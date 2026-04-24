@@ -1502,7 +1502,7 @@
     <string name="context_menu_read_article">Διαβάστε το άρθρο</string>
     <string name="context_menu_points_of_group">Όλα τα σημεία της ομάδας</string>
     <string name="open_from">Ανοιχτά από</string>
-    <string name="open_till">Ανοιχτά μέχρι τις</string>
+    <string name="open_till">Ανοιχτά μέχρι</string>
     <string name="will_close_at">Κλείνει στις</string>
     <string name="will_open_at">Ανοίγει στις</string>
     <string name="will_open_on">Ανοίγει στις</string>

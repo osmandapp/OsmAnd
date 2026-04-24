@@ -903,7 +903,7 @@ public class Amenity extends MapObject {
 	public String getTranslation(MapPoiTypes mapPoiTypes, String alternateName) {
 		for (String key : getAdditionalInfoKeys()) {
 			String value = getAdditionalInfo(key);
-			if (value.equals(alternateName)) {
+			if (value != null && value.equals(alternateName)) {
 				PoiType poiType = getPoiType(mapPoiTypes, key, value);
 				if (poiType != null && !poiType.isText()) {
 					return poiType.getTranslation();

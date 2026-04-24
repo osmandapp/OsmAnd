@@ -3,6 +3,7 @@ package net.osmand;
 import net.osmand.util.ArabicNormalizer;
 import net.osmand.util.SearchAlgorithms;
 
+
 import java.util.Locale;
 
 

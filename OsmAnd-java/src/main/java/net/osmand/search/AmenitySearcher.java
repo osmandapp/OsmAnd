@@ -116,8 +116,6 @@ public class AmenitySearcher {
     public static final int AMENITY_SEARCH_RADIUS = 50;
     private static final int AMENITY_SEARCH_RADIUS_FOR_RELATION = 500;
     private final MapPoiTypes mapPoiTypes; // nullable
-    private Comparator<Amenity> comparator;
-    private int priorityQueueLimit;
 
     public AmenitySearcher(MapPoiTypes mapPoiTypes) {
         this.mapPoiTypes = mapPoiTypes;
@@ -172,7 +170,7 @@ public class AmenitySearcher {
             Predicate<String> travelFileVisibility, ResultMatcher<Amenity> matcher,
             Predicate<AmenityIndexRepository> repositoryFilter) {
         return searchAmenities(filter, null, rect.top, rect.left, rect.bottom, rect.right,
-                -1, includeTravel, travelFileVisibility, matcher, repositoryFilter);
+                -1, includeTravel, travelFileVisibility, matcher, repositoryFilter, null, -1);
     }
 
     public List<Amenity> searchAmenities(BinaryMapIndexReader.SearchPoiTypeFilter filter,
@@ -182,17 +180,18 @@ public class AmenitySearcher {
                                          Predicate<String> travelFileVisibility,
                                          ResultMatcher<Amenity> matcher) {
         return searchAmenities(filter, additionalFilter, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
-                zoom, includeTravel, travelFileVisibility, matcher, null);
+                zoom, includeTravel, travelFileVisibility, matcher, null, null, -1);
     }
 
-    private List<Amenity> searchAmenities(BinaryMapIndexReader.SearchPoiTypeFilter filter,
+    public List<Amenity> searchAmenities(BinaryMapIndexReader.SearchPoiTypeFilter filter,
                                          BinaryMapIndexReader.SearchPoiAdditionalFilter additionalFilter,
                                          double topLatitude, double leftLongitude, double bottomLatitude,
                                          double rightLongitude, int zoom, boolean includeTravel,
                                          Predicate<String> travelFileVisibility,
                                          ResultMatcher<Amenity> matcher,
-                                         Predicate<AmenityIndexRepository> repositoryFilter) {
-
+                                         Predicate<AmenityIndexRepository> repositoryFilter,
+                                         Comparator<Amenity> comparator,
+                                         int searchResultsLimit) {
         Set<Long> closedAmenities = new HashSet<>();
         List<Amenity> actualAmenities = new ArrayList<>();
 
@@ -200,7 +199,7 @@ public class AmenitySearcher {
         if (isEmpty && additionalFilter != null) {
             filter = null;
         }
-        PriorityQueue<Amenity> priorityQueue = comparator != null ? new PriorityQueue<>(priorityQueueLimit, comparator) : null;
+        PriorityQueue<Amenity> priorityQueue = comparator != null ? new PriorityQueue<>(searchResultsLimit, comparator) : null;
         if (!isEmpty || additionalFilter != null) {
             int top31 = MapUtils.get31TileNumberY(topLatitude);
             int left31 = MapUtils.get31TileNumberX(leftLongitude);
@@ -216,7 +215,7 @@ public class AmenitySearcher {
                 if ((repositoryFilter == null || repositoryFilter.test(repo))
                         && repo.checkContainsInt(top31, left31, bottom31, right31)) {
                     List<Amenity> foundAmenities = repo.searchAmenities(top31, left31, bottom31, right31,
-                            zoom, filter, additionalFilter, matcher, priorityQueue, priorityQueueLimit);
+                            zoom, filter, additionalFilter, matcher, priorityQueue, searchResultsLimit);
                     if (foundAmenities != null && priorityQueue == null) {
                         for (Amenity amenity : foundAmenities) {
                             Long id = amenity.getId();
@@ -844,10 +843,5 @@ public class AmenitySearcher {
             }
         }
         return pointsLength > 0;
-    }
-
-    public void setComparator(Comparator<Amenity> comparator, int searchResultsLimit) {
-        this.comparator = comparator;
-        this.priorityQueueLimit = searchResultsLimit;
     }
 }
