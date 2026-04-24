@@ -6002,7 +6002,7 @@
     <string name="astro_search_info_star_clusters">Un amas stellaire est un groupe d\'étoiles liées par la gravité et formées à partir du même nuage moléculaire.</string>
     <string name="astro_search_info_deep_sky">Les objets du ciel profond comprennent les galaxies, les nébuleuses, les amas d\'étoiles et d\'autres objets astronomiques lointains.</string>
     <string name="astro_my_data_no_favorites_title">Rien ici</string>
-    <string name="astro_my_data_no_favorites_description">Vous pouvez ajouter des objets à vos favoris à partir de leur menu contextuel.</string>
+    <string name="astro_my_data_no_favorites_description">Vous pouvez ajouter des objets à vos favoris à partir de leur menu contextuel</string>
     <string name="astro_my_data_no_daily_paths_title">Aucun chemin quotidien</string>
     <string name="astro_my_data_no_daily_paths_description">Activez un chemin quotidien pour un objet à partir de son menu contextuel afin de le voir ici.</string>
     <string name="astro_my_data_no_directions_title">Aucune direction définie</string>
