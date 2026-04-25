@@ -230,11 +230,8 @@ public class HHRouteDataStructure {
 		// Route specific details
 		RoutingStats stats = new RoutingStats();
 		HHRoutingConfig config;
-		int startX;
-		int startY;
-		int endY;
-		int endX;
-		
+		int startX, startY, endX, endY;
+		int roadStartX, roadStartY, roadEndX, roadEndY; // adjusted to RouteDataObject to make rtDistanceToEnd clear
 		// Route runtime vars
 		List<T> queueAdded = new ArrayList<>();
 		List<T> visited = new ArrayList<>();
@@ -323,12 +320,12 @@ public class HHRouteDataStructure {
 
 		public void setStartEnd(LatLon start, LatLon end) {
 			if (start != null) {
-				startY = MapUtils.get31TileNumberY(start.getLatitude());
-				startX = MapUtils.get31TileNumberX(start.getLongitude());
+				startY = roadStartY = MapUtils.get31TileNumberY(start.getLatitude());
+				startX = roadStartX = MapUtils.get31TileNumberX(start.getLongitude());
 			}
 			if (end != null) {
-				endY = MapUtils.get31TileNumberY(end.getLatitude());
-				endX = MapUtils.get31TileNumberX(end.getLongitude());
+				endY = roadEndY = MapUtils.get31TileNumberY(end.getLatitude());
+				endX = roadEndX = MapUtils.get31TileNumberX(end.getLongitude());
 			}
 		}
 
@@ -421,7 +418,9 @@ public class HHRouteDataStructure {
 			if (config.HEURISTIC_COEFFICIENT > 0) {
 				double distanceToEnd = nextPoint.rt(reverse).rtDistanceToEnd;
 				if (distanceToEnd == 0) {
-					double dist = HHRoutePlanner.squareRootDist31(reverse ? startX : endX, reverse ? startY : endY, 
+					double dist = HHRoutePlanner.squareRootDist31(
+							reverse ? roadStartX : roadEndX,
+							reverse ? roadStartY : roadEndY,
 							nextPoint.midX(), nextPoint.midY());
 					distanceToEnd = config.HEURISTIC_COEFFICIENT * dist / rctx.getRouter().getMaxSpeed();
 					nextPoint.setDistanceToEnd(reverse, distanceToEnd);

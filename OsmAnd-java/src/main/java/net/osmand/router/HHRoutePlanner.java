@@ -984,6 +984,30 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		if (frs != null) {
 			TLongSet set = new TLongHashSet();
 			for (FinalRouteSegment o : frs.all) {
+				int startSegment = reverse ? o.getSegmentEnd() : o.getSegmentStart();
+				int endSegment = reverse ? o.getSegmentStart() : o.getSegmentEnd();
+				long pntId = calculateRoutePointInternalId(o.getRoad().getId(), startSegment, endSegment);
+				if (set.add(pntId) && !hctx.pointsByGeo.containsKey(pntId)) {
+					int x = reverse ? hctx.startX : hctx.endX;
+					int y = reverse ? hctx.startY : hctx.endY;
+					RouteSegmentPoint road = RoutePlannerFrontEnd.calcPreciseRouteSegmentPoint(o.getRoad(), x, y);
+					if (road != null) {
+						if (reverse) {
+							hctx.roadStartX = road.preciseX;
+							hctx.roadStartY = road.preciseY;
+						} else {
+							hctx.roadEndX = road.preciseX;
+							hctx.roadEndY = road.preciseY;
+						}
+						o.distanceFromStart +=
+								planner.calculatePreciseStartTime(hctx.rctx, road.preciseX, road.preciseY, o);
+						break;
+					}
+				}
+			}
+
+			set.clear();
+			for (FinalRouteSegment o : frs.all) {
 				// duplicates are possible as alternative routes
 				int startSegment = reverse ? o.getSegmentEnd() : o.getSegmentStart();
 				int endSegment = reverse ? o.getSegmentStart() : o.getSegmentEnd();
@@ -1007,18 +1031,10 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 						pnt.endX = o.getEndPointX();
 						pnt.startY = o.getStartPointY();
 						pnt.endY = o.getEndPointY();
-						int preciseY = reverse? hctx.startY : hctx.endY;
-						int preciseX = reverse? hctx.startX : hctx.endX;
-
-						RouteSegmentPoint road =
-								RoutePlannerFrontEnd.calcPreciseRouteSegmentPoint(o.getRoad(), preciseX, preciseY);
-						if (road != null) {
-							preciseX = road.preciseX;
-							preciseY = road.preciseY;
-						}
-
-						o.distanceFromStart += planner.calculatePreciseStartTime(hctx.rctx, preciseX, preciseY, o);
 					} else {
+//						if (o.getRoad().roundabout()) {
+//							continue; // TODO THIS IS WRONG WAY !!! https://github.com/osmandapp/OsmAnd/issues/21912
+//						}
 						float obstacle = hctx.rctx.getRouter().defineRoutingObstacle(
 								o.getRoad(), o.getSegmentStart(), o.getSegmentStart() > o.getSegmentEnd());
 						if (obstacle < 0) {
