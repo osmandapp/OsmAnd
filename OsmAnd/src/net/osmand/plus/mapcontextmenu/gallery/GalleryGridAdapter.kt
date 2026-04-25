@@ -1,219 +1,177 @@
-package net.osmand.plus.mapcontextmenu.gallery;
+package net.osmand.plus.mapcontextmenu.gallery
 
-import static net.osmand.plus.mapcontextmenu.gallery.holders.ImageHolderType.MAIN;
-import static net.osmand.plus.mapcontextmenu.gallery.holders.ImageHolderType.SPAN_RESIZABLE;
-import static net.osmand.plus.mapcontextmenu.gallery.holders.ImageHolderType.STANDARD;
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.RecyclerView
+import net.osmand.plus.OsmandApplication
+import net.osmand.plus.R
+import net.osmand.plus.activities.MapActivity
+import net.osmand.plus.gallery.GalleryItem
+import net.osmand.plus.gallery.MediaProvider
+import net.osmand.plus.mapcontextmenu.gallery.holders.GalleryMediaHolder
+import net.osmand.plus.mapcontextmenu.gallery.holders.ImageHolderType
+import net.osmand.plus.mapcontextmenu.gallery.holders.MediaCountHolder
+import net.osmand.plus.mapcontextmenu.gallery.holders.MapillaryContributeHolder
+import net.osmand.plus.mapcontextmenu.gallery.holders.NoImagesHolder
+import net.osmand.plus.mapcontextmenu.gallery.holders.NoInternetHolder
+import net.osmand.plus.utils.UiUtilities
+import net.osmand.shared.media.domain.MediaItem
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+class GalleryGridAdapter(
+	private val mapActivity: MapActivity,
+	private val listener: GalleryListener,
+	private val viewWidth: Int?,
+	private val isOnlinePhotos: Boolean,
+	private val nightMode: Boolean
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.RecyclerView;
+	private val app: OsmandApplication = mapActivity.app
+	private val themedInflater: LayoutInflater = UiUtilities.getInflater(mapActivity, nightMode)
 
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.gallery.GalleryItem;
-import net.osmand.plus.gallery.LegacyMediaConverter;
-import net.osmand.plus.gallery.MediaProvider;
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
-import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
-import net.osmand.plus.mapcontextmenu.builders.cards.ProgressCard;
-import net.osmand.plus.mapcontextmenu.gallery.holders.GalleryImageHolder;
-import net.osmand.plus.mapcontextmenu.gallery.holders.ImageHolderType;
-import net.osmand.plus.mapcontextmenu.gallery.holders.ImagesCountHolder;
-import net.osmand.plus.mapcontextmenu.gallery.holders.MapillaryContributeHolder;
-import net.osmand.plus.mapcontextmenu.gallery.holders.NoImagesHolder;
-import net.osmand.plus.mapcontextmenu.gallery.holders.NoInternetHolder;
-import net.osmand.plus.plugins.mapillary.MapillaryContributeCard;
-import net.osmand.plus.plugins.mapillary.MapillaryImageCard;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.shared.util.NetworkImageLoader;
-import net.osmand.util.Algorithms;
+	private val mediaProvider = MediaProvider(app)
+	private val items = mutableListOf<GalleryItem>()
 
-import java.util.ArrayList;
-import java.util.List;
+	private var resizeBySpanCount = false
+	private var loadingImages = false
 
-public class GalleryGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
-	protected static final int MAIN_IMAGE_TYPE = 0;
-	public static final int IMAGE_TYPE = 1;
-	private static final int PROGRESS_TYPE = 2;
-	private static final int MAPILLARY_CONTRIBUTE_TYPE = 3;
-	private static final int NO_IMAGES_TYPE = 4;
-	public static final int NO_INTERNET_TYPE = 5;
-	protected static final int IMAGES_COUNT_TYPE = 6;
-
-	protected static final int UPDATE_PROGRESS_BAR_PAYLOAD_TYPE = 1;
-	public static final int UPDATE_IMAGE_VIEW_TYPE = 2;
-
-	private final List<Object> items = new ArrayList<>();
-
-	private final GalleryListener listener;
-	private final LayoutInflater themedInflater;
-	private final boolean nightMode;
-	private final MapActivity mapActivity;
-	private final OsmandApplication app;
-
-	private final boolean isOnlinePhotos;
-	private boolean resizeBySpanCount = false;
-	private boolean loadingImages = false;
-	private final Integer viewWidth;
-
-	private MediaProvider mediaProvider;
-
-	public GalleryGridAdapter(@NonNull MapActivity mapActivity, @NonNull GalleryListener listener,
-	                          @Nullable Integer viewWidth, boolean isOnlinePhotos, boolean nightMode) {
-		this.listener = listener;
-		this.nightMode = nightMode;
-		this.isOnlinePhotos = isOnlinePhotos;
-		this.mapActivity = mapActivity;
-		this.app = mapActivity.getApp();
-		this.viewWidth = viewWidth;
-		this.mediaProvider = new MediaProvider(app);
-		themedInflater = UiUtilities.getInflater(mapActivity, nightMode);
-	}
-
-	public void setItems(@NonNull List<Object> items) {
-		this.items.clear();
+	fun setItems(newItems: List<GalleryItem>) {
+		items.clear()
 		if (isOnlinePhotos) {
-			this.items.addAll(items);
+			items.addAll(newItems)
 		} else {
-			List<Object> limitedItems = new ArrayList<>();
-			int addedMapillaryCards = 0;
-			for (Object object : items) {
-				if (object instanceof MapillaryImageCard mapillaryImageCard) {
+			val limitedItems = mutableListOf<GalleryItem>()
+			var addedMapillaryCards = 0
+
+			for (item in newItems) {
+				if (item is GalleryItem.Media && item.mediaItem is MediaItem.Mapillary) {
 					if (addedMapillaryCards < 5) {
-						limitedItems.add(mapillaryImageCard);
-						addedMapillaryCards++;
+						limitedItems.add(item)
+						addedMapillaryCards++
 					}
 				} else {
-					limitedItems.add(object);
+					limitedItems.add(item)
 				}
 			}
-			this.items.addAll(limitedItems);
+			items.addAll(limitedItems)
 		}
-
-		notifyDataSetChanged();
+		notifyDataSetChanged()
 	}
 
-	public List<Object> getItems() {
-		return items;
-	}
+	fun getItems(): List<GalleryItem> = items
 
-	@NonNull
-	@Override
-	public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-		View itemView;
-		return switch (viewType) {
-			case MAIN_IMAGE_TYPE, IMAGE_TYPE -> {
-				itemView = themedInflater.inflate(R.layout.gallery_card_item, parent, false);
-				yield new GalleryImageHolder(app, itemView);
+	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+		return when (viewType) {
+			MAIN_IMAGE_TYPE, IMAGE_TYPE -> {
+				val itemView = inflate(R.layout.gallery_card_item, parent)
+				GalleryMediaHolder(app, itemView)
 			}
-			case MAPILLARY_CONTRIBUTE_TYPE -> {
-				itemView = themedInflater.inflate(R.layout.context_menu_card_add_mapillary_images, parent, false);
-				yield new MapillaryContributeHolder(itemView);
+			MAPILLARY_CONTRIBUTE_TYPE -> {
+				val itemView = inflate(R.layout.context_menu_card_add_mapillary_images, parent)
+				MapillaryContributeHolder(itemView)
 			}
-			case NO_IMAGES_TYPE -> {
-				itemView = themedInflater.inflate(R.layout.no_image_card, parent, false);
-				yield new NoImagesHolder(itemView, app);
+			NO_IMAGES_TYPE -> {
+				val itemView = inflate(R.layout.no_image_card, parent)
+				NoImagesHolder(itemView, app)
 			}
-			case NO_INTERNET_TYPE -> {
-				itemView = themedInflater.inflate(R.layout.no_internet_card, parent, false);
-				yield new NoInternetHolder(itemView, app);
+			NO_INTERNET_TYPE -> {
+				val itemView = inflate(R.layout.no_internet_card, parent)
+				NoInternetHolder(itemView, app)
 			}
-			case IMAGES_COUNT_TYPE -> {
-				itemView = themedInflater.inflate(R.layout.images_count_item, parent, false);
-				yield new ImagesCountHolder(itemView, app);
+			IMAGES_COUNT_TYPE -> {
+				val itemView = inflate(R.layout.images_count_item, parent)
+				MediaCountHolder(itemView, app)
 			}
-			default -> throw new IllegalArgumentException("Unsupported view type");
-		};
-	}
-
-	@Override
-	public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-		if (holder instanceof GalleryImageHolder viewHolder) {
-			Object item = items.get(position);
-			if (item instanceof ImageCard imageCard) {
-				ImageHolderType type = resizeBySpanCount ? SPAN_RESIZABLE : position == 0 ? MAIN : STANDARD;
-				GalleryItem galleryItem = LegacyMediaConverter.INSTANCE.convertItem(imageCard, items);
-				if (galleryItem instanceof GalleryItem.Media media) {
-					viewHolder.bindView(mapActivity, listener, media, type, viewWidth, mediaProvider, nightMode);
-				}
-			}
-		} else if (holder instanceof MapillaryContributeHolder viewHolder) {
-			viewHolder.bindView(nightMode, mapActivity);
-		} else if (holder instanceof NoImagesHolder noImagesHolder) {
-			noImagesHolder.bindView(nightMode, mapActivity, isOnlinePhotos);
-		} else if (holder instanceof NoInternetHolder noInternetHolder) {
-			noInternetHolder.bindView(nightMode, listener, loadingImages);
-		} else if (holder instanceof ImagesCountHolder imagesCountHolder) {
-			imagesCountHolder.bindView(items.size() - 1, nightMode);
+			else -> throw IllegalArgumentException("Unsupported view type: $viewType")
 		}
 	}
 
-	@Override
-	public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position, @NonNull List<Object> payloads) {
-		if (!Algorithms.isEmpty(payloads) && payloads.get(0) instanceof Integer payLoadInteger) {
-			if (holder instanceof NoInternetHolder noInternetHolder && payLoadInteger == UPDATE_PROGRESS_BAR_PAYLOAD_TYPE) {
-				noInternetHolder.updateProgressBar(loadingImages);
+	override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+		val item = items[position]
+
+		when {
+			holder is GalleryMediaHolder && item is GalleryItem.Media -> {
+				val type = when {
+					resizeBySpanCount -> ImageHolderType.SPAN_RESIZABLE
+					position == 0 -> ImageHolderType.MAIN
+					else -> ImageHolderType.STANDARD
+				}
+				holder.bindView(mapActivity, listener, item, type, viewWidth, mediaProvider, nightMode)
+			}
+			holder is MapillaryContributeHolder -> {
+				holder.bindView(nightMode, mapActivity) // todo don't need bind, just setup once
+			}
+			holder is NoImagesHolder -> {
+				holder.bindView(nightMode, mapActivity, isOnlinePhotos) // todo don't need bind, just setup once
+			}
+			holder is NoInternetHolder && item is GalleryItem.NoInternet -> {
+				holder.bindView(nightMode, listener, item.isLoading)
+			}
+			holder is MediaCountHolder && item is GalleryItem.ImagesCount -> {
+				// TODO: show only media items count
+				holder.bindView(items.size - 1, nightMode) // todo don't need bind, just setup once
+			}
+		}
+	}
+
+	override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int, payloads: MutableList<Any>) {
+		if (payloads.isNotEmpty() && payloads[0] == UPDATE_PROGRESS_BAR_PAYLOAD_TYPE) {
+			if (holder is NoInternetHolder) {
+				holder.updateProgressBar(loadingImages)
 			}
 		} else {
-			super.onBindViewHolder(holder, position, payloads);
+			super.onBindViewHolder(holder, position, payloads)
 		}
 	}
 
-	public void onLoadingImages(boolean loadingImages) {
-		this.loadingImages = loadingImages;
-		for (int i = 0; i < items.size(); i++) {
-			Object object = items.get(i);
-			if (object instanceof Integer integer && integer == NO_INTERNET_TYPE) {
-				notifyItemChanged(i, UPDATE_PROGRESS_BAR_PAYLOAD_TYPE);
+	fun onLoadingImages(loadingImages: Boolean) {
+		this.loadingImages = loadingImages
+		for (i in items.indices) {
+			val item = items[i]
+			if (item is GalleryItem.NoInternet) {
+				item.isLoading = loadingImages // TODO: changed logic
+				notifyItemChanged(i, UPDATE_PROGRESS_BAR_PAYLOAD_TYPE)
 			}
 		}
 	}
 
-	@Override
-	public int getItemCount() {
-		return items.size();
+	override fun getItemCount(): Int = items.size
+
+	override fun getItemViewType(position: Int): Int {
+		return when (items[position]) {
+			is GalleryItem.Media -> if (position == 0) MAIN_IMAGE_TYPE else IMAGE_TYPE
+			is GalleryItem.MapillaryContribute -> MAPILLARY_CONTRIBUTE_TYPE
+			is GalleryItem.NoImages -> NO_IMAGES_TYPE
+			is GalleryItem.NoInternet -> NO_INTERNET_TYPE
+			is GalleryItem.ImagesCount -> IMAGES_COUNT_TYPE
+		}
 	}
 
-	@Override
-	public int getItemViewType(int position) {
-		Object object = items.get(position);
-		if (object instanceof MapillaryContributeCard) {
-			return MAPILLARY_CONTRIBUTE_TYPE;
-		} else if (object instanceof ImageCard && position == 0) {
-			return MAIN_IMAGE_TYPE;
-		} else if (object instanceof ImageCard) {
-			return IMAGE_TYPE;
-		} else if (object instanceof ProgressCard) {
-			return PROGRESS_TYPE;
-		} else if (object instanceof NoImagesCard) {
-			return NO_IMAGES_TYPE;
-		} else if (object instanceof Integer integer) {
-			if (integer == NO_INTERNET_TYPE) {
-				return NO_INTERNET_TYPE;
-			} else if (integer == IMAGES_COUNT_TYPE) {
-				return IMAGES_COUNT_TYPE;
+	fun getAnimator(): RecyclerView.ItemAnimator {
+		return object : DefaultItemAnimator() {
+			override fun canReuseUpdatedViewHolder(viewHolder: RecyclerView.ViewHolder): Boolean {
+				return true
 			}
 		}
-		throw new IllegalArgumentException("Unsupported view type");
 	}
 
-	public RecyclerView.ItemAnimator getAnimator() {
-		return new DefaultItemAnimator() {
-			@Override
-			public boolean canReuseUpdatedViewHolder(@NonNull RecyclerView.ViewHolder viewHolder) {
-				return true;
-			}
-		};
+	fun setResizeBySpanCount(resizeBySpanCount: Boolean) {
+		this.resizeBySpanCount = resizeBySpanCount
 	}
 
-	public void setResizeBySpanCount(boolean resizeBySpanCount) {
-		this.resizeBySpanCount = resizeBySpanCount;
+	fun inflate(resourceId: Int, root: ViewGroup, attachToRoot: Boolean = false): View {
+		return themedInflater.inflate(resourceId, root, attachToRoot)
+	}
+
+	companion object {
+		private const val MAIN_IMAGE_TYPE = 0
+		const val IMAGE_TYPE = 1
+		private const val MAPILLARY_CONTRIBUTE_TYPE = 3
+		private const val NO_IMAGES_TYPE = 4
+		const val NO_INTERNET_TYPE = 5
+		const val IMAGES_COUNT_TYPE = 6
+
+		private const val UPDATE_PROGRESS_BAR_PAYLOAD_TYPE = 1
 	}
 }

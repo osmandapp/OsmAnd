@@ -26,7 +26,7 @@ import net.osmand.shared.util.ImageLoaderCallback
 import net.osmand.shared.util.ImageRequestListener
 import net.osmand.shared.util.LoadingImage
 
-class GalleryImageHolder(
+class GalleryMediaHolder(
 	private val app: OsmandApplication,
 	itemView: View
 ) : RecyclerView.ViewHolder(itemView) {

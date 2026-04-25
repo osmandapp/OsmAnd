@@ -94,14 +94,14 @@ sealed class MediaItem {
 		val key: String,
 		val latitude: Double?,
 		val longitude: Double?,
-		val cameraAngle: Double, // Double.NaN if not provided
+		val cameraAngle: Double,
 		val sourceUrl: String,
 		override val title: String,
 		override val type: MediaType = MediaType.PHOTO,
 		val previewContent: MediaContent? = null,
-		val webpageUrl: String? = null,
-		override val origin: MediaOrigin = MediaOrigin.MAPILLARY
+		val webpageUrl: String? = null
 	) : MediaItem() {
+		override val origin: MediaOrigin = MediaOrigin.MAPILLARY
 		override val sourceUri: String = sourceUrl
 
 		fun getHiResUrl() = previewContent?.hiResUrl ?: sourceUrl

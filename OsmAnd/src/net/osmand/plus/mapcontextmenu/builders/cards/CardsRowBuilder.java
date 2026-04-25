@@ -14,6 +14,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.gallery.LegacyMediaConverter;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
@@ -68,7 +69,7 @@ public class CardsRowBuilder {
 
 		if (!menuBuilder.isHidden()) {
 			List<Object> list = new ArrayList<>(cards);
-			galleryGridAdapter.setItems(list);
+			galleryGridAdapter.setItems(LegacyMediaConverter.INSTANCE.convertList(list));
 
 			MapContextMenu mapContextMenu = menuBuilder.getMapContextMenu();
 			if (itemsCount() > 0 && mapContextMenu != null) {
@@ -101,7 +102,7 @@ public class CardsRowBuilder {
 		} else {
 			items.addAll(cards);
 		}
-		galleryGridAdapter.setItems(items);
+		galleryGridAdapter.setItems(LegacyMediaConverter.INSTANCE.convertList(items));
 
 		recyclerView.setLayoutManager(getGridLayoutManager());
 		GalleryGridItemDecorator galleryGridItemDecorator = new GalleryGridItemDecorator(app);

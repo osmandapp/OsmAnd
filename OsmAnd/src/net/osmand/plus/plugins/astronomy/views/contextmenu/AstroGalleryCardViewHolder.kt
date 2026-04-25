@@ -10,6 +10,7 @@ import com.google.android.material.progressindicator.LinearProgressIndicator
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
+import net.osmand.plus.gallery.LegacyMediaConverter
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard
 import net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter
 import net.osmand.plus.mapcontextmenu.gallery.GalleryGridFragment
@@ -76,19 +77,19 @@ class AstroGalleryCardViewHolder(
 
 	private fun showCards(cards: List<Any?>) {
 		contentContainer.visibility = View.VISIBLE
-		val items: MutableList<Any?> = ArrayList()
+		val items: MutableList<Any> = ArrayList()
 
 		val containsImage = cards.any { it is ImageCard }
 		val connectionAvailable = app.getSettings().isInternetConnectionAvailable
 
 		if (connectionAvailable || !Algorithms.isEmpty(cards)) {
-			items.addAll(cards)
+			items.addAll(cards.filterNotNull())
 			viewAllButton.visibility = if (containsImage) View.VISIBLE else View.GONE
 		} else {
 			items.add(GalleryGridAdapter.NO_INTERNET_TYPE)
 			viewAllButton.visibility = View.GONE
 		}
-		galleryGridAdapter?.setItems(items)
+		galleryGridAdapter?.setItems(LegacyMediaConverter.convertList(items))
 		recyclerView.post {
 			recyclerView.invalidateItemDecorations()
 			recyclerView.requestLayout()
@@ -122,14 +123,15 @@ class AstroGalleryCardViewHolder(
 		if (galleryGridAdapter != null && adapterNightMode == nightMode) {
 			return
 		}
-		galleryGridAdapter = GalleryGridAdapter(mapActivity, listener, null, true, nightMode)
+		galleryGridAdapter =
+			GalleryGridAdapter(mapActivity, listener, null, true, nightMode)
 		adapterNightMode = nightMode
 		recyclerView.layoutManager = getGridLayoutManager()
 		if (recyclerView.itemDecorationCount == 0) {
 			recyclerView.addItemDecoration(GalleryGridItemDecorator(app))
 		}
 		recyclerView.adapter = galleryGridAdapter
-		recyclerView.itemAnimator = galleryGridAdapter?.animator
+		recyclerView.itemAnimator = galleryGridAdapter?.getAnimator()
 	}
 
 	private fun setupViewAllButton() {

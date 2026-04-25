@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
+import net.osmand.plus.gallery.LegacyMediaConverter;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.utils.AndroidUtils;
@@ -96,7 +97,7 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 				List<Object> items = new ArrayList<>();
 				items.add(IMAGES_COUNT_TYPE);
 				items.addAll(controller.getOnlinePhotoCards());
-				adapter.setItems(items);
+				adapter.setItems(LegacyMediaConverter.INSTANCE.convertList(items));
 
 				recyclerView.setAdapter(adapter);
 				recyclerView.setScaleDetector(scaleDetector);

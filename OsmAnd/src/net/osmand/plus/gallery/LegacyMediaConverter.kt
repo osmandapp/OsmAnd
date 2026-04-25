@@ -2,6 +2,8 @@ package net.osmand.plus.gallery
 
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard
 import net.osmand.plus.mapcontextmenu.builders.cards.UrlImageCard
+import net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.Companion.IMAGES_COUNT_TYPE
+import net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.Companion.NO_INTERNET_TYPE
 import net.osmand.plus.plugins.mapillary.MapillaryContributeCard
 import net.osmand.plus.plugins.mapillary.MapillaryImageCard
 import net.osmand.plus.wikipedia.WikiImageCard
@@ -40,15 +42,13 @@ object LegacyMediaConverter {
 			is ImageCard ->
 				GalleryItem.Media(convertGenericImage(item), item.isImageDownloadFailed)
 
-			is net.osmand.plus.mapcontextmenu.builders.cards.ProgressCard -> GalleryItem.Progress
-
 			is net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard -> GalleryItem.NoImages
 
 			// Handle legacy integer types (5 = NO_INTERNET, 6 = IMAGES_COUNT)
 			is Int -> {
 				when (item) {
-					5 -> GalleryItem.NoInternet(isLoading = false)
-					6 -> GalleryItem.ImagesCount(count = legacyItems.size - 1)
+					NO_INTERNET_TYPE -> GalleryItem.NoInternet(isLoading = false)
+					IMAGES_COUNT_TYPE -> GalleryItem.ImagesCount(count = legacyItems.size - 1)
 					else -> null
 				}
 			}

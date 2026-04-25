@@ -15,8 +15,6 @@ sealed class GalleryItem {
 
 	data object MapillaryContribute : GalleryItem()
 
-	data object Progress : GalleryItem()
-
 	data object NoImages : GalleryItem()
 
 	// Represents the "No Internet" placeholder, which can show a loading spinner
