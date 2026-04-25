@@ -760,7 +760,7 @@
     <string name="map_widget_distancemeasurement">Avståndsmätning</string>
     <string name="map_widget_audionotes">Ljudanteckningar</string>
     <string name="audionotes_plugin_description">Ta ljud-/foto-/videoanteckningar under en resa, med antingen en kartknapp eller platsens snabbmeny.</string>
-    <string name="audionotes_plugin_name">Ljud-/Videoanteckningar</string>
+    <string name="audionotes_plugin_name">Ljud-/videoanteckningar</string>
     <string name="download_select_map_types">Andra kartor</string>
     <string name="srtm_plugin_name">Topografi</string>
     <string name="download_srtm_maps">Höjdkurvsdata</string>
@@ -1739,7 +1739,7 @@
     <string name="no_address_found">Ingen adress angiven</string>
     <string name="looking_up_address">Slår upp adressen</string>
     <string name="rendering_attr_horseRoutes_name">Hästleder</string>
-    <string name="only_download_over_wifi">Hämta endast via WiFi</string>
+    <string name="only_download_over_wifi">Hämta endast via Wi-Fi</string>
     <string name="live_update">Direktuppdatering</string>
     <string name="update_now">Uppdatera nu</string>
     <string name="route_distance">Avstånd:</string>
@@ -2270,8 +2270,8 @@
     <string name="south_abbreviation">S</string>
     <string name="north_abbreviation">N</string>
     <string name="optional_point_name">Valfritt punktnamn</string>
-    <string name="transport_nearby_routes_within">Rutter nära i</string>
-    <string name="transport_nearby_routes">i</string>
+    <string name="transport_nearby_routes_within">Rutter i närheten inom</string>
+    <string name="transport_nearby_routes">Inom</string>
     <string name="enter_the_file_name">Ange filnamnet.</string>
     <string name="map_import_error">Kartimportfel</string>
     <string name="map_imported_successfully">Karta importerad</string>
@@ -2279,7 +2279,7 @@
     <string name="shared_string_current">Nuvarande</string>
     <string name="last_intermediate_dest_description">Lägger till mellanliggande stopp</string>
     <string name="first_intermediate_dest_description">Lägger till första stoppet</string>
-    <string name="subsequent_dest_description">Flytta upp destination och skapa</string>
+    <string name="subsequent_dest_description">Flytta destinationen uppåt och skapa den</string>
     <string name="show_closed_notes">Visa stängda anteckningar</string>
     <string name="switch_osm_notes_visibility_desc">Visa eller dölj OSM-anteckningar på kartan.</string>
     <string name="gpx_file_desc">GPX - lämplig för export till JOSM eller andra OSM-redigerare.</string>
@@ -5974,4 +5974,5 @@
     <string name="map_screen_layout_descr">Välj om du vill använda en enda layout för alla orienteringar, eller anpassa Stående och Landskap separat.</string>
     <string name="backup_deleted_all_data">Raderade data.</string>
     <string name="backup_deleting_all_data">Raderade data.</string>
+    <string name="astronomy_plugin_name">Astronomi</string>
 </resources>
