@@ -7,6 +7,8 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
+import net.osmand.plus.gallery.GalleryItem;
+import net.osmand.plus.gallery.LegacyMediaConverter;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.shared.util.NetworkImageLoader;
@@ -30,6 +32,11 @@ public class GalleryController implements IDialogController {
 
 	public NetworkImageLoader getImageLoader() {
 		return imageLoader;
+	}
+
+	@NonNull
+	public List<GalleryItem> getOnlinePhotoItems() {
+		return LegacyMediaConverter.INSTANCE.convertImageCards(getOnlinePhotoCards());
 	}
 
 	@NonNull

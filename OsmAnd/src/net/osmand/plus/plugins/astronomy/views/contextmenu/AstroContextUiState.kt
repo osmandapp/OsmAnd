@@ -9,5 +9,5 @@ data class AstroContextUiState(
 	val visibilityCursorReferenceTimeMillis: Long? = null,
 	val schedulePeriodStart: LocalDate? = null,
 	val catalogsExpanded: Boolean = false,
-	val galleryState: AstroGalleryCardState = AstroGalleryCardState.Collapsed
+	val galleryState: AstroGalleryState = AstroGalleryState.Collapsed
 )

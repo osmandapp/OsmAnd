@@ -108,8 +108,8 @@ class GalleryGridAdapter(
 			holder is NoInternetHolder && item is GalleryItem.NoInternet -> {
 				holder.bindView(nightMode, listener, item.isLoading)
 			}
-			holder is MediaCountHolder && item is GalleryItem.ImagesCount -> {
-				// TODO: show only media items count
+			holder is MediaCountHolder && item is GalleryItem.MediaCount -> {
+				// TODO show actual media item count instead of legacy items.size - 1
 				holder.bindView(items.size - 1, nightMode) // todo don't need bind, just setup once
 			}
 		}
@@ -136,6 +136,8 @@ class GalleryGridAdapter(
 		}
 	}
 
+	fun getItem(position: Int) = items[position]
+
 	override fun getItemCount(): Int = items.size
 
 	override fun getItemViewType(position: Int): Int {
@@ -144,7 +146,7 @@ class GalleryGridAdapter(
 			is GalleryItem.MapillaryContribute -> MAPILLARY_CONTRIBUTE_TYPE
 			is GalleryItem.NoImages -> NO_IMAGES_TYPE
 			is GalleryItem.NoInternet -> NO_INTERNET_TYPE
-			is GalleryItem.ImagesCount -> IMAGES_COUNT_TYPE
+			is GalleryItem.MediaCount -> IMAGES_COUNT_TYPE
 		}
 	}
 
@@ -169,8 +171,8 @@ class GalleryGridAdapter(
 		const val IMAGE_TYPE = 1
 		private const val MAPILLARY_CONTRIBUTE_TYPE = 3
 		private const val NO_IMAGES_TYPE = 4
-		const val NO_INTERNET_TYPE = 5
-		const val IMAGES_COUNT_TYPE = 6
+		private const val NO_INTERNET_TYPE = 5
+		private const val IMAGES_COUNT_TYPE = 6
 
 		private const val UPDATE_PROGRESS_BAR_PAYLOAD_TYPE = 1
 	}

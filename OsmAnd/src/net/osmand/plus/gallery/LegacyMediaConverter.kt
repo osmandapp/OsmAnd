@@ -2,8 +2,6 @@ package net.osmand.plus.gallery
 
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard
 import net.osmand.plus.mapcontextmenu.builders.cards.UrlImageCard
-import net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.Companion.IMAGES_COUNT_TYPE
-import net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.Companion.NO_INTERNET_TYPE
 import net.osmand.plus.plugins.mapillary.MapillaryContributeCard
 import net.osmand.plus.plugins.mapillary.MapillaryImageCard
 import net.osmand.plus.wikipedia.WikiImageCard
@@ -22,38 +20,24 @@ object LegacyMediaConverter {
 	/**
 	 * Iterates through the legacy list and maps items to strictly typed GalleryItems.
 	 */
-	fun convertList(legacyItems: List<Any>): List<GalleryItem> {
-		return legacyItems.mapNotNull { item -> convertItem(item, legacyItems) }
+	fun convertImageCards(legacyItems: List<ImageCard>): List<GalleryItem> {
+		return legacyItems.map { item -> convertImageCard(item) }
 	}
 
-	fun convertItem(item: Any, legacyItems: List<Any>): GalleryItem? {
+	private fun convertImageCard(item: ImageCard): GalleryItem {
 		return when (item) {
 			is MapillaryContributeCard -> GalleryItem.MapillaryContribute
 
-			is WikiImageCard ->
-				GalleryItem.Media(MediaItem.Wiki(item.wikiImage), item.isImageDownloadFailed)
+			is WikiImageCard -> GalleryItem.Media(
+				MediaItem.Wiki(item.wikiImage), item.isImageDownloadFailed)
 
-			is MapillaryImageCard ->
-				GalleryItem.Media(convertMapillary(item), item.isImageDownloadFailed)
+			is MapillaryImageCard -> GalleryItem.Media(
+				convertMapillary(item), item.isImageDownloadFailed)
 
-			is UrlImageCard ->
-				GalleryItem.Media(convertUrlImage(item), item.isImageDownloadFailed, showProgress = true)
+			is UrlImageCard -> GalleryItem.Media(
+				convertUrlImage(item), item.isImageDownloadFailed, showProgress = true)
 
-			is ImageCard ->
-				GalleryItem.Media(convertGenericImage(item), item.isImageDownloadFailed)
-
-			is net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard -> GalleryItem.NoImages
-
-			// Handle legacy integer types (5 = NO_INTERNET, 6 = IMAGES_COUNT)
-			is Int -> {
-				when (item) {
-					NO_INTERNET_TYPE -> GalleryItem.NoInternet(isLoading = false)
-					IMAGES_COUNT_TYPE -> GalleryItem.ImagesCount(count = legacyItems.size - 1)
-					else -> null
-				}
-			}
-
-			else -> null
+			else -> GalleryItem.Media(convertGenericImage(item), item.isImageDownloadFailed)
 		}
 	}
 

@@ -64,15 +64,15 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.gallery.GalleryItem;
+import net.osmand.plus.gallery.GalleryItem.NoImages;
+import net.osmand.plus.gallery.LegacyMediaConverter;
 import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.mapcontextmenu.SearchAmenitiesTask.SearchAmenitiesListener;
 import net.osmand.plus.mapcontextmenu.SearchByRouteIdTask.SearchByRouteIdListener;
 import net.osmand.plus.mapcontextmenu.SearchByRouteIdTask.SearchType;
 import net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder;
-import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
-import net.osmand.plus.mapcontextmenu.builders.cards.CardsRowBuilder;
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
-import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
+import net.osmand.plus.mapcontextmenu.builders.cards.GalleryRowBuilder;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.mapcontextmenu.gallery.GalleryController;
@@ -157,8 +157,8 @@ public class MenuBuilder {
 
 	private GalleryController galleryController;
 	@Nullable
-	private CardsRowBuilder onlinePhotoCardsRow;
-	private List<AbstractCard> onlinePhotoCards;
+	private GalleryRowBuilder onlinePhotosRow;
+	private List<GalleryItem> onlinePhotoItems;
 
 	private CollapseExpandListener collapseExpandListener;
 	private GetImageCardsTask getImageCardsTask;
@@ -183,26 +183,26 @@ public class MenuBuilder {
 				if (galleryController != null) {
 					galleryController.setCurrentCardsHolder(cardsHolder);
 				}
-				setOnlinePhotosCards(cardsHolder.getOrderedCards());
+				setOnlinePhotoItems(LegacyMediaConverter.INSTANCE.convertImageCards(cardsHolder.getOrderedCards()));
 				PluginsHelper.onGetImageCardsFinished(cardsHolder);
 			}
 		}
 	};
 
-	private void setOnlinePhotosCards(List<ImageCard> onlinePhotosCards) {
-		List<AbstractCard> cards = new ArrayList<>(onlinePhotosCards);
-		if (onlinePhotosCards.isEmpty() && mapActivity != null) {
-			cards.add(new NoImagesCard(mapActivity));
+	private void setOnlinePhotoItems(@NonNull List<GalleryItem> onlinePhotoItems) {
+		List<GalleryItem> items = new ArrayList<>(onlinePhotoItems);
+		if (onlinePhotoItems.isEmpty() && mapActivity != null) {
+			items.add(NoImages.INSTANCE);
 		}
-		if (onlinePhotoCardsRow != null) {
-			onlinePhotoCardsRow.setCards(cards);
+		if (onlinePhotosRow != null) {
+			onlinePhotosRow.setItems(items);
 		}
-		onlinePhotoCards = cards;
+		this.onlinePhotoItems = items;
 	}
 
 	private void onLoadingImages(boolean loading) {
-		if (onlinePhotoCardsRow != null) {
-			onlinePhotoCardsRow.onLoadingImage(loading);
+		if (onlinePhotosRow != null) {
+			onlinePhotosRow.onLoadingImage(loading);
 		}
 	}
 
@@ -408,8 +408,8 @@ public class MenuBuilder {
 	}
 
 	void onClose() {
-		onlinePhotoCardsRow = null;
-		onlinePhotoCards = null;
+		onlinePhotosRow = null;
+		onlinePhotoItems = null;
 		if (galleryController != null) {
 			galleryController.clearHolder();
 		}
@@ -663,18 +663,18 @@ public class MenuBuilder {
 	}
 
 	protected void buildNearestPhotosRow(View view) {
-		boolean needUpdateOnly = onlinePhotoCardsRow != null && onlinePhotoCardsRow.getMenuBuilder() == this;
-		onlinePhotoCardsRow = new CardsRowBuilder(this);
-		onlinePhotoCardsRow.build(galleryController, true, getApplication().getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP));
+		boolean needUpdateOnly = onlinePhotosRow != null && onlinePhotosRow.getMenuBuilder() == this;
+		onlinePhotosRow = new GalleryRowBuilder(this);
+		onlinePhotosRow.build(galleryController, true, getApplication().getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP));
 
 		LinearLayout parent = new LinearLayout(view.getContext());
 		parent.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT));
 		parent.setOrientation(LinearLayout.VERTICAL);
-		parent.addView(onlinePhotoCardsRow.getGalleryView());
+		parent.addView(onlinePhotosRow.getGalleryView());
 		CollapsableView collapsableView = new CollapsableView(parent, this, app.getSettings().ONLINE_PHOTOS_ROW_COLLAPSED);
 		collapsableView.setCollapseExpandListener(collapsed -> {
-			if (!collapsed && onlinePhotoCards == null) {
+			if (!collapsed && onlinePhotoItems == null) {
 				startLoadingImages();
 			}
 		});
@@ -683,9 +683,9 @@ public class MenuBuilder {
 				.setCollapsable(true).setCollapsableView(collapsableView)
 				.setTextLinesLimit(1).build());
 
-		if (needUpdateOnly && onlinePhotoCards != null) {
-			onlinePhotoCardsRow.setCards(onlinePhotoCards);
-		} else if (!collapsableView.isCollapsed() && onlinePhotoCards == null) {
+		if (needUpdateOnly && onlinePhotoItems != null) {
+			onlinePhotosRow.setItems(onlinePhotoItems);
+		} else if (!collapsableView.isCollapsed() && onlinePhotoItems == null) {
 			startLoadingImages();
 		}
 	}
@@ -708,7 +708,7 @@ public class MenuBuilder {
 			return;
 		}
 
-		onlinePhotoCards = new ArrayList<>();
+		onlinePhotoItems = new ArrayList<>();
 		LatLon latLon = getLatLon();
 		Map<String, String> params = getAdditionalCardParams();
 

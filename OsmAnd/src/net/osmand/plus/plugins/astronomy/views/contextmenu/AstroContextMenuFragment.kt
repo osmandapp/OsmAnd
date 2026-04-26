@@ -232,7 +232,7 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 		updateVisibilityCard(obj)
 		updateScheduleCard(obj)
 		ensureKnowledgeCardPrerequisites()
-		if (uiState.galleryState == AstroGalleryCardState.Loading) {
+		if (uiState.galleryState == AstroGalleryState.Loading) {
 			galleryLoader?.startLoading(obj.wid)
 		}
 		submitCards()
@@ -1244,28 +1244,28 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 
 	private fun onGalleryToggle(wid: String) {
 		when (uiState.galleryState) {
-			AstroGalleryCardState.Collapsed -> {
+			AstroGalleryState.Collapsed -> {
 				loadGallery(wid)
 			}
 
-			is AstroGalleryCardState.Ready -> {
-				uiState = uiState.copy(galleryState = AstroGalleryCardState.Collapsed)
+			is AstroGalleryState.Ready -> {
+				uiState = uiState.copy(galleryState = AstroGalleryState.Collapsed)
 				submitCards()
 			}
 
-			AstroGalleryCardState.Loading -> Unit
+			AstroGalleryState.Loading -> Unit
 		}
 	}
 
 	private fun loadGallery(wid: String) {
-		uiState = uiState.copy(galleryState = AstroGalleryCardState.Loading)
+		uiState = uiState.copy(galleryState = AstroGalleryState.Loading)
 		submitCards()
 		galleryLoader?.startLoading(wid) ?: run {
-			onGalleryStateChanged(wid, AstroGalleryCardState.Ready(emptyList()))
+			onGalleryStateChanged(wid, AstroGalleryState.Ready(emptyList()))
 		}
 	}
 
-	private fun onGalleryStateChanged(wid: String, state: AstroGalleryCardState) {
+	private fun onGalleryStateChanged(wid: String, state: AstroGalleryState) {
 		if (skyObject?.wid != wid || uiState.galleryState == state) {
 			return
 		}

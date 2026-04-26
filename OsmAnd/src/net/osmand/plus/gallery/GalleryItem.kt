@@ -9,17 +9,17 @@ sealed class GalleryItem {
 
 	data class Media(
 		val mediaItem: MediaItem,
+		// TODO make GalleryItem immutable and update state via copy()
 		var hasError: Boolean = false,
 		var showProgress: Boolean = false
 	) : GalleryItem()
 
-	data object MapillaryContribute : GalleryItem()
-
 	data object NoImages : GalleryItem()
+	data object MapillaryContribute : GalleryItem()
 
 	// Represents the "No Internet" placeholder, which can show a loading spinner
 	data class NoInternet(var isLoading: Boolean = false) : GalleryItem()
 
 	// Represents the footer text showing the total number of items
-	data class ImagesCount(val count: Int) : GalleryItem()
+	data object MediaCount : GalleryItem()
 }

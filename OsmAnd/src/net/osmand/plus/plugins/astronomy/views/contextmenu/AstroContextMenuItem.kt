@@ -2,7 +2,7 @@ package net.osmand.plus.plugins.astronomy.views.contextmenu
 
 import android.net.Uri
 import net.osmand.plus.R
-import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard
+import net.osmand.plus.gallery.GalleryItem
 import net.osmand.plus.plugins.astronomy.Catalog
 import java.time.LocalDate
 import java.time.ZoneId
@@ -30,10 +30,10 @@ enum class AstroDescriptionLinkType {
 	WIKIDATA
 }
 
-sealed class AstroGalleryCardState {
-	data object Collapsed : AstroGalleryCardState()
-	data object Loading : AstroGalleryCardState()
-	data class Ready(val cards: List<AbstractCard?>) : AstroGalleryCardState()
+sealed class AstroGalleryState {
+	data object Collapsed : AstroGalleryState()
+	data object Loading : AstroGalleryState()
+	data class Ready(val galleryItems: List<GalleryItem>) : AstroGalleryState()
 }
 
 data class AstroKnowledgeCardItem(
@@ -84,7 +84,7 @@ data class AstroCatalogsCardItem(
 data class AstroGalleryCardItem(
 	val wid: String,
 	val showAllTitle: String?,
-	val state: AstroGalleryCardState
+	val state: AstroGalleryState
 ) : AstroContextMenuItem {
 	override val key: AstroContextCardKey = AstroContextCardKey.GALLERY
 }

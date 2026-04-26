@@ -10,6 +10,8 @@ import static net.osmand.plus.mapcontextmenu.gallery.ImageCardType.WIKIMEDIA;
 import androidx.annotation.NonNull;
 
 import net.osmand.data.LatLon;
+import net.osmand.plus.gallery.GalleryItem;
+import net.osmand.plus.gallery.LegacyMediaConverter;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.wikipedia.WikiImageCard;
 import net.osmand.util.Algorithms;
@@ -46,13 +48,29 @@ public class ImageCardsHolder {
 	}
 
 	@NonNull
-	public List<ImageCard> getMapillaryCards() {
+	public List<GalleryItem> getMapillaryGalleryItems() {
+		return convertToGalleryItems(getMapillaryCards());
+	}
+
+	@NonNull
+	private List<ImageCard> getMapillaryCards() {
 		return getCardsWithTypes(MAPILLARY);
+	}
+
+	@NonNull
+	public List<GalleryItem> getAstronomyGalleryItems() {
+		return convertToGalleryItems(getAstronomyCards());
 	}
 
 	@NonNull
 	public List<ImageCard> getAstronomyCards() {
 		return getCardsWithTypes(ASTRONOMY);
+	}
+
+	// TODO: temporary method
+	@NonNull
+	private List<GalleryItem> convertToGalleryItems(@NonNull List<ImageCard> imageCards) {
+		return LegacyMediaConverter.INSTANCE.convertImageCards(imageCards);
 	}
 
 	@NonNull

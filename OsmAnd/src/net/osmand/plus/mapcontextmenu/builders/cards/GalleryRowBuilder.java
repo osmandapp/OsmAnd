@@ -1,7 +1,6 @@
 package net.osmand.plus.mapcontextmenu.builders.cards;
 
 import static net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.IMAGE_TYPE;
-import static net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.NO_INTERNET_TYPE;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.gallery.LegacyMediaConverter;
+import net.osmand.plus.gallery.GalleryItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
@@ -36,16 +35,16 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-public class CardsRowBuilder {
+public class GalleryRowBuilder {
 	private final OsmandApplication app;
 	private final MapActivity mapActivity;
 
 	private final MenuBuilder menuBuilder;
-	private final List<AbstractCard> cards = new ArrayList<>();
+	private final List<GalleryItem> galleryItems = new ArrayList<>();
 	private View galleryView;
 	private GalleryGridAdapter galleryGridAdapter;
 
-	public CardsRowBuilder(MenuBuilder menuBuilder) {
+	public GalleryRowBuilder(MenuBuilder menuBuilder) {
 		this.menuBuilder = menuBuilder;
 		this.mapActivity = menuBuilder.getMapActivity();
 		this.app = menuBuilder.getApplication();
@@ -59,17 +58,17 @@ public class CardsRowBuilder {
 		return galleryView;
 	}
 
-	public void setCards(AbstractCard... cards) {
-		setCards(Arrays.asList(cards));
+	public void setItems(GalleryItem... items) {
+		setItems(Arrays.asList(items));
 	}
 
-	public void setCards(@NonNull Collection<? extends AbstractCard> cards) {
-		this.cards.clear();
-		this.cards.addAll(cards);
+	public void setItems(@NonNull Collection<? extends GalleryItem> items) {
+		this.galleryItems.clear();
+		this.galleryItems.addAll(items);
 
 		if (!menuBuilder.isHidden()) {
-			List<Object> list = new ArrayList<>(cards);
-			galleryGridAdapter.setItems(LegacyMediaConverter.INSTANCE.convertList(list));
+			List<GalleryItem> list = new ArrayList<>(items);
+			galleryGridAdapter.setItems(list);
 
 			MapContextMenu mapContextMenu = menuBuilder.getMapContextMenu();
 			if (itemsCount() > 0 && mapContextMenu != null) {
@@ -93,16 +92,16 @@ public class CardsRowBuilder {
 		galleryView = themedInflater.inflate(R.layout.gallery_card, null);
 		RecyclerView recyclerView = galleryView.findViewById(R.id.recycler_view);
 
-		List<Object> items = new ArrayList<>();
-		GalleryListener listener = getImageCardListener(controller, onlinePhotos);
+		List<GalleryItem> items = new ArrayList<>();
+		GalleryListener listener = getGalleryListener(controller, onlinePhotos);
 		galleryGridAdapter = new GalleryGridAdapter(mapActivity, listener, null, onlinePhotos, nightMode);
 
 		if (!app.getSettings().isInternetConnectionAvailable()) {
-			items.add(NO_INTERNET_TYPE);
+			items.add(new GalleryItem.NoInternet());
 		} else {
-			items.addAll(cards);
+			items.addAll(galleryItems);
 		}
-		galleryGridAdapter.setItems(LegacyMediaConverter.INSTANCE.convertList(items));
+		galleryGridAdapter.setItems(items);
 
 		recyclerView.setLayoutManager(getGridLayoutManager());
 		GalleryGridItemDecorator galleryGridItemDecorator = new GalleryGridItemDecorator(app);
@@ -131,7 +130,7 @@ public class CardsRowBuilder {
 	}
 
 	@NonNull
-	private GalleryListener getImageCardListener(@NonNull GalleryController controller, boolean onlinePhotos) {
+	private GalleryListener getGalleryListener(@NonNull GalleryController controller, boolean onlinePhotos) {
 		return new GalleryListener() {
 			@Override
 			public void onMediaItemClicked(@NonNull MediaItem mediaItem) {
@@ -170,11 +169,11 @@ public class CardsRowBuilder {
 	}
 
 	private boolean shouldShowViewAll() {
-		if (Algorithms.isEmpty(cards)) {
+		if (Algorithms.isEmpty(galleryItems)) {
 			return false;
 		}
-		for (AbstractCard card : cards) {
-			if (card instanceof ImageCard) {
+		for (GalleryItem item : galleryItems) {
+			if (item instanceof GalleryItem.Media) {
 				return true;
 			}
 		}
@@ -182,6 +181,6 @@ public class CardsRowBuilder {
 	}
 
 	private int itemsCount() {
-		return cards.size();
+		return galleryItems.size();
 	}
 }

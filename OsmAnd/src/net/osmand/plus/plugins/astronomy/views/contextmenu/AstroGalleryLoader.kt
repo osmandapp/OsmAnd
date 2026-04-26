@@ -5,8 +5,7 @@ import net.osmand.data.LatLon
 import net.osmand.plus.OsmAndTaskManager
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.activities.MapActivity
-import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard
-import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard
+import net.osmand.plus.gallery.GalleryItem
 import net.osmand.plus.mapcontextmenu.gallery.GalleryController
 import net.osmand.plus.mapcontextmenu.gallery.ImageCardType
 import net.osmand.plus.mapcontextmenu.gallery.ImageCardsHolder
@@ -22,7 +21,7 @@ class AstroGalleryLoader(
 	private val app: OsmandApplication,
 	private val galleryController: GalleryController,
 	private val mapActivityProvider: () -> MapActivity?,
-	private val onStateChanged: (String, AstroGalleryCardState) -> Unit
+	private val onStateChanged: (String, AstroGalleryState) -> Unit
 ) {
 
 	private var getAstroImagesTask: GetAstroImagesTask? = null
@@ -41,9 +40,9 @@ class AstroGalleryLoader(
 				return
 			}
 			val cardsHolder = buildCardsHolder(wikidataId, images)
-			val astronomyCards = cardsHolder?.astronomyCards.orEmpty()
-			galleryController.currentCardsHolder = cardsHolder?.takeIf { astronomyCards.isNotEmpty() }
-			publishReadyState(wikidataId, astronomyCards)
+			val galleryItems = cardsHolder?.astronomyGalleryItems.orEmpty()
+			galleryController.currentCardsHolder = cardsHolder?.takeIf { galleryItems.isNotEmpty() }
+			publishReadyState(wikidataId, galleryItems)
 		}
 	}
 
@@ -56,9 +55,9 @@ class AstroGalleryLoader(
 		val rawKey = "wikidataId=$wikidataId"
 
 		val hasMatchingHolder = galleryController.isCurrentHolderEquals(latLon, params)
-		val existingAstronomyCards = galleryController.currentCardsHolder?.astronomyCards.orEmpty()
-		if (hasMatchingHolder && existingAstronomyCards.isNotEmpty()) {
-			publishReadyState(wikidataId, existingAstronomyCards)
+		val existingGalleryItems = galleryController.currentCardsHolder?.astronomyGalleryItems.orEmpty()
+		if (hasMatchingHolder && existingGalleryItems.isNotEmpty()) {
+			publishReadyState(wikidataId, existingGalleryItems)
 			return
 		}
 		if (hasMatchingHolder) {
@@ -145,13 +144,11 @@ class AstroGalleryLoader(
 
 	private fun publishReadyState(
 		wikidataId: String,
-		cards: List<AbstractCard?>
+		galleryItems: List<GalleryItem>
 	) {
-		val readyCards = if (cards.isNotEmpty()) {
-			cards
-		} else {
-			listOfNotNull(mapActivityProvider()?.let(::NoImagesCard))
+		val readyItems = galleryItems.ifEmpty {
+			listOf(GalleryItem.NoImages)
 		}
-		onStateChanged(wikidataId, AstroGalleryCardState.Ready(readyCards))
+		onStateChanged(wikidataId, AstroGalleryState.Ready(readyItems))
 	}
 }

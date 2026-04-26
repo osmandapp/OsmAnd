@@ -10,8 +10,7 @@ import com.google.android.material.progressindicator.LinearProgressIndicator
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
-import net.osmand.plus.gallery.LegacyMediaConverter
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard
+import net.osmand.plus.gallery.GalleryItem
 import net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter
 import net.osmand.plus.mapcontextmenu.gallery.GalleryGridFragment
 import net.osmand.plus.mapcontextmenu.gallery.GalleryGridItemDecorator
@@ -53,14 +52,14 @@ class AstroGalleryCardViewHolder(
 		}
 
 		when (val state = item.state) {
-			is AstroGalleryCardState.Collapsed -> showCollapsed()
-			is AstroGalleryCardState.Loading -> showLoading()
-			is AstroGalleryCardState.Ready -> showCards(state.cards)
+			is AstroGalleryState.Collapsed -> showCollapsed()
+			is AstroGalleryState.Loading -> showLoading()
+			is AstroGalleryState.Ready -> showGalleryItems(state.galleryItems)
 		}
 
 		arrowCard.setImageDrawable(
 			app.uiUtilities.getIcon(
-				if (item.state is AstroGalleryCardState.Collapsed) {
+				if (item.state is AstroGalleryState.Collapsed) {
 					R.drawable.ic_action_arrow_down
 				} else {
 					R.drawable.ic_action_arrow_up
@@ -75,21 +74,21 @@ class AstroGalleryCardViewHolder(
 		contentContainer.visibility = View.GONE
 	}
 
-	private fun showCards(cards: List<Any?>) {
+	private fun showGalleryItems(galleryItems: List<GalleryItem>) {
 		contentContainer.visibility = View.VISIBLE
-		val items: MutableList<Any> = ArrayList()
+		val items: MutableList<GalleryItem> = ArrayList()
 
-		val containsImage = cards.any { it is ImageCard }
+		val containsImage = galleryItems.any { it is GalleryItem.Media }
 		val connectionAvailable = app.getSettings().isInternetConnectionAvailable
 
-		if (connectionAvailable || !Algorithms.isEmpty(cards)) {
-			items.addAll(cards.filterNotNull())
+		if (connectionAvailable || !Algorithms.isEmpty(galleryItems)) {
+			items.addAll(galleryItems)
 			viewAllButton.visibility = if (containsImage) View.VISIBLE else View.GONE
 		} else {
-			items.add(GalleryGridAdapter.NO_INTERNET_TYPE)
+			items.add(GalleryItem.NoInternet())
 			viewAllButton.visibility = View.GONE
 		}
-		galleryGridAdapter?.setItems(LegacyMediaConverter.convertList(items))
+		galleryGridAdapter?.setItems(items)
 		recyclerView.post {
 			recyclerView.invalidateItemDecorations()
 			recyclerView.requestLayout()
