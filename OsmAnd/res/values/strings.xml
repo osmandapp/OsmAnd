@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+	<string name="astronomy_map">Astronomy Map</string>
 	<string name="astro_designations">Designations</string>
 	<string name="open_from_short">From</string>
 	<string name="open_till_short">Until</string>
