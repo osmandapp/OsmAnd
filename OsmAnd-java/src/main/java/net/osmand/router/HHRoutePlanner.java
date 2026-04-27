@@ -973,6 +973,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		hctx.rctx.unloadAllData(); // needed for proper multidijsktra work
 		// hctx.rctx.calculationProgress = new RouteCalculationProgress(); // reuse same progress
 		BinaryRoutePlanner planner = new BinaryRoutePlanner();
+		RoutePlannerFrontEnd routePlannerFrontEnd = new RoutePlannerFrontEnd();
 		MultiFinalRouteSegment frs = (MultiFinalRouteSegment) planner.searchRouteInternal(hctx.rctx,
 				reverse ? null : s, reverse ? s : null, hctx.boundaries);
 		hctx.rctx.config.heuristicCoefficient = savedHeuristicCoefficient;
@@ -989,7 +990,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				if (!hctx.pointsByGeo.containsKey(pntId)) {
 					int x = reverse ? hctx.startX : hctx.endX;
 					int y = reverse ? hctx.startY : hctx.endY;
-					RouteSegmentPoint road = RoutePlannerFrontEnd.calcPreciseRouteSegmentPoint(o.getRoad(), x, y);
+					RouteSegmentPoint road = routePlannerFrontEnd.calcPreciseRouteSegmentPoint(o.getRoad(), x, y);
 					if (road != null) {
 						if (reverse) {
 							hctx.roadStartX = road.preciseX;

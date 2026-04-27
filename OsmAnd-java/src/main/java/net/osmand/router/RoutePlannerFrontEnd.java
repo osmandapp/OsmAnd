@@ -209,7 +209,7 @@ public class RoutePlannerFrontEnd {
 		return null;
 	}
 
-	public static RouteSegmentPoint calcPreciseRouteSegmentPoint(RouteDataObject r, int x, int y) {
+	public RouteSegmentPoint calcPreciseRouteSegmentPoint(RouteDataObject r, int x, int y) {
 		RouteSegmentPoint road = null;
 		for (int i = 1; i < r.getPointsLength(); i++) {
 			QuadPointDouble pr = MapUtils.getProjectionPoint31(x, y, r.getPoint31XTile(i - 1),
