@@ -3,6 +3,8 @@ package net.osmand.binary;
 import net.osmand.PlatformUtil;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
+import net.osmand.util.SearchAlgorithms;
+import net.osmand.util.UnicodeDiacritics;
 
 import java.io.IOException;
 import java.util.*;
@@ -17,14 +19,20 @@ public class CommonWords {
 	private static String NUMBER_WITH_LESS_THAN_2_LETTERS = "NUMBER_WITH_LESS_THAN_2_LETTERS";
 	
 	private static void addCommon(String string) {
-		// 1. add variant with "ß" -> "ss"
-		// 2. add variant with dyacritics
+		String string2 = SearchAlgorithms.replaceGermanSS(string);
+		string2 = UnicodeDiacritics.getInstance().stripDiacritics(string2);
 		commonWordsDictionary.put(string, commonWordsDictionary.size());
+		if (!string.equals(string2)) {
+			commonWordsDictionary.put(string2, commonWordsDictionary.size());
+		}
 	}
 	private static void addFrequentlyUsed(String string) {
-		// 1. add variant with "ß" -> "ss"
-		// 2. add variant with dyacritics
+		String string2 = SearchAlgorithms.replaceGermanSS(string);
+		string2 = UnicodeDiacritics.getInstance().stripDiacritics(string2);
 		frequentlyUsedWordsDictionary.put(string, frequentlyUsedWordsDictionary.size());
+		if (!string.equals(string2)) {
+			frequentlyUsedWordsDictionary.put(string2, frequentlyUsedWordsDictionary.size());
+		}
 	}
 
 	private static boolean isNumber2Letters(String name) {
