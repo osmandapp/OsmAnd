@@ -89,6 +89,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 
 		setupBatterySavingModePref();
 		setupSimulateOBDDataPref();
+		setupSearchStatApiPref();
 		setupSimulateInitialStartupPref();
 		setupFullscreenMapDrawingModePref();
 		setupShouldShowFreeVersionBannerPref();
@@ -152,6 +153,12 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		SwitchPreferenceEx debugRenderingInfo = findPreference(settings.SIMULATE_OBD_DATA.getId());
 		debugRenderingInfo.setDescription(getString(R.string.simulate_obd));
 		debugRenderingInfo.setIconSpaceReserved(false);
+	}
+
+	private void setupSearchStatApiPref() {
+		SwitchPreferenceEx searchStatApi = findPreference(plugin.ENABLE_SEARCH_STAT_API.getId());
+		searchStatApi.setDescription(getString(R.string.search_stat_api_description));
+		searchStatApi.setIconSpaceReserved(false);
 	}
 
 

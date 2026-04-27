@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.IndexConstants;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapIndexReaderStats.SearchStat;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -33,6 +34,8 @@ import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.poi.NominatimPoiFilter;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -52,6 +55,7 @@ import net.osmand.search.core.SearchCoreFactory.SearchBaseAPI;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchResult;
+import net.osmand.search.core.SearchSettings;
 import net.osmand.util.Algorithms;
 import net.osmand.util.GeoPointParserUtil;
 
@@ -91,6 +95,7 @@ public class QuickSearchHelper implements ResourceListener {
 		OsmandSettings settings = app.getSettings();
 		core = new SearchUICore(app.getPoiTypes(), settings.MAP_PREFERRED_LOCALE.get(),
 				settings.MAP_TRANSLITERATE_NAMES.get());
+		applySearchStatSetting(app, core.getSearchSettings());
 		core.setHttpRedirectRequester(this::httpRedirectRequester);
 		app.getResourceManager().addResourceListener(this);
 	}
@@ -164,6 +169,14 @@ public class QuickSearchHelper implements ResourceListener {
 		BinaryMapIndexReader[] binaryMapIndexReaderArray = app.getResourceManager().getQuickSearchFiles(null);
 		core.getSearchSettings().setOfflineIndexes(Arrays.asList(binaryMapIndexReaderArray));
 		core.getSearchSettings().setRegions(app.getRegions());
+		applySearchStatSetting(app, core.getSearchSettings());
+	}
+
+	public static SearchSettings applySearchStatSetting(@NonNull OsmandApplication app, @NonNull SearchSettings searchSettings) {
+		OsmandDevelopmentPlugin developmentPlugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
+		boolean enabled = developmentPlugin != null && developmentPlugin.ENABLE_SEARCH_STAT_API.get();
+		searchSettings.setStat(enabled ? new SearchStat() : null);
+		return searchSettings;
 	}
 
 	public Amenity findAmenity(String name, double lat, double lon) {

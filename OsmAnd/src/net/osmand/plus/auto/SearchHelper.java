@@ -15,6 +15,7 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -155,6 +156,7 @@ public class SearchHelper {
 				.setSortByName(false)
 				.setLang(locale, transliterate)
 				.setOriginalLocation(searchLatLon);
+		QuickSearchHelper.applySearchStatSetting(app, searchSettings);
 
 		updateSearchHint(searchSettings);
 		return searchSettings;

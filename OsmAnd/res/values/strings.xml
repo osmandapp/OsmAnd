@@ -849,6 +849,8 @@ You will be able to pair this scanner again at any time.</string>
     <string name="energy_avg_info_description">Battery level per minute: %1$s\nEnergy consumption (mAh): %2$s</string>
     <string name="rendering_avg_info">Rendering statistics (average 1 / 5 / 15 minutes)</string>
     <string name="rendering_avg_info_details">FPS by last 1k frames: %1$s\nCPU (tiles): %2$s\nCPU (idle time): %3$s\nCPU (waits GPU): %4$s</string>
+    <string name="search_stat_api">Search statistics API</string>
+    <string name="search_stat_api_description">Collects low-level search statistics through SearchSettings SearchStat during search requests.</string>
     <string name="quick_action_location_by_gpx">Location by GPX</string>
     <string name="quick_action_terrain_color_scheme">Terrain color scheme</string>
     <string name="quick_action_directions_from">Start point</string>
