@@ -1032,9 +1032,6 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 						pnt.startY = o.getStartPointY();
 						pnt.endY = o.getEndPointY();
 					} else {
-//						if (o.getRoad().roundabout()) {
-//							continue; // TODO THIS IS WRONG WAY !!! https://github.com/osmandapp/OsmAnd/issues/21912
-//						}
 						float obstacle = hctx.rctx.getRouter().defineRoutingObstacle(
 								o.getRoad(), o.getSegmentStart(), o.getSegmentStart() > o.getSegmentEnd());
 						if (obstacle < 0) {
