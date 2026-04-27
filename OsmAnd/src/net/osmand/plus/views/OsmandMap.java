@@ -148,18 +148,23 @@ public class OsmandMap {
 		return app.getSettings().TEXT_SCALE.get();
 	}
 
-	public float getMapDensity() {
+	public static float getMapDensitySettings(@NonNull OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
 		float mapDensity = settings.MAP_DENSITY.get();
 		float aaMapDensity = settings.AA_MAP_DENSITY.get();
-		boolean aaMapDensitySet = settings.AA_MAP_DENSITY_SET.get();
+		boolean aaMapDensitySet = settings.AA_MAP_DENSITY.isSet();
 		float densityToSet;
-		if (getMapView().isCarView() && aaMapDensitySet) {
+		if (app.getOsmandMap() != null && app.getOsmandMap().mapView != null &&
+				app.getOsmandMap().mapView.isCarView() && aaMapDensitySet) {
 			densityToSet = aaMapDensity;
 		} else {
 			densityToSet = mapDensity;
 		}
 		return densityToSet;
+	}
+
+	public float getMapDensity() {
+		return getMapDensitySettings(app);
 	}
 
 	public float getCarDensityScaleCoef() {

@@ -24,20 +24,18 @@ class MapMagnifierScreen(
 
 	private val magnifierValues = listOf(50, 75, 100, 125, 150, 200)
 	private var selectedIndex = 2
-	private var initialAAMapDensitySet = false
-	private var initialAAMapDensity = 1f
+	private var initialAAMapDensity = 0f
 	private var isApplied = false
-
-	override fun onCreate(owner: LifecycleOwner) {
-		super.onCreate(owner)
-	}
 
 	override fun onDestroy(owner: LifecycleOwner) {
 		super.onDestroy(owner)
 		if (!isApplied) {
 			val settings = app.settings
-			settings.AA_MAP_DENSITY.set(initialAAMapDensity)
-			settings.AA_MAP_DENSITY_SET.set(initialAAMapDensitySet)
+			if (isInitialValueSet()) {
+				settings.AA_MAP_DENSITY.set(initialAAMapDensity)
+			} else {
+				settings.AA_MAP_DENSITY.resetToDefault()
+			}
 			refreshMapScale()
 		}
 	}
@@ -46,16 +44,23 @@ class MapMagnifierScreen(
 		super.onFirstGetTemplate()
 		val settings = app.settings
 		val mapDensity: Float = settings.MAP_DENSITY.get()
-		initialAAMapDensity = settings.AA_MAP_DENSITY.get()
-		initialAAMapDensitySet = settings.AA_MAP_DENSITY_SET.get()
+		initialAAMapDensity = if (settings.AA_MAP_DENSITY.isSet) {
+			settings.AA_MAP_DENSITY.get()
+		} else {
+			0f
+		}
 		val selectedValue =
-			((if (initialAAMapDensitySet) initialAAMapDensity else mapDensity) * 100).roundToInt()
+			((if (isInitialValueSet()) initialAAMapDensity else mapDensity) * 100).roundToInt()
 		for (value in magnifierValues) {
 			if (selectedValue == value) {
 				selectedIndex = magnifierValues.indexOf(value)
 				break
 			}
 		}
+	}
+
+	private fun isInitialValueSet(): Boolean {
+		return initialAAMapDensity > 0
 	}
 
 	override fun getTemplate(): Template {
@@ -73,7 +78,6 @@ class MapMagnifierScreen(
 				val value = magnifierValues[index].toFloat() / 100
 				val settings = app.settings
 				settings.AA_MAP_DENSITY.set(value)
-				settings.AA_MAP_DENSITY_SET.set(true)
 				refreshMapScale()
 				selectedIndex = index
 			}
