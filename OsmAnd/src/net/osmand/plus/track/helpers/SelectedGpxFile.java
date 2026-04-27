@@ -385,4 +385,8 @@ public class SelectedGpxFile {
 	public FilteredSelectedGpxFile getFilteredSelectedGpxFile() {
 		return filteredSelectedGpxFile;
 	}
+
+	public boolean hasFilters() {
+		return filteredSelectedGpxFile != null;
+	}
 }

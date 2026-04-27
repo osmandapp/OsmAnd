@@ -393,7 +393,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 		displayHelper.setGpx(selectedGpxFile.getGpxFileToDisplay());
 		displayHelper.setSelectedGpxFile(selectedGpxFile);
-		if (selectedGpxFile.getFilteredSelectedGpxFile() != null) {
+		if (selectedGpxFile.hasFilters()) {
 			displayHelper.setFilteredGpxFile(selectedGpxFile.getFilteredSelectedGpxFile().getGpxFile());
 		}
 		if (analysis == null) {

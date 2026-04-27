@@ -1504,7 +1504,7 @@
     <string name="poi_payment_cheque_no">Checkar accepteras inte</string>
     <string name="poi_payment_pikepass_yes">PIKEPASS</string>
     <string name="poi_payment_pikepass_no">PIKEPASS inte accepteras</string>
-    <string name="poi_payment_pikepass_designated">PIKEPASS (designerat)</string>
+    <string name="poi_payment_pikepass_designated">PIKEPASS (avsett)</string>
     <string name="poi_payment_visa_debit_yes">Visa Debit-kort</string>
     <string name="poi_payment_visa_debit_no">Visa Betalkort accepteras inte</string>
     <string name="poi_payment_cryptocurrencies_no">Kryptovalutor accepteras inte</string>
@@ -2742,7 +2742,7 @@
     <string name="poi_depth">Djup</string>
     <string name="poi_salt_yes">Salt</string>
     <string name="poi_salt_no">Salt: nej</string>
-    <string name="poi_wheelchair_designated">Designerat</string>
+    <string name="poi_wheelchair_designated">Avsett</string>
     <string name="poi_spoil_heap">Slagghög</string>
     <string name="poi_summer_camp">Sommarläger</string>
     <string name="poi_recreation_center">Fritidsområde</string>

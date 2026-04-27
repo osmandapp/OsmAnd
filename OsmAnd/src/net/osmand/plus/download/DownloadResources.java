@@ -224,6 +224,7 @@ public class DownloadResources extends DownloadResourceGroup {
 		DownloadResourceGroup wikivoyageMapsGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.TRAVEL_GROUP);
 		DownloadResourceGroup wikivoyageMapsScreen = new DownloadResourceGroup(wikivoyageMapsGroup, DownloadResourceGroupType.WIKIVOYAGE_MAPS);
 		DownloadResourceGroup wikivoyageMaps = new DownloadResourceGroup(wikivoyageMapsGroup, DownloadResourceGroupType.WIKIVOYAGE_HEADER);
+		DownloadResourceGroup astronomyMaps = new DownloadResourceGroup(wikivoyageMapsGroup, DownloadResourceGroupType.ASTRONOMY_HEADER);
 
 		Map<WorldRegion, List<IndexItem>> groupByRegion = new LinkedHashMap<>();
 		OsmandRegions regs = app.getRegions();
@@ -268,6 +269,10 @@ public class DownloadResources extends DownloadResourceGroup {
 				if (item.getFileName().contains(WIKIVOYAGE_FILE_FILTER)) {
 					wikivoyageMaps.addItem(item);
 				}
+				continue;
+			}
+			if (type == DownloadActivityType.STAR_MAP_FILE) {
+				astronomyMaps.addItem(item);
 				continue;
 			}
 			if (type == DownloadActivityType.HILLSHADE_FILE || type == DownloadActivityType.SLOPE_FILE) {
@@ -370,6 +375,7 @@ public class DownloadResources extends DownloadResourceGroup {
 		addGroup(nauticalMapsGroup);
 
 		wikivoyageMapsScreen.addGroup(wikivoyageMaps);
+		wikivoyageMapsScreen.addGroup(astronomyMaps);
 		wikivoyageMapsGroup.addGroup(wikivoyageMapsScreen);
 		addGroup(wikivoyageMapsGroup);
 

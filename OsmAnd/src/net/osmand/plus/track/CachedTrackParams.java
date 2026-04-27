@@ -1,24 +1,12 @@
 package net.osmand.plus.track;
 
-import androidx.annotation.Nullable;
-
 import net.osmand.util.Algorithms;
 
-public class CachedTrackParams {
-
-	public final long prevModifiedTime;
-	public final boolean useFilteredGpx;
-	public final boolean useJoinSegments;
-
-	public CachedTrackParams(long prevModifiedTime, boolean useFilteredGpx, boolean useJoinSegments) {
-		this.prevModifiedTime = prevModifiedTime;
-		this.useFilteredGpx = useFilteredGpx;
-		this.useJoinSegments = useJoinSegments;
-	}
+public record CachedTrackParams(long modifiedTime, boolean useFilteredGpx, boolean useJoinSegments, long pointsCount) {
 
 	@Override
 	public int hashCode() {
-		return Algorithms.hash(prevModifiedTime, useFilteredGpx, useJoinSegments);
+		return Algorithms.hash(modifiedTime, useFilteredGpx, useJoinSegments);
 	}
 
 	@Override
@@ -30,16 +18,18 @@ public class CachedTrackParams {
 			return false;
 		}
 		CachedTrackParams params = (CachedTrackParams) obj;
-		return prevModifiedTime == params.prevModifiedTime
+		return modifiedTime == params.modifiedTime
 				&& useFilteredGpx == params.useFilteredGpx
-				&& useJoinSegments == params.useJoinSegments;
+				&& useJoinSegments == params.useJoinSegments
+				&& pointsCount == params.pointsCount;
 	}
 
 	@Override
 	public String toString() {
 		return "CachedTrackParams{" +
-				"prevModifiedTime=" + prevModifiedTime +
+				"modifiedTime=" + modifiedTime +
 				", useFilteredGpx=" + useFilteredGpx +
-				", useJoinSegments=" + useJoinSegments;
+				", useJoinSegments=" + useJoinSegments +
+				", pointsCount=" + pointsCount;
 	}
 }

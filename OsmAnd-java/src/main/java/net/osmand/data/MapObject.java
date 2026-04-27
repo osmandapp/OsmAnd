@@ -366,13 +366,10 @@ public abstract class MapObject implements Comparable<MapObject> {
 				String s;
 				while ((s = br.readLine()) != null) {
 					bld.append(s);
+					bld.append("\n"); // could be space for name
 				}
 				br.close();
-				str = bld.toString();
-				// ugly fix of temporary problem of map generation
-				if (isContentZipped(str)) {
-					str = unzipContent(str);
-				}
+				str = bld.toString().trim();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
