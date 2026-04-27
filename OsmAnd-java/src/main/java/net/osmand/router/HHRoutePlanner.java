@@ -982,12 +982,11 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			System.out.println("  " + hctx.rctx.calculationProgress.getInfo(null));
 		}
 		if (frs != null) {
-			TLongSet set = new TLongHashSet();
 			for (FinalRouteSegment o : frs.all) {
 				int startSegment = reverse ? o.getSegmentEnd() : o.getSegmentStart();
 				int endSegment = reverse ? o.getSegmentStart() : o.getSegmentEnd();
 				long pntId = calculateRoutePointInternalId(o.getRoad().getId(), startSegment, endSegment);
-				if (set.add(pntId) && !hctx.pointsByGeo.containsKey(pntId)) {
+				if (!hctx.pointsByGeo.containsKey(pntId)) {
 					int x = reverse ? hctx.startX : hctx.endX;
 					int y = reverse ? hctx.startY : hctx.endY;
 					RouteSegmentPoint road = RoutePlannerFrontEnd.calcPreciseRouteSegmentPoint(o.getRoad(), x, y);
@@ -1006,7 +1005,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				}
 			}
 
-			set.clear();
+			TLongSet set = new TLongHashSet();
 			for (FinalRouteSegment o : frs.all) {
 				// duplicates are possible as alternative routes
 				int startSegment = reverse ? o.getSegmentEnd() : o.getSegmentStart();
