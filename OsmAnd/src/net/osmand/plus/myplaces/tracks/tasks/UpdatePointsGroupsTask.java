@@ -6,16 +6,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxParameter;
+import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.shared.gpx.primitives.WptPt;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
-import java.io.File;
 import java.util.Map;
 
 public class UpdatePointsGroupsTask extends BaseLoadAsyncTask<Void, Void, Exception> {
@@ -45,7 +47,7 @@ public class UpdatePointsGroupsTask extends BaseLoadAsyncTask<Void, Void, Except
 		updatePoints();
 
 		if (!gpxFile.isShowCurrentTrack() && gpxUpdated) {
-			return SharedUtil.writeGpxFile(new File(gpxFile.getPath()), gpxFile);
+			updatePointsGroupsInDb();
 		}
 		return null;
 	}
@@ -78,6 +80,22 @@ public class UpdatePointsGroupsTask extends BaseLoadAsyncTask<Void, Void, Except
 			WptPt wptInfo = new WptPt(wpt.getLatitude(), wpt.getLongitude(), wpt.getDesc(), wpt.getName(), category,
 					Algorithms.colorToString(color), iconName, backgroundType);
 			gpxFile.updateWptPt(wpt, wptInfo, false);
+		}
+	}
+
+	private void updatePointsGroupsInDb() {
+		if (Algorithms.isEmpty(gpxFile.getPath())) {
+			return;
+		}
+		KFile file = new KFile(gpxFile.getPath());
+		GpxDataItem dataItem = app.getGpxDbHelper().getItem(file, false);
+		String pointsGroups = GpxUtilities.INSTANCE.serializePointsGroups(gpxFile.getPointsGroups());
+		if (dataItem != null) {
+			app.getGpxDbHelper().updateDataItemParameter(dataItem, GpxParameter.POINTS_GROUPS, pointsGroups);
+		} else {
+			dataItem = new GpxDataItem(file);
+			dataItem.setParameter(GpxParameter.POINTS_GROUPS, pointsGroups);
+			app.getGpxDbHelper().add(dataItem);
 		}
 	}
 

@@ -138,7 +138,7 @@ class GpxDataItem(
 					setParameter(GpxParameter.COLOR_PALETTE, gpxFile.getGradientColorPalette())
 				}
 
-				GpxParameter.TRACK_VISUALIZATION_TYPE -> setParameter(
+			GpxParameter.TRACK_VISUALIZATION_TYPE -> setParameter(
 				GpxParameter.TRACK_VISUALIZATION_TYPE,
 				gpxFile.get3DVisualizationType()
 			)
