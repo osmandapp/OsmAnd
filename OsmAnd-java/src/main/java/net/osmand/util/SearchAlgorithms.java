@@ -345,4 +345,12 @@ public class SearchAlgorithms {
         }
         return data;
     }
+
+    public static String replaceGermanSS(String fullText) {
+        int i;
+        while ((i = fullText.indexOf('ß')) != -1) {
+            fullText = fullText.substring(0, i) + "ss" + fullText.substring(i + 1);
+        }
+        return fullText;
+    }
 }
