@@ -31,10 +31,10 @@ public abstract class LocationServiceHelper {
 	// Working with location checkListeners
 	protected class NetworkListener implements LocationListenerCompat {
 
-		private final String requestedProvider;
+		private final String provider;
 
-		protected NetworkListener(@NonNull String requestedProvider) {
-			this.requestedProvider = requestedProvider;
+		protected NetworkListener(@NonNull String provider) {
+			this.provider = provider;
 		}
 
 		@Override
@@ -47,7 +47,7 @@ public abstract class LocationServiceHelper {
 		}
 	}
 
-	public LocationServiceHelper(OsmandApplication app) {
+	public LocationServiceHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 	}
 

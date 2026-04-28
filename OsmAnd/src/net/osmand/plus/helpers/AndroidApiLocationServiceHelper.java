@@ -26,7 +26,7 @@ public class AndroidApiLocationServiceHelper extends LocationServiceHelper imple
 
 	private LocationCallback locationCallback;
 
-	public AndroidApiLocationServiceHelper(OsmandApplication app) {
+	public AndroidApiLocationServiceHelper(@NonNull OsmandApplication app) {
 		super(app);
 	}
 
@@ -37,9 +37,11 @@ public class AndroidApiLocationServiceHelper extends LocationServiceHelper imple
 		String provider = LocationManager.GPS_PROVIDER;
 		LocationManager locationManager = (LocationManager) app.getSystemService(LOCATION_SERVICE);
 		try {
-			List<String> providers = locationManager.getProviders(true);
-			if (Version.isHMDBuild() && providers.contains("fused")) {
-				provider = "fused";
+			if (Version.isHMDBuild()) {
+				List<String> providers = locationManager.getProviders(true);
+				if (providers.contains("fused")) {
+					provider = "fused";
+				}
 			}
 			locationManager.requestLocationUpdates(provider, 0, 0, this);
 		} catch (SecurityException e) {
