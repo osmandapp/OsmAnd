@@ -39,7 +39,11 @@ class AstronomyPlugin(app: OsmandApplication) : OsmandPlugin(app) {
 
 	override fun getName(): String {
 		val name = app.getString(R.string.astronomy_plugin_name)
-		return app.getString(R.string.ltr_or_rtl_combine_via_space, name, "(Beta)")
+		return app.getString(
+			R.string.ltr_or_rtl_combine_with_brackets,
+			name,
+			app.getString(R.string.shared_string_beta)
+		)
 	}
 
 	override fun getDescription(linksEnabled: Boolean): CharSequence {
