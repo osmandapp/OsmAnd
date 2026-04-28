@@ -84,12 +84,11 @@ public class AndroidApiLocationServiceHelper extends LocationServiceHelper imple
 			try {
 				boolean enabled = locationManager.isProviderEnabled(provider);
 				android.location.Location last = locationManager.getLastKnownLocation(provider);
-				LOG.warn("LOC_DIAG providerState [" + provider + "]: enabled=" + enabled
-						+ ", lastKnown=" + androidLocToString(last));
+				LOG.warn("providerState [" + provider + "]: enabled=" + enabled + ", lastKnown=" + androidLocToString(last));
 			} catch (SecurityException e) {
-				LOG.warn("LOC_DIAG providerState [" + provider + "]: SecurityException", e);
+				LOG.warn("providerState [" + provider + "]: SecurityException", e);
 			} catch (Exception e) {
-				LOG.warn("LOC_DIAG providerState [" + provider + "]: error", e);
+				LOG.warn("providerState [" + provider + "]: error", e);
 			}
 		}
 	}
@@ -99,8 +98,8 @@ public class AndroidApiLocationServiceHelper extends LocationServiceHelper imple
 			return "null";
 		}
 		return "provider=" + location.getProvider()
-				+ ", lat=" + String.format(java.util.Locale.US, "%.3f", location.getLatitude())
-				+ ", lon=" + String.format(java.util.Locale.US, "%.3f", location.getLongitude())
+				+ ", lat=" + String.format(java.util.Locale.US, "%.2f", location.getLatitude())
+				+ ", lon=" + String.format(java.util.Locale.US, "%.2f", location.getLongitude())
 				+ ", acc=" + (location.hasAccuracy() ? location.getAccuracy() : -1)
 				+ ", time=" + location.getTime()
 				+ ", elapsedRealtimeNanos=" + location.getElapsedRealtimeNanos();
@@ -155,8 +154,8 @@ public class AndroidApiLocationServiceHelper extends LocationServiceHelper imple
 	@Override
 	public void onLocationChanged(@NonNull Location location) {
 		LOG.info("SUCCESS! Received GPS location: Lat=" +
-				String.format(java.util.Locale.US, "%.3f", location.getLatitude()) + ", Lon=" +
-				String.format(java.util.Locale.US, "%.3f", location.getLongitude()) + ", Acc=" + location.getAccuracy());
+				String.format(java.util.Locale.US, "%.2f", location.getLatitude()) + ", Lon=" +
+				String.format(java.util.Locale.US, "%.2f", location.getLongitude()) + ", Acc=" + location.getAccuracy());
 		LocationCallback locationCallback = this.locationCallback;
 		if (locationCallback != null) {
 			net.osmand.Location l = convertLocation(location);

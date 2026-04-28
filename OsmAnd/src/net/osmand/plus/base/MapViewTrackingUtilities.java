@@ -245,7 +245,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	@Override
 	public void updateLocation(Location location) {
-		LOG.warn("LOC_DIAG MapViewTrackingUtilities.updateLocation: incoming=" + formatLocationForLog(location)
+		LOG.warn("updateLocation: incoming=" + formatLocationForLog(location)
 				+ ", prevMyLocation=" + formatLocationForLog(myLocation)
 				+ ", mapView=" + mapView
 				+ ", isMapLinked=" + isMapLinkedToLocation()

@@ -59,8 +59,8 @@ public class GmsLocationServiceHelper extends LocationServiceHelper {
 				Location loc = locationResult.getLastLocation();
 				if (loc != null) {
 					LOG.info("SUCCESS! Received GMS Fused location: Lat=" +
-							String.format(java.util.Locale.US, "%.3f", loc.getLatitude()) + ", Lon=" +
-							String.format(java.util.Locale.US, "%.3f", loc.getLongitude()) + ", Acc=" + loc.getAccuracy());
+							String.format(java.util.Locale.US, "%.2f", loc.getLatitude()) + ", Lon=" +
+							String.format(java.util.Locale.US, "%.2f", loc.getLongitude()) + ", Acc=" + loc.getAccuracy());
 				}
 				LocationCallback locationCallback = GmsLocationServiceHelper.this.locationCallback;
 				if (locationCallback != null) {

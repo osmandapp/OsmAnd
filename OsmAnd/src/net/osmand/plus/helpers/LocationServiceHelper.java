@@ -31,18 +31,18 @@ public abstract class LocationServiceHelper {
 	// Working with location checkListeners
 	protected class NetworkListener implements LocationListenerCompat {
 
-		private final String requestedProvider;
+		private final String provider;
 
-		protected NetworkListener(@NonNull String requestedProvider) {
-			this.requestedProvider = requestedProvider;
+		protected NetworkListener(@NonNull String provider) {
+			this.provider = provider;
 		}
 
 		@Override
 		public void onLocationChanged(@NonNull android.location.Location location) {
-			LOG.info("network callback: requestedProvider=[" + requestedProvider
+			LOG.info("network callback: provider=[" + provider
 					+ "], actualProvider=[" + location.getProvider()
-					+ "], lat=" + String.format(java.util.Locale.US, "%.3f", location.getLatitude())
-					+ ", lon=" + String.format(java.util.Locale.US, "%.3f", location.getLongitude())
+					+ "], lat=" + String.format(java.util.Locale.US, "%.2f", location.getLatitude())
+					+ ", lon=" + String.format(java.util.Locale.US, "%.2f", location.getLongitude())
 					+ ", acc=" + (location.hasAccuracy() ? location.getAccuracy() : -1)
 					+ ", time=" + location.getTime());
 
@@ -57,12 +57,12 @@ public abstract class LocationServiceHelper {
 
 		@Override
 		public void onProviderEnabled(@NonNull String provider) {
-			LOG.info("provider enabled: requestedProvider=[" + requestedProvider + "], provider=[" + provider + "]");
+			LOG.info("provider enabled: requestedProvider=[" + this.provider + "], provider=[" + provider + "]");
 		}
 
 		@Override
 		public void onProviderDisabled(@NonNull String provider) {
-			LOG.warn("provider disabled: requestedProvider=[" + requestedProvider + "], provider=[" + provider + "]");
+			LOG.warn("provider disabled: requestedProvider=[" + this.provider + "], provider=[" + provider + "]");
 		}
 	}
 

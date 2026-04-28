@@ -570,7 +570,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	private void stopLocationRequests() {
-		LOG.warn("LOC_DIAG stopLocationRequests: stored=" + formatLocationForLog(location) + ", cached=" + formatLocationForLog(cachedLocation));
+		LOG.warn("stopLocationRequests: stored=" + formatLocationForLog(location) + ", cached=" + formatLocationForLog(cachedLocation));
 		gpsInfo.reset();
 		LocationManager service = (LocationManager) app.getSystemService(LOCATION_SERVICE);
 		if (gpsStatusListener != null) {
@@ -585,7 +585,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	public void pauseAllUpdates() {
-		LOG.warn("LOC_DIAG pauseAllUpdates: stored=" + formatLocationForLog(location)
+		LOG.warn("pauseAllUpdates: stored=" + formatLocationForLog(location)
 				+ ", cached=" + formatLocationForLog(cachedLocation) + ", lastFixAgeMs=" + (lastTimeLocationFixed > 0
 				? System.currentTimeMillis() - lastTimeLocationFixed : -1));
 		stopLocationRequests();
@@ -808,8 +808,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			return "null";
 		}
 		return "provider=" + location.getProvider()
-				+ ", lat=" + String.format(java.util.Locale.US, "%.3f", location.getLatitude())
-				+ ", lon=" + String.format(java.util.Locale.US, "%.3f", location.getLongitude())
+				+ ", lat=" + String.format(java.util.Locale.US, "%.2f", location.getLatitude())
+				+ ", lon=" + String.format(java.util.Locale.US, "%.2f", location.getLongitude())
 				+ ", acc=" + (location.hasAccuracy() ? location.getAccuracy() : -1)
 				+ ", time=" + location.getTime();
 	}
@@ -913,9 +913,12 @@ public class OsmAndLocationProvider implements SensorEventListener {
 				}
 			}
 		} else {
+			boolean changed = cachedLocation != newLoc;
 			cachedLocation = newLoc;
 			cachedLocationTimeFix = lastTimeLocationFixed;
-			LOG.info("getLastStaleKnownLocation cache updated: newLoc=" + formatLocationForLog(newLoc));
+			if (changed) {
+				LOG.info("getLastStaleKnownLocation cache updated: newLoc=" + formatLocationForLog(newLoc));
+			}
 		}
 		return cachedLocation;
 	}

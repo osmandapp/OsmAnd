@@ -22,23 +22,34 @@ public class HMDLocationServiceHelper extends AndroidApiLocationServiceHelper {
 	}
 
 	@Override
-	protected void requestLocationUpdatesImpl() {
-		String provider = LocationManager.GPS_PROVIDER;
+	public void requestNetworkLocationUpdates(@NonNull LocationCallback locationCallback) {
 		LocationManager locationManager = (LocationManager) app.getSystemService(LOCATION_SERVICE);
-		LOG.info("Requesting HMD (Fused/GPS) location updates...");
+		LOG.info("Requesting (Fused/GPS) location updates...");
+		List<String> enabledProviders = null;
 		try {
-			List<String> providers = locationManager.getProviders(true);
-			if (providers.contains("fused")) {
-				provider = "fused";
+			enabledProviders = locationManager.getProviders(true);
+			LOG.info("Diagnostic - All providers: " + locationManager.getAllProviders());
+			LOG.info("Diagnostic - Enabled providers: " + enabledProviders);
+		} catch (Exception e) {
+			LOG.debug("Failed to log providers", e);
+		}
+		super.requestNetworkLocationUpdates(locationCallback);
+		try {
+			if (enabledProviders != null && enabledProviders.contains("fused")) {
+				LOG.info("Requesting FUSED for fast indoor fallback...");
+				NetworkListener networkListener = new NetworkListener("fused");
+				locationManager.requestLocationUpdates("fused", 0, 0, networkListener);
+				networkListeners.add(networkListener);
+				LOG.info("Successfully registered listener for fused provider");
+			} else {
+				LOG.warn("device does not have 'fused' enabled or available.");
 			}
-			locationManager.requestLocationUpdates(provider, 0, 0, this);
-			LOG.info("Successfully registered listener for [" + provider + "]");
 		} catch (SecurityException e) {
-			LOG.debug(provider + " location service permission not granted", e);
-			throw e;
+			LOG.debug("Fused location service permission not granted", e);
 		} catch (IllegalArgumentException e) {
-			LOG.debug(provider + " location provider not available", e);
-			throw e;
+			LOG.debug("Fused location provider not available", e);
+		} catch (Exception e) {
+			LOG.error("Unexpected error registering fused fallback", e);
 		}
 	}
 }
