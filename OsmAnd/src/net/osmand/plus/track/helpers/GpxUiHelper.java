@@ -16,6 +16,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -92,39 +93,79 @@ public class GpxUiHelper {
 		return getColorValue(clr, value, true);
 	}
 
-
-
 	@NonNull
 	public static String getTrackShortDescription(@NonNull Context context,
 	                                              @NonNull GpxTrackAnalysis analysis,
 	                                              @Nullable KFile file,
 	                                              boolean shouldShowFolder) {
-		OsmandApplication app = context instanceof OsmandApplication
-				? (OsmandApplication) context
-				: (OsmandApplication) context.getApplicationContext();
-		boolean accessibilityEnabled = app.accessibilityEnabled();
+		SpannableStringBuilder description = new SpannableStringBuilder();
+		appendTrackShortDescription(context, description, analysis, file, shouldShowFolder);
+		return description.toString();
+	}
 
-		StringBuilder description = new StringBuilder();
-		description.append(OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app));
+	public static void appendTrackShortDescription(@NonNull Context context,
+	                                               @NonNull SpannableStringBuilder builder,
+	                                               @NonNull GpxTrackAnalysis analysis,
+	                                               @Nullable KFile file,
+	                                               boolean shouldShowFolder) {
+		appendTrackDistance(context, builder, analysis);
 		if (analysis.isTimeSpecified()) {
-			description.append(" • ");
-			description.append(formatDuration(analysis.getDurationInSeconds(), accessibilityEnabled));
+			builder.append(" • ");
+			appendTrackDuration(context, builder, analysis);
 		}
+		appendTrackPoints(builder, analysis);
+		appendTrackFolderName(builder, file, shouldShowFolder);
+	}
+
+	public static void appendTrackDistance(@NonNull Context context,
+	                                       @NonNull SpannableStringBuilder builder,
+	                                       @NonNull GpxTrackAnalysis analysis) {
+		builder.append(OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), getApplication(context)));
+	}
+
+	public static void appendTrackDuration(@NonNull Context context,
+	                                       @NonNull SpannableStringBuilder builder,
+	                                       @NonNull GpxTrackAnalysis analysis) {
+		if (analysis.isTimeSpecified()) {
+			OsmandApplication app = getApplication(context);
+			builder.append(formatDuration(analysis.getDurationInSeconds(), app.accessibilityEnabled()));
+		}
+	}
+
+	public static void appendTrackPoints(@NonNull SpannableStringBuilder builder,
+	                                     @NonNull GpxTrackAnalysis analysis) {
 		if (analysis.getWptPoints() > 0) {
-			description.append(" • ");
-			description.append(analysis.getWptPoints());
+			builder.append(" • ");
+			builder.append(String.valueOf(analysis.getWptPoints()));
 		}
+	}
+
+	public static void appendTrackFolderName(@NonNull SpannableStringBuilder builder,
+	                                         @Nullable KFile file,
+	                                         boolean shouldShowFolder) {
+		String folderName = getTrackFolderName(file, shouldShowFolder);
+		if (!Algorithms.isEmpty(folderName)) {
+			builder.append(" | ");
+			builder.append(Algorithms.capitalizeFirstLetter(folderName));
+		}
+	}
+
+	@Nullable
+	public static String getTrackFolderName(@Nullable KFile file, boolean shouldShowFolder) {
 		if (shouldShowFolder && file != null) {
-			File parentDir = SharedUtil.jFile(file).getParentFile();
+			File parentDir = new File(file.absolutePath()).getParentFile();
 			if (parentDir != null) {
-				String folderName = getFolderName(context, parentDir);
-				if (!Algorithms.isEmpty(folderName)) {
-					description.append(" | ");
-					description.append(Algorithms.capitalizeFirstLetter(folderName));
-				}
+				return parentDir.getName();
 			}
 		}
-		return description.toString();
+		return null;
+	}
+
+	@NonNull
+	private static OsmandApplication getApplication(@NonNull Context context) {
+		return context instanceof OsmandApplication
+				? (OsmandApplication) context
+				: (OsmandApplication) context.getApplicationContext();
 	}
 
 	public static String getDescription(OsmandApplication app, GpxTrackAnalysis analysis, boolean html) {
