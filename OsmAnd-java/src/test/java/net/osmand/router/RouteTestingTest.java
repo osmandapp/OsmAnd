@@ -2,22 +2,6 @@ package net.osmand.router;
 
 import static net.osmand.util.RouterUtilTest.getNativeLibPath;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import net.osmand.NativeLibrary;
-import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.ObfConstants;
-import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
-import net.osmand.util.RouterUtilTest;
-
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -30,6 +14,21 @@ import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
+
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import net.osmand.NativeLibrary;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.ObfConstants;
+import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
+import net.osmand.util.RouterUtilTest;
 
 @RunWith(Parameterized.class)
 public class RouteTestingTest {
@@ -68,7 +67,6 @@ public class RouteTestingTest {
 
 	}
 
-	@Ignore
 	@Test(timeout = TIMEOUT)
 	public void testRouting() throws Exception {
 		NativeLibrary nativeLibrary = null;

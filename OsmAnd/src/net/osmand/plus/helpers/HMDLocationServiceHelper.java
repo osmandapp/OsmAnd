@@ -25,12 +25,14 @@ public class HMDLocationServiceHelper extends AndroidApiLocationServiceHelper {
 	protected void requestLocationUpdatesImpl() {
 		String provider = LocationManager.GPS_PROVIDER;
 		LocationManager locationManager = (LocationManager) app.getSystemService(LOCATION_SERVICE);
+		LOG.info("Requesting HMD (Fused/GPS) location updates...");
 		try {
 			List<String> providers = locationManager.getProviders(true);
 			if (providers.contains("fused")) {
 				provider = "fused";
 			}
 			locationManager.requestLocationUpdates(provider, 0, 0, this);
+			LOG.info("Successfully registered listener for [" + provider + "]");
 		} catch (SecurityException e) {
 			LOG.debug(provider + " location service permission not granted", e);
 			throw e;

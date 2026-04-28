@@ -17,9 +17,7 @@ import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 public class AndroidApiLocationServiceHelper extends LocationServiceHelper implements LocationListenerCompat {
 
@@ -27,7 +25,7 @@ public class AndroidApiLocationServiceHelper extends LocationServiceHelper imple
 
 	private LocationCallback locationCallback;
 
-	public AndroidApiLocationServiceHelper(OsmandApplication app) {
+	public AndroidApiLocationServiceHelper(@NonNull OsmandApplication app) {
 		super(app);
 	}
 
@@ -35,16 +33,21 @@ public class AndroidApiLocationServiceHelper extends LocationServiceHelper imple
 	public void requestLocationUpdates(@NonNull LocationCallback locationCallback) {
 		this.locationCallback = locationCallback;
 		// request location updates
+		requestLocationUpdatesImpl();
+	}
+
+	protected void requestLocationUpdatesImpl() {
+		String provider = LocationManager.GPS_PROVIDER;
 		LocationManager locationManager = (LocationManager) app.getSystemService(LOCATION_SERVICE);
 		LOG.info("Requesting GPS location updates...");
 		try {
-			locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-			LOG.info("Successfully registered listener for [gps]");
+			locationManager.requestLocationUpdates(provider, 0, 0, this);
+			LOG.info("Successfully registered listener for [" + provider + "]");
 		} catch (SecurityException e) {
-			LOG.debug("Location service permission not granted", e);
+			LOG.debug(provider + " location service permission not granted", e);
 			throw e;
 		} catch (IllegalArgumentException e) {
-			LOG.debug("GPS location provider not available", e);
+			LOG.debug(provider + " location provider not available", e);
 			throw e;
 		}
 	}
@@ -59,48 +62,22 @@ public class AndroidApiLocationServiceHelper extends LocationServiceHelper imple
 		this.networkLocationCallback = locationCallback;
 		// request location updates
 		LocationManager locationManager = (LocationManager) app.getSystemService(LOCATION_SERVICE);
-
-		LOG.info("requestNetworkLocationUpdates()");
-		LOG.info("allProviders=" + locationManager.getAllProviders());
-		LOG.info("enabledProviders=" + locationManager.getProviders(true));
-
-		Set<String> providersToRequest = new LinkedHashSet<>();
-		// Important: request standard framework NLP providers explicitly.
-		if (locationManager.getAllProviders().contains(LocationManager.NETWORK_PROVIDER)) {
-			providersToRequest.add(LocationManager.NETWORK_PROVIDER);
-		}
-		if (locationManager.getAllProviders().contains(LocationManager.FUSED_PROVIDER)) {
-			providersToRequest.add(LocationManager.FUSED_PROVIDER);
-		}
-		// Also request any custom enabled non-GPS provider exposed by the ROM.
-		for (String provider : locationManager.getProviders(true)) {
+		List<String> providers = locationManager.getProviders(true);
+		for (String provider : providers) {
 			if (provider == null
 					|| provider.equals(LocationManager.GPS_PROVIDER)
-					|| provider.equals(LocationManager.PASSIVE_PROVIDER)) {
+					|| provider.equals(LocationManager.PASSIVE_PROVIDER)
+					|| provider.equals(LocationManager.FUSED_PROVIDER)) {
 				continue;
 			}
-			providersToRequest.add(provider);
-		}
-		LOG.info("providersToRequest=" + providersToRequest);
-		for (String provider : providersToRequest) {
 			try {
-				boolean enabled = false;
-				try {
-					enabled = locationManager.isProviderEnabled(provider);
-				} catch (Exception e) {
-					LOG.warn("cannot check enabled state for [" + provider + "]", e);
-				}
-				LOG.info("requesting updates from provider=[" + provider + "], enabled=" + enabled);
 				NetworkListener networkListener = new NetworkListener(provider);
-				locationManager.requestLocationUpdates(provider, 0, 0, networkListener, android.os.Looper.getMainLooper());
+				locationManager.requestLocationUpdates(provider, 0, 0, networkListener);
 				networkListeners.add(networkListener);
-				LOG.info("successfully registered listener for provider=[" + provider + "]");
 			} catch (SecurityException e) {
-				LOG.warn(provider + " location service permission not granted", e);
+				LOG.debug(provider + " location service permission not granted", e);
 			} catch (IllegalArgumentException e) {
-				LOG.warn(provider + " location provider not available", e);
-			} catch (Exception e) {
-				LOG.error("unexpected error registering provider=[" + provider + "]", e);
+				LOG.debug(provider + " location provider not available", e);
 			}
 		}
 		for (String provider : locationManager.getAllProviders()) {
@@ -128,7 +105,7 @@ public class AndroidApiLocationServiceHelper extends LocationServiceHelper imple
 				+ ", time=" + location.getTime()
 				+ ", elapsedRealtimeNanos=" + location.getElapsedRealtimeNanos();
 	}
-	
+
 	@Override
 	public void removeLocationUpdates() {
 		LOG.info("Removing all location updates...");
@@ -166,11 +143,9 @@ public class AndroidApiLocationServiceHelper extends LocationServiceHelper imple
 					return location;
 				}
 			} catch (SecurityException e) {
-				// location service permission not granted
-				LOG.warn("SecurityException checking last known location for [" + provider + "]", e);
+				LOG.debug(provider + " location service permission not granted", e);
 			} catch (IllegalArgumentException e) {
-				// location provider not available
-				LOG.warn("IllegalArgumentException checking last known location for [" + provider + "]", e);
+				LOG.debug(provider + " location provider not available", e);
 			}
 		}
 		LOG.info("Failed to find any cached last known location.");
