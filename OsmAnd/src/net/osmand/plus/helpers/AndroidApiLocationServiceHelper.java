@@ -12,7 +12,6 @@ import androidx.core.location.LocationListenerCompat;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.Version;
 
 import org.apache.commons.logging.Log;
 
@@ -34,15 +33,13 @@ public class AndroidApiLocationServiceHelper extends LocationServiceHelper imple
 	public void requestLocationUpdates(@NonNull LocationCallback locationCallback) {
 		this.locationCallback = locationCallback;
 		// request location updates
+		requestLocationUpdatesImpl();
+	}
+
+	protected void requestLocationUpdatesImpl() {
 		String provider = LocationManager.GPS_PROVIDER;
 		LocationManager locationManager = (LocationManager) app.getSystemService(LOCATION_SERVICE);
 		try {
-			if (Version.isHMDBuild()) {
-				List<String> providers = locationManager.getProviders(true);
-				if (providers.contains("fused")) {
-					provider = "fused";
-				}
-			}
 			locationManager.requestLocationUpdates(provider, 0, 0, this);
 		} catch (SecurityException e) {
 			LOG.debug(provider + " location service permission not granted", e);
