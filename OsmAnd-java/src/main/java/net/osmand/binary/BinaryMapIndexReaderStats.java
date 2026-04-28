@@ -175,7 +175,7 @@ public class BinaryMapIndexReaderStats {
 	
 	public static class SearchStat {
 		private static final boolean TO_DETAILED_STRING = false;
-		private static final int DEFAULT_TOP_K_OBF = 3;
+		private static final int DEFAULT_TOP_K_OBF = 5;
 		long lastReq = 0, subSize = 0;
 		public long totalTime = 0;
 		public long totalBytes = 0;
