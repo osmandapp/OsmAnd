@@ -10,13 +10,18 @@ import androidx.annotation.Nullable;
 import androidx.core.location.LocationListenerCompat;
 
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
+
+import org.apache.commons.logging.Log;
 
 import java.util.Collections;
 import java.util.LinkedList;
 
 public abstract class LocationServiceHelper {
+
+	protected static final Log LOG = PlatformUtil.getLog(LocationServiceHelper.class);
 
 	protected final OsmandApplication app;
 
@@ -25,6 +30,12 @@ public abstract class LocationServiceHelper {
 
 	// Working with location checkListeners
 	protected class NetworkListener implements LocationListenerCompat {
+
+		private final String requestedProvider;
+
+		protected NetworkListener(@NonNull String requestedProvider) {
+			this.requestedProvider = requestedProvider;
+		}
 
 		@Override
 		public void onLocationChanged(@NonNull android.location.Location location) {

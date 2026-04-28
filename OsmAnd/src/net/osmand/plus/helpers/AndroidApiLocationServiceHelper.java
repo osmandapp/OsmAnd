@@ -12,6 +12,7 @@ import androidx.core.location.LocationListenerCompat;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.Version;
 
 import org.apache.commons.logging.Log;
 
@@ -21,7 +22,7 @@ import java.util.List;
 
 public class AndroidApiLocationServiceHelper extends LocationServiceHelper implements LocationListenerCompat {
 
-	private static final Log LOG = PlatformUtil.getLog(DayNightHelper.class);
+	private static final Log LOG = PlatformUtil.getLog(AndroidApiLocationServiceHelper.class);
 
 	private LocationCallback locationCallback;
 
@@ -33,14 +34,19 @@ public class AndroidApiLocationServiceHelper extends LocationServiceHelper imple
 	public void requestLocationUpdates(@NonNull LocationCallback locationCallback) {
 		this.locationCallback = locationCallback;
 		// request location updates
+		String provider = LocationManager.GPS_PROVIDER;
 		LocationManager locationManager = (LocationManager) app.getSystemService(LOCATION_SERVICE);
 		try {
-			locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+			List<String> providers = locationManager.getProviders(true);
+			if (Version.isHMDBuild() && providers.contains("fused")) {
+				provider = "fused";
+			}
+			locationManager.requestLocationUpdates(provider, 0, 0, this);
 		} catch (SecurityException e) {
-			LOG.debug("Location service permission not granted");
+			LOG.debug(provider + " location service permission not granted", e);
 			throw e;
 		} catch (IllegalArgumentException e) {
-			LOG.debug("GPS location provider not available");
+			LOG.debug(provider + " location provider not available", e);
 			throw e;
 		}
 	}
@@ -64,13 +70,13 @@ public class AndroidApiLocationServiceHelper extends LocationServiceHelper imple
 				continue;
 			}
 			try {
-				NetworkListener networkListener = new NetworkListener();
+				NetworkListener networkListener = new NetworkListener(provider);
 				locationManager.requestLocationUpdates(provider, 0, 0, networkListener);
 				networkListeners.add(networkListener);
 			} catch (SecurityException e) {
-				LOG.debug(provider + " location service permission not granted");
+				LOG.debug(provider + " location service permission not granted", e);
 			} catch (IllegalArgumentException e) {
-				LOG.debug(provider + " location provider not available");
+				LOG.debug(provider + " location provider not available", e);
 			}
 		}
 	}
@@ -108,9 +114,9 @@ public class AndroidApiLocationServiceHelper extends LocationServiceHelper imple
 					return location;
 				}
 			} catch (SecurityException e) {
-				// location service permission not granted
+				LOG.debug(provider + " location service permission not granted", e);
 			} catch (IllegalArgumentException e) {
-				// location provider not available
+				LOG.debug(provider + " location provider not available", e);
 			}
 		}
 		return null;

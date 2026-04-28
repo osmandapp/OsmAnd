@@ -29,7 +29,7 @@ import java.util.List;
 
 public class GmsLocationServiceHelper extends LocationServiceHelper {
 
-	private static final Log LOG = PlatformUtil.getLog(DayNightHelper.class);
+	private static final Log LOG = PlatformUtil.getLog(GmsLocationServiceHelper.class);
 
 	// FusedLocationProviderClient - Main class for receiving location updates.
 	private final FusedLocationProviderClient fusedLocationProviderClient;
@@ -82,10 +82,10 @@ public class GmsLocationServiceHelper extends LocationServiceHelper {
 			fusedLocationProviderClient.requestLocationUpdates(
 					fusedLocationRequest, fusedLocationCallback, Looper.myLooper());
 		} catch (SecurityException e) {
-			LOG.debug("Location service permission not granted");
+			LOG.debug("Location service permission not granted", e);
 			throw e;
 		} catch (IllegalArgumentException e) {
-			LOG.debug("GPS location provider not available");
+			LOG.debug("GPS location provider not available", e);
 			throw e;
 		}
 	}
@@ -108,14 +108,14 @@ public class GmsLocationServiceHelper extends LocationServiceHelper {
 				continue;
 			}
 			try {
-				NetworkListener networkListener = new NetworkListener();
+				NetworkListener networkListener = new NetworkListener(provider);
 				LocationManagerCompat.requestLocationUpdates(locationManager, provider, networkLocationRequest,
 						networkListener, Looper.myLooper());
 				networkListeners.add(networkListener);
 			} catch (SecurityException e) {
-				LOG.debug(provider + " location service permission not granted");
+				LOG.debug(provider + " location service permission not granted", e);
 			} catch (IllegalArgumentException e) {
-				LOG.debug(provider + " location provider not available");
+				LOG.debug(provider + " location provider not available", e);
 			}
 		}
 	}
@@ -143,9 +143,9 @@ public class GmsLocationServiceHelper extends LocationServiceHelper {
 			lastLocation.addOnSuccessListener(loc -> locationCallback.onLocationResult(loc != null
 					? Collections.singletonList(convertLocation(loc)) : Collections.emptyList() ));
 		} catch (SecurityException e) {
-			LOG.debug("Location service permission not granted");
+			LOG.debug("Location service permission not granted", e);
 		} catch (IllegalArgumentException e) {
-			LOG.debug("GPS location provider not available");
+			LOG.debug("GPS location provider not available", e);
 		}
 		return null;
 	}
