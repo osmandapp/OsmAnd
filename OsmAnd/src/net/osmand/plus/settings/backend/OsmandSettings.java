@@ -1482,6 +1482,7 @@ public class OsmandSettings {
 	}
 
 	public final CommonPreference<Float> MAP_DENSITY = new FloatPreference(this, "map_density_n", 1f).makeProfile().cache();
+	public final CommonPreference<Float> AA_MAP_DENSITY = new FloatPreference(this, "aa_map_density_n", 1f).makeProfile().cache();
 
 	public final OsmandPreference<Boolean> SHOW_POI_LABEL = new BooleanPreference(this, "show_poi_label", false).makeProfile();
 
