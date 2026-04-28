@@ -52,6 +52,7 @@ kotlin {
 	val coroutinesVersion = "1.8.1"
 	val statelyVersion = "2.1.0"
 	val coilVersion = "3.1.0"
+    val ktorVersion = "3.1.3"
 
 	sourceSets {
 		commonMain.dependencies {
@@ -63,6 +64,7 @@ kotlin {
 			implementation("com.squareup.okio:okio:$okioVersion")
 			implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
 			implementation("co.touchlab:stately-concurrent-collections:$statelyVersion")
+            implementation("io.ktor:ktor-client-core:$ktorVersion")
 		}
 		jvmMain.dependencies {
 			//implementation(kotlin("stdlib-jdk8"))
@@ -76,9 +78,11 @@ kotlin {
 			implementation("net.sf.kxml:kxml2:$kxml2Version")
 			implementation("io.coil-kt.coil3:coil-core:$coilVersion")
 			implementation("io.coil-kt.coil3:coil-network-okhttp:$coilVersion")
+            implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
 		}
 		iosMain.dependencies {
 			implementation("co.touchlab:sqliter-driver:$sqliterVersion")
+            implementation("io.ktor:ktor-client-darwin:$ktorVersion")
 		}
 
 		commonTest.dependencies {
