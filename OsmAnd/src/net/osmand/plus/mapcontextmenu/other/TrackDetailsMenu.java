@@ -282,14 +282,8 @@ public class TrackDetailsMenu {
 				mapActivity.showTopToolbar(toolbarController);
 			}
 			mapActivity.getMapLayers().getContextMenuLayer().enterGpxDetailsMode();
-			restoreMapWidgetsVisibility(mapActivity);
 			mapActivity.refreshMap();
 		}
-	}
-
-	private void restoreMapWidgetsVisibility(@NonNull MapActivity mapActivity) {
-		mapActivity.getWidgetsVisibilityHelper().updateControlsVisibility(true, true);
-		AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE, R.id.map_ruler_layout);
 	}
 
 	public void onDismiss() {
