@@ -76,8 +76,11 @@ public class SaveTracksTask extends AsyncTask<Void, Void, List<String>> {
 		KFile kFile = SharedUtil.kFile(file);
 		GpxDataItem item = new GpxDataItem(kFile);
 		item.readGpxParams(gpxFile);
-		app.getGpxDbHelper().remove(kFile);
-		app.getGpxDbHelper().add(item);
+		if (app.getGpxDbHelper().hasGpxDataItem(kFile)) {
+			app.getGpxDbHelper().updateDataItem(item);
+		} else {
+			app.getGpxDbHelper().add(item);
+		}
 		app.getSmartFolderHelper().addTrackItemToSmartFolder(new TrackItem(kFile));
 	}
 

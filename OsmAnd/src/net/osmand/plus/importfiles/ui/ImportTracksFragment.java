@@ -299,15 +299,15 @@ public class ImportTracksFragment extends BaseFullScreenDialogFragment implement
 
 	private void importTracks() {
 		File folder = new File(selectedFolder);
-		updateImportListenerFilesSize(selectedTracks.size());
+		updateImportListenerFilesCount(selectedTracks.size());
 		SaveImportedGpxListener saveGpxListener = getSaveGpxListener(() -> saveTracksTask = null);
 		saveTracksTask = new SaveTracksTask(app, new ArrayList<>(selectedTracks), folder, saveGpxListener);
 		OsmAndTaskManager.executeTask(saveTracksTask);
 	}
 
-	private void updateImportListenerFilesSize(int filesSize) {
+	private void updateImportListenerFilesCount(int filesCount) {
 		if (importListener instanceof MultipleTracksImportListener) {
-			((MultipleTracksImportListener) importListener).setFilesSize(filesSize);
+			((MultipleTracksImportListener) importListener).setFilesCount(filesCount);
 		}
 	}
 

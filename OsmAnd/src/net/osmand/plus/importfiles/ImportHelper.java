@@ -656,20 +656,6 @@ public class ImportHelper {
 		return null;
 	}
 
-	@Nullable
-	public static String getExistingFilePath(@NonNull OsmandApplication app, @NonNull String name, long fileSize) {
-		File dir = app.getAppPath(GPX_INDEX_DIR);
-		List<GPXInfo> gpxInfoList = GpxUiHelper.getSortedGPXFilesInfoByDate(dir, true);
-		for (GPXInfo gpxInfo : gpxInfoList) {
-			String filePath = gpxInfo.getFileName();
-			String fileName = Algorithms.getFileWithoutDirs(filePath);
-			if (Algorithms.objectEquals(name, fileName) && gpxInfo.getFileSize() == fileSize) {
-				return filePath;
-			}
-		}
-		return null;
-	}
-
 	private MapActivity getMapActivity() {
 		if (activity instanceof MapActivity) {
 			return (MapActivity) activity;
