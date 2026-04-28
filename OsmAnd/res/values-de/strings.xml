@@ -5907,7 +5907,7 @@
     <string name="routing_attr_maxaxleload_name">Maximale Achslast</string>
     <string name="centimeter">cm</string>
     <string name="shared_string_centimeters">Zentimeter</string>
-    <string name="bicycle_width_limit_description">Fahrradbreite angeben, um schmale Radwege zu vermeiden.</string>
+    <string name="bicycle_width_limit_description">Stellen die Breite deines Fahrrads ein, um schmale Radwege zu vermeiden.</string>
     <string name="copy_link">Verknüpfung kopieren</string>
     <string name="button_frames">Schaltflächenrahmen</string>
     <string name="routing_attr_pt_limit_name">Die N besten Routen anzeigen</string>
@@ -5923,7 +5923,7 @@
     <string name="show_spherical_map">Globusansicht</string>
     <string name="visualizing_button_grid">Raster der Karten-Schaltflächen</string>
     <string name="imprecise_coordinates">Ungenaue Koordinaten</string>
-    <string name="show_expand_button">Erweitern-Schaltfläche anzeigen</string>
+    <string name="show_expand_button">Zeige Schaltfäche \"Erweitern\"</string>
     <string name="astronomy_plugin_description">Sternkarten, 3D-Sternkarte</string>
     <string name="star_map">Sternkarte</string>
     <string name="star_charts_name">Sternatlas</string>
