@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -967,9 +968,11 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		int savedMaxVisited = hctx.rctx.config.MAX_VISITED;
 		int savedPlanRoadDirectrion = hctx.rctx.config.planRoadDirection;
 		float savedHeuristicCoefficient = hctx.rctx.config.heuristicCoefficient;
+		GeneralRouter savedRouter = hctx.rctx.config.router;
 		hctx.rctx.config.MAX_VISITED = MAX_POINTS_CLUSTER_ROUTING;
 		hctx.rctx.config.planRoadDirection = reverse ? -1 : 1;
 		hctx.rctx.config.heuristicCoefficient = 0; // dijkstra
+		hctx.rctx.config.router = new GeneralRouter(hctx.rctx.config.router, Collections.emptyMap()); // TODO should be default profile parameters to align with index costs
 		hctx.rctx.unloadAllData(); // needed for proper multidijsktra work
 		// hctx.rctx.calculationProgress = new RouteCalculationProgress(); // reuse same progress
 		BinaryRoutePlanner planner = new BinaryRoutePlanner();
@@ -979,6 +982,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		hctx.rctx.config.heuristicCoefficient = savedHeuristicCoefficient;
 		hctx.rctx.config.planRoadDirection = savedPlanRoadDirectrion;
 		hctx.rctx.config.MAX_VISITED = savedMaxVisited;
+		hctx.rctx.config.router = savedRouter;
 		if (HHRoutingConfig.STATS_VERBOSE_LEVEL > 0) {
 			System.out.println("  " + hctx.rctx.calculationProgress.getInfo(null));
 		}
@@ -1027,7 +1031,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 						throw new IllegalStateException();
 					}
 					pnt.setDistanceToEnd(reverse,
-							pnt.index == PNT_SHORT_ROUTE_START_END ? 0 : hctx.distanceToEnd(reverse, pnt));
+							pnt.index == PNT_SHORT_ROUTE_START_END ? 0 : hctx.distanceToEnd(reverse, pnt)
+									);
 					pnt.setDetailedParentRt(reverse, o);
 					pnts.put(pnt.index, pnt);
 				}
