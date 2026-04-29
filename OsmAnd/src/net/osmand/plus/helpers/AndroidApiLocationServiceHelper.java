@@ -4,6 +4,7 @@ import static android.content.Context.LOCATION_SERVICE;
 
 import android.content.Context;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 
 import androidx.annotation.NonNull;
@@ -29,18 +30,33 @@ public class AndroidApiLocationServiceHelper extends LocationServiceHelper imple
 		super(app);
 	}
 
+	@NonNull
+	protected String getPrimaryProvider() {
+		return LocationManager.GPS_PROVIDER;
+	}
+
+	@NonNull
+	protected List<String> getIgnoredNetworkProviders() {
+		List<String> list = new ArrayList<>();
+		list.add(LocationManager.GPS_PROVIDER);
+		list.add(LocationManager.PASSIVE_PROVIDER);
+		list.add("fused");
+
+		return list;
+	}
+
 	@Override
 	public void requestLocationUpdates(@NonNull LocationCallback locationCallback) {
 		this.locationCallback = locationCallback;
 		// request location updates
-		requestLocationUpdatesImpl();
+		requestLocationUpdatesImpl(this, getPrimaryProvider());
 	}
 
-	protected void requestLocationUpdatesImpl() {
-		String provider = LocationManager.GPS_PROVIDER;
+	protected boolean requestLocationUpdatesImpl(@NonNull LocationListener listener, @NonNull String provider) {
 		LocationManager locationManager = (LocationManager) app.getSystemService(LOCATION_SERVICE);
 		try {
-			locationManager.requestLocationUpdates(provider, 0, 0, this);
+			locationManager.requestLocationUpdates(provider, 0, 0, listener);
+			return true;
 		} catch (SecurityException e) {
 			LOG.debug(provider + " location service permission not granted", e);
 			throw e;
@@ -60,22 +76,20 @@ public class AndroidApiLocationServiceHelper extends LocationServiceHelper imple
 		this.networkLocationCallback = locationCallback;
 		// request location updates
 		LocationManager locationManager = (LocationManager) app.getSystemService(LOCATION_SERVICE);
+
+		List<String> ignoredProviders = getIgnoredNetworkProviders();
 		List<String> providers = locationManager.getProviders(true);
 		for (String provider : providers) {
-			if (provider == null
-					|| provider.equals(LocationManager.GPS_PROVIDER)
-					|| provider.equals(LocationManager.PASSIVE_PROVIDER)
-					|| provider.equals(LocationManager.FUSED_PROVIDER)) {
+			if (provider == null || ignoredProviders.contains(provider)) {
 				continue;
 			}
 			try {
 				NetworkListener networkListener = new NetworkListener(provider);
-				locationManager.requestLocationUpdates(provider, 0, 0, networkListener);
-				networkListeners.add(networkListener);
-			} catch (SecurityException e) {
-				LOG.debug(provider + " location service permission not granted", e);
-			} catch (IllegalArgumentException e) {
-				LOG.debug(provider + " location provider not available", e);
+				if (requestLocationUpdatesImpl(networkListener, provider)) {
+					networkListeners.add(networkListener);
+				}
+			} catch (Exception ignored) {
+
 			}
 		}
 	}
