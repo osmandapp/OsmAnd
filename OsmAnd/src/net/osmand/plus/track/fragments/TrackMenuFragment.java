@@ -959,21 +959,27 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	@Override
 	public void onResume() {
 		super.onResume();
-		mapDisplayPositionManager.registerMapPositionProvider(this);
-		mapDisplayPositionManager.registerCoveredScreenRectProvider(this);
-		onHiddenChanged(false);
+		updateTrackMenuVisibilityState(isHidden());
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		mapDisplayPositionManager.unregisterCoveredScreenRectProvider(this);
-		mapDisplayPositionManager.unregisterMapPositionProvider(this);
-		onHiddenChanged(true);
+		updateTrackMenuVisibilityState(true);
 	}
 
 	@Override
 	public void onHiddenChanged(boolean hidden) {
+		super.onHiddenChanged(hidden);
+		if (isResumed()) {
+			updateTrackMenuVisibilityState(hidden);
+		}
+	}
+
+	private void updateTrackMenuVisibilityState(boolean hidden) {
+		updateMapDisplayPositionProviders(!hidden);
+		mapDisplayPositionManager.updateMapDisplayPosition();
+
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(hidden ? null : trackChartPoints);
@@ -983,6 +989,16 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			stopLocationUpdate();
 		} else {
 			startLocationUpdate();
+		}
+	}
+
+	private void updateMapDisplayPositionProviders(boolean register) {
+		if (register) {
+			mapDisplayPositionManager.registerMapPositionProvider(this);
+			mapDisplayPositionManager.registerCoveredScreenRectProvider(this);
+		} else {
+			mapDisplayPositionManager.unregisterCoveredScreenRectProvider(this);
+			mapDisplayPositionManager.unregisterMapPositionProvider(this);
 		}
 	}
 

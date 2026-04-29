@@ -32,6 +32,7 @@ import net.osmand.plus.firstusage.FirstUsageWizardFragment;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialogFragment;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
+import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenuFragment;
 import net.osmand.plus.mapmarkers.PlanRouteFragment;
 import net.osmand.plus.measurementtool.GpxApproximationFragment;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
@@ -187,6 +188,11 @@ public class MapFragmentsHelper implements OnPreferenceStartFragmentCallback {
 	@Nullable
 	public TrackMenuFragment getTrackMenuFragment() {
 		return getFragment(TrackMenuFragment.TAG);
+	}
+
+	@Nullable
+	public TrackDetailsMenuFragment getTrackDetailsMenuFragment() {
+		return getFragment(TrackDetailsMenuFragment.TAG);
 	}
 
 	@Nullable

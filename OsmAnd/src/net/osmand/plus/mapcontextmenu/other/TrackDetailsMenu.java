@@ -281,8 +281,8 @@ public class TrackDetailsMenu {
 				toolbarController.setOnCloseButtonClickListener(v -> hide(false));
 				mapActivity.showTopToolbar(toolbarController);
 			}
-			mapActivity.refreshMap();
 			mapActivity.getMapLayers().getContextMenuLayer().enterGpxDetailsMode();
+			mapActivity.refreshMap();
 		}
 	}
 

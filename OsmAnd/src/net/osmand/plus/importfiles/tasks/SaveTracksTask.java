@@ -9,6 +9,7 @@ import net.osmand.IndexConstants;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.importfiles.SaveImportedGpxListener;
 import net.osmand.plus.importfiles.ui.ImportTrackItem;
@@ -59,7 +60,7 @@ public class SaveTracksTask extends AsyncTask<Void, Void, List<String>> {
 				if (error != null) {
 					warnings.add(error);
 				} else {
-					app.getSmartFolderHelper().addTrackItemToSmartFolder(new TrackItem(new KFile(gpxFile.getPath())));
+					processSavedFile(file, gpxFile);
 				}
 				if (listener != null) {
 					listener.onGpxSaved(error, gpxFile);
@@ -67,6 +68,20 @@ public class SaveTracksTask extends AsyncTask<Void, Void, List<String>> {
 			}
 		}
 		return warnings;
+	}
+
+	private void processSavedFile(@NonNull File file, @NonNull GpxFile gpxFile) {
+		gpxFile.setPath(file.getAbsolutePath());
+
+		KFile kFile = SharedUtil.kFile(file);
+		GpxDataItem item = new GpxDataItem(kFile);
+		item.readGpxParams(gpxFile);
+		if (app.getGpxDbHelper().hasGpxDataItem(kFile)) {
+			app.getGpxDbHelper().updateDataItem(item);
+		} else {
+			app.getGpxDbHelper().add(item);
+		}
+		app.getSmartFolderHelper().addTrackItemToSmartFolder(new TrackItem(kFile));
 	}
 
 	@Override

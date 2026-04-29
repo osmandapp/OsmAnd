@@ -109,11 +109,11 @@ public class GeocodingUtilities {
 		}
 		public double getDistance() {
 			if (dist == -1 && searchPoint != null) {
-				if (building == null && point != null) {
+				if (connectionPoint != null) {
+					dist = MapUtils.getDistance(connectionPoint, searchPoint);
+				} else if (building == null && point != null) {
 					// Need distance between searchPoint and nearest RouteSegmentPoint here, to approximate distance from neareest named road
 					dist = Math.sqrt(point.distToProj);
-				} else if (connectionPoint != null) {
-					dist = MapUtils.getDistance(connectionPoint, searchPoint);
 				}
 			}
 			return dist;

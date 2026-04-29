@@ -13,10 +13,14 @@ import net.osmand.plus.mapcontextmenu.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.builders.SelectedGpxMenuBuilder;
 import net.osmand.plus.myplaces.tracks.tasks.OpenGpxDetailsTask;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.primitives.WptPt;
+import net.osmand.shared.io.KFile;
+import net.osmand.util.Algorithms;
 
 public class SelectedGpxMenuController extends MenuController {
 
@@ -70,6 +74,22 @@ public class SelectedGpxMenuController extends MenuController {
 	@NonNull
 	@Override
 	public String getTypeStr() {
+		if (getMenuType() == MenuType.MULTI_LINE) {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				SelectedGpxFile selectedGpxFile = selectedGpxPoint.getSelectedGpxFile();
+				GpxTrackAnalysis analysis = selectedGpxFile.getTrackAnalysis(mapActivity.getApp());
+				if (analysis != null) {
+					KFile file = selectedGpxFile.isShowCurrentTrack()
+							? null
+							: new KFile(selectedGpxFile.getGpxFile().getPath());
+					String description = GpxUiHelper.getTrackShortDescription(mapActivity, analysis, file, true);
+					if (!Algorithms.isEmpty(description)) {
+						return description;
+					}
+				}
+			}
+		}
 		return getPointDescription().getTypeName();
 	}
 

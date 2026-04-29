@@ -973,6 +973,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		hctx.rctx.unloadAllData(); // needed for proper multidijsktra work
 		// hctx.rctx.calculationProgress = new RouteCalculationProgress(); // reuse same progress
 		BinaryRoutePlanner planner = new BinaryRoutePlanner();
+		RoutePlannerFrontEnd routePlannerFrontEnd = new RoutePlannerFrontEnd();
 		MultiFinalRouteSegment frs = (MultiFinalRouteSegment) planner.searchRouteInternal(hctx.rctx,
 				reverse ? null : s, reverse ? s : null, hctx.boundaries);
 		hctx.rctx.config.heuristicCoefficient = savedHeuristicCoefficient;
@@ -1007,9 +1008,13 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 						pnt.endX = o.getEndPointX();
 						pnt.startY = o.getStartPointY();
 						pnt.endY = o.getEndPointY();
-						int preciseY = reverse? hctx.startY : hctx.endY;
-						int preciseX = reverse? hctx.startX : hctx.endX;
-						o.distanceFromStart += planner.calculatePreciseStartTime(hctx.rctx, preciseX, preciseY, o);
+						int x = reverse ? hctx.startX : hctx.endX;
+						int y = reverse ? hctx.startY : hctx.endY;
+						RouteSegmentPoint road = routePlannerFrontEnd.calcPreciseRouteSegmentPoint(o.getRoad(), x, y);
+						if (road != null) {
+							o.distanceFromStart +=
+									planner.calculatePreciseStartTime(hctx.rctx, road.preciseX, road.preciseY, o);
+						}
 					} else {
 						float obstacle = hctx.rctx.getRouter().defineRoutingObstacle(
 								o.getRoad(), o.getSegmentStart(), o.getSegmentStart() > o.getSegmentEnd());
@@ -1021,7 +1026,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 					if (pnt.rt(reverse).rtCost != 0) {
 						throw new IllegalStateException();
 					}
-					pnt.setDistanceToEnd(reverse, hctx.distanceToEnd(reverse, pnt));
+					pnt.setDistanceToEnd(reverse,
+							pnt.index == PNT_SHORT_ROUTE_START_END ? 0 : hctx.distanceToEnd(reverse, pnt));
 					pnt.setDetailedParentRt(reverse, o);
 					pnts.put(pnt.index, pnt);
 				}

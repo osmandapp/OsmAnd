@@ -538,7 +538,8 @@ public class MapActivityActions extends MapActions {
 				}));
 
 		adapter.addItem(new ContextMenuItem(DRAWER_TRAVEL_GUIDES_ID)
-				.setTitle(getString(R.string.shared_string_travel_guides) + " (Beta)")
+				.setTitle(app.getString(R.string.ltr_or_rtl_combine_with_brackets,
+						getString(R.string.shared_string_travel_guides), getString(R.string.shared_string_beta)))
 				.setIcon(R.drawable.ic_action_travel)
 				.setListener((uiAdapter, view, item, isChecked) -> {
 					MapActivity.clearPrevActivityIntent();

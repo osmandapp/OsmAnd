@@ -3,7 +3,6 @@ package net.osmand.plus;
 import static android.content.Context.LOCATION_SERVICE;
 import static android.location.LocationManager.GPS_PROVIDER;
 import static android.location.LocationManager.NETWORK_PROVIDER;
-
 import static net.osmand.plus.simulation.SimulationProvider.isTunnelLocationSimulated;
 
 import android.Manifest;
@@ -89,7 +88,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private static final long START_LOCATION_SIMULATION_DELAY = 2000;
 	private static final int UPCOMING_TUNNEL_DISTANCE = 250;
 
-	public  static final float ACCURACY_FOR_GPX_AND_ROUTING = 50;
+	public static final float ACCURACY_FOR_GPX_AND_ROUTING = 50;
 
 	public static final int NOT_SWITCH_TO_NETWORK_WHEN_GPS_LOST_MS = 12000;
 
@@ -206,9 +205,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 					}
 				});
 			} catch (SecurityException e) {
-				// Location service permission not granted
+				LOG.error("Location service permission not granted", e);
 			} catch (IllegalArgumentException e) {
-				// GPS location provider not available
+				LOG.error("GPS location provider not available", e);
 			}
 			// try to always ask for network provide : it is faster way to find location
 			if (locationServiceHelper.isNetworkLocationUpdatesSupported()) {
@@ -216,7 +215,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 					@Override
 					public void onLocationResult(@NonNull List<net.osmand.Location> locations) {
 						if (!locations.isEmpty() && !useOnlyGPS() && !locationSimulation.isRouteAnimating()) {
- 							setLocation(locations.get(locations.size() - 1));
+							setLocation(locations.get(locations.size() - 1));
 						}
 					}
 				});
@@ -225,6 +224,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	public void redownloadAGPS() {
+		LOG.info(">>>> redownloadAGPS");
 		try {
 			LocationManager service = (LocationManager) app.getSystemService(LOCATION_SERVICE);
 			// Issue 6410: Test not forcing cold start here
@@ -234,6 +234,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			service.sendExtraCommand(GPS_PROVIDER, "force_time_injection", bundle);
 			app.getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.set(System.currentTimeMillis());
 		} catch (Exception e) {
+			LOG.debug(e);
 			app.getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.set(0L);
 		}
 	}
@@ -875,7 +876,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		try {
 			LocationManager manager = (LocationManager) app.getSystemService(LOCATION_SERVICE);
 			return manager.isProviderEnabled(GPS_PROVIDER);
-		} catch (Exception ignored) {
+		} catch (Exception e) {
+			LOG.debug(e);
 		}
 		return false;
 	}
@@ -884,7 +886,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		try {
 			LocationManager manager = (LocationManager) app.getSystemService(LOCATION_SERVICE);
 			return manager.isProviderEnabled(NETWORK_PROVIDER);
-		} catch (Exception ignored) {
+		} catch (Exception e) {
+			LOG.debug(e);
 		}
 		return false;
 	}

@@ -255,7 +255,7 @@ public class WidgetsVisibilityHelper {
 	}
 
 	private boolean isInGpxDetailsMode() {
-		return mapLayers.getContextMenuLayer().isInGpxDetailsMode();
+		return isTrackDetailsMenuOpened();
 	}
 
 	private boolean isInAddGpxPointMode() {
@@ -377,7 +377,7 @@ public class WidgetsVisibilityHelper {
 	}
 
 	private boolean isTrackDetailsMenuOpened() {
-		return mapActivity.getTrackDetailsMenu().isVisible();
+		return fragmentsHelper.getTrackDetailsMenuFragment() != null;
 	}
 
 	private boolean isRecMenuVisible() {

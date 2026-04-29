@@ -230,11 +230,7 @@ public class HHRouteDataStructure {
 		// Route specific details
 		RoutingStats stats = new RoutingStats();
 		HHRoutingConfig config;
-		int startX;
-		int startY;
-		int endY;
-		int endX;
-		
+		int startX, startY, endX, endY;
 		// Route runtime vars
 		List<T> queueAdded = new ArrayList<>();
 		List<T> visited = new ArrayList<>();
@@ -421,7 +417,7 @@ public class HHRouteDataStructure {
 			if (config.HEURISTIC_COEFFICIENT > 0) {
 				double distanceToEnd = nextPoint.rt(reverse).rtDistanceToEnd;
 				if (distanceToEnd == 0) {
-					double dist = HHRoutePlanner.squareRootDist31(reverse ? startX : endX, reverse ? startY : endY, 
+					double dist = HHRoutePlanner.squareRootDist31(reverse ? startX : endX, reverse ? startY : endY,
 							nextPoint.midX(), nextPoint.midY());
 					distanceToEnd = config.HEURISTIC_COEFFICIENT * dist / rctx.getRouter().getMaxSpeed();
 					nextPoint.setDistanceToEnd(reverse, distanceToEnd);
