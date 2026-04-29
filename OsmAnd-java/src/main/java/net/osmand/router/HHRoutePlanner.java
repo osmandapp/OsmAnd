@@ -983,29 +983,6 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			System.out.println("  " + hctx.rctx.calculationProgress.getInfo(null));
 		}
 		if (frs != null) {
-			for (FinalRouteSegment o : frs.all) {
-				int startSegment = reverse ? o.getSegmentEnd() : o.getSegmentStart();
-				int endSegment = reverse ? o.getSegmentStart() : o.getSegmentEnd();
-				long pntId = calculateRoutePointInternalId(o.getRoad().getId(), startSegment, endSegment);
-				if (!hctx.pointsByGeo.containsKey(pntId)) {
-					int x = reverse ? hctx.startX : hctx.endX;
-					int y = reverse ? hctx.startY : hctx.endY;
-					RouteSegmentPoint road = routePlannerFrontEnd.calcPreciseRouteSegmentPoint(o.getRoad(), x, y);
-					if (road != null) {
-						if (reverse) {
-							hctx.roadStartX = road.preciseX;
-							hctx.roadStartY = road.preciseY;
-						} else {
-							hctx.roadEndX = road.preciseX;
-							hctx.roadEndY = road.preciseY;
-						}
-						o.distanceFromStart +=
-								planner.calculatePreciseStartTime(hctx.rctx, road.preciseX, road.preciseY, o);
-						break;
-					}
-				}
-			}
-
 			TLongSet set = new TLongHashSet();
 			for (FinalRouteSegment o : frs.all) {
 				// duplicates are possible as alternative routes
@@ -1031,6 +1008,13 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 						pnt.endX = o.getEndPointX();
 						pnt.startY = o.getStartPointY();
 						pnt.endY = o.getEndPointY();
+						int x = reverse ? hctx.startX : hctx.endX;
+						int y = reverse ? hctx.startY : hctx.endY;
+						RouteSegmentPoint road = routePlannerFrontEnd.calcPreciseRouteSegmentPoint(o.getRoad(), x, y);
+						if (road != null) {
+							o.distanceFromStart +=
+									planner.calculatePreciseStartTime(hctx.rctx, road.preciseX, road.preciseY, o);
+						}
 					} else {
 						float obstacle = hctx.rctx.getRouter().defineRoutingObstacle(
 								o.getRoad(), o.getSegmentStart(), o.getSegmentStart() > o.getSegmentEnd());
@@ -1042,7 +1026,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 					if (pnt.rt(reverse).rtCost != 0) {
 						throw new IllegalStateException();
 					}
-					pnt.setDistanceToEnd(reverse, hctx.distanceToEnd(reverse, pnt));
+					pnt.setDistanceToEnd(reverse,
+							pnt.index == PNT_SHORT_ROUTE_START_END ? 0 : hctx.distanceToEnd(reverse, pnt));
 					pnt.setDetailedParentRt(reverse, o);
 					pnts.put(pnt.index, pnt);
 				}
