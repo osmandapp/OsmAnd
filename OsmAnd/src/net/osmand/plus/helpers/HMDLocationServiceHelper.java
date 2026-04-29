@@ -1,6 +1,10 @@
 package net.osmand.plus.helpers;
 
-import android.location.LocationManager;
+import static android.location.LocationManager.FUSED_PROVIDER;
+import static android.location.LocationManager.GPS_PROVIDER;
+import static android.location.LocationManager.PASSIVE_PROVIDER;
+
+import android.annotation.SuppressLint;
 
 import androidx.annotation.NonNull;
 
@@ -9,12 +13,15 @@ import net.osmand.plus.OsmandApplication;
 
 import org.apache.commons.logging.Log;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class HMDLocationServiceHelper extends AndroidApiLocationServiceHelper {
 
 	private static final Log LOG = PlatformUtil.getLog(HMDLocationServiceHelper.class);
+
+	@SuppressLint("InlinedApi")
+	private static final List<String> IGNORED_NETWORK_PROVIDERS = Arrays.asList(GPS_PROVIDER, PASSIVE_PROVIDER, FUSED_PROVIDER);
 
 	public HMDLocationServiceHelper(@NonNull OsmandApplication app) {
 		super(app);
@@ -23,10 +30,6 @@ public class HMDLocationServiceHelper extends AndroidApiLocationServiceHelper {
 	@NonNull
 	@Override
 	protected List<String> getIgnoredNetworkProviders() {
-		List<String> list = new ArrayList<>();
-		list.add(LocationManager.GPS_PROVIDER);
-		list.add(LocationManager.PASSIVE_PROVIDER);
-
-		return list;
+		return IGNORED_NETWORK_PROVIDERS;
 	}
 }

@@ -1,7 +1,11 @@
 package net.osmand.plus.helpers;
 
 import static android.content.Context.LOCATION_SERVICE;
+import static android.location.LocationManager.FUSED_PROVIDER;
+import static android.location.LocationManager.GPS_PROVIDER;
+import static android.location.LocationManager.PASSIVE_PROVIDER;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.location.Location;
 import android.location.LocationListener;
@@ -17,12 +21,16 @@ import net.osmand.plus.OsmandApplication;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 public class AndroidApiLocationServiceHelper extends LocationServiceHelper implements LocationListenerCompat {
 
 	private static final Log LOG = PlatformUtil.getLog(AndroidApiLocationServiceHelper.class);
+
+	@SuppressLint("InlinedApi")
+	private static final List<String> IGNORED_NETWORK_PROVIDERS = Arrays.asList(GPS_PROVIDER, PASSIVE_PROVIDER, FUSED_PROVIDER);
 
 	private LocationCallback locationCallback;
 
@@ -32,17 +40,12 @@ public class AndroidApiLocationServiceHelper extends LocationServiceHelper imple
 
 	@NonNull
 	protected String getPrimaryProvider() {
-		return LocationManager.GPS_PROVIDER;
+		return GPS_PROVIDER;
 	}
 
 	@NonNull
 	protected List<String> getIgnoredNetworkProviders() {
-		List<String> list = new ArrayList<>();
-		list.add(LocationManager.GPS_PROVIDER);
-		list.add(LocationManager.PASSIVE_PROVIDER);
-		list.add("fused");
-
-		return list;
+		return IGNORED_NETWORK_PROVIDERS;
 	}
 
 	@Override
@@ -114,7 +117,7 @@ public class AndroidApiLocationServiceHelper extends LocationServiceHelper imple
 		List<String> providers = new ArrayList<>(locationManager.getProviders(true));
 		// note, passive provider is from API_LEVEL 8 but it is a constant, we can check for it.
 		// constant should not be changed in future
-		int passiveFirst = providers.indexOf(LocationManager.PASSIVE_PROVIDER);
+		int passiveFirst = providers.indexOf(PASSIVE_PROVIDER);
 		// put passive provider to first place
 		if (passiveFirst > -1) {
 			providers.add(0, providers.remove(passiveFirst));
