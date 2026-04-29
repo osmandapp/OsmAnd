@@ -5932,4 +5932,6 @@
     <string name="memory_used_settings">Χρησιμοποιημένος Σωρός Java</string>
     <string name="open_till_short">Έως</string>
     <string name="open_from_short">Από</string>
+    <string name="astronomy_map">Αστρονομικός χάρτης</string>
+    <string name="astro_designations">Ονομασίες</string>
 </resources>

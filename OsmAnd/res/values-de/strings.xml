@@ -6164,4 +6164,6 @@
     <string name="shared_string_allocated">Zugewiesen</string>
     <string name="open_till_short">Bis</string>
     <string name="open_from_short">Von</string>
+    <string name="astronomy_map">Astronomiekarte</string>
+    <string name="astro_designations">Bezeichnungen</string>
 </resources>
