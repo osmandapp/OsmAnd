@@ -418,8 +418,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	}
 
 	private void cancelLoadingImages() {
-		LOG.debug("cancelLoadingImages: Cancelling all top places image load tasks");
 		if (loadingImages != null) {
+			LOG.debug("cancelLoadingImages: Cancelling all top places image load tasks");
 			loadingImages.values().forEach(LoadingImage::cancel);
 			loadingImages = null;
 			topPlaces = null;
