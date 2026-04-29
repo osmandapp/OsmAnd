@@ -916,8 +916,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public double getSettingsMapDensity() {
-		OsmandMap map = app.getOsmandMap();
-		return (map != null ? map.getMapDensity() : getSettings().MAP_DENSITY.get())
+		return (OsmandMap.getMapDensitySettings(app))
 				* Math.max(1, getDensity());
 	}
 

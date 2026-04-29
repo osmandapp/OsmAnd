@@ -5801,7 +5801,7 @@
     <string name="is_parking_time_limited">La durée de stationnement est-elle limitée ?</string>
     <string name="centimeter">cm</string>
     <string name="shared_string_centimeters">centimètres</string>
-    <string name="bicycle_width_limit_description">Indiquez la largeur de votre vélo pour éviter les pistes cyclables étroites.</string>
+    <string name="bicycle_width_limit_description">Indiquez la largeur de votre vélo afin d\'éviter les pistes cyclables étroites.</string>
     <string name="copy_link">Copier le lien</string>
     <string name="routing_attr_pt_limit_name">Afficher les N meilleurs itinéraires</string>
     <string name="routing_attr_pt_limit_description">Spécifiez le nombre de meilleurs itinéraires à afficher</string>
@@ -5812,7 +5812,7 @@
     <string name="lang_mi">Māori</string>
     <string name="buildings_3d_detail_level">Détail des bâtiments 3D</string>
     <string name="has_vehicle_metrics">À partir des données OBDII</string>
-    <string name="show_expand_button">Afficher le bouton Développer</string>
+    <string name="show_expand_button">Afficher le bouton d\'expansion</string>
     <string name="imprecise_coordinates">Coordonnées imprécises</string>
     <string name="astronomy_plugin_description">Cartes stellaires, carte du ciel en 3D</string>
     <string name="star_map">Carte du ciel</string>
@@ -6002,7 +6002,7 @@
     <string name="astro_search_info_star_clusters">Un amas stellaire est un groupe d\'étoiles liées par la gravité et formées à partir du même nuage moléculaire.</string>
     <string name="astro_search_info_deep_sky">Les objets du ciel profond comprennent les galaxies, les nébuleuses, les amas d\'étoiles et d\'autres objets astronomiques lointains.</string>
     <string name="astro_my_data_no_favorites_title">Rien ici</string>
-    <string name="astro_my_data_no_favorites_description">Vous pouvez ajouter des objets à vos favoris à partir de leur menu contextuel.</string>
+    <string name="astro_my_data_no_favorites_description">Vous pouvez ajouter des objets à vos favoris à partir de leur menu contextuel</string>
     <string name="astro_my_data_no_daily_paths_title">Aucun chemin quotidien</string>
     <string name="astro_my_data_no_daily_paths_description">Activez un chemin quotidien pour un objet à partir de son menu contextuel afin de le voir ici.</string>
     <string name="astro_my_data_no_directions_title">Aucune direction définie</string>
@@ -6057,4 +6057,5 @@
     <string name="open_till_short">Jusqu\'à</string>
     <string name="open_from_short">De</string>
     <string name="astro_designations">Désignations</string>
+    <string name="astronomy_map">Carte astronomique</string>
 </resources>

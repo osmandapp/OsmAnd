@@ -3,13 +3,15 @@ package net.osmand.binary;
 import net.osmand.PlatformUtil;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
+import net.osmand.util.SearchAlgorithms;
+import net.osmand.util.UnicodeDiacritics;
 
 import java.io.IOException;
 import java.util.*;
 import java.util.Map.Entry;
 
 public class CommonWords {
-	private static Map<String, Integer> commonWordsDictionary = new LinkedHashMap<>();
+	private static Map<String, Integer> commonWordsDictionary = new LinkedHashMap<>(); 
 	private static Map<String, Integer> frequentlyUsedWordsDictionary = new LinkedHashMap<>();
 	private static Set<String> regionNames = new HashSet<>();
 	
@@ -17,10 +19,20 @@ public class CommonWords {
 	private static String NUMBER_WITH_LESS_THAN_2_LETTERS = "NUMBER_WITH_LESS_THAN_2_LETTERS";
 	
 	private static void addCommon(String string) {
+		String string2 = SearchAlgorithms.replaceGermanSS(string);
+		string2 = UnicodeDiacritics.getInstance().stripDiacritics(string2);
 		commonWordsDictionary.put(string, commonWordsDictionary.size());
+		if (!string.equals(string2)) {
+			commonWordsDictionary.put(string2, commonWordsDictionary.size());
+		}
 	}
 	private static void addFrequentlyUsed(String string) {
+		String string2 = SearchAlgorithms.replaceGermanSS(string);
+		string2 = UnicodeDiacritics.getInstance().stripDiacritics(string2);
 		frequentlyUsedWordsDictionary.put(string, frequentlyUsedWordsDictionary.size());
+		if (!string.equals(string2)) {
+			frequentlyUsedWordsDictionary.put(string2, frequentlyUsedWordsDictionary.size());
+		}
 	}
 
 	private static boolean isNumber2Letters(String name) {
@@ -968,6 +980,7 @@ public class CommonWords {
 		addCommon("улица");
 		addCommon("спуск");
 		addCommon("straße");
+		addCommon("strasse"); // needed as well
 		addCommon("chemin");
 		addCommon("way");
 

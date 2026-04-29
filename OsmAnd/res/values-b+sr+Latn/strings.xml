@@ -5877,8 +5877,8 @@
     <string name="routing_attr_maxaxleload_name">Maksimalno osovinsko opterećenje</string>
     <string name="is_parking_time_limited">Da li je vreme parkiranja ograničeno?</string>
     <string name="centimeter">cm</string>
-    <string name="shared_string_centimeters">centimetara</string>
-    <string name="bicycle_width_limit_description">Obezbedite širinu bicikla kako biste izbegli uske biciklističke staze.</string>
+    <string name="shared_string_centimeters">centimetri</string>
+    <string name="bicycle_width_limit_description">Dostavite širinu vašeg bicikla kako biste izbegli uske biciklističke staze.</string>
     <string name="copy_link">Kopiraj link</string>
     <string name="routing_attr_pt_limit_name">Prikaz N najboljih ruta</string>
     <string name="routing_attr_pt_limit_description">Navedite broj najboljih ruta za prikaz</string>
@@ -5889,7 +5889,7 @@
     <string name="delete_folder_description">Obrisati „%1$s“ folder?</string>
     <string name="show_spherical_map">Globusni prikaz</string>
     <string name="enable_3d_objects">3D zgrada</string>
-    <string name="show_expand_button">Pokaži dugme za proširenje</string>
+    <string name="show_expand_button">Prikaži dugme za proširivanje</string>
     <string name="imprecise_coordinates">Neprecizne koordinate</string>
     <string name="star_map">Zvezdana mapa</string>
     <string name="star_charts_name">Zvezdane mape</string>
@@ -6134,4 +6134,5 @@
     <string name="open_till_short">Do</string>
     <string name="open_from_short">Od</string>
     <string name="astro_designations">Oznake</string>
+    <string name="astronomy_map">Astronomska mapa</string>
 </resources>

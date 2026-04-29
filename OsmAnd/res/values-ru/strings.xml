@@ -5777,7 +5777,7 @@
     <string name="centimeter">см</string>
     <string name="shared_string_centimeters">сантиметры</string>
     <string name="copy_link">Скопировать ссылку</string>
-    <string name="bicycle_width_limit_description">Укажите ширину вашего велосипеда, чтобы избегать узких велодорожек.</string>
+    <string name="bicycle_width_limit_description">Укажите ширину своего велосипеда, чтобы не попасть на узкие велодорожки.</string>
     <string name="show_spherical_map">Вид на земной шар</string>
     <string name="help_article_navigation_routing_ski_routing_name">Горнолыжные склоны и маршруты</string>
     <string name="lang_mi">Маори</string>
@@ -6066,4 +6066,5 @@
     <string name="shared_string_allocated">Зарезервированная</string>
     <string name="open_till_short">До</string>
     <string name="open_from_short">C</string>
+    <string name="astro_designations">Обозначения</string>
 </resources>

@@ -6520,4 +6520,6 @@
     <string name="shared_string_allocated">Alocado</string>
     <string name="open_till_short">Até</string>
     <string name="open_from_short">De</string>
+    <string name="astronomy_map">Mapa astronômico</string>
+    <string name="astro_designations">Designações</string>
 </resources>

@@ -52,7 +52,6 @@ import net.osmand.plus.backup.ui.LoginDialogType;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.configmap.tracks.PreselectedTabParams;
-import net.osmand.plus.configmap.tracks.TrackTabType;
 import net.osmand.plus.configmap.tracks.TracksTabsFragment;
 import net.osmand.plus.dashboard.DashboardType;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
@@ -601,9 +600,7 @@ public class IntentHelper {
 					return false;
 				}
 				String name = data.getQueryParameter("name");
-				if (Algorithms.isEmpty(name)) {
-					name = Algorithms.getFileWithoutDirs(url);
-				}
+				name = Algorithms.getFileWithoutDirs(Algorithms.isEmpty(name) ? url : name);
 				if (!name.endsWith(IndexConstants.GPX_FILE_EXT)) {
 					name += IndexConstants.GPX_FILE_EXT;
 				}

@@ -5974,4 +5974,6 @@
     <string name="shared_string_allocated">Leithdháilte</string>
     <string name="open_till_short">Go dtí</string>
     <string name="open_from_short">Ó</string>
+    <string name="astro_designations">Ainmniúcháin</string>
+    <string name="astronomy_map">Léarscáil Réalteolaíochta</string>
 </resources>

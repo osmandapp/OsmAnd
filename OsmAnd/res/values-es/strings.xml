@@ -5912,7 +5912,7 @@
     <string name="backup_deleting_all_data">Eliminando datos…</string>
     <string name="favorite_search_empty_state_description">Ajuste su búsqueda o filtros para ver si eso ayuda</string>
     <string name="astro_directions">Indicaciones</string>
-    <string name="free_custom_color_description">Personaliza los edificios 3D con cualquier color. Perfecto para combinar con un tema de mapa o mejorar el contraste.</string>
+    <string name="free_custom_color_description">Personalice los edificios 3D con cualquier color. Ideal para combinar con un tema del mapa o para mejorar el contraste.</string>
     <string name="buildings_3d_use_map_style_color_description">Usa el color por defecto del estilo de mapa (%s).</string>
     <string name="buildings_3d_visibility_description">Ajuste la opacidad de las estructuras en 3D del mapa.</string>
     <string name="level_of_details">Nivel de detalle</string>
@@ -6066,4 +6066,7 @@
     <string name="ar_mode_disabled">Modo RA desactivado</string>
     <string name="shared_string_clear_filters">Quitar filtros</string>
     <string name="release_5_3">• Se ha añadido compatibilidad con edificios en 3D\n\n • Vista de mapa esférica\n\n • Complemento de astronomía con mapa nocturno y base de datos de estrellas\n\n • Nuevos modos de color para el velocímetro: tolerancia y exceso de velocidad\n\n • Diseños de widgets independientes para orientación horizontal y vertical\n\n • Widgets de registro de recorrido: velocidad de desplazamiento y velocidad media\n\n • Widget de voltaje del adaptador para métricas del vehículo\n\n • Datos de métricas del vehículo en el analizador de rutas\n\n • Organización automática de rutas por año, longitud, actividad y más\n\n • Editor de paletas para la visualización del terreno y las rutas\n\n • Algoritmos de búsqueda mejorados e interfaz de usuario renovada\n\n • Perfiles de elevación corregidos para las rutas\n\n • Favoritos: nuevas opciones de ordenación y renovación de la interfaz de usuario\n\n • Compartir enlace a cualquier punto de interés\n\n • Previsualización de puntos de ruta sin cerrar la lista\n\n • Parámetro de anchura de bicicleta para evitar carreteras estrechas\n\n • Descripciones de fotos de Wikimedia</string>
+    <string name="astro_sort_newest_first">Más recientes primero</string>
+    <string name="astro_designations">Designaciones</string>
+    <string name="shared_string_world_weather_map">Mapamundi meteorológico</string>
 </resources>
