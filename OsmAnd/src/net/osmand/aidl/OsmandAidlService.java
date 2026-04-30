@@ -18,6 +18,7 @@ import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.RemoteException;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
@@ -123,14 +124,15 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 	}
 
 	@Nullable
-	private OsmandAidlApi getApi(String reason) {
-		LOG.info("Request AIDL API for " + reason);
-		OsmandAidlApi api = getApp().getAidlApi();
+	private OsmandAidlApi getApi(@NonNull String reason) {
+		OsmandApplication app = getApp();
+		OsmandAidlApi api = app.getAidlApi();
 		String packName = getCallingAppPackName();
-		if (packName != null && !packName.equals(getApp().getPackageName()) && !api.isAppEnabled(packName)) {
-			return null;
-		}
-		return api;
+
+		boolean enabled = packName != null && (packName.equals(app.getPackageName()) || api.isAppEnabled(packName));
+		LOG.info("Request AIDL API for " + reason + " from " + packName + " enabled: " + enabled);
+
+		return enabled ? api : null;
 	}
 
 	@Override
