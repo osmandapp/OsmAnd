@@ -91,6 +91,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	protected String filterByKey = null;
 
 	private boolean deleted;
+	private boolean isNearbyPoi = false;
 
 	SearchPoiAdditionalFilter additionalFilter;
 
@@ -312,6 +313,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 			acceptedTypes.put(t, null);
 		}
 		distanceToSearchValues = new double[] {0.5, 1, 2, 5, 10, 20, 50, 100};
+		isNearbyPoi = true;
 	}
 
 	public boolean isSearchFurtherAvailable() {
@@ -1045,5 +1047,9 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	@Override
 	public String toString() {
 		return getFilterId();
+	}
+
+	public boolean isNearbyPoi() {
+		return isNearbyPoi;
 	}
 }

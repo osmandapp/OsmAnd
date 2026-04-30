@@ -47,6 +47,11 @@ public class SearchSettings {
 	private SearchExportSettings exportSettings; // = new SearchExportSettings(true, true, -1);
 	private List<MapObject> exportedObjects;
 	private List<City> exportedCities;
+	public enum SortType {
+		BY_RELEVANCE,
+		BY_DISTANCE
+	}
+	private SortType sortType;
 
 	public SearchSettings(SearchSettings s) {
 		if (s != null) {
@@ -66,6 +71,7 @@ public class SearchSettings {
 			this.sortByName = s.sortByName;
 			this.exportSettings = s.exportSettings;
 			this.stat = s.stat;
+			this.sortType = s.sortType;
 		}
 	}
 	
@@ -345,5 +351,13 @@ public class SearchSettings {
 			s.searchTypes = searchTypes;
 		}
 		return s;
+	}
+
+	public SortType getSortType() {
+		return sortType;
+	}
+
+	public void setSortType(SortType sortType) {
+		this.sortType = sortType;
 	}
 }

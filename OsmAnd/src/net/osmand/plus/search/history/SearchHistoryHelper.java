@@ -21,6 +21,7 @@ import net.osmand.search.SearchUICore;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
+import net.osmand.search.core.SearchSettings;
 import net.osmand.util.CollectionUtils;
 
 import org.apache.commons.logging.Log;
@@ -298,6 +299,7 @@ public class SearchHistoryHelper {
 			addNewItemToHistory((PoiUIFilter) result.object, SEARCH);
 		}
 		SearchUICore searchUICore = app.getSearchUICore().getCore();
+		searchUICore.setSortType(SearchSettings.SortType.BY_RELEVANCE);
 		if (result.object instanceof PoiType && ((PoiType) result.object).isAdditional()) {
 			PoiType additional = (PoiType) result.object;
 			AbstractPoiType parent = additional.getParentType();
@@ -317,6 +319,9 @@ public class SearchHistoryHelper {
 					result.objectType = ObjectType.POI_TYPE;
 				}
 			}
+		}
+		if (result.object instanceof PoiUIFilter poiUIFilter && poiUIFilter.isNearbyPoi()) {
+			searchUICore.setSortType(SearchSettings.SortType.BY_DISTANCE);
 		}
 		searchUICore.selectSearchResult(result);
 	}

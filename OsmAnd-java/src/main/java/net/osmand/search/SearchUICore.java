@@ -47,9 +47,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
@@ -1329,21 +1327,21 @@ public class SearchUICore {
 		private Collator collator;
 		private LatLon loc;
 		private boolean sortByName;
-		private boolean sortByDist;
+		private SearchSettings.SortType sortType;
 		
 
 		public SearchResultComparator(SearchPhrase sp) {
 			this.collator = sp.getCollator();
 			loc = sp.getLastTokenLocation();
 			sortByName = sp.isSortByName();
-			sortByDist = sp.hasObjectType(ObjectType.POI_TYPE) && sp.getWords().size() == 1;
+			sortType = sp.getSettings().getSortType();
 		}
 		
 
 		@Override
 		public int compare(SearchResult o1, SearchResult o2) {
 			List<ResultCompareStep> steps = new ArrayList<>();
-			if (sortByDist) {
+			if (sortType == SearchSettings.SortType.BY_DISTANCE) {
 				return ResultCompareStep.COMPARE_BY_DISTANCE.compare(o1, o2, this);
 			}
 			for (ResultCompareStep step : ResultCompareStep.values()) {
@@ -1359,25 +1357,6 @@ public class SearchUICore {
 			return 0;
 		}
 
-	}
-	
-	public static class SearchResultComparatorOneStep extends SearchResultComparator {		
-		ResultCompareStep step;
-		
-		public SearchResultComparatorOneStep(SearchPhrase sp) {
-			super(sp);
-			this.step = ResultCompareStep.COMPARE_BY_DISTANCE;
-		}
-
-		public SearchResultComparatorOneStep(SearchPhrase sp, ResultCompareStep step) {
-			super(sp);
-			this.step = step;
-		}
-
-		@Override
-		public int compare(SearchResult o1, SearchResult o2) {
-            return step.compare(o1, o2, this);
-        }
 	}
 
 	public static String getMainCityName(String cityName) {
@@ -1407,5 +1386,13 @@ public class SearchUICore {
 		} else {
 			return (Algorithms.isEmpty(cityName) ? "" : (cityName + ", ")) + addr;
 		}
+	}
+
+	public SearchSettings.SortType getSortType() {
+		return searchSettings.getSortType();
+	}
+
+	public void setSortType(SearchSettings.SortType sortType) {
+		searchSettings.setSortType(sortType);
 	}
 }
