@@ -1329,18 +1329,23 @@ public class SearchUICore {
 		private Collator collator;
 		private LatLon loc;
 		private boolean sortByName;
+		private boolean sortByDist;
 		
 
 		public SearchResultComparator(SearchPhrase sp) {
 			this.collator = sp.getCollator();
 			loc = sp.getLastTokenLocation();
 			sortByName = sp.isSortByName();
+			sortByDist = sp.hasObjectType(ObjectType.POI_TYPE) && sp.getWords().size() == 1;
 		}
 		
 
 		@Override
 		public int compare(SearchResult o1, SearchResult o2) {
 			List<ResultCompareStep> steps = new ArrayList<>();
+			if (sortByDist) {
+				return ResultCompareStep.COMPARE_BY_DISTANCE.compare(o1, o2, this);
+			}
 			for (ResultCompareStep step : ResultCompareStep.values()) {
 				int r = step.compare(o1, o2, this);
 				steps.add(step);
