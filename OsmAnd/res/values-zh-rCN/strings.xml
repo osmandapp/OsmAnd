@@ -5875,4 +5875,12 @@
     <string name="astro_name_mercury">水星</string>
     <string name="astro_name_venus">金星</string>
     <string name="astro_name_mars">火星</string>
+    <string name="obd_simulation_device">模拟装置</string>
+    <string name="astronomy_map">天文地图</string>
+    <string name="open_from_short">从</string>
+    <string name="open_till_short">直到</string>
+    <string name="map_widget_memory_info">内存信息</string>
+    <string name="map_widget_memory_info_desc">监控 Java 堆、本地分配和图形内存。</string>
+    <string name="memory_used_settings">已用 Java 堆</string>
+    <string name="memory_allocated_settings">已分配的 Java 堆</string>
 </resources>
