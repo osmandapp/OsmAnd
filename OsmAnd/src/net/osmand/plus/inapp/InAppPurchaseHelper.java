@@ -539,26 +539,24 @@ public abstract class InAppPurchaseHelper {
 						GET_ACTIVE_SUBSCRIPTIONS_SKU_URL,
 						parameters, "Requesting active subscriptions...", false, false);
 
-				boolean hasToken = false;
+				Map<String, String> authHeaders = new HashMap<>();
 				String userId = ctx.getSettings().BILLING_USER_ID.get();
 				String userToken = ctx.getSettings().BILLING_USER_TOKEN.get();
 				if (!Algorithms.isEmpty(userId) && !Algorithms.isEmpty(userToken)) {
-					parameters.put("userId", userId);
-					parameters.put("userToken", userToken);
-					hasToken = true;
+					authHeaders.put("X-User-Id", userId);
+					authHeaders.put("X-User-Token", userToken);
 				}
 				String deviceId = ctx.getSettings().BACKUP_DEVICE_ID.get();
 				String accessToken = ctx.getSettings().BACKUP_ACCESS_TOKEN.get();
 				if (!Algorithms.isEmpty(deviceId) && !Algorithms.isEmpty(accessToken)) {
-					parameters.put("deviceId", deviceId);
-					parameters.put("accessToken", accessToken);
-					hasToken = true;
+					authHeaders.put("X-Device-Id", deviceId);
+					authHeaders.put("X-Access-Token", accessToken);
 				}
-				if (hasToken) {
+				if (!authHeaders.isEmpty()) {
 					subscriptionsState = AndroidNetworkUtils.sendRequest(ctx, GET_ALL_SUBSCRIPTIONS_URL,
-							parameters, "Requesting subscriptions state...", false, false);
+							parameters, "Requesting subscriptions state...", false, false, authHeaders, null);
 					inappsState = AndroidNetworkUtils.sendRequest(ctx, GET_INAPPS_URL,
-							parameters, "Requesting inapps state...", false, false);
+							parameters, "Requesting inapps state...", false, false, authHeaders, null);
 				}
 			} catch (Exception e) {
 				logError("sendRequest Error", e);
