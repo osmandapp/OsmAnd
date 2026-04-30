@@ -30,6 +30,10 @@ public class QueryToken {
             if (masks == null) {
                 masks = new TIntArrayList();
             }
+            if (suffixDictionary.size() == 1 && suffixDictionary.get(0).isEmpty()) {
+                masks.add(1);
+                return;
+            }
             if (query == null) {
                 return;
             }
