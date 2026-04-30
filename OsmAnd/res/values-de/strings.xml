@@ -6166,4 +6166,5 @@
     <string name="open_from_short">Von</string>
     <string name="astronomy_map">Astronomiekarte</string>
     <string name="astro_designations">Bezeichnungen</string>
+    <string name="obd_simulation_device">Simulationsgerät</string>
 </resources>
