@@ -5974,4 +5974,5 @@
     <string name="open_from_short">從</string>
     <string name="astro_designations">指定</string>
     <string name="astronomy_map">天文圖</string>
+    <string name="obd_simulation_device">模擬裝置</string>
 </resources>
