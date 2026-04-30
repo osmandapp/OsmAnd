@@ -751,6 +751,9 @@ public class BinaryMapAddressReaderAdapter {
 								suffixDictionary = new ArrayList<>();
 							}
 							String encodedSuffix = codedIS.readString();
+							if (SearchAlgorithms.EMPTY_SUFFIX_DICTIONARY_SENTINEL.equals(encodedSuffix)) {
+								continue;
+							}
 							String previousSuffix = suffixDictionary.isEmpty() ? null : suffixDictionary.get(suffixDictionary.size() - 1);
 							String decodedSuffix = SearchAlgorithms.nameIndexDecodeDictionarySuffix(previousSuffix, encodedSuffix);
 							suffixDictionary.add(decodedSuffix);

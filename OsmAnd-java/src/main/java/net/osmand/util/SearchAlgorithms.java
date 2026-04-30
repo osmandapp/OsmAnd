@@ -247,7 +247,7 @@ public class SearchAlgorithms {
 
     private static final int MARKER_LCP_LENGTH = SUFFIX_DICT_MARKER_MAX - SUFFIX_DICT_MARKER_BASE;
     public record SuffixEntry(String resolvedSuffix, String encodedSuffix) {}
-    public static final String EMPTY_POI_SUFFIX_DICTIONARY_SENTINEL = "";
+    public static final String EMPTY_SUFFIX_DICTIONARY_SENTINEL = "\uE100";
     
     public static class SuffixDictionary<T> {
         public final List<SuffixEntry> dictionaryEntries = new ArrayList<>();

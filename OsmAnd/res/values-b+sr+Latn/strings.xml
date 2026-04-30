@@ -6135,4 +6135,5 @@
     <string name="open_from_short">Od</string>
     <string name="astro_designations">Oznake</string>
     <string name="astronomy_map">Astronomska mapa</string>
+    <string name="obd_simulation_device">Uređaj za simulaciju</string>
 </resources>

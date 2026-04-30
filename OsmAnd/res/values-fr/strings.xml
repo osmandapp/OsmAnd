@@ -6058,4 +6058,5 @@
     <string name="open_from_short">De</string>
     <string name="astro_designations">Désignations</string>
     <string name="astronomy_map">Carte astronomique</string>
+    <string name="obd_simulation_device">Dispositif de simulation</string>
 </resources>

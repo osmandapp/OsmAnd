@@ -6480,4 +6480,5 @@
     <string name="open_from_short">Vanaf</string>
     <string name="astro_designations">Aanduidingen</string>
     <string name="astronomy_map">Astronomische kaart</string>
+    <string name="obd_simulation_device">Simulatie-apparaat</string>
 </resources>
