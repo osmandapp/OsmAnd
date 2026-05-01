@@ -6016,7 +6016,7 @@
     <string name="astro_explore_watch_now_subtitle">Tekintse meg, hogy mi látható ma éjjel az égen</string>
     <string name="astro_explore_watch_now">Megtekintés most</string>
     <string name="astro_explore_deep_sky_subtitle">Galaxisok, galaxishalmazok, fekete lyukak</string>
-    <string name="obd_alt_battery_voltage_desc">Megjeleníti az OBD-adapter feszültségszintjét</string>
+    <string name="obd_alt_battery_voltage_desc">Megjeleníti a feszültségszintet az OBD-adapteren</string>
     <string name="shared_string_radians">Radián</string>
     <string name="shared_string_unlock">Feloldás</string>
     <string name="start_free_trial">Ingyenes próbaidőszak megkezdése</string>
@@ -6054,4 +6054,6 @@
     <string name="open_till_short">Ekkor:</string>
     <string name="open_from_short">Ettől:</string>
     <string name="astro_designations">Jelölések</string>
+    <string name="astronomy_map">Csillagászati térkép</string>
+    <string name="obd_simulation_device">Szimulációs eszköz</string>
 </resources>

@@ -6152,4 +6152,6 @@
     <string name="shared_string_allocated">Alokované</string>
     <string name="open_till_short">Do</string>
     <string name="open_from_short">Od</string>
+    <string name="astronomy_map">Astronomická mapa</string>
+    <string name="obd_simulation_device">Simulačné zariadenie</string>
 </resources>
