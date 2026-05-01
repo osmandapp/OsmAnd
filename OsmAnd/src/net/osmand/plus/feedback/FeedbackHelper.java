@@ -112,17 +112,18 @@ public class FeedbackHelper {
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		PrintStream printStream = new PrintStream(out);
 		throwable.printStackTrace(printStream);
-		StringBuilder msg = new StringBuilder();
-		msg.append("Version  ")
+
+		StringBuilder builder = new StringBuilder();
+		builder.append("Version  ")
 				.append(Version.getFullVersion(app))
 				.append("\n")
 				.append(DateFormat.format("dd.MM.yyyy h:mm:ss", System.currentTimeMillis()));
 
 		PackageInfo info = getPackageInfo();
 		if (info != null) {
-			msg.append("\nApk Version : ").append(info.versionName).append(" ").append(info.versionCode);
+			builder.append("\nApk Version : ").append(info.versionName).append(" ").append(info.versionCode);
 		}
-		msg.append("\n")
+		builder.append("\n")
 				.append("Exception occurred in thread ")
 				.append(thread)
 				.append(" : \n")
@@ -130,7 +131,7 @@ public class FeedbackHelper {
 
 		if (file.getParentFile().canWrite()) {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
-			writer.write(msg.toString());
+			writer.write(builder.toString());
 			writer.close();
 		}
 	}
