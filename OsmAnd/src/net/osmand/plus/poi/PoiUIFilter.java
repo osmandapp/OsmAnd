@@ -38,7 +38,6 @@ import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.SearchSettings;
 import static net.osmand.search.core.SearchSettings.SortType.BY_DISTANCE;
 import static net.osmand.search.core.SearchSettings.SortType.BY_RELEVANCE;
-import net.osmand.search.core.SearchSortingType;
 import net.osmand.search.core.TopIndexFilter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -60,7 +59,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilter, SearchSortingType {
+public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilter {
 
 	public static final String STD_PREFIX = "std_";
 	public static final String ONLINE_PREFIX = "online_";
