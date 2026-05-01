@@ -427,10 +427,7 @@ public class SRTMPlugin extends OsmandPlugin {
 			if (nauticalPlugin != null) {
 				nauticalPlugin.createAdapterItem(TERRAIN_DEPTH_CONTOURS, adapter, mapActivity, customRules);
 			}
-			OsmandDevelopmentPlugin developmentPlugin = PluginsHelper.getEnabledPlugin(OsmandDevelopmentPlugin.class);
-			if (developmentPlugin != null) {
-				createDeveloperItems(developmentPlugin, adapter, mapActivity);
-			}
+			createSphericalMapItem(adapter, mapActivity);
 		}
 	}
 
@@ -625,8 +622,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		adapter.addItem(item);
 	}
 
-	private void createDeveloperItems(@NonNull OsmandDevelopmentPlugin plugin,
-	                                  @NonNull ContextMenuAdapter adapter, @NonNull MapActivity activity) {
+	private void createSphericalMapItem(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity activity) {
 		adapter.addItem(new ContextMenuItem(TERRAIN_SPHERICAL_MAP)
 				.setTitleId(R.string.show_spherical_map, activity)
 				.setIcon(R.drawable.ic_world_globe_dark)
