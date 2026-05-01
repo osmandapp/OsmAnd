@@ -122,15 +122,16 @@ public class SearchPhrase {
 			if (textToSearch.startsWith(w.getWord() + DELIMITER)) {
 				foundWords.add(w);
 				textToSearch = textToSearch.substring(w.getWord().length() + DELIMITER.length());
-				if (w.getResult() != null && w.getResult().object instanceof CustomSearchPoiFilter specialSorting
-						&& specialSorting.getDefaultSearchType() != null) {
-//						settings.getSortType() == null
-					settings = new SearchSettings(settings);
-					settings.setSortType(specialSorting.getDefaultSearchType());
-				}
-
 			} else {
 				break;
+			}
+		}
+		for (SearchWord w : foundWords) {
+			if (w.getResult() != null && w.getResult().object instanceof CustomSearchPoiFilter specialSorting
+					&& specialSorting.getDefaultSearchType() != null) {
+//						settings.getSortType() == null
+				settings = new SearchSettings(settings);
+				settings.setSortType(specialSorting.getDefaultSearchType());
 			}
 		}
 		return createNewSearchPhrase(settings, text, foundWords, textToSearch);
