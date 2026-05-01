@@ -145,6 +145,7 @@ public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer 
 		});
 
 		viewPager = findViewById(R.id.view_pager);
+		viewPager.setId(isRightSide() ? R.id.widget_panel_view_pager_right : R.id.widget_panel_view_pager_left);
 		viewPager.setAdapter(adapter);
 		// Set transformer just to update pages without RecyclerView animation
 		viewPager.setPageTransformer(new CompositePageTransformer());
