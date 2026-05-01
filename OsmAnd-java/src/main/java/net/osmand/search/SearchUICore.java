@@ -664,12 +664,6 @@ public class SearchUICore {
 
 	public boolean selectSearchResult(SearchResult r) {
 		SearchSettings newSettings = this.phrase.getSettings(); 
-		if (r.object instanceof CustomSearchPoiFilter specialSorting) {
-			if (specialSorting.getDefaultSearchType() != null) {
-				newSettings = new SearchSettings(this.phrase.getSettings());
-				newSettings.setSortType(specialSorting.getDefaultSearchType());
-			}
-		}
 		this.phrase = this.phrase.selectWord(r, newSettings);
 		return true;
 	}
