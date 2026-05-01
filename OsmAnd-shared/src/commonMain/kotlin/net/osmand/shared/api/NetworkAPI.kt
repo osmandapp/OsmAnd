@@ -1,5 +1,7 @@
 package net.osmand.shared.api
 
+import net.osmand.shared.util.KNetworkUtils
+
 interface NetworkAPI {
 
 	data class NetworkResponse(
@@ -15,11 +17,15 @@ interface NetworkAPI {
 		url: String,
 		auth: String? = null,
 		useGzip: Boolean = false,
-		userAgent: String = "OsmAnd"
+		userAgent: String = KNetworkUtils.USER_AGENT
 	): NetworkResponse
+
+    fun resolveRedirectUrl(url: String): String? {
+        return resolveRedirectUrl(url, KNetworkUtils.USER_AGENT)
+    }
 
     fun resolveRedirectUrl(
         url: String,
-        userAgent: String = "OsmAnd"
+        userAgent: String = KNetworkUtils.USER_AGENT
     ): String?
 }

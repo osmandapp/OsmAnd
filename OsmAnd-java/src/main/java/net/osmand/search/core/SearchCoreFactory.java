@@ -2180,8 +2180,7 @@ public class SearchCoreFactory {
 		private String resolveRedirectUrl(String url) {
 			URI uri = GeoPointParserUtil.createUri(url);
 			if (uri != null) {
-				return PlatformUtil.INSTANCE.getNetworkAPI()
-						.resolveRedirectUrl(uri.toString(), "Mozilla/5.0 (OsmAnd; Android)");
+				return PlatformUtil.INSTANCE.getNetworkAPI().resolveRedirectUrl(uri.toString());
 			}
 			return null;
 		}
