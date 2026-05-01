@@ -6145,4 +6145,6 @@
     <string name="shared_string_allocated">Asignita</string>
     <string name="open_from_short">ekde</string>
     <string name="astro_designations">Nomoj</string>
+    <string name="obd_simulation_device">Simulata aparato</string>
+    <string name="astronomy_map">Astronomia mapo</string>
 </resources>
