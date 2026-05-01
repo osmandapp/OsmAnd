@@ -237,6 +237,9 @@ public class FavouritesHelper {
 				destinationGroup = new FavoriteGroup(sourceGroup);
 				destination.put(key, destinationGroup);
 			} else {
+				if (sourceGroup.getSize() > 0 || sourceGroup.getTimeModified() > 0) {
+					destinationGroup.copyFileMetadata(sourceGroup);
+				}
 				boolean groupChanged = false;
 				if (!destinationGroup.appearanceEquals(sourceGroup)) {
 					groupChanged = true;

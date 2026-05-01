@@ -60,6 +60,8 @@ public class FavoriteGroup {
 		pinned = group.pinned;
 		iconName = group.iconName;
 		backgroundType = group.backgroundType;
+		size = group.size;
+		timeModified = group.timeModified;
 		points.addAll(group.getPoints());
 	}
 
@@ -186,6 +188,11 @@ public class FavoriteGroup {
 		setBackgroundType(group.getBackgroundType());
 		setVisible(group.isVisible());
 		setPinned(group.isPinned());
+	}
+
+	public void copyFileMetadata(@NonNull FavoriteGroup group) {
+		setSize(group.getSize());
+		setTimeModified(group.getTimeModified());
 	}
 
 	private static boolean isPersonal(@NonNull String name) {
