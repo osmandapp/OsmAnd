@@ -35,7 +35,6 @@ import net.osmand.osm.PoiType;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchPhrase.SearchPhraseDataType;
-import net.osmand.search.core.SearchPhrase.SortType;
 import net.osmand.util.*;
 import net.osmand.util.LocationParser.ParsedOpenLocationCode;
 
@@ -367,7 +366,7 @@ public class SearchCoreFactory {
 
 		@Override
 		public boolean search(final SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
-			if (!phrase.isUnknownSearchWordPresent() && !phrase.acceptAllCitiesTowns()) {
+			if (!phrase.isUnknownSearchWordPresent() && !phrase.isEmptyQueryAllowed()) {
 				return false;
 			}
 			// phrase.isLastWord(ObjectType.CITY, ObjectType.VILLAGE, ObjectType.POSTCODE) || phrase.isLastWord(ObjectType.REGION)
@@ -434,7 +433,7 @@ public class SearchCoreFactory {
 				}
 			}
 			if (phrase.isNoSelectedType() && bbox != null
-					&& (phrase.isUnknownSearchWordPresent() || phrase.acceptAllCitiesTowns())
+					&& (phrase.isUnknownSearchWordPresent() || phrase.isEmptyQueryAllowed())
 					&& phrase.isSearchTypeAllowed(ObjectType.CITY)) {
 				NameStringMatcher nm = phrase.getMainUnknownNameStringMatcher();
 				List<City>  cacheResArray = townCitiesCache.queryCities(bbox);
@@ -451,7 +450,7 @@ public class SearchCoreFactory {
 					res.priority = SEARCH_ADDRESS_BY_NAME_PRIORITY;
 					res.priorityDistance = SEARCH_ADDRESS_BY_NAME_CITY_PRIORITY_DISTANCE;
 					res.objectType = ObjectType.CITY;
-					if (phrase.acceptAllCitiesTowns() && phrase.isEmpty()) {
+					if (phrase.isEmptyQueryAllowed() && phrase.isEmpty()) {
 						resultMatcher.publish(res);
 					} else if (nm.matches(res.localeName) || nm.matches(res.otherNames)) {
 						subSearchApiOrPublish(phrase, resultMatcher, res, cityApi);
@@ -2052,10 +2051,11 @@ public class SearchCoreFactory {
 			final boolean transliterate = phrase.getSettings().isTransliterate();
 			
 			SearchSettings settings = phrase.getSettings().setSearchBBox31(searchBBox31);
-			SearchPhrase olcPhrase = phrase.generateNewPhrase(text, settings);
-			olcPhrase.setSortType(SortType.IGNORE_DISTANCE);
-			olcPhrase.setAcceptAllCitiesTowns(true);
+			settings = settings.setSortByName(false);
+			settings = settings.setAddressSearch(true);
+			settings = settings.setEmptyQueryAllowed(true);
 			
+			SearchPhrase olcPhrase = phrase.generateNewPhrase(text, settings);
 			final List<SearchResult> result = new ArrayList<>();
 			
 			ResultMatcher<SearchResult> matcher = new ResultMatcher<SearchResult>() {
