@@ -13,5 +13,7 @@ public interface CustomSearchPoiFilter extends SearchPoiTypeFilter {
 	public Object getIconResource();
 
 	public ResultMatcher<Amenity> wrapResultMatcher(final ResultMatcher<Amenity> matcher);
+	
+	public default SearchSettings.SortType getDefaultSearchType() { return null; }
 
 }

@@ -1057,8 +1057,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		return isNearbyPoi;
 	}
 
-	@Override
-	public SearchSettings.SortType getSortType() {
-		return isNearbyPoi ? BY_DISTANCE : BY_RELEVANCE;
+	public SearchSettings.SortType getDefaultSearchType() {
+		return isNearbyPoi? SearchSettings.SortType.BY_DISTANCE : null;
 	}
 }

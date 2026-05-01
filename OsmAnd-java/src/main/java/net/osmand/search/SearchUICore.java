@@ -32,7 +32,6 @@ import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
-import net.osmand.search.core.SearchSortingType;
 import net.osmand.search.core.SearchWord;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -88,7 +87,6 @@ public class SearchUICore {
 			Arrays.asList("building", "internet_access_yes"));
 
 	private Function<String, String> httpRedirectRequester = null;
-	private static final int MIN_COMPLETE_MATCH_WEIGHT = 40;
 
 	public SearchUICore(MapPoiTypes poiTypes, String locale, boolean transliterate) {
 		this.poiTypes = poiTypes;
@@ -664,9 +662,10 @@ public class SearchUICore {
 	}
 
 	public boolean selectSearchResult(SearchResult r) {
-		setSortType(SearchSettings.SortType.BY_RELEVANCE);
-		if (r.object instanceof SearchSortingType sortingType) {
-			setSortType(sortingType.getSortType());
+		if (r.object instanceof CustomSearchPoiFilter sortingType) {
+			if (sortingType.getDefaultSearchType() != null) {
+				setSortType(sortingType.getDefaultSearchType());
+			}
 		}
 		this.phrase = this.phrase.selectWord(r);
 		return true;
