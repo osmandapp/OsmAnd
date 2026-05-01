@@ -114,12 +114,21 @@ public class SearchPhrase {
 			foundWords.addAll(this.words);
 			leftWords = leftWords.subList(leftWords.size(), leftWords.size());
 		}
+
 		for (SearchWord w : leftWords) {
 			if (textToSearch.startsWith(w.getWord() + DELIMITER)) {
 				foundWords.add(w);
 				textToSearch = textToSearch.substring(w.getWord().length() + DELIMITER.length());
 			} else {
 				break;
+			}
+		}
+		for (SearchWord w : foundWords) {
+			if (w.getResult() != null && w.getResult().object instanceof CustomSearchPoiFilter specialSorting
+					&& specialSorting.getDefaultSearchType() != null) {
+//						settings.getSortType() == null
+				settings = new SearchSettings(settings);
+				settings.setSortType(specialSorting.getDefaultSearchType());
 			}
 		}
 		return createNewSearchPhrase(settings, text, foundWords, textToSearch);
@@ -142,14 +151,7 @@ public class SearchPhrase {
 	// init search phrase
 	private SearchPhrase createNewSearchPhrase(final SearchSettings settings, String fullText, List<SearchWord> foundWords,
 											   String textToSearch) {
-		SearchPhrase sp;
-		if (this.settings != null && this.settings.getSortType() != settings.getSortType()) {
-			SearchSettings newSettings = new SearchSettings(settings);
-			newSettings.setSortType(this.settings.getSortType());
-			sp = new SearchPhrase(newSettings, this.clt);
-		} else {
-			sp = new SearchPhrase(settings, this.clt);
-		}
+		SearchPhrase sp = new SearchPhrase(settings, this.clt);
 		sp.words = foundWords;
 		sp.fullTextSearchPhrase = fullText;
 		sp.unknownSearchPhrase = textToSearch;
