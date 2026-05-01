@@ -154,7 +154,14 @@ public class SearchPhrase {
 	// init search phrase
 	private SearchPhrase createNewSearchPhrase(final SearchSettings settings, String fullText, List<SearchWord> foundWords,
 											   String textToSearch) {
-		SearchPhrase sp = new SearchPhrase(settings, this.clt);
+		SearchPhrase sp;
+		if (this.settings != null && this.settings.getSortType() != settings.getSortType()) {
+			SearchSettings newSettings = new SearchSettings(settings);
+			newSettings.setSortType(this.settings.getSortType());
+			sp = new SearchPhrase(newSettings, this.clt);
+		} else {
+			sp = new SearchPhrase(settings, this.clt);
+		}
 		sp.words = foundWords;
 		sp.fullTextSearchPhrase = fullText;
 		sp.unknownSearchPhrase = textToSearch;
