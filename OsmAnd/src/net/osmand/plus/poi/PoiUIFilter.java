@@ -35,9 +35,7 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.POIMapLayer.PoiUIFilterResultMatcher;
 import net.osmand.search.AmenitySearcher;
 import net.osmand.search.core.CustomSearchPoiFilter;
-import net.osmand.search.core.SearchSettings;
-import static net.osmand.search.core.SearchSettings.SortType.BY_DISTANCE;
-import static net.osmand.search.core.SearchSettings.SortType.BY_RELEVANCE;
+import net.osmand.search.core.SearchSettings.SortType;
 import net.osmand.search.core.TopIndexFilter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -1056,7 +1054,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		return isNearbyPoi;
 	}
 
-	public SearchSettings.SortType getDefaultSearchType() {
-		return isNearbyPoi? SearchSettings.SortType.BY_DISTANCE : null;
+	public SortType getDefaultSearchType() {
+		return isNearbyPoi? SortType.ONLY_BY_DISTANCE : null;
 	}
 }
