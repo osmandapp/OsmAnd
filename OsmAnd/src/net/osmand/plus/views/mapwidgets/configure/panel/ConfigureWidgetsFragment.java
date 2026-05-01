@@ -39,6 +39,7 @@ import com.google.android.material.tabs.TabLayout.Tab;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -661,6 +662,9 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 			ConfigureWidgetsFragment fragment = new ConfigureWidgetsFragment();
 			fragment.selectedPanel = panel;
 			fragment.selectedAppMode = appMode;
+			if (activity instanceof MapActivity mapActivity) {
+				fragment.layoutMode = ScreenLayoutMode.getDefault(mapActivity);
+			}
 			if (args != null) {
 				fragment.setArguments(args);
 			}
