@@ -14,6 +14,6 @@ public interface CustomSearchPoiFilter extends SearchPoiTypeFilter {
 
 	public ResultMatcher<Amenity> wrapResultMatcher(final ResultMatcher<Amenity> matcher);
 	
-	public default SearchSettings.SortType getDefaultSearchType() { return null; }
+	public default SearchPhrase.SortType getDefaultSearchType() { return null; }
 
 }
