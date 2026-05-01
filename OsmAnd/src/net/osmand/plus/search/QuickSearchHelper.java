@@ -93,7 +93,6 @@ public class QuickSearchHelper implements ResourceListener {
 		OsmandSettings settings = app.getSettings();
 		core = new SearchUICore(app.getPoiTypes(), settings.MAP_PREFERRED_LOCALE.get(),
 				settings.MAP_TRANSLITERATE_NAMES.get());
-		core.setHttpRedirectRequester(this::httpRedirectRequester);
 		app.getResourceManager().addResourceListener(this);
 	}
 
@@ -692,15 +691,6 @@ public class QuickSearchHelper implements ResourceListener {
 		PoiFilterBarController() {
 			super(TopToolbarControllerType.POI_FILTER);
 		}
-	}
-
-	@Nullable
-	private String httpRedirectRequester(@NonNull String url) {
-		URI uri = GeoPointParserUtil.createUri(url);
-		if (uri != null && app.getSettings().isInternetConnectionAvailable()) {
-			return KNetworkUtils.okHttpRedirectRequester(uri.toString(), NetworkImageLoader.USER_AGENT);
-		}
-		return null;
 	}
 
 }

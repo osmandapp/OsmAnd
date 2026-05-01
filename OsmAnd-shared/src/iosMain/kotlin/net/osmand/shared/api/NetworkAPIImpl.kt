@@ -2,7 +2,7 @@ package net.osmand.shared.api
 
 import net.osmand.shared.api.NetworkAPI.NetworkResponse
 
-class NetworkAPIImpl : NetworkAPI {
+class NetworkAPIImpl : BaseNetworkAPI() {
 
 	override fun hasProxy(): Boolean {
 		TODO("Not yet implemented")

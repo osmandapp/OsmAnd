@@ -12,7 +12,7 @@ import java.util.Base64
 import java.util.zip.GZIPInputStream
 import kotlin.text.Charsets.UTF_8
 
-class NetworkAPIImpl : NetworkAPI {
+class NetworkAPIImpl : BaseNetworkAPI() {
 
 	companion object {
 		private val LOG = LoggerFactory.getLogger("NetworkAPIImpl")

@@ -35,16 +35,17 @@ import net.osmand.osm.PoiType;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchPhrase.SearchPhraseDataType;
+import net.osmand.shared.util.PlatformUtil;
 import net.osmand.util.*;
 import net.osmand.util.LocationParser.ParsedOpenLocationCode;
 
 import java.io.IOException;
+import java.net.URI;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Function;
 
 public class SearchCoreFactory {
 
@@ -1949,16 +1950,9 @@ public class SearchCoreFactory {
 		private final DecimalFormat latLonFormatter = new DecimalFormat("#.0####", new DecimalFormatSymbols(Locale.US));
 		
 		private SearchAmenityByNameAPI amenitiesApi;
-		private Function<String, String> httpRedirectRequester = null;
 
 		public SearchLocationAndUrlAPI(SearchAmenityByNameAPI amenitiesApi) {
 			super(ObjectType.LOCATION, ObjectType.PARTIAL_LOCATION);
-			this.amenitiesApi = amenitiesApi;
-		}
-
-		public SearchLocationAndUrlAPI(SearchAmenityByNameAPI amenitiesApi, Function<String, String> requester) {
-			super(ObjectType.LOCATION, ObjectType.PARTIAL_LOCATION);
-			this.httpRedirectRequester = requester;
 			this.amenitiesApi = amenitiesApi;
 		}
 
@@ -2154,10 +2148,10 @@ public class SearchCoreFactory {
 			GeoParsedPoint pnt = null;
 			for (String text : lines.split("\n")) {
 				pnt = GeoPointParserUtil.parse(text);
-				if (pnt == null && httpRedirectRequester != null && GeoPointParserUtil.isGooGlUrl(text)) {
-					text = httpRedirectRequester.apply(text);
-					if (text != null) {
-						pnt = GeoPointParserUtil.parse(text);
+				if (pnt == null && GeoPointParserUtil.isGooGlUrl(text)) {
+					String resolvedUrl = resolveRedirectUrl(text);
+					if (resolvedUrl != null) {
+						pnt = GeoPointParserUtil.parse(resolvedUrl);
 					}
 				}
 				if (pnt != null) {
@@ -2172,7 +2166,7 @@ public class SearchCoreFactory {
 				sp.wordsSpan = lines;
 				sp.setImpreciseCoordinates(pnt.hasImpreciseCoordinates());
 				sp.location = new LatLon(pnt.getLatitude(), pnt.getLongitude());
-				sp.localeName = formatLatLon(pnt.getLatitude()) +", " + formatLatLon(pnt.getLongitude());
+				sp.localeName = formatLatLon(pnt.getLatitude()) + ", " + formatLatLon(pnt.getLongitude());
 				if (pnt.getZoom() > 0) {
 					sp.preferredZoom = pnt.getZoom();
 				}
@@ -2181,6 +2175,15 @@ public class SearchCoreFactory {
 				return true;
 			}
 			return false;
+		}
+
+		private String resolveRedirectUrl(String url) {
+			URI uri = GeoPointParserUtil.createUri(url);
+			if (uri != null) {
+				return PlatformUtil.INSTANCE.getNetworkAPI()
+						.resolveRedirectUrl(uri.toString(), "Mozilla/5.0 (OsmAnd; Android)");
+			}
+			return null;
 		}
 
 		@Override

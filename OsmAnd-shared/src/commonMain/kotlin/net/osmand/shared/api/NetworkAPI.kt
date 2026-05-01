@@ -17,4 +17,9 @@ interface NetworkAPI {
 		useGzip: Boolean = false,
 		userAgent: String = "OsmAnd"
 	): NetworkResponse
+
+    fun resolveRedirectUrl(
+        url: String,
+        userAgent: String = "OsmAnd"
+    ): String?
 }

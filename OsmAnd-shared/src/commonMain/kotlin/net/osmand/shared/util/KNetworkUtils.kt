@@ -29,35 +29,4 @@ object KNetworkUtils {
         }
     }
 
-    @JvmStatic
-    fun okHttpRedirectRequester(url: String, userAgent: String): String? = runBlocking {
-        httpRedirectRequester(url, userAgent)
-    }
-
-    private suspend fun httpRedirectRequester(url: String, userAgent: String): String? {
-        val log = LoggerFactory.getLogger("KNetworkUtils")
-        return try {
-            val response: HttpResponse = client.request(url) {
-                method = HttpMethod.Head
-                header(HttpHeaders.UserAgent, userAgent)
-            }
-
-            val code = response.status.value
-            if (code !in 300..399) {
-                log.error("Got no Redirect from $url")
-                return null
-            }
-
-            val location = response.headers[HttpHeaders.Location]
-            if (location.isNullOrBlank()) {
-                log.error("Got no Location from $url")
-                return null
-            }
-
-            location
-        } catch (e: Throwable) {
-            log.error("Got error from  $url  ${e.message}")
-            null
-        }
-    }
 }

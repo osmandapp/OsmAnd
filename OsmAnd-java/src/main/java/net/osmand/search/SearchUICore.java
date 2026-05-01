@@ -86,7 +86,6 @@ public class SearchUICore {
 	private static final Set<String> FILTER_DUPLICATE_POI_SUBTYPE = new TreeSet<String>(
 			Arrays.asList("building", "internet_access_yes"));
 
-	private Function<String, String> httpRedirectRequester = null;
 	private static final int MIN_COMPLETE_MATCH_WEIGHT = 40;
 
 	public SearchUICore(MapPoiTypes poiTypes, String locale, boolean transliterate) {
@@ -97,10 +96,6 @@ public class SearchUICore {
 		phrase = SearchPhrase.emptyPhrase(searchSettings);
 		currentSearchResult = new SearchResultCollection(phrase);
 		singleThreadedExecutor = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, taskQueue);
-	}
-
-	public void setHttpRedirectRequester(Function<String, String> httpRedirectRequester) {
-		this.httpRedirectRequester = httpRedirectRequester;
 	}
 
 	public static void setDebugMode(boolean debugMode) {
@@ -576,7 +571,7 @@ public class SearchUICore {
 	public void init() {
 		SearchAmenityByNameAPI amenitiesApi = new SearchCoreFactory.SearchAmenityByNameAPI();
 		apis.add(amenitiesApi);
-		apis.add(new SearchCoreFactory.SearchLocationAndUrlAPI(amenitiesApi, httpRedirectRequester));
+		apis.add(new SearchCoreFactory.SearchLocationAndUrlAPI(amenitiesApi));
 		SearchAmenityTypesAPI searchAmenityTypesAPI = new SearchAmenityTypesAPI(poiTypes);
 		apis.add(searchAmenityTypesAPI);
 		apis.add(new SearchAmenityByTypeAPI(poiTypes, searchAmenityTypesAPI));
