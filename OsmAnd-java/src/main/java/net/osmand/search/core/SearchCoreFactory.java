@@ -34,10 +34,8 @@ import net.osmand.osm.PoiType;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchPhrase.SearchPhraseDataType;
-import net.osmand.util.Algorithms;
-import net.osmand.util.GeoParsedPoint;
-import net.osmand.util.GeoPointParserUtil;
-import net.osmand.util.LocationParser;
+import net.osmand.search.core.SearchPhrase.SortType;
+import net.osmand.util.*;
 import net.osmand.util.LocationParser.ParsedOpenLocationCode;
 import net.osmand.util.MapUtils;
 
@@ -269,7 +267,7 @@ public class SearchCoreFactory {
 		}
 	}
 	
-	
+
 	public static Set<String> splitSearchNames(String name) {
 		int prev = -1;
 		Set<String> namesToAdd = new HashSet<>();
@@ -394,7 +392,7 @@ public class SearchCoreFactory {
 
 		@Override
 		public boolean search(final SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
-			if (!phrase.isUnknownSearchWordPresent() && !phrase.isEmptyQueryAllowed()) {
+			if (!phrase.isUnknownSearchWordPresent() && !phrase.acceptAllCitiesTowns()) {
 				return false;
 			}
 			// phrase.isLastWord(ObjectType.CITY, ObjectType.VILLAGE, ObjectType.POSTCODE) || phrase.isLastWord(ObjectType.REGION)
@@ -461,7 +459,7 @@ public class SearchCoreFactory {
 				}
 			}
 			if (phrase.isNoSelectedType() && bbox != null
-					&& (phrase.isUnknownSearchWordPresent() || phrase.isEmptyQueryAllowed())
+					&& (phrase.isUnknownSearchWordPresent() || phrase.acceptAllCitiesTowns())
 					&& phrase.isSearchTypeAllowed(ObjectType.CITY)) {
 				NameStringMatcher nm = phrase.getMainUnknownNameStringMatcher();
 				List<City>  cacheResArray = townCitiesCache.queryCities(bbox);
@@ -478,7 +476,7 @@ public class SearchCoreFactory {
 					res.priority = SEARCH_ADDRESS_BY_NAME_PRIORITY;
 					res.priorityDistance = SEARCH_ADDRESS_BY_NAME_CITY_PRIORITY_DISTANCE;
 					res.objectType = ObjectType.CITY;
-					if (phrase.isEmptyQueryAllowed() && phrase.isEmpty()) {
+					if (phrase.acceptAllCitiesTowns() && phrase.isEmpty()) {
 						resultMatcher.publish(res);
 					} else if (nm.matches(res.localeName) || nm.matches(res.otherNames)) {
 						subSearchApiOrPublish(phrase, resultMatcher, res, cityApi);
@@ -2073,11 +2071,10 @@ public class SearchCoreFactory {
 			final boolean transliterate = phrase.getSettings().isTransliterate();
 			
 			SearchSettings settings = phrase.getSettings().setSearchBBox31(searchBBox31);
-			settings = settings.setSortByName(false);
-			settings = settings.setAddressSearch(true);
-			settings = settings.setEmptyQueryAllowed(true);
-			
 			SearchPhrase olcPhrase = phrase.generateNewPhrase(text, settings);
+			olcPhrase.setSortType(SortType.IGNORE_DISTANCE);
+			olcPhrase.setAcceptAllCitiesTowns(true);
+
 			final List<SearchResult> result = new ArrayList<>();
 			
 			ResultMatcher<SearchResult> matcher = new ResultMatcher<SearchResult>() {

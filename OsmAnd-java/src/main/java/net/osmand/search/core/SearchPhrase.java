@@ -27,11 +27,23 @@ public class SearchPhrase {
 	private static final Pattern reg = Pattern.compile(ALLDELIMITERS);
 	private static Comparator<String> commonWordsComparator;
 	
+	public enum SortType {
+		BY_RELEVANCE, // default
+		ONLY_BY_DISTANCE,
+		IGNORE_DISTANCE
+	}
+	
 	private final Collator clt;
 	private final SearchSettings settings;
-	private List<BinaryMapIndexReader> indexes;
 	
+	private List<BinaryMapIndexReader> indexes;
 	private BinaryMapIndexReader fileRequest;
+	
+	// specific settings 
+	private SortType sortType;
+	private boolean acceptAllCitiesTowns = false;
+	
+	
 	
 	// Object consists of 2 part [known + unknown] 
 	private String fullTextSearchPhrase = "";
@@ -173,17 +185,6 @@ public class SearchPhrase {
 			}
 		}
 		return sp;
-	}
-
-	private boolean likelyAddressSearch(String fullText) {
-		// for now only simple check - we just check if it contains digit
-		for (int i = 0; i < fullText.length(); i++) {
-			char c = fullText.charAt(i);
-			if (c >= '0' && c <= '9') {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	private boolean needDecryptAbbreviations() {
@@ -522,12 +523,12 @@ public class SearchPhrase {
 		}
 	}
 
-	public boolean isEmptyQueryAllowed() {
-		return settings.isEmptyQueryAllowed();
+	public boolean acceptAllCitiesTowns() {
+		return acceptAllCitiesTowns;
 	}
-
-	public boolean isSortByName() {
-		return settings.isSortByName();
+	
+	public void setAcceptAllCitiesTowns(boolean acceptAllCitiesTowns) {
+		this.acceptAllCitiesTowns = acceptAllCitiesTowns;
 	}
 
 	public SearchPhrase selectWord(SearchResult res) {
@@ -972,4 +973,11 @@ public class SearchPhrase {
 		return 0;
 	}
 
+	public SortType getSortType() {
+		return sortType;
+	}
+	
+	public void setSortType(SortType sortType) {
+		this.sortType = sortType;
+	}
 }

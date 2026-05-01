@@ -28,10 +28,6 @@ public class SearchSettings {
 
 	public static final Log LOG = PlatformUtil.getLog(SearchSettings.class);
 	private static final double MIN_DISTANCE_REGION_LANG_RECALC = 10000;
-	public enum SortType {
-		BY_RELEVANCE,
-		BY_DISTANCE
-	}
 
 	private LatLon originalLocation;
 	private OsmandRegions regions;
@@ -43,15 +39,11 @@ public class SearchSettings {
 	private String mapLang;
 	private boolean transliterateIfMissing;
 	private ObjectType[] searchTypes;
-	private boolean emptyQueryAllowed;
-	private boolean sortByName;
 	private QuadRect searchBBox31;
-	private boolean addressSearch;
 	private SearchStat stat;
 	private SearchExportSettings exportSettings; // = new SearchExportSettings(true, true, -1);
 	private List<MapObject> exportedObjects;
 	private List<City> exportedCities;
-	private SortType sortType;
 
 	public SearchSettings(SearchSettings s) {
 		if (s != null) {
@@ -63,15 +55,11 @@ public class SearchSettings {
 			this.offlineIndexes = s.offlineIndexes;
 			this.originalLocation = s.originalLocation;
 			this.searchBBox31 = s.searchBBox31;
-			this.addressSearch = s.addressSearch;
 			this.regions = s.regions;
 			this.regionLang = s.regionLang;
 			this.searchTypes = s.searchTypes;
-			this.emptyQueryAllowed = s.emptyQueryAllowed;
-			this.sortByName = s.sortByName;
 			this.exportSettings = s.exportSettings;
 			this.stat = s.stat;
-			this.sortType = s.sortType;
 		}
 	}
 	
@@ -181,12 +169,6 @@ public class SearchSettings {
 		return s;
 	}
 	
-	public SearchSettings setAddressSearch(boolean addressSearch) {
-		SearchSettings s = new SearchSettings(this);
-		s.addressSearch = addressSearch;
-		return s;
-	}
-
 	public boolean isTransliterate() {
 		return transliterateIfMissing;
 	}
@@ -208,26 +190,6 @@ public class SearchSettings {
 	public SearchSettings resetSearchTypes() {
 		SearchSettings s = new SearchSettings(this);
 		s.searchTypes = null;
-		return s;
-	}
-
-	public boolean isEmptyQueryAllowed() {
-		return emptyQueryAllowed;
-	}
-
-	public SearchSettings setEmptyQueryAllowed(boolean emptyQueryAllowed) {
-		SearchSettings s = new SearchSettings(this);
-		s.emptyQueryAllowed = emptyQueryAllowed;
-		return s;
-	}
-
-	public boolean isSortByName() {
-		return sortByName;
-	}
-
-	public SearchSettings setSortByName(boolean sortByName) {
-		SearchSettings s = new SearchSettings(this);
-		s.sortByName = sortByName;
 		return s;
 	}
 
@@ -308,8 +270,6 @@ public class SearchSettings {
 		json.put("lang", mapLang);
 		json.put("appLang", appLang);
 		json.put("transliterateIfMissing", transliterateIfMissing);
-		json.put("emptyQueryAllowed", emptyQueryAllowed);
-		json.put("sortByName", sortByName);
 		if (searchTypes != null && searchTypes.length > 0) {
 			JSONArray searchTypesArr = new JSONArray();
 			for (ObjectType type : searchTypes) {
@@ -329,8 +289,6 @@ public class SearchSettings {
 		s.radiusLevel = json.optInt("radiusLevel", 1);
 		s.totalLimit = json.optInt("totalLimit", -1);
 		s.transliterateIfMissing = json.optBoolean("transliterateIfMissing", false);
-		s.emptyQueryAllowed = json.optBoolean("emptyQueryAllowed", false);
-		s.sortByName = json.optBoolean("sortByName", false);
 
 		if (json.has("lang")) {
 			s.mapLang = json.getString("lang");
@@ -353,11 +311,4 @@ public class SearchSettings {
 		return s;
 	}
 
-	public SortType getSortType() {
-		return sortType;
-	}
-
-	public void setSortType(SortType sortType) {
-		this.sortType = sortType;
-	}
 }
