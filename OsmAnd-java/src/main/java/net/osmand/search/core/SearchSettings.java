@@ -28,6 +28,10 @@ public class SearchSettings {
 
 	public static final Log LOG = PlatformUtil.getLog(SearchSettings.class);
 	private static final double MIN_DISTANCE_REGION_LANG_RECALC = 10000;
+	public enum SortType {
+		BY_RELEVANCE,
+		BY_DISTANCE
+	}
 
 	private LatLon originalLocation;
 	private OsmandRegions regions;
@@ -47,6 +51,7 @@ public class SearchSettings {
 	private SearchExportSettings exportSettings; // = new SearchExportSettings(true, true, -1);
 	private List<MapObject> exportedObjects;
 	private List<City> exportedCities;
+	private SortType sortType;
 
 	public SearchSettings(SearchSettings s) {
 		if (s != null) {
@@ -66,6 +71,7 @@ public class SearchSettings {
 			this.sortByName = s.sortByName;
 			this.exportSettings = s.exportSettings;
 			this.stat = s.stat;
+			this.sortType = s.sortType;
 		}
 	}
 	
@@ -349,5 +355,13 @@ public class SearchSettings {
 			s.searchTypes = searchTypes;
 		}
 		return s;
+	}
+
+	public SortType getSortType() {
+		return sortType;
+	}
+
+	public void setSortType(SortType sortType) {
+		this.sortType = sortType;
 	}
 }

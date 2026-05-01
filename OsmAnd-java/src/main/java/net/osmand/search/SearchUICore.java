@@ -87,7 +87,6 @@ public class SearchUICore {
 			Arrays.asList("building", "internet_access_yes"));
 
 	private Function<String, String> httpRedirectRequester = null;
-	private static final int MIN_COMPLETE_MATCH_WEIGHT = 40;
 
 	public SearchUICore(MapPoiTypes poiTypes, String locale, boolean transliterate) {
 		this.poiTypes = poiTypes;
@@ -663,6 +662,11 @@ public class SearchUICore {
 	}
 
 	public boolean selectSearchResult(SearchResult r) {
+		if (r.object instanceof CustomSearchPoiFilter sortingType) {
+			if (sortingType.getDefaultSearchType() != null) {
+				setSortType(sortingType.getDefaultSearchType());
+			}
+		}
 		this.phrase = this.phrase.selectWord(r);
 		return true;
 	}
@@ -1327,18 +1331,23 @@ public class SearchUICore {
 		private Collator collator;
 		private LatLon loc;
 		private boolean sortByName;
+		private SearchSettings.SortType sortType;
 		
 
 		public SearchResultComparator(SearchPhrase sp) {
 			this.collator = sp.getCollator();
 			loc = sp.getLastTokenLocation();
 			sortByName = sp.isSortByName();
+			sortType = sp.getSettings().getSortType();
 		}
 		
 
 		@Override
 		public int compare(SearchResult o1, SearchResult o2) {
 			List<ResultCompareStep> steps = new ArrayList<>();
+			if (sortType == SearchSettings.SortType.BY_DISTANCE) {
+				return ResultCompareStep.COMPARE_BY_DISTANCE.compare(o1, o2, this);
+			}
 			for (ResultCompareStep step : ResultCompareStep.values()) {
 				int r = step.compare(o1, o2, this);
 				steps.add(step);
@@ -1352,25 +1361,6 @@ public class SearchUICore {
 			return 0;
 		}
 
-	}
-	
-	public static class SearchResultComparatorOneStep extends SearchResultComparator {		
-		ResultCompareStep step;
-		
-		public SearchResultComparatorOneStep(SearchPhrase sp) {
-			super(sp);
-			this.step = ResultCompareStep.COMPARE_BY_DISTANCE;
-		}
-
-		public SearchResultComparatorOneStep(SearchPhrase sp, ResultCompareStep step) {
-			super(sp);
-			this.step = step;
-		}
-
-		@Override
-		public int compare(SearchResult o1, SearchResult o2) {
-            return step.compare(o1, o2, this);
-        }
 	}
 
 	public static String getMainCityName(String cityName) {
@@ -1400,5 +1390,13 @@ public class SearchUICore {
 		} else {
 			return (Algorithms.isEmpty(cityName) ? "" : (cityName + ", ")) + addr;
 		}
+	}
+
+	public SearchSettings.SortType getSortType() {
+		return searchSettings.getSortType();
+	}
+
+	public void setSortType(SearchSettings.SortType sortType) {
+		searchSettings.setSortType(sortType);
 	}
 }
