@@ -662,6 +662,7 @@ public class SearchUICore {
 	}
 
 	public boolean selectSearchResult(SearchResult r) {
+		setSortType(null);
 		if (r.object instanceof CustomSearchPoiFilter sortingType) {
 			if (sortingType.getDefaultSearchType() != null) {
 				setSortType(sortingType.getDefaultSearchType());
