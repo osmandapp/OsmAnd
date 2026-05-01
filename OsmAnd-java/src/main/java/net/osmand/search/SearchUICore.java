@@ -32,6 +32,7 @@ import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
+import net.osmand.search.core.SearchSettings.SortType;
 import net.osmand.search.core.SearchWord;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -87,7 +88,6 @@ public class SearchUICore {
 			Arrays.asList("building", "internet_access_yes"));
 
 	private Function<String, String> httpRedirectRequester = null;
-	private static final int MIN_COMPLETE_MATCH_WEIGHT = 40;
 
 	public SearchUICore(MapPoiTypes poiTypes, String locale, boolean transliterate) {
 		this.poiTypes = poiTypes;
@@ -663,7 +663,14 @@ public class SearchUICore {
 	}
 
 	public boolean selectSearchResult(SearchResult r) {
-		this.phrase = this.phrase.selectWord(r);
+		SearchSettings newSettings = this.phrase.getSettings(); 
+		if (r.object instanceof CustomSearchPoiFilter specialSorting) {
+			if (specialSorting.getDefaultSearchType() != null) {
+				newSettings = new SearchSettings(this.phrase.getSettings());
+				newSettings.setSortType(specialSorting.getDefaultSearchType());
+			}
+		}
+		this.phrase = this.phrase.selectWord(r, newSettings);
 		return true;
 	}
 
@@ -1251,7 +1258,7 @@ public class SearchUICore {
 				}
 				break;
 			case SEARCH_DISTANCE_IF_NOT_BY_NAME: 
-				if (!c.sortByName) {
+				if (c.sortType != SortType.IGNORE_DISTANCE) {
 					double s1 = o1.getSearchDistance(c.loc);
 					double s2 = o2.getSearchDistance(c.loc);
 					if (s1 != s2) {
@@ -1326,19 +1333,22 @@ public class SearchUICore {
 	public static class SearchResultComparator implements Comparator<SearchResult> {
 		private Collator collator;
 		private LatLon loc;
-		private boolean sortByName;
+		private SearchSettings.SortType sortType;
 		
 
 		public SearchResultComparator(SearchPhrase sp) {
 			this.collator = sp.getCollator();
 			loc = sp.getLastTokenLocation();
-			sortByName = sp.isSortByName();
+			sortType = sp.getSettings().getSortType();
 		}
 		
 
 		@Override
 		public int compare(SearchResult o1, SearchResult o2) {
 			List<ResultCompareStep> steps = new ArrayList<>();
+			if (sortType == SearchSettings.SortType.ONLY_BY_DISTANCE) {
+				return ResultCompareStep.COMPARE_BY_DISTANCE.compare(o1, o2, this);
+			}
 			for (ResultCompareStep step : ResultCompareStep.values()) {
 				int r = step.compare(o1, o2, this);
 				steps.add(step);
@@ -1352,25 +1362,6 @@ public class SearchUICore {
 			return 0;
 		}
 
-	}
-	
-	public static class SearchResultComparatorOneStep extends SearchResultComparator {		
-		ResultCompareStep step;
-		
-		public SearchResultComparatorOneStep(SearchPhrase sp) {
-			super(sp);
-			this.step = ResultCompareStep.COMPARE_BY_DISTANCE;
-		}
-
-		public SearchResultComparatorOneStep(SearchPhrase sp, ResultCompareStep step) {
-			super(sp);
-			this.step = step;
-		}
-
-		@Override
-		public int compare(SearchResult o1, SearchResult o2) {
-            return step.compare(o1, o2, this);
-        }
 	}
 
 	public static String getMainCityName(String cityName) {
@@ -1401,4 +1392,5 @@ public class SearchUICore {
 			return (Algorithms.isEmpty(cityName) ? "" : (cityName + ", ")) + addr;
 		}
 	}
+
 }

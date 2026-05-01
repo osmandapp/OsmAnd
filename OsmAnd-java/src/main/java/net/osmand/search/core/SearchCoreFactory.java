@@ -2052,7 +2052,6 @@ public class SearchCoreFactory {
 			
 			SearchSettings settings = phrase.getSettings().setSearchBBox31(searchBBox31);
 			settings = settings.setSortByName(false);
-			settings = settings.setAddressSearch(true);
 			settings = settings.setEmptyQueryAllowed(true);
 			
 			SearchPhrase olcPhrase = phrase.generateNewPhrase(text, settings);
