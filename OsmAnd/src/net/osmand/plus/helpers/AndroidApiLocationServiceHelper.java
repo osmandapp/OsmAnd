@@ -57,7 +57,7 @@ public class AndroidApiLocationServiceHelper extends LocationServiceHelper imple
 
 	protected boolean requestLocationUpdatesImpl(@NonNull LocationListener listener, @NonNull String provider) {
 		LocationManager locationManager = (LocationManager) app.getSystemService(LOCATION_SERVICE);
-		LOG.info("Requesting GPS location updates...");
+		LOG.info("Requesting [" + provider + "] location updates...");
 		try {
 			locationManager.requestLocationUpdates(provider, 0, 0, listener);
 			LOG.info("Successfully registered listener for [" + provider + "]");
