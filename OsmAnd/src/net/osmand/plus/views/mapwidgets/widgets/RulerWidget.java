@@ -79,7 +79,7 @@ public class RulerWidget extends FrameLayoutEx implements ViewChangeProvider {
 
 	public boolean updateInfo(@NonNull RotatedTileBox tileBox) {
 		boolean visible = true;
-		float mapDensity = settings.MAP_DENSITY.get();
+		float mapDensity = app.getOsmandMap().getMapDensity();
 		// update cache
 		if (mapTileView.isZooming() || mapTileView.isCarView()) {
 			visible = false;

@@ -114,12 +114,21 @@ public class SearchPhrase {
 			foundWords.addAll(this.words);
 			leftWords = leftWords.subList(leftWords.size(), leftWords.size());
 		}
+
 		for (SearchWord w : leftWords) {
 			if (textToSearch.startsWith(w.getWord() + DELIMITER)) {
 				foundWords.add(w);
 				textToSearch = textToSearch.substring(w.getWord().length() + DELIMITER.length());
 			} else {
 				break;
+			}
+		}
+		for (SearchWord w : foundWords) {
+			if (w.getResult() != null && w.getResult().object instanceof CustomSearchPoiFilter specialSorting
+					&& specialSorting.getDefaultSearchType() != null) {
+//						settings.getSortType() == null
+				settings = new SearchSettings(settings);
+				settings.setSortType(specialSorting.getDefaultSearchType());
 			}
 		}
 		return createNewSearchPhrase(settings, text, foundWords, textToSearch);
@@ -172,17 +181,6 @@ public class SearchPhrase {
 		return sp;
 	}
 
-	private boolean likelyAddressSearch(String fullText) {
-		// for now only simple check - we just check if it contains digit
-		for (int i = 0; i < fullText.length(); i++) {
-			char c = fullText.charAt(i);
-			if (c >= '0' && c <= '9') {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	private boolean needDecryptAbbreviations() {
 		String langs = settings != null ? settings.getRegionLang() : null;
 		if (langs != null) {
@@ -223,8 +221,12 @@ public class SearchPhrase {
 		return cnt;
 	}
 	
-	public SearchPhrase selectWord(SearchResult res, List<String> unknownWords, boolean lastComplete) {
-		SearchPhrase sp = new SearchPhrase(this.settings, this.clt);
+	SearchPhrase selectWord(SearchResult res, List<String> unknownWords, boolean lastComplete) {
+		return selectWord(res, this.settings, unknownWords, lastComplete);
+	}
+	
+	SearchPhrase selectWord(SearchResult res, SearchSettings settings, List<String> unknownWords, boolean lastComplete) {
+		SearchPhrase sp = new SearchPhrase(settings, this.clt);
 		addResult(res, sp);
 		SearchResult prnt = res.parentSearchResult;
 		while (prnt != null) {
@@ -523,12 +525,8 @@ public class SearchPhrase {
 		return settings.isEmptyQueryAllowed();
 	}
 
-	public boolean isSortByName() {
-		return settings.isSortByName();
-	}
-
-	public SearchPhrase selectWord(SearchResult res) {
-		return selectWord(res, null, false);
+	public SearchPhrase selectWord(SearchResult res, SearchSettings settings) {
+		return selectWord(res, settings, null, false);
 	}
 	
 

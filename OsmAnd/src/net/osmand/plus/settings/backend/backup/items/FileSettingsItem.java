@@ -386,6 +386,14 @@ public class FileSettingsItem extends StreamSettingsItem {
 	}
 
 	@Override
+	public void apply() {
+		if (subtype == FileSubtype.COLOR_PALETTE) {
+			String paletteId = file.getName().replace(".txt", "");
+			app.getPaletteRepository().invalidatePalette(paletteId);
+		}
+	}
+
+	@Override
 	public void delete() {
 		Algorithms.removeAllFiles(file);
 	}

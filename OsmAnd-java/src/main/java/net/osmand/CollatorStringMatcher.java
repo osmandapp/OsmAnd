@@ -219,11 +219,8 @@ public class CollatorStringMatcher implements StringMatcher {
 			String normalized = ArabicNormalizer.normalize(fullText);
 			fullText = normalized == null ? fullText : normalized;
 		}
-		int i;
 		fullText = SearchAlgorithms.removeApostrophes(fullText);
-		while ((i = fullText.indexOf('ß')) != -1) {
-			fullText = fullText.substring(0, i) + "ss" + fullText.substring(i + 1);
-		}
+		fullText = SearchAlgorithms.replaceGermanSS(fullText);
 		return fullText;
 	}
 

@@ -1223,7 +1223,7 @@
     <string name="poi_aerialway_bicycle_summer">Povolené len v lete</string>
     <string name="poi_aerialway_access_entry">Iba vstup</string>
     <string name="poi_aerialway_access_exit">Iba výstup</string>
-    <string name="poi_aerialway_access_both">Vstup aj výstup</string>
+    <string name="poi_aerialway_access_both">Vchod aj výstup</string>
     <string name="poi_aerialway_summer_access_entry">Letný prístup: len vstup</string>
     <string name="poi_aerialway_summer_access_exit">Letný prístup: len výstup</string>
     <string name="poi_aerialway_summer_access_both">Letný prístup: vstup aj výstup</string>

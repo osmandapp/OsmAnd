@@ -48,6 +48,10 @@ public abstract class AndroidTest {
 	@After
 	public void cleanUp() {
 		unregisterIdlingResources(appInitIdlingResource);
+
+		if (appInitIdlingResource != null) {
+			appInitIdlingResource.unregisterListener();
+		}
 	}
 
 	protected void registerIdlingResources(@NonNull IdlingResource... idlingResources) {

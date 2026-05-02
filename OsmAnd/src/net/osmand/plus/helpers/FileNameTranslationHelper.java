@@ -78,7 +78,7 @@ public class FileNameTranslationHelper {
 		} else if (SrtmDownloadItem.isSrtmFile(fileName)) {
 			return getTerrainName(ctx, regions, basename, R.string.download_srtm_maps);
 		} else if (basename.endsWith(STARS_ARTICLES)) {
-			return ctx.getString(R.string.stars_articles);
+			return ctx.getString(R.string.astronomy_map);
 		} else if (fileName.length() == 2) { //voice recorded files
 			String name = getStringFromResName(ctx, "lang_" + fileName);
 			if (name != null) {
