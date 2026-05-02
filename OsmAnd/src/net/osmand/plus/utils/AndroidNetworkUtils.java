@@ -1077,39 +1077,4 @@ public class AndroidNetworkUtils {
 		return Build.VERSION.SDK_INT < Build.VERSION_CODES.N_MR1 ? "http://" : "https://";
 	}
 
-	@Nullable
-	public static String okHttpRedirectRequester(@NonNull String url) {
-		OkHttpClient client = new OkHttpClient.Builder()
-				.followRedirects(false)
-				.followSslRedirects(false)
-				.readTimeout(Duration.ofMillis(READ_TIMEOUT))
-				.writeTimeout(Duration.ofMillis(READ_TIMEOUT))
-				.connectTimeout(Duration.ofMillis(CONNECT_TIMEOUT))
-				.callTimeout(Duration.ofMillis(CONNECT_TIMEOUT + READ_TIMEOUT))
-				.build();
-
-		okhttp3.Request req = new okhttp3.Request.Builder()
-				.header("User-Agent", NetworkImageLoader.USER_AGENT)
-				.url(url)
-				.head()
-				.build();
-
-		try (Response resp = client.newCall(req).execute()) {
-			if (resp.code() < 300 || resp.code() >= 400) {
-				LOG.error("Got no Redirect from " + url);
-				return null;
-			}
-			String location = resp.header("Location");
-			if (location == null || location.isEmpty()) {
-				LOG.error("Got no Location from " + url);
-				return null;
-			}
-			HttpUrl redirected = resp.request().url().resolve(location);
-			return redirected != null ? redirected.toString() : null;
-		} catch (Exception e) {
-			LOG.error("Got error from " + url + " " + e.getMessage());
-			return null;
-		}
-	}
-
 }
