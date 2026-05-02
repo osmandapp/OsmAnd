@@ -7,7 +7,6 @@ import com.github.scribejava.core.model.Verb;
 import net.osmand.osm.oauth.OsmOAuthAuthorizationClient;
 import net.osmand.shared.api.NetworkAPI;
 import net.osmand.shared.api.NetworkAPI.NetworkResponse;
-import net.osmand.shared.api.NetworkAPIImpl;
 import net.osmand.shared.util.PlatformUtil;
 import net.osmand.util.Algorithms;
 
@@ -15,7 +14,9 @@ import org.apache.commons.logging.Log;
 
 import java.io.*;
 import java.net.HttpURLConnection;
+import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
+import java.net.Proxy;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -201,8 +202,11 @@ public class NetworkUtils {
 
 	public static HttpURLConnection getHttpURLConnection(String url) throws MalformedURLException, IOException {
 		NetworkAPI networkAPI = PlatformUtil.INSTANCE.getNetworkAPI();
-		if (networkAPI instanceof NetworkAPIImpl api) {
-			return api.getHttpURLConnection(url);
+		String proxyHost = networkAPI.getProxyHost();
+		int proxyPort = networkAPI.getProxyPort();
+		if (!Algorithms.isEmpty(proxyHost) && proxyPort > 0) {
+			Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyHost, proxyPort));
+			return (HttpURLConnection) new URL(url).openConnection(proxy);
 		}
 		return (HttpURLConnection) new URL(url).openConnection();
 	}

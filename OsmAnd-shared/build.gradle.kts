@@ -65,12 +65,14 @@ kotlin {
 			implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
 			implementation("co.touchlab:stately-concurrent-collections:$statelyVersion")
             implementation("io.ktor:ktor-client-core:$ktorVersion")
+            implementation("io.ktor:ktor-client-encoding:$ktorVersion")
 		}
 		jvmMain.dependencies {
 			//implementation(kotlin("stdlib-jdk8"))
 			implementation("net.sf.kxml:kxml2:$kxml2Version")
 			implementation("org.xerial:sqlite-jdbc:$sqliteJDBCVersion")
 			implementation("commons-logging:commons-logging:$commonLoggingVersion")
+            implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
 		}
 		androidMain.dependencies {
 			implementation("androidx.sqlite:sqlite:$sqliteVersion")
@@ -87,6 +89,7 @@ kotlin {
 
 		commonTest.dependencies {
 			implementation("org.jetbrains.kotlin:kotlin-test:2.0.0")
+            implementation("io.ktor:ktor-client-mock:$ktorVersion")
 		}
 	}
 }
