@@ -87,7 +87,7 @@ public class QuickSearchHelper implements ResourceListener {
 		this.app = app;
 		OsmandSettings settings = app.getSettings();
 		core = new SearchUICore(app.getPoiTypes(), settings.MAP_PREFERRED_LOCALE.get(),
-				settings.MAP_TRANSLITERATE_NAMES.get());
+				settings.MAP_TRANSLITERATE_NAMES.get(), () -> settings.isInternetConnectionAvailable());
 		app.getResourceManager().addResourceListener(this);
 	}
 

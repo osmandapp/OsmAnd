@@ -46,6 +46,7 @@ import java.text.DecimalFormatSymbols;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.BooleanSupplier;
 
 public class SearchCoreFactory {
 
@@ -1943,6 +1944,7 @@ public class SearchCoreFactory {
 	public static class SearchLocationAndUrlAPI extends SearchBaseAPI {
 
 		private static final int OLC_RECALC_DISTANCE_THRESHOLD = 100000; // 100 km
+		private static final BooleanSupplier DEFAULT_INTERNET_CONNECTION_AVAILABLE = () -> true;
 		private int olcPhraseHash;
 		private LatLon olcPhraseLocation;
 		private ParsedOpenLocationCode cachedParsedCode;
@@ -1950,10 +1952,18 @@ public class SearchCoreFactory {
 		private final DecimalFormat latLonFormatter = new DecimalFormat("#.0####", new DecimalFormatSymbols(Locale.US));
 		
 		private SearchAmenityByNameAPI amenitiesApi;
+		private final BooleanSupplier internetConnectionAvailable;
 
 		public SearchLocationAndUrlAPI(SearchAmenityByNameAPI amenitiesApi) {
+			this(amenitiesApi, DEFAULT_INTERNET_CONNECTION_AVAILABLE);
+		}
+
+		public SearchLocationAndUrlAPI(SearchAmenityByNameAPI amenitiesApi, BooleanSupplier internetConnectionAvailable) {
 			super(ObjectType.LOCATION, ObjectType.PARTIAL_LOCATION);
 			this.amenitiesApi = amenitiesApi;
+			this.internetConnectionAvailable = internetConnectionAvailable != null
+					? internetConnectionAvailable
+					: DEFAULT_INTERNET_CONNECTION_AVAILABLE;
 		}
 
 		@Override
@@ -2178,7 +2188,7 @@ public class SearchCoreFactory {
 
 		private String resolveRedirectUrl(String url) {
 			URI uri = GeoPointParserUtil.createUri(url);
-			if (uri != null) {
+			if (uri != null && internetConnectionAvailable.getAsBoolean()) {
 				return PlatformUtil.INSTANCE.getNetworkAPI().resolveRedirectUrl(uri.toString());
 			}
 			return null;

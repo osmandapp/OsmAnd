@@ -1,6 +1,7 @@
 package net.osmand.search;
 
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import net.osmand.OsmAndCollator;
 import net.osmand.data.LatLon;
@@ -26,6 +27,18 @@ public class LocationSearchTest {
 	public void testGeo() throws IOException {
 		search("geo:34.99393,-106.61568 (Treasure Island, other irrelevant info) ", new LatLon(34.99393, -106.61568));
 		search("http://download.osmand.net/go?lat=34.99393&lon=-106.61568&z=11", new LatLon(34.99393, -106.61568));
+	}
+
+	@Test
+	public void testGooGlRedirectSkippedWithoutInternetConnection() throws IOException {
+		AtomicBoolean internetConnectionChecked = new AtomicBoolean(false);
+		SearchResultMatcher srm = new SearchUICore.SearchResultMatcher(null, null, 0, null, 100);
+		new SearchCoreFactory.SearchLocationAndUrlAPI(null, () -> {
+			internetConnectionChecked.set(true);
+			return false;
+		}).search(SearchPhrase.emptyPhrase().generateNewPhrase("http://goo.gl/maps/Cji0V", null), srm);
+		Assert.assertTrue(internetConnectionChecked.get());
+		Assert.assertEquals(0, srm.getRequestResults().size());
 	}
 	
 	@Test
