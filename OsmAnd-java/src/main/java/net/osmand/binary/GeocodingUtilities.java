@@ -238,7 +238,7 @@ public class GeocodingUtilities {
 		List<String> s2words = prepareStreetName(undashed2, false);
 		s1words.sort(Collator.getInstance());
 		s2words.sort(Collator.getInstance());
-		if (s1words.equals(s2words)) {
+		if (!s1words.isEmpty() && s1words.equals(s2words)) {
 			return true;
 		}
 
@@ -247,7 +247,7 @@ public class GeocodingUtilities {
 			s2words = prepareStreetName(undashed2, true);
 			s1words.sort(Collator.getInstance());
 			s2words.sort(Collator.getInstance());
-			return s1words.equals(s2words);
+			return !s1words.isEmpty() && s1words.equals(s2words);
 		}
 
 		return false;
