@@ -3996,4 +3996,14 @@
     <string name="open_till_short">Ata</string>
     <string name="map_widget_memory_info">Información sobre memoria</string>
     <string name="years_3">3 anos</string>
+    <string name="obd_simulation_device">Dispositivo de simulación</string>
+    <string name="astronomy_map">Mapa de astronomía</string>
+    <string name="astro_designations">Designacións</string>
+    <string name="map_widget_memory_info_desc">Monitoriza a memoria dinámica de Java, as asignacións nativas e a memoria gráfica.</string>
+    <string name="memory_used_settings">Morea de Java usado</string>
+    <string name="memory_allocated_settings">Morea de Java asignado</string>
+    <string name="memory_limit_settings">Límite máximo de morea de Java</string>
+    <string name="memory_native_settings">Asignación nativa da morea</string>
+    <string name="memory_graphics_settings">Memoria gráfica</string>
+    <string name="shared_string_heap">Grupo</string>
 </resources>
