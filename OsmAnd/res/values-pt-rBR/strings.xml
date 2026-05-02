@@ -6522,4 +6522,7 @@
     <string name="open_from_short">De</string>
     <string name="astronomy_map">Mapa astronômico</string>
     <string name="astro_designations">Designações</string>
+    <string name="obd_simulation_device">Dispositivo de simulação</string>
+    <string name="memory_used_settings">Heap do Java usado</string>
+    <string name="memory_limit_settings">Limite máximo do heap do Java</string>
 </resources>
