@@ -28,6 +28,7 @@ import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.shared.media.domain.MediaItem;
+import net.osmand.shared.media.domain.MediaOrigin;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -135,17 +136,28 @@ public class GalleryRowBuilder {
 			@Override
 			public void onMediaItemClicked(@NonNull MediaItem mediaItem) {
 				if (onlinePhotos) {
-					GalleryPhotoPagerFragment.showInstance(mapActivity, controller.getItemIndexFromUrl(mediaItem.getSourceUri()));
-				} else if (mediaItem instanceof MediaItem.Mapillary mapillary) {
+					GalleryPhotoPagerFragment.showInstance(mapActivity, controller.getItemIndexBySourceUri(mediaItem.getSourceUri()));
+				} else if (mediaItem.getOrigin() == MediaOrigin.MAPILLARY && mediaItem instanceof MediaItem.Remote remote) {
 					mapActivity.getContextMenu().close();
+					var metadata = remote.getMetadata();
+					var resource = mediaItem.getResource();
+					var details = mediaItem.getDetails();
+
+					if (Algorithms.isEmpty(metadata.getKey())) {
+						return;
+					}
 
 					LatLon location = null;
-					if (mapillary.getLatitude() != null && mapillary.getLongitude() != null) {
-						location = new LatLon(mapillary.getLatitude(), mapillary.getLongitude());
+					if (metadata.getLatitude() != null && metadata.getLongitude() != null) {
+						location = new LatLon(metadata.getLatitude(), metadata.getLongitude());
 					}
-					MapillaryImageDialog.show(mapActivity, mapillary.getKey(),
-							mapillary.getHiResUrl(), mapillary.getWebpageUrl(), location,
-							mapillary.getCameraAngle(), app.getString(R.string.mapillary), null, true);
+
+					MapillaryImageDialog.show(
+							mapActivity, metadata.getKey(),
+							resource.getFullUri(), details.getViewUrl(),
+							location, metadata.getCameraAngle(),
+							app.getString(R.string.mapillary), null, true
+					);
 				}
 			}
 

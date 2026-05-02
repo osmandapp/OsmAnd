@@ -92,7 +92,7 @@ class GalleryMediaHolder(
 		loadingImage?.cancel()
 		val mediaItem = galleryItem.mediaItem
 
-		loadingImage = mediaProvider.loadStandardImage(mediaItem, object : ImageLoaderCallback {
+		loadingImage = mediaProvider.loadPreview(mediaItem, object : ImageLoaderCallback {
 			override fun onStart(bitmap: Bitmap?) {}
 
 			override fun onSuccess(bitmap: Bitmap) {
@@ -125,7 +125,7 @@ class GalleryMediaHolder(
 		nightMode: Boolean
 	) {
 		val mediaItem = galleryItem.mediaItem
-		loadingImage = mediaProvider.loadHiResImage(mediaItem, object : ImageLoaderCallback {
+		loadingImage = mediaProvider.loadFull(mediaItem, object : ImageLoaderCallback {
 			override fun onStart(bitmap: Bitmap?) {}
 
 			override fun onSuccess(bitmap: Bitmap) {
@@ -218,12 +218,13 @@ class GalleryMediaHolder(
 	}
 
 	private fun getDisplayUrl(mediaItem: MediaItem): String {
-		return when (mediaItem) {
-			is MediaItem.Remote -> mediaItem.webpageUrl ?: mediaItem.sourceUrl
-			is MediaItem.Wiki -> mediaItem.wikiImage.imageStubUrl
-			is MediaItem.Gallery -> mediaItem.uri
-			is MediaItem.Internal -> mediaItem.relativePath
-			is MediaItem.Mapillary -> mediaItem.webpageUrl ?: mediaItem.sourceUrl
+		val details = mediaItem.details
+		val resource = mediaItem.resource
+
+		return when {
+			details.viewUrl.isNotEmpty() -> details.viewUrl
+			!resource.fullUri.isNullOrEmpty() -> resource.fullUri ?: mediaItem.sourceUri
+			else -> mediaItem.sourceUri
 		}
 	}
 

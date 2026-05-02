@@ -33,10 +33,10 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
+import net.osmand.plus.gallery.GalleryItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
-import net.osmand.plus.mapcontextmenu.builders.cards.UrlImageCard;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
@@ -48,8 +48,8 @@ import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
 import net.osmand.plus.wikipedia.WikiAlgorithms;
-import net.osmand.plus.wikipedia.WikiImageCard;
-import net.osmand.shared.wiki.WikiMetadata;
+import net.osmand.shared.media.MediaUrlResolver;
+import net.osmand.shared.media.domain.MediaItem;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -87,7 +87,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 		} else if (args != null && args.containsKey(SELECTED_POSITION_KEY)) {
 			selectedPosition = args.getInt(SELECTED_POSITION_KEY);
 		}
-		if (selectedPosition > controller.getOnlinePhotoCards().size()) {
+		if (selectedPosition >= controller.getOnlinePhotoItems().size()) {
 			dismiss();
 		}
 	}
@@ -95,7 +95,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-			@Nullable Bundle savedInstanceState) {
+	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		ViewGroup view = (ViewGroup) inflate(R.layout.gallery_photo_fragment, container, false);
 
@@ -108,11 +108,11 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 		descriptionShadow = view.findViewById(R.id.description_shadow);
 		descriptionContainer = view.findViewById(R.id.description_container);
 
-		List<ImageCard> imageCards = controller.getOnlinePhotoCards();
-		if (selectedPosition < imageCards.size()) {
+		List<GalleryItem> items = controller.getOnlinePhotoItems();
+		if (selectedPosition < items.size()) {
 			setupViewPager(view);
 			preloadThumbNails();
-			updateImageDescriptionRow(getSelectedImageCard());
+			updateImageDescriptionRow(getSelectedMediaItem());
 		}
 
 		return view;
@@ -132,23 +132,25 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 	}
 
 	private void preloadThumbNails(boolean next) {
-		List<ImageCard> imageCards = controller.getOnlinePhotoCards();
-		if (imageCards.size() <= 1) {
+		List<GalleryItem> items = controller.getOnlinePhotoItems();
+		if (items.size() <= 1) {
 			return;
 		}
 
 		if (next) {
 			int startPreloadThumbnailIndex = selectedPosition + 1;
-			if (startPreloadThumbnailIndex >= imageCards.size()) {
+			if (startPreloadThumbnailIndex >= items.size()) {
 				return;
 			}
 			int lastPreloadThumbnailIndex = startPreloadThumbnailIndex + PRELOAD_THUMBNAILS_COUNT;
-			if (lastPreloadThumbnailIndex >= imageCards.size()) {
-				lastPreloadThumbnailIndex = imageCards.size() - 1;
+			if (lastPreloadThumbnailIndex >= items.size()) {
+				lastPreloadThumbnailIndex = items.size() - 1;
 			}
 			for (int i = selectedPosition; i < lastPreloadThumbnailIndex; i++) {
-				ImageCard card = imageCards.get(i);
-				downloadThumbnail(card.getThumbnailUrl());
+				MediaItem mediaItem = getMediaItem(items.get(i));
+				if (mediaItem != null) {
+					downloadThumbnail(MediaUrlResolver.getThumbnailUrl(mediaItem));
+				}
 			}
 		} else {
 			int startPreloadThumbnailIndex = selectedPosition - 1;
@@ -160,8 +162,10 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 				lastPreloadThumbnailIndex = 0;
 			}
 			for (int i = selectedPosition; i > lastPreloadThumbnailIndex; i--) {
-				ImageCard card = imageCards.get(i);
-				downloadThumbnail(card.getThumbnailUrl());
+				MediaItem mediaItem = getMediaItem(items.get(i));
+				if (mediaItem != null) {
+					downloadThumbnail(MediaUrlResolver.getThumbnailUrl(mediaItem));
+				}
 			}
 		}
 	}
@@ -178,24 +182,20 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 		super.onSaveInstanceState(outState);
 	}
 
-	private void updateImageDescriptionRow(@NonNull ImageCard imageCard) {
-		if (imageCard instanceof WikiImageCard wikiImageCard) {
-			dateView.setVisibility(View.VISIBLE);
-			authorView.setVisibility(View.VISIBLE);
-			licenseView.setVisibility(View.VISIBLE);
+	private void updateImageDescriptionRow(@Nullable MediaItem mediaItem) {
+		if (mediaItem == null) return;
+		var details = mediaItem.getDetails();
+		setDescription(details.getDescription());
 
-			WikiMetadata.Metadata metadata = wikiImageCard.getWikiImage().getMetadata();
-			setDescription(metadata.getDescription(app.getLanguage()));
-			setMetaData(metadata.getAuthor(), metadata.getDate(), metadata.getLicense());
-		} else {
-			setDescription(null);
-			dateView.setVisibility(View.INVISIBLE);
-			authorView.setVisibility(View.INVISIBLE);
-			licenseView.setVisibility(View.INVISIBLE);
-		}
+		dateView.setVisibility(Algorithms.isEmpty(details.getDate()) ? View.INVISIBLE : View.VISIBLE);
+		authorView.setVisibility(Algorithms.isEmpty(details.getAuthor()) ? View.INVISIBLE : View.VISIBLE);
+		licenseView.setVisibility(Algorithms.isEmpty(details.getLicense()) ? View.INVISIBLE : View.VISIBLE);
+		setMetaData(details.getAuthor(), details.getDate(), details.getLicense());
 
-		int iconId = imageCard.getTopIconId();
+		String iconName = mediaItem.getOrigin().getIconName();
+		int iconId = iconName != null ? AndroidUtils.getDrawableId(app, iconName) : 0;
 		Drawable icon = iconId != 0 ? app.getUIUtilities().getIcon(iconId) : null;
+
 		sourceView.setImageDrawable(icon);
 		AndroidUiHelper.updateVisibility(sourceView, icon != null);
 	}
@@ -207,7 +207,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 	}
 
 	private void setMetaData(@Nullable String author, @Nullable String date,
-			@Nullable String license) {
+	                         @Nullable String license) {
 		String formattedDate = WikiAlgorithms.formatWikiDate(date);
 
 		String fullDate = getString(R.string.ltr_or_rtl_combine_via_colon,
@@ -327,44 +327,45 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 	}
 
 	private void shareImage() {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
+		callActivity(activity -> {
+			MediaItem mediaItem = getSelectedMediaItem();
+			String shareUrl = MediaUrlResolver.getShareUrl(mediaItem);
+			if (Algorithms.isEmpty(shareUrl)) return;
+
 			Intent sendIntent = new Intent();
 			sendIntent.setAction(Intent.ACTION_SEND);
 			sendIntent.setType("text/plain");
-			sendIntent.putExtra(Intent.EXTRA_TEXT, getSelectedImageCard().getImageHiresUrl());
+			sendIntent.putExtra(Intent.EXTRA_TEXT, shareUrl);
 			Intent chooserIntent = Intent.createChooser(sendIntent, getString(R.string.shared_string_share));
 
 			AndroidUtils.startActivityIfSafe(activity, chooserIntent);
-		}
+		});
 	}
 
 	public void showContextWidgetMenu(@NonNull View view) {
-		ImageCard card = getSelectedImageCard();
+		MediaItem mediaItem = getSelectedMediaItem();
+		if (mediaItem == null) {
+			return;
+		}
 		List<PopUpMenuItem> items = new ArrayList<>();
 		UiUtilities uiUtilities = app.getUIUtilities();
 		int iconColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitleId(R.string.shared_string_details)
 				.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_info_outlined, iconColor))
-				.setOnClickListener(item -> GalleryDetailsFragment.showInstance(getMapActivity(), selectedPosition))
+				.setOnClickListener(item -> callActivity(activity -> {
+					GalleryDetailsFragment.showInstance(activity, selectedPosition);
+				}))
 				.create());
 
-		if (card instanceof WikiImageCard || card instanceof UrlImageCard urlCard && urlCard.getSuitableUrl() != null) {
+		String browserUrl = MediaUrlResolver.getBrowserUrl(mediaItem);
+		if (!Algorithms.isEmpty(browserUrl)) {
 			items.add(new PopUpMenuItem.Builder(app)
 					.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_external_link, iconColor))
 					.setTitleId(R.string.open_in_browser)
-					.setOnClickListener(item -> {
-						FragmentActivity activity = getActivity();
-						if (activity != null) {
-							if (card instanceof WikiImageCard wikiImageCard) {
-								AndroidUtils.openUrl(activity, wikiImageCard.getWikiImage().getUrlWithCommonAttributions(), nightMode);
-							} else {
-								UrlImageCard urlImageCard = (UrlImageCard) card;
-								AndroidUtils.openUrl(activity, urlImageCard.getSuitableUrl(), nightMode);
-							}
-						}
-					})
+					.setOnClickListener(item -> callActivity(activity -> {
+						AndroidUtils.openUrl(activity, browserUrl, nightMode);
+					}))
 					.create());
 		}
 
@@ -372,11 +373,10 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 				.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_gsave_dark, iconColor))
 				.setTitleId(R.string.shared_string_download)
 				.setOnClickListener(item -> {
-					String downloadUrl = card.getImageHiresUrl();
-					if (Algorithms.isEmpty(downloadUrl)) {
-						downloadUrl = card.getImageUrl();
+					String downloadUrl = MediaUrlResolver.getDownloadUrl(mediaItem);
+					if (!Algorithms.isEmpty(downloadUrl)) {
+						downloadImage(downloadUrl);
 					}
-					downloadImage(downloadUrl);
 				})
 				.create());
 
@@ -388,16 +388,20 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 		PopUpMenu.show(displayData);
 	}
 
-	private void downloadImage(String url) {
+	private void downloadImage(@NonNull String url) {
+		callMapActivity(activity -> downloadImage(activity, url));
+	}
+
+	private void downloadImage(@NonNull MapActivity activity, @NonNull String url) {
 		String fileName = url.substring(url.lastIndexOf('/') + 1);
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
 			startDownloading(fileName, url);
 		} else {
-			if (AndroidUtils.hasPermission(getMapActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+			if (AndroidUtils.hasPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 				startDownloading(fileName, url);
 			} else {
-				AndroidUtils.hasPermission(getMapActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
-				ActivityCompat.requestPermissions(getMapActivity(), new String[] {
+				AndroidUtils.hasPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+				ActivityCompat.requestPermissions(activity, new String[] {
 						Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_EXTERNAL_STORAGE_PERMISSION);
 			}
 		}
@@ -417,10 +421,10 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 
 	private void setupViewPager(@NonNull View view) {
 		ViewPager pager = view.findViewById(R.id.photo_pager);
-		List<ImageCard> imageCards = controller.getOnlinePhotoCards();
+		List<GalleryItem> items = controller.getOnlinePhotoItems();
 		FragmentManager manager = getChildFragmentManager();
 
-		ViewPagerAdapter adapter = new ViewPagerAdapter(manager, imageCards);
+		ViewPagerAdapter adapter = new ViewPagerAdapter(manager, items);
 		pager.setAdapter(adapter);
 		pager.setCurrentItem(selectedPosition);
 		pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -434,7 +438,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 				boolean shouldPreloadNext = selectedPosition < position;
 				selectedPosition = position;
 				preloadThumbNails(shouldPreloadNext);
-				updateImageDescriptionRow(getSelectedImageCard());
+				updateImageDescriptionRow(getSelectedMediaItem());
 			}
 
 			@Override
@@ -445,8 +449,20 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 		pager.setPageTransformer(true, new GalleryDepthTransformer());
 	}
 
-	private ImageCard getSelectedImageCard() {
-		return controller.getOnlinePhotoCards().get(selectedPosition);
+	@Nullable
+	private MediaItem getSelectedMediaItem() {
+		return getMediaItem(getSelectedGalleryItem());
+	}
+
+	@Nullable
+	private GalleryItem getSelectedGalleryItem() {
+		List<GalleryItem> items = controller.getOnlinePhotoItems();
+		return selectedPosition >= 0 && selectedPosition < items.size() ? items.get(selectedPosition) : null;
+	}
+
+	@Nullable
+	private MediaItem getMediaItem(@Nullable GalleryItem item) {
+		return item instanceof GalleryItem.Media media ? media.getMediaItem() : null;
 	}
 
 	private void setupSelectableBackground(@NonNull View view) {
@@ -466,10 +482,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 	}
 
 	private void dismiss() {
-		FragmentActivity activity = getMyActivity();
-		if (activity != null) {
-			activity.getSupportFragmentManager().popBackStack();
-		}
+		callActivity(activity -> activity.getSupportFragmentManager().popBackStack());
 	}
 
 	@Override
@@ -481,13 +494,13 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		getMapActivity().disableDrawer();
+		callMapActivity(MapActivity::disableDrawer);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		getMapActivity().enableDrawer();
+		callMapActivity(MapActivity::enableDrawer);
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity, int selectedPosition) {
@@ -506,9 +519,9 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 
 	private static class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
-		private final List<ImageCard> pictures;
+		private final List<GalleryItem> pictures;
 
-		public ViewPagerAdapter(@NonNull FragmentManager manager, @NonNull List<ImageCard> pictures) {
+		public ViewPagerAdapter(@NonNull FragmentManager manager, @NonNull List<GalleryItem> pictures) {
 			super(manager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 			this.pictures = pictures;
 		}

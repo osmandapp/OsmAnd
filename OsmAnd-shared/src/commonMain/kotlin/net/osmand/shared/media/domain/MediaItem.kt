@@ -1,19 +1,24 @@
 package net.osmand.shared.media.domain
 
-import net.osmand.shared.wiki.WikiImage
+import net.osmand.shared.util.Localization
 
-enum class MediaOrigin(val iconName: String?) {
-	OSM("ic_osm"),
-	WIKIPEDIA("ic_logo_wikimedia"),
-	MAPILLARY("ic_logo_mapillary"),
-	UNKNOWN(null)
+enum class MediaOrigin(
+	val titleKey: String? = null,
+	val iconName: String? = null
+) {
+	OSM(iconName = "ic_osm"),
+	WIKIPEDIA(titleKey = "wikimedia", iconName = "ic_logo_wikimedia"),
+	MAPILLARY(iconName = "ic_logo_mapillary"),
+	UNKNOWN;
+
+	// TODO: extract from domain logic
+	fun getTitle() = if (titleKey != null) Localization.getString(titleKey) else ""
 }
 
 enum class MediaType {
 	PHOTO, VIDEO, AUDIO, UNKNOWN;
 
 	companion object {
-		// Maps standard MIME types from GPX <type> tags to MediaType
 		fun fromMimeType(mimeType: String?): MediaType {
 			val normalized = mimeType?.trim()?.lowercase() ?: return UNKNOWN
 			return when {
@@ -26,84 +31,82 @@ enum class MediaType {
 	}
 }
 
-// Encapsulates URLs for different preview sizes provided by remote servers
-data class MediaContent(
-	val standardUrl: String,
-	val thumbnailUrl: String,
-	val hiResUrl: String
+/**
+ * Resolved URIs used by UI/providers to display or consume media.
+ * For local media these URIs may all point to the same source URI.
+ */
+data class MediaResource(
+	val thumbnailUri: String?,
+	val previewUri: String?,
+	val fullUri: String?
+)
+
+data class MediaDetails(
+	val description: String = "",
+	val author: String = "",
+	val date: String = "",
+	val license: String = "",
+	val viewUrl: String = ""
+)
+
+data class RemoteMetadata(
+	val key: String = "",
+	val latitude: Double? = null,
+	val longitude: Double? = null,
+	val cameraAngle: Double = Double.NaN,
+	val timestamp: Long? = null,
+	val userName: String = "",
+	val externalLink: Boolean = false
 )
 
 sealed class MediaItem {
+
 	abstract val title: String
 	abstract val type: MediaType
 	abstract val origin: MediaOrigin
 	abstract val sourceUri: String
+	abstract val resource: MediaResource 
+	abstract val details: MediaDetails
 
-	// 1. Internal Media
-	// Represents files physically stored within the app's internal storage (e.g., A/V notes).
-	// Uses relative paths (e.g., "avnotes/video.mp4").
 	data class Internal(
 		val relativePath: String,
 		override val title: String,
 		override val type: MediaType,
-		override val origin: MediaOrigin = MediaOrigin.UNKNOWN
+		override val origin: MediaOrigin = MediaOrigin.UNKNOWN,
+		override val details: MediaDetails = MediaDetails()
 	) : MediaItem() {
 		override val sourceUri: String = relativePath
+		override val resource: MediaResource = MediaResource(
+			thumbnailUri = relativePath,
+			previewUri = relativePath,
+			fullUri = relativePath
+		)
 	}
 
-	// 2. System Gallery Media
-	// Represents files located outside the app's internal storage, chosen by the user.
-	// Uses absolute URIs (e.g., "content://..." on Android or "file://..." on iOS).
 	data class Gallery(
 		val uri: String,
 		override val title: String,
 		override val type: MediaType,
-		override val origin: MediaOrigin = MediaOrigin.UNKNOWN
+		override val origin: MediaOrigin = MediaOrigin.UNKNOWN,
+		override val details: MediaDetails = MediaDetails()
 	) : MediaItem() {
 		override val sourceUri: String = uri
+		override val resource: MediaResource = MediaResource(
+			thumbnailUri = uri,
+			previewUri = uri,
+			fullUri = uri
+		)
 	}
 
-	// 3. Remote Web Media
-	// Represents media hosted on external servers (http:// or https://).
-	// Can be any media type (photo, video, audio).
 	data class Remote(
-		val sourceUrl: String, // Direct link to the binary file for loading pixels
-		override val title: String,
-		override val type: MediaType,
-		val previewContent: MediaContent? = null,
-		val webpageUrl: String? = null, // Optional link to the source webpage for viewing in a browser
-		override val origin: MediaOrigin = MediaOrigin.UNKNOWN
-	) : MediaItem() {
-		override val sourceUri: String = sourceUrl
-	}
-
-	// 4. Wikipedia Media
-	// Legacy wrapper for the existing WikiImage data structure.
-	data class Wiki(
-		val wikiImage: WikiImage,
-		override val origin: MediaOrigin = MediaOrigin.WIKIPEDIA
-	) : MediaItem() {
-		override val title: String = wikiImage.imageName
-		override val type: MediaType = MediaType.PHOTO
-		override val sourceUri: String = wikiImage.imageStubUrl
-	}
-
-	// 5. Mapillary Media
-	// Contains specific metadata required by the Mapillary plugin (key, coordinates, camera angle).
-	data class Mapillary(
-		val key: String,
-		val latitude: Double?,
-		val longitude: Double?,
-		val cameraAngle: Double,
 		val sourceUrl: String,
 		override val title: String,
-		override val type: MediaType = MediaType.PHOTO,
-		val previewContent: MediaContent? = null,
-		val webpageUrl: String? = null
+		override val type: MediaType,
+		override val origin: MediaOrigin = MediaOrigin.UNKNOWN,
+		override val resource: MediaResource,
+		override val details: MediaDetails = MediaDetails(),
+		val metadata: RemoteMetadata = RemoteMetadata()
 	) : MediaItem() {
-		override val origin: MediaOrigin = MediaOrigin.MAPILLARY
 		override val sourceUri: String = sourceUrl
-
-		fun getHiResUrl() = previewContent?.hiResUrl ?: sourceUrl
 	}
 }

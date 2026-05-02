@@ -8,9 +8,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.gallery.GalleryItem;
-import net.osmand.plus.gallery.LegacyMediaConverter;
+import net.osmand.plus.gallery.MediaProvider;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
+import net.osmand.shared.media.domain.MediaItem;
 import net.osmand.shared.util.NetworkImageLoader;
 import net.osmand.util.Algorithms;
 
@@ -19,14 +19,14 @@ import java.util.*;
 public class GalleryController implements IDialogController {
 
 	public static final String PROCESS_ID = "gallery_context_controller";
-	private final OsmandApplication app;
 
 	private ImageCardsHolder currentCardsHolder;
 
+	private final MediaProvider mediaProvider;
 	private final NetworkImageLoader imageLoader;
 
 	public GalleryController(@NonNull OsmandApplication app) {
-		this.app = app;
+		mediaProvider = new MediaProvider(app);
 		imageLoader = new NetworkImageLoader(app, true);
 	}
 
@@ -35,17 +35,17 @@ public class GalleryController implements IDialogController {
 	}
 
 	@NonNull
-	public List<GalleryItem> getOnlinePhotoItems() {
-		return LegacyMediaConverter.INSTANCE.convertImageCards(getOnlinePhotoCards());
+	public MediaProvider getMediaProvider() {
+		return mediaProvider;
 	}
 
 	@NonNull
-	public List<ImageCard> getOnlinePhotoCards() {
-		List<ImageCard> imageCards = new ArrayList<>();
+	public List<GalleryItem> getOnlinePhotoItems() {
+		List<GalleryItem> galleryItems = new ArrayList<>();
 		if (currentCardsHolder != null) {
-			imageCards.addAll(currentCardsHolder.getOrderedCards());
+			galleryItems.addAll(currentCardsHolder.getOrderedGalleryItems());
 		}
-		return imageCards;
+		return galleryItems;
 	}
 
 	@Nullable
@@ -66,11 +66,15 @@ public class GalleryController implements IDialogController {
 				&& Algorithms.objectEquals(currentCardsHolder.getParams(), params);
 	}
 
-	public int getItemIndexFromUrl(@NonNull String imageUrl) {
-		for (int i = 0; i < getOnlinePhotoCards().size(); i++) {
-			ImageCard card = getOnlinePhotoCards().get(i);
-			if (imageUrl.equals(card.getImageUrl())) {
-				return i;
+	public int getItemIndexBySourceUri(@NonNull String sourceUri) {
+		List<GalleryItem> items = getOnlinePhotoItems();
+		for (int i = 0; i < items.size(); i++) {
+			GalleryItem item = items.get(i);
+			if (item instanceof GalleryItem.Media media) {
+				MediaItem mediaItem = media.getMediaItem();
+				if (Algorithms.stringsEqual(sourceUri, mediaItem.getSourceUri())) {
+					return i;
+				}
 			}
 		}
 		return 0;

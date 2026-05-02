@@ -17,7 +17,7 @@ import net.osmand.plus.mapcontextmenu.gallery.holders.MapillaryContributeHolder
 import net.osmand.plus.mapcontextmenu.gallery.holders.NoImagesHolder
 import net.osmand.plus.mapcontextmenu.gallery.holders.NoInternetHolder
 import net.osmand.plus.utils.UiUtilities
-import net.osmand.shared.media.domain.MediaItem
+import net.osmand.shared.media.domain.MediaOrigin
 
 class GalleryGridAdapter(
 	private val mapActivity: MapActivity,
@@ -45,7 +45,7 @@ class GalleryGridAdapter(
 			var addedMapillaryCards = 0
 
 			for (item in newItems) {
-				if (item is GalleryItem.Media && item.mediaItem is MediaItem.Mapillary) {
+				if (item is GalleryItem.Media && item.mediaItem.origin == MediaOrigin.MAPILLARY) {
 					if (addedMapillaryCards < 5) {
 						limitedItems.add(item)
 						addedMapillaryCards++

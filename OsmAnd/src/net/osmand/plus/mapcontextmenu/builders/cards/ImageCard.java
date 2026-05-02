@@ -238,4 +238,8 @@ public abstract class ImageCard extends AbstractCard {
 	public void setDistance(float distance) {
 		this.distance = distance;
 	}
+
+	public boolean isExternalLink() {
+		return externalLink;
+	}
 }

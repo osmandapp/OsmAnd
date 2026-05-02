@@ -21,18 +21,17 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
+import net.osmand.plus.gallery.GalleryItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.DistanceByTapFragment;
 import net.osmand.plus.wikipedia.WikiAlgorithms;
-import net.osmand.plus.wikipedia.WikiImageCard;
-import net.osmand.shared.wiki.WikiMetadata;
+import net.osmand.shared.media.MediaUrlResolver;
+import net.osmand.shared.media.domain.MediaDetails;
+import net.osmand.shared.media.domain.MediaItem;
 import net.osmand.util.Algorithms;
-
-import java.util.Set;
 
 public class GalleryDetailsFragment extends BaseFullScreenFragment {
 
@@ -89,28 +88,34 @@ public class GalleryDetailsFragment extends BaseFullScreenFragment {
 		AndroidUiHelper.updateVisibility(toolbar.findViewById(R.id.toolbar_subtitle), false);
 	}
 
-	private ImageCard getSelectedCard() {
-		return controller.getOnlinePhotoCards().get(selectedPosition);
+	@Nullable
+	private GalleryItem getSelectedGalleryItem() {
+		return controller.getOnlinePhotoItems().get(selectedPosition);
 	}
 
 	private void updateContent(@NonNull View view) {
 		ViewGroup container = view.findViewById(R.id.container);
 		container.removeAllViews();
 
-		ImageCard card = getSelectedCard();
-		WikiMetadata.Metadata metadata = card instanceof WikiImageCard ? ((WikiImageCard) card).getWikiImage().getMetadata() : null;
+		GalleryItem galleryItem = getSelectedGalleryItem();
+		if (!(galleryItem instanceof GalleryItem.Media media)) {
+			return;
+		}
 
-		String description = metadata != null ? metadata.getDescription(app.getLanguage()) : null;
+		MediaItem mediaItem = media.getMediaItem();
+		MediaDetails details = mediaItem.getDetails();
+
+		String description = details.getDescription();
 		if (!Algorithms.isEmpty(description)) {
 			buildDescriptionItem(container, description);
 		}
 
-		String author = metadata != null ? metadata.getAuthor() : null;
+		String author = details.getAuthor();
 		if (!Algorithms.isEmpty(author)) {
 			buildItem(container, getString(R.string.shared_string_author), author, R.drawable.ic_action_user, true, false);
 		}
 
-		String date = metadata != null ? metadata.getDate() : null;
+		String date = details.getDate();
 		String formattedDate = WikiAlgorithms.formatWikiDate(date);
 		if (Algorithms.isEmpty(formattedDate)) {
 			formattedDate = date;
@@ -119,29 +124,22 @@ public class GalleryDetailsFragment extends BaseFullScreenFragment {
 			buildItem(container, getString(R.string.shared_string_added), formattedDate, R.drawable.ic_action_sort_by_date, true, false);
 		}
 
-		int iconId = card.getTopIconId();
-		String source = getSourceTypeName(card);
+		String source = mediaItem.getOrigin().getTitle();
+		String iconName = mediaItem.getOrigin().getIconName();
+		int iconId = getIconId(iconName);
 		if (!Algorithms.isEmpty(source) || iconId != 0) {
 			buildItem(container, getString(R.string.shared_string_source), source, iconId, false, false);
 		}
 
-		String license = metadata != null ? metadata.getLicense() : null;
+		String license = details.getLicense();
 		if (!Algorithms.isEmpty(license)) {
 			buildItem(container, getString(R.string.shared_string_license), license, R.drawable.ic_action_copyright, true, false);
 		}
 
-		String link;
-		if (card instanceof WikiImageCard wikiImageCard) {
-			link = wikiImageCard.getWikiImage().getUrlWithCommonAttributions();
-		} else {
-			link = !Algorithms.isEmpty(card.getImageHiresUrl()) ? card.getImageHiresUrl() : card.getImageUrl();
+		String link = MediaUrlResolver.getDisplayLink(mediaItem);
+		if (!Algorithms.isEmpty(link)) {
+			buildItem(container, getString(R.string.shared_string_link), link, R.drawable.ic_action_link, true, true);
 		}
-		buildItem(container, getString(R.string.shared_string_link), link, R.drawable.ic_action_link, true, true);
-	}
-
-	@NonNull
-	private String getSourceTypeName(@NonNull ImageCard imageCard) {
-		return imageCard instanceof WikiImageCard ? getString(R.string.wikimedia) : "";
 	}
 
 	private void buildItem(@NonNull ViewGroup container, @NonNull String title, @NonNull String description,
@@ -209,27 +207,23 @@ public class GalleryDetailsFragment extends BaseFullScreenFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			mapActivity.disableDrawer();
-		}
+		callMapActivity(MapActivity::disableDrawer);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			mapActivity.enableDrawer();
-		}
+		callMapActivity(MapActivity::enableDrawer);
 	}
 
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		outState.putInt(SELECTED_POSITION_KEY, selectedPosition);
 		super.onSaveInstanceState(outState);
+	}
+
+	private int getIconId(@Nullable String iconName) {
+		return iconName != null ? AndroidUtils.getDrawableId(app, iconName) : 0;
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity, int selectedPosition) {

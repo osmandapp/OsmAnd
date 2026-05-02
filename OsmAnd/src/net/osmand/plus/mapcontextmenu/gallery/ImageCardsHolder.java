@@ -43,6 +43,11 @@ public class ImageCardsHolder {
 	}
 
 	@NonNull
+	public List<GalleryItem> getOrderedGalleryItems() {
+		return convertToGalleryItems(getOrderedCards());
+	}
+
+	@NonNull
 	public List<ImageCard> getOrderedCards() {
 		return getCardsWithTypes(MAPILLARY_AMENITY, WIKIDATA, WIKIMEDIA, OTHER, ASTRONOMY);
 	}

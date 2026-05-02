@@ -13,75 +13,63 @@ import net.osmand.shared.util.NetworkImageLoader
  * Temporary provider that extracts existing online image loading logic from UI components
  * and adapts it to the new MediaItem model.
  *
- * At this stage it only supports previously existing online photo sources.
- * Other media types are intentionally not implemented yet and will be added
- * in subsequent migration steps.
+ * At this stage it supports image loading through the normalized MediaResource contract.
+ * Local/video/audio loading can be extended later without changing UI consumers.
  */
 class MediaProvider(context: Context) {
 
 	private val imageLoader = NetworkImageLoader(context, useDiskCache = true)
 
+	@JvmOverloads
 	fun loadThumbnail(
 		item: MediaItem,
 		callback: ImageLoaderCallback,
 		requestListener: ImageRequestListener? = null
 	): LoadingImage? {
-		return load(resolveUrl(item, ImageResolution.THUMBNAIL), callback, requestListener)
+		return load(resolveUri(item, ImageResolution.THUMBNAIL), callback, requestListener)
 	}
 
-	fun loadStandardImage(
+	@JvmOverloads
+	fun loadPreview(
 		item: MediaItem,
 		callback: ImageLoaderCallback,
 		requestListener: ImageRequestListener? = null
 	): LoadingImage? {
-		return load(resolveUrl(item, ImageResolution.STANDARD), callback, requestListener)
+		return load(resolveUri(item, ImageResolution.PREVIEW), callback, requestListener)
 	}
 
-	fun loadHiResImage(
+	@JvmOverloads
+	fun loadFull(
 		item: MediaItem,
 		callback: ImageLoaderCallback,
 		requestListener: ImageRequestListener? = null
 	): LoadingImage? {
-		return load(resolveUrl(item, ImageResolution.HI_RES), callback, requestListener)
+		return load(resolveUri(item, ImageResolution.FULL), callback, requestListener)
 	}
 
 	private fun load(
-		url: String?,
+		uri: String?,
 		callback: ImageLoaderCallback,
 		requestListener: ImageRequestListener?
 	): LoadingImage? {
-		if (url.isNullOrEmpty()) {
+		if (uri.isNullOrBlank()) {
 			callback.onError()
 			return null
 		}
-		return imageLoader.loadImage(url, callback, requestListener, handlePlaceholder = false)
+		return imageLoader.loadImage(uri, callback, requestListener, handlePlaceholder = false)
 	}
 
-	private enum class ImageResolution { THUMBNAIL, STANDARD, HI_RES }
+	private enum class ImageResolution { THUMBNAIL, PREVIEW, FULL }
 
-	private fun resolveUrl(item: MediaItem, resolution: ImageResolution): String? {
-		if (item.type == MediaType.AUDIO || item.type == MediaType.VIDEO) {
-			throw NotImplementedError("A/V media loading is not implemented yet")
+	private fun resolveUri(item: MediaItem, resolution: ImageResolution): String? {
+		if (item.type != MediaType.PHOTO) {
+			return null
 		}
 
-		return when (item) {
-			is MediaItem.Remote -> when (resolution) {
-				ImageResolution.THUMBNAIL -> item.previewContent?.thumbnailUrl ?: item.sourceUrl
-				ImageResolution.STANDARD -> item.previewContent?.standardUrl ?: item.sourceUrl
-				ImageResolution.HI_RES -> item.previewContent?.hiResUrl ?: item.sourceUrl
-			}
-			is MediaItem.Mapillary -> when (resolution) {
-				ImageResolution.THUMBNAIL -> item.previewContent?.thumbnailUrl ?: item.sourceUrl
-				ImageResolution.STANDARD -> item.previewContent?.standardUrl ?: item.sourceUrl
-				ImageResolution.HI_RES -> item.previewContent?.hiResUrl ?: item.sourceUrl
-			}
-			is MediaItem.Wiki -> when (resolution) {
-				ImageResolution.HI_RES -> item.wikiImage.imageHiResUrl
-				else -> item.wikiImage.imageStubUrl
-			}
-			is MediaItem.Internal, is MediaItem.Gallery -> {
-				throw NotImplementedError("Local media loading is not implemented yet")
-			}
-		}
+		return when (resolution) {
+			ImageResolution.THUMBNAIL -> item.resource.thumbnailUri
+			ImageResolution.PREVIEW -> item.resource.previewUri
+			ImageResolution.FULL -> item.resource.fullUri
+		}.takeIf { !it.isNullOrEmpty() }
 	}
 }

@@ -141,7 +141,7 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 			@Override
 			public void onMediaItemClicked(@NonNull MediaItem mediaItem) {
 				callMapActivity(activity -> {
-					int index = controller.getItemIndexFromUrl(mediaItem.getSourceUri());
+					int index = controller.getItemIndexBySourceUri(mediaItem.getSourceUri());
 					GalleryPhotoPagerFragment.showInstance(activity, index);
 				});
 			}
