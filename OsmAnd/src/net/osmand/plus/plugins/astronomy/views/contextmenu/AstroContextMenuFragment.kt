@@ -160,7 +160,6 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 			galleryLoader = AstroGalleryLoader(
 				app = app,
 				galleryController = controller,
-				mapActivityProvider = { mapActivity },
 				onStateChanged = ::onGalleryStateChanged
 			)
 		}

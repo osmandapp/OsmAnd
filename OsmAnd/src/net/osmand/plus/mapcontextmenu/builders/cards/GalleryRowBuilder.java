@@ -89,8 +89,7 @@ public class GalleryRowBuilder {
 	}
 
 	public void build(@NonNull GalleryController controller, boolean onlinePhotos, boolean nightMode) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(mapActivity, nightMode);
-		galleryView = themedInflater.inflate(R.layout.gallery_card, null);
+		galleryView = UiUtilities.inflate(mapActivity, nightMode, R.layout.gallery_card);
 		RecyclerView recyclerView = galleryView.findViewById(R.id.recycler_view);
 
 		List<GalleryItem> items = new ArrayList<>();

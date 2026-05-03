@@ -4,15 +4,14 @@ import android.os.AsyncTask
 import net.osmand.data.LatLon
 import net.osmand.plus.OsmAndTaskManager
 import net.osmand.plus.OsmandApplication
-import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.gallery.GalleryItem
 import net.osmand.plus.mapcontextmenu.gallery.GalleryController
-import net.osmand.plus.mapcontextmenu.gallery.ImageCardType
-import net.osmand.plus.mapcontextmenu.gallery.ImageCardsHolder
+import net.osmand.plus.mapcontextmenu.gallery.GalleryMediaGroup
+import net.osmand.plus.mapcontextmenu.gallery.GalleryItemsHolder
 import net.osmand.plus.mapcontextmenu.gallery.PhotoCacheManager
+import net.osmand.plus.mapcontextmenu.gallery.RemoteMediaFactory
 import net.osmand.plus.mapcontextmenu.gallery.tasks.CacheReadTask
 import net.osmand.plus.mapcontextmenu.gallery.tasks.CacheWriteTask
-import net.osmand.plus.wikipedia.WikiImageCard
 import net.osmand.shared.wiki.WikiCoreHelper
 import net.osmand.shared.wiki.WikiImage
 import net.osmand.util.Algorithms
@@ -20,7 +19,6 @@ import net.osmand.util.Algorithms
 class AstroGalleryLoader(
 	private val app: OsmandApplication,
 	private val galleryController: GalleryController,
-	private val mapActivityProvider: () -> MapActivity?,
 	private val onStateChanged: (String, AstroGalleryState) -> Unit
 ) {
 
@@ -39,9 +37,9 @@ class AstroGalleryLoader(
 				publishReadyState(wikidataId, emptyList())
 				return
 			}
-			val cardsHolder = buildCardsHolder(wikidataId, images)
-			val galleryItems = cardsHolder?.astronomyGalleryItems.orEmpty()
-			galleryController.currentCardsHolder = cardsHolder?.takeIf { galleryItems.isNotEmpty() }
+			val mediaItemsHolder = buildMediaItemsHolder(wikidataId, images)
+			val galleryItems = mediaItemsHolder.astronomyGalleryItems
+			galleryController.currentMediaHolder = mediaItemsHolder.takeIf { galleryItems.isNotEmpty() }
 			publishReadyState(wikidataId, galleryItems)
 		}
 	}
@@ -55,7 +53,7 @@ class AstroGalleryLoader(
 		val rawKey = "wikidataId=$wikidataId"
 
 		val hasMatchingHolder = galleryController.isCurrentHolderEquals(latLon, params)
-		val existingGalleryItems = galleryController.currentCardsHolder?.astronomyGalleryItems.orEmpty()
+		val existingGalleryItems = galleryController.currentMediaHolder?.astronomyGalleryItems.orEmpty()
 		if (hasMatchingHolder && existingGalleryItems.isNotEmpty()) {
 			publishReadyState(wikidataId, existingGalleryItems)
 			return
@@ -75,7 +73,10 @@ class AstroGalleryLoader(
 
 		getAstroImagesTask = GetAstroImagesTask(
 			app = app,
-			holder = ImageCardsHolder(latLon, params),
+			holder = GalleryItemsHolder(
+				latLon,
+				params
+			),
 			wikidataId = wikidataId,
 			getImageCardsListener = imageCardListener,
 			networkResponseListener = { response ->
@@ -128,16 +129,21 @@ class AstroGalleryLoader(
 		}
 	}
 
-	private fun buildCardsHolder(
+	private fun buildMediaItemsHolder(
 		wikidataId: String,
 		images: List<WikiImage>
-	): ImageCardsHolder? {
-		val mapActivity = mapActivityProvider() ?: return null
+	): GalleryItemsHolder {
 		val latLon = LatLon(0.0, 0.0)
 		val params = hashMapOf("wikidataId" to wikidataId)
-		return ImageCardsHolder(latLon, params).apply {
+		return GalleryItemsHolder(
+			latLon,
+			params
+		).apply {
 			for (wikiImage in images) {
-				addCard(ImageCardType.ASTRONOMY, WikiImageCard(mapActivity, wikiImage))
+				addMediaItem(
+					GalleryMediaGroup.ASTRONOMY,
+					RemoteMediaFactory.fromWikiImage(wikiImage)
+				)
 			}
 		}
 	}

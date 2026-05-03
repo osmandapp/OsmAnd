@@ -56,16 +56,20 @@ data class RemoteMetadata(
 	val cameraAngle: Double = Double.NaN,
 	val timestamp: Long? = null,
 	val userName: String = "",
-	val externalLink: Boolean = false
+	val externalLink: Boolean = false,
+	val distance: Float = Float.NaN,
+	val bearing: Float = Float.NaN,
+	val is360: Boolean = false
 )
 
 sealed class MediaItem {
 
+	abstract val id: String
 	abstract val title: String
 	abstract val type: MediaType
 	abstract val origin: MediaOrigin
 	abstract val sourceUri: String
-	abstract val resource: MediaResource 
+	abstract val resource: MediaResource
 	abstract val details: MediaDetails
 
 	data class Internal(
@@ -75,6 +79,7 @@ sealed class MediaItem {
 		override val origin: MediaOrigin = MediaOrigin.UNKNOWN,
 		override val details: MediaDetails = MediaDetails()
 	) : MediaItem() {
+		override val id: String = relativePath
 		override val sourceUri: String = relativePath
 		override val resource: MediaResource = MediaResource(
 			thumbnailUri = relativePath,
@@ -90,6 +95,7 @@ sealed class MediaItem {
 		override val origin: MediaOrigin = MediaOrigin.UNKNOWN,
 		override val details: MediaDetails = MediaDetails()
 	) : MediaItem() {
+		override val id: String = uri
 		override val sourceUri: String = uri
 		override val resource: MediaResource = MediaResource(
 			thumbnailUri = uri,
@@ -99,6 +105,7 @@ sealed class MediaItem {
 	}
 
 	data class Remote(
+		override val id: String,
 		val sourceUrl: String,
 		override val title: String,
 		override val type: MediaType,

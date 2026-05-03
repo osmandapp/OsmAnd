@@ -43,8 +43,8 @@ import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.mapcontextmenu.gallery.ImageCardsHolder;
-import net.osmand.plus.mapcontextmenu.gallery.tasks.GetImageCardsTask.GetImageCardsListener;
+import net.osmand.plus.mapcontextmenu.gallery.GalleryItemsHolder;
+import net.osmand.plus.mapcontextmenu.gallery.tasks.GetOnlineImagesTask.GetImageCardsListener;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickActionType;
@@ -260,8 +260,8 @@ public abstract class OsmandPlugin {
 	protected void attachAdditionalInfoToRecordedTrack(@NonNull Location location, @NonNull JSONObject json) throws JSONException {
 	}
 
-	protected boolean createContextMenuImageCard(@NonNull ImageCardsHolder holder,
-	                                             @NonNull JSONObject imageObject) {
+	protected boolean addContextMenuGalleryItem(@NonNull GalleryItemsHolder holder,
+	                                            @NonNull JSONObject imageObject) {
 		return false;
 	}
 

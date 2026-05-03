@@ -20,7 +20,7 @@ public class GalleryController implements IDialogController {
 
 	public static final String PROCESS_ID = "gallery_context_controller";
 
-	private ImageCardsHolder currentCardsHolder;
+	private GalleryItemsHolder currentMediaHolder;
 
 	private final MediaProvider mediaProvider;
 	private final NetworkImageLoader imageLoader;
@@ -42,28 +42,28 @@ public class GalleryController implements IDialogController {
 	@NonNull
 	public List<GalleryItem> getOnlinePhotoItems() {
 		List<GalleryItem> galleryItems = new ArrayList<>();
-		if (currentCardsHolder != null) {
-			galleryItems.addAll(currentCardsHolder.getOrderedGalleryItems());
+		if (currentMediaHolder != null) {
+			galleryItems.addAll(currentMediaHolder.getOrderedGalleryItems());
 		}
 		return galleryItems;
 	}
 
 	@Nullable
-	public ImageCardsHolder getCurrentCardsHolder() {
-		return currentCardsHolder;
+	public GalleryItemsHolder getCurrentMediaHolder() {
+		return currentMediaHolder;
 	}
 
-	public void setCurrentCardsHolder(@Nullable ImageCardsHolder cardsHolder) {
-		this.currentCardsHolder = cardsHolder;
+	public void setCurrentMediaHolder(@Nullable GalleryItemsHolder mediaHolder) {
+		this.currentMediaHolder = mediaHolder;
 	}
 
 	public void clearHolder() {
-		this.currentCardsHolder = null;
+		this.currentMediaHolder = null;
 	}
 
 	public boolean isCurrentHolderEquals(@NonNull LatLon latLon, @NonNull Map<String, String> params) {
-		return currentCardsHolder != null && Algorithms.objectEquals(currentCardsHolder.getLatLon(), latLon)
-				&& Algorithms.objectEquals(currentCardsHolder.getParams(), params);
+		return currentMediaHolder != null && Algorithms.objectEquals(currentMediaHolder.getLatLon(), latLon)
+				&& Algorithms.objectEquals(currentMediaHolder.getParams(), params);
 	}
 
 	public int getItemIndexBySourceUri(@NonNull String sourceUri) {
