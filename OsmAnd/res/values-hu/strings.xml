@@ -5345,7 +5345,7 @@
     <string name="open_in_browser">Megnyitás böngészőben</string>
     <string name="shared_string_source">Forrás</string>
     <string name="shared_string_no_internet_connection">Nincs internetkapcsolat</string>
-    <string name="no_internet_descr">Ellenőrizze az internetkapcsolatát és próbálja újra.</string>
+    <string name="no_internet_descr">Ellenőrizze az internetkapcsolatát, és próbálja újra.</string>
     <string name="no_photos_available">Nincs elérhető fénykép</string>
     <string name="wikimedia">Wikimedia</string>
     <string name="no_photos_available_descr">Ehhez a helyhez még nem adtak hozzá felhasználói fényképeket</string>
@@ -5778,7 +5778,7 @@
     <string name="shared_string_last_downhill">Utolsó lejtő</string>
     <string name="help_article_navigation_routing_ski_routing_name">Sípályák és útvonalak</string>
     <string name="rendering_attr_pisteRoutes_name">Sípályák és útvonalak</string>
-    <string name="requires_internet_connection">Internet kapcsolat szükséges</string>
+    <string name="requires_internet_connection">Internetkapcsolat szükséges</string>
     <string name="save_and_access_articles_offline">Adatmentés és cikkek offline elérése bárhonnan</string>
     <string name="private_access_routing_req_short">Engedélyezi a magánutak használatát az úti cél eléréséhez?</string>
     <string name="download_wikipedia_label">Wikipédia letöltése</string>
