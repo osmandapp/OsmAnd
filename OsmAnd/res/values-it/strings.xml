@@ -5997,4 +5997,6 @@
     <string name="astronomy_map">Mappa Astronomica</string>
     <string name="no_objects_found">Nessun oggetto trovato</string>
     <string name="open_from_short">Da</string>
+    <string name="subscription_free_trial_with_price">%1$s gratuito, poi %2$s</string>
+    <string name="subscription_then_price">poi %1$s</string>
 </resources>
