@@ -3461,7 +3461,7 @@
     <string name="edit_group">Sunting grup</string>
     <string name="proxy_host_title">Host Proksi</string>
     <string name="app_modes_choose">Profil aplikasi</string>
-    <string name="download_roads_only_maps">Peta hanya jalan</string>
+    <string name="download_roads_only_maps">Peta jalan saja</string>
     <string name="safe_mode">Mode aman</string>
     <string name="close_changeset">Tutup set perubahan</string>
     <string name="map_widget_monitoring_services">Layanan pencatatan</string>
@@ -6354,4 +6354,7 @@
     <string name="backup_deleted_all_data">Data dihapus.</string>
     <string name="backup_deleting_all_data">Menghapus data…</string>
     <string name="open_from_short">Dari</string>
+    <string name="obd_simulation_device">Perangkat simulasi</string>
+    <string name="obd_alt_battery_voltage_desc">Tampilkan tingkat voltase pada adapter OBD</string>
+    <string name="astronomy_map">Peta Astronomi</string>
 </resources>
