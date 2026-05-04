@@ -39,6 +39,7 @@ import com.google.android.material.tabs.TabLayout.Tab;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -126,6 +127,10 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 			selectedPanel = WidgetsPanel.valueOf(savedInstanceState.getString(SELECTED_GROUP_ATTR));
 			isEditMode = savedInstanceState.getBoolean(EDIT_MODE_KEY, false);
 			layoutMode = AndroidUtils.getSerializable(savedInstanceState, SCREEN_LAYOUT_MODE, ScreenLayoutMode.class);
+		} else {
+			if (getActivity() instanceof MapActivity mapActivity) {
+				layoutMode = ScreenLayoutMode.getDefault(mapActivity);
+			}
 		}
 		Bundle args = getArguments();
 		if (args != null) {
