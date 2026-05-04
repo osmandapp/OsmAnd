@@ -2,7 +2,6 @@ package net.osmand.shared.util
 
 import net.osmand.shared.KException
 import net.osmand.shared.api.NetworkAPI
-import net.osmand.shared.api.NetworkAPIImpl
 import net.osmand.shared.api.OsmAndContext
 import net.osmand.shared.api.SQLiteAPI
 import net.osmand.shared.api.SQLiteAPIImpl
@@ -13,7 +12,7 @@ actual object PlatformUtil {
 	private lateinit var osmAndContext: OsmAndContext
 
 	private val sqliteApi = SQLiteAPIImpl()
-	private val networkAPI = NetworkAPIImpl()
+	private val networkAPI = NetworkAPI()
 
 	fun initialize(osmAndContext: OsmAndContext) {
 		this.osmAndContext = osmAndContext

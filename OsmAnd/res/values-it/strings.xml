@@ -4513,7 +4513,7 @@
     <string name="terms_of_service_desc">Scaricando le mappe accetti %1$s e %2$s.</string>
     <string name="shared_string_terms_of_use">Termini d\'uso</string>
     <string name="purchases_feature_desc_cross_buy">Utilizza le funzionalità del tuo abbonamento su piattaforme diverse (Android/iOS/Web) senza costi aggiuntivi.</string>
-    <string name="external_sensor_widgets">Widget ANT+</string>
+    <string name="external_sensor_widgets">Sensori esterni</string>
     <string name="map_widget_ant_heart_rate">Battito cardiaco</string>
     <string name="ant_write_to_gpx">Scrivi dati sulla traccia</string>
     <string name="ant_missing_dependency_descr">Il servizio \"%1$s\" richiesto non è stato trovato.
@@ -5996,4 +5996,7 @@
     <string name="release_5_3">• Aggiunto il supporto alle agli edifici 3D\n\n • Visualizzazione sferica della mappa\n\n • Componente aggiuntivo Astronomia con la mappa notturna e l\'archivio stellare\n\n • Nuova modalità colore per il tachimetro: tolleranza ed eccesso\n\n • Aspetto dei widget separato per visualizzazione Orizzontale e Verticale\n\n • Widgets Registrazione viaggio: Velocità in movimento e Velocità media\n\n • Widget voltaggio per le Metriche del Veicolo\n\n • Dati delle metriche del veicolo nell\'Analizzatore della Traccia\n\n • Organizzazione automatica delle tracce per anno, lunghezza, attività e altro\n\n • Modifica della palette dei colori per for Terreno and Visualizzazione della traccia\n\n • Algoritmo di ricerca migliorato e aggiornato la UI\n\n • Corretto il profilo altimetrico per i Percorsi\n\n • Preferiti: nuove opzioni di ordinamento e aggiornamento della UI\n\n • Condividi il link di ogni PDI\n\n • Anteprima dei Punti Intermedi senza chiudere l\'elenco\n\n • Larghezza della bici per evitare le strade strette\n\n • Descrizione delle foto da Wikimedia</string>
     <string name="astronomy_map">Mappa Astronomica</string>
     <string name="no_objects_found">Nessun oggetto trovato</string>
+    <string name="open_from_short">Da</string>
+    <string name="subscription_free_trial_with_price">%1$s gratuito, poi %2$s</string>
+    <string name="subscription_then_price">poi %1$s</string>
 </resources>

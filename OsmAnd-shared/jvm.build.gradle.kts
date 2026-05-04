@@ -24,6 +24,7 @@ kotlin {
 	val sqliterVersion = "1.3.1"
 	val sqliteJDBCVersion = "3.34.0"
 	val commonLoggingVersion = "1.2"
+	val ktorVersion = "3.1.3"
 
 	sourceSets {
 		commonMain.dependencies {
@@ -33,12 +34,19 @@ kotlin {
 			implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesCoreVersion")
 			implementation("org.jetbrains.kotlinx:kotlinx-datetime:$datetimeVersion")
 			implementation("com.squareup.okio:okio:$okioVersion")
+			implementation("io.ktor:ktor-client-core:$ktorVersion")
+			implementation("io.ktor:ktor-client-encoding:$ktorVersion")
 		}
 		jvmMain.dependencies {
 			implementation(kotlin("stdlib-jdk8"))
 			implementation("net.sf.kxml:kxml2:$kxml2Version")
 			implementation("org.xerial:sqlite-jdbc:$sqliteJDBCVersion")
 			implementation("commons-logging:commons-logging:$commonLoggingVersion")
+			implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
+		}
+		commonTest.dependencies {
+			implementation("org.jetbrains.kotlin:kotlin-test:2.0.0")
+			implementation("io.ktor:ktor-client-mock:$ktorVersion")
 		}
 	}
 }

@@ -33,6 +33,7 @@ import net.osmand.search.core.SearchPhrase
 import net.osmand.search.core.SearchResult
 import net.osmand.util.Algorithms
 import net.osmand.util.MapUtils
+import net.osmand.util.OpeningHoursParser
 
 class POIScreen(
     carContext: CarContext,
@@ -117,11 +118,20 @@ class POIScreen(
                 if (counter >= contentLimit) {
                     break
                 }
+                var description = ""
+                var openHour = ""
                 if (point.`object` is Amenity) {
                     val amenity = point.`object` as Amenity
                     mapPoint.add(amenity)
                     val latLon = amenity.location
                     Algorithms.extendRectToContainPoint(mapRect, latLon.longitude, latLon.latitude)
+                    val openHourInfo = OpeningHoursParser.getInfo(amenity.openingHours)
+                    if(openHourInfo != null && openHourInfo.isNotEmpty()) {
+                        openHour = " • ${openHourInfo[0].shortInfo}"
+                    }
+                    if(!Algorithms.isEmpty(amenity.streetName)) {
+                        description = " • ${amenity.streetName}"
+                    }
                 }
                 val title = point.localeName
                 var groupIcon = QuickSearchListItem.getIcon(app, point)
@@ -131,13 +141,11 @@ class POIScreen(
                 val icon = if (groupIcon != null) CarIcon.Builder(
                     IconCompat.createWithBitmap(AndroidUtils.drawableToBitmap(groupIcon)))
                     .build() else null
-                val description =
-                    if (point.alternateName != null) point.alternateName else ""
                 val dist = MapUtils.getDistance(
                     point.location.latitude, point.location.longitude,
                     location.latitude, location.longitude)
                 val address =
-                    SpannableString(if (Algorithms.isEmpty(description)) " " else "  • $description")
+                    SpannableString(" $openHour$description")
                 val distanceSpan = DistanceSpan.create(TripUtils.getDistance(app, dist))
                 address.setSpan(distanceSpan, 0, 1, Spanned.SPAN_INCLUSIVE_INCLUSIVE)
                 val rowBuilder = Row.Builder()
