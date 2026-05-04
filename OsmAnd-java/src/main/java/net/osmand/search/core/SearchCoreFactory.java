@@ -267,7 +267,7 @@ public class SearchCoreFactory {
 			return getClass().getSimpleName();
 		}
 	}
-	
+
 	public static class SearchRegionByNameAPI extends SearchBaseAPI {
 
 		public SearchRegionByNameAPI() {
@@ -843,7 +843,7 @@ public class SearchCoreFactory {
 				public boolean isCancelled() {
 					return resultMatcher.isCancelled() && (limit < LIMIT);
 				}
-				
+
 				@Override
 				public boolean isSkippedDuplication() {
 					return isSkipped;
@@ -2057,7 +2057,7 @@ public class SearchCoreFactory {
 			SearchSettings settings = phrase.getSettings().setSearchBBox31(searchBBox31);
 			settings = settings.setSortByName(false);
 			settings = settings.setEmptyQueryAllowed(true);
-			
+
 			SearchPhrase olcPhrase = phrase.generateNewPhrase(text, settings);
 			final List<SearchResult> result = new ArrayList<>();
 			
