@@ -127,6 +127,10 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 			selectedPanel = WidgetsPanel.valueOf(savedInstanceState.getString(SELECTED_GROUP_ATTR));
 			isEditMode = savedInstanceState.getBoolean(EDIT_MODE_KEY, false);
 			layoutMode = AndroidUtils.getSerializable(savedInstanceState, SCREEN_LAYOUT_MODE, ScreenLayoutMode.class);
+		} else {
+			if (getActivity() instanceof MapActivity mapActivity) {
+				layoutMode = ScreenLayoutMode.getDefault(mapActivity);
+			}
 		}
 		Bundle args = getArguments();
 		if (args != null) {
@@ -662,9 +666,6 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 			ConfigureWidgetsFragment fragment = new ConfigureWidgetsFragment();
 			fragment.selectedPanel = panel;
 			fragment.selectedAppMode = appMode;
-			if (activity instanceof MapActivity mapActivity) {
-				fragment.layoutMode = ScreenLayoutMode.getDefault(mapActivity);
-			}
 			if (args != null) {
 				fragment.setArguments(args);
 			}

@@ -73,6 +73,7 @@ public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer 
 	private Insets insets;
 	private int screenWidth = -1;
 	private int screenHeight = -1;
+	int viewPagerId = 0;
 
 	public SideWidgetsPanel(@NonNull Context context) {
 		this(context, null);
@@ -144,8 +145,8 @@ public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer 
 			}
 		});
 
-		viewPager = findViewById(R.id.view_pager);
-		viewPager.setId(isRightSide() ? R.id.widget_panel_view_pager_right : R.id.widget_panel_view_pager_left);
+		viewPager = findViewById(getViewPagerId());
+		setPagerDifferentIdForRestoreState();
 		viewPager.setAdapter(adapter);
 		// Set transformer just to update pages without RecyclerView animation
 		viewPager.setPageTransformer(new CompositePageTransformer());
@@ -164,6 +165,19 @@ public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer 
 			}
 		});
 		updateDots();
+	}
+
+	private int getViewPagerId() {
+		if (viewPagerId == 0) {
+			return R.id.view_pager;
+		} else {
+			return viewPagerId;
+		}
+	}
+
+	private void setPagerDifferentIdForRestoreState() {
+		viewPagerId = isRightSide() ? R.id.widget_panel_view_pager_right : R.id.widget_panel_view_pager_left;
+		viewPager.setId(viewPagerId);
 	}
 
 	protected WidgetsPagerAdapter createPagerAdapter() {
