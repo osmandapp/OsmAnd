@@ -493,7 +493,7 @@ object GpxUtilities {
 	}
 
 	fun hasPointsGroupsExtension(file: KFile): Boolean {
-		file.source().use { source ->
+		return file.source().use { source ->
 			val buffer = Buffer()
 			var tail = ByteArray(0)
 			while (true) {
