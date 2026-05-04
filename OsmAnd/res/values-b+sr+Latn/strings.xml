@@ -1175,7 +1175,7 @@
     <string name="rendering_attr_noAdminboundaries_description">Zabrani prikaz oblastnih granica (nivoi rukovaoca 5-9).</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Prikazuj puteve prema putanjama OSMC-a.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Planinske staze</string>
-    <string name="download_roads_only_maps">Mapa puteva</string>
+    <string name="download_roads_only_maps">Mapa samo puteva</string>
     <string name="map_screen_orientation">Orijentacija ekrana</string>
     <string name="map_orientation_landscape">Vodoravno</string>
     <string name="map_orientation_portrait">Uspravno</string>
