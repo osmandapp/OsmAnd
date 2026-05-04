@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.IndexConstants;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapIndexReaderStats.SearchStat;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -28,6 +29,7 @@ import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.poi.NominatimPoiFilter;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -50,6 +52,7 @@ import net.osmand.search.core.SearchCoreFactory.SearchBaseAPI;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchResult;
+import net.osmand.search.core.SearchSettings;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 
@@ -89,6 +92,7 @@ public class QuickSearchHelper implements ResourceListener {
 		core = new SearchUICore(app.getPoiTypes(), settings.MAP_PREFERRED_LOCALE.get(),
 				settings.MAP_TRANSLITERATE_NAMES.get(), () -> settings.isInternetConnectionAvailable());
 		app.getResourceManager().addResourceListener(this);
+		applySearchStatSetting(core.getSearchSettings());
 	}
 
 	public SearchUICore getCore() {
@@ -160,6 +164,11 @@ public class QuickSearchHelper implements ResourceListener {
 		BinaryMapIndexReader[] binaryMapIndexReaderArray = app.getResourceManager().getQuickSearchFiles(null);
 		core.getSearchSettings().setOfflineIndexes(Arrays.asList(binaryMapIndexReaderArray));
 		core.getSearchSettings().setRegions(app.getRegions());
+		applySearchStatSetting(core.getSearchSettings());
+	}
+
+	public static void applySearchStatSetting(@NonNull SearchSettings searchSettings) {
+		searchSettings.setStat(PluginsHelper.isDevelopment() ? new SearchStat() : null);
 	}
 
 	public Amenity findAmenity(String name, double lat, double lon) {
