@@ -19,6 +19,8 @@ import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
+import net.osmand.shared.io.KFile;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -65,6 +67,12 @@ public class GpxGroupEditorFragment extends GroupEditorFragment {
 	@Override
 	public void addNewGroup() {
 		pointsGroup = new PointsGroup(groupName, getIconName(), getBackgroundType().getTypeName(), getColor());
+		gpxFile.getPointsGroups().put(groupName, pointsGroup);
+
+		String path = gpxFile.getPath();
+		if (!Algorithms.isEmpty(path)) {
+			app.getGpxDbHelper().updatePointsGroups(new KFile(path), gpxFile.getPointsGroups());
+		}
 	}
 
 	@Override

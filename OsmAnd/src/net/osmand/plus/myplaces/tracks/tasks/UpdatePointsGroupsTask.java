@@ -9,10 +9,7 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxParameter;
-import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.io.KFile;
@@ -84,18 +81,9 @@ public class UpdatePointsGroupsTask extends BaseLoadAsyncTask<Void, Void, Except
 	}
 
 	private void updatePointsGroupsInDb() {
-		if (Algorithms.isEmpty(gpxFile.getPath())) {
-			return;
-		}
-		KFile file = new KFile(gpxFile.getPath());
-		GpxDataItem dataItem = app.getGpxDbHelper().getItem(file, false);
-		String pointsGroups = GpxUtilities.INSTANCE.serializePointsGroups(gpxFile.getPointsGroups());
-		if (dataItem != null) {
-			app.getGpxDbHelper().updateDataItemParameter(dataItem, GpxParameter.POINTS_GROUPS, pointsGroups);
-		} else {
-			dataItem = new GpxDataItem(file);
-			dataItem.setParameter(GpxParameter.POINTS_GROUPS, pointsGroups);
-			app.getGpxDbHelper().add(dataItem);
+		String path = gpxFile.getPath();
+		if (!Algorithms.isEmpty(path)) {
+			app.getGpxDbHelper().updatePointsGroups(new KFile(path), gpxFile.getPointsGroups());
 		}
 	}
 
