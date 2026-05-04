@@ -30,7 +30,8 @@ public class SearchSettings {
 	private static final double MIN_DISTANCE_REGION_LANG_RECALC = 10000;
 	public enum SortType {
 		BY_RELEVANCE,
-		BY_DISTANCE
+		ONLY_BY_DISTANCE,
+		IGNORE_DISTANCE
 	}
 
 	private LatLon originalLocation;
@@ -46,7 +47,6 @@ public class SearchSettings {
 	private boolean emptyQueryAllowed;
 	private boolean sortByName;
 	private QuadRect searchBBox31;
-	private boolean addressSearch;
 	private SearchStat stat;
 	private SearchExportSettings exportSettings; // = new SearchExportSettings(true, true, -1);
 	private List<MapObject> exportedObjects;
@@ -63,7 +63,6 @@ public class SearchSettings {
 			this.offlineIndexes = s.offlineIndexes;
 			this.originalLocation = s.originalLocation;
 			this.searchBBox31 = s.searchBBox31;
-			this.addressSearch = s.addressSearch;
 			this.regions = s.regions;
 			this.regionLang = s.regionLang;
 			this.searchTypes = s.searchTypes;
@@ -181,12 +180,6 @@ public class SearchSettings {
 		return s;
 	}
 	
-	public SearchSettings setAddressSearch(boolean addressSearch) {
-		SearchSettings s = new SearchSettings(this);
-		s.addressSearch = addressSearch;
-		return s;
-	}
-
 	public boolean isTransliterate() {
 		return transliterateIfMissing;
 	}
@@ -221,14 +214,19 @@ public class SearchSettings {
 		return s;
 	}
 
-	public boolean isSortByName() {
-		return sortByName;
-	}
 
 	public SearchSettings setSortByName(boolean sortByName) {
 		SearchSettings s = new SearchSettings(this);
-		s.sortByName = sortByName;
+		s.sortType = sortByName ? SortType.BY_RELEVANCE : SortType.IGNORE_DISTANCE;
 		return s;
+	}
+	
+	public SortType getSortType() {
+		return sortType;
+	}
+
+	public void setSortType(SortType sortType) {
+		this.sortType = sortType;
 	}
 
 	public SearchExportSettings getExportSettings() {
@@ -353,11 +351,5 @@ public class SearchSettings {
 		return s;
 	}
 
-	public SortType getSortType() {
-		return sortType;
-	}
 
-	public void setSortType(SortType sortType) {
-		this.sortType = sortType;
-	}
 }

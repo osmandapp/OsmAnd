@@ -34,10 +34,7 @@ import net.osmand.osm.PoiType;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchPhrase.SearchPhraseDataType;
-import net.osmand.util.Algorithms;
-import net.osmand.util.GeoParsedPoint;
-import net.osmand.util.GeoPointParserUtil;
-import net.osmand.util.LocationParser;
+import net.osmand.util.*;
 import net.osmand.util.LocationParser.ParsedOpenLocationCode;
 import net.osmand.util.MapUtils;
 
@@ -269,7 +266,7 @@ public class SearchCoreFactory {
 		}
 	}
 	
-	
+
 	public static Set<String> splitSearchNames(String name) {
 		int prev = -1;
 		Set<String> namesToAdd = new HashSet<>();
@@ -2074,9 +2071,8 @@ public class SearchCoreFactory {
 			
 			SearchSettings settings = phrase.getSettings().setSearchBBox31(searchBBox31);
 			settings = settings.setSortByName(false);
-			settings = settings.setAddressSearch(true);
 			settings = settings.setEmptyQueryAllowed(true);
-			
+
 			SearchPhrase olcPhrase = phrase.generateNewPhrase(text, settings);
 			final List<SearchResult> result = new ArrayList<>();
 			
