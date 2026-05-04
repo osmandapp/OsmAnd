@@ -128,7 +128,7 @@ object SharedUtil {
 		extensionsReader: GpxExtensionsReader?,
 		addGeneralTrack: Boolean
 	): GpxFile =
-		GpxUtilities.loadGpxFile(null, inputStream.source(), extensionsReader, addGeneralTrack)
+		GpxUtilities.loadGpxFile(null, inputStream.source(), extensionsReader, addGeneralTrack, false)
 
 	@JvmStatic
 	fun loadGpxFile(
@@ -136,7 +136,7 @@ object SharedUtil {
 		extensionsReader: GpxExtensionsReader?,
 		addGeneralTrack: Boolean
 	): GpxFile =
-		GpxUtilities.loadGpxFile(null, source, extensionsReader, addGeneralTrack)
+		GpxUtilities.loadGpxFile(null, source, extensionsReader, addGeneralTrack, false)
 
 	@JvmStatic
 	fun writeGpxFile(fout: File, file: GpxFile): Exception? =

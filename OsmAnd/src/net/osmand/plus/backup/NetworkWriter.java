@@ -9,6 +9,7 @@ import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.settings.backend.backup.AbstractWriter;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.GpxSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
@@ -48,6 +49,7 @@ public class NetworkWriter extends AbstractWriter {
 	public void write(@NonNull SettingsItem item) throws IOException {
 		String error;
 		String fileName = BackupUtils.getItemFileName(item);
+		item.prepareForUpload();
 		SettingsItemWriter<? extends SettingsItem> itemWriter = item.getWriter();
 		if (itemWriter != null) {
 			try {

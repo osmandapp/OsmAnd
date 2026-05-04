@@ -318,14 +318,6 @@ public class WptPtEditorFragment extends PointEditorFragment {
 	}
 
 	@Override
-	public void setPointsGroup(@NonNull PointsGroup group, boolean updateAppearance) {
-		if (editor != null) {
-			editor.getPointsGroups().put(group.getName(), group);
-		}
-		super.setPointsGroup(group, updateAppearance);
-	}
-
-	@Override
 	protected String getDefaultCategoryName() {
 		return getString(R.string.shared_string_favorites);
 	}

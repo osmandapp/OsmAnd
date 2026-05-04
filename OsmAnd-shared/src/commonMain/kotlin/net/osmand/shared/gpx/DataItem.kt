@@ -25,7 +25,7 @@ abstract class DataItem(val file: KFile) {
 	}
 
 	fun hasAppearanceData(): Boolean {
-		return hasData() && GpxParameter.getAppearanceParameters().any { key -> map[key] != null }
+		return hasData() && GpxParameter.getGpxAppearanceParameters().any { key -> map[key] != null }
 	}
 
 	fun hasParameter(parameter: GpxParameter): Boolean {
