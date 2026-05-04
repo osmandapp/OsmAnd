@@ -168,6 +168,12 @@ public class QuickSearchHelper implements ResourceListener {
 	}
 
 	public static void applySearchStatSetting(@NonNull SearchSettings searchSettings) {
+		if (!PluginsHelper.isDevelopment() && searchSettings.getStat() == null) {
+			return;
+		}
+		if (PluginsHelper.isDevelopment() && searchSettings.getStat() != null) {
+			return;
+		}
 		searchSettings.setStat(PluginsHelper.isDevelopment() ? new SearchStat() : null);
 	}
 
