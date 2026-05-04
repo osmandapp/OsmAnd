@@ -242,6 +242,7 @@ public class RoutingHelper {
 
 	public synchronized void clearCurrentRoute(LatLon newFinalLocation, List<LatLon> newIntermediatePoints) {
 		app.logRoutingEvent("clearCurrentRoute newFinalLocation " + newFinalLocation + " newIntermediatePoints " + newIntermediatePoints);
+		routeWasFinished = false; // Prevent stale "arrived" state from leaking into the next navigation session
 		route = new RouteCalculationResult("");
 		isDeviatedFromRoute = false;
 		routeRecalculationHelper.resetEvalWaitInterval();
