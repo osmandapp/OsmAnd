@@ -164,7 +164,7 @@ public class FavouritesFileHelper {
 				favoriteGroup.setTimeModified(gpxFile.getModifiedTime());
 			} else {
 				FavoriteGroup existingGroup = favoriteGroups.get(key);
-				if (existingGroup != null && (existingGroup.getSize() > 0 || existingGroup.getTimeModified() > 0)) {
+				if (existingGroup != null) {
 					favoriteGroup.copyFileMetadata(existingGroup);
 				}
 			}

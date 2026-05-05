@@ -191,8 +191,10 @@ public class FavoriteGroup {
 	}
 
 	public void copyFileMetadata(@NonNull FavoriteGroup group) {
-		setSize(group.getSize());
-		setTimeModified(group.getTimeModified());
+		if (group.getSize() > 0 || group.getTimeModified() > 0) {
+			setSize(group.getSize());
+			setTimeModified(group.getTimeModified());
+		}
 	}
 
 	private static boolean isPersonal(@NonNull String name) {
