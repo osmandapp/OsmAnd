@@ -6134,6 +6134,6 @@
     <string name="open_till_short">До</string>
     <string name="open_from_short">Од</string>
     <string name="astro_designations">Ознаке</string>
-    <string name="astronomy_map">Астрономска мапа</string>
-    <string name="obd_simulation_device">Уређај за симулацију</string>
+    <string name="astronomy_map">Небеска карта</string>
+    <string name="obd_simulation_device">Уређај за опонашање</string>
 </resources>
