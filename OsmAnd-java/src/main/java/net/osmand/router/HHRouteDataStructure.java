@@ -40,7 +40,9 @@ public class HHRouteDataStructure {
 		int FULL_DIJKSTRA_NETWORK_RECALC = 10;
 		int MAX_START_END_REITERATIONS = 50;
 		int MAX_START_END_REITERATIONS_WITH_MISSING_MAPS = 5;
+
 		double MAX_INC_COST_CF = 1.25;
+		double MAX_INC_COST_CF_VIGILANT = 1.15;
 
 		int MAX_COUNT_REITERATION = 30; // 3 is enough for 90%, 30 is for 10% (100-750km with 1.5m months live updates)
 		int MAX_COUNT_REITERATION_WITH_MISSING_MAPS = 3; // speed up HH-to-A* fallback if outdated maps were found
@@ -627,6 +629,7 @@ public class HHRouteDataStructure {
 		public int fileId;
 		public short mapId;
 		public boolean incomplete;
+		public boolean isStartEnd;
 		
 		public long roadId;
 		public short start;
