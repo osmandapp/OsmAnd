@@ -74,6 +74,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 
 	private int maxCountReiteration;
 	private int maxStartEndReiterations;
+	private boolean incorrectCostAtStartEnd;
 
 	public static HHRoutePlanner<NetworkDBPoint> createDB(RoutingContext ctx, HHRoutingDB networkDB) {
 		return new HHRoutePlanner<NetworkDBPoint>(ctx,
@@ -206,6 +207,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		findFirstLastSegments(hctx, start, end, stPoints, endPoints, progress);
 
 		RouteResultPreparation rrp = new RouteResultPreparation();
+		incorrectCostAtStartEnd = false;
 		HHNetworkRouteRes route = null;
 		boolean recalc = false;
 		double firstIterationTime = 0; 
@@ -983,6 +985,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			System.out.println("  " + hctx.rctx.calculationProgress.getInfo(null));
 		}
 		if (frs != null) {
+			boolean isStartEnd = true;
 			TLongSet set = new TLongHashSet();
 			for (FinalRouteSegment o : frs.all) {
 				// duplicates are possible as alternative routes
@@ -1029,7 +1032,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 					pnt.setDistanceToEnd(reverse,
 							pnt.index == PNT_SHORT_ROUTE_START_END ? 0 : hctx.distanceToEnd(reverse, pnt));
 					pnt.setDetailedParentRt(reverse, o);
+					pnt.isStartEnd = isStartEnd;
 					pnts.put(pnt.index, pnt);
+					isStartEnd = false;
 				}
 			}
 
@@ -1219,6 +1224,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			}
 			if (ASSERT_AND_CORRECT_DIST_SMALLER && hctx.config.HEURISTIC_COEFFICIENT > 0
 					&& smallestSegmentCost(hctx, point, nextPoint) - connected.dist >  1) {
+				if (point.isStartEnd || nextPoint.isStartEnd) {
+					incorrectCostAtStartEnd = true;
+				}
 				double smallestSegmentCost = smallestSegmentCost(hctx, point, nextPoint);
 				System.err.printf("Incorrect distance %s -> %s: db = %.2f > fastest %.2f \n", point, nextPoint, connected.dist, smallestSegmentCost);
 				connected.dist = smallestSegmentCost;
@@ -1353,7 +1361,11 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 					s.segment.dist = -1;
 					return true;
 				}
-				if ((f.distanceFromStart + MAX_INC_COST_CORR) > (s.segment.dist + MAX_INC_COST_CORR) * hctx.config.MAX_INC_COST_CF) {
+				double maxIncCostCoefficient = incorrectCostAtStartEnd
+						? hctx.config.MAX_INC_COST_CF_VIGILANT
+						: hctx.config.MAX_INC_COST_CF;
+				if ((f.distanceFromStart + MAX_INC_COST_CORR) >
+						(s.segment.dist + MAX_INC_COST_CORR) * maxIncCostCoefficient) {
 					if (DEBUG_VERBOSE_LEVEL > 0) {
 						System.out.printf("Route cost increased (%.2f > %.2f) between %s -> %s: recalculate route\n",
 								f.distanceFromStart, s.segment.dist, s.segment.start, s.segment.end);
