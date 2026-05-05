@@ -2,11 +2,12 @@ package net.osmand.shared.gpx
 
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
+import kotlinx.coroutines.sync.Semaphore
 import net.osmand.shared.api.SQLiteAPI.*
 import net.osmand.shared.data.StringIntPair
 import net.osmand.shared.extensions.currentTimeMillis
@@ -39,7 +40,7 @@ class GpxDatabase {
 			"case when %1\$s is null then '' else %1\$s end as %1\$s"
 		val CHANGE_NULL_TO_EMPTY_GROUP_CONDITION_STRING_QUERY_PART =
 			"case when %1\$s is null then '' else %1\$s end"
-		val INCLUDE_NON_NULL_COLUMN_CONDITION = " WHERE %1\$s NOT NULL AND %1\$s <> '' "
+		val INCLUDE_NON_NULL_COLUMN_CONDITION = " WHERE %1\$s IS NOT NULL AND %1\$s <> '' "
 		val GET_ITEM_COUNT_COLLECTION_BASE =
 			"SELECT %s, count (*) as $TMP_NAME_COLUMN_COUNT FROM $GPX_TABLE_NAME%s group by %s ORDER BY %s %s"
 
@@ -373,23 +374,44 @@ class GpxDatabase {
 	fun getGpxDataItemsBlocking(): List<GpxDataItem> = runBlocking { getGpxDataItems() }
 
 	suspend fun getGpxDataItems(): List<GpxDataItem> = coroutineScope {
+		// Compute the total rows using the exact same SELECT as the data query (prevents mismatch)
+		val total = withContext(Dispatchers.IO) {
+			var db: SQLiteConnection? = null
+			try {
+				db = openConnection(true)
+				if (db == null) 0 else getGpxDirItemsCount(db)
+			} finally {
+				db?.close()
+			}
+		}
+		if (total == 0) return@coroutineScope emptyList<GpxDataItem>()
+
 		val items = mutableListOf<GpxDataItem>()
 		val deferredResults = mutableListOf<Deferred<List<GpxDataItem>>>()
+
+		// Bound concurrency to avoid FD exhaustion / IO contention
+		val parallelism = 4
+		val semaphore = Semaphore(parallelism)
+
 		var offset = 0
-		val itemsCount = getGpxDirItemsCount()
+		val itemsCount = total
 		while (offset < itemsCount) {
 			val currentOffset = offset
 			val deferredBatch = async(Dispatchers.IO) {
-				var db: SQLiteConnection? = null
+				semaphore.acquire()
 				try {
-					db = openConnection(true)
-					if (db != null) {
-						fetchBatchData(db, currentOffset, BATCH_SIZE)
-					} else {
-						emptyList()
+					val db = openConnection(true)
+					try {
+						if (db != null) {
+							fetchBatchData(db, currentOffset, BATCH_SIZE)
+						} else {
+							emptyList<GpxDataItem>()
+						}
+					} finally {
+						db?.close()
 					}
 				} finally {
-					db?.close()
+					semaphore.release()
 				}
 			}
 			deferredResults.add(deferredBatch)
@@ -402,24 +424,17 @@ class GpxDatabase {
 		return@coroutineScope items.toList()
 	}
 
-	private fun getGpxDirItemsCount(): Int {
+	private fun getGpxDirItemsCount(db: SQLiteConnection): Int {
 		var res = 0
-		var db: SQLiteConnection? = null
+		var query: SQLiteCursor? = null
 		try {
-			db = openConnection(true)
-			db?.let {
-				var query: SQLiteCursor? = null
-				try {
-					query = db.rawQuery("SELECT COUNT(*) FROM $GPX_TABLE_NAME", null)
-					if (query != null && query.moveToFirst()) {
-						res = query.getInt(0)
-					}
-				} finally {
-					query?.close()
-				}
+			val countSql = "SELECT COUNT(*) FROM (" + GpxDbUtils.getSelectGpxQuery() + ")"
+			query = db.rawQuery(countSql, null)
+			if (query != null && query.moveToFirst()) {
+				res = query.getInt(0)
 			}
 		} finally {
-			db?.close()
+			query?.close()
 		}
 		return res
 	}
@@ -429,7 +444,8 @@ class GpxDatabase {
 		val batchItems = mutableListOf<GpxDataItem>()
 		var query: SQLiteCursor? = null
 		try {
-			val paginatedQuery = "${GpxDbUtils.getSelectGpxQuery()} ORDER BY ${FILE_NAME.columnName} LIMIT $batchSize OFFSET $offset"
+			// Use a stable ordering to prevent page drift
+			val paginatedQuery = "${GpxDbUtils.getSelectGpxQuery()} ORDER BY ${FILE_DIR.columnName}, ${FILE_NAME.columnName} LIMIT $batchSize OFFSET $offset"
 			query = db.rawQuery(paginatedQuery, null)
 			if (query != null && query.moveToFirst()) {
 				do {
@@ -487,39 +503,44 @@ class GpxDatabase {
 	}
 
 	fun getDataItem(file: KFile, db: SQLiteConnection): DataItem? {
+		// For non‑GPX, non‑directory files (e.g. PDFs) skip DB access entirely
+		val isGpx = GpxDbUtils.isGpxFile(file)
+		val isDir = file.isDirectory()
+		if (!isGpx && !isDir) return null
+
 		val name = file.name()
 		val dir = GpxDbUtils.getGpxFileDir(file)
-		val gpxFile = GpxDbUtils.isGpxFile(file)
 		val selectQuery =
-			if (gpxFile) GpxDbUtils.getSelectGpxQuery() else GpxDbUtils.getSelectGpxDirQuery()
-		var query: SQLiteCursor? = null
+			if (isGpx) GpxDbUtils.getSelectGpxQuery() else GpxDbUtils.getSelectGpxDirQuery()
+		var cursor: SQLiteCursor? = null
 		try {
-			query = db.rawQuery("$selectQuery $GPX_FIND_BY_NAME_AND_DIR", arrayOf(name, dir))
-			if (query != null && query.moveToFirst()) {
-				return if (gpxFile) readGpxDataItem(query) else readGpxDirItem(query)
+			cursor = db.rawQuery("$selectQuery $GPX_FIND_BY_NAME_AND_DIR", arrayOf(name, dir))
+			if (cursor != null && cursor.moveToFirst()) {
+				return if (isGpx) readGpxDataItem(cursor) else readGpxDirItem(cursor)
 			}
 		} finally {
-			query?.close()
+			cursor?.close()
 		}
 		return null
 	}
 
 	fun isDataItemExists(file: KFile, db: SQLiteConnection): Boolean {
+		// For non‑GPX, non‑directory files (e.g. PDFs) skip DB access entirely
+		val isGpx = GpxDbUtils.isGpxFile(file)
+		val isDir = file.isDirectory()
+		if (!isGpx && !isDir) return false
+
 		val name = file.name()
 		val dir = GpxDbUtils.getGpxFileDir(file)
-		val gpxFile = GpxDbUtils.isGpxFile(file)
 		val selectQuery =
-			if (gpxFile) GpxDbUtils.getSelectGpxQuery(FILE_NAME) else GpxDbUtils.getSelectGpxDirQuery(FILE_NAME)
-		var query: SQLiteCursor? = null
+			if (isGpx) GpxDbUtils.getSelectGpxQuery(FILE_NAME) else GpxDbUtils.getSelectGpxDirQuery(FILE_NAME)
+		var cursor: SQLiteCursor? = null
 		try {
-			query = db.rawQuery("$selectQuery $GPX_FIND_BY_NAME_AND_DIR", arrayOf(name, dir))
-			if (query != null && query.moveToFirst()) {
-				return true
-			}
+			cursor = db.rawQuery("$selectQuery $GPX_FIND_BY_NAME_AND_DIR", arrayOf(name, dir))
+			return cursor != null && cursor.moveToFirst()
 		} finally {
-			query?.close()
+			cursor?.close()
 		}
-		return false
 	}
 
 	private fun updateAppearanceTimestamp(item: DataItem) {
