@@ -3,7 +3,6 @@ package net.osmand.binary;
 
 import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.WireFormat;
-import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntLongHashMap;
 import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.*;
@@ -539,7 +538,7 @@ public class BinaryMapPoiReaderAdapter {
 					}
 					int len = codedIS.readRawVarint32();
 					long oldLim = codedIS.pushLimitLong((long) len);
-					readPoiNameIndexDataAtom(offsets, req, region, nameIndexCoordinates, mask == null ? null : mask.masks);
+					readPoiNameIndexDataAtom(offsets, req, region, nameIndexCoordinates, mask);
 					codedIS.popLimit(oldLim);
 					break;
 				default:
@@ -550,12 +549,12 @@ public class BinaryMapPoiReaderAdapter {
 	}
 
 	private void readPoiNameIndexDataAtom(TIntLongHashMap offsets, SearchRequest<Amenity> req, PoiRegion region,
-	                                      List<Integer> nameIndexCoordinates, TIntArrayList suffixMasks) throws IOException {
+	                                      List<Integer> nameIndexCoordinates, QueryToken.SuffixMask suffixMask) throws IOException {
 		int x = 0;
 		int y = 0;
 		int zoom = 15;
 		int shift = Integer.MIN_VALUE;
-		boolean matched = suffixMasks == null;
+		boolean matched = suffixMask != null && suffixMask.shouldPassThrough();
 		int maskIndex = 0;
 		while (true) {
 			int t = codedIS.readTag();
@@ -595,7 +594,7 @@ public class BinaryMapPoiReaderAdapter {
 				break;
 			case OsmandOdb.OsmAndPoiNameIndexDataAtom.SUFFIXESBITSET_FIELD_NUMBER:
 				int mask = codedIS.readUInt32();
-				if (!matched && suffixMasks != null && maskIndex < suffixMasks.size() && (suffixMasks.get(maskIndex) & mask) != 0) {
+				if (!matched && suffixMask != null && suffixMask.isMatched(maskIndex, mask)) {
 					matched = true;
 				}
 				maskIndex++;

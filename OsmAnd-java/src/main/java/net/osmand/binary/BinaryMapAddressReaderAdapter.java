@@ -764,7 +764,7 @@ public class BinaryMapAddressReaderAdapter {
 							}
 							long slen = codedIS.readRawVarint32();
 							long soldLim = codedIS.pushLimitLong((long) slen);
-							readAddressNameData(req, refs, refsToCities, fp, suffixMask == null ? null : suffixMask.masks);
+							readAddressNameData(req, refs, refsToCities, fp, suffixMask);
 							codedIS.popLimit(soldLim);
 						} else if (stag != 0) {
 							skipUnknownField(st);
@@ -895,14 +895,14 @@ public class BinaryMapAddressReaderAdapter {
 	}
 
 	private void readAddressNameData(SearchRequest<MapObject> req, TIntArrayList[] refs,
-			TIntArrayList[] refsToCities, long fp, TIntArrayList suffixMasks) throws IOException {
+			TIntArrayList[] refsToCities, long fp, QueryToken.SuffixMask suffixMask) throws IOException {
 		TIntArrayList toAdd = null;
 		TIntArrayList toAddCity = null;
 		int shiftindex = 0;
 		int shiftcityindex = 0;
 		boolean add = true; 
-		boolean suffixMatched = suffixMasks == null;
-		int suffixMaskIndex = 0;
+		boolean matched = suffixMask != null && suffixMask.shouldPassThrough();
+		int maskIndex = 0;
 		while (true) {
 			if (req.isCancelled()) {
 				return;
@@ -910,7 +910,7 @@ public class BinaryMapAddressReaderAdapter {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			if(tag == 0 || tag == AddressNameIndexDataAtom.SHIFTTOINDEX_FIELD_NUMBER) {
-				if (toAdd != null && add && suffixMatched) {
+				if (toAdd != null && add && matched) {
 					if (shiftindex != 0) {
 						toAdd.add(shiftindex);
 					}
@@ -930,11 +930,10 @@ public class BinaryMapAddressReaderAdapter {
 				break;
 			case AddressNameIndexDataAtom.SUFFIXESBITSET_FIELD_NUMBER:
 				int mask = codedIS.readUInt32();
-				if (!suffixMatched && suffixMasks != null && suffixMaskIndex < suffixMasks.size()
-						&& (suffixMasks.get(suffixMaskIndex) & mask) != 0) {
-					suffixMatched = true;
+				if (!matched && suffixMask != null && suffixMask.isMatched(maskIndex, mask)) {
+					matched = true;
 				}
-				suffixMaskIndex++;
+				maskIndex++;
 				break;
 			case AddressNameIndexDataAtom.SHIFTTOCITYINDEX_FIELD_NUMBER:
 				if (toAddCity != null) {
