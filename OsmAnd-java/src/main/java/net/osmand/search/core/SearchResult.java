@@ -209,6 +209,9 @@ public class SearchResult {
 			if (closeDistance) {
 				res += 1;
 			}
+			if (objectType == ObjectType.CITY && requiredSearchPhrase.getWords().size() == 1) {
+				res += 10;
+			}
 			// range 60 - 91
 		}
 		if (res < MAX_TYPES_BASE_10 * 4) {
