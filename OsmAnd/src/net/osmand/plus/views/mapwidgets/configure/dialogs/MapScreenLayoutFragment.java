@@ -167,14 +167,14 @@ public class MapScreenLayoutFragment extends BaseFullScreenFragment {
 		applyButton.setOnClickListener(v -> {
 			settings.USE_SEPARATE_LAYOUTS.set(useSeparateLayouts);
 
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				activity.onBackPressed();
-			}
 			callMapActivity((mapActivity) -> {
 				MapWidgetRegistry widgetRegistry = mapActivity.getMapLayers().getMapWidgetRegistry();
 				widgetRegistry.registerAllControls(mapActivity);
 			});
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				activity.onBackPressed();
+			}
 		});
 	}
 
