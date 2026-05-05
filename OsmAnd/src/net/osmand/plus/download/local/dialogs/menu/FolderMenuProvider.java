@@ -60,7 +60,7 @@ public class FolderMenuProvider extends AbstractBaseMenuProvider {
 		}
 
 		if (type.isDeletionSupported()) {
-			menuItem = menu.add(1, R.string.shared_string_remove, Menu.NONE, R.string.shared_string_remove);
+			menuItem = menu.add(1, R.string.shared_string_remove, Menu.NONE, R.string.shared_string_delete);
 			menuItem.setIcon(getIcon(R.drawable.ic_action_delete_outlined, iconColorId));
 			menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 			menuItem.setOnMenuItemClickListener(i -> {
