@@ -6139,4 +6139,19 @@
     <string name="astro_sort_oldest_first">Od najstaršieho</string>
     <string name="shared_string_world_weather_map">Svetová mapa počasia</string>
     <string name="release_5_3">• Pridané 3D budovy\n\n • Guľaté zobrazenie mapy\n\n • Modul Astronómia s nočnou oblohou a databázou hviezd\n\n • Nové farebné režimy pre Tachometer: tolerancia a prekročenie rýchlosti\n\n • Samostatné rozloženie nástrojov pre režim na výšku a na šírku\n\n • Nástroj nahrávania výletu: Rýchlosť pohybu a priemerná rýchlosť\n\n • Nástroj napätia adaptéra pre merania vozidla\n\n • Údaje merania vozidla pri analýze stôp\n\n • Automatický organizátor stôp podľa roku, dĺžky, aktivity a ďalších vlastností\n\n • Editor palety pre zobrazenie terénu a stôp\n\n • Vylepšený algoritmus vyhľadávania a zlepšené rozhranie\n\n • Opravené profily nadmorskej výšky pre trasy\n\n • Obľúbené: nové možnosti triedenia a vylepšenie rozhrania\n\n • Linka pre zdieľanie ľubovoľného bodu záujmu\n\n • Náhľad bodu trasy bez zatvorenia zoznamu\n\n • Parameter šírky bicykla pre vyhnutie sa úzkym cestám\n\n • Popisy fotografií z Wikimedia</string>
+    <string name="map_widget_memory_info">Informácie o pamäti</string>
+    <string name="map_widget_memory_info_desc">Sleduje pamäť Javy, alokácie systému a grafickú pamäť.</string>
+    <string name="memory_used_settings">Použitá pamäť Javy</string>
+    <string name="memory_allocated_settings">Alokovaná pamäť Javy</string>
+    <string name="memory_limit_settings">Maximálna pamäť Javy</string>
+    <string name="memory_native_settings">Alokovaná pamäť systému</string>
+    <string name="memory_graphics_settings">Grafická pamäť</string>
+    <string name="shared_string_heap">Java</string>
+    <string name="shared_string_native">Systém</string>
+    <string name="shared_string_gpu">Graf.</string>
+    <string name="shared_string_allocated">Alokované</string>
+    <string name="open_till_short">Do</string>
+    <string name="open_from_short">Od</string>
+    <string name="astronomy_map">Astronomická mapa</string>
+    <string name="obd_simulation_device">Simulačné zariadenie</string>
 </resources>

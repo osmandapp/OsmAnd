@@ -1482,6 +1482,7 @@ public class OsmandSettings {
 	}
 
 	public final CommonPreference<Float> MAP_DENSITY = new FloatPreference(this, "map_density_n", 1f).makeProfile().cache();
+	public final CommonPreference<Float> AA_MAP_DENSITY = new FloatPreference(this, "aa_map_density_n", 1f).makeProfile().cache();
 
 	public final OsmandPreference<Boolean> SHOW_POI_LABEL = new BooleanPreference(this, "show_poi_label", false).makeProfile();
 
@@ -1798,6 +1799,7 @@ public class OsmandSettings {
 	}
 
 	public final ListStringPreference LAST_USED_FAV_ICONS = (ListStringPreference) new ListStringPreference(this, "last_used_favorite_icons", null, ",").makeShared().makeGlobal();
+	public final ListStringPreference LAST_USED_PROFILE_ICONS = (ListStringPreference) new ListStringPreference(this, "last_used_profile_icons", null, ",").makeShared().makeGlobal();
 
 	public final CommonPreference<Integer> SAVE_TRACK_INTERVAL = new IntPreference(this, "save_track_interval", 5000).makeProfile();
 

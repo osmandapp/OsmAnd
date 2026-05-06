@@ -16,6 +16,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -90,6 +91,81 @@ public class GpxUiHelper {
 
 	public static String getColorValue(String clr, String value) {
 		return getColorValue(clr, value, true);
+	}
+
+	@NonNull
+	public static String getTrackShortDescription(@NonNull Context context,
+	                                              @NonNull GpxTrackAnalysis analysis,
+	                                              @Nullable KFile file,
+	                                              boolean shouldShowFolder) {
+		SpannableStringBuilder description = new SpannableStringBuilder();
+		appendTrackShortDescription(context, description, analysis, file, shouldShowFolder);
+		return description.toString();
+	}
+
+	public static void appendTrackShortDescription(@NonNull Context context,
+	                                               @NonNull SpannableStringBuilder builder,
+	                                               @NonNull GpxTrackAnalysis analysis,
+	                                               @Nullable KFile file,
+	                                               boolean shouldShowFolder) {
+		appendTrackDistance(context, builder, analysis);
+		if (analysis.isTimeSpecified()) {
+			builder.append(" • ");
+			appendTrackDuration(context, builder, analysis);
+		}
+		appendTrackPoints(builder, analysis);
+		appendTrackFolderName(builder, file, shouldShowFolder);
+	}
+
+	public static void appendTrackDistance(@NonNull Context context,
+	                                       @NonNull SpannableStringBuilder builder,
+	                                       @NonNull GpxTrackAnalysis analysis) {
+		builder.append(OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), getApplication(context)));
+	}
+
+	public static void appendTrackDuration(@NonNull Context context,
+	                                       @NonNull SpannableStringBuilder builder,
+	                                       @NonNull GpxTrackAnalysis analysis) {
+		if (analysis.isTimeSpecified()) {
+			OsmandApplication app = getApplication(context);
+			builder.append(formatDuration(analysis.getDurationInSeconds(), app.accessibilityEnabled()));
+		}
+	}
+
+	public static void appendTrackPoints(@NonNull SpannableStringBuilder builder,
+	                                     @NonNull GpxTrackAnalysis analysis) {
+		if (analysis.getWptPoints() > 0) {
+			builder.append(" • ");
+			builder.append(String.valueOf(analysis.getWptPoints()));
+		}
+	}
+
+	public static void appendTrackFolderName(@NonNull SpannableStringBuilder builder,
+	                                         @Nullable KFile file,
+	                                         boolean shouldShowFolder) {
+		String folderName = getTrackFolderName(file, shouldShowFolder);
+		if (!Algorithms.isEmpty(folderName)) {
+			builder.append(" | ");
+			builder.append(Algorithms.capitalizeFirstLetter(folderName));
+		}
+	}
+
+	@Nullable
+	public static String getTrackFolderName(@Nullable KFile file, boolean shouldShowFolder) {
+		if (shouldShowFolder && file != null) {
+			File parentDir = new File(file.absolutePath()).getParentFile();
+			if (parentDir != null) {
+				return parentDir.getName();
+			}
+		}
+		return null;
+	}
+
+	@NonNull
+	private static OsmandApplication getApplication(@NonNull Context context) {
+		return context instanceof OsmandApplication
+				? (OsmandApplication) context
+				: (OsmandApplication) context.getApplicationContext();
 	}
 
 	public static String getDescription(OsmandApplication app, GpxTrackAnalysis analysis, boolean html) {
@@ -643,8 +719,9 @@ public class GpxUiHelper {
 
 	public static void saveAndShareGpxWithAppearance(@NonNull OsmandApplication app, @NonNull Activity activity, @NonNull GpxFile gpxFile, @NonNull GpxDataItem item) {
 		if (item.hasAppearanceData()) {
-			addDbParametersToGpx(app, gpxFile, item);
-			saveAndShareGpx(app, activity, gpxFile);
+			GpxFile gpxFileToShare = gpxFile.clone();
+			addDbParametersToGpx(app, gpxFileToShare, item);
+			saveAndShareGpx(app, activity, gpxFileToShare);
 		} else {
 			shareGpx(app, activity, new File(gpxFile.getPath()));
 		}
@@ -724,6 +801,11 @@ public class GpxUiHelper {
 		String gradientPalette = item.getParameter(COLOR_PALETTE);
 		if (gradientPalette != null) {
 			gpxFile.setGradientColorPalette(gradientPalette);
+		}
+		String pointsGroups = item.getParameter(POINTS_GROUPS);
+		if (pointsGroups != null) {
+			GpxUtilities.INSTANCE.applyPointsGroups(gpxFile, pointsGroups);
+			GpxUtilities.INSTANCE.assignPointsGroupsExtensionWriter(gpxFile);
 		}
 		GpsFilter.writeValidFilterValuesToExtensions(gpxFile.getExtensionsToWrite(), item);
 	}

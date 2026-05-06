@@ -456,27 +456,7 @@ public class QuickSearchListItem {
 				}
 			case POI:
 				Amenity amenity = (Amenity) searchResult.object;
-				Drawable shieldIcon = getRouteShieldDrawable(app, amenity);
-				if (shieldIcon != null) {
-					return shieldIcon;
-				}
-				String id = getAmenityIconName(app, amenity);
-				Drawable icon = null;
-				if (id != null) {
-					iconId = RenderingIcons.getBigIconResourceId(id);
-					if (iconId > 0) {
-						if (amenity.getType().isAdministrative()) {
-							icon = getIcon(app, iconId, defIconColor);
-						} else {
-							icon = getIcon(app, iconId);
-						}
-					}
-				}
-				if (icon == null) {
-					return getIcon(app, R.drawable.ic_action_search_dark);
-				} else {
-					return icon;
-				}
+				return getAmenityTypeIcon(app, amenity, defIconColor);
 			case GPX_TRACK:
 				return getIcon(app, R.drawable.ic_action_polygom_dark);
 			case LOCATION:
@@ -515,6 +495,35 @@ public class QuickSearchListItem {
 				break;
 		}
 		return null;
+	}
+
+	public static Drawable getAmenityTypeIcon(OsmandApplication app, Amenity amenity, int iconColor) {
+		return getAmenityTypeIcon(app, amenity, iconColor, false);
+	}
+
+	public static Drawable getAmenityTypeIcon(OsmandApplication app, Amenity amenity, int iconColor, boolean useCustomColor) {
+		int iconId;
+		Drawable shieldIcon = getRouteShieldDrawable(app, amenity);
+		if (shieldIcon != null) {
+			return shieldIcon;
+		}
+		String id = getAmenityIconName(app, amenity);
+		Drawable icon = null;
+		if (id != null) {
+			iconId = RenderingIcons.getBigIconResourceId(id);
+			if (iconId > 0) {
+				if (amenity.getType().isAdministrative() || useCustomColor) {
+					icon = getIcon(app, iconId, iconColor);
+				} else {
+					icon = getIcon(app, iconId);
+				}
+			}
+		}
+		if (icon == null) {
+			return getIcon(app, R.drawable.ic_action_search_dark);
+		} else {
+			return icon;
+		}
 	}
 
 	@Nullable

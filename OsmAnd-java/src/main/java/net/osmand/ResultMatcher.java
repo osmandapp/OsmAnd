@@ -17,4 +17,10 @@ public interface ResultMatcher<T> {
 	 */
 	boolean isCancelled();
 
+	/**
+	 * @returns true if object is skipped because it is a duplicate
+	 */
+	default boolean isSkippedDuplication() {
+		return false;
+	}
 }

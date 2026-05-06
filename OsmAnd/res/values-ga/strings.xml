@@ -5961,4 +5961,20 @@
     <string name="astro_sort_newest_first">Is nuaí ar dtús</string>
     <string name="astro_sort_oldest_first">Is sine ar dtús</string>
     <string name="shared_string_world_weather_map">Léarscáil aimsire an domhain</string>
+    <string name="map_widget_memory_info">Eolas cuimhne</string>
+    <string name="map_widget_memory_info_desc">Déanann monatóireacht ar charn Java, leithdháiltí dúchasacha, agus cuimhne grafaicí.</string>
+    <string name="memory_used_settings">Carn Java Úsáidte</string>
+    <string name="memory_allocated_settings">Carn Java Leithdháilte</string>
+    <string name="memory_limit_settings">Uasteorainn Carn Java</string>
+    <string name="memory_native_settings">Carn Dúchasach Leithdháilte</string>
+    <string name="memory_graphics_settings">Cuimhne Grafaicí</string>
+    <string name="shared_string_heap">Carn</string>
+    <string name="shared_string_native">Dúchasach</string>
+    <string name="shared_string_gpu">GPU</string>
+    <string name="shared_string_allocated">Leithdháilte</string>
+    <string name="open_till_short">Go dtí</string>
+    <string name="open_from_short">Ó</string>
+    <string name="astro_designations">Ainmniúcháin</string>
+    <string name="astronomy_map">Léarscáil Réalteolaíochta</string>
+    <string name="obd_simulation_device">Gléas insamhalta</string>
 </resources>

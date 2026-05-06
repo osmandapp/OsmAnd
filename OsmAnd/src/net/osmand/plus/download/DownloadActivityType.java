@@ -512,6 +512,9 @@ public class DownloadActivityType {
 		} else if (this == WEATHER_FORECAST) {
 			return fileName.substring(0, fileName.length() - ZIP_EXT.length())
 					.replace(FileNameTranslationHelper.WEATHER + "_", "");
+		} else if (this == STAR_MAP_FILE) {
+			return fileName.substring(0, fileName.length() - IndexConstants.STAR_MAP_INDEX_EXT_GZ.length())
+					+ IndexConstants.STAR_MAP_INDEX_EXT;
 		} else if (fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)
 				|| fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)) {
 			int l = fileName.lastIndexOf('_');

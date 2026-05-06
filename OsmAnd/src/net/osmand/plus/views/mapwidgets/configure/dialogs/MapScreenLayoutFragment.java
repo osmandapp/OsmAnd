@@ -26,6 +26,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 public class MapScreenLayoutFragment extends BaseFullScreenFragment {
@@ -166,6 +167,10 @@ public class MapScreenLayoutFragment extends BaseFullScreenFragment {
 		applyButton.setOnClickListener(v -> {
 			settings.USE_SEPARATE_LAYOUTS.set(useSeparateLayouts);
 
+			callMapActivity((mapActivity) -> {
+				MapWidgetRegistry widgetRegistry = mapActivity.getMapLayers().getMapWidgetRegistry();
+				widgetRegistry.registerAllControls(mapActivity);
+			});
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				activity.onBackPressed();

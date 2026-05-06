@@ -21,7 +21,7 @@
 			android:layout_height="wrap_content"
 			android:baselineAligned="false"
 			android:gravity="center_vertical"
-			android:paddingHorizontal="16dp"
+			android:paddingStart="16dp"
 			android:orientation="horizontal">
 
 			<LinearLayout
@@ -66,7 +66,7 @@
 						android:layout_height="24dp"
 						android:layout_gravity="center"
 						android:contentDescription="@string/astro_schedule_show_current_week"
-						android:src="@drawable/ic_action_calendar_month"
+						android:src="@drawable/ic_action_date_start"
 						app:tint="?attr/icon_color_active" />
 				</FrameLayout>
 

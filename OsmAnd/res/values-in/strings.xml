@@ -3304,7 +3304,7 @@
     <string name="lang_ber">Berber</string>
     <string name="shared_string_target_points">Destinasi</string>
     <string name="navigation_profiles_item">Profil navigasi</string>
-    <string name="custom_color">Warna kustom</string>
+    <string name="custom_color">Warna custom</string>
     <string name="lang_ba">Bashkir</string>
     <string name="lang_bar">Bavaria</string>
     <string name="shared_string_divider">Pembagi</string>
@@ -3461,7 +3461,7 @@
     <string name="edit_group">Sunting grup</string>
     <string name="proxy_host_title">Host Proksi</string>
     <string name="app_modes_choose">Profil aplikasi</string>
-    <string name="download_roads_only_maps">Peta hanya jalan</string>
+    <string name="download_roads_only_maps">Peta jalan saja</string>
     <string name="safe_mode">Mode aman</string>
     <string name="close_changeset">Tutup set perubahan</string>
     <string name="map_widget_monitoring_services">Layanan pencatatan</string>
@@ -4313,7 +4313,7 @@
     <string name="favorites_backup">Cadangan favorit</string>
     <string name="map_widget_ant_bicycle_power_desc">Menampilkan keluaran daya pengendara sepeda, yang digunakan untuk menggerakkan sepeda supaya maju</string>
     <string name="map_widget_ant_bicycle_dist_desc">Menampilkan jarak yang ditempuh</string>
-    <string name="external_sensor_widgets">Widget ANT+</string>
+    <string name="external_sensor_widgets">Sensor eksternal</string>
     <string name="ant_read_data">Baca data</string>
     <string name="map_widget_ant_heart_rate_desc">Menampilkan detak jantung pengguna selama beraktivitas dalam waktu nyata</string>
     <string name="ant_missing_dependency_descr">Tidak dapat menemukan layanan \"%1$s\" yang dibutuhkan.
@@ -5048,7 +5048,7 @@
     <string name="enable_3d_maps">Aktifkan peta 3D</string>
     <string name="weather_forecast_is_outdated">Prakiraan kedaluwarsa.</string>
     <string name="shared_string_pounds">pound</string>
-    <string name="offline_weather_forecast">Prakiraan cuaca luring</string>
+    <string name="offline_weather_forecast">Prediksi cuaca luring</string>
     <string name="clear_online_cache">Hapus tembolok daring</string>
     <string name="offline_cache">Tembolok daring</string>
     <string name="clear_online_cache_description">Ini akan menghapus tembolok untuk ubin cuaca daring.</string>
@@ -5824,7 +5824,7 @@
     <string name="obd_engine_coolant_temp">Suhu pendingin</string>
     <string name="obd_ambient_air_temp">Suhu lingkungan</string>
     <string name="obd_fuel_consumption_rate_desc">Menampilkan tingkat konsumsi bahan bakar kendaraan berdasarkan OBD dan lokasi</string>
-    <string name="y_axis_description">Pilih sampai dengan dua opsi untuk axis Y.</string>
+    <string name="y_axis_description">Pilih sampai dengan dua pilihan untuk sumbu Y.</string>
     <string name="energy_avg_info">Statistik energi (rata-rata 1 / 5 / 15 menit)</string>
     <string name="help_article_map_tracks_name">Trek</string>
     <string name="quick_action_switch_compass_desc">Saklar untuk mengubah orientasi peta.</string>
@@ -5895,7 +5895,7 @@
     <string name="quick_action_drawer_desc">Saklar untuk menampilkan atau menyembunyikan menu samping.</string>
     <string name="quick_action_drawer_title">Menu samping</string>
     <string name="app_mode_suv">SUV</string>
-    <string name="graph_axis">Axis grafik</string>
+    <string name="graph_axis">Sumbu grafik</string>
     <string name="driving_region_uk">UK dan terkait</string>
     <string name="detailed_track_guidance">Panduan track terperinci</string>
     <string name="resting_navigation_position">Posisi istirahat &amp; navigasi</string>
@@ -6270,7 +6270,7 @@
     <string name="shared_string_magnitude">Magnitudo</string>
     <string name="astro_rise">Terbit</string>
     <string name="astro_set">Terbenam</string>
-    <string name="shared_string_centimeters">centimeter</string>
+    <string name="shared_string_centimeters">sentimeter</string>
     <string name="equator_line">Garis Khatulistiwa</string>
     <string name="copy_from_portrait_layout">Salin dari tata letak Vertikal</string>
     <string name="copy_from_landscape_layout">Salin dari tata letak Horizontal</string>
@@ -6345,4 +6345,16 @@
     <string name="astro_sort_brightest_first">Paling terang dulu</string>
     <string name="astro_search_empty_description">Coba ubah saringannya atau waktu pengamatannya.</string>
     <string name="astro_search_input_hint">Masukkan teks</string>
+    <string name="enable_3d_objects">Bangunan 3D</string>
+    <string name="buildings_3d_visibility_description">Sesuaikan opasitas struktur 3D di peta.</string>
+    <string name="level_of_details">Tingkat detail</string>
+    <string name="performance">Performa</string>
+    <string name="view_distance">Jarak pandang</string>
+    <string name="open_till_short">Sampai</string>
+    <string name="backup_deleted_all_data">Data dihapus.</string>
+    <string name="backup_deleting_all_data">Menghapus data…</string>
+    <string name="open_from_short">Dari</string>
+    <string name="obd_simulation_device">Perangkat simulasi</string>
+    <string name="obd_alt_battery_voltage_desc">Tampilkan tingkat voltase pada adapter OBD</string>
+    <string name="astronomy_map">Peta Astronomi</string>
 </resources>

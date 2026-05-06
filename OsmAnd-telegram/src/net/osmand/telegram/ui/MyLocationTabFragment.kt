@@ -31,6 +31,8 @@ import net.osmand.telegram.helpers.TelegramHelper.TelegramListener
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.OsmandFormatter
+import net.osmand.telegram.utils.doOnTelegramInsets
+import net.osmand.telegram.utils.telegramTopInset
 import org.drinkless.tdlib.TdApi
 import java.util.*
 import kotlin.Comparator
@@ -54,6 +56,11 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	private var searchBoxSidesMargin: Int = 0
 	private var titlePaddingSmall: Int = 0
 	private var titlePaddingBig: Int = 0
+	private var topSystemInset: Int = 0
+	private var titleContainerBasePaddingTop: Int = 0
+	private var titleContainerBasePaddingBottom: Int = 0
+	private var textContainerBasePaddingTop: Int = 0
+	private var textContainerBasePaddingBottom: Int = 0
 
 	private var appBarScrollRange: Int = -1
 
@@ -159,9 +166,9 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		}
 
 		imageContainer = mainView.findViewById<FrameLayout>(R.id.image_container)
-		titleContainer = mainView.findViewById<LinearLayout>(R.id.title_container).apply {
-			AndroidUtils.addStatusBarPadding19v(context, this)
-		}
+		titleContainer = mainView.findViewById(R.id.title_container)
+		titleContainerBasePaddingTop = titleContainer.paddingTop
+		titleContainerBasePaddingBottom = titleContainer.paddingBottom
 
 		mainView.findViewById<TextView>(R.id.status_title).apply {
 			val enabled = getString(R.string.shared_string_enabled)
@@ -182,6 +189,13 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			}
 			title = findViewById(R.id.title)
 			description = findViewById(R.id.description)
+		}
+		textContainerBasePaddingTop = textContainer.paddingTop
+		textContainerBasePaddingBottom = textContainer.paddingBottom
+		mainView.doOnTelegramInsets { _, insets ->
+			topSystemInset = insets.telegramTopInset()
+			applyTitleContainerInsets()
+			adjustText()
 		}
 
 		searchBoxBg = GradientDrawable().apply {
@@ -402,17 +416,22 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		actionButtonsListener?.switchButtonsVisibility(false)
 	}
 
+	private fun applyTitleContainerInsets() {
+		titleContainer.setPadding(
+			titleContainer.paddingLeft,
+			titleContainerBasePaddingTop + topSystemInset,
+			titleContainer.paddingRight,
+			titleContainerBasePaddingBottom
+		)
+	}
+
 	private fun adjustText() {
 		val gravity = if (appBarCollapsed) Gravity.START else Gravity.CENTER
 		val padding = if (appBarCollapsed) textMarginSmall else textMarginBig
 		val titlePadding = if (appBarCollapsed) titlePaddingBig else titlePaddingSmall
 		textContainer.apply {
-			setPadding(padding, paddingTop, padding, paddingBottom)
-			if (appBarCollapsed) {
-				AndroidUtils.addStatusBarPadding19v(app, this)
-			} else {
-				AndroidUtils.removeStatusBarPadding19v(app, this)
-			}
+			val topPadding = textContainerBasePaddingTop + if (appBarCollapsed) topSystemInset else 0
+			setPadding(padding, topPadding, padding, textContainerBasePaddingBottom)
 		}
 		title.apply {
 			this.gravity = gravity

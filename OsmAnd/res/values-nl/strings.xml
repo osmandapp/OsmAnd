@@ -1360,7 +1360,7 @@
     <string name="back_to_map">Terug naar kaart</string>
     <string name="share_note">Deel notitie</string>
     <string name="location_on_map">Locatie:\n Lat %1$s\n Lon %2$s</string>
-    <string name="notes">Audio/Video-notities</string>
+    <string name="notes">A/V-notities</string>
     <string name="online_map">Online kaart</string>
     <string name="roads_only">Alleen wegen</string>
     <string name="free">%1$s beschikbaar</string>
@@ -1456,7 +1456,7 @@
     <string name="shared_string_collapse">Inklappen</string>
     <string name="shared_string_my_location">Huidige Positie</string>
     <string name="shared_string_my_favorites">Favorieten</string>
-    <string name="shared_string_tracks">GPX-tracks</string>
+    <string name="shared_string_tracks">Tracks</string>
     <string name="shared_string_currently_recording_track">Momenteel geregistreerde track</string>
     <string name="local_osm_changes_upload_all_confirm">%1$d wijziging(en) naar OSM versturen\?</string>
     <string name="confirmation_to_clear_history">Wil je de geschiedenis verwijderen?</string>
@@ -1836,7 +1836,7 @@
     <string name="osm_live_enter_user_name">Voer een Openbare Naam in</string>
     <string name="osm_live_thanks">Bedankt voor het steunen van OsmAnd!
 \nOm toegang te krijgen tot alle nieuwe functies moet OsmAnd opnieuw gestart worden.</string>
-    <string name="osm_live_region_desc">Een gedeelte van je betaling gaat naar OSM-bijdragers in deze regio.</string>
+    <string name="osm_live_region_desc">Een gedeelte van je donatie gaat naar OSM-bijdragers in deze regio.</string>
     <string name="osm_live_subscription_settings">Abonnementsgegevens</string>
     <string name="osm_live_ask_for_purchase">Neem alsjeblieft eerst een abonnement op OsmAnd Live</string>
     <string name="osm_live_header">Met dit abonnement ontvang je dagelijks updates voor kaarten over de hele wereld.
@@ -2170,7 +2170,7 @@
     <string name="fonts_header">Lettertypes voor de kaart</string>
     <string name="do_not_show_startup_messages_desc">Geen meldingen van app-aanbiedingen en speciale lokale gebeurtenissen tonen.</string>
     <string name="parking_options">Parkeermogelijkheden</string>
-    <string name="full_version_thanks">Dank voor het aanschaffen van de betalende versie van OsmAnd.</string>
+    <string name="full_version_thanks">Dank je wel voor het aanschaffen van de betaalde versie van OsmAnd.</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Heuvelachtig</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Minder heuvelachtig</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Vlak</string>
@@ -2525,11 +2525,11 @@
     <string name="update_is_available">Update beschikbaar</string>
     <string name="download_file">Bestand downloaden</string>
     <string name="start_editing_card_image_text">De gratis wereldwijde reisgids die iedereen kan bewerken.</string>
-    <string name="welcome_to_open_beta_description">Reisgidsen zijn gebaseerd op Wikivoyage. Test gratis alle mogelijkheden tijdens de open beta-testfase.</string>
+    <string name="welcome_to_open_beta_description">Reisgidsen zijn gebaseerd op Wikivoyage. Test gratis alle mogelijkheden tijdens de open bèta-testfase.</string>
     <string name="start_editing_card_description">Je kunt artikelen bewerken op Wikivoyage. Deel jouw kennis, ervaringen, talent en interesses.</string>
     <string name="start_editing">Begin met bewerken</string>
     <string name="get_unlimited_access">Krijg onbeperkte toegang</string>
-    <string name="welcome_to_open_beta">Welkom bij de open beta</string>
+    <string name="welcome_to_open_beta">Welkom bij de open bèta</string>
     <string name="wikivoyage_travel_guide">Reisgidsen</string>
     <string name="wikivoyage_travel_guide_descr">Voert je - binnen OsmAnd, zonder internetverbinding - naar de meest interessante plaatsen op aarde.</string>
     <string name="monthly_map_updates">Maandelijkse kaartupdates</string>
@@ -3886,10 +3886,10 @@
     <string name="copy_to_map_markers">Kopiëren naar Markeervlaggetjes</string>
     <string name="copy_to_map_favorites">Kopiëren naar Favorieten</string>
     <string name="upload_photo">Opladen</string>
-    <string name="upload_photo_completed">Opladen voltooid</string>
+    <string name="upload_photo_completed">Uploaden voltooid</string>
     <string name="uploading_count">Aan het opladen %1$d van %2$d</string>
     <string name="uploaded_count">Opgeladen %1$d van %2$d</string>
-    <string name="toast_select_edits_for_upload">Selecteer de op te laden wijzigingen</string>
+    <string name="toast_select_edits_for_upload">Selecteer wijzigingen om te uploaden</string>
     <string name="track_recording_description">Stoppen met registreren? \nAlle niet-opgeslagen gegevens gaan verloren.</string>
     <string name="select_segments">Selecteer segmenten</string>
     <string name="select_segments_description">%1$s bevat meer dan één segment, u moet het gedeelte voor navigatie specificeren.</string>
@@ -4039,13 +4039,13 @@
     <string name="map_updates_for_mappers">Kaart updates voor OSM bijdragers</string>
     <string name="benefits_for_contributors">Voordelen voor actieve OSM bijdragers</string>
     <string name="benefits_for_contributors_primary_descr">Actieve OpenStreetMap.org bijdragers hebben misschien recht op onbeperkte uurlijkse kaartupdates.</string>
-    <string name="benefits_for_contributors_secondary_descr">Log in op OpenStreetMap om te controleren of je recht hebt op onbeperkte maandelijkse en uurlijkse kaart updates.</string>
+    <string name="benefits_for_contributors_secondary_descr">Log in bij OpenStreetMap om te controleren of je in aanmerking komt voor onbeperkte maandelijkse en uurlijkse kaartupdates.</string>
     <string name="use_login_and_password">Gebruik gebruikersnaam en wachtwoord</string>
     <string name="available_until">Beschikbaar tot %1$s</string>
-    <string name="enough_contributions_descr">Proficiat, je hebt genoeg OpenStreetMap bijdragen geleverd en kan nu genieten van onbeperkte OsmAnd kaart updates!</string>
+    <string name="enough_contributions_descr">Proficiat, je hebt genoeg OpenStreetMap-bijdragen geleverd en kunt nu genieten van onbeperkte OsmAnd-kaartupdates!</string>
     <string name="shared_string_contributions">Bijdragen</string>
     <string name="contributions_may_calculate_with_delay">Het berekenen van bijdragen kan enkele uren duren.</string>
-    <string name="map_updates_are_unavailable_yet">Kaart updates zijn nog niet beschikbaar. :-(</string>
+    <string name="map_updates_are_unavailable_yet">Kaartupdates zijn nog niet beschikbaar. :-(</string>
     <string name="connect_track_points_as">Routepunten verbinden</string>
     <string name="pro_features">Pro functies</string>
     <string name="purchases_restored">Aankopen hersteld</string>
@@ -4798,8 +4798,8 @@
     <string name="goods_delivery_desc">Vrachtvoertuigen kunnen worden beperkt op sommige wegen.</string>
     <string name="includes_osm_changes_until">Inclusief OSM aanpassingen t/m %1$s.</string>
     <string name="next_live_update_time">Volgende bijwerking om %1$s.</string>
-    <string name="live_update_frequency_day_variant">Nieuwe kaarten worden elke dag gecontroleerd.</string>
-    <string name="live_update_frequency_week_variant">Nieuwe kaarten worden elke week gecontroleerd.</string>
+    <string name="live_update_frequency_day_variant">Kaartupdates worden dagelijks gecontroleerd.</string>
+    <string name="live_update_frequency_week_variant">Kaartupdates worden wekelijks gecontroleerd.</string>
     <string name="no_altitude_data_desc">Om %1$s data te ontvangen, moet u uw pad aan de wegen koppelen of online berekenen.</string>
     <string name="routing_attr_motor_type_name">Type verbrandingsmotor</string>
     <string name="routing_attr_motor_type_lpg_name">LPG</string>
@@ -4863,7 +4863,7 @@
     <string name="distance_to_intermediate_widget_desc">De widget toont de afstand tot het eerste tussenliggende punt. Zodra een tussenliggend punt is gepasseerd, wordt de afstand bijgewerkt tot het volgende tussenliggende punt.</string>
     <string name="map_marker_average_speed_desc">Bepaal het tijdsinterval voor berekenen van gemiddelde snelheid (voor berekenen van aankomsttijd).</string>
     <string name="goods_delivery_desc_3">Geldt alleen voor vrachtwagens van maximaal 3,5 ton.</string>
-    <string name="live_update_frequency_hour_variant">Nieuwe kaarten worden elk uur gecontroleerd.</string>
+    <string name="live_update_frequency_hour_variant">Kaartupdates worden uurlijks gecontroleerd.</string>
     <string name="radius_ruler_mode_desc">Op de widget drukken verandert de modus naar Radius liniaal.</string>
     <string name="navigation_points_desc">Navigatie widgets worden ingeschakeld tijdens navigatie om informatie te tonen, zoals afstand, aankomst- of resterende tijd, volgende afslagen, richting, huidige/volgende straatnaam, rijstrook informatie, maximale snelheid, naderende waarschuwingen, bezienswaardigheden, opgeslagen tussenstops.</string>
     <string name="routeInfo_horse_scale_description">Paden laden volgens begaanbaarheid van ruiterpaden</string>
@@ -4876,7 +4876,7 @@
     <string name="weight_limit_error">Minimumwaarde is \"%1$s\" ton. Gebruik het \"%2$s\"-profiel als het voertuig minder weegt dan de minimumwaarde.</string>
     <string name="share_link">Deel link</string>
     <string name="weather_online_cache">Online cache</string>
-    <string name="not_enough_contributions_descr">Een minimum van %1$s wijzigingen over een periode van de laatste twee maanden %2$s is nodig om toegang te krijgen tot onbeperkte kaartupdates elk uur.</string>
+    <string name="not_enough_contributions_descr">Minimaal %1$s wijzigingen in de afgelopen twee maanden %2$s zijn nodig om toegang te krijgen tot onbeperkte uurlijkse kaartupdates.</string>
     <string name="release_4_3">• Nieuwe, snellere Versie 2 kaartrenderer en 2.5D-aanzicht
 \n
 \n • Vloeiende animatie van locatieveranderingen wanneer je in beweging bent
@@ -5376,7 +5376,7 @@
     <string name="key_bindings">Toetstoewijzingen</string>
     <string name="help_article_navigation_routing_moped_routing_name">Bromfietsroutes</string>
     <string name="help_article_plan_route_name">Routeplannen</string>
-    <string name="track_not_recorded">Niet opgenomen</string>
+    <string name="track_not_recorded">Niet geregistreerd</string>
     <string name="shared_string_all_tracks">Alle tracks</string>
     <string name="precise_distance_numbers">Nauwkeurige afstandsaantallen</string>
     <string name="shared_string_eta">Geschatte aankomsttijd (ETA)</string>
@@ -5919,7 +5919,7 @@
     <string name="us_gallons">US-gallons</string>
     <string name="unit_of_volume_description">De gekozen eenheid zal gebruikt worden voor alle volumegerelateerde gegevens in dit profiel.</string>
     <string name="unit_of_volume">Inhoudsmaat</string>
-    <string name="record_obd_data">Voertuigstatistieken registreren</string>
+    <string name="record_obd_data">Voertuigdiagnostiek registreren</string>
     <string name="shared_string_dynamic">Dynamisch</string>
     <string name="obd_connected_to_device">Verbonden met %s</string>
     <string name="obd_not_connected_to_device">Verbinding verbroken met %s</string>
@@ -5933,7 +5933,7 @@
     <string name="default_buttons_opacity_original_description">Elke knop behoudt de eigen individuele achtergrondopaciteit.</string>
     <string name="preview_next_turn">Voorvertoning van de volgende afslag</string>
     <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Houd essentiële voertuiggegevens bij via het OBD-II-protocol. Monitor belangrijke statistieken zoals onder andere: snelheid, motortoerental (RPM), brandstofverbruik.</string>
-    <string name="vehicle_metrics_obd_ii">Voertuigstatistieken (OBD-II)</string>
+    <string name="vehicle_metrics_obd_ii">Voertuigdiagnostiek (OBD-II)</string>
     <string name="shared_string_hour">Uur</string>
     <string name="ltr_or_rtl_combine_via_per">%1$s per %2$s</string>
     <string name="obd_engine_runtime_desc">Toont hoelang de motor al draait sinds het starten.</string>
@@ -5999,8 +5999,8 @@
     <string name="obd_fuel_type_electric">Elektrisch</string>
     <string name="obd_fuel_type_hydrogen">Waterstof</string>
     <string name="obd_fuel_type_unknown">Type brandstof onbekend</string>
-    <string name="obd_widget_group">Voertuigmetingen</string>
-    <string name="vehicle_metrics_plugin_settings">Instellingen voor voertuigmetingen</string>
+    <string name="obd_widget_group">Voertuigdiagnostiek</string>
+    <string name="vehicle_metrics_plugin_settings">Instellingen voor voertuigdiagnostiek</string>
     <string name="write_location_provider">Locatie-aanbieder opschrijven</string>
     <string name="write_location_provider_description">Sla de locatie-aanbieder op bij elk trackpunt tijdens het registreren</string>
     <string name="third_links">Links van derden</string>
@@ -6062,8 +6062,8 @@
     <string name="obd_fuel_consumption_rate_desc">Toont het brandstofverbruik van het voertuig op basis van de OBD-gegevens en de locatie</string>
     <string name="obd_fuel_left_liters">Resterende brandstof (liters)</string>
     <string name="obd_fuel_type">Brandstofsoort</string>
-    <string name="obd_plugin_name">Voertuigmetingen</string>
-    <string name="obd_plugin_description">Monitor belangrijke voertuigmetingen met het OBD-II-protocol. Bekijk gegevens zoals:\n • Motorsnelheid, motordraaitijd, berekende motorbelasting \n • Brandstofverbruik, brandstofdruk, resterende brandstof\n • Inlaattemperatuur, omgevingstemperatuur, koelvloeistoftemperatuur, motorolietemperatuur\n • Voertuigsnelheid, gaskleppositie, batterijspanning\n</string>
+    <string name="obd_plugin_name">Voertuigdiagnostiek</string>
+    <string name="obd_plugin_description">Monitor belangrijke voertuigdiagnostiek met het OBD-II-protocol. Bekijk gegevens zoals:\n • Motorsnelheid, motordraaitijd, berekende motorbelasting \n • Brandstofverbruik, brandstofdruk, resterende brandstof\n • Inlaattemperatuur, omgevingstemperatuur, koelvloeistoftemperatuur, motorolietemperatuur\n • Voertuigsnelheid, gaskleppositie, batterijspanning\n</string>
     <string name="obd_support">OBD-ondersteuning</string>
     <string name="shared_string_dp">dp</string>
     <string name="shared_string_interface">Interface</string>
@@ -6106,7 +6106,7 @@
     <string name="poi_categories">POI-categorieën</string>
     <string name="offline_wikivoyage">Offline Wikivoyage</string>
     <string name="release_4_5">• BLE/ANT+ sensoren: verbeterde verbinding, schrijven en bekijken van ontvangen gegevens naar GPX \n\n • Gratis back-up voor favorieten en instellingen op\"OsmAnd Cloud\" \n\n • Nieuw formaat voor terreinkaarten met ondersteuning voor 3D-reliëf \n\n • Beheer van tracks: bijgewerkte UI, sorteren toegevoegd, ondersteuning voor geneste mappen \n\n • Android Auto: nieuw startmenu voor toegang tot favorieten, tracks en POI-categorieën \n\n • Een lijst van widgets voor het bovenste/onderste paneel \n\n • Nieuw \"Trein\"-profiel, waarmee je treinroutes kunt berekenen \n\n • Contourlijnen werken met elke \"Kaartbron\" \n\n • Een lijst van standaardacties voor externe toetsenborden \n\n • Eigen routebestanden, opties toegevoegd om te verwijderen of te overschrijven \n\n • Optie toegevoegd om \"Afwijking van route aan te kondigen\" \n\n • Startscherm: optie toegevoegd om de opgeslagen OsmAnd-staat te herstellen vanuit een bestanden \n\n • \"Gevaarlijke stoffen\"-klassen toegevoegd voor vrachtwagennavigatie in Noord-Amerika \n\n • Ondersteuning toegevoegd voor \"via ferrata\" voor voetgangersroutes \n\n • \"CAI\"-schaal toegevoegd voor moeilijkheidsclassificatie van de routes \n\n • Taalkeuze per app gerepareerd \n\n • Ondersteuning voor thema-iconen toegevoegd \n\n • OsmAnd Cloud: optie toegevoegd om het account te kunnen verwijderen \n\n • Toegankelijkheid: aanraakvlakgrootte van knoppen gewijzigd naar 48 dp; probleem opgelost met kaart-UI zichtbaarheid bij het gebruik van een schermlezer \n\n • Japanse spraakopdrachten bewerkt\n\n • Hoogteverschil en hellingevaluatie bewerkt</string>
-    <string name="release_4_9">• Een volledig scherm galerijweergave toegevoegd voor Wikimedia-afbeeldingen\n\n • Een nieuwe plug-in \"Voertuigmetingen\" geïntroduceerd om voertuigprestaties te kunnen monitoren met behulp van het OBD-II-protocol\n\n • De mogelijkheid toegevoegd om activiteiten aan tracks toe te wijzen en deze dienovereenkomstig te filteren\n\n • Nieuwe snelle acties geïmplementeerd om een reis op te kunnen nemen en het vergrendelen van het aanraakscherm\n\n • Aanpasbare kaartknopweergave en een nauwkeurig raster geïntroduceerd\n\n • Contextmenu en actie \"Gemiddelde snelheid resetten\" toegevoegd aan widgets\n\n • Nieuwe routelaag \"Dirt Bike trails\" toegevoegd\n\n • Probleem met \"automatische reisopname tijdens het navigeren\" opgelost\n\n • Probleem met omgedraaide coördinaten in RTL opgelost\n\n • Probleem met ontbrekende sensorgegevens voor de huidige reisopname opgelost\n\n • Informatie over de omgeving van het geselecteerde punt toegevoegd\n\n • Snelle actie toegevoegd om de zichtbaarheid van OSM-bwerkingen aan te passen\n\n • Zichtbaarheidsparameters voor opties voor terrein-inkleuring opgesplitst\n\n • Een aanraakbaar pictogram toegevoegd om toegang of andere weg- of padattributen weer te geven</string>
+    <string name="release_4_9">• Een volledig scherm galerijweergave toegevoegd voor Wikimedia-afbeeldingen\n\n • Een nieuwe plug-in \"Voertuigdiagnostiek\" geïntroduceerd om voertuigprestaties te kunnen monitoren met behulp van het OBD-II-protocol\n\n • De mogelijkheid toegevoegd om activiteiten aan tracks toe te wijzen en deze dienovereenkomstig te filteren\n\n • Nieuwe snelle acties geïmplementeerd om een reis op te kunnen nemen en het vergrendelen van het aanraakscherm\n\n • Aanpasbare kaartknopweergave en een nauwkeurig raster geïntroduceerd\n\n • Contextmenu en actie \"Gemiddelde snelheid resetten\" toegevoegd aan widgets\n\n • Nieuwe routelaag \"Dirt Bike trails\" toegevoegd\n\n • Probleem met \"automatische reisopname tijdens het navigeren\" opgelost\n\n • Probleem met omgedraaide coördinaten in RTL opgelost\n\n • Probleem met ontbrekende sensorgegevens voor de huidige reisopname opgelost\n\n • Informatie over de omgeving van het geselecteerde punt toegevoegd\n\n • Snelle actie toegevoegd om de zichtbaarheid van OSM-bwerkingen aan te passen\n\n • Zichtbaarheidsparameters voor opties voor terrein-inkleuring opgesplitst\n\n • Een aanraakbaar pictogram toegevoegd om toegang of andere weg- of padattributen weer te geven</string>
     <string name="rendering_attr_watercolor_description">Kleur van water</string>
     <string name="rendering_attr_watercolor_name">Waterkleur</string>
     <string name="rendering_attr_depthContoursDashed_description">Gestreepte dieptecontouren</string>
@@ -6228,7 +6228,7 @@
     <string name="shared_string_centimeters">Centimeter</string>
     <string name="bicycle_width_limit_description">Geef je fietsbreedte op om smalle fietspaden te vermijden.</string>
     <string name="copy_link">Kopieer link</string>
-    <string name="vehicle_metrics_chart_category">Voertuigstatistieken</string>
+    <string name="vehicle_metrics_chart_category">Voertuigdiagnostiek</string>
     <string name="delete_folder_description">Map \"%1$s\" verwijderen?</string>
     <string name="routing_attr_pt_limit_description">Geef het aantal beste routes op om weer te geven</string>
     <string name="show_spherical_map">Globeweergave</string>
@@ -6465,4 +6465,20 @@
     <string name="ar_mode_enabled">AR-modus ingeschakeld</string>
     <string name="ar_mode_disabled">AR-modus uitgeschakeld</string>
     <string name="shared_string_world_weather_map">Wereld weerkaart</string>
+    <string name="map_widget_memory_info">Geheugeninformatie</string>
+    <string name="map_widget_memory_info_desc">Monitort Java heap, native allocations en grafisch geheugen.</string>
+    <string name="memory_used_settings">Gebruikte Java Heap</string>
+    <string name="memory_allocated_settings">Toegewezen Java Heap</string>
+    <string name="memory_limit_settings">Maximale Java Heap limiet</string>
+    <string name="memory_native_settings">Toegewezen Native Heap</string>
+    <string name="memory_graphics_settings">Grafisch geheugen</string>
+    <string name="shared_string_heap">Heap</string>
+    <string name="shared_string_native">Native</string>
+    <string name="shared_string_gpu">GPU</string>
+    <string name="shared_string_allocated">Toegewezen</string>
+    <string name="open_till_short">Tot</string>
+    <string name="open_from_short">Vanaf</string>
+    <string name="astro_designations">Aanduidingen</string>
+    <string name="astronomy_map">Astronomische kaart</string>
+    <string name="obd_simulation_device">Simulatie-apparaat</string>
 </resources>

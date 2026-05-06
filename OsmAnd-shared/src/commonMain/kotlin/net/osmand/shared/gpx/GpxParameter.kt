@@ -52,6 +52,7 @@ enum class GpxParameter(
 	WIDTH("width", "TEXT", String::class, null, false),
 	COLORING_TYPE("gradientScaleType", "TEXT", String::class, null, false),
 	COLOR_PALETTE("colorPalette", "TEXT", String::class, null, false),
+	POINTS_GROUPS("pointsGroups", "TEXT", String::class, null, false),
 	SMOOTHING_THRESHOLD("smoothingThreshold", "double", Double::class, Double.NaN, false),
 	MIN_FILTER_SPEED("minFilterSpeed", "double", Double::class, Double.NaN, false),
 	MAX_FILTER_SPEED("maxFilterSpeed", "double", Double::class, Double.NaN, false),
@@ -74,6 +75,7 @@ enum class GpxParameter(
 	MIN_SENSOR_HEART_RATE("minSensorHr", "int", Int::class, 0, true),
 	AVG_SENSOR_HEART_RATE("avgSensorHr", "double", Double::class, 0.0, true),
 	DATA_VERSION("dataVersion", "int", Int::class, 0, false),
+	LEGACY_POINTS_GROUPS_CHECKED("legacyPointsGroupsChecked", "int", Boolean::class, null, false),
 	APPEARANCE_LAST_MODIFIED_TIME("appearanceLastModifiedTime", "bigint", Long::class, 0L, false),
 
 	AVG_OBD_ENGINE_LOAD("avgVmEload", "double", Double::class, 0.0, true),
@@ -183,6 +185,11 @@ enum class GpxParameter(
 			TRACK_3D_LINE_POSITION_TYPE, TRACK_VISUALIZATION_TYPE, TRACK_3D_WALL_COLORING_TYPE, COLOR_PALETTE
 		)
 
+		private val GPX_APPEARANCE_PARAMETERS = buildList {
+			addAll(APPEARANCE_PARAMETERS)
+			add(POINTS_GROUPS)
+		}
+
 		private val GPX_DIR_PARAMETERS: List<GpxParameter> = buildList {
 			add(FILE_NAME)
 			add(FILE_DIR)
@@ -192,6 +199,8 @@ enum class GpxParameter(
 		}
 
 		fun getAppearanceParameters(): List<GpxParameter> = APPEARANCE_PARAMETERS
+
+		fun getGpxAppearanceParameters(): List<GpxParameter> = GPX_APPEARANCE_PARAMETERS
 
 		fun getGpxDirParameters(): List<GpxParameter> = GPX_DIR_PARAMETERS
 

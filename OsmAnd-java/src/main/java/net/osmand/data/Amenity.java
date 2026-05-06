@@ -1069,4 +1069,25 @@ public class Amenity extends MapObject {
 
 		return result;
 	}
+
+	public String getIcon() {
+		if (type == null || subType == null) {
+			return null;
+		}
+		PoiType pt = type.getPoiTypeByKeyName(subType);
+		if (pt == null) {
+			return null;
+		}
+		String icon = pt.getOriginalIconName();
+		if (icon == null && !pt.getPoiAdditionals().isEmpty()) {
+			for (PoiType ad : pt.getPoiAdditionals()) {
+				String headerIcon = ad.getOriginalIconName();
+				if (headerIcon != null && getAdditionalInfo(ad.getKeyName()) != null) {
+					icon = headerIcon;
+					break;
+				}
+			}
+		}
+		return icon;
+	}
 }

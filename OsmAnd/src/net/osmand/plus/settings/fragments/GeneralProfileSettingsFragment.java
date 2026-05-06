@@ -49,6 +49,7 @@ import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
+import net.osmand.shared.routing.GeneralRouterProfile;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -255,12 +256,12 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		if (routeService == RouteService.OSMAND) {
 			GeneralRouter router = app.getRouter(mode);
 			if (router != null) {
-				GeneralRouter.GeneralRouterProfile routerProfile = router.getProfile();
+				GeneralRouterProfile routerProfile = router.getProfile();
 				hidePref = routerProfile == null
-						|| routerProfile == GeneralRouter.GeneralRouterProfile.PEDESTRIAN
-						|| routerProfile == GeneralRouter.GeneralRouterProfile.BICYCLE
-						|| routerProfile == GeneralRouter.GeneralRouterProfile.HORSEBACKRIDING
-						|| routerProfile == GeneralRouter.GeneralRouterProfile.SKI;
+						|| routerProfile == GeneralRouterProfile.PEDESTRIAN
+						|| routerProfile == GeneralRouterProfile.BICYCLE
+						|| routerProfile == GeneralRouterProfile.HORSEBACKRIDING
+						|| routerProfile == GeneralRouterProfile.SKI;
 			}
 		}
 		ListPreferenceEx unitOfVolumePref = requirePreference(settings.UNIT_OF_VOLUME.getId());

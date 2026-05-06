@@ -198,6 +198,10 @@ public class SearchSettings {
 		return s;
 	}
 
+	public void updateSearchTypes(ObjectType... searchTypes) {
+		this.searchTypes = searchTypes;
+	}
+
 	public SearchSettings resetSearchTypes() {
 		SearchSettings s = new SearchSettings(this);
 		s.searchTypes = null;
@@ -217,7 +221,7 @@ public class SearchSettings {
 
 	public SearchSettings setSortByName(boolean sortByName) {
 		SearchSettings s = new SearchSettings(this);
-		s.sortType = sortByName ? SortType.BY_RELEVANCE : SortType.IGNORE_DISTANCE;
+		s.sortType = sortByName ?  SortType.IGNORE_DISTANCE : SortType.BY_RELEVANCE;
 		return s;
 	}
 	

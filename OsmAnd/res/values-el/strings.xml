@@ -31,7 +31,7 @@
     <string name="poi_filter_fuel">Καύσιμα</string>
     <string name="show_warnings_title">Εμφάνιση προειδοποιήσεων…</string>
     <string name="show_warnings_descr">Ρύθμιση κυκλοφοριακών προειδοποιήσεων (όρια ταχύτητας, αναγκαστικές στάσεις, σαμαράκια, σήραγγες) προειδοποιήσεις καμερών ταχύτητας και πληροφορίες λωρίδων.</string>
-    <string name="use_compass_navigation_descr">Χρήση της πυξίδας όταν η κατεύθυνση δεν έχει ανιχνευτεί.</string>
+    <string name="use_compass_navigation_descr">Χρήση της πυξίδας όταν η πορεία δεν έχει ανιχνευτεί.</string>
     <string name="use_compass_navigation">Χρήση πυξίδας</string>
     <string name="avoid_motorway">Όχι αυτοκινητόδρομους</string>
     <string name="auto_zoom_map_descr">Επίπεδο εστίασης χάρτη ανάλογα με την ταχύτητά σας (ενώ ο χάρτης συγχρονίζεται με την τρέχουσα θέση).</string>
@@ -1502,7 +1502,7 @@
     <string name="context_menu_read_article">Διαβάστε το άρθρο</string>
     <string name="context_menu_points_of_group">Όλα τα σημεία της ομάδας</string>
     <string name="open_from">Ανοιχτά από</string>
-    <string name="open_till">Ανοιχτά μέχρι τις</string>
+    <string name="open_till">Ανοιχτά μέχρι</string>
     <string name="will_close_at">Κλείνει στις</string>
     <string name="will_open_at">Ανοίγει στις</string>
     <string name="will_open_on">Ανοίγει στις</string>
@@ -3083,8 +3083,8 @@
     <string name="new_plugin_added">Προστέθηκε νέο πρόσθετο</string>
     <string name="join_segments">Συνένωση τμημάτων</string>
     <string name="add_new_profile_q">Προσθήκη νέου προφίλ \'%1$s\';</string>
-    <string name="save_heading">Συμπερίληψη κατεύθυνσης</string>
-    <string name="save_heading_descr">Αποθήκευση κατεύθυνσης για κάθε σημείο ίχνους κατά την εγγραφή.</string>
+    <string name="save_heading">Συμπερίληψη πορείας</string>
+    <string name="save_heading_descr">Αποθήκευση πορείας για κάθε σημείο ίχνους κατά την εγγραφή.</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
     <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="personal_category_name">Προσωπικό</string>
@@ -5724,7 +5724,7 @@
     <string name="feature_available_as_part_of_plan">%1$s διαθέσιμο ως μέρος του πλάνου %2$s</string>
     <string name="write_bearing_description">Αποθήκευση προσανατολισμού σε κάθε σημείο του ίχνους κατά την εγγραφή</string>
     <string name="write_bearing">Γράψιμο Προσανατολισμού</string>
-    <string name="write_heading_description">Αποθήκευση κατεύθυνσης πορείας σε κάθε σημείο του ίχνους κατά την εγγραφή</string>
+    <string name="write_heading_description">Αποθήκευση πορείας σε κάθε σημείο του ίχνους κατά την εγγραφή</string>
     <string name="write_heading">Γράψιμο Πορείας</string>
     <string name="wheel_circumference">Περιφέρεια τροχού</string>
     <string name="map_marker_interval_dialog_desc">Ορίστε το χρονικό μεσοδιάστημα για το οποίο η μέση ταχύτητα θα μετράται για τον υπολογισμό της εκτιμώμενης ώρας άφιξης.</string>
@@ -5924,4 +5924,14 @@
     <string name="ar_mode_enabled">Λειτουργία AR Ενεργή</string>
     <string name="ar_mode_disabled">Λειτουργία AR Ανενεργή</string>
     <string name="sensors_not_available_for_ar">Οι αισθητήρες δεν είναι διαθέσιμοι για AR</string>
+    <string name="map_widget_memory_info">Πληροφορίες μνήμης</string>
+    <string name="memory_graphics_settings">Μνήμη γραφικών</string>
+    <string name="shared_string_heap">Σωρός</string>
+    <string name="shared_string_native">Εγγενής</string>
+    <string name="shared_string_gpu">GPU</string>
+    <string name="memory_used_settings">Χρησιμοποιημένος Σωρός Java</string>
+    <string name="open_till_short">Έως</string>
+    <string name="open_from_short">Από</string>
+    <string name="astronomy_map">Αστρονομικός χάρτης</string>
+    <string name="astro_designations">Ονομασίες</string>
 </resources>

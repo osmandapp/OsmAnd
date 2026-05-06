@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.CollatorStringMatcher;
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
 import net.osmand.data.Amenity;
@@ -42,6 +43,8 @@ import net.osmand.util.MapUtils;
 import net.osmand.util.OpeningHoursParser;
 import net.osmand.util.OpeningHoursParser.OpeningHours;
 
+import org.apache.commons.logging.Log;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -58,6 +61,8 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilter {
+
+	private static final Log LOG = PlatformUtil.getLog(PoiUIFilter.class);
 
 	public static final String STD_PREFIX = "std_";
 	public static final String ONLINE_PREFIX = "online_";
@@ -405,18 +410,22 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 
 	public List<Amenity> searchAmenities(double top, double left, double bottom, double right,
 			int zoom, ResultMatcher<Amenity> matcher, boolean filterUnique) {
+		LOG.debug("searchAmenities (bbox): filter=" + filterId + ", zoom=" + zoom + ", bbox=[" + left + "," + top + " to " + right + "," + bottom + "]");
 		Set<Amenity> results = new HashSet<>();
 		if (currentSearchResult != null) {
 			List<Amenity> tempResults = new ArrayList<>(currentSearchResult);
+			int cachedMatches = 0;
 			for (Amenity a : tempResults) {
 				LatLon l = a.getLocation();
 				if (l != null && l.getLatitude() <= top && l.getLatitude() >= bottom
 						&& l.getLongitude() >= left && l.getLongitude() <= right) {
 					if (matcher == null || matcher.publish(a)) {
 						results.add(a);
+						cachedMatches++;
 					}
 				}
 			}
+			LOG.debug("searchAmenities (bbox): Retained " + cachedMatches + " amenities from currentSearchResult cache.");
 		}
 		List<Amenity> amenities = searchAmenitiesInternal(top / 2 + bottom / 2, left / 2 + right / 2,
 				top, bottom, left, right, zoom, matcher);
@@ -431,6 +440,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 			AmenitySearcher.Settings settings = resourceManager.getDefaultAmenitySearchSettings();
 			resultList = resourceManager.getAmenitySearcher().mergeAmenities(resultList, settings);
 		}
+		LOG.debug("searchAmenities (bbox): Finished combining and sorting. Yielding " + resultList.size() + " total items to POIMapLayer.");
 		return resultList;
 	}
 
@@ -448,10 +458,12 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 			comparator = Comparator.comparingInt(Amenity::getTravelEloNumber);
 			limit = 1000;
 		}
-        currentSearchResult = dataProvider.searchAmenities(
+		LOG.debug("searchAmenitiesInternal: Dispatching search to dataProvider for filter=" + filterId);
+		currentSearchResult = dataProvider.searchAmenities(
 				lat, lon, topLatitude, bottomLatitude, leftLongitude, rightLongitude,
 				zoom, matcher, comparator, limit
 		);
+		LOG.debug("searchAmenitiesInternal: dataProvider returned " + (currentSearchResult != null ? currentSearchResult.size() : 0) + " items.");
 		return currentSearchResult;
 	}
 

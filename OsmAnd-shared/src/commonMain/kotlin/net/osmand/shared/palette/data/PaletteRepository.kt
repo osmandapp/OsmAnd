@@ -199,6 +199,10 @@ class PaletteRepository {
 		return null
 	}
 
+	fun invalidatePalette(id: String) {
+		cachedPalettesForId.remove(id)
+	}
+
 	companion object {
 		private val LOG = LoggerFactory.getLogger("PaletteRepository")
 	}

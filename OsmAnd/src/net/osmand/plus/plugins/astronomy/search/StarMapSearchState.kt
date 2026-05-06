@@ -151,9 +151,10 @@ internal data class StarMapSearchStateSnapshot(
 	}
 
 	private fun matchesQuery(entry: StarMapSearchEntry, queryLower: String): Boolean {
+		val display = entry.displayName.lowercase(Locale.getDefault())
 		val localized = entry.objectRef.localizedName.orEmpty().lowercase(Locale.getDefault())
 		val original = entry.objectRef.name.lowercase(Locale.getDefault())
-		return localized.contains(queryLower) || original.contains(queryLower)
+		return display.contains(queryLower) || localized.contains(queryLower) || original.contains(queryLower)
 	}
 
 	private fun matchesTypeFilter(

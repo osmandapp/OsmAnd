@@ -10,6 +10,11 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+	<string name="obd_simulation_device">Simulation device</string>
+	<string name="astronomy_map">Astronomy Map</string>
+	<string name="astro_designations">Designations</string>
+	<string name="open_from_short">From</string>
+	<string name="open_till_short">Until</string>
 	<string name="map_widget_memory_info">Memory info</string>
 	<string name="map_widget_memory_info_desc">Monitors Java heap, native allocations, and graphics memory.</string>
 	<string name="memory_used_settings">Used Java Heap</string>
@@ -804,8 +809,8 @@ You will be able to pair this scanner again at any time.</string>
     <string name="app_mode_suv">SUV</string>
 	<string name="graph_axis">Graph axis</string>
 	<string name="y_axis_description">Select up to two options for Y-Axis.</string>
-	<string name="delete_widget_description">This widget will be deleted. You can restore it later in Configure Screen.</string>
-	<string name="delete_widget">Delete widget?</string>
+	<string name="delete_widget_description">This widget will be removed. You can restore it later in Configure Screen.</string>
+	<string name="delete_widget">Remove widget?</string>
 	<string name="add_widget_below">Add widget below</string>
 	<string name="add_widget_above">Add widget above</string>
 	<string name="add_widget_to_the_right">Add widget to the right</string>
@@ -2315,7 +2320,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="option_available_only_in_osmand_pro">Available as part of the OsmAnd Pro subscription.</string>
     <string name="track_has_no_needed_data">The track is missing the respective data.</string>
     <string name="promo_subscription">Promo subscription</string>
-    <string name="active_till">Active till %1$s</string>
+    <string name="active_till">Active until %1$s</string>
     <string name="on_hold_since">On hold since %1$s</string>
     <string name="explore_wikipedia_offline">Explore Wikipedia offline.</string>
     <string name="shared_string_purchased">Purchased</string>
@@ -3934,7 +3939,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="context_menu_read_article">Read article</string>
     <string name="context_menu_points_of_group">All points of the group</string>
     <string name="open_from">Open from</string>
-    <string name="open_till">Open till</string>
+    <string name="open_till">Open until</string>
     <string name="will_close_at">Closes at</string>
     <string name="will_open_at">Opens at</string>
     <string name="will_open_on">Opens at</string>

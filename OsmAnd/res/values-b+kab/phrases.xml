@@ -49,7 +49,7 @@
     <string name="poi_company">Taṛmist</string>
     <string name="poi_townhall">Taɣiwant</string>
     <string name="poi_hotel">Asensu</string>
-    <string name="poi_travel_agent">Tanegga n ussikel</string>
+    <string name="poi_travel_agent">Tanegga n usikel</string>
     <string name="poi_cinema">Ssinima</string>
     <string name="poi_hairdresser">Anersam</string>
     <string name="poi_bank">Tabanka</string>
@@ -164,7 +164,7 @@
     <string name="poi_post_street">Abrid</string>
     <string name="poi_bicycle_no">Azlalam</string>
     <string name="poi_car_no">Takerrust: uhu</string>
-    <string name="poi_water_place_access_family">Famille</string>
+    <string name="poi_water_place_access_family">Tawacult</string>
     <string name="poi_water_place_access_community">Tarbaɛt</string>
     <string name="poi_water_supply_pump">Tamejɣart</string>
     <string name="poi_water_purification_none">Ula yiwen</string>
@@ -369,7 +369,7 @@
     <string name="poi_tactile_paving_yes">Ih</string>
     <string name="poi_smoking_yes">Tessireg</string>
     <string name="poi_smoking_no">Tessireg</string>
-    <string name="poi_covered_no">"Meṛṛa isenfaṛen i yeɛna uɣawas n ufter,ttwakksen. "</string>
+    <string name="poi_covered_no">Meṛṛa isenfaṛen i yeɛna uɣawas n ufter,ttwakksen.</string>
     <string name="poi_covered_yes">Ih</string>
     <string name="poi_fireplace_yes">Ih</string>
     <string name="poi_board_type_astronomy">Tasnallunt</string>
@@ -401,7 +401,7 @@
     <string name="poi_seasonal_no">Uhu</string>
     <string name="poi_seasonal_yes">Ih</string>
     <string name="poi_drinking_water_no">Uhu</string>
-    <string name="poi_drinking_water_yes">Ih</string>
+    <string name="poi_drinking_water_yes">Ih;Aman n tissit</string>
     <string name="poi_fee_no">Uhu</string>
     <string name="poi_fee_yes">Ih</string>
     <string name="poi_operator">Amahal</string>
@@ -471,8 +471,8 @@
     <string name="poi_basin">Amdun</string>
     <string name="poi_allotments">Talmat n twacult</string>
     <string name="poi_landfill">Agudu</string>
-    <string name="poi_recycling_furniture"></string>
-    <string name="poi_recycling_hardcore"></string>
+    <string name="poi_recycling_furniture"/>
+    <string name="poi_recycling_hardcore"/>
     <string name="poi_recycling_computers">Iselkimen</string>
     <string name="poi_recycling_metal">Uzzal</string>
     <string name="poi_recycling_aluminium">Aluminyum</string>
@@ -529,7 +529,7 @@
     <string name="poi_depth">Profondeur du framebuffer</string>
     <string name="poi_water_source_stream">Flux</string>
     <string name="poi_water_source_pond">Pond</string>
-    <string name="poi_water_source_main">MAIN</string>
+    <string name="poi_water_source_main">Main</string>
     <string name="poi_fire_hydrant_position_street">Abrid</string>
     <string name="poi_fire_hydrant_position_green">Adal</string>
     <string name="poi_disease_aids_no">Tallalin timeẓranin</string>
@@ -614,7 +614,7 @@
     <string name="poi_brushless">War imeṣleḥ</string>
     <string name="poi_tactile_paving">Anasiw annalan</string>
     <string name="poi_payment_toll_type">Tawsit n lexlaṣ</string>
-    <string name="poi_water_source">Tala</string>
+    <string name="poi_water_source">Aɣbalu n waman</string>
     <string name="poi_fire_hydrant_position">Adig</string>
     <string name="poi_bicycle_service">Ameẓlu n uvilu</string>
     <string name="poi_vending_type">Anaw n uznuzu</string>
@@ -774,4 +774,20 @@
     <string name="poi_training_language">Aselmed : tutlayt</string>
     <string name="poi_board_type_public_transport">Amesni azayez</string>
     <string name="poi_shelter_type_public_transport">Amesni azayez</string>
+    <string name="poi_vending_bread">Aɣrum</string>
+    <string name="poi_water_characteristic_mud">Aluḍ</string>
+    <string name="poi_water_source_well">Lbir</string>
+    <string name="poi_playground_water">Aman</string>
+    <string name="poi_water_well">Lbir n waman</string>
+    <string name="poi_watermill">Tassirt n waman</string>
+    <string name="poi_water_supply_water_well">Lbir n waman</string>
+    <string name="poi_water_filter">Aman;Aman n tissit</string>
+    <string name="poi_us_maps_recreation_area_activity_other_activities">Irmad nniḍen</string>
+    <string name="poi_us_maps_recreation_area_open_status_open">Yeldi</string>
+    <string name="poi_us_maps_recreation_area_open_status_closed">Yemdel</string>
+    <string name="poi_us_maps_recreation_area_open_status_unreachable">Ur yettwakcam ara</string>
+    <string name="poi_name_left">Isem ɣef tama tazelmaḍt</string>
+    <string name="poi_route_article">Imagraden n usikel</string>
+    <string name="poi_route_point_category">Taggayt n usikel</string>
+    <string name="poi_route_train_ref">Tamacint</string>
 </resources>

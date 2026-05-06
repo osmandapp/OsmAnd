@@ -1175,7 +1175,7 @@
     <string name="rendering_attr_noAdminboundaries_description">Zabrani prikaz oblastnih granica (nivoi rukovaoca 5-9).</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Prikazuj puteve prema putanjama OSMC-a.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Planinske staze</string>
-    <string name="download_roads_only_maps">Mapa puteva</string>
+    <string name="download_roads_only_maps">Mapa samo puteva</string>
     <string name="map_screen_orientation">Orijentacija ekrana</string>
     <string name="map_orientation_landscape">Vodoravno</string>
     <string name="map_orientation_portrait">Uspravno</string>
@@ -5715,7 +5715,7 @@
     <string name="saved_to_device">Sačuvano na uređaju</string>
     <string name="travel_guides">Vodiči</string>
     <string name="show_debug_tile_description">Prikaz informacija o simbolima na mapi svakog tila</string>
-    <string name="show_debug_tile">Prikaži informacije o tilovima</string>
+    <string name="show_debug_tile">Prikaži informaciju o pločici</string>
     <string name="deactivated_map">Deaktivirana mapa</string>
     <string name="suggest_activate_map_msg">%1$s mapa je deaktivirana,\naktivirajte da biste videli ovu oblast.</string>
     <string name="unit_of_temperature_description">Izabrane jedinice će biti primenjene na sve podatke vezane za temperaturu u trenutnom profilu.</string>
@@ -5877,8 +5877,8 @@
     <string name="routing_attr_maxaxleload_name">Maksimalno osovinsko opterećenje</string>
     <string name="is_parking_time_limited">Da li je vreme parkiranja ograničeno?</string>
     <string name="centimeter">cm</string>
-    <string name="shared_string_centimeters">centimetara</string>
-    <string name="bicycle_width_limit_description">Obezbedite širinu bicikla kako biste izbegli uske biciklističke staze.</string>
+    <string name="shared_string_centimeters">centimetri</string>
+    <string name="bicycle_width_limit_description">Dostavite širinu vašeg bicikla kako biste izbegli uske biciklističke staze.</string>
     <string name="copy_link">Kopiraj link</string>
     <string name="routing_attr_pt_limit_name">Prikaz N najboljih ruta</string>
     <string name="routing_attr_pt_limit_description">Navedite broj najboljih ruta za prikaz</string>
@@ -5889,7 +5889,7 @@
     <string name="delete_folder_description">Obrisati „%1$s“ folder?</string>
     <string name="show_spherical_map">Globusni prikaz</string>
     <string name="enable_3d_objects">3D zgrada</string>
-    <string name="show_expand_button">Pokaži dugme za proširenje</string>
+    <string name="show_expand_button">Prikaži dugme za proširivanje</string>
     <string name="imprecise_coordinates">Neprecizne koordinate</string>
     <string name="star_map">Zvezdana mapa</string>
     <string name="star_charts_name">Zvezdane mape</string>
@@ -6120,4 +6120,20 @@
     <string name="astro_next_day_suffix">⁺¹</string>
     <string name="shared_string_world_weather_map">Svetska vremenska mapa</string>
     <string name="release_5_3">• Dodata je podrška za 3D zgrade\n\n • Sferni prikaz mape\n\n • Astronomski dodatak sa noćnom mapom i bazom podataka zvezda\n\n • Novi režimi boja za brzinomer: tolerancija i prekoračenje brzine\n\n • Odvojeni rasporedi vidžeta za pejzažni i portretni režim\n\n • Vidžeti za snimanje putovanja: Brzina kretanja i Prosečna brzina\n\n • Vidžet za napon adaptera za metriku vozila\n\n • Podaci o metrici vozila u Analizatoru putanje\n\n • Automatsko organizovanje putanja po godini, dužini, aktivnosti i još mnogo toga\n\n • Uređivač palete za vizuelizaciju terena i putanje\n\n • Poboljšani algoritmi pretrage i osveženi korisnički interfejs\n\n • Popravljeni profili nadmorske visine za rute\n\n • Omiljeni: nove opcije sortiranja i osvežavanje korisničkog interfejsa\n\n • Deljenje veze do bilo koje TOI\n\n • Pregled tačke puta bez zatvaranja liste\n\n • Parametar širine bicikla za izbegavanje uskih puteva\n\n • Opisi fotografija sa Vikimedije</string>
+    <string name="map_widget_memory_info">Informacije o memoriji</string>
+    <string name="map_widget_memory_info_desc">Prati Java hip, izvorne alokacije i grafičku memoriju.</string>
+    <string name="memory_used_settings">Korišćen Java hip</string>
+    <string name="memory_allocated_settings">Dodeljen Java hip</string>
+    <string name="memory_limit_settings">Maksimalno ograničenje Java hipa</string>
+    <string name="memory_native_settings">Dodeljena izvorna hip memorija</string>
+    <string name="memory_graphics_settings">Grafička memorija</string>
+    <string name="shared_string_heap">Hip</string>
+    <string name="shared_string_native">Izvorno</string>
+    <string name="shared_string_gpu">GPJ</string>
+    <string name="shared_string_allocated">Dodeljeno</string>
+    <string name="open_till_short">Do</string>
+    <string name="open_from_short">Od</string>
+    <string name="astro_designations">Oznake</string>
+    <string name="astronomy_map">Astronomska mapa</string>
+    <string name="obd_simulation_device">Uređaj za simulaciju</string>
 </resources>

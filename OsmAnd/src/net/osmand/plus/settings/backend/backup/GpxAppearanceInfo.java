@@ -15,6 +15,7 @@ import net.osmand.shared.gpx.DataItem;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.shared.gpx.GradientScaleType;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.shared.routing.Gpx3DWallColorType;
@@ -24,6 +25,8 @@ import net.osmand.util.Algorithms;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Set;
 
 public class GpxAppearanceInfo {
@@ -51,6 +54,7 @@ public class GpxAppearanceInfo {
 	public static final String TAG_MAX_FILTER_ALTITUDE = "max_filter_altitude";
 	public static final String TAG_MAX_FILTER_HDOP = "max_filter_hdop";
 	public static final String TAG_IS_JOIN_SEGMENTS = "is_join_segments";
+	public static final String TAG_POINTS_GROUPS = "pointsGroups";
 
 	public static final Set<String> gpxAppearanceTags = Set.of(
 			TAG_COLOR,
@@ -76,7 +80,8 @@ public class GpxAppearanceInfo {
 			TAG_MIN_FILTER_ALTITUDE,
 			TAG_MAX_FILTER_ALTITUDE,
 			TAG_MAX_FILTER_HDOP,
-			TAG_IS_JOIN_SEGMENTS
+			TAG_IS_JOIN_SEGMENTS,
+			TAG_POINTS_GROUPS
 	);
 
 	public static boolean isGpxAppearanceTag(@NonNull String tag) {
@@ -107,6 +112,8 @@ public class GpxAppearanceInfo {
 	private Gpx3DLinePositionType trackLinePositionType;
 	private Float verticalExaggeration;
 	private Float elevationMeters;
+	private final Map<String, PointsGroup> pointsGroups = new LinkedHashMap<>();
+	private boolean pointsGroupsDefined;
 
 	public GpxAppearanceInfo(@NonNull JSONObject json) {
 		fromJson(json);
@@ -122,11 +129,21 @@ public class GpxAppearanceInfo {
 		coloringType = item.getParameter(COLORING_TYPE);
 		gradientPaletteName = item.getParameter(COLOR_PALETTE);
 
-		trackVisualizationType = item.hasParameter(TRACK_VISUALIZATION_TYPE) ? Gpx3DVisualizationType.get3DVisualizationType(item.getParameter(TRACK_VISUALIZATION_TYPE)) : null;
-		trackWallColorType = item.hasParameter(TRACK_3D_WALL_COLORING_TYPE) ? Gpx3DWallColorType.Companion.get3DWallColorType(item.getParameter(TRACK_3D_WALL_COLORING_TYPE)) : null;
-		trackLinePositionType = item.hasParameter(TRACK_3D_LINE_POSITION_TYPE) ? Gpx3DLinePositionType.get3DLinePositionType(item.getParameter(TRACK_3D_LINE_POSITION_TYPE)) : null;
-		verticalExaggeration = item.hasParameter(ADDITIONAL_EXAGGERATION) ? ((Double) item.getParameter(ADDITIONAL_EXAGGERATION)).floatValue() : null;
-		elevationMeters = item.hasParameter(ELEVATION_METERS) ? ((Double) item.getParameter(ELEVATION_METERS)).floatValue() : null;
+		trackVisualizationType = item.hasParameter(TRACK_VISUALIZATION_TYPE)
+				? Gpx3DVisualizationType.get3DVisualizationType(item.getParameter(TRACK_VISUALIZATION_TYPE))
+				: null;
+		trackWallColorType = item.hasParameter(TRACK_3D_WALL_COLORING_TYPE)
+				? Gpx3DWallColorType.Companion.get3DWallColorType(item.getParameter(TRACK_3D_WALL_COLORING_TYPE))
+				: null;
+		trackLinePositionType = item.hasParameter(TRACK_3D_LINE_POSITION_TYPE)
+				? Gpx3DLinePositionType.get3DLinePositionType(item.getParameter(TRACK_3D_LINE_POSITION_TYPE))
+				: null;
+		verticalExaggeration = item.hasParameter(ADDITIONAL_EXAGGERATION)
+				? ((Double) item.getParameter(ADDITIONAL_EXAGGERATION)).floatValue()
+				: null;
+		elevationMeters = item.hasParameter(ELEVATION_METERS)
+				? ((Double) item.getParameter(ELEVATION_METERS)).floatValue()
+				: null;
 
 		if (item instanceof GpxDataItem gpxDataItem) {
 			GpxTrackAnalysis analysis = gpxDataItem.getAnalysis();
@@ -135,6 +152,7 @@ public class GpxAppearanceInfo {
 				wptPoints = analysis.getWptPoints();
 				totalDistance = analysis.getTotalDistance();
 			}
+			readPointsGroups(gpxDataItem);
 		}
 		smoothingThreshold = item.getParameter(SMOOTHING_THRESHOLD);
 		minFilterSpeed = item.getParameter(MIN_FILTER_SPEED);
@@ -178,8 +196,18 @@ public class GpxAppearanceInfo {
 		writeValidDouble(json, TAG_MIN_FILTER_SPEED, minFilterSpeed);
 		writeValidDouble(json, TAG_MAX_FILTER_SPEED, maxFilterSpeed);
 		writeValidDouble(json, TAG_MIN_FILTER_ALTITUDE, minFilterAltitude);
-		writeValidDouble(json, TAG_MAX_FILTER_ALTITUDE, maxFilterSpeed);
+		writeValidDouble(json, TAG_MAX_FILTER_ALTITUDE, maxFilterAltitude);
 		writeValidDouble(json, TAG_MAX_FILTER_HDOP, maxFilterHdop);
+		writePointsGroups(json);
+	}
+
+	public boolean hasPointsGroups() {
+		return pointsGroupsDefined;
+	}
+
+	@NonNull
+	public Map<String, PointsGroup> getPointsGroups() {
+		return pointsGroups;
 	}
 
 	public void setParameters(@NonNull DataItem dataItem) {
@@ -227,7 +255,6 @@ public class GpxAppearanceInfo {
 			this.coloringType = coloringType != null ? coloringType.getName(null) : null;
 		}
 		if (json.has(TAG_COLOR_PALETTE)) {
-
 			gradientPaletteName = json.optString(TAG_COLOR_PALETTE);
 		}
 		if (json.has(TAG_LINE_3D_VISUALIZATION_BY_TYPE)) {
@@ -271,9 +298,34 @@ public class GpxAppearanceInfo {
 		}
 		if (json.has(TAG_MAX_FILTER_ALTITUDE)) {
 			maxFilterAltitude = json.optDouble(TAG_MAX_FILTER_ALTITUDE);
-			if (json.has(TAG_MAX_FILTER_HDOP)) {
-				maxFilterHdop = json.optDouble(TAG_MAX_FILTER_HDOP);
-			}
+		}
+		if (json.has(TAG_MAX_FILTER_HDOP)) {
+			maxFilterHdop = json.optDouble(TAG_MAX_FILTER_HDOP);
+		}
+		if (json.has(TAG_POINTS_GROUPS)) {
+			pointsGroupsDefined = true;
+			readPointsGroupsFromJson(json.optJSONObject(TAG_POINTS_GROUPS));
+		}
+	}
+
+	private void readPointsGroups(@NonNull GpxDataItem item) {
+		pointsGroups.clear();
+		pointsGroups.putAll(GpxUtilities.INSTANCE.parsePointsGroups(item.getParameter(POINTS_GROUPS)));
+		pointsGroupsDefined = !pointsGroups.isEmpty();
+	}
+
+	private void readPointsGroupsFromJson(@Nullable JSONObject pointsGroupsJson) {
+		pointsGroups.clear();
+		pointsGroups.putAll(GpxUtilities.INSTANCE.parsePointsGroups(pointsGroupsJson != null ? pointsGroupsJson.toString() : null));
+	}
+
+	private void writePointsGroups(@NonNull JSONObject json) throws JSONException {
+		if (!pointsGroupsDefined || pointsGroups.isEmpty()) {
+			return;
+		}
+		String pointsGroupsJson = GpxUtilities.INSTANCE.serializePointsGroups(pointsGroups);
+		if (!Algorithms.isEmpty(pointsGroupsJson)) {
+			json.put(TAG_POINTS_GROUPS, new JSONObject(pointsGroupsJson));
 		}
 	}
 
@@ -312,8 +364,8 @@ public class GpxAppearanceInfo {
 	}
 
 	private static void writeValidDouble(@NonNull JSONObject json, @NonNull String name,
-			double value) throws JSONException {
-		if (!Double.isNaN(value)) {
+			@Nullable Double value) throws JSONException {
+		if (value != null && !Double.isNaN(value)) {
 			json.putOpt(name, value);
 		}
 	}

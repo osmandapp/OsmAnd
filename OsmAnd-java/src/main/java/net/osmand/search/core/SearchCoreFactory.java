@@ -11,6 +11,7 @@ import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
 import static net.osmand.search.core.ObjectType.POI;
 import static net.osmand.util.LocationParser.parseOpenLocationCode;
+import static net.osmand.util.SearchAlgorithms.splitAndNormalize;
 
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
@@ -34,17 +35,18 @@ import net.osmand.osm.PoiType;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchPhrase.SearchPhraseDataType;
+import net.osmand.shared.util.PlatformUtil;
 import net.osmand.util.*;
 import net.osmand.util.LocationParser.ParsedOpenLocationCode;
-import net.osmand.util.MapUtils;
 
 import java.io.IOException;
+import java.net.URI;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Function;
+import java.util.function.BooleanSupplier;
 
 public class SearchCoreFactory {
 
@@ -264,31 +266,6 @@ public class SearchCoreFactory {
 		public String toString() {
 			return getClass().getSimpleName();
 		}
-	}
-	
-
-	public static Set<String> splitSearchNames(String name) {
-		int prev = -1;
-		Set<String> namesToAdd = new HashSet<>();
-
-		for (int i = 0; i <= name.length(); i++) {
-			boolean isHyphenNearNumber = i != name.length() && name.charAt(i) == '-'
-					&& ((i + 1 < name.length() && Character.isDigit(name.charAt(i + 1)))
-							|| (i - 1 >= 0 && Character.isDigit(name.charAt(i - 1))));
-			if (i == name.length() || (!Character.isLetter(name.charAt(i)) && !Character.isDigit(name.charAt(i))
-					&& name.charAt(i) != '\'' && !isHyphenNearNumber)) {
-				if (prev != -1) {
-					String substr = name.substring(prev, i);
-					namesToAdd.add(substr.toLowerCase());
-					prev = -1;
-				}
-			} else {
-				if (prev == -1) {
-					prev = i;
-				}
-			}
-		}
-		return namesToAdd;
 	}
 
 	public static class SearchRegionByNameAPI extends SearchBaseAPI {
@@ -638,7 +615,7 @@ public class SearchCoreFactory {
 				}
 				Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(minRadius, maxRadius, SearchPhraseDataType.ADDRESS);
 				String wordToSearch = phrase.getUnknownWordToSearch();
-				Set<String> wordToSearchSplit = splitSearchNames(wordToSearch);
+				List<String> wordToSearchSplit = splitAndNormalize(wordToSearch);
 				if (wordToSearchSplit.size() > 1) {
 					wordToSearch = phrase.selectMainUnknownWordToSearch(new ArrayList<>(wordToSearchSplit));
 				}
@@ -724,7 +701,7 @@ public class SearchCoreFactory {
 								
 							}
 							subSearchApiOrPublish(phrase, resultMatcher, res, streetsApi, newParentSearchResult, true);
-						} else if (res.objectType == ObjectType.BOUNDARY ) {
+						} else if (res.objectType == ObjectType.BOUNDARY) {
 							// require exact matching to speed up
 							if (matchAddressName(phrase, null, res, true)) {
 								subSearchApiOrPublish(phrase, resultMatcher, res, this);
@@ -805,6 +782,7 @@ public class SearchCoreFactory {
 			}
 			ResultMatcher<Amenity> matcher = new ResultMatcher<Amenity>() {
 				int limit = 0;
+				boolean isSkipped = false;
 
 				@Override
 				public boolean publish(Amenity object) {
@@ -816,6 +794,7 @@ public class SearchCoreFactory {
 					}
 					String poiID = object.getType().getKeyName() + "_" + object.getId();
 					if (ids.contains(poiID)) {
+						isSkipped = true;
 						return false;
 					}
 					SearchResult sr = new SearchResult(phrase);
@@ -828,8 +807,7 @@ public class SearchCoreFactory {
 					}
 					if (!matchLocalName && !nm.matches(sr.otherNames)) {
 						for(String k : object.getAdditionalInfoKeys()) {
-							if ((isTagIndexedForSearchAsName(k)
-									|| isTagIndexedForSearchAsId(k))
+							if ((isTagIndexedForSearchAsName(k) || isTagIndexedForSearchAsId(k))
 									&& nm.matches(object.getAdditionalInfo(k))) {
 								sr.alternateName = object.getAdditionalInfo(k);
 								break;
@@ -864,6 +842,11 @@ public class SearchCoreFactory {
 				@Override
 				public boolean isCancelled() {
 					return resultMatcher.isCancelled() && (limit < LIMIT);
+				}
+
+				@Override
+				public boolean isSkippedDuplication() {
+					return isSkipped;
 				}
 			};
 
@@ -1961,6 +1944,7 @@ public class SearchCoreFactory {
 	public static class SearchLocationAndUrlAPI extends SearchBaseAPI {
 
 		private static final int OLC_RECALC_DISTANCE_THRESHOLD = 100000; // 100 km
+		private static final BooleanSupplier DEFAULT_INTERNET_CONNECTION_AVAILABLE = () -> true;
 		private int olcPhraseHash;
 		private LatLon olcPhraseLocation;
 		private ParsedOpenLocationCode cachedParsedCode;
@@ -1968,17 +1952,18 @@ public class SearchCoreFactory {
 		private final DecimalFormat latLonFormatter = new DecimalFormat("#.0####", new DecimalFormatSymbols(Locale.US));
 		
 		private SearchAmenityByNameAPI amenitiesApi;
-		private Function<String, String> httpRedirectRequester = null;
+		private final BooleanSupplier internetConnectionAvailable;
 
 		public SearchLocationAndUrlAPI(SearchAmenityByNameAPI amenitiesApi) {
-			super(ObjectType.LOCATION, ObjectType.PARTIAL_LOCATION);
-			this.amenitiesApi = amenitiesApi;
+			this(amenitiesApi, DEFAULT_INTERNET_CONNECTION_AVAILABLE);
 		}
 
-		public SearchLocationAndUrlAPI(SearchAmenityByNameAPI amenitiesApi, Function<String, String> requester) {
+		public SearchLocationAndUrlAPI(SearchAmenityByNameAPI amenitiesApi, BooleanSupplier internetConnectionAvailable) {
 			super(ObjectType.LOCATION, ObjectType.PARTIAL_LOCATION);
-			this.httpRedirectRequester = requester;
 			this.amenitiesApi = amenitiesApi;
+			this.internetConnectionAvailable = internetConnectionAvailable != null
+					? internetConnectionAvailable
+					: DEFAULT_INTERNET_CONNECTION_AVAILABLE;
 		}
 
 		@Override
@@ -2172,10 +2157,10 @@ public class SearchCoreFactory {
 			GeoParsedPoint pnt = null;
 			for (String text : lines.split("\n")) {
 				pnt = GeoPointParserUtil.parse(text);
-				if (pnt == null && httpRedirectRequester != null && GeoPointParserUtil.isGooGlUrl(text)) {
-					text = httpRedirectRequester.apply(text);
-					if (text != null) {
-						pnt = GeoPointParserUtil.parse(text);
+				if (pnt == null && GeoPointParserUtil.isGooGlUrl(text)) {
+					String resolvedUrl = resolveRedirectUrl(text);
+					if (resolvedUrl != null) {
+						pnt = GeoPointParserUtil.parse(resolvedUrl);
 					}
 				}
 				if (pnt != null) {
@@ -2190,7 +2175,7 @@ public class SearchCoreFactory {
 				sp.wordsSpan = lines;
 				sp.setImpreciseCoordinates(pnt.hasImpreciseCoordinates());
 				sp.location = new LatLon(pnt.getLatitude(), pnt.getLongitude());
-				sp.localeName = formatLatLon(pnt.getLatitude()) +", " + formatLatLon(pnt.getLongitude());
+				sp.localeName = formatLatLon(pnt.getLatitude()) + ", " + formatLatLon(pnt.getLongitude());
 				if (pnt.getZoom() > 0) {
 					sp.preferredZoom = pnt.getZoom();
 				}
@@ -2199,6 +2184,14 @@ public class SearchCoreFactory {
 				return true;
 			}
 			return false;
+		}
+
+		private String resolveRedirectUrl(String url) {
+			URI uri = GeoPointParserUtil.createUri(url);
+			if (uri != null && internetConnectionAvailable.getAsBoolean()) {
+				return PlatformUtil.INSTANCE.getNetworkAPI().resolveRedirectUrl(uri.toString());
+			}
+			return null;
 		}
 
 		@Override

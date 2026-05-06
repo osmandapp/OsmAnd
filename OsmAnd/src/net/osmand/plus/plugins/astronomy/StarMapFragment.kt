@@ -67,6 +67,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	internal lateinit var mainLayout: View
 	internal lateinit var starView: StarView
+	private lateinit var mapControlsContainer: View
 	private lateinit var timeSelectionView: DateTimeSelectionView
 	private lateinit var timeControlBtn: StarMapTimeControlButton
 	private lateinit var resetTimeButton: StarMapResetButton
@@ -202,6 +203,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 		mainLayout = view.findViewById(R.id.main_layout)
 		starView = view.findViewById(R.id.star_view)
+		mapControlsContainer = view.findViewById(R.id.map_controls_container)
 		timeSelectionView = view.findViewById(R.id.time_selection_view)
 		timeControlBtn = view.findViewById(R.id.time_control_button)
 		resetTimeButton = view.findViewById(R.id.reset_time_button)
@@ -354,6 +356,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 		bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
 			override fun onStateChanged(bottomSheet: View, newState: Int) {
+				updateMapControlsVisibility()
 				if (newState == BottomSheetBehavior.STATE_HIDDEN) {
 					clearSelectedObject()
 				}
@@ -361,6 +364,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			}
 			override fun onSlide(bottomSheet: View, slideOffset: Float) {}
 		})
+		updateMapControlsVisibility()
 		applyRedFilterToViews(starView.showRedFilter, bottomSheetContainer)
 
 		return view
@@ -511,6 +515,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		updateWidgetsVisibility(mapActivity, View.GONE)
 		mapActivity.refreshMap()
 		updateBackPressedCallback()
+		updateMapControlsVisibility()
 		if (isTimeAutoUpdateEnabled()) {
 			viewModel.resetTime()
 			scheduleAutoTimeUpdate()
@@ -867,6 +872,19 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		starView.setObserverLocation(location.latitude, location.longitude, 0.0)
 		if (updateAzimuth && !arModeHelper.isArModeEnabled && !starView.is2DMode) {
 			setAzimuth(-tileBox.rotate.toDouble())
+		}
+	}
+
+	private fun updateMapControlsVisibility() {
+		if (!::mapControlsContainer.isInitialized) {
+			return
+		}
+		mapControlsContainer.visibility = if (::bottomSheetBehavior.isInitialized &&
+			bottomSheetBehavior.state != BottomSheetBehavior.STATE_HIDDEN
+		) {
+			View.INVISIBLE
+		} else {
+			View.VISIBLE
 		}
 	}
 

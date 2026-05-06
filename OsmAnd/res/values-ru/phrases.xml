@@ -211,7 +211,7 @@
     <string name="poi_power_pole">Опора ЛЭП;Столб линии электропередач</string>
     <string name="poi_post_office">Почта;Почтовое отделение</string>
     <string name="poi_post_box">Почтовый ящик</string>
-    <string name="poi_telephone">Телефон</string>
+    <string name="poi_telephone">Телефон;Таксофон</string>
     <string name="poi_communication_tower">Вышка связи</string>
     <string name="poi_cooling_tower">Градирня</string>
     <string name="poi_lighting_tower">Осветительная вышка</string>
@@ -1177,7 +1177,7 @@
     <string name="poi_payment_type">Тип оплаты</string>
     <string name="poi_payment_fuel_type">Топливные карты</string>
     <string name="poi_fuel_type">Вид топлива</string>
-    <string name="poi_fuel_avia_type">Вид топлива (для самолётов)</string>
+    <string name="poi_fuel_avia_type">Тип топлива (авиационное)</string>
     <string name="poi_payment_coins_yes">Монеты</string>
     <string name="poi_payment_coins_no">Монеты не принимаются</string>
     <string name="poi_payment_coins_0_5">Монеты по $0.5</string>

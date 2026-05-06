@@ -358,7 +358,7 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 
 		if (type.isDeletionSupported()) {
 			items.add(new PopUpMenuItem.Builder(activity)
-					.setTitleId(R.string.shared_string_remove)
+					.setTitleId(R.string.shared_string_delete)
 					.setIcon(getContentIcon(R.drawable.ic_action_delete_outlined))
 					.setOnClickListener(v -> showDeleteConfirmationDialog(localItem))
 					.showTopDivider(!Algorithms.isEmpty(items))
