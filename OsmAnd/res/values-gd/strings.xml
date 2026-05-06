@@ -442,7 +442,7 @@
     <string name="shared_string_online_maps">Mapaichean air-loidhne</string>
     <string name="open_in_browser_wiki">Fosgail an aiste air loidhne</string>
     <string name="backup_do_not_have_any">Chan eil lethbhreac-glèidhidh agad fhathast</string>
-	<string name="poi_filter_namefinder">NameFinder air-loidhne</string>
+    <string name="poi_filter_namefinder">NameFinder air-loidhne</string>
     <string name="offline_cache">Tasgadan far-loidhne</string>
     <string name="offline_wikipeadia">Uicipeid far-loidhne</string>
     <string name="wikipedia_and_wikivoyage_offline">Uicipeid agus Wikivoyage far-loidhne</string>
