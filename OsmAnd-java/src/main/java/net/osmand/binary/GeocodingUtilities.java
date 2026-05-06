@@ -17,6 +17,7 @@ import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
 import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingContext;
+import net.osmand.search.core.SearchPhrase;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.SearchAlgorithms;
@@ -214,7 +215,8 @@ public class GeocodingUtilities {
 
 	private List<String> prepareStreetName(String streetName, boolean includeCommonWords) {
 		List<String> words = new ArrayList<>();
-		for (String word : SearchAlgorithms.splitAndNormalize(streetName)) {
+		// "Tempelhofer Damm" == "Tempelhofer Damm (Tempelhof-Schöneberg)"
+		for (String word : SearchAlgorithms.splitAndNormalize(SearchPhrase.stripBraces(streetName))) {
 			if (Algorithms.isNotEmpty(word) && (includeCommonWords || CommonWords.getCommonGeocoding(word) == -1)) {
 				words.add(word);
 			}
@@ -231,8 +233,8 @@ public class GeocodingUtilities {
 		}
 
 		// Strip dashes before split to match "NC 42" == "NC-42"
-		String undashed1 = s1.replaceAll("-", " ");
-		String undashed2 = s2.replaceAll("-", " ");
+		String undashed1 = s1.replace("-", " ");
+		String undashed2 = s2.replace("-", " ");
 
 		List<String> s1words = prepareStreetName(undashed1, false);
 		List<String> s2words = prepareStreetName(undashed2, false);
