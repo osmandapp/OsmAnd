@@ -658,8 +658,9 @@ public class SearchCoreFactory {
 					for (SearchResult res : immediateResults) {
 						if (res.objectType == ObjectType.STREET) {
 							SearchResult newParentSearchResult = null;
+							int wordSize = phrase.getWords().size();
 							if (res.parentSearchResult == null && resultMatcher.getParentSearchResult() == null &&
-									res.object instanceof Street && ((Street) res.object).getCity() != null) {
+									res.object instanceof Street && ((Street) res.object).getCity() != null && wordSize > 1) {
 								City ct = ((Street) res.object).getCity();
 								SearchResult cityResult = new SearchResult(phrase);
 								cityResult.object = ct;
