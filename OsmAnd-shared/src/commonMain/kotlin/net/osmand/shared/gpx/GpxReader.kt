@@ -88,6 +88,13 @@ class GpxReader(private val adapter: GpxReaderAdapter)
 			if (!updatedItem.isRegularTrack()) {
 				return updatedItem
 			}
+			val storedPointsGroups = updatedItem.getParameter<String>(GpxParameter.POINTS_GROUPS)
+			if (storedPointsGroups.isNullOrEmpty()) {
+				val pointsGroups = GpxUtilities.serializePointsGroups(gpxFile.pointsGroups)
+				if (!pointsGroups.isNullOrEmpty()) {
+					updatedItem.setParameter(GpxParameter.POINTS_GROUPS, pointsGroups)
+				}
+			}
 			val creationTime: Long = updatedItem.requireParameter(GpxParameter.FILE_CREATION_TIME)
 			if (creationTime <= 0) {
 				updatedItem.setParameter(GpxParameter.FILE_CREATION_TIME, GpxUtilities.getCreationTime(gpxFile))

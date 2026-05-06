@@ -87,7 +87,7 @@ public class GpxSettingsItem extends FileSettingsItem {
 
 	@Override
 	public void prepareForUpload() {
-		migrateLegacyPointsGroupsForUploadIfNeeded();
+		syncPointsGroupsForUploadIfNeeded();
 	}
 
 	@Override
@@ -164,7 +164,7 @@ public class GpxSettingsItem extends FileSettingsItem {
 		}
 	}
 
-	private void migrateLegacyPointsGroupsForUploadIfNeeded() {
+	private void syncPointsGroupsForUploadIfNeeded() {
 		if (!file.exists() || file.isDirectory()) {
 			return;
 		}
@@ -173,48 +173,63 @@ public class GpxSettingsItem extends FileSettingsItem {
 			if (dataItem == null) {
 				return;
 			}
-			Boolean legacyPointsGroupsChecked = dataItem.getParameter(LEGACY_POINTS_GROUPS_CHECKED);
-			if (Boolean.TRUE.equals(legacyPointsGroupsChecked)) {
-				return;
-			}
-			KFile kFile = SharedUtil.kFile(file);
-			if (!GpxUtilities.INSTANCE.hasPointsGroupsExtension(kFile)) {
-				markLegacyPointsGroupsChecked(dataItem);
-				return;
-			}
 			String pointsGroups = dataItem.getParameter(POINTS_GROUPS);
+			boolean pointsGroupsUpdated = false;
 			if (Algorithms.isEmpty(pointsGroups)) {
-				GpxFile rawGpxFile = GpxUtilities.INSTANCE.loadGpxFile(kFile, null, null, true, true);
+				Boolean legacyPointsGroupsChecked = dataItem.getParameter(LEGACY_POINTS_GROUPS_CHECKED);
+				if (Boolean.TRUE.equals(legacyPointsGroupsChecked)) {
+					return;
+				}
+				KFile kFile = SharedUtil.kFile(file);
+				if (!GpxUtilities.INSTANCE.hasPointsGroupsExtension(kFile)) {
+					markLegacyPointsGroupsChecked(dataItem);
+					return;
+				}
+				GpxFile rawGpxFile = GpxUtilities.INSTANCE.loadGpxFile(kFile, null, null, true);
 				if (rawGpxFile.getError() != null) {
 					SettingsHelper.LOG.error("Failed to load GPX with legacy points_groups: " + file.getAbsolutePath(),
 							SharedUtil.jException(rawGpxFile.getError()));
 					return;
 				}
 				pointsGroups = GpxUtilities.INSTANCE.serializePointsGroups(rawGpxFile.getPointsGroups());
-				app.getGpxDbHelper().updateDataItemParameter(dataItem, POINTS_GROUPS, pointsGroups);
-			}
-			GpxFile gpxFile = SharedUtil.loadGpxFile(file);
-			if (gpxFile.getError() != null) {
-				SettingsHelper.LOG.error("Failed to load migrated GPX for cleanup: " + file.getAbsolutePath(),
-						SharedUtil.jException(gpxFile.getError()));
-				return;
-			}
-			long lastModified = file.lastModified();
-			Exception writeError = SharedUtil.writeGpxFile(file, gpxFile);
-			if (writeError != null) {
-				SettingsHelper.LOG.error("Failed to rewrite GPX without legacy points_groups: " + file.getAbsolutePath(), writeError);
-				return;
-			}
-			setSize(0);
-			if (lastModified > 0) {
-				file.setLastModified(lastModified);
+				if (!Algorithms.isEmpty(pointsGroups)) {
+					app.getGpxDbHelper().updateDataItemParameter(dataItem, POINTS_GROUPS, pointsGroups);
+					pointsGroupsUpdated = true;
+				}
+			} else if (writePointsGroupsToGpx(file, pointsGroups)) {
+				setSize(0);
 			}
 			markLegacyPointsGroupsChecked(dataItem);
-			appearanceInfo = new GpxAppearanceInfo(app, dataItem);
-			refreshSelectedGpxFile(file);
+			if (pointsGroupsUpdated) {
+				appearanceInfo = new GpxAppearanceInfo(app, dataItem);
+				refreshSelectedGpxFile(file);
+			}
 		} catch (Exception e) {
-			SettingsHelper.LOG.error("Failed to migrate legacy points_groups before upload: " + file.getAbsolutePath(), e);
+			SettingsHelper.LOG.error("Failed to sync points_groups before upload: " + file.getAbsolutePath(), e);
 		}
+	}
+
+	private boolean writePointsGroupsToGpx(@NonNull File savedFile, @Nullable String pointsGroups) {
+		if (Algorithms.isEmpty(pointsGroups) || !savedFile.exists() || savedFile.isDirectory()) {
+			return false;
+		}
+		GpxFile gpxFile = SharedUtil.loadGpxFile(savedFile);
+		if (gpxFile.getError() != null) {
+			SettingsHelper.LOG.error("Failed to load GPX for points_groups restore: " + savedFile.getAbsolutePath(),
+					SharedUtil.jException(gpxFile.getError()));
+			return false;
+		}
+		GpxUtilities.INSTANCE.applyPointsGroups(gpxFile, pointsGroups);
+		long lastModified = savedFile.lastModified();
+		Exception writeError = SharedUtil.writeGpxFile(savedFile, gpxFile);
+		if (writeError != null) {
+			SettingsHelper.LOG.error("Failed to write GPX with points_groups: " + savedFile.getAbsolutePath(), writeError);
+			return false;
+		}
+		if (lastModified > 0) {
+			savedFile.setLastModified(lastModified);
+		}
+		return true;
 	}
 
 	private void markLegacyPointsGroupsChecked(@NonNull GpxDataItem dataItem) {

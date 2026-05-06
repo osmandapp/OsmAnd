@@ -397,6 +397,9 @@ object GpxUtilities {
 			if (hidden) {
 				put("hidden", JsonPrimitive(true))
 			}
+			if (pinned != null) {
+				put("pinned", JsonPrimitive(isPinned() == true))
+			}
 		}
 
 		companion object {
@@ -426,7 +429,8 @@ object GpxUtilities {
 					(jsonObject["iconName"] as? JsonPrimitive)?.contentOrNull,
 					(jsonObject["backgroundType"] as? JsonPrimitive)?.contentOrNull,
 					parseColor((jsonObject["color"] as? JsonPrimitive)?.contentOrNull, 0) ?: 0,
-					(jsonObject["hidden"] as? JsonPrimitive)?.contentOrNull?.toBoolean() ?: false
+					(jsonObject["hidden"] as? JsonPrimitive)?.contentOrNull?.toBoolean() ?: false,
+					(jsonObject["pinned"] as? JsonPrimitive)?.contentOrNull?.toBoolean()
 				)
 			}
 		}
@@ -487,7 +491,10 @@ object GpxUtilities {
 	private fun applyPointsGroupsParameter(file: KFile, gpxFile: GpxFile): GpxFile {
 		if (gpxFile.error == null) {
 			val dataItem = GpxDbHelper.getItem(file, false)
-			applyPointsGroups(gpxFile, dataItem?.getParameter<String>(GpxParameter.POINTS_GROUPS))
+			val storedPointsGroups = dataItem?.getParameter<String>(GpxParameter.POINTS_GROUPS)
+			if (!storedPointsGroups.isNullOrEmpty()) {
+				applyPointsGroups(gpxFile, storedPointsGroups)
+			}
 		}
 		return gpxFile
 	}
@@ -693,6 +700,7 @@ object GpxUtilities {
 			)
 
 			assignNetworkRouteExtensionWriter(gpxFile)
+			assignPointsGroupsExtensionWriter(gpxFile)
 			writeMetadata(serializer, gpxFile, progress)
 			writePoints(serializer, gpxFile, progress)
 			writeRoutes(serializer, gpxFile, progress)
@@ -1375,7 +1383,7 @@ object GpxUtilities {
 		addGeneralTrack: Boolean
 	): GpxFile {
 		return try {
-			val gpxFile = loadGpxFile(file, null, extensionsReader, addGeneralTrack, false)
+			val gpxFile = loadGpxFile(file, null, extensionsReader, addGeneralTrack)
 			gpxFile.path = file.absolutePath()
 			gpxFile.modifiedTime = file.lastModified()
 			gpxFile.pointsModifiedTime = gpxFile.modifiedTime
@@ -1401,15 +1409,14 @@ object GpxUtilities {
 		extensionsReader: GpxExtensionsReader?,
 		addGeneralTrack: Boolean
 	): GpxFile {
-		return loadGpxFile(null, source, extensionsReader, addGeneralTrack, false)
+		return loadGpxFile(null, source, extensionsReader, addGeneralTrack)
 	}
 
 	fun loadGpxFile(
 		file: KFile?,
 		source: Source?,
 		extensionsReader: GpxExtensionsReader?,
-		addGeneralTrack: Boolean,
-		readLegacyPointsGroups: Boolean
+		addGeneralTrack: Boolean
 	): GpxFile {
 		val insideTagDepth = mutableMapOf("trk" to 0)
 		oneOffLogParseTimeErrors = true
@@ -1479,8 +1486,7 @@ object GpxUtilities {
 
 							tagName == "route" && insideTagDepth["trk"]!! > 0 -> routeExtension = true
 							tagName == "types" && insideTagDepth["trk"]!! > 0 -> typesExtension = true
-							tagName == "points_groups" && readLegacyPointsGroups -> pointsGroupsExtension = true
-							tagName == "points_groups" -> skipTag(parser)
+							tagName == POINTS_GROUPS_EXTENSIONS_KEY -> pointsGroupsExtension = true
 							tagName == "network_route" -> networkRoute = true
 							else -> {
 								if (extensionsReader == null || !extensionsReader.readExtensions(
@@ -1739,6 +1745,10 @@ object GpxUtilities {
 					}
 					if (extensionReadMode && tag == "types") {
 						typesExtension = false
+						continue
+					}
+					if (extensionReadMode && tag.lowercase() == POINTS_GROUPS_EXTENSIONS_KEY) {
+						pointsGroupsExtension = false
 						continue
 					}
 					if (extensionReadMode && tag == "network_route") {
