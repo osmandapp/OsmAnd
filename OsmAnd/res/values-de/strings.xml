@@ -5416,8 +5416,8 @@
     <string name="add_widget_above">Widget oben hinzufügen</string>
     <string name="add_widget_to_the_right">Widget rechts hinzufügen</string>
     <string name="add_widget_to_the_left">Widget links hinzufügen</string>
-    <string name="delete_widget">Widget löschen?</string>
-    <string name="delete_widget_description">Dieses Widget wird gelöscht. Sie können es später im Bildschirm Konfigurieren wiederherstellen.</string>
+    <string name="delete_widget">Widget entfernen?</string>
+    <string name="delete_widget_description">Dieses Widget wird entfernt. Sie können es später im Bildschirm Konfigurieren wiederherstellen.</string>
     <string name="battery_saving_mode">Akkusparmodus</string>
     <string name="graph_axis">Diagramm-Achse</string>
     <string name="y_axis_description">Wählen Sie bis zu zwei Optionen für die Y-Achse.</string>
