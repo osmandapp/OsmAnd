@@ -5430,8 +5430,8 @@
     <string name="add_widget_to_the_left">Tilføj modul til venstre</string>
     <string name="add_widget_below">Tilføj modul nedenfor</string>
     <string name="add_widget_to_the_right">Tilføj modul til højre</string>
-    <string name="delete_widget">Slet modul?</string>
-    <string name="delete_widget_description">Dette modul bliver slettet. Du kan gendanne det senere i Konfigurer skærm.</string>
+    <string name="delete_widget">Fjern modul?</string>
+    <string name="delete_widget_description">Dette modul bliver fjernet. Du kan gendanne det senere i Konfigurer skærm.</string>
     <string name="battery_saving_mode">Batterisparetilstand</string>
     <string name="graph_axis">Grafakse</string>
     <string name="y_axis_description">Vælg op til to indstillinger for Y-aksen.</string>
