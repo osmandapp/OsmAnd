@@ -17,6 +17,7 @@ import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
 import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingContext;
+import net.osmand.search.core.SearchPhrase;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.SearchAlgorithms;
@@ -215,23 +216,12 @@ public class GeocodingUtilities {
 	private List<String> prepareStreetName(String streetName, boolean includeCommonWords) {
 		List<String> words = new ArrayList<>();
 		// "Tempelhofer Damm" == "Tempelhofer Damm (Tempelhof-Schöneberg)"
-		for (String word : SearchAlgorithms.splitAndNormalize(removeParentheses(streetName))) {
+		for (String word : SearchAlgorithms.splitAndNormalize(SearchPhrase.stripBraces(streetName))) {
 			if (Algorithms.isNotEmpty(word) && (includeCommonWords || CommonWords.getCommonGeocoding(word) == -1)) {
 				words.add(word);
 			}
 		}
 		return words; // keep original order ("NC 42" - search by "NC" not by "42")
-	}
-
-	private String removeParentheses(String s) {
-		int depth = 0;
-		StringBuilder r = new StringBuilder(s.length());
-		for (char c : s.toCharArray()) {
-			if (c == '(') depth++;
-			else if (c == ')' && depth > 0) depth--;
-			else if (depth == 0) r.append(c);
-		}
-		return r.toString();
 	}
 
 	private boolean matchStreetName(String s1, String s2, boolean matchWithCommonWords) {
