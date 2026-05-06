@@ -894,7 +894,16 @@ public class CommonWords {
 		addFrequentlyUsed("verdi");
 		addFrequentlyUsed("augusta");
 		addFrequentlyUsed("neuburger");
-
+		addFrequentlyUsed("hauptstr");
+		addFrequentlyUsed("hauptstraße");
+		addFrequentlyUsed("dorfstraße");
+		addFrequentlyUsed("bahnhofstraße");
+		addFrequentlyUsed("gartenstraße");
+		addFrequentlyUsed("bergstraße");
+		addFrequentlyUsed("lindenstraße");
+		addFrequentlyUsed("ringstraße");
+		addFrequentlyUsed("waldstraße");
+		
 		addCommon("la");
 		addCommon("via");
 		addCommon("rua");
