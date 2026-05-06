@@ -14,7 +14,8 @@ public class ShowHideWindAnimationAction extends BaseWeatherQuickAction {
 			.nameActionRes(R.string.quick_action_verb_show_hide)
 			.nameRes(R.string.wind_animation_layer)
 			.iconRes(R.drawable.ic_action_wind).nonEditable()
-			.category(QuickActionType.CONFIGURE_MAP);
+			.category(QuickActionType.CONFIGURE_MAP)
+			.allowedInAndroidAuto(true);
 
 	public ShowHideWindAnimationAction() {
 		super(TYPE);

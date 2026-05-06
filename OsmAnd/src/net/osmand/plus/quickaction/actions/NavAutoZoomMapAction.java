@@ -24,7 +24,8 @@ public class NavAutoZoomMapAction extends QuickAction {
 			"nav.autozoom", NavAutoZoomMapAction.class).
 			nameRes(R.string.quick_action_auto_zoom).iconRes(R.drawable.ic_action_search_dark).nonEditable().
 			category(QuickActionType.NAVIGATION)
-			.nameActionRes(R.string.quick_action_verb_turn_on_off);
+			.nameActionRes(R.string.quick_action_verb_turn_on_off)
+			.allowedInAndroidAuto(true);
 
 
 	public NavAutoZoomMapAction() {

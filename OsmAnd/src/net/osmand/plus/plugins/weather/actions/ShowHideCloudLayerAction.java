@@ -14,7 +14,8 @@ public class ShowHideCloudLayerAction extends BaseWeatherQuickAction {
 			.nameActionRes(R.string.quick_action_verb_show_hide)
 			.nameRes(R.string.cloud_layer)
 			.iconRes(R.drawable.ic_action_clouds).nonEditable()
-			.category(QuickActionType.CONFIGURE_MAP);
+			.category(QuickActionType.CONFIGURE_MAP)
+			.allowedInAndroidAuto(true);
 
 	public ShowHideCloudLayerAction() {
 		super(TYPE);
