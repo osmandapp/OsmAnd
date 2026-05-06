@@ -214,12 +214,24 @@ public class GeocodingUtilities {
 
 	private List<String> prepareStreetName(String streetName, boolean includeCommonWords) {
 		List<String> words = new ArrayList<>();
-		for (String word : SearchAlgorithms.splitAndNormalize(streetName)) {
+		// "Tempelhofer Damm" == "Tempelhofer Damm (Tempelhof-Schöneberg)"
+		for (String word : SearchAlgorithms.splitAndNormalize(removeParentheses(streetName))) {
 			if (Algorithms.isNotEmpty(word) && (includeCommonWords || CommonWords.getCommonGeocoding(word) == -1)) {
 				words.add(word);
 			}
 		}
 		return words; // keep original order ("NC 42" - search by "NC" not by "42")
+	}
+
+	private String removeParentheses(String s) {
+		int depth = 0;
+		StringBuilder r = new StringBuilder(s.length());
+		for (char c : s.toCharArray()) {
+			if (c == '(') depth++;
+			else if (c == ')' && depth > 0) depth--;
+			else if (depth == 0) r.append(c);
+		}
+		return r.toString();
 	}
 
 	private boolean matchStreetName(String s1, String s2, boolean matchWithCommonWords) {
@@ -231,8 +243,8 @@ public class GeocodingUtilities {
 		}
 
 		// Strip dashes before split to match "NC 42" == "NC-42"
-		String undashed1 = s1.replaceAll("-", " ");
-		String undashed2 = s2.replaceAll("-", " ");
+		String undashed1 = s1.replace("-", " ");
+		String undashed2 = s2.replace("-", " ");
 
 		List<String> s1words = prepareStreetName(undashed1, false);
 		List<String> s2words = prepareStreetName(undashed2, false);
