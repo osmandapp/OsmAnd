@@ -217,7 +217,7 @@ public class SearchSettings {
 
 	public SearchSettings setSortByName(boolean sortByName) {
 		SearchSettings s = new SearchSettings(this);
-		s.sortType = sortByName ? SortType.BY_RELEVANCE : SortType.IGNORE_DISTANCE;
+		s.sortType = sortByName ?  SortType.IGNORE_DISTANCE : SortType.BY_RELEVANCE;
 		return s;
 	}
 	
