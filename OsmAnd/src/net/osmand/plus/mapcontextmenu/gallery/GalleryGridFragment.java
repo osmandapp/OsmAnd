@@ -1,6 +1,5 @@
 package net.osmand.plus.mapcontextmenu.gallery;
 
-import static net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.IMAGES_COUNT_TYPE;
 import static net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.IMAGE_TYPE;
 
 import android.annotation.SuppressLint;
@@ -24,13 +23,14 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
+import net.osmand.plus.gallery.GalleryItem;
+import net.osmand.plus.gallery.GalleryItem.MediaCount;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
-import net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.ImageCardListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
+import net.osmand.shared.media.domain.MediaItem;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -89,13 +89,13 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 			@Override
 			public void onGlobalLayout() {
 				recyclerView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-				adapter = new GalleryGridAdapter(requireMapActivity(), getImageCardListener(),
+				adapter = new GalleryGridAdapter(requireMapActivity(), getGalleryListener(),
 						recyclerView.getMeasuredWidth(), true, nightMode);
 				adapter.setResizeBySpanCount(true);
 
-				List<Object> items = new ArrayList<>();
-				items.add(IMAGES_COUNT_TYPE);
-				items.addAll(controller.getOnlinePhotoCards());
+				List<GalleryItem> items = new ArrayList<>();
+				items.add(MediaCount.INSTANCE);
+				items.addAll(controller.getOnlinePhotoItems());
 				adapter.setItems(items);
 
 				recyclerView.setAdapter(adapter);
@@ -136,9 +136,20 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 	}
 
 	@NonNull
-	private ImageCardListener getImageCardListener() {
-		return imageCard -> GalleryPhotoPagerFragment.showInstance(requireMapActivity(),
-				controller.getImageCardFromUrl(imageCard.getImageUrl()));
+	private GalleryListener getGalleryListener() {
+		return new GalleryListener() {
+			@Override
+			public void onMediaItemClicked(@NonNull MediaItem mediaItem) {
+				callMapActivity(activity -> {
+					int index = controller.getItemIndexBySourceUri(mediaItem.getSourceUri());
+					GalleryPhotoPagerFragment.showInstance(activity, index);
+				});
+			}
+
+			@Override
+			public void onReloadMediaItems() {
+			}
+		};
 	}
 
 	private void setupScaleDetector() {
@@ -186,8 +197,8 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 	private void updateSpan() {
 		layoutManager.setSpanCount(GalleryController.getSettingsSpanCount(requireMapActivity()));
 		for (int i = 0; i < adapter.getItemCount(); i++) {
-			Object object = adapter.getItems().get(i);
-			if (object instanceof ImageCard) {
+			GalleryItem item = adapter.getItem(i);
+			if (item instanceof GalleryItem.Media) {
 				adapter.notifyItemChanged(i);
 			}
 		}

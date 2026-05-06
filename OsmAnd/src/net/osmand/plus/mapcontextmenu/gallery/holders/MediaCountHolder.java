@@ -10,11 +10,11 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.ColorUtilities;
 
-public class ImagesCountHolder extends RecyclerView.ViewHolder {
+public class MediaCountHolder extends RecyclerView.ViewHolder {
 	private final OsmandApplication app;
 	private final TextView countView;
 
-	public ImagesCountHolder(@NonNull View itemView, @NonNull OsmandApplication app) {
+	public MediaCountHolder(@NonNull View itemView, @NonNull OsmandApplication app) {
 		super(itemView);
 		this.countView = itemView.findViewById(R.id.images_count);
 		this.app = app;

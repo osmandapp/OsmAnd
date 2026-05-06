@@ -6,7 +6,7 @@ import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 import static net.osmand.osm.MapPoiTypes.WIKI_LANG;
 import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
 import static net.osmand.plus.helpers.FileNameTranslationHelper.WIKI_NAME;
-import static net.osmand.plus.mapcontextmenu.gallery.ImageCardType.OTHER;
+import static net.osmand.plus.mapcontextmenu.gallery.GalleryMediaGroup.OTHER;
 import static net.osmand.plus.poi.PoiUIFilter.TOP_WIKI_FILTER_ID;
 
 import android.app.Activity;
@@ -40,7 +40,8 @@ import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
-import net.osmand.plus.mapcontextmenu.gallery.ImageCardsHolder;
+import net.osmand.plus.mapcontextmenu.gallery.GalleryItemsHolder;
+import net.osmand.plus.mapcontextmenu.gallery.RemoteMediaFactory;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -282,32 +283,32 @@ public class WikipediaPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected boolean createContextMenuImageCard(@NonNull ImageCardsHolder holder,
-			@NonNull JSONObject imageObject) {
-		ImageCard imageCard = null;
-		if (mapActivity != null) {
-			try {
-				if (imageObject.has("type") && imageObject.has("url")) {
-					String type = imageObject.getString("type");
-					if (URL_PHOTO.equals(type)) {
-						String url = imageObject.getString("url");
-						int colonIdx = url.lastIndexOf(":");
-						if (url.contains(ORG_WIKI_SUFFIX) && colonIdx > 0) {
-							String fileName = url.substring(colonIdx + 1);
-							WikiImage wikiImage = WikiHelper.INSTANCE.getImageData(fileName);
-							if (wikiImage != null) {
-								imageCard = new WikiImageCard(mapActivity, wikiImage);
-							}
-						}
-					}
-				}
-			} catch (JSONException e) {
-				LOG.error(e);
+	protected boolean addContextMenuGalleryItem(@NonNull GalleryItemsHolder holder,
+	                                            @NonNull JSONObject imageObject) {
+		try {
+			if (!imageObject.has("type") || !imageObject.has("url")) {
+				return false;
 			}
-		}
-		if (imageCard != null) {
-			holder.addCard(OTHER, imageCard);
-			return true;
+
+			String type = imageObject.getString("type");
+			if (!URL_PHOTO.equals(type)) {
+				return false;
+			}
+
+			String url = imageObject.getString("url");
+			int colonIdx = url.lastIndexOf(":");
+			if (!url.contains(ORG_WIKI_SUFFIX) || colonIdx <= 0) {
+				return false;
+			}
+
+			String fileName = url.substring(colonIdx + 1);
+			WikiImage wikiImage = WikiHelper.INSTANCE.getImageData(fileName);
+			if (wikiImage != null) {
+				holder.addMediaItem(OTHER, RemoteMediaFactory.fromWikiImage(wikiImage));
+				return true;
+			}
+		} catch (JSONException e) {
+			LOG.error(e);
 		}
 		return false;
 	}

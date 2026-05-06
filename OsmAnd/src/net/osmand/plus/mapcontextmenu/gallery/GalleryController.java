@@ -7,9 +7,10 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
+import net.osmand.plus.gallery.GalleryItem;
+import net.osmand.plus.gallery.MediaProvider;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
-import net.osmand.plus.wikipedia.WikiImageCard;
+import net.osmand.shared.media.domain.MediaItem;
 import net.osmand.shared.util.NetworkImageLoader;
 import net.osmand.util.Algorithms;
 
@@ -18,14 +19,14 @@ import java.util.*;
 public class GalleryController implements IDialogController {
 
 	public static final String PROCESS_ID = "gallery_context_controller";
-	private final OsmandApplication app;
 
-	private ImageCardsHolder currentCardsHolder;
+	private GalleryItemsHolder currentMediaHolder;
 
+	private final MediaProvider mediaProvider;
 	private final NetworkImageLoader imageLoader;
 
 	public GalleryController(@NonNull OsmandApplication app) {
-		this.app = app;
+		mediaProvider = new MediaProvider(app);
 		imageLoader = new NetworkImageLoader(app, true);
 	}
 
@@ -34,37 +35,46 @@ public class GalleryController implements IDialogController {
 	}
 
 	@NonNull
-	public List<ImageCard> getOnlinePhotoCards() {
-		List<ImageCard> imageCards = new ArrayList<>();
-		if (currentCardsHolder != null) {
-			imageCards.addAll(currentCardsHolder.getOrderedCards());
+	public MediaProvider getMediaProvider() {
+		return mediaProvider;
+	}
+
+	@NonNull
+	public List<GalleryItem> getOnlinePhotoItems() {
+		List<GalleryItem> galleryItems = new ArrayList<>();
+		if (currentMediaHolder != null) {
+			galleryItems.addAll(currentMediaHolder.getOrderedGalleryItems());
 		}
-		return imageCards;
+		return galleryItems;
 	}
 
 	@Nullable
-	public ImageCardsHolder getCurrentCardsHolder() {
-		return currentCardsHolder;
+	public GalleryItemsHolder getCurrentMediaHolder() {
+		return currentMediaHolder;
 	}
 
-	public void setCurrentCardsHolder(@Nullable ImageCardsHolder cardsHolder) {
-		this.currentCardsHolder = cardsHolder;
+	public void setCurrentMediaHolder(@Nullable GalleryItemsHolder mediaHolder) {
+		this.currentMediaHolder = mediaHolder;
 	}
 
 	public void clearHolder() {
-		this.currentCardsHolder = null;
+		this.currentMediaHolder = null;
 	}
 
 	public boolean isCurrentHolderEquals(@NonNull LatLon latLon, @NonNull Map<String, String> params) {
-		return currentCardsHolder != null && Algorithms.objectEquals(currentCardsHolder.getLatLon(), latLon)
-				&& Algorithms.objectEquals(currentCardsHolder.getParams(), params);
+		return currentMediaHolder != null && Algorithms.objectEquals(currentMediaHolder.getLatLon(), latLon)
+				&& Algorithms.objectEquals(currentMediaHolder.getParams(), params);
 	}
 
-	public int getImageCardFromUrl(@NonNull String imageUrl) {
-		for (int i = 0; i < getOnlinePhotoCards().size(); i++) {
-			ImageCard card = getOnlinePhotoCards().get(i);
-			if (imageUrl.equals(card.getImageUrl())) {
-				return i;
+	public int getItemIndexBySourceUri(@NonNull String sourceUri) {
+		List<GalleryItem> items = getOnlinePhotoItems();
+		for (int i = 0; i < items.size(); i++) {
+			GalleryItem item = items.get(i);
+			if (item instanceof GalleryItem.Media media) {
+				MediaItem mediaItem = media.getMediaItem();
+				if (Algorithms.stringsEqual(sourceUri, mediaItem.getSourceUri())) {
+					return i;
+				}
 			}
 		}
 		return 0;

@@ -1,6 +1,6 @@
 package net.osmand.plus.mapcontextmenu.gallery;
 
-public enum ImageCardType {
+public enum GalleryMediaGroup {
 	OTHER,
 	MAPILLARY_AMENITY,
 	WIKIDATA,

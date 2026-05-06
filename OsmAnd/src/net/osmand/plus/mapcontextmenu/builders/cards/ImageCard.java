@@ -113,16 +113,20 @@ public abstract class ImageCard extends AbstractCard {
 				if (imageObject.has("externalLink") && !imageObject.isNull("externalLink")) {
 					this.externalLink = imageObject.getBoolean("externalLink");
 				}
+				// todo: new model should also parse it
 				if (imageObject.has("topIcon") && !imageObject.isNull("topIcon")) {
 					String topIcon = imageObject.getString("topIcon");
 					this.topIconId = AndroidUtils.getDrawableId(app, topIcon);
 				}
+				// todo: new model should also parse it
 				if (imageObject.has("buttonIcon") && !imageObject.isNull("buttonIcon")) {
 					this.buttonIconId = AndroidUtils.getDrawableId(app, imageObject.getString("buttonIcon"));
 				}
+				// todo: new model should also parse it
 				if (imageObject.has("buttonText") && !imageObject.isNull("buttonText")) {
 					this.buttonText = imageObject.getString("buttonText");
 				}
+				// todo: new model should also parse it
 				if (imageObject.has("buttonIconColor") && !imageObject.isNull("buttonIconColor")) {
 					try {
 						this.buttonIconColor = Algorithms.parseColor(imageObject.getString("buttonIconColor"));
@@ -130,6 +134,7 @@ public abstract class ImageCard extends AbstractCard {
 						e.printStackTrace();
 					}
 				}
+				// todo: new model should also parse it
 				if (imageObject.has("buttonColor") && !imageObject.isNull("buttonColor")) {
 					try {
 						this.buttonColor = Algorithms.parseColor(imageObject.getString("buttonColor"));
@@ -137,6 +142,7 @@ public abstract class ImageCard extends AbstractCard {
 						e.printStackTrace();
 					}
 				}
+				// todo: new model should also parse it
 				if (imageObject.has("buttonTextColor") && !imageObject.isNull("buttonTextColor")) {
 					try {
 						this.buttonTextColor = Algorithms.parseColor(imageObject.getString("buttonTextColor"));
@@ -237,5 +243,9 @@ public abstract class ImageCard extends AbstractCard {
 
 	public void setDistance(float distance) {
 		this.distance = distance;
+	}
+
+	public boolean isExternalLink() {
+		return externalLink;
 	}
 }

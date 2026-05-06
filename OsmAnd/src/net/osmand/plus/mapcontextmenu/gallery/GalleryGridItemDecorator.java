@@ -1,7 +1,5 @@
 package net.osmand.plus.mapcontextmenu.gallery;
 
-import static net.osmand.plus.mapcontextmenu.gallery.holders.GalleryImageHolder.*;
-
 import android.graphics.Rect;
 import android.view.View;
 
@@ -10,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.mapcontextmenu.gallery.holders.GalleryImageHolder;
+import net.osmand.plus.mapcontextmenu.gallery.holders.GalleryMediaHolder;
+import net.osmand.plus.mapcontextmenu.gallery.holders.ImageHolderType;
 import net.osmand.plus.mapcontextmenu.gallery.holders.MapillaryContributeHolder;
 import net.osmand.plus.utils.AndroidUtils;
 
@@ -30,7 +29,7 @@ public class GalleryGridItemDecorator extends RecyclerView.ItemDecoration {
 		super.getItemOffsets(outRect, view, parent, state);
 		int position = parent.getChildAdapterPosition(view);
 		RecyclerView.ViewHolder viewHolder = parent.getChildViewHolder(view);
-		if (viewHolder instanceof GalleryImageHolder holder) {
+		if (viewHolder instanceof GalleryMediaHolder holder) {
 			ImageHolderType type = holder.getHolderType();
 			switch (type) {
 				case SPAN_RESIZABLE -> {

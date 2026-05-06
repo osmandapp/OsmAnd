@@ -21,11 +21,12 @@ import androidx.fragment.app.Fragment;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenFragment;
+import net.osmand.plus.gallery.GalleryItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.gallery.imageview.GalleryImageView;
 import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
+import net.osmand.shared.media.domain.MediaItem;
 import net.osmand.shared.util.ImageLoaderCallback;
 import net.osmand.shared.util.LoadingImage;
 
@@ -80,18 +81,18 @@ public class GalleryPhotoViewerFragment extends BaseFullScreenFragment {
 		imageView = view.findViewById(R.id.image);
 
 		if (controller != null) {
-			List<ImageCard> photoCards = controller.getOnlinePhotoCards();
+			List<GalleryItem> photoItems = controller.getOnlinePhotoItems();
 			int position = selectedPosition;
-			if (photoCards.size() > position) {
-				ImageCard imageCard = photoCards.get(position);
-				if (imageCard != null) {
+			if (photoItems.size() > position) {
+				MediaItem mediaItem = getMediaItem(photoItems.get(position));
+				if (mediaItem != null) {
 					if (loadingImage != null) {
 						loadingImage.cancel();
 					}
 					if (!app.getSettings().isInternetConnectionAvailable()) {
-						downloadHiResImage(imageCard, true);
+						downloadFullImage(mediaItem, true);
 					} else {
-						downloadThumbnail(imageCard);
+						downloadThumbnail(mediaItem);
 					}
 				}
 			}
@@ -110,92 +111,83 @@ public class GalleryPhotoViewerFragment extends BaseFullScreenFragment {
 		});
 	}
 
-	private void downloadThumbnail(@NonNull ImageCard imageCard) {
-		String thumbnailUrl = imageCard.getThumbnailUrl();
-		if (thumbnailUrl != null) {
-			loadingImage = controller.getImageLoader().loadImage(thumbnailUrl, new ImageLoaderCallback() {
-				@Override
-				public void onStart(@Nullable Bitmap bitmap) {
+	private void downloadThumbnail(@NonNull MediaItem mediaItem) {
+		loadingImage = controller.getMediaProvider().loadThumbnail(mediaItem, new ImageLoaderCallback() {
+			@Override
+			public void onStart(@Nullable Bitmap bitmap) {
+			}
 
-				}
+			@Override
+			public void onSuccess(@NonNull Bitmap bitmap) {
+				Drawable previous = new ColorDrawable(Color.TRANSPARENT);
+				Drawable next = new BitmapDrawable(imageView.getResources(), bitmap);
 
-				@Override
-				public void onSuccess(@NonNull Bitmap bitmap) {
-					Drawable previous = new ColorDrawable(Color.TRANSPARENT);
-					Drawable next = new BitmapDrawable(imageView.getResources(), bitmap);
+				AndroidUiHelper.crossFadeDrawables(imageView,
+						previous,
+						next);
 
-					AndroidUiHelper.crossFadeDrawables(imageView,
-							previous,
-							next);
+				downloadFullImage(mediaItem, false);
+			}
 
-					downloadHiResImage(imageCard, false);
-				}
-
-				@Override
-				public void onError() {
-					downloadHiResImage(imageCard, true);
-				}
-			}, false);
-		} else {
-			downloadHiResImage(imageCard, false);
-		}
+			@Override
+			public void onError() {
+				downloadFullImage(mediaItem, true);
+			}
+		});
 	}
 
-	private void downloadHiResImage(@NonNull ImageCard imageCard, boolean loadPreviewOnError) {
-		String hiResUrl = imageCard.getGalleryFullSizeUrl();
-		if (hiResUrl != null) {
-			loadingImage = controller.getImageLoader().loadImage(imageCard.getGalleryFullSizeUrl(), new ImageLoaderCallback() {
-				@Override
-				public void onStart(@Nullable Bitmap bitmap) {
+	private void downloadFullImage(@NonNull MediaItem mediaItem, boolean fallbackToPreview) {
+		loadingImage = controller.getMediaProvider().loadFull(mediaItem, new ImageLoaderCallback() {
+			@Override
+			public void onStart(@Nullable Bitmap bitmap) {
+			}
 
+			@Override
+			public void onSuccess(@NonNull Bitmap bitmap) {
+				Drawable previous = imageView.getDrawable() != null
+						? imageView.getDrawable()
+						: new ColorDrawable(Color.TRANSPARENT);
+				Drawable next = new BitmapDrawable(imageView.getResources(), bitmap);
+
+				AndroidUiHelper.crossFadeDrawables(imageView, previous, next);
+			}
+
+			@Override
+			public void onError() {
+				if (fallbackToPreview) {
+					tryLoadCachePreviewImage(mediaItem);
+				} else {
+					LOG.error("Unable to download full image: " + mediaItem.getResource().getFullUri());
 				}
-
-				@Override
-				public void onSuccess(@NonNull Bitmap bitmap) {
-					Drawable previous = imageView.getDrawable() != null ? imageView.getDrawable() : new ColorDrawable(Color.TRANSPARENT);
-					Drawable next = new BitmapDrawable(imageView.getResources(), bitmap);
-
-					AndroidUiHelper.crossFadeDrawables(imageView,
-							previous,
-							next);
-				}
-
-				@Override
-				public void onError() {
-					if (loadPreviewOnError) {
-						tryLoadCachePreviewImage(imageCard);
-					} else {
-						LOG.error("Unable to download hi res image: " + hiResUrl);
-					}
-				}
-			}, false);
-		}
+			}
+		});
 	}
 
-	private void tryLoadCachePreviewImage(@NonNull ImageCard imageCard) {
-		String imageUrl = imageCard.getImageUrl();
-		if (imageUrl != null) {
-			loadingImage = controller.getImageLoader().loadImage(imageUrl, new ImageLoaderCallback() {
-				@Override
-				public void onStart(@Nullable Bitmap bitmap) {
+	private void tryLoadCachePreviewImage(@NonNull MediaItem mediaItem) {
+		loadingImage = controller.getMediaProvider().loadPreview(mediaItem, new ImageLoaderCallback() {
+			@Override
+			public void onStart(@Nullable Bitmap bitmap) {
+			}
 
-				}
+			@Override
+			public void onSuccess(@NonNull Bitmap bitmap) {
+				Drawable previous = new ColorDrawable(Color.TRANSPARENT);
+				Drawable next = new BitmapDrawable(imageView.getResources(), bitmap);
 
-				@Override
-				public void onSuccess(@NonNull Bitmap bitmap) {
-					Drawable previous = new ColorDrawable(Color.TRANSPARENT);
-					Drawable next = new BitmapDrawable(imageView.getResources(), bitmap);
+				AndroidUiHelper.crossFadeDrawables(imageView,
+						previous,
+						next);
+			}
 
-					AndroidUiHelper.crossFadeDrawables(imageView,
-							previous,
-							next);
-				}
+			@Override
+			public void onError() {
+			}
+		});
+	}
 
-				@Override
-				public void onError() {
-				}
-			}, false);
-		}
+	@Nullable
+	private MediaItem getMediaItem(@Nullable GalleryItem item) {
+		return item instanceof GalleryItem.Media media ? media.getMediaItem() : null;
 	}
 
 	@Override

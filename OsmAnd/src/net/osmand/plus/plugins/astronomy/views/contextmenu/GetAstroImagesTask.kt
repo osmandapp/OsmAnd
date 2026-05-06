@@ -4,13 +4,13 @@ import android.net.TrafficStats
 import android.os.AsyncTask
 import net.osmand.PlatformUtil
 import net.osmand.plus.OsmandApplication
-import net.osmand.plus.mapcontextmenu.gallery.ImageCardsHolder
+import net.osmand.plus.mapcontextmenu.gallery.GalleryItemsHolder
 import net.osmand.shared.wiki.WikiCoreHelper
 import net.osmand.shared.wiki.WikiImage
 import org.apache.commons.logging.Log
 
 class GetAstroImagesTask(
-	val app: OsmandApplication, val holder: ImageCardsHolder, val wikidataId: String,
+	val app: OsmandApplication, val holder: GalleryItemsHolder, val wikidataId: String,
 	val getImageCardsListener: GetImageCardsListener?,
 	val networkResponseListener: WikiCoreHelper.NetworkResponseListener?
 ) : AsyncTask<Void, Void, List<WikiImage>?>() {

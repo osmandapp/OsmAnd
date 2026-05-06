@@ -24,18 +24,18 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardType;
+import net.osmand.plus.gallery.GalleryItem;
+import net.osmand.plus.gallery.GalleryItem.NoImages;
 import net.osmand.plus.mapcontextmenu.BuildRowAttrs;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
-import net.osmand.plus.mapcontextmenu.builders.cards.CardsRowBuilder;
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
-import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
+import net.osmand.plus.mapcontextmenu.builders.cards.GalleryRowBuilder;
 import net.osmand.plus.mapcontextmenu.gallery.GalleryController;
-import net.osmand.plus.mapcontextmenu.gallery.ImageCardType;
-import net.osmand.plus.mapcontextmenu.gallery.ImageCardsHolder;
-import net.osmand.plus.mapcontextmenu.gallery.tasks.GetImageCardsTask.GetImageCardsListener;
+import net.osmand.plus.mapcontextmenu.gallery.GalleryMediaGroup;
+import net.osmand.plus.mapcontextmenu.gallery.GalleryItemsHolder;
+import net.osmand.plus.mapcontextmenu.gallery.RemoteMediaFactory;
+import net.osmand.plus.mapcontextmenu.gallery.tasks.GetOnlineImagesTask.GetImageCardsListener;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -60,11 +60,12 @@ import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
+import net.osmand.shared.media.domain.MediaItem;
+import net.osmand.shared.media.domain.MediaOrigin;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 import org.jetbrains.annotations.NotNull;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.MessageFormat;
@@ -94,8 +95,9 @@ public class MapillaryPlugin extends OsmandPlugin {
 	private MapActivity mapActivity;
 
 	@Nullable
-	private CardsRowBuilder mapillaryCardsRow;
-	private List<AbstractCard> mapillaryCards;
+	private GalleryRowBuilder galleryRowBuilder;
+	// TODO avoid caching UI state (GalleryItem), cache domain MediaItem.Mapillary instead
+	private List<GalleryItem> mapillaryGalleryItems;
 
 	private MapillaryVectorLayer vectorLayer;
 	private MapWidgetInfo mapillaryWidgetRegInfo;
@@ -263,20 +265,20 @@ public class MapillaryPlugin extends OsmandPlugin {
 			return;
 		}
 		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
-		boolean needUpdateOnly = mapillaryCardsRow != null && mapillaryCardsRow.getMenuBuilder() == menuBuilder;
+		boolean needUpdateOnly = galleryRowBuilder != null && galleryRowBuilder.getMenuBuilder() == menuBuilder;
 
-		mapillaryCardsRow = new CardsRowBuilder(menuBuilder);
-		mapillaryCardsRow.build(controller, false, nightMode);
+		galleryRowBuilder = new GalleryRowBuilder(menuBuilder);
+		galleryRowBuilder.build(controller, false, nightMode);
 
 		LinearLayout parent = new LinearLayout(view.getContext());
 		parent.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT));
 		parent.setOrientation(LinearLayout.VERTICAL);
-		parent.addView(mapillaryCardsRow.getGalleryView());
+		parent.addView(galleryRowBuilder.getGalleryView());
 
 		CollapsableView collapsableView = new CollapsableView(parent, menuBuilder, MAPILLARY_PHOTOS_ROW_COLLAPSED);
 		collapsableView.setCollapseExpandListener(collapsed -> {
-			if (!collapsed && mapillaryCards == null) {
+			if (!collapsed && mapillaryGalleryItems == null) {
 				menuBuilder.startLoadingImages();
 			}
 		});
@@ -284,41 +286,41 @@ public class MapillaryPlugin extends OsmandPlugin {
 				.setText(app.getString(R.string.street_level_imagery))
 				.setCollapsable(true).setCollapsableView(collapsableView).setTextLinesLimit(1).build());
 
-		if (needUpdateOnly && mapillaryCards != null) {
-			mapillaryCardsRow.setCards(mapillaryCards);
-		} else if (!collapsableView.isCollapsed() && mapillaryCards == null) {
+		if (needUpdateOnly && mapillaryGalleryItems != null) {
+			galleryRowBuilder.setItems(mapillaryGalleryItems);
+		} else if (!collapsableView.isCollapsed() && mapillaryGalleryItems == null) {
 			menuBuilder.startLoadingImages();
 		}
 	}
 
 	@Override
 	public void clearContextMenuRows() {
-		mapillaryCards = null;
-		mapillaryCardsRow = null;
+		mapillaryGalleryItems = null;
+		galleryRowBuilder = null;
 	}
 
 	public GetImageCardsListener getImageCardsListener() {
 		return new GetImageCardsListener() {
 			@Override
 			public void onTaskStarted() {
-				if (mapillaryCardsRow != null) {
-					mapillaryCardsRow.onLoadingImage(true);
+				if (galleryRowBuilder != null) {
+					galleryRowBuilder.onLoadingImage(true);
 				}
 			}
 
 			@Override
-			public void onFinish(ImageCardsHolder cardsHolder) {
-				if (mapillaryCardsRow != null) {
-					mapillaryCardsRow.onLoadingImage(false);
+			public void onFinish(GalleryItemsHolder cardsHolder) {
+				if (galleryRowBuilder != null) {
+					galleryRowBuilder.onLoadingImage(false);
 				}
-				List<AbstractCard> cards = new ArrayList<>(cardsHolder.getMapillaryCards());
-				if (mapActivity != null && Algorithms.isEmpty(cards)) {
-					cards.add(new NoImagesCard(mapActivity));
+				List<GalleryItem> items = new ArrayList<>(cardsHolder.getMapillaryGalleryItems());
+				if (mapActivity != null && Algorithms.isEmpty(items)) {
+					items.add(NoImages.INSTANCE);
 				}
-				if (mapillaryCardsRow != null) {
-					mapillaryCardsRow.setCards(cards);
+				if (galleryRowBuilder != null) {
+					galleryRowBuilder.setItems(items);
 				}
-				mapillaryCards = cards;
+				mapillaryGalleryItems = items;
 			}
 		};
 	}
@@ -345,28 +347,33 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected boolean createContextMenuImageCard(@NonNull ImageCardsHolder holder,
-	                                             @NonNull JSONObject imageObject) {
-		ImageCard imageCard = null;
-		if (mapActivity != null) {
-			try {
-				if (imageObject.has("type")) {
-					String type = imageObject.getString("type");
-					if (TYPE_MAPILLARY_PHOTO.equals(type)) {
-						imageCard = new MapillaryImageCard(mapActivity, imageObject);
-					} else if (TYPE_MAPILLARY_CONTRIBUTE.equals(type)) {
-						imageCard = new MapillaryContributeCard(mapActivity, imageObject);
-					}
+	protected boolean addContextMenuGalleryItem(@NonNull GalleryItemsHolder holder,
+	                                            @NonNull JSONObject imageObject) {
+		String type = imageObject.optString("type", null);
+		boolean mapillaryPhoto = TYPE_MAPILLARY_PHOTO.equals(type);
+		boolean mapillaryContribute = TYPE_MAPILLARY_CONTRIBUTE.equals(type);
+
+		if (!mapillaryPhoto && !mapillaryContribute) {
+			return false;
+		}
+
+		try {
+			if (mapillaryPhoto) {
+				MediaItem.Remote item = RemoteMediaFactory.fromJson(imageObject, MediaOrigin.MAPILLARY);
+				if (item != null) {
+					holder.addMediaItem(GalleryMediaGroup.MAPILLARY, item);
 				}
-			} catch (JSONException e) {
-				LOG.error(e);
+			} else {
+				holder.addGalleryItem(
+						GalleryMediaGroup.MAPILLARY,
+						TYPE_MAPILLARY_CONTRIBUTE,
+						GalleryItem.MapillaryContribute.INSTANCE
+				);
 			}
+		} catch (Exception e) {
+			LOG.error(e);
 		}
-		if (imageCard != null) {
-			holder.addCard(ImageCardType.MAPILLARY, imageCard);
-			return true;
-		}
-		return false;
+		return true;
 	}
 
 	@Override
