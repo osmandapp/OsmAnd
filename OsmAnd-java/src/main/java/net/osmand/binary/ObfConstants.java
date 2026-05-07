@@ -214,7 +214,7 @@ public class ObfConstants {
 
 	public static boolean isTagIndexedForSearchAsName(String tag) {
 		if (tag != null) {
-			if (tag.equals(Amenity.ROUTE_NAME)) {
+			if (tag.startsWith(Amenity.ROUTE_NAME)) {
 				// search related but not direct
 				return false;
 			}

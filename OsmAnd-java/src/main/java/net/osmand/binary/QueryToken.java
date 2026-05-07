@@ -17,17 +17,20 @@ public class QueryToken {
     class SuffixMask {
         TIntArrayList masks;
         final Prefix prefix;
+        private boolean passThrough;
 
         SuffixMask(Prefix prefix) {
             this.prefix = prefix;
         }
 
         void setDictionary(List<String> suffixDictionary) {
+            passThrough = suffixDictionary == null;
             if (prefix.key() == null || suffixDictionary == null) {
                 return;
             }
             
             if (suffixDictionary.size() == 1 && suffixDictionary.get(0).isEmpty()) {
+                passThrough = query != null && CollatorStringMatcher.cmatches(collator, prefix.key(), query, matcherMode);
                 return;
             }
             if (masks == null) {
@@ -39,6 +42,14 @@ public class QueryToken {
             for (int index = 0; index < suffixDictionary.size(); index++) {
                 addSuffix(index, suffixDictionary.get(index));
             }
+        }
+
+        boolean shouldPassThrough() {
+            return passThrough;
+        }
+        
+        boolean isMatched(int maskIndex, int mask) {
+            return masks != null && maskIndex < masks.size() && (masks.get(maskIndex) & mask) != 0;
         }
 
         private void addSuffix(int index, String suffix) {

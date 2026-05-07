@@ -369,7 +369,7 @@
     <string name="poi_tactile_paving_yes">Ih</string>
     <string name="poi_smoking_yes">Tessireg</string>
     <string name="poi_smoking_no">Tessireg</string>
-    <string name="poi_covered_no">"Meṛṛa isenfaṛen i yeɛna uɣawas n ufter,ttwakksen. "</string>
+    <string name="poi_covered_no">Meṛṛa isenfaṛen i yeɛna uɣawas n ufter,ttwakksen.</string>
     <string name="poi_covered_yes">Ih</string>
     <string name="poi_fireplace_yes">Ih</string>
     <string name="poi_board_type_astronomy">Tasnallunt</string>

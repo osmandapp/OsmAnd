@@ -39,6 +39,7 @@ public class LocationPointsTileProvider extends interface_MapTiledCollectionProv
       }
       skPointBitmap = pointBitmap;
       this.offset = new PointI(0, 0);
+      this.swigTakeOwnership();
    }
 
    public void drawPoints(@NonNull MapRendererView mapRenderer) {

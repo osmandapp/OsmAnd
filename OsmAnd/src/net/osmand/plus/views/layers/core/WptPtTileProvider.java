@@ -46,6 +46,7 @@ public class WptPtTileProvider extends interface_MapTiledCollectionProvider {
       this.textStyle = textStyle != null ? textStyle : new TextRasterizer.Style();
       this.density = density;
       offset = new PointI(0,0);
+      this.swigTakeOwnership();
    }
 
    public void drawSymbols(@NonNull MapRendererView mapRenderer) {

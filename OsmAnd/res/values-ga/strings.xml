@@ -3344,8 +3344,8 @@
     <string name="number_of_contributors">Líon na ranníocóirí</string>
     <string name="reports_for">Tuarascáil le haghaidh</string>
     <string name="add_line">Cuir Líne Leis</string>
-    <string name="delete_widget">Scrios giuirléid?</string>
-    <string name="delete_widget_description">Scriosfar an ghiuirléid seo. Is féidir leat é a chur ar ais níos déanaí sa Scáileán Cumraithe.</string>
+    <string name="delete_widget">Bain an giuirléid?</string>
+    <string name="delete_widget_description">Bainfear an giuirléid seo. Is féidir leat é a athchóiriú níos déanaí sa Scáileán Cumraíochta.</string>
     <string name="add_widget_to_the_right">Cuir giuirléid ar dheis</string>
     <string name="hugerock_promo_description">Rochtain saor in aisce ar ghnéithe lena n-áirítear íoslódálacha léarscáil neamhtheoranta, faoiseamh 3D etc. le haghaidh %1$s month</string>
     <string name="location_radius_description">Taispeáin an limistéar ciorclach a léiríonn do chruinneas suímh reatha</string>

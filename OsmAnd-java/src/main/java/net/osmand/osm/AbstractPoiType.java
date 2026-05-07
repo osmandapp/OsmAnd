@@ -200,4 +200,8 @@ public abstract class AbstractPoiType {
 		}
 		return keyName != null && keyName.equals(that.keyName);
 	}
+
+	public String getOriginalIconName() {
+		return iconName;
+	}
 }

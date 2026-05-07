@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu.controllers;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmAndTaskManager;
@@ -39,7 +40,9 @@ public class SelectedGpxMenuController extends MenuController {
 					mapContextMenu.close();
 				}
 				SelectedGpxFile selectedGpxFile = selectedGpxPoint.getSelectedGpxFile();
-				TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint);
+				if (selectedGpxFile != null) {
+					TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint);
+				}
 			}
 		};
 		leftTitleButtonController.caption = mapActivity.getString(R.string.shared_string_open_track);
@@ -49,7 +52,11 @@ public class SelectedGpxMenuController extends MenuController {
 			@Override
 			public void buttonPressed() {
 				WptPt selectedPoint = selectedGpxPoint.getSelectedPoint();
-				GpxFile gpxFile = selectedGpxPoint.getSelectedGpxFile().getGpxFile();
+				SelectedGpxFile selectedGpxFile = selectedGpxPoint.getSelectedGpxFile();
+				if (selectedGpxFile == null) {
+					return;
+				}
+				GpxFile gpxFile = selectedGpxFile.getGpxFile();
 
 				OpenGpxDetailsTask detailsTask = new OpenGpxDetailsTask(mapActivity, gpxFile, selectedPoint, null);
 				OsmAndTaskManager.executeTask(detailsTask);
@@ -76,13 +83,14 @@ public class SelectedGpxMenuController extends MenuController {
 	public String getTypeStr() {
 		if (getMenuType() == MenuType.MULTI_LINE) {
 			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
+			if (mapActivity != null && selectedGpxPoint.getSelectedGpxFile() != null) {
 				SelectedGpxFile selectedGpxFile = selectedGpxPoint.getSelectedGpxFile();
 				GpxTrackAnalysis analysis = selectedGpxFile.getTrackAnalysis(mapActivity.getApp());
 				if (analysis != null) {
-					KFile file = selectedGpxFile.isShowCurrentTrack()
+					String path = selectedGpxFile.getGpxFile().getPath();
+					KFile file = selectedGpxFile.isShowCurrentTrack() || Algorithms.isEmpty(path)
 							? null
-							: new KFile(selectedGpxFile.getGpxFile().getPath());
+							: new KFile(path);
 					String description = GpxUiHelper.getTrackShortDescription(mapActivity, analysis, file, true);
 					if (!Algorithms.isEmpty(description)) {
 						return description;
@@ -125,6 +133,7 @@ public class SelectedGpxMenuController extends MenuController {
 
 	public static class SelectedGpxPoint {
 
+		@Nullable
 		private final SelectedGpxFile selectedGpxFile;
 		private final WptPt selectedPoint;
 		private final WptPt prevPoint;
@@ -132,11 +141,11 @@ public class SelectedGpxMenuController extends MenuController {
 		private final float bearing;
 		private final boolean showTrackPointMenu;
 
-		public SelectedGpxPoint(SelectedGpxFile selectedGpxFile, WptPt selectedPoint) {
+		public SelectedGpxPoint(@Nullable SelectedGpxFile selectedGpxFile, WptPt selectedPoint) {
 			this(selectedGpxFile, selectedPoint, null, null, Float.NaN, false);
 		}
 
-		public SelectedGpxPoint(SelectedGpxFile selectedGpxFile, WptPt selectedPoint, WptPt prevPoint,
+		public SelectedGpxPoint(@Nullable SelectedGpxFile selectedGpxFile, WptPt selectedPoint, WptPt prevPoint,
 		                        WptPt nextPoint, float bearing, boolean showTrackPointMenu) {
 			this.prevPoint = prevPoint;
 			this.nextPoint = nextPoint;
@@ -146,6 +155,7 @@ public class SelectedGpxMenuController extends MenuController {
 			this.showTrackPointMenu = showTrackPointMenu;
 		}
 
+		@Nullable
 		public SelectedGpxFile getSelectedGpxFile() {
 			return selectedGpxFile;
 		}

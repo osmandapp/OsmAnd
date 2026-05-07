@@ -34,4 +34,6 @@
     <item name="initial_padding_top" type="id"/>
     <item name="initial_padding_right" type="id"/>
     <item name="initial_padding_bottom" type="id"/>
+    <item name="widget_panel_view_pager_left" type="id" />
+    <item name="widget_panel_view_pager_right" type="id" />
 </resources>

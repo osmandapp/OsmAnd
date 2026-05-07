@@ -178,6 +178,9 @@ public class SaveFavoritesTask extends AsyncTask<Void, String, Void> {
 		Exception exception = helper.saveFile(Collections.singletonList(group), externalFile);
 		if (exception != null) {
 			log.error(exception);
+		} else if (externalFile.exists()) {
+			group.setSize(externalFile.length());
+			group.setTimeModified(externalFile.lastModified());
 		}
 	}
 

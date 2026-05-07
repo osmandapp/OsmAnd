@@ -35,8 +35,8 @@ public class CommonWords {
 		}
 	}
 
-	private static boolean isNumber2Letters(String name) {
-		return Character.isDigit(name.charAt(0)) && letters(name) < 2;
+	public static boolean isNumber2Letters(String name) {
+		return !name.isEmpty() && Character.isDigit(name.charAt(0)) && letters(name) < 2;
 	}
 
 	public static boolean isCommon(String name) {
@@ -96,8 +96,8 @@ public class CommonWords {
 		if (i != null) {
 			return i.intValue();
 		}
-		if (regionNames.contains(name)) {
-			return commonWordsDictionary.size();
+		if (name.length() > 2 && regionNames.contains(name)) {
+			return commonWordsDictionary.size(); // length > 2 is for NC 42 ("NC" and "42" exist in regionNames)
 		}
 		return -1;
 	}
