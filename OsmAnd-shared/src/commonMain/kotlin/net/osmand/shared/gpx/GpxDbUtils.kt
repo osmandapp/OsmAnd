@@ -85,8 +85,8 @@ object GpxDbUtils {
 		db.execSQL(getGpxIndexQuery())
 		db.execSQL(getCreateGpxDirTableQuery())
 		db.execSQL(getGpxDirIndexQuery())
-		db.execSQL(getCreateAppearanceTriggerQuery(GPX_TABLE_NAME, GPX_APPEARANCE_TRIGGER, GpxParameter.getGpxAppearanceParameters()))
-		db.execSQL(getCreateAppearanceTriggerQuery(GPX_DIR_TABLE_NAME, GPX_DIR_APPEARANCE_TRIGGER, GpxParameter.getAppearanceParameters()))
+		db.execSQL(getCreateAppearanceTriggerQuery(GPX_TABLE_NAME, GPX_APPEARANCE_TRIGGER))
+		db.execSQL(getCreateAppearanceTriggerQuery(GPX_DIR_TABLE_NAME, GPX_DIR_APPEARANCE_TRIGGER))
 	}
 
 	fun onUpgrade(database: GpxDatabase, db: SQLiteConnection, oldVersion: Int, newVersion: Int) {
@@ -135,7 +135,6 @@ object GpxDbUtils {
 			addIfMissingGpxTableColumn(columnNames, db, WIDTH);
 			addIfMissingGpxTableColumn(columnNames, db, COLORING_TYPE);
 			addIfMissingGpxTableColumn(columnNames, db, COLOR_PALETTE);
-			addIfMissingGpxTableColumn(columnNames, db, POINTS_GROUPS);
 			addIfMissingGpxTableColumn(columnNames, db, SMOOTHING_THRESHOLD);
 			addIfMissingGpxTableColumn(columnNames, db, MIN_FILTER_SPEED);
 			addIfMissingGpxTableColumn(columnNames, db, MAX_FILTER_SPEED);
@@ -236,16 +235,10 @@ object GpxDbUtils {
 			}
 		}
 		if (oldVersion < 31) {
-			db.execSQL(getCreateAppearanceTriggerQuery(GPX_TABLE_NAME, GPX_APPEARANCE_TRIGGER, GpxParameter.getGpxAppearanceParameters()))
+			db.execSQL(getCreateAppearanceTriggerQuery(GPX_TABLE_NAME, GPX_APPEARANCE_TRIGGER))
 		}
 		if (oldVersion < 33) {
-			db.execSQL(getCreateAppearanceTriggerQuery(GPX_DIR_TABLE_NAME, GPX_DIR_APPEARANCE_TRIGGER, GpxParameter.getAppearanceParameters()))
-		}
-		if (oldVersion < 35) {
-			db.execSQL("DROP TRIGGER IF EXISTS $GPX_APPEARANCE_TRIGGER")
-			db.execSQL("DROP TRIGGER IF EXISTS $GPX_DIR_APPEARANCE_TRIGGER")
-			db.execSQL(getCreateAppearanceTriggerQuery(GPX_TABLE_NAME, GPX_APPEARANCE_TRIGGER, GpxParameter.getGpxAppearanceParameters()))
-			db.execSQL(getCreateAppearanceTriggerQuery(GPX_DIR_TABLE_NAME, GPX_DIR_APPEARANCE_TRIGGER, GpxParameter.getAppearanceParameters()))
+			db.execSQL(getCreateAppearanceTriggerQuery(GPX_DIR_TABLE_NAME, GPX_DIR_APPEARANCE_TRIGGER))
 		}
 	}
 
@@ -345,14 +338,11 @@ object GpxDbUtils {
 		return (GpxDatabase.DB_VERSION shl 10) + analysisVersion
 	}
 
-	private fun getCreateAppearanceTriggerQuery(
-		tableName: String,
-		triggerName: String,
-		appearanceParameters: List<GpxParameter>
-	): String {
+	private fun getCreateAppearanceTriggerQuery(tableName: String, triggerName: String): String {
 		val stampColumn = GpxParameter.APPEARANCE_LAST_MODIFIED_TIME.columnName
-		val columnNames  = appearanceParameters.joinToString(", ") { it.columnName }
-		val changeCondition = appearanceParameters.joinToString(" OR ") {
+		val appearance = GpxParameter.getAppearanceParameters()
+		val columnNames  = appearance.joinToString(", ") { it.columnName }
+		val changeCondition = appearance.joinToString(" OR ") {
 			"OLD.${it.columnName} IS NOT NEW.${it.columnName}"
 		}
 		val sb = StringBuilder()

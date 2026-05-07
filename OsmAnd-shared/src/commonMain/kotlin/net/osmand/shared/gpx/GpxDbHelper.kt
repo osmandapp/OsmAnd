@@ -14,8 +14,6 @@ import net.osmand.shared.api.SQLiteAPI.SQLiteConnection
 import net.osmand.shared.data.StringIntPair
 import net.osmand.shared.extensions.currentTimeMillis
 import net.osmand.shared.gpx.GpxReader.GpxReaderAdapter
-import net.osmand.shared.gpx.GpxUtilities.PointsGroup
-import net.osmand.shared.gpx.GpxUtilities.serializePointsGroups
 import net.osmand.shared.io.KFile
 import net.osmand.shared.util.LoggerFactory
 import net.osmand.shared.util.PlatformUtil
@@ -307,18 +305,6 @@ object GpxDbHelper : GpxReaderAdapter {
 				}
 			}
 			updateDataItem(item)
-		}
-	}
-
-	fun updatePointsGroups(file: KFile, pointsGroups: Map<String, PointsGroup>) {
-		var dataItem: GpxDataItem? = getItem(file, false)
-		val pointsGroups = serializePointsGroups(pointsGroups)
-		if (dataItem != null) {
-			updateDataItemParameter(dataItem, GpxParameter.POINTS_GROUPS, pointsGroups)
-		} else {
-			dataItem = GpxDataItem(file)
-			dataItem.setParameter(GpxParameter.POINTS_GROUPS, pointsGroups)
-			add(dataItem)
 		}
 	}
 
