@@ -58,16 +58,10 @@ object GpxUtilities {
 
 	val log = LoggerFactory.getLogger("GpxUtilities")
 	private const val POINTS_GROUPS_EXTENSIONS_KEY = "points_groups"
-	private const val LEGACY_POINTS_GROUPS_SCAN_CHUNK_SIZE = 8 * 1024L
 	private val pointsGroupsJson = Json {
 		ignoreUnknownKeys = true
 		explicitNulls = false
 	}
-	private val legacyPointsGroupsMarkers = listOf(
-		"<osmand:$POINTS_GROUPS_EXTENSIONS_KEY".encodeToByteArray(),
-		"<$POINTS_GROUPS_EXTENSIONS_KEY".encodeToByteArray()
-	)
-	private val legacyPointsGroupsScanOverlap = legacyPointsGroupsMarkers.maxOf { it.size } - 1
 
 	const val ICON_NAME_EXTENSION = "icon"
 	const val BACKGROUND_TYPE_EXTENSION = "background"
@@ -490,69 +484,15 @@ object GpxUtilities {
 
 	private fun applyPointsGroupsParameter(file: KFile, gpxFile: GpxFile): GpxFile {
 		if (gpxFile.error == null) {
-			val dataItem = GpxDbHelper.getItem(file, false)
-			val storedPointsGroups = dataItem?.getParameter<String>(GpxParameter.POINTS_GROUPS)
-			if (!storedPointsGroups.isNullOrEmpty()) {
-				applyPointsGroups(gpxFile, storedPointsGroups)
+			if (gpxFile.pointsGroups.isEmpty()) {
+				val dataItem = GpxDbHelper.getItem(file, false)
+				val storedPointsGroups = dataItem?.getParameter<String>(GpxParameter.POINTS_GROUPS)
+				if (!storedPointsGroups.isNullOrEmpty()) {
+					applyPointsGroups(gpxFile, storedPointsGroups)
+				}
 			}
 		}
 		return gpxFile
-	}
-
-	fun hasPointsGroupsExtension(file: KFile): Boolean {
-		return file.source().use { source ->
-			val buffer = Buffer()
-			var tail = ByteArray(0)
-			while (true) {
-				val read = source.read(buffer, LEGACY_POINTS_GROUPS_SCAN_CHUNK_SIZE)
-				if (read == -1L) {
-					break
-				}
-				if (read == 0L) {
-					continue
-				}
-				val chunk = buffer.readByteArray()
-				val combined = ByteArray(tail.size + chunk.size)
-				tail.copyInto(combined, 0)
-				chunk.copyInto(combined, tail.size)
-				if (containsAnyBytePattern(combined, legacyPointsGroupsMarkers)) {
-					return true
-				}
-				if (legacyPointsGroupsScanOverlap > 0) {
-					val tailStart = maxOf(0, combined.size - legacyPointsGroupsScanOverlap)
-					tail = combined.copyOfRange(tailStart, combined.size)
-				}
-			}
-			false
-		}
-	}
-
-	private fun containsAnyBytePattern(data: ByteArray, patterns: List<ByteArray>): Boolean {
-		for (pattern in patterns) {
-			if (containsBytePattern(data, pattern)) {
-				return true
-			}
-		}
-		return false
-	}
-
-	private fun containsBytePattern(data: ByteArray, pattern: ByteArray): Boolean {
-		if (pattern.isEmpty() || data.size < pattern.size) {
-			return false
-		}
-		for (start in 0..data.size - pattern.size) {
-			var match = true
-			for (index in pattern.indices) {
-				if (data[start + index] != pattern[index]) {
-					match = false
-					break
-				}
-			}
-			if (match) {
-				return true
-			}
-		}
-		return false
 	}
 
 	fun assignPointsGroupsExtensionWriter(gpxFile: GpxFile) {

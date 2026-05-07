@@ -9,12 +9,14 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
+import java.io.File;
 import java.util.Map;
 
 public class UpdatePointsGroupsTask extends BaseLoadAsyncTask<Void, Void, Exception> {
@@ -45,6 +47,7 @@ public class UpdatePointsGroupsTask extends BaseLoadAsyncTask<Void, Void, Except
 
 		if (!gpxFile.isShowCurrentTrack() && gpxUpdated) {
 			updatePointsGroupsInDb();
+			return SharedUtil.writeGpxFile(new File(gpxFile.getPath()), gpxFile);
 		}
 		return null;
 	}

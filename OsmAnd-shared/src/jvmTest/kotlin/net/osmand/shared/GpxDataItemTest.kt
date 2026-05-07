@@ -11,9 +11,7 @@ import net.osmand.shared.gpx.GpxFile
 import net.osmand.shared.gpx.GpxParameter
 import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser
 import net.osmand.shared.gpx.GpxUtilities
-import net.osmand.shared.gpx.GpxUtilities.PointsGroup
 import net.osmand.shared.gpx.SmartFolderHelper
-import net.osmand.shared.gpx.primitives.WptPt
 import net.osmand.shared.io.KFile
 import net.osmand.shared.settings.enums.AltitudeMetrics
 import net.osmand.shared.settings.enums.AngularConstants
@@ -22,9 +20,11 @@ import net.osmand.shared.settings.enums.SpeedConstants
 import net.osmand.shared.units.TemperatureUnits
 import net.osmand.shared.util.KStringMatcher
 import net.osmand.shared.util.PlatformUtil
+import okio.Buffer
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
+import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 class GpxDataItemTest {
@@ -33,21 +33,21 @@ class GpxDataItemTest {
 	fun readGpxParamsStoresPointsGroupsParameter() {
 		PlatformUtil.initialize(TestOsmAndContext())
 
-		val gpxFile = GpxFile(null)
-		val point = WptPt(10.0, 20.0).apply {
-			name = "Cafe"
-			category = "Food"
-		}
-		val group = PointsGroup(
-			"Food",
-			"restaurant",
-			"circle",
-			GpxUtilities.parseColor("#ff0000", 0) ?: 0,
-			hidden = true,
-			pinned = false
+		val gpxFile = loadGpx(
+			"""
+			<gpx version="1.1" creator="test">
+			  <wpt lat="10.0" lon="20.0">
+			    <name>Cafe</name>
+			    <type>Food</type>
+			  </wpt>
+			  <extensions>
+			    <points_groups>
+			      <group name="Food" color="#ff0000" icon="restaurant" background="circle" hidden="true" pinned="false" />
+			    </points_groups>
+			  </extensions>
+			</gpx>
+			""".trimIndent()
 		)
-		group.points.add(point)
-		gpxFile.addPointsGroup(group)
 
 		val item = GpxDataItem(KFile("/tmp/osmand-test/gpx/imported.gpx"))
 		item.readGpxParams(gpxFile)
@@ -59,6 +59,48 @@ class GpxDataItemTest {
 		assertTrue(storedGroup.isHidden())
 		assertEquals(false, storedGroup.isPinned())
 	}
+
+	@Test
+	fun readGpxParamsSetsNullPointsGroupsWithoutExtension() {
+		PlatformUtil.initialize(TestOsmAndContext())
+
+		val gpxFile = loadGpx(
+			"""
+			<gpx version="1.1" creator="test">
+			</gpx>
+			""".trimIndent()
+		)
+
+		val item = GpxDataItem(KFile("/tmp/osmand-test/gpx/imported.gpx"))
+		item.readGpxParams(gpxFile)
+
+		assertTrue(item.getParameters().containsKey(GpxParameter.POINTS_GROUPS))
+		assertNull(item.getParameter<String>(GpxParameter.POINTS_GROUPS))
+	}
+
+	@Test
+	fun readGpxParamsSetsNullPointsGroupsWithoutExtensionGroups() {
+		PlatformUtil.initialize(TestOsmAndContext())
+
+		val gpxFile = loadGpx(
+			"""
+			<gpx version="1.1" creator="test">
+			  <extensions>
+			    <points_groups />
+			  </extensions>
+			</gpx>
+			""".trimIndent()
+		)
+
+		val item = GpxDataItem(KFile("/tmp/osmand-test/gpx/imported.gpx"))
+		item.readGpxParams(gpxFile)
+
+		assertTrue(item.getParameters().containsKey(GpxParameter.POINTS_GROUPS))
+		assertNull(item.getParameter<String>(GpxParameter.POINTS_GROUPS))
+	}
+
+	private fun loadGpx(xml: String): GpxFile =
+		GpxUtilities.loadGpxFile(null, Buffer().writeUtf8(xml), null, false)
 
 	private class TestOsmAndContext : OsmAndContext {
 		private val root = KFile("/tmp/osmand-test")
