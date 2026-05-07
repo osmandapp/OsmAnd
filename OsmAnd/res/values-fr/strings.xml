@@ -5294,7 +5294,7 @@
     <string name="add_widget_below">Ajouter un widget en dessous</string>
     <string name="add_widget_to_the_right">Ajouter un widget à droite</string>
     <string name="delete_widget_description">Ce widget sera supprimé. Vous pourrez le restaurer plus tard dans Configurer l’écran.</string>
-    <string name="delete_widget">Supprimer le widget ?</string>
+    <string name="delete_widget">Supprimer le widget ?</string>
     <string name="battery_saving_mode">Mode économie d\'énergie</string>
     <string name="graph_axis">Axes du graphique</string>
     <string name="y_axis_description">Sélectionnez jusqu\'à deux options d\'ordonnées.</string>

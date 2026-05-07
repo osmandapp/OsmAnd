@@ -346,7 +346,7 @@
     <string name="rendering_attr_showRoadMaps_name">Карты только дорог</string>
     <string name="download_roads_only_item">Только дороги</string>
     <string name="download_regular_maps">Стандартная карта</string>
-    <string name="download_roads_only_maps">Карта дорог</string>
+    <string name="download_roads_only_maps">Карта только для дорог</string>
     <string name="safe_mode_description">Запустить приложение в безопасном (более медленном) режиме.</string>
     <string name="safe_mode">Безопасный режим</string>
     <string name="native_library_not_running">Приложение работает в безопасном режиме (отключается в разделе «Настройки»).</string>
