@@ -55,7 +55,7 @@ class GpxDataItem(
 		setParameter(GpxParameter.FILE_DIR, GpxDbUtils.getGpxFileDir(file))
 		setParameter(GpxParameter.FILE_LAST_MODIFIED_TIME, file.lastModified())
 
-		for (parameter in GpxParameter.getAppearanceParameters()) {
+		for (parameter in GpxParameter.getGpxAppearanceParameters()) {
 			readGpxAppearanceParameter(gpxFile, parameter)
 		}
 
@@ -156,6 +156,11 @@ class GpxDataItem(
 			GpxParameter.JOIN_SEGMENTS -> setParameter(
 					GpxParameter.JOIN_SEGMENTS,
 					gpxFile.isJoinSegments()
+			)
+
+			GpxParameter.POINTS_GROUPS -> setParameter(
+				GpxParameter.POINTS_GROUPS,
+				GpxUtilities.serializePointsGroups(gpxFile.pointsGroups)
 			)
 
 			else -> {}

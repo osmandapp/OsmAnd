@@ -1,6 +1,7 @@
 package net.osmand.shared
 
 import net.osmand.shared.gpx.GpxUtilities
+import net.osmand.shared.gpx.GpxUtilities.PointsGroup
 import net.osmand.shared.gpx.PointAttributes
 import okio.Buffer
 import kotlin.test.Test
@@ -95,6 +96,73 @@ class GpxUtilitiesLoadTest {
 		assertTrue(generalSegment.points[1].lastPoint)
 		assertTrue(generalSegment.points[2].firstPoint)
 		assertTrue(generalSegment.points[3].lastPoint)
+	}
+
+	@Test
+	fun testLoadAndWritePointsGroupsXmlPreservesGroupAppearance() {
+		val gpxFile = loadGpx(
+			"""
+			<gpx version="1.1" creator="test" xmlns:osmand="https://osmand.net/docs/technical/osmand-file-formats/osmand-gpx">
+			  <wpt lat="10.0" lon="20.0">
+			    <name>Cafe</name>
+			    <type>Food</type>
+			  </wpt>
+			  <extensions>
+			    <osmand:points_groups>
+			      <group name="Food" color="#ff0000" icon="restaurant" background="circle" hidden="true" pinned="false" />
+			    </osmand:points_groups>
+			  </extensions>
+			</gpx>
+			""".trimIndent(),
+			addGeneralTrack = false
+		)
+
+		assertNull(gpxFile.error)
+		val pointsGroup = assertNotNull(gpxFile.pointsGroups["Food"])
+		assertEquals("restaurant", pointsGroup.iconName)
+		assertEquals("circle", pointsGroup.backgroundType)
+		assertTrue(pointsGroup.isHidden())
+		assertEquals(false, pointsGroup.isPinned())
+		assertEquals(1, pointsGroup.points.size)
+
+		val written = writeGpxToString(gpxFile)
+		assertTrue(written.contains("points_groups"))
+		assertTrue(written.contains("Food"))
+		assertTrue(written.contains("restaurant"))
+		assertTrue(written.contains("pinned"))
+	}
+
+	@Test
+	fun testStoredPointsGroupsOverrideParsedXmlWhenApplied() {
+		val gpxFile = loadGpx(
+			"""
+			<gpx version="1.1" creator="test">
+			  <wpt lat="10.0" lon="20.0">
+			    <name>Cafe</name>
+			    <type>Food</type>
+			  </wpt>
+			  <extensions>
+			    <points_groups>
+			      <group name="Food" icon="restaurant" background="circle" hidden="true" />
+			    </points_groups>
+			  </extensions>
+			</gpx>
+			""".trimIndent(),
+			addGeneralTrack = false
+		)
+		assertNull(gpxFile.error)
+		assertEquals("restaurant", assertNotNull(gpxFile.pointsGroups["Food"]).iconName)
+
+		val storedPointsGroups = GpxUtilities.serializePointsGroups(
+			mapOf("Food" to PointsGroup("Food", "bar", "square", 0, hidden = false, pinned = true))
+		)
+		GpxUtilities.applyPointsGroups(gpxFile, storedPointsGroups)
+
+		val pointsGroup = assertNotNull(gpxFile.pointsGroups["Food"])
+		assertEquals("bar", pointsGroup.iconName)
+		assertEquals("square", pointsGroup.backgroundType)
+		assertEquals(true, pointsGroup.isPinned())
+		assertEquals(1, pointsGroup.points.size)
 	}
 
 	private fun buildTimedTrackGpx(pointsCount: Int, startTime: Long): String {

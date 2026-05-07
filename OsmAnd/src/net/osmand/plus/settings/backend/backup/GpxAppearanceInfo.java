@@ -221,6 +221,7 @@ public class GpxAppearanceInfo {
 		dataItem.setParameter(SPLIT_INTERVAL, splitInterval);
 		dataItem.setParameter(COLORING_TYPE, coloringType);
 		dataItem.setParameter(COLOR_PALETTE, gradientPaletteName);
+		dataItem.setParameter(POINTS_GROUPS, GpxUtilities.INSTANCE.serializePointsGroups(pointsGroups));
 	}
 
 	private void fromJson(@NonNull JSONObject json) {

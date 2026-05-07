@@ -58,16 +58,10 @@ object GpxUtilities {
 
 	val log = LoggerFactory.getLogger("GpxUtilities")
 	private const val POINTS_GROUPS_EXTENSIONS_KEY = "points_groups"
-	private const val LEGACY_POINTS_GROUPS_SCAN_CHUNK_SIZE = 8 * 1024L
 	private val pointsGroupsJson = Json {
 		ignoreUnknownKeys = true
 		explicitNulls = false
 	}
-	private val legacyPointsGroupsMarkers = listOf(
-		"<osmand:$POINTS_GROUPS_EXTENSIONS_KEY".encodeToByteArray(),
-		"<$POINTS_GROUPS_EXTENSIONS_KEY".encodeToByteArray()
-	)
-	private val legacyPointsGroupsScanOverlap = legacyPointsGroupsMarkers.maxOf { it.size } - 1
 
 	const val ICON_NAME_EXTENSION = "icon"
 	const val BACKGROUND_TYPE_EXTENSION = "background"
@@ -397,6 +391,9 @@ object GpxUtilities {
 			if (hidden) {
 				put("hidden", JsonPrimitive(true))
 			}
+			if (pinned != null) {
+				put("pinned", JsonPrimitive(isPinned() == true))
+			}
 		}
 
 		companion object {
@@ -426,7 +423,8 @@ object GpxUtilities {
 					(jsonObject["iconName"] as? JsonPrimitive)?.contentOrNull,
 					(jsonObject["backgroundType"] as? JsonPrimitive)?.contentOrNull,
 					parseColor((jsonObject["color"] as? JsonPrimitive)?.contentOrNull, 0) ?: 0,
-					(jsonObject["hidden"] as? JsonPrimitive)?.contentOrNull?.toBoolean() ?: false
+					(jsonObject["hidden"] as? JsonPrimitive)?.contentOrNull?.toBoolean() ?: false,
+					(jsonObject["pinned"] as? JsonPrimitive)?.contentOrNull?.toBoolean()
 				)
 			}
 		}
@@ -486,66 +484,15 @@ object GpxUtilities {
 
 	private fun applyPointsGroupsParameter(file: KFile, gpxFile: GpxFile): GpxFile {
 		if (gpxFile.error == null) {
-			val dataItem = GpxDbHelper.getItem(file, false)
-			applyPointsGroups(gpxFile, dataItem?.getParameter<String>(GpxParameter.POINTS_GROUPS))
+			if (gpxFile.pointsGroups.isEmpty()) {
+				val dataItem = GpxDbHelper.getItem(file, false)
+				val storedPointsGroups = dataItem?.getParameter<String>(GpxParameter.POINTS_GROUPS)
+				if (!storedPointsGroups.isNullOrEmpty()) {
+					applyPointsGroups(gpxFile, storedPointsGroups)
+				}
+			}
 		}
 		return gpxFile
-	}
-
-	fun hasPointsGroupsExtension(file: KFile): Boolean {
-		return file.source().use { source ->
-			val buffer = Buffer()
-			var tail = ByteArray(0)
-			while (true) {
-				val read = source.read(buffer, LEGACY_POINTS_GROUPS_SCAN_CHUNK_SIZE)
-				if (read == -1L) {
-					break
-				}
-				if (read == 0L) {
-					continue
-				}
-				val chunk = buffer.readByteArray()
-				val combined = ByteArray(tail.size + chunk.size)
-				tail.copyInto(combined, 0)
-				chunk.copyInto(combined, tail.size)
-				if (containsAnyBytePattern(combined, legacyPointsGroupsMarkers)) {
-					return true
-				}
-				if (legacyPointsGroupsScanOverlap > 0) {
-					val tailStart = maxOf(0, combined.size - legacyPointsGroupsScanOverlap)
-					tail = combined.copyOfRange(tailStart, combined.size)
-				}
-			}
-			false
-		}
-	}
-
-	private fun containsAnyBytePattern(data: ByteArray, patterns: List<ByteArray>): Boolean {
-		for (pattern in patterns) {
-			if (containsBytePattern(data, pattern)) {
-				return true
-			}
-		}
-		return false
-	}
-
-	private fun containsBytePattern(data: ByteArray, pattern: ByteArray): Boolean {
-		if (pattern.isEmpty() || data.size < pattern.size) {
-			return false
-		}
-		for (start in 0..data.size - pattern.size) {
-			var match = true
-			for (index in pattern.indices) {
-				if (data[start + index] != pattern[index]) {
-					match = false
-					break
-				}
-			}
-			if (match) {
-				return true
-			}
-		}
-		return false
 	}
 
 	fun assignPointsGroupsExtensionWriter(gpxFile: GpxFile) {
@@ -693,6 +640,7 @@ object GpxUtilities {
 			)
 
 			assignNetworkRouteExtensionWriter(gpxFile)
+			assignPointsGroupsExtensionWriter(gpxFile)
 			writeMetadata(serializer, gpxFile, progress)
 			writePoints(serializer, gpxFile, progress)
 			writeRoutes(serializer, gpxFile, progress)
@@ -1375,7 +1323,7 @@ object GpxUtilities {
 		addGeneralTrack: Boolean
 	): GpxFile {
 		return try {
-			val gpxFile = loadGpxFile(file, null, extensionsReader, addGeneralTrack, false)
+			val gpxFile = loadGpxFile(file, null, extensionsReader, addGeneralTrack)
 			gpxFile.path = file.absolutePath()
 			gpxFile.modifiedTime = file.lastModified()
 			gpxFile.pointsModifiedTime = gpxFile.modifiedTime
@@ -1401,15 +1349,14 @@ object GpxUtilities {
 		extensionsReader: GpxExtensionsReader?,
 		addGeneralTrack: Boolean
 	): GpxFile {
-		return loadGpxFile(null, source, extensionsReader, addGeneralTrack, false)
+		return loadGpxFile(null, source, extensionsReader, addGeneralTrack)
 	}
 
 	fun loadGpxFile(
 		file: KFile?,
 		source: Source?,
 		extensionsReader: GpxExtensionsReader?,
-		addGeneralTrack: Boolean,
-		readLegacyPointsGroups: Boolean
+		addGeneralTrack: Boolean
 	): GpxFile {
 		val insideTagDepth = mutableMapOf("trk" to 0)
 		oneOffLogParseTimeErrors = true
@@ -1479,8 +1426,7 @@ object GpxUtilities {
 
 							tagName == "route" && insideTagDepth["trk"]!! > 0 -> routeExtension = true
 							tagName == "types" && insideTagDepth["trk"]!! > 0 -> typesExtension = true
-							tagName == "points_groups" && readLegacyPointsGroups -> pointsGroupsExtension = true
-							tagName == "points_groups" -> skipTag(parser)
+							tagName == POINTS_GROUPS_EXTENSIONS_KEY -> pointsGroupsExtension = true
 							tagName == "network_route" -> networkRoute = true
 							else -> {
 								if (extensionsReader == null || !extensionsReader.readExtensions(
@@ -1739,6 +1685,10 @@ object GpxUtilities {
 					}
 					if (extensionReadMode && tag == "types") {
 						typesExtension = false
+						continue
+					}
+					if (extensionReadMode && tag.lowercase() == POINTS_GROUPS_EXTENSIONS_KEY) {
+						pointsGroupsExtension = false
 						continue
 					}
 					if (extensionReadMode && tag == "network_route") {

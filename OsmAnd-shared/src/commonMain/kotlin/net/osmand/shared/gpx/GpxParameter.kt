@@ -75,7 +75,6 @@ enum class GpxParameter(
 	MIN_SENSOR_HEART_RATE("minSensorHr", "int", Int::class, 0, true),
 	AVG_SENSOR_HEART_RATE("avgSensorHr", "double", Double::class, 0.0, true),
 	DATA_VERSION("dataVersion", "int", Int::class, 0, false),
-	LEGACY_POINTS_GROUPS_CHECKED("legacyPointsGroupsChecked", "int", Boolean::class, null, false),
 	APPEARANCE_LAST_MODIFIED_TIME("appearanceLastModifiedTime", "bigint", Long::class, 0L, false),
 
 	AVG_OBD_ENGINE_LOAD("avgVmEload", "double", Double::class, 0.0, true),

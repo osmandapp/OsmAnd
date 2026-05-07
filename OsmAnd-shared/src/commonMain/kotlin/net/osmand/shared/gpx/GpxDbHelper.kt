@@ -311,14 +311,10 @@ object GpxDbHelper : GpxReaderAdapter {
 	}
 
 	fun updatePointsGroups(file: KFile, pointsGroups: Map<String, PointsGroup>) {
-		var dataItem: GpxDataItem? = getItem(file, false)
+		val dataItem: GpxDataItem? = getItem(file, false)
 		val pointsGroups = serializePointsGroups(pointsGroups)
 		if (dataItem != null) {
 			updateDataItemParameter(dataItem, GpxParameter.POINTS_GROUPS, pointsGroups)
-		} else {
-			dataItem = GpxDataItem(file)
-			dataItem.setParameter(GpxParameter.POINTS_GROUPS, pointsGroups)
-			add(dataItem)
 		}
 	}
 

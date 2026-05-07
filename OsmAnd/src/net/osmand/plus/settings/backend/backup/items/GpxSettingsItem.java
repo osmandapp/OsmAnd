@@ -2,8 +2,6 @@ package net.osmand.plus.settings.backend.backup.items;
 
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.shared.gpx.GpxParameter.APPEARANCE_LAST_MODIFIED_TIME;
-import static net.osmand.shared.gpx.GpxParameter.LEGACY_POINTS_GROUPS_CHECKED;
-import static net.osmand.shared.gpx.GpxParameter.POINTS_GROUPS;
 import static net.osmand.shared.gpx.GpxParameter.SPLIT_INTERVAL;
 import static net.osmand.shared.gpx.GpxParameter.SPLIT_TYPE;
 
@@ -15,7 +13,6 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.backup.FileSettingsItemReader;
 import net.osmand.plus.settings.backend.backup.GpxAppearanceInfo;
-import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.shared.SharedUtil;
@@ -28,7 +25,6 @@ import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxHelper;
-import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
@@ -86,11 +82,6 @@ public class GpxSettingsItem extends FileSettingsItem {
 	}
 
 	@Override
-	public void prepareForUpload() {
-		migrateLegacyPointsGroupsForUploadIfNeeded();
-	}
-
-	@Override
 	public void applyAdditionalParams(@Nullable SettingsItemReader<? extends SettingsItem> reader) {
 		if (appearanceInfo != null) {
 			File savedFile = null;
@@ -109,9 +100,6 @@ public class GpxSettingsItem extends FileSettingsItem {
 				}
 				if (dataItem != null) {
 					updateGpxParams(dataItem, savedFile);
-				}
-				if (appearanceInfo.hasPointsGroups()) {
-					updatePointsGroups(savedFile, dataItem);
 				}
 			}
 		}
@@ -146,108 +134,6 @@ public class GpxSettingsItem extends FileSettingsItem {
 			if (selectedGpxFile != null) {
 				selectedGpxFile.resetSplitProcessed();
 			}
-		}
-	}
-
-	private void updatePointsGroups(@NonNull File savedFile, @Nullable GpxDataItem dataItem) {
-		String pointsGroups = GpxUtilities.INSTANCE.serializePointsGroups(appearanceInfo.getPointsGroups());
-		if (dataItem != null) {
-			app.getGpxDbHelper().updateDataItemParameter(dataItem, POINTS_GROUPS, pointsGroups);
-			app.getGpxDbHelper().updateDataItemParameter(dataItem, APPEARANCE_LAST_MODIFIED_TIME, savedFile.lastModified());
-		}
-
-		GpxSelectionHelper gpxHelper = app.getSelectedGpxHelper();
-		SelectedGpxFile selectedGpxFile = gpxHelper.getSelectedFileByPath(savedFile.getAbsolutePath());
-		if (selectedGpxFile != null) {
-			GpxUtilities.INSTANCE.applyPointsGroups(selectedGpxFile.getGpxFile(), pointsGroups);
-			gpxHelper.updateSelectedGpxFile(selectedGpxFile);
-		}
-	}
-
-	private void migrateLegacyPointsGroupsForUploadIfNeeded() {
-		if (!file.exists() || file.isDirectory()) {
-			return;
-		}
-		try {
-			GpxDataItem dataItem = getOrCreateDataItem(file);
-			if (dataItem == null) {
-				return;
-			}
-			Boolean legacyPointsGroupsChecked = dataItem.getParameter(LEGACY_POINTS_GROUPS_CHECKED);
-			if (Boolean.TRUE.equals(legacyPointsGroupsChecked)) {
-				return;
-			}
-			KFile kFile = SharedUtil.kFile(file);
-			if (!GpxUtilities.INSTANCE.hasPointsGroupsExtension(kFile)) {
-				markLegacyPointsGroupsChecked(dataItem);
-				return;
-			}
-			String pointsGroups = dataItem.getParameter(POINTS_GROUPS);
-			if (Algorithms.isEmpty(pointsGroups)) {
-				GpxFile rawGpxFile = GpxUtilities.INSTANCE.loadGpxFile(kFile, null, null, true, true);
-				if (rawGpxFile.getError() != null) {
-					SettingsHelper.LOG.error("Failed to load GPX with legacy points_groups: " + file.getAbsolutePath(),
-							SharedUtil.jException(rawGpxFile.getError()));
-					return;
-				}
-				pointsGroups = GpxUtilities.INSTANCE.serializePointsGroups(rawGpxFile.getPointsGroups());
-				app.getGpxDbHelper().updateDataItemParameter(dataItem, POINTS_GROUPS, pointsGroups);
-			}
-			GpxFile gpxFile = SharedUtil.loadGpxFile(file);
-			if (gpxFile.getError() != null) {
-				SettingsHelper.LOG.error("Failed to load migrated GPX for cleanup: " + file.getAbsolutePath(),
-						SharedUtil.jException(gpxFile.getError()));
-				return;
-			}
-			long lastModified = file.lastModified();
-			Exception writeError = SharedUtil.writeGpxFile(file, gpxFile);
-			if (writeError != null) {
-				SettingsHelper.LOG.error("Failed to rewrite GPX without legacy points_groups: " + file.getAbsolutePath(), writeError);
-				return;
-			}
-			setSize(0);
-			if (lastModified > 0) {
-				file.setLastModified(lastModified);
-			}
-			markLegacyPointsGroupsChecked(dataItem);
-			appearanceInfo = new GpxAppearanceInfo(app, dataItem);
-			refreshSelectedGpxFile(file);
-		} catch (Exception e) {
-			SettingsHelper.LOG.error("Failed to migrate legacy points_groups before upload: " + file.getAbsolutePath(), e);
-		}
-	}
-
-	private void markLegacyPointsGroupsChecked(@NonNull GpxDataItem dataItem) {
-		app.getGpxDbHelper().updateDataItemParameter(dataItem, LEGACY_POINTS_GROUPS_CHECKED, true);
-	}
-
-	@Nullable
-	private GpxDataItem getOrCreateDataItem(@NonNull File targetFile) {
-		KFile kFile = SharedUtil.kFile(targetFile);
-		GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
-		GpxDataItem dataItem = gpxDbHelper.getItem(kFile);
-		if (dataItem == null) {
-			dataItem = new GpxDataItem(kFile);
-			if (!gpxDbHelper.add(dataItem)) {
-				dataItem = gpxDbHelper.getItem(kFile);
-			}
-		}
-		return dataItem;
-	}
-
-	private void refreshSelectedGpxFile(@NonNull File targetFile) {
-		GpxSelectionHelper gpxHelper = app.getSelectedGpxHelper();
-		SelectedGpxFile selectedGpxFile = gpxHelper.getSelectedFileByPath(targetFile.getAbsolutePath());
-		if (selectedGpxFile != null) {
-			GpxFile gpxFile = SharedUtil.loadGpxFile(targetFile);
-			if (gpxFile.getError() != null) {
-				SettingsHelper.LOG.error("Failed to refresh selected GPX after points_groups migration: " + targetFile.getAbsolutePath(),
-						SharedUtil.jException(gpxFile.getError()));
-				return;
-			}
-			selectedGpxFile.setGpxFile(gpxFile, app);
-			selectedGpxFile.resetSplitProcessed();
-			gpxHelper.updateSelectedGpxFile(selectedGpxFile);
 		}
 	}
 
