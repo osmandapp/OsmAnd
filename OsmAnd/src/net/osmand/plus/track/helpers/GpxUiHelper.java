@@ -719,9 +719,8 @@ public class GpxUiHelper {
 
 	public static void saveAndShareGpxWithAppearance(@NonNull OsmandApplication app, @NonNull Activity activity, @NonNull GpxFile gpxFile, @NonNull GpxDataItem item) {
 		if (item.hasAppearanceData()) {
-			GpxFile gpxFileToShare = gpxFile.clone();
-			addDbParametersToGpx(app, gpxFileToShare, item);
-			saveAndShareGpx(app, activity, gpxFileToShare);
+			addDbParametersToGpx(app, gpxFile, item);
+			saveAndShareGpx(app, activity, gpxFile);
 		} else {
 			shareGpx(app, activity, new File(gpxFile.getPath()));
 		}
@@ -801,11 +800,6 @@ public class GpxUiHelper {
 		String gradientPalette = item.getParameter(COLOR_PALETTE);
 		if (gradientPalette != null) {
 			gpxFile.setGradientColorPalette(gradientPalette);
-		}
-		String pointsGroups = item.getParameter(POINTS_GROUPS);
-		if (pointsGroups != null) {
-			GpxUtilities.INSTANCE.applyPointsGroups(gpxFile, pointsGroups);
-			GpxUtilities.INSTANCE.assignPointsGroupsExtensionWriter(gpxFile);
 		}
 		GpsFilter.writeValidFilterValuesToExtensions(gpxFile.getExtensionsToWrite(), item);
 	}
