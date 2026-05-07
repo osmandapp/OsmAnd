@@ -1560,7 +1560,14 @@ public class RouteResultPreparation {
 			if (analyzedList.containsAll(otherSideTurns)) {
 				currentTurns.removeAll(otherSideTurns);
 				if (currentTurns.size() == 1) {
-					return TurnType.valueOf(currentTurns.iterator().next(), leftSide);
+					int detectedTurn = currentTurns.iterator().next();
+					if (keepTurnType == TurnType.KR && TurnType.isLeftTurn(detectedTurn)) {
+						return TurnType.valueOf(keepTurnType, leftSide);
+					}
+					if (keepTurnType == TurnType.KL && TurnType.isRightTurn(detectedTurn)) {
+						return TurnType.valueOf(keepTurnType, leftSide);
+					}
+					return TurnType.valueOf(detectedTurn, leftSide);
 				}
 			} else {
 				// Avoid "keep" instruction if active side contains only "through" moving
