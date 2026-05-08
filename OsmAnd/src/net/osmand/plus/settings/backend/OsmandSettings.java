@@ -1677,6 +1677,8 @@ public class OsmandSettings {
 
 	public final CommonPreference<Boolean> SHOW_ROUTING_ALARMS = new BooleanPreference(this, "show_routing_alarms", true).makeProfile().cache();
 
+	public final CommonPreference<Boolean> SHOW_NAVIGATION_NOTIFICATIONS = new BooleanPreference(this, "show_navigation_notifications", true).makeProfile().cache();
+
 	public final CommonPreference<Boolean> SHOW_TRAFFIC_WARNINGS = new BooleanPreference(this, "show_traffic_warnings", false).makeProfile().cache();
 
 	{
