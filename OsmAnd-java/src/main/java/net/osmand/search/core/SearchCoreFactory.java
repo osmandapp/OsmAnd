@@ -260,6 +260,15 @@ public class SearchCoreFactory {
 			}
 			return false;
 		}
+
+		boolean hasNonNumericLeftUnknownSearchWord(SearchResult res) {
+			for (String leftUnknownSearchWord : res.filterUnknownSearchWord(null)) {
+				if (!Algorithms.containsDigit(leftUnknownSearchWord)) {
+					return true;
+				}
+			}
+			return false;
+		}
 		
 
 		@Override
@@ -658,9 +667,8 @@ public class SearchCoreFactory {
 					for (SearchResult res : immediateResults) {
 						if (res.objectType == ObjectType.STREET) {
 							SearchResult newParentSearchResult = null;
-							int wordSize = phrase.getWords().size();
 							if (res.parentSearchResult == null && resultMatcher.getParentSearchResult() == null &&
-									res.object instanceof Street && ((Street) res.object).getCity() != null && wordSize > 1) {
+									res.object instanceof Street && ((Street) res.object).getCity() != null) {
 								City ct = ((Street) res.object).getCity();
 								SearchResult cityResult = new SearchResult(phrase);
 								cityResult.object = ct;
@@ -675,7 +683,7 @@ public class SearchCoreFactory {
 								boolean match = matchAddressName(phrase, res, cityResult, true);
 								if (match) {
 									newParentSearchResult = cityResult;
-								} else {
+								} else if (hasNonNumericLeftUnknownSearchWord(res)) {
 									QuadRect bbox = SearchPhrase.calculateBbox(1000, res.location);
 									List<City>  cacheResArray = townCitiesCache.queryBoundaries(bbox);
 									for (City boundary : cacheResArray) {
