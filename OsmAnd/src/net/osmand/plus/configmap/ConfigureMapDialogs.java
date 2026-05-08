@@ -69,10 +69,12 @@ public class ConfigureMapDialogs {
 		builder.setSingleChoiceItems(values.toArray(new String[0]), i, (dialog, which) -> {
 			int p1 = tlist.get(which);
 			density.set(p1 / 100.0f);
-			view.setComplexZoom(view.getZoom(), view.getSettingsMapDensity());
-			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
-			if (mapContext != null) {
-				mapContext.updateMapSettings(true);
+			if (!view.isCarView()) {
+				view.setComplexZoom(view.getZoom(), view.getSettingsMapDensity());
+				MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
+				if (mapContext != null) {
+					mapContext.updateMapSettings(true);
+				}
 			}
 			dialog.dismiss();
 		});
@@ -118,10 +120,12 @@ public class ConfigureMapDialogs {
 			int which = (int) v.getTag();
 			int value = tlist.get(which);
 			mapDensity.set(value / 100.0f);
-			view.setComplexZoom(view.getZoom(), view.getSettingsMapDensity());
-			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
-			if (mapContext != null) {
-				mapContext.updateMapSettings(true);
+			if (!view.isCarView()) {
+				view.setComplexZoom(view.getZoom(), view.getSettingsMapDensity());
+				MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
+				if (mapContext != null) {
+					mapContext.updateMapSettings(true);
+				}
 			}
 			item.setDescription(String.format(Locale.UK, "%.0f", 100f * settings.MAP_DENSITY.get()) + " %");
 			adapter.onDataSetInvalidated();

@@ -450,6 +450,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			if (Build.VERSION.SDK_INT >= 26) {
 				view.setDefaultFocusHighlightEnabled(false);
 			}
+			setComplexZoom(getZoom(), getSettingsMapDensity());
 			refreshMap(true);
 		}
 	}
