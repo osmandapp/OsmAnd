@@ -1,8 +1,5 @@
 package net.osmand.plus.mapcontextmenu.builders.cards;
 
-import static net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.IMAGE_TYPE;
-
-import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -14,6 +11,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.gallery.GalleryItem;
+import net.osmand.plus.gallery.GalleryItem.NoInternet;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
@@ -97,7 +95,7 @@ public class GalleryRowBuilder {
 		galleryGridAdapter = new GalleryGridAdapter(mapActivity, listener, null, onlinePhotos, nightMode);
 
 		if (!app.getSettings().isInternetConnectionAvailable()) {
-			items.add(new GalleryItem.NoInternet());
+			items.add(NoInternet.INSTANCE);
 		} else {
 			items.addAll(galleryItems);
 		}
@@ -116,7 +114,7 @@ public class GalleryRowBuilder {
 		gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
 			@Override
 			public int getSpanSize(int position) {
-				return galleryGridAdapter.getItemViewType(position) == IMAGE_TYPE ? 1 : 2;
+				return galleryGridAdapter.isRegularMediaItemOnPosition(position) ? 1 : 2;
 			}
 		});
 		return gridLayoutManager;
@@ -135,7 +133,7 @@ public class GalleryRowBuilder {
 			@Override
 			public void onMediaItemClicked(@NonNull MediaItem mediaItem) {
 				if (onlinePhotos) {
-					GalleryPhotoPagerFragment.showInstance(mapActivity, controller.getItemIndexBySourceUri(mediaItem.getSourceUri()));
+					GalleryPhotoPagerFragment.showInstance(mapActivity, controller.getMediaItemIndexById(mediaItem.getId()));
 				} else if (mediaItem.getOrigin() == MediaOrigin.MAPILLARY && mediaItem instanceof MediaItem.Remote remote) {
 					mapActivity.getContextMenu().close();
 					var metadata = remote.getMetadata();

@@ -39,7 +39,6 @@ import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.gallery.GalleryItemsHolder;
 import net.osmand.plus.mapcontextmenu.gallery.RemoteMediaFactory;
 import net.osmand.plus.plugins.OsmandPlugin;

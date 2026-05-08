@@ -81,7 +81,7 @@ public class GalleryPhotoViewerFragment extends BaseFullScreenFragment {
 		imageView = view.findViewById(R.id.image);
 
 		if (controller != null) {
-			List<GalleryItem> photoItems = controller.getOnlinePhotoItems();
+			List<GalleryItem.Media> photoItems = controller.getOnlinePhotoItems();
 			int position = selectedPosition;
 			if (photoItems.size() > position) {
 				MediaItem mediaItem = getMediaItem(photoItems.get(position));

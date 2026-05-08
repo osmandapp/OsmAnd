@@ -172,9 +172,9 @@ class GalleryMediaHolder(
 		ivImage.visibility = View.GONE
 		tvUrl.visibility = View.VISIBLE
 
-		val displayUrl = getDisplayUrl(mediaItem)
-		tvUrl.text = displayUrl
-		tvUrl.setOnClickListener { AndroidUtils.openUrl(mapActivity, displayUrl, nightMode) }
+		val viewUrl = mediaItem.details.viewUrl ?: mediaItem.sourceUri
+		tvUrl.text = viewUrl
+		tvUrl.setOnClickListener { AndroidUtils.openUrl(mapActivity, viewUrl, nightMode) }
 
 		border.visibility = View.VISIBLE
 		progressBar.visibility = View.GONE
@@ -215,17 +215,6 @@ class GalleryMediaHolder(
 	): Int {
 		val spaceForItems = screenWidth - (recyclerViewPadding * 2) - (spanCount * itemSpace)
 		return spaceForItems / spanCount
-	}
-
-	private fun getDisplayUrl(mediaItem: MediaItem): String {
-		val details = mediaItem.details
-		val resource = mediaItem.resource
-
-		return when {
-			details.viewUrl.isNotEmpty() -> details.viewUrl
-			!resource.fullUri.isNullOrEmpty() -> resource.fullUri ?: mediaItem.sourceUri
-			else -> mediaItem.sourceUri
-		}
 	}
 
 	private fun getBackgroundId(nightMode: Boolean) =

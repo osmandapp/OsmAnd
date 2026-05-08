@@ -6,23 +6,18 @@ import kotlin.jvm.JvmStatic
 
 object MediaUrlResolver {
 
-	private const val THUMBNAIL_WIDTH = 160
-	private const val GALLERY_FULL_SIZE_WIDTH = 1280
-
 	@JvmStatic
 	fun getDisplayLink(mediaItem: MediaItem?): String? {
 		return if (mediaItem?.origin == MediaOrigin.WIKIPEDIA) {
 			mediaItem.details.viewUrl
-		} else if (!mediaItem?.resource?.fullUri.isNullOrEmpty()) {
-			mediaItem?.resource?.fullUri
 		} else {
-			mediaItem?.sourceUri
+			val fullUri = mediaItem?.resource?.fullUri
+			if (fullUri.isNullOrEmpty()) {
+				mediaItem?.sourceUri
+			} else {
+				fullUri
+			}
 		}
-	}
-
-	@JvmStatic
-	fun getThumbnailUrl(mediaItem: MediaItem?): String? {
-		return mediaItem?.resource?.thumbnailUri
 	}
 
 	@JvmStatic
@@ -38,15 +33,5 @@ object MediaUrlResolver {
 	@JvmStatic
 	fun getDownloadUrl(mediaItem: MediaItem?): String? {
 		return mediaItem?.resource?.fullUri ?: mediaItem?.sourceUri
-	}
-
-	fun getGalleryThumbnailUrl(mediaItem: MediaItem?): String? {
-		val hiResUrl = mediaItem?.resource?.fullUri ?: return null
-		return "$hiResUrl?width=$THUMBNAIL_WIDTH"
-	}
-
-	fun getGalleryFullSizeUrl(mediaItem: MediaItem?): String? {
-		val hiResUrl = mediaItem?.resource?.fullUri ?: return null
-		return "$hiResUrl?width=$GALLERY_FULL_SIZE_WIDTH"
 	}
 }

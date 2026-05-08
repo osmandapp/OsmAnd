@@ -22,6 +22,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.gallery.GalleryItem;
+import net.osmand.plus.gallery.GalleryItem.Media;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.utils.AndroidUtils;
@@ -31,7 +32,10 @@ import net.osmand.plus.wikipedia.WikiAlgorithms;
 import net.osmand.shared.media.MediaUrlResolver;
 import net.osmand.shared.media.domain.MediaDetails;
 import net.osmand.shared.media.domain.MediaItem;
+import net.osmand.shared.media.domain.MediaOrigin;
 import net.osmand.util.Algorithms;
+
+import java.util.List;
 
 public class GalleryDetailsFragment extends BaseFullScreenFragment {
 
@@ -89,23 +93,24 @@ public class GalleryDetailsFragment extends BaseFullScreenFragment {
 	}
 
 	@Nullable
-	private GalleryItem getSelectedGalleryItem() {
-		return controller.getOnlinePhotoItems().get(selectedPosition);
+	private GalleryItem.Media getSelectedGalleryItem() {
+		List<Media> items = controller.getOnlinePhotoItems();
+		return selectedPosition >= 0
+				&& selectedPosition < items.size()
+				? items.get(selectedPosition) : null;
 	}
 
 	private void updateContent(@NonNull View view) {
 		ViewGroup container = view.findViewById(R.id.container);
 		container.removeAllViews();
 
-		GalleryItem galleryItem = getSelectedGalleryItem();
-		if (!(galleryItem instanceof GalleryItem.Media media)) {
-			return;
-		}
+		GalleryItem.Media media = getSelectedGalleryItem();
+		if (media == null) return;
 
 		MediaItem mediaItem = media.getMediaItem();
 		MediaDetails details = mediaItem.getDetails();
 
-		String description = details.getDescription();
+		String description = details.getDescription(app.getLanguage());
 		if (!Algorithms.isEmpty(description)) {
 			buildDescriptionItem(container, description);
 		}
@@ -124,9 +129,10 @@ public class GalleryDetailsFragment extends BaseFullScreenFragment {
 			buildItem(container, getString(R.string.shared_string_added), formattedDate, R.drawable.ic_action_sort_by_date, true, false);
 		}
 
-		String source = mediaItem.getOrigin().getTitle();
-		String iconName = mediaItem.getOrigin().getIconName();
-		int iconId = getIconId(iconName);
+		MediaOrigin mediaOrigin = mediaItem.getOrigin();
+		String titleKey = mediaOrigin.getTitleKey();
+		String source = titleKey != null ? getString(titleKey) : null;
+		int iconId = getDrawableId(mediaOrigin.getIconName());
 		if (!Algorithms.isEmpty(source) || iconId != 0) {
 			buildItem(container, getString(R.string.shared_string_source), source, iconId, false, false);
 		}
@@ -220,10 +226,6 @@ public class GalleryDetailsFragment extends BaseFullScreenFragment {
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		outState.putInt(SELECTED_POSITION_KEY, selectedPosition);
 		super.onSaveInstanceState(outState);
-	}
-
-	private int getIconId(@Nullable String iconName) {
-		return iconName != null ? AndroidUtils.getDrawableId(app, iconName) : 0;
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity, int selectedPosition) {

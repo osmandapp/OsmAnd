@@ -115,7 +115,7 @@ class AstroContextMenuAdapter(
 							galleryController?.let { controller ->
 								GalleryPhotoPagerFragment.showInstance(
 									mapActivity,
-									controller.getItemIndexBySourceUri(mediaItem.sourceUri)
+									controller.getMediaItemIndexById(mediaItem.id)
 								)
 							}
 						}

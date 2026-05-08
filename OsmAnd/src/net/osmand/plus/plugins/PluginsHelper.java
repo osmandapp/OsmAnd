@@ -32,6 +32,7 @@ import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.gallery.GalleryItem;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.mapcontextmenu.gallery.GalleryItemsHolder;
@@ -781,6 +782,21 @@ public class PluginsHelper {
 	                                                @NonNull JSONObject imageObject) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			if (plugin.addContextMenuGalleryItem(holder, imageObject)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Lets enabled plugins handle a context-menu gallery action.
+	 *
+	 * @param action gallery action item created by a plugin or gallery data source
+	 * @return true if the action was recognized and handled by a plugin
+	 */
+	public static boolean handleGalleryAction(@NonNull GalleryItem.Action action) {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			if (plugin.handleGalleryAction(action)) {
 				return true;
 			}
 		}

@@ -39,6 +39,7 @@ import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.IndexFileList;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.gallery.GalleryItem;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
@@ -262,6 +263,10 @@ public abstract class OsmandPlugin {
 
 	protected boolean addContextMenuGalleryItem(@NonNull GalleryItemsHolder holder,
 	                                            @NonNull JSONObject imageObject) {
+		return false;
+	}
+
+	protected boolean handleGalleryAction(@NonNull GalleryItem.Action action) {
 		return false;
 	}
 

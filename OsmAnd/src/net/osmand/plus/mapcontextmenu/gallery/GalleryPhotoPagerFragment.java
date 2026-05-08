@@ -108,8 +108,8 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 		descriptionShadow = view.findViewById(R.id.description_shadow);
 		descriptionContainer = view.findViewById(R.id.description_container);
 
-		List<GalleryItem> items = controller.getOnlinePhotoItems();
-		if (selectedPosition < items.size()) {
+		List<GalleryItem.Media> onlinePhotoItems = controller.getOnlinePhotoItems();
+		if (selectedPosition < onlinePhotoItems.size()) {
 			setupViewPager(view);
 			preloadThumbNails();
 			updateImageDescriptionRow(getSelectedMediaItem());
@@ -132,25 +132,23 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 	}
 
 	private void preloadThumbNails(boolean next) {
-		List<GalleryItem> items = controller.getOnlinePhotoItems();
-		if (items.size() <= 1) {
+		List<GalleryItem.Media> photoItems = controller.getOnlinePhotoItems();
+		if (photoItems.size() <= 1) {
 			return;
 		}
 
 		if (next) {
 			int startPreloadThumbnailIndex = selectedPosition + 1;
-			if (startPreloadThumbnailIndex >= items.size()) {
+			if (startPreloadThumbnailIndex >= photoItems.size()) {
 				return;
 			}
 			int lastPreloadThumbnailIndex = startPreloadThumbnailIndex + PRELOAD_THUMBNAILS_COUNT;
-			if (lastPreloadThumbnailIndex >= items.size()) {
-				lastPreloadThumbnailIndex = items.size() - 1;
+			if (lastPreloadThumbnailIndex >= photoItems.size()) {
+				lastPreloadThumbnailIndex = photoItems.size() - 1;
 			}
 			for (int i = selectedPosition; i < lastPreloadThumbnailIndex; i++) {
-				MediaItem mediaItem = getMediaItem(items.get(i));
-				if (mediaItem != null) {
-					downloadThumbnail(MediaUrlResolver.getThumbnailUrl(mediaItem));
-				}
+				MediaItem mediaItem = photoItems.get(i).getMediaItem();
+				downloadThumbnail(mediaItem);
 			}
 		} else {
 			int startPreloadThumbnailIndex = selectedPosition - 1;
@@ -162,18 +160,14 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 				lastPreloadThumbnailIndex = 0;
 			}
 			for (int i = selectedPosition; i > lastPreloadThumbnailIndex; i--) {
-				MediaItem mediaItem = getMediaItem(items.get(i));
-				if (mediaItem != null) {
-					downloadThumbnail(MediaUrlResolver.getThumbnailUrl(mediaItem));
-				}
+				MediaItem mediaItem = photoItems.get(i).getMediaItem();
+				downloadThumbnail(mediaItem);
 			}
 		}
 	}
 
-	private void downloadThumbnail(@Nullable String url) {
-		if (!Algorithms.isEmpty(url)) {
-			controller.getImageLoader().loadImage(url);
-		}
+	private void downloadThumbnail(@NonNull MediaItem mediaItem) {
+		controller.getMediaProvider().loadThumbnail(mediaItem);
 	}
 
 	@Override
@@ -185,16 +179,15 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 	private void updateImageDescriptionRow(@Nullable MediaItem mediaItem) {
 		if (mediaItem == null) return;
 		var details = mediaItem.getDetails();
-		setDescription(details.getDescription());
+		setDescription(details.getDescription(app.getLanguage()));
 
 		dateView.setVisibility(Algorithms.isEmpty(details.getDate()) ? View.INVISIBLE : View.VISIBLE);
 		authorView.setVisibility(Algorithms.isEmpty(details.getAuthor()) ? View.INVISIBLE : View.VISIBLE);
 		licenseView.setVisibility(Algorithms.isEmpty(details.getLicense()) ? View.INVISIBLE : View.VISIBLE);
 		setMetaData(details.getAuthor(), details.getDate(), details.getLicense());
 
-		String iconName = mediaItem.getOrigin().getIconName();
-		int iconId = iconName != null ? AndroidUtils.getDrawableId(app, iconName) : 0;
-		Drawable icon = iconId != 0 ? app.getUIUtilities().getIcon(iconId) : null;
+		int iconId = getDrawableId(mediaItem.getOrigin().getIconName());
+		Drawable icon = iconId != 0 ? getIcon(iconId) : null;
 
 		sourceView.setImageDrawable(icon);
 		AndroidUiHelper.updateVisibility(sourceView, icon != null);
@@ -421,7 +414,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 
 	private void setupViewPager(@NonNull View view) {
 		ViewPager pager = view.findViewById(R.id.photo_pager);
-		List<GalleryItem> items = controller.getOnlinePhotoItems();
+		List<GalleryItem.Media> items = controller.getOnlinePhotoItems();
 		FragmentManager manager = getChildFragmentManager();
 
 		ViewPagerAdapter adapter = new ViewPagerAdapter(manager, items);
@@ -451,18 +444,14 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 
 	@Nullable
 	private MediaItem getSelectedMediaItem() {
-		return getMediaItem(getSelectedGalleryItem());
+		GalleryItem.Media selectedGalleryItem = getSelectedGalleryItem();
+		return selectedGalleryItem != null ? selectedGalleryItem.getMediaItem() : null;
 	}
 
 	@Nullable
-	private GalleryItem getSelectedGalleryItem() {
-		List<GalleryItem> items = controller.getOnlinePhotoItems();
+	private GalleryItem.Media getSelectedGalleryItem() {
+		List<GalleryItem.Media> items = controller.getOnlinePhotoItems();
 		return selectedPosition >= 0 && selectedPosition < items.size() ? items.get(selectedPosition) : null;
-	}
-
-	@Nullable
-	private MediaItem getMediaItem(@Nullable GalleryItem item) {
-		return item instanceof GalleryItem.Media media ? media.getMediaItem() : null;
 	}
 
 	private void setupSelectableBackground(@NonNull View view) {
@@ -519,9 +508,10 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 
 	private static class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
-		private final List<GalleryItem> pictures;
+		private final List<GalleryItem.Media> pictures;
 
-		public ViewPagerAdapter(@NonNull FragmentManager manager, @NonNull List<GalleryItem> pictures) {
+		public ViewPagerAdapter(@NonNull FragmentManager manager,
+		                        @NonNull List<GalleryItem.Media> pictures) {
 			super(manager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 			this.pictures = pictures;
 		}

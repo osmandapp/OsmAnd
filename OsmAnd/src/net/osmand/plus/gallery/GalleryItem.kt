@@ -14,12 +14,11 @@ sealed class GalleryItem {
 		var showProgress: Boolean = false
 	) : GalleryItem()
 
-	data object NoImages : GalleryItem()
-	data object MapillaryContribute : GalleryItem()
+	data class Action(
+		val id: String,
+	) : GalleryItem()
 
-	// Represents the "No Internet" placeholder, which can show a loading spinner
-	data class NoInternet(var isLoading: Boolean = false) : GalleryItem()
-
-	// Represents the footer text showing the total number of items
+	data object NoMedia : GalleryItem()
+	data object NoInternet : GalleryItem()
 	data object MediaCount : GalleryItem()
 }

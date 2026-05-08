@@ -25,7 +25,8 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardType;
 import net.osmand.plus.gallery.GalleryItem;
-import net.osmand.plus.gallery.GalleryItem.NoImages;
+import net.osmand.plus.gallery.GalleryItem.Action;
+import net.osmand.plus.gallery.GalleryItem.NoMedia;
 import net.osmand.plus.mapcontextmenu.BuildRowAttrs;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
@@ -315,7 +316,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 				}
 				List<GalleryItem> items = new ArrayList<>(cardsHolder.getMapillaryGalleryItems());
 				if (mapActivity != null && Algorithms.isEmpty(items)) {
-					items.add(NoImages.INSTANCE);
+					items.add(NoMedia.INSTANCE);
 				}
 				if (galleryRowBuilder != null) {
 					galleryRowBuilder.setItems(items);
@@ -367,13 +368,24 @@ public class MapillaryPlugin extends OsmandPlugin {
 				holder.addGalleryItem(
 						GalleryMediaGroup.MAPILLARY,
 						TYPE_MAPILLARY_CONTRIBUTE,
-						GalleryItem.MapillaryContribute.INSTANCE
+						new GalleryItem.Action(TYPE_MAPILLARY_CONTRIBUTE)
 				);
 			}
 		} catch (Exception e) {
 			LOG.error(e);
 		}
 		return true;
+	}
+
+	@Override
+	protected boolean handleGalleryAction(@NonNull Action action) {
+		if (TYPE_MAPILLARY_CONTRIBUTE.equals(action.getId())) {
+			if (mapActivity != null) {
+				MapillaryPlugin.openMapillary(mapActivity, null);
+			}
+			return true;
+		}
+		return false;
 	}
 
 	@Override

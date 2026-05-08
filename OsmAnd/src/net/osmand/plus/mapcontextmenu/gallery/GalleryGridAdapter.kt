@@ -13,7 +13,7 @@ import net.osmand.plus.gallery.MediaProvider
 import net.osmand.plus.mapcontextmenu.gallery.holders.GalleryMediaHolder
 import net.osmand.plus.mapcontextmenu.gallery.holders.ImageHolderType
 import net.osmand.plus.mapcontextmenu.gallery.holders.MediaCountHolder
-import net.osmand.plus.mapcontextmenu.gallery.holders.MapillaryContributeHolder
+import net.osmand.plus.mapcontextmenu.gallery.holders.ActionViewHolder
 import net.osmand.plus.mapcontextmenu.gallery.holders.NoImagesHolder
 import net.osmand.plus.mapcontextmenu.gallery.holders.NoInternetHolder
 import net.osmand.plus.utils.UiUtilities
@@ -63,15 +63,15 @@ class GalleryGridAdapter(
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 		return when (viewType) {
-			MAIN_IMAGE_TYPE, IMAGE_TYPE -> {
+			MAIN_MEDIA_TYPE, MEDIA_TYPE -> {
 				val itemView = inflate(R.layout.gallery_card_item, parent)
 				GalleryMediaHolder(app, itemView)
 			}
-			MAPILLARY_CONTRIBUTE_TYPE -> {
-				val itemView = inflate(R.layout.context_menu_card_add_mapillary_images, parent)
-				MapillaryContributeHolder(itemView)
+			ACTION_VIEW_TYPE -> {
+				val itemView = inflate(R.layout.context_menu_card_gallery_action_view, parent)
+				ActionViewHolder(itemView)
 			}
-			NO_IMAGES_TYPE -> {
+			NO_MEDIA_TYPE -> {
 				val itemView = inflate(R.layout.no_image_card, parent)
 				NoImagesHolder(itemView, app)
 			}
@@ -79,7 +79,7 @@ class GalleryGridAdapter(
 				val itemView = inflate(R.layout.no_internet_card, parent)
 				NoInternetHolder(itemView, app)
 			}
-			IMAGES_COUNT_TYPE -> {
+			MEDIA_COUNT_TYPE -> {
 				val itemView = inflate(R.layout.images_count_item, parent)
 				MediaCountHolder(itemView, app)
 			}
@@ -99,18 +99,17 @@ class GalleryGridAdapter(
 				}
 				holder.bindView(mapActivity, listener, item, type, viewWidth, mediaProvider, nightMode)
 			}
-			holder is MapillaryContributeHolder -> {
-				holder.bindView(nightMode, mapActivity) // todo don't need bind, just setup once
+			holder is ActionViewHolder && item is GalleryItem.Action -> {
+				holder.bindView(nightMode, mapActivity, item)
 			}
 			holder is NoImagesHolder -> {
-				holder.bindView(nightMode, mapActivity, isOnlinePhotos) // todo don't need bind, just setup once
+				holder.bindView(nightMode, mapActivity, isOnlinePhotos)
 			}
 			holder is NoInternetHolder && item is GalleryItem.NoInternet -> {
-				holder.bindView(nightMode, listener, item.isLoading)
+				holder.bindView(nightMode, listener, loadingImages)
 			}
 			holder is MediaCountHolder && item is GalleryItem.MediaCount -> {
-				// TODO show actual media item count instead of legacy items.size - 1
-				holder.bindView(items.size - 1, nightMode) // todo don't need bind, just setup once
+				holder.bindView(getMediaItemsCount(), nightMode)
 			}
 		}
 	}
@@ -130,7 +129,6 @@ class GalleryGridAdapter(
 		for (i in items.indices) {
 			val item = items[i]
 			if (item is GalleryItem.NoInternet) {
-				item.isLoading = loadingImages // TODO: changed logic
 				notifyItemChanged(i, UPDATE_PROGRESS_BAR_PAYLOAD_TYPE)
 			}
 		}
@@ -138,15 +136,17 @@ class GalleryGridAdapter(
 
 	fun getItem(position: Int) = items[position]
 
+	fun isRegularMediaItemOnPosition(position: Int) = getItemViewType(position) == MEDIA_TYPE
+
 	override fun getItemCount(): Int = items.size
 
 	override fun getItemViewType(position: Int): Int {
 		return when (items[position]) {
-			is GalleryItem.Media -> if (position == 0) MAIN_IMAGE_TYPE else IMAGE_TYPE
-			is GalleryItem.MapillaryContribute -> MAPILLARY_CONTRIBUTE_TYPE
-			is GalleryItem.NoImages -> NO_IMAGES_TYPE
+			is GalleryItem.Media -> if (position == 0) MAIN_MEDIA_TYPE else MEDIA_TYPE
+			is GalleryItem.Action -> ACTION_VIEW_TYPE
+			is GalleryItem.NoMedia -> NO_MEDIA_TYPE
 			is GalleryItem.NoInternet -> NO_INTERNET_TYPE
-			is GalleryItem.MediaCount -> IMAGES_COUNT_TYPE
+			is GalleryItem.MediaCount -> MEDIA_COUNT_TYPE
 		}
 	}
 
@@ -162,17 +162,21 @@ class GalleryGridAdapter(
 		this.resizeBySpanCount = resizeBySpanCount
 	}
 
-	fun inflate(resourceId: Int, root: ViewGroup, attachToRoot: Boolean = false): View {
+	private fun inflate(resourceId: Int, root: ViewGroup, attachToRoot: Boolean = false): View {
 		return themedInflater.inflate(resourceId, root, attachToRoot)
 	}
 
+	private fun getMediaItemsCount(): Int {
+		return items.count { it is GalleryItem.Media }
+	}
+
 	companion object {
-		private const val MAIN_IMAGE_TYPE = 0
-		const val IMAGE_TYPE = 1
-		private const val MAPILLARY_CONTRIBUTE_TYPE = 3
-		private const val NO_IMAGES_TYPE = 4
+		private const val MAIN_MEDIA_TYPE = 0
+		private const val MEDIA_TYPE = 1
+		private const val ACTION_VIEW_TYPE = 3
+		private const val NO_MEDIA_TYPE = 4
 		private const val NO_INTERNET_TYPE = 5
-		private const val IMAGES_COUNT_TYPE = 6
+		private const val MEDIA_COUNT_TYPE = 6
 
 		private const val UPDATE_PROGRESS_BAR_PAYLOAD_TYPE = 1
 	}

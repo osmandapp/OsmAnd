@@ -1,7 +1,5 @@
 package net.osmand.shared.media.domain
 
-import net.osmand.shared.util.Localization
-
 enum class MediaOrigin(
 	val titleKey: String? = null,
 	val iconName: String? = null
@@ -10,9 +8,6 @@ enum class MediaOrigin(
 	WIKIPEDIA(titleKey = "wikimedia", iconName = "ic_logo_wikimedia"),
 	MAPILLARY(iconName = "ic_logo_mapillary"),
 	UNKNOWN;
-
-	// TODO: extract from domain logic
-	fun getTitle() = if (titleKey != null) Localization.getString(titleKey) else ""
 }
 
 enum class MediaType {
@@ -42,12 +37,36 @@ data class MediaResource(
 )
 
 data class MediaDetails(
-	val description: String = "",
-	val author: String = "",
-	val date: String = "",
-	val license: String = "",
-	val viewUrl: String = ""
-)
+	val descriptions: Map<String, String>? = null,
+	val author: String? = null,
+	val date: String? = null,
+	val license: String? = null,
+	val viewUrl: String? = null
+) {
+
+	fun getDescription(preferredLanguage: String?): String? {
+		val descriptions = descriptions ?: return null
+		val normalizedLanguage = normalizeLanguageKey(preferredLanguage)
+
+		if (normalizedLanguage != null) {
+			descriptions[normalizedLanguage]
+				?.takeIf { it.isNotBlank() }
+				?.let { return it }
+		}
+
+		return descriptions[ENGLISH_LANGUAGE]
+			?.takeIf { it.isNotBlank() }
+			?: descriptions.values.firstOrNull { it.isNotBlank() }
+	}
+
+	private fun normalizeLanguageKey(language: String?): String? {
+		return language?.trim()?.lowercase()?.takeIf { it.isNotEmpty() }
+	}
+
+	companion object {
+		const val ENGLISH_LANGUAGE = "en"
+	}
+}
 
 data class RemoteMetadata(
 	val key: String = "",

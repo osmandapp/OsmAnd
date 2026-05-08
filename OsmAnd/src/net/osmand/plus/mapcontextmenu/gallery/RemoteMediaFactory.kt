@@ -83,8 +83,7 @@ object RemoteMediaFactory {
 				fullUri = createGalleryFullSizeUrl(imageHiresUrl) ?: imageHiresUrl
 			),
 			details = MediaDetails(
-				// TODO: check preferred language
-				description = metadata.getDescription(null) ?: "",
+				descriptions = metadata.descriptions.toMap(),
 				author = metadata.author ?: "",
 				date = metadata.date ?: "",
 				license = metadata.license ?: "",

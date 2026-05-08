@@ -85,7 +85,7 @@ class AstroGalleryCardViewHolder(
 			items.addAll(galleryItems)
 			viewAllButton.visibility = if (containsImage) View.VISIBLE else View.GONE
 		} else {
-			items.add(GalleryItem.NoInternet())
+			items.add(GalleryItem.NoInternet)
 			viewAllButton.visibility = View.GONE
 		}
 		galleryGridAdapter?.setItems(items)
@@ -107,7 +107,7 @@ class AstroGalleryCardViewHolder(
 				return if (
 					adapter != null &&
 					position in 0 until adapter.itemCount &&
-					adapter.getItemViewType(position) == GalleryGridAdapter.IMAGE_TYPE
+					adapter.isRegularMediaItemOnPosition(position)
 				) {
 					1
 				} else {

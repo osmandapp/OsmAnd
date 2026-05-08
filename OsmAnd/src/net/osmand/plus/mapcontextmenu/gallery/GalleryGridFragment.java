@@ -1,7 +1,5 @@
 package net.osmand.plus.mapcontextmenu.gallery;
 
-import static net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter.IMAGE_TYPE;
-
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -105,7 +103,7 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 				layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
 					@Override
 					public int getSpanSize(int position) {
-						return adapter.getItemViewType(position) == IMAGE_TYPE ? 1 : layoutManager.getSpanCount();
+						return adapter.isRegularMediaItemOnPosition(position) ? 1 : layoutManager.getSpanCount();
 					}
 				});
 				recyclerView.setLayoutManager(layoutManager);
@@ -141,7 +139,7 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 			@Override
 			public void onMediaItemClicked(@NonNull MediaItem mediaItem) {
 				callMapActivity(activity -> {
-					int index = controller.getItemIndexBySourceUri(mediaItem.getSourceUri());
+					int index = controller.getMediaItemIndexById(mediaItem.getId());
 					GalleryPhotoPagerFragment.showInstance(activity, index);
 				});
 			}

@@ -11,7 +11,6 @@ import net.osmand.plus.gallery.GalleryItem;
 import net.osmand.plus.gallery.MediaProvider;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.shared.media.domain.MediaItem;
-import net.osmand.shared.util.NetworkImageLoader;
 import net.osmand.util.Algorithms;
 
 import java.util.*;
@@ -20,18 +19,12 @@ public class GalleryController implements IDialogController {
 
 	public static final String PROCESS_ID = "gallery_context_controller";
 
-	private GalleryItemsHolder currentMediaHolder;
+	private GalleryItemsHolder currentGalleryItemsHolder;
 
 	private final MediaProvider mediaProvider;
-	private final NetworkImageLoader imageLoader;
 
 	public GalleryController(@NonNull OsmandApplication app) {
 		mediaProvider = new MediaProvider(app);
-		imageLoader = new NetworkImageLoader(app, true);
-	}
-
-	public NetworkImageLoader getImageLoader() {
-		return imageLoader;
 	}
 
 	@NonNull
@@ -39,45 +32,47 @@ public class GalleryController implements IDialogController {
 		return mediaProvider;
 	}
 
-	@NonNull
-	public List<GalleryItem> getOnlinePhotoItems() {
-		List<GalleryItem> galleryItems = new ArrayList<>();
-		if (currentMediaHolder != null) {
-			galleryItems.addAll(currentMediaHolder.getOrderedGalleryItems());
-		}
-		return galleryItems;
-	}
-
 	@Nullable
-	public GalleryItemsHolder getCurrentMediaHolder() {
-		return currentMediaHolder;
+	public GalleryItemsHolder getCurrentGalleryItemsHolder() {
+		return currentGalleryItemsHolder;
 	}
 
-	public void setCurrentMediaHolder(@Nullable GalleryItemsHolder mediaHolder) {
-		this.currentMediaHolder = mediaHolder;
+	public void setCurrentGalleryItemsHolder(@Nullable GalleryItemsHolder galleryItemsHolder) {
+		this.currentGalleryItemsHolder = galleryItemsHolder;
 	}
 
 	public void clearHolder() {
-		this.currentMediaHolder = null;
+		this.currentGalleryItemsHolder = null;
 	}
 
 	public boolean isCurrentHolderEquals(@NonNull LatLon latLon, @NonNull Map<String, String> params) {
-		return currentMediaHolder != null && Algorithms.objectEquals(currentMediaHolder.getLatLon(), latLon)
-				&& Algorithms.objectEquals(currentMediaHolder.getParams(), params);
+		return currentGalleryItemsHolder != null
+				&& Algorithms.objectEquals(currentGalleryItemsHolder.getLatLon(), latLon)
+				&& Algorithms.objectEquals(currentGalleryItemsHolder.getParams(), params);
 	}
 
-	public int getItemIndexBySourceUri(@NonNull String sourceUri) {
-		List<GalleryItem> items = getOnlinePhotoItems();
-		for (int i = 0; i < items.size(); i++) {
-			GalleryItem item = items.get(i);
-			if (item instanceof GalleryItem.Media media) {
-				MediaItem mediaItem = media.getMediaItem();
-				if (Algorithms.stringsEqual(sourceUri, mediaItem.getSourceUri())) {
-					return i;
-				}
+	public int getMediaItemIndexById(@NonNull String id) {
+		List<GalleryItem.Media> mediaItems = getOnlinePhotoItems();
+		for (int i = 0; i < mediaItems.size(); i++) {
+			MediaItem mediaItem = mediaItems.get(i).getMediaItem();
+			if (Algorithms.stringsEqual(id, mediaItem.getId())) {
+				return i;
 			}
 		}
 		return 0;
+	}
+
+	@NonNull
+	public List<GalleryItem.Media> getOnlinePhotoItems() {
+		List<GalleryItem.Media> galleryItems = new ArrayList<>();
+		if (currentGalleryItemsHolder != null) {
+			for (GalleryItem item : currentGalleryItemsHolder.getOrderedGalleryItems()) {
+				if (item instanceof GalleryItem.Media media) {
+					galleryItems.add(media);
+				}
+			}
+		}
+		return galleryItems;
 	}
 
 	public static int getSettingsSpanCount(@NonNull MapActivity mapActivity) {

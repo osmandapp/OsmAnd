@@ -23,7 +23,7 @@ class MediaProvider(context: Context) {
 	@JvmOverloads
 	fun loadThumbnail(
 		item: MediaItem,
-		callback: ImageLoaderCallback,
+		callback: ImageLoaderCallback? = null,
 		requestListener: ImageRequestListener? = null
 	): LoadingImage? {
 		return load(resolveUri(item, ImageResolution.THUMBNAIL), callback, requestListener)
@@ -49,11 +49,11 @@ class MediaProvider(context: Context) {
 
 	private fun load(
 		uri: String?,
-		callback: ImageLoaderCallback,
+		callback: ImageLoaderCallback?,
 		requestListener: ImageRequestListener?
 	): LoadingImage? {
 		if (uri.isNullOrBlank()) {
-			callback.onError()
+			callback?.onError()
 			return null
 		}
 		return imageLoader.loadImage(uri, callback, requestListener, handlePlaceholder = false)

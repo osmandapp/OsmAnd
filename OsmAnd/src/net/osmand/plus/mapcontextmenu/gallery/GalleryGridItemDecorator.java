@@ -10,7 +10,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.mapcontextmenu.gallery.holders.GalleryMediaHolder;
 import net.osmand.plus.mapcontextmenu.gallery.holders.ImageHolderType;
-import net.osmand.plus.mapcontextmenu.gallery.holders.MapillaryContributeHolder;
+import net.osmand.plus.mapcontextmenu.gallery.holders.ActionViewHolder;
 import net.osmand.plus.utils.AndroidUtils;
 
 public class GalleryGridItemDecorator extends RecyclerView.ItemDecoration {
@@ -55,7 +55,7 @@ public class GalleryGridItemDecorator extends RecyclerView.ItemDecoration {
 					}
 				}
 			}
-		} else if (viewHolder instanceof MapillaryContributeHolder) {
+		} else if (viewHolder instanceof ActionViewHolder) {
 			outRect.right = AndroidUtils.dpToPx(app, 16);
 		}
 	}

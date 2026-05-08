@@ -65,7 +65,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.gallery.GalleryItem;
-import net.osmand.plus.gallery.GalleryItem.NoImages;
+import net.osmand.plus.gallery.GalleryItem.NoMedia;
 import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.mapcontextmenu.SearchAmenitiesTask.SearchAmenitiesListener;
 import net.osmand.plus.mapcontextmenu.SearchByRouteIdTask.SearchByRouteIdListener;
@@ -180,7 +180,7 @@ public class MenuBuilder {
 			if (!isHidden()) {
 				onLoadingImages(false);
 				if (galleryController != null) {
-					galleryController.setCurrentMediaHolder(mediaHolder);
+					galleryController.setCurrentGalleryItemsHolder(mediaHolder);
 				}
 				setOnlinePhotoItems(mediaHolder.getOrderedGalleryItems());
 				PluginsHelper.onGetImageCardsFinished(mediaHolder);
@@ -191,7 +191,7 @@ public class MenuBuilder {
 	private void setOnlinePhotoItems(@NonNull List<GalleryItem> onlinePhotoItems) {
 		List<GalleryItem> items = new ArrayList<>(onlinePhotoItems);
 		if (onlinePhotoItems.isEmpty() && mapActivity != null) {
-			items.add(NoImages.INSTANCE);
+			items.add(NoMedia.INSTANCE);
 		}
 		if (onlinePhotosRow != null) {
 			onlinePhotosRow.setItems(items);
@@ -719,7 +719,7 @@ public class MenuBuilder {
 		String rawKey = PhotoCacheManager.buildRawKey(wikidataId, wikiCategory, wikiTitle);
 
 		if (galleryController.isCurrentHolderEquals(latLon, params)) {
-			imageCardListener.onFinish(galleryController.getCurrentMediaHolder());
+			imageCardListener.onFinish(galleryController.getCurrentGalleryItemsHolder());
 		} else if(!app.getSettings().isInternetConnectionAvailable()){
 			loadFromCache(cacheManager, rawKey, params, wikiTagData, latLon);
 		} else {
