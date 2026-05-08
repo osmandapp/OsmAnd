@@ -256,6 +256,9 @@ public class BLEBikeSensor extends BLEAbstractSensor {
 				wheelCadence = (wheelRevolutions - lastWheelRevolutions) * 60.0f / timeDifference;
 				getDevice().fireSensorDataEvent(this, createBikeSpeedDistanceData(speed, distance, totalDistance));
 			}
+			if(wheelRevolutions > lastWheelRevolutions) {
+				lastTimeDifferentValue = System.currentTimeMillis();
+			}
 			lastWheelRevolutions = wheelRevolutions;
 			this.lastWheelEventTime = lastWheelEventTime;
 
@@ -275,6 +278,9 @@ public class BLEBikeSensor extends BLEAbstractSensor {
 					float gearRatio = wheelCadence / crankCadence;
 					getDevice().fireSensorDataEvent(this, createBikeCadenceData(gearRatio, Math.round(crankCadence)));
 				}
+			}
+			if(crankRevolutions > lastCrankRevolutions) {
+				lastTimeDifferentValue = System.currentTimeMillis();
 			}
 			lastCrankRevolutions = crankRevolutions;
 			this.lastCrankEventTime = lastCrankEventTime;
@@ -318,5 +324,10 @@ public class BLEBikeSensor extends BLEAbstractSensor {
 			default:
 				break;
 		}
+	}
+
+	@Override
+	protected long getDataUpdateTimePeriod() {
+		return 2000;
 	}
 }

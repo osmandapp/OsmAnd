@@ -253,6 +253,14 @@ public class SensorTextWidget extends SimpleWidget {
 		@Override
 		public void onDeviceConnecting(@NonNull AbstractDevice<?> device) {
 		}
+
+		@Override
+		public void onActualStateChanged() {
+			app.runInUIThread(() -> {
+				forceUpdate = true;
+				updateInfo(null);
+			});
+		}
 	};
 
 	@NonNull

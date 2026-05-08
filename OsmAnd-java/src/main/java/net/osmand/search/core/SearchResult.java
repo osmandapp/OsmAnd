@@ -170,7 +170,7 @@ public class SearchResult {
 			}
 			// if all words from search phrase match (<) the search result words - we prioritize it higher
 			if (matched) {
-				res = getPhraseWeightForCompleteMatch(completeMatchRes);
+				res = getPhraseWeightForCompleteMatch(completeMatchRes, exactResult);
 			}
 			if (object instanceof Amenity a) {
 				int elo = a.getTravelEloNumber();
@@ -187,7 +187,7 @@ public class SearchResult {
 		return res;
 	}
 
-	private double getPhraseWeightForCompleteMatch(CheckWordsMatchCount completeMatchRes) {
+	private double getPhraseWeightForCompleteMatch(CheckWordsMatchCount completeMatchRes, SearchResult exactResult) {
 		double res = ObjectType.getTypeWeight(objectType) * MAX_TYPES_BASE_10; // range 10 - 40
 		boolean closeDistance = false;
 		LatLon searchLocation = requiredSearchPhrase.getSettings().getOriginalLocation();
@@ -208,6 +208,9 @@ public class SearchResult {
 			}
 			if (closeDistance) {
 				res += 1;
+			}
+			if (objectType == ObjectType.CITY && exactResult == null) {
+				res += MAX_PHRASE_WEIGHT_TOTAL / 2;
 			}
 			// range 60 - 91
 		}
