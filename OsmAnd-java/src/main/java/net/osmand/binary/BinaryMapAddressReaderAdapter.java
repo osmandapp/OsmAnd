@@ -933,6 +933,10 @@ public class BinaryMapAddressReaderAdapter {
 		int maskIndex = 0;
 		while (true) {
 			if (req.isCancelled()) {
+				long bytesUntilLimit = codedIS.getBytesUntilLimit();
+				if (bytesUntilLimit > 0) {
+					codedIS.skipRawBytes(bytesUntilLimit);
+				}
 				return;
 			}
 			int t = codedIS.readTag();
