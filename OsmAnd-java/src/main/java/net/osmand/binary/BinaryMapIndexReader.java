@@ -1417,6 +1417,9 @@ public class BinaryMapIndexReader {
 				codedIS.popLimit(old);
 				req.endSearchStats(statReq, BinaryMapIndexReaderApiName.ADDRESS_BY_NAME, req, reg, codedIS);
 			}
+			if (req.isCancelled()) {
+				break;
+			}
 		}
 		return req.getSearchResults();
 	}
