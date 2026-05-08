@@ -1406,9 +1406,12 @@ public class BinaryMapIndexReader {
 				codedIS.seek(reg.indexNameOffset);
 				long len = readInt();
 				long old = codedIS.pushLimitLong((long) len);
-				addressAdapter.searchAddressDataByName(reg, req, typeFilter);
-				codedIS.popLimit(old);
-				req.endSearchStats(statReq, BinaryMapIndexReaderApiName.ADDRESS_BY_NAME, req, reg, codedIS);
+				try {
+					addressAdapter.searchAddressDataByName(reg, req, typeFilter);
+				} finally {
+					codedIS.popLimit(old);
+					req.endSearchStats(statReq, BinaryMapIndexReaderApiName.ADDRESS_BY_NAME, req, reg, codedIS);
+				}
 			}
 		}
 		return req.getSearchResults();

@@ -697,17 +697,20 @@ public class BinaryMapAddressReaderAdapter {
 				long length = readInt();
 				indexOffset = codedIS.getTotalBytesRead();
 				long oldLimit = codedIS.pushLimitLong((long) length);
-				List<QueryToken.Prefix> prefixCandidates = map.readIndexedStringTablePrefixes(
-						stringMatcher.getCollator(), Collections.singletonList(req.nameQuery)).get(0);
-				queryToken = new QueryToken(req.nameQuery, stringMatcher.getCollator(), req.matcherMode,
-						prefixCandidates);
-				TIntHashSet uniqueOffsets = new TIntHashSet();
-				for (QueryToken.Prefix prefix : queryToken.prefixes) {
-					if (uniqueOffsets.add(prefix.offset())) {
-						loffsets.add(prefix.offset());
+				try {
+					List<QueryToken.Prefix> prefixCandidates = map.readIndexedStringTablePrefixes(
+							stringMatcher.getCollator(), Collections.singletonList(req.nameQuery)).get(0);
+					queryToken = new QueryToken(req.nameQuery, stringMatcher.getCollator(), req.matcherMode,
+							prefixCandidates);
+					TIntHashSet uniqueOffsets = new TIntHashSet();
+					for (QueryToken.Prefix prefix : queryToken.prefixes) {
+						if (uniqueOffsets.add(prefix.offset())) {
+							loffsets.add(prefix.offset());
+						}
 					}
+				} finally {
+					codedIS.popLimit(oldLimit);
 				}
-				codedIS.popLimit(oldLimit);
 				req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.ADDRESS_BY_NAME,
 						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.ADDRESS_NAME_INDEX, map.getFile().getName(), codedIS.getBytesCounter() - bytes);
 				break;
@@ -727,51 +730,56 @@ public class BinaryMapAddressReaderAdapter {
 					codedIS.seek(fp);
 					long len = codedIS.readRawVarint32();
 					long oldLim = codedIS.pushLimitLong((long) len);
-					QueryToken.Prefix matchedPrefix = null;
-					if (queryToken != null) {
-						for (QueryToken.Prefix prefix : queryToken.prefixes) {
-							if (prefix.offset() == loffsets.get(j)) {
-								matchedPrefix = prefix;
-								break;
+					try {
+						QueryToken.Prefix matchedPrefix = null;
+						if (queryToken != null) {
+							for (QueryToken.Prefix prefix : queryToken.prefixes) {
+								if (prefix.offset() == loffsets.get(j)) {
+									matchedPrefix = prefix;
+									break;
+								}
 							}
 						}
-					}
-					boolean suffixDictionaryInitialized = false;
-					List<String> suffixDictionary = null;
-					QueryToken.SuffixMask suffixMask = null;
-					if (queryToken != null && matchedPrefix != null) {
-						suffixMask = queryToken.new SuffixMask(matchedPrefix);
-					}
-					int stag = 0;
-					do {
-						int st = codedIS.readTag();
-						stag = WireFormat.getTagFieldNumber(st);
-						if (stag == AddressNameIndexData.SUFFIXESDICTIONARY_FIELD_NUMBER) {
-							if (suffixDictionary == null) {
-								suffixDictionary = new ArrayList<>();
-							}
-							String encodedSuffix = codedIS.readString();
-							if (SearchAlgorithms.EMPTY_SUFFIX_DICTIONARY_SENTINEL.equals(encodedSuffix)) {
-								continue;
-							}
-							String previousSuffix = suffixDictionary.isEmpty() ? null : suffixDictionary.get(suffixDictionary.size() - 1);
-							String decodedSuffix = SearchAlgorithms.nameIndexDecodeDictionarySuffix(previousSuffix, encodedSuffix);
-							suffixDictionary.add(decodedSuffix);
-						} else if (stag == AddressNameIndexData.ATOM_FIELD_NUMBER) {
-							if (!suffixDictionaryInitialized && suffixMask != null) {
-								suffixMask.setDictionary(suffixDictionary);
-								suffixDictionaryInitialized = true;
-							}
-							long slen = codedIS.readRawVarint32();
-							long soldLim = codedIS.pushLimitLong((long) slen);
-							readAddressNameData(req, refs, refsToCities, fp, suffixMask);
-							codedIS.popLimit(soldLim);
-						} else if (stag != 0) {
-							skipUnknownField(st);
+						boolean suffixDictionaryInitialized = false;
+						List<String> suffixDictionary = null;
+						QueryToken.SuffixMask suffixMask = null;
+						if (queryToken != null && matchedPrefix != null) {
+							suffixMask = queryToken.new SuffixMask(matchedPrefix);
 						}
-					} while (stag != 0);
-
-					codedIS.popLimit(oldLim);
+						int stag = 0;
+						do {
+							int st = codedIS.readTag();
+							stag = WireFormat.getTagFieldNumber(st);
+							if (stag == AddressNameIndexData.SUFFIXESDICTIONARY_FIELD_NUMBER) {
+								if (suffixDictionary == null) {
+									suffixDictionary = new ArrayList<>();
+								}
+								String encodedSuffix = codedIS.readString();
+								if (SearchAlgorithms.EMPTY_SUFFIX_DICTIONARY_SENTINEL.equals(encodedSuffix)) {
+									continue;
+								}
+								String previousSuffix = suffixDictionary.isEmpty() ? null : suffixDictionary.get(suffixDictionary.size() - 1);
+								String decodedSuffix = SearchAlgorithms.nameIndexDecodeDictionarySuffix(previousSuffix, encodedSuffix);
+								suffixDictionary.add(decodedSuffix);
+							} else if (stag == AddressNameIndexData.ATOM_FIELD_NUMBER) {
+								if (!suffixDictionaryInitialized && suffixMask != null) {
+									suffixMask.setDictionary(suffixDictionary);
+									suffixDictionaryInitialized = true;
+								}
+								long slen = codedIS.readRawVarint32();
+								long soldLim = codedIS.pushLimitLong((long) slen);
+								try {
+									readAddressNameData(req, refs, refsToCities, fp, suffixMask);
+								} finally {
+									codedIS.popLimit(soldLim);
+								}
+							} else if (stag != 0) {
+								skipUnknownField(st);
+							}
+						} while (stag != 0);
+					} finally {
+						codedIS.popLimit(oldLim);
+					}
 					if (req.isCancelled()) {
 						req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.ADDRESS_BY_NAME,
 								BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.ADDRESS_NAME_INDEX, map.getFile().getName(), codedIS.getBytesCounter() - bytes);
@@ -800,8 +808,12 @@ public class BinaryMapAddressReaderAdapter {
 							codedIS.seek(offset);
 							long len = codedIS.readRawVarint32();
 							long old = codedIS.pushLimitLong((long) len);
-							City obj = readCityHeader(req, null, offset, reg.attributeTagsTable);
-							codedIS.popLimit(old);
+							City obj;
+							try {
+								obj = readCityHeader(req, null, offset, reg.attributeTagsTable);
+							} finally {
+								codedIS.popLimit(old);
+							}
 							streetGroups.put(offset, obj);
 						}
 						for (int j = 0; j < list.size(); j++) {
@@ -820,34 +832,37 @@ public class BinaryMapAddressReaderAdapter {
 								
 								long len = codedIS.readRawVarint32();
 								long old = codedIS.pushLimitLong((long) len);
-								LatLon l = obj.getLocation();
-								Street s = new Street(obj);
-								s.setFileOffset(offset);
-								long decodeStartNs = metrics == null ? 0 : System.nanoTime();
-								readStreet(s, null, false, MapUtils.get31TileNumberX(l.getLongitude()) >> 7,
-										MapUtils.get31TileNumberY(l.getLatitude()) >> 7, obj.isPostcode() ? obj.getName() : null,
-										reg.attributeTagsTable);
-								if (metrics != null) {
-									metrics.decodeTimeNs += System.nanoTime() - decodeStartNs;
-									metrics.objectsLoaded++;
-								}
-								publishRawData(req, s);
-								long matcherStartNs = metrics == null ? 0 : System.nanoTime();
-								boolean matches = stringMatcher.matches(s.getName());
-								if (!matches) {
-									for (String n : s.getOtherNames()) {
-										matches = stringMatcher.matches(n);
-										if (matches) {
-											break;
+								try {
+									LatLon l = obj.getLocation();
+									Street s = new Street(obj);
+									s.setFileOffset(offset);
+									long decodeStartNs = metrics == null ? 0 : System.nanoTime();
+									readStreet(s, null, false, MapUtils.get31TileNumberX(l.getLongitude()) >> 7,
+											MapUtils.get31TileNumberY(l.getLatitude()) >> 7, obj.isPostcode() ? obj.getName() : null,
+											reg.attributeTagsTable);
+									if (metrics != null) {
+										metrics.decodeTimeNs += System.nanoTime() - decodeStartNs;
+										metrics.objectsLoaded++;
+									}
+									publishRawData(req, s);
+									long matcherStartNs = metrics == null ? 0 : System.nanoTime();
+									boolean matches = stringMatcher.matches(s.getName());
+									if (!matches) {
+										for (String n : s.getOtherNames()) {
+											matches = stringMatcher.matches(n);
+											if (matches) {
+												break;
+											}
 										}
 									}
+									if (metrics != null) metrics.matcherTimeNs += System.nanoTime() - matcherStartNs;
+									if (matches) {
+										req.publish(s);
+										if (metrics != null) metrics.matchedObjectsLoaded++;
+									}
+								} finally {
+									codedIS.popLimit(old);
 								}
-								if (metrics != null) metrics.matcherTimeNs += System.nanoTime() - matcherStartNs;
-								if (matches) {
-									req.publish(s);
-									if (metrics != null) metrics.matchedObjectsLoaded++;
-								}
-								codedIS.popLimit(old);
 								if (metrics != null) metrics.endLoadObject(codedIS);
 							}
 						}
@@ -864,19 +879,22 @@ public class BinaryMapAddressReaderAdapter {
 							
 							long len = codedIS.readRawVarint32();
 							long old = codedIS.pushLimitLong((long) len);
-							long decodeStartNs = metrics == null ? 0 : System.nanoTime();
-							City obj = readCityHeader(req, cityPostcodeMatcher, list.get(j), reg.attributeTagsTable);
-							if (metrics != null) {
-								metrics.decodeTimeNs += System.nanoTime() - decodeStartNs;
-								metrics.objectsLoaded++;
+							try {
+								long decodeStartNs = metrics == null ? 0 : System.nanoTime();
+								City obj = readCityHeader(req, cityPostcodeMatcher, list.get(j), reg.attributeTagsTable);
+								if (metrics != null) {
+									metrics.decodeTimeNs += System.nanoTime() - decodeStartNs;
+									metrics.objectsLoaded++;
+								}
+								publishRawData(req, obj);
+								if (obj != null && !published.contains(offset)) {
+									req.publish(obj);
+									published.add(offset);
+									if (metrics != null) metrics.matchedObjectsLoaded++;
+								}
+							} finally {
+								codedIS.popLimit(old);
 							}
-							publishRawData(req, obj);
-							if (obj != null && !published.contains(offset)) {
-								req.publish(obj);
-								published.add(offset);
-								if (metrics != null) metrics.matchedObjectsLoaded++;
-							}
-							codedIS.popLimit(old);
 							if (metrics != null) metrics.endLoadObject(codedIS);
 						}
 					}
