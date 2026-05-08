@@ -9,12 +9,14 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.protobuf.CodedInputStream;
+import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.WireFormat;
 
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.set.TIntSet;
 import gnu.trove.set.hash.TIntHashSet;
 import net.osmand.CollatorStringMatcher;
+import net.osmand.PlatformUtil;
 import net.osmand.StringMatcher;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapIndexReaderStats.PoiReadMetricSet;
@@ -33,8 +35,10 @@ import net.osmand.data.Street;
 import net.osmand.util.MapUtils;
 import net.osmand.util.SearchAlgorithms;
 import net.osmand.util.TransliterationHelper;
+import org.apache.commons.logging.Log;
 
 public class BinaryMapAddressReaderAdapter {
+	private static final Log LOG = PlatformUtil.getLog(BinaryMapAddressReaderAdapter.class);
 	
 	public enum CityBlocks {
 		UNKNOWN_TYPE(-1, false), // unsupported block types will be parsed as unknown
@@ -771,12 +775,18 @@ public class BinaryMapAddressReaderAdapter {
 								try {
 									readAddressNameData(req, refs, refsToCities, fp, suffixMask);
 								} finally {
+									long bytesUntilLimit = codedIS.getBytesUntilLimit();
+									if (bytesUntilLimit > 0) {
+										codedIS.skipRawBytes(bytesUntilLimit);
+									}
 									codedIS.popLimit(soldLim);
 								}
 							} else if (stag != 0) {
 								skipUnknownField(st);
 							}
 						} while (stag != 0);
+					} catch (InvalidProtocolBufferException e) {
+						LOG.error("Failed to read address name data", e);
 					} finally {
 						codedIS.popLimit(oldLim);
 					}
