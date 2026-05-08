@@ -505,7 +505,7 @@ public class ItemViewHolder {
 		}
 		if (removeItemClickListener != null) {
 			optionsMenu.getMenu()
-					.add(R.string.shared_string_remove)
+					.add(R.string.shared_string_delete)
 					.setIcon(getThemedIcon(context, R.drawable.ic_action_remove_dark))
 					.setOnMenuItemClickListener(removeItemClickListener);
 		}

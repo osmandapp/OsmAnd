@@ -61,6 +61,7 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 	private final Handler mainHandler = new Handler(Looper.getMainLooper());
 	private final Queue<Runnable> commandQueue = new ConcurrentLinkedQueue<>();
 	private boolean commandQueueBusy;
+	private boolean currentHasActualDataState;
 	@Nullable
 	protected List<BluetoothGattCharacteristic> cachedCharacteristics;
 
@@ -238,9 +239,17 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 		public void onCharacteristicChanged(BluetoothGatt gatt,
 		                                    BluetoothGattCharacteristic characteristic) {
 			callbackHandler.post(() -> {
+				boolean hasActualState = false;
 				for (BLEAbstractSensor sensor : sensors) {
 					sensor.checkStaleData(characteristic);
 					sensor.onCharacteristicChanged(gatt, characteristic);
+					if (sensor.hasActualData()) {
+						hasActualState = true;
+					}
+				}
+				if (hasActualState != currentHasActualDataState) {
+					currentHasActualDataState = hasActualState;
+					fireDeviceActualStateChanged();
 				}
 			});
 		}
@@ -311,7 +320,7 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 
 	public void connectAfterScan(Context ctx, String targetAddress) {
 		LOG.debug("scan to connect to " + targetAddress);
-		if(bluetoothAdapter != null && !bluetoothAdapter.isDiscovering()) {
+		if (bluetoothAdapter != null && !bluetoothAdapter.isDiscovering()) {
 			BluetoothLeScanner scanner = bluetoothAdapter.getBluetoothLeScanner();
 			ScanSettings settings = new ScanSettings.Builder()
 					.setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY)

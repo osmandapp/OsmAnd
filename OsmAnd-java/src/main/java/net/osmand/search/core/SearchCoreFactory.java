@@ -701,7 +701,7 @@ public class SearchCoreFactory {
 								
 							}
 							subSearchApiOrPublish(phrase, resultMatcher, res, streetsApi, newParentSearchResult, true);
-						} else if (res.objectType == ObjectType.BOUNDARY ) {
+						} else if (res.objectType == ObjectType.BOUNDARY) {
 							// require exact matching to speed up
 							if (matchAddressName(phrase, null, res, true)) {
 								subSearchApiOrPublish(phrase, resultMatcher, res, this);

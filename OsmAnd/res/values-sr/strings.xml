@@ -5385,8 +5385,8 @@
     <string name="add_widget_below">Додај справицу испод</string>
     <string name="add_widget_to_the_right">Додај справицу десно</string>
     <string name="add_widget_to_the_left">Додај справицу лево</string>
-    <string name="delete_widget">Обрисати справицу?</string>
-    <string name="delete_widget_description">Ова ће справица бити обрисана. Можете је повратити касније у поставкама приказа.</string>
+    <string name="delete_widget">Уклонити справицу?</string>
+    <string name="delete_widget_description">Ова ће справица бити уклоњена. Можете је повратити касније у поставкама приказа.</string>
     <string name="battery_saving_mode">Режим уштеде батерије</string>
     <string name="graph_axis">Графичка оса</string>
     <string name="app_mode_suv">СУВ</string>
@@ -6134,6 +6134,6 @@
     <string name="open_till_short">До</string>
     <string name="open_from_short">Од</string>
     <string name="astro_designations">Ознаке</string>
-    <string name="astronomy_map">Астрономска мапа</string>
-    <string name="obd_simulation_device">Уређај за симулацију</string>
+    <string name="astronomy_map">Небеска карта</string>
+    <string name="obd_simulation_device">Уређај за опонашање</string>
 </resources>
