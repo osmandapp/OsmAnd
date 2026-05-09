@@ -681,11 +681,14 @@ public class SearchCoreFactory {
 								// include parent search result even if it is empty
 								// for street-city don't require exact matching
 								boolean match = matchAddressName(phrase, res, cityResult, true);
-								if (match) {
-									newParentSearchResult = cityResult;
-								} else if (hasNonNumericLeftUnknownSearchWord(res)) {
+								newParentSearchResult = cityResult;
+								if (!match && hasNonNumericLeftUnknownSearchWord(res)) {
 									QuadRect bbox = SearchPhrase.calculateBbox(1000, res.location);
-									List<City>  cacheResArray = townCitiesCache.queryBoundaries(bbox);
+									List<City> cacheResArray = townCitiesCache.queryBoundaries(bbox);
+									SearchResult boundaryResult = new SearchResult(phrase);
+									boundaryResult.objectType = ObjectType.CITY;
+									boundaryResult.localeRelatedObjectName = res.file.getRegionName();
+									boundaryResult.file = res.file;
 									for (City boundary : cacheResArray) {
 										int[] bb = boundary.getBbox31();
 										if (bb == null) {
@@ -695,19 +698,17 @@ public class SearchCoreFactory {
 										if (!QuadRect.intersects(boundBox, bbox)) {
 											continue;
 										}
-										// cityResult.object = boundary; // keep city the same
-										cityResult.localeName = boundary.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
-										cityResult.otherNames = boundary.getOtherNames(true);
+										boundaryResult.object = boundary;
+										boundaryResult.localeName = boundary.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
+										boundaryResult.otherNames = boundary.getOtherNames(true);
+										boundaryResult.location = boundary.getLocation();
 										// for another city require exact matching
-										if (matchAddressName(phrase, res, cityResult, true)) {
-											cityResult.object = boundary; 
-											cityResult.location = boundary.getLocation();
-											newParentSearchResult = cityResult;
+										if (matchAddressName(phrase, res, boundaryResult, true)) {
+											newParentSearchResult = boundaryResult;
 											break;
 										}
 									}
 								}
-								
 							}
 							subSearchApiOrPublish(phrase, resultMatcher, res, streetsApi, newParentSearchResult, true);
 						} else if (res.objectType == ObjectType.BOUNDARY) {
