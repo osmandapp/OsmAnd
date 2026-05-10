@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
-import net.osmand.plus.mapcontextmenu.gallery.GalleryController
-import net.osmand.plus.mapcontextmenu.gallery.GalleryListener
-import net.osmand.plus.mapcontextmenu.gallery.GalleryMediaLoadStateProvider
-import net.osmand.plus.mapcontextmenu.gallery.GalleryPhotoPagerFragment
+import net.osmand.plus.gallery.controller.GalleryController
+import net.osmand.plus.gallery.ui.GalleryListener
+import net.osmand.plus.gallery.controller.GalleryMediaLoadStateProvider
+import net.osmand.plus.gallery.ui.GalleryPhotoPagerFragment
 import net.osmand.plus.plugins.astronomy.Catalog
 import net.osmand.shared.media.domain.MediaItem
 import java.time.LocalDate

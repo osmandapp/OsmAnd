@@ -25,19 +25,19 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardType;
-import net.osmand.plus.gallery.GalleryAction;
-import net.osmand.plus.gallery.GalleryItem;
+import net.osmand.plus.gallery.model.GalleryAction;
+import net.osmand.plus.gallery.model.GalleryItem;
 import net.osmand.plus.mapcontextmenu.BuildRowAttrs;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.mapcontextmenu.builders.cards.GalleryRowBuilder;
-import net.osmand.plus.mapcontextmenu.gallery.GalleryController;
-import net.osmand.plus.mapcontextmenu.gallery.GalleryGridConfig;
-import net.osmand.plus.mapcontextmenu.gallery.GalleryMediaGroup;
-import net.osmand.plus.mapcontextmenu.gallery.GalleryItemsHolder;
-import net.osmand.plus.mapcontextmenu.gallery.RemoteMediaFactory;
-import net.osmand.plus.mapcontextmenu.gallery.tasks.GetOnlineImagesTask.GetImageCardsListener;
+import net.osmand.plus.mapcontextmenu.gallery.GalleryRowBuilder;
+import net.osmand.plus.gallery.controller.GalleryController;
+import net.osmand.plus.gallery.ui.GalleryGridConfig;
+import net.osmand.plus.gallery.model.GalleryMediaGroup;
+import net.osmand.plus.gallery.controller.GalleryItemsHolder;
+import net.osmand.plus.gallery.data.RemoteMediaFactory;
+import net.osmand.plus.gallery.tasks.GetOnlineImagesTask.GetImageCardsListener;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -64,7 +64,6 @@ import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.shared.media.domain.MediaItem;
 import net.osmand.shared.media.domain.MediaOrigin;
-import net.osmand.shared.media.domain.RemoteMetadata;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -74,7 +73,6 @@ import org.json.JSONObject;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class MapillaryPlugin extends OsmandPlugin {
 

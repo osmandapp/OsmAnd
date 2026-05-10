@@ -4,7 +4,7 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
 
-	<net.osmand.plus.mapcontextmenu.gallery.imageview.GalleryImageView
+	<net.osmand.plus.gallery.ui.imageview.GalleryImageView
 		android:id="@+id/image"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"

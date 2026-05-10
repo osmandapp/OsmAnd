@@ -2,7 +2,7 @@ package net.osmand.plus.plugins.astronomy.views.contextmenu
 
 import android.net.Uri
 import net.osmand.plus.R
-import net.osmand.plus.gallery.GalleryItem
+import net.osmand.plus.gallery.model.GalleryItem
 import net.osmand.plus.plugins.astronomy.Catalog
 import java.time.LocalDate
 import java.time.ZoneId

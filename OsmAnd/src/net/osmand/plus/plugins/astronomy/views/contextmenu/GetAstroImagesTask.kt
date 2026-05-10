@@ -4,7 +4,7 @@ import android.net.TrafficStats
 import android.os.AsyncTask
 import net.osmand.PlatformUtil
 import net.osmand.plus.OsmandApplication
-import net.osmand.plus.mapcontextmenu.gallery.GalleryItemsHolder
+import net.osmand.plus.gallery.controller.GalleryItemsHolder
 import net.osmand.shared.wiki.WikiCoreHelper
 import net.osmand.shared.wiki.WikiImage
 import org.apache.commons.logging.Log
