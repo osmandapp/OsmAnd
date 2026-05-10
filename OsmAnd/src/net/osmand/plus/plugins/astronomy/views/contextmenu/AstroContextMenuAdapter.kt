@@ -9,6 +9,7 @@ import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.mapcontextmenu.gallery.GalleryController
 import net.osmand.plus.mapcontextmenu.gallery.GalleryListener
+import net.osmand.plus.mapcontextmenu.gallery.GalleryMediaLoadStateProvider
 import net.osmand.plus.mapcontextmenu.gallery.GalleryPhotoPagerFragment
 import net.osmand.plus.plugins.astronomy.Catalog
 import net.osmand.shared.media.domain.MediaItem
@@ -43,6 +44,11 @@ class AstroContextMenuAdapter(
 
 	init {
 		setHasStableIds(true)
+	}
+
+	private val emptyMediaLoadStateProvider = object : GalleryMediaLoadStateProvider {
+		override fun isMediaLoadFailed(mediaItem: MediaItem): Boolean = false
+		override fun markMediaLoadFailed(mediaItem: MediaItem) = Unit
 	}
 
 	override fun getItemId(position: Int): Long = getItem(position).key.stableId
@@ -115,7 +121,7 @@ class AstroContextMenuAdapter(
 							galleryController?.let { controller ->
 								GalleryPhotoPagerFragment.showInstance(
 									mapActivity,
-									controller.getMediaItemIndexById(mediaItem.id)
+									controller.getPhotoItemIndexById(mediaItem.id)
 								)
 							}
 						}
@@ -124,6 +130,7 @@ class AstroContextMenuAdapter(
 							onUpdateImage()
 						}
 					},
+					mediaLoadStateProvider = galleryController ?: emptyMediaLoadStateProvider,
 					onToggle = onGalleryToggle
 				)
 			}

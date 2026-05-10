@@ -12,9 +12,11 @@ import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.gallery.GalleryItem
 import net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter
+import net.osmand.plus.mapcontextmenu.gallery.GalleryGridConfig
 import net.osmand.plus.mapcontextmenu.gallery.GalleryGridFragment
 import net.osmand.plus.mapcontextmenu.gallery.GalleryGridItemDecorator
 import net.osmand.plus.mapcontextmenu.gallery.GalleryListener
+import net.osmand.plus.mapcontextmenu.gallery.GalleryMediaLoadStateProvider
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.widgets.dialogbutton.DialogButton
 import net.osmand.util.Algorithms
@@ -24,6 +26,7 @@ class AstroGalleryCardViewHolder(
 	private val app: OsmandApplication,
 	private val mapActivity: MapActivity,
 	private val listener: GalleryListener,
+	private val mediaLoadStateProvider: GalleryMediaLoadStateProvider,
 	private val onToggle: (String) -> Unit
 ) : RecyclerView.ViewHolder(itemView) {
 
@@ -122,8 +125,13 @@ class AstroGalleryCardViewHolder(
 		if (galleryGridAdapter != null && adapterNightMode == nightMode) {
 			return
 		}
-		galleryGridAdapter =
-			GalleryGridAdapter(mapActivity, listener, null, true, nightMode)
+		galleryGridAdapter = GalleryGridAdapter(
+			mapActivity = mapActivity,
+			listener = listener,
+			mediaLoadStateProvider = mediaLoadStateProvider,
+			viewWidth = null,
+			nightMode = nightMode
+		)
 		adapterNightMode = nightMode
 		recyclerView.layoutManager = getGridLayoutManager()
 		if (recyclerView.itemDecorationCount == 0) {

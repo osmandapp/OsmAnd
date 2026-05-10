@@ -88,7 +88,7 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 			public void onGlobalLayout() {
 				recyclerView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 				adapter = new GalleryGridAdapter(requireMapActivity(), getGalleryListener(),
-						recyclerView.getMeasuredWidth(), true, nightMode);
+						controller, recyclerView.getMeasuredWidth(), new GalleryGridConfig(), nightMode);
 				adapter.setResizeBySpanCount(true);
 
 				List<GalleryItem> items = new ArrayList<>();
@@ -139,7 +139,7 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 			@Override
 			public void onMediaItemClicked(@NonNull MediaItem mediaItem) {
 				callMapActivity(activity -> {
-					int index = controller.getMediaItemIndexById(mediaItem.getId());
+					int index = controller.getPhotoItemIndexById(mediaItem.getId());
 					GalleryPhotoPagerFragment.showInstance(activity, index);
 				});
 			}

@@ -153,7 +153,7 @@ class AstroGalleryLoader(
 		galleryItems: List<GalleryItem>
 	) {
 		val readyItems = galleryItems.ifEmpty {
-			listOf(GalleryItem.NoMedia)
+			listOf(GalleryItem.NoMedia())
 		}
 		onStateChanged(wikidataId, AstroGalleryState.Ready(readyItems))
 	}

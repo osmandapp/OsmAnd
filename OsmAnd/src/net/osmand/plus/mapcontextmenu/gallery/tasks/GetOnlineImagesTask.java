@@ -116,7 +116,7 @@ public class GetOnlineImagesTask extends AsyncTask<Void, Void, GalleryItemsHolde
 								if (!PluginsHelper.addContextMenuGalleryItem(holder, imageObject)) {
 									MediaItem.Remote mediaItem = RemoteMediaFactory.fromUrlImageJson(imageObject);
 									if (mediaItem != null) {
-										holder.addMediaItem(OTHER, mediaItem);
+										holder.addMediaItem(OTHER, mediaItem, true);
 									}
 								}
 							}

@@ -39,6 +39,7 @@ import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.IndexFileList;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.gallery.GalleryAction;
 import net.osmand.plus.gallery.GalleryItem;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
@@ -69,6 +70,7 @@ import net.osmand.search.core.SearchPhrase;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser;
 import net.osmand.shared.gpx.TrackItem;
+import net.osmand.shared.media.domain.MediaItem;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -266,7 +268,12 @@ public abstract class OsmandPlugin {
 		return false;
 	}
 
-	protected boolean handleGalleryAction(@NonNull GalleryItem.Action action) {
+	protected boolean handleGalleryAction(@NonNull GalleryAction action) {
+		return false;
+	}
+
+	protected boolean handleGalleryMediaItemClick(@NonNull MapActivity mapActivity,
+	                                              @NonNull MediaItem mediaItem) {
 		return false;
 	}
 

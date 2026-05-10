@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.gallery.GalleryAction;
 import net.osmand.plus.gallery.GalleryItem;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -28,14 +29,14 @@ public class ActionViewHolder extends RecyclerView.ViewHolder {
 
 	public void bindView(boolean nightMode,
 	                     @NonNull MapActivity mapActivity,
-	                     @NonNull GalleryItem.Action action) {
+	                     @NonNull GalleryItem.Action item) {
 		itemView.findViewById(R.id.card_background).setVisibility(View.GONE);
 		AndroidUtils.setBackgroundColor(mapActivity, itemView, ColorUtilities.getActivityBgColorId(nightMode));
 		AndroidUtils.setTextPrimaryColor(mapActivity, itemView.findViewById(R.id.title), nightMode);
-		itemView.findViewById(R.id.button).setOnClickListener(v -> handleAction(action));
+		itemView.findViewById(R.id.button).setOnClickListener(v -> handleAction(item.getAction()));
 	}
 
-	private void handleAction(@NonNull GalleryItem.Action action) {
+	private void handleAction(@NonNull GalleryAction action) {
 		if (!PluginsHelper.handleGalleryAction(action)) {
 			LOG.warn("Unhandled gallery action: " + action.getId());
 		}

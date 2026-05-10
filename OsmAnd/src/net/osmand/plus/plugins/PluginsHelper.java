@@ -32,6 +32,7 @@ import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.gallery.GalleryAction;
 import net.osmand.plus.gallery.GalleryItem;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
@@ -80,6 +81,7 @@ import net.osmand.search.core.SearchPhrase;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser;
 import net.osmand.shared.gpx.TrackItem;
+import net.osmand.shared.media.domain.MediaItem;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -794,9 +796,19 @@ public class PluginsHelper {
 	 * @param action gallery action item created by a plugin or gallery data source
 	 * @return true if the action was recognized and handled by a plugin
 	 */
-	public static boolean handleGalleryAction(@NonNull GalleryItem.Action action) {
+	public static boolean handleGalleryAction(@NonNull GalleryAction action) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			if (plugin.handleGalleryAction(action)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static boolean handleGalleryMediaItemClick(@NonNull MapActivity mapActivity,
+	                                                  @NonNull MediaItem mediaItem) {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			if (plugin.handleGalleryMediaItemClick(mapActivity, mediaItem)) {
 				return true;
 			}
 		}

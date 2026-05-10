@@ -65,7 +65,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.gallery.GalleryItem;
-import net.osmand.plus.gallery.GalleryItem.NoMedia;
 import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.mapcontextmenu.SearchAmenitiesTask.SearchAmenitiesListener;
 import net.osmand.plus.mapcontextmenu.SearchByRouteIdTask.SearchByRouteIdListener;
@@ -75,6 +74,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.GalleryRowBuilder;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.mapcontextmenu.gallery.GalleryController;
+import net.osmand.plus.mapcontextmenu.gallery.GalleryGridConfig;
 import net.osmand.plus.mapcontextmenu.gallery.GalleryItemsHolder;
 import net.osmand.plus.mapcontextmenu.gallery.PhotoCacheManager;
 import net.osmand.plus.mapcontextmenu.gallery.RemoteMediaFactory;
@@ -191,7 +191,7 @@ public class MenuBuilder {
 	private void setOnlinePhotoItems(@NonNull List<GalleryItem> onlinePhotoItems) {
 		List<GalleryItem> items = new ArrayList<>(onlinePhotoItems);
 		if (onlinePhotoItems.isEmpty() && mapActivity != null) {
-			items.add(NoMedia.INSTANCE);
+			items.add(new GalleryItem.NoMedia());
 		}
 		if (onlinePhotosRow != null) {
 			onlinePhotosRow.setItems(items);
@@ -663,8 +663,9 @@ public class MenuBuilder {
 
 	protected void buildOnlinePhotosRow(View view) {
 		boolean needUpdateOnly = onlinePhotosRow != null && onlinePhotosRow.getMenuBuilder() == this;
+		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		onlinePhotosRow = new GalleryRowBuilder(this);
-		onlinePhotosRow.build(galleryController, true, getApplication().getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP));
+		onlinePhotosRow.build(galleryController, new GalleryGridConfig(), nightMode);
 
 		LinearLayout parent = new LinearLayout(view.getContext());
 		parent.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,

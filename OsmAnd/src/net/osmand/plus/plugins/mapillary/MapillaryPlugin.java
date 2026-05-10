@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.PlatformUtil;
+import net.osmand.data.LatLon;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
@@ -24,15 +25,15 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardType;
+import net.osmand.plus.gallery.GalleryAction;
 import net.osmand.plus.gallery.GalleryItem;
-import net.osmand.plus.gallery.GalleryItem.Action;
-import net.osmand.plus.gallery.GalleryItem.NoMedia;
 import net.osmand.plus.mapcontextmenu.BuildRowAttrs;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.cards.GalleryRowBuilder;
 import net.osmand.plus.mapcontextmenu.gallery.GalleryController;
+import net.osmand.plus.mapcontextmenu.gallery.GalleryGridConfig;
 import net.osmand.plus.mapcontextmenu.gallery.GalleryMediaGroup;
 import net.osmand.plus.mapcontextmenu.gallery.GalleryItemsHolder;
 import net.osmand.plus.mapcontextmenu.gallery.RemoteMediaFactory;
@@ -63,6 +64,7 @@ import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.shared.media.domain.MediaItem;
 import net.osmand.shared.media.domain.MediaOrigin;
+import net.osmand.shared.media.domain.RemoteMetadata;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -72,6 +74,7 @@ import org.json.JSONObject;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MapillaryPlugin extends OsmandPlugin {
 
@@ -79,6 +82,10 @@ public class MapillaryPlugin extends OsmandPlugin {
 	public static final String TYPE_MAPILLARY_CONTRIBUTE = "mapillary-contribute";
 
 	private static final String MAPILLARY_PACKAGE_ID = "com.mapillary.app";
+	private static final int GALLERY_ITEMS_PREVIEW_LIMIT = 5;
+
+	private static final GalleryAction MAPILLARY_CONTRIBUTE_ACTION =
+			new GalleryAction(TYPE_MAPILLARY_CONTRIBUTE);
 
 	private static final Log LOG = PlatformUtil.getLog(MapillaryPlugin.class);
 
@@ -97,7 +104,6 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 	@Nullable
 	private GalleryRowBuilder galleryRowBuilder;
-	// TODO avoid caching UI state (GalleryItem), cache domain MediaItem.Mapillary instead
 	private List<GalleryItem> mapillaryGalleryItems;
 
 	private MapillaryVectorLayer vectorLayer;
@@ -268,8 +274,14 @@ public class MapillaryPlugin extends OsmandPlugin {
 		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		boolean needUpdateOnly = galleryRowBuilder != null && galleryRowBuilder.getMenuBuilder() == menuBuilder;
 
+		GalleryGridConfig config = new GalleryGridConfig(
+				GALLERY_ITEMS_PREVIEW_LIMIT,
+				mediaItem -> mediaItem.getOrigin() == MediaOrigin.MAPILLARY,
+				R.string.shared_string_explore,
+				MAPILLARY_CONTRIBUTE_ACTION
+		);
 		galleryRowBuilder = new GalleryRowBuilder(menuBuilder);
-		galleryRowBuilder.build(controller, false, nightMode);
+		galleryRowBuilder.build(controller, config, nightMode);
 
 		LinearLayout parent = new LinearLayout(view.getContext());
 		parent.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
@@ -315,8 +327,8 @@ public class MapillaryPlugin extends OsmandPlugin {
 					galleryRowBuilder.onLoadingImage(false);
 				}
 				List<GalleryItem> items = new ArrayList<>(cardsHolder.getMapillaryGalleryItems());
-				if (mapActivity != null && Algorithms.isEmpty(items)) {
-					items.add(NoMedia.INSTANCE);
+				if (Algorithms.isEmpty(items)) {
+					items.add(new GalleryItem.NoMedia(MAPILLARY_CONTRIBUTE_ACTION));
 				}
 				if (galleryRowBuilder != null) {
 					galleryRowBuilder.setItems(items);
@@ -368,7 +380,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 				holder.addGalleryItem(
 						GalleryMediaGroup.MAPILLARY,
 						TYPE_MAPILLARY_CONTRIBUTE,
-						new GalleryItem.Action(TYPE_MAPILLARY_CONTRIBUTE)
+						new GalleryItem.Action(MAPILLARY_CONTRIBUTE_ACTION)
 				);
 			}
 		} catch (Exception e) {
@@ -378,14 +390,37 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected boolean handleGalleryAction(@NonNull Action action) {
-		if (TYPE_MAPILLARY_CONTRIBUTE.equals(action.getId())) {
-			if (mapActivity != null) {
-				MapillaryPlugin.openMapillary(mapActivity, null);
-			}
-			return true;
+	protected boolean handleGalleryAction(@NonNull GalleryAction action) {
+		if (!TYPE_MAPILLARY_CONTRIBUTE.equals(action.getId())) {
+			return false;
 		}
-		return false;
+		if (mapActivity != null) {
+			openMapillary(mapActivity, null);
+		}
+		return true;
+	}
+
+	@Override
+	protected boolean handleGalleryMediaItemClick(@NonNull MapActivity mapActivity,
+	                                              @NonNull MediaItem mediaItem) {
+		if (mediaItem.getOrigin() != MediaOrigin.MAPILLARY || !(mediaItem instanceof MediaItem.Remote remote)) {
+			return false;
+		}
+		mapActivity.getContextMenu().close();
+
+		LatLon location = null;
+		var metadata = remote.getMetadata();
+		if (metadata.getLatitude() != null && metadata.getLongitude() != null) {
+			location = new LatLon(metadata.getLatitude(), metadata.getLongitude());
+		}
+
+		MapillaryImageDialog.show(
+				mapActivity, metadata.getKey(),
+				remote.getDownloadUri(), remote.getSourceUri(),
+				location, metadata.getCameraAngle(),
+				app.getString(R.string.mapillary), null, true
+		);
+		return true;
 	}
 
 	@Override

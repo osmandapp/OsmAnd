@@ -11,19 +11,19 @@ import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.gallery.GalleryItem
 import net.osmand.plus.gallery.MediaProvider
 import net.osmand.plus.mapcontextmenu.gallery.holders.GalleryMediaHolder
-import net.osmand.plus.mapcontextmenu.gallery.holders.ImageHolderType
+import net.osmand.plus.mapcontextmenu.gallery.holders.MediaHolderType
 import net.osmand.plus.mapcontextmenu.gallery.holders.MediaCountHolder
 import net.osmand.plus.mapcontextmenu.gallery.holders.ActionViewHolder
-import net.osmand.plus.mapcontextmenu.gallery.holders.NoImagesHolder
+import net.osmand.plus.mapcontextmenu.gallery.holders.NoMediaHolder
 import net.osmand.plus.mapcontextmenu.gallery.holders.NoInternetHolder
 import net.osmand.plus.utils.UiUtilities
-import net.osmand.shared.media.domain.MediaOrigin
 
 class GalleryGridAdapter(
 	private val mapActivity: MapActivity,
 	private val listener: GalleryListener,
+	private val mediaLoadStateProvider: GalleryMediaLoadStateProvider,
 	private val viewWidth: Int?,
-	private val isOnlinePhotos: Boolean,
+	private val config: GalleryGridConfig = GalleryGridConfig(),
 	private val nightMode: Boolean
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -38,25 +38,27 @@ class GalleryGridAdapter(
 
 	fun setItems(newItems: List<GalleryItem>) {
 		items.clear()
-		if (isOnlinePhotos) {
-			items.addAll(newItems)
-		} else {
-			val limitedItems = mutableListOf<GalleryItem>()
-			var addedMapillaryCards = 0
-
-			for (item in newItems) {
-				if (item is GalleryItem.Media && item.mediaItem.origin == MediaOrigin.MAPILLARY) {
-					if (addedMapillaryCards < 5) {
-						limitedItems.add(item)
-						addedMapillaryCards++
-					}
-				} else {
-					limitedItems.add(item)
-				}
-			}
-			items.addAll(limitedItems)
-		}
+		items.addAll(applyMediaItemsLimit(newItems))
 		notifyDataSetChanged()
+	}
+
+	private fun applyMediaItemsLimit(newItems: List<GalleryItem>): List<GalleryItem> {
+		val limit = config.mediaItemsLimit ?: return newItems
+
+		val limitedItems = mutableListOf<GalleryItem>()
+		var limitedMediaItemsCount = 0
+
+		for (item in newItems) {
+			if (item is GalleryItem.Media && config.mediaItemLimitPredicate(item.mediaItem)) {
+				if (limitedMediaItemsCount < limit) {
+					limitedItems.add(item)
+					limitedMediaItemsCount++
+				}
+			} else {
+				limitedItems.add(item)
+			}
+		}
+		return limitedItems
 	}
 
 	fun getItems(): List<GalleryItem> = items
@@ -73,7 +75,10 @@ class GalleryGridAdapter(
 			}
 			NO_MEDIA_TYPE -> {
 				val itemView = inflate(R.layout.no_image_card, parent)
-				NoImagesHolder(itemView, app)
+				NoMediaHolder(
+					itemView,
+					app
+				)
 			}
 			NO_INTERNET_TYPE -> {
 				val itemView = inflate(R.layout.no_internet_card, parent)
@@ -93,17 +98,20 @@ class GalleryGridAdapter(
 		when {
 			holder is GalleryMediaHolder && item is GalleryItem.Media -> {
 				val type = when {
-					resizeBySpanCount -> ImageHolderType.SPAN_RESIZABLE
-					position == 0 -> ImageHolderType.MAIN
-					else -> ImageHolderType.STANDARD
+					resizeBySpanCount -> MediaHolderType.SPAN_RESIZABLE
+					position == 0 -> MediaHolderType.MAIN
+					else -> MediaHolderType.STANDARD
 				}
-				holder.bindView(mapActivity, listener, item, type, viewWidth, mediaProvider, nightMode)
+				holder.bindView(
+					mapActivity, listener, item, type, viewWidth,
+					mediaProvider, mediaLoadStateProvider, nightMode
+				)
 			}
 			holder is ActionViewHolder && item is GalleryItem.Action -> {
 				holder.bindView(nightMode, mapActivity, item)
 			}
-			holder is NoImagesHolder -> {
-				holder.bindView(nightMode, mapActivity, isOnlinePhotos)
+			holder is NoMediaHolder && item is GalleryItem.NoMedia -> {
+				holder.bindView(nightMode, item)
 			}
 			holder is NoInternetHolder && item is GalleryItem.NoInternet -> {
 				holder.bindView(nightMode, listener, loadingImages)

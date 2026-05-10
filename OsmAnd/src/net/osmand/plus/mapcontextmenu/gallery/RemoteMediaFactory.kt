@@ -3,7 +3,7 @@ package net.osmand.plus.mapcontextmenu.gallery
 import net.osmand.shared.media.domain.MediaDetails
 import net.osmand.shared.media.domain.MediaItem
 import net.osmand.shared.media.domain.MediaOrigin
-import net.osmand.shared.media.domain.MediaResource
+import net.osmand.shared.media.domain.MediaPreviewUris
 import net.osmand.shared.media.domain.MediaType
 import net.osmand.shared.media.domain.RemoteMetadata
 import net.osmand.shared.wiki.WikiImage
@@ -27,41 +27,41 @@ object RemoteMediaFactory {
 	/**
 	 * Creates a regular remote media item from OsmAnd server JSON.
 	 *
-	 * This follows the legacy ImageCard behavior:
-	 * - thumbnailUri is generated from imageHiresUrl with a small width;
-	 * - previewUri is generated from imageHiresUrl with gallery width;
-	 * - fullUri uses gallery-sized imageHiresUrl when available and falls back to imageUrl.
+	 * Expected JSON fields:
+	 * - url: source/page URI related to the media;
+	 * - imageUrl: direct media URI used as the base image;
+	 * - imageHiresUrl: optional high-resolution image URI used to derive preview variants.
 	 *
-	 * Do not use this method for OSM "image" tag items that previously used UrlImageCard,
-	 * because UrlImageCard intentionally used safer preview/full URLs.
+	 * This method is intended for regular remote image objects returned by OsmAnd services.
+	 * OSM "image" tag objects should use fromUrlImageJson(), because they may point to
+	 * arbitrary external services and require safer preview/fullscreen URI handling.
 	 */
 	@JvmStatic
 	fun fromJson(
 		imageObject: JSONObject,
 		origin: MediaOrigin = MediaOrigin.UNKNOWN
 	): MediaItem.Remote? {
-		val imageUrl = imageObject.optStringOrNull("imageUrl")
+		val mediaUri = imageObject.optStringOrNull("imageUrl") ?: return null
 		val imageHiresUrl = imageObject.optStringOrNull("imageHiresUrl")
-		val sourceUrl = imageUrl ?: return null
-
+		val sourceUri = imageObject.optStringOrNull("url")
 		val key = imageObject.optStringOrNull("key")
-		val viewUrl = imageObject.optStringOrNull("url").orEmpty()
-		val galleryFullSizeUrl = createGalleryFullSizeUrl(imageHiresUrl)
+		val galleryFullSizeUri = createGalleryFullSizeUri(imageHiresUrl)
 
 		return MediaItem.Remote(
-			id = key ?: imageUrl,
-			sourceUrl = sourceUrl,
+			id = key ?: mediaUri,
+			sourceUri = sourceUri,
+			mediaUri = mediaUri,
 			title = imageObject.optStringOrNull("title").orEmpty(),
 			type = MediaType.PHOTO,
 			origin = origin,
-			resource = MediaResource(
-				thumbnailUri = createThumbnailUrl(imageHiresUrl) ?: imageUrl,
-				previewUri = galleryFullSizeUrl ?: imageUrl,
-				fullUri = galleryFullSizeUrl ?: imageUrl
+			previewUris = MediaPreviewUris(
+				thumbnailUri = createThumbnailUri(imageHiresUrl) ?: mediaUri,
+				standardSizeUri = mediaUri,
+				fullSizeUri = galleryFullSizeUri ?: mediaUri
 			),
-			details = MediaDetails(
-				viewUrl = viewUrl
-			),
+			details = null,
+			externalUri = null,
+			downloadUri = imageHiresUrl ?: mediaUri,
 			metadata = createRemoteMetadata(imageObject)
 		)
 	}
@@ -70,72 +70,81 @@ object RemoteMediaFactory {
 	fun fromWikiImage(wikiImage: WikiImage): MediaItem.Remote {
 		val metadata = wikiImage.metadata
 		val imageHiresUrl = wikiImage.imageHiResUrl
+		val mediaUri = wikiImage.imageStubUrl
 
 		return MediaItem.Remote(
 			id = wikiImage.wikiMediaTag,
-			sourceUrl = wikiImage.imageStubUrl,
+			sourceUri = mediaUri,
+			mediaUri = mediaUri,
 			title = wikiImage.imageName,
 			type = MediaType.PHOTO,
 			origin = MediaOrigin.WIKIPEDIA,
-			resource = MediaResource(
-				thumbnailUri = createThumbnailUrl(imageHiresUrl),
-				previewUri = wikiImage.imageStubUrl,
-				fullUri = createGalleryFullSizeUrl(imageHiresUrl) ?: imageHiresUrl
+			previewUris = MediaPreviewUris(
+				thumbnailUri = createThumbnailUri(imageHiresUrl),
+				standardSizeUri = mediaUri,
+				fullSizeUri = createGalleryFullSizeUri(imageHiresUrl) ?: imageHiresUrl
 			),
+			externalUri = wikiImage.getUrlWithCommonAttributions(),
+			downloadUri = imageHiresUrl.takeIf { it.isNotBlank() } ?: mediaUri,
 			details = MediaDetails(
 				descriptions = metadata.descriptions.toMap(),
-				author = metadata.author ?: "",
-				date = metadata.date ?: "",
-				license = metadata.license ?: "",
-				viewUrl = wikiImage.getUrlWithCommonAttributions()
+				author = metadata.author,
+				date = metadata.date,
+				license = metadata.license
 			)
 		)
 	}
 
+	/**
+	 * Creates a remote media item from an OSM "image" tag JSON object.
+	 *
+	 * OSM image tags may point to arbitrary external services, so generated thumbnail
+	 * or hi-res preview URIs are not assumed to be safe. The regular imageUrl is used
+	 * for both standard and full-size loading, while externalUri is resolved separately
+	 * for opening the media outside the app.
+	 */
 	@JvmStatic
 	fun fromUrlImageJson(imageObject: JSONObject): MediaItem.Remote? {
-		val imageUrl = imageObject.optStringOrNull("imageUrl") ?: return null
-		val viewUrl = resolveBrowserUrl(imageObject).orEmpty()
+		val mediaUri = imageObject.optStringOrNull("imageUrl") ?: return null
 		val key = imageObject.optStringOrNull("key")
+		val sourceUri = imageObject.optStringOrNull("url")
+		val imageHiresUrl = imageObject.optStringOrNull("imageHiresUrl")
 
 		return MediaItem.Remote(
-			id = key ?: viewUrl.takeIf { it.isNotBlank() } ?: imageUrl,
-			sourceUrl = imageUrl,
+			id = key ?: sourceUri?.takeIf { it.isNotBlank() } ?: mediaUri,
+			sourceUri = sourceUri,
+			mediaUri = mediaUri,
 			title = imageObject.optStringOrNull("title").orEmpty(),
 			type = MediaType.PHOTO,
 			origin = MediaOrigin.UNKNOWN,
-			resource = MediaResource(
+			previewUris = MediaPreviewUris(
 				/*
-				 * Thumbnail is `null` due to the nature of the OSM "image" tag.
-				 * Since the tag can contain any URL pointing to any external service, generating a reliable
-				 * thumbnail format (a highly compressed low-resolution image) is not feasible.
-				 * In such cases, the best approach is to directly load the full-size image instead.
+				 * Thumbnail is null because an OSM "image" tag can point to an
+				 * arbitrary external service where reliable thumbnail generation
+				 * is not available.
 				 */
 				thumbnailUri = null,
 
-				previewUri = imageUrl,
-
 				/*
-				 * URL for displaying the image in the gallery viewer.
-				 * Instead of using the "hires" image URL (if available), it uses a lower-quality
-				 * "image" URL in this case to avoid potential crashes.
-				 * Some high-resolution images may be too large to be properly rendered on a canvas bitmap.
-				 * To prevent crashes, this implementation uses URL with lower-quality image.
+				 * Use the direct media URI for preview/fullscreen display.
+				 * This avoids loading potentially very large hi-res resources
+				 * into bitmap rendering.
 				 */
-				fullUri = imageUrl
+				standardSizeUri = mediaUri,
+				fullSizeUri = mediaUri
 			),
-			details = MediaDetails(
-				viewUrl = viewUrl
-			),
+			details = null,
+			externalUri = imageHiresUrl ?: sourceUri,
+			downloadUri = imageHiresUrl ?: mediaUri,
 			metadata = createRemoteMetadata(imageObject)
 		)
 	}
 
-	private fun createThumbnailUrl(imageHiresUrl: String?): String? {
+	private fun createThumbnailUri(imageHiresUrl: String?): String? {
 		return imageHiresUrl?.takeIf { it.isNotBlank() }?.let { "$it?width=$THUMBNAIL_WIDTH" }
 	}
 
-	private fun createGalleryFullSizeUrl(imageHiresUrl: String?): String? {
+	private fun createGalleryFullSizeUri(imageHiresUrl: String?): String? {
 		return imageHiresUrl?.takeIf { it.isNotBlank() }?.let { "$it?width=$GALLERY_FULL_SIZE_WIDTH" }
 	}
 
@@ -143,23 +152,16 @@ object RemoteMediaFactory {
 		if (timestamp.isNullOrBlank()) {
 			return null
 		}
+
+		timestamp.toLongOrNull()?.let {
+			return Date(it)
+		}
+
 		return try {
 			DATE_FORMAT.get()?.parse(timestamp)
 		} catch (e: ParseException) {
-			timestamp.toLongOrNull()?.let { Date(it) }
+			null
 		}
-	}
-
-	/**
-	 * Returns a suitable URL for opening in a browser.
-	 *
-	 * This may be a high-resolution image URL (if available) or the URL stored in the OSM "image" tag.
-	 * The link can either point directly to an image file or lead to a webpage hosting the image
-	 * on an external service.
-	 */
-	private fun resolveBrowserUrl(imageObject: JSONObject): String? {
-		val hiresUrl = imageObject.optStringOrNull("imageHiresUrl")
-		return hiresUrl ?: imageObject.optStringOrNull("url")
 	}
 
 	private fun JSONObject.optStringOrNull(name: String): String? {
@@ -181,9 +183,9 @@ object RemoteMediaFactory {
 	/**
 	 * Parses remote metadata used for media-specific behavior.
 	 *
-	 * Legacy ImageCard also parsed topIcon/buttonIcon/buttonText/button colors, but these fields
-	 * describe old card UI configuration rather than media data. They are intentionally not mapped
-	 * to MediaItem. Known source icons are represented by MediaOrigin.
+	 * UI styling fields from server responses, such as topIcon/buttonIcon/button colors,
+	 * are intentionally not mapped here because MediaItem should only contain media data.
+	 * Known source icons are represented by MediaOrigin.
 	 */
 	private fun createRemoteMetadata(imageObject: JSONObject): RemoteMetadata {
 		return RemoteMetadata(

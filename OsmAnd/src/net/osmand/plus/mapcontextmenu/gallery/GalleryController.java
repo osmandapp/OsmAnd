@@ -11,17 +11,23 @@ import net.osmand.plus.gallery.GalleryItem;
 import net.osmand.plus.gallery.MediaProvider;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.shared.media.domain.MediaItem;
+import net.osmand.shared.media.domain.MediaType;
 import net.osmand.util.Algorithms;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-public class GalleryController implements IDialogController {
+public class GalleryController implements IDialogController, GalleryMediaLoadStateProvider {
 
 	public static final String PROCESS_ID = "gallery_context_controller";
 
 	private GalleryItemsHolder currentGalleryItemsHolder;
 
 	private final MediaProvider mediaProvider;
+	private final Set<String> failedMediaIds = new HashSet<>();
 
 	public GalleryController(@NonNull OsmandApplication app) {
 		mediaProvider = new MediaProvider(app);
@@ -42,7 +48,8 @@ public class GalleryController implements IDialogController {
 	}
 
 	public void clearHolder() {
-		this.currentGalleryItemsHolder = null;
+		currentGalleryItemsHolder = null;
+		failedMediaIds.clear();
 	}
 
 	public boolean isCurrentHolderEquals(@NonNull LatLon latLon, @NonNull Map<String, String> params) {
@@ -51,7 +58,17 @@ public class GalleryController implements IDialogController {
 				&& Algorithms.objectEquals(currentGalleryItemsHolder.getParams(), params);
 	}
 
-	public int getMediaItemIndexById(@NonNull String id) {
+	@Override
+	public void markMediaLoadFailed(@NonNull MediaItem mediaItem) {
+		failedMediaIds.add(mediaItem.getId());
+	}
+
+	@Override
+	public boolean isMediaLoadFailed(@NonNull MediaItem mediaItem) {
+		return failedMediaIds.contains(mediaItem.getId());
+	}
+
+	public int getPhotoItemIndexById(@NonNull String id) {
 		List<GalleryItem.Media> mediaItems = getOnlinePhotoItems();
 		for (int i = 0; i < mediaItems.size(); i++) {
 			MediaItem mediaItem = mediaItems.get(i).getMediaItem();
@@ -67,12 +84,16 @@ public class GalleryController implements IDialogController {
 		List<GalleryItem.Media> galleryItems = new ArrayList<>();
 		if (currentGalleryItemsHolder != null) {
 			for (GalleryItem item : currentGalleryItemsHolder.getOrderedGalleryItems()) {
-				if (item instanceof GalleryItem.Media media) {
+				if (item instanceof GalleryItem.Media media && isPhoto(media.getMediaItem())) {
 					galleryItems.add(media);
 				}
 			}
 		}
 		return galleryItems;
+	}
+
+	private boolean isPhoto(@NonNull MediaItem mediaItem) {
+		return mediaItem.getType() == MediaType.PHOTO;
 	}
 
 	public static int getSettingsSpanCount(@NonNull MapActivity mapActivity) {

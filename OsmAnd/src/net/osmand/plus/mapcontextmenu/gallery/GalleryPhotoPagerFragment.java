@@ -48,8 +48,9 @@ import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
 import net.osmand.plus.wikipedia.WikiAlgorithms;
-import net.osmand.shared.media.MediaUrlResolver;
+import net.osmand.shared.media.MediaUriResolver;
 import net.osmand.shared.media.domain.MediaItem;
+import net.osmand.shared.wiki.WikiMetadata;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -179,16 +180,23 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 	private void updateImageDescriptionRow(@Nullable MediaItem mediaItem) {
 		if (mediaItem == null) return;
 		var details = mediaItem.getDetails();
-		setDescription(details.getDescription(app.getLanguage()));
 
-		dateView.setVisibility(Algorithms.isEmpty(details.getDate()) ? View.INVISIBLE : View.VISIBLE);
-		authorView.setVisibility(Algorithms.isEmpty(details.getAuthor()) ? View.INVISIBLE : View.VISIBLE);
-		licenseView.setVisibility(Algorithms.isEmpty(details.getLicense()) ? View.INVISIBLE : View.VISIBLE);
-		setMetaData(details.getAuthor(), details.getDate(), details.getLicense());
+		if (details != null) {
+			dateView.setVisibility(View.VISIBLE);
+			authorView.setVisibility(View.VISIBLE);
+			licenseView.setVisibility(View.VISIBLE);
+
+			setDescription(details.getDescription(app.getLanguage()));
+			setMetaData(details.getAuthor(), details.getDate(), details.getLicense());
+		} else {
+			setDescription(null);
+			dateView.setVisibility(View.INVISIBLE);
+			authorView.setVisibility(View.INVISIBLE);
+			licenseView.setVisibility(View.INVISIBLE);
+		}
 
 		int iconId = getDrawableId(mediaItem.getOrigin().getIconName());
 		Drawable icon = iconId != 0 ? getIcon(iconId) : null;
-
 		sourceView.setImageDrawable(icon);
 		AndroidUiHelper.updateVisibility(sourceView, icon != null);
 	}
@@ -320,19 +328,20 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 	}
 
 	private void shareImage() {
-		callActivity(activity -> {
-			MediaItem mediaItem = getSelectedMediaItem();
-			String shareUrl = MediaUrlResolver.getShareUrl(mediaItem);
-			if (Algorithms.isEmpty(shareUrl)) return;
+		String shareUri = MediaUriResolver.getShareUri(getSelectedMediaItem());
+		if (!Algorithms.isEmpty(shareUri)) {
+			callActivity(activity -> shareImageUri(activity, shareUri));
+		}
+	}
 
-			Intent sendIntent = new Intent();
-			sendIntent.setAction(Intent.ACTION_SEND);
-			sendIntent.setType("text/plain");
-			sendIntent.putExtra(Intent.EXTRA_TEXT, shareUrl);
-			Intent chooserIntent = Intent.createChooser(sendIntent, getString(R.string.shared_string_share));
+	private void shareImageUri(@NonNull FragmentActivity activity, @NonNull String shareUri) {
+		Intent sendIntent = new Intent();
+		sendIntent.setAction(Intent.ACTION_SEND);
+		sendIntent.setType("text/plain");
+		sendIntent.putExtra(Intent.EXTRA_TEXT, shareUri);
+		Intent chooserIntent = Intent.createChooser(sendIntent, getString(R.string.shared_string_share));
 
-			AndroidUtils.startActivityIfSafe(activity, chooserIntent);
-		});
+		AndroidUtils.startActivityIfSafe(activity, chooserIntent);
 	}
 
 	public void showContextWidgetMenu(@NonNull View view) {
@@ -351,13 +360,13 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 				}))
 				.create());
 
-		String browserUrl = MediaUrlResolver.getBrowserUrl(mediaItem);
-		if (!Algorithms.isEmpty(browserUrl)) {
+		String browserUri = MediaUriResolver.getBrowserUri(mediaItem);
+		if (!Algorithms.isEmpty(browserUri)) {
 			items.add(new PopUpMenuItem.Builder(app)
 					.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_external_link, iconColor))
 					.setTitleId(R.string.open_in_browser)
 					.setOnClickListener(item -> callActivity(activity -> {
-						AndroidUtils.openUrl(activity, browserUrl, nightMode);
+						AndroidUtils.openUrl(activity, browserUri, nightMode);
 					}))
 					.create());
 		}
@@ -366,9 +375,9 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 				.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_gsave_dark, iconColor))
 				.setTitleId(R.string.shared_string_download)
 				.setOnClickListener(item -> {
-					String downloadUrl = MediaUrlResolver.getDownloadUrl(mediaItem);
-					if (!Algorithms.isEmpty(downloadUrl)) {
-						downloadImage(downloadUrl);
+					String downloadUri = MediaUriResolver.getDownloadUri(mediaItem);
+					if (!Algorithms.isEmpty(downloadUri)) {
+						downloadImage(downloadUri);
 					}
 				})
 				.create());

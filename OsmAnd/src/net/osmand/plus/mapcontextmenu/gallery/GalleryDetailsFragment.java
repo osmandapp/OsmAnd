@@ -29,7 +29,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.DistanceByTapFragment;
 import net.osmand.plus.wikipedia.WikiAlgorithms;
-import net.osmand.shared.media.MediaUrlResolver;
+import net.osmand.shared.media.MediaUriResolver;
 import net.osmand.shared.media.domain.MediaDetails;
 import net.osmand.shared.media.domain.MediaItem;
 import net.osmand.shared.media.domain.MediaOrigin;
@@ -95,9 +95,7 @@ public class GalleryDetailsFragment extends BaseFullScreenFragment {
 	@Nullable
 	private GalleryItem.Media getSelectedGalleryItem() {
 		List<Media> items = controller.getOnlinePhotoItems();
-		return selectedPosition >= 0
-				&& selectedPosition < items.size()
-				? items.get(selectedPosition) : null;
+		return selectedPosition >= 0 && selectedPosition < items.size() ? items.get(selectedPosition) : null;
 	}
 
 	private void updateContent(@NonNull View view) {
@@ -110,17 +108,17 @@ public class GalleryDetailsFragment extends BaseFullScreenFragment {
 		MediaItem mediaItem = media.getMediaItem();
 		MediaDetails details = mediaItem.getDetails();
 
-		String description = details.getDescription(app.getLanguage());
+		String description = details != null ? details.getDescription(app.getLanguage()) : null;
 		if (!Algorithms.isEmpty(description)) {
 			buildDescriptionItem(container, description);
 		}
 
-		String author = details.getAuthor();
+		String author = details != null ? details.getAuthor() : null;
 		if (!Algorithms.isEmpty(author)) {
 			buildItem(container, getString(R.string.shared_string_author), author, R.drawable.ic_action_user, true, false);
 		}
 
-		String date = details.getDate();
+		String date = details != null ? details.getDate() : null;
 		String formattedDate = WikiAlgorithms.formatWikiDate(date);
 		if (Algorithms.isEmpty(formattedDate)) {
 			formattedDate = date;
@@ -137,12 +135,12 @@ public class GalleryDetailsFragment extends BaseFullScreenFragment {
 			buildItem(container, getString(R.string.shared_string_source), source, iconId, false, false);
 		}
 
-		String license = details.getLicense();
+		String license = details != null ? details.getLicense() : null;
 		if (!Algorithms.isEmpty(license)) {
 			buildItem(container, getString(R.string.shared_string_license), license, R.drawable.ic_action_copyright, true, false);
 		}
 
-		String link = MediaUrlResolver.getDisplayLink(mediaItem);
+		String link = MediaUriResolver.getDetailsLink(mediaItem);
 		if (!Algorithms.isEmpty(link)) {
 			buildItem(container, getString(R.string.shared_string_link), link, R.drawable.ic_action_link, true, true);
 		}

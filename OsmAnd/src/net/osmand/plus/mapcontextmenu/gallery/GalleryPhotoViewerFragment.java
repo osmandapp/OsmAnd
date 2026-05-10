@@ -137,7 +137,7 @@ public class GalleryPhotoViewerFragment extends BaseFullScreenFragment {
 	}
 
 	private void downloadFullImage(@NonNull MediaItem mediaItem, boolean fallbackToPreview) {
-		loadingImage = controller.getMediaProvider().loadFull(mediaItem, new ImageLoaderCallback() {
+		loadingImage = controller.getMediaProvider().loadFullSizeImage(mediaItem, new ImageLoaderCallback() {
 			@Override
 			public void onStart(@Nullable Bitmap bitmap) {
 			}
@@ -157,14 +157,14 @@ public class GalleryPhotoViewerFragment extends BaseFullScreenFragment {
 				if (fallbackToPreview) {
 					tryLoadCachePreviewImage(mediaItem);
 				} else {
-					LOG.error("Unable to download full image: " + mediaItem.getResource().getFullUri());
+					LOG.error("Unable to download full image: " + mediaItem.getPreviewUris().getFullSizeUri());
 				}
 			}
 		});
 	}
 
 	private void tryLoadCachePreviewImage(@NonNull MediaItem mediaItem) {
-		loadingImage = controller.getMediaProvider().loadPreview(mediaItem, new ImageLoaderCallback() {
+		loadingImage = controller.getMediaProvider().loadStandardSizeImage(mediaItem, new ImageLoaderCallback() {
 			@Override
 			public void onStart(@Nullable Bitmap bitmap) {
 			}

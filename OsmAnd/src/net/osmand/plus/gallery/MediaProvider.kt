@@ -8,13 +8,15 @@ import net.osmand.shared.util.ImageRequestListener
 import net.osmand.shared.util.LoadingImage
 import net.osmand.shared.util.NetworkImageLoader
 
-// TODO: remove or update docs, implement loading for other types
 /**
- * Temporary provider that extracts existing online image loading logic from UI components
- * and adapts it to the new MediaItem model.
+ * Provides UI-facing operations for MediaItem.
  *
- * At this stage it supports image loading through the normalized MediaResource contract.
- * Local/video/audio loading can be extended later without changing UI consumers.
+ * MediaItem stores media metadata and resolved URIs, while MediaProvider decides
+ * how to load, open, share or otherwise consume each item depending on its type
+ * and source.
+ *
+ * Currently it supports remote photo loading through NetworkImageLoader.
+ * Local media and audio/video handling can be added behind the same API later.
  */
 class MediaProvider(context: Context) {
 
@@ -30,18 +32,18 @@ class MediaProvider(context: Context) {
 	}
 
 	@JvmOverloads
-	fun loadPreview(
+	fun loadStandardSizeImage(
 		item: MediaItem,
-		callback: ImageLoaderCallback,
+		callback: ImageLoaderCallback? = null,
 		requestListener: ImageRequestListener? = null
 	): LoadingImage? {
-		return load(resolveUri(item, ImageResolution.PREVIEW), callback, requestListener)
+		return load(resolveUri(item, ImageResolution.STANDARD), callback, requestListener)
 	}
 
 	@JvmOverloads
-	fun loadFull(
+	fun loadFullSizeImage(
 		item: MediaItem,
-		callback: ImageLoaderCallback,
+		callback: ImageLoaderCallback? = null,
 		requestListener: ImageRequestListener? = null
 	): LoadingImage? {
 		return load(resolveUri(item, ImageResolution.FULL), callback, requestListener)
@@ -59,7 +61,7 @@ class MediaProvider(context: Context) {
 		return imageLoader.loadImage(uri, callback, requestListener, handlePlaceholder = false)
 	}
 
-	private enum class ImageResolution { THUMBNAIL, PREVIEW, FULL }
+	private enum class ImageResolution { THUMBNAIL, STANDARD, FULL }
 
 	private fun resolveUri(item: MediaItem, resolution: ImageResolution): String? {
 		if (item.type != MediaType.PHOTO) {
@@ -67,9 +69,9 @@ class MediaProvider(context: Context) {
 		}
 
 		return when (resolution) {
-			ImageResolution.THUMBNAIL -> item.resource.thumbnailUri
-			ImageResolution.PREVIEW -> item.resource.previewUri
-			ImageResolution.FULL -> item.resource.fullUri
+			ImageResolution.THUMBNAIL -> item.previewUris.thumbnailUri
+			ImageResolution.STANDARD -> item.previewUris.standardSizeUri
+			ImageResolution.FULL -> item.previewUris.fullSizeUri
 		}.takeIf { !it.isNullOrEmpty() }
 	}
 }

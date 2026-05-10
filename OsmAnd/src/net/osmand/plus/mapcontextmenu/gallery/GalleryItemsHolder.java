@@ -67,7 +67,11 @@ public class GalleryItemsHolder {
 	}
 
 	public void addMediaItem(@NonNull GalleryMediaGroup group, @NonNull MediaItem mediaItem) {
-		addGalleryItem(group, mediaItem.getId(), new GalleryItem.Media(mediaItem, false, false));
+		addMediaItem(group, mediaItem, false);
+	}
+
+	public void addMediaItem(@NonNull GalleryMediaGroup group, @NonNull MediaItem mediaItem, boolean showLoadingProgress) {
+		addGalleryItem(group, mediaItem.getId(), new GalleryItem.Media(mediaItem, showLoadingProgress));
 	}
 
 	public void addGalleryItem(@NonNull GalleryMediaGroup group, @NonNull String key, @NonNull GalleryItem item) {

@@ -7,7 +7,7 @@ enum class MediaOrigin(
 	OSM(iconName = "ic_osm"),
 	WIKIPEDIA(titleKey = "wikimedia", iconName = "ic_logo_wikimedia"),
 	MAPILLARY(iconName = "ic_logo_mapillary"),
-	UNKNOWN;
+	UNKNOWN
 }
 
 enum class MediaType {
@@ -27,21 +27,29 @@ enum class MediaType {
 }
 
 /**
- * Resolved URIs used by UI/providers to display or consume media.
- * For local media these URIs may all point to the same source URI.
+ * Resolved media URIs used by UI/providers to display or consume media.
+ *
+ * thumbnailUri is used for small previews, standardSizeUri for regular gallery cells,
+ * and fullSizeUri for fullscreen/gallery viewer loading. For local media these may
+ * all point to the same mediaUri.
  */
-data class MediaResource(
+data class MediaPreviewUris(
 	val thumbnailUri: String?,
-	val previewUri: String?,
-	val fullUri: String?
+	val standardSizeUri: String?,
+	val fullSizeUri: String?
 )
 
+/**
+ * Optional descriptive metadata associated with media.
+ *
+ * This object contains source-independent details that can be shown by UI,
+ * such as localized descriptions, author, date and license.
+ */
 data class MediaDetails(
 	val descriptions: Map<String, String>? = null,
 	val author: String? = null,
 	val date: String? = null,
-	val license: String? = null,
-	val viewUrl: String? = null
+	val license: String? = null
 ) {
 
 	fun getDescription(preferredLanguage: String?): String? {
@@ -87,23 +95,51 @@ sealed class MediaItem {
 	abstract val title: String
 	abstract val type: MediaType
 	abstract val origin: MediaOrigin
-	abstract val sourceUri: String
-	abstract val resource: MediaResource
-	abstract val details: MediaDetails
+
+	/**
+	 * Source/page URI associated with this media item.
+	 *
+	 * For remote media this may point to a web page, attribution page,
+	 * external service, or another source location related to the media.
+	 * Local media usually does not have a separate source URI; use mediaUri
+	 * when the media resource itself should be opened or displayed.
+	 */
+	abstract val sourceUri: String?
+
+	/**
+	 * Direct URI of the media resource itself.
+	 *
+	 * This is the base URI used to load or display the media content.
+	 * For local media it may be a file/content URI or an app-relative path.
+	 */
+	abstract val mediaUri: String
+
+	/**
+	 * Resolved media variants used by UI/providers for loading.
+	 */
+	abstract val previewUris: MediaPreviewUris
+
+	/**
+	 * Optional descriptive metadata.
+	 *
+	 * Null means there are no additional details for this media item.
+	 */
+	abstract val details: MediaDetails?
 
 	data class Internal(
 		val relativePath: String,
 		override val title: String,
 		override val type: MediaType,
 		override val origin: MediaOrigin = MediaOrigin.UNKNOWN,
-		override val details: MediaDetails = MediaDetails()
+		override val details: MediaDetails? = null
 	) : MediaItem() {
 		override val id: String = relativePath
-		override val sourceUri: String = relativePath
-		override val resource: MediaResource = MediaResource(
+		override val sourceUri: String? = null
+		override val mediaUri: String = relativePath
+		override val previewUris: MediaPreviewUris = MediaPreviewUris(
 			thumbnailUri = relativePath,
-			previewUri = relativePath,
-			fullUri = relativePath
+			standardSizeUri = relativePath,
+			fullSizeUri = relativePath
 		)
 	}
 
@@ -112,27 +148,29 @@ sealed class MediaItem {
 		override val title: String,
 		override val type: MediaType,
 		override val origin: MediaOrigin = MediaOrigin.UNKNOWN,
-		override val details: MediaDetails = MediaDetails()
+		override val details: MediaDetails? = null
 	) : MediaItem() {
 		override val id: String = uri
-		override val sourceUri: String = uri
-		override val resource: MediaResource = MediaResource(
+		override val sourceUri: String? = null
+		override val mediaUri: String = uri
+		override val previewUris: MediaPreviewUris = MediaPreviewUris(
 			thumbnailUri = uri,
-			previewUri = uri,
-			fullUri = uri
+			standardSizeUri = uri,
+			fullSizeUri = uri
 		)
 	}
 
 	data class Remote(
 		override val id: String,
-		val sourceUrl: String,
+		override val sourceUri: String?,
+		override val mediaUri: String,
 		override val title: String,
 		override val type: MediaType,
 		override val origin: MediaOrigin = MediaOrigin.UNKNOWN,
-		override val resource: MediaResource,
-		override val details: MediaDetails = MediaDetails(),
+		override val previewUris: MediaPreviewUris,
+		override val details: MediaDetails?,
+		val externalUri: String?,
+		val downloadUri: String?,
 		val metadata: RemoteMetadata = RemoteMetadata()
-	) : MediaItem() {
-		override val sourceUri: String = sourceUrl
-	}
+	) : MediaItem()
 }
