@@ -1532,8 +1532,8 @@
     <string name="shared_string_sunset">Aɣelluy n yiṭij</string>
     <string name="shared_string_sunrise">Alluy n yiṭṭij</string>
     <string name="shared_string_mode">Askar</string>
-    <string name="add_page">Rnu asebtar</string>
-    <string name="page_number">Asebtar %1$s</string>
+    <string name="add_page">Rnu asebter</string>
+    <string name="page_number">Asebter %1$s</string>
     <string name="rendering_value_category_name">Taggayt</string>
     <string name="rendering_value_all_name">Akk</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
