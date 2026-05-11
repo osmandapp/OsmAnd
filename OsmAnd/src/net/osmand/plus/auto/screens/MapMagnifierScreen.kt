@@ -11,6 +11,7 @@ import androidx.car.app.model.Template
 import androidx.car.app.navigation.model.MapWithContentTemplate
 import androidx.lifecycle.LifecycleOwner
 import net.osmand.plus.R
+import net.osmand.plus.views.corenative.NativeCoreContext
 import java.util.Locale
 import kotlin.math.roundToInt
 
@@ -36,7 +37,7 @@ class MapMagnifierScreen(
 			} else {
 				settings.AA_MAP_DENSITY.resetToDefault()
 			}
-			refreshMapScale()
+			app.osmandMap.mapView.applyDisplayScaleSettings()
 		}
 	}
 
@@ -78,7 +79,7 @@ class MapMagnifierScreen(
 				val value = magnifierValues[index].toFloat() / 100
 				val settings = app.settings
 				settings.AA_MAP_DENSITY.set(value)
-				refreshMapScale()
+				app.osmandMap.mapView.applyDisplayScaleSettings()
 				selectedIndex = index
 			}
 		}
@@ -110,11 +111,5 @@ class MapMagnifierScreen(
 			.setContentTemplate(listTemplate)
 			.setActionStrip(actionStrip)
 			.build()
-	}
-
-	private fun refreshMapScale() {
-		val mapView = app.osmandMap.mapView
-		mapView.setMapDensity(mapView.getSettingsMapDensity())
-		app.osmandMap.refreshMap(true)
 	}
 }

@@ -52,6 +52,10 @@ public abstract class AbstractDevice<T extends AbstractSensor> {
 		default void onDeviceConnectionFailed(@NonNull AbstractDevice<?> device) {
 
 		}
+
+		default void onActualStateChanged(){
+
+		}
 	}
 
 	public AbstractDevice(@NonNull String deviceId) {
@@ -169,6 +173,12 @@ public abstract class AbstractDevice<T extends AbstractSensor> {
 	public void fireDeviceConnectionFailed() {
 		for (DeviceListener listener : listeners) {
 			listener.onDeviceConnectionFailed(this);
+		}
+	}
+
+	public void fireDeviceActualStateChanged() {
+		for (DeviceListener listener : listeners) {
+			listener.onActualStateChanged();
 		}
 	}
 

@@ -3,6 +3,8 @@ package net.osmand.plus.mapcontextmenu.other;
 import static android.text.format.DateUtils.HOUR_IN_MILLIS;
 
 import static net.osmand.plus.charts.ChartModeBottomSheet.getAvailableDefaultYTypes;
+import static net.osmand.plus.charts.GPXDataSetAxisType.TIME;
+import static net.osmand.plus.charts.GPXDataSetAxisType.TIME_OF_DAY;
 
 import android.content.Context;
 import android.graphics.Matrix;
@@ -28,6 +30,7 @@ import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.PointI;
 import net.osmand.data.LatLon;
@@ -65,6 +68,8 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import org.apache.commons.logging.Log;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -73,6 +78,8 @@ import java.util.List;
 import java.util.Map;
 
 public class TrackDetailsMenu {
+
+	private static final Log log = PlatformUtil.getLog(TrackDetailsMenu.class);
 
 	public static final int MAX_DISTANCE_LOCATION_PROJECTION = 20; // in meters
 
@@ -175,8 +182,7 @@ public class TrackDetailsMenu {
 					gpxItem.locationOnMap = GpxUtils.createProjectionPoint(points.first, points.second, latLon);
 
 					float pos;
-					if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME ||
-							gpxItem.chartAxisType == GPXDataSetAxisType.TIME_OF_DAY) {
+					if (gpxItem.chartAxisType == TIME || gpxItem.chartAxisType == TIME_OF_DAY) {
 						pos = gpxItem.locationOnMap.getTime() / 1000f;
 					} else {
 						double totalDistance = 0;
@@ -337,32 +343,40 @@ public class TrackDetailsMenu {
 	}
 
 	@Nullable
-	private LatLon getLocationAtPos(LineChart chart, float pos) {
+	private LatLon getLocationAtPos(@NonNull LineChart chart, float pos) {
 		GpxDisplayItem gpxItem = getGpxItem();
 		TrkSegment segment = getTrackSegment(chart);
 		boolean joinSegments = selectedGpxFile != null && selectedGpxFile.isJoinSegments();
-		return getLocationAtPos(chart, gpxItem, segment, pos, joinSegments);
+
+		WptPt point = getPointAtChartPos(chart, gpxItem, segment, pos, joinSegments, true);
+		return point == null ? null : new LatLon(point.getLat(), point.getLon());
 	}
 
 	@Nullable
-	public static LatLon getLocationAtPos(LineChart chart, GpxDisplayItem gpxItem, TrkSegment segment,
-	                                      float pos, boolean joinSegments) {
-		WptPt point = null;
-		LineData lineData = chart.getLineData();
-		List<ILineDataSet> ds = lineData != null ? lineData.getDataSets() : null;
-		if (!Algorithms.isEmpty(ds) && gpxItem != null && segment != null) {
-			OrderedLineDataSet dataSet = (OrderedLineDataSet) ds.get(0);
+	public static LatLon getLocationAtPos(@Nullable LineChart chart, @Nullable GpxDisplayItem gpxItem,
+			@Nullable TrkSegment segment, float pos, boolean joinSegments) {
+		WptPt point = getPointAtChartPos(chart, gpxItem, segment, pos, joinSegments, true);
+		return point == null ? null : new LatLon(point.getLat(), point.getLon());
+	}
+
+	@Nullable
+	public static WptPt getPointAtChartPos(@Nullable LineChart chart, @Nullable GpxDisplayItem gpxItem,
+			@Nullable TrkSegment segment, float pos, boolean joinSegments, boolean preciseLocation) {
+		LineData lineData = chart != null ? chart.getLineData() : null;
+		List<ILineDataSet> dataSets = lineData != null ? lineData.getDataSets() : null;
+
+		if (!Algorithms.isEmpty(dataSets) && gpxItem != null && segment != null) {
 			GpxFile gpxFile = gpxItem.group.getGpxFile();
-			if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME ||
-					gpxItem.chartAxisType == GPXDataSetAxisType.TIME_OF_DAY) {
+			if (gpxItem.chartAxisType == TIME || gpxItem.chartAxisType == TIME_OF_DAY) {
 				float time = pos * 1000;
-				point = GpxUtils.getSegmentPointByTime(segment, gpxFile, time, true, joinSegments);
+				return GpxUtils.getSegmentPointByTime(segment, gpxFile, time, preciseLocation, joinSegments);
 			} else {
+				OrderedLineDataSet dataSet = (OrderedLineDataSet) dataSets.get(0);
 				float distance = pos * dataSet.getDivX();
-				point = GpxUtils.getSegmentPointByDistance(segment, gpxFile, distance, true, joinSegments);
+				return GpxUtils.getSegmentPointByDistance(segment, gpxFile, distance, preciseLocation, joinSegments);
 			}
 		}
-		return point == null ? null : new LatLon(point.getLat(), point.getLon());
+		return null;
 	}
 
 	private QuadRect getRect(LineChart chart, float startPos, float endPos) {
@@ -375,7 +389,7 @@ public class TrackDetailsMenu {
 			TrkSegment segment = getTrackSegment(chart);
 			if (segment != null) {
 				OrderedLineDataSet dataSet = (OrderedLineDataSet) ds.get(0);
-				if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME || gpxItem.chartAxisType == GPXDataSetAxisType.TIME_OF_DAY) {
+				if (gpxItem.chartAxisType == TIME || gpxItem.chartAxisType == TIME_OF_DAY) {
 					float startTime = startPos * 1000;
 					float endTime = endPos * 1000;
 					for (WptPt p : segment.getPoints()) {
@@ -727,10 +741,10 @@ public class TrackDetailsMenu {
 		ImageView xAxisIcon = parentView.findViewById(R.id.x_axis_icon);
 		TextView xAxisTitle = parentView.findViewById(R.id.x_axis_title);
 		View xAxisArrow = parentView.findViewById(R.id.x_axis_arrow);
-		if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME) {
+		if (gpxItem.chartAxisType == TIME) {
 			xAxisIcon.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_time));
 			xAxisTitle.setText(app.getString(R.string.shared_string_time));
-		} else if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME_OF_DAY) {
+		} else if (gpxItem.chartAxisType == TIME_OF_DAY) {
 			xAxisIcon.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_time_span));
 			xAxisTitle.setText(app.getString(R.string.time_of_day));
 		} else {

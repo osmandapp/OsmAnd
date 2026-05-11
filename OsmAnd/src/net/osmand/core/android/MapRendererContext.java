@@ -35,6 +35,7 @@ import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.NativeUtilities;
+import net.osmand.plus.views.OsmandMap;
 import net.osmand.render.RenderingClass;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -191,7 +192,8 @@ public class MapRendererContext {
 	}
 
 	protected int getRasterTileSize() {
-		float mapDensity = app.getSettings().MAP_DENSITY.get();
+		OsmandMap osmandMap = app.getOsmandMap();
+		float mapDensity = osmandMap != null ? osmandMap.getMapDensity() : app.getSettings().MAP_DENSITY.get();
 		float mapDensityAligned = mapDensity > 2.0f ? 2.0f : Math.min(mapDensity, 1.0f);
 		return (int) (getReferenceTileSize() * mapDensityAligned);
 	}

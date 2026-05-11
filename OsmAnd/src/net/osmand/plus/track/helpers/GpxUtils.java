@@ -254,7 +254,7 @@ public class GpxUtils {
 								currPoint.getLat(), currPoint.getLon());
 					}
 					if (passedSegmentsPointsDistance + currPoint.getDistance() >= distanceToPoint
-							|| Math.abs(passedDistance - distanceToPoint) < 0.1) {
+							|| passedDistance >= distanceToPoint) {
 						return preciseLocation && prevPoint != null
 								&& currPoint.getDistance() + passedSegmentsPointsDistance >= distanceToPoint
 								? getIntermediatePointByDistance(passedDistance, distanceToPoint, currPoint, prevPoint)
