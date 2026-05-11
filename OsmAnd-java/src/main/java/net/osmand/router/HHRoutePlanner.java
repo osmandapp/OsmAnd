@@ -985,7 +985,6 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			System.out.println("  " + hctx.rctx.calculationProgress.getInfo(null));
 		}
 		if (frs != null) {
-			boolean isStartEnd = true;
 			TLongSet set = new TLongHashSet();
 			for (FinalRouteSegment o : frs.all) {
 				// duplicates are possible as alternative routes
@@ -1032,9 +1031,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 					pnt.setDistanceToEnd(reverse,
 							pnt.index == PNT_SHORT_ROUTE_START_END ? 0 : hctx.distanceToEnd(reverse, pnt));
 					pnt.setDetailedParentRt(reverse, o);
-					pnt.isStartEnd = isStartEnd;
 					pnts.put(pnt.index, pnt);
-					isStartEnd = false;
 				}
 			}
 
@@ -1224,7 +1221,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			}
 			if (ASSERT_AND_CORRECT_DIST_SMALLER && hctx.config.HEURISTIC_COEFFICIENT > 0
 					&& smallestSegmentCost(hctx, point, nextPoint) - connected.dist >  1) {
-				if (point.isStartEnd || nextPoint.isStartEnd) {
+				if (touchesStartOrEnd(point, nextPoint, reverse)) {
 					incorrectCostAtStartEnd = true;
 				}
 				double smallestSegmentCost = smallestSegmentCost(hctx, point, nextPoint);
@@ -1242,6 +1239,16 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			if ((exCost == 0 && !nextPoint.rt(reverse).rtVisited) || cost < exCost) {
 				addPointToQueue(hctx, queue, reverse, nextPoint, point, connected.dist, cost);
 			}
+		}
+	}
+
+	private boolean touchesStartOrEnd(T point, T nextPoint, boolean reverse) {
+		if (reverse) {
+			return (point.rtRev != null && point.rtRev.rtRouteToPoint == null)
+					|| (nextPoint.rtPos != null && nextPoint.rtPos.rtRouteToPoint == null);
+		} else {
+			return (point.rtPos != null && point.rtPos.rtRouteToPoint == null)
+					|| (nextPoint.rtRev != null && nextPoint.rtRev.rtRouteToPoint == null);
 		}
 	}
 

@@ -629,8 +629,7 @@ public class HHRouteDataStructure {
 		public int fileId;
 		public short mapId;
 		public boolean incomplete;
-		public boolean isStartEnd;
-		
+
 		public long roadId;
 		public short start;
 		public short end;
