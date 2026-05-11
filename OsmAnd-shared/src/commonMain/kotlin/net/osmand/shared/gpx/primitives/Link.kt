@@ -7,13 +7,13 @@ class Link : GpxExtensions {
 
     constructor()
 
-    constructor(href: String?) {
-        this.href = href
-    }
+    constructor(href: String?): this(href, null)
 
-    constructor(href: String?, text: String?, type: String? = null) {
-        this.href = href;
-        this.text = text;
+    constructor(href: String?, text: String?) : this(href, text, null)
+
+    constructor(href: String?, text: String?, type: String?) {
+        this.href = href
+        this.text = text
         this.type = type
     }
 
