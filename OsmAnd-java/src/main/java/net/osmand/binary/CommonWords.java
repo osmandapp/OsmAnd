@@ -23,7 +23,7 @@ public class CommonWords {
 		frequentlyUsedWordsDictionary.put(string, frequentlyUsedWordsDictionary.size());
 	}
 
-	private static boolean isNumber2Letters(String name) {
+	public static boolean isNumber2Letters(String name) {
 		return Character.isDigit(name.charAt(0)) && letters(name) < 2;
 	}
 
