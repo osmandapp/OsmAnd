@@ -1,9 +1,5 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
-import static net.osmand.plus.myplaces.tracks.tasks.OpenGpxDetailsTask.getDefaultTypes;
-import static net.osmand.plus.myplaces.tracks.tasks.OpenGpxDetailsTask.getSavedSupportedTypes;
-import static net.osmand.plus.myplaces.tracks.tasks.OpenGpxDetailsTask.limit;
-import static net.osmand.shared.gpx.GpxParameter.JOIN_SEGMENTS;
 import static net.osmand.plus.charts.ChartUtils.CHART_LABEL_COUNT;
 import static net.osmand.plus.charts.GPXDataSetType.ALTITUDE;
 import static net.osmand.plus.charts.GPXDataSetType.SLOPE;
@@ -13,7 +9,11 @@ import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_ALTITU
 import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
 import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_NO_ALTITUDE;
 import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_SPEED;
+import static net.osmand.plus.myplaces.tracks.tasks.OpenGpxDetailsTask.getDefaultTypes;
+import static net.osmand.plus.myplaces.tracks.tasks.OpenGpxDetailsTask.getSavedSupportedTypes;
+import static net.osmand.plus.myplaces.tracks.tasks.OpenGpxDetailsTask.limit;
 import static net.osmand.plus.track.helpers.GpxDisplayGroup.getTrackDisplayGroup;
+import static net.osmand.shared.gpx.GpxParameter.JOIN_SEGMENTS;
 
 import android.content.Context;
 import android.graphics.Matrix;
@@ -41,32 +41,20 @@ import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
-import net.osmand.plus.charts.ElevationChartAppearance;
-import net.osmand.plus.charts.GpxMarkerView;
+import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.charts.*;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
+import net.osmand.plus.myplaces.tracks.GPXTabItemType;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
-import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxTrackAnalysis;
-import net.osmand.shared.gpx.primitives.Track;
-import net.osmand.shared.gpx.primitives.TrkSegment;
-import net.osmand.shared.gpx.primitives.WptPt;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.charts.ChartModeBottomSheet;
-import net.osmand.plus.charts.ChartUtils;
-import net.osmand.plus.charts.GPXDataSetAxisType;
-import net.osmand.plus.charts.GPXDataSetType;
-import net.osmand.plus.charts.OrderedLineDataSet;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.myplaces.tracks.GPXTabItemType;
-import net.osmand.plus.charts.GraphModeListener;
-import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxUiHelper;
-import net.osmand.plus.track.helpers.GpxUtils;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.TrackDisplayGroup;
 import net.osmand.plus.track.helpers.TrackDisplayHelper;
@@ -80,19 +68,23 @@ import net.osmand.plus.views.controls.PagerSlidingTabStrip.CustomTabProvider;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager.ViewAtPositionInterface;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.primitives.Track;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvider, ViewAtPositionInterface {
+
+	private static final Log log = PlatformUtil.getLog(GPXItemPagerAdapter.class);
 
 	private static final int[] SINGLE_TAB_LAYOUT_ID = {R.layout.center_button_container};
 	private static final int[] DOUBLE_TABS_LAYOUT_IDS = {R.layout.left_button_container, R.layout.right_button_container};
@@ -271,22 +263,9 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 
 	@Nullable
 	private WptPt getPoint(LineChart chart, float pos) {
-		LineData lineData = chart.getLineData();
-		List<ILineDataSet> dataSets = lineData != null ? lineData.getDataSets() : null;
 		TrkSegment segment = getTrackSegment(chart);
-		if (!Algorithms.isEmpty(dataSets) && segment != null) {
-			GpxFile gpxFile = gpxItem.group.getGpxFile();
-			boolean joinSegments = displayHelper.isJoinSegments();
-			if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME) {
-				float time = pos * 1000;
-				return GpxUtils.getSegmentPointByTime(segment, gpxFile, time, false, joinSegments);
-			} else {
-				OrderedLineDataSet dataSet = (OrderedLineDataSet) dataSets.get(0);
-				float distance = dataSet.getDivX() * pos;
-				return GpxUtils.getSegmentPointByDistance(segment, gpxFile, distance, false, joinSegments);
-			}
-		}
-		return null;
+		boolean joinSegments = displayHelper.isJoinSegments();
+		return TrackDetailsMenu.getPointAtChartPos(chart, gpxItem, segment, pos, joinSegments, false);
 	}
 
 	@Override

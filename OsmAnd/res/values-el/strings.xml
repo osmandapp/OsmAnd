@@ -5934,4 +5934,5 @@
     <string name="open_from_short">Από</string>
     <string name="astronomy_map">Αστρονομικός χάρτης</string>
     <string name="astro_designations">Ονομασίες</string>
+    <string name="obd_simulation_device">Συσκευή προσομοίωσης</string>
 </resources>

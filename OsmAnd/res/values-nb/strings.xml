@@ -6056,4 +6056,6 @@
     <string name="ais_address_nmea_server_description">Definer IP-adresse for NMEA-datakilden (hvis TCP brukes)</string>
     <string name="open_from_short">Fra</string>
     <string name="astro_designations">Betegnelser</string>
+    <string name="obd_simulation_device">Simuleringsenhet</string>
+    <string name="astronomy_map">Astronomikart</string>
 </resources>

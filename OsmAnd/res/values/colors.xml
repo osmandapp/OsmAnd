@@ -621,4 +621,14 @@
 	<color name="astro_visibility_fill_0_15">#FB5934</color>
 	<color name="astro_visibility_fill_lt_0">#8E24AA</color>
 
+
+	<!-- Free version banner -->
+	<color name="banner_downloads_remaining_light">#ff8f00</color>
+	<color name="banner_downloads_remaining_dark">#D28521</color>
+	<color name="banner_downloads_used_light">#DEDEE3</color>
+	<color name="banner_downloads_used_dark">#34343C</color>
+	<color name="sale_badge_light">#E82A3B</color>
+	<color name="sale_badge_dark">#E82A3B</color>
+	<color name="banner_feature_bg_light">#EDF1F7</color>
+	<color name="banner_feature_bg_dark">#2E3238</color>
 </resources>

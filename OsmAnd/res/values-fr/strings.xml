@@ -4179,7 +4179,7 @@
     <string name="add_page">Ajouter une page</string>
     <string name="no_widgets_descr">Ajouter un ou plusieurs widgets depuis la liste des widgets disponibles.</string>
     <string name="snackbar_page_removed">La page « %1$s » a été supprimée.</string>
-    <string name="no_widgets_here_yet">Pas encore de widget ici</string>
+    <string name="no_widgets_here_yet">Aucun widget pour l\'instant</string>
     <string name="on_with_params">%1$s de %2$s</string>
     <string name="shared_string_symbol">Symbole</string>
     <string name="available_widgets">Widgets disponibles</string>
@@ -5293,8 +5293,8 @@
     <string name="add_widget_above">Ajouter un widget au-dessus</string>
     <string name="add_widget_below">Ajouter un widget en dessous</string>
     <string name="add_widget_to_the_right">Ajouter un widget à droite</string>
-    <string name="delete_widget_description">Ce widget sera supprimé. Vous pourrez le restaurer plus tard dans Configurer l’écran.</string>
-    <string name="delete_widget">Supprimer le widget ?</string>
+    <string name="delete_widget_description">Ce widget va être retiré. Vous pourrez l\'ajouter à nouveau depuis le menu \"Configurer l\'écran\".</string>
+    <string name="delete_widget">Retirer le widget ?</string>
     <string name="battery_saving_mode">Mode économie d\'énergie</string>
     <string name="graph_axis">Axes du graphique</string>
     <string name="y_axis_description">Sélectionnez jusqu\'à deux options d\'ordonnées.</string>

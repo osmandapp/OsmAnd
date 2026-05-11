@@ -160,10 +160,6 @@ public abstract class SettingsItem {
 		// non implemented
 	}
 
-	public void prepareForUpload() {
-		// non implemented
-	}
-
 	void readFromJson(@NonNull JSONObject json) throws JSONException {
 		pluginId = json.has("pluginId") ? json.getString("pluginId") : null;
 		if (json.has("name")) {
