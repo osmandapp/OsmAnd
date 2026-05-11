@@ -5415,8 +5415,8 @@
     <string name="help_article_map_tracks_name">Trilhos</string>
     <string name="help_article_map_routes_name">Rotas</string>
     <string name="rendering_attr_alpineHiking_name">Grau de dificuldade de trilhos pedestres</string>
-    <string name="delete_widget_description">Este widget será eliminado. Pode restaurá-lo mais tarde no ecrã Configurar.</string>
-    <string name="delete_widget">Eliminar o widget?</string>
+    <string name="delete_widget_description">Este widget será removido. Pode restaurá-lo mais tarde no ecrã Configurar.</string>
+    <string name="delete_widget">Remover o widget?</string>
     <string name="app_mode_suv">Todo-terreno (SUV)</string>
     <string name="graph_axis">Eixo do gráfico</string>
     <string name="y_axis_description">Selecione até duas opções para o eixo Y.</string>

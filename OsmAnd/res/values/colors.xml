@@ -629,4 +629,6 @@
 	<color name="banner_downloads_used_dark">#34343C</color>
 	<color name="sale_badge_light">#E82A3B</color>
 	<color name="sale_badge_dark">#E82A3B</color>
+	<color name="banner_feature_bg_light">#EDF1F7</color>
+	<color name="banner_feature_bg_dark">#2E3238</color>
 </resources>
