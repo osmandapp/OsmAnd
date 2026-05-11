@@ -915,7 +915,7 @@ public class SearchUICore {
 			}
 		});
 		for (SearchCoreAPI api : lst) {
-			long start = System.currentTimeMillis();
+			long start = debugMode ? System.currentTimeMillis() : 0;
 			if (matcher.isCancelled()) {
 				break;
 			}
