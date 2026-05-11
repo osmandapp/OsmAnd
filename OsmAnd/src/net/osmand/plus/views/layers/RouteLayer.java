@@ -516,16 +516,14 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 				OsmandApplication app = getApplication();
 				boolean useMapCenter = useMapCenter();
 				if (mapRenderer != null) {
-					if (useMapCenter) {
+					LatLon lastMarkerLocation = app.getOsmandMap().getMapLayers().getLocationLayer().getLastMarkerLocation();
+					if (lastMarkerLocation != null) {
+						currentLocation.setLatitude(lastMarkerLocation.getLatitude());
+						currentLocation.setLongitude(lastMarkerLocation.getLongitude());
+					} else if (useMapCenter) {
 						PointI target31 = mapRenderer.getTarget();
 						currentLocation.setLatitude(MapUtils.get31LatitudeY(target31.getY()));
 						currentLocation.setLongitude(MapUtils.get31LongitudeX(target31.getX()));
-					} else {
-						LatLon lastMarkerLocation = app.getOsmandMap().getMapLayers().getLocationLayer().getLastMarkerLocation();
-						if (lastMarkerLocation != null) {
-							currentLocation.setLatitude(lastMarkerLocation.getLatitude());
-							currentLocation.setLongitude(lastMarkerLocation.getLongitude());
-						}
 					}
 				} else if (useMapCenter) {
 					currentLocation.setLatitude(tileBox.getLatitude());
@@ -540,7 +538,11 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 					float calcbearing = !MapUtils.areLatLonEqual(previousRouteLocation, currentRouteLocation) ? previousRouteLocation.bearingTo(currentRouteLocation) :
 							previousRouteLocation.bearingTo(currentLocation);
 					lastProjection.setBearing(MapUtils.normalizeDegrees360(calcbearing));
-					if (currentLocation.distanceTo(lastProjection) > helper.getMaxAllowedProjectDist(currentLocation)) {
+
+					double distanceToProjection = MapUtils.getDistance(currentLocation.getLatitude(), currentLocation.getLongitude(),
+							lastProjection.getLatitude(), lastProjection.getLongitude());
+
+					if (distanceToProjection > helper.getMaxAllowedProjectDist(currentLocation)) {
 						lastProjection = null;
 					} else if (app.getSettings().SNAP_TO_ROAD.get() && currentRoute + 1 < locations.size()) {
 						// Not needed here as this code for preview turns
