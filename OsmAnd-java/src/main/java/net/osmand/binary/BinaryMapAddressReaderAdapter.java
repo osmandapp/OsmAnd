@@ -769,7 +769,7 @@ public class BinaryMapAddressReaderAdapter {
 						} else if (stag != 0) {
 							skipUnknownField(st);
 						}
-					} while (stag != 0);
+					} while (stag != 0 && !req.isCancelled());
 
 					codedIS.popLimit(oldLim);
 					if (req.isCancelled()) {
