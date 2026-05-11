@@ -450,7 +450,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			if (Build.VERSION.SDK_INT >= 26) {
 				view.setDefaultFocusHighlightEnabled(false);
 			}
-			setComplexZoom(getZoom(), getSettingsMapDensity());
+			applyDisplayScaleSettings();
 			refreshMap(true);
 		}
 	}
@@ -730,6 +730,14 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			setZoomAndAnimationImpl(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
 			setRotateImpl(rotate);
 			refreshMap();
+		}
+	}
+
+	public void applyDisplayScaleSettings() {
+		setComplexZoom(getZoom(), getSettingsMapDensity());
+		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
+		if (mapContext != null) {
+			mapContext.updateMapSettings(true);
 		}
 	}
 
