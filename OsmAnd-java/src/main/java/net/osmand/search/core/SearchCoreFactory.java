@@ -494,6 +494,14 @@ public class SearchCoreFactory {
 			}
 		}
 		
+		boolean hasNonNumericLeftUnknownSearchWord(SearchResult res) {
+			for (String leftUnknownSearchWord : res.filterUnknownSearchWord(null)) {
+				if (!CommonWords.isNumber2Letters(leftUnknownSearchWord)) {
+					return true;
+				}
+			}
+			return false;
+		}
 
 		private void searchByName(final SearchPhrase phrase, final SearchResultMatcher resultMatcher)
 				throws IOException {
@@ -697,7 +705,7 @@ public class SearchCoreFactory {
 								boolean match = matchAddressName(phrase, res, cityResult, true);
 								if (match) {
 									newParentSearchResult = cityResult;
-								} else {
+								} else if(hasNonNumericLeftUnknownSearchWord(res)) { // speed up
 									QuadRect bbox = SearchPhrase.calculateBbox(1000, res.location);
 									List<City>  cacheResArray = townCitiesCache.queryBoundaries(bbox);
 									for (City boundary : cacheResArray) {
