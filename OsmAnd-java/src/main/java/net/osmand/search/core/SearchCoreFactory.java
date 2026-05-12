@@ -1813,7 +1813,7 @@ public class SearchCoreFactory {
 						res.object = b;
 						res.file = file;
 						res.priority = priority;
-						res.priorityDistance = 0;
+						res.priorityDistance = 1;
 						res.firstUnknownWordMatches = startMatch.matches(res.localeName);
 						// phrase.countUnknownWordsMatchMainResult(res); // same as above
 						res.relatedObject = s;
