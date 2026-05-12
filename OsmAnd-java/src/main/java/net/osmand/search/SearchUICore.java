@@ -900,6 +900,7 @@ public class SearchUICore {
 	}
 
 	void searchInternal(final SearchPhrase phrase, SearchResultMatcher matcher) {
+		long totalTime = 0;
 		BinaryMapIndexReaderStats.SearchStat stat = phrase.getSettings().getStat();
 		if (stat != null) {
 			LOG.info("Total Stat API time=" + stat.totalTime);
@@ -932,7 +933,9 @@ public class SearchUICore {
 				}
 				matcher.apiSearchFinished(api, phrase);
 				if (debugMode) {
-					LOG.info("API search done <" + phrase + "> API=<" + api + ">, time=" + (System.currentTimeMillis() - start));
+					long deltaTime = (System.currentTimeMillis() - start);
+					totalTime += deltaTime;
+					LOG.info("API search done <" + phrase + "> API=<" + api + ">, time=" + deltaTime);
 				}
 			} catch (Throwable e) {
 				e.printStackTrace();
@@ -942,6 +945,7 @@ public class SearchUICore {
 		
 		if (stat != null) {
 			LOG.info(stat.toDetailedString());
+			LOG.info("API search total <" + phrase + ", time=" + totalTime);
 		}
 	}
 
