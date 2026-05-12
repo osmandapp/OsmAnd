@@ -2,9 +2,14 @@ package net.osmand.search;
 
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.GeocodingUtilities;
+import net.osmand.binary.GeocodingUtilities.GeocodingResult;
 import net.osmand.data.Amenity;
+import net.osmand.data.Building;
+import net.osmand.data.Street;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.router.RoutingContext;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.*;
@@ -36,7 +41,10 @@ public class SearchUICoreTest {
 
 	private static final String SEARCH_RESOURCES_PATH = "src/test/resources/search/";
 	private static boolean TEST_EXTRA_RESULTS = true;
-	
+
+	private RoutingContext geoCtx = null;
+	private final GeocodingUtilities geoUtils = new GeocodingUtilities();
+
 	private final File testFile;
 
     public SearchUICoreTest(String name, File file) {
@@ -104,7 +112,6 @@ public class SearchUICoreTest {
 			}
 		}
 		JSONObject settingsJson = sourceJson.getJSONObject("settings");
-		BinaryMapIndexReader reader = null;
 		boolean useData = settingsJson.optBoolean("useData", true);
 		JSONArray filesJson = sourceJson.optJSONArray("files");
 		List<BinaryMapIndexReader> readers = new ArrayList<>();
@@ -207,6 +214,8 @@ public class SearchUICoreTest {
 					expected = expected.substring(0, expected.indexOf('[')).trim();
 				}
 				// String present = result.toString();
+				boolean testGeocoding = expected.startsWith("@");
+				expected = expected.replaceFirst("^@", "");
 				String present = res == null ? ("#MISSING " + (i + 1)) : formatResult(simpleTest, res, phrase);
 				if (!Algorithms.stringsEqual(expected, present)) {
 					System.out.printf("Phrase: %s%n", phrase);
@@ -225,12 +234,38 @@ public class SearchUICoreTest {
 					}
 				}
 				Assert.assertEquals(expected, present);
+				if (testGeocoding) {
+					testReverseGeocoding(res, readers.get(0));
+				}
 			}
 		}
 
 		obfFile.delete();
 	}
-	
+
+	private void testReverseGeocoding(SearchResult searchResult, BinaryMapIndexReader reader) throws IOException {
+		Assert.assertNotNull(searchResult);
+		Assert.assertNotNull(searchResult.location);
+		if (geoCtx == null) {
+			geoCtx = GeocodingUtilities.buildDefaultContextForPOI(reader);
+		}
+
+		List<GeocodingResult> geoResult = geoUtils.reverseGeocodingSearch(
+				geoCtx, searchResult.location.getLatitude(), searchResult.location.getLongitude(), false);
+
+		geoResult = geoUtils.sortGeocodingResults(Collections.singletonList(reader), geoResult);
+
+		Assert.assertFalse(geoResult.isEmpty());
+
+		if (searchResult.object instanceof Building b1 && searchResult.relatedObject instanceof Street s1) {
+			Assert.assertEquals(s1, geoResult.get(0).street);
+			Assert.assertEquals(b1, geoResult.get(0).building);
+			Assert.assertEquals(s1.getCity(), geoResult.get(0).city);
+		} else {
+			Assert.fail("Unsupported searchResult object / relatedObject");
+		}
+	}
+
 	private void unzipObf(File obfGzFile, File obfFile) throws IOException {
 		GZIPInputStream gzin = new GZIPInputStream(new FileInputStream(obfGzFile));
 		FileOutputStream fous = new FileOutputStream(obfFile);
