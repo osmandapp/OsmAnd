@@ -61,7 +61,6 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BooleanSupplier;
-import java.util.function.Function;
 
 public class SearchUICore {
 	
@@ -698,7 +697,7 @@ public class SearchUICore {
 		if (loc != null) {
 			searchSettings = searchSettings.setOriginalLocation(loc);
 		}
-		final SearchPhrase searchPhrase = this.phrase.generateNewPhrase(text, searchSettings);
+		final SearchPhrase searchPhrase = this.phrase.generateNewPhrase(text, resetSearchSettingsForNewRequest(searchSettings));
 		final SearchResultMatcher rm = new SearchResultMatcher(null, searchPhrase, requestNumber.get(), requestNumber, totalLimit);
 		searchInternal(searchPhrase, rm);
 		SearchResultCollection resultCollection = new SearchResultCollection(searchPhrase);
@@ -722,7 +721,7 @@ public class SearchUICore {
 			this.searchSettings = overrideSettings;
 		}
 		final int request = requestNumber.incrementAndGet();
-		final SearchPhrase phrase = this.phrase.generateNewPhrase(text, searchSettings);
+		final SearchPhrase phrase = this.phrase.generateNewPhrase(text, resetSearchSettingsForNewRequest(searchSettings));
 		phrase.setAcceptPrivate(this.phrase.isAcceptPrivate());
 		this.phrase = phrase;
 		if (debugMode) {
@@ -836,6 +835,15 @@ public class SearchUICore {
 		});
 	}
 
+	private SearchSettings resetSearchSettingsForNewRequest(SearchSettings settings) {
+		if (settings.getStat() == null || settings.getStat().totalTime == 0) {
+			return settings;
+		}
+		settings = new SearchSettings(settings);
+		settings.setStat(new BinaryMapIndexReaderStats.SearchStat());
+		return settings;
+	}
+
 
 	public boolean isSearchMoreAvailable(SearchPhrase phrase) {
 		for (SearchCoreAPI api : apis) {
@@ -892,6 +900,11 @@ public class SearchUICore {
 	}
 
 	void searchInternal(final SearchPhrase phrase, SearchResultMatcher matcher) {
+		long totalTime = 0;
+		BinaryMapIndexReaderStats.SearchStat stat = phrase.getSettings().getStat();
+		if (stat != null) {
+			LOG.info("Total Stat API time=" + stat.totalTime);
+		}
 		preparePhrase(phrase);
 		ArrayList<SearchCoreAPI> lst = new ArrayList<>(apis);
 		Collections.sort(lst, new Comparator<SearchCoreAPI>() {
@@ -903,6 +916,7 @@ public class SearchUICore {
 			}
 		});
 		for (SearchCoreAPI api : lst) {
+			long start = debugMode ? System.currentTimeMillis() : 0;
 			if (matcher.isCancelled()) {
 				break;
 			}
@@ -919,17 +933,19 @@ public class SearchUICore {
 				}
 				matcher.apiSearchFinished(api, phrase);
 				if (debugMode) {
-					LOG.info("API search done <" + phrase + "> API=<" + api + ">");
+					long deltaTime = (System.currentTimeMillis() - start);
+					totalTime += deltaTime;
+					LOG.info("API search done <" + phrase + "> API=<" + api + ">, time=" + deltaTime);
 				}
 			} catch (Throwable e) {
 				e.printStackTrace();
 				LOG.error(e.getMessage(), e);
 			}
 		}
-
-		BinaryMapIndexReaderStats.SearchStat stat = phrase.getSettings().getStat();
+		
 		if (stat != null) {
 			LOG.info(stat.toDetailedString());
+			LOG.info("API search total <" + phrase + ", time=" + totalTime);
 		}
 	}
 
