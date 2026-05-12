@@ -24,7 +24,7 @@ public class CommonWords {
 	}
 
 	public static boolean isNumber2Letters(String name) {
-		return Character.isDigit(name.charAt(0)) && letters(name) < 2;
+		return name != null && !name.isEmpty() && Character.isDigit(name.charAt(0)) && letters(name) < 2;
 	}
 
 	public static boolean isCommon(String name) {
