@@ -889,10 +889,10 @@
     <string name="poi_climbing_style">攀登风格</string>
     <string name="poi_wildlife_crossing_bat_bridge">蝙蝠桥</string>
     <string name="poi_zoo_wildlife_park">野生动物园</string>
-    <string name="poi_shelter_type_abandoned">遮蔽类型：废弃的</string>
+    <string name="poi_shelter_type_abandoned">庇护所类型：已废弃</string>
     <string name="poi_forestry_allotment">路标：林业配给</string>
     <string name="poi_content_beer">内容物：啤酒</string>
-    <string name="poi_abandoned">已被遗弃</string>
+    <string name="poi_abandoned">已废弃</string>
     <string name="poi_adit">矿道口</string>
     <string name="poi_emergency_access_point">紧急逃生通道</string>
     <string name="poi_grit_bin">消防砂箱</string>
@@ -925,7 +925,7 @@
     <string name="poi_place_allotments">社区农场</string>
     <string name="poi_wildlife_crossing">野生动物过境通道</string>
     <string name="poi_wildlife_crossing_bat_tunnel">蝙蝠隧道</string>
-    <string name="poi_abandoned_poi">被遗弃的物体</string>
+    <string name="poi_abandoned_poi">已废弃物体</string>
     <string name="poi_product_beer">产品：啤酒</string>
     <string name="poi_dairy">乳品店</string>
     <string name="poi_ship_chandler">船舶供给商</string>
