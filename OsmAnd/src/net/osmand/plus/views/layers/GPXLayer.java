@@ -39,6 +39,8 @@ import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.Sele
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.render.OsmandDashPathEffect;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
@@ -319,7 +321,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else {
 			visibleGPXFiles = new ArrayList<>(selectedGpxHelper.getSelectedGPXFiles());
 		}
-
+		logIssue24873("GPXLayer onPrepareBufferImage: count " + visibleGPXFiles.size());
+		logIssue24873("GPXLayer onPrepareBufferImage: mapActivityInvalidated " + mapActivityInvalidated);
 		boolean tmpVisibleTrackChanged = updateTmpVisibleTrack(visibleGPXFiles);
 
 		pointsCache.clear();
@@ -350,6 +353,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		if (mapRenderer != null) {
 			boolean forceUpdate = updateBitmaps() || nightModeChanged || pointsModified || tmpVisibleTrackChanged || mapRendererChanged;
 			if (mapRendererChanged) {
+				logIssue24873("GPXLayer onPrepareBufferImage: mapRendererChanged");
 				clearSelectedFilesSegments();
 			}
 			if (!visibleGPXFiles.isEmpty()) {
@@ -512,7 +516,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private void acquireTrackWidth(@NonNull String widthKey, @NonNull RenderingRulesStorage rrs,
-			@NonNull RenderingRuleSearchRequest req, @NonNull RenderingContext rc) {
+	                               @NonNull RenderingRuleSearchRequest req, @NonNull RenderingContext rc) {
 		if (!Algorithms.isEmpty(widthKey) && Algorithms.isInt(widthKey)) {
 			try {
 				int widthDp = Math.min(Integer.parseInt(widthKey), MAX_SUPPORTED_TRACK_WIDTH_DP);
@@ -1253,9 +1257,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private void drawSelectedFilesSegments(Canvas canvas, RotatedTileBox tileBox,
-			List<SelectedGpxFile> selectedGPXFiles, DrawSettings settings) {
+	                                       List<SelectedGpxFile> selectedGPXFiles, DrawSettings settings) {
 		SelectedGpxFile currentTrack = null;
 		int baseOrder = getBaseOrder();
+		logIssue24873("GPXLayer onPrepareBufferImage: drawSelectedFilesSegments " + selectedGPXFiles.size());
 		for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
 			GpxFile gpxFile = selectedGpxFile.getGpxFile();
 			KFile file = new KFile(gpxFile.getPath());
@@ -1272,6 +1277,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			baseOrder -= GpxGeometryWay.VECTOR_LINES_RESERVED;
 		}
 		if (currentTrack != null) {
+			logIssue24873("GPXLayer onPrepareBufferImage: drawSelectedFilesSegments currentTrack " + currentTrack);
+			logIssue24873("GPXLayer onPrepareBufferImage: drawSelectedFilesSegments currentTrack visible " + isGpxFileVisible(currentTrack, tileBox));
 			drawSelectedFileSegments(currentTrack, true, canvas, tileBox, settings, baseOrder);
 		}
 	}
@@ -1364,6 +1371,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				if (!oldSegments.isEmpty() && oldSegments.get(0).getRenderer() instanceof CurrentTrack track) {
 					GpxGeometryWay gpxGeometryWay = track.getGeometryWay();
 					if (gpxGeometryWay != null) {
+						log.debug("remove oldSegments");
 						geometryWay.vectorLinesCollection = gpxGeometryWay.vectorLinesCollection;
 						geometryWay.vectorLineArrowsProvider = gpxGeometryWay.vectorLineArrowsProvider;
 						geometryWay.updateCustomWidth(gpxGeometryWay.getCustomWidth());
@@ -1907,6 +1915,13 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		if (customObjectsDelegate != null) {
 			customObjectsDelegate.setCustomMapObjects(gpxFiles);
 			getApplication().getOsmandMap().refreshMap();
+		}
+	}
+
+	private void logIssue24873(@NonNull String msg) {
+		OsmandDevelopmentPlugin plugin = PluginsHelper.getActivePlugin(OsmandDevelopmentPlugin.class);
+		if (plugin != null) {
+			log.debug("Issue24873 " + msg);
 		}
 	}
 }
