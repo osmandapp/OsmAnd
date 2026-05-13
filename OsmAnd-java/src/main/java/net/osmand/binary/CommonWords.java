@@ -1595,26 +1595,26 @@ public class CommonWords {
 
 
 
-	public static void mainFilterFrequentWords(String[] args) {
-		// algorithm to find missing frequent words
-		String[] array = new String[] { 
-				// retrieved from https://taginfo.openstreetmap.org/api/4/key/values?key=name&page=1&rp=999&sortorder=desc&sortname=count 
-				"Hauptstraße",
-				"Центральная улица",
-				"Советская улица",
-				"улица Ленина",
-				"Main Street",
-				//. ....
-		};
-		
-		for (String name : array) {
-			List<String> tokens = SearchAlgorithms.splitAndNormalize(name);
-			for (String token : tokens) {
-				if (CommonWords.getCommonSearch(token) < 0) {
-					System.out.println("Missing " + token);
-				}
-			}
-		}
-	}
+//	public static void mainFilterFrequentWords(String[] args) {
+//		// algorithm to find missing frequent words
+//		String[] array = new String[] {
+//				// retrieved from https://taginfo.openstreetmap.org/api/4/key/values?key=name&page=1&rp=999&sortorder=desc&sortname=count
+//				"Hauptstraße",
+//				"Центральная улица",
+//				"Советская улица",
+//				"улица Ленина",
+//				"Main Street",
+//				//. ....
+//		};
+//
+//		for (String name : array) {
+//			List<String> tokens = SearchAlgorithms.splitAndNormalize(name);
+//			for (String token : tokens) {
+//				if (CommonWords.getCommonSearch(token) < 0) {
+//					System.out.println("Missing " + token);
+//				}
+//			}
+//		}
+//	}
 
 }
