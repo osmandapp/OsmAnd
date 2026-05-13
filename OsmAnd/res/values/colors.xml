@@ -186,6 +186,9 @@
     <color name="btn_text_on_disabled_light">#666666</color>
     <color name="btn_text_on_disabled_dark">#666666</color>
 
+	<color name="chip_bg_light">#FFFFFF</color>
+    <color name="chip_bg_dark">#1E1F20</color>
+
 	<color name="subscription_active_bg_color_light">#fff9b2</color>
 	<color name="subscription_active_bg_color_dark">#43453b</color>
 	<color name="subscription_active_div_color_light">#f3edae</color>
