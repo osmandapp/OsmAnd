@@ -157,7 +157,7 @@ public class SimulationProvider {
 
 	public static boolean isLocationForRecording(@Nullable Location location) {
 		if (location != null) {
-			return true || !(SIMULATED_PROVIDER.equals(location.getProvider())
+			return !(SIMULATED_PROVIDER.equals(location.getProvider())
 					|| SIMULATED_PROVIDER_TUNNEL.equals(location.getProvider()));
 		}
 		return true;
