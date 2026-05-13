@@ -23,7 +23,7 @@ object MediaUriResolver {
 
 	@JvmStatic
 	fun getShareUri(mediaItem: MediaItem?): String? {
-		return mediaItem?.previewUris?.fullSizeUri ?: mediaItem?.mediaUri
+		return (mediaItem as? MediaItem.Remote)?.downloadUri ?: mediaItem?.mediaUri
 	}
 
 	@JvmStatic

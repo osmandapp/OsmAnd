@@ -23,8 +23,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.gallery.controller.GalleryController;
 import net.osmand.plus.gallery.model.GalleryItem;
-import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.gallery.ui.imageview.GalleryImageView;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.shared.media.domain.MediaItem;
@@ -36,6 +36,7 @@ import org.apache.commons.logging.Log;
 import java.util.List;
 
 public class GalleryPhotoViewerFragment extends BaseFullScreenFragment {
+
 	private static final Log LOG = PlatformUtil.getLog(GalleryPhotoViewerFragment.class);
 
 	public static final String TAG = GalleryPhotoViewerFragment.class.getSimpleName();
@@ -65,9 +66,7 @@ public class GalleryPhotoViewerFragment extends BaseFullScreenFragment {
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		ViewGroup view = (ViewGroup) inflate(R.layout.gallery_photo_item, container, false);
-
 		setupImageView(view);
-
 		return view;
 	}
 
@@ -87,9 +86,7 @@ public class GalleryPhotoViewerFragment extends BaseFullScreenFragment {
 			if (photoItems.size() > position) {
 				MediaItem mediaItem = getMediaItem(photoItems.get(position));
 				if (mediaItem != null) {
-					if (loadingImage != null) {
-						loadingImage.cancel();
-					}
+					cancelLoadingImage();
 					if (!app.getSettings().isInternetConnectionAvailable()) {
 						downloadFullImage(mediaItem, true);
 					} else {
@@ -113,7 +110,7 @@ public class GalleryPhotoViewerFragment extends BaseFullScreenFragment {
 	}
 
 	private void downloadThumbnail(@NonNull MediaItem mediaItem) {
-		loadingImage = controller.getMediaProvider().loadThumbnail(mediaItem, new ImageLoaderCallback() {
+		trackLoadingImage(controller.getMediaProvider().loadThumbnail(mediaItem, new ImageLoaderCallback() {
 			@Override
 			public void onStart(@Nullable Bitmap bitmap) {
 			}
@@ -123,9 +120,7 @@ public class GalleryPhotoViewerFragment extends BaseFullScreenFragment {
 				Drawable previous = new ColorDrawable(Color.TRANSPARENT);
 				Drawable next = new BitmapDrawable(imageView.getResources(), bitmap);
 
-				AndroidUiHelper.crossFadeDrawables(imageView,
-						previous,
-						next);
+				AndroidUiHelper.crossFadeDrawables(imageView, previous, next);
 
 				downloadFullImage(mediaItem, false);
 			}
@@ -134,11 +129,11 @@ public class GalleryPhotoViewerFragment extends BaseFullScreenFragment {
 			public void onError() {
 				downloadFullImage(mediaItem, true);
 			}
-		});
+		}));
 	}
 
 	private void downloadFullImage(@NonNull MediaItem mediaItem, boolean fallbackToPreview) {
-		loadingImage = controller.getMediaProvider().loadFullSizeImage(mediaItem, new ImageLoaderCallback() {
+		trackLoadingImage(controller.getMediaProvider().loadFullSizeImage(mediaItem, new ImageLoaderCallback() {
 			@Override
 			public void onStart(@Nullable Bitmap bitmap) {
 			}
@@ -161,11 +156,11 @@ public class GalleryPhotoViewerFragment extends BaseFullScreenFragment {
 					LOG.error("Unable to download full image: " + mediaItem.getPreviewUris().getFullSizeUri());
 				}
 			}
-		});
+		}));
 	}
 
 	private void tryLoadCachePreviewImage(@NonNull MediaItem mediaItem) {
-		loadingImage = controller.getMediaProvider().loadStandardSizeImage(mediaItem, new ImageLoaderCallback() {
+		trackLoadingImage(controller.getMediaProvider().loadStandardSizeImage(mediaItem, new ImageLoaderCallback() {
 			@Override
 			public void onStart(@Nullable Bitmap bitmap) {
 			}
@@ -175,15 +170,26 @@ public class GalleryPhotoViewerFragment extends BaseFullScreenFragment {
 				Drawable previous = new ColorDrawable(Color.TRANSPARENT);
 				Drawable next = new BitmapDrawable(imageView.getResources(), bitmap);
 
-				AndroidUiHelper.crossFadeDrawables(imageView,
-						previous,
-						next);
+				AndroidUiHelper.crossFadeDrawables(imageView, previous, next);
 			}
 
 			@Override
 			public void onError() {
 			}
-		});
+		}));
+	}
+
+	private void trackLoadingImage(@Nullable LoadingImage image) {
+		if (image != null) {
+			loadingImage = image;
+		}
+	}
+
+	private void cancelLoadingImage() {
+		if (loadingImage != null) {
+			loadingImage.cancel();
+			loadingImage = null;
+		}
 	}
 
 	@Nullable
@@ -200,9 +206,7 @@ public class GalleryPhotoViewerFragment extends BaseFullScreenFragment {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		if (loadingImage != null) {
-			loadingImage.cancel();
-		}
+		cancelLoadingImage();
 	}
 
 	@Override

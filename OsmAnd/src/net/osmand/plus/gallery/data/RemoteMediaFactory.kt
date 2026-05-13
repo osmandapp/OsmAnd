@@ -18,6 +18,8 @@ object RemoteMediaFactory {
 	private const val THUMBNAIL_WIDTH = 160
 	private const val GALLERY_FULL_SIZE_WIDTH = 1280
 
+	private const val TYPE_URL_PHOTO = "url-photo"
+
 	private val DATE_FORMAT = object : ThreadLocal<SimpleDateFormat>() {
 		override fun initialValue(): SimpleDateFormat {
 			return SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US)
@@ -105,6 +107,9 @@ object RemoteMediaFactory {
 	 */
 	@JvmStatic
 	fun fromUrlImageJson(imageObject: JSONObject): MediaItem.Remote? {
+		if (!isUrlImageJson(imageObject)) {
+			return null
+		}
 		val mediaUri = imageObject.optStringOrNull("imageUrl") ?: return null
 		val key = imageObject.optStringOrNull("key")
 		val sourceUri = imageObject.optStringOrNull("url")
@@ -162,6 +167,11 @@ object RemoteMediaFactory {
 		} catch (e: ParseException) {
 			null
 		}
+	}
+
+	@JvmStatic
+	fun isUrlImageJson(imageObject: JSONObject): Boolean {
+		return TYPE_URL_PHOTO == imageObject.optStringOrNull("type")
 	}
 
 	private fun JSONObject.optStringOrNull(name: String): String? {
