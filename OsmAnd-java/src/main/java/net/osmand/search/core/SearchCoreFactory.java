@@ -1957,7 +1957,7 @@ public class SearchCoreFactory {
 		private LatLon olcPhraseLocation;
 		private ParsedOpenLocationCode cachedParsedCode;
 //		private final List<String> citySubTypes = Arrays.asList("city", "town", "village");
-		private final DecimalFormat latLonFormatter = new DecimalFormat("#.0####", new DecimalFormatSymbols(Locale.US));
+		private final DecimalFormat latLonFormatter = new DecimalFormat("0.0####", new DecimalFormatSymbols(Locale.US));
 		
 		private SearchAmenityByNameAPI amenitiesApi;
 		private final BooleanSupplier internetConnectionAvailable;
