@@ -169,6 +169,208 @@ public class CommonWords {
 	}
 	
 	static {
+		//// Added 11-May-2026 mainFilterFrequentWords
+		addFrequentlyUsed("hauptstraße");
+		addFrequentlyUsed("dorfstraße");
+		addFrequentlyUsed("bahnhofstraße");
+		addFrequentlyUsed("schulstraße");
+		addFrequentlyUsed("中正路");
+		addFrequentlyUsed("калинина");
+		addFrequentlyUsed("пушкина");
+		addFrequentlyUsed("зелёная");
+		addFrequentlyUsed("заречная");
+		addFrequentlyUsed("полевая");
+		addFrequentlyUsed("пролетарская");
+		addFrequentlyUsed("луговая");
+		addFrequentlyUsed("красноармейская");
+		addFrequentlyUsed("中山路");
+		addFrequentlyUsed("карла");
+		addFrequentlyUsed("маркса");
+		addFrequentlyUsed("чапаева");
+		addFrequentlyUsed("пионерская");
+		addFrequentlyUsed("słoneczna");
+		addFrequentlyUsed("szkolna");
+		addFrequentlyUsed("goethestraße");
+		addFrequentlyUsed("солнечная");
+		addFrequentlyUsed("kościuszki");
+		addFrequentlyUsed("długa");
+		addFrequentlyUsed("юбилейная");
+		addFrequentlyUsed("колхозная");
+		addFrequentlyUsed("principală");
+		addFrequentlyUsed("ogrodowa");
+		addFrequentlyUsed("główna");
+		addFrequentlyUsed("степная");
+		addFrequentlyUsed("железнодорожная");
+		addFrequentlyUsed("рабочая");
+		addFrequentlyUsed("заводская");
+		addFrequentlyUsed("dorpsstraat");
+		addFrequentlyUsed("савецкая");
+		addFrequentlyUsed("береговая");
+		addFrequentlyUsed("jahnstraße");
+		addFrequentlyUsed("свердлова");
+		addFrequentlyUsed("красная");
+		addFrequentlyUsed("adama");
+		addFrequentlyUsed("mickiewicza");
+		addFrequentlyUsed("чкалова");
+		addFrequentlyUsed("kerkstraat");
+		addFrequentlyUsed("фрунзе");
+		addFrequentlyUsed("свободы");
+		addFrequentlyUsed("feldstraße");
+		addFrequentlyUsed("lipowa");
+		addFrequentlyUsed("дзержинского");
+		addFrequentlyUsed("hlavná");
+		addFrequentlyUsed("мичурина");
+		addFrequentlyUsed("кооперативная");
+		addFrequentlyUsed("park");
+		addFrequentlyUsed("mihai");
+		addFrequentlyUsed("eminescu");
+		addFrequentlyUsed("wiejska");
+		addFrequentlyUsed("wiesenstraße");
+		addFrequentlyUsed("маяковского");
+		addFrequentlyUsed("лермонтова");
+		addFrequentlyUsed("дружбы");
+		addFrequentlyUsed("строителей");
+		addFrequentlyUsed("гоголя");
+		addFrequentlyUsed("коммунистическая");
+		addFrequentlyUsed("речная");
+		addFrequentlyUsed("l'église");
+		addFrequentlyUsed("mozartstraße");
+		addFrequentlyUsed("ștefan");
+		addFrequentlyUsed("cel");
+		addFrequentlyUsed("sfânt");
+		addFrequentlyUsed("rosenstraße");
+		addFrequentlyUsed("kolejowa");
+		addFrequentlyUsed("molenstraat");
+		addFrequentlyUsed("beethovenstraße");
+		addFrequentlyUsed("партизанская");
+		addFrequentlyUsed("нагорная");
+		addFrequentlyUsed("карађорђева");
+		addFrequentlyUsed("совхозная");
+		addFrequentlyUsed("römerstraße");
+		addFrequentlyUsed("bachstraße");
+		addFrequentlyUsed("hauptstrasse");
+		addFrequentlyUsed("куйбышева");
+		addFrequentlyUsed("kościelna");
+		addFrequentlyUsed("中華路");
+		addFrequentlyUsed("kwiatowa");
+		addFrequentlyUsed("некрасова");
+		addFrequentlyUsed("маршала");
+		addFrequentlyUsed("тита");
+		addFrequentlyUsed("buchenweg");
+		addFrequentlyUsed("blumenstraße");
+		addFrequentlyUsed("марта");
+		addFrequentlyUsed("amselweg");
+		addFrequentlyUsed("mittelstraße");
+		addFrequentlyUsed("breslauer");
+		addFrequentlyUsed("henryka");
+		addFrequentlyUsed("sienkiewicza");
+		addFrequentlyUsed("warszawska");
+		addFrequentlyUsed("brunnenstraße");
+		addFrequentlyUsed("ahornweg");
+		addFrequentlyUsed("дачная");
+		addFrequentlyUsed("friedrichstraße");
+		addFrequentlyUsed("парковая");
+		addFrequentlyUsed("вука");
+		addFrequentlyUsed("караџића");
+		addFrequentlyUsed("oak");
+		addFrequentlyUsed("вокзальная");
+		addFrequentlyUsed("park");
+		addFrequentlyUsed("friedhofstraße");
+		addFrequentlyUsed("dorfstrasse");
+		addFrequentlyUsed("спортивная");
+		addFrequentlyUsed("brzozowa");
+		addFrequentlyUsed("крупской");
+		addFrequentlyUsed("чехова");
+		addFrequentlyUsed("wilhelmstraße");
+		addFrequentlyUsed("wojska");
+		addFrequentlyUsed("polskiego");
+		addFrequentlyUsed("burgstraße");
+		addFrequentlyUsed("zielona");
+		addFrequentlyUsed("шоссейная");
+		addFrequentlyUsed("цветочная");
+		addFrequentlyUsed("königsberger");
+		addFrequentlyUsed("интернациональная");
+		addFrequentlyUsed("friedrich");
+		addFrequentlyUsed("ebert");
+		addFrequentlyUsed("schloßstraße");
+		addFrequentlyUsed("островского");
+		addFrequentlyUsed("spacerowa");
+		addFrequentlyUsed("stationsstraat");
+		addFrequentlyUsed("энгельса");
+		addFrequentlyUsed("復興路");
+		addFrequentlyUsed("marktstraße");
+		addFrequentlyUsed("максима");
+		addFrequentlyUsed("akacjowa");
+		addFrequentlyUsed("schoolstraat");
+		addFrequentlyUsed("łąkowa");
+		addFrequentlyUsed("schützenstraße");
+		addFrequentlyUsed("lindenweg");
+		addFrequentlyUsed("шевченко");
+		addFrequentlyUsed("eichenweg");
+		addFrequentlyUsed("nieuwstraat");
+		addFrequentlyUsed("parkstraße");
+		addFrequentlyUsed("lessingstraße");
+		addFrequentlyUsed("маладзёжная");
+		addFrequentlyUsed("суворова");
+		addFrequentlyUsed("poststraße");
+		addFrequentlyUsed("sosnowa");
+		addFrequentlyUsed("finkenweg");
+		addFrequentlyUsed("николе");
+		addFrequentlyUsed("тесле");
+		addFrequentlyUsed("independenței");
+		addFrequentlyUsed("вишнёвая");
+		addFrequentlyUsed("uhlandstraße");
+		addFrequentlyUsed("juliusza");
+		addFrequentlyUsed("słowackiego");
+		addFrequentlyUsed("erlenweg");
+		addFrequentlyUsed("dworcowa");
+		addFrequentlyUsed("подгорная");
+		addFrequentlyUsed("ștefan");
+		addFrequentlyUsed("cel");
+		addFrequentlyUsed("sfînt");
+		addFrequentlyUsed("матросова");
+		addFrequentlyUsed("ломоносова");
+		addFrequentlyUsed("raiffeisenstraße");
+		addFrequentlyUsed("почтовая");
+		addFrequentlyUsed("seestraße");
+		addFrequentlyUsed("parkowa");
+		addFrequentlyUsed("hoofdstraat");
+		addFrequentlyUsed("берёзовая");
+		addFrequentlyUsed("danziger");
+		addFrequentlyUsed("sportowa");
+		addFrequentlyUsed("rosenweg");
+		addFrequentlyUsed("krakowska");
+		addFrequentlyUsed("трудовая");
+		addFrequentlyUsed("民族路");
+		addFrequentlyUsed("мая");
+		addFrequentlyUsed("民權路");
+		addFrequentlyUsed("ion");
+		addFrequentlyUsed("creangă");
+		addFrequentlyUsed("pawła");
+		addFrequentlyUsed("сосновая");
+		addFrequentlyUsed("birkenstraße");
+		addFrequentlyUsed("dębowa");
+		addFrequentlyUsed("中山路二段");
+		addFrequentlyUsed("rheinstraße");
+		addFrequentlyUsed("орджоникидзе");
+		addFrequentlyUsed("строительная");
+		addFrequentlyUsed("урицкого");
+		addFrequentlyUsed("bismarckstraße");
+		addFrequentlyUsed("tannenweg");
+		addFrequentlyUsed("lerchenweg");
+		addFrequentlyUsed("民生路");
+		addFrequentlyUsed("луначарского");
+		addFrequentlyUsed("дорожная");
+		addFrequentlyUsed("комарова");
+		addFrequentlyUsed("hochstraße");
+		addFrequentlyUsed("中山路一段");
+		addFrequentlyUsed("marienstraße");
+		addFrequentlyUsed("păcii");
+		addFrequentlyUsed("park");
+		addFrequentlyUsed("kasztanowa");
+		addFrequentlyUsed("karlstraße");
+		//// Added 11-May-2026
+		
 		addFrequentlyUsed("santa");
 		addFrequentlyUsed("west");
 		addFrequentlyUsed("east");
@@ -1405,5 +1607,27 @@ public class CommonWords {
 	}
 
 
+
+	public static void mainFilterFrequentWords(String[] args) {
+		// algorithm to find missing frequent words
+		String[] array = new String[] { 
+				// retrieved from https://taginfo.openstreetmap.org/api/4/key/values?key=name&page=1&rp=999&sortorder=desc&sortname=count 
+				"Hauptstraße",
+				"Центральная улица",
+				"Советская улица",
+				"улица Ленина",
+				"Main Street",
+				//. ....
+		};
+		
+		for (String name : array) {
+			List<String> tokens = SearchAlgorithms.splitAndNormalize(name);
+			for (String token : tokens) {
+				if (CommonWords.getCommonSearch(token) < 0) {
+					System.out.println("Missing " + token);
+				}
+			}
+		}
+	}
 
 }
