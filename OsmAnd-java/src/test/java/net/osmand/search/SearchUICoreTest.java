@@ -4,7 +4,6 @@ import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.GeocodingUtilities;
 import net.osmand.binary.GeocodingUtilities.GeocodingResult;
-import net.osmand.data.Amenity;
 import net.osmand.data.Building;
 import net.osmand.data.Street;
 import net.osmand.osm.AbstractPoiType;
@@ -14,7 +13,6 @@ import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.*;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -305,30 +303,11 @@ public class SearchUICoreTest {
 		}
 	}
 
-	private String formatResult(boolean simpleTest, SearchResult r, SearchPhrase phrase) {
-		if (simpleTest) {
-			return r.toString().trim();
-		}
-		double dist = 0;
-		if (r.location != null) {
-			dist = MapUtils.getDistance(r.location, phrase.getLastTokenLocation());
-		}
-		String subType = "";
-		if (r.objectType == ObjectType.POI) {
-			Amenity am = (Amenity) r.object;
-			String subtype = am.getSubType();
-			if ("town".equals(subtype) || "city".equals(subtype)) {
-				subType = " (" + subtype + ")";
-			}
-		}
-		return String.format(Locale.US, "%s [[%d, %s, %.3f, %.2f km]]", r.toString(),
-				r.getFoundWordCount(), r.objectType.toString() + subType,
-				r.getUnknownPhraseMatchWeight(), //r.getSearchDistance(phrase.getSettings().getOriginalLocation())
-				dist / 1000
-				);
+	public static String formatResult(boolean simpleTest, SearchResult r, SearchPhrase phrase) {
+		return SearchUICore.formatSearchResultForTest(simpleTest, r, phrase);
 	}
 	
-	private String formatResultMultiSearch(SearchResult r, SearchPhrase phrase) {
+	public static String formatResultMultiSearch(SearchResult r, SearchPhrase phrase) {
 		String format = formatResult(false, r, phrase);
 		String reg = r.file == null ? "-" : r.file.getFile().getName();
 		return String.format(Locale.US, "%s [%s]", format, reg);

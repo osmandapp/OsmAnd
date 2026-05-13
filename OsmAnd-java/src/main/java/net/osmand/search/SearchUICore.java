@@ -1231,6 +1231,29 @@ public class SearchUICore {
 		return json;
 	}
 
+	public static String formatSearchResultForTest(boolean simpleTest, SearchResult r, SearchPhrase phrase) {
+		if (simpleTest) {
+			return r.toString().trim();
+		}
+		double dist = 0;
+		if (r.location != null) {
+			dist = MapUtils.getDistance(r.location, phrase.getLastTokenLocation());
+		}
+		String subType = "";
+		if (r.objectType == ObjectType.POI) {
+			Amenity am = (Amenity) r.object;
+			String subtype = am.getSubType();
+			if ("town".equals(subtype) || "city".equals(subtype)) {
+				subType = " (" + subtype + ")";
+			}
+		}
+		return String.format(Locale.US, "%s [[%d, %s, %.3f, %.2f km]]", r.toString(),
+				r.getFoundWordCount(), r.objectType.toString() + subType,
+				r.getUnknownPhraseMatchWeight(),
+				dist / 1000
+		);
+	}
+
 	private enum ResultCompareStep {
 		TOP_VISIBLE,
 		FOUND_WORD_COUNT, // more is better (top)
