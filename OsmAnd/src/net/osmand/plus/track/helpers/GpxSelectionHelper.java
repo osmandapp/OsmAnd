@@ -422,8 +422,6 @@ public class GpxSelectionHelper {
 				selectedFile.selectedByUser = params.isSelectedByUser();
 			}
 			boolean isSelected = selectedGPXFiles.contains(selectedFile);
-
-			//try me here
 			if (selectedFile.isLoaded() && (params.shouldUpdateSelected() && showOnMap != isSelected)) {
 				updateSelected(showOnMap, selectedFile);
 				if (showOnMap) {
