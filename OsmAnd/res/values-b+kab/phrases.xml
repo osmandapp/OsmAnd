@@ -254,7 +254,7 @@
     <string name="poi_artist_name">Anaẓur</string>
     <string name="poi_square">Amkuẓ</string>
     <string name="poi_archaeological_site_city">Tiɣremt</string>
-    <string name="poi_animal_training_dog">&lt;strong&gt;Amarraw&lt;/strong&gt; &amp;mdash; Tzemreḍ ad tsettefeḍ isebtar-inek s umyellel. deg umedya tzemreḍ ad tesɛuḍ asebtar &amp;#8220;Awal ɣef&amp;#8221; i yesɛan isebtar &amp;#8220;Tudert-iw&amp;#8221; aked&amp;#8220;Aqjun-iw&amp;#8221; d isebtar inadayen. Ulac tilist i isebtar inadayen.</string>
+    <string name="poi_animal_training_dog">Aqjun</string>
     <string name="poi_theatre_genre_chamber_music">Musique de chambre</string>
     <string name="poi_theatre_genre_comedy">Comédie</string>
     <string name="poi_theatre_genre_cabaret">Cabaret</string>
@@ -369,7 +369,7 @@
     <string name="poi_tactile_paving_yes">Ih</string>
     <string name="poi_smoking_yes">Tessireg</string>
     <string name="poi_smoking_no">Tessireg</string>
-    <string name="poi_covered_no">"Meṛṛa isenfaṛen i yeɛna uɣawas n ufter,ttwakksen. "</string>
+    <string name="poi_covered_no">Meṛṛa isenfaṛen i yeɛna uɣawas n ufter,ttwakksen.</string>
     <string name="poi_covered_yes">Ih</string>
     <string name="poi_fireplace_yes">Ih</string>
     <string name="poi_board_type_astronomy">Tasnallunt</string>

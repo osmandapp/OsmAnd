@@ -57,7 +57,7 @@ public class CachedTrack {
 		this.selectedGpxFile = selectedGpxFile;
 		this.currentTrack = selectedGpxFile.isShowCurrentTrack();
 		this.params = new CachedTrackParams(selectedGpxFile.getGpxFileToDisplay().getModifiedTime(),
-				selectedGpxFile.getFilteredSelectedGpxFile() != null, false);
+				selectedGpxFile.hasFilters(), selectedGpxFile.isJoinSegments(), selectedGpxFile.getPointsToDisplayCount());
 	}
 
 	@NonNull
@@ -72,9 +72,7 @@ public class CachedTrack {
 
 	@Nullable
 	public List<RouteSegmentResult> getCachedRouteSegments(int nonEmptySegmentIdx) {
-		if (isCachedTrackChanged()) {
-			clearCaches();
-		}
+		clearOutdatedCache();
 		return routeCache.get(nonEmptySegmentIdx);
 	}
 
@@ -101,14 +99,11 @@ public class CachedTrack {
 	public List<TrkSegment> getTrackSegments(@Nullable GradientScaleType scaleType,
 	                                         @Nullable GradientScaleType outlineScaleType,
 	                                         @NonNull String paletteName) {
-		boolean changed = isCachedTrackChanged();
-		if (changed) {
-			clearCaches();
-		}
+		boolean cleared = clearOutdatedCache();
 		String trackId = scaleType + "_" + paletteName + "_" + outlineScaleType;
 		List<TrkSegment> segments = nonSimplifiedSegmentsCache.get(trackId);
 
-		if (shouldUpdateSegments(segments, changed)) {
+		if (shouldUpdateSegments(segments, cleared)) {
 			RouteColorize colorization = scaleType != null ? createGpxColorization(scaleType, paletteName) : null;
 			RouteColorize outlineColorization = outlineScaleType != null ? createGpxColorization(outlineScaleType, paletteName) : null;
 
@@ -132,14 +127,11 @@ public class CachedTrack {
 	public List<TrkSegment> getSimplifiedTrackSegments(int zoom,
 	                                                   @NonNull GradientScaleType scaleType,
 	                                                   @NonNull String paletteName) {
-		boolean changed = isCachedTrackChanged();
-		if (changed) {
-			clearCaches();
-		}
+		boolean cleared = clearOutdatedCache();
 		String trackId = zoom + "_" + scaleType + "_" + paletteName;
 		List<TrkSegment> segments = simplifiedSegmentsCache.get(trackId);
 
-		if (shouldUpdateSegments(segments, changed)) {
+		if (shouldUpdateSegments(segments, cleared)) {
 			RouteColorize colorization = createGpxColorization(scaleType, paletteName);
 			List<RouteColorizationPoint> colorsOfPoints = colorization.getSimplifiedResult(zoom);
 			segments = buildAndUpdateSegments(segments, Pair.create(scaleType, colorsOfPoints), null);
@@ -169,16 +161,21 @@ public class CachedTrack {
 		return newSegments;
 	}
 
-	private boolean isCachedTrackChanged() {
+	private boolean clearOutdatedCache() {
 		GpxFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
+		boolean useFilteredGpx = selectedGpxFile.hasFilters();
 		boolean useJoinSegments = selectedGpxFile.isJoinSegments();
-		boolean useFilteredGpx = selectedGpxFile.getFilteredSelectedGpxFile() != null;
-		if (useFilteredGpx != params.useFilteredGpx
-				|| useJoinSegments != params.useJoinSegments
-				|| gpxFile.getModifiedTime() != params.prevModifiedTime
+		long pointsCount = selectedGpxFile.getPointsToDisplayCount();
+
+		if (useFilteredGpx != params.useFilteredGpx() || useJoinSegments != params.useJoinSegments()
+				|| gpxFile.getModifiedTime() != params.modifiedTime() || pointsCount != params.pointsCount()
 				|| forceUpdate) {
-			params = new CachedTrackParams(gpxFile.getModifiedTime(), useFilteredGpx, useJoinSegments);
 			forceUpdate = false;
+			boolean keepSegmentsCache = currentTrack && pointsCount >= params.pointsCount();
+			params = new CachedTrackParams(gpxFile.getModifiedTime(), useFilteredGpx, useJoinSegments, pointsCount);
+
+			clearCaches(keepSegmentsCache);
+
 			return true;
 		}
 		return false;
@@ -282,7 +279,7 @@ public class CachedTrack {
 	}
 
 	public boolean isColoringTypeAvailable(@NonNull ColoringType coloringType, @Nullable String routeInfoAttribute) {
-		if (params.prevModifiedTime != selectedGpxFile.getGpxFileToDisplay().getModifiedTime() || availableColoringTypes == null) {
+		if (params.modifiedTime() != selectedGpxFile.getGpxFileToDisplay().getModifiedTime() || availableColoringTypes == null) {
 			availableColoringTypes = listAvailableColoringTypes();
 		}
 		return availableColoringTypes.contains(coloringType.getName(routeInfoAttribute));
@@ -326,8 +323,8 @@ public class CachedTrack {
 		return availableRouteInfoAttributes;
 	}
 
-	private void clearCaches() {
-		if (!currentTrack) {
+	private void clearCaches(boolean keepSegmentsCache) {
+		if (!keepSegmentsCache) {
 			nonSimplifiedSegmentsCache.clear();
 			simplifiedSegmentsCache.clear();
 		}

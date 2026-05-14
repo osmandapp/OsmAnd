@@ -1,14 +1,12 @@
 package net.osmand.plus.plugins.weather;
 
 import static net.osmand.IndexConstants.WEATHER_FORECAST_DIR;
-import static net.osmand.plus.download.local.LocalItemType.WEATHER_DATA;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_CLOUD;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRECIPITATION;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRESSURE;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_TEMPERATURE;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_WIND_ANIMATION;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_WIND_SPEED;
-import static net.osmand.plus.plugins.weather.enums.WeatherForecastDownloadState.FINISHED;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,16 +21,13 @@ import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.core.jni.ZoomLevelDoubleListHash;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.weather.enums.WeatherSource;
-import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.download.local.LocalIndexHelper;
-import net.osmand.plus.download.local.LocalItem;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.plugins.weather.WeatherWebClient.DownloadState;
 import net.osmand.plus.plugins.weather.WeatherWebClient.WeatherWebClientListener;
 import net.osmand.plus.plugins.weather.containers.WeatherTotalCacheSize;
 import net.osmand.plus.plugins.weather.units.WeatherUnit;
 import net.osmand.plus.settings.enums.TemperatureUnitsMode;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.util.Algorithms;
 
@@ -44,6 +39,9 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class WeatherHelper {
@@ -55,6 +53,7 @@ public class WeatherHelper {
 	private final Map<Short, WeatherBand> weatherBands = new LinkedHashMap<>();
 	private final AtomicInteger bandsSettingsVersion = new AtomicInteger(0);
 	private final WeatherTotalCacheSize totalCacheSize;
+	private final ExecutorService cacheExecutor = Executors.newSingleThreadExecutor();
 	private List<WeakReference<WeatherWebClientListener>> downloadStateListeners = new ArrayList<>();
 	private final StateChangedListener<TemperatureUnitsMode> temperaturePreferenceListener = weatherUnit -> updateBandsSettings();
 	private WeatherWebClient webClient;
@@ -149,19 +148,16 @@ public class WeatherHelper {
 		return Algorithms.isEmpty(dir.listFiles());
 	}
 
-	public void updateForecastCache() {
-		LocalIndexHelper helper = new LocalIndexHelper(app);
-		for (LocalItem item : helper.getLocalIndexItems(true, false, null, WEATHER_DATA)) {
-			updateForecastCache(item.getPath());
-		}
+	public void updateForecastCacheAsync() {
+		OsmAndTaskManager.executeTask(new UpdateWeatherCacheTask(app, weatherTileResourcesManager), cacheExecutor);
 	}
 
 	public void updateForecastCache(@NonNull String filePath) {
-		boolean updateForecastCache = false;
-		if (weatherTileResourcesManager != null) {
-			updateForecastCache = weatherTileResourcesManager.importDbCache(filePath);
+		try {
+			OsmAndTaskManager.executeTask(new UpdateWeatherCacheTask(app, weatherTileResourcesManager, filePath), cacheExecutor).get();
+		} catch (ExecutionException | InterruptedException e) {
+			log.error(e);
 		}
-		log.info("updateForecastCache " + filePath + " success " + updateForecastCache);
 	}
 
 	@NonNull
@@ -173,18 +169,9 @@ public class WeatherHelper {
 		return dir;
 	}
 
-	public void clearOutdatedCache() {
-		totalCacheSize.reset();
-
-		long dateTime = OsmAndFormatter.getStartOfToday();
-		weatherTileResourcesManager.clearDbCache(dateTime);
-
-		List<String> downloadedRegionIds = offlineForecastHelper.getTempForecastsWithDownloadStates(FINISHED);
-		for (WorldRegion region : app.getRegions().getFlattenedWorldRegions()) {
-			if (downloadedRegionIds.contains(region.getRegionId())) {
-				offlineForecastHelper.calculateCacheSize(region, null);
-			}
-		}
+	public void clearOutdatedCacheAsync() {
+		OsmAndTaskManager.executeTask(new ClearWeatherCacheTask(app, totalCacheSize,
+				offlineForecastHelper, weatherTileResourcesManager), cacheExecutor);
 	}
 
 	@Nullable

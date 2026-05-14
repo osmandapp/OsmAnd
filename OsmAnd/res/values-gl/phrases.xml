@@ -5134,4 +5134,19 @@
     <string name="poi_canoe_egress">Canoe Toma-fóra</string>
     <string name="poi_canoe_put_in_egress">Canoe Lancha e tomar-fóra</string>
     <string name="poi_whitewater_hazard">Perigo en augas bravas</string>
+    <string name="poi_rapids_grade_x">X (non executable)</string>
+    <string name="poi_rapids_grade_6">6 (extremo)</string>
+    <string name="poi_rapids_grade_5">5 (experto)</string>
+    <string name="poi_rapids_grade_4">4 (avanzado)</string>
+    <string name="poi_rapids_grade_3">3 (intermedio)</string>
+    <string name="poi_rapids_grade_2">2 (novato)</string>
+    <string name="poi_rapids_grade_1">1 (fácil)</string>
+    <string name="poi_rapids_grade_0">0 (augas tranquilas)</string>
+    <string name="poi_yoga">Ioga</string>
+    <string name="poi_sample_collection_blood">Sangue</string>
+    <string name="poi_sample_collection_covid19">COVID19</string>
+    <string name="poi_sample_collection_yes">Sí</string>
+    <string name="poi_sample_collection">Recollida de mostras; Sangue; Laboratorio; Proba</string>
+    <string name="poi_hazard_ice">xeo</string>
+    <string name="poi_hazard_side_winds">Ventos laterais</string>
 </resources>

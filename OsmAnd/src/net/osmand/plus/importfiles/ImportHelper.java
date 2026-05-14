@@ -517,7 +517,7 @@ public class ImportHelper {
 					if (AndroidUtils.isActivityNotDestroyed(activity)) {
 						FragmentManager manager = activity.getSupportFragmentManager();
 						ImportTracksFragment.showInstance(manager, result, name,
-								destinationDir.getAbsolutePath(), gpxImportListener, fileSize);
+								destinationDir.getAbsolutePath(), gpxImportListener);
 					}
 				} else {
 					importAsOneTrack(result, name, destinationDir, showSnackbar, onGpxImport);
@@ -633,20 +633,6 @@ public class ImportHelper {
 			String filePath = gpxInfo.getFileName();
 			String fileName = Algorithms.getFileWithoutDirs(filePath);
 			if (Algorithms.objectEquals(name, fileName)) {
-				return filePath;
-			}
-		}
-		return null;
-	}
-
-	@Nullable
-	public static String getExistingFilePath(@NonNull OsmandApplication app, @NonNull String name, long fileSize) {
-		File dir = app.getAppPath(GPX_INDEX_DIR);
-		List<GPXInfo> gpxInfoList = GpxUiHelper.getSortedGPXFilesInfoByDate(dir, true);
-		for (GPXInfo gpxInfo : gpxInfoList) {
-			String filePath = gpxInfo.getFileName();
-			String fileName = Algorithms.getFileWithoutDirs(filePath);
-			if (Algorithms.objectEquals(name, fileName) && gpxInfo.getFileSize() == fileSize) {
 				return filePath;
 			}
 		}

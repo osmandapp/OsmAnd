@@ -903,7 +903,7 @@
     <string name="poi_seasonal_wet_season">Saison humide</string>
     <string name="poi_seasonal_dry_season">Saison sèche</string>
     <string name="poi_seasonal_spring">Printemps</string>
-    <string name="poi_seasonal_summer">Eté</string>
+    <string name="poi_seasonal_summer">Été</string>
     <string name="poi_seasonal_autumn">Automne</string>
     <string name="poi_seasonal_winter">Hiver</string>
     <string name="poi_animal_shelter_dog">Chiens</string>
@@ -5108,7 +5108,7 @@
     <string name="poi_denomination_fsspx">Fraternité Saint-Pie X</string>
     <string name="poi_denomination_syriac_orthodox">Syriaque orthodoxe</string>
     <string name="poi_denomination_laestadian">Læstadien</string>
-    <string name="poi_denomination_philippine_independent">Philippine Independent</string>
+    <string name="poi_denomination_philippine_independent">Philippine indépendante</string>
     <string name="poi_denomination_exclusive_brethren">Frères exclusifs</string>
     <string name="poi_denomination_church_of_god_in_christ">Église de Dieu en Christ</string>
     <string name="poi_denomination_czechoslovak_hussite">Hussite tchécoslovaque</string>

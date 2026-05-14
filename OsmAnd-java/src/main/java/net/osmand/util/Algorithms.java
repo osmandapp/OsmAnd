@@ -57,10 +57,6 @@ public class Algorithms {
 	private static final int BUFFER_SIZE = 1024;
 	private static final Log log = PlatformUtil.getLog(Algorithms.class);
 
-	private static final char[] APOSTROPHES = {'\'', '’', 'ʼ', '´', '`', '′', '‵', 'ʹ'};
-	private static final char[] CHARS_TO_NORMALIZE_KEY = {'’', 'ʼ', '(', ')', '´', '`', '′', '‵', 'ʹ'}; // remove () subcities
-	private static final char[] CHARS_TO_NORMALIZE_VALUE = {'\'', '\'', ' ', ' ', '\'', '\'', '\'', '\'', '\''};
-
 	public static final NumberFormat DECIMAL_FORMAT = new DecimalFormat("#.#", new DecimalFormatSymbols(Locale.US));
 
 	private static final String HTML_PATTERN = "<(\"[^\"]*\"|'[^']*'|[^'\">])*>";
@@ -87,72 +83,7 @@ public class Algorithms {
 		}
 		return false;
 	}
-
-	public static String normalizeSearchText(String s) {
-		boolean norm = containsChar(s, CHARS_TO_NORMALIZE_KEY);
-		if (!norm) {
-			return s;
-		}
-		for (int k = 0; k < CHARS_TO_NORMALIZE_KEY.length; k++) {
-			s = s.replace(CHARS_TO_NORMALIZE_KEY[k], CHARS_TO_NORMALIZE_VALUE[k]);
-		}
-		return s;
-	}
-
-	public static String removeApostrophes(String s) {
-		if (!containsChar(s, APOSTROPHES)) {
-			return s;
-		}
-		StringBuilder sb = new StringBuilder(s.length());
-		for (int i = 0; i < s.length(); i++) {
-			char c = s.charAt(i);
-			boolean apostroph = false;
-			for (char d : APOSTROPHES) {
-				if (d == c) {
-					apostroph = true;
-					break;
-				}
-			}
-			if (!apostroph) {
-				sb.append(c);
-			}
-		}
-		return sb.toString();
-	}
 	
-	public static String removeQuotes(String s) {
-		if (!s.contains("«") && !s.contains("»")) {
-			return s;
-		}
-		return s.replace("«", "").replace("»", "");
-	}
-
-	/**
-	 * Split string by words and convert to lowercase, use as delimiter all chars except letters and digits
-	 * @param str input string
-	 * @return result words list
-	 */
-
-	public static List<String> splitByWordsLowercase(String str) {
-		List<String> splitStr = new ArrayList<>();
-		int prev = -1;
-		for (int i = 0; i <= str.length(); i++) {
-			if (i == str.length() ||
-					(!Character.isLetter(str.charAt(i)) && !Character.isDigit(str.charAt(i)))) {
-				if (prev != -1) {
-					String subStr = str.substring(prev, i);
-					splitStr.add(subStr.toLowerCase());
-					prev = -1;
-				}
-			} else {
-				if (prev == -1) {
-					prev = i;
-				}
-			}
-		}
-		return splitStr;
-	}
-
 	public static boolean isEmpty(Collection<?> c) {
 		return c == null || c.size() == 0;
 	}

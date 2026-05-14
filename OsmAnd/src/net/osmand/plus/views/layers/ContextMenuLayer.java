@@ -93,7 +93,6 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 	private boolean cancelApplyingNewMarkerPosition;
 	private LatLon applyingMarkerLatLon;
 	private IContextMenuProvider selectedObjectContextMenuProvider;
-	private boolean mInGpxDetailsMode;
 	private boolean mInAddGpxPointMode;
 	private boolean carView;
 
@@ -504,7 +503,8 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 	}
 
 	public boolean isInGpxDetailsMode() {
-		return mInGpxDetailsMode;
+		MapActivity mapActivity = getMapActivity();
+		return mapActivity != null && mapActivity.getFragmentsHelper().getTrackDetailsMenuFragment() != null;
 	}
 
 	public boolean isInAddGpxPointMode() {
@@ -608,14 +608,7 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 
 		menu.updateMapCenter(null);
 		menu.hide();
-
-		mInGpxDetailsMode = true;
 		mapActivity.disableDrawer();
-		AndroidUiHelper.setVisibility(mapActivity, View.INVISIBLE,
-				R.id.map_ruler_layout,
-				R.id.map_left_widgets_panel,
-				R.id.map_right_widgets_panel,
-				R.id.map_center_info);
 	}
 
 	public void exitGpxDetailsMode() {
@@ -624,13 +617,7 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 			return;
 		}
 
-		mInGpxDetailsMode = false;
 		mapActivity.enableDrawer();
-		AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE,
-				R.id.map_ruler_layout,
-				R.id.map_left_widgets_panel,
-				R.id.map_right_widgets_panel,
-				R.id.map_center_info);
 	}
 
 	private void quitMovingMarker() {
@@ -858,7 +845,7 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 	public boolean disableLongPressOnMap(PointF point, RotatedTileBox tileBox) {
 		MapActivity mapActivity = getMapActivity();
 		WeatherPlugin plugin = PluginsHelper.getActivePlugin(WeatherPlugin.class);
-		if (mInChangeMarkerPositionMode || mInGpxDetailsMode || mInAddGpxPointMode
+		if (mInChangeMarkerPositionMode || isInGpxDetailsMode() || mInAddGpxPointMode
 				|| mapActivity == null || mapActivity.getMapRouteInfoMenu().isVisible()
 				|| MapRouteInfoMenu.waypointsVisible || MapRouteInfoMenu.followTrackVisible
 				|| mapActivity.getFragmentsHelper().getGpsFilterFragment() != null
@@ -909,7 +896,7 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 	@Override
 	public boolean onSingleTap(@NonNull PointF point, @NonNull RotatedTileBox tileBox) {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity == null || menu == null || mInChangeMarkerPositionMode || mInGpxDetailsMode
+		if (mapActivity == null || menu == null || mInChangeMarkerPositionMode || isInGpxDetailsMode()
 				|| mapActivity.getFragmentsHelper().getGpsFilterFragment() != null
 				|| mapActivity.getFragmentsHelper().getStarMapFragment() != null
 				|| mapActivity.getFragmentsHelper().getDownloadTilesFragment() != null) {
@@ -1008,7 +995,7 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 
 		switch (event.getAction()) {
 			case MotionEvent.ACTION_DOWN:
-				if (!mInChangeMarkerPositionMode && !mInGpxDetailsMode) {
+				if (!mInChangeMarkerPositionMode && !isInGpxDetailsMode()) {
 					PointF pointF = new PointF(event.getX(), event.getY());
 					selectionHelper.acquireTouchedMapObjects(tileBox, pointF, true);
 					if (selectionHelper.hasTouchedMapObjects()) {

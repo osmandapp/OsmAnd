@@ -502,8 +502,9 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 					}
 				}
 
-				// process other maps & voice prompts
+				// process other maps & voice prompts & astronomy maps
 				if (group.getType() == DownloadResourceGroupType.OTHER_MAPS_HEADER
+						|| group.getType() == DownloadResourceGroupType.ASTRONOMY_HEADER
 						|| group.getType() == DownloadResourceGroupType.VOICE_HEADER_REC
 						|| group.getType() == DownloadResourceGroupType.VOICE_HEADER_TTS
 						|| group.getType() == DownloadResourceGroupType.FONTS_HEADER) {

@@ -141,6 +141,7 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 		this.textScale = textScale;
 		this.density = density;
 		this.offset = new PointI(0, 0);
+		this.swigTakeOwnership();
 	}
 
 	public void drawSymbols(@NonNull MapRendererView mapRenderer) {

@@ -1333,8 +1333,13 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				updated |= renderableSegment.setTrackParams(color, width, coloringType, routeIndoAttribute, colorPalette);
 				if (hasMapRenderer || coloringType.isRouteInfoAttribute()) {
 					boolean showArrows = appearanceHelper.isShowArrowsForTrack(gpxFile, gpxItem, dirItem, selected);
-					if (coloringType.isRouteInfoAttribute() || currentTrack) {
+					if (coloringType.isRouteInfoAttribute()) {
 						updated |= renderableSegment.setRoute(getCachedRouteSegments(cachedTrack, segmentIdx));
+					}
+					boolean boundsChanged = false;
+					if (currentTrack) {
+						boundsChanged = renderableSegment.updateBounds();
+						updated |= boundsChanged;
 					}
 					updated |= renderableSegment.setDrawArrows(showArrows);
 					updated |= renderableSegment.setTrack3DStyle(track3DStyle);
@@ -1344,8 +1349,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 						if (pathEffect instanceof OsmandDashPathEffect) {
 							intervals = ((OsmandDashPathEffect) pathEffect).getIntervals();
 						}
-						renderableSegment.drawGeometry(canvas, tileBox, correctedQuadRect,
-								paint.getColor(), paint.getStrokeWidth(), intervals, showArrows, track3DStyle, invalidated);
+						boolean recreateSegments = invalidated || boundsChanged;
+						renderableSegment.drawGeometry(canvas, tileBox, correctedQuadRect, paint.getColor(),
+								paint.getStrokeWidth(), intervals, showArrows, track3DStyle, recreateSegments);
 						renderedSegments.add(ts);
 					}
 				} else {
@@ -1403,7 +1409,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		if (routeSegments == null) {
 			loadRouteSegments(cachedTrack, nonEmptySegmentIdx);
 		}
-		return routeSegments != null ? routeSegments : new ArrayList<>();
+		return routeSegments != null ? routeSegments : Collections.emptyList();
 	}
 
 	private void loadRouteSegments(@NonNull CachedTrack cachedTrack, int nonEmptySegmentIdx) {

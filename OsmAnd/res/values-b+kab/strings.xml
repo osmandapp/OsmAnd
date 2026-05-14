@@ -1088,7 +1088,7 @@
     <string name="search_nearby">Nadi di liqrib</string>
     <string name="first_time_continue">Ticki</string>
     <string name="show_poi_filter">Imsizdeg</string>
-    <string name="hide_poi_filter">Imsizdeg</string>
+    <string name="hide_poi_filter">Ffer imsizdeg</string>
     <string name="context_menu_item_search_poi">Nadi</string>
     <string name="layer_map">Aɣbalu n tkarḍa…</string>
     <string name="error_occurred_loading_gpx">\"ur izmir ara ad yali: \"</string>
@@ -1532,8 +1532,8 @@
     <string name="shared_string_sunset">Aɣelluy n yiṭij</string>
     <string name="shared_string_sunrise">Alluy n yiṭṭij</string>
     <string name="shared_string_mode">Askar</string>
-    <string name="add_page">Rnu asebtar</string>
-    <string name="page_number">Asebtar %1$s</string>
+    <string name="add_page">Rnu asebter</string>
+    <string name="page_number">Asebter %1$s</string>
     <string name="rendering_value_category_name">Taggayt</string>
     <string name="rendering_value_all_name">Akk</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
@@ -1561,4 +1561,6 @@
     <string name="shared_string_add_profile">Rnu amaɣnu</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="shared_string_memory_mb_desc">%1$s MAṬ</string>
+    <string name="no_search_results">Ulac igmaḍ</string>
+    <string name="shared_string_hide_all">Ɣumm-iten akk</string>
 </resources>

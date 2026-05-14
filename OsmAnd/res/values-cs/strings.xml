@@ -5912,7 +5912,7 @@
     <string name="routing_attr_pt_limit_description">Zadejte počet nejlepších tras k zobrazení</string>
     <string name="centimeter">cm</string>
     <string name="shared_string_centimeters">centimetry</string>
-    <string name="bicycle_width_limit_description">Zadejte šířku vašeho jízdního kola pro vyhnutí se úzkým cyklostezkám.</string>
+    <string name="bicycle_width_limit_description">Zadejte šířku kola, abyste se vyhnuli úzkým cyklostezkám.</string>
     <string name="copy_link">Kopírovat odkaz</string>
     <string name="vehicle_metrics_chart_category">Metriky vozidla</string>
     <string name="delete_folder_description">Odstranit složku „%1$s“?</string>
@@ -5922,7 +5922,7 @@
     <string name="buildings_3d_detail_level">Detaily 3D staveb</string>
     <string name="has_vehicle_metrics">S daty OBDII</string>
     <string name="imprecise_coordinates">Nepřesné souřadnice</string>
-    <string name="show_expand_button">Zobrazit tlačítko rozbalení</string>
+    <string name="show_expand_button">Zobrazit rozbalovací tlačítko</string>
     <string name="astro_name_moon">Měsíc</string>
     <string name="astro_name_sun">Slunce</string>
     <string name="astro_name_mercury">Merkur</string>

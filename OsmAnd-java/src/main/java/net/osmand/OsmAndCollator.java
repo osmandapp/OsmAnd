@@ -1,7 +1,7 @@
 package net.osmand;
 
-import net.osmand.util.Algorithms;
 import net.osmand.util.ArabicNormalizer;
+import net.osmand.util.SearchAlgorithms;
 
 import java.util.Locale;
 
@@ -47,8 +47,8 @@ public class OsmAndCollator {
 					String normalized = ArabicNormalizer.normalize(s);
 					s = normalized == null ? s : normalized;
 				}
-				s = Algorithms.removeApostrophes(s);
-				s = Algorithms.removeQuotes(s);
+				s = SearchAlgorithms.removeApostrophes(s);
+				s = SearchAlgorithms.removeQuotes(s);
 				return s;
 			}
 		};

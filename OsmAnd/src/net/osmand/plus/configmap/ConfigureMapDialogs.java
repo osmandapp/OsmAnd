@@ -8,6 +8,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatCheckedTextView;
 import androidx.appcompat.widget.SwitchCompat;
@@ -41,42 +42,7 @@ import gnu.trove.list.array.TIntArrayList;
 public class ConfigureMapDialogs {
 
 	public static void showMapMagnifierDialog(@NonNull OsmandMapTileView view) {
-		OsmandPreference<Float> density = view.getSettings().MAP_DENSITY;
-		int p = (int) (density.get() * 100);
-		TIntArrayList tlist = new TIntArrayList(new int[] {25, 33, 50, 75, 100, 125, 150, 200, 300, 400});
-		List<String> values = new ArrayList<>();
-		int i = -1;
-		for (int k = 0; k <= tlist.size(); k++) {
-			boolean end = k == tlist.size();
-			if (i == -1) {
-				if ((end || p < tlist.get(k))) {
-					values.add(p + " %");
-					i = k;
-				} else if (p == tlist.get(k)) {
-					i = k;
-				}
-			}
-			if (k < tlist.size()) {
-				values.add(tlist.get(k) + " %");
-			}
-		}
-		if (values.size() != tlist.size()) {
-			tlist.insert(i, p);
-		}
-
-		AlertDialog.Builder builder = new AlertDialog.Builder(view.requireMapActivity());
-		builder.setTitle(R.string.map_magnifier);
-		builder.setSingleChoiceItems(values.toArray(new String[0]), i, (dialog, which) -> {
-			int p1 = tlist.get(which);
-			density.set(p1 / 100.0f);
-			view.setComplexZoom(view.getZoom(), view.getSettingsMapDensity());
-			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
-			if (mapContext != null) {
-				mapContext.updateMapSettings(true);
-			}
-			dialog.dismiss();
-		});
-		builder.show();
+		showMapMagnifierDialog(view.requireMapActivity(), false, 0, view, view.getSettings().MAP_DENSITY, null, null);
 	}
 
 	protected static void showMapMagnifierDialog(@NonNull MapActivity activity, boolean nightMode,
@@ -87,45 +53,79 @@ public class ConfigureMapDialogs {
 
 		OsmandMapTileView view = activity.getMapView();
 		OsmandPreference<Float> mapDensity = settings.MAP_DENSITY;
-		int p = (int) (mapDensity.get() * 100);
-		TIntArrayList tlist = new TIntArrayList(new int[] {25, 33, 50, 75, 100, 125, 150, 200, 300, 400});
+		showMapMagnifierDialog(activity, nightMode, profileColor, view, mapDensity, item, adapter);
+	}
+
+	private static void showMapMagnifierDialog(@NonNull MapActivity activity,
+	                                           boolean nightMode,
+	                                           int profileColor,
+	                                           @NonNull OsmandMapTileView view,
+	                                           @NonNull OsmandPreference<Float> mapDensity,
+	                                           @Nullable ContextMenuItem item,
+	                                           @Nullable OnDataChangeUiAdapter adapter) {
+		MapMagnifierValues magnifierValues = getMapMagnifierValues(mapDensity);
+		String[] values = magnifierValues.values.toArray(new String[0]);
+
+		if (item != null && adapter != null) {
+			AlertDialogData dialogData = new AlertDialogData(activity, nightMode)
+					.setTitle(R.string.map_magnifier)
+					.setControlsColor(profileColor)
+					.setNegativeButton(R.string.shared_string_dismiss, null);
+
+			CustomAlert.showSingleSelection(dialogData, values, magnifierValues.selectedIndex, v -> {
+				int which = (int) v.getTag();
+				setPhoneMapDensity(view, mapDensity, magnifierValues.percentValues.get(which));
+				item.setDescription(String.format(Locale.UK, "%.0f", 100f * mapDensity.get()) + " %");
+				adapter.onDataSetInvalidated();
+			});
+		} else {
+			AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+			builder.setTitle(R.string.map_magnifier);
+			builder.setSingleChoiceItems(values, magnifierValues.selectedIndex, (dialog, which) -> {
+				setPhoneMapDensity(view, mapDensity, magnifierValues.percentValues.get(which));
+				dialog.dismiss();
+			});
+			builder.show();
+		}
+	}
+
+	@NonNull
+	private static MapMagnifierValues getMapMagnifierValues(@NonNull OsmandPreference<Float> mapDensity) {
+		int currentValue = (int) (mapDensity.get() * 100);
+		TIntArrayList percentValues = new TIntArrayList(new int[] {25, 33, 50, 75, 100, 125, 150, 200, 300, 400});
 		List<String> values = new ArrayList<>();
-		int i = -1;
-		for (int k = 0; k <= tlist.size(); k++) {
-			boolean end = k == tlist.size();
-			if (i == -1) {
-				if ((end || p < tlist.get(k))) {
-					values.add(p + " %");
-					i = k;
-				} else if (p == tlist.get(k)) {
-					i = k;
+		int selectedIndex = -1;
+		for (int k = 0; k <= percentValues.size(); k++) {
+			boolean end = k == percentValues.size();
+			if (selectedIndex == -1) {
+				if ((end || currentValue < percentValues.get(k))) {
+					values.add(currentValue + " %");
+					selectedIndex = k;
+				} else if (currentValue == percentValues.get(k)) {
+					selectedIndex = k;
 				}
 			}
-			if (k < tlist.size()) {
-				values.add(tlist.get(k) + " %");
+			if (k < percentValues.size()) {
+				values.add(percentValues.get(k) + " %");
 			}
 		}
-		if (values.size() != tlist.size()) {
-			tlist.insert(i, p);
+		if (values.size() != percentValues.size()) {
+			percentValues.insert(selectedIndex, currentValue);
 		}
+		return new MapMagnifierValues(percentValues, values, selectedIndex);
+	}
 
-		AlertDialogData dialogData = new AlertDialogData(activity, nightMode)
-				.setTitle(R.string.map_magnifier)
-				.setControlsColor(profileColor)
-				.setNegativeButton(R.string.shared_string_dismiss, null);
+	private static void setPhoneMapDensity(@NonNull OsmandMapTileView view,
+	                                       @NonNull OsmandPreference<Float> mapDensity,
+	                                       int value) {
+		mapDensity.set(value / 100.0f);
+		if (!view.isCarView()) {
+			view.applyDisplayScaleSettings();
+		}
+	}
 
-		CustomAlert.showSingleSelection(dialogData, values.toArray(new String[0]), i, v -> {
-			int which = (int) v.getTag();
-			int value = tlist.get(which);
-			mapDensity.set(value / 100.0f);
-			view.setComplexZoom(view.getZoom(), view.getSettingsMapDensity());
-			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
-			if (mapContext != null) {
-				mapContext.updateMapSettings(true);
-			}
-			item.setDescription(String.format(Locale.UK, "%.0f", 100f * settings.MAP_DENSITY.get()) + " %");
-			adapter.onDataSetInvalidated();
-		});
+	private record MapMagnifierValues(@NonNull TIntArrayList percentValues,
+	                                  @NonNull List<String> values, int selectedIndex) {
 	}
 
 	protected static void showTextSizeDialog(

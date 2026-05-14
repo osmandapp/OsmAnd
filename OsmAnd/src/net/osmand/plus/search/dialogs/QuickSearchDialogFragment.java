@@ -919,6 +919,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		SearchSettings settings = searchUICore.getSearchSettings().setOriginalLocation(
 				new LatLon(searchLatLon.getLatitude(), searchLatLon.getLongitude()));
 		settings = settings.setLangs(appLang, mapLang, transliterate);
+		QuickSearchHelper.applySearchStatSetting(settings);
 		searchUICore.updateSettings(settings);
 
 		if (newSearch) {
@@ -1474,6 +1475,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				.setEmptyQueryAllowed(false)
 				.setSortByName(false)
 				.setRadiusLevel(1);
+		QuickSearchHelper.applySearchStatSetting(onlineSettings);
 		searchUICore.updateSettings(onlineSettings);
 		setResultCollection(null);
 	}
@@ -1483,6 +1485,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				.setSortByName(false)
 				.setSearchTypes(CITY, VILLAGE, POSTCODE, HOUSE, STREET_INTERSECTION, STREET, LOCATION, PARTIAL_LOCATION)
 				.setRadiusLevel(1);
+		QuickSearchHelper.applySearchStatSetting(addressSettings);
 		searchUICore.updateSettings(addressSettings);
 	}
 
@@ -1491,6 +1494,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				.setSortByName(true)
 				.setSearchTypes(CITY, VILLAGE)
 				.setRadiusLevel(1);
+		QuickSearchHelper.applySearchStatSetting(citySettings);
 		searchUICore.updateSettings(citySettings);
 	}
 
@@ -1499,6 +1503,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				.setSortByName(false)
 				.setSearchTypes(CITY)
 				.setRadiusLevel(1);
+		QuickSearchHelper.applySearchStatSetting(nearestSettings);
 		searchUICore.updateSettings(nearestSettings);
 	}
 
@@ -1510,6 +1515,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				.setRadiusLevel(1);
 		storedOriginalLocation = settings.getOriginalLocation();
 		settings.setOriginalLocation(latLon);
+		QuickSearchHelper.applySearchStatSetting(settings);
 		searchUICore.updateSettings(settings);
 	}
 
@@ -1518,6 +1524,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				.setEmptyQueryAllowed(false)
 				.setSortByName(true)
 				.setRadiusLevel(1);
+		QuickSearchHelper.applySearchStatSetting(postcodeSettings);
 		searchUICore.updateSettings(postcodeSettings);
 	}
 
@@ -1526,6 +1533,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				.setEmptyQueryAllowed(false)
 				.setSortByName(false)
 				.setRadiusLevel(1);
+		QuickSearchHelper.applySearchStatSetting(stopAddressSettings);
 		searchUICore.updateSettings(stopAddressSettings);
 	}
 

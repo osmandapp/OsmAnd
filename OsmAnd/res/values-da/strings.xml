@@ -5430,8 +5430,8 @@
     <string name="add_widget_to_the_left">Tilføj modul til venstre</string>
     <string name="add_widget_below">Tilføj modul nedenfor</string>
     <string name="add_widget_to_the_right">Tilføj modul til højre</string>
-    <string name="delete_widget">Slet modul?</string>
-    <string name="delete_widget_description">Dette modul bliver slettet. Du kan gendanne det senere i Konfigurer skærm.</string>
+    <string name="delete_widget">Fjern modul?</string>
+    <string name="delete_widget_description">Dette modul bliver fjernet. Du kan gendanne det senere i Konfigurer skærm.</string>
     <string name="battery_saving_mode">Batterisparetilstand</string>
     <string name="graph_axis">Grafakse</string>
     <string name="y_axis_description">Vælg op til to indstillinger for Y-aksen.</string>
@@ -5951,7 +5951,7 @@
     <string name="lang_mi">Maori</string>
     <string name="has_vehicle_metrics">Med OBDII-data</string>
     <string name="buildings_3d_detail_level">3D-bygningers detaljering</string>
-    <string name="show_expand_button">Vis udvidknap</string>
+    <string name="show_expand_button">Vis udvidelsesknap</string>
     <string name="imprecise_coordinates">Upræcise koordinater</string>
     <string name="star_map">Stjernekort</string>
     <string name="star_visibility_name">Stjernesynlighed</string>
@@ -6194,4 +6194,6 @@
     <string name="open_till_short">Til</string>
     <string name="open_from_short">Fra</string>
     <string name="astro_designations">Betegnelser</string>
+    <string name="astronomy_map">Astronomikort</string>
+    <string name="obd_simulation_device">Simuleringsenhed</string>
 </resources>

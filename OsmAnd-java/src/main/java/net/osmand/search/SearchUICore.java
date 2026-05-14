@@ -8,6 +8,7 @@ import net.osmand.Collator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapIndexReaderStats;
 import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
@@ -32,6 +33,7 @@ import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
+import net.osmand.search.core.SearchSettings.SortType;
 import net.osmand.search.core.SearchWord;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -58,7 +60,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Function;
+import java.util.function.BooleanSupplier;
 
 public class SearchUICore {
 	
@@ -80,27 +82,29 @@ public class SearchUICore {
 	List<SearchCoreAPI> apis = new ArrayList<>();
 	private SearchSettings searchSettings;
 	private MapPoiTypes poiTypes;
+	private final BooleanSupplier internetConnectionAvailable;
 
 	private static boolean debugMode = false;
 
 	private static final Set<String> FILTER_DUPLICATE_POI_SUBTYPE = new TreeSet<String>(
 			Arrays.asList("building", "internet_access_yes"));
 
-	private Function<String, String> httpRedirectRequester = null;
-	private static final int MIN_COMPLETE_MATCH_WEIGHT = 40;
-
 	public SearchUICore(MapPoiTypes poiTypes, String locale, boolean transliterate) {
+		this(poiTypes, locale, transliterate, () -> true);
+	}
+
+	public SearchUICore(MapPoiTypes poiTypes, String locale, boolean transliterate,
+			BooleanSupplier internetConnectionAvailable) {
 		this.poiTypes = poiTypes;
+		this.internetConnectionAvailable = internetConnectionAvailable != null
+				? internetConnectionAvailable
+				: () -> true;
 		taskQueue = new LinkedBlockingQueue<Runnable>();
 		searchSettings = new SearchSettings(new ArrayList<BinaryMapIndexReader>());
 		searchSettings = searchSettings.setLang(locale, transliterate);
 		phrase = SearchPhrase.emptyPhrase(searchSettings);
 		currentSearchResult = new SearchResultCollection(phrase);
 		singleThreadedExecutor = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, taskQueue);
-	}
-
-	public void setHttpRedirectRequester(Function<String, String> httpRedirectRequester) {
-		this.httpRedirectRequester = httpRedirectRequester;
 	}
 
 	public static void setDebugMode(boolean debugMode) {
@@ -576,7 +580,7 @@ public class SearchUICore {
 	public void init() {
 		SearchAmenityByNameAPI amenitiesApi = new SearchCoreFactory.SearchAmenityByNameAPI();
 		apis.add(amenitiesApi);
-		apis.add(new SearchCoreFactory.SearchLocationAndUrlAPI(amenitiesApi, httpRedirectRequester));
+		apis.add(new SearchCoreFactory.SearchLocationAndUrlAPI(amenitiesApi, internetConnectionAvailable));
 		SearchAmenityTypesAPI searchAmenityTypesAPI = new SearchAmenityTypesAPI(poiTypes);
 		apis.add(searchAmenityTypesAPI);
 		apis.add(new SearchAmenityByTypeAPI(poiTypes, searchAmenityTypesAPI));
@@ -663,7 +667,8 @@ public class SearchUICore {
 	}
 
 	public boolean selectSearchResult(SearchResult r) {
-		this.phrase = this.phrase.selectWord(r);
+		SearchSettings newSettings = this.phrase.getSettings(); 
+		this.phrase = this.phrase.selectWord(r, newSettings);
 		return true;
 	}
 
@@ -692,7 +697,7 @@ public class SearchUICore {
 		if (loc != null) {
 			searchSettings = searchSettings.setOriginalLocation(loc);
 		}
-		final SearchPhrase searchPhrase = this.phrase.generateNewPhrase(text, searchSettings);
+		final SearchPhrase searchPhrase = this.phrase.generateNewPhrase(text, resetSearchSettingsForNewRequest(searchSettings));
 		final SearchResultMatcher rm = new SearchResultMatcher(null, searchPhrase, requestNumber.get(), requestNumber, totalLimit);
 		searchInternal(searchPhrase, rm);
 		SearchResultCollection resultCollection = new SearchResultCollection(searchPhrase);
@@ -716,7 +721,7 @@ public class SearchUICore {
 			this.searchSettings = overrideSettings;
 		}
 		final int request = requestNumber.incrementAndGet();
-		final SearchPhrase phrase = this.phrase.generateNewPhrase(text, searchSettings);
+		final SearchPhrase phrase = this.phrase.generateNewPhrase(text, resetSearchSettingsForNewRequest(searchSettings));
 		phrase.setAcceptPrivate(this.phrase.isAcceptPrivate());
 		this.phrase = phrase;
 		if (debugMode) {
@@ -830,6 +835,15 @@ public class SearchUICore {
 		});
 	}
 
+	private SearchSettings resetSearchSettingsForNewRequest(SearchSettings settings) {
+		if (settings.getStat() == null || settings.getStat().totalTime == 0) {
+			return settings;
+		}
+		settings = new SearchSettings(settings);
+		settings.setStat(new BinaryMapIndexReaderStats.SearchStat());
+		return settings;
+	}
+
 
 	public boolean isSearchMoreAvailable(SearchPhrase phrase) {
 		for (SearchCoreAPI api : apis) {
@@ -886,6 +900,11 @@ public class SearchUICore {
 	}
 
 	void searchInternal(final SearchPhrase phrase, SearchResultMatcher matcher) {
+		long totalTime = 0;
+		BinaryMapIndexReaderStats.SearchStat stat = phrase.getSettings().getStat();
+		if (stat != null) {
+			LOG.info("Total Stat API time=" + stat.totalTime);
+		}
 		preparePhrase(phrase);
 		ArrayList<SearchCoreAPI> lst = new ArrayList<>(apis);
 		Collections.sort(lst, new Comparator<SearchCoreAPI>() {
@@ -897,6 +916,7 @@ public class SearchUICore {
 			}
 		});
 		for (SearchCoreAPI api : lst) {
+			long start = debugMode ? System.currentTimeMillis() : 0;
 			if (matcher.isCancelled()) {
 				break;
 			}
@@ -913,12 +933,19 @@ public class SearchUICore {
 				}
 				matcher.apiSearchFinished(api, phrase);
 				if (debugMode) {
-					LOG.info("API search done <" + phrase + "> API=<" + api + ">");
+					long deltaTime = (System.currentTimeMillis() - start);
+					totalTime += deltaTime;
+					LOG.info("API search done <" + phrase + "> API=<" + api + ">, time=" + deltaTime);
 				}
 			} catch (Throwable e) {
 				e.printStackTrace();
 				LOG.error(e.getMessage(), e);
 			}
+		}
+		
+		if (stat != null) {
+			LOG.info(stat.toDetailedString());
+			LOG.info("API search total <" + phrase + ", time=" + totalTime);
 		}
 	}
 
@@ -1251,7 +1278,7 @@ public class SearchUICore {
 				}
 				break;
 			case SEARCH_DISTANCE_IF_NOT_BY_NAME: 
-				if (!c.sortByName) {
+				if (c.sortType != SortType.IGNORE_DISTANCE) {
 					double s1 = o1.getSearchDistance(c.loc);
 					double s2 = o2.getSearchDistance(c.loc);
 					if (s1 != s2) {
@@ -1326,19 +1353,22 @@ public class SearchUICore {
 	public static class SearchResultComparator implements Comparator<SearchResult> {
 		private Collator collator;
 		private LatLon loc;
-		private boolean sortByName;
+		private SearchSettings.SortType sortType;
 		
 
 		public SearchResultComparator(SearchPhrase sp) {
 			this.collator = sp.getCollator();
 			loc = sp.getLastTokenLocation();
-			sortByName = sp.isSortByName();
+			sortType = sp.getSettings().getSortType();
 		}
 		
 
 		@Override
 		public int compare(SearchResult o1, SearchResult o2) {
 			List<ResultCompareStep> steps = new ArrayList<>();
+			if (sortType == SearchSettings.SortType.ONLY_BY_DISTANCE) {
+				return ResultCompareStep.COMPARE_BY_DISTANCE.compare(o1, o2, this);
+			}
 			for (ResultCompareStep step : ResultCompareStep.values()) {
 				int r = step.compare(o1, o2, this);
 				steps.add(step);
@@ -1352,25 +1382,6 @@ public class SearchUICore {
 			return 0;
 		}
 
-	}
-	
-	public static class SearchResultComparatorOneStep extends SearchResultComparator {		
-		ResultCompareStep step;
-		
-		public SearchResultComparatorOneStep(SearchPhrase sp) {
-			super(sp);
-			this.step = ResultCompareStep.COMPARE_BY_DISTANCE;
-		}
-
-		public SearchResultComparatorOneStep(SearchPhrase sp, ResultCompareStep step) {
-			super(sp);
-			this.step = step;
-		}
-
-		@Override
-		public int compare(SearchResult o1, SearchResult o2) {
-            return step.compare(o1, o2, this);
-        }
 	}
 
 	public static String getMainCityName(String cityName) {
@@ -1401,4 +1412,5 @@ public class SearchUICore {
 			return (Algorithms.isEmpty(cityName) ? "" : (cityName + ", ")) + addr;
 		}
 	}
+
 }

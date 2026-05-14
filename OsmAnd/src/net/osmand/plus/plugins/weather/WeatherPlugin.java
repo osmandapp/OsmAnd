@@ -149,7 +149,7 @@ public class WeatherPlugin extends OsmandPlugin {
 					updateLayers(app, null);
 
 					if (weatherHelper.shouldUpdateForecastCache()) {
-						weatherHelper.updateForecastCache();
+						weatherHelper.updateForecastCacheAsync();
 					}
 				} else if (event == INDEX_REGION_BOUNDARIES) {
 					clearOutdatedCache();
@@ -174,7 +174,7 @@ public class WeatherPlugin extends OsmandPlugin {
 			updateMapPresentationEnvironment();
 
 			if (weatherHelper.shouldUpdateForecastCache()) {
-				weatherHelper.updateForecastCache();
+				weatherHelper.updateForecastCacheAsync();
 			}
 		}
 		return super.init(app, activity);
@@ -190,7 +190,7 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	private void clearOutdatedCache() {
 		if (weatherHelper.getWeatherResourcesManager() != null) {
-			weatherHelper.clearOutdatedCache();
+			weatherHelper.clearOutdatedCacheAsync();
 		} else {
 			log.error("Tile Resources Manager isn't initialized");
 		}

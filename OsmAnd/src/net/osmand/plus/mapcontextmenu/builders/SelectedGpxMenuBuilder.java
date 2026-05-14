@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.mapcontextmenu.BuildRowAttrs;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.TrackDisplayGroup;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.primitives.TrkSegment;
@@ -162,7 +163,11 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 
 	@Nullable
 	private TrackDisplayGroup getTrackGroup() {
-		List<GpxDisplayGroup> gpxDisplayGroups = selectedGpxPoint.getSelectedGpxFile().getSplitGroups(app);
+		SelectedGpxFile selectedGpxFile = selectedGpxPoint.getSelectedGpxFile();
+		if (selectedGpxFile == null) {
+			return null;
+		}
+		List<GpxDisplayGroup> gpxDisplayGroups = selectedGpxFile.getSplitGroups(app);
 		if (Algorithms.isEmpty(gpxDisplayGroups)) {
 			return null;
 		}
@@ -176,13 +181,14 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 
 	private GpxDisplayItem findDisplayItem() {
 		TrackDisplayGroup trackGroup = getTrackGroup();
-		if (trackGroup == null) return null;
+		SelectedGpxFile selectedGpxFile = selectedGpxPoint.getSelectedGpxFile();
+		if (trackGroup == null || selectedGpxFile == null) return null;
 
 		WptPt refPoint = selectedGpxPoint.getPrevPoint();
 		if (refPoint == null) refPoint = selectedGpxPoint.getNextPoint();
 		if (refPoint == null) refPoint = selectedPoint;
 
-		for (TrkSegment segment : selectedGpxPoint.getSelectedGpxFile().getPointsToDisplay()) {
+		for (TrkSegment segment : selectedGpxFile.getPointsToDisplay()) {
 			List<WptPt> points = segment.getPoints();
 			int currentIndex = points.indexOf(refPoint);
 			if (currentIndex == -1) continue;

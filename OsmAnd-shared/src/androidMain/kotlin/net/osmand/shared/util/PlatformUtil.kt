@@ -2,7 +2,6 @@ package net.osmand.shared.util
 
 import android.content.Context
 import net.osmand.shared.KException
-import net.osmand.shared.api.NetworkAPIImpl
 import net.osmand.shared.api.NetworkAPI
 import net.osmand.shared.api.OsmAndContext
 import net.osmand.shared.api.SQLiteAPI
@@ -20,7 +19,7 @@ actual object PlatformUtil {
 	fun initialize(context: Context, osmAndContext: OsmAndContext) {
 		this.context = WeakReference(context)
 		this.osmAndContext = osmAndContext
-		this.networkAPI = NetworkAPIImpl()
+		this.networkAPI = NetworkAPI()
 
 		sqliteApi = SQLiteAPIImpl(context)
 		Localization.initialize(context)

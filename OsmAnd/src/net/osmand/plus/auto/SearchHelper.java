@@ -12,6 +12,7 @@ import androidx.car.app.model.*;
 import androidx.core.graphics.drawable.IconCompat;
 
 import net.osmand.Location;
+import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -25,6 +26,7 @@ import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import net.osmand.util.OpeningHoursParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -187,15 +189,9 @@ public class SearchHelper {
 					continue;
 				}
 				Drawable icon = QuickSearchListItem.getIcon(app, r);
-				String typeName = showDescription ? addAddress(QuickSearchListItem.getTypeName(app, r), r) : r.addressName;
 				itemList.setNoItemsMessage(app.getString(R.string.search_nothing_found));
-				if (!Algorithms.isEmpty(typeName)) {
-					int typenameComaPosition = typeName.indexOf(",");
-					if (typenameComaPosition > 0) {
-						typeName = typeName.substring(0, typenameComaPosition);
-					}
-				}
-				Row.Builder builder = buildSearchRow(searchSettings.getOriginalLocation(), r.location, name, icon, typeName);
+				String description = composeDescription(r);
+				Row.Builder builder = buildSearchRow(searchSettings.getOriginalLocation(), r.location, name, icon, description);
 				if (builder != null) {
 					builder.setOnClickListener(() -> {
 						if (listener != null) {
@@ -247,6 +243,37 @@ public class SearchHelper {
 		searchUICore.search(searchQuery, true, null, searchSettings);
 	}
 
+	private String composeDescription(@NonNull SearchResult searchResult) {
+		StringBuilder description = new StringBuilder();
+		String typeName = "";
+		if (showDescription) {
+			typeName = QuickSearchListItem.getTypeName(app, searchResult);
+			if (!Algorithms.isEmpty(typeName)) {
+				int typenameComaPosition = typeName.indexOf(",");
+				if (typenameComaPosition > 0) {
+					typeName = typeName.substring(0, typenameComaPosition);
+				}
+			}
+			if (!Algorithms.isEmpty(typeName)) {
+				description.append(typeName);
+			}
+		}
+		String openHour = null;
+		if (searchResult.object instanceof Amenity amenity) {
+			List<OpeningHoursParser.OpeningHours.Info> openHourInfo = OpeningHoursParser.getInfo(amenity.getOpeningHours());
+			if (openHourInfo != null && !openHourInfo.isEmpty()) {
+				openHour = openHourInfo.get(0).getShortInfo();
+			}
+			if (!Algorithms.isEmpty(openHour)) {
+				if (!Algorithms.isEmpty(description)) {
+					description.append(" • ");
+					description.append(openHour);
+				}
+			}
+		}
+		return addAddress(description.toString(), searchResult);
+	}
+
 	public String addAddress(@NonNull String str, @NonNull SearchResult result) {
 		if(!Algorithms.isEmpty(result.addressName)) {
 			return String.format("%s • %s", str, result.addressName);
@@ -266,27 +293,31 @@ public class SearchHelper {
 
 	@Nullable
 	public Row.Builder buildSearchRow(@Nullable LatLon searchLocation, @Nullable LatLon placeLocation,
-	                                  @NonNull String name, @Nullable Drawable icon, @Nullable String typeName) {
+	                                  @NonNull String name, @Nullable Drawable icon, @Nullable String description) {
 		Row.Builder builder = new Row.Builder();
 		if (icon != null) {
 			builder.setImage(new CarIcon.Builder(IconCompat.createWithBitmap(AndroidUtils.drawableToBitmap(icon))).build());
 		}
 		builder.setTitle(name);
-		if (name.equals(typeName)) {
-			typeName = "";
+		if (name.equals(description)) {
+			description = "";
 		}
 		if (placeLocation != null && searchLocation != null) {
 			float dist = (float) MapUtils.getDistance(placeLocation, searchLocation);
-			SpannableString description = !Algorithms.isEmpty(typeName)
-					? new SpannableString("  • " + typeName) : new SpannableString(" ");
+			StringBuilder descriptionBuilder = new StringBuilder(" ");
+			if (!Algorithms.isEmpty(description)) {
+				descriptionBuilder.append(" • ");
+				descriptionBuilder.append(description);
+			}
+			SpannableString descriptionSpannable = new SpannableString(descriptionBuilder.toString());
 			DistanceSpan distanceSpan = DistanceSpan.create(TripUtils.getDistance(app, dist));
-			description.setSpan(distanceSpan, 0, 1, SPAN_INCLUSIVE_INCLUSIVE);
-			builder.addText(description);
+			descriptionSpannable.setSpan(distanceSpan, 0, 1, SPAN_INCLUSIVE_INCLUSIVE);
+			builder.addText(descriptionSpannable);
 			builder.setMetadata(new Metadata.Builder().setPlace(new Place.Builder(
 					CarLocation.create(placeLocation.getLatitude(), placeLocation.getLongitude())).build()).build());
 		} else {
-			if (!Algorithms.isEmpty(typeName)) {
-				builder.addText(typeName);
+			if (!Algorithms.isEmpty(description)) {
+				builder.addText(description);
 			}
 			builder.setBrowsable(true);
 		}

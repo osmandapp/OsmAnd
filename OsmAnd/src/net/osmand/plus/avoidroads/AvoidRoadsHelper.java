@@ -36,7 +36,7 @@ public class AvoidRoadsHelper {
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
 	private final DirectionPointsHelper pointsHelper;
-	private final List<AvoidRoadInfo> impassableRoads = new LinkedList<>();
+	private List<AvoidRoadInfo> impassableRoads = new LinkedList<>();
 
 	public AvoidRoadsHelper(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -67,8 +67,7 @@ public class AvoidRoadsHelper {
 		for (RoutingConfiguration.Builder builder : app.getAllRoutingConfigs()) {
 			builder.clearImpassableRoadLocations();
 		}
-		impassableRoads.clear();
-		impassableRoads.addAll(settings.getImpassableRoadPoints());
+		updateImpassableRoads(settings.getImpassableRoadPoints());
 	}
 
 	@NonNull
@@ -127,7 +126,7 @@ public class AvoidRoadsHelper {
 	}
 
 	public void removeImpassableRoad(@NonNull AvoidRoadInfo roadInfo) {
-		impassableRoads.remove(roadInfo);
+		removeImpassableRoadFromList(roadInfo);
 		removeFromRoutingConfigs(roadInfo.getId());
 		settings.removeImpassableRoad(roadInfo.getLatLon());
 	}
@@ -218,7 +217,7 @@ public class AvoidRoadsHelper {
 					if (oldLoc != null) {
 						settings.moveImpassableRoad(oldLoc, newLoc);
 					}
-					impassableRoads.remove(currentObject);
+					removeImpassableRoadFromList(currentObject);
 					removeFromRoutingConfigs(currentObject.getId());
 
 					AvoidRoadInfo roadInfo = getOrCreateAvoidRoadInfo(newLoc, appMode.getStringKey(), object);
@@ -242,9 +241,7 @@ public class AvoidRoadsHelper {
 		boolean roadAdded = addToRoutingConfigs(roadInfo.getId());
 		if (roadAdded) {
 			settings.updateImpassableRoadInfo(roadInfo);
-			if (!impassableRoads.contains(roadInfo)) {
-				impassableRoads.add(0, roadInfo);
-			}
+			addImpassableRoadToList(roadInfo);
 		} else {
 			LatLon location = getLocation(roadInfo);
 			if (location != null) {
@@ -313,6 +310,24 @@ public class AvoidRoadsHelper {
 			}
 		}
 		return null;
+	}
+
+	private void updateImpassableRoads(@NonNull List<AvoidRoadInfo> roadInfos) {
+		impassableRoads = new LinkedList<>(roadInfos);
+	}
+
+	private void addImpassableRoadToList(@NonNull AvoidRoadInfo roadInfo) {
+		List<AvoidRoadInfo> list = new LinkedList<>(impassableRoads);
+		if (!list.contains(roadInfo)) {
+			list.add(0, roadInfo);
+		}
+		impassableRoads = list;
+	}
+
+	private void removeImpassableRoadFromList(@NonNull AvoidRoadInfo roadInfo) {
+		List<AvoidRoadInfo> list = new LinkedList<>(impassableRoads);
+		list.remove(roadInfo);
+		impassableRoads = list;
 	}
 
 	@NonNull
