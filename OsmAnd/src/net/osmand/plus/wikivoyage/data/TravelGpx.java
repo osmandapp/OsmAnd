@@ -179,7 +179,7 @@ public class TravelGpx extends TravelArticle {
 		}
 
 		if (linkHref != null || linkText != null) {
-			wptPt.setLink(new Link(linkHref, linkText)); // nullable href/text
+			wptPt.setLink(new Link(linkHref, linkText, null)); // nullable href/text
 		}
 
 		return wptPt;

@@ -19,6 +19,7 @@ import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.shared.util.Localization;
 
 import java.util.Objects;
 
@@ -147,7 +148,7 @@ public interface IOsmAndFragment extends AppModeDependentComponent {
 		return getThemedInflater().inflate(layoutResId, parent, attachToRoot);
 	}
 
-	// === Resource access: dimensions, dp, colors ===
+	// === Resource access: dimensions, dp, colors, strings ===
 
 	default int dpToPx(float dp) {
 		return AndroidUtils.dpToPx(getApp(), dp);
@@ -166,6 +167,11 @@ public interface IOsmAndFragment extends AppModeDependentComponent {
 	@ColorInt
 	default int getColor(@ColorRes int colorId) {
 		return ColorUtilities.getColor(getApp(), colorId);
+	}
+
+	@NonNull
+	default String getString(@NonNull String resId) {
+		return Localization.INSTANCE.getString(resId);
 	}
 
 	// === Icon access and customization ===
@@ -198,5 +204,10 @@ public interface IOsmAndFragment extends AppModeDependentComponent {
 	@Nullable
 	default Drawable getPaintedIcon(@DrawableRes int id, @ColorInt int color) {
 		return getIconsCache().getPaintedIcon(id, color);
+	}
+
+	@DrawableRes
+	default int getDrawableId(@Nullable String iconName) {
+		return AndroidUtils.getDrawableId(getApp(), iconName);
 	}
 }

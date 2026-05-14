@@ -67,7 +67,7 @@
 			android:layout_height="match_parent"
 			android:orientation="vertical">
 
-			<net.osmand.plus.mapcontextmenu.gallery.GalleryGridRecyclerView
+			<net.osmand.plus.gallery.ui.GalleryGridRecyclerView
 				android:id="@+id/content_list"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"

@@ -7,11 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard
-import net.osmand.plus.mapcontextmenu.gallery.GalleryController
-import net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter
-import net.osmand.plus.mapcontextmenu.gallery.GalleryPhotoPagerFragment
+import net.osmand.plus.gallery.controller.GalleryController
+import net.osmand.plus.gallery.ui.GalleryListener
+import net.osmand.plus.gallery.controller.GalleryMediaLoadStateProvider
+import net.osmand.plus.gallery.ui.GalleryPhotoPagerFragment
 import net.osmand.plus.plugins.astronomy.Catalog
+import net.osmand.shared.media.domain.MediaItem
 import java.time.LocalDate
 
 class AstroContextMenuAdapter(
@@ -43,6 +44,11 @@ class AstroContextMenuAdapter(
 
 	init {
 		setHasStableIds(true)
+	}
+
+	private val emptyMediaLoadStateProvider = object : GalleryMediaLoadStateProvider {
+		override fun isMediaLoadFailed(mediaItem: MediaItem): Boolean = false
+		override fun markMediaLoadFailed(mediaItem: MediaItem) = Unit
 	}
 
 	override fun getItemId(position: Int): Long = getItem(position).key.stableId
@@ -109,21 +115,22 @@ class AstroContextMenuAdapter(
 					itemView = view,
 					app = app,
 					mapActivity = mapActivity,
-					listener = object : GalleryGridAdapter.ImageCardListener {
+					listener = object : GalleryListener {
 
-						override fun onImageClicked(imageCard: ImageCard) {
+						override fun onMediaItemClicked(mediaItem: MediaItem) {
 							galleryController?.let { controller ->
 								GalleryPhotoPagerFragment.showInstance(
 									mapActivity,
-									controller.getImageCardFromUrl(imageCard.imageUrl)
+									controller.getPhotoItemIndexById(mediaItem.id)
 								)
 							}
 						}
 
-						override fun onReloadImages() {
+						override fun onReloadMediaItems() {
 							onUpdateImage()
 						}
 					},
+					mediaLoadStateProvider = galleryController ?: emptyMediaLoadStateProvider,
 					onToggle = onGalleryToggle
 				)
 			}
