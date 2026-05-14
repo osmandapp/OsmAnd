@@ -17,7 +17,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.plus.gallery.controller.GalleryItemsHolder;
-import net.osmand.plus.gallery.data.RemoteMediaFactory;
+import net.osmand.shared.media.RemoteMediaFactory;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.mapillary.MapillaryOsmTagHelper;
 import net.osmand.plus.utils.AndroidNetworkUtils;
@@ -96,7 +96,7 @@ public class GetOnlineImagesTask extends AsyncTask<Void, Void, GalleryItemsHolde
 			if (!Algorithms.isEmpty(key)) {
 				JSONObject imageObject = MapillaryOsmTagHelper.getImageByKey(key);
 				if (imageObject != null) {
-					MediaItem item = RemoteMediaFactory.fromJson(imageObject, MediaOrigin.MAPILLARY);
+					MediaItem item = RemoteMediaFactory.fromJson(imageObject.toString(), MediaOrigin.MAPILLARY);
 					if (item != null) {
 						holder.addMediaItem(MAPILLARY_AMENITY, item);
 					}
@@ -114,7 +114,7 @@ public class GetOnlineImagesTask extends AsyncTask<Void, Void, GalleryItemsHolde
 							JSONObject imageObject = (JSONObject) images.get(i);
 							if (imageObject != JSONObject.NULL) {
 								if (!PluginsHelper.addContextMenuGalleryItem(holder, imageObject)) {
-									MediaItem.Remote mediaItem = RemoteMediaFactory.fromUrlImageJson(imageObject);
+									MediaItem.Remote mediaItem = RemoteMediaFactory.fromUrlImageJson(imageObject.toString());
 									if (mediaItem != null) {
 										holder.addMediaItem(OTHER, mediaItem, true);
 									}

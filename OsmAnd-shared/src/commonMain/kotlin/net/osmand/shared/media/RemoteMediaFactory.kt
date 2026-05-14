@@ -1,5 +1,11 @@
-package net.osmand.plus.gallery.data
+package net.osmand.shared.media
 
+import kotlinx.datetime.Instant
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.contentOrNull
+import kotlinx.serialization.json.jsonObject
 import net.osmand.shared.media.domain.MediaDetails
 import net.osmand.shared.media.domain.MediaItem
 import net.osmand.shared.media.domain.MediaOrigin
@@ -7,11 +13,8 @@ import net.osmand.shared.media.domain.MediaPreviewUris
 import net.osmand.shared.media.domain.MediaType
 import net.osmand.shared.media.domain.RemoteMetadata
 import net.osmand.shared.wiki.WikiImage
-import org.json.JSONObject
-import java.text.ParseException
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+import kotlin.jvm.JvmStatic
+import kotlin.jvm.JvmSynthetic
 
 object RemoteMediaFactory {
 
@@ -20,10 +23,18 @@ object RemoteMediaFactory {
 
 	private const val TYPE_URL_PHOTO = "url-photo"
 
-	private val DATE_FORMAT = object : ThreadLocal<SimpleDateFormat>() {
-		override fun initialValue(): SimpleDateFormat {
-			return SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US)
+	@JvmStatic
+	fun fromJson(
+		jsonString: String?,
+		origin: MediaOrigin = MediaOrigin.UNKNOWN
+	): MediaItem.Remote? {
+		if (jsonString.isNullOrBlank()) return null
+		val jsonObject = try {
+			Json.parseToJsonElement(jsonString).jsonObject
+		} catch (e: Exception) {
+			return null
 		}
+		return fromJson(jsonObject, origin)
 	}
 
 	/**
@@ -38,9 +49,9 @@ object RemoteMediaFactory {
 	 * OSM "image" tag objects should use fromUrlImageJson(), because they may point to
 	 * arbitrary external services and require safer preview/fullscreen URI handling.
 	 */
-	@JvmStatic
+	@JvmSynthetic
 	fun fromJson(
-		imageObject: JSONObject,
+		imageObject: JsonObject,
 		origin: MediaOrigin = MediaOrigin.UNKNOWN
 	): MediaItem.Remote? {
 		val mediaUri = imageObject.optStringOrNull("imageUrl") ?: return null
@@ -97,6 +108,17 @@ object RemoteMediaFactory {
 		)
 	}
 
+	@JvmStatic
+	fun fromUrlImageJson(jsonString: String?): MediaItem.Remote? {
+		if (jsonString.isNullOrBlank()) return null
+		val jsonObject = try {
+			Json.parseToJsonElement(jsonString).jsonObject
+		} catch (e: Exception) {
+			return null
+		}
+		return fromUrlImageJson(jsonObject)
+	}
+
 	/**
 	 * Creates a remote media item from an OSM "image" tag JSON object.
 	 *
@@ -105,8 +127,8 @@ object RemoteMediaFactory {
 	 * for both standard and full-size loading, while externalUri is resolved separately
 	 * for opening the media outside the app.
 	 */
-	@JvmStatic
-	fun fromUrlImageJson(imageObject: JSONObject): MediaItem.Remote? {
+	@JvmSynthetic
+	fun fromUrlImageJson(imageObject: JsonObject): MediaItem.Remote? {
 		if (!isUrlImageJson(imageObject)) {
 			return null
 		}
@@ -153,41 +175,54 @@ object RemoteMediaFactory {
 		return imageHiresUrl?.takeIf { it.isNotBlank() }?.let { "$it?width=$GALLERY_FULL_SIZE_WIDTH" }
 	}
 
-	private fun parseTimestamp(timestamp: String?): Date? {
+	private fun parseTimestamp(timestamp: String?): Long? {
 		if (timestamp.isNullOrBlank()) {
 			return null
 		}
-
 		timestamp.toLongOrNull()?.let {
-			return Date(it)
+			return it
 		}
-
 		return try {
-			DATE_FORMAT.get()?.parse(timestamp)
-		} catch (e: ParseException) {
+			Instant.parse(timestamp).toEpochMilliseconds()
+		} catch (e: Exception) {
 			null
 		}
 	}
 
 	@JvmStatic
-	fun isUrlImageJson(imageObject: JSONObject): Boolean {
+	fun isUrlImageJson(jsonString: String?): Boolean {
+		if (jsonString.isNullOrBlank()) return false
+		val jsonObject = try {
+			Json.parseToJsonElement(jsonString).jsonObject
+		} catch (e: Exception) {
+			return false
+		}
+		return isUrlImageJson(jsonObject)
+	}
+
+	@JvmSynthetic
+	fun isUrlImageJson(imageObject: JsonObject): Boolean {
 		return TYPE_URL_PHOTO == imageObject.optStringOrNull("type")
 	}
 
-	private fun JSONObject.optStringOrNull(name: String): String? {
-		return if (has(name) && !isNull(name)) optString(name).takeIf { it.isNotBlank() } else null
+	private fun JsonObject.getPrimitive(name: String): JsonPrimitive? {
+		return this[name] as? JsonPrimitive
 	}
 
-	private fun JSONObject.optDoubleOrNull(name: String): Double? {
-		return if (has(name) && !isNull(name)) optDouble(name) else null
+	private fun JsonObject.optStringOrNull(name: String): String? {
+		return getPrimitive(name)?.contentOrNull?.takeIf { it.isNotBlank() }
 	}
 
-	private fun JSONObject.optBooleanOrFalse(name: String): Boolean {
-		return has(name) && !isNull(name) && optBoolean(name, false)
+	private fun JsonObject.optDoubleOrNull(name: String): Double? {
+		return getPrimitive(name)?.contentOrNull?.toDoubleOrNull()
 	}
 
-	private fun JSONObject.optFloatOrNaN(name: String): Float {
-		return if (has(name) && !isNull(name)) optDouble(name).toFloat() else Float.NaN
+	private fun JsonObject.optBooleanOrFalse(name: String): Boolean {
+		return "true".equals(getPrimitive(name)?.contentOrNull, ignoreCase = true)
+	}
+
+	private fun JsonObject.optFloatOrNaN(name: String): Float {
+		return getPrimitive(name)?.contentOrNull?.toFloatOrNull() ?: Float.NaN
 	}
 
 	/**
@@ -197,13 +232,13 @@ object RemoteMediaFactory {
 	 * are intentionally not mapped here because MediaItem should only contain media data.
 	 * Known source icons are represented by MediaOrigin.
 	 */
-	private fun createRemoteMetadata(imageObject: JSONObject): RemoteMetadata {
+	private fun createRemoteMetadata(imageObject: JsonObject): RemoteMetadata {
 		return RemoteMetadata(
 			key = imageObject.optStringOrNull("key").orEmpty(),
 			latitude = imageObject.optDoubleOrNull("lat"),
 			longitude = imageObject.optDoubleOrNull("lon"),
 			cameraAngle = imageObject.optDoubleOrNull("ca") ?: Double.NaN,
-			timestamp = parseTimestamp(imageObject.optStringOrNull("timestamp"))?.time,
+			timestamp = parseTimestamp(imageObject.optStringOrNull("timestamp")),
 			userName = imageObject.optStringOrNull("username").orEmpty(),
 			externalLink = imageObject.optBooleanOrFalse("externalLink"),
 			distance = imageObject.optFloatOrNaN("distance"),

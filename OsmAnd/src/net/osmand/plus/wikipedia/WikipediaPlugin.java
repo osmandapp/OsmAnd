@@ -40,7 +40,7 @@ import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.gallery.controller.GalleryItemsHolder;
-import net.osmand.plus.gallery.data.RemoteMediaFactory;
+import net.osmand.shared.media.RemoteMediaFactory;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;

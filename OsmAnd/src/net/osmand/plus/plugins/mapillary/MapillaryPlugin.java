@@ -36,7 +36,7 @@ import net.osmand.plus.gallery.controller.GalleryController;
 import net.osmand.plus.gallery.ui.GalleryGridConfig;
 import net.osmand.plus.gallery.model.GalleryMediaGroup;
 import net.osmand.plus.gallery.controller.GalleryItemsHolder;
-import net.osmand.plus.gallery.data.RemoteMediaFactory;
+import net.osmand.shared.media.RemoteMediaFactory;
 import net.osmand.plus.gallery.tasks.GetOnlineImagesTask.GetImageCardsListener;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -370,7 +370,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 		try {
 			if (mapillaryPhoto) {
-				MediaItem.Remote item = RemoteMediaFactory.fromJson(imageObject, MediaOrigin.MAPILLARY);
+				MediaItem.Remote item = RemoteMediaFactory.fromJson(imageObject.toString(), MediaOrigin.MAPILLARY);
 				if (item != null) {
 					holder.addMediaItem(GalleryMediaGroup.MAPILLARY, item);
 				}

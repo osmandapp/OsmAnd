@@ -77,7 +77,7 @@ import net.osmand.plus.gallery.controller.GalleryController;
 import net.osmand.plus.gallery.ui.GalleryGridConfig;
 import net.osmand.plus.gallery.controller.GalleryItemsHolder;
 import net.osmand.plus.gallery.cache.PhotoCacheManager;
-import net.osmand.plus.gallery.data.RemoteMediaFactory;
+import net.osmand.shared.media.RemoteMediaFactory;
 import net.osmand.plus.gallery.tasks.CacheReadTask;
 import net.osmand.plus.gallery.tasks.CacheWriteTask;
 import net.osmand.plus.gallery.tasks.GetOnlineImagesTask;

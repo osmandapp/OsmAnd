@@ -9,7 +9,7 @@ import net.osmand.plus.gallery.controller.GalleryController
 import net.osmand.plus.gallery.model.GalleryMediaGroup
 import net.osmand.plus.gallery.controller.GalleryItemsHolder
 import net.osmand.plus.gallery.cache.PhotoCacheManager
-import net.osmand.plus.gallery.data.RemoteMediaFactory
+import net.osmand.shared.media.RemoteMediaFactory
 import net.osmand.plus.gallery.tasks.CacheReadTask
 import net.osmand.plus.gallery.tasks.CacheWriteTask
 import net.osmand.shared.wiki.WikiCoreHelper
