@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.local.LocalItemType;
+import net.osmand.plus.myplaces.favorites.FavoriteFolderNode;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.ExportCategory;
@@ -14,6 +15,7 @@ import net.osmand.plus.settings.backend.backup.items.FavoritesSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -32,7 +34,14 @@ class FavoritesExportType extends AbstractExportType {
 	@NonNull
 	@Override
 	public List<?> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup) {
-		return app.getFavoritesHelper().getFavoriteGroups();
+		List<FavoriteGroup> groups = new ArrayList<>();
+		for (FavoriteFolderNode node : app.getFavoritesHelper().getFavoriteFolderTree().flatten(true)) {
+			FavoriteGroup group = node.getGroup();
+			if (group != null) {
+				groups.add(group);
+			}
+		}
+		return groups;
 	}
 
 	@NonNull
