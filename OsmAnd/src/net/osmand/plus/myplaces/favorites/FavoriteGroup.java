@@ -246,6 +246,7 @@ public class FavoriteGroup {
 		favoriteGroup.color = pointsGroup.getColor();
 		favoriteGroup.iconName = pointsGroup.getIconName();
 		favoriteGroup.backgroundType = BackgroundType.getByTypeName(pointsGroup.getBackgroundType(), DEFAULT_BACKGROUND_TYPE);
+		favoriteGroup.visible = !pointsGroup.isHidden();
 		Boolean groupPinned = pointsGroup.isPinned();
 		favoriteGroup.pinned = Objects.requireNonNullElseGet(groupPinned, () -> FavoriteGroup.isBaseFavoriteOrPersonalGroup(favoriteGroup.name));
 

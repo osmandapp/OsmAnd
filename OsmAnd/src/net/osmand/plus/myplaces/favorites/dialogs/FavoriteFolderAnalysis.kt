@@ -1,6 +1,7 @@
 package net.osmand.plus.myplaces.favorites.dialogs
 
 import net.osmand.plus.myplaces.favorites.FavoriteGroup
+import net.osmand.plus.myplaces.favorites.FavoriteFolderNode
 
 class FavoriteFolderAnalysis {
     var pointsCount = 0
@@ -9,6 +10,12 @@ class FavoriteFolderAnalysis {
 
     constructor(group: FavoriteGroup) {
         analyzeGroup(group)
+    }
+
+    constructor(node: FavoriteFolderNode) {
+        pointsCount = node.subtreePointsCount
+        foldersCount = node.subtreeFoldersCount
+        fileSize = node.subtreeFileSize
     }
 
     constructor(groups: List<FavoriteGroup>) {

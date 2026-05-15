@@ -11,6 +11,7 @@ import static net.osmand.plus.mapcontextmenu.other.ShareSheetReceiver.KEY_SHARE_
 import static net.osmand.plus.mapcontextmenu.other.ShareSheetReceiver.KEY_SHARE_LIST;
 import static net.osmand.plus.myplaces.favorites.dialogs.FavoritesSearchFragment.FAV_SEARCH_QUERY_KEY;
 import static net.osmand.plus.myplaces.favorites.dialogs.SearchFavoriteFragment.FAVORITE_SEARCH_GROUP_KEY;
+import static net.osmand.plus.myplaces.favorites.dialogs.SearchFavoriteFragment.FAVORITE_SEARCH_INCLUDE_ALL_KEY;
 import static net.osmand.plus.myplaces.favorites.dialogs.SearchFavoriteFragment.FAVORITE_SEARCH_QUERY_KEY;
 
 import android.animation.ValueAnimator;
@@ -104,9 +105,10 @@ public class MyPlacesActivity extends TabActivity {
 				if (bundle != null && bundle.containsKey(FAVORITE_SEARCH_QUERY_KEY) && bundle.containsKey(FAVORITE_SEARCH_GROUP_KEY)) {
 					String searchQuery = bundle.getString(FAVORITE_SEARCH_QUERY_KEY, "");
 					String groupKey = bundle.getString(FAVORITE_SEARCH_GROUP_KEY, "");
+					boolean includeAllGroups = bundle.getBoolean(FAVORITE_SEARCH_INCLUDE_ALL_KEY, groupKey.isEmpty());
 					FragmentManager manager = getSupportFragmentManager();
 
-					SearchFavoriteFragment.showInstance(manager, null, new ArrayList<>(), groupKey, searchQuery);
+					SearchFavoriteFragment.showInstance(manager, null, new ArrayList<>(), groupKey, searchQuery, includeAllGroups);
 				}
 
 				if (intent.hasExtra(MapActivity.INTENT_PARAMS)) {
