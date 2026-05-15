@@ -102,6 +102,21 @@ public class FavouritesHelper {
 	}
 
 	@NonNull
+	public FavoriteFolderTree getFavoriteFolderTree() {
+		return new FavoriteFolderTree(favoriteGroups);
+	}
+
+	@Nullable
+	public FavoriteFolderNode getFavoriteFolderNode(@NonNull String fullPath) {
+		return getFavoriteFolderTree().getNode(fullPath);
+	}
+
+	@NonNull
+	public List<FavoriteGroup> getFavoriteGroupsInSubtree(@NonNull String fullPath) {
+		return getFavoriteFolderTree().getGroupsInSubtree(fullPath);
+	}
+
+	@NonNull
 	public List<FavouritePoint> getFavouritePoints() {
 		return new ArrayList<>(cachedFavoritePoints);
 	}
@@ -639,6 +654,54 @@ public class FavouritesHelper {
 		return false;
 	}
 
+	public boolean deleteFavoriteFolderSubtree(@NonNull String fullPath, boolean saveImmediately) {
+		if (Algorithms.isEmpty(fullPath)) {
+			return false;
+		}
+		List<FavoriteGroup> groupsToDelete = getFavoriteGroupsInSubtree(fullPath);
+		if (Algorithms.isEmpty(groupsToDelete)) {
+			return false;
+		}
+		boolean updateLauncherShortcuts = false;
+		List<FavoriteGroup> tmpFavoriteGroups = new ArrayList<>(favoriteGroups);
+		Map<String, FavoriteGroup> tmpFlatGroups = new LinkedHashMap<>(flatGroups);
+		for (FavoriteGroup group : groupsToDelete) {
+			tmpFavoriteGroups.remove(group);
+			tmpFlatGroups.remove(group.getName());
+			removeFavouritePoints(group.getPoints());
+			removeFromMarkers(group);
+			updateLauncherShortcuts |= group.isPersonal();
+		}
+		favoriteGroups = tmpFavoriteGroups;
+		flatGroups = tmpFlatGroups;
+		if (updateLauncherShortcuts) {
+			app.getLauncherShortcutsHelper().updateLauncherShortcuts();
+		}
+		if (saveImmediately) {
+			saveCurrentPointsIntoFile(true);
+		}
+		return true;
+	}
+
+	@NonNull
+	public FavoriteGroup ensureFavoriteGroup(@NonNull String fullPath) {
+		return ensureFavoriteGroup(fullPath, false);
+	}
+
+	@NonNull
+	public FavoriteGroup ensureFavoriteGroup(@NonNull String fullPath, boolean saveImmediately) {
+		FavoriteFolderPath.requireValidFullPath(fullPath);
+		FavoriteGroup group = flatGroups.get(fullPath);
+		if (group == null) {
+			group = addFavoriteGroup(fullPath, 0);
+			sortAll();
+			if (saveImmediately) {
+				saveCurrentPointsIntoFile(true);
+			}
+		}
+		return group;
+	}
+
 	public FavoriteGroup addFavoriteGroup(@NonNull String name, int color) {
 		return addFavoriteGroup(name, color, DEFAULT_ICON_NAME, DEFAULT_BACKGROUND_TYPE);
 	}
@@ -911,6 +974,83 @@ public class FavouritesHelper {
 		if (saveImmediately) {
 			saveCurrentPointsIntoFile(true);
 		}
+	}
+
+	public boolean hasRenameFavoriteFolderSubtreeConflict(@NonNull String oldPath, @NonNull String newPath) {
+		FavoriteFolderPath.requireValidFullPath(newPath);
+		if (Algorithms.stringsEqual(oldPath, newPath)) {
+			return false;
+		}
+		if (Algorithms.isEmpty(oldPath) || FavoriteFolderPath.isDescendantOrSelf(newPath, oldPath)) {
+			return true;
+		}
+		FavoriteFolderTree tree = getFavoriteFolderTree();
+		List<FavoriteGroup> groupsToRename = tree.getGroupsInSubtree(oldPath);
+		if (Algorithms.isEmpty(groupsToRename)) {
+			return false;
+		}
+		Set<String> sourceNodePaths = new HashSet<>();
+		for (FavoriteFolderNode node : tree.getNodesInSubtree(oldPath)) {
+			sourceNodePaths.add(node.getFullPath());
+		}
+		FavoriteFolderNode targetFolder = tree.getNode(newPath);
+		if (targetFolder != null && !sourceNodePaths.contains(newPath)) {
+			return true;
+		}
+		for (FavoriteGroup group : groupsToRename) {
+			String targetPath = FavoriteFolderPath.replacePathPrefix(group.getName(), oldPath, newPath);
+			FavoriteFolderNode targetNode = tree.getNode(targetPath);
+			if (targetNode != null && !sourceNodePaths.contains(targetPath)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean renameFavoriteFolderSubtree(@NonNull String oldPath, @NonNull String newPath, boolean saveImmediately) {
+		FavoriteFolderPath.requireValidFullPath(newPath);
+		if (Algorithms.isEmpty(oldPath) || Algorithms.stringsEqual(oldPath, newPath)) {
+			return false;
+		}
+		List<FavoriteGroup> groupsToRename = getFavoriteGroupsInSubtree(oldPath);
+		if (Algorithms.isEmpty(groupsToRename) || hasRenameFavoriteFolderSubtreeConflict(oldPath, newPath)) {
+			return false;
+		}
+		List<String> newNames = new ArrayList<>();
+		for (FavoriteGroup group : groupsToRename) {
+			newNames.add(FavoriteFolderPath.replacePathPrefix(group.getName(), oldPath, newPath));
+		}
+		List<FavoriteGroup> groupsInMarkers = new ArrayList<>();
+		boolean updateLauncherShortcuts = false;
+		Map<String, FavoriteGroup> tmpFlatGroups = new LinkedHashMap<>(flatGroups);
+		for (FavoriteGroup group : groupsToRename) {
+			tmpFlatGroups.remove(group.getName());
+			if (removeFromMarkers(group)) {
+				groupsInMarkers.add(group);
+			}
+			updateLauncherShortcuts |= group.isPersonal();
+		}
+		for (int i = 0; i < groupsToRename.size(); i++) {
+			FavoriteGroup group = groupsToRename.get(i);
+			String newName = newNames.get(i);
+			group.setName(newName);
+			for (FavouritePoint point : group.getPoints()) {
+				point.setCategory(newName);
+			}
+			tmpFlatGroups.put(newName, group);
+		}
+		flatGroups = tmpFlatGroups;
+		for (FavoriteGroup group : groupsInMarkers) {
+			addToMarkers(group);
+		}
+		if (updateLauncherShortcuts) {
+			app.getLauncherShortcutsHelper().updateLauncherShortcuts();
+		}
+		sortAll();
+		if (saveImmediately) {
+			saveCurrentPointsIntoFile(true);
+		}
+		return true;
 	}
 
 	@NonNull
