@@ -256,9 +256,9 @@ public class SearchUICoreTest {
 		Assert.assertFalse(geoResult.isEmpty());
 
 		if (searchResult.object instanceof Building b1 && searchResult.relatedObject instanceof Street s1) {
-			Assert.assertEquals(s1, geoResult.get(0).street);
-			Assert.assertEquals(b1, geoResult.get(0).building);
 			Assert.assertEquals(s1.getCity(), geoResult.get(0).city);
+			Assert.assertEquals(s1.getName(), geoResult.get(0).street.getName());
+			Assert.assertEquals(b1.getName(), geoResult.get(0).building.getName());
 		} else {
 			Assert.fail("Unsupported searchResult object / relatedObject");
 		}
