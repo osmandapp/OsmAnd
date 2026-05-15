@@ -74,8 +74,8 @@
     <string name="local_openstreetmap_descr_title">Aszinkron OSM-szerkesztés:</string>
     <string name="local_openstreetmap_settings">Eszközön tárolt OSM POI-k, -jegyzetek</string>
     <string name="local_openstreetmap_settings_descr">Az eszköz adatbázisában tárolt OSM POI-k és -jegyzetek megjelenítése, kezelése.</string>
-    <string name="live_monitoring_interval_descr">Online útvonalrögzítés időközének megadása.</string>
-    <string name="live_monitoring_interval">Online útvonalrögzítés időköze</string>
+    <string name="live_monitoring_interval_descr">Online útvonalrögzítés intervallumának megadása.</string>
+    <string name="live_monitoring_interval">Online útvonalrögzítés intervalluma</string>
     <string name="live_monitoring_url_descr">A webcímet a következő paraméterszintaxissal kell megadni: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="live_monitoring_url">Online útvonalrögzítés webcíme</string>
     <string name="gpx_monitoring_disabled_warn">Nyomvonal naplózása a GPX-modullal vagy az „Útvonalrögzítés” beállításaiban.</string>
@@ -544,8 +544,8 @@
     <string name="shared_string_settings">Beállítások</string>
     <string name="save_current_track_descr">Jelenlegi nyomvonal mentése GPX-fájlba most.</string>
     <string name="save_current_track">Jelenlegi nyomvonal mentése</string>
-    <string name="save_track_interval_descr">A navigáció alatti nyomvonalrögzítéshez adja meg a naplózás időközét</string>
-    <string name="save_track_interval">Naplózási időköz navigáció közben</string>
+    <string name="save_track_interval_descr">A navigáció alatti nyomvonalrögzítéshez adja meg a naplózás intervallumát</string>
+    <string name="save_track_interval">Naplózási intervallum navigáció közben</string>
     <string name="reload_tile">Térképcsempe újratöltése</string>
     <string name="mark_point">Cél</string>
     <string name="shared_string_add_to_favorites">Hozzáadás a „Kedvencekhez”</string>
@@ -1133,7 +1133,7 @@
     <string name="selected_gpx_info_show">\n\nHosszú érintés a térképen való megtekintéshez</string>
     <string name="delay_navigation_start">Részletes navigáció indítása automatikusan</string>
     <string name="shared_string_selected_lowercase">kijelölve</string>
-    <string name="gpx_split_interval">Felosztási időköz</string>
+    <string name="gpx_split_interval">Felosztási intervallum</string>
     <string name="gpx_info_subtracks">Résznyomvonalak: %1$s </string>
     <string name="gpx_info_waypoints">Útpontok: %1$s </string>
     <string name="gpx_info_distance">Távolság: %1$s (%2$s pont) </string>
@@ -1236,9 +1236,9 @@
     <string name="duration">Időtartam</string>
     <string name="distance">Távolság</string>
     <string name="confirm_every_run">Mindig kérdezzen rá</string>
-    <string name="save_global_track_interval">Általános naplózási időköz</string>
+    <string name="save_global_track_interval">Általános naplózási intervallum</string>
     <string name="save_track_to_gpx_globally_descr">A GPX-fájlba történő általános pozíciónaplózás be- és kikapcsolható a térképen lévő GPX-naplózó modullal.</string>
-    <string name="save_track_interval_globally">Naplózási időköz</string>
+    <string name="save_track_interval_globally">Naplózási intervallum</string>
     <string name="rendering_attr_publicTransportMode_name">Trolibusz-, ingajáratú busz- és buszútvonalak</string>
     <string name="traffic_warning_speed_limit">Sebességkorlátozás</string>
     <string name="traffic_warning_border_control">Határellenőrzés</string>
@@ -2539,7 +2539,7 @@
     <string name="osm_live_payment_renews_quarterly">Negyedévente megújul</string>
     <string name="osm_live_payment_renews_annually">Évente megújul</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
-    <string name="osm_live_payment_header">Fizetési időköz:</string>
+    <string name="osm_live_payment_header">Fizetés gyakorisága:</string>
     <string name="osm_live_payment_contribute_descr">Az adományok az OSM-térképezést támogatják.</string>
     <string name="markers_remove_dialog_msg">Törli a térképjelölőt: „%s”\?</string>
     <string name="edit_map_marker">Térképjelölő szerkesztése</string>
@@ -3358,7 +3358,7 @@
     <string name="reset_to_default_category_button_promo">Az alapértelmezés visszaállítása a sorrendet visszaállítja a telepítés utáni alapértelmezett állapotba.</string>
     <string name="accessibility_mode_disabled">A kisegítő lehetőségek az eszközén az Android rendszerben ki vannak kapcsolva.</string>
     <string name="live_monitoring_time_buffer">Idő puffer</string>
-    <string name="live_monitoring_tracking_interval">Rögzítési időköz</string>
+    <string name="live_monitoring_tracking_interval">Rögzítési intervallum</string>
     <string name="live_monitoring_adress">Webcím</string>
     <string name="monitoring_notification">Értesítés</string>
     <string name="monitoring_min_speed">Legkisebb sebesség</string>
@@ -3394,7 +3394,7 @@
     <string name="add_to_a_track">Hozzáadás nyomvonalhoz</string>
     <string name="pass_whole_track_descr">A nyomvonal elérendő pontja</string>
     <string name="release_3_6">• Profilok: most már módosíthatja a sorrendet, beállíthat egy ikont a térképen, megváltoztathatja az alapprofilok összes beállítását, és visszaállíthatja azokat az alapértelmezett értékekre \n \n • Kijárat száma megjelenik navigálásnál \n \n • Átdolgozott bővítmény-beállítások \n \n • Átdolgozott beállítás-képernyő az összes profil gyors eléréséhez \n \n • Beállítások másolása egy másik profilból \n \n • POI-kategóriák sorrendjének módosítása vagy elrejtésük a Keresésben \n \n • Helyesen igazított POI-ikonok a térképen \n \n • Napkelte / napnyugta adatai a Térkép konfigurálásához \n \n • Otthon / munkahely ikonok a térképen \n \n • Többsoros leírás támogatása a Beállításoknál \n \n • Helyes átírás Japán térképénél \n \n • Antarktisz-térkép</string>
-    <string name="gpx_split_interval_descr">Válassza ki azt az időközt, amelyenként megjelenjenek a távolság- vagy időjelölések a nyomvonalon.</string>
+    <string name="gpx_split_interval_descr">Válassza ki azt az intervallumot, amelyenként megjelenjenek a távolság- vagy időjelölések a nyomvonalon.</string>
     <string name="monitoring_min_distance_descr">Ennek a szűrőnek a bekapcsolása kiküszöböli további adatok rögzítését akkor, ha mozgás gyakorlatilag nem érzékelhető. Emellett javul a nyomvonalak térbeli megjelenése, utólagos feldolgozás nélkül is.</string>
     <string name="multimedia_rec_split_title">Rögzítés vágása</string>
     <string name="disable_recording_once_app_killed_descrp">A nyomvonal naplózása szünetelni fog, amikor az alkalmazást (újabb alkalmazásokkal) kilövik. (Ilyenkor az OsmAnd háttérjelzése is eltűnik az Android értesítési sávjáról.)</string>
@@ -3461,7 +3461,7 @@
     <string name="gpx_monitoring_stop">Utazás rögzítésének szüneteltetése</string>
     <string name="shared_string_save_as_gpx">Mentés új nyomvonalfájlként</string>
     <string name="plan_route_last_edited">Utoljára szerkesztve</string>
-    <string name="save_global_track_interval_descr">Adja meg az általános nyomvonalrögzítés naplózási időközét (bekapcsolható a térképen található „Utazás rögzítése” modullal).</string>
+    <string name="save_global_track_interval_descr">Adja meg az általános nyomvonalrögzítés naplózási intervallumát (bekapcsolható a térképen található „Utazás rögzítése” modullal).</string>
     <string name="gpx_split_interval_none_descr">Válassza ki az előnyben részesített felosztási lehetőséget: idő vagy távolság szerint.</string>
     <string name="gpx_monitoring_start">Utazás rögzítésének folytatása</string>
     <string name="navigation_profile">Navigációs profil</string>
@@ -3611,7 +3611,7 @@
     <string name="select_folder">Mappa kijelölése</string>
     <string name="select_folder_descr">Mappa kijelölése vagy új hozzáadása</string>
     <string name="shared_string_empty">Üres</string>
-    <string name="analyze_by_intervals">Elemzés időközönként</string>
+    <string name="analyze_by_intervals">Elemzés intervallumonként</string>
     <string name="upload_to_openstreetmap">Feltöltés az OpenStreetMapre</string>
     <string name="edit_track">Nyomvonal szerkesztése</string>
     <string name="rename_track">Nyomvonal átnevezése</string>
@@ -3670,7 +3670,7 @@
     <string name="activity_type_motorbike_name">Motorkerékpár</string>
     <string name="activity_type_car_name">Személyautó</string>
     <string name="map_widget_distance_by_tap">Távolságmérés koppintással</string>
-    <string name="shared_string_interval">Időköz</string>
+    <string name="shared_string_interval">Intervallum</string>
     <string name="update_frequency">Frissítés gyakorisága</string>
     <string name="updated">Frissítve: %s</string>
     <string name="last_time_checked">Legutóbb ellenőrizve: %s</string>
@@ -3703,7 +3703,7 @@
     <string name="track_has_no_altitude">A nyomvonal nem tartalmaz magassági adatokat.</string>
     <string name="track_has_no_speed">A nyomvonal nem tartalmaz sebességadatokat.</string>
     <string name="select_another_colorization">Válasszon másik színezéstípust.</string>
-    <string name="trip_recording_logging_interval_info">A naplózási időköz azt az időközt határozza meg, amely alatt az OsmAnd lekérdezi a jelenlegi pozíció adatait.</string>
+    <string name="trip_recording_logging_interval_info">A naplózási időköz azt az időtartamot határozza meg, amelyen belül az OsmAnd lekérdezi a jelenlegi pozíció adatait.</string>
     <string name="trip_recording_save_and_continue">Mentés és folytatás</string>
     <string name="lost_data_warning">Minden nem mentett adat törlődni fog.</string>
     <string name="show_start_dialog">Kezdő párbeszéd megjelenítése</string>
@@ -4068,7 +4068,7 @@
     <string name="save_changes_into_file">Módosítások fájlba mentése</string>
     <string name="save_as_copy">Mentés másolatként</string>
     <string name="shared_string_gps_filter">GPS szűrő</string>
-    <string name="gps_filter_speed_altitude_desc">Csak a megadott időközbe eső nyomvonalpontok fognak megjelenni a diagramon és a térképen, a többi el lesz rejtve.</string>
+    <string name="gps_filter_speed_altitude_desc">Csak a megadott intervallumba eső nyomvonalpontok fognak megjelenni a diagramon és a térképen, a többi el lesz rejtve.</string>
     <string name="shared_string_uphill">Dombnak fel</string>
     <string name="shared_string_downhill">Lejtő</string>
     <string name="shared_string_show_slope">Lejtés megjelenítése</string>
@@ -4844,7 +4844,7 @@
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
     <string name="map_widget_group_glide_desc">A modulok a célhoz vezető vagy a jelenlegi útra vonatkozó átlagos siklószámot jelenítik meg.</string>
     <string name="glide_ratio_to_target">Siklószám a célig</string>
-    <string name="map_widget_glide_average_desc">Megjeleníti az átlagos siklószámot a megadott időközhöz.</string>
+    <string name="map_widget_glide_average_desc">Megjeleníti az átlagos siklószámot a megadott intervallumhoz.</string>
     <string name="external_sensor_name_property_description">Érzékelő neve</string>
     <string name="wheel_circumference">Kerék kerülete</string>
     <string name="contact_us">Kapcsolatfelvétel</string>
@@ -5664,7 +5664,7 @@
     <string name="deleting">Törlés…</string>
     <string name="deleting_history">Előzmények törlése…</string>
     <string name="show_rasterization_debug_tile">Csempe raszterezési információk megjelenítése</string>
-    <string name="release_5_2">• Utca- és városadatok hozzáadása a keresési eredményekhez\n\n • Új túra-rögzítési modulok: Legnagyobb sebesség, Átlagos meredekség és továbbfejlesztett Emelkedő/Lejtő\n\n • Új Tengeri térképstílus széles körű testreszabási lehetőségekkel\n\n • Továbbfejlesztett térkép-megjelenítési sebesség\n\n • Továbbfejlesztett kapcsolat az OBDII BLE-adapterekkel\n\n • Pulzusmérők hozzáadása az „Elemzés időköz szerint” funkcióhoz\n\n • Időtartam kijelzése a tervezett útvonalakhoz\n\n • A magassági egységek mostantól a távolsági egységektől elkülönítve állíthatók be\n\n • Továbbfejlesztett térképtájolás Gyors-művelet választható iránytű módokkal\n\n • Android Auto esetén navigáció előtti figyelmeztetések hiányzó térképekre és magánutakra\n\n • Kijavítva egy hiba a Sugárvonalzó-modul helytelen méretparamétereivel kapcsolatban\n\n • Fordított képernyőtájolások hozzáadása\n\n • Továbbfejlesztett felhasználói felület a teherautó-mérőszámok megadásához</string>
+    <string name="release_5_2">• Utca- és városadatok hozzáadása a keresési eredményekhez\n\n • Új túra-rögzítési modulok: Legnagyobb sebesség, Átlagos meredekség és továbbfejlesztett Emelkedő/Lejtő\n\n • Új Tengeri térképstílus széles körű testreszabási lehetőségekkel\n\n • Továbbfejlesztett térkép-megjelenítési sebesség\n\n • Továbbfejlesztett kapcsolat az OBDII BLE-adapterekkel\n\n • Pulzusmérők hozzáadása az „Elemzés intervallumonként” funkcióhoz\n\n • Időtartam kijelzése a tervezett útvonalakhoz\n\n • A magassági egységek mostantól a távolsági egységektől elkülönítve állíthatók be\n\n • Továbbfejlesztett térképtájolás Gyors-művelet választható iránytű módokkal\n\n • Android Auto esetén navigáció előtti figyelmeztetések hiányzó térképekre és magánutakra\n\n • Kijavítva egy hiba a Sugárvonalzó-modul helytelen méretparamétereivel kapcsolatban\n\n • Fordított képernyőtájolások hozzáadása\n\n • Továbbfejlesztett felhasználói felület a teherautó-mérőszámok megadásához</string>
     <string name="shared_string_threads">Szálak</string>
     <string name="threads_allocated_for_rendering">Megjelenítéshez lefoglalt szálak</string>
     <string name="threads_allocated_for_rendering_desc">Az alacsonyabb szálfoglalás bizonyos esetekben felgyorsíthatja a térkép-megjelenítést.</string>
