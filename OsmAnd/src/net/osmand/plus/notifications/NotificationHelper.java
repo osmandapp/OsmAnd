@@ -26,7 +26,7 @@ public class NotificationHelper {
 
 	public static final Log LOG = PlatformUtil.getLog(NotificationHelper.class);
 
-	public static final String NOTIFICATION_CHANEL_ID = "osmand_background_service";
+	public static final String NOTIFICATION_CHANEL_ID = "osmand_background_service_v2";
 	private final OsmandApplication app;
 
 	private NavigationNotification navigationNotification;
@@ -212,8 +212,11 @@ public class NotificationHelper {
 	public void createNotificationChannel() {
 		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
 			NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANEL_ID,
-					app.getString(R.string.osmand_service), NotificationManager.IMPORTANCE_LOW);
+					app.getString(R.string.osmand_service), NotificationManager.IMPORTANCE_DEFAULT);
+			
+			channel.setSound(null, null);
 			channel.enableVibration(false);
+			
 			channel.setDescription(app.getString(R.string.osmand_service_descr));
 			NotificationManagerCompat.from(app).createNotificationChannel(channel);
 		}
