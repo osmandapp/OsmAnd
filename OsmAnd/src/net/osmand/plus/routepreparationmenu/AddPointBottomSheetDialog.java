@@ -318,9 +318,9 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 				.setCustomView(switchStartAndEndView)
 				.setOnClickListener(v -> {
 					callMapActivity(activity -> {
-						TargetPoint startPoint = targetPointsHelper.getPointToStart();
-						if (startPoint == null) {
-							app.showShortToastMessage(R.string.route_add_start_point);
+						TargetPoint finishPoint = targetPointsHelper.getPointToNavigate();
+						if (finishPoint == null) {
+							app.showShortToastMessage(R.string.mark_final_location_first);
 							return;
 						}
 						WaypointDialogHelper.switchStartAndFinish(activity, true);
