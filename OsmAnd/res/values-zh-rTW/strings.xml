@@ -5719,9 +5719,9 @@
     <string name="routing_attr_weightrating_name">滿載時的最大重量</string>
     <string name="routing_attr_maxaxleload_name">最大軸重</string>
     <string name="is_parking_time_limited">可停車的時間有限制嗎？</string>
-    <string name="centimeter">公分</string>
-    <string name="shared_string_centimeters">公分</string>
-    <string name="bicycle_width_limit_description">請提供您的腳踏車寬度，以避免使用太窄的腳踏車道。</string>
+    <string name="centimeter">厘米</string>
+    <string name="shared_string_centimeters">厘米</string>
+    <string name="bicycle_width_limit_description">提供您的自行車寬度，以避免狹窄的自行車道。</string>
     <string name="copy_link">複製連結</string>
     <string name="routing_attr_pt_limit_name">顯示 N 條最佳路線</string>
     <string name="routing_attr_pt_limit_description">指定要顯示的最佳路線數量</string>
@@ -5936,7 +5936,7 @@
     <string name="astro_explore_watch_now">立刻觀看</string>
     <string name="astro_explore_deep_sky_subtitle">星系、星系團、黑洞</string>
     <string name="shared_string_radians">弧度</string>
-    <string name="obd_alt_battery_voltage_desc">顯示 OBD 轉接器的電壓值</string>
+    <string name="obd_alt_battery_voltage_desc">顯示 OBD 適配器上的電壓水平</string>
     <string name="shared_string_unlock">解鎖</string>
     <string name="start_free_trial">開始免費試用</string>
     <string name="subscription_free_trial_with_price">%1$s 免費，然後 %2$s</string>
