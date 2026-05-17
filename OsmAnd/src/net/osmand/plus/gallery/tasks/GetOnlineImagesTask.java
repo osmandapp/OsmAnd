@@ -1,8 +1,8 @@
 package net.osmand.plus.gallery.tasks;
 
-import static net.osmand.plus.gallery.model.GalleryMediaGroup.MAPILLARY_AMENITY;
-import static net.osmand.plus.gallery.model.GalleryMediaGroup.OTHER;
-import static net.osmand.plus.gallery.model.GalleryMediaGroup.WIKIMEDIA;
+import static net.osmand.plus.gallery.online.OnlinePhotosGroup.MAPILLARY_AMENITY;
+import static net.osmand.plus.gallery.online.OnlinePhotosGroup.OTHER;
+import static net.osmand.plus.gallery.online.OnlinePhotosGroup.WIKIMEDIA;
 
 import android.net.TrafficStats;
 import android.os.AsyncTask;
@@ -16,7 +16,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
-import net.osmand.plus.gallery.controller.GalleryItemsHolder;
+import net.osmand.plus.gallery.online.OnlinePhotosHolder;
 import net.osmand.shared.media.RemoteMediaFactory;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.mapillary.MapillaryOsmTagHelper;
@@ -37,7 +37,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GetOnlineImagesTask extends AsyncTask<Void, Void, GalleryItemsHolder> {
+public class GetOnlineImagesTask extends AsyncTask<Void, Void, OnlinePhotosHolder> {
 	private static final Log LOG = PlatformUtil.getLog(GetOnlineImagesTask.class);
 
 	private static final int GET_IMAGE_CARD_THREAD_ID = 10104;
@@ -68,9 +68,9 @@ public class GetOnlineImagesTask extends AsyncTask<Void, Void, GalleryItemsHolde
 	}
 
 	@Override
-	protected GalleryItemsHolder doInBackground(Void... voids) {
+	protected OnlinePhotosHolder doInBackground(Void... voids) {
 		TrafficStats.setThreadStatsTag(GET_IMAGE_CARD_THREAD_ID);
-		GalleryItemsHolder holder = new GalleryItemsHolder(latLon, params);
+		OnlinePhotosHolder holder = new OnlinePhotosHolder(latLon, params);
 		try {
 			Map<String, String> httpPms = new LinkedHashMap<>();
 			httpPms.put("lat", String.valueOf((float) latLon.getLatitude()));
@@ -134,7 +134,7 @@ public class GetOnlineImagesTask extends AsyncTask<Void, Void, GalleryItemsHolde
 	}
 
 	@Override
-	protected void onPostExecute(GalleryItemsHolder holder) {
+	protected void onPostExecute(OnlinePhotosHolder holder) {
 		if (imageCardsListener != null) {
 			imageCardsListener.onFinish(holder);
 		}
@@ -143,6 +143,6 @@ public class GetOnlineImagesTask extends AsyncTask<Void, Void, GalleryItemsHolde
 	public interface GetImageCardsListener {
 		void onTaskStarted();
 
-		void onFinish(GalleryItemsHolder cardsHolder);
+		void onFinish(OnlinePhotosHolder cardsHolder);
 	}
 }

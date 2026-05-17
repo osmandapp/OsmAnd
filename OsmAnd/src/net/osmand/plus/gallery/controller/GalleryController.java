@@ -8,6 +8,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.gallery.model.GalleryItem;
+import net.osmand.plus.gallery.online.OnlinePhotosHolder;
 import net.osmand.plus.gallery.provider.MediaProvider;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.shared.media.domain.MediaItem;
@@ -24,7 +25,7 @@ public class GalleryController implements IDialogController, GalleryMediaLoadSta
 
 	public static final String PROCESS_ID = "gallery_context_controller";
 
-	private GalleryItemsHolder itemsHolder;
+	private OnlinePhotosHolder itemsHolder;
 
 	private final MediaProvider mediaProvider;
 	private final Set<String> failedMediaIds = new HashSet<>();
@@ -39,11 +40,11 @@ public class GalleryController implements IDialogController, GalleryMediaLoadSta
 	}
 
 	@Nullable
-	public GalleryItemsHolder getItemsHolder() {
+	public OnlinePhotosHolder getItemsHolder() {
 		return itemsHolder;
 	}
 
-	public void setItemsHolder(@Nullable GalleryItemsHolder itemsHolder) {
+	public void setItemsHolder(@Nullable OnlinePhotosHolder itemsHolder) {
 		this.itemsHolder = itemsHolder;
 	}
 

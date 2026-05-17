@@ -35,7 +35,7 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.gallery.model.GalleryAction;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
-import net.osmand.plus.gallery.controller.GalleryItemsHolder;
+import net.osmand.plus.gallery.online.OnlinePhotosHolder;
 import net.osmand.plus.gallery.tasks.GetOnlineImagesTask.GetImageCardsListener;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.OsmandPlugin.PluginInstallListener;
@@ -631,7 +631,7 @@ public class PluginsHelper {
 		}
 	}
 
-	public static void onGetImageCardsFinished(@NonNull GalleryItemsHolder cardsHolder) {
+	public static void onGetImageCardsFinished(@NonNull OnlinePhotosHolder cardsHolder) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			GetImageCardsListener listener = plugin.getImageCardsListener();
 			if (listener != null) {
@@ -779,7 +779,7 @@ public class PluginsHelper {
 	 * @param imageObject JSON object that may describe a media item or gallery action
 	 * @return true if the object was recognized and handled by a plugin, even if no item was added
 	 */
-	public static boolean addContextMenuGalleryItem(@NonNull GalleryItemsHolder holder,
+	public static boolean addContextMenuGalleryItem(@NonNull OnlinePhotosHolder holder,
 	                                                @NonNull JSONObject imageObject) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			if (plugin.addContextMenuGalleryItem(holder, imageObject)) {
