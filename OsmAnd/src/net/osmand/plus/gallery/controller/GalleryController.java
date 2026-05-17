@@ -24,7 +24,7 @@ public class GalleryController implements IDialogController, GalleryMediaLoadSta
 
 	public static final String PROCESS_ID = "gallery_context_controller";
 
-	private GalleryItemsHolder currentGalleryItemsHolder;
+	private GalleryItemsHolder itemsHolder;
 
 	private final MediaProvider mediaProvider;
 	private final Set<String> failedMediaIds = new HashSet<>();
@@ -39,23 +39,23 @@ public class GalleryController implements IDialogController, GalleryMediaLoadSta
 	}
 
 	@Nullable
-	public GalleryItemsHolder getCurrentGalleryItemsHolder() {
-		return currentGalleryItemsHolder;
+	public GalleryItemsHolder getItemsHolder() {
+		return itemsHolder;
 	}
 
-	public void setCurrentGalleryItemsHolder(@Nullable GalleryItemsHolder galleryItemsHolder) {
-		this.currentGalleryItemsHolder = galleryItemsHolder;
+	public void setItemsHolder(@Nullable GalleryItemsHolder itemsHolder) {
+		this.itemsHolder = itemsHolder;
 	}
 
 	public void clearHolder() {
-		currentGalleryItemsHolder = null;
+		itemsHolder = null;
 		failedMediaIds.clear();
 	}
 
 	public boolean isCurrentHolderEquals(@NonNull LatLon latLon, @NonNull Map<String, String> params) {
-		return currentGalleryItemsHolder != null
-				&& Algorithms.objectEquals(currentGalleryItemsHolder.getLatLon(), latLon)
-				&& Algorithms.objectEquals(currentGalleryItemsHolder.getParams(), params);
+		return itemsHolder != null
+				&& Algorithms.objectEquals(itemsHolder.getLatLon(), latLon)
+				&& Algorithms.objectEquals(itemsHolder.getParams(), params);
 	}
 
 	@Override
@@ -82,8 +82,8 @@ public class GalleryController implements IDialogController, GalleryMediaLoadSta
 	@NonNull
 	public List<GalleryItem.Media> getOnlinePhotoItems() {
 		List<GalleryItem.Media> galleryItems = new ArrayList<>();
-		if (currentGalleryItemsHolder != null) {
-			for (GalleryItem item : currentGalleryItemsHolder.getOrderedGalleryItems()) {
+		if (itemsHolder != null) {
+			for (GalleryItem item : itemsHolder.getOrderedGalleryItems()) {
 				if (item instanceof GalleryItem.Media media && isPhoto(media.getMediaItem())) {
 					galleryItems.add(media);
 				}

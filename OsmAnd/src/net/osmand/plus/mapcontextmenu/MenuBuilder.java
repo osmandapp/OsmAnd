@@ -180,7 +180,7 @@ public class MenuBuilder {
 			if (!isHidden()) {
 				onLoadingImages(false);
 				if (galleryController != null) {
-					galleryController.setCurrentGalleryItemsHolder(mediaHolder);
+					galleryController.setItemsHolder(mediaHolder);
 				}
 				setOnlinePhotoItems(mediaHolder.getOrderedGalleryItems());
 				PluginsHelper.onGetImageCardsFinished(mediaHolder);
@@ -661,11 +661,10 @@ public class MenuBuilder {
 		}
 	}
 
-	protected void buildOnlinePhotosRow(View view) {
+	protected void buildOnlinePhotosRow(@NonNull View view) {
 		boolean needUpdateOnly = onlinePhotosRow != null && onlinePhotosRow.getMenuBuilder() == this;
-		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		onlinePhotosRow = new GalleryRowBuilder(this);
-		onlinePhotosRow.build(galleryController, new GalleryGridConfig(), nightMode);
+		onlinePhotosRow.build(galleryController, new GalleryGridConfig(), isNightMode());
 
 		LinearLayout parent = new LinearLayout(view.getContext());
 		parent.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
@@ -690,7 +689,7 @@ public class MenuBuilder {
 		}
 	}
 
-	private void buildCoordinatesRow(View view) {
+	private void buildCoordinatesRow(@NonNull View view) {
 		Map<Integer, String> locationData = PointDescription.getLocationData(mapActivity, latLon.getLatitude(), latLon.getLongitude(), true);
 		String title = Objects.requireNonNull(locationData.remove(PointDescription.LOCATION_LIST_HEADER));
 		buildRow(view, new BuildRowAttrs.Builder().setText(title).setIconId(R.drawable.ic_action_get_my_location)
@@ -720,7 +719,7 @@ public class MenuBuilder {
 		String rawKey = PhotoCacheManager.buildRawKey(wikidataId, wikiCategory, wikiTitle);
 
 		if (galleryController.isCurrentHolderEquals(latLon, params)) {
-			imageCardListener.onFinish(galleryController.getCurrentGalleryItemsHolder());
+			imageCardListener.onFinish(galleryController.getItemsHolder());
 		} else if(!app.getSettings().isInternetConnectionAvailable()){
 			loadFromCache(cacheManager, rawKey, params, wikiTagData, latLon);
 		} else {
@@ -1403,7 +1402,7 @@ public class MenuBuilder {
 		LinearLayout.LayoutParams typeTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		typeTextView.setLayoutParams(typeTextParams);
 		typeTextView.setText(route.getTypeStrRes());
-		AndroidUtils.setTextSecondaryColor(getMapActivity(), typeTextView, getApplication().getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP));
+		AndroidUtils.setTextSecondaryColor(getMapActivity(), typeTextView, isNightMode());
 		typeView.addView(typeTextView);
 
 		baseView.setOnClickListener(listener);
@@ -1731,5 +1730,9 @@ public class MenuBuilder {
 
 	protected boolean isLightContent() {
 		return menuRowBuilder.isLightContent();
+	}
+
+	protected boolean isNightMode() {
+		return app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 	}
 }
