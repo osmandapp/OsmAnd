@@ -38,7 +38,7 @@ class AstroGalleryLoader(
 				return
 			}
 			val mediaItemsHolder = buildMediaItemsHolder(wikidataId, images)
-			val galleryItems = mediaItemsHolder.astronomyGalleryItems
+			val galleryItems = mediaItemsHolder.getAstronomyGalleryItems()
 			galleryController.itemsHolder = mediaItemsHolder.takeIf { galleryItems.isNotEmpty() }
 			publishReadyState(wikidataId, galleryItems)
 		}
@@ -54,7 +54,7 @@ class AstroGalleryLoader(
 		val rawKey = "wikidataId=$wikidataId"
 
 		val hasMatchingHolder = galleryController.isCurrentHolderEquals(latLon, params)
-		val existingGalleryItems = galleryController.itemsHolder?.astronomyGalleryItems.orEmpty()
+		val existingGalleryItems = galleryController.itemsHolder?.getAstronomyGalleryItems().orEmpty()
 		if (hasMatchingHolder && existingGalleryItems.isNotEmpty()) {
 			publishReadyState(wikidataId, existingGalleryItems)
 			return
