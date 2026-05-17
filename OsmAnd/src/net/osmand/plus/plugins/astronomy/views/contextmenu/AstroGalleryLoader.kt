@@ -8,10 +8,10 @@ import net.osmand.plus.gallery.model.GalleryItem
 import net.osmand.plus.gallery.controller.GalleryController
 import net.osmand.plus.gallery.online.OnlinePhotosGroup
 import net.osmand.plus.gallery.online.OnlinePhotosHolder
-import net.osmand.plus.gallery.cache.PhotoCacheManager
+import net.osmand.plus.gallery.online.cache.PhotoCacheManager
 import net.osmand.shared.media.RemoteMediaFactory
-import net.osmand.plus.gallery.tasks.CacheReadTask
-import net.osmand.plus.gallery.tasks.CacheWriteTask
+import net.osmand.plus.gallery.online.tasks.CacheReadTask
+import net.osmand.plus.gallery.online.tasks.CacheWriteTask
 import net.osmand.shared.wiki.WikiCoreHelper
 import net.osmand.shared.wiki.WikiImage
 import net.osmand.util.Algorithms
@@ -49,7 +49,8 @@ class AstroGalleryLoader(
 
 		val latLon = LatLon(0.0, 0.0)
 		val params = hashMapOf("wikidataId" to wikidataId)
-		val cacheManager = PhotoCacheManager(app)
+		val cacheManager =
+			PhotoCacheManager(app)
 		val rawKey = "wikidataId=$wikidataId"
 
 		val hasMatchingHolder = galleryController.isCurrentHolderEquals(latLon, params)
@@ -100,12 +101,18 @@ class AstroGalleryLoader(
 			publishReadyState(wikidataId, emptyList())
 			return
 		}
-		val cacheReadTask = CacheReadTask(cacheManager, rawKey) { json ->
+		val cacheReadTask = CacheReadTask(
+			cacheManager,
+			rawKey
+		) { json ->
 			if (requestWid != wikidataId) {
 				return@CacheReadTask true
 			}
 			if (!Algorithms.isEmpty(json)) {
-				imageCardListener.onFinish(wikidataId, WikiCoreHelper.getAstroImagesFromJson(json!!))
+				imageCardListener.onFinish(
+					wikidataId,
+					WikiCoreHelper.getAstroImagesFromJson(json!!)
+				)
 			} else {
 				imageCardListener.onFinish(wikidataId, null)
 			}
@@ -121,7 +128,11 @@ class AstroGalleryLoader(
 	) {
 		if (!Algorithms.isEmpty(response)) {
 			OsmAndTaskManager.executeTask<Void?, CacheWriteTask?>(
-				CacheWriteTask(cacheManager, rawKey, response!!)
+				CacheWriteTask(
+					cacheManager,
+					rawKey,
+					response!!
+				)
 			)
 		}
 	}
