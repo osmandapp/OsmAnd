@@ -6,8 +6,8 @@ import net.osmand.plus.OsmAndTaskManager
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.gallery.model.GalleryItem
 import net.osmand.plus.gallery.controller.GalleryController
-import net.osmand.plus.gallery.model.GalleryMediaGroup
-import net.osmand.plus.gallery.controller.GalleryItemsHolder
+import net.osmand.plus.gallery.online.OnlinePhotosGroup
+import net.osmand.plus.gallery.online.OnlinePhotosHolder
 import net.osmand.plus.gallery.cache.PhotoCacheManager
 import net.osmand.shared.media.RemoteMediaFactory
 import net.osmand.plus.gallery.tasks.CacheReadTask
@@ -73,10 +73,7 @@ class AstroGalleryLoader(
 
 		getAstroImagesTask = GetAstroImagesTask(
 			app = app,
-			holder = GalleryItemsHolder(
-				latLon,
-				params
-			),
+			holder = OnlinePhotosHolder(latLon, params),
 			wikidataId = wikidataId,
 			getImageCardsListener = imageCardListener,
 			networkResponseListener = { response ->
@@ -132,16 +129,13 @@ class AstroGalleryLoader(
 	private fun buildMediaItemsHolder(
 		wikidataId: String,
 		images: List<WikiImage>
-	): GalleryItemsHolder {
+	): OnlinePhotosHolder {
 		val latLon = LatLon(0.0, 0.0)
 		val params = hashMapOf("wikidataId" to wikidataId)
-		return GalleryItemsHolder(
-			latLon,
-			params
-		).apply {
+		return OnlinePhotosHolder(latLon, params).apply {
 			for (wikiImage in images) {
 				addMediaItem(
-					GalleryMediaGroup.ASTRONOMY,
+					OnlinePhotosGroup.ASTRONOMY,
 					RemoteMediaFactory.fromWikiImage(wikiImage)
 				)
 			}

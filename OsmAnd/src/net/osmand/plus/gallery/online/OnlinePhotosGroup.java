@@ -1,6 +1,6 @@
-package net.osmand.plus.gallery.model;
+package net.osmand.plus.gallery.online;
 
-public enum GalleryMediaGroup {
+public enum OnlinePhotosGroup {
 	OTHER,
 	MAPILLARY_AMENITY,
 	WIKIDATA,

@@ -14,7 +14,7 @@ import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.ROUTE_MEMBE
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.ROUTE_PART_OF_ROW_KEY;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.ROUTE_RELATED_ROUTES_ROW_KEY;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.WITHIN_POLYGONS_ROW_KEY;
-import static net.osmand.plus.gallery.model.GalleryMediaGroup.WIKIMEDIA;
+import static net.osmand.plus.gallery.online.OnlinePhotosGroup.WIKIMEDIA;
 
 import android.content.Context;
 import android.content.Intent;
@@ -75,7 +75,7 @@ import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.gallery.controller.GalleryController;
 import net.osmand.plus.gallery.ui.GalleryGridConfig;
-import net.osmand.plus.gallery.controller.GalleryItemsHolder;
+import net.osmand.plus.gallery.online.OnlinePhotosHolder;
 import net.osmand.plus.gallery.cache.PhotoCacheManager;
 import net.osmand.shared.media.RemoteMediaFactory;
 import net.osmand.plus.gallery.tasks.CacheReadTask;
@@ -176,7 +176,7 @@ public class MenuBuilder {
 		}
 
 		@Override
-		public void onFinish(GalleryItemsHolder mediaHolder) {
+		public void onFinish(OnlinePhotosHolder mediaHolder) {
 			if (!isHidden()) {
 				onLoadingImages(false);
 				if (galleryController != null) {
@@ -746,7 +746,7 @@ public class MenuBuilder {
 			imageCardListener.onTaskStarted();
 			CacheReadTask cacheReadTask = new CacheReadTask(cacheManager, rawKey, json -> {
 				if (!Algorithms.isEmpty(json)) {
-					GalleryItemsHolder holder = new GalleryItemsHolder(latLon, params);
+					OnlinePhotosHolder holder = new OnlinePhotosHolder(latLon, params);
 					List<WikiImage> wikimediaImageList = WikiCoreHelper.INSTANCE.getImagesFromJson(json, wikiTagData.getWikiImages());
 					for (WikiImage wikiImage : wikimediaImageList) {
 						holder.addMediaItem(WIKIMEDIA, RemoteMediaFactory.fromWikiImage(wikiImage));

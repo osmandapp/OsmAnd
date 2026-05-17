@@ -1,17 +1,16 @@
-package net.osmand.plus.gallery.controller;
+package net.osmand.plus.gallery.online;
 
-import static net.osmand.plus.gallery.model.GalleryMediaGroup.ASTRONOMY;
-import static net.osmand.plus.gallery.model.GalleryMediaGroup.MAPILLARY;
-import static net.osmand.plus.gallery.model.GalleryMediaGroup.MAPILLARY_AMENITY;
-import static net.osmand.plus.gallery.model.GalleryMediaGroup.OTHER;
-import static net.osmand.plus.gallery.model.GalleryMediaGroup.WIKIDATA;
-import static net.osmand.plus.gallery.model.GalleryMediaGroup.WIKIMEDIA;
+import static net.osmand.plus.gallery.online.OnlinePhotosGroup.ASTRONOMY;
+import static net.osmand.plus.gallery.online.OnlinePhotosGroup.MAPILLARY;
+import static net.osmand.plus.gallery.online.OnlinePhotosGroup.MAPILLARY_AMENITY;
+import static net.osmand.plus.gallery.online.OnlinePhotosGroup.OTHER;
+import static net.osmand.plus.gallery.online.OnlinePhotosGroup.WIKIDATA;
+import static net.osmand.plus.gallery.online.OnlinePhotosGroup.WIKIMEDIA;
 
 import androidx.annotation.NonNull;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.gallery.model.GalleryItem;
-import net.osmand.plus.gallery.model.GalleryMediaGroup;
 import net.osmand.shared.media.domain.MediaItem;
 
 import java.util.ArrayList;
@@ -19,13 +18,13 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GalleryItemsHolder {
+public class OnlinePhotosHolder {
 
 	private final LatLon latLon;
 	private final Map<String, String> params;
-	private final Map<GalleryMediaGroup, LinkedHashMap<String, GalleryItem>> itemsByGroup = new LinkedHashMap<>();
+	private final Map<OnlinePhotosGroup, LinkedHashMap<String, GalleryItem>> itemsByGroup = new LinkedHashMap<>();
 
-	public GalleryItemsHolder(@NonNull LatLon latLon, @NonNull Map<String, String> params) {
+	public OnlinePhotosHolder(@NonNull LatLon latLon, @NonNull Map<String, String> params) {
 		this.latLon = latLon;
 		this.params = params;
 	}
@@ -56,9 +55,9 @@ public class GalleryItemsHolder {
 	}
 
 	@NonNull
-	private List<GalleryItem> getGalleryItemsWithGroups(@NonNull GalleryMediaGroup... groups) {
+	private List<GalleryItem> getGalleryItemsWithGroups(@NonNull OnlinePhotosGroup... groups) {
 		List<GalleryItem> list = new ArrayList<>();
-		for (GalleryMediaGroup group : groups) {
+		for (OnlinePhotosGroup group : groups) {
 			LinkedHashMap<String, GalleryItem> items = itemsByGroup.get(group);
 			if (items != null && !items.isEmpty()) {
 				list.addAll(items.values());
@@ -67,15 +66,15 @@ public class GalleryItemsHolder {
 		return list;
 	}
 
-	public void addMediaItem(@NonNull GalleryMediaGroup group, @NonNull MediaItem mediaItem) {
+	public void addMediaItem(@NonNull OnlinePhotosGroup group, @NonNull MediaItem mediaItem) {
 		addMediaItem(group, mediaItem, false);
 	}
 
-	public void addMediaItem(@NonNull GalleryMediaGroup group, @NonNull MediaItem mediaItem, boolean showLoadingProgress) {
+	public void addMediaItem(@NonNull OnlinePhotosGroup group, @NonNull MediaItem mediaItem, boolean showLoadingProgress) {
 		addGalleryItem(group, mediaItem.getId(), new GalleryItem.Media(mediaItem, showLoadingProgress));
 	}
 
-	public void addGalleryItem(@NonNull GalleryMediaGroup group, @NonNull String key, @NonNull GalleryItem item) {
+	public void addGalleryItem(@NonNull OnlinePhotosGroup group, @NonNull String key, @NonNull GalleryItem item) {
 		LinkedHashMap<String, GalleryItem> items = itemsByGroup.computeIfAbsent(group, ignored -> new LinkedHashMap<>());
 		items.put(key, item);
 	}
