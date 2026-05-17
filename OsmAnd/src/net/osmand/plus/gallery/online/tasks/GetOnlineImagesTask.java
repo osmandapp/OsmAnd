@@ -1,4 +1,4 @@
-package net.osmand.plus.gallery.tasks;
+package net.osmand.plus.gallery.online.tasks;
 
 import static net.osmand.plus.gallery.online.OnlinePhotosGroup.MAPILLARY_AMENITY;
 import static net.osmand.plus.gallery.online.OnlinePhotosGroup.OTHER;

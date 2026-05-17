@@ -45,7 +45,7 @@ import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.gallery.online.OnlinePhotosHolder;
-import net.osmand.plus.gallery.tasks.GetOnlineImagesTask.GetImageCardsListener;
+import net.osmand.plus.gallery.online.tasks.GetOnlineImagesTask.GetImageCardsListener;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickActionType;

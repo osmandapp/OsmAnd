@@ -37,7 +37,7 @@ import net.osmand.plus.gallery.ui.GalleryGridConfig;
 import net.osmand.plus.gallery.online.OnlinePhotosGroup;
 import net.osmand.plus.gallery.online.OnlinePhotosHolder;
 import net.osmand.shared.media.RemoteMediaFactory;
-import net.osmand.plus.gallery.tasks.GetOnlineImagesTask.GetImageCardsListener;
+import net.osmand.plus.gallery.online.tasks.GetOnlineImagesTask.GetImageCardsListener;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
