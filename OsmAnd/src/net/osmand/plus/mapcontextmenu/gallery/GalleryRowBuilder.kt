@@ -1,175 +1,163 @@
-package net.osmand.plus.mapcontextmenu.gallery;
+package net.osmand.plus.mapcontextmenu.gallery
 
-import android.view.View;
+import android.view.View
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import net.osmand.plus.OsmandApplication
+import net.osmand.plus.R
+import net.osmand.plus.activities.MapActivity
+import net.osmand.plus.gallery.controller.GalleryController
+import net.osmand.plus.gallery.model.GalleryAction
+import net.osmand.plus.gallery.model.GalleryItem
+import net.osmand.plus.gallery.model.GalleryItem.NoInternet
+import net.osmand.plus.gallery.ui.GalleryGridAdapter
+import net.osmand.plus.gallery.ui.GalleryGridConfig
+import net.osmand.plus.gallery.ui.GalleryGridFragment
+import net.osmand.plus.gallery.ui.GalleryGridItemDecorator
+import net.osmand.plus.gallery.ui.GalleryListener
+import net.osmand.plus.gallery.ui.GalleryPhotoPagerFragment
+import net.osmand.plus.helpers.AndroidUiHelper
+import net.osmand.plus.mapcontextmenu.MapContextMenu
+import net.osmand.plus.mapcontextmenu.MenuBuilder
+import net.osmand.plus.plugins.PluginsHelper
+import net.osmand.plus.utils.UiUtilities
+import net.osmand.plus.widgets.dialogbutton.DialogButton
+import net.osmand.shared.media.domain.MediaItem
+import net.osmand.util.Algorithms
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+class GalleryRowBuilder(
+	val menuBuilder: MenuBuilder
+) {
 
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.gallery.model.GalleryAction;
-import net.osmand.plus.gallery.model.GalleryItem;
-import net.osmand.plus.gallery.model.GalleryItem.NoInternet;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.mapcontextmenu.MenuBuilder;
-import net.osmand.plus.gallery.controller.GalleryController;
-import net.osmand.plus.gallery.ui.GalleryGridAdapter;
-import net.osmand.plus.gallery.ui.GalleryGridConfig;
-import net.osmand.plus.gallery.ui.GalleryListener;
-import net.osmand.plus.gallery.ui.GalleryGridFragment;
-import net.osmand.plus.gallery.ui.GalleryGridItemDecorator;
-import net.osmand.plus.gallery.ui.GalleryPhotoPagerFragment;
-import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.dialogbutton.DialogButton;
-import net.osmand.shared.media.domain.MediaItem;
-import net.osmand.util.Algorithms;
+	private val app: OsmandApplication = menuBuilder.application
+	private val mapActivity: MapActivity = menuBuilder.mapActivity
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+	private val galleryItems = mutableListOf<GalleryItem>()
 
-public class GalleryRowBuilder {
-	private final OsmandApplication app;
-	private final MapActivity mapActivity;
+	lateinit var galleryView: View
+		private set
 
-	private final MenuBuilder menuBuilder;
-	private final List<GalleryItem> galleryItems = new ArrayList<>();
-	private View galleryView;
-	private GalleryGridAdapter galleryGridAdapter;
+	private lateinit var galleryGridAdapter: GalleryGridAdapter
 
-	public GalleryRowBuilder(MenuBuilder menuBuilder) {
-		this.menuBuilder = menuBuilder;
-		this.mapActivity = menuBuilder.getMapActivity();
-		this.app = menuBuilder.getApplication();
+	fun setItems(vararg items: GalleryItem) {
+		setItems(items.asList())
 	}
 
-	public MenuBuilder getMenuBuilder() {
-		return menuBuilder;
-	}
+	fun setItems(items: Collection<GalleryItem>) {
+		galleryItems.clear()
+		galleryItems.addAll(items)
 
-	public View getGalleryView() {
-		return galleryView;
-	}
+		if (!menuBuilder.isHidden) {
+			val list = ArrayList(items)
+			galleryGridAdapter.setItems(list)
 
-	public void setItems(GalleryItem... items) {
-		setItems(Arrays.asList(items));
-	}
-
-	public void setItems(@NonNull Collection<? extends GalleryItem> items) {
-		this.galleryItems.clear();
-		this.galleryItems.addAll(items);
-
-		if (!menuBuilder.isHidden()) {
-			List<GalleryItem> list = new ArrayList<>(items);
-			galleryGridAdapter.setItems(list);
-
-			MapContextMenu mapContextMenu = menuBuilder.getMapContextMenu();
+			val mapContextMenu: MapContextMenu? = menuBuilder.mapContextMenu
 			if (itemsCount() > 0 && mapContextMenu != null) {
-				mapContextMenu.updateLayout();
+				mapContextMenu.updateLayout()
 			}
 		}
-		updateShowAll();
+		updateShowAll()
 	}
 
-	private void updateShowAll() {
-		View viewAllButton = galleryView.findViewById(R.id.view_all);
-		AndroidUiHelper.updateVisibility(viewAllButton, shouldShowViewAll());
+	private fun updateShowAll() {
+		val viewAllButton = galleryView.findViewById<View>(R.id.view_all)
+		AndroidUiHelper.updateVisibility(viewAllButton, shouldShowViewAll())
 	}
 
-	public void onLoadingImage(boolean loading) {
-		galleryGridAdapter.onLoadingImages(loading);
+	fun onLoadingImage(loading: Boolean) {
+		galleryGridAdapter.onLoadingImages(loading)
 	}
 
-	public void build(@NonNull GalleryController controller, @NonNull GalleryGridConfig config, boolean nightMode) {
-		galleryView = UiUtilities.inflate(mapActivity, nightMode, R.layout.gallery_card);
-		RecyclerView recyclerView = galleryView.findViewById(R.id.recycler_view);
+	fun build(
+		controller: GalleryController,
+		config: GalleryGridConfig,
+		nightMode: Boolean
+	) {
+		galleryView = UiUtilities.inflate(mapActivity, nightMode, R.layout.gallery_card)
+		val recyclerView = galleryView.findViewById<RecyclerView>(R.id.recycler_view)
 
-		List<GalleryItem> items = new ArrayList<>();
-		GalleryListener listener = getGalleryListener(controller);
-		galleryGridAdapter = new GalleryGridAdapter(mapActivity, listener, controller,null, config, nightMode);
+		val items = mutableListOf<GalleryItem>()
+		val listener = getGalleryListener(controller)
+		galleryGridAdapter = GalleryGridAdapter(mapActivity, listener, controller, null, config, nightMode)
 
-		if (!app.getSettings().isInternetConnectionAvailable()) {
-			items.add(NoInternet.INSTANCE);
+		if (!app.settings.isInternetConnectionAvailable) {
+			items.add(NoInternet)
 		} else {
-			items.addAll(galleryItems);
+			items.addAll(galleryItems)
 		}
-		galleryGridAdapter.setItems(items);
+		galleryGridAdapter.setItems(items)
 
-		recyclerView.setLayoutManager(getGridLayoutManager());
-		GalleryGridItemDecorator galleryGridItemDecorator = new GalleryGridItemDecorator(app);
-		recyclerView.addItemDecoration(galleryGridItemDecorator);
-		recyclerView.setAdapter(galleryGridAdapter);
+		recyclerView.layoutManager = getGridLayoutManager()
+		val galleryGridItemDecorator = GalleryGridItemDecorator(app)
+		recyclerView.addItemDecoration(galleryGridItemDecorator)
+		recyclerView.adapter = galleryGridAdapter
 
-		setupViewALlButton(config);
+		setupViewAllButton(config)
 	}
 
-	private GridLayoutManager getGridLayoutManager() {
-		GridLayoutManager gridLayoutManager = new GridLayoutManager(app, 2, GridLayoutManager.HORIZONTAL, false);
-		gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-			@Override
-			public int getSpanSize(int position) {
-				return galleryGridAdapter.isRegularMediaItemOnPosition(position) ? 1 : 2;
+	private fun getGridLayoutManager(): GridLayoutManager {
+		val gridLayoutManager = GridLayoutManager(
+			app,
+			2,
+			GridLayoutManager.HORIZONTAL,
+			false
+		)
+		gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+			override fun getSpanSize(position: Int): Int {
+				return if (galleryGridAdapter.isRegularMediaItemOnPosition(position)) 1 else 2
 			}
-		});
-		return gridLayoutManager;
+		}
+		return gridLayoutManager
 	}
 
-	private void setupViewALlButton(@NonNull GalleryGridConfig config) {
-		DialogButton viewAllButton = galleryView.findViewById(R.id.view_all);
-		viewAllButton.setTitleId(config.getShowAllButtonTitleResId());
-		viewAllButton.setOnClickListener(v -> onShowAllButtonClicked(config));
-		updateShowAll();
+	private fun setupViewAllButton(config: GalleryGridConfig) {
+		val actionButton = galleryView.findViewById<DialogButton>(R.id.view_all)
+		actionButton.setTitleId(config.showAllButtonTitleResId)
+		actionButton.setOnClickListener { onShowAllButtonClicked(config) }
+		updateShowAll()
 	}
 
-	@NonNull
-	private GalleryListener getGalleryListener(@NonNull GalleryController controller) {
-		return new GalleryListener() {
-			@Override
-			public void onMediaItemClicked(@NonNull MediaItem mediaItem) {
+	private fun getGalleryListener(controller: GalleryController): GalleryListener {
+		return object : GalleryListener {
+			override fun onMediaItemClicked(mediaItem: MediaItem) {
 				if (!PluginsHelper.handleGalleryMediaItemClick(mapActivity, mediaItem)) {
-					int position = controller.getPhotoItemIndexById(mediaItem.getId());
-					GalleryPhotoPagerFragment.showInstance(mapActivity, position);
+					val position = controller.getPhotoItemIndexById(mediaItem.id)
+					GalleryPhotoPagerFragment.showInstance(mapActivity, position)
 				}
 			}
 
-			@Override
-			public void onReloadMediaItems() {
-				if (!app.getSettings().isInternetConnectionAvailable()) {
-					app.showShortToastMessage(R.string.shared_string_no_internet_connection);
+			override fun onReloadMediaItems() {
+				if (!app.settings.isInternetConnectionAvailable) {
+					app.showShortToastMessage(R.string.shared_string_no_internet_connection)
 				} else {
-					menuBuilder.startLoadingImages();
+					menuBuilder.startLoadingImages()
 				}
 			}
-		};
+		}
 	}
 
-	private void onShowAllButtonClicked(@NonNull GalleryGridConfig config) {
-		GalleryAction action = config.getShowAllButtonAction();
+	private fun onShowAllButtonClicked(config: GalleryGridConfig) {
+		val action: GalleryAction? = config.showAllButtonAction
 		if (action != null) {
-			PluginsHelper.handleGalleryAction(action);
+			PluginsHelper.handleGalleryAction(action)
 		} else {
-			GalleryGridFragment.showInstance(mapActivity);
+			GalleryGridFragment.showInstance(mapActivity)
 		}
 	}
 
-	private boolean shouldShowViewAll() {
+	private fun shouldShowViewAll(): Boolean {
 		if (Algorithms.isEmpty(galleryItems)) {
-			return false;
+			return false
 		}
-		for (GalleryItem item : galleryItems) {
-			if (item instanceof GalleryItem.Media) {
-				return true;
+		for (item in galleryItems) {
+			if (item is GalleryItem.Media) {
+				return true
 			}
 		}
-		return false;
+		return false
 	}
 
-	private int itemsCount() {
-		return galleryItems.size();
+	private fun itemsCount(): Int {
+		return galleryItems.size
 	}
 }
