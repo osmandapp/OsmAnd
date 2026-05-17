@@ -1,81 +1,63 @@
-package net.osmand.plus.gallery.online;
+package net.osmand.plus.gallery.online
 
-import static net.osmand.plus.gallery.online.OnlinePhotosGroup.ASTRONOMY;
-import static net.osmand.plus.gallery.online.OnlinePhotosGroup.MAPILLARY;
-import static net.osmand.plus.gallery.online.OnlinePhotosGroup.MAPILLARY_AMENITY;
-import static net.osmand.plus.gallery.online.OnlinePhotosGroup.OTHER;
-import static net.osmand.plus.gallery.online.OnlinePhotosGroup.WIKIDATA;
-import static net.osmand.plus.gallery.online.OnlinePhotosGroup.WIKIMEDIA;
+import net.osmand.data.LatLon
+import net.osmand.plus.gallery.model.GalleryItem
+import net.osmand.shared.media.domain.MediaItem
 
-import androidx.annotation.NonNull;
+class OnlinePhotosHolder(
+	val latLon: LatLon,
+	val params: Map<String, String>
+) {
 
-import net.osmand.data.LatLon;
-import net.osmand.plus.gallery.model.GalleryItem;
-import net.osmand.shared.media.domain.MediaItem;
+	private val itemsByGroup = linkedMapOf<OnlinePhotosGroup, LinkedHashMap<String, GalleryItem>>()
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-public class OnlinePhotosHolder {
-
-	private final LatLon latLon;
-	private final Map<String, String> params;
-	private final Map<OnlinePhotosGroup, LinkedHashMap<String, GalleryItem>> itemsByGroup = new LinkedHashMap<>();
-
-	public OnlinePhotosHolder(@NonNull LatLon latLon, @NonNull Map<String, String> params) {
-		this.latLon = latLon;
-		this.params = params;
+	fun getOrderedGalleryItems(): List<GalleryItem> {
+		return getGalleryItemsWithGroups(
+			OnlinePhotosGroup.MAPILLARY_AMENITY,
+			OnlinePhotosGroup.WIKIDATA,
+			OnlinePhotosGroup.WIKIMEDIA,
+			OnlinePhotosGroup.OTHER,
+			OnlinePhotosGroup.ASTRONOMY
+		)
 	}
 
-	@NonNull
-	public LatLon getLatLon() {
-		return latLon;
+	fun getMapillaryGalleryItems(): List<GalleryItem> {
+		return getGalleryItemsWithGroups(OnlinePhotosGroup.MAPILLARY)
 	}
 
-	@NonNull
-	public Map<String, String> getParams() {
-		return params;
+	fun getAstronomyGalleryItems(): List<GalleryItem> {
+		return getGalleryItemsWithGroups(OnlinePhotosGroup.ASTRONOMY)
 	}
 
-	@NonNull
-	public List<GalleryItem> getOrderedGalleryItems() {
-		return getGalleryItemsWithGroups(MAPILLARY_AMENITY, WIKIDATA, WIKIMEDIA, OTHER, ASTRONOMY);
-	}
-
-	@NonNull
-	public List<GalleryItem> getMapillaryGalleryItems() {
-		return getGalleryItemsWithGroups(MAPILLARY);
-	}
-
-	@NonNull
-	public List<GalleryItem> getAstronomyGalleryItems() {
-		return getGalleryItemsWithGroups(ASTRONOMY);
-	}
-
-	@NonNull
-	private List<GalleryItem> getGalleryItemsWithGroups(@NonNull OnlinePhotosGroup... groups) {
-		List<GalleryItem> list = new ArrayList<>();
-		for (OnlinePhotosGroup group : groups) {
-			LinkedHashMap<String, GalleryItem> items = itemsByGroup.get(group);
-			if (items != null && !items.isEmpty()) {
-				list.addAll(items.values());
+	private fun getGalleryItemsWithGroups(vararg groups: OnlinePhotosGroup): List<GalleryItem> {
+		val result = mutableListOf<GalleryItem>()
+		for (group in groups) {
+			val items = itemsByGroup[group]
+			if (!items.isNullOrEmpty()) {
+				result.addAll(items.values)
 			}
 		}
-		return list;
+		return result
 	}
 
-	public void addMediaItem(@NonNull OnlinePhotosGroup group, @NonNull MediaItem mediaItem) {
-		addMediaItem(group, mediaItem, false);
+	fun addMediaItem(group: OnlinePhotosGroup, mediaItem: MediaItem) {
+		addMediaItem(group, mediaItem, showLoadingProgress = false)
 	}
 
-	public void addMediaItem(@NonNull OnlinePhotosGroup group, @NonNull MediaItem mediaItem, boolean showLoadingProgress) {
-		addGalleryItem(group, mediaItem.getId(), new GalleryItem.Media(mediaItem, showLoadingProgress));
+	fun addMediaItem(
+		group: OnlinePhotosGroup,
+		mediaItem: MediaItem,
+		showLoadingProgress: Boolean
+	) {
+		addGalleryItem(group, mediaItem.id, GalleryItem.Media(mediaItem, showLoadingProgress))
 	}
 
-	public void addGalleryItem(@NonNull OnlinePhotosGroup group, @NonNull String key, @NonNull GalleryItem item) {
-		LinkedHashMap<String, GalleryItem> items = itemsByGroup.computeIfAbsent(group, ignored -> new LinkedHashMap<>());
-		items.put(key, item);
+	fun addGalleryItem(group: OnlinePhotosGroup, key: String, item: GalleryItem) {
+		val items = itemsByGroup.getOrPut(group) { linkedMapOf() }
+		items[key] = item
+	}
+
+	fun clear() {
+		itemsByGroup.clear()
 	}
 }
