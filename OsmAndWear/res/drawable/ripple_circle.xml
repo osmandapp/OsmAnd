@@ -1,0 +1,13 @@
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+	android:color="@color/active_buttons_and_links_trans_dark">
+	<item
+		android:id="@android:id/mask"
+		android:bottom="1dp"
+		android:left="1dp"
+		android:right="1dp"
+		android:top="1dp">
+		<shape android:shape="oval">
+			<solid android:color="@color/active_color_primary_light" />
+		</shape>
+	</item>
+</ripple>

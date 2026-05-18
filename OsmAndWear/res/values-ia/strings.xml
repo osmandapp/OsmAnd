@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="add_new_profile_q">Adder le nove profilo \'%1$s\'?</string>
+    <string name="shared_string_downloading_formatted">Discargante %s</string>
+    <string name="backup_version_history">Chronologia del versiones</string>
+    <string name="days_2_4">Dies</string>
+    <string name="day">Die</string>
+    <string name="shared_string_current">Actual</string>
+    <string name="start_point">Initiar</string>
+    <string name="added_profiles">Profilos addite</string>
+    <string name="shared_string_next_event">Proxime evento</string>
+    <string name="shared_string_license">Licentia</string>
+    <string name="shared_string_link">Ligamine</string>
+    <string name="shared_string_author">Autor</string>
+    <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
+    <string name="shared_string_road_maps">Mappas de stratas</string>
+    <string name="weeks_5">Septimanas</string>
+    <string name="shared_string_previous">Previe</string>
+    <string name="shared_string_next">Sequente</string>
+    <string name="cancel_navigation">Stoppar le navigation</string>
+    <string name="months_5">Menses</string>
+    <string name="week">Septimana</string>
+    <string name="month">Mense</string>
+    <string name="months_2_4">Menses</string>
+    <string name="year">Anno</string>
+    <string name="years_5">Annos</string>
+    <string name="days_5">Dies</string>
+    <string name="weeks_2_4">Septimanas</string>
+    <string name="years_2_4">Annos</string>
+    <string name="shared_string_options">Optiones</string>
+    <string name="mapillary_image">Imagine de Mapillary</string>
+    <string name="shared_string_control_stop">Stoppar</string>
+    <string name="sign_in_with_open_street_map">Initiar sesión con OpenStreetMap</string>
+    <string name="price_free">Gratuite</string>
+</resources>

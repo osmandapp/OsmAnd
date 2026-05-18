@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <string name="regions">অঞ্চল</string>
+    <string name="region_maps">অঞ্চলভিত্তিক মানচিত্র</string>
+    <string name="world_maps">বিশ্ব মানচিত্র</string>
+    <string name="hillshade_layer_disabled">পর্বতছায়া স্তর নিষ্ক্রিয়</string>
+    <string name="favorite_category_add_new">নতুন সংযোজন</string>
+    <string name="shared_string_markers">চিহ্নসমুহ</string>
+    <string name="coordinates_format">অক্ষাংশ-দ্রাঘিমাংশ বিন্যাস</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">বরফাবৃত, জলমগ্ন রাস্তা পরিত্যক্ত করুন</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">বরফাবৃত এবং জলমগ্ন রাস্তা পরিত্যক্ত করুন</string>
+    <string name="use_location">অবস্থান ব্যবহার করুন</string>
+    <string name="add_location_as_first_point_descr">নির্ভুল রাস্তা পরিকল্পনা করতে প্রথমে আপনার অবস্থান চিহ্নিত করুন</string>
+    <string name="my_location">আমার অবস্থান</string>
+    <string name="shared_string_finish">সম্পূর্ণ</string>
+    <string name="plan_route">রাস্তা পরিকল্পনা</string>
+    <string name="shared_string_sort">সাজানো</string>
+    <string name="shared_string_app_default_w_val">এপ মনোনিত</string>
+    <string name="shared_string_angle">কোন</string>
+    <string name="recalc_angle_dialog_descr">আমার নিজের অবস্থান এবং গন্তব্য এর হিসাব করা অতিরিক্ত সরলরেখাংশ গুলো দেখানো হবে, যতক্ষণ না গন্তব্যে পৌছানোর রাস্তাটি আবার খুঁজে পাওয়া যাচ্ছে</string>
+    <string name="recalc_angle_dialog_title">আমার অবস্থান ও গন্তব্য এর মধ্যকার সর্বনিম্ন কোন</string>
+    <string name="shared_string_preparing">তৈরী করা হচ্ছে</string>
+    <string name="shared_string_nothing_selected">কিছু নির্বাচন করা হয়নি</string>
+    <string name="osmand_purchases_item">ওএসএমও কেনাকাটা</string>
+    <string name="legend_item_description">একটি মানচিত্রের প্রতীকের জন্য গাইড</string>
+    <string name="navigation_profiles_item">ন্যাভিগেশন প্রোফাইল</string>
+    <string name="av_locations">অবস্থানগুলো</string>
+    <string name="shared_string_navigation">দিক নির্ণয়</string>
+    <string name="m_s">মি/সে</string>
+    <string name="nm">নটিকাল মাইল</string>
+</resources>

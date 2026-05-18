@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+	<item>
+		<nine-patch android:src="@drawable/bg_card_shadow"/>
+	</item>
+	<item>
+		<shape>
+			<solid android:color="@color/list_background_color_light"/>
+			<corners android:radius="4dp" />
+		</shape>
+	</item>
+</layer-list>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:title="@string/external_sensors_plugin_name">
+
+	<Preference
+		android:key="antplus_info"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:selectable="false"
+		android:title="@string/plugin_global_prefs_info"
+		tools:icon="@drawable/ic_action_info_dark" />
+
+</PreferenceScreen>

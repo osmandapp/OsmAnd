@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:minHeight="@dimen/list_item_height"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
+    android:orientation="horizontal">
+
+
+	<androidx.appcompat.widget.AppCompatCheckBox
+		android:id="@+id/filter_poi_check"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
+		android:translationX="35dp"
+		android:translationY="10dp" />
+
+
+    <TextView
+        android:id="@+id/filter_poi_label"
+        android:textSize="@dimen/default_list_text_size"
+		android:textColor="?android:textColorPrimary"
+		android:layout_gravity="center_vertical"
+		android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+		android:ellipsize="end"
+		android:maxLines="1"/>
+</LinearLayout>

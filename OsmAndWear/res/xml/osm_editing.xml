@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:summary="@string/osm_editing"
+	android:title="@string/shared_string_settings">
+
+	<Preference
+		android:key="osm_editing_info"
+		android:layout="@layout/preference_info"
+		android:persistent="false"
+		android:selectable="false"
+		android:title="@string/plugin_global_prefs_info"
+		tools:icon="@drawable/ic_action_info_dark" />
+
+	<Preference
+		android:key="osm_login_data"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/login_open_street_map" />
+
+	<Preference
+		android:key="osm_logout"
+		android:layout="@layout/preference_login"
+		android:persistent="false"
+		android:title="@string/login_account" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="offline_osm_editing"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/offline_edition"
+		tools:icon="@drawable/ic_action_offline" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="use_dev_url"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/use_dev_url"
+		tools:icon="@drawable/ic_action_laptop" />
+
+	<Preference
+		android:key="map_updates_for_mappers"
+		android:layout="@layout/preference_active_descr"
+		android:persistent="false"
+		android:icon="@drawable/ic_action_map_update"
+		android:title="@string/map_updates_for_mappers"
+		android:summary="@string/shared_string_learn_more"/>
+
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
+	<Preference
+		android:key="osm_edits_description"
+		android:layout="@layout/preference_description"
+		android:persistent="false"
+		android:selectable="false"
+		android:title="@string/osm_edits_view_descr" />
+
+	<Preference
+		android:key="open_osm_edits"
+		android:layout="@layout/preference_button"
+		android:persistent="false"
+		android:title="@string/osm_edits"
+		tools:icon="@drawable/ic_action_folder" />
+
+</PreferenceScreen>

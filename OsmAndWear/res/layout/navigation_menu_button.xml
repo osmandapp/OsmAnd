@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<net.osmand.plus.views.controls.maphudbuttons.NavigationMenuButton xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/map_route_info_button"
+	android:layout_width="@dimen/map_button_size"
+	android:layout_height="@dimen/map_button_size"
+	android:clickable="true"
+	android:contentDescription="@string/layer_route"
+	android:focusable="true"
+	tools:background="@drawable/btn_round_night"
+	tools:src="@drawable/ic_action_gdirections_dark" />

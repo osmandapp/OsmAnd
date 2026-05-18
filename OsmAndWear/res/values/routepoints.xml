@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="rp_current_route">Current route:</string>
+    <string name="route_points_no_gpx">No route</string>
+    <string name="rp_current_route_not_available">Please select a route</string>
+    <string name="route_plugin_name">Navigate predefined tours</string>
+    <string name="route_plugin_descr">Activates functionality allowing to follow a predefined GPX tour</string>
+    <string name="mark_as_visited">Mark as visited</string>
+    <string name="mark_as_not_visited">Mark as not-visited</string>
+    <string name="mark_as_current">Go to this point</string>
+    <string name="navigate_to_next">Go to next point</string>
+    <string name="map_widget_route_points">Route points</string>
+    <string name="route_points_activity">Route Points</string>
+    <string name="navigate_dialog">Navigate dialog</string>
+    <string name="package_delivered">Was the package delivered?</string>
+</resources>

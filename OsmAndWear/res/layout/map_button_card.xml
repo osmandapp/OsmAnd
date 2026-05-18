@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/map_button_container"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:clipChildren="false"
+	android:clipToPadding="false"
+	android:minHeight="@dimen/map_button_appearance_image_height"
+	android:paddingHorizontal="@dimen/map_alarm_text_top_padding"
+	android:paddingVertical="@dimen/content_padding"
+	tools:background="#103866" />

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:background="?attr/list_background_color"
+	android:paddingHorizontal="@dimen/dialog_content_margin"
+	android:paddingTop="@dimen/content_padding_large"
+	android:paddingBottom="@dimen/content_padding"
+	android:orientation="vertical">
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:layout_width="@dimen/icon_size_double"
+		android:layout_height="@dimen/icon_size_double"
+		android:layout_gravity="center_horizontal"
+		android:src="@drawable/ic_action_keyboard"
+		android:tint="?attr/default_icon_color" />
+
+	<net.osmand.plus.widgets.TextViewEx
+		style="@style/TitleStyle.Medium"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:gravity="center_horizontal"
+		android:layout_gravity="center_horizontal"
+		android:textColor="?android:textColorPrimary"
+		android:textSize="@dimen/default_list_text_size_large"
+		android:layout_marginTop="@dimen/dialog_content_margin"
+		android:text="@string/no_assigned_keys" />
+
+	<net.osmand.plus.widgets.TextViewEx
+		style="@style/DescStyle"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:gravity="center_horizontal"
+		android:layout_gravity="center_horizontal"
+		android:textColor="?android:textColorSecondary"
+		android:layout_marginTop="@dimen/content_padding_small_half"
+		android:layout_marginBottom="@dimen/content_padding"
+		android:text="@string/no_assigned_keys_desc" />
+
+	<net.osmand.plus.widgets.dialogbutton.DialogButton
+		android:id="@+id/add_button"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:transitionName="add_button_shared_element_container"
+		app:dialogButtonTitle="@string/shared_string_add"
+		app:dialogButtonType="secondary" />
+
+</LinearLayout>

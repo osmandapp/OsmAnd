@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
+	android:background="?android:attr/selectableItemBackground"
+	android:minHeight="@dimen/list_item_height"
+	android:paddingStart="@dimen/list_content_padding"
+	android:paddingLeft="@dimen/list_content_padding"
+	android:paddingEnd="@dimen/list_content_padding"
+	android:paddingRight="@dimen/list_content_padding">
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/icon_new_device_account"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
+		android:layout_marginEnd="@dimen/map_widget_height"
+		android:layout_marginRight="@dimen/map_widget_height"
+		android:translationX="25dp"
+		app:srcCompat="@drawable/ic_action_help_online"
+		app:tint="?attr/active_color_basic" />
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/new_device_account_title"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
+		android:layout_weight="1"
+		android:text="@string/new_device_account"
+		android:textColor="?attr/active_color_basic"
+		android:textSize="12sp"
+		app:typefaceWeight="medium" />
+
+</LinearLayout>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/widget_bg"
+	android:layout_width="match_parent"
+	android:layout_height="95dp"
+	android:background="?attr/list_background_color"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:id="@+id/container"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical"
+		android:paddingHorizontal="3dp">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/widget_icon"
+			android:layout_width="@dimen/map_widget_icon"
+			android:layout_height="@dimen/map_widget_icon"
+			android:layout_gravity="center_horizontal"
+			android:layout_marginTop="9dp"
+			app:srcCompat="@drawable/ic_action_remove_dark" />
+
+		<TextView
+			android:id="@+id/widget_text"
+			android:layout_width="match_parent"
+			android:layout_height="30dp"
+			android:layout_gravity="center_horizontal"
+			android:layout_marginTop="7dp"
+			android:gravity="center_horizontal"
+			android:includeFontPadding="false"
+			android:letterSpacing="0.04"
+			android:maxLines="1"
+			android:textColor="@color/text_color_primary_light"
+			android:textSize="@dimen/widget_custom_vertical_value_size"
+			tools:text="Value" />
+
+		<TextView
+			android:id="@+id/widget_name"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:visibility="gone"
+			tools:text="Widget name" />
+
+		<TextView
+			android:id="@+id/widget_text_small"
+			android:layout_width="wrap_content"
+			android:layout_height="13dp"
+			android:layout_gravity="center_horizontal"
+			android:layout_marginTop="3dp"
+			android:layout_marginBottom="9dp"
+			android:includeFontPadding="false"
+			android:letterSpacing="0.06"
+			android:lineSpacingExtra="-2sp"
+			android:maxLines="1"
+			android:textAllCaps="true"
+			android:textColor="@color/text_color_secondary_light"
+			android:textSize="@dimen/simple_widget_description_text_size"
+			tools:text="Unit" />
+
+	</LinearLayout>
+
+</FrameLayout>

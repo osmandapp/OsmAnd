@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<net.osmand.plus.widgets.chips.HorizontalChipsView
+		android:id="@+id/icons_categories_selector"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:paddingHorizontal="@dimen/content_padding"
+		tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+		tools:listitem="@layout/custom_chip_view"
+		tools:orientation="horizontal" />
+
+	<net.osmand.plus.widgets.FlowLayout
+		android:id="@+id/icons_selector"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginTop="@dimen/content_padding_small_half" />
+
+</LinearLayout>

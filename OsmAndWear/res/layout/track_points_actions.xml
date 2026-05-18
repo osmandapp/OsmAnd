@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<include layout="@layout/list_item_divider" />
+
+	<include
+		android:id="@+id/header"
+		layout="@layout/preference_category_with_descr" />
+
+	<include
+		android:id="@+id/add_waypoint_button"
+		layout="@layout/preference_button" />
+
+	<include
+		android:id="@+id/delete_waypoint_button"
+		layout="@layout/preference_button" />
+
+	<include layout="@layout/list_shadow_footer" />
+
+</LinearLayout>

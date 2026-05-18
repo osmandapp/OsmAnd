@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+	<item>
+		<shape android:shape="oval">
+			<solid android:color="@color/color_osm_edit_create"/>
+			<size
+				android:width="32dp"
+				android:height="32dp"/>
+		</shape>
+	</item>
+	<item
+		android:drawable="@drawable/ic_action_import"
+		android:top="4dp"
+		android:bottom="4dp"
+		android:left="4dp"
+		android:right="4dp" />
+</layer-list>

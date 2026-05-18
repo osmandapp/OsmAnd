@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:paddingHorizontal="@dimen/content_padding"
+		android:layout_marginTop="@dimen/content_padding"
+		android:orientation="horizontal"
+		android:baselineAligned="false">
+
+		<net.osmand.plus.widgets.OsmandTextFieldBoxes
+			android:id="@+id/tag_fb"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			app:alwaysShowHint="true"
+			app:useDenseSpacing="true"
+			app:hasClearButton="true">
+
+			<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+				android:id="@+id/tagEditText"
+				android:layout_width="match_parent"
+				android:textColor="?attr/active_color_basic"
+				android:hint="@string/hint_tag"
+				android:maxLines="1"
+				android:inputType="text"
+				android:scrollHorizontally="true"
+				android:layout_height="wrap_content" />
+
+		</net.osmand.plus.widgets.OsmandTextFieldBoxes>
+
+		<FrameLayout
+			android:id="@+id/delete_button"
+			android:layout_width="@dimen/context_menu_action_buttons_h"
+			android:layout_height="@dimen/context_menu_action_buttons_h"
+			android:layout_marginStart="@dimen/content_padding_small_half"
+			android:layout_gravity="center"
+			android:background="@drawable/bg_red_rounded_corners">
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:layout_width="@dimen/standard_icon_size"
+				android:layout_height="@dimen/standard_icon_size"
+				android:layout_gravity="center"
+				android:tint="@color/color_warning"
+				android:src="@drawable/ic_action_delete_dark" />
+
+		</FrameLayout>
+
+	</LinearLayout>
+
+	<net.osmand.plus.widgets.OsmandTextFieldBoxes
+		android:id="@+id/value_fb"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/content_padding_small_half"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		app:hasClearButton="true"
+		app:alwaysShowHint="true"
+		app:useDenseSpacing="true">
+
+		<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+			android:id="@+id/valueEditText"
+			android:layout_width="match_parent"
+			android:hint="@string/hint_value"
+			android:layout_height="wrap_content" />
+
+	</net.osmand.plus.widgets.OsmandTextFieldBoxes>
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginTop="@dimen/content_padding"
+		android:background="?attr/divider_color" />
+
+</LinearLayout>

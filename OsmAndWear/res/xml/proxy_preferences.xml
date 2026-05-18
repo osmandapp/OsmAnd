@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:description="@string/proxy_pref_descr"
+	android:key="proxy"
+	android:title="@string/proxy_pref_title">
+
+	<Preference
+		android:key="proxy_preferences_info"
+		android:layout="@layout/preference_info"
+		android:persistent="false"
+		android:selectable="false"
+		android:title="@string/enable_proxy_descr"
+		tools:icon="@drawable/ic_action_info_dark" />
+
+	<net.osmand.plus.settings.preferences.EditTextPreferenceEx
+		android:key="proxy_host"
+		android:layout="@layout/preference_with_descr"
+		android:summary="@string/proxy_host_descr"
+		android:title="@string/proxy_host_title" />
+
+	<net.osmand.plus.settings.preferences.EditTextPreferenceEx
+		android:key="proxy_port"
+		android:layout="@layout/preference_with_descr"
+		android:summary="@string/proxy_port_descr"
+		android:title="@string/proxy_port_title" />
+
+</PreferenceScreen>

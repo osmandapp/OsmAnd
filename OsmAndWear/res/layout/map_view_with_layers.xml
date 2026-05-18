@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/map_view_with_layers"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<ViewStub
+		android:id="@+id/atlasMapRendererViewStub"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:inflatedId="@+id/atlasMapRendererView"
+		android:layout="@layout/atlas_map_renderer_view" />
+
+	<net.osmand.plus.views.OsmAndMapSurfaceView
+		android:id="@+id/MapView"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:contentDescription="@string/shared_string_map"
+		android:visibility="gone" />
+
+	<net.osmand.plus.views.OsmAndMapLayersView
+		android:id="@+id/MapLayersView"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:contentDescription="@string/shared_string_map"
+		android:visibility="gone" />
+
+	<net.osmand.plus.auto.views.AndroidAutoMapPlaceholderView
+		android:id="@+id/AndroidAutoPlaceholder"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:visibility="gone" />
+
+</FrameLayout>

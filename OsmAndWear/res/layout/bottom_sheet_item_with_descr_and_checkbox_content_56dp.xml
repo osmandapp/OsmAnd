@@ -1,0 +1,50 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="horizontal"
+	android:paddingStart="0dp"
+	android:paddingEnd="@dimen/content_padding"
+	android:paddingTop="@dimen/context_menu_padding_margin_medium"
+	android:paddingBottom="@dimen/context_menu_padding_margin_medium">
+
+	<LinearLayout
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
+		android:layout_weight="1"
+		android:orientation="vertical">
+
+		<TextView
+			android:id="@+id/title"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:ellipsize="end"
+			android:maxLines="2"
+			android:textAppearance="@style/TextAppearance.ListItemTitle"
+			tools:text="Some title" />
+
+		<TextView
+			android:id="@+id/description"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:ellipsize="end"
+			android:maxLines="2"
+			android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
+			android:textColor="@null"
+			tools:text="Some description" />
+
+	</LinearLayout>
+
+	<androidx.appcompat.widget.AppCompatCheckBox
+		android:id="@+id/compound_button"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
+		android:layout_marginStart="@dimen/bottom_sheet_content_margin"
+		android:background="@null"
+		android:clickable="false"
+		android:focusable="false"
+		android:focusableInTouchMode="false" />
+
+</LinearLayout>
