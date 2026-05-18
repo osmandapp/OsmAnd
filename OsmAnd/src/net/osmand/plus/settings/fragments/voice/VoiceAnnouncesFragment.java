@@ -97,6 +97,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 
 		setupKeepInformingPref();
 		setupArrivalAnnouncementPref();
+		setupVoiceVolumePref();
 
 		setupAudioStreamGuidancePref();
 		setupInterruptMusicPref();
@@ -153,6 +154,18 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 		ListPreferenceEx keepInforming = findPreference(settings.KEEP_INFORMING.getId());
 		keepInforming.setEntries(keepInformingNames);
 		keepInforming.setEntryValues(keepInformingValues);
+	}
+
+	private void setupVoiceVolumePref() {
+		Float[] volumeValues = {5.0f, 10.0f, 15.0f};
+		String[] volumeNames = {
+				"Quieter",
+				"Normal",
+				"Louder"
+		};
+
+		ListPreferenceEx volumePref = createListPreferenceEx(settings.VOICE_AMP_VOLUME.getId(), volumeNames, volumeValues, "Voice guidance volume", R.layout.preference_with_descr);
+		getPreferenceScreen().addPreference(volumePref);
 	}
 
 	private void setupArrivalAnnouncementPref() {
