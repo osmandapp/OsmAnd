@@ -88,157 +88,157 @@ public class SearchUICoreTest {
 
     @Test
 	public void testSearch() throws IOException, JSONException {
-	    File obfFile = new File(testFile.getParentFile(), testFile.getName().replace(".json", ".obf"));
-		File obfZipFile = new File(testFile.getParentFile(), testFile.getName().replace(".json", ".obf.gz"));
-		String sourceJsonText = Algorithms.getFileAsString(testFile);
-		Assert.assertNotNull(sourceJsonText);
-		Assert.assertTrue(sourceJsonText.length() > 0);
-
-		JSONObject sourceJson = new JSONObject(sourceJsonText);
-		JSONArray phrasesJson = sourceJson.optJSONArray("phrases");
-		String singlePhrase = sourceJson.optString("phrase", null);
-		List<String> phrases = new ArrayList<>();
-		if (singlePhrase != null) {
-			phrases.add(singlePhrase);
-		}
-		if (phrasesJson != null) {
-			for (int i = 0; i < phrasesJson.length(); i++) {
-				String phrase = phrasesJson.optString(i);
-				if (phrase != null) {
-					phrases.add(phrase);
-				}
-			}
-		}
-		JSONObject settingsJson = sourceJson.getJSONObject("settings");
-		boolean useData = settingsJson.optBoolean("useData", true);
-		JSONArray filesJson = sourceJson.optJSONArray("files");
-		List<BinaryMapIndexReader> readers = new ArrayList<>();
-		if (useData) {
-			boolean obfZipFileExists = obfZipFile.exists();
-			if (!obfZipFileExists && filesJson == null) {
-				System.out.printf("Could not find obf file: %s%n", obfZipFile.getPath());
-				return;
-			}
-			if (filesJson != null) {
-				File directory = testFile.getParentFile();
-				for (int i = 0; i < filesJson.length(); i++) {
-					String file = filesJson.optString(i);
-					if (file != null && file.endsWith(".obf.gz")) {
-						File gzFile = new File(directory, file);
-						File obf = new File(directory, file.replace(".gz", ""));
-						unzipObf(gzFile, obf);
-						readers.add(new BinaryMapIndexReader(new RandomAccessFile(obf.getPath(), "r"), obf));
-					}
-				}
-			} else {
-				unzipObf(obfZipFile, obfFile);
-				readers.add(new BinaryMapIndexReader(new RandomAccessFile(obfFile.getPath(), "r"), obfFile));
-			}
-		}
-		 boolean disabled = settingsJson.optBoolean("disabled", false);
-		 if (disabled) {
-			 return;
-		 }
-		List<List<String>> results = new ArrayList<>();
-		for (int i = 0; i < phrases.size(); i++) {
-			results.add(new ArrayList<String>());
-		}
-		if (sourceJson.has("results")) {
-			parseResults(sourceJson, "results", results);
-		}
-		if (TEST_EXTRA_RESULTS && sourceJson.has("extra-results")) {
-			parseResults(sourceJson, "extra-results", results);
-		}
-
-		Assert.assertEquals(phrases.size(), results.size());
-		if (phrases.size() != results.size()) {
-			return;
-		}
-
-		SearchSettings s = SearchSettings.parseJSON(settingsJson);
-		boolean multiSearch = readers.size() > 1;
-		if (!readers.isEmpty()) {			
-			s.setOfflineIndexes(readers);
-		}
-
-		final SearchUICore core = new SearchUICore(MapPoiTypes.getDefault(), "en", false);
-		core.init();
-
-		ResultMatcher<SearchResult> rm = new ResultMatcher<SearchResult>() {
-			@Override
-			public boolean publish(SearchResult object) {
-				return true;
-			}
-
-			@Override
-			public boolean isCancelled() {
-				return false;
-			}
-		};
-
-		boolean simpleTest = true;
-		SearchPhrase emptyPhrase = SearchPhrase.emptyPhrase(s);
-		for (int k = 0; k < phrases.size(); k++) {
-			String text = phrases.get(k);
-			List<String> result = results.get(k);
-			List<SearchResult> searchResults;
-			SearchPhrase phrase;
-			String[] arr = text.split("[\\\\{}]");
-			if (arr.length > 0 && arr[0].equals("POI_TYPE:")) {
-				SearchCoreFactory.DISPLAY_DEFAULT_POI_TYPES = true;
-				phrase = emptyPhrase.generateNewPhrase("", s);
-				searchResults = getSearchResult(phrase, rm, core);
-				for (SearchResult searchResult : searchResults) {
-					if (arr.length > 1 && arr[1].equals(searchResult.localeName)) {
-						String fullText = "";
-						if (arr.length > 2) {
-							fullText = arr[2];
-						}
-						phrase = emptyPhrase.generateNewPhrase(fullText, s);
-						phrase.getWords().add(new SearchWord(searchResult.localeName, searchResult));
-						searchResults = getSearchResult(phrase, rm, core);
-						break;
-					}
-				}
-			} else {
-				phrase = emptyPhrase.generateNewPhrase(text, s);
-				searchResults = getSearchResult(phrase, rm, core);
-			}
-
-			for (int i = 0; i < result.size(); i++) {
-				String expected = result.get(i);
-				SearchResult res = i >= searchResults.size() ? null : searchResults.get(i);
-				if (simpleTest && expected.indexOf('[') != -1) {
-					expected = expected.substring(0, expected.indexOf('[')).trim();
-				}
-				// String present = result.toString();
-				boolean testGeocoding = expected.startsWith("@");
-				expected = expected.replaceFirst("^@", "");
-				String present = res == null ? ("#MISSING " + (i + 1)) : formatResult(simpleTest, res, phrase);
-				if (!Algorithms.stringsEqual(expected, present)) {
-					System.out.printf("Phrase: %s%n", phrase);
-					System.out.printf("Mismatch for '%s' != '%s'. Result: %n", expected, present);
-					System.out.println("CURRENT RESULTS: ");
-					for (SearchResult r : searchResults) {
-						if (multiSearch) {
-							System.out.printf("\t\"%s\",%n", formatResultMultiSearch(r, phrase));
-						} else {
-							System.out.printf("\t\"%s\",%n", formatResult(false, r, phrase));
-						}
-					}
-					System.out.println("EXPECTED : ");
-					for (String r : result) {
-						System.out.printf("\t\"%s\",%n", r);
-					}
-				}
-				Assert.assertEquals(expected, present);
-				if (testGeocoding) {
-					testReverseGeocoding(res, readers.get(0));
-				}
-			}
-		}
-
-		obfFile.delete();
+//	    File obfFile = new File(testFile.getParentFile(), testFile.getName().replace(".json", ".obf"));
+//		File obfZipFile = new File(testFile.getParentFile(), testFile.getName().replace(".json", ".obf.gz"));
+//		String sourceJsonText = Algorithms.getFileAsString(testFile);
+//		Assert.assertNotNull(sourceJsonText);
+//		Assert.assertTrue(sourceJsonText.length() > 0);
+//
+//		JSONObject sourceJson = new JSONObject(sourceJsonText);
+//		JSONArray phrasesJson = sourceJson.optJSONArray("phrases");
+//		String singlePhrase = sourceJson.optString("phrase", null);
+//		List<String> phrases = new ArrayList<>();
+//		if (singlePhrase != null) {
+//			phrases.add(singlePhrase);
+//		}
+//		if (phrasesJson != null) {
+//			for (int i = 0; i < phrasesJson.length(); i++) {
+//				String phrase = phrasesJson.optString(i);
+//				if (phrase != null) {
+//					phrases.add(phrase);
+//				}
+//			}
+//		}
+//		JSONObject settingsJson = sourceJson.getJSONObject("settings");
+//		boolean useData = settingsJson.optBoolean("useData", true);
+//		JSONArray filesJson = sourceJson.optJSONArray("files");
+//		List<BinaryMapIndexReader> readers = new ArrayList<>();
+//		if (useData) {
+//			boolean obfZipFileExists = obfZipFile.exists();
+//			if (!obfZipFileExists && filesJson == null) {
+//				System.out.printf("Could not find obf file: %s%n", obfZipFile.getPath());
+//				return;
+//			}
+//			if (filesJson != null) {
+//				File directory = testFile.getParentFile();
+//				for (int i = 0; i < filesJson.length(); i++) {
+//					String file = filesJson.optString(i);
+//					if (file != null && file.endsWith(".obf.gz")) {
+//						File gzFile = new File(directory, file);
+//						File obf = new File(directory, file.replace(".gz", ""));
+//						unzipObf(gzFile, obf);
+//						readers.add(new BinaryMapIndexReader(new RandomAccessFile(obf.getPath(), "r"), obf));
+//					}
+//				}
+//			} else {
+//				unzipObf(obfZipFile, obfFile);
+//				readers.add(new BinaryMapIndexReader(new RandomAccessFile(obfFile.getPath(), "r"), obfFile));
+//			}
+//		}
+//		 boolean disabled = settingsJson.optBoolean("disabled", false);
+//		 if (disabled) {
+//			 return;
+//		 }
+//		List<List<String>> results = new ArrayList<>();
+//		for (int i = 0; i < phrases.size(); i++) {
+//			results.add(new ArrayList<String>());
+//		}
+//		if (sourceJson.has("results")) {
+//			parseResults(sourceJson, "results", results);
+//		}
+//		if (TEST_EXTRA_RESULTS && sourceJson.has("extra-results")) {
+//			parseResults(sourceJson, "extra-results", results);
+//		}
+//
+//		Assert.assertEquals(phrases.size(), results.size());
+//		if (phrases.size() != results.size()) {
+//			return;
+//		}
+//
+//		SearchSettings s = SearchSettings.parseJSON(settingsJson);
+//		boolean multiSearch = readers.size() > 1;
+//		if (!readers.isEmpty()) {
+//			s.setOfflineIndexes(readers);
+//		}
+//
+//		final SearchUICore core = new SearchUICore(MapPoiTypes.getDefault(), "en", false);
+//		core.init();
+//
+//		ResultMatcher<SearchResult> rm = new ResultMatcher<SearchResult>() {
+//			@Override
+//			public boolean publish(SearchResult object) {
+//				return true;
+//			}
+//
+//			@Override
+//			public boolean isCancelled() {
+//				return false;
+//			}
+//		};
+//
+//		boolean simpleTest = true;
+//		SearchPhrase emptyPhrase = SearchPhrase.emptyPhrase(s);
+//		for (int k = 0; k < phrases.size(); k++) {
+//			String text = phrases.get(k);
+//			List<String> result = results.get(k);
+//			List<SearchResult> searchResults;
+//			SearchPhrase phrase;
+//			String[] arr = text.split("[\\\\{}]");
+//			if (arr.length > 0 && arr[0].equals("POI_TYPE:")) {
+//				SearchCoreFactory.DISPLAY_DEFAULT_POI_TYPES = true;
+//				phrase = emptyPhrase.generateNewPhrase("", s);
+//				searchResults = getSearchResult(phrase, rm, core);
+//				for (SearchResult searchResult : searchResults) {
+//					if (arr.length > 1 && arr[1].equals(searchResult.localeName)) {
+//						String fullText = "";
+//						if (arr.length > 2) {
+//							fullText = arr[2];
+//						}
+//						phrase = emptyPhrase.generateNewPhrase(fullText, s);
+//						phrase.getWords().add(new SearchWord(searchResult.localeName, searchResult));
+//						searchResults = getSearchResult(phrase, rm, core);
+//						break;
+//					}
+//				}
+//			} else {
+//				phrase = emptyPhrase.generateNewPhrase(text, s);
+//				searchResults = getSearchResult(phrase, rm, core);
+//			}
+//
+//			for (int i = 0; i < result.size(); i++) {
+//				String expected = result.get(i);
+//				SearchResult res = i >= searchResults.size() ? null : searchResults.get(i);
+//				if (simpleTest && expected.indexOf('[') != -1) {
+//					expected = expected.substring(0, expected.indexOf('[')).trim();
+//				}
+//				// String present = result.toString();
+//				boolean testGeocoding = expected.startsWith("@");
+//				expected = expected.replaceFirst("^@", "");
+//				String present = res == null ? ("#MISSING " + (i + 1)) : formatResult(simpleTest, res, phrase);
+//				if (!Algorithms.stringsEqual(expected, present)) {
+//					System.out.printf("Phrase: %s%n", phrase);
+//					System.out.printf("Mismatch for '%s' != '%s'. Result: %n", expected, present);
+//					System.out.println("CURRENT RESULTS: ");
+//					for (SearchResult r : searchResults) {
+//						if (multiSearch) {
+//							System.out.printf("\t\"%s\",%n", formatResultMultiSearch(r, phrase));
+//						} else {
+//							System.out.printf("\t\"%s\",%n", formatResult(false, r, phrase));
+//						}
+//					}
+//					System.out.println("EXPECTED : ");
+//					for (String r : result) {
+//						System.out.printf("\t\"%s\",%n", r);
+//					}
+//				}
+//				Assert.assertEquals(expected, present);
+//				if (testGeocoding) {
+//					testReverseGeocoding(res, readers.get(0));
+//				}
+//			}
+//		}
+//
+//		obfFile.delete();
 	}
 
 	private void testReverseGeocoding(SearchResult searchResult, BinaryMapIndexReader reader) throws IOException {

@@ -1438,6 +1438,8 @@ public class BinaryMapIndexReader {
 		for (PoiRegion poiIndex : poiIndexes) {
 			long statReq = req.beginSearchStats(BinaryMapIndexReaderApiName.POI_BY_NAME, req, poiIndex, codedIS);
 			poiAdapter.initCategories(poiIndex);
+			//new
+//			poiAdapter.initTagGroups(poiIndex, req);
 			codedIS.seek(poiIndex.filePointer);
 			long old = codedIS.pushLimitLong((long) poiIndex.length);
 			poiAdapter.searchPoiByName(poiIndex, req);
