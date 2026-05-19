@@ -1768,19 +1768,11 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 						LocalRoutingParameter parameter = new OtherLocalRoutingParameter(R.string.gpx_option_reverse_route, app.getString(R.string.gpx_option_reverse_route), reverse);
 						app.getRoutingOptionsHelper().applyRoutingParameter(parameter, reverse);
 					} else {
-						if (startPoint == null && loc != null) {
-							startPoint = TargetPoint.createStartPoint(new LatLon(loc.getLatitude(), loc.getLongitude()),
-									new PointDescription(PointDescription.POINT_TYPE_MY_LOCATION, activity.getString(R.string.shared_string_my_location)));
-						}
-						if (startPoint != null) {
-							int intermediateSize = targetPointsHelper.getIntermediatePoints().size();
-							if (intermediateSize > 1) {
-								WaypointDialogHelper.reverseAllPoints(activity);
-							} else {
-								WaypointDialogHelper.switchStartAndFinish(activity, true);
-							}
+						int intermediateSize = targetPointsHelper.getIntermediatePoints().size();
+						if (intermediateSize > 1) {
+							WaypointDialogHelper.reverseAllPoints(activity);
 						} else {
-							app.showShortToastMessage(R.string.route_add_start_point);
+							WaypointDialogHelper.switchStartAndFinish(activity, true);
 						}
 					}
 				}
