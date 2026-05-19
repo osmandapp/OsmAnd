@@ -3455,6 +3455,8 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="voice_announces_descr">Navigation instructions and announcements</string>
     <string name="voice_announces">Voice prompts</string>
     <string name="screen_alerts">Screen alerts</string>
+    <string name="send_navigation_notifications">Send notifications</string>
+    <string name="send_navigation_notifications_descr">Show navigation turn-by-turn notifications</string>
     <string name="route_parameters_descr">Configure route parameters</string>
     <string name="route_parameters">Route parameters</string>
     <string name="day">Day</string>

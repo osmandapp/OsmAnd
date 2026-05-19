@@ -131,6 +131,8 @@ public class NavigationNotification extends OsmandNotification {
 		Bitmap turnBitmap = null;
 		ongoing = true;
 		RoutingHelper routingHelper = app.getRoutingHelper();
+		boolean showNotifications = app.getSettings().SHOW_NAVIGATION_NOTIFICATIONS
+				.getModeValue(routingHelper.getAppMode());
 		if (isUsedByService(service)) {
 			color = app.getColor(R.color.osmand_orange);
 
@@ -233,6 +235,10 @@ public class NavigationNotification extends OsmandNotification {
 				.setCategory(NotificationCompat.CATEGORY_NAVIGATION)
 				.setStyle(new BigTextStyle().bigText(notificationText))
 				.setLargeIcon(turnBitmap);
+
+		if (!showNotifications) {
+			return null;
+		}
 
 		NavigationSession carNavigationSession = app.getCarNavigationSession();
 		if (carNavigationSession != null) {

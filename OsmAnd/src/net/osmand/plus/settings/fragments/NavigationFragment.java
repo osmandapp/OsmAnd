@@ -90,6 +90,7 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 		showRoutingAlarms.setIcon(getPersistentPrefIcon(R.drawable.ic_action_alert));
 
 		setupSpeakRoutingAlarmsPref();
+		setupNavigationNotificationsPref();
 		setupVehicleParametersPref();
 		showHideCustomizeRouteLinePref();
 		showTrackGuidancePref();
@@ -116,6 +117,13 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 		SwitchPreferenceCompat speakRoutingAlarms = findPreference(settings.VOICE_MUTE.getId());
 		speakRoutingAlarms.setIcon(icon);
 		speakRoutingAlarms.setChecked(!settings.VOICE_MUTE.getModeValue(getSelectedAppMode()));
+	}
+
+	private void setupNavigationNotificationsPref() {
+		SwitchPreferenceCompat pref = findPreference(settings.SHOW_NAVIGATION_NOTIFICATIONS.getId());
+		if (pref != null) {
+			pref.setIcon(getPersistentPrefIcon(R.drawable.ic_action_notification));
+		}
 	}
 
 	private void showHideCustomizeRouteLinePref() {
