@@ -1279,7 +1279,7 @@ object GpxUtilities {
 					val tag = parser.getName() ?: ""
 					insideTagDepth[tag]?.let { insideTagDepth[tag] = it + 1}
 					if (extensionReadMode && parse != null && !routePointExtension) {
-						val tagName = getExtensionsTagName(tag)
+						val tagName = tag.lowercase()
 						when {
 							routeExtension && tagName == "segment" -> {
 								val segment = parseRouteSegmentAttributes(parser)
@@ -1556,27 +1556,26 @@ object GpxUtilities {
 					val parse = parserState.lastOrNull()
 					val tag = parser.getName() ?: ""
 					insideTagDepth[tag]?.let { insideTagDepth[tag] = it - 1}
-					val extensionsTagName = getExtensionsTagName(tag)
 
-					if (extensionsTagName == "routepointextension") {
+					if (tag.equals("routepointextension", ignoreCase = true)) {
 						routePointExtension = false
 					}
 					if (parse != null && tag == "extensions") {
 						extensionReadMode = false
 					}
-					if (extensionReadMode && extensionsTagName == "route") {
+					if (extensionReadMode && tag == "route") {
 						routeExtension = false
 						continue
 					}
-					if (extensionReadMode && extensionsTagName == "types") {
+					if (extensionReadMode && tag == "types") {
 						typesExtension = false
 						continue
 					}
-					if (extensionReadMode && extensionsTagName == "points_groups") {
+					if (extensionReadMode && tag == "points_groups") {
 						pointsGroupsExtension = false
 						continue
 					}
-					if (extensionReadMode && extensionsTagName == "network_route") {
+					if (extensionReadMode && tag == "network_route") {
 						networkRoute = false
 						continue
 					}
@@ -1673,10 +1672,6 @@ object GpxUtilities {
 		}
 
 		return gpxFile
-	}
-
-	private fun getExtensionsTagName(tag: String): String {
-		return tag.lowercase().removePrefix(OSMAND_EXTENSIONS_PREFIX)
 	}
 
 	private fun getExtensionsSupportedTag(tag: String): String {
