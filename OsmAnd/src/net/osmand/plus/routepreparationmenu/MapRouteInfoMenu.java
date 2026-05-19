@@ -1064,8 +1064,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			startButtonText.setText(R.string.shared_string_control_start);
 		}
 
-		startButton.setEnabled(routeCalculated);
-		startButton.setClickable(routeCalculated);
+		boolean startButtonEnabled = routeCalculated || !hasCalculatedMissingMaps;
+		startButton.setClickable(startButtonEnabled);
+		startButton.setEnabled(startButtonEnabled);
 
 		startButton.setOnClickListener(v -> clickRouteGo());
 		startButton.setFocusable(true);
