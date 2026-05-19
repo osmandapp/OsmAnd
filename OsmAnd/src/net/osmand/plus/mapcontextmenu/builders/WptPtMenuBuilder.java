@@ -100,7 +100,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		ReadPointDescriptionFragment.showInstance(mapActivity, description);
 	}
 
-	protected Map<String, String> getAdditionalCardParams() {
+	protected Map<String, String> getAdditionalImageParams() {
 		return AmenityExtensionsHelper.getImagesParams(amenityExtensions);
 	}
 

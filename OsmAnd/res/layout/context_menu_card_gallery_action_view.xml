@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/context_img_card_width"
+    android:layout_height="@dimen/context_img_card_height"
+    android:orientation="vertical"
+    tools:background="?attr/bg_color">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="104dp"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="4"
+        android:paddingStart="@dimen/dialog_content_margin"
+        android:paddingTop="@dimen/subHeaderPadding"
+        android:paddingEnd="@dimen/dialog_content_margin"
+        android:text="@string/mapillary_action_descr"
+        android:textSize="@dimen/default_list_text_size"
+        tools:textColor="?android:textColorPrimary" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="@dimen/content_padding"
+        android:background="@drawable/blue_button_drawable"
+        android:drawablePadding="@dimen/content_padding_half"
+        android:paddingStart="10dp"
+        android:paddingEnd="14dp"
+        android:text="@string/shared_string_add_photos"
+        android:textColor="@color/card_and_list_background_light"
+        app:backgroundTint="@color/mapillary_color"
+        app:drawableLeftCompat="@drawable/ic_action_mapillary"
+        app:drawableStartCompat="@drawable/ic_action_mapillary" />
+
+    <View
+        android:id="@+id/card_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:background="?attr/context_menu_card" />
+
+</FrameLayout>

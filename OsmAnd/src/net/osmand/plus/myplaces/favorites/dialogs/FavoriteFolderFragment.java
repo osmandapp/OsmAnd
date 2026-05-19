@@ -28,6 +28,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet.CategorySelectionListener;
 import net.osmand.plus.myplaces.MyPlacesActivity;
+import net.osmand.plus.myplaces.favorites.FavoriteFolder;
+import net.osmand.plus.myplaces.favorites.FavoriteFolderFormatter;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavoritesListener;
 import net.osmand.plus.myplaces.favorites.dialogs.FavoriteFoldersAdapter.FavoriteAdapterListener;
@@ -53,8 +55,9 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 
 	public static final String TAG = FavoriteFolderFragment.class.getSimpleName();
 	protected static final String SELECTED_POINTS_KEY = "selected_points_key";
+	protected static final String SELECTED_FOLDERS_KEY = "selected_folders_key";
 
-	protected final ItemsSelectionHelper<FavouritePoint> selectionHelper = new ItemsSelectionHelper<>(true);
+	protected final ItemsSelectionHelper<Object> selectionHelper = new ItemsSelectionHelper<>(true);
 
 	private FavouritePoint selectedPoint;
 	private Location lastLocation;
@@ -71,19 +74,33 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		if (selectedGroup == null) {
-			getParentFragmentManager().popBackStack();
+		if (selectedFolderPath == null && selectedGroup != null) {
+			selectedFolderPath = selectedGroup.getName();
 		}
-		selectionHelper.setAllItems(selectedGroup.getPoints());
+		if (selectedFolderPath == null) {
+			getParentFragmentManager().popBackStack();
+			return;
+		}
+		FavoriteFolder selectedFolder = getSelectedFolder();
+		if (selectedFolder == null) {
+			getParentFragmentManager().popBackStack();
+			return;
+		}
+		selectedGroup = selectedFolder.getGroup();
+		selectionHelper.setAllItems(getSelectableItems());
 
-		if (savedInstanceState != null && selectionMode && savedInstanceState.containsKey(SELECTED_POINTS_KEY)) {
+		if (savedInstanceState != null && selectionMode) {
 			ArrayList<String> selectedPointsNames = savedInstanceState.getStringArrayList(SELECTED_POINTS_KEY);
-			if (selectedPointsNames == null) {
-				return;
-			}
-			for (FavouritePoint point : selectedGroup.getPoints()) {
-				if (selectedPointsNames.contains(point.getName())) {
-					selectionHelper.onItemsSelected(Collections.singletonList(point), true);
+			ArrayList<String> selectedFolders = savedInstanceState.getStringArrayList(SELECTED_FOLDERS_KEY);
+			for (Object item : getSelectableItems()) {
+				if (item instanceof FavouritePoint point
+						&& selectedPointsNames != null
+						&& selectedPointsNames.contains(point.getName())) {
+					selectionHelper.onItemsSelected(Collections.singletonList(item), true);
+				} else if (item instanceof FavoriteFolder folder
+						&& selectedFolders != null
+						&& selectedFolders.contains(folder.getFullPath())) {
+					selectionHelper.onItemsSelected(Collections.singletonList(item), true);
 				}
 			}
 		}
@@ -93,21 +110,28 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		ArrayList<String> selectedPoints = new ArrayList<>();
-		for (FavouritePoint point : selectionHelper.getSelectedItems()) {
-			selectedPoints.add(point.getName());
+		ArrayList<String> selectedFolders = new ArrayList<>();
+		for (Object item : selectionHelper.getSelectedItems()) {
+			if (item instanceof FavouritePoint point) {
+				selectedPoints.add(point.getName());
+			} else if (item instanceof FavoriteFolder folder && !Algorithms.isEmpty(folder.getFullPath())) {
+				selectedFolders.add(folder.getFullPath());
+			}
 		}
 		if (selectionMode) {
 			outState.putStringArrayList(SELECTED_POINTS_KEY, selectedPoints);
+			outState.putStringArrayList(SELECTED_FOLDERS_KEY, selectedFolders);
 		}
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
+		updateContent();
 		if (selectionMode) {
 			changeTitle(String.valueOf(selectionHelper.getSelectedItems().size()));
 		} else {
-			changeTitle(selectedGroup.getDisplayName(app));
+			changeTitle(getSelectedFolderTitle());
 		}
 		helper.addListener(this);
 		startLocationUpdate();
@@ -156,7 +180,7 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 	}
 
 	private void setupSelectionHelper() {
-		selectionHelper.setAllItems(selectedGroup.getPoints());
+		selectionHelper.setAllItems(getSelectableItems());
 	}
 
 	protected FavoriteAdapterListener getFavoriteFolderListener() {
@@ -164,7 +188,7 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 
 			@Override
 			public boolean isItemSelected(@NonNull Object object) {
-				return object instanceof FavouritePoint favouritePoint && selectionHelper.isItemSelected(favouritePoint);
+				return isSelectableItem(object) && selectionHelper.isItemSelected(object);
 			}
 
 			@Override
@@ -176,16 +200,21 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 					String pointType = PointDescription.POINT_TYPE_FAVORITE;
 					requireMyActivity().showOnMap(FavoriteFolderFragment.this, location.getLatitude(), location.getLongitude(),
 							settings.getLastKnownMapZoom(), new PointDescription(pointType, point.getDisplayName(app)), true, point);
+				} else if (object instanceof FavoriteFolder folder) {
+					openFolder(folder.getFullPath());
 				}
 			}
 
 			@Override
 			public void onItemLongClick(@NonNull Object object) {
+				if (!isSelectableItem(object)) {
+					return;
+				}
 				if (!isInSelectionMode()) {
 					setSelectionMode(true);
 					adapter.setSelectionMode(true);
 				}
-				if (object instanceof FavouritePoint favouritePoint && !selectionHelper.isItemSelected(favouritePoint)) {
+				if (!selectionHelper.isItemSelected(object)) {
 					selectItem(object);
 				}
 			}
@@ -196,6 +225,9 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 					selectedPoint = favouritePoint;
 					FavoriteMenu menu = new FavoriteMenu(app, uiUtilities, requireMyActivity());
 					menu.showPointOptionsMenu(anchor, favouritePoint, nightMode, FavoriteFolderFragment.this, FavoriteFolderFragment.this, FavoriteFolderFragment.this);
+				} else if (object instanceof FavoriteFolder folder) {
+					selectedPoint = null;
+					FavoriteOptionsDialogFragment.showInstance(getChildFragmentManager(), folder.getFullPath());
 				}
 			}
 
@@ -207,8 +239,8 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 	}
 
 	private void selectItem(Object object) {
-		if (object instanceof FavouritePoint favouritePoint && isInSelectionMode()) {
-			selectionHelper.onItemsSelected(Collections.singleton(favouritePoint), !selectionHelper.isItemSelected(favouritePoint));
+		if (isSelectableItem(object) && isInSelectionMode()) {
+			selectionHelper.onItemsSelected(Collections.singleton(object), !selectionHelper.isItemSelected(object));
 			changeTitle(String.valueOf(selectionHelper.getSelectedItems().size()));
 			adapter.selectItem(object);
 		}
@@ -265,7 +297,7 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 			AndroidUiHelper.setStatusBarColor(activity, ColorUtilities.getColor(app, ColorUtilities.getStatusBarActiveColorId(isNightMode())));
 		} else {
 			ab.setBackgroundDrawable(new ColorDrawable(ColorUtilities.getAppBarColor(app, isNightMode())));
-			ab.setTitle(selectedGroup.getDisplayName(app));
+			ab.setTitle(getSelectedFolderTitle());
 			activity.updateStatusBarColor();
 		}
 	}
@@ -274,14 +306,14 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 	public void showSortByDialog() {
 		FragmentManager manager = getFragmentManager();
 		if (manager != null) {
-			FavoriteSortByBottomSheet.showInstance(manager, getTracksSortMode(), this, isUsedOnMap(), false, !selectedGroup.getPoints().isEmpty());
+			FavoriteSortByBottomSheet.showInstance(manager, getTracksSortMode(), this, isUsedOnMap(), false, !getExactPoints().isEmpty());
 		}
 	}
 
 	@NonNull
 	public FavoriteListSortMode getTracksSortMode() {
 		FavoriteSortModesHelper sortModesHelper = app.getFavoriteSortModesHelper();
-		return sortModesHelper.requireSortMode(selectedGroup.getDisplayName(app));
+		return sortModesHelper.requireSortMode(getSelectedFolderSortId());
 	}
 
 	@Override
@@ -290,7 +322,7 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 			//sortSubFolder(sortMode);
 		} else {
 			FavoriteSortModesHelper sortModesHelper = app.getFavoriteSortModesHelper();
-			sortModesHelper.setSortMode(selectedGroup.getDisplayName(app), sortMode);
+			sortModesHelper.setSortMode(getSelectedFolderSortId(), sortMode);
 			sortModesHelper.syncSettings();
 			updateContent();
 		}
@@ -306,11 +338,19 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 		List<Object> items = new ArrayList<>();
 		items.add(TYPE_SORT_FAVORITE);
 
-		if (Algorithms.isEmpty(selectedGroup.getPoints())) {
+		FavoriteFolder selectedFolder = getSelectedFolder();
+		List<FavoriteFolder> childFolders = getChildFolders(selectedFolder);
+		List<FavouritePoint> exactPoints = getExactPoints();
+		if (Algorithms.isEmpty(childFolders) && Algorithms.isEmpty(exactPoints)) {
 			items.add(TYPE_EMPTY_FOLDER);
 		} else {
-			items.addAll(selectedGroup.getPoints());
-			items.add(new FavoriteFolderAnalysis(selectedGroup));
+			items.addAll(childFolders);
+			items.addAll(exactPoints);
+			if (selectedFolder != null) {
+				items.add(isRootExactFolder(selectedFolder) && selectedGroup != null
+						? new FavoriteFolderAnalysis(selectedGroup)
+						: new FavoriteFolderAnalysis(selectedFolder));
+			}
 		}
 
 		return items;
@@ -318,6 +358,12 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 
 	public void setSelectedGroup(FavoriteGroup selectedGroup) {
 		this.selectedGroup = selectedGroup;
+		this.selectedFolderPath = selectedGroup.getName();
+	}
+
+	public void setSelectedFolderPath(@NonNull String selectedFolderPath) {
+		this.selectedFolderPath = selectedFolderPath;
+		selectedGroup = helper != null ? helper.getGroup(selectedFolderPath) : null;
 	}
 
 	@NonNull
@@ -342,17 +388,28 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 		} else if (item.getItemId() == R.id.action_search) {
 			FragmentManager manager = getFragmentManager();
 			if (manager != null) {
-				SearchFavoriteFragment.showInstance(manager, this, selectedGroup.getPoints(), selectedGroup.getDisplayName(app), "");
+				SearchFavoriteFragment.showInstance(manager, this, getSearchPoints(), getSelectedFolderSortId(), "", false);
 			}
 		} else if (item.getItemId() == R.id.action_menu) {
 			FavoriteMenu menu = new FavoriteMenu(app, uiUtilities, requireMyActivity());
 			View view = requireMyActivity().findViewById(R.id.action_menu);
-			menu.showFolderOptionsMenu(requireMyActivity(), view, selectedGroup, nightMode, FavoriteFolderFragment.this);
+			FavoriteFolder selectedFolder = getSelectedFolder();
+			if (selectedFolder != null) {
+				selectedPoint = null;
+				menu.showFolderOptionsMenu(requireMyActivity(), view, selectedFolder, nightMode,
+						FavoriteFolderFragment.this, FavoriteFolderFragment.this, FavoriteFolderFragment.this);
+			}
 		} else if (item.getItemId() == R.id.more_button) {
 			FavoriteMenu menu = new FavoriteMenu(app, uiUtilities, requireMyActivity());
 			View view = requireMyActivity().findViewById(R.id.more_button);
 			if (selectionMode) {
-				menu.showPointsSelectOptionsMenu(view, selectionHelper.getSelectedItems(), selectedGroup, nightMode, FavoriteFolderFragment.this, FavoriteFolderFragment.this, FavoriteFolderFragment.this);
+				FavoriteSelection selection = new FavoriteSelection(selectionHelper.getSelectedItems());
+				if (selection.isOnlyPoints()) {
+					menu.showPointsSelectOptionsMenu(view, selection.getPoints(), selectedGroup, nightMode,
+							FavoriteFolderFragment.this, FavoriteFolderFragment.this, FavoriteFolderFragment.this);
+				} else if (selection.hasFolders()) {
+					menu.showDeleteSelectionOptionsMenu(view, selection, nightMode, FavoriteFolderFragment.this);
+				}
 			}
 		}
 		return false;
@@ -363,19 +420,25 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 		super.setSelectionMode(mode);
 		changeTitle(selectionMode
 				? String.valueOf(selectionHelper.getSelectedItems().size())
-				: selectedGroup.getDisplayName(app));
+				: getSelectedFolderTitle());
 	}
 
 	@Override
 	public void onCategorySelected(PointsGroup pointsGroup) {
 		String category = FavoriteGroup.getCategoryFromPointGroup(app, pointsGroup);
 		if (selectionMode) {
-			helper.editFavouritesGroup(new ArrayList<>(selectionHelper.getSelectedItems()), category);
+			FavoriteSelection selection = new FavoriteSelection(selectionHelper.getSelectedItems());
+			helper.editFavouritesGroup(new ArrayList<>(selection.getPoints()), category);
 			selectionHelper.clearSelectedItems();
 			changeTitle(String.valueOf(selectionHelper.getSelectedItems().size()));
 			updateContent();
-		} else {
+		} else if (selectedPoint != null) {
 			helper.editFavouriteName(selectedPoint, selectedPoint.getName(), category, selectedPoint.getDescription(), selectedPoint.getAddress());
+		} else {
+			FavoriteGroup group = helper.getGroup(pointsGroup.getName());
+			if (group != null) {
+				helper.saveSelectedGroupsIntoFile(Collections.singletonList(group), true);
+			}
 		}
 
 		updateContent();
@@ -391,6 +454,8 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 			if (fragment instanceof FavoriteFoldersFragment foldersFragment) {
 				foldersFragment.updateContent();
 			}
+		} else {
+			changeTitle(getSelectedFolderTitle());
 		}
 	}
 
@@ -424,11 +489,89 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 		updateContent();
 	}
 
+	@Nullable
+	private FavoriteFolder getSelectedFolder() {
+		if (selectedFolderPath == null) {
+			return null;
+		}
+		FavoriteFolder folder = helper.getFavoriteFolder(selectedFolderPath);
+		selectedGroup = folder != null ? folder.getGroup() : null;
+		return folder;
+	}
+
+	@NonNull
+	private List<FavoriteFolder> getChildFolders(@Nullable FavoriteFolder selectedFolder) {
+		if (selectedFolder == null || isRootExactFolder(selectedFolder)) {
+			return Collections.emptyList();
+		}
+		return selectedFolder.getSubFolders();
+	}
+
+	private boolean isRootExactFolder(@NonNull FavoriteFolder selectedFolder) {
+		return selectedFolder.isRoot() && selectedFolder.getGroup() != null;
+	}
+
+	@NonNull
+	private List<FavouritePoint> getExactPoints() {
+		return selectedGroup != null ? selectedGroup.getPoints() : Collections.emptyList();
+	}
+
+	@NonNull
+	private List<Object> getSelectableItems() {
+		List<Object> items = new ArrayList<>();
+		FavoriteFolder selectedFolder = getSelectedFolder();
+		items.addAll(getChildFolders(selectedFolder));
+		items.addAll(getExactPoints());
+		return items;
+	}
+
+	private boolean isSelectableItem(@NonNull Object object) {
+		return object instanceof FavouritePoint
+				|| (object instanceof FavoriteFolder folder && !Algorithms.isEmpty(folder.getFullPath()));
+	}
+
+	@NonNull
+	private List<FavouritePoint> getSearchPoints() {
+		FavoriteFolder selectedFolder = getSelectedFolder();
+		if (selectedFolder == null) {
+			return Collections.emptyList();
+		}
+		if (isRootExactFolder(selectedFolder)) {
+			return new ArrayList<>(getExactPoints());
+		}
+		List<FavouritePoint> points = new ArrayList<>();
+		for (FavoriteGroup group : helper.getFavoriteGroupsInSubtree(selectedFolder.getFullPath())) {
+			points.addAll(group.getPoints());
+		}
+		return points;
+	}
+
+	@NonNull
+	private String getSelectedFolderTitle() {
+		return FavoriteFolderFormatter.getDisplayName(app, selectedFolderPath);
+	}
+
+	@NonNull
+	private String getSelectedFolderSortId() {
+		return selectedFolderPath != null ? selectedFolderPath : "";
+	}
+
+	private void openFolder(@NonNull String folderPath) {
+		FragmentManager manager = getParentFragmentManager();
+		Fragment target = getTargetFragment();
+		FavoriteFolderFragment.showInstance(manager, folderPath, target != null ? target : this);
+	}
+
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull FavoriteGroup group,
+	                                @Nullable Fragment target) {
+		showInstance(manager, group.getName(), target);
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull String folderPath,
 	                                @Nullable Fragment target) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			FavoriteFolderFragment fragment = new FavoriteFolderFragment();
-			fragment.setSelectedGroup(group);
+			fragment.setSelectedFolderPath(folderPath);
 			fragment.setTargetFragment(target, 0);
 
 			manager.beginTransaction()

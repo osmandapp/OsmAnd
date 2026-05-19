@@ -5273,8 +5273,8 @@
     <string name="add_widget_to_the_right">Agregar widget a la derecha</string>
     <string name="add_widget_to_the_left">Agregar widget a la izquierda</string>
     <string name="add_widget_below">Agregar widget debajo</string>
-    <string name="delete_widget">¿Borrar el widget?</string>
-    <string name="delete_widget_description">Este widget se borrará. Podés restaurarlo luego en «Configurar pantalla».</string>
+    <string name="delete_widget">¿Quitar el widget?</string>
+    <string name="delete_widget_description">Este widget se quitará. Podés restaurarlo luego en «Configurar pantalla».</string>
     <string name="battery_saving_mode">Modo ahorro de batería</string>
     <string name="app_mode_suv">SUV</string>
     <string name="y_axis_description">Marcá hasta dos opciones para el eje Y.</string>

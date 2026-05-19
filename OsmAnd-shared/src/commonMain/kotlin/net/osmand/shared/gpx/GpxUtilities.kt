@@ -1571,6 +1571,10 @@ object GpxUtilities {
 						typesExtension = false
 						continue
 					}
+					if (extensionReadMode && tag == "points_groups") {
+						pointsGroupsExtension = false
+						continue
+					}
 					if (extensionReadMode && tag == "network_route") {
 						networkRoute = false
 						continue

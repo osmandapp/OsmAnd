@@ -10,10 +10,12 @@ import com.google.android.material.progressindicator.LinearProgressIndicator
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard
-import net.osmand.plus.mapcontextmenu.gallery.GalleryGridAdapter
-import net.osmand.plus.mapcontextmenu.gallery.GalleryGridFragment
-import net.osmand.plus.mapcontextmenu.gallery.GalleryGridItemDecorator
+import net.osmand.plus.gallery.model.GalleryItem
+import net.osmand.plus.gallery.ui.GalleryGridAdapter
+import net.osmand.plus.gallery.ui.GalleryGridFragment
+import net.osmand.plus.gallery.ui.GalleryGridItemDecorator
+import net.osmand.plus.gallery.ui.GalleryListener
+import net.osmand.plus.gallery.controller.GalleryMediaLoadStateProvider
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.widgets.dialogbutton.DialogButton
 import net.osmand.util.Algorithms
@@ -22,7 +24,8 @@ class AstroGalleryCardViewHolder(
 	itemView: View,
 	private val app: OsmandApplication,
 	private val mapActivity: MapActivity,
-	private val listener: GalleryGridAdapter.ImageCardListener,
+	private val listener: GalleryListener,
+	private val mediaLoadStateProvider: GalleryMediaLoadStateProvider,
 	private val onToggle: (String) -> Unit
 ) : RecyclerView.ViewHolder(itemView) {
 
@@ -51,14 +54,14 @@ class AstroGalleryCardViewHolder(
 		}
 
 		when (val state = item.state) {
-			is AstroGalleryCardState.Collapsed -> showCollapsed()
-			is AstroGalleryCardState.Loading -> showLoading()
-			is AstroGalleryCardState.Ready -> showCards(state.cards)
+			is AstroGalleryState.Collapsed -> showCollapsed()
+			is AstroGalleryState.Loading -> showLoading()
+			is AstroGalleryState.Ready -> showGalleryItems(state.galleryItems)
 		}
 
 		arrowCard.setImageDrawable(
 			app.uiUtilities.getIcon(
-				if (item.state is AstroGalleryCardState.Collapsed) {
+				if (item.state is AstroGalleryState.Collapsed) {
 					R.drawable.ic_action_arrow_down
 				} else {
 					R.drawable.ic_action_arrow_up
@@ -73,18 +76,18 @@ class AstroGalleryCardViewHolder(
 		contentContainer.visibility = View.GONE
 	}
 
-	private fun showCards(cards: List<Any?>) {
+	private fun showGalleryItems(galleryItems: List<GalleryItem>) {
 		contentContainer.visibility = View.VISIBLE
-		val items: MutableList<Any?> = ArrayList()
+		val items: MutableList<GalleryItem> = ArrayList()
 
-		val containsImage = cards.any { it is ImageCard }
+		val containsImage = galleryItems.any { it is GalleryItem.Media }
 		val connectionAvailable = app.getSettings().isInternetConnectionAvailable
 
-		if (connectionAvailable || !Algorithms.isEmpty(cards)) {
-			items.addAll(cards)
+		if (connectionAvailable || !Algorithms.isEmpty(galleryItems)) {
+			items.addAll(galleryItems)
 			viewAllButton.visibility = if (containsImage) View.VISIBLE else View.GONE
 		} else {
-			items.add(GalleryGridAdapter.NO_INTERNET_TYPE)
+			items.add(GalleryItem.NoInternet)
 			viewAllButton.visibility = View.GONE
 		}
 		galleryGridAdapter?.setItems(items)
@@ -106,7 +109,7 @@ class AstroGalleryCardViewHolder(
 				return if (
 					adapter != null &&
 					position in 0 until adapter.itemCount &&
-					adapter.getItemViewType(position) == GalleryGridAdapter.IMAGE_TYPE
+					adapter.isRegularMediaItemOnPosition(position)
 				) {
 					1
 				} else {
@@ -121,14 +124,20 @@ class AstroGalleryCardViewHolder(
 		if (galleryGridAdapter != null && adapterNightMode == nightMode) {
 			return
 		}
-		galleryGridAdapter = GalleryGridAdapter(mapActivity, listener, null, true, nightMode)
+		galleryGridAdapter = GalleryGridAdapter(
+			mapActivity = mapActivity,
+			listener = listener,
+			mediaLoadStateProvider = mediaLoadStateProvider,
+			viewWidth = null,
+			nightMode = nightMode
+		)
 		adapterNightMode = nightMode
 		recyclerView.layoutManager = getGridLayoutManager()
 		if (recyclerView.itemDecorationCount == 0) {
 			recyclerView.addItemDecoration(GalleryGridItemDecorator(app))
 		}
 		recyclerView.adapter = galleryGridAdapter
-		recyclerView.itemAnimator = galleryGridAdapter?.animator
+		recyclerView.itemAnimator = galleryGridAdapter?.getAnimator()
 	}
 
 	private fun setupViewAllButton() {

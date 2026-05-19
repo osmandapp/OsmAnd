@@ -3,6 +3,7 @@ package net.osmand.plus.myplaces.favorites.dialogs;
 import static net.osmand.plus.settings.enums.FavoriteListSortMode.*;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
@@ -10,6 +11,8 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.configmap.tracks.TrackTab;
+import net.osmand.plus.myplaces.favorites.FavoriteFolder;
+import net.osmand.plus.myplaces.favorites.FavoriteFolderFormatter;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.settings.enums.FavoriteListSortMode;
 import net.osmand.plus.shared.SharedUtil;
@@ -49,14 +52,16 @@ public class FavoriteComparator implements Comparator<Object> {
 			return Integer.compare(i1, i2);
 		}
 
-		if (o1 instanceof FavoriteGroup g1 && o2 instanceof FavoriteGroup g2) {
-			boolean pinned1 = g1.isPinned();
-			boolean pinned2 = g2.isPinned();
+		if (isFavoriteFolder(o1) && isFavoriteFolder(o2)) {
+			boolean pinned1 = isPinnedFolder(o1);
+			boolean pinned2 = isPinnedFolder(o2);
 			if (pinned1 != pinned2) return pinned1 ? -1 : 1;
 
-			if (g1.isVisible() != g2.isVisible()) return g1.isVisible() ? -1 : 1;
+			boolean visible1 = isVisibleFolder(o1);
+			boolean visible2 = isVisibleFolder(o2);
+			if (visible1 != visible2) return visible1 ? -1 : 1;
 
-			return compareFavoriteGroups(g1, g2);
+			return compareFavoriteFolders(o1, o2);
 		}
 
 		if (o1 instanceof FavouritePoint p1 && o2 instanceof FavouritePoint p2) {
@@ -68,7 +73,7 @@ public class FavoriteComparator implements Comparator<Object> {
 
 	private int rank(Object o) {
 		if (o instanceof Integer) return 0;
-		if (o instanceof FavoriteGroup) return 1;
+		if (isFavoriteFolder(o)) return 1;
 		if (o instanceof FavouritePoint) return 2;
 		return 3;
 	}
@@ -109,41 +114,80 @@ public class FavoriteComparator implements Comparator<Object> {
 		return Double.compare(distance1, distance2);
 	}
 
-	private int compareFavoriteGroups(@NonNull FavoriteGroup group1,
-	                                  @NonNull FavoriteGroup group2) {
-		int multiplier;
-		return switch (sortMode) {
-			case NAME_ASCENDING, NAME_DESCENDING -> {
-				multiplier = sortMode == NAME_ASCENDING ? 1 : -1;
-				yield multiplier * compareTrackFolderNames(group1, group2);
-			}
-			case LAST_MODIFIED, DATE_ASCENDING, DATE_DESCENDING -> {
-				multiplier = sortMode == DATE_DESCENDING ? -1 : 1;
-				yield multiplier * compareFolderFilesByLastModified(group1, group2);
-			}
-
-			default -> 0;
-		};
-	}
-
-	private int compareFolderFilesByLastModified(@NonNull FavoriteGroup group1,
-	                                             @NonNull FavoriteGroup group2) {
-		long lastModified1 = group1.getTimeModified();
-		long lastModified2 = group2.getTimeModified();
-
-		if (lastModified1 == lastModified2) {
-			return compareTrackFolderNames(group1, group2);
-		}
-		return compareFilesByLastModified(lastModified1, lastModified2);
-	}
-
 	private int compareFilesByLastModified(long lastModified1, long lastModified2) {
 		return -Long.compare(lastModified1, lastModified2);
 	}
 
-	private int compareTrackFolderNames(@NonNull FavoriteGroup folder1,
-	                                    @NonNull FavoriteGroup folder2) {
-		return compareNames(folder1.getDisplayName(app), folder2.getDisplayName(app));
+	private int compareFavoriteFolders(@NonNull Object folder1, @NonNull Object folder2) {
+		int multiplier;
+		return switch (sortMode) {
+			case NAME_ASCENDING, NAME_DESCENDING -> {
+				multiplier = sortMode == NAME_ASCENDING ? 1 : -1;
+				yield multiplier * compareFolderTitles(folder1, folder2);
+			}
+			case LAST_MODIFIED, DATE_ASCENDING, DATE_DESCENDING -> {
+				multiplier = sortMode == DATE_DESCENDING ? -1 : 1;
+				yield multiplier * compareFoldersByLastModified(folder1, folder2);
+			}
+			default -> 0;
+		};
+	}
+
+	private int compareFoldersByLastModified(@NonNull Object folder1, @NonNull Object folder2) {
+		long lastModified1 = getFolderLastModified(folder1);
+		long lastModified2 = getFolderLastModified(folder2);
+
+		if (lastModified1 == lastModified2) {
+			return compareFolderTitles(folder1, folder2);
+		}
+		return compareFilesByLastModified(lastModified1, lastModified2);
+	}
+
+	private boolean isFavoriteFolder(@NonNull Object object) {
+		return object instanceof FavoriteGroup || object instanceof FavoriteFolder;
+	}
+
+	private boolean isPinnedFolder(@NonNull Object object) {
+		FavoriteGroup group = getFavoriteGroup(object);
+		return group != null && group.isPinned();
+	}
+
+	private boolean isVisibleFolder(@NonNull Object object) {
+		FavoriteGroup group = getFavoriteGroup(object);
+		return group == null || group.isVisible();
+	}
+
+	@Nullable
+	private FavoriteGroup getFavoriteGroup(@NonNull Object object) {
+		if (object instanceof FavoriteGroup group) {
+			return group;
+		} else if (object instanceof FavoriteFolder folder) {
+			return folder.getGroup();
+		}
+		return null;
+	}
+
+	@NonNull
+	private String getFolderTitle(@NonNull Object object) {
+		if (object instanceof FavoriteFolder folder) {
+			return FavoriteFolderFormatter.getDisplayName(app, folder.getFullPath());
+		} else if (object instanceof FavoriteGroup group) {
+			return FavoriteFolderFormatter.getDisplayName(app, group.getName());
+		}
+		return "";
+	}
+
+	private long getFolderLastModified(@NonNull Object object) {
+		if (object instanceof FavoriteFolder folder) {
+			return folder.getSubtreeLastModified();
+		} else if (object instanceof FavoriteGroup group) {
+			return group.getTimeModified();
+		}
+		return 0;
+	}
+
+	private int compareFolderTitles(@NonNull Object folder1, @NonNull Object folder2) {
+		return compareNames(getFolderTitle(folder1), getFolderTitle(folder2));
 	}
 
 	private int compareFavoritePointNames(@NonNull FavouritePoint point1,

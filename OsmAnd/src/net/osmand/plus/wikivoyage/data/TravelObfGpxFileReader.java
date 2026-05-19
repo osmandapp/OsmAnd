@@ -212,7 +212,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
         }
 
         if (gpxFileExtensions.containsKey(TAG_URL) && gpxFileExtensions.containsKey(TAG_URL_TEXT)) {
-            gpxFile.getMetadata().setLink(new Link(gpxFileExtensions.get(TAG_URL), gpxFileExtensions.get(TAG_URL_TEXT)));
+            gpxFile.getMetadata().setLink(new Link(gpxFileExtensions.get(TAG_URL), gpxFileExtensions.get(TAG_URL_TEXT), null));
             gpxFileExtensions.remove(TAG_URL_TEXT);
             gpxFileExtensions.remove(TAG_URL);
         } else if (gpxFileExtensions.containsKey(TAG_URL)) {

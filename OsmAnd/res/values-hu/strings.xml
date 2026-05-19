@@ -403,7 +403,7 @@
     <string name="int_seconds">másodperc</string>
     <string name="int_min">perc</string>
     <string name="background_service_int_descr">Háttérszolgáltatás felébredési időköze:</string>
-    <string name="background_service_int">GPS-felébredési időköz</string>
+    <string name="background_service_int">GPS felébredésének időköze</string>
     <string name="background_service_provider_descr">Háttérszolgáltatás helymeghatározási módszere:</string>
     <string name="background_service_provider">Helymeghatározási szolgáltatás</string>
     <string name="background_router_service_descr">Követi a pozíciót kikapcsolt képernyőnél.</string>
@@ -544,7 +544,7 @@
     <string name="shared_string_settings">Beállítások</string>
     <string name="save_current_track_descr">Jelenlegi nyomvonal mentése GPX-fájlba most.</string>
     <string name="save_current_track">Jelenlegi nyomvonal mentése</string>
-    <string name="save_track_interval_descr">A navigáció alatti nyomvonalrögzítéshez adja meg a naplózás időközét</string>
+    <string name="save_track_interval_descr">A navigáció alatti nyomvonalrögzítéshez adja meg a naplózási időközt</string>
     <string name="save_track_interval">Naplózási időköz navigáció közben</string>
     <string name="reload_tile">Térképcsempe újratöltése</string>
     <string name="mark_point">Cél</string>
@@ -1173,7 +1173,7 @@
     <string name="keep_navigation_service">Megtart</string>
     <string name="stop_navigation_service">Leállítás</string>
     <string name="enable_sleep_mode">GPS háttér mód engedélyezése</string>
-    <string name="gps_wake_up_timer">GPS-felébredési időköz</string>
+    <string name="gps_wake_up_timer">GPS felébredésének időköze</string>
     <string name="sleep_mode_stop_dialog">Leállítja a GPS háttér módot\?</string>
     <string name="map_preferred_locale_descr">A térképfeliratok előnyben részesített nyelve (ha nem elérhető, akkor angolul vagy a helyi nyelven fogja megjelenni).</string>
     <string name="map_preferred_locale">Térkép előnyben részesített nyelve</string>
@@ -2539,7 +2539,7 @@
     <string name="osm_live_payment_renews_quarterly">Negyedévente megújul</string>
     <string name="osm_live_payment_renews_annually">Évente megújul</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
-    <string name="osm_live_payment_header">Fizetési időköz:</string>
+    <string name="osm_live_payment_header">Fizetés időköze:</string>
     <string name="osm_live_payment_contribute_descr">Az adományok az OSM-térképezést támogatják.</string>
     <string name="markers_remove_dialog_msg">Törli a térképjelölőt: „%s”\?</string>
     <string name="edit_map_marker">Térképjelölő szerkesztése</string>
@@ -3703,7 +3703,7 @@
     <string name="track_has_no_altitude">A nyomvonal nem tartalmaz magassági adatokat.</string>
     <string name="track_has_no_speed">A nyomvonal nem tartalmaz sebességadatokat.</string>
     <string name="select_another_colorization">Válasszon másik színezéstípust.</string>
-    <string name="trip_recording_logging_interval_info">A naplózási időköz azt az időközt határozza meg, amely alatt az OsmAnd lekérdezi a jelenlegi pozíció adatait.</string>
+    <string name="trip_recording_logging_interval_info">A naplózási időköz azt az időtartamot határozza meg, amelyen belül az OsmAnd lekérdezi a jelenlegi pozíció adatait.</string>
     <string name="trip_recording_save_and_continue">Mentés és folytatás</string>
     <string name="lost_data_warning">Minden nem mentett adat törlődni fog.</string>
     <string name="show_start_dialog">Kezdő párbeszéd megjelenítése</string>
@@ -5487,8 +5487,8 @@
     <string name="remaining_fuel">Maradék üzemanyag</string>
     <string name="obd_fuel_consumption">Fogyasztás</string>
     <string name="reset_average_value">Átlagértékek nullázása</string>
-    <string name="average_value_slider_description">Válassza ki az átlagérték képzésének időtartományát.</string>
-    <string name="average_temperature_slider_description">Válassza ki az átlaghőmérséklet képzésének időtartományát.</string>
+    <string name="average_value_slider_description">Válassza ki az átlagérték képzésének időközét.</string>
+    <string name="average_temperature_slider_description">Válassza ki az átlaghőmérséklet képzésének időközét.</string>
     <string name="shared_string_instant">Azonnali</string>
     <string name="average_temperature">Átlaghőmérséklet</string>
     <string name="show_minor_turns_descr">A sávok minden érintett kereszteződésnél megjelennek, függetlenül a hangutasításoktól</string>
@@ -5664,7 +5664,7 @@
     <string name="deleting">Törlés…</string>
     <string name="deleting_history">Előzmények törlése…</string>
     <string name="show_rasterization_debug_tile">Csempe raszterezési információk megjelenítése</string>
-    <string name="release_5_2">• Utca- és városadatok hozzáadása a keresési eredményekhez\n\n • Új túra-rögzítési modulok: Legnagyobb sebesség, Átlagos meredekség és továbbfejlesztett Emelkedő/Lejtő\n\n • Új Tengeri térképstílus széles körű testreszabási lehetőségekkel\n\n • Továbbfejlesztett térkép-megjelenítési sebesség\n\n • Továbbfejlesztett kapcsolat az OBDII BLE-adapterekkel\n\n • Pulzusmérők hozzáadása az „Elemzés időköz szerint” funkcióhoz\n\n • Időtartam kijelzése a tervezett útvonalakhoz\n\n • A magassági egységek mostantól a távolsági egységektől elkülönítve állíthatók be\n\n • Továbbfejlesztett térképtájolás Gyors-művelet választható iránytű módokkal\n\n • Android Auto esetén navigáció előtti figyelmeztetések hiányzó térképekre és magánutakra\n\n • Kijavítva egy hiba a Sugárvonalzó-modul helytelen méretparamétereivel kapcsolatban\n\n • Fordított képernyőtájolások hozzáadása\n\n • Továbbfejlesztett felhasználói felület a teherautó-mérőszámok megadásához</string>
+    <string name="release_5_2">• Utca- és városadatok hozzáadása a keresési eredményekhez\n\n • Új túra-rögzítési modulok: Legnagyobb sebesség, Átlagos meredekség és továbbfejlesztett Emelkedő/Lejtő\n\n • Új Tengeri térképstílus széles körű testreszabási lehetőségekkel\n\n • Továbbfejlesztett térkép-megjelenítési sebesség\n\n • Továbbfejlesztett kapcsolat az OBDII BLE-adapterekkel\n\n • Pulzusmérők hozzáadása az „Elemzés időközönként” funkcióhoz\n\n • Időtartam kijelzése a tervezett útvonalakhoz\n\n • A magassági egységek mostantól a távolsági egységektől elkülönítve állíthatók be\n\n • Továbbfejlesztett térképtájolás Gyors-művelet választható iránytű módokkal\n\n • Android Auto esetén navigáció előtti figyelmeztetések hiányzó térképekre és magánutakra\n\n • Kijavítva egy hiba a Sugárvonalzó-modul helytelen méretparamétereivel kapcsolatban\n\n • Fordított képernyőtájolások hozzáadása\n\n • Továbbfejlesztett felhasználói felület a teherautó-mérőszámok megadásához</string>
     <string name="shared_string_threads">Szálak</string>
     <string name="threads_allocated_for_rendering">Megjelenítéshez lefoglalt szálak</string>
     <string name="threads_allocated_for_rendering_desc">Az alacsonyabb szálfoglalás bizonyos esetekben felgyorsíthatja a térkép-megjelenítést.</string>

@@ -10,6 +10,12 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+	<string name="favorite_confirm_delete_folder">This will delete folder \"%1$s\", including nested folders and %2$d favorite point(s).</string>
+	<string name="favorite_folder_rename_conflict">A folder with this name already exists.</string>
+	<string name="favorite_folder_invalid_name">Folder name can\'t contain / or _%_</string>
+	<string name="favorite_folder_duplicate_message">Use a folder name that doesn\'t already exist.</string>
+	<string name="favorite_folder_name">Folder name</string>
+	<string name="edit_folder">Edit folder</string>
 	<string name="obd_simulation_device">Simulation device</string>
 	<string name="astronomy_map">Astronomy Map</string>
 	<string name="astro_designations">Designations</string>

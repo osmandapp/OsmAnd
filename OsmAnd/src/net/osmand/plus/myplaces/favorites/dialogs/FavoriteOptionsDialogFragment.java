@@ -30,8 +30,12 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.editors.FavoriteAppearanceFragment;
+import net.osmand.plus.mapcontextmenu.editors.FavouriteGroupEditorFragment;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.myplaces.favorites.FavoriteFolder;
+import net.osmand.plus.myplaces.favorites.FavoriteFolderFormatter;
+import net.osmand.plus.myplaces.favorites.FavoriteFolderPath;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.track.SelectTrackTabsFragment;
@@ -58,6 +62,11 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 
 	private FavouritesHelper helper;
 
+	@Nullable
+	private String folderPath;
+	@Nullable
+	private FavoriteFolder folder;
+	@Nullable
 	private FavoriteGroup group;
 
 	@Override
@@ -70,12 +79,13 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 	public void createMenuItems(Bundle savedInstanceState) {
 		Bundle args = getArguments();
 		if (args != null) {
-			String groupName = args.getString(GROUP_NAME_KEY);
-			if (groupName != null) {
-				group = helper.getGroup(groupName);
+			folderPath = args.getString(GROUP_NAME_KEY);
+			if (folderPath != null) {
+				folder = helper.getFavoriteFolder(folderPath);
+				group = folder != null ? folder.getGroup() : helper.getGroup(folderPath);
 			}
 		}
-		if (group == null) {
+		if (folderPath == null || folder == null) {
 			return;
 		}
 		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
@@ -87,22 +97,24 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 		View checkboxContainer = groupView.findViewById(R.id.checkbox_container);
 		View menuButton = groupView.findViewById(R.id.menu_button);
 		View divider = groupView.findViewById(R.id.divider);
-		boolean visible = group.isVisible();
+		boolean visible = group == null || group.isVisible();
 
-		title.setText(group.getDisplayName(app));
+		title.setText(FavoriteFolderFormatter.getDisplayName(app, folderPath));
 		title.setMaxLines(2);
-		description.setText(GpxUiHelper.getFavoriteFolderDescription(app, group));
+		description.setText(group != null
+				? GpxUiHelper.getFavoriteFolderDescription(app, group)
+				: getVirtualFolderDescription(folder));
 		if (visible) {
 			title.setTypeface(FontCache.getNormalFont());
 		} else {
 			title.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 		}
-		int color = group.getColor() == 0 ? getColor(R.color.color_favorite) : group.getColor();
+		int color = group == null || group.getColor() == 0 ? getColor(R.color.color_favorite) : group.getColor();
 		int hiddenColor = ColorUtilities.getDefaultIconColor(app, nightMode);
-		if (group.isPinned()) {
+		if (group != null && group.isPinned()) {
 			icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder_pin,
 					group.isVisible() ? color : hiddenColor));
-		} else if (group.isVisible()) {
+		} else if (visible) {
 			icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder, color));
 		} else {
 			icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder_hidden, hiddenColor));
@@ -121,66 +133,76 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 		items.add(groupItem);
 		items.add(new DividerItem(app));
 
-		BaseBottomSheetItem showOnMapItem = new BottomSheetItemWithCompoundButton.Builder()
-				.setChecked(group.isVisible())
-				.setIcon(getContentIcon(R.drawable.ic_map))
-				.setTitle(getString(R.string.shared_string_show_on_map))
-				.setLayoutId(R.layout.bottom_sheet_item_with_switch)
-				.setOnClickListener(v -> {
-					boolean shouldShowOnMap = !group.isVisible();
-					helper.updateGroupVisibility(group, shouldShowOnMap, true);
-					updateAll();
-					dismiss();
-				})
-				.create();
-		items.add(showOnMapItem);
+		if (group != null) {
+			BaseBottomSheetItem showOnMapItem = new BottomSheetItemWithCompoundButton.Builder()
+					.setChecked(group.isVisible())
+					.setIcon(getContentIcon(R.drawable.ic_map))
+					.setTitle(getString(R.string.shared_string_show_on_map))
+					.setLayoutId(R.layout.bottom_sheet_item_with_switch)
+					.setOnClickListener(v -> {
+						boolean shouldShowOnMap = !group.isVisible();
+						helper.updateGroupVisibility(group, shouldShowOnMap, true);
+						updateAll();
+						dismiss();
+					})
+					.create();
+			items.add(showOnMapItem);
 
-		BaseBottomSheetItem pinItem = new SimpleBottomSheetItem.Builder()
-				.setIcon(getContentIcon(group.isPinned() ? R.drawable.ic_action_drawing_pin_disable : R.drawable.ic_action_drawing_pin))
-				.setTitle(getString(group.isPinned() ? R.string.unpin_folder : R.string.pin_folder))
+			BaseBottomSheetItem pinItem = new SimpleBottomSheetItem.Builder()
+					.setIcon(getContentIcon(group.isPinned() ? R.drawable.ic_action_drawing_pin_disable : R.drawable.ic_action_drawing_pin))
+					.setTitle(getString(group.isPinned() ? R.string.unpin_folder : R.string.pin_folder))
+					.setLayoutId(R.layout.bottom_sheet_item_simple)
+					.setOnClickListener(v -> {
+						boolean shouldPin = !group.isPinned();
+						helper.updateGroupPin(group, shouldPin, true);
+						updateAll();
+						dismiss();
+					})
+					.create();
+			items.add(pinItem);
+			items.add(new DividerHalfItem(getContext()));
+		}
+
+		BaseBottomSheetItem addFolderItem = new SimpleBottomSheetItem.Builder()
+				.setIcon(getContentIcon(R.drawable.ic_action_folder_add_outlined))
+				.setTitle(getString(R.string.add_new_folder))
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
-				.setOnClickListener(v -> {
-					boolean shouldPin = !group.isPinned();
-					helper.updateGroupPin(group, shouldPin, true);
-					updateAll();
-					dismiss();
-				})
+				.setOnClickListener(v -> showAddFolderDialog())
 				.create();
-		items.add(pinItem);
-		items.add(new DividerHalfItem(getContext()));
+		items.add(addFolderItem);
 
 		BaseBottomSheetItem editNameItem = new SimpleBottomSheetItem.Builder()
-				.setIcon(getContentIcon(R.drawable.ic_action_edit_dark))
+				.setIcon(getContentIcon(R.drawable.ic_action_edit_outlined))
 				.setTitle(getString(R.string.shared_string_rename))
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
 				.setOnClickListener(v -> showRenameDialog())
 				.create();
 		items.add(editNameItem);
 
-		BaseBottomSheetItem changeColorItem = new SimpleBottomSheetItem.Builder()
-				.setIcon(getContentIcon(R.drawable.ic_action_appearance))
-				.setTitle(getString(R.string.change_default_appearance))
-				.setLayoutId(R.layout.bottom_sheet_item_simple)
-				.setOnClickListener(v -> callActivity(activity -> {
-					PointsGroup pointsGroup = group != null ? group.toPointsGroup(app) : null;
-					FragmentManager manager = activity.getSupportFragmentManager();
-					if (pointsGroup != null) {
+		if (group != null) {
+			BaseBottomSheetItem changeColorItem = new SimpleBottomSheetItem.Builder()
+					.setIcon(getContentIcon(R.drawable.ic_action_appearance))
+					.setTitle(getString(R.string.change_default_appearance))
+					.setLayoutId(R.layout.bottom_sheet_item_simple)
+					.setOnClickListener(v -> callActivity(activity -> {
+						PointsGroup pointsGroup = group.toPointsGroup(app);
+						FragmentManager manager = activity.getSupportFragmentManager();
 						Fragment fragment = getParentFragment();
 						if (fragment instanceof BaseFavoriteListFragment) {
 							FavoriteAppearanceFragment.showInstance(manager, pointsGroup, fragment);
 							dismiss();
 						}
-					}
-				}))
-				.create();
-		items.add(changeColorItem);
+					}))
+					.create();
+			items.add(changeColorItem);
+		}
 
-		if (!group.getPoints().isEmpty()) {
+		if (group != null && !group.getPoints().isEmpty()) {
 			items.add(new DividerHalfItem(getContext()));
 
 			MapMarkersHelper markersHelper = app.getMapMarkersHelper();
-			FavoriteGroup favGroup = this.group;
-			MapMarkersGroup markersGr = markersHelper.getMarkersGroup(this.group);
+			FavoriteGroup favoriteGroup = group;
+			MapMarkersGroup markersGr = markersHelper.getMarkersGroup(favoriteGroup);
 			boolean synced = markersGr != null;
 
 			BaseBottomSheetItem markersGroupItem = new SimpleBottomSheetItem.Builder()
@@ -191,7 +213,7 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 						if (synced) {
 							markersHelper.removeMarkersGroup(markersGr);
 						} else {
-							markersHelper.addOrEnableGroup(favGroup);
+							markersHelper.addOrEnableGroup(favoriteGroup);
 						}
 						dismiss();
 						MapActivity.launchMapActivityMoveToTop(requireActivity());
@@ -205,7 +227,7 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 					.setLayoutId(R.layout.bottom_sheet_item_simple)
 					.setOnClickListener(view -> {
 						SelectTrackTabsFragment.GpxFileSelectionListener gpxFileSelectionListener = gpxFile -> {
-							gpxFile.addPointsGroup(group.toPointsGroup(app));
+							gpxFile.addPointsGroup(favoriteGroup.toPointsGroup(app));
 							saveGpx(app, gpxFile);
 							syncGpx(gpxFile);
 						};
@@ -226,7 +248,7 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 					.setOnClickListener(view -> {
 						BaseFavoriteListFragment fragment = getFavoriteListFragment();
 						if (fragment != null) {
-							fragment.shareFavorites(Collections.singletonList(group));
+							fragment.shareFavorites(Collections.singletonList(favoriteGroup));
 						}
 						dismiss();
 					})
@@ -243,16 +265,11 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
 				.setOnClickListener(v -> {
 					AlertDialog.Builder b = new AlertDialog.Builder(getThemedContext());
-					b.setTitle(R.string.favorite_delete_group);
-					String groupName = Algorithms.isEmpty(group.getName()) ? getString(R.string.shared_string_favorites) : group.getName();
-					b.setMessage(getString(R.string.favorite_confirm_delete_group, groupName, group.getPoints().size()));
+					b.setTitle(R.string.delete_folder);
+					b.setMessage(getDeleteFolderMessage());
 					b.setNeutralButton(R.string.shared_string_cancel, null);
 					b.setPositiveButton(R.string.shared_string_delete, (dialog, which) -> {
-						helper.deleteGroup(group, false);
-						helper.saveCurrentPointsIntoFile(true);
-						FavoriteSortModesHelper sortModesHelper = app.getFavoriteSortModesHelper();
-						sortModesHelper.onFavoriteFolderDeleted(group);
-						updateAll();
+						deleteFolder();
 						dismiss();
 					});
 					b.show();
@@ -280,7 +297,7 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (group == null) {
+		if (folder == null) {
 			dismiss();
 		}
 	}
@@ -301,6 +318,28 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 		}
 	}
 
+	@NonNull
+	private String getVirtualFolderDescription(@Nullable FavoriteFolder folder) {
+		int pointsCount = folder != null ? folder.getSubtreePointsCount() : 0;
+		return pointsCount > 0
+				? getString(R.string.gpx_selection_number_of_points, String.valueOf(pointsCount))
+				: getString(R.string.shared_string_empty);
+	}
+
+	private void showAddFolderDialog() {
+		callActivity(activity -> {
+			FragmentManager manager = activity.getSupportFragmentManager();
+			FavouriteGroupEditorFragment.showInstance(manager, null, pointsGroup -> {
+				FavoriteGroup createdGroup = helper.getGroup(pointsGroup.getName());
+				if (createdGroup != null) {
+					helper.saveSelectedGroupsIntoFile(Collections.singletonList(createdGroup), true);
+				}
+				updateAll();
+			}, false, folderPath);
+			dismiss();
+		});
+	}
+
 	private void showRenameDialog() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
@@ -313,29 +352,102 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 				Object extra = dialogData.getExtra(AlertDialogExtra.EDIT_TEXT);
 				if (extra instanceof EditText editText) {
 					String newName = editText.getText().toString().trim();
-					String newGroupIdName = FavoriteGroup.convertDisplayNameToGroupIdName(app, newName);
-					boolean nameChanged = !Algorithms.stringsEqual(group.getName(), newGroupIdName);
-					if (nameChanged) {
-						if (helper.groupExists(newName)) {
-							app.showShortToastMessage(R.string.favorite_category_dublicate_message);
-							return;
-						}
-						helper.updateGroupName(group, newGroupIdName, true);
+					if (renameFolder(newName)) {
 						updateAll();
+						dismiss();
 					}
-					dismiss();
 				}
 			});
-			String caption = activity.getString(R.string.enter_new_name);
-			CustomAlert.showInput(dialogData, activity, group.getDisplayName(app), caption);
+			String caption = activity.getString(R.string.favorite_folder_name);
+			CustomAlert.showInput(dialogData, activity, FavoriteFolderFormatter.getDisplayName(app, folderPath), caption);
 		}
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable String groupName) {
+	private boolean renameFolder(@NonNull String newName) {
+		if (folderPath == null || newName.isEmpty()) {
+			return false;
+		}
+		boolean rootFolder = Algorithms.isEmpty(folderPath);
+		String newSegment = rootFolder ? FavoriteGroup.convertDisplayNameToGroupIdName(app, newName) : newName;
+		if (Algorithms.isEmpty(folderPath) && Algorithms.isEmpty(newSegment)) {
+			return true;
+		}
+		if (!FavoriteFolderPath.isValidSegment(newSegment)) {
+			app.showShortToastMessage(R.string.favorite_folder_invalid_name);
+			return false;
+		}
+		String parentPath = FavoriteFolderPath.parentPath(folderPath);
+		String newPath = Algorithms.isEmpty(parentPath)
+				? newSegment
+				: parentPath + FavoriteFolderPath.DELIMITER + newSegment;
+		if (Algorithms.stringsEqual(folderPath, newPath)) {
+			return true;
+		}
+		if (!rootFolder && helper.hasRenameFavoriteFolderSubtreeConflict(folderPath, newPath)) {
+			app.showShortToastMessage(R.string.favorite_folder_rename_conflict);
+			return false;
+		}
+		boolean renamed;
+		if (rootFolder && group != null) {
+			renamed = !helper.groupExists(newPath);
+			if (renamed) {
+				helper.updateGroupName(group, newPath, true);
+			}
+		} else {
+			renamed = helper.renameFavoriteFolderSubtree(folderPath, newPath, true);
+		}
+		if (renamed) {
+			app.getFavoriteSortModesHelper().clearRelatedKeys(folderPath);
+			app.getFavoriteSortModesHelper().syncSettings();
+			folderPath = newPath;
+			folder = helper.getFavoriteFolder(newPath);
+			group = folder != null ? folder.getGroup() : null;
+		} else {
+			app.showShortToastMessage(R.string.favorite_folder_rename_conflict);
+		}
+		return renamed;
+	}
+
+	@NonNull
+	private String getDeleteFolderMessage() {
+		if (Algorithms.isEmpty(folderPath) && group != null) {
+			String groupName = getString(R.string.shared_string_favorites);
+			return getString(R.string.favorite_confirm_delete_group, groupName, group.getPoints().size());
+		}
+		String name = FavoriteFolderFormatter.getBreadcrumb(app, folderPath);
+		int pointsCount = folder != null ? folder.getSubtreePointsCount() : group != null ? group.getPoints().size() : 0;
+		return getString(R.string.favorite_confirm_delete_folder, name, pointsCount);
+	}
+
+	private void deleteFolder() {
+		if (folderPath == null) {
+			return;
+		}
+		boolean deleted;
+		FavoriteSortModesHelper sortModesHelper = app.getFavoriteSortModesHelper();
+		if (Algorithms.isEmpty(folderPath) && group != null) {
+			deleted = helper.deleteGroup(group, false);
+			if (deleted) {
+				sortModesHelper.clearRelatedKeys(group.getName());
+			}
+		} else {
+			deleted = helper.deleteFavoriteFolderSubtree(folderPath, false);
+			if (deleted) {
+				sortModesHelper.clearRelatedKeys(folderPath);
+			}
+		}
+		if (deleted) {
+			sortModesHelper.syncSettings();
+			helper.saveCurrentPointsIntoFile(true);
+			updateAll();
+		}
+	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable String folderPath) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			FavoriteOptionsDialogFragment fragment = new FavoriteOptionsDialogFragment();
 			Bundle args = new Bundle();
-			args.putString(GROUP_NAME_KEY, groupName);
+			args.putString(GROUP_NAME_KEY, folderPath);
 			fragment.setArguments(args);
 			fragment.show(fragmentManager, TAG);
 		}

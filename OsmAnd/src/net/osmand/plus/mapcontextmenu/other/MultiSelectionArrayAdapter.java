@@ -91,7 +91,7 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MenuObject> {
 		// Text line 2
 		TextView line2 = convertView.findViewById(R.id.context_menu_line2);
 		line2.setTextColor(getSecondaryTextColor(context, nightMode));
-		line2.setText(MenuObjectUtils.getSecondLineText(item));
+		MenuObjectUtils.setSecondLineText(item, line2, nightMode);
 		Drawable slIcon = item.getTypeIcon();
 		line2.setCompoundDrawablesWithIntrinsicBounds(slIcon, null, null, null);
 		line2.setCompoundDrawablePadding(AndroidUtils.dpToPx(context, 5f));

@@ -40,6 +40,7 @@ import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet.CategorySelectionListener;
 import net.osmand.plus.myplaces.MyPlacesActivity;
+import net.osmand.plus.myplaces.favorites.FavoriteFolderPath;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavoritesListener;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
@@ -73,11 +74,13 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 
 	public static final String FAVORITE_SEARCH_QUERY_KEY = "favorite_search_query_key";
 	public static final String FAVORITE_SEARCH_GROUP_KEY = "favorite_search_group_key";
+	public static final String FAVORITE_SEARCH_INCLUDE_ALL_KEY = "favorite_search_include_all_key";
 
 	protected final ItemsSelectionHelper<FavouritePoint> selectionHelper = new ItemsSelectionHelper<>(true);
 	private FavouritesHelper helper;
 
 	private String groupKey;
+	private boolean includeAllGroups;
 	private List<FavouritePoint> points = new ArrayList<>();
 
 	protected boolean selectionMode;
@@ -113,6 +116,7 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 		if (savedInstanceState != null) {
 			searchQuery = savedInstanceState.getString(FAVORITE_SEARCH_QUERY_KEY);
 			groupKey = savedInstanceState.getString(FAVORITE_SEARCH_GROUP_KEY);
+			includeAllGroups = savedInstanceState.getBoolean(FAVORITE_SEARCH_INCLUDE_ALL_KEY, false);
 		}
 		if (arguments != null) {
 			if (searchQuery == null) {
@@ -121,6 +125,9 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 			if (groupKey == null) {
 				groupKey = arguments.getString(FAVORITE_SEARCH_GROUP_KEY);
 			}
+			if (arguments.containsKey(FAVORITE_SEARCH_INCLUDE_ALL_KEY)) {
+				includeAllGroups = arguments.getBoolean(FAVORITE_SEARCH_INCLUDE_ALL_KEY);
+			}
 		}
 		if (searchQuery == null) {
 			searchQuery = "";
@@ -128,19 +135,32 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 		if (groupKey == null) {
 			groupKey = "";
 		}
+		if (savedInstanceState == null && (arguments == null || !arguments.containsKey(FAVORITE_SEARCH_INCLUDE_ALL_KEY))) {
+			includeAllGroups = groupKey.isEmpty();
+		}
 
 		updatePoints();
 	}
 
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putString(FAVORITE_SEARCH_QUERY_KEY, searchQuery);
+		outState.putString(FAVORITE_SEARCH_GROUP_KEY, groupKey);
+		outState.putBoolean(FAVORITE_SEARCH_INCLUDE_ALL_KEY, includeAllGroups);
+	}
+
 	private void updatePoints(){
 		points.clear();
-		boolean includeAll = groupKey.isEmpty();
 		for (FavoriteGroup group : helper.getFavoriteGroups()) {
-			if (includeAll) {
+			if (includeAllGroups) {
 				points.addAll(group.getPoints());
-			} else if (group.getName().equals(groupKey)) {
+			} else if (groupKey.isEmpty()) {
+				if (group.getName().isEmpty()) {
+					points.addAll(group.getPoints());
+				}
+			} else if (FavoriteFolderPath.isDescendantOrSelf(group.getName(), groupKey)) {
 				points.addAll(group.getPoints());
-				break;
 			}
 		}
 	}
@@ -336,6 +356,7 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 		Bundle bundle = new Bundle();
 		bundle.putString(FAVORITE_SEARCH_QUERY_KEY, searchQuery);
 		bundle.putString(FAVORITE_SEARCH_GROUP_KEY, groupKey);
+		bundle.putBoolean(FAVORITE_SEARCH_INCLUDE_ALL_KEY, includeAllGroups);
 		MapActivity.launchMapActivityMoveToTop(requireActivity(), bundle, null, null);
 	}
 
@@ -660,6 +681,11 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @Nullable Fragment target, List<FavouritePoint> points, String groupKey, String searchQuery) {
+		showInstance(manager, target, points, groupKey, searchQuery, Algorithms.isEmpty(groupKey));
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager, @Nullable Fragment target, List<FavouritePoint> points,
+	                                String groupKey, String searchQuery, boolean includeAllGroups) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SearchFavoriteFragment fragment = new SearchFavoriteFragment();
 			Bundle bundle = new Bundle();
@@ -669,6 +695,7 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 			if (groupKey != null) {
 				bundle.putString(FAVORITE_SEARCH_GROUP_KEY, groupKey);
 			}
+			bundle.putBoolean(FAVORITE_SEARCH_INCLUDE_ALL_KEY, includeAllGroups);
 			fragment.setArguments(bundle);
 			fragment.points.addAll(points);
 			fragment.setTargetFragment(target, 0);

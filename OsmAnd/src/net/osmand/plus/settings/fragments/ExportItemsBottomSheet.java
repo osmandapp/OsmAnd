@@ -34,6 +34,7 @@ import net.osmand.plus.helpers.ColorsPaletteUtils;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.mapmarkers.ItineraryType;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
+import net.osmand.plus.myplaces.favorites.FavoriteFolderFormatter;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
@@ -342,7 +343,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			item.setTitle(OsmEditingPlugin.getTitle(openstreetmapPoint, app));
 			item.setIcon(getIcon(R.drawable.ic_action_info_dark, getItemIconColor(object)));
 		} else if (object instanceof FavoriteGroup group) {
-			item.setTitle(group.getDisplayName(app));
+			item.setTitle(FavoriteFolderFormatter.getBreadcrumb(app, group.getName()));
 			int color;
 			if (selectedItems.contains(object)) {
 				color = group.getColor() == 0 ? getColor(R.color.color_favorite) : group.getColor();

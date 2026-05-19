@@ -56,8 +56,10 @@ import net.osmand.plus.helpers.MapDisplayPositionManager.ICoveredScreenRectProvi
 import net.osmand.plus.helpers.MapDisplayPositionManager.IMapDisplayPositionProvider;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
+import net.osmand.plus.mapcontextmenu.controllers.FavouritePointMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
-import net.osmand.plus.mapcontextmenu.gallery.GalleryController;
+import net.osmand.plus.mapcontextmenu.other.MenuObjectUtils;
+import net.osmand.plus.gallery.controller.GalleryController;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.settings.backend.menuitems.MainContextMenuItemsSettings;
@@ -1824,6 +1826,8 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 			toolbarTextView.setText(menu.getTitleStr());
 			// Text line 2
 			TextView line2 = view.findViewById(R.id.context_menu_line2);
+			MenuObjectUtils.resetSecondLineTextStyle(line2);
+			AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(line2, null, null, null, null);
 			LinearLayout customAddressLine = view.findViewById(R.id.context_menu_custom_address_line);
 			customAddressLine.removeAllViews();
 			if (menu.hasCustomAddressLine()) {
@@ -1850,7 +1854,9 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 					line2Str.append(streetStr);
 				}
 				if (!TextUtils.isEmpty(line2Str)) {
-					line2.setText(line2Str.toString());
+					if (!setFavoriteFolderPathText(line2)) {
+						line2.setText(line2Str.toString());
+					}
 					line2.setVisibility(View.VISIBLE);
 				} else {
 					line2.setVisibility(View.GONE);
@@ -1906,6 +1912,15 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 
 		updateCompassVisibility();
 		updateAdditionalInfoVisibility();
+	}
+
+	private boolean setFavoriteFolderPathText(@NonNull TextView line2) {
+		MenuController controller = menu.getMenuController();
+		if (controller instanceof FavouritePointMenuController favoriteController) {
+			MenuObjectUtils.setFavoriteFolderPathText(line2, favoriteController.getFavoriteCategory(), nightMode);
+			return true;
+		}
+		return false;
 	}
 
 	private void updateAltitudeText(boolean addSeparator) {

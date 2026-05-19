@@ -59,6 +59,7 @@ public abstract class BaseFavoriteListFragment extends BaseFullScreenFragment
 
 	protected FavoriteFoldersAdapter adapter;
 	protected FavoriteGroup selectedGroup;
+	protected String selectedFolderPath;
 	protected RecyclerView recyclerView;
 
 	@Override
@@ -72,7 +73,8 @@ public abstract class BaseFavoriteListFragment extends BaseFullScreenFragment
 				selectionMode = savedInstanceState.getBoolean(SELECTION_MODE_KEY, false);
 			}
 			if (savedInstanceState.containsKey(SELECTED_GROUP_KEY)) {
-				FavoriteGroup group = helper.getGroup(savedInstanceState.getString(SELECTED_GROUP_KEY));
+				selectedFolderPath = savedInstanceState.getString(SELECTED_GROUP_KEY);
+				FavoriteGroup group = helper.getGroup(selectedFolderPath);
 				if (group != null) {
 					selectedGroup = group;
 				}
@@ -85,8 +87,9 @@ public abstract class BaseFavoriteListFragment extends BaseFullScreenFragment
 		super.onSaveInstanceState(outState);
 
 		outState.putBoolean(SELECTION_MODE_KEY, selectionMode);
-		if (selectedGroup != null) {
-			outState.putString(SELECTED_GROUP_KEY, selectedGroup.getName());
+		String folderPath = getSelectedFolderPath();
+		if (folderPath != null) {
+			outState.putString(SELECTED_GROUP_KEY, folderPath);
 		}
 	}
 
@@ -167,8 +170,9 @@ public abstract class BaseFavoriteListFragment extends BaseFullScreenFragment
 	public Bundle storeState() {
 		Bundle bundle = new Bundle();
 		bundle.putInt(TAB_ID, FAV_TAB);
-		if (selectedGroup != null) {
-			bundle.putString(SELECTED_GROUP_KEY, selectedGroup.getName());
+		String folderPath = getSelectedFolderPath();
+		if (folderPath != null) {
+			bundle.putString(SELECTED_GROUP_KEY, folderPath);
 		}
 		return bundle;
 	}
@@ -178,10 +182,19 @@ public abstract class BaseFavoriteListFragment extends BaseFullScreenFragment
 		if (bundle != null && bundle.getInt(TAB_ID) == FAV_TAB) {
 			String selectedGroupName = bundle.getString(SELECTED_GROUP_KEY);
 			if (selectedGroupName != null) {
+				selectedFolderPath = selectedGroupName;
 				selectedGroup = helper.getGroup(selectedGroupName);
 			}
 			bundle.remove(SELECTED_GROUP_KEY);
 		}
+	}
+
+	@Nullable
+	protected String getSelectedFolderPath() {
+		if (selectedFolderPath != null) {
+			return selectedFolderPath;
+		}
+		return selectedGroup != null ? selectedGroup.getName() : null;
 	}
 
 	public void reloadData() {
