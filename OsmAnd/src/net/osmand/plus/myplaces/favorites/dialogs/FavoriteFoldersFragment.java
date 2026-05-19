@@ -23,8 +23,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet.CategorySelectionListener;
 import net.osmand.plus.myplaces.MyPlacesActivity;
-import net.osmand.plus.myplaces.favorites.FavoriteFolderNode;
-import net.osmand.plus.myplaces.favorites.FavoriteFolderTree;
+import net.osmand.plus.myplaces.favorites.FavoriteFolder;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.dialogs.FavoriteFoldersAdapter.FavoriteAdapterListener;
 import net.osmand.plus.myplaces.favorites.dialogs.SortFavoriteViewHolder.SortFavoriteListener;
@@ -227,10 +226,10 @@ public class FavoriteFoldersFragment extends BaseFavoriteListFragment
 		if (Algorithms.isEmpty(favoriteGroups)) {
 			items.add(TYPE_EMPTY_FOLDERS);
 		} else {
-			FavoriteFolderTree tree = helper.getFavoriteFolderTree();
-			folderItems.addAll(getRootFolderItems(tree));
+			FavoriteFolder rootFolder = helper.getFavoriteFolderRoot();
+			folderItems.addAll(getRootFolderItems(rootFolder));
 			items.addAll(folderItems);
-			items.add(new FavoriteFolderAnalysis(tree.getRoot()));
+			items.add(new FavoriteFolderAnalysis(rootFolder));
 		}
 
 		return items;
@@ -238,17 +237,17 @@ public class FavoriteFoldersFragment extends BaseFavoriteListFragment
 
 	@NonNull
 	private List<Object> getRootFolderItems() {
-		return getRootFolderItems(helper.getFavoriteFolderTree());
+		return getRootFolderItems(helper.getFavoriteFolderRoot());
 	}
 
 	@NonNull
-	private List<Object> getRootFolderItems(@NonNull FavoriteFolderTree tree) {
+	private List<Object> getRootFolderItems(@NonNull FavoriteFolder rootFolder) {
 		List<Object> items = new ArrayList<>();
-		FavoriteGroup rootGroup = tree.getRoot().getGroup();
+		FavoriteGroup rootGroup = rootFolder.getGroup();
 		if (rootGroup != null) {
 			items.add(rootGroup);
 		}
-		items.addAll(tree.getRootChildren());
+		items.addAll(rootFolder.getSubFolders());
 		return items;
 	}
 
@@ -359,14 +358,14 @@ public class FavoriteFoldersFragment extends BaseFavoriteListFragment
 	}
 
 	private boolean isFolderItem(@Nullable Object object) {
-		return object instanceof FavoriteGroup || object instanceof FavoriteFolderNode;
+		return object instanceof FavoriteGroup || object instanceof FavoriteFolder;
 	}
 
 	@Nullable
 	private String getFolderPath(@Nullable Object object) {
 		if (object instanceof FavoriteGroup group) {
 			return group.getName();
-		} else if (object instanceof FavoriteFolderNode folder) {
+		} else if (object instanceof FavoriteFolder folder) {
 			return folder.getFullPath();
 		}
 		return null;

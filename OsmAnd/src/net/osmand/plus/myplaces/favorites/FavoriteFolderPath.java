@@ -1,16 +1,8 @@
 package net.osmand.plus.myplaces.favorites;
 
-import android.content.Context;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.text.TextPaint;
-import android.text.TextUtils;
-import android.text.style.ForegroundColorSpan;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -19,8 +11,7 @@ import java.util.List;
 public final class FavoriteFolderPath {
 
 	public static final String DELIMITER = "/";
-	public static final String DISPLAY_DELIMITER = " / ";
-	private static final String PATH_ELLIPSIS = "...";
+	private static final char DELIMITER_CHAR = '/';
 
 	private FavoriteFolderPath() {
 	}
@@ -29,13 +20,21 @@ public final class FavoriteFolderPath {
 	public static List<String> split(@Nullable String fullPath) {
 		List<String> segments = new ArrayList<>();
 		if (!Algorithms.isEmpty(fullPath)) {
-			for (String segment : fullPath.split(DELIMITER)) {
-				if (!Algorithms.isEmpty(segment)) {
-					segments.add(segment);
-				}
+			int start = 0;
+			int delimiterIndex;
+			while ((delimiterIndex = fullPath.indexOf(DELIMITER_CHAR, start)) >= 0) {
+				addSegment(segments, fullPath.substring(start, delimiterIndex));
+				start = delimiterIndex + 1;
 			}
+			addSegment(segments, fullPath.substring(start));
 		}
 		return segments;
+	}
+
+	private static void addSegment(@NonNull List<String> segments, @NonNull String segment) {
+		if (!Algorithms.isEmpty(segment)) {
+			segments.add(segment);
+		}
 	}
 
 	@NonNull
@@ -55,125 +54,32 @@ public final class FavoriteFolderPath {
 
 	@NonNull
 	public static String parentPath(@Nullable String fullPath) {
-		List<String> segments = split(fullPath);
-		if (segments.size() <= 1) {
+		if (Algorithms.isEmpty(fullPath)) {
 			return "";
 		}
-		return join(segments.subList(0, segments.size() - 1));
+		int end = trimTrailingDelimiters(fullPath);
+		if (end <= 0) {
+			return "";
+		}
+		int delimiterIndex = fullPath.lastIndexOf(DELIMITER_CHAR, end - 1);
+		if (delimiterIndex < 0) {
+			return "";
+		}
+		String parentPath = fullPath.substring(0, delimiterIndex);
+		return isNormalizedPath(parentPath) ? parentPath : join(split(parentPath));
 	}
 
 	@NonNull
 	public static String lastSegment(@Nullable String fullPath) {
-		List<String> segments = split(fullPath);
-		return segments.isEmpty() ? "" : segments.get(segments.size() - 1);
-	}
-
-	@NonNull
-	public static String lastSegment(@NonNull Context ctx, @Nullable String fullPath) {
-		if (Algorithms.isEmpty(fullPath) || FavoriteGroup.PERSONAL_CATEGORY.equals(fullPath)) {
-			return FavoriteGroup.getDisplayName(ctx, fullPath != null ? fullPath : "");
+		if (Algorithms.isEmpty(fullPath)) {
+			return "";
 		}
-		return lastSegment(fullPath);
-	}
-
-	@NonNull
-	public static String toBreadcrumb(@Nullable String fullPath) {
-		List<String> segments = split(fullPath);
-		StringBuilder builder = new StringBuilder();
-		for (String segment : segments) {
-			if (builder.length() > 0) {
-				builder.append(DISPLAY_DELIMITER);
-			}
-			builder.append(segment);
+		int end = trimTrailingDelimiters(fullPath);
+		if (end <= 0) {
+			return "";
 		}
-		return builder.toString();
-	}
-
-	@NonNull
-	public static String toBreadcrumb(@NonNull Context ctx, @Nullable String fullPath) {
-		if (Algorithms.isEmpty(fullPath) || FavoriteGroup.PERSONAL_CATEGORY.equals(fullPath)) {
-			return FavoriteGroup.getDisplayName(ctx, fullPath != null ? fullPath : "");
-		}
-		return toBreadcrumb(fullPath);
-	}
-
-	@NonNull
-	public static CharSequence toStyledBreadcrumb(@NonNull Context ctx, @Nullable String fullPath, boolean nightMode) {
-		return styleBreadcrumbDelimiters(ctx, toBreadcrumb(ctx, fullPath), nightMode);
-	}
-
-	@NonNull
-	public static CharSequence toStyledBreadcrumb(@NonNull Context ctx, @Nullable String fullPath,
-			boolean nightMode, @Nullable TextPaint textPaint, int availableWidth) {
-		String breadcrumb = getMiddleTruncatedBreadcrumb(ctx, fullPath, textPaint, availableWidth);
-		return styleBreadcrumbDelimiters(ctx, breadcrumb, nightMode);
-	}
-
-	@NonNull
-	public static String getMiddleTruncatedBreadcrumb(@NonNull Context ctx, @Nullable String fullPath,
-			@Nullable TextPaint textPaint, int availableWidth) {
-		String fullBreadcrumb = toBreadcrumb(ctx, fullPath);
-		if (textPaint == null || availableWidth <= 0 || fits(fullBreadcrumb, textPaint, availableWidth)) {
-			return fullBreadcrumb;
-		}
-
-		List<String> segments = split(fullPath);
-		if (segments.size() <= 2) {
-			return TextUtils.ellipsize(fullBreadcrumb, textPaint, availableWidth, TextUtils.TruncateAt.MIDDLE).toString();
-		}
-
-		String best = buildMiddleTruncatedBreadcrumb(segments, 1, 1);
-		for (int visibleSegments = 3; visibleSegments < segments.size(); visibleSegments++) {
-			int leadingCount = (visibleSegments + 1) / 2;
-			int trailingCount = visibleSegments - leadingCount;
-			String candidate = buildMiddleTruncatedBreadcrumb(segments, leadingCount, trailingCount);
-			if (fits(candidate, textPaint, availableWidth)) {
-				best = candidate;
-			} else {
-				break;
-			}
-		}
-		return fits(best, textPaint, availableWidth)
-				? best
-				: TextUtils.ellipsize(best, textPaint, availableWidth, TextUtils.TruncateAt.MIDDLE).toString();
-	}
-
-	@NonNull
-	private static String buildMiddleTruncatedBreadcrumb(@NonNull List<String> segments, int leadingCount, int trailingCount) {
-		StringBuilder builder = new StringBuilder();
-		for (int i = 0; i < leadingCount; i++) {
-			appendBreadcrumbSegment(builder, segments.get(i));
-		}
-		appendBreadcrumbSegment(builder, PATH_ELLIPSIS);
-		for (int i = segments.size() - trailingCount; i < segments.size(); i++) {
-			appendBreadcrumbSegment(builder, segments.get(i));
-		}
-		return builder.toString();
-	}
-
-	private static void appendBreadcrumbSegment(@NonNull StringBuilder builder, @NonNull String segment) {
-		if (builder.length() > 0) {
-			builder.append(DISPLAY_DELIMITER);
-		}
-		builder.append(segment);
-	}
-
-	private static boolean fits(@NonNull String text, @NonNull TextPaint textPaint, int availableWidth) {
-		return textPaint.measureText(text) <= availableWidth;
-	}
-
-	@NonNull
-	private static SpannableStringBuilder styleBreadcrumbDelimiters(@NonNull Context ctx,
-			@NonNull String breadcrumb, boolean nightMode) {
-		SpannableStringBuilder builder = new SpannableStringBuilder(breadcrumb);
-		int color = ColorUtilities.getTertiaryTextColor(ctx, nightMode);
-		int start = breadcrumb.indexOf(DISPLAY_DELIMITER);
-		while (start >= 0) {
-			builder.setSpan(new ForegroundColorSpan(color), start, start + DISPLAY_DELIMITER.length(),
-					Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-			start = breadcrumb.indexOf(DISPLAY_DELIMITER, start + DISPLAY_DELIMITER.length());
-		}
-		return builder;
+		int delimiterIndex = fullPath.lastIndexOf(DELIMITER_CHAR, end - 1);
+		return fullPath.substring(delimiterIndex + 1, end);
 	}
 
 	public static boolean isDescendantOrSelf(@Nullable String path, @Nullable String ancestorPath) {
@@ -206,12 +112,30 @@ public final class FavoriteFolderPath {
 		if (fullPath.isEmpty()) {
 			return true;
 		}
-		for (String segment : fullPath.split(DELIMITER, -1)) {
-			if (!isValidSegment(segment)) {
+		int start = 0;
+		int delimiterIndex;
+		while ((delimiterIndex = fullPath.indexOf(DELIMITER_CHAR, start)) >= 0) {
+			if (!isValidSegment(fullPath.substring(start, delimiterIndex))) {
 				return false;
 			}
+			start = delimiterIndex + 1;
 		}
-		return true;
+		return isValidSegment(fullPath.substring(start));
+	}
+
+	private static int trimTrailingDelimiters(@NonNull String fullPath) {
+		int end = fullPath.length();
+		while (end > 0 && fullPath.charAt(end - 1) == DELIMITER_CHAR) {
+			end--;
+		}
+		return end;
+	}
+
+	private static boolean isNormalizedPath(@NonNull String fullPath) {
+		return fullPath.isEmpty()
+				|| (!fullPath.startsWith(DELIMITER)
+				&& !fullPath.endsWith(DELIMITER)
+				&& !fullPath.contains(DELIMITER + DELIMITER));
 	}
 
 	public static boolean isValidSegment(@Nullable String segment) {

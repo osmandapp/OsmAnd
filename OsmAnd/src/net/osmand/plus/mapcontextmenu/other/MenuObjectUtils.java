@@ -16,7 +16,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.controllers.FavouritePointMenuController;
-import net.osmand.plus.myplaces.favorites.FavoriteFolderPath;
+import net.osmand.plus.myplaces.favorites.FavoriteFolderFormatter;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.router.network.NetworkRouteSelector.RouteKey;
@@ -97,10 +97,10 @@ public class MenuObjectUtils {
 		textView.setEllipsize(TextUtils.TruncateAt.MIDDLE);
 		Object token = new Object();
 		textView.setTag(R.id.context_menu_line2, token);
-		textView.setText(FavoriteFolderPath.toStyledBreadcrumb(context, fullPath, nightMode));
+		textView.setText(FavoriteFolderFormatter.getStyledBreadcrumb(context, fullPath, nightMode));
 		textView.post(() -> {
 			if (textView.getTag(R.id.context_menu_line2) == token) {
-				textView.setText(FavoriteFolderPath.toStyledBreadcrumb(context, fullPath, nightMode,
+				textView.setText(FavoriteFolderFormatter.getStyledBreadcrumb(context, fullPath, nightMode,
 						textView.getPaint(), getTextAvailableWidth(textView)));
 			}
 		});

@@ -65,6 +65,8 @@ public class FavouritesHelper {
 	private List<FavoriteGroup> favoriteGroups = new ArrayList<>();
 	private Map<String, FavoriteGroup> flatGroups = new LinkedHashMap<>();
 	private List<FavouritePoint> cachedFavoritePoints = new ArrayList<>();
+	@Nullable
+	private FavoriteFolderSnapshot favoriteFolderSnapshot;
 
 	private final Set<FavoritesListener> listeners = new HashSet<>();
 	private final Map<FavouritePoint, AddressLookupRequest> addressRequestMap = new ConcurrentHashMap<>();
@@ -102,19 +104,125 @@ public class FavouritesHelper {
 	}
 
 	@NonNull
-	public FavoriteFolderTree getFavoriteFolderTree() {
-		return new FavoriteFolderTree(favoriteGroups);
+	public FavoriteFolder getFavoriteFolderRoot() {
+		return ensureFavoriteFolderSnapshot().root;
 	}
 
 	@Nullable
-	public FavoriteFolderNode getFavoriteFolderNode(@NonNull String fullPath) {
-		return getFavoriteFolderTree().getNode(fullPath);
+	public FavoriteFolder getFavoriteFolder(@NonNull String fullPath) {
+		return ensureFavoriteFolderSnapshot().folders.get(fullPath);
+	}
+
+	@NonNull
+	public List<FavoriteFolder> getFavoriteRootFolders() {
+		return ensureFavoriteFolderSnapshot().root.getSubFolders();
+	}
+
+	@NonNull
+	public List<FavoriteFolder> getFlattenedFavoriteFolders(boolean includeRoot) {
+		List<FavoriteFolder> result = new ArrayList<>();
+		FavoriteFolder root = ensureFavoriteFolderSnapshot().root;
+		if (includeRoot) {
+			result.add(root);
+		}
+		for (FavoriteFolder subFolder : root.getSubFolders()) {
+			collectFlattenedFavoriteFolders(subFolder, result);
+		}
+		return result;
 	}
 
 	@NonNull
 	public List<FavoriteGroup> getFavoriteGroupsInSubtree(@NonNull String fullPath) {
-		return getFavoriteFolderTree().getGroupsInSubtree(fullPath);
+		List<FavoriteGroup> result = new ArrayList<>();
+		for (FavoriteFolder folder : getFavoriteFoldersInSubtree(fullPath)) {
+			FavoriteGroup group = folder.getGroup();
+			if (group != null) {
+				result.add(group);
+			}
+		}
+		return result;
 	}
+
+	@NonNull
+	private FavoriteFolderSnapshot ensureFavoriteFolderSnapshot() {
+		FavoriteFolderSnapshot snapshot = favoriteFolderSnapshot;
+		if (snapshot == null) {
+			snapshot = buildFavoriteFolderSnapshot();
+			favoriteFolderSnapshot = snapshot;
+		}
+		return snapshot;
+	}
+
+	@NonNull
+	private FavoriteFolderSnapshot buildFavoriteFolderSnapshot() {
+		FavoriteFolder root = new FavoriteFolder("", null);
+		Map<String, FavoriteFolder> folders = new LinkedHashMap<>();
+		folders.put(root.getFullPath(), root);
+		for (FavoriteGroup group : favoriteGroups) {
+			addFavoriteGroupToSnapshot(root, folders, group);
+		}
+		Collator collator = getCollator();
+		root.sortSubFolders(collator);
+		root.updateSubtreeStats();
+		return new FavoriteFolderSnapshot(root, folders);
+	}
+
+	private void addFavoriteGroupToSnapshot(@NonNull FavoriteFolder root,
+	                                        @NonNull Map<String, FavoriteFolder> folders,
+	                                        @NonNull FavoriteGroup group) {
+		String fullPath = group.getName();
+		if (Algorithms.isEmpty(fullPath)) {
+			root.setGroup(group);
+			return;
+		}
+		FavoriteFolder parent = root;
+		String currentPath = "";
+		for (String segment : FavoriteFolderPath.split(fullPath)) {
+			currentPath = Algorithms.isEmpty(currentPath)
+					? segment
+					: currentPath + FavoriteFolderPath.DELIMITER + segment;
+			FavoriteFolder folder = folders.get(currentPath);
+			if (folder == null) {
+				folder = new FavoriteFolder(currentPath, parent);
+				folders.put(currentPath, folder);
+				parent.addSubFolder(folder);
+			}
+			parent = folder;
+		}
+		parent.setGroup(group);
+	}
+
+	private void collectFlattenedFavoriteFolders(@NonNull FavoriteFolder folder,
+	                                             @NonNull List<FavoriteFolder> result) {
+		result.add(folder);
+		for (FavoriteFolder subFolder : folder.getSubFolders()) {
+			collectFlattenedFavoriteFolders(subFolder, result);
+		}
+	}
+
+	@NonNull
+	private List<FavoriteFolder> getFavoriteFoldersInSubtree(@NonNull String fullPath) {
+		List<FavoriteFolder> result = new ArrayList<>();
+		FavoriteFolder folder = getFavoriteFolder(fullPath);
+		if (folder != null) {
+			collectFlattenedFavoriteFolders(folder, result);
+		}
+		return result;
+	}
+
+	private void invalidateFavoriteFolderCache() {
+		favoriteFolderSnapshot = null;
+	}
+
+	private record FavoriteFolderSnapshot(FavoriteFolder root,
+	                                      Map<String, FavoriteFolder> folders) {
+
+			private FavoriteFolderSnapshot(@NonNull FavoriteFolder root,
+			                               @NonNull Map<String, FavoriteFolder> folders) {
+				this.root = root;
+				this.folders = folders;
+			}
+		}
 
 	@NonNull
 	public List<FavouritePoint> getFavouritePoints() {
@@ -159,6 +267,7 @@ public class FavouritesHelper {
 
 		recalculateCachedFavPoints();
 		sortAll();
+		invalidateFavoriteFolderCache();
 
 		File legacyExternalFile = fileHelper.getLegacyExternalFile();
 		// Force save favorites to file if internals are different from externals
@@ -206,6 +315,7 @@ public class FavouritesHelper {
 			group.getPoints().add(fp);
 		}
 		sortAll();
+		invalidateFavoriteFolderCache();
 		saveCurrentPointsIntoFile(false);
 		notifyListeners();
 	}
@@ -322,6 +432,7 @@ public class FavouritesHelper {
 			for (FavoriteGroup group : groupsToSync) {
 				runSyncWithMarkers(group);
 			}
+			invalidateFavoriteFolderCache();
 		}
 		if (!Algorithms.isEmpty(groupsToDelete)) {
 			Map<String, FavoriteGroup> tmpFlatGroups = new LinkedHashMap<>(flatGroups);
@@ -337,6 +448,7 @@ public class FavouritesHelper {
 			}
 			flatGroups = tmpFlatGroups;
 			favoriteGroups = tmpFavoriteGroups;
+			invalidateFavoriteFolderCache();
 		}
 		saveCurrentPointsIntoFile(true);
 	}
@@ -356,6 +468,7 @@ public class FavouritesHelper {
 			if (p.isHomeOrWork()) {
 				app.getLauncherShortcutsHelper().updateLauncherShortcuts();
 			}
+			invalidateFavoriteFolderCache();
 		}
 		if (saveImmediately) {
 			saveCurrentPointsIntoFile(true);
@@ -471,6 +584,7 @@ public class FavouritesHelper {
 			}
 			group.getPoints().add(point);
 			addFavouritePoint(point);
+			invalidateFavoriteFolderCache();
 		}
 		if (options.sortAndSave) {
 			sortAll();
@@ -541,6 +655,7 @@ public class FavouritesHelper {
 			pg.getPoints().add(p);
 		}
 		sortAll();
+		invalidateFavoriteFolderCache();
 		saveCurrentPointsIntoFile(true);
 		runSyncWithMarkers(getOrCreateGroup(p));
 		return true;
@@ -576,6 +691,7 @@ public class FavouritesHelper {
 		}
 
 		sortAll();
+		invalidateFavoriteFolderCache();
 		saveCurrentPointsIntoFile(true);
 		if (!Algorithms.isEmpty(points)) {
 			runSyncWithMarkers(getOrCreateGroup(points.get(0)));
@@ -645,6 +761,7 @@ public class FavouritesHelper {
 			Map<String, FavoriteGroup> tmpFlatGroups = new LinkedHashMap<>(flatGroups);
 			tmpFlatGroups.remove(group.getName());
 			flatGroups = tmpFlatGroups;
+			invalidateFavoriteFolderCache();
 			if (saveImmediately) {
 				saveCurrentPointsIntoFile(true);
 			}
@@ -674,6 +791,7 @@ public class FavouritesHelper {
 		}
 		favoriteGroups = tmpFavoriteGroups;
 		flatGroups = tmpFlatGroups;
+		invalidateFavoriteFolderCache();
 		if (updateLauncherShortcuts) {
 			app.getLauncherShortcutsHelper().updateLauncherShortcuts();
 		}
@@ -719,6 +837,7 @@ public class FavouritesHelper {
 		if (FavoriteGroup.isBaseFavoriteOrPersonalGroup(group.getName())){
 			group.setPinned(true);
 		}
+		invalidateFavoriteFolderCache();
 		return group;
 	}
 
@@ -829,6 +948,7 @@ public class FavouritesHelper {
 			allPoints.addAll(f.getPoints());
 		}
 		cachedFavoritePoints = new ArrayList<>(allPoints);
+		invalidateFavoriteFolderCache();
 	}
 
 	public void sortAll() {
@@ -970,6 +1090,7 @@ public class FavouritesHelper {
 			if (isInMarkers) {
 				addToMarkers(renamedGroup);
 			}
+			invalidateFavoriteFolderCache();
 		}
 		if (saveImmediately) {
 			saveCurrentPointsIntoFile(true);
@@ -984,23 +1105,29 @@ public class FavouritesHelper {
 		if (Algorithms.isEmpty(oldPath) || FavoriteFolderPath.isDescendantOrSelf(newPath, oldPath)) {
 			return true;
 		}
-		FavoriteFolderTree tree = getFavoriteFolderTree();
-		List<FavoriteGroup> groupsToRename = tree.getGroupsInSubtree(oldPath);
+		List<FavoriteFolder> foldersToRename = getFavoriteFoldersInSubtree(oldPath);
+		List<FavoriteGroup> groupsToRename = new ArrayList<>();
+		for (FavoriteFolder folder : foldersToRename) {
+			FavoriteGroup group = folder.getGroup();
+			if (group != null) {
+				groupsToRename.add(group);
+			}
+		}
 		if (Algorithms.isEmpty(groupsToRename)) {
 			return false;
 		}
-		Set<String> sourceNodePaths = new HashSet<>();
-		for (FavoriteFolderNode node : tree.getNodesInSubtree(oldPath)) {
-			sourceNodePaths.add(node.getFullPath());
+		Set<String> sourceFolderPaths = new HashSet<>();
+		for (FavoriteFolder folder : foldersToRename) {
+			sourceFolderPaths.add(folder.getFullPath());
 		}
-		FavoriteFolderNode targetFolder = tree.getNode(newPath);
-		if (targetFolder != null && !sourceNodePaths.contains(newPath)) {
+		FavoriteFolder targetFolder = getFavoriteFolder(newPath);
+		if (targetFolder != null && !sourceFolderPaths.contains(newPath)) {
 			return true;
 		}
 		for (FavoriteGroup group : groupsToRename) {
 			String targetPath = FavoriteFolderPath.replacePathPrefix(group.getName(), oldPath, newPath);
-			FavoriteFolderNode targetNode = tree.getNode(targetPath);
-			if (targetNode != null && !sourceNodePaths.contains(targetPath)) {
+			FavoriteFolder targetChildFolder = getFavoriteFolder(targetPath);
+			if (targetChildFolder != null && !sourceFolderPaths.contains(targetPath)) {
 				return true;
 			}
 		}
@@ -1047,6 +1174,7 @@ public class FavouritesHelper {
 			app.getLauncherShortcutsHelper().updateLauncherShortcuts();
 		}
 		sortAll();
+		invalidateFavoriteFolderCache();
 		if (saveImmediately) {
 			saveCurrentPointsIntoFile(true);
 		}
@@ -1067,6 +1195,7 @@ public class FavouritesHelper {
 			tmpFlatGroups.put(favoriteGroup.getName(), favoriteGroup);
 			flatGroups = tmpFlatGroups;
 			favoriteGroups = CollectionUtils.addToList(favoriteGroups, favoriteGroup);
+			invalidateFavoriteFolderCache();
 		}
 		updateGroupAppearance(favoriteGroup, pointsGroup);
 
@@ -1083,6 +1212,7 @@ public class FavouritesHelper {
 	}
 
 	private void onSavingFavoritesFinished() {
+		invalidateFavoriteFolderCache();
 		for (FavoritesListener listener : listeners) {
 			listener.onSavingFavoritesFinished();
 		}

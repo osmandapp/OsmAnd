@@ -33,7 +33,8 @@ import net.osmand.plus.mapcontextmenu.editors.FavoriteAppearanceFragment;
 import net.osmand.plus.mapcontextmenu.editors.FavouriteGroupEditorFragment;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.myplaces.favorites.FavoriteFolderNode;
+import net.osmand.plus.myplaces.favorites.FavoriteFolder;
+import net.osmand.plus.myplaces.favorites.FavoriteFolderFormatter;
 import net.osmand.plus.myplaces.favorites.FavoriteFolderPath;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
@@ -64,7 +65,7 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 	@Nullable
 	private String folderPath;
 	@Nullable
-	private FavoriteFolderNode folderNode;
+	private FavoriteFolder folder;
 	@Nullable
 	private FavoriteGroup group;
 
@@ -80,11 +81,11 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 		if (args != null) {
 			folderPath = args.getString(GROUP_NAME_KEY);
 			if (folderPath != null) {
-				folderNode = helper.getFavoriteFolderNode(folderPath);
-				group = folderNode != null ? folderNode.getGroup() : helper.getGroup(folderPath);
+				folder = helper.getFavoriteFolder(folderPath);
+				group = folder != null ? folder.getGroup() : helper.getGroup(folderPath);
 			}
 		}
-		if (folderPath == null || folderNode == null) {
+		if (folderPath == null || folder == null) {
 			return;
 		}
 		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
@@ -98,11 +99,11 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 		View divider = groupView.findViewById(R.id.divider);
 		boolean visible = group == null || group.isVisible();
 
-		title.setText(FavoriteFolderPath.lastSegment(app, folderPath));
+		title.setText(FavoriteFolderFormatter.getDisplayName(app, folderPath));
 		title.setMaxLines(2);
 		description.setText(group != null
 				? GpxUiHelper.getFavoriteFolderDescription(app, group)
-				: getVirtualFolderDescription(folderNode));
+				: getVirtualFolderDescription(folder));
 		if (visible) {
 			title.setTypeface(FontCache.getNormalFont());
 		} else {
@@ -296,7 +297,7 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (folderNode == null) {
+		if (folder == null) {
 			dismiss();
 		}
 	}
@@ -318,8 +319,8 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 	}
 
 	@NonNull
-	private String getVirtualFolderDescription(@Nullable FavoriteFolderNode node) {
-		int pointsCount = node != null ? node.getSubtreePointsCount() : 0;
+	private String getVirtualFolderDescription(@Nullable FavoriteFolder folder) {
+		int pointsCount = folder != null ? folder.getSubtreePointsCount() : 0;
 		return pointsCount > 0
 				? getString(R.string.gpx_selection_number_of_points, String.valueOf(pointsCount))
 				: getString(R.string.shared_string_empty);
@@ -358,7 +359,7 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 				}
 			});
 			String caption = activity.getString(R.string.favorite_folder_name);
-			CustomAlert.showInput(dialogData, activity, FavoriteFolderPath.lastSegment(app, folderPath), caption);
+			CustomAlert.showInput(dialogData, activity, FavoriteFolderFormatter.getDisplayName(app, folderPath), caption);
 		}
 	}
 
@@ -399,8 +400,8 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 			app.getFavoriteSortModesHelper().clearRelatedKeys(folderPath);
 			app.getFavoriteSortModesHelper().syncSettings();
 			folderPath = newPath;
-			folderNode = helper.getFavoriteFolderNode(newPath);
-			group = folderNode != null ? folderNode.getGroup() : null;
+			folder = helper.getFavoriteFolder(newPath);
+			group = folder != null ? folder.getGroup() : null;
 		} else {
 			app.showShortToastMessage(R.string.favorite_folder_rename_conflict);
 		}
@@ -413,8 +414,8 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 			String groupName = getString(R.string.shared_string_favorites);
 			return getString(R.string.favorite_confirm_delete_group, groupName, group.getPoints().size());
 		}
-		String name = FavoriteFolderPath.toBreadcrumb(app, folderPath);
-		int pointsCount = folderNode != null ? folderNode.getSubtreePointsCount() : group != null ? group.getPoints().size() : 0;
+		String name = FavoriteFolderFormatter.getBreadcrumb(app, folderPath);
+		int pointsCount = folder != null ? folder.getSubtreePointsCount() : group != null ? group.getPoints().size() : 0;
 		return getString(R.string.favorite_confirm_delete_folder, name, pointsCount);
 	}
 

@@ -26,7 +26,7 @@ import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.mapcontextmenu.other.SharePoiParams;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.myplaces.favorites.FavoriteFolderPath;
+import net.osmand.plus.myplaces.favorites.FavoriteFolderFormatter;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.PointImageUtils;
@@ -229,7 +229,7 @@ public class FavouritePointMenuController extends MenuController {
 	public String getTypeStr() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			return FavoriteFolderPath.toBreadcrumb(mapActivity, fav.getCategory());
+			return FavoriteFolderFormatter.getBreadcrumb(mapActivity, fav.getCategory());
 		} else {
 			return "";
 		}

@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.myplaces.favorites.FavoriteFolderNode;
-import net.osmand.plus.myplaces.favorites.FavoriteFolderPath;
+import net.osmand.plus.myplaces.favorites.FavoriteFolder;
+import net.osmand.plus.myplaces.favorites.FavoriteFolderFormatter;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.dialogs.FavoriteFoldersAdapter.FavoriteAdapterListener;
 import net.osmand.plus.track.helpers.GpxUiHelper;
@@ -74,7 +74,7 @@ public class FavoriteFolderViewHolder extends RecyclerView.ViewHolder {
 		itemView.setOnClickListener(v -> listener.onItemSingleClick(group));
 		menuButton.setOnClickListener(v -> listener.onActionButtonClick(group, menuButton));
 
-		title.setText(FavoriteFolderPath.lastSegment(app, group.getName()));
+		title.setText(FavoriteFolderFormatter.getDisplayName(app, group.getName()));
 		description.setText(GpxUiHelper.getFavoriteFolderDescription(app, group));
 		bindAppearance(group);
 		AndroidUiHelper.updateVisibility(divider, showDivider);
@@ -83,7 +83,7 @@ public class FavoriteFolderViewHolder extends RecyclerView.ViewHolder {
 		bindSelectionMode(selectionMode, listener, group);
 	}
 
-	public void bindView(@NonNull FavoriteFolderNode folder, boolean showDivider, boolean showFullDivider,
+	public void bindView(@NonNull FavoriteFolder folder, boolean showDivider, boolean showFullDivider,
 	                     boolean selectionMode, FavoriteAdapterListener listener) {
 		itemView.setOnLongClickListener(v -> {
 			listener.onItemLongClick(folder);
@@ -92,7 +92,7 @@ public class FavoriteFolderViewHolder extends RecyclerView.ViewHolder {
 		itemView.setOnClickListener(v -> listener.onItemSingleClick(folder));
 		menuButton.setOnClickListener(v -> listener.onActionButtonClick(folder, menuButton));
 
-		title.setText(FavoriteFolderPath.lastSegment(app, folder.getFullPath()));
+		title.setText(FavoriteFolderFormatter.getDisplayName(app, folder.getFullPath()));
 		description.setText(getFolderDescription(folder));
 		bindAppearance(folder.getGroup());
 		AndroidUiHelper.updateVisibility(divider, showDivider);
@@ -121,7 +121,7 @@ public class FavoriteFolderViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	@NonNull
-	private String getFolderDescription(@NonNull FavoriteFolderNode folder) {
+	private String getFolderDescription(@NonNull FavoriteFolder folder) {
 		FavoriteGroup group = folder.getGroup();
 		long lastModified = folder.getSubtreeLastModified();
 		int pointsCount = folder.getSubtreePointsCount();
@@ -157,14 +157,14 @@ public class FavoriteFolderViewHolder extends RecyclerView.ViewHolder {
 		}
 	}
 
-	public void bindSelectionMode(boolean selectionMode, @NonNull FavoriteAdapterListener listener, @NonNull FavoriteFolderNode folder) {
+	public void bindSelectionMode(boolean selectionMode, @NonNull FavoriteAdapterListener listener, @NonNull FavoriteFolder folder) {
 		AndroidUiHelper.updateVisibility(checkboxContainer, selectionMode);
 		AndroidUiHelper.updateVisibility(menuButton, !selectionMode);
 
 		checkbox.setChecked(listener.isItemSelected(folder));
 	}
 
-	public void bindSelectionToggle(boolean selectionMode, @NonNull FavoriteAdapterListener listener, @NonNull FavoriteFolderNode folder) {
+	public void bindSelectionToggle(boolean selectionMode, @NonNull FavoriteAdapterListener listener, @NonNull FavoriteFolder folder) {
 		if (selectionMode) {
 			checkbox.setChecked(listener.isItemSelected(folder));
 		}

@@ -39,7 +39,8 @@ import net.osmand.plus.mapcontextmenu.other.SharePoiParams;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.MyPlacesActivity;
-import net.osmand.plus.myplaces.favorites.FavoriteFolderNode;
+import net.osmand.plus.myplaces.favorites.FavoriteFolder;
+import net.osmand.plus.myplaces.favorites.FavoriteFolderFormatter;
 import net.osmand.plus.myplaces.favorites.FavoriteFolderPath;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
@@ -211,7 +212,7 @@ public class FavoriteMenu {
 		}
 	}
 
-	public void showFolderOptionsMenu(@NonNull MyPlacesActivity activity, @NonNull View view, @NonNull FavoriteFolderNode selectedFolder,
+	public void showFolderOptionsMenu(@NonNull MyPlacesActivity activity, @NonNull View view, @NonNull FavoriteFolder selectedFolder,
 	                                  boolean nightMode, @NonNull CategorySelectionListener selectionListener,
 	                                  @NonNull FavoriteActionListener actionListener,
 	                                  @NonNull BaseFavoriteListFragment fragment) {
@@ -301,7 +302,7 @@ public class FavoriteMenu {
 		PopUpMenu.show(displayData);
 	}
 
-	private void showRenameFolderDialog(@NonNull FavoriteFolderNode selectedFolder, boolean nightMode,
+	private void showRenameFolderDialog(@NonNull FavoriteFolder selectedFolder, boolean nightMode,
 	                                    @NonNull FavoriteActionListener actionListener,
 	                                    @NonNull BaseFavoriteListFragment fragment) {
 		int controlsColor = ColorUtilities.getDefaultIconColor(app, nightMode);
@@ -323,12 +324,12 @@ public class FavoriteMenu {
 			}
 		});
 		String caption = activity.getString(R.string.favorite_folder_name);
-		String name = FavoriteFolderPath.lastSegment(app, selectedFolder.getFullPath());
+		String name = FavoriteFolderFormatter.getDisplayName(app, selectedFolder.getFullPath());
 		CustomAlert.showInput(dialogData, activity, name, caption);
 	}
 
 	@Nullable
-	private String renameFolder(@NonNull FavoriteFolderNode selectedFolder, @NonNull String newName) {
+	private String renameFolder(@NonNull FavoriteFolder selectedFolder, @NonNull String newName) {
 		String oldPath = selectedFolder.getFullPath();
 		FavoriteGroup group = selectedFolder.getGroup();
 		if (newName.isEmpty()) {
@@ -375,13 +376,13 @@ public class FavoriteMenu {
 	}
 
 	@NonNull
-	private String getDeleteFolderMessage(@NonNull FavoriteFolderNode selectedFolder) {
+	private String getDeleteFolderMessage(@NonNull FavoriteFolder selectedFolder) {
 		FavoriteGroup group = selectedFolder.getGroup();
 		if (Algorithms.isEmpty(selectedFolder.getFullPath()) && group != null) {
 			String groupName = app.getString(R.string.shared_string_favorites);
 			return app.getString(R.string.favorite_confirm_delete_group, groupName, group.getPoints().size());
 		}
-		String name = FavoriteFolderPath.toBreadcrumb(app, selectedFolder.getFullPath());
+		String name = FavoriteFolderFormatter.getBreadcrumb(app, selectedFolder.getFullPath());
 		return app.getString(R.string.favorite_confirm_delete_folder, name, selectedFolder.getSubtreePointsCount());
 	}
 
@@ -565,7 +566,7 @@ public class FavoriteMenu {
 		for (FavoriteGroup group : selection.getExactGroups()) {
 			changed |= deleteExactGroup(helper, sortModesHelper, group);
 		}
-		for (FavoriteFolderNode folder : selection.getFolderNodes()) {
+		for (FavoriteFolder folder : selection.getFolders()) {
 			String fullPath = folder.getFullPath();
 			if (Algorithms.isEmpty(fullPath)) {
 				FavoriteGroup group = folder.getGroup();

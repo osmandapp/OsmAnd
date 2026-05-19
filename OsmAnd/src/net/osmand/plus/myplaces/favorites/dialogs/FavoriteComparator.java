@@ -11,8 +11,8 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.configmap.tracks.TrackTab;
-import net.osmand.plus.myplaces.favorites.FavoriteFolderNode;
-import net.osmand.plus.myplaces.favorites.FavoriteFolderPath;
+import net.osmand.plus.myplaces.favorites.FavoriteFolder;
+import net.osmand.plus.myplaces.favorites.FavoriteFolderFormatter;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.settings.enums.FavoriteListSortMode;
 import net.osmand.plus.shared.SharedUtil;
@@ -144,7 +144,7 @@ public class FavoriteComparator implements Comparator<Object> {
 	}
 
 	private boolean isFavoriteFolder(@NonNull Object object) {
-		return object instanceof FavoriteGroup || object instanceof FavoriteFolderNode;
+		return object instanceof FavoriteGroup || object instanceof FavoriteFolder;
 	}
 
 	private boolean isPinnedFolder(@NonNull Object object) {
@@ -161,25 +161,25 @@ public class FavoriteComparator implements Comparator<Object> {
 	private FavoriteGroup getFavoriteGroup(@NonNull Object object) {
 		if (object instanceof FavoriteGroup group) {
 			return group;
-		} else if (object instanceof FavoriteFolderNode node) {
-			return node.getGroup();
+		} else if (object instanceof FavoriteFolder folder) {
+			return folder.getGroup();
 		}
 		return null;
 	}
 
 	@NonNull
 	private String getFolderTitle(@NonNull Object object) {
-		if (object instanceof FavoriteFolderNode node) {
-			return FavoriteFolderPath.lastSegment(app, node.getFullPath());
+		if (object instanceof FavoriteFolder folder) {
+			return FavoriteFolderFormatter.getDisplayName(app, folder.getFullPath());
 		} else if (object instanceof FavoriteGroup group) {
-			return FavoriteFolderPath.lastSegment(app, group.getName());
+			return FavoriteFolderFormatter.getDisplayName(app, group.getName());
 		}
 		return "";
 	}
 
 	private long getFolderLastModified(@NonNull Object object) {
-		if (object instanceof FavoriteFolderNode node) {
-			return node.getSubtreeLastModified();
+		if (object instanceof FavoriteFolder folder) {
+			return folder.getSubtreeLastModified();
 		} else if (object instanceof FavoriteGroup group) {
 			return group.getTimeModified();
 		}

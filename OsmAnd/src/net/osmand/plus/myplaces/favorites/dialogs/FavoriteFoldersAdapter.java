@@ -14,7 +14,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder;
-import net.osmand.plus.myplaces.favorites.FavoriteFolderNode;
+import net.osmand.plus.myplaces.favorites.FavoriteFolder;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.dialogs.SortFavoriteViewHolder.SortFavoriteListener;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
@@ -147,7 +147,7 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 		Object object = items.get(position);
 		if (object instanceof FavouritePoint) {
 			return TYPE_FAVORITE;
-		} else if (object instanceof FavoriteFolderNode || object instanceof FavoriteGroup) {
+		} else if (object instanceof FavoriteFolder || object instanceof FavoriteGroup) {
 			return TYPE_FOLDER;
 		} else if (object instanceof FavoriteFolderAnalysis) {
 			return TYPE_FOLDER_STATS;
@@ -205,7 +205,7 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 	private FavoriteGroup getFavoriteGroup(@Nullable Object object) {
 		if (object instanceof FavoriteGroup group) {
 			return group;
-		} else if (object instanceof FavoriteFolderNode folder) {
+		} else if (object instanceof FavoriteFolder folder) {
 			return folder.getGroup();
 		}
 		return null;
@@ -226,8 +226,8 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 					showFolderNameOnSecondLine, selectionMode, listener);
 		} else if (holder instanceof FavoriteFolderViewHolder viewHolder) {
 			Object folder = items.get(position);
-			if (folder instanceof FavoriteFolderNode node) {
-				viewHolder.bindView(node, !lastPinned && !lastItem, lastPinned && !lastItem, selectionMode, listener);
+			if (folder instanceof FavoriteFolder favoriteFolder) {
+				viewHolder.bindView(favoriteFolder, !lastPinned && !lastItem, lastPinned && !lastItem, selectionMode, listener);
 			} else {
 				FavoriteGroup group = (FavoriteGroup) folder;
 				viewHolder.bindView(group, !lastPinned && !lastItem, lastPinned && !lastItem, selectionMode, listener);
@@ -257,8 +257,8 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 						viewHolder.bindSelectionMode(selectionMode, listener, favouritePoint);
 					} else if (holder instanceof FavoriteFolderViewHolder viewHolder) {
 						Object folder = items.get(position);
-						if (folder instanceof FavoriteFolderNode node) {
-							viewHolder.bindSelectionMode(selectionMode, listener, node);
+						if (folder instanceof FavoriteFolder favoriteFolder) {
+							viewHolder.bindSelectionMode(selectionMode, listener, favoriteFolder);
 						} else {
 							FavoriteGroup group = (FavoriteGroup) folder;
 							viewHolder.bindSelectionMode(selectionMode, listener, group);
@@ -271,8 +271,8 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 						viewHolder.bindSelectionToggle(selectionMode, listener, favouritePoint);
 					} else if (holder instanceof FavoriteFolderViewHolder viewHolder) {
 						Object folder = items.get(position);
-						if (folder instanceof FavoriteFolderNode node) {
-							viewHolder.bindSelectionToggle(selectionMode, listener, node);
+						if (folder instanceof FavoriteFolder favoriteFolder) {
+							viewHolder.bindSelectionToggle(selectionMode, listener, favoriteFolder);
 						} else {
 							FavoriteGroup group = (FavoriteGroup) folder;
 							viewHolder.bindSelectionToggle(selectionMode, listener, group);
@@ -316,7 +316,7 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	private boolean hasTrackItems() {
 		for (Object o : items) {
-			if (o instanceof FavoriteFolderNode || o instanceof FavoriteGroup || o instanceof FavouritePoint) {
+			if (o instanceof FavoriteFolder || o instanceof FavoriteGroup || o instanceof FavouritePoint) {
 				return true;
 			}
 		}

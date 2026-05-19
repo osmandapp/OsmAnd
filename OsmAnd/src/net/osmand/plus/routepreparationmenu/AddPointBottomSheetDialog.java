@@ -45,7 +45,7 @@ import net.osmand.plus.mapcontextmenu.other.FavouritesComparator;
 import net.osmand.plus.mapcontextmenu.other.SelectFavouriteToGoBottomSheet;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.myplaces.favorites.FavoriteFolderPath;
+import net.osmand.plus.myplaces.favorites.FavoriteFolderFormatter;
 import net.osmand.plus.myplaces.favorites.FavoritesListener;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.routepreparationmenu.data.PointType;
@@ -648,7 +648,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 						false, pointIconRes, backgroundType);
 				favoriteViewHolder.icon.setImageDrawable(pointIcon);
 
-				String description = FavoriteFolderPath.lastSegment(app, point.getCategory());
+				String description = FavoriteFolderFormatter.getDisplayName(app, point.getCategory());
 				favoriteViewHolder.description.setText(description);
 				favoriteViewHolder.description.setVisibility(View.VISIBLE);
 			}

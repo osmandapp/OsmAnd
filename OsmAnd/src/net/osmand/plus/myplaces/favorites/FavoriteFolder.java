@@ -11,17 +11,22 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class FavoriteFolderNode {
+public class FavoriteFolder {
 
 	private final String fullPath;
 	private final String name;
 	@Nullable
-	private final FavoriteFolderNode parent;
-	private final List<FavoriteFolderNode> children = new ArrayList<>();
+	private final FavoriteFolder parent;
+	private final List<FavoriteFolder> subFolders = new ArrayList<>();
 	@Nullable
 	private FavoriteGroup group;
 
-	FavoriteFolderNode(@NonNull String fullPath, @Nullable FavoriteFolderNode parent) {
+	private int subtreePointsCount;
+	private long subtreeFileSize;
+	private int subtreeFoldersCount;
+	private long subtreeLastModified;
+
+	FavoriteFolder(@NonNull String fullPath, @Nullable FavoriteFolder parent) {
 		this.fullPath = fullPath;
 		this.name = FavoriteFolderPath.lastSegment(fullPath);
 		this.parent = parent;
@@ -38,7 +43,7 @@ public class FavoriteFolderNode {
 	}
 
 	@Nullable
-	public FavoriteFolderNode getParent() {
+	public FavoriteFolder getParent() {
 		return parent;
 	}
 
@@ -60,16 +65,16 @@ public class FavoriteFolderNode {
 	}
 
 	@NonNull
-	public List<FavoriteFolderNode> getChildren() {
-		return Collections.unmodifiableList(children);
+	public List<FavoriteFolder> getSubFolders() {
+		return Collections.unmodifiableList(subFolders);
 	}
 
-	public void addChild(@NonNull FavoriteFolderNode child) {
-		children.add(child);
+	public void addSubFolder(@NonNull FavoriteFolder subFolder) {
+		subFolders.add(subFolder);
 	}
 
-	public void sortChildren(@NonNull Collator collator) {
-		children.sort((lhs, rhs) -> {
+	public void sortSubFolders(@NonNull Collator collator) {
+		subFolders.sort((lhs, rhs) -> {
 			if (FavoriteGroup.PERSONAL_CATEGORY.equals(lhs.getFullPath())) {
 				return -1;
 			} else if (FavoriteGroup.PERSONAL_CATEGORY.equals(rhs.getFullPath())) {
@@ -77,9 +82,27 @@ public class FavoriteFolderNode {
 			}
 			return collator.compare(lhs.getName(), rhs.getName());
 		});
-		for (FavoriteFolderNode child : children) {
-			child.sortChildren(collator);
+		for (FavoriteFolder subFolder : subFolders) {
+			subFolder.sortSubFolders(collator);
 		}
+	}
+
+	public void updateSubtreeStats() {
+		int pointsCount = getExactPointsCount();
+		long fileSize = group != null ? group.getSize() : 0;
+		int foldersCount = subFolders.size();
+		long lastModified = group != null ? group.getTimeModified() : 0;
+		for (FavoriteFolder subFolder : subFolders) {
+			subFolder.updateSubtreeStats();
+			pointsCount += subFolder.subtreePointsCount;
+			fileSize += subFolder.subtreeFileSize;
+			foldersCount += subFolder.subtreeFoldersCount;
+			lastModified = Math.max(lastModified, subFolder.subtreeLastModified);
+		}
+		subtreePointsCount = pointsCount;
+		subtreeFileSize = fileSize;
+		subtreeFoldersCount = foldersCount;
+		subtreeLastModified = lastModified;
 	}
 
 	@NonNull
@@ -92,35 +115,19 @@ public class FavoriteFolderNode {
 	}
 
 	public int getSubtreePointsCount() {
-		int count = getExactPointsCount();
-		for (FavoriteFolderNode child : children) {
-			count += child.getSubtreePointsCount();
-		}
-		return count;
+		return subtreePointsCount;
 	}
 
 	public long getSubtreeFileSize() {
-		long size = group != null ? group.getSize() : 0;
-		for (FavoriteFolderNode child : children) {
-			size += child.getSubtreeFileSize();
-		}
-		return size;
+		return subtreeFileSize;
 	}
 
 	public int getSubtreeFoldersCount() {
-		int count = children.size();
-		for (FavoriteFolderNode child : children) {
-			count += child.getSubtreeFoldersCount();
-		}
-		return count;
+		return subtreeFoldersCount;
 	}
 
 	public long getSubtreeLastModified() {
-		long lastModified = group != null ? group.getTimeModified() : 0;
-		for (FavoriteFolderNode child : children) {
-			lastModified = Math.max(lastModified, child.getSubtreeLastModified());
-		}
-		return lastModified;
+		return subtreeLastModified;
 	}
 
 	@Override
@@ -128,10 +135,10 @@ public class FavoriteFolderNode {
 		if (this == object) {
 			return true;
 		}
-		if (!(object instanceof FavoriteFolderNode node)) {
+		if (!(object instanceof FavoriteFolder folder)) {
 			return false;
 		}
-		return Objects.equals(fullPath, node.fullPath);
+		return Objects.equals(fullPath, folder.fullPath);
 	}
 
 	@Override

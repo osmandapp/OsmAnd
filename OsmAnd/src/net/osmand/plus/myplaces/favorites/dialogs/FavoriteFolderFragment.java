@@ -28,8 +28,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet.CategorySelectionListener;
 import net.osmand.plus.myplaces.MyPlacesActivity;
-import net.osmand.plus.myplaces.favorites.FavoriteFolderNode;
-import net.osmand.plus.myplaces.favorites.FavoriteFolderPath;
+import net.osmand.plus.myplaces.favorites.FavoriteFolder;
+import net.osmand.plus.myplaces.favorites.FavoriteFolderFormatter;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavoritesListener;
 import net.osmand.plus.myplaces.favorites.dialogs.FavoriteFoldersAdapter.FavoriteAdapterListener;
@@ -81,7 +81,7 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 			getParentFragmentManager().popBackStack();
 			return;
 		}
-		FavoriteFolderNode selectedFolder = getSelectedFolderNode();
+		FavoriteFolder selectedFolder = getSelectedFolder();
 		if (selectedFolder == null) {
 			getParentFragmentManager().popBackStack();
 			return;
@@ -97,7 +97,7 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 						&& selectedPointsNames != null
 						&& selectedPointsNames.contains(point.getName())) {
 					selectionHelper.onItemsSelected(Collections.singletonList(item), true);
-				} else if (item instanceof FavoriteFolderNode folder
+				} else if (item instanceof FavoriteFolder folder
 						&& selectedFolders != null
 						&& selectedFolders.contains(folder.getFullPath())) {
 					selectionHelper.onItemsSelected(Collections.singletonList(item), true);
@@ -114,7 +114,7 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 		for (Object item : selectionHelper.getSelectedItems()) {
 			if (item instanceof FavouritePoint point) {
 				selectedPoints.add(point.getName());
-			} else if (item instanceof FavoriteFolderNode folder && !Algorithms.isEmpty(folder.getFullPath())) {
+			} else if (item instanceof FavoriteFolder folder && !Algorithms.isEmpty(folder.getFullPath())) {
 				selectedFolders.add(folder.getFullPath());
 			}
 		}
@@ -200,7 +200,7 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 					String pointType = PointDescription.POINT_TYPE_FAVORITE;
 					requireMyActivity().showOnMap(FavoriteFolderFragment.this, location.getLatitude(), location.getLongitude(),
 							settings.getLastKnownMapZoom(), new PointDescription(pointType, point.getDisplayName(app)), true, point);
-				} else if (object instanceof FavoriteFolderNode folder) {
+				} else if (object instanceof FavoriteFolder folder) {
 					openFolder(folder.getFullPath());
 				}
 			}
@@ -225,7 +225,7 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 					selectedPoint = favouritePoint;
 					FavoriteMenu menu = new FavoriteMenu(app, uiUtilities, requireMyActivity());
 					menu.showPointOptionsMenu(anchor, favouritePoint, nightMode, FavoriteFolderFragment.this, FavoriteFolderFragment.this, FavoriteFolderFragment.this);
-				} else if (object instanceof FavoriteFolderNode folder) {
+				} else if (object instanceof FavoriteFolder folder) {
 					selectedPoint = null;
 					FavoriteOptionsDialogFragment.showInstance(getChildFragmentManager(), folder.getFullPath());
 				}
@@ -338,8 +338,8 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 		List<Object> items = new ArrayList<>();
 		items.add(TYPE_SORT_FAVORITE);
 
-		FavoriteFolderNode selectedFolder = getSelectedFolderNode();
-		List<FavoriteFolderNode> childFolders = getChildFolders(selectedFolder);
+		FavoriteFolder selectedFolder = getSelectedFolder();
+		List<FavoriteFolder> childFolders = getChildFolders(selectedFolder);
 		List<FavouritePoint> exactPoints = getExactPoints();
 		if (Algorithms.isEmpty(childFolders) && Algorithms.isEmpty(exactPoints)) {
 			items.add(TYPE_EMPTY_FOLDER);
@@ -393,7 +393,7 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 		} else if (item.getItemId() == R.id.action_menu) {
 			FavoriteMenu menu = new FavoriteMenu(app, uiUtilities, requireMyActivity());
 			View view = requireMyActivity().findViewById(R.id.action_menu);
-			FavoriteFolderNode selectedFolder = getSelectedFolderNode();
+			FavoriteFolder selectedFolder = getSelectedFolder();
 			if (selectedFolder != null) {
 				selectedPoint = null;
 				menu.showFolderOptionsMenu(requireMyActivity(), view, selectedFolder, nightMode,
@@ -490,24 +490,24 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 	}
 
 	@Nullable
-	private FavoriteFolderNode getSelectedFolderNode() {
+	private FavoriteFolder getSelectedFolder() {
 		if (selectedFolderPath == null) {
 			return null;
 		}
-		FavoriteFolderNode node = helper.getFavoriteFolderNode(selectedFolderPath);
-		selectedGroup = node != null ? node.getGroup() : null;
-		return node;
+		FavoriteFolder folder = helper.getFavoriteFolder(selectedFolderPath);
+		selectedGroup = folder != null ? folder.getGroup() : null;
+		return folder;
 	}
 
 	@NonNull
-	private List<FavoriteFolderNode> getChildFolders(@Nullable FavoriteFolderNode selectedFolder) {
+	private List<FavoriteFolder> getChildFolders(@Nullable FavoriteFolder selectedFolder) {
 		if (selectedFolder == null || isRootExactFolder(selectedFolder)) {
 			return Collections.emptyList();
 		}
-		return selectedFolder.getChildren();
+		return selectedFolder.getSubFolders();
 	}
 
-	private boolean isRootExactFolder(@NonNull FavoriteFolderNode selectedFolder) {
+	private boolean isRootExactFolder(@NonNull FavoriteFolder selectedFolder) {
 		return selectedFolder.isRoot() && selectedFolder.getGroup() != null;
 	}
 
@@ -519,7 +519,7 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 	@NonNull
 	private List<Object> getSelectableItems() {
 		List<Object> items = new ArrayList<>();
-		FavoriteFolderNode selectedFolder = getSelectedFolderNode();
+		FavoriteFolder selectedFolder = getSelectedFolder();
 		items.addAll(getChildFolders(selectedFolder));
 		items.addAll(getExactPoints());
 		return items;
@@ -527,12 +527,12 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 
 	private boolean isSelectableItem(@NonNull Object object) {
 		return object instanceof FavouritePoint
-				|| (object instanceof FavoriteFolderNode folder && !Algorithms.isEmpty(folder.getFullPath()));
+				|| (object instanceof FavoriteFolder folder && !Algorithms.isEmpty(folder.getFullPath()));
 	}
 
 	@NonNull
 	private List<FavouritePoint> getSearchPoints() {
-		FavoriteFolderNode selectedFolder = getSelectedFolderNode();
+		FavoriteFolder selectedFolder = getSelectedFolder();
 		if (selectedFolder == null) {
 			return Collections.emptyList();
 		}
@@ -548,7 +548,7 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 
 	@NonNull
 	private String getSelectedFolderTitle() {
-		return FavoriteFolderPath.lastSegment(app, selectedFolderPath);
+		return FavoriteFolderFormatter.getDisplayName(app, selectedFolderPath);
 	}
 
 	@NonNull
