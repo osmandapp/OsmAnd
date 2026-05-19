@@ -56,8 +56,8 @@ public class BinaryMapPoiReaderAdapter {
 		List<PoiSubType> subTypes = new ArrayList<PoiSubType>();
 		List<PoiSubType> topIndexSubTypes = new ArrayList<PoiSubType>();
 		Map<Integer, List<TagValuePair>> tagGroups = new HashMap<>();
-		QuadTree<Void> bboxIndexCache = new QuadTree<Void>(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),
-				8, 0.55f);
+//		QuadTree<Void> bboxIndexCache = new QuadTree<Void>(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),
+//				8, 0.55f);
 		static boolean MAP_HAS_TAG_GROUPS = false;
 
 		int left31;
@@ -306,6 +306,56 @@ public class BinaryMapPoiReaderAdapter {
 		}
 	}
 
+
+
+//	public void initTagGroups(PoiRegion region, SearchRequest<Amenity> req) throws IOException {
+//		if (region.tagGroups.isEmpty()) {
+//			codedIS.seek(region.filePointer);
+//			long oldLimit = codedIS.pushLimitLong((long) region.length);
+//			BinaryMapIndexReader.SearchPoiTypeFilter filter = req.poiTypeFilter;
+//			req.poiTypeFilter = null;//init for all
+//			indexTagGroupsInPoiBox(0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, req, region);
+//			req.poiTypeFilter = filter;
+//			codedIS.popLimit(oldLimit);
+//		}
+//	}
+//
+//	protected void indexTagGroupsInPoiBox(int left31, int right31, int top31, int bottom31,
+//										  SearchRequest<Amenity> req, PoiRegion region) throws IOException {
+//		TLongHashSet skipTiles = null;
+//		if (req.zoom >= 0 && req.zoom < 16) {
+//			skipTiles = new TLongHashSet();
+//		}
+//		long length;
+//		long oldLimit;
+//		TIntLongHashMap offsetsMap = new TIntLongHashMap();
+//		while (true) {
+//			if (req.isCancelled()) {
+//				return;
+//			}
+//			int t = codedIS.readTag();
+//			int tag = WireFormat.getTagFieldNumber(t);
+//			switch (tag) {
+//				case 0:
+//					return;
+//				case OsmandOdb.OsmAndPoiIndex.BOXES_FIELD_NUMBER:
+//					length = readInt();
+//					oldLimit = codedIS.pushLimitLong((long) length);
+//					readBoxField(left31, right31, top31, bottom31, 0, 0, 0, offsetsMap, skipTiles, req, region);
+//					codedIS.popLimit(oldLimit);
+//					break;
+//				case OsmandOdb.OsmAndPoiIndex.POIDATA_FIELD_NUMBER:
+//					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+//					return;
+//				default:
+//					skipUnknownField(t);
+//					break;
+//			}
+//		}
+//	}
+
+
+
 	private String normalizeSearchPoiByNameQuery(String query) {
 		return query.replace("\"", "").toLowerCase();
 	}
@@ -314,9 +364,11 @@ public class BinaryMapPoiReaderAdapter {
 		TIntLongHashMap offsets = new TIntLongHashMap();
 		String query = normalizeSearchPoiByNameQuery(req.nameQuery);
 		CollatorStringMatcher matcher = new CollatorStringMatcher(query, req.matcherMode);
+
+		long time = System.currentTimeMillis();
 		long indexOffset = codedIS.getTotalBytesRead();
-		TIntLongHashMap offsetsMap = new TIntLongHashMap();
-		List<Integer> nameIndexCoordinates = new ArrayList<>();
+//		TIntLongHashMap offsetsMap = new TIntLongHashMap();
+//		List<Integer> nameIndexCoordinates = new ArrayList<>();
 		QuadTree<Void> nameIndexTree = null;
 		while (true) {
 			if (req.isCancelled()) {
@@ -335,32 +387,38 @@ public class BinaryMapPoiReaderAdapter {
 				long length = readInt();
 				long oldLimit = codedIS.pushLimitLong((long) length);
 				// here offsets are sorted by distance
-				offsets = readPoiNameIndex(matcher.getCollator(), query, req, region, nameIndexCoordinates);
+
+				//TODO: uncomment!
+				offsets = readPoiNameIndex(matcher.getCollator(), query, req, null, null);
 				codedIS.popLimit(oldLimit);
-				req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
-						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_INDEX, map.getFile().getName(), codedIS.getBytesCounter() - bytes);
 				break;
-			case OsmandOdb.OsmAndPoiIndex.BOXES_FIELD_NUMBER:
-				length = readInt();
-				oldLimit = codedIS.pushLimitLong((long) length);
-				if (nameIndexCoordinates.size() > 0 && nameIndexTree == null) {
-					nameIndexTree = new QuadTree<Void>(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),
-							8, 0.55f);
-					for (int i = 0; i < nameIndexCoordinates.size(); i = i + 2) {
-						int x = nameIndexCoordinates.get(i);
-						int y = nameIndexCoordinates.get(i + 1);
-						nameIndexTree.insert(null, new QuadRect(x, y, x, y));
-					}
-				}
-				BinaryMapIndexReader.SearchPoiTypeFilter filter = req.poiTypeFilter;
-				req.poiTypeFilter = null;//init for all categories
-				// if nameIndexTree is empty, then skip by zero bbox 0,0,0,0
-				readBoxField(0, 0, 0, 0, 0, 0, 0, offsetsMap, null, req, region, nameIndexTree);
-				req.poiTypeFilter = filter;
-				codedIS.popLimit(oldLimit);
-				req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
-						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_GROUPS_BBOXES, map.getFile().getName(), codedIS.getBytesCounter() - bytes);
-				break;
+
+//				offsets = readPoiNameIndex(matcher.getCollator(), query, req, region, nameIndexCoordinates);
+//				codedIS.popLimit(oldLimit);
+//				req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
+//						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_INDEX, map.getFile().getName(), codedIS.getBytesCounter() - bytes);
+//				break;
+//			case OsmandOdb.OsmAndPoiIndex.BOXES_FIELD_NUMBER:
+//				length = readInt();
+//				oldLimit = codedIS.pushLimitLong((long) length);
+//				if (nameIndexCoordinates.size() > 0 && nameIndexTree == null) {
+//					nameIndexTree = new QuadTree<Void>(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),
+//							8, 0.55f);
+//					for (int i = 0; i < nameIndexCoordinates.size(); i = i + 2) {
+//						int x = nameIndexCoordinates.get(i);
+//						int y = nameIndexCoordinates.get(i + 1);
+//						nameIndexTree.insert(null, new QuadRect(x, y, x, y));
+//					}
+//				}
+//				BinaryMapIndexReader.SearchPoiTypeFilter filter = req.poiTypeFilter;
+//				req.poiTypeFilter = null;//init for all categories
+//				// if nameIndexTree is empty, then skip by zero bbox 0,0,0,0
+//				readBoxField(0, 0, 0, 0, 0, 0, 0, offsetsMap, null, req, region, nameIndexTree);
+//				req.poiTypeFilter = filter;
+//				codedIS.popLimit(oldLimit);
+//				req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
+//						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_GROUPS_BBOXES, map.getFile().getName(), codedIS.getBytesCounter() - bytes);
+//				break;
 			case OsmandOdb.OsmAndPoiIndex.POIDATA_FIELD_NUMBER:
 				BinaryMapIndexReaderStats.PoiReadMetricSet metrics = req.searchStat == null ? null : new BinaryMapIndexReaderStats.PoiReadMetricSet();
 				// also offsets can be randomly skipped by limit
@@ -575,12 +633,12 @@ public class BinaryMapPoiReaderAdapter {
 						offsets.put(shift, d);
 					}
 
-					List<Void> bboxResult = new ArrayList<>();
-					region.bboxIndexCache.queryInBox(new QuadRect(x31, y31, x31, y31), bboxResult);
-					if (bboxResult.isEmpty()) {
-						nameIndexCoordinates.add(x31);
-						nameIndexCoordinates.add(y31);
-					}
+//					List<Void> bboxResult = new ArrayList<>();
+//					region.bboxIndexCache.queryInBox(new QuadRect(x31, y31, x31, y31), bboxResult);
+//					if (bboxResult.isEmpty()) {
+//						nameIndexCoordinates.add(x31);
+//						nameIndexCoordinates.add(y31);
+//					}
 				}
 				return;
 			case OsmandOdb.OsmAndPoiNameIndexDataAtom.X_FIELD_NUMBER:
@@ -1148,25 +1206,26 @@ public class BinaryMapPoiReaderAdapter {
 					int yT = y << (31 - zoom);
 					int yB = ((y + 1) << (31 - zoom)) - 1;
 
-					boolean intersectWithNameIndex = false;
-					QuadRect rect = new QuadRect(xL, yT, xR, yB);
-					if (PoiRegion.MAP_HAS_TAG_GROUPS && nameIndexTree != null) {
-						List<Void> resCache = new ArrayList<>();
-						region.bboxIndexCache.queryInBox(rect, resCache);
-						if (resCache.size() == 0) {
-							List<Void> res = new ArrayList<>();
-							nameIndexTree.queryInBox(rect, res);
-							intersectWithNameIndex = res.size() > 0;
-						}
-					}
+//					boolean intersectWithNameIndex = false;
+//					QuadRect rect = new QuadRect(xL, yT, xR, yB);
+//					if (PoiRegion.MAP_HAS_TAG_GROUPS && nameIndexTree != null) {
+//						List<Void> resCache = new ArrayList<>();
+//						region.bboxIndexCache.queryInBox(rect, resCache);
+//						if (resCache.size() == 0) {
+//							List<Void> res = new ArrayList<>();
+//							nameIndexTree.queryInBox(rect, res);
+//							intersectWithNameIndex = res.size() > 0;
+//						}
+//					}
 					// check intersection
-					if ((left31 > xR || xL > right31 || bottom31 < yT || yB < top31) && !intersectWithNameIndex) {
+//					if ((left31 > xR || xL > right31 || bottom31 < yT || yB < top31) && !intersectWithNameIndex) {
+					if ((left31 > xR || xL > right31 || bottom31 < yT || yB < top31)) {
 						codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 						return false;
 					}
 					req.numberOfAcceptedSubtrees++;
 					checkBox = false;
-					region.bboxIndexCache.insert(null, rect);
+//					region.bboxIndexCache.insert(null, rect);
 				}
 
 				long length = readInt();
