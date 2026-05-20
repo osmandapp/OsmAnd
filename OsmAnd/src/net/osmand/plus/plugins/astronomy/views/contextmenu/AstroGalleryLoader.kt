@@ -6,12 +6,12 @@ import net.osmand.plus.OsmAndTaskManager
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.gallery.model.GalleryItem
 import net.osmand.plus.gallery.controller.GalleryController
-import net.osmand.plus.gallery.model.GalleryMediaGroup
-import net.osmand.plus.gallery.controller.GalleryItemsHolder
-import net.osmand.plus.gallery.cache.PhotoCacheManager
+import net.osmand.plus.gallery.online.OnlinePhotosGroup
+import net.osmand.plus.gallery.online.OnlinePhotosHolder
+import net.osmand.plus.gallery.online.cache.PhotoCacheManager
 import net.osmand.shared.media.RemoteMediaFactory
-import net.osmand.plus.gallery.tasks.CacheReadTask
-import net.osmand.plus.gallery.tasks.CacheWriteTask
+import net.osmand.plus.gallery.online.tasks.CacheReadTask
+import net.osmand.plus.gallery.online.tasks.CacheWriteTask
 import net.osmand.shared.wiki.WikiCoreHelper
 import net.osmand.shared.wiki.WikiImage
 import net.osmand.util.Algorithms
@@ -38,8 +38,8 @@ class AstroGalleryLoader(
 				return
 			}
 			val mediaItemsHolder = buildMediaItemsHolder(wikidataId, images)
-			val galleryItems = mediaItemsHolder.astronomyGalleryItems
-			galleryController.currentGalleryItemsHolder = mediaItemsHolder.takeIf { galleryItems.isNotEmpty() }
+			val galleryItems = mediaItemsHolder.getAstronomyGalleryItems()
+			galleryController.itemsHolder = mediaItemsHolder.takeIf { galleryItems.isNotEmpty() }
 			publishReadyState(wikidataId, galleryItems)
 		}
 	}
@@ -49,11 +49,12 @@ class AstroGalleryLoader(
 
 		val latLon = LatLon(0.0, 0.0)
 		val params = hashMapOf("wikidataId" to wikidataId)
-		val cacheManager = PhotoCacheManager(app)
+		val cacheManager =
+			PhotoCacheManager(app)
 		val rawKey = "wikidataId=$wikidataId"
 
 		val hasMatchingHolder = galleryController.isCurrentHolderEquals(latLon, params)
-		val existingGalleryItems = galleryController.currentGalleryItemsHolder?.astronomyGalleryItems.orEmpty()
+		val existingGalleryItems = galleryController.itemsHolder?.getAstronomyGalleryItems().orEmpty()
 		if (hasMatchingHolder && existingGalleryItems.isNotEmpty()) {
 			publishReadyState(wikidataId, existingGalleryItems)
 			return
@@ -73,10 +74,7 @@ class AstroGalleryLoader(
 
 		getAstroImagesTask = GetAstroImagesTask(
 			app = app,
-			holder = GalleryItemsHolder(
-				latLon,
-				params
-			),
+			holder = OnlinePhotosHolder(latLon, params),
 			wikidataId = wikidataId,
 			getImageCardsListener = imageCardListener,
 			networkResponseListener = { response ->
@@ -103,12 +101,18 @@ class AstroGalleryLoader(
 			publishReadyState(wikidataId, emptyList())
 			return
 		}
-		val cacheReadTask = CacheReadTask(cacheManager, rawKey) { json ->
+		val cacheReadTask = CacheReadTask(
+			cacheManager,
+			rawKey
+		) { json ->
 			if (requestWid != wikidataId) {
 				return@CacheReadTask true
 			}
 			if (!Algorithms.isEmpty(json)) {
-				imageCardListener.onFinish(wikidataId, WikiCoreHelper.getAstroImagesFromJson(json!!))
+				imageCardListener.onFinish(
+					wikidataId,
+					WikiCoreHelper.getAstroImagesFromJson(json!!)
+				)
 			} else {
 				imageCardListener.onFinish(wikidataId, null)
 			}
@@ -124,7 +128,11 @@ class AstroGalleryLoader(
 	) {
 		if (!Algorithms.isEmpty(response)) {
 			OsmAndTaskManager.executeTask<Void?, CacheWriteTask?>(
-				CacheWriteTask(cacheManager, rawKey, response!!)
+				CacheWriteTask(
+					cacheManager,
+					rawKey,
+					response!!
+				)
 			)
 		}
 	}
@@ -132,16 +140,13 @@ class AstroGalleryLoader(
 	private fun buildMediaItemsHolder(
 		wikidataId: String,
 		images: List<WikiImage>
-	): GalleryItemsHolder {
+	): OnlinePhotosHolder {
 		val latLon = LatLon(0.0, 0.0)
 		val params = hashMapOf("wikidataId" to wikidataId)
-		return GalleryItemsHolder(
-			latLon,
-			params
-		).apply {
+		return OnlinePhotosHolder(latLon, params).apply {
 			for (wikiImage in images) {
 				addMediaItem(
-					GalleryMediaGroup.ASTRONOMY,
+					OnlinePhotosGroup.ASTRONOMY,
 					RemoteMediaFactory.fromWikiImage(wikiImage)
 				)
 			}

@@ -1,10 +1,10 @@
-package net.osmand.plus.gallery.tasks;
+package net.osmand.plus.gallery.online.tasks;
 
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.gallery.cache.PhotoCacheManager;
+import net.osmand.plus.gallery.online.cache.PhotoCacheManager;
 
 public class CacheWriteTask extends AsyncTask<Void, Void, Void> {
 

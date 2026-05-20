@@ -1,4 +1,4 @@
-package net.osmand.plus.gallery.cache;
+package net.osmand.plus.gallery.online.cache;
 
 import android.content.Context;
 
