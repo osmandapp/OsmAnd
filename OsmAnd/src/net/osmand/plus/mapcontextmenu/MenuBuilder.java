@@ -14,7 +14,6 @@ import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.ROUTE_MEMBE
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.ROUTE_PART_OF_ROW_KEY;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.ROUTE_RELATED_ROUTES_ROW_KEY;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.WITHIN_POLYGONS_ROW_KEY;
-import static net.osmand.plus.gallery.online.OnlinePhotosGroup.WIKIMEDIA;
 
 import android.content.Context;
 import android.content.Intent;
@@ -64,24 +63,20 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.gallery.controller.GalleryController;
 import net.osmand.plus.gallery.model.GalleryItem;
+import net.osmand.plus.gallery.online.OnlinePhotosHolder;
+import net.osmand.plus.gallery.ui.GalleryGridConfig;
 import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.mapcontextmenu.SearchAmenitiesTask.SearchAmenitiesListener;
 import net.osmand.plus.mapcontextmenu.SearchByRouteIdTask.SearchByRouteIdListener;
 import net.osmand.plus.mapcontextmenu.SearchByRouteIdTask.SearchType;
 import net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder;
-import net.osmand.plus.mapcontextmenu.gallery.GalleryRowBuilder;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
-import net.osmand.plus.gallery.controller.GalleryController;
-import net.osmand.plus.gallery.ui.GalleryGridConfig;
-import net.osmand.plus.gallery.online.OnlinePhotosHolder;
-import net.osmand.plus.gallery.online.cache.PhotoCacheManager;
-import net.osmand.shared.media.RemoteMediaFactory;
-import net.osmand.plus.gallery.online.tasks.CacheReadTask;
-import net.osmand.plus.gallery.online.tasks.CacheWriteTask;
-import net.osmand.plus.gallery.online.tasks.GetOnlineImagesTask;
-import net.osmand.plus.gallery.online.tasks.GetOnlineImagesTask.GetImageCardsListener;
+import net.osmand.plus.mapcontextmenu.gallery.GalleryRowBuilder;
+import net.osmand.plus.mapcontextmenu.gallery.OnlinePhotosFlow;
+import net.osmand.plus.mapcontextmenu.gallery.OnlinePhotosFlowListener;
 import net.osmand.plus.mapcontextmenu.other.MenuObject;
 import net.osmand.plus.mapcontextmenu.other.MenuObjectUtils;
 import net.osmand.plus.plugins.OsmandPlugin;
@@ -112,11 +107,8 @@ import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
-import net.osmand.shared.wiki.WikiHelper;
-import net.osmand.shared.wiki.WikiImage;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import net.osmand.shared.wiki.WikiCoreHelper;
 
 import org.apache.commons.logging.Log;
 
@@ -124,7 +116,7 @@ import java.lang.ref.WeakReference;
 import java.text.DateFormat;
 import java.util.*;
 
-public class MenuBuilder {
+public class MenuBuilder implements OnlinePhotosFlowListener {
 
 	private static final Log LOG = PlatformUtil.getLog(MenuBuilder.class);
 	public static final float SHADOW_HEIGHT_TOP_DP = 17f;
@@ -154,56 +146,16 @@ public class MenuBuilder {
 
 	private final List<OsmandPlugin> menuPlugins = new ArrayList<>();
 
-	private GalleryController galleryController;
 	@Nullable
 	private GalleryRowBuilder onlinePhotosRow;
-	private List<GalleryItem> onlinePhotoItems;
+	private OnlinePhotosFlow onlinePhotosFlow;
 
 	private CollapseExpandListener collapseExpandListener;
-	private GetOnlineImagesTask getOnlineImagesTask;
 	private final List<SearchAmenitiesTask> searchAmenitiesTasks = new ArrayList<>();
 
 	private final String preferredMapLang;
 	private String preferredMapAppLang;
 	private final boolean transliterateNames;
-	private final GetImageCardsListener imageCardListener = new GetImageCardsListener() {
-		@Override
-		public void onTaskStarted() {
-			if (!isHidden()) {
-				onLoadingImages(true);
-				PluginsHelper.onGetImageCardsStart();
-			}
-		}
-
-		@Override
-		public void onFinish(OnlinePhotosHolder mediaHolder) {
-			if (!isHidden()) {
-				onLoadingImages(false);
-				if (galleryController != null) {
-					galleryController.setItemsHolder(mediaHolder);
-				}
-				setOnlinePhotoItems(mediaHolder.getOrderedGalleryItems());
-				PluginsHelper.onGetImageCardsFinished(mediaHolder);
-			}
-		}
-	};
-
-	private void setOnlinePhotoItems(@NonNull List<GalleryItem> onlinePhotoItems) {
-		List<GalleryItem> items = new ArrayList<>(onlinePhotoItems);
-		if (onlinePhotoItems.isEmpty() && mapActivity != null) {
-			items.add(new GalleryItem.NoMedia());
-		}
-		if (onlinePhotosRow != null) {
-			onlinePhotosRow.setItems(items);
-		}
-		this.onlinePhotoItems = items;
-	}
-
-	private void onLoadingImages(boolean loading) {
-		if (onlinePhotosRow != null) {
-			onlinePhotosRow.onLoadingImage(loading);
-		}
-	}
 
 	public interface CollapseExpandListener {
 		void onCollapseExpand(boolean collapsed);
@@ -215,7 +167,7 @@ public class MenuBuilder {
 		this.customization = app.getAppCustomization();
 		this.menuRowBuilder = new MenuRowBuilder(mapActivity);
 		this.plainMenuItems = new LinkedList<>();
-		this.galleryController = (GalleryController) app.getDialogManager().findController(GalleryController.PROCESS_ID);
+		this.onlinePhotosFlow = new OnlinePhotosFlow(app, this);
 
 		preferredMapLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
 		preferredMapAppLang = preferredMapLang;
@@ -381,11 +333,16 @@ public class MenuBuilder {
 	}
 
 	public void buildPhotosRow(@NonNull ViewGroup view, @Nullable Object object) {
-		galleryController = (GalleryController) app.getDialogManager().findController(GalleryController.PROCESS_ID);
-		if (customization.isFeatureEnabled(CONTEXT_MENU_ONLINE_PHOTOS_ID) && showOnlinePhotos && galleryController != null) {
+		GalleryController galleryController = onlinePhotosFlow.getGalleryController();
+		if (customization.isFeatureEnabled(CONTEXT_MENU_ONLINE_PHOTOS_ID)
+				&& showOnlinePhotos && galleryController != null) {
 			buildOnlinePhotosRow(view);
 			buildPluginGalleryRows(view, object);
 		}
+	}
+
+	public void startLoadingImages() {
+		onlinePhotosFlow.startLoadingImages();
 	}
 
 	private boolean showTransportRoutes() {
@@ -408,12 +365,8 @@ public class MenuBuilder {
 
 	void onClose() {
 		onlinePhotosRow = null;
-		onlinePhotoItems = null;
-		if (galleryController != null) {
-			galleryController.clearHolder();
-		}
+		onlinePhotosFlow.clear();
 		clearPluginRows();
-		stopLoadingImagesTask();
 		stopSearchAmenitiesTasks();
 	}
 
@@ -663,6 +616,9 @@ public class MenuBuilder {
 
 	protected void buildOnlinePhotosRow(@NonNull View view) {
 		boolean needUpdateOnly = onlinePhotosRow != null && onlinePhotosRow.getMenuBuilder() == this;
+		GalleryController galleryController = onlinePhotosFlow.getGalleryController();
+		if (galleryController == null) return;
+
 		onlinePhotosRow = new GalleryRowBuilder(this);
 		onlinePhotosRow.build(galleryController, new GalleryGridConfig(), isNightMode());
 
@@ -673,7 +629,7 @@ public class MenuBuilder {
 		parent.addView(onlinePhotosRow.getGalleryView());
 		CollapsableView collapsableView = new CollapsableView(parent, this, app.getSettings().ONLINE_PHOTOS_ROW_COLLAPSED);
 		collapsableView.setCollapseExpandListener(collapsed -> {
-			if (!collapsed && onlinePhotoItems == null) {
+			if (!collapsed && !onlinePhotosFlow.hasCurrentGalleryItems() && !onlinePhotosFlow.isLoading()) {
 				startLoadingImages();
 			}
 		});
@@ -682,9 +638,12 @@ public class MenuBuilder {
 				.setCollapsable(true).setCollapsableView(collapsableView)
 				.setTextLinesLimit(1).build());
 
+		List<GalleryItem> onlinePhotoItems = onlinePhotosFlow.getCurrentGalleryItems();
 		if (needUpdateOnly && onlinePhotoItems != null) {
 			onlinePhotosRow.setItems(onlinePhotoItems);
-		} else if (!collapsableView.isCollapsed() && onlinePhotoItems == null) {
+		} else if (!collapsableView.isCollapsed()
+				&& !onlinePhotosFlow.hasCurrentGalleryItems()
+				&& !onlinePhotosFlow.isLoading()) {
 			startLoadingImages();
 		}
 	}
@@ -698,69 +657,6 @@ public class MenuBuilder {
 				.setTextLinesLimit(1).build());
 	}
 
-	public void startLoadingImages() {
-		startLoadingImagesTask();
-	}
-
-	private void startLoadingImagesTask() {
-		if (galleryController == null) {
-			return;
-		}
-
-		onlinePhotoItems = new ArrayList<>();
-		LatLon latLon = getLatLon();
-		Map<String, String> params = getAdditionalImageParams();
-
-		PhotoCacheManager cacheManager = new PhotoCacheManager(app);
-		WikiHelper.WikiTagData wikiTagData = WikiHelper.INSTANCE.extractWikiTagData(params);
-		String wikidataId = wikiTagData.getWikidataId();
-		String wikiCategory = wikiTagData.getWikiCategory();
-		String wikiTitle = wikiTagData.getWikiTitle();
-		String rawKey = PhotoCacheManager.buildRawKey(wikidataId, wikiCategory, wikiTitle);
-
-		if (galleryController.isCurrentHolderEquals(latLon, params)) {
-			imageCardListener.onFinish(galleryController.getItemsHolder());
-		} else if(!app.getSettings().isInternetConnectionAvailable()){
-			loadFromCache(cacheManager, rawKey, params, wikiTagData, latLon);
-		} else {
-			stopLoadingImagesTask();
-			galleryController.clearHolder();
-			getOnlineImagesTask = new GetOnlineImagesTask(app, getLatLon(),
-					getAdditionalImageParams(), imageCardListener,
-					response -> savePhotoListToCache(cacheManager, rawKey, response));
-			OsmAndTaskManager.executeTask(getOnlineImagesTask);
-		}
-	}
-
-	private void savePhotoListToCache(@NonNull PhotoCacheManager cacheManager, @NonNull String rawKey, @NonNull String response){
-		if (!Algorithms.isEmpty(response)) {
-			CacheWriteTask cacheWriteTask = new CacheWriteTask(cacheManager, rawKey, response);
-			OsmAndTaskManager.executeTask(cacheWriteTask);
-		}
-	}
-
-	private void loadFromCache(@NonNull PhotoCacheManager cacheManager, @NonNull String rawKey,
-	                           @NonNull Map<String, String> params, @NonNull WikiHelper.WikiTagData wikiTagData,
-	                           @NonNull LatLon latLon){
-		if (cacheManager.exists(rawKey)) {
-			imageCardListener.onTaskStarted();
-			CacheReadTask cacheReadTask = new CacheReadTask(cacheManager, rawKey, json -> {
-				if (!Algorithms.isEmpty(json)) {
-					OnlinePhotosHolder holder = new OnlinePhotosHolder(latLon, params);
-					List<WikiImage> wikimediaImageList = WikiCoreHelper.INSTANCE.getImagesFromJson(json, wikiTagData.getWikiImages());
-					for (WikiImage wikiImage : wikimediaImageList) {
-						holder.addMediaItem(WIKIMEDIA, RemoteMediaFactory.fromWikiImage(wikiImage));
-					}
-					imageCardListener.onFinish(holder);
-				} else {
-					imageCardListener.onFinish(null);
-				}
-				return true;
-			});
-			OsmAndTaskManager.executeTask(cacheReadTask);
-		}
-	}
-
 	private void stopSearchAmenitiesTasks() {
 		if (!Algorithms.isEmpty(searchAmenitiesTasks)) {
 			for (SearchAmenitiesTask task : searchAmenitiesTasks) {
@@ -772,13 +668,33 @@ public class MenuBuilder {
 		}
 	}
 
-	private void stopLoadingImagesTask() {
-		if (getOnlineImagesTask != null && getOnlineImagesTask.getStatus() == AsyncTask.Status.RUNNING) {
-			getOnlineImagesTask.cancel(false);
+	@Override
+	public void onPhotosLoadStarted() {
+		if (!isHidden()) {
+			onLoadingImages(true);
+			PluginsHelper.onGetImageCardsStart();
 		}
 	}
 
-	protected Map<String, String> getAdditionalImageParams() {
+	@Override
+	public void onPhotosLoadFinished(@NonNull OnlinePhotosHolder holder) {
+		if (!isHidden()) {
+			onLoadingImages(false);
+			List<GalleryItem> galleryItems = onlinePhotosFlow.getCurrentGalleryItems();
+			if (onlinePhotosRow != null && galleryItems != null) {
+				onlinePhotosRow.setItems(galleryItems);
+			}
+			PluginsHelper.onGetImageCardsFinished(holder);
+		}
+	}
+
+	private void onLoadingImages(boolean loading) {
+		if (onlinePhotosRow != null) {
+			onlinePhotosRow.onLoadingImage(loading);
+		}
+	}
+
+	public Map<String, String> getAdditionalImageParams() {
 		return Collections.emptyMap();
 	}
 
@@ -1732,7 +1648,7 @@ public class MenuBuilder {
 		return menuRowBuilder.isLightContent();
 	}
 
-	protected boolean isNightMode() {
+	public boolean isNightMode() {
 		return app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 	}
 }
