@@ -11,8 +11,8 @@ import java.util.*;
 import java.util.Map.Entry;
 
 public class CommonWords {
-	private static Map<String, Integer> commonWordsDictionary = new LinkedHashMap<>(); 
-	private static Map<String, Integer> frequentlyUsedWordsDictionary = new LinkedHashMap<>();
+	protected static Map<String, Integer> commonWordsDictionary = new LinkedHashMap<>(); 
+	protected static Map<String, Integer> frequentlyUsedWordsDictionary = new LinkedHashMap<>();
 	private static Set<String> regionNames = new HashSet<>();
 	
 	// for ex: 100 bridge, ленина 30, but not potenitally name of street (31st road)
