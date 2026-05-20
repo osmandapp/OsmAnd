@@ -101,7 +101,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		ReadPointDescriptionFragment.showInstance(mapActivity, description);
 	}
 
-	protected Map<String, String> getAdditionalImageParams() {
+	public Map<String, String> getAdditionalImageParams() {
 		return AmenityExtensionsHelper.getImagesParams(amenityExtensions);
 	}
 
