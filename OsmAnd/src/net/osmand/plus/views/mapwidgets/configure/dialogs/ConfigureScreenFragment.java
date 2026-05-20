@@ -27,6 +27,7 @@ import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment;
 import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment.AppModeChangedListener;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
+import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -40,8 +41,10 @@ import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.configure.WidgetsSettingsHelper;
+import net.osmand.plus.views.mapwidgets.configure.buttons.AndroidAutoMapButtonFragment;
 import net.osmand.plus.views.mapwidgets.configure.buttons.CustomMapButtonsFragment;
 import net.osmand.plus.views.mapwidgets.configure.buttons.DefaultMapButtonsFragment;
+import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.cards.ConfigureActionsCard;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.cards.ConfigureButtonsCard;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.cards.MapScreenLayoutCard;
@@ -322,6 +325,11 @@ public class ConfigureScreenFragment extends BaseFullScreenFragment implements C
 		} else if (card instanceof ConfigureButtonsCard) {
 			if (buttonIndex == ConfigureButtonsCard.CUSTOM_MAP_BUTTONS_INDEX) {
 				CustomMapButtonsFragment.showInstance(manager, ConfigureScreenFragment.this);
+			} else if (buttonIndex == ConfigureButtonsCard.AAUTO_CUSTOM_MAP_BUTTON_INDEX) {
+				QuickActionButtonState state = app.getMapButtonsHelper().getAndroidAutoButtonState();
+				if (state != null) {
+					QuickActionListFragment.showInstance(mapActivity, state);
+				}
 			} else if (buttonIndex == ConfigureButtonsCard.DEFAULT_MAP_BUTTONS_INDEX) {
 				DefaultMapButtonsFragment.showInstance(manager, ConfigureScreenFragment.this);
 			}

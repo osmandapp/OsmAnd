@@ -26,7 +26,8 @@ public class ShowHideWeatherLayersAction extends QuickAction {
 			.nameActionRes(R.string.quick_action_verb_show_hide)
 			.nameRes(R.string.weather_layers)
 			.iconRes(R.drawable.ic_action_umbrella).nonEditable()
-			.category(QuickActionType.CONFIGURE_MAP);
+			.category(QuickActionType.CONFIGURE_MAP)
+			.allowedInAndroidAuto(true);
 
 	public ShowHideWeatherLayersAction() {
 		super(TYPE);

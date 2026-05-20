@@ -12,6 +12,10 @@
 		layout="@layout/configure_screen_list_item" />
 
 	<include
+		android:id="@+id/aauto_custom_button"
+		layout="@layout/configure_screen_list_item" />
+
+	<include
 		android:id="@+id/default_buttons"
 		layout="@layout/configure_screen_list_item" />
 

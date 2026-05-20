@@ -14,7 +14,8 @@ public class ShowHideAirPressureLayerAction extends BaseWeatherQuickAction {
 			.nameActionRes(R.string.quick_action_verb_show_hide)
 			.nameRes(R.string.pressure_layer)
 			.iconRes(R.drawable.ic_action_air_pressure).nonEditable()
-			.category(QuickActionType.CONFIGURE_MAP);
+			.category(QuickActionType.CONFIGURE_MAP)
+			.allowedInAndroidAuto(true);
 
 	public ShowHideAirPressureLayerAction() {
 		super(TYPE);
