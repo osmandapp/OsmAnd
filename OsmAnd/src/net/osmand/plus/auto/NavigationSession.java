@@ -640,7 +640,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 			this.navigationManager.setNavigationManagerCallback(new NavigationManagerCallback() {
 				@Override
 				public void onStopNavigation() {
-					if (!routingHelper.isRouteCalculated() || !routingHelper.isFollowingMode()) {
+					if (routingHelper.isRouteCalculated() && routingHelper.isFollowingMode()) {
 						getApp().stopNavigation();
 					}
 					carNavigationShouldBeActive = false;
