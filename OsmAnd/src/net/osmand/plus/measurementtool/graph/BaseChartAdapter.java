@@ -18,6 +18,9 @@ import androidx.annotation.Nullable;
 public abstract class BaseChartAdapter<_Chart extends Chart<_ChartData>, _ChartData extends ChartData<?>, _Data> {
 
 	private Highlight lastKnownHighlight;
+	private Chart lastKnownHighlightSourceChart;
+	private float lastKnownHighlightValue;
+	private boolean highlightByValueFromTouchX;
 	protected OsmandApplication app;
 	protected _Chart chart;
 	protected _ChartData chartData;
@@ -44,11 +47,29 @@ public abstract class BaseChartAdapter<_Chart extends Chart<_ChartData>, _ChartD
 	}
 
 	protected void updateHighlight() {
-		highlight(lastKnownHighlight);
+		highlight(lastKnownHighlight, lastKnownHighlightSourceChart, lastKnownHighlightValue);
 	}
 
 	public void highlight(Highlight h) {
+		highlight(h, null);
+	}
+
+	public void highlight(Highlight h, @Nullable Chart sourceChart) {
+		highlight(h, sourceChart, h != null ? h.getXPx() : 0);
+	}
+
+	public void highlight(Highlight h, @Nullable Chart sourceChart, float value) {
 		this.lastKnownHighlight = h;
+		this.lastKnownHighlightSourceChart = sourceChart;
+		this.lastKnownHighlightValue = value;
+	}
+
+	public boolean isHighlightByValueFromTouchX() {
+		return highlightByValueFromTouchX;
+	}
+
+	public void setHighlightByValueFromTouchX(boolean highlightByValueFromTouchX) {
+		this.highlightByValueFromTouchX = highlightByValueFromTouchX;
 	}
 
 	public void updateContent(_ChartData chartData, _Data data) {
