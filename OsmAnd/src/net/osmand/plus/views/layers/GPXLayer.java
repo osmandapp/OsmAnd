@@ -111,6 +111,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private static final int START_ZOOM = 7;
 	private static final int MAX_SUPPORTED_TRACK_WIDTH_DP = 48;
 	private static final long MANY_POINTS_VISIBLE_WARNING_THRESHOLD = 500_000L;
+	public static final int INVALID_EXTRA_ID = -1;
+	private static final int SPLIT_LABEL_EXTRA_ID_START = 1_000_000_000;
 
 	private Paint paint;
 	private Paint borderPaint;
@@ -174,6 +176,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	//OpenGl
 	private List<GpxAdditionalIconsProvider> additionalIconsProviders = new ArrayList<>();
+	private final Map<Integer, SelectedGpxPoint> splitLabelPointsByExtraId = new HashMap<>();
+	private int nextSplitLabelExtraId = SPLIT_LABEL_EXTRA_ID_START;
 	private int startFinishPointsCountCached;
 	private int splitLabelsCountCached;
 	private int pointCountCached;
@@ -640,8 +644,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
 				QListPointI startFinishPoints = new QListPointI();
 				QListInt startFinishExtraIds = new QListInt();
-				startFinishExtraIds.add(0);
-				startFinishExtraIds.add(0);
 				SplitLabelList splitLabels = new SplitLabelList();
 
 				GpxFile gpxFile = selectedGpxFile.getGpxFile();
@@ -666,7 +668,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 								startFinishHeights.add((float) Gpx3DVisualizationType.getPointElevation(finish, track3DStyle, heightmapsActive));
 							}
 							startFinishPoints.add(new PointI(Utilities.get31TileNumberX(start.getLon()), Utilities.get31TileNumberY(start.getLat())));
+							startFinishExtraIds.add(INVALID_EXTRA_ID);
 							startFinishPoints.add(new PointI(Utilities.get31TileNumberX(finish.getLon()), Utilities.get31TileNumberY(finish.getLat())));
+							startFinishExtraIds.add(INVALID_EXTRA_ID);
 						}
 					}
 				}
@@ -681,12 +685,13 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 						if (name != null) {
 							SplitLabel splitLabel;
+							int extraId = registerSplitLabel(selectedGpxFile, item);
 							PointI point31 = new PointI(Utilities.get31TileNumberX(point.getLon()), Utilities.get31TileNumberY(point.getLat()));
 							if (visualizationType == Gpx3DVisualizationType.NONE || trackLinePosition != Gpx3DLinePositionType.TOP) {
-								splitLabel = new SplitLabel(point31, name, NativeUtilities.createColorARGB(color, 179), 0);
+								splitLabel = new SplitLabel(point31, name, NativeUtilities.createColorARGB(color, 179), extraId);
 							} else {
 								float labelHeight = (float) Gpx3DVisualizationType.getPointElevation(point, track3DStyle, heightmapsActive);
-								splitLabel = new SplitLabel(point31, name, NativeUtilities.createColorARGB(color, 179), 0, labelHeight);
+								splitLabel = new SplitLabel(point31, name, NativeUtilities.createColorARGB(color, 179), extraId, labelHeight);
 							}
 							splitLabels.add(splitLabel);
 						}
@@ -744,6 +749,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private void clearSelectedFilesSplits() {
+		splitLabelPointsByExtraId.clear();
+		nextSplitLabelExtraId = SPLIT_LABEL_EXTRA_ID_START;
+
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null && !Algorithms.isEmpty(additionalIconsProviders)) {
 			List<GpxAdditionalIconsProvider> oldProviders = additionalIconsProviders;
@@ -752,6 +760,38 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				mapRenderer.removeSymbolsProvider(provider);
 			}
 		}
+	}
+
+	public boolean collectSplitLabelByExtraId(int extraId, @NonNull MapSelectionResult result) {
+		SelectedGpxPoint gpxPoint = splitLabelPointsByExtraId.get(extraId);
+		if (gpxPoint == null) {
+			return false;
+		}
+		collectSplitLabel(result, gpxPoint);
+		return true;
+	}
+
+	private int registerSplitLabel(@NonNull SelectedGpxFile selectedGpxFile, @NonNull GpxDisplayItem item) {
+		int extraId = nextSplitLabelExtraId++;
+		splitLabelPointsByExtraId.put(extraId,
+				new SelectedGpxPoint(selectedGpxFile, item.getLabelPoint(), null, null, Float.NaN, true));
+		return extraId;
+	}
+
+	private void collectSplitLabel(@NonNull MapSelectionResult result, @NonNull SelectedGpxPoint gpxPoint) {
+		for (SelectedMapObject selectedObject : result.getAllObjects()) {
+			if (selectedObject.object() == gpxPoint) {
+				return;
+			}
+		}
+		removeCollectedGpxTrackPoints(result);
+		result.collect(gpxPoint, this);
+		result.setObjectLatLon(getObjectLocation(gpxPoint));
+	}
+
+	private void removeCollectedGpxTrackPoints(@NonNull MapSelectionResult result) {
+		result.getAllObjects().removeIf(selectedObject ->
+				selectedObject.provider() == this && selectedObject.object() instanceof SelectedGpxPoint);
 	}
 
 	@Nullable
