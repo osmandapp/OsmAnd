@@ -1205,6 +1205,9 @@ public class MenuBuilder {
 			} else if (line.getKey() == OsmAndFormatter.SWISS_GRID_PLUS_FORMAT) {
 				ssb.append("CH1903+: ");
 				ssb.setSpan(new ForegroundColorSpan(getColor(R.color.text_color_secondary_light)), 0, 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+			} else if (line.getKey() == OsmAndFormatter.MAIDENHEAD_FORMAT) {
+				ssb.append("Maidenhead: ");
+				ssb.setSpan(new ForegroundColorSpan(getColor(R.color.text_color_secondary_light)), 0, 12, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 			}
 			ssb.append(line.getValue());
 			button.setText(ssb);

@@ -15,7 +15,8 @@ public enum GridFormat implements EnumWithTitleId {
 	DM(LocationConvert.FORMAT_MINUTES, R.string.dd_mm_mmm_format),
 	DIGITAL(LocationConvert.FORMAT_DEGREES, R.string.dd_ddddd_format),
 	UTM(LocationConvert.UTM_FORMAT, R.string.navigate_point_format_utm),
-	MGRS(LocationConvert.MGRS_FORMAT, R.string.navigate_point_format_mgrs);
+	MGRS(LocationConvert.MGRS_FORMAT, R.string.navigate_point_format_mgrs),
+	MAIDENHEAD(LocationConvert.MAIDENHEAD_FORMAT, R.string.navigate_point_format_maidenhead);
 
 	private final int id;
 	private final int titleId;
@@ -36,6 +37,7 @@ public enum GridFormat implements EnumWithTitleId {
 			case DMS, DM, DIGITAL -> Projection.WGS84;
 			case UTM -> Projection.UTM;
 			case MGRS -> Projection.MGRS;
+			case MAIDENHEAD -> Projection.WGS84;
 			default -> throw new IllegalArgumentException("Unknown GridFormat: " + this);
 		};
 	}
@@ -46,13 +48,13 @@ public enum GridFormat implements EnumWithTitleId {
 			case DMS -> Format.DMS;
 			case DM -> Format.DM;
 			case DIGITAL -> Format.Decimal;
-			case UTM, MGRS -> Format.values()[0];
+			case UTM, MGRS, MAIDENHEAD -> Format.values()[0];
 			default -> throw new IllegalArgumentException("Unknown GridFormat: " + this);
 		};
 	}
 
 	public boolean needSuffixes() {
-		return !CollectionUtils.equalsToAny(this, UTM, MGRS);
+		return !CollectionUtils.equalsToAny(this, UTM, MGRS, MAIDENHEAD);
 	}
 
 	@NonNull

@@ -37,6 +37,7 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 	private static final String OLC_FORMAT = "olc_format";
 	private static final String SWISS_GRID_FORMAT = "swiss_grid_format";
 	private static final String SWISS_GRID_PLUS_FORMAT = "swiss_grid_plus_format";
+	private static final String MAIDENHEAD_FORMAT = "maidenhead_format";
 
 	@Override
 	protected void setupPreferences() {
@@ -48,6 +49,7 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 		CheckBoxPreference olcPref = findPreference(OLC_FORMAT);
 		CheckBoxPreference swissGridPref = findPreference(SWISS_GRID_FORMAT);
 		CheckBoxPreference swissGridPlusPref = findPreference(SWISS_GRID_PLUS_FORMAT);
+		CheckBoxPreference maidenheadPref = findPreference(MAIDENHEAD_FORMAT);
 
 		Location loc = app.getLocationProvider().getLastKnownLocation();
 
@@ -59,6 +61,7 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 		olcPref.setSummary(getCoordinatesFormatSummary(loc, PointDescription.OLC_FORMAT));
 		swissGridPref.setSummary(getCoordinatesFormatSummary(loc, PointDescription.SWISS_GRID_FORMAT));
 		swissGridPlusPref.setSummary(getCoordinatesFormatSummary(loc, PointDescription.SWISS_GRID_PLUS_FORMAT));
+		maidenheadPref.setSummary(getCoordinatesFormatSummary(loc, PointDescription.MAIDENHEAD_FORMAT));
 
 		int currentFormat = settings.COORDINATES_FORMAT.getModeValue(getSelectedAppMode());
 		String currentPrefKey = getCoordinatesKeyForFormat(currentFormat);
@@ -76,6 +79,12 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 			}
 		}
 		if (MGRS_FORMAT.equals(preference.getKey())) {
+			TextView summaryView = (TextView) holder.findViewById(android.R.id.summary);
+			if (summaryView != null) {
+				summaryView.setOnTouchListener(new ClickableSpanTouchListener());
+			}
+		}
+		if (MAIDENHEAD_FORMAT.equals(preference.getKey())) {
 			TextView summaryView = (TextView) holder.findViewById(android.R.id.summary);
 			if (summaryView != null) {
 				summaryView.setOnTouchListener(new ClickableSpanTouchListener());
@@ -129,6 +138,30 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 					Context ctx = getContext();
 					if (ctx != null) {
 						AndroidUtils.openUrl(ctx, R.string.url_wikipedia_mgrs_format, isNightMode());
+					}
+				}
+			};
+			spannableBuilder.setSpan(clickableSpan, start, spannableBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+			return spannableBuilder;
+		}
+		if (format == PointDescription.MAIDENHEAD_FORMAT) {
+			SpannableStringBuilder spannableBuilder = new SpannableStringBuilder();
+			String combined = getString(R.string.ltr_or_rtl_combine_via_colon, getString(R.string.shared_string_example), formattedCoordinates);
+			spannableBuilder.append(combined);
+			spannableBuilder.append("\n");
+			spannableBuilder.append(getString(R.string.maidenhead_format_descr));
+
+			int start = spannableBuilder.length();
+			spannableBuilder.append(" ");
+			spannableBuilder.append(getString(R.string.shared_string_read_more));
+
+			ClickableSpan clickableSpan = new CustomClickableSpan() {
+				@Override
+				public void onClick(@NonNull View widget) {
+					Context ctx = getContext();
+					if (ctx != null) {
+						AndroidUtils.openUrl(ctx, "https://en.wikipedia.org/wiki/Maidenhead_Locator_System", isNightMode());
 					}
 				}
 			};
@@ -197,6 +230,8 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 				return PointDescription.SWISS_GRID_FORMAT;
 			case SWISS_GRID_PLUS_FORMAT:
 				return PointDescription.SWISS_GRID_PLUS_FORMAT;
+			case MAIDENHEAD_FORMAT:
+				return PointDescription.MAIDENHEAD_FORMAT;
 			default:
 				return -1;
 		}
@@ -220,6 +255,8 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 				return SWISS_GRID_FORMAT;
 			case PointDescription.SWISS_GRID_PLUS_FORMAT:
 				return SWISS_GRID_PLUS_FORMAT;
+			case PointDescription.MAIDENHEAD_FORMAT:
+				return MAIDENHEAD_FORMAT;
 			default:
 				return "Unknown format";
 		}

@@ -101,6 +101,7 @@ public class OsmAndFormatter {
 	public static final int MGRS_FORMAT = LocationConvert.MGRS_FORMAT;
 	public static final int SWISS_GRID_FORMAT = LocationConvert.SWISS_GRID_FORMAT;
 	public static final int SWISS_GRID_PLUS_FORMAT = LocationConvert.SWISS_GRID_PLUS_FORMAT;
+	public static final int MAIDENHEAD_FORMAT = LocationConvert.MAIDENHEAD_FORMAT;
 	private static final char DELIMITER_DEGREES = '°';
 	private static final char DELIMITER_MINUTES = '\'';
 	private static final char DELIMITER_SECONDS = '″';
@@ -960,11 +961,35 @@ public class OsmAndFormatter {
 			formatSymbols.setGroupingSeparator(' ');
 			DecimalFormat swissGridFormat = new DecimalFormat("###,###.##", formatSymbols);
 			result.append(swissGridFormat.format(swissGrid[0])).append(", ").append(swissGridFormat.format(swissGrid[1]));
+		} else if (outputFormat == MAIDENHEAD_FORMAT) {
+			result.append(toMaidenhead(lat, lon));
 		}
 		String formattedCoordinates = result.toString();
 		return forceLTR ? TextDirectionUtil.markAsLTR(formattedCoordinates) : formattedCoordinates;
 	}
 
+
+	private static String toMaidenhead(double lat, double lon) {
+		lon += 180.0;
+		lat += 90.0;
+		lon = Math.max(0, Math.min(lon, 360.0 - 1e-6));
+		lat = Math.max(0, Math.min(lat, 180.0 - 1e-6));
+		StringBuilder sb = new StringBuilder();
+		int lonField = (int) (lon / 20);
+		int latField = (int) (lat / 10);
+		lon -= lonField * 20;
+		lat -= latField * 10;
+		sb.append((char) ('A' + lonField)).append((char) ('A' + latField));
+		int lonSquare = (int) (lon / 2);
+		int latSquare = (int) (lat / 1);
+		lon -= lonSquare * 2;
+		lat -= latSquare * 1;
+		sb.append((char) ('0' + lonSquare)).append((char) ('0' + latSquare));
+		int lonSub = (int) (lon * 12);
+		int latSub = (int) (lat * 24);
+		sb.append((char) ('a' + lonSub)).append((char) ('a' + latSub));
+		return sb.toString();
+	}
 
 	private static String formatCoordinate(double coordinate, int outputType) {
 
