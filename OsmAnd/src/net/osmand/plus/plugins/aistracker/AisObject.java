@@ -85,6 +85,7 @@ public class AisObject {
     private SortedSet<Integer> msgTypes = null;
     private AisObjType objectClass;
     private Cpa cpa;
+    public static final float SPEED_CONSIDERED_IN_REST = 0.4f; // in knots: vessels up to this speed are considered as "in rest"
 
     /* timestamp of last AIS message received for the current instance: */
     private long lastUpdate = 0;
@@ -225,11 +226,20 @@ public class AisObject {
             case 22: // WIG, Hazardous category B
             case 23: // WIG, Hazardous category C
             case 24: // WIG, Hazardous category D
+            case 25: // WIG, Reserved for future use
+            case 26: // WIG, Reserved for future use
+            case 27: // WIG, Reserved for future use
+            case 28: // WIG, Reserved for future use
+            case 29: // WIG, Reserved for future use
             case 40: // High Speed Craft (HSC)
             case 41: // HSC, Hazardous category A
             case 42: // HSC, Hazardous category B
             case 43: // HSC, Hazardous category C
             case 44: // HSC, Hazardous category D
+            case 45: // HSC, Reserved for future use
+            case 46: // HSC, Reserved for future use
+            case 47: // HSC, Reserved for future use
+            case 48: // HSC, Reserved for future use
             case 49: // HSC, No additional information
                 this.objectClass = AIS_VESSEL_FAST;
                 break;
@@ -269,6 +279,10 @@ public class AisObject {
             case 62: // Passenger, Hazardous category B
             case 63: // Passenger, Hazardous category C
             case 64: // Passenger, Hazardous category D
+            case 65: // Passenger, Reserved for future use
+            case 66: // Passenger, Reserved for future use
+            case 67: // Passenger, Reserved for future use
+            case 68: // Passenger, Reserved for future use
             case 69: // Passenger, No additional information
                 this.objectClass = AIS_VESSEL_PASSENGER;
                 break;
@@ -278,12 +292,20 @@ public class AisObject {
             case 72: // Cargo, Hazardous category B
             case 73: // Cargo, Hazardous category C
             case 74: // Cargo, Hazardous category D
+            case 75: // Cargo, Reserved for future use
+            case 76: // Cargo, Reserved for future use
+            case 77: // Cargo, Reserved for future use
+            case 78: // Cargo, Reserved for future use
             case 79: // Cargo, No additional information
             case 80: // Tanker, all ships of this type
             case 81: // Tanker, Hazardous category A
             case 82: // Tanker, Hazardous category B
             case 83: // Tanker, Hazardous category C
             case 84: // Tanker, Hazardous category D
+            case 85: // Tanker, Reserved for future use
+            case 86: // Tanker, Reserved for future use
+            case 87: // Tanker, Reserved for future use
+            case 88: // Tanker, Reserved for future use
             case 89: // Tanker, No additional information
                 this.objectClass = AIS_VESSEL_FREIGHT;
                 break;
@@ -293,6 +315,10 @@ public class AisObject {
             case 92: // Other Type, Hazardous category B
             case 93: // Other Type, Hazardous category C
             case 94: // Other Type, Hazardous category D
+            case 95: // Other Type, Reserved for future use
+            case 96: // Other Type, Reserved for future use
+            case 97: // Other Type, Reserved for future use
+            case 98: // Other Type, Reserved for future use
             case 99: // Other Type, no additional information
             default:
                 this.objectClass = AIS_VESSEL_OTHER;
@@ -579,11 +605,16 @@ public class AisObject {
     public String getShipTypeString() {
 		return switch (this.ais_shipType) {
 			case INVALID_SHIP_TYPE -> "unknown"; // not initialized
-			case 20 -> "Wing in ground (WIG)";
+            case 20 -> "Wing in ground (WIG)";
 			case 21 -> "WIG, Hazardous category A";
 			case 22 -> "WIG, Hazardous category B";
 			case 23 -> "WIG, Hazardous category C";
 			case 24 -> "WIG, Hazardous category D";
+            case 25 -> "Wing in ground (WIG)";
+            case 26 -> "Wing in ground (WIG)";
+            case 27 -> "Wing in ground (WIG)";
+            case 28 -> "Wing in ground (WIG)";
+            case 29 -> "Wing in ground (WIG)";
 			case 30 -> "Fishing";
 			case 31 -> "Towing";
 			case 32 -> "Towing";
@@ -597,7 +628,11 @@ public class AisObject {
 			case 42 -> "HSC, Hazardous category B";
 			case 43 -> "HSC, Hazardous category C";
 			case 44 -> "HSC, Hazardous category D";
-			case 49 -> "High Speed Craft (HSC)"; // HSC, No additional information
+            case 45 -> "High Speed Craft (HSC)"; // HSC, Reserved for future use
+            case 46 -> "High Speed Craft (HSC)"; // HSC, Reserved for future use
+            case 47 -> "High Speed Craft (HSC)"; // HSC, Reserved for future use
+            case 48 -> "High Speed Craft (HSC)"; // HSC, Reserved for future use
+			case 49 -> "High Speed Craft (HSC)"; // HSC, Reserved for future use
 			case 50 -> "Pilot Vessel";
 			case 51 -> "Search and Rescue vessel";
 			case 52 -> "Tug";
@@ -613,24 +648,40 @@ public class AisObject {
 			case 62 -> "Passenger, Hazardous category B";
 			case 63 -> "Passenger, Hazardous category C";
 			case 64 -> "Passenger, Hazardous category D";
+            case 65 -> "Passenger/Cruise/Ferry"; // Passenger, reserved for future use
+            case 66 -> "Passenger/Cruise/Ferry"; // Passenger, reserved for future use
+            case 67 -> "Passenger/Cruise/Ferry"; // Passenger, reserved for future use
+            case 68 -> "Passenger/Cruise/Ferry"; // Passenger, reserved for future use
 			case 69 -> "Passenger/Cruise/Ferry"; // Passenger, No additional information
 			case 70 -> "Cargo"; // Cargo, all ships of this type
 			case 71 -> "Cargo, Hazardous category A";
 			case 72 -> "Cargo, Hazardous category B";
 			case 73 -> "Cargo, Hazardous category C";
 			case 74 -> "Cargo, Hazardous category D";
+            case 75 -> "Cargo"; // Cargo, reserved for future use
+            case 76 -> "Cargo"; // Cargo, reserved for future use
+            case 77 -> "Cargo"; // Cargo, reserved for future use
+            case 78 -> "Cargo"; // Cargo, reserved for future use
 			case 79 -> "Cargo"; // Cargo, No additional information
 			case 80 -> "Tanker"; // Tanker, all ships of this type
 			case 81 -> "Tanker, Hazardous category A";
 			case 82 -> "Tanker, Hazardous category B";
 			case 83 -> "Tanker, Hazardous category C";
 			case 84 -> "Tanker, Hazardous category D";
+            case 85 -> "Tanker"; // Tanker, reserved for future use
+            case 86 -> "Tanker"; // Tanker, reserved for future use
+            case 87 -> "Tanker"; // Tanker, reserved for future use
+            case 88 -> "Tanker"; // Tanker, reserved for future use
 			case 89 -> "Tanker"; // Tanker, No additional information
 			case 90 -> "Other Type"; // Other Type, all ships of this type
 			case 91 -> "Other Type, Hazardous category A";
 			case 92 -> "Other Type, Hazardous category B";
 			case 93 -> "Other Type, Hazardous category C";
 			case 94 -> "Other Type, Hazardous category D";
+            case 95 -> "Other Type"; // Other Type, reserved for future use
+            case 96 -> "Other Type"; // Other Type, reserved for future use
+            case 97 -> "Other Type"; // Other Type, reserved for future use
+            case 98 -> "Other Type"; // Other Type, reserved for future use
 			case 99 -> "Other Type"; // Other Type, no additional information
 			default -> Integer.toString(ais_shipType);
 		};
@@ -751,9 +802,9 @@ public class AisObject {
         };
     }
 
-    /* return true if a vessel is moored etc. */
+    /* return true if a vessel is moored etc. and needs to be drawn as a circle */
     public boolean isVesselAtRest() {
-        switch (objectClass) {
+        switch (this.objectClass) {
             case AIS_VESSEL:
             case AIS_VESSEL_SPORT:
             case AIS_VESSEL_FAST:
@@ -763,16 +814,18 @@ public class AisObject {
             case AIS_VESSEL_AUTHORITIES:
             case AIS_VESSEL_SAR:
             case AIS_VESSEL_OTHER:
-                switch (ais_navStatus) {
+                switch (this.ais_navStatus) {
+                    case 1: // at anchor
                     case 5: // moored
                         /* sometimes the ais_navStatus is wrong and contradicts other data... */
-                        return (ais_cog == INVALID_COG) || (ais_sog < 0.2d);
+                        return (ais_cog == INVALID_COG) || (ais_sog < SPEED_CONSIDERED_IN_REST);
                     default:
-						return (msgTypes.contains(18) || msgTypes.contains(24)
-								|| msgTypes.contains(1) || msgTypes.contains(3))
-                                && (ais_cog == INVALID_COG /* maybe remove this condition */)
-								&& (ais_sog < 0.2d);
-				}
+                        if (msgTypes.contains(18) || msgTypes.contains(24)
+                                ||  msgTypes.contains(1)  || msgTypes.contains(3)) {
+                            return (ais_sog < SPEED_CONSIDERED_IN_REST);
+                        }
+                        return false;
+                }
             default:
                 return false;
         }
@@ -782,7 +835,7 @@ public class AisObject {
         return (isLost(plugin.getVesselLostTimeoutInMinutes()) && isMovable() && !isVesselAtRest());
     }
 
-    float getVesselRotation() {
+    public float getVesselRotation() {
         float rotation = 0;
         if (this.ais_cog != INVALID_COG) {
             rotation = (float) this.ais_cog;

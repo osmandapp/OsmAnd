@@ -191,7 +191,7 @@ public final class AisTrackerHelper {
         double divisor = vVX.x * vVY.y - vVX.y * vVY.x;
         if ((Math.abs(divisor) < 1.0E-10f) || (lonCorrection < 1.0E-10f)) {
             // avoid div by 0 or invalid lonCorrection
-            Log.d("AisTrackerHelper", "getCollisionTimes(): Division by 0: divisor->"
+            Log.d("AisTrackerHelper", "getCrossingTimes(): Division by 0: divisor->"
                     + divisor + ", lonCorrection->" + lonCorrection);
             return null;
         }
