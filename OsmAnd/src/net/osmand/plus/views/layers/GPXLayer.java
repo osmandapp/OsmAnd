@@ -110,7 +110,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private static final int DEFAULT_WIDTH_MULTIPLIER = 7;
 	private static final int START_ZOOM = 7;
 	private static final int MAX_SUPPORTED_TRACK_WIDTH_DP = 48;
-	private static final long MANY_POINTS_VISIBLE_WARNING_THRESHOLD = 1_000_000L;
+	private static final long MANY_POINTS_VISIBLE_WARNING_THRESHOLD = 500_000L;
 
 	private Paint paint;
 	private Paint borderPaint;
@@ -639,6 +639,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			QListFloat startFinishHeights = new QListFloat();
 			for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
 				QListPointI startFinishPoints = new QListPointI();
+				QListInt startFinishExtraIds = new QListInt();
+				startFinishExtraIds.add(0);
+				startFinishExtraIds.add(0);
 				SplitLabelList splitLabels = new SplitLabelList();
 
 				GpxFile gpxFile = selectedGpxFile.getGpxFile();
@@ -680,10 +683,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 							SplitLabel splitLabel;
 							PointI point31 = new PointI(Utilities.get31TileNumberX(point.getLon()), Utilities.get31TileNumberY(point.getLat()));
 							if (visualizationType == Gpx3DVisualizationType.NONE || trackLinePosition != Gpx3DLinePositionType.TOP) {
-								splitLabel = new SplitLabel(point31, name, NativeUtilities.createColorARGB(color, 179));
+								splitLabel = new SplitLabel(point31, name, NativeUtilities.createColorARGB(color, 179), 0);
 							} else {
 								float labelHeight = (float) Gpx3DVisualizationType.getPointElevation(point, track3DStyle, heightmapsActive);
-								splitLabel = new SplitLabel(point31, name, NativeUtilities.createColorARGB(color, 179), labelHeight);
+								splitLabel = new SplitLabel(point31, name, NativeUtilities.createColorARGB(color, 179), 0, labelHeight);
 							}
 							splitLabels.add(splitLabel);
 						}
@@ -691,7 +694,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				}
 				if (!startFinishPoints.isEmpty() || !splitLabels.isEmpty()) {
 					GpxAdditionalIconsProvider additionalIconsProvider = new GpxAdditionalIconsProvider(getPointsOrder() - selectedGPXFiles.size() - 800, tileBox.getDensity(),
-							startFinishPoints, splitLabels,
+							startFinishPoints, startFinishExtraIds, splitLabels,
 							NativeUtilities.createSkImageFromBitmap(startPointImage),
 							NativeUtilities.createSkImageFromBitmap(finishPointImage),
 							NativeUtilities.createSkImageFromBitmap(startAndFinishImage),
@@ -1333,8 +1336,13 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				updated |= renderableSegment.setTrackParams(color, width, coloringType, routeIndoAttribute, colorPalette);
 				if (hasMapRenderer || coloringType.isRouteInfoAttribute()) {
 					boolean showArrows = appearanceHelper.isShowArrowsForTrack(gpxFile, gpxItem, dirItem, selected);
-					if (coloringType.isRouteInfoAttribute() || currentTrack) {
+					if (coloringType.isRouteInfoAttribute()) {
 						updated |= renderableSegment.setRoute(getCachedRouteSegments(cachedTrack, segmentIdx));
+					}
+					boolean boundsChanged = false;
+					if (currentTrack) {
+						boundsChanged = renderableSegment.updateBounds();
+						updated |= boundsChanged;
 					}
 					updated |= renderableSegment.setDrawArrows(showArrows);
 					updated |= renderableSegment.setTrack3DStyle(track3DStyle);
@@ -1344,8 +1352,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 						if (pathEffect instanceof OsmandDashPathEffect) {
 							intervals = ((OsmandDashPathEffect) pathEffect).getIntervals();
 						}
-						renderableSegment.drawGeometry(canvas, tileBox, correctedQuadRect,
-								paint.getColor(), paint.getStrokeWidth(), intervals, showArrows, track3DStyle, invalidated);
+						boolean recreateSegments = invalidated || boundsChanged;
+						renderableSegment.drawGeometry(canvas, tileBox, correctedQuadRect, paint.getColor(),
+								paint.getStrokeWidth(), intervals, showArrows, track3DStyle, recreateSegments);
 						renderedSegments.add(ts);
 					}
 				} else {
@@ -1403,7 +1412,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		if (routeSegments == null) {
 			loadRouteSegments(cachedTrack, nonEmptySegmentIdx);
 		}
-		return routeSegments != null ? routeSegments : new ArrayList<>();
+		return routeSegments != null ? routeSegments : Collections.emptyList();
 	}
 
 	private void loadRouteSegments(@NonNull CachedTrack cachedTrack, int nonEmptySegmentIdx) {

@@ -3,6 +3,7 @@ package net.osmand.core.android;
 import static net.osmand.IndexConstants.GEOTIFF_DIR;
 import static net.osmand.IndexConstants.GEOTIFF_SQLITE_CACHE_DIR;
 import static net.osmand.IndexConstants.OPENGL_SHADERS_CACHE_DIR;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.BUILDINGS_3D_DEFAULT_COLOR;
 import static net.osmand.plus.views.OsmandMapTileView.FOG_DEFAULT_COLOR;
 import static net.osmand.plus.views.OsmandMapTileView.FOG_NIGHTMODE_COLOR;
 import static net.osmand.plus.views.OsmandMapTileView.MAP_DEFAULT_COLOR;
@@ -28,12 +29,13 @@ import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.srtm.Buildings3DColorType;
+import net.osmand.plus.plugins.srtm.building.Buildings3DColorType;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.NativeUtilities;
+import net.osmand.plus.views.OsmandMap;
 import net.osmand.render.RenderingClass;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -190,7 +192,8 @@ public class MapRendererContext {
 	}
 
 	protected int getRasterTileSize() {
-		float mapDensity = app.getSettings().MAP_DENSITY.get();
+		OsmandMap osmandMap = app.getOsmandMap();
+		float mapDensity = osmandMap != null ? osmandMap.getMapDensity() : app.getSettings().MAP_DENSITY.get();
 		float mapDensityAligned = mapDensity > 2.0f ? 2.0f : Math.min(mapDensity, 1.0f);
 		return (int) (getReferenceTileSize() * mapDensityAligned);
 	}
@@ -521,7 +524,6 @@ public class MapRendererContext {
 			mapRendererView.addSymbolsProvider(providerType.symbolsSectionIndex, obfMapSymbolsProvider);
 		}
 		recreateHeightmapProvider();
-		updateVerticalExaggerationScale();
 		setMapBackgroundColor();
 	}
 
@@ -533,12 +535,17 @@ public class MapRendererContext {
 				map3DObjectsProvider = null;
 				return;
 			}
-
 			SRTMPlugin srtmPlugin = PluginsHelper.getPlugin(SRTMPlugin.class);
 			if (srtmPlugin != null && srtmPlugin.ENABLE_3D_MAP_OBJECTS.get()) {
-				Buildings3DColorType buildings3DColorType = srtmPlugin.get3DBuildingsColorStyle();
-				int buildings3DCustomColor = srtmPlugin.getBuildings3dColor();
-				map3DObjectsProvider = new Map3DObjectsTiledProvider(mapPrimitivesProvider, mapPresentationEnvironment, buildings3DColorType == Buildings3DColorType.CUSTOM, NativeUtilities.createFColorRGB(buildings3DCustomColor));
+				Buildings3DColorType colorType = srtmPlugin.get3DBuildingsColorStyle();
+				boolean useCustomColor = colorType == Buildings3DColorType.CUSTOM;
+				int customColor = useCustomColor
+						? srtmPlugin.getBuildings3dCustomColor(nightMode)
+						: BUILDINGS_3D_DEFAULT_COLOR;
+				map3DObjectsProvider = new Map3DObjectsTiledProvider(
+						mapPrimitivesProvider, mapPresentationEnvironment,
+						useCustomColor, NativeUtilities.createFColorRGB(customColor)
+				);
 				mapRendererView.setMap3DObjectsProvider(map3DObjectsProvider);
 
 				for (Map.Entry<LatLon, Integer> entry : highlight3dObjects.entrySet()) {
@@ -601,16 +608,18 @@ public class MapRendererContext {
 			elevationConfiguration.setSlopeAlgorithm(SlopeAlgorithm.None);
 			elevationConfiguration.setVisualizationStyle(VisualizationStyle.None);
 		}
+		if (plugin != null) {
+			elevationConfiguration.setZScaleFactor(plugin.getVerticalExaggerationScale());
+			elevationConfiguration.setHillshadeSunAngle(plugin.HILLSHADE_SUN_ANGLE.get());
+			elevationConfiguration.setHillshadeSunAzimuth(plugin.HILLSHADE_SUN_AZIMUTH.get());
+		}
 		mapRendererView.setElevationConfiguration(elevationConfiguration);
 	}
 
 	public void updateVerticalExaggerationScale() {
 		MapRendererView mapRendererView = this.mapRendererView;
-		if (mapRendererView == null) {
-			return;
-		}
 		SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
-		if (plugin != null) {
+		if (mapRendererView != null && plugin != null) {
 			mapRendererView.setElevationScaleFactor(plugin.getVerticalExaggerationScale());
 		}
 	}

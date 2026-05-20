@@ -216,7 +216,6 @@
     <string name="poi_traffic_calming_island">Drošības saliņa</string>
     <string name="poi_traffic_signals">Luksofors</string>
     <string name="poi_car_repair">Autoserviss</string>
-    <string name="poi_service_tyres">Riepu serviss</string>
     <string name="poi_vehicle_inspection">Tehniskās apskates stacijas</string>
     <string name="poi_car_wash">Automazgātuve</string>
     <string name="poi_fuel">Degvielas uzpildes stacijas</string>
@@ -1925,7 +1924,6 @@
     <string name="poi_training_art">Mākslas kursi</string>
     <string name="poi_training_cooking">Ēdienu pagatavošanas kursi</string>
     <string name="poi_training_computer">Datorzinību kursi</string>
-    <string name="poi_training_yoga">Jogas kursi</string>
     <string name="poi_training_martial_art">Kara mākslas kursi</string>
     <string name="poi_training_aviation">Aviācijas kursi</string>
     <string name="poi_training_hairdressing">Friziera kursi</string>

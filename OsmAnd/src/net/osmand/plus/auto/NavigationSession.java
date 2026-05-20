@@ -65,6 +65,7 @@ import net.osmand.plus.settings.enums.LocationSource;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.router.FastRoutingState;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
 import net.osmand.shared.gpx.GpxFile;
@@ -127,6 +128,8 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	private NavigationManager navigationManager;
 	private boolean carNavigationShouldBeActive; // it could set true before init navigationManager
 	private TripHelper tripHelper;
+
+	private FastRoutingState.Status lastFastRoutingComplication = null;
 
 	NavigationSession() {
 		getLifecycle().addObserver(this);
@@ -195,6 +198,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		if (!appMode.isAppModeDerivedFromCar()) {
 			ApplicationMode carMode = ApplicationMode.getFirstCarMode(app);
 			if (carMode != null) {
+				originalAppMode = appMode;
 				settings.setApplicationMode(carMode, false);
 			}
 		}
@@ -466,6 +470,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 	@Override
 	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
+		closeMissingMapsScreen();
 		if (routingHelper.isFollowingMode() && routingHelper.isRouteCalculated()) {
 			startNavigationScreen();
 			updateCarNavigation(getApp().getLocationProvider().getLastKnownLocation());
@@ -635,7 +640,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 			this.navigationManager.setNavigationManagerCallback(new NavigationManagerCallback() {
 				@Override
 				public void onStopNavigation() {
-					if (!routingHelper.isRouteCalculated() || !routingHelper.isFollowingMode()) {
+					if (routingHelper.isRouteCalculated() && routingHelper.isFollowingMode()) {
 						getApp().stopNavigation();
 					}
 					carNavigationShouldBeActive = false;
@@ -722,7 +727,12 @@ public class NavigationSession extends Session implements NavigationListener, Os
 					}
 					Trip trip = tripHelper.buildTrip(currentLocation, density);
 					if (carNavigationShouldBeActive) {
-						navigationManager.updateTrip(trip);
+						try {
+							navigationManager.updateTrip(trip);
+						} catch (IllegalStateException e) {
+							carNavigationShouldBeActive = false;
+							LOG.warn("NavigationManager is no longer in started state, stop sending trip updates", e);
+						}
 					}
 
 					List<Destination> destinations = null;
@@ -769,21 +779,47 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		}
 	}
 
-	public void showMissingMapsScreen() {
+	public void showMissingMapsScreen(boolean allowContinue) {
 		CarContext carContext = getCarContext();
 		if (carContext != null) {
-			carContext.getCarService(ScreenManager.class).push(new MissingMapsScreen(carContext));
+			Screen topScreen = getScreenManager().getTop();
+			if (!(topScreen instanceof MissingMapsScreen)) {
+				carContext.getCarService(ScreenManager.class).push(new MissingMapsScreen(carContext, allowContinue));
+			}
+		}
+	}
+
+	public void closeMissingMapsScreen() {
+		Screen topScreen = getScreenManager().getTop();
+		if (topScreen instanceof MissingMapsScreen) {
+			topScreen.finish();
 		}
 	}
 
 	@Override
 	public void onCalculationStart() {
-
+		lastFastRoutingComplication = null;
 	}
 
 	@Override
 	public void onUpdateCalculationProgress(int progress) {
+		catchCurrentMissingMaps();
+	}
 
+	private void catchCurrentMissingMaps() {
+		OsmandApplication app = getApp();
+		if (app != null && app.getRoutingHelper().hasCurrentMissingMaps()) {
+			FastRoutingState.Status complication = app.getRoutingHelper().getCurrentFastRoutingComplication();
+			if (complication != null && complication != lastFastRoutingComplication) {
+				lastFastRoutingComplication = complication;
+				if (FastRoutingState.isSuccessStatus(complication)
+						|| FastRoutingState.isCancelledStatus(complication)) {
+					closeMissingMapsScreen();
+				} else {
+					showMissingMapsScreen(!FastRoutingState.isFailedStatus(complication));
+				}
+			}
+		}
 	}
 
 	@Override

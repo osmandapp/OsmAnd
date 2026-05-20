@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.myplaces.favorites.FavoriteFolderFormatter;
 import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.plus.views.PointImageUtils;
@@ -48,7 +49,7 @@ public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 			FavouritesViewHolder favouritesViewHolder = (FavouritesViewHolder) holder;
 			FavouritePoint favouritePoint = getItem(position);
 			favouritesViewHolder.title.setText(favouritePoint.getDisplayName(app));
-			favouritesViewHolder.description.setText(favouritePoint.getCategoryDisplayName(app));
+			favouritesViewHolder.description.setText(FavoriteFolderFormatter.getDisplayName(app, favouritePoint.getCategory()));
 			favouritesViewHolder.favouriteImage.setImageDrawable(
 					PointImageUtils.getFromPoint(app,
 							app.getFavoritesHelper().getColorWithCategory(favouritePoint,

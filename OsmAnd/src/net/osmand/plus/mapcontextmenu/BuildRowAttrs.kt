@@ -9,6 +9,7 @@ class BuildRowAttrs private constructor(
     val buttonText: String?,
     val textPrefix: String?,
     val text: String?,
+    val clipboardText: String?,
     val secondaryText: String?,
     val textColor: Int,
     val isCollapsable: Boolean,
@@ -28,6 +29,7 @@ class BuildRowAttrs private constructor(
         private var buttonText: String? = null
         private var textPrefix: String? = null
         private var secondaryText: String? = null
+        private var clipboardText: String? = null
         private var textColor: Int = 0
         private var isCollapsable: Boolean = false
         private var collapsableView: CollapsableView? = null
@@ -45,6 +47,7 @@ class BuildRowAttrs private constructor(
         fun setButtonText(v: String?) = apply { buttonText = v }
         fun setTextPrefix(v: String?) = apply { textPrefix = v }
         fun setSecondaryText(v: String?) = apply { secondaryText = v }
+        fun setClipboardText(v: String?) = apply { clipboardText = v }
         fun setTextColor(v: Int) = apply { textColor = v }
         fun setCollapsable(v: Boolean) = apply { isCollapsable = v }
         fun setCollapsableView(v: CollapsableView?) = apply { collapsableView = v }
@@ -58,7 +61,7 @@ class BuildRowAttrs private constructor(
         fun markLabelUndefined() = apply {  }
 
         fun build() = BuildRowAttrs(
-            icon, iconId, buttonText, textPrefix, text, secondaryText, textColor,
+            icon, iconId, buttonText, textPrefix, text, clipboardText, secondaryText, textColor,
             isCollapsable, collapsableView, isNeedLinks, textLinesLimit,
             isUrl, isNumber, isEmail, onClickListener, matchWithDivider
         )

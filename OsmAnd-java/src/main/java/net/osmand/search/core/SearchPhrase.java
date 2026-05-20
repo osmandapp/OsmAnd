@@ -11,10 +11,7 @@ import net.osmand.binary.CommonWords;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.AbstractPoiType;
-import net.osmand.util.Algorithms;
-import net.osmand.util.ArabicNormalizer;
-import net.osmand.util.LocationParser;
-import net.osmand.util.MapUtils;
+import net.osmand.util.*;
 
 import java.util.*;
 import java.util.regex.Pattern;
@@ -106,23 +103,32 @@ public class SearchPhrase {
 	
 	
 	public SearchPhrase generateNewPhrase(String text, SearchSettings settings) {
-		String textToSearch = Algorithms.normalizeSearchText(text);
+		String textToSearch = SearchAlgorithms.canonicalizePunctuation(text);
 		List<SearchWord> leftWords = this.words;
 		String thisTxt = getText(true);
 		List<SearchWord> foundWords = new ArrayList<>();
-		thisTxt = Algorithms.normalizeSearchText(thisTxt);
+		thisTxt = SearchAlgorithms.canonicalizePunctuation(thisTxt);
 		if (textToSearch.startsWith(thisTxt)) {
 			// string is longer
 			textToSearch = textToSearch.substring(getText(false).length());
 			foundWords.addAll(this.words);
 			leftWords = leftWords.subList(leftWords.size(), leftWords.size());
 		}
+
 		for (SearchWord w : leftWords) {
 			if (textToSearch.startsWith(w.getWord() + DELIMITER)) {
 				foundWords.add(w);
 				textToSearch = textToSearch.substring(w.getWord().length() + DELIMITER.length());
 			} else {
 				break;
+			}
+		}
+		for (SearchWord w : foundWords) {
+			if (w.getResult() != null && w.getResult().object instanceof CustomSearchPoiFilter specialSorting
+					&& specialSorting.getDefaultSearchType() != null) {
+//						settings.getSortType() == null
+				settings = new SearchSettings(settings);
+				settings.setSortType(specialSorting.getDefaultSearchType());
 			}
 		}
 		return createNewSearchPhrase(settings, text, foundWords, textToSearch);
@@ -175,17 +181,6 @@ public class SearchPhrase {
 		return sp;
 	}
 
-	private boolean likelyAddressSearch(String fullText) {
-		// for now only simple check - we just check if it contains digit
-		for (int i = 0; i < fullText.length(); i++) {
-			char c = fullText.charAt(i);
-			if (c >= '0' && c <= '9') {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	private boolean needDecryptAbbreviations() {
 		String langs = settings != null ? settings.getRegionLang() : null;
 		if (langs != null) {
@@ -226,8 +221,12 @@ public class SearchPhrase {
 		return cnt;
 	}
 	
-	public SearchPhrase selectWord(SearchResult res, List<String> unknownWords, boolean lastComplete) {
-		SearchPhrase sp = new SearchPhrase(this.settings, this.clt);
+	SearchPhrase selectWord(SearchResult res, List<String> unknownWords, boolean lastComplete) {
+		return selectWord(res, this.settings, unknownWords, lastComplete);
+	}
+	
+	SearchPhrase selectWord(SearchResult res, SearchSettings settings, List<String> unknownWords, boolean lastComplete) {
+		SearchPhrase sp = new SearchPhrase(settings, this.clt);
 		addResult(res, sp);
 		SearchResult prnt = res.parentSearchResult;
 		while (prnt != null) {
@@ -526,12 +525,8 @@ public class SearchPhrase {
 		return settings.isEmptyQueryAllowed();
 	}
 
-	public boolean isSortByName() {
-		return settings.isSortByName();
-	}
-
-	public SearchPhrase selectWord(SearchResult res) {
-		return selectWord(res, null, false);
+	public SearchPhrase selectWord(SearchResult res, SearchSettings settings) {
+		return selectWord(res, settings, null, false);
 	}
 	
 
@@ -784,6 +779,10 @@ public class SearchPhrase {
 				}
 			}
 			return false;
+		}
+		
+		public CollatorStringMatcher getStringMatcher() {
+			return sm;
 		}
 
 		@Override

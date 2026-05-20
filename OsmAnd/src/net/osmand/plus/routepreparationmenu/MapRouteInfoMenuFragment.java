@@ -18,20 +18,19 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.utils.InsetTarget;
-import net.osmand.plus.utils.InsetTargetsCollection;
-import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.widgets.TextViewExProgress;
+import net.osmand.shared.gpx.GpxFile;
 
 public class MapRouteInfoMenuFragment extends ContextMenuFragment
 		implements OnSegmentSelectedListener, DownloadEvents {
@@ -470,7 +469,9 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 		((TextView) mainView.findViewById(R.id.ViaSubView)).setTextColor(descriptionColor);
 		((TextView) mainView.findViewById(R.id.toTitle)).setTextColor(descriptionColor);
 
-		ctx.setupRouteCalculationProgressBar(mainView.findViewById(R.id.progress_bar));
+		if (menu != null) {
+			menu.setupRouteCalculationProgressBar();
+		}
 	}
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity, int initialMenuState) {

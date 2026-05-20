@@ -159,7 +159,6 @@
     <string name="poi_traffic_calming_choker">Calzada reducida;Gargantilla</string>
     <string name="poi_traffic_signals">Semáforo</string>
     <string name="poi_car_repair">Taller de automóviles;Taller mecánico; Reparación de automotores</string>
-    <string name="poi_service_tyres">Neumáticos;Gomería</string>
     <string name="poi_vehicle_inspection">Inspección de vehículos</string>
     <string name="poi_car_wash">Lavadero de automóviles</string>
     <string name="poi_fuel">Estación de servicio;Estación de combustible;Gasolinera;Servicentro;Bencinera;Bomba</string>
@@ -1786,7 +1785,6 @@
     <string name="poi_training_art">Capacitación: arte</string>
     <string name="poi_training_cooking">Capacitación: cocina</string>
     <string name="poi_training_computer">Capacitación: computación</string>
-    <string name="poi_training_yoga">Capacitación: yoga</string>
     <string name="poi_training_martial_art">Capacitación: artes marciales</string>
     <string name="poi_training_aviation">Capacitación: aviación</string>
     <string name="poi_training_hairdressing">Capacitación: peluquería</string>
@@ -2886,7 +2884,6 @@
     <string name="poi_cuisine_snack">Picadas</string>
     <string name="poi_cuisine_yogurt">Yogur</string>
     <string name="poi_cuisine_empanada">Empanadas</string>
-    <string name="poi_cuisine_crepes">Crepes;Panqueques</string>
     <string name="poi_cuisine_suki">Suki</string>
     <string name="poi_cuisine_udon">Udon;Sopa de fideos</string>
     <string name="poi_cuisine_bubble_tea">Té de burbujas</string>
@@ -4991,7 +4988,6 @@
     <string name="poi_consulate">Consulado</string>
     <string name="poi_hazard_landslide">Deslizamiento de tierra</string>
     <string name="poi_hazard_yes">Advertencia de peligro</string>
-    <string name="poi_hazard_additional_yes">Advertencia de peligro</string>
     <string name="poi_hazard_falling_rocks">Rocas en descenso</string>
     <string name="poi_hazard_contamination">Contaminación</string>
     <string name="poi_network_nhn">Red ecuestre nacional (NHN)</string>

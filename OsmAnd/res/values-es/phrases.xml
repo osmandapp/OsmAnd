@@ -390,7 +390,6 @@
     <string name="poi_traffic_calming_cushion">Cojín berlinés</string>
     <string name="poi_traffic_calming_rumble_strip">Banda sonora</string>
     <string name="poi_traffic_calming_choker">Calzada reducida;Gargantilla</string>
-    <string name="poi_service_tyres">Neumáticos</string>
     <string name="poi_fuel_octane_80">80 octanos</string>
     <string name="poi_fuel_octane_91">91 octanos</string>
     <string name="poi_fuel_octane_92">92 octanos</string>
@@ -1671,7 +1670,7 @@
     <string name="poi_artwork_type_graffiti">Tipo de obra: graffiti</string>
     <string name="poi_artwork_type_stele">Tipo de obra: estela</string>
     <string name="poi_artwork_type_fountain">Tipo de obra: fuente</string>
-    <string name="poi_width">Ancho</string>
+    <string name="poi_width">Anchura</string>
     <string name="poi_architect_name">Arquitecto/a;Arquitecta</string>
     <string name="poi_architecture_modern">Arquitectura: moderna</string>
     <string name="poi_architecture_stalinist_neoclassicism">Arquitectura: neoclasista stalinista</string>
@@ -1795,7 +1794,6 @@
     <string name="poi_training_art">Capacitación: arte</string>
     <string name="poi_training_cooking">Capacitación: cocina</string>
     <string name="poi_training_computer">Capacitación: computación</string>
-    <string name="poi_training_yoga">Capacitación: yoga</string>
     <string name="poi_training_martial_art">Capacitación: artes marciales</string>
     <string name="poi_training_aviation">Capacitación: aviación</string>
     <string name="poi_training_hairdressing">Capacitación: peluquería</string>
@@ -1962,7 +1960,7 @@
     <string name="poi_social_facility_outreach">Alcance</string>
     <string name="poi_social_facility_food_bank">Banco de alimentos</string>
     <string name="poi_social_facility_shelter">Refugio</string>
-    <string name="poi_social_facility_ambulatory_care">Asistencia sanitaria</string>
+    <string name="poi_social_facility_ambulatory_care">Atención ambulatoria</string>
     <string name="poi_social_facility_workshop">Centro laboral</string>
     <string name="poi_social_facility_day_care">Guardería infantil</string>
     <string name="poi_social_facility_for_senior">Jubilados</string>
@@ -2905,7 +2903,6 @@
     <string name="poi_cuisine_yogurt">Yogur</string>
     <string name="poi_cuisine_gyros">Gyros;Carne asada en horno vertical</string>
     <string name="poi_cuisine_empanada">Empanadas</string>
-    <string name="poi_cuisine_crepes">Crepes;Panqueques</string>
     <string name="poi_cuisine_yakiniku">Yakiniku;Carne asada japonesa</string>
     <string name="poi_cuisine_suki">Suki</string>
     <string name="poi_cuisine_brasserie">Brasserie (café-restaurante de ambiente relajado)</string>
@@ -3745,7 +3742,7 @@
     <string name="poi_volcano_type_mud">Tierra (lodosa)</string>
     <string name="poi_volcano_last_eruption">Última erupción</string>
     <string name="poi_volcano_status_extinct">Extinto</string>
-    <string name="poi_volcano_status_dormant">Latente o dormido</string>
+    <string name="poi_volcano_status_dormant">Latente</string>
     <string name="poi_volcano_status_active">Activo</string>
     <string name="poi_volcano_status_inactive">Inactivo</string>
     <string name="poi_volcano_number_of_eruptions">Número de erupciones</string>
@@ -4901,7 +4898,6 @@
     <string name="poi_shinto_shrine">Santuario de Shinto</string>
     <string name="poi_synagogue">Sinagoga</string>
     <string name="poi_hazard_landslide">Peligro: deslizamiento de tierra</string>
-    <string name="poi_hazard_additional_yes">Advertencia de peligro</string>
     <string name="poi_hazard_falling_rocks">Rocas en descenso</string>
     <string name="poi_hazard_contamination">Contaminación</string>
     <string name="poi_aerodrome_type_airfield">Aeródromo</string>

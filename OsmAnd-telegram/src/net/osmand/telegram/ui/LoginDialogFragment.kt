@@ -29,6 +29,7 @@ import net.osmand.telegram.utils.AndroidNetworkUtils
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.DataConstants
 import net.osmand.telegram.utils.OsmandApiUtils
+import net.osmand.telegram.utils.applyBottomSystemWindowMargin
 import org.json.JSONObject
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText
 
@@ -256,11 +257,9 @@ class LoginDialogFragment : BaseDialogFragment() {
 		}
 
 		view?.findViewById<Button>(R.id.welcome_continue_button)?.apply {
-			val params = layoutParams as ViewGroup.MarginLayoutParams
-			val bottomMargin = AndroidUtils.getNavBarHeight(context) + resources.getDimensionPixelSize(R.dimen.dialog_button_bottom_padding)
-			params.apply {
-				setMargins(leftMargin, topMargin, rightMargin, bottomMargin)
-			}
+			applyBottomSystemWindowMargin(
+				baseBottomMargin = resources.getDimensionPixelSize(R.dimen.dialog_button_bottom_padding)
+			)
 			setOnClickListener {
 				showWelcomeDialog = false
 				if (!privacyPolicyAgreed) {

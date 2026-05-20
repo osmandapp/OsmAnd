@@ -22,7 +22,11 @@ public abstract class ModedColorsPaletteController extends SolidPaletteControlle
 		super(app, 0);
 		this.availablePaletteModes = collectAvailablePaletteModes();
 		this.selectedPaletteMode = getInitialPaletteMode();
-		this.setSelectedItem(provideSelectedPaletteItemForMode(selectedPaletteMode));
+		updateSelection();
+	}
+
+	public void updateSelection() {
+		setSelectedItem(provideSelectedPaletteItemForMode(selectedPaletteMode));
 	}
 
 	public void setPaletteModeSelectedListener(@Nullable OnPaletteModeSelectedListener listener) {

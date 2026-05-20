@@ -276,7 +276,5 @@
     <string name="shared_string_error">Ошибка</string>
     <string name="send_live_location_error">Ошибка отправки текущего местоположения: %1$s</string>
     <string name="location_source">Источник местоположения</string>
-    <string name="location_source_summary">По умолчанию для определения местоположения OsmAnd, установленный с помощью Google Play, использует Google Play Services.
-\n
-\nЕсли местоположение определяется неточно или если пользуетесь устройством без Google Play Services, можно попытаться переключиться на Android API</string>
+    <string name="location_source_summary">По умолчанию OsmAnd, установленный из Google Play, использует сервисы Google Play для определения местоположения. \n\n Если вы получаете неточные данные о местоположении или используете устройство без сервисов Google Play, попробуйте переключиться на Android API</string>
 </resources>

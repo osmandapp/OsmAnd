@@ -187,7 +187,7 @@ public class Building extends MapObject {
 	}
 
 	public boolean belongsToInterpolation(String hno) {
-		return interpolation(hno) >= 0;
+		return interpolation(hno) > 0;
 	}
 	
 	@Override

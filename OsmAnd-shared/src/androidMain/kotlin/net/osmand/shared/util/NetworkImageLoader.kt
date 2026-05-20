@@ -160,10 +160,6 @@ class NetworkImageLoader(private val context: Context, useDiskCache: Boolean = f
     ): LoadingImage {
         return loadImage(url, callback, null, handlePlaceholder)
     }
-
-    fun loadImage(url: String): LoadingImage {
-        return loadImage(url, null, null, false)
-    }
 }
 
 interface ImageLoaderCallback {

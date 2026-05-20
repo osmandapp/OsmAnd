@@ -34,7 +34,7 @@ class GradientEditorUiBuilder(
 		)
 
 		val fileType = initialDraft.fileType
-		val units = fileType.displayUnits.getSymbol()
+		val units = fileType.displayUnitsType.getUnit().getSymbol()
 
 		val toolbarSubtitle = app.getString(
 			R.string.ltr_or_rtl_combine_with_brackets,
@@ -89,7 +89,7 @@ class GradientEditorUiBuilder(
 		val selectedPoint = if (isNoDataSelected) noDataPoint else points.getOrNull(selectedIndex)
 
 		val baseUnits = fileType.baseUnits
-		val displayUnits = fileType.displayUnits
+		val displayUnits = fileType.displayUnitsType.getUnit()
 
 		// 2. Build Value State via Behaviour
 		// We inject the validation error from the dataState here
@@ -109,7 +109,7 @@ class GradientEditorUiBuilder(
 					label = if (mandatory) {
 						behaviour.getStepLabel(selectedPoint, fileType, useFullName = true)
 					} else {
-						fileType.displayUnits.getSymbol()
+						displayUnits.getSymbol()
 					},
 					text = if (mandatory) {
 						""

@@ -330,8 +330,8 @@ public final class SearchScreen extends BaseSearchScreen implements DefaultLifec
 			SearchHelper helper = getSearchHelper();
 			Drawable icon = QuickSearchListItem.getIcon(app, result);
 			if (helper != null) {
-				String typeName = helper.addAddress(QuickSearchListItem.getTypeName(app, result), result);
-				Row.Builder builder = helper.buildSearchRow(helper.getSearchLocation(), result.location, name, icon, typeName);
+				String description = helper.addAddress(QuickSearchListItem.getTypeName(app, result), result);
+				Row.Builder builder = helper.buildSearchRow(helper.getSearchLocation(), result.location, name, icon, description);
 				if (builder != null) {
 					builder.setOnClickListener(() -> onClickSearchResult(result));
 					itemList.addItem(builder.build());

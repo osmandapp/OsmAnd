@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.astronomy.utils
 
 import android.content.Context
+import android.text.format.DateFormat
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.core.graphics.toColorInt
@@ -23,7 +24,6 @@ import java.time.Instant
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.util.Calendar
-import java.util.Locale
 import java.util.TimeZone
 import kotlin.math.PI
 import kotlin.math.atan2
@@ -98,13 +98,10 @@ object AstroUtils {
 		val astroDawn: ZonedDateTime?, val astroDusk: ZonedDateTime?
 	)
 
-	fun formatLocalTime(astronomyTime: Time): String {
+	fun formatLocalTime(context: Context, astronomyTime: Time): String {
 		val calendar = Calendar.getInstance(TimeZone.getDefault())
 		calendar.timeInMillis = astronomyTime.toMillisecondsSince1970()
-		return String.format(
-			Locale.getDefault(), "%02d:%02d",
-			calendar.get(Calendar.HOUR_OF_DAY),
-			calendar.get(Calendar.MINUTE))
+		return DateFormat.getTimeFormat(context).format(calendar.time)
 	}
 	
 	// ---------- Extensions for Type Conversions ----------
@@ -147,11 +144,11 @@ object AstroUtils {
 		startSearch: ZonedDateTime,
 		obs: Observer,
 		windowStart: ZonedDateTime? = null,
-		windowEnd: ZonedDateTime? = null
+		windowEnd: ZonedDateTime? = null,
+		limitDays: Double = 2.0
 	): Pair<ZonedDateTime?, ZonedDateTime?> {
 		val searchStartUtc = startSearch.toAstroTime()
 		val zone = startSearch.zone
-		val limitDays = 2.0
 
 		val nextRise = searchRiseSet(body, obs, Direction.Rise, searchStartUtc, limitDays)
 		val nextSet  = searchRiseSet(body, obs, Direction.Set, searchStartUtc, limitDays)
@@ -175,14 +172,15 @@ object AstroUtils {
 		startSearch: ZonedDateTime,
 		obs: Observer,
 		windowStart: ZonedDateTime? = null,
-		windowEnd: ZonedDateTime? = null
+		windowEnd: ZonedDateTime? = null,
+		limitDays: Double = 2.0
 	): Pair<ZonedDateTime?, ZonedDateTime?> {
 		val body = obj.body
 		return if (body != null) {
-			nextRiseSet(body, startSearch, obs, windowStart, windowEnd)
+			nextRiseSet(body, startSearch, obs, windowStart, windowEnd, limitDays)
 		} else {
 			withCustomStar(obj.ra, obj.dec) { star ->
-				nextRiseSet(star, startSearch, obs, windowStart, windowEnd)
+				nextRiseSet(star, startSearch, obs, windowStart, windowEnd, limitDays)
 			}
 		}
 	}

@@ -6,8 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BottomSheetBehaviourDialogFragment;
+import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemButton;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
@@ -17,10 +16,9 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
-public class PairNewDeviceBottomSheet extends BottomSheetBehaviourDialogFragment {
+public class PairNewDeviceBottomSheet extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = PairNewDeviceBottomSheet.class.getSimpleName();
-	public static final int BOTTOM_SHEET_HEIGHT_DP = 427;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -74,21 +72,6 @@ public class PairNewDeviceBottomSheet extends BottomSheetBehaviourDialogFragment
 		items.add(cancelItem);
 		int padding = getDimensionPixelSize(R.dimen.content_padding_small);
 		items.add(new DividerSpaceItem(getContext(), padding));
-	}
-
-	@Override
-	protected int getPeekHeight() {
-		return dpToPx(BOTTOM_SHEET_HEIGHT_DP);
-	}
-
-	protected void hideBottomSheet() {
-		MapActivity mapActivity = (MapActivity) getActivity();
-		if (mapActivity != null) {
-			FragmentManager manager = mapActivity.getSupportFragmentManager();
-			manager.beginTransaction()
-					.hide(this)
-					.commitAllowingStateLoss();
-		}
 	}
 
 	protected boolean hideButtonsContainer() {

@@ -71,6 +71,7 @@ public class StreetNameWidget extends MapWidget {
 
 	private static final int MAX_MARKER_DISTANCE = 50;
 	public static final int MAX_SHIELDS_QUANTITY = 3;
+	public static final int SHIELD_ZOOM = 16; // motorway=7, primary=10, secondary=12, tertiary=14, residential=16
 
 	private final WaypointHelper waypointHelper;
 	private final RendererRegistry rendererRegistry;
@@ -276,7 +277,7 @@ public class StreetNameWidget extends MapWidget {
 			String tag = routeTypeRule.getTag();
 			String value = routeTypeRule.getValue();
 			if (tag.equals("highway") || tag.equals("route")) {
-				rreq.setInitialTagValueZoom(tag, value, 13, null);
+				rreq.setInitialTagValueZoom(tag, value, SHIELD_ZOOM, null);
 			} else {
 				additional.append(tag).append("=").append(value).append(";");
 			}
@@ -419,11 +420,12 @@ public class StreetNameWidget extends MapWidget {
 		return updatedVisibility;
 	}
 
-	private boolean isAnyStreetNameEnabledForMode(@NonNull FragmentActivity activity,
-			@NonNull List<MapWidgetInfo> widgets, @NonNull ApplicationMode mode) {
+	private boolean isAnyStreetNameEnabledForMode(@NonNull FragmentActivity activity, @NonNull List<MapWidgetInfo> widgets, @NonNull ApplicationMode appMode) {
 		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(activity);
+		List<String> widgetsVisibility = MapWidgetInfo.getWidgetsVisibility(app, appMode, layoutMode);
+
 		for (MapWidgetInfo widgetInfo : widgets) {
-			if (widgetInfo.getWidgetType() == STREET_NAME && widgetInfo.isEnabledForAppMode(mode, layoutMode)) {
+			if (widgetInfo.getWidgetType() == STREET_NAME && widgetInfo.isEnabledForAppMode(appMode, widgetsVisibility)) {
 				return true;
 			}
 		}

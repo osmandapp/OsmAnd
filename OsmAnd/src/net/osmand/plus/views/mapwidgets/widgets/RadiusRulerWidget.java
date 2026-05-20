@@ -31,6 +31,10 @@ public class RadiusRulerWidget extends SimpleWidget {
 
 	private RadiusRulerMode cachedRadiusRulerMode;
 
+	private LatLon cachedCenterLocation;
+	private Location cachedCurrentLocation;
+	private float cachedDistance = -1f;
+
 	public RadiusRulerWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		super(mapActivity, RADIUS_RULER, customId, widgetsPanel);
 		cachedRadiusRulerMode = settings.RADIUS_RULER_MODE.get();
@@ -63,22 +67,34 @@ public class RadiusRulerWidget extends SimpleWidget {
 		LatLon centerLocation = mapActivity.getMapLocation();
 
 		RadiusRulerMode radiusRulerMode = settings.RADIUS_RULER_MODE.get();
-		if (radiusRulerMode != cachedRadiusRulerMode) {
+		boolean modeChanged = radiusRulerMode != cachedRadiusRulerMode;
+
+		if (modeChanged) {
 			cachedRadiusRulerMode = radiusRulerMode;
 			updateIcons();
 		}
+		boolean updateNeeded = isUpdateNeeded();
+		boolean centerChanged = !MapUtils.areLatLonEqual(cachedCenterLocation, centerLocation);
+		boolean locationChanged = !MapUtils.areLatLonEqual(cachedCurrentLocation, currentLocation);
 
-		if (currentLocation != null && centerLocation != null) {
+		if (updateNeeded || modeChanged || centerChanged || locationChanged) {
+			cachedCenterLocation = centerLocation;
+			cachedCurrentLocation = currentLocation;
+
+			float distance = -1f;
 			if (mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
-				setDistanceText(0);
-			} else {
-				double currentLat = currentLocation.getLatitude();
-				double currentLon = currentLocation.getLongitude();
-				float distance = ((float) MapUtils.getDistance(centerLocation, currentLat, currentLon));
-				setDistanceText(distance);
+				distance = 0f;
+			} else if (currentLocation != null && centerLocation != null) {
+				distance = (float) MapUtils.getDistance(centerLocation, currentLocation.getLatitude(), currentLocation.getLongitude());
 			}
-		} else {
-			setText(NO_VALUE, null);
+			if (cachedDistance != distance || updateNeeded || modeChanged) {
+				cachedDistance = distance;
+				if (distance >= 0f) {
+					setDistanceText(distance);
+				} else {
+					setText(NO_VALUE, null);
+				}
+			}
 		}
 	}
 

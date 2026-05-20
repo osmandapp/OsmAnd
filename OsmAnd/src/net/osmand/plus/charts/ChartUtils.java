@@ -47,6 +47,7 @@ import net.osmand.plus.download.local.dialogs.MemoryInfo;
 import net.osmand.plus.download.local.dialogs.MemoryInfo.MemoryItem;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.shared.settings.enums.MetricsConstants;
@@ -973,6 +974,27 @@ public class ChartUtils {
 		return Arrays.asList(GPXDataSetType.ALTITUDE, GPXDataSetType.SLOPE);
 	}
 
+	@NonNull
+	public static GPXDataSetAxisType getSavedXAxis(@NonNull CommonPreference<GPXDataSetAxisType> preference,
+	                                               @Nullable GpxTrackAnalysis analysis) {
+		GPXDataSetAxisType axisType = preference.get();
+		if (analysis == null) {
+			return axisType;
+		}
+		for (GPXDataSetAxisType availableType : ChartModeBottomSheet.getAvailableXTypes(analysis)) {
+			if (axisType == availableType) {
+				return axisType;
+			}
+		}
+		return DISTANCE;
+	}
+
+	@NonNull
+	public static GPXDataSetAxisType getSavedGeneralXAxis(@NonNull OsmandSettings settings,
+	                                                      @Nullable GpxTrackAnalysis analysis) {
+		return getSavedXAxis(settings.TRACK_CHART_X_AXIS, analysis);
+	}
+
 	public static void saveYAxis(@NonNull ListStringPreference preference, @NonNull List<GPXDataSetType> dataSetTypes) {
 		List<String> names = new ArrayList<>();
 		for (GPXDataSetType type : dataSetTypes) {
@@ -984,7 +1006,16 @@ public class ChartUtils {
 		preference.setStringsList(names);
 	}
 
+	public static void saveXAxis(@NonNull CommonPreference<GPXDataSetAxisType> preference,
+	                             @NonNull GPXDataSetAxisType axisType) {
+		preference.set(axisType);
+	}
+
 	public static void saveGeneralYAxis(@NonNull OsmandSettings settings, @NonNull List<GPXDataSetType> dataSetTypes) {
 		saveYAxis(settings.TRACK_CHART_Y_AXIS, dataSetTypes);
+	}
+
+	public static void saveGeneralXAxis(@NonNull OsmandSettings settings, @NonNull GPXDataSetAxisType axisType) {
+		saveXAxis(settings.TRACK_CHART_X_AXIS, axisType);
 	}
 }

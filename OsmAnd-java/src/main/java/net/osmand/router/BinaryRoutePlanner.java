@@ -257,23 +257,8 @@ public class BinaryRoutePlanner {
 				while (pntIterator.hasNext()) {
 					RouteSegmentPoint next = pntIterator.next();
 					pntIterator.remove();
-					float estimatedDistance = (float) estimatedDistance(next, reverseWaySearch, ctx);
-					RouteSegment pos = next.initRouteSegment(true);
-					if (pos != null && !visited.containsKey(calculateRoutePointId(pos)) &&
-							checkMovementAllowed(ctx, reverseWaySearch, pos)) {
-						pos.setParentRoute(null);
-						pos.distanceFromStart = 0;
-						pos.distanceToEnd = estimatedDistance;
-						graphSegments.add(new RouteSegmentCost(pos, ctx));
-					}
-					RouteSegment neg = next.initRouteSegment(false);
-					if (neg != null && !visited.containsKey(calculateRoutePointId(neg)) && 
-							checkMovementAllowed(ctx, reverseWaySearch, neg)) {
-						neg.setParentRoute(null);
-						neg.distanceFromStart = 0;
-						neg.distanceToEnd = estimatedDistance;
-						graphSegments.add(new RouteSegmentCost(neg, ctx));
-					}
+					initEdgeSegment(ctx, next, true, graphSegments,  visited, reverseWaySearch);
+					initEdgeSegment(ctx, next, false, graphSegments,  visited, reverseWaySearch);
 					if (!graphSegments.isEmpty()) {
 						println("Reiterate point with new " + (!reverseWaySearch ? "start " : "destination ")
 								+ next.getRoad());
@@ -288,7 +273,8 @@ public class BinaryRoutePlanner {
 		return false;
 	}
 
-	public RouteSegment initEdgeSegment(final RoutingContext ctx, RouteSegmentPoint pnt, boolean originalDir, PriorityQueue<RouteSegmentCost> graphSegments, boolean reverseSearchWay) {
+	public RouteSegment initEdgeSegment(final RoutingContext ctx, RouteSegmentPoint pnt, boolean originalDir, 
+			PriorityQueue<RouteSegmentCost> graphSegments, TLongObjectMap<RouteSegment> visited, boolean reverseSearchWay) {
 		if (pnt == null) {
 			return null;
 		}
@@ -331,9 +317,11 @@ public class BinaryRoutePlanner {
 			}
 		}
 		if (checkMovementAllowed(ctx, reverseSearchWay, seg)) {
-			seg.distanceToEnd = estimatedDistance(seg, reverseSearchWay, ctx);
-			graphSegments.add(new RouteSegmentCost(seg, ctx));
-			return seg;
+			if (visited == null || !visited.containsKey(calculateRoutePointId(seg))) {
+				seg.distanceToEnd = estimatedDistance(seg, reverseSearchWay, ctx);
+				graphSegments.add(new RouteSegmentCost(seg, ctx));
+				return seg;
+			}
 		}
 		return null;
 	}
@@ -364,10 +352,10 @@ public class BinaryRoutePlanner {
 			ctx.targetX = end.preciseX;
 			ctx.targetY = end.preciseY;
 		}
-		RouteSegment startPos = initEdgeSegment(ctx, start, true, graphDirectSegments, false);
-		RouteSegment startNeg = initEdgeSegment(ctx, start, false, graphDirectSegments, false);
-		RouteSegment endPos = initEdgeSegment(ctx, end, true, graphReverseSegments, true);
-		RouteSegment endNeg = initEdgeSegment(ctx, end, false, graphReverseSegments, true);
+		RouteSegment startPos = initEdgeSegment(ctx, start, true, graphDirectSegments, null, false);
+		RouteSegment startNeg = initEdgeSegment(ctx, start, false, graphDirectSegments, null, false);
+		RouteSegment endPos = initEdgeSegment(ctx, end, true, graphReverseSegments, null, true);
+		RouteSegment endNeg = initEdgeSegment(ctx, end, false, graphReverseSegments, null, true);
 		if (TRACE_ROUTING) {
 			printRoad("Initial segment start positive: ", startPos, false);
 			printRoad("Initial segment start negative: ", startNeg, false);

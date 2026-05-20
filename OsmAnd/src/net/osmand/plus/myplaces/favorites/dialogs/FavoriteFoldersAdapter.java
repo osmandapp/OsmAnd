@@ -1,12 +1,12 @@
 package net.osmand.plus.myplaces.favorites.dialogs;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
@@ -14,10 +14,11 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder;
+import net.osmand.plus.myplaces.favorites.FavoriteFolder;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.dialogs.SortFavoriteViewHolder.SortFavoriteListener;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.settings.enums.FavoriteListSortMode;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
@@ -32,6 +33,7 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 	public static final Object SELECTION_TOGGLE_PAYLOAD = new Object();
 	public static final Object LOCATION_UPDATE_PAYLOAD = new Object();
 
+	public static final int TYPE_FREE_BACKUP_CARD = -1;
 	public static final int TYPE_SORT_FAVORITE = 0;
 	public static final int TYPE_FOLDER = 1;
 	public static final int TYPE_FAVORITE = 2;
@@ -43,25 +45,45 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 
 	private final OsmandApplication app;
+	private final FragmentActivity activity;
 	private final UpdateLocationViewCache locationViewCache;
 	private final List<Object> items = new ArrayList<>();
 
 	@Nullable
 	private SortFavoriteListener sortListener;
+	@Nullable
+	private final CardListener cardListener;
 	private final boolean nightMode;
+	private final boolean showFolderNameOnSecondLine;
 	private FavoriteListSortMode sortMode;
 	private boolean selectionMode;
 
 	private final FavoriteAdapterListener listener;
 
-	public FavoriteFoldersAdapter(@NonNull Context context, boolean nightMode, FavoriteAdapterListener listener) {
-		this.app = (OsmandApplication) context.getApplicationContext();
+	public FavoriteFoldersAdapter(@NonNull FragmentActivity activity, boolean nightMode, FavoriteAdapterListener listener) {
+		this(activity, nightMode, false, listener);
+	}
+
+	public FavoriteFoldersAdapter(@NonNull FragmentActivity activity, boolean nightMode,
+	                              boolean showFolderNameOnSecondLine,
+	                              FavoriteAdapterListener listener) {
+		this(activity, nightMode, showFolderNameOnSecondLine, listener, null);
+	}
+
+	public FavoriteFoldersAdapter(@NonNull FragmentActivity activity, boolean nightMode,
+	                              boolean showFolderNameOnSecondLine,
+	                              FavoriteAdapterListener listener,
+	                              @Nullable CardListener cardListener) {
+		this.app = (OsmandApplication) activity.getApplicationContext();
+		this.activity = activity;
 		this.nightMode = nightMode;
+		this.showFolderNameOnSecondLine = showFolderNameOnSecondLine;
 		this.listener = listener;
-		locationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(context);
+		this.cardListener = cardListener;
+		locationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(activity);
 		sortMode = FavoriteListSortMode.NAME_ASCENDING;
 
-		setHasStableIds(true);
+		setHasStableIds(false);
 	}
 
 	public void setItems(@NonNull List<Object> items) {
@@ -88,8 +110,11 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 	public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 		LayoutInflater inflater = UiUtilities.getInflater(parent.getContext(), nightMode);
 		switch (viewType) {
+			case TYPE_FREE_BACKUP_CARD:
+				View view = inflater.inflate(R.layout.favorite_free_backup_card_item, parent, false);
+				return new FavoriteFreeBackupCardViewHolder(view, activity, cardListener);
 			case TYPE_FAVORITE:
-				View view = inflater.inflate(R.layout.track_list_item, parent, false);
+				view = inflater.inflate(R.layout.track_list_item, parent, false);
 				return new FavoriteViewHolder(view, locationViewCache, nightMode);
 			case TYPE_FOLDER:
 				view = inflater.inflate(R.layout.track_list_item, parent, false);
@@ -122,13 +147,15 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 		Object object = items.get(position);
 		if (object instanceof FavouritePoint) {
 			return TYPE_FAVORITE;
-		} else if (object instanceof FavoriteGroup) {
+		} else if (object instanceof FavoriteFolder || object instanceof FavoriteGroup) {
 			return TYPE_FOLDER;
 		} else if (object instanceof FavoriteFolderAnalysis) {
 			return TYPE_FOLDER_STATS;
 		} else if (object instanceof Integer) {
 			int item = (Integer) object;
-			if (TYPE_SORT_FAVORITE == item) {
+			if (TYPE_FREE_BACKUP_CARD == item) {
+				return TYPE_FREE_BACKUP_CARD;
+			} else if (TYPE_SORT_FAVORITE == item) {
 				return TYPE_SORT_FAVORITE;
 			} else if (TYPE_EMPTY_FOLDER == item) {
 				return TYPE_EMPTY_FOLDER;
@@ -152,7 +179,8 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	private boolean isLastPinnedFolder(int position) {
 		Object cur = items.get(position);
-		if (!(cur instanceof FavoriteGroup currentGroup)) {
+		FavoriteGroup currentGroup = getFavoriteGroup(cur);
+		if (currentGroup == null) {
 			return false;
 		}
 		if (!currentGroup.isPinned()) {
@@ -161,7 +189,8 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 		for (int i = position + 1; i < items.size(); i++) {
 			Object o = items.get(i);
-			if (o instanceof FavoriteGroup g) {
+			FavoriteGroup g = getFavoriteGroup(o);
+			if (g != null) {
 				if (g.isPinned()) {
 					return false;
 				} else {
@@ -172,19 +201,37 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 		return true;
 	}
 
+	@Nullable
+	private FavoriteGroup getFavoriteGroup(@Nullable Object object) {
+		if (object instanceof FavoriteGroup group) {
+			return group;
+		} else if (object instanceof FavoriteFolder folder) {
+			return folder.getGroup();
+		}
+		return null;
+	}
+
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 		boolean lastItem = isLastItem(position);
 		boolean lastPinned = isLastPinnedFolder(position);
 
-		if (holder instanceof SortFavoriteViewHolder viewHolder) {
+		if (holder instanceof FavoriteFreeBackupCardViewHolder viewHolder) {
+			viewHolder.bindView();
+		} else if (holder instanceof SortFavoriteViewHolder viewHolder) {
 			viewHolder.bindView(hasTrackItems());
 		} else if (holder instanceof FavoriteViewHolder viewHolder) {
 			FavouritePoint favouritePoint = (FavouritePoint) items.get(position);
-			viewHolder.bindView(sortMode, favouritePoint, !lastItem, selectionMode, listener);
+			viewHolder.bindView(sortMode, favouritePoint, !lastItem,
+					showFolderNameOnSecondLine, selectionMode, listener);
 		} else if (holder instanceof FavoriteFolderViewHolder viewHolder) {
-			FavoriteGroup favFolder = (FavoriteGroup) items.get(position);
-			viewHolder.bindView(favFolder, !lastPinned && !lastItem, lastPinned && !lastItem, selectionMode, listener);
+			Object folder = items.get(position);
+			if (folder instanceof FavoriteFolder favoriteFolder) {
+				viewHolder.bindView(favoriteFolder, !lastPinned && !lastItem, lastPinned && !lastItem, selectionMode, listener);
+			} else {
+				FavoriteGroup group = (FavoriteGroup) folder;
+				viewHolder.bindView(group, !lastPinned && !lastItem, lastPinned && !lastItem, selectionMode, listener);
+			}
 		} else if (holder instanceof FavoriteStatsViewHolder viewHolder) {
 			FavoriteFolderAnalysis folderAnalysis = (FavoriteFolderAnalysis) items.get(position);
 			viewHolder.bindView(folderAnalysis);
@@ -209,8 +256,13 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 						FavouritePoint favouritePoint = (FavouritePoint) items.get(position);
 						viewHolder.bindSelectionMode(selectionMode, listener, favouritePoint);
 					} else if (holder instanceof FavoriteFolderViewHolder viewHolder) {
-						FavoriteGroup trackFolder = (FavoriteGroup) items.get(position);
-						viewHolder.bindSelectionMode(selectionMode, listener, trackFolder);
+						Object folder = items.get(position);
+						if (folder instanceof FavoriteFolder favoriteFolder) {
+							viewHolder.bindSelectionMode(selectionMode, listener, favoriteFolder);
+						} else {
+							FavoriteGroup group = (FavoriteGroup) folder;
+							viewHolder.bindSelectionMode(selectionMode, listener, group);
+						}
 					}
 					return;
 				} else if (p == SELECTION_TOGGLE_PAYLOAD) {
@@ -218,14 +270,19 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 						FavouritePoint favouritePoint = (FavouritePoint) items.get(position);
 						viewHolder.bindSelectionToggle(selectionMode, listener, favouritePoint);
 					} else if (holder instanceof FavoriteFolderViewHolder viewHolder) {
-						FavoriteGroup trackFolder = (FavoriteGroup) items.get(position);
-						viewHolder.bindSelectionToggle(selectionMode, listener, trackFolder);
+						Object folder = items.get(position);
+						if (folder instanceof FavoriteFolder favoriteFolder) {
+							viewHolder.bindSelectionToggle(selectionMode, listener, favoriteFolder);
+						} else {
+							FavoriteGroup group = (FavoriteGroup) folder;
+							viewHolder.bindSelectionToggle(selectionMode, listener, group);
+						}
 					}
 					return;
 				} else if (p == LOCATION_UPDATE_PAYLOAD) {
 					if (holder instanceof FavoriteViewHolder viewHolder) {
 						FavouritePoint favouritePoint = (FavouritePoint) items.get(position);
-						viewHolder.bindLocation(sortMode, favouritePoint);
+						viewHolder.bindLocation(sortMode, favouritePoint, showFolderNameOnSecondLine);
 					}
 					return;
 				}
@@ -233,24 +290,6 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 		} else {
 			onBindViewHolder(holder, position);
 		}
-	}
-
-	@Override
-	public long getItemId(int position) {
-		Object object = items.get(position);
-
-		if (object instanceof Integer integer) {
-			return integer.longValue();
-		} else {
-			if (object instanceof FavouritePoint favouritePoint) {
-				return favouritePoint.hashCode();
-			} else if (object instanceof FavoriteGroup favoriteGroup) {
-				return favoriteGroup.hashCode();
-			} else if (object instanceof FavoriteFolderAnalysis) {
-				return TYPE_FOLDER_STATS;
-			}
-		}
-		return super.getItemId(position);
 	}
 
 	@Override
@@ -277,7 +316,7 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	private boolean hasTrackItems() {
 		for (Object o : items) {
-			if (o instanceof FavoriteGroup || o instanceof FavouritePoint) {
+			if (o instanceof FavoriteFolder || o instanceof FavoriteGroup || o instanceof FavouritePoint) {
 				return true;
 			}
 		}

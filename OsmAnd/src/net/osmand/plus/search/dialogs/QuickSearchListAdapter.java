@@ -219,6 +219,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	public View getView(int position, View convertView, @NonNull ViewGroup parent) {
 		QuickSearchListItem listItem = getItem(position);
 		QuickSearchListItemType type = listItem.getType();
+		SearchResult searchResult = listItem.getSearchResult();
 
 		LinearLayout view;
 		boolean useBigDividerMargin = false;
@@ -240,22 +241,20 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			return bindBottomShadowItem(convertView);
 		} else if (type == CARD_DIVIDER) {
 			return bindCardDividerItem(convertView);
-		} else if (ObjectType.isAddress(listItem.getSearchResult().objectType) ||
-				listItem.getSearchResult().object instanceof Amenity amenity && amenity.getType().isAdministrative()
+		} else if (searchResult != null && (ObjectType.isAddress(searchResult.objectType) ||
+				searchResult.object instanceof Amenity amenity && amenity.getType().isAdministrative())
 		) {
 			view = bindAdministrativeItem(convertView, listItem);
 		} else if (type == QuickSearchListItemType.SEARCH_RESULT &&
-				(poiUIFilter != null && poiUIFilter.isWikiFilter() ||
-						listItem.getSearchResult().object instanceof Amenity amenity &&
-								amenity.getType().isWiki())) {
+				(poiUIFilter != null && poiUIFilter.isWikiFilter())) {
 			return bindWikiItem(convertView, listItem);
 		} else if (type == QuickSearchListItemType.DISABLED_HISTORY) {
 			view = bindDisabledHistoryItem(listItem, convertView);
 		} else {
 			view = bindSearchResultItem(position, convertView, listItem);
-			useBigDividerMargin = listItem.getSearchResult().objectType != ObjectType.POI &&
-					listItem.getSearchResult().objectType != ObjectType.INDEX_ITEM &&
-					listItem.getSearchResult().objectType != ObjectType.GPX_TRACK;
+			useBigDividerMargin = searchResult != null && searchResult.objectType != ObjectType.POI &&
+					searchResult.objectType != ObjectType.INDEX_ITEM &&
+					searchResult.objectType != ObjectType.GPX_TRACK;
 		}
 
 		setupBackground(view);
@@ -455,7 +454,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		QuickSearchWikiItem wikiItem = new QuickSearchWikiItem(app, item.getSearchResult());
 		LinearLayout view = getLinearLayout(convertView, R.layout.search_nearby_item_vertical);
 		WikiItemViewHolder holder = new WikiItemViewHolder(view, updateLocationViewCache, nightMode);
-		holder.bindItem(wikiItem, poiUIFilter, useMapCenter);
+		holder.bindItem(wikiItem, useMapCenter);
 		return view;
 	}
 
@@ -584,7 +583,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		if (divider != null) {
 			Object o = getItem(position);
 			if (position == getCount() - 1 || getItem(position + 1).getType() == HEADER
-					|| getItem(position + 1).getType() == BOTTOM_SHADOW) {
+					|| getItem(position + 1).getType() == BOTTOM_SHADOW || getItem(position + 1).getType() == CARD_DIVIDER) {
 				divider.setVisibility(View.GONE);
 			} else {
 				divider.setVisibility(View.VISIBLE);

@@ -41,6 +41,8 @@ import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
 import java.util.List;
 import java.util.Objects;
@@ -54,6 +56,18 @@ public class QuickSearchListItem {
 	public QuickSearchListItem(OsmandApplication app, SearchResult searchResult) {
 		this.app = app;
 		this.searchResult = searchResult;
+	}
+
+	enum AlternativeNameTags {
+		LOC_NAME_TAG("loc_name"),
+		ALT_NAME_TAG("alt_name"),
+		OLD_NAME_TAG("old_name");
+
+		AlternativeNameTags(String tagName) {
+			this.tagName = tagName;
+		}
+
+		final String tagName;
 	}
 
 	public QuickSearchListItemType getType() {
@@ -200,6 +214,20 @@ public class QuickSearchListItem {
 		return itemType;
 	}
 
+	@Nullable
+	public static String getDistanceToCity(@NonNull OsmandApplication app, @Nullable SearchResult searchResult) {
+		if (searchResult != null && searchResult.objectType == ObjectType.VILLAGE) {
+			if (!Algorithms.isEmpty(searchResult.localeRelatedObjectName)) {
+				if (searchResult.distRelatedObjectName > 0) {
+					return OsmAndFormatter.getFormattedDistance((float) searchResult.distRelatedObjectName, app)
+							+ " " + app.getString(R.string.shared_string_from) + " "
+							+ searchResult.localeRelatedObjectName;
+				}
+			}
+		}
+		return null;
+	}
+
 	public static String getTypeName(OsmandApplication app, SearchResult searchResult) {
 		switch (searchResult.objectType) {
 			case CITY:
@@ -226,11 +254,9 @@ public class QuickSearchListItem {
 				}
 			case STREET:
 				StringBuilder streetBuilder = new StringBuilder();
-				if (searchResult.localeName.endsWith(")")) {
-					int i = searchResult.localeName.indexOf('(');
-					if (i > 0) {
-						streetBuilder.append(searchResult.localeName.substring(i + 1, searchResult.localeName.length() - 1));
-					}
+				String cityPart = getStreetCityPart(searchResult);
+				if (cityPart != null) {
+					streetBuilder.append(cityPart);
 				}
 				if (!Algorithms.isEmpty(searchResult.localeRelatedObjectName)) {
 					if (streetBuilder.length() > 0) {
@@ -365,6 +391,17 @@ public class QuickSearchListItem {
 		return getIcon(app, searchResult);
 	}
 
+	@Nullable
+	public static String getStreetCityPart(SearchResult searchResult) {
+		if (searchResult.localeName.endsWith(")")) {
+			int i = searchResult.localeName.indexOf('(');
+			if (i > 0) {
+				return searchResult.localeName.substring(i + 1, searchResult.localeName.length() - 1);
+			}
+		}
+		return null;
+	}
+
 	public static String getAmenityIconName(@NonNull Context ctx, @NonNull Amenity amenity) {
 		return RenderingIcons.getIconNameForAmenity(ctx, amenity);
 	}
@@ -419,27 +456,7 @@ public class QuickSearchListItem {
 				}
 			case POI:
 				Amenity amenity = (Amenity) searchResult.object;
-				Drawable shieldIcon = getRouteShieldDrawable(app, amenity);
-				if (shieldIcon != null) {
-					return shieldIcon;
-				}
-				String id = getAmenityIconName(app, amenity);
-				Drawable icon = null;
-				if (id != null) {
-					iconId = RenderingIcons.getBigIconResourceId(id);
-					if (iconId > 0) {
-						if (amenity.getType().isAdministrative()) {
-							icon = getIcon(app, iconId, defIconColor);
-						} else {
-							icon = getIcon(app, iconId);
-						}
-					}
-				}
-				if (icon == null) {
-					return getIcon(app, R.drawable.ic_action_search_dark);
-				} else {
-					return icon;
-				}
+				return getAmenityTypeIcon(app, amenity, defIconColor);
 			case GPX_TRACK:
 				return getIcon(app, R.drawable.ic_action_polygom_dark);
 			case LOCATION:
@@ -478,6 +495,35 @@ public class QuickSearchListItem {
 				break;
 		}
 		return null;
+	}
+
+	public static Drawable getAmenityTypeIcon(OsmandApplication app, Amenity amenity, int iconColor) {
+		return getAmenityTypeIcon(app, amenity, iconColor, false);
+	}
+
+	public static Drawable getAmenityTypeIcon(OsmandApplication app, Amenity amenity, int iconColor, boolean useCustomColor) {
+		int iconId;
+		Drawable shieldIcon = getRouteShieldDrawable(app, amenity);
+		if (shieldIcon != null) {
+			return shieldIcon;
+		}
+		String id = getAmenityIconName(app, amenity);
+		Drawable icon = null;
+		if (id != null) {
+			iconId = RenderingIcons.getBigIconResourceId(id);
+			if (iconId > 0) {
+				if (amenity.getType().isAdministrative() || useCustomColor) {
+					icon = getIcon(app, iconId, iconColor);
+				} else {
+					icon = getIcon(app, iconId);
+				}
+			}
+		}
+		if (icon == null) {
+			return getIcon(app, R.drawable.ic_action_search_dark);
+		} else {
+			return icon;
+		}
 	}
 
 	@Nullable
@@ -651,4 +697,54 @@ public class QuickSearchListItem {
 	public String toString() {
 		return getName();
 	}
+
+	@NonNull
+	public CharSequence getMapObjectTitleWithAltName(@NonNull OsmandApplication app, boolean nightMode) {
+		SearchResult searchResult = getSearchResult();
+		String mapLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
+		if (Algorithms.isEmpty(mapLang) && searchResult != null) {
+			CharSequence spannableName = getSpannableName();
+			return completeWithAltNames(app, spannableName != null ? getSpannableName().toString() : "", searchResult, nightMode);
+		} else if (searchResult != null && searchResult.object instanceof MapObject mapObject) {
+			String title = mapObject.getName(mapLang);
+			String altName = Algorithms.isEmpty(searchResult.alternateName) ? mapObject.getName() : searchResult.alternateName;
+			if (Algorithms.isEmpty(title) && Algorithms.isEmpty(altName)) {
+				return getSpannableName();
+			} else if (Algorithms.isEmpty(title)) {
+				return altName;
+			} else {
+				return addPartInParentheses(app, title, altName, nightMode);
+			}
+		} else {
+			return getSpannableName();
+		}
+	}
+
+	public static CharSequence completeWithAltNames(@NonNull Context ctx, @NotNull String mainPart, @NotNull SearchResult searchResult, boolean nightMode) {
+		if (!Algorithms.isEmpty(searchResult.alternateName)) {
+			return addPartInParentheses(ctx, mainPart, searchResult.alternateName, nightMode);
+		}
+		if (searchResult.object instanceof MapObject mapObject) {
+			for (int i = 0; i < AlternativeNameTags.values().length; i++) {
+				AlternativeNameTags tag = AlternativeNameTags.values()[i];
+				if (mapObject.getNamesMap(false).containsKey(tag.tagName)) {
+					return addPartInParentheses(ctx, mainPart, mapObject.getName(tag.tagName), nightMode);
+				}
+			}
+		}
+		return mainPart;
+	}
+
+	@NonNull
+	private static CharSequence addPartInParentheses(Context ctx, @NonNull CharSequence mainPart, String partToAdd, boolean nightMode) {
+		if (Algorithms.isEmpty(partToAdd) || Algorithms.stringsEqual(mainPart.toString(), partToAdd)) {
+			return mainPart;
+		} else {
+			int textColor = nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light;
+			String altName = String.format("(%s)", partToAdd);
+			mainPart = String.format("%s %s", mainPart, altName);
+			return UiUtilities.createColorSpannable(mainPart.toString(), ctx.getColor(textColor), false, altName);
+		}
+	}
+
 }

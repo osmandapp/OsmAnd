@@ -43,7 +43,7 @@ public class DeleteWidgetConfirmationDialog extends BaseAlertDialogFragment {
 		builder.setTitle(getString(R.string.delete_widget));
 		builder.setMessage(R.string.delete_widget_description);
 		builder.setNegativeButton(R.string.shared_string_cancel, null)
-				.setPositiveButton(R.string.shared_string_delete, (dialog, which) -> {
+				.setPositiveButton(R.string.shared_string_remove, (dialog, which) -> {
 					callMapActivity(activity -> {
 						if (controller != null) {
 							controller.onDeleteActionConfirmed(activity);

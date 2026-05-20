@@ -204,14 +204,14 @@ public class LocalSearchFragment extends LocalBaseFragment implements LocalItemL
 				}
 			}
 		}
-		sortItems(items);
+		sortItems(items, false);
 		return items;
 	}
 
-	private void sortItems(@NonNull List<BaseLocalItem> items) {
+	private void sortItems(@NonNull List<BaseLocalItem> items, boolean groupedFolder) {
 		if (type == MAP_DATA) {
 			LocalSortMode sortMode = LocalItemUtils.getSortModePref(app, type).get();
-			items.sort(new LocalItemsComparator(app, sortMode));
+			items.sort(new LocalItemsComparator(app, sortMode, groupedFolder));
 		} else {
 			Collator collator = OsmAndCollator.primaryCollator();
 			items.sort((o1, o2) -> collator.compare(o1.getName(app).toString(), o2.getName(app).toString()));
@@ -223,7 +223,7 @@ public class LocalSearchFragment extends LocalBaseFragment implements LocalItemL
 		if (getTargetFragment() instanceof LocalItemsFragment fragment) {
 			List<BaseLocalItem> folderItems = fragment.getCurrentFolderItems();
 			if (folderItems != null) {
-				sortItems(folderItems);
+				sortItems(folderItems, true);
 			}
 			return folderItems;
 		}

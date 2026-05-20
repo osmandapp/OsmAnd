@@ -14,6 +14,7 @@ import net.osmand.plus.plugins.externalsensors.devices.sensors.AbstractSensor;
 
 import org.apache.commons.logging.Log;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,6 +23,7 @@ public abstract class BLEAbstractSensor extends AbstractSensor {
 	private static final Log LOG = PlatformUtil.getLog(BLEAbstractSensor.class);
 
 	protected BluetoothGattCharacteristic notifyCharacteristic;
+	private byte[] lastTimeData = null;
 
 	public BLEAbstractSensor(@NonNull BLEAbstractDevice device, @NonNull String sensorId) {
 		super(device, sensorId);
@@ -85,4 +87,14 @@ public abstract class BLEAbstractSensor extends AbstractSensor {
 
 	public abstract void onCharacteristicChanged(
 			@NonNull BluetoothGatt gatt, @NonNull BluetoothGattCharacteristic characteristic);
+
+	public void checkStaleData(@NonNull BluetoothGattCharacteristic characteristic) {
+		UUID charaUUID = characteristic.getUuid();
+		if (getRequestedCharacteristicUUID().equals(charaUUID)) {
+			if (!Arrays.equals(lastTimeData, characteristic.getValue())) {
+				lastTimeData = characteristic.getValue();
+				lastTimeDifferentValue = System.currentTimeMillis();
+			}
+		}
+	}
 }

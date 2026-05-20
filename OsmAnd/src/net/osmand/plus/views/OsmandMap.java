@@ -16,6 +16,7 @@ import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.CollectionUtils;
 
@@ -147,8 +148,23 @@ public class OsmandMap {
 		return app.getSettings().TEXT_SCALE.get();
 	}
 
+	public static float getMapDensitySettings(@NonNull OsmandApplication app) {
+		OsmandSettings settings = app.getSettings();
+		float mapDensity = settings.MAP_DENSITY.get();
+		float aaMapDensity = settings.AA_MAP_DENSITY.get();
+		boolean aaMapDensitySet = settings.AA_MAP_DENSITY.isSet();
+		float densityToSet;
+		if (app.getOsmandMap() != null && app.getOsmandMap().mapView != null &&
+				app.getOsmandMap().mapView.isCarView() && aaMapDensitySet) {
+			densityToSet = aaMapDensity;
+		} else {
+			densityToSet = mapDensity;
+		}
+		return densityToSet;
+	}
+
 	public float getMapDensity() {
-		return app.getSettings().MAP_DENSITY.get();
+		return getMapDensitySettings(app);
 	}
 
 	public float getCarDensityScaleCoef() {

@@ -3,7 +3,6 @@ package net.osmand.binary;
 
 import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.WireFormat;
-import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntLongHashMap;
 import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.*;
@@ -18,10 +17,13 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
-import net.osmand.util.ArabicNormalizer;
-import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
+
+import static net.osmand.binary.ObfConstants.isTagIndexedForSearchAsId;
+import static net.osmand.binary.ObfConstants.isTagIndexedForSearchAsName;
+import static net.osmand.binary.ObfConstants.isTagIndexedAsSearchRelated;
+import static net.osmand.util.SearchAlgorithms.*;
 
 import java.io.IOException;
 import java.util.*;
@@ -326,6 +328,8 @@ public class BinaryMapPoiReaderAdapter {
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
+				req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
+						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_INDEX, map.getFile().getName(), codedIS.getBytesCounter() - bytes);
 				return;
 			case OsmandOdb.OsmAndPoiIndex.NAMEINDEX_FIELD_NUMBER:
 				long length = readInt();
@@ -333,6 +337,8 @@ public class BinaryMapPoiReaderAdapter {
 				// here offsets are sorted by distance
 				offsets = readPoiNameIndex(matcher.getCollator(), query, req, region, nameIndexCoordinates);
 				codedIS.popLimit(oldLimit);
+				req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
+						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_INDEX, map.getFile().getName(), codedIS.getBytesCounter() - bytes);
 				break;
 			case OsmandOdb.OsmAndPoiIndex.BOXES_FIELD_NUMBER:
 				length = readInt();
@@ -356,6 +362,7 @@ public class BinaryMapPoiReaderAdapter {
 						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_GROUPS_BBOXES, map.getFile().getName(), codedIS.getBytesCounter() - bytes);
 				break;
 			case OsmandOdb.OsmAndPoiIndex.POIDATA_FIELD_NUMBER:
+				BinaryMapIndexReaderStats.PoiReadMetricSet metrics = req.searchStat == null ? null : new BinaryMapIndexReaderStats.PoiReadMetricSet();
 				// also offsets can be randomly skipped by limit
 				Integer[] offKeys = new Integer[offsets.size()];
 				if (offsets.size() > 0) {
@@ -387,14 +394,18 @@ public class BinaryMapPoiReaderAdapter {
 //				LOG.info("Searched poi structure in " + (System.currentTimeMillis() - time) +
 //						"ms. Found " + offKeys.length + " subtrees");
 				for (int j = 0; j < offKeys.length; j++) {
+					if (metrics != null) metrics.beginLoadObject(codedIS);
 					codedIS.seek(offKeys[j] + indexOffset);
 					long len = readInt();
 					long oldLim = codedIS.pushLimitLong((long) len);
-					readPoiData(matcher, req, region);
+					readPoiData(matcher, req, region, metrics);
 					codedIS.popLimit(oldLim);
+					if (metrics != null) metrics.endLoadObject(codedIS);
+					
 					if (req.isCancelled() || req.limitExceeded()) {
 						req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
-								BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_OBJECTS, map.getFile().getName(), codedIS.getBytesCounter() - bytes);
+								BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_OBJECTS, 
+								map.getFile().getName(), codedIS.getBytesCounter() - bytes, metrics);
 						return;
 					}
 				}
@@ -402,7 +413,8 @@ public class BinaryMapPoiReaderAdapter {
 //						"ms. Found " + req.getSearchResults().size());
 				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
-						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_OBJECTS, map.getFile().getName(), codedIS.getBytesCounter() - bytes);
+						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_OBJECTS, 
+						map.getFile().getName(), codedIS.getBytesCounter() - bytes, metrics);
 				return;
 			default:
 				skipUnknownField(t);
@@ -411,49 +423,12 @@ public class BinaryMapPoiReaderAdapter {
 		}
 	}
 	
-	static class BloomFilterAlgorithmDef {
-		int index;
-		byte[] data;
-		int version = -1;
-	}
-	
-	private BloomFilterAlgorithmDef readFilter(BloomFilterAlgorithmDef activeFilter, int bloomFilterIndex)
-			throws IOException {
-		BloomFilterAlgorithmDef algo = new BloomFilterAlgorithmDef();
-		algo.index = bloomFilterIndex;
-		while (true) {
-			int t = codedIS.readTag();
-			int tag = WireFormat.getTagFieldNumber(t);
-			switch (tag) {
-			case 0:
-				if (algo.version == BloomFilter.VERSION) {
-					return algo;
-				}
-				return activeFilter;
-			case OsmandOdb.OsmAndBloomFilterAlgorithm.VERSION_FIELD_NUMBER: {
-				algo.version =  codedIS.readUInt32();
-				break;
-			}
-			case OsmandOdb.OsmAndBloomFilterAlgorithm.DATA_FIELD_NUMBER: {
-				algo.data =  codedIS.readBytes().toByteArray();
-				break;
-			}
-			default:
-				skipUnknownField(t);
-				break;
-			}
-		}
-
-	}
-
 	private TIntLongHashMap readPoiNameIndex(Collator instance, String query, SearchRequest<Amenity> req, PoiRegion region, List<Integer> nameIndexCoordinates) throws IOException {
 		TIntLongHashMap offsets = new TIntLongHashMap();
-		List<TIntArrayList> listOffsets = null;
-		List<String> queries = null;
-		List<TIntLongHashMap> listOfSepOffsets = new ArrayList<TIntLongHashMap>();
-		BloomFilterAlgorithmDef activeFilter = null;
-		int bloomFilterIndex = 0;
 		long offset = 0;
+		List<TIntLongHashMap> listOfSepOffsets = new ArrayList<TIntLongHashMap>();
+		List<String> queries = splitAndNormalize(query);
+		List<QueryToken> queryTokens = null;
 		while (true) {
 			final long subStart = req.beginSubSearchStats(), bytes = codedIS.getBytesCounter();
 			int t = codedIS.readTag();
@@ -461,26 +436,17 @@ public class BinaryMapPoiReaderAdapter {
 			switch (tag) {
 			case 0:
 				return offsets;
-			case OsmandOdb.OsmAndPoiNameIndex.FILTERS_FIELD_NUMBER: {
-				int len = codedIS.readRawVarint32();
-				long oldLim = codedIS.pushLimitLong((long) len);
-				activeFilter = readFilter(activeFilter, bloomFilterIndex++);
-				codedIS.popLimit(oldLim);
-				
-				break;
-			}
 			case OsmandOdb.OsmAndPoiNameIndex.TABLE_FIELD_NUMBER: {
 				long length = readInt();
 				long oldLimit = codedIS.pushLimitLong((long) length);
 				offset = codedIS.getTotalBytesRead();
-				queries = splitAndNormalize(query);
-				TIntArrayList charsList = new TIntArrayList(queries.size());
-				listOffsets = new ArrayList<>(queries.size());
-				while (listOffsets.size() < queries.size()) {
-					charsList.add(0);
-					listOffsets.add(new TIntArrayList());
+				
+				List<List<QueryToken.Prefix>> prefixCandidates = map.readIndexedStringTablePrefixes(instance, queries);
+				queryTokens = new ArrayList<>(queries.size());
+				for (int i = 0; i < queries.size(); i++) {
+					String queryToken = queries.get(i);
+					queryTokens.add(new QueryToken(queryToken, instance, req.matcherMode, prefixCandidates.get(i)));
 				}
-				map.readIndexedStringTable(instance, queries, "", listOffsets, charsList);
 				codedIS.popLimit(oldLimit);
 				req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_NAME,
 						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_INDEX,
@@ -488,16 +454,16 @@ public class BinaryMapPoiReaderAdapter {
 				break;
 			}
 			case OsmandOdb.OsmAndPoiNameIndex.DATA_FIELD_NUMBER: {
-				if (listOffsets != null) {
-					for (TIntArrayList dataOffsets : listOffsets) {
+				if (queryTokens != null) {
+					for (int tokenIndex = 0; tokenIndex < queryTokens.size(); tokenIndex++) {
+						QueryToken tokenMatch = queryTokens.get(tokenIndex);
 						TIntLongHashMap offsetMap = new TIntLongHashMap();
 						listOfSepOffsets.add(offsetMap);
-						dataOffsets.sort(); // 1104125
-						for (int i = 0; i < dataOffsets.size(); i++) {
-							codedIS.seek(dataOffsets.get(i) + offset);
+						for (QueryToken.Prefix prefix : tokenMatch.prefixes) {
+							codedIS.seek(prefix.offset() + offset);
 							int len = codedIS.readRawVarint32();
 							long oldLim = codedIS.pushLimitLong((long) len);
-							readPoiNameIndexData(offsetMap, req, region, activeFilter, nameIndexCoordinates, queries);
+							readPoiNameIndexData(offsetMap, req, region, nameIndexCoordinates, tokenMatch, prefix);
 							codedIS.popLimit(oldLim);
 							if (req.isCancelled()) {
 								codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
@@ -543,17 +509,36 @@ public class BinaryMapPoiReaderAdapter {
 
 
 	private void readPoiNameIndexData(TIntLongHashMap offsets, SearchRequest<Amenity> req, PoiRegion region,
-			BloomFilterAlgorithmDef supportedBloomFilter, List<Integer> nameIndexCoordinates, List<String> queryTokens) throws IOException {
+			List<Integer> nameIndexCoordinates, QueryToken token, QueryToken.Prefix prefix) throws IOException {
+		List<String> suffixDictionary = null;
+		QueryToken.SuffixMask mask = token == null || prefix == null ? null : token.new SuffixMask(prefix);
+		boolean suffixDictionaryInitialized = false;
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 				case 0:
 					return;
+				case OsmAndPoiNameIndexData.SUFFIXESDICTIONARY_FIELD_NUMBER:
+					String encodedSuffix = codedIS.readString();
+					if (suffixDictionary == null) {
+						suffixDictionary = new ArrayList<>();
+					}
+					if (EMPTY_SUFFIX_DICTIONARY_SENTINEL.equals(encodedSuffix)) {
+						break;
+					}
+					String prevSuffix = suffixDictionary.isEmpty() ? null : suffixDictionary.get(suffixDictionary.size() - 1);
+					String entry = nameIndexDecodeDictionarySuffix(prevSuffix, encodedSuffix);
+					suffixDictionary.add(entry);
+					break;
 				case OsmAndPoiNameIndexData.ATOMS_FIELD_NUMBER:
+					if (!suffixDictionaryInitialized && mask != null) {
+						mask.setDictionary(suffixDictionary);
+						suffixDictionaryInitialized = true;
+					}
 					int len = codedIS.readRawVarint32();
 					long oldLim = codedIS.pushLimitLong((long) len);
-					readPoiNameIndexDataAtom(offsets, req, region, supportedBloomFilter, nameIndexCoordinates, queryTokens);
+					readPoiNameIndexDataAtom(offsets, req, region, nameIndexCoordinates, mask);
 					codedIS.popLimit(oldLim);
 					break;
 				default:
@@ -563,20 +548,20 @@ public class BinaryMapPoiReaderAdapter {
 		}
 	}
 
-	private void readPoiNameIndexDataAtom(TIntLongHashMap offsets, SearchRequest<Amenity> req, PoiRegion region, BloomFilterAlgorithmDef bloomFilter,
-	                                      List<Integer> nameIndexCoordinates, List<String> queryTokens) throws IOException {
+	private void readPoiNameIndexDataAtom(TIntLongHashMap offsets, SearchRequest<Amenity> req, PoiRegion region,
+	                                      List<Integer> nameIndexCoordinates, QueryToken.SuffixMask suffixMask) throws IOException {
 		int x = 0;
 		int y = 0;
 		int zoom = 15;
 		int shift = Integer.MIN_VALUE;
-		boolean bloomMatched = true;
-		int filterIndex = 0; 
+		boolean matched = suffixMask != null && suffixMask.shouldPassThrough();
+		int maskIndex = 0;
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
-				if (!bloomMatched) {
+				if (!matched) {
 					return;
 				}
 				if (shift != Integer.MIN_VALUE) {
@@ -607,12 +592,12 @@ public class BinaryMapPoiReaderAdapter {
 			case OsmandOdb.OsmAndPoiNameIndexDataAtom.ZOOM_FIELD_NUMBER:
 				zoom = codedIS.readUInt32();
 				break;
-			case OsmandOdb.OsmAndPoiNameIndexDataAtom.BLOOMINDEX_FIELD_NUMBER:
-				byte[] bloom = codedIS.readBytes().toByteArray();
-				if (bloomFilter != null && bloomFilter.index == filterIndex) { 
-					bloomMatched &= BloomFilter.getInstance().matches(bloom, queryTokens);
+			case OsmandOdb.OsmAndPoiNameIndexDataAtom.SUFFIXESBITSET_FIELD_NUMBER:
+				int mask = codedIS.readUInt32();
+				if (!matched && suffixMask != null && suffixMask.isMatched(maskIndex, mask)) {
+					matched = true;
 				}
-				filterIndex++;
+				maskIndex++;
 				break;
 			case OsmandOdb.OsmAndPoiNameIndexDataAtom.SHIFTTO_FIELD_NUMBER:
 				long l = readInt();
@@ -620,7 +605,7 @@ public class BinaryMapPoiReaderAdapter {
 					throw new IllegalStateException();
 				}
 				shift = (int) l;
-				if (!bloomMatched) {
+				if (!matched) {
 					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 					return;
 				}
@@ -630,22 +615,6 @@ public class BinaryMapPoiReaderAdapter {
 				break;
 			}
 		}
-	}
-
-	private List<String> splitAndNormalize(String query) {
-		String normalizedQuery = Algorithms.normalizeSearchText(query);
-		List<String> queryTokens = new ArrayList<>(Algorithms.splitByWordsLowercase(normalizedQuery));
-		if (ArabicNormalizer.isSpecialArabic(normalizedQuery)) {
-			String arabic = ArabicNormalizer.normalize(normalizedQuery);
-			if (arabic != null && !arabic.equals(normalizedQuery)) {
-				for (String arabicToken : Algorithms.splitByWordsLowercase(arabic)) {
-					if (!queryTokens.contains(arabicToken)) {
-						queryTokens.add(arabicToken);
-					}
-				}
-			}
-		}
-		return queryTokens;
 	}
 
 	protected void searchPoiIndex(int left31, int right31, int top31, int bottom31,
@@ -724,7 +693,8 @@ public class BinaryMapPoiReaderAdapter {
 		}
 	}
 
-	private void readPoiData(CollatorStringMatcher matcher, SearchRequest<Amenity> req, PoiRegion region) throws IOException {
+	private void readPoiData(CollatorStringMatcher matcher, SearchRequest<Amenity> req, PoiRegion region,
+			BinaryMapIndexReaderStats.PoiReadMetricSet metrics) throws IOException {
 		int x = 0;
 		int y = 0;
 		int zoom = 0;
@@ -747,9 +717,19 @@ public class BinaryMapPoiReaderAdapter {
 				y = codedIS.readUInt32();
 				break;
 			case OsmandOdb.OsmAndPoiBoxData.POIDATA_FIELD_NUMBER:
+				long decodeStartNs = 0, matcherStartNs = 0;
+				if (metrics != null) {
+					metrics.objectsLoaded++;
+					decodeStartNs = System.nanoTime();
+				}
 				int len = codedIS.readRawVarint32();
 				long oldLim = codedIS.pushLimitLong((long) len);
+
 				Amenity am = readPoiPoint(0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, x, y, zoom, req, region, false);
+				if (metrics != null)  {
+					metrics.decodeTimeNs += System.nanoTime() - decodeStartNs;
+					matcherStartNs = System.nanoTime();
+				}
 				codedIS.popLimit(oldLim);
 				if (am != null) {
 					boolean matches = matcher.matches(am.getName().toLowerCase())
@@ -763,22 +743,24 @@ public class BinaryMapPoiReaderAdapter {
 						}
 						if (!matches) {
 							for (String key : am.getAdditionalInfoKeys()) {
-								if (!key.contains("_name") && !key.equals("brand") &&
-										!key.contains("wikidata") && !key.equals("route_id") &&
-										!key.equals("route_members_ids")) {
-									continue;
-								}
-								matches = matcher.matches(am.getAdditionalInfo(key));
-								if (matches) {
-									break;
+								if (isTagIndexedForSearchAsName(key) || isTagIndexedForSearchAsId(key)
+										|| isTagIndexedAsSearchRelated(key)) {
+									// isTagIndexedAsSearchRelated could be toggled off to avoid unnecessary matches
+									matches = matcher.matches(am.getAdditionalInfo(key));
+									if (matches) {
+										break;
+									}
 								}
 							}
 						}
 					}
 					if (matches) {
 						req.collectRawData(am);
-						req.publish(am);
+						if (req.publish(am) || req.isSkippedDuplication()) {
+							if (metrics != null) metrics.matchedObjectsLoaded++;
+						}
 					}
+					if (metrics != null) metrics.matcherTimeNs += System.nanoTime() - matcherStartNs;
 				}
 				break;
 			default:
@@ -884,7 +866,7 @@ public class BinaryMapPoiReaderAdapter {
 		LinkedList<String> textTags = null;
 		boolean hasSubcategoriesField = false;
 		boolean topIndexAdditonalFound = false;
-		Map<String, PoiCategory> otherSubTypes = new HashMap<>();
+		Map<String, PoiCategory> otherSubTypes = null;
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -927,7 +909,7 @@ public class BinaryMapPoiReaderAdapter {
 						am.setRoutePoint(arp);
 					}
 				}
-				if (req.poiTypeFilter != null) {
+				if (req.poiTypeFilter != null && otherSubTypes != null) {
 					//multivalue amenity, add other subtypes
 					for (Map.Entry<String, PoiCategory> entry : otherSubTypes.entrySet()) {
 						PoiCategory cat = entry.getValue();
@@ -1010,6 +992,9 @@ public class BinaryMapPoiReaderAdapter {
 						am.setSubType(am.getSubType() + ";" + subtype);
 					}
 				} else {
+					if (otherSubTypes == null) {
+						otherSubTypes = new HashMap<>();
+					}
 					otherSubTypes.put(subtype, type);
 				}
 				break;

@@ -52,6 +52,10 @@ public abstract class AbstractDevice<T extends AbstractSensor> {
 		default void onDeviceConnectionFailed(@NonNull AbstractDevice<?> device) {
 
 		}
+
+		default void onActualStateChanged(){
+
+		}
 	}
 
 	public AbstractDevice(@NonNull String deviceId) {
@@ -172,9 +176,15 @@ public abstract class AbstractDevice<T extends AbstractSensor> {
 		}
 	}
 
+	public void fireDeviceActualStateChanged() {
+		for (DeviceListener listener : listeners) {
+			listener.onActualStateChanged();
+		}
+	}
+
 	public void writeSensorDataToJson(@NonNull JSONObject json, @NonNull SensorWidgetDataFieldType widgetDataFieldType) throws JSONException {
 		for (T sensor : sensors) {
-			if (sensor.getSupportedWidgetDataFieldTypes().contains(widgetDataFieldType)) {
+			if (sensor.getSupportedWidgetDataFieldTypes().contains(widgetDataFieldType) && sensor.hasActualData()) {
 				sensor.writeSensorDataToJson(json, widgetDataFieldType);
 			}
 		}

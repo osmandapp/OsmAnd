@@ -66,10 +66,10 @@ public class AddWidgetFragment extends BaseFullScreenFragment {
 		return nightMode;
 	}
 
-	@Nullable
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		updateNightMode();
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
 		Bundle args = getArguments();
 		if (savedInstanceState != null) {
 			initFromBundle(savedInstanceState);
@@ -77,6 +77,12 @@ public class AddWidgetFragment extends BaseFullScreenFragment {
 			initFromBundle(args);
 			selectWidgetByDefault();
 		}
+	}
+
+	@Nullable
+	@Override
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		updateNightMode();
 
 		view = inflate(R.layout.base_widget_fragment_layout, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
@@ -263,7 +269,10 @@ public class AddWidgetFragment extends BaseFullScreenFragment {
 		super.onSaveInstanceState(outState);
 		outState.putSerializable(KEY_SELECTED_WIDGETS_IDS, (Serializable) selectedWidgetsIds);
 		outState.putSerializable(KEY_ALREADY_SELECTED_WIDGETS_IDS, (Serializable) alreadySelectedWidgetsIds);
-		widgetsDataHolder.saveState(outState);
+
+		if (widgetsDataHolder != null) {
+			widgetsDataHolder.saveState(outState);
+		}
 	}
 
 	public static void showGroupDialog(@NonNull FragmentManager manager,

@@ -40,6 +40,7 @@ import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet.CategorySelectionListener;
 import net.osmand.plus.myplaces.MyPlacesActivity;
+import net.osmand.plus.myplaces.favorites.FavoriteFolderPath;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavoritesListener;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
@@ -66,19 +67,20 @@ import java.util.List;
 import java.util.Set;
 
 public class SearchFavoriteFragment extends BaseFullScreenDialogFragment implements
-		SortFavoriteListener, FragmentStateHolder, CategorySelectionListener, FavoriteActionListener,
+		SortFavoriteListener, FragmentStateHolder, FavoriteActionListener,
 		FavoritesListener, OsmAndCompassListener, OsmAndLocationListener {
 
 	public static final String TAG = SearchFavoriteFragment.class.getSimpleName();
 
 	public static final String FAVORITE_SEARCH_QUERY_KEY = "favorite_search_query_key";
 	public static final String FAVORITE_SEARCH_GROUP_KEY = "favorite_search_group_key";
+	public static final String FAVORITE_SEARCH_INCLUDE_ALL_KEY = "favorite_search_include_all_key";
 
 	protected final ItemsSelectionHelper<FavouritePoint> selectionHelper = new ItemsSelectionHelper<>(true);
 	private FavouritesHelper helper;
 
 	private String groupKey;
-	private FavouritePoint selectedPoint;
+	private boolean includeAllGroups;
 	private List<FavouritePoint> points = new ArrayList<>();
 
 	protected boolean selectionMode;
@@ -114,6 +116,7 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 		if (savedInstanceState != null) {
 			searchQuery = savedInstanceState.getString(FAVORITE_SEARCH_QUERY_KEY);
 			groupKey = savedInstanceState.getString(FAVORITE_SEARCH_GROUP_KEY);
+			includeAllGroups = savedInstanceState.getBoolean(FAVORITE_SEARCH_INCLUDE_ALL_KEY, false);
 		}
 		if (arguments != null) {
 			if (searchQuery == null) {
@@ -122,6 +125,9 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 			if (groupKey == null) {
 				groupKey = arguments.getString(FAVORITE_SEARCH_GROUP_KEY);
 			}
+			if (arguments.containsKey(FAVORITE_SEARCH_INCLUDE_ALL_KEY)) {
+				includeAllGroups = arguments.getBoolean(FAVORITE_SEARCH_INCLUDE_ALL_KEY);
+			}
 		}
 		if (searchQuery == null) {
 			searchQuery = "";
@@ -129,19 +135,32 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 		if (groupKey == null) {
 			groupKey = "";
 		}
+		if (savedInstanceState == null && (arguments == null || !arguments.containsKey(FAVORITE_SEARCH_INCLUDE_ALL_KEY))) {
+			includeAllGroups = groupKey.isEmpty();
+		}
 
 		updatePoints();
 	}
 
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putString(FAVORITE_SEARCH_QUERY_KEY, searchQuery);
+		outState.putString(FAVORITE_SEARCH_GROUP_KEY, groupKey);
+		outState.putBoolean(FAVORITE_SEARCH_INCLUDE_ALL_KEY, includeAllGroups);
+	}
+
 	private void updatePoints(){
 		points.clear();
-		boolean includeAll = groupKey.isEmpty();
 		for (FavoriteGroup group : helper.getFavoriteGroups()) {
-			if (includeAll) {
+			if (includeAllGroups) {
 				points.addAll(group.getPoints());
-			} else if (group.getName().equals(groupKey)) {
+			} else if (groupKey.isEmpty()) {
+				if (group.getName().isEmpty()) {
+					points.addAll(group.getPoints());
+				}
+			} else if (FavoriteFolderPath.isDescendantOrSelf(group.getName(), groupKey)) {
 				points.addAll(group.getPoints());
-				break;
 			}
 		}
 	}
@@ -168,7 +187,7 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 		}
 		helper = app.getFavoritesHelper();
 
-		adapter = new FavoriteFoldersAdapter(requireMyPlacesActivity(), nightMode, getFavoriteFolderListener());
+		adapter = new FavoriteFoldersAdapter(requireMyPlacesActivity(), nightMode, true, getFavoriteFolderListener());
 		adapter.setSortFavoriteListener(this);
 
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
@@ -272,10 +291,10 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 			@Override
 			public void onActionButtonClick(@NonNull Object object, @NonNull View anchor) {
 				if (object instanceof FavouritePoint point) {
-					selectedPoint = point;
 					FavoriteMenu menu = new FavoriteMenu(app, app.getUIUtilities(), requireMyPlacesActivity());
 					menu.showPointOptionsMenu(anchor, point, nightMode,
-							SearchFavoriteFragment.this, SearchFavoriteFragment.this, SearchFavoriteFragment.this);
+							createCategorySelectionListener(point, null),
+							SearchFavoriteFragment.this, SearchFavoriteFragment.this);
 				}
 			}
 
@@ -337,6 +356,7 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 		Bundle bundle = new Bundle();
 		bundle.putString(FAVORITE_SEARCH_QUERY_KEY, searchQuery);
 		bundle.putString(FAVORITE_SEARCH_GROUP_KEY, groupKey);
+		bundle.putBoolean(FAVORITE_SEARCH_INCLUDE_ALL_KEY, includeAllGroups);
 		MapActivity.launchMapActivityMoveToTop(requireActivity(), bundle, null, null);
 	}
 
@@ -443,9 +463,11 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 
 		actionButton.setOnClickListener(v -> {
 			if (selectionMode) {
+				Set<FavouritePoint> selectedPoints = selectionHelper.getSelectedItems();
 				FavoriteMenu favoriteMenu = new FavoriteMenu(app, app.getUIUtilities(), requireMyPlacesActivity());
-				favoriteMenu.showPointsSelectOptionsMenu(actionButton, selectionHelper.getSelectedItems(), null, nightMode,
-						SearchFavoriteFragment.this, SearchFavoriteFragment.this, SearchFavoriteFragment.this);
+				favoriteMenu.showPointsSelectOptionsMenu(actionButton, selectedPoints, null, nightMode,
+						createCategorySelectionListener(null, selectedPoints),
+						SearchFavoriteFragment.this, SearchFavoriteFragment.this);
 			}
 		});
 
@@ -552,6 +574,48 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 		updateToolbar();
 	}
 
+	@NonNull
+	private CategorySelectionListener createCategorySelectionListener(@Nullable FavouritePoint pointToMove,
+	                                                                 @Nullable Set<FavouritePoint> pointsToMove) {
+		return new CategorySelectionListener() {
+			@Override
+			public void onCategorySelected(PointsGroup pointsGroup) {
+				String category = FavoriteGroup.getCategoryFromPointGroup(app, pointsGroup);
+				if (pointsToMove != null) {
+					if (!pointsToMove.isEmpty()) {
+						helper.editFavouritesGroup(new ArrayList<>(pointsToMove), category);
+					}
+					selectionHelper.clearSelectedItems();
+				} else if (pointToMove != null) {
+					helper.editFavouriteName(pointToMove, pointToMove.getName(), category,
+							pointToMove.getDescription(), pointToMove.getAddress());
+				}
+				updateAfterMove();
+			}
+
+			@Override
+			public void onAddGroupOpened() {
+				if (isAdded()) {
+					dismissAllowingStateLoss();
+				}
+			}
+		};
+	}
+
+	private void updateAfterMove() {
+		if (isAdded() && getView() != null && adapter != null) {
+			updatePoints();
+			updateContent();
+			updateToolbar();
+		} else {
+			Fragment fragment = getTargetFragment();
+			if (fragment instanceof BaseFavoriteListFragment favoriteListFragment
+					&& favoriteListFragment.isAdded() && favoriteListFragment.getView() != null) {
+				favoriteListFragment.reloadData();
+			}
+		}
+	}
+
 	@Override
 	public void updateCompassValue(float heading) {
 		if (Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
@@ -612,23 +676,16 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 	}
 
 	@Override
-	public void onCategorySelected(PointsGroup pointsGroup) {
-		String category = FavoriteGroup.getCategoryFromPointGroup(app, pointsGroup);
-		if (selectionMode) {
-			helper.editFavouritesGroup(new ArrayList<>(selectionHelper.getSelectedItems()), category);
-		} else {
-			helper.editFavouriteName(selectedPoint, selectedPoint.getName(), category, selectedPoint.getDescription(), selectedPoint.getAddress());
-		}
-
-		updateContent();
-	}
-
-	@Override
 	public void onSavingFavoritesFinished() {
 		updateContent();
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @Nullable Fragment target, List<FavouritePoint> points, String groupKey, String searchQuery) {
+		showInstance(manager, target, points, groupKey, searchQuery, Algorithms.isEmpty(groupKey));
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager, @Nullable Fragment target, List<FavouritePoint> points,
+	                                String groupKey, String searchQuery, boolean includeAllGroups) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SearchFavoriteFragment fragment = new SearchFavoriteFragment();
 			Bundle bundle = new Bundle();
@@ -638,6 +695,7 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 			if (groupKey != null) {
 				bundle.putString(FAVORITE_SEARCH_GROUP_KEY, groupKey);
 			}
+			bundle.putBoolean(FAVORITE_SEARCH_INCLUDE_ALL_KEY, includeAllGroups);
 			fragment.setArguments(bundle);
 			fragment.points.addAll(points);
 			fragment.setTargetFragment(target, 0);

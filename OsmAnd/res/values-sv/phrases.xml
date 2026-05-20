@@ -284,7 +284,6 @@
     <string name="poi_traffic_calming_island">Refug</string>
     <string name="poi_traffic_signals">Stoppljus</string>
     <string name="poi_car_repair">Bilverkstad</string>
-    <string name="poi_service_tyres">Däck</string>
     <string name="poi_vehicle_inspection">Bilprovning</string>
     <string name="poi_car_wash">Biltvätt</string>
     <string name="poi_fuel">Bensinstation;Bränslestation;Bränsle</string>
@@ -1505,7 +1504,7 @@
     <string name="poi_payment_cheque_no">Checkar accepteras inte</string>
     <string name="poi_payment_pikepass_yes">PIKEPASS</string>
     <string name="poi_payment_pikepass_no">PIKEPASS inte accepteras</string>
-    <string name="poi_payment_pikepass_designated">PIKEPASS (designerat)</string>
+    <string name="poi_payment_pikepass_designated">PIKEPASS (avsett)</string>
     <string name="poi_payment_visa_debit_yes">Visa Debit-kort</string>
     <string name="poi_payment_visa_debit_no">Visa Betalkort accepteras inte</string>
     <string name="poi_payment_cryptocurrencies_no">Kryptovalutor accepteras inte</string>
@@ -1998,7 +1997,6 @@
     <string name="poi_training_art">Utbildning: konst</string>
     <string name="poi_training_cooking">Utbildning: matlagning</string>
     <string name="poi_training_computer">Utbildning: dator</string>
-    <string name="poi_training_yoga">Utbildning: yoga</string>
     <string name="poi_training_martial_art">Utbildning: kampsport</string>
     <string name="poi_training_aviation">Utbildning: flygning</string>
     <string name="poi_training_hairdressing">Utbildning: frisör</string>
@@ -2744,7 +2742,7 @@
     <string name="poi_depth">Djup</string>
     <string name="poi_salt_yes">Salt</string>
     <string name="poi_salt_no">Salt: nej</string>
-    <string name="poi_wheelchair_designated">Designerat</string>
+    <string name="poi_wheelchair_designated">Avsett</string>
     <string name="poi_spoil_heap">Slagghög</string>
     <string name="poi_summer_camp">Sommarläger</string>
     <string name="poi_recreation_center">Fritidsområde</string>
@@ -2885,7 +2883,6 @@
     <string name="poi_cuisine_yogurt">Yoghurt</string>
     <string name="poi_cuisine_gyros">Gyros</string>
     <string name="poi_cuisine_empanada">Empanada</string>
-    <string name="poi_cuisine_crepes">Crêpes</string>
     <string name="poi_cuisine_yakiniku">Yakiniku</string>
     <string name="poi_cuisine_suki">Suki</string>
     <string name="poi_cuisine_udon">Udon</string>
@@ -3471,7 +3468,7 @@
     <string name="poi_traffic_signals_sound_locate">Endast för lokalisering av passage (akustisk ledfyr/pollare)</string>
     <string name="poi_internet_access_fee_customers">Internetåtkomst: kunder</string>
     <string name="poi_booth">Bås typ</string>
-    <string name="poi_covered_booth">Bås</string>
+    <string name="poi_covered_booth">Ja</string>
     <string name="poi_dive_centre">Dykcenter</string>
     <string name="poi_resort_hunting">Jaktbas</string>
     <string name="poi_piste_ref">Referensummer för pist</string>
@@ -4932,7 +4929,6 @@
     <string name="poi_lit">Belysning</string>
     <string name="poi_piste_oneway">Pist enkelriktad</string>
     <string name="poi_hazard_landslide">Fara: jordskred</string>
-    <string name="poi_hazard_additional_yes">Fara</string>
     <string name="poi_hazard_contamination">Förorening</string>
     <string name="poi_hazard_yes">Fara</string>
     <string name="poi_steps">Trappa</string>
@@ -5165,4 +5161,5 @@
     <string name="poi_united_reformed_church">United reformed church</string>
     <string name="poi_memorial_type">Typ av minnesmärke</string>
     <string name="poi_yoga">Yoga</string>
+    <string name="poi_covered_booth_filter">Bås</string>
 </resources>

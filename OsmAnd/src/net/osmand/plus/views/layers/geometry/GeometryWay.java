@@ -396,26 +396,26 @@ public abstract class GeometryWay<T extends CommonGeometryWayContext, D extends 
 		for (List<DrawPathData31> pathsDataList : pathsData31Cache) {
 			for (DrawPathData31 pathData : pathsDataList) {
 				boolean hasIndex = false;
-				for (Integer index : pathData.indexes) {
+				for (int index : pathData.indexes) {
 					if (index <= startLocationIndex) {
 						hasIndex = true;
 						break;
 					}
 				}
 				if (hasIndex) {
-					List<Integer> indexes = pathData.indexes;
-					for (int i = 0; i < indexes.size() - 1; i++) {
-						Integer index = indexes.get(i);
+					int[] indexes = pathData.indexes;
+					for (int i = 0; i < indexes.length - 1; i++) {
+						int index = indexes[i];
 						if (index < startLocationIndex) {
-							lastX31 = pathData.tx.get(i);
-							lastY31 = pathData.ty.get(i);
+							lastX31 = pathData.tx[i];
+							lastY31 = pathData.ty[i];
 							if (passedLineId != pathData.lineId) {
-								passedDist = pathData.distances.get(i);
+								passedDist = pathData.distances[i];
 							} else {
-								passedDist += i > 0 ? pathData.distances.get(i) : lastPathDist;
+								passedDist += i > 0 ? pathData.distances[i] : lastPathDist;
 							}
 							passedLineId = pathData.lineId;
-							lastPathDist = pathData.distances.get(pathData.distances.size() - 1);
+							lastPathDist = pathData.distances[pathData.distances.length - 1];
 						}
 					}
 				}

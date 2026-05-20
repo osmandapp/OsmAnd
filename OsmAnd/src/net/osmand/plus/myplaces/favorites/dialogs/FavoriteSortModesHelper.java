@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.myplaces.favorites.FavoriteFolderPath;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
@@ -56,16 +57,26 @@ public class FavoriteSortModesHelper {
 	}
 
 	public void onFavoriteFolderDeleted(@NonNull FavoriteGroup favoriteGroup) {
-		String folderId = favoriteGroup.getDisplayName(app);
+		String folderId = favoriteGroup.getName();
 		clearRelatedKeys(folderId);
+
+		String displayName = favoriteGroup.getDisplayName(app);
+		if (!Algorithms.stringsEqual(displayName, folderId)) {
+			clearRelatedKeys(displayName);
+		}
+
 		syncSettings();
 	}
 
 	public void clearRelatedKeys(@NonNull String folderId) {
-		List<String> prefixesToRemove = getRelatedKeyPrefixes(folderId);
+		String internalId = getInternalId(folderId);
+		List<String> prefixesToRemove = getRelatedKeyPrefixes(internalId);
 		if (prefixesToRemove.isEmpty()) return;
 
 		cachedSortModes.keySet().removeIf(key -> {
+			if (Algorithms.stringsEqual(key, internalId)) {
+				return true;
+			}
 			for (String prefix : prefixesToRemove) {
 				if (key.startsWith(prefix)) {
 					return true;
@@ -76,9 +87,12 @@ public class FavoriteSortModesHelper {
 	}
 
 	@NonNull
-	private List<String> getRelatedKeyPrefixes(@NonNull String folderId) {
+	private List<String> getRelatedKeyPrefixes(@NonNull String internalId) {
 		List<String> prefixes = new ArrayList<>();
-		prefixes.add(OrganizedTracksGroup.Companion.getBaseId(folderId));
+		if (!Algorithms.isEmpty(internalId)) {
+			prefixes.add(internalId + FavoriteFolderPath.DELIMITER);
+		}
+		prefixes.add(OrganizedTracksGroup.Companion.getBaseId(internalId));
 		return prefixes;
 	}
 

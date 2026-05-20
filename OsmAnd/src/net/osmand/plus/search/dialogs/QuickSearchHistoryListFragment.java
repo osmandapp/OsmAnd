@@ -160,4 +160,9 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 			nearbyPlacesCard.onPause();
 		}
 	}
+
+	@Override
+	protected boolean needToSeparateTopItemsInList() {
+		return false;
+	}
 }

@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.text.format.DateFormat;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -43,6 +44,8 @@ public class TimeSlider extends Slider {
 	private final boolean isLayoutRtl;
 
 	private int halfHeight;
+	private boolean touchInProgress;
+	private boolean hideLabelPending;
 
 	public TimeSlider(@NonNull Context context) {
 		this(context, null);
@@ -120,11 +123,39 @@ public class TimeSlider extends Slider {
 		return coordinates;
 	}
 
+	@Override
+	public boolean onTouchEvent(@NonNull MotionEvent event) {
+		int action = event.getActionMasked();
+		if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE) {
+			touchInProgress = true;
+		}
+
+		boolean handled = super.onTouchEvent(event);
+		if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
+			touchInProgress = false;
+			if (hideLabelPending) {
+				hideLabelPending = false;
+				setActiveThumbIndex(-1);
+				invalidate();
+			}
+		}
+		return handled;
+	}
+
 	public void hideLabel(){
+		if (touchInProgress) {
+			// Material Slider crashes if the active thumb is reset while a drag is still being processed.
+			hideLabelPending = true;
+			return;
+		}
+		hideLabelPending = false;
 		setActiveThumbIndex(-1);
+		invalidate();
 	}
 
 	public void showLabel(){
+		hideLabelPending = false;
 		setActiveThumbIndex(0);
+		invalidate();
 	}
 }

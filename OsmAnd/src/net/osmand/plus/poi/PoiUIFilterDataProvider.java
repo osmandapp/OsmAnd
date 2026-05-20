@@ -17,6 +17,7 @@ import net.osmand.search.AmenitySearcher;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class PoiUIFilterDataProvider {
@@ -40,7 +41,9 @@ public class PoiUIFilterDataProvider {
     List<Amenity> searchAmenities(double lat, double lon, double topLatitude,
                                   double bottomLatitude, double leftLongitude,
                                   double rightLongitude, int zoom,
-                                  @Nullable ResultMatcher<Amenity> matcher) {
+                                  @Nullable ResultMatcher<Amenity> matcher,
+                                  @Nullable Comparator<Amenity> comparator,
+                                  int comparatorLimit) {
         if (filter.isTopWikiFilter() && getDataSourceType() == ONLINE) {
             return searchWikiOnline(lat, lon, topLatitude, bottomLatitude, leftLongitude, rightLongitude,
                     filter.wrapResultMatcher(matcher));
@@ -49,7 +52,7 @@ public class PoiUIFilterDataProvider {
             AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
             return amenitySearcher.searchAmenities(filter, filter.additionalFilter, topLatitude, leftLongitude,
                     bottomLatitude, rightLongitude, zoom, true, settings.fileVisibility(),
-                    filter.wrapResultMatcher(matcher));
+                    filter.wrapResultMatcher(matcher), null, comparator, comparatorLimit);
         }
     }
 
@@ -88,6 +91,6 @@ public class PoiUIFilterDataProvider {
             }
         }
         MapUtils.sortListOfMapObject(result, lat, lon);
-        return data;
+        return result;
     }
 }

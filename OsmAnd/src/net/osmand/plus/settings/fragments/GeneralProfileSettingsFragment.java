@@ -33,7 +33,6 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.DistanceDuringNavigationBottomSheet;
 import net.osmand.plus.settings.controllers.CompassModeDialogController;
-import net.osmand.plus.settings.enums.AngularConstants;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.enums.ScreenOrientation;
@@ -43,12 +42,14 @@ import net.osmand.plus.settings.enums.VolumeUnit;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.router.GeneralRouter;
 import net.osmand.shared.settings.enums.AltitudeMetrics;
+import net.osmand.shared.settings.enums.AngularConstants;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
+import net.osmand.shared.routing.GeneralRouterProfile;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -214,13 +215,13 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 
 		for (int i = 0; i < entries.length; i++) {
 			if (ac[i] == AngularConstants.DEGREES) {
-				entries[i] = AngularConstants.DEGREES.toHumanString(app) + " 180";
+				entries[i] = AngularConstants.DEGREES.toHumanString() + " 180";
 				entryValues[i] = AngularConstants.DEGREES.ordinal();
 			} else if (ac[i] == AngularConstants.DEGREES360) {
-				entries[i] = AngularConstants.DEGREES.toHumanString(app) + " 360";
+				entries[i] = AngularConstants.DEGREES.toHumanString() + " 360";
 				entryValues[i] = AngularConstants.DEGREES360.ordinal();
 			} else {
-				entries[i] = ac[i].toHumanString(app);
+				entries[i] = ac[i].toHumanString();
 				entryValues[i] = AngularConstants.MILLIRADS.ordinal();
 			}
 		}
@@ -255,12 +256,12 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		if (routeService == RouteService.OSMAND) {
 			GeneralRouter router = app.getRouter(mode);
 			if (router != null) {
-				GeneralRouter.GeneralRouterProfile routerProfile = router.getProfile();
+				GeneralRouterProfile routerProfile = router.getProfile();
 				hidePref = routerProfile == null
-						|| routerProfile == GeneralRouter.GeneralRouterProfile.PEDESTRIAN
-						|| routerProfile == GeneralRouter.GeneralRouterProfile.BICYCLE
-						|| routerProfile == GeneralRouter.GeneralRouterProfile.HORSEBACKRIDING
-						|| routerProfile == GeneralRouter.GeneralRouterProfile.SKI;
+						|| routerProfile == GeneralRouterProfile.PEDESTRIAN
+						|| routerProfile == GeneralRouterProfile.BICYCLE
+						|| routerProfile == GeneralRouterProfile.HORSEBACKRIDING
+						|| routerProfile == GeneralRouterProfile.SKI;
 			}
 		}
 		ListPreferenceEx unitOfVolumePref = requirePreference(settings.UNIT_OF_VOLUME.getId());

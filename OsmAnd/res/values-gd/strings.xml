@@ -78,7 +78,6 @@
     <string name="row_number">Sreath %1$s</string>
     <string name="shared_string_rows">Sreathan</string>
     <string name="standard_maps">Mapaichean àbhaisteach</string>
-    <string name="widget_available_ram">RAM ri làimh</string>
     <string name="max_altitude">Àirde as motha</string>
     <string name="shared_string_temperature">Teòthachd</string>
     <string name="track_filter_date_selected_format">%s - %s</string>
@@ -443,7 +442,7 @@
     <string name="shared_string_online_maps">Mapaichean air-loidhne</string>
     <string name="open_in_browser_wiki">Fosgail an aiste air loidhne</string>
     <string name="backup_do_not_have_any">Chan eil lethbhreac-glèidhidh agad fhathast</string>
-	<string name="poi_filter_namefinder">NameFinder air-loidhne</string>
+    <string name="poi_filter_namefinder">NameFinder air-loidhne</string>
     <string name="offline_cache">Tasgadan far-loidhne</string>
     <string name="offline_wikipeadia">Uicipeid far-loidhne</string>
     <string name="wikipedia_and_wikivoyage_offline">Uicipeid agus Wikivoyage far-loidhne</string>

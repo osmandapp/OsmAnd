@@ -24,6 +24,7 @@ import java.util.List;
 public class AntHeartRateSensor extends AntAbstractSensor<AntPlusHeartRatePcc> {
 
 	private HeartRateData lastHeartRateData;
+	private long lastHeartBeatCount;
 
 	public static class HeartRateData implements SensorData {
 
@@ -160,6 +161,10 @@ public class AntHeartRateSensor extends AntAbstractSensor<AntPlusHeartRatePcc> {
 		if (pcc != null) {
 			pcc.subscribeHeartRateDataEvent(null);
 			pcc.subscribeHeartRateDataEvent((estTimestamp, eventFlags, computedHeartRate, heartBeatCount, heartBeatEventTime, dataState) -> {
+				if (heartBeatCount != lastHeartBeatCount) {
+					lastHeartBeatCount = heartBeatCount;
+					lastTimeDifferentValue = System.currentTimeMillis();
+				}
 				boolean zeroState = AntPlusHeartRatePcc.DataState.ZERO_DETECTED.equals(dataState);
 				boolean initialState = AntPlusHeartRatePcc.DataState.INITIAL_VALUE.equals(dataState);
 
@@ -177,5 +182,10 @@ public class AntHeartRateSensor extends AntAbstractSensor<AntPlusHeartRatePcc> {
 		if (computedHeartRate > 0) {
 			json.put(SENSOR_TAG_HEART_RATE, computedHeartRate);
 		}
+	}
+
+	@Override
+	protected long getDataUpdateTimePeriod() {
+		return 5000;
 	}
 }

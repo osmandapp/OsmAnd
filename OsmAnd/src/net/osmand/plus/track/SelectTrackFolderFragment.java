@@ -406,7 +406,7 @@ public class SelectTrackFolderFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	protected void addTrackItem(@NonNull TrackItem item) {
-		currentTrackFolder.getTrackItems().add(item);
+		currentTrackFolder.addTrackItem(item);
 		updateContent();
 	}
 }

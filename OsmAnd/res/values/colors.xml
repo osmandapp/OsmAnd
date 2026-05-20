@@ -186,6 +186,9 @@
     <color name="btn_text_on_disabled_light">#666666</color>
     <color name="btn_text_on_disabled_dark">#666666</color>
 
+	<color name="chip_bg_light">#FFFFFF</color>
+    <color name="chip_bg_dark">#1E1F20</color>
+
 	<color name="subscription_active_bg_color_light">#fff9b2</color>
 	<color name="subscription_active_bg_color_dark">#43453b</color>
 	<color name="subscription_active_div_color_light">#f3edae</color>
@@ -239,8 +242,8 @@
 	<color name="plugin_details_install_header_bg_light">#dbdbdb</color>
 	<color name="plugin_details_install_header_bg_dark">#2d3438</color>
 
-	<color name="list_item_light_pressed">#8cffffff</color>
-	<color name="list_item_dark_pressed">#be222526</color>
+	<color name="list_item_light_pressed">#b2e6e6e6</color>
+	<color name="list_item_dark_pressed">#cc3b3b3b</color>
 
 	<color name="fab_color">#ff8f00</color>
 	<color name="fab_color_pressed">#e58200</color>
@@ -621,4 +624,14 @@
 	<color name="astro_visibility_fill_0_15">#FB5934</color>
 	<color name="astro_visibility_fill_lt_0">#8E24AA</color>
 
+
+	<!-- Free version banner -->
+	<color name="banner_downloads_remaining_light">#ff8f00</color>
+	<color name="banner_downloads_remaining_dark">#D28521</color>
+	<color name="banner_downloads_used_light">#DEDEE3</color>
+	<color name="banner_downloads_used_dark">#34343C</color>
+	<color name="sale_badge_light">#E82A3B</color>
+	<color name="sale_badge_dark">#E82A3B</color>
+	<color name="banner_feature_bg_light">#EDF1F7</color>
+	<color name="banner_feature_bg_dark">#2E3238</color>
 </resources>

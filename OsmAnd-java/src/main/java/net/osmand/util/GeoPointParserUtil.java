@@ -634,6 +634,13 @@ public class GeoPointParserUtil {
 		if (params.containsKey("saddr")) {
 			return Collections.singletonList(new GeoParsedPoint(params.get("saddr")));
 		}
+		//"coordinate": "50.4323371182397,30.515658259391785"
+		if (params.containsKey("coordinate")) {
+			String[] latlon = params.get("coordinate").split(",");
+			if (latlon.length > 1) {
+				return Collections.singletonList(new GeoParsedPoint(latlon[0], latlon[1]));
+			}
+		}
 		return null;
 	}
 

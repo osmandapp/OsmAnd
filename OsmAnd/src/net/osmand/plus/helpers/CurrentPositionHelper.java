@@ -16,11 +16,11 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.resources.BinaryMapReaderResource;
 import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResourceType;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
 import net.osmand.router.RoutingContext;
+import net.osmand.shared.routing.GeneralRouterProfile;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;

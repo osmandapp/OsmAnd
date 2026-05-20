@@ -8,6 +8,7 @@ import net.osmand.Collator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapIndexReaderStats;
 import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
@@ -32,6 +33,7 @@ import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
+import net.osmand.search.core.SearchSettings.SortType;
 import net.osmand.search.core.SearchWord;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -47,9 +49,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
@@ -60,7 +60,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Function;
+import java.util.function.BooleanSupplier;
 
 public class SearchUICore {
 	
@@ -82,27 +82,29 @@ public class SearchUICore {
 	List<SearchCoreAPI> apis = new ArrayList<>();
 	private SearchSettings searchSettings;
 	private MapPoiTypes poiTypes;
+	private final BooleanSupplier internetConnectionAvailable;
 
 	private static boolean debugMode = false;
 
 	private static final Set<String> FILTER_DUPLICATE_POI_SUBTYPE = new TreeSet<String>(
 			Arrays.asList("building", "internet_access_yes"));
 
-	private Function<String, String> httpRedirectRequester = null;
-	private static final int MIN_COMPLETE_MATCH_WEIGHT = 40;
-
 	public SearchUICore(MapPoiTypes poiTypes, String locale, boolean transliterate) {
+		this(poiTypes, locale, transliterate, () -> true);
+	}
+
+	public SearchUICore(MapPoiTypes poiTypes, String locale, boolean transliterate,
+			BooleanSupplier internetConnectionAvailable) {
 		this.poiTypes = poiTypes;
+		this.internetConnectionAvailable = internetConnectionAvailable != null
+				? internetConnectionAvailable
+				: () -> true;
 		taskQueue = new LinkedBlockingQueue<Runnable>();
 		searchSettings = new SearchSettings(new ArrayList<BinaryMapIndexReader>());
 		searchSettings = searchSettings.setLang(locale, transliterate);
 		phrase = SearchPhrase.emptyPhrase(searchSettings);
 		currentSearchResult = new SearchResultCollection(phrase);
 		singleThreadedExecutor = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, taskQueue);
-	}
-
-	public void setHttpRedirectRequester(Function<String, String> httpRedirectRequester) {
-		this.httpRedirectRequester = httpRedirectRequester;
 	}
 
 	public static void setDebugMode(boolean debugMode) {
@@ -241,7 +243,7 @@ public class SearchUICore {
 				}
 			}
 			for (SearchResult s : searchResults) {
-				if (s.object instanceof Amenity amenity && Algorithms.isEmpty(s.alternateName)) {
+				if (s.object instanceof Amenity amenity && Algorithms.isEmpty(s.addressName)) {
 					updateSearchResultAddress(s, amenity, dominatedCity);
 				}
 			}
@@ -268,60 +270,64 @@ public class SearchUICore {
 		}
 
 		private void filterSearchDuplicateResults(List<SearchResult> lst) {
-			ListIterator<SearchResult> it = lst.listIterator();
-			LinkedList<SearchResult> lstUnique = new LinkedList<SearchResult>();
-			while (it.hasNext()) {
-				SearchResult r = it.next();
-				boolean same = false;
-				for (SearchResult rs : lstUnique) {
-					same = sameSearchResult(rs, r);
-					if (same) {
-						break;
+			for (int i = 0; i < lst.size();) {
+				SearchResult current = lst.get(i);
+				boolean duplicate = false;
+				for (int j = i - 1; j >= Math.max(i - DEPTH_TO_CHECK_SAME_SEARCH_RESULTS, 0); j--) {
+					SearchResult prevAdded = lst.get(j);
+					if (sameSearchResult(prevAdded, current)) {
+						duplicate = true;
+						double wDiff = Math.abs(current.getUnknownPhraseMatchWeight() - prevAdded.getUnknownPhraseMatchWeight());
+						if (ObjectType.getTypeWeight(current.objectType) > ObjectType.getTypeWeight(prevAdded.objectType) && wDiff <= 1) {
+							lst.set(j, current);
+						}
 					}
 				}
-				if (same) {
-					it.remove();
+				if (duplicate) {
+					lst.remove(i);
 				} else {
-					lstUnique.add(r);
-					if (lstUnique.size() > DEPTH_TO_CHECK_SAME_SEARCH_RESULTS) {
-						lstUnique.remove(0);
-					}
+					i++;
 				}
 			}
 		}
 
-		private void copyData(SearchResult unique, SearchResult iterated) {
+		private SearchResult uniteData(List<SearchResult> list) {
+			SearchResult unique = list.remove(0);
 			BaseDetailsObject base = new BaseDetailsObject(unique.object, phrase.getSettings().getLang());
-			base.addObject(iterated.object);
+			for (SearchResult iterated : list) {
+				base.addObject(iterated.object);
 
-			unique.object = base.getSyntheticAmenity();
-			if (iterated.otherNames != null) {
-				if (!iterated.localeName.equals(unique.localeName)) {
-					iterated.otherNames.add(iterated.localeName);
-				}
-				if (unique.otherNames == null)
-					unique.otherNames = new ArrayList<>();
-				for (String name : iterated.otherNames) {
-					if (!unique.otherNames.contains(name)) {
-						unique.otherNames.add(name);
+				unique.object = base.getSyntheticAmenity();
+				if (iterated.otherNames != null) {
+					if (!iterated.localeName.equals(unique.localeName)) {
+						iterated.otherNames.add(iterated.localeName);
+					}
+					if (unique.otherNames == null)
+						unique.otherNames = new ArrayList<>();
+					for (String name : iterated.otherNames) {
+						if (!unique.otherNames.contains(name)) {
+							unique.otherNames.add(name);
+						}
 					}
 				}
-			}
-			if (iterated.getOtherWordsMatch() != null) {
-				if (unique.getOtherWordsMatch() == null) {
-					unique.setOtherWordsMatch(new TreeSet<>());
+				if (iterated.getOtherWordsMatch() != null) {
+					if (unique.getOtherWordsMatch() == null) {
+						unique.setOtherWordsMatch(new TreeSet<>());
+					}
+					unique.getOtherWordsMatch().addAll(iterated.getOtherWordsMatch());
 				}
-				unique.getOtherWordsMatch().addAll(iterated.getOtherWordsMatch());
+				if (iterated.getUnknownPhraseMatchWeight() > unique.getUnknownPhraseMatchWeight()) {
+					unique.setUnknownPhraseMatchWeight(iterated.getUnknownPhraseMatchWeight());
+				}
 			}
-			if (iterated.getUnknownPhraseMatchWeight() > unique.getUnknownPhraseMatchWeight()) {
-				unique.setUnknownPhraseMatchWeight(iterated.getUnknownPhraseMatchWeight());
-			}
+			return unique;
 		}
 
 		private void uniteSearchResultsByOsmIdOrWikidata(List<SearchResult> input) {
 			List<SearchResult> output = new ArrayList<>();
 			Map<Long, Integer> osmIdMap = new HashMap<>();
 			Map<String, Integer> wikidataMap = new HashMap<>();
+			Map<Integer, List<SearchResult>> copyDataMap = new HashMap<>();
 			for (SearchResult sr : input) {
 				if (sr.object instanceof Amenity that) {
 					Long osmId = that.getOsmId();
@@ -351,7 +357,8 @@ public class SearchUICore {
 						output.add(sr);
 						indexToUpdate = output.size() - 1;
 					} else {
-						copyData(output.get(indexToUpdate), sr);
+						copyDataMap.computeIfAbsent(indexToUpdate, k -> new ArrayList<>());
+						copyDataMap.get(indexToUpdate).add(sr);
 					}
 
 					if (osmId != null) {
@@ -362,6 +369,32 @@ public class SearchUICore {
 					}
 				} else {
 					output.add(sr);
+				}
+			}
+			if (!copyDataMap.isEmpty()) {
+				String lang = phrase.getSettings().getLang();
+				for (Map.Entry<Integer, List<SearchResult>> entry : copyDataMap.entrySet()) {
+					List<SearchResult> sr = entry.getValue();
+					int indexToUpdate = entry.getKey();
+					SearchResult r = output.get(indexToUpdate);
+					sr.add(0, r);
+					sr.sort((s1, s2) -> {
+                        SearchResult.SearchResultResource r1 = s1.getResourceType();
+                        SearchResult.SearchResultResource r2 = s2.getResourceType();
+                        if (r1.getWeight() != r2.getWeight()) {
+                            return r1.getWeight() > r2.getWeight() ? -1 : 1;
+                        }
+                        if (s1.object instanceof Amenity am1 && am1.isRouteArticle() &&
+                            s2.object instanceof Amenity am2 && am2.isRouteArticle()) {
+                            String l1 = BaseDetailsObject.getLangForTravel(am1);
+                            String l2 = BaseDetailsObject.getLangForTravel(am2);
+                            if (!l1.equals(l2)) {
+                                return l1.equals(lang) ? -1 : 1;
+                            }
+                        }
+                        return 0;
+                    });
+					output.set(indexToUpdate, uniteData(sr));
 				}
 			}
 			if (input.size() != output.size()) {
@@ -547,7 +580,7 @@ public class SearchUICore {
 	public void init() {
 		SearchAmenityByNameAPI amenitiesApi = new SearchCoreFactory.SearchAmenityByNameAPI();
 		apis.add(amenitiesApi);
-		apis.add(new SearchCoreFactory.SearchLocationAndUrlAPI(amenitiesApi, httpRedirectRequester));
+		apis.add(new SearchCoreFactory.SearchLocationAndUrlAPI(amenitiesApi, internetConnectionAvailable));
 		SearchAmenityTypesAPI searchAmenityTypesAPI = new SearchAmenityTypesAPI(poiTypes);
 		apis.add(searchAmenityTypesAPI);
 		apis.add(new SearchAmenityByTypeAPI(poiTypes, searchAmenityTypesAPI));
@@ -634,8 +667,14 @@ public class SearchUICore {
 	}
 
 	public boolean selectSearchResult(SearchResult r) {
-		this.phrase = this.phrase.selectWord(r);
+		SearchSettings newSettings = this.phrase.getSettings(); 
+		this.phrase = this.phrase.selectWord(r, newSettings);
 		return true;
+	}
+
+	public void resetSearch() {
+		phrase = SearchPhrase.emptyPhrase(searchSettings);
+		currentSearchResult = new SearchResultCollection(phrase);
 	}
 
 	public SearchPhrase resetPhrase() {
@@ -658,7 +697,7 @@ public class SearchUICore {
 		if (loc != null) {
 			searchSettings = searchSettings.setOriginalLocation(loc);
 		}
-		final SearchPhrase searchPhrase = this.phrase.generateNewPhrase(text, searchSettings);
+		final SearchPhrase searchPhrase = this.phrase.generateNewPhrase(text, resetSearchSettingsForNewRequest(searchSettings));
 		final SearchResultMatcher rm = new SearchResultMatcher(null, searchPhrase, requestNumber.get(), requestNumber, totalLimit);
 		searchInternal(searchPhrase, rm);
 		SearchResultCollection resultCollection = new SearchResultCollection(searchPhrase);
@@ -682,7 +721,7 @@ public class SearchUICore {
 			this.searchSettings = overrideSettings;
 		}
 		final int request = requestNumber.incrementAndGet();
-		final SearchPhrase phrase = this.phrase.generateNewPhrase(text, searchSettings);
+		final SearchPhrase phrase = this.phrase.generateNewPhrase(text, resetSearchSettingsForNewRequest(searchSettings));
 		phrase.setAcceptPrivate(this.phrase.isAcceptPrivate());
 		this.phrase = phrase;
 		if (debugMode) {
@@ -796,6 +835,15 @@ public class SearchUICore {
 		});
 	}
 
+	private SearchSettings resetSearchSettingsForNewRequest(SearchSettings settings) {
+		if (settings.getStat() == null || settings.getStat().totalTime == 0) {
+			return settings;
+		}
+		settings = new SearchSettings(settings);
+		settings.setStat(new BinaryMapIndexReaderStats.SearchStat());
+		return settings;
+	}
+
 
 	public boolean isSearchMoreAvailable(SearchPhrase phrase) {
 		for (SearchCoreAPI api : apis) {
@@ -852,6 +900,11 @@ public class SearchUICore {
 	}
 
 	void searchInternal(final SearchPhrase phrase, SearchResultMatcher matcher) {
+		long totalTime = 0;
+		BinaryMapIndexReaderStats.SearchStat stat = phrase.getSettings().getStat();
+		if (stat != null) {
+			LOG.info("Total Stat API time=" + stat.totalTime);
+		}
 		preparePhrase(phrase);
 		ArrayList<SearchCoreAPI> lst = new ArrayList<>(apis);
 		Collections.sort(lst, new Comparator<SearchCoreAPI>() {
@@ -863,6 +916,7 @@ public class SearchUICore {
 			}
 		});
 		for (SearchCoreAPI api : lst) {
+			long start = debugMode ? System.currentTimeMillis() : 0;
 			if (matcher.isCancelled()) {
 				break;
 			}
@@ -879,12 +933,19 @@ public class SearchUICore {
 				}
 				matcher.apiSearchFinished(api, phrase);
 				if (debugMode) {
-					LOG.info("API search done <" + phrase + "> API=<" + api + ">");
+					long deltaTime = (System.currentTimeMillis() - start);
+					totalTime += deltaTime;
+					LOG.info("API search done <" + phrase + "> API=<" + api + ">, time=" + deltaTime);
 				}
 			} catch (Throwable e) {
 				e.printStackTrace();
 				LOG.error(e.getMessage(), e);
 			}
+		}
+		
+		if (stat != null) {
+			LOG.info(stat.toDetailedString());
+			LOG.info("API search total <" + phrase + ", time=" + totalTime);
 		}
 	}
 
@@ -1002,7 +1063,9 @@ public class SearchUICore {
 				if (object.otherNames != null) {
 					for (String s : object.otherNames) {
 						if (phrase.getFirstUnknownNameStringMatcher().matches(s)) {
-							object.localeName = s;
+							// previous implementation didn't fit enough 
+//							object.localeName = s;
+							object.alternateName = s;
 							updateName = true;
 							break;
 						}
@@ -1010,8 +1073,8 @@ public class SearchUICore {
 				}
 				if (!updateName && object.object instanceof Amenity) {
 					for (String key : ((Amenity) object.object).getAdditionalInfoKeys()) {
-						if (!ObfConstants.isTagIndexedForSearchAsId(key)
-								&& !ObfConstants.isTagIndexedForSearchAsName(key)) {
+						if ((!ObfConstants.isTagIndexedForSearchAsId(key)
+								&& !ObfConstants.isTagIndexedForSearchAsName(key))) {
 							continue;
 						}
 						String vl = ((Amenity) object.object).getAdditionalInfo(key);
@@ -1168,10 +1231,32 @@ public class SearchUICore {
 		return json;
 	}
 
+	public static String formatSearchResultForTest(boolean simpleTest, SearchResult r, SearchPhrase phrase) {
+		if (simpleTest) {
+			return r.toString().trim();
+		}
+		double dist = 0;
+		if (r.location != null) {
+			dist = MapUtils.getDistance(r.location, phrase.getLastTokenLocation());
+		}
+		String subType = "";
+		if (r.objectType == ObjectType.POI) {
+			Amenity am = (Amenity) r.object;
+			String subtype = am.getSubType();
+			if ("town".equals(subtype) || "city".equals(subtype)) {
+				subType = " (" + subtype + ")";
+			}
+		}
+		return String.format(Locale.US, "%s [[%d, %s, %.3f, %.2f km]]", r.toString(),
+				r.getFoundWordCount(), r.objectType.toString() + subType,
+				r.getUnknownPhraseMatchWeight(),
+				dist / 1000
+		);
+	}
+
 	private enum ResultCompareStep {
 		TOP_VISIBLE,
 		FOUND_WORD_COUNT, // more is better (top)
-		OBF_RESOURCE,
 		UNKNOWN_PHRASE_MATCH_WEIGHT, // more is better (top)
 		SEARCH_DISTANCE_IF_NOT_BY_NAME,
 		COMPARE_FIRST_NUMBER_IN_NAME,
@@ -1197,17 +1282,6 @@ public class SearchUICore {
 					return -Algorithms.compare(o1.getFoundWordCount(), o2.getFoundWordCount());
 				}
 				break;
-			case OBF_RESOURCE:
-				boolean fp1 = o1.isFullPhraseEqualLocaleName();
-				boolean fp2 = o2.isFullPhraseEqualLocaleName();
-				// sort order: DETAILED|BASEMAP, WIKIPEDIA, TRAVEL
-				int maxWeight = SearchResult.SearchResultResource.DETAILED.getWeight();
-				int weight1 = fp1 ? maxWeight : o1.getResourceType().getWeight();
-				int weight2 = fp2 ? maxWeight : o2.getResourceType().getWeight();
-				if (weight1 != weight2) {
-					return weight2 > weight1 ? 1 : -1;
-				}
-				break;
 			case UNKNOWN_PHRASE_MATCH_WEIGHT:
 				// here we check how much each sub search result matches the phrase
 				// also we sort it by type house -> street/poi -> city/postcode/village/other
@@ -1227,7 +1301,7 @@ public class SearchUICore {
 				}
 				break;
 			case SEARCH_DISTANCE_IF_NOT_BY_NAME: 
-				if (!c.sortByName) {
+				if (c.sortType != SortType.IGNORE_DISTANCE) {
 					double s1 = o1.getSearchDistance(c.loc);
 					double s2 = o2.getSearchDistance(c.loc);
 					if (s1 != s2) {
@@ -1302,19 +1376,22 @@ public class SearchUICore {
 	public static class SearchResultComparator implements Comparator<SearchResult> {
 		private Collator collator;
 		private LatLon loc;
-		private boolean sortByName;
+		private SearchSettings.SortType sortType;
 		
 
 		public SearchResultComparator(SearchPhrase sp) {
 			this.collator = sp.getCollator();
 			loc = sp.getLastTokenLocation();
-			sortByName = sp.isSortByName();
+			sortType = sp.getSettings().getSortType();
 		}
 		
 
 		@Override
 		public int compare(SearchResult o1, SearchResult o2) {
 			List<ResultCompareStep> steps = new ArrayList<>();
+			if (sortType == SearchSettings.SortType.ONLY_BY_DISTANCE) {
+				return ResultCompareStep.COMPARE_BY_DISTANCE.compare(o1, o2, this);
+			}
 			for (ResultCompareStep step : ResultCompareStep.values()) {
 				int r = step.compare(o1, o2, this);
 				steps.add(step);
@@ -1328,25 +1405,6 @@ public class SearchUICore {
 			return 0;
 		}
 
-	}
-	
-	public static class SearchResultComparatorOneStep extends SearchResultComparator {		
-		ResultCompareStep step;
-		
-		public SearchResultComparatorOneStep(SearchPhrase sp) {
-			super(sp);
-			this.step = ResultCompareStep.COMPARE_BY_DISTANCE;
-		}
-
-		public SearchResultComparatorOneStep(SearchPhrase sp, ResultCompareStep step) {
-			super(sp);
-			this.step = step;
-		}
-
-		@Override
-		public int compare(SearchResult o1, SearchResult o2) {
-            return step.compare(o1, o2, this);
-        }
 	}
 
 	public static String getMainCityName(String cityName) {
@@ -1377,4 +1435,5 @@ public class SearchUICore {
 			return (Algorithms.isEmpty(cityName) ? "" : (cityName + ", ")) + addr;
 		}
 	}
+
 }

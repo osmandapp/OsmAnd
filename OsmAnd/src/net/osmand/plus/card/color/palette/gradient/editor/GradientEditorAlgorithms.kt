@@ -126,6 +126,7 @@ object GradientEditorAlgorithms {
 		val selectedIndex = currentState.selectedIndex
 		val points = draft.points
 		val fileType = draft.fileType
+		val displayUnits = fileType.displayUnitsType.getUnit()
 
 		// 1. Validate selection
 		if (selectedIndex !in points.indices) {
@@ -149,7 +150,7 @@ object GradientEditorAlgorithms {
 		// 4. Convert: Display Units -> Base Units
 		val newValueBase = fileType.baseUnits.from(
 			value = inputDisplayValue.toDouble(),
-			sourceUnit = fileType.displayUnits
+			sourceUnit = displayUnits
 		).toFloat()
 
 		// 5. Validate Limits (Limits are defined in Base Units)
@@ -159,7 +160,7 @@ object GradientEditorAlgorithms {
 		if (minLimitBase != null && newValueBase < minLimitBase) {
 			// Convert limit back to Display Units for the error message
 			// We use 'from' on Display Unit to convert FROM Base Unit.
-			val minLimitDisplay = fileType.displayUnits.from(
+			val minLimitDisplay = displayUnits.from(
 				value = minLimitBase.toDouble(),
 				sourceUnit = fileType.baseUnits
 			).toFloat()
@@ -174,7 +175,7 @@ object GradientEditorAlgorithms {
 
 		if (maxLimitBase != null && newValueBase > maxLimitBase) {
 			// Convert limit back to Display Units
-			val maxLimitDisplay = fileType.displayUnits.from(
+			val maxLimitDisplay = displayUnits.from(
 				value = maxLimitBase.toDouble(),
 				sourceUnit = fileType.baseUnits
 			).toFloat()

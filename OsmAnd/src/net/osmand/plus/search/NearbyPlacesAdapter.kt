@@ -21,8 +21,10 @@ import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.helpers.LocaleHelper
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.render.RenderingIcons
+import net.osmand.plus.search.listitems.QuickSearchListItem
 import net.osmand.plus.settings.enums.ThemeUsageContext
 import net.osmand.plus.utils.AndroidUtils
+import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.OsmAndFormatter
 import net.osmand.plus.utils.PicassoUtils
 import net.osmand.plus.utils.UiUtilities
@@ -118,19 +120,15 @@ class NearbyPlacesAdapter(
 			val osmanPoiType = item.osmandPoiKey
 			val itemType = osmanPoiType ?: item.subType
 			val subType = poiTypes.getPoiTypeByKey(itemType)
-			val poiIcon =
-				if (subType == null) null else RenderingIcons.getBigIcon(app, subType.keyName)
-			val uiUtilities = app.uiUtilities
 			val nightMode = app.daynightHelper.isNightMode(ThemeUsageContext.MAP)
-			val coloredIcon = if (poiIcon != null) {
-				uiUtilities.getRenderingIcon(
-					app,
-					subType.keyName,
-					nightMode
-				)
-			} else {
-				uiUtilities.getIcon(R.drawable.ic_action_info_dark, nightMode)
-			}
+			val poiIcon = QuickSearchListItem.getAmenityTypeIcon(
+				app,
+				item,
+				ColorUtilities.getSecondaryIconColorId(nightMode),
+				true)
+			val uiUtilities = app.uiUtilities
+			val coloredIcon =
+				poiIcon ?: uiUtilities.getIcon(R.drawable.ic_action_info_dark, nightMode)
 			iconImageView.setImageDrawable(coloredIcon)
 			errorImageView.setImageDrawable(coloredIcon)
 			AndroidUiHelper.updateVisibility(errorImageView, true)

@@ -28,6 +28,8 @@ import net.osmand.plus.palette.contract.IPaletteView;
 import net.osmand.plus.palette.controller.BasePaletteController;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.shared.palette.domain.PaletteItem;
 
 public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment implements IPaletteView {
@@ -137,6 +139,13 @@ public class AllGradientsPaletteFragment extends BaseFullScreenDialogFragment im
 				controller.onPaletteScreenClosed();
 			}
 		}
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.add(InsetTarget.createScrollable(R.id.recycler_view));
+		return collection;
 	}
 
 	protected int getStatusBarColorId() {

@@ -346,7 +346,7 @@
     <string name="rendering_attr_showRoadMaps_name">Карты только дорог</string>
     <string name="download_roads_only_item">Только дороги</string>
     <string name="download_regular_maps">Стандартная карта</string>
-    <string name="download_roads_only_maps">Карта дорог</string>
+    <string name="download_roads_only_maps">Карта только для дорог</string>
     <string name="safe_mode_description">Запустить приложение в безопасном (более медленном) режиме.</string>
     <string name="safe_mode">Безопасный режим</string>
     <string name="native_library_not_running">Приложение работает в безопасном режиме (отключается в разделе «Настройки»).</string>
@@ -778,7 +778,7 @@
     <string name="hint_search_online">Онлайн-поиск: номер дома, улица, город</string>
     <string name="search_offline_address">Локальный поиск</string>
     <string name="search_online_address">Онлайн-поиск</string>
-    <string name="max_level_download_tile">Уровень детализации</string>
+    <string name="max_level_download_tile">Максимальное увеличение в режиме онлайн</string>
     <string name="max_level_download_tile_descr">Выберите максимальный масштаб для загрузки тайлов карт из интернета.</string>
     <string name="route_general_information">Общая протяжённость = %1$s, время в пути = %2$d ч %3$d мин.</string>
     <string name="router_service_descr">Онлайн или локальный сервис для прокладки маршрута.</string>
@@ -1042,7 +1042,7 @@
     <string name="osmand_parking_position_name">Место парковки</string>
     <string name="osmand_parking_plugin_description">Отметьте, где припаркован ваш автомобиль, и сообщите в своем календаре, когда закончится срок действия парковочного счетчика. Чтобы разместить метку, выберите место на карте, перейдите в раздел \"Действия\" и нажмите \"Добавить парковку\".</string>
     <string name="osmand_parking_plugin_name">Место парковки</string>
-    <string name="context_menu_item_add_parking_point">Отметить как место для парковки</string>
+    <string name="context_menu_item_add_parking_point">Отметить место парковки</string>
     <string name="context_menu_item_delete_parking_point">Удалить парковку</string>
     <string name="starting_point_too_far">Пункт отправления слишком далеко от ближайшей дороги.</string>
     <string name="shared_location">Общие места</string>
@@ -2278,7 +2278,7 @@
     <string name="yesterday">Вчера</string>
     <string name="last_seven_days">За последние 7 дней</string>
     <string name="this_year">В этом году</string>
-    <string name="plan_route">Проект маршрута</string>
+    <string name="plan_route">План маршрута</string>
     <string name="coordinate_input">Ввод координат</string>
     <string name="move_to_history">Переместить в историю</string>
     <string name="group_will_be_removed_after_restart">Группа будет выключена при следующем запуске приложения.</string>
@@ -2462,7 +2462,7 @@
     <string name="parked_at">припаркован в</string>
     <string name="pick_up_till">Забрать до</string>
     <string name="without_time_limit">Без ограничения по времени</string>
-    <string name="context_menu_read_full_article">Полный текст статьи</string>
+    <string name="context_menu_read_full_article">Прочитать статью полностью</string>
     <string name="context_menu_read_article">Читать статью</string>
     <string name="context_menu_points_of_group">Все точки группы</string>
     <string name="open_from">Откроется в</string>
@@ -3922,7 +3922,7 @@
     <string name="backup_setup">Настроить резервное копирование</string>
     <string name="promo_subscription">Промо-подписка</string>
     <string name="on_hold_since">Приостановлена с %1$s</string>
-    <string name="active_till">Активна до %1$s</string>
+    <string name="active_till">Активно до %1$s</string>
     <string name="track_has_no_needed_data">В треке отсутствуют соответствующие данные.</string>
     <string name="enter_verification_code">Введите одноразовый пароль</string>
     <string name="reset_to_original">Сбросить к начальному значению</string>
@@ -4676,7 +4676,6 @@
     <string name="shared_string_pounds">фунтов</string>
     <string name="metric_lbs">фунт</string>
     <string name="weather_forecast_is_outdated">Прогноз устарел.</string>
-    <string name="shared_string_all_world">Весь мир</string>
     <string name="weather_forecast">Прогноз погоды</string>
     <string name="offline_weather_forecast">Прогноз погоды офлайн</string>
     <string name="offline_weather_forecast_desc">Вы можете скачать прогноз погоды на 7 дней.</string>
@@ -4906,7 +4905,7 @@
     <string name="help_article_navigation_routing_straight_line_routing_name">Прямая линия (воздушное судно)</string>
     <string name="help_article_navigation_routing_train_routing_name">Поезд</string>
     <string name="help_article_personal_import_export_name">Импорт/экспорт</string>
-    <string name="help_article_plan_route_name">Проект маршрута</string>
+    <string name="help_article_plan_route_name">План маршрута</string>
     <string name="help_article_plan_route_coordinate_input_name">Ввод координат</string>
     <string name="help_article_plan_route_web_name">Веб-планировщик маршрутов</string>
     <string name="help_article_purchases_android_name">Покупки на Android</string>
@@ -4965,7 +4964,6 @@
     <string name="sort_country_name_descending">Названия стран: Я – А</string>
     <string name="delete_map_description">Удалить карту %1$s?</string>
     <string name="maps_and_resources">Карты и ресурсы</string>
-    <string name="widget_available_ram_desc">Отображает доступную память, выделенную для OsmAnd.</string>
     <string name="glide_ratio_to_target">Коэффициент планирования к цели</string>
     <string name="average_glide_ratio">Средний коэффициент планирования</string>
     <string name="release_4_6">• Android Auto: добавлен 3D-режим \n \n• Треки: добавлены фильтры и смарт-папки, оптимизирована память для файлов большего размера \n \n• Улучшены верхняя и нижняя панели виджетов для размещения всех вариантов виджетов \n \n• Улучшено управление локальными ресурсами \n \n• Настраиваемое назначение кнопок для внешних контроллеров \n \n• Новые виджеты: «Коэффициент планирования» и «Положение солнца» \n \n• OsmAnd Cloud: доступ к удаленным файлам \n \n• Улучшена окраска линии маршрута в режиме уклона с новым симметричным градиентом \n \n• Исправлены проблемы с прозрачной строкой состояния \n \n• Добавлена поддержка виджета температуры ANT+ \n \n• Добавлен виджет «Доступная оперативная память»</string>
@@ -4973,7 +4971,6 @@
     <string name="map_widget_group_glide_ratio">Коэффициент планирования</string>
     <string name="app_mode_hang_gliding">Дельтапланеризм</string>
     <string name="may_be_used_if_there_is_shortcut">Может быть использован при наличии ярлыка</string>
-    <string name="widget_available_ram">Доступная оперативная память</string>
     <string name="shared_string_created">Дата создания</string>
     <string name="live_monitoring_adress_descr">Укажите веб-адрес используя следующий синтаксис: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}, batproc={11}.</string>
     <string name="shared_string_show_icon">Показать значок</string>
@@ -5267,7 +5264,7 @@
     <string name="quick_action_move_map_right">Подвинуть карту вправо</string>
     <string name="quick_action_move_map_down">Сдвинуть карту ниже</string>
     <string name="quick_action_move_map_up">Сдвинуть карту вверх</string>
-    <string name="quick_action_previous_app_profile">К предыдущему Профилю приложения</string>
+    <string name="quick_action_previous_app_profile">К предыдущему профилю</string>
     <string name="app_profile">Профиль приложения</string>
     <string name="shared_string_create">Создать</string>
     <string name="shared_string_replace">Заменить</string>
@@ -5295,7 +5292,7 @@
     <string name="quick_action_map_underlay">Подложка</string>
     <string name="quick_action_directions_from">Маршрут от этой точки</string>
     <string name="quick_action_remove_next_destination">Следующий пункт назначения</string>
-    <string name="quick_action_next_app_profile">К следующему Профилю приложения</string>
+    <string name="quick_action_next_app_profile">К следующему профилю</string>
     <string name="energy_avg_info_description">Расход батареи в минуту: %1$s
 \nПотребление энергии (мАч): %2$s</string>
     <string name="rendering_avg_info">Статистика рендеринга (в среднем за 1/5/15 минут)</string>
@@ -5345,7 +5342,7 @@
     <string name="delete_widget">Удалить виджет?</string>
     <string name="battery_saving_mode">Режим экономии батареи</string>
     <string name="delete_widget_description">Этот виджет будет удален. Вы сможете восстановить его позже в настройках экрана.</string>
-    <string name="y_axis_description">Выберите не более двух параметров.</string>
+    <string name="y_axis_description">Выберите до двух вариантов для оси Y.</string>
     <string name="graph_axis">Ось графика</string>
     <string name="quick_action_search_view_desc">Переключатель для открытия или закрытия режима поиска.</string>
     <string name="shared_string_interface">Интерфейс</string>
@@ -5648,7 +5645,7 @@
     <string name="save_to_device_error">Ошибка сохранения на устройстве</string>
     <string name="travel_guides">Путеводители</string>
     <string name="show_debug_tile_description">Показывать отладочную информацию о каждом тайле</string>
-    <string name="show_debug_tile">Показывать информацию о тайле</string>
+    <string name="show_debug_tile">Отображать информацию о тайлах</string>
     <string name="unit_of_temperature_description">Выбранные единицы измерения будут применены ко всем данным, связанным с температурой, в текущем профиле.</string>
     <string name="deactivated_map">Деактивированная карта</string>
     <string name="hmd_promo_description_years">Бесплатный доступ к возможностям включая безграничное скачивание карт, рельефов в 3D и т.д. на %1$s лет</string>
@@ -5780,7 +5777,7 @@
     <string name="centimeter">см</string>
     <string name="shared_string_centimeters">сантиметры</string>
     <string name="copy_link">Скопировать ссылку</string>
-    <string name="bicycle_width_limit_description">Укажите ширину вашего велосипеда, чтобы избегать узких велодорожек.</string>
+    <string name="bicycle_width_limit_description">Укажите ширину своего велосипеда, чтобы не попасть на узкие велодорожки.</string>
     <string name="show_spherical_map">Вид на земной шар</string>
     <string name="help_article_navigation_routing_ski_routing_name">Горнолыжные склоны и маршруты</string>
     <string name="lang_mi">Маори</string>
@@ -5812,7 +5809,7 @@
     <string name="rendering_attr_safetyContour_description">Контур безопасной глубины</string>
     <string name="response">Ответ</string>
     <string name="download_wikipedia_label">Скачать Википедию</string>
-    <string name="has_vehicle_metrics">С данными OBD-II</string>
+    <string name="has_vehicle_metrics">С данными OBDII</string>
     <string name="reverse_mode_original_track_desc">Точно следовать по маршруту обратно к началу.\nПредупреждение: Это может быть опасно, так как игнорирует одностороннее движение на дорогах.</string>
     <string name="reverse_mode">Реверсивный режим</string>
     <string name="release_5_2">• Добавлены данные о улице и городе в результаты поиска\n\n• Новые виджеты записи поездки: максимальная скорость, средний уклон и улучшенные показатели подъёмов/спусков\n\n• Новый морской навигационный стиль карты с широкими возможностями настройки\n\n• Улучшена скорость отрисовки карты\n\n• Повышена стабильность подключения к адаптерам OBDII BLE\n\n• Добавлены показатели пульса в разделе «Анализ по интервалам»\n\n• Добавлено отображение длительности для запланированных треков\n\n• Единицы измерения высоты теперь можно задавать отдельно от единиц измерения расстояния\n\n• Улучшено быстрое действие ориентации карты с выбором режима компаса\n\n• Для Android Auto добавлены предварительные уведомления о недостающих картах и частных дорогах\n\n• Исправлена ошибка с неправильными параметрами размера для виджета «Радиусная линейка»\n\n• Добавлены инверсные ориентации экрана\n\n• Улучшен интерфейс пользователя для указания параметров грузовика</string>
@@ -5822,7 +5819,7 @@
     <string name="buildings_3d_detail_level">Детализация 3D зданий</string>
     <string name="access_pinch_zoom_magnification">Увеличение с помощью жеста «щипок»</string>
     <string name="access_pinch_zoom_magnification_descr">Использовать масштабирование области просмотра вместо дискретных уровней увеличения при жестах увеличения.</string>
-    <string name="vehicle_metrics_chart_category">Показатели ТС</string>
+    <string name="vehicle_metrics_chart_category">Показатели транспортного средства</string>
     <string name="imprecise_coordinates">Примерные координаты</string>
     <string name="show_expand_button">Показать кнопку \"развернуть\"</string>
     <string name="astronomy_plugin_description">Карта звёзд в 3D</string>
@@ -5880,15 +5877,15 @@
     <string name="organize_by_max_altitude">Макс. высота</string>
     <string name="copy_from_portrait_layout">Копировать с портретной ориентации</string>
     <string name="copy_from_landscape_layout">Копировать с альбомной ориентации</string>
-    <string name="panels_layout_compact">Компактный</string>
-    <string name="panels_layout_wide">Широкий</string>
-    <string name="panels_layout">Расположение панелей</string>
+    <string name="panels_layout_compact">Компактная</string>
+    <string name="panels_layout_wide">Широкая</string>
+    <string name="panels_layout">Компоновка панелей</string>
     <string name="panels_layout_descr">Выберите расположение верхней и нижней панелей. Они могут быть широкими, занимающими всю ширину экрана, или компактными, располагающимися между боковыми панелями и кнопками.</string>
     <string name="single_layout">Единый макет</string>
     <string name="separate_layouts">Отдельные макеты</string>
     <string name="use_separate_layouts">Использовать отдельные макеты</string>
     <string name="map_screen_layout">Макет экрана карты</string>
-    <string name="map_screen_layout_descr">Выберите, использовать ли единый макет для всех ориентаций или настроить портретную и альбомную ориентацию отдельно.</string>
+    <string name="map_screen_layout_descr">Выберите, использовать ли единый макет для всех ориентаций или настроить книжную и альбомную ориентацию отдельно.</string>
     <string name="meridian_line">Линия меридиана</string>
     <string name="equator_line">Линия экватора</string>
     <string name="galactic_line">Галактическая координатная линия</string>
@@ -5913,12 +5910,12 @@
     <string name="pin_folder">Закрепить папку</string>
     <string name="favorite_search_empty_state_description">Попробуйте изменить параметры поиска или фильтры, возможно это поможет</string>
     <string name="favorites_empty_folder_description">В этой папке пока нет избранных точек.</string>
-    <string name="free_custom_color_description">Придайте 3D-зданиям любой цвет. Идеально подходит для соответствия теме карты или улучшения контраста.</string>
+    <string name="free_custom_color_description">Настройте 3D-модели зданий в любом цвете. Идеально подходит для создания карты в едином стиле или для усиления контраста.</string>
     <string name="buildings_3d_use_map_style_color_description">Использовать цвета стиля карты (%s).</string>
-    <string name="buildings_3d_visibility_description">Отрегулируйте непрозрачность 3D-структур на карте.</string>
-    <string name="level_of_details">Детализация</string>
+    <string name="buildings_3d_visibility_description">Отрегулируйте прозрачность 3D-структур на карте.</string>
+    <string name="level_of_details">Уровень детализации</string>
     <string name="performance">Производительность</string>
-    <string name="view_distance">Дальность видимости</string>
+    <string name="view_distance">Видимость</string>
     <string name="astro_min_magnitude">Мин. величина</string>
     <string name="building_3d_day_color_content_desc">Тема цвета 3d-зданий днём</string>
     <string name="building_3d_night_color_content_desc">Тема цвета 3d-зданий ночью</string>
@@ -6035,4 +6032,41 @@
     <string name="obd_alt_battery_voltage_desc">Показывает уровень напряжения на OBD-адаптере</string>
     <string name="shared_string_radians">Радианы</string>
     <string name="shared_string_unlock">Разблокировать</string>
+    <string name="start_free_trial">Попробуйте бесплатно</string>
+    <string name="subscription_free_trial_with_price">%1$s бесплатно, затем %2$s</string>
+    <string name="subscription_then_price">затем %1$s</string>
+    <string name="compass_calibration_needed">Требуется калибровка компаса</string>
+    <string name="sensors_not_available_for_ar">Датчики, недоступные для ДР</string>
+    <string name="ar_mode_enabled">Включен режим дополненной реальности</string>
+    <string name="ar_mode_disabled">Режим дополненной реальности отключен</string>
+    <string name="release_5_3">• Добавлена поддержка 3D-зданий\n\n • Сферический вид карты\n\n • Астрономический плагин с ночной картой и базой данных звезд\n\n • Новые цветовые режимы для спидометра: допустимое превышение скорости и превышение скорости\n\n • Отдельные макеты виджетов для альбомной и портретной ориентации\n\n • Виджеты для записи поездок: скорость движения и средняя скорость\n\n • Виджет с напряжением адаптера для Показателей транспортного средства\n\n • Данные о технических характеристиках автомобиля в Анализаторе треков\n\n • Автоматическая сортировка треков по годам, продолжительности, активности и другим параметрам\n\n • Редактор палитры для визуализации рельефа и треков\n\n • Улучшенные алгоритмы поиска и обновленный пользовательский интерфейс\n\n • Фиксированные профили высот для маршрутов\n\n • Избранное: новые возможности сортировки и обновленный интерфейс\n\n • Поделитесь ссылкой на любую точку интереса\n\n • Предварительный просмотр путевых точек без закрытия списка\n\n • Параметр ширины велосипеда для езды по узким дорогам\n\n • Описания фотографий из Викимедиа</string>
+    <string name="purchases_feature_desc_astronomy">Исследуйте ночное небо с помощью офлайн-карты и каталога небесных тел. Планируйте наблюдения с помощью удобных графиков видимости, ежедневных расписаний и интерактивного режима дополненной реальности.</string>
+    <string name="shared_string_clear_filters">Очистить фильтры</string>
+    <string name="astro_sort_newest_first">Самый новый в начале</string>
+    <string name="astro_sort_oldest_first">Самый старый в начале</string>
+    <string name="astro_expand_your_universe_title">Расширяйте свою вселенную</string>
+    <string name="astro_expand_your_universe_description">Получите доступ к расширенной базе данных каталогов объектов дальнего космоса, статьям Википедии и режиму дополненной реальности в автономном режиме.</string>
+    <string name="astro_offline_knowledge_base_title">Автономная база знаний</string>
+    <string name="astro_offline_knowledge_base_description">Скачать расширенную базу данных, чтобы получать доступ к статьям Википедии и каталогам объектов дальнего космоса без подключения к интернету.</string>
+    <string name="astro_schedule_next_day_note">⁺¹ Следующий день.</string>
+    <string name="astro_visibility_show_today">Показать сегодняшнюю видимость</string>
+    <string name="astro_schedule_show_current_week">Показать текущую неделю</string>
+    <string name="astro_next_day_suffix">⁺¹</string>
+    <string name="shared_string_world_weather_map">Карта погоды в мире</string>
+    <string name="map_widget_memory_info">Информация о памяти</string>
+    <string name="map_widget_memory_info_desc">Отслеживает кучу Java, собственные выделения памяти и графическую память.</string>
+    <string name="memory_used_settings">Используемая куча Java</string>
+    <string name="memory_allocated_settings">Выделенная память кучи Java</string>
+    <string name="memory_limit_settings">Максимальный предел кучи Java</string>
+    <string name="memory_native_settings">Выделение памяти в Собственной куче</string>
+    <string name="memory_graphics_settings">Графическая память</string>
+    <string name="shared_string_heap">Куча</string>
+    <string name="shared_string_native">Собственная</string>
+    <string name="shared_string_gpu">Графический процессор</string>
+    <string name="shared_string_allocated">Зарезервированная</string>
+    <string name="open_till_short">До</string>
+    <string name="open_from_short">C</string>
+    <string name="astro_designations">Обозначения</string>
+    <string name="obd_simulation_device">Устройство для моделирования</string>
+    <string name="astronomy_map">Астрономическая карта</string>
 </resources>

@@ -20,12 +20,16 @@ import net.osmand.plus.utils.FormattedValue;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class AntBikePowerSensor extends AntAbstractSensor<AntPlusBikePowerPcc> {
 
 	private BikePowerData lastBikePowerData;
+	private BigDecimal lastData;
+	private AntPlusBikePowerPcc.DataSource lastDataSource;
 
 	public static class BikePowerData implements SensorData {
 
@@ -142,6 +146,11 @@ public class AntBikePowerSensor extends AntAbstractSensor<AntPlusBikePowerPcc> {
 		if (pcc != null) {
 			pcc.subscribeRssiEvent(null);
 			pcc.subscribeCalculatedPowerEvent((estTimestamp, eventFlags, dataSource, calculatedPower) -> {
+				if (!Objects.equals(lastData, calculatedPower) || lastDataSource != dataSource) {
+					lastTimeDifferentValue = System.currentTimeMillis();
+					lastData = calculatedPower;
+					lastDataSource = dataSource;
+				}
 				boolean powerOnlyData = AntPlusBikePowerPcc.DataSource.POWER_ONLY_DATA.equals(dataSource);
 				boolean initialPowerOnlyData = AntPlusBikePowerPcc.DataSource.INITIAL_VALUE_POWER_ONLY_DATA.equals(dataSource);
 				lastBikePowerData = new BikePowerData(estTimestamp, calculatedPower.doubleValue(),

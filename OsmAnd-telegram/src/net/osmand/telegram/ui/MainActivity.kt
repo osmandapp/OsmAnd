@@ -3,7 +3,6 @@ package net.osmand.telegram.ui
 import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -29,6 +28,9 @@ import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.GRAYSCALE_PHOTOS_DIR
 import net.osmand.telegram.utils.GRAYSCALE_PHOTOS_EXT
 import net.osmand.telegram.utils.OsmandApiUtils
+import net.osmand.telegram.utils.applyBottomSystemWindowInsets
+import net.osmand.telegram.utils.applyHorizontalSystemWindowInsets
+import net.osmand.telegram.utils.setupTelegramEdgeToEdge
 import org.drinkless.tdlib.TdApi
 import java.io.File
 import java.lang.ref.WeakReference
@@ -69,13 +71,9 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
+		setupTelegramEdgeToEdge()
 		setContentView(R.layout.activity_main)
-
-		if (Build.VERSION.SDK_INT >= 23) {
-			AndroidUtils.enterToTransparentFullScreen(this)
-		} else if (Build.VERSION.SDK_INT >= 19) {
-			AndroidUtils.enterToTranslucentFullScreen(this)
-		}
+		findViewById<View>(android.R.id.content).applyHorizontalSystemWindowInsets()
 		
 		paused = false
 
@@ -86,6 +84,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		}
 		coordinatorLayout = findViewById(R.id.coordinator)
 		bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation).apply {
+			applyBottomSystemWindowInsets()
 			setOnNavigationItemSelectedListener {
 				var pos = -1
 				when (it.itemId) {
@@ -119,6 +118,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		}
 
 		buttonsBar = findViewById<LinearLayout>(R.id.buttons_bar).apply {
+			applyBottomSystemWindowInsets(resizeHeight = true)
 			findViewById<TextView>(R.id.primary_btn).apply {
 				text = getString(R.string.shared_string_continue)
 				setOnClickListener {

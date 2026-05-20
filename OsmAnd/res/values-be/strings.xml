@@ -2615,7 +2615,7 @@
     <string name="enter_lat_and_lon">Увядзіце шырату і даўгату</string>
     <string name="distance_farthest">Спачатку далёкія</string>
     <string name="distance_nearest">Спачатку бліжэйшыя</string>
-    <string name="clear_all_intermediates">Выдаліць усе прамежкавыя пункты</string>
+    <string name="clear_all_intermediates">Ачысціць усе прамежкавыя пункты</string>
     <string name="group_deleted">Група выдаленая</string>
     <string name="rendering_attr_whiteWaterSports_name">Сплаўны спорт</string>
     <string name="select_waypoints_category_description">Дадаць усе пункты шляху ці абраць асобныя катэгорыі.</string>
@@ -4553,7 +4553,7 @@
     <string name="sample_wikivoyage">Прыклад Wikivoyage</string>
     <string name="explore_plans">Азнаёмцеся з тарыфнымі планамі</string>
     <string name="rendering_attr_showShareTaxiRoutes_name">Трансферныя маршруты</string>
-    <string name="location_source">Крыніца даных пра месцазнаходжанне</string>
+    <string name="location_source">Крыніца месцапалажэння</string>
     <string name="shared_string_reading_file">Чытанне файла…</string>
     <string name="all_groups">Усе групы</string>
     <string name="waypoint_template">Шаблон маршрутнай кропкі</string>
@@ -4771,7 +4771,7 @@
     <string name="determine_location">Вызначыць ваша месцазнаходжанне</string>
     <string name="favorites_backup">Рэзервовая копія ўлюбёнага</string>
     <string name="app_mode_moped">Мапед</string>
-    <string name="map_rendering_engine_descr">Адмалёўка першай версіі была прадвызначанай да OsmAnd 4.3 і па-ранейшаму з\'яўляецца пераважнай для старых прылад.\nВерсія 2 (OpenGL) - гэта больш хуткі рухавік адмалёўкі мапы, які падтрымлівае 2.5D-выгляд.</string>
+    <string name="map_rendering_engine_descr">Версія 1 была стандартнай да OsmAnd 4.3 і лепш падыходзіць для старых прылад. \n\nВерсія 2 (OpenGL) — больш сучасны рухавік адлюстравання мапаў, які падтрымлівае 3D-рэжым.</string>
     <string name="rendering_engine_failed_descr">OsmAnd вярнуўся да рухавіка адмалёўкі мапы \'Версія 1\'. Вы можаце паспрабаваць пераключыцца на новы рухавік адмалёўкі \'Версія 2 (OpenGL)\' праз налады.
 \n
 \nКалі ласка, падтрымайце паляпшэнні, падаўшы свой журнал памылак.</string>
@@ -4815,49 +4815,7 @@
     <string name="cache_size">Памер кэша</string>
     <string name="shared_string_avoid">Пазбягаць</string>
     <string name="may_be_used_if_there_is_shortcut">Можа выкарыстоўвацца, калі ёсць ярлык</string>
-    <string name="release_4_5">• Датчыкі BLE/ANT+: удасканаленае злучэнне, запіс і прагляд атрыманых даных у GPX
-\n
-\n • Бясплатнае рэзервовае капіраванне выбраных і налад у \"OsmAnd Cloud\"
-\n
-\n • Новы фармат карт мясцовасці з падтрымкай 3D-рэльефу
-\n
-\n • Кіраванне слядамі: абноўлены інтэрфейс, дададзена сартаванне, падтрымка ўкладзеных папак
-\n
-\n • Android Auto: новае меню «Пуск» для доступу да абраных, трэкаў і катэгорый POI
-\n
-\n • Агульны спіс віджэтаў для верхняй/ніжняй панэлі
-\n
-\n • Новы профіль «Цягнік», які дазваляе разлічваць чыгуначныя маршруты
-\n
-\n • Контурныя лініі працуюць з любой «крыніцай карты»
-\n
-\n • Пашыраны спіс дзеянняў па змаўчанні для знешніх клавіятур
-\n
-\n • Карыстальніцкія файлы маршрутызацыі: дададзены параметры для выдалення або перазапісу
-\n
-\n • Дададзена опцыя «Апавяшчаць аб адхіленні ад маршруту»
-\n
-\n • Пачатковы экран: дададзена опцыя аднаўлення стану OsmAnd з файла
-\n
-\n • Дададзены класы «Небяспечныя матэрыялы» Навігацыя грузавікоў у Паўночнай Амерыцы
-\n
-\n • Дададзена падтрымка \"Via ferrata\" для пешаходнага маршруту
-\n
-\n • Дададзена шкала \"CAI\" для класіфікацыі складанасці маршрутаў
-\n
-\n • Выпраўлены выбар мовы для кожнага прыкладання
-\n
-\n • Дададзена падтрымка тэматычных значкоў
-\n
-\n • OsmAnd Cloud: дададзена магчымасць выдалення ўліковага запісу
-\n
-\n • Даступнасць: памер кнопак зменены на 48 dp; выпраўлена праблема з інтэрфейсам карты для праграм чытання з экрана
-\n
-\n • Перапрацаваныя галасавыя падказкі на японскай мове
-\n
-\n • Удасканалены разлік змены вышыні і ацэнка схілу
-\n
-\n</string>
+    <string name="release_4_5">• Датчыкі BLE/ANT+: удасканаленае злучэнне, запіс і прагляд атрыманых даных у GPX \n \n • Бясплатнае рэзервовае капіраванне выбраных і налад у \"OsmAnd Cloud\" \n \n • Новы фармат карт мясцовасці з падтрымкай 3D-рэльефу \n \n • Кіраванне слядамі: абноўлены інтэрфейс, дададзена сартаванне, падтрымка ўкладзеных папак \n \n • Android Auto: новае меню «Пуск» для доступу да абраных, трэкаў і катэгорый POI \n \n • Агульны спіс віджэтаў для верхняй/ніжняй панэлі \n \n • Новы профіль «Цягнік», які дазваляе разлічваць чыгуначныя маршруты \n \n • Контурныя лініі працуюць з любой «крыніцай карты» \n \n • Пашыраны спіс дзеянняў па змаўчанні для знешніх клавіятур \n \n • Карыстальніцкія файлы маршрутызацыі: дададзены параметры для выдалення або перазапісу \n \n • Дададзена опцыя «Апавяшчаць аб адхіленні ад маршруту» \n \n • Пачатковы экран: дададзена опцыя аднаўлення стану OsmAnd з файла \n \n • Дададзены класы «Небяспечныя матэрыялы» Навігацыя грузавікоў у Паўночнай Амерыцы \n \n • Дададзена падтрымка \"Via ferrata\" для пешаходнага маршруту \n \n • Дададзена шкала \"CAI\" для класіфікацыі складанасці маршрутаў \n \n • Выпраўлены выбар мовы для кожнага прыкладання \n \n • Дададзена падтрымка тэматычных значкоў \n \n • OsmAnd Cloud: дададзена магчымасць выдалення ўліковага запісу \n \n • Даступнасць: памер кнопак зменены на 48 dp; выпраўлена праблема з інтэрфейсам карты для праграм чытання з экрана \n \n • Перапрацаваныя галасавыя падказкі на японскай мове \n \n • Удасканалены разлік змены вышыні і ацэнка схілу</string>
     <string name="osmand_cloud_deletion_account_warning">Ваш уліковы запіс і ўсе рэквізіты ўліковага запісу будуць %1$s</string>
     <string name="manage_subscriptions">Кіраванне падпіскамі.</string>
     <string name="osmand_cloud_deletion_subscriptions_warning">Гэта не скасуе вашу падпіску на OsmAnd Pro.</string>
@@ -5067,4 +5025,50 @@
         <item quantity="many">%d трэкаў</item>
         <item quantity="other">%d трэка</item>
     </plurals>
+    <string name="map_widget_memory_info">Інфармацыя пра памяць</string>
+    <string name="map_widget_memory_info_desc">Маніторыць Java-кучу, натыўныя размеркаванні і графічную памяць.</string>
+    <string name="memory_used_settings">Выкарыстаная куча Java</string>
+    <string name="memory_allocated_settings">Выдзеленая куча Java</string>
+    <string name="memory_limit_settings">Макс. ліміт Java Heap</string>
+    <string name="memory_native_settings">Выдзелена ў натыўнай кучы</string>
+    <string name="memory_graphics_settings">Графічная памяць</string>
+    <string name="shared_string_heap">Куча</string>
+    <string name="shared_string_gpu">ГП</string>
+    <string name="shared_string_allocated">Выдзелена</string>
+    <string name="compass_calibration_needed">Патрабуецца каліброўка компаса</string>
+    <string name="sensors_not_available_for_ar">Датчыкі недаступныя для AR</string>
+    <string name="ar_mode_enabled">Рэжым AR уключаны</string>
+    <string name="ar_mode_disabled">Рэжым AR выключаны</string>
+    <string name="release_5_3">• Дададзена падтрымка 3D-будынкаў\n\n • Сферычны рэжым прагляду карты\n\n • Астранамічны плагін з начной картай і базай даных зорак\n\n • Новыя каляровыя рэжымы спідометра: «допуск» і «перавышэнне»\n\n • Асобныя макеты віджэтаў для альбомнай і партрэтнай арыентацый\n\n • Віджэты запісу паездкі: хуткасць руху і сярэдняя хуткасць\n\n • Віджэт напружання адаптара для метрык аўтамабіля\n\n • Даныя метрык аўтамабіля ў аналізатары трэкаў\n\n • Аўтаматычная арганізацыя трэкаў па гадах, працягласці, тыпе актыўнасці і інш.\n\n •Рэдактар палітры для візуалізацыі рэльефу і трэкаў\n\n • Палепшаныя алгарытмы пошуку і абноўлены інтэрфейс\n\n • Выпраўлены профілі вышынь для маршрутаў\n\n • «Выбранае»: новыя варыянты сартавання і абнаўленне інтэрфейсу\n\n • Магчымасць падзяліцца спасылкай на любы пункт цікавасці (POI)\n\n • Папярэдні прагляд пунктаў маршруту без закрыцця спіса\n\n • Параметр «шырыня веласіпеда», каб пазбягаць вузкіх дарог\n\n • Апісанні фотаздымкаў з Wikimedia</string>
+    <string name="purchases_feature_desc_astronomy">Даследуйце начное неба з афлайн-мапай і каталогам нябесных цел. Плануйце назіранні з дапамогай разумных графікаў бачнасці, штодзённых раскладаў і інтэрактыўнага рэжыму AR.</string>
+    <string name="shared_string_clear_filters">Ачысціць фільтры</string>
+    <string name="astro_sort_newest_first">Спачатку новыя</string>
+    <string name="astro_sort_oldest_first">Спачатку старыя</string>
+    <string name="no_objects_found">Аб’ектаў не знойдзена</string>
+    <string name="astro_search_info_solar_system">Сонечная сістэма — гэта гравітацыйна звязаная сістэма Сонца і аб’ектаў, якія верцяцца вакол яго, перш за ўсё васьмі планет, адной з якіх з’яўляецца Зямля</string>
+    <string name="astro_search_info_constellations">Сузор’е — гэта вобласць на нябеснай сферы, у якой група бачных зорак утварае пэўную фігуру ці контур.</string>
+    <string name="astro_search_info_stars">Зоркі — гэта светлавыя астранамічныя аб’екты з плазмы, якія ўтрымліваюцца разам уласнай гравітацыяй.</string>
+    <string name="astro_search_info_nebulas">Туманнасць — гэта гіганцкае воблака пылу і газу ў космасе, часта вобласць, дзе нараджаюцца зоркі.</string>
+    <string name="shared_string_native">Натыўны</string>
+    <string name="years_3">Тры гады</string>
+    <string name="astro_expand_your_universe_title">Пашырайце свой сусвет</string>
+    <string name="astro_expand_your_universe_description">Атрымайце доступ да пашыранай базы даных каталогаў глыбокага космасу, артыкулаў Вікіпедыі і рэжыму дапоўненай рэальнасці (AR) у аўтаномным рэжыме.</string>
+    <string name="astro_offline_knowledge_base_title">Афлайнавая база ведаў</string>
+    <string name="astro_offline_knowledge_base_description">Загрузіце пашыраную базу даных, каб атрымаць доступ да артыкулаў Вікіпедыі і каталогаў глыбокага космасу ў аўтаномным рэжыме.</string>
+    <string name="astro_schedule_next_day_note">Наступны дзень.</string>
+    <string name="astro_visibility_show_today">Паказаць сённяшнюю бачнасць</string>
+    <string name="astro_schedule_show_current_week">Паказваць бягучы тыдзень</string>
+    <string name="start_free_trial">Пачаць бясплатны пробны перыяд</string>
+    <string name="shared_string_radians">Радыяны</string>
+    <string name="shared_string_unlock">Разблакаваць</string>
+    <string name="astro_search_info_star_clusters">Зорная скупнасць — гэта група зорак, якія звязаны гравітацыяй і ўтварыліся з адной і той жа малекулярнай хмары.</string>
+    <string name="astro_search_info_deep_sky">Аб\'екты далёкага космасу ўключаюць галактыкі, туманнасці, зорныя скупнасці і іншыя аддаленыя астранамічныя мэты.</string>
+    <string name="astro_go_to_map">Перайсці да карты</string>
+    <string name="astro_my_data_no_favorites_title">Тут нічога няма</string>
+    <string name="astro_my_data_no_favorites_description">Вы можаце дадаваць аб’екты ў абранае праз іх кантэкстнае меню</string>
+    <string name="astro_my_data_no_daily_paths_title">Няма штодзённых шляхоў</string>
+    <string name="astro_my_data_no_daily_paths_description">Уключыце штодзённы шлях для аб’екта ў яго кантэкстным меню, каб убачыць яго тут</string>
+    <string name="astro_my_data_no_directions_title">Маршрут не зададзены</string>
+    <string name="astro_my_data_no_directions_description">Маршрут дазваляе трымаць бачнай стрэлку, якая паказвае на аб’ект. Уключыце яго ў кантэкстным меню.</string>
+    <string name="open_till_short">Да</string>
 </resources>

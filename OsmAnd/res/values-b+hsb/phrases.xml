@@ -252,7 +252,6 @@
     <string name="poi_stadium">stadion</string>
     <string name="poi_sports_centre">sportowy centrum</string>
     <string name="poi_golf_course">golfownišćo</string>
-    <string name="poi_cuisine_crepes">Crepes</string>
     <string name="poi_cuisine_meat">mjaso</string>
     <string name="poi_cuisine_waffle">wafle</string>
     <string name="poi_cuisine_chocolate">šokolada</string>
@@ -1404,7 +1403,6 @@
     <string name="poi_traffic_calming_island">wobchadna kupa</string>
     <string name="poi_traffic_signals">ampla</string>
     <string name="poi_car_repair">awtowa porjedźernja</string>
-    <string name="poi_service_tyres">wobruče</string>
     <string name="poi_vehicle_inspection">inspekcija awta</string>
     <string name="poi_car_wash">awtowa myjernja</string>
     <string name="poi_fuel">tankownja</string>

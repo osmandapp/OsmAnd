@@ -158,7 +158,7 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 		} else if (routingHelper.getRoute().hasMissingMaps()) {
 			NavigationSession session = getSession();
 			if (session != null) {
-				session.showMissingMapsScreen();
+				session.showMissingMapsScreen(false);
 			}
 		}
 	}

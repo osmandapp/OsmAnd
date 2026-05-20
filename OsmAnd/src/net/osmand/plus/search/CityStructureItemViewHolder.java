@@ -33,12 +33,12 @@ import net.osmand.util.Algorithms;
 
 public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 
-	public static final String OLD_NAME_TAG = "old_name";
 	public final OsmandApplication app;
 	public final UpdateLocationViewCache locationViewCache;
 
 	public final TextView titleTv;
 	public final TextView addressTv;
+	public final TextView distanceToCity;
 	public final View addressDotDivider;
 	public final TextView type;
 	public final ImageView icon;
@@ -55,6 +55,7 @@ public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 		this.locationViewCache = locationViewCache;
 
 		titleTv = view.findViewById(R.id.item_title);
+		distanceToCity = view.findViewById(R.id.distance_to_city);
 		addressTv = view.findViewById(R.id.address);
 		addressDotDivider = view.findViewById(R.id.address_dot_divider);
 		type = view.findViewById(R.id.item_type);
@@ -67,12 +68,28 @@ public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 		this.nightMode = nightMode;
 	}
 
+	private void processDistanceToCity(@NonNull OsmandApplication app, @NonNull QuickSearchListItem item) {
+		MapObject mapObject = (MapObject) item.getSearchResult().object;
+		boolean needToShowDistanceToCity = false;
+		if (mapObject instanceof City city) {
+			City.CityType cityType = city.getType();
+			if (cityType == City.CityType.VILLAGE || cityType == City.CityType.HAMLET) {
+				needToShowDistanceToCity = true;
+			}
+		}
+		if (needToShowDistanceToCity) {
+			String distanceToCityStr = QuickSearchListItem.getDistanceToCity(app, item.getSearchResult());
+			distanceToCity.setText(distanceToCityStr);
+		}
+		AndroidUiHelper.updateVisibility(distanceToCity, needToShowDistanceToCity && !Algorithms.isEmpty(distanceToCity.getText()));
+	}
+
 	public void bindItem(@NonNull QuickSearchListItem item, boolean useMapCenter) {
-		CharSequence title = item.getSpannableName();
+		CharSequence title = item.getMapObjectTitleWithAltName(app, nightMode);
 		MapObject mapObject = (MapObject) item.getSearchResult().object;
 		String addressText = item.getAddress();
 		String typeName = item.getTypeName();
-
+		processDistanceToCity(app, item);
 		if (mapObject instanceof City city) {
 			BinaryMapIndexReader mapReaderResource = null;
 			if (mapObject.getReferenceFile() instanceof BinaryMapIndexReader) {
@@ -92,13 +109,23 @@ public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 				case TOWN -> app.getString(R.string.city_type_town);
 				case BOUNDARY -> app.getString(R.string.poi_boundary_stone);
 				case POSTCODE -> app.getString(R.string.postcode);
+				case HAMLET -> app.getString(R.string.city_type_hamlet);
+				case NEIGHBOURHOOD -> app.getString(R.string.city_type_neighbourhood);
+				case DISTRICT -> app.getString(R.string.city_type_district);
+				case BOROUGH -> app.getString(R.string.poi_borough);
 				default -> app.getString(R.string.city_type_city);
 			};
 		} else if (mapObject instanceof Street street) {
-			if (street.getNamesMap(false).containsKey(OLD_NAME_TAG)) {
-				title = String.format("%s (%s)", title, street.getName(OLD_NAME_TAG));
+			StringBuilder streetAddressBuilder = new StringBuilder();
+			String cityPart = QuickSearchListItem.getStreetCityPart(item.getSearchResult());
+			if (cityPart != null) {
+				streetAddressBuilder.append(cityPart);
 			}
-			addressText = street.getCity().getName();
+			if (!Algorithms.isEmpty(streetAddressBuilder)) {
+				streetAddressBuilder.append(", ");
+			}
+			streetAddressBuilder.append(street.getCity().getName());
+			addressText = streetAddressBuilder.toString();
 			if (item.getSearchResult().objectType == ObjectType.STREET) {
 				typeName = app.getString(R.string.search_address_street);
 			} else if (item.getSearchResult().objectType == ObjectType.STREET_INTERSECTION) {

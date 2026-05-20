@@ -5,6 +5,7 @@ import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.data.LatLon;
+import net.osmand.shared.routing.GeneralRouterProfile;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.TransliterationHelper;
@@ -13,7 +14,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import static net.osmand.router.GeneralRouter.GeneralRouterProfile;
 
 public class RouteDataObject {
 	/*private */static final int RESTRICTION_SHIFT = 3;
@@ -38,6 +38,9 @@ public class RouteDataObject {
 	// mixed array [0, height, cumulative_distance height, cumulative_distance, height, ...] - length is length(points)*2
 	public float[] heightDistanceArray = null;
 	public float heightByCurrentLocation = Float.NaN;
+
+	public static final String JUNCTION_REF = "junction:ref";
+	public static final String JUNCTION_NAME = "junction:name";
 
 	public RouteDataObject(RouteRegion region) {
 		this.region = region;
@@ -678,7 +681,7 @@ public class RouteDataObject {
 		return false;
 	}
 
-	public boolean isExitPoint() {
+	public boolean hasMotorwayJunctionNode() {
 		if (pointTypes != null) {
 			int ptSz = pointTypes.length;
 			for (int i = 0; i < ptSz; i++) {
@@ -696,6 +699,32 @@ public class RouteDataObject {
 		return false;
 	}
 
+	public String getJunctionRef() {
+		return getValue(JUNCTION_REF);
+	}
+
+	public String getJunctionName() {
+		return getValue(JUNCTION_NAME);
+	}
+
+	public String getNodeRef() {
+		return getPointNameByTypeRule(region.refTypeRule);
+	}
+
+	public String getNodeName() {
+		return getPointNameByTypeRule(region.nameTypeRule);
+	}
+
+	public String getExitRef() {
+		String junctionRef = getJunctionRef();
+		return junctionRef != null ? junctionRef : getNodeRef();
+	}
+
+	public String getExitName() {
+		String junctionName = getJunctionName();
+		return junctionName != null ? junctionName : getNodeName();
+	}
+
 	public boolean hasTrafficLightAt(int i) {
 		int[] pointTypes = getPointTypes(i);
 		if (pointTypes != null) {
@@ -706,53 +735,6 @@ public class RouteDataObject {
 			}
 		}
 		return false;
-	}
-
-//	public boolean isMotorWayLink() {
-//		int sz = types.length;
-//		for (int i = 0; i < sz; i++) {
-//			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
-//			if (r.getTag().equals("highway") && r.getValue().equals("motorway_link")) {
-//				return true;
-//			}
-//		}
-//		return false;
-//	}
-
-	public String getExitName() {
-		if (pointNames != null && pointNameTypes != null) {
-			int pnSz = pointNames.length;
-			for (int i = 0; i < pnSz; i++) {
-				String[] point = pointNames[i];
-				if (point != null) {
-					int pSz = point.length;
-					for (int j = 0; j < pSz; j++) {
-						if (pointNameTypes[i][j] == region.nameTypeRule) {
-							return point[j];
-						}
-					}
-				}
-			}
-		}
-		return null;
-	}
-
-	public String getExitRef() {
-		if (pointNames != null && pointNameTypes != null) {
-			int pnSz = pointNames.length;
-			for (int i = 0; i < pnSz; i++) {
-				String[] point = pointNames[i];
-				if (point != null) {
-					int pSz = point.length;
-					for (int j = 0; j < pSz; j++) {
-						if (pointNameTypes[i][j] == region.refTypeRule) {
-							return point[j];
-						}
-					}
-				}
-			}
-		}
-		return null;
 	}
 
 	public int getOneway() {
@@ -1089,5 +1071,23 @@ public class RouteDataObject {
 			}
 		}
 		return false;
+	}
+
+	private String getPointNameByTypeRule(int typeRule) {
+		if (typeRule != -1 && pointNames != null && pointNameTypes != null) {
+			int pnSz = pointNames.length;
+			for (int i = 0; i < pnSz; i++) {
+				String[] point = pointNames[i];
+				if (point != null) {
+					int pSz = point.length;
+					for (int j = 0; j < pSz; j++) {
+						if (pointNameTypes[i][j] == typeRule) {
+							return point[j];
+						}
+					}
+				}
+			}
+		}
+		return null;
 	}
 }

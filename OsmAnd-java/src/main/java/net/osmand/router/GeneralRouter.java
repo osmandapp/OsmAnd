@@ -4,6 +4,7 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
+import net.osmand.shared.routing.GeneralRouterProfile;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -125,23 +126,7 @@ public class GeneralRouter implements VehicleRouter {
 			return null;
 		}
 	}
-	
-	public enum GeneralRouterProfile {
-		CAR,
-		PEDESTRIAN,
-		BICYCLE,
-		BOAT,
-		SKI,
-		MOPED,
-		TRAIN,
-		PUBLIC_TRANSPORT,
-		HORSEBACKRIDING;
-		
-		public String getBaseProfile() {
-			return this.toString().toLowerCase();
-		}
-	}
-	
+
 	public enum RoutingParameterType {
 		NUMERIC,
 		BOOLEAN,
@@ -153,6 +138,7 @@ public class GeneralRouter implements VehicleRouter {
 		GeneralRouter parent = root;
 		this.profile = parent.profile;
 		this.attributes = new LinkedHashMap<String, String>();
+
 		Iterator<Entry<String, String>> e = parent.attributes.entrySet().iterator();
 		while (e.hasNext()) {
 			Entry<String, String> next = e.next();
@@ -719,9 +705,12 @@ public class GeneralRouter implements VehicleRouter {
 		if (prevTs != ts) {
 			totalPenalty += Math.abs(ts - prevTs) / 2;
 		}
-		
-		if (segment.getRoad().roundabout() && !prev.getRoad().roundabout()) {
-			double rt = getRoundaboutTurnPenalty();
+
+		boolean currentRoundAbout = segment.getRoad().roundabout();
+		boolean previousRoundAbout = prev.getRoad().roundabout();
+
+		if ((currentRoundAbout && !previousRoundAbout) || (!currentRoundAbout && previousRoundAbout)) {
+			float rt = getRoundaboutTurnPenalty() / 2;
 			if (rt > 0) {
 				totalPenalty += rt;
 			}

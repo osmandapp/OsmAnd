@@ -72,8 +72,7 @@ public class WikiItemViewHolder extends RecyclerView.ViewHolder {
 		timeLayout = view.findViewById(R.id.time_layout);
 	}
 
-	public void bindItem(@NonNull QuickSearchWikiItem item, @Nullable PoiUIFilter poiUIFilter,
-	                     boolean useMapCenter) {
+	public void bindItem(@NonNull QuickSearchWikiItem item, boolean useMapCenter) {
 		String address = item.getAddress();
 		String descr = item.getDescription();
 		if (description != null) {
@@ -104,7 +103,7 @@ public class WikiItemViewHolder extends RecyclerView.ViewHolder {
 					SpannableString openHours = MenuController.getSpannableOpeningHours(
 							rs.getInfo(),
 							ContextCompat.getColor(app, colorOpen),
-							ContextCompat.getColor(app, colorClosed));
+							ContextCompat.getColor(app, colorClosed), true);
 					int colorId = rs.isOpenedForTime(Calendar.getInstance()) ? colorOpen : colorClosed;
 					timeLayout.setVisibility(View.VISIBLE);
 
@@ -123,7 +122,6 @@ public class WikiItemViewHolder extends RecyclerView.ViewHolder {
 		String wikiImageUrl = item.getImage();
 		if (image.getTag() != wikiImageUrl) {
 			image.setTag(wikiImageUrl);
-			AndroidUiHelper.updateVisibility(imageViewContainer, wikiImageUrl != null);
 			if (wikiImageUrl != null) {
 				RequestCreator creator = Picasso.get().load(wikiImageUrl);
 				creator.into(image, new Callback() {
@@ -141,6 +139,10 @@ public class WikiItemViewHolder extends RecyclerView.ViewHolder {
 						PicassoUtils.getPicasso(app).setResultLoaded(wikiImageUrl, false);
 					}
 				});
+			} else {
+				image.setImageDrawable(drawable);
+				AndroidUiHelper.updateVisibility(image, false);
+				AndroidUiHelper.updateVisibility(errorImageView, true);
 			}
 		}
 		QuickSearchListAdapter.updateCompass(itemView, item, locationViewCache, useMapCenter);

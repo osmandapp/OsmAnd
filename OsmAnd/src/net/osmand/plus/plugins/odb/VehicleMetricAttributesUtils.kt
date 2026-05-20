@@ -136,7 +136,7 @@ class VehicleMetricAttributesUtils {
                         currentX += stepX / divX
                     }
                     if (attribute.hasValidValue(key)) {
-                        var value = attribute.getAttributeValue(key)!!
+                        var value = attribute.getAttributeValue(key)
                         val formattedValue =
                             widgetType?.let { plugin.getWidgetConvertedValue(it, value) }
 

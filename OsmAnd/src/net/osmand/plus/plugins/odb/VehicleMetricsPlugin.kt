@@ -537,7 +537,11 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 			@Throws(IOException::class)
 			override fun connect(): Pair<Source, Sink>? {
 				socket?.apply {
-					connect()
+					try{
+						connect()
+					} catch(_: IOException) {
+						LOG.error("IOException on try to connect to OBD ${deviceToConnect.name}")
+					}
 					if (isConnected) {
 						return Pair(inputStream.source(), outputStream.sink())
 					}

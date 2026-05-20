@@ -59,17 +59,33 @@ open class FilterRangeViewHolder(
 	}
 
 	private val onSliderChanged =
-		RangeSlider.OnChangeListener { slider: RangeSlider, _: Float, fromUser: Boolean ->
+		RangeSlider.OnChangeListener { slider: RangeSlider, value: Float, fromUser: Boolean ->
 			if (fromUser) {
 				val values = slider.values
 				val valueFrom = floor(values[0])
 				val valueTo = ceil(values[1])
+
 				if (valueFrom >= slider.valueFrom && valueTo <= slider.valueTo) {
-					valueFromInput.setText(valueFrom.toInt().toString())
-					valueToInput.setText(valueTo.toInt().toString())
+
+					// Update 'From' (min) input ONLY if the active thumb is the minimum boundary
+					if (value == values[0]) {
+						val fromStr = valueFrom.toInt().toString()
+						if (valueFromInput.text.toString() != fromStr) {
+							valueFromInput.setText(fromStr)
+						}
+					}
+
+					// Update 'To' (max) input ONLY if the active thumb is the maximum boundary
+					if (value == values[1]) {
+						val toStr = valueTo.toInt().toString()
+						if (valueToInput.text.toString() != toStr) {
+							valueToInput.setText(toStr)
+						}
+					}
 				}
 			}
 		}
+
 	private val onSliderTouchListener =
 		object : OnSliderTouchListener {
 			override fun onStartTrackingTouch(slider: RangeSlider) {
@@ -79,9 +95,20 @@ open class FilterRangeViewHolder(
 			override fun onStopTrackingTouch(slider: RangeSlider) {
 				isSliderDragging = false
 				val values = slider.values
-				filter.setValueFrom(Math.round(values[0]).toString())
-				filter.setValueTo(Math.round(values[1]).toString())
-				updateValues()
+
+				if (values[0] <= slider.valueFrom) {
+					filter.clearValueFrom()
+				} else {
+					filter.setValueFrom(Math.round(values[0]).toString())
+				}
+
+				if (values[1] >= slider.valueTo) {
+					filter.clearValueTo()
+				} else {
+					filter.setValueTo(Math.round(values[1]).toString())
+				}
+
+				updateValues(fromUser = true)
 			}
 		}
 
@@ -110,14 +137,18 @@ open class FilterRangeViewHolder(
 		valueFromInput.addTextChangedListener(object : SimpleTextWatcher() {
 			override fun afterTextChanged(newText: Editable) {
 				super.afterTextChanged(newText)
-				if (!Algorithms.isEmpty(newText) && Algorithms.isInt(newText.toString())) {
+				if (isSliderDragging || isBinding) return
+
+				if (Algorithms.isEmpty(newText)) {
+					filter.clearValueFrom()
+					updateValues(fromUser = true)
+				} else if (Algorithms.isInt(newText.toString())) {
 					val newValue = newText.toString().toInt()
 					if (getDisplayValueFrom(filter) != newValue
-						&& newValue < getDisplayValueTo(filter)
-						&& !isSliderDragging
-						&& !isBinding) {
+						&& newValue < getDisplayValueTo(filter)) {
+
 						filter.setValueFrom(newValue.toString())
-						updateValues()
+						updateValues(fromUser = true)
 					}
 				}
 			}
@@ -126,14 +157,18 @@ open class FilterRangeViewHolder(
 		valueToInput.addTextChangedListener(object : SimpleTextWatcher() {
 			override fun afterTextChanged(newText: Editable) {
 				super.afterTextChanged(newText)
-				if (!Algorithms.isEmpty(newText) && Algorithms.isInt(newText.toString())) {
+				if (isSliderDragging || isBinding) return
+
+				if (Algorithms.isEmpty(newText)) {
+					filter.clearValueTo()
+					updateValues(fromUser = true)
+				} else if (Algorithms.isInt(newText.toString())) {
 					val newValue = newText.toString().toInt()
 					if (getDisplayValueTo(filter) != newValue
-						&& newValue > getDisplayValueFrom(filter)
-						&& !isSliderDragging
-						&& !isBinding) {
+						&& newValue > getDisplayValueFrom(filter)) {
+
 						filter.setValueTo(newValue.toString())
-						updateValues()
+						updateValues(fromUser = true)
 					}
 				}
 			}
@@ -167,7 +202,7 @@ open class FilterRangeViewHolder(
 		AndroidUiHelper.updateVisibility(minMaxContainer, expanded)
 	}
 
-	private fun updateValues() {
+	private fun updateValues(fromUser: Boolean = false) {
 		isBinding = true
 		val valueFrom = getDisplayValueFrom(filter)
 		var valueTo = getDisplayValueTo(filter)
@@ -186,10 +221,13 @@ open class FilterRangeViewHolder(
 			expanded = false
 			updateExpandState()
 		}
-		valueFromInput.setText(valueFrom.toString())
-		valueFromInput.setSelection(valueFromInput.length())
-		valueToInput.setText(valueTo.toString())
-		valueToInput.setSelection(valueToInput.length())
+
+		val isMinDefault = filter.valueFrom == filter.minValue
+		updateInputField(valueFromInput, valueFrom, isMinDefault, fromUser)
+
+		val isMaxDefault = filter.valueTo == filter.maxValue
+		updateInputField(valueToInput, valueTo, isMaxDefault, fromUser)
+
 		val minValuePrompt =
 			"${decimalFormat.format(minValue.toFloat())} ${
 				MeasureUnitsFormatter.getUnitsLabel(app, getMeasureUnitType())
@@ -205,16 +243,39 @@ open class FilterRangeViewHolder(
 		isBinding = false
 	}
 
+	private fun updateInputField(
+		input: ExtendedEditText,
+		value: Int,
+		isDefault: Boolean,
+		fromUser: Boolean
+	) {
+		val currentText = input.text.toString()
+		val textToSet = if (!fromUser && isDefault) {
+			"" // Show empty if untouched
+		} else if (currentText.isBlank() && isDefault) {
+			"" // User manually erased it, let it stay erased
+		} else if (currentText.toIntOrNull() == value) {
+			currentText // Preserve exactly what the user typed
+		} else {
+			value.toString() // Slider dragged or external update
+		}
+
+		if (currentText != textToSet) {
+			input.setText(textToSet)
+			input.setSelection(input.length())
+		}
+	}
+
 	open fun getDisplayMaxValue(filter: RangeTrackFilter<*>): Int {
 		val formattedValue =
 			getFormattedValue(filter.trackFilterType.measureUnitType, filter.ceilMaxValue())
-		return ceil(formattedValue.valueSrc).toInt()
+		return ceil(formattedValue.valueSrc.toDouble() - 0.0001).toInt()
 	}
 
 	open fun getDisplayMinValue(filter: RangeTrackFilter<*>): Int {
 		val formattedValue =
 			getFormattedValue(filter.trackFilterType.measureUnitType, filter.ceilMinValue())
-		return floor(formattedValue.valueSrc).toInt()
+		return floor(formattedValue.valueSrc.toDouble() + 0.0001).toInt()
 	}
 
 	open fun getDisplayValueFrom(filter: RangeTrackFilter<*>): Int {
@@ -233,17 +294,24 @@ open class FilterRangeViewHolder(
 	}
 
 	open fun updateSelectedValue(valueFrom: String, valueTo: String) {
+		val isMin = filter.valueFrom == filter.minValue || valueFrom.toInt() <= getDisplayMinValue(filter)
+		val isMax = filter.valueTo == filter.maxValue || valueTo.toInt() >= getDisplayMaxValue(filter)
+
+		val minStr = app.getString(R.string.shared_string_min)
+		val maxStr = app.getString(R.string.shared_string_max)
+
 		if (filter.trackFilterType.measureUnitType == MeasureUnitType.TIME_DURATION) {
-			val fromTxt =
-				OsmAndFormatter.getFormattedDuration(valueFrom.toLong() * 60L, app)
-			val toTxt = OsmAndFormatter.getFormattedDuration(valueTo.toLong() * 60L, app)
+			val fromTxt = if (isMin) minStr else OsmAndFormatter.getFormattedDuration(valueFrom.toLong() * 60L, app)
+			val toTxt = if (isMax) maxStr else OsmAndFormatter.getFormattedDuration(valueTo.toLong() * 60L, app)
+
 			selectedValue.text = String.format(
 				app.getString(R.string.track_filter_date_selected_format),
 				fromTxt,
 				toTxt)
 		} else {
-			val fromTxt = decimalFormat.format(valueFrom.toLong())
-			val toTxt = decimalFormat.format(valueTo.toLong())
+			val fromTxt = if (isMin) minStr else decimalFormat.format(valueFrom.toLong())
+			val toTxt = if (isMax) maxStr else decimalFormat.format(valueTo.toLong())
+
 			selectedValue.text = String.format(
 				app.getString(R.string.track_filter_range_selected_format),
 				fromTxt,

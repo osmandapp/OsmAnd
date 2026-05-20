@@ -12,6 +12,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.Collator;
+import net.osmand.OsmAndCollator;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -91,16 +93,9 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 		if (showAllFolders || fileDir != null && !Algorithms.objectEquals(fileDir, rootDir)) {
 			dirs.add(0, rootDir);
 		}
-		String gpxDir = rootDir.getPath();
+		sortDirs(dirs, rootDir);
 		for (File dir : dirs) {
-			String dirName = dir.getPath();
-			if (dirName.startsWith(gpxDir)) {
-				if (dirName.length() == gpxDir.length()) {
-					dirName = dir.getName();
-				} else {
-					dirName = dirName.substring(gpxDir.length() + 1);
-				}
-			}
+			String dirName = getDirItemTitle(dir, rootDir);
 			String description;
 			List<File> files = collectFiles(dir);
 			if (Algorithms.isEmpty(files)) {
@@ -111,7 +106,7 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 			BaseBottomSheetItem[] folderItem = new BaseBottomSheetItem[1];
 			folderItem[0] = new BottomSheetItemWithDescription.Builder()
 					.setDescription(description)
-					.setTitle(capitalizeFirstLetter(dirName))
+					.setTitle(dirName)
 					.setIcon(getActiveIcon(R.drawable.ic_action_folder))
 					.setLayoutId(R.layout.bottom_sheet_item_with_descr_64dp)
 					.setOnClickListener(v -> {
@@ -161,6 +156,30 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 			}
 		}
 		return files;
+	}
+
+	private void sortDirs(@NonNull List<File> dirs, @NonNull File rootDir) {
+		if (dirs.size() <= 1) {
+			return;
+		}
+		int sortStartIndex = !dirs.isEmpty() && Algorithms.objectEquals(dirs.get(0), rootDir) ? 1 : 0;
+		Collator collator = OsmAndCollator.primaryCollator();
+		dirs.subList(sortStartIndex, dirs.size()).sort((dir1, dir2) ->
+				collator.compare(getDirItemTitle(dir1, rootDir), getDirItemTitle(dir2, rootDir)));
+	}
+
+	@NonNull
+	private String getDirItemTitle(@NonNull File dir, @NonNull File rootDir) {
+		String dirName = dir.getPath();
+		String gpxDir = rootDir.getPath();
+		if (dirName.startsWith(gpxDir)) {
+			if (dirName.length() == gpxDir.length()) {
+				dirName = dir.getName();
+			} else {
+				dirName = dirName.substring(gpxDir.length() + 1);
+			}
+		}
+		return capitalizeFirstLetter(dirName);
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @Nullable File srcFile,

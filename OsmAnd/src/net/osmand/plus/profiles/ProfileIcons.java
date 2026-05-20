@@ -8,6 +8,8 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.shared.gpx.RouteActivityHelper;
 import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.util.Algorithms;
@@ -65,6 +67,18 @@ public enum ProfileIcons {
 		return new ArrayList<>(iconIds);
 	}
 
+	@NonNull
+	public static ArrayList<String> getIconKeysForPicker(@NonNull OsmandApplication app) {
+		LinkedHashSet<String> iconKeys = new LinkedHashSet<>();
+		for (int iconResId : getIcons(app)) {
+			String iconKey = getPickerIconKey(app, iconResId);
+			if (!Algorithms.isEmpty(iconKey)) {
+				iconKeys.add(iconKey);
+			}
+		}
+		return new ArrayList<>(iconKeys);
+	}
+
 	public int getResId() {
 		return resId;
 	}
@@ -106,6 +120,26 @@ public enum ProfileIcons {
 			return hasDrawable(app, iconName) ? iconName : null;
 		}
 		return hasDrawable(app, iconName) ? iconName : null;
+	}
+
+	@Nullable
+	public static String getPickerIconKey(@NonNull OsmandApplication app, @DrawableRes int resId) {
+		if (resId == 0) {
+			return null;
+		}
+		String iconName = getResStringByResId(app, resId);
+		if (Algorithms.isEmpty(iconName)) {
+			return null;
+		}
+		if (iconName.startsWith("mx_") && RenderingIcons.getResId(iconName) != null) {
+			return iconName.substring(3);
+		}
+		return iconName;
+	}
+
+	@DrawableRes
+	public static int getDrawableResByPickerIconKey(@NonNull OsmandApplication app, @Nullable String iconKey) {
+		return Algorithms.isEmpty(iconKey) ? 0 : AndroidUtils.getDrawableId(app, iconKey, 0);
 	}
 
 	private static boolean hasDrawable(@NonNull OsmandApplication app, @NonNull String iconName) {

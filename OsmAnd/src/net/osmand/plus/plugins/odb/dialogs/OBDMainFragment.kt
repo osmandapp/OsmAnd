@@ -26,6 +26,9 @@ import net.osmand.shared.obd.OBDDataComputer
 import net.osmand.shared.obd.OBDDataComputer.OBDComputerWidget
 import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget
 import net.osmand.util.Algorithms
+import net.osmand.util.CollectionUtils
+import okhttp3.internal.immutableListOf
+import okhttp3.internal.toImmutableList
 
 class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.ConnectionStateListener,
 	RenameOBDDialog.OnDeviceNameChangedCallback, ForgetOBDDeviceDialog.ForgetDeviceListener {
@@ -60,7 +63,7 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 
 	private val uiHandler = Handler(Looper.getMainLooper())
 	private var updateWidgetsHandler: Handler? = null
-	private val items = mutableListOf<Any>()
+	private var items = immutableListOf<Any>()
 
 	private lateinit var adapter: OBDMainFragmentAdapter
 	private var progress: View? = null
@@ -116,7 +119,7 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 
 	override fun setupUI(view: View) {
 		progress = view.findViewById(R.id.progress_bar)
-		items.clear()
+		items = immutableListOf()
 		setupConnectionState(view)
 		updateButtonState(view)
 		setupVehicleInfo()
@@ -253,26 +256,32 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 	}
 
 	private fun setupVehicleInfo() {
-		items.add(OBDMainFragmentAdapter.ITEM_DIVIDER)
-		items.add(OBDMainFragmentAdapter.TITLE_VEHICLE_TYPE)
-		items.add(OBDDataItem(OBDDataType.VIN, OBDDataComputer.registerWidget(OBDTypeWidget.VIN, 0)))
+		val tmpLIst = mutableListOf<Any>()
+		tmpLIst.add(OBDMainFragmentAdapter.ITEM_DIVIDER)
+		tmpLIst.add(OBDMainFragmentAdapter.TITLE_VEHICLE_TYPE)
+		tmpLIst.add(OBDDataItem(OBDDataType.VIN, OBDDataComputer.registerWidget(OBDTypeWidget.VIN, 0)))
+		items = CollectionUtils.addAllToList(items, tmpLIst)
 	}
 
 	private fun setupReceivedData() {
-		items.add(OBDMainFragmentAdapter.ITEM_DIVIDER)
-		items.add(OBDMainFragmentAdapter.TITLE_RECEIVED_TYPE)
+		val tmpLIst = mutableListOf<Any>()
+		tmpLIst.add(OBDMainFragmentAdapter.ITEM_DIVIDER)
+		tmpLIst.add(OBDMainFragmentAdapter.TITLE_RECEIVED_TYPE)
 		OBDDataType.entries.forEach {
 			if (it.widgetType(app) != OBDTypeWidget.VIN) {
-				items.add(OBDDataItem(it, OBDDataComputer.registerWidget(it.widgetType(app), it.widgetType(app).defaultAverageTime)))
+				tmpLIst.add(OBDDataItem(it, OBDDataComputer.registerWidget(it.widgetType(app), it.widgetType(app).defaultAverageTime)))
 			}
 		}
+		items = CollectionUtils.addAllToList(items, tmpLIst)
 	}
 
 	private fun setupSettingsCard() {
-		items.add(OBDMainFragmentAdapter.ITEM_DIVIDER)
-		items.add(OBDMainFragmentAdapter.TITLE_SETTINGS_TYPE)
-		items.add(OBDMainFragmentAdapter.NAME_ITEM_TYPE)
-		items.add(OBDMainFragmentAdapter.FORGET_SENSOR_TYPE)
+		val tmpLIst = mutableListOf<Any>()
+		tmpLIst.add(OBDMainFragmentAdapter.ITEM_DIVIDER)
+		tmpLIst.add(OBDMainFragmentAdapter.TITLE_SETTINGS_TYPE)
+		tmpLIst.add(OBDMainFragmentAdapter.NAME_ITEM_TYPE)
+		tmpLIst.add(OBDMainFragmentAdapter.FORGET_SENSOR_TYPE)
+		items = CollectionUtils.addAllToList(items, tmpLIst)
 	}
 
 	override fun onStart() {

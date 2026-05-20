@@ -35,6 +35,7 @@ import java.util.TreeMap;
 
 public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 
+	private final OsmandApplication app;
 	private final Context context;
 	private final OsmandSettings settings;
 	private final WidgetsPanel widgetsPanel;
@@ -47,7 +48,7 @@ public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 		this.context = context;
 		this.widgetsPanel = widgetsPanel;
 
-		OsmandApplication app = AndroidUtils.getApp(context);
+		app = AndroidUtils.getApp(context);
 		settings = app.getSettings();
 		widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		visiblePages = collectVisiblePages();
@@ -120,8 +121,10 @@ public class WidgetsPagerAdapter extends RecyclerView.Adapter<PageViewHolder> {
 	                                @NonNull ApplicationMode appMode) {
 		Map<Integer, List<MapWidget>> textInfoWidgets = new TreeMap<>();
 		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(context);
+		List<String> widgetsVisibility = MapWidgetInfo.getWidgetsVisibility(app, appMode, layoutMode);
+
 		for (MapWidgetInfo widgetInfo : widgets) {
-			if (widgetInfo.isEnabledForAppMode(appMode, layoutMode)) {
+			if (widgetInfo.isEnabledForAppMode(appMode, widgetsVisibility)) {
 				MapWidget widget = widgetInfo.widget;
 				addWidgetViewToPage(textInfoWidgets, widgetInfo.pageIndex, widget);
 			}

@@ -53,7 +53,9 @@ public class EditorIconCardController extends BaseMultiStateCardController {
 
 	public void updateSelectedCardState() {
 		selectedState = findCardState(centralController.getSelectedCategory());
-		card.updateSelectedCardState();
+		if (card != null) {
+			card.updateSelectedCardState();
+		}
 	}
 
 	public void updateIconsSelection() {

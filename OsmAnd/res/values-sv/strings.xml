@@ -760,7 +760,7 @@
     <string name="map_widget_distancemeasurement">Avståndsmätning</string>
     <string name="map_widget_audionotes">Ljudanteckningar</string>
     <string name="audionotes_plugin_description">Ta ljud-/foto-/videoanteckningar under en resa, med antingen en kartknapp eller platsens snabbmeny.</string>
-    <string name="audionotes_plugin_name">Ljud-/Videoanteckningar</string>
+    <string name="audionotes_plugin_name">Ljud-/videoanteckningar</string>
     <string name="download_select_map_types">Andra kartor</string>
     <string name="srtm_plugin_name">Topografi</string>
     <string name="download_srtm_maps">Höjdkurvsdata</string>
@@ -1739,7 +1739,7 @@
     <string name="no_address_found">Ingen adress angiven</string>
     <string name="looking_up_address">Slår upp adressen</string>
     <string name="rendering_attr_horseRoutes_name">Hästleder</string>
-    <string name="only_download_over_wifi">Hämta endast via WiFi</string>
+    <string name="only_download_over_wifi">Hämta endast via Wi-Fi</string>
     <string name="live_update">Direktuppdatering</string>
     <string name="update_now">Uppdatera nu</string>
     <string name="route_distance">Avstånd:</string>
@@ -2270,8 +2270,8 @@
     <string name="south_abbreviation">S</string>
     <string name="north_abbreviation">N</string>
     <string name="optional_point_name">Valfritt punktnamn</string>
-    <string name="transport_nearby_routes_within">Rutter nära i</string>
-    <string name="transport_nearby_routes">i</string>
+    <string name="transport_nearby_routes_within">Rutter i närheten inom</string>
+    <string name="transport_nearby_routes">Inom</string>
     <string name="enter_the_file_name">Ange filnamnet.</string>
     <string name="map_import_error">Kartimportfel</string>
     <string name="map_imported_successfully">Karta importerad</string>
@@ -2279,7 +2279,7 @@
     <string name="shared_string_current">Nuvarande</string>
     <string name="last_intermediate_dest_description">Lägger till mellanliggande stopp</string>
     <string name="first_intermediate_dest_description">Lägger till första stoppet</string>
-    <string name="subsequent_dest_description">Flytta upp destination och skapa</string>
+    <string name="subsequent_dest_description">Flytta destinationen uppåt och skapa den</string>
     <string name="show_closed_notes">Visa stängda anteckningar</string>
     <string name="switch_osm_notes_visibility_desc">Visa eller dölj OSM-anteckningar på kartan.</string>
     <string name="gpx_file_desc">GPX - lämplig för export till JOSM eller andra OSM-redigerare.</string>
@@ -4198,7 +4198,6 @@
     <string name="shutter_sound">Slutarljud</string>
     <string name="speak_route_deviation">Meddela avvikelser från rutten</string>
     <string name="offline_cache">Offline-cache</string>
-    <string name="shared_string_all_world">Hela världen</string>
     <string name="proxy_port_max_warning">Maximalt portvärde är %1$s</string>
     <string name="camera_app">Kamera-app</string>
     <string name="shared_string_pounds">pund</string>
@@ -4554,7 +4553,6 @@
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
     <string name="help_article_navigation_car_play_name">CarPlay</string>
     <string name="shared_string_cache">Cache</string>
-    <string name="widget_available_ram_desc">Visar tillgängligt ram-minne allokerat för OsmAnd.</string>
     <string name="sort_size_descending">Störst storlek först</string>
     <string name="delete_map">Radera kartan</string>
     <string name="standard_maps">Standardkartor</string>
@@ -4568,7 +4566,6 @@
     <string name="shared_string_show_icon">Visa ikon</string>
     <string name="map_is_up_to_date">Kartan %1$s är uppdaterad.</string>
     <string name="sort_size_ascending">Minst storlek först</string>
-    <string name="widget_available_ram">Tillgängligt minne</string>
     <string name="terrain_maps">Terrängkartor</string>
     <string name="sort_country_name_descending">Land: Ö - A</string>
     <string name="delete_map_description">Radera kartan %1$s?</string>
@@ -5612,7 +5609,7 @@
     <string name="background_opacity">Bakgrundens genomskinlighet</string>
     <string name="quick_action_previous_screen_title">Föregående skärm</string>
     <string name="quick_action_switch_compass_desc">En knapp för att ändra kartorientering.</string>
-    <string name="y_axis_description">Välj upp till två valmöjligheter för Y-axeln.</string>
+    <string name="y_axis_description">Välj upp till två alternativ för Y-axeln.</string>
     <string name="delete_widget_description">Denna wiget kommer att tas bort. Du kan återställa den senare i Konfigurera skärmen.</string>
     <string name="delete_widget">Ta bort widget?</string>
     <string name="add_widget_below">Lägg till widget nedanför</string>
@@ -5900,11 +5897,11 @@
     <string name="routing_attr_pt_limit_name">Visa N bästa rutter</string>
     <string name="routing_attr_pt_limit_description">Ange antalet bästa rutter som ska visas</string>
     <string name="lang_mi">Maori</string>
-    <string name="vehicle_metrics_chart_category">Fordonsstatistik</string>
+    <string name="vehicle_metrics_chart_category">Fordonets mätvärden</string>
     <string name="delete_folder_description">Ta bort mappen \"%1$s\"?</string>
     <string name="show_spherical_map">Globvy</string>
     <string name="enable_3d_objects">3D-byggnader</string>
-    <string name="has_vehicle_metrics">Med OBDII data</string>
+    <string name="has_vehicle_metrics">Med OBDII-data</string>
     <string name="buildings_3d_detail_level">3D-byggnader detalisering</string>
     <string name="astronomy_plugin_description">Stjärndiagram, 3D-stjärnkarta</string>
     <string name="star_map">Stjärnkarta</string>
@@ -5977,4 +5974,5 @@
     <string name="map_screen_layout_descr">Välj om du vill använda en enda layout för alla orienteringar, eller anpassa Stående och Landskap separat.</string>
     <string name="backup_deleted_all_data">Raderade data.</string>
     <string name="backup_deleting_all_data">Raderade data.</string>
+    <string name="astronomy_plugin_name">Astronomi</string>
 </resources>

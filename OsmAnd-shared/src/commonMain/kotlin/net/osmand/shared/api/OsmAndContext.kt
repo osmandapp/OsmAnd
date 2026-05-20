@@ -6,8 +6,10 @@ import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser
 import net.osmand.shared.gpx.SmartFolderHelper
 import net.osmand.shared.io.KFile
 import net.osmand.shared.settings.enums.AltitudeMetrics
+import net.osmand.shared.settings.enums.AngularConstants
 import net.osmand.shared.settings.enums.MetricsConstants
 import net.osmand.shared.settings.enums.SpeedConstants
+import net.osmand.shared.units.TemperatureUnits
 import net.osmand.shared.util.KStringMatcher
 
 typealias CityNameCallback = (String) -> Unit
@@ -24,6 +26,8 @@ interface OsmAndContext {
 	fun getSpeedSystem(): SpeedConstants?
 	fun getMetricSystem(): MetricsConstants?
 	fun getAltitudeMetric(): AltitudeMetrics?
+	fun getAngularSystem(): AngularConstants?
+	fun getTemperatureUnits(): TemperatureUnits?
 
 	fun isGpxFileVisible(path: String): Boolean
 	fun getSelectedFileByPath(path: String): GpxFile?

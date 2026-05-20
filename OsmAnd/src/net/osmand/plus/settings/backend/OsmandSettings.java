@@ -112,6 +112,7 @@ import net.osmand.shared.obd.OBDDataComputer;
 import net.osmand.shared.palette.domain.PaletteConstants;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.shared.settings.enums.AltitudeMetrics;
+import net.osmand.shared.settings.enums.AngularConstants;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.util.Algorithms;
@@ -137,6 +138,8 @@ public class OsmandSettings {
 
 	public static final String RENDERER_PREFERENCE_PREFIX = "nrenderer_";
 	public static final String ROUTING_PREFERENCE_PREFIX = "prouting_";
+
+	private static final Map<String, String> PREFERENCES_NAMES_CACHE = new LinkedHashMap<>();
 
 	public static final float SIM_MIN_SPEED = 5 / 3.6f;
 	/// Settings variables
@@ -282,9 +285,13 @@ public class OsmandSettings {
 		String sharedPreferencesName = !Algorithms.isEmpty(CUSTOM_SHARED_PREFERENCES_NAME) ? CUSTOM_SHARED_PREFERENCES_NAME : SHARED_PREFERENCES_NAME;
 		if (modeKey == null) {
 			return sharedPreferencesName;
-		} else {
-			return sharedPreferencesName + "." + modeKey.toLowerCase();
 		}
+		String result = PREFERENCES_NAMES_CACHE.get(modeKey);
+		if (result == null || !result.startsWith(sharedPreferencesName)) {
+			result = sharedPreferencesName + "." + modeKey.toLowerCase();
+			PREFERENCES_NAMES_CACHE.put(modeKey, result);
+		}
+		return result;
 	}
 
 	public static boolean areSettingsCustomizedForPreference(String sharedPreferencesName, OsmandApplication app) {
@@ -1475,6 +1482,7 @@ public class OsmandSettings {
 	}
 
 	public final CommonPreference<Float> MAP_DENSITY = new FloatPreference(this, "map_density_n", 1f).makeProfile().cache();
+	public final CommonPreference<Float> AA_MAP_DENSITY = new FloatPreference(this, "aa_map_density_n", 1f).makeProfile().cache();
 
 	public final OsmandPreference<Boolean> SHOW_POI_LABEL = new BooleanPreference(this, "show_poi_label", false).makeProfile();
 
@@ -1654,6 +1662,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> FAST_ROUTE_MODE = new BooleanPreference(this, "fast_route_mode", true).makeProfile();
 
 	public static boolean IGNORE_MISSING_MAPS = false;
+	public static boolean STOP_ON_MISSING_MAPS = false;
 	public final CommonPreference<RoutingType> ROUTING_TYPE = new EnumStringPreference<>(this, "routing_method", HH_CPP, RoutingType.values()).makeProfile().cache();
 	public final CommonPreference<ApproximationType> APPROXIMATION_TYPE = new EnumStringPreference<>(this, "approximation_method_r49_default", APPROX_GEO_CPP, ApproximationType.values()).makeProfile().cache();
 
@@ -1780,6 +1789,7 @@ public class OsmandSettings {
 		CURRENT_TRACK_ROUTE_ACTIVITY.setModeDefaultValue(ApplicationMode.BICYCLE, "road_cycling");
 		CURRENT_TRACK_ROUTE_ACTIVITY.setModeDefaultValue(ApplicationMode.BOAT, "motorboat");
 		CURRENT_TRACK_ROUTE_ACTIVITY.setModeDefaultValue(ApplicationMode.CAR, "car");
+		CURRENT_TRACK_ROUTE_ACTIVITY.setModeDefaultValue(ApplicationMode.MOTORCYCLE, "adventure_motorcycling");
 		CURRENT_TRACK_ROUTE_ACTIVITY.setModeDefaultValue(ApplicationMode.HORSE, "horse_riding");
 		CURRENT_TRACK_ROUTE_ACTIVITY.setModeDefaultValue(ApplicationMode.MOPED, "motor_scooter");
 		CURRENT_TRACK_ROUTE_ACTIVITY.setModeDefaultValue(ApplicationMode.PEDESTRIAN, "walking");
@@ -1789,6 +1799,7 @@ public class OsmandSettings {
 	}
 
 	public final ListStringPreference LAST_USED_FAV_ICONS = (ListStringPreference) new ListStringPreference(this, "last_used_favorite_icons", null, ",").makeShared().makeGlobal();
+	public final ListStringPreference LAST_USED_PROFILE_ICONS = (ListStringPreference) new ListStringPreference(this, "last_used_profile_icons", null, ",").makeShared().makeGlobal();
 
 	public final CommonPreference<Integer> SAVE_TRACK_INTERVAL = new IntPreference(this, "save_track_interval", 5000).makeProfile();
 
@@ -1823,6 +1834,7 @@ public class OsmandSettings {
 	public final ListStringPreference TRIP_RECORDING_Y_AXIS = (ListStringPreference) new ListStringPreference(this, "trip_recording_x_axis", GPXDataSetType.ALTITUDE.name(), ";").makeShared().makeGlobal();
 	public final CommonPreference<GPXDataSetAxisType> TRIP_RECORDING_X_AXIS = new EnumStringPreference<>(this, "trip_recording_Y_axis", GPXDataSetAxisType.DISTANCE, GPXDataSetAxisType.values());
 
+	public final CommonPreference<GPXDataSetAxisType> TRACK_CHART_X_AXIS = new EnumStringPreference<>(this, "track_chart_x_axis", GPXDataSetAxisType.DISTANCE, GPXDataSetAxisType.values()).makeShared().makeGlobal();
 	public final ListStringPreference TRACK_CHART_Y_AXIS = (ListStringPreference) new ListStringPreference(this, "track_chart_y_axis", GPXDataSetType.ALTITUDE.name() + ";" + GPXDataSetType.SLOPE.name(), ";").makeShared().makeGlobal();
 
 	public final CommonPreference<Boolean> SHOW_TRIP_REC_NOTIFICATION = new BooleanPreference(this, "show_trip_recording_notification", false).makeProfile();
@@ -3550,5 +3562,9 @@ public class OsmandSettings {
 				preference.setModeValue(mode, allow);
 			}
 		}
+	}
+
+	public void setStopOnMissingMaps(boolean state) {
+		STOP_ON_MISSING_MAPS = state;
 	}
 }

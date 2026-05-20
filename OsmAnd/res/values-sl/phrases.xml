@@ -747,7 +747,6 @@
     <string name="poi_fuel_octane_92">92 oktanski</string>
     <string name="poi_fuel_octane_91">91 oktanski</string>
     <string name="poi_fuel_octane_80">80 oktanski</string>
-    <string name="poi_service_tyres">Vulkanizer</string>
     <string name="poi_lift_gate">Dvižna vrata</string>
     <string name="poi_gate">Vrata</string>
     <string name="poi_opening_hours">Odpiralni časi</string>
@@ -1189,7 +1188,7 @@
     <string name="poi_denomination_reformed">Reformirana</string>
     <string name="poi_denomination_evangelical">Evangeličanska</string>
     <string name="poi_denomination_anglican">Anglikanska</string>
-    <string name="poi_stone">Izjemen kamen</string>
+    <string name="poi_stone">Posebna skala</string>
     <string name="poi_boat_sharing">Skupna raba čolna</string>
     <string name="poi_car_pooling">Točka za souporabo avtomobilov</string>
     <string name="poi_funeral_directors">Pogrebne storitve</string>
@@ -2113,7 +2112,7 @@
     <string name="poi_surface_concrete">Površina: beton</string>
     <string name="poi_surface_asphalt">Površina: asfalt</string>
     <string name="poi_surface_paved">Površina: tlakovano</string>
-    <string name="poi_surface_unpaved">Površina: netlakovano</string>
+    <string name="poi_surface_unpaved">Površina: neasfaltirana</string>
     <string name="poi_bridge_movable_bascule">Tip premičnega mostu: gibljivi</string>
     <string name="poi_architecture_umgebinde">Arhitektura: umgebinde</string>
     <string name="poi_surface_metal">Površina: kovina</string>
@@ -2174,7 +2173,6 @@
     <string name="poi_industrial_oil">Vrsta: naftna industrija</string>
     <string name="poi_monument_yes">Spomeniški predmet</string>
     <string name="poi_training_hairdressing">Usposabljanje: frizerstvo</string>
-    <string name="poi_training_yoga">Usposabljanje: joga</string>
     <string name="poi_wildlife_hide">Kraj za opazovanje divjih živali</string>
     <string name="poi_shower_outdoor">Tuš: na prostem</string>
     <string name="poi_shower_no">Tuš: ne</string>
@@ -3146,7 +3144,6 @@
     <string name="poi_cuisine_wings">Peruti</string>
     <string name="poi_cuisine_suki">Suki</string>
     <string name="poi_cuisine_yakiniku">Yakiniku</string>
-    <string name="poi_cuisine_crepes">Krepe</string>
     <string name="poi_cuisine_souvlaki">Souvlaki</string>
     <string name="poi_cuisine_falafel">Falafeli</string>
     <string name="poi_cuisine_tacos">Tacosi</string>

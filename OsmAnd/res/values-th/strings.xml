@@ -10,7 +10,6 @@
     <string name="set_up_backup">ตั้งค่าการสํารองข้อมูล</string>
     <string name="cloud_sync_progress">ซิงค์…%1$s</string>
     <string name="res_unknown">ไม่รู้จัก</string>
-    <string name="shared_string_all_world">โลกทั้งใบ</string>
     <string name="ble_search_again">ค้นหาอีกครั้ง</string>
     <string name="sort_date_ascending">วันที่ใหม่ล่าสุดก่อน</string>
     <string name="checking_progress">กำลังตรวจสอบ…</string>

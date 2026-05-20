@@ -1,16 +1,7 @@
 package net.osmand.plus.views.layers.geometry;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.LinearGradient;
-import android.graphics.Matrix;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
-import android.graphics.Shader;
+import android.graphics.*;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
@@ -153,7 +144,7 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 						lastColor = color;
 					}
 				}
-				for (int i = 0; i < data.tx.size() - 1; i++) {
+				for (int i = 0; i < data.tx.length - 1; i++) {
 					colors.add(NativeUtilities.createFColorARGB(color));
 				}
 				colors.add(NativeUtilities.createFColorARGB(lastColor));

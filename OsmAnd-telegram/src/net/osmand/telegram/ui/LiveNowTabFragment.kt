@@ -31,6 +31,7 @@ import net.osmand.telegram.ui.LiveNowTabFragment.LiveNowListAdapter.BaseViewHold
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.OsmandFormatter
 import net.osmand.telegram.utils.UiUtils.UpdateLocationViewCache
+import net.osmand.telegram.utils.applyTopSystemWindowInsets
 import net.osmand.util.MapUtils
 import org.drinkless.tdlib.TdApi
 import java.util.*
@@ -68,7 +69,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 
 		lastTelegramUpdateTime = mainView.findViewById<TextView>(R.id.last_telegram_update_time)
 
-		AndroidUtils.addStatusBarPadding19v(context!!, appBarLayout)
+		appBarLayout.applyTopSystemWindowInsets()
 		adapter = LiveNowListAdapter()
 		mainView.findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.recycler_view).apply {
 			layoutManager = LinearLayoutManager(context)

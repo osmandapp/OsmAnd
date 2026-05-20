@@ -415,7 +415,7 @@ public class OsmandApplication extends MultiDexApplication {
 		if (source == LocationSource.GOOGLE_PLAY_SERVICES) {
 			return new GmsLocationServiceHelper(this);
 		}
-		return new AndroidApiLocationServiceHelper(this);
+		return Version.isHMDBuild() ? new HMDLocationServiceHelper(this) : new AndroidApiLocationServiceHelper(this);
 	}
 
 	public void setAppCustomization(OsmAndAppCustomization appCustomization) {

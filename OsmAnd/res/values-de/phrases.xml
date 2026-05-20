@@ -68,7 +68,7 @@
     <string name="poi_bitcoin_yes">Bitcoin-Bezahlmöglichkeit</string>
     <string name="poi_craft_blacksmith">Schmied</string>
     <string name="poi_blood_bank">Blutbank</string>
-    <string name="poi_boat_sharing">Bootsverleih</string>
+    <string name="poi_boat_sharing">Boots-Sharing</string>
     <string name="poi_craft_boatbuilder">Schiffsbauer</string>
     <string name="poi_boatyard">Schiffsanlegeplatz</string>
     <string name="poi_craft_bookbinder">Buchbinder</string>
@@ -79,7 +79,7 @@
     <string name="poi_boundary_stone">Grenzstein</string>
     <string name="poi_boutique">Boutique</string>
     <string name="poi_bowls">Bowls</string>
-    <string name="poi_craft_brewery">Brauerei</string>
+    <string name="poi_craft_brewery">Craft‑Bier‑Brauerei</string>
     <string name="poi_bridge">Brücke</string>
     <string name="poi_brothel">Bordell</string>
     <string name="poi_bus_station">Busbahnhof</string>
@@ -280,7 +280,7 @@
     <string name="poi_lawyer">Rechtsanwalt</string>
     <string name="poi_leisure_track">Sportbahn</string>
     <string name="poi_library">Bücherei</string>
-    <string name="poi_lift_gate">Hubtor</string>
+    <string name="poi_lift_gate">Hubschranke</string>
     <string name="poi_lighthouse">Leuchtturm</string>
     <string name="poi_locality">Örtlichkeit</string>
     <string name="poi_lock_gate">Schleusentor</string>
@@ -468,7 +468,6 @@
     <string name="poi_topmark">Toppzeichen</string>
     <string name="poi_seamark_wreck">Wrack</string>
     <string name="poi_second_hand">Gebrauchtwarenladen</string>
-    <string name="poi_service_tyres">Reifen</string>
     <string name="poi_disaster_response">Katastrophenhilfe-Station</string>
     <string name="poi_sewing">Nähbedarf</string>
     <string name="poi_shelter">Unterstand</string>
@@ -596,7 +595,7 @@
     <string name="poi_attraction_carousel">Karussell</string>
     <string name="poi_attraction_maze">Labyrinth</string>
     <string name="poi_attraction_roller_coaster">Achterbahn</string>
-    <string name="poi_attraction_slide">Rutschbahn</string>
+    <string name="poi_attraction_slide">Rutsche</string>
     <string name="poi_attraction_summer_toboggan">Sommerrodelbahn</string>
     <string name="poi_attraction_swing_carousel">Kettenkarussell</string>
     <string name="poi_attraction_train">Eisenbahn (Attraktion)</string>
@@ -643,22 +642,22 @@
     <string name="poi_medical_supply">Medizinische Versorgung</string>
     <string name="poi_photo">Fotogeschäft</string>
     <string name="poi_fuel_diesel">Diesel</string>
-    <string name="poi_fuel_gtl_diesel">GtL-Diesel</string>
+    <string name="poi_fuel_gtl_diesel">Ultimate Diesel</string>
     <string name="poi_fuel_hgv_diesel">Lkw-Diesel</string>
     <string name="poi_fuel_biodiesel">Biodiesel</string>
     <string name="poi_fuel_lpg">Autogas</string>
     <string name="poi_fuel_octane_80">80 Oktan</string>
-    <string name="poi_fuel_octane_91">91 Oktan</string>
+    <string name="poi_fuel_octane_91">Normalbenzin</string>
     <string name="poi_fuel_octane_92">92 Oktan</string>
-    <string name="poi_fuel_octane_95">95 Oktan</string>
-    <string name="poi_fuel_octane_98">98 Oktan</string>
-    <string name="poi_fuel_octane_100">100 Oktan</string>
+    <string name="poi_fuel_octane_95">Super E5</string>
+    <string name="poi_fuel_octane_98">Super Plus</string>
+    <string name="poi_fuel_octane_100">V-Power-Racing</string>
     <string name="poi_fuel_cng">Komprimiertes Erdgas</string>
     <string name="poi_fuel_1_25">Kraftstoffgemisch 1:25</string>
     <string name="poi_fuel_1_50">Kraftstoffgemisch 1:50</string>
     <string name="poi_fuel_ethanol">Ethanol</string>
     <string name="poi_fuel_methanol">Methanol</string>
-    <string name="poi_fuel_e10">E10</string>
+    <string name="poi_fuel_e10">Super E10</string>
     <string name="poi_fuel_e20">E20</string>
     <string name="poi_fuel_e85">E85</string>
     <string name="poi_fuel_biogas">Biogas</string>
@@ -666,7 +665,7 @@
     <string name="poi_fuel_electricity">Strom</string>
     <string name="poi_public_transport_stop_position">Halteposition öffentlicher Verkehrsmittel</string>
     <string name="poi_railway_buffer_stop">Eisenbahnprellbock</string>
-    <string name="poi_junction">ABZWEIGUNG</string>
+    <string name="poi_junction">Abzweigung</string>
     <string name="poi_rest_area">Rastplatz</string>
     <string name="poi_observation_tower">Aussichtsturm</string>
     <string name="poi_bell_tower">Glockenturm</string>
@@ -2001,7 +2000,6 @@
     <string name="poi_training_art">Ausbildung: Kunst</string>
     <string name="poi_training_cooking">Ausbildung: Kochen</string>
     <string name="poi_training_computer">Ausbildung: Computer</string>
-    <string name="poi_training_yoga">Ausbildung: Yoga</string>
     <string name="poi_training_martial_art">Ausbildung: Kampfkunst</string>
     <string name="poi_training_aviation">Ausbildung: Luftfahrt</string>
     <string name="poi_training_hairdressing">Ausbildung: Frisör</string>
@@ -2617,7 +2615,7 @@
     <string name="poi_crossing_activation_automatic">Bahnübergangssteuerung: automatisch</string>
     <string name="poi_crossing_activation_local">Bahnübergangssteuerung: lokal</string>
     <string name="poi_crossing_activation_remote">Bahnübergangssteuerung: ferngesteuert</string>
-    <string name="poi_crossing_barrier_no">Schranken: keine</string>
+    <string name="poi_crossing_barrier_no">Schranke: keine</string>
     <string name="poi_crossing_barrier_yes">Schranke</string>
     <string name="poi_crossing_barrier_full">Schranke: komplett</string>
     <string name="poi_crossing_barrier_half">Schranke: halb</string>
@@ -2879,7 +2877,6 @@
     <string name="poi_cuisine_yogurt">Joghurt</string>
     <string name="poi_cuisine_gyros">Gyros</string>
     <string name="poi_cuisine_empanada">Empanada</string>
-    <string name="poi_cuisine_crepes">Crêpes</string>
     <string name="poi_cuisine_suki">Suki</string>
     <string name="poi_cuisine_bubble_tea">Bubble Tea</string>
     <string name="poi_cuisine_meat">Fleisch</string>
@@ -3134,7 +3131,7 @@
     <string name="poi_reservation_no">Nein</string>
     <string name="poi_reservation_members_only">Nur für Mitglieder</string>
     <string name="poi_boat_rental_type">Mietboote</string>
-    <string name="poi_boat_rental">Bootsvermietung</string>
+    <string name="poi_boat_rental">Bootsverleih/Bootsvermietung</string>
     <string name="poi_boat_motorboat_rental_yes">Motorboote: ja</string>
     <string name="poi_boat_motorboat_rental_no">Motorboote: nein</string>
     <string name="poi_boat_houseboat_rental_yes">Hausboote: ja</string>
@@ -4022,7 +4019,7 @@
     <string name="poi_geoglyph">Erdzeichnung</string>
     <string name="poi_satellite_dish">Satellitenantenne</string>
     <string name="poi_trailhead">Ausgangspunkt eines Wanderwegs</string>
-    <string name="poi_hampshire_gate">Drahtzaun (über den Weg gespannt, als Ersatz für ein Tor)</string>
+    <string name="poi_hampshire_gate">Drahtzaun</string>
     <string name="poi_driver_training">Verkehrsübungsplatz</string>
     <string name="poi_research_institute">Forschungsinstitut</string>
     <string name="poi_butcher_type">Primäre Fleischart</string>
@@ -4990,7 +4987,6 @@
     <string name="poi_aerodrome_type_airfield">Flugfeld</string>
     <string name="poi_consulate">Konsulat</string>
     <string name="poi_hazard_landslide">Gefahr: Erdrutsch</string>
-    <string name="poi_hazard_additional_yes">Gefahr</string>
     <string name="poi_hazard_falling_rocks">Herabfallende Felsen</string>
     <string name="poi_hazard_contamination">Kontamination</string>
     <string name="poi_hazard_yes">Gefahr</string>

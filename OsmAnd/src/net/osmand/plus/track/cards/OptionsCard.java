@@ -50,6 +50,7 @@ public class OptionsCard extends MapBaseCard {
 	public static final int ALTITUDE_CORRECTION_BUTTON_INDEX = 12;
 	public static final int DELETE_BUTTON_INDEX = 13;
 	public static final int SIMULATE_POSITION_BUTTON_INDEX = 14;
+	public static final int CENTER_MAP_ON_LOCATION_BUTTON_INDEX = 15;
 
 	private final TrackDisplayHelper displayHelper;
 	private final SelectedGpxFile selectedGpxFile;

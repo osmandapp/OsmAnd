@@ -21,13 +21,13 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
-import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.HHRouteDataStructure.HHNetworkRouteRes;
 import net.osmand.router.HHRouteDataStructure.HHRoutingConfig;
 import net.osmand.router.HHRouteDataStructure.NetworkDBPoint;
 import net.osmand.router.RouteCalculationProgress.HHIteration;
 import net.osmand.router.RouteResultPreparation.RouteCalcResult;
+import net.osmand.shared.routing.GeneralRouterProfile;
 import net.osmand.util.MapUtils;
 
 
@@ -37,6 +37,7 @@ public class RoutePlannerFrontEnd {
 	// Check issue #8649
 	protected static final double GPS_POSSIBLE_ERROR = 7;
 	public static boolean CALCULATE_MISSING_MAPS = true;
+	public static boolean CONTINUE_ON_MISSING_MAPS = true;
 	static boolean TRACE_ROUTING = false;
 	private boolean useSmartRouteRecalculation = true;
 	private boolean useGeometryBasedApproximation = false;
@@ -155,18 +156,7 @@ public class RoutePlannerFrontEnd {
 		}
 		for (RouteDataObject r : dataObjects) {
 			if (r.getPointsLength() > 1) {
-				RouteSegmentPoint road = null;
-				for (int j = 1; j < r.getPointsLength(); j++) {
-					QuadPointDouble pr = MapUtils.getProjectionPoint31(px, py, r.getPoint31XTile(j - 1),
-							r.getPoint31YTile(j - 1), r.getPoint31XTile(j), r.getPoint31YTile(j));
-					double currentsDistSquare = squareDist((int) pr.x, (int) pr.y, px, py);
-					if (road == null || currentsDistSquare < road.distToProj) {
-						RouteDataObject ro = new RouteDataObject(r);
-						road = new RouteSegmentPoint(ro, j - 1, j, currentsDistSquare);
-						road.preciseX = (int) pr.x;
-						road.preciseY = (int) pr.y;
-					}
-				}
+				RouteSegmentPoint road = calcPreciseRouteSegmentPoint(r, px, py);
 				if (road != null) {
 					if (!transportStop) {
 						float prio = ctx.getRouter().defineDestinationPriority(road.road);
@@ -178,7 +168,6 @@ public class RoutePlannerFrontEnd {
 					} else {
 						list.add(road);
 					}
-					
 				}
 			}
 		}
@@ -218,6 +207,22 @@ public class RoutePlannerFrontEnd {
 			return ps;
 		}
 		return null;
+	}
+
+	public RouteSegmentPoint calcPreciseRouteSegmentPoint(RouteDataObject r, int x, int y) {
+		RouteSegmentPoint road = null;
+		for (int i = 1; i < r.getPointsLength(); i++) {
+			QuadPointDouble pr = MapUtils.getProjectionPoint31(x, y, r.getPoint31XTile(i - 1),
+					r.getPoint31YTile(i - 1), r.getPoint31XTile(i), r.getPoint31YTile(i));
+			double currentsDistSquare = squareDist((int) pr.x, (int) pr.y, x, y);
+			if (road == null || currentsDistSquare < road.distToProj) {
+				RouteDataObject ro = new RouteDataObject(r);
+				road = new RouteSegmentPoint(ro, i - 1, i, currentsDistSquare);
+				road.preciseX = (int) pr.x;
+				road.preciseY = (int) pr.y;
+			}
+		}
+		return road;
 	}
 
 	public RouteCalcResult searchRoute(final RoutingContext ctx, LatLon start, LatLon end, List<LatLon> intermediates) throws IOException, InterruptedException {
@@ -403,7 +408,11 @@ public class RoutePlannerFrontEnd {
 		if (CALCULATE_MISSING_MAPS) {
 			MissingMapsCalculator calculator = new MissingMapsCalculator(osmandRegions);
 			if (calculator.checkIfThereAreMissingMaps(ctx, start, targets, hhRoutingConfig != null)) {
-				return new RouteCalcResult(ctx.calculationProgress.missingMapsCalculationResult.getErrorMessage());
+				if (CONTINUE_ON_MISSING_MAPS) {
+					log.info(ctx.calculationProgress.missingMapsCalculationResult.getErrorMessage());
+				} else {
+					return new RouteCalcResult(ctx.calculationProgress.missingMapsCalculationResult.getErrorMessage());
+				}
 			}
 		}
 		if (needRequestPrivateAccessRouting(ctx, targets)) {
@@ -413,7 +422,8 @@ public class RoutePlannerFrontEnd {
 			calculateRegionsWithAllRoutePoints(ctx, osmandRegions, start, targets);
 			if (ctx.nativeLib == null || hhRoutingType == HHRoutingType.JAVA) {
 				HHNetworkRouteRes r = runHHRoute(ctx, start, targets);
-				if ((r != null && r.isCorrect()) || useOnlyHHRouting) {
+				boolean hasAnyMissingMaps = ctx.calculationProgress.hasAnyMissingMaps();
+				if ((r != null && r.isCorrect()) || hasAnyMissingMaps || useOnlyHHRouting) {
 					return r;
 				}
 			} else {
@@ -422,7 +432,8 @@ public class RoutePlannerFrontEnd {
 				RouteCalcResult r = runNativeRouting(ctx, null, hhRoutingConfig);
 				ctx.calculationProgress.timeToCalculate = (System.nanoTime() - timeToCalculate);
 				RouteResultPreparation.printResults(ctx, start, end, r.detailed);
-				if ((!r.detailed.isEmpty() && r.isCorrect()) || useOnlyHHRouting) {
+				boolean hasAnyMissingMaps = ctx.calculationProgress.hasAnyMissingMaps();
+				if ((!r.detailed.isEmpty() && r.isCorrect()) || hasAnyMissingMaps || useOnlyHHRouting) {
 					makeStartEndPointsPrecise(ctx, r, start, end, intermediates);
 					return r;
 				}

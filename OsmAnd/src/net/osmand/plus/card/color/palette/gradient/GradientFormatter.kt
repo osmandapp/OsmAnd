@@ -67,7 +67,7 @@ object GradientFormatter {
 		showUnits: Boolean,
 		realDataLimits: RealDataLimits? = null
 	): String {
-		var displayUnits = fileType.displayUnits
+		var displayUnits = fileType.displayUnitsType.getUnit()
 		var baseUnits = fileType.baseUnits
 
 		val valueStr: String

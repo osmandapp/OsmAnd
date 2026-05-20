@@ -143,7 +143,7 @@ class PointAttributes(
 
 	fun hasAnyVehicleValueSet(): Boolean = vehicleData?.hasAnyValueSet() == true
 
-	fun getAttributeValue(tag: String): Float? =
+	fun getAttributeValue(tag: String): Float =
 		when (tag) {
 			POINT_SPEED -> speed
 			POINT_ELEVATION -> elevation
@@ -174,7 +174,7 @@ class PointAttributes(
 			OBD_SPEED_COMMAND.gpxTag -> vehicleSpeed
 			OBD_THROTTLE_POSITION_COMMAND.gpxTag -> throttlePosition
 
-			else -> null
+			else -> Float.NaN
 		}
 
 	fun setAttributeValue(tag: String, value: Float) {
@@ -222,7 +222,7 @@ class PointAttributes(
 	}
 
 	fun hasValidValue(tag: String): Boolean {
-		val value = getAttributeValue(tag) ?: return false
+		val value = getAttributeValue(tag)
 		return when (tag) {
 			SENSOR_TAG_TEMPERATURE,
 			SENSOR_TAG_TEMPERATURE_W,

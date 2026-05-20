@@ -57,10 +57,6 @@ public class Algorithms {
 	private static final int BUFFER_SIZE = 1024;
 	private static final Log log = PlatformUtil.getLog(Algorithms.class);
 
-	private static final char[] APOSTROPHES = {'\'', '’', 'ʼ', '´', '`', '′', '‵', 'ʹ'};
-	private static final char[] CHARS_TO_NORMALIZE_KEY = {'’', 'ʼ', '(', ')', '´', '`', '′', '‵', 'ʹ'}; // remove () subcities
-	private static final char[] CHARS_TO_NORMALIZE_VALUE = {'\'', '\'', ' ', ' ', '\'', '\'', '\'', '\'', '\''};
-
 	public static final NumberFormat DECIMAL_FORMAT = new DecimalFormat("#.#", new DecimalFormatSymbols(Locale.US));
 
 	private static final String HTML_PATTERN = "<(\"[^\"]*\"|'[^']*'|[^'\">])*>";
@@ -87,75 +83,29 @@ public class Algorithms {
 		}
 		return false;
 	}
-
-	public static String normalizeSearchText(String s) {
-		boolean norm = containsChar(s, CHARS_TO_NORMALIZE_KEY);
-		if (!norm) {
-			return s;
-		}
-		for (int k = 0; k < CHARS_TO_NORMALIZE_KEY.length; k++) {
-			s = s.replace(CHARS_TO_NORMALIZE_KEY[k], CHARS_TO_NORMALIZE_VALUE[k]);
-		}
-		return s;
-	}
-
-	public static String removeApostrophes(String s) {
-		if (!containsChar(s, APOSTROPHES)) {
-			return s;
-		}
-		StringBuilder sb = new StringBuilder(s.length());
-		for (int i = 0; i < s.length(); i++) {
-			char c = s.charAt(i);
-			boolean apostroph = false;
-			for (char d : APOSTROPHES) {
-				if (d == c) {
-					apostroph = true;
-					break;
-				}
-			}
-			if (!apostroph) {
-				sb.append(c);
-			}
-		}
-		return sb.toString();
-	}
-
-	/**
-	 * Split string by words and convert to lowercase, use as delimiter all chars except letters and digits
-	 * @param str input string
-	 * @return result words list
-	 */
-
-	public static List<String> splitByWordsLowercase(String str) {
-		List<String> splitStr = new ArrayList<>();
-		int prev = -1;
-		for (int i = 0; i <= str.length(); i++) {
-			if (i == str.length() ||
-					(!Character.isLetter(str.charAt(i)) && !Character.isDigit(str.charAt(i)))) {
-				if (prev != -1) {
-					String subStr = str.substring(prev, i);
-					splitStr.add(subStr.toLowerCase());
-					prev = -1;
-				}
-			} else {
-				if (prev == -1) {
-					prev = i;
-				}
-			}
-		}
-		return splitStr;
-	}
-
+	
 	public static boolean isEmpty(Collection<?> c) {
 		return c == null || c.size() == 0;
+	}
+
+	public static boolean isNotEmpty(Collection<?> c) {
+		return !isEmpty(c);
 	}
 
 	public static boolean isEmpty(Map<?, ?> map) {
 		return map == null || map.size() == 0;
 	}
 
+	public static boolean isNotEmpty(Map<?, ?> map) {
+		return !isEmpty(map);
+	}
+
 	public static <T> boolean isEmpty(T[] array) {
 		return array == null || array.length == 0;
+	}
+
+	public static <T> boolean isNotEmpty(T[] array) {
+		return !isEmpty(array);
 	}
 
 	public static String emptyIfNull(String s) {
@@ -168,6 +118,10 @@ public class Algorithms {
 
 	public static boolean isEmpty(CharSequence s) {
 		return s == null || s.length() == 0;
+	}
+
+	public static boolean isNotEmpty(CharSequence s) {
+		return !isEmpty(s);
 	}
 
 	public static boolean isBlank(String s) {
@@ -244,26 +198,57 @@ public class Algorithms {
 		return true;
 	}
 
+	public static boolean isFirstPolygonInsideSecond(float[] firstPolygon, float[] secondPolygon) {
+		for (int i = 0; i < firstPolygon.length; i += 2) {
+			float lat = firstPolygon[i];
+			float lon = firstPolygon[i + 1];
+			if (!isPointInsidePolygon(lat, lon, secondPolygon)) {
+				// if at least one point is not inside the boundary, return false
+				return false;
+			}
+		}
+		return true;
+	}
+
 	/**
 	 * @see <a href="http://alienryderflex.com/polygon/">Determining Whether A Point Is Inside A Complex Polygon</a>
 	 * @param point
 	 * @param polygon
 	 * @return true if the point is in the area of the polygon
 	 */
-	public static boolean isPointInsidePolygon(LatLon point,
-	                                           List<LatLon> polygon) {
-		double px = point.getLongitude();
-		double py = point.getLatitude();
+	public static boolean isPointInsidePolygon(LatLon point, List<LatLon> polygon) {
 		boolean oddNodes = false;
+		double lat = point.getLatitude();
+		double lon = point.getLongitude();
+
 		for (int i = 0, j = polygon.size() - 1; i < polygon.size(); j = i++) {
 			double x1 = polygon.get(i).getLongitude();
 			double y1 = polygon.get(i).getLatitude();
 			double x2 = polygon.get(j).getLongitude();
 			double y2 = polygon.get(j).getLatitude();
-			if ((y1 < py && y2 >= py
-					|| y2 < py && y1 >= py)
-					&& (x1 <= px || x2 <= px)) {
-				if (x1 + (py - y1) / (y2 - y1) * (x2 - x1) < px) {
+			if ((y1 < lat && y2 >= lat
+					|| y2 < lat && y1 >= lat)
+					&& (x1 <= lon || x2 <= lon)) {
+				if (x1 + (lat - y1) / (y2 - y1) * (x2 - x1) < lon) {
+					oddNodes = !oddNodes;
+				}
+			}
+		}
+		return oddNodes;
+	}
+
+	public static boolean isPointInsidePolygon(float lat, float lon, float[] polygon) {
+		boolean oddNodes = false;
+		for (int i = 0, j = polygon.length - 2; i < polygon.length; j = i, i += 2) {
+			double x1 = polygon[i + 1];
+			double y1 = polygon[i];
+			double x2 = polygon[j + 1];
+			double y2 = polygon[j];
+
+			if ((y1 < lat && y2 >= lat
+					|| y2 < lat && y1 >= lat)
+					&& (x1 <= lon || x2 <= lon)) {
+				if (x1 + (lat - y1) / (y2 - y1) * (x2 - x1) < lon) {
 					oddNodes = !oddNodes;
 				}
 			}

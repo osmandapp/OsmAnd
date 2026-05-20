@@ -9,22 +9,26 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.routepreparationmenu.RequiredMapsFragment
-import net.osmand.plus.settings.backend.OsmandSettings
 
 
-class MissingMapsScreen(carContext: CarContext) : BaseAndroidAutoScreen(carContext) {
+class MissingMapsScreen(carContext: CarContext, private val allowContinue: Boolean) :
+	BaseAndroidAutoScreen(carContext) {
 	override fun getTemplate(): Template {
 		val title = app.getString(R.string.missing_maps_header)
 		val message = app.getString(R.string.missing_maps_description)
+		val continueNavigation = R.string.continue_navigation
+		val stopNavigationService = R.string.stop_navigation_service
+		val firstButtonText = if (allowContinue) continueNavigation else stopNavigationService
 
 		return MessageTemplate.Builder(message)
 			.setTitle(title)
 			.addAction(
 				Action.Builder()
-					.setTitle(app.getString(R.string.missing_maps_ignore))
+					.setTitle(app.getString(firstButtonText))
 					.setOnClickListener {
-						OsmandSettings.IGNORE_MISSING_MAPS = true
-						app.routingHelper.onSettingsChanged(true)
+						if (!allowContinue) {
+							app.carNavigationSession?.stopNavigation()
+						}
 						finish()
 					}
 					.build()
@@ -37,6 +41,9 @@ class MissingMapsScreen(carContext: CarContext) : BaseAndroidAutoScreen(carConte
 						val params = Bundle()
 						params.putBoolean(RequiredMapsFragment.OPEN_FRAGMENT_KEY, true)
 						MapActivity.launchMapActivityMoveToTop(app, null, null, params)
+						app.getRoutingHelper().stopCalculationImmediately()
+						app.getSettings().setStopOnMissingMaps(true)
+						app.carNavigationSession?.stopNavigation()
 						finish()
 					}
 					.build()

@@ -166,11 +166,13 @@ public class AmenityUIHelper extends MenuBuilder {
 							builder.append(pt.getTranslation());
 						}
 					}
-					Drawable icon;
+					if (Algorithms.isEmpty(categoryTypes)) {
+						continue;
+					}
 					PoiType pType = categoryTypes.get(0);
 					String poiAdditionalCategoryName = pType.getPoiAdditionalCategory();
 					String poiAdditionalIconName = poiTypes.getPoiAdditionalCategoryIconName(poiAdditionalCategoryName);
-					icon = getRowIcon(view.getContext(), poiAdditionalIconName);
+					Drawable icon = getRowIcon(view.getContext(), poiAdditionalIconName);
 					if (icon == null) {
 						icon = getRowIcon(view.getContext(), poiAdditionalCategoryName);
 					}

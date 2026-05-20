@@ -22,6 +22,7 @@ import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.download.local.BaseLocalItem;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemType;
+import net.osmand.plus.download.local.LocalItemUtils;
 import net.osmand.plus.download.local.MultipleLocalItem;
 import net.osmand.plus.download.local.dialogs.LocalItemsAdapter.LocalItemListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -67,7 +68,7 @@ public class LocalItemHolder extends RecyclerView.ViewHolder {
 	public void bindView(@NonNull BaseLocalItem item, boolean selectionMode,
 	                     boolean isInsideFolder, boolean lastItem, boolean hideDivider) {
 		Context context = itemView.getContext();
-		title.setText(item.getName(context, !isInsideFolder));
+		title.setText(getTitle(context, item, isInsideFolder));
 		description.setText(item.getDescription(context));
 		icon.setImageDrawable(getIcon(item));
 
@@ -88,6 +89,14 @@ public class LocalItemHolder extends RecyclerView.ViewHolder {
 		AndroidUiHelper.updateVisibility(compoundButton, selectionMode);
 		AndroidUiHelper.updateVisibility(bottomShadow, lastItem);
 		AndroidUiHelper.updateVisibility(bottomDivider, !lastItem && !hideDivider);
+	}
+
+	@NonNull
+	private CharSequence getTitle(@NonNull Context context, @NonNull BaseLocalItem item, boolean isInsideFolder) {
+		if (isInsideFolder && item instanceof LocalItem localItem && localItem.getType().isSortingByCountrySupported()) {
+			return LocalItemUtils.getGroupedItemName(context, localItem);
+		}
+		return item.getName(context, !isInsideFolder);
 	}
 
 	@NonNull

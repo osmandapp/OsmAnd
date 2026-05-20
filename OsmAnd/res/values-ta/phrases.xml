@@ -1143,7 +1143,6 @@
     <string name="poi_traffic_calming_island">போக்குவரத்து தீவு</string>
     <string name="poi_traffic_signals">ஒளியை நிறுத்து</string>
     <string name="poi_car_repair">கார் பழுது</string>
-    <string name="poi_service_tyres">டயர்கள்</string>
     <string name="poi_vehicle_inspection">வாகன ஆய்வு</string>
     <string name="poi_car_wash">கார் கழுவுதல்</string>
     <string name="poi_fuel">எரிவாயு நிலையம்; பெட்ரோல் நிலையம்; நிரப்புதல் நிலையம்; பெட்ரோல் நிலையம்</string>
@@ -2601,7 +2600,6 @@
     <string name="poi_training_art">பயிற்சி: கலை</string>
     <string name="poi_training_cooking">பயிற்சி: சமையல்</string>
     <string name="poi_training_computer">பயிற்சி: கணினி</string>
-    <string name="poi_training_yoga">பயிற்சி: யோகா</string>
     <string name="poi_training_martial_art">பயிற்சி: தற்காப்பு கலை</string>
     <string name="poi_training_hairdressing">பயிற்சி: சிகையலங்கார வல்லுநர்</string>
     <string name="poi_monument_yes">நினைவுச்சின்ன பொருள்</string>
@@ -3374,7 +3372,6 @@
     <string name="poi_cuisine_yogurt">தயிர்</string>
     <string name="poi_cuisine_gyros">கைரோச்</string>
     <string name="poi_cuisine_empanada">எம்பனாடா</string>
-    <string name="poi_cuisine_crepes">க்ரீப்ச்</string>
     <string name="poi_cuisine_yakiniku">யாகினிகு</string>
     <string name="poi_cuisine_suki">சுகி</string>
     <string name="poi_cuisine_udon">உடோன்</string>
@@ -5059,7 +5056,6 @@
     <string name="poi_route_point_category">பயண வகை</string>
     <string name="poi_travel_agency">பயண நிறுவனம்</string>
     <string name="poi_network_cycling">வழித்தட பிணையம் (சைக்கிள் ஓட்டுதல்)</string>
-    <string name="poi_hazard_additional_yes">இடர்</string>
     <string name="poi_steps">படிகள்</string>
     <string name="poi_area_highway_steps">படிக்கட்டு பகுதி</string>
     <string name="poi_sled_yes">ச்லெட்: ஆம்</string>

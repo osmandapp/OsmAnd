@@ -33,6 +33,8 @@ import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.OsmandFormatter
 import net.osmand.telegram.utils.OsmandLocationUtils
+import net.osmand.telegram.utils.applyScrollableBottomSystemWindowInsets
+import net.osmand.telegram.utils.applyTopSystemWindowInsets
 import net.osmand.util.Algorithms
 import java.io.File
 import java.text.SimpleDateFormat
@@ -78,7 +80,8 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		savedInstanceState: Bundle?
 	): View {
 		mainView = inflater.inflate(R.layout.fragment_user_gpx_info, parent)
-		AndroidUtils.addStatusBarPadding19v(requireContext(), mainView)
+		mainView.findViewById<View>(R.id.image_container).applyTopSystemWindowInsets()
+		mainView.findViewById<View>(R.id.scroll_view).applyScrollableBottomSystemWindowInsets()
 
 		readFromBundle(savedInstanceState ?: arguments)
 

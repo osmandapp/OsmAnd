@@ -320,6 +320,7 @@
 	<dimen name="bottom_sheet_title_height">52dp</dimen>
 	<dimen name="bottom_sheet_descr_height">44dp</dimen>
 	<dimen name="bottom_sheet_list_item_height">48dp</dimen>
+	<dimen name="bottom_sheet_medium_list_item_height">56dp</dimen>
 	<dimen name="bottom_sheet_large_list_item_height">64dp</dimen>
 	<dimen name="bottom_sheet_icon_margin">24dp</dimen>
 	<dimen name="bottom_sheet_title_padding_top">10dp</dimen>
@@ -353,6 +354,11 @@
 
 	<dimen name="gallery_standard_icon_size">72dp</dimen>
 	<dimen name="gallery_big_icon_size">156dp</dimen>
+
+	<dimen name="astro_schedule_time_text_size">16sp</dimen>
+	<dimen name="astro_schedule_meridiem_text_size">11sp</dimen>
+	<dimen name="astro_schedule_suffix_text_size">10sp</dimen>
+	<dimen name="astro_search_empty_state_padding_top">48dp</dimen>
 
 	<!--Route info-->
 	<dimen name="route_info_buttons_padding_top_bottom">16dp</dimen>

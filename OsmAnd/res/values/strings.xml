@@ -10,8 +10,55 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+	<string name="favorite_confirm_delete_folder">This will delete folder \"%1$s\", including nested folders and %2$d favorite point(s).</string>
+	<string name="favorite_folder_rename_conflict">A folder with this name already exists.</string>
+	<string name="favorite_folder_invalid_name">Folder name can\'t contain / or _%_</string>
+	<string name="favorite_folder_duplicate_message">Use a folder name that doesn\'t already exist.</string>
+	<string name="favorite_folder_name">Folder name</string>
+	<string name="edit_folder">Edit folder</string>
+	<string name="obd_simulation_device">Simulation device</string>
+	<string name="astronomy_map">Astronomy Map</string>
+	<string name="astro_designations">Designations</string>
+	<string name="open_from_short">From</string>
+	<string name="open_till_short">Until</string>
+	<string name="map_widget_memory_info">Memory info</string>
+	<string name="map_widget_memory_info_desc">Monitors Java heap, native allocations, and graphics memory.</string>
+	<string name="memory_used_settings">Used Java Heap</string>
+	<string name="memory_allocated_settings">Allocated Java Heap</string>
+	<string name="memory_limit_settings">Max Java Heap Limit</string>
+	<string name="memory_native_settings">Native Heap Allocated</string>
+	<string name="memory_graphics_settings">Graphics Memory</string>
+	<string name="shared_string_heap">Heap</string>
+	<string name="shared_string_native">Native</string>
+	<string name="shared_string_gpu">GPU</string>
+	<string name="shared_string_allocated">Allocated</string>
+	<string name="compass_calibration_needed">Compass calibration needed</string>
+	<string name="sensors_not_available_for_ar">Sensors not available for AR</string>
+	<string name="ar_mode_enabled">AR Mode Enabled</string>
+	<string name="ar_mode_disabled">AR Mode Disabled</string>
+    <string name="release_5_3">
+        • 3D Buildings support added\n\n
+        • Spherical map view\n\n
+        • Astronomy plugin with night map and star database\n\n
+        • New color modes for Speedometer: tolerance and speeding\n\n
+        • Separate widget layouts for Landscape and Portrait\n\n
+        • Trip recording widgets: Moving speed and Average speed\n\n
+        • Adapter voltage widget for Vehicle Metrics\n\n
+        • Vehicle metrics data in Track Analyzer\n\n
+        • Auto-organize tracks by year, length, activity &amp; more\n\n
+        • Palette editor for Terrain and Track visualization\n\n
+        • Improved search algorithms &amp; refreshed UI\n\n
+        • Elevation profiles fixed for Routes\n\n
+        • Favorites: new sorting options and UI refresh\n\n
+        • Share link to any POI\n\n
+        • Waypoint preview without closing the list\n\n
+        • Bicycle width parameter to avoid narrow roads\n\n
+        • Photo descriptions from Wikimedia\n\n
+    </string>
 	<string name="purchases_feature_desc_astronomy">Explore the night sky with an offline map and celestial catalog. Plan observations using smart visibility graphs, daily schedules, and an interactive AR mode.</string>
+	<string name="shared_string_clear_filters">Clear filters</string>
+	<string name="astro_sort_newest_first">Newest first</string>
+	<string name="astro_sort_oldest_first">Oldest first</string>
 	<string name="astro_expand_your_universe_title">Expand your universe</string>
 	<string name="astro_expand_your_universe_description">Get access to the extended database of deep sky catalogs, Wikipedia articles and AR mode offline.</string>
 	<string name="astro_offline_knowledge_base_title">Offline Knowledge Base</string>
@@ -776,8 +823,8 @@ You will be able to pair this scanner again at any time.</string>
     <string name="app_mode_suv">SUV</string>
 	<string name="graph_axis">Graph axis</string>
 	<string name="y_axis_description">Select up to two options for Y-Axis.</string>
-	<string name="delete_widget_description">This widget will be deleted. You can restore it later in Configure Screen.</string>
-	<string name="delete_widget">Delete widget?</string>
+	<string name="delete_widget_description">This widget will be removed. You can restore it later in Configure Screen.</string>
+	<string name="delete_widget">Remove widget?</string>
 	<string name="add_widget_below">Add widget below</string>
 	<string name="add_widget_above">Add widget above</string>
 	<string name="add_widget_to_the_right">Add widget to the right</string>
@@ -1179,8 +1226,6 @@ You will be able to pair this scanner again at any time.</string>
     <string name="wikipedia_and_travel_maps">Wikipedia and Travel maps</string>
     <string name="standard_maps">Standard maps</string>
     <string name="terrain_maps">Terrain maps</string>
-    <string name="widget_available_ram_desc">Displays available memory allocated for OsmAnd.</string>
-    <string name="widget_available_ram">Available RAM</string>
     <string name="app_mode_hang_gliding">Hang gliding</string>
     <string name="app_mode_paragliding">Paragliding</string>
     <string name="max_altitude">Max altitude</string>
@@ -1551,7 +1596,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="shared_string_on_map">On map</string>
     <string name="display_position_automatic_descr">Depends on Map orientation: bottom for movement direction, center for all others.</string>
     <string name="weather_forecast_is_outdated">Forecast is outdated.</string>
-    <string name="shared_string_all_world">All world</string>
+    <string name="shared_string_world_weather_map">World weather map</string>
     <string name="weather_forecast">Weather forecast</string>
     <string name="offline_weather_forecast">Offline weather forecast</string>
     <string name="offline_weather_forecast_desc">You can download weather forecast for 7 days.</string>
@@ -2289,7 +2334,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="option_available_only_in_osmand_pro">Available as part of the OsmAnd Pro subscription.</string>
     <string name="track_has_no_needed_data">The track is missing the respective data.</string>
     <string name="promo_subscription">Promo subscription</string>
-    <string name="active_till">Active till %1$s</string>
+    <string name="active_till">Active until %1$s</string>
     <string name="on_hold_since">On hold since %1$s</string>
     <string name="explore_wikipedia_offline">Explore Wikipedia offline.</string>
     <string name="shared_string_purchased">Purchased</string>
@@ -3908,7 +3953,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="context_menu_read_article">Read article</string>
     <string name="context_menu_points_of_group">All points of the group</string>
     <string name="open_from">Open from</string>
-    <string name="open_till">Open till</string>
+    <string name="open_till">Open until</string>
     <string name="will_close_at">Closes at</string>
     <string name="will_open_at">Opens at</string>
     <string name="will_open_on">Opens at</string>

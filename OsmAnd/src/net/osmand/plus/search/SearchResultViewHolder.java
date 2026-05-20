@@ -133,7 +133,7 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 					SpannableString openHours = MenuController.getSpannableOpeningHours(
 							rs.getInfo(),
 							ContextCompat.getColor(app, colorOpen),
-							ContextCompat.getColor(app, colorClosed));
+							ContextCompat.getColor(app, colorClosed), true);
 					int colorId = rs.isOpenedForTime(calendar) ? colorOpen : colorClosed;
 					timeLayout.setVisibility(View.VISIBLE);
 
@@ -153,7 +153,7 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 	public static void bindPOISearchResult(@NonNull View view, @NonNull QuickSearchListItem item,
 	                                       boolean nightMode, Calendar calendar) {
 		OsmandApplication app = (OsmandApplication) view.getContext().getApplicationContext();
-		TextView title = view.findViewById(R.id.title);
+		TextView titleTv = view.findViewById(R.id.title);
 		TextView subtitle = view.findViewById(R.id.subtitle);
 		TextView addressTv = view.findViewById(R.id.address);
 		ImageView imageView = view.findViewById(R.id.imageView);
@@ -165,8 +165,7 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 		boolean hasRouteShield = false;
 
 		String address = item.getAddress();
-		String name = item.getName();
-		String altName = item.getAltName();
+		CharSequence title = item.getMapObjectTitleWithAltName(app, nightMode);
 		String typeName = QuickSearchListItem.getTypeName(app, item.getSearchResult());
 		if (!Algorithms.isEmpty(typeName)) {
 			int typenameComaPosition = typeName.indexOf(",");
@@ -175,9 +174,7 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 			}
 		}
 		Amenity amenity = (Amenity) item.getSearchResult().object;
-		if (Algorithms.isEmpty(altName)) {
-			altName = amenity.getName(Amenity.ALT_NAME_TAG);
-		}
+		titleTv.setText(title);
 
 		String description = null;
 		String photoUrl = null;
@@ -191,15 +188,6 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 			}
 		}
 
-		if (!Algorithms.isEmpty(altName) && !Algorithms.stringsEqual(name, altName)) {
-			name = String.format("%s (%s)", name, altName);
-			int textColor = nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light;
-			SpannableString spannableName = UiUtilities.createColorSpannable(name, view.getContext().getColor(textColor), false, altName);
-			title.setText(spannableName);
-		} else {
-			title.setText(item.getSpannableName());
-		}
-
 		AndroidUiHelper.setTextAndChangeVisibility(addressTv, address);
 		subtitle.setText(typeName);
 
@@ -210,11 +198,23 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 				if (openHourInfo != null) {
 					int colorOpen = R.color.text_color_positive;
 					int colorClosed = R.color.text_color_negative;
+					int colorNearToOpen = R.color.icon_color_warning;
 					SpannableString openHours = MenuController.getSpannableOpeningHours(
 							openHourInfo,
 							ContextCompat.getColor(app, colorOpen),
-							ContextCompat.getColor(app, colorClosed));
-					int colorId = rs.isOpenedForTime(calendar) ? colorOpen : colorClosed;
+							ContextCompat.getColor(app, colorClosed), true);
+
+					String nearToOpen = rs.getNearToOpeningTime(calendar, OpeningHours.ALL_SEQUENCES);
+					boolean isNearToOpen = !Algorithms.isEmpty(nearToOpen);
+
+					int colorId;
+					if (rs.isOpenedForTime(calendar)) {
+						colorId = colorOpen;
+					} else if (isNearToOpen) {
+						colorId = colorNearToOpen;
+					} else {
+						colorId = colorClosed;
+					}
 					if (Algorithms.isEmpty(openHours)) {
 						String openHoursStr = rs.toLocalString();
 						openHours = UiUtilities.createColorSpannable(openHoursStr, app.getColor(colorId), openHoursStr);
@@ -226,7 +226,7 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 						TextView timeText = view.findViewById(R.id.time);
 						ImageView timeIcon = view.findViewById(R.id.time_icon);
 						timeText.setText(openHours);
-						timeIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_opening_hour_16, colorId));
+						timeIcon.setImageDrawable(app.getUIUtilities().getIcon(isNearToOpen ? R.drawable.ic_action_closed_hours_16 : R.drawable.ic_action_opening_hour_16, colorId));
 					}
 				} else {
 					timeLayout.setVisibility(View.GONE);
@@ -296,7 +296,7 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 				imageContainer.setBackground(null);
 				imageContainer.setPadding(margin, margin, margin, margin);
 			} else {
-				int topPadding = title.getLineCount() > 1 ? AndroidUtils.dpToPx(app, 8) : 0;
+				int topPadding = titleTv.getLineCount() > 1 ? AndroidUtils.dpToPx(app, 8) : 0;
 				imageContainer.setPadding(0, topPadding, 0, 0);
 			}
 			if (!hasRouteShield) {

@@ -3089,7 +3089,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="remove_widget_first">Pirmiausia pašalinkite valdiklį</string>
     <string name="external_input_device_title">Išorinis įvesties įrenginys</string>
     <string name="trash_alert_card_desc">Šiukšliadėžėje esantys elementai bus ištrinti po %1$s dienų.</string>
-    <string name="widget_available_ram_desc">Rodo laisvą atmintį, skirtą OsmAnd.</string>
     <string name="rendering_attr_padusHideBoundaries_description">Slėpti viešosios žemės ribas, bet palikti sritis</string>
     <string name="added_profiles">Pridėti profiliai</string>
     <string name="update_all_maps">Atnaujinti visus žemėlapius</string>

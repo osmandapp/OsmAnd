@@ -73,8 +73,8 @@ public abstract class SelectPointsCategoryBottomSheet extends MenuBottomSheetDia
 	@NonNull
 	private BaseBottomSheetItem createTitleItem() {
 		return new BottomSheetItemWithDescription.Builder()
-				.setDescription(getString(R.string.select_category_descr))
-				.setTitle(getString(R.string.favorite_category_select))
+				.setDescription(getString(getDescriptionStringId()))
+				.setTitle(getString(getTitleStringId()))
 				.setLayoutId(R.layout.bottom_sheet_item_title_with_description)
 				.create();
 	}
@@ -90,7 +90,7 @@ public abstract class SelectPointsCategoryBottomSheet extends MenuBottomSheetDia
 		AndroidUiHelper.updateVisibility(container.findViewById(R.id.description), false);
 
 		return new SimpleBottomSheetItem.Builder()
-				.setTitle(getString(R.string.add_group))
+				.setTitle(getString(getAddNewCategoryStringId()))
 				.setTitleColorId(ColorUtilities.getActiveColorId(nightMode))
 				.setIcon(getActiveIcon(R.drawable.ic_action_folder_add))
 				.setOnClickListener(v -> showAddNewCategoryFragment(listener))
@@ -129,22 +129,54 @@ public abstract class SelectPointsCategoryBottomSheet extends MenuBottomSheetDia
 
 		TextView text = itemView.findViewById(R.id.title);
 		TextView description = itemView.findViewById(R.id.description);
-		String name = categoryName.isEmpty() ? getString(R.string.shared_string_favorites) : categoryName;
-		text.setText(name);
-		description.setText(String.valueOf(pointsGroup.getPoints().size()));
+		text.setText(getCategoryDisplayName(pointsGroup));
+		setupCategoryTitle(text, pointsGroup);
+		description.setText(getCategoryDescription(pointsGroup));
 
 		itemView.setOnClickListener(v -> {
+			PointsGroup selectedPointsGroup = prepareSelectedPointsGroup(pointsGroup);
 			PointEditor pointEditor = getPointEditor();
 			if (pointEditor != null) {
-				pointEditor.setPointsGroup(pointsGroup);
+				pointEditor.setPointsGroup(selectedPointsGroup);
 			}
 			if (listener != null) {
-				listener.onCategorySelected(pointsGroup);
+				listener.onCategorySelected(selectedPointsGroup);
 			}
 			dismiss();
 		});
 
 		return itemView;
+	}
+
+	protected int getTitleStringId() {
+		return R.string.favorite_category_select;
+	}
+
+	protected int getDescriptionStringId() {
+		return R.string.select_category_descr;
+	}
+
+	protected int getAddNewCategoryStringId() {
+		return R.string.add_group;
+	}
+
+	@NonNull
+	protected String getCategoryDisplayName(@NonNull PointsGroup pointsGroup) {
+		String categoryName = pointsGroup.getName();
+		return categoryName.isEmpty() ? getString(R.string.shared_string_favorites) : categoryName;
+	}
+
+	protected void setupCategoryTitle(@NonNull TextView title, @NonNull PointsGroup pointsGroup) {
+	}
+
+	@NonNull
+	protected String getCategoryDescription(@NonNull PointsGroup pointsGroup) {
+		return String.valueOf(pointsGroup.getPoints().size());
+	}
+
+	@NonNull
+	protected PointsGroup prepareSelectedPointsGroup(@NonNull PointsGroup pointsGroup) {
+		return pointsGroup;
 	}
 
 	@Override

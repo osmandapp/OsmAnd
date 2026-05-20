@@ -137,13 +137,12 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 
 	@Override
 	public void updateInfo(@NonNull View view, @Nullable DrawSettings drawSettings) {
-		List<MapMarker> markers = markersHelper.getMapMarkers();
 		int zoom = mapActivity.getMapView().getZoom();
-		if (markers.size() == 0 || zoom < 3 || shouldHide()) {
+		List<MapMarker> markers = markersHelper.getMapMarkers();
+		if (markers.isEmpty() || zoom < 3 || shouldHide()) {
 			updateVisibility(false);
 			return;
 		}
-
 		showMarkers(markers);
 	}
 

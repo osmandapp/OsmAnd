@@ -86,7 +86,7 @@ class SkyObjectInfoFragment : Fragment() {
 			return
 		}
 
-		sheetTitle.text = obj.localizedName ?: obj.name
+		sheetTitle.text = obj.niceName()
 		val az = String.format(Locale.getDefault(), "%.1f°", obj.azimuth)
 		val alt = String.format(Locale.getDefault(), "%.1f°", obj.altitude)
 		val coordsText = "${getString(R.string.shared_string_azimuth)}: $az  •  ${getString(R.string.altitude)}: $alt"
@@ -151,14 +151,14 @@ class SkyObjectInfoFragment : Fragment() {
 			val setTime = searchRiseSet(bodyToCheck, observer, Direction.Set, searchStart, 1.2)
 
 			if (riseTime != null) {
-				sheetRiseTime.text = "Rise: ↑${AstroUtils.formatLocalTime(riseTime)}"
+				sheetRiseTime.text = "Rise: ↑${AstroUtils.formatLocalTime(requireContext(), riseTime)}"
 				sheetRiseTime.isVisible = true
 			} else {
 				sheetRiseTime.isVisible = false
 			}
 
 			if (setTime != null) {
-				sheetSetTime.text = "Set: ↓${AstroUtils.formatLocalTime(setTime)}"
+				sheetSetTime.text = "Set: ↓${AstroUtils.formatLocalTime(requireContext(), setTime)}"
 				sheetSetTime.isVisible = true
 			} else {
 				sheetSetTime.isVisible = false

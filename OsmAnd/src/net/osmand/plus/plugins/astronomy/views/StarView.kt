@@ -57,6 +57,7 @@ import kotlin.math.sin
 import kotlin.math.sqrt
 import kotlin.math.tan
 import androidx.core.graphics.withRotation
+import net.osmand.plus.utils.UiUtilities
 
 class StarView @JvmOverloads constructor(
 	context: Context,
@@ -983,9 +984,9 @@ class StarView @JvmOverloads constructor(
 
 			// Initialize bitmaps lazily
 			if (arrowShadowBmp == null) {
-				arrowShadowBmp = BitmapFactory.decodeResource(resources, R.drawable.map_marker_direction_arrow_p3_shadow)
-				arrowToDestinationBmp = BitmapFactory.decodeResource(resources, R.drawable.map_marker_direction_arrow_p2_color)
-				arrowLightBmp = BitmapFactory.decodeResource(resources, R.drawable.map_marker_direction_arrow_p1_light)
+				arrowShadowBmp = UiUtilities.decodeResource(resources, R.drawable.map_marker_direction_arrow_p3_shadow)
+				arrowToDestinationBmp = UiUtilities.decodeResource(resources, R.drawable.map_marker_direction_arrow_p2_color)
+				arrowLightBmp = UiUtilities.decodeResource(resources, R.drawable.map_marker_direction_arrow_p1_light)
 			}
 
 			(skyObjects + constellations).forEach { obj ->

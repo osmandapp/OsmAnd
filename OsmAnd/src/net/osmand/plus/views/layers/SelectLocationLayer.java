@@ -3,7 +3,6 @@ package net.osmand.plus.views.layers;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
@@ -19,6 +18,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.containers.ShiftedBitmap;
 import net.osmand.plus.dialogs.selectlocation.SelectLocationController;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
@@ -49,8 +49,8 @@ public class SelectLocationLayer extends OsmandMapLayer {
 	@Override
 	public void initLayer(@NonNull OsmandMapTileView view) {
 		super.initLayer(view);
-		defaultIconDay = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_day);
-		defaultIconNight = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_night);
+		defaultIconDay = UiUtilities.decodeResource(view.getResources(), R.drawable.map_ruler_center_day);
+		defaultIconNight = UiUtilities.decodeResource(view.getResources(), R.drawable.map_ruler_center_night);
 	}
 
 	@Override

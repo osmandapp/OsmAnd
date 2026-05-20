@@ -182,12 +182,12 @@ public class RouteGeometryWay extends
 			for (int pathIndex = 0; pathIndex < segmentData.size(); pathIndex++) {
 				DrawPathData31 path31 = segmentData.get(pathIndex);
 				boolean lastPath = pathIndex + 1 == segmentData.size();
-				int endIndex = lastPath ? path31.indexes.size() : path31.indexes.size() - 1;
+				int endIndex = lastPath ? path31.indexes.length : path31.indexes.length - 1;
 				for (int i = 0; i < endIndex; i++) {
-					int index = path31.indexes.get(i);
+					int index = path31.indexes[i];
 					if (index >= INITIAL_POINT_INDEX_SHIFT) {
-						int x31 = path31.tx.get(i);
-						int y31 = path31.ty.get(i);
+						int x31 = path31.tx[i];
+						int y31 = path31.ty[i];
 						double lat = MapUtils.get31LatitudeY(y31);
 						double lon = MapUtils.get31LongitudeX(x31);
 						segment.initialLocations.add(new Location("", lat, lon));

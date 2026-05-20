@@ -104,10 +104,16 @@ public abstract class MapObject implements Comparable<MapObject> {
 	}
 	
 	public List<String> getOtherNames(boolean transliterate) {
+		return getOtherNames(transliterate, null);
+	}
+	
+	public List<String> getOtherNames(boolean transliterate, String localeName) {
 		List<String> l = new ArrayList<String>();
 		String enName = getEnName(transliterate);
 		if (!Algorithms.isEmpty(enName)) {
-			l.add(enName);
+			if (localeName == null || !localeName.equals(enName)) {
+				l.add(enName);
+			}
 		}
 		if (names != null) {
 			for (String key : names.keySet()) {
@@ -115,8 +121,15 @@ public abstract class MapObject implements Comparable<MapObject> {
 				if (key.equals("admin_level") || key.equals("place")) {
 					continue;
 				}
-				l.add(names.get(key));
+				String name = names.get(key);
+				if (localeName != null && localeName.equals(name)) {
+					continue;
+				}
+				l.add(name);
 			}
+		}
+		if (!Algorithms.isEmpty(name) && localeName != null && !localeName.equals(name)) {
+			l.add(name);
 		}
 		return l;
 	}
@@ -353,13 +366,10 @@ public abstract class MapObject implements Comparable<MapObject> {
 				String s;
 				while ((s = br.readLine()) != null) {
 					bld.append(s);
+					bld.append("\n"); // could be space for name
 				}
 				br.close();
-				str = bld.toString();
-				// ugly fix of temporary problem of map generation
-				if (isContentZipped(str)) {
-					str = unzipContent(str);
-				}
+				str = bld.toString().trim();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

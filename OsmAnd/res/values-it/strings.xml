@@ -4167,7 +4167,7 @@
 \nI punti della traccia a una distanza maggiore dall\'ultimi punto visibile non saranno visualizzati.
 \nRicordate che soglie elevate possono semplificare eccessivamente la geometria della traccia.</string>
     <string name="gps_filter_actions_description">OsmAnd applicherà le modifiche alla traccia senza aggiornare il file. Puoi salvare le modifiche manualmente.</string>
-    <string name="shared_string_size">Misura</string>
+    <string name="shared_string_size">Dimensione</string>
     <string name="created_on">Creato il</string>
     <string name="use_routing_fallback_description">Utilizza la navigazione offline quando quella online non è disponibile.</string>
     <string name="turn_arrows">Frecce di direzione</string>
@@ -4513,7 +4513,7 @@
     <string name="terms_of_service_desc">Scaricando le mappe accetti %1$s e %2$s.</string>
     <string name="shared_string_terms_of_use">Termini d\'uso</string>
     <string name="purchases_feature_desc_cross_buy">Utilizza le funzionalità del tuo abbonamento su piattaforme diverse (Android/iOS/Web) senza costi aggiuntivi.</string>
-    <string name="external_sensor_widgets">Widget ANT+</string>
+    <string name="external_sensor_widgets">Sensori esterni</string>
     <string name="map_widget_ant_heart_rate">Battito cardiaco</string>
     <string name="ant_write_to_gpx">Scrivi dati sulla traccia</string>
     <string name="ant_missing_dependency_descr">Il servizio \"%1$s\" richiesto non è stato trovato.
@@ -4756,7 +4756,6 @@
     <string name="clear_online_cache_description">Questo cancellerà la cache delle mattonelle meteo online.</string>
     <string name="free_maps_updates">Aggiornamenti gratuiti (emergenza)</string>
     <string name="common_weight_limit_error">Il valore minimo è \"%1$s\" %2$s. Utilizza il profilo \"%3$s\" se il peso del veicolo è inferiore al valore minimo.</string>
-    <string name="shared_string_all_world">Tutto il mondo</string>
     <string name="offline_weather_forecast_desc">Puoi scaricare le previsioni del tempo per 7 giorni.</string>
     <string name="generate_slope_from_3d_maps">Genera mappe raster di pendenza da mappe 3D</string>
     <string name="generate_hillshade_from_3d_maps">Genera mappe raster con ombreggiamenti delle colline da mappe 3D</string>
@@ -5045,7 +5044,6 @@
     <string name="date_of_creation">Data di creazione</string>
     <string name="filter_screen_title">Filtro</string>
     <string name="shared_string_cache">Cache</string>
-    <string name="widget_available_ram_desc">Visualizza la memoria disponibile per OsmAnd.</string>
     <string name="sort_size_descending">Ordine discendente</string>
     <string name="smart_folder_saved">Smart Folder salvata</string>
     <string name="delete_map">Elimina la mappa</string>
@@ -5061,7 +5059,6 @@
     <string name="map_is_up_to_date">La mappa %1$s è aggiornata.</string>
     <string name="delete_smart_folder_dialog_message">Questa operazione eliminerà la cartella \"%1$s\". (Non sarà cancellata alcuna traccia)</string>
     <string name="sort_size_ascending">Ordine ascendente</string>
-    <string name="widget_available_ram">RAM disponibile</string>
     <string name="terrain_maps">Mappe del terreno</string>
     <string name="sort_country_name_descending">Nome del paese: Z - A</string>
     <string name="delete_map_description">Eliminare la mappa %1$s?</string>
@@ -5985,4 +5982,62 @@
     <string name="astro_globular_clusters">Ammassi galattici</string>
     <string name="visible_layers_and_objects">Oggetti e Livelli visibili</string>
     <string name="show_expand_button">Mostra il pulsante espandi</string>
+    <string name="start_free_trial">Inizia prova gratuita</string>
+    <string name="open_till_short">Fino</string>
+    <string name="map_widget_memory_info">Informazioni memoria</string>
+    <string name="memory_graphics_settings">Memoria grafica</string>
+    <string name="shared_string_native">Nativo</string>
+    <string name="shared_string_gpu">GPU</string>
+    <string name="shared_string_allocated">Allocata</string>
+    <string name="compass_calibration_needed">È necessario calibrare la bussola</string>
+    <string name="sensors_not_available_for_ar">Sensori non disponibili per AR</string>
+    <string name="ar_mode_enabled">Modalità AR attivata</string>
+    <string name="ar_mode_disabled">Modalità AR disattivata</string>
+    <string name="release_5_3">• Aggiunto il supporto alle agli edifici 3D\n\n • Visualizzazione sferica della mappa\n\n • Componente aggiuntivo Astronomia con la mappa notturna e l\'archivio stellare\n\n • Nuova modalità colore per il tachimetro: tolleranza ed eccesso\n\n • Aspetto dei widget separato per visualizzazione Orizzontale e Verticale\n\n • Widgets Registrazione viaggio: Velocità in movimento e Velocità media\n\n • Widget voltaggio per le Metriche del Veicolo\n\n • Dati delle metriche del veicolo nell\'Analizzatore della Traccia\n\n • Organizzazione automatica delle tracce per anno, lunghezza, attività e altro\n\n • Modifica della palette dei colori per for Terreno and Visualizzazione della traccia\n\n • Algoritmo di ricerca migliorato e aggiornato la UI\n\n • Corretto il profilo altimetrico per i Percorsi\n\n • Preferiti: nuove opzioni di ordinamento e aggiornamento della UI\n\n • Condividi il link di ogni PDI\n\n • Anteprima dei Punti Intermedi senza chiudere l\'elenco\n\n • Larghezza della bici per evitare le strade strette\n\n • Descrizione delle foto da Wikimedia</string>
+    <string name="astronomy_map">Mappa Astronomica</string>
+    <string name="no_objects_found">Nessun oggetto trovato</string>
+    <string name="open_from_short">Da</string>
+    <string name="subscription_free_trial_with_price">%1$s gratuito, poi %2$s</string>
+    <string name="subscription_then_price">poi %1$s</string>
+    <string name="obd_simulation_device">Dispositivo di simulazione</string>
+    <string name="purchases_feature_desc_astronomy">Esplora il cielo notturno con una mappa offline e un catalogo celeste. Pianifica le tue osservazioni usando grafici di visibilità intelligenti, programmazioni giornaliere, e una modalità interattiva di realtà aumentata.</string>
+    <string name="shared_string_clear_filters">Cancella filtri</string>
+    <string name="astro_sort_newest_first">Dal più recente</string>
+    <string name="astro_sort_oldest_first">Dal più vecchio</string>
+    <string name="astro_expand_your_universe_title">Espandi il tuo universo</string>
+    <string name="astro_expand_your_universe_description">Ottieni l’accesso al database esteso di cataloghi del cielo profondo, articoli di Wikipedia e modalità di realtà aumentata offline.</string>
+    <string name="astro_offline_knowledge_base_title">Knowledge Base offline</string>
+    <string name="astro_offline_knowledge_base_description">Scarica il database esteso per accedere agli articoli di Wikipedia e ai cataloghi del cielo profondo offline.</string>
+    <string name="astro_schedule_next_day_note">⁺¹ Giorno seguente.</string>
+    <string name="astro_visibility_show_today">Mostra la visibilità di oggi</string>
+    <string name="astro_schedule_show_current_week">Mostra la settimana corrente</string>
+    <string name="astro_next_day_suffix">⁺¹</string>
+    <string name="shared_string_radians">Radianti</string>
+    <string name="shared_string_unlock">Sblocca</string>
+    <string name="astro_search_info_solar_system">Il Sistema Solare è il sistema legato per gravità del Sole e delle masse che lo orbitano, soprattutto i suoi otto pianeti, di cui la Terra è uno.</string>
+    <string name="astro_search_info_constellations">Una costellazione è un’area della sfera celeste nella quale un gruppo di stelle visibili forma un motivo o una sagoma percepita.</string>
+    <string name="astro_search_info_stars">Le stelle sono oggetti astronomici luminosi fatti di plasma, tenuti insieme dalla loro gravità.</string>
+    <string name="astro_search_info_nebulas">Una nebulosa è una gigantesca nube di polvere e gas nello spazio, spesso una regione dove nascono le stelle.</string>
+    <string name="astro_search_info_star_clusters">Un ammasso stellare è un gruppo di stelle che sono legate dalla gravità e formate a partire dalla stessa nube molecolare.</string>
+    <string name="astro_search_info_deep_sky">Gli oggetti del cielo profondo includono galassie, nebulose, ammassi stellari e altri oggetti astronomici distanti.</string>
+    <string name="astro_go_to_map">Vai alla mappa</string>
+    <string name="astro_my_data_no_favorites_title">Niente qui</string>
+    <string name="astro_my_data_no_favorites_description">Puoi aggiungere oggetti ai tuoi preferiti dal menu contestuale</string>
+    <string name="astro_my_data_no_directions_title">Nessuna direzione impostata</string>
+    <string name="astro_my_data_no_directions_description">Le direzioni consentono di mantenere una freccia visibile che punta a un oggetto. Attiva dal menu contestuale.</string>
+    <plurals name="astro_catalog_objects_count">
+        <item quantity="one">%d oggetto</item>
+        <item quantity="many">%d oggetti</item>
+        <item quantity="other">%d oggetti</item>
+    </plurals>
+    <string name="astro_search_constellation_with_code">Costellazione (%1$s)</string>
+    <string name="astro_search_type_in_location">%1$s in %2$s</string>
+    <string name="astro_search_in_location">In %1$s</string>
+    <string name="astro_search_rises_tomorrow">↗ %1$s %2$s</string>
+    <string name="astro_search_sets_tomorrow">↘ %1$s %2$s</string>
+    <string name="astro_search_rises_at">↗ Sorge %1$s</string>
+    <string name="astro_filter_naked_eye">Visibile ad occhio nudo</string>
+    <string name="astro_filter_visible_tonight">Visibile stanotte</string>
+    <string name="astro_filter_visible_now">Visibile ora</string>
+    <string name="astro_filter_show_all">Mostra tutto</string>
 </resources>

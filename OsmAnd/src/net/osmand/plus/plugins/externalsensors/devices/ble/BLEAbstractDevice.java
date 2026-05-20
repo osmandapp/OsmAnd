@@ -15,6 +15,11 @@ import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattDescriptor;
 import android.bluetooth.BluetoothGattService;
 import android.bluetooth.BluetoothProfile;
+import android.bluetooth.le.BluetoothLeScanner;
+import android.bluetooth.le.ScanCallback;
+import android.bluetooth.le.ScanFilter;
+import android.bluetooth.le.ScanResult;
+import android.bluetooth.le.ScanSettings;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
@@ -32,10 +37,12 @@ import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.ble.BLEAbstractSensor;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.ble.BLEBatterySensor;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Queue;
@@ -54,6 +61,7 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 	private final Handler mainHandler = new Handler(Looper.getMainLooper());
 	private final Queue<Runnable> commandQueue = new ConcurrentLinkedQueue<>();
 	private boolean commandQueueBusy;
+	private boolean currentHasActualDataState;
 	@Nullable
 	protected List<BluetoothGattCharacteristic> cachedCharacteristics;
 
@@ -172,9 +180,10 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 	@SuppressLint("MissingPermission")
 	protected void onGattServicesDiscovered(BluetoothGatt gatt, int status) {
 		if (status == BluetoothGatt.GATT_SUCCESS) {
+			gatt.requestConnectionPriority(BluetoothGatt.CONNECTION_PRIORITY_HIGH);
 			List<BluetoothGattService> services = gatt.getServices();
 			LOG.debug(String.format(Locale.US, "discovered %d services for '%s'", services.size(), gatt.getDevice().getName()));
-			if (cachedCharacteristics == null) {
+			if (Algorithms.isEmpty(cachedCharacteristics)) {
 				cachedCharacteristics = getCharacteristics();
 			}
 			for (BLEAbstractSensor sensor : sensors) {
@@ -230,8 +239,17 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 		public void onCharacteristicChanged(BluetoothGatt gatt,
 		                                    BluetoothGattCharacteristic characteristic) {
 			callbackHandler.post(() -> {
+				boolean hasActualState = false;
 				for (BLEAbstractSensor sensor : sensors) {
+					sensor.checkStaleData(characteristic);
 					sensor.onCharacteristicChanged(gatt, characteristic);
+					if (sensor.hasActualData()) {
+						hasActualState = true;
+					}
+				}
+				if (hasActualState != currentHasActualDataState) {
+					currentHasActualDataState = hasActualState;
+					fireDeviceActualStateChanged();
 				}
 			});
 		}
@@ -283,11 +301,14 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 					}
 					return true;
 				} else {
+					bluetoothGatt.disconnect();
+					bluetoothGatt.close();
+					bluetoothGatt = null;
 					return false;
 				}
 			}
 
-			bluetoothGatt = device.connectGatt(context, true, gattCallback, BluetoothDevice.TRANSPORT_LE);
+			connectAfterScan(context, deviceId);
 			LOG.debug("Trying to create new connection " + device.getAddress() + ". gatt " + bluetoothGatt);
 			setCurrentState(DeviceConnectionState.CONNECTING);
 			for (DeviceListener listener : listeners) {
@@ -295,6 +316,33 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 			}
 		}
 		return true;
+	}
+
+	public void connectAfterScan(Context ctx, String targetAddress) {
+		LOG.debug("scan to connect to " + targetAddress);
+		if (bluetoothAdapter != null && !bluetoothAdapter.isDiscovering()) {
+			BluetoothLeScanner scanner = bluetoothAdapter.getBluetoothLeScanner();
+			ScanSettings settings = new ScanSettings.Builder()
+					.setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY)
+					.setMatchMode(ScanSettings.MATCH_MODE_AGGRESSIVE)
+					.setNumOfMatches(ScanSettings.MATCH_NUM_ONE_ADVERTISEMENT)
+					.setReportDelay(0L)
+					.build();
+			ScanFilter filter = new ScanFilter.Builder().setDeviceAddress(targetAddress).build();
+			scanner.startScan(Collections.singletonList(filter), settings, new ScanCallback() {
+				@Override
+				public void onScanResult(int callbackType, ScanResult result) {
+					scanner.stopScan(this);
+					bluetoothGatt = result.getDevice().connectGatt(ctx, false, gattCallback, BluetoothDevice.TRANSPORT_AUTO);
+				}
+
+				@Override
+				public void onScanFailed(int errorCode) {
+					super.onScanFailed(errorCode);
+					LOG.debug("robustScan failed " + errorCode);
+				}
+			});
+		}
 	}
 
 	@SuppressLint("MissingPermission")
@@ -306,6 +354,8 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 			return false;
 		}
 		bluetoothGatt.disconnect();
+		bluetoothGatt.close();
+		bluetoothGatt = null;
 		device = null;
 		return true;
 	}
