@@ -92,7 +92,7 @@ public class OsmAndFormatter {
 	public static final float MILS_IN_DEGREE = 17.777778f;
 	private static final String[] CARDINAL_DIRECTIONS = {"N", "NE", "E", "SE", "S", "SW", "W", "NW"};
 
-	public static final int FORMAT_DEGREES_SHORT = 8;
+	public static final int FORMAT_DEGREES_SHORT = 9;
 	public static final int FORMAT_DEGREES = LocationConvert.FORMAT_DEGREES;
 	public static final int FORMAT_MINUTES = LocationConvert.FORMAT_MINUTES;
 	public static final int FORMAT_SECONDS = LocationConvert.FORMAT_SECONDS;
@@ -975,18 +975,18 @@ public class OsmAndFormatter {
 		lon = Math.max(0, Math.min(lon, 360.0 - 1e-6));
 		lat = Math.max(0, Math.min(lat, 180.0 - 1e-6));
 		StringBuilder sb = new StringBuilder();
-		int lonField = (int) (lon / 20);
-		int latField = (int) (lat / 10);
+		int lonField = (int) (lon / 20 + 1e-6);
+		int latField = (int) (lat / 10 + 1e-6);
 		lon -= lonField * 20;
 		lat -= latField * 10;
 		sb.append((char) ('A' + lonField)).append((char) ('A' + latField));
-		int lonSquare = (int) (lon / 2);
-		int latSquare = (int) (lat / 1);
+		int lonSquare = (int) (lon / 2 + 1e-6);
+		int latSquare = (int) (lat / 1 + 1e-6);
 		lon -= lonSquare * 2;
 		lat -= latSquare * 1;
 		sb.append((char) ('0' + lonSquare)).append((char) ('0' + latSquare));
-		int lonSub = (int) (lon * 12);
-		int latSub = (int) (lat * 24);
+		int lonSub = (int) (lon * 12 + 1e-6);
+		int latSub = (int) (lat * 24 + 1e-6);
 		sb.append((char) ('a' + lonSub)).append((char) ('a' + latSub));
 		return sb.toString();
 	}

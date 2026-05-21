@@ -789,8 +789,9 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 	}
 
 	private LatLon parseMaidenhead(String maidenhead) {
-		if (maidenhead == null || maidenhead.length() < 2) return null;
-		maidenhead = maidenhead.toUpperCase(Locale.US);
+		if (maidenhead == null) return null;
+		maidenhead = maidenhead.replaceAll("[^A-Za-z0-9]", "").toUpperCase(Locale.US);
+		if (maidenhead.length() < 2) return null;
 		double lon = -180.0;
 		double lat = -90.0;
 		if (maidenhead.length() >= 2) {

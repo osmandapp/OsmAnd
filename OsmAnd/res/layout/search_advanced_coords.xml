@@ -470,7 +470,7 @@
                                 android:layout_height="wrap_content"
                                 android:hint="@string/navigate_point_format_maidenhead"
                                 android:imeOptions="actionDone"
-                                android:inputType="text|textCapCharacters|textNoSuggestions"
+                                android:inputType="textVisiblePassword|textCapCharacters|textNoSuggestions"
                                 tools:text="IO91aa"/>
 
                         </com.google.android.material.textfield.TextInputLayout>
