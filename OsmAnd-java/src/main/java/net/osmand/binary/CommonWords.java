@@ -213,6 +213,7 @@ public class CommonWords {
 		addTopFrequentManually("пос.");
 		addTopFrequentManually("ln");
 		addTopFrequentManually("blvd");
+		addTopFrequentManually("hwy");
 
 		// Push higher than roads to avoid problem with "Drive A 21"
 		addCommon(NUMBER_WITH_LESS_THAN_2_LETTERS);
