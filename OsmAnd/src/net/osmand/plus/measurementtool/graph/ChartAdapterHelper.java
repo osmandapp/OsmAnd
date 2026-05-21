@@ -240,12 +240,21 @@ public class ChartAdapterHelper {
 	public static RefreshMapCallback bindToMap(@NonNull CommonChartAdapter graphAdapter,
 	                                           @NonNull MapActivity mapActivity,
 	                                           @NonNull TrackDetailsMenu detailsMenu) {
+		boolean[] refreshingMap = {false};
 		RefreshMapCallback refreshMapCallback = (fitTrackOnMap, forceFit, recalculateXAxis) -> {
+			if (refreshingMap[0]) {
+				return;
+			}
 			ElevationChart chart = graphAdapter.getChart();
 			OsmandApplication app = mapActivity.getApp();
 			if (!app.getRoutingHelper().isFollowingMode()) {
-				detailsMenu.refreshChart(chart, fitTrackOnMap, forceFit, recalculateXAxis);
-				mapActivity.refreshMap();
+				refreshingMap[0] = true;
+				try {
+					detailsMenu.refreshChart(chart, fitTrackOnMap, forceFit, recalculateXAxis);
+					mapActivity.refreshMap();
+				} finally {
+					refreshingMap[0] = false;
+				}
 			}
 		};
 
