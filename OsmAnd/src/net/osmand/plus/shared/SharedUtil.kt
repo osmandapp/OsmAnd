@@ -295,7 +295,7 @@ object SharedUtil {
 		jPoint.lat = point.lat
 		jPoint.lon = point.lon
 		jPoint.name = point.name
-		jPoint.link = point.link?.href
+		jPoint.link = point.links?.firstOrNull()?.href
 		jPoint.category = point.category
 		jPoint.desc = point.desc
 		jPoint.comment = point.comment

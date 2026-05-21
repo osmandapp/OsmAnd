@@ -13,7 +13,6 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.gallery.model.GalleryItem
-import net.osmand.plus.gallery.provider.MediaProvider
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.gallery.controller.GalleryController
 import net.osmand.plus.gallery.ui.GalleryGridItemDecorator.GRID_SCREEN_ITEM_SPACE_DP
@@ -21,6 +20,7 @@ import net.osmand.plus.gallery.ui.GalleryListener
 import net.osmand.plus.gallery.controller.GalleryMediaLoadStateProvider
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
+import net.osmand.shared.media.MediaProvider
 import net.osmand.shared.media.MediaUriResolver
 import net.osmand.shared.media.domain.MediaItem
 import net.osmand.shared.util.ImageLoadSource
