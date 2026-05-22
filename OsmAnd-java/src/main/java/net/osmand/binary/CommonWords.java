@@ -211,9 +211,15 @@ public class CommonWords {
 		addTopFrequentManually("m.");
 		addTopFrequentManually("дер.");
 		addTopFrequentManually("пос.");
-		addTopFrequentManually("ln");
-		addTopFrequentManually("blvd");
-		addTopFrequentManually("hwy");
+
+		// abbrevations;
+//		addTopFrequentManually("ave"); // common
+//		addTopFrequentManually("dr"); // common
+		addTopFrequentManually("st");
+		addTopFrequentManually("ln"); 
+		addTopFrequentManually("rd");
+		addTopFrequentManually("blvd"); 
+		addTopFrequentManually("hwy"); 
 
 		// Push higher than roads to avoid problem with "Drive A 21"
 		addCommon(NUMBER_WITH_LESS_THAN_2_LETTERS);

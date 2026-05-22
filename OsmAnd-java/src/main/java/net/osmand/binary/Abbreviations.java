@@ -49,6 +49,7 @@ public class Abbreviations {
         abbreviations.put("rd", "Road");
         abbreviations.put("ave", "Avenue");
         abbreviations.put("st", "Street");
+        abbreviations.put("hwy", "Highway");
         abbreviations.put("blvd", "Boulevard");
     }
     
