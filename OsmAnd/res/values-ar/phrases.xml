@@ -4920,4 +4920,16 @@
     <string name="poi_us_maps_recreation_area_activity_metal_detecting">كشف عن معادن</string>
     <string name="poi_us_maps_recreation_area_activity_mountain_biking">ركوب دراجات جبلية</string>
     <string name="poi_us_maps_recreation_area_activity_mountain_climbing">تسلق جبال</string>
+    <string name="poi_covered_booth_filter">كشك</string>
+    <string name="poi_rapids_filter">مستوى المنحدرات</string>
+    <string name="poi_denomination_polish_catholic">كاثوليكي بولندي</string>
+    <string name="poi_denomination_scottish_episcopal">الكنيسة الأسقفية الاسكتلندية</string>
+    <string name="poi_denomination_moravian">المورافية</string>
+    <string name="poi_denomination_disciples_of_christ">تلاميذ المسيح</string>
+    <string name="poi_denomination_charismatic">كارزما</string>
+    <string name="poi_denomination_ecumenical">مسكوني</string>
+    <string name="poi_denomination_fsspx">جمعية القديس بيوس العاشر</string>
+    <string name="poi_denomination_laestadian">لاستاديان</string>
+    <string name="poi_denomination_philippine_independent">الفلبين المستقلة</string>
+    <string name="poi_denomination_exclusive_brethren">الإخوة الحصريون</string>
 </resources>
