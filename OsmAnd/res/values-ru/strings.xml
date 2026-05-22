@@ -6069,4 +6069,9 @@
     <string name="astro_designations">Обозначения</string>
     <string name="obd_simulation_device">Устройство для моделирования</string>
     <string name="astronomy_map">Астрономическая карта</string>
+    <string name="favorite_folder_rename_conflict">Папка с таким названием уже существует.</string>
+    <string name="favorite_folder_invalid_name">Имя папки не может содержать / или _%_</string>
+    <string name="favorite_folder_duplicate_message">Используйте имя папки, которого еще нет в списке.</string>
+    <string name="favorite_folder_name">Имя папки</string>
+    <string name="edit_folder">Редактировать папку</string>
 </resources>
