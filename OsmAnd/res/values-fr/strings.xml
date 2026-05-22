@@ -6059,4 +6059,10 @@
     <string name="astro_designations">Désignations</string>
     <string name="astronomy_map">Carte astronomique</string>
     <string name="obd_simulation_device">Dispositif de simulation</string>
+    <string name="favorite_confirm_delete_folder">Cette opération supprimera le dossier « %1$s », y compris les dossiers qu\'il contient et %2$d favoris.</string>
+    <string name="favorite_folder_rename_conflict">Un dossier portant ce nom existe déjà.</string>
+    <string name="favorite_folder_invalid_name">Le nom du dossier ne peut pas contenir de / ou de _%_</string>
+    <string name="favorite_folder_duplicate_message">Choisissez un nom de dossier qui n\'existe pas encore.</string>
+    <string name="favorite_folder_name">Nom du dossier</string>
+    <string name="edit_folder">Modifier le dossier</string>
 </resources>
