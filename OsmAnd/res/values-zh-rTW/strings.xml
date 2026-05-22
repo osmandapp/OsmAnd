@@ -878,7 +878,7 @@
     <string name="download_roads_only_item">僅道路</string>
     <string name="download_srtm_maps">等高線</string>
     <string name="download_regular_maps">標準地圖</string>
-    <string name="download_roads_only_maps">僅道路地圖</string>
+    <string name="download_roads_only_maps">只有道路的地圖</string>
     <string name="rendering_attr_noAdminboundaries_name">界線</string>
     <string name="rendering_attr_noAdminboundaries_description">抑制顯示行政區界(管理級別5-9)。</string>
     <string name="map_widget_max_speed">速限</string>
