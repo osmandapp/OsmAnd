@@ -2812,7 +2812,7 @@
     <string name="settings_privacy_and_security">Privatliv og sikkerhed</string>
     <string name="settings_privacy_and_security_desc">Vælg hvilke data der deles</string>
     <string name="shared_string_no_thank_you">Nej tak</string>
-    <string name="shared_string_allow">Tillade</string>
+    <string name="shared_string_allow">Tillad</string>
     <string name="profile_name_hint">Profilnavn</string>
     <string name="nav_type_hint">Navigationstype</string>
     <string name="app_mode_taxi">Taxi</string>
@@ -5279,7 +5279,7 @@
     <string name="route_line_use_coloring_speed">Rutelinjen er farvet efter bevægelseshastighed.</string>
     <string name="route_line_use_coloring_altitude">Rutelinjen er farvet efter højde over havet.</string>
     <string name="required_maps">Nødvendige kort</string>
-    <string name="missing_maps_description">Nogle offline-kort, der er kræves for denne rute, mangler eller er ikke opdaterede. Download eller opdater disse kort.</string>
+    <string name="missing_maps_description">Nogle af de offlinekort, der kræves til denne rute, mangler eller er ikke opdaterede. Download eller opdater disse kort.</string>
     <string name="missing_maps_header">Manglende eller forældede kort</string>
     <string name="visualized_by">Visualiseret af</string>
     <string name="wall_color">Vægfarve</string>
@@ -5873,7 +5873,7 @@
     <string name="add_to_favorites">Tilføj til favoritter</string>
     <string name="max_weight_at_full_load_description">Angiv dit køretøjs maksimale vægt ved fuld last for at undgå veje og broer med vægtbegrænsninger.</string>
     <string name="max_axle_load_description">Angiv dit køretøjs maksimale akselbelastning for at undgå veje og broer med vægtbegrænsninger.</string>
-    <string name="view_on_phone">Vis på telefonen</string>
+    <string name="view_on_phone">Vis på telefon</string>
     <string name="rendering_attr_hideLightSectors_name">Lyse sektorer</string>
     <string name="rendering_attr_hideLightSectors_description">Skjul lyse sektorer</string>
     <string name="rendering_attr_hideLightSectorSources_name">Kilder til lyse sektorer</string>
@@ -6196,4 +6196,10 @@
     <string name="astro_designations">Betegnelser</string>
     <string name="astronomy_map">Astronomikort</string>
     <string name="obd_simulation_device">Simuleringsenhed</string>
+    <string name="favorite_confirm_delete_folder">Dette vil slette mappen \"%1$s\", inklusive undermapper og %2$d favoritpunkt(er).</string>
+    <string name="favorite_folder_rename_conflict">Der findes allerede en mappe med dette navn.</string>
+    <string name="favorite_folder_invalid_name">Mappenavnet må ikke indeholde / eller _%_</string>
+    <string name="favorite_folder_duplicate_message">Brug et mappenavn, der ikke allerede findes.</string>
+    <string name="favorite_folder_name">Mappenavn</string>
+    <string name="edit_folder">Rediger mappe</string>
 </resources>
