@@ -364,12 +364,13 @@ public class SpeedometerWidget {
 				isChanged = true;
 			}
 			Location location = provider.getLastKnownLocation();
-			if (location != null && location.hasSpeed()) {
+			if (location != null && (location.hasSpeed() || settings.SHOW_SPEED_LIMIT_WARNING.getModeValue(mode) == ALWAYS)) {
 				float updateThreshold = cachedSpeed < LOW_SPEED_THRESHOLD_MPS
 						? LOW_SPEED_UPDATE_THRESHOLD_MPS
 						: UPDATE_THRESHOLD_MPS;
-				if (Math.abs(location.getSpeed() - cachedSpeed) > updateThreshold || cachedSpeed == UNDEFINED_SPEED) {
-					cachedSpeed = location.getSpeed();
+				float speed = location.hasSpeed() ? location.getSpeed() : 0;
+				if (Math.abs(speed - cachedSpeed) > updateThreshold || cachedSpeed == UNDEFINED_SPEED) {
+					cachedSpeed = speed;
 					isChanged = true;
 				}
 				FormattedValue formattedSpeed = OsmAndFormatter.getFormattedSpeedValue(cachedSpeed, app);
