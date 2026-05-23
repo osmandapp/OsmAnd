@@ -6136,4 +6136,10 @@
     <string name="astro_designations">Oznake</string>
     <string name="astronomy_map">Astronomska mapa</string>
     <string name="obd_simulation_device">Uređaj za simulaciju</string>
+    <string name="favorite_confirm_delete_folder">Ovim će se obrisati folder „%1$s“, uključujući ugnežđeni folderi i %2$d omiljenih tačaka.</string>
+    <string name="favorite_folder_rename_conflict">Folder sa ovim imenom već postoji.</string>
+    <string name="favorite_folder_invalid_name">Ime foldera ne sme da sadrži / ili _%_</string>
+    <string name="favorite_folder_duplicate_message">Koristite ime foldera koji već ne postoji.</string>
+    <string name="favorite_folder_name">Ime foldera</string>
+    <string name="edit_folder">Uredi folder</string>
 </resources>
