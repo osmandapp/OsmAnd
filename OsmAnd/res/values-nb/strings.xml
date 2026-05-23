@@ -6058,4 +6058,14 @@
     <string name="astro_designations">Betegnelser</string>
     <string name="obd_simulation_device">Simuleringsenhet</string>
     <string name="astronomy_map">Astronomikart</string>
+    <string name="favorite_confirm_delete_folder">Dette vil slette mappen \"%1$s\", inkludert undermapper og %2$d favorittpunkt(er).</string>
+    <string name="favorite_folder_rename_conflict">En mappe med dette navnet finnes allerede.</string>
+    <string name="favorite_folder_invalid_name">Mappenavn kan ikke inneholde / eller _%_</string>
+    <string name="favorite_folder_duplicate_message">Bruk et mappenavn som ikke allerede finnes.</string>
+    <string name="favorite_folder_name">Mappenavn</string>
+    <string name="edit_folder">Rediger mappe</string>
+    <string name="average_value_slider_description">Velg tidsintervallet for måling av gjennomsnittsverdien.</string>
+    <string name="average_temperature_slider_description">Velg tidsintervallet for måling av gjennomsnittstemperaturen.</string>
+    <string name="shared_string_instant">Øyeblikkelig</string>
+    <string name="shared_strings_dimensions">Dimensjoner</string>
 </resources>
