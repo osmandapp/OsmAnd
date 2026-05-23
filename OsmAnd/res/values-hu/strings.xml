@@ -511,7 +511,7 @@
     <string name="closing_changeset">Módosításkészlet bezárása…</string>
     <string name="commiting_node">Pont véglegesítése…</string>
     <string name="loading_poi_obj">Érdekes hely betöltése…</string>
-    <string name="auth_failed">Azonosítás nem sikerült</string>
+    <string name="auth_failed">Nem sikerült a hitelesítés</string>
     <string name="failed_op">sikertelen</string>
     <string name="converting_names">Helyi/angol nevek átváltása…</string>
     <string name="loading_streets_buildings">Utcák és épületek betöltése…</string>
@@ -616,7 +616,7 @@
     <string name="favourites_remove_dialog_msg">Törli a(z) „%s” Kedvenc pontot\?</string>
     <string name="favourites_remove_dialog_success">{0} kedvenc pont törölve.</string>
     <string name="osb_comment_dialog_message">Üzenet</string>
-    <string name="osb_comment_dialog_author">Bejelentő neve</string>
+    <string name="osb_comment_dialog_author">Szerző neve</string>
     <string name="osb_comment_dialog_success">Megjegyzés hozzáadva</string>
     <string name="osb_comment_dialog_error">Nem sikerült megjegyzést hozzáadni.</string>
     <string name="poi_edit_title">POI szerkesztése</string>
@@ -1929,7 +1929,7 @@
     <string name="search_location">Hely keresése…</string>
     <string name="storage_free_space">Szabad hely</string>
     <string name="storage_place_description">Az OsmAnd tárolt adatai (térképek, nyomvonalfájlok stb.): %1$s.</string>
-    <string name="give_permission">Engedélyezés</string>
+    <string name="give_permission">Engedély megadása</string>
     <string name="allow_access_location">Hozzáférés a pozíciódhoz engedélyezése</string>
     <string name="search_my_location">Saját pozíció meghatározása</string>
     <string name="update_all_maps_now">Frissíti most az összes térképet?</string>
@@ -3194,7 +3194,7 @@
     <string name="main_actions_descr">Csak 4 gomb helyezhető el.</string>
     <string name="multimedia_use_system_camera">Rendszeralkalmazás használata</string>
     <string name="multimedia_photo_play_sound">Fényképező zárhang</string>
-    <string name="osm_authorization_success">Hitelesítés sikeres</string>
+    <string name="osm_authorization_success">Hitelesítés kész</string>
     <string name="sort_by_category">Rendezés kategória szerint</string>
     <string name="index_name_antarctica">Antarktika</string>
     <string name="shared_string_hidden">Rejtett</string>
@@ -3755,13 +3755,13 @@
     <string name="search_more">További keresés…</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
     <string name="osmand_cloud">OsmAnd Cloud</string>
-    <string name="verify_email_address_descr">Hitelesítő kód elküldve ide: %1$s. Írja be az alábbi mezőbe.</string>
+    <string name="verify_email_address_descr">Ellenörző kód elküldve ide: %1$s. Írja be az alábbi mezőbe.</string>
     <string name="verification_code_missing_description">Ez 10 akár perc is lehet. Ha nincs a spam mappában, használja az alábbi gombot.</string>
-    <string name="verification_code_missing">Nem kaptam hitelesítő kódot</string>
+    <string name="verification_code_missing">Nem kaptam meg az ellenőrző kódot</string>
     <string name="resend_verification_code">Újraküldés</string>
     <string name="cloud_email_already_registered">Ez az e-mail-cím már regisztrálva van.</string>
     <string name="cloud_email_not_registered">Ez az e-mail-címe nincs regisztrálva az OsmAnd Cloud szolgáltatásban</string>
-    <string name="verify_email_address">E-mail-cím hitelesítése</string>
+    <string name="verify_email_address">E-mail-cím ellenőrzése</string>
     <string name="osmand_cloud_login_descr">Írja be a regisztrációhoz használt e-mail-címet. Egy egyszer használatos jelszót küldünk erre.</string>
     <string name="osmand_cloud_create_account_descr">Adja meg az e-mail-címét, ahová küldünk egy ellenőrző kódot,\nés minden adatát összekapcsoljuk vele.</string>
     <string name="osmand_cloud_help_descr">Segítségre van szüksége\? Lépjen velünk kapcsolatba itt: %1$s</string>
@@ -4788,8 +4788,8 @@
     <string name="deleting_complete">Törlés kész</string>
     <string name="delete_account">Fiók törlése</string>
     <string name="backup_error_delete_account_email_match">Az e-mail cím nem egyezik a bejelentkezéshez használt felhasználónévvel</string>
-    <string name="verify_account_deletion_descr">A törlés előtt hitelesíteni kell a fiókját.\n\nAdja meg az e-mail-címet, amellyel regisztrált. A következő lépéshez egyszeri jelszót küld a rendszer.</string>
-    <string name="verify_account">Fiókjának hitelesítése</string>
+    <string name="verify_account_deletion_descr">A törlés előtt ellenőrizni kell a fiókját.\n\nAdja meg az e-mail-címet, amellyel regisztrált. A következő lépéshez egyszeri jelszót küld a rendszer.</string>
+    <string name="verify_account">Fiók ellenőrzése</string>
     <string name="osmand_cloud_deleted_account_descr">Minden fiók- és egyéb adat törölve lett az OsmAnd Cloudból.</string>
     <string name="osmand_cloud_deleting_account_descr">Pillanatokon belül törölve lesz minden fiók- és egyéb adat az OsmAnd Cloudból. \n \nAz eszközön lévő adatok érintetlenek maradnak.</string>
     <string name="osmand_cloud_delete_account_confirmation_descr">Törli az OsmAnd Cloud fiókot? \n \nEz a művelet nem vonható vissza.</string>
@@ -5138,7 +5138,7 @@
     <string name="shared_string_changes">Módosítások</string>
     <string name="change_default_tracks_appearance_confirmation">Alkalmazza a módosításokat a mappában meglévő nyomvonalakra vagy csak az újra?</string>
     <string name="apply_only_to_new">Alkalmazás csak az újra</string>
-    <string name="release_4_8">• Új, magasságfüggő domborzatszínezési lehetőség \n \n • Egyedi színpaletták a domborzathoz, nyomvonalakhoz és útvonalakhoz \n \n • 3D változat a helypozíció ikonokhoz \n \n • A gyors-műveletek most külső billentyűzethez is rendelhetők \n \n • Időjárás: a felhasználói felület frissítése, hozzáadott szélanimáció \n \n • 3D nyomvonal fejlesztések: új megjelenítési és színezési lehetőségek \n \n • Kibővített turistaútvonalak választéka a térképen \n \n • Hozzáadott alkalmazástéma-opció a térképmód követéséhez \n \n • Javított nyomvonal-statisztika, -rendezés és -keresés \n \n • OSM-szerkesztés: törölt bejelentkezési / jelszó engedélyezési mód \n \n • Váltás a rendszermegosztási lapra az Android 14-től</string>
+    <string name="release_4_8">• Új, magasságfüggő domborzatszínezési lehetőség \n \n • Egyedi színpaletták a domborzathoz, nyomvonalakhoz és útvonalakhoz \n \n • 3D változat a helypozíció ikonokhoz \n \n • A gyors-műveletek most külső billentyűzethez is rendelhetők \n \n • Időjárás: a felhasználói felület frissítése, hozzáadott szélanimáció \n \n • 3D nyomvonal fejlesztések: új megjelenítési és színezési lehetőségek \n \n • Kibővített turistaútvonalak választéka a térképen \n \n • Hozzáadott alkalmazástéma-opció a térképmód követéséhez \n \n • Javított nyomvonal-statisztika, -rendezés és -keresés \n \n • OSM-szerkesztés: törölt bejelentkezési / jelszó hitelesítési módszer \n \n • Váltás a rendszermegosztási lapra az Android 14-től</string>
     <string name="shared_string_scale">Skála</string>
     <string name="relief_3d_download_description">További térképekre van szükség a domborzat térképen való megjelenítéséhez.</string>
     <string name="vertical_exaggeration_description">A skálaérték megváltoztatásával kiemelheti a 3D domborzatot.</string>
@@ -5152,11 +5152,11 @@
     <string name="delete_actions_button">Gomb törlése</string>
     <string name="delete_actions_button_confirmation">Biztosan törölni szeretné a következőt: „%1$s” az összes hozzáadott művelettel együtt?</string>
     <string name="required_maps">Szükséges térképek</string>
-    <string name="missing_maps_description">Néhány ehhez az útvonalhoz szükséges offline térkép hiányzik vagy nem naprakész. Töltse le vagy frissítse ezeket a térképeket.</string>
+    <string name="missing_maps_description">Az útvonalhoz szükséges néhány offline térkép hiányzik vagy elavult. Töltse le vagy frissítse ezeket a térképeket.</string>
     <string name="maps_that_also_be_used">Szintén használt térképek: %1$s</string>
     <string name="getting_list_of_required_maps">A szükséges térképek listájának lekérése…</string>
     <string name="required_maps_calculate_online_summary">A hiányzó térképek listája az egyenes útvonalon alapul. A térképek pontos listájának megszerzéséhez az OsmAnd előre kiszámíthatja az útvonalat online.</string>
-    <string name="missing_maps_header">Hiányzó vagy nem naprakész térképek</string>
+    <string name="missing_maps_header">Hiányzó vagy elavult térképek</string>
     <string name="route_line_use_coloring_altitude">Az útvonal a magasság változása szerint színezett.</string>
     <string name="route_line_use_coloring_speed">Az útvonal a haladás sebessége szerint színezett.</string>
     <string name="visualized_by">Vizualizálás:</string>
@@ -5737,7 +5737,7 @@
     <string name="rendering_attr_tidalFlatStyle_name">Árapály-síkság stílusa</string>
     <string name="rendering_attr_tidalFlatStyle_description">Az árapály-síkságok stílusa</string>
     <string name="rendering_attr_spotDistance_name">Mélységi szondázási távolság</string>
-    <string name="view_on_phone">Megtekintés az eszközön</string>
+    <string name="view_on_phone">Megtekintés a telefonon</string>
     <string name="backup_delete_data_warning_extended">Ez a művelet véglegesen eltávolítja az összes kiválasztott adatot a felhőből. Később sem lehet visszaállítani őket.</string>
     <string name="amount_of_total_used">%1$s / %2$s használatban</string>
     <string name="delete_data">Adatok törlése</string>
@@ -6056,4 +6056,10 @@
     <string name="astro_designations">Jelölések</string>
     <string name="astronomy_map">Csillagászati térkép</string>
     <string name="obd_simulation_device">Szimulációs eszköz</string>
+    <string name="favorite_confirm_delete_folder">Ez törli a(z) „%1$s” nevű mappát, beleértve a beágyazott mappákat és %2$d darab kedvenc pontot is.</string>
+    <string name="favorite_folder_rename_conflict">Már létezik ilyen nevű mappa.</string>
+    <string name="favorite_folder_invalid_name">A mappanév nem tartalmazhat / vagy _%_ karaktert</string>
+    <string name="favorite_folder_duplicate_message">Használjon olyan mappanevet, amely még nem létezik.</string>
+    <string name="favorite_folder_name">Mappa neve</string>
+    <string name="edit_folder">Mappa szerkesztése</string>
 </resources>
