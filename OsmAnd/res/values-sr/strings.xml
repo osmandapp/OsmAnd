@@ -5231,8 +5231,8 @@
     <string name="route_line_use_coloring_altitude">Линија путање је обојена по надморској висини.</string>
     <string name="getting_list_of_required_maps">Преузима се списак потребних карата…</string>
     <string name="required_maps">Потребне карте</string>
-    <string name="missing_maps_description">Неке ванмрежне карте потребне за ову путању недостају или нису свеже. Молим, преузмите или надградите ове карте.</string>
-    <string name="missing_maps_header">Недостајуће или застареле карте</string>
+    <string name="missing_maps_description">Неке ванмрежне мапе потребне за ову руту недостају или нису ажуриране. Преузмите или ажурирајте ове мапе.</string>
+    <string name="missing_maps_header">Недостајуће или застареле мапе</string>
     <string name="route_line_use_coloring_speed">Линија путање је обојена по брзини кретања.</string>
     <string name="maps_that_also_be_used">Карте које ће се такође користити: %1$s</string>
     <string name="required_maps_calculate_online_summary">Списак карата које недостају заснива се на праволинијској путањи. Ради добављања тачног списка карата ОсмАнд може унапред да израчуна вашу путању на мрежи.</string>
@@ -5815,7 +5815,7 @@
     <string name="rendering_attr_tidalFlatStyle_description">Стил плимних равница</string>
     <string name="rendering_attr_watercolor_name">Боја воде</string>
     <string name="rendering_attr_watercolor_description">Боја воде</string>
-    <string name="view_on_phone">Приказуј на телефону</string>
+    <string name="view_on_phone">Прикажи на телефону</string>
     <string name="backup_delete_data_warning_extended">Ово дејство ће трајно уклонити све изабране податке из облака. Неће бити могуће повратити их касније.</string>
     <string name="amount_of_total_used">%1$s од %2$s искоришћено</string>
     <string name="delete_data">Обриши податке</string>
