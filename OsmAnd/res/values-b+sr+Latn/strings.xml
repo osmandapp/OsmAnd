@@ -5233,7 +5233,7 @@
     <string name="required_maps_calculate_online_summary">Lista mapa koje nedostaju zasniva se na pravolinijskoj ruti. Da biste dobili tačnu listu mapa, OsmAnd može unapred da izračuna vašu rutu na mreži.</string>
     <string name="required_maps">Potrebne Mape</string>
     <string name="missing_maps_description">Neke oflajn mape potrebne za ovu rutu nedostaju ili nisu ažurirane. Preuzmite ili ažurirajte ove mape.</string>
-    <string name="missing_maps_header">Nedostajajuće ili zastarele mape</string>
+    <string name="missing_maps_header">Nedostajuće ili zastarele mape</string>
     <string name="route_line_use_coloring_speed">Linija rute je obojena po brzini kretanja.</string>
     <string name="route_line_use_coloring_altitude">Linija rute je obojena po nadmorskoj visini.</string>
     <string name="visualized_by">Vizualizirao</string>
@@ -5815,7 +5815,7 @@
     <string name="rendering_attr_tidalFlatStyle_description">Stil plimnih ravnica</string>
     <string name="rendering_attr_watercolor_name">Boja vode</string>
     <string name="rendering_attr_watercolor_description">Boja vode</string>
-    <string name="view_on_phone">Pogledaj na telefonu</string>
+    <string name="view_on_phone">Prikaži na telefonu</string>
     <string name="copy_as_new_folder">Kopiraj kao novi folder</string>
     <string name="add_to_a_folder">Dodaj u folder</string>
     <string name="add_to_favorites">Dodaj u omiljene</string>
