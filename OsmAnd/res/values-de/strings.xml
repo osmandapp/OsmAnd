@@ -2819,7 +2819,7 @@
     <string name="settings_privacy_and_security">Datenschutz und Sicherheit</string>
     <string name="settings_privacy_and_security_desc">Wählen Sie, welche Daten Sie freigeben möchten</string>
     <string name="shared_string_no_thank_you">Nein, danke</string>
-    <string name="shared_string_allow">Erlauben</string>
+    <string name="shared_string_allow">Zulassen</string>
     <string name="profile_name_hint">Profilname</string>
     <string name="nav_type_hint">Navigationsart</string>
     <string name="app_mode_taxi">Taxi</string>
@@ -5262,7 +5262,7 @@
     <string name="route_line_use_coloring_speed">Die Routenlinie ist nach der Geschwindigkeit der Fortbewegung eingefärbt.</string>
     <string name="required_maps_calculate_online_summary">Die Liste der fehlenden Karten basiert auf der direkten Streckenroute. Um eine genaue Liste der Karten zu erhalten, kann OsmAnd Ihre Route online vorberechnen.</string>
     <string name="required_maps">Benötigte Karten</string>
-    <string name="missing_maps_description">Einige Offline-Karten, die für diese Route benötigt werden, fehlen oder sind nicht auf dem neuesten Stand. Bitte laden Sie diese Karten herunter oder aktualisieren Sie diese.</string>
+    <string name="missing_maps_description">Einige Offline-Karten, die für diese Route benötigt werden, fehlen oder sind nicht auf dem neuesten Stand. Bitte lade diese Karten herunter oder aktualisiere diese.</string>
     <string name="missing_maps_header">Fehlende oder veraltete Karten</string>
     <string name="getting_list_of_required_maps">Beschaffung einer Liste der benötigten Karten …</string>
     <string name="route_line_use_coloring_altitude">Die Routenlinie ist nach der Höhenlage eingefärbt.</string>
@@ -5896,7 +5896,7 @@
     <string name="wind_animation_layer">Windanimationsebene</string>
     <string name="weather_layers">Wetterebenen</string>
     <string name="download_wikipedia_label">Wikipedia herunterladen</string>
-    <string name="private_access_routing_req_short">Erlauben Sie die Nutzung einer Privatstraße, um Ihr Ziel zu erreichen?</string>
+    <string name="private_access_routing_req_short">Dein Ziel befindet sich in einem privaten Bereich. Möchtest du private Straßen nutzen?</string>
     <string name="lang_crh">Krimtatarisch (lateinisch)</string>
     <string name="enable_3d_objects_description">3D-Gebäudeobjekte auf der Karte anzeigen</string>
     <string name="efficient_grid">Effizientes Gitter</string>
@@ -6039,9 +6039,9 @@
     <string name="add_palette">Palette hinzufügen</string>
     <string name="delete_palette">Palette löschen</string>
     <string name="trip_recording_avg_speed_widget_description">Zeigt die Durchschnittsgeschwindigkeit von der aktuellen Strecke oder die Durchschnittsgeschwindigkeit während des letzten Anstiegs- ober Abfahrtsabschnitts.</string>
-    <string name="gradient_no_data_point_summary">Angezeigte Farbe, wenn Daten fehlen oder undefiniert sind.</string>
-    <string name="gradient_input_value_too_low_warn">Der erlaubte Minimalwert ist %1$s.</string>
-    <string name="gradient_input_value_too_high_warn">Der erlaubte Maximalwert ist %1$s.</string>
+    <string name="gradient_no_data_point_summary">Farbe, die angewendet wird, wenn Daten fehlen oder nicht definiert sind.</string>
+    <string name="gradient_input_value_too_low_warn">Der zulässige Mindestwert ist %1$s.</string>
+    <string name="gradient_input_value_too_high_warn">Der zulässige Höchstwert ist %1$s.</string>
     <string name="shared_string_trip_average">Streckendurchschnitt</string>
     <string name="trip_recording_moving_time_widget_description">Zeigt die aktuell aufgezeichnete Zeit in Bewegung oder die Dauer des letzten Anstiegs und Abstiegs an.</string>
     <string name="trip_recording_moving_time">Bewegungszeit</string>
@@ -6049,14 +6049,14 @@
         <item quantity="one">%d Track</item>
         <item quantity="other">%d Tracks</item>
     </plurals>
-    <string name="gradient_input_value_duplicate_warn">Dieser Wert existiert bereits in der Palette.</string>
+    <string name="gradient_input_value_duplicate_warn">Dieser Wert ist in der Palette bereits vorhanden.</string>
     <string name="gradient_input_invalid_value_warn">Gib bitte eine gültige Nummer ein.</string>
     <string name="value_cannot_be_edited_warn">Dieser Wert kann nicht geändert werden.</string>
     <string name="unexpected_error_occurred_warn">Ein unerwarteter Fehler ist aufgetreten.</string>
     <string name="relative_gradient_point_m_summary">Farbe für den maximalen Wert in dem Track gefunden.</string>
     <string name="gradient_range_type_fixed_summary">Farben werden bestimmten absoluten Zahlen zugeordnet (z. B. 50 km/h).</string>
     <string name="gradient_range_type_relative_summary">Die Farben werden automatisch je nach dem minimalen/maximalen Bereich des Tracks angepasst.</string>
-    <string name="delete_colors_palette_dialog_summary">Möchten Sie die Palette %1$s wirklich löschen?</string>
+    <string name="delete_colors_palette_dialog_summary">Möchtest du die Palette %1$s wirklich löschen?</string>
     <string name="relative_gradient_point_avg_summary">Farbe für den Durchschnittswert den Track.</string>
     <string name="relative_gradient_point_min_summary">Farbe für den kleinsten Wert, der in dem Track gefunden wurde.</string>
     <string name="astro_type_sun">Sonne</string>
@@ -6167,4 +6167,9 @@
     <string name="astronomy_map">Astronomiekarte</string>
     <string name="astro_designations">Bezeichnungen</string>
     <string name="obd_simulation_device">Simulationsgerät</string>
+    <string name="favorite_folder_rename_conflict">Ein Ordner mit diesem Namen ist bereits vorhanden.</string>
+    <string name="favorite_folder_invalid_name">Der Ordnername darf kein / oder _%_ enthalten</string>
+    <string name="favorite_folder_duplicate_message">Verwende einen Ordnernamen, der noch nicht vorhanden ist.</string>
+    <string name="favorite_folder_name">Ordnername</string>
+    <string name="edit_folder">Ordner bearbeiten</string>
 </resources>
