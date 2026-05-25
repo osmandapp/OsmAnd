@@ -6063,7 +6063,7 @@
     <string name="gradient_input_value_too_low_warn">Den mindste tilladte værdi er %1$s.</string>
     <string name="gradient_input_value_too_high_warn">Den maksimalt tilladte værdi er %1$s.</string>
     <string name="gradient_input_value_duplicate_warn">Denne værdi findes allerede i paletten.</string>
-    <string name="gradient_input_invalid_value_warn">Indtast et gyldigt nummer.</string>
+    <string name="gradient_input_invalid_value_warn">Indtast et gyldigt tal.</string>
     <string name="value_cannot_be_edited_warn">Denne værdi kan ikke redigeres.</string>
     <string name="unexpected_error_occurred_warn">Der opstod en uventet fejl.</string>
     <string name="relative_gradient_point_m_summary">Farve for den maksimale værdi, der findes i sporet.</string>
@@ -6082,7 +6082,7 @@
     <string name="edit_palette">Rediger palet</string>
     <string name="add_palette">Tilføj palet</string>
     <string name="delete_palette">Slet palet</string>
-    <string name="delete_colors_palette_dialog_summary">Er du sikker på, at du vil slette paletten %1$s ?</string>
+    <string name="delete_colors_palette_dialog_summary">Er du sikker på, at du vil slette paletten %1$s?</string>
     <string name="shared_string_trip_average">Turgennemsnit</string>
     <string name="trip_recording_avg_speed_widget_description">Viser den gennemsnitlige hastighed for den aktuelle tur eller den gennemsnitlige hastighed under den sidste opadgående eller nedadgående sektion.</string>
     <string name="trip_recording_moving_time_widget_description">Viser den aktuelt registrerede bevægelsestid eller tiden for den sidste op- og nedkørsel.</string>
