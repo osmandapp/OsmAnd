@@ -6002,7 +6002,7 @@
     <string name="gradient_input_value_too_low_warn">Minimalna dozvoljena vrednost je %1$s.</string>
     <string name="gradient_input_value_too_high_warn">Maksimalna dozvoljena vrednost je %1$s.</string>
     <string name="gradient_input_value_duplicate_warn">Ova vrednost već postoji u paleti.</string>
-    <string name="gradient_input_invalid_value_warn">Molimo da unesete važeći broj.</string>
+    <string name="gradient_input_invalid_value_warn">Molimo vas da unesete važeći broj.</string>
     <string name="value_cannot_be_edited_warn">Ova vrednost se ne može izmeniti.</string>
     <string name="unexpected_error_occurred_warn">Došlo je do neočekivane greške.</string>
     <string name="relative_gradient_point_m_summary">Boja za maksimalnu vrednost pronađena u putanji.</string>
@@ -6016,7 +6016,7 @@
     <string name="shared_string_value">Vrednost</string>
     <string name="gradient_range_type_fixed_summary">Boje su dodeljene određenim apsolutnim brojevima (npr. 50 km/h).</string>
     <string name="gradient_range_type_fixed">Fiksne vrednosti</string>
-    <string name="gradient_range_type_relative_summary">Boje se automatski skaliraju na osnovu min./maks. opsega putanje.</string>
+    <string name="gradient_range_type_relative_summary">Boje se automatski skaliraju na osnovu min/maks opsega putanje.</string>
     <string name="gradient_range_type_relative">Relativan</string>
     <string name="edit_palette">Uredi paletu</string>
     <string name="add_palette">Dodaj paletu</string>
