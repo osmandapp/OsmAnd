@@ -39,6 +39,7 @@ import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -63,10 +64,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
-import net.osmand.plus.gallery.controller.GalleryController;
-import net.osmand.plus.gallery.model.GalleryItem;
-import net.osmand.plus.gallery.online.OnlinePhotosHolder;
-import net.osmand.plus.gallery.ui.GalleryGridConfig;
+import net.osmand.plus.gallery.contract.IGalleryRowController;
+import net.osmand.plus.gallery.online.OnlinePhotoParamsProvider;
 import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.mapcontextmenu.SearchAmenitiesTask.SearchAmenitiesListener;
 import net.osmand.plus.mapcontextmenu.SearchByRouteIdTask.SearchByRouteIdListener;
@@ -75,8 +74,7 @@ import net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.mapcontextmenu.gallery.GalleryRowBuilder;
-import net.osmand.plus.mapcontextmenu.gallery.OnlinePhotosFlow;
-import net.osmand.plus.mapcontextmenu.gallery.OnlinePhotosFlowListener;
+import net.osmand.plus.mapcontextmenu.gallery.OnlinePhotosRowController;
 import net.osmand.plus.mapcontextmenu.other.MenuObject;
 import net.osmand.plus.mapcontextmenu.other.MenuObjectUtils;
 import net.osmand.plus.plugins.OsmandPlugin;
@@ -85,6 +83,7 @@ import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.dialogs.QuickSearchToolbarController;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.track.clickable.ClickableWayHelper;
 import net.osmand.plus.transport.TransportStopRoute;
@@ -116,7 +115,7 @@ import java.lang.ref.WeakReference;
 import java.text.DateFormat;
 import java.util.*;
 
-public class MenuBuilder implements OnlinePhotosFlowListener {
+public class MenuBuilder implements OnlinePhotoParamsProvider {
 
 	private static final Log LOG = PlatformUtil.getLog(MenuBuilder.class);
 	public static final float SHADOW_HEIGHT_TOP_DP = 17f;
@@ -147,8 +146,7 @@ public class MenuBuilder implements OnlinePhotosFlowListener {
 	private final List<OsmandPlugin> menuPlugins = new ArrayList<>();
 
 	@Nullable
-	private GalleryRowBuilder onlinePhotosRow;
-	private OnlinePhotosFlow onlinePhotosFlow;
+	private IGalleryRowController onlinePhotosRowController;
 
 	private CollapseExpandListener collapseExpandListener;
 	private final List<SearchAmenitiesTask> searchAmenitiesTasks = new ArrayList<>();
@@ -167,7 +165,6 @@ public class MenuBuilder implements OnlinePhotosFlowListener {
 		this.customization = app.getAppCustomization();
 		this.menuRowBuilder = new MenuRowBuilder(mapActivity);
 		this.plainMenuItems = new LinkedList<>();
-		this.onlinePhotosFlow = new OnlinePhotosFlow(app, this);
 
 		preferredMapLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
 		preferredMapAppLang = preferredMapLang;
@@ -333,16 +330,10 @@ public class MenuBuilder implements OnlinePhotosFlowListener {
 	}
 
 	public void buildPhotosRow(@NonNull ViewGroup view, @Nullable Object object) {
-		GalleryController galleryController = onlinePhotosFlow.getGalleryController();
-		if (customization.isFeatureEnabled(CONTEXT_MENU_ONLINE_PHOTOS_ID)
-				&& showOnlinePhotos && galleryController != null) {
+		if (customization.isFeatureEnabled(CONTEXT_MENU_ONLINE_PHOTOS_ID) && showOnlinePhotos) {
 			buildOnlinePhotosRow(view);
 			buildPluginGalleryRows(view, object);
 		}
-	}
-
-	public void startLoadingImages() {
-		onlinePhotosFlow.startLoadingImages();
 	}
 
 	private boolean showTransportRoutes() {
@@ -364,8 +355,10 @@ public class MenuBuilder implements OnlinePhotosFlowListener {
 	}
 
 	void onClose() {
-		onlinePhotosRow = null;
-		onlinePhotosFlow.clear();
+		if (onlinePhotosRowController != null) {
+			onlinePhotosRowController.onClose();
+			onlinePhotosRowController = null;
+		}
 		clearPluginRows();
 		stopSearchAmenitiesTasks();
 	}
@@ -406,7 +399,7 @@ public class MenuBuilder implements OnlinePhotosFlowListener {
 
 	protected void buildPluginGalleryRows(@NonNull View view, @Nullable Object object) {
 		for (OsmandPlugin plugin : menuPlugins) {
-			plugin.buildContextMenuGalleryRows(this, view, object);
+			plugin.buildContextMenuGalleryRows(this, view);
 		}
 	}
 
@@ -615,37 +608,40 @@ public class MenuBuilder implements OnlinePhotosFlowListener {
 	}
 
 	protected void buildOnlinePhotosRow(@NonNull View view) {
-		boolean needUpdateOnly = onlinePhotosRow != null && onlinePhotosRow.getMenuBuilder() == this;
-		GalleryController galleryController = onlinePhotosFlow.getGalleryController();
-		if (galleryController == null) return;
+		boolean needUpdateOnly = onlinePhotosRowController != null;
+		if (onlinePhotosRowController == null) {
+			onlinePhotosRowController = new OnlinePhotosRowController(app, this);
+		}
+		buildGalleryRow(view, onlinePhotosRowController, R.drawable.ic_action_photo,
+				app.getString(R.string.online_photos), needUpdateOnly,
+				app.getSettings().ONLINE_PHOTOS_ROW_COLLAPSED);
+	}
 
-		onlinePhotosRow = new GalleryRowBuilder(this);
-		onlinePhotosRow.build(galleryController, new GalleryGridConfig(), isNightMode());
+	public void buildGalleryRow(@NonNull View view, @NonNull IGalleryRowController controller,
+	                            @DrawableRes int iconId, @NonNull String title, boolean updateOnly,
+	                            @NonNull OsmandPreference<Boolean> collapsePreference) {
+		GalleryRowBuilder galleryRowBuilder = new GalleryRowBuilder(this, controller);
 
 		LinearLayout parent = new LinearLayout(view.getContext());
-		parent.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-				LinearLayout.LayoutParams.WRAP_CONTENT));
+		parent.setLayoutParams(new LinearLayout.LayoutParams(
+				LinearLayout.LayoutParams.MATCH_PARENT,
+				LinearLayout.LayoutParams.WRAP_CONTENT)
+		);
 		parent.setOrientation(LinearLayout.VERTICAL);
-		parent.addView(onlinePhotosRow.getGalleryView());
-		CollapsableView collapsableView = new CollapsableView(parent, this, app.getSettings().ONLINE_PHOTOS_ROW_COLLAPSED);
-		collapsableView.setCollapseExpandListener(collapsed -> {
-			if (!collapsed && !onlinePhotosFlow.hasCurrentGalleryItems() && !onlinePhotosFlow.isLoading()) {
-				startLoadingImages();
-			}
-		});
-		buildRow(view, new BuildRowAttrs.Builder()
-				.setIconId(R.drawable.ic_action_photo).setText(app.getString(R.string.online_photos))
-				.setCollapsable(true).setCollapsableView(collapsableView)
-				.setTextLinesLimit(1).build());
+		parent.addView(galleryRowBuilder.getGalleryView());
 
-		List<GalleryItem> onlinePhotoItems = onlinePhotosFlow.getCurrentGalleryItems();
-		if (needUpdateOnly && onlinePhotoItems != null) {
-			onlinePhotosRow.setItems(onlinePhotoItems);
-		} else if (!collapsableView.isCollapsed()
-				&& !onlinePhotosFlow.hasCurrentGalleryItems()
-				&& !onlinePhotosFlow.isLoading()) {
-			startLoadingImages();
-		}
+		CollapsableView collapsableView = new CollapsableView(parent, this, collapsePreference);
+		collapsableView.setCollapseExpandListener(controller::onCollapseExpandRow);
+
+		buildRow(view, new BuildRowAttrs.Builder()
+				.setIconId(iconId)
+				.setText(title)
+				.setCollapsable(true)
+				.setCollapsableView(collapsableView)
+				.setTextLinesLimit(1)
+				.build()
+		);
+		controller.askUpdate(updateOnly, collapsableView.isCollapsed());
 	}
 
 	private void buildCoordinatesRow(@NonNull View view) {
@@ -668,32 +664,7 @@ public class MenuBuilder implements OnlinePhotosFlowListener {
 		}
 	}
 
-	@Override
-	public void onPhotosLoadStarted() {
-		if (!isHidden()) {
-			onLoadingImages(true);
-			PluginsHelper.onGetImageCardsStart();
-		}
-	}
-
-	@Override
-	public void onPhotosLoadFinished(@NonNull OnlinePhotosHolder holder) {
-		if (!isHidden()) {
-			onLoadingImages(false);
-			List<GalleryItem> galleryItems = onlinePhotosFlow.getCurrentGalleryItems();
-			if (onlinePhotosRow != null && galleryItems != null) {
-				onlinePhotosRow.setItems(galleryItems);
-			}
-			PluginsHelper.onGetImageCardsFinished(holder);
-		}
-	}
-
-	private void onLoadingImages(boolean loading) {
-		if (onlinePhotosRow != null) {
-			onlinePhotosRow.onLoadingImage(loading);
-		}
-	}
-
+	@NonNull
 	public Map<String, String> getAdditionalImageParams() {
 		return Collections.emptyMap();
 	}

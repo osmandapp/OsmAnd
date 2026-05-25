@@ -21,7 +21,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
-import net.osmand.plus.gallery.controller.GalleryController;
+import net.osmand.plus.gallery.GallerySession;
 import net.osmand.plus.gallery.model.GalleryItem;
 import net.osmand.plus.gallery.model.GalleryItem.Media;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -42,8 +42,6 @@ public class GalleryDetailsFragment extends BaseFullScreenFragment {
 
 	public static final String TAG = DistanceByTapFragment.class.getSimpleName();
 
-	private GalleryController controller;
-
 	private int selectedPosition;
 
 	@Override
@@ -55,7 +53,6 @@ public class GalleryDetailsFragment extends BaseFullScreenFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		controller = (GalleryController) app.getDialogManager().findController(GalleryController.PROCESS_ID);
 
 		Bundle args = getArguments();
 		if (savedInstanceState != null && savedInstanceState.containsKey(SELECTED_POSITION_KEY)) {
@@ -95,7 +92,7 @@ public class GalleryDetailsFragment extends BaseFullScreenFragment {
 
 	@Nullable
 	private GalleryItem.Media getSelectedGalleryItem() {
-		List<Media> items = controller.getOnlinePhotoItems();
+		List<Media> items = GallerySession.getOnlinePhotoItems();
 		return selectedPosition >= 0 && selectedPosition < items.size() ? items.get(selectedPosition) : null;
 	}
 

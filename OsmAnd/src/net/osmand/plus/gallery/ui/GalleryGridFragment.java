@@ -21,7 +21,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
-import net.osmand.plus.gallery.controller.GalleryController;
+import net.osmand.plus.gallery.contract.IGalleryListener;
+import net.osmand.plus.gallery.GallerySession;
 import net.osmand.plus.gallery.model.GalleryItem;
 import net.osmand.plus.gallery.model.GalleryItem.MediaCount;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -42,8 +43,6 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 
 	protected static final float SCALE_MULTIPLIER = 3f;
 
-	private GalleryController controller;
-
 	private Toolbar toolbar;
 	private GalleryGridRecyclerView recyclerView;
 
@@ -58,12 +57,6 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 
 	private static final int MAX_GALLERY_GRID_SPAN_COUNT = 7;
 	private static final int MIN_GALLERY_GRID_SPAN_COUNT = 2;
-
-	@Override
-	public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		controller = (GalleryController) app.getDialogManager().findController(GalleryController.PROCESS_ID);
-	}
 
 	@SuppressLint("ClickableViewAccessibility")
 	@Nullable
@@ -89,18 +82,18 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 			public void onGlobalLayout() {
 				recyclerView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 				adapter = new GalleryGridAdapter(requireMapActivity(), getGalleryListener(),
-						controller, recyclerView.getMeasuredWidth(), new GalleryGridConfig(), nightMode);
+						recyclerView.getMeasuredWidth(), nightMode);
 				adapter.setResizeBySpanCount(true);
 
 				List<GalleryItem> items = new ArrayList<>();
 				items.add(MediaCount.INSTANCE);
-				items.addAll(controller.getOnlinePhotoItems());
+				items.addAll(GallerySession.getOnlinePhotoItems());
 				adapter.setItems(items);
 
 				recyclerView.setAdapter(adapter);
 				recyclerView.setScaleDetector(scaleDetector);
 
-				layoutManager = new GridLayoutManager(app, GalleryController.getSettingsSpanCount(requireMapActivity()));
+				layoutManager = new GridLayoutManager(app, GallerySession.getSettingsSpanCount(requireMapActivity()));
 				layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
 					@Override
 					public int getSpanSize(int position) {
@@ -135,12 +128,12 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 	}
 
 	@NonNull
-	private GalleryListener getGalleryListener() {
-		return new GalleryListener() {
+	private IGalleryListener getGalleryListener() {
+		return new IGalleryListener() {
 			@Override
 			public void onMediaItemClicked(@NonNull MediaItem mediaItem) {
 				callMapActivity(activity -> {
-					int index = controller.getPhotoItemIndexById(mediaItem.getId());
+					int index = GallerySession.getPhotoItemIndexById(mediaItem.getId());
 					GalleryPhotoPagerFragment.showInstance(activity, index);
 				});
 			}
@@ -165,13 +158,13 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 					float a = (1 - detector.getScaleFactor()) * SCALE_MULTIPLIER;
 					newScaleFactor = newScaleFactor + a;
 				}
-				int previousCount = GalleryController.getSettingsSpanCount(requireMapActivity());
+				int previousCount = GallerySession.getSettingsSpanCount(requireMapActivity());
 				int newCount = (int) newScaleFactor + previousCount;
 
 				if (newCount != previousCount) {
 					newScaleFactor = 0;
 					if (newCount <= MAX_GALLERY_GRID_SPAN_COUNT && newCount >= MIN_GALLERY_GRID_SPAN_COUNT) {
-						GalleryController.setSpanSettings(requireMapActivity(), newCount);
+						GallerySession.setSpanSettings(requireMapActivity(), newCount);
 						updateSpan();
 						zoomedForPinch = true;
 					}
@@ -194,7 +187,7 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 	}
 
 	private void updateSpan() {
-		layoutManager.setSpanCount(GalleryController.getSettingsSpanCount(requireMapActivity()));
+		layoutManager.setSpanCount(GallerySession.getSettingsSpanCount(requireMapActivity()));
 		for (int i = 0; i < adapter.getItemCount(); i++) {
 			GalleryItem item = adapter.getItem(i);
 			if (item instanceof GalleryItem.Media) {

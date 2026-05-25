@@ -35,7 +35,7 @@ import androidx.viewpager.widget.ViewPager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
-import net.osmand.plus.gallery.controller.GalleryController;
+import net.osmand.plus.gallery.GallerySession;
 import net.osmand.plus.gallery.model.GalleryItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -49,6 +49,7 @@ import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
 import net.osmand.plus.wikipedia.WikiAlgorithms;
+import net.osmand.shared.media.MediaProvider;
 import net.osmand.shared.media.MediaUriResolver;
 import net.osmand.shared.media.domain.MediaItem;
 import net.osmand.util.Algorithms;
@@ -63,8 +64,6 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 	public static final int PRELOAD_THUMBNAILS_COUNT = 3;
 	public static final String SELECTED_POSITION_KEY = "selected_position_key";
 
-	private GalleryController controller;
-
 	private ImageView sourceView;
 	private TextView descriptionView;
 	private TextView dateView;
@@ -77,18 +76,20 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 	private boolean uiHidden = false;
 	private int selectedPosition = 0;
 
+	private MediaProvider mediaProvider;
+
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		controller = (GalleryController) app.getDialogManager().findController(GalleryController.PROCESS_ID);
 
+		mediaProvider = new MediaProvider(app);
 		Bundle args = getArguments();
 		if (savedInstanceState != null && savedInstanceState.containsKey(SELECTED_POSITION_KEY)) {
 			selectedPosition = savedInstanceState.getInt(SELECTED_POSITION_KEY);
 		} else if (args != null && args.containsKey(SELECTED_POSITION_KEY)) {
 			selectedPosition = args.getInt(SELECTED_POSITION_KEY);
 		}
-		if (selectedPosition >= controller.getOnlinePhotoItems().size()) {
+		if (selectedPosition >= GallerySession.getOnlinePhotoItems().size()) {
 			dismiss();
 		}
 	}
@@ -109,7 +110,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 		descriptionShadow = view.findViewById(R.id.description_shadow);
 		descriptionContainer = view.findViewById(R.id.description_container);
 
-		List<GalleryItem.Media> onlinePhotoItems = controller.getOnlinePhotoItems();
+		List<GalleryItem.Media> onlinePhotoItems = GallerySession.getOnlinePhotoItems();
 		if (selectedPosition < onlinePhotoItems.size()) {
 			setupViewPager(view);
 			preloadThumbNails();
@@ -133,7 +134,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 	}
 
 	private void preloadThumbNails(boolean next) {
-		List<GalleryItem.Media> photoItems = controller.getOnlinePhotoItems();
+		List<GalleryItem.Media> photoItems = GallerySession.getOnlinePhotoItems();
 		if (photoItems.size() <= 1) {
 			return;
 		}
@@ -168,7 +169,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 	}
 
 	private void downloadThumbnail(@NonNull MediaItem mediaItem) {
-		controller.getMediaProvider().loadThumbnail(mediaItem);
+		mediaProvider.loadThumbnail(mediaItem);
 	}
 
 	@Override
@@ -423,7 +424,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 
 	private void setupViewPager(@NonNull View view) {
 		ViewPager pager = view.findViewById(R.id.photo_pager);
-		List<GalleryItem.Media> items = controller.getOnlinePhotoItems();
+		List<GalleryItem.Media> items = GallerySession.getOnlinePhotoItems();
 		FragmentManager manager = getChildFragmentManager();
 
 		ViewPagerAdapter adapter = new ViewPagerAdapter(manager, items);
@@ -459,7 +460,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 
 	@Nullable
 	private GalleryItem.Media getSelectedGalleryItem() {
-		List<GalleryItem.Media> items = controller.getOnlinePhotoItems();
+		List<GalleryItem.Media> items = GallerySession.getOnlinePhotoItems();
 		return selectedPosition >= 0 && selectedPosition < items.size() ? items.get(selectedPosition) : null;
 	}
 
