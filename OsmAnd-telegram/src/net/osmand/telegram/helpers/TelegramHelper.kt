@@ -530,13 +530,17 @@ class TelegramHelper private constructor() {
 			}
 			resultArticles.forEach {
 				shareInfo.lastTextMessageHandled = false
-				val sendOptions = TdApi.MessageSendOptions(true, true, true, true, null, 0, 0, false)
-				client?.send(TdApi.SendInlineQueryResultMessage(shareInfo.chatId, 0, null, sendOptions,
+				val sendOptions = createMessageSendOptions(true)
+				client?.send(TdApi.SendInlineQueryResultMessage(shareInfo.chatId, null, null, sendOptions,
 					inlineQueryResults.inlineQueryId, it.id, false)) { obj ->
 					handleTextLocationMessageUpdate(obj, shareInfo, true)
 				}
 			}
 		}
+	}
+
+	private fun createMessageSendOptions(disableNotification: Boolean): TdApi.MessageSendOptions {
+		return TdApi.MessageSendOptions(null, disableNotification, true, true, false, 0, true, null, 0, 0, false)
 	}
 
 	private fun requestSupergroupFullInfo(id: Long) {
@@ -727,7 +731,8 @@ class TelegramHelper private constructor() {
 			is TelegramSettings.ProxySOCKS5Pref -> TdApi.ProxyTypeSocks5(proxyPref.login, proxyPref.password)
 			else -> null
 		}
-		client?.send(TdApi.AddProxy(proxyPref.server, proxyPref.port, enable, proxyType)) { obj ->
+		val proxy = TdApi.Proxy(proxyPref.server, proxyPref.port, proxyType)
+		client?.send(TdApi.AddProxy(proxy, enable, "")) { obj ->
 			when (obj.constructor) {
 				TdApi.Error.CONSTRUCTOR -> {
 					val error = obj as TdApi.Error
@@ -735,9 +740,8 @@ class TelegramHelper private constructor() {
 						listener?.onTelegramError(error.code, error.message)
 					}
 				}
-				TdApi.Proxy.CONSTRUCTOR -> {
-					val proxy = (obj as TdApi.Proxy)
-					proxyPref.id = proxy.id
+				TdApi.AddedProxy.CONSTRUCTOR -> {
+					proxyPref.id = (obj as TdApi.AddedProxy).id
 				}
 			}
 		}
@@ -749,7 +753,8 @@ class TelegramHelper private constructor() {
 			is TelegramSettings.ProxySOCKS5Pref -> TdApi.ProxyTypeSocks5(proxyPref.login, proxyPref.password)
 			else -> null
 		}
-		client?.send(TdApi.EditProxy(proxyPref.id, proxyPref.server, proxyPref.port, enable, proxyType)) { obj ->
+		val proxy = TdApi.Proxy(proxyPref.server, proxyPref.port, proxyType)
+		client?.send(TdApi.EditProxy(proxyPref.id, proxy, enable, "")) { obj ->
 			when (obj.constructor) {
 				TdApi.Error.CONSTRUCTOR -> {
 					val error = obj as TdApi.Error
@@ -757,9 +762,8 @@ class TelegramHelper private constructor() {
 						listener?.onTelegramError(error.code, error.message)
 					}
 				}
-				TdApi.Proxy.CONSTRUCTOR -> {
-					val proxy = (obj as TdApi.Proxy)
-					proxyPref.id = proxy.id
+				TdApi.AddedProxy.CONSTRUCTOR -> {
+					proxyPref.id = (obj as TdApi.AddedProxy).id
 				}
 			}
 		}
@@ -866,8 +870,8 @@ class TelegramHelper private constructor() {
 			shareInfo.pendingTdLibText++
 			shareInfo.lastSendTextMessageTime = (System.currentTimeMillis() / 1000).toInt()
 			log.error("sendNewTextLocation ${shareInfo.pendingTdLibText}")
-			val sendOptions = TdApi.MessageSendOptions(true, true, true, true, null, 0, 0, false)
-			client?.send(TdApi.SendMessage(shareInfo.chatId, 0, null, sendOptions, null, content)) { obj ->
+			val sendOptions = createMessageSendOptions(true)
+			client?.send(TdApi.SendMessage(shareInfo.chatId, null, null, sendOptions, null, content)) { obj ->
 				handleTextLocationMessageUpdate(obj, shareInfo, false)
 			}
 		}
@@ -899,8 +903,8 @@ class TelegramHelper private constructor() {
 			shareInfo.pendingTdLibMap++
 			shareInfo.lastSendMapMessageTime = (System.currentTimeMillis() / 1000).toInt()
 			log.error("sendNewMapLocation ${shareInfo.pendingTdLibMap}")
-			val sendOptions = TdApi.MessageSendOptions(false, true, true, true, null, 0, 0, false)
-			client?.send(TdApi.SendMessage(shareInfo.chatId, 0, null, sendOptions, null, content)) { obj ->
+			val sendOptions = createMessageSendOptions(false)
+			client?.send(TdApi.SendMessage(shareInfo.chatId, null, null, sendOptions, null, content)) { obj ->
 				handleMapLocationMessageUpdate(obj, shareInfo, false)
 			}
 		}
@@ -1459,7 +1463,7 @@ class TelegramHelper private constructor() {
 					val chat = chats[updateChat.chatId]
 					if (chat != null) {
 						synchronized(chat) {
-							chat.replyMarkupMessageId = updateChat.replyMarkupMessageId
+							chat.replyMarkupMessageId = updateChat.replyMarkupMessage?.id ?: 0
 						}
 					}
 				}
