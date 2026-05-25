@@ -5,7 +5,7 @@ import net.osmand.data.LatLon
 import net.osmand.plus.OsmAndTaskManager
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.gallery.model.GalleryItem
-import net.osmand.plus.gallery.controller.GalleryController
+import net.osmand.plus.gallery.GallerySession
 import net.osmand.plus.gallery.online.OnlinePhotosGroup
 import net.osmand.plus.gallery.online.OnlinePhotosHolder
 import net.osmand.plus.gallery.online.cache.PhotoCacheManager
@@ -18,7 +18,6 @@ import net.osmand.util.Algorithms
 
 class AstroGalleryLoader(
 	private val app: OsmandApplication,
-	private val galleryController: GalleryController,
 	private val onStateChanged: (String, AstroGalleryState) -> Unit
 ) {
 
@@ -39,7 +38,7 @@ class AstroGalleryLoader(
 			}
 			val mediaItemsHolder = buildMediaItemsHolder(wikidataId, images)
 			val galleryItems = mediaItemsHolder.getAstronomyGalleryItems()
-			galleryController.itemsHolder = mediaItemsHolder.takeIf { galleryItems.isNotEmpty() }
+			GallerySession.itemsHolder = mediaItemsHolder.takeIf { galleryItems.isNotEmpty() }
 			publishReadyState(wikidataId, galleryItems)
 		}
 	}
@@ -53,14 +52,14 @@ class AstroGalleryLoader(
 			PhotoCacheManager(app)
 		val rawKey = "wikidataId=$wikidataId"
 
-		val hasMatchingHolder = galleryController.isCurrentHolderEquals(latLon, params)
-		val existingGalleryItems = galleryController.itemsHolder?.getAstronomyGalleryItems().orEmpty()
+		val hasMatchingHolder = GallerySession.isCurrentHolderEquals(latLon, params)
+		val existingGalleryItems = GallerySession.itemsHolder?.getAstronomyGalleryItems().orEmpty()
 		if (hasMatchingHolder && existingGalleryItems.isNotEmpty()) {
 			publishReadyState(wikidataId, existingGalleryItems)
 			return
 		}
 		if (hasMatchingHolder) {
-			galleryController.clearHolder()
+			GallerySession.clearHolder()
 		}
 
 		if (!app.settings.isInternetConnectionAvailable) {
@@ -70,7 +69,7 @@ class AstroGalleryLoader(
 
 		cancel()
 		requestWid = wikidataId
-		galleryController.clearHolder()
+		GallerySession.clearHolder()
 
 		getAstroImagesTask = GetAstroImagesTask(
 			app = app,

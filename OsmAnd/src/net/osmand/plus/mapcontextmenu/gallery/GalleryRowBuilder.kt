@@ -6,158 +6,97 @@ import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
-import net.osmand.plus.gallery.controller.GalleryController
-import net.osmand.plus.gallery.model.GalleryAction
-import net.osmand.plus.gallery.model.GalleryItem
-import net.osmand.plus.gallery.model.GalleryItem.NoInternet
+import net.osmand.plus.gallery.contract.IGalleryRowController
+import net.osmand.plus.gallery.contract.IGalleryRowView
+import net.osmand.plus.gallery.model.GalleryActionButton
 import net.osmand.plus.gallery.ui.GalleryGridAdapter
-import net.osmand.plus.gallery.ui.GalleryGridConfig
-import net.osmand.plus.gallery.ui.GalleryGridFragment
 import net.osmand.plus.gallery.ui.GalleryGridItemDecorator
-import net.osmand.plus.gallery.ui.GalleryListener
-import net.osmand.plus.gallery.ui.GalleryPhotoPagerFragment
-import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.mapcontextmenu.MapContextMenu
 import net.osmand.plus.mapcontextmenu.MenuBuilder
-import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.widgets.dialogbutton.DialogButton
-import net.osmand.shared.media.domain.MediaItem
-import net.osmand.util.Algorithms
+
+private const val SPAN_COUNT = 2
 
 class GalleryRowBuilder(
-	val menuBuilder: MenuBuilder
-) {
+	val menuBuilder: MenuBuilder,
+	val controller: IGalleryRowController
+) : IGalleryRowView {
 
+	override val mapActivity: MapActivity = menuBuilder.mapActivity
 	private val app: OsmandApplication = menuBuilder.application
-	private val mapActivity: MapActivity = menuBuilder.mapActivity
+	private val nightMode = menuBuilder.isNightMode
 
-	private val galleryItems = mutableListOf<GalleryItem>()
+	val galleryView: View = UiUtilities.inflate(mapActivity, nightMode, R.layout.gallery_card)
 
-	lateinit var galleryView: View
-		private set
+	private var galleryGridAdapter: GalleryGridAdapter =
+		GalleryGridAdapter(mapActivity, controller, null, nightMode)
 
-	private lateinit var galleryGridAdapter: GalleryGridAdapter
+	private var actionButtons: List<GalleryActionButton>? = null
 
-	fun setItems(vararg items: GalleryItem) {
-		setItems(items.asList())
+	init {
+		controller.attachView(this)
+		setupRecyclerView()
+		render()
 	}
 
-	fun setItems(items: Collection<GalleryItem>) {
-		galleryItems.clear()
-		galleryItems.addAll(items)
-
-		if (!menuBuilder.isHidden) {
-			val list = ArrayList(items)
-			galleryGridAdapter.setItems(list)
-
-			val mapContextMenu: MapContextMenu? = menuBuilder.mapContextMenu
-			if (itemsCount() > 0 && mapContextMenu != null) {
-				mapContextMenu.updateLayout()
-			}
-		}
-		updateShowAll()
-	}
-
-	private fun updateShowAll() {
-		val viewAllButton = galleryView.findViewById<View>(R.id.view_all)
-		AndroidUiHelper.updateVisibility(viewAllButton, shouldShowViewAll())
-	}
-
-	fun onLoadingImage(loading: Boolean) {
-		galleryGridAdapter.onLoadingImages(loading)
-	}
-
-	fun build(
-		controller: GalleryController,
-		config: GalleryGridConfig,
-		nightMode: Boolean
-	) {
-		galleryView = UiUtilities.inflate(mapActivity, nightMode, R.layout.gallery_card)
-		val recyclerView = galleryView.findViewById<RecyclerView>(R.id.recycler_view)
-
-		val items = mutableListOf<GalleryItem>()
-		val listener = getGalleryListener(controller)
-		galleryGridAdapter = GalleryGridAdapter(mapActivity, listener, controller, null, config, nightMode)
-
-		if (!app.settings.isInternetConnectionAvailable) {
-			items.add(NoInternet)
-		} else {
-			items.addAll(galleryItems)
-		}
-		galleryGridAdapter.setItems(items)
-
-		recyclerView.layoutManager = getGridLayoutManager()
-		val galleryGridItemDecorator = GalleryGridItemDecorator(app)
-		recyclerView.addItemDecoration(galleryGridItemDecorator)
-		recyclerView.adapter = galleryGridAdapter
-
-		setupViewAllButton(config)
-	}
-
-	private fun getGridLayoutManager(): GridLayoutManager {
-		val gridLayoutManager = GridLayoutManager(
-			app,
-			2,
-			GridLayoutManager.HORIZONTAL,
-			false
-		)
-		gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+	private fun setupRecyclerView() {
+		val lookup = object : GridLayoutManager.SpanSizeLookup() {
 			override fun getSpanSize(position: Int): Int {
 				return if (galleryGridAdapter.isRegularMediaItemOnPosition(position)) 1 else 2
 			}
 		}
-		return gridLayoutManager
+
+		val gridLayoutManager = GridLayoutManager(
+			app, SPAN_COUNT, GridLayoutManager.HORIZONTAL, false
+		).apply {
+			spanSizeLookup = lookup
+		}
+
+		val recyclerView = galleryView.findViewById<RecyclerView>(R.id.recycler_view)
+		recyclerView.layoutManager = gridLayoutManager
+
+		val galleryGridItemDecorator = GalleryGridItemDecorator(app)
+		recyclerView.addItemDecoration(galleryGridItemDecorator)
+		recyclerView.adapter = galleryGridAdapter
 	}
 
-	private fun setupViewAllButton(config: GalleryGridConfig) {
-		val actionButton = galleryView.findViewById<DialogButton>(R.id.view_all)
-		actionButton.setTitleId(config.showAllButtonTitleResId)
-		actionButton.setOnClickListener { onShowAllButtonClicked(config) }
-		updateShowAll()
-	}
+	override fun render() {
+		if (!menuBuilder.isHidden) {
+			val items = controller.getGalleryItems()
+			val list = ArrayList(items)
+			galleryGridAdapter.setItems(list)
 
-	private fun getGalleryListener(controller: GalleryController): GalleryListener {
-		return object : GalleryListener {
-			override fun onMediaItemClicked(mediaItem: MediaItem) {
-				if (!PluginsHelper.handleGalleryMediaItemClick(mapActivity, mediaItem)) {
-					val position = controller.getPhotoItemIndexById(mediaItem.id)
-					GalleryPhotoPagerFragment.showInstance(mapActivity, position)
-				}
+			val mapContextMenu: MapContextMenu? = menuBuilder.mapContextMenu
+			if (items.isNotEmpty() && mapContextMenu != null) {
+				mapContextMenu.updateLayout()
 			}
+		}
+		updateButtons()
+	}
 
-			override fun onReloadMediaItems() {
-				if (!app.settings.isInternetConnectionAvailable) {
-					app.showShortToastMessage(R.string.shared_string_no_internet_connection)
+	private fun updateButtons() {
+		val newButtons = controller.collectActionButtons()
+		val cachedButtons = actionButtons
+		if (cachedButtons == null || cachedButtons != newButtons) {
+			actionButtons = newButtons
+
+			val buttonIds = listOf(R.id.primary_action_button, R.id.secondary_action_button)
+			for (i in buttonIds.indices) {
+				val buttonView = galleryView.findViewById<DialogButton>(buttonIds[i])
+				if (i < newButtons.size) {
+					val actionButton = newButtons[i]
+					buttonView.setTitleId(actionButton.titleId)
+					buttonView.setOnClickListener { controller.handleActionButtonClick(actionButton) }
+					buttonView.visibility = View.VISIBLE
 				} else {
-					menuBuilder.startLoadingImages()
+					buttonView.visibility = View.GONE
 				}
 			}
 		}
 	}
 
-	private fun onShowAllButtonClicked(config: GalleryGridConfig) {
-		val action: GalleryAction? = config.showAllButtonAction
-		if (action != null) {
-			PluginsHelper.handleGalleryAction(action)
-		} else {
-			GalleryGridFragment.showInstance(mapActivity)
-		}
-	}
-
-	private fun shouldShowViewAll(): Boolean {
-		if (Algorithms.isEmpty(galleryItems)) {
-			return false
-		}
-		for (item in galleryItems) {
-			if (item is GalleryItem.Media) {
-				return true
-			}
-		}
-		return false
-	}
-
-	private fun itemsCount(): Int {
-		return galleryItems.size
+	override fun onLoadingImage(loading: Boolean) {
+		galleryGridAdapter.onLoadingImages(loading)
 	}
 }

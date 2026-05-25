@@ -21,12 +21,13 @@ import androidx.fragment.app.Fragment;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenFragment;
-import net.osmand.plus.gallery.controller.GalleryController;
+import net.osmand.plus.gallery.GallerySession;
 import net.osmand.plus.gallery.model.GalleryItem;
 import net.osmand.plus.gallery.ui.imageview.GalleryImageView;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
+import net.osmand.shared.media.MediaProvider;
 import net.osmand.shared.media.domain.MediaItem;
 import net.osmand.shared.util.ImageLoaderCallback;
 import net.osmand.shared.util.LoadingImage;
@@ -41,16 +42,15 @@ public class GalleryPhotoViewerFragment extends BaseFullScreenFragment {
 
 	public static final String TAG = GalleryPhotoViewerFragment.class.getSimpleName();
 
-	private GalleryController controller;
-
 	private GalleryImageView imageView;
 	private int selectedPosition = 0;
 	private LoadingImage loadingImage;
+	private MediaProvider mediaProvider;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		controller = (GalleryController) app.getDialogManager().findController(GalleryController.PROCESS_ID);
+		this.mediaProvider = new MediaProvider(app);
 
 		Bundle args = getArguments();
 		if (savedInstanceState != null && savedInstanceState.containsKey(SELECTED_POSITION_KEY)) {
@@ -80,18 +80,16 @@ public class GalleryPhotoViewerFragment extends BaseFullScreenFragment {
 	private void setupImageView(@NonNull ViewGroup view) {
 		imageView = view.findViewById(R.id.image);
 
-		if (controller != null) {
-			List<GalleryItem.Media> photoItems = controller.getOnlinePhotoItems();
-			int position = selectedPosition;
-			if (photoItems.size() > position) {
-				MediaItem mediaItem = getMediaItem(photoItems.get(position));
-				if (mediaItem != null) {
-					cancelLoadingImage();
-					if (!app.getSettings().isInternetConnectionAvailable()) {
-						downloadFullImage(mediaItem, true);
-					} else {
-						downloadThumbnail(mediaItem);
-					}
+		List<GalleryItem.Media> photoItems = GallerySession.getOnlinePhotoItems();
+		int position = selectedPosition;
+		if (photoItems.size() > position) {
+			MediaItem mediaItem = getMediaItem(photoItems.get(position));
+			if (mediaItem != null) {
+				cancelLoadingImage();
+				if (!app.getSettings().isInternetConnectionAvailable()) {
+					downloadFullImage(mediaItem, true);
+				} else {
+					downloadThumbnail(mediaItem);
 				}
 			}
 		}
@@ -110,7 +108,7 @@ public class GalleryPhotoViewerFragment extends BaseFullScreenFragment {
 	}
 
 	private void downloadThumbnail(@NonNull MediaItem mediaItem) {
-		trackLoadingImage(controller.getMediaProvider().loadThumbnail(mediaItem, new ImageLoaderCallback() {
+		trackLoadingImage(mediaProvider.loadThumbnail(mediaItem, new ImageLoaderCallback() {
 			@Override
 			public void onStart(@Nullable Bitmap bitmap) {
 			}
@@ -133,7 +131,7 @@ public class GalleryPhotoViewerFragment extends BaseFullScreenFragment {
 	}
 
 	private void downloadFullImage(@NonNull MediaItem mediaItem, boolean fallbackToPreview) {
-		trackLoadingImage(controller.getMediaProvider().loadFullSizeImage(mediaItem, new ImageLoaderCallback() {
+		trackLoadingImage(mediaProvider.loadFullSizeImage(mediaItem, new ImageLoaderCallback() {
 			@Override
 			public void onStart(@Nullable Bitmap bitmap) {
 			}
@@ -160,7 +158,7 @@ public class GalleryPhotoViewerFragment extends BaseFullScreenFragment {
 	}
 
 	private void tryLoadCachePreviewImage(@NonNull MediaItem mediaItem) {
-		trackLoadingImage(controller.getMediaProvider().loadStandardSizeImage(mediaItem, new ImageLoaderCallback() {
+		trackLoadingImage(mediaProvider.loadStandardSizeImage(mediaItem, new ImageLoaderCallback() {
 			@Override
 			public void onStart(@Nullable Bitmap bitmap) {
 			}

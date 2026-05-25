@@ -10,8 +10,7 @@ import androidx.annotation.Nullable;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.gallery.controller.GalleryController;
+import net.osmand.plus.gallery.GallerySession;
 import net.osmand.plus.gallery.model.GalleryItem;
 import net.osmand.plus.gallery.online.OnlinePhotosHolder;
 import net.osmand.plus.gallery.online.cache.PhotoCacheManager;
@@ -34,7 +33,6 @@ public class OnlinePhotosFlow {
 	private final OsmandApplication app;
 	private final OnlinePhotosFlowListener listener;
 
-	private GalleryController galleryController;
 	private GetOnlineImagesTask getOnlineImagesTask;
 	private List<GalleryItem> currentGalleryItems;
 	private boolean loading;
@@ -43,7 +41,6 @@ public class OnlinePhotosFlow {
 	                        @NonNull OnlinePhotosFlowListener listener) {
 		this.app = app;
 		this.listener = listener;
-		this.galleryController = findController(app);
 	}
 
 	private final GetImageCardsListener imageCardListener = new GetImageCardsListener() {
@@ -57,9 +54,7 @@ public class OnlinePhotosFlow {
 		public void onFinish(OnlinePhotosHolder mediaHolder) {
 			loading = false;
 			setCurrentGalleryItems(mediaHolder.getOrderedGalleryItems());
-			if (galleryController != null) {
-				galleryController.setItemsHolder(mediaHolder);
-			}
+			GallerySession.setItemsHolder(mediaHolder);
 			listener.onPhotosLoadFinished(mediaHolder);
 		}
 	};
@@ -72,18 +67,8 @@ public class OnlinePhotosFlow {
 		currentGalleryItems = items;
 	}
 
-	public void startLoadingImages() {
-		startLoadingImagesTask();
-	}
-
-	private void startLoadingImagesTask() {
-		if (galleryController == null) {
-			return;
-		}
-
-		LatLon latLon = listener.getLatLon();
-		Map<String, String> params = listener.getAdditionalImageParams();
-
+	public void startLoadingImages(@NonNull LatLon latLon,
+	                               @NonNull Map<String, String> params) {
 		PhotoCacheManager cacheManager = new PhotoCacheManager(app);
 		WikiHelper.WikiTagData wikiTagData = WikiHelper.INSTANCE.extractWikiTagData(params);
 		String wikidataId = wikiTagData.getWikidataId();
@@ -91,16 +76,15 @@ public class OnlinePhotosFlow {
 		String wikiTitle = wikiTagData.getWikiTitle();
 		String rawKey = PhotoCacheManager.buildRawKey(wikidataId, wikiCategory, wikiTitle);
 
-		OnlinePhotosHolder holder = galleryController.getItemsHolder();
-		if (holder != null && galleryController.isCurrentHolderEquals(latLon, params)) {
+		OnlinePhotosHolder holder = GallerySession.getItemsHolder();
+		if (holder != null && GallerySession.isCurrentHolderEquals(latLon, params)) {
 			imageCardListener.onFinish(holder);
 		} else if (!app.getSettings().isInternetConnectionAvailable()){
 			loadFromCache(cacheManager, rawKey, params, wikiTagData, latLon);
 		} else {
 			stopLoadingImagesTask();
-			galleryController.clearHolder();
-			getOnlineImagesTask = new GetOnlineImagesTask(app, listener.getLatLon(),
-					listener.getAdditionalImageParams(), imageCardListener,
+			GallerySession.clearHolder();
+			getOnlineImagesTask = new GetOnlineImagesTask(app, latLon, params, imageCardListener,
 					response -> savePhotoListToCache(cacheManager, rawKey, response));
 			OsmAndTaskManager.executeTask(getOnlineImagesTask);
 		}
@@ -154,17 +138,7 @@ public class OnlinePhotosFlow {
 		stopLoadingImagesTask();
 		currentGalleryItems = null;
 		loading = false;
-		if (galleryController != null) {
-			galleryController.clearHolder();
-		}
-	}
-
-	@Nullable
-	public GalleryController getGalleryController() {
-		if (galleryController == null) {
-			galleryController = findController(app);
-		}
-		return galleryController;
+		GallerySession.clearHolder();
 	}
 
 	@Nullable
@@ -178,11 +152,5 @@ public class OnlinePhotosFlow {
 
 	public boolean isLoading() {
 		return loading;
-	}
-
-	@Nullable
-	public static GalleryController findController(@NonNull OsmandApplication app) {
-		DialogManager dialogManager = app.getDialogManager();
-		return (GalleryController) dialogManager.findController(GalleryController.PROCESS_ID);
 	}
 }

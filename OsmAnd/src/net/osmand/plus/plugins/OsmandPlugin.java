@@ -69,7 +69,6 @@ import net.osmand.search.core.SearchPhrase;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser;
 import net.osmand.shared.gpx.TrackItem;
-import net.osmand.shared.media.domain.MediaItem;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -271,11 +270,6 @@ public abstract class OsmandPlugin {
 		return false;
 	}
 
-	protected boolean handleGalleryMediaItemClick(@NonNull MapActivity mapActivity,
-	                                              @NonNull MediaItem mediaItem) {
-		return false;
-	}
-
 	public boolean disablePreferences() {
 		return !isActive();
 	}
@@ -327,7 +321,7 @@ public abstract class OsmandPlugin {
 	/*
 	 * Add gallery menu row to the map context menu.
 	 */
-	public void buildContextMenuGalleryRows(@NonNull MenuBuilder menuBuilder, @NonNull View view, @Nullable Object object) {
+	public void buildContextMenuGalleryRows(@NonNull MenuBuilder menuBuilder, @NonNull View view) {
 	}
 
 	@Nullable

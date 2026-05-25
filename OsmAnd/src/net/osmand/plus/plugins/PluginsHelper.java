@@ -622,24 +622,6 @@ public class PluginsHelper {
 		}
 	}
 
-	public static void onGetImageCardsStart() {
-		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			GetImageCardsListener listener = plugin.getImageCardsListener();
-			if (listener != null) {
-				listener.onTaskStarted();
-			}
-		}
-	}
-
-	public static void onGetImageCardsFinished(@NonNull OnlinePhotosHolder cardsHolder) {
-		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			GetImageCardsListener listener = plugin.getImageCardsListener();
-			if (listener != null) {
-				listener.onFinish(cardsHolder);
-			}
-		}
-	}
-
 	@Nullable
 	public static MapWidget createMapWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
@@ -798,16 +780,6 @@ public class PluginsHelper {
 	public static boolean handleGalleryAction(@NonNull GalleryAction action) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			if (plugin.handleGalleryAction(action)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public static boolean handleGalleryMediaItemClick(@NonNull MapActivity mapActivity,
-	                                                  @NonNull MediaItem mediaItem) {
-		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			if (plugin.handleGalleryMediaItemClick(mapActivity, mediaItem)) {
 				return true;
 			}
 		}

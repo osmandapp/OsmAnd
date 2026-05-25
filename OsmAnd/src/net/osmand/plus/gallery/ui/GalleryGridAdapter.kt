@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
-import net.osmand.plus.gallery.controller.GalleryMediaLoadStateProvider
+import net.osmand.plus.gallery.contract.IGalleryListener
 import net.osmand.plus.gallery.model.GalleryItem
 import net.osmand.plus.gallery.ui.holders.GalleryMediaViewHolder
 import net.osmand.plus.gallery.ui.holders.MediaHolderType
@@ -21,10 +21,8 @@ import net.osmand.shared.media.MediaProvider
 
 class GalleryGridAdapter(
 	private val mapActivity: MapActivity,
-	private val listener: GalleryListener,
-	private val mediaLoadStateProvider: GalleryMediaLoadStateProvider,
+	private val controller: IGalleryListener,
 	private val viewWidth: Int?,
-	private val config: GalleryGridConfig = GalleryGridConfig(),
 	private val nightMode: Boolean
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -39,30 +37,9 @@ class GalleryGridAdapter(
 
 	fun setItems(newItems: List<GalleryItem>) {
 		items.clear()
-		items.addAll(applyMediaItemsLimit(newItems))
+		items.addAll(newItems)
 		notifyDataSetChanged()
 	}
-
-	private fun applyMediaItemsLimit(newItems: List<GalleryItem>): List<GalleryItem> {
-		val limit = config.mediaItemsLimit ?: return newItems
-
-		val limitedItems = mutableListOf<GalleryItem>()
-		var limitedMediaItemsCount = 0
-
-		for (item in newItems) {
-			if (item is GalleryItem.Media && config.mediaItemLimitPredicate(item.mediaItem)) {
-				if (limitedMediaItemsCount < limit) {
-					limitedItems.add(item)
-					limitedMediaItemsCount++
-				}
-			} else {
-				limitedItems.add(item)
-			}
-		}
-		return limitedItems
-	}
-
-	fun getItems(): List<GalleryItem> = items
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 		return when (viewType) {
@@ -101,8 +78,8 @@ class GalleryGridAdapter(
 					else -> MediaHolderType.STANDARD
 				}
 				holder.bindView(
-					mapActivity, listener, item, type, viewWidth,
-					mediaProvider, mediaLoadStateProvider, nightMode
+					mapActivity, controller, item, type, viewWidth,
+					mediaProvider, nightMode
 				)
 			}
 			holder is ActionViewHolder && item is GalleryItem.Action -> {
@@ -112,7 +89,7 @@ class GalleryGridAdapter(
 				holder.bindView(nightMode, item)
 			}
 			holder is NoInternetHolder && item is GalleryItem.NoInternet -> {
-				holder.bindView(nightMode, listener, loadingImages)
+				holder.bindView(nightMode, controller, loadingImages)
 			}
 			holder is MediaCountHolder && item is GalleryItem.MediaCount -> {
 				holder.bindView(getMediaItemsCount(), nightMode)

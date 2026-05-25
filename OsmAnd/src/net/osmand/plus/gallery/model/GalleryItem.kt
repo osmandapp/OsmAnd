@@ -33,3 +33,8 @@ sealed class GalleryItem {
 data class GalleryAction(
 	val id: String
 )
+
+data class GalleryActionButton(
+	val titleId: Int,
+	val action: GalleryAction
+)

@@ -31,7 +31,6 @@ import net.osmand.plus.chooseplan.ChoosePlanFragment
 import net.osmand.plus.chooseplan.OsmAndFeature
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents
 import net.osmand.plus.download.DownloadValidationManager
-import net.osmand.plus.gallery.controller.GalleryController
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.astronomy.AstroArticle
 import net.osmand.plus.plugins.astronomy.AstronomyPlugin
@@ -54,7 +53,6 @@ import kotlin.math.roundToInt
 
 class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 
-	private var galleryController: GalleryController? = null
 	private var galleryLoader: AstroGalleryLoader? = null
 
 	private var skyObject: SkyObject? = null
@@ -149,22 +147,10 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-
-		val dialogManager = app.dialogManager
-		galleryController =
-			dialogManager.findController(GalleryController.PROCESS_ID) as GalleryController?
-		if (galleryController == null) {
-			dialogManager.register(GalleryController.PROCESS_ID, GalleryController(app))
-			galleryController =
-				dialogManager.findController(GalleryController.PROCESS_ID) as GalleryController?
-		}
-		galleryController?.let { controller ->
-			galleryLoader = AstroGalleryLoader(
-				app = app,
-				galleryController = controller,
-				onStateChanged = ::onGalleryStateChanged
-			)
-		}
+		galleryLoader = AstroGalleryLoader(
+			app = app,
+			onStateChanged = ::onGalleryStateChanged
+		)
 	}
 
 	override fun onCreateView(
@@ -642,7 +628,6 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 			app,
 			requireMapActivity(),
 			nightMode,
-			galleryController,
 			onDescriptionRead = { item ->
 				openDescriptionCard(item)
 			},
