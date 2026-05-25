@@ -1468,6 +1468,13 @@ public class RouteResultPreparation {
 		if (leftOrRightKeep) {
 			setActiveLanesRange(rawLanes, activeBeginIndex, activeEndIndex, activeTurn);
 			int tp = inferSlightTurnFromActiveLanes(rawLanes, rs.keepLeft, rs.keepRight);
+
+			double deviation = MapUtils.degreesDiff(prevSegm.getBearingEnd(), currentSegm.getBearingBegin());
+			boolean forceGoAhead = shouldPreferStraightOverInferredTurn(rawLanes, tp, deviation);
+			if (forceGoAhead) {
+				tp = TurnType.C;
+			}
+
 			// Checking to see that there is only one unique turn
 			if (tp != 0) {
 				// add extra lanes with same turn
@@ -1482,7 +1489,7 @@ public class RouteResultPreparation {
 			}
 			if (tp != t.getValue() && tp != 0) {
 				t = TurnType.valueOf(tp, leftSide);
-			} else {
+			} else if (!forceGoAhead) {
 				//use keepRight and keepLeft turns when attached road doesn't have lanes
 				//or prev segment has more then 1 turn to the active lane
 				if (rs.keepRight && !rs.keepLeft) {
@@ -1499,6 +1506,27 @@ public class RouteResultPreparation {
 		t.setPossibleLeftTurn(possiblyLeftTurn);
 		t.setPossibleRightTurn(possiblyRightTurn);
 		return t;
+	}
+
+	private boolean shouldPreferStraightOverInferredTurn(int[] lanes, int inferredTurn, double deviation) {
+		if (inferredTurn == 0 || inferredTurn == TurnType.C) {
+			return false;
+		}
+		if (TurnType.isSlightTurn(inferredTurn) || TurnType.isKeepDirectionTurn(inferredTurn)) {
+			return false;
+		}
+		if (Math.abs(deviation) >= TURN_SLIGHT_DEGREE) {
+			return false;
+		}
+		return hasActiveLaneWithTurn(lanes, TurnType.C);
+	}
+	private boolean hasActiveLaneWithTurn(int[] lanes, int turnType) {
+		for (int lane : lanes) {
+			if ((lane & 1) == 1 && TurnType.hasAnyTurnLane(lane, turnType)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private void setActiveLanesRange(int[] rawLanes, int activeBeginIndex, int activeEndIndex, int activeTurn) {
