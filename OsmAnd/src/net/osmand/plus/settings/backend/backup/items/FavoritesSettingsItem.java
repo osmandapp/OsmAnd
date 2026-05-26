@@ -182,12 +182,6 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 				for (FavouritePoint point : group.getPoints()) {
 					favoritesHelper.addFavourite(point, pointsGroup, new AddFavoriteOptions());
 				}
-				FavoriteGroup existing = favoritesHelper.getGroup(group.getName());
-				if (existing == null) {
-					existing = favoritesHelper.addFavoriteGroup(group.getName(), group.getColor(), group.getIconName(), group.getBackgroundType());
-				}
-				existing.setPinned(group.isPinned());
-				existing.setVisible(group.isVisible());
 			}
 			favoritesHelper.sortAll();
 			favoritesHelper.saveCurrentPointsIntoFile(false);
