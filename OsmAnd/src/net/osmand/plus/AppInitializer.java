@@ -257,7 +257,7 @@ public class AppInitializer implements IProgress {
 				InputStream stream = OsmandRegions.class.getResourceAsStream("regions.ocbf");
 				Algorithms.streamCopy(stream, new FileOutputStream(file));
 			}
-			app.regions = new OsmandRegions(file.getAbsolutePath());
+			app.regions.prepareFile(file.getAbsolutePath());
 			app.regions.setTranslator(new RegionTranslation() {
 
 				@Override
@@ -347,7 +347,6 @@ public class AppInitializer implements IProgress {
 		app.favoritesHelper = startupInit(new FavouritesHelper(app), FavouritesHelper.class);
 		app.waypointHelper = startupInit(new WaypointHelper(app), WaypointHelper.class);
 		app.aidlApi = startupInit(new OsmandAidlApi(app), OsmandAidlApi.class);
-		app.regions = startupInit(new OsmandRegions(false), OsmandRegions.class);
 		app.poiFilters = startupInit(new PoiFiltersHelper(app), PoiFiltersHelper.class);
 		app.rendererRegistry = startupInit(new RendererRegistry(app), RendererRegistry.class);
 		app.geocodingLookupService = startupInit(new GeocodingLookupService(app), GeocodingLookupService.class);

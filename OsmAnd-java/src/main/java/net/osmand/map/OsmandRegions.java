@@ -34,6 +34,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.concurrent.ConcurrentHashMap;
 
 import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.list.array.TIntArrayList;
@@ -67,9 +68,9 @@ public class OsmandRegions {
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmandRegions.class);
 
 	WorldRegion worldRegion = new WorldRegion(WorldRegion.WORLD);
-	Map<String, WorldRegion> fullNamesToRegionData = new HashMap<>();
-	Map<String, String> downloadNamesToFullNames = new HashMap<>();
-	Map<String, LinkedList<BinaryMapDataObject>> countriesByDownloadName = new HashMap<>();
+	Map<String, WorldRegion> fullNamesToRegionData = new ConcurrentHashMap<>();
+	Map<String, String> downloadNamesToFullNames = new ConcurrentHashMap<>();
+	Map<String, LinkedList<BinaryMapDataObject>> countriesByDownloadName = new ConcurrentHashMap<>();
 
 
 	QuadTree<String> quadTree;
@@ -111,7 +112,6 @@ public class OsmandRegions {
 		} else {
 			prepareFile(fileName);
 		}
-		this.isInit = true;
 	}
 
 	public boolean isInitialized() {
@@ -122,7 +122,7 @@ public class OsmandRegions {
 		this.translator = translator;
 	}
 
-	private BinaryMapIndexReader prepareFile() throws IOException {
+	public BinaryMapIndexReader prepareFile() throws IOException {
 		File regions = new File(REGIONS_OCBF);
 		InputStream is = OsmandRegions.class.getResourceAsStream(REGIONS_OCBF);
 		// internal version could be updated
@@ -134,7 +134,7 @@ public class OsmandRegions {
 		return prepareFile(regions.getAbsolutePath());
 	}
 
-	private BinaryMapIndexReader prepareFile(String fileName) throws IOException {
+	public BinaryMapIndexReader prepareFile(String fileName) throws IOException {
 		reader = new BinaryMapIndexReader(new RandomAccessFile(fileName, "r"), new File(fileName));
 //		final Collator clt = OsmAndCollator.primaryCollator();
 		final Map<String, String> parentRelations = new LinkedHashMap<>();
@@ -197,6 +197,7 @@ public class OsmandRegions {
 			}
 		};
 		iterateOverAllObjects(resultMatcher);
+		Map<String, WorldRegion> fullNamesToRegionData = new HashMap<>();
 		// post process download names
 		for (Map.Entry<String, String> e : parentRelations.entrySet()) {
 			String fullName = e.getKey();
@@ -209,6 +210,7 @@ public class OsmandRegions {
 			}
 		}
 		structureWorldRegions(new ArrayList<>(fullNamesToRegionData.values()));
+		this.isInit = true;
 		return reader;
 	}
 
