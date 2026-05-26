@@ -68,9 +68,9 @@ public class OsmandRegions {
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmandRegions.class);
 
 	WorldRegion worldRegion = new WorldRegion(WorldRegion.WORLD);
-	Map<String, WorldRegion> fullNamesToRegionData = new ConcurrentHashMap<>();
-	Map<String, String> downloadNamesToFullNames = new ConcurrentHashMap<>();
-	Map<String, LinkedList<BinaryMapDataObject>> countriesByDownloadName = new ConcurrentHashMap<>();
+	Map<String, WorldRegion> fullNamesToRegionData = new HashMap<>();
+	Map<String, String> downloadNamesToFullNames = new HashMap<>();
+	Map<String, LinkedList<BinaryMapDataObject>> countriesByDownloadName = new HashMap<>();
 
 
 	QuadTree<String> quadTree;
