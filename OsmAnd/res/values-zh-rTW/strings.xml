@@ -5975,4 +5975,10 @@
     <string name="astro_designations">指定</string>
     <string name="astronomy_map">天文圖</string>
     <string name="obd_simulation_device">模擬裝置</string>
+    <string name="favorite_confirm_delete_folder">這將刪除資料夾「%1$s」，包括其中的子資料夾以及 %2$d 個收藏點。</string>
+    <string name="favorite_folder_rename_conflict">已經存在一個同名的資料夾。</string>
+    <string name="favorite_folder_invalid_name">資料夾名稱不能包含 / 或 _%_</string>
+    <string name="favorite_folder_duplicate_message">請使用一個尚不存在的資料夾名稱。</string>
+    <string name="favorite_folder_name">資料夾名稱</string>
+    <string name="edit_folder">編輯資料夾</string>
 </resources>
