@@ -124,13 +124,13 @@ public class OsmandRegions {
 
 	private BinaryMapIndexReader prepareFile() throws IOException {
 		File regions = new File(REGIONS_OCBF);
+		InputStream is = OsmandRegions.class.getResourceAsStream(REGIONS_OCBF);
 		// internal version could be updated
-//		if (!regions.exists()) {
-			InputStream is = OsmandRegions.class.getResourceAsStream(REGIONS_OCBF);
+		if (!regions.exists() || is.available() != regions.length()) {
 			FileOutputStream fous = new FileOutputStream(regions);
 			Algorithms.streamCopy(is, fous);
 			fous.close();
-//		}
+		}
 		return prepareFile(regions.getAbsolutePath());
 	}
 
