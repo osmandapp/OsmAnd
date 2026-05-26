@@ -54,8 +54,6 @@ public class RouteResultPreparation {
 	
 	protected static final Log LOG = PlatformUtil.getLog(RouteResultPreparation.class);
 	public static final String UNMATCHED_HIGHWAY_TYPE = "unmatched";
-
-	private static final int ACTIVE_LANE_MASK = 1;
 	
 	private static class CombineAreaRoutePoint {
 		int x31;
@@ -1072,7 +1070,7 @@ public class RouteResultPreparation {
 						tt.getLanes()[it] = turn & (~1);
 					}
 				} else {
-					tt.getLanes()[it] = turn | ACTIVE_LANE_MASK;
+					tt.getLanes()[it] = turn | 1;
 				}
 			}
 		}
@@ -1188,7 +1186,7 @@ public class RouteResultPreparation {
 		for (int i = 0; i < active.disabledLanes.length; i++) {
 			if (i >= active.activeStartIndex && i <= active.activeEndIndex && 
 					active.originalLanes[i] % 2 == 1) {
-				active.disabledLanes[i] |= ACTIVE_LANE_MASK;
+				active.disabledLanes[i] |= 1;
 			}
 		}
 		TurnType currentTurn = currentSegment.getTurnType();
@@ -1390,7 +1388,7 @@ public class RouteResultPreparation {
 				for (int k = startIndex; k <= endIndex; k++) {
 					int[] oneActiveLane = {lanesArray[k]};
 					if (hasAllowedLanes(mainTurnType, oneActiveLane, 0, 0)) {
-						lanesArray[k] |= ACTIVE_LANE_MASK;
+						lanesArray[k] |= 1;
 					}
 				}
 				isSet = true;
@@ -1407,7 +1405,7 @@ public class RouteResultPreparation {
 		boolean turnSet = false;
 		for (int i = 0; i < lanesArray.length; i++) {
 			if (TurnType.getPrimaryTurn(lanesArray[i]) == mainTurnType) {
-				lanesArray[i] |= ACTIVE_LANE_MASK;
+				lanesArray[i] |= 1;
 				turnSet = true;
 			}
 		}
@@ -1483,9 +1481,9 @@ public class RouteResultPreparation {
 				for(int i = 0; i < rawLanes.length; i++) {
 					if (TurnType.getSecondaryTurn(rawLanes[i]) == tp) {
 						TurnType.setSecondaryToPrimary(rawLanes, i);
-						rawLanes[i] |= ACTIVE_LANE_MASK;
+						rawLanes[i] |= 1;
 					} else if(TurnType.getPrimaryTurn(rawLanes[i]) == tp) {
-						rawLanes[i] |= ACTIVE_LANE_MASK;
+						rawLanes[i] |= 1;
 					}
 				}
 			}
@@ -1524,9 +1522,7 @@ public class RouteResultPreparation {
 	}
 	private boolean hasActiveLaneWithTurn(int[] lanes, int turnType) {
 		for (int lane : lanes) {
-			boolean isActiveLane = (lane & ACTIVE_LANE_MASK) == ACTIVE_LANE_MASK;
-			boolean hasRequestedTurn = TurnType.hasAnyTurnLane(lane, turnType);
-			if (isActiveLane && hasRequestedTurn) {
+			if ((lane & 1) == 1 && TurnType.hasAnyTurnLane(lane, turnType)) {
 				return true;
 			}
 		}
@@ -1537,7 +1533,7 @@ public class RouteResultPreparation {
 		Set<Integer> possibleTurns = new TreeSet<>();
 		Set<Integer> upossibleTurns = new TreeSet<>();
 		for (int k = activeBeginIndex; k < rawLanes.length && k <= activeEndIndex; k++) {
-			rawLanes[k] |= ACTIVE_LANE_MASK;
+			rawLanes[k] |= 1;
 			upossibleTurns.clear();
 			upossibleTurns.add(TurnType.getPrimaryTurn(rawLanes[k]));
 			if (TurnType.getSecondaryTurn(rawLanes[k]) != 0) {
@@ -1900,7 +1896,7 @@ public class RouteResultPreparation {
 				}
 			}
 		}
-		lanes[0] |= ACTIVE_LANE_MASK;
+		lanes[0] |= 1;
 		return lanes;
 	}
 
