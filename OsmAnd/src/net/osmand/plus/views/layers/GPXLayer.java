@@ -111,7 +111,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private static final int START_ZOOM = 7;
 	private static final int MAX_SUPPORTED_TRACK_WIDTH_DP = 48;
 	private static final long MANY_POINTS_VISIBLE_WARNING_THRESHOLD = 500_000L;
-	public static final int INVALID_EXTRA_ID = -1;
+	private static final int INVALID_EXTRA_ID = -1;
 	private static final int SPLIT_LABEL_EXTRA_ID_START = 1_000_000_000;
 
 	private Paint paint;
@@ -762,7 +762,12 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		}
 	}
 
-	public boolean collectSplitLabelByExtraId(int extraId, @NonNull MapSelectionResult result) {
+	@Override
+	public boolean collectMapSymbolByExtraId(int extraId, @NonNull MapSelectionResult result) {
+		return extraId != INVALID_EXTRA_ID && collectSplitLabelByExtraId(extraId, result);
+	}
+
+	private boolean collectSplitLabelByExtraId(int extraId, @NonNull MapSelectionResult result) {
 		SelectedGpxPoint gpxPoint = splitLabelPointsByExtraId.get(extraId);
 		if (gpxPoint == null) {
 			return false;
@@ -773,8 +778,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	private int registerSplitLabel(@NonNull SelectedGpxFile selectedGpxFile, @NonNull GpxDisplayItem item) {
 		int extraId = nextSplitLabelExtraId++;
-		splitLabelPointsByExtraId.put(extraId,
-				new SelectedGpxPoint(selectedGpxFile, item.getLabelPoint(), null, null, Float.NaN, true));
+		splitLabelPointsByExtraId.put(extraId, SelectedGpxPoint.createSplitLabel(selectedGpxFile, item.getLabelPoint()));
 		return extraId;
 	}
 
@@ -786,12 +790,13 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		}
 		removeCollectedGpxTrackPoints(result);
 		result.collect(gpxPoint, this);
-		result.setObjectLatLon(getObjectLocation(gpxPoint));
 	}
 
 	private void removeCollectedGpxTrackPoints(@NonNull MapSelectionResult result) {
 		result.getAllObjects().removeIf(selectedObject ->
-				selectedObject.provider() == this && selectedObject.object() instanceof SelectedGpxPoint);
+				selectedObject.provider() == this
+						&& selectedObject.object() instanceof SelectedGpxPoint gpxPoint
+						&& !gpxPoint.isSplitLabel());
 	}
 
 	@Nullable

@@ -140,6 +140,7 @@ public class SelectedGpxMenuController extends MenuController {
 		private final WptPt nextPoint;
 		private final float bearing;
 		private final boolean showTrackPointMenu;
+		private final boolean splitLabel;
 
 		public SelectedGpxPoint(@Nullable SelectedGpxFile selectedGpxFile, WptPt selectedPoint) {
 			this(selectedGpxFile, selectedPoint, null, null, Float.NaN, false);
@@ -147,12 +148,24 @@ public class SelectedGpxMenuController extends MenuController {
 
 		public SelectedGpxPoint(@Nullable SelectedGpxFile selectedGpxFile, WptPt selectedPoint, WptPt prevPoint,
 		                        WptPt nextPoint, float bearing, boolean showTrackPointMenu) {
+			this(selectedGpxFile, selectedPoint, prevPoint, nextPoint, bearing, showTrackPointMenu, false);
+		}
+
+		public SelectedGpxPoint(@Nullable SelectedGpxFile selectedGpxFile, WptPt selectedPoint, WptPt prevPoint,
+		                        WptPt nextPoint, float bearing, boolean showTrackPointMenu, boolean splitLabel) {
 			this.prevPoint = prevPoint;
 			this.nextPoint = nextPoint;
 			this.selectedPoint = selectedPoint;
 			this.selectedGpxFile = selectedGpxFile;
 			this.bearing = bearing;
 			this.showTrackPointMenu = showTrackPointMenu;
+			this.splitLabel = splitLabel;
+		}
+
+		@NonNull
+		public static SelectedGpxPoint createSplitLabel(@NonNull SelectedGpxFile selectedGpxFile,
+		                                                @NonNull WptPt selectedPoint) {
+			return new SelectedGpxPoint(selectedGpxFile, selectedPoint, null, null, Float.NaN, true, true);
 		}
 
 		@Nullable
@@ -178,6 +191,10 @@ public class SelectedGpxMenuController extends MenuController {
 
 		public boolean shouldShowTrackPointMenu() {
 			return showTrackPointMenu;
+		}
+
+		public boolean isSplitLabel() {
+			return splitLabel;
 		}
 	}
 }

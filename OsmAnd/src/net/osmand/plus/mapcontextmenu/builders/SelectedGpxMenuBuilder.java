@@ -184,7 +184,7 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 		SelectedGpxFile selectedGpxFile = selectedGpxPoint.getSelectedGpxFile();
 		if (trackGroup == null || selectedGpxFile == null) return null;
 
-		if (isSplitLabelSelection()) {
+		if (selectedGpxPoint.isSplitLabel()) {
 			GpxDisplayItem labelItem = findSplitLabelItem(trackGroup);
 			if (labelItem != null) {
 				return labelItem;
@@ -209,10 +209,6 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 			}
 		}
 		return null;
-	}
-
-	private boolean isSplitLabelSelection() {
-		return selectedGpxPoint.getPrevPoint() == null && selectedGpxPoint.getNextPoint() == null;
 	}
 
 	@Nullable
