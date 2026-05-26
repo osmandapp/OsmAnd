@@ -4,6 +4,9 @@ import java.text.Normalizer;
 import java.util.*;
 import java.util.function.Function;
 
+import net.osmand.binary.Abbreviations;
+import net.osmand.binary.CommonWords;
+
 /**
  * Basic algorithms that are used in Search
  */
@@ -353,4 +356,27 @@ public class SearchAlgorithms {
         }
         return fullText;
     }
+
+	public static void removeCommonWords(List<String> names) {
+		// remove all common words (most common delete first) but leave at least 1
+		int pos = 0;
+		while (names.size() > 1 && pos != -1) {
+			int prioP = Integer.MAX_VALUE;
+			pos = -1;
+			for (int k = 0; k < names.size(); k++) {
+				String word = names.get(k);
+				int prio = CommonWords.getCommon(word);
+				if (Abbreviations.isConjunction(word)) {
+					prio = 0;
+				}
+				if (prio != -1 && prio < prioP) {
+					pos = k;
+					prioP = prio;
+				}
+			}
+			if (pos != -1) {
+				names.remove(pos);
+			}
+		}
+	}
 }

@@ -256,6 +256,13 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 						}
 						group.getPoints().add(point);
 					}
+					for (Map.Entry<String, PointsGroup> entry : gpxFile.getPointsGroups().entrySet()) {
+						if (!flatGroups.containsKey(entry.getKey())) {
+							FavoriteGroup group = FavoriteGroup.fromPointsGroup(entry.getValue());
+							flatGroups.put(entry.getKey(), group);
+							items.add(group);
+						}
+					}
 				}
 				return null;
 			}
@@ -270,6 +277,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 					favoriteGroup.setIconName(pointsGroup.getIconName());
 					favoriteGroup.setBackgroundType(BackgroundType.getByTypeName(pointsGroup.getBackgroundType(), DEFAULT_BACKGROUND_TYPE));
 					favoriteGroup.setVisible(!pointsGroup.isHidden());
+					favoriteGroup.setPinned(Boolean.TRUE.equals(pointsGroup.isPinned()));
 				}
 				return favoriteGroup;
 			}

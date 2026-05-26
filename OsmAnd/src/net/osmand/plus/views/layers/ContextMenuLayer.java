@@ -1025,6 +1025,10 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 
 		void collectObjectsFromPoint(@NonNull MapSelectionResult result, @NonNull MapSelectionRules rules);
 
+		default boolean collectMapSymbolByExtraId(int extraId, @NonNull MapSelectionResult result) {
+			return false;
+		}
+
 		LatLon getObjectLocation(Object o);
 
 		PointDescription getObjectName(Object o);

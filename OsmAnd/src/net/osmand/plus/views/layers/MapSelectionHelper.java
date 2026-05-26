@@ -150,6 +150,19 @@ public class MapSelectionHelper {
 		}
 	}
 
+	private boolean collectMapSymbolByExtraId(@NonNull MapSelectionResult result,
+	                                          @NonNull IBillboardMapSymbol billboardMapSymbol,
+	                                          @NonNull LatLon objectLatLon) {
+		int extraId = billboardMapSymbol.getExtraId();
+		for (OsmandMapLayer layer : view.getLayers()) {
+			if (layer instanceof IContextMenuProvider provider && provider.collectMapSymbolByExtraId(extraId, result)) {
+				result.setObjectLatLon(objectLatLon);
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public void acquireTouchedMapObjects(@NonNull RotatedTileBox tileBox,
 	                                     @NonNull PointF point, boolean unknownLocation) {
 		MapSelectionRules rules = new MapSelectionRules();
@@ -309,6 +322,9 @@ public class MapSelectionHelper {
 				IBillboardMapSymbol billboardMapSymbol = getBillboardMapSymbol(mapSymbol);
 				if (billboardMapSymbol != null) {
 					objectLatLon = fetchBillboardSymbolLatLon(symbolInfo, billboardMapSymbol);
+					if (collectMapSymbolByExtraId(result, billboardMapSymbol, objectLatLon)) {
+						continue;
+					}
 					jniAmenity = getJniAmenity(mapSymbol);
 				} else {
 					LatLon clickLatLon = NativeUtilities.getLatLonFromElevatedPixel(rendererView, tileBox, point);

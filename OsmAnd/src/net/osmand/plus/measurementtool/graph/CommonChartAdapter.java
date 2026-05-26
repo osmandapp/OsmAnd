@@ -8,6 +8,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.ElevationChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -195,7 +196,28 @@ public class CommonChartAdapter extends BaseChartAdapter<ElevationChart, LineDat
 
 	@Override
 	public void highlight(Highlight h) {
-		super.highlight(h);
+		highlight(h, null);
+	}
+
+	@Override
+	public void highlight(Highlight h, @Nullable Chart sourceChart) {
+		highlight(h, sourceChart, h != null ? ChartAdapterHelper.getHighlightValueByTouchX(chart, h.getXPx()) : 0);
+	}
+
+	@Override
+	public void highlight(Highlight h, @Nullable Chart sourceChart, float value) {
+		super.highlight(h, sourceChart, value);
+		if (h == null) {
+			highlight = null;
+			chart.highlightValue(null);
+			return;
+		}
+		if (sourceChart != null && isHighlightByValueFromTouchX()) {
+			float x = ChartAdapterHelper.getHighlightTouchXByValue(chart, value);
+			highlight = chart.getHighlightByTouchPoint(x, 0f);
+		} else {
+			highlight = h;
+		}
 		chart.highlightValue(highlight);
 	}
 

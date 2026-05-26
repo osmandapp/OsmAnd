@@ -31,7 +31,7 @@ public class MissingMapsCalculator {
 	public static final double DISTANCE_SPLIT = 15000;
 	public static final double DISTANCE_SKIP = 10000;
 	private OsmandRegions or;
-	private BinaryMapIndexReader reader;
+	private boolean orClose = false;
 	private List<String> lastKeyNames ;
 
 	private static class Point {
@@ -50,8 +50,9 @@ public class MissingMapsCalculator {
 
 	public MissingMapsCalculator() throws IOException {
 		// could be cached
-		or = new OsmandRegions();
-		reader = or.prepareFile();
+		or = new OsmandRegions(null);
+		orClose = true;
+		
 	}
 
 	public MissingMapsCalculator(OsmandRegions osmandRegions) {
@@ -286,8 +287,8 @@ public class MissingMapsCalculator {
 	}
 
 	public void close() throws IOException {
-		if (reader != null) {
-			reader.close();
+		if (orClose) {
+			or.close();
 		}
 	}
 

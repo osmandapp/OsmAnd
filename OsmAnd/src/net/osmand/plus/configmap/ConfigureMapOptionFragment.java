@@ -54,7 +54,7 @@ public abstract class ConfigureMapOptionFragment extends BaseFullScreenFragment 
 	@Override
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
-		boolean portrait = AndroidUiHelper.isOrientationPortrait(requireMapActivity());
+		boolean portrait = AndroidUiHelper.isPortrait(requireMapActivity());
 		return portrait ? ColorUtilities.getListBgColorId(nightMode) : R.color.status_bar_transparent_light;
 	}
 
@@ -146,11 +146,12 @@ public abstract class ConfigureMapOptionFragment extends BaseFullScreenFragment 
 
 	private void setupBackgroundShadow(@NonNull View view) {
 		MapActivity activity = requireMapActivity();
-		if (!AndroidUiHelper.isOrientationPortrait(activity)) {
+		View mainView = view.findViewById(R.id.main_view);
+		if (mainView != null && !AndroidUiHelper.isPortrait(activity)) {
 			TypedValue typedValueAttr = new TypedValue();
 			int bgAttrId = AndroidUtils.isLayoutRtl(activity) ? R.attr.right_menu_view_bg : R.attr.left_menu_view_bg;
 			activity.getTheme().resolveAttribute(bgAttrId, typedValueAttr, true);
-			view.findViewById(R.id.main_view).setBackgroundResource(typedValueAttr.resourceId);
+			mainView.setBackgroundResource(typedValueAttr.resourceId);
 		}
 	}
 
