@@ -197,7 +197,6 @@ public class OsmandRegions {
 			}
 		};
 		iterateOverAllObjects(resultMatcher);
-		Map<String, WorldRegion> fullNamesToRegionData = new HashMap<>();
 		// post process download names
 		for (Map.Entry<String, String> e : parentRelations.entrySet()) {
 			String fullName = e.getKey();
