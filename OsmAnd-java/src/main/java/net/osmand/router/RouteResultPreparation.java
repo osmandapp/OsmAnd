@@ -1520,6 +1520,7 @@ public class RouteResultPreparation {
 		}
 		return hasActiveLaneWithTurn(lanes, TurnType.C);
 	}
+	
 	private boolean hasActiveLaneWithTurn(int[] lanes, int turnType) {
 		for (int lane : lanes) {
 			boolean isActiveLane = (lane & 1) == 1;
