@@ -34,17 +34,9 @@ public class PlatformUtil {
 
 	public static OsmandRegions getOsmandRegions() throws IOException {
 		if (osmandRegions == null) {
-			osmandRegions = new OsmandRegions();
-			osmandRegions.prepareFile();
+			osmandRegions = new OsmandRegions(null);
 		}
 		return osmandRegions;
-	}
-
-	public static void initOsmandRegionsAsTempFile() throws IOException {
-		if (osmandRegions == null) {
-			osmandRegions = new OsmandRegions();
-			osmandRegions.prepareRegionsFromResourcesAsTempFile();
-		}
 	}
 
 	public static XmlPullParser newXMLPullParser() throws XmlPullParserException{
