@@ -184,6 +184,13 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 		SelectedGpxFile selectedGpxFile = selectedGpxPoint.getSelectedGpxFile();
 		if (trackGroup == null || selectedGpxFile == null) return null;
 
+		if (selectedGpxPoint.isSplitLabel()) {
+			GpxDisplayItem labelItem = findSplitLabelItem(trackGroup);
+			if (labelItem != null) {
+				return labelItem;
+			}
+		}
+
 		WptPt refPoint = selectedGpxPoint.getPrevPoint();
 		if (refPoint == null) refPoint = selectedGpxPoint.getNextPoint();
 		if (refPoint == null) refPoint = selectedPoint;
@@ -199,6 +206,16 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 				if (startIdx != -1 && endIdx != -1 && currentIndex >= startIdx && currentIndex < endIdx) {
 					return item;
 				}
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	private GpxDisplayItem findSplitLabelItem(@NonNull TrackDisplayGroup trackGroup) {
+		for (GpxDisplayItem item : trackGroup.getDisplayItems()) {
+			if (selectedPoint == item.getLabelPoint()) {
+				return item;
 			}
 		}
 		return null;

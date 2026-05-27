@@ -5144,7 +5144,7 @@
     <string name="getting_list_of_required_maps">Récupération de la liste des cartes requises…</string>
     <string name="required_maps">Cartes requises</string>
     <string name="missing_maps_header">Cartes manquantes ou obsolètes</string>
-    <string name="missing_maps_description">Pour calculer cet itinéraire, certaines cartes hors ligne sont manquantes ou pas à jour. Veuillez télécharger ou mettre à jour ces cartes.</string>
+    <string name="missing_maps_description">Certaines cartes hors ligne nécessaires pour cet itinéraire sont manquantes ou ne sont pas à jour. Veuillez télécharger ou mettre à jour ces cartes.</string>
     <string name="shared_string_osm_id">ID OSM</string>
     <string name="route_line_use_coloring_altitude">La ligne d\'itinéraire est colorée selon l\'altitude.</string>
     <string name="delete_actions_button_confirmation">Êtes-vous certain de vouloir supprimer « %1$s » avec toutes les actions ajoutées ?</string>
@@ -5686,8 +5686,8 @@
     <string name="reverse_mode">Mode inversé</string>
     <string name="n_a">N/A</string>
     <string name="altitude_metrics_description">Définit l\'unité d\'affichage de l\'altitude dans les widgets et les statistiques.</string>
-    <string name="write_location_provider_description">Enregistrer le fournisseur de localisation pour chaque point de suivi pendant l\'enregistrement</string>
-    <string name="write_location_provider">Écrire le fournisseur d\'emplacement</string>
+    <string name="write_location_provider_description">Stocker le fournisseur de position de chaque point de la trace lors de l\'enregistrement</string>
+    <string name="write_location_provider">Écrire le fournisseur de position</string>
     <string name="average_elevation">Altitude moyenne</string>
     <string name="ascent">Montée</string>
     <string name="descent">Descente</string>
@@ -5921,21 +5921,21 @@
         <item quantity="many">%d traces</item>
         <item quantity="other">%d traces</item>
     </plurals>
-    <string name="gradient_no_data_point_summary">Couleur lorsqu\'il n\'y a aucune donnée.</string>
+    <string name="gradient_no_data_point_summary">Couleur utilisée lorsque des données sont manquantes ou indéfinies.</string>
     <string name="gradient_input_value_too_low_warn">La valeur minimale autorisée est : %1$s.</string>
     <string name="gradient_input_value_too_high_warn">La valeur maximale autorisée est : %1$s.</string>
     <string name="gradient_input_value_duplicate_warn">Cette valeur existe déjà dans la palette.</string>
     <string name="gradient_input_invalid_value_warn">Veuillez saisir un nombre valide.</string>
     <string name="value_cannot_be_edited_warn">Cette valeur ne peut pas être modifiée.</string>
-    <string name="unexpected_error_occurred_warn">Une erreur est survenue.</string>
-    <string name="relative_gradient_point_m_summary">Couleur pour la valeur maximale de la trace.</string>
-    <string name="relative_gradient_point_avg_summary">Couleur pour la valeur moyenne de la trace.</string>
-    <string name="relative_gradient_point_min_summary">Couleur pour la valeur minimale de la trace.</string>
+    <string name="unexpected_error_occurred_warn">Une erreur inattendue s\'est produite.</string>
+    <string name="relative_gradient_point_m_summary">Couleur de la valeur maximale présente dans la trace.</string>
+    <string name="relative_gradient_point_avg_summary">Couleur de la valeur moyenne de la trace.</string>
+    <string name="relative_gradient_point_min_summary">Couleur de la valeur minimale présente dans la trace.</string>
     <string name="shared_string_maximum">Maximum</string>
     <string name="shared_string_minimum">Minimum</string>
-    <string name="shared_string_ratio">proportion</string>
+    <string name="shared_string_ratio">ratio</string>
     <string name="shared_string_percentage">pourcentage</string>
-    <string name="remove_step">Retirer l\'étape</string>
+    <string name="remove_step">Supprimer cette étape</string>
     <string name="shared_string_value">Valeur</string>
     <string name="gradient_range_type_fixed">Valeurs fixes</string>
     <string name="gradient_range_type_relative">Relatif</string>
@@ -5943,8 +5943,8 @@
     <string name="add_palette">Ajouter une palette</string>
     <string name="delete_palette">Supprimer la palette</string>
     <string name="delete_colors_palette_dialog_summary">Êtes-vous certain de vouloir supprimer la palette %1$s ?</string>
-    <string name="gradient_range_type_fixed_summary">Les couleurs sont attribuées selon des valeurs précises (par exemple : 50 km/h).</string>
-    <string name="gradient_range_type_relative_summary">Les couleurs sont attribuées automatiquement selon l\'entendue des valeurs de la trace.</string>
+    <string name="gradient_range_type_fixed_summary">Les couleurs correspondent à des vitesses absolues précises (par exemple, 50 km/h).</string>
+    <string name="gradient_range_type_relative_summary">Les couleurs s\'adaptent automatiquement aux valeurs minimale et maximale de la trace.</string>
     <string name="shared_string_trip_average">Moyenne du trajet</string>
     <string name="trip_recording_avg_speed_widget_description">Affiche la vitesse moyenne du trajet actuel ou la vitesse moyenne de la dernière ascension ou descente.</string>
     <string name="trip_recording_moving_time_widget_description">Affiche la durée de déplacement actuellement enregistrée ou la durée de la dernière ascension et descente.</string>
@@ -6059,4 +6059,10 @@
     <string name="astro_designations">Désignations</string>
     <string name="astronomy_map">Carte astronomique</string>
     <string name="obd_simulation_device">Dispositif de simulation</string>
+    <string name="favorite_confirm_delete_folder">Cette opération supprimera le dossier « %1$s », y compris les dossiers qu\'il contient et %2$d favoris.</string>
+    <string name="favorite_folder_rename_conflict">Un dossier portant ce nom existe déjà.</string>
+    <string name="favorite_folder_invalid_name">Le nom du dossier ne peut pas contenir de / ou de _%_</string>
+    <string name="favorite_folder_duplicate_message">Renseignez un nom de dossier qui n\'existe pas encore.</string>
+    <string name="favorite_folder_name">Nom du dossier</string>
+    <string name="edit_folder">Modifier le dossier</string>
 </resources>

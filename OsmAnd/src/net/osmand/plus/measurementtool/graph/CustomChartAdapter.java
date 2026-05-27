@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.graphics.ColorUtils;
 
+import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.Entry;
@@ -88,10 +89,23 @@ public class CustomChartAdapter extends BaseChartAdapter<HorizontalBarChart, Bar
 	}
 
 	public void highlight(Highlight h) {
-		super.highlight(h);
-		Highlight bh = h != null ? chart.getHighlighter().getHighlight(1, h.getXPx()) : null;
+		highlight(h, null);
+	}
+
+	@Override
+	public void highlight(Highlight h, @Nullable Chart sourceChart) {
+		highlight(h, sourceChart, h != null ? ChartAdapterHelper.getHighlightValueByTouchX(chart, h.getXPx()) : 0);
+	}
+
+	@Override
+	public void highlight(Highlight h, @Nullable Chart sourceChart, float value) {
+		super.highlight(h, sourceChart, value);
+		float x = h != null && sourceChart != null && isHighlightByValueFromTouchX()
+				? ChartAdapterHelper.getHighlightTouchXByValue(chart, value)
+				: h != null ? h.getXPx() : 0;
+		Highlight bh = h != null ? chart.getHighlighter().getHighlight(1, x) : null;
 		if (bh != null) {
-			bh.setDraw(h.getXPx(), 0);
+			bh.setDraw(x, 0);
 		}
 		chart.highlightValue(bh, true);
 	}

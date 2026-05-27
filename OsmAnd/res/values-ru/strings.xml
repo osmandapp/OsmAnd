@@ -5190,8 +5190,8 @@
     <string name="route_line_use_coloring_altitude">Линия маршрута окрашена в зависимости от высоты над уровнем моря.</string>
     <string name="required_maps_calculate_online_summary">Список недостающих карт составлен на основе прямолинейного маршрута. Чтобы получить точный список карт, OsmAnd может предварительно рассчитать ваш маршрут онлайн.</string>
     <string name="required_maps">Требуемые карты</string>
-    <string name="missing_maps_description">Некоторые локальные карты, необходимые для этого маршрута, отсутствуют или устарели. Пожалуйста, скачайте или обновите эти карты.</string>
-    <string name="missing_maps_header">Отсутствующие или устаревшие карты</string>
+    <string name="missing_maps_description">Некоторые офлайн-карты, необходимые для этого маршрута, отсутствуют или устарели. Пожалуйста, скачайте или обновите эти карты.</string>
+    <string name="missing_maps_header">Карты отсутствуют или устарели</string>
     <string name="route_line_use_coloring_speed">Линия маршрута окрашена в зависимости от скорости движения.</string>
     <string name="visualized_by">Визуализация</string>
     <string name="wall_color">Цвет стены</string>
@@ -5689,7 +5689,7 @@
     <string name="add_to_favorites">Добавить в избранное</string>
     <string name="max_weight_at_full_load_description">Укажите максимальный вес вашего автомобиля при полной загрузке, чтобы избежать дорог и мостов с ограничениями по весу.</string>
     <string name="max_axle_load_description">Укажите максимальную нагрузку на ось вашего автомобиля, чтобы избежать дорог и мостов с ограничениями по весу.</string>
-    <string name="view_on_phone">Просмотреть в телефоне</string>
+    <string name="view_on_phone">Просмотр на телефоне</string>
     <string name="manage_purchases">Управление покупками</string>
     <string name="deleting">Удаление…</string>
     <string name="shared_string_threads">Потоки</string>
@@ -5934,16 +5934,16 @@
         <item quantity="many">%d треков</item>
         <item quantity="other">%d треков</item>
     </plurals>
-    <string name="gradient_no_data_point_summary">Цвет применяется, когда данные отсутствуют или не определены.</string>
+    <string name="gradient_no_data_point_summary">Цвет применяется, если данные отсутствуют или не определены.</string>
     <string name="gradient_input_value_too_low_warn">Минимально допустимое значение %1$s.</string>
     <string name="gradient_input_value_too_high_warn">Максимально допустимое значение %1$s.</string>
-    <string name="gradient_input_value_duplicate_warn">Это значение уже существует в палитре.</string>
-    <string name="gradient_input_invalid_value_warn">Пожалуйста, введите допустимое значение.</string>
-    <string name="value_cannot_be_edited_warn">Это значение невозможно отредактировать.</string>
+    <string name="gradient_input_value_duplicate_warn">Это значение уже есть в палитре.</string>
+    <string name="gradient_input_invalid_value_warn">Пожалуйста, введите корректное число.</string>
+    <string name="value_cannot_be_edited_warn">Это значение нельзя изменить.</string>
     <string name="unexpected_error_occurred_warn">Произошла непредвиденная ошибка.</string>
-    <string name="relative_gradient_point_m_summary">Цвет соответствует максимальному значению, найденному в треке.</string>
-    <string name="relative_gradient_point_avg_summary">Цвет для обозначения среднего значения трека.</string>
-    <string name="relative_gradient_point_min_summary">Цвет соответствует минимальному значению, найденному в треке.</string>
+    <string name="relative_gradient_point_m_summary">Цвет соответствует максимальному значению, найденному на треке.</string>
+    <string name="relative_gradient_point_avg_summary">Цвет соответствует среднему значению на треке.</string>
+    <string name="relative_gradient_point_min_summary">Цвет соответствует минимальному значению на треке.</string>
     <string name="shared_string_maximum">Максимум</string>
     <string name="shared_string_minimum">Минимум</string>
     <string name="shared_string_ratio">соотношение</string>
@@ -5952,8 +5952,8 @@
     <string name="shared_string_value">Значение</string>
     <string name="gradient_range_type_fixed_summary">Цвета соответствуют определенным абсолютным значениям (например, 50 км/ч).</string>
     <string name="gradient_range_type_fixed">Фиксированные значения</string>
-    <string name="gradient_range_type_relative_summary">Цветовая шкала выбирается автоматически, в зависимости от минимального/максимального диапазона трека.</string>
-    <string name="gradient_range_type_relative">Соответствие</string>
+    <string name="gradient_range_type_relative_summary">Цвета на треке автоматически распределяются, в зависимости от минимального и максимального значений.</string>
+    <string name="gradient_range_type_relative">Относительный</string>
     <string name="edit_palette">Редактировать палитру</string>
     <string name="add_palette">Добавить палитру</string>
     <string name="delete_palette">Удалить палитру</string>
@@ -6069,4 +6069,10 @@
     <string name="astro_designations">Обозначения</string>
     <string name="obd_simulation_device">Устройство для моделирования</string>
     <string name="astronomy_map">Астрономическая карта</string>
+    <string name="favorite_folder_rename_conflict">Папка с таким названием уже существует.</string>
+    <string name="favorite_folder_invalid_name">Имя папки не может содержать / или _%_</string>
+    <string name="favorite_folder_duplicate_message">Используйте имя папки, которого еще нет в списке.</string>
+    <string name="favorite_folder_name">Имя папки</string>
+    <string name="edit_folder">Редактировать папку</string>
+    <string name="favorite_confirm_delete_folder">Это приведёт к удалению папки \"%1$s\", включая вложенные папки и избранные точки в количестве %2$d шт.</string>
 </resources>

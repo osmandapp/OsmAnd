@@ -5935,4 +5935,6 @@
     <string name="astronomy_map">Αστρονομικός χάρτης</string>
     <string name="astro_designations">Ονομασίες</string>
     <string name="obd_simulation_device">Συσκευή προσομοίωσης</string>
+    <string name="favorite_folder_name">Όνομα φακέλου</string>
+    <string name="edit_folder">Επεξεργασία φακέλου</string>
 </resources>

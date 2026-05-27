@@ -5977,4 +5977,10 @@
     <string name="astro_designations">Ainmniúcháin</string>
     <string name="astronomy_map">Léarscáil Réalteolaíochta</string>
     <string name="obd_simulation_device">Gléas insamhalta</string>
+    <string name="favorite_confirm_delete_folder">Scriosfaidh sé seo an fillteán \"%1$s\", lena n-áirítear fillteáin neadaithe agus %2$d pointe(í) is fearr leat.</string>
+    <string name="favorite_folder_rename_conflict">Tá fillteán leis an ainm seo ann cheana féin.</string>
+    <string name="favorite_folder_invalid_name">Ní féidir / nó _%_ a bheith in ainm an fhillteáin</string>
+    <string name="favorite_folder_duplicate_message">Bain úsáid as ainm fillteáin nach bhfuil ann cheana féin.</string>
+    <string name="favorite_folder_name">Ainm fillteáin</string>
+    <string name="edit_folder">Cuir fillteán in eagar</string>
 </resources>

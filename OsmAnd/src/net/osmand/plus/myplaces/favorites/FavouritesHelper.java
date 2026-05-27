@@ -1208,6 +1208,7 @@ public class FavouritesHelper {
 			favoriteGroup.setIconName(pointsGroup.getIconName());
 			favoriteGroup.setBackgroundType(BackgroundType.getByTypeName(pointsGroup.getBackgroundType(), DEFAULT_BACKGROUND_TYPE));
 			favoriteGroup.setVisible(!pointsGroup.isHidden());
+			favoriteGroup.setPinned(Boolean.TRUE.equals(pointsGroup.isPinned()));
 		}
 	}
 

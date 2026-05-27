@@ -189,7 +189,7 @@ public class OsmandApplication extends MultiDexApplication {
 	DownloadIndexesThread downloadIndexesThread;
 	AvoidRoadsHelper avoidRoadsHelper;
 	BRouterServiceConnection bRouterServiceConnection;
-	OsmandRegions regions;
+	OsmandRegions regions = new OsmandRegions(false);
 	GeocodingLookupService geocodingLookupService;
 	QuickSearchHelper searchUICore;
 	SearchHistoryHelper searchHistoryHelper;

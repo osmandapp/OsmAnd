@@ -34,6 +34,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.concurrent.ConcurrentHashMap;
 
 import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.list.array.TIntArrayList;
@@ -75,6 +76,7 @@ public class OsmandRegions {
 	QuadTree<String> quadTree;
 	MapIndexFields mapIndexFields;
 	RegionTranslation translator;
+	boolean isInit;
 
 	private static class MapIndexFields {
 
@@ -99,6 +101,22 @@ public class OsmandRegions {
 			return object.getNameByType(tp);
 		}
 	}
+	
+	public OsmandRegions(boolean isInitialized) {
+		this.isInit = isInitialized;
+	}
+
+	public OsmandRegions(String fileName) throws IOException {
+		if (fileName == null) {
+			prepareFile();
+		} else {
+			prepareFile(fileName);
+		}
+	}
+
+	public boolean isInitialized() {
+		return isInit;
+	}
 
 	public void setTranslator(RegionTranslation translator) {
 		this.translator = translator;
@@ -106,28 +124,14 @@ public class OsmandRegions {
 
 	public BinaryMapIndexReader prepareFile() throws IOException {
 		File regions = new File(REGIONS_OCBF);
-		// internal version could be updated
-//		if (!regions.exists()) {
-			InputStream is = OsmandRegions.class.getResourceAsStream(REGIONS_OCBF);
-			FileOutputStream fous = new FileOutputStream(regions);
-			Algorithms.streamCopy(is, fous);
-			fous.close();
-//		}
-		return prepareFile(regions.getAbsolutePath());
-	}
-
-	public void prepareRegionsFromResourcesAsTempFile() throws IOException {
 		InputStream is = OsmandRegions.class.getResourceAsStream(REGIONS_OCBF);
-		if (is != null) {
-			File regions = File.createTempFile(REGIONS_OCBF, ".tmp");
+		// internal version could be updated
+		if (!regions.exists() || is.available() != regions.length()) {
 			FileOutputStream fous = new FileOutputStream(regions);
 			Algorithms.streamCopy(is, fous);
 			fous.close();
-			prepareFile(regions.getAbsolutePath());
-			if (!regions.delete()) {
-				regions.deleteOnExit();
-			}
 		}
+		return prepareFile(regions.getAbsolutePath());
 	}
 
 	public BinaryMapIndexReader prepareFile(String fileName) throws IOException {
@@ -205,6 +209,7 @@ public class OsmandRegions {
 			}
 		}
 		structureWorldRegions(new ArrayList<>(fullNamesToRegionData.values()));
+		this.isInit = true;
 		return reader;
 	}
 
@@ -305,8 +310,8 @@ public class OsmandRegions {
 		return worldRegion;
 	}
 
-	public boolean isInitialized() {
-		return reader != null;
+	public BinaryMapIndexReader getReader() {
+		return reader;
 	}
 
 	public static boolean contain(BinaryMapDataObject bo, int tx, int ty) {
@@ -781,7 +786,7 @@ public class OsmandRegions {
 
 
 	public static void main(String[] args) throws IOException {
-		OsmandRegions or = new OsmandRegions();
+		OsmandRegions or = new OsmandRegions(null);
 		Locale tw = Locale.CHINA;
 		or.setLocale(tw.getLanguage(), null);
 //		or.setLocale(tw.getLanguage(), tw.getCountry());
@@ -1023,6 +1028,12 @@ public class OsmandRegions {
 			}
 		}
 		return filtered;
+	}
+
+	public void close() throws IOException {
+		if (reader != null) {
+			reader.close();
+		}
 	}
 
 }

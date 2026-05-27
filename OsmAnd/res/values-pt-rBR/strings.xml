@@ -5772,8 +5772,8 @@
     <string name="add_widget_to_the_right">Adicionar widget à direita</string>
     <string name="add_widget_to_the_left">Adicionar widget à esquerda</string>
     <string name="add_widget_above">Adicionar widget acima</string>
-    <string name="delete_widget_description">Esse widget será excluído. Você poderá restaurá-lo posteriormente na tela Configurar.</string>
-    <string name="delete_widget">Excluir widget?</string>
+    <string name="delete_widget_description">Esse widget será removido. Você poderá restaurá-lo posteriormente na tela Configurar.</string>
+    <string name="delete_widget">Remover widget?</string>
     <string name="battery_saving_mode">Modo de economia de bateria</string>
     <string name="graph_axis">Eixo do gráfico</string>
     <string name="y_axis_description">Selecione até duas opções para o eixo Y.</string>
@@ -6525,4 +6525,6 @@
     <string name="obd_simulation_device">Dispositivo de simulação</string>
     <string name="memory_used_settings">Heap do Java usado</string>
     <string name="memory_limit_settings">Limite máximo do heap do Java</string>
+    <string name="favorite_folder_name">Nome da pasta</string>
+    <string name="edit_folder">Editar pasta</string>
 </resources>
