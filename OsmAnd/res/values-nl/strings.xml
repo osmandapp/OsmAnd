@@ -6481,4 +6481,10 @@
     <string name="astro_designations">Aanduidingen</string>
     <string name="astronomy_map">Astronomische kaart</string>
     <string name="obd_simulation_device">Simulatie-apparaat</string>
+    <string name="favorite_confirm_delete_folder">Dit zal de map \"%1$s\" verwijderen, inclusief submappen en %2$d favoriet(en).</string>
+    <string name="favorite_folder_rename_conflict">Een map met deze naam bestaat al.</string>
+    <string name="favorite_folder_invalid_name">De mapnaam mag geen / of _%_ bevatten</string>
+    <string name="favorite_folder_duplicate_message">Gebruik een mapnaam die nog niet bestaat.</string>
+    <string name="favorite_folder_name">Mapnaam</string>
+    <string name="edit_folder">Bewerk map</string>
 </resources>
