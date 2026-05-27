@@ -6527,4 +6527,8 @@
     <string name="memory_limit_settings">Limite máximo do heap do Java</string>
     <string name="favorite_folder_name">Nome da pasta</string>
     <string name="edit_folder">Editar pasta</string>
+    <string name="favorite_confirm_delete_folder">Isso excluirá a pasta \"%1$s\", incluindo as pastas aninhadas e %2$d marcadores.</string>
+    <string name="favorite_folder_rename_conflict">Já existe uma pasta com esse nome.</string>
+    <string name="favorite_folder_invalid_name">O nome da pasta não pode conter / ou _%_</string>
+    <string name="favorite_folder_duplicate_message">Use um nome de pasta que ainda não exista.</string>
 </resources>
