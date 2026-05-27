@@ -257,7 +257,6 @@ public class AppInitializer implements IProgress {
 				InputStream stream = OsmandRegions.class.getResourceAsStream("regions.ocbf");
 				Algorithms.streamCopy(stream, new FileOutputStream(file));
 			}
-			app.regions.prepareFile(file.getAbsolutePath());
 			app.regions.setTranslator(new RegionTranslation() {
 
 				@Override
@@ -285,6 +284,7 @@ public class AppInitializer implements IProgress {
 				}
 			});
 			app.regions.setLocale(app.getLanguage(), app.getLocaleHelper().getCountry());
+			app.regions.prepareFile(file.getAbsolutePath());
 			PlatformUtil.setOsmandRegions(app.regions);
 		} catch (Exception e) {
 			warnings.add(e.getMessage());
