@@ -6147,4 +6147,10 @@
     <string name="astro_designations">Nomoj</string>
     <string name="obd_simulation_device">Simulata aparato</string>
     <string name="astronomy_map">Astronomia mapo</string>
+    <string name="favorite_confirm_delete_folder">Tio ĉi forigos la dosierujon “%1$s”, inkluzivante ĝiajn subdosierujon kaj %2$d ŝatata(j)n ejo(j)n.</string>
+    <string name="favorite_folder_rename_conflict">Dosierujo kun tiu ĉi nomo jam ekzistas.</string>
+    <string name="favorite_folder_invalid_name">Nomo de dosierujon ne povas enhavi / aŭ _%_.</string>
+    <string name="favorite_folder_duplicate_message">Enigu nomon de dosierujo, kiu ne ekzistas.</string>
+    <string name="favorite_folder_name">Nomo de dosierujo</string>
+    <string name="edit_folder">Redakti dosierujon</string>
 </resources>
