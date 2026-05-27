@@ -220,7 +220,7 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 		int haloColorInt = ColorUtilities.getContrastColor(app, colorInt, true);
 		FColorARGB haloColor = NativeUtilities.createFColorARGB(haloColorInt);
 
-		gridConfig.setPrimaryProjection(projection);
+		gridConfig.setPrimaryProjection(Projection.WGS84);
 		gridConfig.setPrimaryFormat(format);
 		gridConfig.setPrimaryColor(color);
 		gridConfig.setPrimaryMinZoomLevel(minZoom);
