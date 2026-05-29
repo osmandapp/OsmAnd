@@ -807,15 +807,29 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 			return new LatLon(lat, lon);
 		}
 		if (maidenhead.length() >= 6) {
-			// Subsquare is case insensitive, A-X
-			// But we already converted to uppercase.
 			lon += (maidenhead.charAt(4) - 'A') * (5.0 / 60.0);
 			lat += (maidenhead.charAt(5) - 'A') * (2.5 / 60.0);
-			lon += 2.5 / 60.0;
-			lat += 1.25 / 60.0;
 		} else {
 			lon += 1.0;
 			lat += 0.5;
+			return new LatLon(lat, lon);
+		}
+		if (maidenhead.length() >= 8) {
+			lon += (maidenhead.charAt(6) - '0') * (5.0 / 600.0);
+			lat += (maidenhead.charAt(7) - '0') * (2.5 / 600.0);
+		} else {
+			lon += 2.5 / 60.0;
+			lat += 1.25 / 60.0;
+			return new LatLon(lat, lon);
+		}
+		if (maidenhead.length() >= 10) {
+			lon += (maidenhead.charAt(8) - 'A') * (5.0 / 14400.0);
+			lat += (maidenhead.charAt(9) - 'A') * (2.5 / 14400.0);
+			lon += 2.5 / 14400.0;
+			lat += 1.25 / 14400.0;
+		} else {
+			lon += 2.5 / 600.0;
+			lat += 1.25 / 600.0;
 		}
 		return new LatLon(lat, lon);
 	}

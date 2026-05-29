@@ -987,7 +987,18 @@ public class OsmAndFormatter {
 		sb.append((char) ('0' + lonSquare)).append((char) ('0' + latSquare));
 		int lonSub = (int) (lon * 12 + 1e-6);
 		int latSub = (int) (lat * 24 + 1e-6);
-		sb.append((char) ('a' + lonSub)).append((char) ('a' + latSub));
+		lon -= lonSub / 12.0;
+		lat -= latSub / 24.0;
+		sb.append((char) ('A' + lonSub)).append((char) ('A' + latSub));
+		sb.append(' ');
+		int lonExtSquare = (int) (lon * 120 + 1e-6);
+		int latExtSquare = (int) (lat * 240 + 1e-6);
+		lon -= lonExtSquare / 120.0;
+		lat -= latExtSquare / 240.0;
+		sb.append((char) ('0' + lonExtSquare)).append((char) ('0' + latExtSquare));
+		int lonExtSub = (int) (lon * 2880 + 1e-6);
+		int latExtSub = (int) (lat * 5760 + 1e-6);
+		sb.append((char) ('A' + lonExtSub)).append((char) ('A' + latExtSub));
 		return sb.toString();
 	}
 

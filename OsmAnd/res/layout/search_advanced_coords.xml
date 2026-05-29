@@ -471,7 +471,7 @@
                                 android:hint="@string/navigate_point_format_maidenhead"
                                 android:imeOptions="actionDone"
                                 android:inputType="textVisiblePassword|textCapCharacters|textNoSuggestions"
-                                tools:text="IO91aa"/>
+                                tools:text="IO91AA 28UC"/>
 
                         </com.google.android.material.textfield.TextInputLayout>
 
