@@ -31,19 +31,21 @@ class MediaProvider(context: Context) {
 		callback: ImageLoaderCallback? = null,
 		requestListener: ImageRequestListener? = null
 	): LoadingImage? {
-		return load(resolvePhotoUri(item, item.previewUris.thumbnailUri), callback, requestListener)
+		return load(resolvePhotoUri(item, item.previewUris.thumbnailUri), callback, requestListener, null)
 	}
 
 	@JvmOverloads
 	fun loadStandardSizeImage(
 		item: MediaItem,
 		callback: ImageLoaderCallback? = null,
-		requestListener: ImageRequestListener? = null
+		requestListener: ImageRequestListener? = null,
+		targetSizePx: Int? = null
 	): LoadingImage? {
 		return load(
 			resolvePhotoUri(item, item.previewUris.standardSizeUri),
 			callback,
-			requestListener
+			requestListener,
+			targetSizePx
 		)
 	}
 
@@ -51,21 +53,23 @@ class MediaProvider(context: Context) {
 	fun loadFullSizeImage(
 		item: MediaItem,
 		callback: ImageLoaderCallback? = null,
-		requestListener: ImageRequestListener? = null
+		requestListener: ImageRequestListener? = null,
+		targetSizePx: Int? = null
 	): LoadingImage? {
-		return load(resolvePhotoUri(item, item.previewUris.fullSizeUri), callback, requestListener)
+		return load(resolvePhotoUri(item, item.previewUris.fullSizeUri), callback, requestListener, targetSizePx)
 	}
 
 	private fun load(
 		uri: String?,
 		callback: ImageLoaderCallback?,
-		requestListener: ImageRequestListener?
+		requestListener: ImageRequestListener?,
+		targetSizePx: Int?
 	): LoadingImage? {
 		if (uri.isNullOrBlank()) {
 			callback?.onError()
 			return null
 		}
-		return imageLoader.loadImage(uri, callback, requestListener, handlePlaceholder = false)
+		return imageLoader.loadImage(uri, callback, requestListener, handlePlaceholder = false, targetSizePx = targetSizePx)
 	}
 
 	private fun resolvePhotoUri(item: MediaItem, uri: String?): String? {

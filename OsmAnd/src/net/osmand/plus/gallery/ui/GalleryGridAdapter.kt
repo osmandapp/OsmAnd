@@ -130,6 +130,13 @@ class GalleryGridAdapter(
 		}
 	}
 
+	override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
+		if (holder is GalleryMediaViewHolder) {
+			holder.cancelLoadingImage()
+		}
+		super.onViewRecycled(holder)
+	}
+
 	fun onLoadingImages(loadingImages: Boolean) {
 		this.loadingImages = loadingImages
 		for (i in items.indices) {

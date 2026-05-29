@@ -8,8 +8,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.gallery.model.GalleryItem;
-import net.osmand.plus.gallery.provider.MediaProvider;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.shared.media.MediaProvider;
 import net.osmand.shared.media.domain.MediaItem;
 import net.osmand.shared.media.domain.MediaType;
 import net.osmand.util.Algorithms;
@@ -81,10 +81,21 @@ public class GalleryController implements IDialogController, GalleryMediaLoadSta
 
 	@NonNull
 	public List<GalleryItem.Media> getOnlinePhotoItems() {
+		List<GalleryItem.Media> mediaItems = new ArrayList<>();
+		for (GalleryItem.Media media : getMediaItems()) {
+			if (isPhoto(media.getMediaItem())) {
+				mediaItems.add(media);
+			}
+		}
+		return mediaItems;
+	}
+
+	@NonNull
+	public List<GalleryItem.Media> getMediaItems() {
 		List<GalleryItem.Media> galleryItems = new ArrayList<>();
 		if (currentGalleryItemsHolder != null) {
 			for (GalleryItem item : currentGalleryItemsHolder.getOrderedGalleryItems()) {
-				if (item instanceof GalleryItem.Media media && isPhoto(media.getMediaItem())) {
+				if (item instanceof GalleryItem.Media media) {
 					galleryItems.add(media);
 				}
 			}

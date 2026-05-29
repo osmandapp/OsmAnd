@@ -12,6 +12,8 @@ import coil3.request.CachePolicy
 import coil3.request.Disposable
 import coil3.request.ImageRequest
 import coil3.request.allowHardware
+import coil3.size.Precision
+import coil3.size.Scale
 import coil3.toBitmap
 import kotlin.random.Random
 
@@ -108,10 +110,18 @@ class NetworkImageLoader(private val context: Context, useDiskCache: Boolean = f
         url: String,
         callback: ImageLoaderCallback? = null,
         imageRequestListener: ImageRequestListener? = null,
-        handlePlaceholder: Boolean = false
+        handlePlaceholder: Boolean = false,
+        targetSizePx: Int? = null
     ): LoadingImage {
         val requestBuilder = ImageRequest.Builder(context)
             .data(url)
+
+        if (targetSizePx != null && targetSizePx > 0) {
+            requestBuilder
+                .size(targetSizePx, targetSizePx)
+                .scale(Scale.FILL)
+                .precision(Precision.INEXACT)
+        }
 
         callback?.let {
             requestBuilder.target(

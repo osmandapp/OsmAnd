@@ -210,7 +210,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private double actionLat;
 	private double actionLon;
 	private int runAction = -1;
-	private final OnResultCallback<Recording> defaultRecordingSavedCallback = this::updateContextMenu;
+	private List<OnResultCallback<Recording>> recordingCallbacks = new ArrayList<>();
 
 	public enum AVActionType {
 		REC_AUDIO,
@@ -345,6 +345,14 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	public CurrentRecording getCurrentRecording() {
 		return currentRecording;
+	}
+
+	public void addRecordingCallback(@NonNull OnResultCallback<Recording> callback) {
+		recordingCallbacks = CollectionUtils.addToList(recordingCallbacks, callback);
+	}
+
+	public void removeRecordingCallback(@NonNull OnResultCallback<Recording> callback) {
+		recordingCallbacks = CollectionUtils.removeFromList(recordingCallbacks, callback);
 	}
 
 	@Override
@@ -540,7 +548,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
 		intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1); // set the video image quality to high
 		// start the video capture Intent
-		AndroidUtils.startActivityForResultIfSafe(mapActivity, intent, 205);
+		if (!AndroidUtils.startActivityForResultIfSafe(mapActivity, intent, 205)) {
+			clearNextRecordingSavedCallbacks();
+		}
 	}
 
 	@Override
@@ -645,6 +655,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				if (cam != null) {
 					initRecMenu(AVActionType.REC_VIDEO, lat, lon);
 					recordVideoCamera(lat, lon, mapActivity);
+				} else {
+					clearNextRecordingSavedCallbacks();
 				}
 			}
 		} else {
@@ -686,6 +698,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					logErr(e);
 					closeRecordingMenu();
 					closeCamera();
+					clearNextRecordingSavedCallbacks();
 					finishRecording();
 					return;
 				}
@@ -698,6 +711,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					}
 					runMediaRecorder(mapActivity, mr, f);
 				} catch (Exception e) {
+					clearNextRecordingSavedCallbacks();
 					logErr(e);
 				}
 			}
@@ -854,6 +868,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			if (save) {
 				indexFile(true, mediaRecFile, notifyOnSaved);
 			} else {
+				clearNextRecordingSavedCallbacks();
 				finishRecording();
 			}
 			mediaRec.release();
@@ -882,6 +897,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			try {
 				runMediaRecorder(activity, mr, file);
 			} catch (Exception e) {
+				clearNextRecordingSavedCallbacks();
 				unmuteStreamMusicAndOutputGuidance();
 				log.error("Error starting audio recorder ", e);
 				app.showToastMessage(app.getString(R.string.recording_error) + " : "
@@ -1038,6 +1054,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 						logErr(e);
 						closeRecordingMenu();
 						closeCamera();
+						clearNextRecordingSavedCallbacks();
 						finishRecording();
 					}
 				}
@@ -1052,6 +1069,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		} catch (RuntimeException e) {
 			logErr(e);
 			closeCamera();
+			clearNextRecordingSavedCallbacks();
 		}
 	}
 
@@ -1146,6 +1164,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				} catch (RuntimeException e) {
 					closeRecordingMenu();
 					closeCamera();
+					clearNextRecordingSavedCallbacks();
 					finishRecording();
 				}
 			}
@@ -1160,6 +1179,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				logErr(e);
 				closeRecordingMenu();
 				closeCamera();
+				clearNextRecordingSavedCallbacks();
 				finishRecording();
 			}
 		});
@@ -1180,8 +1200,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
 		takePictureIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
 		try {
-			AndroidUtils.startActivityForResultIfSafe(mapActivity, takePictureIntent, 205);
+			if (!AndroidUtils.startActivityForResultIfSafe(mapActivity, takePictureIntent, 205)) {
+				clearNextRecordingSavedCallbacks();
+			}
 		} catch (Exception e) {
+			clearNextRecordingSavedCallbacks();
 			log.error("Error taking a picture ", e);
 			app.showToastMessage(app.getString(R.string.recording_error) + " : " + e.getMessage());
 		}
@@ -1383,7 +1406,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		if (isRecording()) {
 			AVActionType type = currentRecording.getType();
 			finishRecording();
-			if (notify && !type.isAudio() && (!AV_RECORDER_SPLIT.get() || !type.isVideo())) {
+			if (notify && (!recordingCallbacks.isEmpty()
+					|| !type.isAudio() && (!AV_RECORDER_SPLIT.get() || !type.isVideo()))) {
 				notifyRecordingSaved(recording);
 			}
 		}
@@ -1392,7 +1416,21 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	private void notifyRecordingSaved(@NonNull Recording recording) {
-		app.runInUIThread(() -> defaultRecordingSavedCallback.onResult(recording), 200);
+		List<OnResultCallback<Recording>> callbacks = recordingCallbacks;
+		clearNextRecordingSavedCallbacks();
+		app.runInUIThread(() -> {
+			if (callbacks.isEmpty()) {
+				updateContextMenu(recording);
+			} else {
+				for (OnResultCallback<Recording> callback : callbacks) {
+					callback.onResult(recording);
+				}
+			}
+		}, 200);
+	}
+
+	private void clearNextRecordingSavedCallbacks() {
+		recordingCallbacks = new ArrayList<>();
 	}
 
 	@Override
@@ -1485,8 +1523,31 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	@Override
 	public void onMapActivityExternalResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == 205 || requestCode == 105) {
+			Set<String> indexedFiles = !recordingCallbacks.isEmpty()
+					? new HashSet<>(recordingByFileName.keySet())
+					: null;
 			indexingFiles(true, true);
+			if (indexedFiles != null) {
+				Recording recording = getNewRecording(indexedFiles);
+				if (recording != null && recording.getFile().length() > 0) {
+					notifyRecordingSaved(recording);
+				} else {
+					clearNextRecordingSavedCallbacks();
+				}
+			}
 		}
+	}
+
+	@Nullable
+	private Recording getNewRecording(@NonNull Set<String> indexedFiles) {
+		Recording result = null;
+		for (Recording recording : recordingByFileName.values()) {
+			if (!indexedFiles.contains(recording.getFileName())
+					&& (result == null || recording.getLastModified() > result.getLastModified())) {
+				result = recording;
+			}
+		}
+		return result;
 	}
 
 	public Collection<Recording> getAllRecordings() {
@@ -1630,18 +1691,21 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			if (grantResults[0] == PERMISSION_GRANTED && grantResults[1] == PERMISSION_GRANTED) {
 				runAction = AV_DEFAULT_ACTION_VIDEO;
 			} else {
+				clearNextRecordingSavedCallbacks();
 				app.showToastMessage(R.string.no_camera_permission);
 			}
 		} else if (requestCode == CAMERA_FOR_PHOTO_REQUEST_CODE) {
 			if (grantResults[0] == PERMISSION_GRANTED) {
 				runAction = AV_DEFAULT_ACTION_TAKEPICTURE;
 			} else {
+				clearNextRecordingSavedCallbacks();
 				app.showToastMessage(R.string.no_camera_permission);
 			}
 		} else if (requestCode == AUDIO_REQUEST_CODE) {
 			if (grantResults[0] == PERMISSION_GRANTED) {
 				runAction = AV_DEFAULT_ACTION_AUDIO;
 			} else {
+				clearNextRecordingSavedCallbacks();
 				app.showToastMessage(R.string.no_microphone_permission);
 			}
 		}
@@ -1702,6 +1766,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				logErr(e);
 				closeRecordingMenu();
 				closeCamera();
+				clearNextRecordingSavedCallbacks();
 				finishRecording();
 			}
 		}
@@ -1718,6 +1783,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					indexFile(true, lastTakingPhoto, true);
 				}
 			} catch (Exception error) {
+				clearNextRecordingSavedCallbacks();
 				logErr(error);
 			} finally {
 				photoJpegData = null;
@@ -1726,8 +1792,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					finishRecording();
 				}
 			}
-		} else if (cancel) {
-			closeRecordingMenu();
+		} else {
+			clearNextRecordingSavedCallbacks();
+			if (cancel) {
+				closeRecordingMenu();
+			}
 		}
 	}
 

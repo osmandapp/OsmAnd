@@ -13,7 +13,6 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.gallery.model.GalleryItem
-import net.osmand.plus.gallery.provider.MediaProvider
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.gallery.controller.GalleryController
 import net.osmand.plus.gallery.ui.GalleryGridItemDecorator.GRID_SCREEN_ITEM_SPACE_DP
@@ -21,8 +20,10 @@ import net.osmand.plus.gallery.ui.GalleryListener
 import net.osmand.plus.gallery.controller.GalleryMediaLoadStateProvider
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
+import net.osmand.shared.media.MediaProvider
 import net.osmand.shared.media.MediaUriResolver
 import net.osmand.shared.media.domain.MediaItem
+import net.osmand.shared.media.domain.MediaType
 import net.osmand.shared.util.ImageLoadSource
 import net.osmand.shared.util.ImageLoaderCallback
 import net.osmand.shared.util.ImageRequestListener
@@ -62,9 +63,10 @@ class GalleryMediaViewHolder(
 		nightMode: Boolean
 	) {
 		this.holderType = type
-		setupView(mapActivity, viewWidth, nightMode)
 
 		val mediaItem = galleryItem.mediaItem
+		cancelLoadingImage()
+		val imageSizePx = setupView(mapActivity, viewWidth, nightMode)
 		val iconName = mediaItem.origin.iconName
 		val topIconId = AndroidUtils.getDrawableId(app, iconName)
 
@@ -77,13 +79,15 @@ class GalleryMediaViewHolder(
 		AndroidUtils.setBackground(mapActivity, border, getBackgroundId(nightMode))
 		progressBar.visibility = if (galleryItem.showLoadingProgress) View.VISIBLE else View.GONE
 		ivImage.setImageDrawable(null)
+		ivImage.setOnClickListener(null)
+		ivLoadSourceType.visibility = View.GONE
 
 		if (mediaLoadStateProvider.isMediaLoadFailed(mediaItem)) {
 			bindUrl(mapActivity, mediaItem, nightMode)
 		} else {
 			tryLoadImage(
 				mapActivity, listener, galleryItem, mediaProvider,
-				mediaLoadStateProvider, nightMode
+				mediaLoadStateProvider, nightMode, imageSizePx
 			)
 		}
 	}
@@ -94,10 +98,14 @@ class GalleryMediaViewHolder(
 		galleryItem: GalleryItem.Media,
 		mediaProvider: MediaProvider,
 		mediaLoadStateProvider: GalleryMediaLoadStateProvider,
-		nightMode: Boolean
+		nightMode: Boolean,
+		imageSizePx: Int
 	) {
-		loadingImage?.cancel()
 		val mediaItem = galleryItem.mediaItem
+		if (mediaItem.type != MediaType.PHOTO) {
+			bindMediaIcon(listener, mediaItem)
+			return
+		}
 
 		loadingImage = mediaProvider.loadStandardSizeImage(mediaItem, object : ImageLoaderCallback {
 			override fun onStart(bitmap: Bitmap?) {}
@@ -111,7 +119,7 @@ class GalleryMediaViewHolder(
 				if (!app.settings.isInternetConnectionAvailable) {
 					tryLoadCacheHiResImage(
 						mapActivity, listener, galleryItem, mediaProvider,
-						mediaLoadStateProvider, nightMode
+						mediaLoadStateProvider, nightMode, imageSizePx
 					)
 				} else {
 					mediaLoadStateProvider.markMediaLoadFailed(mediaItem)
@@ -122,7 +130,7 @@ class GalleryMediaViewHolder(
 			override fun onSuccess(source: ImageLoadSource) {
 				updateLoadSource(source)
 			}
-		})
+		}, imageSizePx)
 	}
 
 	private fun tryLoadCacheHiResImage(
@@ -131,7 +139,8 @@ class GalleryMediaViewHolder(
 		galleryItem: GalleryItem.Media,
 		mediaProvider: MediaProvider,
 		mediaLoadStateProvider: GalleryMediaLoadStateProvider,
-		nightMode: Boolean
+		nightMode: Boolean,
+		imageSizePx: Int
 	) {
 		val mediaItem = galleryItem.mediaItem
 		loadingImage = mediaProvider.loadFullSizeImage(mediaItem, object : ImageLoaderCallback {
@@ -150,7 +159,7 @@ class GalleryMediaViewHolder(
 			override fun onSuccess(source: ImageLoadSource) {
 				updateLoadSource(source)
 			}
-		})
+		}, imageSizePx)
 	}
 
 	private fun updateLoadSource(source: ImageLoadSource?) {
@@ -177,6 +186,24 @@ class GalleryMediaViewHolder(
 		progressBar.visibility = View.GONE
 	}
 
+	private fun bindMediaIcon(listener: GalleryListener, mediaItem: MediaItem) {
+		val iconId = when (mediaItem.type) {
+			MediaType.VIDEO -> R.drawable.ic_action_video_dark
+			MediaType.AUDIO -> R.drawable.ic_action_micro_dark
+			else -> R.drawable.ic_action_image_disabled
+		}
+		ivImage.visibility = View.VISIBLE
+		ivImage.setImageDrawable(iconsCache.getIcon(iconId))
+		ivImage.scaleType = ImageView.ScaleType.CENTER
+		ivImage.setOnClickListener { listener.onMediaItemClicked(mediaItem) }
+
+		tvUrl.visibility = View.GONE
+		border.visibility = View.VISIBLE
+		progressBar.visibility = View.GONE
+		updateLoadSource(null)
+		setSourceTypeIcon(null)
+	}
+
 	private fun bindUrl(mapActivity: MapActivity, mediaItem: MediaItem, nightMode: Boolean) {
 		ivImage.visibility = View.GONE
 		tvUrl.visibility = View.VISIBLE
@@ -200,7 +227,12 @@ class GalleryMediaViewHolder(
 		ivSourceType.setImageDrawable(icon)
 	}
 
-	private fun setupView(mapActivity: MapActivity, viewWidth: Int?, nightMode: Boolean) {
+	fun cancelLoadingImage() {
+		loadingImage?.cancel()
+		loadingImage = null
+	}
+
+	private fun setupView(mapActivity: MapActivity, viewWidth: Int?, nightMode: Boolean): Int {
 		val sizeInPx = if (holderType == MediaHolderType.SPAN_RESIZABLE) {
 			val spanCount = GalleryController.getSettingsSpanCount(mapActivity)
 			val recyclerViewPadding = AndroidUtils.dpToPx(app, 13f)
@@ -218,6 +250,7 @@ class GalleryMediaViewHolder(
 		val layoutParams = FrameLayout.LayoutParams(sizeInPx, sizeInPx)
 		itemView.layoutParams = layoutParams
 		itemView.setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode))
+		return sizeInPx
 	}
 
 	private fun calculateItemSize(

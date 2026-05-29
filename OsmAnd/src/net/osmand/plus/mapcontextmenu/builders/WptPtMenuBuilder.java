@@ -81,6 +81,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 	protected void buildTopInternal(View view) {
 		super.buildTopInternal(view);
 		buildWaypointsView(view);
+		buildMediaLinksRow(view, wpt.getLinks(), wpt);
 	}
 
 	@Override
