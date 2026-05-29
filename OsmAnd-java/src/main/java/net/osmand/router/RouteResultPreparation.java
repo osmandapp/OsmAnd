@@ -1467,7 +1467,7 @@ public class RouteResultPreparation {
 		boolean leftOrRightKeep = (rs.keepLeft && !rs.keepRight) || (!rs.keepLeft && rs.keepRight);
 		if (leftOrRightKeep) {
 			setActiveLanesRange(rawLanes, activeBeginIndex, activeEndIndex, activeTurn);
-			int tp = inferSlightTurnFromActiveLanes(rawLanes, rs.keepLeft, rs.keepRight);
+			int tp = inferSlightTurnFromActiveLanes(rawLanes, rs.keepLeft, rs.keepRight, activeTurn);
 			// Checking to see that there is only one unique turn
 			if (tp != 0) {
 				// add extra lanes with same turn
@@ -2027,7 +2027,11 @@ public class RouteResultPreparation {
 	}
 
 	
-	private int inferSlightTurnFromActiveLanes(int[] oLanes, boolean mostLeft, boolean mostRight) {
+	private int inferSlightTurnFromActiveLanes(int[] oLanes, boolean mostLeft, boolean mostRight, int activeTurn) {
+		if (activeTurn == TurnType.C) {
+			return TurnType.C;
+		}
+
 		Integer[] possibleTurns = getPossibleTurns(oLanes, false, false);
 		if (possibleTurns.length == 0) {
 			// No common turns, so can't determine anything.
@@ -2318,12 +2322,13 @@ public class RouteResultPreparation {
 			return pair;
 		}
 
-		findActiveIndexByUniqueDirections(pair, directions, rs, rawLanes);
+		findActiveIndexByUniqueDirections(pair, directions, rs, rawLanes, prevSegm, currentSegm);
 
 		return pair;
 	}
 
-	private void findActiveIndexByUniqueDirections(int[] pair, int[] directions, RoadSplitStructure rs, int[] rawLanes) {
+	private void findActiveIndexByUniqueDirections(int[] pair, int[] directions, RoadSplitStructure rs, int[] rawLanes,
+	                                               RouteSegmentResult prevSegm, RouteSegmentResult currentSegm) {
 		int startDirection = directions[rs.roadsOnLeft];
 		int endDirection = directions[directions.length - rs.roadsOnRight - 1];
 		for (int i = 0; i < rawLanes.length; i++) {
@@ -2345,6 +2350,36 @@ public class RouteResultPreparation {
 				break;
 			}
 		}
+		preferStraightTurnForNearlyStraightRoute(pair, rawLanes, prevSegm, currentSegm);
+	}
+
+	private void preferStraightTurnForNearlyStraightRoute(int[] pair, int[] rawLanes, RouteSegmentResult prevSegm,
+													  RouteSegmentResult currentSegm) {
+		int beginIndex = pair[0];
+		int endIndex = pair[1];
+		int activeTurn = pair[2];
+
+		boolean hasValidRange = beginIndex >= 0 && endIndex >= beginIndex && endIndex < rawLanes.length;
+		boolean hasValidTurns = activeTurn != 0 && !TurnType.isSlightTurn(activeTurn);
+		if (hasValidRange && hasValidTurns) {
+
+			double routeDeviation = MapUtils.degreesDiff(prevSegm.getBearingEnd(), currentSegm.getBearingBegin());
+			boolean isRouteAlmostStraight = Math.abs(routeDeviation) < TURN_SLIGHT_DEGREE;
+			boolean hasRouteStraightLanes = hasTurnTypeInRange(TurnType.C, rawLanes, beginIndex, endIndex);
+
+			if (isRouteAlmostStraight && hasRouteStraightLanes) {
+				pair[2] = TurnType.C;
+			}
+		}
+	}
+
+	private boolean hasTurnTypeInRange(int turnType, int[] lanes, int beginIndex, int endIndex) {
+		for (int i = beginIndex; i <= endIndex; i++) {
+			if (TurnType.hasAnyTurnLane(lanes[i], turnType)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private boolean findActiveIndexByLanes(int[] pair, int[] directions, RoadSplitStructure rs, int[] rawLanes,
