@@ -10,7 +10,6 @@ import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.gallery.controller.GalleryMediaLoadStateProvider
 import net.osmand.plus.gallery.model.GalleryItem
-import net.osmand.plus.gallery.provider.MediaProvider
 import net.osmand.plus.gallery.ui.holders.GalleryMediaViewHolder
 import net.osmand.plus.gallery.ui.holders.MediaHolderType
 import net.osmand.plus.gallery.ui.holders.MediaCountHolder
@@ -18,6 +17,7 @@ import net.osmand.plus.gallery.ui.holders.ActionViewHolder
 import net.osmand.plus.gallery.ui.holders.NoMediaHolder
 import net.osmand.plus.gallery.ui.holders.NoInternetHolder
 import net.osmand.plus.utils.UiUtilities
+import net.osmand.shared.media.MediaProvider
 
 class GalleryGridAdapter(
 	private val mapActivity: MapActivity,

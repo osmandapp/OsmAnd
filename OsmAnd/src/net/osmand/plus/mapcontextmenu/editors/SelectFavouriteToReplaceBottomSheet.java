@@ -1,7 +1,5 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
-import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -16,8 +14,6 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.SelectFavouriteBottomSheet;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.utils.AndroidUtils;
-
-import static net.osmand.plus.dialogs.FavoriteDialogs.KEY_FAVORITE;
 
 public class SelectFavouriteToReplaceBottomSheet extends SelectFavouriteBottomSheet {
 
@@ -38,7 +34,7 @@ public class SelectFavouriteToReplaceBottomSheet extends SelectFavouriteBottomSh
 	}
 
 	private void onApplyReplacement(@NonNull FavouritePoint favourite) {
-		FavouritePoint point = AndroidUtils.getSerializable(requireArguments(), KEY_FAVORITE, FavouritePoint.class);
+		FavouritePoint point = getReplacementPoint();
 		if (point == null) return;
 
 		favourite.setAddress(point.getAddress()); // Use address from the new point
@@ -59,15 +55,25 @@ public class SelectFavouriteToReplaceBottomSheet extends SelectFavouriteBottomSh
 		}
 	}
 
+	@Nullable
+	private FavouritePoint getReplacementPoint() {
+		Fragment target = getTargetFragment();
+		if (target instanceof FavoritePointEditorFragment editorFragment) {
+			return editorFragment.getFavorite();
+		}
+		Fragment fragment = requireActivity().getSupportFragmentManager().findFragmentByTag(FavoritePointEditor.TAG);
+		if (fragment instanceof FavoritePointEditorFragment editorFragment) {
+			return editorFragment.getFavorite();
+		}
+		return null;
+	}
+
 	public static void showInstance(@NonNull FragmentActivity activity,
-	                                @Nullable FavouritePoint favouritePoint) {
+	                                @NonNull Fragment targetFragment) {
 		FragmentManager manager = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-			Bundle args = new Bundle();
-			args.putSerializable(KEY_FAVORITE, favouritePoint);
-
 			SelectFavouriteToReplaceBottomSheet fragment = new SelectFavouriteToReplaceBottomSheet();
-			fragment.setArguments(args);
+			fragment.setTargetFragment(targetFragment, 0);
 			fragment.show(manager, SelectFavouriteBottomSheet.TAG);
 		}
 	}
