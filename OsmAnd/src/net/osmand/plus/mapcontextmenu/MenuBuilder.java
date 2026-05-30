@@ -641,7 +641,7 @@ public class MenuBuilder implements OnlinePhotoParamsProvider {
 				.setTextLinesLimit(1)
 				.build()
 		);
-		controller.askUpdate(updateOnly, collapsableView.isCollapsed());
+		controller.onGalleryRowBuilt(updateOnly, collapsableView.isCollapsed());
 	}
 
 	private void buildCoordinatesRow(@NonNull View view) {
