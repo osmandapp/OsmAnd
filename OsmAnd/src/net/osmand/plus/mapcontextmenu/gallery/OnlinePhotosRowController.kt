@@ -37,7 +37,7 @@ open class OnlinePhotosRowController(
 	protected val mapActivity: MapActivity?
 		get() = view?.mapActivity
 
-	override fun askUpdate(updateOnly: Boolean, collapsed: Boolean) {
+	override fun onGalleryRowBuilt(updateOnly: Boolean, collapsed: Boolean) {
 		val photoItems = onlinePhotosFlow?.currentGalleryItems
 		if (updateOnly && photoItems != null) {
 			setItems(photoItems)

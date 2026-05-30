@@ -7,7 +7,7 @@ interface IGalleryRowController : IGalleryListener {
 
 	var view: IGalleryRowView?
 
-	fun askUpdate(updateOnly: Boolean, collapsed: Boolean)
+	fun onGalleryRowBuilt(updateOnly: Boolean, collapsed: Boolean)
 
 	fun attachView(view: IGalleryRowView) {
 		this.view = view
