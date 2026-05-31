@@ -35,8 +35,8 @@ open class OnlinePhotosRowController(
 		return if (hasMediaItems()) listOf(showAllButton) else emptyList()
 	}
 
-	override fun onActionButtonClicked(button: GalleryActionButton) {
-		if (button.action == SHOW_ALL_ACTION) {
+	override fun handleGalleryAction(action: GalleryAction) {
+		if (action == SHOW_ALL_ACTION) {
 			view?.mapActivity?.let { GalleryGridController.showDialog(it, key) }
 		}
 	}

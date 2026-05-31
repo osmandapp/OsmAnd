@@ -35,7 +35,7 @@ class MapillaryRowController(
 	}
 
 	override fun emptyStateItems(): List<GalleryItem> {
-		return listOf(GalleryItem.NoMedia(CONTRIBUTE_ACTION))
+		return listOf(GalleryItem.NoPhotos(CONTRIBUTE_ACTION))
 	}
 
 	override fun collectActionButtons(): List<GalleryActionButton> {
@@ -46,8 +46,8 @@ class MapillaryRowController(
 		return if (hasMediaItems()) listOf(exploreButton) else emptyList()
 	}
 
-	override fun onActionButtonClicked(button: GalleryActionButton) {
-		if (button.action == CONTRIBUTE_ACTION) {
+	override fun handleGalleryAction(action: GalleryAction) {
+		if (action == CONTRIBUTE_ACTION) {
 			view?.mapActivity?.let { MapillaryPlugin.openMapillary(it) }
 		}
 	}

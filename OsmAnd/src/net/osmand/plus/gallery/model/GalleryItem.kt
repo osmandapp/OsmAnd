@@ -1,5 +1,6 @@
 package net.osmand.plus.gallery.model
 
+import android.view.View
 import net.osmand.shared.media.domain.MediaItem
 
 /**
@@ -14,6 +15,10 @@ sealed class GalleryItem {
 
 	data class Action(
 		val action: GalleryAction
+	) : GalleryItem()
+
+	data class NoPhotos(
+		val action: GalleryAction? = null
 	) : GalleryItem()
 
 	data class NoMedia(

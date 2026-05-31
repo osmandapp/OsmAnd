@@ -134,7 +134,7 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 			if (key != currentGalleryKey) return
 			val items = holder.getItems()
 				.map { GalleryItem.Media(it) }
-				.ifEmpty { listOf(GalleryItem.NoMedia()) }
+				.ifEmpty { listOf(GalleryItem.NoPhotos()) }
 			val wid = (key as GalleryKey.Astronomy).wikidataId
 			onGalleryStateChanged(wid, AstroGalleryState.Ready(items))
 		}
@@ -142,7 +142,7 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 		override fun onLoadFailed(key: GalleryKey) {
 			if (key != currentGalleryKey) return
 			val wid = (key as GalleryKey.Astronomy).wikidataId
-			onGalleryStateChanged(wid, AstroGalleryState.Ready(listOf(GalleryItem.NoMedia())))
+			onGalleryStateChanged(wid, AstroGalleryState.Ready(listOf(GalleryItem.NoPhotos())))
 		}
 	}
 

@@ -6,27 +6,22 @@ import net.osmand.shared.gpx.GpxFile
 import net.osmand.shared.gpx.primitives.Link
 import net.osmand.shared.gpx.primitives.WptPt
 
+// TODO: Temporary solution
 class AttachedMediaRegistry {
-
-	private val registry = mutableMapOf<GalleryKey, List<Link>>()
-
-	// --- Favorites ---
+	private val favorites = mutableMapOf<String, FavouritePoint>()
+	private val waypoints = mutableMapOf<GalleryKey.Waypoint, WptPt>()
 
 	fun registerFavorite(point: FavouritePoint) {
-		val key = GalleryKey.Favorite(point.key)
-		val links = point.links
-		if (!links.isNullOrEmpty()) {
-			registry[key] = links
+		if (!point.links.isNullOrEmpty()) {
+			favorites[point.key] = point
 		} else {
-			registry.remove(key)
+			favorites.remove(point.key)
 		}
 	}
 
 	fun unregisterFavorite(point: FavouritePoint) {
-		registry.remove(GalleryKey.Favorite(point.key))
+		favorites.remove(point.key)
 	}
-
-	// --- Waypoints ---
 
 	fun registerWaypoints(gpxFile: GpxFile) {
 		for (wpt in gpxFile.getPointsList()) {
@@ -37,25 +32,29 @@ class AttachedMediaRegistry {
 	fun registerWaypoint(wpt: WptPt, gpxPath: String) {
 		val name = wpt.name ?: return
 		val key = GalleryKey.Waypoint(gpxPath, name)
-		val links = wpt.links
-		if (!links.isNullOrEmpty()) {
-			registry[key] = links
+		if (!wpt.links.isNullOrEmpty()) {
+			waypoints[key] = wpt
 		} else {
-			registry.remove(key)
+			waypoints.remove(key)
 		}
 	}
 
 	fun unregisterWaypoints(gpxPath: String) {
-		registry.keys.removeAll { it is GalleryKey.Waypoint && it.gpxPath == gpxPath }
+		waypoints.keys.removeAll { it.gpxPath == gpxPath }
 	}
 
-	// --- Query ---
+	fun hasAttachedMedia(key: GalleryKey): Boolean = when (key) {
+		is GalleryKey.Favorite -> !favorites[key.pointKey]?.links.isNullOrEmpty()
+		is GalleryKey.Waypoint -> !waypoints[key]?.links.isNullOrEmpty()
+		else -> false
+	}
 
-	fun getLinks(key: GalleryKey): List<Link>? = registry[key]
+	fun getLinks(key: GalleryKey): List<Link>? = when (key) {
+		is GalleryKey.Favorite -> favorites[key.pointKey]?.links
+		is GalleryKey.Waypoint -> waypoints[key]?.links
+		else -> null
+	}
 
-	fun hasLinks(key: GalleryKey): Boolean = !registry[key].isNullOrEmpty()
-
-	fun getAllEntries(): Map<GalleryKey, List<Link>> = registry.toMap()
-
-	fun clear() { registry.clear() }
+	fun getAllFavorites(): Collection<FavouritePoint> = favorites.values
+	fun getAllWaypoints(): Collection<WptPt> = waypoints.values
 }

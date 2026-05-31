@@ -25,7 +25,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardType;
 import net.osmand.plus.gallery.contract.IGalleryRowController;
 import net.osmand.plus.gallery.data.GalleryKey;
-import net.osmand.plus.gallery.model.GalleryAction;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.gallery.online.OnlinePhotosGroup;
@@ -309,17 +308,6 @@ public class MapillaryPlugin extends OsmandPlugin {
 			}
 		} catch (Exception e) {
 			LOG.error(e);
-		}
-		return true;
-	}
-
-	@Override
-	protected boolean handleGalleryAction(@NonNull GalleryAction action) {
-		if (!TYPE_MAPILLARY_CONTRIBUTE.equals(action.getId())) {
-			return false;
-		}
-		if (mapActivity != null) {
-			openMapillary(mapActivity, null);
 		}
 		return true;
 	}

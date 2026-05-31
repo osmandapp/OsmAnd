@@ -91,7 +91,7 @@ abstract class GalleryRowController(
 	protected open fun requiresInternet(): Boolean = false
 
 	protected open fun emptyStateItems(): List<GalleryItem> {
-		return listOf(GalleryItem.NoMedia())
+		return listOf(GalleryItem.NoPhotos())
 	}
 
 	protected abstract fun buildGalleryItems(holder: MediaHolder): List<GalleryItem>

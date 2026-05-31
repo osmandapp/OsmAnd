@@ -93,7 +93,7 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 				MediaLoadStateRegistry loadStateRegistry = app.getGalleryHelper().getLoadStateRegistry();
 				recyclerView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 				adapter = new GalleryGridAdapter(requireMapActivity(), getGalleryListener(),
-						recyclerView.getMeasuredWidth(), nightMode, loadStateRegistry);
+						null, recyclerView.getMeasuredWidth(), nightMode, loadStateRegistry);
 				adapter.setResizeBySpanCount(true);
 
 				List<GalleryItem> items = new ArrayList<>();

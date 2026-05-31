@@ -411,6 +411,9 @@ public class GpxSelectionHelper {
 				}
 			}
 			selectedFile.setGpxFile(gpx, app);
+			if (showOnMap) {
+				app.getGalleryHelper().getAttachedMediaRegistry().registerWaypoints(gpx);
+			}
 		}
 		if (selectedFile != null) {
 			selectedFile.notShowNavigationDialog = params.isNotShowNavigationDialog();
@@ -456,6 +459,9 @@ public class GpxSelectionHelper {
 			if (gpxDisplayHelper.isSplittingTrack(selectedGpxFile)) {
 				gpxDisplayHelper.cancelTrackSplitting(selectedGpxFile);
 			}
+
+			app.getGalleryHelper().getAttachedMediaRegistry()
+					.unregisterWaypoints(selectedGpxFile.getGpxFile().getPath());
 		}
 		selectedGPXFiles = selectedFiles;
 	}
