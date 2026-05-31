@@ -14,7 +14,7 @@ class GalleryPagerController(
 ) : BaseDialogController(app) {
 
 	val photoItems: List<GalleryItem.Media>
-		get() = app.galleryRepository.get(key)
+		get() = app.galleryHelper.repository.get(key)
 			?.getPhotoItems()
 			?.map { GalleryItem.Media(it) }
 			?: emptyList()

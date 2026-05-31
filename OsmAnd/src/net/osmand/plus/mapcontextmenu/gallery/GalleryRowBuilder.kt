@@ -29,8 +29,8 @@ class GalleryRowBuilder(
 
 	val galleryView: View = UiUtilities.inflate(mapActivity, nightMode, R.layout.gallery_card)
 
-	private var galleryGridAdapter: GalleryGridAdapter =
-		GalleryGridAdapter(mapActivity, controller, null, nightMode, app.mediaLoadStateRegistry)
+	private var galleryGridAdapter: GalleryGridAdapter = GalleryGridAdapter(mapActivity, controller,
+		null, nightMode, app.galleryHelper.loadStateRegistry)
 
 	private var actionButtons: List<GalleryActionButton>? = null
 

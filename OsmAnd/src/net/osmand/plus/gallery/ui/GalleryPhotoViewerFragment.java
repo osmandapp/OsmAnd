@@ -194,7 +194,7 @@ public class GalleryPhotoViewerFragment extends BaseFullScreenFragment {
 	}
 
 	private void markMediaLoadFailed(@NonNull MediaItem mediaItem) {
-		app.getMediaLoadStateRegistry().markFailed(mediaItem);
+		app.getGalleryHelper().getLoadStateRegistry().markFailed(mediaItem);
 	}
 
 	private void trackLoadingImage(@Nullable LoadingImage image) {

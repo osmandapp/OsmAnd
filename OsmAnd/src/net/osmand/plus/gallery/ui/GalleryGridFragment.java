@@ -24,6 +24,7 @@ import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.gallery.contract.IGalleryListener;
 import net.osmand.plus.gallery.controller.GalleryGridController;
 import net.osmand.plus.gallery.controller.GalleryPagerController;
+import net.osmand.plus.gallery.data.MediaLoadStateRegistry;
 import net.osmand.plus.gallery.helpers.AttachedMediaUiHelper;
 import net.osmand.plus.gallery.model.GalleryItem;
 import net.osmand.plus.gallery.model.GalleryItem.MediaCount;
@@ -91,9 +92,10 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 		recyclerView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 			@Override
 			public void onGlobalLayout() {
+				MediaLoadStateRegistry loadStateRegistry = app.getGalleryHelper().getLoadStateRegistry();
 				recyclerView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 				adapter = new GalleryGridAdapter(requireMapActivity(), getGalleryListener(),
-						recyclerView.getMeasuredWidth(), nightMode, app.getMediaLoadStateRegistry());
+						recyclerView.getMeasuredWidth(), nightMode, loadStateRegistry);
 				adapter.setResizeBySpanCount(true);
 
 				List<GalleryItem> items = new ArrayList<>();

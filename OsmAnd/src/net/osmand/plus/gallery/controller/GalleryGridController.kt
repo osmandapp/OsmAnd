@@ -15,7 +15,7 @@ class GalleryGridController(
 ) : BaseDialogController(app) {
 
 	val galleryItems: List<GalleryItem>
-		get() = app.galleryRepository.get(key)
+		get() = app.galleryHelper.repository.get(key)
 			?.getItems()
 			?.map { toGalleryItem(it) }
 			?: emptyList()

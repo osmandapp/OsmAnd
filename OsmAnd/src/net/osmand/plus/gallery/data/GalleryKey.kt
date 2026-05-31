@@ -13,7 +13,11 @@ sealed class GalleryKey {
 		val wikidataId: String
 	) : GalleryKey()
 
-	data class Favorite(val id: String) : GalleryKey()
+	data class Favorite(
+		val pointKey: String
+	) : GalleryKey()
 
-	data class Waypoint(val id: String) : GalleryKey()
+	data class Waypoint(
+		val gpxPath: String, val name: String
+	) : GalleryKey()
 }
