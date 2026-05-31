@@ -1285,11 +1285,11 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 		val key = GalleryKey.Astronomy(wid)
 		cancelGalleryLoading()
 		currentGalleryKey = key
-		app.mediaLoader.load(key, galleryLoadListener)
+		app.galleryHelper.mediaLoader.load(key, galleryLoadListener)
 	}
 
 	private fun cancelGalleryLoading() {
-		currentGalleryKey?.let { app.mediaLoader.cancel(it, galleryLoadListener) }
+		currentGalleryKey?.let { app.galleryHelper.mediaLoader.cancel(it, galleryLoadListener) }
 		currentGalleryKey = null
 	}
 

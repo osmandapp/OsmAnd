@@ -127,7 +127,7 @@ class AstroGalleryCardViewHolder(
 			controller = listener,
 			viewWidth = null,
 			nightMode = nightMode,
-			loadStateRegistry = app.mediaLoadStateRegistry
+			loadStateRegistry = app.galleryHelper.loadStateRegistry
 		)
 		adapterNightMode = nightMode
 		recyclerView.layoutManager = getGridLayoutManager()

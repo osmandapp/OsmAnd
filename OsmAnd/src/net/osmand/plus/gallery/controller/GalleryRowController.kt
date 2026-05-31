@@ -50,7 +50,7 @@ abstract class GalleryRowController(
 	}
 
 	override fun detach() {
-		app.mediaLoader.cancel(key, loadListener)
+		app.galleryHelper.mediaLoader.cancel(key, loadListener)
 		loading = false
 		view = null
 	}
@@ -65,7 +65,7 @@ abstract class GalleryRowController(
 
 	private fun loadIfNeeded(collapsed: Boolean) {
 		if (!collapsed && !loading && items.isEmpty()) {
-			app.mediaLoader.load(key, loadListener)
+			app.galleryHelper.mediaLoader.load(key, loadListener)
 		}
 	}
 
@@ -81,7 +81,7 @@ abstract class GalleryRowController(
 			app.showShortToastMessage(R.string.shared_string_no_internet_connection)
 			return
 		}
-		app.mediaLoader.reload(key, loadListener)
+		app.galleryHelper.mediaLoader.reload(key, loadListener)
 	}
 
 	protected fun hasMediaItems(): Boolean {
