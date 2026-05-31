@@ -1,10 +1,9 @@
 package net.osmand.plus.gallery.online;
 
 public enum OnlinePhotosGroup {
-	OTHER,
+	MAPILLARY,
 	MAPILLARY_AMENITY,
 	WIKIDATA,
 	WIKIMEDIA,
-	MAPILLARY,
-	ASTRONOMY
+	OTHER
 }

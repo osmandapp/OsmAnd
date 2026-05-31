@@ -1,63 +1,33 @@
 package net.osmand.plus.gallery.online
 
 import net.osmand.data.LatLon
-import net.osmand.plus.gallery.model.GalleryItem
+import net.osmand.plus.gallery.model.MediaHolder
 import net.osmand.shared.media.domain.MediaItem
 
 class OnlinePhotosHolder(
 	val latLon: LatLon,
 	val params: Map<String, String>
-) {
+) : MediaHolder {
 
-	private val itemsByGroup = linkedMapOf<OnlinePhotosGroup, LinkedHashMap<String, GalleryItem>>()
+	private val itemsByGroup = linkedMapOf<OnlinePhotosGroup, LinkedHashMap<String, MediaItem>>()
 
-	fun getOrderedGalleryItems(): List<GalleryItem> {
-		return getGalleryItemsWithGroups(
-			OnlinePhotosGroup.MAPILLARY_AMENITY,
-			OnlinePhotosGroup.WIKIDATA,
-			OnlinePhotosGroup.WIKIMEDIA,
-			OnlinePhotosGroup.OTHER,
-			OnlinePhotosGroup.ASTRONOMY
-		)
+	override fun getItems(): List<MediaItem> = getItemsByGroups(
+		OnlinePhotosGroup.MAPILLARY_AMENITY,
+		OnlinePhotosGroup.WIKIDATA,
+		OnlinePhotosGroup.WIKIMEDIA,
+		OnlinePhotosGroup.OTHER
+	)
+
+	fun getMapillaryItems(): List<MediaItem> =
+		getItemsByGroups(OnlinePhotosGroup.MAPILLARY)
+
+	fun addItem(group: OnlinePhotosGroup, item: MediaItem) {
+		itemsByGroup.getOrPut(group) { linkedMapOf() }[item.id] = item
 	}
 
-	fun getMapillaryGalleryItems(): List<GalleryItem> {
-		return getGalleryItemsWithGroups(OnlinePhotosGroup.MAPILLARY)
-	}
+	fun clear() { itemsByGroup.clear() }
 
-	fun getAstronomyGalleryItems(): List<GalleryItem> {
-		return getGalleryItemsWithGroups(OnlinePhotosGroup.ASTRONOMY)
-	}
-
-	private fun getGalleryItemsWithGroups(vararg groups: OnlinePhotosGroup): List<GalleryItem> {
-		val result = mutableListOf<GalleryItem>()
-		for (group in groups) {
-			val items = itemsByGroup[group]
-			if (!items.isNullOrEmpty()) {
-				result.addAll(items.values)
-			}
-		}
-		return result
-	}
-
-	fun addMediaItem(group: OnlinePhotosGroup, mediaItem: MediaItem) {
-		addMediaItem(group, mediaItem, showLoadingProgress = false)
-	}
-
-	fun addMediaItem(
-		group: OnlinePhotosGroup,
-		mediaItem: MediaItem,
-		showLoadingProgress: Boolean
-	) {
-		addGalleryItem(group, mediaItem.id, GalleryItem.Media(mediaItem, showLoadingProgress))
-	}
-
-	fun addGalleryItem(group: OnlinePhotosGroup, key: String, item: GalleryItem) {
-		val items = itemsByGroup.getOrPut(group) { linkedMapOf() }
-		items[key] = item
-	}
-
-	fun clear() {
-		itemsByGroup.clear()
+	private fun getItemsByGroups(vararg groups: OnlinePhotosGroup): List<MediaItem> {
+		return groups.flatMap { itemsByGroup[it]?.values ?: emptyList() }
 	}
 }

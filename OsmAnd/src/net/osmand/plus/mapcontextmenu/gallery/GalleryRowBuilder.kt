@@ -30,12 +30,12 @@ class GalleryRowBuilder(
 	val galleryView: View = UiUtilities.inflate(mapActivity, nightMode, R.layout.gallery_card)
 
 	private var galleryGridAdapter: GalleryGridAdapter =
-		GalleryGridAdapter(mapActivity, controller, null, nightMode)
+		GalleryGridAdapter(mapActivity, controller, null, nightMode, app.mediaLoadStateRegistry)
 
 	private var actionButtons: List<GalleryActionButton>? = null
 
 	init {
-		controller.attachView(this)
+		controller.attach(this)
 		setupRecyclerView()
 		render()
 	}
@@ -87,7 +87,7 @@ class GalleryRowBuilder(
 				if (i < newButtons.size) {
 					val actionButton = newButtons[i]
 					buttonView.setTitleId(actionButton.titleId)
-					buttonView.setOnClickListener { controller.handleActionButtonClick(actionButton) }
+					buttonView.setOnClickListener { controller.onActionButtonClicked(actionButton) }
 					buttonView.visibility = View.VISIBLE
 				} else {
 					buttonView.visibility = View.GONE

@@ -12,7 +12,6 @@ import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.gallery.model.GalleryItem
 import net.osmand.plus.gallery.ui.GalleryGridAdapter
-import net.osmand.plus.gallery.ui.GalleryGridFragment
 import net.osmand.plus.gallery.ui.GalleryGridItemDecorator
 import net.osmand.plus.gallery.contract.IGalleryListener
 import net.osmand.plus.utils.ColorUtilities
@@ -24,6 +23,7 @@ class AstroGalleryCardViewHolder(
 	private val app: OsmandApplication,
 	private val mapActivity: MapActivity,
 	private val listener: IGalleryListener,
+	private val onActionButtonClick: (String?) -> Unit,
 	private val onToggle: (String) -> Unit
 ) : RecyclerView.ViewHolder(itemView) {
 
@@ -126,7 +126,8 @@ class AstroGalleryCardViewHolder(
 			mapActivity = mapActivity,
 			controller = listener,
 			viewWidth = null,
-			nightMode = nightMode
+			nightMode = nightMode,
+			loadStateRegistry = app.mediaLoadStateRegistry
 		)
 		adapterNightMode = nightMode
 		recyclerView.layoutManager = getGridLayoutManager()
@@ -139,9 +140,7 @@ class AstroGalleryCardViewHolder(
 
 	private fun setupViewAllButton() {
 		viewAllButton.setTitleId(R.string.shared_string_show_all)
-		viewAllButton.setOnClickListener {
-			GalleryGridFragment.showInstance(mapActivity, showAllTitle)
-		}
+		viewAllButton.setOnClickListener { onActionButtonClick(showAllTitle) }
 	}
 
 	private fun applyViewAllStyle(nightMode: Boolean) {
