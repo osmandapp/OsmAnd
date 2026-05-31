@@ -64,6 +64,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.gallery.attached.AttachedMediaRowController;
 import net.osmand.plus.gallery.contract.IGalleryRowController;
 import net.osmand.plus.gallery.data.GalleryKey;
 import net.osmand.plus.helpers.LocaleHelper;
@@ -147,6 +148,8 @@ public class MenuBuilder {
 
 	@Nullable
 	private IGalleryRowController onlinePhotosRowController;
+	@Nullable
+	private AttachedMediaRowController attachedMediaRowController;
 
 	private CollapseExpandListener collapseExpandListener;
 	private final List<SearchAmenitiesTask> searchAmenitiesTasks = new ArrayList<>();
@@ -359,6 +362,10 @@ public class MenuBuilder {
 		if (onlinePhotosRowController != null) {
 			onlinePhotosRowController.detach();
 			onlinePhotosRowController = null;
+		}
+		if (attachedMediaRowController != null) {
+			attachedMediaRowController.detach();
+			attachedMediaRowController = null;
 		}
 		clearPluginRows();
 		stopSearchAmenitiesTasks();
@@ -616,6 +623,18 @@ public class MenuBuilder {
 		buildGalleryRow(view, onlinePhotosRowController, R.drawable.ic_action_photo,
 				app.getString(R.string.online_photos), needUpdateOnly,
 				app.getSettings().ONLINE_PHOTOS_ROW_COLLAPSED);
+	}
+
+	protected void buildAttachedMediaRow(@NonNull View view, @NonNull GalleryKey key) {
+		boolean needUpdateOnly = attachedMediaRowController != null;
+		if (attachedMediaRowController == null) {
+			attachedMediaRowController = new AttachedMediaRowController(app, key);
+		}
+		buildGalleryRow(view, attachedMediaRowController,
+				R.drawable.ic_action_photo,
+				app.getString(R.string.shared_string_media),
+				needUpdateOnly,
+				app.getSettings().ATTACHED_MEDIA_ROW_COLLAPSED);
 	}
 
 	public void buildGalleryRow(@NonNull View view, @NonNull IGalleryRowController controller,

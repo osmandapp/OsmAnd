@@ -124,7 +124,8 @@ class AstroGalleryCardViewHolder(
 		}
 		galleryGridAdapter = GalleryGridAdapter(
 			mapActivity = mapActivity,
-			controller = listener,
+			galleryListener = listener,
+			actionListener = null,
 			viewWidth = null,
 			nightMode = nightMode,
 			loadStateRegistry = app.galleryHelper.loadStateRegistry

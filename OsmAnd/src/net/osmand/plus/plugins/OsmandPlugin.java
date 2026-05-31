@@ -40,7 +40,6 @@ import net.osmand.plus.download.DownloadOsmandIndexesHelper.IndexFileList;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.gallery.data.GalleryKey;
-import net.osmand.plus.gallery.model.GalleryAction;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
@@ -264,10 +263,6 @@ public abstract class OsmandPlugin {
 
 	protected boolean addContextMenuGalleryItem(@NonNull OnlinePhotosHolder holder,
 	                                            @NonNull JSONObject imageObject) {
-		return false;
-	}
-
-	protected boolean handleGalleryAction(@NonNull GalleryAction action) {
 		return false;
 	}
 

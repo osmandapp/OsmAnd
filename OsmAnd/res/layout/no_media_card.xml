@@ -4,7 +4,7 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:orientation="vertical"
-	android:paddingTop="16dp"
+	android:paddingTop="@dimen/content_padding"
 	android:paddingHorizontal="@dimen/content_padding"
 	android:paddingBottom="10dp">
 
@@ -15,9 +15,9 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginStart="48dp"
-		android:layout_marginTop="16dp"
-		android:visibility="gone"
+		app:dialogButtonTopMargin="@dimen/content_padding"
 		app:dialogButtonTitle="@string/shared_string_add"
+		app:dialogButtonHeight="@dimen/dialog_button_height"
 		app:dialogButtonType="secondary" />
 
 </LinearLayout>
