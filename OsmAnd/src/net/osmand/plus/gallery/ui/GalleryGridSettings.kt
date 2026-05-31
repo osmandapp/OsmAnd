@@ -5,6 +5,7 @@ import net.osmand.plus.helpers.AndroidUiHelper
 
 object GalleryGridSettings {
 
+	@JvmStatic
 	fun getSpanCount(mapActivity: MapActivity): Int {
 		val app = mapActivity.app
 		return if (AndroidUiHelper.isOrientationPortrait(mapActivity)) {
@@ -14,6 +15,7 @@ object GalleryGridSettings {
 		}
 	}
 
+	@JvmStatic
 	fun setSpanCount(mapActivity: MapActivity, spanCount: Int) {
 		val app = mapActivity.app
 		if (AndroidUiHelper.isOrientationPortrait(mapActivity)) {

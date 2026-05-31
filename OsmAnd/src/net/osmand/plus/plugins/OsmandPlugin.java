@@ -39,6 +39,7 @@ import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.IndexFileList;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.gallery.data.GalleryKey;
 import net.osmand.plus.gallery.model.GalleryAction;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
@@ -321,7 +322,8 @@ public abstract class OsmandPlugin {
 	/*
 	 * Add gallery menu row to the map context menu.
 	 */
-	public void buildContextMenuGalleryRows(@NonNull MenuBuilder menuBuilder, @NonNull View view) {
+	public void buildContextMenuGalleryRows(@NonNull MenuBuilder menuBuilder, @NonNull View view,
+	                                        @NonNull GalleryKey.Location key) {
 	}
 
 	@Nullable

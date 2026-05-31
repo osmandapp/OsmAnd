@@ -24,8 +24,8 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardType;
 import net.osmand.plus.gallery.contract.IGalleryRowController;
+import net.osmand.plus.gallery.data.GalleryKey;
 import net.osmand.plus.gallery.model.GalleryAction;
-import net.osmand.plus.gallery.model.GalleryItem;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.gallery.online.OnlinePhotosGroup;
@@ -249,10 +249,11 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void buildContextMenuGalleryRows(@NonNull MenuBuilder menuBuilder, @NonNull View view) {
+	public void buildContextMenuGalleryRows(@NonNull MenuBuilder menuBuilder, @NonNull View view,
+	                                        @NonNull GalleryKey.Location key) {
 		boolean needUpdateOnly = mapillaryRowController != null;
 		if (mapillaryRowController == null) {
-			mapillaryRowController = new MapillaryRowController(app, menuBuilder, this);
+			mapillaryRowController = new MapillaryRowController(app, key);
 		}
 		menuBuilder.buildGalleryRow(view, mapillaryRowController, R.drawable.ic_action_photo_street,
 				app.getString(R.string.street_level_imagery), needUpdateOnly,
@@ -262,7 +263,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 	@Override
 	public void clearContextMenuRows() {
 		if (mapillaryRowController != null) {
-			mapillaryRowController.onClose();
+			mapillaryRowController.detach();
 			mapillaryRowController = null;
 		}
 	}
@@ -303,14 +304,8 @@ public class MapillaryPlugin extends OsmandPlugin {
 			if (mapillaryPhoto) {
 				MediaItem.Remote item = RemoteMediaFactory.fromJson(imageObject.toString(), MediaOrigin.MAPILLARY);
 				if (item != null) {
-					holder.addMediaItem(OnlinePhotosGroup.MAPILLARY, item);
+					holder.addItem(OnlinePhotosGroup.MAPILLARY, item);
 				}
-			} else {
-				holder.addGalleryItem(
-						OnlinePhotosGroup.MAPILLARY,
-						TYPE_MAPILLARY_CONTRIBUTE,
-						new GalleryItem.Action(new GalleryAction(TYPE_MAPILLARY_CONTRIBUTE))
-				);
 			}
 		} catch (Exception e) {
 			LOG.error(e);

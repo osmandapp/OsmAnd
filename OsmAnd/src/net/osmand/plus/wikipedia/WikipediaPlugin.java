@@ -303,7 +303,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 			String fileName = url.substring(colonIdx + 1);
 			WikiImage wikiImage = WikiHelper.INSTANCE.getImageData(fileName);
 			if (wikiImage != null) {
-				holder.addMediaItem(OTHER, RemoteMediaFactory.fromWikiImage(wikiImage));
+				holder.addItem(OTHER, RemoteMediaFactory.fromWikiImage(wikiImage));
 				return true;
 			}
 		} catch (JSONException e) {

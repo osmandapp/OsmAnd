@@ -65,7 +65,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.gallery.contract.IGalleryRowController;
-import net.osmand.plus.gallery.online.OnlinePhotoParamsProvider;
+import net.osmand.plus.gallery.data.GalleryKey;
 import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.mapcontextmenu.SearchAmenitiesTask.SearchAmenitiesListener;
 import net.osmand.plus.mapcontextmenu.SearchByRouteIdTask.SearchByRouteIdListener;
@@ -115,7 +115,7 @@ import java.lang.ref.WeakReference;
 import java.text.DateFormat;
 import java.util.*;
 
-public class MenuBuilder implements OnlinePhotoParamsProvider {
+public class MenuBuilder {
 
 	private static final Log LOG = PlatformUtil.getLog(MenuBuilder.class);
 	public static final float SHADOW_HEIGHT_TOP_DP = 17f;
@@ -331,8 +331,9 @@ public class MenuBuilder implements OnlinePhotoParamsProvider {
 
 	public void buildPhotosRow(@NonNull ViewGroup view, @Nullable Object object) {
 		if (customization.isFeatureEnabled(CONTEXT_MENU_ONLINE_PHOTOS_ID) && showOnlinePhotos) {
-			buildOnlinePhotosRow(view);
-			buildPluginGalleryRows(view, object);
+			GalleryKey.Location key = new GalleryKey.Location(latLon, new LinkedHashMap<>(getAdditionalImageParams()));
+			buildOnlinePhotosRow(view, key);
+			buildPluginGalleryRows(view, key);
 		}
 	}
 
@@ -356,7 +357,7 @@ public class MenuBuilder implements OnlinePhotoParamsProvider {
 
 	void onClose() {
 		if (onlinePhotosRowController != null) {
-			onlinePhotosRowController.onClose();
+			onlinePhotosRowController.detach();
 			onlinePhotosRowController = null;
 		}
 		clearPluginRows();
@@ -397,9 +398,9 @@ public class MenuBuilder implements OnlinePhotoParamsProvider {
 		}
 	}
 
-	protected void buildPluginGalleryRows(@NonNull View view, @Nullable Object object) {
+	protected void buildPluginGalleryRows(@NonNull View view, @NonNull GalleryKey.Location key) {
 		for (OsmandPlugin plugin : menuPlugins) {
-			plugin.buildContextMenuGalleryRows(this, view);
+			plugin.buildContextMenuGalleryRows(this, view, key);
 		}
 	}
 
@@ -607,10 +608,10 @@ public class MenuBuilder implements OnlinePhotoParamsProvider {
 		}
 	}
 
-	protected void buildOnlinePhotosRow(@NonNull View view) {
+	protected void buildOnlinePhotosRow(@NonNull View view, @NonNull GalleryKey.Location key) {
 		boolean needUpdateOnly = onlinePhotosRowController != null;
 		if (onlinePhotosRowController == null) {
-			onlinePhotosRowController = new OnlinePhotosRowController(app, this);
+			onlinePhotosRowController = new OnlinePhotosRowController(app, key);
 		}
 		buildGalleryRow(view, onlinePhotosRowController, R.drawable.ic_action_photo,
 				app.getString(R.string.online_photos), needUpdateOnly,
@@ -641,7 +642,7 @@ public class MenuBuilder implements OnlinePhotoParamsProvider {
 				.setTextLinesLimit(1)
 				.build()
 		);
-		controller.onGalleryRowBuilt(updateOnly, collapsableView.isCollapsed());
+		controller.onRowBuilt(collapsableView.isCollapsed());
 	}
 
 	private void buildCoordinatesRow(@NonNull View view) {

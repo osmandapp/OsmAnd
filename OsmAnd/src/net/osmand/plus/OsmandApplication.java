@@ -64,6 +64,9 @@ import net.osmand.plus.feedback.AnalyticsHelper;
 import net.osmand.plus.feedback.FeedbackHelper;
 import net.osmand.plus.feedback.RateUsHelper;
 import net.osmand.plus.feedback.RateUsState;
+import net.osmand.plus.gallery.data.GalleryRepository;
+import net.osmand.plus.gallery.data.MediaLoadStateRegistry;
+import net.osmand.plus.gallery.data.MediaLoader;
 import net.osmand.plus.help.HelpArticlesHelper;
 import net.osmand.plus.helpers.*;
 import net.osmand.plus.importfiles.ImportHelper;
@@ -224,6 +227,9 @@ public class OsmandApplication extends MultiDexApplication {
 	ExplorePlacesOnlineProvider explorePlacesProvider;
 	HelpArticlesHelper helpArticlesHelper;
 	ClickableWayHelper clickableWayHelper;
+	MediaLoadStateRegistry mediaLoadStateRegistry;
+	GalleryRepository galleryRepository;
+	MediaLoader mediaLoader;
 
 	private final Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
@@ -723,6 +729,21 @@ public class OsmandApplication extends MultiDexApplication {
 	@NonNull
 	public HelpArticlesHelper getHelpArticlesHelper() {
 		return helpArticlesHelper;
+	}
+
+	@NonNull
+	public MediaLoadStateRegistry getMediaLoadStateRegistry() {
+		return mediaLoadStateRegistry;
+	}
+
+	@NonNull
+	public GalleryRepository getGalleryRepository() {
+		return galleryRepository;
+	}
+
+	@NonNull
+	public MediaLoader getMediaLoader() {
+		return mediaLoader;
 	}
 
 	public CommandPlayer getPlayer() {

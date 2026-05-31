@@ -7,9 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
-import net.osmand.plus.gallery.GallerySession
 import net.osmand.plus.gallery.contract.IGalleryListener
-import net.osmand.plus.gallery.ui.GalleryPhotoPagerFragment
 import net.osmand.plus.plugins.astronomy.Catalog
 import net.osmand.shared.media.domain.MediaItem
 import java.time.LocalDate
@@ -20,6 +18,8 @@ class AstroContextMenuAdapter(
 	private val nightMode: Boolean,
 	private val onDescriptionRead: (AstroDescriptionCardItem) -> Unit,
 	private val onGalleryToggle: (String) -> Unit,
+	private val onMediaClick: (MediaItem) -> Unit,
+	private val onActionButtonClick: (String?) -> Unit,
 	private val onUpdateImage: () -> Unit,
 	private val onKnowledgeCardAction: () -> Unit,
 	private val onVisibilityResetToToday: () -> Unit,
@@ -111,16 +111,14 @@ class AstroContextMenuAdapter(
 					listener = object : IGalleryListener {
 
 						override fun onMediaItemClicked(mediaItem: MediaItem) {
-							GalleryPhotoPagerFragment.showInstance(
-								mapActivity,
-								GallerySession.getPhotoItemIndexById(mediaItem.id)
-							)
+							onMediaClick(mediaItem)
 						}
 
 						override fun onReloadMediaItems() {
 							onUpdateImage()
 						}
 					},
+					onActionButtonClick = onActionButtonClick,
 					onToggle = onGalleryToggle
 				)
 			}

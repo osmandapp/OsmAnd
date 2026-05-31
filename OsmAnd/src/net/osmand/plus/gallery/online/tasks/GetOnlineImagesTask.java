@@ -90,7 +90,7 @@ public class GetOnlineImagesTask extends AsyncTask<Void, Void, OnlinePhotosHolde
 
 			List<WikiImage> wikimediaImageList = WikiCoreHelper.INSTANCE.getWikiImageList(params, networkResponseListener);
 			for (WikiImage wikiImage : wikimediaImageList) {
-				holder.addMediaItem(WIKIMEDIA, RemoteMediaFactory.fromWikiImage(wikiImage));
+				holder.addItem(WIKIMEDIA, RemoteMediaFactory.fromWikiImage(wikiImage));
 			}
 			String key = params.remove(Amenity.MAPILLARY);
 			if (!Algorithms.isEmpty(key)) {
@@ -98,7 +98,7 @@ public class GetOnlineImagesTask extends AsyncTask<Void, Void, OnlinePhotosHolde
 				if (imageObject != null) {
 					MediaItem item = RemoteMediaFactory.fromJson(imageObject.toString(), MediaOrigin.MAPILLARY);
 					if (item != null) {
-						holder.addMediaItem(MAPILLARY_AMENITY, item);
+						holder.addItem(MAPILLARY_AMENITY, item);
 					}
 				}
 			}
@@ -116,7 +116,8 @@ public class GetOnlineImagesTask extends AsyncTask<Void, Void, OnlinePhotosHolde
 								if (!PluginsHelper.addContextMenuGalleryItem(holder, imageObject)) {
 									MediaItem.Remote mediaItem = RemoteMediaFactory.fromUrlImageJson(imageObject.toString());
 									if (mediaItem != null) {
-										holder.addMediaItem(OTHER, mediaItem, true);
+										holder.addItem(OTHER, mediaItem);
+										holder.addItem(OTHER, mediaItem);
 									}
 								}
 							}

@@ -42,6 +42,11 @@ import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.exploreplaces.ExplorePlacesOnlineProvider;
 import net.osmand.plus.feedback.AnalyticsHelper;
 import net.osmand.plus.feedback.FeedbackHelper;
+import net.osmand.plus.gallery.data.GalleryKey;
+import net.osmand.plus.gallery.data.GalleryRepository;
+import net.osmand.plus.gallery.data.MediaLoadStateRegistry;
+import net.osmand.plus.gallery.data.MediaLoader;
+import net.osmand.plus.gallery.online.OnlinePhotosDelegate;
 import net.osmand.plus.help.HelpArticlesHelper;
 import net.osmand.plus.helpers.*;
 import net.osmand.plus.importfiles.ImportHelper;
@@ -52,10 +57,10 @@ import net.osmand.plus.keyevent.KeyEventHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
-import net.osmand.plus.myplaces.favorites.dialogs.FavoriteSortModesHelper;
 import net.osmand.plus.notifications.NotificationHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.astronomy.AstronomyDelegate;
 import net.osmand.plus.plugins.monitoring.live.LiveMonitoringHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
@@ -361,6 +366,10 @@ public class AppInitializer implements IProgress {
 		app.helpArticlesHelper = startupInit(new HelpArticlesHelper(app), HelpArticlesHelper.class);
 		app.clickableWayHelper = startupInit(new ClickableWayHelper(app), ClickableWayHelper.class);
 		app.autoBackupHelper = startupInit(new AutoBackupHelper(app), AutoBackupHelper.class);
+		app.mediaLoadStateRegistry = startupInit(new MediaLoadStateRegistry(), MediaLoadStateRegistry.class);
+		app.galleryRepository = startupInit(new GalleryRepository(app.mediaLoadStateRegistry), GalleryRepository.class);
+		app.mediaLoader = startupInit(new MediaLoader(app.galleryRepository), MediaLoader.class);
+		registerMediaLoaderDelegates();
 		initOpeningHoursParser();
 	}
 
@@ -410,6 +419,17 @@ public class AppInitializer implements IProgress {
 			}
 		});
 		app.regions.setLocale(app.getLanguage(), app.getLocaleHelper().getCountry());
+	}
+
+	private void registerMediaLoaderDelegates() {
+		app.mediaLoader.registerDelegate(
+				GalleryKey.Location.class,
+				new OnlinePhotosDelegate(app)
+		);
+		app.mediaLoader.registerDelegate(
+				GalleryKey.Astronomy.class,
+				new AstronomyDelegate(app)
+		);
 	}
 
 

@@ -9,6 +9,7 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.gallery.contract.IGalleryListener
+import net.osmand.plus.gallery.data.MediaLoadStateRegistry
 import net.osmand.plus.gallery.model.GalleryItem
 import net.osmand.plus.gallery.ui.holders.GalleryMediaViewHolder
 import net.osmand.plus.gallery.ui.holders.MediaHolderType
@@ -23,7 +24,8 @@ class GalleryGridAdapter(
 	private val mapActivity: MapActivity,
 	private val controller: IGalleryListener,
 	private val viewWidth: Int?,
-	private val nightMode: Boolean
+	private val nightMode: Boolean,
+	private val loadStateRegistry: MediaLoadStateRegistry
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 	private val app: OsmandApplication = mapActivity.app
@@ -79,7 +81,7 @@ class GalleryGridAdapter(
 				}
 				holder.bindView(
 					mapActivity, controller, item, type, viewWidth,
-					mediaProvider, nightMode
+					mediaProvider, nightMode, loadStateRegistry
 				)
 			}
 			holder is ActionViewHolder && item is GalleryItem.Action -> {
