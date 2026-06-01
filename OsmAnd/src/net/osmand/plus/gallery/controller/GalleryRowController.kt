@@ -32,7 +32,6 @@ abstract class GalleryRowController(
 			items = buildGalleryItems(holder).ifEmpty {
 				emptyStateItems()
 			}
-
 			view?.render()
 		}
 
