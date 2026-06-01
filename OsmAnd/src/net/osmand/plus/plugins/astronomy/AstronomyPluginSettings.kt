@@ -162,6 +162,7 @@ class AstronomyPluginSettings(private val settingsPref: CommonPreference<String>
 		return array
 	}
 
+	@Synchronized
 	fun getCommonConfig(): CommonConfig {
 		val root = getSettingsJson()
 		val settings = root.optJSONObject(KEY_COMMON)
@@ -171,6 +172,7 @@ class AstronomyPluginSettings(private val settingsPref: CommonPreference<String>
 		return CommonConfig(showStarMap)
 	}
 
+	@Synchronized
 	fun setCommonConfig(config: CommonConfig) {
 		val root = getSettingsJson()
 		val settings = root.optJSONObject(KEY_COMMON) ?: JSONObject()
@@ -181,7 +183,12 @@ class AstronomyPluginSettings(private val settingsPref: CommonPreference<String>
 		setSettingsJson(root)
 	}
 
+	@Synchronized
 	fun getStarMapConfig(): StarMapConfig {
+		return readStarMapConfig()
+	}
+
+	private fun readStarMapConfig(): StarMapConfig {
 		val root = getSettingsJson()
 		val mapSettings = root.optJSONObject(KEY_STAR_MAP)
 
@@ -253,7 +260,22 @@ class AstronomyPluginSettings(private val settingsPref: CommonPreference<String>
 		)
 	}
 
+	@Synchronized
 	fun setStarMapConfig(config: StarMapConfig) {
+		writeStarMapConfig(config)
+	}
+
+	@Synchronized
+	fun updateStarMapConfig(transform: (StarMapConfig) -> StarMapConfig): StarMapConfig {
+		val current = readStarMapConfig()
+		val updated = transform(current)
+		if (updated != current) {
+			writeStarMapConfig(updated)
+		}
+		return updated
+	}
+
+	private fun writeStarMapConfig(config: StarMapConfig) {
 		val root = getSettingsJson()
 		val mapSettings = root.optJSONObject(KEY_STAR_MAP) ?: JSONObject()
 
@@ -312,57 +334,57 @@ class AstronomyPluginSettings(private val settingsPref: CommonPreference<String>
 	}
 
 	fun addFavorite(id: String) {
-		val config = getStarMapConfig()
-		if (config.favorites.none { it.id == id }) {
-			val favorites = config.favorites.toMutableList()
-			favorites.add(FavoriteConfig(id))
-			setStarMapConfig(config.copy(favorites = favorites))
+		updateStarMapConfig { config ->
+			if (config.favorites.any { it.id == id }) {
+				config
+			} else {
+				config.copy(favorites = config.favorites + FavoriteConfig(id))
+			}
 		}
 	}
 
 	fun removeFavorite(id: String) {
-		val config = getStarMapConfig()
-		val favorites = config.favorites.toMutableList()
-		if (favorites.removeAll { it.id == id }) {
-			setStarMapConfig(config.copy(favorites = favorites))
+		updateStarMapConfig { config ->
+			config.copy(favorites = config.favorites.filterNot { it.id == id })
 		}
 	}
 
 	fun addDirection(id: String): Int {
-		val config = getStarMapConfig()
-		if (config.directions.none { it.id == id }) {
-			val directions = config.directions.toMutableList()
-			val maxColor = directions.maxOfOrNull { it.colorIndex } ?: -1
-			val nextColor = (maxColor + 1) % DirectionColor.entries.size
-			directions.add(DirectionConfig(id, nextColor))
-			setStarMapConfig(config.copy(directions = directions))
-			return nextColor
+		var resultColor = 0
+		updateStarMapConfig { config ->
+			val existing = config.directions.find { it.id == id }
+			if (existing != null) {
+				resultColor = existing.colorIndex
+				config
+			} else {
+				val maxColor = config.directions.maxOfOrNull { it.colorIndex } ?: -1
+				val nextColor = (maxColor + 1) % DirectionColor.entries.size
+				resultColor = nextColor
+				config.copy(directions = config.directions + DirectionConfig(id, nextColor))
+			}
 		}
-		return config.directions.find { it.id == id }?.colorIndex ?: 0
+		return resultColor
 	}
 
 	fun removeDirection(id: String) {
-		val config = getStarMapConfig()
-		val directions = config.directions.toMutableList()
-		if (directions.removeAll { it.id == id }) {
-			setStarMapConfig(config.copy(directions = directions))
+		updateStarMapConfig { config ->
+			config.copy(directions = config.directions.filterNot { it.id == id })
 		}
 	}
 
 	fun addCelestialPath(id: String) {
-		val config = getStarMapConfig()
-		if (config.celestialPaths.none { it.id == id }) {
-			val paths = config.celestialPaths.toMutableList()
-			paths.add(CelestialPathConfig(id))
-			setStarMapConfig(config.copy(celestialPaths = paths))
+		updateStarMapConfig { config ->
+			if (config.celestialPaths.any { it.id == id }) {
+				config
+			} else {
+				config.copy(celestialPaths = config.celestialPaths + CelestialPathConfig(id))
+			}
 		}
 	}
 
 	fun removeCelestialPath(id: String) {
-		val config = getStarMapConfig()
-		val paths = config.celestialPaths.toMutableList()
-		if (paths.removeAll { it.id == id }) {
-			setStarMapConfig(config.copy(celestialPaths = paths))
+		updateStarMapConfig { config ->
+			config.copy(celestialPaths = config.celestialPaths.filterNot { it.id == id })
 		}
 	}
 }

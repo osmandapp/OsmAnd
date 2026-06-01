@@ -22,6 +22,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.gallery.controller.GalleryController;
+import net.osmand.plus.gallery.helpers.AttachedMediaUiHelper;
 import net.osmand.plus.gallery.model.GalleryItem;
 import net.osmand.plus.gallery.model.GalleryItem.MediaCount;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -30,6 +31,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.shared.media.domain.MediaItem;
+import net.osmand.shared.media.domain.MediaType;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -94,7 +96,7 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 
 				List<GalleryItem> items = new ArrayList<>();
 				items.add(MediaCount.INSTANCE);
-				items.addAll(controller.getOnlinePhotoItems());
+				items.addAll(controller.getMediaItems());
 				adapter.setItems(items);
 
 				recyclerView.setAdapter(adapter);
@@ -140,8 +142,12 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 			@Override
 			public void onMediaItemClicked(@NonNull MediaItem mediaItem) {
 				callMapActivity(activity -> {
-					int index = controller.getPhotoItemIndexById(mediaItem.getId());
-					GalleryPhotoPagerFragment.showInstance(activity, index);
+					if (mediaItem.getType() == MediaType.PHOTO) {
+						int index = controller.getPhotoItemIndexById(mediaItem.getId());
+						GalleryPhotoPagerFragment.showInstance(activity, index);
+					} else {
+						new AttachedMediaUiHelper(activity).openMediaItem(mediaItem, nightMode);
+					}
 				});
 			}
 

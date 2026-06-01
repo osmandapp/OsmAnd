@@ -38,11 +38,11 @@
     <string name="proxy_disconnected">Ühendus puudub</string>
     <string name="proxy_settings">Puhverserveri seaded</string>
     <string name="proxy">Puhverserver</string>
-    <string name="altitude">Kõrgus</string>
+    <string name="altitude">Kõrgus merepinnast</string>
     <string name="shared_string_search">Otsi</string>
     <string name="shared_string_ok">Sobib</string>
     <string name="shared_string_update">Uuenda</string>
-    <string name="average_altitude">Keskmine kõrgus</string>
+    <string name="average_altitude">Keskmine kõrgus merepinnast</string>
     <string name="average_speed">Keskmine kiirus</string>
     <string name="shared_string_map">Kaart</string>
     <string name="shared_string_add">Lisa</string>

@@ -92,7 +92,8 @@ abstract class AstroDataProvider {
 			Triple(Body.Jupiter, bodyColor(Body.Jupiter), "Q319"),
 			Triple(Body.Saturn, bodyColor(Body.Saturn), "Q193"),
 			Triple(Body.Uranus, bodyColor(Body.Uranus), "Q324"),
-			Triple(Body.Neptune, bodyColor(Body.Neptune), "Q332")
+			Triple(Body.Neptune, bodyColor(Body.Neptune), "Q332"),
+			Triple(Body.Pluto, bodyColor(Body.Pluto), "Q339")
 		)
 
 		planets.forEach { (body, color, wid) ->

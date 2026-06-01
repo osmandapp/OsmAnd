@@ -2231,7 +2231,7 @@
     <string name="poi_cuisine_hotdog">Хот-дог</string>
     <string name="poi_lighting">Освітлювальні прилади</string>
     <string name="poi_payment_meal_voucher_yes">Талони на харчування</string>
-    <string name="poi_vending_drinks">Продаж напоїв</string>
+    <string name="poi_vending_drinks">Напої</string>
     <string name="poi_beach_rocky">Камені</string>
     <string name="poi_model_aerodrome">Авіамодельний спорт</string>
     <string name="poi_health_specialty_tropical_medicine_no">Спеціалізація: тропічна медицина: відсутнє</string>
@@ -2659,7 +2659,7 @@
     <string name="poi_cuisine_sausage">Ковбаса</string>
     <string name="poi_cuisine_british">Британська</string>
     <string name="poi_microbrewery_no">Немає власної броварні</string>
-    <string name="poi_vending_water">Продаж води</string>
+    <string name="poi_vending_water">Вода</string>
     <string name="poi_lit_yes">Об\'єкт освітлений: так</string>
     <string name="poi_parish">Офіс парафії</string>
     <string name="poi_castle_type_palace">Вид замку: палац</string>
@@ -2734,7 +2734,7 @@
     <string name="poi_cuisine_belgian">Бельгійська</string>
     <string name="poi_delivery_only">Лише з доставкою</string>
     <string name="poi_outdoor_seating_filter_yes">Так;Літній майданчик</string>
-    <string name="poi_vending_toys">Продаж іграшок</string>
+    <string name="poi_vending_toys">Іграшки</string>
     <string name="poi_surface_paving_stones">Поверхня: тротуарна плитка</string>
     <string name="poi_fuel_charcoal">Паливо: деревне вугілля</string>
     <string name="poi_massage_chinese">Китайський</string>
@@ -2744,7 +2744,7 @@
     <string name="poi_cuisine_soup">Суп</string>
     <string name="poi_cuisine_basque">Баскська</string>
     <string name="poi_outdoor_seating_yes">Місця на відкритому повітрі: є</string>
-    <string name="poi_vending_ice_cream">Продаж морозива</string>
+    <string name="poi_vending_ice_cream">Морозиво</string>
     <string name="poi_surface_pebblestone">Поверхня: галька</string>
     <string name="poi_fuel_coal">Паливо: кам\'яне вугілля</string>
     <string name="poi_health_specialty_obstetrics_caesarean_section_no">Спеціалізація: акушерство (кесарів розтин): відсутнє</string>

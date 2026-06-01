@@ -48,8 +48,11 @@ import net.osmand.plus.download.local.LocalItemUtils;
 import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile;
 import net.osmand.plus.keyevent.devices.ParrotDeviceProfile;
 import net.osmand.plus.keyevent.devices.WunderLINQDeviceProfile;
+import net.osmand.plus.gallery.helpers.AttachedMediaDataHelper;
 import net.osmand.plus.mapmarkers.MarkersDb39HelperLegacy;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.srtm.TerrainMode;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.profiles.ProfileIcons;
@@ -163,8 +166,9 @@ public class AppVersionUpgradeOnInit {
 	public static final int VERSION_5_3_01 = 5301;
 	public static final int VERSION_5_3_02 = 5302;
 	public static final int VERSION_5_3_04 = 5304;
+	public static final int VERSION_5_3_05 = 5305;
 
-	public static final int LAST_APP_VERSION = VERSION_5_3_04;
+	public static final int LAST_APP_VERSION = VERSION_5_3_05;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -330,6 +334,9 @@ public class AppVersionUpgradeOnInit {
 				}
 				if (prevAppVersion < VERSION_5_3_04) {
 					migrateProfileIconsToMx(settings);
+				}
+				if (prevAppVersion < VERSION_5_3_05) {
+					app.getAppInitializer().addOnFinishListener(init -> migrateAudioVideoNotesToFavorites());
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -1148,6 +1155,14 @@ public class AppVersionUpgradeOnInit {
 					}
 				}
 			}
+		}
+	}
+
+	private void migrateAudioVideoNotesToFavorites() {
+		AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
+		if (plugin != null) {
+			plugin.indexingFiles(true, false);
+			new AttachedMediaDataHelper(app).convertRecordingsToFavorites(plugin.getAllRecordings());
 		}
 	}
 

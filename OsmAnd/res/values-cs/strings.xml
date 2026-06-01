@@ -6167,4 +6167,13 @@
     <string name="astro_locate">Najít</string>
     <string name="show_layout_grid_logs">Ukázat záznamy mřížky</string>
     <string name="open_from_short">Od</string>
+    <string name="favorite_confirm_delete_folder">Tím se smaže složka „%1$s“, včetně všech podsložek a %2$d oblíbených položek.</string>
+    <string name="favorite_folder_rename_conflict">Složka s tímto názvem již existuje.</string>
+    <string name="favorite_folder_invalid_name">Název složky nesmí obsahovat znaky / nebo _%_</string>
+    <string name="favorite_folder_duplicate_message">Zvolte název složky, který ještě neexistuje.</string>
+    <string name="favorite_folder_name">Název složky</string>
+    <string name="edit_folder">Upravit složku</string>
+    <string name="obd_simulation_device">Zařízení k simulaci</string>
+    <string name="astronomy_map">Astronomická mapa</string>
+    <string name="astro_designations">Označení</string>
 </resources>

@@ -13,20 +13,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.primitives.Link;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
-public class FavouritePoint implements Serializable, LocationPoint {
-
-	private static final long serialVersionUID = 729654300829771466L;
+public class FavouritePoint implements LocationPoint {
 
 	private static final String DELIMITER = "__";
 	private static final String HIDDEN = "hidden";
@@ -41,6 +41,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	private String description;
 	private String address;
 	private String comment;
+	private List<Link> links;
 
 	private double latitude;
 	private double longitude;
@@ -99,6 +100,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.pickupDate = point.pickupDate;
 		this.calendarEvent = point.calendarEvent;
 		this.amenityExtensions = new HashMap<>(point.amenityExtensions);
+		this.links = copyLinks(point.links);
 		initPersonalType();
 	}
 
@@ -269,6 +271,34 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	}
 
 	@Nullable
+	public List<Link> getLinks() {
+		return links;
+	}
+
+	public void setLinks(@Nullable List<Link> links) {
+		this.links = Algorithms.isEmpty(links) ? null : new ArrayList<>(links);
+	}
+
+	@Nullable
+	private static List<Link> copyLinks(@Nullable List<Link> links) {
+		if (!Algorithms.isEmpty(links)) {
+			List<Link> res = new ArrayList<>(links.size());
+			for (int i = 0; i < links.size(); i++) {
+				res.add(new Link(links.get(i)));
+			}
+			return res;
+		}
+		return null;
+	}
+
+	public void addLink(@NonNull Link link) {
+		if (links == null) {
+			links = new ArrayList<>();
+		}
+		links.add(link);
+	}
+
+	@Nullable
 	public String getAmenityOriginName() {
 		return amenityOriginName;
 	}
@@ -416,6 +446,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		point.setComment(wptPt.getComment());
 		point.setAmenityOriginName(wptPt.getAmenityOriginName());
 		point.setAmenityExtensions(wptPt.getExtensionsToRead());
+		point.setLinks(wptPt.getLinks());
 
 		Map<String, String> extensions = wptPt.getExtensionsToWrite();
 		if (extensions.containsKey(VISITED_DATE)) {
@@ -460,6 +491,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		point.setName(getName());
 		point.setDesc(getDescription());
 		point.setComment(getComment());
+		point.setLinks(getLinks());
 
 		if (!Algorithms.isEmpty(getCategory())) {
 			point.setCategory(getCategory());

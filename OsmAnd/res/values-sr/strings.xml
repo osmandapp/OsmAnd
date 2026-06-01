@@ -6136,10 +6136,10 @@
     <string name="astro_designations">Ознаке</string>
     <string name="astronomy_map">Небеска карта</string>
     <string name="obd_simulation_device">Уређај за опонашање</string>
-    <string name="favorite_confirm_delete_folder">Овим ће се обрисати фолдер „%1$s“, укључујући угнежђени фолдери и %2$d омиљених тачака.</string>
-    <string name="favorite_folder_rename_conflict">Фолдер са овим именом већ постоји.</string>
-    <string name="favorite_folder_invalid_name">Име фолдера не сме да садржи / или _%_</string>
-    <string name="favorite_folder_duplicate_message">Користите име фолдера који већ не постоји.</string>
-    <string name="favorite_folder_name">Име фолдера</string>
-    <string name="edit_folder">Уреди фолдер</string>
+    <string name="favorite_confirm_delete_folder">Овим ће се обрисати омот „%1$s“, обухватајући угнежђене омоте и %2$d омиљену тачку(е).</string>
+    <string name="favorite_folder_rename_conflict">Омот са овим именом већ постоји.</string>
+    <string name="favorite_folder_invalid_name">Име омота не сме да садржи / или _%_</string>
+    <string name="favorite_folder_duplicate_message">Користи име омота које већ не постоји.</string>
+    <string name="favorite_folder_name">Име омота</string>
+    <string name="edit_folder">Уреди омот</string>
 </resources>

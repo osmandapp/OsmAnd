@@ -65,15 +65,16 @@ class StarObjectsViewModel(
 			val indexMap = favorites.withIndex().associate { it.value.id to it.index }
 
 			fun applyConfig(obj: SkyObject) {
+				val directionConfig = directionsMap[obj.id]
 				obj.isFavorite = favoritesMap.contains(obj.id)
-				obj.showDirection = directionsMap.contains(obj.id)
-				obj.colorIndex = directionsMap[obj.id]?.colorIndex ?: 0
+				obj.showDirection = directionConfig != null
+				obj.colorIndex = directionConfig?.colorIndex ?: 0
 				obj.showCelestialPath = celestialPathsMap.contains(obj.id)
 			}
 			objects.forEach(::applyConfig)
 			constellations.forEach(::applyConfig)
-			objects.sortBy { indexMap[it.id] ?: Int.MAX_VALUE }
-			constellations.sortBy { indexMap[it.id] ?: Int.MAX_VALUE }
+			objects.sortBy { obj -> indexMap[obj.id] ?: Int.MAX_VALUE }
+			constellations.sortBy { obj -> indexMap[obj.id] ?: Int.MAX_VALUE }
 
 			_skyObjects.postValue(objects)
 			_constellations.postValue(constellations)

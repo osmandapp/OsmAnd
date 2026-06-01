@@ -197,6 +197,7 @@
 	<string name="poi_memorial_type">Memorial type</string>
 	<string name="poi_covered_booth_filter">Booth</string>
 	<string name="poi_rapids_filter">Rapids grade</string>
+	<string name="poi_water_type_filter">Water type</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -5769,5 +5770,7 @@
 	<string name="poi_rapids_grade_5">5 (expert)</string>
 	<string name="poi_rapids_grade_6">6 (extreme)</string>
 	<string name="poi_rapids_grade_x">X (not runnable)</string>
+
+	<string name="poi_water_lake">Lake</string>
 
 </resources>

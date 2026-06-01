@@ -24,6 +24,7 @@ import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.shape.ShapeAppearanceModel
 import com.google.android.material.tabs.TabLayout
+import net.osmand.PlatformUtil
 import net.osmand.plus.R
 import net.osmand.plus.base.BaseMaterialFragment
 import net.osmand.plus.chooseplan.ChoosePlanFragment
@@ -122,6 +123,7 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 	private var programmaticSectionScrollToken = 0
 
 	companion object {
+		private val LOG = PlatformUtil.getLog(AstroContextMenuFragment::class.java)
 		val TAG: String = AstroContextMenuFragment::class.java.simpleName
 		private const val ARG_SKY_OBJECT_ID = "skyObjectId"
 		private const val TAB_OVERVIEW = 0
@@ -1302,7 +1304,8 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 		val intent = Intent(Intent.ACTION_VIEW, uri)
 		try {
 			startActivity(intent)
-		} catch (_: Exception) {
+		} catch (e: Exception) {
+			LOG.error("Error opening astronomy URI: $uri", e)
 		}
 	}
 

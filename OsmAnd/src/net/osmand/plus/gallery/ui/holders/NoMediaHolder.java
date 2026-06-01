@@ -3,6 +3,7 @@ package net.osmand.plus.gallery.ui.holders;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,21 +26,27 @@ public class NoMediaHolder extends RecyclerView.ViewHolder {
 
 	private final OsmandApplication app;
 	private final ImageView imageView;
+	private final TextView titleView;
+	private final TextView descriptionView;
 	private final View actionButton;
 
 	public NoMediaHolder(@NonNull View itemView, @NonNull OsmandApplication app) {
 		super(itemView);
 		this.imageView = itemView.findViewById(R.id.icon);
+		this.titleView = itemView.findViewById(R.id.title);
+		this.descriptionView = itemView.findViewById(R.id.description);
 		this.actionButton = itemView.findViewById(R.id.no_media_action_button);
 		this.app = app;
 	}
 
 	public void bindView(boolean nightMode, @NonNull GalleryItem.NoMedia item) {
 		Drawable icon = app.getUIUtilities().getPaintedIcon(
-				R.drawable.ic_action_desert,
+				item.getIconResId(),
 				ColorUtilities.getDefaultIconColor(app, nightMode)
 		);
 		imageView.setImageDrawable(icon);
+		titleView.setText(item.getTitleResId());
+		descriptionView.setText(item.getDescriptionResId());
 		bindAction(item.getAction());
 	}
 
@@ -47,13 +54,15 @@ public class NoMediaHolder extends RecyclerView.ViewHolder {
 		AndroidUiHelper.updateVisibility(actionButton, action != null);
 
 		if (action != null) {
-			actionButton.setOnClickListener(v -> {
-				if (!PluginsHelper.handleGalleryAction(action)) {
-					LOG.warn("Unhandled gallery action: " + action.getId());
-				}
-			});
+			actionButton.setOnClickListener(v -> handleAction(action));
 		} else {
 			actionButton.setOnClickListener(null);
+		}
+	}
+
+	private void handleAction(@NonNull GalleryAction action) {
+		if (!PluginsHelper.handleGalleryAction(action)) {
+			LOG.warn("Unhandled gallery action: " + action.getId());
 		}
 	}
 }

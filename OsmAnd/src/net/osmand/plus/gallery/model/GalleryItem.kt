@@ -1,5 +1,8 @@
 package net.osmand.plus.gallery.model
 
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
+import net.osmand.plus.R
 import net.osmand.shared.media.domain.MediaItem
 
 /**
@@ -16,8 +19,11 @@ sealed class GalleryItem {
 		val action: GalleryAction
 	) : GalleryItem()
 
-	data class NoMedia(
-		val action: GalleryAction? = null
+	data class NoMedia @JvmOverloads constructor(
+		val action: GalleryAction? = null,
+		@StringRes val titleResId: Int = R.string.no_photos_available,
+		@StringRes val descriptionResId: Int = R.string.no_photos_available_descr,
+		@DrawableRes val iconResId: Int = R.drawable.ic_action_desert
 	) : GalleryItem()
 
 	data object NoInternet : GalleryItem()

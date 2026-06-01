@@ -83,18 +83,18 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	protected void buildTopInternal(View view) {
 		super.buildTopInternal(view);
 		buildGroupFavouritesView(view);
+		buildMediaLinksRow(view, point.getLinks(), point);
 	}
 
 	@Override
 	public void buildInternal(View view) {
-		boolean light = isLightContent();
 		buildDateRow(view, app.getString(R.string.created_on), point.getTimestamp());
 		buildCommentRow(view, point.getComment());
 
 		if (!Algorithms.isEmpty(amenityExtensions)) {
 			AdditionalInfoBundle bundle = new AdditionalInfoBundle(app, amenityExtensions);
 			AmenityUIHelper helper = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), bundle);
-			helper.setLight(light);
+			helper.setLight(isLightContent());
 			helper.setLatLon(getLatLon());
 			helper.setCollapseExpandListener(getCollapseExpandListener());
 			helper.buildInternal(view);
