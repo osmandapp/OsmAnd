@@ -22,7 +22,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.gallery.controller.GalleryController;
-import net.osmand.plus.gallery.helpers.AttachedMediaHelper;
+import net.osmand.plus.gallery.helpers.AttachedMediaUiHelper;
 import net.osmand.plus.gallery.model.GalleryItem;
 import net.osmand.plus.gallery.model.GalleryItem.MediaCount;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -146,7 +146,7 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 						int index = controller.getPhotoItemIndexById(mediaItem.getId());
 						GalleryPhotoPagerFragment.showInstance(activity, index);
 					} else {
-						new AttachedMediaHelper(activity).openMediaItem(mediaItem, nightMode);
+						new AttachedMediaUiHelper(activity).openMediaItem(mediaItem, nightMode);
 					}
 				});
 			}

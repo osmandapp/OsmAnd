@@ -62,7 +62,7 @@ import net.osmand.plus.gallery.cache.PhotoCacheManager;
 import net.osmand.plus.gallery.controller.GalleryController;
 import net.osmand.plus.gallery.controller.GalleryItemsHolder;
 import net.osmand.plus.gallery.helpers.AttachedMediaDataHelper;
-import net.osmand.plus.gallery.helpers.AttachedMediaHelper;
+import net.osmand.plus.gallery.helpers.AttachedMediaUiHelper;
 import net.osmand.plus.gallery.model.GalleryItem;
 import net.osmand.plus.gallery.tasks.CacheReadTask;
 import net.osmand.plus.gallery.tasks.CacheWriteTask;
@@ -151,7 +151,7 @@ public class MenuBuilder {
 
 	private final List<OsmandPlugin> menuPlugins = new ArrayList<>();
 	private final AttachedMediaDataHelper attachedMediaDataHelper;
-	private final AttachedMediaHelper attachedMediaHelper;
+	private final AttachedMediaUiHelper attachedMediaUiHelper;
 
 	private GalleryController galleryController;
 	@Nullable
@@ -216,7 +216,7 @@ public class MenuBuilder {
 		this.customization = app.getAppCustomization();
 		this.menuRowBuilder = new MenuRowBuilder(mapActivity);
 		this.attachedMediaDataHelper = new AttachedMediaDataHelper(app);
-		this.attachedMediaHelper = new AttachedMediaHelper(mapActivity);
+		this.attachedMediaUiHelper = new AttachedMediaUiHelper(mapActivity);
 		this.plainMenuItems = new LinkedList<>();
 		this.galleryController = (GalleryController) app.getDialogManager().findController(GalleryController.PROCESS_ID);
 
@@ -702,11 +702,11 @@ public class MenuBuilder {
 		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		mediaLinksRow = new GalleryRowBuilder(this);
 		mediaLinksRow.setRequireInternet(false);
-		mediaLinksRow.setAddButtonClickListener(anchor -> attachedMediaHelper.showAddMenu(anchor, object,
+		mediaLinksRow.setAddButtonClickListener(anchor -> attachedMediaUiHelper.showAddMenu(anchor, object,
 				getLatLon(), () -> onAttachedMediaChanged(object)));
-		mediaLinksRow.setShowAllClickListener(anchor -> attachedMediaHelper.showAllMedia(galleryController,
+		mediaLinksRow.setShowAllClickListener(anchor -> attachedMediaUiHelper.showAllMedia(galleryController,
 				object, getLatLon()));
-		mediaLinksRow.setMediaItemClickListener(mediaItem -> attachedMediaHelper.onMediaItemClicked(galleryController,
+		mediaLinksRow.setMediaItemClickListener(mediaItem -> attachedMediaUiHelper.onMediaItemClicked(galleryController,
 				mediaItem, object, getLatLon(), nightMode));
 		mediaLinksRow.build(galleryController, new GalleryGridConfig(), nightMode);
 
@@ -721,12 +721,12 @@ public class MenuBuilder {
 				.setCollapsable(true).setCollapsableView(collapsableView)
 				.setTextLinesLimit(1).build());
 
-		mediaLinksRow.setItems(attachedMediaHelper.getGalleryItems(links));
+		mediaLinksRow.setItems(attachedMediaUiHelper.getGalleryItems(links));
 	}
 
 	private void onAttachedMediaChanged(@Nullable Object object) {
 		if (mediaLinksRow != null) {
-			mediaLinksRow.setItems(attachedMediaHelper.getGalleryItems(attachedMediaDataHelper.getMediaLinks(object)));
+			mediaLinksRow.setItems(attachedMediaUiHelper.getGalleryItems(attachedMediaDataHelper.getMediaLinks(object)));
 		}
 		mapActivity.getContextMenu().updateMenuUI();
 	}

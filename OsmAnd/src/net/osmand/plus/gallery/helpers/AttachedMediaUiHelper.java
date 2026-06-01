@@ -60,9 +60,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
-public class AttachedMediaHelper {
+public class AttachedMediaUiHelper {
 
-	private static final Log LOG = PlatformUtil.getLog(AttachedMediaHelper.class);
+	private static final Log LOG = PlatformUtil.getLog(AttachedMediaUiHelper.class);
 	private static final String ADD_MEDIA_PICKER_KEY = "attached_media_picker_";
 	private static final String[] MEDIA_MIME_TYPES = {"image/*", "video/*", "audio/*"};
 
@@ -72,7 +72,7 @@ public class AttachedMediaHelper {
 	@Nullable
 	private ActivityResultLauncher<Intent> mediaPickerLauncher;
 
-	public AttachedMediaHelper(@NonNull MapActivity mapActivity) {
+	public AttachedMediaUiHelper(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		this.app = mapActivity.getApp();
 		this.dataHelper = new AttachedMediaDataHelper(app);
