@@ -1,54 +1,53 @@
-package net.osmand.plus.gallery.ui.holders;
+package net.osmand.plus.gallery.ui.holders
 
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import net.osmand.plus.OsmandApplication
+import net.osmand.plus.R
+import net.osmand.plus.gallery.contract.IGalleryActionListener
+import net.osmand.plus.gallery.model.GalleryItem.NoMedia
+import net.osmand.plus.gallery.model.GalleryItem.NoMedia.ActionButtonStyle
+import net.osmand.plus.helpers.AndroidUiHelper
+import net.osmand.plus.utils.ColorUtilities
+import net.osmand.plus.widgets.dialogbutton.DialogButton
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
+class NoMediaHolder(
+	private val app: OsmandApplication,
+	itemView: View
+) : RecyclerView.ViewHolder(itemView) {
 
-import net.osmand.plus.R;
-import net.osmand.plus.gallery.contract.IGalleryActionListener;
-import net.osmand.plus.gallery.model.GalleryAction;
-import net.osmand.plus.gallery.model.GalleryItem;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.widgets.dialogbutton.DialogButton;
+	private val imageView: ImageView = itemView.findViewById(R.id.icon)
+	private val titleView: TextView = itemView.findViewById(R.id.title)
+	private val descriptionView: TextView = itemView.findViewById(R.id.description)
+	private val simpleButton: View = itemView.findViewById(R.id.no_media_action_button)
+	private val dialogButton: DialogButton = itemView.findViewById(R.id.no_media_action_dialog_button)
 
-public class NoMediaHolder extends RecyclerView.ViewHolder {
+	fun bindView(
+		item: NoMedia,
+		nightMode: Boolean,
+		listener: IGalleryActionListener?
+	) {
+		imageView.setImageDrawable(
+			app.uiUtilities.getPaintedIcon(
+				item.iconResId,
+				ColorUtilities.getDefaultIconColor(app, nightMode)
+			)
+		)
+		titleView.setText(item.titleResId)
+		descriptionView.setText(item.descriptionResId)
 
-	private final ImageView imageView;
-	private final TextView titleView;
-	private final TextView descriptionView;
-	private final DialogButton actionButton;
+		val action = item.action
+		val useDialogButton = item.buttonStyle == ActionButtonStyle.DIALOG
+		val activeButton: View = if (useDialogButton) dialogButton else simpleButton
+		val inactiveButton: View = if (useDialogButton) simpleButton else dialogButton
 
-	public NoMediaHolder(@NonNull View itemView) {
-		super(itemView);
-		this.imageView = itemView.findViewById(R.id.icon);
-		this.titleView = itemView.findViewById(R.id.title);
-		this.descriptionView = itemView.findViewById(R.id.description);
-		this.actionButton = itemView.findViewById(R.id.no_media_action_button);
-	}
-
-	public void bindView(@NonNull GalleryItem.NoMedia item,
-	                     @Nullable IGalleryActionListener listener) {
-		imageView.setImageResource(R.drawable.ic_action_photo_album);
-		titleView.setText(R.string.no_media);
-		descriptionView.setText(R.string.no_media_descr);
-
-		GalleryAction action = item.getAction();
-		AndroidUiHelper.updateVisibility(actionButton, action != null);
-
-		if (action != null) {
-			actionButton.setOnClickListener(v -> {
-				if (listener != null) {
-					listener.handleGalleryAction(action);
-				}
-			});
-		} else {
-			actionButton.setOnClickListener(null);
-		}
-
-		// TODO: customize
+		AndroidUiHelper.updateVisibility(inactiveButton, false)
+		AndroidUiHelper.updateVisibility(activeButton, action != null)
+		activeButton.setOnClickListener(
+			if (action != null) View.OnClickListener { listener?.handleGalleryAction(action) }
+			else null
+		)
 	}
 }

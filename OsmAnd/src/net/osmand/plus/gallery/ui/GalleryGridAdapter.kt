@@ -17,7 +17,6 @@ import net.osmand.plus.gallery.ui.holders.GalleryMediaViewHolder
 import net.osmand.plus.gallery.ui.holders.MediaCountHolder
 import net.osmand.plus.gallery.ui.holders.MediaHolderType
 import net.osmand.plus.gallery.ui.holders.NoInternetHolder
-import net.osmand.plus.gallery.ui.holders.NoPhotosHolder
 import net.osmand.plus.gallery.ui.holders.NoMediaHolder
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.shared.media.MediaProvider
@@ -53,11 +52,8 @@ class GalleryGridAdapter(
 			ACTION_VIEW_TYPE -> {
 				ActionViewHolder(inflate(R.layout.context_menu_card_gallery_action_view, parent))
 			}
-			NO_PHOTOS_TYPE -> {
-				NoPhotosHolder(inflate(R.layout.no_image_card, parent))
-			}
 			NO_MEDIA_TYPE -> {
-				NoMediaHolder(inflate(R.layout.no_media_card, parent))
+				NoMediaHolder(app, inflate(R.layout.no_image_card, parent))
 			}
 			NO_INTERNET_TYPE -> {
 				NoInternetHolder(inflate(R.layout.no_internet_card, parent), app)
@@ -86,9 +82,7 @@ class GalleryGridAdapter(
 			holder is ActionViewHolder && item is GalleryItem.Action ->
 				holder.bindView(nightMode, mapActivity, item, actionListener ?: IGalleryActionListener() {})
 			holder is NoMediaHolder && item is GalleryItem.NoMedia ->
-				holder.bindView(item, actionListener)
-			holder is NoPhotosHolder && item is GalleryItem.NoPhotos ->
-				holder.bindView(item, actionListener)
+				holder.bindView(item, nightMode, actionListener)
 			holder is NoInternetHolder && item is GalleryItem.NoInternet ->
 				holder.bindView(nightMode, galleryListener, loadingImages)
 			holder is MediaCountHolder && item is GalleryItem.MediaCount ->
@@ -133,7 +127,6 @@ class GalleryGridAdapter(
 	override fun getItemViewType(position: Int): Int = when (items[position]) {
 		is GalleryItem.Media -> if (position == 0) MAIN_MEDIA_TYPE else MEDIA_TYPE
 		is GalleryItem.Action -> ACTION_VIEW_TYPE
-		is GalleryItem.NoPhotos -> NO_PHOTOS_TYPE
 		is GalleryItem.NoMedia -> NO_MEDIA_TYPE
 		is GalleryItem.NoInternet -> NO_INTERNET_TYPE
 		is GalleryItem.MediaCount -> MEDIA_COUNT_TYPE
@@ -155,11 +148,10 @@ class GalleryGridAdapter(
 	companion object {
 		private const val MAIN_MEDIA_TYPE = 0
 		private const val MEDIA_TYPE = 1
-		private const val ACTION_VIEW_TYPE = 3
-		private const val NO_PHOTOS_TYPE = 4
-		private const val NO_INTERNET_TYPE = 5
-		private const val MEDIA_COUNT_TYPE = 6
-		private const val NO_MEDIA_TYPE = 7
+		private const val ACTION_VIEW_TYPE = 2
+		private const val NO_INTERNET_TYPE = 3
+		private const val MEDIA_COUNT_TYPE = 4
+		private const val NO_MEDIA_TYPE = 5
 
 		private const val UPDATE_PROGRESS_BAR_PAYLOAD_TYPE = 1
 	}

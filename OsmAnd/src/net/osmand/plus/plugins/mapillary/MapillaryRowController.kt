@@ -35,7 +35,7 @@ class MapillaryRowController(
 	}
 
 	override fun emptyStateItems(): List<GalleryItem> {
-		return listOf(GalleryItem.NoPhotos(CONTRIBUTE_ACTION))
+		return listOf(GalleryItem.NoMedia(action = CONTRIBUTE_ACTION))
 	}
 
 	override fun collectActionButtons(): List<GalleryActionButton> {

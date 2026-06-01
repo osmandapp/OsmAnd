@@ -9,6 +9,7 @@ import net.osmand.plus.gallery.data.GalleryKey
 import net.osmand.plus.gallery.model.GalleryAction
 import net.osmand.plus.gallery.model.GalleryActionButton
 import net.osmand.plus.gallery.model.GalleryItem
+import net.osmand.plus.gallery.model.GalleryItem.NoMedia.ActionButtonStyle
 import net.osmand.plus.gallery.model.MediaHolder
 import net.osmand.shared.media.domain.MediaItem
 
@@ -46,7 +47,14 @@ class AttachedMediaRowController(
 	}
 
 	override fun emptyStateItems(): List<GalleryItem> {
-		return listOf(GalleryItem.NoMedia(ADD_MEDIA_ACTION))
+		val noMedia = GalleryItem.NoMedia(
+			action = ADD_MEDIA_ACTION,
+			titleResId = R.string.no_media,
+			descriptionResId = R.string.no_media_descr,
+			iconResId = R.drawable.ic_action_image_disabled,
+			buttonStyle = ActionButtonStyle.DIALOG
+		)
+		return listOf(noMedia)
 	}
 
 	companion object {
