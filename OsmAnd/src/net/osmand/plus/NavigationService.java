@@ -111,7 +111,7 @@ public class NavigationService extends Service {
 		LOG.info(">>>> NavigationService stopIfNeeded = " + usageIntent);
 		OsmandApplication app = getApp();
 		if ((usedBy & usageIntent) > 0) {
-			usedBy -= usageIntent;
+			usedBy &= ~usageIntent;
 		}
 		onServiceChanged(false);
 		if (usedBy == 0) {
