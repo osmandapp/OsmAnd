@@ -629,6 +629,9 @@ public class Algorithms {
 	 * #AARRGGBB
 	 */
 	public static int parseColor(String colorString) throws IllegalArgumentException {
+		if (isEmpty(colorString)) {
+			throw new IllegalArgumentException("Unknown color " + colorString); //$NON-NLS-1$
+		}
 		if (colorString.charAt(0) == '#') {
 			// Use a long to avoid rollovers on #ffXXXXXX
 			if (colorString.length() == 4) {
