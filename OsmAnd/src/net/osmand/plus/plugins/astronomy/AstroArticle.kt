@@ -63,7 +63,7 @@ data class AstroArticle(
         if (summaryJson != other.summaryJson) return false
         if (mobileHtml != null) {
             if (other.mobileHtml == null) return false
-            if (mobileHtml.size != other.mobileHtml.size) return false
+            if (!mobileHtml.contentEquals(other.mobileHtml)) return false
         } else if (other.mobileHtml != null) return false
 
         return true
