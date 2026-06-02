@@ -37,6 +37,7 @@ class StarMapARModeHelper(
 
 	private var hasAccelerometer = false
 	private var hasMagnetometer = false
+	@Volatile
 	private var geomagneticField: GeomagneticField? = null
 
 	// Low pass filter for smoothing
