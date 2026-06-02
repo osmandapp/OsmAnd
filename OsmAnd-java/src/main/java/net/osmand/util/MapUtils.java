@@ -226,12 +226,12 @@ public class MapUtils {
 		if (longitude >= MIN_LONGITUDE && longitude <= MAX_LONGITUDE) {
 			return longitude;
 		}
-		while (longitude <= MIN_LONGITUDE || longitude > MAX_LONGITUDE) {
-			if (longitude < 0) {
-				longitude += LONGITUDE_TURN;
-			} else {
-				longitude -= LONGITUDE_TURN;
-			}
+		if (Double.isNaN(longitude) || Double.isInfinite(longitude)) {
+			return longitude;
+		}
+		longitude = Math.IEEEremainder(longitude, LONGITUDE_TURN);
+		if (longitude <= MIN_LONGITUDE) {
+			longitude += LONGITUDE_TURN;
 		}
 		return longitude;
 	}
@@ -240,13 +240,10 @@ public class MapUtils {
 		if (latitude >= MIN_LATITUDE && latitude <= MAX_LATITUDE) {
 			return latitude;
 		}
-		while (latitude < -90 || latitude > 90) {
-			if (latitude < 0) {
-				latitude += LATITUDE_TURN;
-			} else {
-				latitude -= LATITUDE_TURN;
-			}
+		if (Double.isNaN(latitude) || Double.isInfinite(latitude)) {
+			return latitude;
 		}
+		latitude = Math.IEEEremainder(latitude, LATITUDE_TURN);
 		if (latitude < MIN_LATITUDE) {
 			return MIN_LATITUDE;
 		} else if (latitude > MAX_LATITUDE) {
@@ -596,14 +593,10 @@ public class MapUtils {
 	 * @return
 	 */
 	public static double degreesDiff(double a1, double a2) {
-		double diff = a1 - a2;
-		while (diff > 180) {
-			diff -= 360;
+		if (Double.isNaN(a1) || Double.isNaN(a2) || Double.isInfinite(a1) || Double.isInfinite(a2)) {
+			return a1 - a2;
 		}
-		while (diff <= -180) {
-			diff += 360;
-		}
-		return diff;
+		return Math.IEEEremainder(a1 - a2, 360.0);
 	}
 
 
