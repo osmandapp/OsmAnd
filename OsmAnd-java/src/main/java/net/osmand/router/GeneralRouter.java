@@ -631,7 +631,7 @@ public class GeneralRouter implements VehicleRouter {
 
 		@Override
 		public boolean equals(Object other) {
-			if (array == other) {
+			if (this == other) {
 				return true;
 			}
 			if (!(other instanceof IntHolder)) {
