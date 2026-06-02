@@ -21,6 +21,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.set.hash.TLongHashSet;
@@ -215,7 +216,7 @@ public class GeneralRouter implements VehicleRouter {
 		int l = RouteDataObjectAttribute.values().length;
 		evalCache = new Map[l];
 		for (int i = 0; i < l; i++) {
-			evalCache[i] = new HashMap<>();
+			evalCache[i] = new ConcurrentHashMap<>();
 		}
 	}
 
@@ -607,7 +608,7 @@ public class GeneralRouter implements VehicleRouter {
 		if (USE_CACHE) {
 			Map<IntHolder, Float> rM = ch.get(reg);
 			if (rM == null) {
-				rM = new HashMap<IntHolder, Float>();
+				rM = new ConcurrentHashMap<>();
 				ch.put(reg, rM);
 			}
 			rM.put(new IntHolder(types, extra), val);
