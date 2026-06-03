@@ -720,9 +720,9 @@ class StarView @JvmOverloads constructor(
 		}
 	}
 
-	fun getMinZoom() = if (is2DMode) 200.0 else 150.0
+	fun getMinZoom(): Double = 150.0
 
-	fun getMaxZoom() = 150.0
+	fun getMaxZoom(): Double = if (is2DMode) 200.0 else 150.0
 
 	fun zoomIn() {
 		updateViewAngle(viewAngle / 1.5)
