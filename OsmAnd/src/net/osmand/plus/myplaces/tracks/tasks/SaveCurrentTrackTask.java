@@ -15,7 +15,7 @@ import net.osmand.shared.gpx.GpxFile;
 import java.io.File;
 import java.util.Map;
 
-public class SaveCurrentTrackTask extends AsyncTask<Void, Void, Boolean> {
+public class SaveCurrentTrackTask extends AsyncTask<Void, Void, Exception> {
 
 	private final OsmandApplication app;
 	private final GpxFile gpx;
@@ -36,38 +36,43 @@ public class SaveCurrentTrackTask extends AsyncTask<Void, Void, Boolean> {
 	}
 
 	@Override
-	protected Boolean doInBackground(Void... params) {
+	protected Exception doInBackground(Void... params) {
 		SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
 		Map<String, GpxFile> files = savingTrackHelper.collectRecordedData();
 		File dir;
-		boolean shouldClearPath = false;
 		if (gpx.getPath().isEmpty()) {
 			dir = app.getCacheDir();
-			shouldClearPath = true;
 		} else {
 			dir = app.getAppCustomization().getTracksDir();
 		}
 		if (!dir.exists()) {
-			dir.mkdir();
+			dir.mkdirs();
 		}
+		Exception lastError = null;
 		for (String f : files.keySet()) {
+			GpxFile gpxFile = files.get(f);
+			if (gpxFile == null) {
+				continue;
+			}
 			File fout = new File(dir, f + IndexConstants.GPX_FILE_EXT);
-			Exception exception = SharedUtil.writeGpxFile(fout, gpx);
-			if (exception == null) {
+			Exception exception = SharedUtil.writeGpxFile(fout, gpxFile);
+			if (exception != null) {
+				lastError = exception;
+			} else {
 				app.getSavingTrackHelper().setLastTimeFileSaved(fout.lastModified());
-				app.getSmartFolderHelper().addTrackItemToSmartFolder(new TrackItem(gpx));
+				app.getSmartFolderHelper().addTrackItemToSmartFolder(new TrackItem(gpxFile));
 			}
 		}
-		return shouldClearPath;
+		return lastError;
 	}
 
 	@Override
-	protected void onPostExecute(Boolean shouldClearPath) {
+	protected void onPostExecute(Exception error) {
 		if (gpx != null) {
 			if (saveGpxListener != null) {
-				saveGpxListener.onSaveGpxFinished(null);
+				saveGpxListener.onSaveGpxFinished(error);
 			}
-			if (shouldClearPath) {
+			if (error == null && gpx.getPath().isEmpty()) {
 				gpx.setPath("");
 			}
 		}
