@@ -47,6 +47,12 @@ public class DownloadService extends Service {
 
 		NotificationHelper notificationHelper = app.getNotificationHelper();
 		Notification notification = notificationHelper.buildDownloadNotification();
+		if (notification == null) {
+			LOG.error("DownloadService could not be started because the notification is null.");
+			app.setDownloadService(null);
+			stopSelf();
+			return START_NOT_STICKY;
+		}
 		try {
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
 				startForeground(DOWNLOAD_NOTIFICATION_SERVICE_ID, notification, FOREGROUND_SERVICE_TYPE_DATA_SYNC);
