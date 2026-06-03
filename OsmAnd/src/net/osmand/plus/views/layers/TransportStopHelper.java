@@ -17,7 +17,9 @@ import net.osmand.util.MapUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class TransportStopHelper {
 
@@ -108,7 +110,8 @@ public class TransportStopHelper {
 						&& MapUtils.getDistance(stop.getLocation(), loc) < MAX_DISTANCE_BETWEEN_AMENITY_AND_LOCAL_STOPS
 						&& (nearestStop == null
 						|| nearestStop.getLocation().equals(stop.getLocation())))
-						|| stop.getLocation().equals(loc)) {
+						|| stop.getLocation().equals(loc)
+						|| (nearestStop != null && isSameRouteStop(nearestStop, stop))) {
 					stopAggregated.addLocalTransportStop(stop);
 					if (nearestStop == null) {
 						nearestStop = stop;
@@ -145,6 +148,31 @@ public class TransportStopHelper {
 			}
 		}
 		stopAggregated.addLocalTransportStop(localStop == null ? transportStop : localStop);
+	}
+
+	private static boolean isSameRouteStop(@NonNull TransportStop mainStop, @NonNull TransportStop nearbyStop) {
+		if (Algorithms.isEmpty(mainStop.getName()) || !nearbyStop.getName().equalsIgnoreCase(mainStop.getName())
+				|| Algorithms.isEmpty(mainStop.getRoutes()) || Algorithms.isEmpty(nearbyStop.getRoutes())) {
+			return false;
+		}
+
+		Set<String> mainStopRouteTypes = new HashSet<>();
+		for (TransportRoute mainRoute : mainStop.getRoutes()) {
+			mainStopRouteTypes.add(mainRoute.getType());
+		}
+
+		for (TransportRoute nearbyStopRoute : nearbyStop.getRoutes()) {
+			if (mainStopRouteTypes.contains(nearbyStopRoute.getType())) {
+
+				for (TransportStop nearbyStopRouteStop : nearbyStopRoute.getForwardStops()) {
+					if ((MapUtils.getDistance(mainStop.getLocation(), nearbyStopRouteStop.getLocation()) <= MAX_DISTANCE_BETWEEN_AMENITY_AND_LOCAL_STOPS)
+							&& nearbyStop.getId() != null &&  nearbyStop.getId().equals(nearbyStopRouteStop.getId())) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	@NonNull
