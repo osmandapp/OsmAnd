@@ -593,7 +593,7 @@ public class AppInitializer implements IProgress {
 				long lastCheck = preferenceLastSuccessfulUpdateCheck(fileName, settings).get();
 
 				if (System.currentTimeMillis() - lastCheck > updateFrequency.intervalMillis * 2) {
-					runLiveUpdate(app, fileName, false, null);
+					// Do not download on cold start; LiveUpdatesAlarmReceiver runs updates (#25148).
 					PendingIntent alarmIntent = getPendingIntent(app, fileName);
 					int timeOfDayOrd = preferenceTimeOfDayToUpdate(fileName, settings).get();
 					TimeOfDay[] timeOfDayValues = TimeOfDay.values();
