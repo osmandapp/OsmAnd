@@ -103,6 +103,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	SearchPoiAdditionalFilter additionalFilter;
 
 	private final PoiUIFilterDataProvider dataProvider;
+	private final Object searchLock = new Object();
 
 	// constructor for standard filters
 	public PoiUIFilter(@Nullable AbstractPoiType type, @NonNull OsmandApplication app, @NonNull String idSuffix) {
@@ -198,15 +199,17 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 
 	@NonNull
 	public List<Amenity> getCurrentSearchResult(boolean filterUnique) {
-		if (Algorithms.isEmpty(currentSearchResult)) {
-			return Collections.emptyList();
+		synchronized (searchLock) {
+			if (Algorithms.isEmpty(currentSearchResult)) {
+				return Collections.emptyList();
+			}
+			if (!filterUnique) {
+				return new ArrayList<>(currentSearchResult);
+			}
+			ResourceManager resourceManager = app.getResourceManager();
+			AmenitySearcher.Settings settings = resourceManager.getDefaultAmenitySearchSettings();
+			return resourceManager.getAmenitySearcher().mergeAmenities(currentSearchResult, settings);
 		}
-		if (!filterUnique) {
-			return new ArrayList<>(currentSearchResult);
-		}
-		ResourceManager resourceManager = app.getResourceManager();
-		AmenitySearcher.Settings settings = resourceManager.getDefaultAmenitySearchSettings();
-		return resourceManager.getAmenitySearcher().mergeAmenities(currentSearchResult, settings);
 	}
 
 	public DataSourceType getDataSourceType() {
@@ -272,16 +275,18 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	}
 
 	public void updateFilterResults() {
-		List<Amenity> prev = currentSearchResult;
-		if (prev != null) {
-			AmenityNameFilter nameFilter = getNameFilter();
-			List<Amenity> newResults = new ArrayList<>();
-			for (Amenity a : prev) {
-				if (nameFilter.accept(a)) {
-					newResults.add(a);
+		synchronized (searchLock) {
+			List<Amenity> prev = currentSearchResult;
+			if (prev != null) {
+				AmenityNameFilter nameFilter = getNameFilter();
+				List<Amenity> newResults = new ArrayList<>();
+				for (Amenity a : prev) {
+					if (nameFilter.accept(a)) {
+						newResults.add(a);
+					}
 				}
+				currentSearchResult = newResults;
 			}
-			currentSearchResult = newResults;
 		}
 	}
 
@@ -296,9 +301,14 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 
 	public List<Amenity> searchAgain(double lat, double lon) {
 		List<Amenity> amenityList;
-		if (currentSearchResult != null) {
-			amenityList = currentSearchResult;
-		} else {
+		synchronized (searchLock) {
+			if (currentSearchResult != null) {
+				amenityList = new ArrayList<>(currentSearchResult);
+			} else {
+				amenityList = null;
+			}
+		}
+		if (amenityList == null) {
 			amenityList = searchAmenities(lat, lon, null);
 		}
 		MapUtils.sortListOfMapObject(amenityList, lat, lon);
@@ -307,8 +317,10 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 
 
 	public List<Amenity> searchFurther(double latitude, double longitude, ResultMatcher<Amenity> matcher) {
-		if (distanceInd < distanceToSearchValues.length - 1) {
-			distanceInd++;
+		synchronized (searchLock) {
+			if (distanceInd < distanceToSearchValues.length - 1) {
+				distanceInd++;
+			}
 		}
 		List<Amenity> amenityList = searchAmenities(latitude, longitude, matcher);
 		MapUtils.sortListOfMapObject(amenityList, latitude, longitude);
@@ -324,14 +336,19 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	}
 
 	public boolean isSearchFurtherAvailable() {
-		return distanceInd < distanceToSearchValues.length - 1;
+		synchronized (searchLock) {
+			return distanceInd < distanceToSearchValues.length - 1;
+		}
 	}
 
 	public String getSearchArea(boolean next) {
-		int distInd = distanceInd;
-		if (next && (distanceInd < distanceToSearchValues.length - 1)) {
-			//This is workaround for the SearchAmenityTask.onPreExecute() case
-			distInd = distanceInd + 1;
+		int distInd;
+		synchronized (searchLock) {
+			distInd = distanceInd;
+			if (next && (distanceInd < distanceToSearchValues.length - 1)) {
+				//This is workaround for the SearchAmenityTask.onPreExecute() case
+				distInd = distanceInd + 1;
+			}
 		}
 		double val = distanceToSearchValues[distInd];
 		if (val >= 1) {
@@ -342,23 +359,29 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	}
 
 	public void clearPreviousZoom() {
-		distanceInd = 0;
+		synchronized (searchLock) {
+			distanceInd = 0;
+		}
 	}
 
 	public void clearCurrentResults() {
-		if (currentSearchResult != null) {
-			currentSearchResult = new ArrayList<>();
+		synchronized (searchLock) {
+			if (currentSearchResult != null) {
+				currentSearchResult = new ArrayList<>();
+			}
 		}
 	}
 
 	public List<Amenity> initializeNewSearch(double lat, double lon, int firstTimeLimit,
 	                                         ResultMatcher<Amenity> matcher, int radius) {
-		if (radius < 0) {
-			clearPreviousZoom();
-		} else if (radius < distanceToSearchValues.length) {
-			distanceInd = radius;
-		} else {
-			distanceInd = distanceToSearchValues.length - 1;
+		synchronized (searchLock) {
+			if (radius < 0) {
+				distanceInd = 0;
+			} else if (radius < distanceToSearchValues.length) {
+				distanceInd = radius;
+			} else {
+				distanceInd = distanceToSearchValues.length - 1;
+			}
 		}
 		List<Amenity> amenityList = searchAmenities(lat, lon, matcher);
 		MapUtils.sortListOfMapObject(amenityList, lat, lon);
@@ -380,12 +403,14 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	}
 
 	public double getSearchRadius(int radius) {
-		if (radius < 0) {
-			distanceInd = 0;
-		} else if (radius < distanceToSearchValues.length) {
-			distanceInd = radius;
-		} else {
-			distanceInd = distanceToSearchValues.length - 1;
+		synchronized (searchLock) {
+			if (radius < 0) {
+				distanceInd = 0;
+			} else if (radius < distanceToSearchValues.length) {
+				distanceInd = radius;
+			} else {
+				distanceInd = distanceToSearchValues.length - 1;
+			}
 		}
 		return distanceToSearchValues[distanceInd] * 1000;
 	}
@@ -401,7 +426,10 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	private List<Amenity> searchAmenities(double lat, double lon, ResultMatcher<Amenity> matcher) {
 		double baseDistY = MapUtils.getDistance(lat, lon, lat - 1, lon);
 		double baseDistX = MapUtils.getDistance(lat, lon, lat, lon - 1);
-		double distance = distanceToSearchValues[distanceInd] * 1000;
+		double distance;
+		synchronized (searchLock) {
+			distance = distanceToSearchValues[distanceInd] * 1000;
+		}
 		double topLatitude = Math.min(lat + (distance / baseDistY), 84.);
 		double bottomLatitude = Math.max(lat - (distance / baseDistY), -84.);
 		double leftLongitude = Math.max(lon - (distance / baseDistX), -180);
@@ -413,8 +441,13 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 			int zoom, ResultMatcher<Amenity> matcher, boolean filterUnique) {
 		LOG.debug("searchAmenities (bbox): filter=" + filterId + ", zoom=" + zoom + ", bbox=[" + left + "," + top + " to " + right + "," + bottom + "]");
 		Set<Amenity> results = new HashSet<>();
-		if (currentSearchResult != null) {
-			List<Amenity> tempResults = new ArrayList<>(currentSearchResult);
+		List<Amenity> tempResults = null;
+		synchronized (searchLock) {
+			if (currentSearchResult != null) {
+				tempResults = new ArrayList<>(currentSearchResult);
+			}
+		}
+		if (tempResults != null) {
 			int cachedMatches = 0;
 			for (Amenity a : tempResults) {
 				LatLon l = a.getLocation();
@@ -460,12 +493,19 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 			limit = 1000;
 		}
 		LOG.debug("searchAmenitiesInternal: Dispatching search to dataProvider for filter=" + filterId);
-		currentSearchResult = dataProvider.searchAmenities(
-				lat, lon, topLatitude, bottomLatitude, leftLongitude, rightLongitude,
-				zoom, matcher, comparator, limit
-		);
-		LOG.debug("searchAmenitiesInternal: dataProvider returned " + (currentSearchResult != null ? currentSearchResult.size() : 0) + " items.");
-		return currentSearchResult;
+		synchronized (searchLock) {
+			try {
+				currentSearchResult = dataProvider.searchAmenities(
+						lat, lon, topLatitude, bottomLatitude, leftLongitude, rightLongitude,
+						zoom, matcher, comparator, limit
+				);
+			} catch (RuntimeException e) {
+				LOG.error("Failed to search amenities for filter=" + filterId, e);
+				currentSearchResult = new ArrayList<>();
+			}
+			LOG.debug("searchAmenitiesInternal: dataProvider returned " + (currentSearchResult != null ? currentSearchResult.size() : 0) + " items.");
+			return currentSearchResult;
+		}
 	}
 
 	public PoiFilterUtils.AmenityNameFilter getNameFilter() {
