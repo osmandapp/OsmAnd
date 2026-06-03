@@ -107,6 +107,14 @@
 		android:title="@string/auto_backup_title"
 		tools:icon="@drawable/ic_action_android" />
 
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="auto_copy_media_to_osmand_storage"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_off"
+		android:summaryOn="@string/shared_string_on"
+		android:title="@string/auto_copy_media_to_osmand_storage"
+		tools:icon="@drawable/ic_action_photo_album" />
+
 	<Preference
 		android:layout="@layout/simple_divider_item"
 		android:selectable="false" />

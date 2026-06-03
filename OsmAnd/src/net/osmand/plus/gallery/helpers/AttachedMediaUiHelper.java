@@ -1,19 +1,21 @@
 package net.osmand.plus.gallery.helpers;
 
 import static android.app.Activity.RESULT_OK;
+import static net.osmand.IndexConstants.AV_INDEX_DIR;
 import static net.osmand.plus.gallery.model.GalleryMediaGroup.OTHER;
 
 import android.content.ActivityNotFoundException;
-import android.content.ClipData;
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.SystemClock;
-import android.provider.OpenableColumns;
 import android.view.View;
-import android.webkit.MimeTypeMap;
 
+import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.PickVisualMediaRequest;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts.PickMultipleVisualMedia;
+import androidx.activity.result.contract.ActivityResultContracts.PickVisualMedia;
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +24,7 @@ import net.osmand.OnResultCallback;
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -30,6 +33,7 @@ import net.osmand.plus.gallery.controller.GalleryItemsHolder;
 import net.osmand.plus.gallery.model.GalleryItem;
 import net.osmand.plus.gallery.ui.GalleryGridFragment;
 import net.osmand.plus.gallery.ui.GalleryPhotoPagerFragment;
+import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AVActionType;
@@ -55,10 +59,7 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Locale;
-import java.util.Set;
 
 public class AttachedMediaUiHelper {
 
@@ -70,7 +71,7 @@ public class AttachedMediaUiHelper {
 	private final MapActivity mapActivity;
 	private final AttachedMediaDataHelper dataHelper;
 	@Nullable
-	private ActivityResultLauncher<Intent> mediaPickerLauncher;
+	private ActivityResultLauncher<?> mediaPickerLauncher;
 
 	public AttachedMediaUiHelper(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
@@ -94,7 +95,7 @@ public class AttachedMediaUiHelper {
 
 	public void showAddMenu(@NonNull View anchorView, @Nullable Object object,
 			@Nullable LatLon latLon, @Nullable Runnable onMediaChanged) {
-		if (latLon == null) {
+		if (latLon == null || !canAttachMedia(object)) {
 			return;
 		}
 		UiUtilities uiUtilities = app.getUIUtilities();
@@ -112,10 +113,10 @@ public class AttachedMediaUiHelper {
 				() -> takeNote(AVActionType.REC_AUDIO, latLon, object, onMediaChanged), false));
 		items.add(createAddMenuItem(R.string.choose_from_gallery,
 				R.drawable.ic_action_photo_album, uiUtilities, iconColor,
-				() -> chooseMedia(object, onMediaChanged), true));
+				() -> chooseFromGallery(object, latLon, onMediaChanged), true));
 		items.add(createAddMenuItem(R.string.choose_from_files,
 				R.drawable.ic_action_group_list, uiUtilities, iconColor,
-				() -> chooseMedia(object, onMediaChanged), false));
+				() -> chooseFromFiles(object, latLon, onMediaChanged), false));
 
 		PopUpMenuDisplayData data = new PopUpMenuDisplayData();
 		data.anchorView = anchorView;
@@ -134,6 +135,10 @@ public class AttachedMediaUiHelper {
 				.setOnClickListener(item -> action.run())
 				.showTopDivider(showTopDivider)
 				.create();
+	}
+
+	private boolean canAttachMedia(@Nullable Object object) {
+		return object instanceof FavouritePoint || object instanceof WptPt;
 	}
 
 	private void takeNote(@NonNull AVActionType type, @NonNull LatLon latLon, @Nullable Object object, @Nullable Runnable onMediaChanged) {
@@ -168,8 +173,21 @@ public class AttachedMediaUiHelper {
 				? recording -> dataHelper.addRecordingLink(object, recording, onMediaChanged) : null;
 	}
 
-	private void chooseMedia(@Nullable Object object, @Nullable Runnable onMediaChanged) {
-		startMediaPicker(createOpenMediaDocumentIntent(), object, onMediaChanged);
+	private void chooseFromGallery(@Nullable Object object, @NonNull LatLon latLon, @Nullable Runnable onMediaChanged) {
+		PickVisualMediaRequest request = new PickVisualMediaRequest.Builder()
+				.setMediaType(PickVisualMedia.ImageAndVideo.INSTANCE)
+				.build();
+		launchMediaPicker(new PickMultipleVisualMedia(), request,
+				uris -> onMediaPicked(object, latLon, onMediaChanged, uris));
+	}
+
+	private void chooseFromFiles(@Nullable Object object, @NonNull LatLon latLon, @Nullable Runnable onMediaChanged) {
+		launchMediaPicker(new StartActivityForResult(), createOpenMediaDocumentIntent(), result -> {
+			Intent data = result.getData();
+			if (data != null && result.getResultCode() == RESULT_OK) {
+				onMediaPicked(object, latLon, onMediaChanged, IntentHelper.getIntentUris(data));
+			}
+		});
 	}
 
 	@NonNull
@@ -183,17 +201,19 @@ public class AttachedMediaUiHelper {
 		return intent;
 	}
 
-	private void startMediaPicker(@NonNull Intent intent, @Nullable Object object, @Nullable Runnable onMediaChanged) {
+	private <I, O> void launchMediaPicker(@NonNull ActivityResultContract<I, O> contract, @NonNull I input, @NonNull ActivityResultCallback<O> callback) {
 		unregisterMediaPickerLauncher();
-		mediaPickerLauncher = mapActivity.getActivityResultRegistry().register(ADD_MEDIA_PICKER_KEY + SystemClock.elapsedRealtimeNanos(),
-				new StartActivityForResult(), result -> {
+		ActivityResultLauncher<I> launcher = mapActivity.getActivityResultRegistry().register(
+				ADD_MEDIA_PICKER_KEY + SystemClock.elapsedRealtimeNanos(), contract, result -> {
 					unregisterMediaPickerLauncher();
-					onMediaPicked(object, onMediaChanged, result.getResultCode(), result.getData());
+					callback.onActivityResult(result);
 				});
+		mediaPickerLauncher = launcher;
 		try {
-			mediaPickerLauncher.launch(intent);
+			launcher.launch(input);
 		} catch (ActivityNotFoundException e) {
 			unregisterMediaPickerLauncher();
+			LOG.warn("Failed to launch media picker", e);
 			app.showToastMessage(R.string.no_activity_for_intent);
 		}
 	}
@@ -205,122 +225,25 @@ public class AttachedMediaUiHelper {
 		}
 	}
 
-	private void onMediaPicked(@Nullable Object object, @Nullable Runnable onMediaChanged,
-			int resultCode, @Nullable Intent data) {
-		if (data == null || resultCode != RESULT_OK) {
+	private void onMediaPicked(@Nullable Object object, @NonNull LatLon latLon,
+			@Nullable Runnable onMediaChanged, @NonNull List<Uri> uris) {
+		if (uris.isEmpty()) {
 			return;
 		}
-		List<Link> links = getPickedMediaLinks(data);
-		if (!links.isEmpty()) {
+		OsmAndTaskManager.executeTask(new CollectMediaLinksTask(app, latLon, uris, links -> {
 			dataHelper.addMediaLinks(object, links, onMediaChanged);
-		}
-	}
-
-	@NonNull
-	private List<Link> getPickedMediaLinks(@NonNull Intent data) {
-		Set<Uri> uris = new LinkedHashSet<>();
-		Uri dataUri = data.getData();
-		if (dataUri != null) {
-			uris.add(dataUri);
-		}
-		List<Link> links = new ArrayList<>();
-		ClipData clipData = data.getClipData();
-		if (clipData != null) {
-			for (int i = 0; i < clipData.getItemCount(); i++) {
-				Uri uri = clipData.getItemAt(i).getUri();
-				if (uri != null) {
-					uris.add(uri);
-				}
-			}
-		}
-		for (Uri uri : uris) {
-			links.add(createMediaLink(uri, data));
-		}
-		return links;
-	}
-
-	@NonNull
-	private Link createMediaLink(@NonNull Uri uri, @NonNull Intent data) {
-		persistMediaPermission(uri, data);
-		String name = getMediaName(uri);
-		String mimeType = getMediaMimeType(uri, name);
-		return new Link(uri.toString(), name, mimeType);
-	}
-
-	@Nullable
-	private String getMediaMimeType(@NonNull Uri uri, @Nullable String name) {
-		String mimeType = mapActivity.getContentResolver().getType(uri);
-		if (isSupportedMediaMimeType(mimeType)) {
-			return mimeType;
-		}
-		if (shouldFallbackToName(mimeType)) {
-			String mimeTypeByName = getMediaMimeTypeByName(name);
-			if (!Algorithms.isEmpty(mimeTypeByName)) {
-				return mimeTypeByName;
-			}
-		}
-		return mimeType;
-	}
-
-	private boolean isSupportedMediaMimeType(@Nullable String mimeType) {
-		if (Algorithms.isEmpty(mimeType)) {
-			return false;
-		}
-		String normalized = mimeType.trim().toLowerCase(Locale.US);
-		return normalized.startsWith("image/")
-				|| normalized.startsWith("video/")
-				|| normalized.startsWith("audio/");
-	}
-
-	private boolean shouldFallbackToName(@Nullable String mimeType) {
-		if (Algorithms.isEmpty(mimeType)) {
 			return true;
-		}
-		String normalized = mimeType.trim().toLowerCase(Locale.US);
-		return "*/*".equals(normalized)
-				|| "application/octet-stream".equals(normalized)
-				|| "binary/octet-stream".equals(normalized);
+		}));
 	}
 
-	@Nullable
-	private String getMediaMimeTypeByName(@Nullable String name) {
-		if (Algorithms.isEmpty(name)) {
-			return null;
-		}
-		int index = name.lastIndexOf('.');
-		if (index < 0 || index == name.length() - 1) {
-			return null;
-		}
-		String extension = name.substring(index + 1).toLowerCase(Locale.US);
-		return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
+	@NonNull
+	public static File getMediaStorageFolder(@NonNull OsmandApplication app) {
+		return app.getAppPath(getMediaStorageDir(app));
 	}
 
-	private void persistMediaPermission(@NonNull Uri uri, @NonNull Intent data) {
-		int flags = data.getFlags() & Intent.FLAG_GRANT_READ_URI_PERMISSION;
-		if (flags != 0) {
-			try {
-				mapActivity.getContentResolver().takePersistableUriPermission(uri, flags);
-			} catch (SecurityException e) {
-				LOG.warn("Failed to persist media URI permission: " + uri, e);
-			}
-		}
-	}
-
-	@Nullable
-	private String getMediaName(@NonNull Uri uri) {
-		if ("content".equalsIgnoreCase(uri.getScheme())) {
-			try (Cursor cursor = mapActivity.getContentResolver().query(uri,
-					new String[] {OpenableColumns.DISPLAY_NAME}, null, null, null)) {
-				if (cursor != null && cursor.moveToFirst()) {
-					int index = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
-					if (index >= 0) {
-						return cursor.getString(index);
-					}
-				}
-			}
-		}
-		String path = uri.getPath();
-		return Algorithms.isEmpty(path) ? null : new File(path).getName();
+	@NonNull
+	public static String getMediaStorageDir(@NonNull OsmandApplication app) {
+		return AV_INDEX_DIR;
 	}
 
 	public void showAllMedia(@NonNull GalleryController galleryController, @Nullable Object object,

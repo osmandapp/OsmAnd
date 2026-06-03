@@ -517,7 +517,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		return getBaseFileName(lat, lon, baseDir, ext);
 	}
 
-	protected static File getBaseFileName(double lat, double lon, @NonNull File baseDir,
+	@NonNull
+	public static File getBaseFileName(double lat, double lon, @NonNull File baseDir,
 			@NonNull String ext) {
 		String basename = MapUtils.createShortLinkString(lat, lon, 15);
 		int k = 1;
