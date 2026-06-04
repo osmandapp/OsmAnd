@@ -258,18 +258,12 @@ public class WeatherBand {
 	public void setBandUnitAuto(boolean unitAuto) {
 		WeatherSettings settings = getWeatherSettings();
 		switch (bandIndex) {
-			case WEATHER_BAND_CLOUD:
-				settings.weatherCloudUnitAuto.set(unitAuto);
-			case WEATHER_BAND_TEMPERATURE:
-				settings.weatherTempUnitAuto.set(unitAuto);
-			case WEATHER_BAND_PRESSURE:
-				settings.weatherPressureUnitAuto.set(unitAuto);
-			case WEATHER_BAND_WIND_SPEED:
-				settings.weatherWindUnitAuto.set(unitAuto);
-			case WEATHER_BAND_PRECIPITATION:
-				settings.weatherPrecipUnitAuto.set(unitAuto);
-			case WEATHER_BAND_WIND_ANIMATION:
-				settings.weatherWindAnimationUnitAuto.set(unitAuto);
+			case WEATHER_BAND_CLOUD -> settings.weatherCloudUnitAuto.set(unitAuto);
+			case WEATHER_BAND_TEMPERATURE -> settings.weatherTempUnitAuto.set(unitAuto);
+			case WEATHER_BAND_PRESSURE -> settings.weatherPressureUnitAuto.set(unitAuto);
+			case WEATHER_BAND_WIND_SPEED -> settings.weatherWindUnitAuto.set(unitAuto);
+			case WEATHER_BAND_PRECIPITATION -> settings.weatherPrecipUnitAuto.set(unitAuto);
+			case WEATHER_BAND_WIND_ANIMATION -> settings.weatherWindAnimationUnitAuto.set(unitAuto);
 		}
 	}
 

@@ -3,6 +3,8 @@ package net.osmand.binary;
 
 import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.WireFormat;
+
+import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntLongHashMap;
 import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.*;
@@ -45,16 +47,22 @@ public class BinaryMapPoiReaderAdapter {
 	public static class PoiSubType {
 		public boolean text;
 		public String name;
+		public int frequency;
 		//int estiatedSize;
 		public List<String> possibleValues = null;
+		public TIntArrayList possibleValuesFreqs = null;
 	}
 
 	public static class PoiRegion extends BinaryIndexPart {
 		List<String> categories = new ArrayList<String>();
 		List<PoiCategory> categoriesType = new ArrayList<PoiCategory>();
 		List<List<String>> subcategories = new ArrayList<List<String>>();
+		TIntArrayList categoryFreqs = new TIntArrayList();
+		List<TIntArrayList> subcategoryFreqs = new ArrayList<TIntArrayList>();
+		
 		List<PoiSubType> subTypes = new ArrayList<PoiSubType>();
 		List<PoiSubType> topIndexSubTypes = new ArrayList<PoiSubType>();
+		// tag groups
 		Map<Integer, List<TagValuePair>> tagGroups = new HashMap<>();
 		QuadTree<Void> bboxIndexCache = new QuadTree<Void>(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),
 				8, 0.55f);
@@ -92,6 +100,14 @@ public class BinaryMapPoiReaderAdapter {
 		
 		public List<List<String>> getSubcategories() {
 			return subcategories;
+		}
+		
+		public TIntArrayList getCategoryFreqs() {
+			return categoryFreqs;
+		}
+		
+		public List<TIntArrayList> getSubcategoryFreqs() {
+			return subcategoryFreqs;
 		}
 		
 		public List<PoiSubType> getSubTypes() {
@@ -239,9 +255,18 @@ public class BinaryMapPoiReaderAdapter {
 				region.categories.add(cat);
 				region.categoriesType.add(poiTypes.getPoiCategoryByName(cat.toLowerCase(), true));
 				region.subcategories.add(new ArrayList<String>());
+				region.subcategoryFreqs.add(new TIntArrayList());
 				break;
 			case OsmandOdb.OsmAndCategoryTable.SUBCATEGORIES_FIELD_NUMBER:
 				region.subcategories.get(region.subcategories.size() - 1).add(codedIS.readString().intern());
+				break;
+			case OsmandOdb.OsmAndCategoryTable.FREQUENCY_FIELD_NUMBER:
+				int freq = codedIS.readUInt32();
+				region.categoryFreqs.add(freq);
+				break;
+			case OsmandOdb.OsmAndCategoryTable.SUBCATFREQ_FIELD_NUMBER:
+				int sfreq = codedIS.readUInt32();
+				region.subcategoryFreqs.get(region.subcategoryFreqs.size() - 1).add(sfreq);
 				break;
 			default:
 				skipUnknownField(t);
@@ -270,11 +295,20 @@ public class BinaryMapPoiReaderAdapter {
 					case OsmandOdb.OsmAndPoiSubtype.NAME_FIELD_NUMBER:
 						st.name = codedIS.readString().intern();
 						break;
+					case OsmandOdb.OsmAndPoiSubtype.FREQUENCY_FIELD_NUMBER:
+						st.frequency = codedIS.readUInt32();
+						break;
 					case OsmandOdb.OsmAndPoiSubtype.SUBTYPEVALUE_FIELD_NUMBER:
 						if (st.possibleValues == null) {
 							st.possibleValues = new ArrayList<String>();
 						}
 						st.possibleValues.add(codedIS.readString().intern());
+						break;
+					case OsmandOdb.OsmAndPoiSubtype.SUBTYPEVALUESFREQ_FIELD_NUMBER:
+						if (st.possibleValuesFreqs == null) {
+							st.possibleValuesFreqs = new TIntArrayList();
+						}
+						st.possibleValuesFreqs.add(codedIS.readUInt32());
 						break;
 					case OsmandOdb.OsmAndPoiSubtype.ISTEXT_FIELD_NUMBER:
 						st.text = codedIS.readBool();
@@ -947,7 +981,7 @@ public class BinaryMapPoiReaderAdapter {
 						topIndexAdditonalFound = true;
 					}
 				}
-				if (st != null && !topIndex) {
+				if (st != null ) {
 					am.setAdditionalInfo(st.name, retValue.toString());
 				}
 				break;

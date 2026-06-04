@@ -229,7 +229,7 @@ public class QuickSearchSubCategoriesFragment extends BaseFullScreenDialogFragme
 			listView.removeHeaderView(headerShadow);
 			listView.addHeaderView(headerShadow);
 			for (PoiType poiType : poiTypeList) {
-				if (poiType.getTranslation().toLowerCase().contains(search.toLowerCase())) {
+				if (poiType.getTranslation().toLowerCase(Locale.ROOT).contains(search.toLowerCase(Locale.ROOT))) {
 					result.add(poiType);
 				}
 			}

@@ -1950,7 +1950,7 @@
     <string name="new_filter_desc">Adja meg az új szűrő nevét, ami hozzá fog adódni a „Kategóriák” fülhöz.</string>
     <string name="lang_kab">kabil</string>
     <string name="shared_string_continue">Folytatás</string>
-    <string name="gpx_logging_no_data">Nincs adat</string>
+    <string name="gpx_logging_no_data">Nincsenek adatok</string>
     <string name="rendering_attr_contourColorScheme_description">Szintvonalak színsémája</string>
     <string name="route_roundabout_short">Hajtson ki a %1$d. kijáraton, és haladjon tovább ezen:</string>
     <string name="upload_poi">Érdekes hely feltöltése</string>
@@ -4451,7 +4451,7 @@
     <string name="show_borders_of_downloaded_maps">Letöltött térképpel rendelkező területek eltérő színnel</string>
     <string name="show_map_symbols">Térképjelek megjelenítése</string>
     <string name="map_rendering_engine_v1">1-es verzió</string>
-    <string name="dismiss_changes_descr">Minden változtatás elvetésre kerül.</string>
+    <string name="dismiss_changes_descr">Minden módosítás el lesz vetve.</string>
     <string name="rendering_engine_failed_descr">Az OsmAnd visszatért az „1-es verziójú” térkép-megjelenítőhöz. Megpróbálhat visszaváltani az új „2-es verziójú (OpenGL)” megjelenítő motorra a beállításokban. \n\nTámogassa a fejlesztéseket a hibanaplója elküldésével.</string>
     <string name="map_rendering_engine_descr">Az 1-es verzió volt az alapértelmezett az OsmAnd 4.3-as verziója előtt, és a régebbi eszközöknek is ez a megfelelő.\n\nA 2-es verzió (OpenGL) sokkal fejlettebb és olyan funkciókat is tartalmaz, mint a 3D nézet.</string>
     <string name="rendering_engine_failed">Az OsmAnd térkép-megjelenítője nemrég összeomlott.</string>
@@ -6062,4 +6062,9 @@
     <string name="favorite_folder_duplicate_message">Használjon olyan mappanevet, amely még nem létezik.</string>
     <string name="favorite_folder_name">Mappa neve</string>
     <string name="edit_folder">Mappa szerkesztése</string>
+    <string name="choose_from_gallery">Kiválasztás a galériából</string>
+    <string name="choose_from_files">Kiválasztás a fájlokból</string>
+    <string name="shared_string_media">Média</string>
+    <string name="no_media">Nincs média</string>
+    <string name="no_media_descr">Fényképeket, videókat vagy hangjegyzeteket adhat hozzá a fényképezőgépéről vagy az eszköz könytárából.</string>
 </resources>

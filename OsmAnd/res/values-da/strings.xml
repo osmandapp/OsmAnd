@@ -6202,4 +6202,9 @@
     <string name="favorite_folder_duplicate_message">Brug et mappenavn, der ikke allerede findes.</string>
     <string name="favorite_folder_name">Mappenavn</string>
     <string name="edit_folder">Rediger mappe</string>
+    <string name="choose_from_gallery">Vælg fra galleri</string>
+    <string name="choose_from_files">Vælg fra filer</string>
+    <string name="shared_string_media">Medier</string>
+    <string name="no_media">Ingen medier</string>
+    <string name="no_media_descr">Du kan tilføje fotos, videoer eller lydnoter fra dit kamera eller dit bibliotek.</string>
 </resources>

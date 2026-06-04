@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -306,7 +307,7 @@ public class SearchHistoryHelper {
 				if (custom != null) {
 					custom.clearFilter();
 					custom.updateTypesToAccept(parent);
-					custom.setFilterByName(additional.getKeyName().replace('_', ':').toLowerCase());
+					custom.setFilterByName(additional.getKeyName().replace('_', ':').toLowerCase(Locale.ROOT));
 
 					SearchPhrase phrase = searchUICore.getPhrase();
 					result = new SearchResult(phrase);

@@ -1504,7 +1504,8 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> MAP_SHOW_LOCAL_NAMES = new BooleanPreference(this, "map_show_local_names", false).makeGlobal().makeShared().cache();
 
 	public boolean usingEnglishNames() {
-		return MAP_PREFERRED_LOCALE.get().equals("en");
+		String locale = MAP_PREFERRED_LOCALE.get();
+		return "en".equals(locale) || locale.startsWith("en_") || locale.startsWith("en-");
 	}
 
 	public static final String BILLING_USER_DONATION_WORLD_PARAMETER = "";

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
@@ -31,6 +32,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.myplaces.favorites.FavoriteFolderFormatter;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.render.RenderingIcons;
@@ -349,6 +351,11 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 			}
 		}
 		return pointsGroups;
+	}
+
+	@Override
+	protected void setupGroupName(@NonNull TextView groupName, @NonNull PointsGroup group) {
+		FavoriteFolderFormatter.setupStyledBreadcrumb(groupName, group.getName(), nightMode);
 	}
 
 	@NonNull

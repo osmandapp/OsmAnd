@@ -5124,4 +5124,18 @@
     <string name="poi_rapids_grade_5">5 (ekspertidele)</string>
     <string name="poi_rapids_grade_6">6 (äärmuslik)</string>
     <string name="poi_rapids_grade_x">X (pole läbitav)</string>
+    <string name="poi_water_type_filter">Vee tüüp</string>
+    <string name="poi_denomination_african_methodist_episcopal_zion">Aafrika Metodisti Episkopaalne Siionikirik</string>
+    <string name="poi_african_methodist_episcopal_church">Aafrika Metodisti Piiskoplik Kirik</string>
+    <string name="poi_water_lake">Järv</string>
+    <string name="poi_congregational_church">Kogudusekirik (Congregational church)</string>
+    <string name="poi_church_of_christ">Kristuse kirik (Church of christ)</string>
+    <string name="poi_assemblies_of_god_church">Jumala koguduste kirik (Assemblies of god church)</string>
+    <string name="poi_nondenominational_church">Konfessioonivaba kirik</string>
+    <string name="poi_episcopal_church">Episkopaalkirik</string>
+    <string name="poi_denomination_free_church_of_scotland">Šoti vabakirik (Free Church Of Scotland)</string>
+    <string name="poi_denomination_churches_of_christ">Kristuse kirikud (Churches Of Christ)</string>
+    <string name="poi_denomination_marthoma">Mar Thoma kirik</string>
+    <string name="poi_denomination_vajrayana">Vadžrajaana</string>
+    <string name="poi_denomination_gelug">Gelukpa koolkond</string>
 </resources>

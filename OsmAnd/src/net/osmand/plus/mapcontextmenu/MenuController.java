@@ -811,6 +811,9 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	}
 
 	public void onAcquireNewController(PointDescription pointDescription, Object object) {
+		if (builder != null) {
+			builder.onHide();
+		}
 	}
 
 	public boolean isMapDownloaded() {

@@ -5861,7 +5861,7 @@
     <string name="edit_palette">Επεξεγασία παλέττας</string>
     <string name="add_palette">Προσθήκη παλέττας</string>
     <string name="delete_palette">Διαγραφή παλέττας</string>
-    <string name="delete_colors_palette_dialog_summary">Σίγουρα θέλετε να διαγράψε την παλέττα %1$s;</string>
+    <string name="delete_colors_palette_dialog_summary">Σίγουρα θέλετε να διαγράψετε την παλέττα %1$s;</string>
     <string name="share_favorite">Κοινοποίηση αγαπημένου</string>
     <string name="copy_list">Αντιγραφή λίστας</string>
     <string name="shared_string_trip_average">Μέσος όρος διαδρομής</string>

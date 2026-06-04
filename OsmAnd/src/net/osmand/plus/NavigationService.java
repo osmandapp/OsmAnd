@@ -111,7 +111,7 @@ public class NavigationService extends Service {
 		LOG.info(">>>> NavigationService stopIfNeeded = " + usageIntent);
 		OsmandApplication app = getApp();
 		if ((usedBy & usageIntent) > 0) {
-			usedBy -= usageIntent;
+			usedBy &= ~usageIntent;
 		}
 		onServiceChanged(false);
 		if (usedBy == 0) {
@@ -125,16 +125,17 @@ public class NavigationService extends Service {
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		LOG.info(">>>> NavigationService onStartCommand");
+		int usageIntent = intent != null ? intent.getIntExtra(USAGE_INTENT, 0) : 0;
 		if (isUsed()) {
 			LOG.info(">>>> NavigationService is used by = " + usedBy);
-			addUsageIntent(intent.getIntExtra(USAGE_INTENT, 0));
+			addUsageIntent(usageIntent);
 			return START_REDELIVER_INTENT;
 		}
 
 		OsmandApplication app = getApp();
 		settings = app.getSettings();
 		routingHelper = app.getRoutingHelper();
-		usedBy = intent.getIntExtra(USAGE_INTENT, 0);
+		usedBy = usageIntent;
 
 		locationProvider = app.getLocationProvider();
 		locationServiceHelper = app.createLocationServiceHelper();

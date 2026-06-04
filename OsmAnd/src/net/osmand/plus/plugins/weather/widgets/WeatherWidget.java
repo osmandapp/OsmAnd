@@ -23,6 +23,7 @@ import net.osmand.plus.plugins.weather.WeatherHelper;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.plugins.weather.WeatherUtils;
 import net.osmand.plus.plugins.weather.enums.WeatherSource;
+import net.osmand.plus.plugins.weather.units.WeatherUnit;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -127,13 +128,15 @@ public class WeatherWidget extends SimpleWidget {
 	public void updateContent(@Nullable String formattedValue) {
 		app.removeMessagesInUiThread(hideOldDataMessageId);
 		if (!Algorithms.isEmpty(formattedValue)) {
-			WeatherSource weatherSource = plugin.getWeatherSource();
+			WeatherUnit bandUnit = weatherBand.getBandUnit();
+			String unit = bandUnit != null ? bandUnit.getUnit(app) : null;
+			WeatherSource weatherSource = plugin != null ? plugin.getWeatherSource() : null;
 			if (weatherSource == WeatherSource.ECMWF &&
 					(widgetType == WidgetType.WEATHER_CLOUDS_WIDGET || widgetType == WidgetType.WEATHER_WIND_WIDGET) &&
 					"0".equals(formattedValue)) {
-				setText(NO_VALUE, weatherBand.getBandUnit().getUnit(app));
+				setText(NO_VALUE, unit);
 			} else {
-				setText(formattedValue, weatherBand.getBandUnit().getUnit(app));
+				setText(formattedValue, unit);
 			}
 		} else {
 			setText(NO_VALUE, null);
