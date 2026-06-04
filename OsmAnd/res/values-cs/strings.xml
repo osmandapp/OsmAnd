@@ -1981,7 +1981,7 @@
     <string name="shared_string_trip">Cesta</string>
     <string name="shared_string_recorded">Zaznamenáno</string>
     <string name="shared_string_record">Záznam</string>
-    <string name="gpx_logging_no_data">Žádná data</string>
+    <string name="gpx_logging_no_data">Bez dat</string>
     <string name="rendering_attr_contourColorScheme_description">Barevné schéma pro vrstevnice</string>
     <string name="save_track_min_speed">Minimální rychlost pro záznam</string>
     <string name="save_track_min_speed_descr">Filtr: Nezaznamenávat body pod touto rychlostí.</string>
@@ -5401,7 +5401,7 @@
     <string name="clear_all_key_shortcuts">Vymazat všechny klávesové zkratky</string>
     <string name="no_assigned_keys_desc">Vyberte akci a přiřaďte jí klávesu klepnutím na tlačítko „Přidat“.</string>
     <string name="steps_per_minute_unit">SPM</string>
-    <string name="delete_widget">Smazat widget?</string>
+    <string name="delete_widget">Odebrat widget?</string>
     <string name="delete_widget_description">Tento widget bude odstraněn. Později jej můžete obnovit v okně Konfigurace.</string>
     <string name="battery_saving_mode">Režim úspory baterie</string>
     <string name="rendering_attr_alpineHiking_name">Stupeň obtížnosti turistických tras</string>
@@ -6176,4 +6176,9 @@
     <string name="obd_simulation_device">Zařízení k simulaci</string>
     <string name="astronomy_map">Astronomická mapa</string>
     <string name="astro_designations">Označení</string>
+    <string name="choose_from_gallery">Vyberte si z galerie</string>
+    <string name="choose_from_files">Vyberte ze souborů</string>
+    <string name="shared_string_media">Média</string>
+    <string name="no_media">Bez médií</string>
+    <string name="no_media_descr">Můžete přidávat fotografie, videa nebo zvukové poznámky z fotoaparátu nebo knihovny.</string>
 </resources>

@@ -1357,7 +1357,7 @@
     <string name="route_points">Punti del percorso</string>
     <string name="shared_string_release">Rilasciata</string>
     <string name="shared_string_ellipsis">…</string>
-    <string name="shared_string_ok">Ok</string>
+    <string name="shared_string_ok">OK</string>
     <string name="shared_string_cancel">Annulla</string>
     <string name="shared_string_dismiss">Abbandona</string>
     <string name="shared_string_yes">Sì</string>
@@ -6149,4 +6149,5 @@
     <string name="remove_step">Elimina passaggio</string>
     <string name="choose_from_gallery">Scegli dalla galleria</string>
     <string name="choose_from_files">Scegli tra i file</string>
+    <string name="shared_string_media">Media</string>
 </resources>

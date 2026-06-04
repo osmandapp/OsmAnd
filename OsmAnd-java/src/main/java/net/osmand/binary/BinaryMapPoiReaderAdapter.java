@@ -11,7 +11,12 @@ import net.osmand.*;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
+import net.osmand.binary.OsmandOdb.IndexedStringTable;
+import net.osmand.binary.OsmandOdb.OsmAndPoiBoxData;
+import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex;
+import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.Builder;
 import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData;
+import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexOrBuilder;
 import net.osmand.data.Amenity;
 import net.osmand.data.Amenity.AmenityRoutePoint;
 import net.osmand.data.LatLon;
@@ -343,7 +348,59 @@ public class BinaryMapPoiReaderAdapter {
 	private String normalizeSearchPoiByNameQuery(String query) {
 		return query.replace("\"", "").toLowerCase();
 	}
+	
+	
+	protected OsmandOdb.IndexedStringTable readNameIndexInternal(NameIndexInspector pi) throws IOException {
+		OsmandOdb.IndexedStringTable res = null;
+		while (true) {
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				return res;
+			case OsmandOdb.OsmAndPoiNameIndex.TABLE_FIELD_NUMBER :
+				long length = readInt();
+				long oldLimit = codedIS.pushLimitLong((long) length);
+				pi.setInitialShift(codedIS.getTotalBytesRead());
+				map.readNameIndexInspector(null, pi);
+				codedIS.popLimit(oldLimit);
+				break;
+			case OsmandOdb.OsmAndPoiNameIndex.DATA_FIELD_NUMBER :
+				long shift = codedIS.getTotalBytesRead();
+				int len = codedIS.readRawVarint32();
+				oldLimit = codedIS.pushLimitLong((long) len);
+				pi.addData(OsmAndPoiNameIndexData.parseFrom(codedIS), shift);
+				codedIS.popLimit(oldLimit);
+				break;
 
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
+	}
+
+	protected NameIndexInspector readNameIndex() throws IOException {
+		NameIndexInspector nameIndexInspector = new NameIndexInspector();
+		while (true) {
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				return nameIndexInspector;
+			case OsmandOdb.OsmAndPoiIndex.NAMEINDEX_FIELD_NUMBER:
+				long length = readInt();
+				long oldLimit = codedIS.pushLimitLong((long) length);
+				readNameIndexInternal(nameIndexInspector);
+				codedIS.popLimit(oldLimit);
+				break;
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
+	}
+	
 	protected void searchPoiByName(PoiRegion region, SearchRequest<Amenity> req) throws IOException {
 		TIntLongHashMap offsets = new TIntLongHashMap();
 		String query = normalizeSearchPoiByNameQuery(req.nameQuery);

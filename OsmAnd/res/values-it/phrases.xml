@@ -705,7 +705,7 @@
     <string name="poi_highway_crossing_type">Tipo</string>
     <string name="poi_tactile_paving">Pavimentazione tattile</string>
     <string name="poi_service_general">Servizio</string>
-    <string name="poi_brushless">Senza spazzola (acqua ad alta pressione)</string>
+    <string name="poi_brushless">Senza spazzole</string>
     <string name="poi_self_service">Self-service</string>
     <string name="poi_automated">Automatizzato</string>
     <string name="poi_parking_type">Tipo</string>

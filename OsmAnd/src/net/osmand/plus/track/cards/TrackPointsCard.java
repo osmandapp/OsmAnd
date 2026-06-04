@@ -21,7 +21,6 @@ import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -569,7 +568,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 					updateSelectionMode();
 				});
 			}
-			ImageButton goToLocationIcon = row.findViewById(R.id.go_to_point_location_icon);
+			ImageView goToLocationIcon = row.findViewById(R.id.go_to_point_location_icon);
 			boolean isTrackPoint = GpxDisplayItemType.TRACK_POINTS == group.getType();
 			AndroidUiHelper.updateVisibility(goToLocationIcon, isTrackPoint);
 			goToLocationIcon.setOnClickListener((v) -> {
