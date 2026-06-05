@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public abstract class OsmandSettingsItemWriter<T extends OsmandSettingsItem> extends SettingsItemWriter<T> {
 
@@ -33,8 +34,13 @@ public abstract class OsmandSettingsItemWriter<T extends OsmandSettingsItem> ext
 	@Override
 	public void writeToStream(@NonNull OutputStream outputStream, @Nullable IProgress progress) throws IOException {
 		JSONObject json = new JSONObject();
-		List<OsmandPreference<?>> prefs = new ArrayList<>(settings.getRegisteredPreferences().values());
-		for (OsmandPreference<?> pref : prefs) {
+		List<Map.Entry<String, OsmandPreference<?>>> prefs = new ArrayList<>(settings.getRegisteredPreferences().entrySet());
+		for (Map.Entry<String, OsmandPreference<?>> entry : prefs) {
+			OsmandPreference<?> pref = entry.getValue();
+			if (pref == null) {
+				SettingsHelper.LOG.warn("No registered preference while exporting settings item: " + getItem().getName() + ", key: " + entry.getKey());
+				continue;
+			}
 			try {
 				writePreferenceToJson(pref, json);
 			} catch (JSONException e) {

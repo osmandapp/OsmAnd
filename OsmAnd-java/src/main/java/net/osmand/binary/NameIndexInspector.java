@@ -1,15 +1,18 @@
 package net.osmand.binary;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import net.osmand.binary.OsmandOdb.AddressNameIndexDataAtom;
+import net.osmand.binary.OsmandOdb.OsmAndAddressNameIndexData.AddressNameIndexData;
 import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData;
 import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom;
+import net.osmand.util.Algorithms;
+import net.osmand.util.SearchAlgorithms;
 
 public class NameIndexInspector {
 
@@ -27,6 +30,7 @@ public class NameIndexInspector {
 		public List<ValueFreq> subValues = null;
 		
 		public static boolean SORT_BY_NAME = false;
+		public static boolean SORT_BY_TOP_FREQ = true;
 		
 		public ValueFreq(String name, int frequency) {
 			this.value = name;
@@ -57,6 +61,19 @@ public class NameIndexInspector {
 			return res;
 		}
 		
+
+		public static Map<String, ValueFreq> mergeArray(Map<String, ValueFreq> res, Map<String, ValueFreq> ms) {
+			for (ValueFreq s : ms.values()) {
+				ValueFreq vf = res.get(s.value);
+				if (vf != null) {
+					vf.merge(s);
+				} else {
+					res.put(s.value, s);
+				}
+			}
+			return res;
+		}
+		
 		
 		public void merge(ValueFreq s) {
 			this.freq += s.freq;
@@ -73,11 +90,22 @@ public class NameIndexInspector {
 		public String toString() {
 			return String.format("%s (%,d)", value ,freq);
 		}
+		
+		public int getTopFreq() {
+			if(subValues != null && subValues.size() > 0) {
+				Collections.sort(subValues);
+				return subValues.get(0).freq;
+			}
+			return freq;
+		}
 
 		@Override
 		public int compareTo(ValueFreq o) {
 			if (!SORT_BY_NAME) {
 				int c = -Integer.compare(freq, o.freq);
+				if (SORT_BY_TOP_FREQ) {
+					c = -Integer.compare(getTopFreq(), o.getTopFreq());
+				}
 				if (c != 0) {
 					return c;
 				}
@@ -86,28 +114,39 @@ public class NameIndexInspector {
 		}
 	}
 	
-	public static class PrefixNameValue implements Comparable<PrefixNameValue> {
+	private static class PrefixNameValue implements Comparable<PrefixNameValue> {
 		public String key;
 		public OsmAndPoiNameIndexData data = null;
-		public static double LIMIT_PERCENT = 0.1;
+		public AddressNameIndexData addr = null;
 		
 		@Override
 		public String toString() {
 			List<ValueFreq> suffixes = collectFrequencies();
-			return String.format("%s (%d, %s)", key, data.getAtomsCount(), suffixes);
+			if(data != null) {
+				return String.format("%s (%d, %s)", key, data.getAtomsCount(), suffixes);
+			} else if(addr != null) {
+				return String.format("%s (%d, %s)", key, addr.getAtomCount(), suffixes);
+			} else {
+				return key + " <NOT SET>";
+			}
 		}
 
-		private List<ValueFreq> collectFrequencies() {
+		private List<ValueFreq> collectAddrFrequencies(int f) {
 			List<ValueFreq> suffixes = new ArrayList<>();
-			for (String s : data.getSuffixesDictionaryList()) {
-				ValueFreq vf = new ValueFreq(key + s, 0);
+			String curSuffix = "";
+			for (String s : addr.getSuffixesDictionaryList()) {
+				curSuffix = SearchAlgorithms.nameIndexDecodeDictionarySuffix(curSuffix, s);
+				ValueFreq vf = new ValueFreq(key + curSuffix, 0);
 				suffixes.add(vf);
 			}
 			int intBits = 32;
-			for (OsmAndPoiNameIndexDataAtom a : data.getAtomsList()) {
-				for(int i = 0; i < a.getSuffixesBitsetCount(); i++) {
+			for (AddressNameIndexDataAtom a : addr.getAtomList()) {
+				if (a.getType() != f && f >= 0) {
+					continue;
+				}
+				for (int i = 0; i < a.getSuffixesBitsetCount(); i++) {
 					int suffBit = a.getSuffixesBitset(i);
-					for(int j = 0; j < intBits && suffBit != 0; j++) {
+					for (int j = 0; j < intBits && suffBit != 0; j++) {
 						if (suffBit % 2 == 1) {
 							ValueFreq s = suffixes.get(i * intBits + j);
 							s.freq++;
@@ -115,6 +154,34 @@ public class NameIndexInspector {
 						suffBit >>= 1;
 					}
 				}
+			}
+			return suffixes;
+		}
+		
+		private List<ValueFreq> collectFrequencies() {
+			List<ValueFreq> suffixes = new ArrayList<>();
+			if (data != null) {
+				String curSuffix = "";
+				for (String s : data.getSuffixesDictionaryList()) {
+					curSuffix = SearchAlgorithms.nameIndexDecodeDictionarySuffix(curSuffix, s);
+					ValueFreq vf = new ValueFreq(key + curSuffix, 0);
+					suffixes.add(vf);
+				}
+				int intBits = 32;
+				for (OsmAndPoiNameIndexDataAtom a : data.getAtomsList()) {
+					for(int i = 0; i < a.getSuffixesBitsetCount(); i++) {
+						int suffBit = a.getSuffixesBitset(i);
+						for(int j = 0; j < intBits && suffBit != 0; j++) {
+							if (suffBit % 2 == 1) {
+								ValueFreq s = suffixes.get(i * intBits + j);
+								s.freq++;
+							}
+							suffBit >>= 1;
+						}
+					}
+				}
+			} else if (addr != null) {
+				suffixes = collectAddrFrequencies(-1);
 			}
 			Collections.sort(suffixes);
 			return suffixes;
@@ -137,9 +204,12 @@ public class NameIndexInspector {
 	}
 	
 	
-	public List<ValueFreq> getPrefixes() {
+	public List<ValueFreq> getPrefixes(String prefix) {
 		List<ValueFreq> ls = new ArrayList<NameIndexInspector.ValueFreq>();
-		for(PrefixNameValue p : indexByRef.values()) {
+		for (PrefixNameValue p : indexByRef.values()) {
+			if (prefix != null && !(p.key.toLowerCase().startsWith(prefix) || prefix.toLowerCase().startsWith(p.key))) {
+				continue;
+			}
 			ValueFreq vf = new ValueFreq(p.key, p.data.getAtomsCount());
 			vf.subValues = p.collectFrequencies();
 			ls.add(vf);
@@ -147,15 +217,35 @@ public class NameIndexInspector {
 		return ls;
 	}
 	
-	
-	
-	public List<PrefixNameValue> getTop(int limit) {
-		List<PrefixNameValue> r = new ArrayList<>(indexByRef.values());
-		Collections.sort(r);
-		if (r.size() > limit) {
-			r = r.subList(0, limit);
+
+	public List<ValueFreq> getAddrPrefixes(int filter, String prefix) {
+		List<ValueFreq> ls = new ArrayList<NameIndexInspector.ValueFreq>();
+		for (PrefixNameValue p : indexByRef.values()) {
+			if (prefix != null && !(p.key.toLowerCase().startsWith(prefix) || prefix.toLowerCase().startsWith(p.key))) {
+				continue;
+			}
+
+			List<ValueFreq> subvalues = p.collectAddrFrequencies(filter);
+			int total = p.addr.getAtomCount();
+			if (filter >= 0 || !Algorithms.isEmpty(prefix)) {
+				total = 0;
+				List<ValueFreq> sublist = new ArrayList<>();
+				for (ValueFreq s : subvalues) {
+					total += s.freq;
+					if (s.freq > 0) {
+						sublist.add(s);
+					}
+				}
+				if (sublist.size() == 0) {
+					continue;
+				}
+				subvalues = sublist;
+			}
+			ValueFreq vf = new ValueFreq(p.key, total);
+			vf.subValues = subvalues;
+			ls.add(vf);
 		}
-		return r;
+		return ls;
 	}
 
 	
@@ -170,6 +260,15 @@ public class NameIndexInspector {
 			throw new IllegalStateException(obj.toString());
 		}
 		obj.data = from;
+	}
+
+
+	public void addData(AddressNameIndexData from, long currentShift) {
+		PrefixNameValue obj = indexByRef.get(currentShift);
+		if (obj.addr != null) {
+			throw new IllegalStateException(obj.toString());
+		}
+		obj.addr = from;		
 	}
 
 

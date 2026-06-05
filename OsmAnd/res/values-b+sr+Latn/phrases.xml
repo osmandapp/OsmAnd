@@ -5171,4 +5171,6 @@
     <string name="poi_rapids_grade_5">5 (stručni)</string>
     <string name="poi_rapids_grade_6">6 (ekstremno)</string>
     <string name="poi_rapids_grade_x">X (ne može se kretati)</string>
+    <string name="poi_water_type_filter">Vrsta vode</string>
+    <string name="poi_water_lake">Jezero</string>
 </resources>

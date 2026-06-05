@@ -5849,7 +5849,7 @@
     <string name="show_spherical_map_description">Mostra il modello sferoidale della Terra</string>
     <string name="save_and_access_articles_offline">Salva i dati e accedi agli articoli offline ovunque</string>
     <string name="track_folder_appearance">Aspetto della cartella tracce</string>
-    <string name="update_maps">Aggiorna le nappe</string>
+    <string name="update_maps">Aggiorna le mappe</string>
     <string name="reconnect">Ricollega</string>
     <string name="rendering_attr_showSkiSlopes_name">Mostra la pendenza delle piste da sci</string>
     <string name="rendering_attr_showSkiSlopes_description">Mostra i pendii da discesa in modo semplificato</string>

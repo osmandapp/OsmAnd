@@ -6142,4 +6142,9 @@
     <string name="favorite_folder_duplicate_message">Koristite ime foldera koji već ne postoji.</string>
     <string name="favorite_folder_name">Ime foldera</string>
     <string name="edit_folder">Uredi folder</string>
+    <string name="choose_from_gallery">Izaberi iz galerije</string>
+    <string name="choose_from_files">Izaberi iz Fajlova</string>
+    <string name="shared_string_media">Mediji</string>
+    <string name="no_media">Nema medija</string>
+    <string name="no_media_descr">Možete dodati fotografije, video zapise ili audio beleške sa kamere ili biblioteke.</string>
 </resources>

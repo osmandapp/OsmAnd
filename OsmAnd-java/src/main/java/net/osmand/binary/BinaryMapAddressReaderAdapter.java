@@ -893,6 +893,57 @@ public class BinaryMapAddressReaderAdapter {
 		}
 
 	}
+	
+	protected NameIndexInspector readNameIndex() throws IOException {
+		NameIndexInspector nameIndexInspector = new NameIndexInspector();
+		while (true) {
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				return nameIndexInspector;
+			case OsmandOdb.OsmAndAddressIndex.NAMEINDEX_FIELD_NUMBER:
+				long length = readInt();
+				long oldLimit = codedIS.pushLimitLong((long) length);
+				readNameIndexInternal(nameIndexInspector);
+				codedIS.popLimit(oldLimit);
+				break;
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
+	}
+	
+	protected OsmandOdb.IndexedStringTable readNameIndexInternal(NameIndexInspector pi) throws IOException {
+		OsmandOdb.IndexedStringTable res = null;
+		while (true) {
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				return res;
+			case OsmAndAddressNameIndexData.TABLE_FIELD_NUMBER :
+				long length = readInt();
+				long oldLimit = codedIS.pushLimitLong((long) length);
+				pi.setInitialShift(codedIS.getTotalBytesRead());
+				map.readNameIndexInspector(null, pi);
+				codedIS.popLimit(oldLimit);
+				break;
+			case OsmAndAddressNameIndexData.ATOM_FIELD_NUMBER :
+				long shift = codedIS.getTotalBytesRead();
+				int len = codedIS.readRawVarint32();
+				oldLimit = codedIS.pushLimitLong((long) len);
+				pi.addData(AddressNameIndexData.parseFrom(codedIS), shift);
+				codedIS.popLimit(oldLimit);
+				break;
+
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
+	}
 
 	private void readAddressNameData(SearchRequest<MapObject> req, TIntArrayList[] refs,
 			TIntArrayList[] refsToCities, long fp, QueryToken.SuffixMask suffixMask) throws IOException {

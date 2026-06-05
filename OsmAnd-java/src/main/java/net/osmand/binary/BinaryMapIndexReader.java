@@ -1454,6 +1454,14 @@ public class BinaryMapIndexReader {
 		codedIS.popLimit(old);
 		return res;
 	}
+	
+	public NameIndexInspector readFullNameIndex(AddressRegion p) throws IOException {
+		codedIS.seek(p.filePointer);
+		NameIndexInspector res = addressAdapter.readNameIndex();
+		long old = codedIS.pushLimitLong((long) p.length);
+		codedIS.popLimit(old);
+		return res;
+	}
 
 	public Map<PoiCategory, List<String>> searchPoiCategoriesByName(String query, Map<PoiCategory, List<String>> map) throws IOException {
 		if (query == null || query.length() == 0) {

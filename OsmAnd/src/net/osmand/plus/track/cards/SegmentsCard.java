@@ -97,7 +97,6 @@ public class SegmentsCard extends MapBaseCard {
 		recyclerView.setLayoutManager(new LinearLayoutManager(activity));
 		recyclerView.setAdapter(new SegmentsAdapter(items, tabToOpen));
 		tabToOpen = null;
-		recyclerView.setHasFixedSize(true);
 
 		LinearLayout noRoutesContainer = view.findViewById(R.id.no_routes_container);
 		TextViewEx createRoutesButton = view.findViewById(R.id.create_routes_btn);
