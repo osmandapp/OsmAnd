@@ -705,7 +705,7 @@ public abstract class InAppPurchaseHelper {
 		}
 
 		boolean subscribedToLiveUpdates = isSubscribedToLocalLiveUpdates();
-		boolean subscribedToMaps = isSubscribedToLocalMaps() || isSubscribedToExternalMaps();
+		boolean subscribedToMaps = isSubscribedToLocalMaps() || isSubscribedToExternalMaps() || isPurchasedExternalMaps();
 		boolean subscribedToOsmAndPro = isSubscribedToLocalOsmAndPro() || isSubscribedToExternalOsmAndPro() || isPurchasedExternalOsmAndPro();
 		if (!subscribedToLiveUpdates && ctx.getSettings().LIVE_UPDATES_PURCHASED.get() && externalPurchasesHandled) {
 			ctx.getSettings().LIVE_UPDATES_PURCHASED.set(false);
@@ -764,6 +764,15 @@ public abstract class InAppPurchaseHelper {
 	protected boolean isSubscribedToExternalMaps() {
 		for (SubscriptionStateHolder holder : subscriptionStateMap.values()) {
 			if (holder.linkedSubscription != null && holder.linkedSubscription.isMaps()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	protected boolean isPurchasedExternalMaps() {
+		for (InAppStateHolder holder : inAppStateMap.values()) {
+			if (holder.linkedPurchase != null && holder.linkedPurchase.isMaps()) {
 				return true;
 			}
 		}
