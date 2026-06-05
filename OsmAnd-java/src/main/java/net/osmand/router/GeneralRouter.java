@@ -606,11 +606,7 @@ public class GeneralRouter implements VehicleRouter {
 //		TIMER -= System.nanoTime();
 		Map<RouteRegion, Map<IntHolder, Float>> ch = evalCache[attr.ordinal()];
 		if (USE_CACHE) {
-			Map<IntHolder, Float> rM = ch.get(reg);
-			if (rM == null) {
-				rM = new ConcurrentHashMap<>();
-				ch.put(reg, rM);
-			}
+			Map<IntHolder, Float> rM = ch.computeIfAbsent(reg, r -> new ConcurrentHashMap<>());
 			rM.put(new IntHolder(types, extra), val);
 		}
 //		TIMER += System.nanoTime();
