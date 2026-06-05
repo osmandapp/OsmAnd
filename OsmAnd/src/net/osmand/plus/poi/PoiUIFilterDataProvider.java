@@ -68,7 +68,7 @@ public class PoiUIFilterDataProvider {
         boolean cancelled = matcher != null && matcher.isCancelled();
         PoiUIFilterResultMatcher<?> uiFilterResultMatcher = matcher != null ? (PoiUIFilterResultMatcher<?>) matcher : null;
         long waitDeadlineMs = System.currentTimeMillis() + WIKI_LOAD_MAX_WAIT_MS;
-        while (explorePlacesProvider.isLoading() && !cancelled && System.currentTimeMillis() < waitDeadlineMs) {
+        while (explorePlacesProvider.isLoadingRect(rect) && !cancelled && System.currentTimeMillis() < waitDeadlineMs) {
             if (uiFilterResultMatcher != null) {
                 uiFilterResultMatcher.defferedResults();
             }
