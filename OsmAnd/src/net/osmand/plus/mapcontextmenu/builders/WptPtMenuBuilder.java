@@ -16,6 +16,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.gallery.data.GalleryKey;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.mapcontextmenu.BuildRowAttrs;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
@@ -81,7 +82,8 @@ public class WptPtMenuBuilder extends MenuBuilder {
 	protected void buildTopInternal(View view) {
 		super.buildTopInternal(view);
 		buildWaypointsView(view);
-		buildMediaLinksRow(view, wpt.getLinks(), wpt);
+		String key = wpt.getName() + "__" + wpt.getCategory();
+		buildAttachedMediaRow(view, new GalleryKey.Waypoint(key), wpt);
 	}
 
 	@Override

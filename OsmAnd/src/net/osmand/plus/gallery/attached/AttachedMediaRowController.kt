@@ -1,21 +1,27 @@
 package net.osmand.plus.gallery.attached
 
+import android.view.View
+import net.osmand.data.LatLon
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.gallery.controller.GalleryGridController
 import net.osmand.plus.gallery.controller.GalleryPagerController
 import net.osmand.plus.gallery.controller.GalleryRowController
 import net.osmand.plus.gallery.data.GalleryKey
+import net.osmand.plus.gallery.attached.helpers.AttachedMediaUiHelper
 import net.osmand.plus.gallery.model.GalleryAction
 import net.osmand.plus.gallery.model.GalleryActionButton
 import net.osmand.plus.gallery.model.GalleryItem
 import net.osmand.plus.gallery.model.GalleryItem.NoMedia.ActionButtonStyle
 import net.osmand.plus.gallery.model.MediaHolder
 import net.osmand.shared.media.domain.MediaItem
+import net.osmand.shared.media.domain.MediaType
 
 class AttachedMediaRowController(
 	app: OsmandApplication,
-	key: GalleryKey
+	key: GalleryKey,
+	val obj: Any,
+	val latLon: LatLon
 ) : GalleryRowController(app, key) {
 
 	override fun requiresInternet() = false
@@ -33,17 +39,26 @@ class AttachedMediaRowController(
 			emptyList()
 		}
 
-	override fun handleGalleryAction(action: GalleryAction) {
-		if (action == SHOW_ALL_ACTION) {
-			view?.mapActivity?.let { GalleryGridController.showDialog(it, key) }
-		} else if (action == ADD_MEDIA_ACTION) {
-			// TODO: open popup add media menu
+	override fun handleGalleryAction(v: View, action: GalleryAction) {
+		view?.mapActivity?.let {
+			when (action) {
+				SHOW_ALL_ACTION -> GalleryGridController.showDialog(it, key)
+				ADD_MEDIA_ACTION -> AttachedMediaUiHelper(it).showAddMenu(v, obj, latLon) {
+					onMediaChanged()
+				}
+			}
 		}
 	}
 
 	override fun onMediaItemClicked(mediaItem: MediaItem) {
 		val activity = view?.mapActivity ?: return
-		GalleryPagerController.showDialog(activity, key, mediaItem.id)
+		val nightMode = view?.isNightMode() ?: return
+
+		if (mediaItem.type == MediaType.PHOTO) {
+			GalleryPagerController.showDialog(activity, key, mediaItem.id)
+		} else {
+			AttachedMediaUiHelper(activity).openMediaItem(mediaItem, nightMode)
+		}
 	}
 
 	override fun emptyStateItems(): List<GalleryItem> {
@@ -55,6 +70,10 @@ class AttachedMediaRowController(
 			buttonStyle = ActionButtonStyle.DIALOG
 		)
 		return listOf(noMedia)
+	}
+
+	private fun onMediaChanged() {
+		app.galleryHelper.mediaLoader.reload(key, loadListener)
 	}
 
 	companion object {

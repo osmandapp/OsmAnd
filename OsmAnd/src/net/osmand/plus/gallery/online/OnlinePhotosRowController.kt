@@ -1,5 +1,6 @@
-package net.osmand.plus.mapcontextmenu.gallery
+package net.osmand.plus.gallery.online
 
+import android.view.View
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.gallery.controller.GalleryGridController
@@ -35,7 +36,7 @@ open class OnlinePhotosRowController(
 		return if (hasMediaItems()) listOf(showAllButton) else emptyList()
 	}
 
-	override fun handleGalleryAction(action: GalleryAction) {
+	override fun handleGalleryAction(v: View, action: GalleryAction) {
 		if (action == SHOW_ALL_ACTION) {
 			view?.mapActivity?.let { GalleryGridController.showDialog(it, key) }
 		}

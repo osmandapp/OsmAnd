@@ -24,7 +24,7 @@ import net.osmand.shared.media.MediaProvider
 class GalleryGridAdapter(
 	private val mapActivity: MapActivity,
 	private val galleryListener: IGalleryListener,
-	private val actionListener: IGalleryActionListener?,
+	private val actionListener: IGalleryActionListener,
 	private val viewWidth: Int?,
 	private val nightMode: Boolean,
 	private val loadStateRegistry: MediaLoadStateRegistry
@@ -80,7 +80,7 @@ class GalleryGridAdapter(
 				)
 			}
 			holder is ActionViewHolder && item is GalleryItem.Action ->
-				holder.bindView(nightMode, mapActivity, item, actionListener ?: IGalleryActionListener() {})
+				holder.bindView(nightMode, mapActivity, item, actionListener)
 			holder is NoMediaHolder && item is GalleryItem.NoMedia ->
 				holder.bindView(item, nightMode, actionListener)
 			holder is NoInternetHolder && item is GalleryItem.NoInternet ->

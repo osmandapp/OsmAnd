@@ -18,6 +18,6 @@ sealed class GalleryKey {
 	) : GalleryKey()
 
 	data class Waypoint(
-		val gpxPath: String, val name: String
+		val pointKey: String
 	) : GalleryKey()
 }

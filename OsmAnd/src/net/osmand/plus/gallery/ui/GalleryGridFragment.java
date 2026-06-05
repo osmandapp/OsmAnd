@@ -21,11 +21,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
-import net.osmand.plus.gallery.contract.IGalleryListener;
+import net.osmand.plus.gallery.contract.IGalleryGridController;
+import net.osmand.plus.gallery.contract.IGalleryGridView;
 import net.osmand.plus.gallery.controller.GalleryGridController;
-import net.osmand.plus.gallery.controller.GalleryPagerController;
 import net.osmand.plus.gallery.data.MediaLoadStateRegistry;
-import net.osmand.plus.gallery.helpers.AttachedMediaUiHelper;
 import net.osmand.plus.gallery.model.GalleryItem;
 import net.osmand.plus.gallery.model.GalleryItem.MediaCount;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -33,14 +32,12 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
-import net.osmand.shared.media.domain.MediaItem;
-import net.osmand.shared.media.domain.MediaType;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GalleryGridFragment extends BaseFullScreenFragment {
+public class GalleryGridFragment extends BaseFullScreenFragment implements IGalleryGridView {
 
 	public static final String TAG = GalleryGridFragment.class.getSimpleName();
 	private static final String TITLE_KEY = "title_key";
@@ -55,7 +52,7 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 	private GridLayoutManager layoutManager;
 	private String title = null;
 
-	private GalleryGridController controller;
+	private IGalleryGridController controller;
 
 	private float newScaleFactor;
 
@@ -72,9 +69,8 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 		updateNightMode();
 
 		controller = GalleryGridController.getExistingInstance(app);
-		if (controller == null) {
-			return null;
-		}
+		if (controller == null) return null;
+		controller.attach(this);
 
 		View view = inflate(R.layout.gallery_grid_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
@@ -94,8 +90,8 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 			public void onGlobalLayout() {
 				MediaLoadStateRegistry loadStateRegistry = app.getGalleryHelper().getLoadStateRegistry();
 				recyclerView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-				adapter = new GalleryGridAdapter(requireMapActivity(), getGalleryListener(),
-						null, recyclerView.getMeasuredWidth(), nightMode, loadStateRegistry);
+				adapter = new GalleryGridAdapter(requireMapActivity(), controller, controller,
+						recyclerView.getMeasuredWidth(), nightMode, loadStateRegistry);
 				adapter.setResizeBySpanCount(true);
 
 				List<GalleryItem> items = new ArrayList<>();
@@ -138,23 +134,6 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 		InsetTargetsCollection collection = super.getInsetTargets();
 		collection.replace(InsetTarget.createScrollable(R.id.content_list));
 		return collection;
-	}
-
-	@NonNull
-	private IGalleryListener getGalleryListener() {
-		return new IGalleryListener() {
-			@Override
-			public void onMediaItemClicked(@NonNull MediaItem mediaItem) {
-				FragmentActivity activity = getActivity();
-				if (controller != null && activity != null) {
-					GalleryPagerController.showDialog(activity, controller.getKey(), mediaItem.getId());
-				}
-			}
-
-			@Override
-			public void onReloadMediaItems() {
-			}
-		};
 	}
 
 	private void setupScaleDetector() {
@@ -256,21 +235,27 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			mapActivity.disableDrawer();
-		}
+		callMapActivity(MapActivity::disableDrawer);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
+		callMapActivity(MapActivity::enableDrawer);
+	}
 
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			mapActivity.enableDrawer();
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		if (controller != null) {
+			controller.detach();
 		}
+	}
+
+	@Nullable
+	@Override
+	public MapActivity getMapActivity() {
+		return super.getMapActivity();
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity, @Nullable String title) {

@@ -48,7 +48,7 @@ import net.osmand.plus.download.local.LocalItemUtils;
 import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile;
 import net.osmand.plus.keyevent.devices.ParrotDeviceProfile;
 import net.osmand.plus.keyevent.devices.WunderLINQDeviceProfile;
-import net.osmand.plus.gallery.helpers.AttachedMediaDataHelper;
+import net.osmand.plus.gallery.attached.helpers.AttachedMediaDataHelper;
 import net.osmand.plus.mapmarkers.MarkersDb39HelperLegacy;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.plugins.PluginsHelper;

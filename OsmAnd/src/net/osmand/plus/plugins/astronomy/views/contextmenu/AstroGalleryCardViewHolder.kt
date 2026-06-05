@@ -10,6 +10,7 @@ import com.google.android.material.progressindicator.LinearProgressIndicator
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
+import net.osmand.plus.gallery.contract.IGalleryActionListener
 import net.osmand.plus.gallery.model.GalleryItem
 import net.osmand.plus.gallery.ui.GalleryGridAdapter
 import net.osmand.plus.gallery.ui.GalleryGridItemDecorator
@@ -22,7 +23,8 @@ class AstroGalleryCardViewHolder(
 	itemView: View,
 	private val app: OsmandApplication,
 	private val mapActivity: MapActivity,
-	private val listener: IGalleryListener,
+	private val galleryListener: IGalleryListener,
+	private val actionListener: IGalleryActionListener,
 	private val onActionButtonClick: (String?) -> Unit,
 	private val onToggle: (String) -> Unit
 ) : RecyclerView.ViewHolder(itemView) {
@@ -124,8 +126,8 @@ class AstroGalleryCardViewHolder(
 		}
 		galleryGridAdapter = GalleryGridAdapter(
 			mapActivity = mapActivity,
-			galleryListener = listener,
-			actionListener = null,
+			galleryListener = galleryListener,
+			actionListener = actionListener,
 			viewWidth = null,
 			nightMode = nightMode,
 			loadStateRegistry = app.galleryHelper.loadStateRegistry

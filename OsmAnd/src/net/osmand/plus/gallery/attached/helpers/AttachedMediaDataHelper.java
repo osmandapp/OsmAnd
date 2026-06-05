@@ -1,4 +1,4 @@
-package net.osmand.plus.gallery.helpers;
+package net.osmand.plus.gallery.attached.helpers;
 
 import static net.osmand.IndexConstants.AV_INDEX_DIR;
 

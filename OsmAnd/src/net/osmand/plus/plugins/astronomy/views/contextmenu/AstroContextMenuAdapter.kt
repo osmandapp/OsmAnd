@@ -108,7 +108,7 @@ class AstroContextMenuAdapter(
 					itemView = view,
 					app = app,
 					mapActivity = mapActivity,
-					listener = object : IGalleryListener {
+					galleryListener = object : IGalleryListener {
 
 						override fun onMediaItemClicked(mediaItem: MediaItem) {
 							onMediaClick(mediaItem)
@@ -118,6 +118,7 @@ class AstroContextMenuAdapter(
 							onUpdateImage()
 						}
 					},
+					actionListener = { _, _ -> },
 					onActionButtonClick = onActionButtonClick,
 					onToggle = onGalleryToggle
 				)

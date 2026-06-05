@@ -75,7 +75,7 @@ import net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.mapcontextmenu.gallery.GalleryRowBuilder;
-import net.osmand.plus.mapcontextmenu.gallery.OnlinePhotosRowController;
+import net.osmand.plus.gallery.online.OnlinePhotosRowController;
 import net.osmand.plus.mapcontextmenu.other.MenuObject;
 import net.osmand.plus.mapcontextmenu.other.MenuObjectUtils;
 import net.osmand.plus.plugins.OsmandPlugin;
@@ -625,11 +625,12 @@ public class MenuBuilder {
 				app.getSettings().ONLINE_PHOTOS_ROW_COLLAPSED);
 	}
 
-	protected void buildAttachedMediaRow(@NonNull View view, @NonNull GalleryKey key) {
+	protected void buildAttachedMediaRow(@NonNull View view, @NonNull GalleryKey key, @NonNull Object object) {
 		boolean needUpdateOnly = attachedMediaRowController != null;
 		if (attachedMediaRowController == null) {
-			attachedMediaRowController = new AttachedMediaRowController(app, key);
+			attachedMediaRowController = new AttachedMediaRowController(app, key, object, getLatLon());
 		}
+		app.getGalleryHelper().getAttachedMediaRegistry().register(key, object);
 		buildGalleryRow(view, attachedMediaRowController,
 				R.drawable.ic_action_photo,
 				app.getString(R.string.shared_string_media),

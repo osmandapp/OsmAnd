@@ -1,7 +1,6 @@
-package net.osmand.plus.gallery.helpers;
+package net.osmand.plus.gallery.attached.helpers;
 
 import static android.app.Activity.RESULT_OK;
-import static net.osmand.plus.gallery.model.GalleryMediaGroup.OTHER;
 
 import android.content.ActivityNotFoundException;
 import android.content.ClipData;
@@ -25,11 +24,6 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.gallery.controller.GalleryController;
-import net.osmand.plus.gallery.controller.GalleryItemsHolder;
-import net.osmand.plus.gallery.model.GalleryItem;
-import net.osmand.plus.gallery.ui.GalleryGridFragment;
-import net.osmand.plus.gallery.ui.GalleryPhotoPagerFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AVActionType;
@@ -44,17 +38,14 @@ import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
 import net.osmand.shared.gpx.primitives.Link;
 import net.osmand.shared.gpx.primitives.WptPt;
-import net.osmand.shared.media.LinkMediaFactory;
 import net.osmand.shared.media.MediaUriResolver;
 import net.osmand.shared.media.domain.MediaItem;
-import net.osmand.shared.media.domain.MediaType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
@@ -78,22 +69,8 @@ public class AttachedMediaUiHelper {
 		this.dataHelper = new AttachedMediaDataHelper(app);
 	}
 
-	@NonNull
-	public List<GalleryItem> getGalleryItems(@Nullable List<Link> links) {
-		List<MediaItem> mediaItems = LinkMediaFactory.fromLinks(links);
-		List<GalleryItem> items = new ArrayList<>();
-		if (mediaItems.isEmpty()) {
-			items.add(new GalleryItem.NoMedia(null, R.string.no_media, R.string.no_media_descr, R.drawable.ic_action_image_disabled));
-		} else {
-			for (int i = mediaItems.size() - 1; i >= 0; i--) {
-				items.add(new GalleryItem.Media(mediaItems.get(i), false));
-			}
-		}
-		return items;
-	}
-
 	public void showAddMenu(@NonNull View anchorView, @Nullable Object object,
-			@Nullable LatLon latLon, @Nullable Runnable onMediaChanged) {
+	                        @Nullable LatLon latLon, @Nullable Runnable onMediaChanged) {
 		if (latLon == null) {
 			return;
 		}
@@ -321,40 +298,6 @@ public class AttachedMediaUiHelper {
 		}
 		String path = uri.getPath();
 		return Algorithms.isEmpty(path) ? null : new File(path).getName();
-	}
-
-	public void showAllMedia(@NonNull GalleryController galleryController, @Nullable Object object,
-			@Nullable LatLon latLon) {
-		if (updateMediaGalleryHolder(galleryController, object, latLon)) {
-			GalleryGridFragment.showInstance(mapActivity, app.getString(R.string.shared_string_media));
-		}
-	}
-
-	public void onMediaItemClicked(@NonNull GalleryController galleryController,
-			@NonNull MediaItem mediaItem, @Nullable Object object, @Nullable LatLon latLon,
-			boolean nightMode) {
-		if (mediaItem.getType() == MediaType.PHOTO && updateMediaGalleryHolder(galleryController, object, latLon)) {
-			int position = galleryController.getPhotoItemIndexById(mediaItem.getId());
-			GalleryPhotoPagerFragment.showInstance(mapActivity, position);
-		} else {
-			openMediaItem(mediaItem, nightMode);
-		}
-	}
-
-	private boolean updateMediaGalleryHolder(@NonNull GalleryController galleryController,
-			@Nullable Object object, @Nullable LatLon latLon) {
-		if (latLon == null) {
-			return false;
-		}
-		GalleryItemsHolder holder = new GalleryItemsHolder(latLon, Collections.emptyMap());
-		List<GalleryItem> galleryItems = getGalleryItems(dataHelper.getMediaLinks(object));
-		for (GalleryItem item : galleryItems) {
-			if (item instanceof GalleryItem.Media media) {
-				holder.addMediaItem(OTHER, media.getMediaItem());
-			}
-		}
-		galleryController.setCurrentGalleryItemsHolder(holder);
-		return !holder.getOrderedGalleryItems().isEmpty();
 	}
 
 	public void openMediaItem(@NonNull MediaItem mediaItem, boolean nightMode) {

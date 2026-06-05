@@ -87,7 +87,7 @@ class GalleryRowBuilder(
 				if (i < newButtons.size) {
 					val button = newButtons[i]
 					buttonView.setTitleId(button.titleId)
-					buttonView.setOnClickListener { controller.handleGalleryAction(button.action) }
+					buttonView.setOnClickListener { controller.handleGalleryAction(it, button.action) }
 					buttonView.visibility = View.VISIBLE
 				} else {
 					buttonView.visibility = View.GONE
@@ -98,5 +98,9 @@ class GalleryRowBuilder(
 
 	override fun onLoadingImage(loading: Boolean) {
 		galleryGridAdapter.onLoadingImages(loading)
+	}
+
+	override fun isNightMode(): Boolean {
+		return nightMode
 	}
 }

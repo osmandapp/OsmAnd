@@ -33,6 +33,6 @@ public class ActionViewHolder extends RecyclerView.ViewHolder {
 		itemView.findViewById(R.id.card_background).setVisibility(View.GONE);
 		AndroidUtils.setBackgroundColor(mapActivity, itemView, ColorUtilities.getActivityBgColorId(nightMode));
 		AndroidUtils.setTextPrimaryColor(mapActivity, itemView.findViewById(R.id.title), nightMode);
-		itemView.findViewById(R.id.button).setOnClickListener(v -> listener.handleGalleryAction(item.getAction()));
+		itemView.findViewById(R.id.button).setOnClickListener(v -> listener.handleGalleryAction(v, item.getAction()));
 	}
 }

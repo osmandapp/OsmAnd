@@ -46,7 +46,7 @@ class NoMediaHolder(
 		AndroidUiHelper.updateVisibility(inactiveButton, false)
 		AndroidUiHelper.updateVisibility(activeButton, action != null)
 		activeButton.setOnClickListener(
-			if (action != null) View.OnClickListener { listener?.handleGalleryAction(action) }
+			if (action != null) View.OnClickListener { listener?.handleGalleryAction(it, action) }
 			else null
 		)
 	}

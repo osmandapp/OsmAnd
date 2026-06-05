@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.mapillary
 
+import android.view.View
 import net.osmand.data.LatLon
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
@@ -46,7 +47,7 @@ class MapillaryRowController(
 		return if (hasMediaItems()) listOf(exploreButton) else emptyList()
 	}
 
-	override fun handleGalleryAction(action: GalleryAction) {
+	override fun handleGalleryAction(v: View, action: GalleryAction) {
 		if (action == CONTRIBUTE_ACTION) {
 			view?.mapActivity?.let { MapillaryPlugin.openMapillary(it) }
 		}

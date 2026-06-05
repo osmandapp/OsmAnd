@@ -1,26 +1,58 @@
 package net.osmand.plus.gallery.controller
 
+import android.view.View
 import androidx.fragment.app.FragmentActivity
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.base.dialog.BaseDialogController
+import net.osmand.plus.gallery.attached.helpers.AttachedMediaUiHelper
+import net.osmand.plus.gallery.contract.IGalleryGridController
+import net.osmand.plus.gallery.contract.IGalleryGridView
 import net.osmand.plus.gallery.data.GalleryKey
+import net.osmand.plus.gallery.model.GalleryAction
 import net.osmand.plus.gallery.model.GalleryItem
 import net.osmand.plus.gallery.ui.GalleryGridFragment
 import net.osmand.shared.media.domain.MediaItem
 import net.osmand.shared.media.domain.MediaOrigin
+import net.osmand.shared.media.domain.MediaType
 
 class GalleryGridController(
 	app: OsmandApplication,
 	val key: GalleryKey
-) : BaseDialogController(app) {
+) : BaseDialogController(app), IGalleryGridController {
 
-	val galleryItems: List<GalleryItem>
-		get() = app.galleryHelper.repository.get(key)
+	private var view: IGalleryGridView? = null
+
+	override fun getProcessId(): String = PROCESS_ID
+
+	override fun attach(view: IGalleryGridView) {
+		this.view = view
+	}
+
+	override fun detach() {
+		this.view = null
+	}
+
+	override fun getGalleryItems(): List<GalleryItem> {
+		return app.galleryHelper.repository.get(key)
 			?.getItems()
 			?.map { toGalleryItem(it) }
 			?: emptyList()
+	}
 
-	override fun getProcessId(): String = PROCESS_ID
+	override fun onMediaItemClicked(mediaItem: MediaItem) {
+		val nightMode = view?.isNightMode() ?: false
+
+		view?.getMapActivity()?.let {
+			if (mediaItem.type == MediaType.PHOTO) {
+				GalleryPagerController.showDialog(it, key, mediaItem.id)
+			} else {
+				AttachedMediaUiHelper(it).openMediaItem(mediaItem, nightMode)
+			}
+		}
+	}
+
+	override fun handleGalleryAction(v: View, action: GalleryAction) {
+	}
 
 	private fun toGalleryItem(mediaItem: MediaItem): GalleryItem.Media {
 		return GalleryItem.Media(

@@ -18,7 +18,7 @@ abstract class GalleryRowController(
 	private var items: List<GalleryItem> = emptyList()
 	private var loading = false
 
-	private val loadListener = object : MediaLoadListener {
+	protected val loadListener = object : MediaLoadListener {
 
 		override fun onLoadingStarted(key: GalleryKey) {
 			loading = true
