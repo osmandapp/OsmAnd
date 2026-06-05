@@ -343,7 +343,12 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			item.setTitle(OsmEditingPlugin.getTitle(openstreetmapPoint, app));
 			item.setIcon(getIcon(R.drawable.ic_action_info_dark, getItemIconColor(object)));
 		} else if (object instanceof FavoriteGroup group) {
-			item.setTitle(FavoriteFolderFormatter.getBreadcrumb(app, group.getName()));
+			TextView title = item.getView().findViewById(R.id.title);
+			if (title != null) {
+				FavoriteFolderFormatter.setupStyledBreadcrumb(title, group.getName(), nightMode);
+			} else {
+				item.setTitle(FavoriteFolderFormatter.getStyledBreadcrumb(app, group.getName(), nightMode));
+			}
 			int color;
 			if (selectedItems.contains(object)) {
 				color = group.getColor() == 0 ? getColor(R.color.color_favorite) : group.getColor();

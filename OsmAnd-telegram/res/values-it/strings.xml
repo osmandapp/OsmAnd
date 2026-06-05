@@ -185,11 +185,11 @@
     <string name="shared_string_text">Testo</string>
     <string name="map_and_text">Mappa e testo</string>
     <string name="timeline">Cronologia</string>
-    <string name="shared_string_ok">Ok</string>
+    <string name="shared_string_ok">OK</string>
     <string name="timeline_available_for_free_now">La funzionalità Timeline è adesso disponibile gratuitamente.</string>
     <string name="disable_monitoring">Disattiva il monitoraggio</string>
     <string name="location_recording_enabled">Registrazione della posizione abilitata</string>
-    <string name="timeline_description">Attivare il monitoraggio per salvare lo storico delle locazioni.</string>
+    <string name="timeline_description">Attiva il monitoraggio per salvare lo storico delle posizioni.</string>
     <string name="app_name_short">Tracciatore OsmAnd</string>
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_use_telegram">Telegram (l\'applicazione di messaggistica) viene usato per connettersi e comunicare con le persone.</string>

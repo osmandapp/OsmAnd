@@ -4606,4 +4606,5 @@
     <string name="poi_route_activity_type_drone_flying">Πέταγμα drone</string>
     <string name="poi_prep_school">Φροντιστήριο</string>
     <string name="poi_piste_downhill">Κατηφορική πίστα;Πίστα σκι;Πλαγιά σκι</string>
+    <string name="poi_water_lake">Λίμνη</string>
 </resources>
