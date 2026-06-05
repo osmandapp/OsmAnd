@@ -54,7 +54,7 @@ class CollectMediaLinksTask extends AsyncTask<Void, Void, List<Link>> {
 		this.app = app;
 		this.contentResolver = app.getContentResolver();
 		this.mediaStorageFolder = AttachedMediaUiHelper.getMediaStorageFolder(app);
-		this.mediaStorageDir = AttachedMediaUiHelper.getMediaStorageDir(app);
+		this.mediaStorageDir = AttachedMediaUiHelper.getMediaStorageDir();
 		this.latLon = latLon;
 		this.autoCopyMedia = app.getSettings().AUTO_COPY_MEDIA_TO_OSMAND_STORAGE.get();
 		this.uris = new ArrayList<>(uris);

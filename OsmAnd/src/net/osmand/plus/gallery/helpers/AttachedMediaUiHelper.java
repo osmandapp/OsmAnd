@@ -1,7 +1,7 @@
 package net.osmand.plus.gallery.helpers;
 
 import static android.app.Activity.RESULT_OK;
-import static net.osmand.IndexConstants.AV_INDEX_DIR;
+import static net.osmand.IndexConstants.MEDIA_INDEX_DIR;
 import static net.osmand.plus.gallery.model.GalleryMediaGroup.OTHER;
 
 import android.content.ActivityNotFoundException;
@@ -36,7 +36,7 @@ import net.osmand.plus.gallery.ui.GalleryPhotoPagerFragment;
 import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AVActionType;
+import net.osmand.plus.plugins.audionotes.AVActionType;
 import net.osmand.plus.plugins.audionotes.Recording;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
@@ -238,12 +238,12 @@ public class AttachedMediaUiHelper {
 
 	@NonNull
 	public static File getMediaStorageFolder(@NonNull OsmandApplication app) {
-		return app.getAppPath(getMediaStorageDir(app));
+		return app.getAppPath(getMediaStorageDir());
 	}
 
 	@NonNull
-	public static String getMediaStorageDir(@NonNull OsmandApplication app) {
-		return AV_INDEX_DIR;
+	public static String getMediaStorageDir() {
+		return MEDIA_INDEX_DIR;
 	}
 
 	public void showAllMedia(@NonNull GalleryController galleryController, @Nullable Object object,

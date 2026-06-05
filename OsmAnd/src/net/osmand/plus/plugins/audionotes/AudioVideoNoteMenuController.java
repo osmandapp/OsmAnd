@@ -3,7 +3,6 @@ package net.osmand.plus.plugins.audionotes;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.data.LatLon;
@@ -96,7 +95,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 
 	@Override
 	public Drawable getRightIcon() {
-		int iconId = AudioVideoNotesPlugin.getIconIdForRecordingFile(mRecording.getFile());
+		int iconId = mRecording.getIconId();
 		if (iconId == -1) {
 			iconId = R.drawable.ic_action_photo_dark;
 		}

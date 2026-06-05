@@ -5,7 +5,7 @@ import static net.osmand.plus.download.local.LocalItemType.MAP_DATA;
 import static net.osmand.plus.download.local.LocalItemType.ROAD_DATA;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_AUDIO;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_CHOOSE;
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_TAKEPICTURE;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_PHOTO;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_VIDEO;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.DEFAULT_ACTION_SETTING_ID;
 import static net.osmand.plus.plugins.srtm.TerrainMode.DEFAULT_KEY;
@@ -612,7 +612,7 @@ public class AppVersionUpgradeOnInit {
 			return AV_NOTES_RECORD_AUDIO.id;
 		} else if (audioVideoNotesStateId == AV_DEFAULT_ACTION_VIDEO) {
 			return AV_NOTES_RECORD_VIDEO.id;
-		} else if (audioVideoNotesStateId == AV_DEFAULT_ACTION_TAKEPICTURE) {
+		} else if (audioVideoNotesStateId == AV_DEFAULT_ACTION_PHOTO) {
 			return AV_NOTES_TAKE_PHOTO.id;
 		} else {
 			return AV_NOTES_ON_REQUEST.id;
