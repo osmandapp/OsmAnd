@@ -107,6 +107,7 @@ import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
+import net.osmand.shared.gpx.primitives.Linkable;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -149,7 +150,7 @@ public class MenuBuilder {
 	@Nullable
 	private IGalleryRowController onlinePhotosRowController;
 	@Nullable
-	private AttachedMediaRowController attachedMediaRowController;
+	private AttachedMediaRowController mediaRowController;
 
 	private CollapseExpandListener collapseExpandListener;
 	private final List<SearchAmenitiesTask> searchAmenitiesTasks = new ArrayList<>();
@@ -334,9 +335,10 @@ public class MenuBuilder {
 
 	public void buildPhotosRow(@NonNull ViewGroup view, @Nullable Object object) {
 		if (customization.isFeatureEnabled(CONTEXT_MENU_ONLINE_PHOTOS_ID) && showOnlinePhotos) {
-			GalleryKey.Location key = new GalleryKey.Location(latLon, new LinkedHashMap<>(getAdditionalImageParams()));
-			buildOnlinePhotosRow(view, key);
-			buildPluginGalleryRows(view, key);
+			Map<String, String> imageParams = new LinkedHashMap<>(getAdditionalImageParams());
+			GalleryKey.Location galleryKey = new GalleryKey.Location(latLon, imageParams);
+			buildOnlinePhotosRow(view, galleryKey);
+			buildPluginGalleryRows(view, galleryKey);
 		}
 	}
 
@@ -363,9 +365,9 @@ public class MenuBuilder {
 			onlinePhotosRowController.detach();
 			onlinePhotosRowController = null;
 		}
-		if (attachedMediaRowController != null) {
-			attachedMediaRowController.detach();
-			attachedMediaRowController = null;
+		if (mediaRowController != null) {
+			mediaRowController.detach();
+			mediaRowController = null;
 		}
 		clearPluginRows();
 		stopSearchAmenitiesTasks();
@@ -616,30 +618,29 @@ public class MenuBuilder {
 	}
 
 	protected void buildOnlinePhotosRow(@NonNull View view, @NonNull GalleryKey.Location key) {
-		boolean needUpdateOnly = onlinePhotosRowController != null;
 		if (onlinePhotosRowController == null) {
 			onlinePhotosRowController = new OnlinePhotosRowController(app, key);
 		}
 		buildGalleryRow(view, onlinePhotosRowController, R.drawable.ic_action_photo,
-				app.getString(R.string.online_photos), needUpdateOnly,
+				app.getString(R.string.online_photos),
 				app.getSettings().ONLINE_PHOTOS_ROW_COLLAPSED);
 	}
 
-	protected void buildAttachedMediaRow(@NonNull View view, @NonNull GalleryKey key, @NonNull Object object) {
-		boolean needUpdateOnly = attachedMediaRowController != null;
-		if (attachedMediaRowController == null) {
-			attachedMediaRowController = new AttachedMediaRowController(app, key, object, getLatLon());
+	protected void buildAttachedMediaRow(@NonNull View view,
+	                                     @NonNull GalleryKey key,
+	                                     @NonNull Linkable target) {
+		if (mediaRowController == null) {
+			mediaRowController = new AttachedMediaRowController(app, key, target, getLatLon());
 		}
-		app.getGalleryHelper().getAttachedMediaRegistry().register(key, object);
-		buildGalleryRow(view, attachedMediaRowController,
+		app.getGalleryHelper().getAttachedMediaRegistry().register(key, target);
+		buildGalleryRow(view, mediaRowController,
 				R.drawable.ic_action_photo,
 				app.getString(R.string.shared_string_media),
-				needUpdateOnly,
 				app.getSettings().ATTACHED_MEDIA_ROW_COLLAPSED);
 	}
 
 	public void buildGalleryRow(@NonNull View view, @NonNull IGalleryRowController controller,
-	                            @DrawableRes int iconId, @NonNull String title, boolean updateOnly,
+	                            @DrawableRes int iconId, @NonNull String title,
 	                            @NonNull OsmandPreference<Boolean> collapsePreference) {
 		GalleryRowBuilder galleryRowBuilder = new GalleryRowBuilder(this, controller);
 

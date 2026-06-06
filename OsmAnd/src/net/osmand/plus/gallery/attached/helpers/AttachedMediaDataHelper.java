@@ -14,6 +14,7 @@ import net.osmand.plus.plugins.audionotes.Recording;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.shared.gpx.primitives.Link;
+import net.osmand.shared.gpx.primitives.Linkable;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.media.LinkMediaFactory;
 import net.osmand.util.Algorithms;
@@ -34,25 +35,23 @@ public class AttachedMediaDataHelper {
 		this.app = app;
 	}
 
-	public void addRecordingLink(@Nullable Object object, @Nullable Recording recording, @Nullable Runnable onMediaChanged) {
+	public void addRecordingLink(@NonNull Linkable target, @Nullable Recording recording, @Nullable Runnable onMediaChanged) {
 		if (recording != null) {
-			addMediaLinks(object, Collections.singletonList(createRecordingLink(recording)), onMediaChanged);
+			addMediaLinks(target, Collections.singletonList(createRecordingLink(recording)), onMediaChanged);
 		}
 	}
 
-	public void addMediaLinks(@Nullable Object object, @NonNull List<Link> links, @Nullable Runnable onMediaChanged) {
-		if (links.isEmpty()) {
-			return;
+	public void addMediaLinks(@NonNull Linkable target, @NonNull List<Link> links,
+	                          @Nullable Runnable onMediaChanged) {
+		if (links.isEmpty()) return;
+
+		for (int i = 0; i < links.size(); i++) {
+			target.addLink(links.get(i));
 		}
-		if (object instanceof FavouritePoint point) {
-			for (int i = 0; i < links.size(); i++) {
-				point.addLink(links.get(i));
-			}
+
+		if (target instanceof FavouritePoint) {
 			app.getFavoritesHelper().saveCurrentPointsIntoFile(true);
-		} else if (object instanceof WptPt wpt) {
-			for (int i = 0; i < links.size(); i++) {
-				wpt.addLink(links.get(i));
-			}
+		} else if (target instanceof WptPt wpt) {
 			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedGPXFile(wpt);
 			if (selectedGpxFile != null) {
 				SaveGpxHelper.saveGpx(selectedGpxFile.getGpxFile());
@@ -63,16 +62,6 @@ public class AttachedMediaDataHelper {
 		if (onMediaChanged != null) {
 			onMediaChanged.run();
 		}
-	}
-
-	@Nullable
-	public List<Link> getMediaLinks(@Nullable Object object) {
-		if (object instanceof FavouritePoint point) {
-			return point.getLinks();
-		} else if (object instanceof WptPt wpt) {
-			return wpt.getLinks();
-		}
-		return null;
 	}
 
 	@NonNull

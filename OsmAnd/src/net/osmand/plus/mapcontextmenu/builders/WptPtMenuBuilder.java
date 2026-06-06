@@ -82,8 +82,13 @@ public class WptPtMenuBuilder extends MenuBuilder {
 	protected void buildTopInternal(View view) {
 		super.buildTopInternal(view);
 		buildWaypointsView(view);
-		String key = wpt.getName() + "__" + wpt.getCategory();
-		buildAttachedMediaRow(view, new GalleryKey.Waypoint(key), wpt);
+
+		SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedGPXFile(wpt);
+		if (selectedGpxFile != null) {
+			GpxFile gpxFile = selectedGpxFile.getGpxFile();
+			GalleryKey galleryKey = new GalleryKey.Waypoint(gpxFile.getPath(), wpt.getKey());
+			buildAttachedMediaRow(view, galleryKey, wpt);
+		}
 	}
 
 	@Override

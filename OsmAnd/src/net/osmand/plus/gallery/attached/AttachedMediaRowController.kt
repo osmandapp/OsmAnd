@@ -14,14 +14,15 @@ import net.osmand.plus.gallery.model.GalleryActionButton
 import net.osmand.plus.gallery.model.GalleryItem
 import net.osmand.plus.gallery.model.GalleryItem.NoMedia.ActionButtonStyle
 import net.osmand.plus.gallery.model.MediaHolder
+import net.osmand.shared.gpx.primitives.Linkable
 import net.osmand.shared.media.domain.MediaItem
 import net.osmand.shared.media.domain.MediaType
 
 class AttachedMediaRowController(
 	app: OsmandApplication,
 	key: GalleryKey,
-	val obj: Any,
-	val latLon: LatLon
+	private val target: Linkable,
+	private val latLon: LatLon
 ) : GalleryRowController(app, key) {
 
 	override fun requiresInternet() = false
@@ -43,7 +44,7 @@ class AttachedMediaRowController(
 		view?.mapActivity?.let {
 			when (action) {
 				SHOW_ALL_ACTION -> GalleryGridController.showDialog(it, key)
-				ADD_MEDIA_ACTION -> AttachedMediaUiHelper(it).showAddMenu(v, obj, latLon) {
+				ADD_MEDIA_ACTION -> AttachedMediaUiHelper(it).showAddMenu(v, target, latLon) {
 					onMediaChanged()
 				}
 			}

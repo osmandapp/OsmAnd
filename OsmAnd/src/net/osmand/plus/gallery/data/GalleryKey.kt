@@ -14,10 +14,11 @@ sealed class GalleryKey {
 	) : GalleryKey()
 
 	data class Favorite(
-		val pointKey: String
+		val key: String
 	) : GalleryKey()
 
 	data class Waypoint(
-		val pointKey: String
+		val gpxPath: String,
+		val key: String
 	) : GalleryKey()
 }

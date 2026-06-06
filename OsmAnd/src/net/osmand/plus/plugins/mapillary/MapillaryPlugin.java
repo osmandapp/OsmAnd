@@ -250,12 +250,11 @@ public class MapillaryPlugin extends OsmandPlugin {
 	@Override
 	public void buildContextMenuGalleryRows(@NonNull MenuBuilder menuBuilder, @NonNull View view,
 	                                        @NonNull GalleryKey.Location key) {
-		boolean needUpdateOnly = mapillaryRowController != null;
 		if (mapillaryRowController == null) {
 			mapillaryRowController = new MapillaryRowController(app, key);
 		}
 		menuBuilder.buildGalleryRow(view, mapillaryRowController, R.drawable.ic_action_photo_street,
-				app.getString(R.string.street_level_imagery), needUpdateOnly,
+				app.getString(R.string.street_level_imagery),
 				MAPILLARY_PHOTOS_ROW_COLLAPSED);
 	}
 

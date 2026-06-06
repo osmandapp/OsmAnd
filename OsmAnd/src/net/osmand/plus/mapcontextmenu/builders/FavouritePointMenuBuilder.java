@@ -84,7 +84,8 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	protected void buildTopInternal(View view) {
 		super.buildTopInternal(view);
 		buildGroupFavouritesView(view);
-		buildAttachedMediaRow(view, new GalleryKey.Favorite(point.getKey()), point);
+		GalleryKey galleryKey = new GalleryKey.Favorite(point.getKey());
+		buildAttachedMediaRow(view, galleryKey, point);
 	}
 
 	@Override
