@@ -117,7 +117,6 @@ public class GetOnlineImagesTask extends AsyncTask<Void, Void, OnlinePhotosHolde
 									MediaItem.Remote mediaItem = RemoteMediaFactory.fromUrlImageJson(imageObject.toString());
 									if (mediaItem != null) {
 										holder.addItem(OTHER, mediaItem);
-										holder.addItem(OTHER, mediaItem);
 									}
 								}
 							}
