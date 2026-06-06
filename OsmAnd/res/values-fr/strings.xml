@@ -1296,7 +1296,7 @@
     <string name="shared_string_never">Jamais</string>
     <string name="home_button">Domicile</string>
     <string name="search_for">Rechercher</string>
-    <string name="shared_string_show_all">AFFICHER TOUT</string>
+    <string name="shared_string_show_all">Afficher tout</string>
     <string name="coordinates">Coordonnées</string>
     <string name="map_update">Mise à jour disponible pour %1$s carte(s)</string>
     <string name="error_avoid_specific_road">Aucune déviation trouvée</string>
@@ -1971,7 +1971,7 @@
     <string name="trip_rec_notification_settings_desc">Afficher une notification système permettant de démarrer l\'enregistrement du trajet.</string>
     <string name="gpx_no_tracks_title">Vous n\'avez aucun fichier de trace pour l\'instant</string>
     <string name="gpx_no_tracks_title_folder">Vous pouvez aussi ajouter des fichiers de trace GPX dans le dossier</string>
-    <string name="gpx_add_track">GPX…</string>
+    <string name="gpx_add_track">Ajouter plus…</string>
     <string name="shared_string_appearance">Apparence</string>
     <string name="rendering_value_fine_name">Très fin</string>
     <string name="route_calculation">Calcul de l\'itinéraire</string>
@@ -4495,7 +4495,7 @@
     <string name="show_borders_of_downloaded_maps">Afficher les bordures des cartes téléchargées</string>
     <string name="rendering_engine_failed">Le rendu de carte OsmAnd a planté récemment.</string>
     <string name="share_crash_log">Partager le journal d\'erreur</string>
-    <string name="dismiss_changes_descr">Toutes les modifications seront perdues.</string>
+    <string name="dismiss_changes_descr">Toutes les modifications seront annulées.</string>
     <string name="dismiss_changes">Ignorer les modifications \?</string>
     <string name="restart_now">Redémarrer maintenant</string>
     <string name="mtb_scale">Échelle de difficulté VTT</string>
@@ -5529,7 +5529,7 @@
     <string name="map_widget_route_information_desc">Affiche l\'heure d\'arrivée estimée, le temps de trajet restant et la distance pour l\'itinéraire de navigation actif.</string>
     <string name="shared_string_default_view">Vue par défaut</string>
     <string name="ais_address_settings">Paramètres de l\'adresse IP</string>
-    <string name="ais_address_settings_description">Choisissez le protocole NMEA (UDP/TCP) et spécifiez les adresses et ports correspondants.</string>
+    <string name="ais_address_settings_description">Choisissez le protocole NMEA (UDP/TCP) et spécifiez les adresses et ports correspondants</string>
     <string name="ais_nmea_protocol">Protocole pour la réception de données NMEA</string>
     <string name="ais_nmea_protocol_description">Choisissez le protocole pour la réception des données NMEA</string>
     <string name="ais_port_nmea_server">Port TCP de la source des données NMEA</string>
@@ -6065,4 +6065,9 @@
     <string name="favorite_folder_duplicate_message">Renseignez un nom de dossier qui n\'existe pas encore.</string>
     <string name="favorite_folder_name">Nom du dossier</string>
     <string name="edit_folder">Modifier le dossier</string>
+    <string name="no_media_descr">Vous pouvez ajouter des photos, des vidéos ou des notes audio depuis votre appareil photo ou votre bibliothèque.</string>
+    <string name="choose_from_gallery">Faites votre choix dans la Galerie</string>
+    <string name="choose_from_files">Sélectionnez un fichier</string>
+    <string name="shared_string_media">Médias</string>
+    <string name="no_media">Aucun média</string>
 </resources>

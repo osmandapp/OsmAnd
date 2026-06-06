@@ -45,12 +45,13 @@
 	<locale android:name="hr" />
 	<locale android:name="hu" />
 	<locale android:name="hy" />
-	<locale android:name="hy" />
 	<locale android:name="ia" />
 	<locale android:name="in" />
+	<locale android:name="id" />
 	<locale android:name="is" />
 	<locale android:name="it" />
 	<locale android:name="iw" />
+	<locale android:name="he" />
 	<locale android:name="ja" />
 	<locale android:name="ka" />
 	<locale android:name="kn" />

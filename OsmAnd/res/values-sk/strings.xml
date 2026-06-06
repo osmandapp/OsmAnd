@@ -6160,4 +6160,9 @@
     <string name="favorite_folder_duplicate_message">Použite názov priečinka, ktorý ešte neexistuje.</string>
     <string name="favorite_folder_name">Názov priečinka</string>
     <string name="edit_folder">Upraviť priečinok</string>
+    <string name="choose_from_gallery">Vybrať z galérie</string>
+    <string name="choose_from_files">Vybrať zo súborov</string>
+    <string name="shared_string_media">Médiá</string>
+    <string name="no_media">Žiadne médiá</string>
+    <string name="no_media_descr">Môžete pridávať fotografie, videá a audio poznámky z fotoaparátu alebo galérie.</string>
 </resources>

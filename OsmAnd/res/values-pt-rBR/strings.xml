@@ -6531,4 +6531,9 @@
     <string name="favorite_folder_rename_conflict">Já existe uma pasta com esse nome.</string>
     <string name="favorite_folder_invalid_name">O nome da pasta não pode conter / ou _%_</string>
     <string name="favorite_folder_duplicate_message">Use um nome de pasta que ainda não exista.</string>
+    <string name="choose_from_gallery">Escolha na galeria</string>
+    <string name="choose_from_files">Escolha entre os arquivos</string>
+    <string name="shared_string_media">Mídia</string>
+    <string name="no_media">Sem mídia</string>
+    <string name="no_media_descr">Você pode adicionar fotos, vídeos ou notas de áudio da sua câmera ou da sua galeria.</string>
 </resources>

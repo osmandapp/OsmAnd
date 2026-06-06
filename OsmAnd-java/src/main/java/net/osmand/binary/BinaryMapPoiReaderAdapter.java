@@ -3,13 +3,20 @@ package net.osmand.binary;
 
 import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.WireFormat;
+
+import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntLongHashMap;
 import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.*;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
+import net.osmand.binary.OsmandOdb.IndexedStringTable;
+import net.osmand.binary.OsmandOdb.OsmAndPoiBoxData;
+import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex;
+import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.Builder;
 import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData;
+import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexOrBuilder;
 import net.osmand.data.Amenity;
 import net.osmand.data.Amenity.AmenityRoutePoint;
 import net.osmand.data.LatLon;
@@ -45,16 +52,22 @@ public class BinaryMapPoiReaderAdapter {
 	public static class PoiSubType {
 		public boolean text;
 		public String name;
+		public int frequency;
 		//int estiatedSize;
 		public List<String> possibleValues = null;
+		public TIntArrayList possibleValuesFreqs = null;
 	}
 
 	public static class PoiRegion extends BinaryIndexPart {
 		List<String> categories = new ArrayList<String>();
 		List<PoiCategory> categoriesType = new ArrayList<PoiCategory>();
 		List<List<String>> subcategories = new ArrayList<List<String>>();
+		TIntArrayList categoryFreqs = new TIntArrayList();
+		List<TIntArrayList> subcategoryFreqs = new ArrayList<TIntArrayList>();
+		
 		List<PoiSubType> subTypes = new ArrayList<PoiSubType>();
 		List<PoiSubType> topIndexSubTypes = new ArrayList<PoiSubType>();
+		// tag groups
 		Map<Integer, List<TagValuePair>> tagGroups = new HashMap<>();
 		QuadTree<Void> bboxIndexCache = new QuadTree<Void>(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),
 				8, 0.55f);
@@ -92,6 +105,14 @@ public class BinaryMapPoiReaderAdapter {
 		
 		public List<List<String>> getSubcategories() {
 			return subcategories;
+		}
+		
+		public TIntArrayList getCategoryFreqs() {
+			return categoryFreqs;
+		}
+		
+		public List<TIntArrayList> getSubcategoryFreqs() {
+			return subcategoryFreqs;
 		}
 		
 		public List<PoiSubType> getSubTypes() {
@@ -237,11 +258,20 @@ public class BinaryMapPoiReaderAdapter {
 			case OsmandOdb.OsmAndCategoryTable.CATEGORY_FIELD_NUMBER:
 				String cat = codedIS.readString().intern();
 				region.categories.add(cat);
-				region.categoriesType.add(poiTypes.getPoiCategoryByName(cat.toLowerCase(), true));
+				region.categoriesType.add(poiTypes.getPoiCategoryByName(cat.toLowerCase(Locale.ROOT), true));
 				region.subcategories.add(new ArrayList<String>());
+				region.subcategoryFreqs.add(new TIntArrayList());
 				break;
 			case OsmandOdb.OsmAndCategoryTable.SUBCATEGORIES_FIELD_NUMBER:
 				region.subcategories.get(region.subcategories.size() - 1).add(codedIS.readString().intern());
+				break;
+			case OsmandOdb.OsmAndCategoryTable.FREQUENCY_FIELD_NUMBER:
+				int freq = codedIS.readUInt32();
+				region.categoryFreqs.add(freq);
+				break;
+			case OsmandOdb.OsmAndCategoryTable.SUBCATFREQ_FIELD_NUMBER:
+				int sfreq = codedIS.readUInt32();
+				region.subcategoryFreqs.get(region.subcategoryFreqs.size() - 1).add(sfreq);
 				break;
 			default:
 				skipUnknownField(t);
@@ -270,11 +300,20 @@ public class BinaryMapPoiReaderAdapter {
 					case OsmandOdb.OsmAndPoiSubtype.NAME_FIELD_NUMBER:
 						st.name = codedIS.readString().intern();
 						break;
+					case OsmandOdb.OsmAndPoiSubtype.FREQUENCY_FIELD_NUMBER:
+						st.frequency = codedIS.readUInt32();
+						break;
 					case OsmandOdb.OsmAndPoiSubtype.SUBTYPEVALUE_FIELD_NUMBER:
 						if (st.possibleValues == null) {
 							st.possibleValues = new ArrayList<String>();
 						}
 						st.possibleValues.add(codedIS.readString().intern());
+						break;
+					case OsmandOdb.OsmAndPoiSubtype.SUBTYPEVALUESFREQ_FIELD_NUMBER:
+						if (st.possibleValuesFreqs == null) {
+							st.possibleValuesFreqs = new TIntArrayList();
+						}
+						st.possibleValuesFreqs.add(codedIS.readUInt32());
 						break;
 					case OsmandOdb.OsmAndPoiSubtype.ISTEXT_FIELD_NUMBER:
 						st.text = codedIS.readBool();
@@ -307,9 +346,61 @@ public class BinaryMapPoiReaderAdapter {
 	}
 
 	private String normalizeSearchPoiByNameQuery(String query) {
-		return query.replace("\"", "").toLowerCase();
+		return query.replace("\"", "").toLowerCase(Locale.ROOT);
+	}
+	
+	
+	protected OsmandOdb.IndexedStringTable readNameIndexInternal(NameIndexInspector pi) throws IOException {
+		OsmandOdb.IndexedStringTable res = null;
+		while (true) {
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				return res;
+			case OsmandOdb.OsmAndPoiNameIndex.TABLE_FIELD_NUMBER :
+				long length = readInt();
+				long oldLimit = codedIS.pushLimitLong((long) length);
+				pi.setInitialShift(codedIS.getTotalBytesRead());
+				map.readNameIndexInspector(null, pi);
+				codedIS.popLimit(oldLimit);
+				break;
+			case OsmandOdb.OsmAndPoiNameIndex.DATA_FIELD_NUMBER :
+				long shift = codedIS.getTotalBytesRead();
+				int len = codedIS.readRawVarint32();
+				oldLimit = codedIS.pushLimitLong((long) len);
+				pi.addData(OsmAndPoiNameIndexData.parseFrom(codedIS), shift);
+				codedIS.popLimit(oldLimit);
+				break;
+
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
 	}
 
+	protected NameIndexInspector readNameIndex() throws IOException {
+		NameIndexInspector nameIndexInspector = new NameIndexInspector();
+		while (true) {
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				return nameIndexInspector;
+			case OsmandOdb.OsmAndPoiIndex.NAMEINDEX_FIELD_NUMBER:
+				long length = readInt();
+				long oldLimit = codedIS.pushLimitLong((long) length);
+				readNameIndexInternal(nameIndexInspector);
+				codedIS.popLimit(oldLimit);
+				break;
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
+	}
+	
 	protected void searchPoiByName(PoiRegion region, SearchRequest<Amenity> req) throws IOException {
 		TIntLongHashMap offsets = new TIntLongHashMap();
 		String query = normalizeSearchPoiByNameQuery(req.nameQuery);
@@ -732,11 +823,11 @@ public class BinaryMapPoiReaderAdapter {
 				}
 				codedIS.popLimit(oldLim);
 				if (am != null) {
-					boolean matches = matcher.matches(am.getName().toLowerCase())
-							|| matcher.matches(am.getEnName(true).toLowerCase());
+					boolean matches = matcher.matches(am.getName().toLowerCase(Locale.ROOT))
+							|| matcher.matches(am.getEnName(true).toLowerCase(Locale.ROOT));
 					if (!matches) {
 						for (String s : am.getOtherNames()) {
-							matches = matcher.matches(s.toLowerCase());
+							matches = matcher.matches(s.toLowerCase(Locale.ROOT));
 							if (matches) {
 								break;
 							}
@@ -947,7 +1038,7 @@ public class BinaryMapPoiReaderAdapter {
 						topIndexAdditonalFound = true;
 					}
 				}
-				if (st != null && !topIndex) {
+				if (st != null ) {
 					am.setAdditionalInfo(st.name, retValue.toString());
 				}
 				break;

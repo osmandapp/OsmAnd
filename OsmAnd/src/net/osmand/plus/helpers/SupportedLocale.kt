@@ -90,6 +90,7 @@ enum class SupportedLocale(
 	// @formatter:on
 
 	companion object {
+		// Keep modernTag values in sync with OsmAnd/res/xml/locales_config.xml (Android 13+ per-app locales).
 
 		@JvmStatic
 		fun fromTag(tag: String?): SupportedLocale? {

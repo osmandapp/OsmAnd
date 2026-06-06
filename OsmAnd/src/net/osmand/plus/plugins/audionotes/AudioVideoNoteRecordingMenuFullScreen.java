@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.audionotes;
 
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AVActionType.REC_AUDIO;
+import static net.osmand.plus.plugins.audionotes.AVActionType.REC_AUDIO;
 
 import android.animation.ValueAnimator;
 import android.graphics.Bitmap;

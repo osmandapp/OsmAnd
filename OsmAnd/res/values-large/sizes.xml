@@ -89,9 +89,6 @@
 	<dimen name="bottom_sheet_menu_peek_height">450dp</dimen>
 	<dimen name="side_of_the_world_button_size">54dp</dimen>
 
-	<dimen name="map_widget_text_size">35sp</dimen>
-	<dimen name="map_widget_text_size_small">23sp</dimen>
-
 	<dimen name="map_button_text_size">23sp</dimen>
 
 </resources>

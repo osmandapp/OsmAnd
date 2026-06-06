@@ -4395,7 +4395,7 @@
 \n請透過提供您的錯誤紀錄檔支援改善。</string>
     <string name="rendering_engine_failed">OsmAnd 的地圖繪製最近當機了。</string>
     <string name="share_crash_log">分享當機紀錄檔</string>
-    <string name="dismiss_changes_descr">所有變更都將被取消。</string>
+    <string name="dismiss_changes_descr">所有變動都會被放棄。</string>
     <string name="map_rendering_engine_v1">第一版</string>
     <string name="map_rendering_engine_v2">第二版 (OpenGL)</string>
     <string name="map_rendering_engine_descr">第 1 版是 OsmAnd 4.3 之前的預設值，適用於較舊的裝置。\n\n第 2 版 (OpenGL) 更為先進，新增了 3D 檢視等功能。</string>
@@ -5860,7 +5860,7 @@
     <string name="gradient_range_type_relative_summary">顏色會根據軌跡的最小值/最大值範圍自動調整。</string>
     <string name="gradient_range_type_relative">相對</string>
     <string name="edit_palette">編輯調色板</string>
-    <string name="add_palette">新增調色板</string>
+    <string name="add_palette">新增色盤</string>
     <string name="delete_palette">刪除調色板</string>
     <string name="delete_colors_palette_dialog_summary">您確定您想要刪除 %1$s 調色板嗎？</string>
     <string name="shared_string_trip_average">旅程平均</string>
@@ -5981,4 +5981,9 @@
     <string name="favorite_folder_duplicate_message">請使用一個尚不存在的資料夾名稱。</string>
     <string name="favorite_folder_name">資料夾名稱</string>
     <string name="edit_folder">編輯資料夾</string>
+    <string name="choose_from_gallery">從媒體庫中選擇</string>
+    <string name="choose_from_files">從檔案中選擇</string>
+    <string name="shared_string_media">媒體</string>
+    <string name="no_media">無媒體</string>
+    <string name="no_media_descr">您可以從您的相機或媒體庫新增照片、影片或音訊附註。</string>
 </resources>

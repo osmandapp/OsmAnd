@@ -1357,7 +1357,7 @@
     <string name="route_points">Punti del percorso</string>
     <string name="shared_string_release">Rilasciata</string>
     <string name="shared_string_ellipsis">…</string>
-    <string name="shared_string_ok">Ok</string>
+    <string name="shared_string_ok">OK</string>
     <string name="shared_string_cancel">Annulla</string>
     <string name="shared_string_dismiss">Abbandona</string>
     <string name="shared_string_yes">Sì</string>
@@ -5849,7 +5849,7 @@
     <string name="show_spherical_map_description">Mostra il modello sferoidale della Terra</string>
     <string name="save_and_access_articles_offline">Salva i dati e accedi agli articoli offline ovunque</string>
     <string name="track_folder_appearance">Aspetto della cartella tracce</string>
-    <string name="update_maps">Aggiorna le nappe</string>
+    <string name="update_maps">Aggiorna le mappe</string>
     <string name="reconnect">Ricollega</string>
     <string name="rendering_attr_showSkiSlopes_name">Mostra la pendenza delle piste da sci</string>
     <string name="rendering_attr_showSkiSlopes_description">Mostra i pendii da discesa in modo semplificato</string>
@@ -6146,4 +6146,8 @@
     <string name="astro_search_always_up">↑ Sempre visibile</string>
     <string name="astro_search_magnitude_short">mag %.1f</string>
     <string name="astro_sort_sets_soonest">Tramonta prima</string>
+    <string name="remove_step">Elimina passaggio</string>
+    <string name="choose_from_gallery">Scegli dalla galleria</string>
+    <string name="choose_from_files">Scegli tra i file</string>
+    <string name="shared_string_media">Media</string>
 </resources>

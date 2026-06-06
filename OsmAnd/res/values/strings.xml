@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+	<string name="auto_copy_media_to_osmand_storage">Auto-copy media to OsmAnd storage</string>
 	<string name="choose_from_gallery">Choose from Gallery</string>
 	<string name="choose_from_files">Choose from Files</string>
 	<string name="shared_string_media">Media</string>

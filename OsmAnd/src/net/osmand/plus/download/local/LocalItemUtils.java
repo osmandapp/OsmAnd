@@ -205,7 +205,8 @@ public class LocalItemUtils {
 			return PROFILES;
 		} else if (path.contains(ROUTING_PROFILES_DIR) && name.endsWith(ROUTING_FILE_EXT)) {
 			return ROUTING;
-		} else if (name.endsWith(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT) || name.endsWith(BINARY_WIKI_MAP_INDEX_EXT)) {
+		} else if (name.endsWith(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT) || name.endsWith(BINARY_WIKI_MAP_INDEX_EXT)
+				|| name.endsWith(STAR_MAP_INDEX_EXT)) {
 			return WIKI_AND_TRAVEL_MAPS;
 		} else if (path.contains(LIVE_INDEX_DIR) && path.endsWith(BINARY_MAP_INDEX_EXT)) {
 			return LIVE_UPDATES;

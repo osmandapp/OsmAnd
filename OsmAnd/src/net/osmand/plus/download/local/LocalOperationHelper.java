@@ -1,5 +1,6 @@
 package net.osmand.plus.download.local;
 
+import static net.osmand.IndexConstants.ASTRO_DIR;
 import static net.osmand.IndexConstants.BACKUP_INDEX_DIR;
 import static net.osmand.IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT;
 import static net.osmand.IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT;
@@ -14,6 +15,7 @@ import static net.osmand.IndexConstants.NAUTICAL_INDEX_DIR;
 import static net.osmand.IndexConstants.ROADS_INDEX_DIR;
 import static net.osmand.IndexConstants.SQLITE_EXT;
 import static net.osmand.IndexConstants.SRTM_INDEX_DIR;
+import static net.osmand.IndexConstants.STAR_MAP_INDEX_EXT;
 import static net.osmand.IndexConstants.TIF_EXT;
 import static net.osmand.IndexConstants.TILES_INDEX_DIR;
 import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
@@ -170,6 +172,8 @@ public class LocalOperationHelper {
 				} else if (fileName.endsWith(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)
 						|| fileName.endsWith(BINARY_WIKIVOYAGE_MAP_INDEX_EXT)) {
 					parent = app.getAppPath(WIKIVOYAGE_INDEX_DIR);
+				} else if (fileName.endsWith(STAR_MAP_INDEX_EXT)) {
+					parent = app.getAppPath(ASTRO_DIR);
 				}
 			} else if (item.getType() == COLOR_DATA) {
 				parent = app.getAppPath(COLOR_PALETTE_DIR);

@@ -50583,6 +50583,16 @@ public final class OsmandOdb {
     com.google.protobuf.ByteString
         getCategoryBytes();
 
+    // optional uint32 frequency = 2;
+    /**
+     * <code>optional uint32 frequency = 2;</code>
+     */
+    boolean hasFrequency();
+    /**
+     * <code>optional uint32 frequency = 2;</code>
+     */
+    int getFrequency();
+
     // repeated string subcategories = 3;
     /**
      * <code>repeated string subcategories = 3;</code>
@@ -50602,6 +50612,32 @@ public final class OsmandOdb {
      */
     com.google.protobuf.ByteString
         getSubcategoriesBytes(int index);
+
+    // repeated uint32 subcatfreq = 4;
+    /**
+     * <code>repeated uint32 subcatfreq = 4;</code>
+     *
+     * <pre>
+     * optional
+     * </pre>
+     */
+    java.util.List<java.lang.Integer> getSubcatfreqList();
+    /**
+     * <code>repeated uint32 subcatfreq = 4;</code>
+     *
+     * <pre>
+     * optional
+     * </pre>
+     */
+    int getSubcatfreqCount();
+    /**
+     * <code>repeated uint32 subcatfreq = 4;</code>
+     *
+     * <pre>
+     * optional
+     * </pre>
+     */
+    int getSubcatfreq(int index);
   }
   /**
    * Protobuf type {@code OsmAnd.OBF.OsmAndCategoryTable}
@@ -50659,12 +50695,38 @@ public final class OsmandOdb {
               category_ = input.readBytes();
               break;
             }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              frequency_ = input.readUInt32();
+              break;
+            }
             case 26: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
                 subcategories_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000002;
+                mutable_bitField0_ |= 0x00000004;
               }
               subcategories_.add(input.readBytes());
+              break;
+            }
+            case 32: {
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+                subcatfreq_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              subcatfreq_.add(input.readUInt32());
+              break;
+            }
+            case 34: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008) && input.getBytesUntilLimit() > 0) {
+                subcatfreq_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                subcatfreq_.add(input.readUInt32());
+              }
+              input.popLimit(limit);
               break;
             }
           }
@@ -50675,8 +50737,11 @@ public final class OsmandOdb {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           subcategories_ = new com.google.protobuf.UnmodifiableLazyStringList(subcategories_);
+        }
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+          subcatfreq_ = java.util.Collections.unmodifiableList(subcatfreq_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -50765,6 +50830,22 @@ public final class OsmandOdb {
       }
     }
 
+    // optional uint32 frequency = 2;
+    public static final int FREQUENCY_FIELD_NUMBER = 2;
+    private int frequency_;
+    /**
+     * <code>optional uint32 frequency = 2;</code>
+     */
+    public boolean hasFrequency() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional uint32 frequency = 2;</code>
+     */
+    public int getFrequency() {
+      return frequency_;
+    }
+
     // repeated string subcategories = 3;
     public static final int SUBCATEGORIES_FIELD_NUMBER = 3;
     private com.google.protobuf.LazyStringList subcategories_;
@@ -50795,9 +50876,46 @@ public final class OsmandOdb {
       return subcategories_.getByteString(index);
     }
 
+    // repeated uint32 subcatfreq = 4;
+    public static final int SUBCATFREQ_FIELD_NUMBER = 4;
+    private java.util.List<java.lang.Integer> subcatfreq_;
+    /**
+     * <code>repeated uint32 subcatfreq = 4;</code>
+     *
+     * <pre>
+     * optional
+     * </pre>
+     */
+    public java.util.List<java.lang.Integer>
+        getSubcatfreqList() {
+      return subcatfreq_;
+    }
+    /**
+     * <code>repeated uint32 subcatfreq = 4;</code>
+     *
+     * <pre>
+     * optional
+     * </pre>
+     */
+    public int getSubcatfreqCount() {
+      return subcatfreq_.size();
+    }
+    /**
+     * <code>repeated uint32 subcatfreq = 4;</code>
+     *
+     * <pre>
+     * optional
+     * </pre>
+     */
+    public int getSubcatfreq(int index) {
+      return subcatfreq_.get(index);
+    }
+
     private void initFields() {
       category_ = "";
+      frequency_ = 0;
       subcategories_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      subcatfreq_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -50818,8 +50936,14 @@ public final class OsmandOdb {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeBytes(1, getCategoryBytes());
       }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeUInt32(2, frequency_);
+      }
       for (int i = 0; i < subcategories_.size(); i++) {
         output.writeBytes(3, subcategories_.getByteString(i));
+      }
+      for (int i = 0; i < subcatfreq_.size(); i++) {
+        output.writeUInt32(4, subcatfreq_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -50834,6 +50958,10 @@ public final class OsmandOdb {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(1, getCategoryBytes());
       }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(2, frequency_);
+      }
       {
         int dataSize = 0;
         for (int i = 0; i < subcategories_.size(); i++) {
@@ -50842,6 +50970,15 @@ public final class OsmandOdb {
         }
         size += dataSize;
         size += 1 * getSubcategoriesList().size();
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < subcatfreq_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeUInt32SizeNoTag(subcatfreq_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getSubcatfreqList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -50961,8 +51098,12 @@ public final class OsmandOdb {
         super.clear();
         category_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        subcategories_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        frequency_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
+        subcategories_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        subcatfreq_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -50995,12 +51136,21 @@ public final class OsmandOdb {
           to_bitField0_ |= 0x00000001;
         }
         result.category_ = category_;
-        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.frequency_ = frequency_;
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
           subcategories_ = new com.google.protobuf.UnmodifiableLazyStringList(
               subcategories_);
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000004);
         }
         result.subcategories_ = subcategories_;
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          subcatfreq_ = java.util.Collections.unmodifiableList(subcatfreq_);
+          bitField0_ = (bitField0_ & ~0x00000008);
+        }
+        result.subcatfreq_ = subcatfreq_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -51022,13 +51172,26 @@ public final class OsmandOdb {
           category_ = other.category_;
           onChanged();
         }
+        if (other.hasFrequency()) {
+          setFrequency(other.getFrequency());
+        }
         if (!other.subcategories_.isEmpty()) {
           if (subcategories_.isEmpty()) {
             subcategories_ = other.subcategories_;
-            bitField0_ = (bitField0_ & ~0x00000002);
+            bitField0_ = (bitField0_ & ~0x00000004);
           } else {
             ensureSubcategoriesIsMutable();
             subcategories_.addAll(other.subcategories_);
+          }
+          onChanged();
+        }
+        if (!other.subcatfreq_.isEmpty()) {
+          if (subcatfreq_.isEmpty()) {
+            subcatfreq_ = other.subcatfreq_;
+            bitField0_ = (bitField0_ & ~0x00000008);
+          } else {
+            ensureSubcatfreqIsMutable();
+            subcatfreq_.addAll(other.subcatfreq_);
           }
           onChanged();
         }
@@ -51161,12 +51324,45 @@ public final class OsmandOdb {
         return this;
       }
 
+      // optional uint32 frequency = 2;
+      private int frequency_ ;
+      /**
+       * <code>optional uint32 frequency = 2;</code>
+       */
+      public boolean hasFrequency() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional uint32 frequency = 2;</code>
+       */
+      public int getFrequency() {
+        return frequency_;
+      }
+      /**
+       * <code>optional uint32 frequency = 2;</code>
+       */
+      public Builder setFrequency(int value) {
+        bitField0_ |= 0x00000002;
+        frequency_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional uint32 frequency = 2;</code>
+       */
+      public Builder clearFrequency() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        frequency_ = 0;
+        onChanged();
+        return this;
+      }
+
       // repeated string subcategories = 3;
       private com.google.protobuf.LazyStringList subcategories_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureSubcategoriesIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
           subcategories_ = new com.google.protobuf.LazyStringArrayList(subcategories_);
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000004;
          }
       }
       /**
@@ -51236,7 +51432,7 @@ public final class OsmandOdb {
        */
       public Builder clearSubcategories() {
         subcategories_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000004);
         onChanged();
         return this;
       }
@@ -51250,6 +51446,100 @@ public final class OsmandOdb {
   }
   ensureSubcategoriesIsMutable();
         subcategories_.add(value);
+        onChanged();
+        return this;
+      }
+
+      // repeated uint32 subcatfreq = 4;
+      private java.util.List<java.lang.Integer> subcatfreq_ = java.util.Collections.emptyList();
+      private void ensureSubcatfreqIsMutable() {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          subcatfreq_ = new java.util.ArrayList<java.lang.Integer>(subcatfreq_);
+          bitField0_ |= 0x00000008;
+         }
+      }
+      /**
+       * <code>repeated uint32 subcatfreq = 4;</code>
+       *
+       * <pre>
+       * optional
+       * </pre>
+       */
+      public java.util.List<java.lang.Integer>
+          getSubcatfreqList() {
+        return java.util.Collections.unmodifiableList(subcatfreq_);
+      }
+      /**
+       * <code>repeated uint32 subcatfreq = 4;</code>
+       *
+       * <pre>
+       * optional
+       * </pre>
+       */
+      public int getSubcatfreqCount() {
+        return subcatfreq_.size();
+      }
+      /**
+       * <code>repeated uint32 subcatfreq = 4;</code>
+       *
+       * <pre>
+       * optional
+       * </pre>
+       */
+      public int getSubcatfreq(int index) {
+        return subcatfreq_.get(index);
+      }
+      /**
+       * <code>repeated uint32 subcatfreq = 4;</code>
+       *
+       * <pre>
+       * optional
+       * </pre>
+       */
+      public Builder setSubcatfreq(
+          int index, int value) {
+        ensureSubcatfreqIsMutable();
+        subcatfreq_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 subcatfreq = 4;</code>
+       *
+       * <pre>
+       * optional
+       * </pre>
+       */
+      public Builder addSubcatfreq(int value) {
+        ensureSubcatfreqIsMutable();
+        subcatfreq_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 subcatfreq = 4;</code>
+       *
+       * <pre>
+       * optional
+       * </pre>
+       */
+      public Builder addAllSubcatfreq(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureSubcatfreqIsMutable();
+        super.addAll(values, subcatfreq_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 subcatfreq = 4;</code>
+       *
+       * <pre>
+       * optional
+       * </pre>
+       */
+      public Builder clearSubcatfreq() {
+        subcatfreq_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000008);
         onChanged();
         return this;
       }
@@ -52194,6 +52484,32 @@ public final class OsmandOdb {
      */
     int getSubtypeValuesSize();
 
+    // repeated uint32 subtypeValuesFreq = 7;
+    /**
+     * <code>repeated uint32 subtypeValuesFreq = 7;</code>
+     *
+     * <pre>
+     * optional
+     * </pre>
+     */
+    java.util.List<java.lang.Integer> getSubtypeValuesFreqList();
+    /**
+     * <code>repeated uint32 subtypeValuesFreq = 7;</code>
+     *
+     * <pre>
+     * optional
+     * </pre>
+     */
+    int getSubtypeValuesFreqCount();
+    /**
+     * <code>repeated uint32 subtypeValuesFreq = 7;</code>
+     *
+     * <pre>
+     * optional
+     * </pre>
+     */
+    int getSubtypeValuesFreq(int index);
+
     // repeated string subtypeValue = 8;
     /**
      * <code>repeated string subtypeValue = 8;</code>
@@ -52290,10 +52606,31 @@ public final class OsmandOdb {
               subtypeValuesSize_ = input.readUInt32();
               break;
             }
-            case 66: {
+            case 56: {
               if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
-                subtypeValue_ = new com.google.protobuf.LazyStringArrayList();
+                subtypeValuesFreq_ = new java.util.ArrayList<java.lang.Integer>();
                 mutable_bitField0_ |= 0x00000020;
+              }
+              subtypeValuesFreq_.add(input.readUInt32());
+              break;
+            }
+            case 58: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020) && input.getBytesUntilLimit() > 0) {
+                subtypeValuesFreq_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000020;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                subtypeValuesFreq_.add(input.readUInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+            case 66: {
+              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+                subtypeValue_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000040;
               }
               subtypeValue_.add(input.readBytes());
               break;
@@ -52307,6 +52644,9 @@ public final class OsmandOdb {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+          subtypeValuesFreq_ = java.util.Collections.unmodifiableList(subtypeValuesFreq_);
+        }
+        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
           subtypeValue_ = new com.google.protobuf.UnmodifiableLazyStringList(subtypeValue_);
         }
         this.unknownFields = unknownFields.build();
@@ -52487,6 +52827,41 @@ public final class OsmandOdb {
       return subtypeValuesSize_;
     }
 
+    // repeated uint32 subtypeValuesFreq = 7;
+    public static final int SUBTYPEVALUESFREQ_FIELD_NUMBER = 7;
+    private java.util.List<java.lang.Integer> subtypeValuesFreq_;
+    /**
+     * <code>repeated uint32 subtypeValuesFreq = 7;</code>
+     *
+     * <pre>
+     * optional
+     * </pre>
+     */
+    public java.util.List<java.lang.Integer>
+        getSubtypeValuesFreqList() {
+      return subtypeValuesFreq_;
+    }
+    /**
+     * <code>repeated uint32 subtypeValuesFreq = 7;</code>
+     *
+     * <pre>
+     * optional
+     * </pre>
+     */
+    public int getSubtypeValuesFreqCount() {
+      return subtypeValuesFreq_.size();
+    }
+    /**
+     * <code>repeated uint32 subtypeValuesFreq = 7;</code>
+     *
+     * <pre>
+     * optional
+     * </pre>
+     */
+    public int getSubtypeValuesFreq(int index) {
+      return subtypeValuesFreq_.get(index);
+    }
+
     // repeated string subtypeValue = 8;
     public static final int SUBTYPEVALUE_FIELD_NUMBER = 8;
     private com.google.protobuf.LazyStringList subtypeValue_;
@@ -52523,6 +52898,7 @@ public final class OsmandOdb {
       isText_ = false;
       frequency_ = 0;
       subtypeValuesSize_ = 0;
+      subtypeValuesFreq_ = java.util.Collections.emptyList();
       subtypeValue_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
@@ -52560,6 +52936,9 @@ public final class OsmandOdb {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeUInt32(6, subtypeValuesSize_);
       }
+      for (int i = 0; i < subtypeValuesFreq_.size(); i++) {
+        output.writeUInt32(7, subtypeValuesFreq_.get(i));
+      }
       for (int i = 0; i < subtypeValue_.size(); i++) {
         output.writeBytes(8, subtypeValue_.getByteString(i));
       }
@@ -52591,6 +52970,15 @@ public final class OsmandOdb {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(6, subtypeValuesSize_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < subtypeValuesFreq_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeUInt32SizeNoTag(subtypeValuesFreq_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getSubtypeValuesFreqList().size();
       }
       {
         int dataSize = 0;
@@ -52727,8 +53115,10 @@ public final class OsmandOdb {
         bitField0_ = (bitField0_ & ~0x00000008);
         subtypeValuesSize_ = 0;
         bitField0_ = (bitField0_ & ~0x00000010);
-        subtypeValue_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        subtypeValuesFreq_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000020);
+        subtypeValue_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -52778,9 +53168,14 @@ public final class OsmandOdb {
         }
         result.subtypeValuesSize_ = subtypeValuesSize_;
         if (((bitField0_ & 0x00000020) == 0x00000020)) {
+          subtypeValuesFreq_ = java.util.Collections.unmodifiableList(subtypeValuesFreq_);
+          bitField0_ = (bitField0_ & ~0x00000020);
+        }
+        result.subtypeValuesFreq_ = subtypeValuesFreq_;
+        if (((bitField0_ & 0x00000040) == 0x00000040)) {
           subtypeValue_ = new com.google.protobuf.UnmodifiableLazyStringList(
               subtypeValue_);
-          bitField0_ = (bitField0_ & ~0x00000020);
+          bitField0_ = (bitField0_ & ~0x00000040);
         }
         result.subtypeValue_ = subtypeValue_;
         result.bitField0_ = to_bitField0_;
@@ -52818,10 +53213,20 @@ public final class OsmandOdb {
         if (other.hasSubtypeValuesSize()) {
           setSubtypeValuesSize(other.getSubtypeValuesSize());
         }
+        if (!other.subtypeValuesFreq_.isEmpty()) {
+          if (subtypeValuesFreq_.isEmpty()) {
+            subtypeValuesFreq_ = other.subtypeValuesFreq_;
+            bitField0_ = (bitField0_ & ~0x00000020);
+          } else {
+            ensureSubtypeValuesFreqIsMutable();
+            subtypeValuesFreq_.addAll(other.subtypeValuesFreq_);
+          }
+          onChanged();
+        }
         if (!other.subtypeValue_.isEmpty()) {
           if (subtypeValue_.isEmpty()) {
             subtypeValue_ = other.subtypeValue_;
-            bitField0_ = (bitField0_ & ~0x00000020);
+            bitField0_ = (bitField0_ & ~0x00000040);
           } else {
             ensureSubtypeValueIsMutable();
             subtypeValue_.addAll(other.subtypeValue_);
@@ -53134,12 +53539,106 @@ public final class OsmandOdb {
         return this;
       }
 
+      // repeated uint32 subtypeValuesFreq = 7;
+      private java.util.List<java.lang.Integer> subtypeValuesFreq_ = java.util.Collections.emptyList();
+      private void ensureSubtypeValuesFreqIsMutable() {
+        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+          subtypeValuesFreq_ = new java.util.ArrayList<java.lang.Integer>(subtypeValuesFreq_);
+          bitField0_ |= 0x00000020;
+         }
+      }
+      /**
+       * <code>repeated uint32 subtypeValuesFreq = 7;</code>
+       *
+       * <pre>
+       * optional
+       * </pre>
+       */
+      public java.util.List<java.lang.Integer>
+          getSubtypeValuesFreqList() {
+        return java.util.Collections.unmodifiableList(subtypeValuesFreq_);
+      }
+      /**
+       * <code>repeated uint32 subtypeValuesFreq = 7;</code>
+       *
+       * <pre>
+       * optional
+       * </pre>
+       */
+      public int getSubtypeValuesFreqCount() {
+        return subtypeValuesFreq_.size();
+      }
+      /**
+       * <code>repeated uint32 subtypeValuesFreq = 7;</code>
+       *
+       * <pre>
+       * optional
+       * </pre>
+       */
+      public int getSubtypeValuesFreq(int index) {
+        return subtypeValuesFreq_.get(index);
+      }
+      /**
+       * <code>repeated uint32 subtypeValuesFreq = 7;</code>
+       *
+       * <pre>
+       * optional
+       * </pre>
+       */
+      public Builder setSubtypeValuesFreq(
+          int index, int value) {
+        ensureSubtypeValuesFreqIsMutable();
+        subtypeValuesFreq_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 subtypeValuesFreq = 7;</code>
+       *
+       * <pre>
+       * optional
+       * </pre>
+       */
+      public Builder addSubtypeValuesFreq(int value) {
+        ensureSubtypeValuesFreqIsMutable();
+        subtypeValuesFreq_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 subtypeValuesFreq = 7;</code>
+       *
+       * <pre>
+       * optional
+       * </pre>
+       */
+      public Builder addAllSubtypeValuesFreq(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureSubtypeValuesFreqIsMutable();
+        super.addAll(values, subtypeValuesFreq_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 subtypeValuesFreq = 7;</code>
+       *
+       * <pre>
+       * optional
+       * </pre>
+       */
+      public Builder clearSubtypeValuesFreq() {
+        subtypeValuesFreq_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000020);
+        onChanged();
+        return this;
+      }
+
       // repeated string subtypeValue = 8;
       private com.google.protobuf.LazyStringList subtypeValue_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureSubtypeValueIsMutable() {
-        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
           subtypeValue_ = new com.google.protobuf.LazyStringArrayList(subtypeValue_);
-          bitField0_ |= 0x00000020;
+          bitField0_ |= 0x00000040;
          }
       }
       /**
@@ -53209,7 +53708,7 @@ public final class OsmandOdb {
        */
       public Builder clearSubtypeValue() {
         subtypeValue_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000040);
         onChanged();
         return this;
       }
@@ -56580,14 +57079,26 @@ public final class OsmandOdb {
     // repeated uint32 subcategories = 5;
     /**
      * <code>repeated uint32 subcategories = 5;</code>
+     *
+     * <pre>
+     * related to OsmAndSubtypesTable (poi_additional)
+     * </pre>
      */
     java.util.List<java.lang.Integer> getSubcategoriesList();
     /**
      * <code>repeated uint32 subcategories = 5;</code>
+     *
+     * <pre>
+     * related to OsmAndSubtypesTable (poi_additional)
+     * </pre>
      */
     int getSubcategoriesCount();
     /**
      * <code>repeated uint32 subcategories = 5;</code>
+     *
+     * <pre>
+     * related to OsmAndSubtypesTable (poi_additional)
+     * </pre>
      */
     int getSubcategories(int index);
   }
@@ -56769,6 +57280,10 @@ public final class OsmandOdb {
     private java.util.List<java.lang.Integer> subcategories_;
     /**
      * <code>repeated uint32 subcategories = 5;</code>
+     *
+     * <pre>
+     * related to OsmAndSubtypesTable (poi_additional)
+     * </pre>
      */
     public java.util.List<java.lang.Integer>
         getSubcategoriesList() {
@@ -56776,12 +57291,20 @@ public final class OsmandOdb {
     }
     /**
      * <code>repeated uint32 subcategories = 5;</code>
+     *
+     * <pre>
+     * related to OsmAndSubtypesTable (poi_additional)
+     * </pre>
      */
     public int getSubcategoriesCount() {
       return subcategories_.size();
     }
     /**
      * <code>repeated uint32 subcategories = 5;</code>
+     *
+     * <pre>
+     * related to OsmAndSubtypesTable (poi_additional)
+     * </pre>
      */
     public int getSubcategories(int index) {
       return subcategories_.get(index);
@@ -57159,6 +57682,10 @@ public final class OsmandOdb {
       }
       /**
        * <code>repeated uint32 subcategories = 5;</code>
+       *
+       * <pre>
+       * related to OsmAndSubtypesTable (poi_additional)
+       * </pre>
        */
       public java.util.List<java.lang.Integer>
           getSubcategoriesList() {
@@ -57166,18 +57693,30 @@ public final class OsmandOdb {
       }
       /**
        * <code>repeated uint32 subcategories = 5;</code>
+       *
+       * <pre>
+       * related to OsmAndSubtypesTable (poi_additional)
+       * </pre>
        */
       public int getSubcategoriesCount() {
         return subcategories_.size();
       }
       /**
        * <code>repeated uint32 subcategories = 5;</code>
+       *
+       * <pre>
+       * related to OsmAndSubtypesTable (poi_additional)
+       * </pre>
        */
       public int getSubcategories(int index) {
         return subcategories_.get(index);
       }
       /**
        * <code>repeated uint32 subcategories = 5;</code>
+       *
+       * <pre>
+       * related to OsmAndSubtypesTable (poi_additional)
+       * </pre>
        */
       public Builder setSubcategories(
           int index, int value) {
@@ -57188,6 +57727,10 @@ public final class OsmandOdb {
       }
       /**
        * <code>repeated uint32 subcategories = 5;</code>
+       *
+       * <pre>
+       * related to OsmAndSubtypesTable (poi_additional)
+       * </pre>
        */
       public Builder addSubcategories(int value) {
         ensureSubcategoriesIsMutable();
@@ -57197,6 +57740,10 @@ public final class OsmandOdb {
       }
       /**
        * <code>repeated uint32 subcategories = 5;</code>
+       *
+       * <pre>
+       * related to OsmAndSubtypesTable (poi_additional)
+       * </pre>
        */
       public Builder addAllSubcategories(
           java.lang.Iterable<? extends java.lang.Integer> values) {
@@ -57207,6 +57754,10 @@ public final class OsmandOdb {
       }
       /**
        * <code>repeated uint32 subcategories = 5;</code>
+       *
+       * <pre>
+       * related to OsmAndSubtypesTable (poi_additional)
+       * </pre>
        */
       public Builder clearSubcategories() {
         subcategories_ = java.util.Collections.emptyList();
@@ -77418,87 +77969,89 @@ public final class OsmandOdb {
       "And.OBF.OsmAndPoiNameIndexDataAtom\"i\n\032Os" +
       "mAndPoiNameIndexDataAtom\022\014\n\004zoom\030\002 \001(\r\022\t",
       "\n\001x\030\003 \001(\r\022\t\n\001y\030\004 \001(\r\022\026\n\016suffixesBitset\030\006" +
-      " \003(\r\022\017\n\007shiftTo\030\016 \001(\007\">\n\023OsmAndCategoryT" +
-      "able\022\020\n\010category\030\001 \002(\t\022\025\n\rsubcategories\030" +
-      "\003 \003(\t\"E\n\023OsmAndSubtypesTable\022.\n\010subtypes" +
-      "\030\004 \003(\0132\034.OsmAnd.OBF.OsmAndPoiSubtype\"\205\001\n" +
-      "\020OsmAndPoiSubtype\022\014\n\004name\030\001 \002(\t\022\017\n\007tagna" +
-      "me\030\002 \001(\t\022\016\n\006isText\030\003 \002(\010\022\021\n\tfrequency\030\005 " +
-      "\001(\r\022\031\n\021subtypeValuesSize\030\006 \001(\r\022\024\n\014subtyp" +
-      "eValue\030\010 \003(\t\"2\n\021OsmAndPoiTagGroup\022\n\n\002id\030" +
-      "\001 \002(\r\022\021\n\ttagValues\030\005 \003(\t\"T\n\022OsmAndPoiTag",
-      "Groups\022\017\n\003ids\030\002 \003(\rB\002\020\001\022-\n\006groups\030\005 \003(\0132" +
-      "\035.OsmAnd.OBF.OsmAndPoiTagGroup\"\340\001\n\014OsmAn" +
-      "dPoiBox\022\014\n\004zoom\030\001 \002(\r\022\014\n\004left\030\002 \002(\021\022\013\n\003t" +
-      "op\030\003 \002(\021\0223\n\ncategories\030\004 \001(\0132\037.OsmAnd.OB" +
-      "F.OsmAndPoiCategories\0221\n\ttagGroups\030\010 \001(\013" +
-      "2\036.OsmAnd.OBF.OsmAndPoiTagGroups\022*\n\010subB" +
-      "oxes\030\n \003(\0132\030.OsmAnd.OBF.OsmAndPoiBox\022\023\n\013" +
-      "shiftToData\030\016 \001(\007\"@\n\023OsmAndPoiCategories" +
-      "\022\022\n\ncategories\030\003 \003(\r\022\025\n\rsubcategories\030\005 " +
-      "\003(\r\"i\n\020OsmAndPoiBoxData\022\014\n\004zoom\030\001 \001(\r\022\t\n",
-      "\001x\030\002 \001(\r\022\t\n\001y\030\003 \001(\r\0221\n\007poiData\030\005 \003(\0132 .O" +
-      "smAnd.OBF.OsmAndPoiBoxDataAtom\"\234\002\n\024OsmAn" +
-      "dPoiBoxDataAtom\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022" +
-      "\022\n\ncategories\030\004 \003(\r\022\025\n\rsubcategories\030\005 \003" +
-      "(\r\022\014\n\004name\030\006 \001(\t\022\016\n\006nameEn\030\007 \001(\t\022\n\n\002id\030\010" +
-      " \001(\004\022\024\n\014openingHours\030\n \001(\t\022\014\n\004site\030\013 \001(\t" +
-      "\022\r\n\005phone\030\014 \001(\t\022\014\n\004note\030\r \001(\t\022\026\n\016textCat" +
-      "egories\030\016 \003(\r\022\022\n\ntextValues\030\017 \003(\t\022\023\n\013pre" +
-      "cisionXY\030\020 \001(\005\022\025\n\ttagGroups\030\021 \003(\rB\002\020\001\"\032\n" +
-      "\007IdTable\022\017\n\007routeId\030\001 \003(\022\"F\n\017Restriction",
-      "Data\022\014\n\004type\030\001 \002(\005\022\014\n\004from\030\002 \002(\005\022\n\n\002to\030\003" +
-      " \002(\005\022\013\n\003via\030\004 \001(\005\"x\n\tRouteData\022\016\n\006points" +
-      "\030\001 \002(\014\022\022\n\npointTypes\030\004 \001(\014\022\022\n\npointNames" +
-      "\030\005 \001(\014\022\r\n\005types\030\007 \002(\014\022\017\n\007routeId\030\014 \002(\005\022\023" +
-      "\n\013stringNames\030\016 \001(\014\"\304\005\n\022OsmAndRoutingInd" +
-      "ex\022\014\n\004name\030\001 \002(\t\022?\n\005rules\030\002 \003(\01320.OsmAnd" +
-      ".OBF.OsmAndRoutingIndex.RouteEncodingRul" +
-      "e\022>\n\trootBoxes\030\003 \003(\0132+.OsmAnd.OBF.OsmAnd" +
-      "RoutingIndex.RouteDataBox\022A\n\014basemapBoxe" +
-      "s\030\004 \003(\0132+.OsmAnd.OBF.OsmAndRoutingIndex.",
-      "RouteDataBox\022=\n\006blocks\030\005 \003(\0132-.OsmAnd.OB" +
-      "F.OsmAndRoutingIndex.RouteDataBlock\032;\n\021R" +
-      "outeEncodingRule\022\013\n\003tag\030\003 \002(\t\022\r\n\005value\030\005" +
-      " \002(\t\022\n\n\002id\030\007 \001(\r\032\231\001\n\014RouteDataBox\022\014\n\004lef" +
-      "t\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n\006b" +
-      "ottom\030\004 \002(\021\022\023\n\013shiftToData\030\005 \001(\007\022:\n\005boxe" +
-      "s\030\007 \003(\0132+.OsmAnd.OBF.OsmAndRoutingIndex." +
-      "RouteDataBox\032\303\001\n\016RouteDataBlock\022$\n\007idTab" +
-      "le\030\005 \001(\0132\023.OsmAnd.OBF.IdTable\022*\n\013dataObj" +
-      "ects\030\006 \003(\0132\025.OsmAnd.OBF.RouteData\0221\n\014res",
-      "trictions\030\007 \003(\0132\033.OsmAnd.OBF.Restriction" +
-      "Data\022,\n\013stringTable\030\010 \001(\0132\027.OsmAnd.OBF.S" +
-      "tringTable\"\231\010\n\024OsmAndHHRoutingIndex\022\017\n\007e" +
-      "dition\030\001 \002(\003\022\017\n\007profile\030\002 \002(\t\022\025\n\rprofile" +
-      "Params\030\003 \003(\t\022/\n\016tagValuesTable\030\004 \001(\0132\027.O" +
-      "smAnd.OBF.StringTable\022E\n\npointBoxes\030\005 \002(" +
-      "\01321.OsmAnd.OBF.OsmAndHHRoutingIndex.HHRo" +
-      "utePointsBox\022L\n\rpointSegments\030\006 \003(\01325.Os" +
-      "mAnd.OBF.OsmAndHHRoutingIndex.HHRouteBlo" +
-      "ckSegments\032\324\001\n\020HHRoutePointsBox\022\014\n\004left\030",
-      "\002 \002(\021\022\r\n\005right\030\003 \002(\021\022\013\n\003top\030\004 \002(\021\022\016\n\006bot" +
-      "tom\030\005 \002(\021\022@\n\005boxes\030\006 \003(\01321.OsmAnd.OBF.Os" +
-      "mAndHHRoutingIndex.HHRoutePointsBox\022D\n\006p" +
-      "oints\030\007 \003(\01324.OsmAnd.OBF.OsmAndHHRouting" +
-      "Index.HHRouteNetworkPoint\032\366\001\n\023HHRouteNet" +
-      "workPoint\022\n\n\002id\030\001 \002(\005\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030" +
-      "\003 \002(\021\022\020\n\010globalId\030\004 \002(\005\022\016\n\006roadId\030\005 \002(\003\022" +
-      "\031\n\021roadStartEndIndex\030\006 \002(\005\022\021\n\tclusterId\030" +
-      "\007 \001(\005\022\023\n\013dualPointId\030\010 \001(\005\022\025\n\rdualCluste" +
-      "rId\030\t \001(\005\022\022\n\nprofileIds\030\n \003(\005\022\022\n\npartial",
-      "Ind\030\013 \001(\005\022\027\n\013tagValueIds\030\014 \003(\005B\002\020\001\032\360\001\n\024H" +
-      "HRouteBlockSegments\022\024\n\014idRangeStart\030\001 \002(" +
-      "\005\022\025\n\ridRangeLength\030\002 \002(\005\022\021\n\tprofileId\030\003 " +
-      "\001(\005\022J\n\013innerBlocks\030\006 \003(\01325.OsmAnd.OBF.Os" +
-      "mAndHHRoutingIndex.HHRouteBlockSegments\022" +
-      "L\n\rpointSegments\030\004 \003(\01325.OsmAnd.OBF.OsmA" +
-      "ndHHRoutingIndex.HHRoutePointSegments\032?\n" +
-      "\024HHRoutePointSegments\022\022\n\nsegmentsIn\030\002 \002(" +
-      "\014\022\023\n\013segmentsOut\030\003 \002(\014\"T\n\013OsmAndOwner\022\014\n" +
-      "\004name\030\001 \002(\t\022\020\n\010resource\030\002 \001(\t\022\023\n\013descrip",
-      "tion\030\003 \001(\t\022\020\n\010pluginid\030\004 \001(\tB\036\n\021net.osma" +
-      "nd.binaryB\tOsmandOdb"
+      " \003(\r\022\017\n\007shiftTo\030\016 \001(\007\"e\n\023OsmAndCategoryT" +
+      "able\022\020\n\010category\030\001 \002(\t\022\021\n\tfrequency\030\002 \001(" +
+      "\r\022\025\n\rsubcategories\030\003 \003(\t\022\022\n\nsubcatfreq\030\004" +
+      " \003(\r\"E\n\023OsmAndSubtypesTable\022.\n\010subtypes\030" +
+      "\004 \003(\0132\034.OsmAnd.OBF.OsmAndPoiSubtype\"\240\001\n\020" +
+      "OsmAndPoiSubtype\022\014\n\004name\030\001 \002(\t\022\017\n\007tagnam" +
+      "e\030\002 \001(\t\022\016\n\006isText\030\003 \002(\010\022\021\n\tfrequency\030\005 \001" +
+      "(\r\022\031\n\021subtypeValuesSize\030\006 \001(\r\022\031\n\021subtype" +
+      "ValuesFreq\030\007 \003(\r\022\024\n\014subtypeValue\030\010 \003(\t\"2",
+      "\n\021OsmAndPoiTagGroup\022\n\n\002id\030\001 \002(\r\022\021\n\ttagVa" +
+      "lues\030\005 \003(\t\"T\n\022OsmAndPoiTagGroups\022\017\n\003ids\030" +
+      "\002 \003(\rB\002\020\001\022-\n\006groups\030\005 \003(\0132\035.OsmAnd.OBF.O" +
+      "smAndPoiTagGroup\"\340\001\n\014OsmAndPoiBox\022\014\n\004zoo" +
+      "m\030\001 \002(\r\022\014\n\004left\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\0223\n\nca" +
+      "tegories\030\004 \001(\0132\037.OsmAnd.OBF.OsmAndPoiCat" +
+      "egories\0221\n\ttagGroups\030\010 \001(\0132\036.OsmAnd.OBF." +
+      "OsmAndPoiTagGroups\022*\n\010subBoxes\030\n \003(\0132\030.O" +
+      "smAnd.OBF.OsmAndPoiBox\022\023\n\013shiftToData\030\016 " +
+      "\001(\007\"@\n\023OsmAndPoiCategories\022\022\n\ncategories",
+      "\030\003 \003(\r\022\025\n\rsubcategories\030\005 \003(\r\"i\n\020OsmAndP" +
+      "oiBoxData\022\014\n\004zoom\030\001 \001(\r\022\t\n\001x\030\002 \001(\r\022\t\n\001y\030" +
+      "\003 \001(\r\0221\n\007poiData\030\005 \003(\0132 .OsmAnd.OBF.OsmA" +
+      "ndPoiBoxDataAtom\"\234\002\n\024OsmAndPoiBoxDataAto" +
+      "m\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\022\n\ncategories\030" +
+      "\004 \003(\r\022\025\n\rsubcategories\030\005 \003(\r\022\014\n\004name\030\006 \001" +
+      "(\t\022\016\n\006nameEn\030\007 \001(\t\022\n\n\002id\030\010 \001(\004\022\024\n\014openin" +
+      "gHours\030\n \001(\t\022\014\n\004site\030\013 \001(\t\022\r\n\005phone\030\014 \001(" +
+      "\t\022\014\n\004note\030\r \001(\t\022\026\n\016textCategories\030\016 \003(\r\022" +
+      "\022\n\ntextValues\030\017 \003(\t\022\023\n\013precisionXY\030\020 \001(\005",
+      "\022\025\n\ttagGroups\030\021 \003(\rB\002\020\001\"\032\n\007IdTable\022\017\n\007ro" +
+      "uteId\030\001 \003(\022\"F\n\017RestrictionData\022\014\n\004type\030\001" +
+      " \002(\005\022\014\n\004from\030\002 \002(\005\022\n\n\002to\030\003 \002(\005\022\013\n\003via\030\004 " +
+      "\001(\005\"x\n\tRouteData\022\016\n\006points\030\001 \002(\014\022\022\n\npoin" +
+      "tTypes\030\004 \001(\014\022\022\n\npointNames\030\005 \001(\014\022\r\n\005type" +
+      "s\030\007 \002(\014\022\017\n\007routeId\030\014 \002(\005\022\023\n\013stringNames\030" +
+      "\016 \001(\014\"\304\005\n\022OsmAndRoutingIndex\022\014\n\004name\030\001 \002" +
+      "(\t\022?\n\005rules\030\002 \003(\01320.OsmAnd.OBF.OsmAndRou" +
+      "tingIndex.RouteEncodingRule\022>\n\trootBoxes" +
+      "\030\003 \003(\0132+.OsmAnd.OBF.OsmAndRoutingIndex.R",
+      "outeDataBox\022A\n\014basemapBoxes\030\004 \003(\0132+.OsmA" +
+      "nd.OBF.OsmAndRoutingIndex.RouteDataBox\022=" +
+      "\n\006blocks\030\005 \003(\0132-.OsmAnd.OBF.OsmAndRoutin" +
+      "gIndex.RouteDataBlock\032;\n\021RouteEncodingRu" +
+      "le\022\013\n\003tag\030\003 \002(\t\022\r\n\005value\030\005 \002(\t\022\n\n\002id\030\007 \001" +
+      "(\r\032\231\001\n\014RouteDataBox\022\014\n\004left\030\001 \002(\021\022\r\n\005rig" +
+      "ht\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021\022\023\n" +
+      "\013shiftToData\030\005 \001(\007\022:\n\005boxes\030\007 \003(\0132+.OsmA" +
+      "nd.OBF.OsmAndRoutingIndex.RouteDataBox\032\303" +
+      "\001\n\016RouteDataBlock\022$\n\007idTable\030\005 \001(\0132\023.Osm",
+      "And.OBF.IdTable\022*\n\013dataObjects\030\006 \003(\0132\025.O" +
+      "smAnd.OBF.RouteData\0221\n\014restrictions\030\007 \003(" +
+      "\0132\033.OsmAnd.OBF.RestrictionData\022,\n\013string" +
+      "Table\030\010 \001(\0132\027.OsmAnd.OBF.StringTable\"\231\010\n" +
+      "\024OsmAndHHRoutingIndex\022\017\n\007edition\030\001 \002(\003\022\017" +
+      "\n\007profile\030\002 \002(\t\022\025\n\rprofileParams\030\003 \003(\t\022/" +
+      "\n\016tagValuesTable\030\004 \001(\0132\027.OsmAnd.OBF.Stri" +
+      "ngTable\022E\n\npointBoxes\030\005 \002(\01321.OsmAnd.OBF" +
+      ".OsmAndHHRoutingIndex.HHRoutePointsBox\022L" +
+      "\n\rpointSegments\030\006 \003(\01325.OsmAnd.OBF.OsmAn",
+      "dHHRoutingIndex.HHRouteBlockSegments\032\324\001\n" +
+      "\020HHRoutePointsBox\022\014\n\004left\030\002 \002(\021\022\r\n\005right" +
+      "\030\003 \002(\021\022\013\n\003top\030\004 \002(\021\022\016\n\006bottom\030\005 \002(\021\022@\n\005b" +
+      "oxes\030\006 \003(\01321.OsmAnd.OBF.OsmAndHHRoutingI" +
+      "ndex.HHRoutePointsBox\022D\n\006points\030\007 \003(\01324." +
+      "OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteN" +
+      "etworkPoint\032\366\001\n\023HHRouteNetworkPoint\022\n\n\002i" +
+      "d\030\001 \002(\005\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\020\n\010globa" +
+      "lId\030\004 \002(\005\022\016\n\006roadId\030\005 \002(\003\022\031\n\021roadStartEn" +
+      "dIndex\030\006 \002(\005\022\021\n\tclusterId\030\007 \001(\005\022\023\n\013dualP",
+      "ointId\030\010 \001(\005\022\025\n\rdualClusterId\030\t \001(\005\022\022\n\np" +
+      "rofileIds\030\n \003(\005\022\022\n\npartialInd\030\013 \001(\005\022\027\n\013t" +
+      "agValueIds\030\014 \003(\005B\002\020\001\032\360\001\n\024HHRouteBlockSeg" +
+      "ments\022\024\n\014idRangeStart\030\001 \002(\005\022\025\n\ridRangeLe" +
+      "ngth\030\002 \002(\005\022\021\n\tprofileId\030\003 \001(\005\022J\n\013innerBl" +
+      "ocks\030\006 \003(\01325.OsmAnd.OBF.OsmAndHHRoutingI" +
+      "ndex.HHRouteBlockSegments\022L\n\rpointSegmen" +
+      "ts\030\004 \003(\01325.OsmAnd.OBF.OsmAndHHRoutingInd" +
+      "ex.HHRoutePointSegments\032?\n\024HHRoutePointS" +
+      "egments\022\022\n\nsegmentsIn\030\002 \002(\014\022\023\n\013segmentsO",
+      "ut\030\003 \002(\014\"T\n\013OsmAndOwner\022\014\n\004name\030\001 \002(\t\022\020\n" +
+      "\010resource\030\002 \001(\t\022\023\n\013description\030\003 \001(\t\022\020\n\010" +
+      "pluginid\030\004 \001(\tB\036\n\021net.osmand.binaryB\tOsm" +
+      "andOdb"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -77720,7 +78273,7 @@ public final class OsmandOdb {
           internal_static_OsmAnd_OBF_OsmAndCategoryTable_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndCategoryTable_descriptor,
-              new java.lang.String[] { "Category", "Subcategories", });
+              new java.lang.String[] { "Category", "Frequency", "Subcategories", "Subcatfreq", });
           internal_static_OsmAnd_OBF_OsmAndSubtypesTable_descriptor =
             getDescriptor().getMessageTypes().get(30);
           internal_static_OsmAnd_OBF_OsmAndSubtypesTable_fieldAccessorTable = new
@@ -77732,7 +78285,7 @@ public final class OsmandOdb {
           internal_static_OsmAnd_OBF_OsmAndPoiSubtype_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndPoiSubtype_descriptor,
-              new java.lang.String[] { "Name", "Tagname", "IsText", "Frequency", "SubtypeValuesSize", "SubtypeValue", });
+              new java.lang.String[] { "Name", "Tagname", "IsText", "Frequency", "SubtypeValuesSize", "SubtypeValuesFreq", "SubtypeValue", });
           internal_static_OsmAnd_OBF_OsmAndPoiTagGroup_descriptor =
             getDescriptor().getMessageTypes().get(32);
           internal_static_OsmAnd_OBF_OsmAndPoiTagGroup_fieldAccessorTable = new

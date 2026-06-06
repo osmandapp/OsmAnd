@@ -5861,7 +5861,7 @@
     <string name="edit_palette">Επεξεγασία παλέττας</string>
     <string name="add_palette">Προσθήκη παλέττας</string>
     <string name="delete_palette">Διαγραφή παλέττας</string>
-    <string name="delete_colors_palette_dialog_summary">Σίγουρα θέλετε να διαγράψε την παλέττα %1$s;</string>
+    <string name="delete_colors_palette_dialog_summary">Σίγουρα θέλετε να διαγράψετε την παλέττα %1$s;</string>
     <string name="share_favorite">Κοινοποίηση αγαπημένου</string>
     <string name="copy_list">Αντιγραφή λίστας</string>
     <string name="shared_string_trip_average">Μέσος όρος διαδρομής</string>
@@ -5937,4 +5937,13 @@
     <string name="obd_simulation_device">Συσκευή προσομοίωσης</string>
     <string name="favorite_folder_name">Όνομα φακέλου</string>
     <string name="edit_folder">Επεξεργασία φακέλου</string>
+    <string name="shared_string_media">Πολυμέσα</string>
+    <string name="no_media">Κανένα πολυμέσο</string>
+    <string name="favorite_folder_invalid_name">Το όνομα του φακέλου δεν μπορεί να περιλαμβάνει / ή _%_</string>
+    <string name="favorite_folder_duplicate_message">Χρησιμοποιήστε ένα όνομα φακέλου που να μην υπάρχει ήδη.</string>
+    <string name="favorite_folder_rename_conflict">Υπάρχει ήδη φάκελος με αυτό το όνομα.</string>
+    <string name="favorite_confirm_delete_folder">Αυτό θα διαγράψει τον φάκελο \"%1$s\", συμπεριλαμβανομένου των εμφωλευμένων φακέλων και %2$d αγαπημένου/ων σημείου/ων.</string>
+    <string name="no_media_descr">Μπορείτε να προσθέσετε φωτογραφίες, βίντεο ή ηχητικές σημειώσεις από την κάμερά σας ή τη βιβλιοθήκη σας.</string>
+    <string name="choose_from_gallery">Επιλέξτε από τη Συλλογή</string>
+    <string name="choose_from_files">Επιλέξτε από τα Αρχεία</string>
 </resources>

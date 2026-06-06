@@ -39,6 +39,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -261,7 +262,7 @@ public class TravelRendererHelper implements RendererEventListener {
 				for (String category : categories) {
 					CommonPreference<Boolean> prop = getRoutePointCategoryProperty(category);
 					if (prop.get()) {
-						selectedCategories.add(category.replace('_', ':').toLowerCase());
+						selectedCategories.add(category.replace('_', ':').toLowerCase(Locale.ROOT));
 					}
 				}
 				routeArticlePointsFilter.setFilterByName(TextUtils.join(" ", selectedCategories));

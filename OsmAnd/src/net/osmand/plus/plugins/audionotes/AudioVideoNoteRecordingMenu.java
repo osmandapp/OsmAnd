@@ -19,7 +19,6 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AVActionType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.util.Algorithms;
 

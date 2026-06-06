@@ -45,6 +45,7 @@ public class LocalIndexHelper {
 		} else if (type == WIKI_AND_TRAVEL_MAPS) {
 			addLocalItem(items, type, name, WIKI_INDEX_DIR, BINARY_WIKI_MAP_INDEX_EXT, backuped);
 			addLocalItem(items, type, name, WIKIVOYAGE_INDEX_DIR, BINARY_WIKIVOYAGE_MAP_INDEX_EXT, backuped);
+			addLocalItem(items, type, downloadName, ASTRO_DIR, STAR_MAP_INDEX_EXT, backuped);
 		} else if (type == DEPTH_DATA) {
 			addLocalItem(items, type, name, NAUTICAL_INDEX_DIR, BINARY_DEPTH_MAP_INDEX_EXT, backuped);
 		} else if (type == WEATHER_DATA) {
@@ -106,6 +107,8 @@ public class LocalIndexHelper {
 					loadDataImpl(app.getAppPath(WIKI_INDEX_DIR), WIKI_AND_TRAVEL_MAPS, BINARY_MAP_INDEX_EXT,
 							readFiles, shouldUpdate, items, indexFiles, task);
 					loadDataImpl(app.getAppPath(WIKIVOYAGE_INDEX_DIR), WIKI_AND_TRAVEL_MAPS, BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT,
+							readFiles, shouldUpdate, items, indexFiles, task);
+					loadDataImpl(app.getAppPath(ASTRO_DIR), WIKI_AND_TRAVEL_MAPS, STAR_MAP_INDEX_EXT,
 							readFiles, shouldUpdate, items, indexFiles, task);
 				}
 				case MAP_DATA ->
