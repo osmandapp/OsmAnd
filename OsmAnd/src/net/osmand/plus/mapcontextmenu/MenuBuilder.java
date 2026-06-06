@@ -618,9 +618,8 @@ public class MenuBuilder {
 	}
 
 	protected void buildOnlinePhotosRow(@NonNull View view, @NonNull GalleryKey.Location key) {
-		if (onlinePhotosRowController == null) {
-			onlinePhotosRowController = new OnlinePhotosRowController(app, key);
-		}
+		onlinePhotosRowController = resolveOnlinePhotosRowController(key);
+
 		buildGalleryRow(view, onlinePhotosRowController, R.drawable.ic_action_photo,
 				app.getString(R.string.online_photos),
 				app.getSettings().ONLINE_PHOTOS_ROW_COLLAPSED);
@@ -629,10 +628,10 @@ public class MenuBuilder {
 	protected void buildAttachedMediaRow(@NonNull View view,
 	                                     @NonNull GalleryKey key,
 	                                     @NonNull Linkable target) {
-		if (mediaRowController == null) {
-			mediaRowController = new AttachedMediaRowController(app, key, target, getLatLon());
-		}
+		LatLon latLon = getLatLon();
 		app.getGalleryHelper().getAttachedMediaRegistry().register(key, target);
+		mediaRowController = resolveAttachedMediaRowController(key, target, latLon);
+
 		buildGalleryRow(view, mediaRowController,
 				R.drawable.ic_action_photo,
 				app.getString(R.string.shared_string_media),
@@ -664,6 +663,30 @@ public class MenuBuilder {
 				.build()
 		);
 		controller.onRowBuilt(collapsableView.isCollapsed());
+	}
+
+	@NonNull
+	private IGalleryRowController resolveOnlinePhotosRowController(@NonNull GalleryKey.Location key) {
+		if (onlinePhotosRowController != null && onlinePhotosRowController.matches(key)) {
+			return onlinePhotosRowController;
+		}
+		if (onlinePhotosRowController != null) {
+			onlinePhotosRowController.detach();
+		}
+		return new OnlinePhotosRowController(app, key);
+	}
+
+	@NonNull
+	private AttachedMediaRowController resolveAttachedMediaRowController(@NonNull GalleryKey key,
+	                                                                     @NonNull Linkable target,
+	                                                                     @Nullable LatLon latLon) {
+		if (mediaRowController != null && mediaRowController.matches(key, target, latLon)) {
+			return mediaRowController;
+		}
+		if (mediaRowController != null) {
+			mediaRowController.detach();
+		}
+		return new AttachedMediaRowController(app, key, target, latLon);
 	}
 
 	private void buildCoordinatesRow(@NonNull View view) {

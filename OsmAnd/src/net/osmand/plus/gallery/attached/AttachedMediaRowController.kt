@@ -4,11 +4,11 @@ import android.view.View
 import net.osmand.data.LatLon
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
+import net.osmand.plus.gallery.attached.helpers.AttachedMediaUiHelper
 import net.osmand.plus.gallery.controller.GalleryGridController
 import net.osmand.plus.gallery.controller.GalleryPagerController
 import net.osmand.plus.gallery.controller.GalleryRowController
 import net.osmand.plus.gallery.data.GalleryKey
-import net.osmand.plus.gallery.attached.helpers.AttachedMediaUiHelper
 import net.osmand.plus.gallery.model.GalleryAction
 import net.osmand.plus.gallery.model.GalleryActionButton
 import net.osmand.plus.gallery.model.GalleryItem
@@ -17,6 +17,8 @@ import net.osmand.plus.gallery.model.MediaHolder
 import net.osmand.shared.gpx.primitives.Linkable
 import net.osmand.shared.media.domain.MediaItem
 import net.osmand.shared.media.domain.MediaType
+import java.util.Objects
+
 
 class AttachedMediaRowController(
 	app: OsmandApplication,
@@ -75,6 +77,12 @@ class AttachedMediaRowController(
 
 	private fun onMediaChanged() {
 		app.galleryHelper.mediaLoader.reload(key, loadListener)
+	}
+
+	fun matches(key: GalleryKey, target: Linkable, latLon: LatLon?): Boolean {
+		return getGalleryKey() == key
+				&& this.target == target
+				&& this.latLon == latLon
 	}
 
 	companion object {

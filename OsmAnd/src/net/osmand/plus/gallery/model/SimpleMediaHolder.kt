@@ -3,8 +3,10 @@ package net.osmand.plus.gallery.model
 import net.osmand.shared.media.domain.MediaItem
 
 class SimpleMediaHolder(
-	private val items: MutableList<MediaItem> = mutableListOf()
+	items: Collection<MediaItem> = emptyList()
 ) : MediaHolder {
+
+	private val items = items.toMutableList()
 
 	override fun getItems(): List<MediaItem> = items
 
@@ -12,7 +14,11 @@ class SimpleMediaHolder(
 		items.add(item)
 	}
 
+	fun addItems(items: Collection<MediaItem>) {
+		this.items.addAll(items)
+	}
+
 	fun clear() {
-		items.clear()
+		this.items.clear()
 	}
 }

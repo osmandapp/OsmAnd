@@ -54,6 +54,8 @@ abstract class GalleryRowController(
 		view = null
 	}
 
+	override fun getGalleryKey() = key
+
 	override fun onRowBuilt(collapsed: Boolean) {
 		loadIfNeeded(collapsed)
 	}

@@ -20,7 +20,7 @@ class AttachedMediaDelegate(
 		if (links.isNullOrEmpty()) {
 			onError()
 		} else {
-			onResult(SimpleMediaHolder(LinkMediaFactory.fromLinks(links).toMutableList()))
+			onResult(SimpleMediaHolder(LinkMediaFactory.fromLinks(links)))
 		}
 	}
 }

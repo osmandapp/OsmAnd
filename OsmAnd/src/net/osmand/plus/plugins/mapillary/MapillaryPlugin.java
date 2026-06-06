@@ -250,7 +250,8 @@ public class MapillaryPlugin extends OsmandPlugin {
 	@Override
 	public void buildContextMenuGalleryRows(@NonNull MenuBuilder menuBuilder, @NonNull View view,
 	                                        @NonNull GalleryKey.Location key) {
-		if (mapillaryRowController == null) {
+		if (mapillaryRowController == null || !mapillaryRowController.matches(key)) {
+			clearRowController();
 			mapillaryRowController = new MapillaryRowController(app, key);
 		}
 		menuBuilder.buildGalleryRow(view, mapillaryRowController, R.drawable.ic_action_photo_street,
@@ -260,6 +261,10 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 	@Override
 	public void clearContextMenuRows() {
+		clearRowController();
+	}
+
+	private void clearRowController() {
 		if (mapillaryRowController != null) {
 			mapillaryRowController.detach();
 			mapillaryRowController = null;
