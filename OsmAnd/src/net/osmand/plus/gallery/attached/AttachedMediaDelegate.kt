@@ -3,6 +3,7 @@ package net.osmand.plus.gallery.attached
 import net.osmand.plus.gallery.data.GalleryKey
 import net.osmand.plus.gallery.data.MediaLoadDelegate
 import net.osmand.plus.gallery.model.MediaHolder
+import net.osmand.plus.gallery.model.SimpleMediaHolder
 import net.osmand.shared.media.LinkMediaFactory
 
 class AttachedMediaDelegate(
@@ -16,12 +17,10 @@ class AttachedMediaDelegate(
 		onError: () -> Unit
 	) {
 		val links = registry.get(key)?.links
-		if (!links.isNullOrEmpty()) {
-			val holder = AttachedMediaHolder()
-			LinkMediaFactory.fromLinks(links).forEach { holder.addItem(it) }
-			onResult(holder)
-		} else {
+		if (links.isNullOrEmpty()) {
 			onError()
+		} else {
+			onResult(SimpleMediaHolder(LinkMediaFactory.fromLinks(links).toMutableList()))
 		}
 	}
 }

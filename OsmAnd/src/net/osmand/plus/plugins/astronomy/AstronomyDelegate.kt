@@ -6,6 +6,7 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.gallery.data.GalleryKey
 import net.osmand.plus.gallery.data.MediaLoadDelegate
 import net.osmand.plus.gallery.model.MediaHolder
+import net.osmand.plus.gallery.model.SimpleMediaHolder
 import net.osmand.plus.gallery.online.cache.PhotoCacheManager
 import net.osmand.plus.gallery.online.tasks.CacheReadTask
 import net.osmand.plus.gallery.online.tasks.CacheWriteTask
@@ -78,7 +79,7 @@ class AstronomyDelegate(
 		onResult: (MediaHolder) -> Unit
 	) {
 		if (!cacheManager.exists(rawKey)) {
-			onResult(AstronomyMediaHolder())
+			onResult(SimpleMediaHolder())
 			return
 		}
 
@@ -96,8 +97,8 @@ class AstronomyDelegate(
 		OsmAndTaskManager.executeTask(cacheReadTask)
 	}
 
-	private fun buildHolder(images: List<WikiImage>): AstronomyMediaHolder {
-		return AstronomyMediaHolder().apply {
+	private fun buildHolder(images: List<WikiImage>): MediaHolder {
+		return SimpleMediaHolder().apply {
 			images.forEach { addItem(RemoteMediaFactory.fromWikiImage(it)) }
 		}
 	}
