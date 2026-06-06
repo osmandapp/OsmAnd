@@ -277,7 +277,6 @@ public class FavouritePoint implements LocationPoint, Linkable {
 		return links;
 	}
 
-	@Override
 	public void setLinks(@Nullable List<Link> links) {
 		this.links = Algorithms.isEmpty(links) ? null : new ArrayList<>(links);
 	}

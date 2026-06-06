@@ -5,6 +5,7 @@ import static net.osmand.IndexConstants.AV_INDEX_DIR;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
@@ -19,6 +20,8 @@ import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.media.LinkMediaFactory;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -26,6 +29,8 @@ import java.util.List;
 import java.util.Set;
 
 public class AttachedMediaDataHelper {
+
+	private static final Log LOG = PlatformUtil.getLog(AttachedMediaDataHelper.class);
 
 	public static final String MEDIA_FAVORITES_GROUP = "media";
 
@@ -57,6 +62,7 @@ public class AttachedMediaDataHelper {
 				SaveGpxHelper.saveGpx(selectedGpxFile.getGpxFile());
 			}
 		} else {
+			LOG.warn("Unsupported Linkable type, links not persisted: " + target.getClass().getName());
 			return;
 		}
 		if (onMediaChanged != null) {

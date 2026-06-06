@@ -187,7 +187,7 @@ class WptPt : GpxExtensions, Linkable {
 		setBackgroundType(background)
 	}
 
-	fun getKey() = name + "__" + category
+	fun getKey() = "${name.orEmpty()}__${category.orEmpty()}"
 
 	fun getIconName(): String? {
 		return getExtensionsToRead()[GpxUtilities.ICON_NAME_EXTENSION]

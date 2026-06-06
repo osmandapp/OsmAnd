@@ -14,8 +14,11 @@ import android.webkit.MimeTypeMap;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult;
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
@@ -56,6 +59,7 @@ public class AttachedMediaUiHelper {
 
 	private final OsmandApplication app;
 	private final MapActivity mapActivity;
+	private final UiUtilities iconsCache;
 	private final AttachedMediaDataHelper dataHelper;
 	@Nullable
 	private ActivityResultLauncher<Intent> mediaPickerLauncher;
@@ -63,6 +67,7 @@ public class AttachedMediaUiHelper {
 	public AttachedMediaUiHelper(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		this.app = mapActivity.getApp();
+		this.iconsCache = app.getUIUtilities();
 		this.dataHelper = new AttachedMediaDataHelper(app);
 	}
 
@@ -71,24 +76,23 @@ public class AttachedMediaUiHelper {
 		if (latLon == null) {
 			return;
 		}
-		UiUtilities uiUtilities = app.getUIUtilities();
 		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		int iconColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 		List<PopUpMenuItem> items = new ArrayList<>();
 		items.add(createAddMenuItem(R.string.recording_context_menu_precord,
-				R.drawable.ic_action_photo_dark, uiUtilities, iconColor,
+				R.drawable.ic_action_photo_dark, iconColor,
 				() -> takeNote(AVActionType.REC_PHOTO, latLon, target, onMediaChanged), false));
 		items.add(createAddMenuItem(R.string.recording_context_menu_vrecord,
-				R.drawable.ic_action_video_dark, uiUtilities, iconColor,
+				R.drawable.ic_action_video_dark, iconColor,
 				() -> takeNote(AVActionType.REC_VIDEO, latLon, target, onMediaChanged), false));
 		items.add(createAddMenuItem(R.string.recording_context_menu_arecord,
-				R.drawable.ic_action_micro_dark, uiUtilities, iconColor,
+				R.drawable.ic_action_micro_dark, iconColor,
 				() -> takeNote(AVActionType.REC_AUDIO, latLon, target, onMediaChanged), false));
 		items.add(createAddMenuItem(R.string.choose_from_gallery,
-				R.drawable.ic_action_photo_album, uiUtilities, iconColor,
+				R.drawable.ic_action_photo_album, iconColor,
 				() -> chooseMedia(target, onMediaChanged), true));
 		items.add(createAddMenuItem(R.string.choose_from_files,
-				R.drawable.ic_action_group_list, uiUtilities, iconColor,
+				R.drawable.ic_action_group_list, iconColor,
 				() -> chooseMedia(target, onMediaChanged), false));
 
 		PopUpMenuDisplayData data = new PopUpMenuDisplayData();
@@ -100,11 +104,12 @@ public class AttachedMediaUiHelper {
 	}
 
 	@NonNull
-	private PopUpMenuItem createAddMenuItem(int titleId, int iconId, @NonNull UiUtilities uiUtilities,
-	                                        int iconColor, @NonNull Runnable action, boolean showTopDivider) {
+	private PopUpMenuItem createAddMenuItem(@StringRes int titleId, @DrawableRes int iconId,
+	                                        @ColorInt int iconColor, @NonNull Runnable action,
+	                                        boolean showTopDivider) {
 		return new PopUpMenuItem.Builder(app)
 				.setTitleId(titleId)
-				.setIcon(uiUtilities.getPaintedIcon(iconId, iconColor))
+				.setIcon(iconsCache.getPaintedIcon(iconId, iconColor))
 				.setOnClickListener(item -> action.run())
 				.showTopDivider(showTopDivider)
 				.create();

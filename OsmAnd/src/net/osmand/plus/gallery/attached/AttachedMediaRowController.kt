@@ -22,7 +22,7 @@ class AttachedMediaRowController(
 	app: OsmandApplication,
 	key: GalleryKey,
 	private val target: Linkable,
-	private val latLon: LatLon
+	private val latLon: LatLon?
 ) : GalleryRowController(app, key) {
 
 	override fun requiresInternet() = false

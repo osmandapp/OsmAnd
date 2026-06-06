@@ -1,14 +1,15 @@
 package net.osmand.plus.gallery.ui
 
-import net.osmand.plus.activities.MapActivity
+import androidx.fragment.app.FragmentActivity
+import net.osmand.plus.OsmandApplication
 import net.osmand.plus.helpers.AndroidUiHelper
 
 object GalleryGridSettings {
 
 	@JvmStatic
-	fun getSpanCount(mapActivity: MapActivity): Int {
-		val app = mapActivity.app
-		return if (AndroidUiHelper.isOrientationPortrait(mapActivity)) {
+	fun getSpanCount(activity: FragmentActivity): Int {
+		val app = activity.applicationContext as OsmandApplication
+		return if (AndroidUiHelper.isOrientationPortrait(activity)) {
 			app.settings.CONTEXT_GALLERY_SPAN_GRID_COUNT.get()
 		} else {
 			app.settings.CONTEXT_GALLERY_SPAN_GRID_COUNT_LANDSCAPE.get()
@@ -16,9 +17,9 @@ object GalleryGridSettings {
 	}
 
 	@JvmStatic
-	fun setSpanCount(mapActivity: MapActivity, spanCount: Int) {
-		val app = mapActivity.app
-		if (AndroidUiHelper.isOrientationPortrait(mapActivity)) {
+	fun setSpanCount(activity: FragmentActivity, spanCount: Int) {
+		val app = activity.applicationContext as OsmandApplication
+		if (AndroidUiHelper.isOrientationPortrait(activity)) {
 			app.settings.CONTEXT_GALLERY_SPAN_GRID_COUNT.set(spanCount)
 		} else {
 			app.settings.CONTEXT_GALLERY_SPAN_GRID_COUNT_LANDSCAPE.set(spanCount)
