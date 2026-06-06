@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.primitives.Link;
+import net.osmand.shared.gpx.primitives.Linkable;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
@@ -26,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class FavouritePoint implements LocationPoint {
+public class FavouritePoint implements LocationPoint, Linkable {
 
 	private static final String DELIMITER = "__";
 	private static final String HIDDEN = "hidden";
@@ -270,6 +271,7 @@ public class FavouritePoint implements LocationPoint {
 		this.comment = comment;
 	}
 
+	@Override
 	@Nullable
 	public List<Link> getLinks() {
 		return links;
@@ -277,6 +279,21 @@ public class FavouritePoint implements LocationPoint {
 
 	public void setLinks(@Nullable List<Link> links) {
 		this.links = Algorithms.isEmpty(links) ? null : new ArrayList<>(links);
+	}
+
+	@Override
+	public void addLink(@NonNull Link link) {
+		if (links == null) {
+			links = new ArrayList<>();
+		}
+		links.add(link);
+	}
+
+	@Override
+	public void removeLink(@NonNull Link link) {
+		if (links != null) {
+			links.remove(link);
+		}
 	}
 
 	@Nullable
@@ -289,13 +306,6 @@ public class FavouritePoint implements LocationPoint {
 			return res;
 		}
 		return null;
-	}
-
-	public void addLink(@NonNull Link link) {
-		if (links == null) {
-			links = new ArrayList<>();
-		}
-		links.add(link);
 	}
 
 	@Nullable

@@ -10,14 +10,12 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.PlatformUtil;
-import net.osmand.data.LatLon;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
@@ -25,19 +23,13 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardType;
-import net.osmand.plus.gallery.model.GalleryAction;
-import net.osmand.plus.gallery.model.GalleryItem;
-import net.osmand.plus.mapcontextmenu.BuildRowAttrs;
-import net.osmand.plus.mapcontextmenu.CollapsableView;
+import net.osmand.plus.gallery.contract.IGalleryRowController;
+import net.osmand.plus.gallery.data.GalleryKey;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.mapcontextmenu.gallery.GalleryRowBuilder;
-import net.osmand.plus.gallery.controller.GalleryController;
-import net.osmand.plus.gallery.ui.GalleryGridConfig;
-import net.osmand.plus.gallery.model.GalleryMediaGroup;
-import net.osmand.plus.gallery.controller.GalleryItemsHolder;
+import net.osmand.plus.gallery.online.OnlinePhotosGroup;
+import net.osmand.plus.gallery.online.OnlinePhotosHolder;
 import net.osmand.shared.media.RemoteMediaFactory;
-import net.osmand.plus.gallery.tasks.GetOnlineImagesTask.GetImageCardsListener;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -45,7 +37,6 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
-import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapInfoLayer;
@@ -71,7 +62,6 @@ import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MapillaryPlugin extends OsmandPlugin {
@@ -80,10 +70,6 @@ public class MapillaryPlugin extends OsmandPlugin {
 	public static final String TYPE_MAPILLARY_CONTRIBUTE = "mapillary-contribute";
 
 	private static final String MAPILLARY_PACKAGE_ID = "com.mapillary.app";
-	private static final int GALLERY_ITEMS_PREVIEW_LIMIT = 5;
-
-	private static final GalleryAction MAPILLARY_CONTRIBUTE_ACTION =
-			new GalleryAction(TYPE_MAPILLARY_CONTRIBUTE);
 
 	private static final Log LOG = PlatformUtil.getLog(MapillaryPlugin.class);
 
@@ -101,9 +87,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 	private MapActivity mapActivity;
 
 	@Nullable
-	private GalleryRowBuilder galleryRowBuilder;
-	private List<GalleryItem> mapillaryGalleryItems;
-
+	private IGalleryRowController mapillaryRowController;
 	private MapillaryVectorLayer vectorLayer;
 	private MapWidgetInfo mapillaryWidgetRegInfo;
 
@@ -264,76 +248,27 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void buildContextMenuGalleryRows(@NonNull MenuBuilder menuBuilder, @NonNull View view, @Nullable Object object) {
-		GalleryController controller = (GalleryController) app.getDialogManager().findController(GalleryController.PROCESS_ID);
-		if (controller == null) {
-			return;
+	public void buildContextMenuGalleryRows(@NonNull MenuBuilder menuBuilder, @NonNull View view,
+	                                        @NonNull GalleryKey.Location key) {
+		if (mapillaryRowController == null || !mapillaryRowController.matches(key)) {
+			clearRowController();
+			mapillaryRowController = new MapillaryRowController(app, key);
 		}
-		boolean nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
-		boolean needUpdateOnly = galleryRowBuilder != null && galleryRowBuilder.getMenuBuilder() == menuBuilder;
-
-		GalleryGridConfig config = new GalleryGridConfig(
-				GALLERY_ITEMS_PREVIEW_LIMIT,
-				mediaItem -> mediaItem.getOrigin() == MediaOrigin.MAPILLARY,
-				R.string.shared_string_explore,
-				MAPILLARY_CONTRIBUTE_ACTION
-		);
-		galleryRowBuilder = new GalleryRowBuilder(menuBuilder);
-		galleryRowBuilder.build(controller, config, nightMode);
-
-		LinearLayout parent = new LinearLayout(view.getContext());
-		parent.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-				LinearLayout.LayoutParams.WRAP_CONTENT));
-		parent.setOrientation(LinearLayout.VERTICAL);
-		parent.addView(galleryRowBuilder.getGalleryView());
-
-		CollapsableView collapsableView = new CollapsableView(parent, menuBuilder, MAPILLARY_PHOTOS_ROW_COLLAPSED);
-		collapsableView.setCollapseExpandListener(collapsed -> {
-			if (!collapsed && mapillaryGalleryItems == null) {
-				menuBuilder.startLoadingImages();
-			}
-		});
-		menuBuilder.buildRow(view, new BuildRowAttrs.Builder().setIconId(R.drawable.ic_action_photo_street)
-				.setText(app.getString(R.string.street_level_imagery))
-				.setCollapsable(true).setCollapsableView(collapsableView).setTextLinesLimit(1).build());
-
-		if (needUpdateOnly && mapillaryGalleryItems != null) {
-			galleryRowBuilder.setItems(mapillaryGalleryItems);
-		} else if (!collapsableView.isCollapsed() && mapillaryGalleryItems == null) {
-			menuBuilder.startLoadingImages();
-		}
+		menuBuilder.buildGalleryRow(view, mapillaryRowController, R.drawable.ic_action_photo_street,
+				app.getString(R.string.street_level_imagery),
+				MAPILLARY_PHOTOS_ROW_COLLAPSED);
 	}
 
 	@Override
 	public void clearContextMenuRows() {
-		mapillaryGalleryItems = null;
-		galleryRowBuilder = null;
+		clearRowController();
 	}
 
-	public GetImageCardsListener getImageCardsListener() {
-		return new GetImageCardsListener() {
-			@Override
-			public void onTaskStarted() {
-				if (galleryRowBuilder != null) {
-					galleryRowBuilder.onLoadingImage(true);
-				}
-			}
-
-			@Override
-			public void onFinish(GalleryItemsHolder cardsHolder) {
-				if (galleryRowBuilder != null) {
-					galleryRowBuilder.onLoadingImage(false);
-				}
-				List<GalleryItem> items = new ArrayList<>(cardsHolder.getMapillaryGalleryItems());
-				if (Algorithms.isEmpty(items)) {
-					items.add(new GalleryItem.NoMedia(MAPILLARY_CONTRIBUTE_ACTION));
-				}
-				if (galleryRowBuilder != null) {
-					galleryRowBuilder.setItems(items);
-				}
-				mapillaryGalleryItems = items;
-			}
-		};
+	private void clearRowController() {
+		if (mapillaryRowController != null) {
+			mapillaryRowController.detach();
+			mapillaryRowController = null;
+		}
 	}
 
 	@Override
@@ -358,7 +293,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected boolean addContextMenuGalleryItem(@NonNull GalleryItemsHolder holder,
+	protected boolean addContextMenuGalleryItem(@NonNull OnlinePhotosHolder holder,
 	                                            @NonNull JSONObject imageObject) {
 		String type = imageObject.optString("type", null);
 		boolean mapillaryPhoto = TYPE_MAPILLARY_PHOTO.equals(type);
@@ -372,52 +307,12 @@ public class MapillaryPlugin extends OsmandPlugin {
 			if (mapillaryPhoto) {
 				MediaItem.Remote item = RemoteMediaFactory.fromJson(imageObject.toString(), MediaOrigin.MAPILLARY);
 				if (item != null) {
-					holder.addMediaItem(GalleryMediaGroup.MAPILLARY, item);
+					holder.addItem(OnlinePhotosGroup.MAPILLARY, item);
 				}
-			} else {
-				holder.addGalleryItem(
-						GalleryMediaGroup.MAPILLARY,
-						TYPE_MAPILLARY_CONTRIBUTE,
-						new GalleryItem.Action(MAPILLARY_CONTRIBUTE_ACTION)
-				);
 			}
 		} catch (Exception e) {
 			LOG.error(e);
 		}
-		return true;
-	}
-
-	@Override
-	protected boolean handleGalleryAction(@NonNull GalleryAction action) {
-		if (!TYPE_MAPILLARY_CONTRIBUTE.equals(action.getId())) {
-			return false;
-		}
-		if (mapActivity != null) {
-			openMapillary(mapActivity, null);
-		}
-		return true;
-	}
-
-	@Override
-	protected boolean handleGalleryMediaItemClick(@NonNull MapActivity mapActivity,
-	                                              @NonNull MediaItem mediaItem) {
-		if (mediaItem.getOrigin() != MediaOrigin.MAPILLARY || !(mediaItem instanceof MediaItem.Remote remote)) {
-			return false;
-		}
-		mapActivity.getContextMenu().close();
-
-		LatLon location = null;
-		var metadata = remote.getMetadata();
-		if (metadata.getLatitude() != null && metadata.getLongitude() != null) {
-			location = new LatLon(metadata.getLatitude(), metadata.getLongitude());
-		}
-
-		MapillaryImageDialog.show(
-				mapActivity, metadata.getKey(),
-				remote.getDownloadUri(), remote.getSourceUri(),
-				location, metadata.getCameraAngle(),
-				app.getString(R.string.mapillary), null, true
-		);
 		return true;
 	}
 
@@ -436,7 +331,11 @@ public class MapillaryPlugin extends OsmandPlugin {
 		this.mapActivity = null;
 	}
 
-	public static boolean openMapillary(FragmentActivity activity, String imageKey) {
+	public static boolean openMapillary(@NonNull FragmentActivity activity) {
+		return openMapillary(activity, null);
+	}
+
+	public static boolean openMapillary(@NonNull FragmentActivity activity, String imageKey) {
 		boolean success = false;
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		if (PluginsHelper.isPackageInstalled(MAPILLARY_PACKAGE_ID, app)) {

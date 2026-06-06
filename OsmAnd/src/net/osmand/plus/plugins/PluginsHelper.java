@@ -32,11 +32,9 @@ import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.gallery.model.GalleryAction;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
-import net.osmand.plus.gallery.controller.GalleryItemsHolder;
-import net.osmand.plus.gallery.tasks.GetOnlineImagesTask.GetImageCardsListener;
+import net.osmand.plus.gallery.online.OnlinePhotosHolder;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.OsmandPlugin.PluginInstallListener;
 import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
@@ -80,7 +78,6 @@ import net.osmand.search.core.SearchPhrase;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser;
 import net.osmand.shared.gpx.TrackItem;
-import net.osmand.shared.media.domain.MediaItem;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -622,24 +619,6 @@ public class PluginsHelper {
 		}
 	}
 
-	public static void onGetImageCardsStart() {
-		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			GetImageCardsListener listener = plugin.getImageCardsListener();
-			if (listener != null) {
-				listener.onTaskStarted();
-			}
-		}
-	}
-
-	public static void onGetImageCardsFinished(@NonNull GalleryItemsHolder cardsHolder) {
-		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			GetImageCardsListener listener = plugin.getImageCardsListener();
-			if (listener != null) {
-				listener.onFinish(cardsHolder);
-			}
-		}
-	}
-
 	@Nullable
 	public static MapWidget createMapWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
@@ -779,35 +758,10 @@ public class PluginsHelper {
 	 * @param imageObject JSON object that may describe a media item or gallery action
 	 * @return true if the object was recognized and handled by a plugin, even if no item was added
 	 */
-	public static boolean addContextMenuGalleryItem(@NonNull GalleryItemsHolder holder,
+	public static boolean addContextMenuGalleryItem(@NonNull OnlinePhotosHolder holder,
 	                                                @NonNull JSONObject imageObject) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			if (plugin.addContextMenuGalleryItem(holder, imageObject)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	/**
-	 * Lets enabled plugins handle a context-menu gallery action.
-	 *
-	 * @param action gallery action item created by a plugin or gallery data source
-	 * @return true if the action was recognized and handled by a plugin
-	 */
-	public static boolean handleGalleryAction(@NonNull GalleryAction action) {
-		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			if (plugin.handleGalleryAction(action)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public static boolean handleGalleryMediaItemClick(@NonNull MapActivity mapActivity,
-	                                                  @NonNull MediaItem mediaItem) {
-		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			if (plugin.handleGalleryMediaItemClick(mapActivity, mediaItem)) {
 				return true;
 			}
 		}

@@ -14,7 +14,6 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_TAKE_PHOTO;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
@@ -96,7 +95,6 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -142,15 +140,15 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	public static final int AV_DEFAULT_ACTION_AUDIO = 0;
 	public static final int AV_DEFAULT_ACTION_VIDEO = 1;
-	public static final int AV_DEFAULT_ACTION_TAKEPICTURE = 2;
+	public static final int AV_DEFAULT_ACTION_PHOTO = 2;
 	public static final int AV_DEFAULT_ACTION_CHOOSE = -1;
 
-	@IntDef({AV_DEFAULT_ACTION.AUDIO, AV_DEFAULT_ACTION.VIDEO, AV_DEFAULT_ACTION.TAKEPICTURE, AV_DEFAULT_ACTION.CHOOSE})
+	@IntDef({AV_DEFAULT_ACTION.AUDIO, AV_DEFAULT_ACTION.VIDEO, AV_DEFAULT_ACTION.PHOTO, AV_DEFAULT_ACTION.CHOOSE})
 	@Retention(RetentionPolicy.SOURCE)
 	@interface AV_DEFAULT_ACTION {
 		int AUDIO = AV_DEFAULT_ACTION_AUDIO;
 		int VIDEO = AV_DEFAULT_ACTION_VIDEO;
-		int TAKEPICTURE = AV_DEFAULT_ACTION_TAKEPICTURE;
+		int PHOTO = AV_DEFAULT_ACTION_PHOTO;
 		int CHOOSE = AV_DEFAULT_ACTION_CHOOSE;
 	}
 
@@ -212,42 +210,12 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private int runAction = -1;
 	private List<OnResultCallback<Recording>> recordingCallbacks = new ArrayList<>();
 
-	public enum AVActionType {
-		REC_AUDIO,
-		REC_VIDEO,
-		REC_PHOTO;
-
-		public boolean isPhoto() {
-			return this == REC_PHOTO;
-		}
-
-		public boolean isAudio() {
-			return this == REC_AUDIO;
-		}
-
-		public boolean isVideo() {
-			return this == REC_VIDEO;
-		}
-	}
-
-	public static int getIconIdForRecordingFile(@NonNull File file) {
-		String fileName = file.getName();
-		if (fileName.endsWith(IMG_EXTENSION)) {
-			return R.drawable.ic_action_photo_dark;
-		} else if (fileName.endsWith(MPEG4_EXTENSION)) {
-			return R.drawable.ic_action_video_dark;
-		} else if (fileName.endsWith(THREEGP_EXTENSION)) {
-			return R.drawable.ic_action_micro_dark;
-		}
-		return -1;
-	}
-
 	@Override
 	public String getId() {
 		return PLUGIN_AUDIO_VIDEO_NOTES;
 	}
 
-	public AudioVideoNotesPlugin(OsmandApplication app) {
+	public AudioVideoNotesPlugin(@NonNull OsmandApplication app) {
 		super(app);
 
 		ApplicationMode[] noAppMode = {};
@@ -382,9 +350,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void registerMapContextMenuActions(@NonNull MapActivity mapActivity, double latitude,
-			double longitude,
-			ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
+	public void registerMapContextMenuActions(@NonNull MapActivity mapActivity, double latitude, double longitude,
+			@NonNull ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
 		if (!configureMenu && isRecording()) {
 			return;
 		}
@@ -467,7 +434,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			case AV_NOTES_RECORD_VIDEO ->
 					new AudioVideoNotesWidget(mapActivity, widgetType, AV_DEFAULT_ACTION.VIDEO, customId, widgetsPanel);
 			case AV_NOTES_TAKE_PHOTO ->
-					new AudioVideoNotesWidget(mapActivity, widgetType, AV_DEFAULT_ACTION.TAKEPICTURE, customId, widgetsPanel);
+					new AudioVideoNotesWidget(mapActivity, widgetType, AV_DEFAULT_ACTION.PHOTO, customId, widgetsPanel);
 			default -> null;
 		};
 	}
@@ -495,7 +462,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 						mapActivity.getString(R.string.recording_context_menu_vrecord),
 						mapActivity.getString(R.string.recording_context_menu_precord),}, (dialog, which) -> {
 					int action = which == 0 ? AV_DEFAULT_ACTION_AUDIO : (which == 1 ? AV_DEFAULT_ACTION_VIDEO
-							: AV_DEFAULT_ACTION_TAKEPICTURE);
+							: AV_DEFAULT_ACTION_PHOTO);
 					takeAction(mapActivity, lon, lat, action);
 
 				});
@@ -505,7 +472,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private void takeAction(MapActivity mapActivity, double lon, double lat, int action) {
 		if (action == AV_DEFAULT_ACTION_VIDEO) {
 			recordVideo(lat, lon, mapActivity, false);
-		} else if (action == AV_DEFAULT_ACTION_TAKEPICTURE) {
+		} else if (action == AV_DEFAULT_ACTION_PHOTO) {
 			takePhoto(lat, lon, mapActivity, false, false);
 		} else if (action == AV_DEFAULT_ACTION_AUDIO) {
 			recordAudio(lat, lon, mapActivity);
@@ -517,8 +484,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		return getBaseFileName(lat, lon, baseDir, ext);
 	}
 
-	protected static File getBaseFileName(double lat, double lon, @NonNull File baseDir,
-			@NonNull String ext) {
+	@NonNull
+	public static File getBaseFileName(double lat, double lon, @NonNull File baseDir, @NonNull String ext) {
 		String basename = MapUtils.createShortLinkString(lat, lon, 15);
 		int k = 1;
 		baseDir.mkdirs();
@@ -527,18 +494,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			fl = new File(baseDir, basename + "." + (k++) + "." + ext);
 		} while (fl.exists());
 		return fl;
-	}
-
-	public void captureImage(double lat, double lon, MapActivity mapActivity) {
-		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-		Uri fileUri = AndroidUtils.getUriForFile(mapActivity, getBaseFileName(lat, lon, app, IMG_EXTENSION));
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN && Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) {
-			intent.setClipData(ClipData.newRawUri("", fileUri));
-		}
-		intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
-		intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-		// start the image capture Intent
-		AndroidUtils.startActivityForResultIfSafe(mapActivity, intent, 105);
 	}
 
 	public void captureVideoExternal(double lat, double lon, MapActivity mapActivity) {
@@ -827,7 +782,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			parameters.setFocusMode("continuous-video");
 		}
 
-		int cameraOrientation = getCamOrientation(mapActivity, Camera.CameraInfo.CAMERA_FACING_BACK);
+		int cameraOrientation = getCamOrientation(mapActivity);
 		cam.setDisplayOrientation(cameraOrientation);
 		parameters.set("rotation", cameraOrientation);
 		if (mPreviewSize != null) {
@@ -996,10 +951,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 						// camera focus type
 						autofocus = true;
 						parameters.removeGpsData();
-						if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-							parameters.setGpsLatitude(lat);
-							parameters.setGpsLongitude(lon);
-						}
 						switch (AV_CAMERA_FOCUS_TYPE.get()) {
 							case AV_CAMERA_FOCUS_HIPERFOCAL:
 								parameters.setFocusMode(Parameters.FOCUS_MODE_FIXED);
@@ -1039,7 +990,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 							//parameters.setFlashMode(Parameters.FLASH_MODE_AUTO);
 						}
 
-						int cameraOrientation = getCamOrientation(mapActivity, Camera.CameraInfo.CAMERA_FACING_BACK);
+						int cameraOrientation = getCamOrientation(mapActivity);
 						cam.setDisplayOrientation(cameraOrientation);
 						parameters.set("rotation", cameraOrientation);
 						if (mPreviewSize != null) {
@@ -1123,27 +1074,17 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		return optimalSize;
 	}
 
-	private static int getCamOrientation(MapActivity mapActivity, int cameraId) {
-		android.hardware.Camera.CameraInfo info =
-				new android.hardware.Camera.CameraInfo();
-		android.hardware.Camera.getCameraInfo(cameraId, info);
-		int rotation = mapActivity.getWindowManager().getDefaultDisplay()
-				.getRotation();
-		int degrees = 0;
-		switch (rotation) {
-			case Surface.ROTATION_0:
-				degrees = 0;
-				break;
-			case Surface.ROTATION_90:
-				degrees = 90;
-				break;
-			case Surface.ROTATION_180:
-				degrees = 180;
-				break;
-			case Surface.ROTATION_270:
-				degrees = 270;
-				break;
-		}
+	private static int getCamOrientation(MapActivity mapActivity) {
+		Camera.CameraInfo info = new Camera.CameraInfo();
+		Camera.getCameraInfo(CameraInfo.CAMERA_FACING_BACK, info);
+		int rotation = mapActivity.getWindowManager().getDefaultDisplay().getRotation();
+		int degrees = switch (rotation) {
+			case Surface.ROTATION_0 -> 0;
+			case Surface.ROTATION_90 -> 90;
+			case Surface.ROTATION_180 -> 180;
+			case Surface.ROTATION_270 -> 270;
+			default -> 0;
+		};
 
 		int result;
 		if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
@@ -1194,9 +1135,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		File f = getBaseFileName(lat, lon, app, IMG_EXTENSION);
 		lastTakingPhoto = f;
 		Uri uri = AndroidUtils.getUriForFile(mapActivity, f);
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN && Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) {
-			takePictureIntent.setClipData(ClipData.newRawUri("", uri));
-		}
 		takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
 		takePictureIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
 		try {
@@ -1211,12 +1149,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	private void cleanupSpace() {
-		File[] files = app.getAppPath(IndexConstants.AV_INDEX_DIR).listFiles(new FilenameFilter() {
-			@Override
-			public boolean accept(File dir, String filename) {
-				return filename.endsWith("." + MPEG4_EXTENSION);
-			}
-		});
+		File[] files = app.getAppPath(IndexConstants.AV_INDEX_DIR).listFiles((dir, filename) -> filename.endsWith("." + MPEG4_EXTENSION));
 
 		if (files != null) {
 			double usedSpace = 0;
@@ -1484,17 +1417,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		return recordings;
 	}
 
-	private void checkRecordings() {
-		Iterator<Recording> it = recordingByFileName.values().iterator();
-		while (it.hasNext()) {
-			Recording r = it.next();
-			if (!r.getFile().exists()) {
-				it.remove();
-				recordings.unregisterObject(r.getLatitude(), r.getLongitude(), r);
-			}
-		}
-	}
-
 	public void deleteRecording(Recording r, boolean updateUI) {
 		recordings.unregisterObject(r.getLatitude(), r.getLongitude(), r);
 		Map<String, Recording> newMap = new LinkedHashMap<>(recordingByFileName);
@@ -1552,18 +1474,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	public Collection<Recording> getAllRecordings() {
 		return recordingByFileName.values();
-	}
-
-	protected Recording[] getRecordingsSorted() {
-		checkRecordings();
-		Collection<Recording> allObjects = getAllRecordings();
-		Recording[] res = allObjects.toArray(new Recording[0]);
-		Arrays.sort(res, (object1, object2) -> {
-			long l1 = object1.getFile().lastModified();
-			long l2 = object2.getFile().lastModified();
-			return l1 < l2 ? 1 : -1;
-		});
-		return res;
 	}
 
 	public boolean isPlaying() {
@@ -1696,7 +1606,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			}
 		} else if (requestCode == CAMERA_FOR_PHOTO_REQUEST_CODE) {
 			if (grantResults[0] == PERMISSION_GRANTED) {
-				runAction = AV_DEFAULT_ACTION_TAKEPICTURE;
+				runAction = AV_DEFAULT_ACTION_PHOTO;
 			} else {
 				clearNextRecordingSavedCallbacks();
 				app.showToastMessage(R.string.no_camera_permission);

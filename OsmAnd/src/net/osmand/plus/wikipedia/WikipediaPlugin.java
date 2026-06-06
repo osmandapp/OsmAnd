@@ -6,7 +6,7 @@ import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 import static net.osmand.osm.MapPoiTypes.WIKI_LANG;
 import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
 import static net.osmand.plus.helpers.FileNameTranslationHelper.WIKI_NAME;
-import static net.osmand.plus.gallery.model.GalleryMediaGroup.OTHER;
+import static net.osmand.plus.gallery.online.OnlinePhotosGroup.OTHER;
 import static net.osmand.plus.poi.PoiUIFilter.TOP_WIKI_FILTER_ID;
 
 import android.app.Activity;
@@ -39,7 +39,7 @@ import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.gallery.controller.GalleryItemsHolder;
+import net.osmand.plus.gallery.online.OnlinePhotosHolder;
 import net.osmand.shared.media.RemoteMediaFactory;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
@@ -282,7 +282,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected boolean addContextMenuGalleryItem(@NonNull GalleryItemsHolder holder,
+	protected boolean addContextMenuGalleryItem(@NonNull OnlinePhotosHolder holder,
 	                                            @NonNull JSONObject imageObject) {
 		try {
 			if (!imageObject.has("type") || !imageObject.has("url")) {
@@ -303,7 +303,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 			String fileName = url.substring(colonIdx + 1);
 			WikiImage wikiImage = WikiHelper.INSTANCE.getImageData(fileName);
 			if (wikiImage != null) {
-				holder.addMediaItem(OTHER, RemoteMediaFactory.fromWikiImage(wikiImage));
+				holder.addItem(OTHER, RemoteMediaFactory.fromWikiImage(wikiImage));
 				return true;
 			}
 		} catch (JSONException e) {

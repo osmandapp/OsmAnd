@@ -1488,6 +1488,7 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> ONLINE_PHOTOS_ROW_COLLAPSED = new BooleanPreference(this, "online_photos_menu_collapsed", true).makeGlobal().makeShared();
 	public final OsmandPreference<Boolean> EXPLORE_NEARBY_ITEMS_ROW_COLLAPSED = new BooleanPreference(this, "online_photos_menu_collapsed", true).makeGlobal().makeShared();
+	public final OsmandPreference<Boolean> ATTACHED_MEDIA_ROW_COLLAPSED = new BooleanPreference(this, "attached_media_menu_collapsed", true).makeGlobal().makeShared();
 	public final OsmandPreference<Boolean> WEBGL_SUPPORTED = new BooleanPreference(this, "webgl_supported", true).makeGlobal();
 
 	public final OsmandPreference<String> PREFERRED_LOCALE = new StringPreference(this, "preferred_locale", "").makeGlobal().makeShared();
@@ -2294,6 +2295,8 @@ public class OsmandSettings {
 		}
 		return map;
 	}
+
+	public final OsmandPreference<Boolean> AUTO_COPY_MEDIA_TO_OSMAND_STORAGE = new BooleanPreference(this, "auto_copy_media_to_osmand_storage", false).makeGlobal().makeShared();
 
 	public final OsmandPreference<Boolean> SHARED_STORAGE_MIGRATION_FINISHED = new BooleanPreference(this,
 			"shared_storage_migration_finished", false).makeGlobal();

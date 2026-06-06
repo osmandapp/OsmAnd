@@ -39,13 +39,13 @@ import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.IndexFileList;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.gallery.model.GalleryAction;
+import net.osmand.plus.gallery.data.GalleryKey;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.gallery.controller.GalleryItemsHolder;
-import net.osmand.plus.gallery.tasks.GetOnlineImagesTask.GetImageCardsListener;
+import net.osmand.plus.gallery.online.OnlinePhotosHolder;
+import net.osmand.plus.gallery.online.tasks.GetOnlineImagesTask.GetImageCardsListener;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickActionType;
@@ -69,7 +69,6 @@ import net.osmand.search.core.SearchPhrase;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser;
 import net.osmand.shared.gpx.TrackItem;
-import net.osmand.shared.media.domain.MediaItem;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -262,17 +261,8 @@ public abstract class OsmandPlugin {
 	protected void attachAdditionalInfoToRecordedTrack(@NonNull Location location, @NonNull JSONObject json) throws JSONException {
 	}
 
-	protected boolean addContextMenuGalleryItem(@NonNull GalleryItemsHolder holder,
+	protected boolean addContextMenuGalleryItem(@NonNull OnlinePhotosHolder holder,
 	                                            @NonNull JSONObject imageObject) {
-		return false;
-	}
-
-	protected boolean handleGalleryAction(@NonNull GalleryAction action) {
-		return false;
-	}
-
-	protected boolean handleGalleryMediaItemClick(@NonNull MapActivity mapActivity,
-	                                              @NonNull MediaItem mediaItem) {
 		return false;
 	}
 
@@ -327,7 +317,8 @@ public abstract class OsmandPlugin {
 	/*
 	 * Add gallery menu row to the map context menu.
 	 */
-	public void buildContextMenuGalleryRows(@NonNull MenuBuilder menuBuilder, @NonNull View view, @Nullable Object object) {
+	public void buildContextMenuGalleryRows(@NonNull MenuBuilder menuBuilder, @NonNull View view,
+	                                        @NonNull GalleryKey.Location key) {
 	}
 
 	@Nullable

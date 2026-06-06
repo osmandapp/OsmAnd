@@ -1,8 +1,8 @@
-package net.osmand.plus.gallery.ui
+package net.osmand.plus.gallery.contract
 
 import net.osmand.shared.media.domain.MediaItem
 
-interface GalleryListener {
+interface IGalleryListener {
 
 	fun onMediaItemClicked(mediaItem: MediaItem)
 

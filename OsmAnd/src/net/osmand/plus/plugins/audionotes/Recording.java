@@ -7,6 +7,7 @@ import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.THREEGP_E
 import android.content.Context;
 import android.media.MediaPlayer;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 
 import net.osmand.Location;
@@ -361,5 +362,23 @@ public class Recording {
 			return app.getString(R.string.shared_string_audio) + " " + formatDateTime(app, lastModified);
 		}
 		return "";
+	}
+
+	@DrawableRes
+	public int getIconId() {
+		return getIconIdForRecordingFile(file);
+	}
+
+	@DrawableRes
+	public static int getIconIdForRecordingFile(@NonNull File file) {
+		String fileName = file.getName();
+		if (fileName.endsWith(IMG_EXTENSION)) {
+			return R.drawable.ic_action_photo_dark;
+		} else if (fileName.endsWith(MPEG4_EXTENSION)) {
+			return R.drawable.ic_action_video_dark;
+		} else if (fileName.endsWith(THREEGP_EXTENSION)) {
+			return R.drawable.ic_action_micro_dark;
+		}
+		return -1;
 	}
 }

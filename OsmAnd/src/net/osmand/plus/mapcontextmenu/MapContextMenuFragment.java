@@ -47,7 +47,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.base.ContextMenuFragment;
-import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
@@ -59,7 +58,6 @@ import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.controllers.FavouritePointMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.mapcontextmenu.other.MenuObjectUtils;
-import net.osmand.plus.gallery.controller.GalleryController;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.settings.backend.menuitems.MainContextMenuItemsSettings;
@@ -191,12 +189,6 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 		if (isForceCenterRequired()) {
 			this.centered = true;
 		}
-
-		DialogManager dialogManager = mapActivity.getApp().getDialogManager();
-		GalleryController controller = (GalleryController) dialogManager.findController(GalleryController.PROCESS_ID);
-		if (controller == null) {
-			dialogManager.register(GalleryController.PROCESS_ID, new GalleryController(app));
-		}
 	}
 
 	@Override
@@ -217,7 +209,7 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 		markerPaddingXPx = dpToPx(MARKER_PADDING_X_DP);
 		int shadowHeight = dpToPx(SHADOW_HEIGHT_TOP_DP);
 		topScreenPosY = addStatusBarHeightIfNeeded(-shadowHeight);
-		bottomToolbarPosY = addStatusBarHeightIfNeeded(getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar));
+		bottomToolbarPosY = addStatusBarHeightIfNeeded(getDimensionPixelSize(R.dimen.dashboard_map_toolbar));
 		minHalfY = viewHeight - (int) (viewHeight * menu.getHalfScreenMaxHeightKoef());
 		zoomPaddingTop = getDimensionPixelSize(R.dimen.map_button_margin);
 

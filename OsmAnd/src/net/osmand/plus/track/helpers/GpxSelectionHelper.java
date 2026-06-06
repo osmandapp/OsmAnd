@@ -5,7 +5,6 @@ import static net.osmand.shared.gpx.GpxParameter.JOIN_SEGMENTS;
 import static net.osmand.shared.gpx.GpxParameter.SHOW_AS_MARKERS;
 
 import android.app.Activity;
-import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
 
 import androidx.annotation.NonNull;
@@ -22,7 +21,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
-import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;

@@ -352,7 +352,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	}
 
 	@Override
-	protected Map<String, String> getAdditionalImageParams() {
+	@NonNull
+	public Map<String, String> getAdditionalImageParams() {
 		return AmenityExtensionsHelper.getImagesParams(extensions);
 	}
 }

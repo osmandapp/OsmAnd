@@ -528,6 +528,7 @@ public class MapUtils {
 		}
 		return c;
 	}
+	
 
 	/**
 	 * Calculate rotation diff D, that R (rotate) + D = T (targetRotate)

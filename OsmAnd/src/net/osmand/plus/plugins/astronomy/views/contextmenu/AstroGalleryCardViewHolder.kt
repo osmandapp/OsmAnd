@@ -10,12 +10,11 @@ import com.google.android.material.progressindicator.LinearProgressIndicator
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
+import net.osmand.plus.gallery.contract.IGalleryActionListener
 import net.osmand.plus.gallery.model.GalleryItem
 import net.osmand.plus.gallery.ui.GalleryGridAdapter
-import net.osmand.plus.gallery.ui.GalleryGridFragment
 import net.osmand.plus.gallery.ui.GalleryGridItemDecorator
-import net.osmand.plus.gallery.ui.GalleryListener
-import net.osmand.plus.gallery.controller.GalleryMediaLoadStateProvider
+import net.osmand.plus.gallery.contract.IGalleryListener
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.widgets.dialogbutton.DialogButton
 import net.osmand.util.Algorithms
@@ -24,15 +23,16 @@ class AstroGalleryCardViewHolder(
 	itemView: View,
 	private val app: OsmandApplication,
 	private val mapActivity: MapActivity,
-	private val listener: GalleryListener,
-	private val mediaLoadStateProvider: GalleryMediaLoadStateProvider,
+	private val galleryListener: IGalleryListener,
+	private val actionListener: IGalleryActionListener,
+	private val onActionButtonClick: (String?) -> Unit,
 	private val onToggle: (String) -> Unit
 ) : RecyclerView.ViewHolder(itemView) {
 
 	private val recyclerView: RecyclerView = itemView.findViewById(R.id.gallery_grid_recycler_view)
 	private val progressBar: LinearProgressIndicator = itemView.findViewById(R.id.progress_bar)
 	private val contentContainer: LinearLayout = itemView.findViewById(R.id.content_container)
-	private val viewAllButton: DialogButton = itemView.findViewById(R.id.view_all)
+	private val viewAllButton: DialogButton = itemView.findViewById(R.id.primary_action_button)
 	private val collapseButton: View = itemView.findViewById(R.id.collapse_button)
 	private val arrowCard: ImageView = itemView.findViewById(R.id.arrow_icon)
 	private var galleryGridAdapter: GalleryGridAdapter? = null
@@ -126,10 +126,11 @@ class AstroGalleryCardViewHolder(
 		}
 		galleryGridAdapter = GalleryGridAdapter(
 			mapActivity = mapActivity,
-			listener = listener,
-			mediaLoadStateProvider = mediaLoadStateProvider,
+			galleryListener = galleryListener,
+			actionListener = actionListener,
 			viewWidth = null,
-			nightMode = nightMode
+			nightMode = nightMode,
+			loadStateRegistry = app.galleryHelper.loadStateRegistry
 		)
 		adapterNightMode = nightMode
 		recyclerView.layoutManager = getGridLayoutManager()
@@ -142,9 +143,7 @@ class AstroGalleryCardViewHolder(
 
 	private fun setupViewAllButton() {
 		viewAllButton.setTitleId(R.string.shared_string_show_all)
-		viewAllButton.setOnClickListener {
-			GalleryGridFragment.showInstance(mapActivity, showAllTitle)
-		}
+		viewAllButton.setOnClickListener { onActionButtonClick(showAllTitle) }
 	}
 
 	private fun applyViewAllStyle(nightMode: Boolean) {

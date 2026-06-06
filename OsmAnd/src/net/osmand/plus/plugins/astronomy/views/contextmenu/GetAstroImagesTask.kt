@@ -4,15 +4,15 @@ import android.net.TrafficStats
 import android.os.AsyncTask
 import net.osmand.PlatformUtil
 import net.osmand.plus.OsmandApplication
-import net.osmand.plus.gallery.controller.GalleryItemsHolder
 import net.osmand.shared.wiki.WikiCoreHelper
 import net.osmand.shared.wiki.WikiImage
 import org.apache.commons.logging.Log
 
 class GetAstroImagesTask(
-	val app: OsmandApplication, val holder: GalleryItemsHolder, val wikidataId: String,
-	val getImageCardsListener: GetImageCardsListener?,
-	val networkResponseListener: WikiCoreHelper.NetworkResponseListener?
+	private val app: OsmandApplication,
+	private val wikidataId: String,
+	private val listener: GetImagesListener?,
+	private val networkResponseListener: WikiCoreHelper.NetworkResponseListener?
 ) : AsyncTask<Void, Void, List<WikiImage>?>() {
 
 	companion object {
@@ -20,30 +20,26 @@ class GetAstroImagesTask(
 		const val GET_IMAGE_CARD_THREAD_ID = 10105
 	}
 
-
 	override fun onPreExecute() {
-		getImageCardsListener?.onTaskStarted()
+		listener?.onTaskStarted()
 	}
 
 	override fun doInBackground(vararg voids: Void?): List<WikiImage>? {
 		TrafficStats.setThreadStatsTag(GET_IMAGE_CARD_THREAD_ID)
-		try {
-			val list = WikiCoreHelper.getAstroImageList(wikidataId, networkResponseListener)
-			return list
+		return try {
+			WikiCoreHelper.getAstroImageList(wikidataId, networkResponseListener)
 		} catch (e: Exception) {
 			LOG?.error(e)
+			null
 		}
-
-		return null
 	}
 
-	override fun onPostExecute(holder: List<WikiImage>?) {
-		getImageCardsListener?.onFinish(wikidataId, holder)
+	override fun onPostExecute(images: List<WikiImage>?) {
+		listener?.onFinish(wikidataId, images)
 	}
 
-	interface GetImageCardsListener {
+	interface GetImagesListener {
 		fun onTaskStarted()
-
 		fun onFinish(wikidataId: String, images: List<WikiImage>?)
 	}
 }

@@ -37,7 +37,6 @@ import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.myplaces.favorites.FavoriteFolderFormatter;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.audionotes.Recording;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
@@ -405,7 +404,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		} else if (file.getAbsolutePath().contains(IndexConstants.GPX_INDEX_DIR)) {
 			setupBottomSheetItemForGpx(item, file, null);
 		} else if (file.getAbsolutePath().contains(IndexConstants.AV_INDEX_DIR)) {
-			int iconId = AudioVideoNotesPlugin.getIconIdForRecordingFile(file);
+			int iconId = Recording.getIconIdForRecordingFile(file);
 			if (iconId == -1) {
 				iconId = R.drawable.ic_action_photo_dark;
 			}

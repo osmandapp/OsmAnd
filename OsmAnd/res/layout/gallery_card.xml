@@ -12,30 +12,31 @@
 		android:layout_height="wrap_content" />
 
 	<LinearLayout
-		android:id="@+id/gallery_buttons_container"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginBottom="@dimen/content_padding"
-		android:paddingStart="@dimen/content_padding"
-		android:paddingEnd="@dimen/content_padding"
-		android:orientation="horizontal">
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
 
 		<net.osmand.plus.widgets.dialogbutton.DialogButton
-			android:id="@+id/add_media"
+			android:id="@+id/primary_action_button"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_marginBottom="@dimen/content_padding"
+			android:paddingStart="@dimen/content_padding"
+			android:paddingEnd="@dimen/content_padding_half"
 			app:dialogButtonHeight="@dimen/dialog_button_height"
-			app:dialogButtonTitle="@string/shared_string_add"
+			app:dialogButtonTitle="@string/shared_string_view_all"
 			app:dialogButtonTopMargin="@dimen/content_padding_small"
 			app:dialogButtonTouchableHeight="@dimen/bottom_sheet_list_item_height"
 			app:dialogButtonType="secondaryActive" />
 
 		<net.osmand.plus.widgets.dialogbutton.DialogButton
-			android:id="@+id/view_all"
+			android:id="@+id/secondary_action_button"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_marginBottom="@dimen/content_padding"
+			android:paddingStart="0dp"
+			android:paddingEnd="@dimen/content_padding"
 			app:dialogButtonHeight="@dimen/dialog_button_height"
-			app:dialogButtonTitle="@string/shared_string_view_all"
+			app:dialogButtonTitle="@string/shared_string_add"
 			app:dialogButtonTopMargin="@dimen/content_padding_small"
 			app:dialogButtonTouchableHeight="@dimen/bottom_sheet_list_item_height"
 			app:dialogButtonType="secondaryActive" />
