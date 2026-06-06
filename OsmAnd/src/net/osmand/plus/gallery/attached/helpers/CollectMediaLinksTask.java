@@ -1,4 +1,4 @@
-package net.osmand.plus.gallery.helpers;
+package net.osmand.plus.gallery.attached.helpers;
 
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.IMG_EXTENSION;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.MPEG4_EXTENSION;
@@ -39,7 +39,6 @@ class CollectMediaLinksTask extends AsyncTask<Void, Void, List<Link>> {
 	private static final Log LOG = PlatformUtil.getLog(CollectMediaLinksTask.class);
 	private static final String DEFAULT_AUDIO_EXTENSION = "mp3";
 
-	private final OsmandApplication app;
 	private final ContentResolver contentResolver;
 
 	private final LatLon latLon;
@@ -51,7 +50,6 @@ class CollectMediaLinksTask extends AsyncTask<Void, Void, List<Link>> {
 
 	CollectMediaLinksTask(@NonNull OsmandApplication app, @NonNull LatLon latLon,
 			@NonNull List<Uri> uris, @NonNull CallbackWithObject<List<Link>> callback) {
-		this.app = app;
 		this.contentResolver = app.getContentResolver();
 		this.mediaStorageFolder = AttachedMediaUiHelper.getMediaStorageFolder(app);
 		this.mediaStorageDir = AttachedMediaUiHelper.getMediaStorageDir();

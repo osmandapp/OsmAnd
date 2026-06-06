@@ -359,11 +359,14 @@ public class MenuBuilder {
 	void onHide() {
 		hidden = true;
 		// Cancel in-flight nearby-amenity and image loads when the menu is replaced (see #25137).
-		stopLoadingImagesTask();
-		stopSearchAmenitiesTasks();
+		resetLoadingState();
 	}
 
 	void onClose() {
+		resetLoadingState();
+	}
+
+	private void resetLoadingState() {
 		if (onlinePhotosRowController != null) {
 			onlinePhotosRowController.detach();
 			onlinePhotosRowController = null;

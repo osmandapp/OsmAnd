@@ -1,6 +1,7 @@
 package net.osmand.plus.gallery.attached.helpers;
 
 import static android.app.Activity.RESULT_OK;
+
 import static net.osmand.IndexConstants.MEDIA_INDEX_DIR;
 
 import android.content.ActivityNotFoundException;
@@ -23,16 +24,16 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.PlatformUtil;
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AVActionType;
 import net.osmand.plus.plugins.audionotes.AVActionType;
-import net.osmand.plus.plugins.audionotes.Recording;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -41,8 +42,8 @@ import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
-import net.osmand.shared.gpx.primitives.Link;
 import net.osmand.shared.gpx.primitives.Linkable;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.media.MediaUriResolver;
 import net.osmand.shared.media.domain.MediaItem;
 import net.osmand.util.Algorithms;
@@ -51,8 +52,6 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.Collections;
 import java.util.List;
 
 public class AttachedMediaUiHelper {
@@ -94,10 +93,10 @@ public class AttachedMediaUiHelper {
 				() -> takeNote(AVActionType.REC_AUDIO, latLon, target, onMediaChanged), false));
 		items.add(createAddMenuItem(R.string.choose_from_gallery,
 				R.drawable.ic_action_photo_album, iconColor,
-				() -> chooseFromGallery(object, latLon, onMediaChanged), true));
+				() -> chooseFromGallery(target, latLon, onMediaChanged), true));
 		items.add(createAddMenuItem(R.string.choose_from_files,
 				R.drawable.ic_action_group_list, iconColor,
-				() -> chooseFromFiles(object, latLon, onMediaChanged), false));
+				() -> chooseFromFiles(target, latLon, onMediaChanged), false));
 
 		PopUpMenuDisplayData data = new PopUpMenuDisplayData();
 		data.anchorView = anchorView;
@@ -147,7 +146,7 @@ public class AttachedMediaUiHelper {
 		}
 	}
 
-	private void chooseFromGallery(@Nullable Linkable target, @NonNull LatLon latLon, @Nullable Runnable onMediaChanged) {
+	private void chooseFromGallery(@NonNull Linkable target, @NonNull LatLon latLon, @Nullable Runnable onMediaChanged) {
 		PickVisualMediaRequest request = new PickVisualMediaRequest.Builder()
 				.setMediaType(PickVisualMedia.ImageAndVideo.INSTANCE)
 				.build();
@@ -155,7 +154,7 @@ public class AttachedMediaUiHelper {
 				uris -> onMediaPicked(target, latLon, onMediaChanged, uris));
 	}
 
-	private void chooseFromFiles(@Nullable Linkable target, @NonNull LatLon latLon, @Nullable Runnable onMediaChanged) {
+	private void chooseFromFiles(@NonNull Linkable target, @NonNull LatLon latLon, @Nullable Runnable onMediaChanged) {
 		launchMediaPicker(new StartActivityForResult(), createOpenMediaDocumentIntent(), result -> {
 			Intent data = result.getData();
 			if (data != null && result.getResultCode() == RESULT_OK) {
@@ -199,8 +198,8 @@ public class AttachedMediaUiHelper {
 		}
 	}
 
-	private void onMediaPicked(@Nullable Linkable target, @NonNull LatLon latLon,
-			@Nullable Runnable onMediaChanged, @NonNull List<Uri> uris) {
+	private void onMediaPicked(@NonNull Linkable target, @NonNull LatLon latLon,
+	                           @Nullable Runnable onMediaChanged, @NonNull List<Uri> uris) {
 		if (uris.isEmpty()) {
 			return;
 		}
