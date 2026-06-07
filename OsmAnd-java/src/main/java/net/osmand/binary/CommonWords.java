@@ -229,13 +229,14 @@ public class CommonWords {
 //		addTopFrequentManually("dr"); // already common
 		addTopFrequentManually("st");
 		addTopFrequentManually("ln"); 
-		addTopFrequentManually("rd");
+//		addTopFrequentManually("rd"); // already common
 		addTopFrequentManually("blvd"); 
 		addTopFrequentManually("hwy"); 
 	}
 
 		
 	private static void addCalculatedCommonWords() {
+		// Issue of order != popularity "west avenue 45" not searchable by "avenue 45"
 		// RANK. Total, Main word presence - Percent (Total)
 		addCommon("street"); // 1. 11954399, 0.001% (76363)
 		addCommon("улица"); // 2. 11052215, 0.000% (50610)

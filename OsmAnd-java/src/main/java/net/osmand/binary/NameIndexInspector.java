@@ -27,7 +27,7 @@ public class NameIndexInspector {
 	}
 	
 	public static class SuffixesStat {
-		List<String> longestSuffixes = new ArrayList<String>();
+		List<ValueFreq> longestSuffixes = new ArrayList<>();
 		String longestSuffixesKey;
 		int suffixesLenSum;
 		int prefixesCount;
@@ -48,16 +48,22 @@ public class NameIndexInspector {
 			this.suffixesLenSum += suffixesStat.suffixesLenSum;
 		}
 		
-		@Override
-		public String toString() {
+		public String toString(String nl) {
 			int sz = longestSuffixes.size();
 			String longestStr = String.format("Longest suffixes '%s' (%d): %s...", longestSuffixesKey,
-					longestSuffixes.size(), longestSuffixes.subList(0, Math.min(15, sz)));
-			return String.format("Suffixes stat."
-					+ "\n\t  Prefixes - %,d, avg suffixes - %.1f. "
-					+ "\n\t  Atoms (%,d) - suffix (1 - %,d, 2 - %,d, ...). %s",
-					prefixesCount, suffixesLenSum * 1.0 / (prefixesCount + 1),
-					atomCount, atomOneBitSuffix, atomTwoBitSuffix, longestStr);
+					longestSuffixes.size(), longestSuffixes.subList(0, Math.min(30, sz)));
+			String msg = String.format(
+					"Name Suffixes - "
+//					+ "%.1f avg suffixes per prefix, " // duplicate 23,193 prefixes, 45,283 tokens division
+					+ "suffixes in atom set: 2 - %,d, 3+ - %,d. ",
+//					suffixesLenSum * 1.0 / (prefixesCount + 1), 
+					atomTwoBitSuffix, (atomCount - atomOneBitSuffix - atomTwoBitSuffix));
+			return msg + longestStr;
+		}
+
+		@Override
+		public String toString() {
+			return toString("\n");
 		}
 		
 	}
@@ -65,6 +71,7 @@ public class NameIndexInspector {
 	public static class ValueFreq implements Comparable<ValueFreq> {
 		public String value;
 		public int freq;
+		public int extra;
 		public List<ValueFreq> subValues = null;
 		
 		public static boolean SORT_BY_NAME = false;
@@ -172,17 +179,18 @@ public class NameIndexInspector {
 		private List<ValueFreq> collectAddrFrequencies(SuffixesStat stats, int f) {
 			List<ValueFreq> suffixes = new ArrayList<>();
 			String curSuffix = "";
-//			if(addr.getSuffixesDictionaryCount() > suffixes.lo.si)
-			if (stats != null && stats.longestSuffixes.size() < addr.getSuffixesDictionaryCount()) {
-				stats.longestSuffixes = addr.getSuffixesDictionaryList();
-				stats.longestSuffixesKey = key;
+			if (stats != null) {
+				stats.prefixesCount++;
+				stats.suffixesLenSum += addr.getSuffixesDictionaryList().size();
 			}
-			stats.prefixesCount++;
-			stats.suffixesLenSum += addr.getSuffixesDictionaryList().size();
 			for (String s : addr.getSuffixesDictionaryList()) {
 				curSuffix = SearchAlgorithms.nameIndexDecodeDictionarySuffix(curSuffix, s);
 				ValueFreq vf = new ValueFreq(key + curSuffix, 0);
 				suffixes.add(vf);
+			}
+			if (stats != null && stats.longestSuffixes.size() < suffixes.size()) {
+				stats.longestSuffixes = suffixes;
+				stats.longestSuffixesKey = key;
 			}
 			int INT_BITS = 32;
 			for (AddressNameIndexDataAtom a : addr.getAtomList()) {
@@ -218,16 +226,16 @@ public class NameIndexInspector {
 			List<ValueFreq> suffixes = new ArrayList<>();
 			if (data != null) {
 				String curSuffix = "";
-				if (stats != null && stats.longestSuffixes.size() < data.getSuffixesDictionaryCount()) {
-					stats.longestSuffixes = data.getSuffixesDictionaryList();
-					stats.longestSuffixesKey = key;
-				}
 				stats.prefixesCount++;
 				stats.suffixesLenSum += data.getSuffixesDictionaryList().size();
 				for (String s : data.getSuffixesDictionaryList()) {
 					curSuffix = SearchAlgorithms.nameIndexDecodeDictionarySuffix(curSuffix, s);
 					ValueFreq vf = new ValueFreq(key + curSuffix, 0);
 					suffixes.add(vf);
+				}
+				if (stats != null && stats.longestSuffixes.size() < suffixes.size()) {
+					stats.longestSuffixes = suffixes;
+					stats.longestSuffixesKey = key;
 				}
 				int INT_BITS = 32;
 				for (OsmAndPoiNameIndexDataAtom a : data.getAtomsList()) {
@@ -300,8 +308,7 @@ public class NameIndexInspector {
 			if (prefix != null && !(p.key.toLowerCase().startsWith(prefix) || prefix.toLowerCase().startsWith(p.key))) {
 				continue;
 			}
-
-			List<ValueFreq> subvalues = p.collectAddrFrequencies(suffixesStat, filter);
+			List<ValueFreq> subvalues = p.collectAddrFrequencies(filter == -1 ? suffixesStat : null, filter);
 			int total = p.addr.getAtomCount();
 			if (filter >= 0 || !Algorithms.isEmpty(prefix)) {
 				total = 0;
