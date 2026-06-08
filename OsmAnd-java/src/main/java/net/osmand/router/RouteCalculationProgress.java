@@ -253,8 +253,8 @@ public class RouteCalculationProgress implements Serializable {
 		fastRoutingStatusOrdinal = FastRoutingState.reset();
 	}
 
-	public void failFastRoutingStatus() {
-		fastRoutingStatusOrdinal = FastRoutingState.fail(fastRoutingStatusOrdinal);
+	public void failFastRoutingStatus(boolean hasUnsupportedParameters) {
+		fastRoutingStatusOrdinal = FastRoutingState.fail(fastRoutingStatusOrdinal, hasUnsupportedParameters);
 	}
 
 	public void raiseFastRoutingStatus(FastRoutingState.Status status) {

@@ -78,8 +78,8 @@ public class RoutingContext {
 	public boolean publicTransport;
 	public HashSet<BinaryMapIndexReader> mapIndexReaderFilter = new HashSet<>();
 	public String[] regionsCoveringStartAndTargets = new String[0];
+	public boolean hhHasUnsupportedParameters = false;
 
-	
 	public RouteCalculationProgress calculationProgress;
 	public RouteCalculationProgress calculationProgressFirstPhase;
 	public boolean leftSideNavigation;

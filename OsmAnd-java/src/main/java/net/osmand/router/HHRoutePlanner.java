@@ -49,6 +49,7 @@ import net.osmand.router.RouteCalculationProgress.HHIteration;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 public class HHRoutePlanner<T extends NetworkDBPoint> {
@@ -75,6 +76,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 	private int maxCountReiteration;
 	private int maxStartEndReiterations;
 	private boolean incorrectCostAtStartEnd;
+
+	private static final Set<String> IGNORE_FAILED_UNSUPPORTED_PARAMETERS = Set.of("allow_private");
 
 	public static HHRoutePlanner<NetworkDBPoint> createDB(RoutingContext ctx, HHRoutingDB networkDB) {
 		return new HHRoutePlanner<NetworkDBPoint>(ctx,
@@ -227,7 +230,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			if (finalPnt == null) {
 				printf(SL > 0, " finalPnt is null (stop)\n");
 				hctx.clearAll(stPoints, endPoints);
-				progress.failFastRoutingStatus();
+				progress.failFastRoutingStatus(hctx.rctx.hhHasUnsupportedParameters);
 				return new HHNetworkRouteRes("No finalPnt found (points might be filtered by params)");
 			}
 			if (progress.isCancelled) {
@@ -255,7 +258,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 						printFinalMessage(" [too many cancelled]", start, end, startTime, hctx);
 					}
 					hctx.clearAll(stPoints, endPoints);
-					progress.failFastRoutingStatus();
+					progress.failFastRoutingStatus(hctx.rctx.hhHasUnsupportedParameters);
 					return new HHNetworkRouteRes("Too many recalculations (outdated maps or unsupported parameters).");
 				}
 				hctx.clearVisited(stPoints, endPoints);
@@ -732,9 +735,11 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		public int extraParam = 0;
 		public int matchParam = 0;
 		public int highCostParam = 0;
+		public int unsupportedParams = 0; // affects FastRoutingState via hhHasUnsupportedParameters
+
 		public boolean containsStartEnd;
 		public double sumIntersects;
-		
+
 		public HHRouteRegionsGroup(long edition, String params) {
 			this.profileParams = params;
 			this.edition = edition;
@@ -803,9 +808,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		List<HHRouteRegionsGroup<T>> groups = new ArrayList<>();
 	
 		GeneralRouter router = hctx.rctx.config.router;
-//		String profile = router.getProfileName();
 		String profile = router.getProfile().toString().toLowerCase(); // use base profile
-		List<String> ls = router.serializeParameterValues(router.getParameterValues());
 		QuadRect qr = new QuadRect(Math.min(start.getLongitude(), end.getLongitude()),
 				Math.max(start.getLatitude(), end.getLatitude()),
 				Math.max(start.getLongitude(), end.getLongitude()),
@@ -823,19 +826,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			g.containsStartEnd = g.contains(start) && g.contains(end)
 					&& g.containsStartEndRegion(hctx.rctx.regionsCoveringStartAndTargets);
 			String[] params = g.profileParams.split(",");
-			for (String p : params) {
-				if (p.trim().length() == 0) {
-					continue;
-				}
-				if (!ls.contains(p)) {
-					g.extraParam++;
-				} else {
-					if (HIGH_COST_PARAMS.contains(p)) {
-						g.highCostParam++;
-					}
-					g.matchParam++;
-				}
-			}
+			matchGroupRoutingParams(params, router, g);
 		}
 		Collections.sort(groups, new Comparator<HHRouteRegionsGroup<T>>() {
 
@@ -865,7 +856,6 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			HHRouteRegionPointsCtx<T> reg = new HHRouteRegionPointsCtx<T>(mapId, bestGroup.regions.get(mapId),
 					bestGroup.readers.get(mapId), bestGroup.regions.get(mapId).profileParams.indexOf(bestGroup.profileParams));
 			regions.add(reg);
-			
 		}
 		boolean allMatched = true;
 		for (HHRouteRegionPointsCtx<T> r : regions) {
@@ -890,7 +880,53 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				hctx.rctx.mapIndexReaderFilter.add(reg.file);
 			}
 		}
+		hctx.rctx.hhHasUnsupportedParameters = bestGroup.unsupportedParams > 0;
 		return initNewContext(hctx.rctx, regions);
+	}
+
+	private void matchGroupRoutingParams(String[] hhParams, GeneralRouter router, HHRouteRegionsGroup<T> group) {
+		List<String> routerParams = router.serializeParameterValues(router.getParameterValues());
+
+		for (String p : hhParams) {
+			if (p.trim().isEmpty()) {
+				continue;
+			}
+			if (!routerParams.contains(p)) {
+				group.extraParam++;
+			} else {
+				if (HIGH_COST_PARAMS.contains(p)) {
+					group.highCostParam++;
+				}
+				group.matchParam++;
+			}
+		}
+
+		List<String> hhParamsList = Arrays.asList(hhParams);
+		for (String keyVal : routerParams) {
+			String key = keyVal.split("=")[0];
+			RoutingParameter param = router.getParameters().get(key);
+			if (param == null || IGNORE_FAILED_UNSUPPORTED_PARAMETERS.contains(key) || hhParamsList.contains(keyVal)) {
+				continue;
+			}
+			double doubleValue = 0;
+			boolean booleanValue = true;
+			if (keyVal.contains("=")) {
+				String val = keyVal.split("=")[1];
+				if ("true".equals(val) || "false".equals(val)) {
+					booleanValue = Boolean.parseBoolean(val);
+				} else {
+					doubleValue = Algorithms.parseDoubleSilently(val, 0);
+				}
+			}
+			if (GeneralRouter.RoutingParameterType.BOOLEAN.equals(param.getType())
+					&& booleanValue == param.getDefaultBoolean()) {
+				continue;
+			} else if (GeneralRouter.RoutingParameterType.NUMERIC.equals(param.getType())
+					&& doubleValue == param.getDefaultNumeric()) {
+				continue;
+			}
+			group.unsupportedParams++;
+		}
 	}
 
 	public static <T extends NetworkDBPoint> TIntObjectHashMap<List<T>> groupByClusters(TLongObjectHashMap<T> pointsById, boolean out) {
