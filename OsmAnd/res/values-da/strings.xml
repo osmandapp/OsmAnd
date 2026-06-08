@@ -6207,4 +6207,5 @@
     <string name="shared_string_media">Medier</string>
     <string name="no_media">Ingen medier</string>
     <string name="no_media_descr">Du kan tilføje fotos, videoer eller lydnoter fra dit kamera eller dit bibliotek.</string>
+    <string name="auto_copy_media_to_osmand_storage">Kopier automatisk medier til OsmAnd-lageret</string>
 </resources>

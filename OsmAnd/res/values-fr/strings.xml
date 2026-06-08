@@ -6070,4 +6070,5 @@
     <string name="choose_from_files">Sélectionnez un fichier</string>
     <string name="shared_string_media">Médias</string>
     <string name="no_media">Aucun média</string>
+    <string name="auto_copy_media_to_osmand_storage">Copier automatiquement les fichiers multimédias vers le stockage d\'OsmAnd</string>
 </resources>

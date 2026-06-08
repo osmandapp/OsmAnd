@@ -194,7 +194,6 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 	@Override
 	public void onStart(@NonNull LifecycleOwner owner) {
-		logIssue24873("NavigationSession onStart: ");
 		OsmandApplication app = getApp();
 		routingHelper.addListener(this);
 
@@ -233,7 +232,6 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 	@Override
 	public void onStop(@NonNull LifecycleOwner owner) {
-		logIssue24873("NavigationSession onStop: ");
 		OsmandApplication app = getApp();
 		routingHelper.removeListener(this);
 
@@ -868,13 +866,6 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		Screen topScreen = getScreenManager().getTop();
 		if (topScreen instanceof RoutePreviewScreen) {
 			topScreen.finish();
-		}
-	}
-
-	private void logIssue24873(@NonNull String msg) {
-		OsmandDevelopmentPlugin plugin = PluginsHelper.getActivePlugin(OsmandDevelopmentPlugin.class);
-		if (plugin != null) {
-			LOG.debug("Issue24873 " + msg);
 		}
 	}
 }

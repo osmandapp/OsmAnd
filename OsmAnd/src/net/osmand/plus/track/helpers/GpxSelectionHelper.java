@@ -258,7 +258,6 @@ public class GpxSelectionHelper {
 	}
 
 	public void loadGPXTracks(@Nullable IProgress progress) {
-		logIssue24873("GPXSelectionHelper loadGPXTracks");
 		String load = app.getSettings().SELECTED_GPX.get();
 		if (!Algorithms.isEmpty(load)) {
 			try {
@@ -308,7 +307,6 @@ public class GpxSelectionHelper {
 					saveCurrentSelections();
 				}
 			} catch (Exception e) {
-				logIssue24873("GPXSelectionHelper loadGPXTracks exception " + e);
 				app.getSettings().SELECTED_GPX.set("");
 				log.error(e);
 			}
@@ -578,12 +576,5 @@ public class GpxSelectionHelper {
 				}
 			}
 		};
-	}
-
-	private void logIssue24873(@NonNull String msg) {
-		OsmandDevelopmentPlugin plugin = PluginsHelper.getActivePlugin(OsmandDevelopmentPlugin.class);
-		if (plugin != null) {
-			log.debug("Issue24873 " + msg);
-		}
 	}
 }

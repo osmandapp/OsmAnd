@@ -321,8 +321,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else {
 			visibleGPXFiles = new ArrayList<>(selectedGpxHelper.getSelectedGPXFiles());
 		}
-		logIssue24873("GPXLayer onPrepareBufferImage: count " + visibleGPXFiles.size());
-		logIssue24873("GPXLayer onPrepareBufferImage: mapActivityInvalidated " + mapActivityInvalidated);
 		boolean tmpVisibleTrackChanged = updateTmpVisibleTrack(visibleGPXFiles);
 
 		pointsCache.clear();
@@ -353,7 +351,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		if (mapRenderer != null) {
 			boolean forceUpdate = updateBitmaps() || nightModeChanged || pointsModified || tmpVisibleTrackChanged || mapRendererChanged;
 			if (mapRendererChanged) {
-				logIssue24873("GPXLayer onPrepareBufferImage: mapRendererChanged");
 				clearSelectedFilesSegments();
 			}
 			if (!visibleGPXFiles.isEmpty()) {
@@ -1260,7 +1257,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	                                       List<SelectedGpxFile> selectedGPXFiles, DrawSettings settings) {
 		SelectedGpxFile currentTrack = null;
 		int baseOrder = getBaseOrder();
-		logIssue24873("GPXLayer onPrepareBufferImage: drawSelectedFilesSegments " + selectedGPXFiles.size());
 		for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
 			GpxFile gpxFile = selectedGpxFile.getGpxFile();
 			KFile file = new KFile(gpxFile.getPath());
@@ -1277,8 +1273,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			baseOrder -= GpxGeometryWay.VECTOR_LINES_RESERVED;
 		}
 		if (currentTrack != null) {
-			logIssue24873("GPXLayer onPrepareBufferImage: drawSelectedFilesSegments currentTrack " + currentTrack);
-			logIssue24873("GPXLayer onPrepareBufferImage: drawSelectedFilesSegments currentTrack visible " + isGpxFileVisible(currentTrack, tileBox));
 			drawSelectedFileSegments(currentTrack, true, canvas, tileBox, settings, baseOrder);
 		}
 	}
@@ -1915,13 +1909,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		if (customObjectsDelegate != null) {
 			customObjectsDelegate.setCustomMapObjects(gpxFiles);
 			getApplication().getOsmandMap().refreshMap();
-		}
-	}
-
-	private void logIssue24873(@NonNull String msg) {
-		OsmandDevelopmentPlugin plugin = PluginsHelper.getActivePlugin(OsmandDevelopmentPlugin.class);
-		if (plugin != null) {
-			log.debug("Issue24873 " + msg);
 		}
 	}
 }

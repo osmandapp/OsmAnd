@@ -6487,4 +6487,5 @@
     <string name="favorite_folder_duplicate_message">Gebruik een mapnaam die nog niet bestaat.</string>
     <string name="favorite_folder_name">Mapnaam</string>
     <string name="edit_folder">Bewerk map</string>
+    <string name="shared_string_media">Media</string>
 </resources>

@@ -74,7 +74,7 @@ public class MapWidgetRegistry {
 		notifyWidgetVisibilityChanged(widgetInfo);
 
 		if (widgetInfo.isCustomWidget() && (enabled == null || !enabled)) {
-			settings.getCustomWidgetsKeys(layoutMode).removeValue(widgetInfo.key);
+			settings.getCustomWidgetsKeys(layoutMode).removeValueForProfile(appMode, widgetInfo.key);
 		}
 
 		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();

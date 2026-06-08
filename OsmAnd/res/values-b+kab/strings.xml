@@ -1563,4 +1563,7 @@
     <string name="shared_string_memory_mb_desc">%1$s MAṬ</string>
     <string name="no_search_results">Ulac igmaḍ</string>
     <string name="shared_string_hide_all">Ɣumm-iten akk</string>
+    <string name="shared_string_maximum">Afellay</string>
+    <string name="speedometer_maximum">Afellay</string>
+    <string name="use_magnetic_sensor">Seqdec amaṭṭaf adkiran</string>
 </resources>

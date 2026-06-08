@@ -6149,5 +6149,8 @@
     <string name="remove_step">Elimina passaggio</string>
     <string name="choose_from_gallery">Scegli dalla galleria</string>
     <string name="choose_from_files">Scegli tra i file</string>
-    <string name="shared_string_media">Media</string>
+    <string name="shared_string_media">File multimediali</string>
+    <string name="auto_copy_media_to_osmand_storage">Copia automatica dei file multimediali nella memoria OsmAnd</string>
+    <string name="no_media">Nessun file multimediale</string>
+    <string name="no_media_descr">Puoi aggiungere foto, video o note audio dalla tua fotocamera o libreria.</string>
 </resources>

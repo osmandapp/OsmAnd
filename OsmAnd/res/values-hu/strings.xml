@@ -6066,5 +6066,6 @@
     <string name="choose_from_files">Kiválasztás a fájlokból</string>
     <string name="shared_string_media">Média</string>
     <string name="no_media">Nincs média</string>
-    <string name="no_media_descr">Fényképeket, videókat vagy hangjegyzeteket adhat hozzá a fényképezőgépéről vagy az eszköz könytárából.</string>
+    <string name="no_media_descr">Fényképet, videót vagy hangjegyzetet adhat hozzá a fényképezőgépéről vagy az eszköz könyvtárából.</string>
+    <string name="auto_copy_media_to_osmand_storage">Média automatikus másolása az OsmAnd tárhelyére</string>
 </resources>

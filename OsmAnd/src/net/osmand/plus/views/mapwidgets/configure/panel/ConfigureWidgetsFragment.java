@@ -111,6 +111,11 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 		return selectedPanel;
 	}
 
+	@NonNull
+	public ApplicationMode getSelectedAppMode() {
+		return selectedAppMode;
+	}
+
 	@Nullable
 	public ScreenLayoutMode getScreenLayoutMode() {
 		return layoutMode;
@@ -608,13 +613,11 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 
 	@Nullable
 	private WidgetsListFragment getSelectedFragment() {
-		if (isResumed()) {
-			FragmentManager manager = getChildFragmentManager();
-			for (Fragment fragment : manager.getFragments()) {
-				if (fragment instanceof WidgetsListFragment widgetsFragment
-						&& Algorithms.objectEquals(widgetsFragment.getSelectedPanel(), selectedPanel)) {
-					return widgetsFragment;
-				}
+		FragmentManager manager = getChildFragmentManager();
+		for (Fragment fragment : manager.getFragments()) {
+			if (fragment instanceof WidgetsListFragment widgetsFragment
+					&& Algorithms.objectEquals(widgetsFragment.getSelectedPanel(), selectedPanel)) {
+				return widgetsFragment;
 			}
 		}
 		return null;
