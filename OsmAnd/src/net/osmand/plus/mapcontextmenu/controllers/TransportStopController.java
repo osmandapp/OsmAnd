@@ -126,31 +126,33 @@ public class TransportStopController extends MenuController {
 			ArrayList<TransportStop> transportStopsSameExit = new ArrayList<>(transportStop.getLocalTransportStops());
 			ArrayList<TransportStop> nearbyTransportStops = new ArrayList<>(transportStop.getNearbyTransportStops());
 
-			addTransportStopRoutes(app, transportStopsSameExit, routesOnTheSameExit, useEnglishNames);
+			addTransportStopRoutes(app, transportStopsSameExit, routesOnTheSameExit, useEnglishNames, null);
 			TransportStopHelper.sortTransportStopRoutes(routesOnTheSameExit);
 			if (topType == null && !Algorithms.isEmpty(routesOnTheSameExit)) {
 				topType = routesOnTheSameExit.get(0).type;
 			}
-			addTransportStopRoutes(app, nearbyTransportStops, routesNearby, useEnglishNames);
+			addTransportStopRoutes(app, nearbyTransportStops, routesNearby, useEnglishNames, routesOnTheSameExit);
 			TransportStopHelper.sortTransportStopRoutes(routesNearby);
 		}
 	}
 
 	private void addTransportStopRoutes(OsmandApplication app, List<TransportStop> stops,
-			List<TransportStopRoute> routes, boolean useEnglishNames) {
+			List<TransportStopRoute> routes, boolean useEnglishNames, List<TransportStopRoute> excludedRoutes) {
 		for (TransportStop tstop : stops) {
 			if (!tstop.isDeleted()) {
-				addRoutes(app, routes, useEnglishNames, tstop, transportStop, (int) MapUtils.getDistance(tstop.getLocation(), transportStop.getLocation()));
+				addRoutes(app, routes, excludedRoutes, useEnglishNames, tstop, transportStop,
+						(int) MapUtils.getDistance(tstop.getLocation(), transportStop.getLocation()));
 			}
 		}
 	}
 
 	private void addRoutes(OsmandApplication app, List<TransportStopRoute> routes,
-			boolean useEnglishNames, TransportStop s, TransportStop refStop, int dist) {
+			List<TransportStopRoute> excludedRoutes, boolean useEnglishNames, TransportStop s, TransportStop refStop, int dist) {
 		List<TransportRoute> rts = app.getResourceManager().getRoutesForStop(s);
 		if (rts != null) {
 			for (TransportRoute rs : rts) {
-				boolean routeAlreadyAdded = TransportStopHelper.checkSameRoute(routes, rs);
+				boolean routeAlreadyAdded = TransportStopHelper.checkSameRoute(routes, rs)
+						|| excludedRoutes != null && TransportStopHelper.checkSameRoute(excludedRoutes, rs);
 				if (routeAlreadyAdded) {
 					continue;
 				}
