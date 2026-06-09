@@ -6147,4 +6147,5 @@
     <string name="shared_string_media">Медија</string>
     <string name="no_media">Нема медија</string>
     <string name="no_media_descr">Можете додати слике, видеа или звучне белешке из своје камере или књижнице.</string>
+    <string name="auto_copy_media_to_osmand_storage">Аутоматско копирање медија у ОсмАнд складиште</string>
 </resources>

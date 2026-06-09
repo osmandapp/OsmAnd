@@ -5946,4 +5946,5 @@
     <string name="no_media_descr">Μπορείτε να προσθέσετε φωτογραφίες, βίντεο ή ηχητικές σημειώσεις από την κάμερά σας ή τη βιβλιοθήκη σας.</string>
     <string name="choose_from_gallery">Επιλέξτε από τη Συλλογή</string>
     <string name="choose_from_files">Επιλέξτε από τα Αρχεία</string>
+    <string name="auto_copy_media_to_osmand_storage">Αυτόματη αντιγραφή πολυμέσων στον αποθηκευτικό χώρο του OsmAnd</string>
 </resources>

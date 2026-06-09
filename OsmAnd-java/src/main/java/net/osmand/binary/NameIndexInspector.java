@@ -1,6 +1,7 @@
 package net.osmand.binary;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -81,6 +82,18 @@ public class NameIndexInspector {
 			this.value = name;
 			this.freq = frequency;
 		}
+		
+		public ValueFreq copy() {
+			ValueFreq vf = new ValueFreq(value, freq);
+			vf.extra = extra;
+			if (subValues != null) {
+				vf.subValues = new ArrayList<>();
+				for (ValueFreq s : subValues) {
+					vf.subValues.add(s.copy());
+				}
+			}
+			return vf;
+		}
 
 		public List<ValueFreq> getSubvalues(double percent, int min) {
 			if (subValues == null || subValues.size() == 0) {
@@ -100,12 +113,24 @@ public class NameIndexInspector {
 				if (res.containsKey(s.value)) {
 					res.get(s.value).merge(s);
 				} else {
-					res.put(s.value, s);
+					res.put(s.value, s.copy());
 				}
 			}
 			return res;
 		}
 		
+		public static Map<String, ValueFreq> mergeFlatten(Map<String, ValueFreq> r, Collection<ValueFreq> ms) {
+			for (ValueFreq s : ms) {
+				if (s.subValues != null) {
+					mergeFlatten(r, s.subValues);
+				} else if (!r.containsKey(s.value)) {
+					r.put(s.value, s.copy());
+				} else {
+					r.get(s.value).merge(s);
+				}
+			}
+			return r;
+		}
 
 		public static Map<String, ValueFreq> mergeArray(Map<String, ValueFreq> res, Map<String, ValueFreq> ms) {
 			for (ValueFreq s : ms.values()) {
@@ -113,7 +138,7 @@ public class NameIndexInspector {
 				if (vf != null) {
 					vf.merge(s);
 				} else {
-					res.put(s.value, s);
+					res.put(s.value, s.copy());
 				}
 			}
 			return res;
@@ -125,6 +150,7 @@ public class NameIndexInspector {
 			if (subValues == null && s.subValues != null) {
 				s.subValues = new ArrayList<>();
 			}
+			this.extra += s.extra;
 			if (subValues != null) {
 				subValues = new ArrayList<>(
 						mergeArray(mergeArray(new TreeMap<String, ValueFreq>(), subValues), s.subValues).values());
@@ -243,12 +269,12 @@ public class NameIndexInspector {
 					for(int i = 0; i < a.getSuffixesBitsetCount(); i++) {
 						int suffBit = a.getSuffixesBitset(i);
 						for(int j = 0; j < INT_BITS && suffBit != 0; j++) {
-							if (suffBit % 2 == 1) {
+							if ((suffBit & 1) == 1) {
 								ValueFreq s = suffixes.get(i * INT_BITS + j);
 								s.freq++;
 								setBits++;
 							}
-							suffBit >>= 1;
+							suffBit >>>= 1;
 						}
 					}
 					if (stats != null) {
