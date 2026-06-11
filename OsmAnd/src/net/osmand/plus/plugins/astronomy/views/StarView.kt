@@ -65,6 +65,12 @@ class StarView @JvmOverloads constructor(
 	defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
 
+	companion object {
+		private const val MIN_VIEW_ANGLE = 10.0
+		private const val MAX_VIEW_ANGLE = 150.0
+		private const val MAX_VIEW_ANGLE_2D = 220.0
+	}
+
 	// --- Graphics ---
 	private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
 	private val textPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -368,8 +374,7 @@ class StarView @JvmOverloads constructor(
 	fun getViewAngle() = viewAngle
 
 	private fun updateViewAngle(newAngle: Double, focusX: Float = width / 2f, focusY: Float = height / 2f) {
-		val maxAngle = if (is2DMode) 220.0 else 150.0
-		val finalAngle = max(10.0, min(maxAngle, newAngle))
+		val finalAngle = max(getMinViewAngle(), min(getMaxViewAngle(), newAngle))
 		if (abs(this.viewAngle - finalAngle) > 0.001) {
 			if (width > 0 && height > 0) {
 				if (is2DMode) {
@@ -720,9 +725,9 @@ class StarView @JvmOverloads constructor(
 		}
 	}
 
-	fun getMinZoom() = if (is2DMode) 200.0 else 150.0
+	fun getMinViewAngle() = MIN_VIEW_ANGLE
 
-	fun getMaxZoom() = 150.0
+	fun getMaxViewAngle() = if (is2DMode) MAX_VIEW_ANGLE_2D else MAX_VIEW_ANGLE
 
 	fun zoomIn() {
 		updateViewAngle(viewAngle / 1.5)

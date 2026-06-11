@@ -143,7 +143,7 @@ object RemoteMediaFactory {
 			mediaUri = mediaUri,
 			title = imageObject.optStringOrNull("title").orEmpty(),
 			type = MediaType.PHOTO,
-			origin = MediaOrigin.UNKNOWN,
+			origin = MediaOrigin.OTHER,
 			previewUris = MediaPreviewUris(
 				/*
 				 * Thumbnail is null because an OSM "image" tag can point to an

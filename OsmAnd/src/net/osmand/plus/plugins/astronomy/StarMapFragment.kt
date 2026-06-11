@@ -673,33 +673,33 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	}
 
 	private fun saveStarMapSettings() {
-		val current = astroSettings.getStarMapConfig()
-		val config = current.copy(
-			showAzimuthalGrid = starView.showAzimuthalGrid,
-			showEquatorialGrid = starView.showEquatorialGrid,
-			showEclipticLine = starView.showEclipticLine,
-			showMeridianLine = starView.showMeridianLine,
-			showEquatorLine = starView.showEquatorLine,
-			showGalacticLine = starView.showGalacticLine,
-			showFavorites = starView.showFavorites,
-			showDirections = starView.showDirections,
-			showCelestialPaths = starView.showCelestialPaths,
-			showRedFilter = starView.showRedFilter,
-			showSun = starView.showSun,
-			showMoon = starView.showMoon,
-			showPlanets = starView.showPlanets,
-			showConstellations = starView.showConstellations,
-			showStars = starView.showStars,
-			showGalaxies = starView.showGalaxies,
-			showBlackHoles = starView.showBlackHoles,
-			showNebulae = starView.showNebulae,
-			showOpenClusters = starView.showOpenClusters,
-			showGlobularClusters = starView.showGlobularClusters,
-			showGalaxyClusters = starView.showGalaxyClusters,
-			is2DMode = starView.is2DMode,
-			magnitudeFilter = starView.magnitudeFilter?.toDouble()
-		)
-		astroSettings.setStarMapConfig(config)
+		astroSettings.updateStarMapConfig { current ->
+			current.copy(
+				showAzimuthalGrid = starView.showAzimuthalGrid,
+				showEquatorialGrid = starView.showEquatorialGrid,
+				showEclipticLine = starView.showEclipticLine,
+				showMeridianLine = starView.showMeridianLine,
+				showEquatorLine = starView.showEquatorLine,
+				showGalacticLine = starView.showGalacticLine,
+				showFavorites = starView.showFavorites,
+				showDirections = starView.showDirections,
+				showCelestialPaths = starView.showCelestialPaths,
+				showRedFilter = starView.showRedFilter,
+				showSun = starView.showSun,
+				showMoon = starView.showMoon,
+				showPlanets = starView.showPlanets,
+				showConstellations = starView.showConstellations,
+				showStars = starView.showStars,
+				showGalaxies = starView.showGalaxies,
+				showBlackHoles = starView.showBlackHoles,
+				showNebulae = starView.showNebulae,
+				showOpenClusters = starView.showOpenClusters,
+				showGlobularClusters = starView.showGlobularClusters,
+				showGalaxyClusters = starView.showGalaxyClusters,
+				is2DMode = starView.is2DMode,
+				magnitudeFilter = starView.magnitudeFilter?.toDouble()
+			)
+		}
 	}
 
 	fun setStarMapSettings(newConfig: StarMapConfig) {
@@ -729,7 +729,13 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 		starView.updateVisibility()
 
-		astroSettings.setStarMapConfig(newConfig)
+		astroSettings.updateStarMapConfig { current ->
+			newConfig.copy(
+				favorites = current.favorites,
+				directions = current.directions,
+				celestialPaths = current.celestialPaths
+			)
+		}
 	}
 
 	private fun updateWidgetsVisibility(activity: MapActivity, visibility: Int) {

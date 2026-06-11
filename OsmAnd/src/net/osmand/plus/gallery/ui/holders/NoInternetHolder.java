@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.gallery.ui.GalleryListener;
+import net.osmand.plus.gallery.contract.IGalleryListener;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
@@ -30,7 +30,7 @@ public class NoInternetHolder extends RecyclerView.ViewHolder {
 		this.progressBar = itemView.findViewById(R.id.progress);
 	}
 
-	public void bindView(boolean nightMode, @NonNull GalleryListener listener, boolean loadingImages) {
+	public void bindView(boolean nightMode, @NonNull IGalleryListener listener, boolean loadingImages) {
 		Drawable icon = app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_wifi_off, ColorUtilities.getDefaultIconColor(app, nightMode));
 		imageView.setImageDrawable(icon);
 

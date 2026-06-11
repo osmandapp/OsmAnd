@@ -35,7 +35,8 @@ import androidx.viewpager.widget.ViewPager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
-import net.osmand.plus.gallery.controller.GalleryController;
+import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
+import net.osmand.plus.gallery.controller.GalleryPagerController;
 import net.osmand.plus.gallery.model.GalleryItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -49,6 +50,7 @@ import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
 import net.osmand.plus.wikipedia.WikiAlgorithms;
+import net.osmand.shared.media.MediaProvider;
 import net.osmand.shared.media.MediaUriResolver;
 import net.osmand.shared.media.domain.MediaItem;
 import net.osmand.util.Algorithms;
@@ -56,14 +58,13 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
+public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements IDialog {
 
 	public static final String TAG = GalleryPhotoPagerFragment.class.getSimpleName();
 	public static final int REQUEST_EXTERNAL_STORAGE_PERMISSION = 2000;
 	public static final int PRELOAD_THUMBNAILS_COUNT = 3;
-	public static final String SELECTED_POSITION_KEY = "selected_position_key";
 
-	private GalleryController controller;
+	private static final String SELECTED_ITEM_ID_KEY = "selected_item_id_key";
 
 	private ImageView sourceView;
 	private TextView descriptionView;
@@ -77,18 +78,36 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 	private boolean uiHidden = false;
 	private int selectedPosition = 0;
 
+	private GalleryPagerController controller;
+	private List<GalleryItem.Media> photoItems = new ArrayList<>();
+	private MediaProvider mediaProvider;
+
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		controller = (GalleryController) app.getDialogManager().findController(GalleryController.PROCESS_ID);
 
-		Bundle args = getArguments();
-		if (savedInstanceState != null && savedInstanceState.containsKey(SELECTED_POSITION_KEY)) {
-			selectedPosition = savedInstanceState.getInt(SELECTED_POSITION_KEY);
-		} else if (args != null && args.containsKey(SELECTED_POSITION_KEY)) {
-			selectedPosition = args.getInt(SELECTED_POSITION_KEY);
+		mediaProvider = new MediaProvider(app);
+
+		controller = GalleryPagerController.getExistingInstance(app);
+		if (controller == null) {
+			dismiss();
+			return;
 		}
-		if (selectedPosition >= controller.getOnlinePhotoItems().size()) {
+		controller.registerDialog(this);
+
+		photoItems = controller.getPhotoItems();
+
+		String selectedItemId = null;
+		if (savedInstanceState != null) {
+			selectedItemId = savedInstanceState.getString(SELECTED_ITEM_ID_KEY);
+		} else if (getArguments() != null) {
+			selectedItemId = getArguments().getString(SELECTED_ITEM_ID_KEY);
+		}
+		selectedPosition = selectedItemId != null
+				? controller.getIndexById(selectedItemId)
+				: 0;
+
+		if (selectedPosition >= photoItems.size()) {
 			dismiss();
 		}
 	}
@@ -109,14 +128,30 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 		descriptionShadow = view.findViewById(R.id.description_shadow);
 		descriptionContainer = view.findViewById(R.id.description_container);
 
-		List<GalleryItem.Media> onlinePhotoItems = controller.getOnlinePhotoItems();
-		if (selectedPosition < onlinePhotoItems.size()) {
+		if (selectedPosition < photoItems.size()) {
 			setupViewPager(view);
 			preloadThumbNails();
 			updateImageDescriptionRow(getSelectedMediaItem());
 		}
 
 		return view;
+	}
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		GalleryItem.Media selected = getSelectedGalleryItem();
+		if (selected != null) {
+			outState.putString(SELECTED_ITEM_ID_KEY, selected.getMediaItem().getId());
+		}
+		super.onSaveInstanceState(outState);
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		if (controller != null) {
+			controller.finishProcessIfNeeded(getActivity());
+		}
 	}
 
 	@Override
@@ -133,48 +168,28 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 	}
 
 	private void preloadThumbNails(boolean next) {
-		List<GalleryItem.Media> photoItems = controller.getOnlinePhotoItems();
 		if (photoItems.size() <= 1) {
 			return;
 		}
-
 		if (next) {
-			int startPreloadThumbnailIndex = selectedPosition + 1;
-			if (startPreloadThumbnailIndex >= photoItems.size()) {
-				return;
-			}
-			int lastPreloadThumbnailIndex = startPreloadThumbnailIndex + PRELOAD_THUMBNAILS_COUNT;
-			if (lastPreloadThumbnailIndex >= photoItems.size()) {
-				lastPreloadThumbnailIndex = photoItems.size() - 1;
-			}
-			for (int i = selectedPosition; i < lastPreloadThumbnailIndex; i++) {
-				MediaItem mediaItem = photoItems.get(i).getMediaItem();
-				downloadThumbnail(mediaItem);
+			int start = selectedPosition + 1;
+			if (start >= photoItems.size()) return;
+			int end = Math.min(start + PRELOAD_THUMBNAILS_COUNT, photoItems.size());
+			for (int i = start; i < end; i++) {
+				downloadThumbnail(photoItems.get(i).getMediaItem());
 			}
 		} else {
-			int startPreloadThumbnailIndex = selectedPosition - 1;
-			if (startPreloadThumbnailIndex < 0) {
-				return;
-			}
-			int lastPreloadThumbnailIndex = startPreloadThumbnailIndex - PRELOAD_THUMBNAILS_COUNT;
-			if (lastPreloadThumbnailIndex < 0) {
-				lastPreloadThumbnailIndex = 0;
-			}
-			for (int i = selectedPosition; i > lastPreloadThumbnailIndex; i--) {
-				MediaItem mediaItem = photoItems.get(i).getMediaItem();
-				downloadThumbnail(mediaItem);
+			int start = selectedPosition - 1;
+			if (start < 0) return;
+			int end = Math.max(start - PRELOAD_THUMBNAILS_COUNT, -1);
+			for (int i = start; i > end; i--) {
+				downloadThumbnail(photoItems.get(i).getMediaItem());
 			}
 		}
 	}
 
 	private void downloadThumbnail(@NonNull MediaItem mediaItem) {
-		controller.getMediaProvider().loadThumbnail(mediaItem);
-	}
-
-	@Override
-	public void onSaveInstanceState(@NonNull Bundle outState) {
-		outState.putInt(SELECTED_POSITION_KEY, selectedPosition);
-		super.onSaveInstanceState(outState);
+		mediaProvider.loadThumbnail(mediaItem);
 	}
 
 	private void updateImageDescriptionRow(@Nullable MediaItem mediaItem) {
@@ -185,7 +200,6 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 			dateView.setVisibility(View.VISIBLE);
 			authorView.setVisibility(View.VISIBLE);
 			licenseView.setVisibility(View.VISIBLE);
-
 			setDescription(details.getDescription(app.getLanguage()));
 			setMetaData(details.getAuthor(), details.getDate(), details.getLicense());
 		} else {
@@ -210,18 +224,15 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 	private void setMetaData(@Nullable String author, @Nullable String date,
 	                         @Nullable String license) {
 		String formattedDate = WikiAlgorithms.formatWikiDate(date);
-
-		String fullDate = getString(R.string.ltr_or_rtl_combine_via_colon,
-				getString(R.string.shared_string_date), formattedDate != null && !formattedDate.equals("Unknown") ? formattedDate : "");
-		dateView.setText(fullDate);
-
-		String fullAuthorString = getString(R.string.ltr_or_rtl_combine_via_colon,
-				getString(R.string.shared_string_author), author != null && !author.equals("Unknown") ? author : "");
-		authorView.setText(fullAuthorString);
-
-		String licenseString = getString(R.string.ltr_or_rtl_combine_via_colon,
-				getString(R.string.shared_string_license), license != null && !license.equals("Unknown") ? license : "");
-		licenseView.setText(licenseString);
+		dateView.setText(getString(R.string.ltr_or_rtl_combine_via_colon,
+				getString(R.string.shared_string_date),
+				formattedDate != null && !formattedDate.equals("Unknown") ? formattedDate : ""));
+		authorView.setText(getString(R.string.ltr_or_rtl_combine_via_colon,
+				getString(R.string.shared_string_author),
+				author != null && !author.equals("Unknown") ? author : ""));
+		licenseView.setText(getString(R.string.ltr_or_rtl_combine_via_colon,
+				getString(R.string.shared_string_license),
+				license != null && !license.equals("Unknown") ? license : ""));
 	}
 
 	private void setupMetadataRow(@NonNull ViewGroup view) {
@@ -254,7 +265,6 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 								toolbar.setVisibility(View.GONE);
 							}
 						});
-
 				descriptionShadow.animate()
 						.alpha(0)
 						.setListener(new AnimatorListenerAdapter() {
@@ -264,7 +274,6 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 								descriptionShadow.setVisibility(View.GONE);
 							}
 						});
-
 				descriptionContainer.animate()
 						.translationY(toolbar.getHeight())
 						.alpha(0)
@@ -278,23 +287,15 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 			} else {
 				toolbar.setVisibility(View.VISIBLE);
 				toolbar.setAlpha(0.0f);
-				toolbar.animate()
-						.translationY(0)
-						.alpha(1.0f)
-						.setListener(null);
+				toolbar.animate().translationY(0).alpha(1.0f).setListener(null);
 
 				descriptionShadow.setVisibility(View.VISIBLE);
 				descriptionShadow.setAlpha(0.0f);
-				descriptionShadow.animate()
-						.alpha(1.0f)
-						.setListener(null);
+				descriptionShadow.animate().alpha(1.0f).setListener(null);
 
 				descriptionContainer.setVisibility(View.VISIBLE);
 				descriptionContainer.setAlpha(0.0f);
-				descriptionContainer.animate()
-						.translationY(0)
-						.alpha(1.0f)
-						.setListener(null);
+				descriptionContainer.animate().translationY(0).alpha(1.0f).setListener(null);
 			}
 		} else {
 			toolbar.setVisibility(uiHidden ? View.GONE : View.VISIBLE);
@@ -311,19 +312,22 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 		toolbar.setLayoutParams(params);
 
 		ImageView backButton = toolbar.findViewById(R.id.back_button);
-		backButton.setImageDrawable(getPaintedIcon(R.drawable.ic_action_close, ColorUtilities.getColor(app, R.color.app_bar_secondary_light)));
+		backButton.setImageDrawable(getPaintedIcon(R.drawable.ic_action_close,
+				ColorUtilities.getColor(app, R.color.app_bar_secondary_light)));
 		backButton.setContentDescription(getString(R.string.shared_string_close));
 		backButton.setOnClickListener(v -> dismiss());
 		setupSelectableBackground(backButton);
 
 		ImageView shareButton = toolbar.findViewById(R.id.share_button);
 		shareButton.setOnClickListener(v -> shareImage());
-		shareButton.setImageDrawable(getPaintedIcon(R.drawable.ic_action_gshare_dark, ColorUtilities.getColor(app, R.color.app_bar_secondary_light)));
+		shareButton.setImageDrawable(getPaintedIcon(R.drawable.ic_action_gshare_dark,
+				ColorUtilities.getColor(app, R.color.app_bar_secondary_light)));
 		setupSelectableBackground(shareButton);
 
 		ImageView optionsButton = toolbar.findViewById(R.id.options_button);
 		optionsButton.setOnClickListener(this::showContextWidgetMenu);
-		optionsButton.setImageDrawable(getPaintedIcon(R.drawable.ic_overflow_menu_white, ColorUtilities.getColor(app, R.color.app_bar_secondary_light)));
+		optionsButton.setImageDrawable(getPaintedIcon(R.drawable.ic_overflow_menu_white,
+				ColorUtilities.getColor(app, R.color.app_bar_secondary_light)));
 		setupSelectableBackground(optionsButton);
 	}
 
@@ -339,25 +343,23 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 		sendIntent.setAction(Intent.ACTION_SEND);
 		sendIntent.setType("text/plain");
 		sendIntent.putExtra(Intent.EXTRA_TEXT, shareUri);
-		Intent chooserIntent = Intent.createChooser(sendIntent, getString(R.string.shared_string_share));
-
-		AndroidUtils.startActivityIfSafe(activity, chooserIntent);
+		AndroidUtils.startActivityIfSafe(activity,
+				Intent.createChooser(sendIntent, getString(R.string.shared_string_share)));
 	}
 
 	public void showContextWidgetMenu(@NonNull View view) {
 		MediaItem mediaItem = getSelectedMediaItem();
-		if (mediaItem == null) {
-			return;
-		}
+		if (mediaItem == null) return;
+
 		List<PopUpMenuItem> items = new ArrayList<>();
 		UiUtilities uiUtilities = app.getUIUtilities();
 		int iconColor = ColorUtilities.getDefaultIconColor(app, nightMode);
+
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitleId(R.string.shared_string_details)
 				.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_info_outlined, iconColor))
-				.setOnClickListener(item -> callActivity(activity -> {
-					GalleryDetailsFragment.showInstance(activity, selectedPosition);
-				}))
+				.setOnClickListener(item -> callActivity(activity ->
+						GalleryDetailsFragment.showInstance(activity, mediaItem.getId())))
 				.create());
 
 		String browserUri = MediaUriResolver.getBrowserUri(mediaItem);
@@ -365,9 +367,8 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 			items.add(new PopUpMenuItem.Builder(app)
 					.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_external_link, iconColor))
 					.setTitleId(R.string.open_in_browser)
-					.setOnClickListener(item -> callActivity(activity -> {
-						AndroidUtils.openUrl(activity, browserUri, nightMode);
-					}))
+					.setOnClickListener(item -> callActivity(activity ->
+							AndroidUtils.openUrl(activity, browserUri, nightMode)))
 					.create());
 		}
 
@@ -402,37 +403,38 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 			if (AndroidUtils.hasPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 				startDownloading(fileName, url);
 			} else {
-				AndroidUtils.hasPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-				ActivityCompat.requestPermissions(activity, new String[] {
-						Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_EXTERNAL_STORAGE_PERMISSION);
+				ActivityCompat.requestPermissions(activity,
+						new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+						REQUEST_EXTERNAL_STORAGE_PERMISSION);
 			}
 		}
 	}
 
 	private void startDownloading(String fileName, String url) {
 		DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url))
-				.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
+				.setAllowedNetworkTypes(
+						DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
 				.setTitle(fileName)
-				.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+				.setNotificationVisibility(
+						DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
 				.setAllowedOverMetered(true)
 				.setAllowedOverRoaming(false)
 				.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
-		DownloadManager downloadManager = (DownloadManager) getMapActivity().getSystemService(Context.DOWNLOAD_SERVICE);
+		DownloadManager downloadManager =
+				(DownloadManager) getMapActivity().getSystemService(Context.DOWNLOAD_SERVICE);
 		downloadManager.enqueue(request);
 	}
 
 	private void setupViewPager(@NonNull View view) {
 		ViewPager pager = view.findViewById(R.id.photo_pager);
-		List<GalleryItem.Media> items = controller.getOnlinePhotoItems();
 		FragmentManager manager = getChildFragmentManager();
 
-		ViewPagerAdapter adapter = new ViewPagerAdapter(manager, items);
+		ViewPagerAdapter adapter = new ViewPagerAdapter(manager, photoItems);
 		pager.setAdapter(adapter);
 		pager.setCurrentItem(selectedPosition);
 		pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 			@Override
-			public void onPageScrolled(int position, float positionOffset,
-					int positionOffsetPixels) {
+			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 			}
 
 			@Override
@@ -445,7 +447,6 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 
 			@Override
 			public void onPageScrollStateChanged(int state) {
-
 			}
 		});
 		pager.setPageTransformer(true, new GalleryDepthTransformer());
@@ -453,14 +454,16 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 
 	@Nullable
 	private MediaItem getSelectedMediaItem() {
-		GalleryItem.Media selectedGalleryItem = getSelectedGalleryItem();
-		return selectedGalleryItem != null ? selectedGalleryItem.getMediaItem() : null;
+		GalleryItem.Media item = getSelectedGalleryItem();
+		return item != null ? item.getMediaItem() : null;
 	}
 
 	@Nullable
 	private GalleryItem.Media getSelectedGalleryItem() {
-		List<GalleryItem.Media> items = controller.getOnlinePhotoItems();
-		return selectedPosition >= 0 && selectedPosition < items.size() ? items.get(selectedPosition) : null;
+		if (selectedPosition >= 0 && selectedPosition < photoItems.size()) {
+			return photoItems.get(selectedPosition);
+		}
+		return null;
 	}
 
 	private void setupSelectableBackground(@NonNull View view) {
@@ -501,11 +504,12 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment {
 		callMapActivity(MapActivity::enableDrawer);
 	}
 
-	public static void showInstance(@NonNull FragmentActivity activity, int selectedPosition) {
+	public static void showInstance(@NonNull FragmentActivity activity,
+	                                @NonNull String selectedItemId) {
 		FragmentManager manager = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			Bundle bundle = new Bundle();
-			bundle.putInt(SELECTED_POSITION_KEY, selectedPosition);
+			bundle.putString(SELECTED_ITEM_ID_KEY, selectedItemId);
 			GalleryPhotoPagerFragment fragment = new GalleryPhotoPagerFragment();
 			fragment.setArguments(bundle);
 			manager.beginTransaction()

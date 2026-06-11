@@ -39,6 +39,8 @@ import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.Sele
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.render.OsmandDashPathEffect;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
@@ -319,7 +321,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else {
 			visibleGPXFiles = new ArrayList<>(selectedGpxHelper.getSelectedGPXFiles());
 		}
-
 		boolean tmpVisibleTrackChanged = updateTmpVisibleTrack(visibleGPXFiles);
 
 		pointsCache.clear();
@@ -512,7 +513,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private void acquireTrackWidth(@NonNull String widthKey, @NonNull RenderingRulesStorage rrs,
-			@NonNull RenderingRuleSearchRequest req, @NonNull RenderingContext rc) {
+	                               @NonNull RenderingRuleSearchRequest req, @NonNull RenderingContext rc) {
 		if (!Algorithms.isEmpty(widthKey) && Algorithms.isInt(widthKey)) {
 			try {
 				int widthDp = Math.min(Integer.parseInt(widthKey), MAX_SUPPORTED_TRACK_WIDTH_DP);
@@ -1253,7 +1254,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private void drawSelectedFilesSegments(Canvas canvas, RotatedTileBox tileBox,
-			List<SelectedGpxFile> selectedGPXFiles, DrawSettings settings) {
+	                                       List<SelectedGpxFile> selectedGPXFiles, DrawSettings settings) {
 		SelectedGpxFile currentTrack = null;
 		int baseOrder = getBaseOrder();
 		for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
@@ -1364,6 +1365,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				if (!oldSegments.isEmpty() && oldSegments.get(0).getRenderer() instanceof CurrentTrack track) {
 					GpxGeometryWay gpxGeometryWay = track.getGeometryWay();
 					if (gpxGeometryWay != null) {
+						log.debug("remove oldSegments");
 						geometryWay.vectorLinesCollection = gpxGeometryWay.vectorLinesCollection;
 						geometryWay.vectorLineArrowsProvider = gpxGeometryWay.vectorLineArrowsProvider;
 						geometryWay.updateCustomWidth(gpxGeometryWay.getCustomWidth());

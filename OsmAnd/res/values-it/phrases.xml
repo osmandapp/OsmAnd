@@ -689,7 +689,7 @@
     <string name="poi_club">Club</string>
     <string name="poi_pasta">Pasta</string>
     <string name="poi_fuel_type">Tipo di carburante</string>
-    <string name="poi_fuel_avia_type">Tipo carburante (aeromobili)</string>
+    <string name="poi_fuel_avia_type">Tipo di carburante (aviazione)</string>
     <string name="poi_payment_type">Tipo di pagamento</string>
     <string name="poi_payment_fuel_type">Carte carburante</string>
     <string name="poi_additional_type">Ulteriori</string>
@@ -705,13 +705,13 @@
     <string name="poi_highway_crossing_type">Tipo</string>
     <string name="poi_tactile_paving">Pavimentazione tattile</string>
     <string name="poi_service_general">Servizio</string>
-    <string name="poi_brushless">Senza spazzola (acqua ad alta pressione)</string>
-    <string name="poi_self_service">Self-service</string>
+    <string name="poi_brushless">Senza spazzole</string>
+    <string name="poi_self_service">Self service</string>
     <string name="poi_automated">Automatizzato</string>
     <string name="poi_parking_type">Tipo</string>
     <string name="poi_covered">Coperto</string>
     <string name="poi_subway_station_filter">Stazione della metropolitana</string>
-    <string name="poi_ferry_terminal_cargo">Carico</string>
+    <string name="poi_ferry_terminal_cargo">Merci</string>
     <string name="poi_bicycle_parking_type">Tipo</string>
     <string name="poi_aerialway_bicycle">Trasporto di biciclette</string>
     <string name="poi_aerialway_heating">Riscaldamento</string>
@@ -1186,7 +1186,7 @@
     <string name="poi_archery">Tiro con l\'arco</string>
     <string name="poi_club_ethnic">Club etnico</string>
     <string name="poi_dyke">Frangiflutti</string>
-    <string name="poi_vending_type">Tipo di vendita</string>
+    <string name="poi_vending_type">Tipo di distributore automatico</string>
     <string name="poi_scout_camp">Campo scout</string>
     <string name="poi_drive_through">Drive through</string>
     <string name="poi_charity">Negozio di beneficenza</string>
@@ -4820,4 +4820,11 @@
     <string name="poi_ship_private">Accesso navi: privato</string>
     <string name="poi_boat_no">Accesso barche: no</string>
     <string name="poi_self_checkout_only">Solo</string>
+    <string name="poi_healthcare_speciality_weight_loss">Perdita di peso</string>
+    <string name="poi_healthcare_speciality_intensive">Intenso</string>
+    <string name="poi_healthcare_speciality_venereology">Venereologia</string>
+    <string name="poi_dressing_room">Camerino</string>
+    <string name="poi_sample_collection_filter">Raccolta di campioni</string>
+    <string name="poi_memorial_type">Tipo commemorativo</string>
+    <string name="poi_rapids_filter">Classificazione delle rapide</string>
 </resources>

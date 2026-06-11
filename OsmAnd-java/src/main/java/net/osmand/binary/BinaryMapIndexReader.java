@@ -1446,6 +1446,22 @@ public class BinaryMapIndexReader {
 		}
 		return req.getSearchResults();
 	}
+	
+	public NameIndexInspector readFullNameIndex(PoiRegion p) throws IOException {
+		codedIS.seek(p.filePointer);
+		NameIndexInspector res = poiAdapter.readNameIndex();
+		long old = codedIS.pushLimitLong((long) p.length);
+		codedIS.popLimit(old);
+		return res;
+	}
+	
+	public NameIndexInspector readFullNameIndex(AddressRegion p) throws IOException {
+		codedIS.seek(p.filePointer);
+		NameIndexInspector res = addressAdapter.readNameIndex();
+		long old = codedIS.pushLimitLong((long) p.length);
+		codedIS.popLimit(old);
+		return res;
+	}
 
 	public Map<PoiCategory, List<String>> searchPoiCategoriesByName(String query, Map<PoiCategory, List<String>> map) throws IOException {
 		if (query == null || query.length() == 0) {
@@ -2639,6 +2655,7 @@ req.setSearchStat(stat);
 		}
 
 	}
+	
 
 	List<List<QueryToken.Prefix>> readIndexedStringTablePrefixes(Collator instance, List<String> queries)
 			throws IOException {
@@ -2657,6 +2674,37 @@ req.setSearchStat(stat);
 			result.add(tokenPrefixes);
 		}
 		return result;
+	}
+	
+	void readNameIndexInspector(String prefix, NameIndexInspector inspector) throws InvalidProtocolBufferException, IOException {
+		String key = null;
+		while (true) {
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				return;
+			case OsmandOdb.IndexedStringTable.KEY_FIELD_NUMBER :
+				key = codedIS.readString();
+				if (prefix != null) {
+					key = prefix + key;
+				}
+				break;
+			case OsmandOdb.IndexedStringTable.VAL_FIELD_NUMBER :
+				int val = (int) readInt(); // FIXME for 64 bit support
+				inspector.putKey(key, val, prefix);
+				break;
+			case OsmandOdb.IndexedStringTable.SUBTABLES_FIELD_NUMBER :
+				long len = codedIS.readRawVarint32();
+				long oldLim = codedIS.pushLimitLong((long) len);
+				readNameIndexInspector(key, inspector);
+				codedIS.popLimit(oldLim);
+				break;
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
 	}
 
 	private void readIndexedStringTablePrefixes(Collator instance, List<String> queries, String prefix,

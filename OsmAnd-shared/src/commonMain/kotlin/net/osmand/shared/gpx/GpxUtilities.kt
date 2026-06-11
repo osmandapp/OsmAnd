@@ -609,6 +609,14 @@ object GpxUtilities {
 		serializer.endTag(null, "metadata")
 	}
 
+	private fun writeLinks(serializer: XmlSerializer, links: List<Link>?) {
+		if (links != null) {
+			for (i in 0 until links.size) {
+				writeNotNullLink(serializer, links[i])
+			}
+		}
+	}
+
 	private fun writeNotNullLink(serializer: XmlSerializer, link: Link?) {
 		if (link != null) {
 			serializer.startTag(null, "link")
@@ -616,6 +624,7 @@ object GpxUtilities {
 				serializer.attribute(null, "href", link.href!!)
 			}
 			writeNotNullText(serializer, "text", link.text)
+			writeNotNullText(serializer, "type", link.type)
 			serializer.endTag(null, "link")
 		}
 	}
@@ -770,7 +779,7 @@ object GpxUtilities {
 		writeNotNullText(serializer, "name", p.name)
 		writeNotNullText(serializer, "cmt", p.comment)
 		writeNotNullText(serializer, "desc", p.desc)
-		writeNotNullLink(serializer, p.link)
+		writeLinks(serializer, p.links)
 		writeNotNullText(serializer, "type", p.category)
 		if (!p.hdop.isNaN()) {
 			writeNotNullText(serializer, "hdop", formatDecimal(p.hdop.toDouble()))
@@ -1430,6 +1439,7 @@ object GpxUtilities {
 							is Link -> {
 								when (tag) {
 									"text" -> parse.text = readText(parser, "text")
+									"type" -> parse.type = readText(parser, "type")
 								}
 							}
 
@@ -1514,7 +1524,7 @@ object GpxUtilities {
 									}
 									"link" -> {
 										val link = Link(parser.getAttributeValue("", "href"))
-										parse.link = link
+										parse.addLink(link)
 										parserState.add(link)
 									}
 									"category" -> parse.category = readText(parser, "category")

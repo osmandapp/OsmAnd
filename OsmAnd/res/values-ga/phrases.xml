@@ -5171,4 +5171,6 @@
     <string name="poi_rapids_grade_5">5 (saineolaí)</string>
     <string name="poi_rapids_grade_6">6 (foircneach)</string>
     <string name="poi_rapids_grade_x">X (ní féidir é a rith)</string>
+    <string name="poi_water_type_filter">Cineál uisce</string>
+    <string name="poi_water_lake">Loch</string>
 </resources>

@@ -42,6 +42,7 @@ import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.exploreplaces.ExplorePlacesOnlineProvider;
 import net.osmand.plus.feedback.AnalyticsHelper;
 import net.osmand.plus.feedback.FeedbackHelper;
+import net.osmand.plus.gallery.GalleryHelper;
 import net.osmand.plus.help.HelpArticlesHelper;
 import net.osmand.plus.helpers.*;
 import net.osmand.plus.importfiles.ImportHelper;
@@ -52,7 +53,6 @@ import net.osmand.plus.keyevent.KeyEventHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
-import net.osmand.plus.myplaces.favorites.dialogs.FavoriteSortModesHelper;
 import net.osmand.plus.notifications.NotificationHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -384,6 +384,7 @@ public class AppInitializer implements IProgress {
 		app.helpArticlesHelper = startupInit(new HelpArticlesHelper(app), HelpArticlesHelper.class);
 		app.clickableWayHelper = startupInit(new ClickableWayHelper(app), ClickableWayHelper.class);
 		app.autoBackupHelper = startupInit(new AutoBackupHelper(app), AutoBackupHelper.class);
+		app.galleryHelper = startupInit(new GalleryHelper(app), GalleryHelper.class);
 		initOpeningHoursParser();
 	}
 
@@ -408,7 +409,6 @@ public class AppInitializer implements IProgress {
 	private void updateRegionVars(OsmandRegions regions) {
 
 	}
-
 
 	private <T> T startupInit(T object, Class<T> class1) {
 		long t = System.currentTimeMillis();
@@ -585,14 +585,22 @@ public class AppInitializer implements IProgress {
 					continue;
 				}
 				int updateFrequencyOrd = preferenceUpdateFrequency(fileName, settings).get();
-				UpdateFrequency updateFrequency = UpdateFrequency.values()[updateFrequencyOrd];
+				UpdateFrequency[] updateFrequencies = UpdateFrequency.values();
+				if (updateFrequencyOrd < 0 || updateFrequencyOrd >= updateFrequencies.length) {
+					continue;
+				}
+				UpdateFrequency updateFrequency = updateFrequencies[updateFrequencyOrd];
 				long lastCheck = preferenceLastSuccessfulUpdateCheck(fileName, settings).get();
 
 				if (System.currentTimeMillis() - lastCheck > updateFrequency.intervalMillis * 2) {
 					runLiveUpdate(app, fileName, false, null);
 					PendingIntent alarmIntent = getPendingIntent(app, fileName);
 					int timeOfDayOrd = preferenceTimeOfDayToUpdate(fileName, settings).get();
-					TimeOfDay timeOfDayToUpdate = TimeOfDay.values()[timeOfDayOrd];
+					TimeOfDay[] timeOfDayValues = TimeOfDay.values();
+					if (timeOfDayOrd < 0 || timeOfDayOrd >= timeOfDayValues.length) {
+						continue;
+					}
+					TimeOfDay timeOfDayToUpdate = timeOfDayValues[timeOfDayOrd];
 					setAlarmForPendingIntent(alarmIntent, manager, updateFrequency, timeOfDayToUpdate);
 				}
 			}

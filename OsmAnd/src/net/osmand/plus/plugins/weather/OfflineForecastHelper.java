@@ -304,8 +304,8 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 		});
 	}
 
-	private int calculateApproxUpdatesSize(@NonNull List<Long> tileIds) {
-		return tileIds.size() * FORECAST_DATES_COUNT * TILE_SIZE;
+	private long calculateApproxUpdatesSize(@NonNull List<Long> tileIds) {
+		return (long) tileIds.size() * FORECAST_DATES_COUNT * TILE_SIZE;
 	}
 
 	public void calculateTotalCacheSizeAsync(boolean forceCalculation) {
@@ -371,6 +371,10 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 	}
 
 	private void clearOnlineCache() {
+		if (weatherResourcesManager == null) {
+			LOG.error("[Clear] [All online] Can't clear online cache. WeatherResourcesManager isn't available.");
+			return;
+		}
 		clearOnlineCacheInProgress = true;
 		totalCacheSize.reset(false);
 
@@ -394,6 +398,10 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 	}
 
 	private void clearOfflineCache(@Nullable List<String> regionIds) {
+		if (weatherResourcesManager == null) {
+			LOG.error("[Clear] [All offline] Can't clear offline cache. WeatherResourcesManager isn't available.");
+			return;
+		}
 		if (Algorithms.isEmpty(regionIds)) {
 			regionIds = getTempForecastsWithDownloadStates(IN_PROGRESS, FINISHED);
 		}
@@ -482,7 +490,11 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 		TileIdList qTileIds = NativeUtilities.convertToQListTileIds(tileIds);
 		ZoomLevel zoom = getGeoTileZoom();
 		if (!qTileIds.isEmpty()) {
-			weatherResourcesManager.clearDbCache(qTileIds, new TileIdList(), zoom);
+			if (weatherResourcesManager == null) {
+				LOG.error("[Clear] Can't remove local forecast tiles. WeatherResourcesManager isn't available.");
+			} else {
+				weatherResourcesManager.clearDbCache(qTileIds, new TileIdList(), zoom);
+			}
 		}
 		if (notifyUserOnFinish) {
 			for (String regionId : regionIds) {
@@ -656,7 +668,10 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 
 	public int getProgressDestination(@NonNull String regionId) {
 		List<Long> tileIds = getTileIds(regionId);
-		return tileIds != null ? tileIds.size() * FORECAST_DATES_COUNT : -1;
+		if (tileIds == null || tileIds.isEmpty()) {
+			return 0;
+		}
+		return tileIds.size() * FORECAST_DATES_COUNT;
 	}
 
 	public void onDownloadStarted(@NonNull WorldRegion region, @Nullable IProgress progress) {
@@ -677,6 +692,9 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 			return;
 		}
 		int destinationTilesCount = getProgressDestination(regionId);
+		if (destinationTilesCount <= 0) {
+			return;
+		}
 		int downloadedTilesCount = getOfflineForecastProgressInfo(regionId);
 		setOfflineForecastProgressInfo(regionId, ++downloadedTilesCount);
 

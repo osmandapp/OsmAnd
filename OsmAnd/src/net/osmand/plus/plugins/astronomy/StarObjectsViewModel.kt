@@ -53,8 +53,6 @@ class StarObjectsViewModel(
 
 	fun loadData() {
 		viewModelScope.launch(Dispatchers.Default) {
-			val objects = dataProvider.getSkyObjects(app).toMutableList()
-			val constellations = dataProvider.getConstellations(app).toMutableList()
 			val starMapConfig = settings.getStarMapConfig()
 			val favorites = starMapConfig.favorites
 			val directions = starMapConfig.directions
@@ -64,14 +62,48 @@ class StarObjectsViewModel(
 			val celestialPathsMap = celestialPaths.associateBy { it.id }
 			val indexMap = favorites.withIndex().associate { it.value.id to it.index }
 
-			fun applyConfig(obj: SkyObject) {
-				obj.isFavorite = favoritesMap.contains(obj.id)
-				obj.showDirection = directionsMap.contains(obj.id)
-				obj.colorIndex = directionsMap[obj.id]?.colorIndex ?: 0
-				obj.showCelestialPath = celestialPathsMap.contains(obj.id)
+			fun SkyObject.withUserConfig(): SkyObject {
+				return SkyObject(
+					id = id,
+					hip = hip,
+					catalogs = catalogs,
+					wid = wid,
+					centerWId = centerWId,
+					type = type,
+					body = body,
+					name = name,
+					ra = ra,
+					dec = dec,
+					magnitude = magnitude,
+					color = color,
+					radius = radius,
+					distance = distance,
+					mass = mass,
+					localizedName = localizedName,
+					azimuth = azimuth,
+					altitude = altitude,
+					distAu = distAu,
+					isFavorite = favoritesMap.containsKey(id),
+					showDirection = directionsMap.containsKey(id),
+					showCelestialPath = celestialPathsMap.containsKey(id),
+					colorIndex = directionsMap[id]?.colorIndex ?: 0,
+					startAzimuth = startAzimuth,
+					startAltitude = startAltitude,
+					targetAzimuth = targetAzimuth,
+					targetAltitude = targetAltitude,
+					lastUpdateTime = lastUpdateTime
+				)
 			}
-			objects.forEach(::applyConfig)
-			constellations.forEach(::applyConfig)
+
+			val objects = dataProvider.getSkyObjects(app).map { it.withUserConfig() }.toMutableList()
+			val constellations = dataProvider.getConstellations(app).map { constellation ->
+				constellation.copy().apply {
+					isFavorite = favoritesMap.containsKey(id)
+					showDirection = directionsMap.containsKey(id)
+					showCelestialPath = celestialPathsMap.containsKey(id)
+					colorIndex = directionsMap[id]?.colorIndex ?: 0
+				}
+			}.toMutableList()
 			objects.sortBy { indexMap[it.id] ?: Int.MAX_VALUE }
 			constellations.sortBy { indexMap[it.id] ?: Int.MAX_VALUE }
 

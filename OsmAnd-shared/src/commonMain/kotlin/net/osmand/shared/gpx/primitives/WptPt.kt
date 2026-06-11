@@ -7,7 +7,7 @@ import net.osmand.shared.gpx.PointAttributes
 import net.osmand.shared.routing.RouteColorize
 import net.osmand.shared.util.KAlgorithms
 
-class WptPt : GpxExtensions {
+class WptPt : GpxExtensions, Linkable {
 
 	var lat: Double = 0.0
 	var lon: Double = 0.0
@@ -49,8 +49,18 @@ class WptPt : GpxExtensions {
 		set(value) = setMetadataValue(value) { comment = it }
 
 	var link: Link?
-		get() = metadata?.link
-		set(value) = setMetadataValue(value) { link = it }
+		get() = metadata?.links?.firstOrNull()
+		set(value) {
+			when {
+				value == null -> metadata?.links?.removeFirstOrNull()
+				metadata?.links.isNullOrEmpty() -> addLink(value)
+				else -> metadata?.links?.set(0, value)
+			}
+		}
+
+	override var links: List<Link>?
+		get() = metadata?.links
+		set(value) = setMetadataValue(if (value.isNullOrEmpty()) null else ArrayList(value)) { links = it }
 
 	private fun ensureMetadata() = metadata ?: WaypointMetadata().also { metadata = it }
 
@@ -66,7 +76,7 @@ class WptPt : GpxExtensions {
 		var desc: String? = null
 		var category: String? = null
 		var comment: String? = null
-		var link: Link? = null
+		var links: MutableList<Link>? = null
 	}
 
 	constructor()
@@ -89,8 +99,28 @@ class WptPt : GpxExtensions {
 		slopeColor = wptPt.slopeColor
 		colourARGB = wptPt.colourARGB
 		distance = wptPt.distance
-		link = wptPt.link?.let { Link(it) }
+		copyLinks(wptPt.metadata?.links)
 		copyExtensions(wptPt)
+	}
+
+	private fun copyLinks(sourceLinks: List<Link>?) {
+		if (!sourceLinks.isNullOrEmpty()) {
+			val links = ArrayList<Link>(sourceLinks.size)
+			for (i in 0 until sourceLinks.size) {
+				links.add(Link(sourceLinks[i]))
+			}
+			ensureMetadata().links = links
+		}
+	}
+
+	override fun addLink(link: Link) {
+		val data = ensureMetadata()
+		val links = data.links ?: ArrayList<Link>().also { data.links = it }
+		links.add(link)
+	}
+
+	override fun removeLink(link: Link) {
+		metadata?.links?.remove(link)
 	}
 
 	fun getColor(): Int {
@@ -156,6 +186,8 @@ class WptPt : GpxExtensions {
 		setIconName(icon)
 		setBackgroundType(background)
 	}
+
+	fun getKey() = "${name.orEmpty()}__${category.orEmpty()}"
 
 	fun getIconName(): String? {
 		return getExtensionsToRead()[GpxUtilities.ICON_NAME_EXTENSION]

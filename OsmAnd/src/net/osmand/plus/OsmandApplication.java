@@ -64,6 +64,7 @@ import net.osmand.plus.feedback.AnalyticsHelper;
 import net.osmand.plus.feedback.FeedbackHelper;
 import net.osmand.plus.feedback.RateUsHelper;
 import net.osmand.plus.feedback.RateUsState;
+import net.osmand.plus.gallery.GalleryHelper;
 import net.osmand.plus.help.HelpArticlesHelper;
 import net.osmand.plus.helpers.*;
 import net.osmand.plus.importfiles.ImportHelper;
@@ -224,6 +225,7 @@ public class OsmandApplication extends MultiDexApplication {
 	ExplorePlacesOnlineProvider explorePlacesProvider;
 	HelpArticlesHelper helpArticlesHelper;
 	ClickableWayHelper clickableWayHelper;
+	GalleryHelper galleryHelper;
 
 	private final Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
@@ -297,7 +299,7 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 
 		SearchUICore.setDebugMode(PluginsHelper.isDevelopment());
-		BackupHelper.DEBUG = true;//PluginsHelper.isDevelopment();
+		BackupHelper.DEBUG = PluginsHelper.isDevelopment();
 	}
 
 	public boolean isPlusVersionInApp() {
@@ -559,6 +561,7 @@ public class OsmandApplication extends MultiDexApplication {
 		if (preferredLocale != null && !Objects.equals(newConfig.locale.getLanguage(), preferredLocale.getLanguage())) {
 			super.onConfigurationChanged(newConfig);
 			Locale.setDefault(preferredLocale);
+			localeHelper.checkPreferredLocale();
 		} else {
 			super.onConfigurationChanged(newConfig);
 		}
@@ -723,6 +726,11 @@ public class OsmandApplication extends MultiDexApplication {
 	@NonNull
 	public HelpArticlesHelper getHelpArticlesHelper() {
 		return helpArticlesHelper;
+	}
+
+	@NonNull
+	public GalleryHelper getGalleryHelper() {
+		return galleryHelper;
 	}
 
 	public CommandPlayer getPlayer() {
@@ -1111,15 +1119,17 @@ public class OsmandApplication extends MultiDexApplication {
 		intent.putExtra(NavigationService.USAGE_INTENT, usageIntent);
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 			runInUIThread(() -> {
+				if (!OsmAndLocationProvider.isLocationPermissionAvailable(this)) {
+					LOG.info(">>>> Failed APP startForegroundService = " + usageIntent + " {no location permission}");
+					return;
+				}
 				try {
-					if (isAppInForeground() && OsmAndLocationProvider.isLocationPermissionAvailable(this)) {
-						LOG.info(">>>> APP startForegroundService = " + usageIntent);
-						context.startForegroundService(intent);
-					} else {
-						LOG.info(">>>> Failed APP startForegroundService = " + usageIntent + "{foreground " + isAppInForeground() + ", permissions " + OsmAndLocationProvider.isLocationPermissionAvailable(this));
-					}
-				} catch (IllegalStateException e) {
-					LOG.error("Failed to start foreground service: " + e.getMessage(), e);
+					LOG.info(">>>> APP startForegroundService = " + usageIntent + " {foreground " + isAppInForeground() + "}");
+					context.startForegroundService(intent);
+				} catch (Exception e) {
+					// e.g. ForegroundServiceStartNotAllowedException (Android 12+) when the service
+					// cannot be started from the background; do not fail silently in the log only.
+					LOG.error("Failed to start foreground service (usageIntent=" + usageIntent + "): " + e.getMessage(), e);
 				}
 			});
 		} else {

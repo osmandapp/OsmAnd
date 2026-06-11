@@ -54,6 +54,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -382,8 +383,8 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 			List<PoiType> otherAdditionalCategories = poiTypes.getOtherMapCategory().getPoiAdditionalsCategorized();
 
 			if (!excludedPoiAdditionalCategories.contains(OPENING_HOURS)) {
-				String keyNameOpen = getString(R.string.shared_string_is_open).replace(' ', '_').toLowerCase();
-				String keyNameOpen24 = getString(R.string.shared_string_is_open_24_7).replace(' ', '_').toLowerCase();
+				String keyNameOpen = getString(R.string.shared_string_is_open).replace(' ', '_').toLowerCase(Locale.ROOT);
+				String keyNameOpen24 = getString(R.string.shared_string_is_open_24_7).replace(' ', '_').toLowerCase(Locale.ROOT);
 				index = filterByName.indexOf(keyNameOpen24);
 				if (index != -1) {
 					selectedPoiAdditionals.add(keyNameOpen24);
@@ -404,7 +405,7 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 					List<String> filters = new ArrayList<>(Arrays.asList(filterByName.split(" ")));
 					for (Entry<String, List<PoiType>> entry : additionalsMap.entrySet()) {
 						for (PoiType poiType : entry.getValue()) {
-							String keyName = poiType.getKeyName().replace('_', ':').toLowerCase();
+							String keyName = poiType.getKeyName().replace('_', ':').toLowerCase(Locale.ROOT);
 							index = filters.indexOf(keyName);
 							if (index != -1) {
 								selectedPoiAdditionals.add(keyName);
@@ -486,11 +487,11 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 
 		if (!excludedPoiAdditionalCategories.contains(OPENING_HOURS)) {
 			items.add(new PoiFilterListItem(PoiFilterListItemType.DIVIDER, 0, null, -1, false, false, false, null, null));
-			String keyNameOpen = getString(R.string.shared_string_is_open).replace(' ', '_').toLowerCase();
+			String keyNameOpen = getString(R.string.shared_string_is_open).replace(' ', '_').toLowerCase(Locale.ROOT);
 			items.add(new PoiFilterListItem(PoiFilterListItemType.SWITCH_ITEM,
 					R.drawable.ic_action_time, getString(R.string.shared_string_is_open), ++groupId,
 					false, false, selectedPoiAdditionals.contains(keyNameOpen), null, keyNameOpen));
-			String keyNameOpen24 = getString(R.string.shared_string_is_open_24_7).replace(' ', '_').toLowerCase();
+			String keyNameOpen24 = getString(R.string.shared_string_is_open_24_7).replace(' ', '_').toLowerCase(Locale.ROOT);
 			items.add(new PoiFilterListItem(PoiFilterListItemType.SWITCH_ITEM,
 					0, getString(R.string.shared_string_is_open_24_7), groupId, false, false,
 					selectedPoiAdditionals.contains(keyNameOpen24), null, keyNameOpen24));
@@ -533,7 +534,7 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 						}
 					});
 					for (PoiType poiType : categoryPoiAdditionals) {
-						String keyName = poiType.getKeyName().replace('_', ':').toLowerCase();
+						String keyName = poiType.getKeyName().replace('_', ':').toLowerCase(Locale.ROOT);
 						String translation = poiAdditionalsTranslations.get(poiType);
 						items.add(new PoiFilterListItem(PoiFilterListItemType.CHECKBOX_ITEM,
 								0, translation, groupId, false, false, selectedPoiAdditionals.contains(keyName), category, keyName));
@@ -567,7 +568,7 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 				continue;
 			}
 			boolean showAll = showAllCategories.contains(category) || extractAll;
-			String keyName = poiType.getKeyName().replace('_', ':').toLowerCase();
+			String keyName = poiType.getKeyName().replace('_', ':').toLowerCase(Locale.ROOT);
 			if (!poiAdditionalsTranslations.containsKey(poiType)) {
 				poiAdditionalsTranslations.put(poiType, poiType.getTranslation());
 			}
@@ -621,7 +622,7 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 			} else {
 				topFalseOnlyCategories.remove(category);
 			}
-			String keyName = poiType.getKeyName().replace('_', ':').replace(' ', ':').toLowerCase();
+			String keyName = poiType.getKeyName().replace('_', ':').replace(' ', ':').toLowerCase(Locale.ROOT);
 			if (selectedPoiAdditionals.contains(keyName)) {
 				selectedCategories.add(category);
 			}

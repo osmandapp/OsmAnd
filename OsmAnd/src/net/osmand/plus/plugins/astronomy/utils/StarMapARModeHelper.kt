@@ -37,6 +37,7 @@ class StarMapARModeHelper(
 
 	private var hasAccelerometer = false
 	private var hasMagnetometer = false
+	@Volatile
 	private var geomagneticField: GeomagneticField? = null
 
 	// Low pass filter for smoothing
@@ -174,8 +175,9 @@ class StarMapARModeHelper(
 
 			if (azimuthDeg < 0) azimuthDeg += 360
 
-			if (geomagneticField != null) {
-				azimuthDeg += geomagneticField!!.declination
+			val field = geomagneticField
+			if (field != null) {
+				azimuthDeg += field.declination
 			}
 			if (azimuthDeg >= 360) azimuthDeg -= 360
 			if (azimuthDeg < 0) azimuthDeg += 360

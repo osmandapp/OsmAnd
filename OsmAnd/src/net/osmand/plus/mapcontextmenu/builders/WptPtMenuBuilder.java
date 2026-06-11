@@ -16,6 +16,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.gallery.data.GalleryKey;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.mapcontextmenu.BuildRowAttrs;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
@@ -81,6 +82,13 @@ public class WptPtMenuBuilder extends MenuBuilder {
 	protected void buildTopInternal(View view) {
 		super.buildTopInternal(view);
 		buildWaypointsView(view);
+
+		SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedGPXFile(wpt);
+		if (selectedGpxFile != null) {
+			GpxFile gpxFile = selectedGpxFile.getGpxFile();
+			GalleryKey galleryKey = new GalleryKey.Waypoint(gpxFile.getPath(), wpt.getKey());
+			buildAttachedMediaRow(view, galleryKey, wpt);
+		}
 	}
 
 	@Override
@@ -100,7 +108,9 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		ReadPointDescriptionFragment.showInstance(mapActivity, description);
 	}
 
-	protected Map<String, String> getAdditionalImageParams() {
+	@Override
+	@NonNull
+	public Map<String, String> getAdditionalImageParams() {
 		return AmenityExtensionsHelper.getImagesParams(amenityExtensions);
 	}
 

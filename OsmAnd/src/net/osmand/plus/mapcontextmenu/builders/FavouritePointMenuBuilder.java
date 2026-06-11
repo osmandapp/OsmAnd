@@ -21,6 +21,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.gallery.data.GalleryKey;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.mapcontextmenu.BuildRowAttrs;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
@@ -83,18 +84,19 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	protected void buildTopInternal(View view) {
 		super.buildTopInternal(view);
 		buildGroupFavouritesView(view);
+		GalleryKey galleryKey = new GalleryKey.Favorite(point.getKey());
+		buildAttachedMediaRow(view, galleryKey, point);
 	}
 
 	@Override
 	public void buildInternal(View view) {
-		boolean light = isLightContent();
 		buildDateRow(view, app.getString(R.string.created_on), point.getTimestamp());
 		buildCommentRow(view, point.getComment());
 
 		if (!Algorithms.isEmpty(amenityExtensions)) {
 			AdditionalInfoBundle bundle = new AdditionalInfoBundle(app, amenityExtensions);
 			AmenityUIHelper helper = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), bundle);
-			helper.setLight(light);
+			helper.setLight(isLightContent());
 			helper.setLatLon(getLatLon());
 			helper.setCollapseExpandListener(getCollapseExpandListener());
 			helper.buildInternal(view);

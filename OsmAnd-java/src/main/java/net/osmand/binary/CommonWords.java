@@ -29,7 +29,7 @@ public class CommonWords {
 	private static void addFrequent(String string) {
 		String string2 = SearchAlgorithms.replaceGermanSS(string);
 		string2 = UnicodeDiacritics.getInstance().stripDiacritics(string2);
-		if (isCommon(string)) {
+		if (isCommon(string) || frequentlyUsedWordsDictionary.containsKey(string)) {
 			return;
 		}
 		frequentlyUsedWordsDictionary.put(string, frequentlyUsedWordsDictionary.size());
@@ -144,9 +144,11 @@ public class CommonWords {
 			Set<String> names = new HashSet<>();
 			parseRegionNames(osmandRegions.getWorldRegion(), names);
 			for (String name : names) {
-				regionNames.add(name);
+				addFrequent(name);
+//				regionNames.add(name);
 				if (name.contains(".")) {
-					regionNames.add(name.replace(".", ""));
+					addFrequent(name.replace(".", ""));
+//					regionNames.add(name.replace(".", ""));
 				}
 			}
 		}
@@ -178,6 +180,16 @@ public class CommonWords {
 	}
 	
 	static {
+		addManualFrequentWords(); // for now is common
+		// Push higher than roads to avoid problem with "Drive A 21"
+		addCommon(NUMBER_WITH_LESS_THAN_2_LETTERS);
+		addCalculatedCommonWords();
+		addAbbrevations();
+		addRegionNames(); // add regions names and region abbreviations
+		addCalculatedFrequentWords();
+	}
+		
+	private static void addManualFrequentWords() {
 		// manually maintained - list of common abbrevations not enough present in OSM
 		addTopFrequentManually("e");
 		addTopFrequentManually("g.");
@@ -213,16 +225,18 @@ public class CommonWords {
 		addTopFrequentManually("пос.");
 
 		// abbrevations;
-//		addTopFrequentManually("ave"); // common
-//		addTopFrequentManually("dr"); // common
+//		addTopFrequentManually("ave"); // already common
+//		addTopFrequentManually("dr"); // already common
 		addTopFrequentManually("st");
 		addTopFrequentManually("ln"); 
-		addTopFrequentManually("rd");
+//		addTopFrequentManually("rd"); // already common
 		addTopFrequentManually("blvd"); 
 		addTopFrequentManually("hwy"); 
+	}
 
-		// Push higher than roads to avoid problem with "Drive A 21"
-		addCommon(NUMBER_WITH_LESS_THAN_2_LETTERS);
+		
+	private static void addCalculatedCommonWords() {
+		// Issue of order != popularity "west avenue 45" not searchable by "avenue 45"
 		// RANK. Total, Main word presence - Percent (Total)
 		addCommon("street"); // 1. 11954399, 0.001% (76363)
 		addCommon("улица"); // 2. 11052215, 0.000% (50610)
@@ -837,7 +851,6 @@ public class CommonWords {
 		addCommon("septiembre"); // 1962. 12974, 1.588% (97)
 		addCommon("жарка"); // 1963. 12974, 0.000% (48)
 		addCommon("alfonso"); // 1964. 12970, 7.625% (294)
-		addCommon("либкнехта"); // 1978. 12886, 3.430% (13)
 		addCommon("cantemir"); // 1987. 12827, 0.616% (20)
 		addCommon("gonçalves"); // 1994. 12798, 5.290% (263)
 		addCommon("marszałka"); // 2002. 12772, 1.660% (24)
@@ -985,12 +998,9 @@ public class CommonWords {
 		addCommon("mateevici"); // 2562. 10138, 1.144% (10)
 		addCommon("sous"); // 2566. 10135, 0.414% (353)
 
-		//////////////
-
-		addAbbrevations();
-		addRegionNames(); // add regions names and region abbreviations
-
-		///////////////////////////
+	}
+	
+	private static void addCalculatedFrequentWords() {	
 		addFrequent("street"); // 1. 11954399, 0.001% (76363)
 		addFrequent("улица"); // 2. 11052215, 0.000% (50610)
 		addFrequent("road"); // 3. 10841695, 0.006% (125174)

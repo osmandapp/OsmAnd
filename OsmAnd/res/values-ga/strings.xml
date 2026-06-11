@@ -5983,4 +5983,10 @@
     <string name="favorite_folder_duplicate_message">Bain úsáid as ainm fillteáin nach bhfuil ann cheana féin.</string>
     <string name="favorite_folder_name">Ainm fillteáin</string>
     <string name="edit_folder">Cuir fillteán in eagar</string>
+    <string name="auto_copy_media_to_osmand_storage">Cóipeáil meáin go huathoibríoch chuig stóras OsmAnd</string>
+    <string name="choose_from_gallery">Roghnaigh ón nGailearaí</string>
+    <string name="choose_from_files">Roghnaigh ó Chomhaid</string>
+    <string name="shared_string_media">Meáin</string>
+    <string name="no_media">Gan aon mheáin</string>
+    <string name="no_media_descr">Is féidir leat grianghraif, físeáin, nó nótaí fuaime a chur leis ó do cheamara nó ó do leabharlann.</string>
 </resources>

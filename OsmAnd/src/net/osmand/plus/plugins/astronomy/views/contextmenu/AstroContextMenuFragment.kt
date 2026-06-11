@@ -24,13 +24,19 @@ import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.shape.ShapeAppearanceModel
 import com.google.android.material.tabs.TabLayout
+import net.osmand.PlatformUtil
 import net.osmand.plus.R
 import net.osmand.plus.base.BaseMaterialFragment
 import net.osmand.plus.chooseplan.ChoosePlanFragment
 import net.osmand.plus.chooseplan.OsmAndFeature
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents
 import net.osmand.plus.download.DownloadValidationManager
-import net.osmand.plus.gallery.controller.GalleryController
+import net.osmand.plus.gallery.controller.GalleryGridController
+import net.osmand.plus.gallery.controller.GalleryPagerController
+import net.osmand.plus.gallery.data.GalleryKey
+import net.osmand.plus.gallery.data.MediaLoadListener
+import net.osmand.plus.gallery.model.GalleryItem
+import net.osmand.plus.gallery.model.MediaHolder
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.astronomy.AstroArticle
 import net.osmand.plus.plugins.astronomy.AstronomyPlugin
@@ -42,6 +48,7 @@ import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.InsetTargetsCollection
 import net.osmand.plus.utils.InsetsUtils
+import net.osmand.shared.media.domain.MediaItem
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZonedDateTime
@@ -52,9 +59,6 @@ import kotlin.math.abs
 import kotlin.math.roundToInt
 
 class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
-
-	private var galleryController: GalleryController? = null
-	private var galleryLoader: AstroGalleryLoader? = null
 
 	private var skyObject: SkyObject? = null
 	private var article: AstroArticle? = null
@@ -121,7 +125,30 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 	private var pendingProgrammaticSectionTab: Int? = null
 	private var programmaticSectionScrollToken = 0
 
+	private var currentGalleryKey: GalleryKey.Astronomy? = null
+
+	private val galleryLoadListener = object : MediaLoadListener {
+		override fun onLoadingStarted(key: GalleryKey) {
+		}
+
+		override fun onLoaded(key: GalleryKey, holder: MediaHolder) {
+			if (key != currentGalleryKey) return
+			val items = holder.getItems()
+				.map { GalleryItem.Media(it) }
+				.ifEmpty { listOf(GalleryItem.NoMedia()) }
+			val wid = (key as GalleryKey.Astronomy).wikidataId
+			onGalleryStateChanged(wid, AstroGalleryState.Ready(items))
+		}
+
+		override fun onLoadFailed(key: GalleryKey) {
+			if (key != currentGalleryKey) return
+			val wid = (key as GalleryKey.Astronomy).wikidataId
+			onGalleryStateChanged(wid, AstroGalleryState.Ready(listOf(GalleryItem.NoMedia())))
+		}
+	}
+
 	companion object {
+		private val LOG = PlatformUtil.getLog(AstroContextMenuFragment::class.java)
 		val TAG: String = AstroContextMenuFragment::class.java.simpleName
 		private const val ARG_SKY_OBJECT_ID = "skyObjectId"
 		private const val TAB_OVERVIEW = 0
@@ -143,26 +170,6 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 		val collection = super.getInsetTargets()
 
 		return collection
-	}
-
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-
-		val dialogManager = app.dialogManager
-		galleryController =
-			dialogManager.findController(GalleryController.PROCESS_ID) as GalleryController?
-		if (galleryController == null) {
-			dialogManager.register(GalleryController.PROCESS_ID, GalleryController(app))
-			galleryController =
-				dialogManager.findController(GalleryController.PROCESS_ID) as GalleryController?
-		}
-		galleryController?.let { controller ->
-			galleryLoader = AstroGalleryLoader(
-				app = app,
-				galleryController = controller,
-				onStateChanged = ::onGalleryStateChanged
-			)
-		}
 	}
 
 	override fun onCreateView(
@@ -199,7 +206,7 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 			resetOverviewStateForNewObject()
 		}
 		uiState = if (objectChanged) {
-			galleryLoader?.cancel()
+			cancelGalleryLoading()
 			AstroContextUiState(
 				selectedObjectId = obj.id,
 				currentLocalDate = currentDate,
@@ -232,7 +239,7 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 		updateScheduleCard(obj)
 		ensureKnowledgeCardPrerequisites()
 		if (uiState.galleryState == AstroGalleryState.Loading) {
-			galleryLoader?.startLoading(obj.wid)
+			loadGallery(obj.wid)
 		}
 		submitCards()
 	}
@@ -640,12 +647,17 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 			app,
 			requireMapActivity(),
 			nightMode,
-			galleryController,
 			onDescriptionRead = { item ->
 				openDescriptionCard(item)
 			},
 			onGalleryToggle = { wid ->
 				onGalleryToggle(wid)
+			},
+			onMediaClick = { mediaItem ->
+				openMediaPager(mediaItem)
+			},
+			onActionButtonClick = { title ->
+				openGalleryFullScreen(title)
 			},
 			onUpdateImage = {
 				skyObject?.wid?.let(::loadGallery)
@@ -1201,7 +1213,7 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 	}
 
 	override fun onDestroyView() {
-		galleryLoader?.cancel()
+		cancelGalleryLoading()
 		visibilityController.cancelPendingWork()
 		scheduleController.cancelPendingWork()
 		unbindControllerCallbacks()
@@ -1256,12 +1268,31 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 		}
 	}
 
+	private fun openMediaPager(mediaItem: MediaItem) {
+		val activity = mapActivity ?: return
+		val key = currentGalleryKey ?: return
+		GalleryPagerController.showDialog(activity, key, mediaItem.id)
+	}
+
+	private fun openGalleryFullScreen(title: String?) {
+		val activity = mapActivity ?: return
+		val key = currentGalleryKey ?: return
+		GalleryGridController.showDialog(activity, key, title)
+	}
+
 	private fun loadGallery(wid: String) {
 		uiState = uiState.copy(galleryState = AstroGalleryState.Loading)
 		submitCards()
-		galleryLoader?.startLoading(wid) ?: run {
-			onGalleryStateChanged(wid, AstroGalleryState.Ready(emptyList()))
-		}
+
+		val key = GalleryKey.Astronomy(wid)
+		cancelGalleryLoading()
+		currentGalleryKey = key
+		app.galleryHelper.mediaLoader.load(key, galleryLoadListener)
+	}
+
+	private fun cancelGalleryLoading() {
+		currentGalleryKey?.let { app.galleryHelper.mediaLoader.cancel(it, galleryLoadListener) }
+		currentGalleryKey = null
 	}
 
 	private fun onGalleryStateChanged(wid: String, state: AstroGalleryState) {
@@ -1302,7 +1333,8 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 		val intent = Intent(Intent.ACTION_VIEW, uri)
 		try {
 			startActivity(intent)
-		} catch (_: Exception) {
+		} catch (e: Exception) {
+			LOG.error("Error opening astronomy URI: $uri", e)
 		}
 	}
 

@@ -1,7 +1,6 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
-import static net.osmand.plus.dialogs.FavoriteDialogs.KEY_FAVORITE;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -10,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
@@ -32,6 +32,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.myplaces.favorites.FavoriteFolderFormatter;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.render.RenderingIcons;
@@ -69,9 +70,6 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		FavoritePointEditor editor = getFavoritePointEditor();
 		if (editor != null) {
 			FavouritePoint favorite = editor.getFavorite();
-			if (favorite == null && savedInstanceState != null) {
-				favorite = AndroidUtils.getSerializable(savedInstanceState, KEY_FAVORITE, FavouritePoint.class);
-			}
 			this.favorite = favorite;
 			this.group = favouritesHelper.getGroup(favorite);
 			this.selectedGroup = group != null ? group.toPointsGroup(app) : null;
@@ -108,14 +106,8 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		return view;
 	}
 
-	@Override
-	public void onSaveInstanceState(@NonNull Bundle outState) {
-		super.onSaveInstanceState(outState);
-		outState.putSerializable(KEY_FAVORITE, getFavorite());
-	}
-
 	private void replacePressed() {
-		callActivity(activity -> SelectFavouriteToReplaceBottomSheet.showInstance(activity, getFavorite()));
+		callActivity(activity -> SelectFavouriteToReplaceBottomSheet.showInstance(activity, this));
 	}
 
 	@Nullable
@@ -359,6 +351,11 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 			}
 		}
 		return pointsGroups;
+	}
+
+	@Override
+	protected void setupGroupName(@NonNull TextView groupName, @NonNull PointsGroup group) {
+		FavoriteFolderFormatter.setupStyledBreadcrumb(groupName, group.getName(), nightMode);
 	}
 
 	@NonNull

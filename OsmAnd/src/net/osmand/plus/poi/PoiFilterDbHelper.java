@@ -20,6 +20,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -274,7 +275,7 @@ public class PoiFilterDbHelper {
 						map.put(filterId, new LinkedHashMap<>());
 					}
 					Map<PoiCategory, LinkedHashSet<String>> m = map.get(filterId);
-					PoiCategory a = poiTypes.getPoiCategoryByName(query.getString(1).toLowerCase(), false);
+					PoiCategory a = poiTypes.getPoiCategoryByName(query.getString(1).toLowerCase(Locale.ROOT), false);
 					String subCategory = query.getString(2);
 					if (subCategory == null) {
 						m.put(a, null);

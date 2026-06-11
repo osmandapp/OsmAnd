@@ -6,6 +6,8 @@ import android.text.SpannableStringBuilder;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
+import android.view.ViewTreeObserver;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -50,6 +52,34 @@ public final class FavoriteFolderFormatter {
 			boolean nightMode, @Nullable TextPaint textPaint, int availableWidth) {
 		String breadcrumb = getMiddleTruncatedBreadcrumb(ctx, fullPath, textPaint, availableWidth);
 		return styleBreadcrumbDelimiters(ctx, breadcrumb, nightMode);
+	}
+
+	public static void setupStyledBreadcrumb(@NonNull TextView textView, @Nullable String fullPath,
+			boolean nightMode) {
+		Context context = textView.getContext();
+		textView.setSingleLine(true);
+		textView.setMaxLines(1);
+		textView.setEllipsize(TextUtils.TruncateAt.MIDDLE);
+
+		Object token = new Object();
+		textView.setTag(token);
+		int availableWidth = getTextAvailableWidth(textView);
+		if (availableWidth > 0) {
+			textView.setText(getStyledBreadcrumb(context, fullPath, nightMode, textView.getPaint(), availableWidth));
+		} else {
+			textView.setText(getStyledBreadcrumb(context, fullPath, nightMode));
+			textView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+				@Override
+				public boolean onPreDraw() {
+					textView.getViewTreeObserver().removeOnPreDrawListener(this);
+					if (textView.getTag() == token) {
+						textView.setText(getStyledBreadcrumb(context, fullPath, nightMode,
+								textView.getPaint(), getTextAvailableWidth(textView)));
+					}
+					return true;
+				}
+			});
+		}
 	}
 
 	@NonNull
@@ -119,6 +149,14 @@ public final class FavoriteFolderFormatter {
 
 	private static boolean fits(@NonNull String text, @NonNull TextPaint textPaint, int availableWidth) {
 		return textPaint.measureText(text) <= availableWidth;
+	}
+
+	private static int getTextAvailableWidth(@NonNull TextView textView) {
+		int width = textView.getWidth() > 0 ? textView.getWidth() : textView.getMeasuredWidth();
+		if (width > 0) {
+			width -= textView.getCompoundPaddingLeft() + textView.getCompoundPaddingRight();
+		}
+		return Math.max(0, width);
 	}
 
 	@NonNull

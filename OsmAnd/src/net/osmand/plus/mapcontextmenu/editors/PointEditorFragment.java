@@ -9,6 +9,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -544,7 +545,7 @@ public abstract class PointEditorFragment extends EditorFragment {
 					notifyItemChanged(previousSelectedPosition);
 				});
 				PointsGroup group = items.get(position);
-				holder.groupName.setText(group.getName());
+				setupGroupName(holder.groupName, group);
 				holder.pointsCounter.setText(String.valueOf(group.getPoints().size()));
 				int strokeColor;
 				int strokeWidth;
@@ -592,6 +593,14 @@ public abstract class PointEditorFragment extends EditorFragment {
 		int getItemPosition(PointsGroup group) {
 			return items.indexOf(group);
 		}
+	}
+
+	protected void setupGroupName(@NonNull TextView groupName, @NonNull PointsGroup group) {
+		groupName.setTag(null);
+		groupName.setSingleLine(true);
+		groupName.setMaxLines(1);
+		groupName.setEllipsize(TextUtils.TruncateAt.END);
+		groupName.setText(group.getName());
 	}
 
 	static class GroupsViewHolder extends RecyclerView.ViewHolder {

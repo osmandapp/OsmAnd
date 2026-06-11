@@ -37,7 +37,6 @@ import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.myplaces.favorites.FavoriteFolderFormatter;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.audionotes.Recording;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
@@ -343,7 +342,12 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			item.setTitle(OsmEditingPlugin.getTitle(openstreetmapPoint, app));
 			item.setIcon(getIcon(R.drawable.ic_action_info_dark, getItemIconColor(object)));
 		} else if (object instanceof FavoriteGroup group) {
-			item.setTitle(FavoriteFolderFormatter.getBreadcrumb(app, group.getName()));
+			TextView title = item.getView().findViewById(R.id.title);
+			if (title != null) {
+				FavoriteFolderFormatter.setupStyledBreadcrumb(title, group.getName(), nightMode);
+			} else {
+				item.setTitle(FavoriteFolderFormatter.getStyledBreadcrumb(app, group.getName(), nightMode));
+			}
 			int color;
 			if (selectedItems.contains(object)) {
 				color = group.getColor() == 0 ? getColor(R.color.color_favorite) : group.getColor();
@@ -400,7 +404,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		} else if (file.getAbsolutePath().contains(IndexConstants.GPX_INDEX_DIR)) {
 			setupBottomSheetItemForGpx(item, file, null);
 		} else if (file.getAbsolutePath().contains(IndexConstants.AV_INDEX_DIR)) {
-			int iconId = AudioVideoNotesPlugin.getIconIdForRecordingFile(file);
+			int iconId = Recording.getIconIdForRecordingFile(file);
 			if (iconId == -1) {
 				iconId = R.drawable.ic_action_photo_dark;
 			}

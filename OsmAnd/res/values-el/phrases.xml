@@ -1482,7 +1482,7 @@
     <string name="poi_stars_5">5 (πολυτελείας)</string>
     <string name="poi_stars_5s">5S (ανώτερης πολυτελείας)</string>
     <string name="poi_rooms">Δωμάτια</string>
-    <string name="poi_love_hotel">Ερωτικό ξενοδοχείο</string>
+    <string name="poi_love_hotel">Ξενοδοχείο ημιδιαμονής</string>
     <string name="poi_payment_coins_yes">Κέρματα</string>
     <string name="poi_payment_coins_no">Δεν δέχεται κέρματα</string>
     <string name="poi_payment_coins_0_5">Κέρματα $0,5</string>
@@ -4605,4 +4605,6 @@
     <string name="poi_route_activity_type_cross_country_skiing">Σκι αντοχής</string>
     <string name="poi_route_activity_type_drone_flying">Πέταγμα drone</string>
     <string name="poi_prep_school">Φροντιστήριο</string>
+    <string name="poi_piste_downhill">Κατηφορική πίστα;Πίστα σκι;Πλαγιά σκι</string>
+    <string name="poi_water_lake">Λίμνη</string>
 </resources>

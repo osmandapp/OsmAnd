@@ -1981,7 +1981,7 @@
     <string name="shared_string_trip">Cesta</string>
     <string name="shared_string_recorded">Zaznamenáno</string>
     <string name="shared_string_record">Záznam</string>
-    <string name="gpx_logging_no_data">Žádná data</string>
+    <string name="gpx_logging_no_data">Bez dat</string>
     <string name="rendering_attr_contourColorScheme_description">Barevné schéma pro vrstevnice</string>
     <string name="save_track_min_speed">Minimální rychlost pro záznam</string>
     <string name="save_track_min_speed_descr">Filtr: Nezaznamenávat body pod touto rychlostí.</string>
@@ -5401,7 +5401,7 @@
     <string name="clear_all_key_shortcuts">Vymazat všechny klávesové zkratky</string>
     <string name="no_assigned_keys_desc">Vyberte akci a přiřaďte jí klávesu klepnutím na tlačítko „Přidat“.</string>
     <string name="steps_per_minute_unit">SPM</string>
-    <string name="delete_widget">Smazat widget?</string>
+    <string name="delete_widget">Odebrat widget?</string>
     <string name="delete_widget_description">Tento widget bude odstraněn. Později jej můžete obnovit v okně Konfigurace.</string>
     <string name="battery_saving_mode">Režim úspory baterie</string>
     <string name="rendering_attr_alpineHiking_name">Stupeň obtížnosti turistických tras</string>
@@ -6072,9 +6072,9 @@
     <string name="shared_string_percentage">procenta</string>
     <string name="remove_step">Odebrat krok</string>
     <string name="shared_string_value">Hodnota</string>
-    <string name="gradient_range_type_fixed_summary">Barvy jsou přiřazeny specifickým absolutním počtem (např. 50 km/h).</string>
+    <string name="gradient_range_type_fixed_summary">Barvy jsou přiřazeny specifickým absolutním číslům (např. 50 km/h).</string>
     <string name="gradient_range_type_fixed">Pevné hodnoty</string>
-    <string name="gradient_range_type_relative_summary">Barevná škála je automaticky na základě min/max rozsahu stopy.</string>
+    <string name="gradient_range_type_relative_summary">Barvy se škálují automaticky na základě min/max rozsahu stopy.</string>
     <string name="gradient_range_type_relative">Relativní</string>
     <string name="edit_palette">Upravit paletu</string>
     <string name="add_palette">Přidat paletu</string>
@@ -6167,4 +6167,18 @@
     <string name="astro_locate">Najít</string>
     <string name="show_layout_grid_logs">Ukázat záznamy mřížky</string>
     <string name="open_from_short">Od</string>
+    <string name="favorite_confirm_delete_folder">Tím se smaže složka „%1$s“, včetně všech podsložek a %2$d oblíbených položek.</string>
+    <string name="favorite_folder_rename_conflict">Složka s tímto názvem již existuje.</string>
+    <string name="favorite_folder_invalid_name">Název složky nesmí obsahovat znaky / nebo _%_</string>
+    <string name="favorite_folder_duplicate_message">Zvolte název složky, který ještě neexistuje.</string>
+    <string name="favorite_folder_name">Název složky</string>
+    <string name="edit_folder">Upravit složku</string>
+    <string name="obd_simulation_device">Zařízení k simulaci</string>
+    <string name="astronomy_map">Astronomická mapa</string>
+    <string name="astro_designations">Označení</string>
+    <string name="choose_from_gallery">Vyberte si z galerie</string>
+    <string name="choose_from_files">Vyberte ze souborů</string>
+    <string name="shared_string_media">Média</string>
+    <string name="no_media">Bez médií</string>
+    <string name="no_media_descr">Můžete přidávat fotografie, videa nebo zvukové poznámky z fotoaparátu nebo knihovny.</string>
 </resources>

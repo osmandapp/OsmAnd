@@ -39,7 +39,7 @@ class GpxDatabase {
 			"case when %1\$s is null then '' else %1\$s end as %1\$s"
 		val CHANGE_NULL_TO_EMPTY_GROUP_CONDITION_STRING_QUERY_PART =
 			"case when %1\$s is null then '' else %1\$s end"
-		val INCLUDE_NON_NULL_COLUMN_CONDITION = " WHERE %1\$s NOT NULL AND %1\$s <> '' "
+		val INCLUDE_NON_NULL_COLUMN_CONDITION = " WHERE %1\$s IS NOT NULL AND %1\$s <> '' "
 		val GET_ITEM_COUNT_COLLECTION_BASE =
 			"SELECT %s, count (*) as $TMP_NAME_COLUMN_COUNT FROM $GPX_TABLE_NAME%s group by %s ORDER BY %s %s"
 

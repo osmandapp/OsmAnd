@@ -21,7 +21,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
-import net.osmand.plus.gallery.controller.GalleryController;
+import net.osmand.plus.gallery.contract.IGalleryGridController;
+import net.osmand.plus.gallery.contract.IGalleryGridView;
+import net.osmand.plus.gallery.controller.GalleryGridController;
+import net.osmand.plus.gallery.data.MediaLoadStateRegistry;
 import net.osmand.plus.gallery.model.GalleryItem;
 import net.osmand.plus.gallery.model.GalleryItem.MediaCount;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -29,20 +32,17 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
-import net.osmand.shared.media.domain.MediaItem;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GalleryGridFragment extends BaseFullScreenFragment {
+public class GalleryGridFragment extends BaseFullScreenFragment implements IGalleryGridView {
 
 	public static final String TAG = GalleryGridFragment.class.getSimpleName();
 	private static final String TITLE_KEY = "title_key";
 
 	protected static final float SCALE_MULTIPLIER = 3f;
-
-	private GalleryController controller;
 
 	private Toolbar toolbar;
 	private GalleryGridRecyclerView recyclerView;
@@ -52,6 +52,8 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 	private GridLayoutManager layoutManager;
 	private String title = null;
 
+	private IGalleryGridController controller;
+
 	private float newScaleFactor;
 
 	private boolean zoomedForPinch = false;
@@ -59,18 +61,17 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 	private static final int MAX_GALLERY_GRID_SPAN_COUNT = 7;
 	private static final int MIN_GALLERY_GRID_SPAN_COUNT = 2;
 
-	@Override
-	public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		controller = (GalleryController) app.getDialogManager().findController(GalleryController.PROCESS_ID);
-	}
-
 	@SuppressLint("ClickableViewAccessibility")
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
+
+		controller = GalleryGridController.getExistingInstance(app);
+		if (controller == null) return null;
+		controller.attach(this);
+
 		View view = inflate(R.layout.gallery_grid_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
@@ -87,20 +88,21 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 		recyclerView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 			@Override
 			public void onGlobalLayout() {
+				MediaLoadStateRegistry loadStateRegistry = app.getGalleryHelper().getLoadStateRegistry();
 				recyclerView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-				adapter = new GalleryGridAdapter(requireMapActivity(), getGalleryListener(),
-						controller, recyclerView.getMeasuredWidth(), new GalleryGridConfig(), nightMode);
+				adapter = new GalleryGridAdapter(requireMapActivity(), controller, controller,
+						recyclerView.getMeasuredWidth(), nightMode, loadStateRegistry);
 				adapter.setResizeBySpanCount(true);
 
 				List<GalleryItem> items = new ArrayList<>();
 				items.add(MediaCount.INSTANCE);
-				items.addAll(controller.getOnlinePhotoItems());
+				items.addAll(controller.getGalleryItems());
 				adapter.setItems(items);
 
 				recyclerView.setAdapter(adapter);
 				recyclerView.setScaleDetector(scaleDetector);
 
-				layoutManager = new GridLayoutManager(app, GalleryController.getSettingsSpanCount(requireMapActivity()));
+				layoutManager = new GridLayoutManager(app, GalleryGridSettings.getSpanCount(requireMapActivity()));
 				layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
 					@Override
 					public int getSpanSize(int position) {
@@ -123,7 +125,7 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
-		if (Algorithms.isEmpty(title)) {
+		if (!Algorithms.isEmpty(title)) {
 			outState.putString(TITLE_KEY, title);
 		}
 	}
@@ -132,23 +134,6 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 		InsetTargetsCollection collection = super.getInsetTargets();
 		collection.replace(InsetTarget.createScrollable(R.id.content_list));
 		return collection;
-	}
-
-	@NonNull
-	private GalleryListener getGalleryListener() {
-		return new GalleryListener() {
-			@Override
-			public void onMediaItemClicked(@NonNull MediaItem mediaItem) {
-				callMapActivity(activity -> {
-					int index = controller.getPhotoItemIndexById(mediaItem.getId());
-					GalleryPhotoPagerFragment.showInstance(activity, index);
-				});
-			}
-
-			@Override
-			public void onReloadMediaItems() {
-			}
-		};
 	}
 
 	private void setupScaleDetector() {
@@ -165,13 +150,13 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 					float a = (1 - detector.getScaleFactor()) * SCALE_MULTIPLIER;
 					newScaleFactor = newScaleFactor + a;
 				}
-				int previousCount = GalleryController.getSettingsSpanCount(requireMapActivity());
+				int previousCount = GalleryGridSettings.getSpanCount(requireMapActivity());
 				int newCount = (int) newScaleFactor + previousCount;
 
 				if (newCount != previousCount) {
 					newScaleFactor = 0;
 					if (newCount <= MAX_GALLERY_GRID_SPAN_COUNT && newCount >= MIN_GALLERY_GRID_SPAN_COUNT) {
-						GalleryController.setSpanSettings(requireMapActivity(), newCount);
+						GalleryGridSettings.setSpanCount(requireMapActivity(), newCount);
 						updateSpan();
 						zoomedForPinch = true;
 					}
@@ -194,7 +179,7 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 	}
 
 	private void updateSpan() {
-		layoutManager.setSpanCount(GalleryController.getSettingsSpanCount(requireMapActivity()));
+		layoutManager.setSpanCount(GalleryGridSettings.getSpanCount(requireMapActivity()));
 		for (int i = 0; i < adapter.getItemCount(); i++) {
 			GalleryItem item = adapter.getItem(i);
 			if (item instanceof GalleryItem.Media) {
@@ -230,7 +215,6 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 		requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), backPressedCallback);
 	}
 
-
 	private void onBackPressed() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
@@ -251,25 +235,27 @@ public class GalleryGridFragment extends BaseFullScreenFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			mapActivity.disableDrawer();
-		}
+		callMapActivity(MapActivity::disableDrawer);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
+		callMapActivity(MapActivity::enableDrawer);
+	}
 
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			mapActivity.enableDrawer();
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		if (controller != null) {
+			controller.detach();
 		}
 	}
 
-	public static void showInstance(@NonNull FragmentActivity activity) {
-		showInstance(activity, null);
+	@Nullable
+	@Override
+	public MapActivity getMapActivity() {
+		return super.getMapActivity();
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity, @Nullable String title) {

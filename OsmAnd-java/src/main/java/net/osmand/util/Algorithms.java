@@ -598,7 +598,7 @@ public class Algorithms {
 	public static String capitalizeFirstLetterAndLowercase(String s) {
 		if (s != null && s.length() > 1) {
 			// not very efficient algorithm
-			return Character.toUpperCase(s.charAt(0)) + s.substring(1).toLowerCase();
+			return Character.toUpperCase(s.charAt(0)) + s.substring(1).toLowerCase(Locale.ROOT);
 		} else {
 			return s;
 		}
@@ -629,6 +629,9 @@ public class Algorithms {
 	 * #AARRGGBB
 	 */
 	public static int parseColor(String colorString) throws IllegalArgumentException {
+		if (isEmpty(colorString)) {
+			throw new IllegalArgumentException("Unknown color " + colorString); //$NON-NLS-1$
+		}
 		if (colorString.charAt(0) == '#') {
 			// Use a long to avoid rollovers on #ffXXXXXX
 			if (colorString.length() == 4) {

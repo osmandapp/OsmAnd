@@ -42,7 +42,7 @@ public class WidgetUtils {
 		MapLayers mapLayers = app.getOsmandMap().getMapLayers();
 		MapWidgetRegistry widgetRegistry = mapLayers.getMapWidgetRegistry();
 
-		app.getSettings().getCustomWidgetsKeys(layoutMode).addValue(widgetInfo.key);
+		app.getSettings().getCustomWidgetsKeys(layoutMode).addModeValue(appMode, widgetInfo.key);
 		if (addToNext != null && selectedWidget != null && widgetInfo.widget instanceof ISupportMultiRow) {
 			addWidgetToSpecificPlace(activity, widgetInfo, panel, appMode,layoutMode, selectedWidget, addToNext);
 		} else {
