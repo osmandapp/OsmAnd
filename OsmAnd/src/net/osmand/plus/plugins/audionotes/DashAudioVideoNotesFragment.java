@@ -8,22 +8,22 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+
 import net.osmand.data.PointDescription;
-import net.osmand.plus.dashboard.tools.DashFragmentData.DefaultShouldShow;
-import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.dashboard.tools.DashFragmentData.DefaultShouldShow;
+import net.osmand.plus.plugins.PluginsHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
 
 /**
  * Created by Denis
@@ -94,10 +94,10 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 
 			setupNoteView(recording, view);
 			((ImageView) view.findViewById(R.id.play)).setImageDrawable(uiUtilities.getThemedIcon(R.drawable.ic_play_dark));
-			view.findViewById(R.id.play).setOnClickListener(v -> plugin.playRecording(requireActivity(), recording));
+			view.findViewById(R.id.play).setOnClickListener(v -> callActivity(result -> plugin.getRecordingsPlayer().playRecording(requireActivity(), recording)));
 			view.findViewById(R.id.options).setVisibility(View.GONE);
 			view.findViewById(R.id.divider).setVisibility(View.VISIBLE);
-			
+
 			view.setOnClickListener(v -> {
 				FragmentActivity activity = requireActivity();
 				settings.setMapLocationToShow(recording.getLatitude(),

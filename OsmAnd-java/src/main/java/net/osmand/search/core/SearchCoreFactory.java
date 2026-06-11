@@ -718,7 +718,7 @@ public class SearchCoreFactory {
 							 
 							subSearchApiOrPublish(phrase, resultMatcher, res, cityApi);
 							// if subsearch by cityApi we could avoid calling subsearch by boundary 
-							// but it's tricky to check how good matching reuslts (case Hohlmaier 1 Breuningsweiler)
+							// but it's tricky to check how good matching results (case Hohlmaier 1 Breuningsweiler)
 							
 							// require exact matching to search street by name (not attached to city) 
 							if (matchAddressName(phrase, null, res, true)) {

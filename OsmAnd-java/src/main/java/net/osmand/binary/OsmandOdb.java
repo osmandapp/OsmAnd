@@ -17619,6 +17619,1368 @@ public final class OsmandOdb {
     // @@protoc_insertion_point(class_scope:OsmAnd.OBF.OsmAndAddressIndex)
   }
 
+  public interface NameIndexedStatsOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required uint32 frequency = 1;
+    /**
+     * <code>required uint32 frequency = 1;</code>
+     *
+     * <pre>
+     * if indexed &lt; frequency (there are common words)
+     * </pre>
+     */
+    boolean hasFrequency();
+    /**
+     * <code>required uint32 frequency = 1;</code>
+     *
+     * <pre>
+     * if indexed &lt; frequency (there are common words)
+     * </pre>
+     */
+    int getFrequency();
+
+    // required uint32 indexed = 2;
+    /**
+     * <code>required uint32 indexed = 2;</code>
+     */
+    boolean hasIndexed();
+    /**
+     * <code>required uint32 indexed = 2;</code>
+     */
+    int getIndexed();
+
+    // optional uint32 enclosing = 3;
+    /**
+     * <code>optional uint32 enclosing = 3;</code>
+     *
+     * <pre>
+     * enclosing objects: for now represents number of streets inside boundary
+     * </pre>
+     */
+    boolean hasEnclosing();
+    /**
+     * <code>optional uint32 enclosing = 3;</code>
+     *
+     * <pre>
+     * enclosing objects: for now represents number of streets inside boundary
+     * </pre>
+     */
+    int getEnclosing();
+
+    // repeated string strSuffixes = 5;
+    /**
+     * <code>repeated string strSuffixes = 5;</code>
+     *
+     * <pre>
+     * common (not only?) suffixes:  indexed &lt; frequency
+     * </pre>
+     */
+    java.util.List<java.lang.String>
+    getStrSuffixesList();
+    /**
+     * <code>repeated string strSuffixes = 5;</code>
+     *
+     * <pre>
+     * common (not only?) suffixes:  indexed &lt; frequency
+     * </pre>
+     */
+    int getStrSuffixesCount();
+    /**
+     * <code>repeated string strSuffixes = 5;</code>
+     *
+     * <pre>
+     * common (not only?) suffixes:  indexed &lt; frequency
+     * </pre>
+     */
+    java.lang.String getStrSuffixes(int index);
+    /**
+     * <code>repeated string strSuffixes = 5;</code>
+     *
+     * <pre>
+     * common (not only?) suffixes:  indexed &lt; frequency
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getStrSuffixesBytes(int index);
+
+    // repeated uint32 suffixFreq = 6;
+    /**
+     * <code>repeated uint32 suffixFreq = 6;</code>
+     */
+    java.util.List<java.lang.Integer> getSuffixFreqList();
+    /**
+     * <code>repeated uint32 suffixFreq = 6;</code>
+     */
+    int getSuffixFreqCount();
+    /**
+     * <code>repeated uint32 suffixFreq = 6;</code>
+     */
+    int getSuffixFreq(int index);
+
+    // repeated uint32 suffixIndexed = 7;
+    /**
+     * <code>repeated uint32 suffixIndexed = 7;</code>
+     */
+    java.util.List<java.lang.Integer> getSuffixIndexedList();
+    /**
+     * <code>repeated uint32 suffixIndexed = 7;</code>
+     */
+    int getSuffixIndexedCount();
+    /**
+     * <code>repeated uint32 suffixIndexed = 7;</code>
+     */
+    int getSuffixIndexed(int index);
+
+    // repeated uint32 suffixEnclosing = 8;
+    /**
+     * <code>repeated uint32 suffixEnclosing = 8;</code>
+     */
+    java.util.List<java.lang.Integer> getSuffixEnclosingList();
+    /**
+     * <code>repeated uint32 suffixEnclosing = 8;</code>
+     */
+    int getSuffixEnclosingCount();
+    /**
+     * <code>repeated uint32 suffixEnclosing = 8;</code>
+     */
+    int getSuffixEnclosing(int index);
+  }
+  /**
+   * Protobuf type {@code OsmAnd.OBF.NameIndexedStats}
+   */
+  public static final class NameIndexedStats extends
+      com.google.protobuf.GeneratedMessage
+      implements NameIndexedStatsOrBuilder {
+    // Use NameIndexedStats.newBuilder() to construct.
+    private NameIndexedStats(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private NameIndexedStats(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final NameIndexedStats defaultInstance;
+    public static NameIndexedStats getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public NameIndexedStats getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private NameIndexedStats(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              frequency_ = input.readUInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              indexed_ = input.readUInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              enclosing_ = input.readUInt32();
+              break;
+            }
+            case 42: {
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+                strSuffixes_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              strSuffixes_.add(input.readBytes());
+              break;
+            }
+            case 48: {
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+                suffixFreq_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000010;
+              }
+              suffixFreq_.add(input.readUInt32());
+              break;
+            }
+            case 50: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010) && input.getBytesUntilLimit() > 0) {
+                suffixFreq_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000010;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                suffixFreq_.add(input.readUInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+            case 56: {
+              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+                suffixIndexed_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000020;
+              }
+              suffixIndexed_.add(input.readUInt32());
+              break;
+            }
+            case 58: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020) && input.getBytesUntilLimit() > 0) {
+                suffixIndexed_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000020;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                suffixIndexed_.add(input.readUInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+            case 64: {
+              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+                suffixEnclosing_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000040;
+              }
+              suffixEnclosing_.add(input.readUInt32());
+              break;
+            }
+            case 66: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040) && input.getBytesUntilLimit() > 0) {
+                suffixEnclosing_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000040;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                suffixEnclosing_.add(input.readUInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+          strSuffixes_ = new com.google.protobuf.UnmodifiableLazyStringList(strSuffixes_);
+        }
+        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+          suffixFreq_ = java.util.Collections.unmodifiableList(suffixFreq_);
+        }
+        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+          suffixIndexed_ = java.util.Collections.unmodifiableList(suffixIndexed_);
+        }
+        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+          suffixEnclosing_ = java.util.Collections.unmodifiableList(suffixEnclosing_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_NameIndexedStats_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_NameIndexedStats_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              net.osmand.binary.OsmandOdb.NameIndexedStats.class, net.osmand.binary.OsmandOdb.NameIndexedStats.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<NameIndexedStats> PARSER =
+        new com.google.protobuf.AbstractParser<NameIndexedStats>() {
+      public NameIndexedStats parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new NameIndexedStats(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<NameIndexedStats> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required uint32 frequency = 1;
+    public static final int FREQUENCY_FIELD_NUMBER = 1;
+    private int frequency_;
+    /**
+     * <code>required uint32 frequency = 1;</code>
+     *
+     * <pre>
+     * if indexed &lt; frequency (there are common words)
+     * </pre>
+     */
+    public boolean hasFrequency() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required uint32 frequency = 1;</code>
+     *
+     * <pre>
+     * if indexed &lt; frequency (there are common words)
+     * </pre>
+     */
+    public int getFrequency() {
+      return frequency_;
+    }
+
+    // required uint32 indexed = 2;
+    public static final int INDEXED_FIELD_NUMBER = 2;
+    private int indexed_;
+    /**
+     * <code>required uint32 indexed = 2;</code>
+     */
+    public boolean hasIndexed() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required uint32 indexed = 2;</code>
+     */
+    public int getIndexed() {
+      return indexed_;
+    }
+
+    // optional uint32 enclosing = 3;
+    public static final int ENCLOSING_FIELD_NUMBER = 3;
+    private int enclosing_;
+    /**
+     * <code>optional uint32 enclosing = 3;</code>
+     *
+     * <pre>
+     * enclosing objects: for now represents number of streets inside boundary
+     * </pre>
+     */
+    public boolean hasEnclosing() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional uint32 enclosing = 3;</code>
+     *
+     * <pre>
+     * enclosing objects: for now represents number of streets inside boundary
+     * </pre>
+     */
+    public int getEnclosing() {
+      return enclosing_;
+    }
+
+    // repeated string strSuffixes = 5;
+    public static final int STRSUFFIXES_FIELD_NUMBER = 5;
+    private com.google.protobuf.LazyStringList strSuffixes_;
+    /**
+     * <code>repeated string strSuffixes = 5;</code>
+     *
+     * <pre>
+     * common (not only?) suffixes:  indexed &lt; frequency
+     * </pre>
+     */
+    public java.util.List<java.lang.String>
+        getStrSuffixesList() {
+      return strSuffixes_;
+    }
+    /**
+     * <code>repeated string strSuffixes = 5;</code>
+     *
+     * <pre>
+     * common (not only?) suffixes:  indexed &lt; frequency
+     * </pre>
+     */
+    public int getStrSuffixesCount() {
+      return strSuffixes_.size();
+    }
+    /**
+     * <code>repeated string strSuffixes = 5;</code>
+     *
+     * <pre>
+     * common (not only?) suffixes:  indexed &lt; frequency
+     * </pre>
+     */
+    public java.lang.String getStrSuffixes(int index) {
+      return strSuffixes_.get(index);
+    }
+    /**
+     * <code>repeated string strSuffixes = 5;</code>
+     *
+     * <pre>
+     * common (not only?) suffixes:  indexed &lt; frequency
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getStrSuffixesBytes(int index) {
+      return strSuffixes_.getByteString(index);
+    }
+
+    // repeated uint32 suffixFreq = 6;
+    public static final int SUFFIXFREQ_FIELD_NUMBER = 6;
+    private java.util.List<java.lang.Integer> suffixFreq_;
+    /**
+     * <code>repeated uint32 suffixFreq = 6;</code>
+     */
+    public java.util.List<java.lang.Integer>
+        getSuffixFreqList() {
+      return suffixFreq_;
+    }
+    /**
+     * <code>repeated uint32 suffixFreq = 6;</code>
+     */
+    public int getSuffixFreqCount() {
+      return suffixFreq_.size();
+    }
+    /**
+     * <code>repeated uint32 suffixFreq = 6;</code>
+     */
+    public int getSuffixFreq(int index) {
+      return suffixFreq_.get(index);
+    }
+
+    // repeated uint32 suffixIndexed = 7;
+    public static final int SUFFIXINDEXED_FIELD_NUMBER = 7;
+    private java.util.List<java.lang.Integer> suffixIndexed_;
+    /**
+     * <code>repeated uint32 suffixIndexed = 7;</code>
+     */
+    public java.util.List<java.lang.Integer>
+        getSuffixIndexedList() {
+      return suffixIndexed_;
+    }
+    /**
+     * <code>repeated uint32 suffixIndexed = 7;</code>
+     */
+    public int getSuffixIndexedCount() {
+      return suffixIndexed_.size();
+    }
+    /**
+     * <code>repeated uint32 suffixIndexed = 7;</code>
+     */
+    public int getSuffixIndexed(int index) {
+      return suffixIndexed_.get(index);
+    }
+
+    // repeated uint32 suffixEnclosing = 8;
+    public static final int SUFFIXENCLOSING_FIELD_NUMBER = 8;
+    private java.util.List<java.lang.Integer> suffixEnclosing_;
+    /**
+     * <code>repeated uint32 suffixEnclosing = 8;</code>
+     */
+    public java.util.List<java.lang.Integer>
+        getSuffixEnclosingList() {
+      return suffixEnclosing_;
+    }
+    /**
+     * <code>repeated uint32 suffixEnclosing = 8;</code>
+     */
+    public int getSuffixEnclosingCount() {
+      return suffixEnclosing_.size();
+    }
+    /**
+     * <code>repeated uint32 suffixEnclosing = 8;</code>
+     */
+    public int getSuffixEnclosing(int index) {
+      return suffixEnclosing_.get(index);
+    }
+
+    private void initFields() {
+      frequency_ = 0;
+      indexed_ = 0;
+      enclosing_ = 0;
+      strSuffixes_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      suffixFreq_ = java.util.Collections.emptyList();
+      suffixIndexed_ = java.util.Collections.emptyList();
+      suffixEnclosing_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasFrequency()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasIndexed()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeUInt32(1, frequency_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeUInt32(2, indexed_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeUInt32(3, enclosing_);
+      }
+      for (int i = 0; i < strSuffixes_.size(); i++) {
+        output.writeBytes(5, strSuffixes_.getByteString(i));
+      }
+      for (int i = 0; i < suffixFreq_.size(); i++) {
+        output.writeUInt32(6, suffixFreq_.get(i));
+      }
+      for (int i = 0; i < suffixIndexed_.size(); i++) {
+        output.writeUInt32(7, suffixIndexed_.get(i));
+      }
+      for (int i = 0; i < suffixEnclosing_.size(); i++) {
+        output.writeUInt32(8, suffixEnclosing_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(1, frequency_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(2, indexed_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(3, enclosing_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < strSuffixes_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(strSuffixes_.getByteString(i));
+        }
+        size += dataSize;
+        size += 1 * getStrSuffixesList().size();
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < suffixFreq_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeUInt32SizeNoTag(suffixFreq_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getSuffixFreqList().size();
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < suffixIndexed_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeUInt32SizeNoTag(suffixIndexed_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getSuffixIndexedList().size();
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < suffixEnclosing_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeUInt32SizeNoTag(suffixEnclosing_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getSuffixEnclosingList().size();
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static net.osmand.binary.OsmandOdb.NameIndexedStats parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static net.osmand.binary.OsmandOdb.NameIndexedStats parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static net.osmand.binary.OsmandOdb.NameIndexedStats parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static net.osmand.binary.OsmandOdb.NameIndexedStats parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static net.osmand.binary.OsmandOdb.NameIndexedStats parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static net.osmand.binary.OsmandOdb.NameIndexedStats parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static net.osmand.binary.OsmandOdb.NameIndexedStats parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static net.osmand.binary.OsmandOdb.NameIndexedStats parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static net.osmand.binary.OsmandOdb.NameIndexedStats parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static net.osmand.binary.OsmandOdb.NameIndexedStats parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(net.osmand.binary.OsmandOdb.NameIndexedStats prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code OsmAnd.OBF.NameIndexedStats}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements net.osmand.binary.OsmandOdb.NameIndexedStatsOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_NameIndexedStats_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_NameIndexedStats_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                net.osmand.binary.OsmandOdb.NameIndexedStats.class, net.osmand.binary.OsmandOdb.NameIndexedStats.Builder.class);
+      }
+
+      // Construct using net.osmand.binary.OsmandOdb.NameIndexedStats.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        frequency_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        indexed_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        enclosing_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        strSuffixes_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        suffixFreq_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000010);
+        suffixIndexed_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000020);
+        suffixEnclosing_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000040);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_NameIndexedStats_descriptor;
+      }
+
+      public net.osmand.binary.OsmandOdb.NameIndexedStats getDefaultInstanceForType() {
+        return net.osmand.binary.OsmandOdb.NameIndexedStats.getDefaultInstance();
+      }
+
+      public net.osmand.binary.OsmandOdb.NameIndexedStats build() {
+        net.osmand.binary.OsmandOdb.NameIndexedStats result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public net.osmand.binary.OsmandOdb.NameIndexedStats buildPartial() {
+        net.osmand.binary.OsmandOdb.NameIndexedStats result = new net.osmand.binary.OsmandOdb.NameIndexedStats(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.frequency_ = frequency_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.indexed_ = indexed_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.enclosing_ = enclosing_;
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          strSuffixes_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              strSuffixes_);
+          bitField0_ = (bitField0_ & ~0x00000008);
+        }
+        result.strSuffixes_ = strSuffixes_;
+        if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          suffixFreq_ = java.util.Collections.unmodifiableList(suffixFreq_);
+          bitField0_ = (bitField0_ & ~0x00000010);
+        }
+        result.suffixFreq_ = suffixFreq_;
+        if (((bitField0_ & 0x00000020) == 0x00000020)) {
+          suffixIndexed_ = java.util.Collections.unmodifiableList(suffixIndexed_);
+          bitField0_ = (bitField0_ & ~0x00000020);
+        }
+        result.suffixIndexed_ = suffixIndexed_;
+        if (((bitField0_ & 0x00000040) == 0x00000040)) {
+          suffixEnclosing_ = java.util.Collections.unmodifiableList(suffixEnclosing_);
+          bitField0_ = (bitField0_ & ~0x00000040);
+        }
+        result.suffixEnclosing_ = suffixEnclosing_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof net.osmand.binary.OsmandOdb.NameIndexedStats) {
+          return mergeFrom((net.osmand.binary.OsmandOdb.NameIndexedStats)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(net.osmand.binary.OsmandOdb.NameIndexedStats other) {
+        if (other == net.osmand.binary.OsmandOdb.NameIndexedStats.getDefaultInstance()) return this;
+        if (other.hasFrequency()) {
+          setFrequency(other.getFrequency());
+        }
+        if (other.hasIndexed()) {
+          setIndexed(other.getIndexed());
+        }
+        if (other.hasEnclosing()) {
+          setEnclosing(other.getEnclosing());
+        }
+        if (!other.strSuffixes_.isEmpty()) {
+          if (strSuffixes_.isEmpty()) {
+            strSuffixes_ = other.strSuffixes_;
+            bitField0_ = (bitField0_ & ~0x00000008);
+          } else {
+            ensureStrSuffixesIsMutable();
+            strSuffixes_.addAll(other.strSuffixes_);
+          }
+          onChanged();
+        }
+        if (!other.suffixFreq_.isEmpty()) {
+          if (suffixFreq_.isEmpty()) {
+            suffixFreq_ = other.suffixFreq_;
+            bitField0_ = (bitField0_ & ~0x00000010);
+          } else {
+            ensureSuffixFreqIsMutable();
+            suffixFreq_.addAll(other.suffixFreq_);
+          }
+          onChanged();
+        }
+        if (!other.suffixIndexed_.isEmpty()) {
+          if (suffixIndexed_.isEmpty()) {
+            suffixIndexed_ = other.suffixIndexed_;
+            bitField0_ = (bitField0_ & ~0x00000020);
+          } else {
+            ensureSuffixIndexedIsMutable();
+            suffixIndexed_.addAll(other.suffixIndexed_);
+          }
+          onChanged();
+        }
+        if (!other.suffixEnclosing_.isEmpty()) {
+          if (suffixEnclosing_.isEmpty()) {
+            suffixEnclosing_ = other.suffixEnclosing_;
+            bitField0_ = (bitField0_ & ~0x00000040);
+          } else {
+            ensureSuffixEnclosingIsMutable();
+            suffixEnclosing_.addAll(other.suffixEnclosing_);
+          }
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasFrequency()) {
+          
+          return false;
+        }
+        if (!hasIndexed()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        net.osmand.binary.OsmandOdb.NameIndexedStats parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (net.osmand.binary.OsmandOdb.NameIndexedStats) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required uint32 frequency = 1;
+      private int frequency_ ;
+      /**
+       * <code>required uint32 frequency = 1;</code>
+       *
+       * <pre>
+       * if indexed &lt; frequency (there are common words)
+       * </pre>
+       */
+      public boolean hasFrequency() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required uint32 frequency = 1;</code>
+       *
+       * <pre>
+       * if indexed &lt; frequency (there are common words)
+       * </pre>
+       */
+      public int getFrequency() {
+        return frequency_;
+      }
+      /**
+       * <code>required uint32 frequency = 1;</code>
+       *
+       * <pre>
+       * if indexed &lt; frequency (there are common words)
+       * </pre>
+       */
+      public Builder setFrequency(int value) {
+        bitField0_ |= 0x00000001;
+        frequency_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint32 frequency = 1;</code>
+       *
+       * <pre>
+       * if indexed &lt; frequency (there are common words)
+       * </pre>
+       */
+      public Builder clearFrequency() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        frequency_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // required uint32 indexed = 2;
+      private int indexed_ ;
+      /**
+       * <code>required uint32 indexed = 2;</code>
+       */
+      public boolean hasIndexed() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required uint32 indexed = 2;</code>
+       */
+      public int getIndexed() {
+        return indexed_;
+      }
+      /**
+       * <code>required uint32 indexed = 2;</code>
+       */
+      public Builder setIndexed(int value) {
+        bitField0_ |= 0x00000002;
+        indexed_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint32 indexed = 2;</code>
+       */
+      public Builder clearIndexed() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        indexed_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional uint32 enclosing = 3;
+      private int enclosing_ ;
+      /**
+       * <code>optional uint32 enclosing = 3;</code>
+       *
+       * <pre>
+       * enclosing objects: for now represents number of streets inside boundary
+       * </pre>
+       */
+      public boolean hasEnclosing() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional uint32 enclosing = 3;</code>
+       *
+       * <pre>
+       * enclosing objects: for now represents number of streets inside boundary
+       * </pre>
+       */
+      public int getEnclosing() {
+        return enclosing_;
+      }
+      /**
+       * <code>optional uint32 enclosing = 3;</code>
+       *
+       * <pre>
+       * enclosing objects: for now represents number of streets inside boundary
+       * </pre>
+       */
+      public Builder setEnclosing(int value) {
+        bitField0_ |= 0x00000004;
+        enclosing_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional uint32 enclosing = 3;</code>
+       *
+       * <pre>
+       * enclosing objects: for now represents number of streets inside boundary
+       * </pre>
+       */
+      public Builder clearEnclosing() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        enclosing_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // repeated string strSuffixes = 5;
+      private com.google.protobuf.LazyStringList strSuffixes_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureStrSuffixesIsMutable() {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          strSuffixes_ = new com.google.protobuf.LazyStringArrayList(strSuffixes_);
+          bitField0_ |= 0x00000008;
+         }
+      }
+      /**
+       * <code>repeated string strSuffixes = 5;</code>
+       *
+       * <pre>
+       * common (not only?) suffixes:  indexed &lt; frequency
+       * </pre>
+       */
+      public java.util.List<java.lang.String>
+          getStrSuffixesList() {
+        return java.util.Collections.unmodifiableList(strSuffixes_);
+      }
+      /**
+       * <code>repeated string strSuffixes = 5;</code>
+       *
+       * <pre>
+       * common (not only?) suffixes:  indexed &lt; frequency
+       * </pre>
+       */
+      public int getStrSuffixesCount() {
+        return strSuffixes_.size();
+      }
+      /**
+       * <code>repeated string strSuffixes = 5;</code>
+       *
+       * <pre>
+       * common (not only?) suffixes:  indexed &lt; frequency
+       * </pre>
+       */
+      public java.lang.String getStrSuffixes(int index) {
+        return strSuffixes_.get(index);
+      }
+      /**
+       * <code>repeated string strSuffixes = 5;</code>
+       *
+       * <pre>
+       * common (not only?) suffixes:  indexed &lt; frequency
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getStrSuffixesBytes(int index) {
+        return strSuffixes_.getByteString(index);
+      }
+      /**
+       * <code>repeated string strSuffixes = 5;</code>
+       *
+       * <pre>
+       * common (not only?) suffixes:  indexed &lt; frequency
+       * </pre>
+       */
+      public Builder setStrSuffixes(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureStrSuffixesIsMutable();
+        strSuffixes_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string strSuffixes = 5;</code>
+       *
+       * <pre>
+       * common (not only?) suffixes:  indexed &lt; frequency
+       * </pre>
+       */
+      public Builder addStrSuffixes(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureStrSuffixesIsMutable();
+        strSuffixes_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string strSuffixes = 5;</code>
+       *
+       * <pre>
+       * common (not only?) suffixes:  indexed &lt; frequency
+       * </pre>
+       */
+      public Builder addAllStrSuffixes(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureStrSuffixesIsMutable();
+        super.addAll(values, strSuffixes_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string strSuffixes = 5;</code>
+       *
+       * <pre>
+       * common (not only?) suffixes:  indexed &lt; frequency
+       * </pre>
+       */
+      public Builder clearStrSuffixes() {
+        strSuffixes_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string strSuffixes = 5;</code>
+       *
+       * <pre>
+       * common (not only?) suffixes:  indexed &lt; frequency
+       * </pre>
+       */
+      public Builder addStrSuffixesBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureStrSuffixesIsMutable();
+        strSuffixes_.add(value);
+        onChanged();
+        return this;
+      }
+
+      // repeated uint32 suffixFreq = 6;
+      private java.util.List<java.lang.Integer> suffixFreq_ = java.util.Collections.emptyList();
+      private void ensureSuffixFreqIsMutable() {
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+          suffixFreq_ = new java.util.ArrayList<java.lang.Integer>(suffixFreq_);
+          bitField0_ |= 0x00000010;
+         }
+      }
+      /**
+       * <code>repeated uint32 suffixFreq = 6;</code>
+       */
+      public java.util.List<java.lang.Integer>
+          getSuffixFreqList() {
+        return java.util.Collections.unmodifiableList(suffixFreq_);
+      }
+      /**
+       * <code>repeated uint32 suffixFreq = 6;</code>
+       */
+      public int getSuffixFreqCount() {
+        return suffixFreq_.size();
+      }
+      /**
+       * <code>repeated uint32 suffixFreq = 6;</code>
+       */
+      public int getSuffixFreq(int index) {
+        return suffixFreq_.get(index);
+      }
+      /**
+       * <code>repeated uint32 suffixFreq = 6;</code>
+       */
+      public Builder setSuffixFreq(
+          int index, int value) {
+        ensureSuffixFreqIsMutable();
+        suffixFreq_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 suffixFreq = 6;</code>
+       */
+      public Builder addSuffixFreq(int value) {
+        ensureSuffixFreqIsMutable();
+        suffixFreq_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 suffixFreq = 6;</code>
+       */
+      public Builder addAllSuffixFreq(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureSuffixFreqIsMutable();
+        super.addAll(values, suffixFreq_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 suffixFreq = 6;</code>
+       */
+      public Builder clearSuffixFreq() {
+        suffixFreq_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000010);
+        onChanged();
+        return this;
+      }
+
+      // repeated uint32 suffixIndexed = 7;
+      private java.util.List<java.lang.Integer> suffixIndexed_ = java.util.Collections.emptyList();
+      private void ensureSuffixIndexedIsMutable() {
+        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+          suffixIndexed_ = new java.util.ArrayList<java.lang.Integer>(suffixIndexed_);
+          bitField0_ |= 0x00000020;
+         }
+      }
+      /**
+       * <code>repeated uint32 suffixIndexed = 7;</code>
+       */
+      public java.util.List<java.lang.Integer>
+          getSuffixIndexedList() {
+        return java.util.Collections.unmodifiableList(suffixIndexed_);
+      }
+      /**
+       * <code>repeated uint32 suffixIndexed = 7;</code>
+       */
+      public int getSuffixIndexedCount() {
+        return suffixIndexed_.size();
+      }
+      /**
+       * <code>repeated uint32 suffixIndexed = 7;</code>
+       */
+      public int getSuffixIndexed(int index) {
+        return suffixIndexed_.get(index);
+      }
+      /**
+       * <code>repeated uint32 suffixIndexed = 7;</code>
+       */
+      public Builder setSuffixIndexed(
+          int index, int value) {
+        ensureSuffixIndexedIsMutable();
+        suffixIndexed_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 suffixIndexed = 7;</code>
+       */
+      public Builder addSuffixIndexed(int value) {
+        ensureSuffixIndexedIsMutable();
+        suffixIndexed_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 suffixIndexed = 7;</code>
+       */
+      public Builder addAllSuffixIndexed(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureSuffixIndexedIsMutable();
+        super.addAll(values, suffixIndexed_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 suffixIndexed = 7;</code>
+       */
+      public Builder clearSuffixIndexed() {
+        suffixIndexed_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000020);
+        onChanged();
+        return this;
+      }
+
+      // repeated uint32 suffixEnclosing = 8;
+      private java.util.List<java.lang.Integer> suffixEnclosing_ = java.util.Collections.emptyList();
+      private void ensureSuffixEnclosingIsMutable() {
+        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
+          suffixEnclosing_ = new java.util.ArrayList<java.lang.Integer>(suffixEnclosing_);
+          bitField0_ |= 0x00000040;
+         }
+      }
+      /**
+       * <code>repeated uint32 suffixEnclosing = 8;</code>
+       */
+      public java.util.List<java.lang.Integer>
+          getSuffixEnclosingList() {
+        return java.util.Collections.unmodifiableList(suffixEnclosing_);
+      }
+      /**
+       * <code>repeated uint32 suffixEnclosing = 8;</code>
+       */
+      public int getSuffixEnclosingCount() {
+        return suffixEnclosing_.size();
+      }
+      /**
+       * <code>repeated uint32 suffixEnclosing = 8;</code>
+       */
+      public int getSuffixEnclosing(int index) {
+        return suffixEnclosing_.get(index);
+      }
+      /**
+       * <code>repeated uint32 suffixEnclosing = 8;</code>
+       */
+      public Builder setSuffixEnclosing(
+          int index, int value) {
+        ensureSuffixEnclosingIsMutable();
+        suffixEnclosing_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 suffixEnclosing = 8;</code>
+       */
+      public Builder addSuffixEnclosing(int value) {
+        ensureSuffixEnclosingIsMutable();
+        suffixEnclosing_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 suffixEnclosing = 8;</code>
+       */
+      public Builder addAllSuffixEnclosing(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureSuffixEnclosingIsMutable();
+        super.addAll(values, suffixEnclosing_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 suffixEnclosing = 8;</code>
+       */
+      public Builder clearSuffixEnclosing() {
+        suffixEnclosing_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000040);
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:OsmAnd.OBF.NameIndexedStats)
+    }
+
+    static {
+      defaultInstance = new NameIndexedStats(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:OsmAnd.OBF.NameIndexedStats)
+  }
+
   public interface OsmAndAddressNameIndexDataOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
@@ -17793,6 +19155,20 @@ public final class OsmandOdb {
     public interface AddressNameIndexDataOrBuilder
         extends com.google.protobuf.MessageOrBuilder {
 
+      // optional .OsmAnd.OBF.NameIndexedStats stats = 1;
+      /**
+       * <code>optional .OsmAnd.OBF.NameIndexedStats stats = 1;</code>
+       */
+      boolean hasStats();
+      /**
+       * <code>optional .OsmAnd.OBF.NameIndexedStats stats = 1;</code>
+       */
+      net.osmand.binary.OsmandOdb.NameIndexedStats getStats();
+      /**
+       * <code>optional .OsmAnd.OBF.NameIndexedStats stats = 1;</code>
+       */
+      net.osmand.binary.OsmandOdb.NameIndexedStatsOrBuilder getStatsOrBuilder();
+
       // repeated string suffixesDictionary = 2;
       /**
        * <code>repeated string suffixesDictionary = 2;</code>
@@ -17929,18 +19305,31 @@ public final class OsmandOdb {
                 }
                 break;
               }
+              case 10: {
+                net.osmand.binary.OsmandOdb.NameIndexedStats.Builder subBuilder = null;
+                if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                  subBuilder = stats_.toBuilder();
+                }
+                stats_ = input.readMessage(net.osmand.binary.OsmandOdb.NameIndexedStats.PARSER, extensionRegistry);
+                if (subBuilder != null) {
+                  subBuilder.mergeFrom(stats_);
+                  stats_ = subBuilder.buildPartial();
+                }
+                bitField0_ |= 0x00000001;
+                break;
+              }
               case 18: {
-                if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
                   suffixesDictionary_ = new com.google.protobuf.LazyStringArrayList();
-                  mutable_bitField0_ |= 0x00000001;
+                  mutable_bitField0_ |= 0x00000002;
                 }
                 suffixesDictionary_.add(input.readBytes());
                 break;
               }
               case 34: {
-                if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
                   atom_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.AddressNameIndexDataAtom>();
-                  mutable_bitField0_ |= 0x00000002;
+                  mutable_bitField0_ |= 0x00000004;
                 }
                 atom_.add(input.readMessage(net.osmand.binary.OsmandOdb.AddressNameIndexDataAtom.PARSER, extensionRegistry));
                 break;
@@ -17953,10 +19342,10 @@ public final class OsmandOdb {
           throw new com.google.protobuf.InvalidProtocolBufferException(
               e.getMessage()).setUnfinishedMessage(this);
         } finally {
-          if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
             suffixesDictionary_ = new com.google.protobuf.UnmodifiableLazyStringList(suffixesDictionary_);
           }
-          if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
             atom_ = java.util.Collections.unmodifiableList(atom_);
           }
           this.unknownFields = unknownFields.build();
@@ -17988,6 +19377,29 @@ public final class OsmandOdb {
       @java.lang.Override
       public com.google.protobuf.Parser<AddressNameIndexData> getParserForType() {
         return PARSER;
+      }
+
+      private int bitField0_;
+      // optional .OsmAnd.OBF.NameIndexedStats stats = 1;
+      public static final int STATS_FIELD_NUMBER = 1;
+      private net.osmand.binary.OsmandOdb.NameIndexedStats stats_;
+      /**
+       * <code>optional .OsmAnd.OBF.NameIndexedStats stats = 1;</code>
+       */
+      public boolean hasStats() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .OsmAnd.OBF.NameIndexedStats stats = 1;</code>
+       */
+      public net.osmand.binary.OsmandOdb.NameIndexedStats getStats() {
+        return stats_;
+      }
+      /**
+       * <code>optional .OsmAnd.OBF.NameIndexedStats stats = 1;</code>
+       */
+      public net.osmand.binary.OsmandOdb.NameIndexedStatsOrBuilder getStatsOrBuilder() {
+        return stats_;
       }
 
       // repeated string suffixesDictionary = 2;
@@ -18097,6 +19509,7 @@ public final class OsmandOdb {
       }
 
       private void initFields() {
+        stats_ = net.osmand.binary.OsmandOdb.NameIndexedStats.getDefaultInstance();
         suffixesDictionary_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         atom_ = java.util.Collections.emptyList();
       }
@@ -18105,6 +19518,12 @@ public final class OsmandOdb {
         byte isInitialized = memoizedIsInitialized;
         if (isInitialized != -1) return isInitialized == 1;
 
+        if (hasStats()) {
+          if (!getStats().isInitialized()) {
+            memoizedIsInitialized = 0;
+            return false;
+          }
+        }
         for (int i = 0; i < getAtomCount(); i++) {
           if (!getAtom(i).isInitialized()) {
             memoizedIsInitialized = 0;
@@ -18118,6 +19537,9 @@ public final class OsmandOdb {
       public void writeTo(com.google.protobuf.CodedOutputStream output)
                           throws java.io.IOException {
         getSerializedSize();
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          output.writeMessage(1, stats_);
+        }
         for (int i = 0; i < suffixesDictionary_.size(); i++) {
           output.writeBytes(2, suffixesDictionary_.getByteString(i));
         }
@@ -18133,6 +19555,10 @@ public final class OsmandOdb {
         if (size != -1) return size;
 
         size = 0;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(1, stats_);
+        }
         {
           int dataSize = 0;
           for (int i = 0; i < suffixesDictionary_.size(); i++) {
@@ -18254,6 +19680,7 @@ public final class OsmandOdb {
         }
         private void maybeForceBuilderInitialization() {
           if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+            getStatsFieldBuilder();
             getAtomFieldBuilder();
           }
         }
@@ -18263,11 +19690,17 @@ public final class OsmandOdb {
 
         public Builder clear() {
           super.clear();
-          suffixesDictionary_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+          if (statsBuilder_ == null) {
+            stats_ = net.osmand.binary.OsmandOdb.NameIndexedStats.getDefaultInstance();
+          } else {
+            statsBuilder_.clear();
+          }
           bitField0_ = (bitField0_ & ~0x00000001);
+          suffixesDictionary_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+          bitField0_ = (bitField0_ & ~0x00000002);
           if (atomBuilder_ == null) {
             atom_ = java.util.Collections.emptyList();
-            bitField0_ = (bitField0_ & ~0x00000002);
+            bitField0_ = (bitField0_ & ~0x00000004);
           } else {
             atomBuilder_.clear();
           }
@@ -18298,21 +19731,31 @@ public final class OsmandOdb {
         public net.osmand.binary.OsmandOdb.OsmAndAddressNameIndexData.AddressNameIndexData buildPartial() {
           net.osmand.binary.OsmandOdb.OsmAndAddressNameIndexData.AddressNameIndexData result = new net.osmand.binary.OsmandOdb.OsmAndAddressNameIndexData.AddressNameIndexData(this);
           int from_bitField0_ = bitField0_;
-          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          int to_bitField0_ = 0;
+          if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+            to_bitField0_ |= 0x00000001;
+          }
+          if (statsBuilder_ == null) {
+            result.stats_ = stats_;
+          } else {
+            result.stats_ = statsBuilder_.build();
+          }
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
             suffixesDictionary_ = new com.google.protobuf.UnmodifiableLazyStringList(
                 suffixesDictionary_);
-            bitField0_ = (bitField0_ & ~0x00000001);
+            bitField0_ = (bitField0_ & ~0x00000002);
           }
           result.suffixesDictionary_ = suffixesDictionary_;
           if (atomBuilder_ == null) {
-            if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            if (((bitField0_ & 0x00000004) == 0x00000004)) {
               atom_ = java.util.Collections.unmodifiableList(atom_);
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000004);
             }
             result.atom_ = atom_;
           } else {
             result.atom_ = atomBuilder_.build();
           }
+          result.bitField0_ = to_bitField0_;
           onBuilt();
           return result;
         }
@@ -18328,10 +19771,13 @@ public final class OsmandOdb {
 
         public Builder mergeFrom(net.osmand.binary.OsmandOdb.OsmAndAddressNameIndexData.AddressNameIndexData other) {
           if (other == net.osmand.binary.OsmandOdb.OsmAndAddressNameIndexData.AddressNameIndexData.getDefaultInstance()) return this;
+          if (other.hasStats()) {
+            mergeStats(other.getStats());
+          }
           if (!other.suffixesDictionary_.isEmpty()) {
             if (suffixesDictionary_.isEmpty()) {
               suffixesDictionary_ = other.suffixesDictionary_;
-              bitField0_ = (bitField0_ & ~0x00000001);
+              bitField0_ = (bitField0_ & ~0x00000002);
             } else {
               ensureSuffixesDictionaryIsMutable();
               suffixesDictionary_.addAll(other.suffixesDictionary_);
@@ -18342,7 +19788,7 @@ public final class OsmandOdb {
             if (!other.atom_.isEmpty()) {
               if (atom_.isEmpty()) {
                 atom_ = other.atom_;
-                bitField0_ = (bitField0_ & ~0x00000002);
+                bitField0_ = (bitField0_ & ~0x00000004);
               } else {
                 ensureAtomIsMutable();
                 atom_.addAll(other.atom_);
@@ -18355,7 +19801,7 @@ public final class OsmandOdb {
                 atomBuilder_.dispose();
                 atomBuilder_ = null;
                 atom_ = other.atom_;
-                bitField0_ = (bitField0_ & ~0x00000002);
+                bitField0_ = (bitField0_ & ~0x00000004);
                 atomBuilder_ = 
                   com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                      getAtomFieldBuilder() : null;
@@ -18369,6 +19815,12 @@ public final class OsmandOdb {
         }
 
         public final boolean isInitialized() {
+          if (hasStats()) {
+            if (!getStats().isInitialized()) {
+              
+              return false;
+            }
+          }
           for (int i = 0; i < getAtomCount(); i++) {
             if (!getAtom(i).isInitialized()) {
               
@@ -18397,12 +19849,129 @@ public final class OsmandOdb {
         }
         private int bitField0_;
 
+        // optional .OsmAnd.OBF.NameIndexedStats stats = 1;
+        private net.osmand.binary.OsmandOdb.NameIndexedStats stats_ = net.osmand.binary.OsmandOdb.NameIndexedStats.getDefaultInstance();
+        private com.google.protobuf.SingleFieldBuilder<
+            net.osmand.binary.OsmandOdb.NameIndexedStats, net.osmand.binary.OsmandOdb.NameIndexedStats.Builder, net.osmand.binary.OsmandOdb.NameIndexedStatsOrBuilder> statsBuilder_;
+        /**
+         * <code>optional .OsmAnd.OBF.NameIndexedStats stats = 1;</code>
+         */
+        public boolean hasStats() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        /**
+         * <code>optional .OsmAnd.OBF.NameIndexedStats stats = 1;</code>
+         */
+        public net.osmand.binary.OsmandOdb.NameIndexedStats getStats() {
+          if (statsBuilder_ == null) {
+            return stats_;
+          } else {
+            return statsBuilder_.getMessage();
+          }
+        }
+        /**
+         * <code>optional .OsmAnd.OBF.NameIndexedStats stats = 1;</code>
+         */
+        public Builder setStats(net.osmand.binary.OsmandOdb.NameIndexedStats value) {
+          if (statsBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            stats_ = value;
+            onChanged();
+          } else {
+            statsBuilder_.setMessage(value);
+          }
+          bitField0_ |= 0x00000001;
+          return this;
+        }
+        /**
+         * <code>optional .OsmAnd.OBF.NameIndexedStats stats = 1;</code>
+         */
+        public Builder setStats(
+            net.osmand.binary.OsmandOdb.NameIndexedStats.Builder builderForValue) {
+          if (statsBuilder_ == null) {
+            stats_ = builderForValue.build();
+            onChanged();
+          } else {
+            statsBuilder_.setMessage(builderForValue.build());
+          }
+          bitField0_ |= 0x00000001;
+          return this;
+        }
+        /**
+         * <code>optional .OsmAnd.OBF.NameIndexedStats stats = 1;</code>
+         */
+        public Builder mergeStats(net.osmand.binary.OsmandOdb.NameIndexedStats value) {
+          if (statsBuilder_ == null) {
+            if (((bitField0_ & 0x00000001) == 0x00000001) &&
+                stats_ != net.osmand.binary.OsmandOdb.NameIndexedStats.getDefaultInstance()) {
+              stats_ =
+                net.osmand.binary.OsmandOdb.NameIndexedStats.newBuilder(stats_).mergeFrom(value).buildPartial();
+            } else {
+              stats_ = value;
+            }
+            onChanged();
+          } else {
+            statsBuilder_.mergeFrom(value);
+          }
+          bitField0_ |= 0x00000001;
+          return this;
+        }
+        /**
+         * <code>optional .OsmAnd.OBF.NameIndexedStats stats = 1;</code>
+         */
+        public Builder clearStats() {
+          if (statsBuilder_ == null) {
+            stats_ = net.osmand.binary.OsmandOdb.NameIndexedStats.getDefaultInstance();
+            onChanged();
+          } else {
+            statsBuilder_.clear();
+          }
+          bitField0_ = (bitField0_ & ~0x00000001);
+          return this;
+        }
+        /**
+         * <code>optional .OsmAnd.OBF.NameIndexedStats stats = 1;</code>
+         */
+        public net.osmand.binary.OsmandOdb.NameIndexedStats.Builder getStatsBuilder() {
+          bitField0_ |= 0x00000001;
+          onChanged();
+          return getStatsFieldBuilder().getBuilder();
+        }
+        /**
+         * <code>optional .OsmAnd.OBF.NameIndexedStats stats = 1;</code>
+         */
+        public net.osmand.binary.OsmandOdb.NameIndexedStatsOrBuilder getStatsOrBuilder() {
+          if (statsBuilder_ != null) {
+            return statsBuilder_.getMessageOrBuilder();
+          } else {
+            return stats_;
+          }
+        }
+        /**
+         * <code>optional .OsmAnd.OBF.NameIndexedStats stats = 1;</code>
+         */
+        private com.google.protobuf.SingleFieldBuilder<
+            net.osmand.binary.OsmandOdb.NameIndexedStats, net.osmand.binary.OsmandOdb.NameIndexedStats.Builder, net.osmand.binary.OsmandOdb.NameIndexedStatsOrBuilder> 
+            getStatsFieldBuilder() {
+          if (statsBuilder_ == null) {
+            statsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                net.osmand.binary.OsmandOdb.NameIndexedStats, net.osmand.binary.OsmandOdb.NameIndexedStats.Builder, net.osmand.binary.OsmandOdb.NameIndexedStatsOrBuilder>(
+                    stats_,
+                    getParentForChildren(),
+                    isClean());
+            stats_ = null;
+          }
+          return statsBuilder_;
+        }
+
         // repeated string suffixesDictionary = 2;
         private com.google.protobuf.LazyStringList suffixesDictionary_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         private void ensureSuffixesDictionaryIsMutable() {
-          if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          if (!((bitField0_ & 0x00000002) == 0x00000002)) {
             suffixesDictionary_ = new com.google.protobuf.LazyStringArrayList(suffixesDictionary_);
-            bitField0_ |= 0x00000001;
+            bitField0_ |= 0x00000002;
            }
         }
         /**
@@ -18512,7 +20081,7 @@ public final class OsmandOdb {
          */
         public Builder clearSuffixesDictionary() {
           suffixesDictionary_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-          bitField0_ = (bitField0_ & ~0x00000001);
+          bitField0_ = (bitField0_ & ~0x00000002);
           onChanged();
           return this;
         }
@@ -18539,9 +20108,9 @@ public final class OsmandOdb {
         private java.util.List<net.osmand.binary.OsmandOdb.AddressNameIndexDataAtom> atom_ =
           java.util.Collections.emptyList();
         private void ensureAtomIsMutable() {
-          if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          if (!((bitField0_ & 0x00000004) == 0x00000004)) {
             atom_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.AddressNameIndexDataAtom>(atom_);
-            bitField0_ |= 0x00000002;
+            bitField0_ |= 0x00000004;
            }
         }
 
@@ -18734,7 +20303,7 @@ public final class OsmandOdb {
         public Builder clearAtom() {
           if (atomBuilder_ == null) {
             atom_ = java.util.Collections.emptyList();
-            bitField0_ = (bitField0_ & ~0x00000002);
+            bitField0_ = (bitField0_ & ~0x00000004);
             onChanged();
           } else {
             atomBuilder_.clear();
@@ -18839,7 +20408,7 @@ public final class OsmandOdb {
             atomBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
                 net.osmand.binary.OsmandOdb.AddressNameIndexDataAtom, net.osmand.binary.OsmandOdb.AddressNameIndexDataAtom.Builder, net.osmand.binary.OsmandOdb.AddressNameIndexDataAtomOrBuilder>(
                     atom_,
-                    ((bitField0_ & 0x00000002) == 0x00000002),
+                    ((bitField0_ & 0x00000004) == 0x00000004),
                     getParentForChildren(),
                     isClean());
             atom_ = null;
@@ -19784,6 +21353,24 @@ public final class OsmandOdb {
     com.google.protobuf.ByteString
         getExtraSuffixBytes();
 
+    // optional uint32 enclosingObjects = 16;
+    /**
+     * <code>optional uint32 enclosingObjects = 16;</code>
+     *
+     * <pre>
+     * enclosing objects: for now represents number of streets inside boundary
+     * </pre>
+     */
+    boolean hasEnclosingObjects();
+    /**
+     * <code>optional uint32 enclosingObjects = 16;</code>
+     *
+     * <pre>
+     * enclosing objects: for now represents number of streets inside boundary
+     * </pre>
+     */
+    int getEnclosingObjects();
+
     // repeated int32 shiftToIndex = 5;
     /**
      * <code>repeated int32 shiftToIndex = 5;</code>
@@ -19953,9 +21540,9 @@ public final class OsmandOdb {
               break;
             }
             case 40: {
-              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
                 shiftToIndex_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000040;
+                mutable_bitField0_ |= 0x00000080;
               }
               shiftToIndex_.add(input.readInt32());
               break;
@@ -19963,9 +21550,9 @@ public final class OsmandOdb {
             case 42: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040) && input.getBytesUntilLimit() > 0) {
+              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080) && input.getBytesUntilLimit() > 0) {
                 shiftToIndex_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000040;
+                mutable_bitField0_ |= 0x00000080;
               }
               while (input.getBytesUntilLimit() > 0) {
                 shiftToIndex_.add(input.readInt32());
@@ -19974,9 +21561,9 @@ public final class OsmandOdb {
               break;
             }
             case 48: {
-              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
                 shiftToCityIndex_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000080;
+                mutable_bitField0_ |= 0x00000100;
               }
               shiftToCityIndex_.add(input.readInt32());
               break;
@@ -19984,9 +21571,9 @@ public final class OsmandOdb {
             case 50: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080) && input.getBytesUntilLimit() > 0) {
+              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100) && input.getBytesUntilLimit() > 0) {
                 shiftToCityIndex_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000080;
+                mutable_bitField0_ |= 0x00000100;
               }
               while (input.getBytesUntilLimit() > 0) {
                 shiftToCityIndex_.add(input.readInt32());
@@ -19995,9 +21582,9 @@ public final class OsmandOdb {
               break;
             }
             case 56: {
-              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+              if (!((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
                 xy16_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000100;
+                mutable_bitField0_ |= 0x00000200;
               }
               xy16_.add(input.readUInt32());
               break;
@@ -20005,9 +21592,9 @@ public final class OsmandOdb {
             case 58: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100) && input.getBytesUntilLimit() > 0) {
+              if (!((mutable_bitField0_ & 0x00000200) == 0x00000200) && input.getBytesUntilLimit() > 0) {
                 xy16_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000100;
+                mutable_bitField0_ |= 0x00000200;
               }
               while (input.getBytesUntilLimit() > 0) {
                 xy16_.add(input.readUInt32());
@@ -20041,6 +21628,11 @@ public final class OsmandOdb {
               extraSuffix_ = input.readBytes();
               break;
             }
+            case 128: {
+              bitField0_ |= 0x00000010;
+              enclosingObjects_ = input.readUInt32();
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -20052,13 +21644,13 @@ public final class OsmandOdb {
         if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
           suffixesBitset_ = java.util.Collections.unmodifiableList(suffixesBitset_);
         }
-        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+        if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
           shiftToIndex_ = java.util.Collections.unmodifiableList(shiftToIndex_);
         }
-        if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+        if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
           shiftToCityIndex_ = java.util.Collections.unmodifiableList(shiftToCityIndex_);
         }
-        if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+        if (((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
           xy16_ = java.util.Collections.unmodifiableList(xy16_);
         }
         if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
@@ -20334,6 +21926,30 @@ public final class OsmandOdb {
       }
     }
 
+    // optional uint32 enclosingObjects = 16;
+    public static final int ENCLOSINGOBJECTS_FIELD_NUMBER = 16;
+    private int enclosingObjects_;
+    /**
+     * <code>optional uint32 enclosingObjects = 16;</code>
+     *
+     * <pre>
+     * enclosing objects: for now represents number of streets inside boundary
+     * </pre>
+     */
+    public boolean hasEnclosingObjects() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional uint32 enclosingObjects = 16;</code>
+     *
+     * <pre>
+     * enclosing objects: for now represents number of streets inside boundary
+     * </pre>
+     */
+    public int getEnclosingObjects() {
+      return enclosingObjects_;
+    }
+
     // repeated int32 shiftToIndex = 5;
     public static final int SHIFTTOINDEX_FIELD_NUMBER = 5;
     private java.util.List<java.lang.Integer> shiftToIndex_;
@@ -20449,6 +22065,7 @@ public final class OsmandOdb {
       suffixesBitset_ = java.util.Collections.emptyList();
       suffixesBitsetIndex_ = java.util.Collections.emptyList();
       extraSuffix_ = "";
+      enclosingObjects_ = 0;
       shiftToIndex_ = java.util.Collections.emptyList();
       shiftToCityIndex_ = java.util.Collections.emptyList();
       xy16_ = java.util.Collections.emptyList();
@@ -20495,6 +22112,9 @@ public final class OsmandOdb {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeBytes(9, getExtraSuffixBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeUInt32(16, enclosingObjects_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -20565,6 +22185,10 @@ public final class OsmandOdb {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(9, getExtraSuffixBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(16, enclosingObjects_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -20694,12 +22318,14 @@ public final class OsmandOdb {
         bitField0_ = (bitField0_ & ~0x00000010);
         extraSuffix_ = "";
         bitField0_ = (bitField0_ & ~0x00000020);
-        shiftToIndex_ = java.util.Collections.emptyList();
+        enclosingObjects_ = 0;
         bitField0_ = (bitField0_ & ~0x00000040);
-        shiftToCityIndex_ = java.util.Collections.emptyList();
+        shiftToIndex_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000080);
-        xy16_ = java.util.Collections.emptyList();
+        shiftToCityIndex_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000100);
+        xy16_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000200);
         return this;
       }
 
@@ -20754,19 +22380,23 @@ public final class OsmandOdb {
           to_bitField0_ |= 0x00000008;
         }
         result.extraSuffix_ = extraSuffix_;
-        if (((bitField0_ & 0x00000040) == 0x00000040)) {
-          shiftToIndex_ = java.util.Collections.unmodifiableList(shiftToIndex_);
-          bitField0_ = (bitField0_ & ~0x00000040);
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000010;
         }
-        result.shiftToIndex_ = shiftToIndex_;
+        result.enclosingObjects_ = enclosingObjects_;
         if (((bitField0_ & 0x00000080) == 0x00000080)) {
-          shiftToCityIndex_ = java.util.Collections.unmodifiableList(shiftToCityIndex_);
+          shiftToIndex_ = java.util.Collections.unmodifiableList(shiftToIndex_);
           bitField0_ = (bitField0_ & ~0x00000080);
         }
-        result.shiftToCityIndex_ = shiftToCityIndex_;
+        result.shiftToIndex_ = shiftToIndex_;
         if (((bitField0_ & 0x00000100) == 0x00000100)) {
-          xy16_ = java.util.Collections.unmodifiableList(xy16_);
+          shiftToCityIndex_ = java.util.Collections.unmodifiableList(shiftToCityIndex_);
           bitField0_ = (bitField0_ & ~0x00000100);
+        }
+        result.shiftToCityIndex_ = shiftToCityIndex_;
+        if (((bitField0_ & 0x00000200) == 0x00000200)) {
+          xy16_ = java.util.Collections.unmodifiableList(xy16_);
+          bitField0_ = (bitField0_ & ~0x00000200);
         }
         result.xy16_ = xy16_;
         result.bitField0_ = to_bitField0_;
@@ -20823,10 +22453,13 @@ public final class OsmandOdb {
           extraSuffix_ = other.extraSuffix_;
           onChanged();
         }
+        if (other.hasEnclosingObjects()) {
+          setEnclosingObjects(other.getEnclosingObjects());
+        }
         if (!other.shiftToIndex_.isEmpty()) {
           if (shiftToIndex_.isEmpty()) {
             shiftToIndex_ = other.shiftToIndex_;
-            bitField0_ = (bitField0_ & ~0x00000040);
+            bitField0_ = (bitField0_ & ~0x00000080);
           } else {
             ensureShiftToIndexIsMutable();
             shiftToIndex_.addAll(other.shiftToIndex_);
@@ -20836,7 +22469,7 @@ public final class OsmandOdb {
         if (!other.shiftToCityIndex_.isEmpty()) {
           if (shiftToCityIndex_.isEmpty()) {
             shiftToCityIndex_ = other.shiftToCityIndex_;
-            bitField0_ = (bitField0_ & ~0x00000080);
+            bitField0_ = (bitField0_ & ~0x00000100);
           } else {
             ensureShiftToCityIndexIsMutable();
             shiftToCityIndex_.addAll(other.shiftToCityIndex_);
@@ -20846,7 +22479,7 @@ public final class OsmandOdb {
         if (!other.xy16_.isEmpty()) {
           if (xy16_.isEmpty()) {
             xy16_ = other.xy16_;
-            bitField0_ = (bitField0_ & ~0x00000100);
+            bitField0_ = (bitField0_ & ~0x00000200);
           } else {
             ensureXy16IsMutable();
             xy16_.addAll(other.xy16_);
@@ -21374,12 +23007,61 @@ public final class OsmandOdb {
         return this;
       }
 
+      // optional uint32 enclosingObjects = 16;
+      private int enclosingObjects_ ;
+      /**
+       * <code>optional uint32 enclosingObjects = 16;</code>
+       *
+       * <pre>
+       * enclosing objects: for now represents number of streets inside boundary
+       * </pre>
+       */
+      public boolean hasEnclosingObjects() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional uint32 enclosingObjects = 16;</code>
+       *
+       * <pre>
+       * enclosing objects: for now represents number of streets inside boundary
+       * </pre>
+       */
+      public int getEnclosingObjects() {
+        return enclosingObjects_;
+      }
+      /**
+       * <code>optional uint32 enclosingObjects = 16;</code>
+       *
+       * <pre>
+       * enclosing objects: for now represents number of streets inside boundary
+       * </pre>
+       */
+      public Builder setEnclosingObjects(int value) {
+        bitField0_ |= 0x00000040;
+        enclosingObjects_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional uint32 enclosingObjects = 16;</code>
+       *
+       * <pre>
+       * enclosing objects: for now represents number of streets inside boundary
+       * </pre>
+       */
+      public Builder clearEnclosingObjects() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        enclosingObjects_ = 0;
+        onChanged();
+        return this;
+      }
+
       // repeated int32 shiftToIndex = 5;
       private java.util.List<java.lang.Integer> shiftToIndex_ = java.util.Collections.emptyList();
       private void ensureShiftToIndexIsMutable() {
-        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
+        if (!((bitField0_ & 0x00000080) == 0x00000080)) {
           shiftToIndex_ = new java.util.ArrayList<java.lang.Integer>(shiftToIndex_);
-          bitField0_ |= 0x00000040;
+          bitField0_ |= 0x00000080;
          }
       }
       /**
@@ -21470,7 +23152,7 @@ public final class OsmandOdb {
        */
       public Builder clearShiftToIndex() {
         shiftToIndex_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000080);
         onChanged();
         return this;
       }
@@ -21478,9 +23160,9 @@ public final class OsmandOdb {
       // repeated int32 shiftToCityIndex = 6;
       private java.util.List<java.lang.Integer> shiftToCityIndex_ = java.util.Collections.emptyList();
       private void ensureShiftToCityIndexIsMutable() {
-        if (!((bitField0_ & 0x00000080) == 0x00000080)) {
+        if (!((bitField0_ & 0x00000100) == 0x00000100)) {
           shiftToCityIndex_ = new java.util.ArrayList<java.lang.Integer>(shiftToCityIndex_);
-          bitField0_ |= 0x00000080;
+          bitField0_ |= 0x00000100;
          }
       }
       /**
@@ -21564,7 +23246,7 @@ public final class OsmandOdb {
        */
       public Builder clearShiftToCityIndex() {
         shiftToCityIndex_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000100);
         onChanged();
         return this;
       }
@@ -21572,9 +23254,9 @@ public final class OsmandOdb {
       // repeated uint32 xy16 = 7;
       private java.util.List<java.lang.Integer> xy16_ = java.util.Collections.emptyList();
       private void ensureXy16IsMutable() {
-        if (!((bitField0_ & 0x00000100) == 0x00000100)) {
+        if (!((bitField0_ & 0x00000200) == 0x00000200)) {
           xy16_ = new java.util.ArrayList<java.lang.Integer>(xy16_);
-          bitField0_ |= 0x00000100;
+          bitField0_ |= 0x00000200;
          }
       }
       /**
@@ -21658,7 +23340,7 @@ public final class OsmandOdb {
        */
       public Builder clearXy16() {
         xy16_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000200);
         onChanged();
         return this;
       }
@@ -48259,6 +49941,20 @@ public final class OsmandOdb {
     public interface OsmAndPoiNameIndexDataOrBuilder
         extends com.google.protobuf.MessageOrBuilder {
 
+      // optional .OsmAnd.OBF.NameIndexedStats stats = 1;
+      /**
+       * <code>optional .OsmAnd.OBF.NameIndexedStats stats = 1;</code>
+       */
+      boolean hasStats();
+      /**
+       * <code>optional .OsmAnd.OBF.NameIndexedStats stats = 1;</code>
+       */
+      net.osmand.binary.OsmandOdb.NameIndexedStats getStats();
+      /**
+       * <code>optional .OsmAnd.OBF.NameIndexedStats stats = 1;</code>
+       */
+      net.osmand.binary.OsmandOdb.NameIndexedStatsOrBuilder getStatsOrBuilder();
+
       // repeated string suffixesDictionary = 2;
       /**
        * <code>repeated string suffixesDictionary = 2;</code>
@@ -48391,18 +50087,31 @@ public final class OsmandOdb {
                 }
                 break;
               }
+              case 10: {
+                net.osmand.binary.OsmandOdb.NameIndexedStats.Builder subBuilder = null;
+                if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                  subBuilder = stats_.toBuilder();
+                }
+                stats_ = input.readMessage(net.osmand.binary.OsmandOdb.NameIndexedStats.PARSER, extensionRegistry);
+                if (subBuilder != null) {
+                  subBuilder.mergeFrom(stats_);
+                  stats_ = subBuilder.buildPartial();
+                }
+                bitField0_ |= 0x00000001;
+                break;
+              }
               case 18: {
-                if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
                   suffixesDictionary_ = new com.google.protobuf.LazyStringArrayList();
-                  mutable_bitField0_ |= 0x00000001;
+                  mutable_bitField0_ |= 0x00000002;
                 }
                 suffixesDictionary_.add(input.readBytes());
                 break;
               }
               case 26: {
-                if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
                   atoms_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom>();
-                  mutable_bitField0_ |= 0x00000002;
+                  mutable_bitField0_ |= 0x00000004;
                 }
                 atoms_.add(input.readMessage(net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom.PARSER, extensionRegistry));
                 break;
@@ -48415,10 +50124,10 @@ public final class OsmandOdb {
           throw new com.google.protobuf.InvalidProtocolBufferException(
               e.getMessage()).setUnfinishedMessage(this);
         } finally {
-          if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
             suffixesDictionary_ = new com.google.protobuf.UnmodifiableLazyStringList(suffixesDictionary_);
           }
-          if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
             atoms_ = java.util.Collections.unmodifiableList(atoms_);
           }
           this.unknownFields = unknownFields.build();
@@ -48450,6 +50159,29 @@ public final class OsmandOdb {
       @java.lang.Override
       public com.google.protobuf.Parser<OsmAndPoiNameIndexData> getParserForType() {
         return PARSER;
+      }
+
+      private int bitField0_;
+      // optional .OsmAnd.OBF.NameIndexedStats stats = 1;
+      public static final int STATS_FIELD_NUMBER = 1;
+      private net.osmand.binary.OsmandOdb.NameIndexedStats stats_;
+      /**
+       * <code>optional .OsmAnd.OBF.NameIndexedStats stats = 1;</code>
+       */
+      public boolean hasStats() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .OsmAnd.OBF.NameIndexedStats stats = 1;</code>
+       */
+      public net.osmand.binary.OsmandOdb.NameIndexedStats getStats() {
+        return stats_;
+      }
+      /**
+       * <code>optional .OsmAnd.OBF.NameIndexedStats stats = 1;</code>
+       */
+      public net.osmand.binary.OsmandOdb.NameIndexedStatsOrBuilder getStatsOrBuilder() {
+        return stats_;
       }
 
       // repeated string suffixesDictionary = 2;
@@ -48555,6 +50287,7 @@ public final class OsmandOdb {
       }
 
       private void initFields() {
+        stats_ = net.osmand.binary.OsmandOdb.NameIndexedStats.getDefaultInstance();
         suffixesDictionary_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         atoms_ = java.util.Collections.emptyList();
       }
@@ -48563,6 +50296,12 @@ public final class OsmandOdb {
         byte isInitialized = memoizedIsInitialized;
         if (isInitialized != -1) return isInitialized == 1;
 
+        if (hasStats()) {
+          if (!getStats().isInitialized()) {
+            memoizedIsInitialized = 0;
+            return false;
+          }
+        }
         memoizedIsInitialized = 1;
         return true;
       }
@@ -48570,6 +50309,9 @@ public final class OsmandOdb {
       public void writeTo(com.google.protobuf.CodedOutputStream output)
                           throws java.io.IOException {
         getSerializedSize();
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          output.writeMessage(1, stats_);
+        }
         for (int i = 0; i < suffixesDictionary_.size(); i++) {
           output.writeBytes(2, suffixesDictionary_.getByteString(i));
         }
@@ -48585,6 +50327,10 @@ public final class OsmandOdb {
         if (size != -1) return size;
 
         size = 0;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(1, stats_);
+        }
         {
           int dataSize = 0;
           for (int i = 0; i < suffixesDictionary_.size(); i++) {
@@ -48706,6 +50452,7 @@ public final class OsmandOdb {
         }
         private void maybeForceBuilderInitialization() {
           if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+            getStatsFieldBuilder();
             getAtomsFieldBuilder();
           }
         }
@@ -48715,11 +50462,17 @@ public final class OsmandOdb {
 
         public Builder clear() {
           super.clear();
-          suffixesDictionary_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+          if (statsBuilder_ == null) {
+            stats_ = net.osmand.binary.OsmandOdb.NameIndexedStats.getDefaultInstance();
+          } else {
+            statsBuilder_.clear();
+          }
           bitField0_ = (bitField0_ & ~0x00000001);
+          suffixesDictionary_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+          bitField0_ = (bitField0_ & ~0x00000002);
           if (atomsBuilder_ == null) {
             atoms_ = java.util.Collections.emptyList();
-            bitField0_ = (bitField0_ & ~0x00000002);
+            bitField0_ = (bitField0_ & ~0x00000004);
           } else {
             atomsBuilder_.clear();
           }
@@ -48750,21 +50503,31 @@ public final class OsmandOdb {
         public net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData buildPartial() {
           net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData result = new net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData(this);
           int from_bitField0_ = bitField0_;
-          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          int to_bitField0_ = 0;
+          if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+            to_bitField0_ |= 0x00000001;
+          }
+          if (statsBuilder_ == null) {
+            result.stats_ = stats_;
+          } else {
+            result.stats_ = statsBuilder_.build();
+          }
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
             suffixesDictionary_ = new com.google.protobuf.UnmodifiableLazyStringList(
                 suffixesDictionary_);
-            bitField0_ = (bitField0_ & ~0x00000001);
+            bitField0_ = (bitField0_ & ~0x00000002);
           }
           result.suffixesDictionary_ = suffixesDictionary_;
           if (atomsBuilder_ == null) {
-            if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            if (((bitField0_ & 0x00000004) == 0x00000004)) {
               atoms_ = java.util.Collections.unmodifiableList(atoms_);
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000004);
             }
             result.atoms_ = atoms_;
           } else {
             result.atoms_ = atomsBuilder_.build();
           }
+          result.bitField0_ = to_bitField0_;
           onBuilt();
           return result;
         }
@@ -48780,10 +50543,13 @@ public final class OsmandOdb {
 
         public Builder mergeFrom(net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData other) {
           if (other == net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData.getDefaultInstance()) return this;
+          if (other.hasStats()) {
+            mergeStats(other.getStats());
+          }
           if (!other.suffixesDictionary_.isEmpty()) {
             if (suffixesDictionary_.isEmpty()) {
               suffixesDictionary_ = other.suffixesDictionary_;
-              bitField0_ = (bitField0_ & ~0x00000001);
+              bitField0_ = (bitField0_ & ~0x00000002);
             } else {
               ensureSuffixesDictionaryIsMutable();
               suffixesDictionary_.addAll(other.suffixesDictionary_);
@@ -48794,7 +50560,7 @@ public final class OsmandOdb {
             if (!other.atoms_.isEmpty()) {
               if (atoms_.isEmpty()) {
                 atoms_ = other.atoms_;
-                bitField0_ = (bitField0_ & ~0x00000002);
+                bitField0_ = (bitField0_ & ~0x00000004);
               } else {
                 ensureAtomsIsMutable();
                 atoms_.addAll(other.atoms_);
@@ -48807,7 +50573,7 @@ public final class OsmandOdb {
                 atomsBuilder_.dispose();
                 atomsBuilder_ = null;
                 atoms_ = other.atoms_;
-                bitField0_ = (bitField0_ & ~0x00000002);
+                bitField0_ = (bitField0_ & ~0x00000004);
                 atomsBuilder_ = 
                   com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                      getAtomsFieldBuilder() : null;
@@ -48821,6 +50587,12 @@ public final class OsmandOdb {
         }
 
         public final boolean isInitialized() {
+          if (hasStats()) {
+            if (!getStats().isInitialized()) {
+              
+              return false;
+            }
+          }
           return true;
         }
 
@@ -48843,12 +50615,129 @@ public final class OsmandOdb {
         }
         private int bitField0_;
 
+        // optional .OsmAnd.OBF.NameIndexedStats stats = 1;
+        private net.osmand.binary.OsmandOdb.NameIndexedStats stats_ = net.osmand.binary.OsmandOdb.NameIndexedStats.getDefaultInstance();
+        private com.google.protobuf.SingleFieldBuilder<
+            net.osmand.binary.OsmandOdb.NameIndexedStats, net.osmand.binary.OsmandOdb.NameIndexedStats.Builder, net.osmand.binary.OsmandOdb.NameIndexedStatsOrBuilder> statsBuilder_;
+        /**
+         * <code>optional .OsmAnd.OBF.NameIndexedStats stats = 1;</code>
+         */
+        public boolean hasStats() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        /**
+         * <code>optional .OsmAnd.OBF.NameIndexedStats stats = 1;</code>
+         */
+        public net.osmand.binary.OsmandOdb.NameIndexedStats getStats() {
+          if (statsBuilder_ == null) {
+            return stats_;
+          } else {
+            return statsBuilder_.getMessage();
+          }
+        }
+        /**
+         * <code>optional .OsmAnd.OBF.NameIndexedStats stats = 1;</code>
+         */
+        public Builder setStats(net.osmand.binary.OsmandOdb.NameIndexedStats value) {
+          if (statsBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            stats_ = value;
+            onChanged();
+          } else {
+            statsBuilder_.setMessage(value);
+          }
+          bitField0_ |= 0x00000001;
+          return this;
+        }
+        /**
+         * <code>optional .OsmAnd.OBF.NameIndexedStats stats = 1;</code>
+         */
+        public Builder setStats(
+            net.osmand.binary.OsmandOdb.NameIndexedStats.Builder builderForValue) {
+          if (statsBuilder_ == null) {
+            stats_ = builderForValue.build();
+            onChanged();
+          } else {
+            statsBuilder_.setMessage(builderForValue.build());
+          }
+          bitField0_ |= 0x00000001;
+          return this;
+        }
+        /**
+         * <code>optional .OsmAnd.OBF.NameIndexedStats stats = 1;</code>
+         */
+        public Builder mergeStats(net.osmand.binary.OsmandOdb.NameIndexedStats value) {
+          if (statsBuilder_ == null) {
+            if (((bitField0_ & 0x00000001) == 0x00000001) &&
+                stats_ != net.osmand.binary.OsmandOdb.NameIndexedStats.getDefaultInstance()) {
+              stats_ =
+                net.osmand.binary.OsmandOdb.NameIndexedStats.newBuilder(stats_).mergeFrom(value).buildPartial();
+            } else {
+              stats_ = value;
+            }
+            onChanged();
+          } else {
+            statsBuilder_.mergeFrom(value);
+          }
+          bitField0_ |= 0x00000001;
+          return this;
+        }
+        /**
+         * <code>optional .OsmAnd.OBF.NameIndexedStats stats = 1;</code>
+         */
+        public Builder clearStats() {
+          if (statsBuilder_ == null) {
+            stats_ = net.osmand.binary.OsmandOdb.NameIndexedStats.getDefaultInstance();
+            onChanged();
+          } else {
+            statsBuilder_.clear();
+          }
+          bitField0_ = (bitField0_ & ~0x00000001);
+          return this;
+        }
+        /**
+         * <code>optional .OsmAnd.OBF.NameIndexedStats stats = 1;</code>
+         */
+        public net.osmand.binary.OsmandOdb.NameIndexedStats.Builder getStatsBuilder() {
+          bitField0_ |= 0x00000001;
+          onChanged();
+          return getStatsFieldBuilder().getBuilder();
+        }
+        /**
+         * <code>optional .OsmAnd.OBF.NameIndexedStats stats = 1;</code>
+         */
+        public net.osmand.binary.OsmandOdb.NameIndexedStatsOrBuilder getStatsOrBuilder() {
+          if (statsBuilder_ != null) {
+            return statsBuilder_.getMessageOrBuilder();
+          } else {
+            return stats_;
+          }
+        }
+        /**
+         * <code>optional .OsmAnd.OBF.NameIndexedStats stats = 1;</code>
+         */
+        private com.google.protobuf.SingleFieldBuilder<
+            net.osmand.binary.OsmandOdb.NameIndexedStats, net.osmand.binary.OsmandOdb.NameIndexedStats.Builder, net.osmand.binary.OsmandOdb.NameIndexedStatsOrBuilder> 
+            getStatsFieldBuilder() {
+          if (statsBuilder_ == null) {
+            statsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                net.osmand.binary.OsmandOdb.NameIndexedStats, net.osmand.binary.OsmandOdb.NameIndexedStats.Builder, net.osmand.binary.OsmandOdb.NameIndexedStatsOrBuilder>(
+                    stats_,
+                    getParentForChildren(),
+                    isClean());
+            stats_ = null;
+          }
+          return statsBuilder_;
+        }
+
         // repeated string suffixesDictionary = 2;
         private com.google.protobuf.LazyStringList suffixesDictionary_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         private void ensureSuffixesDictionaryIsMutable() {
-          if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          if (!((bitField0_ & 0x00000002) == 0x00000002)) {
             suffixesDictionary_ = new com.google.protobuf.LazyStringArrayList(suffixesDictionary_);
-            bitField0_ |= 0x00000001;
+            bitField0_ |= 0x00000002;
            }
         }
         /**
@@ -48950,7 +50839,7 @@ public final class OsmandOdb {
          */
         public Builder clearSuffixesDictionary() {
           suffixesDictionary_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-          bitField0_ = (bitField0_ & ~0x00000001);
+          bitField0_ = (bitField0_ & ~0x00000002);
           onChanged();
           return this;
         }
@@ -48976,9 +50865,9 @@ public final class OsmandOdb {
         private java.util.List<net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom> atoms_ =
           java.util.Collections.emptyList();
         private void ensureAtomsIsMutable() {
-          if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          if (!((bitField0_ & 0x00000004) == 0x00000004)) {
             atoms_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom>(atoms_);
-            bitField0_ |= 0x00000002;
+            bitField0_ |= 0x00000004;
            }
         }
 
@@ -49171,7 +51060,7 @@ public final class OsmandOdb {
         public Builder clearAtoms() {
           if (atomsBuilder_ == null) {
             atoms_ = java.util.Collections.emptyList();
-            bitField0_ = (bitField0_ & ~0x00000002);
+            bitField0_ = (bitField0_ & ~0x00000004);
             onChanged();
           } else {
             atomsBuilder_.clear();
@@ -49276,7 +51165,7 @@ public final class OsmandOdb {
             atomsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
                 net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom, net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom.Builder, net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtomOrBuilder>(
                     atoms_,
-                    ((bitField0_ & 0x00000002) == 0x00000002),
+                    ((bitField0_ & 0x00000004) == 0x00000004),
                     getParentForChildren(),
                     isClean());
             atoms_ = null;
@@ -49381,6 +51270,12 @@ public final class OsmandOdb {
       if (!hasTable()) {
         memoizedIsInitialized = 0;
         return false;
+      }
+      for (int i = 0; i < getDataCount(); i++) {
+        if (!getData(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
       }
       memoizedIsInitialized = 1;
       return true;
@@ -49640,6 +51535,12 @@ public final class OsmandOdb {
         if (!hasTable()) {
           
           return false;
+        }
+        for (int i = 0; i < getDataCount(); i++) {
+          if (!getData(i).isInitialized()) {
+            
+            return false;
+          }
         }
         return true;
       }
@@ -78676,6 +80577,11 @@ public final class OsmandOdb {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_OsmAnd_OBF_OsmAndAddressIndex_CitiesIndex_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_OsmAnd_OBF_NameIndexedStats_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_OsmAnd_OBF_NameIndexedStats_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_OsmAnd_OBF_OsmAndAddressNameIndexData_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -78962,190 +80868,197 @@ public final class OsmandOdb {
       "d.OBF.CityIndex\022*\n\006blocks\030\007 \003(\0132\032.OsmAnd" +
       ".OBF.CityBlockIndex\"<\n\nCitiesType\022\021\n\rCit" +
       "iesOrTowns\020\001\022\r\n\tPostcodes\020\002\022\014\n\010Villages\020" +
-      "\003\"\376\001\n\032OsmAndAddressNameIndexData\022-\n\005tabl" +
-      "e\030\004 \002(\0132\036.OsmAnd.OBF.IndexedStringTable\022" +
-      "I\n\004atom\030\007 \003(\0132;.OsmAnd.OBF.OsmAndAddress" +
-      "NameIndexData.AddressNameIndexData\032f\n\024Ad" +
-      "dressNameIndexData\022\032\n\022suffixesDictionary" +
-      "\030\002 \003(\t\0222\n\004atom\030\004 \003(\0132$.OsmAnd.OBF.Addres" +
-      "sNameIndexDataAtom\"\316\001\n\030AddressNameIndexD",
-      "ataAtom\022\014\n\004name\030\001 \001(\t\022\016\n\006nameEn\030\002 \001(\t\022\014\n" +
-      "\004type\030\003 \002(\r\022\026\n\016suffixesBitset\030\004 \003(\r\022\033\n\023s" +
-      "uffixesBitsetIndex\030\010 \003(\r\022\023\n\013extraSuffix\030" +
-      "\t \001(\t\022\024\n\014shiftToIndex\030\005 \003(\005\022\030\n\020shiftToCi" +
-      "tyIndex\030\006 \003(\005\022\014\n\004xy16\030\007 \003(\r\"\302\001\n\tCityInde" +
-      "x\022\021\n\tcity_type\030\001 \001(\r\022\014\n\004name\030\002 \002(\t\022\017\n\007na" +
-      "me_en\030\003 \001(\t\022\n\n\002id\030\004 \001(\004\022\t\n\001x\030\005 \002(\r\022\t\n\001y\030" +
-      "\006 \002(\r\022\027\n\017attributeTagIds\030\007 \003(\r\022\027\n\017attrib" +
-      "uteValues\030\010 \003(\t\022\035\n\025shiftToCityBlockIndex" +
-      "\030\n \001(\007\022\020\n\010boundary\030\014 \001(\014\"\202\001\n\016CityBlockIn",
-      "dex\022\030\n\020shiftToCityIndex\030\004 \001(\007\022,\n\tbuildin" +
-      "gs\030\n \003(\0132\031.OsmAnd.OBF.BuildingIndex\022(\n\007s" +
-      "treets\030\014 \003(\0132\027.OsmAnd.OBF.StreetIndex\"\345\001" +
-      "\n\013StreetIndex\022\014\n\004name\030\001 \002(\t\022\017\n\007name_en\030\002" +
-      " \001(\t\022\t\n\001x\030\003 \002(\021\022\t\n\001y\030\004 \002(\021\0225\n\rintersecti" +
-      "ons\030\005 \003(\0132\036.OsmAnd.OBF.StreetIntersectio" +
-      "n\022\n\n\002id\030\006 \001(\004\022\027\n\017attributeTagIds\030\007 \003(\r\022\027" +
-      "\n\017attributeValues\030\010 \003(\t\022,\n\tbuildings\030\014 \003" +
-      "(\0132\031.OsmAnd.OBF.BuildingIndex\"\221\001\n\022Street" +
-      "Intersection\022\014\n\004name\030\002 \002(\t\022\017\n\007name_en\030\003 ",
-      "\001(\t\022\024\n\014intersectedX\030\004 \002(\021\022\024\n\014intersected" +
-      "Y\030\005 \002(\021\022\027\n\017attributeTagIds\030\007 \003(\r\022\027\n\017attr" +
-      "ibuteValues\030\010 \003(\t\"\230\002\n\rBuildingIndex\022\014\n\004n" +
-      "ame\030\001 \002(\t\022\017\n\007name_en\030\002 \001(\t\022\r\n\005name2\030\003 \001(" +
-      "\t\022\020\n\010name_en2\030\004 \001(\t\022\025\n\rinterpolation\030\005 \001" +
-      "(\021\022\t\n\001x\030\007 \002(\021\022\t\n\001y\030\010 \002(\021\022\n\n\002x2\030\t \001(\021\022\n\n\002" +
-      "y2\030\n \001(\021\022\n\n\002id\030\r \001(\004\022\020\n\010postcode\030\016 \001(\t\022\027" +
-      "\n\017attributeTagIds\030\017 \003(\r\022\027\n\017attributeValu" +
-      "es\030\020 \003(\t\022\030\n\020attributeTagIds2\030\021 \003(\r\022\030\n\020at" +
-      "tributeValues2\030\022 \003(\t\"=\n\017TransportRoutes\022",
-      "*\n\006routes\030\006 \003(\0132\032.OsmAnd.OBF.TransportRo" +
-      "ute\"\371\002\n\016TransportRoute\022\n\n\002id\030\001 \002(\004\022\014\n\004ty" +
-      "pe\030\003 \001(\r\022\020\n\010operator\030\004 \001(\r\022\013\n\003ref\030\005 \001(\t\022" +
-      "\014\n\004name\030\006 \001(\r\022\017\n\007name_en\030\007 \001(\r\022\020\n\010distan" +
-      "ce\030\010 \001(\r\022\r\n\005color\030\t \001(\r\0223\n\013directStops\030\017" +
-      " \003(\0132\036.OsmAnd.OBF.TransportRouteStop\0224\n\014" +
-      "reverseStops\030\020 \003(\0132\036.OsmAnd.OBF.Transpor" +
-      "tRouteStop\022\020\n\010geometry\030\021 \001(\014\0228\n\014schedule" +
-      "Trip\030\022 \003(\0132\".OsmAnd.OBF.TransportRouteSc" +
-      "hedule\022\027\n\017attributeTagIds\030\023 \003(\r\022\036\n\026attri",
-      "buteTextTagValues\030\024 \003(\014\"Q\n\031IncompleteTra" +
-      "nsportRoutes\0224\n\006routes\030\006 \003(\0132$.OsmAnd.OB" +
-      "F.IncompleteTransportRoute\"{\n\030Incomplete" +
-      "TransportRoute\022\n\n\002id\030\001 \002(\004\022\014\n\004type\030\003 \001(\r" +
-      "\022\020\n\010operator\030\004 \001(\r\022\013\n\003ref\030\005 \001(\r\022\020\n\010route" +
-      "Ref\030\007 \002(\r\022\024\n\014missingStops\030\010 \003(\r\"\244\001\n\026Tran" +
-      "sportRouteSchedule\022\030\n\020avgStopIntervals\030\001" +
-      " \001(\014\022\030\n\020avgWaitIntervals\030\002 \001(\014\022\025\n\rtripIn" +
-      "tervals\030\003 \001(\014\022?\n\nexceptions\030\010 \003(\0132+.OsmA" +
-      "nd.OBF.TransportRouteScheduleException\"\313",
-      "\001\n\037TransportRouteScheduleException\022\023\n\013tr" +
-      "ipIndexes\030\001 \003(\r\022\023\n\013stopIndexes\030\002 \003(\r\022\021\n\t" +
-      "available\030\003 \001(\010\022\024\n\014delayArrival\030\005 \003(\r\022\031\n" +
-      "\021deltaWaitInterval\030\006 \003(\005\022\034\n\024dayOfWeekRes" +
-      "triction\030\007 \003(\r\022\034\n\024dayOfYearRestriction\030\010" +
-      " \003(\r\"k\n\022TransportRouteStop\022\n\n\002id\030\001 \002(\022\022\n" +
-      "\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\014\n\004name\030\006 \002(\r\022\017\n\007" +
-      "name_en\030\007 \001(\r\022\022\n\ntravelTime\030\010 \001(\r\"\332\001\n\rTr" +
-      "ansportStop\022\n\n\002dx\030\001 \002(\021\022\n\n\002dy\030\002 \002(\021\022\n\n\002i" +
-      "d\030\005 \002(\022\022\014\n\004name\030\006 \002(\r\022\017\n\007name_en\030\007 \001(\r\022\033",
-      "\n\023additionalNamePairs\030\010 \001(\014\022,\n\005exits\030\t \003" +
-      "(\0132\035.OsmAnd.OBF.TransportStopExit\022\016\n\006rou" +
-      "tes\030\020 \003(\r\022\030\n\020deletedRoutesIds\030\024 \003(\004\022\021\n\tr" +
-      "outesIds\030\026 \003(\004\"8\n\021TransportStopExit\022\n\n\002d" +
-      "x\030\001 \002(\021\022\n\n\002dy\030\002 \002(\021\022\013\n\003ref\030\003 \002(\r\"\272\001\n\022Tra" +
-      "nsportStopsTree\022\014\n\004left\030\001 \002(\021\022\r\n\005right\030\002" +
-      " \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021\0220\n\010sub" +
-      "trees\030\007 \003(\0132\036.OsmAnd.OBF.TransportStopsT" +
-      "ree\022(\n\005leafs\030\010 \003(\0132\031.OsmAnd.OBF.Transpor" +
-      "tStop\022\016\n\006baseId\030\020 \001(\004\"\357\001\n\024OsmAndTranspor",
-      "tIndex\022\014\n\004name\030\001 \001(\t\022+\n\006routes\030\003 \001(\0132\033.O" +
-      "smAnd.OBF.TransportRoutes\022-\n\005stops\030\006 \001(\013" +
-      "2\036.OsmAnd.OBF.TransportStopsTree\022?\n\020inco" +
-      "mpleteRoutes\030\010 \001(\0132%.OsmAnd.OBF.Incomple" +
-      "teTransportRoutes\022,\n\013stringTable\030\t \002(\0132\027" +
-      ".OsmAnd.OBF.StringTable\"\312\002\n\016OsmAndPoiInd" +
-      "ex\022\014\n\004name\030\001 \002(\t\022-\n\nboundaries\030\002 \002(\0132\031.O" +
-      "smAnd.OBF.OsmAndTileBox\0228\n\017categoriesTab" +
-      "le\030\003 \003(\0132\037.OsmAnd.OBF.OsmAndCategoryTabl" +
-      "e\0221\n\tnameIndex\030\004 \001(\0132\036.OsmAnd.OBF.OsmAnd",
-      "PoiNameIndex\0226\n\rsubtypesTable\030\005 \001(\0132\037.Os" +
-      "mAnd.OBF.OsmAndSubtypesTable\022\'\n\005boxes\030\006 " +
-      "\003(\0132\030.OsmAnd.OBF.OsmAndPoiBox\022-\n\007poiData" +
-      "\030\t \003(\0132\034.OsmAnd.OBF.OsmAndPoiBoxData\"\365\001\n" +
-      "\022OsmAndPoiNameIndex\022-\n\005table\030\003 \002(\0132\036.Osm" +
-      "And.OBF.IndexedStringTable\022C\n\004data\030\005 \003(\013" +
-      "25.OsmAnd.OBF.OsmAndPoiNameIndex.OsmAndP" +
-      "oiNameIndexData\032k\n\026OsmAndPoiNameIndexDat" +
-      "a\022\032\n\022suffixesDictionary\030\002 \003(\t\0225\n\005atoms\030\003" +
-      " \003(\0132&.OsmAnd.OBF.OsmAndPoiNameIndexData",
-      "Atom\"\262\001\n\032OsmAndPoiNameIndexDataAtom\022\014\n\004z" +
-      "oom\030\002 \001(\r\022\t\n\001x\030\003 \001(\r\022\t\n\001y\030\004 \001(\r\022\026\n\016suffi" +
-      "xesBitset\030\006 \003(\r\022\033\n\023suffixesBitsetIndex\030\005" +
-      " \003(\r\022\023\n\013extraSuffix\030\007 \001(\t\022\025\n\rpoiIndInBlo" +
-      "ck\030\t \003(\r\022\017\n\007shiftTo\030\016 \001(\007\"e\n\023OsmAndCateg" +
-      "oryTable\022\020\n\010category\030\001 \002(\t\022\021\n\tfrequency\030" +
-      "\002 \001(\r\022\025\n\rsubcategories\030\003 \003(\t\022\022\n\nsubcatfr" +
-      "eq\030\004 \003(\r\"E\n\023OsmAndSubtypesTable\022.\n\010subty" +
-      "pes\030\004 \003(\0132\034.OsmAnd.OBF.OsmAndPoiSubtype\"" +
-      "\240\001\n\020OsmAndPoiSubtype\022\014\n\004name\030\001 \002(\t\022\017\n\007ta",
-      "gname\030\002 \001(\t\022\016\n\006isText\030\003 \002(\010\022\021\n\tfrequency" +
-      "\030\005 \001(\r\022\031\n\021subtypeValuesSize\030\006 \001(\r\022\031\n\021sub" +
-      "typeValuesFreq\030\007 \003(\r\022\024\n\014subtypeValue\030\010 \003" +
-      "(\t\"2\n\021OsmAndPoiTagGroup\022\n\n\002id\030\001 \002(\r\022\021\n\tt" +
-      "agValues\030\005 \003(\t\"T\n\022OsmAndPoiTagGroups\022\017\n\003" +
-      "ids\030\002 \003(\rB\002\020\001\022-\n\006groups\030\005 \003(\0132\035.OsmAnd.O" +
-      "BF.OsmAndPoiTagGroup\"\340\001\n\014OsmAndPoiBox\022\014\n" +
-      "\004zoom\030\001 \002(\r\022\014\n\004left\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\0223" +
-      "\n\ncategories\030\004 \001(\0132\037.OsmAnd.OBF.OsmAndPo" +
-      "iCategories\0221\n\ttagGroups\030\010 \001(\0132\036.OsmAnd.",
-      "OBF.OsmAndPoiTagGroups\022*\n\010subBoxes\030\n \003(\013" +
-      "2\030.OsmAnd.OBF.OsmAndPoiBox\022\023\n\013shiftToDat" +
-      "a\030\016 \001(\007\"@\n\023OsmAndPoiCategories\022\022\n\ncatego" +
-      "ries\030\003 \003(\r\022\025\n\rsubcategories\030\005 \003(\r\"i\n\020Osm" +
-      "AndPoiBoxData\022\014\n\004zoom\030\001 \001(\r\022\t\n\001x\030\002 \001(\r\022\t" +
-      "\n\001y\030\003 \001(\r\0221\n\007poiData\030\005 \003(\0132 .OsmAnd.OBF." +
-      "OsmAndPoiBoxDataAtom\"\234\002\n\024OsmAndPoiBoxDat" +
-      "aAtom\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\022\n\ncategor" +
-      "ies\030\004 \003(\r\022\025\n\rsubcategories\030\005 \003(\r\022\014\n\004name" +
-      "\030\006 \001(\t\022\016\n\006nameEn\030\007 \001(\t\022\n\n\002id\030\010 \001(\004\022\024\n\014op",
-      "eningHours\030\n \001(\t\022\014\n\004site\030\013 \001(\t\022\r\n\005phone\030" +
-      "\014 \001(\t\022\014\n\004note\030\r \001(\t\022\026\n\016textCategories\030\016 " +
-      "\003(\r\022\022\n\ntextValues\030\017 \003(\t\022\023\n\013precisionXY\030\020" +
-      " \001(\005\022\025\n\ttagGroups\030\021 \003(\rB\002\020\001\"\032\n\007IdTable\022\017" +
-      "\n\007routeId\030\001 \003(\022\"F\n\017RestrictionData\022\014\n\004ty" +
-      "pe\030\001 \002(\005\022\014\n\004from\030\002 \002(\005\022\n\n\002to\030\003 \002(\005\022\013\n\003vi" +
-      "a\030\004 \001(\005\"x\n\tRouteData\022\016\n\006points\030\001 \002(\014\022\022\n\n" +
-      "pointTypes\030\004 \001(\014\022\022\n\npointNames\030\005 \001(\014\022\r\n\005" +
-      "types\030\007 \002(\014\022\017\n\007routeId\030\014 \002(\005\022\023\n\013stringNa" +
-      "mes\030\016 \001(\014\"\304\005\n\022OsmAndRoutingIndex\022\014\n\004name",
-      "\030\001 \002(\t\022?\n\005rules\030\002 \003(\01320.OsmAnd.OBF.OsmAn" +
-      "dRoutingIndex.RouteEncodingRule\022>\n\trootB" +
-      "oxes\030\003 \003(\0132+.OsmAnd.OBF.OsmAndRoutingInd" +
-      "ex.RouteDataBox\022A\n\014basemapBoxes\030\004 \003(\0132+." +
-      "OsmAnd.OBF.OsmAndRoutingIndex.RouteDataB" +
-      "ox\022=\n\006blocks\030\005 \003(\0132-.OsmAnd.OBF.OsmAndRo" +
-      "utingIndex.RouteDataBlock\032;\n\021RouteEncodi" +
-      "ngRule\022\013\n\003tag\030\003 \002(\t\022\r\n\005value\030\005 \002(\t\022\n\n\002id" +
-      "\030\007 \001(\r\032\231\001\n\014RouteDataBox\022\014\n\004left\030\001 \002(\021\022\r\n" +
-      "\005right\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n\006bottom\030\004 \002(",
-      "\021\022\023\n\013shiftToData\030\005 \001(\007\022:\n\005boxes\030\007 \003(\0132+." +
-      "OsmAnd.OBF.OsmAndRoutingIndex.RouteDataB" +
-      "ox\032\303\001\n\016RouteDataBlock\022$\n\007idTable\030\005 \001(\0132\023" +
-      ".OsmAnd.OBF.IdTable\022*\n\013dataObjects\030\006 \003(\013" +
-      "2\025.OsmAnd.OBF.RouteData\0221\n\014restrictions\030" +
-      "\007 \003(\0132\033.OsmAnd.OBF.RestrictionData\022,\n\013st" +
-      "ringTable\030\010 \001(\0132\027.OsmAnd.OBF.StringTable" +
-      "\"\231\010\n\024OsmAndHHRoutingIndex\022\017\n\007edition\030\001 \002" +
-      "(\003\022\017\n\007profile\030\002 \002(\t\022\025\n\rprofileParams\030\003 \003" +
-      "(\t\022/\n\016tagValuesTable\030\004 \001(\0132\027.OsmAnd.OBF.",
-      "StringTable\022E\n\npointBoxes\030\005 \002(\01321.OsmAnd" +
-      ".OBF.OsmAndHHRoutingIndex.HHRoutePointsB" +
-      "ox\022L\n\rpointSegments\030\006 \003(\01325.OsmAnd.OBF.O" +
-      "smAndHHRoutingIndex.HHRouteBlockSegments" +
-      "\032\324\001\n\020HHRoutePointsBox\022\014\n\004left\030\002 \002(\021\022\r\n\005r" +
-      "ight\030\003 \002(\021\022\013\n\003top\030\004 \002(\021\022\016\n\006bottom\030\005 \002(\021\022" +
-      "@\n\005boxes\030\006 \003(\01321.OsmAnd.OBF.OsmAndHHRout" +
-      "ingIndex.HHRoutePointsBox\022D\n\006points\030\007 \003(" +
-      "\01324.OsmAnd.OBF.OsmAndHHRoutingIndex.HHRo" +
-      "uteNetworkPoint\032\366\001\n\023HHRouteNetworkPoint\022",
-      "\n\n\002id\030\001 \002(\005\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\020\n\010g" +
-      "lobalId\030\004 \002(\005\022\016\n\006roadId\030\005 \002(\003\022\031\n\021roadSta" +
-      "rtEndIndex\030\006 \002(\005\022\021\n\tclusterId\030\007 \001(\005\022\023\n\013d" +
-      "ualPointId\030\010 \001(\005\022\025\n\rdualClusterId\030\t \001(\005\022" +
-      "\022\n\nprofileIds\030\n \003(\005\022\022\n\npartialInd\030\013 \001(\005\022" +
-      "\027\n\013tagValueIds\030\014 \003(\005B\002\020\001\032\360\001\n\024HHRouteBloc" +
-      "kSegments\022\024\n\014idRangeStart\030\001 \002(\005\022\025\n\ridRan" +
-      "geLength\030\002 \002(\005\022\021\n\tprofileId\030\003 \001(\005\022J\n\013inn" +
-      "erBlocks\030\006 \003(\01325.OsmAnd.OBF.OsmAndHHRout" +
-      "ingIndex.HHRouteBlockSegments\022L\n\rpointSe",
-      "gments\030\004 \003(\01325.OsmAnd.OBF.OsmAndHHRoutin" +
-      "gIndex.HHRoutePointSegments\032?\n\024HHRoutePo" +
-      "intSegments\022\022\n\nsegmentsIn\030\002 \002(\014\022\023\n\013segme" +
-      "ntsOut\030\003 \002(\014\"T\n\013OsmAndOwner\022\014\n\004name\030\001 \002(" +
-      "\t\022\020\n\010resource\030\002 \001(\t\022\023\n\013description\030\003 \001(\t" +
-      "\022\020\n\010pluginid\030\004 \001(\tB\036\n\021net.osmand.binaryB" +
-      "\tOsmandOdb"
+      "\003\"\242\001\n\020NameIndexedStats\022\021\n\tfrequency\030\001 \002(" +
+      "\r\022\017\n\007indexed\030\002 \002(\r\022\021\n\tenclosing\030\003 \001(\r\022\023\n" +
+      "\013strSuffixes\030\005 \003(\t\022\022\n\nsuffixFreq\030\006 \003(\r\022\025" +
+      "\n\rsuffixIndexed\030\007 \003(\r\022\027\n\017suffixEnclosing" +
+      "\030\010 \003(\r\"\254\002\n\032OsmAndAddressNameIndexData\022-\n" +
+      "\005table\030\004 \002(\0132\036.OsmAnd.OBF.IndexedStringT" +
+      "able\022I\n\004atom\030\007 \003(\0132;.OsmAnd.OBF.OsmAndAd",
+      "dressNameIndexData.AddressNameIndexData\032" +
+      "\223\001\n\024AddressNameIndexData\022+\n\005stats\030\001 \001(\0132" +
+      "\034.OsmAnd.OBF.NameIndexedStats\022\032\n\022suffixe" +
+      "sDictionary\030\002 \003(\t\0222\n\004atom\030\004 \003(\0132$.OsmAnd" +
+      ".OBF.AddressNameIndexDataAtom\"\350\001\n\030Addres" +
+      "sNameIndexDataAtom\022\014\n\004name\030\001 \001(\t\022\016\n\006name" +
+      "En\030\002 \001(\t\022\014\n\004type\030\003 \002(\r\022\026\n\016suffixesBitset" +
+      "\030\004 \003(\r\022\033\n\023suffixesBitsetIndex\030\010 \003(\r\022\023\n\013e" +
+      "xtraSuffix\030\t \001(\t\022\030\n\020enclosingObjects\030\020 \001" +
+      "(\r\022\024\n\014shiftToIndex\030\005 \003(\005\022\030\n\020shiftToCityI",
+      "ndex\030\006 \003(\005\022\014\n\004xy16\030\007 \003(\r\"\302\001\n\tCityIndex\022\021" +
+      "\n\tcity_type\030\001 \001(\r\022\014\n\004name\030\002 \002(\t\022\017\n\007name_" +
+      "en\030\003 \001(\t\022\n\n\002id\030\004 \001(\004\022\t\n\001x\030\005 \002(\r\022\t\n\001y\030\006 \002" +
+      "(\r\022\027\n\017attributeTagIds\030\007 \003(\r\022\027\n\017attribute" +
+      "Values\030\010 \003(\t\022\035\n\025shiftToCityBlockIndex\030\n " +
+      "\001(\007\022\020\n\010boundary\030\014 \001(\014\"\202\001\n\016CityBlockIndex" +
+      "\022\030\n\020shiftToCityIndex\030\004 \001(\007\022,\n\tbuildings\030" +
+      "\n \003(\0132\031.OsmAnd.OBF.BuildingIndex\022(\n\007stre" +
+      "ets\030\014 \003(\0132\027.OsmAnd.OBF.StreetIndex\"\345\001\n\013S" +
+      "treetIndex\022\014\n\004name\030\001 \002(\t\022\017\n\007name_en\030\002 \001(",
+      "\t\022\t\n\001x\030\003 \002(\021\022\t\n\001y\030\004 \002(\021\0225\n\rintersections" +
+      "\030\005 \003(\0132\036.OsmAnd.OBF.StreetIntersection\022\n" +
+      "\n\002id\030\006 \001(\004\022\027\n\017attributeTagIds\030\007 \003(\r\022\027\n\017a" +
+      "ttributeValues\030\010 \003(\t\022,\n\tbuildings\030\014 \003(\0132" +
+      "\031.OsmAnd.OBF.BuildingIndex\"\221\001\n\022StreetInt" +
+      "ersection\022\014\n\004name\030\002 \002(\t\022\017\n\007name_en\030\003 \001(\t" +
+      "\022\024\n\014intersectedX\030\004 \002(\021\022\024\n\014intersectedY\030\005" +
+      " \002(\021\022\027\n\017attributeTagIds\030\007 \003(\r\022\027\n\017attribu" +
+      "teValues\030\010 \003(\t\"\230\002\n\rBuildingIndex\022\014\n\004name" +
+      "\030\001 \002(\t\022\017\n\007name_en\030\002 \001(\t\022\r\n\005name2\030\003 \001(\t\022\020",
+      "\n\010name_en2\030\004 \001(\t\022\025\n\rinterpolation\030\005 \001(\021\022" +
+      "\t\n\001x\030\007 \002(\021\022\t\n\001y\030\010 \002(\021\022\n\n\002x2\030\t \001(\021\022\n\n\002y2\030" +
+      "\n \001(\021\022\n\n\002id\030\r \001(\004\022\020\n\010postcode\030\016 \001(\t\022\027\n\017a" +
+      "ttributeTagIds\030\017 \003(\r\022\027\n\017attributeValues\030" +
+      "\020 \003(\t\022\030\n\020attributeTagIds2\030\021 \003(\r\022\030\n\020attri" +
+      "buteValues2\030\022 \003(\t\"=\n\017TransportRoutes\022*\n\006" +
+      "routes\030\006 \003(\0132\032.OsmAnd.OBF.TransportRoute" +
+      "\"\371\002\n\016TransportRoute\022\n\n\002id\030\001 \002(\004\022\014\n\004type\030" +
+      "\003 \001(\r\022\020\n\010operator\030\004 \001(\r\022\013\n\003ref\030\005 \001(\t\022\014\n\004" +
+      "name\030\006 \001(\r\022\017\n\007name_en\030\007 \001(\r\022\020\n\010distance\030",
+      "\010 \001(\r\022\r\n\005color\030\t \001(\r\0223\n\013directStops\030\017 \003(" +
+      "\0132\036.OsmAnd.OBF.TransportRouteStop\0224\n\014rev" +
+      "erseStops\030\020 \003(\0132\036.OsmAnd.OBF.TransportRo" +
+      "uteStop\022\020\n\010geometry\030\021 \001(\014\0228\n\014scheduleTri" +
+      "p\030\022 \003(\0132\".OsmAnd.OBF.TransportRouteSched" +
+      "ule\022\027\n\017attributeTagIds\030\023 \003(\r\022\036\n\026attribut" +
+      "eTextTagValues\030\024 \003(\014\"Q\n\031IncompleteTransp" +
+      "ortRoutes\0224\n\006routes\030\006 \003(\0132$.OsmAnd.OBF.I" +
+      "ncompleteTransportRoute\"{\n\030IncompleteTra" +
+      "nsportRoute\022\n\n\002id\030\001 \002(\004\022\014\n\004type\030\003 \001(\r\022\020\n",
+      "\010operator\030\004 \001(\r\022\013\n\003ref\030\005 \001(\r\022\020\n\010routeRef" +
+      "\030\007 \002(\r\022\024\n\014missingStops\030\010 \003(\r\"\244\001\n\026Transpo" +
+      "rtRouteSchedule\022\030\n\020avgStopIntervals\030\001 \001(" +
+      "\014\022\030\n\020avgWaitIntervals\030\002 \001(\014\022\025\n\rtripInter" +
+      "vals\030\003 \001(\014\022?\n\nexceptions\030\010 \003(\0132+.OsmAnd." +
+      "OBF.TransportRouteScheduleException\"\313\001\n\037" +
+      "TransportRouteScheduleException\022\023\n\013tripI" +
+      "ndexes\030\001 \003(\r\022\023\n\013stopIndexes\030\002 \003(\r\022\021\n\tava" +
+      "ilable\030\003 \001(\010\022\024\n\014delayArrival\030\005 \003(\r\022\031\n\021de" +
+      "ltaWaitInterval\030\006 \003(\005\022\034\n\024dayOfWeekRestri",
+      "ction\030\007 \003(\r\022\034\n\024dayOfYearRestriction\030\010 \003(" +
+      "\r\"k\n\022TransportRouteStop\022\n\n\002id\030\001 \002(\022\022\n\n\002d" +
+      "x\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\014\n\004name\030\006 \002(\r\022\017\n\007nam" +
+      "e_en\030\007 \001(\r\022\022\n\ntravelTime\030\010 \001(\r\"\332\001\n\rTrans" +
+      "portStop\022\n\n\002dx\030\001 \002(\021\022\n\n\002dy\030\002 \002(\021\022\n\n\002id\030\005" +
+      " \002(\022\022\014\n\004name\030\006 \002(\r\022\017\n\007name_en\030\007 \001(\r\022\033\n\023a" +
+      "dditionalNamePairs\030\010 \001(\014\022,\n\005exits\030\t \003(\0132" +
+      "\035.OsmAnd.OBF.TransportStopExit\022\016\n\006routes" +
+      "\030\020 \003(\r\022\030\n\020deletedRoutesIds\030\024 \003(\004\022\021\n\trout" +
+      "esIds\030\026 \003(\004\"8\n\021TransportStopExit\022\n\n\002dx\030\001",
+      " \002(\021\022\n\n\002dy\030\002 \002(\021\022\013\n\003ref\030\003 \002(\r\"\272\001\n\022Transp" +
+      "ortStopsTree\022\014\n\004left\030\001 \002(\021\022\r\n\005right\030\002 \002(" +
+      "\021\022\013\n\003top\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021\0220\n\010subtre" +
+      "es\030\007 \003(\0132\036.OsmAnd.OBF.TransportStopsTree" +
+      "\022(\n\005leafs\030\010 \003(\0132\031.OsmAnd.OBF.TransportSt" +
+      "op\022\016\n\006baseId\030\020 \001(\004\"\357\001\n\024OsmAndTransportIn" +
+      "dex\022\014\n\004name\030\001 \001(\t\022+\n\006routes\030\003 \001(\0132\033.OsmA" +
+      "nd.OBF.TransportRoutes\022-\n\005stops\030\006 \001(\0132\036." +
+      "OsmAnd.OBF.TransportStopsTree\022?\n\020incompl" +
+      "eteRoutes\030\010 \001(\0132%.OsmAnd.OBF.IncompleteT",
+      "ransportRoutes\022,\n\013stringTable\030\t \002(\0132\027.Os" +
+      "mAnd.OBF.StringTable\"\312\002\n\016OsmAndPoiIndex\022" +
+      "\014\n\004name\030\001 \002(\t\022-\n\nboundaries\030\002 \002(\0132\031.OsmA" +
+      "nd.OBF.OsmAndTileBox\0228\n\017categoriesTable\030" +
+      "\003 \003(\0132\037.OsmAnd.OBF.OsmAndCategoryTable\0221" +
+      "\n\tnameIndex\030\004 \001(\0132\036.OsmAnd.OBF.OsmAndPoi" +
+      "NameIndex\0226\n\rsubtypesTable\030\005 \001(\0132\037.OsmAn" +
+      "d.OBF.OsmAndSubtypesTable\022\'\n\005boxes\030\006 \003(\013" +
+      "2\030.OsmAnd.OBF.OsmAndPoiBox\022-\n\007poiData\030\t " +
+      "\003(\0132\034.OsmAnd.OBF.OsmAndPoiBoxData\"\243\002\n\022Os",
+      "mAndPoiNameIndex\022-\n\005table\030\003 \002(\0132\036.OsmAnd" +
+      ".OBF.IndexedStringTable\022C\n\004data\030\005 \003(\01325." +
+      "OsmAnd.OBF.OsmAndPoiNameIndex.OsmAndPoiN" +
+      "ameIndexData\032\230\001\n\026OsmAndPoiNameIndexData\022" +
+      "+\n\005stats\030\001 \001(\0132\034.OsmAnd.OBF.NameIndexedS" +
+      "tats\022\032\n\022suffixesDictionary\030\002 \003(\t\0225\n\005atom" +
+      "s\030\003 \003(\0132&.OsmAnd.OBF.OsmAndPoiNameIndexD" +
+      "ataAtom\"\262\001\n\032OsmAndPoiNameIndexDataAtom\022\014" +
+      "\n\004zoom\030\002 \001(\r\022\t\n\001x\030\003 \001(\r\022\t\n\001y\030\004 \001(\r\022\026\n\016su" +
+      "ffixesBitset\030\006 \003(\r\022\033\n\023suffixesBitsetInde",
+      "x\030\005 \003(\r\022\023\n\013extraSuffix\030\007 \001(\t\022\025\n\rpoiIndIn" +
+      "Block\030\t \003(\r\022\017\n\007shiftTo\030\016 \001(\007\"e\n\023OsmAndCa" +
+      "tegoryTable\022\020\n\010category\030\001 \002(\t\022\021\n\tfrequen" +
+      "cy\030\002 \001(\r\022\025\n\rsubcategories\030\003 \003(\t\022\022\n\nsubca" +
+      "tfreq\030\004 \003(\r\"E\n\023OsmAndSubtypesTable\022.\n\010su" +
+      "btypes\030\004 \003(\0132\034.OsmAnd.OBF.OsmAndPoiSubty" +
+      "pe\"\240\001\n\020OsmAndPoiSubtype\022\014\n\004name\030\001 \002(\t\022\017\n" +
+      "\007tagname\030\002 \001(\t\022\016\n\006isText\030\003 \002(\010\022\021\n\tfreque" +
+      "ncy\030\005 \001(\r\022\031\n\021subtypeValuesSize\030\006 \001(\r\022\031\n\021" +
+      "subtypeValuesFreq\030\007 \003(\r\022\024\n\014subtypeValue\030",
+      "\010 \003(\t\"2\n\021OsmAndPoiTagGroup\022\n\n\002id\030\001 \002(\r\022\021" +
+      "\n\ttagValues\030\005 \003(\t\"T\n\022OsmAndPoiTagGroups\022" +
+      "\017\n\003ids\030\002 \003(\rB\002\020\001\022-\n\006groups\030\005 \003(\0132\035.OsmAn" +
+      "d.OBF.OsmAndPoiTagGroup\"\340\001\n\014OsmAndPoiBox" +
+      "\022\014\n\004zoom\030\001 \002(\r\022\014\n\004left\030\002 \002(\021\022\013\n\003top\030\003 \002(" +
+      "\021\0223\n\ncategories\030\004 \001(\0132\037.OsmAnd.OBF.OsmAn" +
+      "dPoiCategories\0221\n\ttagGroups\030\010 \001(\0132\036.OsmA" +
+      "nd.OBF.OsmAndPoiTagGroups\022*\n\010subBoxes\030\n " +
+      "\003(\0132\030.OsmAnd.OBF.OsmAndPoiBox\022\023\n\013shiftTo" +
+      "Data\030\016 \001(\007\"@\n\023OsmAndPoiCategories\022\022\n\ncat",
+      "egories\030\003 \003(\r\022\025\n\rsubcategories\030\005 \003(\r\"i\n\020" +
+      "OsmAndPoiBoxData\022\014\n\004zoom\030\001 \001(\r\022\t\n\001x\030\002 \001(" +
+      "\r\022\t\n\001y\030\003 \001(\r\0221\n\007poiData\030\005 \003(\0132 .OsmAnd.O" +
+      "BF.OsmAndPoiBoxDataAtom\"\234\002\n\024OsmAndPoiBox" +
+      "DataAtom\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\022\n\ncate" +
+      "gories\030\004 \003(\r\022\025\n\rsubcategories\030\005 \003(\r\022\014\n\004n" +
+      "ame\030\006 \001(\t\022\016\n\006nameEn\030\007 \001(\t\022\n\n\002id\030\010 \001(\004\022\024\n" +
+      "\014openingHours\030\n \001(\t\022\014\n\004site\030\013 \001(\t\022\r\n\005pho" +
+      "ne\030\014 \001(\t\022\014\n\004note\030\r \001(\t\022\026\n\016textCategories" +
+      "\030\016 \003(\r\022\022\n\ntextValues\030\017 \003(\t\022\023\n\013precisionX",
+      "Y\030\020 \001(\005\022\025\n\ttagGroups\030\021 \003(\rB\002\020\001\"\032\n\007IdTabl" +
+      "e\022\017\n\007routeId\030\001 \003(\022\"F\n\017RestrictionData\022\014\n" +
+      "\004type\030\001 \002(\005\022\014\n\004from\030\002 \002(\005\022\n\n\002to\030\003 \002(\005\022\013\n" +
+      "\003via\030\004 \001(\005\"x\n\tRouteData\022\016\n\006points\030\001 \002(\014\022" +
+      "\022\n\npointTypes\030\004 \001(\014\022\022\n\npointNames\030\005 \001(\014\022" +
+      "\r\n\005types\030\007 \002(\014\022\017\n\007routeId\030\014 \002(\005\022\023\n\013strin" +
+      "gNames\030\016 \001(\014\"\304\005\n\022OsmAndRoutingIndex\022\014\n\004n" +
+      "ame\030\001 \002(\t\022?\n\005rules\030\002 \003(\01320.OsmAnd.OBF.Os" +
+      "mAndRoutingIndex.RouteEncodingRule\022>\n\tro" +
+      "otBoxes\030\003 \003(\0132+.OsmAnd.OBF.OsmAndRouting",
+      "Index.RouteDataBox\022A\n\014basemapBoxes\030\004 \003(\013" +
+      "2+.OsmAnd.OBF.OsmAndRoutingIndex.RouteDa" +
+      "taBox\022=\n\006blocks\030\005 \003(\0132-.OsmAnd.OBF.OsmAn" +
+      "dRoutingIndex.RouteDataBlock\032;\n\021RouteEnc" +
+      "odingRule\022\013\n\003tag\030\003 \002(\t\022\r\n\005value\030\005 \002(\t\022\n\n" +
+      "\002id\030\007 \001(\r\032\231\001\n\014RouteDataBox\022\014\n\004left\030\001 \002(\021" +
+      "\022\r\n\005right\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n\006bottom\030\004" +
+      " \002(\021\022\023\n\013shiftToData\030\005 \001(\007\022:\n\005boxes\030\007 \003(\013" +
+      "2+.OsmAnd.OBF.OsmAndRoutingIndex.RouteDa" +
+      "taBox\032\303\001\n\016RouteDataBlock\022$\n\007idTable\030\005 \001(",
+      "\0132\023.OsmAnd.OBF.IdTable\022*\n\013dataObjects\030\006 " +
+      "\003(\0132\025.OsmAnd.OBF.RouteData\0221\n\014restrictio" +
+      "ns\030\007 \003(\0132\033.OsmAnd.OBF.RestrictionData\022,\n" +
+      "\013stringTable\030\010 \001(\0132\027.OsmAnd.OBF.StringTa" +
+      "ble\"\231\010\n\024OsmAndHHRoutingIndex\022\017\n\007edition\030" +
+      "\001 \002(\003\022\017\n\007profile\030\002 \002(\t\022\025\n\rprofileParams\030" +
+      "\003 \003(\t\022/\n\016tagValuesTable\030\004 \001(\0132\027.OsmAnd.O" +
+      "BF.StringTable\022E\n\npointBoxes\030\005 \002(\01321.Osm" +
+      "And.OBF.OsmAndHHRoutingIndex.HHRoutePoin" +
+      "tsBox\022L\n\rpointSegments\030\006 \003(\01325.OsmAnd.OB",
+      "F.OsmAndHHRoutingIndex.HHRouteBlockSegme" +
+      "nts\032\324\001\n\020HHRoutePointsBox\022\014\n\004left\030\002 \002(\021\022\r" +
+      "\n\005right\030\003 \002(\021\022\013\n\003top\030\004 \002(\021\022\016\n\006bottom\030\005 \002" +
+      "(\021\022@\n\005boxes\030\006 \003(\01321.OsmAnd.OBF.OsmAndHHR" +
+      "outingIndex.HHRoutePointsBox\022D\n\006points\030\007" +
+      " \003(\01324.OsmAnd.OBF.OsmAndHHRoutingIndex.H" +
+      "HRouteNetworkPoint\032\366\001\n\023HHRouteNetworkPoi" +
+      "nt\022\n\n\002id\030\001 \002(\005\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\020" +
+      "\n\010globalId\030\004 \002(\005\022\016\n\006roadId\030\005 \002(\003\022\031\n\021road" +
+      "StartEndIndex\030\006 \002(\005\022\021\n\tclusterId\030\007 \001(\005\022\023",
+      "\n\013dualPointId\030\010 \001(\005\022\025\n\rdualClusterId\030\t \001" +
+      "(\005\022\022\n\nprofileIds\030\n \003(\005\022\022\n\npartialInd\030\013 \001" +
+      "(\005\022\027\n\013tagValueIds\030\014 \003(\005B\002\020\001\032\360\001\n\024HHRouteB" +
+      "lockSegments\022\024\n\014idRangeStart\030\001 \002(\005\022\025\n\rid" +
+      "RangeLength\030\002 \002(\005\022\021\n\tprofileId\030\003 \001(\005\022J\n\013" +
+      "innerBlocks\030\006 \003(\01325.OsmAnd.OBF.OsmAndHHR" +
+      "outingIndex.HHRouteBlockSegments\022L\n\rpoin" +
+      "tSegments\030\004 \003(\01325.OsmAnd.OBF.OsmAndHHRou" +
+      "tingIndex.HHRoutePointSegments\032?\n\024HHRout" +
+      "ePointSegments\022\022\n\nsegmentsIn\030\002 \002(\014\022\023\n\013se",
+      "gmentsOut\030\003 \002(\014\"T\n\013OsmAndOwner\022\014\n\004name\030\001" +
+      " \002(\t\022\020\n\010resource\030\002 \001(\t\022\023\n\013description\030\003 " +
+      "\001(\t\022\020\n\010pluginid\030\004 \001(\tB\036\n\021net.osmand.bina" +
+      "ryB\tOsmandOdb"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -79224,8 +81137,14 @@ public final class OsmandOdb {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndAddressIndex_CitiesIndex_descriptor,
               new java.lang.String[] { "Type", "Cities", "Blocks", });
-          internal_static_OsmAnd_OBF_OsmAndAddressNameIndexData_descriptor =
+          internal_static_OsmAnd_OBF_NameIndexedStats_descriptor =
             getDescriptor().getMessageTypes().get(8);
+          internal_static_OsmAnd_OBF_NameIndexedStats_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_OsmAnd_OBF_NameIndexedStats_descriptor,
+              new java.lang.String[] { "Frequency", "Indexed", "Enclosing", "StrSuffixes", "SuffixFreq", "SuffixIndexed", "SuffixEnclosing", });
+          internal_static_OsmAnd_OBF_OsmAndAddressNameIndexData_descriptor =
+            getDescriptor().getMessageTypes().get(9);
           internal_static_OsmAnd_OBF_OsmAndAddressNameIndexData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndAddressNameIndexData_descriptor,
@@ -79235,117 +81154,117 @@ public final class OsmandOdb {
           internal_static_OsmAnd_OBF_OsmAndAddressNameIndexData_AddressNameIndexData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndAddressNameIndexData_AddressNameIndexData_descriptor,
-              new java.lang.String[] { "SuffixesDictionary", "Atom", });
+              new java.lang.String[] { "Stats", "SuffixesDictionary", "Atom", });
           internal_static_OsmAnd_OBF_AddressNameIndexDataAtom_descriptor =
-            getDescriptor().getMessageTypes().get(9);
+            getDescriptor().getMessageTypes().get(10);
           internal_static_OsmAnd_OBF_AddressNameIndexDataAtom_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_AddressNameIndexDataAtom_descriptor,
-              new java.lang.String[] { "Name", "NameEn", "Type", "SuffixesBitset", "SuffixesBitsetIndex", "ExtraSuffix", "ShiftToIndex", "ShiftToCityIndex", "Xy16", });
+              new java.lang.String[] { "Name", "NameEn", "Type", "SuffixesBitset", "SuffixesBitsetIndex", "ExtraSuffix", "EnclosingObjects", "ShiftToIndex", "ShiftToCityIndex", "Xy16", });
           internal_static_OsmAnd_OBF_CityIndex_descriptor =
-            getDescriptor().getMessageTypes().get(10);
+            getDescriptor().getMessageTypes().get(11);
           internal_static_OsmAnd_OBF_CityIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_CityIndex_descriptor,
               new java.lang.String[] { "CityType", "Name", "NameEn", "Id", "X", "Y", "AttributeTagIds", "AttributeValues", "ShiftToCityBlockIndex", "Boundary", });
           internal_static_OsmAnd_OBF_CityBlockIndex_descriptor =
-            getDescriptor().getMessageTypes().get(11);
+            getDescriptor().getMessageTypes().get(12);
           internal_static_OsmAnd_OBF_CityBlockIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_CityBlockIndex_descriptor,
               new java.lang.String[] { "ShiftToCityIndex", "Buildings", "Streets", });
           internal_static_OsmAnd_OBF_StreetIndex_descriptor =
-            getDescriptor().getMessageTypes().get(12);
+            getDescriptor().getMessageTypes().get(13);
           internal_static_OsmAnd_OBF_StreetIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_StreetIndex_descriptor,
               new java.lang.String[] { "Name", "NameEn", "X", "Y", "Intersections", "Id", "AttributeTagIds", "AttributeValues", "Buildings", });
           internal_static_OsmAnd_OBF_StreetIntersection_descriptor =
-            getDescriptor().getMessageTypes().get(13);
+            getDescriptor().getMessageTypes().get(14);
           internal_static_OsmAnd_OBF_StreetIntersection_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_StreetIntersection_descriptor,
               new java.lang.String[] { "Name", "NameEn", "IntersectedX", "IntersectedY", "AttributeTagIds", "AttributeValues", });
           internal_static_OsmAnd_OBF_BuildingIndex_descriptor =
-            getDescriptor().getMessageTypes().get(14);
+            getDescriptor().getMessageTypes().get(15);
           internal_static_OsmAnd_OBF_BuildingIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_BuildingIndex_descriptor,
               new java.lang.String[] { "Name", "NameEn", "Name2", "NameEn2", "Interpolation", "X", "Y", "X2", "Y2", "Id", "Postcode", "AttributeTagIds", "AttributeValues", "AttributeTagIds2", "AttributeValues2", });
           internal_static_OsmAnd_OBF_TransportRoutes_descriptor =
-            getDescriptor().getMessageTypes().get(15);
+            getDescriptor().getMessageTypes().get(16);
           internal_static_OsmAnd_OBF_TransportRoutes_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_TransportRoutes_descriptor,
               new java.lang.String[] { "Routes", });
           internal_static_OsmAnd_OBF_TransportRoute_descriptor =
-            getDescriptor().getMessageTypes().get(16);
+            getDescriptor().getMessageTypes().get(17);
           internal_static_OsmAnd_OBF_TransportRoute_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_TransportRoute_descriptor,
               new java.lang.String[] { "Id", "Type", "Operator", "Ref", "Name", "NameEn", "Distance", "Color", "DirectStops", "ReverseStops", "Geometry", "ScheduleTrip", "AttributeTagIds", "AttributeTextTagValues", });
           internal_static_OsmAnd_OBF_IncompleteTransportRoutes_descriptor =
-            getDescriptor().getMessageTypes().get(17);
+            getDescriptor().getMessageTypes().get(18);
           internal_static_OsmAnd_OBF_IncompleteTransportRoutes_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_IncompleteTransportRoutes_descriptor,
               new java.lang.String[] { "Routes", });
           internal_static_OsmAnd_OBF_IncompleteTransportRoute_descriptor =
-            getDescriptor().getMessageTypes().get(18);
+            getDescriptor().getMessageTypes().get(19);
           internal_static_OsmAnd_OBF_IncompleteTransportRoute_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_IncompleteTransportRoute_descriptor,
               new java.lang.String[] { "Id", "Type", "Operator", "Ref", "RouteRef", "MissingStops", });
           internal_static_OsmAnd_OBF_TransportRouteSchedule_descriptor =
-            getDescriptor().getMessageTypes().get(19);
+            getDescriptor().getMessageTypes().get(20);
           internal_static_OsmAnd_OBF_TransportRouteSchedule_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_TransportRouteSchedule_descriptor,
               new java.lang.String[] { "AvgStopIntervals", "AvgWaitIntervals", "TripIntervals", "Exceptions", });
           internal_static_OsmAnd_OBF_TransportRouteScheduleException_descriptor =
-            getDescriptor().getMessageTypes().get(20);
+            getDescriptor().getMessageTypes().get(21);
           internal_static_OsmAnd_OBF_TransportRouteScheduleException_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_TransportRouteScheduleException_descriptor,
               new java.lang.String[] { "TripIndexes", "StopIndexes", "Available", "DelayArrival", "DeltaWaitInterval", "DayOfWeekRestriction", "DayOfYearRestriction", });
           internal_static_OsmAnd_OBF_TransportRouteStop_descriptor =
-            getDescriptor().getMessageTypes().get(21);
+            getDescriptor().getMessageTypes().get(22);
           internal_static_OsmAnd_OBF_TransportRouteStop_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_TransportRouteStop_descriptor,
               new java.lang.String[] { "Id", "Dx", "Dy", "Name", "NameEn", "TravelTime", });
           internal_static_OsmAnd_OBF_TransportStop_descriptor =
-            getDescriptor().getMessageTypes().get(22);
+            getDescriptor().getMessageTypes().get(23);
           internal_static_OsmAnd_OBF_TransportStop_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_TransportStop_descriptor,
               new java.lang.String[] { "Dx", "Dy", "Id", "Name", "NameEn", "AdditionalNamePairs", "Exits", "Routes", "DeletedRoutesIds", "RoutesIds", });
           internal_static_OsmAnd_OBF_TransportStopExit_descriptor =
-            getDescriptor().getMessageTypes().get(23);
+            getDescriptor().getMessageTypes().get(24);
           internal_static_OsmAnd_OBF_TransportStopExit_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_TransportStopExit_descriptor,
               new java.lang.String[] { "Dx", "Dy", "Ref", });
           internal_static_OsmAnd_OBF_TransportStopsTree_descriptor =
-            getDescriptor().getMessageTypes().get(24);
+            getDescriptor().getMessageTypes().get(25);
           internal_static_OsmAnd_OBF_TransportStopsTree_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_TransportStopsTree_descriptor,
               new java.lang.String[] { "Left", "Right", "Top", "Bottom", "Subtrees", "Leafs", "BaseId", });
           internal_static_OsmAnd_OBF_OsmAndTransportIndex_descriptor =
-            getDescriptor().getMessageTypes().get(25);
+            getDescriptor().getMessageTypes().get(26);
           internal_static_OsmAnd_OBF_OsmAndTransportIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndTransportIndex_descriptor,
               new java.lang.String[] { "Name", "Routes", "Stops", "IncompleteRoutes", "StringTable", });
           internal_static_OsmAnd_OBF_OsmAndPoiIndex_descriptor =
-            getDescriptor().getMessageTypes().get(26);
+            getDescriptor().getMessageTypes().get(27);
           internal_static_OsmAnd_OBF_OsmAndPoiIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndPoiIndex_descriptor,
               new java.lang.String[] { "Name", "Boundaries", "CategoriesTable", "NameIndex", "SubtypesTable", "Boxes", "PoiData", });
           internal_static_OsmAnd_OBF_OsmAndPoiNameIndex_descriptor =
-            getDescriptor().getMessageTypes().get(27);
+            getDescriptor().getMessageTypes().get(28);
           internal_static_OsmAnd_OBF_OsmAndPoiNameIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndPoiNameIndex_descriptor,
@@ -79355,87 +81274,87 @@ public final class OsmandOdb {
           internal_static_OsmAnd_OBF_OsmAndPoiNameIndex_OsmAndPoiNameIndexData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndPoiNameIndex_OsmAndPoiNameIndexData_descriptor,
-              new java.lang.String[] { "SuffixesDictionary", "Atoms", });
+              new java.lang.String[] { "Stats", "SuffixesDictionary", "Atoms", });
           internal_static_OsmAnd_OBF_OsmAndPoiNameIndexDataAtom_descriptor =
-            getDescriptor().getMessageTypes().get(28);
+            getDescriptor().getMessageTypes().get(29);
           internal_static_OsmAnd_OBF_OsmAndPoiNameIndexDataAtom_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndPoiNameIndexDataAtom_descriptor,
               new java.lang.String[] { "Zoom", "X", "Y", "SuffixesBitset", "SuffixesBitsetIndex", "ExtraSuffix", "PoiIndInBlock", "ShiftTo", });
           internal_static_OsmAnd_OBF_OsmAndCategoryTable_descriptor =
-            getDescriptor().getMessageTypes().get(29);
+            getDescriptor().getMessageTypes().get(30);
           internal_static_OsmAnd_OBF_OsmAndCategoryTable_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndCategoryTable_descriptor,
               new java.lang.String[] { "Category", "Frequency", "Subcategories", "Subcatfreq", });
           internal_static_OsmAnd_OBF_OsmAndSubtypesTable_descriptor =
-            getDescriptor().getMessageTypes().get(30);
+            getDescriptor().getMessageTypes().get(31);
           internal_static_OsmAnd_OBF_OsmAndSubtypesTable_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndSubtypesTable_descriptor,
               new java.lang.String[] { "Subtypes", });
           internal_static_OsmAnd_OBF_OsmAndPoiSubtype_descriptor =
-            getDescriptor().getMessageTypes().get(31);
+            getDescriptor().getMessageTypes().get(32);
           internal_static_OsmAnd_OBF_OsmAndPoiSubtype_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndPoiSubtype_descriptor,
               new java.lang.String[] { "Name", "Tagname", "IsText", "Frequency", "SubtypeValuesSize", "SubtypeValuesFreq", "SubtypeValue", });
           internal_static_OsmAnd_OBF_OsmAndPoiTagGroup_descriptor =
-            getDescriptor().getMessageTypes().get(32);
+            getDescriptor().getMessageTypes().get(33);
           internal_static_OsmAnd_OBF_OsmAndPoiTagGroup_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndPoiTagGroup_descriptor,
               new java.lang.String[] { "Id", "TagValues", });
           internal_static_OsmAnd_OBF_OsmAndPoiTagGroups_descriptor =
-            getDescriptor().getMessageTypes().get(33);
+            getDescriptor().getMessageTypes().get(34);
           internal_static_OsmAnd_OBF_OsmAndPoiTagGroups_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndPoiTagGroups_descriptor,
               new java.lang.String[] { "Ids", "Groups", });
           internal_static_OsmAnd_OBF_OsmAndPoiBox_descriptor =
-            getDescriptor().getMessageTypes().get(34);
+            getDescriptor().getMessageTypes().get(35);
           internal_static_OsmAnd_OBF_OsmAndPoiBox_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndPoiBox_descriptor,
               new java.lang.String[] { "Zoom", "Left", "Top", "Categories", "TagGroups", "SubBoxes", "ShiftToData", });
           internal_static_OsmAnd_OBF_OsmAndPoiCategories_descriptor =
-            getDescriptor().getMessageTypes().get(35);
+            getDescriptor().getMessageTypes().get(36);
           internal_static_OsmAnd_OBF_OsmAndPoiCategories_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndPoiCategories_descriptor,
               new java.lang.String[] { "Categories", "Subcategories", });
           internal_static_OsmAnd_OBF_OsmAndPoiBoxData_descriptor =
-            getDescriptor().getMessageTypes().get(36);
+            getDescriptor().getMessageTypes().get(37);
           internal_static_OsmAnd_OBF_OsmAndPoiBoxData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndPoiBoxData_descriptor,
               new java.lang.String[] { "Zoom", "X", "Y", "PoiData", });
           internal_static_OsmAnd_OBF_OsmAndPoiBoxDataAtom_descriptor =
-            getDescriptor().getMessageTypes().get(37);
+            getDescriptor().getMessageTypes().get(38);
           internal_static_OsmAnd_OBF_OsmAndPoiBoxDataAtom_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndPoiBoxDataAtom_descriptor,
               new java.lang.String[] { "Dx", "Dy", "Categories", "Subcategories", "Name", "NameEn", "Id", "OpeningHours", "Site", "Phone", "Note", "TextCategories", "TextValues", "PrecisionXY", "TagGroups", });
           internal_static_OsmAnd_OBF_IdTable_descriptor =
-            getDescriptor().getMessageTypes().get(38);
+            getDescriptor().getMessageTypes().get(39);
           internal_static_OsmAnd_OBF_IdTable_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_IdTable_descriptor,
               new java.lang.String[] { "RouteId", });
           internal_static_OsmAnd_OBF_RestrictionData_descriptor =
-            getDescriptor().getMessageTypes().get(39);
+            getDescriptor().getMessageTypes().get(40);
           internal_static_OsmAnd_OBF_RestrictionData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_RestrictionData_descriptor,
               new java.lang.String[] { "Type", "From", "To", "Via", });
           internal_static_OsmAnd_OBF_RouteData_descriptor =
-            getDescriptor().getMessageTypes().get(40);
+            getDescriptor().getMessageTypes().get(41);
           internal_static_OsmAnd_OBF_RouteData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_RouteData_descriptor,
               new java.lang.String[] { "Points", "PointTypes", "PointNames", "Types", "RouteId", "StringNames", });
           internal_static_OsmAnd_OBF_OsmAndRoutingIndex_descriptor =
-            getDescriptor().getMessageTypes().get(41);
+            getDescriptor().getMessageTypes().get(42);
           internal_static_OsmAnd_OBF_OsmAndRoutingIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndRoutingIndex_descriptor,
@@ -79459,7 +81378,7 @@ public final class OsmandOdb {
               internal_static_OsmAnd_OBF_OsmAndRoutingIndex_RouteDataBlock_descriptor,
               new java.lang.String[] { "IdTable", "DataObjects", "Restrictions", "StringTable", });
           internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_descriptor =
-            getDescriptor().getMessageTypes().get(42);
+            getDescriptor().getMessageTypes().get(43);
           internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_descriptor,
@@ -79489,7 +81408,7 @@ public final class OsmandOdb {
               internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRoutePointSegments_descriptor,
               new java.lang.String[] { "SegmentsIn", "SegmentsOut", });
           internal_static_OsmAnd_OBF_OsmAndOwner_descriptor =
-            getDescriptor().getMessageTypes().get(43);
+            getDescriptor().getMessageTypes().get(44);
           internal_static_OsmAnd_OBF_OsmAndOwner_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndOwner_descriptor,

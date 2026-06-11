@@ -5,9 +5,9 @@ import static net.osmand.plus.download.local.LocalItemType.*;
 import static net.osmand.plus.mapmarkers.MapMarkersDbHelper.DB_NAME;
 import static net.osmand.plus.myplaces.favorites.FavouritesFileHelper.FAV_FILE_PREFIX;
 import static net.osmand.plus.myplaces.favorites.FavouritesFileHelper.LEGACY_FAV_FILE_PREFIX;
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.IMG_EXTENSION;
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.MPEG4_EXTENSION;
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.THREEGP_EXTENSION;
+import static net.osmand.plus.plugins.audionotes.RecordingsFileHelper.IMG_EXTENSION;
+import static net.osmand.plus.plugins.audionotes.RecordingsFileHelper.MPEG4_EXTENSION;
+import static net.osmand.plus.plugins.audionotes.RecordingsFileHelper.THREEGP_EXTENSION;
 import static net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapsDbHelper.OPENSTREETMAP_DB_NAME;
 import static net.osmand.plus.plugins.osmedit.helpers.OsmBugsDbHelper.OSMBUGS_DB_NAME;
 import static net.osmand.plus.settings.backend.OsmandSettings.CUSTOM_SHARED_PREFERENCES_PREFIX;
@@ -19,11 +19,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.shared.SharedUtil;
 import net.osmand.map.ITileSource;
 import net.osmand.map.OsmandRegions;
-import net.osmand.map.WorldRegion;
 import net.osmand.map.TileSourceManager;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.SrtmDownloadItem;
@@ -39,6 +38,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.LocalSortMode;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.voice.JsMediaCommandPlayer;
@@ -50,14 +50,7 @@ import net.osmand.util.CollectionUtils;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class LocalItemUtils {
 

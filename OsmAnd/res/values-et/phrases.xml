@@ -1164,7 +1164,7 @@
     <string name="poi_denomination_seventh_day_adventist">Seitsmenda päeva adventistide</string>
     <string name="poi_denomination_new_apostolic">Uus apostliku</string>
     <string name="poi_denomination_church_of_england">Inglismaa kirik</string>
-    <string name="poi_denomination_episcopal">Piiskoplik</string>
+    <string name="poi_denomination_episcopal">Episkopaalne kirik</string>
     <string name="poi_denomination_shia">Šiism</string>
     <string name="poi_denomination_united">Ühine</string>
     <string name="poi_denomination_greek_catholic">Kreekakatoliku</string>
@@ -5126,7 +5126,7 @@
     <string name="poi_rapids_grade_x">X (pole läbitav)</string>
     <string name="poi_water_type_filter">Vee tüüp</string>
     <string name="poi_denomination_african_methodist_episcopal_zion">Aafrika Metodisti Episkopaalne Siionikirik</string>
-    <string name="poi_african_methodist_episcopal_church">Aafrika Metodisti Piiskoplik Kirik</string>
+    <string name="poi_african_methodist_episcopal_church">Aafrika Metodisti Episkopaalne Kirik</string>
     <string name="poi_water_lake">Järv</string>
     <string name="poi_congregational_church">Kogudusekirik (Congregational church)</string>
     <string name="poi_church_of_christ">Kristuse kirik (Church of christ)</string>
@@ -5138,4 +5138,19 @@
     <string name="poi_denomination_marthoma">Mar Thoma kirik</string>
     <string name="poi_denomination_vajrayana">Vadžrajaana</string>
     <string name="poi_denomination_gelug">Gelukpa koolkond</string>
+    <string name="poi_denomination_theravada">Theravaada</string>
+    <string name="poi_denomination_alevi">Aleviidi</string>
+    <string name="poi_denomination_bektashi">Bektaši</string>
+    <string name="poi_denomination_ibadi">Ibadiidi</string>
+    <string name="poi_denomination_ismaili">Ismailiidi</string>
+    <string name="poi_denomination_sufi">Sufismi</string>
+    <string name="poi_denomination_rinzai">Rinzai</string>
+    <string name="poi_denomination_old_catholic">Vanakatoliiklik</string>
+    <string name="poi_denomination_shaivism">Šivaistlik</string>
+    <string name="poi_denomination_vaishnavism">Višnuistlik</string>
+    <string name="poi_denomination_hare_krishna">Krišnaiitlik</string>
+    <string name="poi_denomination_zen">Zen-budistlik</string>
+    <string name="poi_denomination_pkn">Madalmaade protestantlik kirik</string>
+    <string name="poi_denomination_tiantai">Tiantai-budistlik</string>
+    <string name="poi_denomination_scottish_episcopal">Šoti Episkopaalne Kirik</string>
 </resources>

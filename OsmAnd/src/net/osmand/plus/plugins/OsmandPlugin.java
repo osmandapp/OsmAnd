@@ -476,7 +476,10 @@ public abstract class OsmandPlugin {
 	}
 
 	protected CommonPreference<Integer> registerIntPreference(@NonNull String prefId, int defValue) {
-		CommonPreference<Integer> preference = settings.registerIntPreference(prefId, defValue);
+		return (CommonPreference<Integer>) registerPreference(settings.registerIntPreference(prefId, defValue));
+	}
+
+	protected CommonPreference<?> registerPreference(@NonNull CommonPreference<?> preference) {
 		preference.setRelatedPlugin(this);
 		pluginPreferences.add(preference);
 		return preference;

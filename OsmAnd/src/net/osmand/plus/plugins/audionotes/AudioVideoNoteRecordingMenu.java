@@ -1,5 +1,8 @@
 package net.osmand.plus.plugins.audionotes;
 
+import static net.osmand.plus.plugins.audionotes.AVActionType.REC_AUDIO;
+import static net.osmand.plus.plugins.audionotes.AVActionType.REC_VIDEO;
+
 import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.SurfaceView;
@@ -154,7 +157,7 @@ public class AudioVideoNoteRecordingMenu {
 
 		ImageView leftButtonIcon = view.findViewById(R.id.leftButtonIcon);
 		View leftButtonView = view.findViewById(R.id.leftButtonView);
-		if (recording.getType() != AVActionType.REC_AUDIO) {
+		if (recording.getType() != REC_AUDIO) {
 			leftButtonIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_minimize));
 			TextView showHideText = view.findViewById(R.id.leftButtonText);
 			showHideText.setText(showViewfinder ?
@@ -193,10 +196,10 @@ public class AudioVideoNoteRecordingMenu {
 	public boolean restartRecordingIfNeeded() {
 		boolean restart = false;
 		CurrentRecording recording = plugin.getCurrentRecording();
-		if (recording != null
-				&& recording.getType() == AVActionType.REC_VIDEO
-				&& plugin.AV_RECORDER_SPLIT.get()) {
-			int clipLength = plugin.AV_RS_CLIP_LENGTH.get() * 60;
+		RecordingsFileHelper fileHelper = plugin.getRecordingsFileHelper();
+
+		if (recording != null && recording.getType() == REC_VIDEO && fileHelper.AV_RECORDER_SPLIT.get()) {
+			int clipLength = fileHelper.AV_RS_CLIP_LENGTH.get() * 60;
 			int duration = (int) ((System.currentTimeMillis() - startTime) / 1000);
 			restart = duration >= clipLength;
 			if (restart) {
@@ -217,7 +220,7 @@ public class AudioVideoNoteRecordingMenu {
 	protected void applyViewfinderVisibility() {
 		MapActivity mapActivity = plugin.getMapActivity();
 		CurrentRecording recording = plugin.getCurrentRecording();
-		boolean show = showViewfinder && recording != null && recording.getType() != AVActionType.REC_AUDIO;
+		boolean show = showViewfinder && recording != null && recording.getType() != REC_AUDIO;
 		if (isLandscapeLayout() && mapActivity != null) {
 			int buttonsHeight = (int) view.getResources().getDimension(R.dimen.map_route_buttons_height);
 			int tileBoxHeight = mapActivity.getMapView().getCurrentRotatedTileBox().getPixHeight() - topInset - bottomInset;

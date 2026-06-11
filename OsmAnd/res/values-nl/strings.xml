@@ -6488,4 +6488,9 @@
     <string name="favorite_folder_name">Mapnaam</string>
     <string name="edit_folder">Bewerk map</string>
     <string name="shared_string_media">Media</string>
+    <string name="auto_copy_media_to_osmand_storage">Kopieer media automatisch naar OsmAnd-opslag</string>
+    <string name="choose_from_gallery">Kies uit galerij</string>
+    <string name="choose_from_files">Kies uit bestanden</string>
+    <string name="no_media">Geen media</string>
+    <string name="no_media_descr">Je kunt foto\'s, video\'s of audionotities toevoegen vanuit je camera of bibliotheek.</string>
 </resources>

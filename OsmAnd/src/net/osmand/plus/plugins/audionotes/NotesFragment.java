@@ -8,13 +8,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewStub;
+import android.view.*;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -46,7 +40,6 @@ import net.osmand.plus.plugins.audionotes.adapters.NotesAdapter.NotesAdapterList
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
-import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
 
 import org.apache.commons.logging.Log;
@@ -429,7 +422,7 @@ public class NotesFragment extends BaseOsmAndListFragment implements FragmentSta
 		return new ItemMenuFragmentListener() {
 			@Override
 			public void playOnClick(Recording recording) {
-				plugin.playRecording(requireActivity(), recording);
+				callActivity(result -> plugin.getRecordingsPlayer().playRecording(requireActivity(), recording));
 			}
 
 			@Override

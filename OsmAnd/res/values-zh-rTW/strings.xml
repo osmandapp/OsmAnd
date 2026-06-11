@@ -5986,4 +5986,5 @@
     <string name="shared_string_media">媒體</string>
     <string name="no_media">無媒體</string>
     <string name="no_media_descr">您可以從您的相機或媒體庫新增照片、影片或音訊附註。</string>
+    <string name="auto_copy_media_to_osmand_storage">自動複製媒體到 OsmAnd 儲存空間</string>
 </resources>

@@ -4069,7 +4069,7 @@
     <string name="save_as_copy">Mentés másolatként</string>
     <string name="shared_string_gps_filter">GPS szűrő</string>
     <string name="gps_filter_speed_altitude_desc">Csak a megadott időközbe eső nyomvonalpontok fognak megjelenni a diagramon és a térképen, a többi el lesz rejtve.</string>
-    <string name="shared_string_uphill">Dombnak fel</string>
+    <string name="shared_string_uphill">Emelkedő</string>
     <string name="shared_string_downhill">Lejtő</string>
     <string name="shared_string_show_slope">Lejtés megjelenítése</string>
     <string name="shared_string_hide_slope">Lejtés elrejtése</string>
@@ -5535,9 +5535,9 @@
     <string name="display_distance_to_first_intermediate">A következő megállásig tartó útvonal részleteinek megjelenítése</string>
     <string name="popular_places_nearby">Népszerű helyek a közelben</string>
     <string name="recently_visited">Nemrég meglátogatott</string>
-    <string name="shared_string_avg_altitude">Átl. magasság</string>
+    <string name="shared_string_avg_altitude">Átlagos magasság</string>
     <string name="shared_string_avg_speed">Legkisebb sebesség</string>
-    <string name="shared_string_length">Távolság</string>
+    <string name="shared_string_length">Hossz</string>
     <string name="map_widget_route_information">Útvonal-információk</string>
     <string name="shared_string_default_view">Alapértelmezett nézet</string>
     <string name="map_widget_route_information_desc">Megjeleníti az aktív navigációs útvonal becsült érkezési idejét, a fennmaradó utazási időt és a távolságot.</string>
@@ -5854,13 +5854,13 @@
     <string name="shared_string_step">Lépés</string>
     <string name="set_step_size_summary">Válasszon lépésközt a nyomvonalak csoportosításához.</string>
     <string name="set_step_size">Lépésköz beállítása</string>
-    <string name="organize_by_summary">A nyomvonalakat automatikusan csoportokba rendezi egy kiválasztott paraméter, például tevékenység, sebesség vagy hely alapján.</string>
-    <string name="organize_by">Rendezés:</string>
+    <string name="organize_by_summary">Nyomvonalak automatikus csoportosítása kiválasztott szempont, például tevékenység, sebesség vagy helyszín alapján.</string>
+    <string name="organize_by">Rendezési szempont</string>
     <string name="group_general">Általános</string>
     <string name="group_date_time">Dátum és idő</string>
     <string name="group_sensors">Érzékelők</string>
     <string name="year_of_creation">Létrehozás éve</string>
-    <string name="month_year_creation">Létrehozás éve és hónapja</string>
+    <string name="month_year_creation">Létrehozás hónapja és éve</string>
     <string name="nearest_city">Legközelebbi város</string>
     <string name="avg_speed">Átlagos sebesség</string>
     <string name="organize_by_max_speed">Legnagyobb sebesség</string>
