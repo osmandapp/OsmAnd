@@ -1,10 +1,9 @@
 package net.osmand.plus.plugins.aistracker;
 
-import static net.osmand.plus.plugins.aistracker.AisObjType.AIS_AIRPLANE;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.CPA_UPDATE_TIMEOUT_IN_SECONDS;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.INVALID_COG;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.INVALID_HEADING;
-import static net.osmand.plus.plugins.aistracker.AisTrackerHelper.getCpa;
+import static net.osmand.shared.aistracker.AisObjType.AIS_AIRPLANE;
+import static net.osmand.shared.aistracker.AisObjectConstants.CPA_UPDATE_TIMEOUT_IN_SECONDS;
+import static net.osmand.shared.aistracker.AisObjectConstants.INVALID_COG;
+import static net.osmand.shared.aistracker.AisObjectConstants.INVALID_HEADING;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -27,15 +26,21 @@ import net.osmand.core.jni.SwigUtilities;
 import net.osmand.core.jni.VectorLine;
 import net.osmand.core.jni.VectorLineBuilder;
 import net.osmand.core.jni.VectorLinesCollection;
-import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
-import net.osmand.plus.plugins.aistracker.AisTrackerHelper.Cpa;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.shared.aistracker.AisCpa;
+import net.osmand.shared.aistracker.AisLatLon;
+import net.osmand.shared.aistracker.AisLocation;
+import net.osmand.shared.aistracker.AisObjType;
+import net.osmand.shared.aistracker.AisObject;
+import net.osmand.shared.aistracker.AisTrackerMath;
 import net.osmand.util.MapUtils;
 
 public class AisObjectDrawable {
+
+	private final AisTrackerPlugin plugin;
 
 	private final AisObject ais;
 	private final AisImagesCache imagesCache;
@@ -49,14 +54,15 @@ public class AisObjectDrawable {
 	private MapMarker lostMarker;
 	private VectorLine directionLine;
 
-	public AisObjectDrawable(@NonNull AisObject ais) {
+	public AisObjectDrawable(@NonNull AisTrackerPlugin plugin, @NonNull AisObject ais) {
+		this.plugin = plugin;
 		this.ais = ais;
-		this.imagesCache = ais.getPlugin().getAisImagesCache();
+		this.imagesCache = plugin.getAisImagesCache();
 	}
 
 	@NonNull
 	public AisTrackerPlugin getPlugin() {
-		return ais.getPlugin();
+		return plugin;
 	}
 
 	private void invalidateBitmap() {
@@ -147,21 +153,21 @@ public class AisObjectDrawable {
 		int cpaWarningTime = getPlugin().getCpaWarningTime();
 		float cpaWarningDistance = getPlugin().getCpaWarningDistance();
 		if (ais.isMovable() && (ais.getObjectClass() != AIS_AIRPLANE) && (cpaWarningTime > 0) && (ais.getSog() > 0.0d)) {
-			Cpa cpa = ais.getCpa();
+			AisCpa cpa = ais.getCpa();
 			if (checkForCpaTimeout() && (ownPosition != null)) {
-				Location aisPosition = ais.getCurrentLocation();
+				AisLocation aisPosition = ais.getExtrapolatedLocation(System.currentTimeMillis());
 				if (aisPosition != null) {
-					getCpa(ownPosition, aisPosition, cpa);
+					AisTrackerMath.INSTANCE.getCpa(AisObjectAndroidHelperKt.toAisLocation(ownPosition), aisPosition, cpa);
 					lastCpaUpdate = System.currentTimeMillis();
 				}
 			}
-			if (cpa.isValid()) {
+			if (cpa.getValid()) {
 				double tcpa = cpa.getTcpa();
 				if (tcpa > 0.0f) {
-					return ((cpa.getCpaDist() <= cpaWarningDistance) &&
-							((tcpa * 60.0d) <= cpaWarningTime) &&
-							(cpa.getCrossingTime1() >= 0.0d) &&
-							(cpa.getCrossingTime2() >= 0.0d));
+						return ((cpa.getCpa() <= cpaWarningDistance) &&
+								((tcpa * 60.0d) <= cpaWarningTime) &&
+								(cpa.getT1() >= 0.0d) &&
+								(cpa.getT2() >= 0.0d));
 				}
 			}
 		}
@@ -232,7 +238,7 @@ public class AisObjectDrawable {
 
 	public void draw(@NonNull Paint paint, @NonNull Canvas canvas, @NonNull RotatedTileBox tileBox) {
 		updateBitmap(paint);
-		LatLon position = ais.getPosition();
+		AisLatLon position = ais.getPosition();
 		if (this.bitmap != null && position != null) {
 			canvas.save();
 			canvas.rotate(tileBox.getRotate(), (float)tileBox.getCenterPixelX(), (float)tileBox.getCenterPixelY());
@@ -342,11 +348,11 @@ public class AisObjectDrawable {
 		activeMarker.setOnSurfaceIconModulationColor(iconColor);
 		restMarker.setOnSurfaceIconModulationColor(iconColor);
 
-		LatLon location = ais.getPosition();
-		if (location != null) {
+		AisLatLon position = ais.getPosition();
+		if (position != null) {
 			PointI markerLocation = new PointI(
-					MapUtils.get31TileNumberX(location.getLongitude()),
-					MapUtils.get31TileNumberY(location.getLatitude())
+					MapUtils.get31TileNumberX(position.getLongitude()),
+					MapUtils.get31TileNumberY(position.getLatitude())
 			);
 
 			activeMarker.setPosition(markerLocation);

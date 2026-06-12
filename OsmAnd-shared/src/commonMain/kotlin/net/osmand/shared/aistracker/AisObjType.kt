@@ -1,6 +1,6 @@
-package net.osmand.plus.plugins.aistracker;
+package net.osmand.shared.aistracker
 
-public enum AisObjType {
+enum class AisObjType {
     AIS_VESSEL,
     AIS_VESSEL_SPORT,
     AIS_VESSEL_FAST,

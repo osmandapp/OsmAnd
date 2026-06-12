@@ -56,6 +56,7 @@ kotlin {
 
 	sourceSets {
 		commonMain.dependencies {
+			api("kotlin.nmea:kotlin-nmea:0.11.1-SNAPSHOT")
 			implementation("org.jetbrains.kotlin:kotlin-stdlib")
 			implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
 			implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
@@ -64,8 +65,9 @@ kotlin {
 			implementation("com.squareup.okio:okio:$okioVersion")
 			implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
 			implementation("co.touchlab:stately-concurrent-collections:$statelyVersion")
-            implementation("io.ktor:ktor-client-core:$ktorVersion")
-            implementation("io.ktor:ktor-client-encoding:$ktorVersion")
+			implementation("io.ktor:ktor-client-core:$ktorVersion")
+			implementation("io.ktor:ktor-client-encoding:$ktorVersion")
+			implementation("io.ktor:ktor-network:$ktorVersion")
 		}
 		jvmMain.dependencies {
 			//implementation(kotlin("stdlib-jdk8"))
