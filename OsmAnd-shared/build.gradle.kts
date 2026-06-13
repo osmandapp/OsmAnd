@@ -56,7 +56,6 @@ kotlin {
 
 	sourceSets {
 		commonMain.dependencies {
-			api("kotlin.nmea:kmp-nmea:0.11.1-SNAPSHOT")
 			implementation("org.jetbrains.kotlin:kotlin-stdlib")
 			implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
 			implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
