@@ -1,14 +1,10 @@
 package net.osmand.plus.plugins.aistracker;
 
-import net.osmand.shared.aistracker.AisLatLon;
-import net.osmand.shared.aistracker.AisObjType;
-import net.osmand.shared.aistracker.AisObject;
-
-import static net.osmand.shared.aistracker.AisObjType.AIS_AIRPLANE;
-import static net.osmand.shared.aistracker.AisObjType.AIS_ATON;
-import static net.osmand.shared.aistracker.AisObjType.AIS_ATON_VIRTUAL;
-import static net.osmand.shared.aistracker.AisObjType.AIS_LANDSTATION;
-import static net.osmand.shared.aistracker.AisObjType.AIS_SART;
+import static net.osmand.plus.plugins.aistracker.AisObjType.AIS_AIRPLANE;
+import static net.osmand.plus.plugins.aistracker.AisObjType.AIS_ATON;
+import static net.osmand.plus.plugins.aistracker.AisObjType.AIS_ATON_VIRTUAL;
+import static net.osmand.plus.plugins.aistracker.AisObjType.AIS_LANDSTATION;
+import static net.osmand.plus.plugins.aistracker.AisObjType.AIS_SART;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -92,7 +88,7 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 	public void onAisObjectReceived(@NonNull AisObject ais) {
 		AisObjectDrawable drawable = objectDrawables.get(ais.getMmsi());
 		if (drawable == null) {
-			drawable = new AisObjectDrawable(plugin, ais);
+			drawable = new AisObjectDrawable(ais);
 			objectDrawables.put(ais.getMmsi(), drawable);
 		} else {
 			drawable.set(ais);
@@ -115,12 +111,12 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 		objectDrawables.remove(ais.getMmsi());
 	}
 
-	public boolean isLocationVisible(RotatedTileBox tileBox, double lat, double lon) {
+	public boolean isLocationVisible(RotatedTileBox tileBox, LatLon coordinates) {
 		//noinspection SimplifiableIfStatement
-		if (tileBox == null) {
+		if (tileBox == null || coordinates == null) {
 			return false;
 		}
-		return tileBox.containsLatLon(lat, lon);
+		return tileBox.containsLatLon(coordinates);
 	}
 
 	@Override
@@ -154,7 +150,7 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 				mapRenderer.addSymbolsProvider(vectorLinesCollection);
 
 				for (AisObject ais : plugin.getAisObjects()) {
-					AisObjectDrawable drawable = new AisObjectDrawable(plugin, ais);
+					AisObjectDrawable drawable = new AisObjectDrawable(ais);
 					objectDrawables.put(ais.getMmsi(), drawable);
 					drawable.createAisRenderData(getBaseOrder(), bitmapPaint,
 							markersCollection, vectorLinesCollection, aisRestImage);
@@ -177,7 +173,7 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 		} else if (tileBox.getZoom() >= START_ZOOM) {
 			for (AisObject ais : aisObjects) {
 				AisObjectDrawable drawable = objectDrawables.get(ais.getMmsi());
-				if (drawable != null && ais.getPosition() != null && isLocationVisible(tileBox, ais.getPosition().getLatitude(), ais.getPosition().getLongitude())) {
+				if (drawable != null && isLocationVisible(tileBox, ais.getPosition())) {
 					drawable.draw(bitmapPaint, canvas, tileBox);
 				}
 			}
@@ -207,7 +203,7 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 			}
 		}
 		for (AisObject object : aisObjects) {
-			AisLatLon latLon = object.getPosition();
+			LatLon latLon = object.getPosition();
 			if (latLon != null) {
 				double lat = latLon.getLatitude();
 				double lon = latLon.getLongitude();
@@ -225,7 +221,7 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 	@Override
 	public LatLon getObjectLocation(Object o) {
 		if (o instanceof AisObject) {
-			AisLatLon pos = ((AisObject) o).getPosition();
+			LatLon pos = ((AisObject) o).getPosition();
 			if (pos != null) {
 				return new LatLon(pos.getLatitude(), pos.getLongitude());
 			}
@@ -239,12 +235,12 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 			AisObjType objectClass = ais.getObjectClass();
 			if (ais.getShipName() != null) {
 				return new PointDescription("AIS object", ais.getShipName() +
-						(isSignalLost(ais) ? " (signal lost)" : ""));
+						(ais.getSignalLostState() ? " (signal lost)" : ""));
 			} else if (objectClass == AIS_LANDSTATION) {
 				return new PointDescription("AIS object", "Land Station with MMSI " + ais.getMmsi());
 			} else if (objectClass == AIS_AIRPLANE) {
 				return new PointDescription("AIS object", "Airplane with MMSI " +
-						ais.getMmsi() + (isSignalLost(ais) ? " (signal lost)" : ""));
+						ais.getMmsi() + (ais.getSignalLostState() ? " (signal lost)" : ""));
 			} else if ((objectClass == AIS_ATON) || (objectClass == AIS_ATON_VIRTUAL)) {
 				return new PointDescription("AIS object", "Aid to Navigation");
 			} else if (objectClass == AIS_SART) {
@@ -252,12 +248,8 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 			}
 			return new PointDescription("AIS object",
 					"AIS object with MMSI " + ais.getMmsi() +
-							(isSignalLost(ais) ? " (signal lost)" : ""));
+							(ais.getSignalLostState() ? " (signal lost)" : ""));
 		}
 		return null;
 	}
-
-    private boolean isSignalLost(AisObject ais) {
-        return ais.isLost(plugin.getVesselLostTimeoutInMinutes()) && ais.isMovable() && !ais.isVesselAtRest();
-    }
 }

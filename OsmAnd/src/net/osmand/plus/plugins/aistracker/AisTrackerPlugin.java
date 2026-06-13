@@ -1,8 +1,5 @@
 package net.osmand.plus.plugins.aistracker;
 
-import net.osmand.plus.render.RendererRegistry;
-import net.osmand.shared.aistracker.AisObject;
-
 import static net.osmand.plus.settings.fragments.SettingsScreenType.AIS_SETTINGS;
 
 import android.content.Context;
@@ -19,8 +16,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
-import net.osmand.shared.aistracker.AisMessageListener;
-import net.osmand.shared.aistracker.AisDataListener;
+import net.osmand.plus.plugins.aistracker.AisMessageListener.AisDataListener;
+import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
@@ -143,7 +140,7 @@ public class AisTrackerPlugin extends OsmandPlugin {
 			if (obj != null) {
 				obj.set(ais);
 			} else {
-				obj = new AisObject(ais);
+				obj = new AisObject(AisTrackerPlugin.this, ais);
 				objects.put(ais.getMmsi(), obj);
 			}
 			if (objects.size() >= AIS_OBJECT_LIST_COUNTER_MAX) {
@@ -160,7 +157,7 @@ public class AisTrackerPlugin extends OsmandPlugin {
 		public synchronized void removeLostObjects() {
 			for (Iterator<Map.Entry<Integer, AisObject>> iterator = objects.entrySet().iterator(); iterator.hasNext(); ) {
 				AisObject obj = iterator.next().getValue();
-				if (obj.isLost(AisTrackerPlugin.this.getMaxObjectAgeInMinutes())) {
+				if (obj.checkObjectAge()) {
 					LOG.debug("Remove AIS object with MMSI " + obj.getMmsi());
 					iterator.remove();
 					AisTrackerPlugin.this.onAisObjectRemoved(obj);
