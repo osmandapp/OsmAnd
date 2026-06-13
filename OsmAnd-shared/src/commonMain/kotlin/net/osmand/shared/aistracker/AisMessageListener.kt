@@ -114,10 +114,18 @@ open class AisMessageListener {
         }
     }
 
-
     protected fun processLine(line: String) {
         try {
-            val sentence = SentenceFactory.instance.createParser(line)
+            var data = line
+            if (data.startsWith("\\")) {
+                if (data.contains("\\!")) {
+                    data = "!" + data.substringAfter("\\!")
+                } else if (data.contains("\\$")) {
+                    data = "$" + data.substringAfter("\\$")
+                }
+            }
+
+            val sentence = SentenceFactory.instance.createParser(data)
             if (sentence is AISSentence) {
                 for (listener in listeners) {
                     listener.sentenceRead(net.sf.marineapi.nmea.event.SentenceEvent(this, sentence))
