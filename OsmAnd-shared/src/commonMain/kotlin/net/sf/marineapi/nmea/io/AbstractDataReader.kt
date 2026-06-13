@@ -66,7 +66,15 @@ abstract class AbstractDataReader(var parent: SentenceReader? = null) {
         val factory: SentenceFactory = SentenceFactory.instance
         while (isRunning) {
             try {
-                val data = read()
+                var data = read()
+                if (data != null && data.startsWith("\\")) {
+                    if (data.contains("\\!")) {
+                        data = "!" + data.substringAfter("\\!")
+                    } else if (data.contains("\\$")) {
+                        data = "$" + data.substringAfter("\\$")
+                    }
+                }
+                
                 if (data == null) {
                     kotlinx.coroutines.delay(SLEEP_TIME.toLong())
                 } else if (SentenceValidator.isValid(data)) {
