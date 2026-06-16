@@ -45,7 +45,6 @@ import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.measurementtool.PlanRoutePoint;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.aistracker.AisObject;
 import net.osmand.plus.plugins.aistracker.AisObjectMenuController;
 import net.osmand.plus.plugins.audionotes.AudioVideoNoteMenuController;
 import net.osmand.plus.plugins.audionotes.Recording;
@@ -68,6 +67,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer.DownloadMapObject;
 import net.osmand.plus.views.layers.PlaceDetailsObject;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
+import net.osmand.shared.aistracker.AisObject;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.OpeningHoursParser.OpeningHours;
 

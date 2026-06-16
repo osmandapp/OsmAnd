@@ -24,6 +24,8 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.plus.gallery.data.GalleryKey;
+import net.osmand.shared.gpx.primitives.Linkable;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
@@ -362,6 +364,36 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	@Override
 	protected LatLon getPointCoordinates() {
 		return new LatLon(favorite.getLatitude(), favorite.getLongitude());
+	}
+
+	private boolean canAttachMedia() {
+		return getFavorite() != null;
+	}
+
+	@Nullable
+	@Override
+	protected GalleryKey getMediaGalleryKey() {
+		FavouritePoint favorite = getFavorite();
+		if (favorite == null) {
+			return null;
+		}
+		return canAttachMedia() ? new GalleryKey.Favorite(favorite.getKey()) : null;
+	}
+
+	@Nullable
+	@Override
+	protected Linkable getMediaTarget() {
+		return canAttachMedia() ? getFavorite() : null;
+	}
+
+	@Nullable
+	@Override
+	protected LatLon getMediaLatLon() {
+		FavouritePoint favorite = getFavorite();
+		if (favorite == null) {
+			return null;
+		}
+		return canAttachMedia() ? new LatLon(favorite.getLatitude(), favorite.getLongitude()) : null;
 	}
 
 	@Override

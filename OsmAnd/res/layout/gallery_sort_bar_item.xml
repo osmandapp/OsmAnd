@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:background="?attr/selectableItemBackground"
+	android:gravity="center_vertical"
+	android:orientation="horizontal"
+	android:paddingHorizontal="@dimen/content_padding"
+	android:paddingVertical="@dimen/content_padding_half">
+
+	<ImageView
+		android:id="@+id/sort_icon"
+		android:layout_width="@dimen/standard_icon_size"
+		android:layout_height="@dimen/standard_icon_size"
+		tools:src="@drawable/ic_action_list_sort" />
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/sort_title"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/content_padding_half"
+		android:textSize="@dimen/default_list_text_size"
+		app:typefaceWeight="medium"
+		tools:text="@string/gallery_sort_name_a_z" />
+
+</LinearLayout>

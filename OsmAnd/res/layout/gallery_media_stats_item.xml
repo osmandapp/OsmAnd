@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<View
+		android:id="@+id/stats_divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:background="?attr/divider_color" />
+
+	<TextView
+		android:id="@+id/stats"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center"
+		android:paddingHorizontal="@dimen/content_padding"
+		android:paddingTop="@dimen/content_padding_half"
+		android:paddingBottom="@dimen/content_padding"
+		android:textSize="@dimen/default_desc_text_size"
+		tools:text="Photos 3, videos 2, audio 2.\nSize 14 mb." />
+
+</LinearLayout>

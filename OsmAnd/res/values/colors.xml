@@ -277,6 +277,7 @@
 	<!-- Widgets  -->
 	<color name="color_transparent">#0000</color>
 	<color name="color_black_transparent">#90000000</color>
+	<color name="color_black_transparent_30">#4D000000</color>
 	<color name="widgettext_night">#ffC8C8C8</color>
 	<color name="widgettext_day">#000</color>
 	<color name="widget_units_color_light">#666666</color>

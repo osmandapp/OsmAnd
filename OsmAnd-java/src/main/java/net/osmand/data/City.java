@@ -192,7 +192,6 @@ public class City extends MapObject {
 	// Be attentive ! Working with street names ignoring case
 	private Set<String> isin = null;
 	
-	
 	public Set<String> getIsin() {
 		return isin;
 	}
@@ -337,4 +336,6 @@ public class City extends MapObject {
 		}
 		return c;
 	}
+
+	
 }

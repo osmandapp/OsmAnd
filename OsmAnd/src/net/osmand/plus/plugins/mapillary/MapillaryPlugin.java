@@ -23,7 +23,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardType;
-import net.osmand.plus.gallery.contract.IGalleryRowController;
+import net.osmand.plus.gallery.controller.GalleryRowController;
 import net.osmand.plus.gallery.data.GalleryKey;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
@@ -87,7 +87,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 	private MapActivity mapActivity;
 
 	@Nullable
-	private IGalleryRowController mapillaryRowController;
+	private GalleryRowController mapillaryRowController;
 	private MapillaryVectorLayer vectorLayer;
 	private MapWidgetInfo mapillaryWidgetRegInfo;
 

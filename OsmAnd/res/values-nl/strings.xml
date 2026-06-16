@@ -1308,7 +1308,7 @@
     <string name="routing_attr_no_new_routing_name">Gebruik v1.9-routeberekening niet</string>
     <string name="routing_attr_no_new_routing_description">Gebruik de routeregels van vóór versie 1.9.</string>
     <string name="traffic_warning_railways">Spoorwegovergang</string>
-    <string name="traffic_warning_pedestrian">Voetgangers oversteekplaats</string>
+    <string name="traffic_warning_pedestrian">Voetgangersoversteekplaats</string>
     <string name="show_railway_warnings">Spoorwegovergangen</string>
     <string name="show_pedestrian_warnings">Zebrapaden</string>
     <string name="speak_pedestrian">Zebrapaden</string>
@@ -1990,7 +1990,7 @@
     <string name="save_filter">Filter opslaan</string>
     <string name="delete_filter">Wis filter</string>
     <string name="new_filter">Nieuw filter</string>
-    <string name="new_filter_desc">Geen een naam aan het nieuwe filter. Deze naam wordt aan de lijst Categorieën toegevoegd.</string>
+    <string name="new_filter_desc">Geef een naam aan het nieuwe filter. Deze wordt aan de \'Categorie\' tab toegevoegd.</string>
     <string name="custom_search">Eigen zoekfilter</string>
     <string name="edit_filter">Bewerk filter</string>
     <string name="subcategories">Subcategorieën</string>
@@ -6488,4 +6488,9 @@
     <string name="favorite_folder_name">Mapnaam</string>
     <string name="edit_folder">Bewerk map</string>
     <string name="shared_string_media">Media</string>
+    <string name="auto_copy_media_to_osmand_storage">Kopieer media automatisch naar OsmAnd-opslag</string>
+    <string name="choose_from_gallery">Kies uit galerij</string>
+    <string name="choose_from_files">Kies uit bestanden</string>
+    <string name="no_media">Geen media</string>
+    <string name="no_media_descr">Je kunt foto\'s, video\'s of audionotities toevoegen vanuit je camera of bibliotheek.</string>
 </resources>

@@ -6060,4 +6060,25 @@
     <string name="astro_min_magnitude">Magnitudine min.</string>
     <string name="stars_articles">Articole stele</string>
     <string name="delete_groups_confirmation">Șterge grupurile?</string>
+    <string name="choose_from_gallery">Alege din Galerie</string>
+    <string name="choose_from_files">Alege din fișiere</string>
+    <string name="shared_string_media">Media</string>
+    <string name="no_media">Fără media</string>
+    <string name="coordinate_format_recent">Recent</string>
+    <string name="coordinate_format_primary">Principal</string>
+    <string name="coordinate_format_select_other">Alege alt format</string>
+    <string name="open_from_short">De la</string>
+    <string name="open_till_short">Până la</string>
+    <string name="shared_string_native">Nativ</string>
+    <string name="shared_string_gpu">GPU</string>
+    <string name="shared_string_allocated">Alocat</string>
+    <string name="compass_calibration_needed">Calibrare compas necesară</string>
+    <string name="ar_mode_enabled">Mod AR activat</string>
+    <string name="ar_mode_disabled">Mod AR dezactivat</string>
+    <string name="start_free_trial">Începe perioada gratuită de încercare</string>
+    <string name="shared_string_radians">Radiani</string>
+    <string name="shared_string_unlock">Deblocare</string>
+    <string name="no_objects_found">Niciun obiect găsit</string>
+    <string name="astro_my_data_no_directions_title">Nicio direcție setată</string>
+    <string name="astro_filter_show_all">Arată tot</string>
 </resources>

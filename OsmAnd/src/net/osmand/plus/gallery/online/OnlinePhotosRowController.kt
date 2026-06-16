@@ -3,7 +3,6 @@ package net.osmand.plus.gallery.online
 import android.view.View
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
-import net.osmand.plus.gallery.controller.GalleryGridController
 import net.osmand.plus.gallery.controller.GalleryRowController
 import net.osmand.plus.gallery.data.GalleryKey
 import net.osmand.plus.gallery.model.GalleryAction
@@ -16,7 +15,7 @@ import net.osmand.shared.media.domain.MediaOrigin
 
 open class OnlinePhotosRowController(
 	app: OsmandApplication,
-	key: GalleryKey.Location
+	override val key: GalleryKey.Location
 ) : GalleryRowController(app, key) {
 
 	override fun requiresInternet() = true
@@ -38,13 +37,13 @@ open class OnlinePhotosRowController(
 
 	override fun handleGalleryAction(v: View, action: GalleryAction) {
 		if (action == SHOW_ALL_ACTION) {
-			view?.mapActivity?.let { GalleryGridController.showDialog(it, key) }
+			view?.mapActivity?.let { OnlinePhotosGridController.show(it, key) }
 		}
 	}
 
 	override fun onMediaItemClicked(mediaItem: MediaItem) {
 		val activity = view?.mapActivity ?: return
-		GalleryPagerController.showDialog(activity, key, mediaItem.id)
+		GalleryPagerController.show(activity, key, mediaItem.id)
 	}
 
 	companion object {

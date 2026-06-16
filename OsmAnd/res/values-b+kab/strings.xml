@@ -1566,4 +1566,10 @@
     <string name="shared_string_maximum">Afellay</string>
     <string name="speedometer_maximum">Afellay</string>
     <string name="use_magnetic_sensor">Seqdec amaṭṭaf adkiran</string>
+    <string name="logged_as">Taqqneḍ amzun d %1$s</string>
+    <string name="perform_oauth_authorization">Qqen s OAuth</string>
+    <string name="favorite_folder_name">Isem n ukaram</string>
+    <string name="edit_folder">Ẓreg akaram</string>
+    <string name="choose_from_files">Fren seg yifuyla</string>
+    <string name="astro_direction">Tanila</string>
 </resources>

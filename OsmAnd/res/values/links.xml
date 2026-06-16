@@ -63,6 +63,7 @@
     <string name="url_wikipedia_slope" translatable="false">https://en.wikipedia.org/wiki/Grade_(slope)</string>
     <string name="url_wikipedia_utm_format" translatable="false">https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system</string>
     <string name="url_wikipedia_mgrs_format" translatable="false">https://en.wikipedia.org/wiki/Military_Grid_Reference_System</string>
+    <string name="url_wikipedia_maidenhead_format" translatable="false">https://en.wikipedia.org/wiki/Maidenhead_Locator_System</string>
 
     <string name="osmand_poll" translatable="false">https://osmand.net/android-poll.html</string>
     <string name="osmand_features" translatable="false">https://osmand.net/docs/user/plugins</string>

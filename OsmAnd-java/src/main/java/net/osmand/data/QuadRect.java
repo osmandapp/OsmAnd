@@ -41,6 +41,13 @@ public class QuadRect {
 		}
 	}
 	
+	public void include(double x, double y) {
+		left = left <= right ? Math.min(x, this.left) : Math.max(x, this.left);
+		right = left <= right ? Math.max(x, this.right) : Math.min(x, this.right);
+		top = top <= bottom ? Math.min(y, this.top) : Math.max(y, this.top);
+		bottom = top <= bottom ? Math.max(y, this.bottom) : Math.min(y, this.bottom);
+	}
+	
 	public double width() {
 		return Math.abs(right - left);
 	}

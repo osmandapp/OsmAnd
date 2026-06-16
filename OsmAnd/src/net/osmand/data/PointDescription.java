@@ -14,13 +14,15 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.coordinates.CoordinateFormatFormatter;
+import net.osmand.plus.settings.coordinates.FormattedCoordinate;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import java.util.List;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -168,13 +170,16 @@ public class PointDescription {
 	}
 
 	public static String getLocationName(Context ctx, double lat, double lon, boolean sh) {
-		OsmandSettings st = ((OsmandApplication) ctx.getApplicationContext()).getSettings();
-		int f = st.COORDINATES_FORMAT.get();
-		return OsmAndFormatter.getFormattedCoordinates(lat, lon, f);
+		OsmandApplication app = AndroidUtils.getApp(ctx);
+		return CoordinateFormatFormatter.formatPrimary(app, lat, lon);
+	}
+
+	public static List<FormattedCoordinate> getPreferredLocationData(MapActivity ctx, double lat, double lon) {
+		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+		return CoordinateFormatFormatter.formatPreferred(app, lat, lon);
 	}
 
 	public static Map<Integer, String> getLocationData(MapActivity ctx, double lat, double lon, boolean sh) {
-		OsmandSettings settings = ((OsmandApplication) ctx.getApplicationContext()).getSettings();
 		Map<Integer, String> results = new LinkedHashMap<>();
 
 		String latLonString;
@@ -187,6 +192,7 @@ public class PointDescription {
 		String mgrs = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.MGRS_FORMAT);
 		String swissGrid = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.SWISS_GRID_FORMAT);
 		String swissGridPlus = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.SWISS_GRID_PLUS_FORMAT);
+		String maidenhead = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.MAIDENHEAD_FORMAT);
 
 		try {
 			latLonString = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.FORMAT_DEGREES_SHORT);
@@ -209,6 +215,7 @@ public class PointDescription {
 		results.put(OsmAndFormatter.MGRS_FORMAT, mgrs);
 		results.put(OsmAndFormatter.SWISS_GRID_FORMAT, swissGrid);
 		results.put(OsmAndFormatter.SWISS_GRID_PLUS_FORMAT, swissGridPlus);
+		results.put(OsmAndFormatter.MAIDENHEAD_FORMAT, maidenhead);
 
 		try {
 			int zoom = ctx.getMapView().getZoom();
@@ -227,32 +234,14 @@ public class PointDescription {
 			log.error("Failed to convert coordinates", e);
 		}
 
-		int format = settings.COORDINATES_FORMAT.get();
-
-		if (format == PointDescription.UTM_FORMAT) {
-			results.put(LOCATION_LIST_HEADER, utm);
-		} else if (format == PointDescription.OLC_FORMAT) {
-			results.put(LOCATION_LIST_HEADER, olc);
-		} else if (format == PointDescription.MGRS_FORMAT) {
-			results.put(LOCATION_LIST_HEADER, mgrs);
-		} else if (format == PointDescription.SWISS_GRID_FORMAT) {
-			results.put(LOCATION_LIST_HEADER, swissGrid);
-		} else if (format == PointDescription.SWISS_GRID_PLUS_FORMAT) {
-			results.put(LOCATION_LIST_HEADER, swissGridPlus);
-		} else if (format == PointDescription.FORMAT_DEGREES) {
-			results.put(LOCATION_LIST_HEADER, latLonDeg);
-		} else if (format == PointDescription.FORMAT_MINUTES) {
-			results.put(LOCATION_LIST_HEADER, latLonMin);
-		} else if (format == PointDescription.FORMAT_SECONDS) {
-			results.put(LOCATION_LIST_HEADER, latLonSec);
-		}
+		results.put(LOCATION_LIST_HEADER, CoordinateFormatFormatter.formatPrimary(
+				(OsmandApplication) ctx.getApplicationContext(), lat, lon));
 		return results;
 	}
 
 	public static String getLocationNamePlain(@NonNull Context ctx, double lat, double lon) {
 		OsmandApplication app = AndroidUtils.getApp(ctx);
-		int format = app.getSettings().COORDINATES_FORMAT.get();
-		return OsmAndFormatter.getFormattedCoordinates(lat, lon, format);
+		return CoordinateFormatFormatter.formatPrimary(app, lat, lon);
 	}
 
 	public boolean contextMenuDisabled() {
@@ -434,6 +423,7 @@ public class PointDescription {
 	public static final int MGRS_FORMAT = LocationConvert.MGRS_FORMAT;
 	public static final int SWISS_GRID_FORMAT = LocationConvert.SWISS_GRID_FORMAT;
 	public static final int SWISS_GRID_PLUS_FORMAT = LocationConvert.SWISS_GRID_PLUS_FORMAT;
+	public static final int MAIDENHEAD_FORMAT = LocationConvert.MAIDENHEAD_FORMAT;
 
 	public static String formatToHumanString(Context ctx, int format) {
 		return switch (format) {
@@ -448,6 +438,8 @@ public class PointDescription {
 					ctx.getString(R.string.navigate_point_format_swiss_grid);
 			case LocationConvert.SWISS_GRID_PLUS_FORMAT ->
 					ctx.getString(R.string.navigate_point_format_swiss_grid_plus);
+			case LocationConvert.MAIDENHEAD_FORMAT ->
+					ctx.getString(R.string.navigate_point_format_maidenhead);
 			default -> "Unknown format";
 		};
 	}

@@ -11,10 +11,11 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.gallery.contract.IGalleryActionListener
+import net.osmand.plus.gallery.contract.IGalleryListener
 import net.osmand.plus.gallery.model.GalleryItem
 import net.osmand.plus.gallery.ui.GalleryGridAdapter
 import net.osmand.plus.gallery.ui.GalleryGridItemDecorator
-import net.osmand.plus.gallery.contract.IGalleryListener
+import net.osmand.plus.gallery.ui.holders.MediaHolderType
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.widgets.dialogbutton.DialogButton
 import net.osmand.util.Algorithms
@@ -121,16 +122,19 @@ class AstroGalleryCardViewHolder(
 	}
 
 	private fun ensureRecyclerInitialized(nightMode: Boolean) {
-		if (galleryGridAdapter != null && adapterNightMode == nightMode) {
-			return
-		}
+		if (galleryGridAdapter != null && adapterNightMode == nightMode) return
+
+		val registry = app.galleryHelper.loadStateRegistry
 		galleryGridAdapter = GalleryGridAdapter(
 			mapActivity = mapActivity,
-			galleryListener = galleryListener,
-			actionListener = actionListener,
-			viewWidth = null,
-			nightMode = nightMode,
-			loadStateRegistry = app.galleryHelper.loadStateRegistry
+			onMediaClicked = galleryListener::onMediaItemClicked,
+			onReloadMediaItems = galleryListener::onReloadMediaItems,
+			onActionClicked = actionListener::handleGalleryAction,
+			mediaHolderType = { position -> if (position == 0) MediaHolderType.MAIN else MediaHolderType.STANDARD },
+			resolveResizableImageSize = null,
+			isLoadFailed = registry::isFailed,
+			onLoadFailed = registry::markFailed,
+			nightMode = nightMode
 		)
 		adapterNightMode = nightMode
 		recyclerView.layoutManager = getGridLayoutManager()

@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
@@ -39,13 +40,14 @@ public class SimpleWidgetInfo extends MapWidgetInfo {
 
 	@NonNull
 	@Override
-	public WidgetsPanel getUpdatedPanel(ScreenLayoutMode layoutMode) {
+	public WidgetsPanel getUpdatedPanel(@NonNull ApplicationMode appMode,
+	                                    @Nullable ScreenLayoutMode layoutMode) {
 		OsmandSettings settings = widget.getMyApplication().getSettings();
 		WidgetType widgetType = getWidgetType();
 		if (widgetType != null) {
-			return widgetType.getPanel(key, settings, layoutMode);
+			return widgetType.getPanel(key, appMode, layoutMode, settings);
 		} else {
-			WidgetType.findWidgetPanel(key, settings, null, layoutMode);
+			WidgetType.findWidgetPanel(key, settings, appMode, layoutMode);
 		}
 		return widgetPanel;
 	}

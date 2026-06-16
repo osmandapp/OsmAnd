@@ -33,9 +33,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.BaseMenuController;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.coordinates.CoordinateFormatFormatter;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.GeoParsedPoint;
 import net.osmand.util.TextDirectionUtil;
@@ -214,9 +213,7 @@ public class ShareMenu extends BaseMenuController {
 		}
 		sms = builder.toString();
 
-		OsmandSettings settings = app.getSettings();
-		int format = settings.COORDINATES_FORMAT.get();
-		coordinates = OsmAndFormatter.getFormattedCoordinates(latLon.getLatitude(), latLon.getLongitude(), format, false);
+		coordinates = CoordinateFormatFormatter.formatPrimary(app, latLon.getLatitude(), latLon.getLongitude(), false);
 	}
 
 	public static void startAction(@NonNull Context context, @NonNull ShareItem item,

@@ -6208,4 +6208,21 @@
     <string name="no_media">Ingen medier</string>
     <string name="no_media_descr">Du kan tilføje fotos, videoer eller lydnoter fra dit kamera eller dit bibliotek.</string>
     <string name="auto_copy_media_to_osmand_storage">Kopier automatisk medier til OsmAnd-lageret</string>
+    <string name="navigate_point_format_maidenhead">Maidenhead</string>
+    <string name="maidenhead_format_descr">Maidenhead-lokalisationssystem (QTH-lokalisator).</string>
+    <string name="navigate_point_east_coordinate">Østlig koordinat</string>
+    <string name="navigate_point_north_coordinate">Nordlig koordinat</string>
+    <string name="drag_to_reorder_content_description">Træk for at ændre rækkefølge</string>
+    <string name="coordinate_format_add_title">Tilføj format</string>
+    <string name="coordinate_format_add_empty_body">Søg i en database med over 5.000 lokale og nationale EPSG-koder efter land, navn eller ID.</string>
+    <string name="coordinate_format_select_other">Vælg et andet format</string>
+    <string name="coordinate_format_recent">Seneste</string>
+    <string name="coordinate_format_primary">Primær</string>
+    <string name="coordinate_format_add_empty_title">Leder du efter et bestemt format?</string>
+    <string name="coordinate_format_add_search_hint">Søg efter EPSG-kode eller formatnavn</string>
+    <string name="coordinate_format_cancel_changes_message">Skal ændringer til koordinatformaterne kasseres?</string>
+    <string name="coordinate_format_cancel_changes_title">Ikke-gemte ændringer</string>
+    <string name="coordinate_format_description">Foretrukne formater til hurtig adgang via kontekstmenuen og søgning.</string>
+    <string name="coordinate_format_discard_changes">Kassér ændringer</string>
+    <string name="coordinate_format_last_item_warning">Mindst ét koordinatformat er påkrævet.</string>
 </resources>

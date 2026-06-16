@@ -354,6 +354,8 @@
 
 	<dimen name="gallery_standard_icon_size">72dp</dimen>
 	<dimen name="gallery_big_icon_size">156dp</dimen>
+	<dimen name="gallery_small_icon_size">48dp</dimen>
+	<dimen name="gallery_list_preview_size">36dp</dimen>
 
 	<dimen name="astro_schedule_time_text_size">16sp</dimen>
 	<dimen name="astro_schedule_meridiem_text_size">11sp</dimen>

@@ -49,6 +49,14 @@
 					app:typefaceWeight="medium"
 					tools:text="@string/map_widget_left" />
 
+				<LinearLayout
+					android:id="@+id/actions_container"
+					android:layout_width="wrap_content"
+					android:layout_height="match_parent"
+					android:layout_gravity="center_vertical"
+					android:gravity="center_vertical"
+					android:orientation="horizontal" />
+
 			</LinearLayout>
 
 		</androidx.appcompat.widget.Toolbar>

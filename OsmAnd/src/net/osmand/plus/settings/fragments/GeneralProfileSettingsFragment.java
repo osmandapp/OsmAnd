@@ -20,7 +20,6 @@ import androidx.appcompat.widget.AppCompatCheckedTextView;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 
-import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
@@ -33,6 +32,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.DistanceDuringNavigationBottomSheet;
 import net.osmand.plus.settings.controllers.CompassModeDialogController;
+import net.osmand.plus.settings.coordinates.CoordinateFormatFormatter;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.enums.ScreenOrientation;
@@ -203,9 +203,9 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	}
 
 	private void setupCoordinatesFormatPref() {
-		Preference coordinatesFormat = findPreference(settings.COORDINATES_FORMAT.getId());
+		Preference coordinatesFormat = findPreference(CoordinatesFormatFragment.SETTINGS_PREF_ID);
 		coordinatesFormat.setIcon(getActiveIcon(R.drawable.ic_action_coordinates_widget));
-		coordinatesFormat.setSummary(PointDescription.formatToHumanString(app, settings.COORDINATES_FORMAT.getModeValue(getSelectedAppMode())));
+		coordinatesFormat.setSummary(CoordinateFormatFormatter.getPrimaryTitle(app, getSelectedAppMode()));
 	}
 
 	private void setupAngularUnitsPref() {

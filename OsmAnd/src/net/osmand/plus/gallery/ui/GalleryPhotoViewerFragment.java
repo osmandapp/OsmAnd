@@ -117,8 +117,8 @@ public class GalleryPhotoViewerFragment extends BaseFullScreenFragment {
 			return null;
 		}
 
-		List<GalleryItem.Media> photoItems = controller.getPhotoItems();
-		return photoItems.size() > position ? photoItems.get(position) : null;
+		List<GalleryItem.Media> mediaItems = controller.getMediaItems();
+		return mediaItems.size() > position ? mediaItems.get(position) : null;
 	}
 
 	private void downloadThumbnail(@NonNull MediaItem mediaItem) {

@@ -7,6 +7,7 @@ import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.DownloadManager;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -17,6 +18,7 @@ import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.URLUtil;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -53,6 +55,7 @@ import net.osmand.plus.wikipedia.WikiAlgorithms;
 import net.osmand.shared.media.MediaProvider;
 import net.osmand.shared.media.MediaUriResolver;
 import net.osmand.shared.media.domain.MediaItem;
+import net.osmand.shared.media.domain.MediaType;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -63,6 +66,8 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 	public static final String TAG = GalleryPhotoPagerFragment.class.getSimpleName();
 	public static final int REQUEST_EXTERNAL_STORAGE_PERMISSION = 2000;
 	public static final int PRELOAD_THUMBNAILS_COUNT = 3;
+
+	private static final int UI_TOGGLE_ANIM_MS = 150;
 
 	private static final String SELECTED_ITEM_ID_KEY = "selected_item_id_key";
 
@@ -79,7 +84,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 	private int selectedPosition = 0;
 
 	private GalleryPagerController controller;
-	private List<GalleryItem.Media> photoItems = new ArrayList<>();
+	private List<GalleryItem.Media> mediaItems = new ArrayList<>();
 	private MediaProvider mediaProvider;
 
 	@Override
@@ -95,7 +100,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 		}
 		controller.registerDialog(this);
 
-		photoItems = controller.getPhotoItems();
+		mediaItems = controller.getMediaItems();
 
 		String selectedItemId = null;
 		if (savedInstanceState != null) {
@@ -107,7 +112,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 				? controller.getIndexById(selectedItemId)
 				: 0;
 
-		if (selectedPosition >= photoItems.size()) {
+		if (selectedPosition >= mediaItems.size()) {
 			dismiss();
 		}
 	}
@@ -128,7 +133,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 		descriptionShadow = view.findViewById(R.id.description_shadow);
 		descriptionContainer = view.findViewById(R.id.description_container);
 
-		if (selectedPosition < photoItems.size()) {
+		if (selectedPosition < mediaItems.size()) {
 			setupViewPager(view);
 			preloadThumbNails();
 			updateImageDescriptionRow(getSelectedMediaItem());
@@ -168,28 +173,30 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 	}
 
 	private void preloadThumbNails(boolean next) {
-		if (photoItems.size() <= 1) {
+		if (mediaItems.size() <= 1) {
 			return;
 		}
 		if (next) {
 			int start = selectedPosition + 1;
-			if (start >= photoItems.size()) return;
-			int end = Math.min(start + PRELOAD_THUMBNAILS_COUNT, photoItems.size());
+			if (start >= mediaItems.size()) return;
+			int end = Math.min(start + PRELOAD_THUMBNAILS_COUNT, mediaItems.size());
 			for (int i = start; i < end; i++) {
-				downloadThumbnail(photoItems.get(i).getMediaItem());
+				downloadThumbnail(mediaItems.get(i).getMediaItem());
 			}
 		} else {
 			int start = selectedPosition - 1;
 			if (start < 0) return;
 			int end = Math.max(start - PRELOAD_THUMBNAILS_COUNT, -1);
 			for (int i = start; i > end; i--) {
-				downloadThumbnail(photoItems.get(i).getMediaItem());
+				downloadThumbnail(mediaItems.get(i).getMediaItem());
 			}
 		}
 	}
 
 	private void downloadThumbnail(@NonNull MediaItem mediaItem) {
-		mediaProvider.loadThumbnail(mediaItem);
+		if (mediaItem.getType() == MediaType.PHOTO) {
+			mediaProvider.loadThumbnail(mediaItem);
+		}
 	}
 
 	private void updateImageDescriptionRow(@Nullable MediaItem mediaItem) {
@@ -258,6 +265,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 				toolbar.animate()
 						.translationY(toolbar.getHeight() * -1)
 						.alpha(0.0f)
+						.setDuration(UI_TOGGLE_ANIM_MS)
 						.setListener(new AnimatorListenerAdapter() {
 							@Override
 							public void onAnimationEnd(Animator animation) {
@@ -267,6 +275,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 						});
 				descriptionShadow.animate()
 						.alpha(0)
+						.setDuration(UI_TOGGLE_ANIM_MS)
 						.setListener(new AnimatorListenerAdapter() {
 							@Override
 							public void onAnimationEnd(Animator animation) {
@@ -277,6 +286,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 				descriptionContainer.animate()
 						.translationY(toolbar.getHeight())
 						.alpha(0)
+						.setDuration(UI_TOGGLE_ANIM_MS)
 						.setListener(new AnimatorListenerAdapter() {
 							@Override
 							public void onAnimationEnd(Animator animation) {
@@ -287,15 +297,18 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 			} else {
 				toolbar.setVisibility(View.VISIBLE);
 				toolbar.setAlpha(0.0f);
-				toolbar.animate().translationY(0).alpha(1.0f).setListener(null);
+				toolbar.animate().translationY(0).alpha(1.0f)
+						.setDuration(UI_TOGGLE_ANIM_MS).setListener(null);
 
 				descriptionShadow.setVisibility(View.VISIBLE);
 				descriptionShadow.setAlpha(0.0f);
-				descriptionShadow.animate().alpha(1.0f).setListener(null);
+				descriptionShadow.animate().alpha(1.0f)
+						.setDuration(UI_TOGGLE_ANIM_MS).setListener(null);
 
 				descriptionContainer.setVisibility(View.VISIBLE);
 				descriptionContainer.setAlpha(0.0f);
-				descriptionContainer.animate().translationY(0).alpha(1.0f).setListener(null);
+				descriptionContainer.animate().translationY(0).alpha(1.0f)
+						.setDuration(UI_TOGGLE_ANIM_MS).setListener(null);
 			}
 		} else {
 			toolbar.setVisibility(uiHidden ? View.GONE : View.VISIBLE);
@@ -319,7 +332,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 		setupSelectableBackground(backButton);
 
 		ImageView shareButton = toolbar.findViewById(R.id.share_button);
-		shareButton.setOnClickListener(v -> shareImage());
+		shareButton.setOnClickListener(v -> shareMedia());
 		shareButton.setImageDrawable(getPaintedIcon(R.drawable.ic_action_gshare_dark,
 				ColorUtilities.getColor(app, R.color.app_bar_secondary_light)));
 		setupSelectableBackground(shareButton);
@@ -331,14 +344,51 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 		setupSelectableBackground(optionsButton);
 	}
 
-	private void shareImage() {
-		String shareUri = MediaUriResolver.getShareUri(getSelectedMediaItem());
+	private void openInExternalApp() {
+		MediaItem mediaItem = getSelectedMediaItem();
+		if (mediaItem == null) return;
+
+		Uri uri = app.getGalleryHelper().getMediaSourceResolver().getShareableUri(mediaItem);
+		if (uri == null) return;
+
+		Intent intent = new Intent(Intent.ACTION_VIEW);
+		intent.setDataAndType(uri, getMediaMimeType(mediaItem));
+		intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+		callActivity(activity -> AndroidUtils.startActivityIfSafe(activity,
+				Intent.createChooser(intent, getString(R.string.gallery_open_in))));
+	}
+
+	private void shareMedia() {
+		MediaItem mediaItem = getSelectedMediaItem();
+		if (mediaItem == null) return;
+
+		Uri localUri = app.getGalleryHelper().getMediaSourceResolver().getShareableUri(mediaItem);
+		if (localUri != null) {
+			callActivity(activity -> shareMediaUri(activity, mediaItem, localUri));
+			return;
+		}
+
+		String shareUri = MediaUriResolver.getShareUri(mediaItem);
 		if (!Algorithms.isEmpty(shareUri)) {
-			callActivity(activity -> shareImageUri(activity, shareUri));
+			callActivity(activity -> shareText(activity, shareUri));
 		}
 	}
 
-	private void shareImageUri(@NonNull FragmentActivity activity, @NonNull String shareUri) {
+	private void shareMediaUri(@NonNull FragmentActivity activity, @NonNull MediaItem mediaItem,
+	                           @NonNull Uri uri) {
+		Intent sendIntent = new Intent();
+		sendIntent.setAction(Intent.ACTION_SEND);
+		sendIntent.setType(getMediaMimeType(mediaItem));
+		sendIntent.putExtra(Intent.EXTRA_STREAM, uri);
+		sendIntent.setClipData(ClipData.newRawUri(mediaItem.getTitle(), uri));
+		sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+		Intent chooser = Intent.createChooser(sendIntent, getString(R.string.shared_string_share));
+		chooser.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+		AndroidUtils.startActivityIfSafe(activity, chooser);
+	}
+
+	private void shareText(@NonNull FragmentActivity activity, @NonNull String shareUri) {
 		Intent sendIntent = new Intent();
 		sendIntent.setAction(Intent.ACTION_SEND);
 		sendIntent.setType("text/plain");
@@ -372,16 +422,24 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 					.create());
 		}
 
-		items.add(new PopUpMenuItem.Builder(app)
-				.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_gsave_dark, iconColor))
-				.setTitleId(R.string.shared_string_download)
-				.setOnClickListener(item -> {
-					String downloadUri = MediaUriResolver.getDownloadUri(mediaItem);
-					if (!Algorithms.isEmpty(downloadUri)) {
-						downloadImage(downloadUri);
-					}
-				})
-				.create());
+		String downloadUri = MediaUriResolver.getDownloadUri(mediaItem);
+		if (isDownloadableMedia(mediaItem, downloadUri)) {
+			items.add(new PopUpMenuItem.Builder(app)
+					.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_gsave_dark, iconColor))
+					.setTitleId(R.string.shared_string_download)
+					.setOnClickListener(item -> downloadMedia(downloadUri))
+					.create());
+		}
+
+		boolean playable = mediaItem.getType() == MediaType.VIDEO
+				|| mediaItem.getType() == MediaType.AUDIO;
+		if (playable) {
+			items.add(new PopUpMenuItem.Builder(app)
+					.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_external_link, iconColor))
+					.setTitleId(R.string.gallery_open_in)
+					.setOnClickListener(item -> openInExternalApp())
+					.create());
+		}
 
 		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
 		displayData.anchorView = view;
@@ -391,12 +449,20 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 		PopUpMenu.show(displayData);
 	}
 
-	private void downloadImage(@NonNull String url) {
-		callMapActivity(activity -> downloadImage(activity, url));
+	private boolean isDownloadableMedia(@NonNull MediaItem mediaItem, @Nullable String downloadUri) {
+		if (!(mediaItem instanceof MediaItem.Remote) || Algorithms.isEmpty(downloadUri)) {
+			return false;
+		}
+		String scheme = Uri.parse(downloadUri).getScheme();
+		return "http".equalsIgnoreCase(scheme) || "https".equalsIgnoreCase(scheme);
 	}
 
-	private void downloadImage(@NonNull MapActivity activity, @NonNull String url) {
-		String fileName = url.substring(url.lastIndexOf('/') + 1);
+	private void downloadMedia(@NonNull String url) {
+		callMapActivity(activity -> downloadMedia(activity, url));
+	}
+
+	private void downloadMedia(@NonNull MapActivity activity, @NonNull String url) {
+		String fileName = URLUtil.guessFileName(url, null, null);
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
 			startDownloading(fileName, url);
 		} else {
@@ -404,13 +470,13 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 				startDownloading(fileName, url);
 			} else {
 				ActivityCompat.requestPermissions(activity,
-						new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+						new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},
 						REQUEST_EXTERNAL_STORAGE_PERMISSION);
 			}
 		}
 	}
 
-	private void startDownloading(String fileName, String url) {
+	private void startDownloading(@NonNull String fileName, @NonNull String url) {
 		DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url))
 				.setAllowedNetworkTypes(
 						DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
@@ -425,11 +491,21 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 		downloadManager.enqueue(request);
 	}
 
+	@NonNull
+	private String getMediaMimeType(@NonNull MediaItem mediaItem) {
+		return switch (mediaItem.getType()) {
+			case VIDEO -> "video/*";
+			case AUDIO -> "audio/*";
+			case PHOTO -> "image/*";
+			default -> "*/*";
+		};
+	}
+
 	private void setupViewPager(@NonNull View view) {
 		ViewPager pager = view.findViewById(R.id.photo_pager);
 		FragmentManager manager = getChildFragmentManager();
 
-		ViewPagerAdapter adapter = new ViewPagerAdapter(manager, photoItems);
+		ViewPagerAdapter adapter = new ViewPagerAdapter(manager, mediaItems);
 		pager.setAdapter(adapter);
 		pager.setCurrentItem(selectedPosition);
 		pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -460,10 +536,14 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 
 	@Nullable
 	private GalleryItem.Media getSelectedGalleryItem() {
-		if (selectedPosition >= 0 && selectedPosition < photoItems.size()) {
-			return photoItems.get(selectedPosition);
+		if (selectedPosition >= 0 && selectedPosition < mediaItems.size()) {
+			return mediaItems.get(selectedPosition);
 		}
 		return null;
+	}
+
+	public boolean isUiHidden() {
+		return uiHidden;
 	}
 
 	private void setupSelectableBackground(@NonNull View view) {
@@ -521,23 +601,27 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 
 	private static class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
-		private final List<GalleryItem.Media> pictures;
+		private final List<GalleryItem.Media> mediaItems;
 
 		public ViewPagerAdapter(@NonNull FragmentManager manager,
-		                        @NonNull List<GalleryItem.Media> pictures) {
+		                        @NonNull List<GalleryItem.Media> mediaItems) {
 			super(manager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-			this.pictures = pictures;
+			this.mediaItems = mediaItems;
 		}
 
 		@NonNull
 		@Override
 		public Fragment getItem(int position) {
+			MediaType type = mediaItems.get(position).getMediaItem().getType();
+			if (type == MediaType.VIDEO || type == MediaType.AUDIO) {
+				return GalleryMediaPlayerFragment.newInstance(position);
+			}
 			return GalleryPhotoViewerFragment.newInstance(position);
 		}
 
 		@Override
 		public int getCount() {
-			return pictures.size();
+			return mediaItems.size();
 		}
 	}
 }

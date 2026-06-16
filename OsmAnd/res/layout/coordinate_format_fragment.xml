@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/activity_background_color"
+	android:clickable="true"
+	android:focusable="true">
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/appbar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/card_and_list_background_basic">
+
+		<androidx.appcompat.widget.Toolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:minHeight="@dimen/toolbar_height"
+			app:contentInsetEnd="0dp"
+			app:contentInsetLeft="0dp"
+			app:contentInsetRight="0dp"
+			app:contentInsetStart="0dp"
+			app:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:background="?attr/card_and_list_background_basic"
+				android:gravity="center_vertical"
+				android:minHeight="@dimen/toolbar_height"
+				android:orientation="horizontal">
+
+				<ImageButton
+					android:id="@+id/close_button"
+					style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+					android:layout_width="@dimen/toolbar_height"
+					android:layout_height="@dimen/toolbar_height"
+					android:contentDescription="@string/access_shared_string_navigate_up"
+					app:tint="?attr/default_icon_color"
+					app:srcCompat="@drawable/ic_arrow_back" />
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/toolbar_title"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="@dimen/content_padding"
+					android:layout_marginEnd="@dimen/content_padding"
+					android:layout_weight="1"
+					android:letterSpacing="@dimen/text_button_letter_spacing"
+					android:maxLines="2"
+					android:text="@string/coordinates_format"
+					android:textColor="?android:textColorPrimary"
+					android:textSize="@dimen/dialog_header_text_size"
+					app:typefaceWeight="medium"
+					tools:text="@string/coordinates_format" />
+
+				<ImageButton
+					android:id="@+id/action_edit"
+					style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+					android:layout_width="@dimen/toolbar_height"
+					android:layout_height="@dimen/toolbar_height"
+					android:contentDescription="@string/shared_string_edit"
+					app:tint="?attr/default_icon_color"
+					app:srcCompat="@drawable/ic_action_edit_outlined" />
+
+				<ImageButton
+					android:id="@+id/action_overflow"
+					style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+					android:layout_width="@dimen/toolbar_height"
+					android:layout_height="@dimen/toolbar_height"
+					android:contentDescription="@string/shared_string_options"
+					app:tint="?attr/default_icon_color"
+					app:srcCompat="@drawable/ic_overflow_menu_white" />
+
+			</LinearLayout>
+
+		</androidx.appcompat.widget.Toolbar>
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<FrameLayout
+		android:id="@+id/content_host"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="?attr/activity_background_color"
+		app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+		<androidx.core.widget.NestedScrollView
+			android:id="@+id/scroll_view"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:clipToPadding="false"
+			android:fillViewport="true"
+			android:overScrollMode="ifContentScrolls"
+			android:scrollbars="vertical">
+
+			<LinearLayout
+				android:id="@+id/content_container"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				android:paddingBottom="96dp" />
+
+		</androidx.core.widget.NestedScrollView>
+
+		<com.google.android.material.floatingactionbutton.FloatingActionButton
+			android:id="@+id/fab"
+			style="@style/MaterialOsmandFab"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom|end"
+			android:layout_margin="@dimen/content_padding"
+			android:contentDescription="@string/shared_string_add"
+			app:elevation="6dp"
+			app:pressedTranslationZ="8dp"
+			app:shapeAppearanceOverlay="@style/MaterialOsmandFab"
+			app:srcCompat="@drawable/ic_action_add_no_bg" />
+
+	</FrameLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

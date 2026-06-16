@@ -6068,4 +6068,10 @@
     <string name="average_temperature_slider_description">Velg tidsintervallet for måling av gjennomsnittstemperaturen.</string>
     <string name="shared_string_instant">Øyeblikkelig</string>
     <string name="shared_strings_dimensions">Dimensjoner</string>
+    <string name="auto_copy_media_to_osmand_storage">Kopier automatisk media til OsmAnd-lager</string>
+    <string name="no_media_descr">Du kan legge til bilder, videoer eller lydnotater fra ditt kamera eller bibliotek.</string>
+    <string name="no_media">Ingen media</string>
+    <string name="shared_string_media">Media</string>
+    <string name="choose_from_files">Velg fra Filer</string>
+    <string name="choose_from_gallery">Velg fra Galleri</string>
 </resources>

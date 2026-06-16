@@ -83,16 +83,60 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/formatLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="8dp">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/formatInputLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:minHeight="56dp"
+                            app:boxBackgroundMode="filled"
+                            app:boxBackgroundColor="?attr/text_input_background"
+                            app:endIconContentDescription="@string/coords_format"
+                            app:endIconDrawable="@drawable/ic_action_arrow_drop_down"
+                            app:endIconMode="custom"
+                            app:hintEnabled="true">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/formatEditText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:focusable="false"
+                                android:hint="@string/navigate_point_format"
+                                android:imeOptions="actionNext"
+                                android:minHeight="56dp"
+                                android:textSize="16sp"
+                                tools:text="DD.DDDDD" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/latitudeLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingTop="16dp">
+                    android:paddingTop="8dp">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/latitudeImage"
-                        android:layout_width="54dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         app:srcCompat="@drawable/ic_action_coordinates_latitude"/>
 
                     <FrameLayout
@@ -103,14 +147,26 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="16dp"
-	                        android:layout_marginEnd="16dp">
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:minHeight="56dp"
+                            app:boxBackgroundMode="outline"
+                            app:boxBackgroundColor="?attr/list_background_color"
+                            app:endIconContentDescription="@string/shared_string_clear"
+                            app:endIconDrawable="@drawable/ic_action_remove_dark"
+                            app:endIconMode="clear_text"
+                            app:endIconTint="?attr/default_icon_color"
+                            app:startIconDrawable="@drawable/ic_action_coordinates_latitude"
+                            app:startIconTint="@color/icon_color_active_light">
 
-                            <EditText
+                            <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/latitudeEditText"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/navigate_point_latitude"
                                 android:imeOptions="actionNext"
+                                android:minHeight="56dp"
+                                android:textSize="16sp"
                                 tools:text="22.12345"/>
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -120,11 +176,12 @@
                             style="@style/Widget.AppCompat.ActionButton"
                             android:layout_width="48dp"
                             android:layout_height="48dp"
-                            android:layout_gravity="end"
-                            android:layout_marginRight="4dp"
+                            android:layout_gravity="end|center_vertical"
+                            android:layout_marginRight="16dp"
                             android:contentDescription="@string/shared_string_clear"
+                            android:visibility="gone"
                             app:srcCompat="@drawable/ic_action_remove_dark"
-	                        android:layout_marginEnd="4dp" />
+                            android:layout_marginEnd="16dp" />
 
                     </FrameLayout>
 
@@ -135,12 +192,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingTop="16dp">
+                    android:paddingTop="8dp">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/longitudeImage"
-                        android:layout_width="54dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         app:srcCompat="@drawable/ic_action_coordinates_longitude"/>
 
                     <FrameLayout
@@ -151,14 +209,26 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="16dp"
-	                        android:layout_marginEnd="16dp">
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:minHeight="56dp"
+                            app:boxBackgroundMode="outline"
+                            app:boxBackgroundColor="?attr/list_background_color"
+                            app:endIconContentDescription="@string/shared_string_clear"
+                            app:endIconDrawable="@drawable/ic_action_remove_dark"
+                            app:endIconMode="clear_text"
+                            app:endIconTint="?attr/default_icon_color"
+                            app:startIconDrawable="@drawable/ic_action_coordinates_longitude"
+                            app:startIconTint="@color/icon_color_active_light">
 
-                            <EditText
+                            <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/longitudeEditText"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/navigate_point_longitude"
                                 android:imeOptions="actionDone"
+                                android:minHeight="56dp"
+                                android:textSize="16sp"
                                 tools:text="22.12345"/>
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -168,11 +238,12 @@
                             style="@style/Widget.AppCompat.ActionButton"
                             android:layout_width="48dp"
                             android:layout_height="48dp"
-                            android:layout_gravity="end"
-                            android:layout_marginRight="4dp"
+                            android:layout_gravity="end|center_vertical"
+                            android:layout_marginRight="16dp"
                             android:contentDescription="@string/shared_string_clear"
+                            android:visibility="gone"
                             app:srcCompat="@drawable/ic_action_remove_dark"
-	                        android:layout_marginEnd="4dp" />
+                            android:layout_marginEnd="16dp" />
 
                     </FrameLayout>
 
@@ -183,7 +254,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingTop="16dp"
+                    android:paddingTop="8dp"
                     android:visibility="gone">
 
                     <FrameLayout
@@ -193,18 +264,29 @@
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="54dp"
+                            android:layout_marginLeft="16dp"
                             android:layout_marginRight="16dp"
-                            android:layout_marginStart="54dp"
-                            android:layout_marginEnd="16dp">
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:minHeight="56dp"
+                            app:boxBackgroundMode="outline"
+                            app:boxBackgroundColor="?attr/list_background_color"
+                            app:endIconContentDescription="@string/shared_string_clear"
+                            app:endIconDrawable="@drawable/ic_action_remove_dark"
+                            app:endIconMode="clear_text"
+                            app:endIconTint="?attr/default_icon_color"
+                            app:startIconDrawable="@drawable/ic_action_data_grid"
+                            app:startIconTint="@color/icon_color_active_light">
 
-                            <EditText
+                            <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/zoneEditText"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/navigate_point_zone"
                                 android:imeOptions="actionNext"
-                                android:inputType="textCapCharacters|textNoSuggestions"
+                                android:minHeight="56dp"
+                                android:textSize="16sp"
+                                android:inputType="text|textCapCharacters|textNoSuggestions"
                                 tools:text="22.12345"/>
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -214,11 +296,12 @@
                             style="@style/Widget.AppCompat.ActionButton"
                             android:layout_width="48dp"
                             android:layout_height="48dp"
-                            android:layout_gravity="end"
-                            android:layout_marginRight="4dp"
+                            android:layout_gravity="end|center_vertical"
+                            android:layout_marginRight="16dp"
                             android:contentDescription="@string/shared_string_clear"
+                            android:visibility="gone"
                             app:srcCompat="@drawable/ic_action_remove_dark"
-                            android:layout_marginEnd="4dp" />
+                            android:layout_marginEnd="16dp" />
 
                     </FrameLayout>
 
@@ -229,13 +312,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingTop="16dp"
+                    android:paddingTop="8dp"
                     android:visibility="gone">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/eastingImage"
-                        android:layout_width="54dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         app:srcCompat="@drawable/ic_action_coordinates_longitude"/>
 
                     <FrameLayout
@@ -246,15 +330,27 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="16dp"
-                            android:layout_marginEnd="16dp">
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:minHeight="56dp"
+                            app:boxBackgroundMode="outline"
+                            app:boxBackgroundColor="?attr/list_background_color"
+                            app:endIconContentDescription="@string/shared_string_clear"
+                            app:endIconDrawable="@drawable/ic_action_remove_dark"
+                            app:endIconMode="clear_text"
+                            app:endIconTint="?attr/default_icon_color"
+                            app:startIconDrawable="@drawable/ic_action_coordinates_longitude"
+                            app:startIconTint="@color/icon_color_active_light">
 
-                            <EditText
+                            <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/eastingEditText"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/navigate_point_easting"
                                 android:imeOptions="actionDone"
-                                android:inputType="textCapCharacters|textNoSuggestions"
+                                android:inputType="text|textCapCharacters|textNoSuggestions"
+                                android:minHeight="56dp"
+                                android:textSize="16sp"
                                 tools:text="22.12345"/>
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -264,11 +360,12 @@
                             style="@style/Widget.AppCompat.ActionButton"
                             android:layout_width="48dp"
                             android:layout_height="48dp"
-                            android:layout_gravity="end"
-                            android:layout_marginRight="4dp"
+                            android:layout_gravity="end|center_vertical"
+                            android:layout_marginRight="16dp"
                             android:contentDescription="@string/shared_string_clear"
+                            android:visibility="gone"
                             app:srcCompat="@drawable/ic_action_remove_dark"
-                            android:layout_marginEnd="4dp" />
+                            android:layout_marginEnd="16dp" />
 
                     </FrameLayout>
 
@@ -280,13 +377,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingTop="16dp"
+                    android:paddingTop="8dp"
                     android:visibility="gone">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/northingImage"
-                        android:layout_width="54dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         app:srcCompat="@drawable/ic_action_coordinates_latitude"/>
 
                     <FrameLayout
@@ -297,15 +395,27 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="16dp"
-	                        android:layout_marginEnd="16dp">
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:minHeight="56dp"
+                            app:boxBackgroundMode="outline"
+                            app:boxBackgroundColor="?attr/list_background_color"
+                            app:endIconContentDescription="@string/shared_string_clear"
+                            app:endIconDrawable="@drawable/ic_action_remove_dark"
+                            app:endIconMode="clear_text"
+                            app:endIconTint="?attr/default_icon_color"
+                            app:startIconDrawable="@drawable/ic_action_coordinates_latitude"
+                            app:startIconTint="@color/icon_color_active_light">
 
-                            <EditText
+                            <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/northingEditText"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/navigate_point_northing"
                                 android:imeOptions="actionNext"
-                                android:inputType="textCapCharacters|textNoSuggestions"
+                                android:minHeight="56dp"
+                                android:textSize="16sp"
+                                android:inputType="text|textCapCharacters|textNoSuggestions"
                                 tools:text="22.12345"/>
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -315,11 +425,12 @@
                             style="@style/Widget.AppCompat.ActionButton"
                             android:layout_width="48dp"
                             android:layout_height="48dp"
-                            android:layout_gravity="end"
-                            android:layout_marginRight="4dp"
+                            android:layout_gravity="end|center_vertical"
+                            android:layout_marginRight="16dp"
                             android:contentDescription="@string/shared_string_clear"
+                            android:visibility="gone"
                             app:srcCompat="@drawable/ic_action_remove_dark"
-	                        android:layout_marginEnd="4dp" />
+                            android:layout_marginEnd="16dp" />
 
                     </FrameLayout>
 
@@ -330,7 +441,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingTop="16dp"
+                    android:paddingTop="8dp"
                     android:visibility="gone">
 
                     <FrameLayout
@@ -340,18 +451,29 @@
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="54dp"
+                            android:layout_marginLeft="16dp"
                             android:layout_marginRight="16dp"
-                            android:layout_marginStart="54dp"
-                            android:layout_marginEnd="16dp">
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:minHeight="56dp"
+                            app:boxBackgroundMode="outline"
+                            app:boxBackgroundColor="?attr/list_background_color"
+                            app:endIconContentDescription="@string/shared_string_clear"
+                            app:endIconDrawable="@drawable/ic_action_remove_dark"
+                            app:endIconMode="clear_text"
+                            app:endIconTint="?attr/default_icon_color"
+                            app:startIconDrawable="@drawable/ic_action_data_grid"
+                            app:startIconTint="@color/icon_color_active_light">
 
-                            <EditText
+                            <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/mgrsEditText"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/navigate_point_mgrs"
                                 android:imeOptions="actionDone"
-                                android:inputType="textCapCharacters|textNoSuggestions"
+                                android:minHeight="56dp"
+                                android:textSize="16sp"
+                                android:inputType="text|textCapCharacters|textNoSuggestions"
                                 tools:text="22.12345"/>
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -361,11 +483,12 @@
                             style="@style/Widget.AppCompat.ActionButton"
                             android:layout_width="48dp"
                             android:layout_height="48dp"
-                            android:layout_gravity="end"
-                            android:layout_marginRight="4dp"
+                            android:layout_gravity="end|center_vertical"
+                            android:layout_marginRight="16dp"
                             android:contentDescription="@string/shared_string_clear"
+                            android:visibility="gone"
                             app:srcCompat="@drawable/ic_action_remove_dark"
-                            android:layout_marginEnd="4dp" />
+                            android:layout_marginEnd="16dp" />
 
                     </FrameLayout>
 
@@ -376,7 +499,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingTop="16dp"
+                    android:paddingTop="8dp"
                     android:visibility="gone">
 
                     <FrameLayout
@@ -386,18 +509,29 @@
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="54dp"
+                            android:layout_marginLeft="16dp"
                             android:layout_marginRight="16dp"
-	                        android:layout_marginStart="54dp"
-	                        android:layout_marginEnd="16dp">
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:minHeight="56dp"
+                            app:boxBackgroundMode="outline"
+                            app:boxBackgroundColor="?attr/list_background_color"
+                            app:endIconContentDescription="@string/shared_string_clear"
+                            app:endIconDrawable="@drawable/ic_action_remove_dark"
+                            app:endIconMode="clear_text"
+                            app:endIconTint="?attr/default_icon_color"
+                            app:startIconDrawable="@drawable/ic_action_coordinates_grid_disabled"
+                            app:startIconTint="@color/icon_color_active_light">
 
-                            <EditText
+                            <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/olcEditText"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/navigate_point_olc"
                                 android:imeOptions="actionDone"
-                                android:inputType="textCapCharacters|textNoSuggestions"
+                                android:minHeight="56dp"
+                                android:textSize="16sp"
+                                android:inputType="text|textCapCharacters|textNoSuggestions"
                                 tools:text="6PH57VP3+PQ"/>
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -407,11 +541,12 @@
                             style="@style/Widget.AppCompat.ActionButton"
                             android:layout_width="48dp"
                             android:layout_height="48dp"
-                            android:layout_gravity="end"
-                            android:layout_marginRight="4dp"
+                            android:layout_gravity="end|center_vertical"
+                            android:layout_marginRight="16dp"
                             android:contentDescription="@string/shared_string_clear"
+                            android:visibility="gone"
                             app:srcCompat="@drawable/ic_action_remove_dark"
-	                        android:layout_marginEnd="4dp" />
+                            android:layout_marginEnd="16dp" />
 
                     </FrameLayout>
 
@@ -422,16 +557,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingTop="16dp"
+                    android:paddingTop="8dp"
                     android:visibility="gone">
 
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="54dp"
+                        android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
-	                    android:layout_marginStart="54dp"
-	                    android:layout_marginEnd="16dp">
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp">
 
                         <TextView
                             android:id="@+id/olcInfoTextView"
@@ -445,17 +580,76 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/maidenheadLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="8dp"
+                    android:visibility="gone">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:minHeight="56dp"
+                            app:boxBackgroundMode="outline"
+                            app:boxBackgroundColor="?attr/list_background_color"
+                            app:endIconContentDescription="@string/shared_string_clear"
+                            app:endIconDrawable="@drawable/ic_action_remove_dark"
+                            app:endIconMode="clear_text"
+                            app:endIconTint="?attr/default_icon_color"
+                            app:startIconDrawable="@drawable/ic_action_data_grid"
+                            app:startIconTint="@color/icon_color_active_light">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/maidenheadEditText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/navigate_point_format_maidenhead"
+                                android:imeOptions="actionDone"
+                                android:inputType="text|textCapCharacters|textNoSuggestions"
+                                android:minHeight="56dp"
+                                android:textSize="16sp"
+                                tools:text="IO91AA 28UC"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <ImageButton
+                            android:id="@+id/maidenheadClearButton"
+                            style="@style/Widget.AppCompat.ActionButton"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_gravity="end|center_vertical"
+                            android:layout_marginRight="16dp"
+                            android:contentDescription="@string/shared_string_clear"
+                            android:visibility="gone"
+                            app:srcCompat="@drawable/ic_action_remove_dark"
+                            android:layout_marginEnd="16dp" />
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/swissGridEastLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingTop="16dp"
+                    android:paddingTop="8dp"
                     android:visibility="gone">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/swissGridEastImage"
-                        android:layout_width="54dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         app:srcCompat="@drawable/ic_action_coordinates_latitude"/>
 
                     <FrameLayout
@@ -466,14 +660,26 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="16dp"
-                            android:layout_marginEnd="16dp">
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:minHeight="56dp"
+                            app:boxBackgroundMode="outline"
+                            app:boxBackgroundColor="?attr/list_background_color"
+                            app:endIconContentDescription="@string/shared_string_clear"
+                            app:endIconDrawable="@drawable/ic_action_remove_dark"
+                            app:endIconMode="clear_text"
+                            app:endIconTint="?attr/default_icon_color"
+                            app:startIconDrawable="@drawable/ic_action_coordinates_longitude"
+                            app:startIconTint="@color/icon_color_active_light">
 
-                            <EditText
+                            <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/swissGridEastEditText"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="East Coordinate"
+                                android:hint="@string/navigate_point_east_coordinate"
                                 android:imeOptions="actionNext"
+                                android:minHeight="56dp"
+                                android:textSize="16sp"
                                 tools:text="22.12345"/>
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -483,11 +689,12 @@
                             style="@style/Widget.AppCompat.ActionButton"
                             android:layout_width="48dp"
                             android:layout_height="48dp"
-                            android:layout_gravity="end"
-                            android:layout_marginRight="4dp"
+                            android:layout_gravity="end|center_vertical"
+                            android:layout_marginRight="16dp"
                             android:contentDescription="@string/shared_string_clear"
+                            android:visibility="gone"
                             app:srcCompat="@drawable/ic_action_remove_dark"
-                            android:layout_marginEnd="4dp" />
+                            android:layout_marginEnd="16dp" />
 
                     </FrameLayout>
 
@@ -498,13 +705,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingTop="16dp"
+                    android:paddingTop="8dp"
                     android:visibility="gone">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/swissGridNorthImage"
-                        android:layout_width="54dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         app:srcCompat="@drawable/ic_action_coordinates_longitude"/>
 
                     <FrameLayout
@@ -515,14 +723,26 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="16dp"
-                            android:layout_marginEnd="16dp">
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:minHeight="56dp"
+                            app:boxBackgroundMode="outline"
+                            app:boxBackgroundColor="?attr/list_background_color"
+                            app:endIconContentDescription="@string/shared_string_clear"
+                            app:endIconDrawable="@drawable/ic_action_remove_dark"
+                            app:endIconMode="clear_text"
+                            app:endIconTint="?attr/default_icon_color"
+                            app:startIconDrawable="@drawable/ic_action_coordinates_latitude"
+                            app:startIconTint="@color/icon_color_active_light">
 
-                            <EditText
+                            <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/swissGridNorthEditText"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="North Coordinate"
+                                android:hint="@string/navigate_point_north_coordinate"
                                 android:imeOptions="actionDone"
+                                android:minHeight="56dp"
+                                android:textSize="16sp"
                                 tools:text="22.12345"/>
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -532,61 +752,20 @@
                             style="@style/Widget.AppCompat.ActionButton"
                             android:layout_width="48dp"
                             android:layout_height="48dp"
-                            android:layout_gravity="end"
-                            android:layout_marginRight="4dp"
-                            android:contentDescription="@string/shared_string_clear"
-                            app:srcCompat="@drawable/ic_action_remove_dark"
-                            android:layout_marginEnd="4dp" />
-
-                    </FrameLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/formatLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingBottom="12dp"
-                    android:paddingTop="16dp">
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="54dp"
+                            android:layout_gravity="end|center_vertical"
                             android:layout_marginRight="16dp"
-	                        android:layout_marginStart="54dp"
-	                        android:layout_marginEnd="16dp">
-
-                            <EditText
-                                android:id="@+id/formatEditText"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:focusable="false"
-                                android:hint="@string/coords_format"
-                                android:imeOptions="actionNext"
-                                tools:text="DD.DDDDD"/>
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <ImageButton
-                            android:id="@+id/formatSelectButton"
-                            style="@style/Widget.AppCompat.ActionButton"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:layout_gravity="end"
-                            android:layout_marginRight="4dp"
-                            android:contentDescription="@string/coords_format"
-                            app:srcCompat="@drawable/ic_action_arrow_drop_down"
-	                        android:layout_marginEnd="4dp" />
+                            android:contentDescription="@string/shared_string_clear"
+                            android:visibility="gone"
+                            app:srcCompat="@drawable/ic_action_remove_dark"
+                            android:layout_marginEnd="16dp" />
 
                     </FrameLayout>
 
                 </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp" />
 
                 <include layout="@layout/list_shadow_footer"/>
 
@@ -612,8 +791,8 @@
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
                     android:paddingTop="8dp"
-	                android:paddingStart="16dp"
-	                android:paddingEnd="16dp">
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp">
 
                     <TextView
                         android:id="@+id/title"

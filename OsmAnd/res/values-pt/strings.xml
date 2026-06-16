@@ -6180,4 +6180,16 @@
     <string name="backup_deleting_all_data">A apagar dados…</string>
     <string name="lang_crh">Tártaro da Crimeia (latim)</string>
     <string name="buildings_3d_detail_level">Detalhamento de edifícios em 3D</string>
+    <string name="auto_copy_media_to_osmand_storage">Cópia automática de média para o armazenamento OsmAnd</string>
+    <string name="choose_from_gallery">Escolha na galeria</string>
+    <string name="choose_from_files">Escolha de ficheiros</string>
+    <string name="shared_string_media">Média</string>
+    <string name="no_media">Sem média</string>
+    <string name="no_media_descr">Pode adicionar fotos, vídeos ou notas de áudio da sua câmara, ou da sua galeria.</string>
+    <string name="favorite_confirm_delete_folder">Isso apagará a pasta \"%1$s\", incluindo pastas aninhadas e %2$d ponto(s) favorito(s).</string>
+    <string name="favorite_folder_rename_conflict">Já existe uma pasta com este nome.</string>
+    <string name="favorite_folder_invalid_name">O nome da pasta não pode conter / ou _%_</string>
+    <string name="favorite_folder_duplicate_message">Use um nome de pasta que ainda não exista.</string>
+    <string name="favorite_folder_name">Nome da pasta</string>
+    <string name="edit_folder">Editar pasta</string>
 </resources>

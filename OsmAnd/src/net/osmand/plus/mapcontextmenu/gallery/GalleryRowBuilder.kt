@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
-import net.osmand.plus.gallery.contract.IGalleryRowController
 import net.osmand.plus.gallery.contract.IGalleryRowView
+import net.osmand.plus.gallery.controller.GalleryRowController
 import net.osmand.plus.gallery.model.GalleryActionButton
 import net.osmand.plus.gallery.ui.GalleryGridAdapter
 import net.osmand.plus.gallery.ui.GalleryGridItemDecorator
@@ -20,7 +20,7 @@ private const val SPAN_COUNT = 2
 
 class GalleryRowBuilder(
 	val menuBuilder: MenuBuilder,
-	val controller: IGalleryRowController
+	val controller: GalleryRowController
 ) : IGalleryRowView {
 
 	override val mapActivity: MapActivity = menuBuilder.mapActivity
@@ -29,10 +29,9 @@ class GalleryRowBuilder(
 
 	val galleryView: View = UiUtilities.inflate(mapActivity, nightMode, R.layout.gallery_card)
 
-	private var galleryGridAdapter: GalleryGridAdapter = GalleryGridAdapter(mapActivity, controller,
-		controller, null, nightMode, app.galleryHelper.loadStateRegistry)
-
 	private var actionButtons: List<GalleryActionButton>? = null
+
+	private val adapter: GalleryGridAdapter = controller.createAdapter(mapActivity, nightMode)
 
 	init {
 		controller.attach(this)
@@ -43,7 +42,7 @@ class GalleryRowBuilder(
 	private fun setupRecyclerView() {
 		val lookup = object : GridLayoutManager.SpanSizeLookup() {
 			override fun getSpanSize(position: Int): Int {
-				return if (galleryGridAdapter.isRegularMediaItemOnPosition(position)) 1 else 2
+				return if (adapter.isRegularMediaItemOnPosition(position)) 1 else 2
 			}
 		}
 
@@ -58,14 +57,14 @@ class GalleryRowBuilder(
 
 		val galleryGridItemDecorator = GalleryGridItemDecorator(app)
 		recyclerView.addItemDecoration(galleryGridItemDecorator)
-		recyclerView.adapter = galleryGridAdapter
+		recyclerView.adapter = adapter
 	}
 
 	override fun render() {
 		if (!menuBuilder.isHidden) {
 			val items = controller.getGalleryItems()
 			val list = ArrayList(items)
-			galleryGridAdapter.setItems(list)
+			adapter.setItems(list)
 
 			val mapContextMenu: MapContextMenu? = menuBuilder.mapContextMenu
 			if (items.isNotEmpty() && mapContextMenu != null) {
@@ -97,7 +96,7 @@ class GalleryRowBuilder(
 	}
 
 	override fun onLoadingImage(loading: Boolean) {
-		galleryGridAdapter.onLoadingImages(loading)
+		adapter.onLoadingImages(loading)
 	}
 
 	override fun isNightMode(): Boolean {

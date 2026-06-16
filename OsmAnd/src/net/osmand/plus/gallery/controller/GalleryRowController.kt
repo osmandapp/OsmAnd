@@ -2,16 +2,19 @@ package net.osmand.plus.gallery.controller
 
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
+import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.gallery.contract.IGalleryRowController
 import net.osmand.plus.gallery.contract.IGalleryRowView
 import net.osmand.plus.gallery.data.GalleryKey
 import net.osmand.plus.gallery.data.MediaLoadListener
 import net.osmand.plus.gallery.model.GalleryItem
 import net.osmand.plus.gallery.model.MediaHolder
+import net.osmand.plus.gallery.ui.GalleryGridAdapter
+import net.osmand.plus.gallery.ui.holders.MediaHolderType
 
 abstract class GalleryRowController(
 	protected val app: OsmandApplication,
-	protected val key: GalleryKey
+	protected open val key: GalleryKey
 ) : IGalleryRowController {
 
 	protected var view: IGalleryRowView? = null
@@ -96,4 +99,23 @@ abstract class GalleryRowController(
 	}
 
 	protected abstract fun buildGalleryItems(holder: MediaHolder): List<GalleryItem>
+
+	protected open fun resolveRowHolderType(position: Int): MediaHolderType =
+		if (position == 0) MediaHolderType.MAIN else MediaHolderType.STANDARD
+
+	fun createAdapter(mapActivity: MapActivity, nightMode: Boolean): GalleryGridAdapter {
+		val registry = app.galleryHelper.loadStateRegistry
+		return GalleryGridAdapter(
+			mapActivity = mapActivity,
+			onMediaClicked = ::onMediaItemClicked,
+			onReloadMediaItems = ::onReloadMediaItems,
+			onActionClicked = ::handleGalleryAction,
+			mediaHolderType = ::resolveRowHolderType,
+			resolveResizableImageSize = null,
+			isLoadFailed = registry::isFailed,
+			onLoadFailed = registry::markFailed,
+			nightMode = nightMode,
+			posterLoader = app.galleryHelper.posterLoader
+		)
+	}
 }

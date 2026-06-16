@@ -29,6 +29,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.media.AudioRecorder;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
@@ -65,6 +66,8 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 	private static final String OPEN_NOTES = "open_notes";
 
 	private final AudioVideoNotesPlugin plugin = PluginsHelper.requirePlugin(AudioVideoNotesPlugin.class);
+	private final AudioRecorder audioRecorder = plugin.getAudioRecorder();
+	private final RecordingsFileHelper recordingsFileHelper = plugin.getRecordingsFileHelper();
 
 	private boolean showSwitchProfile;
 
@@ -303,7 +306,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		Integer[] entryValues = {MediaRecorder.AudioEncoder.DEFAULT, MediaRecorder.AudioEncoder.AAC};
 		String[] entries = {getString(R.string.shared_string_default), "AAC"};
 
-		ListPreferenceEx audioFormat = findPreference(plugin.AV_AUDIO_FORMAT.getId());
+		ListPreferenceEx audioFormat = findPreference(audioRecorder.AV_AUDIO_FORMAT.getId());
 		audioFormat.setEntries(entries);
 		audioFormat.setEntryValues(entryValues);
 		audioFormat.setDescription(R.string.av_audio_format_bottom_sheet_descr);
@@ -313,7 +316,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		Integer[] entryValues = {16 * 1024, 32 * 1024, 48 * 1024, 64 * 1024, 96 * 1024, 128 * 1024};
 		String[] entries = {"16 kbps", "32 kbps", "48 kbps", "64 kbps", "96 kbps", "128 kbps"};
 
-		ListPreferenceEx audioBitrate = findPreference(plugin.AV_AUDIO_BITRATE.getId());
+		ListPreferenceEx audioBitrate = findPreference(audioRecorder.AV_AUDIO_BITRATE.getId());
 		audioBitrate.setEntries(entries);
 		audioBitrate.setEntryValues(entryValues);
 		audioBitrate.setDescription(R.string.av_audio_bitrate_descr);
@@ -323,11 +326,11 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		String[] entries = {"8 kHz", "16 kHz", "22.05 kHz", "24 kHz", "44.1 kHz", "48 kHz"};
 		Integer[] entryValues = {8000, 16000, 22050, 24000, 44100, 48000};
 
-		ListPreferenceEx preference = findPreference(plugin.AV_AUDIO_SAMPLE_RATE.getId());
+		ListPreferenceEx preference = findPreference(audioRecorder.AV_AUDIO_SAMPLE_RATE.getId());
 		preference.setEntries(entries);
 		preference.setEntryValues(entryValues);
 		preference.setDescription(R.string.av_audio_sample_rate_descr);
-		preference.setVisible(plugin.AV_AUDIO_FORMAT.get() == AudioEncoder.AAC);
+		preference.setVisible(audioRecorder.AV_AUDIO_FORMAT.get() == AudioEncoder.AAC);
 	}
 
 	private void setupExternalRecorderPref() {
@@ -377,7 +380,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 	}
 
 	private void setupRecorderSplitPref() {
-		SwitchPreferenceEx recorderSplit = findPreference(plugin.AV_RECORDER_SPLIT.getId());
+		SwitchPreferenceEx recorderSplit = findPreference(recordingsFileHelper.AV_RECORDER_SPLIT.getId());
 		recorderSplit.setDescription(getString(R.string.rec_split_desc));
 	}
 
@@ -390,14 +393,14 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 			entries[i++] = v + " " + minStr;
 		}
 
-		ListPreferenceEx clipLength = findPreference(plugin.AV_RS_CLIP_LENGTH.getId());
+		ListPreferenceEx clipLength = findPreference(recordingsFileHelper.AV_RS_CLIP_LENGTH.getId());
 		clipLength.setEntries(entries);
 		clipLength.setEntryValues(entryValues);
 		clipLength.setDescription(R.string.rec_split_clip_length_desc);
 	}
 
 	private void setupStorageSizePref() {
-		ListPreferenceEx storageSize = findPreference(plugin.AV_RS_STORAGE_SIZE.getId());
+		ListPreferenceEx storageSize = findPreference(recordingsFileHelper.AV_RS_STORAGE_SIZE.getId());
 
 		long size = AndroidUtils.getTotalSpace(app) / (1 << 30);
 		if (size > 0) {

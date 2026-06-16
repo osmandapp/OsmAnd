@@ -65,7 +65,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.gallery.attached.AttachedMediaRowController;
-import net.osmand.plus.gallery.contract.IGalleryRowController;
+import net.osmand.plus.gallery.controller.GalleryRowController;
 import net.osmand.plus.gallery.data.GalleryKey;
 import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.mapcontextmenu.SearchAmenitiesTask.SearchAmenitiesListener;
@@ -85,6 +85,7 @@ import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.dialogs.QuickSearchToolbarController;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.coordinates.FormattedCoordinate;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.track.clickable.ClickableWayHelper;
 import net.osmand.plus.transport.TransportStopRoute;
@@ -148,7 +149,7 @@ public class MenuBuilder {
 	private final List<OsmandPlugin> menuPlugins = new ArrayList<>();
 
 	@Nullable
-	private IGalleryRowController onlinePhotosRowController;
+	private OnlinePhotosRowController onlinePhotosRowController;
 	@Nullable
 	private AttachedMediaRowController mediaRowController;
 
@@ -644,7 +645,7 @@ public class MenuBuilder {
 				app.getSettings().ATTACHED_MEDIA_ROW_COLLAPSED);
 	}
 
-	public void buildGalleryRow(@NonNull View view, @NonNull IGalleryRowController controller,
+	public void buildGalleryRow(@NonNull View view, @NonNull GalleryRowController controller,
 	                            @DrawableRes int iconId, @NonNull String title,
 	                            @NonNull OsmandPreference<Boolean> collapsePreference) {
 		GalleryRowBuilder galleryRowBuilder = new GalleryRowBuilder(this, controller);
@@ -672,7 +673,7 @@ public class MenuBuilder {
 	}
 
 	@NonNull
-	private IGalleryRowController resolveOnlinePhotosRowController(@NonNull GalleryKey.Location key) {
+	private OnlinePhotosRowController resolveOnlinePhotosRowController(@NonNull GalleryKey.Location key) {
 		if (onlinePhotosRowController != null && onlinePhotosRowController.matches(key)) {
 			return onlinePhotosRowController;
 		}
@@ -696,12 +697,26 @@ public class MenuBuilder {
 	}
 
 	private void buildCoordinatesRow(@NonNull View view) {
-		Map<Integer, String> locationData = PointDescription.getLocationData(mapActivity, latLon.getLatitude(), latLon.getLongitude(), true);
-		String title = Objects.requireNonNull(locationData.remove(PointDescription.LOCATION_LIST_HEADER));
+		double latitude = latLon.getLatitude();
+		double longitude = latLon.getLongitude();
+		List<FormattedCoordinate> coordinateRows = PointDescription.getPreferredLocationData(mapActivity, latitude, longitude);
+		FormattedCoordinate primaryRow = coordinateRows.isEmpty() ? null : coordinateRows.get(0);
+		String title = primaryRow != null
+				? primaryRow.getText()
+				: PointDescription.getLocationName(mapActivity, latitude, longitude, true);
+		boolean collapsable = coordinateRows.size() > 1;
 		buildRow(view, new BuildRowAttrs.Builder().setText(title).setIconId(R.drawable.ic_action_get_my_location)
-				.setTextPrefix(app.getString(R.string.coordinates)).setClipboardText(title).setCollapsable(true)
-				.setCollapsableView(getLocationCollapsableView(locationData))
+				.setTextPrefix(getCoordinatesRowPrefix(primaryRow)).setClipboardText(title).setCollapsable(collapsable)
+				.setCollapsableView(getLocationCollapsableView(coordinateRows))
 				.setTextLinesLimit(1).build());
+	}
+
+	@NonNull
+	private String getCoordinatesRowPrefix(@Nullable FormattedCoordinate primaryRow) {
+		if (primaryRow != null && primaryRow.getFormat().getEpsgCode() != null) {
+			return "EPSG:" + primaryRow.getFormat().getEpsgCode();
+		}
+		return app.getString(R.string.coordinates);
 	}
 
 	private void stopSearchAmenitiesTasks() {
@@ -1142,6 +1157,9 @@ public class MenuBuilder {
 			} else if (line.getKey() == OsmAndFormatter.SWISS_GRID_PLUS_FORMAT) {
 				ssb.append("CH1903+: ");
 				ssb.setSpan(new ForegroundColorSpan(getColor(R.color.text_color_secondary_light)), 0, 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+			} else if (line.getKey() == OsmAndFormatter.MAIDENHEAD_FORMAT) {
+				ssb.append("Maidenhead: ");
+				ssb.setSpan(new ForegroundColorSpan(getColor(R.color.text_color_secondary_light)), 0, 12, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 			}
 			ssb.append(line.getValue());
 			button.setText(ssb);
@@ -1150,6 +1168,33 @@ public class MenuBuilder {
 		}
 		return new CollapsableView(llv, this, true);
 
+	}
+
+	protected CollapsableView getLocationCollapsableView(List<FormattedCoordinate> coordinateRows) {
+		LinearLayout llv = buildCollapsableContentView(mapActivity, true, true);
+		for (int i = 1; i < coordinateRows.size(); i++) {
+			FormattedCoordinate coordinate = coordinateRows.get(i);
+			TextViewEx button = buildButtonInCollapsableView(mapActivity, false, false);
+			SpannableStringBuilder ssb = new SpannableStringBuilder();
+			appendCoordinateFormatPrefix(ssb, coordinate);
+			ssb.append(coordinate.getText());
+			button.setText(ssb);
+			button.setOnClickListener(v -> copyToClipboard(coordinate.getText(), mapActivity));
+			llv.addView(button);
+		}
+		return new CollapsableView(llv, this, true);
+	}
+
+	private void appendCoordinateFormatPrefix(@NonNull SpannableStringBuilder ssb,
+	                                          @NonNull FormattedCoordinate coordinate) {
+		Integer epsgCode = coordinate.getFormat().getEpsgCode();
+		String title = epsgCode != null ? "EPSG:" + epsgCode : coordinate.getFormat().getTitle();
+		if (!TextUtils.isEmpty(title)) {
+			int start = ssb.length();
+			ssb.append(title).append(": ");
+			ssb.setSpan(new ForegroundColorSpan(getColor(R.color.text_color_secondary_light)),
+					start, ssb.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		}
 	}
 
 	public CollapsableView getDistanceCollapsableView(Set<String> distanceData) {

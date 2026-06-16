@@ -64,16 +64,10 @@ public class CommonChartAdapter extends BaseChartAdapter<ElevationChart, LineDat
 
 		chart.setOnChartGestureListener(new OnChartGestureListener() {
 			boolean hasTranslated;
-			float highlightDrawX = -1;
 
 			@Override
 			public void onChartGestureStart(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
 				hasTranslated = false;
-				if (chart.getHighlighted() != null && chart.getHighlighted().length > 0) {
-					highlightDrawX = chart.getHighlighted()[0].getDrawX();
-				} else {
-					highlightDrawX = -1;
-				}
 				if (externalGestureListener != null) {
 					externalGestureListener.onChartGestureStart(me, lastPerformedGesture);
 				}
@@ -117,8 +111,8 @@ public class CommonChartAdapter extends BaseChartAdapter<ElevationChart, LineDat
 			@Override
 			public void onChartTranslate(MotionEvent me, float dX, float dY) {
 				hasTranslated = true;
-				if (highlightDrawX != -1) {
-					Highlight h = chart.getHighlightByTouchPoint(highlightDrawX, 0f);
+				if (chart.isHighlightPerDragEnabled()) {
+					Highlight h = chart.getHighlightByTouchPoint(me.getX(), 0f);
 					if (h != null) {
 						chart.highlightValue(h, true);
 					}

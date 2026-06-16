@@ -5171,4 +5171,6 @@
     <string name="poi_rapids_grade_6">6 (Grenze der Befahrbarkeit)</string>
     <string name="poi_rapids_filter">Wildwasserschwierigkeit</string>
     <string name="poi_rapids_grade_x">X (nicht befahrbar)</string>
+    <string name="poi_water_type_filter">Wassertyp</string>
+    <string name="poi_water_lake">See</string>
 </resources>

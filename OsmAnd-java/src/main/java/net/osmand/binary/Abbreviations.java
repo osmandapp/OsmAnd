@@ -17,6 +17,7 @@ public class Abbreviations {
 	private static final Set<String> conjunctions = new TreeSet<>();
 
     static {
+    	// articles
     	conjunctions.add("the");
 		conjunctions.add("der");
 		conjunctions.add("den");

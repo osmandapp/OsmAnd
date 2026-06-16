@@ -102,7 +102,7 @@ public class GalleryDetailsFragment extends BaseFullScreenFragment {
 			return null;
 		}
 
-		List<GalleryItem.Media> items = controller.getPhotoItems();
+		List<GalleryItem.Media> items = controller.getMediaItems();
 		for (GalleryItem.Media item : items) {
 			if (Algorithms.stringsEqual(item.getMediaItem().getId(), selectedItemId)) {
 				return item;

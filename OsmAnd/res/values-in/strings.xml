@@ -6357,4 +6357,9 @@
     <string name="obd_simulation_device">Perangkat simulasi</string>
     <string name="obd_alt_battery_voltage_desc">Tampilkan tingkat voltase pada adapter OBD</string>
     <string name="astronomy_map">Peta Astronomi</string>
+    <string name="sort_lowest_first">Terendah dulu</string>
+    <string name="set_step_size">Atur ukuran langkah</string>
+    <string name="set_step_size_summary">Pilih ukuran langkah untuk mengelompokkan trek.</string>
+    <string name="shared_string_step">Langkah</string>
+    <string name="shared_string_unlock">Buka</string>
 </resources>

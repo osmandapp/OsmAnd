@@ -518,6 +518,10 @@ public class BinaryMapIndexReader {
 		}
 	}
 
+	public static final int convertFixed32ToRef(int k) {
+		return Integer.reverseBytes(k);
+	}
+	
 	public final long readInt() throws IOException {
 		long l = readByte();
 		boolean _8byte = l > 0x7f;
@@ -753,6 +757,19 @@ public class BinaryMapIndexReader {
 		}
 		return size;
 	}
+	
+	
+	public List<Amenity> readAmenityBlock(PoiRegion pr, long offset) throws IOException {
+		poiAdapter.initCategories(pr);
+		codedIS.seek(pr.filePointer + offset);
+		long len = readInt(); 
+		long oldLim = codedIS.pushLimitLong((long) len);
+		SearchRequest<Amenity> sr = new SearchRequest<Amenity>();
+		poiAdapter.readPoiData(0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, 
+				sr, pr, null, 0);
+		codedIS.popLimit(oldLim);
+		return sr.getSearchResults();
+	}
 
 	private AddressRegion checkAddressIndex(long offset) {
 		for (AddressRegion r : addressIndexes) {
@@ -760,7 +777,6 @@ public class BinaryMapIndexReader {
 				return r;
 			}
 		}
-		
 		throw new IllegalArgumentException("Illegal offset " + offset); //$NON-NLS-1$
 	}
 
@@ -1447,21 +1463,22 @@ public class BinaryMapIndexReader {
 		return req.getSearchResults();
 	}
 	
-	public NameIndexInspector readFullNameIndex(PoiRegion p) throws IOException {
+	public NameIndexReader readFullNameIndex(PoiRegion p, String prefix) throws IOException {
 		codedIS.seek(p.filePointer);
-		NameIndexInspector res = poiAdapter.readNameIndex();
+		NameIndexReader res = poiAdapter.readNameIndex(prefix, new NameIndexReader(p));
 		long old = codedIS.pushLimitLong((long) p.length);
 		codedIS.popLimit(old);
 		return res;
 	}
 	
-	public NameIndexInspector readFullNameIndex(AddressRegion p) throws IOException {
+	public NameIndexReader readFullNameIndex(AddressRegion p, String prefix) throws IOException {
 		codedIS.seek(p.filePointer);
-		NameIndexInspector res = addressAdapter.readNameIndex();
+		NameIndexReader res = addressAdapter.readNameIndex(prefix, new NameIndexReader(p));
 		long old = codedIS.pushLimitLong((long) p.length);
 		codedIS.popLimit(old);
 		return res;
 	}
+	
 
 	public Map<PoiCategory, List<String>> searchPoiCategoriesByName(String query, Map<PoiCategory, List<String>> map) throws IOException {
 		if (query == null || query.length() == 0) {
@@ -1561,7 +1578,7 @@ public class BinaryMapIndexReader {
 	}
 
 
-	protected List<AddressRegion> getAddressIndexes() {
+	public List<AddressRegion> getAddressIndexes() {
 		return addressIndexes;
 	}
 
@@ -2401,7 +2418,7 @@ public class BinaryMapIndexReader {
 
 	public static void main(String[] args) throws IOException {
 		File fl = new File(System.getProperty("maps") + "/Synthetic_test_rendering.obf");
-		fl = new File(System.getProperty("maps") +"/Map.obf");
+		fl = new File(System.getProperty("maps") +"/Liechtenstein_europe.obf");
 		
 		RandomAccessFile raf = new RandomAccessFile(fl, "r");
 		SearchStat stat = new SearchStat();
@@ -2429,7 +2446,7 @@ public class BinaryMapIndexReader {
 			PoiRegion poiRegion = reader.getPoiIndexes().get(0);
 			if (testPoiSearch) {
 				testPoiSearch(reader, poiRegion, stat);
-				testPoiSearchByName(reader, "central ukraine", 0, 0, stat);
+				testPoiSearchByName(reader, "vaduts", 0, 0, stat);
 			}
 			if (testPoiSearchOnPath) {
 				testSearchOnthePath(reader, stat);
@@ -2573,7 +2590,7 @@ public class BinaryMapIndexReader {
 						return false;
 					}
 				}, null, null);
-req.setSearchStat(stat);
+		req.setSearchStat(stat);
 		reader.searchPoi(req);
 		for (Amenity a : req.getSearchResults()) {
 			int distance = 0;
@@ -2676,8 +2693,9 @@ req.setSearchStat(stat);
 		return result;
 	}
 	
-	void readNameIndexInspector(String prefix, NameIndexInspector inspector) throws InvalidProtocolBufferException, IOException {
+	void readNameIndexInspector(String prefix, NameIndexReader inspector, String filter) throws InvalidProtocolBufferException, IOException {
 		String key = null;
+		boolean match = true;
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -2689,15 +2707,26 @@ req.setSearchStat(stat);
 				if (prefix != null) {
 					key = prefix + key;
 				}
+				match = filter == null || filter.startsWith(key);
+				if (!match && filter.endsWith(".")) {
+					String pr = filter.substring(0, filter.length() - 1);
+					match = key.startsWith(pr) || pr.startsWith(key);
+				}
 				break;
 			case OsmandOdb.IndexedStringTable.VAL_FIELD_NUMBER :
 				int val = (int) readInt(); // FIXME for 64 bit support
-				inspector.putKey(key, val, prefix);
+				if (match) {
+					inspector.putKey(key, val, prefix);
+				}
 				break;
 			case OsmandOdb.IndexedStringTable.SUBTABLES_FIELD_NUMBER :
 				long len = codedIS.readRawVarint32();
 				long oldLim = codedIS.pushLimitLong((long) len);
-				readNameIndexInspector(key, inspector);
+				if (match) {
+					readNameIndexInspector(key, inspector, filter);
+				} else {
+					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+				}
 				codedIS.popLimit(oldLim);
 				break;
 			default:
@@ -2797,7 +2826,7 @@ req.setSearchStat(stat);
 			public boolean isCancelled() {
 				return false;
 			}
-		}, "terra", StringMatcherMode.CHECK_ONLY_STARTS_WITH);
+		}, "vad", StringMatcherMode.CHECK_ONLY_STARTS_WITH);
 		req.setSearchStat(stat);
 //		req.setBBoxRadius(52.276142, 4.8608723, 15000);
 		reader.searchAddressDataByName(req);

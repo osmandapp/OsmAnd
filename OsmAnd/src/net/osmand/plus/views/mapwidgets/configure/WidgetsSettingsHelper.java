@@ -102,7 +102,9 @@ public class WidgetsSettingsHelper {
 		mapButtonsHelper.copyButtonStatesFromMode(appMode, fromAppMode, mapButtonsHelper.getAllButtonsStates());
 	}
 
-	public void copyWidgetsForPanel(@NonNull ApplicationMode fromAppMode, @Nullable ScreenLayoutMode fromLayoutMode, @NonNull WidgetsPanel panel) {
+	public void copyWidgetsForPanel(@NonNull ApplicationMode fromAppMode,
+	                                @Nullable ScreenLayoutMode fromLayoutMode,
+	                                @NonNull WidgetsPanel panel) {
 		int filter = ENABLED_MODE | AVAILABLE_MODE | MATCHING_PANELS_MODE;
 		List<WidgetsPanel> panels = Collections.singletonList(panel);
 		Set<MapWidgetInfo> widgetInfosToCopy = widgetRegistry.getWidgetsForPanel(mapActivity, fromAppMode, fromLayoutMode, filter, panels);

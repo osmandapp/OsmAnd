@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/activity_background_color"
+	android:clickable="true"
+	android:focusable="true">
+
+	<androidx.coordinatorlayout.widget.CoordinatorLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="?attr/activity_background_color">
+
+		<com.google.android.material.appbar.AppBarLayout
+			android:id="@+id/search_app_bar"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="?attr/card_and_list_background_basic">
+
+			<androidx.appcompat.widget.Toolbar
+				android:id="@+id/toolbar"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:minHeight="@dimen/toolbar_height"
+				app:contentInsetEnd="0dp"
+				app:contentInsetLeft="0dp"
+				app:contentInsetRight="0dp"
+				app:contentInsetStart="0dp"
+				app:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:background="?attr/card_and_list_background_basic"
+					android:gravity="center_vertical"
+					android:minHeight="@dimen/toolbar_height"
+					android:orientation="horizontal">
+
+					<ImageButton
+						android:id="@+id/close_button"
+						style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+						android:layout_width="@dimen/toolbar_height"
+						android:layout_height="@dimen/toolbar_height"
+						android:contentDescription="@string/shared_string_close"
+						app:tint="?attr/default_icon_color"
+						app:srcCompat="@drawable/ic_action_close" />
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/toolbar_title"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_marginStart="@dimen/content_padding"
+						android:layout_marginEnd="@dimen/content_padding"
+						android:layout_weight="1"
+						android:letterSpacing="@dimen/text_button_letter_spacing"
+						android:maxLines="2"
+						android:text="@string/coordinate_format_add_title"
+						android:textColor="?android:textColorPrimary"
+						android:textSize="@dimen/dialog_header_text_size"
+						app:typefaceWeight="medium" />
+
+				</LinearLayout>
+
+			</androidx.appcompat.widget.Toolbar>
+
+			<com.google.android.material.search.SearchBar
+				android:id="@+id/search_anchor_bar"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/toolbar_height"
+				android:layout_marginStart="@dimen/content_padding"
+				android:layout_marginTop="@dimen/content_padding_half"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:layout_marginBottom="@dimen/content_padding"
+				android:hint="@string/coordinate_format_add_search_hint"
+				app:backgroundTint="?attr/activity_background_color"
+				app:defaultMarginsEnabled="false"
+				app:hideNavigationIcon="false"
+				app:shapeAppearanceOverlay="@style/Shape.Card28"
+				tools:text="@string/coordinate_format_add_search_hint" />
+
+		</com.google.android.material.appbar.AppBarLayout>
+
+		<androidx.core.widget.NestedScrollView
+			android:id="@+id/scroll_view"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:clipToPadding="false"
+			android:fillViewport="true"
+			android:overScrollMode="ifContentScrolls"
+			android:scrollbars="vertical"
+			app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+			<LinearLayout
+				android:id="@+id/content_container"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				android:paddingBottom="@dimen/content_padding" />
+
+		</androidx.core.widget.NestedScrollView>
+
+	</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+	<com.google.android.material.search.SearchView
+		android:id="@+id/search_input_view"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:hint="@string/coordinate_format_add_search_hint"
+		app:autoShowKeyboard="true"
+		app:backgroundTint="?attr/activity_background_color"
+		app:hideNavigationIcon="false">
+
+		<androidx.recyclerview.widget.RecyclerView
+			android:id="@+id/search_results"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="?attr/list_background_color"
+			android:clipToPadding="false"
+			android:overScrollMode="ifContentScrolls"
+			android:paddingBottom="@dimen/content_padding" />
+
+	</com.google.android.material.search.SearchView>
+
+</FrameLayout>

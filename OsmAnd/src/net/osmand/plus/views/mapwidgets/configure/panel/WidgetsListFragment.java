@@ -73,6 +73,16 @@ public class WidgetsListFragment extends BaseNestedFragment implements Confirmat
 		this.selectedPanel = panel;
 	}
 
+	@NonNull
+	@Override
+	public ApplicationMode getAppMode() {
+		Fragment fragment = getParentFragment();
+		if (fragment instanceof ConfigureWidgetsFragment configureFragment) {
+			return configureFragment.getSelectedAppMode();
+		}
+		return super.getAppMode();
+	}
+
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -377,6 +387,9 @@ public class WidgetsListFragment extends BaseNestedFragment implements Confirmat
 	}
 
 	public void updateEditMode() {
+		if (isEditMode()) {
+			originalWidgetsData = getPagedWidgets();
+		}
 		List<Object> newItems = getUpdatedItems(originalWidgetsData);
 		updateAdapter(newItems, true);
 	}

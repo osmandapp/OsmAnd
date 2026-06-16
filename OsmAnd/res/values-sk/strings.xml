@@ -319,7 +319,7 @@
     <string name="si_km_m">Kilometre/metre</string>
     <string name="yard">yd</string>
     <string name="foot">ft</string>
-    <string name="mile_per_hour">mph</string>
+    <string name="mile_per_hour">mi/h</string>
     <string name="mile">mi</string>
     <string name="send_location_way_choose_title">Zdieľať polohu cez</string>
     <string name="send_location_sms_pattern">Pozícia: %1$s\n%2$s</string>
@@ -962,7 +962,7 @@
     <string name="edit_tilesource_maxzoom">Maximálne priblíženie</string>
     <string name="edit_tilesource_expiration_time">Čas exspirácie (v minútach)</string>
     <string name="edit_tilesource_minzoom">Minimálne priblíženie</string>
-    <string name="edit_tilesource_url_to_load">URL</string>
+    <string name="edit_tilesource_url_to_load">URL adresa</string>
     <string name="edit_tilesource_choose_existing">Zvoliť existujúci…</string>
     <string name="maps_define_edit">Určiť/Upraviť…</string>
     <string name="driving_region_descr">Vyberte jazdnú oblasť: USA, Európa, Spojené kráľovstvo, Ázia a ostatné.</string>
@@ -1625,8 +1625,8 @@
     <string name="si_min_km">Minúty za kilometer</string>
     <string name="si_min_m">Minúty za míľu</string>
     <string name="si_nm_h">Námorné míle za hodinu (uzly)</string>
-    <string name="nm_h">uz</string>
-    <string name="min_mile">min/m</string>
+    <string name="nm_h">kn</string>
+    <string name="min_mile">min/mi</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
     <string name="shared_string_trip_recording">Záznam výletu</string>
@@ -1915,7 +1915,7 @@
     <string name="change_markers_position">Zmeniť polohu značky</string>
     <string name="lang_es_us">Španielčina (Americká)</string>
     <string name="lang_be_by">Bielorusky (Latinka)</string>
-    <string name="lang_kn">Kannada</string>
+    <string name="lang_kn">Kannadčina</string>
     <string name="lang_en_gb">Anglicky (Veľká Británia)</string>
     <string name="lang_ast">Astúrsky</string>
     <string name="app_mode_bus">Autobus</string>
@@ -1933,7 +1933,7 @@
     <string name="lang_hsb">Lužickosrbsky</string>
     <string name="share_history_subject">zdieľaná cez OsmAnd</string>
     <string name="confirmation_to_delete_history_items">Vymazať vybrané položky z \"Histórie\"?</string>
-    <string name="show_something_on_map">Zobraziť %1$s na mape</string>
+    <string name="show_something_on_map">Zobraziť objekty typu \"%1$s\" na mape</string>
     <string name="dist_away_from_my_location">Hľadať do vzdialenosti %1$s</string>
     <string name="back_to_search">Späť na vyhľadávanie</string>
     <string name="coords_search">Hľadanie súradníc</string>
@@ -4308,7 +4308,7 @@
     <string name="distance_circles">Kružnice vzdialenosti</string>
     <string name="circle_settings">Nastavenia kružníc</string>
     <string name="routing_attr_avoid_4wd_only_description">Vyhnúť sa cestám vhodným len terénnym vozidlám s pohonom 4x4</string>
-    <string name="radius_rules_widget_desc">Polomerové pravítko zobrazuje kružníce vzdialeností od zvoleného bodu na mape.</string>
+    <string name="radius_rules_widget_desc">Polomerové pravítko zobrazuje kružnice vzdialeností od zvoleného bodu na mape.</string>
     <string name="battery_widget_desc">Zobrazuje úroveň nabitia batérie zariadenia.</string>
     <string name="magnetic_bearing_widget_desc">Uhol medzi magnetickým severom a cieľovým bodom pozorovaný z vašej polohy.</string>
     <string name="calculate_online">Vypočítať online</string>
@@ -4699,8 +4699,8 @@
     <string name="shared_string_on_map">Na mape</string>
     <string name="approximate_bearing">Približné smerovanie (azimut)</string>
     <string name="approximate_bearing_descr">Odvodiť smerovanie (azimut) z nasledovanej navigačnej trasy.</string>
-    <string name="shared_string_inches">palcov</string>
-    <string name="inch">\"</string>
+    <string name="shared_string_inches">palce</string>
+    <string name="inch">in</string>
     <string name="selected_value">Zvolená hodnota</string>
     <string name="delete_cloud_version">Vymazať verziu z cloudu</string>
     <string name="simulation_position_description">Zvoľte súbor stopy, ktorá bude použitá ako zdroj pre pohyb polohy.</string>
@@ -4736,7 +4736,7 @@
     <string name="offline_weather_forecast">Offline predpoveď počasia</string>
     <string name="common_weight_limit_error">Minimálna hodnota je \"%1$s\" %2$s. Použite profil \"%3$s\" ak je hmotnosť vozidla nižšia než minimálna hodnota.</string>
     <string name="shared_string_pounds">libry</string>
-    <string name="metric_lbs">lbs</string>
+    <string name="metric_lbs">lb</string>
     <string name="free_maps_updates">Aktualizácie zdarma (núdzové)</string>
     <string name="shutter_sound">Zvuk spúšte</string>
     <string name="camera_app">Aplikácia fotoaparátu</string>
@@ -6165,4 +6165,22 @@
     <string name="shared_string_media">Médiá</string>
     <string name="no_media">Žiadne médiá</string>
     <string name="no_media_descr">Môžete pridávať fotografie, videá a audio poznámky z fotoaparátu alebo galérie.</string>
+    <string name="auto_copy_media_to_osmand_storage">Automaticky kopírovať médiá do úložiska OsmAnd</string>
+    <string name="navigate_point_format_maidenhead">Maidenhead</string>
+    <string name="maidenhead_format_descr">Polohovací systém Maidenhead (QTH).</string>
+    <string name="navigate_point_east_coordinate">Východná súradnica</string>
+    <string name="navigate_point_north_coordinate">Severná súradnica</string>
+    <string name="drag_to_reorder_content_description">Ťahať pre preusporiadanie</string>
+    <string name="coordinate_format_add_title">Pridať formát</string>
+    <string name="coordinate_format_add_empty_body">Vyhľadať v databáze viac ako 5000 lokálnych a národných a kódov EPSG podľa krajiny, názvu a ID.</string>
+    <string name="coordinate_format_add_empty_title">Hľadáte konkrétny formát?</string>
+    <string name="coordinate_format_add_search_hint">Hľadať kód EPSG alebo názov formátu</string>
+    <string name="coordinate_format_cancel_changes_message">Zahodiť zmeny súradnicového formátu?</string>
+    <string name="coordinate_format_cancel_changes_title">Neuložené zmeny</string>
+    <string name="coordinate_format_description">Preferované formáty pre rýchly prístup z kontextového menu a vyhľadávania.</string>
+    <string name="coordinate_format_discard_changes">Zahodiť zmeny</string>
+    <string name="coordinate_format_last_item_warning">Vyžaduje sa aspoň jeden formát súradníc.</string>
+    <string name="coordinate_format_select_other">Zvoľte iný formát</string>
+    <string name="coordinate_format_recent">Naposledy použitý</string>
+    <string name="coordinate_format_primary">Hlavný</string>
 </resources>

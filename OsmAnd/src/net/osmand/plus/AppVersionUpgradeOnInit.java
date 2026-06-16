@@ -38,6 +38,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+import net.osmand.LocationConvert;
 import net.osmand.data.LatLon;
 import net.osmand.data.SpecialPointType;
 import net.osmand.plus.api.SettingsAPI;
@@ -65,7 +66,10 @@ import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.preferences.*;
+import net.osmand.plus.settings.coordinates.CoordinateFormatIds;
+import net.osmand.plus.settings.coordinates.CoordinateFormatSettingsStorage;
 import net.osmand.plus.settings.enums.CompassMode;
+import net.osmand.plus.settings.enums.GridFormat;
 import net.osmand.plus.settings.enums.LocalSortMode;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.enums.WidgetSize;
@@ -167,8 +171,9 @@ public class AppVersionUpgradeOnInit {
 	public static final int VERSION_5_3_02 = 5302;
 	public static final int VERSION_5_3_04 = 5304;
 	public static final int VERSION_5_3_05 = 5305;
+	public static final int VERSION_5_3_06 = 5306;
 
-	public static final int LAST_APP_VERSION = VERSION_5_3_05;
+	public static final int LAST_APP_VERSION = VERSION_5_3_06;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -337,6 +342,9 @@ public class AppVersionUpgradeOnInit {
 				}
 				if (prevAppVersion < VERSION_5_3_05) {
 					app.getAppInitializer().addOnFinishListener(init -> migrateAudioVideoNotesToFavorites());
+				}
+				if (prevAppVersion < VERSION_5_3_06) {
+					migrateCoordinateFormatSettings(settings);
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -1164,6 +1172,42 @@ public class AppVersionUpgradeOnInit {
 			plugin.indexingFiles(true, false);
 			new AttachedMediaDataHelper(app).convertRecordingsToFavorites(plugin.getAllRecordings());
 		}
+	}
+
+	private void migrateCoordinateFormatSettings(@NonNull OsmandSettings settings) {
+		CoordinateFormatSettingsStorage storage = settings.getCoordinateFormatSettingsStorage();
+		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
+			int legacyFormat = storage.getLegacyFormatPreference().getModeValue(appMode);
+			if (!storage.isPreferredIdsSetForMode(appMode)) {
+				storage.setPreferredIds(appMode, getLegacyCoordinateFormatPreferredIds(legacyFormat));
+			}
+			if (!settings.COORDINATE_GRID_FORMAT.isSetForMode(appMode)) {
+				settings.COORDINATE_GRID_FORMAT.setModeValue(appMode, getLegacyCoordinateGridFormat(legacyFormat));
+			}
+		}
+	}
+
+	@NonNull
+	public static List<String> getLegacyCoordinateFormatPreferredIds(int legacyFormat) {
+		LinkedHashSet<String> ids = new LinkedHashSet<>();
+		String primaryId = CoordinateFormatIds.fromOldFormat(legacyFormat);
+		if (primaryId != null) {
+			ids.add(primaryId);
+		}
+		ids.addAll(CoordinateFormatIds.ALL_BUILT_IN_FORMAT_IDS);
+		return Collections.unmodifiableList(new ArrayList<>(ids));
+	}
+
+	@NonNull
+	public static GridFormat getLegacyCoordinateGridFormat(int legacyFormat) {
+		return switch (legacyFormat) {
+			case LocationConvert.FORMAT_SECONDS -> GridFormat.DMS;
+			case LocationConvert.FORMAT_MINUTES -> GridFormat.DM;
+			case LocationConvert.FORMAT_DEGREES -> GridFormat.DIGITAL;
+			case LocationConvert.UTM_FORMAT -> GridFormat.UTM;
+			case LocationConvert.MGRS_FORMAT -> GridFormat.MGRS;
+			default -> GridFormat.DIGITAL;
+		};
 	}
 
 	private static final String DISABLE_MODE_STRING = "-1.0";

@@ -12,7 +12,8 @@ sealed class GalleryItem {
 
 	data class Media(
 		val mediaItem: MediaItem,
-		val showLoadingProgress: Boolean = false
+		val showLoadingProgress: Boolean = false,
+		val presentation: GalleryMediaPresentation? = null
 	) : GalleryItem()
 
 	data class Action(
@@ -31,7 +32,20 @@ sealed class GalleryItem {
 
 	data object NoInternet : GalleryItem()
 	data object MediaCount : GalleryItem()
+
+	data class SortBar(
+		val sortMode: GallerySortMode
+	) : GalleryItem()
+
+	data class MediaStats(
+		val text: String
+	) : GalleryItem()
 }
+
+data class GalleryMediaPresentation(
+	val description: String? = null,
+	val durationLabel: String? = null
+)
 
 data class GalleryAction(
 	val id: String
@@ -40,4 +54,10 @@ data class GalleryAction(
 data class GalleryActionButton(
 	val titleId: Int,
 	val action: GalleryAction
+)
+
+data class GalleryToolbarAction(
+	val action: GalleryAction,
+	@DrawableRes val iconId: Int,
+	@StringRes val titleId: Int
 )

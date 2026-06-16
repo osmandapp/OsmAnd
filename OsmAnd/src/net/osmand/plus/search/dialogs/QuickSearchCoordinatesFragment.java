@@ -31,6 +31,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.openlocationcode.OpenLocationCode;
 import com.google.openlocationcode.OpenLocationCode.CodeArea;
 import com.jwetherell.openmap.common.LatLonPoint;
@@ -51,8 +52,18 @@ import net.osmand.plus.SwissGridApproximation;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.search.dialogs.SearchCitiesTask.SearchCitiesListener;
+import net.osmand.plus.settings.coordinates.BuiltInCoordinateFormat;
+import net.osmand.plus.settings.coordinates.CoordinateFormat;
+import net.osmand.plus.settings.coordinates.CoordinateFormatFormatter;
+import net.osmand.plus.settings.coordinates.CoordinateFormatIds;
+import net.osmand.plus.settings.coordinates.CoordinateFormatSelectorBottomSheet;
+import net.osmand.plus.settings.coordinates.EpsgCoordinateTransformer;
+import net.osmand.plus.settings.coordinates.EpsgPoint;
+import net.osmand.plus.settings.coordinates.EpsgTransformResult;
+import net.osmand.plus.settings.fragments.AddCoordinateFormatFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.MaidenheadPoint;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils;
@@ -79,11 +90,14 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 	private static final String QUICK_SEARCH_COORDS_OLC_INFO_KEY = "quick_search_coords_olc_info_key";
 	private static final String QUICK_SEARCH_COORDS_SWISS_GRID_EAST_KEY = "quick_search_coords_swiss_grid_east_key";
 	private static final String QUICK_SEARCH_COORDS_SWISS_GRID_NORTH_KEY = "quick_search_coords_swiss_grid_north_key";
+	private static final String QUICK_SEARCH_COORDS_MAIDENHEAD_KEY = "quick_search_coords_maidenhead_key";
 	private static final String QUICK_SEARCH_COORDS_FORMAT_KEY = "quick_search_coords_format_key";
 
 	private static final String QUICK_SEARCH_COORDS_TEXT_KEY = "quick_search_coords_text_key";
 	private static final String QUICK_SEARCH_COORDS_LATITUDE_KEY = "quick_search_coords_latitude_key";
 	private static final String QUICK_SEARCH_COORDS_LONGITUDE_KEY = "quick_search_coords_longitude_key";
+	private static final String COORDINATE_SEARCH_FORMAT_REQUEST_KEY = "quick_search_coordinate_format";
+	private static final String COORDINATE_SEARCH_ADD_FORMAT_REQUEST_KEY = "quick_search_add_coordinate_format";
 
 	public static int CURRENT_FORMAT = -1;
 
@@ -101,6 +115,7 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 	private TextView olcInfo;
 	private EditText swissGridEastEdit;
 	private EditText swissGridNorthEdit;
+	private EditText maidenheadEdit;
 	private EditText formatEdit;
 	private ProgressBar searchProgressBar;
 
@@ -110,6 +125,9 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 	private LatLon currentLatLon;
 	private LatLon additionalUtmLatLon;
 	private UpdateLocationViewCache updateLocationViewCache;
+	private String currentFormatId;
+	private Integer currentEpsgCode;
+	private EpsgCoordinateTransformer epsgTransformer;
 
 	private SearchCitiesTask parseOlcCodeTask;
 
@@ -129,13 +147,15 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(v -> dismiss());
-		toolbar.setBackgroundColor(ColorUtilities.getAppBarColor(app, nightMode));
-		toolbar.setTitleTextColor(getColor(!nightMode ? R.color.card_and_list_background_light : R.color.text_color_primary_dark));
+		toolbar.setBackgroundColor(getColor(!nightMode ? R.color.osmand_orange : R.color.osmand_orange_dark));
+		toolbar.setTitleTextColor(getColor(R.color.card_and_list_background_light));
 
 		updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(view.getContext());
 		myLocation = app.getLocationProvider().getLastKnownLocation();
+		epsgTransformer = app.getCoordinateFormatHelper().getTransformer();
 
-		if (CURRENT_FORMAT == -1) CURRENT_FORMAT = settings.COORDINATES_FORMAT.get();
+		currentFormatId = getInitialFormatId(savedInstanceState);
+		applyFormatId(currentFormatId);
 
 		latEdit = view.findViewById(R.id.latitudeEditText);
 		lonEdit = view.findViewById(R.id.longitudeEditText);
@@ -147,6 +167,7 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 		olcInfo = view.findViewById(R.id.olcInfoTextView);
 		swissGridEastEdit = view.findViewById(R.id.swissGridEastEditText);
 		swissGridNorthEdit = view.findViewById(R.id.swissGridNorthEditText);
+		maidenheadEdit = view.findViewById(R.id.maidenheadEditText);
 		formatEdit = view.findViewById(R.id.formatEditText);
 		searchProgressBar = view.findViewById(R.id.searchProgressBar);
 
@@ -154,13 +175,17 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 		String defaultZone = "";
 		String defaultMgrs = "";
 		String defaultOlc = "";
+		String defaultEasting = "";
 		String defaultSwissGridEast = "";
 		String defaultSwissGridNorth = "";
+		String defaultMaidenhead = "";
 		boolean coordinatesApplied = false;
 		if (getArguments() != null) {
 			String text = getArguments().getString(QUICK_SEARCH_COORDS_TEXT_KEY);
 			if (!Algorithms.isEmpty(text)) {
-				if (CURRENT_FORMAT == PointDescription.UTM_FORMAT) {
+				if (isEpsgFormat()) {
+					defaultEasting = text.trim();
+				} else if (CURRENT_FORMAT == PointDescription.UTM_FORMAT) {
 					defaultZone = text.trim();
 				} else if (CURRENT_FORMAT == PointDescription.MGRS_FORMAT) {
 					defaultMgrs = text.trim();
@@ -168,6 +193,8 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 					defaultOlc = text.trim();
 				} else if (CURRENT_FORMAT == PointDescription.SWISS_GRID_FORMAT || CURRENT_FORMAT == PointDescription.SWISS_GRID_PLUS_FORMAT) {
 					defaultSwissGridEast = text.trim();
+				} else if (CURRENT_FORMAT == PointDescription.MAIDENHEAD_FORMAT) {
+					defaultMaidenhead = text.trim();
 				} else {
 					defaultLat = text.trim();
 				}
@@ -176,7 +203,7 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 				double longitude = getArguments().getDouble(QUICK_SEARCH_COORDS_LONGITUDE_KEY, Double.NaN);
 				if (!Double.isNaN(latitude) && !Double.isNaN(longitude)) {
 					currentLatLon = new LatLon(latitude, longitude);
-					applyFormat(CURRENT_FORMAT, true);
+					applyFormat(currentFormatId, true);
 					coordinatesApplied = true;
 				}
 			}
@@ -185,13 +212,14 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 		String latStr = getStringValue(savedInstanceState, QUICK_SEARCH_COORDS_LAT_KEY, defaultLat);
 		String lonStr = getStringValue(savedInstanceState, QUICK_SEARCH_COORDS_LON_KEY, "");
 		String northingStr = getStringValue(savedInstanceState, QUICK_SEARCH_COORDS_NORTH_KEY, "");
-		String eastingStr = getStringValue(savedInstanceState, QUICK_SEARCH_COORDS_EAST_KEY, "");
+		String eastingStr = getStringValue(savedInstanceState, QUICK_SEARCH_COORDS_EAST_KEY, defaultEasting);
 		String zoneStr = getStringValue(savedInstanceState, QUICK_SEARCH_COORDS_ZONE_KEY, defaultZone);
 		String mgrsStr = getStringValue(savedInstanceState, QUICK_SEARCH_COORDS_MGRS_KEY, defaultMgrs);
 		String olcStr = getStringValue(savedInstanceState, QUICK_SEARCH_COORDS_OLC_KEY, defaultOlc);
 		String olcInfoStr = getStringValue(savedInstanceState, QUICK_SEARCH_COORDS_OLC_INFO_KEY, defaultOlc);
 		String swissGridEastStr = getStringValue(savedInstanceState, QUICK_SEARCH_COORDS_SWISS_GRID_EAST_KEY, defaultSwissGridEast);
 		String swissGridNorthStr = getStringValue(savedInstanceState, QUICK_SEARCH_COORDS_SWISS_GRID_NORTH_KEY, defaultSwissGridNorth);
+		String maidenheadStr = getStringValue(savedInstanceState, QUICK_SEARCH_COORDS_MAIDENHEAD_KEY, defaultMaidenhead);
 
 		if (!coordinatesApplied) {
 			latEdit.setText(latStr);
@@ -213,11 +241,12 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 			swissGridEastEdit.setSelection(swissGridEastStr.length());
 			swissGridNorthEdit.setText(swissGridNorthStr);
 			swissGridNorthEdit.setSelection(swissGridNorthStr.length());
+			maidenheadEdit.setText(maidenheadStr);
+			maidenheadEdit.setSelection(maidenheadStr.length());
 		}
 
-		formatEdit.setText(PointDescription.formatToHumanString(app, CURRENT_FORMAT));
-		formatEdit.setOnClickListener(v ->
-				ChooseCoordsFormatDialogFragment.showInstance(getChildFragmentManager()));
+		updateFormatTitle();
+		setupFormatSelector();
 
 		TextWatcher textWatcher = new SimpleTextWatcher() {
 			@Override
@@ -234,7 +263,7 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 		olcEdit.addTextChangedListener(textWatcher);
 		swissGridEastEdit.addTextChangedListener(textWatcher);
 		swissGridNorthEdit.addTextChangedListener(textWatcher);
-
+		maidenheadEdit.addTextChangedListener(textWatcher);
 
 		OnEditorActionListener doneListener = (v, actionId, event) -> {
 			if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -258,6 +287,7 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 		olcEdit.setOnEditorActionListener(doneListener);
 		swissGridEastEdit.setOnEditorActionListener(doneListener);
 		swissGridNorthEdit.setOnEditorActionListener(doneListener);
+		maidenheadEdit.setOnEditorActionListener(doneListener);
 
 		UiUtilities ic = app.getUIUtilities();
 		((ImageView) view.findViewById(R.id.latitudeImage))
@@ -296,11 +326,13 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 		ImageButton swissGridNorthClearButton = view.findViewById(R.id.swissGridNorthClearButton);
 		swissGridNorthClearButton.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_remove_dark));
 		swissGridNorthClearButton.setOnClickListener(v -> swissGridNorthEdit.setText(""));
+		ImageButton maidenheadClearButton = view.findViewById(R.id.maidenheadClearButton);
+		maidenheadClearButton.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_remove_dark));
+		maidenheadClearButton.setOnClickListener(v -> maidenheadEdit.setText(""));
 
-		ImageButton formatSelectButton = view.findViewById(R.id.formatSelectButton);
-		formatSelectButton.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_arrow_drop_down));
-		formatSelectButton.setOnClickListener(v ->
-				ChooseCoordsFormatDialogFragment.showInstance(getChildFragmentManager()));
+		TextInputLayout formatInputLayout = view.findViewById(R.id.formatInputLayout);
+		formatInputLayout.setEndIconDrawable(ic.getThemedIcon(R.drawable.ic_action_arrow_drop_down));
+		formatInputLayout.setEndIconOnClickListener(v -> showFormatSelector());
 
 		View coordinatesViewContainer = view.findViewById(R.id.found_location);
 		coordsView = setupCoordinatesView(coordinatesViewContainer);
@@ -350,6 +382,7 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 			TextView olcInfo = view.findViewById(R.id.olcInfoTextView);
 			TextView swissGridEastEdit = view.findViewById(R.id.swissGridEastEditText);
 			TextView swissGridNorthEdit = view.findViewById(R.id.swissGridNorthEditText);
+			outState.putString(QUICK_SEARCH_COORDS_FORMAT_KEY, currentFormatId);
 			outState.putString(QUICK_SEARCH_COORDS_LAT_KEY, latEdit.getText().toString());
 			outState.putString(QUICK_SEARCH_COORDS_LON_KEY, lonEdit.getText().toString());
 			outState.putString(QUICK_SEARCH_COORDS_NORTH_KEY, northEdit.getText().toString());
@@ -360,6 +393,7 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 			outState.putString(QUICK_SEARCH_COORDS_OLC_INFO_KEY, olcInfo.getText().toString());
 			outState.putString(QUICK_SEARCH_COORDS_SWISS_GRID_EAST_KEY, swissGridEastEdit.getText().toString());
 			outState.putString(QUICK_SEARCH_COORDS_SWISS_GRID_NORTH_KEY, swissGridNorthEdit.getText().toString());
+			outState.putString(QUICK_SEARCH_COORDS_MAIDENHEAD_KEY, maidenheadEdit.getText().toString());
 		}
 	}
 
@@ -385,6 +419,45 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 		if (res == null)
 			res = defaultValue;
 		return res;
+	}
+
+	@NonNull
+	private String getInitialFormatId(@Nullable Bundle savedInstanceState) {
+		String savedFormatId = savedInstanceState != null
+				? savedInstanceState.getString(QUICK_SEARCH_COORDS_FORMAT_KEY) : null;
+		String normalizedId = CoordinateFormatIds.normalize(savedFormatId);
+		if (normalizedId != null) {
+			return normalizedId;
+		}
+		return settings.getCoordinateFormatSettingsStorage().getPrimaryId(settings.getApplicationMode());
+	}
+
+	private void setupFormatSelector() {
+		getChildFragmentManager().setFragmentResultListener(COORDINATE_SEARCH_ADD_FORMAT_REQUEST_KEY, this,
+				(requestKey, result) -> view.post(this::showFormatSelector));
+		CoordinateFormatSelectorBottomSheet.setupResultListener(getChildFragmentManager(), this,
+				new CoordinateFormatSelectorBottomSheet.FormatSelectionListener() {
+					@Override
+					public void onFormatSelected(@NonNull String formatId) {
+						applyFormat(formatId, false);
+					}
+
+					@Override
+					public void onSelectOtherFormat() {
+						view.post(QuickSearchCoordinatesFragment.this::showAddFormat);
+					}
+				}, COORDINATE_SEARCH_FORMAT_REQUEST_KEY);
+		formatEdit.setOnClickListener(v -> showFormatSelector());
+	}
+
+	private void showAddFormat() {
+		AddCoordinateFormatFragment.showDialog(getChildFragmentManager(), settings.getApplicationMode(), true,
+				COORDINATE_SEARCH_ADD_FORMAT_REQUEST_KEY);
+	}
+
+	private void showFormatSelector() {
+		CoordinateFormatSelectorBottomSheet.showInstance(getChildFragmentManager(),
+				COORDINATE_SEARCH_FORMAT_REQUEST_KEY, settings.getApplicationMode(), currentFormatId, true);
 	}
 
 	private void startLocationUpdate() {
@@ -451,6 +524,20 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 	}
 
 	private void updateControlsVisibility() {
+		if (isEpsgFormat()) {
+			view.findViewById(R.id.eastingLayout).setVisibility(View.VISIBLE);
+			view.findViewById(R.id.northingLayout).setVisibility(View.VISIBLE);
+			view.findViewById(R.id.zoneLayout).setVisibility(View.GONE);
+			view.findViewById(R.id.olcLayout).setVisibility(View.GONE);
+			view.findViewById(R.id.olcInfoLayout).setVisibility(View.GONE);
+			view.findViewById(R.id.latitudeLayout).setVisibility(View.GONE);
+			view.findViewById(R.id.longitudeLayout).setVisibility(View.GONE);
+			view.findViewById(R.id.mgrsLayout).setVisibility(View.GONE);
+			view.findViewById(R.id.swissGridEastLayout).setVisibility(View.GONE);
+			view.findViewById(R.id.swissGridNorthLayout).setVisibility(View.GONE);
+			view.findViewById(R.id.maidenheadLayout).setVisibility(View.GONE);
+			return;
+		}
 		switch (CURRENT_FORMAT) {
 
 			case PointDescription.OLC_FORMAT: {
@@ -464,6 +551,7 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 				view.findViewById(R.id.mgrsLayout).setVisibility(View.GONE);
 				view.findViewById(R.id.swissGridEastLayout).setVisibility(View.GONE);
 				view.findViewById(R.id.swissGridNorthLayout).setVisibility(View.GONE);
+				view.findViewById(R.id.maidenheadLayout).setVisibility(View.GONE);
 				break;
 			}
 			case PointDescription.UTM_FORMAT: {
@@ -477,6 +565,7 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 				view.findViewById(R.id.mgrsLayout).setVisibility(View.GONE);
 				view.findViewById(R.id.swissGridEastLayout).setVisibility(View.GONE);
 				view.findViewById(R.id.swissGridNorthLayout).setVisibility(View.GONE);
+				view.findViewById(R.id.maidenheadLayout).setVisibility(View.GONE);
 				break;
 			}
 			case PointDescription.MGRS_FORMAT: {
@@ -490,6 +579,7 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 				view.findViewById(R.id.mgrsLayout).setVisibility(View.VISIBLE);
 				view.findViewById(R.id.swissGridEastLayout).setVisibility(View.GONE);
 				view.findViewById(R.id.swissGridNorthLayout).setVisibility(View.GONE);
+				view.findViewById(R.id.maidenheadLayout).setVisibility(View.GONE);
 				break;
 			}
 			case PointDescription.SWISS_GRID_FORMAT:
@@ -504,6 +594,21 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 				view.findViewById(R.id.mgrsLayout).setVisibility(View.GONE);
 				view.findViewById(R.id.swissGridEastLayout).setVisibility(View.VISIBLE);
 				view.findViewById(R.id.swissGridNorthLayout).setVisibility(View.VISIBLE);
+				view.findViewById(R.id.maidenheadLayout).setVisibility(View.GONE);
+				break;
+			}
+			case PointDescription.MAIDENHEAD_FORMAT: {
+				view.findViewById(R.id.eastingLayout).setVisibility(View.GONE);
+				view.findViewById(R.id.northingLayout).setVisibility(View.GONE);
+				view.findViewById(R.id.zoneLayout).setVisibility(View.GONE);
+				view.findViewById(R.id.olcLayout).setVisibility(View.GONE);
+				view.findViewById(R.id.olcInfoLayout).setVisibility(View.GONE);
+				view.findViewById(R.id.latitudeLayout).setVisibility(View.GONE);
+				view.findViewById(R.id.longitudeLayout).setVisibility(View.GONE);
+				view.findViewById(R.id.mgrsLayout).setVisibility(View.GONE);
+				view.findViewById(R.id.swissGridEastLayout).setVisibility(View.GONE);
+				view.findViewById(R.id.swissGridNorthLayout).setVisibility(View.GONE);
+				view.findViewById(R.id.maidenheadLayout).setVisibility(View.VISIBLE);
 				break;
 			}
 			default: {
@@ -517,6 +622,7 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 				view.findViewById(R.id.mgrsLayout).setVisibility(View.GONE);
 				view.findViewById(R.id.swissGridEastLayout).setVisibility(View.GONE);
 				view.findViewById(R.id.swissGridNorthLayout).setVisibility(View.GONE);
+				view.findViewById(R.id.maidenheadLayout).setVisibility(View.GONE);
 				break;
 			}
 		}
@@ -554,10 +660,28 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 	}
 
 	protected boolean applyFormat(int format, boolean forceApply) {
+		String formatId = CoordinateFormatIds.fromOldFormat(format);
+		return formatId != null && applyFormat(formatId, forceApply);
+	}
+
+	protected boolean applyFormat(@NonNull String formatId, boolean forceApply) {
+		String normalizedId = CoordinateFormatIds.normalize(formatId);
+		if (normalizedId == null) {
+			return false;
+		}
+		CoordinateFormat format = CoordinateFormatFormatter.resolve(app, normalizedId);
+		Integer legacyFormat = format.getLegacyFormat();
+		if (legacyFormat == null) {
+			return applyEpsgFormat(normalizedId, format, forceApply);
+		}
+		return applyLegacyFormat(legacyFormat, forceApply);
+	}
+
+	private boolean applyLegacyFormat(int format, boolean forceApply) {
 		if (CURRENT_FORMAT != format || forceApply) {
 			int prevFormat = CURRENT_FORMAT;
-			CURRENT_FORMAT = format;
-			formatEdit.setText(PointDescription.formatToHumanString(app, CURRENT_FORMAT));
+			applyFormatId(CoordinateFormatIds.fromOldFormat(format));
+			updateFormatTitle();
 			EditText latEdit = view.findViewById(R.id.latitudeEditText);
 			EditText lonEdit = view.findViewById(R.id.longitudeEditText);
 			updateControlsVisibility();
@@ -583,6 +707,10 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 					zoneEdit.setText("");
 					northingEdit.setText(swissGridNorthEdit.getText());
 					eastingEdit.setText(swissGridEastEdit.getText());
+				} else if (prevFormat == PointDescription.MAIDENHEAD_FORMAT) {
+					zoneEdit.setText(maidenheadEdit.getText());
+					northingEdit.setText("");
+					eastingEdit.setText("");
 				} else {
 					zoneEdit.setText(latEdit.getText());
 					northingEdit.setText("");
@@ -599,6 +727,8 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 					mgrsEdit.setText(olcEdit.getText());
 				} else if (prevFormat == PointDescription.SWISS_GRID_FORMAT || prevFormat == PointDescription.SWISS_GRID_PLUS_FORMAT) {
 					mgrsEdit.setText(swissGridEastEdit.getText());
+				} else if (prevFormat == PointDescription.MAIDENHEAD_FORMAT) {
+					mgrsEdit.setText(maidenheadEdit.getText());
 				} else {
 					mgrsEdit.setText(latEdit.getText());
 				}
@@ -612,6 +742,8 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 					olcEdit.setText(mgrsEdit.getText());
 				} else if (prevFormat == PointDescription.SWISS_GRID_FORMAT || prevFormat == PointDescription.SWISS_GRID_PLUS_FORMAT) {
 					olcEdit.setText(swissGridEastEdit.getText());
+				} else if (prevFormat == PointDescription.MAIDENHEAD_FORMAT) {
+					olcEdit.setText(maidenheadEdit.getText());
 				} else {
 					olcEdit.setText(latEdit.getText());
 				}
@@ -639,9 +771,26 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 				} else if (prevFormat == PointDescription.OLC_FORMAT) {
 					swissGridEastEdit.setText(olcEdit.getText());
 					swissGridNorthEdit.setText("");
+				} else if (prevFormat == PointDescription.MAIDENHEAD_FORMAT) {
+					swissGridEastEdit.setText(maidenheadEdit.getText());
+					swissGridNorthEdit.setText("");
 				} else if (prevFormat != PointDescription.SWISS_GRID_PLUS_FORMAT) {
 					swissGridEastEdit.setText(latEdit.getText());
 					swissGridNorthEdit.setText("");
+				}
+			} else if (CURRENT_FORMAT == PointDescription.MAIDENHEAD_FORMAT) {
+				if (latLon != null) {
+					maidenheadEdit.setText(OsmAndFormatter.getFormattedCoordinates(latLon.getLatitude(), latLon.getLongitude(), PointDescription.MAIDENHEAD_FORMAT));
+				} else if (prevFormat == PointDescription.UTM_FORMAT) {
+					maidenheadEdit.setText(zoneEdit.getText());
+				} else if (prevFormat == PointDescription.MGRS_FORMAT) {
+					maidenheadEdit.setText(mgrsEdit.getText());
+				} else if (prevFormat == PointDescription.OLC_FORMAT) {
+					maidenheadEdit.setText(olcEdit.getText());
+				} else if (prevFormat == PointDescription.SWISS_GRID_FORMAT || prevFormat == PointDescription.SWISS_GRID_PLUS_FORMAT) {
+					maidenheadEdit.setText(swissGridEastEdit.getText());
+				} else {
+					maidenheadEdit.setText(latEdit.getText());
 				}
 			} else {
 				setInputTypeDependingOnFormat(new EditText[] {latEdit, lonEdit});
@@ -660,6 +809,9 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 				} else if (prevFormat == PointDescription.SWISS_GRID_FORMAT || prevFormat == PointDescription.SWISS_GRID_PLUS_FORMAT) {
 					latEdit.setText(swissGridEastEdit.getText());
 					lonEdit.setText(swissGridNorthEdit.getText());
+				} else if (prevFormat == PointDescription.MAIDENHEAD_FORMAT) {
+					latEdit.setText(maidenheadEdit.getText());
+					lonEdit.setText("");
 				}
 			}
 			return latLon != null;
@@ -668,11 +820,76 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 		}
 	}
 
+	private boolean applyEpsgFormat(@NonNull String formatId, @NonNull CoordinateFormat format, boolean forceApply) {
+		if (!formatId.equals(currentFormatId) || forceApply) {
+			int prevFormat = CURRENT_FORMAT;
+			applyFormatId(formatId);
+			updateFormatTitle(format);
+			updateControlsVisibility();
+			LatLon latLon = currentLatLon;
+			if (latLon != null && currentEpsgCode != null) {
+				EpsgTransformResult<EpsgPoint> result = epsgTransformer.fromLonLat(
+						currentEpsgCode, latLon.getLongitude(), latLon.getLatitude());
+				EpsgPoint point = result.getValue();
+				if (point != null) {
+					eastingEdit.setText(CoordinateFormatFormatter.formatEpsgValue(point.getEasting()));
+					northingEdit.setText(CoordinateFormatFormatter.formatEpsgValue(point.getNorthing()));
+				}
+			} else if (prevFormat == PointDescription.UTM_FORMAT) {
+				eastingEdit.setText(eastingEdit.getText());
+				northingEdit.setText(northingEdit.getText());
+			} else if (prevFormat == PointDescription.SWISS_GRID_FORMAT || prevFormat == PointDescription.SWISS_GRID_PLUS_FORMAT) {
+				eastingEdit.setText(swissGridEastEdit.getText());
+				northingEdit.setText(swissGridNorthEdit.getText());
+			} else if (prevFormat == PointDescription.MGRS_FORMAT) {
+				eastingEdit.setText(mgrsEdit.getText());
+				northingEdit.setText("");
+			} else if (prevFormat == PointDescription.OLC_FORMAT) {
+				eastingEdit.setText(olcEdit.getText());
+				northingEdit.setText("");
+			} else {
+				eastingEdit.setText(latEdit.getText());
+				northingEdit.setText(lonEdit.getText());
+			}
+			return latLon != null;
+		}
+		return false;
+	}
+
+	private void applyFormatId(@Nullable String formatId) {
+		currentFormatId = CoordinateFormatIds.normalize(formatId);
+		currentEpsgCode = CoordinateFormatIds.getEpsgCode(currentFormatId);
+		BuiltInCoordinateFormat builtInFormat = BuiltInCoordinateFormat.fromId(currentFormatId);
+		CURRENT_FORMAT = builtInFormat != null ? builtInFormat.getLegacyFormat() : -1;
+	}
+
+	private boolean isEpsgFormat() {
+		return currentEpsgCode != null;
+	}
+
+	private void updateFormatTitle() {
+		updateFormatTitle(CoordinateFormatFormatter.resolve(app, currentFormatId));
+	}
+
+	private void updateFormatTitle(@NonNull CoordinateFormat format) {
+		if (formatEdit != null) {
+			formatEdit.setText(format.getTitle());
+		}
+	}
+
 	private void parseLocation() {
 		LatLon loc;
 		LatLon additionalLoc = null;
 		try {
-			if (CURRENT_FORMAT == LocationConvert.UTM_FORMAT) {
+			if (isEpsgFormat()) {
+				double easting = parseCoordinateValue(eastingEdit.getText().toString());
+				double northing = parseCoordinateValue(northingEdit.getText().toString());
+				EpsgTransformResult<LatLon> result = epsgTransformer.toLonLat(currentEpsgCode, easting, northing);
+				loc = result.getValue();
+				if (loc == null) {
+					throw new IllegalArgumentException("EPSG transform failed");
+				}
+			} else if (CURRENT_FORMAT == LocationConvert.UTM_FORMAT) {
 				double northing = Double.parseDouble(northingEdit.getText().toString());
 				double easting = Double.parseDouble(eastingEdit.getText().toString());
 				String zone = zoneEdit.getText().toString();
@@ -701,6 +918,8 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 				double eastCoordinate = Double.parseDouble(swissGridEastEdit.getText().toString().replaceAll("\\s+", ""));
 				double northCoordinate = Double.parseDouble(swissGridNorthEdit.getText().toString().replaceAll("\\s+", ""));
 				loc = SwissGridApproximation.convertLV95ToWGS84(eastCoordinate, northCoordinate);
+			} else if (CURRENT_FORMAT == LocationConvert.MAIDENHEAD_FORMAT) {
+				loc = MaidenheadPoint.parse(maidenheadEdit.getText().toString());
 			} else {
 				double lat = LocationConvert.convert(latEdit.getText().toString(), true);
 				double lon = LocationConvert.convert(lonEdit.getText().toString(), true);
@@ -715,6 +934,16 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 		updateLocationCell(coordsView, currentLatLon, additionalUtmLatLon != null);
 		updateLocationCell(additionalCoordsView, additionalUtmLatLon, false);
 		updateErrorVisibility();
+	}
+
+	private double parseCoordinateValue(@NonNull String value) {
+		String normalized = value.replaceAll("[\\s\\u00A0\\u202F]", "");
+		if (normalized.indexOf(',') >= 0 && normalized.indexOf('.') < 0) {
+			normalized = normalized.replace(',', '.');
+		} else {
+			normalized = normalized.replace(",", "");
+		}
+		return Double.parseDouble(normalized);
 	}
 
 	private Pair<LatLon, LatLon> parseUtmLocations(double northing, double easting, int zoneNumber,
@@ -832,7 +1061,7 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 		} else {
 			TextView titleView = coordinatesView.findViewById(R.id.title);
 			TextView subtitleView = coordinatesView.findViewById(R.id.subtitle);
-			titleView.setText(PointDescription.getLocationNamePlain(app, latLon.getLatitude(), latLon.getLongitude()));
+			titleView.setText(formatCurrentCoordinates(latLon));
 			OsmAndTaskManager.executeTask(new AsyncTask<LatLon, Void, String>() {
 				@Override
 				protected String doInBackground(LatLon... params) {
@@ -850,6 +1079,13 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 			AndroidUiHelper.updateVisibility(coordinatesView, true);
 			AndroidUiHelper.updateVisibility(((View) coordinatesView.getParent()).findViewById(R.id.divider), showDivider);
 		}
+	}
+
+	@NonNull
+	private String formatCurrentCoordinates(@NonNull LatLon latLon) {
+		CoordinateFormat format = CoordinateFormatFormatter.resolve(app, currentFormatId);
+		return app.getCoordinateFormatHelper().getFormatter()
+				.format(format, latLon.getLatitude(), latLon.getLongitude());
 	}
 
 	private void updateCompassVisibility(@NonNull View view, @Nullable LatLon latLon) {

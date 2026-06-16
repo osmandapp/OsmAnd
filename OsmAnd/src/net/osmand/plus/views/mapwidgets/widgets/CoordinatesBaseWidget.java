@@ -23,6 +23,11 @@ import net.osmand.plus.SwissGridApproximation;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
+import net.osmand.plus.settings.coordinates.CoordinateFormat;
+import net.osmand.plus.settings.coordinates.CoordinateFormatFormatter;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -34,6 +39,7 @@ import net.osmand.plus.views.mapwidgets.OutlinedTextContainer;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.util.TextDirectionUtil;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -43,6 +49,7 @@ import java.util.Locale;
 
 public abstract class CoordinatesBaseWidget extends MapWidget {
 	private static final Log log = PlatformUtil.getLog(CoordinatesMapCenterWidget.class);
+	private static final String COORDINATES_WIDGET_FORMAT_ID = "coordinates_widget_format";
 
 	protected LatLon lastLocation;
 
@@ -60,6 +67,7 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 	protected ImageView secondIcon;
 
 	private boolean cachedLayoutRtl;
+	private final CommonPreference<String> coordinateFormatPref;
 
 	protected int getLayoutId() {
 		return R.layout.coordinates_widget;
@@ -68,6 +76,7 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 	public CoordinatesBaseWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType,
 			@Nullable String customId, @Nullable WidgetsPanel panel) {
 		super(mapActivity, widgetType, customId, panel);
+		coordinateFormatPref = registerCoordinateFormatPref(customId, widgetType);
 	}
 
 	@Override
@@ -147,10 +156,14 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 	}
 
 	protected void showFormattedCoordinates(double lat, double lon) {
-		int format = app.getSettings().COORDINATES_FORMAT.get();
+		CoordinateFormat coordinateFormat = getCoordinateFormat();
+		Integer legacyFormat = coordinateFormat.getLegacyFormat();
+		int format = legacyFormat != null ? legacyFormat : -1;
 		lastLocation = new LatLon(lat, lon);
 
-		if (format == PointDescription.UTM_FORMAT) {
+		if (legacyFormat == null) {
+			showGenericCoordinates(app.getCoordinateFormatHelper().getFormatter().format(coordinateFormat, lat, lon));
+		} else if (format == PointDescription.UTM_FORMAT) {
 			showUtmCoordinates(lat, lon);
 		} else if (format == PointDescription.MGRS_FORMAT) {
 			showMgrsCoordinates(lat, lon);
@@ -160,9 +173,59 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 			showSwissGrid(lat, lon, false);
 		} else if (format == PointDescription.SWISS_GRID_PLUS_FORMAT) {
 			showSwissGrid(lat, lon, true);
+		} else if (format == PointDescription.MAIDENHEAD_FORMAT) {
+			showMaidenheadCoordinates(lat, lon);
 		} else {
 			showStandardCoordinates(lat, lon, format);
 		}
+	}
+
+	@NonNull
+	public CommonPreference<String> getCoordinateFormatPref() {
+		return coordinateFormatPref;
+	}
+
+	@NonNull
+	public CoordinateFormat getCoordinateFormat() {
+		String formatId = coordinateFormatPref.get();
+		return Algorithms.isEmpty(formatId)
+				? CoordinateFormatFormatter.getPrimaryFormat(app)
+				: CoordinateFormatFormatter.resolve(app, formatId);
+	}
+
+	@NonNull
+	private CommonPreference<String> registerCoordinateFormatPref(@Nullable String customId,
+			@NonNull WidgetType widgetType) {
+		String prefId = COORDINATES_WIDGET_FORMAT_ID + "_" + widgetType.id;
+		if (!Algorithms.isEmpty(customId)) {
+			prefId += "_" + customId;
+		}
+		return settings.registerStringPreference(prefId, "").makeProfile();
+	}
+
+	@Override
+	@Nullable
+	public CommonPreference<?> getWidgetSettingsPrefToReset(@NonNull ApplicationMode appMode,
+			@Nullable ScreenLayoutMode layoutMode) {
+		return coordinateFormatPref;
+	}
+
+	@Override
+	public void copySettings(@NonNull ApplicationMode appMode, @Nullable String customId) {
+		super.copySettings(appMode, customId);
+		copySettingsFromMode(appMode, appMode, customId);
+	}
+
+	@Override
+	public void copySettingsFromMode(@NonNull ApplicationMode sourceAppMode, @NonNull ApplicationMode appMode,
+			@Nullable String customId) {
+		registerCoordinateFormatPref(customId, widgetType)
+				.setModeValue(appMode, coordinateFormatPref.getModeValue(sourceAppMode));
+	}
+
+	private void showGenericCoordinates(@NonNull String coordinates) {
+		setupForNonStandardFormat();
+		setFirstCoordinateText(coordinates);
 	}
 
 	private void showUtmCoordinates(double lat, double lon) {
@@ -180,6 +243,11 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 	private void showOlcCoordinates(double lat, double lon) {
 		setupForNonStandardFormat();
 		setFirstCoordinateText(OsmAndFormatter.getOpenLocationCode(lat, lon));
+	}
+
+	private void showMaidenheadCoordinates(double lat, double lon) {
+		setupForNonStandardFormat();
+		setFirstCoordinateText(OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.MAIDENHEAD_FORMAT, false));
 	}
 
 	private void showSwissGrid(double lat, double lon, boolean swissGridPlus) {

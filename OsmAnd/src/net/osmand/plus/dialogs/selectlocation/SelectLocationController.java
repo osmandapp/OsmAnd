@@ -18,8 +18,8 @@ import net.osmand.plus.dialogs.selectlocation.extractor.IMapLocationExtractor;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.helpers.MapDisplayPositionManager.IMapDisplayPositionProvider;
+import net.osmand.plus.settings.coordinates.CoordinateFormatFormatter;
 import net.osmand.plus.settings.enums.MapPosition;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapTileView;
 
@@ -70,8 +70,7 @@ public class SelectLocationController<ResultType> extends BaseDialogController
 	@NonNull
 	public String getFormattedCoordinates() {
 		LatLon latLon = latLonExtractor.extractLocation(app);
-		int format = app.getSettings().COORDINATES_FORMAT.get();
-		return OsmAndFormatter.getFormattedCoordinates(latLon.getLatitude(), latLon.getLongitude(), format);
+		return CoordinateFormatFormatter.formatPrimary(app, latLon.getLatitude(), latLon.getLongitude());
 	}
 
 	public void onConfirmSelection() {

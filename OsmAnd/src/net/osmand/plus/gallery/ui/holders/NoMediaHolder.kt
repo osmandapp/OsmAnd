@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
-import net.osmand.plus.gallery.contract.IGalleryActionListener
+import net.osmand.plus.gallery.model.GalleryAction
 import net.osmand.plus.gallery.model.GalleryItem.NoMedia
 import net.osmand.plus.gallery.model.GalleryItem.NoMedia.ActionButtonStyle
 import net.osmand.plus.helpers.AndroidUiHelper
@@ -14,8 +14,9 @@ import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.widgets.dialogbutton.DialogButton
 
 class NoMediaHolder(
+	itemView: View,
 	private val app: OsmandApplication,
-	itemView: View
+	private val onActionClicked: (View, GalleryAction) -> Unit
 ) : RecyclerView.ViewHolder(itemView) {
 
 	private val imageView: ImageView = itemView.findViewById(R.id.icon)
@@ -26,8 +27,7 @@ class NoMediaHolder(
 
 	fun bindView(
 		item: NoMedia,
-		nightMode: Boolean,
-		listener: IGalleryActionListener?
+		nightMode: Boolean
 	) {
 		imageView.setImageDrawable(
 			app.uiUtilities.getPaintedIcon(
@@ -46,7 +46,7 @@ class NoMediaHolder(
 		AndroidUiHelper.updateVisibility(inactiveButton, false)
 		AndroidUiHelper.updateVisibility(activeButton, action != null)
 		activeButton.setOnClickListener(
-			if (action != null) View.OnClickListener { listener?.handleGalleryAction(it, action) }
+			if (action != null) View.OnClickListener { onActionClicked(it, action) }
 			else null
 		)
 	}

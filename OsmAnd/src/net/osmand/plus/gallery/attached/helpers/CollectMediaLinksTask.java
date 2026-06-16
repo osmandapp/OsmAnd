@@ -1,7 +1,7 @@
 package net.osmand.plus.gallery.attached.helpers;
 
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.IMG_EXTENSION;
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.MPEG4_EXTENSION;
+import static net.osmand.plus.plugins.audionotes.RecordingsFileHelper.IMG_EXTENSION;
+import static net.osmand.plus.plugins.audionotes.RecordingsFileHelper.MPEG4_EXTENSION;
 
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -18,7 +18,7 @@ import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.plugins.audionotes.RecordingsFileHelper;
 import net.osmand.shared.gpx.primitives.Link;
 import net.osmand.shared.media.LinkMediaFactory;
 import net.osmand.util.Algorithms;
@@ -108,7 +108,7 @@ class CollectMediaLinksTask extends AsyncTask<Void, Void, List<Link>> {
 
 	@Nullable
 	private File copyMediaToOsmAndStorage(@NonNull PickedMedia media) {
-		File destFile = AudioVideoNotesPlugin.getBaseFileName(latLon.getLatitude(), latLon.getLongitude(), mediaStorageFolder, getMediaExtension(media));
+		File destFile = RecordingsFileHelper.getBaseFileName(latLon.getLatitude(), latLon.getLongitude(), mediaStorageFolder, getMediaExtension(media));
 		InputStream input = null;
 		OutputStream output = null;
 		try {

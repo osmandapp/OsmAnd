@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/formatSelectorRoot"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="@android:color/transparent"
+	android:overScrollMode="never"
+	android:paddingBottom="16dp">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<com.google.android.material.card.MaterialCardView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			app:cardBackgroundColor="?attr/list_background_color"
+			app:cardElevation="0dp"
+			app:shapeAppearanceOverlay="@style/Shape.BottomSheet"
+			app:strokeWidth="0dp">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical">
+
+				<View
+					android:layout_width="32dp"
+					android:layout_height="4dp"
+					android:layout_gravity="center_horizontal"
+					android:layout_marginTop="6dp"
+					android:layout_marginBottom="2dp"
+					android:background="@drawable/rectangle_rounded"
+					android:backgroundTint="?attr/secondary_icon_color" />
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:gravity="center_vertical"
+					android:minHeight="56dp"
+					android:orientation="horizontal"
+					android:paddingStart="@dimen/content_padding"
+					android:paddingEnd="4dp">
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/title"
+						style="@style/TitleStyle.Medium"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:ellipsize="end"
+						android:maxLines="1"
+						android:text="@string/navigate_point_format"
+						android:textColor="?attr/text_color_primary_v2"
+						tools:text="Format" />
+
+					<FrameLayout
+						android:id="@+id/closeBtn"
+						android:layout_width="48dp"
+						android:layout_height="48dp"
+						android:layout_gravity="center"
+						android:background="?attr/selectableItemBackground">
+
+						<FrameLayout
+							android:layout_width="32dp"
+							android:layout_height="32dp"
+							android:layout_gravity="center"
+							android:background="@drawable/bg_circle" />
+
+						<com.google.android.material.imageview.ShapeableImageView
+							android:layout_width="24dp"
+							android:layout_height="24dp"
+							android:layout_gravity="center"
+							android:contentDescription="@string/shared_string_close"
+							android:src="@drawable/ic_action_close_rounded"
+							android:tint="?attr/default_icon_color" />
+
+					</FrameLayout>
+
+				</LinearLayout>
+
+				<LinearLayout
+					android:id="@+id/preferredFormatsContainer"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical" />
+
+				<LinearLayout
+					android:id="@+id/recentFormatsContainer"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical" />
+
+				<View
+					android:id="@+id/actionDivider"
+					android:layout_width="match_parent"
+					android:layout_height="1dp"
+					android:background="?attr/divider_color" />
+
+				<include
+					android:id="@+id/selectOtherFormat"
+					layout="@layout/bottom_sheet_item_btn_with_icon_and_text"
+					android:layout_width="match_parent"
+					android:layout_height="@dimen/bottom_sheet_list_item_height" />
+
+			</LinearLayout>
+
+		</com.google.android.material.card.MaterialCardView>
+
+	</LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

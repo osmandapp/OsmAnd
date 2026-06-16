@@ -6172,4 +6172,11 @@
     <string name="favorite_folder_duplicate_message">Verwende einen Ordnernamen, der noch nicht vorhanden ist.</string>
     <string name="favorite_folder_name">Ordnername</string>
     <string name="edit_folder">Ordner bearbeiten</string>
+    <string name="auto_copy_media_to_osmand_storage">Medien automatisch zum OsmAnd Speicher kopieren</string>
+    <string name="choose_from_gallery">Aus der Galerie wählen</string>
+    <string name="choose_from_files">Aus Dateien wählen</string>
+    <string name="shared_string_media">Medien</string>
+    <string name="no_media">Keine Medien</string>
+    <string name="no_media_descr">Sie können Fotos, Videos oder Audionotizen von Ihrer Kamera oder Bibliothek hinzufügen.</string>
+    <string name="favorite_confirm_delete_folder">Dies wird den Ordner \"%1$s\", einschließlich geschachtelter Ordner und %2$d Lieblingspunkt(e) löschen.</string>
 </resources>

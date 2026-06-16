@@ -82,7 +82,6 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 		settings.COORDINATE_GRID_FORMAT.addListener(settingsListener);
 		settings.COORDINATE_GRID_MIN_ZOOM.addListener(settingsListener);
 		settings.COORDINATE_GRID_MAX_ZOOM.addListener(settingsListener);
-		settings.COORDINATES_FORMAT.addListener(settingsListener);
 		settings.COORDINATES_GRID_LABELS_POSITION.addListener(settingsListener);
 		settings.COORDINATES_GRID_COLOR_DAY.addListener(settingsListener);
 		settings.COORDINATES_GRID_COLOR_NIGHT.addListener(settingsListener);

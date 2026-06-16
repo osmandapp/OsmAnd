@@ -503,6 +503,41 @@
 					android:layout_marginEnd="@dimen/content_padding"
 					android:layout_marginBottom="@dimen/content_padding_half" />
 
+				<LinearLayout
+					android:id="@+id/media_card_section"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"
+					android:visibility="gone"
+					tools:visibility="visible">
+
+					<View
+						android:layout_width="match_parent"
+						android:layout_height="1dp"
+						android:background="?attr/dashboard_divider" />
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:letterSpacing="@dimen/description_letter_spacing"
+						android:paddingStart="@dimen/content_padding"
+						android:paddingLeft="@dimen/content_padding"
+						android:paddingTop="@dimen/context_menu_first_line_top_margin"
+						android:paddingEnd="@dimen/content_padding"
+						android:paddingRight="@dimen/content_padding"
+						android:paddingBottom="@dimen/context_menu_first_line_top_margin"
+						android:text="@string/shared_string_media"
+						android:textColor="?android:textColorSecondary"
+						android:textSize="@dimen/default_desc_text_size"
+						app:typefaceWeight="medium" />
+
+					<FrameLayout
+						android:id="@+id/media_card_container"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content" />
+
+				</LinearLayout>
+
 				<View
 					android:layout_width="match_parent"
 					android:layout_height="1dp"

@@ -21,14 +21,13 @@ import java.io.File;
 
 public class AudioVideoNoteMenuController extends MenuController {
 	private Recording mRecording;
-	private final AudioVideoNotesPlugin mPlugin;
+	private final AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
 	private boolean mIsFileAvailable;
 
 	public AudioVideoNoteMenuController(@NonNull MapActivity mapActivity,
 			@NonNull PointDescription pointDescription, @NonNull Recording recording) {
 		super(new AudioVideoNoteMenuBuilder(mapActivity, recording), pointDescription, mapActivity);
 		this.mRecording = recording;
-		mPlugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
 		mIsFileAvailable = mRecording.getFile().exists();
 		builder.setShowTitleIfTruncated(false);
 
@@ -36,13 +35,14 @@ public class AudioVideoNoteMenuController extends MenuController {
 			leftTitleButtonController = new TitleButtonController(this) {
 				@Override
 				public void buttonPressed() {
-					if (mPlugin != null) {
-						if (mPlugin.isPlaying(getRecording())) {
-							mPlugin.stopPlaying();
+					if (plugin != null) {
+						RecordingPlayer player = plugin.getRecordingsPlayer();
+						if (player.isPlaying(getRecording())) {
+							player.stopPlaying();
 						} else {
 							MapActivity activity = getMapActivity();
 							if (activity != null) {
-								mPlugin.playRecording(activity, getRecording());
+								player.playRecording(activity, getRecording());
 							}
 						}
 					}
@@ -59,8 +59,8 @@ public class AudioVideoNoteMenuController extends MenuController {
 						bld.setMessage(activity.getString(R.string.delete_confirmation_msg, recordingName));
 						bld.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
 							MapActivity a = getMapActivity();
-							if (mPlugin != null && a != null) {
-								mPlugin.deleteRecording(getRecording(), true);
+							if (plugin != null && a != null) {
+								plugin.deleteRecording(getRecording(), true);
 								a.getContextMenu().close();
 							}
 						});
@@ -159,10 +159,11 @@ public class AudioVideoNoteMenuController extends MenuController {
 		boolean accessibilityEnabled = mapActivity.getApp().accessibilityEnabled();
 		rightTitleButtonController.visible = true;
 		if (!mRecording.isPhoto()) {
-			if (mPlugin.isPlaying(mRecording)) {
+			RecordingPlayer player = plugin.getRecordingsPlayer();
+			if (player.isPlaying(mRecording)) {
 				leftTitleButtonController.caption = mapActivity.getString(R.string.shared_string_control_stop);
 				leftTitleButtonController.startIconId = R.drawable.ic_action_rec_stop;
-				int pos = mPlugin.getPlayingPosition();
+				int pos = player.getPlayingPosition();
 				String durationStr;
 				if (pos == -1) {
 					durationStr = mRecording.getPlainDuration(accessibilityEnabled);

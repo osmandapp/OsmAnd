@@ -4737,4 +4737,26 @@
     <string name="poi_episcopal_church">Episkopálny kostol</string>
     <string name="poi_denomination_slavic">Slovanské</string>
     <string name="poi_denomination_celtic">Keltské</string>
+    <string name="poi_water_lake">Jazero</string>
+    <string name="poi_osmand_access_main_tag">Prístup</string>
+    <string name="poi_hang_gliding">Závesné lietanie</string>
+    <string name="poi_healthcare_speciality_pain_control">Potláčanie bolesti</string>
+    <string name="poi_healthcare_speciality_first_aid_training">Výcvik prvej pomoci</string>
+    <string name="poi_healthcare_speciality_sleep">Spánok</string>
+    <string name="poi_healthcare_speciality_proctology">Proktológia</string>
+    <string name="poi_healthcare_speciality_audiology">Audiológia</string>
+    <string name="poi_healthcare_speciality_autism">Autismus</string>
+    <string name="poi_healthcare_speciality_chronic">Chronické choroby</string>
+    <string name="poi_healthcare_speciality_microbiology">Mikrobiológia</string>
+    <string name="poi_healthcare_speciality_venereology">Venerológia</string>
+    <string name="poi_healthcare_speciality_obstetrics">Pôrodníctvo</string>
+    <string name="poi_healthcare_speciality_denturist">Výroba snímateľných zubných protéz</string>
+    <string name="poi_healthcare_speciality_pedorthist">Zdravotná úprava obuvi</string>
+    <string name="poi_healthcare_speciality_kinesitherapy">Pohybová terapia</string>
+    <string name="poi_healthcare_speciality_primary_care">Základná starostlivosť</string>
+    <string name="poi_healthcare_speciality_otorhinolaryngology">Otorinolaryngológia</string>
+    <string name="poi_healthcare_speciality_implantology">Implantológia</string>
+    <string name="poi_healthcare_speciality_neonatology">Neonatológia</string>
+    <string name="poi_cemt">CEMT klasifikácia splavnosti</string>
+    <string name="poi_water_type_filter">Typ vody</string>
 </resources>

@@ -419,6 +419,11 @@
 		<item name="cornerSize">16dp</item>
 	</style>
 
+	<style name="Shape.Card28">
+		<item name="cornerFamily">rounded</item>
+		<item name="cornerSize">28dp</item>
+	</style>
+
 	<style name="Shape.Card12">
 		<item name="cornerFamily">rounded</item>
 		<item name="cornerSize">12dp</item>

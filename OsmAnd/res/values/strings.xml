@@ -10,12 +10,43 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+	<string name="gallery_media_playback_error">Could not play media.</string>
+	<string name="gallery_open_in">Open in</string>
+	<string name="gallery_seek_back_seconds">−%1$ds</string>
+	<string name="gallery_seek_forward_seconds">+%1$ds</string>
+	<string name="gallery_stats_counts">Photos %1$d, videos %2$d, audio %3$d.</string>
+	<string name="gallery_stats_size">Size %1$s.</string>
+	<string name="gallery_sort_nearest">Nearest</string>
+	<string name="gallery_sort_last_modified">Last modified</string>
+	<string name="gallery_sort_name_a_z">Name A - Z</string>
+	<string name="gallery_sort_name_z_a">Name Z - A</string>
+	<string name="gallery_sort_newest_first">Newest date first</string>
+	<string name="gallery_sort_oldest_first">Oldest date first</string>
+	<string name="gallery_sort_duration_long_short">Longest duration first</string>
+	<string name="gallery_sort_duration_short_long">Shortest duration first</string>
+    <string name="navigate_point_format_maidenhead">Maidenhead</string>
+    <string name="maidenhead_format_descr">Maidenhead Locator System (QTH Locator).</string>
 	<string name="auto_copy_media_to_osmand_storage">Auto-copy media to OsmAnd storage</string>
 	<string name="choose_from_gallery">Choose from Gallery</string>
 	<string name="choose_from_files">Choose from Files</string>
 	<string name="shared_string_media">Media</string>
 	<string name="no_media">No media</string>
 	<string name="no_media_descr">You can add photos, videos, or audio notes from your camera or library.</string>
+	<string name="navigate_point_east_coordinate">East Coordinate</string>
+	<string name="navigate_point_north_coordinate">North Coordinate</string>
+	<string name="drag_to_reorder_content_description">Drag to reorder</string>
+	<string name="coordinate_format_add_title">Add format</string>
+	<string name="coordinate_format_add_empty_body">Search a database of over 5,000 local and national EPSG codes by country, name, or ID.</string>
+	<string name="coordinate_format_add_empty_title">Looking for a specific format?</string>
+	<string name="coordinate_format_add_search_hint">Search EPSG code or format name</string>
+	<string name="coordinate_format_cancel_changes_message">Discard changes to coordinate formats?</string>
+	<string name="coordinate_format_cancel_changes_title">Unsaved changes</string>
+	<string name="coordinate_format_description">Preferred formats for quick access from context menu and search.</string>
+	<string name="coordinate_format_discard_changes">Discard changes</string>
+	<string name="coordinate_format_last_item_warning">At least one coordinate format is required.</string>
+	<string name="coordinate_format_select_other">Select other format</string>
+	<string name="coordinate_format_recent">Recent</string>
+	<string name="coordinate_format_primary">Primary</string>
 	<string name="favorite_confirm_delete_folder">This will delete folder \"%1$s\", including nested folders and %2$d favorite point(s).</string>
 	<string name="favorite_folder_rename_conflict">A folder with this name already exists.</string>
 	<string name="favorite_folder_invalid_name">Folder name can\'t contain / or _%_</string>

@@ -34,6 +34,7 @@ import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.audionotes.AVActionType;
+import net.osmand.plus.plugins.audionotes.Recording;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -132,8 +133,21 @@ public class AttachedMediaUiHelper {
 			if (plugin.isRecording()) {
 				plugin.stopRecording(mapActivity, true, true);
 			} else {
-				plugin.addRecordingCallback(recording ->
-						dataHelper.addRecordingLink(target, recording, onMediaChanged));
+				plugin.addRecordingsListener(new AudioVideoNotesPlugin.RecordingsListener() {
+					@Override
+					public boolean onRecordingsAdded(@NonNull List<Recording> recordings) {
+						plugin.removeRecordingsListener(this);
+						for (Recording recording : recordings) {
+							dataHelper.addRecordingLink(target, recording, onMediaChanged);
+						}
+						return true;
+					}
+
+					@Override
+					public void onRecordingsCancelled() {
+						plugin.removeRecordingsListener(this);
+					}
+				});
 				switch (type) {
 					case REC_PHOTO ->
 							plugin.takePhoto(latLon.getLatitude(), latLon.getLongitude(), mapActivity, false, false);

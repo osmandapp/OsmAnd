@@ -4,7 +4,7 @@ import androidx.fragment.app.FragmentActivity
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.base.dialog.BaseDialogController
 import net.osmand.plus.gallery.data.GalleryKey
-import net.osmand.plus.gallery.data.getPhotoItems
+import net.osmand.plus.gallery.data.getPagerItems
 import net.osmand.plus.gallery.model.GalleryItem
 import net.osmand.plus.gallery.ui.GalleryPhotoPagerFragment
 
@@ -13,14 +13,25 @@ class GalleryPagerController(
 	val key: GalleryKey
 ) : BaseDialogController(app) {
 
-	val photoItems: List<GalleryItem.Media>
-		get() = app.galleryHelper.repository.get(key)
-			?.getPhotoItems()
-			?.map { GalleryItem.Media(it) }
-			?: emptyList()
+	var orderedIds: List<String>? = null
+
+	val mediaItems: List<GalleryItem.Media>
+		get() {
+			val items = app.galleryHelper.repository.get(key)
+				?.getPagerItems()
+				?: emptyList()
+			val order = orderedIds
+			val sorted = if (order.isNullOrEmpty()) {
+				items
+			} else {
+				val indexById = order.withIndex().associate { (index, id) -> id to index }
+				items.sortedBy { indexById[it.id] ?: Int.MAX_VALUE }
+			}
+			return sorted.map { GalleryItem.Media(it) }
+		}
 
 	fun getIndexById(id: String): Int {
-		val index = photoItems.indexOfFirst { it.mediaItem.id == id }
+		val index = mediaItems.indexOfFirst { it.mediaItem.id == id }
 		return if (index >= 0) index else 0
 	}
 
@@ -30,12 +41,15 @@ class GalleryPagerController(
 		const val PROCESS_ID = "gallery_pager"
 
 		@JvmStatic
-		fun showDialog(
+		@JvmOverloads
+		fun show(
 			activity: FragmentActivity,
 			key: GalleryKey,
-			selectedItemId: String
+			selectedItemId: String,
+			orderedIds: List<String>? = null
 		) {
-			getInstance(activity.application as OsmandApplication, key)
+			val controller = getInstance(activity.application as OsmandApplication, key)
+			controller.orderedIds = orderedIds
 			GalleryPhotoPagerFragment.showInstance(activity, selectedItemId)
 		}
 

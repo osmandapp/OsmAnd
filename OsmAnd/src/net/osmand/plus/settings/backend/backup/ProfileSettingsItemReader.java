@@ -15,6 +15,7 @@ import net.osmand.plus.settings.backend.ApplicationModeBean;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.coordinates.CoordinateFormatSettingsStorage;
 import net.osmand.plus.settings.enums.SunPositionMode;
 import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState.MarkerClickBehaviour;
@@ -59,6 +60,9 @@ public class ProfileSettingsItemReader<T extends ProfileSettingsItem> extends Os
 			Iterator<String> iterator = json.keys();
 			while (iterator.hasNext()) {
 				String key = iterator.next();
+				if (CoordinateFormatSettingsStorage.LEGACY_FORMAT_ID.equals(key)) {
+					continue;
+				}
 				OsmandPreference<?> preference = prefs.get(key);
 				if (preference == null) {
 					String value = json.optString(key);
@@ -79,9 +83,30 @@ public class ProfileSettingsItemReader<T extends ProfileSettingsItem> extends Os
 					SettingsHelper.LOG.warn("No preference while importing settings: " + key);
 				}
 			}
+			migrateLegacyCoordinateFormat(json, settings, appMode);
 			long lastModifiedTime = settingsItem.getLastModifiedTime();
 			settings.setLastModePreferencesEditTime(appMode, lastModifiedTime);
 		});
+	}
+
+	private void migrateLegacyCoordinateFormat(@NonNull JSONObject json,
+			@NonNull OsmandSettings settings, @NonNull ApplicationMode appMode) {
+		if (json.has(CoordinateFormatSettingsStorage.LEGACY_FORMAT_ID)) {
+			try {
+				CoordinateFormatSettingsStorage storage = settings.getCoordinateFormatSettingsStorage();
+				int legacyFormat = storage.getLegacyFormatPreference().parseString(
+						json.getString(CoordinateFormatSettingsStorage.LEGACY_FORMAT_ID));
+				if (!json.has(CoordinateFormatSettingsStorage.PREFERRED_FORMAT_IDS_ID)) {
+					storage.setPreferredIds(appMode, AppVersionUpgradeOnInit.getLegacyCoordinateFormatPreferredIds(legacyFormat));
+				}
+				if (!json.has(settings.COORDINATE_GRID_FORMAT.getId())) {
+					settings.COORDINATE_GRID_FORMAT.setModeValue(appMode,
+							AppVersionUpgradeOnInit.getLegacyCoordinateGridFormat(legacyFormat));
+				}
+			} catch (Exception e) {
+				SettingsHelper.LOG.error("Failed to migrate legacy coordinate format from imported settings", e);
+			}
+		}
 	}
 
 	@Nullable

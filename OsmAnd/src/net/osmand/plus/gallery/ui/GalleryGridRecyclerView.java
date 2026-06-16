@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class GalleryGridRecyclerView extends RecyclerView {
 	private ScaleGestureDetector scaleDetector;
+	@Nullable
+	private Runnable gestureFinishedListener;
 	boolean isScaling;
 
 	public GalleryGridRecyclerView(@NonNull Context context) {
@@ -27,6 +29,10 @@ public class GalleryGridRecyclerView extends RecyclerView {
 
 	public void setScaleDetector(ScaleGestureDetector scaleDetector) {
 		this.scaleDetector = scaleDetector;
+	}
+
+	public void setGestureFinishedListener(@Nullable Runnable listener) {
+		this.gestureFinishedListener = listener;
 	}
 
 	@Override
@@ -60,6 +66,12 @@ public class GalleryGridRecyclerView extends RecyclerView {
 			isScaling = true;
 			stopScroll();
 		}
-		return super.dispatchTouchEvent(e);
+		boolean handled = super.dispatchTouchEvent(e);
+		int action = e.getActionMasked();
+		if ((action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL)
+				&& gestureFinishedListener != null) {
+			gestureFinishedListener.run();
+		}
+		return handled;
 	}
 }

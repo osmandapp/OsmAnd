@@ -31,7 +31,6 @@ import net.osmand.plus.chooseplan.ChoosePlanFragment
 import net.osmand.plus.chooseplan.OsmAndFeature
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents
 import net.osmand.plus.download.DownloadValidationManager
-import net.osmand.plus.gallery.controller.GalleryGridController
 import net.osmand.plus.gallery.controller.GalleryPagerController
 import net.osmand.plus.gallery.data.GalleryKey
 import net.osmand.plus.gallery.data.MediaLoadListener
@@ -39,6 +38,7 @@ import net.osmand.plus.gallery.model.GalleryItem
 import net.osmand.plus.gallery.model.MediaHolder
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.astronomy.AstroArticle
+import net.osmand.plus.plugins.astronomy.AstronomyGridController
 import net.osmand.plus.plugins.astronomy.AstronomyPlugin
 import net.osmand.plus.plugins.astronomy.Catalog
 import net.osmand.plus.plugins.astronomy.SkyObject
@@ -1271,13 +1271,13 @@ class AstroContextMenuFragment : BaseMaterialFragment(), DownloadEvents {
 	private fun openMediaPager(mediaItem: MediaItem) {
 		val activity = mapActivity ?: return
 		val key = currentGalleryKey ?: return
-		GalleryPagerController.showDialog(activity, key, mediaItem.id)
+		GalleryPagerController.show(activity, key, mediaItem.id)
 	}
 
 	private fun openGalleryFullScreen(title: String?) {
 		val activity = mapActivity ?: return
 		val key = currentGalleryKey ?: return
-		GalleryGridController.showDialog(activity, key, title)
+		AstronomyGridController.show(activity, key, title)
 	}
 
 	private fun loadGallery(wid: String) {

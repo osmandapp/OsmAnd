@@ -88,6 +88,7 @@ import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper;
 import net.osmand.plus.plugins.rastermaps.DownloadTilesHelper;
 import net.osmand.plus.plugins.weather.OfflineForecastHelper;
 import net.osmand.plus.plugins.weather.WeatherHelper;
+import net.osmand.plus.settings.coordinates.CoordinateFormatHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.render.RendererRegistry;
@@ -162,6 +163,7 @@ public class OsmandApplication extends MultiDexApplication {
 	private final UiUtilities iconsCache = new UiUtilities(this);
 	private final LocaleHelper localeHelper = new LocaleHelper(this);
 	private final ToastHelper toastHelper = new ToastHelper(this);
+	private final CoordinateFormatHelper coordinateFormatHelper = new CoordinateFormatHelper(this);
 
 	// start variables
 	ResourceManager resourceManager;
@@ -681,6 +683,11 @@ public class OsmandApplication extends MultiDexApplication {
 	@NonNull
 	public WeatherHelper getWeatherHelper() {
 		return weatherHelper;
+	}
+
+	@NonNull
+	public CoordinateFormatHelper getCoordinateFormatHelper() {
+		return coordinateFormatHelper;
 	}
 
 	@NonNull
