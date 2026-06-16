@@ -10,6 +10,7 @@ import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.WireFormat;
 
 import gnu.trove.list.array.TByteArrayList;
+import gnu.trove.list.array.TLongArrayList;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
@@ -648,6 +649,8 @@ public class BinaryMapTransportReaderAdapter {
 		req.cacheIdsA.clear();
 		req.cacheIdsB.clear();
 		req.cacheIdsC.clear();
+		TLongArrayList connectedStopIds = new TLongArrayList();
+		TLongArrayList connectedRouteIds = new TLongArrayList();
 
 		TransportStop dataObject = new TransportStop();
 		dataObject.setLocation(BinaryMapIndexReader.TRANSPORT_STOP_ZOOM, x, y);
@@ -660,6 +663,10 @@ public class BinaryMapTransportReaderAdapter {
 				dataObject.setReferencesToRoutes(req.cacheIdsC.toArray());
 				dataObject.setDeletedRoutesIds(req.cacheIdsA.toArray());
 				dataObject.setRoutesIds(req.cacheIdsB.toArray());
+				connectedStopIds.sort();
+				dataObject.setConnectedStopIds(connectedStopIds.toArray());
+				connectedRouteIds.sort();
+				dataObject.setConnectedRouteIds(connectedRouteIds.toArray());
 				if(dataObject.getName("en").length() == 0){
 					dataObject.setEnName(TransliterationHelper.transliterate(dataObject.getName()));
 				}
@@ -672,6 +679,12 @@ public class BinaryMapTransportReaderAdapter {
 				break;
 			case OsmandOdb.TransportStop.ROUTESIDS_FIELD_NUMBER :
 				req.cacheIdsB.add(codedIS.readUInt64());
+				break;
+			case TransportStop.CONNECTED_STOP_IDS_FIELD_NUMBER:
+				connectedStopIds.add(codedIS.readUInt64());
+				break;
+			case TransportStop.CONNECTED_ROUTE_IDS_FIELD_NUMBER:
+				connectedRouteIds.add(codedIS.readUInt64());
 				break;
 			case OsmandOdb.TransportStop.NAME_EN_FIELD_NUMBER :
 				if (stringTable != null) {

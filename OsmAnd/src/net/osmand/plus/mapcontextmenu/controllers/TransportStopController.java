@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
@@ -126,30 +127,35 @@ public class TransportStopController extends MenuController {
 			ArrayList<TransportStop> transportStopsSameExit = new ArrayList<>(transportStop.getLocalTransportStops());
 			ArrayList<TransportStop> nearbyTransportStops = new ArrayList<>(transportStop.getNearbyTransportStops());
 
-			addTransportStopRoutes(app, transportStopsSameExit, routesOnTheSameExit, useEnglishNames);
+			addTransportStopRoutes(app, transportStopsSameExit, routesOnTheSameExit, useEnglishNames, transportStopsSameExit, false);
 			TransportStopHelper.sortTransportStopRoutes(routesOnTheSameExit);
 			if (topType == null && !Algorithms.isEmpty(routesOnTheSameExit)) {
 				topType = routesOnTheSameExit.get(0).type;
 			}
-			addTransportStopRoutes(app, nearbyTransportStops, routesNearby, useEnglishNames);
+			addTransportStopRoutes(app, nearbyTransportStops, routesNearby, useEnglishNames, transportStopsSameExit, true);
 			TransportStopHelper.sortTransportStopRoutes(routesNearby);
 		}
 	}
 
 	private void addTransportStopRoutes(OsmandApplication app, List<TransportStop> stops,
-			List<TransportStopRoute> routes, boolean useEnglishNames) {
+			List<TransportStopRoute> routes, boolean useEnglishNames, @Nullable List<TransportStop> localStops, boolean nearby) {
 		for (TransportStop tstop : stops) {
 			if (!tstop.isDeleted()) {
-				addRoutes(app, routes, useEnglishNames, tstop, transportStop, (int) MapUtils.getDistance(tstop.getLocation(), transportStop.getLocation()));
+				addRoutes(app, routes, useEnglishNames, tstop, transportStop,
+						(int) MapUtils.getDistance(tstop.getLocation(), transportStop.getLocation()), localStops, nearby);
 			}
 		}
 	}
 
 	private void addRoutes(OsmandApplication app, List<TransportStopRoute> routes,
-			boolean useEnglishNames, TransportStop s, TransportStop refStop, int dist) {
+			boolean useEnglishNames, TransportStop s, TransportStop refStop, int dist,
+			@Nullable List<TransportStop> localStops, boolean nearby) {
 		List<TransportRoute> rts = app.getResourceManager().getRoutesForStop(s);
 		if (rts != null) {
 			for (TransportRoute rs : rts) {
+				if (!shouldAddRouteForStop(s, rs, localStops, nearby)) {
+					continue;
+				}
 				boolean routeAlreadyAdded = TransportStopHelper.checkSameRoute(routes, rs);
 				if (routeAlreadyAdded) {
 					continue;
@@ -168,5 +174,28 @@ public class TransportStopController extends MenuController {
 				routes.add(r);
 			}
 		}
+	}
+
+	private boolean shouldAddRouteForStop(@NonNull TransportStop stop, @NonNull TransportRoute route,
+			@Nullable List<TransportStop> localStops, boolean nearby) {
+		Long stopId = stop.getId();
+		if (stopId == null || localStops == null) {
+			return true;
+		}
+		boolean hasRouteFilter = false;
+		boolean allowed = false;
+		for (TransportStop localStop : localStops) {
+			long[] routeIds = localStop.getConnectedRouteIds();
+			if (routeIds != null && routeIds.length > 0 && localStop.hasConnectedStopId(stopId)) {
+				hasRouteFilter = true;
+				if (localStop.hasConnectedRouteId(route.getId())) {
+					allowed = true;
+				}
+			}
+		}
+		if (!hasRouteFilter) {
+			return true;
+		}
+		return nearby ? !allowed : allowed;
 	}
 }

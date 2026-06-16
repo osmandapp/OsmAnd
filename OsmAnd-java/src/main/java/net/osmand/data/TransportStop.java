@@ -13,10 +13,14 @@ public class TransportStop extends MapObject {
 
 	private static final int DELETED_STOP = -1;
 	public static final String MISSING_STOP_NAME = "#Missing Stop";
+	public static final int CONNECTED_STOP_IDS_FIELD_NUMBER = 23;
+	public static final int CONNECTED_ROUTE_IDS_FIELD_NUMBER = 24;
 
 	private long[] referencesToRoutes = null;
 	private long[] deletedRoutesIds;
 	private long[] routesIds;
+	private long[] connectedStopIds;
+	private long[] connectedRouteIds;
 	public int distance;
 	public int x31;
 	public int y31;
@@ -61,7 +65,39 @@ public class TransportStop extends MapObject {
 		// CHECK route ids are sorted (used later)
 		this.routesIds = routesIds;
 	}
-	
+
+	public long[] getConnectedStopIds() {
+		return connectedStopIds;
+	}
+
+	public void setConnectedStopIds(long[] connectedStopIds) {
+		this.connectedStopIds = connectedStopIds;
+	}
+
+	public long[] getConnectedRouteIds() {
+		return connectedRouteIds;
+	}
+
+	public void setConnectedRouteIds(long[] connectedRouteIds) {
+		this.connectedRouteIds = connectedRouteIds;
+	}
+
+	public void addConnectedStopId(long stopId) {
+		connectedStopIds = CollectionUtils.addToArrayL(connectedStopIds, stopId, true);
+	}
+
+	public void addConnectedRouteId(long routeId) {
+		connectedRouteIds = CollectionUtils.addToArrayL(connectedRouteIds, routeId, true);
+	}
+
+	public boolean hasConnectedStopId(long stopId) {
+		return connectedStopIds != null && Arrays.binarySearch(connectedStopIds, stopId) >= 0;
+	}
+
+	public boolean hasConnectedRouteId(long routeId) {
+		return connectedRouteIds != null && Arrays.binarySearch(connectedRouteIds, routeId) >= 0;
+	}
+
 	public boolean hasRoute(long routeId) {
 		// make assumption that ids are sorted
 		return routesIds != null && Arrays.binarySearch(routesIds, routeId) >= 0;

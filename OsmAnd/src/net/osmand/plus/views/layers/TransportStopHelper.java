@@ -118,6 +118,7 @@ public class TransportStopHelper {
 				}
 			}
 		}
+		promoteConnectedStops(stopAggregated);
 
 		List<TransportStop> localStops = stopAggregated.getLocalTransportStops();
 		List<TransportStop> nearbyStops = stopAggregated.getNearbyTransportStops();
@@ -145,6 +146,32 @@ public class TransportStopHelper {
 			}
 		}
 		stopAggregated.addLocalTransportStop(localStop == null ? transportStop : localStop);
+		promoteConnectedStops(stopAggregated);
+	}
+
+	private static void promoteConnectedStops(@NonNull TransportStopAggregated stopAggregated) {
+		List<TransportStop> localStops = stopAggregated.getLocalTransportStops();
+		List<TransportStop> nearbyStops = stopAggregated.getNearbyTransportStops();
+		if (localStops.isEmpty() || nearbyStops.isEmpty()) {
+			return;
+		}
+		for (TransportStop stop : nearbyStops) {
+			if (!localStops.contains(stop) && isConnectedToLocalStop(localStops, stop)) {
+				stopAggregated.addLocalTransportStop(stop);
+			}
+		}
+	}
+
+	private static boolean isConnectedToLocalStop(@NonNull List<TransportStop> localStops, @NonNull TransportStop stop) {
+		Long stopId = stop.getId();
+		if (stopId != null) {
+			for (TransportStop localStop : localStops) {
+				if (localStop.hasConnectedStopId(stopId)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	@NonNull
