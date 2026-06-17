@@ -17,8 +17,10 @@ import net.osmand.util.MapUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class TransportStopHelper {
 
@@ -172,6 +174,26 @@ public class TransportStopHelper {
 			}
 		}
 		return list;
+	}
+
+	@Nullable
+	public static Set<Long> getConnectedPlatformRouteIds(@Nullable Amenity amenity, @NonNull TransportStop stop) {
+		Long amenityId = amenity == null ? null : amenity.getId();
+		if (amenityId == null) {
+			return null;
+		}
+		String routeIds = stop.getNamesMap(false).get(TransportStop.CONNECTED_PLATFORM_ROUTES_PREFIX + ":" + amenityId);
+		if (Algorithms.isEmpty(routeIds)) {
+			return null;
+		}
+		Set<Long> result = new HashSet<>();
+		for (String routeId : routeIds.split(",")) {
+			long id = Algorithms.parseLongSilently(routeId, 0);
+			if (id != 0) {
+				result.add(id);
+			}
+		}
+		return result.isEmpty() ? null : result;
 	}
 
 	public static void processTransportStopAggregated(@NonNull OsmandApplication app, @NonNull TransportStop transportStop) {

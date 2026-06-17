@@ -20,6 +20,7 @@ import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class TransportStopController extends MenuController {
 
@@ -126,30 +127,37 @@ public class TransportStopController extends MenuController {
 			ArrayList<TransportStop> transportStopsSameExit = new ArrayList<>(transportStop.getLocalTransportStops());
 			ArrayList<TransportStop> nearbyTransportStops = new ArrayList<>(transportStop.getNearbyTransportStops());
 
-			addTransportStopRoutes(app, transportStopsSameExit, routesOnTheSameExit, useEnglishNames);
+			addTransportStopRoutes(app, transportStopsSameExit, routesOnTheSameExit, useEnglishNames, true);
 			TransportStopHelper.sortTransportStopRoutes(routesOnTheSameExit);
 			if (topType == null && !Algorithms.isEmpty(routesOnTheSameExit)) {
 				topType = routesOnTheSameExit.get(0).type;
 			}
-			addTransportStopRoutes(app, nearbyTransportStops, routesNearby, useEnglishNames);
+			addTransportStopRoutes(app, nearbyTransportStops, routesNearby, useEnglishNames, false);
 			TransportStopHelper.sortTransportStopRoutes(routesNearby);
 		}
 	}
 
 	private void addTransportStopRoutes(OsmandApplication app, List<TransportStop> stops,
-			List<TransportStopRoute> routes, boolean useEnglishNames) {
+			List<TransportStopRoute> routes, boolean useEnglishNames, boolean localRoutes) {
 		for (TransportStop tstop : stops) {
 			if (!tstop.isDeleted()) {
-				addRoutes(app, routes, useEnglishNames, tstop, transportStop, (int) MapUtils.getDistance(tstop.getLocation(), transportStop.getLocation()));
+				Set<Long> connectedRouteIds = localRoutes
+						? TransportStopHelper.getConnectedPlatformRouteIds(transportStop.getAmenity(), tstop)
+						: null;
+				addRoutes(app, routes, useEnglishNames, tstop, transportStop,
+						(int) MapUtils.getDistance(tstop.getLocation(), transportStop.getLocation()), connectedRouteIds);
 			}
 		}
 	}
 
 	private void addRoutes(OsmandApplication app, List<TransportStopRoute> routes,
-			boolean useEnglishNames, TransportStop s, TransportStop refStop, int dist) {
+			boolean useEnglishNames, TransportStop s, TransportStop refStop, int dist, Set<Long> connectedRouteIds) {
 		List<TransportRoute> rts = app.getResourceManager().getRoutesForStop(s);
 		if (rts != null) {
 			for (TransportRoute rs : rts) {
+				if (connectedRouteIds != null && !connectedRouteIds.contains(rs.getId())) {
+					continue;
+				}
 				boolean routeAlreadyAdded = TransportStopHelper.checkSameRoute(routes, rs);
 				if (routeAlreadyAdded) {
 					continue;

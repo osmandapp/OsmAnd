@@ -13,7 +13,8 @@ public class TransportStop extends MapObject {
 
 	private static final int DELETED_STOP = -1;
 	public static final String MISSING_STOP_NAME = "#Missing Stop";
-	public static final String CONNECTED_PLATFORM_NAME_PREFIX = "osmand:connected_platform";
+	public static final String CONNECTED_PLATFORM_NAME_PREFIX = "osmand:connected_platform_name";
+	public static final String CONNECTED_PLATFORM_ROUTES_PREFIX = "osmand:connected_platform_routes";
 
 	private long[] referencesToRoutes = null;
 	private long[] deletedRoutesIds;
