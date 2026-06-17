@@ -18,6 +18,7 @@ import net.osmand.util.MapUtils;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class TransportStopHelper {
 
@@ -103,12 +104,18 @@ public class TransportStopHelper {
 			String amenityName = amenity.getName().toLowerCase();
 			for (TransportStop stop : transportStops) {
 				stop.setTransportStopAggregated(stopAggregated);
+
 				String stopName = stop.getName().toLowerCase();
-				if (((stopName.contains(amenityName) || amenityName.contains(stopName))
-						&& MapUtils.getDistance(stop.getLocation(), loc) < MAX_DISTANCE_BETWEEN_AMENITY_AND_LOCAL_STOPS
-						&& (nearestStop == null
-						|| nearestStop.getLocation().equals(stop.getLocation())))
-						|| stop.getLocation().equals(loc)) {
+				boolean sameStopNameAndLocation = isSameTransportName(stopName, amenityName)
+						&& MapUtils.getDistance(stop.getLocation(), loc) < MAX_DISTANCE_BETWEEN_AMENITY_AND_LOCAL_STOPS;
+
+				String connectedPlatformName = getConnectedPlatformName(stop);
+				boolean sameConnectedPlatformName = connectedPlatformName != null
+						&& isSameTransportName(connectedPlatformName, amenityName);
+
+				if (stop.getLocation().equals(loc)
+						|| ((sameStopNameAndLocation || sameConnectedPlatformName)
+						&& (nearestStop == null || nearestStop.getLocation().equals(stop.getLocation())))) {
 					stopAggregated.addLocalTransportStop(stop);
 					if (nearestStop == null) {
 						nearestStop = stop;
@@ -125,6 +132,19 @@ public class TransportStopHelper {
 			return localStops.get(0);
 		} else if (!nearbyStops.isEmpty()) {
 			return nearbyStops.get(0);
+		}
+		return null;
+	}
+
+	private static boolean isSameTransportName(@NonNull String stopName, @NonNull String amenityName) {
+		return stopName.contains(amenityName) || amenityName.contains(stopName);
+	}
+
+	private static String getConnectedPlatformName(@NonNull TransportStop stop) {
+		for (Map.Entry<String, String> entry : stop.getNamesMap(false).entrySet()) {
+			if (entry.getKey().startsWith(TransportStop.CONNECTED_PLATFORM_NAME_PREFIX)) {
+				return entry.getValue().toLowerCase();
+			}
 		}
 		return null;
 	}
