@@ -97,7 +97,7 @@ internal class AISMessage24Parser(content: Sixbit) : AISMessageParser(content, 1
             vendorId = content.getString(FROM_B[VENDORID], TO_B[VENDORID])
             unitModelCode = content.getInt(FROM_B[UNITMODELCODE], TO_B[UNITMODELCODE])
             serialNumber = content.getInt(FROM_B[SERIALNUMBER], TO_B[SERIALNUMBER])
-            callSign = content.getString(FROM_B[CALLSIGN], TO_B[CALLSIGN])
+            callSign = content.getString(FROM_B[CALLSIGN], TO_B[CALLSIGN]).trim { it <= ' ' }
             bow = content.getInt(FROM_B[BOW], TO_B[BOW])
             stern = content.getInt(FROM_B[STERN], TO_B[STERN])
             port = content.getInt(FROM_B[PORT], TO_B[PORT])
