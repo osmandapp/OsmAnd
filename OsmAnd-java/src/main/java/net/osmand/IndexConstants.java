@@ -97,7 +97,6 @@ public class IndexConstants {
 	public static final String WIKIVOYAGE_INDEX_DIR = "travel/";
 	public static final String GPX_TRAVEL_DIR = GPX_INDEX_DIR + WIKIVOYAGE_INDEX_DIR;
 	public static final String AV_INDEX_DIR = "avnotes/";
-	public static final String MEDIA_INDEX_DIR = "media/";
 	public static final String FONT_INDEX_DIR = "fonts/";
 	public static final String VOICE_INDEX_DIR = "voice/";
 	public static final String RENDERERS_DIR = "rendering/";

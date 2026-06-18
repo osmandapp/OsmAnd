@@ -1,8 +1,9 @@
 package net.osmand.plus.gallery.attached.helpers;
 
 import static android.app.Activity.RESULT_OK;
-
-import static net.osmand.IndexConstants.MEDIA_INDEX_DIR;
+import static net.osmand.shared.media.MediaFileNameFormat.IMG_EXTENSION;
+import static net.osmand.shared.media.MediaFileNameFormat.MPEG4_EXTENSION;
+import static net.osmand.shared.media.MediaFileNameFormat.THREEGP_EXTENSION;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -23,6 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -32,27 +34,33 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.audionotes.AVActionType;
+import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.audionotes.Recording;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
-import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.settings.mediastorage.MediaDirType;
+import net.osmand.plus.settings.mediastorage.MediaStorageHelper;
+import net.osmand.plus.settings.mediastorage.MediaStorageLocation;
+import net.osmand.plus.settings.mediastorage.MediaStorageUtils;
+import net.osmand.plus.settings.mediastorage.MediaTarget;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
+import net.osmand.shared.gpx.primitives.Link;
 import net.osmand.shared.gpx.primitives.Linkable;
 import net.osmand.shared.gpx.primitives.WptPt;
-import net.osmand.shared.media.MediaUriResolver;
-import net.osmand.shared.media.domain.MediaItem;
+import net.osmand.shared.media.MediaFileNameFormat;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class AttachedMediaUiHelper {
@@ -65,6 +73,7 @@ public class AttachedMediaUiHelper {
 	private final MapActivity mapActivity;
 	private final UiUtilities iconsCache;
 	private final AttachedMediaDataHelper dataHelper;
+	private final MediaStorageHelper mediaStorageHelper;
 	@Nullable
 	private ActivityResultLauncher<?> mediaPickerLauncher;
 
@@ -73,6 +82,7 @@ public class AttachedMediaUiHelper {
 		this.app = mapActivity.getApp();
 		this.iconsCache = app.getUIUtilities();
 		this.dataHelper = new AttachedMediaDataHelper(app);
+		this.mediaStorageHelper = new MediaStorageHelper(app);
 	}
 
 	public void showAddMenu(@NonNull View anchorView, @NonNull Linkable target,
@@ -133,46 +143,153 @@ public class AttachedMediaUiHelper {
 			if (plugin.isRecording()) {
 				plugin.stopRecording(mapActivity, true, true);
 			} else {
-				plugin.addRecordingsListener(new AudioVideoNotesPlugin.RecordingsListener() {
-					@Override
-					public boolean onRecordingsAdded(@NonNull List<Recording> recordings) {
-						plugin.removeRecordingsListener(this);
-						for (Recording recording : recordings) {
-							dataHelper.addRecordingLink(target, recording, onMediaChanged);
-						}
-						return true;
-					}
-
-					@Override
-					public void onRecordingsCancelled() {
-						plugin.removeRecordingsListener(this);
-					}
-				});
-				switch (type) {
-					case REC_PHOTO ->
-							plugin.takePhoto(latLon.getLatitude(), latLon.getLongitude(), mapActivity, false, false);
-					case REC_VIDEO ->
-							plugin.recordVideo(latLon.getLatitude(), latLon.getLongitude(), mapActivity, false);
-					case REC_AUDIO ->
-							plugin.recordAudio(latLon.getLatitude(), latLon.getLongitude(), mapActivity);
-				}
+				captureAttachedMedia(plugin, type, latLon, target, onMediaChanged);
 			}
 		}
+	}
+
+	private void captureAttachedMedia(@NonNull AudioVideoNotesPlugin plugin, @NonNull AVActionType type,
+	                                  @NonNull LatLon latLon, @NonNull Linkable target, @Nullable Runnable onMediaChanged) {
+		MediaDirType dirType = getMediaDirType(type);
+		String extension = getMediaExtension(type);
+		MediaStorageLocation storageLocation = MediaStorageLocation.fromSettings(app);
+		String fileName = MediaFileNameFormat.createUniqueMediaFileName(latLon.getLatitude(), latLon.getLongitude(), extension,
+				name -> mediaStorageHelper.mediaFileExists(storageLocation, dirType, name));
+		String mimeType = MediaStorageUtils.getMimeType(null, fileName, dirType);
+		MediaTarget mediaTarget = mediaStorageHelper.createTarget(storageLocation, dirType, fileName, mimeType);
+		if (mediaTarget == null || mediaTarget.exists()) {
+			logDebug("Attached media capture target unavailable: type=" + type + ", storage=" + storageLocation.getStorageType()
+					+ ", fileName=" + fileName + ", target=" + mediaTarget);
+			app.showToastMessage(R.string.media_storage_directory_not_writable);
+			return;
+		}
+		File captureFile = getCaptureFile(mediaTarget);
+		boolean deleteCaptureFile = mediaTarget.getFile() == null;
+		logDebug("Attached media capture started: type=" + type + ", storage=" + storageLocation.getStorageType()
+				+ ", fileName=" + mediaTarget.getFileName() + ", captureFile=" + captureFile + ", directTarget=" + !deleteCaptureFile);
+		CallbackWithObject<File> callback = file -> {
+			if (file != null) {
+				logDebug("Attached media capture finished: type=" + type + ", file=" + file);
+				saveCapturedMedia(file, mediaTarget, target, onMediaChanged, mimeType);
+			} else {
+				logDebug("Attached media capture cancelled: type=" + type + ", target=" + mediaTarget.getFileName());
+				discardMediaTarget(mediaTarget);
+				if (deleteCaptureFile) {
+					Algorithms.removeAllFiles(captureFile);
+				}
+			}
+			return true;
+		};
+		switch (type) {
+			case REC_PHOTO ->
+					plugin.takeAttachedPhoto(latLon.getLatitude(), latLon.getLongitude(), mapActivity, captureFile, callback);
+			case REC_VIDEO ->
+					plugin.recordAttachedVideo(latLon.getLatitude(), latLon.getLongitude(), mapActivity, captureFile, callback);
+			case REC_AUDIO ->
+					plugin.recordAttachedAudio(latLon.getLatitude(), latLon.getLongitude(), mapActivity, captureFile, callback);
+		}
+	}
+
+	private void saveCapturedMedia(@NonNull File file, @NonNull MediaTarget mediaTarget, @NonNull Linkable target,
+	                               @Nullable Runnable onMediaChanged, @NonNull String mimeType) {
+		String name = new Recording(file).getName(app, false);
+		if (isTargetFile(file, mediaTarget)) {
+			logDebug("Attached media saved directly to target file: " + mediaTarget.getFileName());
+			addCapturedMediaLink(file, mediaTarget, target, onMediaChanged, name, mimeType);
+			return;
+		}
+		logDebug("Attached media save scheduled: source=" + file + ", target=" + mediaTarget.getFileName());
+		OsmAndTaskManager.executeTask(new SaveCapturedMediaTask(app, file, mediaTarget, name, mimeType, link -> {
+			logDebug("Attached media save completed: href=" + link.getHref());
+			dataHelper.addMediaLinks(target, Collections.singletonList(link), onMediaChanged);
+			return true;
+		}));
+	}
+
+	private boolean isTargetFile(@NonNull File file, @NonNull MediaTarget target) {
+		File targetFile = target.getFile();
+		return targetFile != null && targetFile.equals(file);
+	}
+
+	private void addCapturedMediaLink(@NonNull File file, @NonNull MediaTarget mediaTarget,
+	                                  @NonNull Linkable target, @Nullable Runnable onMediaChanged,
+	                                  @Nullable String name, @NonNull String mimeType) {
+		if (!file.exists() || file.length() == 0) {
+			discardMediaTarget(mediaTarget);
+			app.showToastMessage(app.getString(R.string.shared_string_io_error));
+			return;
+		}
+		if (!finishMediaTarget(mediaTarget)) {
+			return;
+		}
+		Link link = new Link(mediaTarget.getHref(), name, mimeType);
+		logDebug("Attached media link created: href=" + link.getHref() + ", mimeType=" + mimeType);
+		dataHelper.addMediaLinks(target, Collections.singletonList(link), onMediaChanged);
+	}
+
+	private boolean finishMediaTarget(@NonNull MediaTarget mediaTarget) {
+		try {
+			mediaTarget.finish(true);
+			logDebug("Attached media target finished: " + mediaTarget.getFileName());
+			return true;
+		} catch (IOException e) {
+			LOG.warn("Failed to finish attached media target: " + mediaTarget.getFileName(), e);
+			app.showToastMessage(app.getString(R.string.shared_string_io_error));
+			return false;
+		}
+	}
+
+	private void discardMediaTarget(@NonNull MediaTarget mediaTarget) {
+		try {
+			mediaTarget.finish(false);
+			logDebug("Attached media target discarded: " + mediaTarget.getFileName());
+		} catch (IOException e) {
+			LOG.warn("Failed to discard attached media target: " + mediaTarget.getFileName(), e);
+		}
+	}
+
+	@NonNull
+	private File getCaptureFile(@NonNull MediaTarget target) {
+		File file = target.getFile();
+		if (file != null) {
+			return file;
+		}
+		File dir = new File(app.getCacheDir(), "attached_media");
+		File captureFile = new File(dir, target.getFileName());
+		Algorithms.removeAllFiles(captureFile);
+		return captureFile;
+	}
+
+	@NonNull
+	private MediaDirType getMediaDirType(@NonNull AVActionType type) {
+		return switch (type) {
+			case REC_AUDIO -> MediaDirType.AUDIO;
+			case REC_VIDEO -> MediaDirType.VIDEO;
+			case REC_PHOTO -> MediaDirType.PHOTO;
+		};
+	}
+
+	@NonNull
+	private String getMediaExtension(@NonNull AVActionType type) {
+		return switch (type) {
+			case REC_AUDIO -> THREEGP_EXTENSION;
+			case REC_VIDEO -> MPEG4_EXTENSION;
+			case REC_PHOTO -> IMG_EXTENSION;
+		};
 	}
 
 	private void chooseFromGallery(@NonNull Linkable target, @NonNull LatLon latLon, @Nullable Runnable onMediaChanged) {
 		PickVisualMediaRequest request = new PickVisualMediaRequest.Builder()
 				.setMediaType(PickVisualMedia.ImageAndVideo.INSTANCE)
 				.build();
-		launchMediaPicker(new PickMultipleVisualMedia(), request,
-				uris -> onMediaPicked(target, latLon, onMediaChanged, uris));
+		launchMediaPicker(new PickMultipleVisualMedia(), request, uris -> onMediaPicked(target, latLon, onMediaChanged, uris, Intent.FLAG_GRANT_READ_URI_PERMISSION));
 	}
 
 	private void chooseFromFiles(@NonNull Linkable target, @NonNull LatLon latLon, @Nullable Runnable onMediaChanged) {
 		launchMediaPicker(new StartActivityForResult(), createOpenMediaDocumentIntent(), result -> {
 			Intent data = result.getData();
 			if (data != null && result.getResultCode() == RESULT_OK) {
-				onMediaPicked(target, latLon, onMediaChanged, IntentHelper.getIntentUris(data));
+				onMediaPicked(target, latLon, onMediaChanged, IntentHelper.getIntentUris(data), data.getFlags());
 			}
 		});
 	}
@@ -213,70 +330,22 @@ public class AttachedMediaUiHelper {
 	}
 
 	private void onMediaPicked(@NonNull Linkable target, @NonNull LatLon latLon,
-	                           @Nullable Runnable onMediaChanged, @NonNull List<Uri> uris) {
+	                           @Nullable Runnable onMediaChanged, @NonNull List<Uri> uris, int persistableUriFlags) {
 		if (uris.isEmpty()) {
+			logDebug("Attached media picker returned no media");
 			return;
 		}
-		OsmAndTaskManager.executeTask(new CollectMediaLinksTask(app, latLon, uris, links -> {
+		logDebug("Attached media picker returned media: count=" + uris.size() + ", persistableFlags=" + persistableUriFlags);
+		OsmAndTaskManager.executeTask(new CollectMediaLinksTask(app, latLon, uris, persistableUriFlags, links -> {
+			logDebug("Attached media picker links collected: count=" + links.size());
 			dataHelper.addMediaLinks(target, links, onMediaChanged);
 			return true;
 		}));
 	}
 
-	@NonNull
-	public static File getMediaStorageFolder(@NonNull OsmandApplication app) {
-		return app.getAppPath(getMediaStorageDir());
-	}
-
-	@NonNull
-	public static String getMediaStorageDir() {
-		return MEDIA_INDEX_DIR;
-	}
-
-	public void openMediaItem(@NonNull MediaItem mediaItem, boolean nightMode) {
-		String uri = MediaUriResolver.getDetailsLink(mediaItem);
-		if (!Algorithms.isEmpty(uri)) {
-			String scheme = Uri.parse(uri).getScheme();
-			if ("http".equalsIgnoreCase(scheme) || "https".equalsIgnoreCase(scheme)) {
-				AndroidUtils.openUrl(mapActivity, uri, nightMode);
-			} else {
-				openLocalMediaItem(mediaItem, uri);
-			}
+	private static void logDebug(@NonNull String message) {
+		if (PluginsHelper.isDevelopment()) {
+			LOG.debug(message);
 		}
-	}
-
-	private void openLocalMediaItem(@NonNull MediaItem mediaItem, @NonNull String uri) {
-		Intent intent = new Intent(Intent.ACTION_VIEW);
-		intent.setDataAndType(getLocalMediaUri(uri), getMediaMimeType(mediaItem));
-		intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-		AndroidUtils.startActivityIfSafe(mapActivity, intent);
-	}
-
-	@NonNull
-	private Uri getLocalMediaUri(@NonNull String uri) {
-		Uri parsedUri = Uri.parse(uri);
-		String scheme = parsedUri.getScheme();
-		if ("content".equalsIgnoreCase(scheme)) {
-			return parsedUri;
-		}
-		if ("file".equalsIgnoreCase(scheme)) {
-			String path = parsedUri.getPath();
-			return Algorithms.isEmpty(path) ? parsedUri : AndroidUtils.getUriForFile(mapActivity, new File(path));
-		}
-		File file = new File(uri);
-		if (!file.isAbsolute()) {
-			file = app.getAppPath(uri);
-		}
-		return AndroidUtils.getUriForFile(mapActivity, file);
-	}
-
-	@NonNull
-	private String getMediaMimeType(@NonNull MediaItem mediaItem) {
-		return switch (mediaItem.getType()) {
-			case PHOTO -> "image/*";
-			case VIDEO -> "video/*";
-			case AUDIO -> "audio/*";
-			default -> "*/*";
-		};
 	}
 }

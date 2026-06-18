@@ -46,6 +46,11 @@ class AttachedMediaGridController(
 	private val handler = Handler(Looper.getMainLooper())
 	private var metadataRequest: Cancellable? = null
 	private var hasPendingMetadataUpdate = false
+	private val mediaChangeListener: (Set<GalleryKey>) -> Unit = { keys ->
+		if (key in keys) {
+			onMediaChanged()
+		}
+	}
 
 	private val reloadListener = object : MediaLoadListener {
 		override fun onLoadingStarted(key: GalleryKey) {}
@@ -79,12 +84,17 @@ class AttachedMediaGridController(
 		view?.updateItems()
 	}
 
+	init {
+		app.galleryHelper.addAttachedMediaChangeListener(mediaChangeListener)
+	}
+
 	override fun attach(view: IGalleryGridView) {
 		super.attach(view)
 		requestMetadata()
 	}
 
 	override fun onScreenDestroyed(activity: FragmentActivity?) {
+		app.galleryHelper.removeAttachedMediaChangeListener(mediaChangeListener)
 		metadataRequest?.cancel()
 		metadataRequest = null
 		handler.removeCallbacks(applyMetadataUpdate)

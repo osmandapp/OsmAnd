@@ -28,6 +28,7 @@ class GalleryHelper(
 	val metadataRepository: MediaMetadataRepository = localMediaRepository
 	val posterLoader: MediaPosterLoader = localMediaRepository
 	val mediaSourceResolver: MediaSourceResolver = localMediaRepository
+	private val attachedMediaChangeListeners = mutableSetOf<(Set<GalleryKey>) -> Unit>()
 
 	init {
 		registerDelegates()
@@ -46,5 +47,19 @@ class GalleryHelper(
 		val attachedDelegate = AttachedMediaDelegate(attachedMediaRegistry)
 		mediaLoader.registerDelegate(GalleryKey.Favorite::class.java, attachedDelegate)
 		mediaLoader.registerDelegate(GalleryKey.Waypoint::class.java, attachedDelegate)
+	}
+
+	fun addAttachedMediaChangeListener(listener: (Set<GalleryKey>) -> Unit) {
+		attachedMediaChangeListeners.add(listener)
+	}
+
+	fun removeAttachedMediaChangeListener(listener: (Set<GalleryKey>) -> Unit) {
+		attachedMediaChangeListeners.remove(listener)
+	}
+
+	fun notifyAttachedMediaChanged(keys: Set<GalleryKey>) {
+		if (keys.isEmpty()) return
+		keys.forEach { repository.invalidate(it) }
+		attachedMediaChangeListeners.toList().forEach { it(keys) }
 	}
 }

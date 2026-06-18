@@ -26,7 +26,22 @@ class AttachedMediaRowController @JvmOverloads constructor(
 	private val compactItems: Boolean = false
 ) : GalleryRowController(app, key) {
 
+	private val mediaChangeListener: (Set<GalleryKey>) -> Unit = { keys ->
+		if (key in keys) {
+			onMediaChanged()
+		}
+	}
+
+	init {
+		app.galleryHelper.addAttachedMediaChangeListener(mediaChangeListener)
+	}
+
 	override fun requiresInternet() = false
+
+	override fun detach() {
+		app.galleryHelper.removeAttachedMediaChangeListener(mediaChangeListener)
+		super.detach()
+	}
 
 	override fun resolveRowHolderType(position: Int): MediaHolderType =
 		if (compactItems) MediaHolderType.SMALL else super.resolveRowHolderType(position)
