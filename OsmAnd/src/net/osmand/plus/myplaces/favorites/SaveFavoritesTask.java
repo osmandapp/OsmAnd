@@ -37,12 +37,12 @@ public class SaveFavoritesTask extends AsyncTask<Void, String, Void> {
 
 	private final FavouritesFileHelper helper;
 	private final List<FavoriteGroup> groups;
-	private final SaveFavoritesListener listener;
+	private final FavoritesListener listener;
 	private final boolean saveAllGroups;
 
 	public SaveFavoritesTask(@NonNull FavouritesFileHelper helper,
 			@NonNull List<FavoriteGroup> groups, boolean saveAllGroups,
-			@Nullable SaveFavoritesListener listener) {
+			@Nullable FavoritesListener listener) {
 		this.saveAllGroups = saveAllGroups;
 		this.helper = helper;
 		this.groups = groups;
@@ -212,10 +212,5 @@ public class SaveFavoritesTask extends AsyncTask<Void, String, Void> {
 		if (listener != null) {
 			listener.onSavingFavoritesFinished();
 		}
-	}
-
-	public interface SaveFavoritesListener {
-
-		void onSavingFavoritesFinished();
 	}
 }

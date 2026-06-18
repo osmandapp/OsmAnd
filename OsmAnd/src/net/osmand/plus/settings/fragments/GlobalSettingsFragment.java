@@ -47,13 +47,15 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	private static final String DIALOGS_AND_NOTIFICATIONS_PREF_ID = "dialogs_and_notifications";
 	private static final String SEND_UNIQUE_USER_IDENTIFIER_PREF_ID = "send_unique_user_identifier";
 	private static final String ENABLE_PROXY_PREF_ID = "enable_proxy";
+	private static final String MEDIA_STORAGE_PREF_ID = "media_storage";
 
 	@Override
 	protected void setupPreferences() {
 		setupDefaultAppModePref();
 		setupPreferredLocalePref();
-		setupExternalStorageDirPref();
 		setupMapRenderingEnginePref();
+		setupExternalStorageDirPref();
+		setupMediaStoragePref();
 
 		setupSendAnonymousDataPref();
 		setupSendUniqueIdentifiersPreference();
@@ -249,6 +251,12 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		} else {
 			preference.setSummary(currentStorage.getTitle());
 		}
+	}
+
+	private void setupMediaStoragePref() {
+		Preference preference = findPreference(MEDIA_STORAGE_PREF_ID);
+		preference.setIcon(getContentIcon(R.drawable.ic_action_folder_av_notes));
+		preference.setSummary(settings.MEDIA_STORAGE_TYPE.get().toHumanString(app));
 	}
 
 	private void setupMapRenderingEnginePref() {

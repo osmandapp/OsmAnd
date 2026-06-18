@@ -14,7 +14,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
-import net.osmand.plus.myplaces.favorites.SaveFavoritesTask.SaveFavoritesListener;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -134,14 +133,12 @@ public class FavouritesFileHelper {
 		}
 	}
 
-	public void saveFavoritesIntoFile(@NonNull List<FavoriteGroup> groups, boolean saveAllGroups,
-			@Nullable SaveFavoritesListener listener) {
+	public void saveFavoritesIntoFile(@NonNull List<FavoriteGroup> groups, boolean saveAllGroups, @Nullable FavoritesListener listener) {
 		SaveFavoritesTask task = new SaveFavoritesTask(this, groups, saveAllGroups, listener);
 		OsmAndTaskManager.executeTask(task, singleThreadExecutor);
 	}
 
-	public void saveFavoritesIntoFileSync(@NonNull List<FavoriteGroup> groups, boolean saveAllGroups,
-			@Nullable SaveFavoritesListener listener) {
+	public void saveFavoritesIntoFileSync(@NonNull List<FavoriteGroup> groups, boolean saveAllGroups, @Nullable FavoritesListener listener) {
 		SaveFavoritesTask task = new SaveFavoritesTask(this, groups, saveAllGroups, listener);
 		try {
 			OsmAndTaskManager.executeTask(task, singleThreadExecutor).get();

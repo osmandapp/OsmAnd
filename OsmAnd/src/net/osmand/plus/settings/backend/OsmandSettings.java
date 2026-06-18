@@ -2306,6 +2306,10 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> AUTO_COPY_MEDIA_TO_OSMAND_STORAGE = new BooleanPreference(this, "auto_copy_media_to_osmand_storage", false).makeGlobal().makeShared();
 
+	public final CommonPreference<MediaStorageType> MEDIA_STORAGE_TYPE = new EnumStringPreference<>(this, "media_storage_type", MediaStorageType.MAIN_STORAGE, MediaStorageType.values()).makeGlobal().makeShared();
+
+	public final OsmandPreference<String> MEDIA_STORAGE_MANUAL_URI = new StringPreference(this, "media_storage_manual_uri", "").makeGlobal().makeShared();
+
 	public final OsmandPreference<Boolean> SHARED_STORAGE_MIGRATION_FINISHED = new BooleanPreference(this,
 			"shared_storage_migration_finished", false).makeGlobal();
 

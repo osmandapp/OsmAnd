@@ -81,7 +81,7 @@ public class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<Strin
 
 			FragmentManager manager = activity.getSupportFragmentManager();
 			migrationListener = StorageMigrationFragment.showInstance(manager, selectedStorage, sharedStorage, filesSize,
-					generalProgress, documentFiles.size(), usedOnMap, null, null);
+					generalProgress, documentFiles.size(), usedOnMap, true, null, null);
 		}
 	}
 

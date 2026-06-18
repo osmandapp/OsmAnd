@@ -18,19 +18,36 @@
 		android:title="@string/preferred_locale" />
 
 	<Preference
-		android:key="external_storage_dir"
-		android:layout="@layout/preference_with_descr"
-		android:persistent="false"
-		android:title="@string/application_dir"
-		app:fragment="net.osmand.plus.settings.datastorage.DataStorageFragment"
-		tools:icon="@drawable/ic_action_folder" />
-
-	<Preference
 		android:key="map_rendering_engine"
 		android:layout="@layout/preference_with_descr"
 		android:persistent="false"
 		android:title="@string/map_rendering_engine"
 		tools:icon="@drawable/ic_map" />
+
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
+	<PreferenceCategory
+		android:key="data_storage"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/data_storage" />
+
+	<Preference
+		android:key="external_storage_dir"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/main_storage"
+		app:fragment="net.osmand.plus.settings.datastorage.DataStorageFragment"
+		tools:icon="@drawable/ic_action_folder" />
+
+	<Preference
+		android:key="media_storage"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/media_storage"
+		app:fragment="net.osmand.plus.settings.mediastorage.MediaStorageFragment"
+		tools:icon="@drawable/ic_action_folder_av_notes" />
 
 	<Preference
 		android:layout="@layout/simple_divider_item"

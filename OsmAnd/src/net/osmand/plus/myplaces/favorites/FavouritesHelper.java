@@ -26,7 +26,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.myplaces.favorites.SaveFavoritesTask.SaveFavoritesListener;
 import net.osmand.plus.myplaces.favorites.add.AddFavoriteOptions;
 import net.osmand.plus.myplaces.favorites.add.AddFavoriteResult;
 import net.osmand.plus.myplaces.favorites.dialogs.FavoriteSortModesHelper;
@@ -68,7 +67,7 @@ public class FavouritesHelper {
 	@Nullable
 	private FavoriteFolderSnapshot favoriteFolderSnapshot;
 
-	private final Set<FavoritesListener> listeners = new HashSet<>();
+	private List<FavoritesListener> listeners = new ArrayList<>();
 	private final Map<FavouritePoint, AddressLookupRequest> addressRequestMap = new ConcurrentHashMap<>();
 
 	private boolean favoritesLoaded;
@@ -343,11 +342,18 @@ public class FavouritesHelper {
 	}
 
 	public void addListener(@NonNull FavoritesListener listener) {
-		listeners.add(listener);
+		boolean added = false;
+		if (!listeners.contains(listener)) {
+			listeners = CollectionUtils.addToList(listeners, listener);
+			added = true;
+		}
+		if (isFavoritesLoaded()) {
+			listener.onFavoritesLoaded();
+		}
 	}
 
 	public void removeListener(@NonNull FavoritesListener listener) {
-		listeners.remove(listener);
+		listeners = CollectionUtils.removeFromList(listeners, listener);
 	}
 
 	private boolean merge(@NonNull Map<String, FavoriteGroup> source, @NonNull Map<String, FavoriteGroup> destination) {
@@ -738,18 +744,30 @@ public class FavouritesHelper {
 		saveGroupsInternal(new ArrayList<>(favoriteGroups), true, async);
 	}
 
+	public void saveCurrentPointsIntoFile(boolean async, @Nullable FavoritesListener listener) {
+		saveFavoriteGroups(new ArrayList<>(favoriteGroups), true, async, listener);
+	}
+
 	public void saveSelectedGroupsIntoFile(@NonNull List<FavoriteGroup> groups, boolean async) {
 		saveGroupsInternal(groups, false, async);
 	}
 
 	private void saveGroupsInternal(@NonNull List<FavoriteGroup> groups, boolean saveAllGroups, boolean async) {
-		updateLastModifiedTime();
-		SaveFavoritesListener listener = this::onSavingFavoritesFinished;
+		saveFavoriteGroups(groups, saveAllGroups, async, null);
+	}
 
+	private void saveFavoriteGroups(@NonNull List<FavoriteGroup> groups, boolean saveAllGroups, boolean async, @Nullable FavoritesListener listener) {
+		updateLastModifiedTime();
+		FavoritesListener saveListener = new FavoritesListener() {
+			@Override
+			public void onSavingFavoritesFinished() {
+				notifySavingFavoritesFinished(listener);
+			}
+		};
 		if (async) {
-			fileHelper.saveFavoritesIntoFile(groups, saveAllGroups, listener);
+			fileHelper.saveFavoritesIntoFile(groups, saveAllGroups, saveListener);
 		} else {
-			fileHelper.saveFavoritesIntoFileSync(groups, saveAllGroups, listener);
+			fileHelper.saveFavoritesIntoFileSync(groups, saveAllGroups, saveListener);
 		}
 	}
 
@@ -1212,10 +1230,13 @@ public class FavouritesHelper {
 		}
 	}
 
-	private void onSavingFavoritesFinished() {
+	private void notifySavingFavoritesFinished(@Nullable FavoritesListener saveListener) {
 		invalidateFavoriteFolderCache();
 		for (FavoritesListener listener : listeners) {
 			listener.onSavingFavoritesFinished();
+		}
+		if (saveListener != null) {
+			saveListener.onSavingFavoritesFinished();
 		}
 	}
 

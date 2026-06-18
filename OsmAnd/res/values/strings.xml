@@ -10,6 +10,17 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+	<string name="data_storage">Data storage</string>
+	<string name="main_storage">Main storage</string>
+	<string name="media_storage">Media storage</string>
+	<string name="camera_folder">Camera folder</string>
+	<string name="media_storage_main_storage_descr">Files are saved to private app storage. They are hidden from the Gallery and other apps.</string>
+	<string name="media_storage_shared_storage_descr">Files are saved to public folders (Pictures, Movies, Music). They are visible in the Gallery and Google Photos.</string>
+	<string name="media_storage_camera_folder_descr">Files are saved to the Camera Roll. Note: Audio is saved to Music/OsmAnd.</string>
+	<string name="media_storage_manually_specified_descr">Files are saved to a custom folder and sorted by type (Audio, Photo, Video).</string>
+	<string name="change_media_storage_question">Change media storage?</string>
+	<string name="change_media_storage_full_description">Move existing media files to the new destination?\n%1$s > %2$s</string>
+	<string name="media_storage_directory_not_writable">Media files could not be saved in the specified directory</string>
 	<string name="show_discount_bottom_sheet">Show Discount bottom sheet</string>
 	<string name="show_discount_bottom_sheet_description">Display the discount bottom sheet with a custom development response.</string>
 	<string name="gallery_media_playback_error">Could not play media.</string>
