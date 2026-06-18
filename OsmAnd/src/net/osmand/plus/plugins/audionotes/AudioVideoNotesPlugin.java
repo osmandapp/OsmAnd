@@ -8,6 +8,9 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_V
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_AUDIO_VIDEO_NOTES;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.RECORDING_LAYER;
 import static net.osmand.IndexConstants.AV_INDEX_DIR;
+import static net.osmand.shared.media.MediaFileNameFormat.IMG_EXTENSION;
+import static net.osmand.shared.media.MediaFileNameFormat.MPEG4_EXTENSION;
+import static net.osmand.shared.media.MediaFileNameFormat.THREEGP_EXTENSION;
 import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_ON_REQUEST;
 import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_RECORD_AUDIO;
 import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_RECORD_VIDEO;
@@ -35,6 +38,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.IProgress;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -60,6 +64,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.mediastorage.MediaStorageHelper;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
@@ -144,6 +149,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private AudioVideoNoteRecordingMenu recordingMenu;
 	private CurrentRecording currentRecording;
 	private boolean recordingDone = true;
+	@Nullable
+	private CurrentRecording pendingAttachedRecording;
 
 	private final AudioRecorder audioRecorder;
 	private final CameraRecorder cameraRecorder;
@@ -465,7 +472,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			} else {
 				activity.getContextMenu().close();
 
-				if (currentRecording.getType() == AVActionType.REC_VIDEO && recordingsFileHelper.AV_RECORDER_SPLIT.get()) {
+				if (currentRecording.getType() == AVActionType.REC_VIDEO
+						&& !currentRecording.isAttachedMediaRecording() && recordingsFileHelper.AV_RECORDER_SPLIT.get()) {
 					runAction = AV_DEFAULT_ACTION_VIDEO;
 					LatLon latLon = getNextRecordingLocation();
 					actionLat = latLon.getLatitude();
@@ -501,9 +509,63 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		return currentRecording != null;
 	}
 
+	private boolean isAttachedMediaRecording() {
+		return getAttachedMediaRecording() != null;
+	}
+
+	@Nullable
+	private CurrentRecording getAttachedMediaRecording() {
+		if (currentRecording != null && currentRecording.isAttachedMediaRecording()) {
+			return currentRecording;
+		}
+		if (pendingAttachedRecording != null && pendingAttachedRecording.isAttachedMediaRecording()) {
+			return pendingAttachedRecording;
+		}
+		return null;
+	}
+
+	public void recordAttachedAudio(double lat, double lon, @NonNull MapActivity activity,
+	                                @NonNull File file, @NonNull CallbackWithObject<File> callback) {
+		prepareAttachedMediaRecording(AVActionType.REC_AUDIO, file, callback);
+		recordAudio(lat, lon, activity);
+	}
+
+	public void recordAttachedVideo(double lat, double lon, @NonNull MapActivity activity,
+	                                @NonNull File file, @NonNull CallbackWithObject<File> callback) {
+		prepareAttachedMediaRecording(AVActionType.REC_VIDEO, file, callback);
+		recordVideo(lat, lon, activity, false);
+	}
+
+	public void takeAttachedPhoto(double lat, double lon, @NonNull MapActivity activity,
+	                              @NonNull File file, @NonNull CallbackWithObject<File> callback) {
+		prepareAttachedMediaRecording(AVActionType.REC_PHOTO, file, callback);
+		takePhoto(lat, lon, activity, false, false);
+	}
+
+	private void prepareAttachedMediaRecording(@NonNull AVActionType type, @NonNull File file,
+	                                           @NonNull CallbackWithObject<File> callback) {
+		pendingAttachedRecording = new CurrentRecording(type, file, callback);
+		File parent = file.getParentFile();
+		if (parent != null) {
+			parent.mkdirs();
+		}
+	}
+
+	@NonNull
+	private File getOutputFile(double lat, double lon, @NonNull String extension) {
+		CurrentRecording attachedRecording = getAttachedMediaRecording();
+		File file = attachedRecording != null ? attachedRecording.getFile() : null;
+		return file != null ? file : MediaCaptureHelper.getBaseFileName(lat, lon, mediaCaptureHelper.getTargetDir(), extension);
+	}
+
 	private void initRecMenu(AVActionType actionType, double lat, double lon) {
 		if (mapActivity != null) {
-			currentRecording = new CurrentRecording(actionType);
+			if (pendingAttachedRecording != null && pendingAttachedRecording.getType() == actionType) {
+				currentRecording = pendingAttachedRecording;
+			} else {
+				currentRecording = new CurrentRecording(actionType);
+			}
+			pendingAttachedRecording = null;
 			if (actionType == AVActionType.REC_PHOTO) {
 				recordingMenu = new AudioVideoNoteRecordingMenuFullScreen(this, lat, lon);
 			} else {
@@ -518,7 +580,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			boolean forceExternal) {
 		if (ActivityCompat.checkSelfPermission(mapActivity, Manifest.permission.CAMERA) == PERMISSION_GRANTED
 				&& ActivityCompat.checkSelfPermission(mapActivity, RECORD_AUDIO) == PERMISSION_GRANTED) {
-			if (AV_EXTERNAL_RECORDER.get() || forceExternal) {
+			if (!isAttachedMediaRecording() && (AV_EXTERNAL_RECORDER.get() || forceExternal)) {
 				captureVideoExternal(lat, lon, mapActivity);
 			} else {
 				cameraRecorder.openCamera();
@@ -573,10 +635,10 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					return;
 				}
 
-				File f = mediaCaptureHelper.createVideoFile(lat, lon);
+				File f = getOutputFile(lat, lon, MPEG4_EXTENSION);
 				cameraRecorder.configureVideoRecorder(mr, p, f, CameraRecorder.getDisplayRotation(mapActivity));
 				try {
-					if (recordingsFileHelper.AV_RECORDER_SPLIT.get()) {
+					if (!isAttachedMediaRecording() && recordingsFileHelper.AV_RECORDER_SPLIT.get()) {
 						cleanupRecordingSpace(p);
 					}
 					runMediaRecorder(mapActivity, mr, f);
@@ -632,7 +694,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				log.error(e.getMessage(), e);
 			}
 			if (save) {
-				indexRecordingFile(mediaRecFile, notifyOnSaved);
+				if (isAttachedMediaRecording()) {
+					notifyAttachedMediaCaptured(mediaRecFile);
+				} else {
+					indexRecordingFile(mediaRecFile, notifyOnSaved);
+				}
 			} else {
 				cancelPendingRecordingListeners();
 				finishRecording();
@@ -649,7 +715,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			try {
 				audioRecorder.muteStreamMusicAndOutputGuidance();
 
-				File file = mediaCaptureHelper.createAudioFile(lat, lon);
+				File file = getOutputFile(lat, lon, THREEGP_EXTENSION);
 				MediaRecorder recorder = audioRecorder.createRecorder(file);
 				runMediaRecorder(activity, recorder, file);
 			} catch (Exception e) {
@@ -692,7 +758,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	private void takePhotoWithCamera(double lat, double lon, MapActivity mapActivity) {
 		try {
-			lastTakingPhoto = mediaCaptureHelper.createPhotoFile(lat, lon);
+			lastTakingPhoto = getOutputFile(lat, lon, IMG_EXTENSION);
 			Parameters parameters = cameraRecorder.getCamera().getParameters();
 			Camera.Size selectedCamPicSize = cameraRecorder.resolvePictureSize(parameters);
 			Camera.Size mPreviewSize = cameraRecorder.getOptimalPreviewSize(selectedCamPicSize.width, selectedCamPicSize.height);
@@ -784,7 +850,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	public void takePhotoExternal(double lat, double lon, MapActivity mapActivity) {
-		File f = mediaCaptureHelper.createPhotoFile(lat, lon);
+		File f = getOutputFile(lat, lon, IMG_EXTENSION);
 		lastTakingPhoto = f;
 		Intent takePictureIntent = mediaCaptureHelper.createPhotoCaptureIntent(mapActivity, f);
 		try {
@@ -809,6 +875,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	public boolean restartRecording(@NonNull MapActivity mapActivity) {
+		if (isAttachedMediaRecording()) {
+			return false;
+		}
 		AVActionType type = getCurrentRecordingType();
 
 		// Stop media recording and save previously recorded data
@@ -875,9 +944,10 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	public void stopRecording(@NonNull MapActivity mapActivity, boolean save, boolean notifyOnSaved) {
 		if (!recordingDone) {
+			boolean attachedMediaRecording = isAttachedMediaRecording();
 			recordingDone = true;
 			stopMediaRecording(save, notifyOnSaved);
-			if (save) {
+			if (save && !attachedMediaRecording) {
 				SHOW_RECORDINGS.set(true);
 				mapActivity.refreshMap();
 			}
@@ -951,6 +1021,33 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		for (RecordingsListener listener : listeners) {
 			listener.onRecordingsCancelled();
 		}
+		cancelAttachedMediaRecording();
+	}
+
+	private void notifyAttachedMediaCaptured(@Nullable File file) {
+		CurrentRecording attachedRecording = getAttachedMediaRecording();
+		clearAttachedMediaRecording();
+		finishRecording();
+		CallbackWithObject<File> callback = attachedRecording != null ? attachedRecording.getResultCallback() : null;
+		if (callback != null && file != null && file.exists() && file.length() > 0) {
+			callback.processResult(file);
+		} else if (callback != null) {
+			callback.processResult(null);
+		}
+	}
+
+	private void cancelAttachedMediaRecording() {
+		CurrentRecording attachedRecording = getAttachedMediaRecording();
+		clearAttachedMediaRecording();
+		CallbackWithObject<File> callback = attachedRecording != null ? attachedRecording.getResultCallback() : null;
+		if (callback != null) {
+			finishRecording();
+			callback.processResult(null);
+		}
+	}
+
+	private void clearAttachedMediaRecording() {
+		pendingAttachedRecording = null;
 	}
 
 	private void indexRecordingFile(@NonNull File file, boolean notifyOnSaved) {
@@ -972,6 +1069,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			}
 			return;
 		}
+		new MediaStorageHelper(app).scanMediaFile(file);
 		boolean updateMenu = false;
 		if (isRecording()) {
 			AVActionType type = currentRecording.getType();
@@ -1036,7 +1134,13 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public void onMapActivityExternalResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == 205 || requestCode == 105) {
 			if (lastTakingPhoto != null && lastTakingPhoto.exists()) {
-				indexRecordingFile(lastTakingPhoto, true);
+				if (isAttachedMediaRecording()) {
+					notifyAttachedMediaCaptured(lastTakingPhoto);
+				} else {
+					indexRecordingFile(lastTakingPhoto, true);
+				}
+			} else if (isAttachedMediaRecording()) {
+				cancelPendingRecordingListeners();
 			} else {
 				Set<String> indexedFiles = getIndexedRecordingFileNames();
 				recordingsFileHelper.indexingFiles(true, true);
@@ -1115,27 +1219,31 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public void handleRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
 		runAction = -1;
 		if (requestCode == CAMERA_FOR_VIDEO_REQUEST_CODE) {
-			if (grantResults[0] == PERMISSION_GRANTED && grantResults[1] == PERMISSION_GRANTED) {
+			if (isPermissionGranted(grantResults, 0) && isPermissionGranted(grantResults, 1)) {
 				runAction = AV_DEFAULT_ACTION_VIDEO;
 			} else {
 				cancelPendingRecordingListeners();
 				app.showToastMessage(R.string.no_camera_permission);
 			}
 		} else if (requestCode == CAMERA_FOR_PHOTO_REQUEST_CODE) {
-			if (grantResults[0] == PERMISSION_GRANTED) {
+			if (isPermissionGranted(grantResults, 0)) {
 				runAction = AV_DEFAULT_ACTION_PHOTO;
 			} else {
 				cancelPendingRecordingListeners();
 				app.showToastMessage(R.string.no_camera_permission);
 			}
 		} else if (requestCode == AUDIO_REQUEST_CODE) {
-			if (grantResults[0] == PERMISSION_GRANTED) {
+			if (isPermissionGranted(grantResults, 0)) {
 				runAction = AV_DEFAULT_ACTION_AUDIO;
 			} else {
 				cancelPendingRecordingListeners();
 				app.showToastMessage(R.string.no_microphone_permission);
 			}
 		}
+	}
+
+	private boolean isPermissionGranted(@NonNull int[] grantResults, int index) {
+		return grantResults.length > index && grantResults[index] == PERMISSION_GRANTED;
 	}
 
 	public class JpegPhotoHandler implements PictureCallback {
@@ -1200,12 +1308,17 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public synchronized void finishPhotoRecording(boolean cancel) {
 		cancelPhotoTimer();
 		if (photoJpegData != null && photoJpegData.length > 0 && lastTakingPhoto != null) {
+			boolean attachedMediaRecording = isAttachedMediaRecording();
 			try {
 				if (!cancel) {
 					FileOutputStream fos = new FileOutputStream(lastTakingPhoto);
 					fos.write(photoJpegData);
 					fos.close();
-					indexRecordingFile(lastTakingPhoto, true);
+					if (attachedMediaRecording) {
+						notifyAttachedMediaCaptured(lastTakingPhoto);
+					} else {
+						indexRecordingFile(lastTakingPhoto, true);
+					}
 				}
 			} catch (Exception error) {
 				cancelPendingRecordingListeners();
@@ -1213,7 +1326,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			} finally {
 				photoJpegData = null;
 				closeRecordingMenu();
-				if (!cancel) {
+				if (!cancel && !attachedMediaRecording) {
 					finishRecording();
 				}
 			}

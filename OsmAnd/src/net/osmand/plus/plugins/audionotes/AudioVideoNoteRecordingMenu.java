@@ -198,7 +198,8 @@ public class AudioVideoNoteRecordingMenu {
 		CurrentRecording recording = plugin.getCurrentRecording();
 		RecordingsFileHelper fileHelper = plugin.getRecordingsFileHelper();
 
-		if (recording != null && recording.getType() == REC_VIDEO && fileHelper.AV_RECORDER_SPLIT.get()) {
+		if (recording != null && recording.getType() == REC_VIDEO
+				&& !recording.isAttachedMediaRecording() && fileHelper.AV_RECORDER_SPLIT.get()) {
 			int clipLength = fileHelper.AV_RS_CLIP_LENGTH.get() * 60;
 			int duration = (int) ((System.currentTimeMillis() - startTime) / 1000);
 			restart = duration >= clipLength;
