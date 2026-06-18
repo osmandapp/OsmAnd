@@ -77,9 +77,41 @@ class MediaProvider(context: Context) {
 			return null
 		}
 		return if (item is MediaItem.Internal) {
-			Uri.fromFile(File(appDir.absolutePath(), item.relativePath)).toString()
+			Uri.fromFile(resolveInternalMediaFile(appDir.absolutePath(), item.relativePath)).toString()
 		} else {
 			uri
+		}
+	}
+
+	companion object {
+
+		private const val INTERNAL_MEDIA_DIR = "avnotes"
+
+		@JvmStatic
+		fun getInternalMediaDir(appBaseDir: String): File {
+			return File(appBaseDir, INTERNAL_MEDIA_DIR)
+		}
+
+		@JvmStatic
+		fun getInternalMediaRelativePath(internalPath: String?): String? {
+			val fileName = LinkMediaFactory.getInternalMediaFileName(internalPath) ?: return null
+			return "$INTERNAL_MEDIA_DIR/$fileName"
+		}
+
+		/**
+		 * Resolves an internal media link path (`osmand://media/<name>`) to a physical file: the
+		 * canonical media folder first, with a literal fallback so legacy links still resolve.
+		 */
+		@JvmStatic
+		fun resolveInternalMediaFile(appBaseDir: String, internalPath: String): File {
+			val relativePath = getInternalMediaRelativePath(internalPath)
+			if (relativePath != null) {
+				val file = File(appBaseDir, relativePath)
+				if (file.exists()) {
+					return file
+				}
+			}
+			return File(appBaseDir, internalPath)
 		}
 	}
 }

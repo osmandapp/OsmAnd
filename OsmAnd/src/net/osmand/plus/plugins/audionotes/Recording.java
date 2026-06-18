@@ -1,8 +1,8 @@
 package net.osmand.plus.plugins.audionotes;
 
-import static net.osmand.plus.plugins.audionotes.RecordingsFileHelper.IMG_EXTENSION;
-import static net.osmand.plus.plugins.audionotes.RecordingsFileHelper.MPEG4_EXTENSION;
-import static net.osmand.plus.plugins.audionotes.RecordingsFileHelper.THREEGP_EXTENSION;
+import static net.osmand.shared.media.MediaFileNameFormat.IMG_EXTENSION;
+import static net.osmand.shared.media.MediaFileNameFormat.MPEG4_EXTENSION;
+import static net.osmand.shared.media.MediaFileNameFormat.THREEGP_EXTENSION;
 
 import android.content.Context;
 import android.media.MediaPlayer;
@@ -16,7 +16,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.media.MediaFileUtils;
+import net.osmand.plus.media.MediaCaptureHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
@@ -123,7 +123,7 @@ public class Recording {
 		lat = latLon.getLatitude();
 		lon = latLon.getLongitude();
 		if (directory != null) {
-			File to = MediaFileUtils.getBaseFileName(lat, lon, directory, Algorithms.getFileExtension(file));
+			File to = MediaCaptureHelper.getBaseFileName(lat, lon, directory, Algorithms.getFileExtension(file));
 			if (file.renameTo(to)) {
 				file = to;
 				return true;

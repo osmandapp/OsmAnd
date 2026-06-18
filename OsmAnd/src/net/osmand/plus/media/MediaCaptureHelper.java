@@ -1,5 +1,9 @@
 package net.osmand.plus.media;
 
+import static net.osmand.shared.media.MediaFileNameFormat.IMG_EXTENSION;
+import static net.osmand.shared.media.MediaFileNameFormat.MPEG4_EXTENSION;
+import static net.osmand.shared.media.MediaFileNameFormat.THREEGP_EXTENSION;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -9,6 +13,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.shared.media.MediaFileNameFormat;
 
 import java.io.File;
 
@@ -42,17 +47,24 @@ public class MediaCaptureHelper {
 
 	@NonNull
 	public File createAudioFile(double lat, double lon) {
-		return MediaFileUtils.getBaseFileName(lat, lon, targetDir, MediaFileUtils.THREEGP_EXTENSION);
+		return getBaseFileName(lat, lon, targetDir, THREEGP_EXTENSION);
 	}
 
 	@NonNull
 	public File createPhotoFile(double lat, double lon) {
-		return MediaFileUtils.getBaseFileName(lat, lon, targetDir, MediaFileUtils.IMG_EXTENSION);
+		return getBaseFileName(lat, lon, targetDir, IMG_EXTENSION);
 	}
 
 	@NonNull
 	public File createVideoFile(double lat, double lon) {
-		return MediaFileUtils.getBaseFileName(lat, lon, targetDir, MediaFileUtils.MPEG4_EXTENSION);
+		return getBaseFileName(lat, lon, targetDir, MPEG4_EXTENSION);
+	}
+
+	@NonNull
+	public static File getBaseFileName(double lat, double lon, @NonNull File dir, @NonNull String ext) {
+		dir.mkdirs();
+		String fileName = MediaFileNameFormat.createUniqueMediaFileName(lat, lon, ext, name -> new File(dir, name).exists());
+		return new File(dir, fileName);
 	}
 
 	@NonNull

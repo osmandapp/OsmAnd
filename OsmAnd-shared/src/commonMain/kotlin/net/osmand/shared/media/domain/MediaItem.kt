@@ -1,5 +1,7 @@
 package net.osmand.shared.media.domain
 
+import kotlin.jvm.JvmStatic
+
 enum class MediaOrigin(
 	val titleKey: String? = null,
 	val iconName: String? = null
@@ -15,6 +17,7 @@ enum class MediaType {
 	PHOTO, VIDEO, AUDIO, UNKNOWN;
 
 	companion object {
+		@JvmStatic
 		fun fromMimeType(mimeType: String?): MediaType {
 			val normalized = mimeType?.trim()?.lowercase() ?: return UNKNOWN
 			return when {
@@ -22,6 +25,54 @@ enum class MediaType {
 				normalized.startsWith("video/") -> VIDEO
 				normalized.startsWith("audio/") -> AUDIO
 				else -> UNKNOWN
+			}
+		}
+
+		@JvmStatic
+		fun fromFileName(fileName: String?): MediaType {
+			return fromExtension(getExtension(fileName))
+		}
+
+		@JvmStatic
+		fun fromExtension(extension: String?): MediaType {
+			return when (normalizeExtension(extension)) {
+				"jpg", "jpeg", "png", "gif", "webp", "bmp", "heic", "heif", "svg" -> PHOTO
+				"mp4", "m4v", "mov", "avi", "mkv", "webm" -> VIDEO
+				"3gp", "3gpp", "mp3", "m4a", "aac", "wav", "ogg", "oga", "opus", "amr" -> AUDIO
+				else -> UNKNOWN
+			}
+		}
+
+		@JvmStatic
+		fun isSupportedExtension(extension: String?): Boolean {
+			return fromExtension(extension) != UNKNOWN
+		}
+
+		private fun normalizeExtension(extension: String?): String? {
+			val value = extension?.trim()?.substringAfterLast('.')?.lowercase()
+			return value?.takeIf { it.isNotEmpty() }
+		}
+
+		private fun getExtension(uri: String?): String? {
+			uri ?: return null
+			var end = uri.length
+			val queryIndex = uri.indexOf('?')
+			val fragmentIndex = uri.indexOf('#')
+			if (queryIndex >= 0) {
+				end = queryIndex
+			}
+			if (fragmentIndex in 0..<end) {
+				end = fragmentIndex
+			}
+			if (end == 0) {
+				return null
+			}
+			val slashIndex = uri.lastIndexOf('/', end - 1)
+			val dotIndex = uri.lastIndexOf('.', end - 1)
+			return if (dotIndex > slashIndex && dotIndex + 1 < end) {
+				uri.substring(dotIndex + 1, end)
+			} else {
+				null
 			}
 		}
 	}

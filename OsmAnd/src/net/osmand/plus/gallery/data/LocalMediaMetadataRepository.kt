@@ -10,6 +10,7 @@ import android.provider.OpenableColumns
 import android.util.LruCache
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.utils.AndroidUtils
+import net.osmand.shared.media.MediaProvider
 import net.osmand.shared.media.domain.MediaItem
 import net.osmand.shared.media.domain.MediaType
 import java.io.File
@@ -139,7 +140,7 @@ class LocalMediaMetadataRepository(
 
 	private fun resolveFile(item: MediaItem): File? {
 		val file = when (item) {
-			is MediaItem.Internal -> app.getAppPath(item.relativePath)
+			is MediaItem.Internal -> MediaProvider.resolveInternalMediaFile(app.getAppPath().absolutePath, item.relativePath)
 			is MediaItem.Gallery -> fileFromUriString(item.uri)
 			else -> null
 		}

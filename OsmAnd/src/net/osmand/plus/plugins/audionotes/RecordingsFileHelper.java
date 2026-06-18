@@ -1,6 +1,9 @@
 package net.osmand.plus.plugins.audionotes;
 
 import static net.osmand.IndexConstants.AV_INDEX_DIR;
+import static net.osmand.shared.media.MediaFileNameFormat.IMG_EXTENSION;
+import static net.osmand.shared.media.MediaFileNameFormat.MPEG4_EXTENSION;
+import static net.osmand.shared.media.MediaFileNameFormat.THREEGP_EXTENSION;
 
 import android.media.CamcorderProfile;
 
@@ -11,7 +14,6 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.DataTileManager;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.media.MediaFileUtils;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -39,9 +41,6 @@ public class RecordingsFileHelper {
 
 	public static final int CLIP_LENGTH_DEFAULT = 5;
 	public static final int STORAGE_SIZE_DEFAULT = 5;
-	public static final String IMG_EXTENSION = MediaFileUtils.IMG_EXTENSION;
-	public static final String MPEG4_EXTENSION = MediaFileUtils.MPEG4_EXTENSION;
-	public static final String THREEGP_EXTENSION = MediaFileUtils.THREEGP_EXTENSION;
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
