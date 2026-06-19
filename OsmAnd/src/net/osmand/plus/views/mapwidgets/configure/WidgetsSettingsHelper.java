@@ -86,7 +86,7 @@ public class WidgetsSettingsHelper {
 
 	public void copyConfigureScreenSettings(@NonNull ApplicationMode fromAppMode) {
 		for (WidgetsPanel panel : WidgetsPanel.values()) {
-			copyWidgetsForPanel(fromAppMode, null, panel);
+			copyWidgetsForPanel(fromAppMode, getLayoutModeForProfileCopy(layoutMode), panel);
 		}
 		copyPrefFromAppMode(settings.getPanelsLayoutMode(mapActivity, layoutMode), fromAppMode);
 		copyPrefFromAppMode(settings.getTransparentMapThemePreference(layoutMode), fromAppMode);
@@ -100,6 +100,11 @@ public class WidgetsSettingsHelper {
 		copyPrefFromAppMode(mapButtonsHelper.getDefaultOpacityPref(), fromAppMode);
 		copyPrefFromAppMode(mapButtonsHelper.getDefaultCornerRadiusPref(), fromAppMode);
 		mapButtonsHelper.copyButtonStatesFromMode(appMode, fromAppMode, mapButtonsHelper.getAllButtonsStates());
+	}
+
+	@Nullable
+	static ScreenLayoutMode getLayoutModeForProfileCopy(@Nullable ScreenLayoutMode layoutMode) {
+		return layoutMode;
 	}
 
 	public void copyWidgetsForPanel(@NonNull ApplicationMode fromAppMode,
