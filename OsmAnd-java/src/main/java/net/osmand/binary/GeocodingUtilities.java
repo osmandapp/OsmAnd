@@ -233,12 +233,11 @@ public class GeocodingUtilities {
 		}
 
 		// Strip dashes before split to match "NC 42" == "NC-42"
-		// Not needed as splits
-//		String undashed1 = s1.replace("-", " ");
-//		String undashed2 = s2.replace("-", " ");
+		String undashed1 = s1.replace("-", " ");
+		String undashed2 = s2.replace("-", " ");
 
-		List<String> s1words = prepareStreetName(s1, false);
-		List<String> s2words = prepareStreetName(s2, false);
+		List<String> s1words = prepareStreetName(undashed1, false);
+		List<String> s2words = prepareStreetName(undashed2, false);
 		s1words.sort(Collator.getInstance());
 		s2words.sort(Collator.getInstance());
 		if (!s1words.isEmpty() && s1words.equals(s2words)) {
@@ -246,8 +245,8 @@ public class GeocodingUtilities {
 		}
 
 		if (matchWithCommonWords) {
-			s1words = prepareStreetName(s1, true);
-			s2words = prepareStreetName(s2, true);
+			s1words = prepareStreetName(undashed1, true);
+			s2words = prepareStreetName(undashed2, true);
 			s1words.sort(Collator.getInstance());
 			s2words.sort(Collator.getInstance());
 			return !s1words.isEmpty() && s1words.equals(s2words);
