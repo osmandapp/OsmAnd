@@ -15,6 +15,7 @@ import net.osmand.binary.OsmandOdb.AddressNameIndexDataAtom;
 import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom;
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
+import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtomXY;
@@ -29,8 +30,8 @@ public class SpatialSearchContext {
 	private static int SHIFT_POI_IND = 10; // maximum poi 1024
 
 	final List<BinaryMapIndexReader> files;
-
 	final List<SpatialSearchFileCache> internalFile = new ArrayList<>();
+	final LatLon location; // could be null
 
 	SpatialSearchStats stats = new SpatialSearchStats();
 
@@ -54,8 +55,13 @@ public class SpatialSearchContext {
 		}
 	}
 
-	public SpatialSearchContext(List<BinaryMapIndexReader> files) {
+	public SpatialSearchContext(List<BinaryMapIndexReader> files, LatLon location) {
 		this.files = files;
+		this.location = location;
+	}
+	
+	public LatLon getLocation() {
+		return location;
 	}
 
 	public void initFiles(SpatialSearchGlobalCache cache) {
@@ -251,7 +257,7 @@ public class SpatialSearchContext {
 		}
 
 		long tm = System.nanoTime();
-		List<Amenity> lst = files.get(c.fileInd).readAmenityBlock(nameIndex.poiRegion, shift);
+		List<Amenity> lst = files.get(c.fileInd).readAmenityBlock(nameIndex.poiRegion, shift, poiInd);
 		if (cache != null) {
 			long ofirstid = oid - (poiInd << SHIFT_FILE_IND);
 			for (int i = 0; i < lst.size(); i++) {
@@ -316,7 +322,6 @@ public class SpatialSearchContext {
 		String name = "";
 		int wInd = 0;
 		int type = a != null ? a.getType() : SpatialSearchToken.POI_TYPE;
-		
 		for (int i = 0; i < cnt; i++) {
 			int suffBit = a != null ? a.getSuffixesBitsetIndex(i) : b.getSuffixesBitsetIndex(i);
 			if (suffBit % 2 == 0) {
@@ -371,7 +376,7 @@ public class SpatialSearchContext {
 			NameIndexAtomXY coords, List<SpatialSearchToken> allTokens) {
 		List<SpatialSearchToken> otherTokens = null;
 		if (name.indexOf(' ') != -1) {
-			List<String> split = SearchAlgorithms.splitAndNormalize(name);
+			List<String> split = SearchAlgorithms.splitAndNormalize(name, false);
 			for (int k = 1; k < split.size(); k++) {
 				boolean matched = false;
 				for (SpatialSearchToken token : allTokens) {

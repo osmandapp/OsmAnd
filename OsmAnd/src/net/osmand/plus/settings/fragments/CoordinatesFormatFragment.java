@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -92,7 +93,7 @@ public class CoordinatesFormatFragment extends BaseCoordinateFormatFragment
 
 		TextView description = createText(R.string.coordinate_format_description, 16, 18, 16, 18);
 		description.setTextSize(16);
-		description.setTextColor(AndroidUtils.getColorFromAttr(requireContext(), android.R.attr.textColorPrimary));
+		description.setTextColor(AndroidUtils.getColorFromAttr(getMaterialThemedContext(), android.R.attr.textColorPrimary));
 		contentContainer.addView(description);
 
 		List<CoordinateFormat> formats = resolveFormats(formatPreferences.getPreferredIds(appMode));
@@ -113,7 +114,8 @@ public class CoordinatesFormatFragment extends BaseCoordinateFormatFragment
 	}
 
 	private TextView createText(int textRes, int start, int top, int end, int bottom) {
-		TextView text = new TextView(requireContext());
+		Context themedContext = getMaterialThemedContext();
+		TextView text = new TextView(themedContext);
 		text.setText(textRes);
 		text.setPadding(dp(start), dp(top), dp(end), dp(bottom));
 		text.setLayoutParams(new LinearLayout.LayoutParams(

@@ -41,11 +41,18 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 			}
 		}
 		tCount = tokens.length;
+		if (parent != null) {
+			calculateIntersection(token, parent);
+		}
 	}
 	
 	private void loadObjects(SpatialSearchContext ctx, int type, TLongObjectHashMap<MapObject> cache) throws IOException {
 		TLongObjectHashMap<Long> lstMap = new TLongObjectHashMap<>();
 		for (NameIndexAtom a : linearResults) {
+			if (a.object != null) {
+				cache.put(a.id, a.object);
+				continue;
+			}
 			if (a.type == type || (type == -2 && a.type != SpatialSearchToken.POI_TYPE
 					&& a.type != SpatialSearchToken.STREET_TYPE)) {
 				lstMap.put(a.id, a.parentid);
@@ -85,10 +92,6 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		return linearResults.get(combination * tokens.length + pos);
 	}
 	
-	public List<SpatialSearchResult> getResult() {
-		return finalResult;
-	}
-
 	public List<NameIndexAtom> getAtoms(int combination) {
 		if (finalResult != null) {
 			combination = finalResult.get(combination).parentInd;
@@ -108,13 +111,22 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 	public int getTokenCount() {
 		return tCount;
 	}
+	
+	public List<SpatialSearchResult> getFinalResult() {
+		return finalResult;
+	}
 
-	public List<SpatialSearchResult> sortResults(boolean deduplicate) {
+	public List<SpatialSearchResult> sortResults(SpatialSearchContext ctx, boolean deduplicate) {
 		finalResult = new ArrayList<>(tileIds.size());
 		for (int i = 0; i < tileIds.size(); i++) {
 			finalResult.add(new SpatialSearchResult(this, i));
 		}		
-		Collections.sort(finalResult);
+		finalResult = sortResults(ctx, finalResult, deduplicate);
+		return finalResult;
+	}
+
+	public List<SpatialSearchResult> sortResults(SpatialSearchContext ctx, List<SpatialSearchResult> finalResult, boolean deduplicate) {
+		Collections.sort(finalResult, (o1, o2) -> SpatialSearchResult.compare(o1, o2, ctx.location));
 		if (deduplicate) {
 			List<SpatialSearchResult> res = new ArrayList<SpatialSearchResult>();
 			TLongHashSet duplicateIds = new TLongHashSet();
@@ -130,10 +142,10 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		return finalResult;
 	}
 	
-	public void calculateIntersection(SpatialSearchToken token, SpatialSearchResultsList parent) {
+	private void calculateIntersection(SpatialSearchToken token, SpatialSearchResultsList parent) {
 		if (parent.getTokenCount() == 0) {
 			addResult(null, 0, token.atoms);
-		} else {
+		} else if (parent.getCombinations() > 0) {
 			// 1. iterate parent objects and find all objects from <parent>
 			//    that are fully inside object <token> or have same the same tile 
 			for (int i = 0; i < parent.tileIds.size(); i++) {
@@ -194,7 +206,8 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 	}
 
 	private boolean acceptIntersection(SpatialSearchResultsList parent, int pindx, NameIndexAtom a) {
-		// no cache for now
+		// 1. Precise intersection
+		// no cache for parent now needed
 		boolean intersect = true;
 		for (int i = 0; parent != null && i < parent.tCount; i++) {
 			NameIndexAtom pa = parent.linearResults.get(pindx * parent.tCount + i);
@@ -206,8 +219,25 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		if (!intersect) {
 			return false;
 		}
+		// 2. Duplicate words		
+		for (int i = 0; parent != null && i < parent.tCount; i++) {
+			NameIndexAtom pa = parent.linearResults.get(pindx * parent.tCount + i);
+			if (pa.id == a.id && tokens[0].word.equals(tokens[i + 1].word)) {
+				// NameIndexAtom supports "<word> <...> <word>" but it's not present in DATA now
+				int indexOf = a.name.indexOf(tokens[0].word, pindx);
+				if (indexOf != -1 && a.name.indexOf(tokens[0].word, indexOf + 1) >= 0) {
+					// duplicate name in object
+				} else {
+					return false;
+				}
+			}
+			if (!pa.coords.intersects(a.coords)) {
+				intersect = false;
+				break;
+			}
+		}
 		
-		// ignore multiple atomic objects intersections POI / Streets > 2!
+		// 3. ignore multiple atomic objects intersections POI / Streets > 2!
 		if (a.atomicObject()) {
 			// check limit atomic objects to add
 			List<Long> objects = new ArrayList<Long>(SpatialTextSearchSettings.LIMIT_ATOMIC_OBJECTS);
@@ -244,10 +274,10 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		for (SpatialSearchToken t : tokens) {
 			words.add(t.originalWord);
 		}
-		return String.format("Results list %d matched %s - %d (%d unique) results: %s", tCount, words,
-				getCombinations(),
-				finalResult == null ? -1 : finalResult.size(),
-				extended ? linearResults : Collections.EMPTY_LIST);
+		return String.format("Results %d tokens %,d%s - %s %s", tCount, getCombinations(),
+				finalResult == null ? "" : String.format(" (%,d unique)", finalResult.size()), 
+				words,
+				!extended ? "" : (" results: " + linearResults));
 	}
 	
 	

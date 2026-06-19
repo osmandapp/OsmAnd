@@ -53,6 +53,9 @@ public class QueryToken {
 			if (masks == null) {
 				return true;
 			}
+			if (maskIndex == 0) {
+				prevMask = 0;
+			}
 			boolean res = false;
 			// use only masks for first and after delimiter
 			if (prevMask == 0 && mask % 2 == 0 && masks.contains(mask / 2 - 1)) {
@@ -91,4 +94,9 @@ public class QueryToken {
             });
         }
     }
+
+	public boolean matchFullPrefix(String key) {
+		return CollatorStringMatcher.cmatches(collator, key, query, matcherMode);
+	}
+	
 }

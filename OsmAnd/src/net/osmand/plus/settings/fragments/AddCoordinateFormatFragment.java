@@ -20,6 +20,7 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StyleRes;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -42,7 +43,6 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
 
@@ -82,6 +82,12 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 	private int previousSoftInputMode = SOFT_INPUT_MODE_NOT_SET;
 
 	@Override
+	@StyleRes
+	protected int getDialogThemeId() {
+		return nightMode ? R.style.OsmandMaterialDarkTheme : R.style.OsmandMaterialLightTheme;
+	}
+
+	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		formatPreferences = settings.getCoordinateFormatSettingsStorage();
@@ -119,8 +125,7 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = LayoutInflater.from(getMaterialThemedContext())
-				.inflate(R.layout.coordinate_format_add_fragment, container, false);
+		View view = inflate(R.layout.coordinate_format_add_fragment, container, false);
 		contentContainer = view.findViewById(R.id.content_container);
 		setupToolbar(view);
 		setupSearch(view);
@@ -149,7 +154,7 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		updateStatusBarContentColor();
+		updateStatusBarAppearance(getContentView());
 		if (!addToEditDraft) {
 			excludedIds.clear();
 			excludedIds.addAll(formatPreferences.getPreferredIds(appMode));
@@ -187,13 +192,25 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 		return nightMode ? R.color.activity_background_color_dark : R.color.activity_background_color_light;
 	}
 
-	private void updateStatusBarContentColor() {
+	private void updateStatusBarAppearance(@Nullable View contentView) {
+		updateNightMode();
 		Dialog dialog = getDialog();
-		if (dialog != null && dialog.getWindow() != null) {
-			AndroidUiHelper.setStatusBarContentColor(dialog.getWindow().getDecorView(), nightMode);
+		Window window = dialog != null ? dialog.getWindow() : null;
+		if (window != null) {
+			AndroidUiHelper.setStatusBarColor(window, getColor(getStatusBarColorId()));
+			AndroidUiHelper.setStatusBarContentColor(window.getDecorView(), nightMode);
 		} else {
-			AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
+			Activity activity = getActivity();
+			if (activity != null) {
+				AndroidUiHelper.setStatusBarColor(activity, getColor(getStatusBarColorId()));
+			}
+			AndroidUiHelper.setStatusBarContentColor(contentView, nightMode);
 		}
+	}
+
+	@Nullable
+	private View getContentView() {
+		return searchInputView != null && searchInputView.isShowing() ? searchInputView : getView();
 	}
 
 	private void setupToolbar(@NonNull View view) {
@@ -240,11 +257,11 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 		}
 		searchInputView.addTransitionListener((searchView, previousState, newState) -> {
 			if (newState == SearchView.TransitionState.SHOWN) {
-				AndroidUiHelper.setStatusBarContentColor(searchView, nightMode);
+				updateStatusBarAppearance(searchView);
 				applySearchSoftInputMode();
 				searchInputView.getEditText().setSelection(searchInputView.getEditText().length());
 			} else if (newState == SearchView.TransitionState.HIDDEN) {
-				AndroidUiHelper.setStatusBarContentColor(searchView, nightMode);
+				updateStatusBarAppearance(getView());
 				restoreSearchSoftInputMode();
 			}
 		});
@@ -274,8 +291,7 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 	}
 
 	private View createInfoCard() {
-		return LayoutInflater.from(getMaterialThemedContext())
-				.inflate(R.layout.coordinate_format_add_info_card, contentContainer, false);
+		return inflate(R.layout.coordinate_format_add_info_card, contentContainer, false);
 	}
 
 	@Nullable
@@ -395,12 +411,6 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 		previousSoftInputMode = SOFT_INPUT_MODE_NOT_SET;
 	}
 
-	@NonNull
-	private Context getMaterialThemedContext() {
-		return UiUtilities.getThemedContext(requireContext(), nightMode,
-				R.style.OsmandMaterialLightTheme, R.style.OsmandMaterialDarkTheme);
-	}
-
 	private int dp(float value) {
 		return AndroidUtils.dpToPx(app, value);
 	}
@@ -412,12 +422,13 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 
 	@NonNull
 	private MaterialCardView createCard(int marginStart, int marginTop, int marginEnd, int marginBottom) {
-		MaterialCardView card = new MaterialCardView(getMaterialThemedContext());
+		Context themedContext = getThemedContext();
+		MaterialCardView card = new MaterialCardView(themedContext);
 		card.setCardElevation(0);
 		card.setRadius(dp(12));
 		card.setStrokeWidth(0);
 		card.setUseCompatPadding(false);
-		card.setCardBackgroundColor(AndroidUtils.getColorFromAttr(requireContext(), R.attr.list_background_color));
+		card.setCardBackgroundColor(AndroidUtils.getColorFromAttr(themedContext, R.attr.list_background_color));
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
 				ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		params.setMargins(dp(marginStart), dp(marginTop), dp(marginEnd), dp(marginBottom));
@@ -427,7 +438,7 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 
 	@NonNull
 	private LinearLayout createVerticalContainer() {
-		LinearLayout layout = new LinearLayout(requireContext());
+		LinearLayout layout = new LinearLayout(getThemedContext());
 		layout.setOrientation(LinearLayout.VERTICAL);
 		layout.setLayoutParams(new LinearLayout.LayoutParams(
 				ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -436,9 +447,10 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 
 	@NonNull
 	private TextView createTitleText(@NonNull String text) {
-		TextView textView = new TextView(requireContext());
+		Context themedContext = getThemedContext();
+		TextView textView = new TextView(themedContext);
 		textView.setText(text);
-		textView.setTextColor(AndroidUtils.getColorFromAttr(requireContext(), android.R.attr.textColorPrimary));
+		textView.setTextColor(AndroidUtils.getColorFromAttr(themedContext, android.R.attr.textColorPrimary));
 		textView.setTextSize(16);
 		textView.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
 		return textView;

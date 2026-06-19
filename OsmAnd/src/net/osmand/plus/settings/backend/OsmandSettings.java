@@ -1672,6 +1672,8 @@ public class OsmandSettings {
 
 	public static boolean IGNORE_MISSING_MAPS = false;
 	public static boolean STOP_ON_MISSING_MAPS = false;
+	public final CommonPreference<RouteCalculationMethod> ROUTE_CALCULATION_METHOD = new EnumStringPreference<>(this,
+			"route_calculation_method", RouteCalculationMethod.AUTO, RouteCalculationMethod.values()).makeProfile().cache();
 	public final CommonPreference<RoutingType> ROUTING_TYPE = new EnumStringPreference<>(this, "routing_method", HH_CPP, RoutingType.values()).makeProfile().cache();
 	public final CommonPreference<ApproximationType> APPROXIMATION_TYPE = new EnumStringPreference<>(this, "approximation_method_r49_default", APPROX_GEO_CPP, ApproximationType.values()).makeProfile().cache();
 

@@ -6102,4 +6102,12 @@
     <string name="gallery_sort_oldest_first">De la plus ancienne à la plus récente</string>
     <string name="gallery_sort_duration_long_short">Par ordre décroissant de durée</string>
     <string name="gallery_sort_duration_short_long">Par ordre croissant de durée</string>
+    <string name="tracks_backup_promo_button">Obtenir OsmAnd Pro</string>
+    <string name="free_download_limit_reached">Limite atteinte pour le nombre de téléchargements gratuits</string>
+    <string name="free_download_limit_reached_description">Débloquer le téléchargement illimité de cartes et de mises à jour</string>
+    <string name="get_unlimited_downloads">Téléchargez sans limite</string>
+    <string name="tracks_backup_promo_description">Synchronisez vos traces entre vos appareils et sur le web avec OsmAnd Pro.</string>
+    <string name="tracks_backup_promo_title">Synchronisez et restaurez vos traces</string>
+    <string name="show_discount_bottom_sheet">Afficher la feuille inférieure de réduction</string>
+    <string name="show_discount_bottom_sheet_description">Afficher la fiche de fond relative à la remise avec une réponse de développement personnalisée.</string>
 </resources>

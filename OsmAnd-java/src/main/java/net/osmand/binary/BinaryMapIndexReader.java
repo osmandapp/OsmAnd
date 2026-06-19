@@ -10,19 +10,20 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.io.Reader;
-import java.util.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.PriorityQueue;
 import java.util.Set;
-import java.util.Map.Entry;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,7 +31,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import net.osmand.*;
 import org.apache.commons.logging.Log;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -49,7 +49,15 @@ import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.hash.TIntHashSet;
+import net.osmand.Collator;
+import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
+import net.osmand.IndexConstants;
+import net.osmand.Location;
+import net.osmand.OsmAndCollator;
+import net.osmand.PlatformUtil;
+import net.osmand.ResultMatcher;
+import net.osmand.StringMatcher;
 import net.osmand.binary.BinaryHHRouteReaderAdapter.HHRouteRegion;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CitiesBlock;
@@ -84,7 +92,6 @@ import net.osmand.router.HHRouteDataStructure.HHRoutingContext;
 import net.osmand.router.HHRouteDataStructure.NetworkDBPoint;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import net.osmand.util.UnicodeDiacritics;
 
 public class BinaryMapIndexReader {
 
@@ -760,14 +767,14 @@ public class BinaryMapIndexReader {
 	}
 	
 	
-	public List<Amenity> readAmenityBlock(PoiRegion pr, long offset) throws IOException {
+	public List<Amenity> readAmenityBlock(PoiRegion pr, long offset, int index) throws IOException {
 		poiAdapter.initCategories(pr);
 		codedIS.seek(pr.filePointer + offset);
 		long len = readInt(); 
 		long oldLim = codedIS.pushLimitLong((long) len);
 		SearchRequest<Amenity> sr = new SearchRequest<Amenity>();
 		poiAdapter.readPoiData(0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, 
-				sr, pr, null, 0);
+				sr, pr, index, null, 0);
 		codedIS.popLimit(oldLim);
 		return sr.getSearchResults();
 	}
@@ -1107,14 +1114,14 @@ public class BinaryMapIndexReader {
 				return;
 			case MapDataBlock.BASEID_FIELD_NUMBER:
 				baseId = codedIS.readUInt64();
-				if(READ_STATS) {
+				if (READ_STATS) {
 					req.stat.addBlockHeader(MapDataBlock.BASEID_FIELD_NUMBER, 0);
 				}
 				break;
 			case MapDataBlock.DATAOBJECTS_FIELD_NUMBER:
 				int length = codedIS.readRawVarint32();
 				long oldLimit = codedIS.pushLimitLong((long) length);
-				if(READ_STATS) {
+				if (READ_STATS) {
 					req.stat.lastObjectSize += length;
 					req.stat.addBlockHeader(MapDataBlock.DATAOBJECTS_FIELD_NUMBER, length);
 				}
@@ -2445,7 +2452,7 @@ public class BinaryMapIndexReader {
 
 	public static void main(String[] args) throws IOException {
 		File fl = new File(System.getProperty("maps") + "/Synthetic_test_rendering.obf");
-		fl = new File(System.getProperty("maps") +"/Ukraine_kharkiv_europe_2.obf");
+		fl = new File(System.getProperty("maps") +"/Ukraine_kyiv_europe_2.obf");
 		
 		RandomAccessFile raf = new RandomAccessFile(fl, "r");
 		SearchStat stat = new SearchStat();
@@ -2473,7 +2480,7 @@ public class BinaryMapIndexReader {
 			PoiRegion poiRegion = reader.getPoiIndexes().get(0);
 			if (testPoiSearch) {
 				testPoiSearch(reader, poiRegion, stat);
-				testPoiSearchByName(reader, "вулиця", 0, 0, stat);
+				testPoiSearchByName(reader, "shell", 0, 0, stat);
 			}
 			if (testPoiSearchOnPath) {
 				testSearchOnthePath(reader, stat);

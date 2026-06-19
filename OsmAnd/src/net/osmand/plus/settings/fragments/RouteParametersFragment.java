@@ -53,9 +53,11 @@ import net.osmand.plus.settings.bottomsheets.ElevationDateBottomSheet;
 import net.osmand.plus.settings.bottomsheets.GoodsRestrictionsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.HazmatCategoryBottomSheet;
 import net.osmand.plus.settings.bottomsheets.RecalculateRouteInDeviationBottomSheet;
+import net.osmand.plus.settings.bottomsheets.RouteCalculationMethodBottomSheet;
 import net.osmand.plus.settings.controllers.ViaFerrataDialogController;
 import net.osmand.plus.settings.enums.ApproximationType;
 import net.osmand.plus.settings.enums.DrivingRegion;
+import net.osmand.plus.settings.enums.RouteCalculationMethod;
 import net.osmand.plus.settings.enums.RoutingType;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.preferences.ListParameters;
@@ -227,6 +229,10 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 			getPreferenceScreen().addPreference(straightAngle);
 		}
 
+		if (shouldShowRouteCalculationMethod(am)) {
+			setupRouteCalculationMethodPref(screen);
+		}
+
 		addDividerPref();
 		setupRouteRecalcHeader(screen);
 		setupSelectRouteRecalcDistance(screen);
@@ -315,6 +321,29 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 			}
 		}
 		setupTimeConditionalRoutingPref();
+	}
+
+	private boolean shouldShowRouteCalculationMethod(@NonNull ApplicationMode mode) {
+		return mode.getRouteService() == RouteService.OSMAND
+				&& (mode.isDerivedRoutingFrom(ApplicationMode.CAR)
+				|| mode.isDerivedRoutingFrom(ApplicationMode.BICYCLE));
+	}
+
+	private void setupRouteCalculationMethodPref(@NonNull PreferenceScreen screen) {
+		RouteCalculationMethod[] methods = RouteCalculationMethod.values();
+		String[] names = new String[methods.length];
+		Integer[] values = new Integer[methods.length];
+
+		for (int i = 0; i < names.length; i++) {
+			RouteCalculationMethod method = methods[i];
+			values[i] = method.ordinal();
+			names[i] = method.toHumanString(app);
+		}
+
+		ListPreferenceEx preference = createListPreferenceEx(settings.ROUTE_CALCULATION_METHOD.getId(), names,
+				values, R.string.route_calculation_method, R.layout.preference_with_descr);
+		preference.setIcon(getPersistentPrefIcon(R.drawable.ic_action_route_direct));
+		screen.addPreference(preference);
 	}
 
 	public static Preference createRoutingParameterPref(@NonNull Context ctx,
@@ -586,6 +615,10 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		} else if (AVOID_ROUTING_PARAMETER_PREFIX.equals(prefId)) {
 			if (manager != null) {
 				AvoidRoadsPreferencesBottomSheet.showInstance(manager, prefId, this, appMode, false, isProfileDependent());
+			}
+		} else if (settings.ROUTE_CALCULATION_METHOD.getId().equals(prefId)) {
+			if (manager != null) {
+				RouteCalculationMethodBottomSheet.showInstance(manager, prefId, this, appMode, isProfileDependent());
 			}
 		} else if (settings.ROUTING_TYPE.getId().equals(prefId)) {
 			showRoutingTypeDialog(preference);

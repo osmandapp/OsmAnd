@@ -6179,4 +6179,12 @@
     <string name="gallery_sort_oldest_first">Најпре најстарији датум</string>
     <string name="gallery_sort_duration_long_short">Најпре најдуже трајање</string>
     <string name="gallery_sort_duration_short_long">Најпре најкраће трајање</string>
+    <string name="show_discount_bottom_sheet">Прикажи доњи лист са попустима</string>
+    <string name="show_discount_bottom_sheet_description">Приказ доњег листа попуста са прилагођеним развојем одговора.</string>
+    <string name="tracks_backup_promo_button">Преузмите ОсмАнд Про</string>
+    <string name="tracks_backup_promo_description">Синхронизујте своје трагове на различитим уређајима и вебу помоћу ОсмАнд Про.</string>
+    <string name="tracks_backup_promo_title">Направите резервну копију и синхронизујте своје трагове</string>
+    <string name="free_download_limit_reached">Достигнуто је ограничење бесплатног преузимања</string>
+    <string name="free_download_limit_reached_description">Откључајте неограничена преузимања и ажурирања мапа</string>
+    <string name="get_unlimited_downloads">Прибавите неограничена преузимања</string>
 </resources>

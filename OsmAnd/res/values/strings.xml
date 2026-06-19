@@ -21,6 +21,13 @@
 	<string name="change_media_storage_question">Change media storage?</string>
 	<string name="change_media_storage_full_description">Move existing media files to the new destination?\n%1$s > %2$s</string>
 	<string name="media_storage_directory_not_writable">Media files could not be saved in the specified directory</string>
+	<string name="route_calculation_method">Route calculation method</string>
+	<string name="route_calculation_method_auto">Auto (Fastest available)</string>
+	<string name="route_calculation_method_auto_desc">Tries to use fast routing. Automatically switches to standard calculation if map dates don\'t match.</string>
+	<string name="route_calculation_method_standard_only">Standard only</string>
+	<string name="route_calculation_method_standard_only_desc">Always uses standard routing. Slower, but allows navigating with maps from different dates.</string>
+	<string name="route_calculation_method_fast_only">Fast only</string>
+	<string name="route_calculation_method_fast_only_desc">Always uses fast routing. Calculation will stop and ask for updates if map dates don\'t match.</string>
 	<string name="show_discount_bottom_sheet">Show Discount bottom sheet</string>
 	<string name="show_discount_bottom_sheet_description">Display the discount bottom sheet with a custom development response.</string>
 	<string name="gallery_media_playback_error">Could not play media.</string>

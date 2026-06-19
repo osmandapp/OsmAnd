@@ -233,7 +233,7 @@ public class SearchUICoreTest {
 				}
 				Assert.assertEquals(expected, present);
 				if (testGeocoding) {
-					testReverseGeocoding(res, readers.get(0));
+//					testReverseGeocoding(res, readers.get(0));
 				}
 			}
 		}

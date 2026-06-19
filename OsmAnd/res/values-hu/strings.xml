@@ -6099,4 +6099,12 @@
     <string name="gallery_sort_duration_long_short">Leghosszabbak elöl</string>
     <string name="gallery_sort_duration_short_long">Legrövidebbek elöl</string>
     <string name="gallery_seek_forward_seconds">+%1$d mp</string>
+    <string name="show_discount_bottom_sheet_description">Kedvezmények sáv megjelenítése egy egyéni fejlesztési válasszal.</string>
+    <string name="show_discount_bottom_sheet">Kedvezmények sáv megjelenítése</string>
+    <string name="tracks_backup_promo_button">OsmAnd Pro beszerzése</string>
+    <string name="tracks_backup_promo_description">Szinkronizálja nyomvonalait az eszközei és a Weboldal között az OsmAnd Pro segítségével.</string>
+    <string name="tracks_backup_promo_title">Szinkronizálja és készítsen biztonsági mentést a nyomvonalairól</string>
+    <string name="free_download_limit_reached">Elérte az ingyenes letöltési korlátot</string>
+    <string name="free_download_limit_reached_description">Oldja fel a korlátlan térképletöltést és a frissítéseket</string>
+    <string name="get_unlimited_downloads">Korlátlan letöltés szerzése</string>
 </resources>

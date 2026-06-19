@@ -623,7 +623,7 @@ public class SearchCoreFactory {
 				}
 				Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(minRadius, maxRadius, SearchPhraseDataType.ADDRESS);
 				String wordToSearch = phrase.getUnknownWordToSearch();
-				List<String> wordToSearchSplit = splitAndNormalize(wordToSearch);
+				List<String> wordToSearchSplit = splitAndNormalize(wordToSearch, true);
 				if (wordToSearchSplit.size() > 1) {
 					wordToSearch = phrase.selectMainUnknownWordToSearch(new ArrayList<>(wordToSearchSplit));
 				}

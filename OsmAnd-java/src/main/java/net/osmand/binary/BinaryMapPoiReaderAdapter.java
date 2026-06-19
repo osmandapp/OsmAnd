@@ -4,7 +4,6 @@ package net.osmand.binary;
 import static net.osmand.binary.ObfConstants.isTagIndexedAsSearchRelated;
 import static net.osmand.binary.ObfConstants.isTagIndexedForSearchAsId;
 import static net.osmand.binary.ObfConstants.isTagIndexedForSearchAsName;
-import static net.osmand.util.SearchAlgorithms.EMPTY_SUFFIX_DICTIONARY_SENTINEL;
 import static net.osmand.util.SearchAlgorithms.nameIndexDecodeDictionarySuffix;
 import static net.osmand.util.SearchAlgorithms.splitAndNormalize;
 
@@ -44,6 +43,7 @@ import net.osmand.data.QuadTree;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.util.MapUtils;
+import net.osmand.util.SearchAlgorithms;
 
 public class BinaryMapPoiReaderAdapter {
 	static final Log LOG = PlatformUtil.getLog(BinaryMapPoiReaderAdapter.class);
@@ -557,7 +557,7 @@ public class BinaryMapPoiReaderAdapter {
 		TIntLongHashMap offsets = new TIntLongHashMap();
 		long offset = 0;
 		List<TIntLongHashMap> listOfSepOffsets = new ArrayList<TIntLongHashMap>();
-		List<String> queries = splitAndNormalize(query);
+		List<String> queries = splitAndNormalize(query, true);
 		List<QueryToken> queryTokens = null;
 		while (true) {
 			final long subStart = req.beginSubSearchStats(), bytes = codedIS.getBytesCounter();
@@ -643,6 +643,7 @@ public class BinaryMapPoiReaderAdapter {
 		List<String> suffixDictionary = null;
 		QueryToken.SuffixMask mask = token == null || prefix == null ? null : token.new SuffixMask(prefix);
 		boolean suffixDictionaryInitialized = false;
+		boolean emptySuffixes = false;
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -654,14 +655,22 @@ public class BinaryMapPoiReaderAdapter {
 					if (suffixDictionary == null) {
 						suffixDictionary = new ArrayList<>();
 					}
-					if (EMPTY_SUFFIX_DICTIONARY_SENTINEL.equals(encodedSuffix)) {
-						break;
+					if (SearchAlgorithms.OLD_EMPTY_SUFFIX_DICTIONARY_SENTINEL.equals(encodedSuffix)) {
+						emptySuffixes = true;
+						continue;
 					}
 					String prevSuffix = suffixDictionary.isEmpty() ? null : suffixDictionary.get(suffixDictionary.size() - 1);
 					String entry = nameIndexDecodeDictionarySuffix(prevSuffix, encodedSuffix);
 					suffixDictionary.add(entry);
 					break;
 				case OsmAndPoiNameIndexData.ATOMS_FIELD_NUMBER:
+					if (emptySuffixes || (suffixDictionary != null && suffixDictionary.size() == 1
+							&& suffixDictionary.get(0).equals(SearchAlgorithms.EMPTY_SUFFIX_DICTIONARY_SENTINEL))) {
+						if (prefix != null && token != null && !token.matchFullPrefix(prefix.key())) {
+							codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+							return;
+						}
+					}
 					if (!suffixDictionaryInitialized && mask != null) {
 						mask.setDictionary(suffixDictionary);
 						suffixDictionaryInitialized = true;
@@ -804,7 +813,7 @@ public class BinaryMapPoiReaderAdapter {
 					codedIS.seek(offsets[j] + indexOffset);
 					long len = readInt();
 					long oldLim = codedIS.pushLimitLong((long) len);
-					boolean read = readPoiData(left31, right31, top31, bottom31, req, region, skipTiles,
+					boolean read = readPoiData(left31, right31, top31, bottom31, req, region,  -1, skipTiles,
 							req.zoom == -1 ? 31 : req.zoom + ZOOM_TO_SKIP_FILTER);
 					if (read && skipVal != -1 && skipTiles != null) {
 						skipTiles.add(skipVal);
@@ -906,7 +915,7 @@ public class BinaryMapPoiReaderAdapter {
 	}
 
 	boolean readPoiData(int left31, int right31, int top31, int bottom31,
-			SearchRequest<Amenity> req, PoiRegion region, TLongHashSet toSkip, int zSkip) throws IOException {
+			SearchRequest<Amenity> req, PoiRegion region, int index, TLongHashSet toSkip, int zSkip) throws IOException {
 		int x = 0;
 		int y = 0;
 		int zoom = 0;
@@ -956,6 +965,11 @@ public class BinaryMapPoiReaderAdapter {
 							read = true;
 						}
 					}
+				}
+				if (--index == -1) {
+					// index initially could be -1
+					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+					return read;
 				}
 				break;
 			default:
@@ -1141,18 +1155,6 @@ public class BinaryMapPoiReaderAdapter {
 				break;
 			case OsmandOdb.OsmAndPoiBoxDataAtom.NAMEEN_FIELD_NUMBER:
 				am.setEnName(codedIS.readString());
-				break;
-			case OsmandOdb.OsmAndPoiBoxDataAtom.OPENINGHOURS_FIELD_NUMBER:
-				am.setOpeningHours(codedIS.readString());
-				break;
-			case OsmandOdb.OsmAndPoiBoxDataAtom.SITE_FIELD_NUMBER:
-				am.setSite(codedIS.readString());
-				break;
-			case OsmandOdb.OsmAndPoiBoxDataAtom.PHONE_FIELD_NUMBER:
-				am.setPhone(codedIS.readString());
-				break;
-			case OsmandOdb.OsmAndPoiBoxDataAtom.NOTE_FIELD_NUMBER:
-				am.setDescription(codedIS.readString());
 				break;
 			case OsmandOdb.OsmAndPoiBoxDataAtom.PRECISIONXY_FIELD_NUMBER:
 				if (hasLocation) {

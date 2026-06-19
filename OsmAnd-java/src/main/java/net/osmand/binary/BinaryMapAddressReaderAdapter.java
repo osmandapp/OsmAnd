@@ -745,7 +745,8 @@ public class BinaryMapAddressReaderAdapter {
 						suffixMask = queryToken.new SuffixMask(matchedPrefix);
 					}
 					int stag = 0;
-					do {
+					boolean emptySuffixes = false;
+					loopAtoms: do {
 						int st = codedIS.readTag();
 						stag = WireFormat.getTagFieldNumber(st);
 						if (stag == AddressNameIndexData.SUFFIXESDICTIONARY_FIELD_NUMBER) {
@@ -753,13 +754,22 @@ public class BinaryMapAddressReaderAdapter {
 								suffixDictionary = new ArrayList<>();
 							}
 							String encodedSuffix = codedIS.readString();
-							if (SearchAlgorithms.EMPTY_SUFFIX_DICTIONARY_SENTINEL.equals(encodedSuffix)) {
+							if (SearchAlgorithms.OLD_EMPTY_SUFFIX_DICTIONARY_SENTINEL.equals(encodedSuffix)) {
+								emptySuffixes = true;
 								continue;
 							}
+							
 							String previousSuffix = suffixDictionary.isEmpty() ? null : suffixDictionary.get(suffixDictionary.size() - 1);
 							String decodedSuffix = SearchAlgorithms.nameIndexDecodeDictionarySuffix(previousSuffix, encodedSuffix);
 							suffixDictionary.add(decodedSuffix);
 						} else if (stag == AddressNameIndexData.ATOM_FIELD_NUMBER) {
+							if (emptySuffixes || (suffixDictionary  != null && suffixDictionary.size() == 1
+									&& suffixDictionary.get(0).equals(SearchAlgorithms.EMPTY_SUFFIX_DICTIONARY_SENTINEL))) {
+								if (matchedPrefix != null && queryToken != null && !queryToken.matchFullPrefix(matchedPrefix.key())) {
+									codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+									break loopAtoms;
+								}
+							}
 							if (!suffixDictionaryInitialized && suffixMask != null) {
 								suffixMask.setDictionary(suffixDictionary);
 								suffixDictionaryInitialized = true;

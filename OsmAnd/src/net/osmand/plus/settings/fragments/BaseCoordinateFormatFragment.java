@@ -3,6 +3,7 @@ package net.osmand.plus.settings.fragments;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -78,12 +79,13 @@ public abstract class BaseCoordinateFormatFragment extends BaseFullScreenFragmen
 
 	@NonNull
 	protected MaterialCardView createCard(int marginStart, int marginTop, int marginEnd, int marginBottom) {
-		MaterialCardView card = new MaterialCardView(getMaterialThemedContext());
+		Context themedContext = getMaterialThemedContext();
+		MaterialCardView card = new MaterialCardView(themedContext);
 		card.setCardElevation(0);
 		card.setRadius(dp(12));
 		card.setStrokeWidth(0);
 		card.setUseCompatPadding(false);
-		card.setCardBackgroundColor(AndroidUtils.getColorFromAttr(requireContext(), R.attr.list_background_color));
+		card.setCardBackgroundColor(AndroidUtils.getColorFromAttr(themedContext, R.attr.list_background_color));
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
 				ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		params.setMargins(dp(marginStart), dp(marginTop), dp(marginEnd), dp(marginBottom));
@@ -93,7 +95,7 @@ public abstract class BaseCoordinateFormatFragment extends BaseFullScreenFragmen
 
 	@NonNull
 	protected LinearLayout createVerticalContainer() {
-		LinearLayout layout = new LinearLayout(requireContext());
+		LinearLayout layout = new LinearLayout(getMaterialThemedContext());
 		layout.setOrientation(LinearLayout.VERTICAL);
 		layout.setLayoutParams(new LinearLayout.LayoutParams(
 				ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -102,9 +104,10 @@ public abstract class BaseCoordinateFormatFragment extends BaseFullScreenFragmen
 
 	@NonNull
 	protected TextView createTitleText(@NonNull String text) {
-		TextView textView = new TextView(requireContext());
+		Context themedContext = getMaterialThemedContext();
+		TextView textView = new TextView(themedContext);
 		textView.setText(text);
-		textView.setTextColor(AndroidUtils.getColorFromAttr(requireContext(), android.R.attr.textColorPrimary));
+		textView.setTextColor(AndroidUtils.getColorFromAttr(themedContext, android.R.attr.textColorPrimary));
 		textView.setTextSize(16);
 		textView.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
 		return textView;
@@ -113,7 +116,8 @@ public abstract class BaseCoordinateFormatFragment extends BaseFullScreenFragmen
 	@NonNull
 	protected View createFormatRow(@NonNull CoordinateFormat format, boolean addRow, boolean primary,
 	                               boolean showDivider, @NonNull View.OnClickListener clickListener) {
-		View row = inflate(R.layout.coordinate_format_settings_item, null, false);
+		View row = LayoutInflater.from(getMaterialThemedContext())
+				.inflate(R.layout.coordinate_format_settings_item, null, false);
 		bindFormatRow(row, format, addRow, primary, showDivider, clickListener);
 		return row;
 	}

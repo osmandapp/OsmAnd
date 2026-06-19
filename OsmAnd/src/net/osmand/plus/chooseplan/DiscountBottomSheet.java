@@ -768,7 +768,7 @@ public class DiscountBottomSheet extends BaseMaterialBottomSheetDialogFragment i
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager manager, @NonNull DiscountHelper.ControllerData data) {
-		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG, true)) {
 			Bundle args = new Bundle();
 			args.putString(TITLE_KEY, data.getMessage());
 			args.putString(IN_APP_SKU_KEY, data.getChoosePlanType());

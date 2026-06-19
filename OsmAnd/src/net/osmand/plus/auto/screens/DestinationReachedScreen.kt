@@ -23,27 +23,18 @@ import net.osmand.search.core.SearchCoreFactory
 import net.osmand.search.core.SearchResult
 import java.util.Calendar
 
-class DestinationReachedScreen(carContext: CarContext) : BaseAndroidAutoScreen(carContext) {
+class DestinationReachedScreen(
+	carContext: CarContext,
+	private val settingsAction: Action
+) : BaseAndroidAutoScreen(carContext) {
 
 	override fun getTemplate(): Template {
 		return MapWithContentTemplate.Builder()
 			.setActionStrip(
-				createSearchAction().let { searchAction ->
-					ActionStrip.Builder()
-						.addAction(searchAction)
-						.addAction(
-							Action.Builder()
-								.setIcon(
-									CarIcon.Builder(
-										IconCompat.createWithResource(
-											carContext,
-											R.drawable.ic_action_search_dark)
-									).build())
-								.setOnClickListener { recenterMap() }
-								.build()
-						)
-						.build()
-				}
+				ActionStrip.Builder()
+					.addAction(settingsAction)
+					.addAction(createSearchAction())
+					.build()
 			)
 			.setContentTemplate(createArrivalListTemplate())
 			.build()

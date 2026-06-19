@@ -6018,4 +6018,12 @@
     <string name="gallery_sort_oldest_first">最舊日期優先顯示</string>
     <string name="gallery_sort_duration_long_short">最長片段優先顯示</string>
     <string name="gallery_sort_duration_short_long">最短片段優先顯示</string>
+    <string name="show_discount_bottom_sheet">顯示折扣底頁</string>
+    <string name="show_discount_bottom_sheet_description">同時顯示折扣底頁以及自訂開發回應。</string>
+    <string name="tracks_backup_promo_button">取得 OsmAnd Pro</string>
+    <string name="tracks_backup_promo_description">用 OsmAnd Pro 跨裝置與網路同步您的軌跡。</string>
+    <string name="tracks_backup_promo_title">備份與同步您的軌跡</string>
+    <string name="free_download_limit_reached">已經到達免費下載的上限了</string>
+    <string name="free_download_limit_reached_description">解鎖無限地圖下載與更新功能</string>
+    <string name="get_unlimited_downloads">取得無限下載功能</string>
 </resources>

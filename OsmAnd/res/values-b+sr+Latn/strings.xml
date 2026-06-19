@@ -6179,4 +6179,12 @@
     <string name="gallery_sort_oldest_first">Prvo najstariji datum</string>
     <string name="gallery_sort_duration_long_short">Prvo najduže trajanje</string>
     <string name="gallery_sort_duration_short_long">Prvo najkraće trajanje</string>
+    <string name="show_discount_bottom_sheet">Prikaži donji list sa popustima</string>
+    <string name="show_discount_bottom_sheet_description">Prikaz donjeg lista popusta sa prilagođenim razvojem odgovora.</string>
+    <string name="tracks_backup_promo_button">Preuzmite OsmAnd Pro</string>
+    <string name="tracks_backup_promo_description">Sinhronizujte svoje tragove na različitim uređajima i vebu pomoću OsmAnd Pro-a.</string>
+    <string name="tracks_backup_promo_title">Napravite rezervnu kopiju i sinhronizujte svoje tragove</string>
+    <string name="free_download_limit_reached">Dostignuto je ograničenje besplatnog preuzimanja</string>
+    <string name="free_download_limit_reached_description">Otključajte neograničena preuzimanja i ažuriranja mapa</string>
+    <string name="get_unlimited_downloads">Pribavite neograničena preuzimanja</string>
 </resources>

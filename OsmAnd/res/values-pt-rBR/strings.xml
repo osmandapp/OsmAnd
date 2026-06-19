@@ -6564,4 +6564,12 @@
     <string name="gallery_sort_duration_short_long">Primeiro a duração mais curta</string>
     <string name="gallery_media_playback_error">Não foi possível reproduzir o arquivo de mídia.</string>
     <string name="gallery_open_in">Abrir em</string>
+    <string name="show_discount_bottom_sheet">Mostrar folha de fundo com desconto</string>
+    <string name="show_discount_bottom_sheet_description">Exibir a folha inferior de descontos com uma resposta de desenvolvimento personalizada.</string>
+    <string name="tracks_backup_promo_button">Obter OsmAnd Pro</string>
+    <string name="tracks_backup_promo_description">Sincronize suas trilhas entre dispositivos e na Web com o OsmAnd Pro.</string>
+    <string name="tracks_backup_promo_title">Faça backup e sincronize suas faixas</string>
+    <string name="free_download_limit_reached">Limite de downloads gratuitos atingido</string>
+    <string name="free_download_limit_reached_description">Desbloqueie downloads e atualizações ilimitadas de mapas</string>
+    <string name="get_unlimited_downloads">Obtenha downloads ilimitados</string>
 </resources>
