@@ -353,10 +353,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return isCarView() ? getCarViewDensity() : dm.density;
 	}
 
-	private void updateCurrentViewportDensity() {
-		currentViewport.setDensity(getCurrentDensity());
-	}
-
 	@Nullable
 	public MapActivity getMapActivity() {
 		return mapActivity;
@@ -738,15 +734,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void applyDisplayScaleSettings() {
-		if (!hasMapRenderer()) {
-			app.getResourceManager().getRenderer().clearCache();
-		}
 		setComplexZoom(getZoom(), getSettingsMapDensity());
 		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 		if (mapContext != null) {
 			mapContext.updateMapSettings(true);
 		}
-		refreshMap(true);
 	}
 
 	public void setComplexZoom(int zoom, double mapDensity) {
@@ -1161,7 +1153,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		if (updateMapRenderer || viewportChanged || centerChanged) {
 			currentViewport.setPixelDimensions(view.getWidth(), view.getHeight(), ratio.x, ratio.y);
-			updateCurrentViewportDensity();
 
 			if (viewportChanged) {
 				notifyViewportChanged();

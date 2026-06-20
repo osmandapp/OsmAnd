@@ -119,7 +119,7 @@ public class ConfigureMapDialogs {
 	                                       @NonNull OsmandPreference<Float> mapDensity,
 	                                       int value) {
 		mapDensity.set(value / 100.0f);
-		if (!view.isCarView() || !view.getApplication().getSettings().AA_MAP_DENSITY.isSet()) {
+		if (!view.isCarView()) {
 			view.applyDisplayScaleSettings();
 		}
 	}
