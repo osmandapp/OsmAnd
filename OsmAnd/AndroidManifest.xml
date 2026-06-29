@@ -48,6 +48,7 @@
 	<uses-feature android:name="android.hardware.location.gps" android:required="false" />
 	<uses-feature android:name="android.hardware.sensor.light" android:required="false" />
 	<uses-feature android:name="android.hardware.sensor.compass" android:required="false" />
+	<uses-feature android:name="android.hardware.usb.host" android:required="false" />
 	<uses-feature android:name="android.hardware.sensor.accelerometer" android:required="false" />
 	<uses-feature android:name="android.hardware.sensor.gyroscope" android:required="false" />
 	<uses-feature android:name="android.hardware.touchscreen" android:required="false" />

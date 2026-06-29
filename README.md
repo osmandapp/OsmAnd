@@ -91,6 +91,21 @@ By buying OsmAnd+ and subscribing to OsmAnd Pro (see https://osmand.net/docs/use
 
 The technical documentation on how to build OsmAnd can be found at https://www.osmand.net/docs/technical/build-osmand/
 
+#### Driver Break plugin documentation
+
+Documentation for the **Driver Break** plugin (rest stops, energy-aware routing, SRTM elevation, ECU fuel data) is included in this repository:
+
+| Document | Location |
+|---|---|
+| User guide | [web/main/docs/user/plugins/driver-break.md](web/main/docs/user/plugins/driver-break.md) |
+| Energy model | [web/main/docs/technical/build-osmand/driver-break-energy-model.md](web/main/docs/technical/build-osmand/driver-break-energy-model.md) |
+| ECU protocols | [web/main/docs/technical/build-osmand/driver-break-ecu-protocols.md](web/main/docs/technical/build-osmand/driver-break-ecu-protocols.md) |
+| Build and tests | [web/main/docs/technical/build-osmand/driver-break-tests.md](web/main/docs/technical/build-osmand/driver-break-tests.md) |
+| Developer overview | [OsmAnd/src/net/osmand/plus/plugins/driverbreak/README.md](OsmAnd/src/net/osmand/plus/plugins/driverbreak/README.md) |
+| Formula reference | [OsmAnd/src/net/osmand/plus/plugins/driverbreak/FORMULAS.md](OsmAnd/src/net/osmand/plus/plugins/driverbreak/FORMULAS.md) |
+
+See also [web/README.md](web/README.md) for the layout of the `web/` docs tree.
+
 #### Map Coverage and Quality - How Good is OSM Data?
 
 According to research, OSM map data rivals and often surpasses commercially available maps both in terms of data completeness and data actuality. This is indicated by different metrics like the amount of road distance mapped, or the number of objects like points of interest or buildings mapped. The fact that the maps are globally crowd-sourced ensures continuous improvements and updates, the incorporation of local on-the-ground expertise, and reflects things like neighborhood development, ongoing construction, or even the results of recent natural disasters.

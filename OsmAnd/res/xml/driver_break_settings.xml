@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:title="@string/driver_break_plugin_name">
+
+	<Preference
+		android:key="driver_break_info"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:selectable="false"
+		android:title="@string/plugin_global_prefs_info"
+		tools:icon="@drawable/ic_action_info_dark" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="driver_break_travel_mode"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/driver_break_travel_mode"
+		tools:icon="@drawable/ic_action_car_dark" />
+
+	<SwitchPreferenceCompat
+		android:key="driver_break_use_energy_routing"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:persistent="false"
+		android:summary="@string/driver_break_use_energy_routing_desc"
+		android:title="@string/driver_break_use_energy_routing"
+		tools:icon="@drawable/ic_driver_break" />
+
+	<SwitchPreferenceCompat
+		android:key="driver_break_ecu_enabled"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:persistent="false"
+		android:summary="@string/driver_break_ecu_enabled_desc"
+		android:title="@string/driver_break_ecu_enabled"
+		tools:icon="@drawable/ic_driver_break" />
+
+	<SwitchPreferenceCompat
+		android:key="driver_break_adaptive_fuel"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:persistent="false"
+		android:summary="@string/driver_break_adaptive_fuel_desc"
+		android:title="@string/driver_break_adaptive_fuel"
+		tools:icon="@drawable/ic_driver_break" />
+
+</PreferenceScreen>

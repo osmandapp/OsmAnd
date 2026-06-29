@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:title="@string/driver_break_tab_intervals">
+
+	<PreferenceCategory
+		android:key="driver_break_intervals_car"
+		android:title="@string/driver_break_intervals_car">
+
+		<net.osmand.plus.settings.preferences.EditTextPreferenceEx
+			android:key="driver_break_car_soft_limit_h"
+			android:layout="@layout/preference_with_descr"
+			android:persistent="false"
+			android:title="@string/driver_break_car_soft_limit_h"
+			tools:icon="@drawable/ic_action_car_dark" />
+
+		<net.osmand.plus.settings.preferences.EditTextPreferenceEx
+			android:key="driver_break_car_max_limit_h"
+			android:layout="@layout/preference_with_descr"
+			android:persistent="false"
+			android:title="@string/driver_break_car_max_limit_h" />
+
+		<net.osmand.plus.settings.preferences.EditTextPreferenceEx
+			android:key="driver_break_car_break_interval_h"
+			android:layout="@layout/preference_with_descr"
+			android:persistent="false"
+			android:title="@string/driver_break_car_break_interval_h" />
+
+		<net.osmand.plus.settings.preferences.EditTextPreferenceEx
+			android:key="driver_break_car_break_duration_min"
+			android:layout="@layout/preference_with_descr"
+			android:persistent="false"
+			android:title="@string/driver_break_car_break_duration_min" />
+
+	</PreferenceCategory>
+
+	<PreferenceCategory
+		android:key="driver_break_intervals_truck"
+		android:title="@string/driver_break_intervals_truck">
+
+		<net.osmand.plus.settings.preferences.EditTextPreferenceEx
+			android:key="driver_break_truck_mandatory_break_h"
+			android:layout="@layout/preference_with_descr"
+			android:persistent="false"
+			android:title="@string/driver_break_truck_mandatory_break_h" />
+
+		<net.osmand.plus.settings.preferences.EditTextPreferenceEx
+			android:key="driver_break_truck_break_duration_min"
+			android:layout="@layout/preference_with_descr"
+			android:persistent="false"
+			android:title="@string/driver_break_truck_break_duration_min" />
+
+		<net.osmand.plus.settings.preferences.EditTextPreferenceEx
+			android:key="driver_break_truck_max_daily_h"
+			android:layout="@layout/preference_with_descr"
+			android:persistent="false"
+			android:title="@string/driver_break_truck_max_daily_h" />
+
+	</PreferenceCategory>
+
+	<PreferenceCategory
+		android:key="driver_break_intervals_hiking"
+		android:title="@string/driver_break_intervals_hiking">
+
+		<net.osmand.plus.settings.preferences.EditTextPreferenceEx
+			android:key="driver_break_hiking_main_dist_km"
+			android:layout="@layout/preference_with_descr"
+			android:persistent="false"
+			android:title="@string/driver_break_hiking_main_dist_km" />
+
+		<SwitchPreferenceCompat
+			android:key="driver_break_hiking_alt_enabled"
+			android:layout="@layout/preference_with_descr_dialog_and_switch"
+			android:persistent="false"
+			android:summary="@string/driver_break_hiking_alt_enabled_desc"
+			android:title="@string/driver_break_hiking_alt_enabled" />
+
+		<net.osmand.plus.settings.preferences.EditTextPreferenceEx
+			android:key="driver_break_hiking_alt_dist_km"
+			android:layout="@layout/preference_with_descr"
+			android:persistent="false"
+			android:summary="@string/driver_break_hiking_alt_dist_km_desc"
+			android:title="@string/driver_break_hiking_alt_dist_km" />
+
+		<net.osmand.plus.settings.preferences.EditTextPreferenceEx
+			android:key="driver_break_hiking_max_daily_km"
+			android:layout="@layout/preference_with_descr"
+			android:persistent="false"
+			android:summary="@string/driver_break_hiking_max_daily_km_desc"
+			android:title="@string/driver_break_hiking_max_daily_km" />
+
+	</PreferenceCategory>
+
+	<PreferenceCategory
+		android:key="driver_break_intervals_cycling"
+		android:title="@string/driver_break_intervals_cycling">
+
+		<net.osmand.plus.settings.preferences.EditTextPreferenceEx
+			android:key="driver_break_cycling_main_dist_km"
+			android:layout="@layout/preference_with_descr"
+			android:persistent="false"
+			android:title="@string/driver_break_cycling_main_dist_km" />
+
+		<SwitchPreferenceCompat
+			android:key="driver_break_cycling_alt_enabled"
+			android:layout="@layout/preference_with_descr_dialog_and_switch"
+			android:persistent="false"
+			android:summary="@string/driver_break_cycling_alt_enabled_desc"
+			android:title="@string/driver_break_cycling_alt_enabled" />
+
+		<net.osmand.plus.settings.preferences.EditTextPreferenceEx
+			android:key="driver_break_cycling_alt_dist_km"
+			android:layout="@layout/preference_with_descr"
+			android:persistent="false"
+			android:summary="@string/driver_break_cycling_alt_dist_km_desc"
+			android:title="@string/driver_break_cycling_alt_dist_km" />
+
+		<net.osmand.plus.settings.preferences.EditTextPreferenceEx
+			android:key="driver_break_cycling_max_daily_km"
+			android:layout="@layout/preference_with_descr"
+			android:persistent="false"
+			android:summary="@string/driver_break_cycling_max_daily_km_desc"
+			android:title="@string/driver_break_cycling_max_daily_km" />
+
+	</PreferenceCategory>
+
+	<PreferenceCategory
+		android:key="driver_break_intervals_motorcycle"
+		android:title="@string/driver_break_intervals_motorcycle">
+
+		<net.osmand.plus.settings.preferences.EditTextPreferenceEx
+			android:key="driver_break_moto_soft_limit_min"
+			android:layout="@layout/preference_with_descr"
+			android:persistent="false"
+			android:title="@string/driver_break_moto_soft_limit_min" />
+
+		<net.osmand.plus.settings.preferences.EditTextPreferenceEx
+			android:key="driver_break_moto_mandatory_break_min"
+			android:layout="@layout/preference_with_descr"
+			android:persistent="false"
+			android:title="@string/driver_break_moto_mandatory_break_min" />
+
+		<net.osmand.plus.settings.preferences.EditTextPreferenceEx
+			android:key="driver_break_moto_break_duration_min"
+			android:layout="@layout/preference_with_descr"
+			android:persistent="false"
+			android:title="@string/driver_break_moto_break_duration_min" />
+
+		<net.osmand.plus.settings.preferences.EditTextPreferenceEx
+			android:key="driver_break_moto_max_daily_h"
+			android:layout="@layout/preference_with_descr"
+			android:persistent="false"
+			android:summary="@string/driver_break_moto_max_daily_h_desc"
+			android:title="@string/driver_break_moto_max_daily_h" />
+
+	</PreferenceCategory>
+
+</PreferenceScreen>

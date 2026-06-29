@@ -154,6 +154,11 @@ class RouteRecalculationHelper {
 		return routingHelper.getLastProjection();
 	}
 
+	void applyRouteResult(@NonNull RouteCalculationResult prevRoute,
+			@NonNull RouteCalculationResult res, @Nullable Location start) {
+		setNewRoute(prevRoute, res, start);
+	}
+
 	private void setNewRoute(RouteCalculationResult prevRoute, RouteCalculationResult res, Location start) {
 		routingHelper.setRoute(res);
 		boolean newRoute = !prevRoute.isCalculated();

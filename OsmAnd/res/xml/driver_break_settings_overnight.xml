@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:title="@string/driver_break_tab_overnight">
+
+	<SwitchPreferenceCompat
+		android:key="driver_break_water_pois_enabled"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:persistent="false"
+		android:summary="@string/driver_break_water_pois_enabled_desc"
+		android:title="@string/driver_break_water_pois_enabled"
+		tools:icon="@drawable/ic_driver_break" />
+
+	<SwitchPreferenceCompat
+		android:key="driver_break_dnt_priority"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:persistent="false"
+		android:summary="@string/driver_break_dnt_priority_desc"
+		android:title="@string/driver_break_dnt_priority"
+		tools:icon="@drawable/ic_driver_break" />
+
+	<net.osmand.plus.settings.preferences.EditTextPreferenceEx
+		android:key="driver_break_poi_radius_m"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/driver_break_poi_radius_m" />
+
+	<net.osmand.plus.settings.preferences.EditTextPreferenceEx
+		android:key="driver_break_water_radius_m"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/driver_break_water_radius_m" />
+
+	<net.osmand.plus.settings.preferences.EditTextPreferenceEx
+		android:key="driver_break_cabin_radius_m"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/driver_break_cabin_radius_m" />
+
+	<net.osmand.plus.settings.preferences.EditTextPreferenceEx
+		android:key="driver_break_min_dist_buildings_m"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/driver_break_min_dist_buildings_m" />
+
+	<net.osmand.plus.settings.preferences.EditTextPreferenceEx
+		android:key="driver_break_min_dist_glaciers_m"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/driver_break_min_dist_glaciers_m" />
+
+</PreferenceScreen>

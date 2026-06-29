@@ -43,6 +43,7 @@ import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.custom.CustomOsmandPlugin;
 import net.osmand.plus.plugins.custom.CustomRegion;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.plugins.driverbreak.DriverBreakPlugin;
 import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
@@ -121,6 +122,7 @@ public class PluginsHelper {
 		allPlugins.add(new MapillaryPlugin(app));
 		allPlugins.add(new ExternalSensorsPlugin(app));
 		allPlugins.add(new VehicleMetricsPlugin(app));
+		allPlugins.add(new DriverBreakPlugin(app));
 		allPlugins.add(new AstronomyPlugin(app));
 		allPlugins.add(new AccessibilityPlugin(app));
 		allPlugins.add(new OsmandDevelopmentPlugin(app));

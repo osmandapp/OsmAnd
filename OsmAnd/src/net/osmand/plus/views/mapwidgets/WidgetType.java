@@ -149,6 +149,8 @@ public enum WidgetType {
 	GLIDE_TARGET("glide_ratio_to_target", R.string.glide_ratio_to_target, R.string.map_widget_glide_target_desc, R.drawable.widget_glide_ratio_to_target_day, R.drawable.widget_glide_ratio_to_target_night, 0, GLIDE, RIGHT),
 	GLIDE_AVERAGE("average_glide_ratio", R.string.average_glide_ratio, R.string.map_widget_glide_average_desc, R.drawable.widget_glide_ratio_average_day, R.drawable.widget_glide_ratio_average_night, 0, GLIDE, RIGHT),
 
+	DRIVER_BREAK_NEXT_STOP("driver_break_next_stop", R.string.driver_break_widget_next_stop, R.string.driver_break_plugin_description, R.drawable.ic_driver_break, R.drawable.ic_driver_break, 0, null, RIGHT),
+
 	// Bottom panel
 	ROUTE_INFO("route_info", R.string.map_widget_route_information, R.string.map_widget_route_information_desc, R.drawable.widget_route_info_day, R.drawable.widget_route_info_night, 0, null, NAVIGATION_POINTS, BOTTOM),
 	ELEVATION_PROFILE("elevation_profile", R.string.elevation_profile, R.string.elevation_profile_widget_desc, R.drawable.widget_route_elevation_day, R.drawable.widget_route_elevation_night, 0, null, BOTTOM);

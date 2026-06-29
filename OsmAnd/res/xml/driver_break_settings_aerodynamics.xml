@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:title="@string/driver_break_tab_aerodynamics">
+
+	<net.osmand.plus.settings.preferences.EditTextPreferenceEx
+		android:key="driver_break_total_weight"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:summary="@string/driver_break_total_weight_desc"
+		android:title="@string/driver_break_total_weight"
+		tools:icon="@drawable/ic_action_car_dark" />
+
+	<net.osmand.plus.settings.preferences.EditTextPreferenceEx
+		android:key="driver_break_energy_drag_cd"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:summary="@string/driver_break_energy_drag_cd_desc"
+		android:title="@string/driver_break_energy_drag_cd" />
+
+	<net.osmand.plus.settings.preferences.EditTextPreferenceEx
+		android:key="driver_break_energy_frontal_area_sqm"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:summary="@string/driver_break_energy_frontal_area_sqm_desc"
+		android:title="@string/driver_break_energy_frontal_area_sqm" />
+
+</PreferenceScreen>

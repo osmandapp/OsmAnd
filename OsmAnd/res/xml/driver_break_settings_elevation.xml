@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:title="@string/driver_break_tab_elevation">
+
+	<Preference
+		android:key="driver_break_srtm_tiles_summary"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:selectable="false"
+		android:title="@string/driver_break_srtm_tiles_summary"
+		tools:icon="@drawable/ic_action_info_dark" />
+
+	<PreferenceCategory
+		android:key="driver_break_elevation_region_category"
+		android:title="@string/driver_break_elevation_region_category">
+
+		<Preference
+			android:key="driver_break_elevation_region_summary"
+			android:layout="@layout/preference_with_descr"
+			android:persistent="false"
+			android:selectable="false"
+			android:summary="@string/driver_break_elevation_region_unknown"
+			android:title="@string/driver_break_elevation_region_summary"
+			tools:icon="@drawable/ic_action_info_dark" />
+
+		<Preference
+			android:key="driver_break_download_region"
+			android:layout="@layout/preference_with_descr"
+			android:persistent="false"
+			android:summary="@string/driver_break_download_region_desc"
+			android:title="@string/driver_break_download_region"
+			tools:icon="@drawable/ic_driver_break" />
+
+	</PreferenceCategory>
+
+	<PreferenceCategory
+		android:key="driver_break_elevation_single_tile_category"
+		android:title="@string/driver_break_elevation_single_tile_category">
+
+		<Preference
+			android:key="driver_break_download_current_tile"
+			android:layout="@layout/preference_with_descr"
+			android:persistent="false"
+			android:title="@string/driver_break_download_current_tile"
+			tools:icon="@drawable/ic_driver_break" />
+
+	</PreferenceCategory>
+
+</PreferenceScreen>

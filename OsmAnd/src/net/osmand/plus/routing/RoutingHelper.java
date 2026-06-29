@@ -915,6 +915,18 @@ public class RoutingHelper {
 		routeRecalculationHelper.startRouteCalculationThread(params, true, true);
 	}
 
+	/**
+	 * Applies a fully calculated route (for example an energy-optimized variant) without
+	 * running a new route calculation thread.
+	 */
+	public boolean applyCalculatedRoute(@NonNull RouteCalculationResult newRoute, @Nullable Location start) {
+		if (newRoute.isEmpty() || newRoute.getErrorMessage() != null) {
+			return false;
+		}
+		routeRecalculationHelper.applyRouteResult(route, newRoute, start);
+		return true;
+	}
+
 	public static void applyApplicationSettings(RouteCalculationParams params, OsmandSettings settings, ApplicationMode mode) {
 		params.leftSide = settings.DRIVING_REGION.get().leftHandDriving;
 		params.fast = settings.FAST_ROUTE_MODE.getModeValue(mode);

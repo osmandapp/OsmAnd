@@ -55,3 +55,6 @@ OsmAnd-java/src/test/resources/approximation/*
 #Shared library resources
 OsmAnd-shared/src/androidMain/resources/
 OsmAnd-shared/src/jvmMain/resources/
+
+# Local GPX test tracks (not for repo)
+gpx/
