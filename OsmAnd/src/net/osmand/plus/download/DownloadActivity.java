@@ -180,7 +180,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	@Override
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection collection = super.getInsetTargets();
-		collection.add(InsetTarget.createHorizontalLandscape(R.id.sliding_tabs_container, R.id.freeVersionBanner, R.id.downloadProgressLayout).build());
+		collection.add(InsetTarget.createHorizontalLandscape(R.id.sliding_tabs_container, R.id.downloadProgressLayout).build());
 		return collection;
 	}
 
