@@ -436,7 +436,9 @@ public class TransportRoutePlanner {
 		public int end;
 		public double walkDist ;
 		public int depTime;
-		
+		public long departureTimeMillis = -1;
+		public long arrivalTimeMillis = -1;
+
 		public List<TransportRouteResultSegment> alternatives = new ArrayList<>();
 		
 		public TransportRouteResultSegment() {
