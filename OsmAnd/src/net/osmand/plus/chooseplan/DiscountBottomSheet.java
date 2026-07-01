@@ -32,6 +32,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.graphics.Insets;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -108,11 +110,6 @@ public class DiscountBottomSheet extends BaseMaterialBottomSheetDialogFragment i
 			new BannerFeatureItem(OsmAndFeature.RELIEF_3D),
 			new BannerFeatureItem(OsmAndFeature.VEHICLE_METRICS)
 	);
-
-	@Override
-	public int getTheme() {
-		return isNightMode() ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-	}
 
 	@Nullable
 	@Override
@@ -375,6 +372,7 @@ public class DiscountBottomSheet extends BaseMaterialBottomSheetDialogFragment i
 		}
 
 		LinearLayout container = view.findViewById(R.id.price_block);
+		setupPriceBlockBackground(container);
 		container.removeAllViews();
 		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
 		for (PriceButton<?> button : priceButtons) {
@@ -515,6 +513,21 @@ public class DiscountBottomSheet extends BaseMaterialBottomSheetDialogFragment i
 		int activeColor = ColorUtilities.getActiveColor(getApp(), isNightMode());
 		Drawable normal = createRoundedDrawable(activeColor, ButtonBackground.ROUNDED_SMALL);
 		setupRoundedBackground(applyButton, normal, ButtonBackground.ROUNDED_SMALL);
+		setupApplyButtonTextColor(applyButton);
+	}
+
+	private void setupPriceBlockBackground(@NonNull View priceBlock) {
+		priceBlock.setBackgroundResource(isNightMode()
+				? R.drawable.stroked_btn_contour_dark
+				: R.drawable.stroked_btn_contour_light);
+	}
+
+	private void setupApplyButtonTextColor(@NonNull View applyButton) {
+		int textColor = ColorUtilities.getActiveButtonsAndLinksTextColor(getApp(), isNightMode());
+		TextView title = applyButton.findViewById(R.id.title);
+		TextView description = applyButton.findViewById(R.id.description);
+		title.setTextColor(textColor);
+		description.setTextColor(textColor);
 	}
 
 	private void updateApplyButton(@NonNull View view) {
@@ -873,6 +886,34 @@ public class DiscountBottomSheet extends BaseMaterialBottomSheetDialogFragment i
 			canvas.drawText(text, start, end, badgeLeft + paddingHorizontal, y, paint);
 			paint.setColor(oldColor);
 		}
+	}
+
+	@Override
+	public void onApplyInsets(@NonNull WindowInsetsCompat insets) {
+		super.onApplyInsets(insets);
+		View view = getView();
+		if (view != null) {
+			View bannerContainer = view.findViewById(R.id.banner_container);
+			int bottomPadding = getResources().getDimensionPixelSize(R.dimen.content_padding) + getNavigationBarBottomInset();
+			bannerContainer.setPadding(
+					bannerContainer.getPaddingLeft(),
+					bannerContainer.getPaddingTop(),
+					bannerContainer.getPaddingRight(),
+					bottomPadding);
+			Dialog dialog = getDialog();
+			if (dialog instanceof BottomSheetDialog bottomSheetDialog) {
+				setupInitialBottomSheetHeight(bottomSheetDialog);
+			}
+		}
+	}
+
+	private int getNavigationBarBottomInset() {
+		WindowInsetsCompat insets = getLastRootInsets();
+		if (insets != null) {
+			Insets navBarInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars());
+			return navBarInsets.bottom;
+		}
+		return 0;
 	}
 
 }
