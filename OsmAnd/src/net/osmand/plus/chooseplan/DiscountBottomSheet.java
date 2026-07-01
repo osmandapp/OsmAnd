@@ -32,6 +32,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.widget.NestedScrollView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentManager;
@@ -91,6 +92,13 @@ public class DiscountBottomSheet extends BaseMaterialBottomSheetDialogFragment i
 	private OsmAndFeature currentSelectedFeature;
 	@Nullable
 	private String currentInAppSku;
+	@Nullable
+	private BottomSheetBehavior<View> bottomSheetBehavior;
+	@Nullable
+	private BottomSheetBehavior.BottomSheetCallback bottomSheetCallback;
+	@Nullable
+	private View bottomSheetView;
+	private int bottomSheetState = BottomSheetBehavior.STATE_COLLAPSED;
 
 	private static final List<BannerFeatureItem> MAPS_PLUS_BANNER_FEATURES = Arrays.asList(
 			new BannerFeatureItem(OsmAndFeature.UNLIMITED_MAP_DOWNLOADS),
@@ -740,7 +748,15 @@ public class DiscountBottomSheet extends BaseMaterialBottomSheetDialogFragment i
 	private void applyDialogTransparency(@NonNull BottomSheetDialog dialog) {
 		View bottomSheet = dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
 		if (bottomSheet != null) {
+			bottomSheet.setFitsSystemWindows(false);
 			bottomSheet.setBackgroundColor(Color.TRANSPARENT);
+			if (bottomSheet.getParent() instanceof View parent) {
+				parent.setFitsSystemWindows(false);
+				if (parent instanceof ViewGroup parentGroup) {
+					parentGroup.setClipChildren(false);
+					parentGroup.setClipToPadding(false);
+				}
+			}
 		}
 	}
 
@@ -751,8 +767,9 @@ public class DiscountBottomSheet extends BaseMaterialBottomSheetDialogFragment i
 			return;
 		}
 		bottomSheet.post(() -> {
+			bottomSheetView = bottomSheet;
 			ViewGroup.LayoutParams params = bottomSheet.getLayoutParams();
-			params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+			params.height = ViewGroup.LayoutParams.MATCH_PARENT;
 			bottomSheet.setLayoutParams(params);
 
 			int contentHeight = 0;
@@ -768,12 +785,38 @@ public class DiscountBottomSheet extends BaseMaterialBottomSheetDialogFragment i
 			}
 			if (contentHeight > 0) {
 				BottomSheetBehavior<View> behavior = BottomSheetBehavior.from(bottomSheet);
-				behavior.setFitToContents(true);
+				setupBottomSheetCallback(behavior);
+				behavior.setFitToContents(false);
+				behavior.setExpandedOffset(0);
 				behavior.setSkipCollapsed(false);
 				behavior.setPeekHeight(contentHeight);
+				bottomSheetState = BottomSheetBehavior.STATE_COLLAPSED;
+				updateBannerExpandedState();
 				behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
 			}
 		});
+	}
+
+	private void setupBottomSheetCallback(@NonNull BottomSheetBehavior<View> behavior) {
+		if (bottomSheetBehavior == behavior && bottomSheetCallback != null) {
+			return;
+		}
+		if (bottomSheetBehavior != null && bottomSheetCallback != null) {
+			bottomSheetBehavior.removeBottomSheetCallback(bottomSheetCallback);
+		}
+		bottomSheetBehavior = behavior;
+		bottomSheetCallback = new BottomSheetBehavior.BottomSheetCallback() {
+			@Override
+			public void onStateChanged(@NonNull View bottomSheet, int newState) {
+				bottomSheetState = newState;
+				updateBannerExpandedState();
+			}
+
+			@Override
+			public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+			}
+		};
+		behavior.addBottomSheetCallback(bottomSheetCallback);
 	}
 
 	private void applyTextColor(@NonNull TextView view, int color, int defaultColor) {
@@ -891,18 +934,71 @@ public class DiscountBottomSheet extends BaseMaterialBottomSheetDialogFragment i
 	@Override
 	public void onApplyInsets(@NonNull WindowInsetsCompat insets) {
 		super.onApplyInsets(insets);
+		updateBannerExpandedState();
+		updateBottomSheetPeekHeight();
+	}
+
+	private void updateBannerExpandedState() {
 		View view = getView();
 		if (view != null) {
+			boolean expanded = bottomSheetState == BottomSheetBehavior.STATE_EXPANDED;
+			int statusBarTopInset = getStatusBarTopInset();
+			if (bottomSheetView != null) {
+				bottomSheetView.setTranslationY(expanded ? -statusBarTopInset : 0);
+				ViewGroup.LayoutParams bottomSheetParams = bottomSheetView.getLayoutParams();
+				if (bottomSheetParams != null) {
+					bottomSheetParams.height = expanded
+							? getExpandedBottomSheetHeight(statusBarTopInset)
+							: ViewGroup.LayoutParams.MATCH_PARENT;
+					bottomSheetView.setLayoutParams(bottomSheetParams);
+				}
+			}
+			ViewGroup.LayoutParams rootParams = view.getLayoutParams();
+			if (rootParams != null) {
+				rootParams.height = expanded ? ViewGroup.LayoutParams.MATCH_PARENT : ViewGroup.LayoutParams.WRAP_CONTENT;
+				view.setLayoutParams(rootParams);
+			}
+			if (view instanceof NestedScrollView nestedScrollView) {
+				nestedScrollView.setFillViewport(expanded);
+			}
+
 			View bannerContainer = view.findViewById(R.id.banner_container);
+			ViewGroup.LayoutParams bannerParams = bannerContainer.getLayoutParams();
+			bannerParams.height = expanded ? ViewGroup.LayoutParams.MATCH_PARENT : ViewGroup.LayoutParams.WRAP_CONTENT;
+			bannerContainer.setLayoutParams(bannerParams);
+
 			int bottomPadding = getResources().getDimensionPixelSize(R.dimen.content_padding) + getNavigationBarBottomInset();
 			bannerContainer.setPadding(
 					bannerContainer.getPaddingLeft(),
-					bannerContainer.getPaddingTop(),
+					expanded ? statusBarTopInset : 0,
 					bannerContainer.getPaddingRight(),
 					bottomPadding);
-			Dialog dialog = getDialog();
-			if (dialog instanceof BottomSheetDialog bottomSheetDialog) {
-				setupInitialBottomSheetHeight(bottomSheetDialog);
+		}
+	}
+
+	private int getExpandedBottomSheetHeight(int statusBarTopInset) {
+		if (bottomSheetView != null && bottomSheetView.getParent() instanceof View parent && parent.getHeight() > 0) {
+			return parent.getHeight() + statusBarTopInset + getNavigationBarBottomInset();
+		}
+		return ViewGroup.LayoutParams.MATCH_PARENT;
+	}
+
+	private void updateBottomSheetPeekHeight() {
+		if (bottomSheetBehavior == null || bottomSheetView == null || bottomSheetState == BottomSheetBehavior.STATE_EXPANDED) {
+			return;
+		}
+		View content = getView();
+		if (content == null) {
+			return;
+		}
+		int width = bottomSheetView.getWidth() > 0 ? bottomSheetView.getWidth() : content.getWidth();
+		if (width > 0) {
+			int widthSpec = View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY);
+			int heightSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+			content.measure(widthSpec, heightSpec);
+			int contentHeight = content.getMeasuredHeight();
+			if (contentHeight > 0) {
+				bottomSheetBehavior.setPeekHeight(contentHeight);
 			}
 		}
 	}
@@ -912,6 +1008,16 @@ public class DiscountBottomSheet extends BaseMaterialBottomSheetDialogFragment i
 		if (insets != null) {
 			Insets navBarInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars());
 			return navBarInsets.bottom;
+		}
+		return 0;
+	}
+
+	private int getStatusBarTopInset() {
+		WindowInsetsCompat insets = getLastRootInsets();
+		if (insets != null) {
+			Insets statusBarInsets = insets.getInsets(WindowInsetsCompat.Type.statusBars()
+					| WindowInsetsCompat.Type.displayCutout());
+			return statusBarInsets.top;
 		}
 		return 0;
 	}

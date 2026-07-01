@@ -122,11 +122,7 @@
 					tools:text="Get OsmAnd Cloud to store all OsmAnd data online." />
 			</LinearLayout>
 
-			<View
-				android:layout_width="match_parent"
-				android:layout_height="1dp"
-				android:layout_marginTop="@dimen/content_padding_small"
-				android:background="?attr/divider_color_basic" />
+
 
 			<net.osmand.plus.widgets.FlowLayout
 				android:id="@+id/list_container"
