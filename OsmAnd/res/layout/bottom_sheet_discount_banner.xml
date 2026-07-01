@@ -97,7 +97,7 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_gravity="center_horizontal"
-					android:layout_marginTop="@dimen/content_padding_half"
+					android:layout_marginTop="@dimen/content_padding"
 					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/big_header_text_size"
 					app:typefaceWeight="medium"
@@ -109,7 +109,7 @@
 				android:id="@+id/primary_description_container"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_marginTop="@dimen/content_padding_half"
+				android:layout_marginTop="@dimen/content_padding_small"
 				android:gravity="center_horizontal"
 				android:orientation="vertical"
 				android:paddingLeft="@dimen/content_padding_small"
@@ -121,7 +121,7 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:gravity="center_horizontal"
-					android:textColor="?android:textColorPrimary"
+					android:textColor="?android:textColorSecondary"
 					android:textSize="@dimen/default_list_text_size"
 					tools:text="Get OsmAnd Cloud to store all OsmAnd data online." />
 			</LinearLayout>
