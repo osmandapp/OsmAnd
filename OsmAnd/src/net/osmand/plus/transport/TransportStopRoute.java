@@ -10,6 +10,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.util.Algorithms;
 
 import java.util.HashMap;
 import java.util.List;
@@ -83,6 +84,14 @@ public class TransportStopRoute {
 		if (cachedColor == 0 || cachedNight != nightMode) {
 			cachedColor = ctx.getColor(R.color.transport_route_line);
 			cachedNight = nightMode;
+			String directColor = route != null ? route.getColor() : null;
+			if (directColor != null && directColor.startsWith("#")) {
+				try {
+					cachedColor = Algorithms.parseColor(directColor);
+					return cachedColor;
+				} catch (IllegalArgumentException ignored) {
+				}
+			}
 			if (type != null) {
 				RenderingRulesStorage rrs = ctx.getRendererRegistry().getCurrentSelectedRenderer();
 				RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);

@@ -444,7 +444,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		Drawable icon = getContentIcon(drawableResId);
 
 		Typeface typeface = FontCache.getMediumFont();
-		String timeText = OsmAndFormatter.getFormattedDurationShortMinutes(startTime[0]);
+		String timeText = getStopTimeText(segment.departureTimeMillis, startTime[0]);
 
 		SpannableString secondaryText = new SpannableString(getString(R.string.sit_on_the_stop));
 		secondaryText.setSpan(new ForegroundColorSpan(getMainFontColor()), 0, secondaryText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -524,7 +524,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		}
 		// fix later for schedule
 		startTime[0] += (int) segment.getTravelTime();
-		String textTime = OsmAndFormatter.getFormattedDurationShortMinutes(startTime[0]);
+		String textTime = getStopTimeText(segment.arrivalTimeMillis, startTime[0]);
 
 		secondaryText = new SpannableString(getString(R.string.exit_at));
 		secondaryText.setSpan(new CustomTypefaceSpan(typeface), 0, secondaryText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -619,6 +619,13 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		}
 	}
 
+	private String getStopTimeText(long epochMillis, int fallbackDurationSec) {
+		if (epochMillis > 0) {
+			return OsmAndFormatter.getFormattedTimeShort(epochMillis / 1000, false);
+		}
+		return OsmAndFormatter.getFormattedDurationShortMinutes(fallbackDurationSec);
+	}
+
 	private void buildStartItem(@NonNull View view, TargetPoint start, int[] startTime,
 								TransportRouteResultSegment segment, double walkSpeed) {
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
@@ -637,7 +644,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 			name = getString(R.string.shared_string_my_location);
 		}
 		Spannable startTitle = new SpannableString(name);
-		String text = OsmAndFormatter.getFormattedDurationShortMinutes(startTime[0]);
+		String text = getStopTimeText(segment.departureTimeMillis, startTime[0]);
 
 		int drawableId = start == null ? R.drawable.ic_action_location_color : R.drawable.list_startpoint;
 		Drawable icon = app.getUIUtilities().getIcon(drawableId);
@@ -760,7 +767,8 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		buildRowDivider(infoContainer, true);
 		addWalkRouteIcon(imagesContainer);
 
-		String timeStr = OsmAndFormatter.getFormattedDurationShortMinutes(startTime[0] + walkTime);
+		long destEpoch = segment.arrivalTimeMillis > 0 ? segment.arrivalTimeMillis + walkTime * 1000L : -1;
+		String timeStr = getStopTimeText(destEpoch, startTime[0] + walkTime);
 		String name = getRoutePointDescription(destination.getLatLon(), destination.getOnlyName());
 		SpannableString title = new SpannableString(name);
 		title.setSpan(new CustomTypefaceSpan(typeface), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
