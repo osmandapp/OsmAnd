@@ -259,6 +259,11 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		}
 	}
 
+	@Override
+	public void onCardLayoutNeeded(@NonNull BaseCard card) {
+		updateContent();
+	}
+
 	private void updateRecordingTrack() {
 		adapter.updateItem(recordingTrackItem);
 	}
