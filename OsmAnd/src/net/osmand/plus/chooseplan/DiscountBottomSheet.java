@@ -889,7 +889,8 @@ public class DiscountBottomSheet extends BaseMaterialBottomSheetDialogFragment i
 		private final float cornerRadius;
 
 		DiscountBadgeSpan(@NonNull MapActivity activity) {
-			backgroundColor = ColorUtilities.getColor(activity, R.color.purchase_sc_discount);
+			int badgeColor = activity.isNightMode() ? R.color.sale_badge_dark: R.color.sale_badge_light;
+			backgroundColor = ColorUtilities.getColor(activity, badgeColor);
 			textColor = ColorUtilities.getColor(activity, R.color.active_buttons_and_links_text_light);
 			paddingHorizontal = activity.getResources().getDimensionPixelSize(R.dimen.content_padding_small_half);
 			paddingVertical = activity.getResources().getDimensionPixelSize(R.dimen.dash_margin);
@@ -926,7 +927,9 @@ public class DiscountBottomSheet extends BaseMaterialBottomSheetDialogFragment i
 			canvas.drawRoundRect(rect, cornerRadius, cornerRadius, paint);
 
 			paint.setColor(textColor);
-			canvas.drawText(text, start, end, badgeLeft + paddingHorizontal, y, paint);
+			float textX = rect.centerX() - textWidth / 2f;
+			float textY = rect.centerY() - (metrics.ascent + metrics.descent) / 2f;
+			canvas.drawText(text, start, end, textX, textY, paint);
 			paint.setColor(oldColor);
 		}
 	}
