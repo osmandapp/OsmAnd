@@ -331,8 +331,10 @@ public class DiscountBottomSheet extends BaseMaterialBottomSheetDialogFragment i
 
 	private Drawable createChipBackground() {
 		GradientDrawable drawable = new GradientDrawable();
-		drawable.setColor(ColorUtilities.getActivityBgColor(getApp(), isNightMode()));
-		drawable.setCornerRadius(getResources().getDimension(R.dimen.radius_small));
+		drawable.setColor(ColorUtilities.getColor(getApp(), isNightMode()
+				? R.color.banner_feature_bg_dark
+				: R.color.banner_feature_bg_light));
+		drawable.setCornerRadius(getResources().getDimension(R.dimen.radius_normal));
 		return drawable;
 	}
 
