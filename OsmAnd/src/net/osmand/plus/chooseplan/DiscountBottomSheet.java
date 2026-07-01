@@ -226,7 +226,7 @@ public class DiscountBottomSheet extends BaseMaterialBottomSheetDialogFragment i
 
 		FlowLayout listContainer = view.findViewById(R.id.list_container);
 		listContainer.removeAllViews();
-		int spacing = getResources().getDimensionPixelSize(R.dimen.content_padding_half);
+		int spacing = getResources().getDimensionPixelSize(R.dimen.content_padding_small_half);
 		for (BannerFeatureItem item : getBannerFeatureItems(inAppSku)) {
 			View itemView = createFeatureChip(item);
 			if (item.feature != null) {
@@ -283,8 +283,7 @@ public class DiscountBottomSheet extends BaseMaterialBottomSheetDialogFragment i
 		LinearLayout chip = new LinearLayout(requireContext());
 		chip.setGravity(android.view.Gravity.CENTER_VERTICAL);
 		chip.setOrientation(LinearLayout.HORIZONTAL);
-		chip.setMinimumHeight(dpToPx(36f));
-		int horizontalPadding = dpToPx(12f);
+		int horizontalPadding = dpToPx(9f);
 		int verticalPadding = dpToPx(6f);
 		chip.setPadding(horizontalPadding, verticalPadding, horizontalPadding, verticalPadding);
 		chip.setBackground(createChipBackground());
@@ -292,7 +291,7 @@ public class DiscountBottomSheet extends BaseMaterialBottomSheetDialogFragment i
 		ImageView icon = new ImageView(requireContext());
 		int iconSize = getResources().getDimensionPixelSize(R.dimen.standard_icon_size);
 		LinearLayout.LayoutParams iconParams = new LinearLayout.LayoutParams(iconSize, iconSize);
-		iconParams.setMarginEnd(dpToPx(8f));
+		iconParams.setMarginEnd(dpToPx(10f));
 		icon.setImageResource(item.getIconId(isNightMode()));
 		chip.addView(icon, iconParams);
 

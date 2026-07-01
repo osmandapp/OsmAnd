@@ -142,7 +142,7 @@
 				android:id="@+id/purchase_buttons"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_marginTop="@dimen/content_padding_small"
+				android:layout_marginTop="@dimen/content_padding"
 				android:layout_marginLeft="@dimen/content_padding_small"
 				android:layout_marginRight="@dimen/content_padding_small"
 				android:orientation="vertical">
