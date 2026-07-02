@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/freeVersionBannerHeader"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/activity_background_color"
+	android:paddingTop="@dimen/content_padding_small"
+	android:paddingBottom="@dimen/content_padding_small">
+
+	<include layout="@layout/free_version_banner" />
+
+</FrameLayout>

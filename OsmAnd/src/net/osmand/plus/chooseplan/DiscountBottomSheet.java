@@ -154,7 +154,7 @@ public class DiscountBottomSheet extends BaseMaterialBottomSheetDialogFragment i
 		Drawable contours = AppCompatResources.getDrawable(requireContext(), R.drawable.img_banner_contours);
 		if (contours != null) {
 			contours = contours.mutate();
-			contours.setAlpha(isNightMode() ? 255 : 51);
+			contours.setAlpha(isNightMode() ? 151 : 51);
 		}
 		AndroidUtils.setBackground(bannerContainer, new ClipRoundCornersDrawable(backgroundColor, cornerRadius, contours));
 	}
@@ -222,7 +222,6 @@ public class DiscountBottomSheet extends BaseMaterialBottomSheetDialogFragment i
 		primaryDescription.setText(selectedFeature != null
 				? selectedFeature.getDescription(getApp())
 				: args.getString(TITLE_KEY));
-		primaryDescription.setTextColor(ColorUtilities.getPrimaryTextColor(getApp(), nightMode));
 
 		FlowLayout listContainer = view.findViewById(R.id.list_container);
 		listContainer.removeAllViews();
