@@ -815,6 +815,16 @@ public class OpeningHoursParser {
 			return dayMonths != null;
 		}
 
+		// Returns true if dayMonths has at least one entry for the given month,
+		// meaning it was added as a partial range (e.g. "Jun 15-30") rather than
+		// a whole-month entry (e.g. "Jul") which only populates months[].
+		private boolean monthHasDayRestrictions(int month) {
+			for (boolean b : dayMonths[month]) {
+				if (b) return true;
+			}
+			return false;
+		}
+
 		/**
 		 * return an array representing the months of the rule
 		 *
@@ -1560,7 +1570,7 @@ public class OpeningHoursParser {
 			if (hasYears()) {
 				thisDay = isOpened(year, month, dmonth);
 			} else {
-				if (thisDay && hasDayMonths()) {
+				if (thisDay && hasDayMonths() && monthHasDayRestrictions(month)) {
 					thisDay = dayMonths[month][dmonth];
 				}
 			}
@@ -1574,7 +1584,7 @@ public class OpeningHoursParser {
 					previousDay = isOpened(year, month, dmonth - 1);
 				}
 			} else {
-				if (previousDay && hasDayMonths() && dmonth > 0) {
+				if (previousDay && hasDayMonths() && dmonth > 0 && monthHasDayRestrictions(month)) {
 					previousDay = dayMonths[month][dmonth - 1];
 				}
 			}
@@ -2109,7 +2119,7 @@ public class OpeningHoursParser {
 						}
 					}
 				}
-			} else if (t.type.ord() < currentParseParent.ord() && indexP == 0 && tokens.size() > i) {
+			} else if (t.type != TokenType.TOKEN_COMMA && t.type.ord() < currentParseParent.ord() && indexP == 0 && tokens.size() > i) {
 				BasicOpeningHourRule newRule = new BasicOpeningHourRule(basic.getSequenceIndex());
 				newRule.setComment(basic.getComment());
 				buildRule(newRule, tokens.subList(i, tokens.size()), rules);
@@ -2124,6 +2134,12 @@ public class OpeningHoursParser {
 				}
 			} else if (t.type == TokenType.TOKEN_DASH) {
 
+			} else if (t.type == TokenType.TOKEN_MONTH && currentParse == TokenType.TOKEN_DAY_MONTH && indexP == 0) {
+				// Standalone whole-month selector (e.g. "Jul" in "Jun 15-30,Jul,Aug") inside a
+				// day-of-month context. Set months[] directly so containsMonth() recognises it;
+				// also update prevToken so a subsequent TOKEN_DAY_MONTH (e.g. "Jul 6") can
+				// inherit this token as its parent.
+				basic.getMonths()[t.mainNumber] = true;
 			} else if (t.type.ord() == currentParse.ord()) {
 				if (indexP < 2) {
 					currentPair[indexP++] = t;
