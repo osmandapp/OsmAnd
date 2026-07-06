@@ -178,4 +178,13 @@ public class Street extends MapObject {
 		}
 		return s;
 	}
+
+	@Override
+	public String toString() {
+		String add = "";
+		if (city != null) {
+			add = city.getName() + " (" + city.getType().toString() + ")";
+		}
+		return "Street " + getName() + " (" + add + ") " + getLocation(); //$NON-NLS-1$ //$NON-NLS-2$
+	}
 }

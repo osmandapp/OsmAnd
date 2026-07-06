@@ -6,10 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 import net.osmand.binary.ObfConstants;
-import net.osmand.data.Amenity;
-import net.osmand.data.BaseDetailsObject;
-import net.osmand.data.LatLon;
-import net.osmand.data.MapObject;
+import net.osmand.data.*;
 import net.osmand.search.core.HashQuadTree;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
 import net.osmand.util.MapUtils;
@@ -200,6 +197,9 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 					add += " " + a.getSubTypeStr();
 				} else if (parent != null) {
 					add += " " + parent.object.getName();
+				}
+				if (atom.object instanceof Street street && street.getCity() != null) {
+					add += " " + street.getCity().getName();
 				}
 				LatLon resLoc = atom.getResultLocation();
 				return String.format("%s %s (%s) %.4f %.4f ", words, atom.typeStr() + " " + atom.object.getName() + add,

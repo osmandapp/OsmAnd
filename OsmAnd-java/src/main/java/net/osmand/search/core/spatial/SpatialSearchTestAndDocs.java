@@ -311,10 +311,10 @@ public class SpatialSearchTestAndDocs {
 //		query ="Lima Calle 20 San Isidro";
 //		query ="Calle 20 ";
 
-		pattern = "Ukraine_";
-		pattern2 = "Ukraine_";
+		pattern = "Italy_";
+		pattern2 = "World";
 		//query = "Софійський";
-		query = "Сіверка";
+		query = "Torrente Capraia";
 		String lang = "en";
 
 		long t = System.nanoTime();
@@ -330,7 +330,7 @@ public class SpatialSearchTestAndDocs {
 		SpatialTextSearch a = new SpatialTextSearch();
 		System.out.println(String.format("Index files %.1f ms", (System.nanoTime() - t) / 1e6));
 		SpatialSearchContext searchContext = new SpatialSearchContext(settings, ls, location, lang);
-		SpatialSearchResults rs = a.searchTest(query, searchContext, 10);
+		SpatialSearchResults rs = a.searchTest(query, searchContext, 1000);
 		SpatialSearchResult mainResult = rs.getFirstResult();
 		if (mainResult != null && mainResult.matchedTokens() < rs.tokens.size() - 2) {
 			// another way to check to check to get mainResult - boundary object

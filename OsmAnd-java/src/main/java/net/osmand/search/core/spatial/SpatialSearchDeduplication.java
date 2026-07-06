@@ -1,13 +1,14 @@
 package net.osmand.search.core.spatial;
 
-import net.osmand.data.Amenity;
-import net.osmand.data.BaseDetailsObject;
-import net.osmand.data.MapObject;
+import net.osmand.data.*;
 import java.util.*;
 
 public class SpatialSearchDeduplication {
 
     SpatialSearchContext ctx;
+    private static final Set<String> FILTER_DUPLICATE_POI_SUBTYPE = new TreeSet<String>(
+            Arrays.asList("building", "internet_access_yes"));
+    private static final int DEPTH_TO_CHECK_SAME_SEARCH_RESULTS = 20;
     
     public SpatialSearchDeduplication(SpatialSearchContext ctx) {
         this.ctx = ctx;
@@ -17,31 +18,31 @@ public class SpatialSearchDeduplication {
         List<SpatialSearchResult> output = new ArrayList<>();
         Map<Long, Integer> osmIdMap = new HashMap<>();
         Map<String, Integer> wikidataMap = new HashMap<>();
+        Map<String, Integer> routeIdMap = new HashMap<>();
         Map<Integer, List<SpatialSearchResult>> copyDataMap = new HashMap<>();
         for (SpatialSearchResult spatial : input) {
             MapObject object = getMapObject(spatial);
             if (object instanceof Amenity that) {
                 Long osmId = that.getOsmId();
                 String wikidata = that.getWikidata();
+                String routeId = that.getRouteId();
 
                 if (osmId != null && osmId < 0) {
                     osmId = null; // do not merge synthetic osmId such as wiki
                 }
-                if (that.isRouteTrack()) {
-                    osmId = null;
-                    wikidata = null; // do not merge routes
-                }
 
                 Integer foundOsmIdIndex = osmId == null ? null : osmIdMap.get(osmId);
                 Integer foundWikidataIndex = wikidata == null ? null : wikidataMap.get(wikidata);
+                Integer foundRouteIndex = routeId == null ? null : routeIdMap.get(routeId);
 
                 int indexToUpdate = -1; // unique
 
-                if (foundOsmIdIndex != null && foundWikidataIndex != null
-                        && !Objects.equals(foundOsmIdIndex, foundWikidataIndex)) {
-                    //LOG.info("foundOsmIdIndex != foundWikidataIndex (should never happens)");
-                } else if (foundOsmIdIndex != null || foundWikidataIndex != null) {
-                    indexToUpdate = foundOsmIdIndex != null ? foundOsmIdIndex : foundWikidataIndex;
+                if (foundOsmIdIndex != null) {                    
+                    indexToUpdate = foundOsmIdIndex;
+                } else if (foundWikidataIndex != null) {
+                    indexToUpdate = foundWikidataIndex;
+                } else if (foundRouteIndex != null) {
+                    indexToUpdate = foundRouteIndex;
                 }
 
                 if (indexToUpdate == -1) {
@@ -57,6 +58,9 @@ public class SpatialSearchDeduplication {
                 }
                 if (wikidata != null) {
                     wikidataMap.put(wikidata, indexToUpdate);
+                }
+                if (routeId != null) {
+                    routeIdMap.put(routeId, indexToUpdate);
                 }
             } else {
                 output.add(spatial);
@@ -93,12 +97,20 @@ public class SpatialSearchDeduplication {
 
     private SpatialSearchResult uniteData(List<SpatialSearchResult> list) {
         SpatialSearchResult unique = list.remove(0);
-        BaseDetailsObject base = new BaseDetailsObject(unique, ctx.lang);
+        MapObject uniqMapObject = getMapObject(unique);
+        BaseDetailsObject base = new BaseDetailsObject(uniqMapObject, ctx.lang);        
+        boolean united = false;
         for (SpatialSearchResult iterated : list) {
             MapObject mapObject = getMapObject(iterated);
-            base.addObject(mapObject);            
+            if (uniqMapObject == mapObject) {
+                continue;
+            }            
+            base.addObject(mapObject);
+            united = true;
         }
-        unique.unitedObject = base;
+        if (united) {
+            unique.unitedObject = base;
+        }
         return unique;
     }
     
@@ -113,5 +125,12 @@ public class SpatialSearchDeduplication {
             return first.atom.object;
         }
         return null;
+    }
+    
+    private String getObjectType(SpatialSearchResult searchResult) {
+        if (searchResult.objs.isEmpty())
+            return "";
+        SpatialSearchResult.SpatialSearchResultRef first = searchResult.objs.get(0);
+        return first.atom.typeStr();
     }
 }
