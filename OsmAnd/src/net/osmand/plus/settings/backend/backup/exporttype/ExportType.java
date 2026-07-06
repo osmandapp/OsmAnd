@@ -40,6 +40,7 @@ public enum ExportType {
 	POI_TYPES(new PoiTypesExportType()),
 	AVOID_ROADS(new AvoidRoadsExportType()),
 	FAVORITES(new FavoritesExportType()),
+	ATTACHED_MEDIA(new AttachedMediaExportType()),
 	TRACKS(new TracksExportType()),
 	GPX_DIR(new GpxDirExportType()),
 	OSM_NOTES(new OsmNotesExportType()),

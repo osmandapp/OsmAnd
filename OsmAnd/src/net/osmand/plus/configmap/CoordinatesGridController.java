@@ -64,8 +64,11 @@ public class CoordinatesGridController extends BaseDialogController {
 		return getString(gridFormat.getTitleId());
 	}
 
-	public void onFormatSelectorClicked(@NonNull View anchorView, @ColorInt int color, boolean nightMode) {
-		showPopUpMenu(anchorView, GridFormat.values(), getGridFormat(), this::onSelectFormat, color, nightMode);
+	public void onCoordinateFormatSelected(@NonNull String formatId) {
+		GridFormat gridFormat = GridFormat.fromCoordinateFormatId(formatId);
+		if (gridFormat != null) {
+			onSelectFormat(gridFormat);
+		}
 	}
 
 	private void onSelectFormat(@NonNull GridFormat format) {
@@ -155,6 +158,16 @@ public class CoordinatesGridController extends BaseDialogController {
 	@NonNull
 	public GridFormat getGridFormat() {
 		return gridSettings.getGridFormat(getSelectedAppMode());
+	}
+
+	@NonNull
+	public String getSelectedCoordinateFormatId() {
+		return getGridFormat().getCoordinateFormatId();
+	}
+
+	@NonNull
+	public List<String> getSupportedCoordinateFormatIds() {
+		return GridFormat.getSupportedCoordinateFormatIds();
 	}
 
 	public void setGridFormat(@NonNull GridFormat format) {

@@ -34,6 +34,7 @@ class CoordinateFormatSelectorBottomSheet : BaseMaterialModalBottomSheetDialogFr
 	private lateinit var targetAppMode: ApplicationMode
 	private var selectedFormatId: String? = null
 	private var showSelectOtherFormat: Boolean = true
+	private var formatIds: List<String>? = null
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -42,6 +43,9 @@ class CoordinateFormatSelectorBottomSheet : BaseMaterialModalBottomSheetDialogFr
 			?: currentAppMode
 		selectedFormatId = CoordinateFormatIds.normalize(arguments?.getString(ARG_SELECTED_FORMAT_ID))
 		showSelectOtherFormat = arguments?.getBoolean(ARG_SHOW_SELECT_OTHER_FORMAT, true) ?: true
+		formatIds = arguments?.getStringArrayList(ARG_FORMAT_IDS)
+			?.mapNotNull { CoordinateFormatIds.normalize(it) }
+			?.distinct()
 	}
 
 	override fun onCreateView(
@@ -71,8 +75,11 @@ class CoordinateFormatSelectorBottomSheet : BaseMaterialModalBottomSheetDialogFr
 	override fun getInsetTargets(): InsetTargetsCollection {
 		val collection = super.getInsetTargets()
 		if (::mainView.isInitialized) {
-			collection.replace(
-				InsetTarget.createScrollable(mainView).landscapeSides(InsetsUtils.InsetSide.BOTTOM)
+			collection.add(
+				InsetTarget.createCustomBuilder(R.id.formatSelectorContent)
+					.portraitSides(InsetsUtils.InsetSide.BOTTOM)
+					.landscapeSides(InsetsUtils.InsetSide.BOTTOM)
+					.applyPadding(true)
 			)
 		}
 		collection.removeType(InsetTarget.Type.ROOT_INSET)
@@ -107,10 +114,15 @@ class CoordinateFormatSelectorBottomSheet : BaseMaterialModalBottomSheetDialogFr
 
 	private fun bindFormats() {
 		val preferences = osmandSettings.coordinateFormatSettingsStorage
-		val preferredIds = preferences.getPreferredIds(targetAppMode)
+		val fixedFormatIds = formatIds
+		val preferredIds = fixedFormatIds ?: preferences.getPreferredIds(targetAppMode)
 		val selectedId = selectedFormatId ?: preferences.getPrimaryId(targetAppMode)
 		val preferredFormats = resolveFormats(preferredIds)
-		val recentFormats = resolveFormats(preferences.getRecentIds())
+		val recentFormats = if (fixedFormatIds == null) {
+			resolveFormats(preferences.getRecentIds().filterNot { it in preferredIds })
+		} else {
+			emptyList()
+		}
 
 		val preferredContainer = mainView.findViewById<LinearLayout>(R.id.preferredFormatsContainer)
 		preferredContainer.removeAllViews()
@@ -145,9 +157,7 @@ class CoordinateFormatSelectorBottomSheet : BaseMaterialModalBottomSheetDialogFr
 
 	private fun bindSelectOtherFormat() {
 		val action = mainView.findViewById<View>(R.id.selectOtherFormat)
-		val divider = mainView.findViewById<View>(R.id.actionDivider)
 		AndroidUiHelper.updateVisibility(action, showSelectOtherFormat)
-		AndroidUiHelper.updateVisibility(divider, showSelectOtherFormat)
 		if (!showSelectOtherFormat) {
 			return
 		}
@@ -191,23 +201,24 @@ class CoordinateFormatSelectorBottomSheet : BaseMaterialModalBottomSheetDialogFr
 		val description = getFormatDescription(format)
 		val descriptionView = row.findViewById<TextView>(R.id.description)
 		val itemContainer = row.findViewById<View>(R.id.itemContainer)
+		val textContent = row.findViewById<View>(R.id.textContent)
 		descriptionView.text = description
 		val hasDescription = description.isNotEmpty()
 		AndroidUiHelper.updateVisibility(descriptionView, hasDescription)
 		if (hasDescription) {
 			itemContainer.minimumHeight = dp(64)
-			itemContainer.setPadding(
-				itemContainer.paddingLeft,
+			textContent.setPadding(
+				textContent.paddingLeft,
 				dp(8),
-				itemContainer.paddingRight,
+				textContent.paddingRight,
 				dp(8)
 			)
 		} else {
 			itemContainer.minimumHeight = dp(48)
-			itemContainer.setPadding(
-				itemContainer.paddingLeft,
+			textContent.setPadding(
+				textContent.paddingLeft,
 				0,
-				itemContainer.paddingRight,
+				textContent.paddingRight,
 				0
 			)
 		}
@@ -260,6 +271,7 @@ class CoordinateFormatSelectorBottomSheet : BaseMaterialModalBottomSheetDialogFr
 		private const val ARG_APP_MODE_KEY = "app_mode_key"
 		private const val ARG_SELECTED_FORMAT_ID = "selected_format_id"
 		private const val ARG_SHOW_SELECT_OTHER_FORMAT = "show_select_other_format"
+		private const val ARG_FORMAT_IDS = "format_ids"
 
 		@JvmStatic
 		@JvmOverloads
@@ -268,7 +280,8 @@ class CoordinateFormatSelectorBottomSheet : BaseMaterialModalBottomSheetDialogFr
 			requestKey: String = DEFAULT_REQUEST_KEY,
 			appMode: ApplicationMode? = null,
 			selectedFormatId: String? = null,
-			showSelectOtherFormat: Boolean = true
+			showSelectOtherFormat: Boolean = true,
+			formatIds: List<String>? = null
 		) {
 			if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 				CoordinateFormatSelectorBottomSheet().apply {
@@ -277,6 +290,7 @@ class CoordinateFormatSelectorBottomSheet : BaseMaterialModalBottomSheetDialogFr
 						putString(ARG_APP_MODE_KEY, appMode?.stringKey)
 						putString(ARG_SELECTED_FORMAT_ID, selectedFormatId)
 						putBoolean(ARG_SHOW_SELECT_OTHER_FORMAT, showSelectOtherFormat)
+						formatIds?.let { putStringArrayList(ARG_FORMAT_IDS, ArrayList(it)) }
 					}
 				}.show(fragmentManager, TAG)
 			}

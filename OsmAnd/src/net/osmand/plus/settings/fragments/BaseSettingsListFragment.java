@@ -120,6 +120,7 @@ public abstract class BaseSettingsListFragment extends BaseFullScreenFragment im
 		});
 
 		adapter = new ExportSettingsAdapter(requireContext(), exportMode, this, nightMode);
+		syncAttachedMediaSelection();
 		adapter.updateSettingsItems(dataList, selectedItemsMap);
 		expandableList.setAdapter(adapter);
 		setupListView(expandableList);
@@ -279,14 +280,22 @@ public abstract class BaseSettingsListFragment extends BaseFullScreenFragment im
 			List<?> selectedItems = selected ? categoryItems.getItemsForType(exportType) : new ArrayList<>();
 			selectedItemsMap.put(exportType, selectedItems);
 		}
+		syncAttachedMediaSelection();
 		updateAvailableSpace();
 	}
 
 	@Override
 	public void onItemsSelected(@NonNull ExportType exportType, List<?> selectedItems) {
 		selectedItemsMap.put(exportType, selectedItems);
+		syncAttachedMediaSelection();
 		adapter.notifyDataSetChanged();
 		updateAvailableSpace();
+	}
+
+	private void syncAttachedMediaSelection() {
+		if (exportMode && Algorithms.isEmpty(selectedItemsMap.get(ExportType.FAVORITES))) {
+			selectedItemsMap.remove(ExportType.ATTACHED_MEDIA);
+		}
 	}
 
 	@Nullable

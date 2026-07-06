@@ -20,6 +20,8 @@ public class Abbreviations {
     // set of words to check for buidlings
     private static final Map<String, String> buildingAbbreviations = new HashMap<>();
 	private static final Set<String> conjunctions = new TreeSet<>();
+	
+	private static final Set<String> commonSkipOtherCnt = new TreeSet<>();
 
     static {
     	// articles
@@ -41,22 +43,27 @@ public class Abbreviations {
 		conjunctions.add("и");
     }
     
+    private static void addAbbrDirStatus(String key, String full) {
+    	abbreviations.put(key, full);
+    	commonSkipOtherCnt.add(key);
+    	commonSkipOtherCnt.add(full.toLowerCase());
+    }
     static {
-        abbreviations.put("e", "East");
-        abbreviations.put("w", "West");
-        abbreviations.put("s", "South");
-        abbreviations.put("n", "North");
-        abbreviations.put("sw", "Southwest");
-        abbreviations.put("se", "Southeast");
-        abbreviations.put("nw", "Northwest");
-        abbreviations.put("ne", "Northeast");
-        abbreviations.put("ln", "Lane");
-        abbreviations.put("dr", "Drive");
-        abbreviations.put("rd", "Road");
-        abbreviations.put("av", "Avenue");
-        abbreviations.put("st", "Street"); // 2 values could be saint
-        abbreviations.put("hwy", "Highway");
-        abbreviations.put("blvd", "Boulevard");
+    	addAbbrDirStatus("e", "East");
+    	addAbbrDirStatus("w", "West");
+    	addAbbrDirStatus("s", "South");
+    	addAbbrDirStatus("n", "North");
+    	addAbbrDirStatus("sw", "Southwest");
+    	addAbbrDirStatus("se", "Southeast");
+    	addAbbrDirStatus("nw", "Northwest");
+    	addAbbrDirStatus("ne", "Northeast");
+    	addAbbrDirStatus("ln", "Lane");
+    	addAbbrDirStatus("dr", "Drive");
+    	addAbbrDirStatus("rd", "Road");
+    	addAbbrDirStatus("av", "Avenue");
+    	addAbbrDirStatus("st", "Street"); // 2 values could be saint
+    	addAbbrDirStatus("hwy", "Highway");
+    	addAbbrDirStatus("blvd", "Boulevard");
     }
     
     static {
@@ -142,5 +149,9 @@ public class Abbreviations {
 
 	public static boolean isConjunction(String lowerCase) {
 		return conjunctions.contains(lowerCase);
+	}
+	
+	public static boolean isCommonSkipOtherCnt(String lowerCase) {
+		return commonSkipOtherCnt.contains(lowerCase);
 	}
 }

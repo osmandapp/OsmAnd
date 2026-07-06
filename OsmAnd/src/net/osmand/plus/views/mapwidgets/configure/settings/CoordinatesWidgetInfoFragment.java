@@ -12,13 +12,14 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.coordinates.CoordinateFormat;
 import net.osmand.plus.settings.coordinates.CoordinateFormatFormatter;
 import net.osmand.plus.settings.coordinates.CoordinateFormatSelectorBottomSheet;
-import net.osmand.plus.settings.fragments.CoordinatesFormatFragment;
+import net.osmand.plus.settings.fragments.AddCoordinateFormatFragment;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.widgets.CoordinatesBaseWidget;
 
 public class CoordinatesWidgetInfoFragment extends WidgetInfoBaseFragment {
 
 	private static final String REQUEST_COORDINATES_WIDGET_FORMAT = "coordinates_widget_format";
+	private static final String REQUEST_COORDINATES_WIDGET_ADD_FORMAT = "coordinates_widget_add_format";
 	private static final String SELECTED_FORMAT_ID_KEY = "selected_format_id";
 
 	private String selectedFormatId;
@@ -49,6 +50,8 @@ public class CoordinatesWidgetInfoFragment extends WidgetInfoBaseFragment {
 		row.setOnClickListener(v -> showFormatSelector());
 		updateSummary();
 
+		getChildFragmentManager().setFragmentResultListener(REQUEST_COORDINATES_WIDGET_ADD_FORMAT, this,
+				(requestKey, result) -> view.post(this::showFormatSelector));
 		CoordinateFormatSelectorBottomSheet.setupResultListener(getChildFragmentManager(), this,
 				new CoordinateFormatSelectorBottomSheet.FormatSelectionListener() {
 					@Override
@@ -61,7 +64,8 @@ public class CoordinatesWidgetInfoFragment extends WidgetInfoBaseFragment {
 
 					@Override
 					public void onSelectOtherFormat() {
-						CoordinatesFormatFragment.showAddFormat(requireActivity(), appMode);
+						AddCoordinateFormatFragment.showDialog(getChildFragmentManager(), appMode, true,
+								REQUEST_COORDINATES_WIDGET_ADD_FORMAT);
 					}
 				}, REQUEST_COORDINATES_WIDGET_FORMAT);
 	}

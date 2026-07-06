@@ -32,6 +32,11 @@ class FileMediaSource extends MediaSource {
 	}
 
 	@Override
+	public long getLastModified() {
+		return file.lastModified();
+	}
+
+	@Override
 	public void delete() throws IOException {
 		if (!file.exists()) {
 			return;

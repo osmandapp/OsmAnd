@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.IProgress;
 import net.osmand.plus.backup.BackupUtils;
+import net.osmand.plus.settings.backend.backup.items.AttachedMediaSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
@@ -38,7 +39,10 @@ public class ZipWriter extends AbstractWriter {
 
 	private void writeEntry(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
 							@NonNull String fileName, @NonNull ZipOutputStream zos) throws IOException {
-		if (itemWriter.getItem() instanceof FileSettingsItem fileSettingsItem) {
+		SettingsItem item = itemWriter.getItem();
+		if (item instanceof AttachedMediaSettingsItem) {
+			writeItemToStream(itemWriter, fileName, zos);
+		} else if (item instanceof FileSettingsItem fileSettingsItem) {
 			writeDirWithFiles(itemWriter, fileSettingsItem.getFile(), zos);
 		} else {
 			writeItemToStream(itemWriter, fileName, zos);
@@ -57,9 +61,14 @@ public class ZipWriter extends AbstractWriter {
 									  @NonNull String fileName) {
 		fileName = BackupUtils.removeLeadingSlash(fileName);
 		ZipEntry entry = new ZipEntry(fileName);
-		if (itemWriter.getItem() instanceof FileSettingsItem) {
-			FileSettingsItem fileSettingsItem = (FileSettingsItem) itemWriter.getItem();
-			entry.setTime(fileSettingsItem.getFile().lastModified());
+		if (itemWriter.getItem() instanceof FileSettingsItem fileSettingsItem) {
+			long time = fileSettingsItem.getFile().lastModified();
+			if (time <= 0) {
+				time = fileSettingsItem.getLastModifiedTime();
+			}
+			if (time > 0) {
+				entry.setTime(time);
+			}
 		}
 		return entry;
 	}

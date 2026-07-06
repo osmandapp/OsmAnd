@@ -2,17 +2,20 @@ package net.osmand.search.core.spatial;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 
+import gnu.trove.iterator.TIntIterator;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.hash.TLongHashSet;
-import net.osmand.binary.BinaryMapAddressReaderAdapter.CityBlocks;
 import net.osmand.binary.Abbreviations;
+import net.osmand.binary.BinaryMapAddressReaderAdapter.CityBlocks;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.NameIndexReader;
 import net.osmand.binary.NameIndexReader.NameIndexReaderBytes;
@@ -34,7 +37,7 @@ import net.osmand.util.SearchAlgorithms;
 
 public class SpatialSearchContext {
 
-	private static int SHIFT_FILE_IND = 12; // maximum files 4096
+	private static int SHIFT_FILE_IND = 12; // maxism files 4096
 	private static int SHIFT_POI_IND = 10; // maximum poi 1024
 
 	final List<BinaryMapIndexReader> files;
@@ -54,6 +57,7 @@ public class SpatialSearchContext {
 		public Timer step1Atoms = new Timer();
 		public Timer sub1FileAtomsTime = new Timer();
 		public Timer sub1MatchTime = new Timer();
+		public Timer sub1PoiNameBoundaryTime = new Timer();
 		public int tokenObjs;
 		
 		public Timer step2Compute = new Timer();
@@ -96,10 +100,10 @@ public class SpatialSearchContext {
 		@Override
 		public String toString() {
 			return String.format(
-					"Search Stats %.1f ms (read %,d KB) - %.1f ms %,d atoms (read %.1f, match %.1f), "
+					"Search Stats %.1f ms (read %,d KB) - %.1f ms %,d atoms (read %.1f, match %.1f, poi %.1f), "
 					+ "%.1f ms compute %,d (loadBld %.1f, read %.1f)",
 					requestTime.ms(), (readTableBytes + readAtomsBytes + readObjsBytes) / 1024,
-					step1Atoms.ms(), tokenObjs,  sub1FileAtomsTime.ms(), sub1MatchTime.ms(),
+					step1Atoms.ms(), tokenObjs,  sub1FileAtomsTime.ms(), sub1MatchTime.ms(), sub1PoiNameBoundaryTime.ms(),
 					step2Compute.ms(), maxCombinations, sub2LoadObjectsBldTime.ms(), sub2ReadObjTime.ms());
 		}
 
@@ -171,8 +175,7 @@ public class SpatialSearchContext {
 		}
 	}
 	
-	record BoundaryTokens(NameIndexAtom obj, TIntArrayList lstTokens) {
-	}
+	
 
 	void readAtoms(List<SpatialSearchToken> tokens) throws IOException {
 		int indxInd = 0;
@@ -195,61 +198,89 @@ public class SpatialSearchContext {
 			System.out.println(tokenStats(tokens).toString());
  		}
 		if (settings.OPTIM_DELETE_EMBEDDED_BOUNDARIES) {
-			filterEmbeddedBoundaries(tokens);
+			stats.sub1PoiNameBoundaryTime.start();
+			Map<TIntArrayList, List<AtomByTokens>> boundaries = filterEmbeddedBoundaries(tokens);
+			if (settings.OPTIM_FLAG_POI_SAME_AS_CITY_STREET || settings.OPTIM_DELETE_POI_SAME_AS_CITY_STREET) {
+				assignPoiFlagGeo(boundaries, tokens);
+			}
+			stats.sub1PoiNameBoundaryTime.finish();
 		}
+		
 	}
 
-	private void filterEmbeddedBoundaries(List<SpatialSearchToken> tokens) {
-		TLongObjectHashMap<BoundaryTokens> boundaries = new TLongObjectHashMap<>();
-		// 1. idnex boundaries by tokens 
-		for (int tokenOrder = 0; tokenOrder < tokens.size(); tokenOrder++) {
-			SpatialSearchToken token = tokens.get(tokenOrder);
-			for (NameIndexAtom a : token.atoms) {
-				if (a.isCity() || a.isBoundary()) {
-					if (!boundaries.containsKey(a.id)) {
-						boundaries.put(a.id, new BoundaryTokens(a, new TIntArrayList(5)));
-					}
-					boundaries.get(a.id).lstTokens.add(tokenOrder);
+	private void assignPoiFlagGeo(Map<TIntArrayList, List<AtomByTokens>> cities, List<SpatialSearchToken> tokens) {
+		Map<TIntArrayList, List<AtomByTokens>> streets = groupAtomsByTokens(tokens, t -> t.isStreet()); // check performance
+		Map<TIntArrayList, List<AtomByTokens>> pois = groupAtomsByTokens(tokens, t -> t.isPOI());
+		Iterator<Entry<TIntArrayList, List<AtomByTokens>>> it = pois.entrySet().iterator();
+		while (it.hasNext()) {
+			Entry<TIntArrayList, List<AtomByTokens>> e = it.next();
+			TIntArrayList lst = e.getKey();
+			List<AtomByTokens> cityNames = cities.get(lst);
+			if (cityNames != null) {
+				for (AtomByTokens poi : e.getValue()) {
+					markPOIAsArea(poi, cityNames, lst, tokens);
+				}
+			}
+			List<AtomByTokens> streetNames = streets.get(lst);
+			if (streetNames != null) {
+				for (AtomByTokens poi : e.getValue()) {
+					markPOIAsArea(poi, streetNames, lst, tokens);
 				}
 			}
 		}
-//		System.out.println("Boundaries " + boundaries.size());
-		// 2. combine boundaries by same tokens to find the largest boundary
-		Map<TIntArrayList, List<BoundaryTokens>> regroup = new HashMap<>();
-		for(BoundaryTokens b : boundaries.valueCollection()) {
-			List<BoundaryTokens> list = regroup.get(b.lstTokens);
-			if (list == null) {
-				list = new ArrayList<>();
-				regroup.put(b.lstTokens, list);
+	}
+
+	private void markPOIAsArea(AtomByTokens poi, List<AtomByTokens> cityNames, TIntArrayList indxs,
+			List<SpatialSearchToken> tokens) {
+		for (AtomByTokens largeArea : cityNames) {
+			if (largeArea.obj.coords.contains(poi.obj.coords)) {
+				TIntIterator it = indxs.iterator();
+				while (it.hasNext()) {
+					int indx = it.next();
+					if (settings.OPTIM_DELETE_POI_SAME_AS_CITY_STREET) {
+						// delete completely no clear use case for improvement yet found
+						tokens.get(indx).removeAtom(poi.obj);
+					} else {
+						// mark to not intersect
+						NameIndexAtom atomSet = tokens.get(indx).getAtomToken(poi.obj);
+						atomSet.sameNameAreaObj = largeArea.obj;
+					}
+				}
+				return;
 			}
-			list.add(b);
 		}
+
+	}
+
+	record AtomByTokens(NameIndexAtom obj, TIntArrayList lstTokens) {
+	}
+	
+	
+	
+	private Map<TIntArrayList, List<AtomByTokens>> filterEmbeddedBoundaries(List<SpatialSearchToken> tokens) {
+		Map<TIntArrayList, List<AtomByTokens>> group = groupAtomsByTokens(tokens, t -> t.isCityVillage() || t.isBoundary());
 		// 3. find the largest boundary and delete embedded
-		Iterator<Entry<TIntArrayList, List<BoundaryTokens>>> it = regroup.entrySet().iterator();
+		Iterator<Entry<TIntArrayList, List<AtomByTokens>>> it = group.entrySet().iterator();
 		while (it.hasNext()) {
-			Entry<TIntArrayList, List<BoundaryTokens>> e = it.next();
+			Entry<TIntArrayList, List<AtomByTokens>> e = it.next();
 			TIntArrayList lst = e.getKey();
 //			if (lst.size() == tokens.size()) {
 			if (lst.size() >= tokens.size() - 1) {
 				// do not delete full match tokens
 				continue;
 			}
-			StringBuilder words = new StringBuilder();
-			for (int i : lst.toArray()) {
-				words.append(tokens.get(i).word + " ");
-			}
-			List<BoundaryTokens> collection = e.getValue();
-//			int sz = collection.size();
+			List<AtomByTokens> collection = e.getValue();
 			for (int k = 0; k < collection.size();) {
-				BoundaryTokens aBoundary = collection.get(k);
-				BoundaryTokens toDelete = null;
+				AtomByTokens aBoundary = collection.get(k);
+				AtomByTokens toDelete = null;
 //				BoundaryTokens reason = null;
 				for (int l = 0; l < collection.size(); l++) {
 					if (k == l) {
 						continue;
 					}
-					BoundaryTokens bBoundary = collection.get(l);
-					if (bBoundary.obj.coords.contains(aBoundary.obj.coords)) {
+					AtomByTokens bBoundary = collection.get(l);
+					if (bBoundary.obj.coords.contains(aBoundary.obj.coords)
+							&& bBoundary.obj.otherWordsCnt <= aBoundary.obj.otherWordsCnt) {
 						toDelete = aBoundary;
 //						reason = bBoundary;
 						break;
@@ -267,6 +298,35 @@ public class SpatialSearchContext {
 			}
 //			System.out.printf("Boundaries clean up '%s' %d -> %d: %s \n", words, sz, collection.size(), collection);
 		}
+		return group;
+	}
+
+	private Map<TIntArrayList, List<AtomByTokens>> groupAtomsByTokens(List<SpatialSearchToken> tokens, Predicate<NameIndexAtom> filter) {
+		TLongObjectHashMap<AtomByTokens> boundaries = new TLongObjectHashMap<>();
+		// 1. index boundaries by tokens 
+		for (int tokenOrder = 0; tokenOrder < tokens.size(); tokenOrder++) {
+			SpatialSearchToken token = tokens.get(tokenOrder);
+			for (NameIndexAtom a : token.atoms) {
+				if (filter.test(a)) {
+					if (!boundaries.containsKey(a.id)) {
+						boundaries.put(a.id, new AtomByTokens(a, new TIntArrayList(5)));
+					}
+					boundaries.get(a.id).lstTokens.add(tokenOrder);
+				}
+			}
+		}
+//		System.out.println("Boundaries " + boundaries.size());
+		// 2. combine boundaries by same tokens to find the largest boundary
+		Map<TIntArrayList, List<AtomByTokens>> regroup = new HashMap<>();
+		for(AtomByTokens b : boundaries.valueCollection()) {
+			List<AtomByTokens> list = regroup.get(b.lstTokens);
+			if (list == null) {
+				list = new ArrayList<>();
+				regroup.put(b.lstTokens, list);
+			}
+			list.add(b);
+		}
+		return regroup;
 	}
 
 	private StringBuilder tokenStats(List<SpatialSearchToken> tokens) {
@@ -326,6 +386,17 @@ public class SpatialSearchContext {
 	private void readAtoms(List<SpatialSearchToken> tokens, BinaryMapIndexReader b, NameIndexReader indx, int indxInd)
 			throws IOException {
 		ReadTokens read = computeReadTokens(tokens, indx);
+		// sort to assign tokens to '2nd street 2' first instead '2 2nd street'
+		tokens.sort(new Comparator<SpatialSearchToken>() {
+			@Override
+			public int compare(SpatialSearchToken o1, SpatialSearchToken o2) {
+				int cm = Boolean.compare(SearchAlgorithms.isNumber2Letters(o1.word), SearchAlgorithms.isNumber2Letters(o2.word));
+				if (cm != 0) {
+					return cm;
+				}
+				return Integer.compare(o1.originalOrder, o2.originalOrder);
+			}
+		});
 		for (SpatialSearchToken t : tokens) {
 			Map<String, ValueFreq> frequentWords = indx.getCommonWordsStats();
 			if (!read.init && frequentWords != null) {
@@ -536,9 +607,8 @@ public class SpatialSearchContext {
 		return obj;
 	}
 
-	private void parseSuffixes(SpatialSearchToken t, List<String> suffixes, List<String> commonSuffixes,
-			AddressNameIndexDataAtom a, OsmAndPoiNameIndexDataAtom b, long cid, long pid, MapObject obj,
-			List<SpatialSearchToken> allTokens) {
+	private void parseSuffixes(SpatialSearchToken t, List<String> suffixes, List<String> commonSuffixes, AddressNameIndexDataAtom a, 
+			OsmAndPoiNameIndexDataAtom b, long cid, long pid, MapObject obj, List<SpatialSearchToken> allTokens) {
 		int cnt = a != null ? a.getSuffixesBitsetIndexCount() : b.getSuffixesBitsetIndexCount();
 		String name = "";
 		int wordInd = 0;
@@ -560,7 +630,7 @@ public class SpatialSearchContext {
 						} else {
 							other = wordInd < b.getOtherWordsCountCount() ? b.getOtherWordsCount(wordInd) : 0;
 						}
-						addObject(t, name, type, cid, pid, obj, other, new NameIndexAtomXY(a, b), allTokens);
+						addObject(t, name, type, cid, pid, obj, other, new NameIndexAtomXY(a, b, settings), allTokens);
 					}
 					wordInd++;
 					name = "";
@@ -592,7 +662,7 @@ public class SpatialSearchContext {
 			} else {
 				other = wordInd < b.getOtherWordsCountCount() ? b.getOtherWordsCount(wordInd) : 0;
 			}
-			addObject(t, name, type, cid, pid, obj, other, new NameIndexAtomXY(a, b), allTokens);
+			addObject(t, name, type, cid, pid, obj, other, new NameIndexAtomXY(a, b, settings), allTokens);
 		}
 	}
 
@@ -625,19 +695,19 @@ public class SpatialSearchContext {
 		List<SpatialSearchToken> otherTokens = null;
 		boolean streetCity = false;
 		boolean numericNotMatch = false;
-		boolean possiblyMultiword = name.indexOf(' ') != -1;
+		List<String> split = null;
+		if (name.indexOf(' ') != -1) {
+			split = SearchAlgorithms.splitAndNormalize(name, false);
+		}
 		// split '-' to allow search 'M-42' as 'M 42'
-		if (name.indexOf('-') != -1) {
-			possiblyMultiword = true;
-			name = name.replace('-', ' ');
+		if (name.indexOf('-') != -1 && !t.word.contains("-")) {
+			split = SearchAlgorithms.splitAndNormalize(name.replace('-', ' '), false);
 		}
-		// 2.Sokak
+		// '2.Sokak'
 		if (name.indexOf('.') != -1) {
-			possiblyMultiword = true;
-			name = name.replace('.', ' ');
+			split = SearchAlgorithms.splitAndNormalize(name.replace('.', ' '), false);
 		}
-		if (possiblyMultiword) {
-			List<String> split = SearchAlgorithms.splitAndNormalize(name, false);
+		if (split != null) {
 			for (int k = 1; k < split.size(); k++) {
 				String otherName = split.get(k);
 				boolean numeric = SearchAlgorithms.isNumber2Letters(otherName);
@@ -659,9 +729,11 @@ public class SpatialSearchContext {
 				}
 				if (!matched) {
 					if (numeric) {
-						numericNotMatch = true;
+						numericNotMatch = !t.word.contains(otherName); // "us 15" data, "us-15" token
 					}
-					other++;
+					if (!Abbreviations.isConjunction(otherName) && !Abbreviations.isCommonSkipOtherCnt(otherName)) {
+						other++;
+					}
 				}
 			}
 		}

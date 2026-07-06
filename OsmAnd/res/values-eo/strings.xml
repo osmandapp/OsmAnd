@@ -5217,4 +5217,16 @@
     <string name="ais_display_own_position_description">Kutime via propra pozicio montriĝas en OsmAnd. La aldona vidigo de via propra AIS-objekto povas esti konfuza, do vi povas malaktivigi ĝin tie ĉi.</string>
     <string name="ais_receive_in_background">Ricevi AIS-datumojn eĉ kiam OsmAdn estas paŭzigita.</string>
     <string name="ais_receive_in_background_description">Se aktiva, aŭskultanto de AIS-mesaĝoj pluos funkcii, kiam OsmAnd estas paŭzigita aŭ funkcias fone. Se malaktiva, neniu mesaĝo estos ricevita, kiam OsmAnd funkcios fone.</string>
+    <string name="sort_by_relevance">signifeco</string>
+    <string name="shared_string_recent">antaŭe uzitaj</string>
+    <string name="sort_by_nearest_to_map_center">proksimeco al map-centro</string>
+    <string name="last_week">Antaŭa semajno</string>
+    <string name="history_is_turned_off">Historio estas malaktiva</string>
+    <string name="search_and_navigation_history_disabled_descr">Historioj de serĉoj kaj de navigo estas malaktivaj. Aktivigu ilin en la agordoj por vidigi vian lastan agadon tie ĉi.</string>
+    <string name="open_history_settings">Malfermi agordojn pri historio</string>
+    <string name="search_around">Serĉi proksime</string>
+    <string name="search_around_my_location">mia pozicio</string>
+    <string name="search_around_map_center_description">%1$s for de via pozicio</string>
+    <string name="search_around_my_location_description">Serĉi ekde via pozicio</string>
+    <string name="routing_attr_motor_type_ethanol_name">Etanolo</string>
 </resources>

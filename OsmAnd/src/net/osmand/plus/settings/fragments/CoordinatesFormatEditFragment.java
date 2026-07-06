@@ -141,7 +141,11 @@ public class CoordinatesFormatEditFragment extends BaseCoordinateFormatFragment 
 		}
 		editableIds.add(normalizedId);
 		if (editAdapter != null) {
-			editAdapter.notifyItemInserted(editableIds.size() - 1);
+			int insertedPosition = editableIds.size() - 1;
+			editAdapter.notifyItemInserted(insertedPosition);
+			if (insertedPosition > 0) {
+				editAdapter.notifyItemChanged(insertedPosition - 1);
+			}
 		}
 		updateApplyButton();
 	}
@@ -150,13 +154,7 @@ public class CoordinatesFormatEditFragment extends BaseCoordinateFormatFragment 
 		if (!isEditChanged()) {
 			return;
 		}
-		List<String> previousIds = formatPreferences.getPreferredIds(appMode);
 		formatPreferences.setPreferredIds(appMode, editableIds);
-		for (String id : editableIds) {
-			if (!previousIds.contains(id)) {
-				formatPreferences.addRecentId(id);
-			}
-		}
 		dismiss();
 	}
 
@@ -223,16 +221,28 @@ public class CoordinatesFormatEditFragment extends BaseCoordinateFormatFragment 
 			}
 			holder.summary.setText(summary);
 			holder.divider.setVisibility(position < getItemCount() - 1 ? View.VISIBLE : View.GONE);
+			holder.removeButton.setVisibility(View.VISIBLE);
+			holder.removeButton.setImageDrawable(getIcon(R.drawable.ic_action_remove, R.color.color_osm_edit_delete));
+			holder.removeButton.setContentDescription(getString(R.string.shared_string_remove));
 			holder.removeButton.setEnabled(editableIds.size() > 1);
 			holder.removeButton.setAlpha(editableIds.size() > 1 ? 1.0f : 0.35f);
 			holder.removeButton.setBackground(null);
+			holder.removeButton.setClickable(true);
+			holder.removeButton.setFocusable(true);
 			holder.removeButton.setOnClickListener(v -> removeItem(holder.getBindingAdapterPosition()));
+			holder.dragHandle.setVisibility(View.VISIBLE);
+			holder.dragHandle.setImageDrawable(getIcon(R.drawable.ic_action_item_move,
+					ColorUtilities.getDefaultIconColorId(nightMode)));
+			holder.dragHandle.setContentDescription(getString(R.string.drag_to_reorder_content_description));
+			holder.dragHandle.setClickable(true);
+			holder.dragHandle.setFocusable(true);
 			holder.dragHandle.setOnTouchListener((v, event) -> {
 				if (event.getActionMasked() == MotionEvent.ACTION_DOWN && touchHelper != null) {
 					touchHelper.startDrag(holder);
 				}
 				return false;
 			});
+			setDividerTextStartMargin(holder.divider);
 		}
 
 		@Override
@@ -247,6 +257,7 @@ public class CoordinatesFormatEditFragment extends BaseCoordinateFormatFragment 
 			}
 			Collections.swap(editableIds, from, to);
 			notifyItemMoved(from, to);
+			notifyItemRangeChanged(Math.min(from, to), Math.abs(from - to) + 1);
 			updateApplyButton();
 			return true;
 		}
@@ -266,7 +277,8 @@ public class CoordinatesFormatEditFragment extends BaseCoordinateFormatFragment 
 			}
 			editableIds.remove(position);
 			notifyItemRemoved(position);
-			notifyItemRangeChanged(position, editableIds.size() - position);
+			int changedStartPosition = Math.max(0, position - 1);
+			notifyItemRangeChanged(changedStartPosition, editableIds.size() - changedStartPosition);
 			updateApplyButton();
 		}
 

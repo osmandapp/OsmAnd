@@ -24,17 +24,24 @@ import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.backup.BackupUtils;
+import net.osmand.plus.gallery.attached.helpers.AttachedMediaDataHelper;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu.NativeShareDialogBuilder;
+import net.osmand.plus.myplaces.favorites.FavoriteGroup;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper.SettingsExportListener;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.exporttype.MapSourcesExportType;
+import net.osmand.plus.settings.backend.backup.items.AttachedMediaSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.FavoritesSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
+import net.osmand.shared.gpx.primitives.Link;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -202,8 +209,72 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 		File tempDir = FileUtils.getTempDir(app);
 		String fileName = getFileName();
 		List<SettingsItem> items = app.getFileSettingsHelper().prepareSettingsItems(getSelectedData(), Collections.emptyList(), true);
+		processAttachedMediaItems(items);
 		progress.setMax(getMaxProgress(items));
 		app.getFileSettingsHelper().exportSettings(tempDir, fileName, getSettingsExportListener(), items, true);
+	}
+
+	private void processAttachedMediaItems(@NonNull List<SettingsItem> items) {
+		Set<String> selectedFavoriteHrefs = collectSelectedFavoriteHrefs();
+		Set<String> packedFileNames = collectPackedFileNames(items);
+		Map<String, String> hrefRewrites = new HashMap<>();
+		int exportedMediaItems = 0;
+
+		for (Iterator<SettingsItem> iterator = items.iterator(); iterator.hasNext(); ) {
+			SettingsItem item = iterator.next();
+			if (item instanceof AttachedMediaSettingsItem mediaItem) {
+				if (Collections.disjoint(mediaItem.getHrefKeys(), selectedFavoriteHrefs)) {
+					iterator.remove();
+				} else {
+					for (String key : mediaItem.getHrefKeys()) {
+						hrefRewrites.put(key, mediaItem.getRewrittenHref());
+					}
+					String fileName = BackupUtils.getItemFileName(mediaItem);
+					if (!packedFileNames.add(fileName)) {
+						iterator.remove();
+					} else {
+						exportedMediaItems++;
+					}
+				}
+			}
+		}
+		if (!hrefRewrites.isEmpty()) {
+			for (SettingsItem item : items) {
+				if (item instanceof FavoritesSettingsItem favoritesItem) {
+					favoritesItem.setHrefRewrites(hrefRewrites);
+				}
+			}
+		}
+		if (PluginsHelper.isDevelopment()) {
+			LOG.debug("Attached media export items: exported=" + exportedMediaItems + ", rewrites=" + hrefRewrites.size());
+		}
+	}
+
+	@NonNull
+	private Set<String> collectPackedFileNames(@NonNull List<SettingsItem> items) {
+		Set<String> res = new HashSet<>();
+		for (SettingsItem item : items) {
+			if (item instanceof FileSettingsItem && !(item instanceof AttachedMediaSettingsItem)) {
+				res.add(BackupUtils.getItemFileName(item));
+			}
+		}
+		return res;
+	}
+
+	@NonNull
+	private Set<String> collectSelectedFavoriteHrefs() {
+		Set<String> res = new HashSet<>();
+		List<FavoriteGroup> groups = (List<FavoriteGroup>) selectedItemsMap.get(ExportType.FAVORITES);
+		if (!Algorithms.isEmpty(groups)) {
+			AttachedMediaDataHelper helper = new AttachedMediaDataHelper(app);
+			for (Link link : helper.collectMediaLinks(groups)) {
+				String href = link.getHref();
+				if (!Algorithms.isEmpty(href)) {
+					res.add(href.trim());
+				}
+			}
+		}
+		return res;
 	}
 
 	private int getMaxProgress(List<SettingsItem> items) {

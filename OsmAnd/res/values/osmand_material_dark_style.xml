@@ -36,6 +36,8 @@
 		<item name="dlg_btn_transparent">@drawable/dlg_btn_transparent_dark</item>
 		<item name="dlg_btn_stroked">@drawable/dlg_btn_stroked_dark</item>
 		<item name="dlg_btn_stroked_secondary_content">@color/dlg_btn_stroked_secondary_content_dark</item>
+		<item name="dlg_btn_accent_stroked">@drawable/dlg_btn_accent_stroked_dark</item>
+		<item name="dlg_btn_accent_stroked_text">@color/dlg_btn_accent_stroked_text_dark</item>
 		<item name="dlg_btn_tertiary_text">@color/active_color_primary_dark</item>
 		<item name="dlg_btn_tertiary_harmful">@drawable/dlg_btn_tertiary_harmful</item>
 		<item name="text_color_secondary">@color/text_color_secondary_dark</item>

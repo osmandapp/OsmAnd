@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,6 +21,7 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -57,11 +58,17 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 	public static final String ADD_SCREEN_BACK_STACK_TAG = TAG;
 
 	private static final String ARG_FOCUS_SEARCH = "focus_search";
-	private static final String ARG_ADD_TO_EDIT_DRAFT = "add_to_edit_draft";
+	private static final String ARG_ADD_FORMAT_MODE = "add_format_mode";
 	private static final String ARG_EXCLUDED_IDS = "excluded_ids";
 	private static final String ARG_CLOSE_RESULT_KEY = "close_result_key";
 	private static final String STATE_SEARCH_QUERY = "search_query";
 	private static final int SOFT_INPUT_MODE_NOT_SET = Integer.MIN_VALUE;
+
+	private enum AddFormatMode {
+		PREFERRED,
+		RECENT,
+		EDIT_DRAFT
+	}
 
 	private CoordinateFormatSettingsStorage formatPreferences;
 	private CoordinateFormatHelper coordinateFormatHelper;
@@ -77,7 +84,7 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 
 	private String searchQuery = "";
 	private String closeResultKey;
-	private boolean addToEditDraft;
+	private AddFormatMode addFormatMode = AddFormatMode.PREFERRED;
 	private boolean focusSearch;
 	private int previousSoftInputMode = SOFT_INPUT_MODE_NOT_SET;
 
@@ -94,14 +101,14 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 		coordinateFormatHelper = app.getCoordinateFormatHelper();
 
 		Bundle args = getArguments();
-		addToEditDraft = args != null && args.getBoolean(ARG_ADD_TO_EDIT_DRAFT);
+		addFormatMode = getAddFormatMode(args);
 		focusSearch = args != null && args.getBoolean(ARG_FOCUS_SEARCH);
 		closeResultKey = args != null ? args.getString(ARG_CLOSE_RESULT_KEY) : null;
 		ArrayList<String> argExcludedIds = args != null ? args.getStringArrayList(ARG_EXCLUDED_IDS) : null;
-		if (addToEditDraft && argExcludedIds != null) {
+		if (addFormatMode == AddFormatMode.EDIT_DRAFT && argExcludedIds != null) {
 			excludedIds.addAll(argExcludedIds);
 		} else {
-			excludedIds.addAll(formatPreferences.getPreferredIds(appMode));
+			reloadExcludedIds();
 		}
 		if (savedInstanceState != null) {
 			searchQuery = savedInstanceState.getString(STATE_SEARCH_QUERY, "");
@@ -155,9 +162,8 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 	public void onResume() {
 		super.onResume();
 		updateStatusBarAppearance(getContentView());
-		if (!addToEditDraft) {
-			excludedIds.clear();
-			excludedIds.addAll(formatPreferences.getPreferredIds(appMode));
+		if (addFormatMode != AddFormatMode.EDIT_DRAFT) {
+			reloadExcludedIds();
 			renderAddContent();
 		}
 	}
@@ -174,6 +180,18 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 		outState.putString(STATE_SEARCH_QUERY, searchQuery);
 		outState.putStringArrayList(ARG_EXCLUDED_IDS, new ArrayList<>(excludedIds));
 		super.onSaveInstanceState(outState);
+	}
+
+	private void reloadExcludedIds() {
+		excludedIds.clear();
+		excludedIds.addAll(formatPreferences.getPreferredIds(appMode));
+		if (addFormatMode == AddFormatMode.RECENT) {
+			for (String id : formatPreferences.getRecentIds()) {
+				if (!excludedIds.contains(id)) {
+					excludedIds.add(id);
+				}
+			}
+		}
 	}
 
 	@Override
@@ -248,13 +266,13 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 		if (divider != null) {
 			divider.setVisibility(View.GONE);
 		}
-		searchInputView.getToolbar().setElevation(0);
-		searchInputView.getToolbar().setTranslationZ(0);
-		searchInputView.getToolbar().getMenu().clear();
-		if (searchInputView.getToolbar().getNavigationIcon() != null) {
-			searchInputView.getToolbar().getNavigationIcon().mutate().setTint(
-					ColorUtilities.getDefaultIconColor(requireContext(), nightMode));
-		}
+		Toolbar toolbar = searchInputView.getToolbar();
+		toolbar.setElevation(0);
+		toolbar.setTranslationZ(0);
+		toolbar.getMenu().clear();
+		toolbar.setNavigationIcon(getIcon(
+				AndroidUtils.getNavigationIconResId(toolbar.getContext()),
+				ColorUtilities.getDefaultIconColorId(nightMode)));
 		searchInputView.addTransitionListener((searchView, previousState, newState) -> {
 			if (newState == SearchView.TransitionState.SHOWN) {
 				updateStatusBarAppearance(searchView);
@@ -316,7 +334,7 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 
 		for (int i = 0; i < formats.size(); i++) {
 			CoordinateFormat format = formats.get(i);
-			list.addView(createFormatRow(format, true, false, i < formats.size() - 1, v -> onFormatChosen(format.getId())));
+			list.addView(createFormatRow(format, i < formats.size() - 1, v -> onFormatChosen(format.getId())));
 		}
 		return card;
 	}
@@ -341,18 +359,19 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 	}
 
 	private void onFormatChosen(@NonNull String id) {
-		if (addToEditDraft) {
+		if (addFormatMode == AddFormatMode.EDIT_DRAFT) {
 			Bundle result = new Bundle();
 			result.putString(REQUEST_ADD_TO_EDIT, id);
 			getParentFragmentManager().setFragmentResult(REQUEST_ADD_TO_EDIT, result);
 			closeAddScreen();
 			return;
 		}
-		boolean added = formatPreferences.addPreferredId(appMode, id);
+		boolean added = addFormatMode == AddFormatMode.RECENT
+				? formatPreferences.addRecentId(id)
+				: formatPreferences.addPreferredId(appMode, id);
 		if (added) {
 			String normalizedId = CoordinateFormatIds.normalize(id);
 			excludedIds.add(normalizedId != null ? normalizedId : id);
-			formatPreferences.addRecentId(id);
 			renderAddContent();
 			renderSearchResults();
 		}
@@ -457,69 +476,66 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 	}
 
 	@NonNull
-	private View createFormatRow(@NonNull CoordinateFormat format, boolean addRow, boolean primary,
-	                             boolean showDivider, @NonNull View.OnClickListener clickListener) {
-		View row = inflate(R.layout.coordinate_format_settings_item, null, false);
-		bindFormatRow(row, format, addRow, primary, showDivider, clickListener);
+	private View createFormatRow(@NonNull CoordinateFormat format, boolean showDivider,
+	                             @NonNull View.OnClickListener clickListener) {
+		View row = inflate(R.layout.coordinate_format_edit_item, null, false);
+		bindFormatRow(row, format, showDivider, clickListener);
 		return row;
 	}
 
-	private void bindFormatRow(@NonNull View row, @NonNull CoordinateFormat format, boolean addRow, boolean primary,
-	                           boolean showDivider, @NonNull View.OnClickListener clickListener) {
+	private void bindFormatRow(@NonNull View row, @NonNull CoordinateFormat format, boolean showDivider,
+	                           @NonNull View.OnClickListener clickListener) {
 		TextView title = row.findViewById(android.R.id.title);
 		TextView summary = row.findViewById(android.R.id.summary);
 		View divider = row.findViewById(R.id.divider);
-		View iconContainer = row.findViewById(R.id.iconContainer);
-		ImageView icon = row.findViewById(R.id.icon);
 		View selectable = row.findViewById(R.id.selectable_list_item);
 
 		title.setText(format.getTitle());
-		String description = getFormatSummary(format);
-		if (primary) {
-			description = description + " - " + getString(R.string.coordinate_format_primary);
-		}
-		summary.setText(description);
+		summary.setText(getFormatSummary(format));
 		divider.setVisibility(showDivider ? View.VISIBLE : View.GONE);
-		if (addRow) {
-			iconContainer.setVisibility(View.VISIBLE);
-			iconContainer.setBackground(null);
-			icon.setImageDrawable(getIcon(R.drawable.ic_action_add, R.color.color_osm_edit_create));
-			setDividerTextStartMargin(divider);
-		} else {
-			iconContainer.setVisibility(View.GONE);
-			setDividerDefaultMargin(divider);
-		}
+		configureAddRowActions(row);
 		selectable.setOnClickListener(clickListener);
 	}
 
-	private void setDividerTextStartMargin(@NonNull View divider) {
-		setDividerStartMargin(divider, dp(72));
+	private void configureAddRowActions(@NonNull View row) {
+		ImageButton addButton = row.findViewById(R.id.removeButton);
+		ImageButton dragHandle = row.findViewById(R.id.dragHandle);
+		addButton.setVisibility(View.VISIBLE);
+		addButton.setImageDrawable(getIcon(R.drawable.ic_action_add, R.color.color_osm_edit_create));
+		addButton.setContentDescription(getString(R.string.shared_string_add));
+		addButton.setClickable(false);
+		addButton.setFocusable(false);
+		addButton.setBackground(null);
+		dragHandle.setVisibility(View.GONE);
 	}
 
-	private void setDividerDefaultMargin(@NonNull View divider) {
-		setDividerStartMargin(divider, dp(16));
-	}
-
-	private void setDividerStartMargin(@NonNull View divider, int marginStart) {
-		ViewGroup.LayoutParams params = divider.getLayoutParams();
-		if (params instanceof ViewGroup.MarginLayoutParams marginParams) {
-			marginParams.setMarginStart(marginStart);
-			divider.setLayoutParams(marginParams);
+	@NonNull
+	private static AddFormatMode getAddFormatMode(@Nullable Bundle args) {
+		if (args == null) {
+			return AddFormatMode.PREFERRED;
 		}
+		String mode = args.getString(ARG_ADD_FORMAT_MODE);
+		if (mode != null) {
+			try {
+				return AddFormatMode.valueOf(mode);
+			} catch (IllegalArgumentException ignored) {
+			}
+		}
+		return AddFormatMode.PREFERRED;
 	}
 
 	private static void applyArguments(@NonNull AddCoordinateFormatFragment fragment,
 	                                   @NonNull ApplicationMode appMode,
-	                                   boolean addToEditDraft,
+	                                   @NonNull AddFormatMode addFormatMode,
 	                                   boolean focusSearch,
 	                                   @Nullable List<String> editableIds,
 	                                   @Nullable String closeResultKey) {
 		Bundle args = new Bundle();
 		args.putString(APP_MODE_KEY, appMode.getStringKey());
-		args.putBoolean(ARG_ADD_TO_EDIT_DRAFT, addToEditDraft);
+		args.putString(ARG_ADD_FORMAT_MODE, addFormatMode.name());
 		args.putBoolean(ARG_FOCUS_SEARCH, focusSearch);
 		args.putString(ARG_CLOSE_RESULT_KEY, closeResultKey);
-		if (addToEditDraft && editableIds != null) {
+		if (addFormatMode == AddFormatMode.EDIT_DRAFT && editableIds != null) {
 			args.putStringArrayList(ARG_EXCLUDED_IDS, new ArrayList<>(editableIds));
 		}
 		fragment.setArguments(args);
@@ -531,7 +547,7 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 	                              @Nullable String closeResultKey) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			AddCoordinateFormatFragment fragment = new AddCoordinateFormatFragment();
-			applyArguments(fragment, appMode, false, focusSearch, null, closeResultKey);
+			applyArguments(fragment, appMode, AddFormatMode.RECENT, focusSearch, null, closeResultKey);
 			fragment.show(fragmentManager, TAG);
 		}
 	}
@@ -540,7 +556,8 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 	                        boolean addToEditDraft, boolean focusSearch, @Nullable List<String> editableIds) {
 		AddCoordinateFormatFragment fragment = new AddCoordinateFormatFragment();
 		fragment.setShowsDialog(false);
-		applyArguments(fragment, appMode, addToEditDraft, focusSearch, editableIds, null);
+		AddFormatMode addFormatMode = addToEditDraft ? AddFormatMode.EDIT_DRAFT : AddFormatMode.PREFERRED;
+		applyArguments(fragment, appMode, addFormatMode, focusSearch, editableIds, null);
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		if (!fragmentManager.isStateSaved()) {
 			fragmentManager.beginTransaction()
@@ -555,14 +572,14 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 		@NonNull
 		@Override
 		public FormatViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-			View view = inflate(R.layout.coordinate_format_settings_item, parent, false);
+			View view = inflate(R.layout.coordinate_format_edit_item, parent, false);
 			return new FormatViewHolder(view);
 		}
 
 		@Override
 		public void onBindViewHolder(@NonNull FormatViewHolder holder, int position) {
 			CoordinateFormat format = searchItems.get(position);
-			bindFormatRow(holder.itemView, format, true, false, position < getItemCount() - 1,
+			bindFormatRow(holder.itemView, format, position < getItemCount() - 1,
 					v -> onFormatChosen(format.getId()));
 		}
 
@@ -571,7 +588,7 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 			return searchItems.size();
 		}
 
-		private class FormatViewHolder extends RecyclerView.ViewHolder {
+		private static class FormatViewHolder extends RecyclerView.ViewHolder {
 			FormatViewHolder(@NonNull View itemView) {
 				super(itemView);
 			}

@@ -144,13 +144,12 @@
                         android:layout_height="wrap_content">
 
                         <com.google.android.material.textfield.TextInputLayout
+                            style="?attr/textInputOutlinedStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="16dp"
                             android:layout_marginStart="16dp"
                             android:layout_marginEnd="16dp"
                             android:minHeight="56dp"
-                            app:boxBackgroundMode="outline"
                             app:boxBackgroundColor="?attr/list_background_color"
                             app:endIconContentDescription="@string/shared_string_clear"
                             app:endIconDrawable="@drawable/ic_action_remove_dark"
@@ -206,13 +205,12 @@
                         android:layout_height="wrap_content">
 
                         <com.google.android.material.textfield.TextInputLayout
+                            style="?attr/textInputOutlinedStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="16dp"
                             android:layout_marginStart="16dp"
                             android:layout_marginEnd="16dp"
                             android:minHeight="56dp"
-                            app:boxBackgroundMode="outline"
                             app:boxBackgroundColor="?attr/list_background_color"
                             app:endIconContentDescription="@string/shared_string_clear"
                             app:endIconDrawable="@drawable/ic_action_remove_dark"
@@ -262,14 +260,12 @@
                         android:layout_height="wrap_content">
 
                         <com.google.android.material.textfield.TextInputLayout
+                            style="?attr/textInputOutlinedStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginRight="16dp"
                             android:layout_marginStart="16dp"
                             android:layout_marginEnd="16dp"
                             android:minHeight="56dp"
-                            app:boxBackgroundMode="outline"
                             app:boxBackgroundColor="?attr/list_background_color"
                             app:endIconContentDescription="@string/shared_string_clear"
                             app:endIconDrawable="@drawable/ic_action_remove_dark"
@@ -327,13 +323,12 @@
                         android:layout_height="wrap_content">
 
                         <com.google.android.material.textfield.TextInputLayout
+                            style="?attr/textInputOutlinedStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="16dp"
                             android:layout_marginStart="16dp"
                             android:layout_marginEnd="16dp"
                             android:minHeight="56dp"
-                            app:boxBackgroundMode="outline"
                             app:boxBackgroundColor="?attr/list_background_color"
                             app:endIconContentDescription="@string/shared_string_clear"
                             app:endIconDrawable="@drawable/ic_action_remove_dark"
@@ -392,13 +387,12 @@
                         android:layout_height="wrap_content">
 
                         <com.google.android.material.textfield.TextInputLayout
+                            style="?attr/textInputOutlinedStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="16dp"
                             android:layout_marginStart="16dp"
                             android:layout_marginEnd="16dp"
                             android:minHeight="56dp"
-                            app:boxBackgroundMode="outline"
                             app:boxBackgroundColor="?attr/list_background_color"
                             app:endIconContentDescription="@string/shared_string_clear"
                             app:endIconDrawable="@drawable/ic_action_remove_dark"
@@ -449,14 +443,12 @@
                         android:layout_height="wrap_content">
 
                         <com.google.android.material.textfield.TextInputLayout
+                            style="?attr/textInputOutlinedStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginRight="16dp"
                             android:layout_marginStart="16dp"
                             android:layout_marginEnd="16dp"
                             android:minHeight="56dp"
-                            app:boxBackgroundMode="outline"
                             app:boxBackgroundColor="?attr/list_background_color"
                             app:endIconContentDescription="@string/shared_string_clear"
                             app:endIconDrawable="@drawable/ic_action_remove_dark"
@@ -507,14 +499,12 @@
                         android:layout_height="wrap_content">
 
                         <com.google.android.material.textfield.TextInputLayout
+                            style="?attr/textInputOutlinedStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginRight="16dp"
                             android:layout_marginStart="16dp"
                             android:layout_marginEnd="16dp"
                             android:minHeight="56dp"
-                            app:boxBackgroundMode="outline"
                             app:boxBackgroundColor="?attr/list_background_color"
                             app:endIconContentDescription="@string/shared_string_clear"
                             app:endIconDrawable="@drawable/ic_action_remove_dark"
@@ -592,14 +582,12 @@
                         android:layout_height="wrap_content">
 
                         <com.google.android.material.textfield.TextInputLayout
+                            style="?attr/textInputOutlinedStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginRight="16dp"
                             android:layout_marginStart="16dp"
                             android:layout_marginEnd="16dp"
                             android:minHeight="56dp"
-                            app:boxBackgroundMode="outline"
                             app:boxBackgroundColor="?attr/list_background_color"
                             app:endIconContentDescription="@string/shared_string_clear"
                             app:endIconDrawable="@drawable/ic_action_remove_dark"
@@ -657,13 +645,12 @@
                         android:layout_height="wrap_content">
 
                         <com.google.android.material.textfield.TextInputLayout
+                            style="?attr/textInputOutlinedStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="16dp"
                             android:layout_marginStart="16dp"
                             android:layout_marginEnd="16dp"
                             android:minHeight="56dp"
-                            app:boxBackgroundMode="outline"
                             app:boxBackgroundColor="?attr/list_background_color"
                             app:endIconContentDescription="@string/shared_string_clear"
                             app:endIconDrawable="@drawable/ic_action_remove_dark"
@@ -720,13 +707,12 @@
                         android:layout_height="wrap_content">
 
                         <com.google.android.material.textfield.TextInputLayout
+                            style="?attr/textInputOutlinedStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="16dp"
                             android:layout_marginStart="16dp"
                             android:layout_marginEnd="16dp"
                             android:minHeight="56dp"
-                            app:boxBackgroundMode="outline"
                             app:boxBackgroundColor="?attr/list_background_color"
                             app:endIconContentDescription="@string/shared_string_clear"
                             app:endIconDrawable="@drawable/ic_action_remove_dark"

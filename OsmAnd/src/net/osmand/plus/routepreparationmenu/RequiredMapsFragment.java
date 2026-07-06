@@ -11,7 +11,9 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +38,8 @@ import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.routepreparationmenu.RequiredMapsController.RequiredMapItem;
+import net.osmand.plus.routepreparationmenu.RequiredMapsController.RequiredMapType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
@@ -46,7 +50,6 @@ import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.util.Algorithms;
 
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 public class RequiredMapsFragment extends BaseFullScreenDialogFragment implements IAskRefreshDialogCompletely, DownloadEvents {
@@ -102,7 +105,6 @@ public class RequiredMapsFragment extends BaseFullScreenDialogFragment implement
 		view.setBackgroundColor(getActivityBgColor(app, nightMode));
 		setupToolbar();
 		updateContent();
-		setupCalculateOnlineCard();
 		return view;
 	}
 
@@ -136,8 +138,7 @@ public class RequiredMapsFragment extends BaseFullScreenDialogFragment implement
 		closeButton.setImageDrawable(getIcon(R.drawable.ic_action_close));
 		closeButton.setOnClickListener(v -> closeDialog());
 
-		TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
-		toolbarTitle.setText(R.string.required_maps);
+		updateToolbarTitle();
 
 		ImageView actionButton = toolbar.findViewById(R.id.action_button);
 		actionButton.setOnClickListener(v -> {
@@ -152,18 +153,27 @@ public class RequiredMapsFragment extends BaseFullScreenDialogFragment implement
 	}
 
 	private void updateContent() {
+		updateToolbarTitle();
 		if (controller.isLoadingInProgress()) {
 			updateVisibility(view.findViewById(R.id.loading_state), true);
 			updateVisibility(view.findViewById(R.id.main_state), false);
 		} else {
 			updateVisibility(view.findViewById(R.id.loading_state), false);
 			updateVisibility(view.findViewById(R.id.main_state), true);
+			updateRouteOverviewCard();
 			setupItemsList();
-			updateUsedMapsSummary();
 		}
 		updateSelectionButtonVisibility();
-		updateIgnoreMissingMapsCard();
 		updateDownloadButton();
+	}
+
+	private void updateToolbarTitle() {
+		if (view != null) {
+			TextView toolbarTitle = view.findViewById(R.id.toolbar_title);
+			if (toolbarTitle != null) {
+				toolbarTitle.setText(controller.getToolbarTitleId());
+			}
+		}
 	}
 
 	private void updateSelection() {
@@ -174,7 +184,8 @@ public class RequiredMapsFragment extends BaseFullScreenDialogFragment implement
 
 	private void updateSelectionButtonVisibility() {
 		ImageView actionButton = view.findViewById(R.id.action_button);
-		updateVisibility(actionButton, !controller.isLoadingInProgress());
+		updateVisibility(actionButton, !controller.isLoadingInProgress()
+				&& !Algorithms.isEmpty(controller.getMapsToProcess()));
 	}
 
 	private void updateToolbarMenu() {
@@ -189,9 +200,9 @@ public class RequiredMapsFragment extends BaseFullScreenDialogFragment implement
 	private void setupItemsList() {
 		ViewGroup container = view.findViewById(R.id.items_container);
 		container.removeAllViews();
-		List<DownloadItem> items = controller.getMapsToDownload();
+		List<RequiredMapItem> items = controller.getMapsToProcess();
 		for (int i = 0; i < items.size(); i++) {
-			DownloadItem downloadItem = items.get(i);
+			RequiredMapItem downloadItem = items.get(i);
 			boolean showBottomDivider = i < items.size() - 1;
 			container.addView(createItemView(downloadItem, showBottomDivider));
 		}
@@ -199,11 +210,12 @@ public class RequiredMapsFragment extends BaseFullScreenDialogFragment implement
 	}
 
 	@NonNull
-	private View createItemView(@NonNull DownloadItem downloadItem, boolean showBottomDivider) {
+	private View createItemView(@NonNull RequiredMapItem mapItem, boolean showBottomDivider) {
 		View view = inflate(R.layout.bottom_sheet_item_with_descr_and_checkbox_and_divider_56dp);
+		DownloadItem downloadItem = mapItem.downloadItem();
 		ImageView icon = view.findViewById(R.id.icon);
-		boolean downloaded = downloadItem.isDownloaded();
-		icon.setImageResource(downloaded ? R.drawable.ic_action_map_update : R.drawable.ic_action_map_download);
+		icon.setImageResource(mapItem.type() == RequiredMapType.OUTDATED
+				? R.drawable.ic_action_map_update : R.drawable.ic_action_map_missing);
 
 		TextView tvTitle = view.findViewById(R.id.title);
 		tvTitle.setText(getMapTitle(downloadItem));
@@ -216,8 +228,10 @@ public class RequiredMapsFragment extends BaseFullScreenDialogFragment implement
 			size += " " + addDesc;
 		}
 		DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(app);
-		String date = downloadItem.getDate(dateFormat, true);
-		String fullDescription = String.format(pattern, size, date);
+		String date = downloadItem.isDownloaded()
+				? downloadItem.getDate(dateFormat, false)
+				: downloadItem.getDate(dateFormat, true);
+		String fullDescription = Algorithms.isEmpty(date) ? size : String.format(pattern, size, date);
 		tvDescription.setText(fullDescription);
 
 		CompoundButton compoundButton = view.findViewById(R.id.compound_button);
@@ -232,19 +246,68 @@ public class RequiredMapsFragment extends BaseFullScreenDialogFragment implement
 		return view;
 	}
 
-	private void updateUsedMapsSummary() {
-		List<String> regionNames = new ArrayList<>();
-		for (DownloadItem downloadItem : controller.getUsedMaps()) {
-			String regionName = "\"" + getMapTitle(downloadItem) + "\"";
-			regionNames.add(regionName);
+	private void updateRouteOverviewCard() {
+		List<RequiredMapItem> items = controller.getRouteOverviewItems();
+		View card = view.findViewById(R.id.card_route_overview);
+		updateVisibility(card, !Algorithms.isEmpty(items));
+		if (Algorithms.isEmpty(items)) {
+			return;
 		}
-		if (Algorithms.isEmpty(regionNames)) {
-			updateVisibility(view.findViewById(R.id.available_maps_summary_container), false);
-		} else {
-			updateVisibility(view.findViewById(R.id.available_maps_summary_container), true);
-			TextView tvSummary = view.findViewById(R.id.available_maps_summary);
-			tvSummary.setText(getString(R.string.maps_that_also_be_used, TextUtils.join(", ", regionNames)));
+
+		TextView maps = view.findViewById(R.id.route_overview_maps);
+		maps.setText(createRouteOverviewText(items));
+
+		TextView getAccurateList = view.findViewById(R.id.route_overview_calculate_online_button);
+		boolean showOnlineAction = controller.shouldShowOnlineCalculationBanner();
+		updateVisibility(getAccurateList, showOnlineAction);
+		getAccurateList.setOnClickListener(v -> controller.onCalculateOnlineButtonClicked());
+		setupSelectableBackground(getAccurateList);
+
+		TextView calculateExisting = view.findViewById(R.id.route_overview_use_existing_button);
+		boolean showUseExistingAction = controller.shouldShowUseDownloadedMapsBanner();
+		updateVisibility(calculateExisting, showUseExistingAction);
+		calculateExisting.setOnClickListener(v -> {
+			controller.onIgnoreMissingMapsButtonClicked();
+			dismiss();
+		});
+		setupSelectableBackground(calculateExisting);
+
+		updateVisibility(view.findViewById(R.id.route_overview_actions_divider),
+				showOnlineAction || showUseExistingAction);
+		updateVisibility(view.findViewById(R.id.route_overview_actions_middle_divider),
+				showOnlineAction && showUseExistingAction);
+	}
+
+	@NonNull
+	private SpannableStringBuilder createRouteOverviewText(@NonNull List<RequiredMapItem> items) {
+		SpannableStringBuilder builder = new SpannableStringBuilder();
+		for (int i = 0; i < items.size(); i++) {
+			if (i > 0) {
+				builder.append(" — ");
+			}
+			appendRouteOverviewItem(builder, items.get(i));
 		}
+		return builder;
+	}
+
+	private void appendRouteOverviewItem(@NonNull SpannableStringBuilder builder, @NonNull RequiredMapItem item) {
+		int color = item.type() == RequiredMapType.USED
+				? ColorUtilities.getSecondaryTextColor(app, nightMode)
+				: ColorUtilities.getPrimaryTextColor(app, nightMode);
+		int start = builder.length();
+		builder.append(getRouteOverviewIcon(item.type()));
+		builder.append(" ");
+		builder.append(getMapTitle(item.downloadItem()));
+		builder.setSpan(new ForegroundColorSpan(color), start, builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+	}
+
+	@NonNull
+	private String getRouteOverviewIcon(@NonNull RequiredMapType type) {
+		return switch (type) {
+			case OUTDATED -> "🔄";
+			case MISSING -> "❌";
+			default -> "✅";
+		};
 	}
 
 	private void updateListSelection() {
@@ -269,24 +332,13 @@ public class RequiredMapsFragment extends BaseFullScreenDialogFragment implement
 		updateContent();
 	}
 
-	private void setupCalculateOnlineCard() {
-		boolean showOnlineCalculationBanner = controller.shouldShowOnlineCalculationBanner();
-		updateVisibility(view.findViewById(R.id.card_calculate_online), showOnlineCalculationBanner);
-		View buttonCalculateOnline = view.findViewById(R.id.calculate_online_button);
-		buttonCalculateOnline.setOnClickListener(v -> controller.onCalculateOnlineButtonClicked());
-		setupSelectableBackground(buttonCalculateOnline);
-	}
-
-	private void updateIgnoreMissingMapsCard() {
-		updateVisibility(view.findViewById(R.id.card_ignore_missing_maps), controller.shouldShowUseDownloadedMapsBanner());
-		View buttonIgnoreMissingMaps = view.findViewById(R.id.ignore_missing_maps_button);
-		buttonIgnoreMissingMaps.setOnClickListener(v -> {
-			controller.onIgnoreMissingMapsButtonClicked();
-			dismiss();
-		});
-	}
-
 	private void updateDownloadButton() {
+		boolean hasItemsToProcess = !Algorithms.isEmpty(controller.getMapsToProcess());
+		updateVisibility(view.findViewById(R.id.bottom_panel), hasItemsToProcess);
+		updateVisibility(view.findViewById(R.id.bottom_panel_shadow), hasItemsToProcess);
+		if (!hasItemsToProcess) {
+			return;
+		}
 		DialogButton downloadButton = view.findViewById(R.id.download_button);
 		downloadButton.setTitle(controller.getDownloadButtonTitle());
 		downloadButton.setEnabled(controller.isDownloadButtonEnabled());

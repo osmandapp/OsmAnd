@@ -85,6 +85,12 @@
 			android:clipToPadding="false"
 			android:overScrollMode="ifContentScrolls" />
 
+		<androidx.appcompat.widget.AppCompatImageView
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/abp__shadow_height"
+			android:scaleType="fitXY"
+			app:srcCompat="@drawable/bg_shadow_list_bottom" />
+
 		<LinearLayout
 			android:id="@+id/bottom_buttons_container"
 			android:layout_width="match_parent"
@@ -93,10 +99,11 @@
 			android:background="?attr/list_background_color"
 			android:orientation="vertical">
 
-			<View
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/buttons_shadow"
 				android:layout_width="match_parent"
-				android:layout_height="1dp"
-				android:background="?attr/divider_color_basic" />
+				android:layout_height="8dp"
+				android:background="@drawable/shadow" />
 
 			<LinearLayout
 				android:layout_width="match_parent"

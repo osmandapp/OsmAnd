@@ -4874,7 +4874,7 @@
     <string name="average_slope">Pendenza media</string>
     <string name="shared_string_last_uphill">Ultima salita</string>
     <string name="shared_string_last_downhill">Ultima discesa</string>
-    <string name="marine_renderer">Matittimo</string>
+    <string name="marine_renderer">Marittimo</string>
     <string name="requires_internet_connection">Richiede una connessione a internet</string>
     <string name="quick_action_weather_layers">Un pulsante per mostrare o nascondere i livelli meteo sulla mappa.</string>
     <string name="quick_action_wind_animation_layer">Un pulsante per mostrare o nascondere il livello di animazione del vento sulla mappa.</string>
@@ -5192,4 +5192,25 @@
     <string name="gallery_media_playback_error">Contenuto multimediale non riproducibile.</string>
     <string name="gallery_open_in">Apri con</string>
     <string name="gallery_seek_back_seconds">−%1$ds</string>
+    <string name="gallery_seek_forward_seconds">+%1$ds</string>
+    <string name="gallery_stats_counts">Foto %1$d, video %2$d, audio %3$d.</string>
+    <string name="gallery_stats_size">Dimensione %1$s.</string>
+    <string name="gallery_sort_nearest">Più vicina</string>
+    <string name="gallery_sort_last_modified">Modificata per ultima</string>
+    <string name="gallery_sort_name_a_z">Nome A - Z</string>
+    <string name="gallery_sort_name_z_a">Nome Z - A</string>
+    <string name="gallery_sort_newest_first">Prima le date più recenti</string>
+    <string name="gallery_sort_oldest_first">Prima le date meno recenti</string>
+    <string name="gallery_sort_duration_long_short">Prima le durate maggiori</string>
+    <string name="gallery_sort_duration_short_long">Prima le durate minori</string>
+    <string name="navigate_point_format_maidenhead">Maidenhead</string>
+    <string name="maidenhead_format_descr">Sistema di localizzazione Maidenhead (QTH Locator).</string>
+    <string name="search_around">Cerca nei dintorni</string>
+    <string name="search_around_map_center_description">%1$s distante dalla tua posizione</string>
+    <string name="search_around_my_location">La mia posizione</string>
+    <string name="search_around_my_location_description">Cerca attorno alla tua posizione</string>
+    <string name="sort_by_relevance">Rilevanza</string>
+    <string name="tracks_backup_promo_button">Ottieni OsmAnd Pro</string>
+    <string name="tracks_backup_promo_description">Sincronizza le tue tracce tra tutti i dispositivi e sul Web con OsmAnd Pro.</string>
+    <string name="tracks_backup_promo_title">Salva e sincronizza le tue tracce</string>
 </resources>

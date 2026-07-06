@@ -141,6 +141,8 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		ExportType exportType = categoryItems.getVisibleTypes().get(childPosition);
 		List<?> items = categoryItems.getItemsForType(exportType);
 		List<?> selectedItems = selectedItemsMap.get(exportType);
+		boolean selectionEnabled = isTypeSelectionEnabled(exportType);
+		child.setEnabled(selectionEnabled);
 
 		TextView titleTv = child.findViewById(R.id.title_tv);
 		titleTv.setText(exportType.getTitleId());
@@ -150,8 +152,13 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 
 		ImageView icon = child.findViewById(R.id.explicit_indicator);
 		setupIcon(icon, exportType.getIconId(), !Algorithms.isEmpty(selectedItems));
+		View itemContainer = child.findViewById(R.id.item_container);
+		itemContainer.setEnabled(selectionEnabled);
+		itemContainer.setAlpha(selectionEnabled ? 1f : 0.5f);
 
 		ThreeStateCheckbox checkBox = child.findViewById(R.id.check_box);
+		checkBox.setEnabled(selectionEnabled);
+
 		if (selectedItems == null) {
 			checkBox.setState(UNCHECKED);
 		} else if (selectedItems.containsAll(items)) {
@@ -167,6 +174,9 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 			checkBox.setState(contains ? MISC : UNCHECKED);
 		}
 		child.setOnClickListener(v -> {
+			if (!selectionEnabled) {
+				return;
+			}
 			if (!Algorithms.isEmpty(items)) {
 				if (listener != null) {
 					listener.onTypeClicked(exportType);
@@ -177,7 +187,12 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		});
 		int checkBoxColor = checkBox.getState() == UNCHECKED ? secondaryColorRes : activeColorRes;
 		CompoundButtonCompat.setButtonTintList(checkBox, ColorStateList.valueOf(ContextCompat.getColor(app, checkBoxColor)));
-		child.findViewById(R.id.check_box_container).setOnClickListener(view -> {
+		View checkBoxContainer = child.findViewById(R.id.check_box_container);
+		checkBoxContainer.setEnabled(selectionEnabled);
+		checkBoxContainer.setOnClickListener(view -> {
+			if (!selectionEnabled) {
+				return;
+			}
 			if (!Algorithms.isEmpty(items)) {
 				checkBox.performClick();
 				boolean selected = checkBox.getState() == CHECKED;
@@ -192,6 +207,10 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		AndroidUiHelper.updateVisibility(child.findViewById(R.id.card_bottom_divider), isLastChild);
 
 		return child;
+	}
+
+	private boolean isTypeSelectionEnabled(@NonNull ExportType exportType) {
+		return !exportMode || exportType != ExportType.ATTACHED_MEDIA || !Algorithms.isEmpty(selectedItemsMap.get(ExportType.FAVORITES));
 	}
 
 	@Override

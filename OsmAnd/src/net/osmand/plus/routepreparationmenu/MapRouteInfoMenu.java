@@ -58,6 +58,7 @@ import net.osmand.router.FastRoutingState;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.shared.gpx.primitives.WptPt;
+import net.osmand.router.MissingMapsCalculationResult;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
@@ -94,6 +95,7 @@ import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.enums.RouteCalculationMethod;
 import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.settings.fragments.RouteLineAppearanceFragment;
 import net.osmand.plus.settings.fragments.voice.VoiceLanguageBottomSheetFragment;
@@ -124,6 +126,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private static final int BUTTON_ANIMATION_DELAY = 2000;
 	public static final int DEFAULT_MENU_STATE = 0;
 	private static final int MAX_PEDESTRIAN_ROUTE_DURATION = 30 * 60;
+	private static final double STANDARD_LONG_ROUTE_SEGMENT_DISTANCE = 300_000;
 
 	public static int directionInfo = -1;
 	public static boolean chooseRoutesVisible;
@@ -369,7 +372,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (app == null) {
 			return;
 		}
-		if (hasCurrentMissingMaps(app)) {
+		if (shouldCatchRouteCalculationStatus(app)) {
 			FastRoutingState.Status complication = app.getRoutingHelper().getCurrentFastRoutingComplication();
 			if (complication != null && complication != lastFastRoutingComplication) {
 				lastFastRoutingComplication = complication;
@@ -383,6 +386,13 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			updateOptionsButtons();
 			setupRouteCalculationProgressBar();
 		}
+	}
+
+	private boolean shouldCatchRouteCalculationStatus(@NonNull OsmandApplication app) {
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		ApplicationMode mode = routingHelper.getAppMode();
+		RouteCalculationMethod method = app.getSettings().ROUTE_CALCULATION_METHOD.getModeValue(mode);
+		return method == RouteCalculationMethod.STANDARD_ONLY || method.isFastRoutingPossible(mode);
 	}
 
 	public void routeCalculationFinished() {
@@ -608,14 +618,22 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				menuCards.add(new PublicTransportBetaWarningCard(mapActivity));
 			} else if (app.getRoutingHelper().isBoatMode()) {
 				menuCards.add(new NauticalBridgeHeightWarningCard(mapActivity));
-			} else if (hasCurrentMissingMaps(app)) {
-				menuCards.add(new MissingMapsWarningCard(mapActivity));
-			} else if (app.getTargetPointsHelper().hasTooLongDistanceToNavigate() && !hasCalculatedMissingMaps) {
-				menuCards.add(new LongDistanceWarningCard(mapActivity));
+			} else {
+				RouteCalculationCardState state = getRouteCalculationCardState(app, hasCalculatedMissingMaps);
+				if (state != null) {
+					menuCards.add(new MissingMapsWarningCard(mapActivity, state));
+				} else if (hasCurrentMissingMaps(app)) {
+					menuCards.add(new MissingMapsWarningCard(mapActivity));
+				} else if (app.getTargetPointsHelper().hasTooLongDistanceToNavigate() && !hasCalculatedMissingMaps) {
+					menuCards.add(new LongDistanceWarningCard(mapActivity));
+				}
 			}
 		} else {
 			if (hasCalculatedMissingMaps) {
-				menuCards.add(new MissingMapsWarningCard(mapActivity));
+				RouteCalculationCardState state = getCalculatedMissingMapsCardState(app);
+				menuCards.add(state != null
+						? new MissingMapsWarningCard(mapActivity, state)
+						: new MissingMapsWarningCard(mapActivity));
 			} else {
 				// Home/work card
 				HomeWorkCard homeWorkCard = new HomeWorkCard(mapActivity);
@@ -676,6 +694,136 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		this.menuCards = menuCards;
 		setBottomShadowVisible(bottomShadowVisible);
 		setupCards();
+	}
+
+	@Nullable
+	private RouteCalculationCardState getRouteCalculationCardState(@NonNull OsmandApplication app,
+	                                                               boolean hasCalculatedMissingMaps) {
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		ApplicationMode mode = routingHelper.getAppMode();
+		RouteCalculationMethod method = app.getSettings().ROUTE_CALCULATION_METHOD.getModeValue(mode);
+		if (method == RouteCalculationMethod.AUTO && method.isFastRoutingPossible(mode)) {
+			return getAutoRouteCalculationCardState(app);
+		} else if (method == RouteCalculationMethod.STANDARD_ONLY) {
+			return getStandardRouteCalculationCardState(app, hasCalculatedMissingMaps);
+		} else if (method == RouteCalculationMethod.FAST_ONLY && method.isFastRoutingPossible(mode)) {
+			return getFastRouteCalculationCardState(app);
+		}
+		return null;
+	}
+
+	@Nullable
+	private RouteCalculationCardState getCalculatedMissingMapsCardState(@NonNull OsmandApplication app) {
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		ApplicationMode mode = routingHelper.getAppMode();
+		RouteCalculationMethod method = app.getSettings().ROUTE_CALCULATION_METHOD.getModeValue(mode);
+		if (method == RouteCalculationMethod.AUTO && method.isFastRoutingPossible(mode)) {
+			RouteCalculationCardState state = getAutoRouteCalculationCardState(app);
+			return state != null && state != RouteCalculationCardState.AUTO_DEFAULT
+					? state
+					: hasMapsToUpdate(app) ? RouteCalculationCardState.AUTO_MIXED_MAPS : RouteCalculationCardState.AUTO_MISSING_MAPS;
+		} else if (method == RouteCalculationMethod.STANDARD_ONLY) {
+			return RouteCalculationCardState.STANDARD_MISSING_MAPS;
+		} else if (method == RouteCalculationMethod.FAST_ONLY && method.isFastRoutingPossible(mode)) {
+			return getFastMissingMapsCardState(app);
+		}
+		return null;
+	}
+
+	@NonNull
+	private RouteCalculationCardState getStandardRouteCalculationCardState(@NonNull OsmandApplication app,
+	                                                                      boolean hasCalculatedMissingMaps) {
+		if (hasCurrentMissingMaps(app) || hasCalculatedMissingMaps) {
+			return RouteCalculationCardState.STANDARD_MISSING_MAPS;
+		} else if (hasStandardLongRouteSegment(app)) {
+			return RouteCalculationCardState.STANDARD_LONG_ROUTE;
+		}
+		return RouteCalculationCardState.STANDARD_DEFAULT;
+	}
+
+	private boolean hasStandardLongRouteSegment(@NonNull OsmandApplication app) {
+		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+		Location startLocation = targetPointsHelper.getPointToStartLocation();
+		if (startLocation == null) {
+			startLocation = app.getRoutingHelper().getLastProjection();
+		}
+		if (startLocation == null) {
+			startLocation = app.getLocationProvider().getLastKnownLocation();
+		}
+		if (startLocation == null) {
+			return false;
+		}
+		LatLon previous = new LatLon(startLocation.getLatitude(), startLocation.getLongitude());
+		for (TargetPoint targetPoint : targetPointsHelper.getIntermediatePointsWithTarget()) {
+			LatLon next = targetPoint.getLatLon();
+			if (MapUtils.getDistance(previous, next) > STANDARD_LONG_ROUTE_SEGMENT_DISTANCE) {
+				return true;
+			}
+			previous = next;
+		}
+		return false;
+	}
+
+	@Nullable
+	private RouteCalculationCardState getAutoRouteCalculationCardState(@NonNull OsmandApplication app) {
+		FastRoutingState.Status status = getCurrentFastRoutingStatus(app);
+		if (status == null || status == FastRoutingState.Status.READY) {
+			return RouteCalculationCardState.AUTO_DEFAULT;
+		}
+		return switch (status) {
+			case MISSING_MAPS_INTERMEDIATES, MISSING_MAPS_AT_START_OR_END ->
+					RouteCalculationCardState.AUTO_MISSING_MAPS;
+			case MIXED_MAPS_INTERMEDIATES, MIXED_MAPS_AT_START_OR_END ->
+					RouteCalculationCardState.AUTO_MIXED_MAPS;
+			case FAILED_WITH_MIXED_MAPS -> RouteCalculationCardState.AUTO_FAILED_WITH_MIXED_MAPS;
+			case FAILED_WITH_MISSING_MAPS ->
+					RouteCalculationCardState.AUTO_FAILED_WITH_MISSING_MAPS;
+			case FAILED_NEED_MORE_LAND_MAPS -> RouteCalculationCardState.AUTO_ROUTE_NOT_FOUND;
+			case FAILED_NO_HH_ROUTING_DATA -> RouteCalculationCardState.AUTO_MISSING_HH_CACHE;
+			case FAILED_UNSUPPORTED_PARAMETERS ->
+					RouteCalculationCardState.AUTO_UNAVAILABLE_ROUTE_PARAMETERS;
+			default -> null;
+		};
+	}
+
+	@Nullable
+	private RouteCalculationCardState getFastRouteCalculationCardState(@NonNull OsmandApplication app) {
+		FastRoutingState.Status status = getCurrentFastRoutingStatus(app);
+		if (status == null || status == FastRoutingState.Status.READY) {
+			return RouteCalculationCardState.FAST_DEFAULT;
+		}
+		return switch (status) {
+			case MISSING_MAPS_INTERMEDIATES, MISSING_MAPS_AT_START_OR_END,
+			     FAILED_WITH_MISSING_MAPS -> RouteCalculationCardState.FAST_MISSING_MAPS;
+			case MIXED_MAPS_INTERMEDIATES, MIXED_MAPS_AT_START_OR_END, FAILED_WITH_MIXED_MAPS ->
+					RouteCalculationCardState.FAST_MISSING_OR_OUTDATED_MAPS;
+			case FAILED_NEED_MORE_LAND_MAPS -> RouteCalculationCardState.FAST_ROUTE_NOT_FOUND;
+			case FAILED_NO_HH_ROUTING_DATA -> RouteCalculationCardState.FAST_MISSING_HH_CACHE;
+			case FAILED_UNSUPPORTED_PARAMETERS ->
+					RouteCalculationCardState.FAST_UNAVAILABLE_ROUTE_PARAMETERS;
+			default -> null;
+		};
+	}
+
+	@NonNull
+	private RouteCalculationCardState getFastMissingMapsCardState(@NonNull OsmandApplication app) {
+		return hasMapsToUpdate(app)
+				? RouteCalculationCardState.FAST_MISSING_OR_OUTDATED_MAPS
+				: RouteCalculationCardState.FAST_MISSING_MAPS;
+	}
+
+	@Nullable
+	private FastRoutingState.Status getCurrentFastRoutingStatus(@NonNull OsmandApplication app) {
+		FastRoutingState.Status status = app.getRoutingHelper().getCurrentFastRoutingComplication();
+		return status != null ? status : lastFastRoutingComplication;
+	}
+
+	private boolean hasMapsToUpdate(@NonNull OsmandApplication app) {
+		MissingMapsCalculationResult result = app.getRoutingHelper().getRoute().getMissingMapsCalculationResult();
+		if (result == null) {
+			result = app.getRoutingHelper().getCurrentMissingMapsCalculationResult();
+		}
+		return result != null && !Algorithms.isEmpty(result.getMapsToUpdate());
 	}
 
 	private boolean hasCalculatedMissingMaps(@NonNull OsmandApplication app) {

@@ -21,6 +21,7 @@ import net.osmand.data.MapObject;
 import net.osmand.data.Street;
 import net.osmand.search.core.HashQuadTree;
 import net.osmand.search.core.spatial.SpatialSearchContext.SpatialSearchStats;
+import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSettings;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.SearchAlgorithms;
@@ -136,6 +137,10 @@ public class SpatialSearchToken {
 	}
 
 	
+	NameIndexAtom getAtomToken(NameIndexAtom atom) {
+		return index.get(atom.id);
+	}
+	
 	void removeAtom(NameIndexAtom atom) {
 		NameIndexAtom na = index.get(atom.id);
 		deletedAtoms.add(na.indexInToken);
@@ -164,9 +169,22 @@ public class SpatialSearchToken {
 		if (aa != null) {
 			if (aa != atom) {
 				// select shortest available version
-				if (atom.otherWordsCnt < aa.otherWordsCnt) {
-					aa.otherWordsCnt = atom.otherWordsCnt;
-					aa.otherFoundCnt = atom.otherFoundCnt;
+				boolean replace = false;
+				if (atom.otherWordsCnt < aa.otherWordsCnt
+						|| (atom.otherWordsCnt == aa.otherWordsCnt && aa.otherFoundCnt > atom.otherFoundCnt)) {
+					replace = true;
+				}
+				// '2 south 2nd street' vs '25 садова вулиця' (25-та) -
+				if (aa.isBuilding() && !atom.isBuilding() 
+						&& atom.otherWordsCnt <= aa.otherWordsCnt
+						&& aa.otherFoundCnt < atom.otherFoundCnt) {
+					// replace street (has number in name) with building
+					replace = true;
+				}
+				if (replace) {
+					atom.indexInToken = aa.indexInToken;
+					index.put(atom.id, atom);
+					atoms.set(atom.indexInToken, atom);
 				}
 			}
 			return;
@@ -239,9 +257,10 @@ public class SpatialSearchToken {
 		int bboxTileZoom;
 		int x16, y16;
 		
-		public NameIndexAtomXY(AddressNameIndexDataAtom a, OsmAndPoiNameIndexDataAtom b) {
+		public NameIndexAtomXY(AddressNameIndexDataAtom a, OsmAndPoiNameIndexDataAtom b, 
+				SpatialTextSearchSettings settings) {
 			if (a != null) {
-				init(a);
+				init(a, settings);
 			} else {
 				init(b);
 			}
@@ -305,14 +324,28 @@ public class SpatialSearchToken {
 					+ MapUtils.deinterleaveY(bboxTileId);
 		}
 
-		private void init(AddressNameIndexDataAtom addr) {
+		private void init(AddressNameIndexDataAtom addr, SpatialTextSearchSettings settings) {
 			if (addr.getXy16Count() >= 1) {
 				int xy16 = addr.getXy16(0);
 				this.x16 = (xy16 >>> 16);
 				this.y16 = (xy16 & ((1 << 16) - 1));
-				bboxTileZoom = 15;
-				bboxTileId = HashQuadTree.encodeTileId(bboxTileZoom, x16 / 2, y16 / 2);
 				decodeBBox(addr.hasBbox() ? addr.getBbox() : null);
+				if (bbox31 == null) {
+					// not needed as we calculate on server for all cities
+//					if (addr.getType() != CityBlocks.STREET_TYPE.index) {
+//						// possibly needs to be calculated on server
+//						int shift = (1 << (16 - 12)); // extend 12th tile
+//						bbox31 = new int[4];
+//						bbox31[0] = (x16 - shift) << 15;
+//						bbox31[2] = (x16 + shift) << 15;
+//						bbox31[1] = (y16 - shift) << 15;
+//						bbox31[3] = (y16 + shift) << 15;
+//						calcTileFromBbox();
+//					} else {
+						bboxTileZoom = 15;
+						bboxTileId = HashQuadTree.encodeTileId(bboxTileZoom, x16 / 2, y16 / 2);
+//					}
+				}
 			}
 		}
 		
@@ -329,7 +362,7 @@ public class SpatialSearchToken {
 				int z = 31;
 				// for 180 lat check max  
 				int xleft = bbox31[0], xright = Math.max(bbox31[2], bbox31[0]);
-				int ytop = bbox31[1], ybottom = Math.max(bbox31[3], bbox31[1]);;
+				int ytop = bbox31[1], ybottom = Math.max(bbox31[3], bbox31[1]);
 				while (xleft != xright || ytop != ybottom) {
 					z--;
 					xleft >>= 1;
@@ -351,6 +384,9 @@ public class SpatialSearchToken {
 		}
 		
 		public void enlargeBbox31(double mult) {
+			if (mult == 0) {
+				return;
+			}
 			if (bbox31 != null) {
 				int w = (int) ((bbox31[2] - bbox31[0]) * mult), h = (int) ((bbox31[3] - bbox31[1]) * mult);
 				bbox31[0] = Math.max(Math.min(bbox31[0], bbox31[0] - w), 0); // xleft
@@ -406,15 +442,17 @@ public class SpatialSearchToken {
 		final NameIndexAtomXY coords; 
 		final int buildingInd; // added before intersection
 		final int nearbyRadius;
+		
+		NameIndexAtom sameNameAreaObj;
 
 
 		NameIndexAtom(String name, int type, long id, long pid, MapObject obj, boolean cityAsStreet, int otherWordsCnt,
-				int otherFooundCnt, NameIndexAtomXY coords, int nearbyRadius) {
-			this(name, type, id, pid, obj, cityAsStreet, otherWordsCnt, otherFooundCnt, coords, nearbyRadius, -1);
+				int otherFoundCnt, NameIndexAtomXY coords, int nearbyRadius) {
+			this(name, type, id, pid, obj, cityAsStreet, otherWordsCnt, otherFoundCnt, coords, nearbyRadius, -1);
 		}
 
 		NameIndexAtom(String name, int type, long id, long pid, MapObject obj, boolean cityAsStreet, int otherWordsCnt,
-				int otherFooundCnt, NameIndexAtomXY coords, int nearbyRadius, int buildingInd) {
+				int otherFoundCnt, NameIndexAtomXY coords, int nearbyRadius, int buildingInd) {
 			this.name = name;
 			this.id = id;
 			this.parentid = pid;
@@ -422,7 +460,7 @@ public class SpatialSearchToken {
 			this.type = type;
 			this.cityAsStreet = cityAsStreet;
 			this.otherWordsCnt = otherWordsCnt;
-			this.otherFoundCnt = otherFooundCnt;
+			this.otherFoundCnt = otherFoundCnt;
 			this.coords = coords;
 			this.nearbyRadius = nearbyRadius;
 			this.buildingInd = buildingInd;

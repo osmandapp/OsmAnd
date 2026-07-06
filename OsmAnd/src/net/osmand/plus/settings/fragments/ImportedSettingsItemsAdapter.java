@@ -117,6 +117,10 @@ public class ImportedSettingsItemsAdapter extends
 				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_favorite, activeColorRes));
 				holder.title.setText(R.string.shared_string_favorites);
 				break;
+			case ATTACHED_MEDIA:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_folder_av_notes, activeColorRes));
+				holder.title.setText(R.string.attached_media);
+				break;
 			case STANDARD_MAPS:
 				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_map, activeColorRes));
 				holder.title.setText(R.string.standard_maps);

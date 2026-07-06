@@ -106,6 +106,12 @@
 
 		</androidx.core.widget.NestedScrollView>
 
+		<androidx.appcompat.widget.AppCompatImageView
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/abp__shadow_height"
+			android:scaleType="fitXY"
+			app:srcCompat="@drawable/bg_shadow_list_bottom" />
+
 		<com.google.android.material.floatingactionbutton.FloatingActionButton
 			android:id="@+id/fab"
 			style="@style/MaterialOsmandFab"

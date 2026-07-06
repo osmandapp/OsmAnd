@@ -20,6 +20,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.palette.view.PaletteElements;
+import net.osmand.plus.settings.coordinates.CoordinateFormatSelectorBottomSheet;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
@@ -32,6 +33,7 @@ public class CoordinatesGridFragment extends BaseFullScreenFragment
 		implements ICoordinatesGridScreen, InAppPurchaseListener {
 
 	public static final String TAG = CoordinatesGridFragment.class.getSimpleName();
+	private static final String GRID_FORMAT_REQUEST_KEY = "coordinates_grid_format";
 
 	private View view;
 	private int profileColor;
@@ -127,8 +129,24 @@ public class CoordinatesGridFragment extends BaseFullScreenFragment
 
 	private void setupFormatButton() {
 		View button = view.findViewById(R.id.format_button);
-		View selector = button.findViewById(R.id.format_selector);
-		button.setOnClickListener(v -> controller.onFormatSelectorClicked(selector, profileColor, nightMode));
+		CoordinateFormatSelectorBottomSheet.setupResultListener(getChildFragmentManager(), this,
+				new CoordinateFormatSelectorBottomSheet.FormatSelectionListener() {
+					@Override
+					public void onFormatSelected(@NonNull String formatId) {
+						controller.onCoordinateFormatSelected(formatId);
+					}
+
+					@Override
+					public void onSelectOtherFormat() {
+					}
+				}, GRID_FORMAT_REQUEST_KEY);
+		button.setOnClickListener(v -> CoordinateFormatSelectorBottomSheet.showInstance(
+				getChildFragmentManager(),
+				GRID_FORMAT_REQUEST_KEY,
+				settings.getApplicationMode(),
+				controller.getSelectedCoordinateFormatId(),
+				false,
+				controller.getSupportedCoordinateFormatIds()));
 		setupSelectableBackground(button);
 		updateFormatButton();
 	}

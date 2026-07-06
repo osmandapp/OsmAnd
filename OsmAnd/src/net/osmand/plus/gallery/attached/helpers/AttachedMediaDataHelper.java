@@ -11,8 +11,11 @@ import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.myplaces.favorites.add.AddFavoriteOptions;
 import net.osmand.plus.myplaces.favorites.add.AddFavoriteResult;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.plugins.audionotes.Recording;
+import net.osmand.plus.settings.mediastorage.MediaSource;
 import net.osmand.plus.settings.mediastorage.MediaStorageHelper;
+import net.osmand.plus.settings.mediastorage.MediaStorageLocation;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.shared.gpx.primitives.Link;
@@ -41,6 +44,29 @@ public class AttachedMediaDataHelper {
 	public AttachedMediaDataHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		this.mediaStorageHelper = new MediaStorageHelper(app);
+	}
+
+	@NonNull
+	public List<Link> collectMediaLinks(@NonNull Collection<FavoriteGroup> groups) {
+		List<Link> res = new ArrayList<>();
+		for (FavoriteGroup group : groups) {
+			for (FavouritePoint point : group.getPoints()) {
+				List<Link> links = point.getLinks();
+				if (links != null) {
+					for (Link link : links) {
+						if (link != null && !Algorithms.isEmpty(link.getHref())) {
+							res.add(link);
+						}
+					}
+				}
+			}
+		}
+		return res;
+	}
+
+	@Nullable
+	public MediaSource resolveExportMediaSource(@Nullable String href) {
+		return mediaStorageHelper.resolveMediaSource(MediaStorageLocation.fromSettings(app), href, true);
 	}
 
 	public void addMediaLinks(@NonNull Linkable target, @NonNull List<Link> links, @Nullable Runnable onMediaChanged) {

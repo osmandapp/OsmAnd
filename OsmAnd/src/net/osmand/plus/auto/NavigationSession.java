@@ -784,13 +784,24 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		}
 	}
 
-	public void showMissingMapsScreen(boolean allowContinue) {
+	public void showMissingMapsScreen() {
+		showMissingMapsScreen(lastFastRoutingComplication != null
+				? getCurrentMissingMapsScreenType(lastFastRoutingComplication)
+				: MissingMapsScreenType.MISSING_MAPS);
+	}
+
+	public void showMissingMapsScreen(@NonNull MissingMapsScreenType screenType) {
 		CarContext carContext = getCarContext();
 		if (carContext != null) {
 			Screen topScreen = getScreenManager().getTop();
-			if (!(topScreen instanceof MissingMapsScreen)) {
-				carContext.getCarService(ScreenManager.class).push(new MissingMapsScreen(carContext, allowContinue));
+			if (topScreen instanceof MissingMapsScreen missingMapsScreen) {
+				if (missingMapsScreen.getScreenType() == screenType) {
+					return;
+				}
+				missingMapsScreen.updateScreenType(screenType);
+				return;
 			}
+			carContext.getCarService(ScreenManager.class).push(new MissingMapsScreen(carContext, screenType));
 		}
 	}
 
@@ -821,10 +832,19 @@ public class NavigationSession extends Session implements NavigationListener, Os
 						|| FastRoutingState.isCancelledStatus(complication)) {
 					closeMissingMapsScreen();
 				} else {
-					showMissingMapsScreen(!FastRoutingState.isFailedStatus(complication));
+					showMissingMapsScreen(getCurrentMissingMapsScreenType(complication));
 				}
 			}
 		}
+	}
+
+	@NonNull
+	private MissingMapsScreenType getCurrentMissingMapsScreenType(@NonNull FastRoutingState.Status status) {
+		return switch (status) {
+			case FAILED_WITH_MISSING_MAPS -> MissingMapsScreenType.POSSIBLE_MISSING_MAPS;
+			case MISSING_MAPS_INTERMEDIATES, MISSING_MAPS_AT_START_OR_END -> MissingMapsScreenType.MISSING_MAPS;
+			default -> MissingMapsScreenType.MISSING_MAPS;
+		};
 	}
 
 	@Override

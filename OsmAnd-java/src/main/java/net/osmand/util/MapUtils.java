@@ -24,6 +24,9 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 public class MapUtils {
 
 	public static final int ROUNDING_ERROR = 3;
+	// for haversine use R = 6372.8 km instead of 6371 km
+	public static final double HAVERSINE_EARTH_RADIUS_METERS = 6372800.0;
+	public static final double VECTOR_LINE_EARTH_RADIUS_METERS = 6371000.0;
 	private static final int EARTH_RADIUS_B = 6356752;
 	static final int EARTH_RADIUS_A = 6378137;
 	public static final double MIN_LATITUDE = -85.0511;
@@ -193,24 +196,6 @@ public class MapUtils {
 	/**
 	 * Gets distance in meters
 	 */
-	public static double getDistance(double lat1, double lon1, double lat2, double lon2) {
-		double R = 6372.8; // for haversine use R = 6372.8 km instead of 6371 km
-		double dLat = toRadians(lat2 - lat1);
-		double dLon = toRadians(lon2 - lon1);
-		double sinHalfLat = Math.sin(dLat / 2);
-		double sinHalfLon = Math.sin(dLon / 2);
-		double a = sinHalfLat * sinHalfLat +
-				Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
-						sinHalfLon * sinHalfLon;
-		//double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-		//return R * c * 1000;
-		// simplify haversine:
-		return (2 * R * 1000 * Math.asin(Math.sqrt(a)));
-	}
-
-	/**
-	 * Gets distance in meters
-	 */
 	public static double getDistance(LatLon l1, LatLon l2) {
 		return getDistance(l1.getLatitude(), l1.getLongitude(), l2.getLatitude(), l2.getLongitude());
 	}
@@ -220,6 +205,29 @@ public class MapUtils {
 	 */
 	public static double getDistance(Location l1, Location l2) {
 		return getDistance(l1.getLatitude(), l1.getLongitude(), l2.getLatitude(), l2.getLongitude());
+	}
+
+	/**
+	 * Gets distance in meters.
+	 */
+	public static double getDistance(double lat1, double lon1, double lat2, double lon2) {
+		return getDistance(lat1, lon1, lat2, lon2, HAVERSINE_EARTH_RADIUS_METERS);
+	}
+
+	/**
+	 * Gets distance in meters using the specified Earth radius.
+	 */
+	public static double getDistance(double lat1, double lon1, double lat2, double lon2, double earthRadiusMeters) {
+		double dLat = toRadians(lat2 - lat1);
+		double dLon = toRadians(lon2 - lon1);
+		double sinHalfLat = Math.sin(dLat / 2);
+		double sinHalfLon = Math.sin(dLon / 2);
+		double a = sinHalfLat * sinHalfLat
+				+ Math.cos(toRadians(lat1))
+				* Math.cos(toRadians(lat2))
+				* sinHalfLon
+				* sinHalfLon;
+		return 2 * earthRadiusMeters * Math.asin(Math.sqrt(a));
 	}
 
 	public static double checkLongitude(double longitude) {

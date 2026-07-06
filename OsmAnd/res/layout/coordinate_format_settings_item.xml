@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -19,24 +18,6 @@
 		android:paddingEnd="@dimen/content_padding"
 		android:paddingBottom="@dimen/content_padding_half">
 
-		<FrameLayout
-			android:id="@+id/iconContainer"
-			android:layout_width="40dp"
-			android:layout_height="40dp"
-			android:layout_marginEnd="@dimen/content_padding"
-			android:visibility="gone"
-			tools:visibility="visible">
-
-			<androidx.appcompat.widget.AppCompatImageView
-				android:id="@+id/icon"
-				android:layout_width="24dp"
-				android:layout_height="24dp"
-				android:layout_gravity="center"
-				tools:src="@drawable/ic_action_add"
-				tools:tint="?attr/active_color_basic" />
-
-		</FrameLayout>
-
 		<LinearLayout
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
@@ -45,7 +26,7 @@
 
 			<net.osmand.plus.widgets.TextViewEx
 				android:id="@android:id/title"
-				style="@style/TitleStyle.Medium"
+				style="@style/TitleStyle"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:ellipsize="end"

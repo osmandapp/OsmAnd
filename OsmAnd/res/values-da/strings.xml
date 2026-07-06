@@ -4704,7 +4704,7 @@
     <string name="ais_load_data">Indlæs AIS-data fra fil</string>
     <string name="ais_cpa_warning_distance_description">Skibe fremhæves med rødt, hvis CPA (Closest Point of Approach) er under den definerede tærskel, og TCPA (Time to CPA) falder inden for den advarselstid, der er angivet i indstillingen \'Advarselstid til at nå CPA\'.</string>
     <string name="ais_address_settings">Indstillinger for IP-adresse</string>
-    <string name="ais_address_settings_description">Vælg NMEA-protokollen (UDP/TCP) og angiv de tilhørende adresser og porte.</string>
+    <string name="ais_address_settings_description">Vælg NMEA-protokollen (UDP/TCP) og angiv de tilhørende adresser og porte</string>
     <string name="ais_nmea_protocol">Protokol til modtagelse af NMEA-data</string>
     <string name="ais_nmea_protocol_description">Vælg protokol til modtagelse af NMEA-data</string>
     <string name="ais_address_nmea_server">IP-adresse for NMEA-datakilde</string>
@@ -5279,4 +5279,5 @@
     <string name="search_around_my_location">Min placering</string>
     <string name="search_around_my_location_description">Søg i området omkring din position</string>
     <string name="sort_by_relevance">Relevans</string>
+    <string name="routing_attr_motor_type_ethanol_name">Ethanol</string>
 </resources>

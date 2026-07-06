@@ -29,6 +29,8 @@ import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.Link;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -47,6 +49,8 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 
 	private FavouritesHelper favoritesHelper;
 	private FavoriteGroup personalGroup;
+	@Nullable
+	private Map<String, String> hrefRewrites;
 
 	public FavoritesSettingsItem(@NonNull OsmandApplication app, @NonNull List<FavoriteGroup> items) {
 		super(app, null, items);
@@ -284,10 +288,44 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 		};
 	}
 
+	public void setHrefRewrites(@Nullable Map<String, String> hrefRewrites) {
+		this.hrefRewrites = hrefRewrites;
+	}
+
 	@Nullable
 	@Override
 	public SettingsItemWriter<? extends SettingsItem> getWriter() {
 		GpxFile gpxFile = favoritesHelper.getFileHelper().asGpxFile(items);
+		if (!Algorithms.isEmpty(hrefRewrites)) {
+			rewriteMediaLinks(gpxFile, hrefRewrites);
+		}
 		return getGpxWriter(gpxFile);
+	}
+
+	private static void rewriteMediaLinks(@NonNull GpxFile gpxFile, @NonNull Map<String, String> rewrites) {
+		for (WptPt wpt : gpxFile.getPointsList()) {
+			List<Link> links = wpt.getLinks();
+			if (Algorithms.isEmpty(links)) {
+				continue;
+			}
+			List<Link> rewritten = null;
+			for (int i = 0; i < links.size(); i++) {
+				Link link = links.get(i);
+				String href = link != null ? link.getHref() : null;
+				String newHref = href != null ? rewrites.get(href.trim()) : null;
+				if (newHref != null && !newHref.equals(href)) {
+					if (rewritten == null) {
+						rewritten = new ArrayList<>(links);
+					}
+					// Link instances may be shared with the live FavouritePoints - never mutate them
+					Link copy = new Link(link);
+					copy.setHref(newHref);
+					rewritten.set(i, copy);
+				}
+			}
+			if (rewritten != null) {
+				wpt.setLinks(rewritten);
+			}
+		}
 	}
 }

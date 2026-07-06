@@ -5150,4 +5150,5 @@
     <string name="search_around_my_location">Saját tartózkodási hely</string>
     <string name="search_around_my_location_description">Keressen a jelenlegi tartózkodási helye környékén</string>
     <string name="sort_by_relevance">Relevancia</string>
+    <string name="routing_attr_motor_type_ethanol_name">Etanol</string>
 </resources>

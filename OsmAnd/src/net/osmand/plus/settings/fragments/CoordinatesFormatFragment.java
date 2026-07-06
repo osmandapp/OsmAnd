@@ -76,7 +76,7 @@ public class CoordinatesFormatFragment extends BaseCoordinateFormatFragment
 		TextView title = view.findViewById(R.id.toolbar_title);
 		title.setText(R.string.coordinates_format);
 		ImageButton closeButton = view.findViewById(R.id.close_button);
-		closeButton.setImageDrawable(getIcon(AndroidUtils.getNavigationIconResId(app), ColorUtilities.getDefaultIconColorId(nightMode)));
+		closeButton.setImageDrawable(getIcon(AndroidUtils.getNavigationIconResId(closeButton.getContext()), ColorUtilities.getDefaultIconColorId(nightMode)));
 		closeButton.setOnClickListener(v -> dismiss());
 		ImageButton editButton = view.findViewById(R.id.action_edit);
 		editButton.setOnClickListener(v -> CoordinatesFormatEditFragment.show(requireMyActivity(), appMode));
@@ -108,7 +108,7 @@ public class CoordinatesFormatFragment extends BaseCoordinateFormatFragment
 
 		for (int i = 0; i < formats.size(); i++) {
 			CoordinateFormat format = formats.get(i);
-			list.addView(createFormatRow(format, false, i == 0, i < formats.size() - 1, v -> {
+			list.addView(createFormatRow(format, i == 0, i < formats.size() - 1, v -> {
 			}));
 		}
 	}
@@ -164,9 +164,5 @@ public class CoordinatesFormatFragment extends BaseCoordinateFormatFragment
 		if (!fragmentManager.isStateSaved()) {
 			fragmentManager.popBackStack();
 		}
-	}
-
-	public static void showAddFormat(@NonNull FragmentActivity activity, @NonNull ApplicationMode appMode) {
-		AddCoordinateFormatFragment.show(activity, appMode, false, true, null);
 	}
 }

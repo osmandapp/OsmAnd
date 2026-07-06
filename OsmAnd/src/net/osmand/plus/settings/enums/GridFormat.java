@@ -7,7 +7,10 @@ import net.osmand.LocationConvert;
 import net.osmand.core.jni.GridConfiguration.Format;
 import net.osmand.core.jni.GridConfiguration.Projection;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.coordinates.CoordinateFormatIds;
 import net.osmand.util.CollectionUtils;
+
+import java.util.List;
 
 public enum GridFormat implements EnumWithTitleId {
 
@@ -56,6 +59,17 @@ public enum GridFormat implements EnumWithTitleId {
 	}
 
 	@NonNull
+	public String getCoordinateFormatId() {
+		return switch (this) {
+			case DMS -> CoordinateFormatIds.BUILTIN_DMS;
+			case DM -> CoordinateFormatIds.BUILTIN_DDM;
+			case DIGITAL -> CoordinateFormatIds.BUILTIN_DDD;
+			case UTM -> CoordinateFormatIds.BUILTIN_UTM;
+			case MGRS -> CoordinateFormatIds.BUILTIN_MGRS;
+		};
+	}
+
+	@NonNull
 	public static GridFormat valueOf(int formatId) {
 		for (GridFormat format : values()) {
 			if (format.id == formatId) {
@@ -63,6 +77,32 @@ public enum GridFormat implements EnumWithTitleId {
 			}
 		}
 		return values()[0];
+	}
+
+	@Nullable
+	public static GridFormat fromCoordinateFormatId(@Nullable String formatId) {
+		String normalized = CoordinateFormatIds.normalize(formatId);
+		if (CoordinateFormatIds.BUILTIN_DMS.equals(normalized)) {
+			return DMS;
+		} else if (CoordinateFormatIds.BUILTIN_DDM.equals(normalized)) {
+			return DM;
+		} else if (CoordinateFormatIds.BUILTIN_DDD.equals(normalized)) {
+			return DIGITAL;
+		} else if (CoordinateFormatIds.BUILTIN_UTM.equals(normalized)) {
+			return UTM;
+		} else if (CoordinateFormatIds.BUILTIN_MGRS.equals(normalized)) {
+			return MGRS;
+		}
+		return null;
+	}
+
+	@NonNull
+	public static List<String> getSupportedCoordinateFormatIds() {
+		return List.of(DMS.getCoordinateFormatId(),
+				DM.getCoordinateFormatId(),
+				DIGITAL.getCoordinateFormatId(),
+				UTM.getCoordinateFormatId(),
+				MGRS.getCoordinateFormatId());
 	}
 }
 

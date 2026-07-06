@@ -55,7 +55,8 @@ public class FileSettingsItem extends StreamSettingsItem {
 		MULTIMEDIA_NOTES("multimedia_notes", IndexConstants.AV_INDEX_DIR, R.drawable.ic_action_photo_dark),
 		NAUTICAL_DEPTH("nautical_depth", IndexConstants.NAUTICAL_INDEX_DIR, R.drawable.ic_action_nautical_depth),
 		FAVORITES_BACKUP("favorites_backup", IndexConstants.BACKUP_INDEX_DIR, R.drawable.ic_action_folder_favorites),
-		COLOR_PALETTE("colors_palette", IndexConstants.COLOR_PALETTE_DIR, R.drawable.ic_action_file_color_palette);
+		COLOR_PALETTE("colors_palette", IndexConstants.COLOR_PALETTE_DIR, R.drawable.ic_action_file_color_palette),
+		ATTACHED_MEDIA("attached_media", IndexConstants.AV_INDEX_DIR, R.drawable.ic_action_photo_dark);
 
 		private final String subtypeName;
 		private final String subtypeFolder;
@@ -298,6 +299,9 @@ public class FileSettingsItem extends StreamSettingsItem {
 			} else if (subtype != null && subtype != FileSubtype.UNKNOWN) {
 				name = Algorithms.getFileWithoutDirs(fileName);
 			}
+		}
+		if (subtype == FileSubtype.ATTACHED_MEDIA) {
+			shouldReplace = true;
 		}
 	}
 

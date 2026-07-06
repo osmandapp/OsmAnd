@@ -11,6 +11,31 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="android_auto_missing_maps_desc">Download missing maps for the route to continue.</string>
+	<string name="android_auto_possible_missing_maps_desc">Possible missing maps. Try using existing maps to continue.</string>
+	<string name="route_calculation_calculating_route">Calculating route...</string>
+	<string name="route_calculation_calculating_fast_route">Calculating fast route...</string>
+	<string name="route_calculation_using_fast_algorithm">Using Fast routing algorithm.</string>
+	<string name="route_calculation_using_standard_algorithm">Using Standard (slower) routing algorithm.</string>
+	<string name="route_calculation_missing_maps">Missing maps</string>
+	<string name="route_calculation_missing_maps_desc">Some offline maps needed for this route are missing. Download them to continue.</string>
+	<string name="route_calculation_mixed_maps_desc">Fast routing is unavailable due to mixed map dates. Switching to Standard calculation may take a few minutes.</string>
+	<string name="route_calculation_missing_maps_estimate_desc">Possible missing maps detected based on a straight-line estimate.\nIf your route avoids these areas, use existing maps.</string>
+	<string name="route_calculation_route_not_found_desc">Fast routing could not find a route. Switching to standard calculation.</string>
+	<string name="route_calculation_unavailable_parameters_desc">Fast routing is unavailable with the selected route parameters. Switching to standard calculation.</string>
+	<string name="route_calculation_standard_long_route_desc">Standard calculation for long routes (&gt;300km) may take a significant amount of time. Adding a waypoint can speed this up.</string>
+	<string name="route_calculation_fast_missing_or_outdated_maps_desc">Some offline maps needed for this route are missing or outdated. Download or update them to continue.</string>
+	<string name="route_calculation_fast_route_not_found_desc">Fast routing could not find a route with the current maps.</string>
+	<string name="route_calculation_fast_missing_hh_cache_desc">Fast routing data is missing from the maps. Update maps or choose another calculation method.</string>
+	<string name="route_calculation_fast_unavailable_parameters_desc">Fast routing is unavailable with the selected route parameters. Adjust route parameters or choose another calculation method.</string>
+	<string name="route_calculation_review_maps">Review maps</string>
+	<string name="route_calculation_use_existing_maps">Use existing maps</string>
+	<string name="required_maps_missing_and_outdated_title">Missing &amp; Outdated maps</string>
+	<string name="required_maps_route_overview">Route overview:</string>
+	<string name="required_maps_route_overview_desc">This map list is an estimate based on a straight line. If you think your actual route bypasses the missing areas, you can:</string>
+	<string name="required_maps_get_accurate_list_online">Get an accurate list online</string>
+	<string name="required_maps_calculate_with_existing_maps">Calculate with existing maps</string>
+	<string name="attached_media">Attached media</string>
 	<string name="shared_string_recent">Recent</string>
 	<string name="sort_by_nearest_to_map_center">Nearest to map center</string>
 	<string name="last_week">Last week</string>
@@ -1888,6 +1913,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="routing_attr_motor_type_electric_name">Electric</string>
     <string name="routing_attr_motor_type_gas_name">CNG</string>
     <string name="routing_attr_motor_type_hybrid_name">Hybrid</string>
+    <string name="routing_attr_motor_type_ethanol_name">Ethanol</string>
     <string name="import_as_one_track">Import as one track</string>
     <string name="use_latin_name_if_missing">Use latin name if missing</string>
     <string name="show_local_names">Show local names</string>

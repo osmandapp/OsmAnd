@@ -7,6 +7,7 @@ import net.osmand.util.Algorithms;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -60,9 +61,11 @@ public abstract class MediaSource {
 
 	public abstract void delete() throws IOException;
 
+	public abstract long getLastModified();
+
 	@NonNull
 	public List<String> getHrefKeys() {
-		return List.copyOf(hrefKeys);
+		return new ArrayList<>(hrefKeys);
 	}
 
 	@NonNull

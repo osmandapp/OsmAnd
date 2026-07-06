@@ -9,30 +9,39 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.routepreparationmenu.RequiredMapsFragment
+import net.osmand.plus.settings.backend.OsmandSettings
 
 
-class MissingMapsScreen(carContext: CarContext, private val allowContinue: Boolean) :
+class MissingMapsScreen(carContext: CarContext, screenType: MissingMapsScreenType) :
 	BaseAndroidAutoScreen(carContext) {
-	override fun getTemplate(): Template {
-		val title = app.getString(R.string.missing_maps_header)
-		val message = app.getString(R.string.missing_maps_description)
-		val continueNavigation = R.string.continue_navigation
-		val stopNavigationService = R.string.stop_navigation_service
-		val firstButtonText = if (allowContinue) continueNavigation else stopNavigationService
+	var screenType: MissingMapsScreenType = screenType
+		private set
 
-		return MessageTemplate.Builder(message)
-			.setTitle(title)
-			.addAction(
+	fun updateScreenType(screenType: MissingMapsScreenType) {
+		this.screenType = screenType
+		invalidate()
+	}
+
+	override fun getTemplate(): Template {
+		val title = app.getString(screenType.titleId)
+		val message = app.getString(screenType.messageId)
+		val builder = MessageTemplate.Builder(message).setTitle(title)
+
+		if (screenType == MissingMapsScreenType.POSSIBLE_MISSING_MAPS) {
+			builder.addAction(
 				Action.Builder()
-					.setTitle(app.getString(firstButtonText))
+					.setTitle(app.getString(R.string.route_calculation_use_existing_maps))
 					.setOnClickListener {
-						if (!allowContinue) {
-							app.carNavigationSession?.stopNavigation()
-						}
+						app.getSettings().setStopOnMissingMaps(false)
+						OsmandSettings.IGNORE_MISSING_MAPS = true
+						app.getRoutingHelper().onSettingsChanged(true)
 						finish()
 					}
 					.build()
 			)
+		}
+
+		return builder
 			.addAction(
 				Action.Builder()
 					.setTitle(app.getString(R.string.view_on_phone))
@@ -51,4 +60,15 @@ class MissingMapsScreen(carContext: CarContext, private val allowContinue: Boole
 			.setHeaderAction(Action.BACK)
 			.build()
 	}
+}
+
+enum class MissingMapsScreenType(val titleId: Int, val messageId: Int) {
+	MISSING_MAPS(
+		R.string.route_calculation_missing_maps,
+		R.string.android_auto_missing_maps_desc
+	),
+	POSSIBLE_MISSING_MAPS(
+		R.string.route_calculation_missing_maps,
+		R.string.android_auto_possible_missing_maps_desc
+	)
 }

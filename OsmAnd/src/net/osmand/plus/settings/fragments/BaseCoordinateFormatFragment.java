@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -114,21 +113,19 @@ public abstract class BaseCoordinateFormatFragment extends BaseFullScreenFragmen
 	}
 
 	@NonNull
-	protected View createFormatRow(@NonNull CoordinateFormat format, boolean addRow, boolean primary,
+	protected View createFormatRow(@NonNull CoordinateFormat format, boolean primary,
 	                               boolean showDivider, @NonNull View.OnClickListener clickListener) {
 		View row = LayoutInflater.from(getMaterialThemedContext())
 				.inflate(R.layout.coordinate_format_settings_item, null, false);
-		bindFormatRow(row, format, addRow, primary, showDivider, clickListener);
+		bindFormatRow(row, format, primary, showDivider, clickListener);
 		return row;
 	}
 
-	protected void bindFormatRow(@NonNull View row, @NonNull CoordinateFormat format, boolean addRow, boolean primary,
+	protected void bindFormatRow(@NonNull View row, @NonNull CoordinateFormat format, boolean primary,
 	                             boolean showDivider, @NonNull View.OnClickListener clickListener) {
 		TextView title = row.findViewById(android.R.id.title);
 		TextView summary = row.findViewById(android.R.id.summary);
 		View divider = row.findViewById(R.id.divider);
-		View iconContainer = row.findViewById(R.id.iconContainer);
-		ImageView icon = row.findViewById(R.id.icon);
 		View selectable = row.findViewById(R.id.selectable_list_item);
 
 		title.setText(format.getTitle());
@@ -138,24 +135,11 @@ public abstract class BaseCoordinateFormatFragment extends BaseFullScreenFragmen
 		}
 		summary.setText(description);
 		divider.setVisibility(showDivider ? View.VISIBLE : View.GONE);
-		if (addRow) {
-			iconContainer.setVisibility(View.VISIBLE);
-			iconContainer.setBackground(null);
-			icon.setImageDrawable(getIcon(R.drawable.ic_action_add, R.color.color_osm_edit_create));
-			setDividerTextStartMargin(divider);
-		} else {
-			iconContainer.setVisibility(View.GONE);
-			setDividerDefaultMargin(divider);
-		}
 		selectable.setOnClickListener(clickListener);
 	}
 
 	protected void setDividerTextStartMargin(@NonNull View divider) {
 		setDividerStartMargin(divider, dp(72));
-	}
-
-	protected void setDividerDefaultMargin(@NonNull View divider) {
-		setDividerStartMargin(divider, dp(16));
 	}
 
 	protected void setDividerStartMargin(@NonNull View divider, int marginStart) {
