@@ -421,20 +421,7 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		Collections.sort(finalResult, (o1, o2) -> SpatialSearchResult.compare(o1, o2, ctx.location));
 		
 		SpatialSearchDeduplication deduplication = new SpatialSearchDeduplication(ctx);
-		deduplication.uniteSearchResultsByOsmIdOrWikidata(finalResult);
-		
-//		if (deduplicate) {
-//			List<SpatialSearchResult> res = new ArrayList<SpatialSearchResult>();
-//			TLongHashSet duplicateIds = new TLongHashSet();
-//			for (SpatialSearchResult s : finalResult) {
-//				long filterId = s.getIdDeduplication();
-//				if (filterId > 0 && !duplicateIds.add(filterId)) {
-//					continue;
-//				}
-//				res.add(s);
-//			}
-//			finalResult = res;
-//		}
+		deduplication.uniteSimilarAndRemoveDuplicate(finalResult);
 		return finalResult;
 	}
 	
