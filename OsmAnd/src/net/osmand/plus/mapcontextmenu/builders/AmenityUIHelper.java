@@ -3,11 +3,8 @@ package net.osmand.plus.mapcontextmenu.builders;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_PHONE_ID;
 import static net.osmand.data.Amenity.*;
-import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
-import static net.osmand.osm.MapPoiTypes.WIKI_LANG;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.ALT_NAMES_ROW_KEY;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.NAMES_ROW_KEY;
-import static net.osmand.plus.wikipedia.WikiAlgorithms.WIKIPEDIA;
 import static net.osmand.plus.wikipedia.WikiAlgorithms.WIKI_DATA_BASE_URL;
 import static net.osmand.plus.wikipedia.WikiAlgorithms.WIKI_LINK;
 import static net.osmand.util.CollectionUtils.equalsToAny;
@@ -34,6 +31,7 @@ import androidx.core.util.PatternsCompat;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
+import net.osmand.data.AmenityInfoDisplayFilter;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.osm.AbstractPoiType;
@@ -110,20 +108,8 @@ public class AmenityUIHelper extends MenuBuilder {
 		for (Entry<String, Object> entry : filteredInfo.entrySet()) {
 			String key = entry.getKey();
 			Object value = entry.getValue();
-			if (MapPoiTypes.getDefault().getAnyPoiAdditionalTypeByKey(key) instanceof PoiType that) {
-				if (that.isHidden()) {
-					continue;
-				}
-			}
-			if (key.contains(WIKIPEDIA) || key.contains(CONTENT)
-					|| key.contains(SHORT_DESCRIPTION) || key.contains(WIKI_LANG)) {
+			if (!AmenityInfoDisplayFilter.shouldDisplayKey(key, subtype, poiTypes)) {
 				continue;
-			}
-			if (ROUTE_ARTICLE.equals(subtype) && key.contains(DESCRIPTION)) {
-				continue;
-			}
-			if (key.equals(NAME)) {
-				continue; // will be added in buildNamesRow
 			}
 			AmenityInfoRow infoRow = null;
 			if (value instanceof String strValue) {
@@ -381,11 +367,10 @@ public class AmenityUIHelper extends MenuBuilder {
 	}
 
 	private boolean isKeyToSkip(@NonNull String key) {
-		return startsWithAny(key, COLLAPSABLE_PREFIX, ALT_NAME_WITH_LANG_PREFIX, LANG_YES)
-				|| equalsToAny(key, WIKI_PHOTO, WIKIDATA, WIKIMEDIA_COMMONS, "image", "mapillary", "subway_region")
+		return startsWithAny(key, COLLAPSABLE_PREFIX, ALT_NAME_WITH_LANG_PREFIX)
+				|| equalsToAny(key, WIKI_PHOTO, WIKIDATA, WIKIMEDIA_COMMONS, "image", "mapillary")
 				|| (key.equals("note") && !osmEditingEnabled)
-				|| MapObject.isNameLangTag(key)
-				|| key.contains(ROUTE);
+				|| MapObject.isNameLangTag(key);
 	}
 
 	@Nullable

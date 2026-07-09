@@ -82,6 +82,7 @@ public class Amenity extends MapObject {
 	public static final String TYPE = "type";
 	public static final String SUBTYPE = "subtype";
 	public static final String NAME = "name";
+	public static final String SUBWAY_REGION = "subway_region";
 	public static final String SEPARATOR = ";";
 	public static final String ALT_NAME_WITH_LANG_PREFIX = "alt_name:";
 	public static final String COLLAPSABLE_PREFIX = "collapsable_";
