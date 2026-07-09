@@ -1,6 +1,6 @@
 # Driver Break — Energy Model Formula Reference
 
-For full derivation and background see [Driver Break — Energy Model](../../../../../../web/main/docs/technical/build-osmand/driver-break-energy-model.md) (also on [osmand.net](https://osmand.net/docs/technical/build-osmand/driver-break-energy-model)).
+For full derivation and background see [Driver Break — Energy Model](../../../../../../../web/main/docs/technical/build-osmand/driver-break-energy-model.md) (also on [osmand.net](https://osmand.net/docs/technical/build-osmand/driver-break-energy-model)).
 
 Navit reference: [formulas.rst](https://github.com/Supermagnum/navit/blob/feature/driver-break/docs/user/plugins/driver-break/formulas.rst).
 

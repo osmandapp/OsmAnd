@@ -116,7 +116,7 @@ GRADLE_OPTS="-Xmx8g" ./gradlew :OsmAnd:assembleGplayFreeLegacyFatDebug \
   -Pandroid.testInstrumentationRunnerArguments.package=net.osmand.plus.plugins.driverbreak
 ```
 
-**Status (2026-06-27):** 32/32 Driver Break instrumentation tests passed on Pixel 9 Pro AVD (API 17). Emulator route integration (car POI, energy routing, hiking Friisvegen–Rondvassbu–Gautåsæter) is documented in [driver-break-tests.md](../../../../../../web/main/docs/technical/build-osmand/driver-break-tests.md#emulator-route-integration-2026-06-27).
+**Status (2026-06-27):** 32/32 Driver Break instrumentation tests passed on Pixel 9 Pro AVD (API 17). Emulator route integration (car POI, energy routing, hiking Friisvegen–Rondvassbu–Gautåsæter) is documented in [driver-break-tests.md](../../../../../../../web/main/docs/technical/build-osmand/driver-break-tests.md#emulator-route-integration-2026-06-27).
 
 | Test class | Coverage |
 |---|---|
@@ -130,7 +130,7 @@ GRADLE_OPTS="-Xmx8g" ./gradlew :OsmAnd:assembleGplayFreeLegacyFatDebug \
 | `AdaptiveFuelLearnerTest` | EMA learning and config persistence |
 | `J1939BackendTest` | PGN fuel rate/level scaling |
 
-Full build/test log: [driver-break-tests.md](../../../../../../web/main/docs/technical/build-osmand/driver-break-tests.md) (repo `web/main/docs`).
+Full build/test log: [driver-break-tests.md](../../../../../../../web/main/docs/technical/build-osmand/driver-break-tests.md) (repo `web/main/docs`).
 
 ## Known limitations / planned work
 
@@ -149,9 +149,9 @@ Full build/test log: [driver-break-tests.md](../../../../../../web/main/docs/tec
 
 | Audience | Location (repo root) |
 |---|---|
-| End users | [`web/main/docs/user/plugins/driver-break.md`](../../../../../../web/main/docs/user/plugins/driver-break.md) |
-| Energy model | [`web/main/docs/technical/build-osmand/driver-break-energy-model.md`](../../../../../../web/main/docs/technical/build-osmand/driver-break-energy-model.md) |
-| ECU protocols | [`web/main/docs/technical/build-osmand/driver-break-ecu-protocols.md`](../../../../../../web/main/docs/technical/build-osmand/driver-break-ecu-protocols.md) |
-| Tests | [`web/main/docs/technical/build-osmand/driver-break-tests.md`](../../../../../../web/main/docs/technical/build-osmand/driver-break-tests.md) |
+| End users | [`web/main/docs/user/plugins/driver-break.md`](../../../../../../../web/main/docs/user/plugins/driver-break.md) |
+| Energy model | [`web/main/docs/technical/build-osmand/driver-break-energy-model.md`](../../../../../../../web/main/docs/technical/build-osmand/driver-break-energy-model.md) |
+| ECU protocols | [`web/main/docs/technical/build-osmand/driver-break-ecu-protocols.md`](../../../../../../../web/main/docs/technical/build-osmand/driver-break-ecu-protocols.md) |
+| Tests | [`web/main/docs/technical/build-osmand/driver-break-tests.md`](../../../../../../../web/main/docs/technical/build-osmand/driver-break-tests.md) |
 | Formula quick reference | `FORMULAS.md` (this package) |
 | Navit source of truth | [Supermagnum/navit driver-break docs](https://github.com/Supermagnum/navit/tree/feature/driver-break/docs/user/plugins/driver-break) |
