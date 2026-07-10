@@ -2,13 +2,17 @@ package net.osmand.plus.gallery.data
 
 import android.graphics.Bitmap
 import android.media.MediaMetadataRetriever
+import android.media.MediaMetadataRetriever.METADATA_KEY_LOCATION
 import android.net.Uri
 import android.os.Handler
 import android.os.Looper
 import android.provider.DocumentsContract
 import android.provider.OpenableColumns
 import android.util.LruCache
+import net.osmand.Location
+import net.osmand.data.LatLon
 import net.osmand.plus.OsmandApplication
+import net.osmand.plus.media.MediaMetadataUtils
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.shared.media.MediaProvider
 import net.osmand.shared.media.domain.MediaItem
@@ -131,11 +135,37 @@ class LocalMediaMetadataRepository(
 		} else {
 			null
 		}
+		val latLon = extractLocation(item, file, contentUri)
 		return GalleryMediaMetadata(
 			sizeBytes = sizeBytes,
 			dateMillis = dateMillis,
-			durationMs = durationMs
+			durationMs = durationMs,
+			latLon = latLon
 		)
+	}
+
+	private fun extractLocation(item: MediaItem, file: File?, contentUri: Uri?): LatLon? {
+		val location = when {
+			file != null -> MediaMetadataUtils.getLocation(file, file.name)
+			contentUri != null -> extractContentLocation(item, contentUri)
+			else -> null
+		}
+		return location?.let { LatLon(it.latitude, it.longitude) }
+	}
+
+	private fun extractContentLocation(item: MediaItem, uri: Uri): Location? {
+		val location = if (item.type == MediaType.PHOTO) {
+			runCatching {
+				app.contentResolver.openInputStream(uri)?.use {
+					MediaMetadataUtils.getPhotoInformation(it)
+				}
+			}.getOrNull()
+		} else {
+			withRetriever(null, uri) {
+				MediaMetadataUtils.parseMediaLocation(it.extractMetadata(METADATA_KEY_LOCATION))
+			}
+		}
+		return location ?: MediaMetadataUtils.getLocationFromLegacyFileName(item.title)
 	}
 
 	private fun resolveFile(item: MediaItem): File? {

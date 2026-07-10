@@ -40,6 +40,7 @@ import net.osmand.shared.gpx.primitives.Link
 import net.osmand.shared.gpx.primitives.Linkable
 import net.osmand.shared.media.LinkMediaFactory
 import net.osmand.shared.media.domain.MediaItem
+import net.osmand.util.MapUtils
 import java.util.HashMap
 
 class AttachedMediaGridController(
@@ -171,8 +172,9 @@ class AttachedMediaGridController(
 				media.sortedByDescending { metadataOf(it)?.durationMs ?: Long.MIN_VALUE }
 			GallerySortMode.DURATION_SHORT_LONG ->
 				media.sortedBy { metadataOf(it)?.durationMs ?: Long.MAX_VALUE }
-			// TODO #7125: Nearest needs per-item coordinates
-			GallerySortMode.NEAREST -> media
+			GallerySortMode.NEAREST -> latLon?.let { reference -> media.sortedBy { item ->
+					metadataOf(item)?.latLon?.let { MapUtils.getDistance(reference, it) } ?: Double.MAX_VALUE
+				} } ?: media
 		}
 	}
 
@@ -291,7 +293,8 @@ class AttachedMediaGridController(
 	private fun showSortMenu(anchor: View) {
 		val nightMode = view?.isNightMode() ?: false
 		val iconColor = ColorUtilities.getDefaultIconColor(app, nightMode)
-		val items = GallerySortMode.entries.map { mode ->
+		val modes = GallerySortMode.entries.filter { it != GallerySortMode.NEAREST || latLon != null }
+		val items = modes.map { mode ->
 			PopUpMenuItem.Builder(app)
 				.setTitleId(mode.titleId)
 				.setIcon(app.uiUtilities.getPaintedIcon(mode.iconId, iconColor))

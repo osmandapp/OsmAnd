@@ -101,7 +101,14 @@ object MediaFileNameFormat {
 		if (extensionSeparator <= 0 || mediaType == MediaType.UNKNOWN) {
 			return false
 		}
-		return parseNewGeneratedMediaFileName(fileName, mediaType) != null || isLegacyGeneratedMediaFileName(fileName, extensionSeparator)
+		return isNewGeneratedMediaFileName(fileName) || isLegacyGeneratedMediaFileName(fileName, extensionSeparator)
+	}
+
+	@JvmStatic
+	fun isNewGeneratedMediaFileName(fileName: String): Boolean {
+		val extension = getFileNameExtension(fileName)
+		val mediaType = MediaType.fromExtension(extension)
+		return mediaType != MediaType.UNKNOWN && parseNewGeneratedMediaFileName(fileName, mediaType) != null
 	}
 
 	private fun parseNewGeneratedMediaFileName(fileName: String, mediaType: MediaType): Pair<LocalDateTime, Int>? {

@@ -244,6 +244,11 @@ public class MapUtils {
 		return longitude;
 	}
 
+	public static boolean isValidLatLon(double latitude, double longitude) {
+		return latitude >= -90.0 && latitude <= 90.0
+				&& longitude >= MIN_LONGITUDE && longitude <= MAX_LONGITUDE;
+	}
+
 	public static double checkLatitude(double latitude) {
 		if (latitude >= MIN_LATITUDE && latitude <= MAX_LATITUDE) {
 			return latitude;
