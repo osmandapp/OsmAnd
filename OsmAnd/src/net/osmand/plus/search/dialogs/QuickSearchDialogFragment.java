@@ -29,6 +29,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -2914,19 +2915,35 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 		boolean showOnMapVisible = showOnMapFab != null && showOnMapFab.getVisibility() == View.VISIBLE;
 		if (showOnMapVisible) {
-			FrameLayout.LayoutParams parameter = (FrameLayout.LayoutParams) showOnMapFab.getLayoutParams();
-			parameter.setMargins(parameter.leftMargin, parameter.topMargin, parameter.rightMargin, bottomMargin);
-			showOnMapFab.setLayoutParams(parameter);
+			updateFabBottomMargin(showOnMapFab, bottomMargin);
 		}
 
 		if (fabVisible) {
 			if (showOnMapVisible) {
 				bottomMargin += getDimensionPixelSize(R.dimen.fab_size_with_shadow);
 			}
-			FrameLayout.LayoutParams parameter = (FrameLayout.LayoutParams) fab.getLayoutParams();
-			parameter.setMargins(parameter.leftMargin, parameter.topMargin, parameter.rightMargin, bottomMargin);
-			fab.setLayoutParams(parameter);
+			updateFabBottomMargin(fab, bottomMargin);
 		}
+	}
+
+	private void updateFabBottomMargin(@NonNull View fabView, int bottomMargin) {
+		// keep the insets framework in sync: it recomputes margins from this tag on every dispatch
+		fabView.setTag(R.id.initial_margin_bottom, bottomMargin);
+		FrameLayout.LayoutParams parameter = (FrameLayout.LayoutParams) fabView.getLayoutParams();
+		parameter.setMargins(parameter.leftMargin, parameter.topMargin, parameter.rightMargin,
+				bottomMargin + getFabBottomInset());
+		fabView.setLayoutParams(parameter);
+	}
+
+	private int getFabBottomInset() {
+		WindowInsetsCompat insets = getLastRootInsets();
+		if (insets == null) {
+			return 0;
+		}
+		// same mask as InsetTarget.createFab(), so both code paths compute the same margin
+		int typeMask = WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.ime()
+				| WindowInsetsCompat.Type.displayCutout();
+		return insets.getInsets(typeMask).bottom;
 	}
 
 	private void updateSendEmptySearchBottomBar(boolean sendSearchQueryVisible) {
