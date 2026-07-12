@@ -237,16 +237,39 @@ public class PublicTransportCard extends MapBaseCard {
 		int walkDistancePT = (int) routeResult.getWalkDist();
 		int walkDistance = walkDistanceReal > 0 ? walkDistanceReal : walkDistancePT;
 		String walkDistanceStr = OsmAndFormatter.getFormattedDistance(walkDistance, app);
-		int travelTime = (int) routeResult.getTravelTime() + walkTime;
+		TransportRouteResultSegment firstSeg = segments.get(0);
+		TransportRouteResultSegment lastSeg = segments.get(segments.size() - 1);
+		double walkSpeed = routeResult.getWalkSpeed();
+		long depEpoch = -1;
+		long arrEpoch = -1;
+		if (firstSeg.departureTimeMillis > 0 && lastSeg.arrivalTimeMillis > 0) {
+			depEpoch = firstSeg.departureTimeMillis - (long) (getWalkTime(firstSeg.walkDist, walkSpeed) * 1000);
+			arrEpoch = lastSeg.arrivalTimeMillis + (long) (getWalkTime(routeResult.getFinishWalkDist(), walkSpeed) * 1000);
+		}
+		int travelTime = depEpoch > 0 && arrEpoch > 0
+				? (int) ((arrEpoch / 60000 - depEpoch / 60000) * 60)
+				: (int) routeResult.getTravelTime() + walkTime;
 		String travelTimeStr = OsmAndFormatter.getFormattedDuration(travelTime, app);
 		int travelDist = (int) routeResult.getTravelDist() + walkDistance;
 		String travelDistStr = OsmAndFormatter.getFormattedDistance(travelDist, app);
 
 		String secondLine = travelTimeStr + ", " + travelDistStr + "  •  " + app.getString(R.string.shared_string_walk) + " " + walkTimeStr + ", " + walkDistanceStr;
 
+		String clockStr = null;
+		if (depEpoch > 0 && arrEpoch > 0) {
+			clockStr = app.getString(R.string.ltr_or_rtl_combine_via_arrow,
+					OsmAndFormatter.getFormattedTimeShort(depEpoch / 1000, false),
+					OsmAndFormatter.getFormattedTimeShort(arrEpoch / 1000, false));
+			secondLine = clockStr + "  •  " + secondLine;
+		}
+
 		SpannableString secondLineDesc = new SpannableString(secondLine);
 
 		int mainFontColor = getMainFontColor();
+		if (clockStr != null) {
+			secondLineDesc.setSpan(new ForegroundColorSpan(mainFontColor), 0, clockStr.length(), 0);
+			secondLineDesc.setSpan(new CustomTypefaceSpan(typeface), 0, clockStr.length(), 0);
+		}
 		int startTravelTime = secondLine.indexOf(travelTimeStr);
 		secondLineDesc.setSpan(new ForegroundColorSpan(mainFontColor), startTravelTime, startTravelTime + travelTimeStr.length(), 0);
 		secondLineDesc.setSpan(new CustomTypefaceSpan(typeface), startTravelTime, startTravelTime + travelTimeStr.length(), 0);

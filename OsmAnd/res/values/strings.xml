@@ -7,6 +7,7 @@
 	<string name="transit_depart_at">Depart at…</string>
 	<string name="transit_arrive_by">Arrive by…</string>
 	<string name="transit_arrive_prefix">Arrive %1$s</string>
+	<string name="transit_later_departures">Later departures</string>
 	<string name="transit_optimize">Optimize</string>
 	<string name="transit_opt_best">Best route</string>
 	<string name="transit_opt_fewest_changes">Fewest transfers</string>
@@ -2658,6 +2659,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="icon_group_special">Special</string>
     <string name="icon_group_amenity">Amenity</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="ltr_or_rtl_combine_via_arrow">%1$s → %2$s</string>
     <string name="shared_string_local_maps">Local maps</string>
     <string name="message_graph_will_be_available_after_recalculation">Please wait.\nGraph will be available after route recalculation.</string>
     <string name="shared_string_graph">Graph</string>

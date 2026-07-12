@@ -546,7 +546,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		((ViewGroup) view).addView(baseContainer);
 
 		if (nextSegment != null) {
-			double walkDist = (long) getWalkDistance(segment, nextSegment, segment.walkDist);
+			double walkDist = (long) getWalkDistance(segment, nextSegment, nextSegment.walkDist);
 
 			if (walkDist > 0) {
 				int walkTime = (int) getWalkTime(segment, nextSegment, walkDist, walkSpeed);
@@ -644,7 +644,13 @@ public class RouteDetailsFragment extends ContextMenuFragment
 			name = getString(R.string.shared_string_my_location);
 		}
 		Spannable startTitle = new SpannableString(name);
-		String text = getStopTimeText(segment.departureTimeMillis, startTime[0]);
+		double walkDist = (long) getWalkDistance(null, segment, segment.walkDist);
+		int walkTime = (int) getWalkTime(null, segment, walkDist, walkSpeed);
+		if (walkTime < 60) {
+			walkTime = 60;
+		}
+		long startEpoch = segment.departureTimeMillis > 0 ? segment.departureTimeMillis - walkTime * 1000L : -1;
+		String text = getStopTimeText(startEpoch, startTime[0]);
 
 		int drawableId = start == null ? R.drawable.ic_action_location_color : R.drawable.list_startpoint;
 		Drawable icon = app.getUIUtilities().getIcon(drawableId);
@@ -658,11 +664,6 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		addWalkRouteIcon(imagesContainer);
 		buildRowDivider(infoContainer, true);
 
-		double walkDist = (long) getWalkDistance(null, segment, segment.walkDist);
-		int walkTime = (int) getWalkTime(null, segment, walkDist, walkSpeed);
-		if (walkTime < 60) {
-			walkTime = 60;
-		}
 		startTime[0] += walkTime;
 		SpannableStringBuilder title = new SpannableStringBuilder(Algorithms.capitalizeFirstLetter(getString(R.string.shared_string_walk)));
 		title.setSpan(new ForegroundColorSpan(getSecondaryColor()), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
