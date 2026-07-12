@@ -22,6 +22,7 @@ import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.transport.online.OnlineTransportRouteTranslator;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.NativeTransportRoutingResult;
@@ -527,6 +528,13 @@ public class TransportRoutingHelper {
 			}
 			GeneralRouter prouter = config.getRouter(params.mode.getRoutingProfile());
 			TransportRoutingConfiguration cfg = new TransportRoutingConfiguration(prouter, params.params);
+
+			if (settings.USE_ONLINE_PUBLIC_TRANSPORT.get()) {
+				List<TransportRouteResult> res = OnlineTransportRouteTranslator.buildRoutes(settings, params.params, params.start, params.end, cfg);
+				if (!res.isEmpty()) {
+					return res;
+				}
+			}
 
 			TransportRoutingContext ctx = new TransportRoutingContext(cfg, library, files);
 			ctx.calculationProgress = params.calculationProgress;
