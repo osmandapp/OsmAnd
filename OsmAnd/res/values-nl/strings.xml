@@ -5573,4 +5573,14 @@
     <string name="coordinate_format_select_other">Selecteer een andere notatie</string>
     <string name="coordinate_format_primary">Primaire</string>
     <string name="routing_attr_motor_type_ethanol_name">Ethanol</string>
+    <string name="android_auto_missing_maps_desc">Download ontbrekende kaarten voor de route om door te gaan.</string>
+    <string name="android_auto_possible_missing_maps_desc">Er ontbreken mogelijk kaarten. Probeer beschikbare kaarten om door te gaan.</string>
+    <string name="route_calculation_calculating_route">Route berekenen...</string>
+    <string name="route_calculation_using_fast_algorithm">Met het snelle routeringsalgoritme.</string>
+    <string name="route_calculation_using_standard_algorithm">Met het standaard (tragere) routeringsalgoritme.</string>
+    <string name="route_calculation_missing_maps">Ontbrekende kaarten</string>
+    <string name="route_calculation_missing_maps_desc">Sommige voor de route benodigde offline kaarten, ontbreken. Download ze om door te gaan.</string>
+    <string name="route_calculation_mixed_maps_desc">Snelle routeberekening is niet beschikbaar, omdat de offline kaarten verschillende datums hebben. Overschakelen naar de Standaardrouteberekening kan even duren.</string>
+    <string name="attached_media">Bijgevoegde media</string>
+    <string name="traffic_warning_red_light_camera">Roodlichtcamera</string>
 </resources>
