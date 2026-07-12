@@ -130,6 +130,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	public static final int DEFAULT_MENU_STATE = 0;
 	private static final int MAX_PEDESTRIAN_ROUTE_DURATION = 30 * 60;
 	private static final double STANDARD_LONG_ROUTE_SEGMENT_DISTANCE = 300_000;
+	private static final long NEXT_DEPARTURE_SEARCH_OFFSET = 60_000;
 
 	public static int directionInfo = -1;
 	public static boolean chooseRoutesVisible;
@@ -594,6 +595,20 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					pedestrianRouteCard.setListener(this);
 					menuCards.add(pedestrianRouteCard);
 				}
+				long latestDeparture = -1;
+				for (TransportRouteResult r : routes) {
+					if (!r.getSegments().isEmpty()) {
+						long dep = r.getSegments().get(0).departureTimeMillis;
+						if (dep > latestDeparture) {
+							latestDeparture = dep;
+						}
+					}
+				}
+				if (latestDeparture > 0) {
+					LaterDeparturesCard laterCard = new LaterDeparturesCard(mapActivity, latestDeparture + NEXT_DEPARTURE_SEARCH_OFFSET);
+					laterCard.setListener(this);
+					menuCards.add(laterCard);
+				}
 				bottomShadowVisible = routes.isEmpty();
 			} else {
 				RouteMenuAppModes mode = app.getRoutingOptionsHelper().getRouteMenuAppMode(routingHelper.getAppMode());
@@ -895,6 +910,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				AvoidRoadsBottomSheetDialogFragment.showInstance(mapActivity, null, null, true, null);
 			} else if (card instanceof PedestrianRouteCard) {
 				updateApplicationMode(null, ApplicationMode.PEDESTRIAN);
+			} else if (card instanceof LaterDeparturesCard) {
+				OnlineTransportState.setTimeMillis(((LaterDeparturesCard) card).getLaterTimeMillis());
+				OnlineTransportState.setArriveBy(false);
+				app.getRoutingHelper().onSettingsChanged(true);
 			} else if (card instanceof AttachTrackToRoadsBannerCard) {
 				if (MeasurementToolFragment.showSnapToRoadsDialog(mapActivity, true)) {
 					hide();
