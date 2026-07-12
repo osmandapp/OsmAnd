@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:title="@string/traffic_plugin_name">
+
+    <net.osmand.plus.settings.preferences.SwitchPreferenceEx
+        android:key="traffic_overlay_enabled"
+        android:layout="@layout/preference_with_descr_dialog_and_switch"
+        android:summaryOff="@string/shared_string_disabled"
+        android:summaryOn="@string/shared_string_enabled"
+        android:title="@string/traffic_show_overlay" />
+
+    <net.osmand.plus.settings.preferences.SwitchPreferenceEx
+        android:key="traffic_routing"
+        android:layout="@layout/preference_with_descr_dialog_and_switch"
+        android:summaryOff="@string/shared_string_disabled"
+        android:summaryOn="@string/shared_string_enabled"
+        android:title="@string/traffic_routing" />
+
+    <net.osmand.plus.settings.preferences.SwitchPreferenceEx
+        android:key="traffic_auto_reroute"
+        android:layout="@layout/preference_with_descr_dialog_and_switch"
+        android:summaryOff="@string/shared_string_disabled"
+        android:summaryOn="@string/shared_string_enabled"
+        android:title="@string/traffic_auto_reroute" />
+
+    <net.osmand.plus.settings.preferences.EditTextPreferenceEx
+        android:key="tomtom_api_key"
+        android:layout="@layout/preference_with_descr"
+        android:title="@string/traffic_api_key"
+        tools:summary="@string/traffic_api_key_description" />
+</PreferenceScreen>
