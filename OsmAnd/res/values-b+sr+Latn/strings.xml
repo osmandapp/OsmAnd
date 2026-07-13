@@ -3769,7 +3769,7 @@
     <string name="side_marker_eta">Procenjeno vreme dolaska</string>
     <string name="goods_delivery_desc_3">Primenjuje se samo nakamionska vozila lakša od 3.5 tona.</string>
     <string name="updated_map_time">Ažurirano: %1$s.</string>
-    <string name="show_all_tracks_on_the_map">Prikazuj sve trase na mapi</string>
+    <string name="show_all_tracks_on_the_map">Prikaži sve staze na mapi</string>
     <string name="shared_string_sunset">Zalazak Sunca</string>
     <string name="complex_widget_alert">%1$s vidžet se može staviti samo u sopstveni red.</string>
     <string name="map_widget_sun_position">Pozicija Sunca</string>
@@ -5247,4 +5247,5 @@
     <string name="required_maps_calculate_with_existing_maps">Izračunaj sa postojećim mapama</string>
     <string name="attached_media">Priloženi mediji</string>
     <string name="traffic_warning_red_light_camera">Kamera za crveno svetlo</string>
+    <string name="attached_media_delete_confirmation">Da li želite da obrišete %1$d medijskih stavki od ove tačke? Medijski sadržaji koje je aplikacija sačuvala i nisu priloženi nigde drugde takođe će biti obrisani sa uređaja.</string>
 </resources>

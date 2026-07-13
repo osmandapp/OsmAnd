@@ -17,6 +17,7 @@ class PoiAdditionalUiRule(
     val isWikipedia: Boolean = false,
     val isNeedLinks: Boolean = true,
     val isPhoneNumber: Boolean = false,
+    val textLinesLimit: Int = 0,
     val checkBaseKey: Boolean = true,
     val checkKeyOnContains: Boolean = false,
     var behavior: IPoiAdditionalRowBehavior = DefaultPoiAdditionalRowBehaviour()

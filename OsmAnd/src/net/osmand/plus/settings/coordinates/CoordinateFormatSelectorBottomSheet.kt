@@ -5,31 +5,25 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.core.view.doOnPreDraw
 import androidx.core.widget.CompoundButtonCompat
-import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import net.osmand.plus.R
-import net.osmand.plus.base.BaseMaterialModalBottomSheetDialogFragment
+import net.osmand.plus.base.BaseMaterialSimpleListBottomSheet
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
-import net.osmand.plus.utils.InsetTarget
-import net.osmand.plus.utils.InsetTargetsCollection
-import net.osmand.plus.utils.InsetsUtils
 import net.osmand.plus.utils.UiUtilities
 
-class CoordinateFormatSelectorBottomSheet : BaseMaterialModalBottomSheetDialogFragment() {
+class CoordinateFormatSelectorBottomSheet : BaseMaterialSimpleListBottomSheet() {
 
-	private lateinit var mainView: View
 	private lateinit var requestKey: String
 	private lateinit var targetAppMode: ApplicationMode
 	private var selectedFormatId: String? = null
@@ -53,62 +47,33 @@ class CoordinateFormatSelectorBottomSheet : BaseMaterialModalBottomSheetDialogFr
 		container: ViewGroup?,
 		savedInstanceState: Bundle?
 	): View {
-		mainView = inflater.inflate(R.layout.coordinate_format_selector_bottom_sheet, container, false)
-		setupHeaderCloseButton(mainView)
+		super.onCreateView(inflater, container, savedInstanceState)
+		inflater.inflate(R.layout.coordinate_format_selector_items, mainView.findViewById(R.id.itemsContainer))
+		mainView.findViewById<TextView>(R.id.title).setText(R.string.navigate_point_format)
 		bindFormats()
 		bindSelectOtherFormat()
 		return mainView
 	}
 
-	override fun onStart() {
-		super.onStart()
-		dialog?.window?.apply {
-			addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
-			setDimAmount(0.30f)
-		}
-	}
-
-	override fun shouldSkipCollapsed(): Boolean = false
-
 	override fun initialBottomSheetState(): Int = BottomSheetBehavior.STATE_COLLAPSED
 
-	override fun getInsetTargets(): InsetTargetsCollection {
-		val collection = super.getInsetTargets()
-		if (::mainView.isInitialized) {
-			collection.add(
-				InsetTarget.createCustomBuilder(R.id.formatSelectorContent)
-					.portraitSides(InsetsUtils.InsetSide.BOTTOM)
-					.landscapeSides(InsetsUtils.InsetSide.BOTTOM)
-					.applyPadding(true)
-			)
-		}
-		collection.removeType(InsetTarget.Type.ROOT_INSET)
-		return collection
-	}
+	override fun shouldSkipCollapsed(): Boolean = false
 
 	override fun onBottomSheetReady(
 		bottomSheet: FrameLayout,
 		behavior: BottomSheetBehavior<FrameLayout>
 	) {
+		super.onBottomSheetReady(bottomSheet, behavior)
 		val layoutParams = bottomSheet.layoutParams
 		if (layoutParams.height != ViewGroup.LayoutParams.MATCH_PARENT) {
 			layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
 			bottomSheet.layoutParams = layoutParams
 		}
-		behavior.isFitToContents = true
 		behavior.skipCollapsed = false
 		bottomSheet.doOnPreDraw {
 			val parentHeight = (bottomSheet.parent as? View)?.height ?: bottomSheet.height
 			behavior.peekHeight = parentHeight / 2
 			behavior.state = BottomSheetBehavior.STATE_COLLAPSED
-		}
-	}
-
-	override fun getScrollableView(): View? {
-		return if (::mainView.isInitialized) {
-			mainView.findViewById<NestedScrollView>(R.id.formatSelectorRoot)
-		} else {
-			null
 		}
 	}
 
@@ -184,8 +149,8 @@ class CoordinateFormatSelectorBottomSheet : BaseMaterialModalBottomSheetDialogFr
 				setTextColor(AndroidUtils.getColorFromAttr(context, android.R.attr.textColorSecondary))
 				textSize = 14f
 				typeface = android.graphics.Typeface.DEFAULT_BOLD
-				setPadding(dp(16), 0, dp(16), 0)
-			}, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(48)))
+				setPadding(dpToPx(16f), 0, dpToPx(16f), 0)
+			}, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(48f)))
 		}
 	}
 
@@ -206,15 +171,15 @@ class CoordinateFormatSelectorBottomSheet : BaseMaterialModalBottomSheetDialogFr
 		val hasDescription = description.isNotEmpty()
 		AndroidUiHelper.updateVisibility(descriptionView, hasDescription)
 		if (hasDescription) {
-			itemContainer.minimumHeight = dp(64)
+			itemContainer.minimumHeight = dpToPx(64f)
 			textContent.setPadding(
 				textContent.paddingLeft,
-				dp(8),
+				dpToPx(8f),
 				textContent.paddingRight,
-				dp(8)
+				dpToPx(8f)
 			)
 		} else {
-			itemContainer.minimumHeight = dp(48)
+			itemContainer.minimumHeight = dpToPx(48f)
 			textContent.setPadding(
 				textContent.paddingLeft,
 				0,
@@ -248,8 +213,6 @@ class CoordinateFormatSelectorBottomSheet : BaseMaterialModalBottomSheetDialogFr
 	private fun getFormatDescription(format: CoordinateFormat): String {
 		return format.epsgCode?.let { "EPSG:$it" }.orEmpty()
 	}
-
-	private fun dp(value: Int): Int = AndroidUtils.dpToPx(osmandApp, value.toFloat())
 
 	private fun resolveFormats(ids: List<String>): List<CoordinateFormat> {
 		return osmandApp.coordinateFormatHelper.resolveFormats(ids)

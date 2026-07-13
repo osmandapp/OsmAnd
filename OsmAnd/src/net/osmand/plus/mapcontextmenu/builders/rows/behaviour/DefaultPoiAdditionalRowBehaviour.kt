@@ -16,6 +16,7 @@ open class DefaultPoiAdditionalRowBehaviour : IPoiAdditionalRowBehavior {
             builder.setIsWiki(rule.isWikipedia)
                 .setNeedLinks(rule.isNeedLinks)
                 .setIsPhoneNumber(rule.isPhoneNumber)
+                .setTextLinesLimit(rule.textLinesLimit)
         }
     }
 

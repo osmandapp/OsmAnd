@@ -5094,4 +5094,26 @@
     <string name="attached_media">Прикреплённые медиафайлы</string>
     <string name="sort_by_nearest_to_map_center">Ближайшие к центру карты</string>
     <string name="shared_string_recent">Недавние</string>
+    <string name="android_auto_missing_maps_desc">Чтобы продолжить, загрузите недостающие карты для маршрута.</string>
+    <string name="android_auto_possible_missing_maps_desc">Возможно, не хватает карт. Попробуйте продолжить с имеющимися.</string>
+    <string name="route_calculation_calculating_fast_route">Ищем быстрый маршрут...</string>
+    <string name="route_calculation_using_fast_algorithm">Используется быстрый алгоритм расчёта маршрута.</string>
+    <string name="route_calculation_using_standard_algorithm">Используется стандартный (более медленный) алгоритм расчёта маршрута.</string>
+    <string name="route_calculation_missing_maps_desc">Для маршрута не хватает офлайн-карт. Загрузите их, чтобы продолжить.</string>
+    <string name="route_calculation_mixed_maps_desc">Быстрый расчёт маршрута недоступен: карты имеют разные даты. Переход на стандартный расчёт может занять несколько минут.</string>
+    <string name="route_calculation_missing_maps_estimate_desc">Возможно, не хватает карт - по предварительной оценке по прямой.\nЕсли маршрут обходит эти области, используйте имеющиеся карты.</string>
+    <string name="route_calculation_route_not_found_desc">Быстрый алгоритм не смог построить маршрут. Переходим к стандартному расчёту.</string>
+    <string name="route_calculation_unavailable_parameters_desc">Быстрый расчёт недоступен с выбранными параметрами маршрута. Переходим к стандартному расчёту.</string>
+    <string name="route_calculation_standard_long_route_desc">Стандартный расчёт длинных маршрутов (&gt;300 км) может занять много времени. Добавление промежуточной точки может ускорить расчёт.</string>
+    <string name="route_calculation_fast_missing_or_outdated_maps_desc">Некоторые офлайн-карты для этого маршрута отсутствуют или устарели. Загрузите или обновите их, чтобы продолжить.</string>
+    <string name="route_calculation_fast_route_not_found_desc">Быстрый расчёт не смог построить маршрут по имеющимся картам.</string>
+    <string name="route_calculation_fast_missing_hh_cache_desc">В картах отсутствуют данные для быстрого расчёта маршрута. Обновите карты или выберите другой способ расчёта.</string>
+    <string name="route_calculation_fast_unavailable_parameters_desc">Быстрый расчёт недоступен при выбранных параметрах маршрута. Измените параметры маршрута или выберите другой способ расчёта.</string>
+    <string name="required_maps_route_overview_desc">Этот список карт приблизителен и составлен по прямой между точками. Если фактический маршрут обходит области с отсутствующими картами, можно:</string>
+    <string name="required_maps_get_accurate_list_online">Уточнить список онлайн</string>
+    <string name="last_week">Прошлая неделя</string>
+    <string name="history_is_turned_off">История отключена</string>
+    <string name="search_and_navigation_history_disabled_descr">История поиска и навигации отключена. Включите её в настройках, чтобы видеть здесь недавние действия.</string>
+    <string name="open_history_settings">Открыть настройки истории</string>
+    <string name="ais_own_object">Настройки отображения собственного объекта AIS</string>
 </resources>

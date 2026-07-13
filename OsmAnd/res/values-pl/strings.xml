@@ -5230,4 +5230,12 @@
     <string name="astro_sort_oldest_first">Od najstarszych</string>
     <string name="backup_deleting_all_data">Usuwanie danych…</string>
     <string name="backup_deleted_all_data">Usunięto dane.</string>
+    <string name="android_auto_missing_maps_desc">Aby kontynuować trasę, pobierz brakujące mapy.</string>
+    <string name="android_auto_possible_missing_maps_desc">Możliwe braki map. Spróbuj użyć istniejących map, aby kontynuować.</string>
+    <string name="route_calculation_calculating_route">Obliczanie trasy...</string>
+    <string name="route_calculation_calculating_fast_route">Obliczanie szybkiej trasy...</string>
+    <string name="route_calculation_using_fast_algorithm">Używanie algorytmu wyznaczania szybkiej trasy.</string>
+    <string name="route_calculation_using_standard_algorithm">Używanie algorytmu wyznaczania tras standardowych (wolniejszych).</string>
+    <string name="route_calculation_missing_maps">Brakujące mapy</string>
+    <string name="route_calculation_missing_maps_desc">Brakuje niektórych map offline potrzebnych do tej trasy. Pobierz je, aby kontynuować.</string>
 </resources>

@@ -473,7 +473,7 @@ public class SearchCoreFactory {
 		
 		boolean hasNonNumericLeftUnknownSearchWord(SearchResult res) {
 			for (String leftUnknownSearchWord : res.filterUnknownSearchWord(null)) {
-				if (!CommonWords.isNumber2Letters(leftUnknownSearchWord)) {
+				if (!SearchAlgorithms.isNumber2Letters(leftUnknownSearchWord)) {
 					return true;
 				}
 			}
@@ -1728,6 +1728,7 @@ public class SearchCoreFactory {
 		@Override
 		public boolean search(SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
 			Street s = null;
+			CommonWords commonWords = CommonWords.getInstance();
 			int priority = SEARCH_BUILDING_BY_STREET_PRIORITY;
 			if (phrase.isLastWord(ObjectType.STREET)) {
 				s =  (Street) phrase.getLastSelectedWord().getResult().object;
@@ -1828,7 +1829,7 @@ public class SearchCoreFactory {
 				String streetIntersection = phrase.getUnknownWordToSearch();
 				if (Algorithms.isEmpty(streetIntersection) ||
 						(!Character.isDigit(streetIntersection.charAt(0)) &&
-						  CommonWords.getCommonSearch(streetIntersection) == -1) &&
+								commonWords.getCommonSearch(streetIntersection) == -1) &&
 						 phrase.isSearchTypeAllowed(ObjectType.STREET_INTERSECTION)) {
 					for (Street street : s.getIntersectedStreets()) {
 						SearchResult res = new SearchResult(phrase);

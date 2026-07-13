@@ -5116,4 +5116,5 @@
     <string name="sort_by_relevance">Ábharthacht</string>
     <string name="routing_attr_motor_type_ethanol_name">Eatánól</string>
     <string name="traffic_warning_red_light_camera">Ceamara solais dhearg</string>
+    <string name="attached_media_delete_confirmation">Scrios %1$d mír meán ón bpointe seo? Scriosfar ón ngléas meáin atá stóráilte ag an aip agus nach bhfuil ceangailte in aon áit eile freisin.</string>
 </resources>

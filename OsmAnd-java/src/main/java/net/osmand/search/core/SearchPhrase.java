@@ -57,13 +57,13 @@ public class SearchPhrase {
 	private RegionPriorityProvider regionPriorityProvider;
 	
 	static {
-
 		commonWordsComparator = new Comparator<String>() {
+			CommonWords instance = CommonWords.getInstance();
 
 			@Override
 			public int compare(String o1, String o2) {
-				int i1 = CommonWords.getCommonSearch(o1.toLowerCase());
-				int i2 = CommonWords.getCommonSearch(o2.toLowerCase());
+				int i1 = instance.getCommonSearch(o1.toLowerCase());
+				int i2 = instance.getCommonSearch(o2.toLowerCase());
 				if (i1 != i2) {
 					if(i1 == -1) {
 						return -1;
