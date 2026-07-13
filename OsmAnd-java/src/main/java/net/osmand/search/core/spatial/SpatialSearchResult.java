@@ -172,6 +172,9 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 				united.copyNames(object);
 			}
 			united.copyNames(otherObj);
+			if (isBaseMap() || other.isBaseMap()) {
+				united.setRegionName("basemap");
+			}
 			unitedObject = united;
 		} else {
 			// MapObject united
@@ -213,7 +216,11 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 			return String.format("%.4f, %.4f %s", preciseLatlon.getLatitude(), preciseLatlon.getLongitude(),
 					objs.toString());
 		}
-		return objs.toString();
+		String additional = "";
+		if (unitedObject != null) {
+			additional = " United:(" + unitedObject.toString() + ")";
+		}
+		return objs.toString() + additional;
 	}
 	
 	
@@ -259,7 +266,11 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 				} else if (atom.object instanceof Amenity a) {
 					type += " " + a.getSubTypeStr();
 					if (a.getTravelEloNumber() > Amenity.DEFAULT_ELO) {
-						type += " " + a.getTravelEloNumber();// " " + a.getCityFromTagGroups("");
+						int elo = a.getTravelEloNumber();
+						if ("basemap".equals(a.getRegionName())) {
+							elo *= 2;
+						}
+						type += " " + elo;
 					}
 				}
 				LatLon resLoc = atom.getResultLocation();
@@ -313,11 +324,31 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 				rating = Math.max(rating, a.getTravelEloNumber());
 			}
 		}
+		if (unitedObject != null && unitedObject instanceof Amenity amenity) {
+			rating = Math.max(rating, amenity.getTravelEloNumber());
+		}
+		if (isBaseMap()) {
+			rating *= 2;
+		}
 		return rating;
 	}
 	
 	public long compareKey() {
 		return compareKey(this);
+	}
+	
+	private boolean isBaseMap() {
+		if (unitedObject != null) {
+			if (unitedObject instanceof Amenity a) {
+				return "basemap".equals(a.getRegionName());
+			}
+		}
+		for (SpatialSearchResultRef r : objs) {
+			if (r.atom.object instanceof Amenity a) {
+				return "basemap".equals(a.getRegionName());
+			}
+		}
+		return false;
 	}
 	
 	private static long addCompareKey(long key, int bits, int value) {
