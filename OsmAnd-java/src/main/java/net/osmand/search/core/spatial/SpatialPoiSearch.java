@@ -48,8 +48,8 @@ public class SpatialPoiSearch {
 	Map<Integer, SpatialPoiType> byId = new ConcurrentHashMap<>();
 	
 	public static class SpatialPoiType {
-		final AbstractPoiType singleType;
-		final String poiAdditional;
+		public final AbstractPoiType singleType;
+		public final String poiAdditional;
 		final List<String> names = new ArrayList<String>();
 		final String key;
 		final int id;
@@ -67,6 +67,14 @@ public class SpatialPoiSearch {
 			this.key = key;
 			this.id = id;
 			this.poiAdditional = additional;
+		}
+
+		public String getKey() {
+			return key;
+		}
+
+		public List<AbstractPoiType> getParentTypes() {
+			return parentTypes;
 		}
 
 		public boolean accept(Amenity a) {
