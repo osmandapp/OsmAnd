@@ -52,7 +52,7 @@
 					android:layout_width="@dimen/acceptable_touch_radius"
 					android:layout_height="@dimen/acceptable_touch_radius"
 					android:layout_gravity="center"
-					android:background="?attr/selectableItemBackground">
+					android:background="?attr/selectableItemBackgroundBorderless">
 
 					<FrameLayout
 						android:layout_width="32dp"
