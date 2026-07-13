@@ -152,6 +152,14 @@ public class OnlineTransportRouteTranslator {
 			route.setRef(leg.optString("routeShortName", ""));
 			route.setType(osmandType(mode));
 			route.setName(leg.optString("headsign", ""));
+			route.setOperator(leg.optString("agencyName", ""));
+			String ticketUrl = leg.optString("routeUrl", "");
+			if (ticketUrl.isEmpty()) {
+				ticketUrl = leg.optString("agencyUrl", "");
+			}
+			if (!ticketUrl.isEmpty()) {
+				route.setUrl(ticketUrl);
+			}
 			String color = leg.optString("routeColor", "");
 			if (!color.isEmpty()) {
 				route.setColor("#" + color);

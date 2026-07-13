@@ -465,7 +465,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 			}
 		});
 
-		buildTransportStopRouteRow(stopsContainer, transportStopRoute, new OnClickListener() {
+		buildTransportStopRouteRow(stopsContainer, transportStopRoute, transportRoute.getUrl(), new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				showRouteSegmentOnMap(segment);
@@ -475,7 +475,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		for (TransportRouteResultSegment alt : segment.alternatives) {
 			TransportStopRoute altTransportStopRoute = TransportStopRoute.getTransportStopRoute(alt.route,
 					alt.getTravelStops().get(0));
-			buildTransportStopRouteRow(stopsContainer, altTransportStopRoute, new OnClickListener() {
+			buildTransportStopRouteRow(stopsContainer, altTransportStopRoute, null, new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					showRouteSegmentOnMap(alt);
@@ -963,7 +963,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	}
 
 	public void buildTransportStopRouteRow(@NonNull View view, @NonNull TransportStopRoute transportStopRoute,
-										   OnClickListener onClickListener) {
+										   @Nullable String ticketUrl, OnClickListener onClickListener) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return;
@@ -996,6 +996,21 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		AndroidUtils.setMargins(routeBadgeParams, 0, dpToPx(6), 0, dpToPx(8));
 		routeBadge.setLayoutParams(routeBadgeParams);
 		llText.addView(routeBadge);
+
+		if (ticketUrl != null) {
+			ImageView ticketIcon = new ImageView(view.getContext());
+			ticketIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_price_tag));
+			ticketIcon.setContentDescription(getString(R.string.transit_buy_ticket));
+			ticketIcon.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+			LinearLayout.LayoutParams ticketParams = new LinearLayout.LayoutParams(dpToPx(40), dpToPx(40));
+			ticketParams.gravity = Gravity.CENTER_VERTICAL;
+			AndroidUtils.setMargins(ticketParams, dpToPx(4), 0, dpToPx(4), 0);
+			ticketIcon.setLayoutParams(ticketParams);
+			AndroidUtils.setPadding(ticketIcon, dpToPx(8), dpToPx(8), dpToPx(8), dpToPx(8));
+			ticketIcon.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
+			ticketIcon.setOnClickListener(v -> AndroidUtils.openUrl(v.getContext(), ticketUrl, isNightMode()));
+			ll.addView(ticketIcon);
+		}
 
 		if (onClickListener != null) {
 			ll.setOnClickListener(onClickListener);
