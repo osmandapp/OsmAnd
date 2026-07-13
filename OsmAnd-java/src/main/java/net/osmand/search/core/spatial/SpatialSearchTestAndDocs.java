@@ -49,12 +49,13 @@ import net.osmand.util.SearchAlgorithms;
 // TESTING INSPECTOR stats index_words_dashboard.html
 // TESTING OPTIM_READ_COMMON_WORDS_ATOMS !
 // REVIEW: POI / ADDRESS - France, Germany, US, Europe, China, Peru  
-//         TODO (TO FIX 'e.v.' 'a' 'b' 'c')
+//         TODO (TO FIX 'e.v.' 'a' 'b' 'c') - Bridge, refs, e.v. ...
 // AVENUE G https://github.com/osmandapp/OsmAnd/issues/15726
 
 // TODO INDEX: Speedup load after sorting - to limit objects (store elo in index)! 
 // TODO INDEX: Store Poi category index (effective intersection 'Church St. Miguel' - refactor checkAmenity)
 // TODO OBF POI CATEGORY Bboxes too large - investigate size (introduce for categories OBF) - OsmAndPoiNameIndexDataAtom, quad tree (90% < 10K)
+// TODO ANALYZE: too many wiki places on streets?
 
 
 // TO DO Ivan
@@ -75,9 +76,7 @@ import net.osmand.util.SearchAlgorithms;
 
 // TO DO Gateway
 // TODO INSPECTOR: doesn't show suffixes
-// TODO ANALYZE: find slow queries on Autotests
-// TODO ANALYZE: Large Geo atoms "Berlin" (Slow query)
-// TODO ANALYZE: too many wiki places on streets?
+// TODO ANALYZE: Find slow queries on Autotests (New york, France) - large geo atoms
 // TODO INDEX: Find POI Categories translations / synonyms (WEB) - Стоматол., Dentist, Stomatology, Basilica (?)
 // TODO REVIEW: Abbrevations (synonyms / direction words) other languages?
 
@@ -206,7 +205,7 @@ public class SpatialSearchTestAndDocs {
 //		Search Stats 925.5 ms - read 799.8 ms atoms (tokens 442.5 ms, obj 16.3 ms), match 280.5 ms, comp 149.5 ms
 		
 //		pattern = "Us_utah";
-//		pattern = "Us_penn";
+		pattern = "Us_penn";
 //		pattern2 = "Us_new-york_syracuse";
 //		pattern2 = "Us_virg";
 //		pattern = "Map";
@@ -283,8 +282,7 @@ public class SpatialSearchTestAndDocs {
 		
 //		pattern = "Ukraine_kyiv-city";
 //		pattern = "Test_Ukraine_kyiv-city_europe_12.obf";
-//		pattern = "Ukraine_";
-//		pattern = "Ukraine_krop";
+		pattern = "Ukraine_";
 		// poi types
 //		location = new LatLon(50.439, 30.516);
 //		settings.SEARCH_POI = false;
@@ -297,6 +295,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "Mcdonald's";
 //		query = "Stomat.";
 		
+//		location = new LatLon(50.4631,30.4553);
 //		settings.OPTIM_READ_COMMON_WORDS_ATOMS = true;
 //		query = "Kyiv Глушкова 1"; // vs 'Kyiv 1'
 //		query = "нова пошта Бульварно Кудрявська";
@@ -308,7 +307,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "2 га Нова вулиця"; // unit test '2га' +, '2-га', '2', '2 га' (partial) unit test (260537333, 104438019)
 //		query = "2га Нова вулиця"; 
 //		query = "2 нова вулиця"; // '"25-та вулиця", "25та вулиця", "25 та вулиця", "25 вулиця" (NOT FIRST) - '25-та Садова вулиця' 150768561
-//		query = "25-та садова вулиця";
+//		query = "25 садова вулиця"; // 150768561 28256
 //		query = "саксаг. 63 28"; // 129-Б, 129б 63/28, 63, 63-28  +'саксаг. 63 28'
 //		query = "саксаг. 63/28, 2";
 //		query = "саксаг. 63/28 подъезд 2";
@@ -316,11 +315,11 @@ public class SpatialSearchTestAndDocs {
 //		query = "саксаг. тарас."; // intersection
 //		query = "54-та Садова вулиця 8"; // interpolation
 //		query = "Яр. вал 29-г";
-//		query = "Школа 25 Володимирська вулиця"; // Школа 25 Володимирська вулиця ALWAYS_READ_COMMON_WORDS_ATOMS = true 
+//		query = "Школа 25 Володимирська вулиця"; // Школа 25 Володимирська вулиця ALWAYS_READ_COMMON_WORDS_ATOMS = true
 //		query = "андріівський узвіз Школа "; // ALWAYS_READ_COMMON_WORDS_ATOMS = true
 //		query = "Школа ";
 //		query = "Школа А+";
-//		location = new LatLon(50.4631,30.4553);
+		
 //		query = "школа №25"; // test '№25', '25'? -- 'школа', 'школа №25', 'школа 25' // 63112526
 //		query = "ВЕЛОwatt";
 //		query = "O128894."; // FIX Osm id getOsmIdFromMapObjectId
@@ -353,21 +352,21 @@ public class SpatialSearchTestAndDocs {
 //		location = new LatLon(40.64946, -74.00682); // brooklyn
 //		location = new LatLon(40.64946, -73.50682);
 //		query = "New York The plaza";
-//		query = "New York plaza";
-//		query = "New York st"; // 'NY s.' - 0.5s 100k, 'NY st' - 2s (700k)
+//		query = "New York plaza"; // the plaza , riu plaza
+//		query = "New York 55 st"; // 'NY s.' - 0.5s 100k, 'NY st' - 2s (700k)
 		// 40.64946, -74.00682 - unit test '4th av', '4 ave', '4th avenue' 241843204, 247910224, 85393997 (..) brooklyn - not 48
 		// 40.78035, -73.96572 - unit test '4th av', '4 ave', '4th avenue'  - 85393997 Park avenue
 //		query = "New York 4 av 8"; 
-//		query = "New York 4 av 8"; // 160947243
+//		query = "New York 4 av"; // 160947243
 //		query = "57th street"; // central park - 265345338 east, 86216906 west, ()66926268 (west)?),
-//		query = "new york 57th street manhattan";
+//		query = "57 street"; // central park - 265345338 east, 86216906 west, ()66926268 (west)?),
+		query = "new york 57th street manhattan";
 //		query = "4th ave"; //  unit '4 ave'
 //		query = "4th ave 8 paterson"; //  wrong city...
+//		query = "little creek"; // little creek
 		// Result 4 - 40.8407, -74.0954 [[4th, 8] Building 2 4th Street (26238417818) 40.8441 -74.0910 , [ave, paterson] STREET_TYPE Paterson Avenue (651531238) 40.8374 -74.0997 ]
-//		settings.OPTIM_READ_COMMON_WORDS_ATOMS = true;
-//		settings.OPTIM_READ_COMMON_WORDS_LIMIT = 5000;
 		
-//		query = "2 street"; // poi types
+//		query = "2nd street"; // poi types '2 street' - TODO broken
 		
 //		query = "blvd"; //  unit test  'blvd', 'boulevard' - 248280132
 		
@@ -381,12 +380,19 @@ public class SpatialSearchTestAndDocs {
 		// ! unit test - search full address ! no double 539d (no intersectoin)
 		// Cannaregio 539D Campo Saffa, Venezia Cannaregio Campo Saffa  , 
 //		query = "Venezia Cannaregio Campo Saffa ";
+//		query = "Cannaregio 539D Campo Saffa";
 //		query = "Campo Saffa";
 		
-//		pattern = "France_ile-de-france_eu";
+//		pattern = "France_ile-de-france";
+//		location = new LatLon(40, 5);
 //		query = "Rue Bouchardon 2BIS"; // '2bis' OK, '2 BIS' OK , '2' OK, '2-BIS'
 //		query = "Rue Jean Poulmarch 17bis"; //  17bis OK, 17 OK, 17 BIS - OK 'Rue Jean Poulmarch 17;17 bis' 
-//		query = "Dieu 8-bis"; // 'Rue Dieu 8 bis' , '8-bis', '8 bis' 
+//		query = "Dieu 8-bis"; // 'Rue Dieu 8 bis' , '8-bis', '8 bis'
+		// too many results
+//		query = "rue de l'eglise"; // specific search - "rue de l'eglise", non specific "rue de"
+//		query = "rue de la";
+//		query = "rue la";
+//		query = "rû bas du rue";
 
 		
 //		pattern = "World_basemap_2";

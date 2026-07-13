@@ -95,6 +95,7 @@ public class SpatialTextSearch {
 		
 		// display only top 10
 		public int LIMIT_POI_CATEGORY_BY_FREQ = 15;
+		
 		// print some poi cat
 		public int DEV_PRINT_POI_CAT_LIMIT = 0; // 10
 		public int DEV_PRINT_POI_CAT_RADIUS_KM = 10;
@@ -108,7 +109,7 @@ public class SpatialTextSearch {
 		// 2. If object does have other common words and they are not in query - skip it
 		// Problem search: School On Street - some schools have specifiers and some don't   
 		public boolean OPTIM_READ_COMMON_WORDS_ATOMS = true;
-		public int OPTIM_READ_COMMON_WORDS_LIMIT = 5000;
+		public int OPTIM_READ_COMMON_WORDS_LIMIT = 2000;
 
 		// Limit evaluation intersection for unique objects
 		public int LIMIT_ALL_GOALS_MAX_UNIQUE_OBJECTS = 1000;
