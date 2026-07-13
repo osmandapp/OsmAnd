@@ -46,16 +46,21 @@ import net.osmand.util.SearchAlgorithms;
 
 ////////// IN PROGRESS //////////
 
-// INSPECTOR stats index_words_dashboard.html
-// OPTIM_READ_COMMON_WORDS_ATOMS incomplete!
+// TESTING INSPECTOR stats index_words_dashboard.html
+// TESTING OPTIM_READ_COMMON_WORDS_ATOMS !
+// REVIEW: POI / ADDRESS - France, Germany, US, Europe, China, Peru  
+//         TODO (TO FIX 'e.v.' 'a' 'b' 'c')
+// AVENUE G https://github.com/osmandapp/OsmAnd/issues/15726
 
 // TODO INDEX: Speedup load after sorting - to limit objects (store elo in index)! 
 // TODO INDEX: Store Poi category index (effective intersection 'Church St. Miguel' - refactor checkAmenity)
-// TODO ANALYZE: BUG - Germany POI words - . (115,158, 115,158), und (97,839, 97,839), - not common? - bach (56,475, 56,475) - could be common?
+// TODO OBF POI CATEGORY Bboxes too large - investigate size (introduce for categories OBF) - OsmAndPoiNameIndexDataAtom, quad tree (90% < 10K)
+
 
 // TO DO Ivan
 // REVIEW DEDUPLICATE: Review / implement similarity radius - similarityRadius = 50000 ... Route Id
 // REVIEW DEDUPLICATE: Unite RouteArticle, POI by wikidata id ? - DEPTH_TO_CHECK_SAME_SEARCH_RESULTS = 20;...
+// TODO FIX DATA: Fix 36K national park (don't index small islands > 100 POI !!!)
 // TODO DEDUPLICATE: Venezia ? - No place=city in POI is it on purpose ? 2 Wikidataids! Rating not merged. POI - relation/44741 (Q641), CITY - way/64778090 (Q33723961).
 // TODO DEDUPLICATE: review osm route id  combine by?
 // TODO DEDUPLICATE: Index place=state, county.. + wikidata id for boundaries (regions.ocbf) & display them - analyze
@@ -74,8 +79,7 @@ import net.osmand.util.SearchAlgorithms;
 // TODO ANALYZE: Large Geo atoms "Berlin" (Slow query)
 // TODO ANALYZE: too many wiki places on streets?
 // TODO INDEX: Find POI Categories translations / synonyms (WEB) - Стоматол., Dentist, Stomatology, Basilica (?)
-
-
+// TODO REVIEW: Abbrevations (synonyms / direction words) other languages?
 
 // TO DO - RZR
 // TODO WEB: POI Categories + top poi categories
@@ -86,8 +90,7 @@ import net.osmand.util.SearchAlgorithms;
 // TODO ANDROID: memory performance 
  
 /////////////// EXTRA FEATURES ///////////////
-// TODO OBF POI CATEGORY Bboxes too large - investigate size (introduce for categories OBF) - OsmAndPoiNameIndexDataAtom, quad tree (90% < 10K)
-// TODO Review Abbrevations (synonyms / direction words) other languages?
+
 // TODO Store and test conscription number for some cities - issue (RZR)
 // TODO Search in large parks, neighborhood same as in boundaries (index bbox POI), residential way/56238205
 // TODO Japan test, housename, block_number + housenumber, neighbourhood + quarter - street + India assign houses to suburbs / neighbourhood / blocks

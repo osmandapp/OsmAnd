@@ -660,7 +660,6 @@ public class SpatialSearchContext {
 			}
 			// object will be added once it's read rare word
 			// disabled for now as it could only have effect for frequent words in index
-//			boolean skip = settings.OPTIM_READ_COMMON_WORDS_ATOMS && indx != null && other > 0;
 			NameIndexAtom postponed = addObject(t, indx, name, type, cid, pid, obj, other,
 					new NameIndexAtomXY(a, b, settings), allTokens);
 			if (postponed != null) {
@@ -748,14 +747,16 @@ public class SpatialSearchContext {
 			}
 		}
 		NameIndexAtom atom = new NameIndexAtom(name, type, lid, pid, obj, streetCity, other, otherFound, coords, nearByType);
+		// for all common always false, for some frequent could be optimization
+//		if (settings.OPTIM_READ_COMMON_WORDS_ATOMS && isCommon && other > 0 ) { return atom; }
 		if (settings.OPTIM_READ_COMMON_WORDS_ATOMS && (otherTokens == null || otherTokens.size() == 0) && split != null
 				&& split.size() > 1) {
 			String mainWord = split.get(0);
 			Map<String, ValueFreq> commonWordsStats = indx.getCommonWordsStats();
 			boolean number2Letters = SearchAlgorithms.isNumber2Letters(mainWord);
-			ValueFreq vf = commonWordsStats.get(mainWord);
+			ValueFreq isCommonWord = commonWordsStats.get(mainWord);
 			// always search numbers as they could be very specific - "2" token could match "2-nd" atom
-			if (vf != null && !number2Letters) {
+			if (isCommonWord != null && !number2Letters) {
 				// other tokens didn't match for common word but present in object
 				return atom;
 			}
