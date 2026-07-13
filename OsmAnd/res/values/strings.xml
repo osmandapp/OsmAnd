@@ -13,6 +13,8 @@
 	<string name="transit_opt_fewest_changes">Fewest transfers</string>
 	<string name="transit_opt_least_walking">Least walking</string>
 	<string name="transit_wheelchair">Wheelchair accessible</string>
+	<string name="transit_platform">Platform %1$s</string>
+	<string name="transit_platform_track">Platform %1$s, track %2$s</string>
 <!--
 	README:
 	- The preferred way to help with translations is via https://hosted.weblate.org/engage/osmand/

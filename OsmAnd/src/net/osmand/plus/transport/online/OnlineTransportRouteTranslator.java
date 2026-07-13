@@ -192,6 +192,10 @@ public class OnlineTransportRouteTranslator {
 		stop.setId(ID_SEQ.getAndIncrement());
 		stop.setLocation(lat, lon);
 		stop.setName(place.optString("name", ""));
+		String track = place.optString("track", "");
+		if (!track.isEmpty()) {
+			stop.setPlatform(track);
+		}
 		stops.add(stop);
 	}
 

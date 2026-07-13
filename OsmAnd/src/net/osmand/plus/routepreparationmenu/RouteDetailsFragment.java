@@ -446,7 +446,12 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		Typeface typeface = FontCache.getMediumFont();
 		String timeText = getStopTimeText(segment.departureTimeMillis, startTime[0]);
 
-		SpannableString secondaryText = new SpannableString(getString(R.string.sit_on_the_stop));
+		String sitText = getString(R.string.sit_on_the_stop);
+		String startPlatform = getPlatformText(startStop);
+		if (startPlatform != null) {
+			sitText = getString(R.string.ltr_or_rtl_combine_via_bold_point, sitText, startPlatform);
+		}
+		SpannableString secondaryText = new SpannableString(sitText);
 		secondaryText.setSpan(new ForegroundColorSpan(getMainFontColor()), 0, secondaryText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 		SpannableString title = new SpannableString(startStop.getName(getPreferredMapLang(), isTransliterateNames()));
@@ -526,7 +531,12 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		startTime[0] += (int) segment.getTravelTime();
 		String textTime = getStopTimeText(segment.arrivalTimeMillis, startTime[0]);
 
-		secondaryText = new SpannableString(getString(R.string.exit_at));
+		String exitText = getString(R.string.exit_at);
+		String endPlatform = getPlatformText(endStop);
+		if (endPlatform != null) {
+			exitText = getString(R.string.ltr_or_rtl_combine_via_bold_point, exitText, endPlatform);
+		}
+		secondaryText = new SpannableString(exitText);
 		secondaryText.setSpan(new CustomTypefaceSpan(typeface), 0, secondaryText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		int spaceIndex = secondaryText.toString().indexOf(" ");
 		if (spaceIndex != -1) {
@@ -624,6 +634,19 @@ public class RouteDetailsFragment extends ContextMenuFragment
 			return OsmAndFormatter.getFormattedTimeShort(epochMillis / 1000, false);
 		}
 		return OsmAndFormatter.getFormattedDurationShortMinutes(fallbackDurationSec);
+	}
+
+	@Nullable
+	private String getPlatformText(@NonNull TransportStop stop) {
+		String platform = stop.getPlatform();
+		if (platform == null) {
+			return null;
+		}
+		int slash = platform.indexOf('/');
+		if (slash > 0 && slash < platform.length() - 1) {
+			return getString(R.string.transit_platform_track, platform.substring(0, slash), platform.substring(slash + 1));
+		}
+		return getString(R.string.transit_platform, platform);
 	}
 
 	private void buildStartItem(@NonNull View view, TargetPoint start, int[] startTime,
