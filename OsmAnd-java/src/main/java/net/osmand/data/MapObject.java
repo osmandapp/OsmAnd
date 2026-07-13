@@ -431,4 +431,9 @@ public abstract class MapObject implements Comparable<MapObject> {
 		}
 		return false;
 	}
+
+	public String getWikidata() {
+		String wikidata = names != null ? names.get(NAME_WIKIDATA_ATTR) : null;
+		return Algorithms.isNotEmpty(wikidata) ? unzipContent(wikidata) : null;
+	}
 }

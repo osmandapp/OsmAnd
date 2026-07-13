@@ -935,7 +935,7 @@
     <string name="poi_access_private">Prístup len so súhlasom vlastníka</string>
     <string name="poi_access_no">Žiadny prístup</string>
     <string name="poi_access_destination">Prístup len k cieľu</string>
-    <string name="poi_access_permissive">Prístup povolený</string>
+    <string name="poi_access_permissive">Prístup dovolený</string>
     <string name="poi_access_customers">Prístup len pre zákazníkov</string>
     <string name="poi_access_delivery">Prístup len pre zásobovanie</string>
     <string name="poi_access_agricultural">Prístup na poľnohospodárske účely</string>
@@ -1467,7 +1467,7 @@
     <string name="poi_toilets_wheelchair_yes">Prístup na toalety s vozíkom: áno</string>
     <string name="poi_toilets_wheelchair_no">Prístup na toalety s vozíkom: nie</string>
     <string name="poi_toilets_access_customers">Prístup na toalety: zákazníci</string>
-    <string name="poi_toilets_access_permissive">Prístup na toalety: povolený</string>
+    <string name="poi_toilets_access_permissive">Prístup na toalety: dovolený</string>
     <string name="poi_toilets_access_community">Prístup na toalety: komunita</string>
     <string name="poi_toilets_access_public">Prístup na toalety: verejnosť</string>
     <string name="poi_diaper_yes">Stôl na výmenu plienok</string>
@@ -4011,7 +4011,7 @@
     <string name="poi_post_office_opening_hours">Otváracie hodiny doručovacej služby</string>
     <string name="poi_telecommunication">Telekomunikácie</string>
     <string name="poi_books_adults">Dospelí</string>
-    <string name="poi_access_permit">Potrebné povolenie</string>
+    <string name="poi_access_permit">Potrebné bežne získateľné povolenie</string>
     <string name="poi_parcel_locker">Skrinky na balíky</string>
     <string name="poi_museum_type">Predmet zbierky múzea</string>
     <string name="poi_post_office_type">Typ</string>

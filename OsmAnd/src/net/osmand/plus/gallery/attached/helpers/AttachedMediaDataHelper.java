@@ -3,8 +3,10 @@ package net.osmand.plus.gallery.attached.helpers;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.myplaces.favorites.FavoritesListener;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
@@ -95,6 +97,52 @@ public class AttachedMediaDataHelper {
 		}
 		if (onMediaChanged != null) {
 			onMediaChanged.run();
+		}
+	}
+
+	public void removeMediaLinks(@NonNull Linkable target, @NonNull List<Link> links, @Nullable CallbackWithObject<Boolean> callback) {
+		if (links.isEmpty()) {
+			logDebug("Attached media remove skipped: empty links");
+			return;
+		}
+		logDebug("Attached media remove: target=" + target + ", links=" + links.size());
+
+		for (Link link : links) {
+			target.removeLink(link);
+		}
+		saveTarget(target, success -> {
+			if (Boolean.TRUE.equals(success)) {
+				OsmAndTaskManager.executeTask(new DeleteMediaFilesTask(app, links, null));
+			}
+			notifyResult(callback, Boolean.TRUE.equals(success));
+			return true;
+		});
+	}
+
+	private void saveTarget(@NonNull Linkable target, @Nullable CallbackWithObject<Boolean> callback) {
+		if (target instanceof FavouritePoint) {
+			app.getFavoritesHelper().saveCurrentPointsIntoFile(true, new FavoritesListener() {
+				@Override
+				public void onSavingFavoritesFinished(boolean success) {
+					notifyResult(callback, success);
+				}
+			});
+		} else if (target instanceof WptPt wpt) {
+			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedGPXFile(wpt);
+			if (selectedGpxFile != null) {
+				SaveGpxHelper.saveGpx(selectedGpxFile.getGpxFile(), error -> notifyResult(callback, error == null));
+			} else {
+				notifyResult(callback, false);
+			}
+		} else {
+			LOG.warn("Unsupported Linkable type, links not persisted: " + target.getClass().getName());
+			notifyResult(callback, false);
+		}
+	}
+
+	private static void notifyResult(@Nullable CallbackWithObject<Boolean> callback, boolean success) {
+		if (callback != null) {
+			callback.processResult(success);
 		}
 	}
 

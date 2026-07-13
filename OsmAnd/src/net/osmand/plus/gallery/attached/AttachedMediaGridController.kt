@@ -1,12 +1,15 @@
 package net.osmand.plus.gallery.attached
 
+import android.app.AlertDialog
 import android.os.Handler
 import android.os.Looper
 import android.view.View
 import androidx.fragment.app.FragmentActivity
+import net.osmand.data.FavouritePoint
 import net.osmand.data.LatLon
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
+import net.osmand.plus.gallery.attached.helpers.AttachedMediaDataHelper
 import net.osmand.plus.gallery.attached.helpers.AttachedMediaUiHelper
 import net.osmand.plus.gallery.contract.IGalleryGridView
 import net.osmand.plus.gallery.controller.GalleryGridController
@@ -22,19 +25,27 @@ import net.osmand.plus.gallery.model.GallerySortMode
 import net.osmand.plus.gallery.model.GalleryToolbarAction
 import net.osmand.plus.gallery.model.MediaHolder
 import net.osmand.plus.gallery.ui.GalleryGridFragment
-import net.osmand.plus.gallery.ui.holders.SortBarHolder
+import net.osmand.plus.gallery.ui.holders.SortBarHolder.Companion.SORT_ACTION
+import net.osmand.plus.myplaces.favorites.FavoriteGroup
+import net.osmand.plus.settings.backend.backup.exporttype.AttachedMediaExportType
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType
+import net.osmand.plus.settings.fragments.ExportSettingsFragment
 import net.osmand.plus.utils.ColorUtilities
+import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.widgets.popup.PopUpMenu
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData
 import net.osmand.plus.widgets.popup.PopUpMenuItem
 import net.osmand.plus.widgets.popup.PopUpMenuWidthMode
+import net.osmand.shared.gpx.primitives.Link
 import net.osmand.shared.gpx.primitives.Linkable
+import net.osmand.shared.media.LinkMediaFactory
 import net.osmand.shared.media.domain.MediaItem
+import java.util.HashMap
 
 class AttachedMediaGridController(
 	app: OsmandApplication,
 	override val key: GalleryKey,
-	private val target: Linkable?,
+	private val target: Linkable,
 	private val latLon: LatLon?
 ) : GalleryGridController(app, key) {
 
@@ -192,19 +203,65 @@ class AttachedMediaGridController(
 	override fun handleGalleryAction(v: View, action: GalleryAction) {
 		val activity = view?.getMapActivity() ?: return
 		when (action) {
-			ADD_ACTION -> {
-				val target = target ?: return
-				AttachedMediaUiHelper(activity).showAddMenu(v, target, latLon) { onMediaChanged() }
-			}
-
+			ADD_ACTION -> AttachedMediaUiHelper(activity).showAddMenu(v, target, latLon) { onMediaChanged() }
 			EDIT_ACTION -> enterSelectionMode(null)
 			SELECT_ALL_ACTION -> toggleSelectAll()
 			ACTIONS_MENU_ACTION -> showSelectionActionsMenu(v)
-			SortBarHolder.SORT_ACTION -> showSortMenu(v)
+			SORT_ACTION -> showSortMenu(v)
+			EXPORT_ACTION -> exportSelectedMedia()
+			DELETE_ACTION -> showDeleteDialog()
+		}
+	}
 
-			// TODO #7125: implement export\delete of the selected media items.
-			EXPORT_ACTION -> {}
-			DELETE_ACTION -> {}
+	private fun showDeleteDialog() {
+		val activity = view?.getMapActivity() ?: return
+		val links = getSelectedLinks()
+		if (links.isEmpty()) {
+			app.showShortToastMessage(R.string.shared_string_nothing_selected)
+			return
+		}
+		val nightMode = view?.isNightMode() ?: false
+		AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode))
+			.setMessage(getString(R.string.attached_media_delete_confirmation, getSelectedCount()))
+			.setPositiveButton(R.string.shared_string_delete) { _, _ -> deleteMediaLinks(links) }
+			.setNegativeButton(R.string.shared_string_cancel, null)
+			.show()
+	}
+
+	private fun deleteMediaLinks(links: List<Link>) {
+		AttachedMediaDataHelper(app).removeMediaLinks(target, links) {
+			exitSelectionMode()
+			onMediaChanged()
+			true
+		}
+	}
+
+	private fun getSelectedLinks(): List<Link> {
+		val selectedIds = getSelectedItems().mapTo(hashSetOf()) { it.id }
+		return target.links.orEmpty().filter { LinkMediaFactory.getMediaId(it) in selectedIds }
+	}
+
+	private fun exportSelectedMedia() {
+		val activity = view?.getMapActivity() ?: return
+		val favorite = target as? FavouritePoint ?: return
+
+		val links = getSelectedLinks()
+		if (links.isEmpty()) {
+			app.showShortToastMessage(R.string.shared_string_nothing_selected)
+			return
+		}
+		val selectedFavoriteGroup = createExportFavoriteGroup(favorite, links)
+		val exportTypes = HashMap<ExportType, List<*>>()
+		exportTypes[ExportType.FAVORITES] = listOf(selectedFavoriteGroup)
+		exportTypes[ExportType.ATTACHED_MEDIA] = AttachedMediaExportType.collectSettingsItems(app, listOf(selectedFavoriteGroup))
+		ExportSettingsFragment.showInstance(activity.supportFragmentManager,app.settings.applicationMode,exportTypes,true)
+	}
+
+	private fun createExportFavoriteGroup(favorite: FavouritePoint, links: List<Link>): FavoriteGroup {
+		val exportFavorite = FavouritePoint(favorite)
+		exportFavorite.setLinks(links.map { Link(it) })
+		return FavoriteGroup(exportFavorite).apply {
+			points = listOf(exportFavorite)
 		}
 	}
 
@@ -279,7 +336,7 @@ class AttachedMediaGridController(
 		fun show(
 			activity: FragmentActivity,
 			key: GalleryKey,
-			target: Linkable? = null,
+			target: Linkable,
 			latLon: LatLon? = null
 		) {
 			val app = activity.application as OsmandApplication

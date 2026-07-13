@@ -47,30 +47,35 @@ import net.osmand.util.SearchAlgorithms;
 ////////// IN PROGRESS //////////
 
 // INSPECTOR stats index_words_dashboard.html
+// OPTIM_READ_COMMON_WORDS_ATOMS incomplete!
 
-// TO DO Ivan / Gateway
-// TODO DEDUPLICATE: Review / implement similarity radius - similarityRadius = 50000 ... Route Id
-// TODO DEDUPLICATE: Unite RouteArticle, POI by wikidata id ? - DEPTH_TO_CHECK_SAME_SEARCH_RESULTS = 20;...
+// TODO INDEX: Speedup load after sorting - to limit objects (store elo in index)! 
+// TODO INDEX: Store Poi category index (effective intersection 'Church St. Miguel' - refactor checkAmenity)
+// TODO ANALYZE: BUG - Germany POI words - . (115,158, 115,158), und (97,839, 97,839), - not common? - bach (56,475, 56,475) - could be common?
+
+// TO DO Ivan
+// REVIEW DEDUPLICATE: Review / implement similarity radius - similarityRadius = 50000 ... Route Id
+// REVIEW DEDUPLICATE: Unite RouteArticle, POI by wikidata id ? - DEPTH_TO_CHECK_SAME_SEARCH_RESULTS = 20;...
 // TODO DEDUPLICATE: Venezia ? - No place=city in POI is it on purpose ? 2 Wikidataids! Rating not merged. POI - relation/44741 (Q641), CITY - way/64778090 (Q33723961).
 // TODO DEDUPLICATE: review osm route id  combine by?
 // TODO DEDUPLICATE: Index place=state, county.. + wikidata id for boundaries (regions.ocbf) & display them - analyze
 // TODO DEDUPLICATE: Test wiki / travel maps / seamarks map
-// TODO DEDUPLICATE: same location (5-10m) 2 streets different cities
 // TODO DEDUPLICATE: brand langs - 'Поїхали з нами' / 'Поехали с нами'
+// TODO DEDUPLICATE: same location (5-10m) 2 streets different cities
+// TODO DEDUPLICATE: Street related to city or suburb what to show? 
 // TODO UNIT TESTS: (duplicate words), Бульварно-Кудрявська, NC-42, 2-га Нова (2 Нова), M2...
 // TODO UNIT TESTS: Auto tests - Slow analysis (Auto test New york)
 // TODO UNIT TESTS: Analyze Abbrefvations / common skip (abbrevations 1st=first) 
 // TODO UNIT TESTS: Add test on show more '2 sokak' - Show more 1. 2 Sokak (house) 2. 2 Sokak (street) 3. 2 <WORD> Sokak (street) or 3381/2 Sokak. 4. '2.Kadriye' (city) .. Sokak
-// TODO INSPECTOR : doesn't show suffixes
 
-// LARGE IMPORTANT TASKS
-// TODO INDEX: Speedup load after sorting - to limit objects (store elo in index)! 
-// TODO INDEX: Store Poi category index (effective intersection 'Church St. Miguel' - refactor checkAmenity)
-// TODO INDEX: Find POI Categories translations / synonyms (WEB) - Стоматол., Dentist, Stomatology, Basilica (?)
-// TODO ANALYZE: BUG - Germany POI words - . (115,158, 115,158), und (97,839, 97,839), - not common? - bach (56,475, 56,475) - could be common?
-// TODO ANALYZE: too many wiki places on streets?
+// TO DO Gateway
+// TODO INSPECTOR: doesn't show suffixes
 // TODO ANALYZE: find slow queries on Autotests
 // TODO ANALYZE: Large Geo atoms "Berlin" (Slow query)
+// TODO ANALYZE: too many wiki places on streets?
+// TODO INDEX: Find POI Categories translations / synonyms (WEB) - Стоматол., Dentist, Stomatology, Basilica (?)
+
+
 
 // TO DO - RZR
 // TODO WEB: POI Categories + top poi categories
@@ -265,7 +270,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "2301. Sokak"; // Test 23018., 23018 - Fixed NameIndexCreator - parsePureIntegerSuffix
 		// ALL - Search Stats 1569.2 ms - 554.0 ms 59,656 atoms (read 318.8, match 134.1), 985.8 ms compute 693,139 (loadBld 396.2, read 149.5)
         // NO INTER - Search Stats 871.5 ms - 546.4 ms 59,656 atoms (read 313.7, match 135.6), 299.9 ms compute 4,735 (loadBld 54.1, read 37.2)
-//		query = "Sokak 2";// 380657094 2.Sokak
+//		query = "Sokak 2";// 380657094 2.Sokak, 202159401
 //		location = new LatLon(40.7627, 29.8454);  
 //		query = "2/1 21038 Sokak"; // 1380369156
 		
@@ -274,7 +279,8 @@ public class SpatialSearchTestAndDocs {
 		
 //		pattern = "Ukraine_kyiv-city";
 //		pattern = "Test_Ukraine_kyiv-city_europe_12.obf";
-		pattern = "Ukraine_";
+//		pattern = "Ukraine_";
+//		pattern = "Ukraine_krop";
 		// poi types
 //		location = new LatLon(50.439, 30.516);
 //		settings.SEARCH_POI = false;
@@ -287,6 +293,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "Mcdonald's";
 //		query = "Stomat.";
 		
+//		settings.OPTIM_READ_COMMON_WORDS_ATOMS = true;
 //		query = "Kyiv Глушкова 1"; // vs 'Kyiv 1'
 //		query = "нова пошта Бульварно Кудрявська";
 //		query = "Бульварно-кудрявс.";
@@ -307,6 +314,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "Яр. вал 29-г";
 //		query = "Школа 25 Володимирська вулиця"; // Школа 25 Володимирська вулиця ALWAYS_READ_COMMON_WORDS_ATOMS = true 
 //		query = "андріівський узвіз Школа "; // ALWAYS_READ_COMMON_WORDS_ATOMS = true
+//		query = "Школа ";
 //		query = "Школа А+";
 //		location = new LatLon(50.4631,30.4553);
 //		query = "школа №25"; // test '№25', '25'? -- 'школа', 'школа №25', 'школа 25' // 63112526
@@ -349,9 +357,11 @@ public class SpatialSearchTestAndDocs {
 //		query = "New York 4 av 8"; // 160947243
 //		query = "57th street"; // central park - 265345338 east, 86216906 west, ()66926268 (west)?),
 //		query = "new york 57th street manhattan";
-//		query = "4th ave"; //  unit '4 ave'   
+//		query = "4th ave"; //  unit '4 ave'
 //		query = "4th ave 8 paterson"; //  wrong city...
 		// Result 4 - 40.8407, -74.0954 [[4th, 8] Building 2 4th Street (26238417818) 40.8441 -74.0910 , [ave, paterson] STREET_TYPE Paterson Avenue (651531238) 40.8374 -74.0997 ]
+//		settings.OPTIM_READ_COMMON_WORDS_ATOMS = true;
+//		settings.OPTIM_READ_COMMON_WORDS_LIMIT = 5000;
 		
 //		query = "2 street"; // poi types
 		
