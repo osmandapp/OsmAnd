@@ -133,6 +133,10 @@ public class TransportRoutingHelper {
 		return null;
 	}
 
+	public Map<Pair<TransportRouteResultSegment, TransportRouteResultSegment>, RouteCalculationResult> getWalkingRouteSegments() {
+		return walkingRouteSegments;
+	}
+
 	public int getWalkingTime(@NonNull List<TransportRouteResultSegment> segments) {
 		int res = 0;
 		Map<Pair<TransportRouteResultSegment, TransportRouteResultSegment>, RouteCalculationResult> walkingRouteSegments = this.walkingRouteSegments;
@@ -278,7 +282,7 @@ public class TransportRoutingHelper {
 						updateProgress(params);
 					}
 				} else {
-					if (routes != null && routes.size() > 0) {
+					if (routes != null && routes.size() > 0 && currentRoute < 0) {
 						setCurrentRoute(0);
 					}
 					progressRoute.finish();
@@ -721,6 +725,18 @@ public class TransportRoutingHelper {
 			try {
 				res = calculateRouteImpl(params, lib);
 				if (res != null && !params.calculationProgress.isCancelled) {
+					if (params.ctx.getSettings().USE_ONLINE_PUBLIC_TRANSPORT.get()) {
+						// online transit: show the result immediately, walking legs are routed after and refine the display
+						synchronized (transportRoutingHelper) {
+							transportRoutingHelper.routes = res;
+							transportRoutingHelper.currentRoute = res.isEmpty() ? -1 : 0;
+							transportRoutingHelper.walkingRouteSegments = null;
+							if (params.resultListener != null) {
+								params.resultListener.onRouteCalculated(res);
+							}
+						}
+						transportRoutingHelper.setNewRoute(res);
+					}
 					calculateWalkingRoutes(res);
 				}
 			} catch (Exception e) {
