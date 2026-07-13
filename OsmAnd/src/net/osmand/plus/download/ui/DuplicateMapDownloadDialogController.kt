@@ -1,15 +1,11 @@
 package net.osmand.plus.download.ui
 
 import android.graphics.Typeface
+import androidx.annotation.StringRes
 import androidx.fragment.app.FragmentActivity
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.base.dialog.BaseDialogController
-import net.osmand.plus.base.dialog.data.DialogExtra
-import net.osmand.plus.base.dialog.data.DisplayData
-import net.osmand.plus.base.dialog.data.DisplayDialogButtonItem
-import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider
-import net.osmand.plus.settings.bottomsheets.CustomizableQuestionBottomSheet
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType
 
@@ -17,9 +13,9 @@ class DuplicateMapDownloadDialogController(
     app: OsmandApplication,
     private val mapName: String,
     private val direction: ConflictDirection,
-    private val onReplace: Runnable,
-    private val onKeepBoth: Runnable
-) : BaseDialogController(app), IDisplayDataProvider {
+    private val replaceAction: Runnable,
+    private val keepBothAction: Runnable
+) : BaseDialogController(app) {
 
     enum class ConflictDirection {
         ROAD_TO_STANDARD,
@@ -28,56 +24,46 @@ class DuplicateMapDownloadDialogController(
 
     override fun getProcessId(): String = PROCESS_ID
 
-    override fun getDisplayData(processId: String): DisplayData {
-        val displayData = DisplayData()
-        displayData.putExtra(DialogExtra.TITLE, getString(R.string.duplicate_map))
+    val title: String
+        get() = getString(R.string.duplicate_map)
 
-        val descRes = when (direction) {
-            ConflictDirection.ROAD_TO_STANDARD -> R.string.duplicate_map_road_only_exists_desc
-            ConflictDirection.STANDARD_TO_ROAD -> R.string.duplicate_map_standard_exists_desc
+    val description: CharSequence
+        get() {
+            val descRes = when (direction) {
+                ConflictDirection.ROAD_TO_STANDARD -> R.string.duplicate_map_road_only_exists_desc
+                ConflictDirection.STANDARD_TO_ROAD -> R.string.duplicate_map_standard_exists_desc
+            }
+            val fullDescription = getString(descRes, mapName)
+            return UiUtilities.createSpannableString(fullDescription, Typeface.BOLD, mapName)
         }
-        val fullDescription = getString(descRes, mapName)
-        val spannableDescription = UiUtilities.createSpannableString(fullDescription, Typeface.BOLD, mapName)
-        displayData.putExtra(DialogExtra.DESCRIPTION, spannableDescription)
 
-        val replaceBtnTitleRes = when (direction) {
+    @get:StringRes
+    val replaceButtonTitleId: Int
+        get() = when (direction) {
             ConflictDirection.ROAD_TO_STANDARD -> R.string.duplicate_map_replace_with_standard
             ConflictDirection.STANDARD_TO_ROAD -> R.string.duplicate_map_replace_with_road
         }
-        val replaceBtnType = when (direction) {
+
+    val replaceButtonType: DialogButtonType
+        get() = when (direction) {
             ConflictDirection.ROAD_TO_STANDARD -> DialogButtonType.PRIMARY
             ConflictDirection.STANDARD_TO_ROAD -> DialogButtonType.SECONDARY
         }
 
-        val buttons = arrayOf(
-            DisplayDialogButtonItem()
-                .setTitleId(replaceBtnTitleRes)
-                .setButtonType(replaceBtnType)
-                .setOnClickListener {
-                    onReplace.run()
-                    app.dialogManager.askDismissDialog(PROCESS_ID)
-                },
-            DisplayDialogButtonItem()
-                .setTitleId(R.string.keep_both)
-                .setButtonType(DialogButtonType.SECONDARY)
-                .setOnClickListener {
-                    onKeepBoth.run()
-                    app.dialogManager.askDismissDialog(PROCESS_ID)
-                },
-            DisplayDialogButtonItem()
-                .setTitleId(R.string.shared_string_cancel)
-                .setButtonType(DialogButtonType.SECONDARY)
-                .setOnClickListener {
-                    app.dialogManager.askDismissDialog(PROCESS_ID)
-                }
-        )
+    fun onReplace() {
+        replaceAction.run()
+    }
 
-        displayData.putExtra(DialogExtra.DIALOG_BUTTONS, buttons)
-        return displayData
+    fun onKeepBoth() {
+        keepBothAction.run()
     }
 
     companion object {
         const val PROCESS_ID = "duplicate_map_download"
+
+        fun getExistedInstance(app: OsmandApplication): DuplicateMapDownloadDialogController? {
+            return app.dialogManager.findController(PROCESS_ID) as? DuplicateMapDownloadDialogController
+        }
 
         @JvmStatic
         fun showDialog(
@@ -87,10 +73,20 @@ class DuplicateMapDownloadDialogController(
             onReplace: Runnable,
             onKeepBoth: Runnable
         ) {
+            val manager = activity.supportFragmentManager
+            if (!DuplicateMapDownloadBottomSheet.canBeAdded(manager)) {
+                return
+            }
             val app = activity.application as OsmandApplication
-            val controller = DuplicateMapDownloadDialogController(app, mapName, direction, onReplace, onKeepBoth)
+            val controller = DuplicateMapDownloadDialogController(
+                app,
+                mapName,
+                direction,
+                onReplace,
+                onKeepBoth
+            )
             app.dialogManager.register(PROCESS_ID, controller)
-            CustomizableQuestionBottomSheet.showInstance(activity.supportFragmentManager, PROCESS_ID, true)
+            DuplicateMapDownloadBottomSheet.showInstance(manager)
         }
     }
 }

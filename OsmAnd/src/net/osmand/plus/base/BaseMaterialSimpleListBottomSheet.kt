@@ -8,6 +8,8 @@ import android.view.WindowManager
 import android.widget.FrameLayout
 import androidx.core.widget.NestedScrollView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.card.MaterialCardView
+import com.google.android.material.shape.ShapeAppearanceModel
 import net.osmand.plus.R
 import net.osmand.plus.utils.InsetTarget
 import net.osmand.plus.utils.InsetTargetsCollection
@@ -23,7 +25,10 @@ abstract class BaseMaterialSimpleListBottomSheet : BaseMaterialModalBottomSheetD
 		savedInstanceState: Bundle?
 	): View {
 		mainView = inflater.inflate(getLayoutId(), container, false)
+		mainView.findViewById<View>(R.id.dragHandle)?.visibility =
+			if (shouldShowDragHandle()) View.VISIBLE else View.INVISIBLE
 		setupHeaderCloseButton(mainView)
+		setupRoundedCorners()
 		return mainView
 	}
 
@@ -36,6 +41,21 @@ abstract class BaseMaterialSimpleListBottomSheet : BaseMaterialModalBottomSheetD
 	}
 
 	protected open fun getLayoutId(): Int = R.layout.bottom_sheet_simple_list_with_header
+
+	protected open fun shouldShowDragHandle(): Boolean = true
+
+	private fun setupRoundedCorners() {
+		val card = mainView.findViewById<MaterialCardView>(R.id.bottomSheetCard)
+		val largeShape = ShapeAppearanceModel.builder(
+			card.context,
+			R.style.Shape_Card28,
+			0
+		).build()
+		card.shapeAppearanceModel = card.shapeAppearanceModel.toBuilder()
+			.setTopLeftCornerSize(largeShape.topLeftCornerSize)
+			.setTopRightCornerSize(largeShape.topRightCornerSize)
+			.build()
+	}
 
 	override fun getInsetTargets(): InsetTargetsCollection {
 		val collection = super.getInsetTargets()

@@ -7,6 +7,7 @@
 	android:overScrollMode="never">
 
 	<com.google.android.material.card.MaterialCardView
+		android:id="@+id/bottomSheetCard"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content">
 
@@ -17,10 +18,11 @@
 			android:orientation="vertical">
 
 			<View
+				android:id="@+id/dragHandle"
 				android:layout_width="32dp"
 				android:layout_height="4dp"
 				android:layout_gravity="center_horizontal"
-				android:layout_marginTop="4dp"
+				android:layout_marginTop="@dimen/content_padding_half"
 				android:layout_marginBottom="2dp"
 				android:background="@drawable/rectangle_rounded"
 				android:backgroundTint="?attr/secondary_icon_color" />
