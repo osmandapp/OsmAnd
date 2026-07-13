@@ -376,47 +376,8 @@ public class SpatialSearchContext {
 		return s;
 	}
 	
-	private record ReadTokens(boolean init, boolean readCommonTokens, boolean readFreqTokens) {
-		
-	}
-	
-	private ReadTokens computeReadTokens(List<SpatialSearchToken> tokens, NameIndexReader indx) {
-		Map<String, ValueFreq> frequentWords = indx.getCommonWordsStats();
-		boolean readCommonTokens = true;
-		boolean readFreqTokens = true;
-		if (frequentWords != null) {
-			for (SpatialSearchToken t : tokens) {
-				boolean number2Letters = SearchAlgorithms.isNumber2Letters(t.word);
-				if (number2Letters) {
-					continue;
-				}
-				ValueFreq freqWord = frequentWords.get(t.word);
-				if (freqWord == null) {
-					// special case token "2" could match "2-nd" atom
-					// rare word
-					if (!settings.ALWAYS_READ_COMMON_WORDS_ATOMS) {
-						readCommonTokens = false;
-					}
-					if (!settings.ALWAYS_READ_FREQ_WORDS_ATOMS) {
-						readFreqTokens = false;
-					}
-				} else {
-					int nonIndexed = (int) (freqWord.freq - freqWord.extra);
-					if (nonIndexed == 0) {
-						// frequent word is ok to specialize
-						if (!settings.ALWAYS_READ_COMMON_WORDS_ATOMS) {
-							readCommonTokens = false;
-						}
-					}
-				}
-			}
-		}
-		return new ReadTokens(frequentWords != null, readCommonTokens, readFreqTokens);
-	}
-
 	private void readAtoms(List<SpatialSearchToken> tokens, BinaryMapIndexReader b, NameIndexReader indx, int indxInd)
 			throws IOException {
-		ReadTokens read = computeReadTokens(tokens, indx);
 		// sort to assign tokens to '2nd street 2' first instead '2 2nd street'
 		tokens.sort(new Comparator<SpatialSearchToken>() {
 			@Override
@@ -429,24 +390,6 @@ public class SpatialSearchContext {
 			}
 		});
 		for (SpatialSearchToken t : tokens) {
-			Map<String, ValueFreq> frequentWords = indx.getCommonWordsStats();
-			if (!read.init && frequentWords != null) {
-				read = computeReadTokens(tokens, indx);
-			}
-			boolean number2Letters = SearchAlgorithms.isNumber2Letters(t.word);
-			// always search numbers as they could be very specific - "2" token could match "2-nd" atom
-			if (!number2Letters && !read.readFreqTokens) {
-				ValueFreq freqWord = frequentWords.get(t.word);
-				if (freqWord != null) {
-					continue;
-				}
-			} else if (!number2Letters && !read.readCommonTokens) {
-				ValueFreq freqWord = frequentWords.get(t.word);
-				// non indexed > 0 common
-				if (freqWord != null && freqWord.freq - freqWord.extra > 0) {
-					continue;
-				}
-			}
 			List<PrefixNameValue> matchedPrefixes = indx.getMatchedPrefixes(t.word);
 			if (matchedPrefixes == null) {
 				stats.sub1FileAtomsTime.start();
@@ -454,8 +397,17 @@ public class SpatialSearchContext {
 //				matchedPrefixes = indx.getMatchedPrefixes(t.word);
 				stats.sub1FileAtomsTime.finish();
 			}
+			int preSearchSize = t.atoms.size();
 			for (PrefixNameValue prefix : matchedPrefixes) {
 				parseAtomSuffixes(t, indxInd, indx, prefix, tokens);
+			}
+			// check if we didn't find anything redo search
+			if (t.atoms.size() == preSearchSize && settings.OPTIM_READ_COMMON_WORDS_ATOMS && false) {
+				settings.OPTIM_READ_COMMON_WORDS_ATOMS = false;
+				for (PrefixNameValue prefix : matchedPrefixes) {
+					parseAtomSuffixes(t, indxInd, indx, prefix, tokens);
+				}
+				settings.OPTIM_READ_COMMON_WORDS_ATOMS = true;
 			}
 		}
 	}
@@ -515,7 +467,7 @@ public class SpatialSearchContext {
 				if (settings.DEV_READ_ADDR_OBJECTS) {
 					obj = readAddrObject(lid, pid, null);
 				}
-				parseSuffixes(t, suffixes, commonSuffixes, a, null, lid, pid, obj, allTokens);
+				parseSuffixes(t, indx, suffixes, commonSuffixes, a, null, lid, pid, obj, allTokens);
 			}
 		} else if (!addr && settings.SEARCH_POI) {
 			for (OsmAndPoiNameIndexDataAtom a : prefix.poi.getAtomsList()) {
@@ -529,7 +481,7 @@ public class SpatialSearchContext {
 				if (settings.DEV_READ_POI_OBJECTS) {
 					amenity = readPoiObject(lid, null);
 				}
-				parseSuffixes(t, suffixes, commonSuffixes, null, a, lid, 0, amenity, allTokens);
+				parseSuffixes(t, indx, suffixes, commonSuffixes, null, a, lid, 0, amenity, allTokens);
 			}
 		}
 	}
@@ -646,8 +598,9 @@ public class SpatialSearchContext {
 		return obj;
 	}
 
-	private void parseSuffixes(SpatialSearchToken t, List<String> suffixes, List<String> commonSuffixes, AddressNameIndexDataAtom a, 
-			OsmAndPoiNameIndexDataAtom b, long cid, long pid, MapObject obj, List<SpatialSearchToken> allTokens) {
+	private void parseSuffixes(SpatialSearchToken t, NameIndexReader indx, List<String> suffixes,
+			List<String> commonSuffixes, AddressNameIndexDataAtom a, OsmAndPoiNameIndexDataAtom b, long cid, long pid,
+			MapObject obj, List<SpatialSearchToken> allTokens) {
 		int cnt = a != null ? a.getSuffixesBitsetIndexCount() : b.getSuffixesBitsetIndexCount();
 		String name = "";
 		int wordInd = 0;
@@ -669,7 +622,7 @@ public class SpatialSearchContext {
 						} else {
 							other = wordInd < b.getOtherWordsCountCount() ? b.getOtherWordsCount(wordInd) : 0;
 						}
-						addObject(t, name, type, cid, pid, obj, other, new NameIndexAtomXY(a, b, settings), allTokens);
+						addObject(t, indx, name, type, cid, pid, obj, other, new NameIndexAtomXY(a, b, settings), allTokens);
 					}
 					wordInd++;
 					name = "";
@@ -694,6 +647,7 @@ public class SpatialSearchContext {
 		} else if (b != null && wordInd < b.getExtraSuffixCount()) {
 			name += b.getExtraSuffix(wordInd);
 		}
+		
 		if (name.length() != 0 && (matchName(t, name) || (name = matchPartName(t, name, allTokens)) != null)) {
 			int other;
 			if (a != null) {
@@ -701,7 +655,10 @@ public class SpatialSearchContext {
 			} else {
 				other = wordInd < b.getOtherWordsCountCount() ? b.getOtherWordsCount(wordInd) : 0;
 			}
-			addObject(t, name, type, cid, pid, obj, other, new NameIndexAtomXY(a, b, settings), allTokens);
+			// object will be added once it's read rare word
+			// disabled for now as it could only have effect for frequent words in index
+//			boolean skip = settings.OPTIM_READ_COMMON_WORDS_ATOMS && indx != null && other > 0;
+			addObject(t, indx, name, type, cid, pid, obj, other, new NameIndexAtomXY(a, b, settings), allTokens);
 		}
 	}
 
@@ -729,8 +686,8 @@ public class SpatialSearchContext {
 		return resName;
 	}
 
-	private void addObject(SpatialSearchToken t, String name, int type, long lid, long pid, MapObject obj, int other,
-			NameIndexAtomXY coords, List<SpatialSearchToken> allTokens) {
+	private void addObject(SpatialSearchToken t, NameIndexReader indx, String name, int type, long lid, long pid,
+			MapObject obj, int other, NameIndexAtomXY coords, List<SpatialSearchToken> allTokens) {
 		List<SpatialSearchToken> otherTokens = null;
 		boolean streetCity = false;
 		boolean numericNotMatch = false;
@@ -781,6 +738,18 @@ public class SpatialSearchContext {
 		for (; nearByType < limitLocationBboxes.length; nearByType++) {
 			if (coords.intersects(limitLocationBboxes[nearByType])) {
 				break;
+			}
+		}
+		if (settings.OPTIM_READ_COMMON_WORDS_ATOMS && (otherTokens == null || otherTokens.size() == 0) && split != null
+				&& split.size() > 1) {
+			String mainWord = split.get(0);
+			Map<String, ValueFreq> commonWordsStats = indx.getCommonWordsStats();
+			boolean number2Letters = SearchAlgorithms.isNumber2Letters(mainWord);
+			ValueFreq vf = commonWordsStats.get(mainWord);
+			// always search numbers as they could be very specific - "2" token could match "2-nd" atom
+			if (vf != null && !number2Letters) {
+				// other tokens didn't match for common word but present in object
+				return;
 			}
 		}
 		NameIndexAtom atom = new NameIndexAtom(name, type, lid, pid, obj, streetCity, other, otherFound, coords, nearByType);

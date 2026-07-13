@@ -64,7 +64,7 @@ import net.osmand.util.SearchAlgorithms;
 // TODO UNIT TESTS: Add test on show more '2 sokak' - Show more 1. 2 Sokak (house) 2. 2 Sokak (street) 3. 2 <WORD> Sokak (street) or 3381/2 Sokak. 4. '2.Kadriye' (city) .. Sokak
 
 // TO DO Gateway
-// TODO INSPECTOR : doesn't show suffixes
+// TODO INSPECTOR: doesn't show suffixes
 // TODO INDEX: Speedup load after sorting - to limit objects (store elo in index)! 
 // TODO INDEX: Store Poi category index (effective intersection 'Church St. Miguel' - refactor checkAmenity)
 // TODO ANALYZE: BUG - Germany POI words - . (115,158, 115,158), und (97,839, 97,839), - not common? - bach (56,475, 56,475) - could be common?
@@ -267,7 +267,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "2301. Sokak"; // Test 23018., 23018 - Fixed NameIndexCreator - parsePureIntegerSuffix
 		// ALL - Search Stats 1569.2 ms - 554.0 ms 59,656 atoms (read 318.8, match 134.1), 985.8 ms compute 693,139 (loadBld 396.2, read 149.5)
         // NO INTER - Search Stats 871.5 ms - 546.4 ms 59,656 atoms (read 313.7, match 135.6), 299.9 ms compute 4,735 (loadBld 54.1, read 37.2)
-//		query = "Sokak 2";// 380657094 2.Sokak
+//		query = "Sokak 2";// 380657094 2.Sokak, 202159401
 //		location = new LatLon(40.7627, 29.8454);  
 //		query = "2/1 21038 Sokak"; // 1380369156
 		
@@ -277,6 +277,7 @@ public class SpatialSearchTestAndDocs {
 //		pattern = "Ukraine_kyiv-city";
 //		pattern = "Test_Ukraine_kyiv-city_europe_12.obf";
 		pattern = "Ukraine_";
+		pattern = "Ukraine_krop";
 		// poi types
 //		location = new LatLon(50.439, 30.516);
 //		settings.SEARCH_POI = false;
@@ -289,6 +290,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "Mcdonald's";
 //		query = "Stomat.";
 		
+		settings.OPTIM_READ_COMMON_WORDS_ATOMS = true;
 //		query = "Kyiv Глушкова 1"; // vs 'Kyiv 1'
 //		query = "нова пошта Бульварно Кудрявська";
 //		query = "Бульварно-кудрявс.";
@@ -308,7 +310,8 @@ public class SpatialSearchTestAndDocs {
 //		query = "54-та Садова вулиця 8"; // interpolation
 //		query = "Яр. вал 29-г";
 //		query = "Школа 25 Володимирська вулиця"; // Школа 25 Володимирська вулиця ALWAYS_READ_COMMON_WORDS_ATOMS = true 
-//		query = "андріівський узвіз Школа "; // ALWAYS_READ_COMMON_WORDS_ATOMS = true
+		query = "андріівський узвіз Школа "; // ALWAYS_READ_COMMON_WORDS_ATOMS = true
+		query = "Школа ";
 //		query = "Школа А+";
 //		location = new LatLon(50.4631,30.4553);
 //		query = "школа №25"; // test '№25', '25'? -- 'школа', 'школа №25', 'школа 25' // 63112526
@@ -351,9 +354,10 @@ public class SpatialSearchTestAndDocs {
 //		query = "New York 4 av 8"; // 160947243
 //		query = "57th street"; // central park - 265345338 east, 86216906 west, ()66926268 (west)?),
 //		query = "new york 57th street manhattan";
-//		query = "4th ave"; //  unit '4 ave'   
+//		query = "4th ave"; //  unit '4 ave'
 //		query = "4th ave 8 paterson"; //  wrong city...
 		// Result 4 - 40.8407, -74.0954 [[4th, 8] Building 2 4th Street (26238417818) 40.8441 -74.0910 , [ave, paterson] STREET_TYPE Paterson Avenue (651531238) 40.8374 -74.0997 ]
+//		settings.OPTIM_READ_COMMON_WORDS_ATOMS = true;
 		
 //		query = "2 street"; // poi types
 		

@@ -1564,7 +1564,7 @@
     <string name="sorted_by_distance">Triés par distance</string>
     <string name="search_favorites">Rechercher dans les favoris</string>
     <string name="restart_search">Relancer la recherche</string>
-    <string name="nothing_found">Aucun résultat</string>
+    <string name="nothing_found">Aucun résultat trouvé</string>
     <string name="increase_search_radius">Augmenter le rayon de recherche</string>
     <string name="nothing_found_descr">Modifier la recherche ou augmenter son rayon.</string>
     <string name="private_access_routing_req">Votre destination se situe dans une zone privée. Souhaitez-vous autoriser l\'accès aux zones privées pour ce trajet ?</string>
@@ -1626,8 +1626,8 @@
     <string name="shared_string_options">Options</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd va relier les points pour établir un itinéraire adapté au profil sélectionné.</string>
     <string name="choose_navigation_type">Sélectionner le type de navigation</string>
-    <string name="empty_state_favourites">Ajouter des favoris</string>
-    <string name="empty_state_favourites_desc">Importer des favoris ou créer des favoris sur la carte.</string>
+    <string name="empty_state_favourites">Ajouter aux favoris</string>
+    <string name="empty_state_favourites_desc">Importez vos favoris ou ajoutez-les en marquant des points sur la carte.</string>
     <string name="import_track">Importer le fichier GPX</string>
     <string name="import_track_desc">Le fichier %1$s ne contient aucun point de passage, l\'importer comme trace ?</string>
     <string name="move_point">Déplacer le point</string>
@@ -1809,7 +1809,7 @@
     <string name="enter_lon">Saisir la longitude</string>
     <string name="enter_lat">Saisir la latitude</string>
     <string name="enter_lat_and_lon">Saisir la latitude et la longitude</string>
-    <string name="distance_farthest">Le plus lointain en premier</string>
+    <string name="distance_farthest">Le plus éloigné en premier</string>
     <string name="distance_nearest">Le plus proche en premier</string>
     <string name="rendering_attr_whiteWaterSports_name">Sports d\'eau douce</string>
     <string name="clear_all_intermediates">Effacer toutes les étapes</string>
@@ -3482,7 +3482,7 @@
     <string name="how_to_use">Comment utiliser :</string>
     <string name="rotate_map_manual_opt">Orientation manuelle</string>
     <string name="shared_string_large">Grand</string>
-    <string name="distance_by_tap_use_description">Un appui sur la carte affiche la distance entre l\'emplacement d\'appui et votre position.\nUn appui simultané avec deux doigts affiche la distance entre les deux points d\'appui.</string>
+    <string name="distance_by_tap_use_description">Touchez la carte pour afficher la distance entre votre position actuelle et le point sélectionné.\nTouchez la carte avec deux doigts pour afficher la distance entre les points cliqués.</string>
     <string name="map_markers_desc">Le widget affiche la Distance ou l\'Heure d\'arrivée estimée (ETA) pour les deux premières marques de la liste des marques de la carte.</string>
     <string name="go_to_marker_location">Aller au marqueur</string>
     <string name="shared_string_switch_mode">Basculer de mode</string>
@@ -3828,7 +3828,7 @@
     <string name="visible_in_3d_mode">Visible en mode 3D</string>
     <string name="delete_folder_question">Supprimer le dossier \?</string>
     <string name="delete_folder">Supprimer dossier</string>
-    <string name="show_all_tracks_on_the_map">Afficher toutes les traces sur la carte</string>
+    <string name="show_all_tracks_on_the_map">Afficher tous les itinéraires sur la carte</string>
     <string name="rssi_widget_desc">Affiche le niveau RSSI de votre appareil externe.</string>
     <string name="map_widget_rssi">RSSI</string>
     <string name="tracks_empty_folder_description">Ce dossier ne contient aucune trace.</string>
@@ -4910,11 +4910,11 @@
     <string name="astro_rendering">Rendu</string>
     <string name="astro_configure_view">Configurer l\'affichage</string>
     <string name="astro_daily_path">Itinéraire quotidien</string>
-    <string name="delete_groups_confirmation">Supprimer les groupes ?</string>
+    <string name="delete_groups_confirmation">Supprimer des groupes ?</string>
     <string name="add_to_track">Ajouter à la trace</string>
-    <string name="unpin_folder">Détacher le dossier</string>
+    <string name="unpin_folder">Désépingler le dossier</string>
     <string name="pin_folder">Épingler le dossier</string>
-    <string name="favorite_search_empty_state_description">Ajustez votre recherche ou vos filtres pour voir si cela aide</string>
+    <string name="favorite_search_empty_state_description">Modifiez votre recherche ou vos filtres pour voir si cela vous aide</string>
     <string name="favorites_empty_folder_description">Ce dossier ne contient aucun point pour l\'instant.</string>
     <string name="building_3d_low_details_content_desc">Bâtiments 3D à faible niveau de détail</string>
     <string name="building_3d_high_details_content_desc">Bâtiments en 3D élevés</string>
@@ -5179,4 +5179,5 @@
     <string name="required_maps_calculate_with_existing_maps">Effectuer les calculs avec les cartes existantes</string>
     <string name="attached_media">Fichiers média joints</string>
     <string name="traffic_warning_red_light_camera">Radar de feu rouge</string>
+    <string name="attached_media_delete_confirmation">Souhaitez-vous supprimer les %1$d éléments multimédias de ce point ? Les fichiers multimédias enregistrés par l\'application et non associés à un emplacement seront également supprimés de l\'appareil.</string>
 </resources>

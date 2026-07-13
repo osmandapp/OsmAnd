@@ -3883,7 +3883,7 @@
     <string name="offline_weather_forecast">Ванмрежна временска прогноза</string>
     <string name="offline_weather_forecast_desc">Можете преузети седмодневне временске прилике.</string>
     <string name="delete_folder_question">Да ли избрисати фасциклу\?</string>
-    <string name="show_all_tracks_on_the_map">Приказуј све трагове на карти</string>
+    <string name="show_all_tracks_on_the_map">Прикажи све стазе на мапи</string>
     <string name="rssi_widget_desc">Приказуј ступањ РССИ Вашег спољњег уређаја.</string>
     <string name="map_widget_rssi">РССИ</string>
     <string name="tracks_empty_folder_description">Ова фасцикла још увек не садржи икакав траг.</string>
@@ -5250,4 +5250,5 @@
     <string name="required_maps_calculate_with_existing_maps">Израчунај са постојећим мапама</string>
     <string name="attached_media">Приложени медији</string>
     <string name="traffic_warning_red_light_camera">Камера за црвено светло</string>
+    <string name="attached_media_delete_confirmation">Да ли желите да обришете %1$d медијских ставки од ове тачке? Медијски садржаји које је апликација сачувала и нису приложени нигде другде такође ће бити обрисани са уређаја.</string>
 </resources>

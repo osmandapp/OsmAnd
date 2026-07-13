@@ -475,7 +475,7 @@
     <string name="poi_historic_ship">Historisches Schiff</string>
     <string name="poi_craft_shoemaker">Schuster</string>
     <string name="poi_shoes">Schuhgeschäft</string>
-    <string name="poi_shooting">Sportschießen</string>
+    <string name="poi_shooting">Schießen</string>
     <string name="poi_farm">Hofladen</string>
     <string name="poi_tea">Teeladen</string>
     <string name="poi_sinkhole">Senkgrube</string>
@@ -3165,7 +3165,7 @@
     <string name="poi_gorge">Schlucht</string>
     <string name="poi_couloir">Felsschlucht</string>
     <string name="poi_mountain_area">Berggebiet</string>
-    <string name="poi_surface_clay">Asche</string>
+    <string name="poi_surface_clay">Oberfläche: Asche</string>
     <string name="poi_surface_tartan">Tartan</string>
     <string name="poi_surface_artificial_turf">Kunstrasen</string>
     <string name="poi_surface_decoturf">Zierrasen</string>
@@ -5066,7 +5066,7 @@
     <string name="poi_denomination_evangelical_lutheran">Evangelisch-lutherisch</string>
     <string name="poi_denomination_macedonian_orthodox">Mazedonisch-orthodox</string>
     <string name="poi_denomination_church_of_god">Kirche Gottes</string>
-    <string name="poi_denomination_ukrainian_greek_catholic">Ukrainisch Griechisch-katholisch</string>
+    <string name="poi_denomination_ukrainian_greek_catholic">Ukrainisch-griechisch-katholisch</string>
     <string name="poi_denomination_neo_pentecostal">Neocharismatisch</string>
     <string name="poi_denomination_anabaptist">Täufer</string>
     <string name="poi_denomination_thai_mahanikaya">Thailändisches Mahanikaya</string>
@@ -5173,4 +5173,5 @@
     <string name="poi_rapids_grade_x">X (nicht befahrbar)</string>
     <string name="poi_water_type_filter">Wassertyp</string>
     <string name="poi_water_lake">See</string>
+    <string name="poi_surface_laterite">Oberfläche: Laterit</string>
 </resources>

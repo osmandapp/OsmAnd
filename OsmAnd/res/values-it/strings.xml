@@ -4982,7 +4982,7 @@
     <string name="astro_nebulae">Nebulosa</string>
     <string name="astro_galaxy_clusters">Cluster di Galassie</string>
     <string name="astro_black_holes">Buchi Neri</string>
-    <string name="shared_string_azimuth">Azimuth</string>
+    <string name="shared_string_azimuth">Azimut</string>
     <string name="shared_string_magnitude">Magnitudine</string>
     <string name="astro_star_clusters">Ammassi stellari</string>
     <string name="equator_line">Linea Equatoriale</string>
@@ -5099,7 +5099,7 @@
     <string name="add_palette">Aggiungi palette</string>
     <string name="delete_palette">Elimina palette</string>
     <string name="delete_colors_palette_dialog_summary">Sei sicuro di voler eliminare la palette %1$s?</string>
-    <string name="astro_min_magnitude">Ampiezza min.</string>
+    <string name="astro_min_magnitude">Magnitudine min.</string>
     <string name="delete_groups_confirmation">Eliminare gruppi?</string>
     <string name="add_to_track">Aggiungi alla traccia</string>
     <string name="favorites_empty_folder_description">Questa cartella non ha ancora nessun punto.</string>
@@ -5186,7 +5186,7 @@
     <string name="route_calculation_method_standard_only">Solo standard</string>
     <string name="route_calculation_method_standard_only_desc">Utilizza sempre il calcolo standard del percorso. Più lento, ma consente la navigazione con mappe di date diverse.</string>
     <string name="route_calculation_method_fast_only">Solo veloce</string>
-    <string name="route_calculation_method_fast_only_desc">Utilizza sempre il calcolo rapido del percorso. Il calcolo si interromperà e richiederà aggiornamenti se le date della mappa non corrispondono.</string>
+    <string name="route_calculation_method_fast_only_desc">Utilizza sempre l\'elaborazione rapida del percorso. Il calcolo si interromperà e richiederà aggiornamenti se le date della mappa non corrispondono.</string>
     <string name="show_discount_bottom_sheet">Mostra il pannello inferiore degli sconti</string>
     <string name="show_discount_bottom_sheet_description">Visualizza il pannello inferiore degli sconti con una risposta di sviluppo personalizzata.</string>
     <string name="gallery_media_playback_error">Contenuto multimediale non riproducibile.</string>
@@ -5213,4 +5213,11 @@
     <string name="tracks_backup_promo_button">Ottieni OsmAnd Pro</string>
     <string name="tracks_backup_promo_description">Sincronizza le tue tracce tra tutti i dispositivi e sul Web con OsmAnd Pro.</string>
     <string name="tracks_backup_promo_title">Salva e sincronizza le tue tracce</string>
+    <string name="android_auto_missing_maps_desc">Scarica le mappe mancanti per continuare il percorso.</string>
+    <string name="android_auto_possible_missing_maps_desc">Mappe potenzialmente mancanti. Prova a utilizzare le mappe esistenti per continuare.</string>
+    <string name="route_calculation_calculating_route">Calcolando il percorso...</string>
+    <string name="route_calculation_calculating_fast_route">Calcolando il percorso veloce...</string>
+    <string name="shared_string_recent">Recente</string>
+    <string name="attached_media_delete_confirmation">Eliminare %1$d elementi multimediali da questo punto? Anche i file multimediali memorizzati dall\'app e non collegati altrove saranno eliminati dal dispositivo.</string>
+    <string name="route_calculation_using_fast_algorithm">Utilizzo dell\'algoritmo di calcolo veloce del percorso.</string>
 </resources>

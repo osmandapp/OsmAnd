@@ -5306,4 +5306,5 @@
     <string name="required_maps_calculate_with_existing_maps">Beregn ud fra eksisterende kort</string>
     <string name="attached_media">Vedhæftede medier</string>
     <string name="traffic_warning_red_light_camera">Trafikkamera ved rødt lys</string>
+    <string name="attached_media_delete_confirmation">Vil du slette %1$d medieelementer fra dette punkt? Medier, der er gemt af appen og ikke er knyttet til noget andet sted, vil også blive slettet fra enheden.</string>
 </resources>
