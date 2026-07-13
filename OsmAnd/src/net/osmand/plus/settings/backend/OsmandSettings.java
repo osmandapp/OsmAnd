@@ -99,6 +99,7 @@ import net.osmand.plus.settings.backend.storages.ImpassableRoadsStorage;
 import net.osmand.plus.settings.backend.storages.IntermediatePointsStorage;
 import net.osmand.plus.settings.coordinates.CoordinateFormatSettingsStorage;
 import net.osmand.plus.settings.enums.*;
+import net.osmand.plus.transport.online.OnlineTransportOptimize;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
@@ -3344,6 +3345,11 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> USE_OSM_LIVE_FOR_ROUTING = new BooleanPreference(this, "enable_osmc_routing", true).makeProfile();
 
 	public final OsmandPreference<Boolean> USE_OSM_LIVE_FOR_PUBLIC_TRANSPORT = new BooleanPreference(this, "enable_osmc_public_transport", false).makeProfile();
+
+	public final OsmandPreference<Boolean> USE_ONLINE_PUBLIC_TRANSPORT = new BooleanPreference(this, "use_online_public_transport", false).makeProfile();
+	public final CommonPreference<OnlineTransportOptimize> ONLINE_TRANSPORT_OPTIMIZE = new EnumStringPreference<>(this, "online_transport_optimize", OnlineTransportOptimize.BEST, OnlineTransportOptimize.values()).makeProfile();
+	public final CommonPreference<Boolean> ONLINE_TRANSPORT_WHEELCHAIR = new BooleanPreference(this, "online_transport_wheelchair", false).makeProfile();
+	public final CommonPreference<String> ONLINE_TRANSPORT_URL = new StringPreference(this, "online_transport_url", "https://api.transitous.org/api/v6/plan").makeProfile();
 
 	public final OsmandPreference<Boolean> VOICE_MUTE = new BooleanPreference(this, "voice_mute", false).makeProfile().cache();
 	public final CommonPreference<TrackApproximationType> DETAILED_TRACK_GUIDANCE = new EnumStringPreference<>(this, "detailed_track_guidance",
