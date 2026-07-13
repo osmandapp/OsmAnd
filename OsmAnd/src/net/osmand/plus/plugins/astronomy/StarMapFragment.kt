@@ -16,6 +16,7 @@ import android.widget.SeekBar
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.FragmentManager
@@ -30,6 +31,7 @@ import io.github.cosinekitty.astronomy.SolarEclipsePhase
 import io.github.cosinekitty.astronomy.SolarEclipseShadowPoint
 import io.github.cosinekitty.astronomy.Time
 import net.osmand.Location
+import net.osmand.core.jni.PointI
 import net.osmand.map.IMapLocationListener
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener
@@ -62,6 +64,7 @@ import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.InsetTarget
 import net.osmand.plus.utils.InsetTargetsCollection
 import net.osmand.plus.utils.InsetsUtils
+import net.osmand.plus.utils.NativeUtilities
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType
 import net.osmand.shared.util.LoggerFactory
@@ -920,21 +923,34 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private fun updateRegularMapVisibility(visible: Boolean) {
 		regularMapVisible = visible
 		val mapActivity = requireMapActivity()
+		val mapView = app.osmandMap.mapView
+		val preservedCenter = mapView.rotatedTileBox.centerLatLon
+		var mapHeightPx = 0
 		if (visible) {
 			val mapHeight =
 				if (InsetsUtils.isLandscape(app)) REGULAR_MAP_HEIGHT_LANDSCAPE
 				else REGULAR_MAP_HEIGHT
-			val bottomPadding = dpToPx(mapHeight)
-			mainLayout.setPadding(0, 0, 0, bottomPadding)
+			mapHeightPx = dpToPx(mapHeight)
+			mainLayout.setPadding(0, 0, 0, mapHeightPx)
 			val display = AndroidUtils.getDisplay(app)
 			val screenDimensions = Point(0, 0)
 			display.getSize(screenDimensions)
-			mapActivity.setMapViewPaddings(0, screenDimensions.y - bottomPadding, 0, 0)
-			applyEclipseMapDisplayRatio(bottomPadding)
+			mapActivity.setMapViewPaddings(0, screenDimensions.y - mapHeightPx, 0, 0)
 			mapActivity.refreshMap()
 		} else {
 			mainLayout.setPadding(0, 0, 0, 0)
 			mapActivity.resetMapViewPaddings()
+		}
+		if (isSolarEclipseModeActive()) {
+			mapView.view?.doOnPreDraw {
+				if (regularMapVisible != visible || !isAdded || view == null) return@doOnPreDraw
+				reanchorEclipseMapCenter(
+					preservedCenter.latitude,
+					preservedCenter.longitude,
+					visible,
+					mapHeightPx
+				)
+			}
 		}
 		applyBottomInsets()
 		if (isSolarEclipseModeActive() && ::eclipseCard.isInitialized) {
@@ -942,14 +958,44 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 	}
 
-	private fun applyEclipseMapDisplayRatio(mapHeightPx: Int) {
+	private fun reanchorEclipseMapCenter(
+		latitude: Double,
+		longitude: Double,
+		mapVisible: Boolean,
+		mapHeightPx: Int
+	) {
 		if (!isSolarEclipseModeActive()) return
-		val tileBox = app.osmandMap.mapView.rotatedTileBox
-		if (tileBox.pixHeight <= 0) return
-		val visibleCenterY = tileBox.pixHeight - mapHeightPx / 2f
-		val ratioY = (visibleCenterY / tileBox.pixHeight).coerceIn(0f, 1f)
+		val mapView = app.osmandMap.mapView
+		val rendererView = mapView.view ?: return
+		val ratioY = if (mapVisible && mapHeightPx > 0) {
+			val rendererLocation = IntArray(2)
+			val mainLocation = IntArray(2)
+			rendererView.getLocationOnScreen(rendererLocation)
+			mainLayout.getLocationOnScreen(mainLocation)
+			val rendererTop = rendererLocation[1].toFloat()
+			val rendererBottom = rendererTop + rendererView.height
+			val visibleTop = max(
+				rendererTop,
+				(mainLocation[1] + mainLayout.height - mapHeightPx).toFloat()
+			)
+			val visibleCenter = (visibleTop + rendererBottom) / 2f
+			((visibleCenter - rendererTop) / rendererView.height.coerceAtLeast(1))
+				.coerceIn(0f, 1f)
+		} else {
+			0.5f
+		}
 		app.mapViewTrackingUtilities.mapDisplayPositionManager
 			.setCustomMapRatio(0.5f, ratioY)
+		mapView.setLatLon(latitude, longitude, 0.5f, ratioY)
+		mapView.mapRenderer?.let { renderer ->
+			val target31 = NativeUtilities.calculateTarget31(renderer, latitude, longitude, false)
+			val targetPixel = PointI(
+				(rendererView.width * 0.5f).toInt(),
+				(rendererView.height * ratioY).toInt()
+			)
+			renderer.setMapTarget(targetPixel, target31)
+			mapView.refreshMap()
+		}
 	}
 
 	private fun restoreEclipseMapDisplayRatio(restore: EclipseRestoreState) {
