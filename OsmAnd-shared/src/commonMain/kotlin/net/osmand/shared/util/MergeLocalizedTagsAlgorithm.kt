@@ -1,26 +1,21 @@
-package net.osmand.plus.mapcontextmenu.builders
+package net.osmand.shared.util
 
-import net.osmand.data.Amenity.DESCRIPTION
-import net.osmand.data.Amenity.LANG_YES
-import net.osmand.data.Amenity.NAME
-import net.osmand.osm.AbstractPoiType
-import net.osmand.osm.MapPoiTypes
-import net.osmand.plus.OsmandApplication
 import net.osmand.shared.gpx.GpxFile.Companion.XML_COLON
+
+private const val DESCRIPTION = "description"
+private const val LANG_YES = "lang_yes"
+private const val NAME = "name"
 
 private val NAME_TAG_PREFIXES = listOf(
 	"name", "int_name", "nat_name", "reg_name", "loc_name",
 	"old_name", "alt_name", "short_name", "official_name", "lock_name"
 )
 
-class MergeLocalizedTagsAlgorithm private constructor(private val app: OsmandApplication) {
+class MergeLocalizedTagsAlgorithm private constructor(private val langLookup: PoiAdditionalLangLookup) {
 
 	companion object {
-		fun execute(
-			app: OsmandApplication,
-			originalDict: Map<String, String>
-		): Map<String, Any> {
-			val instance = MergeLocalizedTagsAlgorithm(app)
+		fun execute(langLookup: PoiAdditionalLangLookup, originalDict: Map<String, String>): Map<String, Any> {
+			val instance = MergeLocalizedTagsAlgorithm(langLookup)
 			return instance.executeImpl(HashMap(originalDict))
 		}
 	}
@@ -98,9 +93,7 @@ class MergeLocalizedTagsAlgorithm private constructor(private val app: OsmandApp
 		localizationsDict: MutableMap<String, MutableMap<String, Any>>,
 		resultDict: MutableMap<String, Any>
 	) {
-		val poiTypes: MapPoiTypes = app.poiTypes
-		val poiType: AbstractPoiType? = poiTypes.getAnyPoiAdditionalTypeByKey(convertedKey)
-		if (poiType?.lang != null && key.contains(":")) {
+		if (langLookup.hasLang(convertedKey) && key.contains(":")) {
 			val components = key.split(":")
 			if (components.size == 2) {
 				val baseKey = components[0]

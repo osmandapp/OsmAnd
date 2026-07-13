@@ -27,6 +27,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import net.osmand.PlatformUtil;
+import net.osmand.data.AdditionalInfoBundle;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.osm.edit.OSMSettings;
@@ -80,7 +81,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	public void build(@NonNull ViewGroup view, @Nullable Object object) {
 		extensions = amenity.getAmenityExtensions(app.getPoiTypes(), false);
 		setCustomOnlinePhotosPosition(extensions.containsKey(WIKIDATA));
-		infoBundle = new AdditionalInfoBundle(app, extensions);
+		infoBundle = new AdditionalInfoBundle(app.getPoiTypes(), extensions);
 
 		super.build(view, object);
 	}

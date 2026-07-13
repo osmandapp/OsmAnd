@@ -30,8 +30,8 @@ import androidx.core.util.Pair;
 import androidx.core.util.PatternsCompat;
 
 import net.osmand.PlatformUtil;
+import net.osmand.data.AdditionalInfoBundle;
 import net.osmand.data.Amenity;
-import net.osmand.data.AmenityInfoDisplayFilter;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.osm.AbstractPoiType;
@@ -108,7 +108,7 @@ public class AmenityUIHelper extends MenuBuilder {
 		for (Entry<String, Object> entry : filteredInfo.entrySet()) {
 			String key = entry.getKey();
 			Object value = entry.getValue();
-			if (!AmenityInfoDisplayFilter.shouldDisplayKey(key, subtype, poiTypes)) {
+			if (!additionalInfo.shouldDisplayKey(key)) {
 				continue;
 			}
 			AmenityInfoRow infoRow = null;
