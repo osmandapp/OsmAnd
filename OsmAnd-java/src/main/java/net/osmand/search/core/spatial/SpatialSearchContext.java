@@ -394,6 +394,9 @@ public class SpatialSearchContext {
 			if (matchedPrefixes == null) {
 				stats.sub1FileAtomsTime.start();
 				matchedPrefixes = b.readFullNameIndex(indx.setQuery(t.word, t.getPrefixMatcher(stats)));
+				if (matchedPrefixes == null) {
+					continue;
+				}
 //				matchedPrefixes = indx.getMatchedPrefixes(t.word);
 				stats.sub1FileAtomsTime.finish();
 			}

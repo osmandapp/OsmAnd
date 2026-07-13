@@ -394,6 +394,8 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 				// interpolation only over 1 set
 				if (query.size() == 1 && b.belongsToInterpolation(query.iterator().next())) {
 					interpolation = b;
+				} else if (query.size() > 1 && b.belongsToInterpolation(bld)) {
+					interpolation = b;
 				}
 			} else {
 				Set<String> bldSet = SearchAlgorithms.getBuildingCompareSet(b.getName(), tempBuildNames2);

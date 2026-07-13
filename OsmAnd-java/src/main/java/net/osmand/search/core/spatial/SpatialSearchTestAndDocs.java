@@ -181,6 +181,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "3 Hofäckerstraße Kernen im Remstal";
 //		query = "1 W&W Platz Kornwestheim"; // duplicate word new maps needed
 //		query = "1/1 Salierstraße Waiblingen"; // duplicate in house number priority 1st
+		query = "24 Kelterstraße Kernen im Remstal";
 		
 		// poi filter
 //		location = new LatLon(52.50805, 13.38176);
@@ -307,7 +308,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "2 га Нова вулиця"; // unit test '2га' +, '2-га', '2', '2 га' (partial) unit test (260537333, 104438019)
 //		query = "2га Нова вулиця"; 
 //		query = "2 нова вулиця"; // '"25-та вулиця", "25та вулиця", "25 та вулиця", "25 вулиця" (NOT FIRST) - '25-та Садова вулиця' 150768561
-//		query = "25 садова вулиця";
+//		query = "25-та садова вулиця";
 //		query = "саксаг. 63 28"; // 129-Б, 129б 63/28, 63, 63-28  +'саксаг. 63 28'
 //		query = "саксаг. 63/28, 2";
 //		query = "саксаг. 63/28 подъезд 2";
