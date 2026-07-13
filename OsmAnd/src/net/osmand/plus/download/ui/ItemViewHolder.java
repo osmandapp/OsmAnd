@@ -537,8 +537,7 @@ public class ItemViewHolder {
 						context,
 						indexItem.getVisibleName(context, app.getRegions(), false),
 						direction,
-						// TODO: Implement replace-after-download flow in the next step.
-						() -> app.showShortToastMessage("Not implemented yet"),
+						() -> context.startReplacementDownload(indexItem, conflict.getTargetFile(app)),
 						() -> startDownload(indexItem)
 				);
 				return;

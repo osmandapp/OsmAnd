@@ -330,6 +330,7 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 		public File targetFile;
 		public boolean zipStream;
 		public boolean unzipFolder;
+		public List<File> filesToDeleteAfterSuccessfulInstall;
 
 		public File fileToDownload;
 

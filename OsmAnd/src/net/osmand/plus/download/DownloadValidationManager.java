@@ -14,7 +14,9 @@ import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
+import java.io.File;
 import java.text.MessageFormat;
+import java.util.Collections;
 
 public class DownloadValidationManager {
 
@@ -24,6 +26,10 @@ public class DownloadValidationManager {
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
 	private final DownloadIndexesThread downloadThread;
+
+	private interface DownloadValidatedCallback {
+		void onDownloadValidated(@NonNull IndexItem[] items);
+	}
 
 	public DownloadValidationManager(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -73,13 +79,20 @@ public class DownloadValidationManager {
 		if (isAllAssets(items)) {
 			copyVoiceAssetsWithoutInternet(context, items);
 		} else {
-			downloadFilesWithAllChecks(context, items);
+			downloadFilesWithAllChecks(context, items, downloadThread::runDownloadFiles);
 		}
+	}
+
+	public void startReplacementDownload(@NonNull FragmentActivity context, @NonNull IndexItem item,
+	                                     @NonNull File fileToDelete) {
+		downloadFilesWithAllChecks(context, new IndexItem[] {item}, validatedItems ->
+				downloadThread.runDownloadFileWithPendingCleanup(
+						validatedItems[0], Collections.singletonList(fileToDelete)));
 	}
 
 	private void copyVoiceAssetsWithoutInternet(@NonNull FragmentActivity activity, IndexItem... items) {
 		if (downloadFilesCheck_1_FreeVersion(activity, items)) {
-			downloadFilesCheck_3_ValidateSpace(activity, items);
+			downloadFilesCheck_3_ValidateSpace(activity, items, downloadThread::runDownloadFiles);
 		}
 	}
 
@@ -92,9 +105,10 @@ public class DownloadValidationManager {
 		return true;
 	}
 
-	private void downloadFilesWithAllChecks(@NonNull FragmentActivity activity, IndexItem... items) {
+	private void downloadFilesWithAllChecks(@NonNull FragmentActivity activity, @NonNull IndexItem[] items,
+	                                        @NonNull DownloadValidatedCallback callback) {
 		if (downloadFilesCheck_1_FreeVersion(activity, items)) {
-			downloadFilesCheck_2_Internet(activity, items);
+			downloadFilesCheck_2_Internet(activity, items, callback);
 		}
 	}
 
@@ -118,18 +132,19 @@ public class DownloadValidationManager {
 		return total >= MAXIMUM_AVAILABLE_FREE_DOWNLOADS && isAnyItemCountedInDownload;
 	}
 
-	private void downloadFilesCheck_2_Internet(@NonNull FragmentActivity context, IndexItem[] items) {
+	private void downloadFilesCheck_2_Internet(@NonNull FragmentActivity context, @NonNull IndexItem[] items,
+	                                           @NonNull DownloadValidatedCallback callback) {
 		if (settings.isWifiConnected()) {
-			downloadFilesCheck_3_ValidateSpace(context, items);
+			downloadFilesCheck_3_ValidateSpace(context, items, callback);
 		} else if (settings.isInternetConnectionAvailable()) {
 			if (DOWNLOAD_MOBILE_INTERNET_CONFIRMED) {
-				downloadFilesCheck_3_ValidateSpace(context, items);
+				downloadFilesCheck_3_ValidateSpace(context, items, callback);
 			} else {
 				AlertDialog.Builder builder = new AlertDialog.Builder(context);
 				builder.setMessage(context.getString(R.string.download_using_mobile_internet));
 				builder.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
 					DOWNLOAD_MOBILE_INTERNET_CONFIRMED = true;
-					downloadFilesCheck_3_ValidateSpace(context, items);
+					downloadFilesCheck_3_ValidateSpace(context, items, callback);
 				});
 				builder.setNegativeButton(R.string.shared_string_no, null);
 				builder.show();
@@ -139,7 +154,8 @@ public class DownloadValidationManager {
 		}
 	}
 
-	private void downloadFilesCheck_3_ValidateSpace(@NonNull FragmentActivity context, IndexItem... items) {
+	private void downloadFilesCheck_3_ValidateSpace(@NonNull FragmentActivity context, @NonNull IndexItem[] items,
+	                                                @NonNull DownloadValidatedCallback callback) {
 		long szChangeLong = 0;
 		long szMaxTempLong = 0;
 		int i = 0;
@@ -178,16 +194,17 @@ public class DownloadValidationManager {
 				builder.setMessage(MessageFormat.format(message, i, szChange, availableSpace));
 			}
 			builder.setPositiveButton(R.string.shared_string_yes, (dialog, which) ->
-					downloadFileCheckFinalRun(context, items));
+					downloadFileCheckFinalRun(context, items, callback));
 			builder.setNegativeButton(R.string.shared_string_no, null);
 			builder.show();
 		} else {
-			downloadFileCheckFinalRun(context, items);
+			downloadFileCheckFinalRun(context, items, callback);
 		}
 	}
 
-	private void downloadFileCheckFinalRun(@NonNull FragmentActivity context, IndexItem[] items) {
-		downloadThread.runDownloadFiles(items);
+	private void downloadFileCheckFinalRun(@NonNull FragmentActivity context, @NonNull IndexItem[] items,
+	                                       @NonNull DownloadValidatedCallback callback) {
+		callback.onDownloadValidated(items);
 		if (context instanceof DownloadEvents) {
 			((DownloadEvents) context).downloadInProgress();
 		}

@@ -1,5 +1,7 @@
 package net.osmand.plus.download;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -226,6 +228,7 @@ public class DownloadFileHelper {
 					return false;
 				}
 			}
+			removeFilesAfterSuccessfulInstall(de);
 			if (de.type == DownloadActivityType.SRTM_COUNTRY_FILE) {
 				removePreviousSrtmFile(de);
 			}
@@ -237,6 +240,26 @@ public class DownloadFileHelper {
 			// Possibly file is corrupted
 			Algorithms.removeAllFiles(de.fileToDownload);
 			return false;
+		}
+	}
+
+	private void removeFilesAfterSuccessfulInstall(@NonNull DownloadEntry entry) {
+		if (entry.targetFile == null || entry.filesToDeleteAfterSuccessfulInstall == null) {
+			return;
+		}
+		File targetFile = entry.targetFile.getAbsoluteFile();
+		boolean filesRemoved = false;
+		for (File file : entry.filesToDeleteAfterSuccessfulInstall) {
+			if (file != null && file.exists() && !targetFile.equals(file.getAbsoluteFile())) {
+				boolean successful = Algorithms.removeAllFiles(file);
+				if (successful) {
+					ctx.getResourceManager().closeFile(file.getName());
+					filesRemoved = true;
+				}
+			}
+		}
+		if (filesRemoved) {
+			ctx.getDownloadThread().updateLoadedFiles();
 		}
 	}
 
