@@ -17,7 +17,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.importfiles.ImportHelper;
@@ -182,8 +181,7 @@ public class FavoriteFoldersFragment extends BaseFavoriteListFragment
 	}
 
 	private void sortItems(@NonNull List<Object> items, @NonNull FavoriteListSortMode sortMode) {
-		LatLon latLon = app.getMapViewTrackingUtilities().getDefaultLocation();
-		items.sort(new FavoriteComparator(sortMode, latLon, app));
+		items.sort(new FavoriteComparator(sortMode, app));
 	}
 
 	@Override

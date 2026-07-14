@@ -10,6 +10,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.Street;
 import net.osmand.search.core.HashQuadTree;
+import net.osmand.search.core.spatial.SpatialPoiSearch.SpatialPoiType;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -107,13 +108,30 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 			if (r.atom.bldObject != null) {
 				o.add(r.atom.bldObject);
 			}
-			if (!o.contains(r.atom.object)) {
+			if (r.atom.object != null && !o.contains(r.atom.object)) {
 				o.add(r.atom.object);
 			}
 		}
 		return o;
 	}
-	
+
+	public boolean hasPoiTypes() {
+		return objs.stream().anyMatch(r -> r.atom.isPoiCategory());
+	}
+
+	public List<SpatialPoiType> getPoiTypes(SpatialPoiSearch poiSearch) {
+		List<SpatialPoiType> types = new ArrayList<>();
+		for (SpatialSearchResultRef r : objs) {
+			if (r.atom.isPoiCategory()) {
+				SpatialPoiType type = poiSearch.getById((int)r.atom.id);
+				if (type != null) {
+					types.add(type);
+				}
+			}
+		}
+		return types;
+	}
+
 	public LatLon getLatLon() {
 		if (preciseLatlon != null) {
 			return preciseLatlon;
@@ -125,7 +143,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		}
 		return null;
 	}
-	
+
 	public int visibleLevel() {
 		return visibleLevel;
 	}

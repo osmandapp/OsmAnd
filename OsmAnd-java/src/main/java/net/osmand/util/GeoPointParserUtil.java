@@ -716,7 +716,7 @@ public class GeoPointParserUtil {
 			if (lat == 0.0 && lon == 0.0 && positionInSearchRequestMatcher.find()) {
 				double tempLat = Double.valueOf(positionInSearchRequestMatcher.group(1));
 				double tempLon = Double.valueOf(positionInSearchRequestMatcher.group(2));
-				if (tempLat >= -90 && tempLat <= 90 && tempLon >= -180 && tempLon <= 180) {
+				if (MapUtils.isValidLatLon(tempLat, tempLon)) {
 					lat = tempLat;
 					lon = tempLon;
 				}

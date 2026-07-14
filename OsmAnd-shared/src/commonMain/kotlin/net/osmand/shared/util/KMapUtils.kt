@@ -232,6 +232,10 @@ object KMapUtils {
 		return adjustedLongitude
 	}
 
+	fun isValidLatLon(latitude: Double, longitude: Double): Boolean {
+		return latitude in -90.0..90.0 && longitude in MIN_LONGITUDE..MAX_LONGITUDE
+	}
+
 	fun checkLatitude(latitude: Double): Double {
 		if (latitude in MIN_LATITUDE..MAX_LATITUDE) {
 			return latitude

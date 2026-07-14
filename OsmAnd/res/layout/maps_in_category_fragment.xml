@@ -18,11 +18,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include
-        layout="@layout/free_version_banner"
-        android:background="#F00"/>
-
-    <include layout="@layout/progress_with_two_texts"/>
+    <include layout="@layout/progress_with_two_texts" />
 
     <ExpandableListView
         android:id="@+id/category_list"
@@ -30,7 +26,6 @@
         android:layout_height="0dp"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
-        android:layout_marginTop="0dp"
         android:layout_weight="1"
         android:dividerHeight="0.5dp"
         android:divider="?attr/ctx_menu_info_divider"

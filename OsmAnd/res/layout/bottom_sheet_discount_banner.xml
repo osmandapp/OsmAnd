@@ -26,13 +26,13 @@
 		<FrameLayout
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/toolbar_height"
-			android:paddingLeft="@dimen/content_padding"
-			android:paddingRight="@dimen/content_padding">
+			android:paddingLeft="@dimen/content_padding_half"
+			android:paddingRight="@dimen/content_padding_half">
 
 			<FrameLayout
 				android:id="@+id/close_button"
-				android:layout_width="@dimen/toolbar_height"
-				android:layout_height="@dimen/toolbar_height"
+				android:layout_width="@dimen/acceptable_touch_radius"
+				android:layout_height="@dimen/acceptable_touch_radius"
 				android:layout_gravity="start|center_vertical"
 				android:background="?attr/selectableItemBackground">
 
@@ -58,6 +58,7 @@
 				android:layout_height="wrap_content"
 				android:layout_gravity="end|center_vertical"
 				android:gravity="center"
+				android:layout_marginEnd="@dimen/content_padding_small"
 				android:paddingHorizontal="@dimen/content_padding_small"
 				android:paddingVertical="@dimen/content_padding_half"
 				android:text="@string/shared_string_restore"
@@ -71,16 +72,17 @@
 			android:id="@+id/plan_content"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:orientation="vertical">
+			android:orientation="vertical"
+			android:layout_marginStart="@dimen/content_padding_small"
+			android:layout_marginEnd="@dimen/content_padding_small">
 
 			<LinearLayout
 				android:id="@+id/header"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_marginBottom="@dimen/content_padding_small"
 				android:orientation="vertical"
-				android:paddingLeft="@dimen/content_padding"
-				android:paddingRight="@dimen/content_padding">
+				android:paddingLeft="@dimen/content_padding_small"
+				android:paddingRight="@dimen/content_padding_small">
 
 				<androidx.appcompat.widget.AppCompatImageView
 					android:id="@+id/header_icon"
@@ -94,7 +96,7 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_gravity="center_horizontal"
-					android:layout_marginTop="@dimen/content_padding_half"
+					android:layout_marginTop="@dimen/content_padding"
 					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/big_header_text_size"
 					app:typefaceWeight="medium"
@@ -106,48 +108,40 @@
 				android:id="@+id/primary_description_container"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_marginTop="@dimen/content_padding_half"
+				android:layout_marginTop="@dimen/content_padding_small"
 				android:gravity="center_horizontal"
 				android:orientation="vertical"
-				android:paddingLeft="@dimen/content_padding"
-				android:paddingRight="@dimen/content_padding">
+				android:paddingLeft="@dimen/content_padding_small"
+				android:paddingRight="@dimen/content_padding_small"
+				>
 
 				<net.osmand.plus.widgets.TextViewEx
 					android:id="@+id/primary_description"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:gravity="center_horizontal"
-					android:textColor="?android:textColorPrimary"
+					android:textColor="?android:textColorSecondary"
 					android:textSize="@dimen/default_list_text_size"
 					tools:text="Get OsmAnd Cloud to store all OsmAnd data online." />
 			</LinearLayout>
-
-			<View
-				android:layout_width="match_parent"
-				android:layout_height="1dp"
-				android:layout_marginTop="@dimen/content_padding_small"
-				android:background="?attr/divider_color_basic" />
 
 			<net.osmand.plus.widgets.FlowLayout
 				android:id="@+id/list_container"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_marginTop="@dimen/content_padding_half"
-				android:paddingLeft="@dimen/content_padding"
-				android:paddingRight="@dimen/content_padding"
+				android:layout_marginTop="@dimen/content_padding_small_double"
+				android:layout_marginStart="@dimen/content_padding_small"
+				android:layout_marginEnd="@dimen/content_padding_small"
 				app:horizontalItemsSpacing="@dimen/content_padding_half"
 				app:verticalItemsSpacing="@dimen/content_padding_half" />
-
-			<View
-				android:layout_width="match_parent"
-				android:layout_height="@dimen/content_padding_small" />
 
 			<LinearLayout
 				android:id="@+id/purchase_buttons"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_marginLeft="@dimen/content_padding"
-				android:layout_marginRight="@dimen/content_padding"
+				android:layout_marginTop="@dimen/content_padding_small_double"
+				android:layout_marginLeft="@dimen/content_padding_small"
+				android:layout_marginRight="@dimen/content_padding_small"
 				android:orientation="vertical">
 
 				<LinearLayout

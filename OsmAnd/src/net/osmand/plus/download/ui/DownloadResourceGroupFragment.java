@@ -7,6 +7,7 @@ import static net.osmand.plus.download.ui.DownloadItemFragment.updateImagesPager
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -122,22 +123,38 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment
 
 		setHasOptionsMenu(true);
 
-		if (openAsDialog()) {
-			banner = new BannerAndDownloadFreeVersion(view, (DownloadActivity) getActivity(), false);
-		} else {
-			banner = null;
-			view.findViewById(R.id.freeVersionBanner).setVisibility(View.GONE);
-		}
 		listView = view.findViewById(R.id.category_list);
+		listView.setHeaderDividersEnabled(false);
+		listView.setDivider(new ColorDrawable(ColorUtilities.getActivityBgColor(activity, nightMode)));
+		addDownloadCategoryHeader(view);
+		addFreeVersionBannerRow();
 		addSubscribeEmailRow();
 		addSearchRow();
 		addRestorePurchasesRow();
 		addDescriptionRow();
+		listView.setHeaderDividersEnabled(false);
 		listView.setOnChildClickListener(this);
 		listAdapter = new DownloadResourceGroupAdapter(activity);
 		listView.setAdapter(listAdapter);
+		listView.setHeaderDividersEnabled(false);
 
 		return view;
+	}
+
+	private void addDownloadCategoryHeader(@NonNull View view) {
+		if (openAsDialog()) {
+			View headerView = inflate(R.layout.free_version_banner_header, listView, false);
+			listView.addHeaderView(headerView);
+			banner = new BannerAndDownloadFreeVersion(view, headerView, activity, false);
+		}
+	}
+
+	private void addFreeVersionBannerRow() {
+		if (!openAsDialog()) {
+			View bannerView = inflate(R.layout.free_version_banner_header, listView, false);
+			listView.addHeaderView(bannerView);
+			banner = new BannerAndDownloadFreeVersion(bannerView, activity, false);
+		}
 	}
 
 	@Override
@@ -190,6 +207,7 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment
 
 	private void addDescriptionRow() {
 		descriptionView = inflate(R.layout.group_description_item, listView, false);
+		descriptionView.setVisibility(View.GONE);
 		listView.addHeaderView(descriptionView);
 	}
 
@@ -202,11 +220,9 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment
 			title.setHint(R.string.search_map_hint);
 			searchView.setOnClickListener(v -> SearchDialogFragment.showInstance(requireActivity(), ""));
 			listView.addHeaderView(searchView);
-			listView.setHeaderDividersEnabled(true);
 			IndexItem worldBaseMapItem = downloadThread.getIndexes().getWorldBaseMapItem();
 			if (worldBaseMapItem == null || !worldBaseMapItem.isDownloaded()) {
 				searchView.findViewById(R.id.title).setVisibility(View.GONE);
-				listView.setHeaderDividersEnabled(false);
 			}
 		}
 	}
@@ -217,7 +233,6 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment
 			worldBaseMapItem = downloadThread.getIndexes().getWorldBaseMapItem();
 			if (worldBaseMapItem != null && worldBaseMapItem.isDownloaded()) {
 				searchView.findViewById(R.id.title).setVisibility(View.VISIBLE);
-				listView.setHeaderDividersEnabled(true);
 			}
 		}
 		if (restorePurchasesView != null && restorePurchasesView.findViewById(R.id.container).getVisibility() == View.GONE
@@ -253,10 +268,12 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment
 					LockableViewPager viewPager = descriptionView.findViewById(R.id.images_pager);
 					updateImagesPager(app, descriptionInfo, viewPager);
 
+					descriptionView.setVisibility(View.VISIBLE);
 					descriptionView.findViewById(R.id.container).setVisibility(View.VISIBLE);
 					return;
 				}
 			}
+			descriptionView.setVisibility(View.GONE);
 			descriptionView.findViewById(R.id.container).setVisibility(View.GONE);
 		}
 	}
@@ -398,6 +415,9 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment
 							settings.EMAIL_SUBSCRIBED.set(true);
 							hideSubscribeEmailView();
 							activity.updateBanner();
+							if (banner != null) {
+								banner.updateBannerInProgress();
+							}
 						}
 					} catch (JSONException e) {
 						String message = "JSON parsing error: " + (e.getMessage() == null ? "unknown" : e.getMessage());
@@ -418,6 +438,9 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment
 	@Override
 	public void onItemPurchased(String sku, boolean active) {
 		downloadThread.runReloadIndexFilesSilent();
+		if (banner != null) {
+			banner.updateFreeVersionBanner();
+		}
 	}
 
 	@Override

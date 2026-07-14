@@ -11,6 +11,7 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="sort_by_nearest_to_current_location">Nearest to current location</string>
 	<string name="attached_media_delete_confirmation">Delete %1$d media items from this point? Media stored by the app and not attached anywhere else will also be deleted from the device.</string>
 	<string name="duplicate_map">Duplicate map</string>
 	<string name="duplicate_map_standard_exists_desc">You already have the standard map for %1$s. Downloading the road-only map will duplicate data and may degrade performance.\n\nReplacing will remove address search and POI data included in the standard map.</string>

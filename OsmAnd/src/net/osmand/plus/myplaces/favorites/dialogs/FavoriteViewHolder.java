@@ -167,8 +167,9 @@ public class FavoriteViewHolder extends RecyclerView.ViewHolder {
 
 	public void bindLocation(@NonNull FavoriteListSortMode sortMode, @NonNull FavouritePoint favouritePoint,
 	                         boolean showFolderNameOnSecondLine) {
+		LatLon fromLoc = FavoriteSortModesHelper.getDisplayReferenceLocation(app, sortMode);
 		LatLon toLoc = new LatLon(favouritePoint.getLatitude(), favouritePoint.getLongitude());
-		UpdateLocationInfo info = new UpdateLocationInfo(app, null, toLoc);
+		UpdateLocationInfo info = new UpdateLocationInfo(app, fromLoc, toLoc);
 		String descriptionText = getFormattedDistance(app, info, locationViewCache).toString();
 		updateDirectionDrawable(app, directionIcon, info, locationViewCache);
 

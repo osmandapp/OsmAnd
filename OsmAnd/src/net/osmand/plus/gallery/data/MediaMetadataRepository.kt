@@ -8,9 +8,8 @@ import net.osmand.shared.media.domain.MediaItem
  * Decoded metadata of a media item used by the gallery UI.
  *
  * All fields are optional: the current temporary implementation fills what it
- * can read locally (size, date, duration), while [latLon], [heading] and
- * [posterUri] are reserved for the future backend (Nearest sorting, heading
- * metadata, backend-provided poster thumbnails).
+ * can read locally (size, date, duration, location), while [heading] and
+ * [posterUri] are reserved for the future backend.
  */
 data class GalleryMediaMetadata(
 	val sizeBytes: Long? = null,

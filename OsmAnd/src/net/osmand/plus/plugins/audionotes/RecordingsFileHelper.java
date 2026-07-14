@@ -14,6 +14,7 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.DataTileManager;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.media.MediaMetadataUtils;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -27,7 +28,6 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -95,26 +95,26 @@ public class RecordingsFileHelper {
 			return false;
 		}
 		Recording recording = new Recording(file);
-		String fileName = file.getName();
-		String otherName = recording.getOtherName(fileName);
-		int i = otherName.indexOf('.');
-		if (i > 0) {
-			otherName = otherName.substring(0, i);
+
+		String legacyFileName = recording.getOtherName(file.getName());
+		Location fileLocation = MediaMetadataUtils.getLocation(file, legacyFileName);
+		if (fileLocation != null) {
+			recording.setLatitude(fileLocation.getLatitude());
+			recording.setLongitude(fileLocation.getLongitude());
+		} else {
+			int separator = legacyFileName.indexOf('.');
+			String shortLink = separator > 0 ? legacyFileName.substring(0, separator) : legacyFileName;
+			GeoParsedPoint point = MapUtils.decodeShortLinkString(shortLink);
+			recording.setLatitude(point.getLatitude());
+			recording.setLongitude(point.getLongitude());
+			log.warn("Recording location resolved with legacy fallback: " + file.getAbsolutePath());
 		}
-		recording.setFile(file);
-		GeoParsedPoint geo = MapUtils.decodeShortLinkString(otherName);
-		recording.setLatitude(geo.getLatitude());
-		recording.setLongitude(geo.getLongitude());
 		Float heading = app.getLocationProvider().getHeading();
 		Location loc = app.getLocationProvider().getLastKnownLocation();
 
 		if (updatePhotoInformation) {
 			float rot = heading != null ? heading : 0;
-			try {
-				recording.updatePhotoInformation(recording.getLatitude(), recording.getLongitude(), loc, rot == 0 ? Double.NaN : rot);
-			} catch (IOException e) {
-				log.error("Error updating EXIF information " + e.getMessage(), e);
-			}
+			MediaMetadataUtils.updatePhotoInformation(file, recording.getLatitude(), recording.getLongitude(), loc, rot == 0 ? Double.NaN : rot);
 		}
 		recordings.registerObject(recording.getLatitude(), recording.getLongitude(), recording);
 

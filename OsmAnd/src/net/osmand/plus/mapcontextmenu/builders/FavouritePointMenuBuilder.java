@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
+import net.osmand.data.AdditionalInfoBundle;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -94,7 +95,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 		buildCommentRow(view, point.getComment());
 
 		if (!Algorithms.isEmpty(amenityExtensions)) {
-			AdditionalInfoBundle bundle = new AdditionalInfoBundle(app, amenityExtensions);
+			AdditionalInfoBundle bundle = new AdditionalInfoBundle(app.getPoiTypes(), amenityExtensions);
 			AmenityUIHelper helper = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), bundle);
 			helper.setLight(isLightContent());
 			helper.setLatLon(getLatLon());

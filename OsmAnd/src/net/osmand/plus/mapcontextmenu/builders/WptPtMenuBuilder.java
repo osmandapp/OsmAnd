@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.IndexConstants;
+import net.osmand.data.AdditionalInfoBundle;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -137,7 +138,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 
 		if (!Algorithms.isEmpty(amenityExtensions)) {
 			boolean light = isLightContent();
-			AdditionalInfoBundle bundle = new AdditionalInfoBundle(app, amenityExtensions);
+			AdditionalInfoBundle bundle = new AdditionalInfoBundle(app.getPoiTypes(), amenityExtensions);
 			AmenityUIHelper helper = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), bundle);
 			helper.setLight(light);
 			helper.setLatLon(getLatLon());

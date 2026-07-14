@@ -10,22 +10,19 @@ import android.media.MediaPlayer;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 
-import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.media.MediaCaptureHelper;
+import net.osmand.plus.media.MediaMetadataUtils;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
 import java.text.DateFormat;
 
 public class Recording {
@@ -214,74 +211,8 @@ public class Recording {
 		return file.getName().endsWith(THREEGP_EXTENSION);
 	}
 
-	private String convertDegToExifRational(double l) {
-		if (l < 0) {
-			l = -l;
-		}
-		String s = ((int) l) + "/1,"; // degrees
-		l = (l - ((int) l)) * 60.0;
-		s += (int) l + "/1,"; // minutes
-		l = (l - ((int) l)) * 60000.0;
-		s += (int) l + "/1000"; // seconds
-		// log.info("deg rational: " + s);
-		return s;
-	}
-
-	@SuppressWarnings("rawtypes")
-	public void updatePhotoInformation(double lat, double lon, Location loc,
-			double rot) throws IOException {
-		try {
-			Class exClass = Class.forName("android.media.ExifInterface");
-
-			Constructor c = exClass.getConstructor(String.class);
-			Object exInstance = c.newInstance(file.getAbsolutePath());
-			Method setAttribute = exClass.getMethod("setAttribute", String.class, String.class);
-			setAttribute.invoke(exInstance, "GPSLatitude", convertDegToExifRational(lat));
-			setAttribute.invoke(exInstance, "GPSLatitudeRef", lat > 0 ? "N" : "S");
-			setAttribute.invoke(exInstance, "GPSLongitude", convertDegToExifRational(lon));
-			setAttribute.invoke(exInstance, "GPSLongitudeRef", lon > 0 ? "E" : "W");
-			if (!Double.isNaN(rot)) {
-				setAttribute.invoke(exInstance, "GPSImgDirectionRef", "T");
-				while (rot < 0) {
-					rot += 360;
-				}
-				while (rot > 360) {
-					rot -= 360;
-				}
-				int abs = (int) (Math.abs(rot) * 100.0);
-				String rotString = abs + "/100";
-				setAttribute.invoke(exInstance, "GPSImgDirection", rotString);
-			}
-			if (loc != null && loc.hasAltitude()) {
-				double alt = loc.getAltitude();
-				String altString = (int) (Math.abs(alt) * 100.0) + "/100";
-				setAttribute.invoke(exInstance, "GPSAltitude", altString);
-				setAttribute.invoke(exInstance, "GPSAltitudeRef", alt < 0 ? "1" : "0");
-			}
-			Method saveAttributes = exClass.getMethod("saveAttributes");
-			saveAttributes.invoke(exInstance);
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-		}
-	}
-
-	@SuppressWarnings("rawtypes")
-	private int getExifOrientation() {
-		int orientation = 0;
-		try {
-			Class exClass = Class.forName("android.media.ExifInterface");
-			Constructor c = exClass.getConstructor(String.class);
-			Object exInstance = c.newInstance(file.getAbsolutePath());
-			Method getAttributeInt = exClass.getMethod("getAttributeInt", String.class, Integer.TYPE);
-			orientation = (Integer) getAttributeInt.invoke(exInstance, "Orientation", 1);
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-		}
-		return orientation;
-	}
-
 	public int getBitmapRotation() {
-		return switch (getExifOrientation()) {
+		return switch (MediaMetadataUtils.getExifOrientation(file)) {
 			case 3 -> 180;
 			case 6 -> 90;
 			case 8 -> 270;
@@ -295,8 +226,7 @@ public class Recording {
 			return ctx.getString(R.string.recording_photo_description, "", time).trim();
 		}
 		updateInternalDescription();
-		return ctx.getString(R.string.recording_description, "", getDuration(ctx, true), time)
-				.trim();
+		return ctx.getString(R.string.recording_description, "", getDuration(ctx, true), time).trim();
 	}
 
 	public String getSmallDescription(Context ctx) {

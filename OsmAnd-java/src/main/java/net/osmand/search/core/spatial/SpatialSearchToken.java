@@ -54,6 +54,11 @@ public class SpatialSearchToken {
 	HashQuadTree<Integer> quadTree = new HashQuadTree<>(16);
 	TLongObjectHashMap<NameIndexAtom> indexByOsmIds = new TLongObjectHashMap<>();
 	Set<Integer> deletedAtoms = new HashSet<Integer>();
+	
+	// partial place holder
+	List<NameIndexAtom> partialCommonAtoms = new ArrayList<>();
+	List<List<SpatialSearchToken>> partialOtherCommonAtoms = new ArrayList<>();
+	List<Boolean> partialNonNumericCommonAtoms = new ArrayList<>();
 
 	CollatorStringMatcher collatorMain;
 	CollatorStringMatcher noDotCollatorMain;
@@ -100,12 +105,10 @@ public class SpatialSearchToken {
 		}
 	}
 	
-	
-
-	public Set<String> getWordSplitAsBuidingName() {
-		return bldWordSplit;
+	public boolean likelyPartOfBuilding() {
+		return Abbreviations.likelyPartOfBuilding(word, bldWordSplit);
 	}
-	
+
 	public CollatorStringMatcher getMainCollator() {
 		return collatorMain;
 	}
@@ -190,24 +193,24 @@ public class SpatialSearchToken {
 			indexByOsmIds.put(osmId, atom);
 		}
 
-		NameIndexAtom aa = index.get(atom.id);
-		if (aa != null) {
-			if (aa != atom) {
+		NameIndexAtom existing = index.get(atom.id);
+		if (existing != null) {
+			if (existing != atom) {
+				// compare convention like method important!
 				// select shortest available version
-				boolean replace = false;
-				if (atom.otherWordsCnt < aa.otherWordsCnt
-						|| (atom.otherWordsCnt == aa.otherWordsCnt && aa.otherFoundCnt > atom.otherFoundCnt)) {
-					replace = true;
-				}
-				// '2 south 2nd street' vs '25 садова вулиця' (25-та) -
-				if (aa.isBuilding() && !atom.isBuilding() 
-						&& atom.otherWordsCnt <= aa.otherWordsCnt
-						&& aa.otherFoundCnt < atom.otherFoundCnt) {
+				int res = Integer.compare(atom.otherWordsCnt, existing.otherWordsCnt);
+				if (res == 0) {
+					// '2 south 2nd street' vs '25 садова вулиця' (25-та) -
 					// replace street (has number in name) with building
-					replace = true;
+					res = Boolean.compare(atom.isBuilding(), existing.isBuilding());
 				}
+				if (res == 0) {
+					// shorter version
+					res = Integer.compare(atom.otherFoundCnt, existing.otherFoundCnt);
+				}
+				boolean replace = res < 0;
 				if (replace) {
-					atom.indexInToken = aa.indexInToken;
+					atom.indexInToken = existing.indexInToken;
 					index.put(atom.id, atom);
 					atoms.set(atom.indexInToken, atom);
 				}
@@ -257,6 +260,28 @@ public class SpatialSearchToken {
 			}
 		}
 		return false;
+	}
+	
+	public List<NameIndexAtom> getPartialCommonAtoms() {
+		return partialCommonAtoms;
+	}
+	
+	public void clearPartialAtoms() {
+		partialCommonAtoms.clear();
+	}
+	
+	public List<SpatialSearchToken> getPartialOtherTokens(int i) {
+		return partialOtherCommonAtoms.get(i);
+	}
+	
+	public boolean getPartialNumericNonMatch(int i) {
+		return partialNonNumericCommonAtoms.get(i);
+	}
+	
+	public void addPartialCommonAtom(NameIndexAtom atom, List<SpatialSearchToken> otherTokens, boolean numericNotMatch) {
+		partialCommonAtoms.add(atom);
+		partialOtherCommonAtoms.add(otherTokens);
+		partialNonNumericCommonAtoms.add(numericNotMatch);
 	}
 	
 	String[] matchSplitName(String name) {
@@ -479,6 +504,11 @@ public class SpatialSearchToken {
 				int otherFoundCnt, NameIndexAtomXY coords, int nearbyRadius) {
 			this(name, type, id, pid, obj, cityAsStreet, otherWordsCnt, otherFoundCnt, coords, nearbyRadius, -1);
 		}
+		
+		NameIndexAtom(NameIndexAtom cp) {
+			this(cp.name, cp.type, cp.id, cp.parentid, cp.object, cp.cityAsStreet, cp.otherWordsCnt, cp.otherFoundCnt,
+					cp.coords, cp.nearbyRadius, cp.buildingInd);
+		}
 
 		NameIndexAtom(String name, int type, long id, long pid, MapObject obj, boolean cityAsStreet, int otherWordsCnt,
 				int otherFoundCnt, NameIndexAtomXY coords, int nearbyRadius, int buildingInd) {
@@ -575,10 +605,10 @@ public class SpatialSearchToken {
 			return object != null ? object.toString() : simpleName(name);
 		}
 
-
-
 	}
 
+
+	
 
 
 }

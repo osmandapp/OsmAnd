@@ -23,79 +23,98 @@ public class Abbreviations {
 	
 	private static final Set<String> commonSkipOtherCnt = new TreeSet<>();
 
-    static {
-    	// articles
-    	conjunctions.add("the");
-		conjunctions.add("der");
-		conjunctions.add("den");
-		conjunctions.add("die");
-		conjunctions.add("das");
-		conjunctions.add("la");
-		conjunctions.add("le");
-		conjunctions.add("el");
-		conjunctions.add("il");
+	private static void addDirectionWord(String key, String full) {
+		abbreviations.put(key, full);
+		commonSkipOtherCnt.add(key);
+		commonSkipOtherCnt.add(full.toLowerCase());
+	}
+
+	private static void addStreetStatus(String key, String full) {
+		abbreviations.put(key, full);
+		commonSkipOtherCnt.add(key);
+		commonSkipOtherCnt.add(full.toLowerCase());
+	}
+
+	private static void addConjunction(String key) {
+		conjunctions.add(key);
+		commonSkipOtherCnt.add(key);
+	}
+
+	static {
+		// articles
+		addConjunction("the");
+		addConjunction("de");
+		addConjunction("du");
+		addConjunction("der");
+		addConjunction("den");
+		addConjunction("die");
+		addConjunction("das");
+		addConjunction("la");
+		addConjunction("le");
+		addConjunction("el");
+		addConjunction("il");
+		addConjunction("of");
+
 		// and
-		conjunctions.add("and");
-		conjunctions.add("und");
-		conjunctions.add("en");
-		conjunctions.add("et");
-		conjunctions.add("y");
-		conjunctions.add("и");
-    }
-    
-    private static void addAbbrDirStatus(String key, String full) {
-    	abbreviations.put(key, full);
-    	commonSkipOtherCnt.add(key);
-    	commonSkipOtherCnt.add(full.toLowerCase());
-    }
-    static {
-    	addAbbrDirStatus("e", "East");
-    	addAbbrDirStatus("w", "West");
-    	addAbbrDirStatus("s", "South");
-    	addAbbrDirStatus("n", "North");
-    	addAbbrDirStatus("sw", "Southwest");
-    	addAbbrDirStatus("se", "Southeast");
-    	addAbbrDirStatus("nw", "Northwest");
-    	addAbbrDirStatus("ne", "Northeast");
-    	addAbbrDirStatus("ln", "Lane");
-    	addAbbrDirStatus("dr", "Drive");
-    	addAbbrDirStatus("rd", "Road");
-    	addAbbrDirStatus("av", "Avenue");
-    	addAbbrDirStatus("st", "Street"); // 2 values could be saint
-    	addAbbrDirStatus("hwy", "Highway");
-    	addAbbrDirStatus("blvd", "Boulevard");
-    }
-    
-    static {
-    	searchAbbreviations.putAll(abbreviations);
-        searchAbbreviations.put("ave", "Avenue"); // extra
-        searchAbbreviations.put("st", "Street Saint"); // 2 values could be saint
-        // duplicates - synonyms and not abbrevations actually
-        searchAbbreviations.put("о", "Остров");
-        searchAbbreviations.put("остров", "о.");
-        searchAbbreviations.put("1st", "First");
-        searchAbbreviations.put("2nd", "Second");
-        searchAbbreviations.put("3rd", "Third");
-        searchAbbreviations.put("first", "1st");
-        searchAbbreviations.put("second", "2nd");
-        searchAbbreviations.put("third", "3rd");
-    }
-    
-    static {
-    	// french
-    	buildingAbbreviations.put("bis", "Bis");
-    	buildingAbbreviations.put("ter", "Ter");
-    	buildingAbbreviations.put("quater", "Quater");
-    	// american
-    	buildingAbbreviations.put("bldg", "Building");
-    	buildingAbbreviations.put("ste", "Suite");
-    	buildingAbbreviations.put("unt", "Unit");
-    	buildingAbbreviations.put("apt", "Apartment");
-    	buildingAbbreviations.put("fl", "Floor");
-    	buildingAbbreviations.put("flr", "Floor");
-    	buildingAbbreviations.put("bsmt", "Basement");
-    }
-    
+		addConjunction("and");
+		addConjunction("und");
+		addConjunction("en");
+		addConjunction("et");
+		addConjunction("y");
+		addConjunction("и");
+
+		// direction
+		addDirectionWord("e", "East");
+		addDirectionWord("w", "West");
+		addDirectionWord("s", "South");
+		addDirectionWord("n", "North");
+		addDirectionWord("sw", "Southwest");
+		addDirectionWord("se", "Southeast");
+		addDirectionWord("nw", "Northwest");
+		addDirectionWord("ne", "Northeast");
+
+		// street status
+		addStreetStatus("ln", "Lane");
+		addStreetStatus("dr", "Drive");
+		addStreetStatus("rd", "Road");
+		addStreetStatus("av", "Avenue");
+		addStreetStatus("st", "Street"); // 2 values could be saint
+		addStreetStatus("hwy", "Highway");
+		addStreetStatus("blvd", "Boulevard");
+	}
+
+	static {
+		searchAbbreviations.putAll(abbreviations);
+		searchAbbreviations.put("ave", "Avenue"); // extra
+		searchAbbreviations.put("st", "Street Saint"); // 2 values could be saint
+		// duplicates - synonyms and not abbrevations actually
+		searchAbbreviations.put("о", "Остров");
+		searchAbbreviations.put("остров", "о.");
+		searchAbbreviations.put("1st", "First");
+		searchAbbreviations.put("2nd", "Second");
+		searchAbbreviations.put("3rd", "Third");
+		searchAbbreviations.put("first", "1st");
+		searchAbbreviations.put("second", "2nd");
+		searchAbbreviations.put("third", "3rd");
+	}
+
+	// common housenumber additions
+	static {
+		// french
+		buildingAbbreviations.put("bis", "Bis");
+		buildingAbbreviations.put("ter", "Ter");
+		buildingAbbreviations.put("quater", "Quater");
+		// american
+		buildingAbbreviations.put("bldg", "Building");
+		buildingAbbreviations.put("ste", "Suite");
+		buildingAbbreviations.put("unt", "Unit");
+		buildingAbbreviations.put("apt", "Apartment");
+		buildingAbbreviations.put("fl", "Floor");
+		buildingAbbreviations.put("flr", "Floor");
+		buildingAbbreviations.put("bsmt", "Basement");
+	}
+
+	// search v-2
 	public static boolean likelyPartOfBuilding(String word, Set<String> wordSplit) {
 		boolean bldNum = (SearchAlgorithms.isNumber2Letters(word) || word.length() == 1
 				|| buildingAbbreviations.containsKey(word));
@@ -115,19 +134,18 @@ public class Abbreviations {
 		return false;
 	}
     
-    public static String replace(String word) {
-        String value = abbreviations.get(word.toLowerCase());
-        return value != null ? value : word;
-    }
     
-    public static Map<String, String> getAbbreviations() {
-		return abbreviations;
-	}
-    
+    // search-v2
     public static Map<String, String> getSearchabbreviations() {
 		return searchAbbreviations;
 	}
+    
+    // search-v2
+ 	public static boolean isCommonSkipOtherCnt(String lowerCase) {
+ 		return commonSkipOtherCnt.contains(lowerCase);
+ 	}
 
+    // Indexing data
     public static String replaceAll(String phrase) {
         String[] words = phrase.split(SearchPhrase.DELIMITER);
         StringBuilder r = new StringBuilder();
@@ -146,12 +164,22 @@ public class Abbreviations {
         }
         return changed ? r.toString() : phrase;
     }
+    
+	// search-v1
+    public static Map<String, String> getAbbreviations() {
+		return abbreviations;
+	}
 
+	// search v-1
+    public static String replace(String word) {
+        String value = abbreviations.get(word.toLowerCase());
+        return value != null ? value : word;
+    }
+    
+    // search-v1
 	public static boolean isConjunction(String lowerCase) {
 		return conjunctions.contains(lowerCase);
 	}
 	
-	public static boolean isCommonSkipOtherCnt(String lowerCase) {
-		return commonSkipOtherCnt.contains(lowerCase);
-	}
+    
 }
