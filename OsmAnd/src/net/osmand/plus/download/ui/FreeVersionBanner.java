@@ -191,13 +191,12 @@ public class FreeVersionBanner {
 	}
 
 	private int getDownloadsLeft(boolean includeActiveTasks) {
-		return 0;
-//		int mapsDownloaded = settings.NUMBER_OF_FREE_DOWNLOADS.get();
-//		if (includeActiveTasks) {
-//			int activeTasks = activity.getDownloadThread().getCountedDownloads();
-//			mapsDownloaded += activeTasks;
-//		}
-//		int downloadsLeft = MAXIMUM_AVAILABLE_FREE_DOWNLOADS - mapsDownloaded;
-//		return Math.max(downloadsLeft, 0);
+		int mapsDownloaded = settings.NUMBER_OF_FREE_DOWNLOADS.get();
+		if (includeActiveTasks) {
+			int activeTasks = activity.getDownloadThread().getCountedDownloads();
+			mapsDownloaded += activeTasks;
+		}
+		int downloadsLeft = MAXIMUM_AVAILABLE_FREE_DOWNLOADS - mapsDownloaded;
+		return Math.max(downloadsLeft, 0);
 	}
 }

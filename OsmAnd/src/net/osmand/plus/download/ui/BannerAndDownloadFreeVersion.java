@@ -31,19 +31,13 @@ public class BannerAndDownloadFreeVersion {
 
 	private static final Log LOG = PlatformUtil.getLog(BannerAndDownloadFreeVersion.class);
 
-//	@Nullable
 	private final View progressLayout;
-//	@Nullable
 	private final ProgressBar progressBar;
-//	@Nullable
 	private final TextView leftTextView;
-//	@Nullable
 	private final TextView rightTextView;
 
 	private final DownloadActivity activity;
-//	@Nullable
 	private final FreeVersionBanner freeVersionBanner;
-//	@Nullable
 	private final View freeVersionBannerHeader;
 	private final boolean showSpace;
 
