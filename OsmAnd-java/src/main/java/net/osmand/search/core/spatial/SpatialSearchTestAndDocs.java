@@ -17,29 +17,9 @@ import net.osmand.util.SearchAlgorithms;
 
 
 //////////// TESTING //////////
-// REVIEW UI FILTER_MIN_WORDS_COUNT - 'New york plaza' ('the'), Issues Nova poshta Kharkiv 
-// TESTING Building interpolation, Street intersection match, bis matching
-// TESTING Slow 'New York 4 av' - 7.5s (1M), 'New York st' - 2s (700k) - OPTIMAL 
-// TESTING 11-nuon leons, Húns Huns 39a-MLN 8832kd, 
-// TESTING Filter results boundaries, <Salt Lake City>
 // TESTING Ignore same embedded boundary city / county - deduplicate on the fly (new york x4)
-// TESTING Duplicate words W&W
-// TESTING enlarge USA search boxes
 // TESTING test: merge boundaries bbox - extend incomplete boundary same id ... - npt fixed as we anyway enlarge
-// TESTING Cannaregio 539D Campo Saffa - Double 539D
-// TESTING Manhattan 57th street
-// TESTING Regierungsbezirk Stuttgart
-// TESTING "2 South 2nd Street Saint Clair";  street matched twice
-// TESTING Bratislava Billa - too many POI intersection results
 // TESTING Filter / group some categories: Public transport stops, City&Bike - New york?
-// TESTING 25 Школа владим.
-// TESTING 25 Садова вулиця! 2 Нова вулиця! 2 га Нова вулиця ! 25 та садова вулиця, 25 вулиця 2 вулиця
-// TESTING delete default enlarge and enlarge data
-// TESTING Venezia city Street / Place  -  <City Street> ('<Salt Lake City>') with Street ('Pennsylvania street') 
-// TESTING find check that token is reused in parent - and ignore intersection for complete mattch
-// TESTING POI CATEGORY Specific Healthcare specialties (Vegan) - https://github.com/osmandapp/OsmAnd/issues/24941
-// TESTING BUG: numbers obj- filter cafe & rest  + incorrect PrivatBank counts
-// TESTING check additional filter not stored old
 // TESTING Sort maps poi categories API search (sort bboxes?)
 // TESTING query = "Church Catedral-Basílica de Nuestra Señora del Pilar"; -  POI_TYPE /\ POI (SYNONYMS!)
 // TEST_ALLOW_HOUSE_POI_TYPE_INTERSECTION Review if poi doesn't have bbox don't intersect or add bbox! - Shell 2 Rožňavská (test)
@@ -50,12 +30,13 @@ import net.osmand.util.SearchAlgorithms;
 // TESTING OPTIM_READ_COMMON_WORDS_ATOMS !
 // REVIEW: POI / ADDRESS - France, Germany, US, Europe, China, Peru  
 //         TODO (TO FIX 'e.v.' 'a' 'b' 'c') - Bridge, refs, e.v. ...
-// AVENUE G https://github.com/osmandapp/OsmAnd/issues/15726
 
+// TODO AVENUE G https://github.com/osmandapp/OsmAnd/issues/15726
 // TODO INDEX: Speedup load after sorting - to limit objects (store elo in index)! 
 // TODO INDEX: Store Poi category index (effective intersection 'Church St. Miguel' - refactor checkAmenity)
 // TODO OBF POI CATEGORY Bboxes too large - investigate size (introduce for categories OBF) - OsmAndPoiNameIndexDataAtom, quad tree (90% < 10K)
 // TODO ANALYZE: too many wiki places on streets?
+// TODO Bank abc
 
 
 // TO DO Ivan
@@ -90,7 +71,6 @@ import net.osmand.util.SearchAlgorithms;
 // TODO highway=services
  
 /////////////// EXTRA FEATURES ///////////////
-
 // TODO Store and test conscription number for some cities - issue (RZR)
 // TODO Search in large parks, neighborhood same as in boundaries (index bbox POI), residential way/56238205
 // TODO Japan test, housename, block_number + housenumber, neighbourhood + quarter - street + India assign houses to suburbs / neighbourhood / blocks
@@ -343,7 +323,7 @@ public class SpatialSearchTestAndDocs {
 //		pattern = "Slovakia";
 //		query = "Bratislava Billa";
 //		settings.DEDUPLICATE_RES = false;
-//		settings.TEST_ALLOW_HOUSE_POI_TYPE_INTERSECTION = false;
+//		settings.ALLOW_HOUSE_POI_TYPE_INTERSECTION = false;
 //		query = "Shell 2 Rožňavská";
 		
 //		pattern = "Us_new-york_new"; // new-york, new-jersey

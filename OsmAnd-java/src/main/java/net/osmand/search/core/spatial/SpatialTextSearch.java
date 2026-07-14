@@ -60,6 +60,9 @@ public class SpatialTextSearch {
 		public boolean SEARCH_STREET_INTERSECTIONS = true;
 		public boolean SEARCH_POI_INTERSECTIONS = true;
 		public boolean SEARCH_POI_CATEGORIES = true;
+		
+		// performance tested (we need to turn on for <POI + Address> search)
+		public boolean ALLOW_HOUSE_POI_TYPE_INTERSECTION = true;
 		// no intersection recorded but streets are nearby
 		public boolean ALLOW_VIRTUAL_STREET_INTERSECTIONS = true;
 		
@@ -71,10 +74,19 @@ public class SpatialTextSearch {
 		// by deleting embedded or duplicate boundaries in each other
 		public boolean OPTIM_DELETE_EMBEDDED_BOUNDARIES = true;
 		
-		// In case POI is called 'Bratislava' it will be restricted to be searched as POIxPOI, POIxStreet
+		// In case POI is called 'Bratislava' it will be not allowed to be searched as POIxPOI, POIxStreet
 		// Related frequent POIs like "City&Bike 4th Street..." or public transport stops
 		public boolean OPTIM_FLAG_POI_SAME_AS_CITY_STREET = true;
 		public boolean OPTIM_DELETE_POI_SAME_AS_CITY_STREET = false; // not correct for new york the plaza
+		
+		// Performance improvement 
+		// 1. If object does have rare words and they are not in query - skip it 
+		//    Automatically implemented for common via index, for frequent disabled for now
+		// 2. If object does have other common words and they are not in query - skip it
+		// Problem search: School On Street - some schools have specifiers and some don't   
+		public boolean OPTIM_READ_COMMON_WORDS_ATOMS = true;
+		public int OPTIM_READ_COMMON_WORDS_LIMIT = 2000;
+
 		
 		// max prefixes for each name reader
 		public int AUTO_CLEAR_PREFIX_CACHE_LIMIT = 1000;
@@ -82,16 +94,12 @@ public class SpatialTextSearch {
 		// Deduplicate results in the end by checking osm id of the first object in combination
 		public boolean DEDUPLICATE_RES = true;
 		
-		// we need to test performance and results (we need to turn on for <POI + Address> search)
-		public boolean TEST_ALLOW_HOUSE_POI_TYPE_INTERSECTION = true;
-
 		// READ OBJECTS before intersection to reduce number of duplicates from
 		// different maps by osm id - needs to be tested performance mostly slows down
 		// ! Potential issue READ_ADDR_OBJECTS could deduplicate streets and 
 		//  building won't be found in case same street in cities
 		public boolean DEV_READ_ADDR_OBJECTS = false;
 		public boolean DEV_READ_POI_OBJECTS = false;
-
 		
 		// display only top 10
 		public int LIMIT_POI_CATEGORY_BY_FREQ = 15;
@@ -102,14 +110,6 @@ public class SpatialTextSearch {
 		
 		// no need to find 3 street intersection or 3 POI intersection
 		public int LIMIT_ATOMIC_OBJECTS = 2;
-
-		// Performance improvement 
-		// 1. If object does have rare words and they are not in query - skip it 
-		//    Automatically implemented for common via index, for frequent disabled for now
-		// 2. If object does have other common words and they are not in query - skip it
-		// Problem search: School On Street - some schools have specifiers and some don't   
-		public boolean OPTIM_READ_COMMON_WORDS_ATOMS = true;
-		public int OPTIM_READ_COMMON_WORDS_LIMIT = 2000;
 
 		// Limit evaluation intersection for unique objects
 		public int LIMIT_ALL_GOALS_MAX_UNIQUE_OBJECTS = 1000;
