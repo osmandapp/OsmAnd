@@ -212,6 +212,10 @@ public class ObfConstants {
 		return id > 0 && (id & SPLIT_BIT) == SPLIT_BIT;
 	}
 
+	public static boolean isTagNonIndexedForSearchAsName(String tag) {
+		return tag.equals("ref");
+	}
+	
 	public static boolean isTagIndexedForSearchAsName(String tag) {
 		if (tag != null) {
 			// search related but not direct

@@ -25,41 +25,42 @@ import net.osmand.util.SearchAlgorithms;
 // TEST_ALLOW_HOUSE_POI_TYPE_INTERSECTION Review if poi doesn't have bbox don't intersect or add bbox! - Shell 2 Rožňavská (test)
 
 ////////// IN PROGRESS //////////
-
 // TESTING INSPECTOR stats index_words_dashboard.html
 // TESTING OPTIM_READ_COMMON_WORDS_ATOMS !
 // REVIEW: POI / ADDRESS - France, Germany, US, Europe, China, Peru  
-//         TODO (TO FIX 'e.v.' 'a' 'b' 'c') - Bridge, refs, e.v. ...
+// TESTING: Fix 36K national park (don't index small islands > 100 POI !!!)
+
+// TODO DEDUPLICATE: same location (5-10m) 2 streets different cities (Check)
 
 // TODO AVENUE G https://github.com/osmandapp/OsmAnd/issues/15726
 // TODO INDEX: Speedup load after sorting - to limit objects (store elo in index)! 
 // TODO INDEX: Store Poi category index (effective intersection 'Church St. Miguel' - refactor checkAmenity)
 // TODO OBF POI CATEGORY Bboxes too large - investigate size (introduce for categories OBF) - OsmAndPoiNameIndexDataAtom, quad tree (90% < 10K)
 // TODO ANALYZE: too many wiki places on streets?
-// TODO Bank abc
+// TODO Bank abc (Bug New filter?) 
 
 
 // TO DO Ivan
 // REVIEW DEDUPLICATE: Review / implement similarity radius - similarityRadius = 50000 ... Route Id
 // REVIEW DEDUPLICATE: Unite RouteArticle, POI by wikidata id ? - DEPTH_TO_CHECK_SAME_SEARCH_RESULTS = 20;...
-// TODO FIX DATA: Fix 36K national park (don't index small islands > 100 POI !!!)
-// TODO DEDUPLICATE: Venezia ? - No place=city in POI is it on purpose ? 2 Wikidataids! Rating not merged. POI - relation/44741 (Q641), CITY - way/64778090 (Q33723961).
 // TODO DEDUPLICATE: review osm route id  combine by?
-// TODO DEDUPLICATE: Index place=state, county.. + wikidata id for boundaries (regions.ocbf) & display them - analyze
 // TODO DEDUPLICATE: Test wiki / travel maps / seamarks map
-// TODO DEDUPLICATE: brand langs - 'Поїхали з нами' / 'Поехали с нами'
-// TODO DEDUPLICATE: same location (5-10m) 2 streets different cities
-// TODO DEDUPLICATE: Street related to city or suburb what to show? 
+// TODO UNIT TESTS: Street related to city or suburb what to show? (Fixed?) 
 // TODO UNIT TESTS: (duplicate words), Бульварно-Кудрявська, NC-42, 2-га Нова (2 Нова), M2...
 // TODO UNIT TESTS: Auto tests - Slow analysis (Auto test New york)
-// TODO UNIT TESTS: Analyze Abbrefvations / common skip (abbrevations 1st=first) 
 // TODO UNIT TESTS: Add test on show more '2 sokak' - Show more 1. 2 Sokak (house) 2. 2 Sokak (street) 3. 2 <WORD> Sokak (street) or 3381/2 Sokak. 4. '2.Kadriye' (city) .. Sokak
+
+// TODO DEDUPLICATE: Index place=state, county.. + wikidata id for boundaries (regions.ocbf) & display them - analyze
+// TODO DEDUPLICATE: Venezia ? - No place=city in POI is it on purpose ? 2 Wikidataids! Rating not merged. POI - relation/44741 (Q641), CITY - way/64778090 (Q33723961).
+// TODO DEDUPLICATE: brand langs - 'Поїхали з нами' / 'Поехали с нами'
 
 // TO DO Gateway
 // TODO INSPECTOR: doesn't show suffixes
 // TODO ANALYZE: Find slow queries on Autotests (New york, France) - large geo atoms
+
 // TODO INDEX: Find POI Categories translations / synonyms (WEB) - Стоматол., Dentist, Stomatology, Basilica (?)
 // TODO REVIEW: Abbrevations (synonyms / direction words) other languages?
+// TODO REVIEW: Analyze Abbrefvations / common skip (abbrevations 1st=first) 
 
 // TO DO - RZR
 // TODO WEB: POI Categories + top poi categories
@@ -68,7 +69,7 @@ import net.osmand.util.SearchAlgorithms;
 // TODO ANDROID: Integrate (include regions.ocbf) on client
 // TODO ANDROID: Progress / cancel
 // TODO ANDROID: memory performance 
-// TODO highway=services
+// TODO highway=services (Not index)
  
 /////////////// EXTRA FEATURES ///////////////
 // TODO Store and test conscription number for some cities - issue (RZR)
@@ -157,7 +158,6 @@ public class SpatialSearchTestAndDocs {
 		String query = "Berlin hauptstrasse"; // slow
 		query = "Berlin";
 //		query = "Kelterstraße Kernen im Remstal";
-//		query = "Germany Kelter. Kernen im Remstal";
 //		query = "3 Hofäckerstraße Kernen im Remstal";
 //		query = "1 W&W Platz Kornwestheim"; // duplicate word new maps needed
 //		query = "1/1 Salierstraße Waiblingen"; // duplicate in house number priority 1st
@@ -172,6 +172,7 @@ public class SpatialSearchTestAndDocs {
 		
 		// Grainau Am Eibsee 1 36799292
 		// Grainau Seehäuser Eibsee 2 - 242903848 //  Seehäuser Grainau 2, Seehäuser Eibsee 2  
+		
 		// Weberstraße (33164748) 49.2041 10.7035,  Von-Weber-Straße (4648613942) 49.5609 10.8685
 //		query = "Weber Straße"; // +4648613942, +33164748
 //		query = "WeberStraße";  // +33164748, +4648613942
@@ -211,7 +212,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "2 South 2nd Street Saint Clair"; // to fix street matched twice 40.7194 -76.1904 // UNIT TEST !!! (25 street)
 //		query = "South 2nd Street 2 Saint Clair"; // to fix street matched twice
 //		query = "226 Wilkes-Barre Township Boulevard Wilkes-Barre"; // fixed type order
-//		query = "5676 US-15 Montgomery"; // Test 3 matched (not 2)
+//		query = "5676 US-15 Montgomery"; // Test 3 matched (not 2) 
 //		location = new LatLon(42.0061257, -76.5464141);
 //		query = "38 Orange Street Waverly";
 //		query = "441 Cook Road Addison";
@@ -257,18 +258,21 @@ public class SpatialSearchTestAndDocs {
 //		query = "Sokak 2";// 380657094 2.Sokak, 202159401
 //		location = new LatLon(40.7627, 29.8454);  
 //		query = "2/1 21038 Sokak"; // 1380369156
+		// "2.Sokak", "2 Sokak", "Sokak 2", "2. Sokak", "32/2 Sokak" + housenumber (?)
 		
 		
 //		pattern = "regions.ocbf" ;
 		
 //		pattern = "Ukraine_kyiv-city";
 //		pattern = "Test_Ukraine_kyiv-city_europe_12.obf";
-		pattern = "Ukraine_";
+//		pattern = "Ukraine_";
 		// poi types
 //		location = new LatLon(50.439, 30.516);
 //		settings.SEARCH_POI = false;
 //		settings.DEV_PRINT_POI_CAT_LIMIT = 1000; 
 //		settings.DEV_PRINT_POI_CAT_RADIUS_KM = 10;
+		
+//		query = "bank приватбанк"; // прив.
 //		query = "при.";
 //		query = "Cafe";
 //		query = "Aquarium.";
@@ -278,6 +282,7 @@ public class SpatialSearchTestAndDocs {
 		
 //		location = new LatLon(50.4631,30.4553);
 //		settings.OPTIM_READ_COMMON_WORDS_ATOMS = true;
+//		query = "mcdonald's";
 //		query = "Kyiv Глушкова 1"; // vs 'Kyiv 1'
 //		query = "нова пошта Бульварно Кудрявська";
 //		query = "Бульварно-кудрявс.";
@@ -321,6 +326,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "Holmby Melbourne 18B";
 		
 //		pattern = "Slovakia";
+//		pattern2 = "World_";
 //		query = "Bratislava Billa";
 //		settings.DEDUPLICATE_RES = false;
 //		settings.ALLOW_HOUSE_POI_TYPE_INTERSECTION = false;
@@ -350,11 +356,11 @@ public class SpatialSearchTestAndDocs {
 //		query = "2nd street"; // poi types '2 street' - TODO broken
 //		query = "blvd"; //  unit test  'blvd', 'boulevard' - 248280132
 		
-		pattern = "Us_alaska_"; // special test slow 
-		query = "tongass national forest"; // found anyway complet match 
-		query = "tongass national"; // tongass not found without OPTIM_READ_COMMON_WORDS_ATOMS (?)
-		location = new LatLon(57.366, -150.940);
-		settings.OPTIM_READ_COMMON_WORDS_ATOMS = true;
+//		pattern = "Us_alaska_"; // special test slow 
+//		query = "tongass national forest"; // found anyway complet match 
+//		query = "tongass national"; // tongass not found without OPTIM_READ_COMMON_WORDS_ATOMS (?)
+//		location = new LatLon(57.366, -150.940);
+//		settings.OPTIM_READ_COMMON_WORDS_ATOMS = true;
 //		settings.OPTIM_READ_COMMON_WORDS_LIMIT = 2200;
 		
 		// Japan addr:quarter, addr:neighbourhood, addr:block_number

@@ -4,6 +4,7 @@ package net.osmand.binary;
 import static net.osmand.binary.ObfConstants.isTagIndexedAsSearchRelated;
 import static net.osmand.binary.ObfConstants.isTagIndexedForSearchAsId;
 import static net.osmand.binary.ObfConstants.isTagIndexedForSearchAsName;
+import static net.osmand.binary.ObfConstants.isTagNonIndexedForSearchAsName;
 import static net.osmand.util.SearchAlgorithms.nameIndexDecodeDictionarySuffix;
 import static net.osmand.util.SearchAlgorithms.splitAndNormalize;
 
@@ -776,7 +777,6 @@ public class BinaryMapPoiReaderAdapter {
 	protected void searchPoiIndex(int left31, int right31, int top31, int bottom31,
 			SearchRequest<Amenity> req, PoiRegion region) throws IOException {
 		long indexOffset = codedIS.getTotalBytesRead();
-		long nt = System.nanoTime();
 		TLongHashSet skipTiles = null;
 		if (req.zoom >= 0 && req.zoom < 16) {
 			skipTiles = new TLongHashSet();
@@ -804,9 +804,6 @@ public class BinaryMapPoiReaderAdapter {
 				break;
 			case OsmandOdb.OsmAndPoiIndex.POIDATA_FIELD_NUMBER:
 				int[] offsets = offsetsMap.keys();
-//				System.out.printf("%,d keys %s %.1f ms\n", offsets.length, region.getName(), 
-//						(System.nanoTime() - nt) / 1e6);
-				// also offsets can be randomly skipped by limit
 				Arrays.sort(offsets);
 				if (skipTiles != null) {
 					skipTiles.clear();
@@ -840,7 +837,6 @@ public class BinaryMapPoiReaderAdapter {
 				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.POI_BY_TYPE,
 						BinaryMapIndexReaderStats.BinaryMapIndexReaderSubApiName.POI_NAME_OBJECTS, map.getFile().getName(), codedIS.getBytesCounter() - bytes);
-//				System.out.printf("%,d read keys %.1f ms\n", offsets.length, (System.nanoTime() - nt) / 1e6);
 				return;
 			default:
 				skipUnknownField(t);
@@ -900,8 +896,8 @@ public class BinaryMapPoiReaderAdapter {
 						}
 						if (!matches) {
 							for (String key : am.getAdditionalInfoKeys()) {
-								if (isTagIndexedForSearchAsName(key) || isTagIndexedForSearchAsId(key)
-										|| isTagIndexedAsSearchRelated(key)) {
+								if (isTagIndexedForSearchAsName(key) || isTagNonIndexedForSearchAsName(key) ||  
+									isTagIndexedForSearchAsId(key) || isTagIndexedAsSearchRelated(key)) {
 									// isTagIndexedAsSearchRelated could be toggled off to avoid unnecessary matches
 									matches = matcher.matches(am.getAdditionalInfo(key));
 									if (matches) {
