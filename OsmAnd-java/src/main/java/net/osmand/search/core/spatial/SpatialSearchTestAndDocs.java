@@ -31,21 +31,22 @@ import net.osmand.util.SearchAlgorithms;
 // TESTING OPTIM_READ_COMMON_WORDS_ATOMS !
 // UNIT TESTING: Store Poi category index (effective intersection aragon - 'Church Basílica de Nuestra Señora del Pilar')
 // UNIT TESTING: Autocheck poi subtype - Burger Mcdonald's
+// UNIT TESTING: Highlight ref sorting
 
 ////////// IN PROGRESS //////////
-// REGENERATE World basemap
+// TODO REGENERATE World basemap
 // REVIEW (index_words_dashboard.html): POI / ADDRESS - France, Germany, US, Europe, China, Peru  
 // UNIT TESTING Fix 36K national park (don't index small islands > 100 POI !!!)
 // REVIEW AUTO TESTS: Auto tests - Slow analysis (Auto test New york)
 
-// TESTING Autocomplete results from POI TYPE / SUB TYPE
-// TODO Highlight ref
+// TODO Autocomplete results from POI TYPE / SUB TYPE
+// TODO limit + subtypes
+// TODO access_main_tag
 
 // TODO AVENUE G https://github.com/osmandapp/OsmAnd/issues/15726
 // TODO ANALYZE: too many wiki places on streets?
 // TODO highway=services (Not index)
 // TODO Bank abc (Bug New filter?) 
-// TODO Optimize Search POI CATEGORY (Bboxes too large)
 
 // TO DO Ivan
 // TODO DEDUPLICATE: Test wiki / travel maps / seamarks map
@@ -64,13 +65,13 @@ import net.osmand.util.SearchAlgorithms;
 // TODO WEB: POI Categories + top poi categories
 // TODO WEB: display results std way: house, interpolation results, poi...
 // TODO WEB: Multithread pool, Monitor / time & memory optimize memory?
+// TODO WEB: Highlight ref matching (somehow) with braces?
 // TODO ANDROID: Integrate (include regions.ocbf) on client
 // TODO ANDROID: Progress / cancel
 // TODO ANDROID: memory performance 
 
- 
-
 /////////////// EXTRA FEATURES ///////////////
+// TODO Use new poi name index to find by poi type
 // TODO Optimize sorting (before load) use elo index and poi categories
 // TODO Suggestion based on common suffixes
 // TODO Store and test conscription number for some cities - issue (RZR)
