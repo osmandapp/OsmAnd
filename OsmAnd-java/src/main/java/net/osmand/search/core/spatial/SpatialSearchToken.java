@@ -7,6 +7,7 @@ import java.util.Set;
 
 import com.google.protobuf.ByteString;
 
+import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -496,18 +497,20 @@ public class SpatialSearchToken {
 		final NameIndexAtomXY coords; 
 		final int buildingInd; // added before intersection
 		final int nearbyRadius;
+		TIntArrayList poiTypes;
+		int elo;
 		
 		NameIndexAtom sameNameAreaObj;
 
-
-		NameIndexAtom(String name, int type, long id, long pid, MapObject obj, boolean cityAsStreet, int otherWordsCnt,
-				int otherFoundCnt, NameIndexAtomXY coords, int nearbyRadius) {
-			this(name, type, id, pid, obj, cityAsStreet, otherWordsCnt, otherFoundCnt, coords, nearbyRadius, -1);
+		NameIndexAtom(String name, long id, int total) {
+			this(name, SpatialSearchToken.POI_CATEGORY_TYPE, id, 0, null, false, -total, total,
+					new NameIndexAtomXY(null, null, null), 0, -1);
 		}
 		
 		NameIndexAtom(NameIndexAtom cp) {
 			this(cp.name, cp.type, cp.id, cp.parentid, cp.object, cp.cityAsStreet, cp.otherWordsCnt, cp.otherFoundCnt,
 					cp.coords, cp.nearbyRadius, cp.buildingInd);
+			this.poiTypes = cp.poiTypes;
 		}
 
 		NameIndexAtom(String name, int type, long id, long pid, MapObject obj, boolean cityAsStreet, int otherWordsCnt,

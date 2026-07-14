@@ -113,7 +113,6 @@ public class BinaryMapPoiReaderAdapter {
 		public String getPartName() {
 			return "POI";
 		}
-
 		
 		public List<String> getCategories() {
 			return categories;
@@ -186,6 +185,20 @@ public class BinaryMapPoiReaderAdapter {
 		public TLongHashSet checkMissingTagGroups(TLongHashSet coordsTagGroups) {
 			coordsTagGroups.removeAll(tagGroupsRead);
 			return coordsTagGroups;
+		}
+
+		public PoiCategory decodePoiType(int catFile, StringBuilder subtype) {
+			int subcatId = catFile >> SHIFT_BITS_CATEGORY;
+			int catId = catFile & CATEGORY_MASK;
+			PoiCategory type = null;
+			if (catId < categoriesType.size()) {
+				type = categoriesType.get(catId);
+				List<String> subcats = subcategories.get(catId);
+				if (subcatId < subcats.size()) {
+					subtype.append(subcats.get(subcatId));
+				}
+			}
+			return type;
 		}
 
 	}

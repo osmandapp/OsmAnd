@@ -17,48 +17,45 @@ import net.osmand.util.SearchAlgorithms;
 
 
 //////////// TESTING //////////
-// TESTING Ignore same embedded boundary city / county - deduplicate on the fly (new york x4)
-// TESTING test: merge boundaries bbox - extend incomplete boundary same id ... - npt fixed as we anyway enlarge
 // TESTING Filter / group some categories: Public transport stops, City&Bike - New york?
-// TESTING Sort maps poi categories API search (sort bboxes?)
+// TESTING Sort maps poi categories API search
 // TESTING query = "Church Catedral-Basílica de Nuestra Señora del Pilar"; -  POI_TYPE /\ POI (SYNONYMS!)
 // TEST_ALLOW_HOUSE_POI_TYPE_INTERSECTION Review if poi doesn't have bbox don't intersect or add bbox! - Shell 2 Rožňavská (test)
+// UNIT TESTING DEDUPLICATE: Review / implement similarity radius - similarityRadius = 50000 ... Route Id
+// UNIT TESTING DEDUPLICATE: Unite RouteArticle, POI by wikidata id ? - DEPTH_TO_CHECK_SAME_SEARCH_RESULTS = 20;...
+// UNIT TESTING DEDUPLICATE: Route by id 
+// UNIT TESTING DEDUPLICATE: Street related to city or suburb what to show
+// UNIT TESTS: (duplicate words), Бульварно-Кудрявська, NC-42, 2-га Нова (2 Нова), M2...
+// UNIT TESTS: Add test on show more '2 sokak' - Show more 1. 2 Sokak (house) 2. 2 Sokak (street) 3. 2 <WORD> Sokak (street) or 3381/2 Sokak. 4. '2.Kadriye' (city) .. Sokak
+
+// TESTING OPTIM_READ_COMMON_WORDS_ATOMS !
+// UNIT TESTING: Store Poi category index (effective intersection aragon - 'Church Basílica de Nuestra Señora del Pilar')
 
 ////////// IN PROGRESS //////////
-// TESTING INSPECTOR stats index_words_dashboard.html
-// TESTING OPTIM_READ_COMMON_WORDS_ATOMS !
-// REVIEW: POI / ADDRESS - France, Germany, US, Europe, China, Peru  
-// TESTING: Fix 36K national park (don't index small islands > 100 POI !!!)
+// REGENERATE World basemap
+// REVIEW (index_words_dashboard.html): POI / ADDRESS - France, Germany, US, Europe, China, Peru  
+// UNIT TESTING Fix 36K national park (don't index small islands > 100 POI !!!)
+// REVIEW AUTO TESTS: Auto tests - Slow analysis (Auto test New york)
 
-// TODO INDEX: Speedup load after sorting - to limit objects (store elo in index)! 
-// TODO INDEX: Store Poi category index (effective intersection 'Church St. Miguel' - refactor checkAmenity)
+// TODO Autocomplete results from POI TYPE / SUB TYPE
+// TODO Highlight ref
+// TODO Autocheck poi subtype?
 
-
-// TODO DEDUPLICATE: same location (5-10m) 2 streets different cities (Check)
 // TODO AVENUE G https://github.com/osmandapp/OsmAnd/issues/15726
-// TODO OBF POI CATEGORY Bboxes too large - investigate size (introduce for categories OBF) - OsmAndPoiNameIndexDataAtom, quad tree (90% < 10K)
 // TODO ANALYZE: too many wiki places on streets?
+// TODO highway=services (Not index)
 // TODO Bank abc (Bug New filter?) 
-
+// TODO Optimize Search POI CATEGORY (Bboxes too large)
 
 // TO DO Ivan
-// REVIEW DEDUPLICATE: Review / implement similarity radius - similarityRadius = 50000 ... Route Id
-// REVIEW DEDUPLICATE: Unite RouteArticle, POI by wikidata id ? - DEPTH_TO_CHECK_SAME_SEARCH_RESULTS = 20;...
-// TODO DEDUPLICATE: review osm route id  combine by?
 // TODO DEDUPLICATE: Test wiki / travel maps / seamarks map
-// TODO UNIT TESTS: Street related to city or suburb what to show? (Fixed?) 
-// TODO UNIT TESTS: (duplicate words), Бульварно-Кудрявська, NC-42, 2-га Нова (2 Нова), M2...
-// TODO UNIT TESTS: Auto tests - Slow analysis (Auto test New york)
-// TODO UNIT TESTS: Add test on show more '2 sokak' - Show more 1. 2 Sokak (house) 2. 2 Sokak (street) 3. 2 <WORD> Sokak (street) or 3381/2 Sokak. 4. '2.Kadriye' (city) .. Sokak
-
+// TODO DEDUPLICATE: same location (5-10m) 2 streets different cities (Check)
 // TODO DEDUPLICATE: Index place=state, county.. + wikidata id for boundaries (regions.ocbf) & display them - analyze
-// TODO DEDUPLICATE: Venezia ? - No place=city in POI is it on purpose ? 2 Wikidataids! Rating not merged. POI - relation/44741 (Q641), CITY - way/64778090 (Q33723961).
+// TODO DEDUPLICATE: Venezia, Bratislava? - No place=city in POI is it on purpose ? 2 Wikidataids! Rating not merged. POI - relation/44741 (Q641), CITY - way/64778090 (Q33723961).
 // TODO DEDUPLICATE: brand langs - 'Поїхали з нами' / 'Поехали с нами'
 
 // TO DO Gateway
 // TODO INSPECTOR: doesn't show suffixes
-// TODO ANALYZE: Find slow queries on Autotests (New york, France) - large geo atoms
-
 // TODO INDEX: Find POI Categories translations / synonyms (WEB) - Стоматол., Dentist, Stomatology, Basilica (?)
 // TODO REVIEW: Abbrevations (synonyms / direction words) other languages?
 // TODO REVIEW: Analyze Abbrefvations / common skip (abbrevations 1st=first) 
@@ -70,9 +67,12 @@ import net.osmand.util.SearchAlgorithms;
 // TODO ANDROID: Integrate (include regions.ocbf) on client
 // TODO ANDROID: Progress / cancel
 // TODO ANDROID: memory performance 
-// TODO highway=services (Not index)
+
  
+
 /////////////// EXTRA FEATURES ///////////////
+// TODO Optimize sorting (before load) use elo index and poi categories
+// TODO Suggestion based on common suffixes
 // TODO Store and test conscription number for some cities - issue (RZR)
 // TODO Search in large parks, neighborhood same as in boundaries (index bbox POI), residential way/56238205
 // TODO Japan test, housename, block_number + housenumber, neighbourhood + quarter - street + India assign houses to suburbs / neighbourhood / blocks
@@ -81,7 +81,7 @@ import net.osmand.util.SearchAlgorithms;
 // TODO Web worldwide search on missing results test "Arizona"
 // TODO New Geocoding for cases ("NC 42" == "NC-42") - geo index for prefixes
 // TODO Add flats: https://www.openstreetmap.org/node/5843642738
-// TODO Sugggestion-correction
+// TODO Auto-Correction?
 // TODO English postcodes
 // TODO Precise Boundary 'Chernihiv sport life' mostly Kyiv - check precise boundary for filter
 // TODO Short word split "Ro-ki" vs "Roki" 
@@ -242,6 +242,10 @@ public class SpatialSearchTestAndDocs {
 
 		pattern = "Liechtenstein_europe.obf";
 		query = "Vaduz Lettstrasse";
+		query = "Friedenskapelle Church"; //Friedenskapelle, Friedhofskapelle (catholic), Mamerten (roman)
+		settings.DEV_PRINT_POI_CAT_RADIUS_KM  = 100;
+		settings.DEV_PRINT_POI_CAT_LIMIT = 100;
+		location = new LatLon(47, 10);
 //		query = "Vaduz ";
 //		query = "Jugendheim Malbun";
 
@@ -403,7 +407,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "Венец."; 
 
 //		pattern = "Spain_aragon_europe_";
-//		query = "Church Basílica de Nuestra Señora del Pilar"; // Church vs Roman Church
+//		query = "Church Basílica de Nuestra Señora del Pilar"; // Church vs Roman Church UNIT TEST (7 matched)
 //		query = "Catedral-Basílica de Nuestra Señora del Pilar"; // 7 words! 2^7 combinations
 //		query = "Square de Nuestra Señora del Pilar";  // Church vs Square
 //		

@@ -30,6 +30,8 @@ import net.osmand.data.City;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.QuadRect;
+import net.osmand.osm.PoiCategory;
+import net.osmand.search.core.spatial.SpatialPoiSearch.SpatialPoiType;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtomXY;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialSearchFileCache;
@@ -641,6 +643,31 @@ public class SpatialSearchContext {
 		String name = "";
 		int wordInd = 0;
 		int type = a != null ? a.getType() : SpatialSearchToken.POI_TYPE;
+		TIntArrayList poiTypes = null;
+		int elo = 0;
+		if (b != null) {
+			if (b.getEloRatingCount() > 0) {
+				elo = b.getEloRating(0);
+			}
+			if (b.getPoiCategoriesCount() > 0) {
+				poiTypes = new TIntArrayList();
+				for (int k = 0; k < b.getPoiCategoriesCount(); k++) {
+					int catFile = b.getPoiCategories(k);
+					StringBuilder subType = new StringBuilder();
+					PoiCategory pc = indx.poiRegion.decodePoiType(catFile, subType);
+					SpatialPoiType spatialType = null;
+					if (subType.length() > 0) {
+						spatialType = poiSearch.getByKey(subType.toString());
+					}
+					if (pc != null && spatialType == null) {
+						spatialType = poiSearch.getByKey(pc.getKeyName());
+					}
+					if (spatialType != null) {
+						poiTypes.add(spatialType.id);
+					}
+				}
+			}
+		}
 		for (int i = 0; i < cnt; i++) {
 			int suffBit = a != null ? a.getSuffixesBitsetIndex(i) : b.getSuffixesBitsetIndex(i);
 			if (suffBit % 2 == 0) {
@@ -658,7 +685,8 @@ public class SpatialSearchContext {
 						} else {
 							other = wordInd < b.getOtherWordsCountCount() ? b.getOtherWordsCount(wordInd) : 0;
 						}
-						addObject(t, indx, name, type, cid, pid, obj, other, new NameIndexAtomXY(a, b, settings), allTokens);
+						addObject(t, indx, name, type, cid, pid, obj, other, poiTypes, elo,
+								new NameIndexAtomXY(a, b, settings), allTokens);
 					}
 					wordInd++;
 					name = "";
@@ -683,7 +711,6 @@ public class SpatialSearchContext {
 		} else if (b != null && wordInd < b.getExtraSuffixCount()) {
 			name += b.getExtraSuffix(wordInd);
 		}
-		
 		if (name.length() != 0 && (matchName(t, name) || (name = matchPartName(t, name, allTokens)) != null)) {
 			int other;
 			if (a != null) {
@@ -693,7 +720,8 @@ public class SpatialSearchContext {
 			}
 			// object will be added once it's read rare word
 			// disabled for now as it could only have effect for frequent words in index
-			addObject(t, indx, name, type, cid, pid, obj, other, new NameIndexAtomXY(a, b, settings), allTokens);
+			addObject(t, indx, name, type, cid, pid, obj, other, poiTypes, elo, new NameIndexAtomXY(a, b, settings),
+					allTokens);
 		}
 	}
 
@@ -722,7 +750,8 @@ public class SpatialSearchContext {
 	}
 
 	private void addObject(SpatialSearchToken t, NameIndexReader indx, String name, int type, long lid, long pid,
-			MapObject obj, int other, NameIndexAtomXY coords, List<SpatialSearchToken> allTokens) {
+			MapObject obj, int other, TIntArrayList poiTypes, int elo, NameIndexAtomXY coords,
+			List<SpatialSearchToken> allTokens) {
 		List<SpatialSearchToken> otherTokens = null;
 		boolean streetCity = false;
 		boolean numericNotMatch = false;
@@ -775,7 +804,10 @@ public class SpatialSearchContext {
 				break;
 			}
 		}
-		NameIndexAtom atom = new NameIndexAtom(name, type, lid, pid, obj, streetCity, other, otherFound, coords, nearByType);
+		NameIndexAtom atom = new NameIndexAtom(name, type, lid, pid, obj, streetCity, other, otherFound, coords,
+				nearByType, -1);
+		atom.poiTypes = poiTypes;
+		atom.elo = elo;
 		// for all common always false, for some frequent could be optimization
 		if (settings.OPTIM_READ_COMMON_WORDS_ATOMS && other > 0) {
 			boolean matchMainWord = true;
