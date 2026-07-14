@@ -13,6 +13,7 @@ public class TransportStop extends MapObject {
 
 	private static final int DELETED_STOP = -1;
 	public static final String MISSING_STOP_NAME = "#Missing Stop";
+	public static final String CONNECTED_STOP_IDS = "osmand:connected_stop_ids";
 
 	private long[] referencesToRoutes = null;
 	private long[] deletedRoutesIds;
@@ -148,6 +149,19 @@ public class TransportStop extends MapObject {
 
 	public void setTransportStopAggregated(TransportStopAggregated stopAggregated) {
 		transportStopAggregated = stopAggregated;
+	}
+
+	public boolean isConnectedToStop(long stopId) {
+		String connectedStopIds = getNamesMap(false).get(CONNECTED_STOP_IDS);
+		if (connectedStopIds != null) {
+			String id = Long.toString(stopId);
+			for (String connectedStopId : connectedStopIds.split(",")) {
+				if (id.equals(connectedStopId)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	@Override
