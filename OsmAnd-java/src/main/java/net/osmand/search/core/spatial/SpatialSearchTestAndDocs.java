@@ -30,6 +30,7 @@ import net.osmand.util.SearchAlgorithms;
 
 // TESTING OPTIM_READ_COMMON_WORDS_ATOMS !
 // UNIT TESTING: Store Poi category index (effective intersection aragon - 'Church Basílica de Nuestra Señora del Pilar')
+// UNIT TESTING: Autocheck poi subtype - Burger Mcdonald's
 
 ////////// IN PROGRESS //////////
 // REGENERATE World basemap
@@ -37,9 +38,8 @@ import net.osmand.util.SearchAlgorithms;
 // UNIT TESTING Fix 36K national park (don't index small islands > 100 POI !!!)
 // REVIEW AUTO TESTS: Auto tests - Slow analysis (Auto test New york)
 
-// TODO Autocomplete results from POI TYPE / SUB TYPE
+// TESTING Autocomplete results from POI TYPE / SUB TYPE
 // TODO Highlight ref
-// TODO Autocheck poi subtype?
 
 // TODO AVENUE G https://github.com/osmandapp/OsmAnd/issues/15726
 // TODO ANALYZE: too many wiki places on streets?
@@ -241,11 +241,14 @@ public class SpatialSearchTestAndDocs {
 		// data "PA 75" - see "M-2, 2 M" example
 
 		pattern = "Liechtenstein_europe.obf";
-		query = "Vaduz Lettstrasse";
-		query = "Friedenskapelle Church"; //Friedenskapelle, Friedhofskapelle (catholic), Mamerten (roman)
-		settings.DEV_PRINT_POI_CAT_RADIUS_KM  = 100;
-		settings.DEV_PRINT_POI_CAT_LIMIT = 100;
-		location = new LatLon(47, 10);
+//		query = "Vaduz Lettstrasse";
+//		query = "Burger Mcdonald's"; // Test 2 match
+//		query = "Vegan Mai Thai"; // Test 3 match
+		query = "Vegan"; // Test Vegan results
+//		query = "Friedenskapelle Church"; //Friedenskapelle, Friedhofskapelle (catholic), Mamerten (roman)
+//		settings.DEV_PRINT_POI_CAT_RADIUS_KM  = 100;
+//		settings.DEV_PRINT_POI_CAT_LIMIT = 100;
+//		location = new LatLon(47, 10);
 //		query = "Vaduz ";
 //		query = "Jugendheim Malbun";
 

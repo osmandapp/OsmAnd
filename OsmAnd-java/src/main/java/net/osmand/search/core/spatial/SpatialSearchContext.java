@@ -19,6 +19,7 @@ import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.binary.Abbreviations;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CityBlocks;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
 import net.osmand.binary.NameIndexReader;
 import net.osmand.binary.NameIndexReader.NameIndexReaderBytes;
 import net.osmand.binary.NameIndexReader.PrefixNameValue;
@@ -31,6 +32,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
+import net.osmand.search.core.TopIndexFilter;
 import net.osmand.search.core.spatial.SpatialPoiSearch.SpatialPoiType;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtomXY;
@@ -652,15 +654,26 @@ public class SpatialSearchContext {
 			if (b.getPoiCategoriesCount() > 0) {
 				poiTypes = new TIntArrayList();
 				for (int k = 0; k < b.getPoiCategoriesCount(); k++) {
+					SpatialPoiType spatialType = null;
 					int catFile = b.getPoiCategories(k);
 					StringBuilder subType = new StringBuilder();
-					PoiCategory pc = indx.poiRegion.decodePoiType(catFile, subType);
-					SpatialPoiType spatialType = null;
-					if (subType.length() > 0) {
-						spatialType = poiSearch.getByKey(subType.toString());
-					}
-					if (pc != null && spatialType == null) {
-						spatialType = poiSearch.getByKey(pc.getKeyName());
+					if (catFile % 2 == 0) {
+						PoiCategory pc = indx.poiRegion.decodePoiType(catFile / 2, subType);
+						if (subType.length() > 0) {
+							spatialType = poiSearch.getByKey(subType.toString());
+						}
+						if (pc != null && spatialType == null) {
+							spatialType = poiSearch.getByKey(pc.getKeyName());
+						}
+					} else {
+						PoiSubType st = indx.poiRegion.getSubtypeFromId(catFile / 2, subType);
+						if (st != null) {
+							String fullKey = st.name;
+							if (st.isTopIndex()) {
+								fullKey = st.name + "_" + TopIndexFilter.getValueKey(subType.toString());
+							}
+							spatialType = poiSearch.getByKey(fullKey);
+						}
 					}
 					if (spatialType != null) {
 						poiTypes.add(spatialType.id);
