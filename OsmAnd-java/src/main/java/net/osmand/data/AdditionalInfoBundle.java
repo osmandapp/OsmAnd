@@ -87,9 +87,6 @@ public class AdditionalInfoBundle {
 		if (MapPoiTypes.ROUTE_ARTICLE.equals(get(SUBTYPE)) && key.contains(Amenity.DESCRIPTION)) {
 			return false;
 		}
-		if (Amenity.LANG_YES.equals(key) || Amenity.SUBWAY_REGION.equals(key) || key.contains(Amenity.ROUTE)) {
-			return false;
-		}
 		return !Amenity.NAME.equals(key);
 	}
 
