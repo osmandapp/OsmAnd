@@ -279,6 +279,9 @@ class StarView @JvmOverloads constructor(
 	// --- Astronomy Data ---
 	private var skyObjectsOrig: List<SkyObject>? = null
 	private val skyObjects = mutableListOf<SkyObject>()
+	private var sunObject: SkyObject? = null
+	private var moonObject: SkyObject? = null
+	private var solarDiscsOverlap = false
 	private var constellations = listOf<Constellation>()
 	private val skyObjectMap = mutableMapOf<Int, SkyObject>()
 
@@ -368,6 +371,7 @@ class StarView @JvmOverloads constructor(
 	private var visualAnimator: ValueAnimator? = null
 
 	fun setObserverLocation(lat: Double, lon: Double, alt: Double) {
+		if (observer.latitude == lat && observer.longitude == lon && observer.height == alt) return
 		observer = Observer(lat, lon, alt)
 		recalculatePositions(currentTime, updateTargets = false, force = true)
 		invalidate()
@@ -459,8 +463,8 @@ class StarView @JvmOverloads constructor(
 		targetY: Float = height / 2f
 	) {
 		visualAnimator?.cancel()
-		setDateTime(time, animate = false)
-		calculatePosition(obj, time, updateTargets = false, force = true)
+		if (currentTime.ut != time.ut) setDateTime(time, animate = false)
+		calculatePosition(obj, time, updateTargets = false)
 		animateTo(
 			obj.azimuth,
 			obj.altitude,
@@ -478,7 +482,7 @@ class StarView @JvmOverloads constructor(
 		targetY: Float = height / 2f
 	) {
 		visualAnimator?.cancel()
-		setDateTime(time, animate = false)
+		if (currentTime.ut != time.ut) setDateTime(time, animate = false)
 		centerObject(obj, targetX, targetY)
 	}
 
@@ -488,7 +492,7 @@ class StarView @JvmOverloads constructor(
 		targetY: Float = height / 2f
 	) {
 		visualAnimator?.cancel()
-		calculatePosition(obj, currentTime, updateTargets = false, force = true)
+		calculatePosition(obj, currentTime, updateTargets = false)
 		panX = targetX - width / 2f
 		panY = targetY - height / 2f
 		azimuthCenter = obj.azimuth
@@ -582,6 +586,8 @@ class StarView @JvmOverloads constructor(
 		skyObjects.addAll(objects)
 		// Sort by magnitude (ascending): brighter objects (lower mag) come first
 		skyObjects.sortBy { it.magnitude }
+		sunObject = objects.firstOrNull { it.type == SkyObject.Type.SUN }
+		moonObject = objects.firstOrNull { it.type == SkyObject.Type.MOON }
 		skyObjectMap.clear()
 		objects.forEach { skyObjectMap[it.hip] = it }
 
@@ -1076,14 +1082,15 @@ class StarView @JvmOverloads constructor(
 		}
 
 		drawConstellationLabels(canvas)
+		solarDiscsOverlap = viewAngle <= PHYSICAL_DISC_VIEW_ANGLE && calculateSunMoonDiscsOverlap()
 
 		skyObjects.forEach { obj ->
 			if (!obj.type.isSolarDisc() && shouldDrawSkyObject(obj)) drawSkyObject(canvas, obj)
 		}
-		skyObjects.firstOrNull { it.type == SkyObject.Type.SUN }
+		sunObject
 			?.takeIf { shouldDrawSkyObject(it) }
 			?.let { drawSkyObject(canvas, it) }
-		skyObjects.firstOrNull { it.type == SkyObject.Type.MOON }
+		moonObject
 			?.takeIf { shouldDrawSkyObject(it) }
 			?.let { drawSkyObject(canvas, it) }
 
@@ -1786,7 +1793,7 @@ class StarView @JvmOverloads constructor(
 				canvas.drawCircle(tempPoint.x, tempPoint.y, radius, sunDiscPaint)
 			}
 			obj.type == SkyObject.Type.MOON &&
-				viewAngle <= PHYSICAL_DISC_VIEW_ANGLE && sunMoonDiscsOverlap() -> {
+				viewAngle <= PHYSICAL_DISC_VIEW_ANGLE && solarDiscsOverlap -> {
 				canvas.drawCircle(tempPoint.x, tempPoint.y, radius, moonDiscPaint)
 				canvas.drawCircle(tempPoint.x, tempPoint.y, radius, moonLimbPaint)
 			}
@@ -1806,7 +1813,7 @@ class StarView @JvmOverloads constructor(
 
 		// 2. Dynamic Label Visibility
 		var showLabel = true
-		if (obj.type.isSolarDisc() && viewAngle <= PHYSICAL_DISC_VIEW_ANGLE && sunMoonDiscsOverlap()) {
+		if (obj.type.isSolarDisc() && viewAngle <= PHYSICAL_DISC_VIEW_ANGLE && solarDiscsOverlap) {
 			showLabel = false
 		}
 		if (obj.type == SkyObject.Type.STAR) {
@@ -1873,9 +1880,9 @@ class StarView @JvmOverloads constructor(
 	private fun SkyObject.Type.isSolarDisc(): Boolean =
 		this == SkyObject.Type.SUN || this == SkyObject.Type.MOON
 
-	private fun sunMoonDiscsOverlap(): Boolean {
-		val sun = skyObjects.firstOrNull { it.type == SkyObject.Type.SUN } ?: return false
-		val moon = skyObjects.firstOrNull { it.type == SkyObject.Type.MOON } ?: return false
+	private fun calculateSunMoonDiscsOverlap(): Boolean {
+		val sun = sunObject ?: return false
+		val moon = moonObject ?: return false
 		if (!shouldDrawSkyObject(sun) || !shouldDrawSkyObject(moon)) return false
 
 		val sunRadius = sun.body?.let { body ->

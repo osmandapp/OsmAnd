@@ -65,10 +65,18 @@ class SolarEclipseTimelineView @JvmOverloads constructor(
 	}
 
 	fun setRange(start: Long, end: Long, maximum: Long, current: Long) {
+		val normalizedEnd = end.coerceAtLeast(start + 1L)
+		val normalizedMaximum = maximum.coerceIn(start, normalizedEnd)
+		val normalizedCurrent = current.coerceIn(start, normalizedEnd)
+		if (startMillis == start && endMillis == normalizedEnd &&
+			maximumMillis == normalizedMaximum && currentMillis == normalizedCurrent
+		) {
+			return
+		}
 		startMillis = start
-		endMillis = end.coerceAtLeast(start + 1L)
-		maximumMillis = maximum.coerceIn(startMillis, endMillis)
-		currentMillis = current.coerceIn(startMillis, endMillis)
+		endMillis = normalizedEnd
+		maximumMillis = normalizedMaximum
+		currentMillis = normalizedCurrent
 		invalidate()
 	}
 

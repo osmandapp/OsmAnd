@@ -2790,7 +2790,19 @@ internal fun eclipseKindFromUmbra(k: Double) = (
         EclipseKind.Annular
 )
 
-internal fun geoidIntersect(shadow: ShadowInfo): GlobalSolarEclipseInfo {
+internal fun geoidIntersect(shadow: ShadowInfo): GlobalSolarEclipseInfo =
+    geoidIntersect(
+        shadow,
+        rotationEqjEqd(shadow.time),
+        null
+    )
+
+
+private fun geoidIntersect(
+    shadow: ShadowInfo,
+    rot: RotationMatrix,
+    siderealDegrees: Double?
+): GlobalSolarEclipseInfo {
     var kind = EclipseKind.Partial
     var obscuration = Double.NaN
     var latitude = Double.NaN
@@ -2800,7 +2812,6 @@ internal fun geoidIntersect(shadow: ShadowInfo): GlobalSolarEclipseInfo {
     // First we must convert EQJ (equator of J2000) coordinates to EQD (equator of date)
     // coordinates that are perfectly aligned with the Earth's equator at this
     // moment in time.
-    val rot = rotationEqjEqd(shadow.time)
     val v = kmSpherical(rot.rotate(shadow.dir))      // shadow axis vector passing through Sun and Moon
     val e = kmSpherical(rot.rotate(shadow.target))   // lunacentric Earth
 
@@ -2830,8 +2841,8 @@ internal fun geoidIntersect(shadow: ShadowInfo): GlobalSolarEclipseInfo {
         )
 
         // Adjust longitude for Earth's rotation at the given time.
-        val gast = siderealTime(shadow.time)
-        longitude = ((datan2(py,px) - (15.0 * gast)) % 360.0).withMaxDegreeValue(180.0)
+        val earthRotation = siderealDegrees ?: 15.0 * siderealTime(shadow.time)
+        longitude = ((datan2(py,px) - earthRotation) % 360.0).withMaxDegreeValue(180.0)
 
         // We want to determine whether the observer sees a total eclipse or an annular eclipse.
         // We need to perform a series of vector calculations.
@@ -2977,11 +2988,36 @@ fun globalSolarEclipseWindow(event: GlobalSolarEclipseInfo): GlobalSolarEclipseW
  * when the penumbra does not touch the Earth.
  */
 fun solarEclipseShadowPoint(time: Time): SolarEclipseShadowPoint? {
+    val context = eclipseShadowGeometryContext(time) ?: return null
+    return solarEclipseShadowPoint(context)
+}
+
+
+private data class EclipseShadowGeometryContext(
+    val shadow: ShadowInfo,
+    val rotation: RotationMatrix,
+    val siderealDegrees: Double
+)
+
+
+private fun eclipseShadowGeometryContext(time: Time): EclipseShadowGeometryContext? {
     val shadow = moonShadow(time)
     if (shadow.r >= shadow.p + EARTH_MEAN_RADIUS_KM)
         return null
+    return EclipseShadowGeometryContext(
+        shadow,
+        rotationEqjEqd(time),
+        15.0 * siderealTime(time)
+    )
+}
 
-    val central = geoidIntersect(shadow)
+
+private fun solarEclipseShadowPoint(
+    context: EclipseShadowGeometryContext
+): SolarEclipseShadowPoint? {
+    val shadow = context.shadow
+    val time = shadow.time
+    val central = geoidIntersect(shadow, context.rotation, context.siderealDegrees)
     if (central.latitude.isFinite() && central.longitude.isFinite()) {
         return SolarEclipseShadowPoint(
             time,
@@ -2994,9 +3030,8 @@ fun solarEclipseShadowPoint(time: Time): SolarEclipseShadowPoint? {
     // Work in the same equator-of-date, dilated-Earth coordinate system used
     // by geoidIntersect. The closest point on the spherical geoid to the shadow
     // axis gives a stable and useful map target for a partial eclipse.
-    val rot = rotationEqjEqd(time)
-    val axis = kmSpherical(rot.rotate(shadow.dir))
-    val earth = kmSpherical(rot.rotate(shadow.target))
+    val axis = kmSpherical(context.rotation.rotate(shadow.dir))
+    val earth = kmSpherical(context.rotation.rotate(shadow.target))
     val u = (axis dot earth) / (axis dot axis)
     val nearest = (u * axis) - earth
     val length = nearest.length()
@@ -3013,9 +3048,8 @@ fun solarEclipseShadowPoint(time: Time): SolarEclipseShadowPoint? {
     } else {
         datan(pz / proj)
     }
-    val longitude = (
-        (datan2(py, px) - 15.0 * siderealTime(time)) % 360.0
-    ).withMaxDegreeValue(180.0)
+    val longitude = ((datan2(py, px) - context.siderealDegrees) % 360.0)
+        .withMaxDegreeValue(180.0)
     return SolarEclipseShadowPoint(time, latitude, longitude, false)
 }
 
@@ -3043,14 +3077,14 @@ private data class EclipseMapVector3(val x: Double, val y: Double, val z: Double
 
 
 private data class EclipseShadowConeGeometry(
-    val time: Time,
     val moon: EclipseMapVector3,
     val vertex: EclipseMapVector3,
     val axis: EclipseMapVector3,
-    val tangent: Double
+    val tangent: Double,
+    val siderealAngleRadians: Double
 ) {
     fun contains(coordinate: SolarEclipseMapCoordinate): Boolean {
-        val point = eclipseMapCoordinateToEqd(time, coordinate)
+        val point = eclipseMapCoordinateToEqd(siderealAngleRadians, coordinate)
         if (((point - moon) dot axis) <= 0.0)
             return false
 
@@ -3075,11 +3109,13 @@ private data class EclipseShadowConeGeometry(
 private data class EclipseTrackSample(val time: Time, val center: SolarEclipseMapCoordinate)
 
 
-private fun eclipseShadowConeGeometry(time: Time, penumbral: Boolean): EclipseShadowConeGeometry {
-    val shadow = moonShadow(time)
-    val rotation = rotationEqjEqd(time)
-    val moonVector = rotation.rotate(-shadow.target)
-    val directionVector = rotation.rotate(shadow.dir)
+private fun eclipseShadowConeGeometry(
+    context: EclipseShadowGeometryContext,
+    penumbral: Boolean
+): EclipseShadowConeGeometry {
+    val shadow = context.shadow
+    val moonVector = context.rotation.rotate(-shadow.target)
+    val directionVector = context.rotation.rotate(shadow.dir)
     val moon = EclipseMapVector3(
         moonVector.x * KM_PER_AU,
         moonVector.y * KM_PER_AU,
@@ -3101,23 +3137,21 @@ private fun eclipseShadowConeGeometry(time: Time, penumbral: Boolean): EclipseSh
         MOON_MEAN_RADIUS_KM / radiusDelta
     }
     return EclipseShadowConeGeometry(
-        time = time,
         moon = moon,
         vertex = moon + direction * vertexFactor,
         axis = direction.normalized(),
-        tangent = radiusDelta / direction.length()
+        tangent = radiusDelta / direction.length(),
+        siderealAngleRadians = context.siderealDegrees.degreesToRadians()
     )
 }
 
 
 private fun eclipseMapCoordinateToEqd(
-    time: Time,
+    siderealAngleRadians: Double,
     coordinate: SolarEclipseMapCoordinate
 ): EclipseMapVector3 {
     val latitude = coordinate.latitude.degreesToRadians()
-    val siderealLongitude = (
-        coordinate.longitude + 15.0 * siderealTime(time)
-    ).degreesToRadians()
+    val siderealLongitude = coordinate.longitude.degreesToRadians() + siderealAngleRadians
     val cosLatitude = cos(latitude)
     val sinLatitude = sin(latitude)
     val c = 1.0 / hypot(cosLatitude, EARTH_FLATTENING * sinLatitude)
@@ -3213,9 +3247,10 @@ private fun eclipseConeBoundary(
 
 
 private fun eclipseTrackSample(time: Time): EclipseTrackSample? {
-    val shadowPoint = solarEclipseShadowPoint(time) ?: return null
+    val context = eclipseShadowGeometryContext(time) ?: return null
+    val shadowPoint = solarEclipseShadowPoint(context) ?: return null
     val center = SolarEclipseMapCoordinate(shadowPoint.latitude, shadowPoint.longitude)
-    return if (eclipseShadowConeGeometry(time, penumbral = false).contains(center)) {
+    return if (eclipseShadowConeGeometry(context, penumbral = false).contains(center)) {
         EclipseTrackSample(time, center)
     } else {
         null
@@ -3224,7 +3259,8 @@ private fun eclipseTrackSample(time: Time): EclipseTrackSample? {
 
 
 private fun eclipseShadowTrackSample(time: Time): EclipseTrackSample? {
-    val shadowPoint = solarEclipseShadowPoint(time) ?: return null
+    val context = eclipseShadowGeometryContext(time) ?: return null
+    val shadowPoint = solarEclipseShadowPoint(context) ?: return null
     return EclipseTrackSample(
         time,
         SolarEclipseMapCoordinate(shadowPoint.latitude, shadowPoint.longitude)
@@ -3495,7 +3531,9 @@ fun solarEclipseMapTrack(window: GlobalSolarEclipseWindow): SolarEclipseMapTrack
             samples.lastIndex -> eclipseBearingDegrees(samples[index - 1].center, sample.center)
             else -> eclipseBearingDegrees(samples[index - 1].center, samples[index + 1].center)
         }
-        val cone = eclipseShadowConeGeometry(sample.time, penumbral = false)
+        val context = eclipseShadowGeometryContext(sample.time)
+            ?: throw InternalError("Missing central eclipse shadow geometry.")
+        val cone = eclipseShadowConeGeometry(context, penumbral = false)
         left.add(eclipseConeBoundary(sample.center, bearing - 90.0, cone))
         right.add(eclipseConeBoundary(sample.center, bearing + 90.0, cone))
     }
@@ -3515,12 +3553,14 @@ fun solarEclipseMapFrame(
     time: Time,
     includePenumbralFootprint: Boolean = true
 ): SolarEclipseMapFrame {
-    val shadowPoint = solarEclipseShadowPoint(time)
-    if (shadowPoint == null)
+    val context = eclipseShadowGeometryContext(time)
+    if (context == null)
         return SolarEclipseMapFrame(time, null, emptyList(), null)
+    val shadowPoint = solarEclipseShadowPoint(context)
+        ?: return SolarEclipseMapFrame(time, null, emptyList(), null)
     val center = SolarEclipseMapCoordinate(shadowPoint.latitude, shadowPoint.longitude)
     val penumbralCone = if (includePenumbralFootprint) {
-        eclipseShadowConeGeometry(time, penumbral = true)
+        eclipseShadowConeGeometry(context, penumbral = true)
     } else {
         null
     }

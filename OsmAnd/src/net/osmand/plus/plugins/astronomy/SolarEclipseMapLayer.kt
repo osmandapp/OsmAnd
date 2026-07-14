@@ -41,7 +41,7 @@ class SolarEclipseMapLayer(context: Context) : OsmandMapLayer(context) {
 
 	@Volatile
 	private var state = LayerState()
-	private var nativeGeometryKey: String? = null
+	private var nativeGeometryReady = false
 	private var polygonsCollection: PolygonsCollection? = null
 	private var vectorLinesCollection: VectorLinesCollection? = null
 	private var eclipseMarker: MapMarker? = null
@@ -67,10 +67,15 @@ class SolarEclipseMapLayer(context: Context) : OsmandMapLayer(context) {
 		frame: SolarEclipseMapFrame?
 	) {
 		val previous = state
+		if (previous.active == active && previous.eventKey == eventKey &&
+			previous.eventKind == eventKind && previous.track === track && previous.frame === frame
+		) {
+			return
+		}
 		state = LayerState(active, eventKey, eventKind, track, frame)
 		val staticChanged = previous.active != active || previous.eventKey != eventKey ||
 			previous.eventKind != eventKind || previous.track !== track
-		if (staticChanged) nativeGeometryKey = null
+		if (staticChanged) nativeGeometryReady = false
 		if (!active) clearNativeCollections()
 		view?.refreshMap()
 	}
@@ -90,7 +95,6 @@ class SolarEclipseMapLayer(context: Context) : OsmandMapLayer(context) {
 		markerHaloPaint.color = ContextCompat.getColor(context, R.color.solar_eclipse_marker_halo)
 		markerOutlinePaint.color = ContextCompat.getColor(context, R.color.solar_eclipse_marker_outline)
 		markerPaint.color = ContextCompat.getColor(context, R.color.solar_eclipse_marker)
-		nativeGeometryKey = null
 	}
 
 	override fun onPrepareBufferImage(
@@ -100,10 +104,7 @@ class SolarEclipseMapLayer(context: Context) : OsmandMapLayer(context) {
 	) {
 		super.onPrepareBufferImage(canvas, tileBox, settings)
 		val current = state
-		if (!current.active) {
-			clearNativeCollections()
-			return
-		}
+		if (!current.active) return
 		if (mapRenderer != null) {
 			if (mapRendererChanged) {
 				clearNativeCollections()
@@ -160,18 +161,11 @@ class SolarEclipseMapLayer(context: Context) : OsmandMapLayer(context) {
 
 	private fun updateOpenGl(current: LayerState) {
 		val renderer = mapRenderer ?: return
-		val geometryKey = buildString {
-			append(current.eventKey)
-			append(':')
-			append(current.eventKind)
-			append(':')
-			append(current.track?.hashCode())
-		}
-		if (nativeGeometryKey != geometryKey) {
+		if (!nativeGeometryReady) {
 			clearGeometryCollections()
 			createPolygonCollection(current)
 			createLineCollection(current)
-			nativeGeometryKey = geometryKey
+			nativeGeometryReady = true
 		}
 		updateMarkerCollection(current)
 		polygonsCollection?.let { if (!renderer.hasSymbolsProvider(it)) renderer.addSymbolsProvider(it) }
@@ -285,7 +279,7 @@ class SolarEclipseMapLayer(context: Context) : OsmandMapLayer(context) {
 		polygonsCollection = null
 		vectorLinesCollection = null
 		polygonId = 1
-		nativeGeometryKey = null
+		nativeGeometryReady = false
 	}
 
 	private fun clearNativeCollections() {
@@ -297,9 +291,7 @@ class SolarEclipseMapLayer(context: Context) : OsmandMapLayer(context) {
 
 	override fun cleanupResources() {
 		super.cleanupResources()
-		clearGeometryCollections()
-		mapMarkersCollection = null
-		eclipseMarker = null
+		clearNativeCollections()
 	}
 
 	override fun onDraw(canvas: Canvas, tileBox: RotatedTileBox, settings: DrawSettings) {
