@@ -236,8 +236,11 @@ public class SpatialSearchContext {
 				int nearbyLimit = Integer.MAX_VALUE;
 				if (!partialAreSameFreq) {
 					int[] cnts = new int[settings.OPTIM_LIMIT_RADIUS.length + 1];
+					TLongHashSet set = new TLongHashSet();
 					for (NameIndexAtom a : partialCommonAtoms) {
-						cnts[a.nearbyRadius]++;
+						if (set.add(a.id)) {
+							cnts[a.nearbyRadius]++;
+						}
 					}
 					nearbyLimit = 0;
 					int cnt = t.atoms.size();

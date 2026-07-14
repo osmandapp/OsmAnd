@@ -87,6 +87,7 @@ import net.osmand.util.SearchAlgorithms;
 // TODO ANDROID: Integrate (include regions.ocbf) on client
 // TODO ANDROID: Progress / cancel
 // TODO ANDROID: memory performance 
+// TODO highway=services
  
 /////////////// EXTRA FEATURES ///////////////
 
@@ -360,15 +361,21 @@ public class SpatialSearchTestAndDocs {
 //		query = "New York 4 av"; // 160947243
 //		query = "57th street"; // central park - 265345338 east, 86216906 west, ()66926268 (west)?),
 //		query = "57 street"; // central park - 265345338 east, 86216906 west, ()66926268 (west)?),
-		query = "new york 57th street manhattan";
+//		query = "new york 57th street manhattan";
 //		query = "4th ave"; //  unit '4 ave'
 //		query = "4th ave 8 paterson"; //  wrong city...
 //		query = "little creek"; // little creek
 		// Result 4 - 40.8407, -74.0954 [[4th, 8] Building 2 4th Street (26238417818) 40.8441 -74.0910 , [ave, paterson] STREET_TYPE Paterson Avenue (651531238) 40.8374 -74.0997 ]
 		
 //		query = "2nd street"; // poi types '2 street' - TODO broken
-		
 //		query = "blvd"; //  unit test  'blvd', 'boulevard' - 248280132
+		
+		pattern = "Us_alaska_"; // special test slow 
+		query = "tongass national forest"; // found anyway complet match 
+		query = "tongass national"; // tongass not found without OPTIM_READ_COMMON_WORDS_ATOMS (?)
+		location = new LatLon(57.366, -150.940);
+		settings.OPTIM_READ_COMMON_WORDS_ATOMS = true;
+//		settings.OPTIM_READ_COMMON_WORDS_LIMIT = 2200;
 		
 		// Japan addr:quarter, addr:neighbourhood, addr:block_number
 		// See test - [8-8 Kinshi 3 Kinshi Sumida Tokyo], Rivière Tsumura
