@@ -502,6 +502,8 @@ public class SpatialSearchToken {
 		
 		NameIndexAtom sameNameAreaObj;
 
+		int matchExtraWord;
+
 		NameIndexAtom(String name, long id, int total) {
 			this(name, SpatialSearchToken.POI_CATEGORY_TYPE, id, 0, null, false, -total, total,
 					new NameIndexAtomXY(null, null, null), 0, -1);

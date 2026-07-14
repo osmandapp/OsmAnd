@@ -146,11 +146,19 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 	public void loadObjectsAndCalcBuildings(SpatialSearchContext ctx) throws IOException {
 		ctx.stats.sub2LoadObjectsBldTime.start();
 		loadObjects(ctx);
+		List<SpatialSearchToken> missingTokens = getMissingTokens(ctx);
+		if (ctx.settings.ALLOW_SEARCH_POI_REF) {
+			for (int indx = 0; indx < getCombinations(); indx++) {
+				if (!skipResults.contains(indx)) {
+					checkAmenityRef(missingTokens, indx);
+				}
+			}
+		}
 		if (ctx.settings.SEARCH_BUILDINGS) {
 			Map<String, Building> bldCheckCache = new HashMap<>();
 			for (int indx = 0; indx < getCombinations(); indx++) {
 				if (!skipResults.contains(indx)) {
-					calcBuilding(ctx, indx, bldCheckCache);
+					calcBuilding(ctx, indx, missingTokens, bldCheckCache);
 				}
 //				if (!skipResults.contains(indx)) {
 //					System.out.println(indx + " " + getRawAtoms(indx) + " " + skipResults.contains(indx));
@@ -166,6 +174,25 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		}
 		
 		ctx.stats.sub2LoadObjectsBldTime.finish();
+	}
+
+	private void checkAmenityRef(List<SpatialSearchToken> missingTokens, int indx) {
+		NameIndexAtom a = null;
+		String ref = null;
+		for (int i = 0; i < tCount; i++) {
+			a = linearResults.get(indx * tCount + i);
+			if (a.object instanceof Amenity as) {
+				ref = as.getAdditionalInfo("ref");
+				break;
+			}
+		}
+		if (ref != null) {
+			for (SpatialSearchToken t : missingTokens) {
+				if (t.matchName(ref)) {
+					a.matchExtraWord++;
+				}
+			}
+		}
 	}
 
 	
@@ -226,7 +253,8 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		}
 	}
 	
-	private void calcBuilding(SpatialSearchContext ctx, int indx, Map<String, Building> bldCheckCache) {
+	private void calcBuilding(SpatialSearchContext ctx, int indx, List<SpatialSearchToken> missingTokens,
+			Map<String, Building> bldCheckCache) {
 		Map<NameIndexAtom, String> bldCheckMap = null; // mostly single key-value map, value accumulated
 		boolean noBuildings = true;
 		NameIndexAtom noBldStreet = null; 
@@ -261,17 +289,14 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		}
 		int surplus = 0;
 		if (noBuildings && noBldStreet != null) {
-			if (ctx.tokens.size() > tCount) {
+			if (missingTokens.size() > 0) {
 				if (bldCheckMap == null) {
 					bldCheckMap = new HashMap<>();
 				}
 				String searchKey = "";
-				List<SpatialSearchToken> current = Arrays.asList(tokens);
-				for (SpatialSearchToken t : ctx.tokens) {
-					if (!current.contains(t)) {
-						searchKey += t.word + " ";
-						surplus++;
-					}
+				for (SpatialSearchToken t : missingTokens) {
+					searchKey += t.word + " ";
+					surplus++;
 				}
 				bldCheckMap.put(noBldStreet, searchKey);
 			} else if (noBldStreet.cityAsStreet) {

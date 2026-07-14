@@ -66,6 +66,8 @@ public class SpatialTextSearch {
 		// no intersection recorded but streets are nearby
 		public boolean ALLOW_VIRTUAL_STREET_INTERSECTIONS = true;
 		
+		public boolean ALLOW_SEARCH_POI_REF = true;
+		
 		public int[] OPTIM_LIMIT_RADIUS = new int[] {10_000, 30_000, 80_000}; // 
 //		public int[] OPTIM_LIMIT_RADIUS = new int[] {}; 
 		public int OPTIM_LIMIT_INTERSECTIONS = 30_000; // 10K (fast enough) or 50K (slow) - in new york  26,630 (3) -> 2,502 unique

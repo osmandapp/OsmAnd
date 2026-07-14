@@ -47,6 +47,9 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 					surplusWords++;
 				}
 			}
+			if (atom.matchExtraWord > 0) {
+				surplusWords += atom.matchExtraWord;
+			}
 			SpatialSearchToken token = parent.tokens[i];
 			SpatialSearchResultRef ref = null;
 			// find same object or object & parent 
