@@ -29,10 +29,11 @@ public class FavoriteComparator implements Comparator<Object> {
 	public final Collator collator = OsmAndCollator.primaryCollator();
 	private final OsmandApplication app;
 
-	public FavoriteComparator(@NonNull FavoriteListSortMode sortMode, @NonNull LatLon latLon, OsmandApplication app) {
+	public FavoriteComparator(@NonNull FavoriteListSortMode sortMode, @NonNull OsmandApplication app) {
 		this.trackTab = null;
 		this.sortMode = sortMode;
-		this.latLon = SharedUtil.kLatLon(latLon);
+		LatLon referenceLocation = FavoriteSortModesHelper.getReferenceLocation(app, sortMode);
+		this.latLon = SharedUtil.kLatLon(referenceLocation);
 		this.app = app;
 	}
 
@@ -85,9 +86,8 @@ public class FavoriteComparator implements Comparator<Object> {
 				multiplier = sortMode == NAME_ASCENDING ? 1 : -1;
 				return multiplier * compareFavoritePointNames(point1, point2);
 			}
-			case NEAREST, FARTHEST -> {
-				multiplier = sortMode == NEAREST ? 1 : -1;
-				return multiplier * compareNearestPoints(point1, point2);
+			case NEAREST, NEAREST_TO_MAP_CENTER -> {
+				return compareNearestPoints(point1, point2);
 			}
 			case DATE_ASCENDING, DATE_DESCENDING -> {
 				multiplier = sortMode == DATE_DESCENDING ? -1 : 1;

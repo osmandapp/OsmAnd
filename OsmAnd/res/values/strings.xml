@@ -11,6 +11,7 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="sort_by_nearest_to_current_location">Nearest to current location</string>
 	<string name="attached_media_delete_confirmation">Delete %1$d media items from this point? Media stored by the app and not attached anywhere else will also be deleted from the device.</string>
 	<string name="android_auto_missing_maps_desc">Download missing maps for the route to continue.</string>
 	<string name="android_auto_possible_missing_maps_desc">Possible missing maps. Try using existing maps to continue.</string>
