@@ -544,6 +544,8 @@ public class DownloadIndexesThread {
 							continue;
 						}
 						if (currentDownloads.contains(item)) {
+							// Skip duplicate queue entry. Replacement cleanup is valid only for a download
+							// started by this entry, so clear it when the entry is not processed.
 							clearPendingFilesToDelete(item);
 							continue;
 						}
