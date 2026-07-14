@@ -38,10 +38,10 @@ import net.osmand.util.SearchAlgorithms;
 // REVIEW (index_words_dashboard.html): POI / ADDRESS - France, Germany, US, Europe, China, Peru  
 // UNIT TESTING Fix 36K national park (don't index small islands > 100 POI !!!)
 // REVIEW AUTO TESTS: Auto tests - Slow analysis (Auto test New york)
+// TESTING access_main_tag, poi names - limit, subtypes
 
+// TODO Test Size
 // TODO Autocomplete results from POI TYPE / SUB TYPE
-// TODO limit + subtypes
-// TODO access_main_tag
 
 // TODO AVENUE G https://github.com/osmandapp/OsmAnd/issues/15726
 // TODO ANALYZE: too many wiki places on streets?
