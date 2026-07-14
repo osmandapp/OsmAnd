@@ -149,6 +149,7 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginBottom="@dimen/content_padding"
+					android:background="?attr/stroked_btn_contour"
 					android:orientation="vertical" />
 
 				<include

@@ -95,10 +95,28 @@ public class DiscountBottomSheet extends BaseMaterialBottomSheetDialogFragment i
 	@Nullable
 	private BottomSheetBehavior<View> bottomSheetBehavior;
 	@Nullable
-	private BottomSheetBehavior.BottomSheetCallback bottomSheetCallback;
-	@Nullable
 	private View bottomSheetView;
 	private int bottomSheetState = BottomSheetBehavior.STATE_COLLAPSED;
+	private float bottomSheetSlideOffset;
+	@NonNull
+	private final BottomSheetBehavior.BottomSheetCallback bottomSheetCallback = new BottomSheetBehavior.BottomSheetCallback() {
+		@Override
+		public void onStateChanged(@NonNull View bottomSheet, int newState) {
+			bottomSheetState = newState;
+			if (newState == BottomSheetBehavior.STATE_EXPANDED) {
+				bottomSheetSlideOffset = 1f;
+			} else if (newState == BottomSheetBehavior.STATE_COLLAPSED || newState == BottomSheetBehavior.STATE_HIDDEN) {
+				bottomSheetSlideOffset = 0f;
+			}
+			updateBottomSheetLayout();
+		}
+
+		@Override
+		public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+			bottomSheetSlideOffset = getInsetSlideOffset(bottomSheet);
+			updateBottomSheetLayout();
+		}
+	};
 
 	private static final List<BannerFeatureItem> MAPS_PLUS_BANNER_FEATURES = Arrays.asList(
 			new BannerFeatureItem(OsmAndFeature.UNLIMITED_MAP_DOWNLOADS),
@@ -236,6 +254,7 @@ public class DiscountBottomSheet extends BaseMaterialBottomSheetDialogFragment i
 		listContainer.addView(createLearnMoreChip(), new FlowLayout.LayoutParams(spacing, spacing));
 
 		setupPriceButtons(view, selectedFeature, inAppSku);
+		view.post(this::updateCollapsedPeekHeight);
 	}
 
 	private int getHeaderIconId(@Nullable OsmAndFeature selectedFeature, @Nullable String inAppSku, boolean nightMode) {
@@ -380,7 +399,6 @@ public class DiscountBottomSheet extends BaseMaterialBottomSheetDialogFragment i
 		}
 
 		LinearLayout container = view.findViewById(R.id.price_block);
-		setupPriceBlockBackground(container);
 		container.removeAllViews();
 		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
 		for (PriceButton<?> button : priceButtons) {
@@ -521,21 +539,6 @@ public class DiscountBottomSheet extends BaseMaterialBottomSheetDialogFragment i
 		int activeColor = ColorUtilities.getActiveColor(getApp(), isNightMode());
 		Drawable normal = createRoundedDrawable(activeColor, ButtonBackground.ROUNDED_SMALL);
 		setupRoundedBackground(applyButton, normal, ButtonBackground.ROUNDED_SMALL);
-		setupApplyButtonTextColor(applyButton);
-	}
-
-	private void setupPriceBlockBackground(@NonNull View priceBlock) {
-		priceBlock.setBackgroundResource(isNightMode()
-				? R.drawable.stroked_btn_contour_dark
-				: R.drawable.stroked_btn_contour_light);
-	}
-
-	private void setupApplyButtonTextColor(@NonNull View applyButton) {
-		int textColor = ColorUtilities.getActiveButtonsAndLinksTextColor(getApp(), isNightMode());
-		TextView title = applyButton.findViewById(R.id.title);
-		TextView description = applyButton.findViewById(R.id.description);
-		title.setTextColor(textColor);
-		description.setTextColor(textColor);
 	}
 
 	private void updateApplyButton(@NonNull View view) {
@@ -772,51 +775,23 @@ public class DiscountBottomSheet extends BaseMaterialBottomSheetDialogFragment i
 			params.height = ViewGroup.LayoutParams.MATCH_PARENT;
 			bottomSheet.setLayoutParams(params);
 
-			int contentHeight = 0;
-			int width = bottomSheet.getWidth() > 0 ? bottomSheet.getWidth() : content.getWidth();
-			if (width > 0) {
-				int widthSpec = View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY);
-				int heightSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-				content.measure(widthSpec, heightSpec);
-				contentHeight = content.getMeasuredHeight();
+			BottomSheetBehavior<View> behavior = BottomSheetBehavior.from(bottomSheet);
+			if (bottomSheetBehavior != behavior) {
+				if (bottomSheetBehavior != null) {
+					bottomSheetBehavior.removeBottomSheetCallback(bottomSheetCallback);
+				}
+				bottomSheetBehavior = behavior;
+				behavior.addBottomSheetCallback(bottomSheetCallback);
 			}
-			if (contentHeight == 0) {
-				contentHeight = content.getHeight();
-			}
-			if (contentHeight > 0) {
-				BottomSheetBehavior<View> behavior = BottomSheetBehavior.from(bottomSheet);
-				setupBottomSheetCallback(behavior);
-				behavior.setFitToContents(false);
-				behavior.setExpandedOffset(0);
-				behavior.setSkipCollapsed(false);
-				behavior.setPeekHeight(contentHeight);
-				bottomSheetState = BottomSheetBehavior.STATE_COLLAPSED;
-				updateBannerExpandedState();
-				behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-			}
+			behavior.setFitToContents(false);
+			behavior.setExpandedOffset(0);
+			behavior.setSkipCollapsed(false);
+			bottomSheetState = BottomSheetBehavior.STATE_COLLAPSED;
+			bottomSheetSlideOffset = 0f;
+			updateBottomSheetLayout();
+			updateCollapsedPeekHeight();
+			behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
 		});
-	}
-
-	private void setupBottomSheetCallback(@NonNull BottomSheetBehavior<View> behavior) {
-		if (bottomSheetBehavior == behavior && bottomSheetCallback != null) {
-			return;
-		}
-		if (bottomSheetBehavior != null && bottomSheetCallback != null) {
-			bottomSheetBehavior.removeBottomSheetCallback(bottomSheetCallback);
-		}
-		bottomSheetBehavior = behavior;
-		bottomSheetCallback = new BottomSheetBehavior.BottomSheetCallback() {
-			@Override
-			public void onStateChanged(@NonNull View bottomSheet, int newState) {
-				bottomSheetState = newState;
-				updateBannerExpandedState();
-			}
-
-			@Override
-			public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-			}
-		};
-		behavior.addBottomSheetCallback(bottomSheetCallback);
 	}
 
 	private void applyTextColor(@NonNull TextView view, int color, int defaultColor) {
@@ -937,73 +912,97 @@ public class DiscountBottomSheet extends BaseMaterialBottomSheetDialogFragment i
 	@Override
 	public void onApplyInsets(@NonNull WindowInsetsCompat insets) {
 		super.onApplyInsets(insets);
-		updateBannerExpandedState();
-		updateBottomSheetPeekHeight();
+		updateBottomSheetLayout();
+		updateCollapsedPeekHeight();
 	}
 
-	private void updateBannerExpandedState() {
+	private void updateBottomSheetLayout() {
 		View view = getView();
 		if (view != null) {
-			boolean expanded = bottomSheetState == BottomSheetBehavior.STATE_EXPANDED;
-			int statusBarTopInset = getStatusBarTopInset();
-			if (bottomSheetView != null) {
-				bottomSheetView.setTranslationY(expanded ? -statusBarTopInset : 0);
-				ViewGroup.LayoutParams bottomSheetParams = bottomSheetView.getLayoutParams();
-				if (bottomSheetParams != null) {
-					bottomSheetParams.height = expanded
-							? getExpandedBottomSheetHeight(statusBarTopInset)
-							: ViewGroup.LayoutParams.MATCH_PARENT;
-					bottomSheetView.setLayoutParams(bottomSheetParams);
-				}
-			}
-			ViewGroup.LayoutParams rootParams = view.getLayoutParams();
-			if (rootParams != null) {
-				rootParams.height = expanded ? ViewGroup.LayoutParams.MATCH_PARENT : ViewGroup.LayoutParams.WRAP_CONTENT;
-				view.setLayoutParams(rootParams);
-			}
-			if (view instanceof NestedScrollView nestedScrollView) {
-				nestedScrollView.setFillViewport(expanded);
-			}
-
+			boolean fillsHeight = isFullHeightState();
+			int topInset = getStatusBarTopInset();
+			int topOffset = Math.round(topInset * bottomSheetSlideOffset);
+			updateBottomSheetContainer(fillsHeight, topInset, topOffset);
 			View bannerContainer = view.findViewById(R.id.banner_container);
-			ViewGroup.LayoutParams bannerParams = bannerContainer.getLayoutParams();
-			bannerParams.height = expanded ? ViewGroup.LayoutParams.MATCH_PARENT : ViewGroup.LayoutParams.WRAP_CONTENT;
-			bannerContainer.setLayoutParams(bannerParams);
-
+			setLayoutHeight(view, fillsHeight ? ViewGroup.LayoutParams.MATCH_PARENT : ViewGroup.LayoutParams.WRAP_CONTENT);
+			setLayoutHeight(bannerContainer, fillsHeight ? ViewGroup.LayoutParams.MATCH_PARENT : ViewGroup.LayoutParams.WRAP_CONTENT);
+			if (view instanceof NestedScrollView nestedScrollView) {
+				nestedScrollView.setFillViewport(fillsHeight);
+			}
 			int bottomPadding = getResources().getDimensionPixelSize(R.dimen.content_padding) + getNavigationBarBottomInset();
 			bannerContainer.setPadding(
 					bannerContainer.getPaddingLeft(),
-					expanded ? statusBarTopInset : 0,
+					topOffset,
 					bannerContainer.getPaddingRight(),
 					bottomPadding);
 		}
 	}
 
-	private int getExpandedBottomSheetHeight(int statusBarTopInset) {
+	private boolean isFullHeightState() {
+		return bottomSheetSlideOffset > 0f
+				|| bottomSheetState != BottomSheetBehavior.STATE_COLLAPSED
+				&& bottomSheetState != BottomSheetBehavior.STATE_HIDDEN;
+	}
+
+	private void updateBottomSheetContainer(boolean fillsHeight, int topInset, int topOffset) {
+		if (bottomSheetView != null) {
+			bottomSheetView.setTranslationY(-topOffset);
+			setLayoutHeight(bottomSheetView, fillsHeight
+					? getFullHeightBottomSheetHeight(topInset)
+					: ViewGroup.LayoutParams.MATCH_PARENT);
+		}
+	}
+
+	private int getFullHeightBottomSheetHeight(int topInset) {
 		if (bottomSheetView != null && bottomSheetView.getParent() instanceof View parent && parent.getHeight() > 0) {
-			return parent.getHeight() + statusBarTopInset + getNavigationBarBottomInset();
+			return parent.getHeight() - bottomSheetView.getTop() + getNavigationBarBottomInset()
+					+ Math.round(topInset * bottomSheetSlideOffset);
 		}
 		return ViewGroup.LayoutParams.MATCH_PARENT;
 	}
 
-	private void updateBottomSheetPeekHeight() {
-		if (bottomSheetBehavior == null || bottomSheetView == null || bottomSheetState == BottomSheetBehavior.STATE_EXPANDED) {
+	private void setLayoutHeight(@NonNull View view, int height) {
+		ViewGroup.LayoutParams params = view.getLayoutParams();
+		if (params != null && params.height != height) {
+			params.height = height;
+			view.setLayoutParams(params);
+		}
+	}
+
+	private void updateCollapsedPeekHeight() {
+		if (bottomSheetBehavior == null || bottomSheetView == null || isFullHeightState()) {
 			return;
 		}
 		View content = getView();
 		if (content == null) {
 			return;
 		}
-		int width = bottomSheetView.getWidth() > 0 ? bottomSheetView.getWidth() : content.getWidth();
+		int contentHeight = measureContentHeight(content);
+		if (bottomSheetView.getParent() instanceof View parent && parent.getHeight() > 0) {
+			contentHeight = Math.min(contentHeight, parent.getHeight());
+		}
+		if (contentHeight > 0) {
+			bottomSheetBehavior.setPeekHeight(contentHeight);
+		}
+	}
+
+	private int measureContentHeight(@NonNull View content) {
+		int width = bottomSheetView != null && bottomSheetView.getWidth() > 0 ? bottomSheetView.getWidth() : content.getWidth();
 		if (width > 0) {
 			int widthSpec = View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY);
 			int heightSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
 			content.measure(widthSpec, heightSpec);
-			int contentHeight = content.getMeasuredHeight();
-			if (contentHeight > 0) {
-				bottomSheetBehavior.setPeekHeight(contentHeight);
-			}
+			return content.getMeasuredHeight();
 		}
+		return content.getHeight();
+	}
+
+	private float getInsetSlideOffset(@NonNull View bottomSheet) {
+		int topInset = getStatusBarTopInset();
+		if (topInset == 0) {
+			return 1f;
+		}
+		return Math.max(0f, Math.min(1f, (topInset - bottomSheet.getTop()) / (float) topInset));
 	}
 
 	private int getNavigationBarBottomInset() {
