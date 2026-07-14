@@ -240,8 +240,8 @@ public class SpatialSearchTestAndDocs {
 //		query = "PA 75"; // Yes - ('PA 75', 'PA-75'), YES - 'PA75' 
 		// data "PA 75" - see "M-2, 2 M" example
 
-//		pattern = "Liechtenstein_europe.obf";
-//		query = "Vaduz Lettstrasse";
+		pattern = "Liechtenstein_europe.obf";
+		query = "Vaduz Lettstrasse";
 //		query = "Vaduz ";
 //		query = "Jugendheim Malbun";
 
