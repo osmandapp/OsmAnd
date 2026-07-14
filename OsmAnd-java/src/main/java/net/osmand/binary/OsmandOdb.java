@@ -18803,23 +18803,23 @@ public final class OsmandOdb {
     public interface AddressNameIndexDataOrBuilder
         extends com.google.protobuf.MessageOrBuilder {
 
-      // optional uint32 atomsCount = 7;
+      // optional uint32 atomsLength = 7;
       /**
-       * <code>optional uint32 atomsCount = 7;</code>
+       * <code>optional uint32 atomsLength = 7;</code>
        *
        * <pre>
        * first but not in order of values
        * </pre>
        */
-      boolean hasAtomsCount();
+      boolean hasAtomsLength();
       /**
-       * <code>optional uint32 atomsCount = 7;</code>
+       * <code>optional uint32 atomsLength = 7;</code>
        *
        * <pre>
        * first but not in order of values
        * </pre>
        */
-      int getAtomsCount();
+      int getAtomsLength();
 
       // repeated string suffixesDictionary = 2;
       /**
@@ -19026,7 +19026,7 @@ public final class OsmandOdb {
               }
               case 56: {
                 bitField0_ |= 0x00000001;
-                atomsCount_ = input.readUInt32();
+                atomsLength_ = input.readUInt32();
                 break;
               }
             }
@@ -19078,28 +19078,28 @@ public final class OsmandOdb {
       }
 
       private int bitField0_;
-      // optional uint32 atomsCount = 7;
-      public static final int ATOMSCOUNT_FIELD_NUMBER = 7;
-      private int atomsCount_;
+      // optional uint32 atomsLength = 7;
+      public static final int ATOMSLENGTH_FIELD_NUMBER = 7;
+      private int atomsLength_;
       /**
-       * <code>optional uint32 atomsCount = 7;</code>
+       * <code>optional uint32 atomsLength = 7;</code>
        *
        * <pre>
        * first but not in order of values
        * </pre>
        */
-      public boolean hasAtomsCount() {
+      public boolean hasAtomsLength() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional uint32 atomsCount = 7;</code>
+       * <code>optional uint32 atomsLength = 7;</code>
        *
        * <pre>
        * first but not in order of values
        * </pre>
        */
-      public int getAtomsCount() {
-        return atomsCount_;
+      public int getAtomsLength() {
+        return atomsLength_;
       }
 
       // repeated string suffixesDictionary = 2;
@@ -19248,7 +19248,7 @@ public final class OsmandOdb {
       }
 
       private void initFields() {
-        atomsCount_ = 0;
+        atomsLength_ = 0;
         suffixesDictionary_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         suffixesCommonDictionary_ = java.util.Collections.emptyList();
         atom_ = java.util.Collections.emptyList();
@@ -19281,7 +19281,7 @@ public final class OsmandOdb {
           output.writeMessage(4, atom_.get(i));
         }
         if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          output.writeUInt32(7, atomsCount_);
+          output.writeUInt32(7, atomsLength_);
         }
         getUnknownFields().writeTo(output);
       }
@@ -19316,7 +19316,7 @@ public final class OsmandOdb {
         }
         if (((bitField0_ & 0x00000001) == 0x00000001)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeUInt32Size(7, atomsCount_);
+            .computeUInt32Size(7, atomsLength_);
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
@@ -19435,7 +19435,7 @@ public final class OsmandOdb {
 
         public Builder clear() {
           super.clear();
-          atomsCount_ = 0;
+          atomsLength_ = 0;
           bitField0_ = (bitField0_ & ~0x00000001);
           suffixesDictionary_ = com.google.protobuf.LazyStringArrayList.EMPTY;
           bitField0_ = (bitField0_ & ~0x00000002);
@@ -19478,7 +19478,7 @@ public final class OsmandOdb {
           if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
             to_bitField0_ |= 0x00000001;
           }
-          result.atomsCount_ = atomsCount_;
+          result.atomsLength_ = atomsLength_;
           if (((bitField0_ & 0x00000002) == 0x00000002)) {
             suffixesDictionary_ = new com.google.protobuf.UnmodifiableLazyStringList(
                 suffixesDictionary_);
@@ -19515,8 +19515,8 @@ public final class OsmandOdb {
 
         public Builder mergeFrom(net.osmand.binary.OsmandOdb.OsmAndAddressNameIndexData.AddressNameIndexData other) {
           if (other == net.osmand.binary.OsmandOdb.OsmAndAddressNameIndexData.AddressNameIndexData.getDefaultInstance()) return this;
-          if (other.hasAtomsCount()) {
-            setAtomsCount(other.getAtomsCount());
+          if (other.hasAtomsLength()) {
+            setAtomsLength(other.getAtomsLength());
           }
           if (!other.suffixesDictionary_.isEmpty()) {
             if (suffixesDictionary_.isEmpty()) {
@@ -19597,51 +19597,51 @@ public final class OsmandOdb {
         }
         private int bitField0_;
 
-        // optional uint32 atomsCount = 7;
-        private int atomsCount_ ;
+        // optional uint32 atomsLength = 7;
+        private int atomsLength_ ;
         /**
-         * <code>optional uint32 atomsCount = 7;</code>
+         * <code>optional uint32 atomsLength = 7;</code>
          *
          * <pre>
          * first but not in order of values
          * </pre>
          */
-        public boolean hasAtomsCount() {
+        public boolean hasAtomsLength() {
           return ((bitField0_ & 0x00000001) == 0x00000001);
         }
         /**
-         * <code>optional uint32 atomsCount = 7;</code>
+         * <code>optional uint32 atomsLength = 7;</code>
          *
          * <pre>
          * first but not in order of values
          * </pre>
          */
-        public int getAtomsCount() {
-          return atomsCount_;
+        public int getAtomsLength() {
+          return atomsLength_;
         }
         /**
-         * <code>optional uint32 atomsCount = 7;</code>
+         * <code>optional uint32 atomsLength = 7;</code>
          *
          * <pre>
          * first but not in order of values
          * </pre>
          */
-        public Builder setAtomsCount(int value) {
+        public Builder setAtomsLength(int value) {
           bitField0_ |= 0x00000001;
-          atomsCount_ = value;
+          atomsLength_ = value;
           onChanged();
           return this;
         }
         /**
-         * <code>optional uint32 atomsCount = 7;</code>
+         * <code>optional uint32 atomsLength = 7;</code>
          *
          * <pre>
          * first but not in order of values
          * </pre>
          */
-        public Builder clearAtomsCount() {
+        public Builder clearAtomsLength() {
           bitField0_ = (bitField0_ & ~0x00000001);
-          atomsCount_ = 0;
+          atomsLength_ = 0;
           onChanged();
           return this;
         }
@@ -49312,23 +49312,23 @@ public final class OsmandOdb {
     public interface OsmAndPoiNameIndexDataOrBuilder
         extends com.google.protobuf.MessageOrBuilder {
 
-      // optional uint32 atomsCount = 7;
+      // optional uint32 atomsLength = 7;
       /**
-       * <code>optional uint32 atomsCount = 7;</code>
+       * <code>optional uint32 atomsLength = 7;</code>
        *
        * <pre>
        * first but not in order of values
        * </pre>
        */
-      boolean hasAtomsCount();
+      boolean hasAtomsLength();
       /**
-       * <code>optional uint32 atomsCount = 7;</code>
+       * <code>optional uint32 atomsLength = 7;</code>
        *
        * <pre>
        * first but not in order of values
        * </pre>
        */
-      int getAtomsCount();
+      int getAtomsLength();
 
       // repeated string suffixesDictionary = 2;
       /**
@@ -49519,7 +49519,7 @@ public final class OsmandOdb {
               }
               case 56: {
                 bitField0_ |= 0x00000001;
-                atomsCount_ = input.readUInt32();
+                atomsLength_ = input.readUInt32();
                 break;
               }
             }
@@ -49571,28 +49571,28 @@ public final class OsmandOdb {
       }
 
       private int bitField0_;
-      // optional uint32 atomsCount = 7;
-      public static final int ATOMSCOUNT_FIELD_NUMBER = 7;
-      private int atomsCount_;
+      // optional uint32 atomsLength = 7;
+      public static final int ATOMSLENGTH_FIELD_NUMBER = 7;
+      private int atomsLength_;
       /**
-       * <code>optional uint32 atomsCount = 7;</code>
+       * <code>optional uint32 atomsLength = 7;</code>
        *
        * <pre>
        * first but not in order of values
        * </pre>
        */
-      public boolean hasAtomsCount() {
+      public boolean hasAtomsLength() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional uint32 atomsCount = 7;</code>
+       * <code>optional uint32 atomsLength = 7;</code>
        *
        * <pre>
        * first but not in order of values
        * </pre>
        */
-      public int getAtomsCount() {
-        return atomsCount_;
+      public int getAtomsLength() {
+        return atomsLength_;
       }
 
       // repeated string suffixesDictionary = 2;
@@ -49725,7 +49725,7 @@ public final class OsmandOdb {
       }
 
       private void initFields() {
-        atomsCount_ = 0;
+        atomsLength_ = 0;
         suffixesDictionary_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         suffixesCommonDictionary_ = java.util.Collections.emptyList();
         atoms_ = java.util.Collections.emptyList();
@@ -49752,7 +49752,7 @@ public final class OsmandOdb {
           output.writeMessage(3, atoms_.get(i));
         }
         if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          output.writeUInt32(7, atomsCount_);
+          output.writeUInt32(7, atomsLength_);
         }
         getUnknownFields().writeTo(output);
       }
@@ -49787,7 +49787,7 @@ public final class OsmandOdb {
         }
         if (((bitField0_ & 0x00000001) == 0x00000001)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeUInt32Size(7, atomsCount_);
+            .computeUInt32Size(7, atomsLength_);
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
@@ -49906,7 +49906,7 @@ public final class OsmandOdb {
 
         public Builder clear() {
           super.clear();
-          atomsCount_ = 0;
+          atomsLength_ = 0;
           bitField0_ = (bitField0_ & ~0x00000001);
           suffixesDictionary_ = com.google.protobuf.LazyStringArrayList.EMPTY;
           bitField0_ = (bitField0_ & ~0x00000002);
@@ -49949,7 +49949,7 @@ public final class OsmandOdb {
           if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
             to_bitField0_ |= 0x00000001;
           }
-          result.atomsCount_ = atomsCount_;
+          result.atomsLength_ = atomsLength_;
           if (((bitField0_ & 0x00000002) == 0x00000002)) {
             suffixesDictionary_ = new com.google.protobuf.UnmodifiableLazyStringList(
                 suffixesDictionary_);
@@ -49986,8 +49986,8 @@ public final class OsmandOdb {
 
         public Builder mergeFrom(net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData other) {
           if (other == net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData.getDefaultInstance()) return this;
-          if (other.hasAtomsCount()) {
-            setAtomsCount(other.getAtomsCount());
+          if (other.hasAtomsLength()) {
+            setAtomsLength(other.getAtomsLength());
           }
           if (!other.suffixesDictionary_.isEmpty()) {
             if (suffixesDictionary_.isEmpty()) {
@@ -50062,51 +50062,51 @@ public final class OsmandOdb {
         }
         private int bitField0_;
 
-        // optional uint32 atomsCount = 7;
-        private int atomsCount_ ;
+        // optional uint32 atomsLength = 7;
+        private int atomsLength_ ;
         /**
-         * <code>optional uint32 atomsCount = 7;</code>
+         * <code>optional uint32 atomsLength = 7;</code>
          *
          * <pre>
          * first but not in order of values
          * </pre>
          */
-        public boolean hasAtomsCount() {
+        public boolean hasAtomsLength() {
           return ((bitField0_ & 0x00000001) == 0x00000001);
         }
         /**
-         * <code>optional uint32 atomsCount = 7;</code>
+         * <code>optional uint32 atomsLength = 7;</code>
          *
          * <pre>
          * first but not in order of values
          * </pre>
          */
-        public int getAtomsCount() {
-          return atomsCount_;
+        public int getAtomsLength() {
+          return atomsLength_;
         }
         /**
-         * <code>optional uint32 atomsCount = 7;</code>
+         * <code>optional uint32 atomsLength = 7;</code>
          *
          * <pre>
          * first but not in order of values
          * </pre>
          */
-        public Builder setAtomsCount(int value) {
+        public Builder setAtomsLength(int value) {
           bitField0_ |= 0x00000001;
-          atomsCount_ = value;
+          atomsLength_ = value;
           onChanged();
           return this;
         }
         /**
-         * <code>optional uint32 atomsCount = 7;</code>
+         * <code>optional uint32 atomsLength = 7;</code>
          *
          * <pre>
          * first but not in order of values
          * </pre>
          */
-        public Builder clearAtomsCount() {
+        public Builder clearAtomsLength() {
           bitField0_ = (bitField0_ & ~0x00000001);
-          atomsCount_ = 0;
+          atomsLength_ = 0;
           onChanged();
           return this;
         }
@@ -80678,197 +80678,197 @@ public final class OsmandOdb {
       ".OBF.CityBlockIndex\"<\n\nCitiesType\022\021\n\rCit" +
       "iesOrTowns\020\001\022\r\n\tPostcodes\020\002\022\014\n\010Villages\020" +
       "\003\"H\n\022CommonIndexedStats\022\r\n\005value\030\004 \003(\t\022\017" +
-      "\n\007matched\030\005 \003(\r\022\022\n\nnonindexed\030\006 \003(\r\"\352\002\n\032" +
+      "\n\007matched\030\005 \003(\r\022\022\n\nnonindexed\030\006 \003(\r\"\353\002\n\032" +
       "OsmAndAddressNameIndexData\022-\n\005table\030\004 \002(" +
       "\0132\036.OsmAnd.OBF.IndexedStringTable\0223\n\013com" +
       "monStats\030\006 \001(\0132\036.OsmAnd.OBF.CommonIndexe" +
       "dStats\022I\n\004atom\030\007 \003(\0132;.OsmAnd.OBF.OsmAnd" +
       "AddressNameIndexData.AddressNameIndexDat",
-      "a\032\234\001\n\024AddressNameIndexData\022\022\n\natomsCount" +
-      "\030\007 \001(\r\022\032\n\022suffixesDictionary\030\002 \003(\t\022 \n\030su" +
-      "ffixesCommonDictionary\030\003 \003(\r\0222\n\004atom\030\004 \003" +
-      "(\0132$.OsmAnd.OBF.AddressNameIndexDataAtom" +
-      "\"\331\001\n\030AddressNameIndexDataAtom\022\014\n\004type\030\003 " +
-      "\002(\r\022\033\n\023suffixesBitsetIndex\030\010 \003(\r\022\023\n\013extr" +
-      "aSuffix\030\t \003(\t\022\027\n\017otherWordsCount\030\n \003(\r\022\014" +
-      "\n\004bbox\030\014 \001(\014\022\030\n\020enclosingObjects\030\020 \001(\r\022\024" +
-      "\n\014shiftToIndex\030\005 \003(\005\022\030\n\020shiftToCityIndex" +
-      "\030\006 \003(\005\022\014\n\004xy16\030\007 \003(\r\"\302\001\n\tCityIndex\022\021\n\tci",
-      "ty_type\030\001 \001(\r\022\014\n\004name\030\002 \002(\t\022\017\n\007name_en\030\003" +
-      " \001(\t\022\n\n\002id\030\004 \001(\004\022\t\n\001x\030\005 \002(\r\022\t\n\001y\030\006 \002(\r\022\027" +
-      "\n\017attributeTagIds\030\007 \003(\r\022\027\n\017attributeValu" +
-      "es\030\010 \003(\t\022\035\n\025shiftToCityBlockIndex\030\n \001(\007\022" +
-      "\020\n\010boundary\030\014 \001(\014\"\202\001\n\016CityBlockIndex\022\030\n\020" +
-      "shiftToCityIndex\030\004 \001(\007\022,\n\tbuildings\030\n \003(" +
-      "\0132\031.OsmAnd.OBF.BuildingIndex\022(\n\007streets\030" +
-      "\014 \003(\0132\027.OsmAnd.OBF.StreetIndex\"\345\001\n\013Stree" +
-      "tIndex\022\014\n\004name\030\001 \002(\t\022\017\n\007name_en\030\002 \001(\t\022\t\n" +
-      "\001x\030\003 \002(\021\022\t\n\001y\030\004 \002(\021\0225\n\rintersections\030\005 \003",
-      "(\0132\036.OsmAnd.OBF.StreetIntersection\022\n\n\002id" +
-      "\030\006 \001(\004\022\027\n\017attributeTagIds\030\007 \003(\r\022\027\n\017attri" +
-      "buteValues\030\010 \003(\t\022,\n\tbuildings\030\014 \003(\0132\031.Os" +
-      "mAnd.OBF.BuildingIndex\"\221\001\n\022StreetInterse" +
-      "ction\022\014\n\004name\030\002 \002(\t\022\017\n\007name_en\030\003 \001(\t\022\024\n\014" +
-      "intersectedX\030\004 \002(\021\022\024\n\014intersectedY\030\005 \002(\021" +
-      "\022\027\n\017attributeTagIds\030\007 \003(\r\022\027\n\017attributeVa" +
-      "lues\030\010 \003(\t\"\230\002\n\rBuildingIndex\022\014\n\004name\030\001 \002" +
-      "(\t\022\017\n\007name_en\030\002 \001(\t\022\r\n\005name2\030\003 \001(\t\022\020\n\010na" +
-      "me_en2\030\004 \001(\t\022\025\n\rinterpolation\030\005 \001(\021\022\t\n\001x",
-      "\030\007 \002(\021\022\t\n\001y\030\010 \002(\021\022\n\n\002x2\030\t \001(\021\022\n\n\002y2\030\n \001(" +
-      "\021\022\n\n\002id\030\r \001(\004\022\020\n\010postcode\030\016 \001(\t\022\027\n\017attri" +
-      "buteTagIds\030\017 \003(\r\022\027\n\017attributeValues\030\020 \003(" +
-      "\t\022\030\n\020attributeTagIds2\030\021 \003(\r\022\030\n\020attribute" +
-      "Values2\030\022 \003(\t\"=\n\017TransportRoutes\022*\n\006rout" +
-      "es\030\006 \003(\0132\032.OsmAnd.OBF.TransportRoute\"\303\002\n" +
-      "\016TransportRoute\022\n\n\002id\030\001 \002(\004\022\014\n\004type\030\003 \001(" +
-      "\r\022\020\n\010operator\030\004 \001(\r\022\013\n\003ref\030\005 \001(\t\022\014\n\004name" +
-      "\030\006 \001(\r\022\017\n\007name_en\030\007 \001(\r\022\020\n\010distance\030\010 \001(" +
-      "\r\022\r\n\005color\030\t \001(\r\0223\n\013directStops\030\017 \003(\0132\036.",
-      "OsmAnd.OBF.TransportRouteStop\022\020\n\010geometr" +
-      "y\030\021 \001(\014\0228\n\014scheduleTrip\030\022 \003(\0132\".OsmAnd.O" +
-      "BF.TransportRouteSchedule\022\027\n\017attributeTa" +
-      "gIds\030\023 \003(\r\022\036\n\026attributeTextTagValues\030\024 \003" +
-      "(\014\"Q\n\031IncompleteTransportRoutes\0224\n\006route" +
-      "s\030\006 \003(\0132$.OsmAnd.OBF.IncompleteTransport" +
-      "Route\"{\n\030IncompleteTransportRoute\022\n\n\002id\030" +
-      "\001 \002(\004\022\014\n\004type\030\003 \001(\r\022\020\n\010operator\030\004 \001(\r\022\013\n" +
-      "\003ref\030\005 \001(\r\022\020\n\010routeRef\030\007 \002(\r\022\024\n\014missingS" +
-      "tops\030\010 \003(\r\"\244\001\n\026TransportRouteSchedule\022\030\n",
-      "\020avgStopIntervals\030\001 \001(\014\022\030\n\020avgWaitInterv" +
-      "als\030\002 \001(\014\022\025\n\rtripIntervals\030\003 \001(\014\022?\n\nexce" +
-      "ptions\030\010 \003(\0132+.OsmAnd.OBF.TransportRoute" +
-      "ScheduleException\"\313\001\n\037TransportRouteSche" +
-      "duleException\022\023\n\013tripIndexes\030\001 \003(\r\022\023\n\013st" +
-      "opIndexes\030\002 \003(\r\022\021\n\tavailable\030\003 \001(\010\022\024\n\014de" +
-      "layArrival\030\005 \003(\r\022\031\n\021deltaWaitInterval\030\006 " +
-      "\003(\005\022\034\n\024dayOfWeekRestriction\030\007 \003(\r\022\034\n\024day" +
-      "OfYearRestriction\030\010 \003(\r\"k\n\022TransportRout" +
-      "eStop\022\n\n\002id\030\001 \002(\022\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(",
-      "\021\022\014\n\004name\030\006 \002(\r\022\017\n\007name_en\030\007 \001(\r\022\022\n\ntrav" +
-      "elTime\030\010 \001(\r\"\332\001\n\rTransportStop\022\n\n\002dx\030\001 \002" +
-      "(\021\022\n\n\002dy\030\002 \002(\021\022\n\n\002id\030\005 \002(\022\022\014\n\004name\030\006 \002(\r" +
-      "\022\017\n\007name_en\030\007 \001(\r\022\033\n\023additionalNamePairs" +
-      "\030\010 \001(\014\022,\n\005exits\030\t \003(\0132\035.OsmAnd.OBF.Trans" +
-      "portStopExit\022\016\n\006routes\030\020 \003(\r\022\030\n\020deletedR" +
-      "outesIds\030\024 \003(\004\022\021\n\troutesIds\030\026 \003(\004\"8\n\021Tra" +
-      "nsportStopExit\022\n\n\002dx\030\001 \002(\021\022\n\n\002dy\030\002 \002(\021\022\013" +
-      "\n\003ref\030\003 \002(\r\"\272\001\n\022TransportStopsTree\022\014\n\004le" +
-      "ft\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n\006",
-      "bottom\030\004 \002(\021\0220\n\010subtrees\030\007 \003(\0132\036.OsmAnd." +
-      "OBF.TransportStopsTree\022(\n\005leafs\030\010 \003(\0132\031." +
-      "OsmAnd.OBF.TransportStop\022\016\n\006baseId\030\020 \001(\004" +
-      "\"\357\001\n\024OsmAndTransportIndex\022\014\n\004name\030\001 \001(\t\022" +
-      "+\n\006routes\030\003 \001(\0132\033.OsmAnd.OBF.TransportRo" +
-      "utes\022-\n\005stops\030\006 \001(\0132\036.OsmAnd.OBF.Transpo" +
-      "rtStopsTree\022?\n\020incompleteRoutes\030\010 \001(\0132%." +
-      "OsmAnd.OBF.IncompleteTransportRoutes\022,\n\013" +
-      "stringTable\030\t \002(\0132\027.OsmAnd.OBF.StringTab" +
-      "le\"\312\002\n\016OsmAndPoiIndex\022\014\n\004name\030\001 \002(\t\022-\n\nb",
-      "oundaries\030\002 \002(\0132\031.OsmAnd.OBF.OsmAndTileB" +
-      "ox\0228\n\017categoriesTable\030\003 \003(\0132\037.OsmAnd.OBF" +
-      ".OsmAndCategoryTable\0221\n\tnameIndex\030\004 \001(\0132" +
-      "\036.OsmAnd.OBF.OsmAndPoiNameIndex\0226\n\rsubty" +
-      "pesTable\030\005 \001(\0132\037.OsmAnd.OBF.OsmAndSubtyp" +
-      "esTable\022\'\n\005boxes\030\006 \003(\0132\030.OsmAnd.OBF.OsmA" +
-      "ndPoiBox\022-\n\007poiData\030\t \003(\0132\034.OsmAnd.OBF.O" +
-      "smAndPoiBoxData\"\341\002\n\022OsmAndPoiNameIndex\022-" +
-      "\n\005table\030\003 \002(\0132\036.OsmAnd.OBF.IndexedString" +
-      "Table\0223\n\013commonStats\030\004 \001(\0132\036.OsmAnd.OBF.",
-      "CommonIndexedStats\022C\n\004data\030\005 \003(\01325.OsmAn" +
-      "d.OBF.OsmAndPoiNameIndex.OsmAndPoiNameIn" +
-      "dexData\032\241\001\n\026OsmAndPoiNameIndexData\022\022\n\nat" +
-      "omsCount\030\007 \001(\r\022\032\n\022suffixesDictionary\030\002 \003" +
-      "(\t\022 \n\030suffixesCommonDictionary\030\001 \003(\r\0225\n\005" +
-      "atoms\030\003 \003(\0132&.OsmAnd.OBF.OsmAndPoiNameIn" +
-      "dexDataAtom\"\276\002\n\032OsmAndPoiNameIndexDataAt" +
-      "om\022\014\n\004zoom\030\002 \001(\r\022\t\n\001x\030\003 \001(\r\022\t\n\001y\030\004 \001(\r\022\033" +
-      "\n\023suffixesBitsetIndex\030\005 \003(\r\022\023\n\013extraSuff" +
-      "ix\030\007 \003(\t\022\027\n\017otherWordsCount\030\010 \003(\r\022\025\n\rpoi",
-      "IndInBlock\030\t \003(\r\022\014\n\004bbox\030\n \001(\014\022\025\n\rpoiCat" +
-      "egories\030\013 \003(\r\022\021\n\teloRating\030\014 \003(\r\022\017\n\007shif" +
-      "tTo\030\016 \001(\007\022\031\n\021shiftToNextZ8Tile\030\024 \001(\007\022\032\n\022" +
-      "shiftToNextZ10Tile\030\025 \001(\007\022\032\n\022shiftToNextZ" +
-      "12Tile\030\026 \001(\007\"e\n\023OsmAndCategoryTable\022\020\n\010c" +
-      "ategory\030\001 \002(\t\022\021\n\tfrequency\030\002 \001(\r\022\025\n\rsubc" +
-      "ategories\030\003 \003(\t\022\022\n\nsubcatfreq\030\004 \003(\r\"E\n\023O" +
-      "smAndSubtypesTable\022.\n\010subtypes\030\004 \003(\0132\034.O" +
-      "smAnd.OBF.OsmAndPoiSubtype\"\240\001\n\020OsmAndPoi" +
-      "Subtype\022\014\n\004name\030\001 \002(\t\022\017\n\007tagname\030\002 \001(\t\022\016",
-      "\n\006isText\030\003 \002(\010\022\021\n\tfrequency\030\005 \001(\r\022\031\n\021sub" +
-      "typeValuesSize\030\006 \001(\r\022\031\n\021subtypeValuesFre" +
-      "q\030\007 \003(\r\022\024\n\014subtypeValue\030\010 \003(\t\"2\n\021OsmAndP" +
-      "oiTagGroup\022\n\n\002id\030\001 \002(\r\022\021\n\ttagValues\030\005 \003(" +
-      "\t\"T\n\022OsmAndPoiTagGroups\022\017\n\003ids\030\002 \003(\rB\002\020\001" +
-      "\022-\n\006groups\030\005 \003(\0132\035.OsmAnd.OBF.OsmAndPoiT" +
-      "agGroup\"\340\001\n\014OsmAndPoiBox\022\014\n\004zoom\030\001 \002(\r\022\014" +
-      "\n\004left\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\0223\n\ncategories\030" +
-      "\004 \001(\0132\037.OsmAnd.OBF.OsmAndPoiCategories\0221" +
-      "\n\ttagGroups\030\010 \001(\0132\036.OsmAnd.OBF.OsmAndPoi",
-      "TagGroups\022*\n\010subBoxes\030\n \003(\0132\030.OsmAnd.OBF" +
-      ".OsmAndPoiBox\022\023\n\013shiftToData\030\016 \001(\007\"@\n\023Os" +
-      "mAndPoiCategories\022\022\n\ncategories\030\003 \003(\r\022\025\n" +
-      "\rsubcategories\030\005 \003(\r\"i\n\020OsmAndPoiBoxData" +
-      "\022\014\n\004zoom\030\001 \001(\r\022\t\n\001x\030\002 \001(\r\022\t\n\001y\030\003 \001(\r\0221\n\007" +
-      "poiData\030\005 \003(\0132 .OsmAnd.OBF.OsmAndPoiBoxD" +
-      "ataAtom\"\333\001\n\024OsmAndPoiBoxDataAtom\022\n\n\002dx\030\002" +
-      " \002(\021\022\n\n\002dy\030\003 \002(\021\022\022\n\ncategories\030\004 \003(\r\022\025\n\r" +
-      "subcategories\030\005 \003(\r\022\014\n\004name\030\006 \001(\t\022\016\n\006nam" +
-      "eEn\030\007 \001(\t\022\n\n\002id\030\010 \001(\004\022\026\n\016textCategories\030",
-      "\016 \003(\r\022\022\n\ntextValues\030\017 \003(\t\022\023\n\013precisionXY" +
-      "\030\020 \001(\005\022\025\n\ttagGroups\030\021 \003(\rB\002\020\001\"\032\n\007IdTable" +
-      "\022\017\n\007routeId\030\001 \003(\022\"F\n\017RestrictionData\022\014\n\004" +
-      "type\030\001 \002(\005\022\014\n\004from\030\002 \002(\005\022\n\n\002to\030\003 \002(\005\022\013\n\003" +
-      "via\030\004 \001(\005\"x\n\tRouteData\022\016\n\006points\030\001 \002(\014\022\022" +
-      "\n\npointTypes\030\004 \001(\014\022\022\n\npointNames\030\005 \001(\014\022\r" +
-      "\n\005types\030\007 \002(\014\022\017\n\007routeId\030\014 \002(\005\022\023\n\013string" +
-      "Names\030\016 \001(\014\"\304\005\n\022OsmAndRoutingIndex\022\014\n\004na" +
-      "me\030\001 \002(\t\022?\n\005rules\030\002 \003(\01320.OsmAnd.OBF.Osm" +
-      "AndRoutingIndex.RouteEncodingRule\022>\n\troo",
-      "tBoxes\030\003 \003(\0132+.OsmAnd.OBF.OsmAndRoutingI" +
-      "ndex.RouteDataBox\022A\n\014basemapBoxes\030\004 \003(\0132" +
-      "+.OsmAnd.OBF.OsmAndRoutingIndex.RouteDat" +
-      "aBox\022=\n\006blocks\030\005 \003(\0132-.OsmAnd.OBF.OsmAnd" +
-      "RoutingIndex.RouteDataBlock\032;\n\021RouteEnco" +
-      "dingRule\022\013\n\003tag\030\003 \002(\t\022\r\n\005value\030\005 \002(\t\022\n\n\002" +
-      "id\030\007 \001(\r\032\231\001\n\014RouteDataBox\022\014\n\004left\030\001 \002(\021\022" +
-      "\r\n\005right\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n\006bottom\030\004 " +
-      "\002(\021\022\023\n\013shiftToData\030\005 \001(\007\022:\n\005boxes\030\007 \003(\0132" +
-      "+.OsmAnd.OBF.OsmAndRoutingIndex.RouteDat",
-      "aBox\032\303\001\n\016RouteDataBlock\022$\n\007idTable\030\005 \001(\013" +
-      "2\023.OsmAnd.OBF.IdTable\022*\n\013dataObjects\030\006 \003" +
-      "(\0132\025.OsmAnd.OBF.RouteData\0221\n\014restriction" +
-      "s\030\007 \003(\0132\033.OsmAnd.OBF.RestrictionData\022,\n\013" +
-      "stringTable\030\010 \001(\0132\027.OsmAnd.OBF.StringTab" +
-      "le\"\231\010\n\024OsmAndHHRoutingIndex\022\017\n\007edition\030\001" +
-      " \002(\003\022\017\n\007profile\030\002 \002(\t\022\025\n\rprofileParams\030\003" +
-      " \003(\t\022/\n\016tagValuesTable\030\004 \001(\0132\027.OsmAnd.OB" +
-      "F.StringTable\022E\n\npointBoxes\030\005 \002(\01321.OsmA" +
-      "nd.OBF.OsmAndHHRoutingIndex.HHRoutePoint",
-      "sBox\022L\n\rpointSegments\030\006 \003(\01325.OsmAnd.OBF" +
-      ".OsmAndHHRoutingIndex.HHRouteBlockSegmen" +
-      "ts\032\324\001\n\020HHRoutePointsBox\022\014\n\004left\030\002 \002(\021\022\r\n" +
-      "\005right\030\003 \002(\021\022\013\n\003top\030\004 \002(\021\022\016\n\006bottom\030\005 \002(" +
-      "\021\022@\n\005boxes\030\006 \003(\01321.OsmAnd.OBF.OsmAndHHRo" +
-      "utingIndex.HHRoutePointsBox\022D\n\006points\030\007 " +
-      "\003(\01324.OsmAnd.OBF.OsmAndHHRoutingIndex.HH" +
-      "RouteNetworkPoint\032\366\001\n\023HHRouteNetworkPoin" +
-      "t\022\n\n\002id\030\001 \002(\005\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\020\n" +
-      "\010globalId\030\004 \002(\005\022\016\n\006roadId\030\005 \002(\003\022\031\n\021roadS",
-      "tartEndIndex\030\006 \002(\005\022\021\n\tclusterId\030\007 \001(\005\022\023\n" +
-      "\013dualPointId\030\010 \001(\005\022\025\n\rdualClusterId\030\t \001(" +
-      "\005\022\022\n\nprofileIds\030\n \003(\005\022\022\n\npartialInd\030\013 \001(" +
-      "\005\022\027\n\013tagValueIds\030\014 \003(\005B\002\020\001\032\360\001\n\024HHRouteBl" +
-      "ockSegments\022\024\n\014idRangeStart\030\001 \002(\005\022\025\n\ridR" +
-      "angeLength\030\002 \002(\005\022\021\n\tprofileId\030\003 \001(\005\022J\n\013i" +
-      "nnerBlocks\030\006 \003(\01325.OsmAnd.OBF.OsmAndHHRo" +
-      "utingIndex.HHRouteBlockSegments\022L\n\rpoint" +
-      "Segments\030\004 \003(\01325.OsmAnd.OBF.OsmAndHHRout" +
-      "ingIndex.HHRoutePointSegments\032?\n\024HHRoute",
-      "PointSegments\022\022\n\nsegmentsIn\030\002 \002(\014\022\023\n\013seg" +
-      "mentsOut\030\003 \002(\014\"T\n\013OsmAndOwner\022\014\n\004name\030\001 " +
-      "\002(\t\022\020\n\010resource\030\002 \001(\t\022\023\n\013description\030\003 \001" +
-      "(\t\022\020\n\010pluginid\030\004 \001(\tB\036\n\021net.osmand.binar" +
-      "yB\tOsmandOdb"
+      "a\032\235\001\n\024AddressNameIndexData\022\023\n\013atomsLengt" +
+      "h\030\007 \001(\r\022\032\n\022suffixesDictionary\030\002 \003(\t\022 \n\030s" +
+      "uffixesCommonDictionary\030\003 \003(\r\0222\n\004atom\030\004 " +
+      "\003(\0132$.OsmAnd.OBF.AddressNameIndexDataAto" +
+      "m\"\331\001\n\030AddressNameIndexDataAtom\022\014\n\004type\030\003" +
+      " \002(\r\022\033\n\023suffixesBitsetIndex\030\010 \003(\r\022\023\n\013ext" +
+      "raSuffix\030\t \003(\t\022\027\n\017otherWordsCount\030\n \003(\r\022" +
+      "\014\n\004bbox\030\014 \001(\014\022\030\n\020enclosingObjects\030\020 \001(\r\022" +
+      "\024\n\014shiftToIndex\030\005 \003(\005\022\030\n\020shiftToCityInde" +
+      "x\030\006 \003(\005\022\014\n\004xy16\030\007 \003(\r\"\302\001\n\tCityIndex\022\021\n\tc",
+      "ity_type\030\001 \001(\r\022\014\n\004name\030\002 \002(\t\022\017\n\007name_en\030" +
+      "\003 \001(\t\022\n\n\002id\030\004 \001(\004\022\t\n\001x\030\005 \002(\r\022\t\n\001y\030\006 \002(\r\022" +
+      "\027\n\017attributeTagIds\030\007 \003(\r\022\027\n\017attributeVal" +
+      "ues\030\010 \003(\t\022\035\n\025shiftToCityBlockIndex\030\n \001(\007" +
+      "\022\020\n\010boundary\030\014 \001(\014\"\202\001\n\016CityBlockIndex\022\030\n" +
+      "\020shiftToCityIndex\030\004 \001(\007\022,\n\tbuildings\030\n \003" +
+      "(\0132\031.OsmAnd.OBF.BuildingIndex\022(\n\007streets" +
+      "\030\014 \003(\0132\027.OsmAnd.OBF.StreetIndex\"\345\001\n\013Stre" +
+      "etIndex\022\014\n\004name\030\001 \002(\t\022\017\n\007name_en\030\002 \001(\t\022\t" +
+      "\n\001x\030\003 \002(\021\022\t\n\001y\030\004 \002(\021\0225\n\rintersections\030\005 ",
+      "\003(\0132\036.OsmAnd.OBF.StreetIntersection\022\n\n\002i" +
+      "d\030\006 \001(\004\022\027\n\017attributeTagIds\030\007 \003(\r\022\027\n\017attr" +
+      "ibuteValues\030\010 \003(\t\022,\n\tbuildings\030\014 \003(\0132\031.O" +
+      "smAnd.OBF.BuildingIndex\"\221\001\n\022StreetInters" +
+      "ection\022\014\n\004name\030\002 \002(\t\022\017\n\007name_en\030\003 \001(\t\022\024\n" +
+      "\014intersectedX\030\004 \002(\021\022\024\n\014intersectedY\030\005 \002(" +
+      "\021\022\027\n\017attributeTagIds\030\007 \003(\r\022\027\n\017attributeV" +
+      "alues\030\010 \003(\t\"\230\002\n\rBuildingIndex\022\014\n\004name\030\001 " +
+      "\002(\t\022\017\n\007name_en\030\002 \001(\t\022\r\n\005name2\030\003 \001(\t\022\020\n\010n" +
+      "ame_en2\030\004 \001(\t\022\025\n\rinterpolation\030\005 \001(\021\022\t\n\001",
+      "x\030\007 \002(\021\022\t\n\001y\030\010 \002(\021\022\n\n\002x2\030\t \001(\021\022\n\n\002y2\030\n \001" +
+      "(\021\022\n\n\002id\030\r \001(\004\022\020\n\010postcode\030\016 \001(\t\022\027\n\017attr" +
+      "ibuteTagIds\030\017 \003(\r\022\027\n\017attributeValues\030\020 \003" +
+      "(\t\022\030\n\020attributeTagIds2\030\021 \003(\r\022\030\n\020attribut" +
+      "eValues2\030\022 \003(\t\"=\n\017TransportRoutes\022*\n\006rou" +
+      "tes\030\006 \003(\0132\032.OsmAnd.OBF.TransportRoute\"\303\002" +
+      "\n\016TransportRoute\022\n\n\002id\030\001 \002(\004\022\014\n\004type\030\003 \001" +
+      "(\r\022\020\n\010operator\030\004 \001(\r\022\013\n\003ref\030\005 \001(\t\022\014\n\004nam" +
+      "e\030\006 \001(\r\022\017\n\007name_en\030\007 \001(\r\022\020\n\010distance\030\010 \001" +
+      "(\r\022\r\n\005color\030\t \001(\r\0223\n\013directStops\030\017 \003(\0132\036",
+      ".OsmAnd.OBF.TransportRouteStop\022\020\n\010geomet" +
+      "ry\030\021 \001(\014\0228\n\014scheduleTrip\030\022 \003(\0132\".OsmAnd." +
+      "OBF.TransportRouteSchedule\022\027\n\017attributeT" +
+      "agIds\030\023 \003(\r\022\036\n\026attributeTextTagValues\030\024 " +
+      "\003(\014\"Q\n\031IncompleteTransportRoutes\0224\n\006rout" +
+      "es\030\006 \003(\0132$.OsmAnd.OBF.IncompleteTranspor" +
+      "tRoute\"{\n\030IncompleteTransportRoute\022\n\n\002id" +
+      "\030\001 \002(\004\022\014\n\004type\030\003 \001(\r\022\020\n\010operator\030\004 \001(\r\022\013" +
+      "\n\003ref\030\005 \001(\r\022\020\n\010routeRef\030\007 \002(\r\022\024\n\014missing" +
+      "Stops\030\010 \003(\r\"\244\001\n\026TransportRouteSchedule\022\030",
+      "\n\020avgStopIntervals\030\001 \001(\014\022\030\n\020avgWaitInter" +
+      "vals\030\002 \001(\014\022\025\n\rtripIntervals\030\003 \001(\014\022?\n\nexc" +
+      "eptions\030\010 \003(\0132+.OsmAnd.OBF.TransportRout" +
+      "eScheduleException\"\313\001\n\037TransportRouteSch" +
+      "eduleException\022\023\n\013tripIndexes\030\001 \003(\r\022\023\n\013s" +
+      "topIndexes\030\002 \003(\r\022\021\n\tavailable\030\003 \001(\010\022\024\n\014d" +
+      "elayArrival\030\005 \003(\r\022\031\n\021deltaWaitInterval\030\006" +
+      " \003(\005\022\034\n\024dayOfWeekRestriction\030\007 \003(\r\022\034\n\024da" +
+      "yOfYearRestriction\030\010 \003(\r\"k\n\022TransportRou" +
+      "teStop\022\n\n\002id\030\001 \002(\022\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002",
+      "(\021\022\014\n\004name\030\006 \002(\r\022\017\n\007name_en\030\007 \001(\r\022\022\n\ntra" +
+      "velTime\030\010 \001(\r\"\332\001\n\rTransportStop\022\n\n\002dx\030\001 " +
+      "\002(\021\022\n\n\002dy\030\002 \002(\021\022\n\n\002id\030\005 \002(\022\022\014\n\004name\030\006 \002(" +
+      "\r\022\017\n\007name_en\030\007 \001(\r\022\033\n\023additionalNamePair" +
+      "s\030\010 \001(\014\022,\n\005exits\030\t \003(\0132\035.OsmAnd.OBF.Tran" +
+      "sportStopExit\022\016\n\006routes\030\020 \003(\r\022\030\n\020deleted" +
+      "RoutesIds\030\024 \003(\004\022\021\n\troutesIds\030\026 \003(\004\"8\n\021Tr" +
+      "ansportStopExit\022\n\n\002dx\030\001 \002(\021\022\n\n\002dy\030\002 \002(\021\022" +
+      "\013\n\003ref\030\003 \002(\r\"\272\001\n\022TransportStopsTree\022\014\n\004l" +
+      "eft\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n",
+      "\006bottom\030\004 \002(\021\0220\n\010subtrees\030\007 \003(\0132\036.OsmAnd" +
+      ".OBF.TransportStopsTree\022(\n\005leafs\030\010 \003(\0132\031" +
+      ".OsmAnd.OBF.TransportStop\022\016\n\006baseId\030\020 \001(" +
+      "\004\"\357\001\n\024OsmAndTransportIndex\022\014\n\004name\030\001 \001(\t" +
+      "\022+\n\006routes\030\003 \001(\0132\033.OsmAnd.OBF.TransportR" +
+      "outes\022-\n\005stops\030\006 \001(\0132\036.OsmAnd.OBF.Transp" +
+      "ortStopsTree\022?\n\020incompleteRoutes\030\010 \001(\0132%" +
+      ".OsmAnd.OBF.IncompleteTransportRoutes\022,\n" +
+      "\013stringTable\030\t \002(\0132\027.OsmAnd.OBF.StringTa" +
+      "ble\"\312\002\n\016OsmAndPoiIndex\022\014\n\004name\030\001 \002(\t\022-\n\n",
+      "boundaries\030\002 \002(\0132\031.OsmAnd.OBF.OsmAndTile" +
+      "Box\0228\n\017categoriesTable\030\003 \003(\0132\037.OsmAnd.OB" +
+      "F.OsmAndCategoryTable\0221\n\tnameIndex\030\004 \001(\013" +
+      "2\036.OsmAnd.OBF.OsmAndPoiNameIndex\0226\n\rsubt" +
+      "ypesTable\030\005 \001(\0132\037.OsmAnd.OBF.OsmAndSubty" +
+      "pesTable\022\'\n\005boxes\030\006 \003(\0132\030.OsmAnd.OBF.Osm" +
+      "AndPoiBox\022-\n\007poiData\030\t \003(\0132\034.OsmAnd.OBF." +
+      "OsmAndPoiBoxData\"\342\002\n\022OsmAndPoiNameIndex\022" +
+      "-\n\005table\030\003 \002(\0132\036.OsmAnd.OBF.IndexedStrin" +
+      "gTable\0223\n\013commonStats\030\004 \001(\0132\036.OsmAnd.OBF",
+      ".CommonIndexedStats\022C\n\004data\030\005 \003(\01325.OsmA" +
+      "nd.OBF.OsmAndPoiNameIndex.OsmAndPoiNameI" +
+      "ndexData\032\242\001\n\026OsmAndPoiNameIndexData\022\023\n\013a" +
+      "tomsLength\030\007 \001(\r\022\032\n\022suffixesDictionary\030\002" +
+      " \003(\t\022 \n\030suffixesCommonDictionary\030\001 \003(\r\0225" +
+      "\n\005atoms\030\003 \003(\0132&.OsmAnd.OBF.OsmAndPoiName" +
+      "IndexDataAtom\"\276\002\n\032OsmAndPoiNameIndexData" +
+      "Atom\022\014\n\004zoom\030\002 \001(\r\022\t\n\001x\030\003 \001(\r\022\t\n\001y\030\004 \001(\r" +
+      "\022\033\n\023suffixesBitsetIndex\030\005 \003(\r\022\023\n\013extraSu" +
+      "ffix\030\007 \003(\t\022\027\n\017otherWordsCount\030\010 \003(\r\022\025\n\rp",
+      "oiIndInBlock\030\t \003(\r\022\014\n\004bbox\030\n \001(\014\022\025\n\rpoiC" +
+      "ategories\030\013 \003(\r\022\021\n\teloRating\030\014 \003(\r\022\017\n\007sh" +
+      "iftTo\030\016 \001(\007\022\031\n\021shiftToNextZ8Tile\030\024 \001(\007\022\032" +
+      "\n\022shiftToNextZ10Tile\030\025 \001(\007\022\032\n\022shiftToNex" +
+      "tZ12Tile\030\026 \001(\007\"e\n\023OsmAndCategoryTable\022\020\n" +
+      "\010category\030\001 \002(\t\022\021\n\tfrequency\030\002 \001(\r\022\025\n\rsu" +
+      "bcategories\030\003 \003(\t\022\022\n\nsubcatfreq\030\004 \003(\r\"E\n" +
+      "\023OsmAndSubtypesTable\022.\n\010subtypes\030\004 \003(\0132\034" +
+      ".OsmAnd.OBF.OsmAndPoiSubtype\"\240\001\n\020OsmAndP" +
+      "oiSubtype\022\014\n\004name\030\001 \002(\t\022\017\n\007tagname\030\002 \001(\t",
+      "\022\016\n\006isText\030\003 \002(\010\022\021\n\tfrequency\030\005 \001(\r\022\031\n\021s" +
+      "ubtypeValuesSize\030\006 \001(\r\022\031\n\021subtypeValuesF" +
+      "req\030\007 \003(\r\022\024\n\014subtypeValue\030\010 \003(\t\"2\n\021OsmAn" +
+      "dPoiTagGroup\022\n\n\002id\030\001 \002(\r\022\021\n\ttagValues\030\005 " +
+      "\003(\t\"T\n\022OsmAndPoiTagGroups\022\017\n\003ids\030\002 \003(\rB\002" +
+      "\020\001\022-\n\006groups\030\005 \003(\0132\035.OsmAnd.OBF.OsmAndPo" +
+      "iTagGroup\"\340\001\n\014OsmAndPoiBox\022\014\n\004zoom\030\001 \002(\r" +
+      "\022\014\n\004left\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\0223\n\ncategorie" +
+      "s\030\004 \001(\0132\037.OsmAnd.OBF.OsmAndPoiCategories" +
+      "\0221\n\ttagGroups\030\010 \001(\0132\036.OsmAnd.OBF.OsmAndP",
+      "oiTagGroups\022*\n\010subBoxes\030\n \003(\0132\030.OsmAnd.O" +
+      "BF.OsmAndPoiBox\022\023\n\013shiftToData\030\016 \001(\007\"@\n\023" +
+      "OsmAndPoiCategories\022\022\n\ncategories\030\003 \003(\r\022" +
+      "\025\n\rsubcategories\030\005 \003(\r\"i\n\020OsmAndPoiBoxDa" +
+      "ta\022\014\n\004zoom\030\001 \001(\r\022\t\n\001x\030\002 \001(\r\022\t\n\001y\030\003 \001(\r\0221" +
+      "\n\007poiData\030\005 \003(\0132 .OsmAnd.OBF.OsmAndPoiBo" +
+      "xDataAtom\"\333\001\n\024OsmAndPoiBoxDataAtom\022\n\n\002dx" +
+      "\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\022\n\ncategories\030\004 \003(\r\022\025" +
+      "\n\rsubcategories\030\005 \003(\r\022\014\n\004name\030\006 \001(\t\022\016\n\006n" +
+      "ameEn\030\007 \001(\t\022\n\n\002id\030\010 \001(\004\022\026\n\016textCategorie",
+      "s\030\016 \003(\r\022\022\n\ntextValues\030\017 \003(\t\022\023\n\013precision" +
+      "XY\030\020 \001(\005\022\025\n\ttagGroups\030\021 \003(\rB\002\020\001\"\032\n\007IdTab" +
+      "le\022\017\n\007routeId\030\001 \003(\022\"F\n\017RestrictionData\022\014" +
+      "\n\004type\030\001 \002(\005\022\014\n\004from\030\002 \002(\005\022\n\n\002to\030\003 \002(\005\022\013" +
+      "\n\003via\030\004 \001(\005\"x\n\tRouteData\022\016\n\006points\030\001 \002(\014" +
+      "\022\022\n\npointTypes\030\004 \001(\014\022\022\n\npointNames\030\005 \001(\014" +
+      "\022\r\n\005types\030\007 \002(\014\022\017\n\007routeId\030\014 \002(\005\022\023\n\013stri" +
+      "ngNames\030\016 \001(\014\"\304\005\n\022OsmAndRoutingIndex\022\014\n\004" +
+      "name\030\001 \002(\t\022?\n\005rules\030\002 \003(\01320.OsmAnd.OBF.O" +
+      "smAndRoutingIndex.RouteEncodingRule\022>\n\tr",
+      "ootBoxes\030\003 \003(\0132+.OsmAnd.OBF.OsmAndRoutin" +
+      "gIndex.RouteDataBox\022A\n\014basemapBoxes\030\004 \003(" +
+      "\0132+.OsmAnd.OBF.OsmAndRoutingIndex.RouteD" +
+      "ataBox\022=\n\006blocks\030\005 \003(\0132-.OsmAnd.OBF.OsmA" +
+      "ndRoutingIndex.RouteDataBlock\032;\n\021RouteEn" +
+      "codingRule\022\013\n\003tag\030\003 \002(\t\022\r\n\005value\030\005 \002(\t\022\n" +
+      "\n\002id\030\007 \001(\r\032\231\001\n\014RouteDataBox\022\014\n\004left\030\001 \002(" +
+      "\021\022\r\n\005right\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n\006bottom\030" +
+      "\004 \002(\021\022\023\n\013shiftToData\030\005 \001(\007\022:\n\005boxes\030\007 \003(" +
+      "\0132+.OsmAnd.OBF.OsmAndRoutingIndex.RouteD",
+      "ataBox\032\303\001\n\016RouteDataBlock\022$\n\007idTable\030\005 \001" +
+      "(\0132\023.OsmAnd.OBF.IdTable\022*\n\013dataObjects\030\006" +
+      " \003(\0132\025.OsmAnd.OBF.RouteData\0221\n\014restricti" +
+      "ons\030\007 \003(\0132\033.OsmAnd.OBF.RestrictionData\022," +
+      "\n\013stringTable\030\010 \001(\0132\027.OsmAnd.OBF.StringT" +
+      "able\"\231\010\n\024OsmAndHHRoutingIndex\022\017\n\007edition" +
+      "\030\001 \002(\003\022\017\n\007profile\030\002 \002(\t\022\025\n\rprofileParams" +
+      "\030\003 \003(\t\022/\n\016tagValuesTable\030\004 \001(\0132\027.OsmAnd." +
+      "OBF.StringTable\022E\n\npointBoxes\030\005 \002(\01321.Os" +
+      "mAnd.OBF.OsmAndHHRoutingIndex.HHRoutePoi",
+      "ntsBox\022L\n\rpointSegments\030\006 \003(\01325.OsmAnd.O" +
+      "BF.OsmAndHHRoutingIndex.HHRouteBlockSegm" +
+      "ents\032\324\001\n\020HHRoutePointsBox\022\014\n\004left\030\002 \002(\021\022" +
+      "\r\n\005right\030\003 \002(\021\022\013\n\003top\030\004 \002(\021\022\016\n\006bottom\030\005 " +
+      "\002(\021\022@\n\005boxes\030\006 \003(\01321.OsmAnd.OBF.OsmAndHH" +
+      "RoutingIndex.HHRoutePointsBox\022D\n\006points\030" +
+      "\007 \003(\01324.OsmAnd.OBF.OsmAndHHRoutingIndex." +
+      "HHRouteNetworkPoint\032\366\001\n\023HHRouteNetworkPo" +
+      "int\022\n\n\002id\030\001 \002(\005\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022" +
+      "\020\n\010globalId\030\004 \002(\005\022\016\n\006roadId\030\005 \002(\003\022\031\n\021roa",
+      "dStartEndIndex\030\006 \002(\005\022\021\n\tclusterId\030\007 \001(\005\022" +
+      "\023\n\013dualPointId\030\010 \001(\005\022\025\n\rdualClusterId\030\t " +
+      "\001(\005\022\022\n\nprofileIds\030\n \003(\005\022\022\n\npartialInd\030\013 " +
+      "\001(\005\022\027\n\013tagValueIds\030\014 \003(\005B\002\020\001\032\360\001\n\024HHRoute" +
+      "BlockSegments\022\024\n\014idRangeStart\030\001 \002(\005\022\025\n\ri" +
+      "dRangeLength\030\002 \002(\005\022\021\n\tprofileId\030\003 \001(\005\022J\n" +
+      "\013innerBlocks\030\006 \003(\01325.OsmAnd.OBF.OsmAndHH" +
+      "RoutingIndex.HHRouteBlockSegments\022L\n\rpoi" +
+      "ntSegments\030\004 \003(\01325.OsmAnd.OBF.OsmAndHHRo" +
+      "utingIndex.HHRoutePointSegments\032?\n\024HHRou",
+      "tePointSegments\022\022\n\nsegmentsIn\030\002 \002(\014\022\023\n\013s" +
+      "egmentsOut\030\003 \002(\014\"T\n\013OsmAndOwner\022\014\n\004name\030" +
+      "\001 \002(\t\022\020\n\010resource\030\002 \001(\t\022\023\n\013description\030\003" +
+      " \001(\t\022\020\n\010pluginid\030\004 \001(\tB\036\n\021net.osmand.bin" +
+      "aryB\tOsmandOdb"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -80964,7 +80964,7 @@ public final class OsmandOdb {
           internal_static_OsmAnd_OBF_OsmAndAddressNameIndexData_AddressNameIndexData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndAddressNameIndexData_AddressNameIndexData_descriptor,
-              new java.lang.String[] { "AtomsCount", "SuffixesDictionary", "SuffixesCommonDictionary", "Atom", });
+              new java.lang.String[] { "AtomsLength", "SuffixesDictionary", "SuffixesCommonDictionary", "Atom", });
           internal_static_OsmAnd_OBF_AddressNameIndexDataAtom_descriptor =
             getDescriptor().getMessageTypes().get(10);
           internal_static_OsmAnd_OBF_AddressNameIndexDataAtom_fieldAccessorTable = new
@@ -81084,7 +81084,7 @@ public final class OsmandOdb {
           internal_static_OsmAnd_OBF_OsmAndPoiNameIndex_OsmAndPoiNameIndexData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndPoiNameIndex_OsmAndPoiNameIndexData_descriptor,
-              new java.lang.String[] { "AtomsCount", "SuffixesDictionary", "SuffixesCommonDictionary", "Atoms", });
+              new java.lang.String[] { "AtomsLength", "SuffixesDictionary", "SuffixesCommonDictionary", "Atoms", });
           internal_static_OsmAnd_OBF_OsmAndPoiNameIndexDataAtom_descriptor =
             getDescriptor().getMessageTypes().get(29);
           internal_static_OsmAnd_OBF_OsmAndPoiNameIndexDataAtom_fieldAccessorTable = new

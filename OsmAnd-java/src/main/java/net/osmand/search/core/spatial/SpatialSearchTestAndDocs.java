@@ -30,11 +30,12 @@ import net.osmand.util.SearchAlgorithms;
 // REVIEW: POI / ADDRESS - France, Germany, US, Europe, China, Peru  
 // TESTING: Fix 36K national park (don't index small islands > 100 POI !!!)
 
-// TODO DEDUPLICATE: same location (5-10m) 2 streets different cities (Check)
-
-// TODO AVENUE G https://github.com/osmandapp/OsmAnd/issues/15726
 // TODO INDEX: Speedup load after sorting - to limit objects (store elo in index)! 
 // TODO INDEX: Store Poi category index (effective intersection 'Church St. Miguel' - refactor checkAmenity)
+
+
+// TODO DEDUPLICATE: same location (5-10m) 2 streets different cities (Check)
+// TODO AVENUE G https://github.com/osmandapp/OsmAnd/issues/15726
 // TODO OBF POI CATEGORY Bboxes too large - investigate size (introduce for categories OBF) - OsmAndPoiNameIndexDataAtom, quad tree (90% < 10K)
 // TODO ANALYZE: too many wiki places on streets?
 // TODO Bank abc (Bug New filter?) 
