@@ -1038,7 +1038,12 @@ public class ResourceManager {
 	}
 
 	protected void resetGeoidAltitudeCorrection() {
-		geoidAltitudeCorrection = new GeoidAltitudeCorrection(app.getAppPath(null));
+		GeoidAltitudeCorrection geo = new GeoidAltitudeCorrection(app.getAppPath(null));
+		if (geo.isGeoidInformationAvailable()) {
+			geoidAltitudeCorrection = geo;
+		} else {
+			geoidAltitudeCorrection = null;
+		}
 	}
 
 	public OsmandRegions getOsmandRegions() {

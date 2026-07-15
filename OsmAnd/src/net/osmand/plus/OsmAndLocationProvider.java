@@ -100,6 +100,14 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private static final int REQUESTS_BEFORE_CHECK_LOCATION = 100;
 	private final AtomicInteger locationRequestsCounter = new AtomicInteger();
 	private final AtomicInteger staleLocationRequestsCounter = new AtomicInteger();
+	
+	private static final float MSL_CALIBRATION_MAX_ACCURACY = 10f;
+	private static final int DYNAMIC_GEOID_OFFSET_MAX_DISTANCE = 100_000;
+	
+	private static Double cachedDynamicGeoidOffset = null;
+	private static Double cachedDynamicGeoidOffsetLat = null;
+	private static Double cachedDynamicGeoidOffsetLon = null;
+	private static final java.util.Set<String> loggedAltitudeSources = new java.util.concurrent.CopyOnWriteArraySet<>();
 
 
 	private long lastTimeGPSLocationFixed;
@@ -571,19 +579,76 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if (l.hasSpeed()) {
 			r.setSpeed(l.getSpeed());
 		}
-		if (l.hasAltitude()) {
-			r.setAltitude(l.getAltitude());
+		String branchTaken = "NONE";
+
+		if (VERSION.SDK_INT >= VERSION_CODES.UPSIDE_DOWN_CAKE && l.hasMslAltitude()) {
+			r.setAltitude(l.getMslAltitudeMeters());
+			branchTaken = "MSL";
+			if (l.hasMslAltitudeAccuracy()) {
+				r.setVerticalAccuracy(l.getMslAltitudeAccuracyMeters());
+			}
+			if (l.hasAltitude()) {
+				boolean qualityAcceptable = true;
+				if (l.hasMslAltitudeAccuracy()) {
+					qualityAcceptable = l.getMslAltitudeAccuracyMeters() <= MSL_CALIBRATION_MAX_ACCURACY;
+				}
+				if (qualityAcceptable) {
+					double newOffset = l.getAltitude() - l.getMslAltitudeMeters();
+					if (cachedDynamicGeoidOffset == null || Math.abs(cachedDynamicGeoidOffset - newOffset) > 0.1) {
+						LOG.info("Dynamic geoid offset calibrated: " + newOffset + "m (provider=" + l.getProvider() +
+								(l.hasMslAltitudeAccuracy() ? ", MSL accuracy=" + l.getMslAltitudeAccuracyMeters() + "m" : "") + ")");
+					}
+					cachedDynamicGeoidOffset = newOffset;
+					cachedDynamicGeoidOffsetLat = l.getLatitude();
+					cachedDynamicGeoidOffsetLon = l.getLongitude();
+				}
+			}
+		} else if (l.hasAltitude()) {
+			double alt = l.getAltitude();
+			boolean corrected = false;
+			
+			// Altitude fallback priority:
+			// 1. Android 14+ System MSL (via getMslAltitudeMeters)
+			// 2. Offline Geoid Correction File (computed accurately for current coordinates)
+			// 3. Cached dynamic offset (calibrated from previous MSL fix, valid < 100km)
+			// 4. Raw WGS84 altitude (from getAltitude())
+			if (app != null) {
+				GeoidAltitudeCorrection geo = app.getResourceManager().getGeoidAltitudeCorrection();
+				if (geo != null && geo.isGeoidInformationAvailable()) {
+					alt -= geo.getGeoidHeight(l.getLatitude(), l.getLongitude());
+					corrected = true;
+					branchTaken = "FILE";
+				}
+			}
+			if (!corrected) {
+				Double offset = cachedDynamicGeoidOffset;
+				Double offsetLat = cachedDynamicGeoidOffsetLat;
+				Double offsetLon = cachedDynamicGeoidOffsetLon;
+				if (offset != null && offsetLat != null && offsetLon != null) {
+					double dist = MapUtils.getDistance(offsetLat, offsetLon, l.getLatitude(), l.getLongitude());
+					if (dist < DYNAMIC_GEOID_OFFSET_MAX_DISTANCE) {
+						alt -= offset;
+						branchTaken = "CACHED";
+					} else {
+						LOG.info("Dynamic geoid offset invalidated by distance: " + dist + "m");
+						cachedDynamicGeoidOffset = null;
+						cachedDynamicGeoidOffsetLat = null;
+						cachedDynamicGeoidOffsetLon = null;
+						branchTaken = "RAW";
+					}
+				} else {
+					branchTaken = "RAW";
+				}
+			}
+			r.setAltitude(alt);
+		}
+		
+		if (!loggedAltitudeSources.contains(branchTaken)) {
+			LOG.info("Altitude source active: " + branchTaken + ", alt=" + r.getAltitude() + ", provider=" + l.getProvider());
+			loggedAltitudeSources.add(branchTaken);
 		}
 		if (l.hasBearing()) {
 			r.setBearing(l.getBearing());
-		}
-		if (l.hasAltitude() && app != null) {
-			double alt = l.getAltitude();
-			GeoidAltitudeCorrection geo = app.getResourceManager().getGeoidAltitudeCorrection();
-			if (geo != null) {
-				alt -= geo.getGeoidHeight(l.getLatitude(), l.getLongitude());
-				r.setAltitude(alt);
-			}
 		}
 		return r;
 	}
