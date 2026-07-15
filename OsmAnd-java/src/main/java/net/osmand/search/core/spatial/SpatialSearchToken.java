@@ -610,6 +610,10 @@ public class SpatialSearchToken {
 			return object != null ? object.toString() : simpleName(name);
 		}
 
+		public String getName() {
+			return name;
+		}
+
 	}
 
 
