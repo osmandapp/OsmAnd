@@ -13,6 +13,7 @@ import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.binary.Abbreviations;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CityBlocks;
+import net.osmand.binary.NameIndexReader;
 import net.osmand.binary.NameIndexReader.NameIndexReaderMatcher;
 import net.osmand.binary.ObfConstants;
 import net.osmand.binary.OsmandOdb.AddressNameIndexDataAtom;
@@ -21,7 +22,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.Street;
 import net.osmand.search.core.HashQuadTree;
-import net.osmand.search.core.spatial.SpatialPoiSearch.SpatialPoiType;
 import net.osmand.search.core.spatial.SpatialSearchContext.SpatialSearchStats;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSettings;
 import net.osmand.util.Algorithms;
@@ -49,7 +49,7 @@ public class SpatialSearchToken {
 	String wordNoDot;
 	Set<String> bldWordSplit;
 	
-	Set<Long> poiCategoryAtoms = new HashSet<Long>();
+	Set<String> poiCategoryKeys = new HashSet<>();
 	List<NameIndexAtom> atoms = new ArrayList<>();
 	TLongObjectHashMap<NameIndexAtom> index = new TLongObjectHashMap<>();
 	HashQuadTree<Integer> quadTree = new HashQuadTree<>(16);
@@ -130,6 +130,15 @@ public class SpatialSearchToken {
 			@Override
 			public boolean matchKey(String key) {
 				stats.sub1MatchTime.start();
+				if (key.startsWith(NameIndexReader.POI_CATEGORY_PREFIX) && poiCategoryKeys.size() > 0) {
+					for (String poiCatKey : poiCategoryKeys) {
+						if (poiCatKey.startsWith(key.substring(NameIndexReader.POI_CATEGORY_PREFIX.length()))) {
+							stats.sub1MatchTime.finish();
+							return true;
+						}
+					}
+				}
+				
 				String alignedKey = SearchAlgorithms.alignChars(key);
 				// could be empty after align so match = true! ("''" -> "")
 				boolean matched = matchAlignedKey(alignedKey);
@@ -168,20 +177,9 @@ public class SpatialSearchToken {
 		quadTree.put(atom.coords.bboxTileZoom, atom.coords.bboxTileId, na.indexInToken);
 	}
 	
-	SpatialPoiType hasPoiType(String key, SpatialPoiSearch poiSearch) {
-		if (poiCategoryAtoms.isEmpty()) {
-			return null;
-		}
-		SpatialPoiType tp = poiSearch.getByKey(key);
-		if (tp != null && poiCategoryAtoms.contains((long) tp.id)) {
-			return tp;
-		}
-		return null;
-	}
-	
 	void addAtom(NameIndexAtom atom) {
 		if (atom.isPoiCategory()) {
-			poiCategoryAtoms.add(atom.id);
+			poiCategoryKeys.add(atom.name);
 		}
 		if (atom.object != null && !(atom.object instanceof Street) && 
 				atom.object.getId() != null &&  atom.object.getId() > 0) {

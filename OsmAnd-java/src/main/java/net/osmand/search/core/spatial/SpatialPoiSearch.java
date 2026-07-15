@@ -283,7 +283,7 @@ public class SpatialPoiSearch {
 						continue;
 					}
 					
-					NameIndexAtom atom = new NameIndexAtom(a.names.get(0), a.id, total);
+					NameIndexAtom atom = new NameIndexAtom(a.key, a.id, total);
 					cs.atoms.add(atom);
 					cs.tokens.add(t);
 				}

@@ -5583,4 +5583,10 @@
     <string name="route_calculation_mixed_maps_desc">Snelle routeberekening is niet beschikbaar, omdat de offline kaarten verschillende datums hebben. Overschakelen naar de Standaardrouteberekening kan even duren.</string>
     <string name="attached_media">Bijgevoegde media</string>
     <string name="traffic_warning_red_light_camera">Roodlichtcamera</string>
+    <string name="route_calculation_review_maps">Controleer kaarten</string>
+    <string name="route_calculation_use_existing_maps">Gebruik beschikbare kaarten</string>
+    <string name="required_maps_missing_and_outdated_title">Ontbrekende &amp; Verouderde kaarten</string>
+    <string name="required_maps_route_overview">Routeoverzicht:</string>
+    <string name="required_maps_calculate_with_existing_maps">Bereken met beschikbare kaarten</string>
+    <string name="search_around">Zoek nabij</string>
 </resources>

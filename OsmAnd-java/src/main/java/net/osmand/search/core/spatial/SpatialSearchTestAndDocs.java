@@ -40,13 +40,14 @@ import net.osmand.util.SearchAlgorithms;
 // REVIEW AUTO TESTS: Auto tests - Slow analysis (Auto test New york)
 // TESTING access_main_tag, poi names - limit, subtypes
 
-// TODO Test Size
-// TODO Autocomplete results from POI TYPE / SUB TYPE
+// Testing Test Size
+// Testing Autocomplete results from POI TYPE / SUB TYPE
+
+// TODO Bank abc (Bug New filter?) 
 
 // TODO AVENUE G https://github.com/osmandapp/OsmAnd/issues/15726
 // TODO ANALYZE: too many wiki places on streets?
 // TODO highway=services (Not index)
-// TODO Bank abc (Bug New filter?) 
 
 // TO DO Ivan
 // TODO DEDUPLICATE: Test wiki / travel maps / seamarks map
@@ -82,7 +83,7 @@ import net.osmand.util.SearchAlgorithms;
 // TODO Web worldwide search on missing results test "Arizona"
 // TODO New Geocoding for cases ("NC 42" == "NC-42") - geo index for prefixes
 // TODO Add flats: https://www.openstreetmap.org/node/5843642738
-// TODO Auto-Correction?
+// TODO Auto-Corrections
 // TODO English postcodes
 // TODO Precise Boundary 'Chernihiv sport life' mostly Kyiv - check precise boundary for filter
 // TODO Short word split "Ro-ki" vs "Roki" 
@@ -241,12 +242,12 @@ public class SpatialSearchTestAndDocs {
 //		query = "PA 75"; // Yes - ('PA 75', 'PA-75'), YES - 'PA75' 
 		// data "PA 75" - see "M-2, 2 M" example
 
-		pattern = "Liechtenstein_europe.obf";
+//		pattern = "Liechtenstein_europe.obf";
 //		query = "Vaduz Lettstrasse";
 //		query = "Burger Mcdonald's"; // Test 2 match
 //		query = "Vegan Mai Thai"; // Test 3 match
 //		query = "Vegan"; // Test Vegan results from subtype
-		query = "Trübbach 10"; // Test Vegan results
+//		query = "Trübbach 10"; // Test Vegan results
 		// Test helipad 1, helipad 2
 //		query = "Friedenskapelle Church"; //Friedenskapelle, Friedhofskapelle (catholic), Mamerten (roman)
 //		settings.DEV_PRINT_POI_CAT_RADIUS_KM  = 100;
@@ -255,11 +256,12 @@ public class SpatialSearchTestAndDocs {
 //		query = "Vaduz ";
 //		query = "Jugendheim Malbun";
 
-//		pattern = "Netherlands_";
+		pattern = "Netherlands_";
 //		query = "1186RZ Logger 324D Amstelveen";
 //		query = "Farm";
 //		query = "Huns Huns 39a-MLN 8832kd"; // Húns Húns 37482484
 //		query = "11-NUON leons";
+		query = "Gate D18"; 
 		
 //		pattern = "Turkey_";
 //		query = "Sokak 23018. Balikesir"; // OK
@@ -369,7 +371,7 @@ public class SpatialSearchTestAndDocs {
 		
 //		pattern = "Us_alaska_"; // special test slow 
 //		query = "tongass national forest"; // found anyway complet match 
-//		query = "tongass national"; // tongass not found without OPTIM_READ_COMMON_WORDS_ATOMS (?)
+//		query = "tongass national"; //  LIVE TEST tongass not found without OPTIM_READ_COMMON_WORDS_ATOMS (?) 
 //		location = new LatLon(57.366, -150.940);
 //		settings.OPTIM_READ_COMMON_WORDS_ATOMS = true;
 //		settings.OPTIM_READ_COMMON_WORDS_LIMIT = 2200;
