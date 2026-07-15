@@ -53,6 +53,7 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 
 	TIntObjectHashMap<Boolean> skipResults = new TIntObjectHashMap<>();
 	Map<Integer, LatLon> preciseLocations = new HashMap<Integer, LatLon>();
+	Map<Integer, String> preciseBuildingNames = new HashMap<Integer, String>();
 	List<SpatialSearchResult> finalResult = null;
 	
 	List<String> tempBuildNames1 = new ArrayList<String>();
@@ -345,14 +346,14 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 					}
 					if (bldObj.isInterpolation()) {
 						preciseLocations.put(indx, bldObj.getLocation(bldObj.interpolation(bldName)));
+						preciseBuildingNames.put(indx, bldName);
 					}
 				}
 			}
 		}
 		
 	}
-	
-	
+
 	private Building checkBuilding(SpatialSearchContext ctx, Street street, String bld) {
 		Building interpolation = null;
 		Building partial2 = null;
@@ -483,9 +484,9 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		finalResult = new ArrayList<>(tileIds.size());
 		for (int i = 0; i < tileIds.size(); i++) {
 			if (!skipResults.containsKey(i)) {
-				finalResult.add(new SpatialSearchResult(this, i, preciseLocations.get(i)));
+				finalResult.add(new SpatialSearchResult(this, i, preciseLocations.get(i), preciseBuildingNames.get(i)));
 			}
-		}		
+		}
 		finalResult = sortResults(ctx, finalResult, deduplicate);
 		return finalResult;
 	}
