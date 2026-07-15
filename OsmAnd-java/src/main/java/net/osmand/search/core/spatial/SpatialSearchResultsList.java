@@ -331,7 +331,9 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 						break;
 					}
 				} else {
-					if (bldObj.getLocation() != null && !((Street) str.object).getBuildings().contains(bldObj)) {
+					boolean bldObjIsInterpolated = bldObj.getLocation() != null
+							&& !((Street) str.object).getBuildings().contains(bldObj);
+					if (bldObjIsInterpolated) {
 						preciseLocations.put(indx, bldObj.getLocation());
 					}
 					// assign buildings
