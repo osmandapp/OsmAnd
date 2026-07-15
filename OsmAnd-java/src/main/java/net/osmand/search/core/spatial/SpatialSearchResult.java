@@ -22,7 +22,6 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	final SpatialSearchResultsList parent;
 	final List<SpatialSearchResultRef> objs = new ArrayList<>();
 	final LatLon preciseLatlon;
-	final String preciseBuildingName;
 	final int surplusWords; // negative some building numbers not found, positive some extra tokens matched
 	int visibleLevel;
 	public MapObject unitedObject;
@@ -34,11 +33,10 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	final int ZOOM_SIMILARITY_10_KM = 12 - 8; // 2 symbols - tile z=12
 	final int ZOOM_SIMILARITY_1_KM = 15 - 8; // 3 symbols
 	
-	SpatialSearchResult(SpatialSearchResultsList parentList, int parentInd, LatLon preciseLatlon, String preciseBuildingName) {
+	SpatialSearchResult(SpatialSearchResultsList parentList, int parentInd, LatLon preciseLatlon) {
 		this.parentInd = parentInd;
 		this.parent = parentList;
 		this.preciseLatlon = preciseLatlon;
-		this.preciseBuildingName = preciseBuildingName;
 		int surplusWords = 0;
 		for (int i = 0; i < parent.tCount; i++) {
 			NameIndexAtom atom = parent.linearResults.get(parentInd * parentList.tCount + i);
@@ -163,10 +161,6 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 			}
 		}
 		return null;
-	}
-
-	public String getPreciseBuildingName() {
-		return preciseBuildingName;
 	}
 
 	public int visibleLevel() {

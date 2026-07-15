@@ -53,7 +53,6 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 
 	TIntObjectHashMap<Boolean> skipResults = new TIntObjectHashMap<>();
 	Map<Integer, LatLon> preciseLocations = new HashMap<Integer, LatLon>();
-	Map<Integer, String> preciseBuildingNames = new HashMap<Integer, String>();
 	List<SpatialSearchResult> finalResult = null;
 	
 	List<String> tempBuildNames1 = new ArrayList<String>();
@@ -334,6 +333,9 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 						break;
 					}
 				} else {
+					if (bldObj.isInterpolation()) {
+						preciseLocations.put(indx, bldObj.getLocation());
+					}
 					// assign buildings
 					for (int i = 0; i < tCount; i++) {
 						NameIndexAtom bld = linearResults.get(indx * tCount + i);
@@ -343,10 +345,6 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 						} else if(noBuildings  && str.id == bld.id) {
 							bld.bldObject = bldObj;
 						}
-					}
-					if (bldObj.isInterpolation()) {
-						preciseLocations.put(indx, bldObj.getLocation(bldObj.interpolation(bldName)));
-						preciseBuildingNames.put(indx, bldName);
 					}
 				}
 			}
@@ -424,8 +422,9 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 			return partial1;
 		}
 		if (interpolation != null) {
-			interpolation.setId(DEFAULT_BLD_ID);
-			return interpolation;
+			Building b = interpolation.createInterpolatedBuilding(bld);
+			b.setId(DEFAULT_BLD_ID);
+			return b;
 		}
 		if (partial2 != null) {
 			partial2.setId(PARTIAL_ID_MATCH);
@@ -484,7 +483,7 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		finalResult = new ArrayList<>(tileIds.size());
 		for (int i = 0; i < tileIds.size(); i++) {
 			if (!skipResults.containsKey(i)) {
-				finalResult.add(new SpatialSearchResult(this, i, preciseLocations.get(i), preciseBuildingNames.get(i)));
+				finalResult.add(new SpatialSearchResult(this, i, preciseLocations.get(i)));
 			}
 		}
 		finalResult = sortResults(ctx, finalResult, deduplicate);
