@@ -9,13 +9,13 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import net.osmand.plus.R
-import net.osmand.plus.base.BaseMaterialSimpleListBottomSheet
+import net.osmand.plus.base.BaseMaterialBottomSheetWithHeader
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialog
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.widgets.dialogbutton.DialogButton
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType
 
-class DuplicateMapDownloadBottomSheet : BaseMaterialSimpleListBottomSheet(), IDialog {
+class DuplicateMapDownloadBottomSheet : BaseMaterialBottomSheetWithHeader(), IDialog {
 
 	private var controller: DuplicateMapDownloadDialogController? = null
 
@@ -39,7 +39,7 @@ class DuplicateMapDownloadBottomSheet : BaseMaterialSimpleListBottomSheet(), IDi
 
 		mainView.findViewById<TextView>(R.id.title).text = controller.title
 		val itemsContainer = mainView.findViewById<LinearLayout>(R.id.itemsContainer)
-		val content = inflater.inflate(
+		val content = inflate(
 			R.layout.bottom_sheet_duplicate_map_download_content,
 			itemsContainer,
 			false

@@ -15,14 +15,14 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import net.osmand.plus.R
-import net.osmand.plus.base.BaseMaterialSimpleListBottomSheet
+import net.osmand.plus.base.BaseMaterialBottomSheetWithHeader
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.UiUtilities
 
-class CoordinateFormatSelectorBottomSheet : BaseMaterialSimpleListBottomSheet() {
+class CoordinateFormatSelectorBottomSheet : BaseMaterialBottomSheetWithHeader() {
 
 	private lateinit var requestKey: String
 	private lateinit var targetAppMode: ApplicationMode
@@ -48,7 +48,7 @@ class CoordinateFormatSelectorBottomSheet : BaseMaterialSimpleListBottomSheet() 
 		savedInstanceState: Bundle?
 	): View {
 		super.onCreateView(inflater, container, savedInstanceState)
-		inflater.inflate(R.layout.coordinate_format_selector_items, mainView.findViewById(R.id.itemsContainer))
+		inflate(R.layout.coordinate_format_selector_items, mainView.findViewById(R.id.itemsContainer))
 		mainView.findViewById<TextView>(R.id.title).setText(R.string.navigate_point_format)
 		bindFormats()
 		bindSelectOtherFormat()
@@ -160,7 +160,7 @@ class CoordinateFormatSelectorBottomSheet : BaseMaterialSimpleListBottomSheet() 
 		selected: Boolean,
 		showDivider: Boolean
 	): View {
-		val row = layoutInflater.inflate(R.layout.coordinate_format_selector_item, parent, false)
+		val row = inflate(R.layout.coordinate_format_selector_item, parent, false)
 		row.findViewById<TextView>(R.id.title).text = format.title
 
 		val description = getFormatDescription(format)

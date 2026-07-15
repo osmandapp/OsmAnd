@@ -23,6 +23,7 @@ open class BaseMaterialBottomSheetDialogFragment :
     protected lateinit var osmandSettings: OsmandSettings
     protected lateinit var currentAppMode: ApplicationMode
     protected lateinit var uiUtilities: UiUtilities
+    protected lateinit var themedLayoutInflater: LayoutInflater
     protected var nightMode: Boolean = false
 
     private var lastRootInsets: WindowInsetsCompat? = null
@@ -41,6 +42,7 @@ open class BaseMaterialBottomSheetDialogFragment :
 
     protected fun updateNightMode() {
         nightMode = resolveNightMode()
+        themedLayoutInflater = UiUtilities.getInflater(requireActivity(), nightMode)
     }
 
     override fun onStart() {
@@ -75,7 +77,7 @@ open class BaseMaterialBottomSheetDialogFragment :
     }
 
     override fun getThemedInflater(): LayoutInflater {
-        return layoutInflater
+        return themedLayoutInflater
     }
 
     override fun getThemeUsageContext(): ThemeUsageContext {

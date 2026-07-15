@@ -15,7 +15,7 @@ import net.osmand.plus.utils.InsetTarget
 import net.osmand.plus.utils.InsetTargetsCollection
 import net.osmand.plus.utils.InsetsUtils
 
-abstract class BaseMaterialSimpleListBottomSheet : BaseMaterialModalBottomSheetDialogFragment() {
+abstract class BaseMaterialBottomSheetWithHeader : BaseMaterialModalBottomSheetDialogFragment() {
 
 	protected lateinit var mainView: View
 
@@ -24,7 +24,8 @@ abstract class BaseMaterialSimpleListBottomSheet : BaseMaterialModalBottomSheetD
 		container: ViewGroup?,
 		savedInstanceState: Bundle?
 	): View {
-		mainView = inflater.inflate(getLayoutId(), container, false)
+		updateNightMode()
+		mainView = inflate(getLayoutId(), container, false)
 		mainView.findViewById<View>(R.id.dragHandle)?.visibility =
 			if (shouldShowDragHandle()) View.VISIBLE else View.INVISIBLE
 		setupHeaderCloseButton(mainView)
@@ -40,7 +41,7 @@ abstract class BaseMaterialSimpleListBottomSheet : BaseMaterialModalBottomSheetD
 		}
 	}
 
-	protected open fun getLayoutId(): Int = R.layout.bottom_sheet_simple_list_with_header
+	protected open fun getLayoutId(): Int = R.layout.bottom_sheet_material_with_header
 
 	protected open fun shouldShowDragHandle(): Boolean = true
 
