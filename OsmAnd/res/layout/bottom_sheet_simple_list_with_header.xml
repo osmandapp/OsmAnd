@@ -47,28 +47,12 @@
 					android:textColor="?attr/text_color_primary_v2"
 					tools:text="Title" />
 
-				<FrameLayout
+				<com.google.android.material.imageview.ShapeableImageView
 					android:id="@+id/closeBtn"
-					android:layout_width="@dimen/acceptable_touch_radius"
-					android:layout_height="@dimen/acceptable_touch_radius"
+					style="@style/Widget.App.Material.CircularIconButton"
 					android:layout_gravity="center"
-					android:background="?attr/selectableItemBackgroundBorderless">
-
-					<FrameLayout
-						android:layout_width="32dp"
-						android:layout_height="32dp"
-						android:layout_gravity="center"
-						android:background="@drawable/bg_circle" />
-
-					<com.google.android.material.imageview.ShapeableImageView
-						android:layout_width="24dp"
-						android:layout_height="24dp"
-						android:layout_gravity="center"
-						android:contentDescription="@string/shared_string_close"
-						android:src="@drawable/ic_action_close_rounded"
-						android:tint="?attr/default_icon_color" />
-
-				</FrameLayout>
+					android:contentDescription="@string/shared_string_close"
+					android:src="@drawable/ic_action_close_rounded" />
 
 			</LinearLayout>
 
