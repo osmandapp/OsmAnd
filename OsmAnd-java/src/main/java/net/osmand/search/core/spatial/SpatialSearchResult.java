@@ -21,7 +21,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	final int parentInd;
 	final SpatialSearchResultsList parent;
 	final List<SpatialSearchResultRef> objs = new ArrayList<>();
-	final LatLon preciseLatlon;
+	final LatLon preciseLatlon; 
 	final int surplusWords; // negative some building numbers not found, positive some extra tokens matched
 	int visibleLevel;
 	public MapObject unitedObject;

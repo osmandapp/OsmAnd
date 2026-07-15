@@ -18,8 +18,7 @@ public class Building extends MapObject {
 	private int interpolationInterval;
 	private String name2;
 	private Map<String, LatLon> entrances = null;
-	private String interpolationDisplayName;
-	
+
 	public enum BuildingInterpolation {
 		ALL(-1), EVEN(-2), ODD(-3), ALPHABETIC(-4);
 		private final int val;
@@ -42,7 +41,23 @@ public class Building extends MapObject {
 	}
 
 	public Building(){}
-	
+
+	public Building(Building building) {
+		name = building.name;
+		enName = building.enName;
+		names = building.names == null ? null : new LinkedHashMap<>(building.names);
+		location = building.location;
+		fileOffset = building.fileOffset;
+		id = building.id;
+		setReferenceFile(building.getReferenceFile());
+		postcode = building.postcode;
+		latLon2 = building.latLon2;
+		interpolationType = building.interpolationType;
+		interpolationInterval = building.interpolationInterval;
+		name2 = building.name2;
+		entrances = building.entrances == null ? null : new LinkedHashMap<>(building.entrances);
+	}
+
 	public String getPostcode() {
 		return postcode;
 	}
@@ -96,18 +111,7 @@ public class Building extends MapObject {
 	}
 
 	@Override
-	public String getName() {
-		if (Algorithms.isNotEmpty(interpolationDisplayName)) {
-			return interpolationDisplayName;
-		}
-		return super.getName();
-	}
-
-	@Override
 	public String getName(String lang) {
-		if (Algorithms.isNotEmpty(interpolationDisplayName)) {
-			return interpolationDisplayName;
-		}
 		String fname = super.getName(lang);
 		if (interpolationInterval != 0) {
 			return fname + "-" + name2 + " (+" + interpolationInterval + ") ";
@@ -117,18 +121,7 @@ public class Building extends MapObject {
 		return name;
 	}
 
-	@Override
-	public String getName(String lang, boolean transliterate) {
-		if (Algorithms.isNotEmpty(interpolationDisplayName)) {
-			return interpolationDisplayName;
-		}
-		return super.getName(lang, transliterate);
-	}
-
 	public String getFullName() {
-		if (Algorithms.isNotEmpty(interpolationDisplayName)) {
-			return interpolationDisplayName;
-		}
 		String fname = this.name;
 		if (interpolationInterval != 0) {
 			return fname + "-" + name2 + " (+" + interpolationInterval + ") ";
@@ -217,30 +210,17 @@ public class Building extends MapObject {
 		return interpolation(hno) > 0;
 	}
 
-	public Building createInterpolatedBuilding(String hno) {
-		Building building = new Building();
-		building.name = name;
-		building.enName = enName;
-		building.names = names == null ? null : new LinkedHashMap<>(names);
-		building.location = getLocation(interpolation(hno));
-		building.fileOffset = fileOffset;
-		building.id = id;
-		building.setReferenceFile(getReferenceFile());
-		building.postcode = postcode;
-		building.latLon2 = latLon2;
-		building.interpolationType = interpolationType;
-		building.interpolationInterval = interpolationInterval;
-		building.name2 = name2;
-		building.entrances = entrances == null ? null : new LinkedHashMap<>(entrances);
-		building.interpolationDisplayName = hno;
-		return building;
+	public void fixInterpolation(String hno) {
+		setLocation(getLocation(interpolation(hno)));
+		setName(hno);
+		setName2(null);
+		setInterpolationType(null);
+		setInterpolationInterval(0);
+		setLatLon2(null);
 	}
 
 	@Override
 	public String toString() {
-		if (Algorithms.isNotEmpty(interpolationDisplayName)) {
-			return interpolationDisplayName;
-		}
 		if (interpolationInterval != 0) {
 			return name + "-" + name2 + " (+" + interpolationInterval + ") ";
 		} else if (interpolationType != null) {

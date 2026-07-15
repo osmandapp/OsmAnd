@@ -2,7 +2,6 @@ package net.osmand.search.core.spatial;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -25,7 +24,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.Street;
 import net.osmand.search.core.HashQuadTree;
-import net.osmand.search.core.spatial.SpatialPoiSearch.SpatialPoiType;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSettings;
 import net.osmand.util.MapUtils;
@@ -333,7 +331,7 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 						break;
 					}
 				} else {
-					if (bldObj.isInterpolation()) {
+					if (bldObj.getLocation() != null && !((Street) str.object).getBuildings().contains(bldObj)) {
 						preciseLocations.put(indx, bldObj.getLocation());
 					}
 					// assign buildings
@@ -422,7 +420,8 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 			return partial1;
 		}
 		if (interpolation != null) {
-			Building b = interpolation.createInterpolatedBuilding(bld);
+			Building b = new Building(interpolation);
+			b.fixInterpolation(bld);
 			b.setId(DEFAULT_BLD_ID);
 			return b;
 		}
