@@ -7,6 +7,7 @@ import java.util.Set;
 
 import com.google.protobuf.ByteString;
 
+import com.google.protobuf.Message;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import net.osmand.CollatorStringMatcher;
@@ -18,6 +19,7 @@ import net.osmand.binary.NameIndexReader.NameIndexReaderMatcher;
 import net.osmand.binary.ObfConstants;
 import net.osmand.binary.OsmandOdb.AddressNameIndexDataAtom;
 import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom;
+import net.osmand.data.Building;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.Street;
@@ -484,11 +486,11 @@ public class SpatialSearchToken {
 		final long id; // used to read object
 		final long parentid; // used to read object
 		
-		public MapObject object; // same for all
-		public MapObject bldObject; // same for all
+		MapObject object; // same for all
+		MapObject bldObject; // same for all
 		
 		int otherWordsCnt; // added before intersection
-		public int otherFoundCnt;
+		int otherFoundCnt;
 		
 		int indexInToken;
 		final boolean cityAsStreet;
@@ -610,6 +612,17 @@ public class SpatialSearchToken {
 
 		public String getName() {
 			return name;
+		}
+		
+		public MapObject getObject() {
+			return object;
+		}
+		
+		public Building getBuilding() {
+			if (bldObject instanceof Building b) {
+				return b;
+			}
+			return null;
 		}
 
 	}

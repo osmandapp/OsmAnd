@@ -126,7 +126,7 @@ public class SpatialTextSearch {
 		// only do incomplete search with 2+ chars
 		public int MIN_CHARACTERS_INCOMPLETE = 2;
 		
-		public static int MIN_ELO_RATING = 1400; // see SearchResult.MIN_ELO_RATING
+		public int MIN_ELO_RATING = 1400; // see SearchResult.MIN_ELO_RATING
 //		public int MAX_ELO_RATING = 4300; // not used now
 		
 		// > 300 km - x0, for 50km-300km - x0.5, 10-50km - x1.5, 10km - x3sorted!

@@ -259,8 +259,8 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	
 	public static class SpatialSearchResultRef {
 		static final int MAX_TYPE_ORDER = 5;
-		public NameIndexAtom atom;
-		public final List<SpatialSearchToken> tokens = new ArrayList<>();
+		NameIndexAtom atom;
+		List<SpatialSearchToken> tokens = new ArrayList<>();
 		
 		public SpatialSearchResultRef(NameIndexAtom atom) {
 			this.atom = atom;
@@ -310,6 +310,10 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 						atom.id, atom.otherWordsCnt );
 			}
 			return atom.simpleName(words.toString()); 
+		}
+		
+		public NameIndexAtom getNameIndexAtom() {
+			return atom;
 		}
 	}
 	
@@ -484,10 +488,6 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 			return "";
 		}
 		return MapUtils.createShortLinkString(loc.getLatitude(), loc.getLongitude(), zoom);
-	}
-	
-	public int getSurplusWords() {
-		return surplusWords;
 	}
 }
 	
