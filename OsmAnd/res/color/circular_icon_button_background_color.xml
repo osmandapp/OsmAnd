@@ -7,6 +7,6 @@
 	<item
 		android:state_hovered="true"
 		android:color="?attr/icon_button_background_hovered" />
-	<item android:color="@android:color/transparent" />
+	<item android:color="?attr/icon_button_background_hovered" />
 
 </selector>
