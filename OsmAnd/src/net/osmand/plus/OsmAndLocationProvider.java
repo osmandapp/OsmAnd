@@ -100,6 +100,11 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private static final int REQUESTS_BEFORE_CHECK_LOCATION = 100;
 	private final AtomicInteger locationRequestsCounter = new AtomicInteger();
 	private final AtomicInteger staleLocationRequestsCounter = new AtomicInteger();
+	
+	private static final float MSL_CALIBRATION_MAX_ACCURACY = 10f;
+	private static final int DYNAMIC_GEOID_OFFSET_MAX_DISTANCE = 100_000;
+	
+	private static Location cachedMLSGeoidLocation = null;
 
 
 	private long lastTimeGPSLocationFixed;
@@ -571,19 +576,39 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if (l.hasSpeed()) {
 			r.setSpeed(l.getSpeed());
 		}
-		if (l.hasAltitude()) {
-			r.setAltitude(l.getAltitude());
+		if (VERSION.SDK_INT >= VERSION_CODES.UPSIDE_DOWN_CAKE && l.hasMslAltitude() && l.hasAltitude()) {
+			r.setAltitude(l.getMslAltitudeMeters());
+			boolean qualityAcceptable = true;
+			if (l.hasMslAltitudeAccuracy()) {
+				r.setVerticalAccuracy(l.getMslAltitudeAccuracyMeters());
+				qualityAcceptable = l.getMslAltitudeAccuracyMeters() <= MSL_CALIBRATION_MAX_ACCURACY;
+			}
+			if (qualityAcceptable) {
+				double newOffset = l.getAltitude() - l.getMslAltitudeMeters();
+				if (cachedMLSGeoidLocation == null) {
+					LOG.info("Dynamic geoid offset calibrated: " + newOffset + "m (provider=" + l.getProvider() +
+							(l.hasMslAltitudeAccuracy() ? ", MSL accuracy=" + l.getMslAltitudeAccuracyMeters() + "m" : "") + ")");
+				}
+				cachedMLSGeoidLocation = l;
+			}
+		} else if (l.hasAltitude()) {
+			double alt = l.getAltitude();
+			GeoidAltitudeCorrection geo = app == null ? null : app.getResourceManager().getGeoidAltitudeCorrection();
+			if (geo != null && geo.isGeoidInformationAvailable()) {
+				alt -= geo.getGeoidHeight(l.getLatitude(), l.getLongitude());
+			} else if (cachedMLSGeoidLocation != null) {
+				double dist = MapUtils.getDistance(cachedMLSGeoidLocation.getLatitude(), cachedMLSGeoidLocation.getLongitude(), l.getLatitude(), l.getLongitude());
+				if (dist < DYNAMIC_GEOID_OFFSET_MAX_DISTANCE) {
+					alt -= cachedMLSGeoidLocation.getAltitude() - cachedMLSGeoidLocation.getMslAltitudeMeters();
+				} else {
+					cachedMLSGeoidLocation = null;
+				}
+			}
+			r.setAltitude(alt);
 		}
+		
 		if (l.hasBearing()) {
 			r.setBearing(l.getBearing());
-		}
-		if (l.hasAltitude() && app != null) {
-			double alt = l.getAltitude();
-			GeoidAltitudeCorrection geo = app.getResourceManager().getGeoidAltitudeCorrection();
-			if (geo != null) {
-				alt -= geo.getGeoidHeight(l.getLatitude(), l.getLongitude());
-				r.setAltitude(alt);
-			}
 		}
 		return r;
 	}

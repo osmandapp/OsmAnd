@@ -106,23 +106,23 @@ public class FreeVersionBanner {
 		freeVersionCtaContainer.setOnClickListener(onBannerClickListener);
 		boolean hasDiscount = updateCtaDiscountBadge(nightMode);
 		boolean filledCta = limitReached || hasDiscount;
-		updateCtaTextStyle(filledCta);
 		int ctaBackgroundId = R.drawable.free_version_banner_cta_neutral_ripple;
+		int ctaMargin = 0;
+		int ctaTopMargin = 0;
 		if (filledCta) {
+			ctaMargin = (int) app.getResources().getDimension(R.dimen.content_padding);
+			ctaTopMargin = (int) app.getResources().getDimension(R.dimen.content_padding_small);
 			ctaBackgroundId = nightMode
-				? R.drawable.free_version_banner_cta_bg_ripple_dark
-				: R.drawable.free_version_banner_cta_bg_ripple;
+					? R.drawable.free_version_banner_cta_bg_ripple_dark
+					: R.drawable.free_version_banner_cta_bg_ripple;
 		}
-		freeVersionCtaContentContainer.setBackgroundResource(ctaBackgroundId);
+		LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) freeVersionCtaContainer.getLayoutParams();
+		layoutParams.leftMargin = ctaMargin;
+		layoutParams.rightMargin = ctaMargin;
+		layoutParams.bottomMargin = ctaMargin;
+		layoutParams.topMargin = ctaTopMargin;
+		freeVersionCtaContainer.setBackgroundResource(ctaBackgroundId);
 		freeVersionCtaContainer.setVisibility(View.VISIBLE);
-	}
-
-	private void updateCtaTextStyle(boolean filledCta) {
-		if (filledCta) {
-			freeVersionDescriptionTextView.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
-		} else {
-			freeVersionDescriptionTextView.setTypeface(FontCache.getFont(Typeface.DEFAULT, FONT_WEIGHT_MEDIUM));
-		}
 	}
 
 	private void updateBannerColors(boolean nightMode) {

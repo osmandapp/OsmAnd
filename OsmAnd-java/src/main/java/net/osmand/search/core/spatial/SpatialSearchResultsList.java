@@ -146,22 +146,19 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 	public void loadObjectsAndCalcBuildings(SpatialSearchContext ctx) throws IOException {
 		ctx.stats.sub2LoadObjectsBldTime.start();
 		loadObjects(ctx);
-		// calculate amenity type
-		for (int indx = 0; indx < getCombinations(); indx++) {
-			if (skipResults.contains(indx)) {
-				continue;
-			}
-			boolean skip = checkAmenityType(ctx, indx);
-			if (!skip) {
-				skipResults.put(indx, true);
+		List<SpatialSearchToken> missingTokens = getMissingTokens(ctx);
+		if (ctx.settings.ALLOW_SEARCH_POI_REF) {
+			for (int indx = 0; indx < getCombinations(); indx++) {
+				if (!skipResults.contains(indx)) {
+					checkAmenityRef(missingTokens, indx);
+				}
 			}
 		}
-		
 		if (ctx.settings.SEARCH_BUILDINGS) {
 			Map<String, Building> bldCheckCache = new HashMap<>();
 			for (int indx = 0; indx < getCombinations(); indx++) {
 				if (!skipResults.contains(indx)) {
-					calcBuilding(ctx, indx, bldCheckCache);
+					calcBuilding(ctx, indx, missingTokens, bldCheckCache);
 				}
 //				if (!skipResults.contains(indx)) {
 //					System.out.println(indx + " " + getRawAtoms(indx) + " " + skipResults.contains(indx));
@@ -179,49 +176,26 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		ctx.stats.sub2LoadObjectsBldTime.finish();
 	}
 
-	private boolean checkAmenityType(SpatialSearchContext ctx, int indx) {
-		SpatialPoiType type = null;
+	private void checkAmenityRef(List<SpatialSearchToken> missingTokens, int indx) {
+		NameIndexAtom a = null;
+		String ref = null;
 		for (int i = 0; i < tCount; i++) {
-			NameIndexAtom atom = linearResults.get(indx * tCount + i);
-			if (atom.isPoiCategory()) {
-				type = ctx.poiSearch.getById((int) atom.id);
+			a = linearResults.get(indx * tCount + i);
+			if (a.object instanceof Amenity as) {
+				ref = as.getAdditionalInfo("ref");
 				break;
 			}
 		}
-		if (type == null) {
-			return true;
-		}
-		for (int i = 0; i < tCount; i++) {
-			NameIndexAtom atom = linearResults.get(indx * tCount + i);
-			if (atom.object instanceof Amenity a) {
-				boolean matched = type.accept(a);
-				if (!matched) {
-					return false;
+		if (ref != null) {
+			for (SpatialSearchToken t : missingTokens) {
+				if (t.matchName(ref)) {
+					a.matchExtraWord++;
 				}
-				// old logic for missing tokens
-//				for (SpatialSearchToken st : missingTokens) {
-//					if (st.hasPoiType(a.getType().getKeyName(), ctx.poiSearch) != null
-//							|| st.hasPoiType(a.getSubType(), ctx.poiSearch) != null) {
-//						matched = true;
-//						break;
-//					}
-//					if (a.getSubType().indexOf(';') != -1) {
-//						for (String subtStr : a.getSubType().split(";")) {
-//							if (st.hasPoiType(subtStr, ctx.poiSearch) != null) {
-//								matched = true;
-//								break;
-//							}
-//						}
-//					}
-//				}
-//				if (matched) {
-//					atom.otherWordsCnt = -1; // could be added to surplusWords later 
-//					break;
-//				}
 			}
 		}
-		return true;
 	}
+
+	
 	
 	private void calcStreetIntersections(SpatialSearchContext ctx, int indx) {
 		NameIndexAtom first = null;
@@ -279,7 +253,8 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		}
 	}
 	
-	private void calcBuilding(SpatialSearchContext ctx, int indx, Map<String, Building> bldCheckCache) {
+	private void calcBuilding(SpatialSearchContext ctx, int indx, List<SpatialSearchToken> missingTokens,
+			Map<String, Building> bldCheckCache) {
 		Map<NameIndexAtom, String> bldCheckMap = null; // mostly single key-value map, value accumulated
 		boolean noBuildings = true;
 		NameIndexAtom noBldStreet = null; 
@@ -314,17 +289,14 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		}
 		int surplus = 0;
 		if (noBuildings && noBldStreet != null) {
-			if (ctx.tokens.size() > tCount) {
+			if (missingTokens.size() > 0) {
 				if (bldCheckMap == null) {
 					bldCheckMap = new HashMap<>();
 				}
 				String searchKey = "";
-				List<SpatialSearchToken> current = Arrays.asList(tokens);
-				for (SpatialSearchToken t : ctx.tokens) {
-					if (!current.contains(t)) {
-						searchKey += t.word + " ";
-						surplus++;
-					}
+				for (SpatialSearchToken t : missingTokens) {
+					searchKey += t.word + " ";
+					surplus++;
 				}
 				bldCheckMap.put(noBldStreet, searchKey);
 			} else if (noBldStreet.cityAsStreet) {
@@ -731,7 +703,7 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 				return false; 
 			}
 			// if poi doesn't have bbox don't intersect or add bbox! (transport stops take street names)
-			if (!ctx.settings.TEST_ALLOW_HOUSE_POI_TYPE_INTERSECTION) {
+			if (!ctx.settings.ALLOW_HOUSE_POI_TYPE_INTERSECTION) {
 				if ((pa.buildingInd >= 0) && a.isPOI() && a.coords.bbox31 == null) {
 					return false;
 				} else if ((a.buildingInd >= 0) && pa.isPOI() && pa.coords.bbox31 == null) {
@@ -825,7 +797,17 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 			if (poiTypeToken.incomplete) {
 				return false;
 			}
-			if (!p.isPOI()) {
+			if (!p.isPOI() || p.poiTypes == null) {
+				return false;
+			}
+			boolean match = false;
+			for (int k = 0; k < p.poiTypes.size(); k++) {
+				if (p.poiTypes.get(k) == poiType.id) {
+					match = true;
+					break;
+				}
+			}
+			if (!match) {
 				return false;
 			}
 		}

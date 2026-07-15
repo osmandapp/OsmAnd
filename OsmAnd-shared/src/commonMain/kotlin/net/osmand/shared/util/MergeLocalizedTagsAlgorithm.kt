@@ -142,7 +142,9 @@ class MergeLocalizedTagsAlgorithm private constructor(private val langLookup: Po
 		finalDict: MutableMap<String, Any>
 	) {
 		for (key in resultDict.keys) {
-			finalDict.putIfAbsent(key, resultDict[key] ?: continue)
+			if (!finalDict.containsKey(key)) {
+				finalDict[key] = resultDict[key] ?: continue
+			}
 		}
 	}
 

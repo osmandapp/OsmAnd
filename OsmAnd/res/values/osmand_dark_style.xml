@@ -282,5 +282,7 @@
         <item name="slider_label_text_dark">@color/slider_label_text_dark</item>
         <item name="app_bar_secondary_color">@color/app_bar_secondary_dark</item>
         <item name="map_button_icon_color">@color/map_button_icon_color_dark</item>
+        <item name="btn_icon_on_secondary">@color/btn_icon_on_secondary_dark</item>
+        <item name="btn_text_on_secondary">@color/btn_text_on_secondary_dark</item>
     </style>
 </resources>

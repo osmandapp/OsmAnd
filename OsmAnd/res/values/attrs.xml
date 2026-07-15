@@ -203,6 +203,8 @@
 	    <attr name="slider_label_text_dark" format="reference" />
 	    <attr name="app_bar_secondary_color" format="reference"/>
 	    <attr name="map_button_icon_color" format="reference"/>
+		<attr name="btn_text_on_secondary" format="reference" />
+	    <attr name="btn_icon_on_secondary" format="reference"/>
     </declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">

@@ -17,79 +17,64 @@ import net.osmand.util.SearchAlgorithms;
 
 
 //////////// TESTING //////////
-// REVIEW UI FILTER_MIN_WORDS_COUNT - 'New york plaza' ('the'), Issues Nova poshta Kharkiv 
-// TESTING Building interpolation, Street intersection match, bis matching
-// TESTING Slow 'New York 4 av' - 7.5s (1M), 'New York st' - 2s (700k) - OPTIMAL 
-// TESTING 11-nuon leons, Húns Huns 39a-MLN 8832kd, 
-// TESTING Filter results boundaries, <Salt Lake City>
-// TESTING Ignore same embedded boundary city / county - deduplicate on the fly (new york x4)
-// TESTING Duplicate words W&W
-// TESTING enlarge USA search boxes
-// TESTING test: merge boundaries bbox - extend incomplete boundary same id ... - npt fixed as we anyway enlarge
-// TESTING Cannaregio 539D Campo Saffa - Double 539D
-// TESTING Manhattan 57th street
-// TESTING Regierungsbezirk Stuttgart
-// TESTING "2 South 2nd Street Saint Clair";  street matched twice
-// TESTING Bratislava Billa - too many POI intersection results
 // TESTING Filter / group some categories: Public transport stops, City&Bike - New york?
-// TESTING 25 Школа владим.
-// TESTING 25 Садова вулиця! 2 Нова вулиця! 2 га Нова вулиця ! 25 та садова вулиця, 25 вулиця 2 вулиця
-// TESTING delete default enlarge and enlarge data
-// TESTING Venezia city Street / Place  -  <City Street> ('<Salt Lake City>') with Street ('Pennsylvania street') 
-// TESTING find check that token is reused in parent - and ignore intersection for complete mattch
-// TESTING POI CATEGORY Specific Healthcare specialties (Vegan) - https://github.com/osmandapp/OsmAnd/issues/24941
-// TESTING BUG: numbers obj- filter cafe & rest  + incorrect PrivatBank counts
-// TESTING check additional filter not stored old
-// TESTING Sort maps poi categories API search (sort bboxes?)
+// TESTING Sort maps poi categories API search
 // TESTING query = "Church Catedral-Basílica de Nuestra Señora del Pilar"; -  POI_TYPE /\ POI (SYNONYMS!)
 // TEST_ALLOW_HOUSE_POI_TYPE_INTERSECTION Review if poi doesn't have bbox don't intersect or add bbox! - Shell 2 Rožňavská (test)
+// UNIT TESTING DEDUPLICATE: Review / implement similarity radius - similarityRadius = 50000 ... Route Id
+// UNIT TESTING DEDUPLICATE: Unite RouteArticle, POI by wikidata id ? - DEPTH_TO_CHECK_SAME_SEARCH_RESULTS = 20;...
+// UNIT TESTING DEDUPLICATE: Route by id 
+// UNIT TESTING DEDUPLICATE: Street related to city or suburb what to show
+// UNIT TESTS: (duplicate words), Бульварно-Кудрявська, NC-42, 2-га Нова (2 Нова), M2...
+// UNIT TESTS: Add test on show more '2 sokak' - Show more 1. 2 Sokak (house) 2. 2 Sokak (street) 3. 2 <WORD> Sokak (street) or 3381/2 Sokak. 4. '2.Kadriye' (city) .. Sokak
+
+// TESTING OPTIM_READ_COMMON_WORDS_ATOMS !
+// UNIT TESTING: Store Poi category index (effective intersection aragon - 'Church Basílica de Nuestra Señora del Pilar')
+// UNIT TESTING: Autocheck poi subtype - Burger Mcdonald's
+// UNIT TESTING: Highlight ref sorting
 
 ////////// IN PROGRESS //////////
+// TODO REGENERATE World basemap
+// REVIEW (index_words_dashboard.html): POI / ADDRESS - France, Germany, US, Europe, China, Peru  
+// UNIT TESTING Fix 36K national park (don't index small islands > 100 POI !!!)
+// REVIEW AUTO TESTS: Auto tests - Slow analysis (Auto test New york)
+// TESTING access_main_tag, poi names - limit, subtypes
 
-// TESTING INSPECTOR stats index_words_dashboard.html
-// TESTING OPTIM_READ_COMMON_WORDS_ATOMS !
-// REVIEW: POI / ADDRESS - France, Germany, US, Europe, China, Peru  
-//         TODO (TO FIX 'e.v.' 'a' 'b' 'c') - Bridge, refs, e.v. ...
-// AVENUE G https://github.com/osmandapp/OsmAnd/issues/15726
+// Testing Test Size
+// Testing Autocomplete results from POI TYPE / SUB TYPE
 
-// TODO INDEX: Speedup load after sorting - to limit objects (store elo in index)! 
-// TODO INDEX: Store Poi category index (effective intersection 'Church St. Miguel' - refactor checkAmenity)
-// TODO OBF POI CATEGORY Bboxes too large - investigate size (introduce for categories OBF) - OsmAndPoiNameIndexDataAtom, quad tree (90% < 10K)
+// TODO Bank abc (Bug New filter?) 
+
+// TODO AVENUE G https://github.com/osmandapp/OsmAnd/issues/15726
 // TODO ANALYZE: too many wiki places on streets?
-
+// TODO highway=services (Not index)
 
 // TO DO Ivan
-// REVIEW DEDUPLICATE: Review / implement similarity radius - similarityRadius = 50000 ... Route Id
-// REVIEW DEDUPLICATE: Unite RouteArticle, POI by wikidata id ? - DEPTH_TO_CHECK_SAME_SEARCH_RESULTS = 20;...
-// TODO FIX DATA: Fix 36K national park (don't index small islands > 100 POI !!!)
-// TODO DEDUPLICATE: Venezia ? - No place=city in POI is it on purpose ? 2 Wikidataids! Rating not merged. POI - relation/44741 (Q641), CITY - way/64778090 (Q33723961).
-// TODO DEDUPLICATE: review osm route id  combine by?
-// TODO DEDUPLICATE: Index place=state, county.. + wikidata id for boundaries (regions.ocbf) & display them - analyze
 // TODO DEDUPLICATE: Test wiki / travel maps / seamarks map
+// TODO DEDUPLICATE: same location (5-10m) 2 streets different cities (Check)
+// TODO DEDUPLICATE: Index place=state, county.. + wikidata id for boundaries (regions.ocbf) & display them - analyze
+// TODO DEDUPLICATE: Venezia, Bratislava? - No place=city in POI is it on purpose ? 2 Wikidataids! Rating not merged. POI - relation/44741 (Q641), CITY - way/64778090 (Q33723961).
 // TODO DEDUPLICATE: brand langs - 'Поїхали з нами' / 'Поехали с нами'
-// TODO DEDUPLICATE: same location (5-10m) 2 streets different cities
-// TODO DEDUPLICATE: Street related to city or suburb what to show? 
-// TODO UNIT TESTS: (duplicate words), Бульварно-Кудрявська, NC-42, 2-га Нова (2 Нова), M2...
-// TODO UNIT TESTS: Auto tests - Slow analysis (Auto test New york)
-// TODO UNIT TESTS: Analyze Abbrefvations / common skip (abbrevations 1st=first) 
-// TODO UNIT TESTS: Add test on show more '2 sokak' - Show more 1. 2 Sokak (house) 2. 2 Sokak (street) 3. 2 <WORD> Sokak (street) or 3381/2 Sokak. 4. '2.Kadriye' (city) .. Sokak
 
 // TO DO Gateway
 // TODO INSPECTOR: doesn't show suffixes
-// TODO ANALYZE: Find slow queries on Autotests (New york, France) - large geo atoms
 // TODO INDEX: Find POI Categories translations / synonyms (WEB) - Стоматол., Dentist, Stomatology, Basilica (?)
 // TODO REVIEW: Abbrevations (synonyms / direction words) other languages?
+// TODO REVIEW: Analyze Abbrefvations / common skip (abbrevations 1st=first) 
 
 // TO DO - RZR
 // TODO WEB: POI Categories + top poi categories
 // TODO WEB: display results std way: house, interpolation results, poi...
 // TODO WEB: Multithread pool, Monitor / time & memory optimize memory?
+// TODO WEB: Highlight ref matching (somehow) with braces?
 // TODO ANDROID: Integrate (include regions.ocbf) on client
 // TODO ANDROID: Progress / cancel
 // TODO ANDROID: memory performance 
- 
-/////////////// EXTRA FEATURES ///////////////
 
+/////////////// EXTRA FEATURES ///////////////
+// TODO Use new poi name index to find by poi type
+// TODO Optimize sorting (before load) use elo index and poi categories
+// TODO Suggestion based on common suffixes
 // TODO Store and test conscription number for some cities - issue (RZR)
 // TODO Search in large parks, neighborhood same as in boundaries (index bbox POI), residential way/56238205
 // TODO Japan test, housename, block_number + housenumber, neighbourhood + quarter - street + India assign houses to suburbs / neighbourhood / blocks
@@ -98,7 +83,7 @@ import net.osmand.util.SearchAlgorithms;
 // TODO Web worldwide search on missing results test "Arizona"
 // TODO New Geocoding for cases ("NC 42" == "NC-42") - geo index for prefixes
 // TODO Add flats: https://www.openstreetmap.org/node/5843642738
-// TODO Sugggestion-correction
+// TODO Auto-Corrections
 // TODO English postcodes
 // TODO Precise Boundary 'Chernihiv sport life' mostly Kyiv - check precise boundary for filter
 // TODO Short word split "Ro-ki" vs "Roki" 
@@ -176,7 +161,6 @@ public class SpatialSearchTestAndDocs {
 		String query = "Berlin hauptstrasse"; // slow
 		query = "Berlin";
 //		query = "Kelterstraße Kernen im Remstal";
-//		query = "Germany Kelter. Kernen im Remstal";
 //		query = "3 Hofäckerstraße Kernen im Remstal";
 //		query = "1 W&W Platz Kornwestheim"; // duplicate word new maps needed
 //		query = "1/1 Salierstraße Waiblingen"; // duplicate in house number priority 1st
@@ -191,6 +175,7 @@ public class SpatialSearchTestAndDocs {
 		
 		// Grainau Am Eibsee 1 36799292
 		// Grainau Seehäuser Eibsee 2 - 242903848 //  Seehäuser Grainau 2, Seehäuser Eibsee 2  
+		
 		// Weberstraße (33164748) 49.2041 10.7035,  Von-Weber-Straße (4648613942) 49.5609 10.8685
 //		query = "Weber Straße"; // +4648613942, +33164748
 //		query = "WeberStraße";  // +33164748, +4648613942
@@ -230,7 +215,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "2 South 2nd Street Saint Clair"; // to fix street matched twice 40.7194 -76.1904 // UNIT TEST !!! (25 street)
 //		query = "South 2nd Street 2 Saint Clair"; // to fix street matched twice
 //		query = "226 Wilkes-Barre Township Boulevard Wilkes-Barre"; // fixed type order
-//		query = "5676 US-15 Montgomery"; // Test 3 matched (not 2)
+//		query = "5676 US-15 Montgomery"; // Test 3 matched (not 2) 
 //		location = new LatLon(42.0061257, -76.5464141);
 //		query = "38 Orange Street Waverly";
 //		query = "441 Cook Road Addison";
@@ -259,14 +244,24 @@ public class SpatialSearchTestAndDocs {
 
 //		pattern = "Liechtenstein_europe.obf";
 //		query = "Vaduz Lettstrasse";
+//		query = "Burger Mcdonald's"; // Test 2 match
+//		query = "Vegan Mai Thai"; // Test 3 match
+//		query = "Vegan"; // Test Vegan results from subtype
+//		query = "Trübbach 10"; // Test Vegan results
+		// Test helipad 1, helipad 2
+//		query = "Friedenskapelle Church"; //Friedenskapelle, Friedhofskapelle (catholic), Mamerten (roman)
+//		settings.DEV_PRINT_POI_CAT_RADIUS_KM  = 100;
+//		settings.DEV_PRINT_POI_CAT_LIMIT = 100;
+//		location = new LatLon(47, 10);
 //		query = "Vaduz ";
 //		query = "Jugendheim Malbun";
 
-//		pattern = "Netherlands_";
+		pattern = "Netherlands_";
 //		query = "1186RZ Logger 324D Amstelveen";
 //		query = "Farm";
 //		query = "Huns Huns 39a-MLN 8832kd"; // Húns Húns 37482484
 //		query = "11-NUON leons";
+		query = "Gate D18"; 
 		
 //		pattern = "Turkey_";
 //		query = "Sokak 23018. Balikesir"; // OK
@@ -276,18 +271,21 @@ public class SpatialSearchTestAndDocs {
 //		query = "Sokak 2";// 380657094 2.Sokak, 202159401
 //		location = new LatLon(40.7627, 29.8454);  
 //		query = "2/1 21038 Sokak"; // 1380369156
+		// "2.Sokak", "2 Sokak", "Sokak 2", "2. Sokak", "32/2 Sokak" + housenumber (?)
 		
 		
 //		pattern = "regions.ocbf" ;
 		
 //		pattern = "Ukraine_kyiv-city";
 //		pattern = "Test_Ukraine_kyiv-city_europe_12.obf";
-		pattern = "Ukraine_";
+//		pattern = "Ukraine_";
 		// poi types
 //		location = new LatLon(50.439, 30.516);
 //		settings.SEARCH_POI = false;
 //		settings.DEV_PRINT_POI_CAT_LIMIT = 1000; 
 //		settings.DEV_PRINT_POI_CAT_RADIUS_KM = 10;
+		
+//		query = "bank приватбанк"; // прив.
 //		query = "при.";
 //		query = "Cafe";
 //		query = "Aquarium.";
@@ -297,6 +295,7 @@ public class SpatialSearchTestAndDocs {
 		
 //		location = new LatLon(50.4631,30.4553);
 //		settings.OPTIM_READ_COMMON_WORDS_ATOMS = true;
+//		query = "mcdonald's";
 //		query = "Kyiv Глушкова 1"; // vs 'Kyiv 1'
 //		query = "нова пошта Бульварно Кудрявська";
 //		query = "Бульварно-кудрявс.";
@@ -340,9 +339,10 @@ public class SpatialSearchTestAndDocs {
 //		query = "Holmby Melbourne 18B";
 		
 //		pattern = "Slovakia";
+//		pattern2 = "World_";
 //		query = "Bratislava Billa";
 //		settings.DEDUPLICATE_RES = false;
-//		settings.TEST_ALLOW_HOUSE_POI_TYPE_INTERSECTION = false;
+//		settings.ALLOW_HOUSE_POI_TYPE_INTERSECTION = false;
 //		query = "Shell 2 Rožňavská";
 		
 //		pattern = "Us_new-york_new"; // new-york, new-jersey
@@ -360,15 +360,21 @@ public class SpatialSearchTestAndDocs {
 //		query = "New York 4 av"; // 160947243
 //		query = "57th street"; // central park - 265345338 east, 86216906 west, ()66926268 (west)?),
 //		query = "57 street"; // central park - 265345338 east, 86216906 west, ()66926268 (west)?),
-		query = "new york 57th street manhattan";
+//		query = "new york 57th street manhattan";
 //		query = "4th ave"; //  unit '4 ave'
 //		query = "4th ave 8 paterson"; //  wrong city...
 //		query = "little creek"; // little creek
 		// Result 4 - 40.8407, -74.0954 [[4th, 8] Building 2 4th Street (26238417818) 40.8441 -74.0910 , [ave, paterson] STREET_TYPE Paterson Avenue (651531238) 40.8374 -74.0997 ]
 		
 //		query = "2nd street"; // poi types '2 street' - TODO broken
-		
 //		query = "blvd"; //  unit test  'blvd', 'boulevard' - 248280132
+		
+//		pattern = "Us_alaska_"; // special test slow 
+//		query = "tongass national forest"; // found anyway complet match 
+//		query = "tongass national"; //  LIVE TEST tongass not found without OPTIM_READ_COMMON_WORDS_ATOMS (?) 
+//		location = new LatLon(57.366, -150.940);
+//		settings.OPTIM_READ_COMMON_WORDS_ATOMS = true;
+//		settings.OPTIM_READ_COMMON_WORDS_LIMIT = 2200;
 		
 		// Japan addr:quarter, addr:neighbourhood, addr:block_number
 		// See test - [8-8 Kinshi 3 Kinshi Sumida Tokyo], Rivière Tsumura
@@ -409,7 +415,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "Венец."; 
 
 //		pattern = "Spain_aragon_europe_";
-//		query = "Church Basílica de Nuestra Señora del Pilar"; // Church vs Roman Church
+//		query = "Church Basílica de Nuestra Señora del Pilar"; // Church vs Roman Church UNIT TEST (7 matched)
 //		query = "Catedral-Basílica de Nuestra Señora del Pilar"; // 7 words! 2^7 combinations
 //		query = "Square de Nuestra Señora del Pilar";  // Church vs Square
 //		

@@ -10,12 +10,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.plus.R;
+import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.local.LocalCategory;
 import net.osmand.plus.download.local.LocalGroup;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.dialogs.viewholders.CategoryViewHolder;
 import net.osmand.plus.download.local.dialogs.viewholders.GroupViewHolder;
 import net.osmand.plus.download.local.dialogs.viewholders.MemoryViewHolder;
+import net.osmand.plus.download.ui.BannerAndDownloadFreeVersion;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.util.ArrayList;
@@ -26,16 +28,22 @@ public class CategoriesAdapter extends RecyclerView.Adapter<ViewHolder> {
 	private static final int ITEM_TYPE = 0;
 	private static final int HEADER_TYPE = 1;
 	private static final int MEMORY_USAGE_TYPE = 2;
+	private static final int FREE_VERSION_BANNER_TYPE = 3;
+
+	static final Object FREE_VERSION_BANNER_ITEM = new Object();
 
 	private final List<Object> items = new ArrayList<>();
 
 	@Nullable
 	private final LocalTypeListener listener;
+	private final DownloadActivity activity;
 	private final boolean nightMode;
 
 	private MemoryInfo memoryInfo;
 
-	public CategoriesAdapter(@Nullable LocalTypeListener listener, boolean nightMode) {
+	public CategoriesAdapter(@NonNull DownloadActivity activity, @Nullable LocalTypeListener listener,
+	                         boolean nightMode) {
+		this.activity = activity;
 		this.listener = listener;
 		this.nightMode = nightMode;
 	}
@@ -62,6 +70,9 @@ public class CategoriesAdapter extends RecyclerView.Adapter<ViewHolder> {
 			case MEMORY_USAGE_TYPE:
 				itemView = inflater.inflate(R.layout.local_memory_card, parent, false);
 				return new MemoryViewHolder(itemView, true, nightMode);
+			case FREE_VERSION_BANNER_TYPE:
+				itemView = inflater.inflate(R.layout.free_version_banner_header, parent, false);
+				return new FreeVersionBannerViewHolder(itemView, activity);
 			default:
 				throw new IllegalArgumentException("Unsupported view type");
 		}
@@ -83,6 +94,8 @@ public class CategoriesAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 			GroupViewHolder viewHolder = (GroupViewHolder) holder;
 			viewHolder.bindView(group, memoryInfo, listener, lastItem);
+		} else if (holder instanceof FreeVersionBannerViewHolder viewHolder) {
+			viewHolder.bindView();
 		}
 	}
 
@@ -95,6 +108,8 @@ public class CategoriesAdapter extends RecyclerView.Adapter<ViewHolder> {
 			return ITEM_TYPE;
 		} else if (object instanceof MemoryInfo) {
 			return MEMORY_USAGE_TYPE;
+		} else if (object == FREE_VERSION_BANNER_ITEM) {
+			return FREE_VERSION_BANNER_TYPE;
 		}
 		throw new IllegalArgumentException("Unsupported view type");
 	}
@@ -130,5 +145,19 @@ public class CategoriesAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	public interface LocalTypeListener {
 		void onGroupSelected(@NonNull LocalGroup group);
+	}
+
+	private static class FreeVersionBannerViewHolder extends ViewHolder {
+
+		private final BannerAndDownloadFreeVersion banner;
+
+		public FreeVersionBannerViewHolder(@NonNull View itemView, @NonNull DownloadActivity activity) {
+			super(itemView);
+			banner = new BannerAndDownloadFreeVersion(itemView, activity, false);
+		}
+
+		public void bindView() {
+			banner.updateFreeVersionBanner();
+		}
 	}
 }

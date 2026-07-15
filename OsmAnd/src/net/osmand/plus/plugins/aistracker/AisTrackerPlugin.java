@@ -91,7 +91,7 @@ public class AisTrackerPlugin extends OsmandPlugin {
 	public final CommonPreference<Boolean> AIS_DISPLAY_OWN_POSITION;
 	public static final Boolean AIS_DISPLAY_OWN_POSITION_DEFAULT = false;
     public final CommonPreference<Boolean> AIS_RECEIVE_IN_BACKGROUND;
-    public static final Boolean AIS_RECEIVE_IN_BACKGROUND_DEFAULT = true;
+    public static final Boolean AIS_RECEIVE_IN_BACKGROUND_DEFAULT = false;
 
 	/* timestamp of last AIS message received for all instances: */
 	private long lastMessageReceived = 0;
