@@ -43,6 +43,7 @@ import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.custom.CustomOsmandPlugin;
 import net.osmand.plus.plugins.custom.CustomRegion;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.plugins.drone.DroneZonesPlugin;
 import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
@@ -112,6 +113,7 @@ public class PluginsHelper {
 		allPlugins.add(new OsmandMonitoringPlugin(app));
 		checkMarketPlugin(app, new SRTMPlugin(app));
 		allPlugins.add(new WeatherPlugin(app));
+		allPlugins.add(new DroneZonesPlugin(app));
 		checkMarketPlugin(app, new NauticalMapsPlugin(app));
 		allPlugins.add(new AisTrackerPlugin(app));
 		checkMarketPlugin(app, new SkiMapsPlugin(app));
