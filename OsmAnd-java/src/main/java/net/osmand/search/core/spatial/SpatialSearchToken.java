@@ -7,7 +7,6 @@ import java.util.Set;
 
 import com.google.protobuf.ByteString;
 
-import com.google.protobuf.Message;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import net.osmand.CollatorStringMatcher;
@@ -110,6 +109,10 @@ public class SpatialSearchToken {
 	
 	public boolean likelyPartOfBuilding() {
 		return Abbreviations.likelyPartOfBuilding(word, bldWordSplit);
+	}
+	
+	public boolean likelyRef() {
+		return Abbreviations.likelyPartOfRef(word, bldWordSplit);
 	}
 
 	public CollatorStringMatcher getMainCollator() {
@@ -499,7 +502,7 @@ public class SpatialSearchToken {
 		int indexInToken;
 		final boolean cityAsStreet;
 		final NameIndexAtomXY coords; 
-		final int buildingInd; // added before intersection
+		final int buildingOrRefInd; // added before intersection
 		final int nearbyRadius;
 		TIntArrayList poiTypes;
 		int elo;
@@ -515,7 +518,7 @@ public class SpatialSearchToken {
 		
 		NameIndexAtom(NameIndexAtom cp) {
 			this(cp.name, cp.type, cp.id, cp.parentid, cp.object, cp.cityAsStreet, cp.otherWordsCnt, cp.otherFoundCnt,
-					cp.coords, cp.nearbyRadius, cp.buildingInd);
+					cp.coords, cp.nearbyRadius, cp.buildingOrRefInd);
 			this.poiTypes = cp.poiTypes;
 		}
 
@@ -531,7 +534,7 @@ public class SpatialSearchToken {
 			this.otherFoundCnt = otherFoundCnt;
 			this.coords = coords;
 			this.nearbyRadius = nearbyRadius;
-			this.buildingInd = buildingInd;
+			this.buildingOrRefInd = buildingInd;
 		}
 		
 		

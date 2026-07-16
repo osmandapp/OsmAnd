@@ -286,6 +286,7 @@ public class SpatialPoiSearch {
 					NameIndexAtom atom = new NameIndexAtom(a.key, a.id, total);
 					cs.atoms.add(atom);
 					cs.tokens.add(t);
+					
 				}
 			}
 		}
@@ -296,8 +297,15 @@ public class SpatialPoiSearch {
 			finalRes = finalRes.subList(0, ctx.settings.LIMIT_POI_CATEGORY_BY_FREQ);
 		}
 		for (PoiCatSearch pc : finalRes) {
+			SpatialSearchToken token = null;
+			NameIndexAtom atom = null;
 			for (int i = 0; i < pc.tokens.size(); i++) {
-				pc.tokens.get(i).addAtom(pc.atoms.get(i));
+				token = pc.tokens.get(i);
+				atom = pc.atoms.get(i);
+				token.addAtom(pc.atoms.get(i));
+			}
+			if (ctx.settings.SUGGEST_SEARCH_POI_CATEGORY_WITH_REF) {
+				ctx.addBuildingRefAtoms(token, tokens, pc.tokens, false, atom, SpatialSearchToken.POI_CATEGORY_TYPE);
 			}
 		}
 	}

@@ -114,6 +114,18 @@ public class Abbreviations {
 		buildingAbbreviations.put("bsmt", "Basement");
 	}
 
+	public static boolean likelyPartOfRef(String word, Set<String> wordSplit) {
+		if (SearchAlgorithms.letters(word) < 2) {
+			return true;
+		}
+		for (String s : wordSplit) {
+			if (SearchAlgorithms.letters(s) >= 2) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	// search v-2
 	public static boolean likelyPartOfBuilding(String word, Set<String> wordSplit) {
 		boolean bldNum = (SearchAlgorithms.isNumber2Letters(word) || word.length() == 1

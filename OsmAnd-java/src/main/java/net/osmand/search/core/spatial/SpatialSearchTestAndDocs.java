@@ -17,66 +17,64 @@ import net.osmand.util.SearchAlgorithms;
 
 
 //////////// TESTING //////////
-// TESTING Filter / group some categories: Public transport stops, City&Bike - New york?
-// TESTING Sort maps poi categories API search
-// TESTING query = "Church Catedral-Basílica de Nuestra Señora del Pilar"; -  POI_TYPE /\ POI (SYNONYMS!)
-// TEST_ALLOW_HOUSE_POI_TYPE_INTERSECTION Review if poi doesn't have bbox don't intersect or add bbox! - Shell 2 Rožňavská (test)
 // UNIT TESTING DEDUPLICATE: Review / implement similarity radius - similarityRadius = 50000 ... Route Id
 // UNIT TESTING DEDUPLICATE: Unite RouteArticle, POI by wikidata id ? - DEPTH_TO_CHECK_SAME_SEARCH_RESULTS = 20;...
 // UNIT TESTING DEDUPLICATE: Route by id 
 // UNIT TESTING DEDUPLICATE: Street related to city or suburb what to show
-// UNIT TESTS: (duplicate words), Бульварно-Кудрявська, NC-42, 2-га Нова (2 Нова), M2...
-// UNIT TESTS: Add test on show more '2 sokak' - Show more 1. 2 Sokak (house) 2. 2 Sokak (street) 3. 2 <WORD> Sokak (street) or 3381/2 Sokak. 4. '2.Kadriye' (city) .. Sokak
+// UNIT TESTING: (duplicate words), Бульварно-Кудрявська, NC-42, 2-га Нова (2 Нова), M2...
+// UNIT TESTING: Add test on show more '2 sokak' - Show more 1. 2 Sokak (house) 2. 2 Sokak (street) 3. 2 <WORD> Sokak (street) or 3381/2 Sokak. 4. '2.Kadriye' (city) .. Sokak
 
-// TESTING OPTIM_READ_COMMON_WORDS_ATOMS !
 // UNIT TESTING: Store Poi category index (effective intersection aragon - 'Church Basílica de Nuestra Señora del Pilar')
 // UNIT TESTING: Autocheck poi subtype - Burger Mcdonald's
 // UNIT TESTING: Highlight ref sorting
-// Testing Test Size
-// Testing Autocomplete results from POI TYPE / SUB TYPE
+// UNIT TESTING: Fix 36K national park (don't index small islands > 100 POI !!!)
+
+// TESTING Autocomplete results from POI TYPE / SUB TYPE
 // TESTING access_main_tag, poi names - limit, subtypes
-// UNIT TESTING Fix 36K national park (don't index small islands > 100 POI !!!)
+// TESTING Limit results "Gate"...
+// TESTING Bank abcd (Bug New filter?) Test ???
+// TESTING Find Refs of amenity D18 
+// TESTING REGENERATE World basemap
+// TESTING - Abbreviations.isCommonSkipOtherCnt ???  Tour Eiffel don't count extra word (common) - test...!!
+// TESTING mcdonalds fast food (amst)
 
 ////////// IN PROGRESS //////////
-// REVIEW (index_words_dashboard.html): POI / ADDRESS - France, Germany, US, Europe, China, Peru  
 
-// TODO REGENERATE World basemap
-// TODO Limit results "Gate"...
-// TODO Find Refs of amenity D18
-// TODO Tour Eiffel don't count extra word
+// REVIEW (index_words_dashboard.html): POI / ADDRESS - France, Germany, US, Europe, China, Peru
 
-// TODO Fixes Auto tests - Slow analysis (Auto test New york)
-// TODO Bank abc (Bug New filter?) Test 
-
+// TODO SUGGEST_SEARCH_POI_CATEGORY_WITH_REF + Intersect Category and ref
+// TODO DEDUPLICATE: Venezia, Bratislava? - No place=city in POI is it on purpose ? 2 Wikidataids! Rating not merged. POI - relation/44741 (Q641), CITY - way/64778090 (Q33723961).
 // TODO AVENUE G https://github.com/osmandapp/OsmAnd/issues/15726
 // TODO ANALYZE: too many wiki places on streets?
+// TODO Fixes Auto tests - Slow analysis (Auto test New york)
 // TODO highway=services (Not index)
 
 // TO DO Ivan
 // TODO DEDUPLICATE: Test wiki / travel maps / seamarks map
 // TODO DEDUPLICATE: same location (5-10m) 2 streets different cities (Check)
 // TODO DEDUPLICATE: Index place=state, county.. + wikidata id for boundaries (regions.ocbf) & display them - analyze
-// TODO DEDUPLICATE: Venezia, Bratislava? - No place=city in POI is it on purpose ? 2 Wikidataids! Rating not merged. POI - relation/44741 (Q641), CITY - way/64778090 (Q33723961).
 // TODO DEDUPLICATE: brand langs - 'Поїхали з нами' / 'Поехали с нами'
 
 // TO DO Gateway
 // TODO INSPECTOR: doesn't show suffixes
-// TODO INDEX: Find POI Categories translations / synonyms (WEB) - Стоматол., Dentist, Stomatology, Basilica (?)
+// TODO INDEX: Find POI Categories translations / synonyms (+WEB) - Стоматол., Dentist, Stomatology, BASILICA (!!?)
 // TODO REVIEW: Abbrevations (synonyms / direction words) other languages?
 // TODO REVIEW: Analyze Abbrefvations / common skip (abbrevations 1st=first) 
 
 // TO DO - RZR
-// TODO WEB: POI Categories + top poi categories
-// TODO WEB: display results std way: house, interpolation results, poi...
+// TESTING WEB: POI Categories + top poi categories ...
+// TESTING WEB: display results std way: house, street, city, poi...
+// TODO WEB: Highlight ref matching, interpolation (somehow) with braces?
 // TODO WEB: Multithread pool, Monitor / time & memory optimize memory?
-// TODO WEB: Highlight ref matching (somehow) with braces?
+
 // TODO ANDROID: Integrate (include regions.ocbf) on client
 // TODO ANDROID: Progress / cancel
 // TODO ANDROID: memory performance 
 
 /////////////// EXTRA FEATURES ///////////////
-// TODO Use new poi name index to find by poi type
-// TODO Optimize sorting (before load) use elo index and poi categories
+// TODO Investigate do we need to store poi types in name index (covered-yes)
+//      Some categories go to some maps and not others (Paris cafe) 
+// TODO Sorting before load objects (use elo and other buildings?) and limit results
 // TODO Suggestion based on common suffixes
 // TODO Store and test conscription number for some cities - issue (RZR)
 // TODO Search in large parks, neighborhood same as in boundaries (index bbox POI), residential way/56238205
@@ -261,12 +259,17 @@ public class SpatialSearchTestAndDocs {
 //		query = "Vaduz ";
 //		query = "Jugendheim Malbun";
 
-//		pattern = "Netherlands_";
+		pattern = "Netherlands_";
+		location = new LatLon(52.2827, 4.8601);
 //		query = "1186RZ Logger 324D Amstelveen";
 //		query = "Farm";
 //		query = "Huns Huns 39a-MLN 8832kd"; // Húns Húns 37482484
 //		query = "11-NUON leons";
-//		query = "Gate D18";
+		pattern2 = "Gb_england";
+		query = "Gate D18";
+//		query = "mcdonalds"; 
+//		query = "mcdonalds fast food "; // 2807400942 didn't return with many maps LiVE TEST mcdonalds
+		
  
 		
 //		pattern = "Turkey_";
@@ -284,10 +287,10 @@ public class SpatialSearchTestAndDocs {
 		
 //		pattern = "Ukraine_kyiv-city";
 //		pattern = "Test_Ukraine_kyiv-city_europe_12.obf";
-		pattern = "Ukraine_";
+//		pattern = "Ukraine_";
 		
 		// poi types
-		location = new LatLon(50.436423, 30.508097);
+//		location = new LatLon(50.436423, 30.508097);
 //		settings.SEARCH_POI = false;
 //		settings.DEV_PRINT_POI_CAT_LIMIT = 1000; 
 //		settings.DEV_PRINT_POI_CAT_RADIUS_KM = 10;
@@ -400,9 +403,9 @@ public class SpatialSearchTestAndDocs {
 //		query = "Cannaregio 539D Campo Saffa";
 //		query = "Campo Saffa";
 		
-		pattern = "France_ile-de-france";
+//		pattern = "France_ile-de-france";
 //		location = new LatLon(40, 5);
-		query = "Tower Eiffel"; // TODO Tour Eiffel
+//		query = "Eiffel"; // Tour Eiffel, Tower Eiffel, Eiffel
 //		query = "Rue Bouchardon 2BIS"; // '2bis' OK, '2 BIS' OK , '2' OK, '2-BIS'
 //		query = "Rue Jean Poulmarch 17bis"; //  17bis OK, 17 OK, 17 BIS - OK 'Rue Jean Poulmarch 17;17 bis' 
 //		query = "Dieu 8-bis"; // 'Rue Dieu 8 bis' , '8-bis', '8 bis'

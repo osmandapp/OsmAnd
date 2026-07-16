@@ -136,6 +136,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	private lateinit var recentChipsContainer: LinearLayout
 	private lateinit var recentChipsScroll: View
 	private lateinit var watchNowRow: View
+	private lateinit var solarEclipseRow: View
 	private lateinit var categoriesContainer: LinearLayout
 	private lateinit var myDataContainer: LinearLayout
 	private lateinit var catalogsContainer: LinearLayout
@@ -350,6 +351,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		recentChipsContainer = root.findViewById(R.id.recent_chips_container)
 		recentChipsScroll = root.findViewById(R.id.recent_chips_scroll)
 		watchNowRow = root.findViewById(R.id.watch_now_row)
+		solarEclipseRow = root.findViewById(R.id.solar_eclipse_row)
 		categoriesContainer = root.findViewById(R.id.categories_rows_container)
 		myDataContainer = root.findViewById(R.id.my_data_rows_container)
 		catalogsContainer = root.findViewById(R.id.catalogs_rows_container)
@@ -404,6 +406,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 
 	private fun setupExploreContent() {
 		setupWatchNowRow()
+		setupSolarEclipseRow()
 		setupCategoryRows()
 		setupMyDataRows()
 		setupCatalogRows()
@@ -412,6 +415,13 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	private fun setupWatchNowRow() {
 		watchNowRow.setOnClickListener {
 			openFullSearch(StarMapSearchQuickPresetType.WATCH_NOW, null)
+		}
+	}
+
+	private fun setupSolarEclipseRow() {
+		solarEclipseRow.setOnClickListener {
+			(parentFragment as? StarMapFragment)?.toggleSolarEclipseMode()
+			dismiss()
 		}
 	}
 

@@ -21,7 +21,8 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	final int parentInd;
 	final SpatialSearchResultsList parent;
 	final List<SpatialSearchResultRef> objs = new ArrayList<>();
-	final LatLon preciseLatlon; 
+	final LatLon preciseLatlon;
+	final String extraNameMatch; // refs and interpolation
 	final int surplusWords; // negative some building numbers not found, positive some extra tokens matched
 	int visibleLevel;
 	public MapObject unitedObject;
@@ -33,10 +34,11 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	final int ZOOM_SIMILARITY_10_KM = 12 - 8; // 2 symbols - tile z=12
 	final int ZOOM_SIMILARITY_1_KM = 15 - 8; // 3 symbols
 	
-	SpatialSearchResult(SpatialSearchResultsList parentList, int parentInd, LatLon preciseLatlon) {
+	SpatialSearchResult(SpatialSearchResultsList parentList, int parentInd, LatLon preciseLatlon, String extraName) {
 		this.parentInd = parentInd;
 		this.parent = parentList;
 		this.preciseLatlon = preciseLatlon;
+		this.extraNameMatch = extraName;
 		int surplusWords = 0;
 		for (int i = 0; i < parent.tCount; i++) {
 			NameIndexAtom atom = parent.linearResults.get(parentInd * parentList.tCount + i);
@@ -47,7 +49,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 					surplusWords++;
 				}
 			}
-			if (atom.matchExtraWord > 0) {
+			if (atom.matchExtraWord != 0) {
 				surplusWords += atom.matchExtraWord;
 			}
 			SpatialSearchToken token = parent.tokens[i];
@@ -150,6 +152,10 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		}
 		return types;
 	}
+	
+	public String getExtraNameMatch() {
+		return extraNameMatch;
+	}
 
 	public LatLon getLatLon() {
 		if (preciseLatlon != null) {
@@ -249,11 +255,14 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 
 	@Override
 	public String toString() {
+		String r = "";
 		if (preciseLatlon != null) {
-			return String.format("%.4f, %.4f %s", preciseLatlon.getLatitude(), preciseLatlon.getLongitude(),
-					objs.toString());
+			r+=String.format("%.4f, %.4f ", preciseLatlon.getLatitude(), preciseLatlon.getLongitude());
 		}
-		return objs.toString();
+		if (extraNameMatch != null) {
+			r += extraNameMatch + " ";
+		}
+		return r + objs.toString();
 	}
 	
 	
@@ -264,6 +273,10 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		
 		public SpatialSearchResultRef(NameIndexAtom atom) {
 			this.atom = atom;
+		}
+		
+		public boolean extraNameRelated() {
+			return atom.buildingOrRefInd >= 0;
 		}
 		
 		public int typeOrder(int min) {

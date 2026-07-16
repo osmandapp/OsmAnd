@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/solar_eclipse_card"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:visibility="gone"
+	app:cardCornerRadius="20dp"
+	app:cardElevation="8dp"
+	app:strokeColor="?attr/divider_color"
+	app:strokeWidth="1dp">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:paddingStart="16dp"
+		android:paddingTop="8dp"
+		android:paddingEnd="16dp"
+		android:paddingBottom="12dp">
+
+		<androidx.constraintlayout.widget.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="52dp">
+
+			<ImageButton
+				android:id="@+id/eclipse_previous"
+				android:layout_width="44dp"
+				android:layout_height="44dp"
+				android:background="?attr/selectableItemBackgroundBorderless"
+				android:contentDescription="@string/astro_previous_solar_eclipse"
+				android:padding="10dp"
+				android:src="@drawable/ic_action_arrow_forward_16"
+				android:tint="?attr/default_icon_color"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent" />
+
+			<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:gravity="center"
+				android:orientation="vertical"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent">
+
+				<TextView
+					android:id="@+id/eclipse_kind"
+					style="@style/TextAppearance.Material3.TitleMedium"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:ellipsize="end"
+					android:maxWidth="220dp"
+					android:maxLines="1"
+					android:textColor="?attr/text_color_primary_v2"
+					android:textSize="18sp"
+					android:textStyle="bold"
+					app:autoSizeMaxTextSize="18sp"
+					app:autoSizeMinTextSize="14sp"
+					app:autoSizeStepGranularity="1sp"
+					app:autoSizeTextType="uniform" />
+
+				<TextView
+					android:id="@+id/eclipse_event_date"
+					style="@style/TextAppearance.Material3.BodySmall"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textColor="?android:attr/textColorSecondary"
+					android:textSize="13sp" />
+			</LinearLayout>
+
+			<ImageButton
+				android:id="@+id/eclipse_next"
+				android:layout_width="44dp"
+				android:layout_height="44dp"
+				android:background="?attr/selectableItemBackgroundBorderless"
+				android:contentDescription="@string/astro_next_solar_eclipse"
+				android:padding="10dp"
+				android:src="@drawable/ic_action_arrow_forward_16"
+				android:tint="?attr/default_icon_color"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toStartOf="@id/eclipse_close"
+				app:layout_constraintTop_toTopOf="parent" />
+
+			<ImageButton
+				android:id="@+id/eclipse_close"
+				android:layout_width="44dp"
+				android:layout_height="44dp"
+				android:background="?attr/selectableItemBackgroundBorderless"
+				android:contentDescription="@string/astro_close_solar_eclipse"
+				android:padding="10dp"
+				android:src="@drawable/ic_action_close_rounded"
+				android:tint="?attr/default_icon_color"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintTop_toTopOf="parent" />
+		</androidx.constraintlayout.widget.ConstraintLayout>
+
+		<ProgressBar
+			android:id="@+id/eclipse_loading"
+			android:layout_width="32dp"
+			android:layout_height="32dp"
+			android:layout_gravity="center_horizontal"
+			android:layout_margin="20dp"
+			android:contentDescription="@string/astro_loading_solar_eclipse" />
+
+		<LinearLayout
+			android:id="@+id/eclipse_error_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:orientation="vertical"
+			android:padding="12dp"
+			android:visibility="gone">
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:gravity="center"
+				android:text="@string/astro_eclipse_load_error"
+				android:textColor="?android:attr/textColorSecondary" />
+
+			<com.google.android.material.button.MaterialButton
+				android:id="@+id/eclipse_retry"
+				style="@style/Widget.Material3.Button.TextButton"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/retry"
+				android:textAllCaps="false" />
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/eclipse_content"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center_horizontal"
+			android:orientation="vertical"
+			android:visibility="gone">
+
+			<TextView
+				android:id="@+id/eclipse_current_time"
+				style="@style/TextAppearance.Material3.HeadlineMedium"
+				android:layout_width="match_parent"
+				android:layout_height="38dp"
+				android:gravity="center"
+				android:maxLines="1"
+				android:textColor="?attr/text_color_primary_v2"
+				android:textSize="28sp"
+				android:textStyle="bold"
+				app:autoSizeMaxTextSize="28sp"
+				app:autoSizeMinTextSize="20sp"
+				app:autoSizeStepGranularity="1sp"
+				app:autoSizeTextType="uniform" />
+
+			<TextView
+				android:id="@+id/eclipse_current_date_zone"
+				style="@style/TextAppearance.Material3.BodyMedium"
+				android:layout_width="match_parent"
+				android:layout_height="24dp"
+				android:gravity="center"
+				android:maxLines="1"
+				android:textColor="?android:attr/textColorSecondary"
+				android:textSize="14sp"
+				app:autoSizeMaxTextSize="14sp"
+				app:autoSizeMinTextSize="11sp"
+				app:autoSizeStepGranularity="1sp"
+				app:autoSizeTextType="uniform" />
+
+			<TextView
+				android:id="@+id/eclipse_local_status"
+				style="@style/TextAppearance.Material3.BodyMedium"
+				android:layout_width="match_parent"
+				android:layout_height="38dp"
+				android:gravity="center"
+				android:maxLines="2"
+				android:textColor="?android:attr/textColorSecondary"
+				android:textSize="15sp"
+				app:autoSizeMaxTextSize="15sp"
+				app:autoSizeMinTextSize="12sp"
+				app:autoSizeStepGranularity="1sp"
+				app:autoSizeTextType="uniform" />
+
+			<TextView
+				android:id="@+id/eclipse_map_center_location"
+				style="@style/TextAppearance.Material3.LabelMedium"
+				android:layout_width="match_parent"
+				android:layout_height="24dp"
+				android:ellipsize="end"
+				android:gravity="center"
+				android:maxLines="1"
+				android:textColor="?android:attr/textColorSecondary"
+				android:textSize="12sp" />
+
+			<net.osmand.plus.plugins.astronomy.views.SolarEclipseTimelineView
+				android:id="@+id/eclipse_timeline"
+				android:layout_width="match_parent"
+				android:layout_height="44dp"
+				android:contentDescription="@string/astro_eclipse_timeline_description" />
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="54dp"
+				android:baselineAligned="false"
+				android:orientation="horizontal">
+
+				<LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="start" android:orientation="vertical">
+					<TextView style="@style/TextAppearance.Material3.LabelMedium" android:layout_width="wrap_content" android:layout_height="18dp" android:text="@string/astro_eclipse_start" android:textColor="?attr/text_color_primary_v2" android:textSize="12sp" android:textStyle="bold" />
+					<TextView android:id="@+id/eclipse_start_time" style="@style/TextAppearance.Material3.LabelSmall" android:layout_width="wrap_content" android:layout_height="36dp" android:gravity="start|center_vertical" android:maxLines="2" android:textColor="?android:attr/textColorSecondary" android:textSize="11sp" />
+				</LinearLayout>
+
+				<LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center_horizontal" android:orientation="vertical">
+					<TextView style="@style/TextAppearance.Material3.LabelMedium" android:layout_width="wrap_content" android:layout_height="18dp" android:text="@string/astro_eclipse_maximum" android:textColor="@color/osmand_orange" android:textSize="12sp" android:textStyle="bold" />
+					<TextView android:id="@+id/eclipse_maximum_time" style="@style/TextAppearance.Material3.LabelSmall" android:layout_width="wrap_content" android:layout_height="36dp" android:gravity="center" android:maxLines="2" android:textColor="?android:attr/textColorSecondary" android:textSize="11sp" />
+				</LinearLayout>
+
+				<LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="end" android:orientation="vertical">
+					<TextView style="@style/TextAppearance.Material3.LabelMedium" android:layout_width="wrap_content" android:layout_height="18dp" android:text="@string/astro_eclipse_end" android:textColor="?attr/text_color_primary_v2" android:textSize="12sp" android:textStyle="bold" />
+					<TextView android:id="@+id/eclipse_end_time" style="@style/TextAppearance.Material3.LabelSmall" android:layout_width="wrap_content" android:layout_height="36dp" android:gravity="end|center_vertical" android:maxLines="2" android:textColor="?android:attr/textColorSecondary" android:textSize="11sp" />
+				</LinearLayout>
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="48dp"
+				android:layout_marginTop="8dp"
+				android:baselineAligned="false"
+				android:orientation="horizontal">
+
+				<include
+					android:id="@+id/eclipse_fit_path"
+					layout="@layout/bottom_sheet_dialog_button"
+					android:layout_width="0dp"
+					android:layout_height="48dp"
+					android:layout_weight="1" />
+
+				<Space
+					android:layout_width="8dp"
+					android:layout_height="match_parent" />
+
+				<include
+					android:id="@+id/eclipse_toggle_map"
+					layout="@layout/bottom_sheet_dialog_button"
+					android:layout_width="0dp"
+					android:layout_height="48dp"
+					android:layout_weight="1" />
+			</LinearLayout>
+
+			<TextView
+				android:id="@+id/eclipse_safety"
+				style="@style/TextAppearance.Material3.LabelSmall"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="8dp"
+				android:gravity="center"
+				android:lineSpacingExtra="1dp"
+				android:maxLines="3"
+				android:text="@string/astro_eclipse_safety_warning"
+				android:textColor="?android:attr/textColorSecondary"
+				android:textSize="12sp" />
+		</LinearLayout>
+	</LinearLayout>
+</com.google.android.material.card.MaterialCardView>

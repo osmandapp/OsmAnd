@@ -60,13 +60,15 @@ public class SpatialTextSearch {
 		public boolean SEARCH_STREET_INTERSECTIONS = true;
 		public boolean SEARCH_POI_INTERSECTIONS = true;
 		public boolean SEARCH_POI_CATEGORIES = true;
+		public boolean SEARCH_POI_REF = true;
+		public boolean SUGGEST_SEARCH_POI_CATEGORY_WITH_REF = true;
 		
 		// performance tested (we need to turn on for <POI + Address> search)
 		public boolean ALLOW_HOUSE_POI_TYPE_INTERSECTION = true;
 		// no intersection recorded but streets are nearby
 		public boolean ALLOW_VIRTUAL_STREET_INTERSECTIONS = true;
 		
-		public boolean ALLOW_SEARCH_POI_REF = true;
+		
 		
 		public int[] OPTIM_LIMIT_RADIUS = new int[] {10_000, 30_000, 80_000}; // 
 //		public int[] OPTIM_LIMIT_RADIUS = new int[] {}; 

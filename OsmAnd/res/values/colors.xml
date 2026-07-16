@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<color name="solar_eclipse_path">#FFFF00</color>
+	<color name="solar_eclipse_marker">#F44336</color>
+	<color name="solar_eclipse_marker_outline">#1A1A1A</color>
+	<color name="solar_eclipse_marker_halo">#FFFFFF</color>
+
 	<!-- Background -->
 	<color name="activity_background_color_light">#f0f0f0</color>
 	<color name="activity_background_color_dark">#0D0D0D</color>

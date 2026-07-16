@@ -11,6 +11,35 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="astro_fit_eclipse_path">Fit eclipse path</string>
+	<string name="astro_show_map">Show map</string>
+	<string name="astro_hide_map">Hide map</string>
+	<string name="astro_map_center_location">Map center: %1$s</string>
+	<string name="astro_solar_eclipse">Solar eclipse</string>
+	<string name="astro_solar_eclipse_subtitle">Explore worldwide solar eclipses</string>
+	<string name="astro_previous_solar_eclipse">Previous solar eclipse</string>
+	<string name="astro_next_solar_eclipse">Next solar eclipse</string>
+	<string name="astro_close_solar_eclipse">Close solar eclipse explorer</string>
+	<string name="astro_loading_solar_eclipse">Calculating worldwide solar eclipse</string>
+	<string name="astro_eclipse_load_error">Unable to calculate this worldwide solar eclipse.</string>
+	<string name="astro_total_solar_eclipse">Total solar eclipse</string>
+	<string name="astro_annular_solar_eclipse">Annular solar eclipse</string>
+	<string name="astro_partial_solar_eclipse">Partial solar eclipse</string>
+	<string name="astro_eclipse_phase_total">Total</string>
+	<string name="astro_eclipse_phase_annular">Annular</string>
+	<string name="astro_eclipse_phase_partial">Partial</string>
+	<string name="astro_eclipse_not_visible_here">Not visible from the map center • Sun altitude: %1$.1f°</string>
+	<string name="astro_eclipse_not_visible_below_horizon">Not visible from the map center • Sun below the horizon (%1$.1f°)</string>
+	<string name="astro_eclipse_local_status">%1$s • %2$.1f%% obscured • Sun altitude: %3$.1f°</string>
+	<string name="astro_eclipse_below_horizon">%1$s • below the horizon (%2$.1f°)</string>
+	<string name="astro_eclipse_calculating_local_state">Calculating appearance at the map center…</string>
+	<string name="astro_eclipse_timeline_description">Solar eclipse timeline. Swipe to change the simulated time.</string>
+	<string name="astro_eclipse_start">Start</string>
+	<string name="astro_eclipse_maximum">Maximum</string>
+	<string name="astro_eclipse_end">End</string>
+	<string name="astro_show_eclipse_on_map_loading">Finding eclipse shadow…</string>
+	<string name="astro_eclipse_map_error">The eclipse shadow is unavailable at this time.</string>
+	<string name="astro_eclipse_safety_warning">Never look directly at the Sun without appropriate solar-viewing protection. Eclipse times are estimates.</string>
 	<string name="sort_by_nearest_to_current_location">Nearest to current location</string>
 	<string name="attached_media_delete_confirmation">Delete %1$d media items from this point? Media stored by the app and not attached anywhere else will also be deleted from the device.</string>
 	<string name="android_auto_missing_maps_desc">Download missing maps for the route to continue.</string>
