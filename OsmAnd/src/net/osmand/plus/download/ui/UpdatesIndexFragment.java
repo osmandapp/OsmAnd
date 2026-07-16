@@ -5,7 +5,6 @@ import static net.osmand.plus.download.local.OperationType.RESTORE_OPERATION;
 import static net.osmand.plus.liveupdates.LiveUpdatesFragment.showUpdateDialog;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -28,7 +27,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
-import androidx.cardview.widget.CardView;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -40,8 +38,6 @@ import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseNestedListFragment;
-import net.osmand.plus.chooseplan.ChoosePlanFragment;
-import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadItem;
@@ -561,7 +557,10 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 		public View getView(int position, View convertView, @NonNull ViewGroup parent) {
 			View view = convertView;
 			int viewType = getItemViewType(position);
-			if (view == null) {
+			boolean recreateBanner = viewType == OSM_LIVE_BANNER
+					&& view != null
+					&& showSubscriptionPurchaseBanner != (view.getTag() instanceof BannerAndDownloadFreeVersion);
+			if (view == null || recreateBanner) {
 				if (viewType == DELETED_MAPS) {
 					view = inflate(R.layout.item_with_title_desc, parent, false);
 					view.setTag(new DeletedItemsCountViewHolder(view, requireMyActivity()));
@@ -570,15 +569,11 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 					view.setTag(new ItemViewHolder(view, requireMyActivity()));
 				} else if (viewType == OSM_LIVE_BANNER) {
 					if (showSubscriptionPurchaseBanner) {
-						view = inflate(R.layout.osm_subscription_banner_list_item, parent, false);
-						ColorStateList stateList = AndroidUtils.createPressedColorStateList(app, nightMode,
-								R.color.switch_button_active_light, R.color.switch_button_active_stroke_light,
-								R.color.switch_button_active_dark, R.color.switch_button_active_stroke_dark);
-						CardView cardView = view.findViewById(R.id.card_view);
-						cardView.setCardBackgroundColor(stateList);
-						cardView.setOnClickListener(v -> callActivity(activity ->
-								ChoosePlanFragment.showInstance(activity, OsmAndFeature.HOURLY_MAP_UPDATES))
-						);
+						view = inflate(R.layout.free_version_banner_header, parent, false);
+						BannerAndDownloadFreeVersion banner = new BannerAndDownloadFreeVersion(
+								view, requireMyActivity(), false);
+						view.setTag(banner);
+						banner.updateFreeVersionBanner();
 					} else {
 						view = inflate(R.layout.bottom_sheet_item_with_descr_switch_and_additional_button_56dp, parent, false);
 						view.setBackground(null);
@@ -619,6 +614,11 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 					view.setOnClickListener(v -> {
 						DeletedMapsFragment.showInstance(getActivity(), UpdatesIndexFragment.this);
 					});
+				} else if (viewType == OSM_LIVE_BANNER && item.isBanner() && showSubscriptionPurchaseBanner) {
+					Object tag = view.getTag();
+					if (tag instanceof BannerAndDownloadFreeVersion banner) {
+						banner.updateFreeVersionBanner();
+					}
 				}
 			}
 			return view;

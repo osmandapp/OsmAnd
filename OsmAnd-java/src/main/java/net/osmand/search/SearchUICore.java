@@ -1075,8 +1075,9 @@ public class SearchUICore {
 				}
 				if (!updateName && object.object instanceof Amenity) {
 					for (String key : ((Amenity) object.object).getAdditionalInfoKeys()) {
-						if ((!ObfConstants.isTagIndexedForSearchAsId(key)
-								&& !ObfConstants.isTagIndexedForSearchAsName(key))) {
+						if ((!ObfConstants.isTagIndexedForSearchAsId(key) &&
+							 !ObfConstants.isTagNonIndexedForSearchAsName(key) && 
+							 !ObfConstants.isTagIndexedForSearchAsName(key))) {
 							continue;
 						}
 						String vl = ((Amenity) object.object).getAdditionalInfo(key);

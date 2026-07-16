@@ -3,11 +3,8 @@ package net.osmand.plus.mapcontextmenu.builders;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_PHONE_ID;
 import static net.osmand.data.Amenity.*;
-import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
-import static net.osmand.osm.MapPoiTypes.WIKI_LANG;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.ALT_NAMES_ROW_KEY;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.NAMES_ROW_KEY;
-import static net.osmand.plus.wikipedia.WikiAlgorithms.WIKIPEDIA;
 import static net.osmand.plus.wikipedia.WikiAlgorithms.WIKI_DATA_BASE_URL;
 import static net.osmand.plus.wikipedia.WikiAlgorithms.WIKI_LINK;
 import static net.osmand.util.CollectionUtils.equalsToAny;
@@ -33,6 +30,7 @@ import androidx.core.util.Pair;
 import androidx.core.util.PatternsCompat;
 
 import net.osmand.PlatformUtil;
+import net.osmand.data.AdditionalInfoBundle;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
@@ -110,20 +108,8 @@ public class AmenityUIHelper extends MenuBuilder {
 		for (Entry<String, Object> entry : filteredInfo.entrySet()) {
 			String key = entry.getKey();
 			Object value = entry.getValue();
-			if (MapPoiTypes.getDefault().getAnyPoiAdditionalTypeByKey(key) instanceof PoiType that) {
-				if (that.isHidden()) {
-					continue;
-				}
-			}
-			if (key.contains(WIKIPEDIA) || key.contains(CONTENT)
-					|| key.contains(SHORT_DESCRIPTION) || key.contains(WIKI_LANG)) {
+			if (!additionalInfo.shouldDisplayKey(key)) {
 				continue;
-			}
-			if (ROUTE_ARTICLE.equals(subtype) && key.contains(DESCRIPTION)) {
-				continue;
-			}
-			if (key.equals(NAME)) {
-				continue; // will be added in buildNamesRow
 			}
 			AmenityInfoRow infoRow = null;
 			if (value instanceof String strValue) {
@@ -230,6 +216,12 @@ public class AmenityUIHelper extends MenuBuilder {
 		if (PluginsHelper.getActivePlugin(OsmEditingPlugin.class) != null) {
 			buildWikiDataRow(view);
 		}
+	}
+
+	@Override
+	protected void openWikiUrl(@NonNull String url, boolean light) {
+		LatLon location = wikiAmenity != null ? wikiAmenity.getLocation() : getLatLon();
+		WikiArticleHelper.askShowArticle(mapActivity, !light, location, url);
 	}
 
 	public void buildWikiDataRow(@NonNull View view) {
@@ -582,8 +574,9 @@ public class AmenityUIHelper extends MenuBuilder {
 		textView.setTextColor(ColorUtilities.getPrimaryTextColor(app, !light));
 
 		int linkTextColor = ContextCompat.getColor(view.getContext(), light ? R.color.active_color_primary_light : R.color.active_color_primary_dark);
+		boolean isEmailAction = isEmailAction(text);
 
-		if (isPhoneNumber || isUrl) {
+		if (isPhoneNumber || isUrl || isEmailAction) {
 			textView.setTextColor(linkTextColor);
 			needLinks = false;
 		}
@@ -661,30 +654,18 @@ public class AmenityUIHelper extends MenuBuilder {
 
 		((LinearLayout) view).addView(baseView);
 
-		if (isPhoneNumber) {
-			ll.setOnClickListener(v -> {
-				if (customization.isFeatureEnabled(CONTEXT_MENU_PHONE_ID)) {
-					showDialog(text, Intent.ACTION_DIAL, "tel:", v);
-				}
-			});
-		} else if (isUrl) {
-			ll.setOnClickListener(v -> {
-				if (customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID)) {
-					String url = hiddenUrl == null ? text : hiddenUrl;
-					if (url.contains(WIKI_LINK)) {
-						LatLon location = wikiAmenity != null ? wikiAmenity.getLocation() : getLatLon();
-						WikiArticleHelper.askShowArticle(mapActivity, !light, location, url);
-					} else {
-						Intent intent = new Intent(Intent.ACTION_VIEW);
-						intent.setData(Uri.parse(url));
-						AndroidUtils.startActivityIfSafe(v.getContext(), intent);
-					}
-				}
-			});
-		} else if (isWiki) {
-			ll.setOnClickListener(v -> WikipediaDialogFragment.showInstance(mapActivity, wikiAmenity, null));
-		} else if (isText && text.length() > 200) {
-			ll.setOnClickListener(v -> POIMapLayer.showPlainDescriptionDialog(view.getContext(), app, text, textPrefix));
+		if (!collapsable) {
+			if (isPhoneNumber) {
+				ll.setOnClickListener(v -> handlePhoneClick(textPrefix, text, v));
+			} else if (isUrl) {
+				ll.setOnClickListener(v -> handleUrlClick(textPrefix, text, hiddenUrl, light, v));
+			} else if (isEmailAction) {
+				ll.setOnClickListener(v -> handleEmailClick(textPrefix, text, v));
+			} else if (isWiki) {
+				ll.setOnClickListener(v -> WikipediaDialogFragment.showInstance(mapActivity, wikiAmenity, null));
+			} else if (isText && text.length() > 200) {
+				ll.setOnClickListener(v -> POIMapLayer.showPlainDescriptionDialog(view.getContext(), app, text, textPrefix));
+			}
 		}
 
 		rowBuilt();

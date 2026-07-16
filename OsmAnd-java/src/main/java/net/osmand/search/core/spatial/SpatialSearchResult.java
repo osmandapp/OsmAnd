@@ -5,9 +5,12 @@ import java.util.*;
 import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
+import net.osmand.data.City;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
+import net.osmand.data.Street;
 import net.osmand.search.core.HashQuadTree;
+import net.osmand.search.core.spatial.SpatialPoiSearch.SpatialPoiType;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -18,21 +21,24 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	final int parentInd;
 	final SpatialSearchResultsList parent;
 	final List<SpatialSearchResultRef> objs = new ArrayList<>();
-	final LatLon preciseLatlon; 
+	final LatLon preciseLatlon;
+	final String extraNameMatch; // refs and interpolation
 	final int surplusWords; // negative some building numbers not found, positive some extra tokens matched
 	int visibleLevel;
 	public MapObject unitedObject;
-	
+	int biggestCityType = -1;
+
 	private static final List<String> FILTER_DUPLICATE_POI_SUBTYPE = new ArrayList<String>(
 			Arrays.asList("building", "internet_access_yes"));
 	final int ZOOM_SIMILARITY_70_KM = 9 - 8; // 1 symbol - tile z=9 - 1 pixel of z=1
 	final int ZOOM_SIMILARITY_10_KM = 12 - 8; // 2 symbols - tile z=12
 	final int ZOOM_SIMILARITY_1_KM = 15 - 8; // 3 symbols
 	
-	SpatialSearchResult(SpatialSearchResultsList parentList, int parentInd, LatLon preciseLatlon) {
+	SpatialSearchResult(SpatialSearchResultsList parentList, int parentInd, LatLon preciseLatlon, String extraName) {
 		this.parentInd = parentInd;
 		this.parent = parentList;
 		this.preciseLatlon = preciseLatlon;
+		this.extraNameMatch = extraName;
 		int surplusWords = 0;
 		for (int i = 0; i < parent.tCount; i++) {
 			NameIndexAtom atom = parent.linearResults.get(parentInd * parentList.tCount + i);
@@ -42,6 +48,9 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 				} else if(atom.bldObject.getId().longValue() == SpatialSearchResultsList.SURPLUS_ID_MATCH) {
 					surplusWords++;
 				}
+			}
+			if (atom.matchExtraWord != 0) {
+				surplusWords += atom.matchExtraWord;
 			}
 			SpatialSearchToken token = parent.tokens[i];
 			SpatialSearchResultRef ref = null;
@@ -98,19 +107,56 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		return null;
 	}
 	
+	public List<MapObject> getAllObjects() {
+		if (objs.isEmpty()) {
+			return new ArrayList<>();
+		}
+		List<MapObject> result = new ArrayList<>();
+		for (SpatialSearchResultRef ref : objs) {
+			if (ref.atom.bldObject != null) {
+				result.add(ref.atom.bldObject);
+			} 
+			if (ref.atom.object != null) {
+				result.add(ref.atom.object);
+			}
+		}
+		return result;
+	}
+	
 	public List<MapObject> getObjects() {
 		List<MapObject> o = new ArrayList<>();
 		for (SpatialSearchResultRef r : objs) {
 			if (r.atom.bldObject != null) {
 				o.add(r.atom.bldObject);
 			}
-			if (!o.contains(r.atom.object)) {
+			if (r.atom.object != null && !o.contains(r.atom.object)) {
 				o.add(r.atom.object);
 			}
 		}
 		return o;
 	}
+
+	public boolean hasPoiTypes() {
+		return objs.stream().anyMatch(r -> r.atom.isPoiCategory());
+	}
+
+	public List<SpatialPoiType> getPoiTypes(SpatialPoiSearch poiSearch) {
+		List<SpatialPoiType> types = new ArrayList<>();
+		for (SpatialSearchResultRef r : objs) {
+			if (r.atom.isPoiCategory()) {
+				SpatialPoiType type = poiSearch.getById((int)r.atom.id);
+				if (type != null) {
+					types.add(type);
+				}
+			}
+		}
+		return types;
+	}
 	
+	public String getExtraNameMatch() {
+		return extraNameMatch;
+	}
+
 	public LatLon getLatLon() {
 		if (preciseLatlon != null) {
 			return preciseLatlon;
@@ -122,7 +168,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		}
 		return null;
 	}
-	
+
 	public int visibleLevel() {
 		return visibleLevel;
 	}
@@ -209,11 +255,14 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 
 	@Override
 	public String toString() {
+		String r = "";
 		if (preciseLatlon != null) {
-			return String.format("%.4f, %.4f %s", preciseLatlon.getLatitude(), preciseLatlon.getLongitude(),
-					objs.toString());
+			r+=String.format("%.4f, %.4f ", preciseLatlon.getLatitude(), preciseLatlon.getLongitude());
 		}
-		return objs.toString();
+		if (extraNameMatch != null) {
+			r += extraNameMatch + " ";
+		}
+		return r + objs.toString();
 	}
 	
 	
@@ -224,6 +273,10 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		
 		public SpatialSearchResultRef(NameIndexAtom atom) {
 			this.atom = atom;
+		}
+		
+		public boolean extraNameRelated() {
+			return atom.buildingOrRefInd >= 0;
 		}
 		
 		public int typeOrder(int min) {
@@ -270,6 +323,10 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 						atom.id, atom.otherWordsCnt );
 			}
 			return atom.simpleName(words.toString()); 
+		}
+		
+		public NameIndexAtom getNameIndexAtom() {
+			return atom;
 		}
 	}
 	
@@ -377,10 +434,16 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		if (center != null) {
 			double d1 = o1.getLatLon() == null ? 0 : MapUtils.getDistance(center, o1.getLatLon());
 			double d2 = o2.getLatLon() == null ? 0 : MapUtils.getDistance(center, o2.getLatLon());
-			res = Double.compare(d1, d2);
-			if (res != 0) {
-				return res;
+			if ((int) d1 != (int) d2) {
+				res = Double.compare(d1, d2);
+				if (res != 0) {
+					return res;
+				}
 			}
+		}
+		res = Integer.compare(o1.getBiggestCityType(), o2.getBiggestCityType());
+		if (res != 0) {
+			return res;
 		}
 		if (o1.getFirstObject() instanceof Amenity a1 && o2.getFirstObject() instanceof Amenity a2) {
 			int i1 = FILTER_DUPLICATE_POI_SUBTYPE.indexOf(a1.getSubType());
@@ -396,6 +459,18 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		return -Integer.compare(o1.parentInd, o2.parentInd);
 	}
 
+	private int getBiggestCityType() {
+		if (biggestCityType == -1) {
+			biggestCityType = City.CityType.values().length;
+			for (SpatialSearchResultRef ref : objs) {
+				if (ref.atom.object instanceof Street street) {
+					biggestCityType = Math.min(biggestCityType, street.getCity().getType().ordinal());
+				}
+			}
+		}
+		return biggestCityType;
+	}
+
 	@Override
 	public int compareTo(SpatialSearchResult o) {
 		return compare(this, o, null);
@@ -407,7 +482,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 			if (mapObject instanceof Amenity amenity) {
 				return amenity.getWikidata();
 			}
-			return mapObject.getName("wikidata");
+			return mapObject.getWikidata();
 		}
 		return null;
 	}
@@ -427,6 +502,5 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		}
 		return MapUtils.createShortLinkString(loc.getLatitude(), loc.getLongitude(), zoom);
 	}
-
 }
 	

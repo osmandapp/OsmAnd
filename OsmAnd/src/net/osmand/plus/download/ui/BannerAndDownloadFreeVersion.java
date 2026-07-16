@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.ibm.icu.impl.IllegalIcuArgumentException;
 
@@ -37,24 +38,44 @@ public class BannerAndDownloadFreeVersion {
 
 	private final DownloadActivity activity;
 	private final FreeVersionBanner freeVersionBanner;
+	private final View freeVersionBannerHeader;
 	private final boolean showSpace;
 
 	public BannerAndDownloadFreeVersion(@NonNull View view, @NonNull DownloadActivity activity, boolean showSpace) {
+		this(view, view, activity, showSpace);
+	}
+
+	public BannerAndDownloadFreeVersion(@NonNull View progressRoot, @NonNull View bannerRoot,
+	                                    @NonNull DownloadActivity activity, boolean showSpace) {
 		this.activity = activity;
 		this.showSpace = showSpace;
 
-		progressLayout = view.findViewById(R.id.downloadProgressLayout);
-		progressBar = progressLayout.findViewById(R.id.progressBar);
-		leftTextView = progressLayout.findViewById(R.id.leftTextView);
-		rightTextView = progressLayout.findViewById(R.id.rightTextView);
+		progressLayout = progressRoot.findViewById(R.id.downloadProgressLayout);
+		if (progressLayout != null) {
+			progressBar = progressLayout.findViewById(R.id.progressBar);
+			leftTextView = progressLayout.findViewById(R.id.leftTextView);
+			rightTextView = progressLayout.findViewById(R.id.rightTextView);
+		} else {
+			progressBar = null;
+			leftTextView = null;
+			rightTextView = null;
+		}
 
-		freeVersionBanner = new FreeVersionBanner(view, activity);
-		freeVersionBanner.initFreeVersionBanner();
+		freeVersionBannerHeader = bannerRoot.findViewById(R.id.freeVersionBannerHeader);
+		if (bannerRoot.findViewById(R.id.freeVersionBanner) != null) {
+			freeVersionBanner = new FreeVersionBanner(bannerRoot, activity);
+			freeVersionBanner.initFreeVersionBanner();
+		} else {
+			freeVersionBanner = null;
+		}
 		updateBannerInProgress();
 	}
 
 	public void updateFreeVersionBanner() {
-		freeVersionBanner.updateFreeVersionBanner();
+		if (freeVersionBanner != null) {
+			freeVersionBanner.updateFreeVersionBanner();
+			updateFreeVersionBannerHeader();
+		}
 	}
 
 	public void updateBannerInProgress() {
@@ -63,29 +84,49 @@ public class BannerAndDownloadFreeVersion {
 
 		int tab = activity.getCurrentTab();
 		boolean visible = tab != LOCAL_TAB_NUMBER && (!isFinished || tab != UPDATES_TAB_NUMBER || showSpace);
-		AndroidUiHelper.updateVisibility(progressLayout, visible);
+		if (progressLayout != null) {
+			AndroidUiHelper.updateVisibility(progressLayout, visible);
+		}
 
 		if (isFinished) {
-			progressLayout.setOnClickListener(null);
-			updateDescriptionTextWithSize(activity.getApp(), progressLayout);
-			freeVersionBanner.updateFreeVersionBanner();
+			if (progressLayout != null) {
+				progressLayout.setOnClickListener(null);
+				updateDescriptionTextWithSize(activity.getApp(), progressLayout);
+			}
+			if (freeVersionBanner != null) {
+				freeVersionBanner.updateFreeVersionBanner();
+				updateFreeVersionBannerHeader();
+			}
 		} else {
-			freeVersionBanner.setMinimizedFreeVersionBanner(true);
-			freeVersionBanner.updateAvailableDownloads();
-			progressLayout.setOnClickListener(v -> ActiveDownloadsDialogFragment.showInstance(activity));
+			if (freeVersionBanner != null) {
+				freeVersionBanner.updateAvailableDownloads();
+				updateFreeVersionBannerHeader();
+			}
+			if (progressLayout != null) {
+				progressLayout.setOnClickListener(v -> ActiveDownloadsDialogFragment.showInstance(activity));
+			}
 
 			String message = progressTask.getDescription();
 			boolean indeterminate = progressTask.isIndeterminate();
-			progressBar.setIndeterminate(indeterminate);
-			if (indeterminate) {
-				leftTextView.setText(message);
-				rightTextView.setText(null);
-			} else {
-				int percent = (int) progressTask.getDownloadProgress();
-				progressBar.setProgress(percent);
-				leftTextView.setText(message);
-				rightTextView.setText(percent + "%");
+			if (progressBar != null && leftTextView != null && rightTextView != null) {
+				progressBar.setIndeterminate(indeterminate);
+				if (indeterminate) {
+					leftTextView.setText(message);
+					rightTextView.setText(null);
+				} else {
+					int percent = (int) progressTask.getDownloadProgress();
+					progressBar.setProgress(percent);
+					leftTextView.setText(message);
+					rightTextView.setText(percent + "%");
+				}
 			}
+		}
+	}
+
+	private void updateFreeVersionBannerHeader() {
+		if (freeVersionBannerHeader != null) {
+			View bannerView = freeVersionBannerHeader.findViewById(R.id.freeVersionBanner);
+			freeVersionBannerHeader.setVisibility(bannerView != null ? bannerView.getVisibility() : View.GONE);
 		}
 	}
 

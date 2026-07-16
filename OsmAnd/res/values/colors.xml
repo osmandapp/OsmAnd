@@ -188,9 +188,23 @@
     <color name="btn_text_on_secondary_light">#237BFF</color>
     <color name="btn_text_on_secondary_dark">#237BFF</color>
 
+	<color name="btn_icon_on_secondary_light">#237BFF</color>
+    <color name="btn_icon_on_secondary_dark">#237BFF</color>
+
     <color name="btn_text_on_disabled_light">#666666</color>
     <color name="btn_text_on_disabled_dark">#666666</color>
 
+	<!-- Icon Button -->
+	<color name="btn_bg_icon_hover_light">#F0F0F0</color>
+	<color name="btn_bg_icon_hover_dark">#303436</color>
+
+	<color name="btn_bg_icon_focused_light">#DEEBFF</color>
+    <color name="btn_bg_icon_focused_dark">#16396E</color>
+
+	<color name="btn_bg_icon_pressed_light">#ADCEFF</color>
+    <color name="btn_bg_icon_pressed_dark">#131C2A</color>
+
+	<!-- Chip -->
 	<color name="chip_bg_light">#FFFFFF</color>
     <color name="chip_bg_dark">#1E1F20</color>
 

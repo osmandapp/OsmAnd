@@ -5028,4 +5028,13 @@
     <string name="memory_graphics_settings">Memoria grafikoa</string>
     <string name="shared_string_native">Jatorrizkoa</string>
     <string name="shared_string_gpu">GPU</string>
+    <string name="android_auto_missing_maps_desc">Jarraitzeko deskargatu ibilbiderako falta diren mapak.</string>
+    <string name="android_auto_possible_missing_maps_desc">Baliteke mapak falta izatea. Aurrera egiteko, saiatu lehendik dauden mapak erabiltzen.</string>
+    <string name="route_calculation_calculating_route">Ibilbidea kalkulatzen...</string>
+    <string name="route_calculation_calculating_fast_route">Ibilbide azkarra kalkulatzen...</string>
+    <string name="route_calculation_using_fast_algorithm">Ibilbide azkarren logaritmoa erabiltzen.</string>
+    <string name="route_calculation_using_standard_algorithm">Ibilbide estandarren algoritmoa erabiltzen (polikiago).</string>
+    <string name="route_calculation_missing_maps">Falta diren mapak</string>
+    <string name="route_calculation_missing_maps_desc">Ibilbide honetarako behar diren mapa batzuk falta dira. Deskargatu jarraitzeko.</string>
+    <string name="route_calculation_mixed_maps_desc">Bidratze azkarra ez dago erabilgarri mapa-data mistoak direla eta. Kalkulu Estandarra aldatzeak minutu batzuk behar izan ditzake.</string>
 </resources>

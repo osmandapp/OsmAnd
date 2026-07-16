@@ -50,11 +50,13 @@ object PoiAdditionalUiRules {
             key = Amenity.WEBSITE,
             customIconId = R.drawable.ic_world_globe_dark,
             isUrl = true,
+            textLinesLimit = 2
         ),
         PoiAdditionalUiRule(
             key = Amenity.URL,
             customIconId = R.drawable.ic_world_globe_dark,
             isUrl = true,
+            textLinesLimit = 2
         ),
         PoiAdditionalUiRule(
             key = Amenity.CUISINE,

@@ -43,8 +43,16 @@ object LinkMediaFactory {
 			?.takeIf { it.isNotEmpty() }
 	}
 
-	private fun fromLink(link: Link?, origin: MediaOrigin): MediaItem? {
-		val uri = link?.href?.trim()?.takeIf { it.isNotEmpty() } ?: return null
+	@JvmStatic
+	fun getMediaId(link: Link?): String? {
+		val uri = normalizedHref(link) ?: return null
+		return getInternalPath(uri) ?: uri
+	}
+
+	private fun normalizedHref(link: Link?): String? = link?.href?.trim()?.takeIf { it.isNotEmpty() }
+
+	private fun fromLink(link: Link, origin: MediaOrigin): MediaItem? {
+		val uri = normalizedHref(link) ?: return null
 		val type = getMediaType(link.type, uri)
 		if (type == MediaType.UNKNOWN) {
 			return null

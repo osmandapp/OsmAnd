@@ -81,6 +81,7 @@ public class DiscountHelper {
 	private static final String CHOOSE_PLAN_TYPE_SEA_DEPTH = "sea-depth";
 	private static final String CHOOSE_PLAN_TYPE_HILLSHADE = "hillshade";
 	private static final String CHOOSE_PLAN_TYPE_WIKIPEDIA = "wikipedia";
+	private static final String WEATHER = "weather";
 	private static final String CHOOSE_PLAN_TYPE_WIKIVOYAGE = "wikivoyage";
 	private static final String CHOOSE_PLAN_TYPE_OSMAND_CLOUD = "osmand-cloud";
 	private static final String CHOOSE_PLAN_TYPE_ADVANCED_WIDGETS = "advanced-widgets";
@@ -685,6 +686,8 @@ public class DiscountHelper {
 				return null;
 			}
 			switch (planType) {
+				case WEATHER:
+					return OsmAndFeature.WEATHER;
 				case CHOOSE_PLAN_TYPE_SEA_DEPTH:
 					return OsmAndFeature.NAUTICAL;
 				case CHOOSE_PLAN_TYPE_HILLSHADE:

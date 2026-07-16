@@ -278,7 +278,7 @@ public class StringPrefixTree<T> {
 	/**
 	 * Diagnostic testing suite validating proper bucket compression behavior.
 	 */
-	public static void test(String[] args) {
+	public static void main(String[] args) {
 		StringPrefixTree<Integer> tree = new StringPrefixTree<>();
 
 		System.out.println("=== STEP 1: Inserting 5 elements sharing prefixes ===");

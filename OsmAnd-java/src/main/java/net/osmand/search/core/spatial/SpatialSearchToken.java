@@ -7,20 +7,22 @@ import java.util.Set;
 
 import com.google.protobuf.ByteString;
 
+import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.binary.Abbreviations;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CityBlocks;
+import net.osmand.binary.NameIndexReader;
 import net.osmand.binary.NameIndexReader.NameIndexReaderMatcher;
 import net.osmand.binary.ObfConstants;
 import net.osmand.binary.OsmandOdb.AddressNameIndexDataAtom;
 import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom;
+import net.osmand.data.Building;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.Street;
 import net.osmand.search.core.HashQuadTree;
-import net.osmand.search.core.spatial.SpatialPoiSearch.SpatialPoiType;
 import net.osmand.search.core.spatial.SpatialSearchContext.SpatialSearchStats;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSettings;
 import net.osmand.util.Algorithms;
@@ -48,12 +50,17 @@ public class SpatialSearchToken {
 	String wordNoDot;
 	Set<String> bldWordSplit;
 	
-	Set<Long> poiCategoryAtoms = new HashSet<Long>();
+	Set<String> poiCategoryKeys = new HashSet<>();
 	List<NameIndexAtom> atoms = new ArrayList<>();
 	TLongObjectHashMap<NameIndexAtom> index = new TLongObjectHashMap<>();
 	HashQuadTree<Integer> quadTree = new HashQuadTree<>(16);
 	TLongObjectHashMap<NameIndexAtom> indexByOsmIds = new TLongObjectHashMap<>();
 	Set<Integer> deletedAtoms = new HashSet<Integer>();
+	
+	// partial place holder
+	List<NameIndexAtom> partialCommonAtoms = new ArrayList<>();
+	List<List<SpatialSearchToken>> partialOtherCommonAtoms = new ArrayList<>();
+	List<Boolean> partialNonNumericCommonAtoms = new ArrayList<>();
 
 	CollatorStringMatcher collatorMain;
 	CollatorStringMatcher noDotCollatorMain;
@@ -100,12 +107,14 @@ public class SpatialSearchToken {
 		}
 	}
 	
-	
-
-	public Set<String> getWordSplitAsBuidingName() {
-		return bldWordSplit;
+	public boolean likelyPartOfBuilding() {
+		return Abbreviations.likelyPartOfBuilding(word, bldWordSplit);
 	}
 	
+	public boolean likelyRef() {
+		return Abbreviations.likelyPartOfRef(word, bldWordSplit);
+	}
+
 	public CollatorStringMatcher getMainCollator() {
 		return collatorMain;
 	}
@@ -126,6 +135,15 @@ public class SpatialSearchToken {
 			@Override
 			public boolean matchKey(String key) {
 				stats.sub1MatchTime.start();
+				if (key.startsWith(NameIndexReader.POI_CATEGORY_PREFIX) && poiCategoryKeys.size() > 0) {
+					for (String poiCatKey : poiCategoryKeys) {
+						if (poiCatKey.startsWith(key.substring(NameIndexReader.POI_CATEGORY_PREFIX.length()))) {
+							stats.sub1MatchTime.finish();
+							return true;
+						}
+					}
+				}
+				
 				String alignedKey = SearchAlgorithms.alignChars(key);
 				// could be empty after align so match = true! ("''" -> "")
 				boolean matched = matchAlignedKey(alignedKey);
@@ -164,20 +182,9 @@ public class SpatialSearchToken {
 		quadTree.put(atom.coords.bboxTileZoom, atom.coords.bboxTileId, na.indexInToken);
 	}
 	
-	SpatialPoiType hasPoiType(String key, SpatialPoiSearch poiSearch) {
-		if (poiCategoryAtoms.isEmpty()) {
-			return null;
-		}
-		SpatialPoiType tp = poiSearch.getByKey(key);
-		if (tp != null && poiCategoryAtoms.contains((long) tp.id)) {
-			return tp;
-		}
-		return null;
-	}
-	
 	void addAtom(NameIndexAtom atom) {
 		if (atom.isPoiCategory()) {
-			poiCategoryAtoms.add(atom.id);
+			poiCategoryKeys.add(atom.name);
 		}
 		if (atom.object != null && !(atom.object instanceof Street) && 
 				atom.object.getId() != null &&  atom.object.getId() > 0) {
@@ -190,24 +197,24 @@ public class SpatialSearchToken {
 			indexByOsmIds.put(osmId, atom);
 		}
 
-		NameIndexAtom aa = index.get(atom.id);
-		if (aa != null) {
-			if (aa != atom) {
+		NameIndexAtom existing = index.get(atom.id);
+		if (existing != null) {
+			if (existing != atom) {
+				// compare convention like method important!
 				// select shortest available version
-				boolean replace = false;
-				if (atom.otherWordsCnt < aa.otherWordsCnt
-						|| (atom.otherWordsCnt == aa.otherWordsCnt && aa.otherFoundCnt > atom.otherFoundCnt)) {
-					replace = true;
-				}
-				// '2 south 2nd street' vs '25 садова вулиця' (25-та) -
-				if (aa.isBuilding() && !atom.isBuilding() 
-						&& atom.otherWordsCnt <= aa.otherWordsCnt
-						&& aa.otherFoundCnt < atom.otherFoundCnt) {
+				int res = Integer.compare(atom.otherWordsCnt, existing.otherWordsCnt);
+				if (res == 0) {
+					// '2 south 2nd street' vs '25 садова вулиця' (25-та) -
 					// replace street (has number in name) with building
-					replace = true;
+					res = Boolean.compare(atom.isBuilding(), existing.isBuilding());
 				}
+				if (res == 0) {
+					// shorter version
+					res = Integer.compare(atom.otherFoundCnt, existing.otherFoundCnt);
+				}
+				boolean replace = res < 0;
 				if (replace) {
-					atom.indexInToken = aa.indexInToken;
+					atom.indexInToken = existing.indexInToken;
 					index.put(atom.id, atom);
 					atoms.set(atom.indexInToken, atom);
 				}
@@ -257,6 +264,32 @@ public class SpatialSearchToken {
 			}
 		}
 		return false;
+	}
+	
+	public List<NameIndexAtom> getPartialCommonAtoms() {
+		return partialCommonAtoms;
+	}
+	
+	public void clearPartialAtoms() {
+		partialCommonAtoms.clear();
+	}
+	
+	public List<SpatialSearchToken> getPartialOtherTokens(int i) {
+		return partialOtherCommonAtoms.get(i);
+	}
+	
+	public boolean hasPoiCategoryKeys() {
+		return !poiCategoryKeys.isEmpty();
+	}
+	
+	public boolean getPartialNumericNonMatch(int i) {
+		return partialNonNumericCommonAtoms.get(i);
+	}
+	
+	public void addPartialCommonAtom(NameIndexAtom atom, List<SpatialSearchToken> otherTokens, boolean numericNotMatch) {
+		partialCommonAtoms.add(atom);
+		partialOtherCommonAtoms.add(otherTokens);
+		partialNonNumericCommonAtoms.add(numericNotMatch);
 	}
 	
 	String[] matchSplitName(String name) {
@@ -469,15 +502,24 @@ public class SpatialSearchToken {
 		int indexInToken;
 		final boolean cityAsStreet;
 		final NameIndexAtomXY coords; 
-		final int buildingInd; // added before intersection
+		final int buildingOrRefInd; // added before intersection
 		final int nearbyRadius;
+		TIntArrayList poiTypes;
+		int elo;
 		
 		NameIndexAtom sameNameAreaObj;
 
+		int matchExtraWord;
 
-		NameIndexAtom(String name, int type, long id, long pid, MapObject obj, boolean cityAsStreet, int otherWordsCnt,
-				int otherFoundCnt, NameIndexAtomXY coords, int nearbyRadius) {
-			this(name, type, id, pid, obj, cityAsStreet, otherWordsCnt, otherFoundCnt, coords, nearbyRadius, -1);
+		NameIndexAtom(String name, long id, int total) {
+			this(name, SpatialSearchToken.POI_CATEGORY_TYPE, id, 0, null, false, -total, total,
+					new NameIndexAtomXY(null, null, null), 0, -1);
+		}
+		
+		NameIndexAtom(NameIndexAtom cp) {
+			this(cp.name, cp.type, cp.id, cp.parentid, cp.object, cp.cityAsStreet, cp.otherWordsCnt, cp.otherFoundCnt,
+					cp.coords, cp.nearbyRadius, cp.buildingOrRefInd);
+			this.poiTypes = cp.poiTypes;
 		}
 
 		NameIndexAtom(String name, int type, long id, long pid, MapObject obj, boolean cityAsStreet, int otherWordsCnt,
@@ -492,7 +534,7 @@ public class SpatialSearchToken {
 			this.otherFoundCnt = otherFoundCnt;
 			this.coords = coords;
 			this.nearbyRadius = nearbyRadius;
-			this.buildingInd = buildingInd;
+			this.buildingOrRefInd = buildingInd;
 		}
 		
 		
@@ -540,7 +582,7 @@ public class SpatialSearchToken {
 			return type == POI_TYPE;
 		}
 
-		String typeStr() {
+		public String typeStr() {
 			String typeS = "";
 			if (isPoiCategory()) {
 				typeS = "POI_TYPE";
@@ -575,10 +617,25 @@ public class SpatialSearchToken {
 			return object != null ? object.toString() : simpleName(name);
 		}
 
-
+		public String getName() {
+			return name;
+		}
+		
+		public MapObject getObject() {
+			return object;
+		}
+		
+		public Building getBuilding() {
+			if (bldObject instanceof Building b) {
+				return b;
+			}
+			return null;
+		}
 
 	}
 
+
+	
 
 
 }

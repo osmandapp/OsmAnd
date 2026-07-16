@@ -212,10 +212,23 @@ public class ObfConstants {
 		return id > 0 && (id & SPLIT_BIT) == SPLIT_BIT;
 	}
 
+	public static boolean isTagNonIndexedForSearchAsName(String tag) {
+		return tag.equals("ref");
+	}
+	
 	public static boolean isTagIndexedForSearchAsName(String tag) {
 		if (tag != null) {
-			if (tag.startsWith(Amenity.ROUTE_NAME)) {
-				// search related but not direct
+			// search related but not direct
+			if (tag.startsWith(Amenity.ROUTE_NAME) ||
+					tag.equals(Amenity.SHIELD_STUB_NAME)) {
+				return false;
+			}
+			// some popular tags ignored as name
+			if (tag.startsWith("tiger:") || tag.startsWith("noname")
+					|| tag.startsWith("name:" + MapObject.NAME_ETYMOLOGY_ATTR)
+					|| tag.startsWith("artist_name")
+					|| tag.startsWith("addr:") // housename, street name
+				) {
 				return false;
 			}
 			return tag.contains("name") || tag.contains("brand");

@@ -40,6 +40,9 @@
 		<item name="dlg_btn_accent_stroked_text">@color/dlg_btn_accent_stroked_text_dark</item>
 		<item name="dlg_btn_tertiary_text">@color/active_color_primary_dark</item>
 		<item name="dlg_btn_tertiary_harmful">@drawable/dlg_btn_tertiary_harmful</item>
+		<item name="wikivoyage_primary_btn_text_color">@color/active_buttons_and_links_text_dark</item>
+		<item name="stroked_btn_contour">@drawable/stroked_btn_contour_dark</item>
+		<item name="radio_button_outline">@drawable/ic_action_radio_button_night</item>
 		<item name="text_color_secondary">@color/text_color_secondary_dark</item>
 		<item name="android:textColorPrimary">@color/text_color_primary_dark</item>
 		<item name="android:textColorSecondary">@color/text_color_secondary_dark</item>

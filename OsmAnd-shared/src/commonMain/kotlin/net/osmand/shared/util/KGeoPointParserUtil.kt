@@ -757,7 +757,7 @@ object KGeoPointParserUtil {
             if (lat == 0.0 && lon == 0.0 && positionInSearchMatch != null) {
                 val tempLat = positionInSearchMatch.groupValues[1].toDouble()
                 val tempLon = positionInSearchMatch.groupValues[2].toDouble()
-                if (tempLat in -90.0..90.0 && tempLon in -180.0..180.0) {
+                if (KMapUtils.isValidLatLon(tempLat, tempLon)) {
                     lat = tempLat
                     lon = tempLon
                 }

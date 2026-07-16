@@ -329,8 +329,7 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 	}
 
 	private void sortItems(@NonNull List<Object> items, @NonNull FavoriteListSortMode sortMode) {
-		LatLon latLon = app.getMapViewTrackingUtilities().getDefaultLocation();
-		items.sort(new FavoriteComparator(sortMode, latLon, app));
+		items.sort(new FavoriteComparator(sortMode, app));
 	}
 
 	@NonNull

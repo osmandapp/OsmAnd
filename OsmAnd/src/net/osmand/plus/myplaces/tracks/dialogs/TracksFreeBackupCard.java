@@ -113,7 +113,7 @@ public class TracksFreeBackupCard extends BaseCard {
 
 	private void dismiss() {
 		settings.TRACKS_FREE_ACCOUNT_CARD_DISMISSED.set(true);
-		notifyCardPressed();
+		setLayoutNeeded();
 	}
 
 	public static boolean shouldShow(@NonNull OsmandApplication app, @NonNull TrackFolder rootFolder) {

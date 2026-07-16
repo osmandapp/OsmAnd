@@ -1,31 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/freeVersionBanner"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:layout_margin="12dp"
-	android:background="@drawable/free_version_banner_bg"
-	android:elevation="2dp"
-	android:orientation="vertical"
-	android:paddingStart="@dimen/list_content_padding"
-	android:paddingLeft="@dimen/list_content_padding"
-	android:paddingTop="16dp"
-	android:paddingEnd="@dimen/list_content_padding"
-	android:paddingRight="@dimen/list_content_padding"
-	android:paddingBottom="16dp">
+	app:cardBackgroundColor="?attr/list_background_color"
+	app:cardCornerRadius="@dimen/radius_double_large"
+	app:cardElevation="0dp"
+	app:strokeWidth="0dp">
 
 	<LinearLayout
 		android:id="@+id/bannerTopLayout"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:orientation="vertical">
+		android:orientation="vertical"
+		android:paddingTop="12dp">
 
 		<LinearLayout
 			android:id="@+id/freeVersionBannerTitle"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginEnd="@dimen/content_padding"
 			android:gravity="center_vertical"
 			android:orientation="horizontal">
 
@@ -51,7 +48,8 @@
 			android:id="@+id/freeVersionSubtitleTextView"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginTop="6dp"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginEnd="@dimen/content_padding"
 			android:text="@string/free_download_limit_reached_description"
 			android:textColor="@color/text_color_secondary_light"
 			android:textSize="16sp"
@@ -62,7 +60,9 @@
 			android:id="@+id/marksLinearLayout"
 			android:layout_width="match_parent"
 			android:layout_height="24dp"
-			android:layout_marginTop="@dimen/content_padding_small"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginTop="11dp"
+			android:layout_marginEnd="@dimen/content_padding"
 			android:orientation="horizontal" />
 
 		<FrameLayout
@@ -78,29 +78,28 @@
 				android:layout_width="match_parent"
 				android:layout_height="42dp"
 				android:layout_gravity="center_vertical"
-				android:background="@drawable/free_version_banner_cta_bg_ripple"
 				android:gravity="center_vertical"
 				android:orientation="horizontal">
 
-				<TextView
+				<net.osmand.plus.widgets.TextViewEx
 					android:id="@+id/freeVersionDescriptionTextView"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
-					android:layout_marginStart="@dimen/content_padding_half"
+					android:layout_marginStart="@dimen/content_padding"
 					android:layout_weight="1"
 					android:text="@string/get_unlimited_downloads"
-					android:textColor="@color/map_widget_blue"
+					android:textColor="?attr/btn_text_on_secondary"
 					android:textSize="16sp"
-					android:textStyle="bold" />
+					app:typefaceWeight="medium" />
 
 				<ImageView
 					android:id="@+id/freeVersionCtaArrow"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_marginEnd="@dimen/content_padding_half"
+					android:layout_marginEnd="@dimen/content_padding"
 					android:contentDescription="@string/get_unlimited_downloads"
 					android:src="@drawable/ic_arrow_forward"
-					app:tint="@color/map_widget_blue" />
+					app:tint="?attr/btn_icon_on_secondary" />
 
 				<TextView
 					android:id="@+id/freeVersionCtaDiscountBadge"
@@ -108,7 +107,7 @@
 					android:layout_height="match_parent"
 					android:layout_gravity="center_vertical"
 					android:layout_marginTop="@dimen/content_padding_small_half"
-					android:layout_marginEnd="@dimen/content_padding_half"
+					android:layout_marginEnd="@dimen/content_padding"
 					android:layout_marginBottom="@dimen/content_padding_small_half"
 					android:background="@drawable/free_version_banner_cta_discount_bg"
 					android:gravity="center"
@@ -123,4 +122,4 @@
 		</FrameLayout>
 	</LinearLayout>
 
-</LinearLayout>
+</com.google.android.material.card.MaterialCardView>

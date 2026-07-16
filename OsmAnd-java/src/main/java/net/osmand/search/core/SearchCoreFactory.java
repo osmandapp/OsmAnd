@@ -6,6 +6,7 @@ import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_ONLY_STAR
 import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE;
 import static net.osmand.binary.ObfConstants.isTagIndexedForSearchAsId;
 import static net.osmand.binary.ObfConstants.isTagIndexedForSearchAsName;
+import static net.osmand.binary.ObfConstants.isTagNonIndexedForSearchAsName;
 import static net.osmand.data.Amenity.POPULATION;
 import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
@@ -473,7 +474,7 @@ public class SearchCoreFactory {
 		
 		boolean hasNonNumericLeftUnknownSearchWord(SearchResult res) {
 			for (String leftUnknownSearchWord : res.filterUnknownSearchWord(null)) {
-				if (!CommonWords.isNumber2Letters(leftUnknownSearchWord)) {
+				if (!SearchAlgorithms.isNumber2Letters(leftUnknownSearchWord)) {
 					return true;
 				}
 			}
@@ -815,8 +816,10 @@ public class SearchCoreFactory {
 					}
 					if (!matchLocalName && !nm.matches(sr.otherNames)) {
 						for(String k : object.getAdditionalInfoKeys()) {
-							if ((isTagIndexedForSearchAsName(k) || isTagIndexedForSearchAsId(k))
-									&& nm.matches(object.getAdditionalInfo(k))) {
+							if (( isTagIndexedForSearchAsName(k) ||
+								  isTagNonIndexedForSearchAsName(k) ||
+								  isTagIndexedForSearchAsId(k))
+								&& nm.matches(object.getAdditionalInfo(k))) {
 								sr.alternateName = object.getAdditionalInfo(k);
 								break;
 							}
@@ -1728,6 +1731,7 @@ public class SearchCoreFactory {
 		@Override
 		public boolean search(SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
 			Street s = null;
+			CommonWords commonWords = CommonWords.getInstance();
 			int priority = SEARCH_BUILDING_BY_STREET_PRIORITY;
 			if (phrase.isLastWord(ObjectType.STREET)) {
 				s =  (Street) phrase.getLastSelectedWord().getResult().object;
@@ -1828,7 +1832,7 @@ public class SearchCoreFactory {
 				String streetIntersection = phrase.getUnknownWordToSearch();
 				if (Algorithms.isEmpty(streetIntersection) ||
 						(!Character.isDigit(streetIntersection.charAt(0)) &&
-						  CommonWords.getCommonSearch(streetIntersection) == -1) &&
+								commonWords.getCommonSearch(streetIntersection) == -1) &&
 						 phrase.isSearchTypeAllowed(ObjectType.STREET_INTERSECTION)) {
 					for (Street street : s.getIntersectedStreets()) {
 						SearchResult res = new SearchResult(phrase);

@@ -14,6 +14,7 @@ import androidx.core.util.Pair;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.data.AdditionalInfoBundle;
 import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.LatLon;
@@ -85,7 +86,7 @@ public class PlaceDetailsMenuBuilder extends AmenityMenuBuilder {
 	private boolean buildDescription(@NonNull View view, @NonNull Amenity amenity,
 			boolean allowOnlineWiki) {
 		Map<String, String> extensions = amenity.getAmenityExtensions(app.getPoiTypes(), false);
-		AdditionalInfoBundle bundle = new AdditionalInfoBundle(app, extensions);
+		AdditionalInfoBundle bundle = new AdditionalInfoBundle(app.getPoiTypes(), extensions);
 		Map<String, Object> filteredInfo = bundle.getFilteredLocalizedInfo();
 
 		if (buildShortWikiDescription(view, filteredInfo, allowOnlineWiki)) {

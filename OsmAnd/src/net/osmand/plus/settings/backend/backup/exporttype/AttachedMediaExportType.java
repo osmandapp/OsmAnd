@@ -26,7 +26,7 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.*;
 
-class AttachedMediaExportType extends AbstractExportType {
+public class AttachedMediaExportType extends AbstractExportType {
 
 	private static final Log LOG = PlatformUtil.getLog(AttachedMediaExportType.class);
 

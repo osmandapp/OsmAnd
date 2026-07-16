@@ -57,6 +57,7 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.media.AudioRecorder;
 import net.osmand.plus.media.CameraRecorder;
 import net.osmand.plus.media.MediaCaptureHelper;
+import net.osmand.plus.media.MediaMetadataUtils;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.quickaction.QuickActionType;
@@ -81,6 +82,7 @@ import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.CollectionUtils;
+import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -638,7 +640,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				File f = getOutputFile(lat, lon, MPEG4_EXTENSION);
 				cameraRecorder.configureVideoRecorder(mr, p, f, CameraRecorder.getDisplayRotation(mapActivity));
 				try {
-					setMediaRecorderLocation(mr, lat, lon);
+					MediaMetadataUtils.setMediaRecorderLocation(mr, lat, lon);
 					if (!isAttachedMediaRecording() && recordingsFileHelper.AV_RECORDER_SPLIT.get()) {
 						cleanupRecordingSpace(p);
 					}
@@ -718,7 +720,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 				File file = getOutputFile(lat, lon, THREEGP_EXTENSION);
 				MediaRecorder recorder = audioRecorder.createRecorder(file);
-				setMediaRecorderLocation(recorder, lat, lon);
+				MediaMetadataUtils.setMediaRecorderLocation(recorder, lat, lon);
 				runMediaRecorder(activity, recorder, file);
 			} catch (Exception e) {
 				cancelPendingRecordingListeners();
@@ -907,17 +909,17 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			}
 
 			currentRecording = new CurrentRecording(type);
-			MediaRecorder mr = new MediaRecorder();
+			MediaRecorder recorder = new MediaRecorder();
 			LatLon latLon = getNextRecordingLocation();
 			File f = mediaCaptureHelper.createVideoFile(latLon.getLatitude(), latLon.getLongitude());
 
 			cameraRecorder.unlockCamera();
-			mr.setCamera(cameraRecorder.getCamera());
-			cameraRecorder.configureVideoRecorder(mr, profile, f, getRotation());
-			setMediaRecorderLocation(mr, latLon.getLatitude(), latLon.getLongitude());
-			mr.prepare();
-			mr.start();
-			mediaRec = mr;
+			recorder.setCamera(cameraRecorder.getCamera());
+			cameraRecorder.configureVideoRecorder(recorder, profile, f, getRotation());
+			MediaMetadataUtils.setMediaRecorderLocation(recorder, latLon.getLatitude(), latLon.getLongitude());
+			recorder.prepare();
+			recorder.start();
+			mediaRec = recorder;
 			mediaRecFile = f;
 
 		} catch (Exception e) {
@@ -1047,25 +1049,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private void updateAttachedPhotoInformation(@NonNull File file) {
 		double lat = recordingMenu != null ? recordingMenu.lat : actionLat;
 		double lon = recordingMenu != null ? recordingMenu.lon : actionLon;
-		if (!isValidMediaLocation(lat, lon)) {
+		if (!MapUtils.isValidLatLon(lat, lon)) {
 			return;
 		}
 		Float heading = app.getLocationProvider().getHeading();
-		try {
-			new Recording(file).updatePhotoInformation(lat, lon, null, heading != null && heading != 0 ? heading : Double.NaN);
-		} catch (IOException e) {
-			log.error("Error updating EXIF information " + e.getMessage(), e);
-		}
-	}
-
-	private void setMediaRecorderLocation(@NonNull MediaRecorder recorder, double lat, double lon) {
-		if (isValidMediaLocation(lat, lon)) {
-			recorder.setLocation((float) lat, (float) lon);
-		}
-	}
-
-	private static boolean isValidMediaLocation(double lat, double lon) {
-		return lat >= -90.0 && lat <= 90.0 && lon >= -180.0 && lon <= 180.0;
+		MediaMetadataUtils.updatePhotoInformation(file, lat, lon, null, heading != null && heading != 0 ? heading : Double.NaN);
 	}
 
 	private void cancelAttachedMediaRecording() {

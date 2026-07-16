@@ -14,6 +14,7 @@ import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.ROUTE_MEMBE
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.ROUTE_PART_OF_ROW_KEY;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.ROUTE_RELATED_ROUTES_ROW_KEY;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.WITHIN_POLYGONS_ROW_KEY;
+import static net.osmand.plus.wikipedia.WikiAlgorithms.WIKI_LINK;
 
 import android.content.Context;
 import android.content.Intent;
@@ -42,7 +43,6 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.ContextCompat;
@@ -72,6 +72,7 @@ import net.osmand.plus.mapcontextmenu.SearchAmenitiesTask.SearchAmenitiesListene
 import net.osmand.plus.mapcontextmenu.SearchByRouteIdTask.SearchByRouteIdListener;
 import net.osmand.plus.mapcontextmenu.SearchByRouteIdTask.SearchType;
 import net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder;
+import net.osmand.plus.mapcontextmenu.builders.rows.PoiAdditionalMultiValueDialogController;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.mapcontextmenu.gallery.GalleryRowBuilder;
@@ -982,27 +983,11 @@ public class MenuBuilder {
 		if (onClickListener != null) {
 			ll.setOnClickListener(onClickListener);
 		} else if (attrs.isUrl()) {
-			ll.setOnClickListener(v -> {
-				if (customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID)) {
-					Intent intent = new Intent(Intent.ACTION_VIEW);
-					intent.setData(Uri.parse(text));
-					AndroidUtils.startActivityIfSafe(v.getContext(), intent);
-				}
-			});
+			ll.setOnClickListener(v -> handleUrlClick(textPrefix, text, null, light, v));
 		} else if (attrs.isNumber()) {
-			ll.setOnClickListener(v -> {
-				if (customization.isFeatureEnabled(CONTEXT_MENU_PHONE_ID)) {
-					showDialog(text, Intent.ACTION_DIAL, "tel:", v);
-				}
-			});
+			ll.setOnClickListener(v -> handlePhoneClick(textPrefix, text, v));
 		} else if (attrs.isEmail()) {
-			ll.setOnClickListener(v -> {
-				if (customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID)) {
-					Intent intent = new Intent(Intent.ACTION_SENDTO);
-					intent.setData(Uri.parse("mailto:" + text));
-					AndroidUtils.startActivityIfSafe(v.getContext(), intent);
-				}
-			});
+			ll.setOnClickListener(v -> handleEmailClick(textPrefix, text, v));
 		}
 
 		((LinearLayout) view).addView(baseView);
@@ -1109,25 +1094,93 @@ public class MenuBuilder {
 		return ll;
 	}
 
-	protected void showDialog(String text, String actionType, String dataPrefix, View v) {
-		Context context = v.getContext();
-		String[] items = text.split("[,;]");
-		Intent intent = new Intent(actionType);
-		if (items.length > 1) {
-			for (int i = 0; i < items.length; i++) {
-				items[i] = items[i].trim();
-			}
-			AlertDialog.Builder dlg = new AlertDialog.Builder(context);
-			dlg.setNegativeButton(R.string.shared_string_cancel, null);
-			dlg.setItems(items, (dialog, which) -> {
-				intent.setData(Uri.parse(dataPrefix + items[which]));
-				AndroidUtils.startActivityIfSafe(context, intent);
-			});
-			dlg.show();
-		} else {
-			intent.setData(Uri.parse(dataPrefix + text));
-			AndroidUtils.startActivityIfSafe(context, intent);
+	protected void handlePhoneClick(@Nullable String title, @Nullable String text, @NonNull View view) {
+		if (!customization.isFeatureEnabled(CONTEXT_MENU_PHONE_ID)) {
+			return;
 		}
+		ArrayList<String> values = collectMultiValues(text, "[,;]");
+		if (values.size() > 1) {
+			PoiAdditionalMultiValueDialogController.showDialog(mapActivity, title, values, this::openPhoneNumber);
+		} else if (values.size() == 1) {
+			openPhoneNumber(view.getContext(), values.get(0));
+		}
+	}
+
+	protected void handleEmailClick(@Nullable String title, @Nullable String text, @NonNull View view) {
+		if (!customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID)) {
+			return;
+		}
+		ArrayList<String> values = collectMultiValues(text, Amenity.SEPARATOR);
+		if (values.size() > 1 && isEmailValues(values)) {
+			PoiAdditionalMultiValueDialogController.showDialog(mapActivity, title, values, this::openEmail);
+		} else if (values.size() == 1 && AndroidUtils.isValidEmail(values.get(0))) {
+			openEmail(view.getContext(), values.get(0));
+		}
+	}
+
+	protected void handleUrlClick(@Nullable String title, @Nullable String text,
+	                              @Nullable String hiddenUrl, boolean light, @NonNull View view) {
+		if (!customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID)) {
+			return;
+		}
+		String url = hiddenUrl == null ? text : hiddenUrl;
+		if (Algorithms.isEmpty(url)) {
+			return;
+		}
+		ArrayList<String> values = hiddenUrl == null ? collectMultiValues(text, Amenity.SEPARATOR) : new ArrayList<>();
+		if (values.size() > 1) {
+			PoiAdditionalMultiValueDialogController.showDialog(mapActivity, title, values, this::openUrl);
+		} else if (url.contains(WIKI_LINK)) {
+			openWikiUrl(url, light);
+		} else {
+			openUrl(view.getContext(), url);
+		}
+	}
+
+	protected void openWikiUrl(@NonNull String url, boolean light) {
+		WikiArticleHelper.askShowArticle(mapActivity, !light, getLatLon(), url);
+	}
+
+	private void openPhoneNumber(@NonNull Context context, @NonNull String value) {
+		Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + value));
+		AndroidUtils.startActivityIfSafe(context, intent);
+	}
+
+	private void openEmail(@NonNull Context context, @NonNull String value) {
+		Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + value));
+		AndroidUtils.startActivityIfSafe(context, intent);
+	}
+
+	private void openUrl(@NonNull Context context, @NonNull String value) {
+		AndroidUtils.openUrl(context, value, isNightMode());
+	}
+
+	@NonNull
+	private ArrayList<String> collectMultiValues(@Nullable String text, @NonNull String separatorRegex) {
+		ArrayList<String> values = new ArrayList<>();
+		if (!Algorithms.isEmpty(text)) {
+			for (String item : text.split(separatorRegex)) {
+				String trimmed = item.trim();
+				if (!Algorithms.isEmpty(trimmed)) {
+					values.add(trimmed);
+				}
+			}
+		}
+		return values;
+	}
+
+	protected boolean isEmailAction(@Nullable String text) {
+		ArrayList<String> values = collectMultiValues(text, Amenity.SEPARATOR);
+		return !values.isEmpty() && isEmailValues(values);
+	}
+
+	protected boolean isEmailValues(@NonNull ArrayList<String> values) {
+		for (String value : values) {
+			if (!AndroidUtils.isValidEmail(value)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	protected void setDividerWidth(boolean matchWidthDivider) {
