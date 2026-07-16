@@ -162,17 +162,6 @@ class AstroConfigureViewBottomSheet :
 				requireStarMap().applyRedFilter(checked)
 			}
 		)
-
-		bindToggleMapActionCard(
-			card = root.findViewById(R.id.button_solar_eclipse),
-			isChecked = { requireStarMap().isSolarEclipseModeActive() },
-			titleResEnabled = R.string.astro_solar_eclipse,
-			drawableEnabled = uiUtilities.getIcon(R.drawable.ic_action_sun, activeColor),
-			toggle = {
-				requireStarMap().toggleSolarEclipseMode()
-				dismiss()
-			}
-		)
 	}
 
 	private fun bindVisibleObjects(root: View) {

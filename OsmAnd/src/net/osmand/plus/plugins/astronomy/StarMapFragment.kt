@@ -1458,16 +1458,25 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		val selectedTime = state.selectedTime
 		if (event != null && window != null && selectedTime != null) {
 			if (!state.loading && !state.error && state.requestId != lastFocusedEclipseRequestId) {
-				findSun()?.let { sun ->
-					manualAzimuth = true
-					val center = getSolarVisibleCenter()
-					starView.showTimeAndFocusObject(
-						selectedTime,
-						sun,
-						targetX = center.first,
-						targetY = center.second
-					)
-					lastFocusedEclipseRequestId = state.requestId
+				val focusRequestId = state.requestId
+				eclipseCard.doOnPreDraw {
+					val latestState = viewModel.solarEclipseModeState.value
+					if (focusRequestId == lastFocusedEclipseRequestId || latestState?.active != true ||
+						latestState.requestId != focusRequestId || latestState.selectedTime?.ut != selectedTime.ut
+					) {
+						return@doOnPreDraw
+					}
+					findSun()?.let { sun ->
+						manualAzimuth = true
+						val center = getSolarVisibleCenter()
+						starView.showTimeAndFocusObject(
+							selectedTime,
+							sun,
+							targetX = center.first,
+							targetY = center.second
+						)
+						lastFocusedEclipseRequestId = focusRequestId
+					}
 				}
 			}
 			val eventChanged = lastBoundEclipseEventKey != event.peak.ut

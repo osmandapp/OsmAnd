@@ -16,6 +16,7 @@
 	<string name="astro_hide_map">Hide map</string>
 	<string name="astro_map_center_location">Map center: %1$s</string>
 	<string name="astro_solar_eclipse">Solar eclipse</string>
+	<string name="astro_solar_eclipse_subtitle">Explore worldwide solar eclipses</string>
 	<string name="astro_previous_solar_eclipse">Previous solar eclipse</string>
 	<string name="astro_next_solar_eclipse">Next solar eclipse</string>
 	<string name="astro_close_solar_eclipse">Close solar eclipse explorer</string>
