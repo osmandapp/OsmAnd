@@ -422,16 +422,21 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 			return partial1;
 		}
 		if (interpolation != null) {
-			Building b = new Building(interpolation);
-			b.fixInterpolation(bld);
-			b.setId(DEFAULT_BLD_ID);
-			return b;
+			return getInterpolatedBuilding(interpolation, bld);
 		}
 		if (partial2 != null) {
 			partial2.setId(PARTIAL_ID_MATCH);
 			return partial2;
 		}
 		return null;
+	}
+
+	private Building getInterpolatedBuilding(Building interpolation, String bld) {
+		Building b = new Building();
+		b.setLocation(interpolation.getLocation(interpolation.interpolation(bld)));
+		b.setId(DEFAULT_BLD_ID);
+		b.setName(bld);
+		return b;
 	}
 
 	private int getTokenByOriginalOrder(int originalOrder) {
