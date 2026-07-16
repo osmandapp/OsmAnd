@@ -321,6 +321,10 @@ public class FileUtils {
 		return name != null && !ILLEGAL_FILE_NAME_CHARACTERS.matcher(name).find();
 	}
 
+	public static boolean isNonEmptyFile(@Nullable File file) {
+		return file != null && file.exists() && file.length() > 0;
+	}
+
 	public static boolean isValidDirName(@NonNull String name) {
 		return !ILLEGAL_PATH_NAME_CHARACTERS.matcher(name).find();
 	}
@@ -434,8 +438,7 @@ public class FileUtils {
 		}
 	}
 
-	public static List<File> collectFiles(@NonNull File dir, @NonNull String ext,
-			@NonNull List<File> list) {
+	public static List<File> collectFiles(@NonNull File dir, @NonNull String ext, @NonNull List<File> list) {
 		if (dir.exists() && dir.canRead()) {
 			File[] files = dir.listFiles();
 			if (Algorithms.isEmpty(files)) {

@@ -70,6 +70,7 @@ import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
@@ -1036,7 +1037,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		clearAttachedMediaRecording();
 		finishRecording();
 		CallbackWithObject<File> callback = attachedRecording != null ? attachedRecording.getResultCallback() : null;
-		if (callback != null && file != null && file.exists() && file.length() > 0) {
+		if (callback != null && FileUtils.isNonEmptyFile(file)) {
 			if (attachedRecording.getType() == AVActionType.REC_PHOTO) {
 				updateAttachedPhotoInformation(file);
 			}
