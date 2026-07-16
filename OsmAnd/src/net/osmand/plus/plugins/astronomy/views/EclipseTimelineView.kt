@@ -11,7 +11,7 @@ import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
 import kotlin.math.roundToLong
 
-internal object SolarEclipseTimelineMapper {
+internal object EclipseTimelineMapper {
 	fun fractionForTime(startMillis: Long, endMillis: Long, timeMillis: Long): Double {
 		if (endMillis <= startMillis) return 0.0
 		return ((timeMillis - startMillis).toDouble() / (endMillis - startMillis).toDouble())
@@ -25,7 +25,7 @@ internal object SolarEclipseTimelineMapper {
 	}
 }
 
-class SolarEclipseTimelineView @JvmOverloads constructor(
+class EclipseTimelineView @JvmOverloads constructor(
 	context: Context,
 	attrs: AttributeSet? = null,
 	defStyleAttr: Int = 0
@@ -42,6 +42,14 @@ class SolarEclipseTimelineView @JvmOverloads constructor(
 		strokeCap = Paint.Cap.ROUND
 		strokeWidth = 4f * density
 	}
+	private val partialContactPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+		color = 0xFFFFC107.toInt()
+		strokeWidth = 2f * density
+	}
+	private val totalContactPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+		color = 0xFFB71C1C.toInt()
+		strokeWidth = 2f * density
+	}
 	private val maximumPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
 		color = 0xFFFFA000.toInt()
 		strokeWidth = 3f * density
@@ -56,6 +64,8 @@ class SolarEclipseTimelineView @JvmOverloads constructor(
 	private var endMillis = 1L
 	private var maximumMillis = 0L
 	private var currentMillis = 0L
+	private var partialContacts = emptyList<Long>()
+	private var totalContacts = emptyList<Long>()
 	private var listener: ((Long, Boolean) -> Unit)? = null
 
 	init {
@@ -64,12 +74,22 @@ class SolarEclipseTimelineView @JvmOverloads constructor(
 		isClickable = true
 	}
 
-	fun setRange(start: Long, end: Long, maximum: Long, current: Long) {
+	fun setRange(
+		start: Long,
+		end: Long,
+		maximum: Long,
+		current: Long,
+		partialContacts: List<Long> = emptyList(),
+		totalContacts: List<Long> = emptyList()
+	) {
 		val normalizedEnd = end.coerceAtLeast(start + 1L)
 		val normalizedMaximum = maximum.coerceIn(start, normalizedEnd)
 		val normalizedCurrent = current.coerceIn(start, normalizedEnd)
+		val normalizedPartial = partialContacts.map { it.coerceIn(start, normalizedEnd) }
+		val normalizedTotal = totalContacts.map { it.coerceIn(start, normalizedEnd) }
 		if (startMillis == start && endMillis == normalizedEnd &&
-			maximumMillis == normalizedMaximum && currentMillis == normalizedCurrent
+			maximumMillis == normalizedMaximum && currentMillis == normalizedCurrent &&
+			this.partialContacts == normalizedPartial && this.totalContacts == normalizedTotal
 		) {
 			return
 		}
@@ -77,6 +97,8 @@ class SolarEclipseTimelineView @JvmOverloads constructor(
 		endMillis = normalizedEnd
 		maximumMillis = normalizedMaximum
 		currentMillis = normalizedCurrent
+		this.partialContacts = normalizedPartial
+		this.totalContacts = normalizedTotal
 		invalidate()
 	}
 
@@ -98,6 +120,14 @@ class SolarEclipseTimelineView @JvmOverloads constructor(
 			canvas.drawLine(right, centerY, currentX, centerY, activePaint)
 		} else {
 			canvas.drawLine(left, centerY, currentX, centerY, activePaint)
+		}
+		partialContacts.forEach { time ->
+			val x = timeToX(time, left, right)
+			canvas.drawLine(x, centerY - 8f * density, x, centerY + 8f * density, partialContactPaint)
+		}
+		totalContacts.forEach { time ->
+			val x = timeToX(time, left, right)
+			canvas.drawLine(x, centerY - 9f * density, x, centerY + 9f * density, totalContactPaint)
 		}
 		canvas.drawLine(maximumX, centerY - 11f * density, maximumX, centerY + 11f * density, maximumPaint)
 		canvas.drawCircle(currentX, centerY, 9f * density, thumbPaint)
@@ -162,7 +192,7 @@ class SolarEclipseTimelineView @JvmOverloads constructor(
 		val edge = 16f * density
 		val fraction = ((x - edge) / (width - 2f * edge)).coerceIn(0f, 1f)
 		val directedFraction = if (layoutDirection == LAYOUT_DIRECTION_RTL) 1f - fraction else fraction
-		currentMillis = SolarEclipseTimelineMapper.timeForFraction(
+		currentMillis = EclipseTimelineMapper.timeForFraction(
 			startMillis,
 			endMillis,
 			directedFraction.toDouble()
@@ -172,7 +202,7 @@ class SolarEclipseTimelineView @JvmOverloads constructor(
 	}
 
 	private fun timeToX(time: Long, left: Float, right: Float): Float {
-		var fraction = SolarEclipseTimelineMapper.fractionForTime(startMillis, endMillis, time)
+		var fraction = EclipseTimelineMapper.fractionForTime(startMillis, endMillis, time)
 		if (layoutDirection == LAYOUT_DIRECTION_RTL) fraction = 1.0 - fraction
 		return left + (right - left) * fraction.toFloat()
 	}

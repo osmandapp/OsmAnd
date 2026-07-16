@@ -10,6 +10,10 @@ import androidx.lifecycle.viewModelScope
 import io.github.cosinekitty.astronomy.EclipseKind
 import io.github.cosinekitty.astronomy.GlobalSolarEclipseInfo
 import io.github.cosinekitty.astronomy.GlobalSolarEclipseWindow
+import io.github.cosinekitty.astronomy.LunarEclipseInfo
+import io.github.cosinekitty.astronomy.LunarEclipseMapFrame
+import io.github.cosinekitty.astronomy.LunarEclipseState
+import io.github.cosinekitty.astronomy.LunarEclipseWindow
 import io.github.cosinekitty.astronomy.Observer
 import io.github.cosinekitty.astronomy.SolarEclipseMapFrame
 import io.github.cosinekitty.astronomy.SolarEclipseMapTrack
@@ -17,9 +21,15 @@ import io.github.cosinekitty.astronomy.SolarEclipseShadowPoint
 import io.github.cosinekitty.astronomy.SolarEclipseState
 import io.github.cosinekitty.astronomy.Time
 import io.github.cosinekitty.astronomy.globalSolarEclipseWindow
+import io.github.cosinekitty.astronomy.lunarEclipseMapFrame
+import io.github.cosinekitty.astronomy.lunarEclipseState
+import io.github.cosinekitty.astronomy.lunarEclipseWindow
 import io.github.cosinekitty.astronomy.nextGlobalSolarEclipse
+import io.github.cosinekitty.astronomy.nextLunarEclipse
 import io.github.cosinekitty.astronomy.previousGlobalSolarEclipse
+import io.github.cosinekitty.astronomy.previousLunarEclipse
 import io.github.cosinekitty.astronomy.searchGlobalSolarEclipse
+import io.github.cosinekitty.astronomy.searchLunarEclipse
 import io.github.cosinekitty.astronomy.solarEclipseMapFrame
 import io.github.cosinekitty.astronomy.solarEclipseMapTrack
 import io.github.cosinekitty.astronomy.solarEclipseState
@@ -59,6 +69,31 @@ data class SolarEclipseModeState(
 	val mapError: Boolean = false
 )
 
+enum class LunarEclipseNavigationDirection {
+	Initial,
+	Previous,
+	Next
+}
+
+data class LunarEclipseModeState(
+	val active: Boolean = false,
+	val requestId: Long = 0L,
+	val loading: Boolean = false,
+	val observer: Observer? = null,
+	val event: LunarEclipseInfo? = null,
+	val window: LunarEclipseWindow? = null,
+	val selectedTime: Time? = null,
+	val localState: LunarEclipseState? = null,
+	val localStateObserver: Observer? = null,
+	val error: Boolean = false,
+	val navigationDirection: LunarEclipseNavigationDirection = LunarEclipseNavigationDirection.Initial,
+	val mapFrame: LunarEclipseMapFrame? = null,
+	val mapRequestId: Long = 0L,
+	val mapLoading: Boolean = false,
+	val fitFrame: LunarEclipseMapFrame? = null,
+	val mapError: Boolean = false
+)
+
 class StarObjectsViewModel(
 	private val app: Application,
 	private val settings: AstronomyPluginSettings,
@@ -83,6 +118,8 @@ class StarObjectsViewModel(
 
 	private val _solarEclipseModeState = MutableLiveData(SolarEclipseModeState())
 	val solarEclipseModeState: LiveData<SolarEclipseModeState> = _solarEclipseModeState
+	private val _lunarEclipseModeState = MutableLiveData(LunarEclipseModeState())
+	val lunarEclipseModeState: LiveData<LunarEclipseModeState> = _lunarEclipseModeState
 
 	private var eclipseSearchJob: Job? = null
 	private var eclipseLocalStateJob: Job? = null
@@ -96,6 +133,15 @@ class StarObjectsViewModel(
 	private var pendingEclipseTrackRequest: TrackRequest? = null
 	private var pendingEclipseFrameTime: Time? = null
 	private val eclipseTrackCache = mutableMapOf<Double, SolarEclipseMapTrack>()
+	private var lunarEclipseSearchJob: Job? = null
+	private var lunarEclipseStateJob: Job? = null
+	private var lunarEclipseFrameJob: Job? = null
+	private var lunarEclipseRequestId = 0L
+	private var lunarEclipseStateRequestId = 0L
+	private var lunarEclipseFrameRequestId = 0L
+	private var lunarEclipseMapRequestId = 0L
+	private var pendingLunarEclipseStateRequest: LunarStateRequest? = null
+	private var pendingLunarEclipseFrameTime: Time? = null
 
 	class Factory(
 		private val application: Application,
@@ -335,6 +381,257 @@ class StarObjectsViewModel(
 		_solarEclipseModeState.value = SolarEclipseModeState()
 	}
 
+	fun enterLunarEclipseMode(observer: Observer, displayedTime: Time) {
+		searchLunarEclipse(
+			observer,
+			LunarEclipseNavigationDirection.Initial
+		) {
+			var event = searchLunarEclipse(displayedTime.addDays(-INITIAL_SEARCH_LOOKBACK_DAYS))
+			var window = lunarEclipseWindow(event)
+			if (displayedTime.ut > window.p4.ut) {
+				event = nextLunarEclipse(event.peak)
+				window = lunarEclipseWindow(event)
+			}
+			val selectedTime = if (displayedTime.ut in window.p1.ut..window.p4.ut) {
+				displayedTime
+			} else {
+				event.peak
+			}
+			LunarSearchResult(event, window, selectedTime)
+		}
+	}
+
+	fun loadPreviousLunarEclipse() {
+		val state = _lunarEclipseModeState.value ?: return
+		if (state.loading) return
+		val current = state.event ?: return
+		val observer = state.observer ?: return
+		searchLunarEclipse(observer, LunarEclipseNavigationDirection.Previous) {
+			val event = previousLunarEclipse(current.peak)
+			LunarSearchResult(event, lunarEclipseWindow(event), event.peak)
+		}
+	}
+
+	fun loadNextLunarEclipse() {
+		val state = _lunarEclipseModeState.value ?: return
+		if (state.loading) return
+		val current = state.event ?: return
+		val observer = state.observer ?: return
+		searchLunarEclipse(observer, LunarEclipseNavigationDirection.Next) {
+			val event = nextLunarEclipse(current.peak)
+			LunarSearchResult(event, lunarEclipseWindow(event), event.peak)
+		}
+	}
+
+	fun retryLunarEclipseSearch(displayedTime: Time) {
+		val state = _lunarEclipseModeState.value ?: return
+		val observer = state.observer ?: return
+		when (state.navigationDirection) {
+			LunarEclipseNavigationDirection.Previous -> loadPreviousLunarEclipse()
+			LunarEclipseNavigationDirection.Next -> loadNextLunarEclipse()
+			LunarEclipseNavigationDirection.Initial -> enterLunarEclipseMode(observer, displayedTime)
+		}
+	}
+
+	fun selectLunarEclipseTime(time: Time) {
+		val state = _lunarEclipseModeState.value ?: return
+		val window = state.window ?: return
+		if (!state.active) return
+		lunarEclipseMapRequestId++
+		val clamped = Time(time.ut.coerceIn(window.p1.ut, window.p4.ut))
+		_lunarEclipseModeState.value = state.copy(
+			selectedTime = clamped,
+			mapLoading = false,
+			fitFrame = null,
+			mapError = false
+		)
+		calculateLunarEclipseState(state.observer, clamped)
+		calculateLunarEclipseMapFrame(clamped)
+	}
+
+	fun updateLunarEclipseObserver(observer: Observer) {
+		val state = _lunarEclipseModeState.value ?: return
+		if (!state.active || sameObserver(state.observer, observer)) return
+		_lunarEclipseModeState.value = state.copy(observer = observer)
+		calculateLunarEclipseState(observer, state.selectedTime)
+	}
+
+	fun requestLunarEclipseVisibilityFit() {
+		val state = _lunarEclipseModeState.value ?: return
+		val time = state.selectedTime ?: return
+		if (!state.active || state.mapLoading) return
+		val requestId = ++lunarEclipseMapRequestId
+		val readyFrame = state.mapFrame?.takeIf { it.time.ut == time.ut }
+		if (readyFrame != null) {
+			_lunarEclipseModeState.value = state.copy(
+				mapRequestId = requestId,
+				mapLoading = false,
+				fitFrame = readyFrame,
+				mapError = false
+			)
+			return
+		}
+		_lunarEclipseModeState.value = state.copy(
+			mapRequestId = requestId,
+			mapLoading = true,
+			fitFrame = null,
+			mapError = false
+		)
+		if (lunarEclipseFrameJob?.isActive != true) {
+			calculateLunarEclipseMapFrame(time)
+		}
+	}
+
+	fun consumeLunarEclipseVisibilityFit(mapRequestId: Long) {
+		val state = _lunarEclipseModeState.value ?: return
+		if (state.mapRequestId == mapRequestId && (state.fitFrame != null || state.mapError)) {
+			_lunarEclipseModeState.value = state.copy(fitFrame = null, mapError = false)
+		}
+	}
+
+	fun exitLunarEclipseMode() {
+		lunarEclipseRequestId++
+		lunarEclipseStateRequestId++
+		lunarEclipseFrameRequestId++
+		lunarEclipseMapRequestId++
+		pendingLunarEclipseStateRequest = null
+		pendingLunarEclipseFrameTime = null
+		lunarEclipseSearchJob?.cancel()
+		lunarEclipseStateJob?.cancel()
+		lunarEclipseFrameJob?.cancel()
+		_lunarEclipseModeState.value = LunarEclipseModeState()
+	}
+
+	private fun searchLunarEclipse(
+		observer: Observer,
+		direction: LunarEclipseNavigationDirection,
+		searchBlock: () -> LunarSearchResult
+	) {
+		val requestId = ++lunarEclipseRequestId
+		lunarEclipseSearchJob?.cancel()
+		lunarEclipseStateRequestId++
+		lunarEclipseFrameRequestId++
+		lunarEclipseMapRequestId++
+		pendingLunarEclipseStateRequest = null
+		pendingLunarEclipseFrameTime = null
+		val previous = _lunarEclipseModeState.value ?: LunarEclipseModeState()
+		_lunarEclipseModeState.value = previous.copy(
+			active = true,
+			requestId = requestId,
+			loading = true,
+			observer = observer,
+			error = false,
+			navigationDirection = direction,
+			mapFrame = null,
+			mapLoading = false,
+			fitFrame = null,
+			mapError = false
+		)
+		lunarEclipseSearchJob = viewModelScope.launch {
+			try {
+				val result = withContext(Dispatchers.Default) { searchBlock() }
+				if (requestId != lunarEclipseRequestId) return@launch
+				_isTimeAutoUpdateEnabled.value = false
+				updateTime(result.selectedTime)
+				val currentObserver = _lunarEclipseModeState.value?.observer ?: observer
+				_lunarEclipseModeState.value = LunarEclipseModeState(
+					active = true,
+					requestId = requestId,
+					observer = currentObserver,
+					event = result.event,
+					window = result.window,
+					selectedTime = result.selectedTime,
+					navigationDirection = direction
+				)
+				calculateLunarEclipseState(currentObserver, result.selectedTime)
+				calculateLunarEclipseMapFrame(result.selectedTime)
+			} catch (e: CancellationException) {
+				throw e
+			} catch (e: Exception) {
+				LOG.error("Unable to calculate a lunar eclipse", e)
+				if (requestId == lunarEclipseRequestId) {
+					val latest = _lunarEclipseModeState.value ?: LunarEclipseModeState()
+					_lunarEclipseModeState.value = latest.copy(
+						active = true,
+						loading = false,
+						error = true,
+						navigationDirection = direction
+					)
+				}
+			}
+		}
+	}
+
+	private fun calculateLunarEclipseState(observer: Observer?, time: Time?) {
+		if (observer == null || time == null) return
+		pendingLunarEclipseStateRequest = LunarStateRequest(
+			requestId = ++lunarEclipseStateRequestId,
+			observer = observer,
+			time = time
+		)
+		if (lunarEclipseStateJob?.isActive == true) return
+		lunarEclipseStateJob = viewModelScope.launch {
+			while (true) {
+				val request = pendingLunarEclipseStateRequest ?: break
+				pendingLunarEclipseStateRequest = null
+				try {
+					val lunarState = withContext(Dispatchers.Default) {
+						lunarEclipseState(request.time, request.observer)
+					}
+					if (request.requestId != lunarEclipseStateRequestId) continue
+					val latest = _lunarEclipseModeState.value ?: continue
+					if (!latest.active || latest.selectedTime?.ut != request.time.ut ||
+						!sameObserver(latest.observer, request.observer)) continue
+					if (_currentTime.value?.ut != request.time.ut) updateTime(request.time)
+					_lunarEclipseModeState.value = latest.copy(
+						localState = lunarState,
+						localStateObserver = request.observer
+					)
+				} catch (e: CancellationException) {
+					throw e
+				} catch (e: Exception) {
+					LOG.error("Unable to calculate local lunar eclipse state", e)
+				}
+			}
+		}
+	}
+
+	private fun calculateLunarEclipseMapFrame(time: Time) {
+		++lunarEclipseFrameRequestId
+		pendingLunarEclipseFrameTime = time
+		if (lunarEclipseFrameJob?.isActive == true) return
+		lunarEclipseFrameJob = viewModelScope.launch {
+			while (true) {
+				val requestedTime = pendingLunarEclipseFrameTime ?: break
+				pendingLunarEclipseFrameTime = null
+				val requestId = lunarEclipseFrameRequestId
+				try {
+					val frame = withContext(Dispatchers.Default) {
+						lunarEclipseMapFrame(requestedTime)
+					}
+					if (requestId != lunarEclipseFrameRequestId) continue
+					val latest = _lunarEclipseModeState.value ?: continue
+					if (!latest.active || latest.selectedTime?.ut != requestedTime.ut) continue
+					val mapRequested = latest.mapLoading
+					_lunarEclipseModeState.value = latest.copy(
+						mapFrame = frame,
+						mapLoading = false,
+						fitFrame = if (mapRequested) frame else latest.fitFrame,
+						mapError = false
+					)
+				} catch (e: CancellationException) {
+					throw e
+				} catch (e: Exception) {
+					LOG.error("Unable to calculate lunar eclipse visibility", e)
+					val latest = _lunarEclipseModeState.value ?: continue
+					if (latest.mapLoading && latest.selectedTime?.ut == requestedTime.ut) {
+						_lunarEclipseModeState.value = latest.copy(mapLoading = false, mapError = true)
+					}
+				}
+			}
+		}
+	}
+
 	private fun searchSolarEclipse(
 		observer: Observer,
 		direction: SolarEclipseNavigationDirection,
@@ -542,6 +839,12 @@ class StarObjectsViewModel(
 		val selectedTime: Time
 	)
 
+	private data class LunarSearchResult(
+		val event: LunarEclipseInfo,
+		val window: LunarEclipseWindow,
+		val selectedTime: Time
+	)
+
 	private data class LocalEclipseRequest(
 		val requestId: Long,
 		val observer: Observer,
@@ -551,6 +854,12 @@ class StarObjectsViewModel(
 	private data class TrackRequest(
 		val requestId: Long,
 		val window: GlobalSolarEclipseWindow
+	)
+
+	private data class LunarStateRequest(
+		val requestId: Long,
+		val observer: Observer,
+		val time: Time
 	)
 
 	private fun sameObserver(first: Observer?, second: Observer?): Boolean =

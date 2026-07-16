@@ -25,8 +25,10 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.button.MaterialButton
 import io.github.cosinekitty.astronomy.EclipseKind
+import io.github.cosinekitty.astronomy.LunarEclipseMapFrame
+import io.github.cosinekitty.astronomy.LunarEclipsePhase
+import io.github.cosinekitty.astronomy.LunarEclipseState
 import io.github.cosinekitty.astronomy.Observer
-import io.github.cosinekitty.astronomy.SolarEclipseMapCoordinate
 import io.github.cosinekitty.astronomy.SolarEclipsePhase
 import io.github.cosinekitty.astronomy.SolarEclipseShadowPoint
 import io.github.cosinekitty.astronomy.SolarEclipseState
@@ -55,7 +57,7 @@ import net.osmand.plus.plugins.astronomy.views.StarMapResetButton
 import net.osmand.plus.plugins.astronomy.views.StarMapTimeControlButton
 import net.osmand.plus.plugins.astronomy.views.StarView
 import net.osmand.plus.plugins.astronomy.views.StarViewCameraState
-import net.osmand.plus.plugins.astronomy.views.SolarEclipseTimelineView
+import net.osmand.plus.plugins.astronomy.views.EclipseTimelineView
 import net.osmand.plus.plugins.astronomy.views.contextmenu.AstroBottomSheetBehavior
 import net.osmand.plus.plugins.astronomy.views.contextmenu.AstroContextMenuFragment
 import net.osmand.plus.settings.backend.OsmandSettings
@@ -117,6 +119,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private lateinit var eclipseCard: MaterialCardView
 	private lateinit var eclipseLoading: ProgressBar
 	private lateinit var eclipseErrorContainer: View
+	private lateinit var eclipseErrorText: TextView
 	private lateinit var eclipseContent: View
 	private lateinit var eclipsePrevious: ImageButton
 	private lateinit var eclipseNext: ImageButton
@@ -127,13 +130,14 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private lateinit var eclipseCurrentDateZone: TextView
 	private lateinit var eclipseLocalStatus: TextView
 	private lateinit var eclipseMapCenterLocation: TextView
-	private lateinit var eclipseTimeline: SolarEclipseTimelineView
+	private lateinit var eclipseTimeline: EclipseTimelineView
 	private lateinit var eclipseStartTime: TextView
 	private lateinit var eclipseMaximumTime: TextView
 	private lateinit var eclipseEndTime: TextView
 	private lateinit var eclipseFitPath: View
 	private lateinit var eclipseToggleMap: View
 	private lateinit var eclipseRetry: MaterialButton
+	private lateinit var eclipseFooter: TextView
 	private var manualAzimuth: Boolean = true
 	private var lastResetRotationToNorth = 0L
 	private var lastUpdatedLocation: Location? = null
@@ -142,6 +146,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	internal lateinit var viewModel: StarObjectsViewModel
 	private var selectedObject: SkyObject? = null
 	private var solarEclipseSun: SkyObject? = null
+	private var lunarEclipseMoon: SkyObject? = null
 	var regularMapVisible = false
 		private set
 
@@ -165,15 +170,19 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private var previousAzimuth: Double = 0.0
 	private var previousViewAngle: Double = 150.0
 	private var eclipseRestoreState: EclipseRestoreState? = null
+	private var activeEclipseType: EclipseExplorerType? = null
 	private var restoredActiveEclipseCameraState: StarViewCameraState? = null
 	private var lastFocusedEclipseRequestId = -1L
-	private var keepSunCenteredForMapMove = false
+	private var keepEclipseTargetCenteredForMapMove = false
 	private var eclipseMapShown = false
 	private var pendingEclipseMapFit = false
 	private var pendingSliderTimeMillis: Long? = null
+	private var pendingLunarSliderCenterTimeUt: Double? = null
+	private var pendingLunarObserver: Observer? = null
 	private var lastBoundEclipseEventKey: Double? = null
 	private var lastBoundEclipseSelectedTime = Double.NaN
 	private var lastBoundLocalEclipseState: SolarEclipseState? = null
+	private var lastBoundLocalLunarEclipseState: LunarEclipseState? = null
 	private var lastDisplayedEclipseLatitude = Double.NaN
 	private var lastDisplayedEclipseLongitude = Double.NaN
 	private var lastEclipseButtonMapLoading: Boolean? = null
@@ -183,17 +192,17 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private val applySliderTimeRunnable = Runnable {
 		val millis = pendingSliderTimeMillis ?: return@Runnable
 		pendingSliderTimeMillis = null
-		applySolarEclipseSliderTime(millis)
+		applyEclipseSliderTime(millis)
 	}
 	private val monitorEclipseMapMoveRunnable = object : Runnable {
 		override fun run() {
-			if (!keepSunCenteredForMapMove || !::starView.isInitialized) return
+			if (!keepEclipseTargetCenteredForMapMove || !::starView.isInitialized) return
 			if (app.osmandMap.mapView.animatedDraggingThread.isAnimating) {
 				starView.postOnAnimation(this)
 			} else {
 				updateStarMap()
-				keepSunCenteredForMapMove = false
-				centerSunAtSelectedEclipseTime()
+				keepEclipseTargetCenteredForMapMove = false
+				centerEclipseTargetAtSelectedTime()
 			}
 		}
 	}
@@ -221,6 +230,11 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		val mapRatioY: Float
 	)
 
+	private enum class EclipseExplorerType {
+		Solar,
+		Lunar
+	}
+
 	private val backPressedCallback = object : OnBackPressedCallback(false) {
 			override fun handleOnBackPressed() {
 			if (::bottomSheetBehavior.isInitialized && bottomSheetBehavior.state != BottomSheetBehavior.STATE_HIDDEN) {
@@ -230,8 +244,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				}
 			} else if (childFragmentManager.backStackEntryCount > 0) {
 				childFragmentManager.popBackStack()
-			} else if (isSolarEclipseModeActive()) {
-				exitSolarEclipseMode()
+			} else if (isEclipseModeActive()) {
+				exitEclipseMode()
 			} else {
 				isEnabled = false
 				requireActivity().onBackPressedDispatcher.onBackPressed()
@@ -264,6 +278,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		private const val MAX_MAGNITUDE = 7.0f
 		private const val ECLIPSE_MAP_FIT_HALF_FRACTION = 0.4
 		private const val STATE_ECLIPSE_ACTIVE = "eclipse_active"
+		private const val STATE_ECLIPSE_TYPE = "eclipse_type"
 		private const val STATE_ECLIPSE_TIME_UT = "eclipse_time_ut"
 		private const val STATE_ECLIPSE_AUTO_TIME = "eclipse_auto_time"
 		private const val STATE_ECLIPSE_CAMERA_AZ = "eclipse_camera_az"
@@ -321,6 +336,9 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		if (savedInstanceState?.getBoolean(STATE_ECLIPSE_ACTIVE) == true) {
+			activeEclipseType = savedInstanceState.getString(STATE_ECLIPSE_TYPE)
+				?.let { runCatching { EclipseExplorerType.valueOf(it) }.getOrNull() }
+				?: EclipseExplorerType.Solar
 			eclipseRestoreState = EclipseRestoreState(
 				time = Time(savedInstanceState.getDouble(STATE_ECLIPSE_TIME_UT)),
 				autoTime = savedInstanceState.getBoolean(STATE_ECLIPSE_AUTO_TIME),
@@ -370,6 +388,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		super.onSaveInstanceState(outState)
 		val restore = eclipseRestoreState ?: return
 		outState.putBoolean(STATE_ECLIPSE_ACTIVE, true)
+		activeEclipseType?.let { outState.putString(STATE_ECLIPSE_TYPE, it.name) }
 		outState.putDouble(STATE_ECLIPSE_TIME_UT, restore.time.ut)
 		outState.putBoolean(STATE_ECLIPSE_AUTO_TIME, restore.autoTime)
 		outState.putDouble(STATE_ECLIPSE_CAMERA_AZ, restore.cameraState.azimuth)
@@ -418,7 +437,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 		mainLayout = view.findViewById(R.id.main_layout)
 		starView = view.findViewById(R.id.star_view)
-		starView.useUnrefractedSolarPositions = eclipseRestoreState != null
+		starView.useUnrefractedSolarPositions = activeEclipseType == EclipseExplorerType.Solar
+		starView.useUnrefractedLunarPositions = activeEclipseType == EclipseExplorerType.Lunar
 		mapControlsContainer = view.findViewById(R.id.map_controls_container)
 		timeSelectionView = view.findViewById(R.id.time_selection_view)
 		timeControlBtn = view.findViewById(R.id.time_control_button)
@@ -490,7 +510,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		closeButton = view.findViewById(R.id.close_button)
 		closeButton.apply {
 			setOnClickListener {
-				if (isSolarEclipseModeActive()) exitSolarEclipseMode()
+				if (isEclipseModeActive()) exitEclipseMode()
 				backPressedCallback.isEnabled = false
 				requireActivity().onBackPressedDispatcher.onBackPressed()
 			}
@@ -524,6 +544,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		eclipseCard = view.findViewById(R.id.solar_eclipse_timeline_card)
 		eclipseLoading = eclipseCard.findViewById(R.id.eclipse_loading)
 		eclipseErrorContainer = eclipseCard.findViewById(R.id.eclipse_error_container)
+		eclipseErrorText = eclipseCard.findViewById(R.id.eclipse_error_text)
 		eclipseContent = eclipseCard.findViewById(R.id.eclipse_content)
 		eclipsePrevious = eclipseCard.findViewById(R.id.eclipse_previous)
 		eclipseNext = eclipseCard.findViewById(R.id.eclipse_next)
@@ -541,26 +562,46 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		eclipseFitPath = eclipseCard.findViewById(R.id.eclipse_fit_path)
 		eclipseToggleMap = eclipseCard.findViewById(R.id.eclipse_toggle_map)
 		eclipseRetry = eclipseCard.findViewById(R.id.eclipse_retry)
+		eclipseFooter = eclipseCard.findViewById(R.id.eclipse_safety)
 		resetEclipseUiCache()
 		eclipsePrevious.setOnClickListener {
 			prepareForEclipseNavigation()
-			viewModel.loadPreviousSolarEclipse()
+			when (activeEclipseType) {
+				EclipseExplorerType.Solar -> viewModel.loadPreviousSolarEclipse()
+				EclipseExplorerType.Lunar -> viewModel.loadPreviousLunarEclipse()
+				null -> Unit
+			}
 		}
 		eclipseNext.setOnClickListener {
 			prepareForEclipseNavigation()
-			viewModel.loadNextSolarEclipse()
+			when (activeEclipseType) {
+				EclipseExplorerType.Solar -> viewModel.loadNextSolarEclipse()
+				EclipseExplorerType.Lunar -> viewModel.loadNextLunarEclipse()
+				null -> Unit
+			}
 		}
-		eclipseClose.setOnClickListener { exitSolarEclipseMode() }
+		eclipseClose.setOnClickListener { exitEclipseMode() }
 		eclipseRetry.setOnClickListener {
-			viewModel.retrySolarEclipseSearch(viewModel.currentTime.value ?: starView.currentTime)
+			val time = viewModel.currentTime.value ?: starView.currentTime
+			when (activeEclipseType) {
+				EclipseExplorerType.Solar -> viewModel.retrySolarEclipseSearch(time)
+				EclipseExplorerType.Lunar -> viewModel.retryLunarEclipseSearch(time)
+				null -> Unit
+			}
 		}
-		eclipseFitPath.setOnClickListener { viewModel.requestSolarEclipseShadowPoint() }
+		eclipseFitPath.setOnClickListener {
+			when (activeEclipseType) {
+				EclipseExplorerType.Solar -> viewModel.requestSolarEclipseShadowPoint()
+				EclipseExplorerType.Lunar -> viewModel.requestLunarEclipseVisibilityFit()
+				null -> Unit
+			}
+		}
 		eclipseToggleMap.setOnClickListener {
 			if (regularMapVisible) hideEclipseMap() else showEclipseMapWithoutMoving()
 		}
 		updateEclipseMapButtons(false)
 		eclipseTimeline.setOnTimeChangedListener { millis, fromUser ->
-			if (fromUser) scheduleSolarEclipseSliderTime(millis)
+			if (fromUser) scheduleEclipseSliderTime(millis)
 		}
 		val rtl = view.layoutDirection == View.LAYOUT_DIRECTION_RTL
 		eclipsePrevious.scaleX = if (rtl) 1f else -1f
@@ -773,7 +814,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		super.onResume()
 		updateNightMode()
 		updateButtonsNightMode()
-		updateStarMap(!isSolarEclipseModeActive())
+		updateStarMap(!isEclipseModeActive())
 		app.locationProvider.addLocationListener(this)
 		app.locationProvider.addCompassListener(this)
 		app.osmandMap.mapView.addMapLocationListener(this)
@@ -788,9 +829,13 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		restoredActiveEclipseCameraState?.let { state ->
 			apply2DMode(state.is2DMode)
 			starView.restoreCameraState(state)
-			lastFocusedEclipseRequestId = viewModel.solarEclipseModeState.value?.requestId ?: -1L
+			lastFocusedEclipseRequestId = when (activeEclipseType) {
+				EclipseExplorerType.Solar -> viewModel.solarEclipseModeState.value?.requestId
+				EclipseExplorerType.Lunar -> viewModel.lunarEclipseModeState.value?.requestId
+				null -> null
+			} ?: -1L
 			restoredActiveEclipseCameraState = null
-			eclipseCard.post { centerSunAtSelectedEclipseTime() }
+			eclipseCard.post { centerEclipseTargetAtSelectedTime() }
 		}
 		if (isTimeAutoUpdateEnabled()) {
 			viewModel.resetTime()
@@ -816,7 +861,12 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			updateTimeControlTheme(timeControlCard, timeControlBtn, resetTimeButton)
 		}
 		if (::eclipseFitPath.isInitialized) {
-			updateEclipseMapButtons(viewModel.solarEclipseModeState.value?.mapLoading == true)
+			val loading = when (activeEclipseType) {
+				EclipseExplorerType.Solar -> viewModel.solarEclipseModeState.value?.mapLoading
+				EclipseExplorerType.Lunar -> viewModel.lunarEclipseModeState.value?.mapLoading
+				null -> false
+			} == true
+			updateEclipseMapButtons(loading)
 		}
 	}
 
@@ -846,6 +896,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 		if (::viewModel.isInitialized) {
 			astronomyPlugin.setSolarEclipseMapData(false, null, null, null, null)
+			astronomyPlugin.setLunarEclipseMapData(false, null)
 		}
 		eclipseRestoreState?.let { restoreEclipseMapDisplayRatio(it) }
 		super.onDestroyView()
@@ -950,7 +1001,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			mainLayout.setPadding(0, 0, 0, 0)
 			mapActivity.resetMapViewPaddings()
 		}
-		if (isSolarEclipseModeActive()) {
+		if (isEclipseModeActive()) {
 			mapView.view?.doOnPreDraw {
 				if (regularMapVisible != visible || !isAdded || view == null) return@doOnPreDraw
 				reanchorEclipseMapCenter(
@@ -962,8 +1013,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			}
 		}
 		applyBottomInsets()
-		if (isSolarEclipseModeActive() && ::eclipseCard.isInitialized) {
-			eclipseCard.post { centerSunAtSelectedEclipseTime() }
+		if (isEclipseModeActive() && ::eclipseCard.isInitialized) {
+			eclipseCard.post { centerEclipseTargetAtSelectedTime() }
 		}
 	}
 
@@ -973,7 +1024,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		mapVisible: Boolean,
 		mapHeightPx: Int
 	) {
-		if (!isSolarEclipseModeActive()) return
+		if (!isEclipseModeActive()) return
 		val mapView = app.osmandMap.mapView
 		val rendererView = mapView.view ?: return
 		val ratioY = if (mapVisible && mapHeightPx > 0) {
@@ -1024,7 +1075,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	fun setRegularMapVisibility(enabled: Boolean) {
 		updateRegularMapVisibility(enabled)
-		if (isSolarEclipseModeActive()) {
+		if (isEclipseModeActive()) {
 			eclipseMapShown = enabled
 			if (!enabled) pendingEclipseMapFit = false
 			updateEclipseMapButtons(false)
@@ -1134,11 +1185,14 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	private fun setupObservers() {
 		viewModel.currentTime.observe(viewLifecycleOwner) { time ->
-			starView.setDateTime(time, animate = !isSolarEclipseModeActive())
+			starView.setDateTime(time, animate = !isEclipseModeActive())
 			getAstroContextMenuFragment()?.onTimeChanged()
 		}
 		viewModel.solarEclipseModeState.observe(viewLifecycleOwner) { state ->
 			handleSolarEclipseModeState(state)
+		}
+		viewModel.lunarEclipseModeState.observe(viewLifecycleOwner) { state ->
+			handleLunarEclipseModeState(state)
 		}
 		viewModel.currentCalendar.observe(viewLifecycleOwner) { calendar ->
 			timeSelectionView.setDateTime(calendar)
@@ -1167,10 +1221,14 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 		viewModel.skyObjects.observe(viewLifecycleOwner) { objects ->
 			solarEclipseSun = objects.firstOrNull { it.type == SkyObject.Type.SUN }
+			lunarEclipseMoon = objects.firstOrNull { it.type == SkyObject.Type.MOON }
 			starView.setSkyObjects(objects)
 			viewModel.solarEclipseModeState.value
 				?.takeIf { it.active && it.event != null }
 				?.let { handleSolarEclipseModeState(it) }
+			viewModel.lunarEclipseModeState.value
+				?.takeIf { it.active && it.event != null }
+				?.let { handleLunarEclipseModeState(it) }
 			if (objects.isNotEmpty()) {
 				val maxMag = MAX_MAGNITUDE
 				val maxSliderVal = ((maxMag + 1.0) * 10.0).toInt()
@@ -1229,21 +1287,63 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		viewModel.setTimeAutoUpdateEnabled(enabled)
 	}
 
-	fun isSolarEclipseModeActive(): Boolean =
-		eclipseRestoreState != null ||
-			(::viewModel.isInitialized && viewModel.solarEclipseModeState.value?.active == true)
+	fun isSolarEclipseModeActive(): Boolean = activeEclipseType == EclipseExplorerType.Solar &&
+		(eclipseRestoreState != null ||
+			(::viewModel.isInitialized && viewModel.solarEclipseModeState.value?.active == true))
+
+	fun isLunarEclipseModeActive(): Boolean = activeEclipseType == EclipseExplorerType.Lunar &&
+		(eclipseRestoreState != null ||
+			(::viewModel.isInitialized && viewModel.lunarEclipseModeState.value?.active == true))
+
+	private fun isEclipseModeActive(): Boolean =
+		isSolarEclipseModeActive() || isLunarEclipseModeActive()
 
 	fun toggleSolarEclipseMode() {
-		if (isSolarEclipseModeActive()) exitSolarEclipseMode() else enterSolarEclipseMode()
+		if (isSolarEclipseModeActive()) exitEclipseMode()
+		else enterEclipseMode(EclipseExplorerType.Solar)
 	}
 
-	private fun enterSolarEclipseMode() {
-		if (eclipseRestoreState != null) return
+	fun toggleLunarEclipseMode() {
+		if (isLunarEclipseModeActive()) exitEclipseMode()
+		else enterEclipseMode(EclipseExplorerType.Lunar)
+	}
+
+	private fun enterEclipseMode(type: EclipseExplorerType) {
+		val displayedTime = viewModel.currentTime.value ?: starView.currentTime
+		if (activeEclipseType != null && activeEclipseType != type) {
+			clearActiveEclipseModeForSwitch()
+		}
+		if (eclipseRestoreState == null) captureEclipseRestoreState(displayedTime)
+		activeEclipseType = type
+		if (cameraHelper.isCameraOverlayEnabled) cameraHelper.toggleCameraOverlay()
+		if (arModeHelper.isArModeEnabled) arModeHelper.toggleArMode(false)
+		manualAzimuth = true
+		eclipseMapShown = regularMapVisible
+		pendingEclipseMapFit = false
+		resetEclipseUiCache()
+		updateEclipseMapButtons(false)
+		starView.useUnrefractedSolarPositions = type == EclipseExplorerType.Solar
+		starView.useUnrefractedLunarPositions = type == EclipseExplorerType.Lunar
+		if (type != EclipseExplorerType.Lunar) starView.setLunarEclipseState(null)
+		timeSelectionView.isVisible = false
+		setTimeAutoUpdateEnabled(false)
+		eclipseCard.isVisible = true
+		timeControlCard.isVisible = false
+		if (regularMapVisible) updateRegularMapVisibility(true)
+		lastFocusedEclipseRequestId = -1L
+		updateBackPressedCallback()
+		eclipseCard.post { applyBottomInsets() }
+		when (type) {
+			EclipseExplorerType.Solar -> viewModel.enterSolarEclipseMode(starView.observer, displayedTime)
+			EclipseExplorerType.Lunar -> viewModel.enterLunarEclipseMode(starView.observer, displayedTime)
+		}
+	}
+
+	private fun captureEclipseRestoreState(displayedTime: Time) {
 		val mapView = app.osmandMap.mapView
 		val displayPositionManager = app.mapViewTrackingUtilities.mapDisplayPositionManager
 		val mapRatio = displayPositionManager.mapRatio
 		val center = mapView.rotatedTileBox.centerLatLon
-		val displayedTime = viewModel.currentTime.value ?: starView.currentTime
 		eclipseRestoreState = EclipseRestoreState(
 			time = displayedTime,
 			autoTime = isTimeAutoUpdateEnabled(),
@@ -1261,36 +1361,34 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			mapRatioX = mapRatio.x,
 			mapRatioY = mapRatio.y
 		)
-		if (cameraHelper.isCameraOverlayEnabled) cameraHelper.toggleCameraOverlay()
-		if (arModeHelper.isArModeEnabled) arModeHelper.toggleArMode(false)
-		manualAzimuth = true
-		eclipseMapShown = regularMapVisible
-		pendingEclipseMapFit = false
-		updateEclipseMapButtons(false)
-		starView.useUnrefractedSolarPositions = true
-		timeSelectionView.isVisible = false
-		setTimeAutoUpdateEnabled(false)
-		eclipseCard.isVisible = true
-		timeControlCard.isVisible = false
-		if (regularMapVisible) updateRegularMapVisibility(true)
-		lastFocusedEclipseRequestId = -1L
-		updateBackPressedCallback()
-		eclipseCard.post { applyBottomInsets() }
-		viewModel.enterSolarEclipseMode(starView.observer, displayedTime)
 	}
 
-	private fun exitSolarEclipseMode() {
-		val restore = eclipseRestoreState ?: return
-		eclipseRestoreState = null
+	private fun clearActiveEclipseModeForSwitch() {
 		pendingSliderTimeMillis = null
-		keepSunCenteredForMapMove = false
-		eclipseMapShown = false
+		pendingLunarSliderCenterTimeUt = null
+		pendingLunarObserver = null
+		keepEclipseTargetCenteredForMapMove = false
 		pendingEclipseMapFit = false
 		eclipseTimeline.removeCallbacks(applySliderTimeRunnable)
-		if (::starView.isInitialized) starView.removeCallbacks(monitorEclipseMapMoveRunnable)
-		viewModel.exitSolarEclipseMode()
+		starView.removeCallbacks(monitorEclipseMapMoveRunnable)
+		when (activeEclipseType) {
+			EclipseExplorerType.Solar -> viewModel.exitSolarEclipseMode()
+			EclipseExplorerType.Lunar -> viewModel.exitLunarEclipseMode()
+			null -> Unit
+		}
 		astronomyPlugin.setSolarEclipseMapData(false, null, null, null, null)
+		astronomyPlugin.setLunarEclipseMapData(false, null)
 		starView.useUnrefractedSolarPositions = false
+		starView.useUnrefractedLunarPositions = false
+		starView.setLunarEclipseState(null)
+		activeEclipseType = null
+	}
+
+	private fun exitEclipseMode() {
+		val restore = eclipseRestoreState ?: return
+		eclipseRestoreState = null
+		clearActiveEclipseModeForSwitch()
+		eclipseMapShown = false
 		eclipseCard.isVisible = false
 		timeControlCard.isVisible = true
 		apply2DMode(restore.cameraState.is2DMode)
@@ -1316,24 +1414,37 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		updateBackPressedCallback()
 	}
 
-	private fun scheduleSolarEclipseSliderTime(millis: Long) {
+	private fun scheduleEclipseSliderTime(millis: Long) {
 		pendingSliderTimeMillis = millis
+		if (activeEclipseType == EclipseExplorerType.Lunar) {
+			pendingLunarSliderCenterTimeUt = null
+		}
 		eclipseTimeline.removeCallbacks(applySliderTimeRunnable)
 		eclipseTimeline.postOnAnimation(applySliderTimeRunnable)
 	}
 
-	private fun applySolarEclipseSliderTime(millis: Long) {
+	private fun applyEclipseSliderTime(millis: Long) {
 		val time = Time(millis / 86_400_000.0 - 10_957.5)
-		viewModel.selectSolarEclipseTime(time)
-		findSun()?.let { sun ->
-			val center = getSolarVisibleCenter()
-			starView.showTimeAndCenterObject(time, sun, center.first, center.second)
+		when (activeEclipseType) {
+			EclipseExplorerType.Solar -> {
+				viewModel.selectSolarEclipseTime(time)
+				findSun()?.let { sun ->
+					val center = getEclipseVisibleCenter()
+					starView.showTimeAndCenterObject(time, sun, center.first, center.second)
+				}
+			}
+			EclipseExplorerType.Lunar -> {
+				pendingLunarSliderCenterTimeUt = time.ut
+				viewModel.selectLunarEclipseTime(time)
+			}
+			null -> return
 		}
 	}
 
 	private fun prepareForEclipseNavigation() {
 		manualAzimuth = true
-		keepSunCenteredForMapMove = false
+		pendingLunarSliderCenterTimeUt = null
+		keepEclipseTargetCenteredForMapMove = false
 		starView.removeCallbacks(monitorEclipseMapMoveRunnable)
 		app.osmandMap.mapView.animatedDraggingThread.stopAnimating()
 		if (eclipseMapShown) {
@@ -1342,7 +1453,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	}
 
 	private fun hideEclipseMap() {
-		keepSunCenteredForMapMove = false
+		keepEclipseTargetCenteredForMapMove = false
 		starView.removeCallbacks(monitorEclipseMapMoveRunnable)
 		app.osmandMap.mapView.animatedDraggingThread.stopAnimating()
 		eclipseMapShown = false
@@ -1352,7 +1463,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	}
 
 	private fun showEclipseMapWithoutMoving() {
-		keepSunCenteredForMapMove = false
+		keepEclipseTargetCenteredForMapMove = false
 		pendingEclipseMapFit = false
 		eclipseMapShown = true
 		updateRegularMapVisibility(true)
@@ -1375,8 +1486,17 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			eclipseFitPath,
 			DialogButtonType.PRIMARY,
 			getString(
-				if (mapLoading) R.string.astro_show_eclipse_on_map_loading
-				else R.string.astro_fit_eclipse_path
+				if (mapLoading) {
+					if (activeEclipseType == EclipseExplorerType.Lunar) {
+						R.string.astro_lunar_eclipse_visibility_loading
+					} else {
+						R.string.astro_show_eclipse_on_map_loading
+					}
+				} else if (activeEclipseType == EclipseExplorerType.Lunar) {
+					R.string.astro_fit_lunar_eclipse_visibility
+				} else {
+					R.string.astro_fit_eclipse_path
+				}
 			),
 			R.drawable.ic_show_on_map_outlined
 		)
@@ -1389,15 +1509,15 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		)
 	}
 
-	private fun centerSunAtSelectedEclipseTime() {
-		if (!isSolarEclipseModeActive()) return
-		findSun()?.let { sun ->
-			val center = getSolarVisibleCenter()
-			starView.centerObject(sun, center.first, center.second)
+	private fun centerEclipseTargetAtSelectedTime() {
+		if (!isEclipseModeActive()) return
+		findEclipseTarget()?.let { target ->
+			val center = getEclipseVisibleCenter()
+			starView.centerObject(target, center.first, center.second)
 		}
 	}
 
-	private fun getSolarVisibleCenter(): Pair<Float, Float> {
+	private fun getEclipseVisibleCenter(): Pair<Float, Float> {
 		if (!::eclipseCard.isInitialized || !eclipseCard.isVisible ||
 			starView.width <= 0 || starView.height <= 0 || eclipseCard.height <= 0
 		) {
@@ -1420,25 +1540,41 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	private fun findSun(): SkyObject? = solarEclipseSun
 
+	private fun findMoon(): SkyObject? = lunarEclipseMoon
+
+	private fun findEclipseTarget(): SkyObject? = when (activeEclipseType) {
+		EclipseExplorerType.Solar -> findSun()
+		EclipseExplorerType.Lunar -> findMoon()
+		null -> null
+	}
+
 	private fun handleSolarEclipseModeState(state: SolarEclipseModeState) {
 		if (!::eclipseCard.isInitialized) return
-		val becameActive = state.active && !lastEclipseUiActive
-		lastEclipseUiActive = state.active
+		val showing = state.active && activeEclipseType == EclipseExplorerType.Solar
 		astronomyPlugin.setSolarEclipseMapData(
-			active = state.active,
+			active = showing,
 			eventKey = state.event?.peak?.ut,
 			eventKind = state.event?.kind,
 			track = state.track,
 			frame = state.mapFrame
 		)
-		starView.useUnrefractedSolarPositions = state.active
-		eclipseCard.isVisible = state.active
-		timeControlCard.isVisible = !state.active
-		if (!state.active) {
+		if (activeEclipseType != EclipseExplorerType.Solar) return
+		val becameActive = showing && !lastEclipseUiActive
+		lastEclipseUiActive = showing
+		starView.useUnrefractedSolarPositions = showing
+		eclipseCard.isVisible = showing
+		timeControlCard.isVisible = !showing
+		if (!showing) {
 			resetEclipseUiCache()
 			applyBottomInsets()
 			return
 		}
+		eclipsePrevious.contentDescription = getString(R.string.astro_previous_solar_eclipse)
+		eclipseNext.contentDescription = getString(R.string.astro_next_solar_eclipse)
+		eclipseClose.contentDescription = getString(R.string.astro_close_solar_eclipse)
+		eclipseFooter.setText(R.string.astro_eclipse_safety_warning)
+		eclipseLoading.contentDescription = getString(R.string.astro_loading_solar_eclipse)
+		eclipseErrorText.setText(R.string.astro_eclipse_load_error)
 
 		eclipseLoading.isVisible = state.loading && state.event == null
 		eclipseErrorContainer.isVisible = state.error && state.event == null && !state.loading
@@ -1468,7 +1604,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 					}
 					findSun()?.let { sun ->
 						manualAzimuth = true
-						val center = getSolarVisibleCenter()
+						val center = getEclipseVisibleCenter()
 						starView.showTimeAndFocusObject(
 							selectedTime,
 							sun,
@@ -1531,8 +1667,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			if (!regularMapVisible) updateRegularMapVisibility(true)
 			updateEclipseMapButtons(false)
 			manualAzimuth = true
-			keepSunCenteredForMapMove = true
-			centerSunAtSelectedEclipseTime()
+			keepEclipseTargetCenteredForMapMove = true
+			centerEclipseTargetAtSelectedTime()
 			fitEclipseMapIfReady(state, point)
 			viewModel.consumeSolarEclipseShadowPoint(state.mapRequestId)
 		}
@@ -1548,10 +1684,167 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		if (becameActive) applyRedFilterToViews(starView.showRedFilter, eclipseCard)
 	}
 
+	private fun handleLunarEclipseModeState(state: LunarEclipseModeState) {
+		if (!::eclipseCard.isInitialized) return
+		val showing = state.active && activeEclipseType == EclipseExplorerType.Lunar
+		astronomyPlugin.setLunarEclipseMapData(showing, state.mapFrame)
+		if (activeEclipseType != EclipseExplorerType.Lunar) return
+		val becameActive = showing && !lastEclipseUiActive
+		lastEclipseUiActive = showing
+		starView.useUnrefractedLunarPositions = showing
+		val localObserverReady = showing &&
+			state.localState?.time?.ut == state.selectedTime?.ut &&
+			sameEclipseObserver(state.localStateObserver, state.observer)
+		val observerToApply = state.observer?.takeIf { observer ->
+			localObserverReady && sameEclipseObserver(observer, pendingLunarObserver)
+		}
+		observerToApply?.let { observer ->
+			starView.setObserverLocation(observer.latitude, observer.longitude, observer.height)
+			pendingLunarObserver = null
+		}
+		starView.setLunarEclipseState(if (showing) state.localState else null)
+		if (observerToApply != null) centerEclipseTargetAtSelectedTime()
+		eclipseCard.isVisible = showing
+		timeControlCard.isVisible = !showing
+		if (!showing) {
+			resetEclipseUiCache()
+			applyBottomInsets()
+			return
+		}
+
+		eclipsePrevious.contentDescription = getString(R.string.astro_previous_lunar_eclipse)
+		eclipseNext.contentDescription = getString(R.string.astro_next_lunar_eclipse)
+		eclipseClose.contentDescription = getString(R.string.astro_close_lunar_eclipse)
+		eclipseFooter.setText(R.string.astro_lunar_eclipse_rendering_note)
+		eclipseLoading.contentDescription = getString(R.string.astro_loading_lunar_eclipse)
+		eclipseErrorText.setText(R.string.astro_lunar_eclipse_load_error)
+		eclipseLoading.isVisible = state.loading && state.event == null
+		eclipseErrorContainer.isVisible = state.error && state.event == null && !state.loading
+		eclipseContent.isVisible = state.event != null && state.window != null
+		eclipsePrevious.isEnabled = !state.loading && state.event != null
+		eclipseNext.isEnabled = !state.loading && state.event != null
+		if (state.event == null) {
+			eclipseKind.setText(
+				if (state.loading) R.string.astro_loading_lunar_eclipse
+				else R.string.astro_lunar_eclipse
+			)
+			eclipseEventDate.text = ""
+		}
+
+		val event = state.event
+		val window = state.window
+		val selectedTime = state.selectedTime
+		if (event != null && window != null && selectedTime != null) {
+			if (state.localState?.time?.ut == selectedTime.ut &&
+				pendingLunarSliderCenterTimeUt == selectedTime.ut
+			) {
+				findMoon()?.let { moon ->
+					val center = getEclipseVisibleCenter()
+					starView.showTimeAndCenterObject(
+						selectedTime,
+						moon,
+						center.first,
+						center.second
+					)
+				}
+				pendingLunarSliderCenterTimeUt = null
+			}
+			if (!state.loading && !state.error && state.requestId != lastFocusedEclipseRequestId) {
+				val focusRequestId = state.requestId
+				eclipseCard.doOnPreDraw {
+					val latestState = viewModel.lunarEclipseModeState.value
+					if (focusRequestId == lastFocusedEclipseRequestId || latestState?.active != true ||
+						latestState.requestId != focusRequestId || latestState.selectedTime?.ut != selectedTime.ut
+					) {
+						return@doOnPreDraw
+					}
+					findMoon()?.let { moon ->
+						manualAzimuth = true
+						val center = getEclipseVisibleCenter()
+						starView.showTimeAndFocusObject(
+							selectedTime,
+							moon,
+							targetViewAngle = StarView.LUNAR_ECLIPSE_VIEW_ANGLE,
+							targetX = center.first,
+							targetY = center.second
+						)
+						lastFocusedEclipseRequestId = focusRequestId
+					}
+				}
+			}
+			val eventChanged = lastBoundEclipseEventKey != event.peak.ut
+			if (eventChanged) {
+				eclipseKind.setText(when (event.kind) {
+					EclipseKind.Total -> R.string.astro_total_lunar_eclipse
+					EclipseKind.Partial -> R.string.astro_partial_lunar_eclipse
+					else -> R.string.astro_penumbral_lunar_eclipse
+				})
+				eclipseEventDate.text = formatEclipseDate(event.peak)
+				eclipseStartTime.text = formatEclipseColumn(window.p1)
+				eclipseMaximumTime.text = formatEclipseColumn(event.peak)
+				eclipseEndTime.text = formatEclipseColumn(window.p4)
+				lastBoundEclipseEventKey = event.peak.ut
+			}
+			if (lastBoundEclipseSelectedTime != selectedTime.ut) {
+				val selectedMillis = selectedTime.toMillisecondsSince1970()
+				val currentTimeText = formatClockWithSeconds(selectedMillis)
+				val currentDateZoneText = formatEclipseCurrentDateZone(selectedTime)
+				eclipseCurrentTime.text = currentTimeText
+				eclipseCurrentDateZone.text = currentDateZoneText
+				eclipseTimeline.contentDescription =
+					"${getString(R.string.astro_lunar_eclipse_timeline_description)} " +
+						"$currentDateZoneText $currentTimeText"
+				lastBoundEclipseSelectedTime = selectedTime.ut
+			}
+			if (eventChanged || lastBoundLocalLunarEclipseState !== state.localState) {
+				eclipseLocalStatus.text = formatLocalLunarEclipseStatus(state)
+				lastBoundLocalLunarEclipseState = state.localState
+			}
+			state.observer?.let { observer ->
+				updateEclipseMapCenterLocation(observer.latitude, observer.longitude)
+			}
+
+			eclipseTimeline.setRange(
+				window.p1.toMillisecondsSince1970(),
+				window.p4.toMillisecondsSince1970(),
+				event.peak.toMillisecondsSince1970(),
+				selectedTime.toMillisecondsSince1970(),
+				partialContacts = listOfNotNull(window.u1, window.u4).map { it.toMillisecondsSince1970() },
+				totalContacts = listOfNotNull(window.u2, window.u3).map { it.toMillisecondsSince1970() }
+			)
+			eclipseFitPath.isEnabled = state.mapFrame != null && !state.mapLoading
+			eclipseToggleMap.isEnabled = true
+			updateEclipseMapButtons(state.mapLoading)
+		}
+
+		state.fitFrame?.let { frame ->
+			eclipseMapShown = true
+			pendingEclipseMapFit = true
+			if (!regularMapVisible) updateRegularMapVisibility(true)
+			updateEclipseMapButtons(false)
+			manualAzimuth = true
+			keepEclipseTargetCenteredForMapMove = true
+			centerEclipseTargetAtSelectedTime()
+			fitLunarEclipseVisibilityIfReady(frame)
+			viewModel.consumeLunarEclipseVisibilityFit(state.mapRequestId)
+		}
+		if (state.mapError) {
+			app.showToastMessage(R.string.astro_lunar_eclipse_map_error)
+			viewModel.consumeLunarEclipseVisibilityFit(state.mapRequestId)
+		}
+		if (eclipseMapShown && pendingEclipseMapFit) {
+			state.mapFrame?.let { fitLunarEclipseVisibilityIfReady(it) }
+		}
+		eclipseCard.post { applyBottomInsets() }
+		updateBackPressedCallback()
+		if (becameActive) applyRedFilterToViews(starView.showRedFilter, eclipseCard)
+	}
+
 	private fun resetEclipseUiCache() {
 		lastBoundEclipseEventKey = null
 		lastBoundEclipseSelectedTime = Double.NaN
 		lastBoundLocalEclipseState = null
+		lastBoundLocalLunarEclipseState = null
 		lastDisplayedEclipseLatitude = Double.NaN
 		lastDisplayedEclipseLongitude = Double.NaN
 		lastEclipseButtonMapLoading = null
@@ -1599,14 +1892,15 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				.coerceAtLeast(1)
 			val availableHeight = (dpToPx(mapHeight) - dpToPx(16f)).coerceAtLeast(1)
 			val fitZoom = calculateEclipseFitZoom(
-				fitPoints,
-				fallbackPoint,
+				fitPoints.map { it.latitude to it.longitude },
+				fallbackPoint.latitude,
+				fallbackPoint.longitude,
 				availableWidth,
 				availableHeight
 			)
 			manualAzimuth = true
-			keepSunCenteredForMapMove = true
-			centerSunAtSelectedEclipseTime()
+			keepEclipseTargetCenteredForMapMove = true
+			centerEclipseTargetAtSelectedTime()
 			mapView.animatedDraggingThread.startMoving(
 				fallbackPoint.latitude,
 				fallbackPoint.longitude,
@@ -1617,24 +1911,72 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		}
 	}
 
+	private fun fitLunarEclipseVisibilityIfReady(frame: LunarEclipseMapFrame) {
+		if (!pendingEclipseMapFit || !eclipseMapShown) return
+		val fitPoints = frame.visibilityPolygons.flatten()
+		val center = frame.sublunarPoint
+		val mapView = app.osmandMap.mapView
+		pendingEclipseMapFit = false
+		if (fitPoints.isEmpty()) {
+			mapView.animatedDraggingThread.startMoving(
+				center.latitude,
+				center.longitude,
+				mapView.zoom,
+				mapView.zoomFloatPart
+			)
+			monitorEclipseMapMove()
+			return
+		}
+		view?.post {
+			if (!eclipseMapShown || !isLunarEclipseModeActive()) return@post
+			val mapHeight = if (InsetsUtils.isLandscape(app)) {
+				REGULAR_MAP_HEIGHT_LANDSCAPE
+			} else {
+				REGULAR_MAP_HEIGHT
+			}
+			val horizontalMargin = dpToPx(16f)
+			val availableWidth = (mapView.rotatedTileBox.pixWidth - horizontalMargin * 2)
+				.coerceAtLeast(1)
+			val availableHeight = (dpToPx(mapHeight) - dpToPx(16f)).coerceAtLeast(1)
+			val fitZoom = calculateEclipseFitZoom(
+				fitPoints.map { it.latitude to it.longitude },
+				center.latitude,
+				center.longitude,
+				availableWidth,
+				availableHeight
+			)
+			manualAzimuth = true
+			keepEclipseTargetCenteredForMapMove = true
+			centerEclipseTargetAtSelectedTime()
+			mapView.animatedDraggingThread.startMoving(
+				center.latitude,
+				center.longitude,
+				fitZoom.first,
+				fitZoom.second
+			)
+			monitorEclipseMapMove()
+		}
+	}
+
 	private fun calculateEclipseFitZoom(
-		points: List<SolarEclipseMapCoordinate>,
-		center: SolarEclipseShadowPoint,
+		points: List<Pair<Double, Double>>,
+		centerLatitude: Double,
+		centerLongitude: Double,
 		availableWidth: Int,
 		availableHeight: Int
 	): Pair<Int, Float> {
 		val mapView = app.osmandMap.mapView
 		val tileBox = mapView.rotatedTileBox
-		val centerX = normalizedWorldX(center.longitude)
-		val centerY = MapUtils.getTileNumberY(0f, center.latitude)
+		val centerX = normalizedWorldX(centerLongitude)
+		val centerY = MapUtils.getTileNumberY(0f, centerLatitude)
 		val rotateCos = tileBox.rotateCos
 		val rotateSin = tileBox.rotateSin
 		var maxRotatedX = 0.0
 		var maxRotatedY = 0.0
 
 		for (point in points) {
-			val deltaX = wrappedWorldDelta(normalizedWorldX(point.longitude) - centerX)
-			val deltaY = MapUtils.getTileNumberY(0f, point.latitude) - centerY
+			val deltaX = wrappedWorldDelta(normalizedWorldX(point.second) - centerX)
+			val deltaY = MapUtils.getTileNumberY(0f, point.first) - centerY
 			maxRotatedX = max(maxRotatedX, abs(rotateCos * deltaX - rotateSin * deltaY))
 			maxRotatedY = max(maxRotatedY, abs(rotateSin * deltaX + rotateCos * deltaY))
 		}
@@ -1693,6 +2035,40 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				phase,
 				local.obscuration * 100.0,
 				local.correctedSunAltitude
+			)
+		}
+	}
+
+	private fun formatLocalLunarEclipseStatus(state: LunarEclipseModeState): String {
+		val local = state.localState
+			?: return getString(R.string.astro_lunar_eclipse_calculating_state)
+		val phase = getString(when (local.phase) {
+			LunarEclipsePhase.Total -> R.string.astro_eclipse_phase_total
+			LunarEclipsePhase.Partial -> R.string.astro_eclipse_phase_partial
+			LunarEclipsePhase.Penumbral -> R.string.astro_eclipse_phase_penumbral
+			LunarEclipsePhase.None -> R.string.astro_eclipse_phase_none
+		})
+		if (local.correctedMoonAltitude <= 0.0) {
+			return getString(
+				R.string.astro_lunar_eclipse_below_horizon,
+				phase,
+				local.correctedMoonAltitude
+			)
+		}
+		return if (local.phase == LunarEclipsePhase.Partial ||
+			local.phase == LunarEclipsePhase.Total
+		) {
+			getString(
+				R.string.astro_lunar_eclipse_local_status,
+				phase,
+				local.umbralObscuration * 100.0,
+				local.correctedMoonAltitude
+			)
+		} else {
+			getString(
+				R.string.astro_lunar_eclipse_simple_status,
+				phase,
+				local.correctedMoonAltitude
 			)
 		}
 	}
@@ -1759,14 +2135,42 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		if (!isAdded || view == null || !::starView.isInitialized || !::viewModel.isInitialized) return
 		val tileBox = app.osmandMap.mapView.rotatedTileBox
 		val location = tileBox.centerLatLon
-		starView.setObserverLocation(location.latitude, location.longitude, 0.0)
-		viewModel.updateSolarEclipseObserver(Observer(location.latitude, location.longitude, 0.0))
-		updateEclipseMapCenterLocation(location.latitude, location.longitude)
-		if (isSolarEclipseModeActive()) centerSunAtSelectedEclipseTime()
+		val observer = Observer(location.latitude, location.longitude, 0.0)
+		when (activeEclipseType) {
+			EclipseExplorerType.Solar -> {
+				starView.setObserverLocation(location.latitude, location.longitude, 0.0)
+				viewModel.updateSolarEclipseObserver(observer)
+			}
+			EclipseExplorerType.Lunar -> {
+				val lunarState = viewModel.lunarEclipseModeState.value
+				if (!sameEclipseObserver(lunarState?.observer, observer)) {
+					pendingLunarObserver = observer
+					viewModel.updateLunarEclipseObserver(observer)
+				} else if (sameEclipseObserver(lunarState?.localStateObserver, observer)) {
+					starView.setObserverLocation(location.latitude, location.longitude, 0.0)
+					pendingLunarObserver = null
+				}
+			}
+			null -> starView.setObserverLocation(location.latitude, location.longitude, 0.0)
+		}
+		if (isEclipseModeActive()) {
+			updateEclipseMapCenterLocation(location.latitude, location.longitude)
+		}
+		if (isSolarEclipseModeActive() ||
+			(isLunarEclipseModeActive() && pendingLunarObserver == null)
+		) {
+			centerEclipseTargetAtSelectedTime()
+		}
 		if (updateAzimuth && !arModeHelper.isArModeEnabled && !starView.is2DMode) {
 			setAzimuth(-tileBox.rotate.toDouble())
 		}
 	}
+
+	private fun sameEclipseObserver(first: Observer?, second: Observer?): Boolean =
+		first != null && second != null &&
+			first.latitude == second.latitude &&
+			first.longitude == second.longitude &&
+			first.height == second.height
 
 	private fun updateMapControlsVisibility() {
 		if (!::mapControlsContainer.isInitialized) {
@@ -1849,7 +2253,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private fun updateBackPressedCallback() {
 		backPressedCallback.isEnabled = childFragmentManager.backStackEntryCount > 0 ||
 				(::bottomSheetBehavior.isInitialized && bottomSheetBehavior.state != BottomSheetBehavior.STATE_HIDDEN) ||
-				isSolarEclipseModeActive()
+				isEclipseModeActive()
 	}
 
 	internal fun getSearchableObjects(): List<SkyObject> {

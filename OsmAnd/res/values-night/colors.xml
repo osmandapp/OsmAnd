@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<color name="lunar_eclipse_visibility">#B39DDB</color>
+	<color name="lunar_eclipse_marker">#FFFFFF</color>
+	<color name="lunar_eclipse_marker_outline">#311B92</color>
+	<color name="lunar_eclipse_marker_halo">#D1C4E9</color>
     <color name="splash_screen_background_color">@color/list_background_color_dark</color>
 
 	<!-- Astro visibility graph -->

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<color name="lunar_eclipse_visibility">#7E57C2</color>
+	<color name="lunar_eclipse_marker">#ECEFF1</color>
+	<color name="lunar_eclipse_marker_outline">#4527A0</color>
+	<color name="lunar_eclipse_marker_halo">#FFFFFF</color>
 	<color name="solar_eclipse_path">#FFFF00</color>
 	<color name="solar_eclipse_marker">#F44336</color>
 	<color name="solar_eclipse_marker_outline">#1A1A1A</color>
