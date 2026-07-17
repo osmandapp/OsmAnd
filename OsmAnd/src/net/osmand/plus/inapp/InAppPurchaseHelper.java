@@ -732,6 +732,8 @@ public abstract class InAppPurchaseHelper {
 		logDebug("User " + (subscribedToLiveUpdates ? "HAS" : "DOES NOT HAVE") + " Live Updates purchased.");
 		logDebug("User " + (subscribedToOsmAndPro ? "HAS" : "DOES NOT HAVE") + " OsmAnd Pro purchased.");
 		logDebug("User " + (subscribedToMaps ? "HAS" : "DOES NOT HAVE") + " Maps purchased.");
+
+		refreshAndroidAuto();
 	}
 
 	protected boolean isPurchasedExternalFullVersion() {

@@ -106,6 +106,9 @@ public class PurchaseUiDataUtils {
 						expireTime = subscription.getCalculatedExpiredTime();
 					}
 				}
+				if (autoRenewing && expireTime < System.currentTimeMillis()) {
+					expireTime = subscription.getCalculatedExpiredTime();
+				}
 				if (!autoRenewing && subscriptionState != ACTIVE && subscriptionState != CANCELLED) {
 					if (purchases.isMaps(subscription)) {
 						boolean isFullVersion = !Version.isFreeVersion(app) || InAppPurchaseUtils.isFullVersionAvailable(app, false);
