@@ -15,6 +15,7 @@ public class OsmMapUtils {
 	
 	private static final double POLY_CENTER_PRECISION= 1e-6;
 	private static final int LOOP_LIMITATION = 10000000;
+	private static final double POLY_CELL_ALLOWED_DIFFERENCE = 0.2; //20%
 
 	public static double getDistance(Node e1, Node e2) {
 		return MapUtils.getDistance(e1.getLatitude(), e1.getLongitude(), e2.getLatitude(), e2.getLongitude());
@@ -657,8 +658,7 @@ public class OsmMapUtils {
 
 		// If the best point near polygon center is almost as good as the best polygon point (< 20% diff),
 		// then prefer it. To avoid placing icons in wierd places far away from the intuitive visual center of polygon.
-		double threshold = 0.2;
-		if ((bestCell.d > 0 && bestCenterCell.d > 0) && (bestCell.d - bestCenterCell.d) < bestCell.d * threshold) {
+		if ((bestCell.d > 0 && bestCenterCell.d > 0) && (bestCell.d - bestCenterCell.d) < bestCell.d * POLY_CELL_ALLOWED_DIFFERENCE) {
 			bestCell = bestCenterCell;
 		}
 //        System.out.println(String.format("Best lat/lon: %f, %f", bestCell.y, bestCell.x));
