@@ -36,9 +36,11 @@ class LunarEclipseMapLayer(context: Context) : OsmandMapLayer(context) {
 
 	@Volatile
 	private var state = LayerState()
-	private var nativeFrame: LunarEclipseMapFrame? = null
+	private var nativeGeometryDirty = true
 	private var polygonsCollection: PolygonsCollection? = null
+	private val nativePolygonIds = mutableListOf<Int>()
 	private var boundaryCollection: VectorLinesCollection? = null
+	private val nativeBoundaryLines = mutableListOf<VectorLine>()
 	private var sublunarMarker: MapMarker? = null
 	private var polygonId = 1
 
@@ -56,7 +58,7 @@ class LunarEclipseMapLayer(context: Context) : OsmandMapLayer(context) {
 		val previous = state
 		if (previous.active == active && previous.frame === frame) return
 		state = LayerState(active, frame)
-		if (!active || previous.frame !== frame) nativeFrame = null
+		if (!active || previous.frame !== frame) nativeGeometryDirty = true
 		if (!active) clearNativeCollections()
 		view?.refreshMap()
 	}
@@ -123,11 +125,10 @@ class LunarEclipseMapLayer(context: Context) : OsmandMapLayer(context) {
 	private fun updateOpenGl(current: LayerState) {
 		val renderer = mapRenderer ?: return
 		val frame = current.frame
-		if (nativeFrame !== frame) {
-			clearGeometryCollections()
-			createPolygonCollection(frame)
-			createBoundaryCollection(frame)
-			nativeFrame = frame
+		if (nativeGeometryDirty) {
+			updatePolygonCollection(frame)
+			updateBoundaryCollection(frame)
+			nativeGeometryDirty = false
 		}
 		updateMarkerCollection(frame)
 		polygonsCollection?.let { if (!renderer.hasSymbolsProvider(it)) renderer.addSymbolsProvider(it) }
@@ -135,46 +136,70 @@ class LunarEclipseMapLayer(context: Context) : OsmandMapLayer(context) {
 		mapMarkersCollection?.let { if (!renderer.hasSymbolsProvider(it)) renderer.addSymbolsProvider(it) }
 	}
 
-	private fun createPolygonCollection(frame: LunarEclipseMapFrame?) {
-		val polygons = frame?.visibilityPolygons.orEmpty()
+	private fun updatePolygonCollection(frame: LunarEclipseMapFrame?) {
+		val polygons = frame?.visibilityPolygons.orEmpty().filter { it.size >= 3 }
+		val collection = polygonsCollection
+		if (collection != null && nativePolygonIds.size == polygons.size) {
+			val updated = nativePolygonIds.indices.all { index ->
+				collection.setPolygonPoints(nativePolygonIds[index], polygons[index].toPoints31())
+			}
+			if (updated) return
+		}
+		clearPolygonCollection()
+		createPolygonCollection(polygons)
+	}
+
+	private fun createPolygonCollection(polygons: List<List<LunarEclipseMapCoordinate>>) {
 		if (polygons.isEmpty()) return
 		val collection = PolygonsCollection(ZoomLevel.ZoomLevel1, ZoomLevel.ZoomLevel20)
 		val color = NativeUtilities.createFColorARGB(visibilityPaint.color)
 		polygons.forEach { polygon ->
 			val points = polygon.toPoints31()
-			if (points.size() >= 3) {
-				PolygonBuilder()
-					.setBaseOrder(baseOrder)
-					.setIsHidden(false)
-					.setPolygonId(polygonId++)
-					.setPoints(points)
-					.setFillColor(color)
-					.buildAndAddToCollection(collection)
-			}
+			val id = polygonId++
+			PolygonBuilder()
+				.setBaseOrder(baseOrder)
+				.setIsHidden(false)
+				.setPolygonId(id)
+				.setPoints(points)
+				.setFillColor(color)
+				.buildAndAddToCollection(collection)
+			nativePolygonIds.add(id)
 		}
 		polygonsCollection = collection
 	}
 
-	private fun createBoundaryCollection(frame: LunarEclipseMapFrame?) {
-		val polygons = frame?.visibilityPolygons.orEmpty()
-		if (polygons.isEmpty()) return
+	private fun updateBoundaryCollection(frame: LunarEclipseMapFrame?) {
+		val boundaries = frame?.visibilityPolygons.orEmpty()
+			.flatMap { physicalBoundarySegments(it) }
+			.filter { it.size >= 2 }
+		if (boundaryCollection != null && nativeBoundaryLines.size == boundaries.size) {
+			nativeBoundaryLines.forEachIndexed { index, line ->
+				line.setPoints(boundaries[index].toPoints31())
+			}
+			return
+		}
+		clearBoundaryCollection()
+		createBoundaryCollection(boundaries)
+	}
+
+	private fun createBoundaryCollection(boundaries: List<List<LunarEclipseMapCoordinate>>) {
+		if (boundaries.isEmpty()) return
 		val collection = VectorLinesCollection()
 		val lineScale = GeometryWayDrawer.getVectorLineScale(application)
 		var lineId = 1
-		polygons.flatMap { physicalBoundarySegments(it) }.forEach { boundary ->
+		boundaries.forEach { boundary ->
 			val points = boundary.toPoints31()
-			if (points.size() >= 2) {
-				VectorLineBuilder()
-					.setBaseOrder(baseOrder - 1)
-					.setIsHidden(false)
-					.setLineId(lineId++)
-					.setLineWidth(boundaryPaint.strokeWidth.toDouble() * lineScale.toDouble())
-					.setPoints(points)
-					.setEndCapStyle(VectorLine.EndCapStyle.BUTT.swigValue())
-					.setFillColor(NativeUtilities.createFColorARGB(boundaryPaint.color))
-					.setApproximationEnabled(false)
-					.buildAndAddToCollection(collection)
-			}
+			VectorLineBuilder()
+				.setBaseOrder(baseOrder - 1)
+				.setIsHidden(false)
+				.setLineId(lineId++)
+				.setLineWidth(boundaryPaint.strokeWidth.toDouble() * lineScale.toDouble())
+				.setPoints(points)
+				.setEndCapStyle(VectorLine.EndCapStyle.BUTT.swigValue())
+				.setFillColor(NativeUtilities.createFColorARGB(boundaryPaint.color))
+				.setApproximationEnabled(false)
+				.buildAndAddToCollection(collection)
+				?.let(nativeBoundaryLines::add)
 		}
 		boundaryCollection = collection
 	}
@@ -259,14 +284,25 @@ class LunarEclipseMapLayer(context: Context) : OsmandMapLayer(context) {
 			}
 		}
 
-	private fun clearGeometryCollections() {
+	private fun clearPolygonCollection() {
 		val renderer = mapRenderer
 		polygonsCollection?.let { renderer?.removeSymbolsProvider(it) }
-		boundaryCollection?.let { renderer?.removeSymbolsProvider(it) }
 		polygonsCollection = null
-		boundaryCollection = null
+		nativePolygonIds.clear()
 		polygonId = 1
-		nativeFrame = null
+	}
+
+	private fun clearBoundaryCollection() {
+		val renderer = mapRenderer
+		boundaryCollection?.let { renderer?.removeSymbolsProvider(it) }
+		boundaryCollection = null
+		nativeBoundaryLines.clear()
+	}
+
+	private fun clearGeometryCollections() {
+		clearPolygonCollection()
+		clearBoundaryCollection()
+		nativeGeometryDirty = true
 	}
 
 	private fun clearNativeCollections() {
