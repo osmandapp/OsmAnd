@@ -73,9 +73,10 @@ class SolarEclipseMapLayer(context: Context) : OsmandMapLayer(context) {
 			return
 		}
 		state = LayerState(active, eventKey, eventKind, track, frame)
-		val staticChanged = previous.active != active || previous.eventKey != eventKey ||
-			previous.eventKind != eventKind || previous.track !== track
-		if (staticChanged) nativeGeometryReady = false
+		val geometryChanged = previous.active != active || previous.eventKey != eventKey ||
+			previous.eventKind != eventKind || previous.track !== track ||
+			(eventKind == EclipseKind.Partial && previous.frame !== frame)
+		if (geometryChanged) nativeGeometryReady = false
 		if (!active) clearNativeCollections()
 		view?.refreshMap()
 	}
@@ -174,7 +175,6 @@ class SolarEclipseMapLayer(context: Context) : OsmandMapLayer(context) {
 	}
 
 	private fun createPolygonCollection(current: LayerState) {
-		if (current.eventKind == EclipseKind.Partial) return
 		val polygons = geometryPolygons(current)
 		if (polygons.isEmpty()) return
 		val collection = PolygonsCollection(ZoomLevel.ZoomLevel1, ZoomLevel.ZoomLevel20)
@@ -294,12 +294,7 @@ class SolarEclipseMapLayer(context: Context) : OsmandMapLayer(context) {
 		clearNativeCollections()
 	}
 
-	override fun onDraw(canvas: Canvas, tileBox: RotatedTileBox, settings: DrawSettings) {
-		val current = state
-		if (current.active && current.eventKind == EclipseKind.Partial && mapRenderer != null) {
-			drawCanvasPolygons(canvas, tileBox, current)
-		}
-	}
+	override fun onDraw(canvas: Canvas, tileBox: RotatedTileBox, settings: DrawSettings) = Unit
 
 	override fun drawInScreenPixels(): Boolean = false
 }

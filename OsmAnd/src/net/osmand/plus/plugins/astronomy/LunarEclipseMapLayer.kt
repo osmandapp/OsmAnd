@@ -160,14 +160,14 @@ class LunarEclipseMapLayer(context: Context) : OsmandMapLayer(context) {
 		if (polygons.isEmpty()) return
 		val collection = VectorLinesCollection()
 		val lineScale = GeometryWayDrawer.getVectorLineScale(application)
-		polygons.forEachIndexed { index, polygon ->
-			val closed = if (polygon.isNotEmpty()) polygon + polygon.first() else polygon
-			val points = closed.toPoints31()
+		var lineId = 1
+		polygons.flatMap { physicalBoundarySegments(it) }.forEach { boundary ->
+			val points = boundary.toPoints31()
 			if (points.size() >= 2) {
 				VectorLineBuilder()
 					.setBaseOrder(baseOrder - 1)
 					.setIsHidden(false)
-					.setLineId(index + 1)
+					.setLineId(lineId++)
 					.setLineWidth(boundaryPaint.strokeWidth.toDouble() * lineScale.toDouble())
 					.setPoints(points)
 					.setEndCapStyle(VectorLine.EndCapStyle.BUTT.swigValue())
@@ -177,6 +177,32 @@ class LunarEclipseMapLayer(context: Context) : OsmandMapLayer(context) {
 			}
 		}
 		boundaryCollection = collection
+	}
+
+	private fun physicalBoundarySegments(
+		polygon: List<LunarEclipseMapCoordinate>
+	): List<List<LunarEclipseMapCoordinate>> {
+		if (polygon.size < 2) return emptyList()
+		fun isProjectionPole(point: LunarEclipseMapCoordinate): Boolean =
+			point.latitude <= -89.999 || point.latitude >= 89.999
+
+		if (polygon.none { isProjectionPole(it) }) return listOf(polygon + polygon.first())
+
+		val result = mutableListOf<List<LunarEclipseMapCoordinate>>()
+		var segment = mutableListOf<LunarEclipseMapCoordinate>()
+		for (index in polygon.indices) {
+			val start = polygon[index]
+			val end = polygon[(index + 1) % polygon.size]
+			if (!isProjectionPole(start) && !isProjectionPole(end)) {
+				if (segment.isEmpty()) segment.add(start)
+				segment.add(end)
+			} else if (segment.size >= 2) {
+				result.add(segment)
+				segment = mutableListOf()
+			}
+		}
+		if (segment.size >= 2) result.add(segment)
+		return result
 	}
 
 	private fun updateMarkerCollection(frame: LunarEclipseMapFrame?) {

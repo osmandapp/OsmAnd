@@ -3464,6 +3464,38 @@ private fun eclipseConeBoundary(
 }
 
 
+private fun partialEclipseFootprintCenter(
+    shadowPoint: SolarEclipseMapCoordinate,
+    cone: EclipseShadowConeGeometry
+): SolarEclipseMapCoordinate? {
+    if (!cone.contains(shadowPoint))
+        return null
+
+    // For a partial eclipse the shadow axis misses Earth. Its closest surface point is on the
+    // day/night boundary used by EclipseShadowConeGeometry.contains, so tracing the footprint
+    // radially from that point collapses every night-side ray back to the same coordinate and
+    // creates a false V-shaped edge. Find the longest contained ray into the day side and trace
+    // from its midpoint instead, while keeping the original point as the displayed shadow marker.
+    var bestBearing = Double.NaN
+    var bestDistance = 0.0
+    for (bearing in 0 until 360 step 5) {
+        val probe = eclipseDestinationPoint(shadowPoint, 1.0, bearing.toDouble())
+        if (!cone.contains(probe))
+            continue
+        val boundary = eclipseConeBoundary(shadowPoint, bearing.toDouble(), cone, 14)
+        val distance = eclipseDistanceKm(shadowPoint, boundary)
+        if (distance > bestDistance) {
+            bestBearing = bearing.toDouble()
+            bestDistance = distance
+        }
+    }
+    if (!bestBearing.isFinite() || bestDistance <= 0.0)
+        return null
+    val center = eclipseDestinationPoint(shadowPoint, bestDistance / 2.0, bestBearing)
+    return center.takeIf(cone::contains)
+}
+
+
 private fun eclipseTrackSample(time: Time): EclipseTrackSample? {
     val context = eclipseShadowGeometryContext(time) ?: return null
     val shadowPoint = solarEclipseShadowPoint(context) ?: return null
@@ -3661,6 +3693,22 @@ private fun splitEclipsePolygonAtAntimeridian(
         unwrapped.add(UnwrappedEclipseCoordinate(points[index].latitude, longitude))
         previousLongitude = longitude
     }
+
+    var closingLongitude = points.first().longitude
+    while (closingLongitude - previousLongitude > 180.0) closingLongitude -= 360.0
+    while (closingLongitude - previousLongitude < -180.0) closingLongitude += 360.0
+    val longitudeWinding = round(
+        (closingLongitude - points.first().longitude) / 360.0
+    ).toInt()
+    if (longitudeWinding != 0) {
+        // A ring that winds once in longitude surrounds a pole. Closing its unwrapped Mercator
+        // path directly draws a diagonal across the world. Preserve the final boundary segment,
+        // then close along the projection edge where every longitude represents the same pole.
+        val poleLatitude = if (points.sumOf { it.latitude } >= 0.0) 90.0 else -90.0
+        unwrapped.add(UnwrappedEclipseCoordinate(points.first().latitude, closingLongitude))
+        unwrapped.add(UnwrappedEclipseCoordinate(poleLatitude, closingLongitude))
+        unwrapped.add(UnwrappedEclipseCoordinate(poleLatitude, points.first().longitude))
+    }
     val minimumWorld = floor((unwrapped.minOf { it.longitude } + 180.0) / 360.0).toInt()
     val maximumWorld = floor((unwrapped.maxOf { it.longitude } + 180.0) / 360.0).toInt()
     val result = mutableListOf<List<SolarEclipseMapCoordinate>>()
@@ -3782,9 +3830,14 @@ fun solarEclipseMapFrame(
     } else {
         null
     }
-    val footprint = if (penumbralCone?.contains(center) == true) {
+    val footprintCenter = when {
+        penumbralCone == null -> null
+        shadowPoint.central -> center.takeIf(penumbralCone::contains)
+        else -> partialEclipseFootprintCenter(center, penumbralCone)
+    }
+    val footprint = if (penumbralCone != null && footprintCenter != null) {
         (0 until 360 step 5).map { bearing ->
-            eclipseConeBoundary(center, bearing.toDouble(), penumbralCone, 14)
+            eclipseConeBoundary(footprintCenter, bearing.toDouble(), penumbralCone, 14)
         }
     } else {
         emptyList()
