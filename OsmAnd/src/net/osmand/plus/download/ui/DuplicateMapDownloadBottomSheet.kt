@@ -11,6 +11,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import net.osmand.plus.R
 import net.osmand.plus.base.BaseMaterialBottomSheetWithHeader
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialog
+import net.osmand.plus.download.AbstractDownloadActivity
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.widgets.dialogbutton.DialogButton
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType
@@ -59,7 +60,7 @@ class DuplicateMapDownloadBottomSheet : BaseMaterialBottomSheetWithHeader(), IDi
 		button.setTitleId(controller.replaceButtonTitleId)
 		button.setButtonType(controller.replaceButtonType)
 		button.setOnClickListener {
-			controller.onReplace()
+			(activity as? AbstractDownloadActivity)?.let(controller::onReplace)
 			dismiss()
 		}
 	}
@@ -71,7 +72,7 @@ class DuplicateMapDownloadBottomSheet : BaseMaterialBottomSheetWithHeader(), IDi
 		button.setTitleId(R.string.keep_both)
 		button.setButtonType(DialogButtonType.SECONDARY)
 		button.setOnClickListener {
-			controller.onKeepBoth()
+			(activity as? AbstractDownloadActivity)?.let(controller::onKeepBoth)
 			dismiss()
 		}
 	}

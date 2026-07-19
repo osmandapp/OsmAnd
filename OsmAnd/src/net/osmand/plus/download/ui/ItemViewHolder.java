@@ -528,18 +528,7 @@ public class ItemViewHolder {
 
 			IndexItem conflict = DuplicateMapHelper.findConflictingItem(indexItem, parentOptional);
 			if (conflict != null) {
-				DuplicateMapDownloadDialogController.ConflictDirection direction =
-						indexItem.getType() == DownloadActivityType.NORMAL_FILE
-								? DuplicateMapDownloadDialogController.ConflictDirection.ROAD_TO_STANDARD
-								: DuplicateMapDownloadDialogController.ConflictDirection.STANDARD_TO_ROAD;
-
-				DuplicateMapDownloadDialogController.showDialog(
-						context,
-						indexItem.getVisibleName(context, app.getRegions(), false),
-						direction,
-						() -> context.startReplacementDownload(indexItem, conflict.getTargetFile(app)),
-						() -> startDownload(indexItem)
-				);
+				DuplicateMapDownloadDialogController.showDialog(context, indexItem, conflict);
 				return;
 			}
 		}
