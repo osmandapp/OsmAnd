@@ -250,17 +250,22 @@ public class DownloadFileHelper {
 		File targetFile = entry.targetFile.getAbsoluteFile();
 		boolean filesRemoved = false;
 		for (File file : entry.filesToDeleteAfterSuccessfulInstall) {
-			if (file != null && file.exists() && !targetFile.equals(file.getAbsoluteFile())) {
-				boolean successful = Algorithms.removeAllFiles(file);
-				if (successful) {
-					ctx.getResourceManager().closeFile(file.getName());
-					filesRemoved = true;
-				}
+			if (file != null && !targetFile.equals(file.getAbsoluteFile())
+					&& removeFileAndCloseResource(file)) {
+				filesRemoved = true;
 			}
 		}
 		if (filesRemoved) {
 			ctx.getDownloadThread().updateLoadedFiles();
 		}
+	}
+
+	private boolean removeFileAndCloseResource(@NonNull File file) {
+		if (file.exists() && Algorithms.removeAllFiles(file)) {
+			ctx.getResourceManager().closeFile(file.getName());
+			return true;
+		}
+		return false;
 	}
 
 	private void removePreviousSrtmFile(DownloadEntry entry) {
@@ -274,13 +279,7 @@ public class DownloadFileHelper {
 			fileName = fileName.replace(feetExt, meterExt);
 		}
 
-		File previous = new File(fileName);
-		if (previous != null && previous.exists()) {
-			boolean successful = Algorithms.removeAllFiles(previous);
-			if (successful) {
-				ctx.getResourceManager().closeFile(previous.getName());
-			}
-		}
+		removeFileAndCloseResource(new File(fileName));
 	}
 
 	private void unzipFile(IndexItem.DownloadEntry de, IProgress progress,  List<InputStream> is) throws IOException {
