@@ -10,11 +10,12 @@ import net.osmand.plus.download.DownloadActivityType
 import net.osmand.plus.download.IndexItem
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType
+import java.io.File
 
 class DuplicateMapDownloadDialogController(
     app: OsmandApplication,
     private val targetItem: IndexItem,
-    conflictingItem: IndexItem
+    private val conflictingFile: File
 ) : BaseDialogController(app) {
 
     private enum class ConflictDirection {
@@ -28,8 +29,6 @@ class DuplicateMapDownloadDialogController(
         DownloadActivityType.ROADS_FILE -> ConflictDirection.STANDARD_TO_ROAD
         else -> throw IllegalArgumentException("Unsupported duplicate map type: ${targetItem.type}")
     }
-    private val conflictingFile = conflictingItem.getExistedFile(app)
-        ?: conflictingItem.getTargetFile(app)
 
     override fun getProcessId(): String = PROCESS_ID
 
@@ -78,18 +77,14 @@ class DuplicateMapDownloadDialogController(
         fun showDialog(
             activity: AbstractDownloadActivity,
             targetItem: IndexItem,
-            conflictingItem: IndexItem
+            conflictingFile: File
         ) {
             val manager = activity.supportFragmentManager
             if (!DuplicateMapDownloadBottomSheet.canBeAdded(manager)) {
                 return
             }
             val app = activity.application as OsmandApplication
-            val controller = DuplicateMapDownloadDialogController(
-                app,
-                targetItem,
-                conflictingItem
-            )
+            val controller = DuplicateMapDownloadDialogController(app, targetItem, conflictingFile)
             app.dialogManager.register(PROCESS_ID, controller)
             DuplicateMapDownloadBottomSheet.showInstance(manager)
         }

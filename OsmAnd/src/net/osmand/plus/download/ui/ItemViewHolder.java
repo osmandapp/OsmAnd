@@ -526,7 +526,7 @@ public class ItemViewHolder {
 			WorldRegion region = DownloadResourceGroup.getRegion(parentOptional);
 			context.setDownloadItem(region, indexItem.getTargetFile(app).getAbsolutePath());
 
-			IndexItem conflict = DuplicateMapHelper.findConflictingItem(app, indexItem, parentOptional);
+			File conflict = DuplicateMapHelper.findConflictingFile(app, indexItem, parentOptional);
 			if (conflict != null) {
 				DuplicateMapDownloadDialogController.showDialog(context, indexItem, conflict);
 				return;
