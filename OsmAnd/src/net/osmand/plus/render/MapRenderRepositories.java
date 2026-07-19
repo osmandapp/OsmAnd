@@ -634,6 +634,27 @@ public class MapRenderRepositories {
 	public RotatedTileBox getCheckedBox() {
 		return checkedBox;
 	}
+
+	/**
+	 * Reads map objects whose bounding boxes contain the requested map point.
+	 * The rendering readers are reused under the same lock as {@link #loadMap},
+	 * so callers don't race the renderer or open another copy of every OBF.
+	 */
+	@NonNull
+	public synchronized List<BinaryMapDataObject> searchMapObjectsAt(int x31, int y31, int zoom,
+	                                                               @NonNull BinaryMapIndexReader.SearchFilter filter) {
+		List<BinaryMapDataObject> result = new ArrayList<>();
+		for (BinaryMapIndexReader reader : files.values()) {
+			SearchRequest<BinaryMapDataObject> request = BinaryMapIndexReader.buildSearchRequest(
+					x31, x31 + 1, y31, y31 + 1, zoom, filter);
+			try {
+				result.addAll(reader.searchMapIndex(request));
+			} catch (IOException e) {
+				log.debug("Map-object point search failed for " + reader.getRegionNames(), e);
+			}
+		}
+		return result;
+	}
 	
 	public int getCheckedRenderedState() {
 		// to track necessity of map download (1 (if basemap) + 2 (if normal map)

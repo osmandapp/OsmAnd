@@ -33,6 +33,7 @@ import net.osmand.osm.OsmRouteType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.configmap.ConfigureMapUtils;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
+import net.osmand.plus.plugins.drone.DroneZoneObfSelection;
 import net.osmand.plus.plugins.osmedit.OsmBugsLayer.OpenStreetNote;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
@@ -139,6 +140,7 @@ public class MapSelectionHelper {
 		} else if (nativeLib != null) {
 			selectObjectsFromNative(result, rules, nativeLib, tileBox, point);
 		}
+		DroneZoneObfSelection.collect(app, result, tileBox.getZoom());
 	}
 
 	protected void collectObjectsFromLayers(@NonNull MapSelectionResult result,

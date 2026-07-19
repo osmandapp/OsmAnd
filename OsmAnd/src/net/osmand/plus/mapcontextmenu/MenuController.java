@@ -48,6 +48,8 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.aistracker.AisObjectMenuController;
 import net.osmand.plus.plugins.audionotes.AudioVideoNoteMenuController;
 import net.osmand.plus.plugins.audionotes.Recording;
+import net.osmand.plus.plugins.drone.DroneZoneTags;
+import net.osmand.plus.plugins.drone.menu.DroneZoneMenuController;
 import net.osmand.plus.plugins.mapillary.MapillaryImage;
 import net.osmand.plus.plugins.mapillary.MapillaryMenuController;
 import net.osmand.plus.plugins.osmedit.OsmBugsLayer.OpenStreetNote;
@@ -233,7 +235,12 @@ public abstract class MenuController extends BaseMenuController implements Colla
 			} else if (object instanceof AvoidRoadInfo) {
 				menuController = new ImpassibleRoadsMenuController(mapActivity, pointDescription, (AvoidRoadInfo) object);
 			} else if (object instanceof RenderedObject) {
-				menuController = new RenderedObjectMenuController(mapActivity, pointDescription, (RenderedObject) object);
+				RenderedObject renderedObject = (RenderedObject) object;
+				if (DroneZoneTags.isDroneZone(renderedObject.getTags())) {
+					menuController = new DroneZoneMenuController(mapActivity, pointDescription, renderedObject);
+				} else {
+					menuController = new RenderedObjectMenuController(mapActivity, pointDescription, renderedObject);
+				}
 			} else if (object instanceof MapillaryImage) {
 				menuController = new MapillaryMenuController(mapActivity, pointDescription, (MapillaryImage) object);
 			} else if (object instanceof AisObject) {

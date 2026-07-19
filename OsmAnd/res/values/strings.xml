@@ -11,6 +11,21 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="drone_zones">Drone zones</string>
+	<string name="drone_zones_plugin_description">Shows offline UAS geographical zones from an installed OsmAnd drone-zone map package.</string>
+	<string name="drone_zone_restriction">Restriction</string>
+	<string name="drone_zone_restriction_req_authorization">Prior authorization required</string>
+	<string name="drone_zone_category">Category</string>
+	<string name="drone_zone_reasons">Reasons</string>
+	<string name="drone_zone_lower_limit">Lower limit</string>
+	<string name="drone_zone_upper_limit">Upper limit</string>
+	<string name="drone_zone_legal_basis">Legal basis</string>
+	<string name="drone_zone_source">Source</string>
+	<string name="drone_zone_dataset">Dataset</string>
+	<string name="drone_zone_validity">Data validity</string>
+	<string name="drone_zone_validity_value">%1$s – %2$s</string>
+	<string name="drone_zone_expired_warning">Warning: This drone-zone data is outside its validity period.</string>
+	<string name="drone_zone_disclaimer">This map display does not replace an individual flight authorization or an authoritative pre-flight check.</string>
 	<string name="astro_fit_eclipse_path">Fit eclipse path</string>
 	<string name="astro_show_map">Show map</string>
 	<string name="astro_hide_map">Hide map</string>
