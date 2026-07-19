@@ -28,7 +28,8 @@ class DuplicateMapDownloadDialogController(
         DownloadActivityType.ROADS_FILE -> ConflictDirection.STANDARD_TO_ROAD
         else -> throw IllegalArgumentException("Unsupported duplicate map type: ${targetItem.type}")
     }
-    private val conflictingFile = conflictingItem.getTargetFile(app)
+    private val conflictingFile = conflictingItem.getExistedFile(app)
+        ?: conflictingItem.getTargetFile(app)
 
     override fun getProcessId(): String = PROCESS_ID
 
