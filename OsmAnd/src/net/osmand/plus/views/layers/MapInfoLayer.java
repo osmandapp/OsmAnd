@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.WindowInsetsCompat;
 
@@ -30,7 +29,6 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTarget.InsetTargetBuilder;
 import net.osmand.plus.utils.InsetTargetsCollection;
@@ -50,6 +48,9 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControllerType;
 import net.osmand.plus.views.mapwidgets.TopToolbarView;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.appearance.ResolvedPanelAppearance;
+import net.osmand.plus.views.mapwidgets.configure.appearance.PanelAppearanceSettingsManager;
 import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
@@ -67,6 +68,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	private final RouteLayer routeLayer;
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
+	private final PanelAppearanceSettingsManager appearanceSettingsManager;
 	private final MapWidgetRegistry widgetRegistry;
 	private final MapDisplayPositionManager mapDisplayPositionManager;
 
@@ -87,16 +89,32 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	private ObservableFrameLayout bottomFragmentContainer;
 
 	private DrawSettings drawSettings;
-	private int themeId = -1;
+	private boolean colorsInitialized;
+	private boolean systemBarsInitialized;
+	private long appliedAppearanceRevision;
+	private long appliedCommittedAppearanceRevision;
+	@Nullable
+	private ScreenLayoutMode appliedLayoutMode;
+	private boolean appliedNightMode;
+	private boolean appliedFollowingMode;
 
 	private TopToolbarView topToolbarView;
 
 	private final BoundsChangeListener topPanelBoundsChangeListener;
 	private final BoundsChangeListener bottomPanelBoundsChangeListener;
+	private VerticalPanelVisibilityListener topWidgetsVisibilityListener;
 	private VerticalPanelVisibilityListener bottomWidgetsVisibilityListener;
+	private boolean topWidgetsVisibleForSystemBars;
+	private boolean bottomWidgetsVisibleForSystemBars;
 	private WindowInsetsCompat lastWindowInsets;
 
 	private boolean isContentVisible = false;
+	private boolean appearanceRefreshScheduled;
+	private final Runnable appearanceRefreshRunnable = () -> {
+		appearanceRefreshScheduled = false;
+		refreshWidgetAppearance();
+	};
+	private final PanelAppearanceSettingsManager.Listener appearanceSettingsListener;
 
 	public MapInfoLayer(@NonNull Context context, @NonNull RouteLayer layer) {
 		super(context);
@@ -104,6 +122,8 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 
 		app = getApplication();
 		settings = app.getSettings();
+		appearanceSettingsManager = app.getPanelAppearanceSettingsManager();
+		appearanceSettingsListener = origin -> scheduleWidgetAppearanceRefresh();
 		MapLayers mapLayers = app.getOsmandMap().getMapLayers();
 		widgetRegistry = mapLayers.getMapWidgetRegistry();
 		mapDisplayPositionManager = app.getMapViewTrackingUtilities().getMapDisplayPositionManager();
@@ -126,7 +146,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			leftWidgetsPanel.setScreenSize(mapActivity);
 			rightWidgetsPanel.setScreenSize(mapActivity);
 
-			registerInsetListeners();
+			registerWidgetPanelListeners();
 
 			LayoutInflater inflater = mapActivity.getLayoutInflater();
 			rulerWidget = (RulerWidget) inflater.inflate(R.layout.map_ruler, mapHudLayout, false);
@@ -139,9 +159,16 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			topWidgetsPanel.addOnLayoutChangeListener(topPanelBoundsChangeListener);
 			bottomWidgetsPanel.addOnLayoutChangeListener(bottomPanelBoundsChangeListener);
 			mapDisplayPositionManager.updateMapDisplayPosition(true);
+			appearanceSettingsManager.addListener(appearanceSettingsListener);
 		} else {
+			appearanceSettingsManager.removeListener(appearanceSettingsListener);
+			if (mapHudLayout != null) {
+				mapHudLayout.removeCallbacks(appearanceRefreshRunnable);
+			}
+			appearanceRefreshScheduled = false;
 			if (topWidgetsPanel != null) {
 				topWidgetsPanel.removeOnLayoutChangeListener(topPanelBoundsChangeListener);
+				topWidgetsPanel.removeVisibilityListener(topWidgetsVisibilityListener);
 			}
 			if (bottomWidgetsPanel != null) {
 				bottomWidgetsPanel.removeOnLayoutChangeListener(bottomPanelBoundsChangeListener);
@@ -158,7 +185,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			mapDisplayPositionManager.unregisterCoveredScreenRectProvider(this);
 			mapDisplayPositionManager.updateMapDisplayPosition(true);
 
-			resetCashedTheme();
+			resetCachedTheme();
 			widgetRegistry.clearWidgets();
 
 			mapHudLayout = null;
@@ -178,10 +205,25 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			additionalWidgets = null;
 			topToolbarView = null;
 			lastWindowInsets = null;
+			topWidgetsVisibilityListener = null;
+			bottomWidgetsVisibilityListener = null;
+			topWidgetsVisibleForSystemBars = false;
+			bottomWidgetsVisibleForSystemBars = false;
+		}
+	}
+
+	private void onTopWidgetPanelChanged(boolean isVisible) {
+		if (topWidgetsVisibleForSystemBars != isVisible) {
+			topWidgetsVisibleForSystemBars = isVisible;
+			updateSystemBarsForPanelVisibilityChange();
 		}
 	}
 
 	private void onBottomWidgetPanelChanged(boolean isVisible) {
+		if (bottomWidgetsVisibleForSystemBars != isVisible) {
+			bottomWidgetsVisibleForSystemBars = isVisible;
+			updateSystemBarsForPanelVisibilityChange();
+		}
 		if (bottomFragmentContainer != null) {
 			boolean bottomFragmentVisible = bottomFragmentContainer.getChildCount() > 0;
 			if (bottomFragmentVisible) {
@@ -189,6 +231,13 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			}
 		}
 		updateLayerInsets(isVisible, false);
+	}
+
+	private void updateSystemBarsForPanelVisibilityChange() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.updateStatusBarColor();
+		}
 	}
 
 	private void updateLayerInsets(boolean isVisible, boolean forceUpdate) {
@@ -226,7 +275,11 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		}
 	}
 
-	private void registerInsetListeners() {
+	private void registerWidgetPanelListeners() {
+		topWidgetsVisibilityListener = this::onTopWidgetPanelChanged;
+		bottomWidgetsVisibilityListener = this::onBottomWidgetPanelChanged;
+		topWidgetsPanel.addVisibilityListener(topWidgetsVisibilityListener);
+		bottomWidgetsPanel.addVisibilityListener(bottomWidgetsVisibilityListener);
 		if (!InsetsUtils.isEdgeToEdgeSupported()) {
 			return;
 		}
@@ -236,8 +289,6 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			}
 			return Unit.INSTANCE;
 		});
-		bottomWidgetsVisibilityListener = this::onBottomWidgetPanelChanged;
-		bottomWidgetsPanel.addVisibilityListener(bottomWidgetsVisibilityListener);
 	}
 
 	@Nullable
@@ -245,8 +296,9 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		return topToolbarView;
 	}
 
-	private void resetCashedTheme() {
-		themeId = -1;
+	private void resetCachedTheme() {
+		colorsInitialized = false;
+		systemBarsInitialized = false;
 	}
 
 	public void removeWidget(@NonNull MapWidget widget) {
@@ -337,18 +389,90 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	public void recreateControls() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			resetCashedTheme();
+			resetCachedTheme();
 			clearCustomContainers(mapActivity);
-			updateWidgetsInfo(drawSettings);
-			topWidgetsPanel.update(drawSettings);
-			bottomWidgetsPanel.update(drawSettings);
-			leftWidgetsPanel.update(drawSettings);
-			rightWidgetsPanel.update(drawSettings);
+			refreshWidgetsAndAppearance();
 		}
+	}
+
+	public void refreshWidgetAppearance() {
+		if (getMapActivity() == null || leftWidgetsPanel == null || rightWidgetsPanel == null
+				|| topWidgetsPanel == null || bottomWidgetsPanel == null) {
+			return;
+		}
+		if (appearanceRefreshScheduled && mapHudLayout != null) {
+			mapHudLayout.removeCallbacks(appearanceRefreshRunnable);
+			appearanceRefreshScheduled = false;
+		}
+		updateColorShadowsOfText();
+	}
+
+	public void refreshWidgetPanels() {
+		if (getMapActivity() == null) {
+			return;
+		}
+		refreshWidgetAppearance();
+		updateMainWidgetPanels();
+	}
+
+	private void refreshWidgetsAndAppearance() {
+		refreshWidgetAppearance();
+		updateWidgetsInfo(drawSettings);
+		updateMainWidgetPanels();
+		if (sideWidgetsPanels != null) {
+			for (SideWidgetsPanel panel : sideWidgetsPanels) {
+				panel.update(drawSettings);
+			}
+		}
+		if (additionalWidgets != null) {
+			for (WidgetsContainer container : additionalWidgets) {
+				container.update(drawSettings);
+			}
+		}
+	}
+
+	private void updateMainWidgetPanels() {
+		updatePanelVisibilityPolicy();
+		leftWidgetsPanel.update(drawSettings);
+		rightWidgetsPanel.update(drawSettings);
+		topWidgetsPanel.update(drawSettings);
+		bottomWidgetsPanel.update(drawSettings);
+	}
+
+	private void updatePanelVisibilityPolicy() {
+		MapActivity activity = getMapActivity();
+		WidgetsPanel previewPanel = activity != null
+				? activity.getWidgetsVisibilityHelper().getAppearancePreviewPanel()
+				: null;
+		if (leftWidgetsPanel != null) {
+			leftWidgetsPanel.setVisibilityAllowed(previewPanel == null || previewPanel == WidgetsPanel.LEFT);
+		}
+		if (rightWidgetsPanel != null) {
+			rightWidgetsPanel.setVisibilityAllowed(previewPanel == null || previewPanel == WidgetsPanel.RIGHT);
+		}
+		if (topWidgetsPanel != null) {
+			topWidgetsPanel.setVisibilityAllowed(previewPanel == null || previewPanel == WidgetsPanel.TOP);
+		}
+		if (bottomWidgetsPanel != null) {
+			bottomWidgetsPanel.setVisibilityAllowed(previewPanel == null || previewPanel == WidgetsPanel.BOTTOM);
+		}
+	}
+
+	private void scheduleWidgetAppearanceRefresh() {
+		app.runInUIThread(() -> {
+			MapHudLayout hudLayout = mapHudLayout;
+			if (hudLayout != null && !appearanceRefreshScheduled) {
+				appearanceRefreshScheduled = true;
+				if (!hudLayout.post(appearanceRefreshRunnable)) {
+					appearanceRefreshScheduled = false;
+				}
+			}
+		});
 	}
 
 	public void updateVerticalPanels() {
 		updateWidgetsInfo(drawSettings);
+		updatePanelVisibilityPolicy();
 
 		if (topWidgetsPanel != null) {
 			topWidgetsPanel.update(drawSettings);
@@ -376,9 +500,10 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	public RulerWidget setupRulerWidget(@NonNull RulerWidget widget) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			TextState state = calculateTextState(false);
-			boolean nightMode = drawSettings != null && drawSettings.isNightMode();
-			widget.updateTextSize(nightMode, state.textColor, state.textShadowColor, (int) (2 * view.getDensity()));
+			ResolvedPanelAppearance appearance = calculateRulerAppearance();
+			boolean nightMode = resolveMapNightMode();
+			widget.updateTextSize(nightMode, appearance.getPrimaryTextColor(),
+					appearance.getTextShadowColor(), (int) (2 * view.getDensity()));
 
 			rulerWidgets = CollectionUtils.addToList(rulerWidgets, widget);
 
@@ -397,7 +522,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	public void addSideWidgetsPanel(@NonNull SideWidgetsPanel panel) {
 		if (sideWidgetsPanels != null) {
 			sideWidgetsPanels = CollectionUtils.addToList(sideWidgetsPanels, panel);
-			panel.updateColors(calculateTextState(false));
+			panel.applyPanelAppearance(calculatePanelAppearance(WidgetsPanel.RIGHT));
 		}
 	}
 
@@ -410,7 +535,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	public void addAdditionalWidgetsContainer(@NonNull WidgetsContainer container) {
 		if (additionalWidgets != null) {
 			additionalWidgets = CollectionUtils.addToList(additionalWidgets, container);
-			container.updateColors(calculateTextState(false));
+			container.applyPanelAppearance(calculatePanelAppearance(WidgetsPanel.TOP));
 		}
 	}
 
@@ -424,58 +549,74 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		routeLayer.setTrackChartPoints(trackChartPoints);
 	}
 
-	public static class TextState {
-		public boolean textBold;
-		public boolean night;
-		public int textColor;
-		public int textShadowColor;
-		public int secondaryTextColor;
-		public int boxTop;
-		public int widgetBackgroundId;
-		public int boxFree;
-		public int textShadowRadius;
-		public int widgetDividerColorId;
-		public int panelBorderColorId;
-	}
-
 	public void updateColorShadowsOfText() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return;
 		}
 		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(mapActivity);
-		boolean transparent = view.getSettings().getTransparentMapThemePreference(layoutMode).get();
-		boolean nightMode = drawSettings != null && drawSettings.isNightMode();
+		boolean nightMode = resolveMapNightMode();
 		boolean following = routeLayer.getHelper().isFollowingMode();
-		int calcThemeId = (transparent ? 4 : 0) | (nightMode ? 2 : 0) | (following ? 1 : 0);
-		if (themeId != calcThemeId) {
-			themeId = calcThemeId;
-			TextState verticalWidgetsState = calculateTextState(true);
-			TextState sideWidgetsState = calculateTextState(false);
+		long appearanceRevision = appearanceSettingsManager.getRevision();
+		long committedAppearanceRevision = appearanceSettingsManager.getCommittedRevision();
+		boolean contextChanged = appliedLayoutMode != layoutMode
+				|| appliedNightMode != nightMode
+				|| appliedFollowingMode != following;
+		boolean updateAppearance = !colorsInitialized
+				|| appliedAppearanceRevision != appearanceRevision
+				|| contextChanged;
+		boolean updateSystemBars = !systemBarsInitialized
+				|| appliedCommittedAppearanceRevision != committedAppearanceRevision
+				|| contextChanged;
+		if (updateAppearance) {
+			colorsInitialized = true;
+			appliedAppearanceRevision = appearanceRevision;
+			appliedLayoutMode = layoutMode;
+			appliedNightMode = nightMode;
+			appliedFollowingMode = following;
+			ResolvedPanelAppearance leftAppearance = calculatePanelAppearance(WidgetsPanel.LEFT, layoutMode, nightMode, following);
+			ResolvedPanelAppearance rightAppearance = calculatePanelAppearance(WidgetsPanel.RIGHT, layoutMode, nightMode, following);
+			ResolvedPanelAppearance topAppearance = calculatePanelAppearance(WidgetsPanel.TOP, layoutMode, nightMode, following);
+			ResolvedPanelAppearance bottomAppearance = calculatePanelAppearance(WidgetsPanel.BOTTOM, layoutMode, nightMode, following);
 			for (MapWidgetInfo widgetInfo : widgetRegistry.getSideWidgets()) {
-				widgetInfo.widget.updateColors(sideWidgetsState);
+				boolean right = widgetInfo.getWidgetPanel() == WidgetsPanel.RIGHT;
+				widgetInfo.widget.applyPanelAppearance(right ? rightAppearance : leftAppearance);
 			}
 			for (MapWidgetInfo widgetInfo : widgetRegistry.getVerticalWidgets()) {
-				widgetInfo.widget.updateColors(verticalWidgetsState);
+				boolean bottom = widgetInfo.getWidgetPanel() == WidgetsPanel.BOTTOM;
+				widgetInfo.widget.applyPanelAppearance(bottom ? bottomAppearance : topAppearance);
 			}
 			updateTopToolbar(nightMode);
-			leftWidgetsPanel.updateColors(sideWidgetsState);
-			rightWidgetsPanel.updateColors(sideWidgetsState);
+			leftWidgetsPanel.applyPanelAppearance(leftAppearance);
+			rightWidgetsPanel.applyPanelAppearance(rightAppearance);
 
-			topWidgetsPanel.updateColors(verticalWidgetsState);
-			bottomWidgetsPanel.updateColors(verticalWidgetsState);
+			topWidgetsPanel.applyPanelAppearance(topAppearance);
+			bottomWidgetsPanel.applyPanelAppearance(bottomAppearance);
 
+			ResolvedPanelAppearance rulerAppearance = calculateRulerAppearance(layoutMode, nightMode, following);
 			for (RulerWidget rulerWidget : rulerWidgets) {
-				rulerWidget.updateTextSize(nightMode, sideWidgetsState.textColor, sideWidgetsState.textShadowColor, (int) (2 * view.getDensity()));
+				rulerWidget.updateTextSize(nightMode, rulerAppearance.getPrimaryTextColor(),
+						rulerAppearance.getTextShadowColor(), (int) (2 * view.getDensity()));
 			}
 			for (SideWidgetsPanel panel : sideWidgetsPanels) {
-				panel.updateColors(sideWidgetsState);
+				panel.applyPanelAppearance(rightAppearance);
 			}
 			for (WidgetsContainer container : additionalWidgets) {
-				container.updateColors(verticalWidgetsState);
+				container.applyPanelAppearance(topAppearance);
 			}
 			androidAutoMapPlaceholderView.updateNightMode(nightMode);
 		}
+		if (updateSystemBars) {
+			systemBarsInitialized = true;
+			appliedCommittedAppearanceRevision = committedAppearanceRevision;
+			mapActivity.updateStatusBarColor();
+		}
+	}
+
+	private boolean resolveMapNightMode() {
+		return drawSettings != null
+				? drawSettings.isNightMode()
+				: app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
 	}
 
 	public void updateTopToolbar() {
@@ -487,50 +628,34 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	}
 
 	@NonNull
-	private TextState calculateTextState(boolean verticalWidget) {
+	private ResolvedPanelAppearance calculatePanelAppearance(@NonNull WidgetsPanel panel) {
 		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(requireMapActivity());
-		boolean transparent = view.getSettings().getTransparentMapThemePreference(layoutMode).get();
-		boolean nightMode = drawSettings != null && drawSettings.isNightMode();
+		boolean nightMode = resolveMapNightMode();
 		boolean following = routeLayer.getHelper().isFollowingMode();
-		TextState ts = new TextState();
-		ts.textBold = following;
-		ts.night = nightMode;
-		if (verticalWidget) {
-			ts.textColor = ColorUtilities.getPrimaryTextColor(getContext(), nightMode);
-		} else {
-			int textColorId = nightMode ? R.color.widgettext_night : R.color.widgettext_day;
-			ts.textColor = ColorUtilities.getColor(getContext(), textColorId);
-		}
-		ts.secondaryTextColor = ColorUtilities.getSecondaryTextColor(getContext(), nightMode);
+		return calculatePanelAppearance(panel, layoutMode, nightMode, following);
+	}
 
-		// Night shadowColor always use widgettext_shadow_night, same as widget background color for non-transparent
-		ts.textShadowColor = nightMode ? ContextCompat.getColor(getContext(), R.color.widgettext_shadow_night) :
-				ContextCompat.getColor(getContext(), R.color.widgettext_shadow_day);
-		if (!transparent && !nightMode) {
-			ts.textShadowRadius = 0;
-		} else {
-			ts.textShadowRadius = (int) (4 * view.getDensity());
-		}
-		if (transparent) {
-			ts.boxTop = R.drawable.btn_flat_transparent;
-			ts.widgetBackgroundId = R.drawable.bg_side_widget_transparent;
-			ts.boxFree = R.drawable.btn_round_transparent;
-			ts.widgetDividerColorId = R.color.widget_divider_transparent;
-			ts.panelBorderColorId = R.color.widget_panel_border_transparent;
-		} else if (nightMode) {
-			ts.boxTop = R.drawable.btn_flat_night;
-			ts.widgetBackgroundId = verticalWidget ? R.drawable.bs_vertical_widget_night : R.drawable.bs_side_widget_night;
-			ts.boxFree = R.drawable.btn_round_night;
-			ts.widgetDividerColorId = R.color.divider_color_dark;
-			ts.panelBorderColorId = R.color.icon_color_secondary_dark;
-		} else {
-			ts.boxTop = R.drawable.btn_flat;
-			ts.widgetBackgroundId = R.drawable.bg_side_widget_day;
-			ts.boxFree = R.drawable.btn_round;
-			ts.widgetDividerColorId = verticalWidget ? R.color.widget_background_color_light : R.color.divider_color_light;
-			ts.panelBorderColorId = R.color.stroked_buttons_and_links_outline_light;
-		}
-		return ts;
+	@NonNull
+	private ResolvedPanelAppearance calculatePanelAppearance(@NonNull WidgetsPanel panel,
+	                                                        @Nullable ScreenLayoutMode layoutMode,
+	                                                        boolean nightMode, boolean following) {
+		return appearanceSettingsManager.resolve(panel, layoutMode, nightMode, following,
+				view.getDensity(), true);
+	}
+
+	@NonNull
+	private ResolvedPanelAppearance calculateRulerAppearance() {
+		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(requireMapActivity());
+		boolean nightMode = resolveMapNightMode();
+		boolean following = routeLayer.getHelper().isFollowingMode();
+		return calculateRulerAppearance(layoutMode, nightMode, following);
+	}
+
+	@NonNull
+	private ResolvedPanelAppearance calculateRulerAppearance(@Nullable ScreenLayoutMode layoutMode,
+	                                                        boolean nightMode, boolean following) {
+		return appearanceSettingsManager.resolve(WidgetsPanel.LEFT, layoutMode, nightMode, following,
+				view.getDensity(), false);
 	}
 
 	@Override
@@ -540,10 +665,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			updateColorShadowsOfText();
 			updateWidgetsInfo(drawSettings);
 
-			leftWidgetsPanel.update(drawSettings);
-			rightWidgetsPanel.update(drawSettings);
-			topWidgetsPanel.update(drawSettings);
-			bottomWidgetsPanel.update(drawSettings);
+			updateMainWidgetPanels();
 			topToolbarView.updateInfo();
 			alarmWidget.updateInfo(drawSettings, false);
 			speedometerWidget.updateInfo(drawSettings);
@@ -560,7 +682,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		}
 	}
 
-	private void updateWidgetsInfo(@NonNull DrawSettings drawSettings) {
+	private void updateWidgetsInfo(@Nullable DrawSettings drawSettings) {
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
 			ApplicationMode appMode = settings.getApplicationMode();

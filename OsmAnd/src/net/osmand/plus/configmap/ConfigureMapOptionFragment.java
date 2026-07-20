@@ -3,6 +3,7 @@ package net.osmand.plus.configmap;
 import static net.osmand.plus.widgets.dialogbutton.DialogButtonType.PRIMARY;
 import static net.osmand.plus.widgets.dialogbutton.DialogButtonType.STROKED;
 
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -27,10 +28,12 @@ import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.views.MapLayers;
+import net.osmand.plus.views.controls.MapHudLayout;
 import net.osmand.plus.views.controls.maphudbuttons.Map3DButton;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
+import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControllerType;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
@@ -73,11 +76,24 @@ public abstract class ConfigureMapOptionFragment extends BaseFullScreenFragment 
 		mapButtons = new ArrayList<>();
 		setupApplyButton(applyButton = view.findViewById(R.id.apply_button));
 		setupToolBar(view);
-		buildZoomButtons(view);
-		moveMap3DButton(view);
+		if (!shouldShowMapWidgets()) {
+			buildZoomButtons(view);
+			moveMap3DButton(view);
+		}
 		setupBackgroundShadow(view);
 		setupBottomContainer(view.findViewById(R.id.bottom_container));
 		setupMainContent(view.findViewById(R.id.main_content));
+		if (shouldShowMapWidgets()) {
+			View.OnLayoutChangeListener listener = (changedView, left, top, right, bottom,
+					oldLeft, oldTop, oldRight, oldBottom) -> {
+				if (isResumed() && (left != oldLeft || top != oldTop || right != oldRight || bottom != oldBottom)) {
+					view.post(() -> updateMapHudVisibleArea(activity, view, false));
+				}
+			};
+			view.findViewById(R.id.appbar).addOnLayoutChangeListener(listener);
+			view.findViewById(R.id.bottom_container).addOnLayoutChangeListener(listener);
+			view.findViewById(R.id.map_controls_container).addOnLayoutChangeListener(listener);
+		}
 
 		refreshMap();
 		refreshControlsButtons();
@@ -190,13 +206,25 @@ public abstract class ConfigureMapOptionFragment extends BaseFullScreenFragment 
 		}
 	}
 
+	public boolean shouldShowMapWidgets() {
+		return false;
+	}
+
 	@Override
 	public void onResume() {
 		super.onResume();
 
 		MapActivity activity = requireMapActivity();
 		activity.disableDrawer();
-		updateWidgetsVisibility(activity, View.GONE);
+		if (shouldShowMapWidgets()) {
+			activity.hideTopToolbar(TopToolbarControllerType.SUGGEST_MAP);
+			View view = getView();
+			if (view != null) {
+				view.post(() -> updateMapHudVisibleArea(activity, view, true));
+			}
+		} else {
+			updateWidgetsVisibility(activity, View.GONE);
+		}
 	}
 
 	@Override
@@ -205,7 +233,53 @@ public abstract class ConfigureMapOptionFragment extends BaseFullScreenFragment 
 
 		MapActivity activity = requireMapActivity();
 		activity.enableDrawer();
-		updateWidgetsVisibility(activity, View.VISIBLE);
+		if (shouldShowMapWidgets()) {
+			MapHudLayout mapHudLayout = activity.findViewById(R.id.map_hud_layout);
+			if (mapHudLayout != null) {
+				mapHudLayout.clearExternalVisibleArea();
+			}
+			refreshPreviewControls(activity);
+		} else {
+			updateWidgetsVisibility(activity, View.VISIBLE);
+		}
+	}
+
+	private void updateMapHudVisibleArea(@NonNull MapActivity activity, @NonNull View view, boolean forceRefresh) {
+		Rect visibleArea = new Rect();
+		if (AndroidUiHelper.isPortrait(activity)) {
+			if (!view.getGlobalVisibleRect(visibleArea)) {
+				return;
+			}
+			Rect overlayBounds = new Rect();
+			View appBar = view.findViewById(R.id.appbar);
+			if (appBar.getGlobalVisibleRect(overlayBounds)) {
+				visibleArea.top = Math.max(visibleArea.top, overlayBounds.bottom);
+			}
+			View bottomContainer = view.findViewById(R.id.bottom_container);
+			if (bottomContainer.getGlobalVisibleRect(overlayBounds)) {
+				visibleArea.bottom = Math.min(visibleArea.bottom, overlayBounds.top);
+			}
+		} else {
+			View mapArea = view.findViewById(R.id.map_controls_container);
+			if (!mapArea.getGlobalVisibleRect(visibleArea)) {
+				return;
+			}
+		}
+
+		MapHudLayout mapHudLayout = activity.findViewById(R.id.map_hud_layout);
+		if (mapHudLayout != null && (mapHudLayout.setExternalVisibleArea(visibleArea) || forceRefresh)) {
+			refreshPreviewControls(activity);
+		}
+	}
+
+	private void refreshPreviewControls(@NonNull MapActivity activity) {
+		MapLayers mapLayers = activity.getMapLayers();
+		MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();
+		if (mapInfoLayer != null) {
+			mapInfoLayer.refreshWidgetPanels();
+		}
+		refreshControlsButtons();
+		activity.refreshMap();
 	}
 
 	protected void dismiss() {

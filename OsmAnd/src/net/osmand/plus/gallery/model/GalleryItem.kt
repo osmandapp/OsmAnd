@@ -34,7 +34,8 @@ sealed class GalleryItem {
 	data object MediaCount : GalleryItem()
 
 	data class SortBar(
-		val sortMode: GallerySortMode
+		val sortMode: GallerySortMode,
+		val sortModes: List<GallerySortMode> = GallerySortMode.entries
 	) : GalleryItem()
 
 	data class MediaStats(

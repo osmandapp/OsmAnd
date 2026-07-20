@@ -1495,6 +1495,7 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> ONLINE_PHOTOS_ROW_COLLAPSED = new BooleanPreference(this, "online_photos_menu_collapsed", true).makeGlobal().makeShared();
 	public final OsmandPreference<Boolean> EXPLORE_NEARBY_ITEMS_ROW_COLLAPSED = new BooleanPreference(this, "online_photos_menu_collapsed", true).makeGlobal().makeShared();
+	public final OsmandPreference<Boolean> EXPLORE_HISTORY_ROW_COLLAPSED = new BooleanPreference(this, "explore_history_menu_collapsed", true).makeGlobal().makeShared();
 	public final OsmandPreference<Boolean> ATTACHED_MEDIA_ROW_COLLAPSED = new BooleanPreference(this, "attached_media_menu_collapsed", true).makeGlobal().makeShared();
 	public final OsmandPreference<Boolean> WEBGL_SUPPORTED = new BooleanPreference(this, "webgl_supported", true).makeGlobal();
 

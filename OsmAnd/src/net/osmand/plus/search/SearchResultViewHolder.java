@@ -70,11 +70,12 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 		TextView subtitle = view.findViewById(R.id.subtitle);
 		ImageView imageView = view.findViewById(R.id.imageView);
 
+		OsmandApplication app = (OsmandApplication) view.getContext().getApplicationContext();
 		imageView.setImageDrawable(item.getIcon());
+		setupIconContainer(view, imageView, app);
 		String name = item.getName();
 		title.setText(item.getSpannableName());
 
-		OsmandApplication app = (OsmandApplication) view.getContext().getApplicationContext();
 		String desc = item.getTypeName();
 		Object searchResultObject = item.getSearchResult().object;
 		if (searchResultObject instanceof AbstractPoiType) {
@@ -147,6 +148,22 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 			} else {
 				timeLayout.setVisibility(View.GONE);
 			}
+		}
+	}
+
+	private static void setupIconContainer(@NonNull View view, @NonNull ImageView imageView,
+	                                       @NonNull OsmandApplication app) {
+		FrameLayout imageContainer = view.findViewById(R.id.image_container);
+		if (imageContainer != null) {
+			FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) imageView.getLayoutParams();
+			params.width = AndroidUtils.dpToPx(app, 24);
+			params.height = AndroidUtils.dpToPx(app, 24);
+			params.gravity = Gravity.CENTER;
+			imageView.setLayoutParams(params);
+			imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+
+			int margin = AndroidUtils.dpToPx(app, 6);
+			imageContainer.setPadding(margin, margin, margin, margin);
 		}
 	}
 
@@ -336,4 +353,3 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 		}
 	}
 }
-

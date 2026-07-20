@@ -3165,7 +3165,7 @@
     <string name="poi_gorge">Kanjono</string>
     <string name="poi_couloir">Akvosulko</string>
     <string name="poi_mountain_area">Montara areo</string>
-    <string name="poi_surface_clay">argilo</string>
+    <string name="poi_surface_clay">Pavimo: argilo</string>
     <string name="poi_surface_tartan">tartano</string>
     <string name="poi_surface_artificial_turf">artefarita herbo</string>
     <string name="poi_surface_decoturf">DecoTurf</string>
@@ -5173,4 +5173,5 @@
     <string name="poi_rapids_grade_x">X (nenetraflosebla)</string>
     <string name="poi_water_type_filter">Speco de akvujo</string>
     <string name="poi_water_lake">lago</string>
+    <string name="poi_surface_laterite">Pavimo: laterito</string>
 </resources>

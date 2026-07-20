@@ -69,6 +69,7 @@ public class BinaryMapPoiReaderAdapter {
 		//int estiatedSize;
 		public List<String> possibleValues = null;
 		public TIntArrayList possibleValuesFreqs = null;
+		public List<String> wikidataIds = null;
 		
 		public boolean isTopIndex() {
 			return name.startsWith(MapPoiTypes.TOP_INDEX_ADDITIONAL_PREFIX);
@@ -350,6 +351,12 @@ public class BinaryMapPoiReaderAdapter {
 						break;
 					case OsmandOdb.OsmAndPoiSubtype.FREQUENCY_FIELD_NUMBER:
 						st.frequency = codedIS.readUInt32();
+						break;
+					case OsmandOdb.OsmAndPoiSubtype.SUBCATWIKIDATAIDS_FIELD_NUMBER:
+						if (st.wikidataIds == null) {
+							st.wikidataIds = new ArrayList<String>();
+						}
+						st.wikidataIds.add(codedIS.readString().intern());
 						break;
 					case OsmandOdb.OsmAndPoiSubtype.SUBTYPEVALUE_FIELD_NUMBER:
 						if (st.possibleValues == null) {

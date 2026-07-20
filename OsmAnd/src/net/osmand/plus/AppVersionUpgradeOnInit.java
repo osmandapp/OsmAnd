@@ -71,6 +71,7 @@ import net.osmand.plus.settings.coordinates.CoordinateFormatSettingsStorage;
 import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.enums.GridFormat;
 import net.osmand.plus.settings.enums.LocalSortMode;
+import net.osmand.plus.settings.enums.PanelBackgroundMode;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
@@ -78,6 +79,7 @@ import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsIdsMapper;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.configure.appearance.PanelAppearanceSettings;
 import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 import net.osmand.util.Algorithms;
 
@@ -172,8 +174,9 @@ public class AppVersionUpgradeOnInit {
 	public static final int VERSION_5_3_04 = 5304;
 	public static final int VERSION_5_3_05 = 5305;
 	public static final int VERSION_5_3_06 = 5306;
+	public static final int VERSION_5_4_01 = 5401;
 
-	public static final int LAST_APP_VERSION = VERSION_5_3_06;
+	public static final int LAST_APP_VERSION = VERSION_5_4_01;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -345,6 +348,11 @@ public class AppVersionUpgradeOnInit {
 				}
 				if (prevAppVersion < VERSION_5_3_06) {
 					migrateCoordinateFormatSettings(settings);
+				}
+				if (prevAppVersion < VERSION_5_4_01) {
+					app.getAppInitializer().addOnStartListener(
+							init -> migrateTransparentWidgetsToPanelsAppearance()
+					);
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -1083,6 +1091,24 @@ public class AppVersionUpgradeOnInit {
 		}
 	}
 
+	private void migrateTransparentWidgetsToPanelsAppearance() {
+		OsmandSettings settings = app.getSettings();
+		List<ScreenLayoutMode> layoutModes = new ArrayList<>(Arrays.asList(ScreenLayoutMode.values()));
+		layoutModes.add(null);
+
+		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
+			for (ScreenLayoutMode layoutMode : layoutModes) {
+				CommonPreference<Boolean> transparentPreference = settings.getTransparentMapThemePreference(layoutMode);
+				if (transparentPreference.isSetForMode(appMode) && transparentPreference.getModeValue(appMode)) {
+					for (WidgetsPanel panel : WidgetsPanel.values()) {
+						PanelAppearanceSettings appearanceSettings = app.getPanelAppearanceSettingsManager().get(panel);
+						appearanceSettings.getBackgroundModePref(layoutMode).setModeValue(appMode, PanelBackgroundMode.TRANSPARENT);
+					}
+				}
+			}
+		}
+	}
+
 	private void migrateWidgetPanelsPages() {
 		OsmandSettings settings = app.getSettings();
 		for (WidgetsPanel panel : WidgetsPanel.values()) {
@@ -1205,7 +1231,9 @@ public class AppVersionUpgradeOnInit {
 			case LocationConvert.FORMAT_MINUTES -> GridFormat.DM;
 			case LocationConvert.FORMAT_DEGREES -> GridFormat.DIGITAL;
 			case LocationConvert.UTM_FORMAT -> GridFormat.UTM;
+			case LocationConvert.OLC_FORMAT -> GridFormat.OLC;
 			case LocationConvert.MGRS_FORMAT -> GridFormat.MGRS;
+			case LocationConvert.MAIDENHEAD_FORMAT -> GridFormat.MAIDENHEAD;
 			default -> GridFormat.DIGITAL;
 		};
 	}

@@ -239,7 +239,7 @@
     <string name="poi_ticket">Εισιτήρια</string>
     <string name="poi_tobacco">Καπνοπωλείο</string>
     <string name="poi_toys">Κατάστημα παιχνιδιών</string>
-    <string name="poi_tyres">Κατάστημα ελαστικών</string>
+    <string name="poi_tyres">Κατάστημα ελαστικών;Λάστιχα;Ελαστικά</string>
     <string name="poi_vacuum_cleaner">Ηλεκτρικές σκούπες</string>
     <string name="poi_video">Βιντεάδικο</string>
     <string name="poi_department_store">Πολυκατάστημα</string>
@@ -1981,7 +1981,7 @@
     <string name="poi_service_bicycle_rental_no">Ενοικίαση ποδηλάτου: όχι</string>
     <string name="poi_service_bicycle_pump_yes">Τρόμπα ποδηλάτου;Τρόμπα δίκυκλου;Τρόμπα</string>
     <string name="poi_service_bicycle_pump_no">Τρόμπα ποδηλάτου: όχι</string>
-    <string name="poi_service_bicycle_diy_yes">Εργαλεία για ιδιοεπισκευή</string>
+    <string name="poi_service_bicycle_diy_yes">Εργαλεία για ιδιοεπισκευή;DIY εργαλεία;Επισκευή DIY;Ποδήλατα DIY;Επισκευή ποδηλάτων DIY; DIY επισκευή</string>
     <string name="poi_service_bicycle_diy_no">Εργαλεία ποδηλάτου για ιδιοεπισκευή: όχι</string>
     <string name="poi_service_bicycle_cleaning_yes">Καθαρισμός;Καθαρισμός ποδηλάτου;Καθαρισμός δίκυκλου</string>
     <string name="poi_service_bicycle_cleaning_no">Καθαρισμός ποδηλάτου: όχι</string>
@@ -3339,8 +3339,8 @@
     <string name="poi_climbing_rock_quartzite">Πέτρωμα αναρρίχησης: χαλαζίτης</string>
     <string name="poi_climbing_rock_gneiss">Πέτρωμα αναρρίχησης: γνεύσιος</string>
     <string name="poi_climbing_rock_porphyry">Πέτρωμα αναρρίχησης: πορφυρίτης</string>
-    <string name="poi_climbing_quality_solid">Στερεό</string>
-    <string name="poi_climbing_quality_fragile">Εύθριπτο</string>
+    <string name="poi_climbing_quality_solid">Συμπαγής</string>
+    <string name="poi_climbing_quality_fragile">Εύθρυπτο</string>
     <string name="poi_climbing_bolted_yes">Σταθερά σημεία: ναι</string>
     <string name="poi_climbing_bolted_no">Σταθερά σημεία: όχι</string>
     <string name="poi_climbing_orientation_n">Προσανατολισμός του τοίχου: Β</string>
@@ -4704,4 +4704,6 @@
     <string name="poi_denomination_bektashi">Μπεκτασήδες</string>
     <string name="poi_water_source_water_works">Μονάδα επεξεργασίας νερού</string>
     <string name="poi_us_maps_recreation_area_facility_rapid">Ορμητικό ρεύμα</string>
+    <string name="poi_climbing_rock_gritstone">Πέτρωμα αναρρίχησης: σκληρός αμμόλιθος</string>
+    <string name="poi_climbing_rock_conglomerate">Πέτρωμα αναρρίχησης: κροκαλοπαγές</string>
 </resources>

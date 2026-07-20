@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:minHeight="@dimen/list_group_header_height"
 	android:orientation="vertical">
 
 	<View
@@ -10,19 +10,9 @@
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/content_padding" />
 
-	<TextView
-		android:id="@+id/title"
+	<include
+		android:id="@+id/header"
+		layout="@layout/list_item_text_header"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:background="@drawable/bg_quick_search_history_group_header"
-		android:gravity="center_vertical"
-		android:minHeight="48dp"
-		android:paddingStart="@dimen/content_padding"
-		android:paddingTop="@dimen/content_padding_small"
-		android:paddingEnd="@dimen/content_padding"
-		android:paddingBottom="@dimen/content_padding_half"
-		android:textColor="?android:textColorPrimary"
-		android:textSize="@dimen/default_list_text_size"
-		android:textStyle="bold"
-		tools:text="Today" />
+		android:layout_height="wrap_content" />
 </LinearLayout>

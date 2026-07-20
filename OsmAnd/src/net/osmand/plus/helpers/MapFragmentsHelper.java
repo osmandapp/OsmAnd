@@ -52,6 +52,7 @@ import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.track.fragments.GpsFilterFragment;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.views.mapwidgets.configure.appearance.WidgetsAppearanceFragment;
 import net.osmand.plus.utils.AndroidUtils;
 
 import org.apache.commons.logging.Log;
@@ -221,6 +222,11 @@ public class MapFragmentsHelper implements OnPreferenceStartFragmentCallback {
 	@Nullable
 	public ConfigureMapOptionFragment getConfigureMapOptionFragment() {
 		return getFragment(ConfigureMapOptionFragment.TAG);
+	}
+
+	@Nullable
+	public WidgetsAppearanceFragment getWidgetsAppearanceFragment() {
+		return getFragment(WidgetsAppearanceFragment.Companion.getTAG());
 	}
 
 	@Nullable

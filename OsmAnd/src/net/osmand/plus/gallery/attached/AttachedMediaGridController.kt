@@ -25,7 +25,6 @@ import net.osmand.plus.gallery.model.GallerySortMode
 import net.osmand.plus.gallery.model.GalleryToolbarAction
 import net.osmand.plus.gallery.model.MediaHolder
 import net.osmand.plus.gallery.ui.GalleryGridFragment
-import net.osmand.plus.gallery.ui.holders.SortBarHolder.Companion.SORT_ACTION
 import net.osmand.plus.myplaces.favorites.FavoriteGroup
 import net.osmand.plus.settings.backend.backup.exporttype.AttachedMediaExportType
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType
@@ -145,7 +144,7 @@ class AttachedMediaGridController(
 	override fun getGalleryItems(): List<GalleryItem> {
 		val media = sortMedia(getMediaItems())
 		val items = mutableListOf<GalleryItem>()
-		items.add(GalleryItem.SortBar(sortMode))
+		items.add(GalleryItem.SortBar(sortMode, getAvailableSortModes()))
 		if (media.isEmpty()) {
 			return items
 		}
@@ -178,6 +177,9 @@ class AttachedMediaGridController(
 		}
 	}
 
+	private fun getAvailableSortModes(): List<GallerySortMode> =
+		GallerySortMode.entries.filter { it != GallerySortMode.NEAREST || latLon != null }
+
 	private fun metadataOf(item: MediaItem): GalleryMediaMetadata? =
 		metadataRepository.getCached(item)
 
@@ -209,10 +211,13 @@ class AttachedMediaGridController(
 			EDIT_ACTION -> enterSelectionMode(null)
 			SELECT_ALL_ACTION -> toggleSelectAll()
 			ACTIONS_MENU_ACTION -> showSelectionActionsMenu(v)
-			SORT_ACTION -> showSortMenu(v)
 			EXPORT_ACTION -> exportSelectedMedia()
 			DELETE_ACTION -> showDeleteDialog()
 		}
+	}
+
+	override fun onSortModeSelected(sortMode: GallerySortMode) {
+		setSortMode(sortMode)
 	}
 
 	private fun showDeleteDialog() {
@@ -282,26 +287,6 @@ class AttachedMediaGridController(
 				.setOnClickListener { handleGalleryAction(anchor, DELETE_ACTION) }
 				.create()
 		)
-		val data = PopUpMenuDisplayData()
-		data.anchorView = anchor
-		data.menuItems = items
-		data.nightMode = nightMode
-		data.widthMode = PopUpMenuWidthMode.STANDARD
-		PopUpMenu.show(data)
-	}
-
-	private fun showSortMenu(anchor: View) {
-		val nightMode = view?.isNightMode() ?: false
-		val iconColor = ColorUtilities.getDefaultIconColor(app, nightMode)
-		val modes = GallerySortMode.entries.filter { it != GallerySortMode.NEAREST || latLon != null }
-		val items = modes.map { mode ->
-			PopUpMenuItem.Builder(app)
-				.setTitleId(mode.titleId)
-				.setIcon(app.uiUtilities.getPaintedIcon(mode.iconId, iconColor))
-				.setSelected(mode == sortMode)
-				.setOnClickListener { setSortMode(mode) }
-				.create()
-		}
 		val data = PopUpMenuDisplayData()
 		data.anchorView = anchor
 		data.menuItems = items

@@ -5589,4 +5589,22 @@
     <string name="required_maps_route_overview">Routeoverzicht:</string>
     <string name="required_maps_calculate_with_existing_maps">Bereken met beschikbare kaarten</string>
     <string name="search_around">Zoek nabij</string>
+    <string name="astro_show_map">Toon kaart</string>
+    <string name="astro_hide_map">Verberg kaart</string>
+    <string name="astro_map_center_location">Kaartcentrum: %1$s</string>
+    <string name="astro_solar_eclipse">Zonsverduistering</string>
+    <string name="astro_solar_eclipse_subtitle">Verken wereldwijde zonsverduisteringen</string>
+    <string name="astro_previous_solar_eclipse">Vorige zonsverduistering</string>
+    <string name="astro_next_solar_eclipse">Volgende zonsverduistering</string>
+    <string name="astro_close_solar_eclipse">Sluit zonsverduisteringsverkenner</string>
+    <string name="astro_total_solar_eclipse">Totale zonsverduistering</string>
+    <string name="astro_annular_solar_eclipse">Ringvormige zonsverduistering</string>
+    <string name="astro_partial_solar_eclipse">Gedeeltelijke zonsverduistering</string>
+    <string name="astro_eclipse_phase_total">Totaal</string>
+    <string name="astro_eclipse_phase_annular">Ringvormig</string>
+    <string name="astro_eclipse_phase_partial">Gedeeltelijk</string>
+    <string name="astro_eclipse_below_horizon">%1$s • onder de horizon (%2$.1f°)</string>
+    <string name="astro_eclipse_start">Start</string>
+    <string name="astro_eclipse_maximum">Maximum</string>
+    <string name="astro_eclipse_end">Einde</string>
 </resources>

@@ -4,7 +4,6 @@ import static android.view.View.INVISIBLE;
 import static net.osmand.plus.utils.AndroidUtils.dpToPx;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
 
-import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.text.TextPaint;
@@ -31,14 +30,14 @@ import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.ViewChangeProvider.ViewChangeListener;
-import net.osmand.plus.views.layers.MapInfoLayer;
-import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.OutlinedTextContainer;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsContextMenu;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.appearance.PanelAppearanceApplier;
+import net.osmand.plus.views.mapwidgets.appearance.ResolvedPanelAppearance;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportMultiRow;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportWidgetResizing;
 import net.osmand.plus.views.mapwidgets.widgetstates.SimpleWidgetState;
@@ -52,8 +51,9 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 	private final SimpleWidgetState widgetState;
 
 	protected OutlinedTextContainer widgetName;
-	protected TextState textState;
 	private boolean isFullRow;
+	@Nullable
+	private WidgetSize renderedWidgetSize;
 
 	public SimpleWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType,
 	                    @Nullable String customId, @Nullable WidgetsPanel panel) {
@@ -74,6 +74,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 		container.removeAllViews();
 
 		int layoutId = getContentLayoutId();
+		renderedWidgetSize = resolveWidgetSize(widgetState.getWidgetSizePref().get());
 		UiUtilities.getInflater(mapActivity, nightMode).inflate(layoutId, container);
 		findViews();
 		container.setOnLongClickListener(v -> {
@@ -97,7 +98,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 
 	@Override
 	public void updateValueAlign(boolean fullRow) {
-		if (WidgetSize.SMALL != getWidgetSizePref().get()) {
+		if (WidgetSize.SMALL != resolveWidgetSize(getWidgetSizePref().get())) {
 			ViewGroup.LayoutParams textViewLayoutParams = textView.getLayoutParams();
 			if (textViewLayoutParams instanceof FrameLayout.LayoutParams) {
 				FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) textView.getLayoutParams();
@@ -127,7 +128,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 
 	@LayoutRes
 	private int getProperSideLayoutId(@NonNull SimpleWidgetState simpleWidgetState) {
-		return switch (simpleWidgetState.getWidgetSizePref().get()) {
+		return switch (resolveWidgetSize(simpleWidgetState.getWidgetSizePref().get())) {
 			case SMALL -> R.layout.map_hud_widget;
 			case LARGE -> R.layout.simple_map_widget_large;
 			default -> R.layout.simple_map_widget_medium;
@@ -136,7 +137,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 
 	@LayoutRes
 	private int getProperVerticalLayoutId(@NonNull SimpleWidgetState simpleWidgetState) {
-		return switch (simpleWidgetState.getWidgetSizePref().get()) {
+		return switch (resolveWidgetSize(simpleWidgetState.getWidgetSizePref().get())) {
 			case SMALL ->
 					isFullRow ? R.layout.simple_map_widget_small_full : R.layout.simple_map_widget_small;
 			case LARGE -> R.layout.simple_map_widget_large;
@@ -156,7 +157,8 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 	}
 
 	public boolean shouldShowIcon() {
-		return widgetState.getShowIconPref().get() || (isSmallSize() && !isVerticalWidget());
+		return isSmallSize() && !isVerticalWidget()
+				|| resolveIconVisibility(widgetState.getShowIconPref().get());
 	}
 
 	@NonNull
@@ -182,7 +184,8 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 		}
 	}
 
-	public void recreateView() {
+	@Override
+	protected void recreateViewInternal() {
 		initView();
 		ImageView oldImageView = imageView;
 		OutlinedTextContainer oldTextView = textView;
@@ -377,38 +380,39 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 	}
 
 	@Override
-	public void updateColors(@NonNull MapInfoLayer.TextState textState) {
-		this.textState = textState;
+	protected void onPanelAppearanceChanged(@NonNull ResolvedPanelAppearance appearance) {
+		if (renderedWidgetSize != resolveWidgetSize(getWidgetSizePref().get())) {
+			recreateView();
+			return;
+		}
+		AndroidUiHelper.updateVisibility(imageView, shouldShowIcon());
+		if (!isVerticalWidget()) {
+			updateValueAlign(false);
+		}
 		if (isVerticalWidget()) {
-			updateVerticalWidgetColors(textState);
-		} else if (WidgetSize.SMALL != getWidgetSizePref().get() && widgetName != null) {
-			updateVerticalWidgetColors(textState);
-			int typefaceStyle = textState.textBold ? Typeface.BOLD : Typeface.NORMAL;
-			widgetName.setTypeface(Typeface.DEFAULT, typefaceStyle);
-			textView.setTypeface(Typeface.DEFAULT, typefaceStyle);
-			smallTextView.setTypeface(Typeface.DEFAULT, typefaceStyle);
+			applySimpleWidgetAppearance(appearance);
+		} else if (WidgetSize.SMALL != resolveWidgetSize(getWidgetSizePref().get()) && widgetName != null) {
+			applySimpleWidgetAppearance(appearance);
 		} else {
-			super.updateColors(textState);
+			super.onPanelAppearanceChanged(appearance);
 		}
 	}
 
-	protected void updateVerticalWidgetColors(@NonNull MapInfoLayer.TextState textState) {
-		nightMode = textState.night;
-		textView.setTextColor(textState.textColor);
-		smallTextView.setTextColor(textState.secondaryTextColor);
-		widgetName.setTextColor(textState.secondaryTextColor);
+	protected void applySimpleWidgetAppearance(@NonNull ResolvedPanelAppearance appearance) {
+		PanelAppearanceApplier.applyPrimaryText(textView, appearance);
+		PanelAppearanceApplier.applySecondaryText(smallTextView, appearance);
+		PanelAppearanceApplier.applySecondaryText(widgetName, appearance);
 		int iconId = getIconId();
 		if (iconId != 0) {
 			setImageDrawable(iconId);
 		}
-		getView().findViewById(R.id.widget_bg).setBackgroundResource(textState.widgetBackgroundId);
-
-		if (bottomDivider != null) {
-			bottomDivider.setBackgroundResource(textState.widgetDividerColorId);
+		View view = getView();
+		View widgetBg = view.findViewById(R.id.widget_bg);
+		if (widgetBg != view) {
+			view.setBackground(null);
 		}
-		updateTextOutline(textView, textState);
-		updateTextOutline(widgetName, textState);
-		updateTextOutline(smallTextView, textState);
+		PanelAppearanceApplier.applyBackground(widgetBg, appearance);
+		PanelAppearanceApplier.applyDivider(bottomDivider, appearance);
 	}
 
 	@Override
@@ -422,14 +426,11 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 		if (isFullRow != fullRow) {
 			isFullRow = fullRow;
 			recreateView();
-			if (textState != null) {
-				updateColors(textState);
-			}
 			updateInfo(null);
 		}
 	}
 
 	private boolean isSmallSize() {
-		return getWidgetSizePref().get() == WidgetSize.SMALL;
+		return resolveWidgetSize(getWidgetSizePref().get()) == WidgetSize.SMALL;
 	}
 }

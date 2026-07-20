@@ -240,6 +240,7 @@
         <item name="dlg_btn_tertiary_harmful">@drawable/dlg_btn_tertiary_harmful</item>
         <item name="profile_save_btn">@drawable/btn_round_profile_night</item>
         <item name="profile_cancel_btn">@drawable/btn_round_profile_gray_n</item>
+        <item name="btn_history_disabled_card_bg">@drawable/dlg_btn_secondary_dark</item>
 
         <item name="buttonBarNegativeButtonStyle">@style/DialogButtonStyleDark</item>
         <item name="buttonBarPositiveButtonStyle">@style/DialogButtonStyleDark</item>

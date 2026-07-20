@@ -24,7 +24,7 @@
 		layout="@layout/configure_screen_list_item" />
 
 	<include
-		android:id="@+id/transparent_widgets_button"
+		android:id="@+id/appearance_button"
 		layout="@layout/configure_screen_list_item" />
 
 	<include

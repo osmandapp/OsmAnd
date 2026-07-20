@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.BitSet;
 import java.util.Collections;
 import java.util.Comparator;
@@ -15,8 +16,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import gnu.trove.set.hash.TLongHashSet;
+
 import java.util.TreeMap;
 
+import net.osmand.CollatorStringMatcher;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
@@ -25,7 +30,10 @@ import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.search.core.spatial.SpatialSearchContext.SpatialSearchStats;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
+import net.osmand.search.core.spatial.SpatialSearchToken.PartialMatch;
+import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSettings;
 import net.osmand.util.MapUtils;
 import net.osmand.util.SearchAlgorithms;
 
@@ -50,7 +58,12 @@ import net.osmand.util.SearchAlgorithms;
 public class SpatialTextSearch {
 
 	public static class SpatialTextSearchSettings {
+		private SpatialTextSearchSettings() {}
 		
+		public boolean SEARCH_SUGGESTION = false; // incomplete to add '.' in the end
+		// not used in search as maps provided (web could multiply by 1.5x or adjust bbox)
+		public int SUGGESTED_SEARCH_RADIUS_KM = 300;  
+				
 		// lang to deduplicate results
 		public String LANG_DEDUPLICATE = ""; 
 
@@ -68,9 +81,7 @@ public class SpatialTextSearch {
 		// no intersection recorded but streets are nearby
 		public boolean ALLOW_VIRTUAL_STREET_INTERSECTIONS = true;
 		
-		
-		
-		public int[] OPTIM_LIMIT_RADIUS = new int[] {10_000, 30_000, 80_000}; // 
+		public int[] OPTIM_LIMIT_RADIUS = new int[] {10_000, 30_000, 80_000, 200_000}; // 
 //		public int[] OPTIM_LIMIT_RADIUS = new int[] {}; 
 		public int OPTIM_LIMIT_INTERSECTIONS = 30_000; // 10K (fast enough) or 50K (slow) - in new york  26,630 (3) -> 2,502 unique
 		
@@ -120,11 +131,11 @@ public class SpatialTextSearch {
 		public int LIMIT_ATOMIC_OBJECTS = 2;
 
 		// Limit evaluation intersection for unique objects
-		public int LIMIT_ALL_GOALS_MAX_UNIQUE_OBJECTS = 1000;
+		public int LIMIT_STOP_GOALS_ANY_LEVEL_WHEN_REACHED_RES = 1000;
 		// if there are >= 10 results matching 5 words, 4 words match won't be considered
-		public int LIMIT_GOAL_NEXT_LEVEL_MAX_UNIQUE_OBJECTS = 1; // could be 3
-		// don't go level-2 if there are on level matching results
-		public int LIMIT_GOAL_LEVEL_2 = 1;
+		public int LIMIT_STOP_GOALS_LEVEL_1__WHEN_REACHED_RES = 1; // could be 3
+		// overall max without results (evaluate maximum 3 missing words)
+		public int MAX_TOTAL_LIMIT_GOAL_LEVEL = 3;
 		
 		// Hide results under SHOW MORE
 		public int[] SHOW_MORE_WORDS_COUNT = new int[] {3, 20, 100};
@@ -150,6 +161,22 @@ public class SpatialTextSearch {
 				val = e.getValue();
 			}
 			return val;
+		}
+		
+		public static SpatialTextSearchSettings defaultSettings() {
+			return new SpatialTextSearchSettings();
+		}
+		 
+		public static SpatialTextSearchSettings suggestionSettings() {
+			SpatialTextSearchSettings settings = new SpatialTextSearchSettings();
+			settings.SEARCH_STREET_INTERSECTIONS = false;
+			settings.SEARCH_POI_INTERSECTIONS = false;
+			settings.SEARCH_SUGGESTION = true;
+//			settings.SUGGEST_SEARCH_POI_CATEGORY_WITH_REF = false;
+			settings.OPTIM_LIMIT_INTERSECTIONS = 5000;
+			settings.OPTIM_READ_COMMON_WORDS_LIMIT = 500;
+			settings.SUGGESTED_SEARCH_RADIUS_KM = 100;
+			return settings;
 		}
 		
 	}
@@ -197,6 +224,8 @@ public class SpatialTextSearch {
 		public List<SpatialSearchResult> mainResults;
 
 		public List<SpatialSearchResultsList> combinations;
+
+		public SpatialSearchStats stats;
 		
 		public SpatialSearchResult getFirstResult() {
 			return mainResults == null || mainResults.size() == 0 ? null : 
@@ -261,30 +290,21 @@ public class SpatialTextSearch {
 		goals.add(mainGoal);
 
 		int uniqueObjects = 0;
-		int depth = mainGoal.length();
-		int maxDepth = 0;
+		int depth1WithResults = 0;
 		while (!goals.isEmpty()) {
 			BitSet goal = goals.removeFirst();
 			if (!evaluated.add(goal)) {
 				continue;
 			}
-			// stop on level - 2
-			if (maxDepth == 0) {
-				if (uniqueObjects >= ctx.settings.LIMIT_GOAL_LEVEL_2) {
-					maxDepth = depth;
-				}
-			} else if (goal.length() <= maxDepth - 2) {
+			if (ctx.resultMatcher != null && ctx.resultMatcher.isCancelled()) {
+				break;
+			} else if (goal.length() < mainGoal.length() - ctx.settings.MAX_TOTAL_LIMIT_GOAL_LEVEL) {
+				break;
+			} else if (uniqueObjects >= ctx.settings.LIMIT_STOP_GOALS_ANY_LEVEL_WHEN_REACHED_RES) {
+				break;
+			} else if (goal.length() < depth1WithResults) {
 				break;
 			}
-			// stop with condition on level - 1
-			if (goal.length() < depth) {
-				if (ctx.settings.LIMIT_GOAL_NEXT_LEVEL_MAX_UNIQUE_OBJECTS > 0
-						&& uniqueObjects >= ctx.settings.LIMIT_GOAL_NEXT_LEVEL_MAX_UNIQUE_OBJECTS) {
-					break;
-				}
-				depth = goal.length();
-			}
-
 			SpatialSearchResultsList goalRes = cache.get(goal);
 //			System.out.println("EVALUATE GOAL " + goal + " " + (goalRes == null));
 			if (goalRes == null) {
@@ -304,20 +324,34 @@ public class SpatialTextSearch {
 					}
 				}
 			}
+			if (ctx.isCancelled()) {
+				break;
+			}
 			goalRes.loadObjectsAndCalcBuildings(ctx);
 			List<SpatialSearchResult> res = goalRes.sortResults(ctx, ctx.settings.DEDUPLICATE_RES);
 			if (goal.equals(mainGoal) && res.size() == 0) {
 				goalRes = reevalWithExtendedBoundary(ctx, goal, tokens);
+				if (ctx.isCancelled()) {
+					break;
+				}
 				goalRes.loadObjectsAndCalcBuildings(ctx);
 				res = goalRes.sortResults(ctx, ctx.settings.DEDUPLICATE_RES);
 			}
 			if (res.size() > 0) {
+				if (ctx.resultMatcher != null) {
+					for (SpatialSearchResult p : res) {
+						ctx.resultMatcher.publish(p);
+					}
+				}
 				uniqueObjects += res.size();
 				fullResult.add(goalRes);
-				if (ctx.settings.LIMIT_ALL_GOALS_MAX_UNIQUE_OBJECTS > 0
-						&& uniqueObjects >= ctx.settings.LIMIT_ALL_GOALS_MAX_UNIQUE_OBJECTS) {
-					break;
-				}
+				
+			}
+			if (uniqueObjects >= ctx.settings.LIMIT_STOP_GOALS_LEVEL_1__WHEN_REACHED_RES && depth1WithResults == 0) {
+				depth1WithResults = goal.length();
+			}
+			if (ctx.isCancelled()) {
+				break;
 			}
 			BitSet nextGoal = (BitSet) goal.clone();
 			for (int i = nextGoal.length(); (i = nextGoal.previousSetBit(i - 1)) >= 0;) {
@@ -334,10 +368,20 @@ public class SpatialTextSearch {
 
 	private SpatialSearchResultsList reevalWithExtendedBoundary(SpatialSearchContext ctx, BitSet goal, List<SpatialSearchToken> tokens) throws IOException {
 		// Extend boundary for united states addresses (use 50 km radius)
+		enlargeBoundaries(ctx, tokens);
+		SpatialSearchResultsList goalRes = new SpatialSearchResultsList();
+		for (int i = goal.nextSetBit(0); i >= 0; i = goal.nextSetBit(i + 1)) {
+			SpatialSearchToken token = tokens.get(i);
+			goalRes = new SpatialSearchResultsList(ctx, token, goalRes);
+		}
+		return goalRes;
+	}
+
+	private void enlargeBoundaries(SpatialSearchContext ctx, List<SpatialSearchToken> tokens) {
 		int enlarge = 0;
 		for (SpatialSearchToken t : tokens) {
 			for (NameIndexAtom a : t.atoms) {
-				if (a.isBoundary() || a.isCityVillage()) {
+				if (a.isBoundary() || a.isCityVillage() || a.isPostcode()) {
 					double val = ctx.settings.evalEnlargeBoundary(ctx.settings.ENLARGE_BOUNDARIES, 
 							a.coords.dimensionInM());
 					if (val > 0) {
@@ -351,12 +395,6 @@ public class SpatialTextSearch {
 		if (ctx.stats.printLogs) { 
 			System.out.println("Enlarged boundaries " + enlarge);
 		}
-		SpatialSearchResultsList goalRes = new SpatialSearchResultsList();
-		for (int i = goal.nextSetBit(0); i >= 0; i = goal.nextSetBit(i + 1)) {
-			SpatialSearchToken token = tokens.get(i);
-			goalRes = new SpatialSearchResultsList(ctx, token, goalRes);
-		}
-		return goalRes;
 	}
 
 	List<SpatialSearchResultsList> findObjCombinationsSimpleIteration(SpatialSearchContext ctx, List<SpatialSearchToken> tokens) {
@@ -385,9 +423,46 @@ public class SpatialTextSearch {
 
 	}
 	
+	
+	int VERBOSE_RADIUS = -1;
+	private StringBuilder tokenStats(SpatialSearchContext ctx, List<SpatialSearchToken> tokens) {
+		StringBuilder s = new StringBuilder(" ");
+		for (SpatialSearchToken t : tokens) {
+			int[] cnts = new int[ctx.settings.OPTIM_LIMIT_RADIUS.length + 1];
+			int[] bcnts = new int[ctx.settings.OPTIM_LIMIT_RADIUS.length + 1];
+			TLongHashSet set = new TLongHashSet();
+			for (NameIndexAtom a : t.atoms) {
+				if (set.add(a.id)) {
+					cnts[a.nearbyRadius]++;
+					if(a.isBoundary() || a.isCityVillage() || a.isPostcode()) {
+						bcnts[a.nearbyRadius]++;
+					}
+				}
+			}
+			String token = String.format("   - '%s' (%d)", t.word, t.originalOrder + 1);
+			s.append(String.format("\n%-25s %-30s %s", token, Arrays.toString(cnts), Arrays.toString(bcnts)));
+		}
+		// very verbose for debugging
+		if (VERBOSE_RADIUS >= 0) {
+			for (SpatialSearchToken t : tokens) {
+				System.out.println("---------\nToken " + t.word);
+				for (NameIndexAtom a : t.atoms) {
+					if (!a.isPOI()) {
+						continue;
+					}
+					System.out.println(a);
+				}
+			}
+		}
+		return s;
+	}
 
 	public SpatialSearchResults searchAPI(String input, SpatialSearchContext ctx) throws IOException {
 		SpatialSearchResults res = new SpatialSearchResults();
+		if (ctx.settings.SEARCH_SUGGESTION && !input.endsWith(CollatorStringMatcher.INCOMPLETE_DOT + "") && 
+				!input.endsWith(" ")) {
+			input += CollatorStringMatcher.INCOMPLETE_DOT;
+		}
 		ctx.initFiles(cache);
 		res.input = input;
 		
@@ -403,6 +478,10 @@ public class SpatialTextSearch {
 
 		// 3. sort tokens
 		sortTokens(res.tokens);
+		if (ctx.stats.printLogs) {
+			System.out.printf("Token stats '%s' (counts, boundaries): %s\n", input, tokenStats(ctx, res.tokens).toString());
+		}
+
 
 		// 4. find combinations
 		ctx.stats.step2Compute.start();
@@ -416,6 +495,7 @@ public class SpatialTextSearch {
 			combineSortFilterResults(ctx, res);
 		}
 		ctx.stats.step3Sort.finish();
+		res.stats = ctx.stats;
 		return res;
 	}
 
@@ -481,9 +561,13 @@ public class SpatialTextSearch {
 		// split by hyphen as we supposed to index them separately
 		List<String> words = SearchAlgorithms.splitAndNormalize(input, owords, false);
 		List<SpatialSearchToken> tokens = new ArrayList<>();
-		for (int order = 0; order < words.size(); order++) {
-			String w = words.get(order);
-			SpatialSearchToken token = new SpatialSearchToken(ctx.settings.MIN_CHARACTERS_INCOMPLETE, w, owords.get(order), order);
+		for (int ind = 0; ind < words.size(); ind++) {
+			String w = words.get(ind);
+			if (w.equals(SpatialSearchToken.DOT_INCOMPLETE_STRING)) {
+				continue;
+			}
+			SpatialSearchToken token = new SpatialSearchToken(ctx.settings.MIN_CHARACTERS_INCOMPLETE, w,
+					owords.get(ind), tokens.size());
 			tokens.add(token);
 		}
 		return tokens;
@@ -570,7 +654,7 @@ public class SpatialTextSearch {
 		System.out.println(String.format("Index files %.1f ms", (System.nanoTime() - t) / 1e6));
 		SpatialTextSearch a = new SpatialTextSearch();
 		SpatialPoiSearch poiSearch = new SpatialPoiSearch(MapPoiTypes.getDefault());
-		SpatialSearchContext searchContext = new SpatialSearchContext(new SpatialTextSearchSettings(), ls, poiSearch,
+		SpatialSearchContext searchContext = new SpatialSearchContext(SpatialTextSearchSettings.defaultSettings(), ls, poiSearch,
 				null);
 		a.searchTest(query, searchContext, 1000);
 	}

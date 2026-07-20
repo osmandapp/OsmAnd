@@ -37,6 +37,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 	protected Long id = null;
 	private Object referenceFile = null;
 	
+	public static final String NAME_REF_ATTR = "ref";
 	public static final String NAME_PLACE_ATTR = "place";
 	public static final String NAME_ADMIN_LEVEL_ATTR = "admin_level";
 	public static final String NAME_WIKIDATA_ATTR = "wikidata";

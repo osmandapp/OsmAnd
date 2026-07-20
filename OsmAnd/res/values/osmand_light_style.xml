@@ -274,6 +274,7 @@
         <item name="stroked_btn_contour">@drawable/stroked_btn_contour_light</item>
         <item name="profile_save_btn">@drawable/btn_round_profile_blue</item>
         <item name="profile_cancel_btn">@drawable/btn_round_profile_gray</item>
+        <item name="btn_history_disabled_card_bg">@drawable/dlg_btn_secondary_light</item>
 
         <item name="buttonBarNegativeButtonStyle">@style/DialogButtonStyleLight</item>
         <item name="buttonBarPositiveButtonStyle">@style/DialogButtonStyleLight</item>

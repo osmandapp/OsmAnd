@@ -18,7 +18,9 @@ public enum GridFormat implements EnumWithTitleId {
 	DM(LocationConvert.FORMAT_MINUTES, R.string.dd_mm_mmm_format),
 	DIGITAL(LocationConvert.FORMAT_DEGREES, R.string.dd_ddddd_format),
 	UTM(LocationConvert.UTM_FORMAT, R.string.navigate_point_format_utm),
-	MGRS(LocationConvert.MGRS_FORMAT, R.string.navigate_point_format_mgrs);
+	OLC(LocationConvert.OLC_FORMAT, R.string.navigate_point_olc),
+	MGRS(LocationConvert.MGRS_FORMAT, R.string.navigate_point_format_mgrs),
+	MAIDENHEAD(LocationConvert.MAIDENHEAD_FORMAT, R.string.navigate_point_format_maidenhead);
 
 	private final int id;
 	private final int titleId;
@@ -38,8 +40,9 @@ public enum GridFormat implements EnumWithTitleId {
 		return switch (this) {
 			case DMS, DM, DIGITAL -> Projection.WGS84;
 			case UTM -> Projection.UTM;
+			case OLC -> Projection.OLC;
 			case MGRS -> Projection.MGRS;
-			default -> throw new IllegalArgumentException("Unknown GridFormat: " + this);
+			case MAIDENHEAD -> Projection.MLS;
 		};
 	}
 
@@ -49,13 +52,12 @@ public enum GridFormat implements EnumWithTitleId {
 			case DMS -> Format.DMS;
 			case DM -> Format.DM;
 			case DIGITAL -> Format.Decimal;
-			case UTM, MGRS -> Format.values()[0];
-			default -> throw new IllegalArgumentException("Unknown GridFormat: " + this);
+			case UTM, OLC, MGRS, MAIDENHEAD -> Format.Decimal;
 		};
 	}
 
 	public boolean needSuffixes() {
-		return !CollectionUtils.equalsToAny(this, UTM, MGRS);
+		return !CollectionUtils.equalsToAny(this, UTM, OLC, MGRS, MAIDENHEAD);
 	}
 
 	@NonNull
@@ -65,7 +67,9 @@ public enum GridFormat implements EnumWithTitleId {
 			case DM -> CoordinateFormatIds.BUILTIN_DDM;
 			case DIGITAL -> CoordinateFormatIds.BUILTIN_DDD;
 			case UTM -> CoordinateFormatIds.BUILTIN_UTM;
+			case OLC -> CoordinateFormatIds.BUILTIN_OLC;
 			case MGRS -> CoordinateFormatIds.BUILTIN_MGRS;
+			case MAIDENHEAD -> CoordinateFormatIds.BUILTIN_MAIDENHEAD;
 		};
 	}
 
@@ -90,8 +94,12 @@ public enum GridFormat implements EnumWithTitleId {
 			return DIGITAL;
 		} else if (CoordinateFormatIds.BUILTIN_UTM.equals(normalized)) {
 			return UTM;
+		} else if (CoordinateFormatIds.BUILTIN_OLC.equals(normalized)) {
+			return OLC;
 		} else if (CoordinateFormatIds.BUILTIN_MGRS.equals(normalized)) {
 			return MGRS;
+		} else if (CoordinateFormatIds.BUILTIN_MAIDENHEAD.equals(normalized)) {
+			return MAIDENHEAD;
 		}
 		return null;
 	}
@@ -102,7 +110,9 @@ public enum GridFormat implements EnumWithTitleId {
 				DM.getCoordinateFormatId(),
 				DIGITAL.getCoordinateFormatId(),
 				UTM.getCoordinateFormatId(),
-				MGRS.getCoordinateFormatId());
+				OLC.getCoordinateFormatId(),
+				MGRS.getCoordinateFormatId(),
+				MAIDENHEAD.getCoordinateFormatId());
 	}
 }
 

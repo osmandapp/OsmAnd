@@ -22,6 +22,7 @@ public abstract class AbstractPoiType {
 	private String enTranslation;
 	private String translation;
 	private final String iconName;
+	private boolean nonIndx;
 
 	public AbstractPoiType(String keyName, MapPoiTypes registry) {
 		this(keyName, registry, null);
@@ -117,6 +118,14 @@ public abstract class AbstractPoiType {
 		return registry.hasValidTranslation(this);
 	}
 
+	public void setNonIndx(boolean nonIndx) {
+		this.nonIndx = nonIndx;
+	}
+	
+	public boolean isNonIndx() {
+		return nonIndx;
+	}
+	
 	public void addPoiAdditional(PoiType tp) {
 		if (poiAdditionals == null) {
 			poiAdditionals = new ArrayList<>();

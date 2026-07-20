@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 public class PopUpMenuItem {
@@ -18,6 +19,7 @@ public class PopUpMenuItem {
 	private final Integer titleColor;
 	private final Integer titleSize;
 	private final Drawable icon;
+	private final TrailingBadge trailingBadge;
 	private final OnPopUpMenuItemClickListener onClickListener;
 	@ColorInt
 	private final Integer compoundBtnColor;
@@ -32,6 +34,7 @@ public class PopUpMenuItem {
 	                      @ColorInt @Nullable Integer titleColor,
 	                      Integer titleSize,
 	                      Drawable icon,
+	                      TrailingBadge trailingBadge,
 	                      OnPopUpMenuItemClickListener onClickListener,
 	                      Integer compoundBtnColor,
 	                      CompoundButtonType compoundButtonType,
@@ -44,6 +47,7 @@ public class PopUpMenuItem {
 		this.titleColor = titleColor;
 		this.titleSize = titleSize;
 		this.icon = icon;
+		this.trailingBadge = trailingBadge;
 		this.onClickListener = onClickListener;
 		this.compoundBtnColor = compoundBtnColor;
 		this.compoundButtonType = compoundButtonType;
@@ -70,6 +74,11 @@ public class PopUpMenuItem {
 
 	public Drawable getIcon() {
 		return icon;
+	}
+
+	@Nullable
+	public TrailingBadge getTrailingBadge() {
+		return trailingBadge;
 	}
 
 	@Nullable
@@ -111,7 +120,37 @@ public class PopUpMenuItem {
 	}
 
 	public boolean hasCustomization() {
-		return isShowCompoundBtn() || getTitleColor() != null || titleBold;
+		return isShowCompoundBtn() || getTitleColor() != null || titleBold || trailingBadge != null;
+	}
+
+	public static class TrailingBadge {
+		private final Drawable icon;
+		private final CharSequence title;
+		@ColorInt
+		private final Integer titleColor;
+
+		private TrailingBadge(@Nullable Drawable icon, @NonNull CharSequence title,
+		                      @ColorInt @Nullable Integer titleColor) {
+			this.icon = icon;
+			this.title = title;
+			this.titleColor = titleColor;
+		}
+
+		@Nullable
+		public Drawable getIcon() {
+			return icon;
+		}
+
+		@NonNull
+		public CharSequence getTitle() {
+			return title;
+		}
+
+		@ColorInt
+		@Nullable
+		public Integer getTitleColor() {
+			return titleColor;
+		}
 	}
 
 	public static class Builder {
@@ -121,6 +160,7 @@ public class PopUpMenuItem {
 		private Integer titleColor;
 		private Integer titleSize = 16; //SP
 		private Drawable icon;
+		private TrailingBadge trailingBadge;
 		private OnPopUpMenuItemClickListener onClickListener;
 		@ColorInt
 		private Integer compoundBtnColor;
@@ -162,6 +202,16 @@ public class PopUpMenuItem {
 
 		public Builder setIcon(Drawable icon) {
 			this.icon = icon;
+			return this;
+		}
+
+		public Builder setTrailingBadge(@Nullable Drawable icon, @NonNull CharSequence title) {
+			return setTrailingBadge(icon, title, null);
+		}
+
+		public Builder setTrailingBadge(@Nullable Drawable icon, @NonNull CharSequence title,
+		                                @ColorInt @Nullable Integer titleColor) {
+			this.trailingBadge = new TrailingBadge(icon, title, titleColor);
 			return this;
 		}
 
@@ -208,7 +258,7 @@ public class PopUpMenuItem {
 		}
 
 		public PopUpMenuItem create() {
-			return new PopUpMenuItem(title, titleColor, titleSize, icon,
+			return new PopUpMenuItem(title, titleColor, titleSize, icon, trailingBadge,
 					onClickListener, compoundBtnColor, compoundButtonType, selected,
 					showTopDivider, titleBold, dismissOnClick, tag);
 		}

@@ -131,6 +131,13 @@ public class City extends MapObject {
 		return bbox31;
 	}
 	
+	public void calculateBbox31FromStreets() {
+		for(Street s : getStreets()) {
+			// could be more precise with min max
+			updateBbox31WithLoc(s.getLocation());
+		}
+ 	}
+	
 	public boolean updateBbox31WithLoc(LatLon location) {
 		int x = MapUtils.get31TileNumberX(location.getLongitude());
 		int y = MapUtils.get31TileNumberY(location.getLatitude());
@@ -366,6 +373,7 @@ public class City extends MapObject {
 		}
 		return c;
 	}
+
 
 	
 }

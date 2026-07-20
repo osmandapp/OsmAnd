@@ -205,6 +205,7 @@
 	    <attr name="map_button_icon_color" format="reference"/>
 		<attr name="btn_text_on_secondary" format="reference" />
 	    <attr name="btn_icon_on_secondary" format="reference"/>
+		<attr name="btn_history_disabled_card_bg" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">

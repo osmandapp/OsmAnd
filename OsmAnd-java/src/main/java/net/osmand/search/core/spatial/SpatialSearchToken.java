@@ -33,6 +33,7 @@ public class SpatialSearchToken {
 	public static final int ALL_CITY_TYPE = -10;
 	
 	public static final int POI_CATEGORY_TYPE = -5;
+	public static final int POI_REF_TYPE = -3;
 	public static final int BUILDING_TYPE = -2;
 	public static final int POI_TYPE = -1;
 	public static final int STREET_TYPE = CityBlocks.STREET_TYPE.index;
@@ -50,7 +51,8 @@ public class SpatialSearchToken {
 	String wordNoDot;
 	Set<String> bldWordSplit;
 	
-	Set<String> poiCategoryKeys = new HashSet<>();
+	Set<String> poiCategoryKeysToAutocomplete = new HashSet<>();
+	Set<Integer> poiCategoryIds = new HashSet<>();
 	List<NameIndexAtom> atoms = new ArrayList<>();
 	TLongObjectHashMap<NameIndexAtom> index = new TLongObjectHashMap<>();
 	HashQuadTree<Integer> quadTree = new HashQuadTree<>(16);
@@ -58,20 +60,23 @@ public class SpatialSearchToken {
 	Set<Integer> deletedAtoms = new HashSet<Integer>();
 	
 	// partial place holder
-	List<NameIndexAtom> partialCommonAtoms = new ArrayList<>();
-	List<List<SpatialSearchToken>> partialOtherCommonAtoms = new ArrayList<>();
-	List<Boolean> partialNonNumericCommonAtoms = new ArrayList<>();
+	List<PartialMatch> partialExactMatch = new ArrayList<>();
+	List<PartialMatch> partialMatch = new ArrayList<>();
 
 	CollatorStringMatcher collatorMain;
 	CollatorStringMatcher noDotCollatorMain;
+	CollatorStringMatcher noHyphenCollatorMain;
 	// cache for popular split
 	String wordSpacePrefixCache;
 	CollatorStringMatcher wordSpaceCollatorSuffix;
 	
 	int mainNumber = -1;
 	CollatorStringMatcher[] otherMatch;
-
 	
+	public record PartialMatch(NameIndexAtom atom, List<SpatialSearchToken> other, boolean nonNumericMatch) {
+		
+	}
+
 
 	public SpatialSearchToken(int MIN_CHAR_INCOMPLETE, String ow, String original, int order) {
 		this.MIN_CHAR_INCOMPLETE = MIN_CHAR_INCOMPLETE;
@@ -96,6 +101,10 @@ public class SpatialSearchToken {
 				// we use number to compare if we use is isNumber2Letters to many weird results on '2B'
 				mainNumber = Algorithms.extractFirstIntegerNumber(noDot);
 			}
+		}
+		if (wordAligned.indexOf('-') != -1) {
+			// PA-21
+			noHyphenCollatorMain = new CollatorStringMatcher(wordAligned.replace("-", ""), StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
 		}
 		String abbr = Abbreviations.getSearchabbreviations().get(noDot);
 		if (abbr != null) {
@@ -135,8 +144,8 @@ public class SpatialSearchToken {
 			@Override
 			public boolean matchKey(String key) {
 				stats.sub1MatchTime.start();
-				if (key.startsWith(NameIndexReader.POI_CATEGORY_PREFIX) && poiCategoryKeys.size() > 0) {
-					for (String poiCatKey : poiCategoryKeys) {
+				if (key.startsWith(NameIndexReader.POI_CATEGORY_PREFIX) && poiCategoryKeysToAutocomplete.size() > 0) {
+					for (String poiCatKey : poiCategoryKeysToAutocomplete) {
 						if (poiCatKey.startsWith(key.substring(NameIndexReader.POI_CATEGORY_PREFIX.length()))) {
 							stats.sub1MatchTime.finish();
 							return true;
@@ -159,6 +168,12 @@ public class SpatialSearchToken {
 //						System.out.println(alignedKey + " ??? " + matched + " " + o.getPart());
 					}
 				}
+				if (!matched && key.startsWith(wordNoDot)
+						&& SearchAlgorithms.letters(key) == SearchAlgorithms.letters(wordNoDot)) {
+					// query 'pa 21' match 'pa21' key
+					matched = true;
+				}
+				
 				stats.sub1MatchTime.finish();
 				return matched;
 			}
@@ -182,9 +197,14 @@ public class SpatialSearchToken {
 		quadTree.put(atom.coords.bboxTileZoom, atom.coords.bboxTileId, na.indexInToken);
 	}
 	
-	void addAtom(NameIndexAtom atom) {
+	void addPoiCategoryMatch(int id) {
+		poiCategoryIds.add(id);
+	}
+	
+	boolean addAtom(NameIndexAtom atom) {
 		if (atom.isPoiCategory()) {
-			poiCategoryKeys.add(atom.name);
+			poiCategoryKeysToAutocomplete.add(atom.name);
+			poiCategoryIds.add((int) atom.id);
 		}
 		if (atom.object != null && !(atom.object instanceof Street) && 
 				atom.object.getId() != null &&  atom.object.getId() > 0) {
@@ -192,7 +212,7 @@ public class SpatialSearchToken {
 			long osmId = ObfConstants.getOsmIdFromMapObjectId(atom.object.getId());
 			NameIndexAtom ex = indexByOsmIds.get(osmId);
 			if (ex != null) {
-				return;
+				return false;
 			}
 			indexByOsmIds.put(osmId, atom);
 		}
@@ -202,35 +222,36 @@ public class SpatialSearchToken {
 			if (existing != atom) {
 				// compare convention like method important!
 				// select shortest available version
-				int res = Integer.compare(atom.otherWordsCnt, existing.otherWordsCnt);
-				if (res == 0) {
-					// '2 south 2nd street' vs '25 садова вулиця' (25-та) -
-					// replace street (has number in name) with building
-					res = Boolean.compare(atom.isBuilding(), existing.isBuilding());
-				}
-				if (res == 0) {
-					// shorter version
-					res = Integer.compare(atom.otherFoundCnt, existing.otherFoundCnt);
-				}
+				int res = Integer.compare(atom.otherWordsCnt + atom.otherFoundCnt,
+						existing.otherWordsCnt + existing.otherFoundCnt);
+				// '2 south 2nd street' vs '25 садова вулиця' (25-та) -
+				// don't use it for now as it replaces building link 
+				// (if it stops working -then analyse should be done in checkBuilding and find duplicate assigned word) 
+//				res = Boolean.compare(atom.isBuilding(), existing.isBuilding());
 				boolean replace = res < 0;
 				if (replace) {
 					atom.indexInToken = existing.indexInToken;
 					index.put(atom.id, atom);
 					atoms.set(atom.indexInToken, atom);
 				}
+				return true;
 			}
-			return;
+			return false;
 		}
 		index.put(atom.id, atom);
 		atoms.add(atom);
 		int indx = atoms.size() - 1;
 		atom.indexInToken = indx;
 		quadTree.put(atom.coords.bboxTileZoom, atom.coords.bboxTileId, indx);
+		return true;
 	}
 
-	boolean matchName(String name) {
+	boolean matchName(String name, TIntArrayList poiTypes) {
 //		System.out.printf("query '%s' matches '%s' %s\n", word, name, collatorMain.matches(name) || 
 //				collatorMain.matches(name.replace(' ', '-')));
+		if (name.startsWith(NameIndexReader.POI_CATEGORY_PREFIX)) {
+			return poiTypes != null && matchPoiCategoryKeys(poiTypes);
+		}
 		if (mainNumber > 0) {
 			if (mainNumber == Algorithms.extractFirstIntegerNumber(name)) {
 				return true;
@@ -246,50 +267,44 @@ public class SpatialSearchToken {
 		if ((noDotCollatorMain == null ? collatorMain : noDotCollatorMain).matches(name)) {
 			return true;
 		}
-		// wordAligned without space but input name with space
-		// query 'weberstrasse' matches 'weber straße': works for popular suffixes
-		int space = name.indexOf(' ');
-		if (space != -1) {
-			String namePrefix = SearchAlgorithms.alignChars(name.substring(0, space));
-			if (wordAligned.length() > space && collatorMain.getCollator().equals(namePrefix, wordAligned.substring(0, space))) {
-				if (!namePrefix.equals(wordSpacePrefixCache)) {
-					wordSpacePrefixCache = namePrefix;
-					// could be some issues if number of letter do not match
-					wordSpaceCollatorSuffix = new CollatorStringMatcher(word.substring(wordSpacePrefixCache.length()),
-							StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
-				}
-				if (wordSpaceCollatorSuffix.matches(name.substring(space + 1))) {
-					return true;
-				}
+		if (noHyphenCollatorMain != null && noHyphenCollatorMain.matches(name)) {
+			return true;
+		}
+		return false;
+	}
+	
+	public List<PartialMatch> getPartialExactMatch() {
+		return partialExactMatch;
+	}
+	
+	public List<PartialMatch> getPartialMatch() {
+		return partialMatch;
+	}
+	
+	public void clearPartialAtoms() {
+		partialExactMatch.clear();
+		partialMatch.clear();
+	}
+	
+	public boolean hasPoiCategoryKeys() {
+		return !poiCategoryKeysToAutocomplete.isEmpty();
+	}
+	
+	public boolean matchPoiCategoryKeys(TIntArrayList poiTypes) {
+		for (int k = 0; k < poiTypes.size(); k++) {
+			if (poiCategoryIds.contains(poiTypes.getQuick(k))) {
+				return true;
 			}
 		}
 		return false;
 	}
 	
-	public List<NameIndexAtom> getPartialCommonAtoms() {
-		return partialCommonAtoms;
-	}
-	
-	public void clearPartialAtoms() {
-		partialCommonAtoms.clear();
-	}
-	
-	public List<SpatialSearchToken> getPartialOtherTokens(int i) {
-		return partialOtherCommonAtoms.get(i);
-	}
-	
-	public boolean hasPoiCategoryKeys() {
-		return !poiCategoryKeys.isEmpty();
-	}
-	
-	public boolean getPartialNumericNonMatch(int i) {
-		return partialNonNumericCommonAtoms.get(i);
-	}
-	
 	public void addPartialCommonAtom(NameIndexAtom atom, List<SpatialSearchToken> otherTokens, boolean numericNotMatch) {
-		partialCommonAtoms.add(atom);
-		partialOtherCommonAtoms.add(otherTokens);
-		partialNonNumericCommonAtoms.add(numericNotMatch);
+		partialExactMatch.add(new PartialMatch(atom, otherTokens, numericNotMatch));
+	}
+	
+	public void addPartialOtherAtom(NameIndexAtom atom, List<SpatialSearchToken> otherTokens, boolean numericNotMatch) {
+		partialMatch.add(new PartialMatch(atom, otherTokens, numericNotMatch));
 	}
 	
 	String[] matchSplitName(String name) {
@@ -506,10 +521,7 @@ public class SpatialSearchToken {
 		final int nearbyRadius;
 		TIntArrayList poiTypes;
 		int elo;
-		
 		NameIndexAtom sameNameAreaObj;
-
-		int matchExtraWord;
 
 		NameIndexAtom(String name, long id, int total) {
 			this(name, SpatialSearchToken.POI_CATEGORY_TYPE, id, 0, null, false, -total, total,
@@ -571,7 +583,7 @@ public class SpatialSearchToken {
 		}
 		
 		public boolean atomicObject() {
-			return type == STREET_TYPE || type == POI_TYPE || type == BUILDING_TYPE;
+			return type == STREET_TYPE || type == POI_TYPE || type == BUILDING_TYPE || type == POI_REF_TYPE;
 		}
 		
 		public boolean isBuilding() {
@@ -579,7 +591,7 @@ public class SpatialSearchToken {
 		}
 		
 		public boolean isPOI() {
-			return type == POI_TYPE;
+			return type == POI_TYPE || type == POI_REF_TYPE;
 		}
 
 		public String typeStr() {

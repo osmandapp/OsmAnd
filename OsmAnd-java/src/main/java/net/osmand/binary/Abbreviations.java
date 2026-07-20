@@ -62,6 +62,8 @@ public class Abbreviations {
 		addConjunction("et");
 		addConjunction("y");
 		addConjunction("и");
+		
+		
 
 		// direction
 		addDirectionWord("e", "East");
@@ -115,11 +117,13 @@ public class Abbreviations {
 	}
 
 	public static boolean likelyPartOfRef(String word, Set<String> wordSplit) {
-		if (SearchAlgorithms.letters(word) < 2) {
+		int letters = SearchAlgorithms.letters(word);
+		if (letters < 2 || (letters == 2 && SearchAlgorithms.startsWithDigit(word))) {
 			return true;
 		}
 		for (String s : wordSplit) {
-			if (SearchAlgorithms.letters(s) >= 2) {
+			letters = SearchAlgorithms.letters(s);
+			if (!(letters < 2 || (letters == 2 && SearchAlgorithms.startsWithDigit(s)))) {
 				return false;
 			}
 		}
