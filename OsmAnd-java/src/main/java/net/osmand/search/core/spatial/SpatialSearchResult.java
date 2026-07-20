@@ -130,13 +130,8 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		return o;
 	}
 
-	public boolean hasPoiTypes() {
-		for (SpatialSearchResultRef r : objs) {
-			if (r.isPoiCategory()) {
-				return true;
-			}
-		}
-		return false;
+	public boolean isPoiCategory() {
+		return !objs.isEmpty() && objs.get(0).isPoiCategory();
 	}
 
 	public List<SpatialPoiType> getPoiTypes(SpatialPoiSearch poiSearch) {
@@ -416,7 +411,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	}
 	
 	public static int compare(SpatialSearchResult o1, SpatialSearchResult o2, LatLon center) {
-		int res = -Boolean.compare(o1.hasPoiTypes(), o2.hasPoiTypes());
+		int res = -Boolean.compare(o1.isPoiCategory(), o2.isPoiCategory());
 		if (res != 0) {
 			return res;
 		}
