@@ -58,9 +58,11 @@ import net.osmand.util.SearchAlgorithms;
 // REVIEW: Auto test New york, France, Italy (Slow?)
 // DEDUPLICATE: Merge suburb+city same location (5-10m) 2 streets different cities (Aleja Bohaterów)
 
-// TODO Harderwijk - Q58931 (2712801 < 46280889)
-// TODO Result Amenity bbox (merge on category) 
+// TODO Result Amenity bbox (merge on category)
 // TODO City > Boundary ? location
+
+// TODO Okko Brand names
+// TODO Harderwijk - Q58931 (2712801 < 46280889)
 
 // TODO DEDUPLICATE: Venezia, Bratislava? - No place=city in POI is it on purpose ? 2 Wikidataids! Rating not merged. POI - relation/44741 (Q641), CITY - way/64778090 (Q33723961).
 
@@ -174,8 +176,8 @@ public class SpatialSearchTestAndDocs {
 		query = "24 Kelterstraße Kernen im Remstal";
 		query = "2/1 Rathausplatz Esslingen am Neckar"; // not correct
 		
-		pattern = "Map";
-		query = "5 to go";
+//		pattern = "Map";
+//		query = "5 to go";
 		// poi filter
 //		location = new LatLon(52.50805, 13.38176);
 //		settings.SEARCH_POI = false;
@@ -211,7 +213,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "West Valley City";
 //		query = "2110 College Avenue Elmira";
 		
-//		pattern = "Us_penn";
+		pattern = "Us_penn";
 //		query = "USA Salt Lake City Pennsylvania Street 41"6
 //		query = "Pennsylvania Avenue Pennsylvania USA"; // 31372516
 //		query = "Pennsylvania Avenue Philadelphia Pennsylvania USA"; // 50193098, 26283396442
@@ -225,9 +227,9 @@ public class SpatialSearchTestAndDocs {
 //		query = "301 East Second Street Corning"; // "301 East 2nd Street Corning"
 //		query = "763 Ro-Ki Boulevard Nichols"; // NO FIX yet: Roki is very short to be fixed same as Weber-Strasse
 		// Important unit test
-//		query = "2 South 2nd Street Saint Clair"; // to fix street matched twice 40.7194 -76.1904 // UNIT TEST !!! (25 street)
+		query = "2 South 2nd Street Saint Clair"; // to fix street matched twice 40.7194 -76.1904 // UNIT TEST !!! (25 street)
 //		query = "South 2nd Street 2 Saint Clair"; // to fix street matched twice
-//		query = "226 Wilkes-Barre Township Boulevard Wilkes-Barre"; // fixed type order
+		query = "226 Wilkes-Barre Township Boulevard Wilkes-Barre"; // fixed type order
 //		query = "5676 US-15 Montgomery"; // Test 3 matched (not 2) - Data "US 15"
 //		location = new LatLon(42.0061257, -76.5464141);
 //		query = "38 Orange Street Waverly";
@@ -438,14 +440,14 @@ public class SpatialSearchTestAndDocs {
 		// +[Venezia, Cannaregio, 539D , Campo Saffa], +[Venezia Cannaregio 539D ] -[Venezia 539D  Campo Saffa] - expected
 //		pattern = "Italy_ven";
 //		pattern = "Map";
-		pattern2 = "World_basemap_2";
+//		pattern2 = "World_basemap_2";
 		// ! unit test - search full address ! no double 539d (no intersectoin)
 		// Cannaregio 539D Campo Saffa, Venezia Cannaregio Campo Saffa  , 
 //		query = "Venezia Cannaregio Campo Saffa ";
 //		query = "Cannaregio 539D Campo Saffa";
 //		query = "Venezia Cannaregio 539D Campo Saffa";
 //		query = "Campo Saffa";
-		query = "Venezia";
+//		query = "Venezia";
 		
 //		pattern = "France_ile-de-france";
 //		pattern = "France_";

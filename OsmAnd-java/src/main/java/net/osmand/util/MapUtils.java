@@ -738,6 +738,15 @@ public class MapUtils {
 	}
 
 	public static QuadRect calculateLatLonBbox(double latitude, double longitude, int radiusMeters) {
+		QuadRect rect = calculate31Bbbox(latitude, longitude, radiusMeters);
+		rect.left = MapUtils.get31LongitudeX((int) rect.left);
+		rect.top = MapUtils.get31LatitudeY((int) rect.top);
+		rect.right = MapUtils.get31LongitudeX((int) rect.right);
+		rect.bottom = MapUtils.get31LatitudeY((int) rect.bottom);
+		return rect;
+	}
+
+	public static QuadRect calculate31Bbbox(double latitude, double longitude, int radiusMeters) {
 		int zoom = 16;
 		double coeff = radiusMeters / MapUtils.getTileDistanceWidth(latitude, zoom);
 		double tx = MapUtils.getTileNumberX(zoom, longitude);
@@ -749,10 +758,6 @@ public class MapUtils {
 		double bottomRightY = Math.min(max, ty + coeff);
 		double pw = MapUtils.getPowZoom(31 - zoom);
 		QuadRect rect = new QuadRect(topLeftX * pw, topLeftY * pw, bottomRightX * pw, bottomRightY * pw);
-		rect.left = MapUtils.get31LongitudeX((int) rect.left);
-		rect.top = MapUtils.get31LatitudeY((int) rect.top);
-		rect.right = MapUtils.get31LongitudeX((int) rect.right);
-		rect.bottom = MapUtils.get31LatitudeY((int) rect.bottom);
 		return rect;
 	}
 

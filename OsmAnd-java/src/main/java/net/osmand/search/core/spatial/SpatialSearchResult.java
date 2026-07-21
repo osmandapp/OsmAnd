@@ -8,8 +8,10 @@ import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.Building;
 import net.osmand.data.City;
+import net.osmand.data.City.CityType;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
+import net.osmand.data.QuadRect;
 import net.osmand.data.Street;
 import net.osmand.search.core.HashQuadTree;
 import net.osmand.search.core.spatial.SpatialPoiSearch.SpatialPoiType;
@@ -77,8 +79,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 			Collections.sort(r.tokens, (o1, o2) -> Integer.compare(o1.originalOrder, o2.originalOrder));
 		}
 		Collections.sort(objs, (o1, o2) -> {
-			int r = Integer.compare(o1.typeOrder(SpatialSearchResultRef.MAX_TYPE_ORDER), 
-					o2.typeOrder(SpatialSearchResultRef.MAX_TYPE_ORDER));
+			int r = Integer.compare(o1.typeOrder(true), o2.typeOrder(true));
 			if (r != 0) {
 				return r;
 			}
@@ -127,6 +128,27 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		return null;
 	}
 
+	public int[] getViewBBox31() {
+		MapObject obj = getReferenceObject();
+		if(obj == null) {
+			return null;
+		}
+		if (obj.getBbox31() != null) {
+			return obj.getBbox31();
+		}
+		LatLon latLon = obj.getLocation();
+		int radius = 1000;
+		if (obj instanceof City c) {
+			radius = (int) c.getType().getRadius();
+		} else if (obj instanceof Amenity a) {
+			CityType ct = CityType.valueFromString(a.getSubType());
+			if (ct != null) {
+				radius = (int) ct.getRadius();
+			}
+		}
+		QuadRect bbox = MapUtils.calculate31Bbbox(latLon.getLatitude(), latLon.getLongitude(), radius);
+		return new int[] { (int) bbox.left, (int) bbox.top, (int) bbox.right, (int) bbox.bottom };
+	}
 	
 	public int[] getBBox31() {
 		MapObject obj = getReferenceObject();
@@ -315,7 +337,9 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 			return atom.isPoiCategory();
 		}
 		
-		public int typeOrder(int min) {
+		// This is final order for words in result
+		// It also affects on sorting order that's why (boundary == 4 == city) to sort by distance
+		public int typeOrder(boolean wordsOrder) {
 			if (atom.isPoiCategory()) {
 				// push to first token
 				return -2;
@@ -328,7 +352,8 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 			} else if (atom.isPostcode()) {
 				return 3;
 			} else if (atom.isBoundary()) {
-				return min < 4 ? 4 : MAX_TYPE_ORDER;
+				// different sorting words in result & different between results 
+				return wordsOrder ? MAX_TYPE_ORDER : 4;
 			}
 			// all cities, villages, hamlets
 			return 4;
@@ -390,12 +415,8 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	
 	public int sumTypeOrder() {
 		int s1 = 0;
-		int min = SpatialSearchResultRef.MAX_TYPE_ORDER;
 		for (SpatialSearchResultRef r : objs) {
-			min = Math.min(r.typeOrder(min), min);
-		}
-		for (SpatialSearchResultRef r : objs) {
-			s1 += r.typeOrder(min);
+			s1 += r.typeOrder(false);
 		}
 		return s1;
 	}
@@ -473,8 +494,8 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 			return res;
 		}
 		if (center != null) {
-			double d1 = o1.getLatLon() == null ? 0 : MapUtils.getDistance(center, o1.getLatLon());
-			double d2 = o2.getLatLon() == null ? 0 : MapUtils.getDistance(center, o2.getLatLon());
+			double d1 = getDistance(o1, center);
+			double d2 = getDistance(o2, center);
 			if ((int) d1 != (int) d2) {
 				res = Double.compare(d1, d2);
 				if (res != 0) {
@@ -501,12 +522,25 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		return -Integer.compare(o1.parentInd, o2.parentInd);
 	}
 
+	private static double getDistance(SpatialSearchResult o1, LatLon center) {
+		double d1 = o1.getLatLon() == null ? 0 : MapUtils.getDistance(center, o1.getLatLon());
+		if (o1.getFirstRefObject() instanceof City c) {
+			// distance to center shorten by its radius (so boundary will be sorted down comparing to city)
+			d1 -= c.getType().getRadius();
+		}
+		return d1;
+	}
+
 	private int getBiggestCityType() {
 		if (biggestCityType == -1) {
 			biggestCityType = City.CityType.values().length;
 			for (SpatialSearchResultRef ref : objs) {
 				if (ref.atom.object instanceof Street street) {
-					biggestCityType = Math.min(biggestCityType, street.getCity().getType().ordinal());
+					// immediately return as other <city> are not related to street <suburb>
+					biggestCityType = street.getCity().getType().ordinal();
+					return biggestCityType;
+				} else if (ref.atom.object instanceof City c) {
+					biggestCityType = Math.min(biggestCityType, c.getType().ordinal());
 				}
 			}
 		}
