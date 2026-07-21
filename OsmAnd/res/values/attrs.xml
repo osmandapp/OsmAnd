@@ -208,6 +208,7 @@
 		<attr name="icon_button_background_hovered" format="reference" />
 		<attr name="icon_button_background_focused" format="reference" />
 		<attr name="icon_button_background_pressed" format="reference" />
+		<attr name="btn_history_disabled_card_bg" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">

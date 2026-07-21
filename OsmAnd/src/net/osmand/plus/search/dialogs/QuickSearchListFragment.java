@@ -2,6 +2,7 @@ package net.osmand.plus.search.dialogs;
 
 import static net.osmand.search.core.ObjectType.*;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -46,6 +47,7 @@ import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.widgets.callback.OnClickListenerContainer;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
@@ -117,8 +119,11 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 		if (index >= 0 && index < listAdapter.getCount()) {
 			QuickSearchListItem item = listAdapter.getItem(index);
 			if (item != null) {
-				if (item.getType() == QuickSearchListItemType.BUTTON) {
-					((QuickSearchButtonListItem) item).getOnClickListener().onClick(view);
+				if (item instanceof OnClickListenerContainer clickListenerContainer) {
+					View.OnClickListener listener = clickListenerContainer.getOnClickListener();
+					if (listener != null) {
+						listener.onClick(view);
+					}
 				} else if (item.getType() == QuickSearchListItemType.SEARCH_RESULT) {
 					SearchResult sr = item.getSearchResult();
 					if (sr.objectType == POI
@@ -146,6 +151,7 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 	}
 
 	@Override
+	@SuppressLint("ClickableViewAccessibility")
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		dialogFragment = (QuickSearchDialogFragment) getParentFragment();
@@ -402,7 +408,7 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 							item.getSearchResult().objectType == firstItemObjectType) {
 						separateTypeLastIndex = i;
 					} else {
-						if (separateTypeLastIndex < listItems.size() - 1 && !(item instanceof QuickSearchButtonListItem)) {
+						if (separateTypeLastIndex < listItems.size() - 1 && !(item.getType() == QuickSearchListItemType.BUTTON)) {
 							items.add(i, new QuickSearchCardDividerListItem(app));
 						}
 						break;

@@ -120,6 +120,7 @@ public class DownloadResourceGroupAdapter extends OsmandBaseExpandableListAdapte
 			}
 			viewHolder.bindItem(group);
 		}
+		convertView.findViewById(R.id.list_item_divider).setVisibility(View.VISIBLE);
 
 		return convertView;
 	}

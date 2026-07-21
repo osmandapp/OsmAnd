@@ -3,8 +3,9 @@ package net.osmand.plus.search.listitems;
 import android.view.View;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.widgets.callback.OnClickListenerContainer;
 
-public class QuickSearchSelectAllListItem extends QuickSearchListItem {
+public class QuickSearchSelectAllListItem extends QuickSearchListItem implements OnClickListenerContainer {
 
 	private final String name;
 	private final View.OnClickListener onClickListener;
@@ -24,6 +25,7 @@ public class QuickSearchSelectAllListItem extends QuickSearchListItem {
 		return name;
 	}
 
+	@Override
 	public View.OnClickListener getOnClickListener() {
 		return onClickListener;
 	}

@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.myplaces.favorites.FavoriteFolder;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -44,6 +45,18 @@ final class FavoriteSelection {
 		return new LinkedHashSet<>(exactGroups);
 	}
 
+	@NonNull
+	public List<String> getFolderPaths() {
+		Set<String> paths = new LinkedHashSet<>();
+		for (FavoriteFolder folder : folders) {
+			paths.add(folder.getFullPath());
+		}
+		for (FavoriteGroup group : exactGroups) {
+			paths.add(group.getName());
+		}
+		return new ArrayList<>(paths);
+	}
+
 	public boolean hasPoints() {
 		return !points.isEmpty();
 	}
@@ -54,6 +67,18 @@ final class FavoriteSelection {
 
 	public boolean hasSnapshotFolders() {
 		return !folders.isEmpty();
+	}
+
+	public boolean canMoveFolders() {
+		if (!hasFolders()) {
+			return false;
+		}
+		for (String folderPath : getFolderPaths()) {
+			if (Algorithms.isEmpty(folderPath)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public boolean isOnlyPoints() {

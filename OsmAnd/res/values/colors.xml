@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<color name="lunar_eclipse_visibility">#7E57C2</color>
+	<color name="lunar_eclipse_marker">#ECEFF1</color>
+	<color name="lunar_eclipse_marker_outline">#4527A0</color>
+	<color name="lunar_eclipse_marker_halo">#FFFFFF</color>
+	<color name="solar_eclipse_path">#FFFF00</color>
+	<color name="solar_eclipse_marker">#F44336</color>
+	<color name="solar_eclipse_marker_outline">#1A1A1A</color>
+	<color name="solar_eclipse_marker_halo">#FFFFFF</color>
+
 	<!-- Background -->
 	<color name="activity_background_color_light">#f0f0f0</color>
 	<color name="activity_background_color_dark">#0D0D0D</color>
@@ -210,6 +219,8 @@
 	<color name="feature_purchased_bg">#78cc5c</color>
 	<color name="osmand_pro_item_bg">#223EA4</color>
 	<color name="maps_plus_item_bg">#FFA64D</color>
+	<color name="maps_plus_badge_text_light">#4D17C0</color>
+	<color name="maps_plus_badge_text_dark">#B99CFF</color>
 	<color name="purchase_sc_feature_list_bg_dark">@color/list_background_color_dark</color>
 	<color name="purchase_sc_feature_list_bg_light">#f3f4f5</color>
 	<color name="purchase_sc_selected_plan_bg_dark">@color/activity_background_color_dark</color>

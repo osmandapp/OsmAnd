@@ -396,7 +396,7 @@ public class FavoriteFolderFragment extends BaseFavoriteListFragment
 			if (selectedFolder != null) {
 				selectedPoint = null;
 				menu.showFolderOptionsMenu(requireMyActivity(), view, selectedFolder, nightMode,
-						FavoriteFolderFragment.this, FavoriteFolderFragment.this, FavoriteFolderFragment.this);
+						FavoriteFolderFragment.this, FavoriteFolderFragment.this);
 			}
 		} else if (item.getItemId() == R.id.more_button) {
 			FavoriteMenu menu = new FavoriteMenu(app, uiUtilities, requireMyActivity());

@@ -86,6 +86,7 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 	private String closeResultKey;
 	private AddFormatMode addFormatMode = AddFormatMode.PREFERRED;
 	private boolean focusSearch;
+	private boolean closeOnSearchBack;
 	private int previousSoftInputMode = SOFT_INPUT_MODE_NOT_SET;
 
 	@Override
@@ -103,6 +104,7 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 		Bundle args = getArguments();
 		addFormatMode = getAddFormatMode(args);
 		focusSearch = args != null && args.getBoolean(ARG_FOCUS_SEARCH);
+		closeOnSearchBack = focusSearch;
 		closeResultKey = args != null ? args.getString(ARG_CLOSE_RESULT_KEY) : null;
 		ArrayList<String> argExcludedIds = args != null ? args.getStringArrayList(ARG_EXCLUDED_IDS) : null;
 		if (addFormatMode == AddFormatMode.EDIT_DRAFT && argExcludedIds != null) {
@@ -273,6 +275,7 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 		toolbar.setNavigationIcon(getIcon(
 				AndroidUtils.getNavigationIconResId(toolbar.getContext()),
 				ColorUtilities.getDefaultIconColorId(nightMode)));
+		toolbar.setNavigationOnClickListener(v -> onBackPressed());
 		searchInputView.addTransitionListener((searchView, previousState, newState) -> {
 			if (newState == SearchView.TransitionState.SHOWN) {
 				updateStatusBarAppearance(searchView);
@@ -378,7 +381,7 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 	}
 
 	private void onBackPressed() {
-		if (searchInputView != null && searchInputView.isShowing()) {
+		if (searchInputView != null && searchInputView.isShowing() && !closeOnSearchBack) {
 			searchInputView.hide();
 		} else {
 			closeAddScreen();

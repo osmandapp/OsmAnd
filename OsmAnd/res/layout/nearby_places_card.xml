@@ -6,14 +6,14 @@
 	android:layout_height="wrap_content"
 	android:background="?attr/activity_background_color"
 	android:paddingTop="@dimen/content_padding_half"
-	android:paddingBottom="@dimen/content_padding_half"
+	android:paddingBottom="@dimen/content_padding"
 	app:shimmer_base_alpha="1.0"
 	app:shimmer_highlight_alpha="0.2">
 
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:background="@drawable/bg_quick_search_explore_card"
+		android:background="@drawable/bg_list_card_round"
 		android:orientation="vertical">
 
 		<LinearLayout
@@ -72,37 +72,17 @@
 					android:layout_height="wrap_content"
 					android:padding="0dp" />
 
-				<FrameLayout
-					android:id="@+id/show_all_button"
+				<View
 					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:minHeight="@dimen/route_info_list_item_height"
-					android:orientation="vertical">
+					android:layout_height="1dp"
+					android:layout_marginStart="@dimen/content_padding"
+					android:background="?attr/divider_color_basic" />
 
-					<View
-						android:id="@+id/divider_list"
-						android:layout_width="match_parent"
-						android:layout_height="1dp"
-						android:layout_gravity="top"
-						android:layout_marginStart="@dimen/content_padding"
-						android:background="?attr/divider_color_basic" />
-
-					<net.osmand.plus.widgets.TextViewEx
-						android:id="@+id/show_all_btn"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:layout_gravity="center_vertical|start"
-						android:layout_marginStart="@dimen/content_padding"
-						android:paddingTop="@dimen/list_header_padding"
-						android:paddingBottom="@dimen/list_header_padding"
-						android:text="@string/shared_string_show_all"
-						android:textAllCaps="true"
-						android:textColor="?attr/active_color_basic"
-						android:textSize="@dimen/default_sub_text_size"
-						app:typefaceWeight="medium"
-						tools:text="SHOW ALL"
-						tools:visibility="visible" />
-				</FrameLayout>
+				<include
+					android:id="@+id/show_all_button"
+					layout="@layout/setting_action_button"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content" />
 
 			</LinearLayout>
 

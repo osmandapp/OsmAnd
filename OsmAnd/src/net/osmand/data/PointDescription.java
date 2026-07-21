@@ -108,6 +108,11 @@ public class PointDescription {
 	}
 
 	@Nullable
+	public String getType() {
+		return type;
+	}
+
+	@Nullable
 	public String getIconName() {
 		return iconName;
 	}

@@ -26,6 +26,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.*;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.view.ContextThemeWrapper;
@@ -2029,12 +2030,15 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 		}
 	}
 
+	@Nullable
+	@ColorInt
 	@Override
-	public int getNavigationBarColorId() {
+	public Integer getNavigationBarColor() {
 		if (menu.getCurrentMenuState() == MenuState.HEADER_ONLY && menu.isVisible()) {
-			return nightMode ? R.color.list_background_color_dark : R.color.activity_background_color_light;
+			int colorId = nightMode ? R.color.list_background_color_dark : R.color.activity_background_color_light;
+			return ContextCompat.getColor(requireContext(), colorId);
 		} else {
-			return super.getNavigationBarColorId();
+			return super.getNavigationBarColor();
 		}
 	}
 

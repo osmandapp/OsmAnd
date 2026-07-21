@@ -250,4 +250,9 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 		View bottomShadow = getView().findViewById(R.id.bottom_shadow);
 		AndroidUiHelper.updateVisibility(bottomShadow, followingWidgets.isEmpty());
 	}
+
+	@Override
+	public boolean supportsPanelRowDivider() {
+		return false;
+	}
 }

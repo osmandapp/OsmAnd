@@ -45,8 +45,7 @@ public class Street extends MapObject {
 	public QuadRect getBboxPoints() {
 		LatLon ll = getLocation();
 		if (ll != null) {
-			QuadRect qr = new QuadRect(ll.getLongitude(), ll.getLatitude(), 
-					ll.getLongitude() + 0.00001, ll.getLatitude() - 0.00001);
+			QuadRect qr = getMinBbox(ll);
 			if (buildings.isEmpty()) {
 				// use intersected streets however it's much larger
 				for (Street is : getIntersectedStreets()) {
@@ -66,6 +65,7 @@ public class Street extends MapObject {
 		}
 		return null;
 	}
+
 
 	public void addBuildingCheckById(Building building) {
 		if (buildingsByIdCache == null) {

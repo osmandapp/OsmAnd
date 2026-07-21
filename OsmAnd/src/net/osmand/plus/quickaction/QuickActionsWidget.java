@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.fragment.app.FragmentActivity;
@@ -294,15 +295,18 @@ public class QuickActionsWidget extends LinearLayout {
 		return (int) Math.ceil((actions.size()) / (double) 6);
 	}
 
-	public void updateVisibility(boolean visible) {
+	public void updateVisibility(boolean visible, @Nullable Runnable visibilityApplied) {
 		if (settings.DO_NOT_USE_ANIMATIONS.get() || !isAttachedToWindow() || selectedButton == null) {
-			AndroidUiHelper.updateVisibility(this, visible);
+			if (AndroidUiHelper.updateVisibility(this, visible) && visibilityApplied != null) {
+				visibilityApplied.run();
+			}
 		} else {
-			animateWidget(visible);
+			int targetVisibility = visible ? View.VISIBLE : View.GONE;
+			animateWidget(visible, getVisibility() != targetVisibility ? visibilityApplied : null);
 		}
 	}
 
-	private void animateWidget(boolean show) {
+	private void animateWidget(boolean show, @Nullable Runnable visibilityApplied) {
 		AnimatorSet set = new AnimatorSet();
 		List<Animator> animators = new ArrayList<>();
 
@@ -335,6 +339,9 @@ public class QuickActionsWidget extends LinearLayout {
 				super.onAnimationStart(animation);
 				if (show) {
 					setVisibility(View.VISIBLE);
+					if (visibilityApplied != null) {
+						visibilityApplied.run();
+					}
 				}
 			}
 
@@ -345,6 +352,9 @@ public class QuickActionsWidget extends LinearLayout {
 					setVisibility(View.GONE);
 					setTranslationX(0);
 					setTranslationY(0);
+					if (visibilityApplied != null) {
+						visibilityApplied.run();
+					}
 				}
 			}
 		});

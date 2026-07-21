@@ -22,7 +22,6 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.Location;
@@ -52,12 +51,14 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.layers.MapInfoLayer;
-import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.TurnDrawable;
 import net.osmand.plus.views.mapwidgets.WidgetsContextMenu;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.appearance.PanelAppearanceApplier;
+import net.osmand.plus.views.mapwidgets.appearance.ResolvedPanelAppearance;
+import net.osmand.plus.views.mapwidgets.appearance.WidgetBackgroundShape;
 import net.osmand.plus.views.mapwidgets.widgetstates.StreetNameWidgetState;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
@@ -377,30 +378,28 @@ public class StreetNameWidget extends MapWidget {
 		return paint;
 	}
 
-	public void updateColors(@NonNull TextState textState) {
-		super.updateColors(textState);
+	@Override
+	protected void onPanelAppearanceChanged(@NonNull ResolvedPanelAppearance appearance) {
+		super.onPanelAppearanceChanged(appearance);
 
-		shadowRadius = textState.textShadowRadius;
+		shadowRadius = appearance.getTextShadowRadius();
 
 		View view = getView();
-		view.setBackgroundResource(textState.widgetBackgroundId);
+		PanelAppearanceApplier.applyBackground(view, appearance, WidgetBackgroundShape.RECTANGLE);
 
 		TextView waypointText = view.findViewById(R.id.waypoint_text);
 		TextView waypointTextShadow = view.findViewById(R.id.waypoint_text_shadow);
-		updateTextColor(addressText, addressTextShadow, textState.textColor,
-				textState.textShadowColor, textState.textBold, shadowRadius);
-		updateTextColor(waypointText, waypointTextShadow, textState.textColor,
-				textState.textShadowColor, textState.textBold, shadowRadius / 2);
-
-		int exitRefTextColorId = isNightMode()
-				? R.color.text_color_primary_dark
-				: R.color.card_and_list_background_light;
-		exitRefText.setTextColor(ContextCompat.getColor(app, exitRefTextColorId));
+		PanelAppearanceApplier.applyPrimaryText(addressText, addressTextShadow, appearance);
+		PanelAppearanceApplier.applyPrimaryText(
+				waypointText, waypointTextShadow, appearance, shadowRadius / 2);
+		PanelAppearanceApplier.applyPrimaryText(exitRefText, null, appearance);
 
 		ImageView moreImage = waypointInfoBar.findViewById(R.id.waypoint_more);
 		ImageView removeImage = waypointInfoBar.findViewById(R.id.waypoint_close);
 		moreImage.setImageDrawable(iconsCache.getIcon(R.drawable.ic_overflow_menu_white, isNightMode()));
 		removeImage.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_remove_dark, isNightMode()));
+		PanelAppearanceApplier.applySecondaryIcon(moreImage, appearance);
+		PanelAppearanceApplier.applySecondaryIcon(removeImage, appearance);
 
 		turnDrawable.updateColors(nightMode);
 		turnDrawable.invalidateSelf();

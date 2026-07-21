@@ -9,18 +9,18 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.*;
 
@@ -29,6 +29,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -48,7 +49,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -80,14 +80,13 @@ import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem.SearchMoreItemOnClickListener;
+import net.osmand.plus.search.listitems.QuickSearchSimpleButtonListItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.HistorySource;
-import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.HistorySettingsDialogFragment;
 import net.osmand.plus.settings.fragments.OnPreferenceChanged;
-import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -104,6 +103,7 @@ import net.osmand.util.MapUtils;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -126,6 +126,10 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private static final String QUICK_SEARCH_TOOLBAR_TITLE_KEY = "quick_search_toolbar_title_key";
 	private static final String QUICK_SEARCH_TOOLBAR_VISIBLE_KEY = "quick_search_toolbar_visible_key";
 	private static final String QUICK_SEARCH_FAB_VISIBLE_KEY = "quick_search_fab_visible_key";
+	private static final String QUICK_SEARCH_CATEGORY_SEARCH_BY_FILTER_KEY = "quick_search_category_search_by_filter_key";
+	private static final String QUICK_SEARCH_CURRENT_FILTER_ID_KEY = "quick_search_current_filter_id_key";
+	private static final String QUICK_SEARCH_CURRENT_CATEGORY_FILTER_PARAMS_KEY = "quick_search_current_category_filter_params_key";
+	private static final String QUICK_SEARCH_SELECTED_RESULT_POI_TYPE_NAMES_KEY = "quick_search_selected_result_poi_type_names_key";
 
 	private static final String QUICK_SEARCH_RUN_SEARCH_FIRST_TIME_KEY = "quick_search_run_search_first_time_key";
 	private static final String QUICK_SEARCH_PHRASE_DEFINED_KEY = "quick_search_phrase_defined_key";
@@ -134,6 +138,9 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private static final String QUICK_SEARCH_TYPE_KEY = "quick_search_type_key";
 	private static final String NEAREST_POIS_FILTER_ID = "nearest_pois";
 	private static final String NEAREST_POIS_UI_FILTER_ID = PoiUIFilter.STD_PREFIX + "null";
+	private static final String FILTER_CHIP_ID = "filter";
+	private static final String SORT_CHIP_ID = "sort";
+	private static final String SEARCH_AROUND_CHIP_ID = "search_around";
 	private static final double MIN_COMPASS_DEGREES_TO_UPDATE_CONTENT = 5.0;
 	private static final int EXPLORE_HISTORY_CARD_ITEMS_LIMIT = 25;
 
@@ -144,18 +151,14 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private View searchView;
 	private View buttonToolbarView;
 	private View sendEmptySearchView;
-	private View filterChip;
-	private View sortChip;
-	private View searchAroundChip;
+	private ChipsLayout filterChips;
+	private ChipsLayout searchResultPoiTypesChips;
+	private ChipsLayout.ChipData filterChip;
+	private ChipsLayout.DropDownChipData sortChip;
+	private ChipsLayout.DropDownChipData searchAroundChip;
+	private final List<ChipsLayout.ChipData> filterChipItems = new ArrayList<>();
 	private View advancedCoordinatesCard;
-	private View searchResultChipsScroll;
-	private View topFiltersChipScroll;
-	private LinearLayout topFiltersChipContainer;
 	private SearchResultCollection unfilteredResultCollection;
-	private TextView filterChipCount;
-	private TextView sortChipTitle;
-	private ImageView searchAroundChipIcon;
-	private TextView searchAroundChipTitle;
 	private TextView sendEmptySearchText;
 	private FrameLayout sendEmptySearchButton;
 	private QuickSearchMainListFragment mainSearchFragment;
@@ -206,12 +209,11 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private boolean phraseDefined;
 	private boolean addressSearch;
 	private boolean categorySearchByFilter;
-	private boolean topFilterChipsForResultCategories;
 	private SortByOption selectedSortByOption = SortByOption.RELEVANCE;
 	private String selectedSortContextId;
-	private String selectedCategorySearchFilterId;
-	private final List<String> selectedResultCategoryFilterIds = new ArrayList<>();
-	private FragmentManager.OnBackStackChangedListener returnToSearchAfterHistorySettingsListener;
+	private String currentSearchFilterId;
+	private String currentCategoryFilterParams;
+	private final List<String> selectedResultPoiTypeNames = new ArrayList<>();
 	private List<SearchResult> nearestCities;
 	private LatLon storedOriginalLocation;
 
@@ -282,6 +284,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		FragmentActivity activity = requireActivity();
 		navigationInfo = new NavigationInfo(app);
 		accessibilityAssistant = new AccessibilityAssistant(activity);
+		searchHelper = app.getSearchUICore();
+		searchUICore = searchHelper.getCore();
 	}
 
 	@Override
@@ -307,6 +311,14 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			toolbarTitle = savedInstanceState.getString(QUICK_SEARCH_TOOLBAR_TITLE_KEY);
 			toolbarVisible = savedInstanceState.getBoolean(QUICK_SEARCH_TOOLBAR_VISIBLE_KEY, false);
 			fabVisible = savedInstanceState.getBoolean(QUICK_SEARCH_FAB_VISIBLE_KEY, false);
+			categorySearchByFilter = savedInstanceState.getBoolean(QUICK_SEARCH_CATEGORY_SEARCH_BY_FILTER_KEY, false);
+			currentSearchFilterId = savedInstanceState.getString(QUICK_SEARCH_CURRENT_FILTER_ID_KEY);
+			currentCategoryFilterParams = savedInstanceState.getString(QUICK_SEARCH_CURRENT_CATEGORY_FILTER_PARAMS_KEY);
+			ArrayList<String> selectedPoiTypeNames = savedInstanceState.getStringArrayList(
+					QUICK_SEARCH_SELECTED_RESULT_POI_TYPE_NAMES_KEY);
+			if (selectedPoiTypeNames != null) {
+				selectedResultPoiTypeNames.addAll(selectedPoiTypeNames);
+			}
 		}
 		if (searchQuery == null && arguments != null) {
 			searchType = QuickSearchType.valueOf(arguments.getString(QUICK_SEARCH_TYPE_KEY, QuickSearchType.REGULAR.name()));
@@ -336,64 +348,13 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		searchView = view.findViewById(R.id.search_view);
 
 		buttonToolbarView = view.findViewById(R.id.button_toolbar_layout);
-		filterChip = view.findViewById(R.id.filter_chip);
-		filterChipCount = view.findViewById(R.id.filter_chip_count);
-		ImageView filterChipIcon = view.findViewById(R.id.filter_chip_icon);
-		filterChipIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_filter));
-		filterChip.setOnClickListener(v -> {
-			SearchPhrase searchPhrase = searchUICore.getPhrase();
-			if (searchPhrase.isLastWord(POI_TYPE)) {
-				String filterId = null;
-				String filterByName = searchPhrase.getUnknownSearchPhrase().trim();
-				Object object = searchPhrase.getLastSelectedWord().getResult().object;
-				if (object instanceof PoiUIFilter model) {
-					if (!Algorithms.isEmpty(model.getSavedFilterByName())) {
-						model.setFilterByName(model.getSavedFilterByName());
-					}
-					filterId = model.getFilterId();
-				} else if (object instanceof AbstractPoiType abstractPoiType) {
-					PoiUIFilter custom = app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + abstractPoiType.getKeyName());
-					if (custom != null) {
-						custom.setFilterByName(null);
-						custom.clearFilter();
-						custom.updateTypesToAccept(abstractPoiType);
-						filterId = custom.getFilterId();
-					}
-				} else if (object instanceof TopIndexFilter topIndexFilter) {
-					PoiUIFilter poiUIFilter = initPoiUIFilter(topIndexFilter, ProcessTopIndex.FILTER);
-					if (poiUIFilter != null) {
-						filterId = poiUIFilter.getFilterId();
-						filterByName = topIndexFilter.getValue();
-					}
-				}
-				if (filterId != null) {
-					QuickSearchPoiFilterFragment.showInstance(QuickSearchDialogFragment.this, filterByName, filterId);
-				}
-			}
-		});
-		sortChip = view.findViewById(R.id.sort_chip);
-		sortChipTitle = view.findViewById(R.id.sort_chip_title);
-		ImageView sortChipIcon = view.findViewById(R.id.sort_chip_icon);
-		sortChipIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_sort));
-		ImageView sortChipArrow = view.findViewById(R.id.sort_chip_arrow);
-		sortChipArrow.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_arrow_drop_down));
-		sortChip.setOnClickListener(v -> {
-			sortChip.setSelected(true);
-			showSortPopupMenu();
-		});
-		updateSortChip();
-		searchAroundChip = view.findViewById(R.id.search_around_chip);
-		searchAroundChipIcon = view.findViewById(R.id.search_around_chip_icon);
-		searchAroundChipTitle = view.findViewById(R.id.search_around_chip_title);
-		ImageView searchAroundChipArrow = view.findViewById(R.id.search_around_chip_arrow);
-		searchAroundChipArrow.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_arrow_drop_down));
-		searchAroundChip.setOnClickListener(v -> {
-			searchAroundChip.setSelected(true);
-			showSearchAroundPopupMenu();
-		});
-		searchResultChipsScroll = view.findViewById(R.id.search_result_chips_scroll);
-		topFiltersChipScroll = view.findViewById(R.id.top_filters_chip_scroll);
-		topFiltersChipContainer = view.findViewById(R.id.top_filters_chip_container);
+		filterChips = view.findViewById(R.id.search_result_filter_chips);
+		searchResultPoiTypesChips = view.findViewById(R.id.search_result_poi_types_chips);
+		filterChips.setThemeContext(appMode, getThemeUsageContext());
+		searchResultPoiTypesChips.setThemeContext(appMode, getThemeUsageContext());
+		searchResultPoiTypesChips.setOnChipClickListener(this::onPoiTypeChipClick);
+		initFilterChipItems();
+		updateChipsState();
 		advancedCoordinatesCard = view.findViewById(R.id.advanced_coordinates_card);
 		ImageView advancedCoordinatesIcon = view.findViewById(R.id.advanced_coordinates_icon);
 		int advancedCoordinatesIconColorId = nightMode ? R.color.osmand_orange_dark : R.color.osmand_orange;
@@ -519,11 +480,12 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 					}
 				}
 				if (!searchQuery.equalsIgnoreCase(newQueryText)) {
+					categorySearchByFilter = false;
+					currentSearchFilterId = null;
+					currentCategoryFilterParams = null;
 					searchQuery = newQueryText;
 					if (Algorithms.isEmpty(searchQuery)) {
 						cancelSearch();
-						categorySearchByFilter = false;
-						selectedCategorySearchFilterId = null;
 						setResultCollection(null);
 						searchUICore.resetPhrase();
 						mainSearchFragment.getAdapter().clear();
@@ -582,8 +544,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	public InsetTargetsCollection getInsetTargets() {
 		InsetTargetsCollection targetsCollection = super.getInsetTargets();
 		targetsCollection.replace(InsetTarget.createHorizontalLandscape(R.id.tab_toolbar_layout, R.id.toolbar, R.id.toolbar_edit, R.id.button_toolbar_layout));
-		targetsCollection.replace(InsetTarget.createFab(R.id.fab));
-		targetsCollection.replace(InsetTarget.createFab(R.id.show_on_map_fab));
+		targetsCollection.replace(InsetTarget.createFab(R.id.fabs_container));
 		return targetsCollection;
 	}
 
@@ -819,32 +780,9 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	public void openHistorySettingsAndReturnToSearch() {
-		FragmentActivity activity = requireActivity();
-		FragmentManager fragmentManager = activity.getSupportFragmentManager();
-		removeReturnToSearchListener(fragmentManager);
-		hide();
-		boolean opened = BaseSettingsFragment.showInstance(activity, SettingsScreenType.HISTORY_SETTINGS);
-		if (opened) {
-			returnToSearchAfterHistorySettingsListener = () -> {
-				Fragment historySettings = fragmentManager.findFragmentByTag(SettingsScreenType.HISTORY_SETTINGS.fragmentName);
-				if (historySettings == null) {
-					removeReturnToSearchListener(fragmentManager);
-					if (isAdded() && isSearchHidden()) {
-						show();
-						reloadHistory();
-					}
-				}
-			};
-			fragmentManager.addOnBackStackChangedListener(returnToSearchAfterHistorySettingsListener);
-		} else if (isSearchHidden()) {
-			show();
-		}
-	}
-
-	private void removeReturnToSearchListener(@NonNull FragmentManager fragmentManager) {
-		if (returnToSearchAfterHistorySettingsListener != null) {
-			fragmentManager.removeOnBackStackChangedListener(returnToSearchAfterHistorySettingsListener);
-			returnToSearchAfterHistorySettingsListener = null;
+		FragmentManager fragmentManager = getFragmentManager();
+		if (fragmentManager != null) {
+			HistorySettingsDialogFragment.showInstance(fragmentManager, this);
 		}
 	}
 
@@ -947,197 +885,223 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private void updateToolbarButton() {
 		SearchWord word = searchUICore.getPhrase().getLastSelectedWord();
 		updateDefaultSortOption(word);
-		boolean filterButtonVisible = word != null && word.getType() != null && word.getType().equals(POI_TYPE);
-		filterChip.setVisibility(filterButtonVisible ? View.VISIBLE : View.GONE);
-		if (filterButtonVisible) {
-			updateFilterChipCount(word);
-		} else {
-			filterChip.setSelected(false);
-			filterChipCount.setVisibility(View.GONE);
-		}
-		updateSearchAroundChip();
-		updateSortChip();
-		updateTopFilterChipsSelection();
+		updateChipsState();
 		updateAdvancedCoordinatesCard();
 	}
 
 	private void updateTopFilterChips() {
-		if (searchUICore == null || searchUICore.getPhrase() == null || topFiltersChipScroll == null || topFiltersChipContainer == null) {
+		updateChipsState();
+	}
+
+	private void initFilterChipItems() {
+		filterChip = new ChipsLayout.ChipData(
+				FILTER_CHIP_ID,
+				R.drawable.ic_action_filter,
+				null,
+				false,
+				false,
+				true,
+				false,
+				ChipsLayout.TextColorStyle.PRIMARY,
+				ChipsLayout.IconColorStyle.DEFAULT,
+				0,
+				new ArrayList<>(),
+				false,
+				chipId -> onFilterChipClick(),
+				null,
+				app.getString(R.string.shared_string_filters));
+		sortChip = new ChipsLayout.DropDownChipData(
+				SORT_CHIP_ID,
+				R.drawable.ic_action_sort,
+				null,
+				false,
+				false,
+				true,
+				ChipsLayout.TextColorStyle.PRIMARY,
+				ChipsLayout.IconColorStyle.ACTIVE,
+				R.string.sort_by,
+				new ArrayList<>(),
+				false,
+				this::onDropdownItemClick);
+		searchAroundChip = new ChipsLayout.DropDownChipData(
+				SEARCH_AROUND_CHIP_ID,
+				R.drawable.ic_show_on_map_outlined,
+				null,
+				false,
+				false,
+				true,
+				ChipsLayout.TextColorStyle.PRIMARY,
+				ChipsLayout.IconColorStyle.ACTIVE,
+				R.string.search_around,
+				new ArrayList<>(),
+				false,
+				this::onDropdownItemClick);
+		filterChipItems.clear();
+		filterChipItems.add(filterChip);
+		filterChipItems.add(sortChip);
+		filterChipItems.add(searchAroundChip);
+	}
+
+	private void updateChipsState() {
+		if (searchUICore == null || searchUICore.getPhrase() == null
+				|| filterChips == null || searchResultPoiTypesChips == null) {
 			return;
 		}
-		topFiltersChipContainer.removeAllViews();
-		topFilterChipsForResultCategories = isResultCategoryFilterMode();
-		List<PoiUIFilter> topFilters = getTopFilterChipsSource();
-		moveSelectedTopFilterFirst(topFilters);
-		for (PoiUIFilter filter : topFilters) {
-			if (!NEAREST_POIS_UI_FILTER_ID.equals(filter.getFilterId())) {
-				topFiltersChipContainer.addView(createTopFilterChip(filter));
-			}
-		}
+		SearchWord word = searchUICore.getPhrase().getLastSelectedWord();
 		boolean searchVisible = isSearchViewVisible();
-		boolean topRowVisible = topFiltersChipContainer.getChildCount() > 0 && searchVisible;
-		topFiltersChipScroll.setVisibility(topRowVisible ? View.VISIBLE : View.GONE);
-		ViewGroup.LayoutParams layoutParams = topFiltersChipScroll.getLayoutParams();
-		if (layoutParams instanceof ViewGroup.MarginLayoutParams marginLayoutParams) {
-			int topMargin = topRowVisible && searchVisible ? getDimensionPixelSize(R.dimen.content_padding_small) : 0;
-			if (marginLayoutParams.topMargin != topMargin) {
-				marginLayoutParams.topMargin = topMargin;
-				topFiltersChipScroll.setLayoutParams(marginLayoutParams);
+		List<ChipsLayout.ChipData> topChips = new ArrayList<>();
+
+		cacheCategorySearchFilterId(word);
+		boolean filterButtonVisible = isFilterChipVisible(word);
+		int appliedFiltersCount = filterButtonVisible ? getAppliedFiltersCount(word) : 0;
+		filterChip.title = appliedFiltersCount > 0 ? String.valueOf(appliedFiltersCount) : null;
+		filterChip.selected = appliedFiltersCount > 0;
+		filterChip.visible = searchVisible && filterButtonVisible;
+
+		sortChip.title = getString(selectedSortByOption.titleId);
+		sortChip.visible = searchVisible;
+		sortChip.dropdownItems = getSortOptions();
+
+		SearchAroundOption searchAroundOption = getSelectedSearchAroundOption();
+		searchAroundChip.iconId = searchAroundOption.iconId;
+		searchAroundChip.title = getString(searchAroundOption.titleId);
+		searchAroundChip.visible = searchVisible && isSearchAroundChipVisible();
+		searchAroundChip.dropdownItems = getSearchAroundOptions();
+
+		List<String> poiTypeNames = getPoiTypesChipsSource();
+		for (String poiTypeName : poiTypeNames) {
+			if (!Algorithms.isEmpty(poiTypeName)) {
+				boolean selected = selectedResultPoiTypeNames.contains(poiTypeName);
+				topChips.add(new ChipsLayout.ChipData(
+						poiTypeName,
+						0,
+						poiTypeName,
+						selected,
+						searchVisible,
+						true,
+						false,
+						ChipsLayout.TextColorStyle.PRIMARY,
+						ChipsLayout.IconColorStyle.DEFAULT));
 			}
 		}
-		if (searchResultChipsScroll != null) {
-			searchResultChipsScroll.setVisibility(searchVisible ? View.VISIBLE : View.GONE);
+		filterChips.updateContent(filterChipItems);
+		searchResultPoiTypesChips.updateContent(topChips);
+		boolean filterChipsVisible = searchVisible && hasVisibleChip(filterChipItems);
+		filterChips.setVisibility(filterChipsVisible ? View.VISIBLE : View.GONE);
+		boolean poiTypesChipsVisible = searchVisible && !topChips.isEmpty();
+		searchResultPoiTypesChips.setVisibility(poiTypesChipsVisible ? View.VISIBLE : View.GONE);
+		if (filterChipsVisible || poiTypesChipsVisible) {
+			buttonToolbarView.setVisibility(View.VISIBLE);
 		}
 		if (!searchVisible) {
-			buttonToolbarView.setVisibility(topRowVisible ? View.VISIBLE : View.GONE);
+			buttonToolbarView.setVisibility(View.GONE);
 			updateShowOnMapFab();
 		}
-		updateTopFilterChipsSelection();
+	}
+
+	private boolean hasVisibleChip(@NonNull List<ChipsLayout.ChipData> chips) {
+		for (ChipsLayout.ChipData chip : chips) {
+			if (chip.visible) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean isFilterChipVisible(@Nullable SearchWord word) {
+		return getActiveCategorySearchFilterId(word) != null;
+	}
+
+	@Nullable
+	private String getActiveCategorySearchFilterId(@Nullable SearchWord word) {
+		return currentSearchFilterId != null ? currentSearchFilterId : getSearchFilterId(word);
+	}
+
+	private void cacheCategorySearchFilterId(@Nullable SearchWord word) {
+		if (currentSearchFilterId == null && word != null && word.getType() == POI_TYPE) {
+			currentSearchFilterId = getSearchFilterId(word);
+			categorySearchByFilter = currentSearchFilterId != null;
+		}
 	}
 
 	@NonNull
-	private List<PoiUIFilter> getTopFilterChipsSource() {
+	private List<String> getPoiTypesChipsSource() {
 		if (isSearchViewVisible()) {
-			return isCategorySearch()
-					? new ArrayList<>(app.getPoiFilters().getTopDefinedPoiFilters())
-					: getSearchResultCategoryFilters();
+			return getSearchResultPoiTypeNames();
 		}
 		return new ArrayList<>();
 	}
 
-	private boolean isCategorySearch() {
-		return categorySearchByFilter || searchUICore != null
-				&& searchUICore.getPhrase() != null
-				&& searchUICore.getPhrase().isLastWord(POI_TYPE);
-	}
-
-	private boolean isResultCategoryFilterMode() {
-		return isSearchViewVisible() && !isCategorySearch();
-	}
-
 	@NonNull
-	private List<PoiUIFilter> getSearchResultCategoryFilters() {
-		List<PoiUIFilter> filters = new ArrayList<>();
+	private List<String> getSearchResultPoiTypeNames() {
+		List<String> poiTypeNames = new ArrayList<>();
 		SearchResultCollection collection = unfilteredResultCollection != null ? unfilteredResultCollection : getResultCollection();
 		if (collection == null) {
-			return filters;
+			return poiTypeNames;
 		}
-		Map<String, PoiUIFilter> uniqueFilters = new LinkedHashMap<>();
+		Map<String, Integer> uniquePoiTypes = new LinkedHashMap<>();
 		for (SearchResult result : collection.getCurrentSearchResults()) {
-			AbstractPoiType poiType = getPoiTypeForResult(result);
-			if (poiType != null) {
-				PoiUIFilter filter = getPoiUiFilter(poiType);
-				if (filter != null) {
-					uniqueFilters.put(filter.getFilterId(), filter);
-				}
+			String poiTypeName = getPoiTypeNameForResult(result);
+			if (!Algorithms.isEmpty(poiTypeName)) {
+				Integer count = uniquePoiTypes.get(poiTypeName);
+				uniquePoiTypes.put(poiTypeName, count != null ? count + 1 : 1);
 			}
 		}
-		filters.addAll(uniqueFilters.values());
-		return filters;
+		List<Map.Entry<String, Integer>> poiTypeCounts = new ArrayList<>(uniquePoiTypes.entrySet());
+		poiTypeCounts.sort((first, second) -> Integer.compare(second.getValue(), first.getValue()));
+		for (Map.Entry<String, Integer> poiTypeCount : poiTypeCounts) {
+			poiTypeNames.add(poiTypeCount.getKey());
+		}
+		return poiTypeNames;
+	}
+
+	@Nullable
+	private String getPoiTypeNameForResult(@NonNull SearchResult result) {
+		AbstractPoiType poiType = getPoiTypeForResult(result);
+		return poiType != null ? poiType.getTranslation() : null;
 	}
 
 	@Nullable
 	private AbstractPoiType getPoiTypeForResult(@NonNull SearchResult result) {
 		Object object = result.object;
 		if (object instanceof Amenity amenity) {
-			return amenity.getType();
-		} else if (object instanceof PoiCategory category) {
-			return category;
-		} else if (object instanceof PoiFilter filter) {
-			return filter.getPoiCategory();
+			return getPoiTypeForAmenity(amenity);
 		} else if (object instanceof PoiType type) {
-			return type.getCategory();
+			return type;
 		}
 		return null;
 	}
 
 	@Nullable
-	private PoiUIFilter getPoiUiFilter(@NonNull AbstractPoiType poiType) {
-		String filterId = PoiUIFilter.STD_PREFIX + poiType.getKeyName();
-		PoiUIFilter filter = app.getPoiFilters().getFilterById(filterId);
-		return filter != null ? filter : new PoiUIFilter(poiType, app, "");
-	}
-
-	private void moveSelectedTopFilterFirst(@NonNull List<PoiUIFilter> filters) {
-		if (searchUICore == null || searchUICore.getPhrase() == null) {
-			return;
+	private PoiType getPoiTypeForAmenity(@NonNull Amenity amenity) {
+		PoiCategory category = amenity.getType();
+		String subTypes = amenity.getSubType();
+		if (category == null || Algorithms.isEmpty(subTypes)) {
+			return null;
 		}
-		if (topFilterChipsForResultCategories) {
-			for (int selectedIndex = 0; selectedIndex < selectedResultCategoryFilterIds.size(); selectedIndex++) {
-				String selectedFilterId = selectedResultCategoryFilterIds.get(selectedIndex);
-				for (int i = 0; i < filters.size(); i++) {
-					if (selectedFilterId.equals(filters.get(i).getFilterId())) {
-						if (i > 0) {
-							filters.add(0, filters.remove(i));
-						}
-						break;
-					}
-				}
-			}
-			return;
-		}
-		String selectedFilterId = getSelectedCategorySearchFilterId();
-		if (selectedFilterId == null) {
-			return;
-		}
-		for (int i = 0; i < filters.size(); i++) {
-			if (selectedFilterId.equals(filters.get(i).getFilterId())) {
-				if (i > 0) {
-					filters.add(0, filters.remove(i));
-				}
-				return;
+		for (String subType : subTypes.split(";")) {
+			PoiType type = category.getPoiTypeByKeyName(subType);
+			if (type != null && !type.isAdditional()) {
+				return type;
 			}
 		}
+		return null;
 	}
 
-	@NonNull
-	private View createTopFilterChip(@NonNull PoiUIFilter filter) {
-		boolean resultCategoryFilterChip = topFilterChipsForResultCategories;
-		LinearLayout chip = new LinearLayout(requireContext());
-		chip.setGravity(Gravity.CENTER);
-		chip.setOrientation(LinearLayout.HORIZONTAL);
-		chip.setBackgroundResource(R.drawable.bg_search_toolbar_chip);
-		chip.setClickable(true);
-		chip.setFocusable(true);
-		chip.setMinimumWidth(AndroidUtils.dpToPx(requireContext(), 68));
-		chip.setPadding(AndroidUtils.dpToPx(requireContext(), 12), 0,
-				AndroidUtils.dpToPx(requireContext(), 12), 0);
-		chip.setTag(filter.getFilterId());
-		LinearLayout.LayoutParams chipParams = new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.WRAP_CONTENT, AndroidUtils.dpToPx(requireContext(), 36));
-		chipParams.setMarginEnd(getDimensionPixelSize(R.dimen.content_padding_half));
-		chip.setLayoutParams(chipParams);
-
-		TextView title = new TextView(requireContext());
-		title.setText(filter.getName());
-		title.setTextColor(AndroidUtils.getColorFromAttr(requireContext(), android.R.attr.textColorPrimary));
-		title.setTextSize(14);
-		title.setSingleLine(true);
-		title.setEllipsize(TextUtils.TruncateAt.END);
-		title.setGravity(Gravity.CENTER);
-		chip.addView(title, new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-
-		chip.setOnClickListener(v -> {
-			if (resultCategoryFilterChip && !isCategorySearch()) {
-				toggleResultCategoryFilter(filter.getFilterId());
-			} else {
-				showFilter(filter);
-			}
-		});
-		return chip;
+	private void onPoiTypeChipClick(@NonNull String poiTypeName) {
+		toggleResultPoiTypeFilter(poiTypeName);
 	}
 
-	private void toggleResultCategoryFilter(@NonNull String filterId) {
-		if (selectedResultCategoryFilterIds.remove(filterId)) {
-			applyResultCategoryFilters();
+	private void toggleResultPoiTypeFilter(@NonNull String poiTypeName) {
+		if (selectedResultPoiTypeNames.remove(poiTypeName)) {
+			applyResultPoiTypeFilters();
 		} else {
-			selectedResultCategoryFilterIds.add(filterId);
-			applyResultCategoryFilters();
+			selectedResultPoiTypeNames.add(poiTypeName);
+			applyResultPoiTypeFilters();
 		}
 	}
 
-	private void applyResultCategoryFilters() {
+	private void applyResultPoiTypeFilters() {
 		SearchResultCollection source = unfilteredResultCollection != null ? unfilteredResultCollection : getResultCollection();
 		if (source == null) {
 			return;
@@ -1149,14 +1113,13 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 	@NonNull
 	private SearchResultCollection getFilteredResultCollection(@NonNull SearchResultCollection source) {
-		if (selectedResultCategoryFilterIds.isEmpty()) {
+		if (selectedResultPoiTypeNames.isEmpty()) {
 			return source;
 		}
 		List<SearchResult> filteredResults = new ArrayList<>();
 		for (SearchResult result : source.getCurrentSearchResults()) {
-			AbstractPoiType poiType = getPoiTypeForResult(result);
-			PoiUIFilter filter = poiType != null ? getPoiUiFilter(poiType) : null;
-			if (filter != null && selectedResultCategoryFilterIds.contains(filter.getFilterId())) {
+			String poiTypeName = getPoiTypeNameForResult(result);
+			if (poiTypeName != null && selectedResultPoiTypeNames.contains(poiTypeName)) {
 				filteredResults.add(result);
 			}
 		}
@@ -1164,28 +1127,18 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	private void updateTopFilterChipsSelection() {
-		if (topFiltersChipContainer == null) {
-			return;
-		}
-		String selectedFilterId = getSelectedCategorySearchFilterId();
-		for (int i = 0; i < topFiltersChipContainer.getChildCount(); i++) {
-			View child = topFiltersChipContainer.getChildAt(i);
-			boolean selected = topFilterChipsForResultCategories
-					? selectedResultCategoryFilterIds.contains(child.getTag())
-					: Algorithms.objectEquals(child.getTag(), selectedFilterId);
-			child.setSelected(selected);
-		}
+		updateChipsState();
 	}
 
 	@Nullable
-	private String getSelectedCategorySearchFilterId() {
-		return selectedCategorySearchFilterId != null
-				? selectedCategorySearchFilterId
-				: getSortContextId(searchUICore.getPhrase().getLastSelectedWord());
+	private String getCurrentSearchFilterId() {
+		return currentSearchFilterId != null
+				? currentSearchFilterId
+				: getSearchFilterId(searchUICore.getPhrase().getLastSelectedWord());
 	}
 
 	private void updateDefaultSortOption(@Nullable SearchWord word) {
-		String sortContextId = getSortContextId(word);
+		String sortContextId = getSearchFilterId(word);
 		if (isNearestPoiSearch(sortContextId)) {
 			selectedSortContextId = sortContextId;
 			selectedSortByOption = SortByOption.NEAREST;
@@ -1196,28 +1149,11 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	@Nullable
-	private String getSortContextId(@Nullable SearchWord word) {
+	private String getSearchFilterId(@Nullable SearchWord word) {
 		if (word == null || word.getResult() == null || word.getType() != POI_TYPE) {
 			return null;
 		}
-		Object object = word.getResult().object;
-		if (object instanceof PoiUIFilter filter) {
-			return filter.getFilterId();
-		} else if (object instanceof CustomSearchPoiFilter filter) {
-			return filter.getFilterId();
-		} else if (object instanceof TopIndexFilter topIndexFilter) {
-			return topIndexFilter.getFilterId();
-		} else if (object instanceof AbstractPoiType abstractPoiType) {
-			return PoiUIFilter.STD_PREFIX + abstractPoiType.getKeyName();
-		}
-		return null;
-	}
-
-	private void updateSearchAroundChip() {
-		if (searchAroundChip != null) {
-			searchAroundChip.setVisibility(isSearchAroundChipVisible() ? View.VISIBLE : View.GONE);
-			updateSearchAroundChipContent();
-		}
+		return getSearchFilterId(word.getResult().object);
 	}
 
 	private boolean isSearchAroundChipVisible() {
@@ -1232,38 +1168,72 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		return distance >= DISTANCE_THRESHOLD;
 	}
 
-	private void updateSearchAroundChipContent() {
-		if (searchAroundChipIcon == null || searchAroundChipTitle == null) {
-			return;
-		}
-		SearchAroundOption option = getSelectedSearchAroundOption();
-		searchAroundChipIcon.setImageDrawable(iconsCache.getThemedIcon(option.iconId));
-		searchAroundChipTitle.setText(option.titleId);
-	}
-
 	private SearchAroundOption getSelectedSearchAroundOption() {
 		return useMapCenter ? SearchAroundOption.MAP_CENTER : SearchAroundOption.MY_LOCATION;
 	}
 
-	private void updateFilterChipCount(@Nullable SearchWord word) {
-		int appliedFiltersCount = getAppliedFiltersCount(word);
-		filterChip.setSelected(appliedFiltersCount > 0);
-		filterChipCount.setVisibility(appliedFiltersCount > 0 ? View.VISIBLE : View.GONE);
-		filterChipCount.setText(String.valueOf(appliedFiltersCount));
+	private void onDropdownItemClick(@NonNull String chipId, int itemId) {
+		if (SORT_CHIP_ID.equals(chipId)) {
+			SortByOption[] options = SortByOption.values();
+			if (itemId >= 0 && itemId < options.length) {
+				onSortOptionSelected(options[itemId]);
+			}
+		} else if (SEARCH_AROUND_CHIP_ID.equals(chipId)) {
+			SearchAroundOption[] options = SearchAroundOption.values();
+			if (itemId >= 0 && itemId < options.length) {
+				onSearchAroundOptionSelected(options[itemId]);
+			}
+		}
+	}
+
+	private void onFilterChipClick() {
+		SearchPhrase searchPhrase = searchUICore.getPhrase();
+		String filterId = null;
+		String filterByName = searchPhrase.getUnknownSearchPhrase().trim();
+		if (searchPhrase.isLastWord(POI_TYPE)) {
+			Object object = searchPhrase.getLastSelectedWord().getResult().object;
+			if (object instanceof PoiUIFilter model) {
+				if (!Algorithms.isEmpty(model.getSavedFilterByName())) {
+					model.setFilterByName(model.getSavedFilterByName());
+				}
+				filterId = model.getFilterId();
+			} else if (object instanceof AbstractPoiType abstractPoiType) {
+				PoiUIFilter custom = app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + abstractPoiType.getKeyName());
+				if (custom != null) {
+					custom.setFilterByName(null);
+					custom.clearFilter();
+					custom.updateTypesToAccept(abstractPoiType);
+					filterId = custom.getFilterId();
+				}
+			} else if (object instanceof TopIndexFilter topIndexFilter) {
+				PoiUIFilter poiUIFilter = initPoiUIFilter(topIndexFilter, ProcessTopIndex.FILTER);
+				if (poiUIFilter != null) {
+					filterId = poiUIFilter.getFilterId();
+					filterByName = topIndexFilter.getValue();
+				}
+			}
+		}
+		if (filterId == null) {
+			filterId = currentSearchFilterId;
+		}
+		if (filterId != null) {
+			QuickSearchPoiFilterFragment.showInstance(QuickSearchDialogFragment.this, filterByName, filterId);
+		}
 	}
 
 	private int getAppliedFiltersCount(@Nullable SearchWord word) {
-		if (word == null || word.getResult() == null || !(word.getResult().object instanceof PoiUIFilter filter)) {
+		PoiUIFilter filter = getAppliedFiltersSource(word);
+		if (filter == null) {
 			return 0;
 		}
-		String filterByName = filter.getFilterByName();
+		String filterByName = currentCategoryFilterParams;
 		if (Algorithms.isBlank(filterByName)) {
 			return 0;
 		}
 		int count = 0;
 		StringBuilder nameFilter = new StringBuilder();
 		Map<String, ?> poiAdditionals = filter.getPoiAdditionals();
-		for (String param : filterByName.trim().split("\\s+")) {
+		for (String param : getAppliedFilterParams(filter, filterByName)) {
 			if (isAppliedPoiAdditional(param, poiAdditionals) || isAppliedOpeningHoursFilter(param)) {
 				count++;
 			} else {
@@ -1274,6 +1244,30 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			}
 		}
 		return nameFilter.length() > 0 ? count + 1 : count;
+	}
+
+	@NonNull
+	private List<String> getAppliedFilterParams(@NonNull PoiUIFilter filter, @NonNull String filterByName) {
+		List<String> params = new ArrayList<>();
+		if (!Algorithms.isBlank(filterByName)) {
+			params.addAll(Arrays.asList(filterByName.trim().split("\\s+")));
+		}
+		String savedFilterByName = filter.getSavedFilterByName();
+		if (!Algorithms.isBlank(savedFilterByName)) {
+			for (String param : savedFilterByName.trim().split("\\s+")) {
+				params.remove(param);
+			}
+		}
+		return params;
+	}
+
+	@Nullable
+	private PoiUIFilter getAppliedFiltersSource(@Nullable SearchWord word) {
+		if (word != null && word.getResult() != null && word.getResult().object instanceof PoiUIFilter filter) {
+			return filter;
+		}
+		String filterId = getCurrentSearchFilterId();
+		return filterId != null ? app.getPoiFilters().getFilterById(filterId) : null;
 	}
 
 	private boolean isAppliedPoiAdditional(@NonNull String param, @Nullable Map<String, ?> poiAdditionals) {
@@ -1290,122 +1284,31 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		return param.equals(open) || param.equals(open24);
 	}
 
-	private void showSortPopupMenu() {
-		LinearLayout content = new LinearLayout(requireContext());
-		content.setOrientation(LinearLayout.VERTICAL);
-		content.setPadding(0, AndroidUtils.dpToPx(requireContext(), 8), 0, AndroidUtils.dpToPx(requireContext(), 8));
-
-		GradientDrawable background = new GradientDrawable();
-		background.setColor(ColorUtilities.getListBgColor(requireContext(), nightMode));
-		background.setCornerRadius(AndroidUtils.dpToPx(requireContext(), 4));
-
-		TextView title = new TextView(requireContext());
-		title.setText(R.string.sort_by);
-		title.setTextColor(AndroidUtils.getColorFromAttr(requireContext(), android.R.attr.textColorSecondary));
-		title.setTextSize(16);
-		title.setPadding(AndroidUtils.dpToPx(requireContext(), 24), AndroidUtils.dpToPx(requireContext(), 12),
-				AndroidUtils.dpToPx(requireContext(), 24), AndroidUtils.dpToPx(requireContext(), 8));
-		content.addView(title, new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-
-		PopupWindow popupWindow = new PopupWindow(content,
-				AndroidUtils.dpToPx(requireContext(), 268), LinearLayout.LayoutParams.WRAP_CONTENT, true);
-		addSortOption(content, popupWindow, SortByOption.NEAREST);
-		addSortOption(content, popupWindow, SortByOption.RELEVANCE);
-
-		popupWindow.setBackgroundDrawable(background);
-		popupWindow.setOutsideTouchable(true);
-		popupWindow.setElevation(AndroidUtils.dpToPx(requireContext(), 24));
-		popupWindow.setOnDismissListener(() -> sortChip.setSelected(false));
-		popupWindow.showAsDropDown(sortChip, 0, AndroidUtils.dpToPx(requireContext(), 4));
+	@NonNull
+	private List<ChipsLayout.DropdownItem> getSearchAroundOptions() {
+		List<ChipsLayout.DropdownItem> options = new ArrayList<>();
+		SearchAroundOption selectedOption = getSelectedSearchAroundOption();
+		options.add(new ChipsLayout.DropdownItem(
+				SearchAroundOption.MAP_CENTER.ordinal(),
+				0,
+				getString(SearchAroundOption.MAP_CENTER.titleId),
+				getMapCenterDistanceDescription(),
+				selectedOption == SearchAroundOption.MAP_CENTER));
+		options.add(new ChipsLayout.DropdownItem(
+				SearchAroundOption.MY_LOCATION.ordinal(),
+				0,
+				getString(SearchAroundOption.MY_LOCATION.titleId),
+				getString(R.string.search_around_my_location_description),
+				selectedOption == SearchAroundOption.MY_LOCATION));
+		return options;
 	}
 
-	private void showSearchAroundPopupMenu() {
-		LinearLayout content = new LinearLayout(requireContext());
-		content.setOrientation(LinearLayout.VERTICAL);
-		content.setPadding(0, AndroidUtils.dpToPx(requireContext(), 8), 0, AndroidUtils.dpToPx(requireContext(), 8));
-
-		GradientDrawable background = new GradientDrawable();
-		background.setColor(ColorUtilities.getListBgColor(requireContext(), nightMode));
-		background.setCornerRadius(AndroidUtils.dpToPx(requireContext(), 4));
-
-		TextView title = new TextView(requireContext());
-		title.setText(R.string.search_around);
-		title.setTextColor(AndroidUtils.getColorFromAttr(requireContext(), android.R.attr.textColorSecondary));
-		title.setTextSize(16);
-		title.setPadding(AndroidUtils.dpToPx(requireContext(), 24), AndroidUtils.dpToPx(requireContext(), 12),
-				AndroidUtils.dpToPx(requireContext(), 24), AndroidUtils.dpToPx(requireContext(), 8));
-		content.addView(title, new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-
-		PopupWindow popupWindow = new PopupWindow(content,
-				AndroidUtils.dpToPx(requireContext(), 268), LinearLayout.LayoutParams.WRAP_CONTENT, true);
-		addSearchAroundOption(content, popupWindow, SearchAroundOption.MAP_CENTER,
-				getMapCenterDistanceDescription(), () -> {
-					popupWindow.dismiss();
-					searchAroundMapCenter();
-				});
-		addSearchAroundOption(content, popupWindow, SearchAroundOption.MY_LOCATION,
-				getString(R.string.search_around_my_location_description), () -> {
-					popupWindow.dismiss();
-					searchAroundMyLocation();
-				});
-
-		popupWindow.setBackgroundDrawable(background);
-		popupWindow.setOutsideTouchable(true);
-		popupWindow.setElevation(AndroidUtils.dpToPx(requireContext(), 24));
-		popupWindow.setOnDismissListener(() -> searchAroundChip.setSelected(false));
-		popupWindow.showAsDropDown(searchAroundChip, 0, AndroidUtils.dpToPx(requireContext(), 4));
-	}
-
-	private void addSearchAroundOption(@NonNull LinearLayout content, @NonNull PopupWindow popupWindow,
-			@NonNull SearchAroundOption option, @NonNull String description, @Nullable Runnable action) {
-		LinearLayout row = new LinearLayout(requireContext());
-		row.setGravity(Gravity.CENTER_VERTICAL);
-		row.setOrientation(LinearLayout.HORIZONTAL);
-		row.setPadding(AndroidUtils.dpToPx(requireContext(), 24), 0,
-				AndroidUtils.dpToPx(requireContext(), 24), 0);
-		row.setMinimumHeight(AndroidUtils.dpToPx(requireContext(), 72));
-		row.setBackgroundResource(AndroidUtils.resolveAttribute(requireContext(), android.R.attr.selectableItemBackground));
-
-		RadioButton radioButton = new RadioButton(requireContext());
-		radioButton.setClickable(false);
-		radioButton.setChecked(getSelectedSearchAroundOption() == option);
-		row.addView(radioButton, new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-
-		LinearLayout textContainer = new LinearLayout(requireContext());
-		textContainer.setOrientation(LinearLayout.VERTICAL);
-		textContainer.setGravity(Gravity.CENTER_VERTICAL);
-		LinearLayout.LayoutParams textContainerParams = new LinearLayout.LayoutParams(
-				0, LinearLayout.LayoutParams.WRAP_CONTENT, 1);
-		textContainerParams.setMarginStart(AndroidUtils.dpToPx(requireContext(), 16));
-		row.addView(textContainer, textContainerParams);
-
-		TextView title = new TextView(requireContext());
-		title.setText(option.titleId);
-		title.setTextColor(AndroidUtils.getColorFromAttr(requireContext(), android.R.attr.textColorPrimary));
-		title.setTextSize(16);
-		textContainer.addView(title, new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-
-		TextView subtitle = new TextView(requireContext());
-		subtitle.setText(description);
-		subtitle.setTextColor(AndroidUtils.getColorFromAttr(requireContext(), android.R.attr.textColorSecondary));
-		subtitle.setTextSize(14);
-		subtitle.setSingleLine(false);
-		textContainer.addView(subtitle, new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-
-		row.setOnClickListener(v -> {
-			if (action != null) {
-				action.run();
-			} else {
-				popupWindow.dismiss();
-			}
-		});
-		content.addView(row, new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+	private void onSearchAroundOptionSelected(@NonNull SearchAroundOption option) {
+		if (option == SearchAroundOption.MAP_CENTER) {
+			searchAroundMapCenter();
+		} else {
+			searchAroundMyLocation();
+		}
 	}
 
 	@NonNull
@@ -1466,63 +1369,38 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	private void rerunCurrentSearchQuery() {
+		rerunCurrentSearchQuery(false);
+	}
+
+	private void rerunCurrentSearchQuery(boolean preserveSelectedPoiTypeNames) {
 		String text = searchEditText.getText().toString();
 		if (!Algorithms.isEmpty(text)) {
 			searchQuery = text;
-			runSearch(text);
+			runSearch(text, preserveSelectedPoiTypeNames);
 		}
 	}
 
-	private void addSortOption(@NonNull LinearLayout content, @NonNull PopupWindow popupWindow,
-			@NonNull SortByOption option) {
-		boolean enabled = !isNearestPoiSearch() || option == SortByOption.NEAREST;
-		LinearLayout row = new LinearLayout(requireContext());
-		row.setGravity(Gravity.CENTER_VERTICAL);
-		row.setOrientation(LinearLayout.HORIZONTAL);
-		row.setPadding(AndroidUtils.dpToPx(requireContext(), 24), 0,
-				AndroidUtils.dpToPx(requireContext(), 24), 0);
-		row.setMinimumHeight(AndroidUtils.dpToPx(requireContext(), 56));
-		row.setBackgroundResource(AndroidUtils.resolveAttribute(requireContext(), android.R.attr.selectableItemBackground));
-		row.setEnabled(enabled);
-		row.setAlpha(enabled ? 1f : .5f);
-
-		RadioButton radioButton = new RadioButton(requireContext());
-		radioButton.setClickable(false);
-		radioButton.setEnabled(enabled);
-		radioButton.setChecked(selectedSortByOption == option);
-		row.addView(radioButton, new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-
-		TextView text = new TextView(requireContext());
-		text.setText(option.titleId);
-		text.setTextColor(AndroidUtils.getColorFromAttr(requireContext(), android.R.attr.textColorPrimary));
-		text.setEnabled(enabled);
-		text.setTextSize(18);
-		LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-		textParams.setMarginStart(AndroidUtils.dpToPx(requireContext(), 16));
-		row.addView(text, textParams);
-
-		row.setOnClickListener(v -> {
-			if (!enabled) {
-				return;
-			}
-			boolean changed = selectedSortByOption != option;
-			selectedSortByOption = option;
-			updateSortChip();
-			popupWindow.dismiss();
-			if (changed) {
-				applySelectedSortSetting();
-				rerunCurrentSearchQuery();
-			}
-		});
-		content.addView(row, new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+	@NonNull
+	private List<ChipsLayout.DropdownItem> getSortOptions() {
+		List<ChipsLayout.DropdownItem> options = new ArrayList<>();
+		for (SortByOption option : new SortByOption[] {SortByOption.NEAREST, SortByOption.RELEVANCE}) {
+			boolean enabled = !isNearestPoiSearch() || option == SortByOption.NEAREST;
+			options.add(new ChipsLayout.DropdownItem(
+					option.ordinal(), 0, getString(option.titleId), null, selectedSortByOption == option, enabled));
+		}
+		return options;
 	}
 
-	private void updateSortChip() {
-		if (sortChipTitle != null) {
-			sortChipTitle.setText(selectedSortByOption.titleId);
+	private void onSortOptionSelected(@NonNull SortByOption option) {
+		if (isNearestPoiSearch() && option != SortByOption.NEAREST) {
+			return;
+		}
+		boolean changed = selectedSortByOption != option;
+		selectedSortByOption = option;
+		updateChipsState();
+		if (changed) {
+			applySelectedSortSetting();
+			rerunCurrentSearchQuery(true);
 		}
 	}
 
@@ -1538,7 +1416,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	private boolean isNearestPoiSearch() {
-		return isNearestPoiSearch(getSortContextId(searchUICore.getPhrase().getLastSelectedWord()));
+		return isNearestPoiSearch(getSearchFilterId(searchUICore.getPhrase().getLastSelectedWord()));
 	}
 
 	private boolean isNearestPoiSearch(@Nullable String sortContextId) {
@@ -1557,6 +1435,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 			@Override
 			public void searchStarted(SearchPhrase phrase) {
+				updateChipsState();
 			}
 
 			@Override
@@ -1637,6 +1516,15 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			outState.putString(QUICK_SEARCH_TOOLBAR_TITLE_KEY, toolbarTitle);
 		}
 		outState.putBoolean(QUICK_SEARCH_TOOLBAR_VISIBLE_KEY, toolbarVisible);
+		String activeCategoryFilterId = searchUICore != null && searchUICore.getPhrase() != null
+				? getActiveCategorySearchFilterId(searchUICore.getPhrase().getLastSelectedWord())
+				: currentSearchFilterId;
+		outState.putBoolean(QUICK_SEARCH_CATEGORY_SEARCH_BY_FILTER_KEY,
+				categorySearchByFilter || activeCategoryFilterId != null);
+		outState.putString(QUICK_SEARCH_CURRENT_FILTER_ID_KEY, activeCategoryFilterId);
+		outState.putString(QUICK_SEARCH_CURRENT_CATEGORY_FILTER_PARAMS_KEY, currentCategoryFilterParams);
+		outState.putStringArrayList(QUICK_SEARCH_SELECTED_RESULT_POI_TYPE_NAMES_KEY,
+				new ArrayList<>(selectedResultPoiTypeNames));
 		if (centerLatLon != null) {
 			outState.putDouble(QUICK_SEARCH_LAT_KEY, centerLatLon.getLatitude());
 			outState.putDouble(QUICK_SEARCH_LON_KEY, centerLatLon.getLongitude());
@@ -1675,7 +1563,6 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	public void onDismiss(@NonNull DialogInterface dialog) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			removeReturnToSearchListener(mapActivity.getSupportFragmentManager());
 			hideToolbar();
 			mapActivity.updateStatusBarColor();
 			mapActivity.refreshMap();
@@ -1790,9 +1677,15 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	public void setResultCollection(SearchResultCollection resultCollection) {
+		setResultCollection(resultCollection, false);
+	}
+
+	private void setResultCollection(SearchResultCollection resultCollection, boolean preserveSelectedPoiTypeNames) {
 		if (resultCollection == null) {
 			unfilteredResultCollection = null;
-			selectedResultCategoryFilterIds.clear();
+			if (!preserveSelectedPoiTypeNames) {
+				selectedResultPoiTypeNames.clear();
+			}
 		}
 		searchHelper.setResultCollection(resultCollection);
 	}
@@ -2129,7 +2022,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			try {
 				List<QuickSearchListItem> rows = new ArrayList<>();
 				boolean historyEnabled = settings.SEARCH_HISTORY.get() || settings.NAVIGATION_HISTORY.get();
-				if (historyEnabled && !historySearchFragment.isHistoryCollapsed()) {
+				if (historyEnabled && historySearchFragment.isHistoryExpanded()) {
 					List<HistoryEntry> entries = app.getSearchHistoryHelper().getVisibleHistoryEntries(null, false, false);
 					entries.sort((first, second) -> Long.compare(second.getLastAccessTime(), first.getLastAccessTime()));
 					SearchPhrase phrase = SearchPhrase.emptyPhrase(searchUICore.getSearchSettings());
@@ -2142,8 +2035,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 						rows.add(new QuickSearchListItem(app, result));
 						count++;
 					}
-					rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_action_history,
-							getString(R.string.shared_string_view_all), v -> {
+					rows.add(new QuickSearchSimpleButtonListItem(app, getString(R.string.shared_string_view_all), v -> {
 						FragmentManager fragmentManager = getFragmentManager();
 						if (fragmentManager != null) {
 							QuickSearchHistoryFragment.showInstance(fragmentManager, this);
@@ -2151,7 +2043,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 					}));
 				} else {
 					OnClickListener listener = v -> openHistorySettingsAndReturnToSearch();
-					if (!historySearchFragment.isHistoryCollapsed()) {
+					if (historySearchFragment.isHistoryExpanded()) {
 						rows.add(new QuickSearchDisabledHistoryItem(app, listener));
 					}
 				}
@@ -2255,27 +2147,41 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	private void runSearch(String text) {
+		runSearch(text, false);
+	}
+
+	private void runSearch(String text, boolean preserveSelectedPoiTypeNames) {
 		showProgressBar();
-		categorySearchByFilter = false;
-		selectedCategorySearchFilterId = null;
 		SearchSettings settings = searchUICore.getSearchSettings();
 		if (settings.getRadiusLevel() != 1) {
 			searchUICore.updateSettings(settings.setRadiusLevel(1));
 		}
 		applySelectedSortSetting();
-		runCoreSearch(text, true, false);
+		runCoreSearch(text, true, false, preserveSelectedPoiTypeNames);
 	}
 
 	private void runCoreSearch(String text, boolean showQuickResult, boolean searchMore) {
-		runCoreSearch(text, showQuickResult, searchMore, defaultResultListener);
+		runCoreSearch(text, showQuickResult, searchMore, false);
+	}
+
+	private void runCoreSearch(String text, boolean showQuickResult, boolean searchMore,
+	                           boolean preserveSelectedPoiTypeNames) {
+		runCoreSearch(text, showQuickResult, searchMore, defaultResultListener, preserveSelectedPoiTypeNames);
 	}
 
 	private void runCoreSearch(String text, boolean showQuickResult, boolean searchMore, SearchResultListener resultListener) {
+		runCoreSearch(text, showQuickResult, searchMore, resultListener, false);
+	}
+
+	private void runCoreSearch(String text, boolean showQuickResult, boolean searchMore,
+	                           SearchResultListener resultListener, boolean preserveSelectedPoiTypeNames) {
 		showProgressBar();
 		foundPartialLocation = false;
 		if (!searchMore) {
 			unfilteredResultCollection = null;
-			selectedResultCategoryFilterIds.clear();
+			if (!preserveSelectedPoiTypeNames) {
+				selectedResultPoiTypeNames.clear();
+			}
 		}
 		updateToolbarButton();
 		interruptedSearch = false;
@@ -2285,15 +2191,17 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		if (app.isApplicationInitializing() && !text.isEmpty()) {
 			app.getAppInitializer().addOnFinishListener(result -> {
 				if (!paused) {
-					runCoreSearchInternal(text, showQuickResult, searchMore, resultListener);
+					runCoreSearchInternal(text, showQuickResult, searchMore, resultListener, preserveSelectedPoiTypeNames);
 				}
 			});
 		} else {
-			runCoreSearchInternal(text, showQuickResult, searchMore, resultListener);
+			runCoreSearchInternal(text, showQuickResult, searchMore, resultListener, preserveSelectedPoiTypeNames);
 		}
+		updateChipsState();
 	}
 
-	private void runCoreSearchInternal(String text, boolean showQuickResult, boolean searchMore, SearchResultListener resultListener) {
+	private void runCoreSearchInternal(String text, boolean showQuickResult, boolean searchMore,
+	                                   SearchResultListener resultListener, boolean preserveSelectedPoiTypeNames) {
 		searchUICore.search(text, showQuickResult, new ResultMatcher<SearchResult>() {
 			SearchResultCollection regionResultCollection;
 			SearchCoreAPI regionResultApi;
@@ -2349,9 +2257,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 						showApiResults(searchApi, apiResults, phrase, hasRegionCollection, resultListener);
 						switch (processTopIndexAfterLoad) {
 							case FILTER:
-								app.runInUIThread(() -> {
-									filterChip.performClick();
-								});
+								app.runInUIThread(() -> onFilterChipClick());
 								break;
 							case MAP:
 								app.runInUIThread(() -> onShowOnMapButtonClick());
@@ -2383,7 +2289,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		});
 
 		if (!searchMore) {
-			setResultCollection(null);
+			setResultCollection(null, preserveSelectedPoiTypeNames);
 			if (!showQuickResult) {
 				updateSearchResult(null, false);
 			}
@@ -2487,6 +2393,9 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	public void completeQueryWithObject(@NonNull SearchResult result) {
+		if (result.object instanceof AbstractPoiType || result.object instanceof PoiUIFilter) {
+			resetFilterChipSession(result.object);
+		}
 		app.getSearchHistoryHelper().selectSearchResult(result);
 
 		if (result.object instanceof AbstractPoiType || result.object instanceof PoiUIFilter) {
@@ -2552,9 +2461,9 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		SearchPhrase searchPhrase = searchUICore.getPhrase();
 		if (searchPhrase.isLastWord(POI_TYPE)) {
 			categorySearchByFilter = true;
-			topFilterChipsForResultCategories = false;
-			selectedCategorySearchFilterId = filter.getFilterId();
-			selectedResultCategoryFilterIds.clear();
+			currentSearchFilterId = filter.getFilterId();
+			currentCategoryFilterParams = filter.getFilterByName();
+			selectedResultPoiTypeNames.clear();
 			poiFilterApplied = true;
 			SearchResult sr = searchPhrase.getLastSelectedWord().getResult();
 			sr.object = filter;
@@ -2581,6 +2490,13 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	private void onSearchFinished(SearchPhrase phrase) {
+		SearchResultCollection collection = unfilteredResultCollection != null ? unfilteredResultCollection : getResultCollection();
+		if (collection != null && retainAvailableResultPoiTypeFilters(collection)) {
+			SearchResultCollection visibleResults = selectedResultPoiTypeNames.isEmpty()
+					? collection
+					: getFilteredResultCollection(collection);
+			renderSearchResult(visibleResults, false);
+		}
 		if (!PluginsHelper.onSearchFinished(this, phrase, isResultEmpty())) {
 			addMoreButton(searchUICore.isSearchMoreAvailable(phrase));
 		}
@@ -2636,11 +2552,25 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			unfilteredResultCollection = res;
 		}
 		SearchResultCollection visibleResults = res;
-		if (isResultCategoryFilterMode() && unfilteredResultCollection != null && !selectedResultCategoryFilterIds.isEmpty()) {
+		if (unfilteredResultCollection != null && !selectedResultPoiTypeNames.isEmpty()) {
 			visibleResults = getFilteredResultCollection(unfilteredResultCollection);
 			append = false;
 		}
 		renderSearchResult(visibleResults, append);
+	}
+
+	private boolean retainAvailableResultPoiTypeFilters(@NonNull SearchResultCollection collection) {
+		if (selectedResultPoiTypeNames.isEmpty()) {
+			return false;
+		}
+		LinkedHashSet<String> availablePoiTypeNames = new LinkedHashSet<>();
+		for (SearchResult result : collection.getCurrentSearchResults()) {
+			String poiTypeName = getPoiTypeNameForResult(result);
+			if (!Algorithms.isEmpty(poiTypeName)) {
+				availablePoiTypeNames.add(poiTypeName);
+			}
+		}
+		return selectedResultPoiTypeNames.retainAll(availablePoiTypeNames);
 	}
 
 	private void renderSearchResult(SearchResultCollection res, boolean append) {
@@ -2852,10 +2782,9 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	private void showFilter(@NonNull PoiUIFilter filter) {
+		resetFilterChipSession(filter);
 		categorySearchByFilter = true;
-		topFilterChipsForResultCategories = false;
-		selectedCategorySearchFilterId = filter.getFilterId();
-		selectedResultCategoryFilterIds.clear();
+		currentSearchFilterId = filter.getFilterId();
 		String filterId = filter.getFilterId();
 		boolean isCustomFilter = filterId.equals(app.getPoiFilters().getCustomPOIFilter().getFilterId());
 		if (isCustomFilter) {
@@ -2894,6 +2823,26 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		runCoreSearch(txt, false, false);
 	}
 
+	private void resetFilterChipSession(@Nullable Object object) {
+		currentSearchFilterId = getSearchFilterId(object);
+		currentCategoryFilterParams = null;
+		selectedResultPoiTypeNames.clear();
+	}
+
+	@Nullable
+	private String getSearchFilterId(@Nullable Object object) {
+		if (object instanceof PoiUIFilter poiUIFilter) {
+			return poiUIFilter.getFilterId();
+		} else if (object instanceof CustomSearchPoiFilter customSearchPoiFilter) {
+			return customSearchPoiFilter.getFilterId();
+		} else if (object instanceof TopIndexFilter topIndexFilter) {
+			return topIndexFilter.getFilterId();
+		} else if (object instanceof AbstractPoiType abstractPoiType) {
+			return PoiUIFilter.STD_PREFIX + abstractPoiType.getKeyName();
+		}
+		return null;
+	}
+
 	private void updateFab() {
 		fab.setVisibility(fabVisible ? View.VISIBLE : View.GONE);
 		updateFabMargins();
@@ -2908,24 +2857,9 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	private void updateFabMargins() {
-		int bottomMargin = sendEmptySearchBottomBarVisible
-				? getDimensionPixelSize(R.dimen.fab_margin_bottom_big)
-				: getDimensionPixelSize(R.dimen.fab_margin_right);
-
-		boolean showOnMapVisible = showOnMapFab != null && showOnMapFab.getVisibility() == View.VISIBLE;
-		if (showOnMapVisible) {
-			FrameLayout.LayoutParams parameter = (FrameLayout.LayoutParams) showOnMapFab.getLayoutParams();
-			parameter.setMargins(parameter.leftMargin, parameter.topMargin, parameter.rightMargin, bottomMargin);
-			showOnMapFab.setLayoutParams(parameter);
-		}
-
-		if (fabVisible) {
-			if (showOnMapVisible) {
-				bottomMargin += getDimensionPixelSize(R.dimen.fab_size_with_shadow);
-			}
-			FrameLayout.LayoutParams parameter = (FrameLayout.LayoutParams) fab.getLayoutParams();
-			parameter.setMargins(parameter.leftMargin, parameter.topMargin, parameter.rightMargin, bottomMargin);
-			fab.setLayoutParams(parameter);
+		View view = getView();
+		if (view != null) {
+			ViewCompat.requestApplyInsets(view);
 		}
 	}
 
@@ -2934,7 +2868,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		sendEmptySearchText.setVisibility(sendSearchQueryVisible ? View.VISIBLE : View.GONE);
 		sendEmptySearchButton.setVisibility(sendSearchQueryVisible ? View.VISIBLE : View.GONE);
 		sendEmptySearchBottomBarVisible = sendSearchQueryVisible;
-		updateFabMargins();
+		updateShowOnMapFab();
 	}
 
 	@Override
@@ -2995,7 +2929,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	private PoiUIFilter initPoiUIFilter(TopIndexFilter topIndexFilter,
-			ProcessTopIndex processAfter) {
+	                                    ProcessTopIndex processAfter) {
 		PoiUIFilter poiUIFilter = app.getPoiFilters().getFilterById(topIndexFilter.getFilterId());
 		if (poiUIFilter != null) {
 			// use saved filter
