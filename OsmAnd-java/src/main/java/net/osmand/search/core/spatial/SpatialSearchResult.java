@@ -176,19 +176,6 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		return null;
 	}
 
-	public List<SpatialPoiType> getPoiTypes(SpatialPoiSearch poiSearch) {
-		List<SpatialPoiType> types = new ArrayList<>();
-		for (SpatialSearchResultRef r : objs) {
-			if (r.atom.isPoiCategory()) {
-				SpatialPoiType type = poiSearch.getById((int)r.atom.id);
-				if (type != null) {
-					types.add(type);
-				}
-			}
-		}
-		return types;
-	}
-	
 	public String getExtraNameMatch() {
 		return extraNameMatch;
 	}
