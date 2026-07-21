@@ -637,8 +637,8 @@
     <string name="share_route_as_gpx">Compartilhar rota como arquivo GPX</string>
     <string name="share_route_subject">Rota compartilhada via OsmAnd</string>
     <string name="route_roundabout">Rotatória: pegue a %1$dª saída e siga</string>
-    <string name="route_kl">Mantenha à esquerda e siga</string>
-    <string name="route_kr">Mantenha à direita e siga</string>
+    <string name="route_kl">Mantenha-se à esquerda e siga</string>
+    <string name="route_kr">Mantenha-se à direita e siga</string>
     <string name="rendering_attr_noPolygons_description">Tornar transparente todas as características de terra no mapa.</string>
     <string name="rendering_attr_noPolygons_name">Polígonos</string>
     <string name="rendering_attr_appMode_name">Modo de renderização</string>
@@ -1597,7 +1597,7 @@
     <string name="routing_attr_allow_motorway_name">Usar autoestradas</string>
     <string name="routing_attr_allow_motorway_description">Permite autoestradas.</string>
     <string name="search_map_hint">Cidade ou região</string>
-    <string name="route_roundabout_short">Tome %1$d sair e ir</string>
+    <string name="route_roundabout_short">Pegue a %1$dª saída e continue</string>
     <string name="upload_poi">Subir POI</string>
     <string name="route_calculation">Cálculo da rota</string>
     <string name="gpx_no_tracks_title">Você não tem arquivos de trilha ainda</string>
@@ -4835,7 +4835,7 @@
     <string name="battery_saving_mode">Modo de economia de bateria</string>
     <string name="graph_axis">Eixo do gráfico</string>
     <string name="y_axis_description">Selecione até duas opções para o eixo Y.</string>
-    <string name="route_roundabout_exit">Saia em %1$d</string>
+    <string name="route_roundabout_exit">Pegue a %1$dª saída</string>
     <string name="rendering_attr_alpineHiking_name">Grau de dificuldade das trilhas de caminhada</string>
     <string name="app_mode_suv">SUV</string>
     <string name="quick_action_previous_screen_desc">Um botão de alternância para navegar para a tela anterior.</string>

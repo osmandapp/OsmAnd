@@ -94,7 +94,10 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		return null;
 	}
 	
-	private MapObject getFirstRefObject() {
+	private MapObject getFirstRefObject(boolean useUnited) {
+		if (useUnited && unitedObject != null) {
+			return unitedObject.getSyntheticAmenity();
+		}
 		if (objs.size() > 0) {
 			SpatialSearchResultRef o = objs.get(0);
 			if (o.atom.bldObject != null) {
@@ -119,11 +122,13 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		if (unitedObject != null) {
 			return unitedObject.getSyntheticAmenity();
 		}
-		for (SpatialSearchResultRef ref  : objs) {
+		for (SpatialSearchResultRef ref : objs) {
 			if (ref.atom.bldObject != null) {
 				return ref.atom.bldObject;
 			}
-			return ref.atom.object;
+			if (ref.atom.object != null) {
+				return ref.atom.object;
+			}
 		}
 		return null;
 	}
@@ -162,10 +167,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	 * @return main object location (if search is poi category use getReferenceObject)
 	 */
 	public MapObject getMainObject() {
-		if (unitedObject != null) {
-			return unitedObject.getSyntheticAmenity();
-		}
-		return getFirstRefObject();
+		return getFirstRefObject(true);
 	}
 	
 	public List<MapObject> getObjects() {
@@ -173,7 +175,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		List<MapObject> o = new ArrayList<>();
 		MapObject firstRefObject = null;
 		if (unitedObject != null) {
-			firstRefObject = getFirstRefObject();
+			firstRefObject = getFirstRefObject(false);
 			o.add(unitedObject.getSyntheticAmenity());
 		}
 		for (SpatialSearchResultRef r : objs) {
@@ -222,7 +224,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		List<String> result = null;
 		result = addResult(result, getWikidata());
 		result = addResult(result, getRouteId());
-		MapObject mapObject = getFirstRefObject();		
+		MapObject mapObject = getFirstRefObject(true);		
 		if (mapObject instanceof Amenity amenity) {
 			if (amenity.getType().getKeyName().equals("natural")) {
 				String name = SearchAlgorithms.normalizeToken(SearchAlgorithms.alignChars(amenity.getName()));
@@ -254,8 +256,8 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	}
 
 	public void addExtraResult(SpatialSearchResult other, String lang) {
-		MapObject object = getFirstRefObject();
-		MapObject otherObj = other.getFirstRefObject();
+		MapObject object = getFirstRefObject(false);
+		MapObject otherObj = other.getFirstRefObject(false);
 		if (otherObj == null) {
 			// TODO poi category bbox
 			return; // nothing to merge
@@ -311,6 +313,15 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	@Override
 	public String toString() {
 		String r = "";
+		// only for test getBBox31
+//		if (getWikidata() != null) {
+//			r += getWikidata() + " ";
+//		}
+//		if (getBBox31() != null) {
+//			int[] bb = getBBox31();
+//			r += String.format("`%.4f, %.4f, %.4f, %.4f`", MapUtils.get31LongitudeX(bb[0]),
+//					MapUtils.get31LatitudeY(bb[1]), MapUtils.get31LongitudeX(bb[2]), MapUtils.get31LatitudeY(bb[3]));
+//		}
 		if (preciseLatlon != null) {
 			r += String.format("%.4f, %.4f ", preciseLatlon.getLatitude(), preciseLatlon.getLongitude());
 		}
@@ -508,7 +519,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 			return res;
 		}
 		
-		if (o1.getFirstRefObject() instanceof Amenity a1 && o2.getFirstRefObject() instanceof Amenity a2) {
+		if (o1.getFirstRefObject(false) instanceof Amenity a1 && o2.getFirstRefObject(false) instanceof Amenity a2) {
 			int i1 = FILTER_DUPLICATE_POI_SUBTYPE.indexOf(a1.getSubType());
 			int i2 = FILTER_DUPLICATE_POI_SUBTYPE.indexOf(a2.getSubType());
 			res = Integer.compare(i1, i2);
@@ -524,7 +535,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 
 	private static double getDistance(SpatialSearchResult o1, LatLon center) {
 		double d1 = o1.getLatLon() == null ? 0 : MapUtils.getDistance(center, o1.getLatLon());
-		if (o1.getFirstRefObject() instanceof City c) {
+		if (o1.getFirstRefObject(false) instanceof City c) {
 			// distance to center shorten by its radius (so boundary will be sorted down comparing to city)
 			d1 -= c.getType().getRadius();
 		}
@@ -555,7 +566,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	
 
 	private String getWikidata() {
-		MapObject mapObject = getFirstRefObject();
+		MapObject mapObject = getFirstRefObject(false); // TODO
 		if (mapObject != null) {
 			return mapObject.getWikidata();
 		}
@@ -563,7 +574,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	}
 
 	private String getRouteId() {
-		if (getFirstRefObject() instanceof Amenity amenity) {
+		if (getFirstRefObject(true) instanceof Amenity amenity) {
 			return amenity.getRouteId();
 		}
 		return null;
