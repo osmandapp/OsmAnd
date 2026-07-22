@@ -11,6 +11,8 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="use_spatial_text_search">Use spatial text search</string>
+	<string name="use_spatial_text_search_description">Replace the standard quick search APIs with the experimental spatial text search engine.</string>
 	<string name="astro_lunar_eclipse">Lunar eclipse</string>
 	<string name="astro_lunar_eclipse_subtitle">Explore worldwide lunar eclipses</string>
 	<string name="astro_previous_lunar_eclipse">Previous lunar eclipse</string>

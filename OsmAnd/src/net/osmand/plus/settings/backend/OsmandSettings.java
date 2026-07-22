@@ -2061,6 +2061,7 @@ public class OsmandSettings {
 
 	public CommonPreference<String> PREVIOUS_INSTALLED_VERSION = new StringPreference(this, "previous_installed_version", "").makeGlobal();
 
+	public final OsmandPreference<Boolean> USE_SPATIAL_TEXT_SEARCH = new BooleanPreference(this, "use_spatial_text_search", false).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> SHOULD_SHOW_FREE_VERSION_BANNER = new BooleanPreference(this, "should_show_free_version_banner", false).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> SHOULD_SHOW_DISCOUNT_BOTTOM_SHEET = new BooleanPreference(this, "should_show_discount_bottom_sheet", false).makeGlobal().makeShared().cache();
 

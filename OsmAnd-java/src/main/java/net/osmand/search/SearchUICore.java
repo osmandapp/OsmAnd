@@ -593,6 +593,10 @@ public class SearchUICore {
 		apis.add(new SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi, true, townCitiesCache));
 	}
 
+	public void clearAPIs() {
+		apis.clear();
+	}
+
 	public void clearCustomSearchPoiFilters() {
 		for (SearchCoreAPI capi : apis) {
 			if (capi instanceof SearchAmenityTypesAPI) {

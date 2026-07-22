@@ -47,6 +47,8 @@ import net.osmand.data.City;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.QuadRect;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
@@ -724,14 +726,63 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		return expired || (hideTimeMs > 0 && System.currentTimeMillis() - hideTimeMs > EXPIRATION_TIME_MIN * 60 * 1000);
 	}
 
+	private SearchSettings getMapSearchSettings(@NonNull SearchSettings settings, @NonNull RotatedTileBox tileBox) {
+		LatLon mapCenter = tileBox.getCenterLatLon();
+		return settings
+				.setOriginalLocation(new LatLon(mapCenter.getLatitude(), mapCenter.getLongitude()))
+				.setSearchBBox31(useSpatialTextSearch() ? getSearchBBox31(tileBox) : null);
+	}
+
+	private SearchSettings getLocationSearchSettings(@NonNull SearchSettings settings, @NonNull LatLon location) {
+		SearchSettings updatedSettings = settings.setOriginalLocation(
+				new LatLon(location.getLatitude(), location.getLongitude()));
+		if (!useSpatialTextSearch()) {
+			return updatedSettings.setSearchBBox31(null);
+		}
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null) {
+			return updatedSettings.setSearchBBox31(null);
+		}
+		RotatedTileBox tileBox = mapActivity.getMapView().getCurrentRotatedTileBox();
+		return updatedSettings.setSearchBBox31(getSearchBBox31(tileBox, location));
+	}
+
+	private boolean useSpatialTextSearch() {
+		return app.getSettings().USE_SPATIAL_TEXT_SEARCH.get();
+	}
+
+	private QuadRect getSearchBBox31(@NonNull RotatedTileBox tileBox) {
+		QuadRect latLonBounds = tileBox.getLatLonBounds();
+		return getSearchBBox31(latLonBounds.left, latLonBounds.top, latLonBounds.right, latLonBounds.bottom);
+	}
+
+	private QuadRect getSearchBBox31(@NonNull RotatedTileBox tileBox, @NonNull LatLon centerLatLon) {
+		QuadRect latLonBounds = tileBox.getLatLonBounds();
+		double halfLon = Math.abs(latLonBounds.right - latLonBounds.left) / 2;
+		double halfLat = Math.abs(latLonBounds.top - latLonBounds.bottom) / 2;
+		double leftLon = MapUtils.checkLongitude(centerLatLon.getLongitude() - halfLon);
+		double rightLon = MapUtils.checkLongitude(centerLatLon.getLongitude() + halfLon);
+		double topLat = MapUtils.checkLatitude(centerLatLon.getLatitude() + halfLat);
+		double bottomLat = MapUtils.checkLatitude(centerLatLon.getLatitude() - halfLat);
+		return getSearchBBox31(leftLon, topLat, rightLon, bottomLat);
+	}
+
+	private QuadRect getSearchBBox31(double leftLon, double topLat, double rightLon, double bottomLat) {
+		int left = MapUtils.get31TileNumberX(leftLon);
+		int right = MapUtils.get31TileNumberX(rightLon);
+		int top = MapUtils.get31TileNumberY(topLat);
+		int bottom = MapUtils.get31TileNumberY(bottomLat);
+		return new QuadRect(Math.min(left, right), Math.min(top, bottom), Math.max(left, right), Math.max(top, bottom));
+	}
+
 	public void show() {
 		Dialog dialog = getDialog();
 		if (dialog == null) {
 			return;
 		}
 		if (useMapCenter && getMapActivity() != null) {
-			LatLon mapCenter = getMapActivity().getMapView().getCurrentRotatedTileBox().getCenterLatLon();
-			SearchSettings ss = searchUICore.getSearchSettings().setOriginalLocation(new LatLon(mapCenter.getLatitude(), mapCenter.getLongitude()));
+			SearchSettings ss = getMapSearchSettings(searchUICore.getSearchSettings(),
+					getMapActivity().getMapView().getCurrentRotatedTileBox());
 			searchUICore.updateSettings(ss);
 			updateUseMapCenterUI();
 			updateContent(null);
@@ -1335,13 +1386,13 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	private void searchAroundMapCenter() {
-		LatLon mapCenter = getCurrentMapCenter();
-		if (mapCenter == null) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null) {
 			return;
 		}
 		useMapCenter = true;
-		SearchSettings ss = searchUICore.getSearchSettings().setOriginalLocation(
-				new LatLon(mapCenter.getLatitude(), mapCenter.getLongitude()));
+		SearchSettings ss = getMapSearchSettings(searchUICore.getSearchSettings(),
+				mapActivity.getMapView().getCurrentRotatedTileBox());
 		searchUICore.updateSettings(ss);
 		updateUseMapCenterUI();
 		updateClearButtonAndHint();
@@ -1358,8 +1409,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		centerLatLon = null;
 		updateUseMapCenterUI();
 		LatLon centerLatLon = new LatLon(location.getLatitude(), location.getLongitude());
-		SearchSettings ss = searchUICore.getSearchSettings().setOriginalLocation(
-				new LatLon(centerLatLon.getLatitude(), centerLatLon.getLongitude()));
+		SearchSettings ss = getLocationSearchSettings(searchUICore.getSearchSettings(), centerLatLon);
 		searchUICore.updateSettings(ss);
 		updateClearButtonAndHint();
 		updateClearButtonVisibility(true);
@@ -1423,7 +1473,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		return NEAREST_POIS_FILTER_ID.equals(sortContextId) || NEAREST_POIS_UI_FILTER_ID.equals(sortContextId);
 	}
 
-	private void setupSearch(MapActivity mapActivity) {
+	private void setupSearch(@NonNull MapActivity mapActivity) {
 		// Setup search core
 		searchHelper = app.getSearchUICore();
 		searchUICore = searchHelper.getCore();
@@ -1476,11 +1526,19 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		String mapLang = settings.MAP_PREFERRED_LOCALE.get();
 		boolean transliterate = settings.MAP_TRANSLITERATE_NAMES.get();
 
-		SearchSettings settings = searchUICore.getSearchSettings().setOriginalLocation(
+		SearchSettings searchSettings = searchUICore.getSearchSettings().setOriginalLocation(
 				new LatLon(searchLatLon.getLatitude(), searchLatLon.getLongitude()));
-		settings = settings.setLangs(appLang, mapLang, transliterate);
-		QuickSearchHelper.applySearchStatSetting(settings);
-		searchUICore.updateSettings(settings);
+		if (useSpatialTextSearch()) {
+			RotatedTileBox tileBox = mapActivity.getMapView().getCurrentRotatedTileBox();
+			searchSettings = searchSettings.setSearchBBox31(useMapCenter
+					? getSearchBBox31(tileBox)
+					: getSearchBBox31(tileBox, searchLatLon));
+		} else {
+			searchSettings = searchSettings.setSearchBBox31(null);
+		}
+		searchSettings = searchSettings.setLangs(appLang, mapLang, transliterate);
+		QuickSearchHelper.applySearchStatSetting(searchSettings);
+		searchUICore.updateSettings(searchSettings);
 
 		if (newSearch) {
 			setResultCollection(null);
@@ -2202,6 +2260,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 	private void runCoreSearchInternal(String text, boolean showQuickResult, boolean searchMore,
 	                                   SearchResultListener resultListener, boolean preserveSelectedPoiTypeNames) {
+		updateSearchBBoxFromMap();
 		searchUICore.search(text, showQuickResult, new ResultMatcher<SearchResult>() {
 			SearchResultCollection regionResultCollection;
 			SearchCoreAPI regionResultApi;
@@ -2292,6 +2351,24 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			setResultCollection(null, preserveSelectedPoiTypeNames);
 			if (!showQuickResult) {
 				updateSearchResult(null, false);
+			}
+		}
+	}
+
+	private void updateSearchBBoxFromMap() {
+		SearchSettings settings = searchUICore.getSearchSettings();
+		if (!useSpatialTextSearch()) {
+			searchUICore.updateSettings(settings.setSearchBBox31(null));
+		} else if (useMapCenter) {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				RotatedTileBox tileBox = mapActivity.getMapView().getCurrentRotatedTileBox();
+				searchUICore.updateSettings(settings.setSearchBBox31(getSearchBBox31(tileBox)));
+			}
+		} else {
+			LatLon originalLocation = settings.getOriginalLocation();
+			if (originalLocation != null) {
+				searchUICore.updateSettings(getLocationSearchSettings(settings, originalLocation));
 			}
 		}
 	}
