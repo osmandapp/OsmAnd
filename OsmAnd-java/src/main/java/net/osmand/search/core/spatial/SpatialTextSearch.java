@@ -30,6 +30,7 @@ import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
 import net.osmand.binary.NameIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
 import net.osmand.map.OsmandRegions;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.search.core.spatial.SpatialPoiSearch.SpatialPoiType;
@@ -77,7 +78,10 @@ public class SpatialTextSearch {
 		public boolean SEARCH_POI_REF = true;
 		public boolean SUGGEST_SEARCH_POI_CATEGORY_WITH_REF = true;
 		
-		public boolean SEARCH_ONLY_POI_BY_CATEGORY = false; // replacement to search by category
+		// replacement to search by category via name index
+		public boolean SEARCH_POI_BY_CATEGORY_ONLY = false;
+		public int SEARCH_POI_BY_CATEGORY_ZOOM = 15;
+		public int[] SEARCH_POI_BY_CATEGORY_BBOX;
 		
 		// performance tested (we need to turn on for <POI + Address> search)
 		public boolean ALLOW_HOUSE_POI_TYPE_INTERSECTION = true;
@@ -152,6 +156,7 @@ public class SpatialTextSearch {
 		// > 300 km - x0, for 50km-300km - x0.5, 10-50km - x1.5, 10km - x3sorted!
 		public Map<Integer, Double> ENLARGE_BOUNDARIES = new TreeMap<Integer, Double>(
 				Map.of(-300_000, 0.2, -100_000, 0.5, -10_000, 1.0, -1_000, 20.0));
+
 		
 		public double evalEnlargeBoundary(Map<Integer, Double> mp, double dim) {
 			Iterator<Entry<Integer, Double>> it = mp.entrySet().iterator();
@@ -170,13 +175,23 @@ public class SpatialTextSearch {
 			return new SpatialTextSearchSettings();
 		}
 		
-		public static SpatialTextSearchSettings searchPoiByCategorySettings() {
+		public static SpatialTextSearchSettings searchPoiByCategorySettings(int zoom, QuadRect r) {
+			int shift = 4; // test 3, 4, 5, 6
 			SpatialTextSearchSettings settings = new SpatialTextSearchSettings();
 			settings.ALLOW_HOUSE_POI_TYPE_INTERSECTION = false;
 			settings.SEARCH_ADDR = false;
 			settings.SEARCH_POI = true;
 			settings.SEARCH_POI_CATEGORIES = false;
-			settings.SEARCH_ONLY_POI_BY_CATEGORY = true;
+			settings.OPTIM_READ_COMMON_WORDS_ATOMS = false;
+			settings.OPTIM_READ_CATEGORY_WORD_ATOMS = false;
+			
+			settings.SEARCH_POI_BY_CATEGORY_ONLY = true;
+			settings.SEARCH_POI_BY_CATEGORY_ZOOM = zoom + shift;
+			if (r != null) {
+				settings.SEARCH_POI_BY_CATEGORY_BBOX = new int[] { MapUtils.get31TileNumberX(r.left) >> 15,
+						MapUtils.get31TileNumberY(r.top) >> 15, MapUtils.get31TileNumberX(r.right) >> 15,
+						MapUtils.get31TileNumberY(r.bottom) >> 15 };
+			}
 			return settings;
 		}
 		 
@@ -495,7 +510,7 @@ public class SpatialTextSearch {
 		res.input = input;
 		
 		// 1. prepare tokens
-		if (ctx.settings.SEARCH_ONLY_POI_BY_CATEGORY) {
+		if (ctx.settings.SEARCH_POI_BY_CATEGORY_ONLY) {
 			res.tokens = Collections.singletonList(new SpatialSearchToken(0, input, input, 1));
 		} else {
 			res.tokens = splitWords(ctx, input);

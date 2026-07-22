@@ -457,7 +457,7 @@ public class SpatialSearchContext {
 			}
 		});
 		for (SpatialSearchToken t : tokens) {
-			if (settings.SEARCH_ONLY_POI_BY_CATEGORY && indx.poiRegion == null) {
+			if (settings.SEARCH_POI_BY_CATEGORY_ONLY && indx.poiRegion == null) {
 				continue;
 			}
 			List<PrefixNameValue> matchedPrefixes = indx.getMatchedPrefixes(t.word);
@@ -544,12 +544,39 @@ public class SpatialSearchContext {
 				if (settings.DEV_READ_POI_OBJECTS) {
 					amenity = readPoiObject(lid, null);
 				}
+				if (settings.SEARCH_POI_BY_CATEGORY_ONLY && skipFilteredZoomObject(t, a)) {
+					continue;
+				}
 				parseSuffixes(t, indx, suffixes, commonSuffixes, null, a, lid, 0, amenity, allTokens);
 			}
 		}
 	}
 
 
+	private boolean skipFilteredZoomObject(SpatialSearchToken t, OsmAndPoiNameIndexDataAtom a) {
+		NameIndexAtomXY xy = new NameIndexAtomXY(null, a, settings);
+		int z = xy.bboxTileZoom;
+		long tileId = xy.bboxTileId;
+		int[] bbox = settings.SEARCH_POI_BY_CATEGORY_BBOX;
+		if (bbox != null) {
+			if (a.getX() < bbox[0] || a.getX() > bbox[2] || a.getY() < bbox[1] || a.getY() > bbox[3]) {
+				return true;
+			}
+		}
+		if (settings.SEARCH_POI_BY_CATEGORY_ZOOM <= z) {
+			while (z > settings.SEARCH_POI_BY_CATEGORY_ZOOM) {
+				z--;
+				tileId >>= 2;
+			}
+			if (t.cacheCategoryFilterObjects.containsKey(tileId) && a.getEloRatingCount() == 0) {
+				return true;
+			}
+			t.cacheCategoryFilterObjects.put(tileId, a);
+		}
+		return false;
+	}
+	
+	
 	public void readPOIBboxes(int indInd, TLongHashSet tiles) throws IOException {
 		SessionFileCache c = findSessionFile(indInd);
 		NameIndexReader nameIndex = nameIndexReader(c, indInd);

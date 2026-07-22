@@ -64,6 +64,7 @@ import net.osmand.util.SearchAlgorithms;
 ////////// IN PROGRESS //////////
 // REVIEW (index_words_dashboard - common озеро): POI / ADDRESS - France, Germany, US, Europe, China, Peru
 // REVIEW: Auto test New york, France, Italy (Slow?)
+// TODO Ignore elo rating for POI intersection ... 
 // TODO INDEX: Find POI Categories translations / synonyms via Common words - Стоматол., Dentist, Basilica 
 // TODO REVIEW: Abbrevations (synonyms / direction words) other languages?
 // TODO REVIEW: Analyze Abbrevations / common skip (abbrevations 1st=first)
@@ -73,6 +74,7 @@ import net.osmand.util.SearchAlgorithms;
 
 /////////////// EXTRA FEATURES ///////////////
 // TODO INDEX: highway=services (Not index)
+// TODO ALWAYS Extend tile bboxes by at least 100m (Okko mcdonalds)
 // TODO Common words skip sorting ... '155 Park Avenue Wilkes-Barre' - 13 place
 // TODO 100km+: Calle 20 188 San Isidro Lima, mihia lake, нова пошта краматорськ 3, Нова Пошта (№5 not searchable by common words / name)
 // SLOW: "Travessa de Santo António" x "Rua Joaquim Ribeiro de Carvalho" x "portugal" (39.7412, -8.8012 Barreira Urbanização Vale da Cabrita))
@@ -214,7 +216,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "2110 College Avenue Elmira";
 		
 //		pattern = "Us_penn";
-//		query = "USA Salt Lake City Pennsylvania Street 41"6
+//		query = "USA Salt Lake City Pennsylvania Street 41";
 //		query = "Pennsylvania Avenue Pennsylvania USA"; // 31372516
 //		query = "Pennsylvania Avenue Philadelphia Pennsylvania USA"; // 50193098, 26283396442
 //		query = "Pennsylvania Avenue Philadelphia PA USA"; 
@@ -318,7 +320,7 @@ public class SpatialSearchTestAndDocs {
 		
 //		pattern = "Ukraine_kyiv";
 //		pattern = "Test_Ukraine_kyiv-city_europe_12.obf";
-		pattern = "Ukraine_";
+//		pattern = "Ukraine_";
 		
 		// poi types
 //		location = new LatLon(50.436423, 30.508097);
@@ -410,9 +412,9 @@ public class SpatialSearchTestAndDocs {
 //		settings.ALLOW_HOUSE_POI_TYPE_INTERSECTION = false;
 //		query = "Shell 2 Rožňavská";
 		
-//		pattern = "Us_new-york_new"; // new-york, new-jersey
-//		pattern = "Us_new-"; 
-//		location = new LatLon(40.78035, -73.96572); // central park
+		pattern = "Us_new-york_new"; // new-york, new-jersey
+		pattern = "Us_new-"; 
+		location = new LatLon(40.78035, -73.96572); // central park
 //		location = new LatLon(40.64946, -74.00682); // brooklyn
 //		location = new LatLon(40.64946, -73.50682);
 //		query = "New York The plaza";
@@ -422,7 +424,7 @@ public class SpatialSearchTestAndDocs {
 		// 40.78035, -73.96572 - unit test '4th av', '4 ave', '4th avenue'  - 85393997 Park avenue
 //		query = "New York 4 av 8";
 //		query = "New York av 8";
-//		query = "4 ave 8";
+		query = "4 ave 8";
 //		query = "New York 4 av"; // 160947243
 //		query = "57th street"; // central park - 265345338 east, 86216906 west, (266926268 (west)?),
 //		query = "57 street"; // central park - 265345338 east, 86216906 west, (26926268 (west)?),
@@ -573,19 +575,22 @@ public class SpatialSearchTestAndDocs {
 			}
 		}
 		boolean testOldPoiSeerch = true;
-		String cat = "ice_rink"; // ice_rink, cafe
+		String cat = "cafe"; // ice_rink, cafe, aquarium
+		int poiZoom = 10; //10;// 12
+//		QuadRect bbox = new QuadRect(29, 51, 32, 49); // zoom = 9
+//		QuadRect bbox = new QuadRect(21, 51, 37, 45); // zoom = 7
+//		QuadRect bbox = new QuadRect(-79, 42, -73, 39); // zoom = 7 penn
+		QuadRect bbox = new QuadRect(-75, 42, -71, 39); // zoom = 8 newyork
 		if (testOldPoiSeerch) {
 			long nt = System.nanoTime();
 			SpatialPoiType type = poiSearch.getByKey(cat); // ice_rink, cafe
 			int limit = 50_000;
 			int radius = 500_000; // 500_000;
 			LatLon loc = new LatLon(50, 30);
-			QuadRect bbox = new QuadRect(29, 51, 32, 49);
-			int z = 12;// 12
-			boolean bboxLoad = false;
+			boolean bboxLoad = true;
 			List<Amenity> poiRes;
 			if (bboxLoad) {
-				poiRes = poiSearch.loadPOIObjects(searchContext, type, bbox, z, limit);
+				poiRes = poiSearch.loadPOIObjects(searchContext, type, bbox, poiZoom, limit);
 			} else {
 				poiRes = poiSearch.loadPOIObjects(searchContext, type, loc, radius, limit);
 			}
@@ -601,11 +606,9 @@ public class SpatialSearchTestAndDocs {
 					(System.nanoTime() - nt) / 1e6, searchContext.stats.poiByTypeTime.ms(),
 					searchContext.stats.poiByTypeBboxes, searchContext.stats.poiByTypeBytes / 1024);
 		}
-//		settings.OPTIM_DELETE_POI_SAME_AS_CITY_STREET = false;
-		settings = SpatialTextSearchSettings.searchPoiByCategorySettings();
-		settings.DEDUPLICATE_RES = false;
+		settings = SpatialTextSearchSettings.searchPoiByCategorySettings(poiZoom, bbox);
 		searchContext = new SpatialSearchContext(settings, ls, poiSearch, location);
-		a.searchTest(NameIndexReader.POI_CATEGORY_PREFIX + cat, searchContext, 50);
+		a.searchTest(NameIndexReader.POI_CATEGORY_PREFIX + cat, searchContext, 10);
 	}
 
 	private static void testDeduplication(String[] args) throws IOException, InterruptedException {

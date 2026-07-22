@@ -444,9 +444,19 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		}
 		return s1;
 	}
+
+	public int getMainRating() {
+		if (getFirstRefObject(true) instanceof Amenity a) {
+			return Math.max(parent.MIN_ELO_RATING, a.getTravelEloNumber());
+		}
+		return parent.MIN_ELO_RATING;
+	}
 	
-	public int getRating() {
+	public int getTotalRating() {
 		int rating = parent.MIN_ELO_RATING; // MIN Rating to make higher
+		if (unitedObject != null && unitedObject.getSyntheticAmenity() != null) {
+			rating = Math.max(rating, unitedObject.getSyntheticAmenity().getTravelEloNumber());
+		}
 		for (SpatialSearchResultRef r : objs) {
 			if (r.atom.object instanceof Amenity a) {
 				rating = Math.max(rating, a.getTravelEloNumber());
@@ -470,7 +480,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	}
 	
 	public static String compareKeyString(SpatialSearchResult o) {
-		int e = (o.getRating() - o.parent.MIN_ELO_RATING) / 64;
+		int e = (o.getTotalRating() - o.parent.MIN_ELO_RATING) / 64;
 		String elo = e > 0 ? "-"+e+"elo" : "";
 		return String.format("t%d+%d-w%d-oth%d%s-tp%d", o.parent.tCount, o.surplusWords, o.objs.size(), 
 				Math.min(o.sumOther(), 3), elo, o.sumTypeOrder());
@@ -482,7 +492,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		key = addCompareKey(key, 3, -o.surplusWords); // 3 bit - 8
 		key = addCompareKey(key, 6, o.objs.size()); // 6 bit - 64
 		key = addCompareKey(key, 3, Math.min(o.sumOther(), 3)); // 3 bit - 3
-		key = addCompareKey(key, 6, -(o.getRating() - o.parent.MIN_ELO_RATING) / 64); // 6 bit - 64 - group by 64 bucket
+		key = addCompareKey(key, 6, -(o.getTotalRating() - o.parent.MIN_ELO_RATING) / 64); // 6 bit - 64 - group by 64 bucket
 		key = addCompareKey(key, 6, -o.sumTypeOrder()); // 6 bit - 64
 		// total 6+6+3+5+6+12 = 35
 		return key;
@@ -509,11 +519,16 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		if (res != 0) {
 			return res;
 		}
-		res = -Integer.compare(o1.getRating(), o2.getRating());
+		res = -Integer.compare(o1.getMainRating(), o2.getMainRating());
 		if (res != 0) {
 			return res;
 		}
 		res = -Integer.compare(o1.sumTypeOrder(), o2.sumTypeOrder());
+		if (res != 0) {
+			return res;
+		}
+		// sort poi intersection differently
+		res = -Integer.compare(o1.getTotalRating(), o2.getTotalRating());
 		if (res != 0) {
 			return res;
 		}

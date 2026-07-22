@@ -51,8 +51,6 @@ public class HashQuadTree<T> {
 		forEachMatch(startZoom, tileId, action);
 	}
 	
-	
-
 	public void forEachMatch(int startZoom, long tileId, Consumer<List<T>> action) {
 		forEachMatch(startZoom, 0, tileId, action);
 	}

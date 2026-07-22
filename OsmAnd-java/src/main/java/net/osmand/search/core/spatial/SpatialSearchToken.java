@@ -72,7 +72,10 @@ public class SpatialSearchToken {
 	
 	int mainNumber = -1;
 	CollatorStringMatcher[] otherMatch;
+	
+	
 	boolean categoryMatchMode = false;
+	TLongObjectHashMap<Object> cacheCategoryFilterObjects = new TLongObjectHashMap<Object>(); 
 	
 	public record PartialMatch(NameIndexAtom atom, List<SpatialSearchToken> other, boolean nonNumericMatch) {
 		
