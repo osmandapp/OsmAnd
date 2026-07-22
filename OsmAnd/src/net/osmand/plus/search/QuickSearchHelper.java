@@ -55,6 +55,7 @@ import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreFactory;
+import net.osmand.search.core.SearchCoreFactory.SearchAmenityTypesAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchBaseAPI;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
@@ -126,7 +127,9 @@ public class QuickSearchHelper implements ResourceListener {
 		core.resetSearch();
 		resultCollection = null;
 		if (useSpatialTextSearch()) {
+			core.registerAPI(new SearchAmenityTypesAPI(app.getPoiTypes()));
 			core.registerAPI(new SpatialTextSearchAPI(app.getPoiTypes()));
+			refreshCustomPoiFilters();
 			return;
 		}
 		core.init();

@@ -15,6 +15,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.City.CityType;
+import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.QuadRect;
 import net.osmand.data.Street;
@@ -27,11 +28,13 @@ import net.osmand.search.core.SearchCoreFactory.SearchBaseAPI;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.SearchPhraseDataType;
 import net.osmand.search.core.SearchResult;
+import net.osmand.search.core.SearchWord;
 import net.osmand.search.core.spatial.SpatialSearchResult.SpatialSearchResultRef;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialSearchResults;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSettings;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -65,31 +68,16 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 	@Override
 	public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
 		if (!phrase.isUnknownSearchWordPresent()) {
-			return false;
+			return searchSelectedPoiType(phrase, resultMatcher);
 		}
 		List<BinaryMapIndexReader> files = getSpatialSearchFiles(phrase);
 		if (Algorithms.isEmpty(files)) {
 			return false;
 		}
 		LOG.info("\nStart new spatial search");
-		SpatialTextSearchSettings settings = createSpatialSettings(phrase);
-		LOG.info("Spatial search setting " + (settings.SEARCH_SUGGESTION ? "SUGGESTION" : "Default"));
 		SpatialPoiSearch poiSearch = new SpatialPoiSearch(poiTypes);
-		SpatialSearchContext context = new SpatialSearchContext(settings, files, poiSearch,
-				phrase.getSettings().getOriginalLocation());
-		context.resultMatcher = new net.osmand.ResultMatcher<>() {
-			@Override
-			public boolean publish(SpatialSearchResult object) {
-				return !resultMatcher.isCancelled();
-			}
-
-			@Override
-			public boolean isCancelled() {
-				return resultMatcher.isCancelled();
-			}
-		};
-		context.stats.doTiming = phrase.getSettings().getStat() != null;
-		context.stats.printLogs = true;
+		SpatialSearchContext context = createSpatialContext(phrase, resultMatcher, files, poiSearch);
+		LOG.info("Spatial search setting " + (context.settings.SEARCH_SUGGESTION ? "SUGGESTION" : "Default"));
 
 		SpatialSearchResults results = spatialTextSearch.searchAPI(phrase.getFullSearchPhrase(), context);
 		if (results.mainResults == null) {
@@ -112,6 +100,109 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 			}
 		}
 		return true;
+	}
+
+	private boolean searchSelectedPoiType(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
+		if (!phrase.isLastWord(ObjectType.POI_TYPE)) {
+			return false;
+		}
+		SearchWord selectedWord = phrase.getLastSelectedWord();
+		Object object = selectedWord == null || selectedWord.getResult() == null ? null : selectedWord.getResult().object;
+		if (!(object instanceof AbstractPoiType poiType)) {
+			return false;
+		}
+		List<BinaryMapIndexReader> files = getSpatialPoiSearchFiles(phrase);
+		if (Algorithms.isEmpty(files)) {
+			return false;
+		}
+		SpatialPoiSearch poiSearch = new SpatialPoiSearch(poiTypes);
+		SpatialPoiSearch.SpatialPoiType spatialPoiType = poiSearch.getByKey(poiType.getKeyName());
+		if (spatialPoiType == null) {
+			return false;
+		}
+		SpatialSearchContext context = createSpatialContext(phrase, resultMatcher, files, poiSearch);
+		LatLon location = phrase.getSettings().getOriginalLocation();
+		if (location == null) {
+			return false;
+		}
+		List<Amenity> amenities = poiSearch.loadPOIObjects(context, spatialPoiType, location,
+				getPoiTypeSearchRadius(phrase, location), phrase.getSettings().getTotalLimit());
+		for (Amenity amenity : amenities) {
+			if (resultMatcher.isCancelled()) {
+				return false;
+			}
+			if (amenity.isClosed() || (!phrase.isAcceptPrivate() && amenity.isPrivateAccess())) {
+				continue;
+			}
+			SearchResult result = createSelectedPoiTypeResult(phrase, amenity);
+			resultMatcher.publish(result);
+		}
+		return true;
+	}
+
+	private SpatialSearchContext createSpatialContext(SearchPhrase phrase, SearchResultMatcher resultMatcher,
+			List<BinaryMapIndexReader> files, SpatialPoiSearch poiSearch) {
+		SpatialSearchContext context = new SpatialSearchContext(createSpatialSettings(phrase), files, poiSearch,
+				phrase.getSettings().getOriginalLocation());
+		context.resultMatcher = new net.osmand.ResultMatcher<>() {
+			@Override
+			public boolean publish(SpatialSearchResult object) {
+				return !resultMatcher.isCancelled();
+			}
+
+			@Override
+			public boolean isCancelled() {
+				return resultMatcher.isCancelled();
+			}
+		};
+		context.stats.doTiming = phrase.getSettings().getStat() != null;
+		context.stats.printLogs = true;
+		return context;
+	}
+
+	private int getPoiTypeSearchRadius(SearchPhrase phrase, LatLon location) {
+		QuadRect searchBBox31 = phrase.getSettings().getSearchBBox31();
+		if (searchBBox31 == null) {
+			return phrase.getRadiusSearch(10_000);
+		}
+		double leftLon = MapUtils.get31LongitudeX((int) searchBBox31.left);
+		double rightLon = MapUtils.get31LongitudeX((int) searchBBox31.right);
+		double topLat = MapUtils.get31LatitudeY((int) searchBBox31.top);
+		double bottomLat = MapUtils.get31LatitudeY((int) searchBBox31.bottom);
+		double radius = Math.max(
+				MapUtils.getDistance(location.getLatitude(), location.getLongitude(), topLat, leftLon),
+				MapUtils.getDistance(location.getLatitude(), location.getLongitude(), bottomLat, rightLon));
+		return Math.max(1, (int) Math.ceil(radius));
+	}
+
+	private SearchResult createSelectedPoiTypeResult(SearchPhrase phrase, Amenity amenity) {
+		SearchResult result = new SearchResult(phrase);
+		result.object = amenity;
+		result.objectType = ObjectType.POI;
+		result.location = amenity.getLocation();
+		result.preferredZoom = PREFERRED_POI_ZOOM;
+		result.cityName = amenity.getCityFromTagGroups(phrase.getSettings().getLang());
+		result.localeName = amenity.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
+		result.otherNames = amenity.getOtherNames(true, result.localeName);
+		if (Algorithms.isEmpty(result.localeName)) {
+			AbstractPoiType poiType = poiTypes.getAnyPoiTypeByKey(amenity.getSubType());
+			result.localeName = poiType == null ? amenity.getSubType() : poiType.getTranslation();
+		}
+		result.firstUnknownWordMatches = true;
+		result.priority = SEARCH_PRIORITY;
+		result.priorityDistance = 1;
+		return result;
+	}
+
+	private List<BinaryMapIndexReader> getSpatialPoiSearchFiles(SearchPhrase phrase) {
+		QuadRect searchBBox31 = phrase.getSettings().getSearchBBox31();
+		List<BinaryMapIndexReader> files = new ArrayList<>();
+		if (searchBBox31 == null) {
+			addFiles(files, phrase.getOfflineIndexes().iterator());
+		} else {
+			addFiles(files, phrase.getOfflineIndexes(searchBBox31, SearchPhraseDataType.POI));
+		}
+		return files;
 	}
 
 	private List<BinaryMapIndexReader> getSpatialSearchFiles(SearchPhrase phrase) {
@@ -163,7 +254,7 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 
 	@Override
 	public int getSearchPriority(SearchPhrase phrase) {
-		if (!phrase.isUnknownSearchWordPresent()) {
+		if (!phrase.isUnknownSearchWordPresent() && !phrase.isLastWord(ObjectType.POI_TYPE)) {
 			return -1;
 		}
 		return SEARCH_PRIORITY;
