@@ -18,6 +18,7 @@ import net.osmand.data.City.CityType;
 import net.osmand.data.MapObject;
 import net.osmand.data.QuadRect;
 import net.osmand.data.Street;
+import net.osmand.map.OsmandRegions;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
@@ -115,23 +116,33 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 
 	private List<BinaryMapIndexReader> getSpatialSearchFiles(SearchPhrase phrase) {
 		QuadRect searchBBox31 = phrase.getSettings().getSearchBBox31();
-		if (searchBBox31 == null) {
-			return phrase.getSettings().getOfflineIndexes();
-		}
 		List<BinaryMapIndexReader> files = new ArrayList<>();
-		addFiles(files, SearchPhrase.getOfflineIndexes(searchBBox31, SearchPhraseDataType.ADDRESS,
-				phrase.getSettings().getOfflineIndexes()));
-		addFiles(files, SearchPhrase.getOfflineIndexes(searchBBox31, SearchPhraseDataType.POI,
-				phrase.getSettings().getOfflineIndexes()));
+		if (searchBBox31 == null) {
+			addFiles(files, phrase.getOfflineIndexes().iterator());
+		} else {
+			addFiles(files, phrase.getOfflineIndexes(searchBBox31, SearchPhraseDataType.ADDRESS));
+			addFiles(files, phrase.getOfflineIndexes(searchBBox31, SearchPhraseDataType.POI));
+		}
+		addRegionsFile(files, phrase);
 		return files;
+	}
+
+	private void addRegionsFile(List<BinaryMapIndexReader> files, SearchPhrase phrase) {
+		OsmandRegions regions = phrase.getSettings().getRegions();
+		if (regions != null) {
+			addFile(files, regions.getReader());
+		}
 	}
 
 	private void addFiles(List<BinaryMapIndexReader> files, Iterator<BinaryMapIndexReader> iterator) {
 		while (iterator.hasNext()) {
-			BinaryMapIndexReader reader = iterator.next();
-			if (!files.contains(reader)) {
-				files.add(reader);
-			}
+			addFile(files, iterator.next());
+		}
+	}
+
+	private void addFile(List<BinaryMapIndexReader> files, BinaryMapIndexReader reader) {
+		if (reader != null && !files.contains(reader)) {
+			files.add(reader);
 		}
 	}
 
