@@ -1,59 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:background="?android:attr/selectableItemBackground"
+	android:background="?attr/list_background_color"
 	android:orientation="vertical">
 
 	<LinearLayout
+		android:id="@+id/selectable_list_item"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:orientation="horizontal"
-		android:paddingTop="@dimen/content_padding"
-		android:paddingBottom="@dimen/content_padding_small">
-
-		<RadioButton
-			android:id="@android:id/checkbox"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_gravity="top"
-			android:layout_marginStart="@dimen/content_padding"
-			android:layout_marginEnd="@dimen/content_padding"
-			android:background="@null"
-			android:clickable="false"
-			android:focusable="false" />
+		android:orientation="vertical">
 
 		<LinearLayout
-			android:layout_width="0dp"
+			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_weight="1"
-			android:orientation="vertical"
-			android:paddingStart="@dimen/content_padding_small"
-			android:paddingEnd="@dimen/content_padding">
+			android:gravity="center_vertical"
+			android:minHeight="@dimen/bottom_sheet_list_item_height"
+			android:orientation="horizontal">
+
+			<androidx.appcompat.widget.AppCompatRadioButton
+				android:id="@android:id/checkbox"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/content_padding"
+				android:layout_marginEnd="@dimen/content_padding_half"
+				android:background="@null"
+				android:clickable="false"
+				android:focusable="false"
+				android:saveEnabled="false" />
 
 			<net.osmand.plus.widgets.TextViewEx
 				android:id="@android:id/title"
-				android:layout_width="match_parent"
+				style="@style/TitleStyle"
+				android:layout_width="0dp"
 				android:layout_height="wrap_content"
+				android:layout_marginHorizontal="@dimen/content_padding"
+				android:layout_weight="1"
 				android:textColor="?android:textColorPrimary"
-				android:textSize="@dimen/default_list_text_size"
-				android:textStyle="normal"
 				tools:text="@string/main_storage" />
 
-			<net.osmand.plus.widgets.TextViewEx
-				android:id="@+id/summary"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="@dimen/subHeaderPadding"
-				android:textColor="?android:textColorSecondary"
-				android:textSize="@dimen/default_desc_text_size"
-				android:textStyle="normal"
-				app:lineHeight="@dimen/default_desc_line_height"
-				tools:text="@string/media_storage_main_storage_descr" />
-
 		</LinearLayout>
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@android:id/summary"
+			style="@style/DescStyle"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/content_padding_extra_large"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_marginBottom="@dimen/content_padding_small"
+			android:textColor="?android:textColorSecondary"
+			tools:text="@string/media_storage_main_storage_descr" />
 
 	</LinearLayout>
 
@@ -61,7 +59,7 @@
 		android:id="@+id/divider"
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
-		android:layout_marginStart="@dimen/bottom_sheet_divider_margin_start"
+		android:layout_marginStart="@dimen/content_padding_extra_large"
 		android:background="?attr/list_divider" />
 
 </LinearLayout>

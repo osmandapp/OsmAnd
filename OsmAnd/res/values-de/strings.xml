@@ -5178,7 +5178,6 @@
     <string name="favorite_folder_duplicate_message">Verwenden Sie einen Ordnernamen, der noch nicht vorhanden ist.</string>
     <string name="favorite_folder_name">Ordnername</string>
     <string name="edit_folder">Ordner bearbeiten</string>
-    <string name="auto_copy_media_to_osmand_storage">Medien automatisch in den OsmAnd-Speicher kopieren</string>
     <string name="choose_from_gallery">Aus der Galerie wählen</string>
     <string name="choose_from_files">Aus Dateien wählen</string>
     <string name="shared_string_media">Medien</string>

@@ -5077,7 +5077,6 @@
     <string name="choose_from_files">Sélectionnez un fichier</string>
     <string name="shared_string_media">Médias</string>
     <string name="no_media">Aucun média</string>
-    <string name="auto_copy_media_to_osmand_storage">Copier automatiquement les fichiers multimédias vers le stockage d\'OsmAnd</string>
     <string name="navigate_point_format_maidenhead">Maidenhead</string>
     <string name="navigate_point_east_coordinate">Coordonnée Est</string>
     <string name="navigate_point_north_coordinate">Coordonnée Nord</string>
@@ -5121,7 +5120,9 @@
     <string name="camera_folder">Dossier « Appareil photo »</string>
     <string name="media_storage_main_storage_descr">Les fichiers sont enregistrés dans la mémoire interne de l\'application. Ils ne sont pas visibles dans la Galerie ni dans les autres applications.</string>
     <string name="media_storage_shared_storage_descr">Les fichiers sont enregistrés dans des dossiers publics (« Images », « Vidéos », « Musique »). Ils sont visibles dans la Galerie et sur Google Photos.</string>
-    <string name="media_storage_camera_folder_descr">Les fichiers sont enregistrés dans la pellicule. Remarque : les fichiers audio sont enregistrés dans le dossier « Musique/OsmAnd ».</string>
+    <string name="shared_string_note">Remarque</string>
+    <string name="media_storage_camera_folder_note_descr">les fichiers audio sont enregistrés dans le dossier « Musique/OsmAnd ».</string>
+    <string name="media_storage_camera_folder_descr">Les fichiers sont enregistrés dans la pellicule. %1$s</string>
     <string name="media_storage_manually_specified_descr">Les fichiers sont enregistrés dans un dossier personnalisé et classés par type (audio, photo, vidéo).</string>
     <string name="change_media_storage_question">Modifier l\'emplacement du stockage ?</string>
     <string name="change_media_storage_full_description">Déplacer les fichiers multimédias existants vers la nouvelle destination ?\n%1$s &gt; %2$s</string>
