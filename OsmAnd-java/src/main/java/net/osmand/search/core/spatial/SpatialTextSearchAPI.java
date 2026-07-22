@@ -147,6 +147,7 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		context.resultMatcher = new net.osmand.ResultMatcher<>() {
 			@Override
 			public boolean publish(SpatialSearchResult object) {
+				resultMatcher.sampleMemory();
 				return !resultMatcher.isCancelled();
 			}
 
@@ -188,7 +189,7 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 			AbstractPoiType poiType = poiTypes.getAnyPoiTypeByKey(amenity.getSubType());
 			result.localeName = poiType == null ? amenity.getSubType() : poiType.getTranslation();
 		}
-		result.firstUnknownWordMatches = true;
+		result.setFirstUnknownWordMatches(true);
 		result.priority = SEARCH_PRIORITY;
 		result.priorityDistance = 1;
 		return result;
@@ -361,7 +362,6 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		result.priority = SEARCH_PRIORITY;
 		result.priorityDistance = 0;
 		result.preferredZoom = PREFERRED_POI_ZOOM;
-//		result.firstUnknownWordMatches = true;
 		phrase.countUnknownWordsMatchMainResult(result);
 		return result;
 	}

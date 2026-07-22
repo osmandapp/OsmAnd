@@ -103,6 +103,10 @@ public class SearchResult {
 		return impreciseCoordinates;
 	}
 
+	public void setFirstUnknownWordMatches(boolean firstUnknownWordMatches) {
+		this.firstUnknownWordMatches = firstUnknownWordMatches;
+	}
+
 	public void setImpreciseCoordinates(boolean imprecise) {
 		this.impreciseCoordinates = imprecise;
 	}

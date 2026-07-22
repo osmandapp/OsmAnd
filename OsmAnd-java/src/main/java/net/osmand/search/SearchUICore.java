@@ -35,6 +35,7 @@ import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
 import net.osmand.search.core.SearchSettings.SortType;
 import net.osmand.search.core.SearchWord;
+import net.osmand.search.core.spatial.SpatialTextSearchAPI;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -739,7 +740,9 @@ public class SearchUICore {
 					if (onSearchStart != null) {
 						onSearchStart.run();
 					}
-					final SearchResultMatcher rm = new SearchResultMatcher(matcher, phrase, request, requestNumber, totalLimit);
+					final SearchPerformanceStats performanceStats = new SearchPerformanceStats(getSearchType());
+					final SearchResultMatcher rm = new SearchResultMatcher(matcher, phrase, request, requestNumber, totalLimit,
+							performanceStats);
 					if (debugMode) {
 						LOG.info("Starting search <" + phrase.toString() + ">");
 					}
@@ -802,6 +805,7 @@ public class SearchUICore {
 						}
 						return;
 					}
+					performanceStats.start();
 					searchInternal(phrase, rm);
 					if (!rm.isCancelled()) {
 						SearchResultCollection collection = new SearchResultCollection(phrase);
@@ -812,6 +816,7 @@ public class SearchUICore {
 							LOG.info("Processing search results <" + phrase + ">");
 						}
 						collection.addSearchResults(rm.getRequestResults(), true, true);
+						performanceStats.sampleMemory();
 						if (debugMode) {
 							LOG.info("Finishing search <" + phrase + "> Results=" + rm.getRequestResults().size());
 						}
@@ -823,6 +828,7 @@ public class SearchUICore {
 						if (onResultsComplete != null) {
 							onResultsComplete.run();
 						}
+						performanceStats.finish(rm.getRequestResults().size());
 						if (debugMode) {
 							LOG.info("Search finished <" + phrase + "> Results=" + rm.getRequestResults().size());
 						}
@@ -837,6 +843,61 @@ public class SearchUICore {
 				}
 			}
 		});
+	}
+
+	private String getSearchType() {
+		for (SearchCoreAPI api : apis) {
+			if (api instanceof SpatialTextSearchAPI) {
+				return "spatial";
+			}
+		}
+		return "general";
+	}
+
+	private static class SearchPerformanceStats {
+		private final String searchType;
+		private long startTimeNs;
+		private long startUsedMemory;
+		private long peakUsedMemory;
+
+		SearchPerformanceStats(String searchType) {
+			this.searchType = searchType;
+		}
+
+		void start() {
+			startTimeNs = System.nanoTime();
+			startUsedMemory = getUsedMemory();
+			peakUsedMemory = startUsedMemory;
+		}
+
+		void sampleMemory() {
+			if (startTimeNs == 0) {
+				return;
+			}
+			peakUsedMemory = Math.max(peakUsedMemory, getUsedMemory());
+		}
+
+		void finish(int resultsCount) {
+			if (startTimeNs == 0) {
+				return;
+			}
+			long endUsedMemory = getUsedMemory();
+			peakUsedMemory = Math.max(peakUsedMemory, endUsedMemory);
+			long durationMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startTimeNs);
+			LOG.info(String.format(Locale.US,
+					"Search performance type=%s duration=%d ms results=%d memoryStart=%.1f MB memoryEnd=%.1f MB memoryPeak=%.1f MB memoryDelta=%.1f MB",
+					searchType, durationMs, resultsCount, bytesToMb(startUsedMemory), bytesToMb(endUsedMemory),
+					bytesToMb(peakUsedMemory), bytesToMb(endUsedMemory - startUsedMemory)));
+		}
+
+		private static long getUsedMemory() {
+			Runtime runtime = Runtime.getRuntime();
+			return runtime.totalMemory() - runtime.freeMemory();
+		}
+
+		private static double bytesToMb(long bytes) {
+			return bytes / 1024.0 / 1024.0;
+		}
 	}
 
 	private SearchSettings resetSearchSettingsForNewRequest(SearchSettings settings) {
@@ -970,11 +1031,12 @@ public class SearchUICore {
 		}
 	}
 
-	public static class SearchResultMatcher implements ResultMatcher<SearchResult> {
-		private final List<SearchResult> requestResults = new ArrayList<>();
-		private final ResultMatcher<SearchResult> matcher;
-		private final int request;
-		int totalLimit;
+		public static class SearchResultMatcher implements ResultMatcher<SearchResult> {
+			private final List<SearchResult> requestResults = new ArrayList<>();
+			private final ResultMatcher<SearchResult> matcher;
+			private final int request;
+			private final SearchPerformanceStats performanceStats;
+			int totalLimit;
 		private SearchResult parentSearchResult;
 		private final AtomicInteger requestNumber;
 		int count = 0;
@@ -982,14 +1044,20 @@ public class SearchUICore {
 		private List<MapObject> exportedObjects;
 		private List<City> exportedCities;
 
-		public SearchResultMatcher(ResultMatcher<SearchResult> matcher, SearchPhrase phrase, int request,
-								   AtomicInteger requestNumber, int totalLimit) {
-			this.matcher = matcher;
-			this.phrase = phrase;
-			this.request = request;
-			this.requestNumber = requestNumber;
-			this.totalLimit = totalLimit;
-		}
+			public SearchResultMatcher(ResultMatcher<SearchResult> matcher, SearchPhrase phrase, int request,
+									   AtomicInteger requestNumber, int totalLimit) {
+				this(matcher, phrase, request, requestNumber, totalLimit, null);
+			}
+
+			private SearchResultMatcher(ResultMatcher<SearchResult> matcher, SearchPhrase phrase, int request,
+										AtomicInteger requestNumber, int totalLimit, SearchPerformanceStats performanceStats) {
+				this.matcher = matcher;
+				this.phrase = phrase;
+				this.request = request;
+				this.requestNumber = requestNumber;
+				this.totalLimit = totalLimit;
+				this.performanceStats = performanceStats;
+			}
 
 		public SearchResult setParentSearchResult(SearchResult parentSearchResult) {
 			SearchResult prev = this.parentSearchResult;
@@ -1007,6 +1075,12 @@ public class SearchUICore {
 
 		public int getCount() {
 			return requestResults.size();
+		}
+
+		public void sampleMemory() {
+			if (performanceStats != null) {
+				performanceStats.sampleMemory();
+			}
 		}
 
 		public void searchStarted(SearchPhrase phrase) {
@@ -1059,6 +1133,7 @@ public class SearchUICore {
 
 		@Override
 		public boolean publish(SearchResult object) {
+			sampleMemory();
 			// disable boundary for end results
 			if (object.objectType == ObjectType.BOUNDARY) {
 				return false;
