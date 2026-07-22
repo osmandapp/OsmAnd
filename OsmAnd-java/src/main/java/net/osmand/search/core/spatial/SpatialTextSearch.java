@@ -16,6 +16,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.ReentrantLock;
 
 import gnu.trove.set.hash.TLongHashSet;
 
@@ -193,8 +195,7 @@ public class SpatialTextSearch {
 	}
 
 	public static class SpatialSearchFileCache {
-		public int fileInd = -1; // changing each session - not concurrent !!!
-		public int indexInd = -1; // changing each session - not concurrent !!!
+		public final ReentrantLock lock = new ReentrantLock();
 		public final String file;
 		public final long length;
 		public final long edition;
@@ -221,9 +222,7 @@ public class SpatialTextSearch {
 	}
 
 	public static class SpatialSearchGlobalCache {
-
-		public Map<String, SpatialSearchFileCache> filesCache = new HashMap<>();
-
+		public final Map<String, SpatialSearchFileCache> filesCache = new ConcurrentHashMap<>();
 	}
 
 	public static class SpatialSearchResults {
@@ -244,7 +243,7 @@ public class SpatialTextSearch {
 		}
 	}
 
-	SpatialSearchGlobalCache cache = new SpatialSearchGlobalCache(); // reusable between sessions
+	SpatialSearchGlobalCache cache = new SpatialSearchGlobalCache(); // reusable between sessions and threads
 
 	private void sortTokens(List<SpatialSearchToken> tokens) {
 		// sort from least atoms to do combinations as the most efficient

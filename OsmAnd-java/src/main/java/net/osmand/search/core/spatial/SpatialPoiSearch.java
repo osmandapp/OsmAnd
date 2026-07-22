@@ -15,10 +15,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock;
 
 import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapPoiReaderAdapter;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
@@ -32,7 +30,6 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
-import net.osmand.search.core.HashQuadTree;
 import net.osmand.search.core.TopIndexFilter;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialSearchFileCache;
@@ -312,15 +309,15 @@ public class SpatialPoiSearch {
 	private void addPoiCategoryMatch(SpatialSearchContext ctx, SpatialPoiType a, SpatialSearchToken t,
 			Map<SpatialPoiType, PoiCatSearch> res) {
 		int total = 0;
-		for (SpatialSearchFileCache l : ctx.internalFile) {
-			if (l.poiFrequencies != null) {
-				Integer freq = l.poiFrequencies.get(a.key);
+		for (SpatialSearchContext.SessionFileCache l : ctx.internalFile) {
+			if (l.fc().poiFrequencies != null) {
+				Integer freq = l.fc().poiFrequencies.get(a.key);
 				if (freq != null) {
 					total += freq;
 				}
 				if (a.singleType instanceof PoiFilter pf) {
 					for (PoiType p : pf.getPoiTypes()) {
-						freq = l.poiFrequencies.get(p.getKeyName());
+						freq = l.fc().poiFrequencies.get(p.getKeyName());
 						if (freq != null) {
 							total += freq;
 						}

@@ -46,27 +46,45 @@ import net.osmand.util.SearchAlgorithms;
 
 public class SpatialSearchContext {
 
-	private static int SHIFT_FILE_IND = 14; // maxism files 16K
-	private static int SHIFT_POI_IND = 10; // maximum poi 1024
+	private static final int SHIFT_FILE_IND = 14; // maxism files 16K
+	private static final int SHIFT_POI_IND = 10; // maximum poi 1024
 
 	final List<BinaryMapIndexReader> files;
-	final List<SpatialSearchFileCache> internalFile = new ArrayList<>();
+	final List<SessionFileCache> internalFile = new ArrayList<>();
+
+	// per-session view of a shared file cache: session-specific indexes live here,
+	// NOT in the shared SpatialSearchFileCache (they differ between concurrent sessions)
+	record SessionFileCache(SpatialSearchFileCache fc, int fileInd, int indexInd) {
+	}
+
+	private SessionFileCache findSessionFile(int indInd) {
+		for (SessionFileCache c : internalFile) {
+			if (indInd < c.indexInd() + c.fc().indexReaders.size()) {
+				return c;
+			}
+		}
+		return null;
+	}
+
+	private NameIndexReader nameIndexReader(SessionFileCache c, int indInd) {
+		return c == null ? null : c.fc().indexReaders.get(indInd - c.indexInd());
+	}
 	final LatLon location; // could be null
 	final int[][] limitLocationBboxes;
-	
+
 	final SpatialPoiSearch poiSearch;
 	final SpatialTextSearchSettings settings;
 	final SpatialSearchStats stats = new SpatialSearchStats();
-	
+
 	public ResultMatcher<SpatialSearchResult> resultMatcher;
-	
+
 	public boolean isCancelled() {
 		return resultMatcher != null && resultMatcher.isCancelled();
 	}
 
 	List<SpatialSearchToken> tokens = null; // non initiatilized
 	Set<String> commonlyUsedWords = new HashSet<String>();
-	
+
 	public static class SpatialSearchStats {
 		public Timer requestTime = new Timer();
 		public Timer step1Atoms = new Timer();
@@ -74,32 +92,32 @@ public class SpatialSearchContext {
 		public Timer sub1MatchTime = new Timer();
 		public Timer sub1PoiNameBoundaryTime = new Timer();
 		public int tokenObjs;
-		
+
 		public Timer step2Compute = new Timer();
 		public Timer sub2LoadObjectsBldTime = new Timer();
 		public Timer sub2ReadObjTime = new Timer();
 		public int maxCombinations = 0;
-		
+
 		public Timer step3Sort = new Timer();
-		
+
 		public long readTableBytes = 0;
 		public long readAtomsBytes = 0;
 		public long readObjsBytes = 0;
 		public long skipTableBytes = 0;
 		public long skipAtomsBytes = 0;
-		
+
 		// separate api
 		public Timer poiByTypeTime = new Timer();
 		public long poiByTypeBytes = 0;
 		public long poiByTypeBboxes = 0;
-		
+
 		public boolean doTiming = true;
 		public boolean printLogs = true;
-	
+
 		public class Timer {
 			public long time = 0;
 			public long endTime = System.nanoTime();
-			
+
 			public void start() {
 				if (doTiming) {
 					time -= System.nanoTime();
@@ -111,12 +129,12 @@ public class SpatialSearchContext {
 					time += System.nanoTime();
 				}
 			}
-			
+
 			public double ms() {
 				return time / 1e6;
 			}
 		}
-		
+
 		@Override
 		public String toString() {
 			return String.format(
@@ -142,7 +160,7 @@ public class SpatialSearchContext {
 			limitLocationBboxes[k] = calculateBbox(settings.OPTIM_LIMIT_RADIUS[k], loc);
 		}
 	}
-	
+
 	private LatLon getLimitLocationFromFiles(List<BinaryMapIndexReader> files, LatLon limitLocation) {
 		if (limitLocation == null) {
 			for (BinaryMapIndexReader f : files) {
@@ -157,7 +175,7 @@ public class SpatialSearchContext {
 		}
 		return limitLocation;
 	}
-	
+
 	public static int[] calculateBbox(int radiusMeters, LatLon l) {
 		QuadRect qr = MapUtils.calculate31BboxUsingRhumb(radiusMeters, l);
 		int[] bbox31 = new int[4];
@@ -171,7 +189,7 @@ public class SpatialSearchContext {
 		bbox31[2] = (int) qr.right;
 		return bbox31;
 	}
-	
+
 	public SpatialSearchStats getStats() {
 		return stats;
 	}
@@ -180,65 +198,70 @@ public class SpatialSearchContext {
 		int indexInd = 0;
 		int fileInd = 0;
 		for (BinaryMapIndexReader bir : files) {
-			SpatialSearchFileCache fc = cache.filesCache.get(bir.getFile().getName());
-			if (fc == null || !fc.test(bir)) {
-				fc = new SpatialSearchFileCache(bir);
-			}
-			cache.filesCache.put(fc.file, fc);
-			fc.indexInd = indexInd;
-			fc.fileInd = fileInd;
-			this.internalFile.add(fc);
+			SpatialSearchFileCache fc = cache.filesCache.compute(bir.getFile().getName(),
+					(name, prev) -> prev != null && prev.test(bir) ? prev : new SpatialSearchFileCache(bir));
+			this.internalFile.add(new SessionFileCache(fc, fileInd, indexInd));
 			indexInd += fc.indexReaders.size();
 			fileInd++;
-			boolean initPoi = false;
-			if (fc.poiFrequencies != null || fc.poiSearch != poiSearch) {
-				fc.poiFrequencies = new HashMap<String, Integer>();
-				fc.poiSearch = poiSearch;
-				initPoi = true;
-			}
-			for (NameIndexReader r : fc.indexReaders) {
-				if (r.poiRegion != null) {
-					long bRead = bir.getBytesRead();
-					bir.initCategories(r.poiRegion);
-					if (initPoi) {
-						poiSearch.init(cache, fc, bir, r.poiRegion);
-					}
-					stats.readAtomsBytes += (bir.getBytesRead() - bRead);
+			fc.lock.lock();
+			try {
+				boolean initPoi = false;
+				if (fc.poiFrequencies == null || fc.poiSearch != poiSearch) {
+					fc.poiFrequencies = new HashMap<>();
+					fc.poiSearch = poiSearch;
+					initPoi = true;
 				}
-				r.gcPrefixes(settings.AUTO_CLEAR_PREFIX_CACHE_LIMIT);
+				for (NameIndexReader r : fc.indexReaders) {
+					if (r.poiRegion != null) {
+						long bRead = bir.getBytesRead();
+						bir.initCategories(r.poiRegion);
+						if (initPoi) {
+							poiSearch.init(cache, fc, bir, r.poiRegion);
+						}
+						stats.readAtomsBytes += (bir.getBytesRead() - bRead);
+					}
+					r.gcPrefixes(settings.AUTO_CLEAR_PREFIX_CACHE_LIMIT);
+				}
+			} finally {
+				fc.lock.unlock();
 			}
 		}
 	}
-	
-	
+
+
 	public void setTokens(List<SpatialSearchToken> tokens) {
 		this.tokens = tokens;
 	}
 
-	
+
 	void processPoiCategories() throws IOException {
 		if (settings.SEARCH_POI_CATEGORIES) {
 			poiSearch.processPoiCategories(this, tokens);
 		}
 	}
 
-	
-	
+
+
 	void readAtoms() throws IOException {
 		int indxInd = 0;
-		
+
 		for (int fileInd = 0; fileInd < files.size(); fileInd++) {
-			SpatialSearchFileCache iCache = internalFile.get(fileInd);
+			SpatialSearchFileCache iCache = internalFile.get(fileInd).fc();
 			BinaryMapIndexReader b = files.get(fileInd);
-			for (NameIndexReader indx : iCache.indexReaders) {
-				indx.resetBytesStat();
-				readAtoms(tokens, b, indx, indxInd);
-				indxInd++;
-				NameIndexReaderBytes bytesStat = indx.getBytesStat();
-				stats.readAtomsBytes += bytesStat.readAtomBytes;
-				stats.skipAtomsBytes += bytesStat.skipAtomBytes;
-				stats.readTableBytes += (bytesStat.readTableBytes - bytesStat.skipTableBytes);
-				stats.skipTableBytes += bytesStat.skipTableBytes;
+			iCache.lock.lock();
+			try {
+				for (NameIndexReader indx : iCache.indexReaders) {
+					indx.resetBytesStat();
+					readAtoms(tokens, b, indx, indxInd);
+					indxInd++;
+					NameIndexReaderBytes bytesStat = indx.getBytesStat();
+					stats.readAtomsBytes += bytesStat.readAtomBytes;
+					stats.skipAtomsBytes += bytesStat.skipAtomBytes;
+					stats.readTableBytes += (bytesStat.readTableBytes - bytesStat.skipTableBytes);
+					stats.skipTableBytes += bytesStat.skipTableBytes;
+				}
+			} finally {
+				iCache.lock.unlock();
 			}
 		}
 		// add partial once we read all files
@@ -259,7 +282,7 @@ public class SpatialSearchContext {
 			}
 			stats.sub1PoiNameBoundaryTime.finish();
 		}
-		
+
 	}
 
 	private void addPartialMatch(SpatialSearchToken t, List<PartialMatch> partialAtoms) {
@@ -300,7 +323,6 @@ public class SpatialSearchContext {
 			}
 		}
 	}
-	
 
 	private void assignPoiFlagGeo(Map<TIntArrayList, List<AtomByTokens>> cities, List<SpatialSearchToken> tokens) {
 		Map<TIntArrayList, List<AtomByTokens>> streets = groupAtomsByTokens(tokens, t -> t.isStreet()); // check performance
@@ -348,9 +370,7 @@ public class SpatialSearchContext {
 
 	record AtomByTokens(NameIndexAtom obj, TIntArrayList lstTokens) {
 	}
-	
-	
-	
+
 	private Map<TIntArrayList, List<AtomByTokens>> filterEmbeddedBoundaries(List<SpatialSearchToken> tokens) {
 		Map<TIntArrayList, List<AtomByTokens>> group = groupAtomsByTokens(tokens, t -> t.isCityVillage() || t.isBoundary());
 		// 3. find the largest boundary and delete embedded
@@ -454,7 +474,7 @@ public class SpatialSearchContext {
 			}
 		}
 	}
-	
+
 	static boolean checkPoiTypeId(int poiTypeId) {
 		// first 2^8 - 256 bytes not possible to be used by file
 		if (poiTypeId > (1 << (SHIFT_FILE_IND + 8))) {
@@ -470,7 +490,7 @@ public class SpatialSearchContext {
 		long id = (shiftToIndex << SHIFT_FILE_IND) + fileInd;
 		return id;
 	}
-	
+
 	private long makePoiId(int fileInd, long shiftToIndex, int poiInd) {
 		if (fileInd > 1 << SHIFT_FILE_IND) {
 			throw new IllegalStateException();
@@ -528,26 +548,19 @@ public class SpatialSearchContext {
 			}
 		}
 	}
-	
-	
+
+
 	public void readPOIBboxes(int indInd, TLongHashSet tiles) throws IOException {
-		NameIndexReader nameIndex = null;
-		SpatialSearchFileCache c = null;
-		for (int k = 0; k < internalFile.size(); k++) {
-			c = internalFile.get(k);
-			if (indInd < c.indexInd + c.indexReaders.size()) {
-				nameIndex = c.indexReaders.get(indInd - c.indexInd);
-				break;
-			}
-		}
+		SessionFileCache c = findSessionFile(indInd);
+		NameIndexReader nameIndex = nameIndexReader(c, indInd);
 		stats.sub2ReadObjTime.start();
-		BinaryMapIndexReader bmir = files.get(c.fileInd);
+		BinaryMapIndexReader bmir = files.get(c.fileInd());
 		long bytesRead = bmir.getBytesRead();
 		bmir.readAmenityBboxes(nameIndex.poiRegion, tiles);
 		stats.readObjsBytes += (bmir.getBytesRead() - bytesRead);
 		stats.sub2ReadObjTime.finish();
 	}
-	
+
 	public int getFileInd(long id) {
 		int indInd = (int) (id & ((1l << SHIFT_FILE_IND) - 1));
 		return indInd;
@@ -567,18 +580,11 @@ public class SpatialSearchContext {
 		id >>= SHIFT_POI_IND;
 		long shift = id;
 
-		NameIndexReader nameIndex = null;
-		SpatialSearchFileCache c = null;
-		for (int k = 0; k < internalFile.size(); k++) {
-			c = internalFile.get(k);
-			if (indInd < c.indexInd + c.indexReaders.size()) {
-				nameIndex = c.indexReaders.get(indInd - c.indexInd);
-				break;
-			}
-		}
+		SessionFileCache c = findSessionFile(indInd);
+		NameIndexReader nameIndex = nameIndexReader(c, indInd);
 
 		stats.sub2ReadObjTime.start();
-		BinaryMapIndexReader bmir = files.get(c.fileInd);
+		BinaryMapIndexReader bmir = files.get(c.fileInd());
 		long bytesRead = bmir.getBytesRead();
 		List<Amenity> lst = bmir.readAmenityBlock(nameIndex.poiRegion, shift, poiInd);
 		if (cache != null) {
@@ -604,17 +610,10 @@ public class SpatialSearchContext {
 		int indInd = (int) (id & ((1l << SHIFT_FILE_IND) - 1));
 		id >>= SHIFT_FILE_IND;
 		long shift = id;
-		
-		NameIndexReader nameIndex = null;
-		SpatialSearchFileCache c = null;
-		for (int k = 0; k < internalFile.size(); k++) {
-			c = internalFile.get(k);
-			if (indInd < c.indexInd + c.indexReaders.size()) {
-				nameIndex = c.indexReaders.get(indInd - c.indexInd);
-				break;
-			}
-		}		
-		BinaryMapIndexReader bmir = files.get(c.fileInd);
+
+		SessionFileCache c = findSessionFile(indInd);
+		NameIndexReader nameIndex = nameIndexReader(c, indInd);
+		BinaryMapIndexReader bmir = files.get(c.fileInd());
 		long bytesRead = bmir.getBytesRead();
 		stats.sub2ReadObjTime.start();
 		MapObject obj;
@@ -747,7 +746,7 @@ public class SpatialSearchContext {
 		return poiTypes;
 	}
 
-	private boolean matchName(NameIndexReader indx, SpatialSearchToken t, String name, 
+	private boolean matchName(NameIndexReader indx, SpatialSearchToken t, String name,
 			TIntArrayList poiTypes, boolean[] commonWord) {
 		stats.sub1MatchTime.start();
 		int is = name.indexOf(' ');
@@ -777,7 +776,7 @@ public class SpatialSearchContext {
 		stats.sub1MatchTime.finish();
 		return acceptName;
 	}
-	
+
 	private String matchPartName(SpatialSearchToken t, String name, List<SpatialSearchToken> allTokens) {
 		stats.sub1MatchTime.start();
 		String[] res = t.matchSplitName(name);
@@ -847,7 +846,7 @@ public class SpatialSearchContext {
 					if (numeric) {
 						numericNotMatch = !t.word.contains(otherName); // "us 15" data, "us-15" token
 					}
-					if (!Abbreviations.isCommonSkipOtherCnt(otherName) && 
+					if (!Abbreviations.isCommonSkipOtherCnt(otherName) &&
 						 !isWordCommonlyUsed(indx, otherName)) { // To choose Tour eiffel or onlyWest / North !
 						other++;
 					}
@@ -868,7 +867,7 @@ public class SpatialSearchContext {
 		// for all common always false, for some frequent could be optimization
 		if (settings.OPTIM_READ_COMMON_WORDS_ATOMS && cmnWord[0]) {
 			// name 'ru de rue' could match 'rue' it's because of prefix & suffixes
-			
+
 			if (other > 0) {
 				// skip rare words to be added specifically
 				t.addPartialOtherAtom(atom, otherTokens, numericNotMatch);
@@ -922,7 +921,7 @@ public class SpatialSearchContext {
 		if (!(street && settings.SEARCH_BUILDINGS) && !(poi && settings.SEARCH_POI_REF)) {
 			return;
 		}
-		int typeToAdd = street ? SpatialSearchToken.BUILDING_TYPE : SpatialSearchToken.POI_REF_TYPE; 
+		int typeToAdd = street ? SpatialSearchToken.BUILDING_TYPE : SpatialSearchToken.POI_REF_TYPE;
 		for (SpatialSearchToken token : allTokens) {
 			// assign building to word token isNumber2Letters (number + 1 char) + possible
 			if (t != token && (otherTokens == null || !otherTokens.contains(token))) {
