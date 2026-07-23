@@ -13,18 +13,33 @@ class CoordinateFormatHelper(private val app: OsmandApplication) {
 
 	val transformer = EpsgCoordinateTransformer(app)
 	val repository = EpsgCatalogRepository(app)
+	val gridFormatProvider = CoordinateGridFormatProvider(app, repository)
 	val formatter = CoordinateFormatFormatter(app, transformer)
 
 	private val searchScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 	private var searchJob: Job? = null
 
 	fun searchFormats(query: String?, callback: CoordinateSearchCallback) {
+		searchFormats(query, false, callback)
+	}
+
+	fun searchGridFormats(query: String?, callback: CoordinateSearchCallback) {
+		searchFormats(query, true, callback)
+	}
+
+	private fun searchFormats(query: String?, gridFormatsOnly: Boolean, callback: CoordinateSearchCallback) {
 		searchJob?.cancel()
 		searchJob = searchScope.launch {
 			if (!query.isNullOrBlank()) {
 				delay(SEARCH_DEBOUNCE_MS)
 			}
-			val results = if (query.isNullOrBlank()) repository.listAll() else repository.search(query)
+			val results = if (gridFormatsOnly) {
+				repository.searchGridFormats(query)
+			} else if (query.isNullOrBlank()) {
+				repository.listAll()
+			} else {
+				repository.search(query)
+			}
 			if (isActive) {
 				app.runInUIThread { callback.onResult(results) }
 			}
