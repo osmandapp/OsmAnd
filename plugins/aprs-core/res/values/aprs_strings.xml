@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="plugin_aprs_name">APRS station tracker</string>
+    <string name="plugin_aprs_description">Displays live APRS station positions and weather on the map. Packet data is received from an external TNC, SDR driver, or test source.</string>
+    <string name="plugin_aprs_settings_description">Configure APRS frequency, station filters, and Hamlib rig control.</string>
+    <string name="aprs_frequency_settings">Frequency</string>
+    <string name="aprs_frequency">APRS frequency</string>
+    <string name="aprs_frequency_description">Regional APRS voice packet frequency in MHz.</string>
+    <string name="aprs_custom_frequency">Custom frequency (MHz)</string>
+    <string name="aprs_custom_frequency_description">Used when Custom is selected above.</string>
+    <string name="aprs_filter_settings">Filters</string>
+    <string name="aprs_expiry_minutes">Station expiry</string>
+    <string name="aprs_expiry_description">Remove stations not heard within this time.</string>
+    <string name="aprs_radius_km">Radius filter</string>
+    <string name="aprs_radius_description">Discard stations outside this distance from current GPS position.</string>
+    <string name="aprs_hamlib_settings">Hamlib rig control</string>
+    <string name="aprs_hamlib_enabled">Enable Hamlib integration</string>
+    <string name="aprs_hamlib_enabled_description">Tune connected radio via rigctld when tapping a QRV station.</string>
+    <string name="aprs_hamlib_host">rigctld host</string>
+    <string name="aprs_hamlib_host_description">Hostname or IP of the rigctld server.</string>
+    <string name="aprs_hamlib_port">rigctld port</string>
+    <string name="aprs_hamlib_port_description">TCP port for rigctld (default 4532).</string>
+</resources>
