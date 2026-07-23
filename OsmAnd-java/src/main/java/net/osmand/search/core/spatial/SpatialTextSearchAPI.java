@@ -17,7 +17,6 @@ import net.osmand.data.City;
 import net.osmand.data.City.CityType;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
-import net.osmand.data.QuadRect;
 import net.osmand.data.Street;
 import net.osmand.map.OsmandRegions;
 import net.osmand.osm.AbstractPoiType;
@@ -26,7 +25,6 @@ import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreFactory.SearchBaseAPI;
 import net.osmand.search.core.SearchPhrase;
-import net.osmand.search.core.SearchPhrase.SearchPhraseDataType;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchWord;
 import net.osmand.search.core.spatial.SpatialSearchResult.SpatialSearchResultRef;
@@ -34,7 +32,6 @@ import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialSearchResults;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSettings;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -126,7 +123,7 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 			return false;
 		}
 		List<Amenity> amenities = poiSearch.loadPOIObjects(context, spatialPoiType, location,
-				getPoiTypeSearchRadius(phrase, location), phrase.getSettings().getTotalLimit());
+				context.settings.SUGGESTED_SEARCH_RADIUS_KM * 1000, phrase.getSettings().getTotalLimit());
 		for (Amenity amenity : amenities) {
 			if (resultMatcher.isCancelled()) {
 				return false;
@@ -161,21 +158,6 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		return context;
 	}
 
-	private int getPoiTypeSearchRadius(SearchPhrase phrase, LatLon location) {
-		QuadRect searchBBox31 = phrase.getSettings().getSearchBBox31();
-		if (searchBBox31 == null) {
-			return phrase.getRadiusSearch(10_000);
-		}
-		double leftLon = MapUtils.get31LongitudeX((int) searchBBox31.left);
-		double rightLon = MapUtils.get31LongitudeX((int) searchBBox31.right);
-		double topLat = MapUtils.get31LatitudeY((int) searchBBox31.top);
-		double bottomLat = MapUtils.get31LatitudeY((int) searchBBox31.bottom);
-		double radius = Math.max(
-				MapUtils.getDistance(location.getLatitude(), location.getLongitude(), topLat, leftLon),
-				MapUtils.getDistance(location.getLatitude(), location.getLongitude(), bottomLat, rightLon));
-		return Math.max(1, (int) Math.ceil(radius));
-	}
-
 	private SearchResult createSelectedPoiTypeResult(SearchPhrase phrase, Amenity amenity) {
 		SearchResult result = new SearchResult(phrase);
 		result.object = amenity;
@@ -196,25 +178,14 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 	}
 
 	private List<BinaryMapIndexReader> getSpatialPoiSearchFiles(SearchPhrase phrase) {
-		QuadRect searchBBox31 = phrase.getSettings().getSearchBBox31();
 		List<BinaryMapIndexReader> files = new ArrayList<>();
-		if (searchBBox31 == null) {
-			addFiles(files, phrase.getOfflineIndexes().iterator());
-		} else {
-			addFiles(files, phrase.getOfflineIndexes(searchBBox31, SearchPhraseDataType.POI));
-		}
+		addFiles(files, phrase.getOfflineIndexes().iterator());
 		return files;
 	}
 
 	private List<BinaryMapIndexReader> getSpatialSearchFiles(SearchPhrase phrase) {
-		QuadRect searchBBox31 = phrase.getSettings().getSearchBBox31();
 		List<BinaryMapIndexReader> files = new ArrayList<>();
-		if (searchBBox31 == null) {
-			addFiles(files, phrase.getOfflineIndexes().iterator());
-		} else {
-			addFiles(files, phrase.getOfflineIndexes(searchBBox31, SearchPhraseDataType.ADDRESS));
-			addFiles(files, phrase.getOfflineIndexes(searchBBox31, SearchPhraseDataType.POI));
-		}
+		addFiles(files, phrase.getOfflineIndexes().iterator());
 		addRegionsFile(files, phrase);
 		return files;
 	}

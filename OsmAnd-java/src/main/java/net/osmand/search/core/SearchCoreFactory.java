@@ -2062,12 +2062,11 @@ public class SearchCoreFactory {
 			String text = !unknownWords.isEmpty() ? unknownWords.get(0) : phrase.getUnknownWordToSearch();
 			
 			final List<String> allowedTypes = Arrays.asList("village", "town", "city"); // ascending priority
-			QuadRect searchBBox31 = new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
 			final NameStringMatcher nm = new NameStringMatcher(text, CHECK_STARTS_FROM_SPACE);
 			final String lang = phrase.getSettings().getLang();
 			final boolean transliterate = phrase.getSettings().isTransliterate();
 			
-			SearchSettings settings = phrase.getSettings().setSearchBBox31(searchBBox31);
+			SearchSettings settings = phrase.getSettings();
 			settings = settings.setSortByName(false);
 			settings = settings.setEmptyQueryAllowed(true);
 
