@@ -51,24 +51,6 @@ public class SpatialSearchContext {
 
 	final List<BinaryMapIndexReader> files;
 	final List<SessionFileCache> internalFile = new ArrayList<>();
-
-	// per-session view of a shared file cache: session-specific indexes live here,
-	// NOT in the shared SpatialSearchFileCache (they differ between concurrent sessions)
-	record SessionFileCache(SpatialSearchFileCache fc, int fileInd, int indexInd) {
-	}
-
-	private SessionFileCache findSessionFile(int indInd) {
-		for (SessionFileCache c : internalFile) {
-			if (indInd < c.indexInd() + c.fc().indexReaders.size()) {
-				return c;
-			}
-		}
-		return null;
-	}
-
-	private NameIndexReader nameIndexReader(SessionFileCache c, int indInd) {
-		return c == null ? null : c.fc().indexReaders.get(indInd - c.indexInd());
-	}
 	final LatLon location; // could be null
 	final int[][] limitLocationBboxes;
 
@@ -192,6 +174,24 @@ public class SpatialSearchContext {
 
 	public SpatialSearchStats getStats() {
 		return stats;
+	}
+
+	// per-session view of a shared file cache: session-specific indexes live here,
+	// NOT in the shared SpatialSearchFileCache (they differ between concurrent sessions)
+	record SessionFileCache(SpatialSearchFileCache fc, int fileInd, int indexInd) {
+	}
+
+	private SessionFileCache findSessionFile(int indInd) {
+		for (SessionFileCache c : internalFile) {
+			if (indInd < c.indexInd() + c.fc().indexReaders.size()) {
+				return c;
+			}
+		}
+		return null;
+	}
+
+	private NameIndexReader nameIndexReader(SessionFileCache c, int indInd) {
+		return c == null ? null : c.fc().indexReaders.get(indInd - c.indexInd());
 	}
 
 	public void initFiles(SpatialSearchGlobalCache cache) throws IOException {
