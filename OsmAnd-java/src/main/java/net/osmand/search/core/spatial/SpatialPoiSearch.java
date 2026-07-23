@@ -462,17 +462,20 @@ public class SpatialPoiSearch {
 		return results;
 	}
 
+	private static Set<String> groupChildTypes(SpatialPoiType spt) {
+		if (spt.singleType instanceof PoiFilter pf && !(spt.singleType instanceof PoiCategory)) {
+			Set<String> types = new HashSet<>();
+			for (PoiType p : pf.getPoiTypes()) {
+				types.add(p.getKeyName());
+			}
+			return types;
+		}
+		return Collections.emptySet();
+	}
 
 	private SearchRequest<Amenity> prepareRequest(SpatialPoiType spt, List<Amenity> results, int sleft, int stop, int sright,
 			int sbottom, int zoom, int[] alimit) {
-		Set<String> filterTypes = null;
-		if (spt.singleType instanceof PoiFilter pf && !(spt.singleType instanceof PoiCategory)) {
-			filterTypes = new HashSet<>();
-			for (PoiType p : pf.getPoiTypes()) {
-				filterTypes.add(p.getKeyName());
-			}
-		}
-		final Set<String> groupTypes = filterTypes;
+		final Set<String> groupTypes = groupChildTypes(spt);
 		SearchPoiTypeFilter typeFilter = spt.poiAdditional != null ? null : new SearchPoiTypeFilter() {
 
 			@Override
@@ -480,7 +483,7 @@ public class SpatialPoiSearch {
 				if (spt.key.equals(type.getKeyName()) || spt.key.equals(subcategory)) {
 					return true;
 				}
-				if (groupTypes != null && groupTypes.contains(subcategory)) {
+				if (groupTypes.contains(subcategory)) {
 					return true;
 				}
 				if (spt.parentTypes != null) {
