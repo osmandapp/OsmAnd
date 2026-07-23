@@ -35,6 +35,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 class RouteRecalculationHelper {
 	private static final Log LOG = PlatformUtil.getLog(RouteRecalculationHelper.class);
@@ -48,6 +49,9 @@ class RouteRecalculationHelper {
 
 	private final ExecutorService executor = new RouteRecalculationExecutor();
 	private final Map<Future<?>, RouteRecalculationTask> tasksMap = new LinkedHashMap<>();
+	// Counts active recalculation tasks so the UI can ask "is a route being
+	// calculated?" without taking the routingHelper lock on every frame.
+	private final AtomicInteger activeTaskCount = new AtomicInteger(0);
 	private RouteRecalculationTask lastTask;
 
 	private long lastTimeEvaluatedRoute;
@@ -84,14 +88,7 @@ class RouteRecalculationHelper {
 	}
 
 	boolean isRouteBeingCalculated() {
-		synchronized (routingHelper) {
-			for (Future<?> future : tasksMap.keySet()) {
-				if (!future.isDone()) {
-					return true;
-				}
-			}
-		}
-		return false;
+		return activeTaskCount.get() > 0;
 	}
 
 	void resetEvalWaitInterval() {
@@ -216,6 +213,7 @@ class RouteRecalculationHelper {
 			}
 			Future<?> future = executor.submit(newTask);
 			tasksMap.put(future, newTask);
+			activeTaskCount.incrementAndGet();
 		}
 	}
 
@@ -465,6 +463,9 @@ class RouteRecalculationHelper {
 				if (r instanceof Future<?>) {
 					task = tasksMap.remove(r);
 				}
+			}
+			if (task != null) {
+				activeTaskCount.decrementAndGet();
 			}
 			if (t == null && task != null) {
 				evalWaitInterval = task.evalWaitInterval;
