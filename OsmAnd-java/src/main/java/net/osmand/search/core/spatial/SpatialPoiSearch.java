@@ -3,11 +3,13 @@ package net.osmand.search.core.spatial;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -463,11 +465,22 @@ public class SpatialPoiSearch {
 
 	private SearchRequest<Amenity> prepareRequest(SpatialPoiType spt, List<Amenity> results, int sleft, int stop, int sright,
 			int sbottom, int zoom, int[] alimit) {
+		Set<String> filterTypes = null;
+		if (spt.singleType instanceof PoiFilter pf && !(spt.singleType instanceof PoiCategory)) {
+			filterTypes = new HashSet<>();
+			for (PoiType p : pf.getPoiTypes()) {
+				filterTypes.add(p.getKeyName());
+			}
+		}
+		final Set<String> groupTypes = filterTypes;
 		SearchPoiTypeFilter typeFilter = spt.poiAdditional != null ? null : new SearchPoiTypeFilter() {
 
 			@Override
 			public boolean accept(PoiCategory type, String subcategory) {
 				if (spt.key.equals(type.getKeyName()) || spt.key.equals(subcategory)) {
+					return true;
+				}
+				if (groupTypes != null && groupTypes.contains(subcategory)) {
 					return true;
 				}
 				if (spt.parentTypes != null) {
