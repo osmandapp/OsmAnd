@@ -104,7 +104,7 @@ public class SearchUICore {
 		searchSettings = new SearchSettings(new ArrayList<BinaryMapIndexReader>());
 		searchSettings = searchSettings.setLang(locale, transliterate);
 		phrase = SearchPhrase.emptyPhrase(searchSettings);
-		currentSearchResult = new SearchResultCollection(phrase);
+		currentSearchResult = new SearchResultCollection(phrase, isSpatialSearch());
 		singleThreadedExecutor = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, taskQueue);
 	}
 
@@ -119,16 +119,22 @@ public class SearchUICore {
 	public static class SearchResultCollection {
 		private final List<SearchResult> searchResults = new ArrayList<>();
 		private final SearchPhrase phrase;
+		private final boolean skipSorting;
 		private boolean useLimit;
 		private static final int DEPTH_TO_CHECK_SAME_SEARCH_RESULTS = 20;
 		private static final Integer DOMINATED_CITY_CRITERIA = 5;
 
 		public SearchResultCollection(SearchPhrase phrase) {
+			this(phrase, false);
+		}
+
+		public SearchResultCollection(SearchPhrase phrase, boolean skipSorting) {
 			this.phrase = phrase;
+			this.skipSorting = skipSorting;
 		}
 
 		public SearchResultCollection combineWithCollection(SearchResultCollection collection, boolean resort, boolean removeDuplicates) {
-			SearchResultCollection src = new SearchResultCollection(phrase);
+			SearchResultCollection src = new SearchResultCollection(phrase, skipSorting || collection.skipSorting);
 			src.addSearchResults(searchResults, false, false);
 			src.addSearchResults(collection.searchResults, resort, removeDuplicates);
 			return src;
@@ -251,6 +257,9 @@ public class SearchUICore {
 		}
 		
 		public void sortSearchResults() {
+			if (skipSorting) {
+				return;
+			}
 			if (debugMode) {
 				LOG.info("Sorting search results <" + phrase + "> Results=" + searchResults.size());
 			}
@@ -544,7 +553,7 @@ public class SearchUICore {
 			SearchResultMatcher rm = new SearchResultMatcher(matcher, sphrase, ai.get(), ai, totalLimit);
 			api.search(sphrase, rm);
 
-			SearchResultCollection collection = new SearchResultCollection(sphrase);
+			SearchResultCollection collection = new SearchResultCollection(sphrase, isSpatialSearch());
 			if (rm.totalLimit != -1 && rm.count > rm.totalLimit) {
 				collection.setUseLimit(true);
 			}
@@ -679,7 +688,7 @@ public class SearchUICore {
 
 	public void resetSearch() {
 		phrase = SearchPhrase.emptyPhrase(searchSettings);
-		currentSearchResult = new SearchResultCollection(phrase);
+		currentSearchResult = new SearchResultCollection(phrase, isSpatialSearch());
 	}
 
 	public SearchPhrase resetPhrase() {
@@ -705,7 +714,7 @@ public class SearchUICore {
 		final SearchPhrase searchPhrase = this.phrase.generateNewPhrase(text, resetSearchSettingsForNewRequest(searchSettings));
 		final SearchResultMatcher rm = new SearchResultMatcher(null, searchPhrase, requestNumber.get(), requestNumber, totalLimit);
 		searchInternal(searchPhrase, rm);
-		SearchResultCollection resultCollection = new SearchResultCollection(searchPhrase);
+		SearchResultCollection resultCollection = new SearchResultCollection(searchPhrase, isSpatialSearch());
 		if (rm.totalLimit != -1 && rm.count > rm.totalLimit) {
 			resultCollection.setUseLimit(true);
 		}
@@ -808,7 +817,7 @@ public class SearchUICore {
 					performanceStats.start();
 					searchInternal(phrase, rm);
 					if (!rm.isCancelled()) {
-						SearchResultCollection collection = new SearchResultCollection(phrase);
+						SearchResultCollection collection = new SearchResultCollection(phrase, isSpatialSearch());
 						if (rm.totalLimit != -1 && rm.count > rm.totalLimit) {
 							collection.setUseLimit(true);
 						}
@@ -846,12 +855,19 @@ public class SearchUICore {
 	}
 
 	private String getSearchType() {
-		for (SearchCoreAPI api : apis) {
-			if (api instanceof SpatialTextSearchAPI) {
-				return "spatial";
-			}
+		if (isSpatialSearch()) {
+			return "spatial";
 		}
 		return "general";
+	}
+
+	private boolean isSpatialSearch() {
+		for (SearchCoreAPI api : apis) {
+			if (api instanceof SpatialTextSearchAPI) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private static class SearchPerformanceStats {
