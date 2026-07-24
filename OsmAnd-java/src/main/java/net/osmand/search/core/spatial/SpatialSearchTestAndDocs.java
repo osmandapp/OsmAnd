@@ -61,7 +61,7 @@ import net.osmand.util.SearchAlgorithms;
 // UNIT TESTING: (Deduplicate categories brand id) - "okko", "ОККО" - (split 2 maps one without brand id one with)
 // NO TESTING  :.. Amenity bbox (merge on search for category)
 // REVIEWED TESTS OK '237 S Mountain Blvd Mountain Top', '276 East End Centre Wilkes-Barre', '401 Market Street Kingston', '155 Park Avenue Wilkes-Barre' (13 place)
-
+// REVIEW TEST - add back ','
 ////////// IN PROGRESS //////////
 // REVIEW (index_words_dashboard - common озеро): POI / ADDRESS - France, Germany, US, Europe, China, Peru
 // REVIEW: Auto test New york, France, Italy (Slow?)

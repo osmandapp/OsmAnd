@@ -773,6 +773,22 @@ public class MapUtils {
 		return rect;
 	}
 	
+	public static int[] calc31BboxRhumb(int radiusMeters, int x, int y, int z) {
+		double lat = MapUtils.getLatitudeFromTile(z, y + 0.5);
+		double lon = MapUtils.getLongitudeFromTile(z, x + 0.5);
+		double deltaLat = radiusMeters / METERS_IN_DEGREE;
+		double deltaLon = radiusMeters / (METERS_IN_DEGREE * Math.cos(Math.toRadians(lat)));
+		double northLat = lat + deltaLat;
+		double southLat = lat - deltaLat;
+		double westLon = lon - deltaLon;
+		double eastLon = lon + deltaLon;
+		int top = MapUtils.get31TileNumberY(Math.min(MAX_LATITUDE, northLat));
+		int left = MapUtils.get31TileNumberX(Math.max(MIN_LONGITUDE, westLon));
+		int bottom = MapUtils.get31TileNumberY(Math.max(MIN_LATITUDE, southLat));
+		int right = MapUtils.get31TileNumberX(Math.min(MAX_LONGITUDE, eastLon));
+		return new int[] { left, top, right, bottom };
+	}
+	
 	public static QuadRect calculate31BboxUsingRhumb(int radiusMeters, LatLon l) {
 		LatLon northWest = MapUtils.rhumbDestinationPoint(l.getLatitude(), l.getLongitude(), radiusMeters, 315);
 		LatLon southEast = MapUtils.rhumbDestinationPoint(l.getLatitude(), l.getLongitude(), radiusMeters, 135);

@@ -481,6 +481,4 @@ public class HashSkipTileQuadTree<T> {
 		return tileEntries;
 	}
 
-	
-
 }

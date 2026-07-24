@@ -551,10 +551,10 @@ public class SpatialSearchContext {
 				z--;
 				tileId >>= 2;
 			}
-			if (t.cacheCategoryFilterObjects.containsKey(tileId) && a.getEloRatingCount() == 0) {
+			if (t.cacheCategoryFilterObjects.contains(tileId) && a.getEloRatingCount() == 0) {
 				return true;
 			}
-			t.cacheCategoryFilterObjects.put(tileId, a);
+			t.cacheCategoryFilterObjects.add(tileId);
 		}
 		return false;
 	}

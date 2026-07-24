@@ -9,6 +9,7 @@ import com.google.protobuf.ByteString;
 
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TLongObjectHashMap;
+import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.binary.Abbreviations;
@@ -75,7 +76,7 @@ public class SpatialSearchToken {
 	
 	
 	boolean categoryMatchMode = false;
-	TLongObjectHashMap<Object> cacheCategoryFilterObjects = new TLongObjectHashMap<Object>(); 
+	TLongHashSet cacheCategoryFilterObjects = new TLongHashSet(); 
 	
 	public record PartialMatch(NameIndexAtom atom, List<SpatialSearchToken> other, boolean nonNumericMatch) {
 		
@@ -351,7 +352,7 @@ public class SpatialSearchToken {
 			if (a != null) {
 				init(a, settings);
 			} else if(b != null){
-				init(b);
+				init(b, settings);
 			} else {
 				// full world
 				bboxTileZoom = 0;
@@ -424,20 +425,15 @@ public class SpatialSearchToken {
 				this.y16 = (xy16 & ((1 << 16) - 1));
 				decodeBBox(addr.hasBbox() ? addr.getBbox() : null);
 				if (bbox31 == null) {
-					// not needed as we calculate on server for all cities
-//					if (addr.getType() != CityBlocks.STREET_TYPE.index) {
-//						// possibly needs to be calculated on server
-//						int shift = (1 << (16 - 12)); // extend 12th tile
-//						bbox31 = new int[4];
-//						bbox31[0] = (x16 - shift) << 15;
-//						bbox31[2] = (x16 + shift) << 15;
-//						bbox31[1] = (y16 - shift) << 15;
-//						bbox31[3] = (y16 + shift) << 15;
-//						calcTileFromBbox();
-//					} else {
+					if (settings.DEV_USE_SKIP_HASH_TREE) {
 						bboxTileZoom = 15;
 						bboxTileId = HashQuadTree.encodeTileId(bboxTileZoom, x16 / 2, y16 / 2);
-//					}
+						bbox31 = MapUtils.calc31BboxRhumb(settings.ADDR_DEFAULT_RADIUS, x16, y16, 16);
+						calcTileFromBbox();
+					} else {
+						bboxTileZoom = 15;
+						bboxTileId = HashQuadTree.encodeTileId(bboxTileZoom, x16 / 2, y16 / 2);
+					}
 				}
 			}
 		}
@@ -452,28 +448,40 @@ public class SpatialSearchToken {
 
 		private void calcTileFromBbox() {
 			if (bbox31 != null) {
-				int z = 31;
 				// for 180 lat check max  
 				int xleft = bbox31[0], xright = Math.max(bbox31[2], bbox31[0]);
 				int ytop = bbox31[1], ybottom = Math.max(bbox31[3], bbox31[1]);
-				while (xleft != xright || ytop != ybottom) {
-					z--;
-					xleft >>= 1;
-					xright >>= 1;
-					ytop >>= 1;
-					ybottom >>= 1;
-				}
+				int xDiff = xleft ^ xright;
+				int yDiff = ytop ^ ybottom;
+				int maxDiff = xDiff | yDiff;
+				int bitsToShift = (maxDiff == 0) ? 0 : (32 - Integer.numberOfLeadingZeros(maxDiff));
+				
+				int z = Math.min(31 - bitsToShift, 16);
+				xleft = xleft >> (31 - z);
+				ytop = ytop >> (31 - z);
+//				int z = 31;
+//				while (xleft != xright || ytop != ybottom || z > 16) {
+//					z--;
+//					xleft >>= 1;
+//					xright >>= 1;
+//					ytop >>= 1;
+//					ybottom >>= 1;
+//				}
 				bboxTileZoom = z;
 				bboxTileId = HashQuadTree.encodeTileId(z, xleft, ytop);
 			}
 		}
 
-		private void init(OsmAndPoiNameIndexDataAtom poi) {
+		private void init(OsmAndPoiNameIndexDataAtom poi, SpatialTextSearchSettings settings) {
 			this.x16 = poi.getX();
 			this.y16 = poi.getY();
 			bboxTileZoom = 16;
 			bboxTileId = HashQuadTree.encodeTileId(bboxTileZoom, x16, y16);
 			decodeBBox(poi.hasBbox() ? poi.getBbox() : null);
+			if (bbox31 == null && settings.DEV_USE_SKIP_HASH_TREE) {
+				bbox31 = MapUtils.calc31BboxRhumb(settings.POI_DEFAULT_RADIUS, x16, y16, 16);
+				calcTileFromBbox();
+			}
 		}
 		
 		public void enlargeBbox31(double mult) {

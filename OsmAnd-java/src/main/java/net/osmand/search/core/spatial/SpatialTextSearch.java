@@ -125,6 +125,11 @@ public class SpatialTextSearch {
 		public boolean DEV_READ_ADDR_OBJECTS = false;
 		public boolean DEV_READ_POI_OBJECTS = false;
 		
+		// Use tileId as flat (incomplete) or skip hash tree complete solution
+		public boolean DEV_USE_SKIP_HASH_TREE = true;
+		public int POI_DEFAULT_RADIUS = 50;
+		public int ADDR_DEFAULT_RADIUS = 500;
+		
 		// display only top 10
 		public int LIMIT_POI_CATEGORY_BY_FREQ = 15;
 		
