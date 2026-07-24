@@ -18,6 +18,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock;
 
 import gnu.trove.list.array.TIntArrayList;
 import net.osmand.ResultMatcher;
+import net.osmand.CollatorStringMatcher;
+import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
@@ -410,6 +412,33 @@ public class SpatialPoiSearch {
 	
 	public SpatialPoiType getByKey(String key) {
 		return byKey.get(key);
+	}
+
+	public List<SpatialPoiType> searchPoiTypesByName(String query, int limit) {
+		List<SpatialPoiType> res = new ArrayList<>();
+		if (query == null || query.trim().isEmpty()) {
+			return res;
+		}
+		CollatorStringMatcher matcher = new CollatorStringMatcher(query.trim(),
+				StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+		ReadLock readLock = poiTypesIndexLock.readLock();
+		try {
+			readLock.lock();
+			for (SpatialPoiType a : byId.values()) {
+				for (String n : a.names) {
+					if (matcher.matches(n)) {
+						res.add(a);
+						break;
+					}
+				}
+				if (res.size() >= limit) {
+					break;
+				}
+			}
+		} finally {
+			readLock.unlock();
+		}
+		return res;
 	}
 
 
