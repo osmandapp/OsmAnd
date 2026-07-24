@@ -178,8 +178,8 @@ public class SpatialSearchTestAndDocs {
 //		query = "9 Neustädter Straße Korb";
 //		query = "14/1 J.-F.-Weishaar-Straße Korb";
 
-		settings = SpatialTextSearchSettings.searchPoiCategoriesSettings(0, null);
-		query = "Gyn.";
+//		settings = SpatialTextSearchSettings.searchPoiCategoriesSettings(0, null);
+//		query = "Gyn.";
 		
 //		pattern = "Map";
 //		query = "5 to go";
@@ -417,10 +417,10 @@ public class SpatialSearchTestAndDocs {
 		
 //		pattern = "Us_new-york_new"; // new-york, new-jersey
 //		pattern = "Us_new-"; 
-		pattern = "Us_"; 
+//		pattern = "Us_"; 
 //		location = new LatLon(40.78035, -73.96572); // central park
 //		location = new LatLon(40.64946, -74.00682); // brooklyn
-		location = new LatLon(40.7428, -74.0572); // new jersey
+//		location = new LatLon(40.7428, -74.0572); // new jersey
 //		query = "New York The plaza";
 //		query = "New York plaza"; // the plaza , riu plaza
 //		query = "New York 55 st"; // 'NY s.' - 0.5s 100k, 'NY st' - 2s (700k)
@@ -435,10 +435,10 @@ public class SpatialSearchTestAndDocs {
 //		query = "new york 57th street manhattan";
 //		query = "4th ave"; //  unit '4 ave'
 //		query = "4th ave 8 paterson"; //  wrong city... 26240861988
-		settings.OPTIM_READ_COMMON_WORDS_ATOMS= false;
-		settings.OPTIM_READ_CATEGORY_WORD_ATOMS = false;
+//		settings.OPTIM_READ_COMMON_WORDS_ATOMS= false;
+//		settings.OPTIM_READ_CATEGORY_WORD_ATOMS = false;
 //		settings.OPTIM_READ_COMMON_WORDS_LIMIT = 2500;
-		query = "4 8 ave paterson"; //  '8 4 ave paterson' ok, '4 ave 8 paterson' not ok To fix 26240861988 (- new LatLon(40.7428, -74.0572);)
+//		query = "4 8 ave paterson"; //  '8 4 ave paterson' ok, '4 ave 8 paterson' not ok To fix 26240861988 (- new LatLon(40.7428, -74.0572);)
 //		query = "little creek"; // little creek
 		// Result 4 - 40.8407, -74.0954 [[4th, 8] Building 2 4th Street (26238417818) 40.8441 -74.0910 , [ave, paterson] STREET_TYPE Paterson Avenue (651531238) 40.8374 -74.0997 ]
 		
@@ -488,15 +488,16 @@ public class SpatialSearchTestAndDocs {
 //		query = "Golden State Road Foothill Boulevard Sylmar USA";
 
 		
-//		pattern = "World_basemap_mini";
-//		pattern2 = "Ukraine_";
-//		location = new LatLon(50, 30);
+		pattern = "World_basemap_mini";
+		pattern = "Ukraine_";
+		location = new LatLon(50, 30);
 //		settings.DEDUPLICATE_RES = false;
 //		query = "Кафе Antwerpen ";
 //		query = "Ресторан Antwerpen ";
 //		query = "Cafe Gulliver";
 //		query = "Hotel amsterdam";
-//		query = "ОККО"; // "okko", "ОККО"
+//		settings.POI_DEFAULT_RADIUS = 200;
+		query = "ОККО mcdonalds"; // "okko", "ОККО"
 //		query = "Venezia";
 //		query = "Cafe вулиця Саксаганського";
 //		query = "нова пошта вулиця Саксаганського"; // brand + 

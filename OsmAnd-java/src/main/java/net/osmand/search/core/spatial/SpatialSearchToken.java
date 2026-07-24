@@ -24,6 +24,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.Street;
 import net.osmand.search.core.HashQuadTree;
+import net.osmand.search.core.HashSkipTileQuadTree;
 import net.osmand.search.core.spatial.SpatialSearchContext.SpatialSearchStats;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSettings;
 import net.osmand.util.Algorithms;
@@ -76,7 +77,8 @@ public class SpatialSearchToken {
 	
 	
 	boolean categoryMatchMode = false;
-	TLongHashSet cacheCategoryFilterObjects = new TLongHashSet(); 
+	TLongHashSet cacheCategoryFilterObjects = new TLongHashSet();
+	HashSkipTileQuadTree<Integer> cacheCategoryFilterObjsQT = new HashSkipTileQuadTree<>();
 	
 	public record PartialMatch(NameIndexAtom atom, List<SpatialSearchToken> other, boolean nonNumericMatch) {
 		

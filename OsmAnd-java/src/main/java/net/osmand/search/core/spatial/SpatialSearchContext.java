@@ -537,26 +537,34 @@ public class SpatialSearchContext {
 	}
 
 	private boolean skipFilteredZoomObject(SpatialSearchToken t, OsmAndPoiNameIndexDataAtom a) {
-		NameIndexAtomXY xy = new NameIndexAtomXY(null, a, settings);
-		int z = xy.bboxTileZoom;
-		long tileId = xy.bboxTileId;
 		int[] bbox = settings.SEARCH_POI_BY_CATEGORY_BBOX;
 		if (bbox != null) {
 			if (a.getX() < bbox[0] || a.getX() > bbox[2] || a.getY() < bbox[1] || a.getY() > bbox[3]) {
 				return true;
 			}
 		}
-		if (settings.SEARCH_POI_BY_CATEGORY_ZOOM <= z) {
-			while (z > settings.SEARCH_POI_BY_CATEGORY_ZOOM) {
-				z--;
-				tileId >>= 2;
-			}
-			if (t.cacheCategoryFilterObjects.contains(tileId) && a.getEloRatingCount() == 0) {
+		NameIndexAtomXY xy = new NameIndexAtomXY(null, a, settings);
+		if (settings.DEV_USE_SKIP_HASH_TREE) {
+			if (t.cacheCategoryFilterObjsQT.contains(xy.bbox31)) {
 				return true;
 			}
-			t.cacheCategoryFilterObjects.add(tileId);
+			t.cacheCategoryFilterObjsQT.addObject(0, xy.bbox31, -1);
+			return false;
+		} else {
+			int z = xy.bboxTileZoom;
+			long tileId = xy.bboxTileId;
+			if (settings.SEARCH_POI_BY_CATEGORY_ZOOM <= z) {
+				while (z > settings.SEARCH_POI_BY_CATEGORY_ZOOM) {
+					z--;
+					tileId >>= 2;
+				}
+				if (t.cacheCategoryFilterObjects.contains(tileId) && a.getEloRatingCount() == 0) {
+					return true;
+				}
+				t.cacheCategoryFilterObjects.add(tileId);
+			}
+			return false;
 		}
-		return false;
 	}
 	
 	

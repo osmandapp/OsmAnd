@@ -456,6 +456,19 @@ public class HashSkipTileQuadTree<T> {
 		return zoomBuckets[z];
 	}
 
+	public boolean contains(int[] queryBBox) {
+		for (int z = minZoom; z <= maxZoom; z++) {
+			ZoomBucket zoomBucket = zoomBuckets[z];
+			if (zoomBucket != null) {
+				TileIterator ti = new TileIterator(zoomBucket, queryBBox, null);
+				while (ti.hasNext()) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
 	public List<TileEntry<T>> get(int[] queryBBox, SkipStats stats) {
 		return get(queryBBox, minZoom, maxZoom, stats);
 	}
