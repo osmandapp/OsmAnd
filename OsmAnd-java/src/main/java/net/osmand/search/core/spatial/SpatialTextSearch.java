@@ -130,8 +130,8 @@ public class SpatialTextSearch {
 		public int POI_DEFAULT_RADIUS = 50;
 		public int ADDR_DEFAULT_RADIUS = 1000;
 		
-		// display only top 10
-		public int LIMIT_POI_CATEGORY_BY_FREQ = 15;
+		// display only top categories maximum
+		public int LIMIT_POI_CATEGORY_BY_FREQ = 5;
 		
 		// print some poi cat
 		public int DEV_PRINT_POI_CAT_LIMIT = 0; // 10

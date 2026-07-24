@@ -60,11 +60,13 @@ import net.osmand.util.SearchAlgorithms;
 // UNIT TESTING: City > Boundary + location? Format strings (City > Boundary)...
 // UNIT TESTING: (Deduplicate categories brand id) - "okko", "ОККО" - (split 2 maps one without brand id one with)
 // NO TESTING  :.. Amenity bbox (merge on search for category)
-// REVIEWED TESTS OK '237 S Mountain Blvd Mountain Top', '276 East End Centre Wilkes-Barre', '401 Market Street Kingston', '155 Park Avenue Wilkes-Barre' (13 place)
-// REVIEW TEST - add back ','
+// REVIEWED TESTS OK '276 East End Centre Wilkes-Barre'
 ////////// IN PROGRESS //////////
 // REVIEW (index_words_dashboard - common озеро): POI / ADDRESS - France, Germany, US, Europe, China, Peru
 // REVIEW: Auto test New york, France, Italy (Slow?)
+// TODO '155 Park Avenue Wilkes-Barre' ??
+
+
 // TODO INVESTIGATE: Limit (2000->2500) patterson
 // TODO INDEX: Find POI Categories translations / synonyms via Common words - Стоматол., Dentist, Basilica 
 // TODO REVIEW: Abbrevations (synonyms / direction words) other languages?
@@ -75,8 +77,7 @@ import net.osmand.util.SearchAlgorithms;
 
 /////////////// EXTRA FEATURES ///////////////
 // TODO INDEX: highway=services (Not index)
-// TODO ALWAYS Extend tile bboxes by at least 100m (Okko mcdonalds)
-// TODO Common words skip sorting ... '155 Park Avenue Wilkes-Barre' - 13 place
+// TODO ALWAYS Extend tile bboxes by at least 100m (Okko mcdonalds)? (add back ',' carrer_de_vic)
 // TODO 100km+: Calle 20 188 San Isidro Lima, mihia lake, нова пошта краматорськ 3, Нова Пошта (№5 not searchable by common words / name)
 // SLOW: "Travessa de Santo António" x "Rua Joaquim Ribeiro de Carvalho" x "portugal" (39.7412, -8.8012 Barreira Urbanização Vale da Cabrita))
 //       "Foothill Boulevard" x "Golden State Road" x "Los Angeles" x "United states of America"
