@@ -416,9 +416,9 @@ public class SpatialSearchTestAndDocs {
 //		query = "Shell 2 Rožňavská";
 		
 //		pattern = "Us_new-york_new"; // new-york, new-jersey
-//		pattern = "Us_new-"; 
+		pattern = "Us_new-"; 
 //		pattern = "Us_"; 
-//		location = new LatLon(40.78035, -73.96572); // central park
+		location = new LatLon(40.78035, -73.96572); // central park
 //		location = new LatLon(40.64946, -74.00682); // brooklyn
 //		location = new LatLon(40.7428, -74.0572); // new jersey
 //		query = "New York The plaza";
@@ -426,7 +426,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "New York 55 st"; // 'NY s.' - 0.5s 100k, 'NY st' - 2s (700k)
 		// 40.64946, -74.00682 - unit test '4th av', '4 ave', '4th avenue' 241843204, 247910224, 85393997 (..) brooklyn - not 48
 		// 40.78035, -73.96572 - unit test '4th av', '4 ave', '4th avenue'  - 85393997 Park avenue
-//		query = "New York 4 av 8";
+		query = "New York 4 av 8";
 //		query = "New York av 8";
 //		query = "4 ave 8";
 //		query = "New York 4 av"; // 160947243
@@ -488,16 +488,16 @@ public class SpatialSearchTestAndDocs {
 //		query = "Golden State Road Foothill Boulevard Sylmar USA";
 
 		
-		pattern = "World_basemap_mini";
-		pattern = "Ukraine_";
-		location = new LatLon(50, 30);
+//		pattern = "World_basemap_mini";
+//		pattern = "Ukraine_";
+//		location = new LatLon(50, 30);
 //		settings.DEDUPLICATE_RES = false;
 //		query = "Кафе Antwerpen ";
 //		query = "Ресторан Antwerpen ";
 //		query = "Cafe Gulliver";
 //		query = "Hotel amsterdam";
 //		settings.POI_DEFAULT_RADIUS = 200;
-		query = "ОККО mcdonalds"; // "okko", "ОККО"
+//		query = "ОККО mcdonalds"; // "okko", "ОККО"
 //		query = "Venezia";
 //		query = "Cafe вулиця Саксаганського";
 //		query = "нова пошта вулиця Саксаганського"; // brand + 

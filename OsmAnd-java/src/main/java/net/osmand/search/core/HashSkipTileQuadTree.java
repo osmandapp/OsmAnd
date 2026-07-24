@@ -7,6 +7,8 @@ import java.util.NoSuchElementException;
 
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.list.array.TLongArrayList;
+import gnu.trove.map.hash.TLongObjectHashMap;
+import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.util.MapUtils;
 
 public class HashSkipTileQuadTree<T> {
@@ -17,11 +19,12 @@ public class HashSkipTileQuadTree<T> {
 	public static final int[] DEFAULT_INDEXED_ZOOMS = new int[] { 1, 3, 5, 8, 11};
 //	public static final int[] DEFAULT_INDEXED_ZOOMS = new int[] { 3, 5, 8};
 
-	final List<TileEntry<T>> tileEntries = new ArrayList<>();
-	final ZoomBucket[] zoomBuckets;
 	final int minZoom;
 	final int maxZoom;
 	final int[] indxZooms;
+	ZoomBucket[] zoomBuckets;
+	List<TileEntry<T>> tileEntries = new ArrayList<>();
+	TLongObjectHashMap<List<TileEntry<T>>> modified = null; 
 	
 	public HashSkipTileQuadTree() {
 		this(DEFALT_MIN_ZOOM, DEFALT_MAX_ZOOM, DEFAULT_INDEXED_ZOOMS);
@@ -31,7 +34,6 @@ public class HashSkipTileQuadTree<T> {
 		this.minZoom = minZoom;
 		this.maxZoom = maxZoom;
 		this.indxZooms = indexedZooms;
-		zoomBuckets = new ZoomBucket[maxZoom + 1];
 	}
 	
 
@@ -326,12 +328,34 @@ public class HashSkipTileQuadTree<T> {
 		int maxY = bbox31[3] >> shift;
 		for (int x = minX; x <= maxX; x++) {
 			for (int y = minY; y <= maxY; y++) {
-				tileEntries.add(new TileEntry<>(objId, obj, bbox31, targetZoom, encodeTileId(x, y)));
+				TileEntry<T> te = new TileEntry<>(objId, obj, bbox31, targetZoom, encodeTileId(x, y));
+				if (modified != null) {
+					if (!modified.containsKey(objId)) {
+						modified.put(objId, new ArrayList<>());
+					}
+					modified.get(objId).add(te);
+				} else {
+					tileEntries.add(te);
+				}
 			}
 		}
 	}
 
 	public int build() {
+		if (modified != null) {
+			List<TileEntry<T>> tileEntries = new ArrayList<>();
+			for(TileEntry<T> e : this.tileEntries) {
+				if(!modified.containsKey(e.objId)) {
+					tileEntries.add(e);
+				}
+			}
+			Iterator<List<TileEntry<T>>> it = modified.valueCollection().iterator();
+			while (it.hasNext()) {
+				tileEntries.addAll(it.next());
+			}
+			this.tileEntries = tileEntries;
+		}
+		zoomBuckets = new ZoomBucket[maxZoom + 1];
 		tileEntries.sort((e1, e2) -> {
 			if (e1.z != e2.z)
 				return Integer.compare(e1.z, e2.z);
@@ -374,6 +398,7 @@ public class HashSkipTileQuadTree<T> {
 		if (lastTileIdFirstInd >= 0) {
 			tileEntries.get(lastTileIdFirstInd).skipNextTileId = index;
 		}
+		modified = new TLongObjectHashMap<>();
 		return tileEntries.size();
 	}
 
@@ -415,7 +440,7 @@ public class HashSkipTileQuadTree<T> {
 		public boolean hasNext() {
 			return nextEntry != null;
 		}
-
+		
 		@Override
 		public TileEntry<T> next() {
 			if (nextEntry == null) {
@@ -453,10 +478,18 @@ public class HashSkipTileQuadTree<T> {
 	}
 
 	public ZoomBucket getZoomBucket(int z) {
+		checkIsBuilt();
 		return zoomBuckets[z];
 	}
 
+	private void checkIsBuilt() {
+		if (modified == null) {
+			throw new UnsupportedOperationException("Not yet built");
+		}
+	}
+
 	public boolean contains(int[] queryBBox) {
+		checkIsBuilt();
 		for (int z = minZoom; z <= maxZoom; z++) {
 			ZoomBucket zoomBucket = zoomBuckets[z];
 			if (zoomBucket != null) {
@@ -470,10 +503,12 @@ public class HashSkipTileQuadTree<T> {
 	}
 	
 	public List<TileEntry<T>> get(int[] queryBBox, SkipStats stats) {
+		checkIsBuilt();
 		return get(queryBBox, minZoom, maxZoom, stats);
 	}
 	
 	public List<TileEntry<T>> get(int[] queryBBox, int minZ, int maxZ, SkipStats stats) {
+		checkIsBuilt();
 		List<TileEntry<T>> res = new ArrayList<>();
 		for (int z = minZ; z <= maxZ; z++) {
 			ZoomBucket zoomBucket = zoomBuckets[z];
@@ -489,9 +524,10 @@ public class HashSkipTileQuadTree<T> {
 		}
 		return res;
 	}
-
+	
 	List<TileEntry<T>> getTileEntries() {
 		return tileEntries;
 	}
+
 
 }

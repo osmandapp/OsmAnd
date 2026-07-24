@@ -558,7 +558,11 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		if (res != 0) {
 			return res;
 		}
-		return -Integer.compare(o1.parentInd, o2.parentInd);
+//		res = -Integer.compare(o1.parentInd, o2.parentInd);
+//		if (res != 0) {
+//			return res;
+//		}
+		return -Long.compare(o1.getFirstRef().atom.id, o2.getFirstRef().atom.id);
 	}
 
 	private static double getDistance(SpatialSearchResult o1, LatLon center) {

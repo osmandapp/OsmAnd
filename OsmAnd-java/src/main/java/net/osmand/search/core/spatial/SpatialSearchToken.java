@@ -58,6 +58,8 @@ public class SpatialSearchToken {
 	List<NameIndexAtom> atoms = new ArrayList<>();
 	TLongObjectHashMap<NameIndexAtom> index = new TLongObjectHashMap<>();
 	HashQuadTree<Integer> quadTree = new HashQuadTree<>(16);
+	HashSkipTileQuadTree<Integer> quadTreeSkip = new HashSkipTileQuadTree<>();
+	
 	TLongObjectHashMap<NameIndexAtom> indexByOsmIds = new TLongObjectHashMap<>();
 	Set<Integer> deletedAtoms = new HashSet<Integer>();
 	
@@ -211,6 +213,7 @@ public class SpatialSearchToken {
 		quadTree.delete(atom.coords.bboxTileZoom, atom.coords.bboxTileId, na.indexInToken);
 		atom.coords.enlargeBbox31(mult);
 		quadTree.put(atom.coords.bboxTileZoom, atom.coords.bboxTileId, na.indexInToken);
+		quadTreeSkip.addObject(na.indexInToken, atom.coords.bbox31, na.indexInToken);
 	}
 	
 	void addPoiCategoryMatch(int id) {
@@ -259,6 +262,9 @@ public class SpatialSearchToken {
 		int indx = atoms.size() - 1;
 		atom.indexInToken = indx;
 		quadTree.put(atom.coords.bboxTileZoom, atom.coords.bboxTileId, indx);
+		if (atom.coords.bbox31 != null) {
+			quadTreeSkip.addObject(indx, atom.coords.bbox31, indx);
+		}
 		return true;
 	}
 
@@ -359,6 +365,7 @@ public class SpatialSearchToken {
 				// full world
 				bboxTileZoom = 0;
 				bboxTileId = 0;
+				bbox31 = new int[] { 0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE };
 			}
 		}
 

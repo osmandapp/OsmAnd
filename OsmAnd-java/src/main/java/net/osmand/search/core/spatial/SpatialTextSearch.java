@@ -128,7 +128,7 @@ public class SpatialTextSearch {
 		// Use tileId as flat (incomplete) or skip hash tree complete solution
 		public boolean DEV_USE_SKIP_HASH_TREE = true;
 		public int POI_DEFAULT_RADIUS = 50;
-		public int ADDR_DEFAULT_RADIUS = 500;
+		public int ADDR_DEFAULT_RADIUS = 1000;
 		
 		// display only top 10
 		public int LIMIT_POI_CATEGORY_BY_FREQ = 15;
@@ -447,6 +447,9 @@ public class SpatialTextSearch {
 						enlarge++;
 					}
 				}
+			}
+			if (ctx.settings.DEV_USE_SKIP_HASH_TREE) {
+				t.quadTreeSkip.build();
 			}
 		}
 		if (ctx.stats.printLogs) { 

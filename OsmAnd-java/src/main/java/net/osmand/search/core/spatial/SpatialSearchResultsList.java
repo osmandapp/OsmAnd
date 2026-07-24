@@ -23,6 +23,8 @@ import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.Street;
 import net.osmand.search.core.HashQuadTree;
+import net.osmand.search.core.HashSkipTileQuadTree;
+import net.osmand.search.core.HashSkipTileQuadTreeJoiner;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSettings;
 import net.osmand.util.Algorithms;
@@ -43,6 +45,7 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 	TLongArrayList tileIds = new TLongArrayList();
 	TIntArrayList tileZooms = new TIntArrayList();
 	HashQuadTree<Integer> quadTree = new HashQuadTree<>(16);
+	HashSkipTileQuadTree<Integer> quadTreeSkip = new HashSkipTileQuadTree<>();
 	
 	int limitIntersection = -1;
 
@@ -607,7 +610,17 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 
 	}
 	
-	private void iterateIntersection(SpatialSearchResultsList parent, SpatialSearchToken token, IterateIntersection iterate) {
+	private void iterateIntersection(SpatialSearchResultsList parent, SpatialSearchToken token,
+			SpatialTextSearchSettings settings, IterateIntersection iterate) {
+		if (settings.DEV_USE_SKIP_HASH_TREE) {
+			token.quadTreeSkip.build();
+			HashSkipTileQuadTreeJoiner<Integer, Integer> joiner = new HashSkipTileQuadTreeJoiner<>(token.quadTreeSkip, parent.quadTreeSkip);
+			joiner.joinAllBuckets((i1, i2) -> {
+				iterate.iterate(i2.obj, token.atoms.get(i1.obj), i1.obj);
+			}, null, null);
+			quadTreeSkip.build();
+			return;
+		}
 		// 1. iterate parent objects and find all objects from <parent>
 		//    that are fully inside object <token> or have same the same tile
 		for (int i = 0; i < parent.tileIds.size(); i++) {
@@ -636,12 +649,12 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
  	
 	private void calculateMainIntersection(SpatialSearchContext ctx, SpatialSearchToken token, SpatialSearchResultsList parent) {
 		if (parent.getTokenCount() == 0) {
-			for(int indxAtom = 0; indxAtom < token.atoms.size(); indxAtom++) {
+			for (int indxAtom = 0; indxAtom < token.atoms.size(); indxAtom++) {
 				NameIndexAtom atom = token.atoms.get(indxAtom);
 				if (token.deletedAtoms.contains(indxAtom)) {
 					continue;
 				}
-				addResult(null, 0, atom, 0);
+				addResult(null, 0, atom, 0, ctx.settings);
 			}
 		} else if (parent.getCombinations() > 0) {
 			long nt = System.nanoTime();
@@ -655,7 +668,7 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 			}
 			int originalLimit = limitIntersection;
 			int[] typeIntersection = new int[] { 0 };
-			iterateIntersection(parent, token, (parentIndx, atom,  indxAtom) -> {
+			iterateIntersection(parent, token, ctx.settings , (parentIndx, atom,  indxAtom) -> {
 				if (token.deletedAtoms.contains(indxAtom)) {
 					return;
 				}
@@ -706,12 +719,13 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 				int parentIndx = it.next();
 				int indxAtom = it.next();
 				int type = it.next();
-				addResult(parent, parentIndx, token.atoms.get(indxAtom), type);
+				addResult(parent, parentIndx, token.atoms.get(indxAtom), type, ctx.settings);
 //				System.out.println(getRawAtoms(getCombinations() - 1));
 			}
-			
-			
-		}		
+		}
+		if (ctx.settings.DEV_USE_SKIP_HASH_TREE) {
+			quadTreeSkip.build();
+		}
 	}
 
 	private int addResIntersections(int limit, TIntArrayList[] intersections, int maxLevel, TIntArrayList res) {
@@ -736,8 +750,9 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		}
 		return sum;
 	}
-
-	boolean addResult(SpatialSearchResultsList parent, int pindx, NameIndexAtom a, int typeIntersection) {
+	
+	boolean addResult(SpatialSearchResultsList parent, int pindx, NameIndexAtom a, int typeIntersection,
+			SpatialTextSearchSettings settings) {
 		finalResult = null;
 		int pzoom = parent == null ? 0 : parent.tileZooms.get(pindx);
 		int zoom = Math.max(pzoom, a.coords.bboxTileZoom);
@@ -751,6 +766,9 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		this.tileIds.add(tileId);
 		this.tileZooms.add(zoom);
 		quadTree.put(zoom, tileId, insIndx);
+		if (settings.DEV_USE_SKIP_HASH_TREE) {
+			quadTreeSkip.addObject(insIndx, a.coords.bbox31, insIndx);
+		}
 		return true;
 	}
 
