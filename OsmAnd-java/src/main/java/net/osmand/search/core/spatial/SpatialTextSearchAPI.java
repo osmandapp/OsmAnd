@@ -77,19 +77,42 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		SpatialPoiSearch poiSearch = new SpatialPoiSearch(poiTypes);
 		SpatialSearchContext context = createSpatialContext(phrase, resultMatcher, files, poiSearch);
 		LOG.info("Spatial search setting " + (context.settings.SEARCH_SUGGESTION ? "SUGGESTION" : "Default"));
+		LOG.info("Spatial search setting.LANG_DEDUPLICATE " + context.settings.LANG_DEDUPLICATE);
 
 		SpatialSearchResults results = spatialTextSearch.searchAPI(phrase.getFullSearchPhrase(), context);
 		if (results.mainResults == null) {
 			return true;
 		}
+
+		int index = 0;
+		LOG.info("found " + results.mainResults.size() + " mainResults");
+		for (SpatialSearchResult spatialResult : results.mainResults) {
+			LOG.info("found mainResult " + spatialResult + ". visible level " + (spatialResult.visibleLevel()));
+			if(index++ == 10) {
+				break;
+			}
+		}
+
+		index = 0;
+		if(results.combinations != null) {
+			LOG.info("found " + results.combinations.size() + " combinations");
+			for (SpatialSearchResultsList combination : results.combinations) {
+				LOG.info("found combination " + combination);
+				if(index++ == 10) {
+					break;
+				}
+			}
+		}
+
+
 		for (SpatialSearchResult spatialResult : results.mainResults) {
 			if (resultMatcher.isCancelled()) {
 				return false;
 			}
-			List<MapObject> allObjects = spatialResult.getObjects();
-			if (!allObjects.isEmpty()) {
-				LOG.info("found spatial " + allObjects.get(0).getName() + ". visible level " + (spatialResult.visibleLevel()));
-			}
+//			List<MapObject> allObjects = spatialResult.getObjects();
+//			if (!allObjects.isEmpty()) {
+//				LOG.info("found spatial " + allObjects.get(0).getName() + ". visible level " + (spatialResult.visibleLevel()));
+//			}
 			if (spatialResult.visibleLevel() > 0) {
 				continue;
 			}
