@@ -59,15 +59,18 @@ import net.osmand.util.SearchAlgorithms;
 // UNIT TESTING: (failing) 763 Ro-Ki Boulevard Nichols
 // UNIT TESTING: City > Boundary + location? Format strings (City > Boundary)...
 // UNIT TESTING: (Deduplicate categories brand id) - "okko", "ОККО" - (split 2 maps one without brand id one with)
-// NO TESTING  :.. Amenity bbox (merge on search for category)
 // REVIEWED TESTS OK '276 East End Centre Wilkes-Barre'
+
 ////////// IN PROGRESS //////////
 // REVIEW (index_words_dashboard - common озеро): POI / ADDRESS - France, Germany, US, Europe, China, Peru
 // REVIEW: Auto test New york, France, Italy (Slow?)
+
 // TODO '155 Park Avenue Wilkes-Barre' ??
 
+// TODO Web gaps for POI 
+// TODO POI show stats (same for search ms...)
+// TODO Web busy (?? 2 parallel) / timeout - "Foothill Boulevard Golden State Road Los Angeles United states of America" > 30+ sec 
 
-// TODO INVESTIGATE: Limit (2000->2500) patterson
 // TODO INDEX: Find POI Categories translations / synonyms via Common words - Стоматол., Dentist, Basilica 
 // TODO REVIEW: Abbrevations (synonyms / direction words) other languages?
 // TODO REVIEW: Analyze Abbrevations / common skip (abbrevations 1st=first)
@@ -75,9 +78,12 @@ import net.osmand.util.SearchAlgorithms;
 // TODO DEDUPLICATE: too many houses (duplicate names) in wiki maps - obstruct search by street "Ярославів Вал"`?
 // TEST DEDUPLICATE: wiki / travel maps / seamarks map
 
+// TODO Extend POI tile bboxes +100m (Okko mcdonalds)? (add back ',' carrer_de_vic)?
+// TODO INVESTIGATE: Limit (2000->2500) patterson Below probably just distnace 
+// TODO '4 ave 8 paterson' (OK - '8 4 ave paterson', '4th ave 8 paterson' play order of assigned numbers to bdl ref)
+
 /////////////// EXTRA FEATURES ///////////////
 // TODO INDEX: highway=services (Not index)
-// TODO ALWAYS Extend tile bboxes by at least 100m (Okko mcdonalds)? (add back ',' carrer_de_vic)
 // TODO 100km+: Calle 20 188 San Isidro Lima, mihia lake, нова пошта краматорськ 3, Нова Пошта (№5 not searchable by common words / name)
 // SLOW: "Travessa de Santo António" x "Rua Joaquim Ribeiro de Carvalho" x "portugal" (39.7412, -8.8012 Barreira Urbanização Vale da Cabrita))
 //       "Foothill Boulevard" x "Golden State Road" x "Los Angeles" x "United states of America"
@@ -95,7 +101,6 @@ import net.osmand.util.SearchAlgorithms;
 // TODO Auto-Corrections
 // TODO English postcodes
 // TODO Precise Boundary 'Chernihiv sport life' mostly Kyiv - check precise boundary for filter
-// TODO '4 ave 8 paterson' (OK - '8 4 ave paterson', '4th ave 8 paterson' play order of assigned numbers to bdl ref)
 // TODO Short word split "Ro-ki" vs "Roki" 
 
 public class SpatialSearchTestAndDocs {
@@ -219,7 +224,8 @@ public class SpatialSearchTestAndDocs {
 //		query = "West Valley City";
 //		query = "2110 College Avenue Elmira";
 		
-//		pattern = "Us_penn";
+		pattern = "Us_penn";
+		query = "Park  Wilkes-Barre"; // 155 Park Avenue Wilkes-Barre
 //		query = "USA Salt Lake City Pennsylvania Street 41";
 //		query = "Pennsylvania Avenue Pennsylvania USA"; // 31372516
 //		query = "Pennsylvania Avenue Philadelphia Pennsylvania USA"; // 50193098, 26283396442
@@ -419,7 +425,7 @@ public class SpatialSearchTestAndDocs {
 //		pattern = "Us_new-york_new"; // new-york, new-jersey
 		pattern = "Us_new-"; 
 //		pattern = "Us_"; 
-		location = new LatLon(40.78035, -73.96572); // central park
+//		location = new LatLon(40.78035, -73.96572); // central park
 //		location = new LatLon(40.64946, -74.00682); // brooklyn
 //		location = new LatLon(40.7428, -74.0572); // new jersey
 //		query = "New York The plaza";
@@ -427,6 +433,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "New York 55 st"; // 'NY s.' - 0.5s 100k, 'NY st' - 2s (700k)
 		// 40.64946, -74.00682 - unit test '4th av', '4 ave', '4th avenue' 241843204, 247910224, 85393997 (..) brooklyn - not 48
 		// 40.78035, -73.96572 - unit test '4th av', '4 ave', '4th avenue'  - 85393997 Park avenue
+		settings.DEV_USE_SKIP_HASH_TREE = false;
 		query = "New York 4 av 8";
 //		query = "New York av 8";
 //		query = "4 ave 8";

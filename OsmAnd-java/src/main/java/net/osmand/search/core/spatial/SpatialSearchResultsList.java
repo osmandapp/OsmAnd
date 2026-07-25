@@ -767,9 +767,21 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		this.tileZooms.add(zoom);
 		quadTree.put(zoom, tileId, insIndx);
 		if (settings.DEV_USE_SKIP_HASH_TREE) {
-			quadTreeSkip.addObject(insIndx, a.coords.bbox31, insIndx);
+			int[] target = new int[] { a.coords.bbox31[0], a.coords.bbox31[1], a.coords.bbox31[2], a.coords.bbox31[3] };
+			for (int i = 0; parent != null && i < parent.tCount; i++) {
+				NameIndexAtom pa = parent.linearResults.get(pindx * parent.tCount + i);
+				clipBbox(target, pa.coords.bbox31);
+			}
+			quadTreeSkip.addObject(insIndx, target, insIndx);
 		}
 		return true;
+	}
+
+	public static void clipBbox(int[] srcAndTarget, int[] bbox31) {
+		srcAndTarget[0] = Math.max(srcAndTarget[0], bbox31[0]); // xleft
+	    srcAndTarget[1] = Math.max(srcAndTarget[1], bbox31[1]); // ytop
+	    srcAndTarget[2] = Math.min(srcAndTarget[2], bbox31[2]); // xright
+	    srcAndTarget[3] = Math.min(srcAndTarget[3], bbox31[3]); // ybottom
 	}
 
 	private boolean acceptIntersection(SpatialSearchContext ctx,  SpatialSearchResultsList parent, int pindx, SpatialSearchToken token, NameIndexAtom a,
