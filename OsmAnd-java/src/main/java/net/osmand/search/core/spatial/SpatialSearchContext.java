@@ -439,9 +439,9 @@ public class SpatialSearchContext {
 		for (SpatialSearchToken t : tokens) {
 			if (settings.SEARCH_POI_BY_CATEGORY_ONLY && indx.poiRegion == null) {
 				continue;
-			} else if (!settings.SEARCH_POI && indx.poiRegion == null) {
+			} else if (!settings.SEARCH_POI && indx.addressRegion == null) {
 				continue;
-			} else if (!settings.SEARCH_ADDR && indx.addressRegion == null) {
+			} else if (!settings.SEARCH_ADDR && indx.poiRegion == null) {
 				continue;
 			}
 			List<PrefixNameValue> matchedPrefixes = indx.getMatchedPrefixes(t.word);
@@ -544,7 +544,7 @@ public class SpatialSearchContext {
 			}
 		}
 		NameIndexAtomXY xy = new NameIndexAtomXY(null, a, settings);
-		if (settings.DEV_USE_SKIP_HASH_TREE) {
+		if (settings.DEV_USE_SKIP_HASH_TREE && t.cacheCategoryFilterObjsQT.isBuilt()) {
 			if (t.cacheCategoryFilterObjsQT.contains(xy.bbox31)) {
 				return true;
 			}

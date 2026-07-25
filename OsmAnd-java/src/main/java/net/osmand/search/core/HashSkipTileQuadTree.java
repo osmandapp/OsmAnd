@@ -488,6 +488,10 @@ public class HashSkipTileQuadTree<T> {
 		}
 	}
 
+	public boolean isBuilt() {
+		return modified != null;
+	}
+
 	public boolean contains(int[] queryBBox) {
 		checkIsBuilt();
 		for (int z = minZoom; z <= maxZoom; z++) {
