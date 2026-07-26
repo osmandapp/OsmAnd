@@ -861,16 +861,19 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		typeIntersection[0] = 0;
 		// 3. Precise intersection
 		// no cache for parent now needed
-		boolean intersect = true;
-		for (int i = 0; parent != null && i < parent.tCount; i++) {
-			NameIndexAtom pa = parent.linearResults.get(pindx * parent.tCount + i);
-			if (!pa.coords.intersects(a.coords)) {
-				intersect = false;
-				break;
+		if (!settings.DEV_USE_SKIP_HASH_TREE) {
+			// not needed for skip hash tree to be deleted
+			boolean intersect = true;
+			for (int i = 0; parent != null && i < parent.tCount; i++) {
+				NameIndexAtom pa = parent.linearResults.get(pindx * parent.tCount + i);
+				if (!pa.coords.intersects(a.coords)) {
+					intersect = false;
+					break;
+				}
 			}
-		}
-		if (!intersect) {
-			return false;
+			if (!intersect) {
+				return false;
+			}
 		}
 		// 4. New intersection check the limits
 		HashMap<Long, NameIndexAtom> atomObjs = new HashMap<>(4);

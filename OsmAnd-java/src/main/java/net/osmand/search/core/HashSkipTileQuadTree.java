@@ -35,6 +35,26 @@ public class HashSkipTileQuadTree<T> {
 		this.indxZooms = indexedZooms;
 	}
 	
+	// Extra index to be extended
+	public static class TreeExtraIndex<EntryIndex, ZoomIndex> {
+
+		public EntryIndex buildEntryIndex() {
+			return null;
+		}
+		
+		public <T> ZoomIndex buildZoomIndex(ZoomBucket bucket, HashSkipTileQuadTree<T> tree) {
+			return null;
+		}
+		
+		public boolean acceptJoinBucket(EntryIndex entry, ZoomIndex zoom) {
+			return true;
+		}
+		
+		public boolean acceptJoin(EntryIndex entry1, EntryIndex entry2) {
+			return true;
+		}
+	}
+	
 
 	public static class TileEntry<T> {
 		public final long objId;
