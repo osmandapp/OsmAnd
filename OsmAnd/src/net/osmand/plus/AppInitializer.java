@@ -593,19 +593,15 @@ public class AppInitializer implements IProgress {
 					continue;
 				}
 				UpdateFrequency updateFrequency = updateFrequencies[updateFrequencyOrd];
-				long lastCheck = preferenceLastSuccessfulUpdateCheck(fileName, settings).get();
-
-				if (System.currentTimeMillis() - lastCheck > updateFrequency.intervalMillis * 2) {
-					runLiveUpdate(app, fileName, false, null);
-					PendingIntent alarmIntent = getPendingIntent(app, fileName);
-					int timeOfDayOrd = preferenceTimeOfDayToUpdate(fileName, settings).get();
-					TimeOfDay[] timeOfDayValues = TimeOfDay.values();
-					if (timeOfDayOrd < 0 || timeOfDayOrd >= timeOfDayValues.length) {
-						continue;
-					}
-					TimeOfDay timeOfDayToUpdate = timeOfDayValues[timeOfDayOrd];
-					setAlarmForPendingIntent(alarmIntent, manager, updateFrequency, timeOfDayToUpdate);
+				PendingIntent alarmIntent = getPendingIntent(app, fileName);
+				int timeOfDayOrd = preferenceTimeOfDayToUpdate(fileName, settings).get();
+				TimeOfDay[] timeOfDayValues = TimeOfDay.values();
+				if (timeOfDayOrd < 0 || timeOfDayOrd >= timeOfDayValues.length) {
+					continue;
 				}
+				TimeOfDay timeOfDayToUpdate = timeOfDayValues[timeOfDayOrd];
+				// Reschedule only; downloads run via LiveUpdatesAlarmReceiver, not on cold start (#25148).
+				setAlarmForPendingIntent(alarmIntent, manager, updateFrequency, timeOfDayToUpdate);
 			}
 		}
 		notifyEvent(LIVE_UPDATES_ALERTS_CHECKED);
