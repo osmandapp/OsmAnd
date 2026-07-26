@@ -26,6 +26,7 @@ import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
 import net.osmand.binary.NameIndexReader;
+import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
@@ -100,9 +101,8 @@ public class SpatialTextSearch {
 		// In case POI is called 'Bratislava' it will be not allowed to be searched as POIxPOI, POIxStreet
 		// Related frequent POIs like "City&Bike 4th Street..." or public transport stops
 		public boolean OPTIM_FLAG_POI_SAME_AS_CITY_STREET = true;
-		public boolean OPTIM_DELETE_POI_SAME_AS_CITY_STREET = false; // not correct for new york the plaza
 		
-		// Performance improvement 
+		// Performance improvement (effective but needs to be reviewed - paterson)
 		// 1. If object does have rare words and they are not in query - skip it 
 		//    Automatically implemented for common via index, for frequent disabled for now
 		// 2. If object does have other common words and they are not in query - skip it
@@ -666,6 +666,9 @@ public class SpatialTextSearch {
 			int sz = 0;
 			for (SpatialSearchResult r : res.mainResults) {
 				sz++;
+				if (r.toString().contains("649331066")) {
+					System.out.println(r);
+				}
 				if (r.visibleLevel != level) {
 					level++;
 					System.out.printf("### %d - NEXT LEVEL %d (%s). "

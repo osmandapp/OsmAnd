@@ -47,25 +47,34 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		this.extraNameMatch = extraName;
 		for (int i = 0; i < parent.tCount; i++) {
 			NameIndexAtom atom = parent.linearResults.get(parentInd * parentList.tCount + i);
-//			if (atom.matchExtraWord != 0) {
-//				surplusWords += atom.matchExtraWord;
-//			}
 			SpatialSearchToken token = parent.tokens[i];
 			SpatialSearchResultRef ref = null;
 			// find same object or object & parent 
-			for (SpatialSearchResultRef existing : objs) {
-				if (atom.id == existing.atom.id) {
-					ref = existing;
+			for (SpatialSearchResultRef check : objs) {
+				if (atom.id == check.atom.id) {
+					ref = check;
+					if (!atom.isBuilding() && !atom.isPOIRef()) {
+						if (ref.otherWordsFound > 0) {
+							ref.otherWordsFound--;
+						} else if (ref.otherWordsNotFound > 0) {
+							ref.otherWordsNotFound--;
+						}
+					}
 					// building-street
-					if (existing.atom.type > atom.type) {
+					if (check.atom.type > atom.type) {
 						// existing street - swap
-						existing.atom = atom;
+						check.atom = atom;
 						break;
 					}
 				}
 			}
 			if (ref == null) {
 				ref = new SpatialSearchResultRef(atom);
+				ref.otherWordsFound = atom.otherFoundCnt;
+				if (atom.isBuilding() || atom.isPOIRef()) {
+					ref.otherWordsFound++;
+				}
+				ref.otherWordsNotFound = atom.otherWordsCnt;
 				objs.add(ref);
 			}
 			ref.tokens.add(token);
@@ -348,6 +357,8 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		static final int MAX_TYPE_ORDER = 5;
 		NameIndexAtom atom;
 		List<SpatialSearchToken> tokens = new ArrayList<>();
+		int otherWordsFound = 0;
+		int otherWordsNotFound = 0;
 		
 		public SpatialSearchResultRef(NameIndexAtom atom) {
 			this.atom = atom;
@@ -431,8 +442,10 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	public int sumOther() {
 		int s1 = 0;
 		for (SpatialSearchResultRef r : objs) {
-			s1 += r.atom.otherWordsCnt; 
-//			 Math.max(0, r.atom.otherWordsCnt + r.atom.otherFoundCnt - r.tokens.size());
+			// TESTED but didn't work
+//			v1. Math.max(0, r.atom.otherWordsCnt + r.atom.otherFoundCnt - r.tokens.size());
+//			v2. s1 += r.atom.otherWordsCnt;
+			s1 += r.otherWordsNotFound;
 		}
 		return s1;
 	}

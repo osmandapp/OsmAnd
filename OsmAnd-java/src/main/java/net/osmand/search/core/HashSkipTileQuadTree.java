@@ -344,8 +344,8 @@ public class HashSkipTileQuadTree<T> {
 	public int build() {
 		if (modified != null) {
 			List<TileEntry<T>> tileEntries = new ArrayList<>();
-			for(TileEntry<T> e : this.tileEntries) {
-				if(!modified.containsKey(e.objId)) {
+			for (TileEntry<T> e : this.tileEntries) {
+				if (!modified.containsKey(e.objId)) {
 					tileEntries.add(e);
 				}
 			}

@@ -34,6 +34,10 @@ import net.osmand.util.SearchAlgorithms;
 // UNIT TESTING: Venezia (Changed map data 2 Wikidataids)!, So city on first with good elo rating (Test other top visited cities)
 
 //////////// TESTING //////////
+// UNIT TESTING : '155 Park Avenue Wilkes Barre'
+// incorrect first result Result 5 (t5+0-w2-oth0-tp-1) - 41.2364, -75.8843 155 ["155 park avenue" [Building] '101 Parks Avenue (Iron Triangle)' 26282478473 25749 (41.2373 -75.8831), "wilkes barre" [POI Bar] 'Wilkes-Barre Republic Club' 6094142255 21383 (41.2298 -75.8826)]
+// TEST ON FIX for sorting sumOther - s1 += r.otherWordsNotFound;
+
 // UNIT TESTING: 2419 Avenue G, Dickinson, TX 77539, USA (FAILS border) - Add missing border
 // UNIT TESTING: (venezia district-street) 'Venezia Cannaregio Campo Saffa', 'Cannaregio 539D Campo Saffa', 'Venezia Cannaregio 539D'
 // UNIT TESTING: 'Pennsylvania Avenue Philadelphia Philadelphia County Pennsylvania USA' (duplicate words) res - 39.963028, -75.174270
@@ -65,8 +69,6 @@ import net.osmand.util.SearchAlgorithms;
 // REVIEW (index_words_dashboard - common озеро): POI / ADDRESS - France, Germany, US, Europe, China, Peru
 // REVIEW: Auto test New york, France, Italy (Slow?)
 
-// TODO '155 Park Avenue Wilkes-Barre' ??
-
 // TODO Web gaps for POI 
 // TODO POI show stats (same for search ms...)
 // TODO Web busy (?? 2 parallel) / timeout - "Foothill Boulevard Golden State Road Los Angeles United states of America" > 30+ sec 
@@ -78,6 +80,7 @@ import net.osmand.util.SearchAlgorithms;
 // TODO DEDUPLICATE: too many houses (duplicate names) in wiki maps - obstruct search by street "Ярославів Вал"`?
 // TEST DEDUPLICATE: wiki / travel maps / seamarks map
 
+// TODO '155 Park Avenue Wilkes-Barre' ??
 // TODO Extend POI tile bboxes +100m (Okko mcdonalds)? (add back ',' carrer_de_vic)?
 // TODO INVESTIGATE: Limit (2000->2500) patterson Below probably just distnace 
 // TODO '4 ave 8 paterson' (OK - '8 4 ave paterson', '4th ave 8 paterson' play order of assigned numbers to bdl ref)
@@ -225,7 +228,12 @@ public class SpatialSearchTestAndDocs {
 //		query = "2110 College Avenue Elmira";
 		
 		pattern = "Us_penn";
-		query = "Park  Wilkes-Barre"; // 155 Park Avenue Wilkes-Barre
+		
+		location = new LatLon(41.2364,-75.8843); // 649331066
+//		settings.OPTIM_READ_COMMON_WORDS_ATOMS = false;
+		settings.DEDUPLICATE_RES = false;
+		query = "155 Park Avenue Wilkes Barre"; // 155 Park Avenue Wilkes-Barre
+		
 //		query = "USA Salt Lake City Pennsylvania Street 41";
 //		query = "Pennsylvania Avenue Pennsylvania USA"; // 31372516
 //		query = "Pennsylvania Avenue Philadelphia Pennsylvania USA"; // 50193098, 26283396442
@@ -423,7 +431,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "Shell 2 Rožňavská";
 		
 //		pattern = "Us_new-york_new"; // new-york, new-jersey
-		pattern = "Us_new-"; 
+//		pattern = "Us_new-"; 
 //		pattern = "Us_"; 
 //		location = new LatLon(40.78035, -73.96572); // central park
 //		location = new LatLon(40.64946, -74.00682); // brooklyn
@@ -433,8 +441,8 @@ public class SpatialSearchTestAndDocs {
 //		query = "New York 55 st"; // 'NY s.' - 0.5s 100k, 'NY st' - 2s (700k)
 		// 40.64946, -74.00682 - unit test '4th av', '4 ave', '4th avenue' 241843204, 247910224, 85393997 (..) brooklyn - not 48
 		// 40.78035, -73.96572 - unit test '4th av', '4 ave', '4th avenue'  - 85393997 Park avenue
-		settings.DEV_USE_SKIP_HASH_TREE = false;
-		query = "New York 4 av 8";
+//		settings.DEV_USE_SKIP_HASH_TREE = false;
+//		query = "New York 4 av 8";
 //		query = "New York av 8";
 //		query = "4 ave 8";
 //		query = "New York 4 av"; // 160947243

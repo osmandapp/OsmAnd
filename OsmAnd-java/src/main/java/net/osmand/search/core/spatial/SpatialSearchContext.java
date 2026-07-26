@@ -245,7 +245,7 @@ public class SpatialSearchContext {
 		for (SpatialSearchToken t : tokens) {
 			if (settings.OPTIM_READ_COMMON_WORDS_ATOMS || settings.OPTIM_READ_CATEGORY_WORD_ATOMS) {
 				addPartialMatch(t, t.getPartialExactMatch());
-//				if(t.getPartialExactMatch().size() == 0) {
+//				if(t.getPartialExactMatch().size() == 0) { // not correct
 					addPartialMatch(t, t.getPartialMatch());
 //				}
 				t.clearPartialAtoms();
@@ -254,7 +254,7 @@ public class SpatialSearchContext {
 		if (settings.OPTIM_DELETE_EMBEDDED_BOUNDARIES) {
 			stats.sub1PoiNameBoundaryTime.start();
 			Map<TIntArrayList, List<AtomByTokens>> boundaries = filterEmbeddedBoundaries(tokens);
-			if (settings.OPTIM_FLAG_POI_SAME_AS_CITY_STREET || settings.OPTIM_DELETE_POI_SAME_AS_CITY_STREET) {
+			if (settings.OPTIM_FLAG_POI_SAME_AS_CITY_STREET) {
 				assignPoiFlagGeo(boundaries, tokens);
 			}
 			stats.sub1PoiNameBoundaryTime.finish();
@@ -331,14 +331,11 @@ public class SpatialSearchContext {
 				TIntIterator it = indxs.iterator();
 				while (it.hasNext()) {
 					int indx = it.next();
-					if (settings.OPTIM_DELETE_POI_SAME_AS_CITY_STREET) {
-						// delete completely no clear use case for improvement yet found
-						tokens.get(indx).removeAtom(poi.obj);
-					} else {
-						// mark to not intersect
-						NameIndexAtom atomSet = tokens.get(indx).getAtomToken(poi.obj);
-						atomSet.sameNameAreaObj = largeArea.obj;
-					}
+					// delete completely not correct for new york the plaza
+					// tokens.get(indx).removeAtom(poi.obj);
+					// mark to not intersect
+					NameIndexAtom atomSet = tokens.get(indx).getAtomToken(poi.obj);
+					atomSet.sameNameAreaObj = largeArea.obj;
 				}
 				return;
 			}
@@ -439,9 +436,9 @@ public class SpatialSearchContext {
 		for (SpatialSearchToken t : tokens) {
 			if (settings.SEARCH_POI_BY_CATEGORY_ONLY && indx.poiRegion == null) {
 				continue;
-			} else if (!settings.SEARCH_POI && indx.poiRegion == null) {
+			} else if (!settings.SEARCH_POI && indx.poiRegion != null) {
 				continue;
-			} else if (!settings.SEARCH_ADDR && indx.addressRegion == null) {
+			} else if (!settings.SEARCH_ADDR && indx.addressRegion != null) {
 				continue;
 			}
 			List<PrefixNameValue> matchedPrefixes = indx.getMatchedPrefixes(t.word);
@@ -538,33 +535,26 @@ public class SpatialSearchContext {
 
 	private boolean skipFilteredZoomObject(SpatialSearchToken t, OsmAndPoiNameIndexDataAtom a) {
 		int[] bbox = settings.SEARCH_POI_BY_CATEGORY_BBOX;
+		// TODO fix for bbox
 		if (bbox != null) {
 			if (a.getX() < bbox[0] || a.getX() > bbox[2] || a.getY() < bbox[1] || a.getY() > bbox[3]) {
 				return true;
 			}
 		}
 		NameIndexAtomXY xy = new NameIndexAtomXY(null, a, settings);
-		if (settings.DEV_USE_SKIP_HASH_TREE) {
-			if (t.cacheCategoryFilterObjsQT.contains(xy.bbox31)) {
+		int z = xy.bboxTileZoom;
+		long tileId = xy.bboxTileId;
+		if (settings.SEARCH_POI_BY_CATEGORY_ZOOM <= z) {
+			while (z > settings.SEARCH_POI_BY_CATEGORY_ZOOM) {
+				z--;
+				tileId >>= 2;
+			}
+			if (t.cacheCategoryFilterObjects.contains(tileId) && a.getEloRatingCount() == 0) {
 				return true;
 			}
-			t.cacheCategoryFilterObjsQT.addObject(0, xy.bbox31, -1);
-			return false;
-		} else {
-			int z = xy.bboxTileZoom;
-			long tileId = xy.bboxTileId;
-			if (settings.SEARCH_POI_BY_CATEGORY_ZOOM <= z) {
-				while (z > settings.SEARCH_POI_BY_CATEGORY_ZOOM) {
-					z--;
-					tileId >>= 2;
-				}
-				if (t.cacheCategoryFilterObjects.contains(tileId) && a.getEloRatingCount() == 0) {
-					return true;
-				}
-				t.cacheCategoryFilterObjects.add(tileId);
-			}
-			return false;
+			t.cacheCategoryFilterObjects.add(tileId);
 		}
+		return false;
 	}
 	
 	
