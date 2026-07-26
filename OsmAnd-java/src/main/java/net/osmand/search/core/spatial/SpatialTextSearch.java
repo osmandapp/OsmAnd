@@ -26,7 +26,6 @@ import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
 import net.osmand.binary.NameIndexReader;
-import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
@@ -79,7 +78,7 @@ public class SpatialTextSearch {
 		
 		// replacement to search by category via name index
 		public boolean SEARCH_POI_BY_CATEGORY_ONLY = false;
-		public int SEARCH_POI_BY_CATEGORY_ZOOM = 15;
+		public int SEARCH_POI_BY_CATEGORY_ZOOM = 17; // 17+ no filter
 		public int[] SEARCH_POI_BY_CATEGORY_BBOX;
 		
 		// performance tested (we need to turn on for <POI + Address> search)

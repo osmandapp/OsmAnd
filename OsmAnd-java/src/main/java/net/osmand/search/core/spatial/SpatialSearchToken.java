@@ -80,7 +80,6 @@ public class SpatialSearchToken {
 	
 	boolean categoryMatchMode = false;
 	TLongHashSet cacheCategoryFilterObjects = new TLongHashSet();
-	HashSkipTileQuadTree<Integer> cacheCategoryFilterObjsQT = new HashSkipTileQuadTree<>();
 	
 	public record PartialMatch(NameIndexAtom atom, List<SpatialSearchToken> other, boolean nonNumericMatch) {
 		

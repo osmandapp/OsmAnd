@@ -535,20 +535,17 @@ public class SpatialSearchContext {
 
 	private boolean skipFilteredZoomObject(SpatialSearchToken t, OsmAndPoiNameIndexDataAtom a) {
 		int[] bbox = settings.SEARCH_POI_BY_CATEGORY_BBOX;
-		// TODO fix for bbox
+		int x16 = a.getX();
+		int y16 = a.getY();
+//		bbox31 = SearchAlgorithms.decodeBboxForNameAtomsBytes(a.getBbox(), x16, y16);
 		if (bbox != null) {
-			if (a.getX() < bbox[0] || a.getX() > bbox[2] || a.getY() < bbox[1] || a.getY() > bbox[3]) {
+			if (x16 < bbox[0] || x16 > bbox[2] || y16 < bbox[1] || y16 > bbox[3]) {
 				return true;
 			}
 		}
-		NameIndexAtomXY xy = new NameIndexAtomXY(null, a, settings);
-		int z = xy.bboxTileZoom;
-		long tileId = xy.bboxTileId;
-		if (settings.SEARCH_POI_BY_CATEGORY_ZOOM <= z) {
-			while (z > settings.SEARCH_POI_BY_CATEGORY_ZOOM) {
-				z--;
-				tileId >>= 2;
-			}
+		int z = 16 - settings.SEARCH_POI_BY_CATEGORY_ZOOM;
+		if (z >= 0) {
+			long tileId = MapUtils.interleaveBits(x16 >> z, y16 >> z);
 			if (t.cacheCategoryFilterObjects.contains(tileId) && a.getEloRatingCount() == 0) {
 				return true;
 			}

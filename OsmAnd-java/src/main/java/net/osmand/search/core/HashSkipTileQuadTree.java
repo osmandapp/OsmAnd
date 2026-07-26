@@ -8,7 +8,6 @@ import java.util.NoSuchElementException;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.list.array.TLongArrayList;
 import gnu.trove.map.hash.TLongObjectHashMap;
-import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.util.MapUtils;
 
 public class HashSkipTileQuadTree<T> {
@@ -316,7 +315,7 @@ public class HashSkipTileQuadTree<T> {
 		return MapUtils.interleaveBits(x, y);
 	}
 
-	static boolean intersectsBBox(int[] a, int[] b) {
+	public static boolean intersectsBBox(int[] a, int[] b) {
 		return a[0] <= b[2] && a[2] >= b[0] && a[1] <= b[3] && a[3] >= b[1];
 	}
 
