@@ -2271,8 +2271,9 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 					case SEARCH_API_REGION_FINISHED:
 						regionResultApi = (SearchCoreAPI) object.object;
 						SearchPhrase regionPhrase = object.requiredSearchPhrase;
-						regionResultCollection = new SearchResultCollection(regionPhrase, isSpatialSearchApi(regionResultApi))
-								.addSearchResults(results, true, true);
+						boolean spatialSearchApi = isSpatialSearchApi(regionResultApi);
+						regionResultCollection = new SearchResultCollection(regionPhrase, spatialSearchApi)
+								.addSearchResults(results, !spatialSearchApi, !spatialSearchApi);
 						showRegionResults(object.file, regionPhrase, regionResultCollection, resultListener);
 						break;
 					case PARTIAL_LOCATION:
@@ -2319,7 +2320,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				if (isDebugMode) {
 					LOG.info("UI >> Showing API results <" + phrase + "> API=<" + searchApi + "> Results=" + apiResults.size());
 				}
-				boolean append = getResultCollection() != null && !isSpatialSearchApi(searchApi);
+				boolean spatialSearchApi = isSpatialSearchApi(searchApi);
+				boolean append = getResultCollection() != null && !spatialSearchApi;
 				if (append) {
 					if (isDebugMode) {
 						LOG.info("UI >> Appending API results <" + phrase + "> API=<" + searchApi + "> Result collection=" + getSearchResultCollectionFormattedSize(getResultCollection()));
@@ -2332,8 +2334,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 					if (isDebugMode) {
 						LOG.info("UI >> Assign API results <" + phrase + "> API=<" + searchApi + ">");
 					}
-					SearchResultCollection resCollection = new SearchResultCollection(phrase, isSpatialSearchApi(searchApi));
-					resCollection.addSearchResults(apiResults, true, true);
+					SearchResultCollection resCollection = new SearchResultCollection(phrase, spatialSearchApi);
+					resCollection.addSearchResults(apiResults, !spatialSearchApi, !spatialSearchApi);
 					setResultCollection(resCollection);
 					if (isDebugMode) {
 						LOG.info("UI >> API results assigned <" + phrase + "> API=<" + searchApi + "> Result collection=" + getSearchResultCollectionFormattedSize(getResultCollection()));

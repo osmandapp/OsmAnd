@@ -104,7 +104,7 @@ public class SearchUICore {
 		searchSettings = new SearchSettings(new ArrayList<BinaryMapIndexReader>());
 		searchSettings = searchSettings.setLang(locale, transliterate);
 		phrase = SearchPhrase.emptyPhrase(searchSettings);
-		currentSearchResult = new SearchResultCollection(phrase, isSpatialSearch());
+		currentSearchResult = new SearchResultCollection(phrase);
 		singleThreadedExecutor = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, taskQueue);
 	}
 
@@ -143,7 +143,7 @@ public class SearchUICore {
 			SearchResultCollection src = new SearchResultCollection(phrase, skipSorting || collection.skipSorting,
 					Math.max(spatialSearchVisibleLevel, collection.spatialSearchVisibleLevel));
 			src.addSearchResults(searchResults, false, false);
-			src.addSearchResults(collection.searchResults, resort, removeDuplicates);
+			src.addSearchResults(collection.searchResults, resort && !src.skipSorting, removeDuplicates && !src.skipSorting);
 			return src;
 		}
 		
@@ -307,9 +307,6 @@ public class SearchUICore {
 		}
 		
 		public void sortSearchResults() {
-			if (skipSorting) {
-				return;
-			}
 			if (debugMode) {
 				LOG.info("Sorting search results <" + phrase + "> Results=" + searchResults.size());
 			}
@@ -603,11 +600,12 @@ public class SearchUICore {
 			SearchResultMatcher rm = new SearchResultMatcher(matcher, sphrase, ai.get(), ai, totalLimit);
 			api.search(sphrase, rm);
 
-			SearchResultCollection collection = new SearchResultCollection(sphrase, isSpatialSearch());
+			boolean skipResultSorting = api instanceof SpatialTextSearchAPI;
+			SearchResultCollection collection = new SearchResultCollection(sphrase, skipResultSorting);
 			if (rm.totalLimit != -1 && rm.count > rm.totalLimit) {
 				collection.setUseLimit(true);
 			}
-			collection.addSearchResults(rm.getRequestResults(), resortAll, removeDuplicates);
+			collection.addSearchResults(rm.getRequestResults(), resortAll && !skipResultSorting, removeDuplicates && !skipResultSorting);
 			if (debugMode) {
 				LOG.info("Finish shallow search <" + sphrase + "> Results=" + rm.getRequestResults().size());
 			}
@@ -738,7 +736,7 @@ public class SearchUICore {
 
 	public void resetSearch() {
 		phrase = SearchPhrase.emptyPhrase(searchSettings);
-		currentSearchResult = new SearchResultCollection(phrase, isSpatialSearch());
+		currentSearchResult = new SearchResultCollection(phrase);
 	}
 
 	public SearchPhrase resetPhrase() {
@@ -764,11 +762,12 @@ public class SearchUICore {
 		final SearchPhrase searchPhrase = this.phrase.generateNewPhrase(text, resetSearchSettingsForNewRequest(searchSettings));
 		final SearchResultMatcher rm = new SearchResultMatcher(null, searchPhrase, requestNumber.get(), requestNumber, totalLimit);
 		searchInternal(searchPhrase, rm);
-		SearchResultCollection resultCollection = new SearchResultCollection(searchPhrase, isSpatialSearch());
+		boolean skipResultSorting = shouldSkipResultSorting();
+		SearchResultCollection resultCollection = new SearchResultCollection(searchPhrase, skipResultSorting);
 		if (rm.totalLimit != -1 && rm.count > rm.totalLimit) {
 			resultCollection.setUseLimit(true);
 		}
-		resultCollection.addSearchResults(rm.getRequestResults(), true, true);
+		resultCollection.addSearchResults(rm.getRequestResults(), !skipResultSorting, !skipResultSorting);
 		if (phrase.getSettings().isExportObjects()) {
 			phrase.getSettings().setExportedCities(rm.getExportedCities());
 			phrase.getSettings().setExportedObjects(rm.getExportedObjects());
@@ -826,7 +825,7 @@ public class SearchUICore {
 							Thread.sleep(TIMEOUT_BEFORE_FILTER);
 
 							if (!filtered) {
-								final SearchResultCollection quickRes = new SearchResultCollection(phrase, isSpatialSearch());
+								final SearchResultCollection quickRes = new SearchResultCollection(phrase, currentSearchResult.isSkipSorting());
 								if (debugMode) {
 									LOG.info("Filtering current data <" + phrase + "> Results=" + currentSearchResult.searchResults.size());
 								}
@@ -867,14 +866,15 @@ public class SearchUICore {
 					performanceStats.start();
 					searchInternal(phrase, rm);
 					if (!rm.isCancelled()) {
-						SearchResultCollection collection = new SearchResultCollection(phrase, isSpatialSearch());
+						boolean skipResultSorting = shouldSkipResultSorting();
+						SearchResultCollection collection = new SearchResultCollection(phrase, skipResultSorting);
 						if (rm.totalLimit != -1 && rm.count > rm.totalLimit) {
 							collection.setUseLimit(true);
 						}
 						if (debugMode) {
 							LOG.info("Processing search results <" + phrase + ">");
 						}
-						collection.addSearchResults(rm.getRequestResults(), true, true);
+						collection.addSearchResults(rm.getRequestResults(), !skipResultSorting, !skipResultSorting);
 						performanceStats.sampleMemory();
 						if (debugMode) {
 							LOG.info("Finishing search <" + phrase + "> Results=" + rm.getRequestResults().size());
@@ -918,6 +918,18 @@ public class SearchUICore {
 			}
 		}
 		return false;
+	}
+
+	private boolean shouldSkipResultSorting() {
+		boolean spatialSearch = false;
+		for (SearchCoreAPI api : apis) {
+			if (api instanceof SpatialTextSearchAPI) {
+				spatialSearch = true;
+			} else if (!(api instanceof SearchAmenityTypesAPI)) {
+				return false;
+			}
+		}
+		return spatialSearch;
 	}
 
 	private static class SearchPerformanceStats {
