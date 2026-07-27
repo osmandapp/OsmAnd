@@ -81,7 +81,51 @@ public class AdditionalInfoBundle {
 		return localizedAdditionalInfo;
 	}
 
-	public boolean shouldDisplayKey(String key) {
+	public Map<String, Object> getVisibleTagInfo() {
+		Map<String, Object> result = new HashMap<>();
+		for (Map.Entry<String, Object> entry : getFilteredLocalizedInfo().entrySet()) {
+			String key = entry.getKey();
+			if (!shouldDisplayKey(key) || isKeyToSkip(key)) {
+				continue;
+			}
+			Object value = entry.getValue();
+			if (value instanceof Map) {
+				value = filterLocalizations((Map<String, Object>) value);
+				if (value == null) {
+					continue;
+				}
+			}
+			result.put(key, value);
+		}
+		for (Map.Entry<String, String> entry : getFilteredInfo().entrySet()) {
+			if (entry.getKey().startsWith(COLLAPSABLE_PREFIX)) {
+				result.put(entry.getKey(), entry.getValue());
+			}
+		}
+		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	private Map<String, Object> filterLocalizations(Map<String, Object> value) {
+		Object localizationsObj = value.get("localizations");
+		if (!(localizationsObj instanceof Map)) {
+			return value;
+		}
+		Map<String, String> filtered = new HashMap<>();
+		for (Map.Entry<String, String> loc : ((Map<String, String>) localizationsObj).entrySet()) {
+			if (!isKeyToSkip(loc.getKey())) {
+				filtered.put(loc.getKey(), loc.getValue());
+			}
+		}
+		if (filtered.isEmpty()) {
+			return null;
+		}
+		Map<String, Object> result = new HashMap<>();
+		result.put("localizations", filtered);
+		return result;
+	}
+
+	private boolean shouldDisplayKey(String key) {
 		AbstractPoiType t = poiTypes.getAnyPoiAdditionalTypeByKey(key);
 		if (t instanceof PoiType poiType && poiType.isHidden()) {
 			return false;
@@ -150,7 +194,7 @@ public class AdditionalInfoBundle {
 		return pt instanceof PoiType poiType ? poiType : null;
 	}
 
-	public boolean isKeyToSkip(String key) {
+	private boolean isKeyToSkip(String key) {
 		return CollectionUtils.startsWithAny(key, COLLAPSABLE_PREFIX, ALT_NAME_WITH_LANG_PREFIX, LANG_YES)
 				|| CollectionUtils.equalsToAny(key, WIKI_PHOTO, WIKIDATA, WIKIMEDIA_COMMONS, "image", "mapillary", "subway_region")
 				|| MapObject.isNameLangTag(key)

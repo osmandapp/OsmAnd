@@ -102,13 +102,10 @@ public class AmenityUIHelper extends MenuBuilder {
 		Context context = view.getContext();
 		List<AmenityInfoRow> infoRows = new LinkedList<>();
 		List<AmenityInfoRow> descriptions = new LinkedList<>();
-		Map<String, Object> filteredInfo = additionalInfo.getFilteredLocalizedInfo();
+		Map<String, Object> filteredInfo = additionalInfo.getVisibleTagInfo();
 		for (Entry<String, Object> entry : filteredInfo.entrySet()) {
 			String key = entry.getKey();
 			Object value = entry.getValue();
-			if (!additionalInfo.shouldDisplayKey(key)) {
-				continue;
-			}
 			AmenityInfoRow infoRow = null;
 			if (value instanceof String strValue) {
 				infoRow = createPoiAdditionalInfoRow(context, key, strValue, null);
@@ -130,13 +127,14 @@ public class AmenityUIHelper extends MenuBuilder {
 			infoRows.add(cuisineRow);
 		}
 
-		for (Map.Entry<String, String> e : additionalInfo.getFilteredInfo().entrySet()) {
+		for (Entry<String, Object> e : filteredInfo.entrySet()) {
 			if (e.getKey().startsWith(COLLAPSABLE_PREFIX)) {
 				List<PoiType> categoryTypes = new ArrayList<>();
 
-				if (!Algorithms.isEmpty(e.getValue())) {
+				String rawValue = (String) e.getValue();
+				if (!Algorithms.isEmpty(rawValue)) {
 					StringBuilder builder = new StringBuilder();
-					List<String> records = new ArrayList<>(Arrays.asList(e.getValue().split(Amenity.SEPARATOR)));
+					List<String> records = new ArrayList<>(Arrays.asList(rawValue.split(Amenity.SEPARATOR)));
 					for (String record : records) {
 						AbstractPoiType type = poiTypes.getPoiAdditionalType(poiCategory, record);
 						if (type == null) {
@@ -311,7 +309,7 @@ public class AmenityUIHelper extends MenuBuilder {
 	private AmenityInfoRow createPoiAdditionalInfoRow(@NonNull Context context,
 	                                                  @NonNull String key, @NonNull String vl,
 	                                                  @Nullable CollapsableView collapsableView) {
-		if (additionalInfo.isKeyToSkip(key) || (key.equals("note") && !osmEditingEnabled))
+		if (key.equals("note") && !osmEditingEnabled)
 			return null;
 
 		PoiType pType = additionalInfo.getPoiAdditionalType(key, vl);
