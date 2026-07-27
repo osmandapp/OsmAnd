@@ -3779,11 +3779,11 @@
     <string name="cloud_version_confirm_delete">Да ли избрисати \"%1$s\" из Облака ОсмАнда?</string>
     <string name="simulation_position_description">Изаберите датотеку трага ради употребе као извора за померање положаја.</string>
     <string name="shared_string_kilograms">килограми</string>
-    <string name="share_link">Дели везу</string>
+    <string name="share_link">Дели линк</string>
     <string name="skip_download">Прескочи преузимање</string>
     <string name="last_synchronized">Последње усклађивани</string>
     <string name="display_position_automatic_descr">Зависи од усмерења карте: дно за смер кретања, средиште за све остало.</string>
-    <string name="share_as_file">Дели као датотеку</string>
+    <string name="share_as_file">Дели као фајл</string>
     <string name="determine_location">Омогућава нам да одредимо ваш положај</string>
     <string name="y_axis">Y-оса</string>
     <string name="shared_string_cross_buy">Унакрсна куповина</string>
