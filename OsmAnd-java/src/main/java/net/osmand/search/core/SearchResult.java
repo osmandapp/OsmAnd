@@ -54,7 +54,6 @@ public class SearchResult {
 
 	public double priority;
 	public double priorityDistance;
-	public int spatialSearchVisibleLevel;
 
 	public LatLon location;
 	public int preferredZoom = PREFERRED_DEFAULT_ZOOM;

@@ -358,9 +358,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		((TextView) view.findViewById(R.id.empty_search_title)).setText(textTitle);
 		View primaryButton = view.findViewById(R.id.primary_button);
 
-		((TextView) view.findViewById(R.id.title)).setText(searchMoreItem.hasCustomName()
-				? searchMoreItem.getName()
-				: getIncreaseSearchButtonTitle(app, searchPhrase));
+		((TextView) view.findViewById(R.id.title)).setText(getIncreaseSearchButtonTitle(app, searchPhrase));
 
 		primaryButton.setVisibility(searchMoreItem.isSearchMoreAvailable() ? View.VISIBLE : View.GONE);
 		primaryButton.setOnClickListener(new View.OnClickListener() {
