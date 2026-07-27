@@ -2098,7 +2098,7 @@
     <string name="poi_resource_beryl">Beryl</string>
     <string name="poi_resource_bismuth">Bizmut</string>
     <string name="poi_resource_chromite">Chromit</string>
-    <string name="poi_resource_clay">Hlina</string>
+    <string name="poi_resource_clay">Íl</string>
     <string name="poi_resource_coal">Uhlie</string>
     <string name="poi_resource_copper">Meď</string>
     <string name="poi_resource_diamond">Diamanty</string>
@@ -3321,7 +3321,7 @@
     <string name="poi_boat_kayak_rental_no">Kajaky: nie</string>
     <string name="poi_boat_canoe_rental_yes">Kanoe: áno</string>
     <string name="poi_boat_canoe_rental_no">Kanoe: nie</string>
-    <string name="poi_surface_clay">Antuka</string>
+    <string name="poi_surface_clay">Povrch: Antuka</string>
     <string name="poi_generator_source_biomass">Zdroj energie: biomasa</string>
     <string name="poi_snowmobile_filter">Prístup snežným skútrom</string>
     <string name="poi_access_bus">Prístup autobusom verejnej dopravy</string>

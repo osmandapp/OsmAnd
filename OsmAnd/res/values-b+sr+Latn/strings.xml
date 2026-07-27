@@ -5145,7 +5145,6 @@
     <string name="shared_string_media">Mediji</string>
     <string name="no_media">Nema medija</string>
     <string name="no_media_descr">Možete dodati fotografije, video zapise ili audio beleške sa kamere ili biblioteke.</string>
-    <string name="auto_copy_media_to_osmand_storage">Automatsko kopiranje medija u OsmAnd skladište</string>
     <string name="navigate_point_format_maidenhead">Mejdenhed</string>
     <string name="navigate_point_east_coordinate">Istočna koordinata</string>
     <string name="navigate_point_north_coordinate">Severna koordinata</string>
@@ -5189,7 +5188,9 @@
     <string name="camera_folder">Folder kamere</string>
     <string name="media_storage_main_storage_descr">Fajlovi se čuvaju u privatnoj memoriji aplikacije. Skrivene su od Galerije i drugih aplikacija.</string>
     <string name="media_storage_shared_storage_descr">Fajlovi se čuvaju u javnim fasciklama (Slike, Filmovi, Muzika). Vidljive su u Galeriji i Google fotografijama.</string>
-    <string name="media_storage_camera_folder_descr">Fajlovi se čuvaju u folderu Camera Roll. Napomena: Audio se čuva u Music/OsmAnd.</string>
+    <string name="shared_string_note">Napomena</string>
+    <string name="media_storage_camera_folder_note_descr">Audio se čuva u Music/OsmAnd.</string>
+    <string name="media_storage_camera_folder_descr">Fajlovi se čuvaju u folderu Camera Roll. %1$s</string>
     <string name="media_storage_manually_specified_descr">Fajlovi se čuvaju u prilagođenoj fascikli i sortiraju po tipu (Audio, Fotografija, Video).</string>
     <string name="change_media_storage_question">Promeniti skladište medija?</string>
     <string name="change_media_storage_full_description">Premestiti postojeće medijske fajlove na novu destinaciju?\n%1$s &gt; %2$s</string>
@@ -5317,4 +5318,6 @@
     <string name="duplicate_map_replace_with_road">Zameni sa Samo-putevi</string>
     <string name="rendering_attr_surface_clay_name">Glina</string>
     <string name="rendering_attr_surface_laterite_name">Laterit</string>
+    <string name="use_spatial_text_search">Koristite prostornu pretragu teksta</string>
+    <string name="use_spatial_text_search_description">Zamenite standardne API-je za brzu pretragu eksperimentalnom pretragom prostornog teksta.</string>
 </resources>

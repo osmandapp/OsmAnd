@@ -243,9 +243,9 @@ public class SpatialSearchContext {
 		}
 		// add partial once we read all files
 		for (SpatialSearchToken t : tokens) {
-			if (settings.OPTIM_READ_COMMON_WORDS_ATOMS || settings.OPTIM_READ_CATEGORY_WORD_ATOMS) {
+			if (settings.OPTIM_READ_COMMON_WITH_OTH_NON_FOUND_ATOMS || settings.OPTIM_READ_POI_CATEGORY_WORD_ATOMS) {
 				addPartialMatch(t, t.getPartialExactMatch());
-//				if(t.getPartialExactMatch().size() == 0) {
+//				if(t.getPartialExactMatch().size() == 0) { // not correct
 					addPartialMatch(t, t.getPartialMatch());
 //				}
 				t.clearPartialAtoms();
@@ -254,7 +254,7 @@ public class SpatialSearchContext {
 		if (settings.OPTIM_DELETE_EMBEDDED_BOUNDARIES) {
 			stats.sub1PoiNameBoundaryTime.start();
 			Map<TIntArrayList, List<AtomByTokens>> boundaries = filterEmbeddedBoundaries(tokens);
-			if (settings.OPTIM_FLAG_POI_SAME_AS_CITY_STREET || settings.OPTIM_DELETE_POI_SAME_AS_CITY_STREET) {
+			if (settings.OPTIM_FLAG_POI_SAME_AS_CITY_STREET) {
 				assignPoiFlagGeo(boundaries, tokens);
 			}
 			stats.sub1PoiNameBoundaryTime.finish();
@@ -331,14 +331,11 @@ public class SpatialSearchContext {
 				TIntIterator it = indxs.iterator();
 				while (it.hasNext()) {
 					int indx = it.next();
-					if (settings.OPTIM_DELETE_POI_SAME_AS_CITY_STREET) {
-						// delete completely no clear use case for improvement yet found
-						tokens.get(indx).removeAtom(poi.obj);
-					} else {
-						// mark to not intersect
-						NameIndexAtom atomSet = tokens.get(indx).getAtomToken(poi.obj);
-						atomSet.sameNameAreaObj = largeArea.obj;
-					}
+					// delete completely not correct for new york the plaza
+					// tokens.get(indx).removeAtom(poi.obj);
+					// mark to not intersect
+					NameIndexAtom atomSet = tokens.get(indx).getAtomToken(poi.obj);
+					atomSet.sameNameAreaObj = largeArea.obj;
 				}
 				return;
 			}
@@ -439,6 +436,10 @@ public class SpatialSearchContext {
 		for (SpatialSearchToken t : tokens) {
 			if (settings.SEARCH_POI_BY_CATEGORY_ONLY && indx.poiRegion == null) {
 				continue;
+			} else if (!settings.SEARCH_POI && indx.poiRegion != null) {
+				continue;
+			} else if (!settings.SEARCH_ADDR && indx.addressRegion != null) {
+				continue;
 			}
 			List<PrefixNameValue> matchedPrefixes = indx.getMatchedPrefixes(t.word);
 			if (matchedPrefixes == null) {
@@ -507,9 +508,7 @@ public class SpatialSearchContext {
 					continue;
 				}
 				MapObject obj = null;
-				if (settings.DEV_READ_ADDR_OBJECTS) {
-					obj = readAddrObject(lid, pid, null);
-				}
+//				obj = readAddrObject(lid, pid, null);
 				parseSuffixes(t, indx, suffixes, commonSuffixes, a, null, lid, pid, obj, allTokens);
 			}
 		} else if (!addr && settings.SEARCH_POI) {
@@ -521,9 +520,7 @@ public class SpatialSearchContext {
 				long lid = makePoiId(indInd, BinaryMapIndexReader.convertFixed32ToRef(a.getShiftTo()),
 						a.getPoiIndInBlock(0));
 				MapObject amenity = null;
-				if (settings.DEV_READ_POI_OBJECTS) {
-					amenity = readPoiObject(lid, null);
-				}
+//				amenity = readPoiObject(lid, null);
 				if (settings.SEARCH_POI_BY_CATEGORY_ONLY && skipFilteredZoomObject(t, a)) {
 					continue;
 				}
@@ -533,24 +530,22 @@ public class SpatialSearchContext {
 	}
 
 	private boolean skipFilteredZoomObject(SpatialSearchToken t, OsmAndPoiNameIndexDataAtom a) {
-		NameIndexAtomXY xy = new NameIndexAtomXY(null, a, settings);
-		int z = xy.bboxTileZoom;
-		long tileId = xy.bboxTileId;
 		int[] bbox = settings.SEARCH_POI_BY_CATEGORY_BBOX;
+		int x16 = a.getX();
+		int y16 = a.getY();
+//		bbox31 = SearchAlgorithms.decodeBboxForNameAtomsBytes(a.getBbox(), x16, y16);
 		if (bbox != null) {
-			if (a.getX() < bbox[0] || a.getX() > bbox[2] || a.getY() < bbox[1] || a.getY() > bbox[3]) {
+			if (x16 < bbox[0] || x16 > bbox[2] || y16 < bbox[1] || y16 > bbox[3]) {
 				return true;
 			}
 		}
-		if (settings.SEARCH_POI_BY_CATEGORY_ZOOM <= z) {
-			while (z > settings.SEARCH_POI_BY_CATEGORY_ZOOM) {
-				z--;
-				tileId >>= 2;
-			}
-			if (t.cacheCategoryFilterObjects.containsKey(tileId) && a.getEloRatingCount() == 0) {
+		int z = 16 - settings.SEARCH_POI_BY_CATEGORY_ZOOM;
+		if (z >= 0) {
+			long tileId = MapUtils.interleaveBits(x16 >> z, y16 >> z);
+			if (t.cacheCategoryFilterObjects.contains(tileId) && a.getEloRatingCount() == 0) {
 				return true;
 			}
-			t.cacheCategoryFilterObjects.put(tileId, a);
+			t.cacheCategoryFilterObjects.add(tileId);
 		}
 		return false;
 	}
@@ -892,7 +887,7 @@ public class SpatialSearchContext {
 		atom.poiTypes = poiTypes;
 		atom.elo = elo;
 		// for all common always false, for some frequent could be optimization
-		if (settings.OPTIM_READ_COMMON_WORDS_ATOMS && cmnWord[0]) {
+		if (settings.OPTIM_READ_COMMON_WITH_OTH_NON_FOUND_ATOMS && cmnWord[0]) {
 			// name 'ru de rue' could match 'rue' it's because of prefix & suffixes
 			
 			if (other > 0) {
@@ -906,7 +901,7 @@ public class SpatialSearchContext {
 
 			}
 		}
-		if (settings.OPTIM_READ_CATEGORY_WORD_ATOMS && t.hasPoiCategoryKeys() && atom.isPOI()) {
+		if (settings.OPTIM_READ_POI_CATEGORY_WORD_ATOMS && t.hasPoiCategoryKeys() && atom.isPOI()) {
 			// we always add to partial so if we word overloaded we don't display it
 			// doesn't matter if we read token by name "cafe" or "#^cafe" the word associated with category
 			t.addPartialCommonAtom(atom, otherTokens, numericNotMatch);

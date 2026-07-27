@@ -234,14 +234,11 @@ public class MapUtils {
 		if (longitude >= MIN_LONGITUDE && longitude <= MAX_LONGITUDE) {
 			return longitude;
 		}
-		while (longitude <= MIN_LONGITUDE || longitude > MAX_LONGITUDE) {
-			if (longitude < 0) {
-				longitude += LONGITUDE_TURN;
-			} else {
-				longitude -= LONGITUDE_TURN;
-			}
+		double mod = (longitude - MIN_LONGITUDE) % LONGITUDE_TURN;
+		if (mod < 0) {
+			mod += LONGITUDE_TURN;
 		}
-		return longitude;
+		return mod + MIN_LONGITUDE;
 	}
 
 	public static boolean isValidLatLon(double latitude, double longitude) {
@@ -253,13 +250,11 @@ public class MapUtils {
 		if (latitude >= MIN_LATITUDE && latitude <= MAX_LATITUDE) {
 			return latitude;
 		}
-		while (latitude < -90 || latitude > 90) {
-			if (latitude < 0) {
-				latitude += LATITUDE_TURN;
-			} else {
-				latitude -= LATITUDE_TURN;
-			}
+		double mod = (latitude - (-LATITUDE_TURN / 2)) % LATITUDE_TURN;
+		if (mod < 0) {
+			mod += LATITUDE_TURN;
 		}
+		latitude = mod + (-90.0);
 		if (latitude < MIN_LATITUDE) {
 			return MIN_LATITUDE;
 		} else if (latitude > MAX_LATITUDE) {
@@ -535,7 +530,7 @@ public class MapUtils {
 	/**
 	 * interleaves the bits of two 32-bit numbers. the result is known as a Morton code.
 	 */
-	public static long interleaveBits(long x, long y) {
+	public static long interleaveBitsSlow(long x, long y) {
 		long c = 0;
 		for (byte b = 31; b >= 0; b--) {
 			c = (c << 1) | ((x >> b) & 1);
@@ -543,7 +538,24 @@ public class MapUtils {
 		}
 		return c;
 	}
+
+	public static long interleaveBits(long x, long y) {
+		return interleaveBitsFast(x, y);
+	}
 	
+	public static long interleaveBitsFast(long x, long y) {
+		return splitBits(y) | (splitBits(x) << 1);
+	}
+
+	private static long splitBits(long v) {
+	    v &= 0x00000000FFFFFFFFL;               
+	    v = (v | (v << 16)) & 0x0000FFFF0000FFFFL;
+	    v = (v | (v <<  8)) & 0x00FF00FF00FF00FFL;
+	    v = (v | (v <<  4)) & 0x0F0F0F0F0F0F0F0FL;
+	    v = (v | (v <<  2)) & 0x3333333333333333L;
+	    v = (v | (v <<  1)) & 0x5555555555555555L;
+	    return v;
+	}
 
 	/**
 	 * Calculate rotation diff D, that R (rotate) + D = T (targetRotate)
@@ -759,6 +771,22 @@ public class MapUtils {
 		double pw = MapUtils.getPowZoom(31 - zoom);
 		QuadRect rect = new QuadRect(topLeftX * pw, topLeftY * pw, bottomRightX * pw, bottomRightY * pw);
 		return rect;
+	}
+	
+	public static int[] calc31BboxRhumb(int radiusMeters, int x, int y, int z) {
+		double lat = MapUtils.getLatitudeFromTile(z, y + 0.5);
+		double lon = MapUtils.getLongitudeFromTile(z, x + 0.5);
+		double deltaLat = radiusMeters / METERS_IN_DEGREE;
+		double deltaLon = radiusMeters / (METERS_IN_DEGREE * Math.cos(Math.toRadians(lat)));
+		double northLat = lat + deltaLat;
+		double southLat = lat - deltaLat;
+		double westLon = lon - deltaLon;
+		double eastLon = lon + deltaLon;
+		int top = MapUtils.get31TileNumberY(Math.min(MAX_LATITUDE, northLat));
+		int left = MapUtils.get31TileNumberX(Math.max(MIN_LONGITUDE, westLon));
+		int bottom = MapUtils.get31TileNumberY(Math.max(MIN_LATITUDE, southLat));
+		int right = MapUtils.get31TileNumberX(Math.min(MAX_LONGITUDE, eastLon));
+		return new int[] { left, top, right, bottom };
 	}
 	
 	public static QuadRect calculate31BboxUsingRhumb(int radiusMeters, LatLon l) {
