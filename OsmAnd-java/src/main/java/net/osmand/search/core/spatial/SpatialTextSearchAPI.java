@@ -17,7 +17,6 @@ import net.osmand.data.City;
 import net.osmand.data.City.CityType;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
-import net.osmand.data.QuadRect;
 import net.osmand.data.Street;
 import net.osmand.map.OsmandRegions;
 import net.osmand.osm.AbstractPoiType;
@@ -26,21 +25,20 @@ import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreFactory.SearchBaseAPI;
 import net.osmand.search.core.SearchPhrase;
-import net.osmand.search.core.SearchPhrase.SearchPhraseDataType;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchWord;
+import net.osmand.search.core.TopIndexFilter;
 import net.osmand.search.core.spatial.SpatialSearchResult.SpatialSearchResultRef;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialSearchResults;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSettings;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -71,6 +69,7 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 			return searchSelectedPoiType(phrase, resultMatcher);
 		}
 		List<BinaryMapIndexReader> files = getSpatialSearchFiles(phrase);
+		logSearchFiles("general", files);
 		if (Algorithms.isEmpty(files)) {
 			return false;
 		}
@@ -78,25 +77,44 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		SpatialPoiSearch poiSearch = new SpatialPoiSearch(poiTypes);
 		SpatialSearchContext context = createSpatialContext(phrase, resultMatcher, files, poiSearch);
 		LOG.info("Spatial search setting " + (context.settings.SEARCH_SUGGESTION ? "SUGGESTION" : "Default"));
+		LOG.info("Spatial search setting.LANG_DEDUPLICATE " + context.settings.LANG_DEDUPLICATE);
+		LOG.info("Spatial search setting.SUGGESTED_SEARCH_RADIUS_KM " + context.settings.SUGGESTED_SEARCH_RADIUS_KM);
 
 		SpatialSearchResults results = spatialTextSearch.searchAPI(phrase.getFullSearchPhrase(), context);
 		if (results.mainResults == null) {
 			return true;
 		}
+
+		int index = 0;
+		LOG.info("found " + results.mainResults.size() + " mainResults");
+		for (SpatialSearchResult spatialResult : results.mainResults) {
+			LOG.info("found mainResult " + spatialResult + ". visible level " + (spatialResult.visibleLevel()));
+			if(index++ == 10) {
+				break;
+			}
+		}
+
+		index = 0;
+		if(results.combinations != null) {
+			LOG.info("found " + results.combinations.size() + " combinations");
+			for (SpatialSearchResultsList combination : results.combinations) {
+				LOG.info("found combination " + combination);
+				if(index++ == 10) {
+					break;
+				}
+			}
+		}
+
+
 		for (SpatialSearchResult spatialResult : results.mainResults) {
 			if (resultMatcher.isCancelled()) {
 				return false;
 			}
-			List<MapObject> allObjects = spatialResult.getObjects();
-			if (!allObjects.isEmpty()) {
-				LOG.info("found spatial " + allObjects.get(0).getName() + ". visible level " + (spatialResult.visibleLevel()));
-			}
-			if (spatialResult.visibleLevel() > 0) {
-				continue;
-			}
 			SearchResult searchResult = convertResult(phrase, context, spatialResult);
-			if (searchResult != null && phrase.isSearchTypeAllowed(searchResult.objectType)) {
+			if (searchResult != null) {
 				publishWithParent(resultMatcher, searchResult);
+			} else {
+				LOG.info("searchResult = null");
 			}
 		}
 		return true;
@@ -112,6 +130,7 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 			return false;
 		}
 		List<BinaryMapIndexReader> files = getSpatialPoiSearchFiles(phrase);
+		logSearchFiles("poi_category", files);
 		if (Algorithms.isEmpty(files)) {
 			return false;
 		}
@@ -126,7 +145,7 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 			return false;
 		}
 		List<Amenity> amenities = poiSearch.loadPOIObjects(context, spatialPoiType, location,
-				getPoiTypeSearchRadius(phrase, location), phrase.getSettings().getTotalLimit());
+				context.settings.SUGGESTED_SEARCH_RADIUS_KM * 1000, phrase.getSettings().getTotalLimit());
 		for (Amenity amenity : amenities) {
 			if (resultMatcher.isCancelled()) {
 				return false;
@@ -161,21 +180,6 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		return context;
 	}
 
-	private int getPoiTypeSearchRadius(SearchPhrase phrase, LatLon location) {
-		QuadRect searchBBox31 = phrase.getSettings().getSearchBBox31();
-		if (searchBBox31 == null) {
-			return phrase.getRadiusSearch(10_000);
-		}
-		double leftLon = MapUtils.get31LongitudeX((int) searchBBox31.left);
-		double rightLon = MapUtils.get31LongitudeX((int) searchBBox31.right);
-		double topLat = MapUtils.get31LatitudeY((int) searchBBox31.top);
-		double bottomLat = MapUtils.get31LatitudeY((int) searchBBox31.bottom);
-		double radius = Math.max(
-				MapUtils.getDistance(location.getLatitude(), location.getLongitude(), topLat, leftLon),
-				MapUtils.getDistance(location.getLatitude(), location.getLongitude(), bottomLat, rightLon));
-		return Math.max(1, (int) Math.ceil(radius));
-	}
-
 	private SearchResult createSelectedPoiTypeResult(SearchPhrase phrase, Amenity amenity) {
 		SearchResult result = new SearchResult(phrase);
 		result.object = amenity;
@@ -196,25 +200,14 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 	}
 
 	private List<BinaryMapIndexReader> getSpatialPoiSearchFiles(SearchPhrase phrase) {
-		QuadRect searchBBox31 = phrase.getSettings().getSearchBBox31();
 		List<BinaryMapIndexReader> files = new ArrayList<>();
-		if (searchBBox31 == null) {
-			addFiles(files, phrase.getOfflineIndexes().iterator());
-		} else {
-			addFiles(files, phrase.getOfflineIndexes(searchBBox31, SearchPhraseDataType.POI));
-		}
+		addFiles(files, phrase.getOfflineIndexes().iterator());
 		return files;
 	}
 
 	private List<BinaryMapIndexReader> getSpatialSearchFiles(SearchPhrase phrase) {
-		QuadRect searchBBox31 = phrase.getSettings().getSearchBBox31();
 		List<BinaryMapIndexReader> files = new ArrayList<>();
-		if (searchBBox31 == null) {
-			addFiles(files, phrase.getOfflineIndexes().iterator());
-		} else {
-			addFiles(files, phrase.getOfflineIndexes(searchBBox31, SearchPhraseDataType.ADDRESS));
-			addFiles(files, phrase.getOfflineIndexes(searchBBox31, SearchPhraseDataType.POI));
-		}
+		addFiles(files, phrase.getOfflineIndexes().iterator());
 		addRegionsFile(files, phrase);
 		return files;
 	}
@@ -236,6 +229,34 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		if (reader != null && !files.contains(reader)) {
 			files.add(reader);
 		}
+	}
+
+	private void logSearchFiles(String searchType, List<BinaryMapIndexReader> files) {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Spatial search maps type=").append(searchType).append(" count=").append(files.size());
+		if (!files.isEmpty()) {
+			builder.append(": ");
+		}
+		for (int i = 0; i < files.size(); i++) {
+			if (i > 0) {
+				builder.append(", ");
+			}
+			builder.append(getSearchFileName(files.get(i)));
+		}
+		LOG.info(builder.toString());
+	}
+
+	private String getSearchFileName(BinaryMapIndexReader reader) {
+		if (reader == null) {
+			return "null";
+		}
+		File file = reader.getFile();
+		String name = file != null ? file.getName() : reader.getRegionName();
+		List<String> regionNames = reader.getRegionNames();
+		if (!Algorithms.isEmpty(regionNames)) {
+			name += " " + regionNames;
+		}
+		return name;
 	}
 
 	private void publishWithParent(SearchResultMatcher resultMatcher, SearchResult searchResult) {
@@ -266,39 +287,18 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		return false;
 	}
 
-	@Override
-	public int getMinimalSearchRadius(SearchPhrase phrase) {
-		return 0;
-	}
-
-	@Override
-	public int getNextSearchRadius(SearchPhrase phrase) {
-		return 0;
-	}
-
 	private SearchResult convertResult(SearchPhrase phrase, SpatialSearchContext context,
 	                                   SpatialSearchResult spatialResult) {
-		List<SearchResult> chain = new ArrayList<>();
-		boolean hasConcreteObject = hasConcreteObject(spatialResult);
-		for (SpatialSearchResultRef ref : spatialResult.objs) {
-			if (hasConcreteObject && ref.atom.isPoiCategory()) {
-				continue;
-			}
-			SearchResult result = convertRef(phrase, context, spatialResult, ref);
-			if (result != null) {
-				chain.add(result);
-			}
-		}
-		if (chain.isEmpty()) {
+		MapObject mainObject = spatialResult.getMainObject();
+		SpatialPoiSearch.SpatialPoiType poiType = spatialResult.getPoiCategory(context.poiSearch);
+
+		SearchResult result = mainObject != null
+				? convertMainObject(phrase, context, spatialResult, mainObject)
+				: convertPoiType(phrase, poiType);
+		if (result == null) {
 			return null;
 		}
-		Collections.reverse(chain);
-		SearchResult parent = null;
-		for (SearchResult result : chain) {
-			result.parentSearchResult = parent;
-			parent = result;
-		}
-		SearchResult result = parent;
+		result.spatialSearchVisibleLevel = spatialResult.visibleLevel();
 		List<MapObject> matchedObjects = spatialResult.getObjects();
 		result.matchedObjects = Algorithms.isEmpty(matchedObjects) ? null : matchedObjects;
 		if (spatialResult.getLatLon() != null) {
@@ -310,13 +310,36 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		return result;
 	}
 
-	private boolean hasConcreteObject(SpatialSearchResult spatialResult) {
+	private SearchResult convertMainObject(SearchPhrase phrase, SpatialSearchContext context,
+	                                       SpatialSearchResult spatialResult, MapObject mainObject) {
+		SpatialSearchResultRef mainRef = getRef(spatialResult, mainObject);
+		if (mainRef != null) {
+			return convertRef(phrase, context, spatialResult, mainRef);
+		}
+		SearchResult result = new SearchResult(phrase);
+		result.object = mainObject;
+		result.objectType = getObjectType(null, mainObject, spatialResult);
+		result.location = mainObject.getLocation();
+		result.localeName = getLocaleName(mainObject, phrase);
+		result.otherNames = mainObject.getOtherNames(true, result.localeName);
+		result.priority = SEARCH_PRIORITY;
+		result.priorityDistance = 1;
+		result.preferredZoom = getPreferredZoom(result.objectType);
+		fillRelatedObject(result, null, phrase);
+		if (mainObject instanceof Amenity amenity) {
+			result.cityName = amenity.getCityFromTagGroups(phrase.getSettings().getLang());
+		}
+		phrase.countUnknownWordsMatchMainResult(result);
+		return result;
+	}
+
+	private SpatialSearchResultRef getRef(SpatialSearchResult spatialResult, MapObject object) {
 		for (SpatialSearchResultRef ref : spatialResult.objs) {
-			if (!ref.atom.isPoiCategory() && (ref.atom.object != null || ref.atom.bldObject != null)) {
-				return true;
+			if (ref.atom.object == object || ref.atom.bldObject == object) {
+				return ref;
 			}
 		}
-		return false;
+		return null;
 	}
 
 	private SearchResult convertRef(SearchPhrase phrase, SpatialSearchContext context,
@@ -351,14 +374,29 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 
 	private SearchResult convertPoiType(SearchPhrase phrase, SpatialSearchContext context, NameIndexAtom atom) {
 		SpatialPoiSearch.SpatialPoiType spatialPoiType = context.poiSearch.getById((int) atom.id);
-		AbstractPoiType poiType = spatialPoiType == null ? null : spatialPoiType.singleType;
-		if (poiType == null) {
+		return convertPoiType(phrase, spatialPoiType);
+	}
+
+	private SearchResult convertPoiType(SearchPhrase phrase, SpatialPoiSearch.SpatialPoiType spatialPoiType) {
+		if (spatialPoiType == null) {
+			return null;
+		}
+		Object object;
+		String localeName;
+		AbstractPoiType poiType = spatialPoiType.singleType;
+		if (poiType != null) {
+			object = poiType;
+			localeName = poiType.getTranslation();
+		} else if (spatialPoiType.poiSubType != null) {
+			object = new TopIndexFilter(spatialPoiType.poiSubType, poiTypes, spatialPoiType.poiAdditional);
+			localeName = getTopIndexTranslation(spatialPoiType.poiAdditional);
+		} else {
 			return null;
 		}
 		SearchResult result = new SearchResult(phrase);
-		result.object = poiType;
+		result.object = object;
 		result.objectType = ObjectType.POI_TYPE;
-		result.localeName = poiType.getTranslation();
+		result.localeName = localeName;
 		result.priority = SEARCH_PRIORITY;
 		result.priorityDistance = 0;
 		result.preferredZoom = PREFERRED_POI_ZOOM;
@@ -366,11 +404,17 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		return result;
 	}
 
+	private String getTopIndexTranslation(String value) {
+		String key = TopIndexFilter.getValueKey(value);
+		String translate = poiTypes.getPoiTranslation(key);
+		return translate.equalsIgnoreCase(key) ? value : translate;
+	}
+
 	private ObjectType getObjectType(NameIndexAtom atom, MapObject object, SpatialSearchResult spatialResult) {
-		if (atom.isBuilding() || object instanceof Building) {
+		if ((atom != null && atom.isBuilding()) || object instanceof Building) {
 			return ObjectType.HOUSE;
 		}
-		if (atom.isPOI() || object instanceof Amenity) {
+		if ((atom != null && atom.isPOI()) || object instanceof Amenity) {
 			return ObjectType.POI;
 		}
 		if (object instanceof Street) {
@@ -387,13 +431,13 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 			}
 			return ObjectType.VILLAGE;
 		}
-		if (atom.isPostcode()) {
+		if (atom != null && atom.isPostcode()) {
 			return ObjectType.POSTCODE;
 		}
-		if (atom.isBoundary()) {
+		if (atom != null && atom.isBoundary()) {
 			return ObjectType.BOUNDARY;
 		}
-		if (atom.isStreet()) {
+		if (atom != null && atom.isStreet()) {
 			return ObjectType.STREET;
 		}
 		return ObjectType.POI;
@@ -414,6 +458,9 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 	}
 
 	private BinaryMapIndexReader getFile(SpatialSearchContext context, NameIndexAtom atom) {
+		if (atom == null) {
+			return null;
+		}
 		int indexInd = context.getFileInd(atom.id);
 		for (SpatialTextSearch.SpatialSearchFileCache fileCache : context.internalFile) {
 			if (indexInd < fileCache.indexInd + fileCache.indexReaders.size()) {
@@ -450,7 +497,7 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 			result.relatedObject = city;
 			result.localeRelatedObjectName = city == null ? null : city.getName(phrase.getSettings().getLang(),
 					phrase.getSettings().isTransliterate());
-		} else if (object instanceof Building && atom.object instanceof Street street) {
+		} else if (object instanceof Building && atom != null && atom.object instanceof Street street) {
 			result.relatedObject = street;
 			result.localeRelatedObjectName = street.getName(phrase.getSettings().getLang(),
 					phrase.getSettings().isTransliterate());

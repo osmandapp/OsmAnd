@@ -46,7 +46,6 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.*;
 import java.util.Map.Entry;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BooleanSupplier;
 
 public class SearchCoreFactory {
@@ -2027,7 +2026,7 @@ public class SearchCoreFactory {
 				LatLon latLon = parsedCode.getLatLon();
 				// do we have local code with locality
 				if (!parsedCode.isFull() && !Algorithms.isEmpty(parsedCode.getPlaceName())) {
-					LatLon cityLocation = searchOLCLocation(phrase,resultMatcher);
+					LatLon cityLocation = searchOLCLocation(phrase, parsedCode.getPlaceName(), resultMatcher);
 					if (cityLocation != null) {
 						latLon = parsedCode.recover(cityLocation);
 					}
@@ -2057,47 +2056,39 @@ public class SearchCoreFactory {
 			}
 		}
 		
-		private LatLon searchOLCLocation(SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
-			List<String> unknownWords = phrase.getUnknownSearchWords();
-			String text = !unknownWords.isEmpty() ? unknownWords.get(0) : phrase.getUnknownWordToSearch();
-			
+		private LatLon searchOLCLocation(SearchPhrase phrase, String text, final SearchResultMatcher resultMatcher) throws IOException {
+			text = getOLCPlaceNameToSearch(text);
+			if (Algorithms.isEmpty(text)) {
+				return null;
+			}
 			final List<String> allowedTypes = Arrays.asList("village", "town", "city"); // ascending priority
-			QuadRect searchBBox31 = new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
 			final NameStringMatcher nm = new NameStringMatcher(text, CHECK_STARTS_FROM_SPACE);
 			final String lang = phrase.getSettings().getLang();
 			final boolean transliterate = phrase.getSettings().isTransliterate();
 			
-			SearchSettings settings = phrase.getSettings().setSearchBBox31(searchBBox31);
-			settings = settings.setSortByName(false);
-			settings = settings.setEmptyQueryAllowed(true);
-
-			SearchPhrase olcPhrase = phrase.generateNewPhrase(text, settings);
 			final List<SearchResult> result = new ArrayList<>();
 			
-			ResultMatcher<SearchResult> matcher = new ResultMatcher<SearchResult>() {
+			ResultMatcher<Amenity> matcher = new ResultMatcher<Amenity>() {
 				int count = 0;
 				
 				@Override
-				public boolean publish(SearchResult object) {
+				public boolean publish(Amenity amenity) {
 					if (count > SEARCH_OLC_WITH_CITY_TOTAL_LIMIT) {
 						return false;
 					}
-					Amenity amenity = null;
-					if (object.objectType == POI) {
-						amenity = (Amenity) object.object;
-					}
-					
-					if (amenity == null) {
-						return false;
-					}
-					
 					String subType = amenity.getSubType();
 					String localeName = amenity.getName(lang, transliterate);
-					Collection<String> otherNames = object.otherNames;
+					Collection<String> otherNames = amenity.getOtherNames(true, localeName);
 					
 					if (!allowedTypes.contains(subType) || (!nm.matches(localeName) && !nm.matches(otherNames))) {
 						return false;
 					}
+					SearchResult object = new SearchResult(phrase);
+					object.object = amenity;
+					object.objectType = POI;
+					object.localeName = localeName;
+					object.otherNames = otherNames;
+					object.location = amenity.getLocation();
 					result.add(object);
 					count++;
 					return true;
@@ -2109,8 +2100,17 @@ public class SearchCoreFactory {
 				}
 			};
 			
-			SearchResultMatcher rm = new SearchResultMatcher(matcher, olcPhrase, 0, new AtomicInteger(0), SEARCH_OLC_WITH_CITY_TOTAL_LIMIT);
-			amenitiesApi.search(olcPhrase, rm);
+			LatLon originalLocation = phrase.getSettings().getOriginalLocation();
+			int centerX = originalLocation == null ? 0 : MapUtils.get31TileNumberX(originalLocation.getLongitude());
+			int centerY = originalLocation == null ? 0 : MapUtils.get31TileNumberY(originalLocation.getLatitude());
+			SearchRequest<Amenity> request = BinaryMapIndexReader.buildSearchPoiRequest(centerX, centerY, text,
+					0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, matcher, null);
+			for (BinaryMapIndexReader reader : phrase.getOfflineIndexes()) {
+				if (matcher.isCancelled()) {
+					break;
+				}
+				reader.searchPoiByName(request);
+			}
 			
 			final NameStringMatcher nmEquals = new NameStringMatcher(text, CHECK_EQUALS);
 			
@@ -2151,6 +2151,14 @@ public class SearchCoreFactory {
 			});
 			
 			return !result.isEmpty() ? result.get(0).location : null;
+		}
+
+		private String getOLCPlaceNameToSearch(String placeName) {
+			if (placeName == null) {
+				return "";
+			}
+			int commaIndex = placeName.indexOf(',');
+			return (commaIndex == -1 ? placeName : placeName.substring(0, commaIndex)).trim();
 		}
 		
 		
