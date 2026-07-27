@@ -5007,7 +5007,6 @@
     <string name="shared_string_media">媒體</string>
     <string name="no_media">無媒體</string>
     <string name="no_media_descr">您可以從您的相機或媒體庫新增照片、影片或音訊附註。</string>
-    <string name="auto_copy_media_to_osmand_storage">自動複製媒體到 OsmAnd 儲存空間</string>
     <string name="navigate_point_format_maidenhead">讀我檔案：比較好的參與翻譯方式是透過 https://hosted.weblate.org/engage/osmand/ - 如果您直接編輯 strings.xml 檔案的話，請確保：1. 不要產生重覆的字串 (檢查是否有已存在的名稱) 2. 每個撇號 (引號) 前面都需要加反斜線。3. 如果您變動英文字串檔案，請在檔案開頭加新的字串，這會讓釋出前的定期檢核比較容易進行。- 至於用詞與詞字的一致性，請參閱 https://docs.osmand.net/docs/technical/contributions/translating-osmand 謝謝 - Hardy</string>
     <string name="navigate_point_east_coordinate">東邊的座標</string>
     <string name="navigate_point_north_coordinate">北邊的座標</string>

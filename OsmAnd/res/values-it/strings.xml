@@ -5157,7 +5157,6 @@
     <string name="choose_from_gallery">Scegli dalla galleria</string>
     <string name="choose_from_files">Scegli tra i file</string>
     <string name="shared_string_media">File multimediali</string>
-    <string name="auto_copy_media_to_osmand_storage">Copia automatica dei file multimediali nella memoria OsmAnd</string>
     <string name="no_media">Nessun file multimediale</string>
     <string name="no_media_descr">Puoi aggiungere foto, video o note audio dalla tua fotocamera o libreria.</string>
     <string name="access_pinch_zoom_magnification">Ingrandimento con due dita</string>
@@ -5174,7 +5173,9 @@
     <string name="camera_folder">Cartella della fotocamera</string>
     <string name="media_storage_main_storage_descr">I file sono salvati nell\'archivio privato dell\'app. Sono nascosti dalla Galleria e dalle altre app.</string>
     <string name="media_storage_shared_storage_descr">I file sono salvati nelle cartelle pubbliche (Immagini, Video, Musica). Sono visibili nella Galleria e in Google Foto.</string>
-    <string name="media_storage_camera_folder_descr">I file sono salvati nel Rullino fotografico. Nota: l\'audio è salvato in Musica/OsmAnd.</string>
+    <string name="shared_string_note">Nota</string>
+    <string name="media_storage_camera_folder_note_descr">l\'audio è salvato in Musica/OsmAnd.</string>
+    <string name="media_storage_camera_folder_descr">I file sono salvati nel Rullino fotografico. %1$s</string>
     <string name="media_storage_manually_specified_descr">I file sono salvati in una cartella personalizzata e ordinati per tipo (Audio, Foto, Video).</string>
     <string name="change_media_storage_question">Cambio l\'archivio multimediale?</string>
     <string name="change_media_storage_full_description">Sposto i file multimediali esistenti nella nuova destinazione?\n%1$s &gt; %2$s</string>

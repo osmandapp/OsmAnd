@@ -5148,7 +5148,6 @@
     <string name="shared_string_media">Медија</string>
     <string name="no_media">Нема медија</string>
     <string name="no_media_descr">Можете додати слике, видеа или звучне белешке из своје камере или књижнице.</string>
-    <string name="auto_copy_media_to_osmand_storage">Самостално умножавање садржаја у ОсмАндово складиште</string>
     <string name="navigate_point_format_maidenhead">Мејденхед положај</string>
     <string name="navigate_point_east_coordinate">Источна координата</string>
     <string name="navigate_point_north_coordinate">Северна координата</string>
@@ -5192,7 +5191,9 @@
     <string name="camera_folder">Омот камере</string>
     <string name="media_storage_main_storage_descr">Датотеке се чувају у пријатном складишту програма. Скривене су од галерије и других програма.</string>
     <string name="media_storage_shared_storage_descr">Датотеке се чувају у јавним омотима (слике, филмови, музика). Видљиве су у галерији и Гугловим сликама.</string>
-    <string name="media_storage_camera_folder_descr">Датотеке се чувају у омоту камерин свитак. Напомена: звук се чува у музици/ОсмАнду.</string>
+    <string name="shared_string_note">Напомена</string>
+    <string name="media_storage_camera_folder_note_descr">звук се чува у музици/ОсмАнду.</string>
+    <string name="media_storage_camera_folder_descr">Датотеке се чувају у омоту камерин свитак. %1$s</string>
     <string name="media_storage_manually_specified_descr">Датотеке се чувају у произвољном омоту и распоређују по врсти (звук, слика, видео).</string>
     <string name="change_media_storage_question">Променити складиште медија?</string>
     <string name="change_media_storage_full_description">Преместити постојеће медијске датотеке на ново одредиште?\n%1$s &gt; %2$s</string>

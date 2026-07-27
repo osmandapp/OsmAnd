@@ -5204,7 +5204,6 @@
     <string name="shared_string_media">Medier</string>
     <string name="no_media">Ingen medier</string>
     <string name="no_media_descr">Du kan tilføje fotos, videoer eller lydnoter fra dit kamera eller dit bibliotek.</string>
-    <string name="auto_copy_media_to_osmand_storage">Kopier automatisk medier til OsmAnd-lageret</string>
     <string name="navigate_point_format_maidenhead">Maidenhead</string>
     <string name="navigate_point_east_coordinate">Østlig koordinat</string>
     <string name="navigate_point_north_coordinate">Nordlig koordinat</string>
@@ -5248,7 +5247,9 @@
     <string name="camera_folder">Kameramappe</string>
     <string name="media_storage_main_storage_descr">Filer gemmes i appens private lager. De er skjult for GallerI og andre apps.</string>
     <string name="media_storage_shared_storage_descr">Filer gemmes i de offentlige mapper (Billeder, Film, Musik). De kan ses i Galleri og Google Fotos.</string>
-    <string name="media_storage_camera_folder_descr">Filer gemmes i Kamerarullen. Bemærk: Lydfiler gemmes i Musik/OsmAnd.</string>
+    <string name="shared_string_note">Bemærk</string>
+    <string name="media_storage_camera_folder_note_descr">Lydfiler gemmes i Musik/OsmAnd.</string>
+    <string name="media_storage_camera_folder_descr">Filer gemmes i Kamerarullen. %1$s</string>
     <string name="media_storage_manually_specified_descr">Filerne gemmes i en brugerdefineret mappe og sorteres efter type (lyd, foto, video).</string>
     <string name="change_media_storage_question">Skift medielager?</string>
     <string name="change_media_storage_full_description">Skal eksisterende mediefiler flyttes til den nye destination?\n%1$s &gt; %2$s</string>
