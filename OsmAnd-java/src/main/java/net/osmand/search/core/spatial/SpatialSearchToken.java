@@ -9,6 +9,7 @@ import com.google.protobuf.ByteString;
 
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TLongObjectHashMap;
+import gnu.trove.set.hash.TIntHashSet;
 import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -61,7 +62,7 @@ public class SpatialSearchToken {
 	HashSkipTileQuadTree<Integer> quadTreeSkip = new HashSkipTileQuadTree<>();
 	
 	TLongObjectHashMap<NameIndexAtom> indexByOsmIds = new TLongObjectHashMap<>();
-	Set<Integer> deletedAtoms = new HashSet<Integer>();
+	TIntHashSet deletedAtoms = new TIntHashSet();
 	
 	// partial place holder
 	List<PartialMatch> partialExactMatch = new ArrayList<>();
@@ -141,6 +142,7 @@ public class SpatialSearchToken {
 		return collatorMain;
 	}
 	
+	
 	public boolean isOnlyFullMatch() {
 		return incomplete && word.length() <= MIN_CHAR_INCOMPLETE + 1;
 	}
@@ -205,6 +207,11 @@ public class SpatialSearchToken {
 	void removeAtom(NameIndexAtom atom) {
 		NameIndexAtom na = index.get(atom.id);
 		deletedAtoms.add(na.indexInToken);
+	}
+	
+
+	TIntHashSet getDeletedAtoms() {
+		return deletedAtoms;
 	}
 
 	void enlargeBbox(NameIndexAtom atom, double mult) {
