@@ -71,7 +71,8 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 	private Bitmap selectedImage;
 	private Bitmap headingImage;
 	private Paint paintPoint;
-	private Paint paintLine;
+	private final Paint[] linePaints = new Paint[3];
+	private final Paint[] pointPaints = new Paint[3];
 	private Bitmap point;
 	private boolean carView;
 	private float textScale = 1f;
@@ -94,12 +95,26 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 		super.initLayer(view);
 
 		paintPoint = new Paint();
-		paintLine = new Paint();
-		paintLine.setStyle(Paint.Style.STROKE);
-		paintLine.setAntiAlias(true);
-		paintLine.setColor(ContextCompat.getColor(getContext(), R.color.mapillary_color));
-		paintLine.setStrokeWidth(AndroidUtils.dpToPx(getContext(), 4f));
-		paintLine.setStrokeCap(Paint.Cap.ROUND);
+
+		int[] colors = new int[] {
+				ContextCompat.getColor(getContext(), R.color.mapillary_layer_green_color),
+				ContextCompat.getColor(getContext(), R.color.mapillary_layer_yellow_color),
+				ContextCompat.getColor(getContext(), R.color.mapillary_layer_red_color),
+		};
+		for (int i = 0; i < colors.length; i++) {
+			Paint linePaint = new Paint();
+			linePaint.setStyle(Paint.Style.STROKE);
+			linePaint.setAntiAlias(true);
+			linePaint.setColor(colors[i]);
+			linePaint.setStrokeWidth(AndroidUtils.dpToPx(getContext(), 4f));
+			linePaint.setStrokeCap(Paint.Cap.ROUND);
+			linePaints[i] = linePaint;
+
+			Paint pointPaint = new Paint();
+			pointPaint.setAntiAlias(true);
+			pointPaint.setColor(colors[i]);
+			pointPaints[i] = pointPaint;
+		}
 
 		updateBitmaps(true);
 	}
@@ -324,37 +339,44 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 
 	private void drawLines(Canvas canvas, RotatedTileBox tileBox, List<Geometry> geometries,
 	                       int tileX, int tileY, int tileZoom) {
-		for (Geometry geometry : geometries) {
-			if (geometry.isEmpty() || filtered(geometry.getUserData())) {
-				continue;
-			}
+		// Draw order from bottom to top: red -> yellow -> green.
+		// It guarantees that newer/higher-priority (green) lines remain visible above others.
+		int[] drawOrder = {2, 1, 0};
+		for (int targetFilterIndex : drawOrder) {
+			for (Geometry geometry : geometries) {
+				int filterIndex = getFilterIndex(geometry.getUserData());
+				if (geometry.isEmpty() || filterIndex != targetFilterIndex) {
+					continue;
+				}
 
-			if (geometry instanceof MultiLineString) {
-				drawMultiLineString(canvas, tileBox, (MultiLineString) geometry, tileX, tileY, tileZoom);
-			} else if (geometry instanceof LineString) {
-				drawLineString(canvas, tileBox, (LineString) geometry, tileX, tileY, tileZoom);
+				if (geometry instanceof MultiLineString) {
+					drawMultiLineString(canvas, tileBox, (MultiLineString) geometry, tileX, tileY, tileZoom, filterIndex);
+				} else if (geometry instanceof LineString) {
+					drawLineString(canvas, tileBox, (LineString) geometry, tileX, tileY, tileZoom, filterIndex);
+				}
 			}
 		}
 	}
 
 	private void drawMultiLineString(Canvas canvas, RotatedTileBox tileBox, MultiLineString multiLineString,
-	                                 int tileX, int tileY, int tileZoom) {
+									 int tileX, int tileY, int tileZoom, int filterIndex) {
 		for (int i = 0; i < multiLineString.getNumGeometries(); i++) {
 			Geometry geometry = multiLineString.getGeometryN(i);
 			if (geometry instanceof LineString && !geometry.isEmpty()) {
-				drawLineString(canvas, tileBox, ((LineString) geometry), tileX, tileY, tileZoom);
+
+				drawLineString(canvas, tileBox, ((LineString) geometry), tileX, tileY, tileZoom, filterIndex);
 			}
 		}
 	}
 
 	private void drawLineString(Canvas canvas, RotatedTileBox tileBox, LineString line,
-	                            int tileX, int tileY, int tileZoom) {
+								int tileX, int tileY, int tileZoom, int filterIndex) {
 		Coordinate[] coordinates = line.getCoordinateSequence().toCoordinateArray();
-		draw(coordinates, canvas, tileBox, tileX, tileY, tileZoom);
+		draw(coordinates, canvas, tileBox, tileX, tileY, tileZoom, filterIndex);
 	}
 
 	private void draw(Coordinate[] points, Canvas canvas, RotatedTileBox tileBox,
-	                  int tileX, int tileY, int tileZoom) {
+	                  int tileX, int tileY, int tileZoom, int filterIndex) {
 		if (points.length > 1) {
 			int zoomDiff = tileBox.getZoom() - tileZoom;
 			int mult = (int) Math.pow(2.0, zoomDiff);
@@ -392,7 +414,7 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 					y = tileBox.getPixYFromTile(tileX + px, tileY + py, tileZoom);
 
 					if (lastX != x || lastY != y) {
-						canvas.drawLine(lastX, lastY, x, y, paintLine);
+						canvas.drawLine(lastX, lastY, x, y, linePaints[filterIndex]);
 					}
 
 					lastX = x;
@@ -407,7 +429,7 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 	}
 
 	private Map<QuadPointDouble, Map<?, ?>> drawPoints(Canvas canvas, RotatedTileBox tileBox,
-	                                             List<Geometry> geometries, int tileX, int tileY) {
+													   List<Geometry> geometries, int tileX, int tileY) {
 		int dzoom = tileBox.getZoom() - MIN_IMAGE_LAYER_ZOOM;
 		int mult = (int) Math.pow(2.0, dzoom);
 		QuadRect tileBounds = tileBox.getTileBounds();
@@ -419,19 +441,23 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 		float phd = ph / 2;
 
 		Map<QuadPointDouble, Map<?, ?>> visiblePoints = new HashMap<>();
-		for (Geometry g : geometries) {
-			Map<?, ?> userData = g.getUserData() instanceof HashMap ? ((HashMap<?, ?>) g.getUserData()) : null;
-			if (g instanceof Point && !g.isEmpty() && userData != null) {
-				Point p = (Point) g;
-				px = p.getCoordinate().x / EXTENT;
-				py = p.getCoordinate().y / EXTENT;
-				tx = (tileX + px) * mult;
-				ty = (tileY + py) * mult;
-				if (tileBounds.contains(tx, ty, tx, ty) && !filtered(userData)) {
-					x = tileBox.getPixXFromTile(tileX + px, tileY + py, MIN_IMAGE_LAYER_ZOOM);
-					y = tileBox.getPixYFromTile(tileX + px, tileY + py, MIN_IMAGE_LAYER_ZOOM);
-					canvas.drawBitmap(point, x - pwd, y - phd, paintPoint);
-					visiblePoints.put(new QuadPointDouble(tileX + px, tileY + py), userData);
+		int[] drawOrder = {2, 1, 0};
+		for (int targetFilterIndex : drawOrder) {
+			for (Geometry g : geometries) {
+				Map<?, ?> userData = g.getUserData() instanceof HashMap ? ((HashMap<?, ?>) g.getUserData()) : null;
+				if (g instanceof Point && !g.isEmpty() && userData != null) {
+					Point p = (Point) g;
+					px = p.getCoordinate().x / EXTENT;
+					py = p.getCoordinate().y / EXTENT;
+					tx = (tileX + px) * mult;
+					ty = (tileY + py) * mult;
+					int filterIndex = getFilterIndex(userData);
+					if (tileBounds.contains(tx, ty, tx, ty) && filterIndex == targetFilterIndex) {
+						x = tileBox.getPixXFromTile(tileX + px, tileY + py, MIN_IMAGE_LAYER_ZOOM);
+						y = tileBox.getPixYFromTile(tileX + px, tileY + py, MIN_IMAGE_LAYER_ZOOM);
+						canvas.drawCircle(x, y, Math.min(pwd, phd), pointPaints[filterIndex]);
+						visiblePoints.put(new QuadPointDouble(tileX + px, tileY + py), userData);
+					}
 				}
 			}
 		}
@@ -439,44 +465,69 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 		return visiblePoints;
 	}
 
-	private boolean filtered(Object data) {
+	private int getFilterIndex(Object data) {
 		if (data == null) {
-			return true;
+			return -1;
 		}
 
-		boolean shouldFilter = plugin.USE_MAPILLARY_FILTER.get();
+		//boolean shouldFilter = plugin.USE_MAPILLARY_FILTER.get();
 //		String userKey = plugin.MAPILLARY_FILTER_USER_KEY.get();
-		long from = plugin.MAPILLARY_FILTER_FROM_DATE.get();
-		long to = plugin.MAPILLARY_FILTER_TO_DATE.get();
+		boolean usePrimaryFilter = plugin.USE_MAPILLARY_FILTER.get();
+		long mainFrom = plugin.MAPILLARY_FILTER_MAIN_SPLIT_FROM_DATE.get();
+		long mainTo = plugin.MAPILLARY_FILTER_MAIN_SPLIT_TO_DATE.get();
+
+		boolean shouldShowFirstSplit = plugin.MAPILLARY_FILTER_SPLIT_FIRST.get();
+		long firstSplitFrom = plugin.MAPILLARY_FILTER_FIRST_SPLIT_FROM_DATE.get();
+		long firstSplitTo = plugin.MAPILLARY_FILTER_FIRST_SPLIT_TO_DATE.get();
+
+		boolean shouldShowSecondSplit = plugin.MAPILLARY_FILTER_SPLIT_SECOND.get();
+		long secondSplitFrom = plugin.MAPILLARY_FILTER_SECOND_SPLIT_FROM_DATE.get();
+		long secondSplitTo = plugin.MAPILLARY_FILTER_SECOND_SPLIT_TO_DATE.get();
 		boolean pano = plugin.MAPILLARY_FILTER_PANO.get();
 
 		HashMap<String, Object> userData = (HashMap<String, Object>) data;
 		long capturedAt = ((Number) userData.get(CAPTURED_AT_KEY)).longValue();
 
-		if (shouldFilter) {
+//		if (shouldFilter) {
 //  		Filter by user name unavailable in current API version
 //			if (!userKey.isEmpty()) {
 //				String key = (String) userData.get("userkey");
 //				if (!userKey.equals(key)) {
 //					return true;
 //				}
-//			}
-
-			if (from != 0 && to != 0) {
-				if (capturedAt < from || capturedAt > to) {
-					return true;
-				}
-			} else if ((from != 0 && capturedAt < from) || (to != 0 && capturedAt > to)) {
-				return true;
-			}
-		}
+//
+//		}
 
 		// Always filter by image type
 		if (pano) {
 			boolean isPanoramicImage = (boolean) userData.get(IS_PANORAMIC_KEY);
-			return !isPanoramicImage;
+			if (!isPanoramicImage) {
+				return -1;
+			}
 		}
-		return false;
+
+		boolean hasPrimaryRange = mainFrom != 0 || mainTo != 0;
+		boolean hasSecondRange = (firstSplitFrom != 0 || firstSplitTo != 0) && shouldShowFirstSplit;
+		boolean hasThirdRange = (secondSplitFrom != 0 || secondSplitTo != 0) && shouldShowSecondSplit;
+
+		if ((hasPrimaryRange || !hasSecondRange && !hasThirdRange || !usePrimaryFilter)
+				&& matchesDateRange(capturedAt, mainFrom, mainTo)) {
+			return 0;
+		}
+		if (hasSecondRange && matchesDateRange(capturedAt, firstSplitFrom, firstSplitTo)) {
+			return 1;
+		}
+		if (hasThirdRange && matchesDateRange(capturedAt, secondSplitFrom, secondSplitTo)) {
+			return 2;
+		}
+		return !usePrimaryFilter && !hasSecondRange && !hasThirdRange ? 0 : -1;
+	}
+
+	private boolean matchesDateRange(long capturedAt, long from, long to) {
+		if (from != 0 && to != 0) {
+			return capturedAt >= from && capturedAt <= to;
+		}
+		return (from == 0 || capturedAt >= from) && (to == 0 || capturedAt <= to);
 	}
 
 	private void drawSelectedPoint(Canvas canvas, RotatedTileBox tileBox) {
@@ -684,11 +735,21 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 		int hasFilter = plugin.USE_MAPILLARY_FILTER.get() ? 1 : 0;
 		long from = 0;
 		long to = 0;
+		long fromSecond = 0;
+		long toSecond = 0;
+		long fromThird = 0;
+		long toThird = 0;
+
 		if (hasFilter == 1) {
 			from = plugin.MAPILLARY_FILTER_FROM_DATE.get();
 			to = plugin.MAPILLARY_FILTER_TO_DATE.get();
+
+			fromSecond = plugin.MAPILLARY_FILTER_FIRST_SPLIT_FROM_DATE.get();
+			toSecond = plugin.MAPILLARY_FILTER_FIRST_SPLIT_TO_DATE.get();
+			fromThird = plugin.MAPILLARY_FILTER_SECOND_SPLIT_FROM_DATE.get();
+			toThird = plugin.MAPILLARY_FILTER_SECOND_SPLIT_TO_DATE.get();
 		}
 		int pano = plugin.MAPILLARY_FILTER_PANO.get() ? 1 : 0;
-		return (hasFilter << 1) + from + to + pano;
+		return (hasFilter << 1) + from + to + fromSecond + toSecond + fromThird + toThird + pano;
 	}
 }

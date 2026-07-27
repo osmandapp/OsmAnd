@@ -81,10 +81,19 @@ public class MapillaryPlugin extends OsmandPlugin {
 	public final CommonPreference<String> MAPILLARY_FILTER_USERNAME;
 	public final CommonPreference<Long> MAPILLARY_FILTER_FROM_DATE;
 	public final CommonPreference<Long> MAPILLARY_FILTER_TO_DATE;
+	public final CommonPreference<Long> MAPILLARY_FILTER_MAIN_SPLIT_FROM_DATE;
+	public final CommonPreference<Long> MAPILLARY_FILTER_MAIN_SPLIT_TO_DATE;
+	public final CommonPreference<Boolean> MAPILLARY_FILTER_SPLIT_FIRST;
+	public final CommonPreference<Long> MAPILLARY_FILTER_FIRST_SPLIT_FROM_DATE;
+	public final CommonPreference<Long> MAPILLARY_FILTER_FIRST_SPLIT_TO_DATE;
+	public final CommonPreference<Boolean> MAPILLARY_FILTER_SPLIT_SECOND;
+	public final CommonPreference<Long> MAPILLARY_FILTER_SECOND_SPLIT_FROM_DATE;
+	public final CommonPreference<Long> MAPILLARY_FILTER_SECOND_SPLIT_TO_DATE;
 	public final CommonPreference<Boolean> MAPILLARY_FILTER_PANO;
+	public final CommonPreference<Boolean> MAPILLARY_SHOW_ABOVE_OVERLAY;
 	public final CommonPreference<Boolean> MAPILLARY_PHOTOS_ROW_COLLAPSED;
 
-	private MapActivity mapActivity;
+    private MapActivity mapActivity;
 
 	@Nullable
 	private GalleryRowController mapillaryRowController;
@@ -102,7 +111,16 @@ public class MapillaryPlugin extends OsmandPlugin {
 		MAPILLARY_FILTER_USERNAME = registerStringPreference("mapillary_filter_username", "").makeGlobal().makeShared();
 		MAPILLARY_FILTER_FROM_DATE = registerLongPreference("mapillary_filter_from_date", 0).makeGlobal().makeShared();
 		MAPILLARY_FILTER_TO_DATE = registerLongPreference("mapillary_filter_to_date", 0).makeGlobal().makeShared();
+		MAPILLARY_FILTER_MAIN_SPLIT_FROM_DATE = registerLongPreference("mapillary_filter_main_split_from_date", 0).makeGlobal().makeShared();
+		MAPILLARY_FILTER_MAIN_SPLIT_TO_DATE = registerLongPreference("mapillary_filter_main_split_to_date", 0).makeGlobal().makeShared();
+		MAPILLARY_FILTER_SPLIT_FIRST = registerBooleanPreference("mapillary_filterdate_split_first", false).makeGlobal().makeShared();
+		MAPILLARY_FILTER_FIRST_SPLIT_FROM_DATE = registerLongPreference("mapillary_filter_first_split_from_date", 0).makeGlobal().makeShared();
+		MAPILLARY_FILTER_FIRST_SPLIT_TO_DATE = registerLongPreference("mapillary_filter_first_split_to_date", 0).makeGlobal().makeShared();
+		MAPILLARY_FILTER_SPLIT_SECOND = registerBooleanPreference("mapillary_filterdate_split_second", false).makeGlobal().makeShared();
+		MAPILLARY_FILTER_SECOND_SPLIT_FROM_DATE = registerLongPreference("mapillary_filter_second_split_from_date", 0).makeGlobal().makeShared();
+		MAPILLARY_FILTER_SECOND_SPLIT_TO_DATE = registerLongPreference("mapillary_filter_second_split_to_date", 0).makeGlobal().makeShared();
 		MAPILLARY_FILTER_PANO = registerBooleanPreference("mapillary_filter_pano", false).makeGlobal().makeShared();
+		MAPILLARY_SHOW_ABOVE_OVERLAY = registerBooleanPreference("mapillary_show_above_overlay", false).makeGlobal().makeShared();
 		MAPILLARY_PHOTOS_ROW_COLLAPSED = registerBooleanPreference("mapillary_menu_collapsed", true).makeGlobal().makeShared();
 	}
 
@@ -185,7 +203,12 @@ public class MapillaryPlugin extends OsmandPlugin {
 			if (SHOW_MAPILLARY.get() || force) {
 				vectorSource = settings.getTileSourceByName(TileSourceManager.getMapillaryVectorSource().getName(), false);
 			}
-			updateLayer(mapView, vectorSource, vectorLayer, 0.62f);
+
+            float layerOrder = 0.62f;
+			if (MAPILLARY_SHOW_ABOVE_OVERLAY.get()){
+				layerOrder = 0.72f;
+			}
+			updateLayer(mapView, vectorSource, vectorLayer, layerOrder);
 		} else {
 			mapView.removeLayer(vectorLayer);
 			vectorLayer.setMap(null);
