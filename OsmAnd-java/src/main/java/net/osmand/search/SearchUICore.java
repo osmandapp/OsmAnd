@@ -120,6 +120,7 @@ public class SearchUICore {
 		private final List<SearchResult> searchResults = new ArrayList<>();
 		private final SearchPhrase phrase;
 		private final boolean skipSorting;
+		private int spatialSearchVisibleLevel;
 		private boolean useLimit;
 		private static final int DEPTH_TO_CHECK_SAME_SEARCH_RESULTS = 20;
 		private static final Integer DOMINATED_CITY_CRITERIA = 5;
@@ -129,12 +130,18 @@ public class SearchUICore {
 		}
 
 		public SearchResultCollection(SearchPhrase phrase, boolean skipSorting) {
+			this(phrase, skipSorting, 0);
+		}
+
+		public SearchResultCollection(SearchPhrase phrase, boolean skipSorting, int spatialSearchVisibleLevel) {
 			this.phrase = phrase;
 			this.skipSorting = skipSorting;
+			this.spatialSearchVisibleLevel = spatialSearchVisibleLevel;
 		}
 
 		public SearchResultCollection combineWithCollection(SearchResultCollection collection, boolean resort, boolean removeDuplicates) {
-			SearchResultCollection src = new SearchResultCollection(phrase, skipSorting || collection.skipSorting);
+			SearchResultCollection src = new SearchResultCollection(phrase, skipSorting || collection.skipSorting,
+					Math.max(spatialSearchVisibleLevel, collection.spatialSearchVisibleLevel));
 			src.addSearchResults(searchResults, false, false);
 			src.addSearchResults(collection.searchResults, resort, removeDuplicates);
 			return src;
@@ -230,6 +237,49 @@ public class SearchUICore {
 
 		public List<SearchResult> getCurrentSearchResults() {
 			return Collections.unmodifiableList(searchResults);
+		}
+
+		public List<SearchResult> getVisibleSpatialSearchResults() {
+			if (!skipSorting) {
+				return getCurrentSearchResults();
+			}
+			List<SearchResult> visibleResults = new ArrayList<>();
+			for (int level = 0; level <= spatialSearchVisibleLevel; level++) {
+				for (SearchResult result : searchResults) {
+					if (result.spatialSearchVisibleLevel == level) {
+						visibleResults.add(result);
+					}
+				}
+			}
+			return Collections.unmodifiableList(visibleResults);
+		}
+
+		public boolean hasMoreSpatialSearchResults() {
+			if (!skipSorting) {
+				return false;
+			}
+			for (SearchResult result : searchResults) {
+				if (result.spatialSearchVisibleLevel > spatialSearchVisibleLevel) {
+					return true;
+				}
+			}
+			return false;
+		}
+
+		public boolean showMoreSpatialSearchResults() {
+			if (!hasMoreSpatialSearchResults()) {
+				return false;
+			}
+			spatialSearchVisibleLevel++;
+			return true;
+		}
+
+		public boolean isSkipSorting() {
+			return skipSorting;
+		}
+
+		public int getSpatialSearchVisibleLevel() {
+			return spatialSearchVisibleLevel;
 		}
 
 		public SearchPhrase getPhrase() {
@@ -776,7 +826,7 @@ public class SearchUICore {
 							Thread.sleep(TIMEOUT_BEFORE_FILTER);
 
 							if (!filtered) {
-								final SearchResultCollection quickRes = new SearchResultCollection(phrase);
+								final SearchResultCollection quickRes = new SearchResultCollection(phrase, isSpatialSearch());
 								if (debugMode) {
 									LOG.info("Filtering current data <" + phrase + "> Results=" + currentSearchResult.searchResults.size());
 								}
@@ -927,6 +977,9 @@ public class SearchUICore {
 
 
 	public boolean isSearchMoreAvailable(SearchPhrase phrase) {
+		if (currentSearchResult != null && currentSearchResult.hasMoreSpatialSearchResults()) {
+			return true;
+		}
 		for (SearchCoreAPI api : apis) {
 			if (api.isSearchAvailable(phrase) && api.getSearchPriority(phrase) >= 0
 					&& api.isSearchMoreAvailable(phrase)) {

@@ -97,6 +97,7 @@ import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.*;
 import net.osmand.search.core.SearchCoreFactory.SearchAmenityTypesAPI;
+import net.osmand.search.core.spatial.SpatialTextSearchAPI;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -1124,7 +1125,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				filteredResults.add(result);
 			}
 		}
-		return new SearchResultCollection(source.getPhrase()).addSearchResults(filteredResults, false, false);
+		return new SearchResultCollection(source.getPhrase(), source.isSkipSorting(),
+				source.getSpatialSearchVisibleLevel()).addSearchResults(filteredResults, false, false);
 	}
 
 	private void updateTopFilterChipsSelection() {
@@ -1697,7 +1699,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 	public boolean isResultEmpty() {
 		SearchResultCollection res = getResultCollection();
-		return res == null || res.getCurrentSearchResults().isEmpty();
+		return res == null || res.getVisibleSpatialSearchResults().isEmpty();
 	}
 
 	public void onSearchListFragmentResume(QuickSearchListFragment searchListFragment) {
@@ -2269,7 +2271,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 					case SEARCH_API_REGION_FINISHED:
 						regionResultApi = (SearchCoreAPI) object.object;
 						SearchPhrase regionPhrase = object.requiredSearchPhrase;
-						regionResultCollection = new SearchResultCollection(regionPhrase).addSearchResults(results, true, true);
+						regionResultCollection = new SearchResultCollection(regionPhrase, isSpatialSearchApi(regionResultApi))
+								.addSearchResults(results, true, true);
 						showRegionResults(object.file, regionPhrase, regionResultCollection, resultListener);
 						break;
 					case PARTIAL_LOCATION:
@@ -2316,7 +2319,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				if (isDebugMode) {
 					LOG.info("UI >> Showing API results <" + phrase + "> API=<" + searchApi + "> Results=" + apiResults.size());
 				}
-				boolean append = getResultCollection() != null;
+				boolean append = getResultCollection() != null && !isSpatialSearchApi(searchApi);
 				if (append) {
 					if (isDebugMode) {
 						LOG.info("UI >> Appending API results <" + phrase + "> API=<" + searchApi + "> Result collection=" + getSearchResultCollectionFormattedSize(getResultCollection()));
@@ -2329,7 +2332,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 					if (isDebugMode) {
 						LOG.info("UI >> Assign API results <" + phrase + "> API=<" + searchApi + ">");
 					}
-					SearchResultCollection resCollection = new SearchResultCollection(phrase);
+					SearchResultCollection resCollection = new SearchResultCollection(phrase, isSpatialSearchApi(searchApi));
 					resCollection.addSearchResults(apiResults, true, true);
 					setResultCollection(resCollection);
 					if (isDebugMode) {
@@ -2345,6 +2348,10 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				displayToastIfAnyImpreciseResults(apiResults);
 			}
 		});
+	}
+
+	private boolean isSpatialSearchApi(SearchCoreAPI searchApi) {
+		return searchApi instanceof SpatialTextSearchAPI;
 	}
 
 	private void displayToastIfAnyImpreciseResults(List<SearchResult> apiResults) {
@@ -2499,13 +2506,23 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			renderSearchResult(visibleResults, false);
 		}
 		if (!PluginsHelper.onSearchFinished(this, phrase, isResultEmpty())) {
-			addMoreButton(searchUICore.isSearchMoreAvailable(phrase));
+			addMoreButton(isSearchMoreAvailable(phrase));
 		}
+	}
+
+	private boolean isSearchMoreAvailable(@NonNull SearchPhrase phrase) {
+		return hasMoreSpatialSearchResults() || searchUICore.isSearchMoreAvailable(phrase);
+	}
+
+	private boolean hasMoreSpatialSearchResults() {
+		SearchResultCollection collection = unfilteredResultCollection != null ? unfilteredResultCollection : getResultCollection();
+		return collection != null && collection.hasMoreSpatialSearchResults();
 	}
 
 	private void addMoreButton(boolean searchMoreAvailable) {
 		if (!paused && !cancelPrev && mainSearchFragment != null && !isTextEmpty()) {
-			QuickSearchMoreListItem moreListItem = new QuickSearchMoreListItem(app, null, new SearchMoreItemOnClickListener() {
+			String name = hasMoreSpatialSearchResults() ? app.getString(R.string.show_more) : null;
+			QuickSearchMoreListItem moreListItem = new QuickSearchMoreListItem(app, name, new SearchMoreItemOnClickListener() {
 				@Override
 				public void onPrimaryButtonClick() {
 					increaseSearchRadius();
@@ -2534,12 +2551,28 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	public void increaseSearchRadius() {
+		if (showMoreSpatialSearchResults()) {
+			return;
+		}
 		if (!interruptedSearch) {
 			SearchSettings settings = searchUICore.getSearchSettings();
 			searchUICore.updateSettings(settings.setRadiusLevel(settings.getRadiusLevel() + 1));
 		}
 		applySelectedSortSetting();
 		runCoreSearch(searchQuery, false, true);
+	}
+
+	private boolean showMoreSpatialSearchResults() {
+		SearchResultCollection collection = unfilteredResultCollection != null ? unfilteredResultCollection : getResultCollection();
+		if (collection == null || !collection.showMoreSpatialSearchResults()) {
+			return false;
+		}
+		SearchResultCollection visibleResults = selectedResultPoiTypeNames.isEmpty()
+				? collection
+				: getFilteredResultCollection(collection);
+		renderSearchResult(visibleResults, false);
+		addMoreButton(isSearchMoreAvailable(collection.getPhrase()));
+		return true;
 	}
 
 	public void addSearchListItem(QuickSearchListItem item) {
@@ -2577,8 +2610,9 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private void renderSearchResult(SearchResultCollection res, boolean append) {
 		if (!paused && mainSearchFragment != null) {
 			List<QuickSearchListItem> rows = new ArrayList<>();
-			if (res != null && !res.getCurrentSearchResults().isEmpty()) {
-				for (SearchResult sr : res.getCurrentSearchResults()) {
+			List<SearchResult> results = res == null ? null : res.getVisibleSpatialSearchResults();
+			if (!Algorithms.isEmpty(results)) {
+				for (SearchResult sr : results) {
 					rows.add(new QuickSearchListItem(app, sr));
 				}
 				updateSendEmptySearchBottomBar(false);

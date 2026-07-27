@@ -54,6 +54,7 @@ public class SpatialPoiSearch {
 	public static class SpatialPoiType {
 		public final AbstractPoiType singleType;
 		public final String poiAdditional;
+		final PoiSubType poiSubType;
 		final List<String> names = new ArrayList<String>();
 		final String key;
 		final int id;
@@ -67,13 +68,19 @@ public class SpatialPoiSearch {
 			this.key = pt.getKeyName();
 			this.id = id;
 			this.poiAdditional = null;
+			this.poiSubType = null;
 		}
 		
 		public SpatialPoiType(String additional, String key, int id) {
+			this(null, additional, key, id);
+		}
+
+		public SpatialPoiType(PoiSubType poiSubType, String additional, String key, int id) {
 			this.singleType = null;
 			this.key = key;
 			this.id = id;
 			this.poiAdditional = additional;
+			this.poiSubType = poiSubType;
 		}
 		
 		public boolean isPlace() {
@@ -269,7 +276,7 @@ public class SpatialPoiSearch {
 					int freq = possibleValuesFreqs != null && k < possibleValuesFreqs.size() ? possibleValuesFreqs.get(k) : 0;
 					SpatialPoiType topValue = byKey.get(fullKey);
 					if (topValue == null) {
-						topValue = new SpatialPoiType(topValueName, fullKey, ids.getAndIncrement());
+						topValue = new SpatialPoiType(subType, topValueName, fullKey, ids.getAndIncrement());
 						if (wikidataId.length() > 0) {
 							String[] otherNames = wikidataId.split(";");
 							topValue.wikidataId = otherNames[0];
