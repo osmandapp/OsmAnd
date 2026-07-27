@@ -5237,7 +5237,7 @@
     <string name="duplicate_map_standard_exists_desc">Vous disposez déjà de la carte standard pour %1$s. Le téléchargement de la carte « routes uniquement » entraînera une duplication des données et pourrait nuire aux performances.\n\nLe remplacement supprimera les données de recherche d\'adresses et de points d\'intérêt incluses dans la carte standard.</string>
     <string name="duplicate_map_road_only_exists_desc">Vous disposez déjà de la carte « routes uniquement » pour %1$s. Le téléchargement de la carte standard entraînerait une duplication des données et pourrait nuire aux performances.</string>
     <string name="duplicate_map_replace_with_standard">Remplacer par la carte standard</string>
-    <string name="duplicate_map_replace_with_road">Remplacer par la carte routière uniquement</string>
+    <string name="duplicate_map_replace_with_road">Remplacer par la carte routes uniquement</string>
     <string name="rendering_attr_surface_clay_name">Argile</string>
     <string name="rendering_attr_surface_laterite_name">Latérite</string>
     <string name="astro_next_lunar_eclipse">Éclipse de lune suivante</string>
@@ -5250,4 +5250,6 @@
     <string name="background_color">Couleur d\'arrière-plan</string>
     <string name="copy_from">Copier depuis</string>
     <string name="duplicate_map">Dupliquer la carte</string>
+    <string name="use_spatial_text_search">Utiliser la recherche textuelle spatiale</string>
+    <string name="use_spatial_text_search_description">Remplacer les API de recherche rapide standard par le moteur de recherche textuelle spatiale expérimental.</string>
 </resources>

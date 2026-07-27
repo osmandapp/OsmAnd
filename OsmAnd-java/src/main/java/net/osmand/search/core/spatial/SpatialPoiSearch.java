@@ -3,11 +3,13 @@ package net.osmand.search.core.spatial;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -15,10 +17,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock;
 
 import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapPoiReaderAdapter;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
@@ -32,7 +32,6 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
-import net.osmand.search.core.HashQuadTree;
 import net.osmand.search.core.TopIndexFilter;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialSearchFileCache;
@@ -460,14 +459,28 @@ public class SpatialPoiSearch {
 		return results;
 	}
 
+	private static Set<String> groupChildTypes(SpatialPoiType spt) {
+		if (spt.singleType instanceof PoiFilter pf && !(spt.singleType instanceof PoiCategory)) {
+			Set<String> types = new HashSet<>();
+			for (PoiType p : pf.getPoiTypes()) {
+				types.add(p.getKeyName());
+			}
+			return types;
+		}
+		return Collections.emptySet();
+	}
 
 	private SearchRequest<Amenity> prepareRequest(SpatialPoiType spt, List<Amenity> results, int sleft, int stop, int sright,
 			int sbottom, int zoom, int[] alimit) {
+		final Set<String> groupTypes = groupChildTypes(spt);
 		SearchPoiTypeFilter typeFilter = spt.poiAdditional != null ? null : new SearchPoiTypeFilter() {
 
 			@Override
 			public boolean accept(PoiCategory type, String subcategory) {
 				if (spt.key.equals(type.getKeyName()) || spt.key.equals(subcategory)) {
+					return true;
+				}
+				if (groupTypes.contains(subcategory)) {
 					return true;
 				}
 				if (spt.parentTypes != null) {

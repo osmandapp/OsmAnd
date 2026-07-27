@@ -5165,7 +5165,7 @@
     <string name="astro_search_input_hint">Введіть текст</string>
     <string name="astro_explore_watch_now">Дивитися зараз</string>
     <string name="astro_today_visibility">Видимість сьогодні</string>
-    <string name="astro_alt_short">Альтернативний</string>
+    <string name="astro_alt_short">Вис.</string>
     <string name="trip_recording_moving_time">Час переміщення</string>
     <string name="relative_gradient_point_avg_summary">Колір для середнього значення треку.</string>
     <string name="relative_gradient_point_min_summary">Колір для мінімального значення, знайденого на треку.</string>

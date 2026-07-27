@@ -5248,4 +5248,6 @@
     <string name="duplicate_map_replace_with_road">Csere csak-úttérképre</string>
     <string name="rendering_attr_surface_clay_name">Agyag</string>
     <string name="rendering_attr_surface_laterite_name">Laterit</string>
+    <string name="use_spatial_text_search">Térbeli szövegkeresés használata</string>
+    <string name="use_spatial_text_search_description">Térbeli szövegkeresőmotor (kísérleti) használata a szabványos gyorskeresési API-k helyett.</string>
 </resources>
