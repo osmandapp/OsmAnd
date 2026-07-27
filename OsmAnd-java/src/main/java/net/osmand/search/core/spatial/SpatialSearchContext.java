@@ -243,7 +243,7 @@ public class SpatialSearchContext {
 		}
 		// add partial once we read all files
 		for (SpatialSearchToken t : tokens) {
-			if (settings.OPTIM_READ_COMMON_WORDS_ATOMS || settings.OPTIM_READ_CATEGORY_WORD_ATOMS) {
+			if (settings.OPTIM_READ_COMMON_WITH_OTH_NON_FOUND_ATOMS || settings.OPTIM_READ_POI_CATEGORY_WORD_ATOMS) {
 				addPartialMatch(t, t.getPartialExactMatch());
 //				if(t.getPartialExactMatch().size() == 0) { // not correct
 					addPartialMatch(t, t.getPartialMatch());
@@ -508,9 +508,7 @@ public class SpatialSearchContext {
 					continue;
 				}
 				MapObject obj = null;
-				if (settings.DEV_READ_ADDR_OBJECTS) {
-					obj = readAddrObject(lid, pid, null);
-				}
+//				obj = readAddrObject(lid, pid, null);
 				parseSuffixes(t, indx, suffixes, commonSuffixes, a, null, lid, pid, obj, allTokens);
 			}
 		} else if (!addr && settings.SEARCH_POI) {
@@ -522,9 +520,7 @@ public class SpatialSearchContext {
 				long lid = makePoiId(indInd, BinaryMapIndexReader.convertFixed32ToRef(a.getShiftTo()),
 						a.getPoiIndInBlock(0));
 				MapObject amenity = null;
-				if (settings.DEV_READ_POI_OBJECTS) {
-					amenity = readPoiObject(lid, null);
-				}
+//				amenity = readPoiObject(lid, null);
 				if (settings.SEARCH_POI_BY_CATEGORY_ONLY && skipFilteredZoomObject(t, a)) {
 					continue;
 				}
@@ -891,7 +887,7 @@ public class SpatialSearchContext {
 		atom.poiTypes = poiTypes;
 		atom.elo = elo;
 		// for all common always false, for some frequent could be optimization
-		if (settings.OPTIM_READ_COMMON_WORDS_ATOMS && cmnWord[0]) {
+		if (settings.OPTIM_READ_COMMON_WITH_OTH_NON_FOUND_ATOMS && cmnWord[0]) {
 			// name 'ru de rue' could match 'rue' it's because of prefix & suffixes
 			
 			if (other > 0) {
@@ -905,7 +901,7 @@ public class SpatialSearchContext {
 
 			}
 		}
-		if (settings.OPTIM_READ_CATEGORY_WORD_ATOMS && t.hasPoiCategoryKeys() && atom.isPOI()) {
+		if (settings.OPTIM_READ_POI_CATEGORY_WORD_ATOMS && t.hasPoiCategoryKeys() && atom.isPOI()) {
 			// we always add to partial so if we word overloaded we don't display it
 			// doesn't matter if we read token by name "cafe" or "#^cafe" the word associated with category
 			t.addPartialCommonAtom(atom, otherTokens, numericNotMatch);

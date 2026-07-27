@@ -60,6 +60,8 @@ public class SpatialTextSearch {
 	public static class SpatialTextSearchSettings {
 		private SpatialTextSearchSettings() {}
 		
+		///////////// GENERAL SETTINGS //////////
+
 		public boolean SEARCH_SUGGESTION = false; // incomplete to add '.' in the end
 		// not used in search as maps provided (web could multiply by 1.5x or adjust bbox)
 		public int SUGGESTED_SEARCH_RADIUS_KM = 300;  
@@ -81,70 +83,26 @@ public class SpatialTextSearch {
 		public int SEARCH_POI_BY_CATEGORY_ZOOM = 17; // 17+ no filter
 		public int[] SEARCH_POI_BY_CATEGORY_BBOX;
 		
-		// performance tested (we need to turn on for <POI + Address> search)
-		public boolean ALLOW_HOUSE_POI_TYPE_INTERSECTION = true;
-		// no intersection recorded but streets are nearby
-		public boolean ALLOW_VIRTUAL_STREET_INTERSECTIONS = true;
-		
-		public int[] OPTIM_LIMIT_RADIUS = new int[] {10_000, 30_000, 80_000, 200_000}; // 
-//		public int[] OPTIM_LIMIT_RADIUS = new int[] {}; 
-		public int OPTIM_LIMIT_INTERSECTIONS = 30_000; // 10K (fast enough) or 50K (slow) - in new york  26,630 (3) -> 2,502 unique
-		
-		// do not filter objects with such rating from results
-		public int MIN_ELO_RATING_TO_KEEP_IN_ATOM = 0;
-		
-		// produces x10 less intersection and maintains x2-x4 ratio for DEDUPLICATE_RES
-		// by deleting embedded or duplicate boundaries in each other
-		public boolean OPTIM_DELETE_EMBEDDED_BOUNDARIES = true;
-		
-		// In case POI is called 'Bratislava' it will be not allowed to be searched as POIxPOI, POIxStreet
-		// Related frequent POIs like "City&Bike 4th Street..." or public transport stops
-		public boolean OPTIM_FLAG_POI_SAME_AS_CITY_STREET = true;
-		
-		// Performance improvement (effective but needs to be reviewed - paterson)
-		// 1. If object does have rare words and they are not in query - skip it 
-		//    Automatically implemented for common via index, for frequent disabled for now
-		// 2. If object does have other common words and they are not in query - skip it
-		// Problem search: School On Street - some schools have specifiers and some don't   
-		public boolean OPTIM_READ_COMMON_WORDS_ATOMS = true;
-		public boolean OPTIM_READ_CATEGORY_WORD_ATOMS = true;
-		public int OPTIM_READ_COMMON_WORDS_LIMIT = 2000;
-
-		
 		// max prefixes for each name reader
 		public int AUTO_CLEAR_PREFIX_CACHE_LIMIT = 1000;
 
 		// Deduplicate results in the end by checking osm id of the first object in combination
 		public boolean DEDUPLICATE_RES = true;
 		
-		// READ OBJECTS before intersection to reduce number of duplicates from
-		// different maps by osm id - needs to be tested performance mostly slows down
-		// ! Potential issue READ_ADDR_OBJECTS could deduplicate streets and 
-		//  building won't be found in case same street in cities
-		public boolean DEV_READ_ADDR_OBJECTS = false;
-		public boolean DEV_READ_POI_OBJECTS = false;
-		
-		// Use tileId as flat (incomplete) or skip hash tree complete solution
-		public boolean DEV_USE_SKIP_HASH_TREE = true;
-		public int POI_DEFAULT_RADIUS = 50;
-		public int ADDR_DEFAULT_RADIUS = 1000;
-		
+		///////////// FINE TUNE SETTINGS ///////////
+
 		// display only top categories maximum
 		public int LIMIT_POI_CATEGORY_BY_FREQ = 5;
 		
-		// print some poi cat
-		public int DEV_PRINT_POI_CAT_LIMIT = 0; // 10
-		public int DEV_PRINT_POI_CAT_RADIUS_KM = 10;
+		// performance tested (we need to turn on for <POI + Address> search)
+		public boolean ALLOW_HOUSE_POI_TYPE_INTERSECTION = true;
+		// no intersection recorded but streets are nearby
+		public boolean ALLOW_VIRTUAL_STREET_INTERSECTIONS = true;
 		
-		// no need to find 3 street intersection or 3 POI intersection
-		public int LIMIT_ATOMIC_OBJECTS = 2;
-
-		// Limit evaluation intersection for unique objects
-		public int LIMIT_STOP_GOALS_ANY_LEVEL_WHEN_REACHED_RES = 1000;
-		// if there are >= 10 results matching 5 words, 4 words match won't be considered
-		public int LIMIT_STOP_GOALS_LEVEL_1__WHEN_REACHED_RES = 1; // could be 3
-		// overall max without results (evaluate maximum 3 missing words)
-		public int MAX_TOTAL_LIMIT_GOAL_LEVEL = 3;
+		// Enlarge boundaries in case result is not found
+		// > 300 km - x0, for 50km-300km - x0.5, 10-50km - x1.5, 10km - x3sorted!
+		public Map<Integer, Double> ENLARGE_BOUNDARIES = new TreeMap<Integer, Double>(
+				Map.of(-300_000, 0.2, -100_000, 0.5, -10_000, 1.0, -1_000, 20.0));
 		
 		// Hide results under SHOW MORE
 		public int[] SHOW_MORE_WORDS_COUNT = new int[] {3, 20, 100};
@@ -155,10 +113,64 @@ public class SpatialTextSearch {
 		public int MIN_ELO_RATING = 1400; // see SearchResult.MIN_ELO_RATING
 //		public int MAX_ELO_RATING = 4300; // not used now
 		
-		// > 300 km - x0, for 50km-300km - x0.5, 10-50km - x1.5, 10km - x3sorted!
-		public Map<Integer, Double> ENLARGE_BOUNDARIES = new TreeMap<Integer, Double>(
-				Map.of(-300_000, 0.2, -100_000, 0.5, -10_000, 1.0, -1_000, 20.0));
+		// no need to find 3 street intersection or 3 POI intersection
+		public int LIMIT_ATOMIC_OBJECTS = 2;
+		
+		// Create default bboxes for points POI / Address objects  
+		public int POI_DEFAULT_RADIUS = 50;
+		public int ADDR_DEFAULT_RADIUS = 1000;
+		
+		///////////// DEV FEATURES ///////////
 
+		// FEATURE #1. Use tileId as flat (incomplete) or skip hash tree complete solution
+		public boolean DEV_USE_SKIP_HASH_TREE = true;
+
+		// FEATURE #2. PIPELINE vs INTERSECTIONS algorithm 
+		// Use mechanism to smart selection results intead of all word x word intersections
+		public boolean DEV_USE_PIPELINE = true;
+		
+		// print some poi cat - to be deleted once web/android completed
+		public int TEST_PRINT_POI_CAT_LIMIT = 0; // 10
+		public int TEST_PRINT_POI_CAT_RADIUS_KM = 10;
+
+		///////////// OPTIMIZATIONS ///////////
+
+		// OPTIMIZATION #1 
+		// produces x10 less intersection and maintains x2-x4 ratio for DEDUPLICATE_RES
+		// by deleting embedded or duplicate boundaries in each other
+		public boolean OPTIM_DELETE_EMBEDDED_BOUNDARIES = true;
+
+		// OPTIMIZATION #2
+		// In case POI is called 'Bratislava' it will be not allowed to be searched as POIxPOI, POIxStreet
+		// Related frequent POIs like "City&Bike 4th Street..." or public transport stops
+		public boolean OPTIM_FLAG_POI_SAME_AS_CITY_STREET = true;
+
+		// OPTIMIZATION #3. IMPORTANT to filter results by words popular words (not effective in corner cases like paterson)
+		// 1. If object does have rare words and they are not in query - skip it 
+		//    Automatically implemented for common via index, for frequent disabled for now
+		// 2. If object does have other common words and they are not in query - skip it
+		// Problem search: School On Street - some schools have specifiers and some don't
+		// Below limit add all possible objects  
+		public int OPTIM_READ_COMMON_WORDS_LIMIT = 2000;
+		public boolean OPTIM_READ_COMMON_WITH_OTH_NON_FOUND_ATOMS = true;
+		public boolean OPTIM_READ_POI_CATEGORY_WORD_ATOMS = true;
+		// do not filter objects with such rating from results
+		public int MIN_ELO_RATING_TO_KEEP_IN_ATOM = 0;
+
+		
+		//////// INTERSECTION ALGORITHM ////////
+		public int[] OPTIM_LIMIT_RADIUS = new int[] {10_000, 30_000, 80_000, 200_000}; // 
+//		public int[] OPTIM_LIMIT_RADIUS = new int[] {}; 
+		public int OPTIM_LIMIT_INTERSECTIONS = 30_000; // 10K (fast enough) or 50K (slow) - in new york  26,630 (3) -> 2,502 unique
+		
+		// Limit evaluation intersection for unique objects
+		public int LIMIT_STOP_GOALS_ANY_LEVEL_WHEN_REACHED_RES = 1000;
+		// if there are >= 10 results matching 5 words, 4 words match won't be considered
+		public int LIMIT_STOP_GOALS_LEVEL_1__WHEN_REACHED_RES = 1; // could be 3
+		// overall max without results (evaluate maximum 3 missing words)
+		public int MAX_TOTAL_LIMIT_GOAL_LEVEL = 3;
+		////////////////////////////////////////
+		
 		
 		public double evalEnlargeBoundary(Map<Integer, Double> mp, double dim) {
 			Iterator<Entry<Integer, Double>> it = mp.entrySet().iterator();
@@ -184,8 +196,8 @@ public class SpatialTextSearch {
 			settings.SEARCH_ADDR = false;
 			settings.SEARCH_POI = true;
 			settings.SEARCH_POI_CATEGORIES = false;
-			settings.OPTIM_READ_COMMON_WORDS_ATOMS = false;
-			settings.OPTIM_READ_CATEGORY_WORD_ATOMS = false;
+			settings.OPTIM_READ_COMMON_WITH_OTH_NON_FOUND_ATOMS = false;
+			settings.OPTIM_READ_POI_CATEGORY_WORD_ATOMS = false;
 			
 			settings.SEARCH_POI_BY_CATEGORY_ONLY = true;
 			settings.SEARCH_POI_BY_CATEGORY_ZOOM = zoom + shift;
@@ -554,7 +566,12 @@ public class SpatialTextSearch {
 		// 4. find combinations
 		ctx.stats.step2Compute.start();
 //		res.combinations = findObjCombinationsSimpleIteration(res.tokens);
-		res.combinations = findLongestCombinations(ctx, res.tokens);
+		if (ctx.settings.DEV_USE_PIPELINE) {
+			res.combinations = new SpatialStagePipeline(ctx).runPipeline(res.tokens);
+		} else {
+			res.combinations = findLongestCombinations(ctx, res.tokens);
+		}
+		
 		ctx.stats.step2Compute.finish();
 		// 5. sort combinations, load objects, objects and filter duplicate
 		res.mainResults = new ArrayList<>();
@@ -587,7 +604,7 @@ public class SpatialTextSearch {
 			}
 		}
 		res.mainResults = main.sortResults(ctx, res.mainResults, ctx.settings.DEDUPLICATE_RES);
-		int limitPoiCat = ctx.settings.DEV_PRINT_POI_CAT_LIMIT;
+		int limitPoiCat = ctx.settings.TEST_PRINT_POI_CAT_LIMIT;
 		if (res.mainResults.size() > 0) {
 			int[] limits = ctx.settings.SHOW_MORE_WORDS_COUNT.clone();
 			long cKey = SpatialSearchResult.compareKey(res.mainResults.get(0));
@@ -624,7 +641,7 @@ public class SpatialTextSearch {
 			System.out.printf("Loading poi type '%s' - limit %d...\n", type.key, limitPoiCat);
 			LatLon latLon = r.getLatLon();
 			List<Amenity> interRes = ctx.poiSearch.loadPOIObjects(ctx, type,
-					latLon == null ? ctx.location : latLon, ctx.settings.DEV_PRINT_POI_CAT_RADIUS_KM * 1000, limitPoiCat);
+					latLon == null ? ctx.location : latLon, ctx.settings.TEST_PRINT_POI_CAT_RADIUS_KM * 1000, limitPoiCat);
 			for (Amenity a : interRes) {
 				double dist = ctx.location == null ? 0 : MapUtils.getDistance(ctx.location, a.getLocation());
 				System.out.printf("\t %s (%s) %.2f km %s \n", a, a.getOsmId(), dist / 1000.0, a.getLocation());

@@ -82,6 +82,15 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		}
 	}
 	
+	protected SpatialSearchResultsList(List<SpatialSearchToken> tokensList) {
+	    if (tokensList == null || tokensList.isEmpty()) {
+	        this.tokens = new SpatialSearchToken[0];
+	    } else {
+	        this.tokens = tokensList.toArray(new SpatialSearchToken[0]);
+	    }
+	    this.tCount = this.tokens.length;
+	}
+	
 	private void loadObjects(SpatialSearchContext ctx, int type, TLongObjectHashMap<MapObject> cache) throws IOException {
 		TLongObjectHashMap<Long> lstMap = new TLongObjectHashMap<>();
 		
@@ -986,6 +995,7 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		
 		return true;
 	}
+	
 
 	@Override
 	public int compareTo(SpatialSearchResultsList o) {
