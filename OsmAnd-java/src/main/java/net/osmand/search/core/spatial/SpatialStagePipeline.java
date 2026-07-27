@@ -9,6 +9,7 @@ import gnu.trove.list.array.TLongArrayList;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.hash.TIntHashSet;
 import net.osmand.search.core.HashSkipTileQuadTree;
+import net.osmand.search.core.HashSkipTileQuadTreeJoiner;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSettings;
 
@@ -18,10 +19,12 @@ public class SpatialStagePipeline {
     public static final long STATE_EXACT_MATCH = 1L;   // 01
     public static final long STATE_AMBIGUOUS = 2L;     // 10
     public static final long STATE_ANY = 3L;           // 11
-
+    private static final long MASK_SET_01 = 0x5555_5555_5555_5555L;
+    
+    
     private final SpatialSearchContext ctx;
     public static final int MAX_SUPPORTED_TOKENS = 31;
-    public static int MAX_STEPS = 0; // 0 - fully covered, 1 - 1 intersecction ,...
+    public static int MAX_STEPS = 2; // 1 - fully covered, 2 - 1 intersecction ,...
 
     public SpatialStagePipeline(SpatialSearchContext ctx) {
         this.ctx = ctx;
@@ -30,13 +33,36 @@ public class SpatialStagePipeline {
 
     public static class SpatialObjectRes {
     	public final NameIndexAtom[] atoms;  
-    	public NameIndexAtom mainAtom;
+    	public NameIndexAtom mainAtom1;
+    	public NameIndexAtom mainAtom2;
+    	
     	public long mainMask = 0;
     	public TLongArrayList otherMasks = new TLongArrayList(); 
     	
+    	public SpatialObjectRes(long mask, SpatialObjectRes s1, SpatialObjectRes s2) {
+    		atoms = new NameIndexAtom[s1.atoms.length];
+    		this.mainMask = mask;
+			for (int i = 0; i < atoms.length; i++) {
+				NameIndexAtom a1 = s1.atoms[i];
+				NameIndexAtom a2 = s2.atoms[i];
+				if (a1 != null && !a1.isPOIRef() && !a1.isBuilding()) {
+					atoms[i] = a1;
+					mainAtom1 = a1;
+				} else if (a2 != null && !a2.isPOIRef() && !a2.isBuilding()) {
+					// couldn't be both same time
+					atoms[i] = a2;
+					mainAtom2 = a2;
+				} else if (a1 != null) {
+					atoms[i] = a1;
+				} else if (a2 != null) {
+					atoms[i] = a2;
+				}
+			}
+    	}
+    	
     	public SpatialObjectRes(int tCount, NameIndexAtom atom, int index) {
     		atoms = new NameIndexAtom[tCount];
-    		mainAtom = atom;
+    		mainAtom1 = atom;
     		setAtom(atom, index);
     	}
 
@@ -48,17 +74,48 @@ public class SpatialStagePipeline {
 		public void merge(NameIndexAtom atom, int tokenIdx) {
 			// TODO implement correct mixing alternative masks!
 			// we need to separately process situation duplicate words in object and in query
-			if (mainAtom.isPOIRef() || mainAtom.isBuilding()) {
-				mainAtom = atom;
+			if (mainAtom1.isPOIRef() || mainAtom1.isBuilding()) {
+				mainAtom1 = atom;
 			}
 			setAtom(atom, tokenIdx);
 		}
     	
+		
+		public static long setTokenState(long currentMask, int tokenIdx, long state) {
+			int shift = tokenIdx * 2;
+			long clearMask = ~(3L << shift);
+			return (currentMask & clearMask) | ((state & 3L) << shift);
+		}
 
 	    public static int countCoveredTokens(long mask) {
-	        long activeTokensMask = (mask | (mask >>> 1)) & 0x5555_5555_5555_5555L;
+	        long activeTokensMask = (mask | (mask >>> 1)) & MASK_SET_01;
 	        return Long.bitCount(activeTokensMask);
 	    }
+	    
+	    public static boolean allowed(long m1, long m2) {
+	    	return (m1 & m2 & MASK_SET_01) == 0;
+	    }
+	    
+	    public static long combine2BitMasks(long mask1, long mask2, int totalTokens) {
+			long result = 0L;
+			for (int i = 0; i < totalTokens; i++) {
+				int shift = i * 2;
+				long state1 = (mask1 >> shift) & 3L;
+				long state2 = (mask2 >> shift) & 3L;
+
+				long finalState;
+				if (state1 == STATE_EXACT_MATCH || state2 == STATE_EXACT_MATCH) {
+					finalState = STATE_EXACT_MATCH;
+				} else if (state1 == STATE_AMBIGUOUS || state2 == STATE_AMBIGUOUS) {
+					finalState = STATE_AMBIGUOUS;
+				} else {
+					finalState = STATE_NO_MATCH;
+				}
+				result |= (finalState << shift);
+			}
+			return result;
+		}
+
     }
     
     public static class PipelinePrepResult {
@@ -69,27 +126,11 @@ public class SpatialStagePipeline {
 		public final List<SpatialSearchToken> tokens;
 		public final TLongObjectHashMap<SpatialObjectRes> objectsById = new TLongObjectHashMap<>();
     	
-        public final List<SpatialObjectRes> singleResults = new ArrayList<>();
         public final HashSkipTileQuadTree<SpatialObjectRes> allObjectsTree = new HashSkipTileQuadTree<>();
         public final HashSkipTileQuadTree<SpatialObjectRes> areaObjectsTree = new HashSkipTileQuadTree<>();
         
     }
 
-    public static class SpatialSearchResultPair {
-        public final long pairId;
-        public final NameIndexAtom atom1;
-        public final NameIndexAtom atom2;
-        public final int[] bbox31;
-        public final long combinedMask;
-
-        public SpatialSearchResultPair(NameIndexAtom atom1, NameIndexAtom atom2, int[] bbox31, long combinedMask) {
-            this.atom1 = atom1;
-            this.atom2 = atom2;
-            this.bbox31 = bbox31;
-            this.combinedMask = combinedMask;
-            this.pairId = atom1.id ^ (atom2.id << 32) ^ combinedMask;
-        }
-    }
 
     public static class SpatialSearchResultChain {
         public final long chainId;
@@ -123,18 +164,6 @@ public class SpatialStagePipeline {
         }
     }
 
-    public static class ConcreteAssignmentPair {
-        public final SpatialSearchResultPair parentPair;
-        public final long resolvedMask;
-        public final NameIndexAtom refOwner;
-
-        public ConcreteAssignmentPair(SpatialSearchResultPair parentPair, long resolvedMask, NameIndexAtom refOwner) {
-            this.parentPair = parentPair;
-            this.resolvedMask = resolvedMask;
-            this.refOwner = refOwner;
-        }
-    }
-
 
     private PipelinePrepResult prepare(List<SpatialSearchToken> tokens) {
     	if (tokens.size() > MAX_SUPPORTED_TOKENS) {
@@ -160,13 +189,9 @@ public class SpatialStagePipeline {
 		}
         
 		for (SpatialObjectRes obj : prep.objectsById.valueCollection()) {
-			// TODO other masks ?
-			if (SpatialObjectRes.countCoveredTokens(obj.mainMask) == totalTokens) {
-				prep.singleResults.add(obj);
-			}
-			prep.allObjectsTree.addObject(obj, obj.mainAtom.coords.bbox31, obj.mainAtom.id);
-			if (obj.mainAtom.isBoundary() || obj.mainAtom.isCityVillage() || obj.mainAtom.isPostcode()) {
-				prep.areaObjectsTree.addObject(obj, obj.mainAtom.coords.bbox31, obj.mainAtom.id);
+			prep.allObjectsTree.addObject(obj, obj.mainAtom1.coords.bbox31, obj.mainAtom1.id);
+			if (obj.mainAtom1.isBoundary() || obj.mainAtom1.isCityVillage() || obj.mainAtom1.isPostcode()) {
+				prep.areaObjectsTree.addObject(obj, obj.mainAtom1.coords.bbox31, obj.mainAtom1.id);
 			}
  		}
         prep.allObjectsTree.build();
@@ -175,72 +200,46 @@ public class SpatialStagePipeline {
         return prep;
 	}
 
-	public static long setTokenState(long currentMask, int tokenIdx, long state) {
-		int shift = tokenIdx * 2;
-		long clearMask = ~(3L << shift);
-		return (currentMask & clearMask) | ((state & 3L) << shift);
-	}
 
-	public static List<ConcreteAssignmentPair> expandAmbiguousPairsAllOrNothing(SpatialSearchResultPair pair,
-			long mask1, long mask2, int totalTokens) {
-
-		List<ConcreteAssignmentPair> permutations = new ArrayList<>(2);
-		List<Integer> ambiguousIndices = new ArrayList<>();
-		for (int i = 0; i < totalTokens; i++) {
-			long state = (pair.combinedMask >> (i * 2)) & 3L;
-			if (state == STATE_AMBIGUOUS) {
-				ambiguousIndices.add(i);
-			}
+//	public static List<ConcreteAssignmentPair> expandAmbiguousPairsAllOrNothing(SpatialSearchResultPair pair,
+//			long mask1, long mask2, int totalTokens) {
+//
+//		List<ConcreteAssignmentPair> permutations = new ArrayList<>(2);
+//		List<Integer> ambiguousIndices = new ArrayList<>();
+//		for (int i = 0; i < totalTokens; i++) {
+//			long state = (pair.combinedMask >> (i * 2)) & 3L;
+//			if (state == STATE_AMBIGUOUS) {
+//				ambiguousIndices.add(i);
+//			}
+//		}
+//
+//		if (ambiguousIndices.isEmpty()) {
+//			permutations.add(new ConcreteAssignmentPair(pair, pair.combinedMask, null));
+//			return permutations;
+//		}
+//
+//		long combinedMask1 = pair.combinedMask;
+//		for (int tokenIdx : ambiguousIndices) {
+//			combinedMask1 = SpatialObjectRes.setTokenState(combinedMask1, tokenIdx, STATE_EXACT_MATCH);
+//		}
+//		permutations.add(new ConcreteAssignmentPair(pair, combinedMask1, pair.atom1));
+//
+//		long combinedMask2 = pair.combinedMask;
+//		for (int tokenIdx : ambiguousIndices) {
+//			combinedMask2 = SpatialObjectRes.setTokenState(combinedMask2, tokenIdx, STATE_EXACT_MATCH);
+//		}
+//		permutations.add(new ConcreteAssignmentPair(pair, combinedMask2, pair.atom2));
+//
+//		return permutations;
+//    }
+//
+//
+	
+	private boolean validateStageAndFinish(List<SpatialSearchResultsList> combinations, List<SpatialSearchToken> tokens, List<SpatialObjectRes> preResults, int stage) throws IOException {
+		if (preResults.isEmpty()) {
+			return false;
 		}
-
-		if (ambiguousIndices.isEmpty()) {
-			permutations.add(new ConcreteAssignmentPair(pair, pair.combinedMask, null));
-			return permutations;
-		}
-
-		long combinedMask1 = pair.combinedMask;
-		for (int tokenIdx : ambiguousIndices) {
-			combinedMask1 = setTokenState(combinedMask1, tokenIdx, STATE_EXACT_MATCH);
-		}
-		permutations.add(new ConcreteAssignmentPair(pair, combinedMask1, pair.atom1));
-
-		long combinedMask2 = pair.combinedMask;
-		for (int tokenIdx : ambiguousIndices) {
-			combinedMask2 = setTokenState(combinedMask2, tokenIdx, STATE_EXACT_MATCH);
-		}
-		permutations.add(new ConcreteAssignmentPair(pair, combinedMask2, pair.atom2));
-
-		return permutations;
-    }
-
-
-	public static long combine2BitMasks(long mask1, long mask2, int totalTokens) {
-		long result = 0L;
-		for (int i = 0; i < totalTokens; i++) {
-			int shift = i * 2;
-			long state1 = (mask1 >> shift) & 3L;
-			long state2 = (mask2 >> shift) & 3L;
-
-			long finalState;
-			if (state1 == STATE_EXACT_MATCH || state2 == STATE_EXACT_MATCH) {
-				finalState = STATE_EXACT_MATCH;
-			} else if (state1 == STATE_AMBIGUOUS || state2 == STATE_AMBIGUOUS) {
-				finalState = STATE_AMBIGUOUS;
-			} else {
-				finalState = STATE_NO_MATCH;
-			}
-			result |= (finalState << shift);
-		}
-		return result;
-	}
-
-
-    // =========================================================================
-    // Preparation
-    // =========================================================================
-
-
-	private boolean validateStageAndFinish(List<SpatialSearchResultsList> combinations, SpatialSearchResultsList stageList, int stage) throws IOException {
+		SpatialSearchResultsList stageList = createResultList(tokens, preResults);
 		System.out.printf("[PIPELINE-LOG] Finalizing %d STAGE with %d raw combinations...\n", stage, stageList.getCombinations());
 		if (ctx.isCancelled()) {
 			return true;
@@ -271,42 +270,65 @@ public class SpatialStagePipeline {
     // =========================================================================
     // Execution Engine with Mode Control
     // =========================================================================
-
+	// TODO Add non maximum results as well... (surplus words +-) 
+	// TODO other masks ?
+    // TODO introduce mask into joiner index
     public List<SpatialSearchResultsList> runPipeline(List<SpatialSearchToken> tokens) throws IOException {
         if (tokens == null || tokens.isEmpty()) {
             return Collections.emptyList();
         }
+        final int tokensSize = tokens.size();
+        List<SpatialSearchResultsList> combinations = new ArrayList<SpatialSearchResultsList>();
+        
+        // STEP 0 PREPARE
         int stage = 0;
         PipelinePrepResult prep = prepare(tokens);
-		List<SpatialSearchResultsList> combinations = new ArrayList<SpatialSearchResultsList>();
-		if (prep.singleResults.size() > 0) {
-			// generate results for single
-			SpatialSearchResultsList mainResults = new SpatialSearchResultsList(tokens);
-			for (SpatialObjectRes res : prep.singleResults) {
-				mainResults.tileIds.add(res.atoms[0].coords.bboxTileId);
-				for (int i = 0; i < res.atoms.length; i++) {
-					mainResults.linearResults.add(res.atoms[i]);
-				}
-			}
-			// validate
-			if (validateStageAndFinish(combinations, mainResults, stage)) {
-				return combinations;
+        stage++;
+		// STEP 1
+		List<SpatialObjectRes> singleResults = new ArrayList<>();
+		for (SpatialObjectRes obj : prep.objectsById.valueCollection()) {
+			if (SpatialObjectRes.countCoveredTokens(obj.mainMask) == tokensSize) {
+				singleResults.add(obj);
 			}
 		}
-
-		if (stage++ <= MAX_STEPS || ctx.isCancelled()) {
+		if (validateStageAndFinish(combinations, tokens, singleResults, stage)) {
+			return combinations;
+		}
+		if (stage++ >= MAX_STEPS || ctx.isCancelled()) {
 			return combinations;
         }
             
-
-        // ---------------------------------------------------------------------
         // STEP 2: Spatial Join Pairs
-        // ---------------------------------------------------------------------
-//        SpatialSearchResultsList step2List = new SpatialSearchResultsList(tokens);
+        HashSkipTileQuadTree<SpatialObjectRes> step2PairsTree = new HashSkipTileQuadTree<>();
+        HashSkipTileQuadTreeJoiner<SpatialObjectRes, SpatialObjectRes> selfJoiner =
+                new HashSkipTileQuadTreeJoiner<>(prep.allObjectsTree, prep.allObjectsTree);
+        List<SpatialObjectRes> pairResults = new ArrayList<>();
+        selfJoiner.joinAllBuckets((e1, e2) -> {
+			if (e1.objId <= e2.objId) {
+				return; // skip 1 side pairs by id
+			} else if (!SpatialObjectRes.allowed(e1.obj.mainMask, e2.obj.mainMask)) {
+				return;
+			}
+			long combinedMask = SpatialObjectRes.combine2BitMasks(e1.obj.mainMask, e2.obj.mainMask, tokensSize);
+			SpatialObjectRes res = new SpatialObjectRes(combinedMask, e1.obj, e2.obj);
+			if (SpatialObjectRes.countCoveredTokens(combinedMask) == tokensSize) {
+				// TODO add combinations from combined mask
+				pairResults.add(res);
+			}
+			int[] bb = res.mainAtom1.coords.bbox31;
+	        int[] clippedBBox = new int[]{bb[0], bb[1], bb[2], bb[3] };
+	        SpatialSearchResultsList.clipBbox(clippedBBox, res.mainAtom2.coords.bbox31);
+	        step2PairsTree.addObject(res, clippedBBox, -1);
+        });
+        
+        if (validateStageAndFinish(combinations, tokens, pairResults, stage)) {
+			return combinations;
+		}
+        if (stage++ >= MAX_STEPS || ctx.isCancelled()) {
+			return combinations;
+        }
 //
-//        HashSkipTileQuadTree<SpatialSearchResultPair> step2PairsTree = new HashSkipTileQuadTree<>();
-//        HashSkipTileQuadTreeJoiner<NameIndexAtom, NameIndexAtom> selfJoiner =
-//                new HashSkipTileQuadTreeJoiner<>(prep.allObjectsTree, prep.allObjectsTree);
+  
 //
 //        TLongHashSet addedPairIds = new TLongHashSet();
 //
@@ -438,17 +460,37 @@ public class SpatialStagePipeline {
         return combinations;
     }
 
-    public static boolean acceptPairSemantic(SpatialSearchContext ctx, SpatialSearchResultPair pair, NameIndexAtom refOwner) {
-        SpatialTextSearchSettings settings = ctx.settings;
-        NameIndexAtom a1 = pair.atom1;
-        NameIndexAtom a2 = pair.atom2;
+	private SpatialSearchResultsList createResultList(List<SpatialSearchToken> tokens, List<SpatialObjectRes> r) {
+		SpatialSearchResultsList singleResults = new SpatialSearchResultsList(tokens);
+		for (SpatialObjectRes res : r) {
+			singleResults.tileIds.add(res.atoms[0].coords.bboxTileId);
+			for (int i = 0; i < res.atoms.length; i++) {
+				singleResults.linearResults.add(res.atoms[i]);
+			}
+		}
+		return singleResults;
+	}
 
-        if (a1.id == a2.id) {
-            return false;
-        }
+	
+	
+    public static boolean acceptPairSemantic(SpatialSearchContext ctx, SpatialObjectRes pair) {
+        SpatialTextSearchSettings settings = ctx.settings;
+        NameIndexAtom a1 = pair.mainAtom1;
+        NameIndexAtom a2 = pair.mainAtom2;
 		if (a1.isPoiCategory() && a2.isPoiCategory()) {
 			return false;
 		}
+        if (settings.OPTIM_FLAG_POI_SAME_AS_CITY_STREET && a1.atomicObject() && a2.atomicObject()) {
+            if (a1.sameNameAreaObj != null || a2.sameNameAreaObj != null) {
+                return false;
+            }
+        }
+        if (!settings.SEARCH_STREET_INTERSECTIONS && a1.isStreetBuilding() && a2.isStreetBuilding()) {
+            return false;
+        }
+        if (!settings.SEARCH_POI_INTERSECTIONS && a1.isPOI() && a2.isPOI()) {
+            return false;
+        }
 
 //        boolean a1Building = a1.isBuilding() || (a1.buildingOrRefInd >= 0);
 //        boolean a2Building = a2.isBuilding() || (a2.buildingOrRefInd >= 0);
@@ -463,32 +505,12 @@ public class SpatialStagePipeline {
 //            }
 //            return false;
 //        }
+//
+//        int atomicCount = (a1.atomicObject() ? 1 : 0) + (a2.atomicObject() ? 1 : 0);
+//        if (atomicCount > settings.LIMIT_ATOMIC_OBJECTS) {
+//            return false;
+//        }
 
-        int atomicCount = (a1.atomicObject() ? 1 : 0) + (a2.atomicObject() ? 1 : 0);
-        if (atomicCount > settings.LIMIT_ATOMIC_OBJECTS) {
-            return false;
-        }
-
-        if (settings.OPTIM_FLAG_POI_SAME_AS_CITY_STREET && a1.atomicObject() && a2.atomicObject()) {
-            if (a1.sameNameAreaObj != null || a2.sameNameAreaObj != null) {
-                return false;
-            }
-        }
-
-        boolean a1Street = a1.isStreetBuilding();
-        boolean a2Street = a2.isStreetBuilding();
-        boolean a1Area = a1.isBoundary() || a1.isCity();
-        boolean a2Area = a2.isBoundary() || a2.isCity();
-
-        if (!settings.SEARCH_STREET_INTERSECTIONS && a1Street && a2Street) {
-            return false;
-        }
-
-        // Pure Two POIs check
-        boolean pureTwoPOIs = !a1Street && !a2Street && !a1Area && !a2Area;
-        if (!settings.SEARCH_POI_INTERSECTIONS && pureTwoPOIs) {
-            return false;
-        }
 
         return true;
     }

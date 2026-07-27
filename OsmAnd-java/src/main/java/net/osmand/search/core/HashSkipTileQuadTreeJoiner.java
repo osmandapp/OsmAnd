@@ -31,6 +31,10 @@ public class HashSkipTileQuadTreeJoiner<T, R> {
 		this.tree2 = tree2;
 	}
 
+	public void joinAllBuckets(JoinCallback<T, R> callback) {
+		joinAllBuckets(callback, null, null);
+	}
+	
 	/**
 	 * Performs spatial join across all zoom bucket pairs between tree1 and tree2.
 	 */
