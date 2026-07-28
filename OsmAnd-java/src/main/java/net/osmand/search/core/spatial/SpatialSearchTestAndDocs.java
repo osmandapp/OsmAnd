@@ -282,7 +282,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "PA 21";  // 1336083883 DATA 'PA21' (+!'PA 21', +'PA-21',+'PA21') 
 
 		pattern = "Us_texas";
-//		query = "Avenue G, Dickinson"; // 26308264745
+//		query = "Avenue G, Dickinson"; // 2630826474
 //		query = "2419 Avenue G, Dickinson, TX USA";
 		query = "2419 Avenue G, Dickinson, 77539 TX USA";
 		query = "2419 Avenue G Dickinson, 77539 TX USA";
@@ -439,7 +439,7 @@ public class SpatialSearchTestAndDocs {
 		
 //		pattern = "Us_new-york_new"; // new-york, new-jersey
 //		pattern = "Us_new-"; 
-//		pattern = "Us_"; 
+		pattern = "Us_"; 
 //		location = new LatLon(40.78035, -73.96572); // central park
 //		location = new LatLon(40.64946, -74.00682); // brooklyn
 //		location = new LatLon(40.7428, -74.0572); // new jersey
@@ -448,10 +448,12 @@ public class SpatialSearchTestAndDocs {
 //		query = "New York 55 st"; // 'NY s.' - 0.5s 100k, 'NY st' - 2s (700k)
 		// 40.64946, -74.00682 - unit test '4th av', '4 ave', '4th avenue' 241843204, 247910224, 85393997 (..) brooklyn - not 48
 		// 40.78035, -73.96572 - unit test '4th av', '4 ave', '4th avenue'  - 85393997 Park avenue
-//		settings.DEV_USE_PIPELINE = false;
+//		settings.OPTIM_LIMIT_INTERSECTIONS = 100_000;
+//		settings.DEV_USE_PIPELINE = true;
+		settings.MAX_PIPELINE_STAGE_TO_STOP = new int[0];
 //		query = "New York 4 av 8";
 //		query = "New York av 8";
-//		query = "4 ave 8";
+		query = "4 ave 8";
 //		query = "New York 4 av"; // 160947243
 //		query = "57th street"; // central park - 265345338 east, 86216906 west, (266926268 (west)?),
 //		query = "57 street"; // central park - 265345338 east, 86216906 west, (26926268 (west)?),

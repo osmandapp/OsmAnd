@@ -209,13 +209,17 @@ public class SpatialStagePipeline {
 	}
 
 	
-	private boolean validateStageAndFinish(SpatialTextSearchSettings settings, List<SpatialSearchResultsList> combinations, 
-			List<SpatialSearchToken> tokens, List<SpatialObjectRes> preResults, int stage) throws IOException {
+	private boolean validateStageAndFinish(List<SpatialSearchResultsList> combinations, List<SpatialSearchToken> tokens,
+			List<SpatialObjectRes> preResults, int stage, long ptime) throws IOException {
 		if (preResults.isEmpty()) {
 			return false;
 		}
 		SpatialSearchResultsList stageList = createResultList(tokens, preResults);
-		System.out.printf("[PIPELINE-LOG] Finalizing %d STAGE with %d raw combinations...\n", stage, stageList.getCombinations());
+		long time = System.nanoTime();
+		if (ctx.stats.printLogs) {
+			System.out.printf("PIPELINE STAGE %d FIND (%.1f ms) STAGE with %d raw combinations...\n", stage,
+					(time - ptime) / 1e6, stageList.getCombinations());
+		}
 		if (ctx.isCancelled()) {
 			return true;
 		}
@@ -234,9 +238,12 @@ public class SpatialStagePipeline {
 		if ((res.size() > 0 && stage == 0) || nonCategoryRes > 0) {
 			combinations.add(stageList);
 		}
-		System.out.printf("[PIPELINE-LOG] %d STAGE after load & deduplicate: %d valid results.\n", stage, nonCategoryRes);
-		int last = settings.MAX_PIPELINE_STAGE_TO_STOP[Math.min(settings.MAX_PIPELINE_STAGE_TO_STOP.length, stage) - 1];
-		if (nonCategoryRes > last) {
+		if (ctx.stats.printLogs) {
+			System.out.printf("PIPELINE STAGE %d LOAD (%.1f ms): %d valid results.\n", stage,
+					(System.nanoTime() - time) / 1e6, nonCategoryRes);
+		}
+		int[] stops = ctx.settings.MAX_PIPELINE_STAGE_TO_STOP;
+		if (stops.length > 0 && nonCategoryRes > stops[Math.min(stops.length, stage) - 1]) {
 			return true;
 		}
 		return false;
@@ -251,12 +258,16 @@ public class SpatialStagePipeline {
 			return Collections.emptyList();
 		}
 		final int tokensSize = tokens.size();
+		long time = System.nanoTime();
 		List<SpatialSearchResultsList> combinations = new ArrayList<SpatialSearchResultsList>();
 
 		// STEP 0 PREPARE
 		int stage = 0;
 		SpatialPipelineResults prep = prepare(tokens);
+		System.out.println();
+		time = System.nanoTime();
 		stage++;
+		
 		// STEP 1
 		List<SpatialObjectRes> singleResults = new ArrayList<>();
 		for (SpatialObjectRes obj : prep.objectsById.valueCollection()) {
@@ -264,13 +275,14 @@ public class SpatialStagePipeline {
 				singleResults.add(obj);
 			}
 		}
-		if (validateStageAndFinish(ctx.settings, combinations, tokens, singleResults, stage)) {
+		if (validateStageAndFinish(combinations, tokens, singleResults, stage, time)) {
 			return combinations;
 		}
+		time = System.nanoTime();
 		if (stage++ >= MAX_STEPS || ctx.isCancelled()) {
 			return combinations;
 		}
-
+		
 		// STEP 2: Spatial Join Pairs
 		HashSkipTileQuadTreeJoiner<SpatialObjectRes, SpatialObjectRes> selfJoiner = new HashSkipTileQuadTreeJoiner<>(
 				prep.allObjectsTree, prep.allObjectsTree);
@@ -299,18 +311,15 @@ public class SpatialStagePipeline {
 			atomicPairsTree.addObject(res, clippedBBox, -1);
 		});
 
-		if (validateStageAndFinish(ctx.settings, combinations, tokens, pairResults, stage)) {
+		if (validateStageAndFinish(combinations, tokens, pairResults, stage, time)) {
 			return combinations;
 		}
+		time = System.nanoTime();
 		if (stage++ >= MAX_STEPS || ctx.isCancelled()) {
 			return combinations;
 		}
-
 		// STEP 3: Spatial Join Pairs
-		if (validateStageAndFinish(ctx.settings, combinations, tokens, pairResults, stage)) {
-			return combinations;
-		}
-		for (; stage <= MAX_STEPS; stage++) {
+		for (; stage <= MAX_STEPS && !ctx.isCancelled(); stage++) {
 			HashSkipTileQuadTree<SpatialObjectRes> lastTree = prep.pairsTree.get(prep.pairsTree.size() - 1);
 			if (lastTree.isEmpty()) {
 				break;
@@ -339,9 +348,10 @@ public class SpatialStagePipeline {
 				resTree.addObject(res, clippedBBox, -1);
 			});
 			prep.pairsTree.add(resTree);
-			if (validateStageAndFinish(ctx.settings, combinations, tokens, joinResults, stage)) {
+			if (validateStageAndFinish(combinations, tokens, joinResults, stage, time)) {
 				return combinations;
 			}
+			time = System.nanoTime();
 		}
 
 		return combinations;
