@@ -7,6 +7,7 @@ import net.osmand.binary.BinaryMapIndexReaderStats.SearchStat;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
+import net.osmand.data.QuadRect;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.util.MapUtils;
@@ -45,6 +46,7 @@ public class SearchSettings {
 	private ObjectType[] searchTypes;
 	private boolean emptyQueryAllowed;
 	private boolean sortByName;
+	private QuadRect searchBBox31;
 	private SearchStat stat;
 	private SearchExportSettings exportSettings; // = new SearchExportSettings(true, true, -1);
 	private List<MapObject> exportedObjects;
@@ -60,6 +62,7 @@ public class SearchSettings {
 			this.totalLimit = s.totalLimit;
 			this.offlineIndexes = s.offlineIndexes;
 			this.originalLocation = s.originalLocation;
+			this.searchBBox31 = s.searchBBox31;
 			this.regions = s.regions;
 			this.regionLang = s.regionLang;
 			this.searchTypes = s.searchTypes;
@@ -167,6 +170,16 @@ public class SearchSettings {
 		return s;
 	}
 	
+	public QuadRect getSearchBBox31() {
+		return searchBBox31;
+	}
+
+	public SearchSettings setSearchBBox31(QuadRect searchBBox31) {
+		SearchSettings s = new SearchSettings(this);
+		s.searchBBox31 = searchBBox31;
+		return s;
+	}
+
 	public boolean isTransliterate() {
 		return transliterateIfMissing;
 	}
