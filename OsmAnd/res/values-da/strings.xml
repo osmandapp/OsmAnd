@@ -5379,4 +5379,6 @@
     <string name="rendering_attr_surface_laterite_name">Laterit</string>
     <string name="use_spatial_text_search">Brug rumlig tekstsøgning</string>
     <string name="use_spatial_text_search_description">Erstat de almindelige API\'er til hurtigsøgning med den eksperimentelle, rumlige tekstsøgningsmotor.</string>
+    <string name="always_keep_local_copy">Behold altid en lokal kopi</string>
+    <string name="always_keep_local_copy_description">Medie forbliver tilknyttet, selvom originalen slettes fra galleriet eller filer.</string>
 </resources>
