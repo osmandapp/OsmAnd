@@ -26,6 +26,7 @@ import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreFactory.SearchBaseAPI;
 import net.osmand.search.core.SearchPhrase;
+import net.osmand.search.core.SearchPhrase.SearchPhraseDataType;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchWord;
 import net.osmand.search.core.TopIndexFilter;
@@ -67,14 +68,15 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 
 	@Override
 	public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
-		List<BinaryMapIndexReader> files = getSpatialSearchFiles(phrase);
+		SpatialTextSearchSettings settings = createSpatialSettings(phrase);
+		List<BinaryMapIndexReader> files = getSpatialSearchFiles(phrase, settings);
 		logSearchFiles("general", files);
 		if (Algorithms.isEmpty(files)) {
 			return false;
 		}
 		LOG.info("\nStart new spatial search");
 		SpatialPoiSearch poiSearch = new SpatialPoiSearch(poiTypes);
-		SpatialSearchContext context = createSpatialContext(phrase, resultMatcher, files, poiSearch);
+		SpatialSearchContext context = createSpatialContext(phrase, resultMatcher, files, poiSearch, settings);
 		LOG.info("Spatial search setting " + (context.settings.SEARCH_SUGGESTION ? "SUGGESTION" : "Default"));
 		LOG.info("Spatial search setting.LANG_DEDUPLICATE " + context.settings.LANG_DEDUPLICATE);
 		LOG.info("Spatial search setting.SUGGESTED_SEARCH_RADIUS_KM " + context.settings.SUGGESTED_SEARCH_RADIUS_KM);
@@ -120,8 +122,8 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 	}
 
 	private SpatialSearchContext createSpatialContext(SearchPhrase phrase, SearchResultMatcher resultMatcher,
-			List<BinaryMapIndexReader> files, SpatialPoiSearch poiSearch) {
-		SpatialSearchContext context = new SpatialSearchContext(createSpatialSettings(phrase), files, poiSearch,
+			List<BinaryMapIndexReader> files, SpatialPoiSearch poiSearch, SpatialTextSearchSettings settings) {
+		SpatialSearchContext context = new SpatialSearchContext(settings, files, poiSearch,
 				phrase.getSettings().getOriginalLocation());
 		context.resultMatcher = new net.osmand.ResultMatcher<>() {
 			@Override
@@ -141,16 +143,25 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 	}
 
 	private List<BinaryMapIndexReader> getSpatialPoiSearchFiles(SearchPhrase phrase) {
+		return getSpatialPoiSearchFiles(phrase, createSpatialSettings(phrase));
+	}
+
+	private List<BinaryMapIndexReader> getSpatialPoiSearchFiles(SearchPhrase phrase, SpatialTextSearchSettings settings) {
 		List<BinaryMapIndexReader> files = new ArrayList<>();
-		addFiles(files, phrase.getOfflineIndexes().iterator());
+		addFiles(files, getSpatialSearchOfflineIndexes(phrase, settings));
 		return files;
 	}
 
-	private List<BinaryMapIndexReader> getSpatialSearchFiles(SearchPhrase phrase) {
+	private List<BinaryMapIndexReader> getSpatialSearchFiles(SearchPhrase phrase, SpatialTextSearchSettings settings) {
 		List<BinaryMapIndexReader> files = new ArrayList<>();
-		addFiles(files, phrase.getOfflineIndexes().iterator());
+		addFiles(files, getSpatialSearchOfflineIndexes(phrase, settings));
 		addRegionsFile(files, phrase);
 		return files;
+	}
+
+	private Iterator<BinaryMapIndexReader> getSpatialSearchOfflineIndexes(SearchPhrase phrase,
+			SpatialTextSearchSettings settings) {
+		return phrase.getRadiusOfflineIndexes(settings.SUGGESTED_SEARCH_RADIUS_KM * 1000, SearchPhraseDataType.POI);
 	}
 
 	private void addRegionsFile(List<BinaryMapIndexReader> files, SearchPhrase phrase) {
@@ -291,7 +302,7 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 			localeName = poiType.getTranslation();
 		} else if (spatialPoiType.poiSubType != null) {
 			object = new TopIndexFilter(spatialPoiType.poiSubType, poiTypes, spatialPoiType.poiAdditional);
-			localeName = getTopIndexTranslation(spatialPoiType.poiAdditional);
+			localeName = spatialPoiType.names.get(0);
 		} else {
 			return null;
 		}
