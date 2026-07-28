@@ -69,6 +69,14 @@ public class PoiType extends AbstractPoiType {
 		return osmTag;
 	}
 	
+	@Override
+	public boolean isNonIndx() {
+		if (isReference()) {
+			return referenceType.isNonIndx();
+		}
+		return super.isNonIndx();
+	}
+	
 	public String getRawOsmTag() {
 		if(isReference()) {
 			return referenceType.getOsmTag();
@@ -85,7 +93,7 @@ public class PoiType extends AbstractPoiType {
 		this.editTag2 = osmTag;
 		this.editValue2 = editValue;
 	}
-
+	
 	public String getEditOsmTag() {
 		if (isReference()) {
 			return referenceType.getEditOsmTag();

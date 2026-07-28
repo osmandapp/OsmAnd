@@ -82,7 +82,7 @@
 				android:background="?attr/list_background_color"
 				android:clipToPadding="false"
 				android:paddingHorizontal="13dp"
-				android:paddingBottom="@dimen/content_padding"/>
+				android:paddingBottom="@dimen/content_padding_large"/>
 
 		</LinearLayout>
 

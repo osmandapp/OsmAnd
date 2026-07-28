@@ -62,6 +62,8 @@ public class Abbreviations {
 		addConjunction("et");
 		addConjunction("y");
 		addConjunction("и");
+		
+		
 
 		// direction
 		addDirectionWord("e", "East");
@@ -114,6 +116,20 @@ public class Abbreviations {
 		buildingAbbreviations.put("bsmt", "Basement");
 	}
 
+	public static boolean likelyPartOfRef(String word, Set<String> wordSplit) {
+		int letters = SearchAlgorithms.letters(word);
+		if (letters < 2 || (letters == 2 && SearchAlgorithms.startsWithDigit(word))) {
+			return true;
+		}
+		for (String s : wordSplit) {
+			letters = SearchAlgorithms.letters(s);
+			if (!(letters < 2 || (letters == 2 && SearchAlgorithms.startsWithDigit(s)))) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	// search v-2
 	public static boolean likelyPartOfBuilding(String word, Set<String> wordSplit) {
 		boolean bldNum = (SearchAlgorithms.isNumber2Letters(word) || word.length() == 1

@@ -20,7 +20,6 @@ import android.widget.LinearLayout;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
@@ -38,7 +37,7 @@ import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.WidgetsPagerAdapter.VisiblePages;
-import net.osmand.plus.views.layers.MapInfoLayer.TextState;
+import net.osmand.plus.views.mapwidgets.appearance.ResolvedPanelAppearance;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.widgets.FrameLayoutEx;
@@ -64,6 +63,7 @@ public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer 
 	private boolean rightSide;
 	private boolean selfShowAllowed;
 	private boolean selfVisibilityChanging;
+	private boolean visibilityAllowed = true;
 	private final boolean layoutRtl;
 
 	private ViewPager2 viewPager;
@@ -73,6 +73,15 @@ public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer 
 	private Insets insets;
 	private int screenWidth = -1;
 	private int screenHeight = -1;
+	@Nullable
+	private ResolvedPanelAppearance appliedAppearance;
+	private boolean pageSizeUpdateScheduled;
+	private final Runnable pageSizeUpdateRunnable = () -> {
+		pageSizeUpdateScheduled = false;
+		if (getVisibility() == VISIBLE) {
+			wrapContentAroundPage(null);
+		}
+	};
 
 	public SideWidgetsPanel(@NonNull Context context) {
 		this(context, null);
@@ -176,12 +185,21 @@ public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer 
 		return new WidgetsPagerAdapter(getContext(), panel);
 	}
 
+	public void setVisibilityAllowed(boolean visibilityAllowed) {
+		this.visibilityAllowed = visibilityAllowed;
+	}
+
 	public void update(@Nullable DrawSettings drawSettings) {
 		adapter.updateIfNeeded();
-		boolean show = hasVisibleContent() && selfShowAllowed;
+		boolean show = hasVisibleContent() && selfShowAllowed && visibilityAllowed;
 		selfVisibilityChanging = true;
-		if (AndroidUiHelper.updateVisibility(this, show) && !show) {
-			selfShowAllowed = true;
+		boolean visibilityChanged = AndroidUiHelper.updateVisibility(this, show);
+		if (visibilityChanged) {
+			if (show) {
+				schedulePageSizeUpdate();
+			} else {
+				selfShowAllowed = true;
+			}
 		}
 		wrapContentAroundPage(null);
 		selfVisibilityChanging = false;
@@ -232,11 +250,26 @@ public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer 
 		}
 	}
 
-	public void updateColors(@NonNull TextState textState) {
-		this.nightMode = textState.night;
-		borderPaint.setColor(ContextCompat.getColor(getContext(), textState.panelBorderColorId));
+	@Override
+	public void applyPanelAppearance(@NonNull ResolvedPanelAppearance appearance) {
+		boolean geometryChanged = hasGeometryChanged(appliedAppearance, appearance);
+		appliedAppearance = appearance;
+		this.nightMode = appearance.getNightMode();
+		borderPaint.setColor(appearance.getPanelBorderColor());
 		updateDots();
+		if (geometryChanged) {
+			schedulePageSizeUpdate();
+		}
 		invalidate();
+	}
+
+	private static boolean hasGeometryChanged(@Nullable ResolvedPanelAppearance previous,
+	                                          @NonNull ResolvedPanelAppearance current) {
+		return previous == null
+				|| previous.getSizeMode() != current.getSizeMode()
+				|| previous.getIconMode() != current.getIconMode()
+				|| previous.getBoldText() != current.getBoldText()
+				|| previous.getBackground().getMode() != current.getBackground().getMode();
 	}
 
 	@Override
@@ -348,6 +381,18 @@ public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer 
 				}
 				int maxAllowedHeight = screenHeight - occupied;
 
+				if (getParent() instanceof View parentView && parentView.getHeight() > 0) {
+					int occupiedInParent = getPaddingTop() + getPaddingBottom();
+					if (getLayoutParams() instanceof MarginLayoutParams lp) {
+						occupiedInParent += lp.topMargin + lp.bottomMargin;
+					}
+					occupiedInParent += getContext().getResources().getDimensionPixelSize(R.dimen.radius_large);
+					int parentAllowedHeight = parentView.getHeight() - occupiedInParent;
+					if (parentAllowedHeight > 0 && parentAllowedHeight < maxAllowedHeight) {
+						maxAllowedHeight = parentAllowedHeight;
+					}
+				}
+
 				if (measuredHeight > maxAllowedHeight) {
 					measuredHeight = maxAllowedHeight;
 				}
@@ -360,6 +405,19 @@ public class SideWidgetsPanel extends FrameLayoutEx implements WidgetsContainer 
 				viewPager.setLayoutParams(pagerParams);
 			}
 		}
+	}
+
+	private void schedulePageSizeUpdate() {
+		if (!pageSizeUpdateScheduled) {
+			pageSizeUpdateScheduled = post(pageSizeUpdateRunnable);
+		}
+	}
+
+	@Override
+	protected void onDetachedFromWindow() {
+		removeCallbacks(pageSizeUpdateRunnable);
+		pageSizeUpdateScheduled = false;
+		super.onDetachedFromWindow();
 	}
 
 	@Nullable

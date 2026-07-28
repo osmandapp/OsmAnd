@@ -42,6 +42,8 @@
 					android:layout_height="wrap_content"
 					android:layout_gravity="center_vertical"
 					android:layout_weight="1"
+					android:ellipsize="end"
+					android:maxLines="1"
 					android:paddingStart="@dimen/content_padding"
 					android:paddingLeft="@dimen/content_padding"
 					android:paddingTop="@dimen/content_padding_small"

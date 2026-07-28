@@ -644,12 +644,12 @@ public class SearchCoreFactory {
 							req.setBBox(x31, y31, left, top, right, bottom);
 						} else {
 							int radius = (int) c.getType().getRadius() * 3;
-							rect = MapUtils.calculateBbox(radius, c.getLocation());
+							rect = MapUtils.calculate31BboxUsingRhumb(radius, c.getLocation());
 							req.setBBoxRadius(c.getLocation().getLatitude(), c.getLocation().getLongitude(), radius);
 						}
 					} else {
 						int radius = phrase.getRadiusSearch(maxRadius);
-						rect = MapUtils.calculateBbox(radius, loc);
+						rect = MapUtils.calculate31BboxUsingRhumb(radius, loc);
 						req.setBBoxRadius(loc.getLatitude(), loc.getLongitude(), radius);
 					}
                     offlineIterator = phrase.getOfflineIndexes(rect, SearchPhraseDataType.ADDRESS);
@@ -684,7 +684,7 @@ public class SearchCoreFactory {
 								if (match) {
 									newParentSearchResult = cityResult;
 								} else if(hasNonNumericLeftUnknownSearchWord(res)) { // speed up
-									QuadRect bbox = MapUtils.calculateBbox(1000, res.location);
+									QuadRect bbox = MapUtils.calculate31BboxUsingRhumb(1000, res.location);
 									List<City>  cacheResArray = townCitiesCache.queryBoundaries(bbox);
 									for (City boundary : cacheResArray) {
 										int[] bb = boundary.getBbox31();

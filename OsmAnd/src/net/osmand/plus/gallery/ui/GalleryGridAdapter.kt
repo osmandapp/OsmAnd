@@ -13,6 +13,7 @@ import net.osmand.plus.gallery.data.MediaPosterLoader
 import net.osmand.plus.gallery.model.GalleryAction
 import net.osmand.plus.gallery.model.GalleryDisplayMode
 import net.osmand.plus.gallery.model.GalleryItem
+import net.osmand.plus.gallery.model.GallerySortMode
 import net.osmand.plus.gallery.ui.holders.ActionViewHolder
 import net.osmand.plus.gallery.ui.holders.GalleryMediaListViewHolder
 import net.osmand.plus.gallery.ui.holders.GalleryMediaViewHolder
@@ -31,6 +32,7 @@ class GalleryGridAdapter(
 	private val onMediaClicked: (MediaItem) -> Unit,
 	private val onReloadMediaItems: () -> Unit,
 	private val onActionClicked: (View, GalleryAction) -> Unit,
+	private val onSortModeSelected: (GallerySortMode) -> Unit = {},
 	private val mediaHolderType: (position: Int) -> MediaHolderType,
 	private val resolveResizableImageSize: (() -> Int)? = null,
 	private val isLoadFailed: (MediaItem) -> Boolean,
@@ -141,7 +143,7 @@ class GalleryGridAdapter(
 				MediaStatsHolder(inflate(R.layout.gallery_media_stats_item, parent), app)
 			}
 			SORT_BAR_TYPE -> {
-				SortBarHolder(inflate(R.layout.gallery_sort_bar_item, parent), app, onActionClicked)
+				SortBarHolder(inflate(R.layout.gallery_sort_bar_item, parent), app, onSortModeSelected)
 			}
 			else -> throw IllegalArgumentException("Unsupported view type: $viewType")
 		}
@@ -181,7 +183,7 @@ class GalleryGridAdapter(
 			holder is MediaStatsHolder && item is GalleryItem.MediaStats ->
 				holder.bindView(item, nightMode, displayMode == GalleryDisplayMode.GRID)
 			holder is SortBarHolder && item is GalleryItem.SortBar ->
-				holder.bindView(item, nightMode, displayMode == GalleryDisplayMode.GRID)
+				holder.bindView(item, displayMode == GalleryDisplayMode.GRID)
 		}
 	}
 

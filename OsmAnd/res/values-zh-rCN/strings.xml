@@ -1606,7 +1606,6 @@
     <string name="show_free_version_banner_description">即使在付费版本中，也显示免费版本的标语。</string>
     <string name="activate_seamarks_plugin">请启用 \"航海地图视图 \"插件</string>
     <string name="activate_srtm_plugin">请启用 \"地形 \"插件</string>
-    <string name="confirm_download_roadmaps">由于您已经拥有标准（完整）地图，只含有道路的地图是不需要的。仍然要下载它吗？</string>
     <string name="value_downloaded_of_max">%1$.1f 从 %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="feedback">反馈</string>
@@ -5169,7 +5168,9 @@
     <string name="camera_folder">相机文件夹</string>
     <string name="media_storage_main_storage_descr">文件保存到应用私有存储空间，不会在相册或其他应用中显示。</string>
     <string name="media_storage_shared_storage_descr">文件保存到公共文件夹（图片、视频、音乐），可在相册和 Google 相册中查看。</string>
-    <string name="media_storage_camera_folder_descr">文件保存到相机相册。注意：音频会保存到 Music/OsmAnd。</string>
+    <string name="shared_string_note">注意</string>
+    <string name="media_storage_camera_folder_note_descr">音频会保存到 Music/OsmAnd。</string>
+    <string name="media_storage_camera_folder_descr">文件保存到相机相册。%1$s</string>
     <string name="media_storage_manually_specified_descr">文件保存到自定义文件夹，并按类型（音频、照片、视频）分类。</string>
     <string name="change_media_storage_question">要更改媒体存储位置吗？</string>
     <string name="change_media_storage_full_description">是否将现有媒体文件移动到新位置？\n%1$s &gt; %2$s</string>
@@ -5198,7 +5199,6 @@
     <string name="gallery_sort_duration_long_short">最长时长在前</string>
     <string name="gallery_sort_duration_short_long">最短时长在前</string>
     <string name="navigate_point_format_maidenhead">梅登海德</string>
-    <string name="auto_copy_media_to_osmand_storage">自动复制媒体文件到OsmAnd存储库</string>
     <string name="choose_from_gallery">从相册中选择</string>
     <string name="choose_from_files">从文件中选择</string>
     <string name="shared_string_media">媒体</string>

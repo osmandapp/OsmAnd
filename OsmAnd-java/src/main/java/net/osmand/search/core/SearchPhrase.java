@@ -383,13 +383,10 @@ public class SearchPhrase {
 		if (l == null) {
 			return null;
 		}
-		cache1kmRect = MapUtils.calculateBbox(1000, l);
+		cache1kmRect = MapUtils.calculate31BboxUsingRhumb(1000, l);
 		return cache1kmRect;
 	}
 
-	
-	
-	
 	public Iterator<BinaryMapIndexReader> getRadiusOfflineIndexes(int meters, final SearchPhraseDataType dt) {
 		final QuadRect rect = meters > 0 ? getRadiusBBoxToSearch(meters) : null;
 		return getOfflineIndexes(rect, dt);

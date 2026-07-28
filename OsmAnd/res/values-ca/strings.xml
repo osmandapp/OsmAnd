@@ -1154,7 +1154,6 @@
     <string name="favorite_category_dublicate_message">Utilitzeu un nom de categoria que encara no existeixi.</string>
     <string name="favorite_category_name">Nom de categoria</string>
     <string name="favorite_category_add_new_title">Afegeix una nova categoria</string>
-    <string name="confirm_download_roadmaps">El mapa restringit a carreteres no cal, donat que ja teniu el mapa estàndard (complet). Que baixi igualment\?</string>
     <string name="value_downloaded_of_max">%1$.1f de %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Actualitzeu tot (%1$s MB)</string>
@@ -4876,4 +4875,9 @@
     <string name="open_till_short">Fins a</string>
     <string name="map_widget_memory_info">Informació quant a la memòria</string>
     <string name="astro_designations">Designacions</string>
+    <string name="astro_lunar_eclipse">Eclipsi lunar</string>
+    <string name="astro_lunar_eclipse_subtitle">Cerca els eclipsis lunars a tot el món</string>
+    <string name="astro_previous_lunar_eclipse">Eclipsi lunar anterior</string>
+    <string name="astro_next_lunar_eclipse">Eclipsi lunar següent</string>
+    <string name="astro_close_lunar_eclipse">Tancar el cercador d\'eclipsis lunars</string>
 </resources>

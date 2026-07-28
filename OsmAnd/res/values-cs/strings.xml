@@ -1162,7 +1162,6 @@
     <string name="share_menu_location">Sdílet polohu</string>
     <string name="shared_string_send">Odeslat</string>
     <string name="simulate_initial_startup_descr">Nastavit příznak označující první spuštění aplikace, ostatní nastavení ponechat nezměněná.</string>
-    <string name="confirm_download_roadmaps">Silniční mapa není nutná, protože máte standardní (plnou) mapu. I přesto stáhnout?</string>
     <string name="show_on_start_description">\'Vypnuto\' spouští přímo obrazovku s mapou.</string>
     <string name="world_map_download_descr">Základní mapa světa (pokrývající celý svět při malých úrovních detailů) chybí nebo je zastaralá. Prosím zvažte její stažení pro celkový přehled.</string>
     <string name="shared_string_qr_code">QR kód</string>
@@ -1519,7 +1518,7 @@
     <string name="shared_string_color">Barva</string>
     <string name="max_speed">Maximální rychlost</string>
     <string name="average_speed">Průměrná rychlost</string>
-    <string name="add_new_folder">Přidat nový adresář</string>
+    <string name="add_new_folder">Přidat novou složku</string>
     <string name="points_delete_multiple">Smazat %1$d bodů\?</string>
     <string name="shared_string_gpx_track">Trasa</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Kopcovitý</string>
@@ -5197,7 +5196,9 @@
     <string name="camera_folder">Složka fotoaparátu</string>
     <string name="media_storage_main_storage_descr">Soubory se ukládají do soukromého úložiště aplikací. Jsou skryté před Galerií a ostatními aplikacemi.</string>
     <string name="media_storage_shared_storage_descr">Soubory se ukládají do veřejných složek (Obrázky, Filmy, Hudba). Jsou viditelné v Galerii a Google Photos.</string>
-    <string name="media_storage_camera_folder_descr">Soubory se ukládají do složky Fotoaparát. Poznámka: Zvuk se ukládá do složky Hudba/OsmAnd.</string>
+    <string name="shared_string_note">Poznámka</string>
+    <string name="media_storage_camera_folder_note_descr">Zvuk se ukládá do složky Hudba/OsmAnd.</string>
+    <string name="media_storage_camera_folder_descr">Soubory se ukládají do složky Fotoaparát. %1$s</string>
     <string name="media_storage_manually_specified_descr">Soubory se ukládají do vlastní složky a třídí se podle typu (Zvuk, Foto, Video).</string>
     <string name="change_media_storage_question">Změnit úložiště médií?</string>
     <string name="change_media_storage_full_description">Přesunout existující mediální soubory do nového cíle?\n%1$s &gt; %2$s</string>
@@ -5226,7 +5227,6 @@
     <string name="gallery_sort_duration_long_short">Nejdelší doba trvání první</string>
     <string name="gallery_sort_duration_short_long">Nejkratší doba trvání první</string>
     <string name="navigate_point_format_maidenhead">Maidenhead</string>
-    <string name="auto_copy_media_to_osmand_storage">Automatické kopírování médií do úložiště OsmAnd</string>
     <string name="tracks_backup_promo_button">Získejte OsmAnd Pro</string>
     <string name="tracks_backup_promo_description">Synchronizujte své trasy mezi zařízeními a webem s OsmAnd Pro.</string>
     <string name="tracks_backup_promo_title">Zálohujte a synchronizujte své trasy</string>
@@ -5259,4 +5259,16 @@
     <string name="search_around_my_location_description">Hledat okolo mojí polohy</string>
     <string name="sort_by_relevance">Relevance</string>
     <string name="routing_attr_motor_type_ethanol_name">Etanol</string>
+    <string name="sort_by_nearest_to_current_location">Nejblíže k aktuální poloze</string>
+    <string name="attached_media_delete_confirmation">Smazat %1$d mediálních položek od tohoto bodu? Média uložená aplikací a nepřipojená nikde jinde budou také smazána ze zařízení.</string>
+    <string name="android_auto_missing_maps_desc">Stáhněte si chybějící mapy trasy, abyste mohli pokračovat.</string>
+    <string name="android_auto_possible_missing_maps_desc">Možná chybí některé mapy. Zkuste pokračovat s použitím stávajících map.</string>
+    <string name="route_calculation_calculating_route">Vypočítává se trasa...</string>
+    <string name="route_calculation_calculating_fast_route">Vypočítává se nejrychlejší trasa...</string>
+    <string name="route_calculation_using_fast_algorithm">S využitím algoritmu pro rychlé směrování.</string>
+    <string name="astro_show_map">Zobrazit mapu</string>
+    <string name="astro_hide_map">Skrýt mapu</string>
+    <string name="astro_map_center_location">Střed mapy: %1$s</string>
+    <string name="astro_solar_eclipse">Zatmění slunce</string>
+    <string name="astro_solar_eclipse_subtitle">Prozkoumejte celosvětová zatmění slunce</string>
 </resources>

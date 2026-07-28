@@ -35,11 +35,12 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.OutlinedTextContainer;
 import net.osmand.plus.views.mapwidgets.WidgetsContextMenu;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.appearance.PanelAppearanceApplier;
+import net.osmand.plus.views.mapwidgets.appearance.ResolvedPanelAppearance;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportMultiRow;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportVerticalPanel;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportWidgetResizing;
@@ -59,7 +60,6 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 
 	private final RouteInfoWidgetState widgetState;
 
-	private TextState textState;
 	private final RouteInfoCalculator calculator;
 	private List<DestinationInfo> cachedRouteInfo;
 	private DisplayValue cachedDefaultView;
@@ -69,6 +69,9 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	private boolean hasEnoughWidth;
 	private boolean hasSecondaryData;
 	private int widgetWidth;
+	@Nullable
+	private WidgetSize renderedWidgetSize;
+	private boolean renderedNightMode;
 
 	// views
 	private OutlinedTextContainer tvPrimaryLine1;
@@ -109,18 +112,17 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 		container.removeAllViews();
 		LayoutInflater inflater = UiUtilities.getInflater(mapActivity, nightMode);
 		inflater.inflate(getContentLayoutId(), container);
+		renderedWidgetSize = getWidgetSize();
+		renderedNightMode = nightMode;
 		collectViews();
-		if (textState != null) {
-			container.setBackgroundResource(textState.widgetBackgroundId);
-			int color = ColorUtilities.getSecondaryActiveColor(app, nightMode);
-			Drawable normal = UiUtilities.createTintedDrawable(app, R.drawable.rectangle_rounded_small, color);
+		int color = ColorUtilities.getSecondaryActiveColor(app, nightMode);
+		Drawable normal = UiUtilities.createTintedDrawable(app, R.drawable.rectangle_rounded_small, color);
 
-			int rippleDrawableId = nightMode ? R.drawable.ripple_solid_dark_3dp : R.drawable.ripple_solid_light_3dp;
-			Drawable selected = AppCompatResources.getDrawable(app, rippleDrawableId);
+		int rippleDrawableId = nightMode ? R.drawable.ripple_solid_dark_3dp : R.drawable.ripple_solid_light_3dp;
+		Drawable selected = AppCompatResources.getDrawable(app, rippleDrawableId);
 
-			Drawable drawable = UiUtilities.getLayeredIcon(normal, selected);
-			AndroidUtils.setBackground(container.findViewById(R.id.button_body), drawable);
-		}
+		Drawable drawable = UiUtilities.getLayeredIcon(normal, selected);
+		AndroidUtils.setBackground(container.findViewById(R.id.button_body), drawable);
 		updateWidgetRowView();
 
 		View buttonTappableArea = container.findViewById(R.id.button_tappable_area);
@@ -170,9 +172,6 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 		if (this.hasEnoughWidth != hasEnoughWidth) {
 			this.hasEnoughWidth = hasEnoughWidth;
 			recreateView();
-			if (textState != null) {
-				updateColors(textState);
-			}
 		}
 	}
 
@@ -232,8 +231,13 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	private void updatePrimaryBlock(@NonNull DestinationInfo destinationInfo,
 	                                @NonNull DisplayValue[] displayValues) {
 		WidgetSize size = getWidgetSize();
-		int primaryColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
-		int secondaryColor = ColorUtilities.getSecondaryTextColor(app, nightMode);
+		ResolvedPanelAppearance appearance = getPanelAppearance();
+		int primaryColor = appearance != null
+				? appearance.getPrimaryTextColor()
+				: ColorUtilities.getPrimaryTextColor(app, nightMode);
+		int secondaryColor = appearance != null
+				? appearance.getSecondaryTextColor()
+				: ColorUtilities.getSecondaryTextColor(app, nightMode);
 
 		Map<DisplayValue, String> data = prepareDisplayData(destinationInfo);
 		String value1 = Objects.requireNonNull(data.get(displayValues[0]));
@@ -388,16 +392,23 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	}
 
 	@Override
-	public void updateColors(@NonNull TextState textState) {
-		this.textState = textState;
-		this.nightMode = textState.night;
-		recreateView();
-		updateTextOutline(tvPrimaryLine1, textState);
-		updateTextOutline(tvSecondaryLine1, textState);
-		updateTextOutline(tvPrimaryLine2, textState);
-		updateTextOutline(tvSecondaryLine2, textState);
-		forceUpdate = true;
-		updateInfoInternal();
+	protected void onPanelAppearanceChanged(@NonNull ResolvedPanelAppearance appearance) {
+		if (renderedWidgetSize != getWidgetSize() || renderedNightMode != appearance.getNightMode()) {
+			recreateView();
+		} else {
+			applyRouteInfoAppearance(appearance);
+			forceUpdate = true;
+			updateInfoInternal();
+		}
+	}
+
+	private void applyRouteInfoAppearance(@NonNull ResolvedPanelAppearance appearance) {
+		PanelAppearanceApplier.applyBackground(getView(), appearance);
+		PanelAppearanceApplier.applyPrimaryText(tvPrimaryLine1, appearance);
+		PanelAppearanceApplier.applySecondaryText(tvSecondaryLine1, appearance);
+		PanelAppearanceApplier.applyPrimaryText(tvPrimaryLine2, appearance);
+		PanelAppearanceApplier.applySecondaryText(tvSecondaryLine2, appearance);
+		PanelAppearanceApplier.applyDivider(getView().findViewById(R.id.blocks_divider), appearance);
 	}
 
 	@Override
@@ -420,7 +431,7 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 
 	@NonNull
 	public WidgetSize getWidgetSize() {
-		return getWidgetSizePref().get();
+		return resolveWidgetSize(getWidgetSizePref().get());
 	}
 
 	@NonNull
@@ -430,7 +441,7 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	}
 
 	@Override
-	public void recreateView() {
+	protected void recreateViewInternal() {
 		initView();
 		forceUpdate = true;
 		setupViews();

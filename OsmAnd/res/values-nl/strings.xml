@@ -1184,7 +1184,6 @@
     <string name="buy">Kopen</string>
     <string name="later">Later</string>
     <string name="downloads">Downloads</string>
-    <string name="confirm_download_roadmaps">De alleen-wegenkaart is niet nodig, omdat je de standaard (volledige) kaart al hebt. Wil je deze toch downloaden?</string>
     <string name="value_downloaded_of_max">%1$.1f van %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Alles updaten (%1$s MB)</string>
@@ -5495,7 +5494,6 @@
     <string name="favorite_folder_name">Mapnaam</string>
     <string name="edit_folder">Bewerk map</string>
     <string name="shared_string_media">Media</string>
-    <string name="auto_copy_media_to_osmand_storage">Kopieer media automatisch naar OsmAnd-opslag</string>
     <string name="choose_from_gallery">Kies uit galerij</string>
     <string name="choose_from_files">Kies uit bestanden</string>
     <string name="no_media">Geen media</string>
@@ -5519,7 +5517,9 @@
     <string name="camera_folder">Cameramap</string>
     <string name="media_storage_main_storage_descr">Bestanden worden opgeslagen in de privéopslag van de app. Ze zijn niet zichtbaar in de Galerij en voor andere apps.</string>
     <string name="media_storage_shared_storage_descr">Bestanden worden opgeslagen in de openbare mappen (Afbeeldingen, Films, Muziek). Ze zijn zichtbaar in de Galerij en in Google Foto\'s.</string>
-    <string name="media_storage_camera_folder_descr">Bestanden worden opgeslagen in de Cameramap. Let op: audio wordt opgeslagen in Muziek/OsmAnd.</string>
+    <string name="shared_string_note">Let op</string>
+    <string name="media_storage_camera_folder_note_descr">audio wordt opgeslagen in Muziek/OsmAnd.</string>
+    <string name="media_storage_camera_folder_descr">Bestanden worden opgeslagen in de Cameramap. %1$s</string>
     <string name="media_storage_manually_specified_descr">Bestanden worden opgeslagen in een zelfgekozen map en gesorteerd op type (Audio, Foto, Video).</string>
     <string name="change_media_storage_question">Mediaopslag wijzigen?</string>
     <string name="change_media_storage_full_description">Bestaande mediabestanden verplaatsen naar de nieuwe locatie?\n%1$s &gt; %2$s</string>
@@ -5589,4 +5589,22 @@
     <string name="required_maps_route_overview">Routeoverzicht:</string>
     <string name="required_maps_calculate_with_existing_maps">Bereken met beschikbare kaarten</string>
     <string name="search_around">Zoek nabij</string>
+    <string name="astro_show_map">Toon kaart</string>
+    <string name="astro_hide_map">Verberg kaart</string>
+    <string name="astro_map_center_location">Kaartcentrum: %1$s</string>
+    <string name="astro_solar_eclipse">Zonsverduistering</string>
+    <string name="astro_solar_eclipse_subtitle">Verken wereldwijde zonsverduisteringen</string>
+    <string name="astro_previous_solar_eclipse">Vorige zonsverduistering</string>
+    <string name="astro_next_solar_eclipse">Volgende zonsverduistering</string>
+    <string name="astro_close_solar_eclipse">Sluit zonsverduisteringsverkenner</string>
+    <string name="astro_total_solar_eclipse">Totale zonsverduistering</string>
+    <string name="astro_annular_solar_eclipse">Ringvormige zonsverduistering</string>
+    <string name="astro_partial_solar_eclipse">Gedeeltelijke zonsverduistering</string>
+    <string name="astro_eclipse_phase_total">Totaal</string>
+    <string name="astro_eclipse_phase_annular">Ringvormig</string>
+    <string name="astro_eclipse_phase_partial">Gedeeltelijk</string>
+    <string name="astro_eclipse_below_horizon">%1$s • onder de horizon (%2$.1f°)</string>
+    <string name="astro_eclipse_start">Start</string>
+    <string name="astro_eclipse_maximum">Maximum</string>
+    <string name="astro_eclipse_end">Einde</string>
 </resources>

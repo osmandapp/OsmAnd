@@ -1345,7 +1345,6 @@
     <string name="use_trackball">استخدم كرة التعقب</string>
     <string name="route_stops_before">%1$s محطة توقف قبل</string>
     <string name="map_legend">مفتاح الخريطة</string>
-    <string name="confirm_download_roadmaps">هل حقا تريد تحميل خريطة الطرق فقط، على الرغم من أنه لديك الخريطة (كاملة)؟</string>
     <string name="activate_srtm_plugin">يجب تفعيل ملحق الخرائط الجغرافية</string>
     <string name="max_level_download_tile">التكبير الأقصى بالإنترنت</string>
     <string name="commiting_node">إنشاء نقطة…</string>

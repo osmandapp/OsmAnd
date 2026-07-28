@@ -44,16 +44,16 @@ public class CustomizableQuestionBottomSheet extends CustomizableBottomSheet {
 		TextView tvDescription = contentView.findViewById(R.id.description);
 
 		Drawable drawable = (Drawable) getExtra(DRAWABLE);
-		AndroidUiHelper.updateVisibility(tvTitle, drawable != null);
+		AndroidUiHelper.updateVisibility(ivIcon, drawable != null);
 		if (drawable != null) {
 			ivIcon.setImageDrawable(drawable);
 		}
 
-		String title = (String) getExtra(TITLE);
+		CharSequence title = (CharSequence) getExtra(TITLE);
 		AndroidUiHelper.updateVisibility(tvTitle, title != null);
 		tvTitle.setText(title);
 
-		String description = (String) getExtra(DESCRIPTION);
+		CharSequence description = (CharSequence) getExtra(DESCRIPTION);
 		AndroidUiHelper.updateVisibility(tvDescription, description != null);
 		tvDescription.setText(description);
 

@@ -126,7 +126,7 @@ class GalleryGridFragment : BaseFullScreenFragment(), IGalleryGridView {
 		} else {
 			AndroidUtils.dpToPx(app, GalleryGridItemDecorator.GRID_SIDE_PADDING_DP)
 		}
-		val bottomPadding = resources.getDimensionPixelSize(R.dimen.content_padding)
+		val bottomPadding = resources.getDimensionPixelSize(R.dimen.content_padding_large)
 		recyclerView.setPadding(sidePadding, 0, sidePadding, bottomPadding)
 	}
 

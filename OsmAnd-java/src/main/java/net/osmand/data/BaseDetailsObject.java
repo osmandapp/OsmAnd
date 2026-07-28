@@ -33,6 +33,7 @@ public class BaseDetailsObject {
 	private SearchResultResource searchResultResource;
 
 	protected Amenity syntheticAmenity = new Amenity();
+	private int[] bbox31;
 
 	private ObjectCompleteness objectCompleteness = ObjectCompleteness.EMPTY;
 
@@ -53,14 +54,14 @@ public class BaseDetailsObject {
 
 	public BaseDetailsObject(List<? extends MapObject> mapObjects, String lang) {
 		this(Algorithms.isEmpty(lang) ? "en" : lang);
-
 		boolean containsAmenity = false;
 		for (MapObject mo : mapObjects) {
-			addObject(mo);
+			addObjectNoCombine(mo);
 			if (mo instanceof Amenity) {
 				containsAmenity = true;
 			}
 		}
+		combineData();
 		if (!objects.isEmpty()) {
 			objectCompleteness = containsAmenity ? ObjectCompleteness.FULL : ObjectCompleteness.COMBINED;
 		}
@@ -91,6 +92,27 @@ public class BaseDetailsObject {
 	}
 
 	public boolean addObject(Object object) {
+		boolean added = addObjectNoCombine(object);
+		if (added) {
+			combineData();
+		}
+		return added;
+	}
+	
+	private boolean addObjectNoCombine(Object object) {
+		if (bbox31 == null && object instanceof City c) {
+			// we don't support merge of cities direct but take bbox31
+			bbox31 = c.getBbox31();
+			return true;
+		} else if (bbox31 == null && object instanceof Street s) {
+			// we don't support merge of cities direct but take bbox31
+			QuadRect bb = s.getBboxPoints();
+			if (bb != null) {
+				bbox31 = new int[] { MapUtils.get31TileNumberX(bb.left), MapUtils.get31TileNumberY(bb.top),
+						MapUtils.get31TileNumberX(bb.right), MapUtils.get31TileNumberY(bb.bottom) };
+			}
+			return true;
+		}
 		if (!isSupportedObjectType(object)) {
 			return false;
 		}
@@ -111,7 +133,6 @@ public class BaseDetailsObject {
 				wikidataIds.add(wikidata);
 			}
 		}
-		combineData();
 		return true;
 	}
 
@@ -244,7 +265,7 @@ public class BaseDetailsObject {
 
 	private void combineData() {
 		syntheticAmenity = new Amenity();
-
+		syntheticAmenity.setBbox31(bbox31);
 		sortObjects();
 		for (Object object : objects) {
 			mergeObject(object, objects.size() == 1);

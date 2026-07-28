@@ -274,6 +274,7 @@
         <item name="stroked_btn_contour">@drawable/stroked_btn_contour_light</item>
         <item name="profile_save_btn">@drawable/btn_round_profile_blue</item>
         <item name="profile_cancel_btn">@drawable/btn_round_profile_gray</item>
+        <item name="btn_history_disabled_card_bg">@drawable/dlg_btn_secondary_light</item>
 
         <item name="buttonBarNegativeButtonStyle">@style/DialogButtonStyleLight</item>
         <item name="buttonBarPositiveButtonStyle">@style/DialogButtonStyleLight</item>
@@ -313,6 +314,9 @@
         <item name="status_bar_active_color">@color/status_bar_selection_color_light</item>
         <item name="active_color_secondary">@color/active_color_secondary_light</item>
         <item name="active_color_primary">@color/active_color_primary_light</item>
+		<item name="icon_button_background_hovered">@color/btn_bg_icon_hover_light</item>
+		<item name="icon_button_background_focused">@color/btn_bg_icon_focused_light</item>
+		<item name="icon_button_background_pressed">@color/btn_bg_icon_pressed_light</item>
         <item name="slider_label_text_dark">@color/slider_label_text_light</item>
         <item name="app_bar_secondary_color">@color/app_bar_secondary_light</item>
         <item name="map_button_icon_color">@color/map_button_icon_color_light</item>

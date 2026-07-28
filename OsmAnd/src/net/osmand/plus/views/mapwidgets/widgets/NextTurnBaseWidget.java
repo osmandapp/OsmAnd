@@ -5,7 +5,6 @@ import static net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget.MAX_SHIE
 import static net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget.setShieldImage;
 import static java.lang.Math.min;
 
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.text.TextPaint;
 import android.view.Gravity;
@@ -18,7 +17,6 @@ import android.widget.TextView;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 
@@ -31,17 +29,17 @@ import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.enums.WidgetSize;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.OutlinedTextContainer;
 import net.osmand.plus.views.mapwidgets.TurnDrawable;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsContextMenu;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.appearance.PanelAppearanceApplier;
+import net.osmand.plus.views.mapwidgets.appearance.ResolvedPanelAppearance;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.IComplexWidget;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportMultiRow;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportVerticalPanel;
@@ -79,9 +77,10 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 
 	private List<RoadShield> cachedRoadShields;
 	private final ResizableWidgetState widgetState;
-	protected TextState textState;
 	private boolean isFullRow;
 	protected boolean verticalWidget;
+	@Nullable
+	private WidgetSize renderedWidgetSize;
 
 	public NextTurnBaseWidget(@NonNull MapActivity mapActivity, @Nullable String customId,
 			@NonNull WidgetType widgetType, @Nullable WidgetsPanel panel,
@@ -116,6 +115,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 	}
 
 	public void setVerticalWidget(@NonNull WidgetsPanel panel) {
+		setPanel(panel);
 		verticalWidget = panel.isPanelVertical();
 	}
 
@@ -124,6 +124,9 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		container.removeAllViews();
 
 		int layoutId = getContentLayoutId();
+		renderedWidgetSize = verticalWidget
+				? resolveWidgetSize(widgetState.getWidgetSizePref().get())
+				: null;
 		UiUtilities.getInflater(mapActivity, nightMode).inflate(layoutId, container);
 		findViews();
 		updateWidgetView();
@@ -154,7 +157,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 
 	@LayoutRes
 	private int getProperVerticalLayoutId(@NonNull ResizableWidgetState resizableWidgetState) {
-		return switch (resizableWidgetState.getWidgetSizePref().get()) {
+		return switch (resolveWidgetSize(resizableWidgetState.getWidgetSizePref().get())) {
 			case SMALL -> R.layout.navigation_widget_small;
 			case MEDIUM ->
 					isFullRow ? R.layout.navigation_widget_full : R.layout.navigation_widget_half;
@@ -252,7 +255,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 	}
 
 	private void checkShieldOverflow() {
-		if (verticalWidget && WidgetSize.SMALL == getWidgetSizePref().get()) {
+		if (verticalWidget && WidgetSize.SMALL == resolveWidgetSize(getWidgetSizePref().get())) {
 			ScrollUtils.addOnGlobalLayoutListener(shieldImagesContainer, () -> {
 				int containerWidth = shieldImagesContainer.getWidth();
 				int usedWidth = 0;
@@ -400,49 +403,37 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 	}
 
 	@Override
-	public void updateColors(@NonNull TextState textState) {
-		this.textState = textState;
+	protected void onPanelAppearanceChanged(@NonNull ResolvedPanelAppearance appearance) {
+		if (verticalWidget && renderedWidgetSize != resolveWidgetSize(getWidgetSizePref().get())) {
+			recreateView();
+			return;
+		}
 		if (verticalWidget) {
-			updateVerticalWidgetColors(textState);
+			applyVerticalNavigationAppearance(appearance);
 		} else {
-			super.updateColors(textState);
-			updateTextColor(topTextView, null, textState.textColor,
-					textState.textShadowColor, textState.textBold, textState.textShadowRadius);
+			super.onPanelAppearanceChanged(appearance);
+			PanelAppearanceApplier.applyPrimaryText(topTextView, null, appearance);
 
 			textPaint.set(topTextView.getPaint());
-			textPaint.setColor(textState.textColor);
+			textPaint.setColor(appearance.getPrimaryTextColor());
 			turnDrawable.updateTextPaint(textPaint, isNightMode());
 			turnDrawable.updateColors(isNightMode());
 		}
 		turnDrawable.invalidateSelf();
 	}
 
-	protected void updateVerticalWidgetColors(@NonNull TextState textState) {
-		int typefaceStyle = textState.textBold ? Typeface.BOLD : Typeface.NORMAL;
-
-		nightMode = textState.night;
-		int exitRefTextColorId = isNightMode()
-				? R.color.text_color_primary_dark
-				: R.color.widgettext_day;
-		exitView.setTextColor(ContextCompat.getColor(app, exitRefTextColorId));
-
-		int streetNameColor = ColorUtilities.getColor(app, nightMode
-				? R.color.text_color_tertiary_light
-				: R.color.icon_color_secondary_dark);
-		streetView.setTextColor(streetNameColor);
-
-		distanceView.setTextColor(ContextCompat.getColor(app, exitRefTextColorId));
-		distanceSubView.setTextColor(ColorUtilities.getSecondaryTextColor(mapActivity, nightMode));
-
-		distanceView.setTypeface(Typeface.DEFAULT, typefaceStyle);
-		distanceSubView.setTypeface(Typeface.DEFAULT, typefaceStyle);
+	protected void applyVerticalNavigationAppearance(@NonNull ResolvedPanelAppearance appearance) {
+		PanelAppearanceApplier.applyPrimaryText(exitView, null, appearance);
+		PanelAppearanceApplier.applyPrimaryText(distanceView, appearance);
+		PanelAppearanceApplier.applySecondaryText(distanceSubView, appearance);
+		PanelAppearanceApplier.applySecondaryText(streetView, appearance);
 
 		turnDrawable.updateColors(isNightMode());
-		bg.setBackgroundResource(textState.widgetBackgroundId);
-
-		updateTextOutline(distanceView, textState);
-		updateTextOutline(distanceSubView, textState);
-		updateTextOutline(streetView, textState);
+		View view = getView();
+		if (bg != view) {
+			view.setBackground(null);
+		}
+		PanelAppearanceApplier.applyBackground(bg, appearance);
 	}
 
 	@Override
@@ -451,9 +442,6 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		if (isFullRow != fullRow) {
 			isFullRow = fullRow;
 			recreateView();
-			if (textState != null) {
-				updateColors(textState);
-			}
 			updateInfo(null);
 		}
 	}
@@ -519,7 +507,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 	}
 
 	@Override
-	public void recreateView() {
+	protected void recreateViewInternal() {
 		View view = getView();
 		View oldContainer = container;
 		if (verticalWidget) {
@@ -571,7 +559,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 			return;
 		}
 
-		WidgetSize currentWidgetSize = widgetState.getWidgetSizePref().get();
+		WidgetSize currentWidgetSize = resolveWidgetSize(widgetState.getWidgetSizePref().get());
 		String subText = distanceSubView.getText().toString();
 		String formattedSubText = null;
 		switch (currentWidgetSize) {

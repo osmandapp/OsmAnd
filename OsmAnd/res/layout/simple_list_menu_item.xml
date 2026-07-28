@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
-	android:layout_height="wrap_content">
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
 
 	<net.osmand.plus.widgets.TextViewEx
 		android:id="@+id/title"
@@ -20,5 +21,13 @@
 		android:textStyle="normal"
 		tools:drawableStart="@drawable/ic_action_search_dark"
 		tools:text="@string/layer_poi" />
+
+	<View
+		android:id="@+id/list_item_divider"
+		android:layout_width="match_parent"
+		android:layout_height="0.5dp"
+		android:background="?attr/ctx_menu_info_divider"
+		android:visibility="gone"
+		tools:visibility="visible" />
 
 </LinearLayout>

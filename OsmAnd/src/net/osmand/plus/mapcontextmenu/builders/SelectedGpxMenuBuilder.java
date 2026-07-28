@@ -227,8 +227,8 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 			return;
 		}
 
-		buildCategoryView(view, app.getString(R.string.uphill_downhill_split));
 		GpxTrackAnalysis segmentAnalysis = currentSegment.analysis;
+		buildCategoryView(view, getSlopeTitle(segmentAnalysis));
 
 		buildInfoRow(view, getThemedIcon(R.drawable.ic_action_track_16), app.getString(R.string.distance),
 				OsmAndFormatter.getFormattedDistance(segmentAnalysis.getTotalDistance(), app));
@@ -251,8 +251,11 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 		}
 
 		if (segmentAnalysis.hasSpeedData()) {
-			buildInfoRow(view, getThemedIcon(R.drawable.ic_action_time_moving_16), app.getString(R.string.moving_time),
-					Algorithms.formatDuration((int) (segmentAnalysis.getTimeMoving() / 1000), app.accessibilityEnabled()));
+			String duration = Algorithms.formatDuration(segmentAnalysis.getDurationInSeconds(), app.accessibilityEnabled());
+			String timeMoving = Algorithms.formatDuration((int) (segmentAnalysis.getTimeMoving() / 1000), app.accessibilityEnabled());
+			String durationTimeMovingTitle = app.getString(R.string.duration) + " / " + app.getString(R.string.moving_time);
+			buildInfoRow(view, getThemedIcon(R.drawable.ic_action_time_span_16), durationTimeMovingTitle,
+					duration + " / " + timeMoving);
 
 			buildInfoRow(view, getThemedIcon(R.drawable.ic_action_speed_16), app.getString(R.string.average_speed),
 					OsmAndFormatter.getFormattedSpeed(segmentAnalysis.getAvgSpeed(), app));
@@ -271,17 +274,34 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 		}
 
 		if (segmentAnalysis.getTimeSpan() > 0) {
-			DateFormat tf = SimpleDateFormat.getTimeInstance(DateFormat.SHORT);
-			DateFormat df = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM);
+			DateFormat timeFormat = SimpleDateFormat.getTimeInstance(DateFormat.MEDIUM);
 
 			Date start = new Date(segmentAnalysis.getStartTime());
-			String startValue = app.getString(R.string.ltr_or_rtl_combine_via_dash, tf.format(start), df.format(start));
 			Date end = new Date(segmentAnalysis.getEndTime());
-			String endValue = app.getString(R.string.ltr_or_rtl_combine_via_dash, tf.format(end), df.format(end));
 
-			buildInfoRow(view, getThemedIcon(R.drawable.ic_action_time_start_16), app.getString(R.string.shared_string_start_time), startValue);
-			buildInfoRow(view, getThemedIcon(R.drawable.ic_action_time_end_16), app.getString(R.string.shared_string_end_time), endValue);
+			buildInfoRow(view, getThemedIcon(R.drawable.ic_action_time_start_16), app.getString(R.string.shared_string_start_time), timeFormat.format(start));
+			buildInfoRow(view, getThemedIcon(R.drawable.ic_action_time_end_16), app.getString(R.string.shared_string_end_time), timeFormat.format(end));
 		}
+	}
+
+	@NonNull
+	private String getSlopeTitle(@NonNull GpxTrackAnalysis segmentAnalysis) {
+		TrkSegment.SegmentSlopeType slopeType = segmentAnalysis.getSegmentSlopeType();
+		Integer slopeCount = segmentAnalysis.getSlopeCount();
+		if (slopeType == null || slopeCount == null) {
+			return app.getString(R.string.uphill_downhill_split);
+		}
+
+		int titleId;
+		if (slopeType == TrkSegment.SegmentSlopeType.UPHILL) {
+			titleId = R.string.shared_string_uphill;
+		} else if (slopeType == TrkSegment.SegmentSlopeType.DOWNHILL) {
+			titleId = R.string.shared_string_downhill;
+		} else {
+			titleId = R.string.shared_string_flat;
+		}
+		return app.getString(R.string.ltr_or_rtl_combine_via_space,
+				app.getString(titleId), "#" + slopeCount);
 	}
 
 	private void buildInfoRow(View view, Drawable icon, String textPrefix, String text) {

@@ -3091,7 +3091,6 @@
     <string name="update_all">Actualizați toate (%1$s MB)</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="value_downloaded_of_max">%1$.1f de %2$.1f MB</string>
-    <string name="confirm_download_roadmaps">Harta doar pentru drumuri nu este necesară, deoarece aveți harta standard (completă). O descărcați totuși\?</string>
     <string name="activate_srtm_plugin">Activați pluginul \'Topografie\'</string>
     <string name="activate_seamarks_plugin">Activați pluginul \'Hartă nautică\'</string>
     <string name="show_free_version_banner_description">Afișați bannerul versiunii gratuite chiar și în versiunea cu plată.</string>

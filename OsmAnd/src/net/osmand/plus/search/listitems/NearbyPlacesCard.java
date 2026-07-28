@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -102,6 +103,8 @@ public class NearbyPlacesCard extends FrameLayout implements DownloadItemsAdapte
 		emptyView = findViewById(R.id.empty_nearby_places);
 		noCardsFound = findViewById(R.id.no_cards_found);
 		showAllBtn = findViewById(R.id.show_all_button);
+		TextView showAllTitle = showAllBtn.findViewById(R.id.action_title);
+		showAllTitle.setText(R.string.shared_string_show_all);
 		cardContent = findViewById(R.id.card_content);
 		downloadMapsCard = findViewById(R.id.download_maps_card);
 

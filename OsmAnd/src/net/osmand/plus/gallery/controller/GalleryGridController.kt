@@ -12,6 +12,7 @@ import net.osmand.plus.gallery.data.GalleryKey
 import net.osmand.plus.gallery.model.GalleryAction
 import net.osmand.plus.gallery.model.GalleryDisplayMode
 import net.osmand.plus.gallery.model.GalleryItem
+import net.osmand.plus.gallery.model.GallerySortMode
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper
 import net.osmand.plus.gallery.ui.GalleryGridAdapter
 import net.osmand.plus.gallery.ui.GalleryGridItemDecorator
@@ -250,6 +251,8 @@ abstract class GalleryGridController(
 
 	override fun handleGalleryAction(v: View, action: GalleryAction) {}
 
+	open fun onSortModeSelected(sortMode: GallerySortMode) {}
+
 	private fun toGalleryItem(mediaItem: MediaItem): GalleryItem.Media {
 		return GalleryItem.Media(
 			mediaItem = mediaItem,
@@ -264,6 +267,7 @@ abstract class GalleryGridController(
 			onMediaClicked = ::onMediaItemClicked,
 			onReloadMediaItems = ::onReloadMediaItems,
 			onActionClicked = ::handleGalleryAction,
+			onSortModeSelected = ::onSortModeSelected,
 			mediaHolderType = { MediaHolderType.SPAN_RESIZABLE },
 			resolveResizableImageSize = { resolveSpanResizableSize(viewWidth) },
 			isLoadFailed = registry::isFailed,

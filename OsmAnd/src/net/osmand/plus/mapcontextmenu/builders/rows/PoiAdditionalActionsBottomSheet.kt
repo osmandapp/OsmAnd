@@ -11,11 +11,11 @@ import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import net.osmand.plus.R
-import net.osmand.plus.base.BaseMaterialSimpleListBottomSheet
+import net.osmand.plus.base.BaseMaterialBottomSheetWithHeader
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialog
 import net.osmand.plus.utils.AndroidUtils
 
-class PoiAdditionalActionsBottomSheet : BaseMaterialSimpleListBottomSheet(), IDialog {
+class PoiAdditionalActionsBottomSheet : BaseMaterialBottomSheetWithHeader(), IDialog {
 
 	private var controller: PoiAdditionalMultiValueDialogController? = null
 
@@ -69,7 +69,7 @@ class PoiAdditionalActionsBottomSheet : BaseMaterialSimpleListBottomSheet(), IDi
 	}
 
 	private fun createRow(parent: ViewGroup, value: String, showDivider: Boolean): View {
-		return layoutInflater.inflate(R.layout.bottom_sheet_item_active_color_text, parent, false).apply {
+		return inflate(R.layout.bottom_sheet_item_active_color_text, parent, false).apply {
 			findViewById<TextView>(R.id.itemText).text = value
 			findViewById<View>(R.id.divider).visibility = if (showDivider) View.VISIBLE else View.GONE
 			setOnClickListener {

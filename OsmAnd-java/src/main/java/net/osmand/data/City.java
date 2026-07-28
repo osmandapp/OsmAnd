@@ -127,29 +127,43 @@ public class City extends MapObject {
 		return isin.contains(name.toLowerCase());
 	}
 	
+	@Override
 	public int[] getBbox31() {
 		return bbox31;
 	}
 	
+	public void calculateBbox31FromStreets() {
+		for (Street s : getStreets()) {
+			// could be more precise with min max
+			updateBbox31WithLoc(s.getBboxPoints());
+		}
+ 	}
+	
 	public boolean updateBbox31WithLoc(LatLon location) {
-		int x = MapUtils.get31TileNumberX(location.getLongitude());
-		int y = MapUtils.get31TileNumberY(location.getLatitude());
+		return updateBbox31WithLoc(getMinBbox(location));
+	}
+	
+	public boolean updateBbox31WithLoc(QuadRect quadRect) {
+		int lx = MapUtils.get31TileNumberX(quadRect.left);
+		int rx = MapUtils.get31TileNumberX(quadRect.right);
+		int ty = MapUtils.get31TileNumberY(quadRect.top);
+		int by = MapUtils.get31TileNumberY(quadRect.bottom);
 		if (bbox31 != null) {
-			if (y > bbox31[3] || y < bbox31[1] || x > bbox31[2] || x < bbox31[0]) {
-				bbox31[0] = Math.min(x, bbox31[0]);
-				bbox31[1] = Math.min(y, bbox31[1]);
-				bbox31[2] = Math.max(x, bbox31[2]);
-				bbox31[3] = Math.max(y, bbox31[3]);
+			if (by > bbox31[3] || ty < bbox31[1] || rx > bbox31[2] || lx < bbox31[0]) {
+				bbox31[0] = Math.min(lx, bbox31[0]);
+				bbox31[1] = Math.min(ty, bbox31[1]);
+				bbox31[2] = Math.max(rx, bbox31[2]);
+				bbox31[3] = Math.max(by, bbox31[3]);
 				return true;
 			}
 		} else {
 			int cx = MapUtils.get31TileNumberX(getLocation().getLongitude());
 			int cy = MapUtils.get31TileNumberY(getLocation().getLatitude());
 			bbox31 = new int[4];
-			bbox31[0] = Math.min(x, cx);
-			bbox31[1] = Math.min(y, cy);
-			bbox31[2] = Math.max(x, cx);
-			bbox31[3] = Math.max(y, cy);
+			bbox31[0] = Math.min(lx, cx);
+			bbox31[1] = Math.min(ty, cy);
+			bbox31[2] = Math.max(rx, cx);
+			bbox31[3] = Math.max(by, cy);
 			return true;
 		}
 		return false;
@@ -366,6 +380,7 @@ public class City extends MapObject {
 		}
 		return c;
 	}
+
 
 	
 }

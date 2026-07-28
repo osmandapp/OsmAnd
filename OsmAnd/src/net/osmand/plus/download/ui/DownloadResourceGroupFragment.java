@@ -7,7 +7,6 @@ import static net.osmand.plus.download.ui.DownloadItemFragment.updateImagesPager
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -125,36 +124,25 @@ public class DownloadResourceGroupFragment extends BaseFullScreenDialogFragment
 
 		listView = view.findViewById(R.id.category_list);
 		listView.setHeaderDividersEnabled(false);
-		listView.setDivider(new ColorDrawable(ColorUtilities.getActivityBgColor(activity, nightMode)));
-		addDownloadCategoryHeader(view);
-		addFreeVersionBannerRow();
+		listView.setDivider(null);
+		addFreeVersionBannerHeader(view);
 		addSubscribeEmailRow();
 		addSearchRow();
 		addRestorePurchasesRow();
 		addDescriptionRow();
-		listView.setHeaderDividersEnabled(false);
 		listView.setOnChildClickListener(this);
 		listAdapter = new DownloadResourceGroupAdapter(activity);
 		listView.setAdapter(listAdapter);
-		listView.setHeaderDividersEnabled(false);
 
 		return view;
 	}
 
-	private void addDownloadCategoryHeader(@NonNull View view) {
-		if (openAsDialog()) {
-			View headerView = inflate(R.layout.free_version_banner_header, listView, false);
-			listView.addHeaderView(headerView);
-			banner = new BannerAndDownloadFreeVersion(view, headerView, activity, false);
-		}
-	}
-
-	private void addFreeVersionBannerRow() {
-		if (!openAsDialog()) {
-			View bannerView = inflate(R.layout.free_version_banner_header, listView, false);
-			listView.addHeaderView(bannerView);
-			banner = new BannerAndDownloadFreeVersion(bannerView, activity, false);
-		}
+	private void addFreeVersionBannerHeader(@NonNull View view) {
+		View headerView = inflate(R.layout.free_version_banner_header, listView, false);
+		listView.addHeaderView(headerView);
+		banner = openAsDialog()
+				? new BannerAndDownloadFreeVersion(view, headerView, activity, false)
+				: new BannerAndDownloadFreeVersion(headerView, activity, false);
 	}
 
 	@Override

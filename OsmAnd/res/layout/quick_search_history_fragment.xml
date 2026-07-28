@@ -93,11 +93,36 @@
 
 		</androidx.appcompat.widget.Toolbar>
 
-		<net.osmand.plus.search.dialogs.QuickSearchChipsToolbarView
-			android:id="@+id/chips_toolbar"
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:background="?attr/ctx_menu_info_divider" />
+
+		<LinearLayout
+			android:id="@+id/chips_toolbar_container"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:background="?attr/activity_background_color" />
+			android:background="?attr/activity_background_color"
+			android:orientation="vertical"
+			android:paddingStart="@dimen/content_padding"
+			android:paddingTop="@dimen/content_padding_small"
+			android:paddingEnd="@dimen/content_padding"
+			android:paddingBottom="@dimen/content_padding_small">
+
+			<net.osmand.plus.search.dialogs.ChipsLayout
+				android:id="@+id/chips_toolbar"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" />
+
+			<net.osmand.plus.search.dialogs.ChipsLayout
+				android:id="@+id/type_chips_toolbar"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/content_padding_small"
+				android:visibility="gone"
+				tools:visibility="visible" />
+
+		</LinearLayout>
 
 	</com.google.android.material.appbar.AppBarLayout>
 

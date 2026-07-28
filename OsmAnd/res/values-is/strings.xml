@@ -1272,7 +1272,6 @@
     <string name="layer_osm_bugs">OSM-minnispunktar (nettengt)</string>
     <string name="commiting_node">Sendi inn hnút…</string>
     <string name="poi_error_info_not_loaded">Upplýsingum um hnút var ekki hlaðið inn</string>
-    <string name="confirm_download_roadmaps">Kortið sem eingöngu er með vegum er ekki nauðsynlegt, þar sem þú ert þegar með staðlaða (fulla útgáfu) kortsins. Sækja það samt?</string>
     <string name="rendering_attr_depthContours_description">Birta dýptarlínur og punkta.</string>
     <string name="rendering_attr_depthContours_name">Dýptarlínur sjávar</string>
     <string name="rendering_attr_contourDensity_description">Þéttleiki hæðarlína</string>
@@ -5214,7 +5213,6 @@
     <string name="ais_receive_in_background">Taka við AIS-gögnum jafnvel þó OsmAnd sé í bið.</string>
     <string name="change_media_storage_question">Breyta geymslu fyrir gögn?</string>
     <string name="media_storage_directory_not_writable">Ekki var hægt að vista gögn í uppgefnu möppuna</string>
-    <string name="auto_copy_media_to_osmand_storage">Afrita gögn sjálfvirkt yfir í geymslurými OsmAnd</string>
     <string name="no_media_descr">Þú getur bætt við ljósmyndum, myndskeiðum eða hljóðminnispunktum úr myndavélinni þinni eða myndasafni.</string>
     <string name="tracks_backup_promo_description">Samstilltu ferlana þína á milli tækja og vefja með OsmAnd Pro.</string>
     <string name="coordinate_format_add_empty_title">Ertu að leita að sérstöku sniði?</string>

@@ -1246,7 +1246,6 @@ failu(s)?
     <string name="nm">nm</string>
     <string name="nm_h">nm/h</string>
     <string name="routing_attr_avoid_shuttle_train_description">Izvairīties no starppilsētu vilcieniem</string>
-    <string name="confirm_download_roadmaps">Jums jau ir standarta (pilnā) karte, vai lejupielādēt arī ceļu sazarojuma karti?</string>
     <string name="value_downloaded_of_max">%1$.1f no %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Atjaunināt visu (%1$s MB)</string>

@@ -37,6 +37,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 	protected Long id = null;
 	private Object referenceFile = null;
 	
+	public static final String NAME_REF_ATTR = "ref";
 	public static final String NAME_PLACE_ATTR = "place";
 	public static final String NAME_ADMIN_LEVEL_ATTR = "admin_level";
 	public static final String NAME_WIKIDATA_ATTR = "wikidata";
@@ -252,8 +253,12 @@ public abstract class MapObject implements Comparable<MapObject> {
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " " + name + "(" + (id == null || id < 0 ? id
-				: ObfConstants.getOsmIdFromMapObjectId(id)) + ")";
+		// no ternary here: mixing Long and long operands unboxes a null id and throws NPE
+		Long osmId = id;
+		if (id != null && id >= 0) {
+			osmId = ObfConstants.getOsmIdFromMapObjectId(id);
+		}
+		return getClass().getSimpleName() + " " + name + "(" + osmId + ")";
 	}
 
 	@Override
@@ -418,6 +423,13 @@ public abstract class MapObject implements Comparable<MapObject> {
 		}
 	}
 
+	protected QuadRect getMinBbox(LatLon ll) {
+		double d = 0.002;
+		QuadRect qr = new QuadRect(ll.getLongitude() - d, ll.getLatitude() + d, 
+				ll.getLongitude() + d, ll.getLatitude() - d);
+		return qr;
+	}
+	
 	public static boolean isNameLangTag(String tag) {
 		if (tag.startsWith("name:")) {
 			// languages code <= 3
@@ -430,6 +442,10 @@ public abstract class MapObject implements Comparable<MapObject> {
 			}
 		}
 		return false;
+	}
+	
+	public int[] getBbox31() {
+		return null;
 	}
 
 	public String getWikidata() {

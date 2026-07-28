@@ -13,6 +13,7 @@ import static net.osmand.shared.grid.ButtonPositionSize.*;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
@@ -89,6 +90,12 @@ public class MapHudLayout extends FrameLayout {
 	private final Paint slotPaintFill = new Paint();
 	private final Paint framePaintStroke = new Paint();
 
+	private boolean externalVisibleAreaApplied;
+	private int basePaddingLeft;
+	private int basePaddingTop;
+	private int basePaddingRight;
+	private int basePaddingBottom;
+
 	public MapHudLayout(@NonNull Context context) {
 		this(context, null);
 	}
@@ -152,6 +159,60 @@ public class MapHudLayout extends FrameLayout {
 		mapTransparencyLayout = findViewById(R.id.map_transparency_layout);
 
 		setupPositions();
+	}
+
+	public boolean setExternalVisibleArea(@NonNull Rect visibleArea) {
+		if (getWidth() <= 0 || getHeight() <= 0) {
+			return false;
+		}
+		if (!externalVisibleAreaApplied) {
+			basePaddingLeft = getPaddingLeft();
+			basePaddingTop = getPaddingTop();
+			basePaddingRight = getPaddingRight();
+			basePaddingBottom = getPaddingBottom();
+		}
+
+		int[] location = new int[2];
+		getLocationOnScreen(location);
+		int left = Math.max(0, visibleArea.left - location[0]);
+		int top = Math.max(0, visibleArea.top - location[1]);
+		int right = Math.max(0, location[0] + getWidth() - visibleArea.right);
+		int bottom = Math.max(0, location[1] + getHeight() - visibleArea.bottom);
+
+		int paddingLeft = Math.max(basePaddingLeft, left);
+		int paddingTop = Math.max(basePaddingTop, top);
+		int paddingRight = Math.max(basePaddingRight, right);
+		int paddingBottom = Math.max(basePaddingBottom, bottom);
+		boolean changed = getPaddingLeft() != paddingLeft || getPaddingTop() != paddingTop
+				|| getPaddingRight() != paddingRight || getPaddingBottom() != paddingBottom;
+		externalVisibleAreaApplied = true;
+		if (changed) {
+			setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
+			refresh();
+		}
+		return changed;
+	}
+
+	public boolean clearExternalVisibleArea() {
+		if (!externalVisibleAreaApplied) {
+			return false;
+		}
+		externalVisibleAreaApplied = false;
+		boolean changed = getPaddingLeft() != basePaddingLeft || getPaddingTop() != basePaddingTop
+				|| getPaddingRight() != basePaddingRight || getPaddingBottom() != basePaddingBottom;
+		if (changed) {
+			setPadding(basePaddingLeft, basePaddingTop, basePaddingRight, basePaddingBottom);
+			refresh();
+		}
+		return changed;
+	}
+
+	private int getContentWidth() {
+		return Math.max(0, getWidth() - getPaddingLeft() - getPaddingRight());
+	}
+
+	private int getContentHeight() {
+		return Math.max(0, getHeight() - getPaddingTop() - getPaddingBottom());
 	}
 
 	private void setupPositions() {
@@ -281,8 +342,8 @@ public class MapHudLayout extends FrameLayout {
 		Map<View, ButtonPositionSize> map = collectPositions();
 		List<ButtonPositionSize> list = new ArrayList<>(map.values());
 
-		int width = Math.round(getWidth() / dpToPx / CELL_SIZE_DP);
-		int height = Math.round(getHeight() / dpToPx / CELL_SIZE_DP);
+		int width = Math.round(getContentWidth() / dpToPx / CELL_SIZE_DP);
+		int height = Math.round(getContentHeight() / dpToPx / CELL_SIZE_DP);
 
 		if (DEV_GRID_LAYOUT_SHOW_LOGS) {
 			LOG.info("--------START-------- Grid size: width " + width + " height " + height);
@@ -479,13 +540,13 @@ public class MapHudLayout extends FrameLayout {
 		if (panel == null || panel.getVisibility() != VISIBLE) {
 			return false;
 		}
-		float availableHeight = getHeight() - topButtonsMargin;
+		float availableHeight = getContentHeight() - topButtonsMargin;
 		return panel.getHeight() > availableHeight;
 	}
 
 	private void calcGridPositionFromPixel(@NonNull View view, @NonNull ButtonPositionSize position) {
-		int width = getWidth();
-		int height = getHeight();
+		int width = getContentWidth();
+		int height = getContentHeight();
 		boolean top = position.isTop();
 		boolean left = position.isLeft();
 
@@ -570,8 +631,8 @@ public class MapHudLayout extends FrameLayout {
 		MapButtonState buttonState = button.getButtonState();
 		ButtonPositionSize positionSize = buttonState != null ? buttonState.getPositionSize() : null;
 		if (buttonState != null) {
-			int width = getWidth();
-			int height = getHeight();
+			int width = getContentWidth();
+			int height = getContentHeight();
 			LayoutParams params = (LayoutParams) button.getLayoutParams();
 
 			positionSize.calcGridPositionFromPixel(dpToPx, width, height,
@@ -633,7 +694,7 @@ public class MapHudLayout extends FrameLayout {
 	}
 
 	private void updateHorizontalMargins(@Nullable VerticalWidgetPanel panel) {
-		int totalWidth = getWidth();
+		int totalWidth = getContentWidth();
 		if (panel == null || leftWidgetsPanel == null || rightWidgetsPanel == null || totalWidth <= 0) {
 			return;
 		}

@@ -2211,7 +2211,6 @@
     <string name="activate_srtm_plugin">Palun aktiveeri \'Topograafia\' lisamoodul</string>
     <string name="later">Hiljem</string>
     <string name="downloads">Allalaadimised</string>
-    <string name="confirm_download_roadmaps">Ainult maanteede kaarti pole vaja, sest sul on tavaline (täielik) kaart. Kas soovid selle ikkagi alla laadida\?</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="other_menu_group">Muu</string>
     <string name="plugins_menu_group">Lisad</string>

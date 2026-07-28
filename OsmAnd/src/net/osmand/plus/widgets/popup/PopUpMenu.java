@@ -43,6 +43,7 @@ public class PopUpMenu {
 
 		int contentPadding = getDimension(ctx, R.dimen.content_padding);
 		int contentPaddingHalf = getDimension(ctx, R.dimen.content_padding_half);
+		int textMarginSmall = getDimension(ctx, R.dimen.text_margin_small);
 		int standardIconSize = getDimension(ctx, R.dimen.standard_icon_size);
 		float maxItemWidth = 0;
 
@@ -54,6 +55,15 @@ public class PopUpMenu {
 			float w = AndroidUtils.getTextWidth(null, textSize, String.valueOf(item.getTitle())) + contentPadding * 2;
 			if (item.getIcon() != null) {
 				w += standardIconSize + contentPaddingHalf;
+			}
+			PopUpMenuItem.TrailingBadge trailingBadge = item.getTrailingBadge();
+			if (trailingBadge != null) {
+				float badgeTextWidth = AndroidUtils.getTextWidth(null, textSize,
+						String.valueOf(trailingBadge.getTitle()));
+				w += badgeTextWidth + textMarginSmall * 3 + contentPaddingHalf;
+				if (trailingBadge.getIcon() != null) {
+					w += standardIconSize;
+				}
 			}
 			if (w > maxItemWidth) {
 				maxItemWidth = w;
