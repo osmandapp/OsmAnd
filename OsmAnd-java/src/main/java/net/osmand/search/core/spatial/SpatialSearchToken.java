@@ -693,8 +693,8 @@ public class SpatialSearchToken {
 
 	}
 
-
-	
-
+	public String getToken() {
+		return word;
+	}
 
 }
