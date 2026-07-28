@@ -3,9 +3,7 @@ package net.osmand.search.core.spatial;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import gnu.trove.list.array.TLongArrayList;
 import gnu.trove.map.hash.TLongObjectHashMap;
@@ -34,7 +32,9 @@ public class SpatialStagePipeline {
     
     private final SpatialSearchContext ctx;
     public static final int MAX_SUPPORTED_TOKENS = 31;
-    public static int MAX_STEPS = 3; // 1 - fully covered, 2 - 1 intersecction ,...
+    
+	public static int EXCLUDE_MASKS = 5000; // speed up
+    public static int MAX_STEPS = 5; // 1 - fully covered, 2 - 1 intersecction ,...
 
     public SpatialStagePipeline(SpatialSearchContext ctx) {
         this.ctx = ctx;
@@ -127,6 +127,56 @@ public class SpatialStagePipeline {
 		}
 
     }
+    
+    private static class MasksStats {
+    	TLongObjectHashMap<Integer> masks = new TLongObjectHashMap<Integer>();
+
+		int count(SpatialObjectRes obj) {
+			Integer cnt = masks.get(obj.mainMask);
+			if (cnt == null) {
+				cnt = 1;
+			} else {
+				cnt++;
+			}
+			masks.put(obj.mainMask, cnt);
+			return cnt;
+		}
+    }
+    
+    /**
+	 * Helper method to format bitmask bits into a readable list of token words.
+	 * Accommodates the 2-bits-per-token indexing scheme.
+	 */
+	static String formatMaskTokens(long mask, List<SpatialSearchToken> tokens) {
+	    StringBuilder sb = new StringBuilder("[");
+	    boolean first = true;
+	    
+	    // Track processed tokens to avoid printing the same token twice if both bits are set
+	    int lastTokenIndex = -1;
+
+	    for (int bit = 0; bit < 64; bit++) {
+	        if ((mask & (1L << bit)) != 0) {
+	            // Convert bit position to token index (2 bits per token)
+	            int tokenIndex = bit >> 1; 
+
+	            if (tokenIndex != lastTokenIndex) {
+	                if (!first) {
+	                    sb.append(", ");
+	                }
+	                if (tokens != null && tokenIndex < tokens.size() && tokens.get(tokenIndex) != null) {
+	                    String word = tokens.get(tokenIndex).word;
+	                    sb.append(word != null ? word : "T" + tokenIndex);
+	                } else {
+	                    sb.append("T").append(tokenIndex);
+	                }
+	                first = false;
+	                lastTokenIndex = tokenIndex;
+	            }
+	        }
+	    }
+	    sb.append("]");
+	    return sb.toString();
+	}
 
     
     public static class SpatialPipelineResults {
@@ -134,8 +184,12 @@ public class SpatialStagePipeline {
 		public SpatialPipelineResults(List<SpatialSearchToken> tokens) {
 			this.tokens = tokens;
 		}
+		
 		// stage 1
 		public final TLongObjectHashMap<SpatialObjectRes> objectsById = new TLongObjectHashMap<>();
+		public final TLongHashSet excludedMasks = new TLongHashSet();
+		
+		public final List<MasksStats> masksStats = new ArrayList<>();
         public final HashSkipTileQuadTree<SpatialObjectRes> allObjectsTree = new HashSkipTileQuadTree<>();
         public final HashSkipTileQuadTree<SpatialObjectRes> areaObjectsTree = new HashSkipTileQuadTree<>();
 		// stage 2, 3+        
@@ -202,8 +256,20 @@ public class SpatialStagePipeline {
 				}
 			}
 		}
-        
+		// calculate excluded masks
+		MasksStats masksStats = new MasksStats();
 		for (SpatialObjectRes obj : prep.objectsById.valueCollection()) {
+			int cnt = masksStats.count(obj);
+			if (cnt > EXCLUDE_MASKS) {
+				prep.excludedMasks.add(obj.mainMask);
+			}
+		}
+		prep.masksStats.add(masksStats);
+		
+		for (SpatialObjectRes obj : prep.objectsById.valueCollection()) {
+			if (prep.excludedMasks.contains(obj.mainMask)) {
+				continue;
+			}
 			prep.allObjectsTree.addObject(obj, obj.mainAtom1.coords.bbox31, obj.mainAtom1.id);
 			if (obj.mainAtom1.isGeoArea()) {
 				prep.areaObjectsTree.addObject(obj, obj.mainAtom1.coords.bbox31, obj.mainAtom1.id);
@@ -285,7 +351,7 @@ public class SpatialStagePipeline {
 		}
 //		SpatialStagePipelineStats.evaluateMaskIntersections(prep);
 //		SpatialStagePipelineStats.printTree(prep);
-		SpatialStagePipelineStats.printTokenTree(prep);
+//		SpatialStagePipelineStats.printTokenTree(prep);
 		
 		// STEP 1
 		List<SpatialObjectRes> singleResults = new ArrayList<>();
@@ -324,6 +390,31 @@ public class SpatialStagePipeline {
 			exit = join(prep, stage, joiner, time);
 			time = System.nanoTime();
 		}
+		// check potential missing results
+		long[] excl = prep.excludedMasks.toArray();
+		System.out.println("Excluded masks: " + excl.length);
+		MasksStats baseMasksStats = prep.masksStats.get(0);
+		for (int i = 0; i < MAX_STEPS && i < prep.masksStats.size(); i++) {
+			MasksStats masksStats = prep.masksStats.get(i);
+			int numIntersections = i + 2; // i - calculated + 1 excluded + 1 human reading
+			for (int k = 0; k < excl.length; k++) {
+				long maskExcl = excl[k];
+				for (long m : masksStats.masks.keys()) {
+					if (!SpatialObjectRes.allowed(m, maskExcl)) {
+						continue;
+					}
+					long combined = SpatialObjectRes.combine2BitMasks(m, maskExcl, tokensSize);
+					if (SpatialObjectRes.countCoveredTokens(combined) == tokensSize) {
+						Integer c1 = baseMasksStats.masks.get(maskExcl);
+						Integer c2 = masksStats.masks.get(m);
+						System.out.printf("Potential results %d intersections - missing %s (%,d) x %s (%,d) = %,d \n",
+								numIntersections, formatMaskTokens(maskExcl, prep.tokens), c1, formatMaskTokens(m, prep.tokens),
+								c2, c1 * c2);
+					}
+				}
+
+			}
+		}
 
 		return prep.combinations;
 	}
@@ -335,6 +426,8 @@ public class SpatialStagePipeline {
 		final int tokensSize = prep.tokens.size();
 		HashSkipTileQuadTree<SpatialObjectRes> pairsTree = new HashSkipTileQuadTree<>();
 		prep.pairsTree.add(pairsTree);
+		final MasksStats ms = new MasksStats();
+		prep.masksStats.add(ms);
 		int[] itStats = new int[] {0, 0, 0};
 		if (ctx.stats.printLogs) {
 			System.out.printf("PIPELINE STAGE %d INTERSECT - %,d x %,d tree...\n", stage, 
@@ -345,7 +438,7 @@ public class SpatialStagePipeline {
 			if (!SpatialObjectRes.allowed(e1.obj.mainMask, e2.obj.mainMask)) {
 				return;
 			}
-			// TODO this is covered by mask
+			// TODO check preformance this is covered by mask
 //			if (e1.objId <= e2.objId) {
 //				return; // skip 1 side pairs by id
 //			} else 
@@ -355,6 +448,7 @@ public class SpatialStagePipeline {
 			if (stage == 1 && !acceptPairSemantic(ctx, res)) {
 				return;
 			}
+			ms.count(res);
 			if (SpatialObjectRes.countCoveredTokens(combinedMask) == tokensSize) {
 				// TODO add combinations from combined mask
 				itStats[2]++;

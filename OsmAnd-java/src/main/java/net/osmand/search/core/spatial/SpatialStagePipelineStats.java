@@ -1,7 +1,6 @@
 package net.osmand.search.core.spatial;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -230,7 +229,7 @@ public class SpatialStagePipelineStats {
 	        int bitCount = SpatialObjectRes.countCoveredTokens(mask);
 	        double share = (count * 100.0) / totalObjects;
 
-	        String tokensRepresentation = formatMaskTokens(mask, tokens);
+	        String tokensRepresentation = SpatialStagePipeline.formatMaskTokens(mask, tokens);
 
 	        System.out.printf("#%-5d | %-8d | %,12d | %6.2f%%    | %-45s\n", 
 	                (i + 1), bitCount, count, share, tokensRepresentation);
@@ -238,40 +237,6 @@ public class SpatialStagePipelineStats {
 	    System.out.println("==========================================================================================");
 	}
 
-	/**
-	 * Helper method to format bitmask bits into a readable list of token words.
-	 * Accommodates the 2-bits-per-token indexing scheme.
-	 */
-	private static String formatMaskTokens(long mask, List<SpatialSearchToken> tokens) {
-	    StringBuilder sb = new StringBuilder("[");
-	    boolean first = true;
-	    
-	    // Track processed tokens to avoid printing the same token twice if both bits are set
-	    int lastTokenIndex = -1;
-
-	    for (int bit = 0; bit < 64; bit++) {
-	        if ((mask & (1L << bit)) != 0) {
-	            // Convert bit position to token index (2 bits per token)
-	            int tokenIndex = bit >> 1; 
-
-	            if (tokenIndex != lastTokenIndex) {
-	                if (!first) {
-	                    sb.append(", ");
-	                }
-	                if (tokens != null && tokenIndex < tokens.size() && tokens.get(tokenIndex) != null) {
-	                    String word = tokens.get(tokenIndex).word;
-	                    sb.append(word != null ? word : "T" + tokenIndex);
-	                } else {
-	                    sb.append("T").append(tokenIndex);
-	                }
-	                first = false;
-	                lastTokenIndex = tokenIndex;
-	            }
-	        }
-	    }
-	    sb.append("]");
-	    return sb.toString();
-	}
 	
 	/////////////////////////////////////////////////
 	public static void evaluateMaskIntersections(SpatialPipelineResults prep) {
