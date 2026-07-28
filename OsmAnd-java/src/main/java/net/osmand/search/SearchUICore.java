@@ -798,7 +798,7 @@ public class SearchUICore {
 					if (onSearchStart != null) {
 						onSearchStart.run();
 					}
-					final SearchPerformanceStats performanceStats = new SearchPerformanceStats(getSearchType());
+					final SearchPerformanceStats performanceStats = new SearchPerformanceStats(isSpatialSearch() ? "spatial" : "general");
 					final SearchResultMatcher rm = new SearchResultMatcher(matcher, phrase, request, requestNumber, totalLimit,
 							performanceStats);
 					if (debugMode) {
@@ -902,13 +902,6 @@ public class SearchUICore {
 				}
 			}
 		});
-	}
-
-	private String getSearchType() {
-		if (isSpatialSearch()) {
-			return "spatial";
-		}
-		return "general";
 	}
 
 	private boolean isSpatialSearch() {
