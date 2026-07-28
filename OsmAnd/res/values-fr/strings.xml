@@ -2593,7 +2593,7 @@
     <string name="speed_camera_pois">POI radars</string>
     <string name="shared_string_uninstall">Désinstaller</string>
     <string name="speed_cameras_alert">Les alertes radars sont interdites par la loi dans certains pays.</string>
-    <string name="shared_string_bearing">Roulement</string>
+    <string name="shared_string_bearing">Direction</string>
     <string name="item_deleted">%1$s supprimé</string>
     <string name="shared_string_uninstall_and_restart">Désinstaller et redémarrer</string>
     <string name="routing_attr_length_description">Indiquer la longueur du véhicule autorisée sur les routes.</string>
@@ -5120,9 +5120,9 @@
     <string name="camera_folder">Dossier « Appareil photo »</string>
     <string name="media_storage_main_storage_descr">Les fichiers sont enregistrés dans la mémoire interne de l\'application. Ils ne sont pas visibles dans la Galerie ni dans les autres applications.</string>
     <string name="media_storage_shared_storage_descr">Les fichiers sont enregistrés dans des dossiers publics (« Images », « Vidéos », « Musique »). Ils sont visibles dans la Galerie et sur Google Photos.</string>
-    <string name="shared_string_note">Remarque</string>
-    <string name="media_storage_camera_folder_note_descr">les fichiers audio sont enregistrés dans le dossier « Musique/OsmAnd ».</string>
-    <string name="media_storage_camera_folder_descr">Les fichiers sont enregistrés dans la pellicule. %1$s</string>
+    <string name="shared_string_note">Note</string>
+    <string name="media_storage_camera_folder_note_descr">Les fichiers audio sont stockés dans le dossier « Music/OsmAnd ».</string>
+    <string name="media_storage_camera_folder_descr">Les fichiers sont stockés dans le dossier pellicule. %1$s</string>
     <string name="media_storage_manually_specified_descr">Les fichiers sont enregistrés dans un dossier personnalisé et classés par type (audio, photo, vidéo).</string>
     <string name="change_media_storage_question">Modifier l\'emplacement du stockage ?</string>
     <string name="change_media_storage_full_description">Déplacer les fichiers multimédias existants vers la nouvelle destination ?\n%1$s &gt; %2$s</string>
@@ -5252,4 +5252,6 @@
     <string name="duplicate_map">Dupliquer la carte</string>
     <string name="use_spatial_text_search">Utiliser la recherche textuelle spatiale</string>
     <string name="use_spatial_text_search_description">Remplacer les API de recherche rapide standard par le moteur de recherche textuelle spatiale expérimental.</string>
+    <string name="always_keep_local_copy">Toujours conserver une copie locale</string>
+    <string name="always_keep_local_copy_description">L’élément média est conservé même dans le cas où l\'original est supprimé de la galerie ou des fichiers.</string>
 </resources>
