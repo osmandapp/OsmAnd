@@ -24,6 +24,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -82,7 +83,7 @@ public class AdditionalInfoBundle {
 	}
 
 	public Map<String, Object> getVisibleTagInfo() {
-		Map<String, Object> result = new HashMap<>();
+		Map<String, Object> result = new LinkedHashMap<>();
 		for (Map.Entry<String, Object> entry : getFilteredLocalizedInfo().entrySet()) {
 			String key = entry.getKey();
 			if (!shouldDisplayKey(key) || isKeyToSkip(key)) {
@@ -111,11 +112,17 @@ public class AdditionalInfoBundle {
 		if (!(localizationsObj instanceof Map)) {
 			return value;
 		}
-		Map<String, String> filtered = new HashMap<>();
+		Map<String, String> filtered = new LinkedHashMap<>();
+		boolean anySkipped = false;
 		for (Map.Entry<String, String> loc : ((Map<String, String>) localizationsObj).entrySet()) {
-			if (!isKeyToSkip(loc.getKey())) {
+			if (isKeyToSkip(loc.getKey())) {
+				anySkipped = true;
+			} else {
 				filtered.put(loc.getKey(), loc.getValue());
 			}
+		}
+		if (anySkipped) {
+			filtered.keySet().removeIf(key -> !key.contains(":"));
 		}
 		if (filtered.isEmpty()) {
 			return null;
