@@ -178,7 +178,7 @@ public class SpatialTextSearch {
 		}
 		
 		public static SpatialTextSearchSettings searchPoiByCategorySettings(int zoom, QuadRect r) {
-			int shift = 4; // test 3, 4, 5, 6
+			int shift = 3; // test 3, 4, 5, 6
 			SpatialTextSearchSettings settings = new SpatialTextSearchSettings();
 			settings.ALLOW_HOUSE_POI_TYPE_INTERSECTION = false;
 			settings.SEARCH_ADDR = false;

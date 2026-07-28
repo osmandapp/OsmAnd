@@ -544,13 +544,18 @@ public class SpatialSearchContext {
 			}
 		}
 		int z = 16 - settings.SEARCH_POI_BY_CATEGORY_ZOOM;
-		if (z >= 0) {
-			long tileId = MapUtils.interleaveBits(x16 >> z, y16 >> z);
-			if (t.cacheCategoryFilterObjects.contains(tileId) && a.getEloRatingCount() == 0) {
-				return true;
-			}
-			t.cacheCategoryFilterObjects.add(tileId);
+		return skipZoomTileDuplicate(t.cacheCategoryFilterObjects, x16, y16, z, a.getEloRatingCount() > 0);
+	}
+
+	static boolean skipZoomTileDuplicate(TLongHashSet tiles, int x16, int y16, int z, boolean hasRating) {
+		if (z < 0) {
+			return false;
 		}
+		long tileId = MapUtils.interleaveBits(x16 >> z, y16 >> z);
+		if (tiles.contains(tileId) && !hasRating) {
+			return true;
+		}
+		tiles.add(tileId);
 		return false;
 	}
 	
