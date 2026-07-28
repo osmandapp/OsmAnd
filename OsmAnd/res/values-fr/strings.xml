@@ -2593,7 +2593,7 @@
     <string name="speed_camera_pois">POI radars</string>
     <string name="shared_string_uninstall">Désinstaller</string>
     <string name="speed_cameras_alert">Les alertes radars sont interdites par la loi dans certains pays.</string>
-    <string name="shared_string_bearing">Direction</string>
+    <string name="shared_string_bearing">Roulement</string>
     <string name="item_deleted">%1$s supprimé</string>
     <string name="shared_string_uninstall_and_restart">Désinstaller et redémarrer</string>
     <string name="routing_attr_length_description">Indiquer la longueur du véhicule autorisée sur les routes.</string>
