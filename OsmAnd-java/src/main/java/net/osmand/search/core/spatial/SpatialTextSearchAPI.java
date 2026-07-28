@@ -17,6 +17,7 @@ import net.osmand.data.City;
 import net.osmand.data.City.CityType;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
+import net.osmand.data.QuadRect;
 import net.osmand.data.Street;
 import net.osmand.map.OsmandRegions;
 import net.osmand.osm.AbstractPoiType;
@@ -33,6 +34,7 @@ import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialSearchResults;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSettings;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -145,7 +147,7 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 			return false;
 		}
 		List<Amenity> amenities = poiSearch.loadPOIObjects(context, spatialPoiType, location,
-				context.settings.SUGGESTED_SEARCH_RADIUS_KM * 1000, phrase.getSettings().getTotalLimit());
+				getPoiTypeSearchRadius(phrase, location), phrase.getSettings().getTotalLimit());
 		for (Amenity amenity : amenities) {
 			if (resultMatcher.isCancelled()) {
 				return false;
@@ -178,6 +180,21 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		context.stats.doTiming = phrase.getSettings().getStat() != null;
 		context.stats.printLogs = true;
 		return context;
+	}
+
+	private int getPoiTypeSearchRadius(SearchPhrase phrase, LatLon location) {
+		QuadRect searchBBox31 = phrase.getSettings().getSearchBBox31();
+		if (searchBBox31 == null) {
+			return phrase.getRadiusSearch(10_000);
+		}
+		double leftLon = MapUtils.get31LongitudeX((int) searchBBox31.left);
+		double rightLon = MapUtils.get31LongitudeX((int) searchBBox31.right);
+		double topLat = MapUtils.get31LatitudeY((int) searchBBox31.top);
+		double bottomLat = MapUtils.get31LatitudeY((int) searchBBox31.bottom);
+		double radius = Math.max(
+				MapUtils.getDistance(location.getLatitude(), location.getLongitude(), topLat, leftLon),
+				MapUtils.getDistance(location.getLatitude(), location.getLongitude(), bottomLat, rightLon));
+		return Math.max(1, (int) Math.ceil(radius));
 	}
 
 	private SearchResult createSelectedPoiTypeResult(SearchPhrase phrase, Amenity amenity) {
@@ -290,17 +307,15 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 	private SearchResult convertResult(SearchPhrase phrase, SpatialSearchContext context,
 	                                   SpatialSearchResult spatialResult) {
 		MapObject mainObject = spatialResult.getMainObject();
-		SpatialPoiSearch.SpatialPoiType poiType = spatialResult.getPoiCategory(context.poiSearch);
 
 		SearchResult result = mainObject != null
-				? convertMainObject(phrase, context, spatialResult, mainObject)
-				: convertPoiType(phrase, poiType);
+				? convertMainObject(phrase, spatialResult, mainObject)
+				: convertPoiType(phrase, spatialResult, context);
 		if (result == null) {
 			return null;
 		}
 		result.spatialSearchVisibleLevel = spatialResult.visibleLevel();
-		List<MapObject> matchedObjects = spatialResult.getObjects();
-		result.matchedObjects = Algorithms.isEmpty(matchedObjects) ? null : matchedObjects;
+		result.spatialResult = spatialResult;
 		if (spatialResult.getLatLon() != null) {
 			result.location = spatialResult.getLatLon();
 		}
@@ -310,12 +325,8 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		return result;
 	}
 
-	private SearchResult convertMainObject(SearchPhrase phrase, SpatialSearchContext context,
+	private SearchResult convertMainObject(SearchPhrase phrase,
 	                                       SpatialSearchResult spatialResult, MapObject mainObject) {
-		SpatialSearchResultRef mainRef = getRef(spatialResult, mainObject);
-		if (mainRef != null) {
-			return convertRef(phrase, context, spatialResult, mainRef);
-		}
 		SearchResult result = new SearchResult(phrase);
 		result.object = mainObject;
 		result.objectType = getObjectType(null, mainObject, spatialResult);
@@ -342,46 +353,13 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		return null;
 	}
 
-	private SearchResult convertRef(SearchPhrase phrase, SpatialSearchContext context,
-	                                SpatialSearchResult spatialResult, SpatialSearchResultRef ref) {
-		NameIndexAtom atom = ref.atom;
-		if (atom.isPoiCategory()) {
-			return convertPoiType(phrase, context, atom);
-		}
-		MapObject object = atom.bldObject != null ? atom.bldObject : atom.object;
-		if (object == null) {
-			return null;
-		}
-		SearchResult result = new SearchResult(phrase);
-		result.object = object;
-		result.objectType = getObjectType(atom, object, spatialResult);
-		result.location = spatialResult.getLatLon() != null && result.objectType == ObjectType.HOUSE
-				? spatialResult.getLatLon()
-				: atom.getResultLocation();
-		result.localeName = getLocaleName(object, phrase);
-		result.otherNames = object.getOtherNames(true, result.localeName);
-		result.file = getFile(context, atom);
-		result.priority = SEARCH_PRIORITY;
-		result.priorityDistance = 1;
-		result.preferredZoom = getPreferredZoom(result.objectType);
-		fillRelatedObject(result, atom, phrase);
-		if (object instanceof Amenity amenity) {
-			result.cityName = amenity.getCityFromTagGroups(phrase.getSettings().getLang());
-		}
-		phrase.countUnknownWordsMatchMainResult(result);
-		return result;
-	}
+	private SearchResult convertPoiType(SearchPhrase phrase, SpatialSearchResult spatialResult, SpatialSearchContext context) {
+		SpatialPoiSearch.SpatialPoiType spatialPoiType = spatialResult.getPoiCategory(context.poiSearch);
 
-	private SearchResult convertPoiType(SearchPhrase phrase, SpatialSearchContext context, NameIndexAtom atom) {
-		SpatialPoiSearch.SpatialPoiType spatialPoiType = context.poiSearch.getById((int) atom.id);
-		return convertPoiType(phrase, spatialPoiType);
-	}
-
-	private SearchResult convertPoiType(SearchPhrase phrase, SpatialPoiSearch.SpatialPoiType spatialPoiType) {
 		if (spatialPoiType == null) {
 			return null;
 		}
-		Object object;
+		Object object = null;
 		String localeName;
 		AbstractPoiType poiType = spatialPoiType.singleType;
 		if (poiType != null) {

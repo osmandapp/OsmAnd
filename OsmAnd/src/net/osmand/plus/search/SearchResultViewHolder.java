@@ -22,6 +22,7 @@ import com.squareup.picasso.RequestCreator;
 
 import net.osmand.StringMatcher;
 import net.osmand.data.Amenity;
+import net.osmand.data.MapObject;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -40,6 +41,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
+import net.osmand.search.core.spatial.SpatialSearchResult;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 import net.osmand.util.OpeningHoursParser.OpeningHours;
@@ -77,6 +79,15 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 		title.setText(item.getSpannableName());
 
 		String desc = item.getTypeName();
+		if (item.getSearchResult() != null && item.getSearchResult().spatialResult != null) {
+			SpatialSearchResult spatialResult = item.getSearchResult().spatialResult;
+			if (spatialResult.isPoiCategory()) {
+				MapObject refObject = spatialResult.getReferenceObject();
+				if (refObject != null) {
+					desc = String.format("%s • %s", desc, refObject.getName());
+				}
+			}
+		}
 		Object searchResultObject = item.getSearchResult().object;
 		if (searchResultObject instanceof AbstractPoiType) {
 			AbstractPoiType abstractPoiType = (AbstractPoiType) searchResultObject;

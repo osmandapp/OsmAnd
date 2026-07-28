@@ -54,7 +54,7 @@ public class SpatialPoiSearch {
 	public static class SpatialPoiType {
 		public final AbstractPoiType singleType;
 		public final String poiAdditional;
-		final PoiSubType poiSubType;
+		public final PoiSubType poiSubType;
 		final List<String> names = new ArrayList<String>();
 		final String key;
 		final int id;
