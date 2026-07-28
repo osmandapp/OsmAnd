@@ -31,7 +31,7 @@ public class SpatialStagePipeline {
     
     private final SpatialSearchContext ctx;
     public static final int MAX_SUPPORTED_TOKENS = 31;
-    public static int MAX_STEPS = 2; // 1 - fully covered, 2 - 1 intersecction ,...
+    public static int MAX_STEPS = 8; // 1 - fully covered, 2 - 1 intersecction ,...
 
     public SpatialStagePipeline(SpatialSearchContext ctx) {
         this.ctx = ctx;
@@ -137,6 +137,8 @@ public class SpatialStagePipeline {
         public final HashSkipTileQuadTree<SpatialObjectRes> areaObjectsTree = new HashSkipTileQuadTree<>();
 		// stage 2, 3+        
 		public final List<HashSkipTileQuadTree<SpatialObjectRes>> pairsTree = new ArrayList<>();
+		
+		public final List<SpatialSearchResultsList> combinations = new ArrayList<SpatialSearchResultsList>();
         
     }
 
@@ -210,14 +212,15 @@ public class SpatialStagePipeline {
 	}
 
 	
-	private boolean validateStageAndFinish(List<SpatialSearchResultsList> combinations, List<SpatialSearchToken> tokens,
-			int[] intStats, List<SpatialObjectRes> preResults, int stage, long ptime) throws IOException {
+	private boolean validateStageAndFinish(SpatialPipelineResults prep, int[] intStats,
+			List<SpatialObjectRes> preResults, int stage, long ptime) throws IOException {
 		
 		long time = System.nanoTime();
 		if (ctx.stats.printLogs) {
 			String intersections = "";
 			if (intStats != null) {
-				intersections = String.format(" (cross %,d, accept %,d)", intStats[0], intStats[1]);
+				intersections = String.format(" (cross %,d, partial %,d, full %,d)", intStats[0], intStats[1] - intStats[2],
+						intStats[2]);
 			}
 			System.out.printf("PIPELINE STAGE %d FIND (%.1f ms) - %,d results %s \n", stage, (time - ptime) / 1e6,
 					preResults.size(), intersections);
@@ -227,20 +230,20 @@ public class SpatialStagePipeline {
 		}
 		int nonCategoryRes = 0;
 		if (!preResults.isEmpty()) {
-			SpatialSearchResultsList stageList = createResultList(tokens, preResults);
+			SpatialSearchResultsList stageList = createResultList(prep.tokens, preResults);
 			stageList.loadObjectsAndCalcBuildings(ctx);
 			if (ctx.isCancelled()) {
 				return true;
 			}
 			List<SpatialSearchResult> res = stageList.sortResults(ctx, ctx.settings.DEDUPLICATE_RES);
-			int tsize = tokens.size();
+			int tsize = prep.tokens.size();
 			for (SpatialSearchResult r : res) {
 				if (!r.isPoiCategory() && r.surplusWords + r.matchedTokens() == tsize) {
 					nonCategoryRes++;
 				}
 			}
 			if ((res.size() > 0 && stage == 0) || nonCategoryRes > 0) {
-				combinations.add(stageList);
+				prep.combinations.add(stageList);
 			}
 		}
 		if (ctx.stats.printLogs) {
@@ -264,7 +267,6 @@ public class SpatialStagePipeline {
 		}
 		final int tokensSize = tokens.size();
 		long time = System.nanoTime();
-		List<SpatialSearchResultsList> combinations = new ArrayList<SpatialSearchResultsList>();
 
 		// STEP 0 PREPARE
 		int stage = 0;
@@ -275,7 +277,7 @@ public class SpatialStagePipeline {
 		}
 		time = System.nanoTime();
 		if (stage++ >= MAX_STEPS || ctx.isCancelled()) {
-			return combinations;
+			return prep.combinations;
 		}
 		
 		// STEP 1
@@ -285,20 +287,20 @@ public class SpatialStagePipeline {
 				singleResults.add(obj);
 			}
 		}
-		if (validateStageAndFinish(combinations, tokens, null, singleResults, stage, time)) {
-			return combinations;
+		if (validateStageAndFinish(prep, null, singleResults, stage, time)) {
+			return prep.combinations;
 		}
 		time = System.nanoTime();
 		if (stage++ >= MAX_STEPS || ctx.isCancelled()) {
-			return combinations;
+			return prep.combinations;
 		}
 		
 		// STEP 2: Spatial Join Pairs
 		HashSkipTileQuadTreeJoiner<SpatialObjectRes, SpatialObjectRes> selfJoiner = new HashSkipTileQuadTreeJoiner<>(
 				prep.allObjectsTree, prep.allObjectsTree);
-		boolean exit = join(prep, tokens, combinations, stage, selfJoiner, time);
+		boolean exit = join(prep, stage, selfJoiner, time);
 		if (stage++ >= MAX_STEPS || ctx.isCancelled() || exit) {
-			return combinations;
+			return prep.combinations;
 		}
 		time = System.nanoTime();
 		
@@ -311,18 +313,18 @@ public class SpatialStagePipeline {
 			lastTree.build();
 			HashSkipTileQuadTreeJoiner<SpatialObjectRes, SpatialObjectRes> joiner = new HashSkipTileQuadTreeJoiner<>(
 					lastTree, prep.areaObjectsTree);
-			exit = join(prep, tokens, combinations, stage, joiner, time);
+			exit = join(prep, stage, joiner, time);
 			time = System.nanoTime();
 		}
 
-		return combinations;
+		return prep.combinations;
 	}
 
 
-	private boolean join(SpatialPipelineResults prep,List<SpatialSearchToken> tokens, List<SpatialSearchResultsList> combinations,
-			int stage, HashSkipTileQuadTreeJoiner<SpatialObjectRes, SpatialObjectRes> joiner, long time) throws IOException {
+	private boolean join(SpatialPipelineResults prep, int stage,
+			HashSkipTileQuadTreeJoiner<SpatialObjectRes, SpatialObjectRes> joiner, long time) throws IOException {
 		List<SpatialObjectRes> pairResults = new ArrayList<>();
-		final int tokensSize = tokens.size();
+		final int tokensSize = prep.tokens.size();
 		HashSkipTileQuadTree<SpatialObjectRes> pairsTree = new HashSkipTileQuadTree<>();
 		prep.pairsTree.add(pairsTree);
 		int[] itStats = new int[] {0, 0, 0};
@@ -345,9 +347,9 @@ public class SpatialStagePipeline {
 			if (stage == 1 && !acceptPairSemantic(ctx, res)) {
 				return;
 			}
-			itStats[2]++;
 			if (SpatialObjectRes.countCoveredTokens(combinedMask) == tokensSize) {
 				// TODO add combinations from combined mask
+				itStats[2]++;
 				pairResults.add(res);
 				return;
 			}
@@ -357,7 +359,7 @@ public class SpatialStagePipeline {
 			pairsTree.addObject(res, clippedBBox, -1);
 		});
 
-		if (validateStageAndFinish(combinations, tokens, itStats, pairResults, stage, time)) {
+		if (validateStageAndFinish(prep, itStats, pairResults, stage, time)) {
 			return true;
 		}
 		return false;
