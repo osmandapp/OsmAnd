@@ -170,6 +170,9 @@ public class SpatialTextSearch {
 		// overall max without results (evaluate maximum 3 missing words)
 		public int MAX_TOTAL_LIMIT_GOAL_LEVEL = 3;
 		////////////////////////////////////////
+
+		//////// PIPELINE ALGORITHM ////////
+		public int[] MAX_PIPELINE_STAGE_TO_STOP = new int[] {100, 500};
 		
 		
 		public double evalEnlargeBoundary(Map<Integer, Double> mp, double dim) {

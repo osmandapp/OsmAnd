@@ -544,6 +544,10 @@ public class HashSkipTileQuadTree<T> {
 		return res;
 	}
 	
+	public boolean isEmpty() {
+		return tileEntries.isEmpty();
+	}
+	
 	public List<TileEntry<T>> getTileEntries() {
 		return tileEntries;
 	}

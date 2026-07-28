@@ -280,6 +280,14 @@ public class SpatialSearchTestAndDocs {
 //		query = "PA 75 27193"; // +'PA75', +'PA-75', +'PA 75'  Data 'PA-75', 27193  4472676432
 //		query = "PA 75"; // Yes - ('PA 75', 'PA-75'), YES - 'PA75'
 //		query = "PA 21";  // 1336083883 DATA 'PA21' (+!'PA 21', +'PA-21',+'PA21') 
+
+		pattern = "Us_texas";
+//		query = "Avenue G, Dickinson"; // 26308264745
+//		query = "2419 Avenue G, Dickinson, TX USA";
+		query = "2419 Avenue G, Dickinson, 77539 TX USA";
+		query = "2419 Avenue G Dickinson, 77539 TX USA";
+//		query = "TX";
+
 		
 //		pattern = "Us_penn";
 //		pattern = "Map";
@@ -287,11 +295,6 @@ public class SpatialSearchTestAndDocs {
 //		query = "Pennsylvania 1282 14871";
 //		query = "14871 Pennsylvania Avenue Pine City";
 //		query = "14871 Pennsylvania Avenue";
-//		pattern = "Us_texas";
-//		query = "Avenue G, Dickinson"; // 26308264745
-//		query = "2419 Avenue G, Dickinson, TX USA";
-//		query = "2419 Avenue G, Dickinson, 77539 TX USA";
-//		query = "TX";
 
 //		pattern = "Liechtenstein_europe_2.obf";
 //		query = "Vaduz Lettstrasse";
@@ -309,9 +312,9 @@ public class SpatialSearchTestAndDocs {
 //		query = "Vaduz ";
 //		query = "Jugendheim Malbun";
 
-		pattern = "Netherlands_";
+//		pattern = "Netherlands_";
 //		location = new LatLon(52.2827, 4.8601);
-		query = "harderwijk estrado"; // 't2+0-w2-oth1-tp4' t2+0-w2-oth2-tp0
+//		query = "harderwijk estrado"; // 't2+0-w2-oth1-tp4' t2+0-w2-oth2-tp0
 //		query = "harderwijk";
 //		query = "cafe harderwijk";
 //		query = "hotel amsterdam";
@@ -445,7 +448,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "New York 55 st"; // 'NY s.' - 0.5s 100k, 'NY st' - 2s (700k)
 		// 40.64946, -74.00682 - unit test '4th av', '4 ave', '4th avenue' 241843204, 247910224, 85393997 (..) brooklyn - not 48
 		// 40.78035, -73.96572 - unit test '4th av', '4 ave', '4th avenue'  - 85393997 Park avenue
-//		settings.DEV_USE_SKIP_HASH_TREE = false;
+//		settings.DEV_USE_PIPELINE = false;
 //		query = "New York 4 av 8";
 //		query = "New York av 8";
 //		query = "4 ave 8";
@@ -479,12 +482,12 @@ public class SpatialSearchTestAndDocs {
 		// See test - [8-8 Kinshi 3 Kinshi Sumida Tokyo], Rivière Tsumura
 		// India - Satyam node/2296788005#map=18/17.805646/83.356818
 		// +[Venezia, Cannaregio, 539D , Campo Saffa], +[Venezia Cannaregio 539D ] -[Venezia 539D  Campo Saffa] - expected
-		pattern = "Italy_ven";
+//		pattern = "Italy_ven";
 //		pattern = "Map";
 //		pattern2 = "World_basemap_2";
 		// ! unit test - search full address ! no double 539d (no intersectoin)
 		// Cannaregio 539D Campo Saffa, Venezia Cannaregio Campo Saffa  , 
-		query = "Venezia Cannaregio Campo Saffa ";
+//		query = "Venezia Cannaregio Campo Saffa ";
 //		query = "Cannaregio 539D Campo Saffa";
 //		query = "Venezia Cannaregio 539D Campo Saffa";
 //		query = "Campo Saffa";
@@ -505,6 +508,7 @@ public class SpatialSearchTestAndDocs {
 		
 //		pattern = "Us_cal";
 //		pattern2 = "regions";
+//		settings.DEV_USE_PIPELINE = false;
 //		query = "Golden State Road Los Angeles United States"; // matched only 5?, United States - not found
 //		query = "Sylmar United States"; // not found
 //		query = "United States"; // not found 
