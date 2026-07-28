@@ -33,7 +33,7 @@ public class SpatialStagePipeline {
     private final SpatialSearchContext ctx;
     public static final int MAX_SUPPORTED_TOKENS = 31;
     
-	public static int EXCLUDE_MASKS = 5000; // speed up
+	public static int EXCLUDE_MASKS = 8000; // speed up
     public static int MAX_STEPS = 5; // 1 - fully covered, 2 - 1 intersecction ,...
 
     public SpatialStagePipeline(SpatialSearchContext ctx) {
@@ -130,6 +130,11 @@ public class SpatialStagePipeline {
     
     private static class MasksStats {
     	TLongObjectHashMap<Integer> masks = new TLongObjectHashMap<Integer>();
+    	public final int intersections;
+
+		public MasksStats(int intersections) {
+			this.intersections = intersections;
+		}
 
 		int count(SpatialObjectRes obj) {
 			Integer cnt = masks.get(obj.mainMask);
@@ -187,7 +192,7 @@ public class SpatialStagePipeline {
 		
 		// stage 1
 		public final TLongObjectHashMap<SpatialObjectRes> objectsById = new TLongObjectHashMap<>();
-		public final TLongHashSet excludedMasks = new TLongHashSet();
+		public final TLongObjectHashMap<List<SpatialObjectRes>> excludedMasks = new TLongObjectHashMap<List<SpatialObjectRes>>();
 		
 		public final List<MasksStats> masksStats = new ArrayList<>();
         public final HashSkipTileQuadTree<SpatialObjectRes> allObjectsTree = new HashSkipTileQuadTree<>();
@@ -257,17 +262,21 @@ public class SpatialStagePipeline {
 			}
 		}
 		// calculate excluded masks
-		MasksStats masksStats = new MasksStats();
+		MasksStats masksStats = new MasksStats(1);
 		for (SpatialObjectRes obj : prep.objectsById.valueCollection()) {
-			int cnt = masksStats.count(obj);
-			if (cnt > EXCLUDE_MASKS) {
-				prep.excludedMasks.add(obj.mainMask);
-			}
+			masksStats.count(obj);
 		}
 		prep.masksStats.add(masksStats);
 		
 		for (SpatialObjectRes obj : prep.objectsById.valueCollection()) {
-			if (prep.excludedMasks.contains(obj.mainMask)) {
+			Integer cnt = masksStats.masks.get(obj.mainMask);
+			if (cnt > EXCLUDE_MASKS) {
+				List<SpatialObjectRes> elst = prep.excludedMasks.get(obj.mainMask);
+				if (elst == null) {
+					elst = new ArrayList<>();
+					prep.excludedMasks.put(obj.mainMask, elst);
+				}
+				elst.add(obj);
 				continue;
 			}
 			prep.allObjectsTree.addObject(obj, obj.mainAtom1.coords.bbox31, obj.mainAtom1.id);
@@ -391,32 +400,65 @@ public class SpatialStagePipeline {
 			time = System.nanoTime();
 		}
 		// check potential missing results
-		long[] excl = prep.excludedMasks.toArray();
-		System.out.println("Excluded masks: " + excl.length);
-		MasksStats baseMasksStats = prep.masksStats.get(0);
-		for (int i = 0; i < MAX_STEPS && i < prep.masksStats.size(); i++) {
-			MasksStats masksStats = prep.masksStats.get(i);
-			int numIntersections = i + 2; // i - calculated + 1 excluded + 1 human reading
-			for (int k = 0; k < excl.length; k++) {
-				long maskExcl = excl[k];
-				for (long m : masksStats.masks.keys()) {
-					if (!SpatialObjectRes.allowed(m, maskExcl)) {
-						continue;
-					}
-					long combined = SpatialObjectRes.combine2BitMasks(m, maskExcl, tokensSize);
-					if (SpatialObjectRes.countCoveredTokens(combined) == tokensSize) {
-						Integer c1 = baseMasksStats.masks.get(maskExcl);
-						Integer c2 = masksStats.masks.get(m);
-						System.out.printf("Potential results %d intersections - missing %s (%,d) x %s (%,d) = %,d \n",
-								numIntersections, formatMaskTokens(maskExcl, prep.tokens), c1, formatMaskTokens(m, prep.tokens),
-								c2, c1 * c2);
-					}
-				}
-
-			}
-		}
+		checkExcluded(tokensSize, prep);
 
 		return prep.combinations;
+	}
+
+
+	private void checkExcluded(final int tokensSize, SpatialPipelineResults prep) throws IOException {
+		long[] excl = prep.excludedMasks.keys();
+		System.out.println("Excluded masks: " + excl.length);
+		MasksStats baseMasksStats = prep.masksStats.get(0);
+		long time = System.nanoTime();
+		for (int stage = 1; stage < MAX_STEPS && stage < prep.masksStats.size(); stage++) {
+			for (int i = 0; i < prep.masksStats.size(); i++) {
+				MasksStats masksStats = prep.masksStats.get(i);
+				if (masksStats.intersections != stage) {
+					continue;
+				}
+				HashSkipTileQuadTree<SpatialObjectRes> partialTree = i == 0 ? prep.allObjectsTree
+						: prep.pairsTree.get(i - 1);
+
+				TLongHashSet found = new TLongHashSet();
+				for (int k = 0; k < excl.length; k++) {
+					long maskExcl = excl[k];
+					for (long m : masksStats.masks.keys()) {
+						if (!SpatialObjectRes.allowed(m, maskExcl)) {
+							continue;
+						}
+						long combined = SpatialObjectRes.combine2BitMasks(m, maskExcl, tokensSize);
+						if (SpatialObjectRes.countCoveredTokens(combined) == tokensSize) {
+							Integer c1 = baseMasksStats.masks.get(maskExcl);
+							Integer c2 = masksStats.masks.get(m);
+							System.out.printf("Potential results %d intersections - missing %s (%,d) x %s (%,d < %,d ) = %,d \n",
+									stage + 1, formatMaskTokens(maskExcl, prep.tokens), c1,
+									formatMaskTokens(m, prep.tokens), c2, partialTree.getSize(), c1 * c2);
+							found.add(maskExcl);
+						}
+					}
+				}
+				if (found.size() == 0) {
+					continue;
+				}
+				HashSkipTileQuadTree<SpatialObjectRes> exclTree = new HashSkipTileQuadTree<>();
+				for (long exclMask : found.toArray()) {
+					for (SpatialObjectRes r : prep.excludedMasks.get(exclMask)) {
+						exclTree.addObject(r, r.mainAtom1.coords.bbox31, r.mainAtom1.id);
+					}
+				}
+				exclTree.build();
+
+				partialTree.build();
+				HashSkipTileQuadTreeJoiner<SpatialObjectRes, SpatialObjectRes> tailJoiner = new HashSkipTileQuadTreeJoiner<>(
+						partialTree, exclTree);
+				boolean exit = join(prep, stage + 1, tailJoiner, time);
+				if (ctx.isCancelled() || exit) {
+					return;
+				}
+				time = System.nanoTime();
+			}
+		}
 	}
 
 
@@ -426,7 +468,7 @@ public class SpatialStagePipeline {
 		final int tokensSize = prep.tokens.size();
 		HashSkipTileQuadTree<SpatialObjectRes> pairsTree = new HashSkipTileQuadTree<>();
 		prep.pairsTree.add(pairsTree);
-		final MasksStats ms = new MasksStats();
+		final MasksStats ms = new MasksStats(stage);
 		prep.masksStats.add(ms);
 		int[] itStats = new int[] {0, 0, 0};
 		if (ctx.stats.printLogs) {
