@@ -79,15 +79,17 @@ class NativeCrashHandler {
 	@RequiresApi(api = Build.VERSION_CODES.S)
 	private void saveCrashLogsApi31(@NonNull List<File> savedLogs) {
 		for (ApplicationExitInfo exitInfo : getExitReasonsApi31()) {
-			if (savedLogs.stream().anyMatch(file -> file.lastModified() == exitInfo.getTimestamp())) {
+			if (savedLogs.stream().anyMatch(file -> Math.abs(file.lastModified() - exitInfo.getTimestamp()) < 1000)) {
 				continue;
 			}
-			File file = savedLogs.size() < MAX_CRASH_LOGS ? createCrashLogFile() : savedLogs.get(savedLogs.size() - 1);
+			File file = createCrashLogFile();
 			if (saveCrashLog(exitInfo, file)) {
-				file.setLastModified(exitInfo.getTimestamp());
-				savedLogs.remove(file);
 				savedLogs.add(file);
 				savedLogs.sort(NEWEST_FIRST);
+
+				if (savedLogs.size() > MAX_CRASH_LOGS) {
+					Algorithms.removeAllFiles(savedLogs.remove(savedLogs.size() - 1));
+				}
 			}
 		}
 	}
@@ -111,10 +113,13 @@ class NativeCrashHandler {
 			try (FileOutputStream outputStream = new FileOutputStream(file, false)) {
 				Algorithms.streamCopy(inputStream, outputStream);
 			}
-			return FileUtils.isNonEmptyFile(file);
+			if (FileUtils.isNonEmptyFile(file) && file.setLastModified(exitInfo.getTimestamp())) {
+				return true;
+			}
 		} catch (IOException | RuntimeException e) {
 			log.error(e);
-			return false;
 		}
+		Algorithms.removeAllFiles(file);
+		return false;
 	}
 }
