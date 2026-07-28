@@ -47,6 +47,7 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 @SuppressLint({"NewApi", "DefaultLocale"})
@@ -60,6 +61,7 @@ public class DownloadIndexesThread {
 	private final DownloadFileHelper downloadFileHelper;
 	private final List<BasicProgressAsyncTask<?, ?, ?, ?>> currentRunningTask = Collections.synchronizedList(new ArrayList<>());
 	private final ConcurrentLinkedQueue<IndexItem> indexItemDownloading = new ConcurrentLinkedQueue<>();
+	private final Map<String, List<File>> pendingFilesToDelete = new ConcurrentHashMap<>();
 
 	private DownloadEvents uiActivity;
 	private IndexItem currentDownloadingItem;
@@ -258,6 +260,14 @@ public class DownloadIndexesThread {
 	}
 
 	public void runDownloadFiles(IndexItem... items) {
+		enqueueDownloadFiles(Collections.emptyList(), items);
+	}
+
+	public void runDownloadFileWithPendingCleanup(@NonNull IndexItem item, @NonNull List<File> filesToDelete) {
+		enqueueDownloadFiles(filesToDelete, item);
+	}
+
+	private void enqueueDownloadFiles(@NonNull List<File> filesToDelete, IndexItem... items) {
 		if (getCurrentRunningTask() instanceof ReloadIndexesTask) {
 			if (checkRunning(false)) {
 				return;
@@ -268,6 +278,9 @@ public class DownloadIndexesThread {
 		}
 		for (IndexItem item : items) {
 			if (!isCurrentDownloading(item) && !indexItemDownloading.contains(item)) {
+				if (!filesToDelete.isEmpty()) {
+					pendingFilesToDelete.put(getTargetFileKey(item.getTargetFile(app)), new ArrayList<>(filesToDelete));
+				}
 				indexItemDownloading.add(item);
 			}
 		}
@@ -279,14 +292,12 @@ public class DownloadIndexesThread {
 	}
 
 	public void cancelDownload(DownloadItem item) {
-		if (item instanceof MultipleDownloadItem) {
-			MultipleDownloadItem multipleDownloadItem = (MultipleDownloadItem) item;
+		if (item instanceof MultipleDownloadItem multipleDownloadItem) {
 			cancelDownload(multipleDownloadItem.getAllIndexes());
-		} else if (item instanceof SrtmDownloadItem) {
-			IndexItem indexItem = ((SrtmDownloadItem) item).getIndexItem(this);
+		} else if (item instanceof SrtmDownloadItem srtmDownloadItem) {
+			IndexItem indexItem = srtmDownloadItem.getIndexItem(this);
 			cancelDownload(indexItem);
-		} else if (item instanceof IndexItem) {
-			IndexItem indexItem = (IndexItem) item;
+		} else if (item instanceof IndexItem indexItem) {
 			cancelDownload(indexItem);
 		}
 	}
@@ -315,6 +326,7 @@ public class DownloadIndexesThread {
 			downloadFileHelper.setInterruptDownloading(true);
 		} else {
 			indexItemDownloading.remove(item);
+			clearPendingFilesToDelete(item);
 			if (forceUpdateProgress) {
 				downloadInProgress();
 			}
@@ -528,11 +540,18 @@ public class DownloadIndexesThread {
 						IndexItem item = indexItemDownloading.poll();
 						currentDownloadingItem = item;
 						resetDownloadProgress();
-						if (item == null || currentDownloads.contains(item)) {
+						if (item == null) {
+							continue;
+						}
+						if (currentDownloads.contains(item)) {
+							// Skip duplicate queue entry. Replacement cleanup is valid only for a download
+							// started by this entry, so clear it when the entry is not processed.
+							clearPendingFilesToDelete(item);
 							continue;
 						}
 						currentDownloads.add(item);
 						if (!validateEnoughSpace(item) || !validateNotExceedsFreeLimit(item)) {
+							clearPendingFilesToDelete(item);
 							break;
 						}
 						setTag(item);
@@ -577,6 +596,10 @@ public class DownloadIndexesThread {
 						}
 					}
 				} finally {
+					if (currentDownloadingItem != null) {
+						clearPendingFilesToDelete(currentDownloadingItem);
+					}
+					clearPendingFilesToDelete(indexItemDownloading);
 					currentDownloadingItem = null;
 					resetDownloadProgress();
 				}
@@ -651,8 +674,11 @@ public class DownloadIndexesThread {
 			DownloadEntry de = item.createDownloadEntry(app);
 			boolean result = false;
 			if (de == null) {
+				clearPendingFilesToDelete(item);
 				return false;
-			} else if (de.isAsset) {
+			}
+			de.filesToDeleteAfterSuccessfulInstall = pendingFilesToDelete.remove(getTargetFileKey(de.targetFile));
+			if (de.isAsset) {
 				try {
 					if (ctx != null) {
 						boolean changedDate = ResourceManager.copyAssets(ctx.getAssets(), de.assetName, de.targetFile, de.dateModified);
@@ -694,6 +720,21 @@ public class DownloadIndexesThread {
 		private void resetDownloadProgress() {
 			currentDownloadProgress = 0;
 		}
+	}
+
+	private void clearPendingFilesToDelete(@NonNull Iterable<IndexItem> items) {
+		for (IndexItem item : items) {
+			clearPendingFilesToDelete(item);
+		}
+	}
+
+	private void clearPendingFilesToDelete(@NonNull IndexItem item) {
+		pendingFilesToDelete.remove(getTargetFileKey(item.getTargetFile(app)));
+	}
+
+	@NonNull
+	private static String getTargetFileKey(@NonNull File targetFile) {
+		return targetFile.getAbsolutePath();
 	}
 
 	private void checkDownload(IndexItem item, long downloadTime) {

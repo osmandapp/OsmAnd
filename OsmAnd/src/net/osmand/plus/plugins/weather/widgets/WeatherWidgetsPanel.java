@@ -15,21 +15,23 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.WidgetsContainer;
-import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.OutlinedTextContainer;
 import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.appearance.ResolvedPanelAppearance;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -115,11 +117,14 @@ public class WeatherWidgetsPanel extends LinearLayout implements WidgetsContaine
 	}
 
 	@Override
-	public void updateColors(@NonNull TextState textState) {
+	public void applyPanelAppearance(@NonNull ResolvedPanelAppearance appearance) {
+		OsmandApplication app = AndroidUtils.getApp(getContext());
+		ResolvedPanelAppearance forecastAppearance = app.getPanelAppearanceSettingsManager().resolve(
+				appearance.getPanel(), ScreenLayoutMode.getDefault(getContext()), nightMode,
+				appearance.getBoldText(), getResources().getDisplayMetrics().density, true);
 		for (WeatherWidget widget : weatherWidgets) {
 			View widgetView = widget.getView();
-			textState.night = nightMode;
-			widget.updateColors(textState);
+			widget.applyPanelAppearance(forecastAppearance);
 			widgetView.findViewById(R.id.widget_bg).setBackgroundResource(nightMode ? R.color.list_background_color_dark : R.color.widget_background_color_light);
 			OutlinedTextContainer widgetText = widgetView.findViewById(R.id.widget_text);
 

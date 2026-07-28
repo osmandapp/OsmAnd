@@ -25,11 +25,12 @@ import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatterParams;
-import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.LanesDrawable;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.appearance.PanelAppearanceApplier;
+import net.osmand.plus.views.mapwidgets.appearance.ResolvedPanelAppearance;
 import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.TurnType;
 
@@ -175,14 +176,14 @@ public class LanesWidget extends MapWidget {
 		}
 	}
 
-	public void updateColors(@NonNull TextState textState) {
-		super.updateColors(textState);
+	@Override
+	protected void onPanelAppearanceChanged(@NonNull ResolvedPanelAppearance appearance) {
+		super.onPanelAppearanceChanged(appearance);
 
-		getView().setBackgroundResource(textState.boxFree);
+		PanelAppearanceApplier.applyBackground(getView(), appearance);
 
-		shadowRadius = textState.textShadowRadius / 2;
-		updateTextColor(lanesText, lanesShadowText, textState.textColor,
-				textState.textShadowColor, textState.textBold, shadowRadius);
+		shadowRadius = appearance.getTextShadowRadius() / 2;
+		PanelAppearanceApplier.applyPrimaryText(lanesText, lanesShadowText, appearance, shadowRadius);
 	}
 
 	@Override
@@ -197,6 +198,11 @@ public class LanesWidget extends MapWidget {
 		} else {
 			container.addView(view);
 		}
+	}
+
+	@Override
+	public boolean supportsPanelRowDivider() {
+		return !specialPosition;
 	}
 
 	@Override

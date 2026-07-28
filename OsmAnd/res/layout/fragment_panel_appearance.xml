@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/scroll_view"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/activity_background_color"
+	android:clipToPadding="false">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<LinearLayout
+			android:id="@+id/parameters_card"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="?attr/list_background_color"
+			android:orientation="vertical">
+
+			<include
+				android:id="@+id/height_button"
+				layout="@layout/item_appearance_selector" />
+
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:layout_marginStart="72dp"
+				android:background="?attr/dashboard_divider"
+				android:focusable="false" />
+
+			<include
+				android:id="@+id/icon_button"
+				layout="@layout/item_appearance_selector" />
+
+		</LinearLayout>
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/parameters_description"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingHorizontal="@dimen/content_padding"
+			android:paddingVertical="@dimen/content_padding_small"
+			android:textColor="?android:textColorSecondary"
+			android:textSize="@dimen/default_desc_text_size" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/appearance_section_title"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="?attr/list_background_color"
+			android:paddingHorizontal="@dimen/content_padding"
+			android:paddingTop="@dimen/content_padding"
+			android:paddingBottom="@dimen/content_padding_small"
+			android:text="@string/shared_string_appearance"
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/default_list_text_size"
+			app:typefaceWeight="medium" />
+
+		<LinearLayout
+			android:id="@+id/appearance_card"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="?attr/list_background_color"
+			android:orientation="vertical">
+
+			<include
+				android:id="@+id/text_color_button"
+				layout="@layout/item_appearance_selector" />
+
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:layout_marginStart="72dp"
+				android:background="?attr/dashboard_divider"
+				android:focusable="false" />
+
+			<include
+				android:id="@+id/secondary_text_color_button"
+				layout="@layout/item_appearance_selector" />
+
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:layout_marginStart="72dp"
+				android:background="?attr/dashboard_divider"
+				android:focusable="false" />
+
+			<include
+				android:id="@+id/background_color_button"
+				layout="@layout/item_appearance_selector" />
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

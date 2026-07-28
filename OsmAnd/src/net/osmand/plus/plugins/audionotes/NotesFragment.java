@@ -4,8 +4,11 @@ import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.NOTES_TAB;
 
 import android.app.Activity;
+import android.content.ClipData;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.*;
@@ -24,47 +27,68 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ActionBarProgressActivity;
 import net.osmand.plus.base.BaseOsmAndListFragment;
+import net.osmand.plus.gallery.attached.helpers.AttachedMediaDataHelper;
+import net.osmand.plus.gallery.data.Cancellable;
+import net.osmand.plus.gallery.data.GalleryMediaMetadata;
+import net.osmand.plus.gallery.data.MediaMetadataListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu.NativeShareDialogBuilder;
 import net.osmand.plus.myplaces.MyPlacesActivity;
+import net.osmand.plus.myplaces.favorites.FavoritesListener;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.ItemMenuBottomSheetDialogFragment.ItemMenuFragmentListener;
 import net.osmand.plus.plugins.audionotes.adapters.NotesAdapter;
 import net.osmand.plus.plugins.audionotes.adapters.NotesAdapter.NotesAdapterListener;
+import net.osmand.plus.settings.mediastorage.MediaStorageHelper;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
+import net.osmand.shared.gpx.primitives.Link;
+import net.osmand.shared.gpx.primitives.Linkable;
+import net.osmand.shared.gpx.primitives.WptPt;
+import net.osmand.shared.media.LinkMediaFactory;
+import net.osmand.shared.media.MediaUriResolver;
+import net.osmand.shared.media.domain.MediaItem;
 
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class NotesFragment extends BaseOsmAndListFragment implements FragmentStateHolder {
 
-	public static final Recording SHARE_LOCATION_FILE = new Recording(new File("."));
+	public static final MediaNote SHARE_LOCATION_FILE = MediaNote.createShareLocationItem();
 
 	private static final Log LOG = PlatformUtil.getLog(NotesFragment.class);
 	private static final int MODE_DELETE = 100;
 	private static final int MODE_SHARE = 101;
 
 	private AudioVideoNotesPlugin plugin;
+	private AttachedMediaDataHelper attachedMediaDataHelper;
+	private MediaStorageHelper mediaStorageHelper;
 	private NotesAdapter listAdapter;
-	private final Set<Recording> selected = new HashSet<>();
+	private final Set<MediaNote> selected = new HashSet<>();
 
 	private ShareRecordingsTask shareRecordingsTask;
+	private Cancellable metadataRequest;
 
 	private View footerView;
 	private View emptyView;
@@ -73,6 +97,17 @@ public class NotesFragment extends BaseOsmAndListFragment implements FragmentSta
 	private int selectedItemPosition = -1;
 
 	private ActionMode actionMode;
+	private final FavoritesListener favoritesListener = new FavoritesListener() {
+		@Override
+		public void onFavoritesLoaded() {
+			app.runInUIThread(NotesFragment.this::reloadMediaNotes);
+		}
+
+		@Override
+		public void onFavoriteDataUpdated(@NonNull FavouritePoint point) {
+			app.runInUIThread(NotesFragment.this::reloadMediaNotes);
+		}
+	};
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -84,6 +119,8 @@ public class NotesFragment extends BaseOsmAndListFragment implements FragmentSta
 		}
 
 		plugin = PluginsHelper.getActivePlugin(AudioVideoNotesPlugin.class);
+		attachedMediaDataHelper = new AttachedMediaDataHelper(app);
+		mediaStorageHelper = new MediaStorageHelper(app);
 		setHasOptionsMenu(true);
 
 		View view = inflate(R.layout.update_index, container, false);
@@ -108,6 +145,18 @@ public class NotesFragment extends BaseOsmAndListFragment implements FragmentSta
 	}
 
 	@Override
+	public void onStart() {
+		super.onStart();
+		app.getFavoritesHelper().addListener(favoritesListener);
+	}
+
+	@Override
+	public void onStop() {
+		app.getFavoritesHelper().removeListener(favoritesListener);
+		super.onStop();
+	}
+
+	@Override
 	public void onResume() {
 		super.onResume();
 		boolean portrait = AndroidUiHelper.isOrientationPortrait(requireActivity());
@@ -128,6 +177,7 @@ public class NotesFragment extends BaseOsmAndListFragment implements FragmentSta
 		listAdapter.setPortrait(portrait);
 		listView.setAdapter(listAdapter);
 		restoreState(getArguments());
+		requestAttachedMediaMetadata(items);
 	}
 
 	@Override
@@ -135,6 +185,10 @@ public class NotesFragment extends BaseOsmAndListFragment implements FragmentSta
 		super.onPause();
 		if (actionMode != null) {
 			actionMode.finish();
+		}
+		if (metadataRequest != null) {
+			metadataRequest.cancel();
+			metadataRequest = null;
 		}
 	}
 
@@ -181,24 +235,24 @@ public class NotesFragment extends BaseOsmAndListFragment implements FragmentSta
 	}
 
 	private List<Object> createItemsList() {
-		List<Recording> recs = new LinkedList<>(plugin.getAllRecordings());
+		List<MediaNote> notes = collectMediaNotes();
 		List<Object> res = new LinkedList<>();
-		if (!recs.isEmpty()) {
+		if (!notes.isEmpty()) {
 			NotesSortByMode sortByMode = plugin.NOTES_SORT_BY_MODE.get();
 			if (sortByMode.isByDate()) {
 				res.add(NotesAdapter.TYPE_DATE_HEADER);
-				res.addAll(sortRecsByDateDescending(recs));
+				res.addAll(sortNotesByDateDescending(notes));
 			} else if (sortByMode.isByType()) {
-				List<Recording> audios = new LinkedList<>();
-				List<Recording> photos = new LinkedList<>();
-				List<Recording> videos = new LinkedList<>();
-				for (Recording rec : recs) {
-					if (rec.isAudio()) {
-						audios.add(rec);
-					} else if (rec.isPhoto()) {
-						photos.add(rec);
+				List<MediaNote> audios = new LinkedList<>();
+				List<MediaNote> photos = new LinkedList<>();
+				List<MediaNote> videos = new LinkedList<>();
+				for (MediaNote note : notes) {
+					if (note.isAudio()) {
+						audios.add(note);
+					} else if (note.isPhoto()) {
+						photos.add(note);
 					} else {
-						videos.add(rec);
+						videos.add(note);
 					}
 				}
 				addToResIfNotEmpty(res, audios, NotesAdapter.TYPE_AUDIO_HEADER);
@@ -209,10 +263,75 @@ public class NotesFragment extends BaseOsmAndListFragment implements FragmentSta
 		return res;
 	}
 
-	private void addToResIfNotEmpty(List<Object> res, List<Recording> recs, int header) {
-		if (!recs.isEmpty()) {
+	@NonNull
+	private List<MediaNote> collectMediaNotes() {
+		List<MediaNote> notes = new ArrayList<>();
+		Set<String> recordingIds = new HashSet<>();
+		for (Recording recording : plugin.getAllRecordings()) {
+			notes.add(MediaNote.fromRecording(recording));
+			String href = mediaStorageHelper.createMediaFileHref(recording.getFile());
+			String mediaId = getMediaKey(new Link(href));
+			if (mediaId != null) {
+				recordingIds.add(mediaId);
+			}
+		}
+
+		for (FavouritePoint point : app.getFavoritesHelper().getFavouritePoints()) {
+			addAttachedMediaNotes(notes, recordingIds, point, point.getLatitude(), point.getLongitude());
+		}
+		for (SelectedGpxFile selectedGpxFile : app.getSelectedGpxHelper().getSelectedGPXFiles()) {
+			for (WptPt point : selectedGpxFile.getGpxFile().getPointsList()) {
+				addAttachedMediaNotes(notes, recordingIds, point, point.getLatitude(), point.getLongitude());
+			}
+			for (WptPt point : selectedGpxFile.getGpxFile().getRoutePoints()) {
+				addAttachedMediaNotes(notes, recordingIds, point, point.getLatitude(), point.getLongitude());
+			}
+		}
+		return notes;
+	}
+
+	private void addAttachedMediaNotes(@NonNull List<MediaNote> notes, @NonNull Set<String> recordingIds,
+	                                   @NonNull Linkable target, double latitude, double longitude) {
+		List<Link> links = target.getLinks();
+		if (links == null) {
+			return;
+		}
+		for (Link link : links) {
+			if (link == null) {
+				continue;
+			}
+			List<MediaItem> mediaItems = LinkMediaFactory.fromLinks(Collections.singletonList(link));
+			if (mediaItems.isEmpty()) {
+				continue;
+			}
+			MediaItem mediaItem = mediaItems.get(0);
+			if (recordingIds.contains(getMediaKey(link))) {
+				continue;
+			}
+			boolean remote = mediaItem instanceof MediaItem.Remote;
+			if (remote || app.getGalleryHelper().getMediaSourceResolver().getPlaybackUri(mediaItem) != null) {
+				notes.add(MediaNote.fromAttachedMedia(mediaItem, target, link, latitude, longitude));
+			}
+		}
+	}
+
+	@Nullable
+	private String getMediaKey(@NonNull Link link) {
+		String href = link.getHref();
+		if (href != null) {
+			String internalPath = LinkMediaFactory.getInternalPath(href.trim());
+			String fileName = LinkMediaFactory.getInternalMediaFileName(internalPath);
+			if (fileName != null && !fileName.isEmpty()) {
+				return "internal:" + fileName;
+			}
+		}
+		return LinkMediaFactory.getMediaId(link);
+	}
+
+	private void addToResIfNotEmpty(List<Object> res, List<MediaNote> notes, int header) {
+		if (!notes.isEmpty()) {
 			res.add(header);
-			res.addAll(sortRecsByDateDescending(recs));
+			res.addAll(sortNotesByDateDescending(notes));
 		}
 	}
 
@@ -230,60 +349,60 @@ public class NotesFragment extends BaseOsmAndListFragment implements FragmentSta
 			}
 
 			@Override
-			public void onCheckBoxClick(Recording rec, boolean checked) {
+			public void onCheckBoxClick(MediaNote note, boolean checked) {
 				if (selectionMode) {
 					if (checked) {
-						selected.add(rec);
+						selected.add(note);
 					} else {
-						selected.remove(rec);
+						selected.remove(note);
 					}
 					updateSelectionMode(actionMode);
 				}
 			}
 
 			@Override
-			public void onItemClick(Recording rec, int position) {
-				showOnMap(rec, position);
+			public void onItemClick(MediaNote note, int position) {
+				showOnMap(note, position);
 			}
 
 			@Override
-			public void onOptionsClick(Recording rec) {
+			public void onOptionsClick(MediaNote note) {
 				ItemMenuBottomSheetDialogFragment.showInstance(
-						getChildFragmentManager(), createItemMenuFragmentListener(), rec);
+						getChildFragmentManager(), createItemMenuFragmentListener(), note);
 			}
 		};
 	}
 
-	private List<Recording> getRecordingsByType(int type) {
-		List<Recording> allRecs = new LinkedList<>(plugin.getAllRecordings());
-		List<Recording> res = new LinkedList<>();
-		for (Recording rec : allRecs) {
-			if (isAppropriate(rec, type)) {
-				res.add(rec);
+	private List<MediaNote> getNotesByType(int type) {
+		List<MediaNote> res = new LinkedList<>();
+		for (int i = 0; i < listAdapter.getItemsCount(); i++) {
+			Object item = listAdapter.getItem(i);
+			if (item instanceof MediaNote note && note != SHARE_LOCATION_FILE && isAppropriate(note, type)) {
+				res.add(note);
 			}
 		}
 		return res;
 	}
 
-	private boolean isAppropriate(Recording rec, int type) {
+	private boolean isAppropriate(MediaNote note, int type) {
 		if (type == NotesAdapter.TYPE_AUDIO_HEADER) {
-			return rec.isAudio();
+			return note.isAudio();
 		} else if (type == NotesAdapter.TYPE_PHOTO_HEADER) {
-			return rec.isPhoto();
+			return note.isPhoto();
 		}
-		return rec.isVideo();
+		return note.isVideo();
 	}
 
 	private void selectAll(int type) {
 		if (type == NotesAdapter.TYPE_DATE_HEADER) {
 			for (int i = 0; i < listAdapter.getItemsCount(); i++) {
 				Object item = listAdapter.getItem(i);
-				if (item instanceof Recording) {
-					selected.add((Recording) item);
+				if (item instanceof MediaNote) {
+					selected.add((MediaNote) item);
 				}
 			}
 		} else {
-			selected.addAll(getRecordingsByType(type));
+			selected.addAll(getNotesByType(type));
 		}
 		listAdapter.notifyDataSetChanged();
 	}
@@ -292,15 +411,15 @@ public class NotesFragment extends BaseOsmAndListFragment implements FragmentSta
 		if (type == NotesAdapter.TYPE_DATE_HEADER) {
 			selected.clear();
 		} else {
-			selected.removeAll(getRecordingsByType(type));
+			selected.removeAll(getNotesByType(type));
 		}
 		listAdapter.notifyDataSetChanged();
 	}
 
-	private List<Recording> sortRecsByDateDescending(List<Recording> recs) {
-		Collections.sort(recs, (first, second) -> {
-			long firstTime = first.getLastModified();
-			long secondTime = second.getLastModified();
+	private List<MediaNote> sortNotesByDateDescending(List<MediaNote> notes) {
+		Collections.sort(notes, (first, second) -> {
+			long firstTime = first.getLastModified(app.getGalleryHelper().getMetadataRepository());
+			long secondTime = second.getLastModified(app.getGalleryHelper().getMetadataRepository());
 			if (firstTime < secondTime) {
 				return 1;
 			} else if (firstTime == secondTime) {
@@ -309,13 +428,62 @@ public class NotesFragment extends BaseOsmAndListFragment implements FragmentSta
 				return -1;
 			}
 		});
-		return recs;
+		return notes;
 	}
 
 	protected void recreateAdapterData() {
+		if (listAdapter == null) {
+			return;
+		}
 		listAdapter.clear();
 		listAdapter.addAll(createItemsList());
 		listAdapter.notifyDataSetChanged();
+	}
+
+	private void reloadMediaNotes() {
+		if (!isResumed() || listAdapter == null || selectionMode) {
+			return;
+		}
+		List<Object> items = createItemsList();
+		listAdapter.clear();
+		listAdapter.addAll(items);
+		listAdapter.notifyDataSetChanged();
+		requestAttachedMediaMetadata(items);
+	}
+
+	private void requestAttachedMediaMetadata(@NonNull Collection<?> items) {
+		List<MediaItem> mediaItems = new ArrayList<>();
+		for (Object item : items) {
+			if (item instanceof MediaNote note && note.isAttachedMedia()) {
+				mediaItems.add(note.getMediaItem());
+			}
+		}
+		if (mediaItems.isEmpty()) {
+			return;
+		}
+		if (metadataRequest != null) {
+			metadataRequest.cancel();
+		}
+		metadataRequest = app.getGalleryHelper().getMetadataRepository().request(mediaItems, new MediaMetadataListener() {
+			@Override
+			public void onMetadataLoaded(@NonNull MediaItem item, @NonNull GalleryMediaMetadata metadata) {
+				if (listAdapter != null) {
+					listAdapter.notifyDataSetChanged();
+				}
+			}
+
+			@Override
+			public void onBatchFinished() {
+				metadataRequest = null;
+				if (selectionMode) {
+					if (listAdapter != null) {
+						listAdapter.notifyDataSetChanged();
+					}
+				} else {
+					recreateAdapterData();
+				}
+			}
+		});
 	}
 
 	private void enterSelectionMode(int type) {
@@ -366,7 +534,7 @@ public class NotesFragment extends BaseOsmAndListFragment implements FragmentSta
 					listAdapter.remove(SHARE_LOCATION_FILE);
 				}
 				switchSelectionMode(false);
-				listAdapter.notifyDataSetInvalidated();
+				recreateAdapterData();
 			}
 		});
 	}
@@ -391,15 +559,23 @@ public class NotesFragment extends BaseOsmAndListFragment implements FragmentSta
 		listAdapter.notifyDataSetChanged();
 	}
 
-	private void deleteItems(Set<Recording> selected) {
+	private void deleteItems(Set<MediaNote> selected) {
 		new AlertDialog.Builder(getThemedContext())
 				.setMessage(getString(R.string.local_recordings_delete_all_confirm, selected.size()))
 				.setPositiveButton(R.string.shared_string_delete, (dialog, which) -> {
-					Iterator<Recording> it = selected.iterator();
+					Map<Linkable, List<Link>> attachedLinks = new IdentityHashMap<>();
+					Iterator<MediaNote> it = selected.iterator();
 					while (it.hasNext()) {
-						Recording rec = it.next();
-						plugin.deleteRecording(rec, true);
+						MediaNote note = it.next();
+						if (note.isRecording()) {
+							plugin.deleteRecording(note.getRecording(), true);
+						} else if (note.isAttachedMedia()) {
+							attachedLinks.computeIfAbsent(note.getTarget(), key -> new ArrayList<>()).add(note.getLink());
+						}
 						it.remove();
+					}
+					for (Map.Entry<Linkable, List<Link>> entry : attachedLinks.entrySet()) {
+						attachedMediaDataHelper.removeMediaLinks(entry.getKey(), entry.getValue(), null);
 					}
 					recreateAdapterData();
 				})
@@ -407,13 +583,13 @@ public class NotesFragment extends BaseOsmAndListFragment implements FragmentSta
 				.show();
 	}
 
-	private void shareItems(@NonNull Set<Recording> selected) {
+	private void shareItems(@NonNull Set<MediaNote> selected) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			if (shareRecordingsTask != null && shareRecordingsTask.getStatus() == AsyncTask.Status.RUNNING) {
 				shareRecordingsTask.cancel(false);
 			}
-			shareRecordingsTask = new ShareRecordingsTask(activity, plugin, selected);
+			shareRecordingsTask = new ShareRecordingsTask(activity, selected, collectMediaNotes());
 			OsmAndTaskManager.executeTask(shareRecordingsTask);
 		}
 	}
@@ -421,34 +597,70 @@ public class NotesFragment extends BaseOsmAndListFragment implements FragmentSta
 	private ItemMenuFragmentListener createItemMenuFragmentListener() {
 		return new ItemMenuFragmentListener() {
 			@Override
-			public void playOnClick(Recording recording) {
-				callActivity(result -> plugin.getRecordingsPlayer().playRecording(requireActivity(), recording));
+			public void playOnClick(MediaNote note) {
+				if (note.isRecording()) {
+					callActivity(result -> plugin.getRecordingsPlayer().playRecording(requireActivity(), note.getRecording()));
+				} else {
+					openAttachedMedia(note);
+				}
 			}
 
 			@Override
-			public void shareOnClick(Recording recording) {
-				shareNote(recording);
+			public void shareOnClick(MediaNote note) {
+				shareNote(note);
 			}
 
 			@Override
-			public void showOnMapOnClick(Recording recording) {
-				showOnMap(recording);
+			public void showOnMapOnClick(MediaNote note) {
+				showOnMap(note);
 			}
 
 			@Override
-			public void renameOnClick(Recording recording) {
-				editNote(recording);
+			public void renameOnClick(MediaNote note) {
+				if (note.getRecording() != null) {
+					editNote(note.getRecording());
+				}
 			}
 
 			@Override
-			public void deleteOnClick(Recording recording) {
-				deleteNote(recording);
+			public void deleteOnClick(MediaNote note) {
+				deleteNote(note);
 			}
 		};
 	}
 
-	private void shareNote(Recording recording) {
-		if (!recording.getFile().exists()) {
+	private void shareNote(MediaNote note) {
+		if (note.isRecording()) {
+			shareRecording(note.getRecording());
+			return;
+		}
+		MediaItem mediaItem = note.getMediaItem();
+		if (mediaItem == null) {
+			return;
+		}
+		Uri uri = app.getGalleryHelper().getMediaSourceResolver().getShareableUri(mediaItem);
+		if (uri != null) {
+			Intent intent = new Intent(Intent.ACTION_SEND);
+			intent.setType(note.getMimeType());
+			intent.putExtra(Intent.EXTRA_STREAM, uri);
+			intent.setClipData(ClipData.newRawUri(mediaItem.getTitle(), uri));
+			intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+			AndroidUtils.startActivityIfSafe(requireActivity(),
+					Intent.createChooser(intent, getString(R.string.share_note)));
+			return;
+		}
+		String shareUri = MediaUriResolver.getShareUri(mediaItem);
+		if (shareUri != null) {
+			Intent intent = new Intent(Intent.ACTION_SEND);
+			intent.setType("text/plain");
+			intent.putExtra(Intent.EXTRA_TEXT, shareUri);
+			AndroidUtils.startActivityIfSafe(requireActivity(),
+					Intent.createChooser(intent, getString(R.string.share_note)));
+		}
+	}
+
+	private void shareRecording(@Nullable Recording recording) {
+		if (recording == null || !recording.getFile().exists()) {
 			return;
 		}
 		Activity activity = getActivity();
@@ -472,15 +684,42 @@ public class NotesFragment extends BaseOsmAndListFragment implements FragmentSta
 		}
 	}
 
-	private void showOnMap(Recording recording) {
-		showOnMap(recording, -1);
+	private void openAttachedMedia(@NonNull MediaNote note) {
+		MediaItem mediaItem = note.getMediaItem();
+		if (mediaItem == null) {
+			return;
+		}
+		Uri uri = app.getGalleryHelper().getMediaSourceResolver().getShareableUri(mediaItem);
+		if (uri != null) {
+			Intent intent = new Intent(Intent.ACTION_VIEW);
+			intent.setDataAndType(uri, note.getMimeType());
+			intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+			AndroidUtils.startActivityIfSafe(requireActivity(),
+					Intent.createChooser(intent, getString(R.string.gallery_open_in)));
+			return;
+		}
+		String detailsUri = MediaUriResolver.getDetailsLink(mediaItem);
+		if (detailsUri != null) {
+			AndroidUtils.startActivityIfSafe(requireActivity(), new Intent(Intent.ACTION_VIEW, Uri.parse(detailsUri)));
+		}
 	}
 
-	private void showOnMap(Recording recording, int itemPosition) {
+	private void showOnMap(MediaNote note) {
+		showOnMap(note, -1);
+	}
+
+	private void showOnMap(MediaNote note, int itemPosition) {
 		selectedItemPosition = itemPosition;
-		((MyPlacesActivity) requireActivity()).showOnMap(this, recording.getLatitude(), recording.getLongitude(), 15,
-				new PointDescription(recording.getSearchHistoryType(), recording.getName(getActivity(), true)),
-				true, recording);
+		Object target = note.isRecording() ? note.getRecording() : note.getTarget();
+		String pointType = note.getTarget() instanceof FavouritePoint
+				? PointDescription.POINT_TYPE_FAVORITE
+				: note.getTarget() instanceof WptPt
+						? PointDescription.POINT_TYPE_WPT
+						: note.getSearchHistoryType();
+		((MyPlacesActivity) requireActivity()).showOnMap(this, note.getLatitude(), note.getLongitude(), 15,
+				new PointDescription(pointType,
+						note.getName(requireActivity(), app.getGalleryHelper().getMetadataRepository(), true)),
+				true, target);
 	}
 
 	private void editNote(Recording recording) {
@@ -503,14 +742,19 @@ public class NotesFragment extends BaseOsmAndListFragment implements FragmentSta
 		editText.requestFocus();
 	}
 
-	private void deleteNote(Recording recording) {
+	private void deleteNote(MediaNote note) {
 		Activity activity = requireActivity();
-		String recordingName = recording.getName(activity, false);
+		String recordingName = note.getName(activity, app.getGalleryHelper().getMetadataRepository(), false);
 		AlertDialog.Builder bld = new AlertDialog.Builder(activity);
 		bld.setMessage(getString(R.string.delete_confirmation_msg, recordingName));
 		bld.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
-			plugin.deleteRecording(recording, true);
-			listAdapter.remove(recording);
+			if (note.isRecording()) {
+				plugin.deleteRecording(note.getRecording(), true);
+			} else if (note.isAttachedMedia()) {
+				attachedMediaDataHelper.removeMediaLinks(note.getTarget(),
+						Collections.singletonList(note.getLink()), null);
+			}
+			recreateAdapterData();
 		});
 		bld.setNegativeButton(R.string.shared_string_cancel, null);
 		bld.show();

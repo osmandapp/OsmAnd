@@ -1,7 +1,6 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
@@ -29,15 +28,15 @@ import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.coordinates.CoordinateFormat;
 import net.osmand.plus.settings.coordinates.CoordinateFormatFormatter;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer;
-import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.OutlinedTextContainer;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.appearance.PanelAppearanceApplier;
+import net.osmand.plus.views.mapwidgets.appearance.ResolvedPanelAppearance;
 import net.osmand.util.TextDirectionUtil;
 import net.osmand.util.Algorithms;
 
@@ -361,23 +360,15 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 		return updatedVisibility;
 	}
 
-	public void updateColors(@NonNull TextState textState) {
-		super.updateColors(textState);
+	@Override
+	protected void onPanelAppearanceChanged(@NonNull ResolvedPanelAppearance appearance) {
+		super.onPanelAppearanceChanged(appearance);
 		checkLayoutDirection();
 
-		divider.setBackgroundColor(ColorUtilities.getDividerColor(app, isNightMode()));
-		int textColor = textState.textColor;
-		firstCoordinate.setTextColor(textColor);
-		secondCoordinate.setTextColor(textColor);
-
-		int typefaceStyle = textState.textBold ? Typeface.BOLD : Typeface.NORMAL;
-		firstCoordinate.setTypeface(Typeface.DEFAULT, typefaceStyle);
-		secondCoordinate.setTypeface(Typeface.DEFAULT, typefaceStyle);
-
-		updateTextOutline(firstCoordinate, textState);
-		updateTextOutline(secondCoordinate, textState);
-
-		getView().setBackgroundResource(textState.widgetBackgroundId);
+		PanelAppearanceApplier.applyDivider(divider, appearance);
+		PanelAppearanceApplier.applyPrimaryText(firstCoordinate, appearance);
+		PanelAppearanceApplier.applyPrimaryText(secondCoordinate, appearance);
+		PanelAppearanceApplier.applyBackground(getView(), appearance);
 		updateInfo(null);
 	}
 }

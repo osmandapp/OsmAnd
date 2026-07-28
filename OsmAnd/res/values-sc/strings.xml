@@ -1181,7 +1181,6 @@
     <string name="favorite_category_dublicate_message">Pro praghere imprea unu nùmene de categoria chi no esistat giai.</string>
     <string name="favorite_category_name">Nùmene de sa categoria</string>
     <string name="favorite_category_add_new_title">Annanghe una categoria noa</string>
-    <string name="confirm_download_roadmaps">Sa mapa cun sos caminos ebbia non serbit, proite tenes giai cussa istandard (intrea). La cheres iscarrigare su matessi\?</string>
     <string name="value_downloaded_of_max">%1$.1f dae %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Agiorna totu (%1$s MB)</string>

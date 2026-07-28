@@ -1052,7 +1052,6 @@
     <string name="rendering_attr_showSurfaceGrade_name">Bistaratu errepidearen kalitatea</string>
     <string name="rendering_attr_showSurfaces_name">Bistaratu errepidearen azalera</string>
     <string name="roads">Errepideak</string>
-    <string name="confirm_download_roadmaps">Errepideak-bakarrik mapa ez da behar dagoeneko mapa estandarra (osoa) duzulako, deskargatu hala ere?</string>
     <string name="routing_attr_avoid_shuttle_train_description">Saihestu tren transbordadoreak</string>
     <string name="fav_point_dublicate_message">Bikoizketa saihesteko %1$s izena eman zaio.</string>
     <string name="routing_attr_avoid_stairs_name">Eskailerarik ez</string>

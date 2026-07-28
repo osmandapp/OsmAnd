@@ -8,11 +8,12 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.widgets.callback.OnClickListenerContainer;
 
-public class QuickSearchButtonListItem extends QuickSearchListItem {
+public class QuickSearchButtonListItem extends QuickSearchListItem implements OnClickListenerContainer {
 
 	private final int iconId;
 	private String title;
@@ -61,6 +62,7 @@ public class QuickSearchButtonListItem extends QuickSearchListItem {
 		return spannableTitle != null ? spannableTitle : super.getSpannableName();
 	}
 
+	@Override
 	public View.OnClickListener getOnClickListener() {
 		return onClickListener;
 	}

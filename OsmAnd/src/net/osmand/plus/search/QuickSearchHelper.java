@@ -55,11 +55,13 @@ import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreFactory;
+import net.osmand.search.core.SearchCoreFactory.SearchAmenityTypesAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchBaseAPI;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
+import net.osmand.search.core.spatial.SpatialTextSearchAPI;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 
@@ -121,6 +123,15 @@ public class QuickSearchHelper implements ResourceListener {
 	public void initSearchUICore() {
 		mapsIndexed = false;
 		setRepositoriesForSearchUICore(app);
+		core.clearAPIs();
+		core.resetSearch();
+		resultCollection = null;
+		if (useSpatialTextSearch()) {
+			core.registerAPI(new SearchAmenityTypesAPI(app.getPoiTypes()));
+			core.registerAPI(new SpatialTextSearchAPI(app.getPoiTypes()));
+			refreshCustomPoiFilters();
+			return;
+		}
 		core.init();
 
 		// Register index item api
@@ -140,6 +151,10 @@ public class QuickSearchHelper implements ResourceListener {
 		core.registerAPI(new SearchOnlineApi(app));
 
 		refreshCustomPoiFilters();
+	}
+
+	private boolean useSpatialTextSearch() {
+		return app.getSettings().USE_SPATIAL_TEXT_SEARCH.get();
 	}
 
 	public void refreshCustomPoiFilters() {

@@ -3,6 +3,7 @@ package net.osmand.plus.widgets.popup
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.defaultMinSize
@@ -31,7 +32,9 @@ data class OsmAndDropdownMenuOption<T>(
 	val value: T,
 	val title: String,
 	@DrawableRes val iconId: Int? = null,
+	val description: String? = null,
 	val selected: Boolean = false,
+	val enabled: Boolean = true,
 	val showDividerAfter: Boolean = false
 )
 
@@ -86,17 +89,27 @@ fun <T> OsmAndDropdownMenu(
 				modifier = Modifier
 					.fillMaxWidth()
 					.defaultMinSize(minHeight = MENU_ITEM_HEIGHT)
-					.clickable { onOptionSelected(option.value) }
+					.clickable(enabled = option.enabled) { onOptionSelected(option.value) }
 					.padding(horizontal = MENU_HORIZONTAL_PADDING),
 				verticalAlignment = Alignment.CenterVertically
 			) {
 				when (selectionStyle) {
 					OsmAndDropdownMenuSelectionStyle.RADIO -> {
-						RadioButton(
-							selected = option.selected,
-							onClick = null,
-							colors = RadioButtonDefaults.colors(selectedColor = colors.selected)
-						)
+						if (option.iconId != null) {
+							Icon(
+								painter = painterResource(option.iconId),
+								contentDescription = null,
+								tint = colors.icon.copy(alpha = if (option.enabled) 1f else .5f),
+								modifier = Modifier.size(MENU_ICON_SIZE)
+							)
+						} else {
+							RadioButton(
+								selected = option.selected,
+								onClick = null,
+								enabled = option.enabled,
+								colors = RadioButtonDefaults.colors(selectedColor = colors.selected)
+							)
+						}
 						Spacer(modifier = Modifier.width(MENU_CONTENT_SPACING))
 					}
 					OsmAndDropdownMenuSelectionStyle.CHECKMARK,
@@ -105,7 +118,7 @@ fun <T> OsmAndDropdownMenu(
 							Icon(
 								painter = painterResource(it),
 								contentDescription = null,
-								tint = colors.icon,
+								tint = colors.icon.copy(alpha = if (option.enabled) 1f else .5f),
 								modifier = Modifier.size(MENU_ICON_SIZE)
 							)
 							Spacer(modifier = Modifier.width(MENU_CONTENT_SPACING))
@@ -113,14 +126,26 @@ fun <T> OsmAndDropdownMenu(
 					}
 				}
 
-				Text(
-					text = option.title,
-					color = colors.text,
-					fontSize = 18.sp,
-					maxLines = 1,
-					overflow = TextOverflow.Ellipsis,
+				Column(
 					modifier = Modifier.weight(1f)
-				)
+				) {
+					Text(
+						text = option.title,
+						color = colors.text.copy(alpha = if (option.enabled) 1f else .5f),
+						fontSize = 18.sp,
+						maxLines = 1,
+						overflow = TextOverflow.Ellipsis
+					)
+					if (option.description != null) {
+						Text(
+							text = option.description,
+							color = colors.secondaryText.copy(alpha = if (option.enabled) 1f else .5f),
+							fontSize = 14.sp,
+							maxLines = 1,
+							overflow = TextOverflow.Ellipsis
+						)
+					}
+				}
 
 				if (selectionStyle == OsmAndDropdownMenuSelectionStyle.CHECKMARK) {
 					Spacer(modifier = Modifier.width(MENU_CONTENT_SPACING))

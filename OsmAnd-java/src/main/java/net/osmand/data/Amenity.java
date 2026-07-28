@@ -108,6 +108,7 @@ public class Amenity extends MapObject {
 	private int order;
 	private Map<Integer, List<TagValuePair>> tagGroups;
 	private String regionName;
+	private int[] bbox31;
 
 	private String wikiIconUrl;
 	private String wikiImageStubUrl;
@@ -995,6 +996,15 @@ public class Amenity extends MapObject {
 
 	public void setY(TIntArrayList y) {
 		this.y = y;
+	}
+	
+	public void setBbox31(int[] bbox31) {
+		this.bbox31 = bbox31;
+	}
+	
+	@Override
+	public int[] getBbox31() {
+		return bbox31;
 	}
 
 	public String getRouteActivityType() {

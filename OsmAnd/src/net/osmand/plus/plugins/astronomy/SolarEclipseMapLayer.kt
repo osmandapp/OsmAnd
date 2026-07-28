@@ -41,8 +41,10 @@ class SolarEclipseMapLayer(context: Context) : OsmandMapLayer(context) {
 
 	@Volatile
 	private var state = LayerState()
-	private var nativeGeometryReady = false
+	private var nativePolygonGeometryDirty = true
+	private var nativeLineGeometryDirty = true
 	private var polygonsCollection: PolygonsCollection? = null
+	private val nativePolygonIds = mutableListOf<Int>()
 	private var vectorLinesCollection: VectorLinesCollection? = null
 	private var eclipseMarker: MapMarker? = null
 	private var polygonId = 1
@@ -73,9 +75,12 @@ class SolarEclipseMapLayer(context: Context) : OsmandMapLayer(context) {
 			return
 		}
 		state = LayerState(active, eventKey, eventKind, track, frame)
-		val staticChanged = previous.active != active || previous.eventKey != eventKey ||
+		val baseGeometryChanged = previous.active != active || previous.eventKey != eventKey ||
 			previous.eventKind != eventKind || previous.track !== track
-		if (staticChanged) nativeGeometryReady = false
+		val polygonGeometryChanged = baseGeometryChanged ||
+			(eventKind == EclipseKind.Partial && previous.frame !== frame)
+		if (polygonGeometryChanged) nativePolygonGeometryDirty = true
+		if (baseGeometryChanged) nativeLineGeometryDirty = true
 		if (!active) clearNativeCollections()
 		view?.refreshMap()
 	}
@@ -161,11 +166,14 @@ class SolarEclipseMapLayer(context: Context) : OsmandMapLayer(context) {
 
 	private fun updateOpenGl(current: LayerState) {
 		val renderer = mapRenderer ?: return
-		if (!nativeGeometryReady) {
-			clearGeometryCollections()
-			createPolygonCollection(current)
+		if (nativePolygonGeometryDirty) {
+			updatePolygonCollection(current)
+			nativePolygonGeometryDirty = false
+		}
+		if (nativeLineGeometryDirty) {
+			clearLineCollection()
 			createLineCollection(current)
-			nativeGeometryReady = true
+			nativeLineGeometryDirty = false
 		}
 		updateMarkerCollection(current)
 		polygonsCollection?.let { if (!renderer.hasSymbolsProvider(it)) renderer.addSymbolsProvider(it) }
@@ -173,23 +181,36 @@ class SolarEclipseMapLayer(context: Context) : OsmandMapLayer(context) {
 		mapMarkersCollection?.let { if (!renderer.hasSymbolsProvider(it)) renderer.addSymbolsProvider(it) }
 	}
 
-	private fun createPolygonCollection(current: LayerState) {
-		if (current.eventKind == EclipseKind.Partial) return
-		val polygons = geometryPolygons(current)
+	private fun updatePolygonCollection(current: LayerState) {
+		val polygons = geometryPolygons(current).filter { it.size >= 3 }
+		val collection = polygonsCollection
+		if (collection != null && nativePolygonIds.size == polygons.size) {
+			// Updating points keeps the provider registered, so the renderer can renew only each
+			// polygon primitive instead of unloading and asynchronously loading the whole provider.
+			val updated = nativePolygonIds.indices.all { index ->
+				collection.setPolygonPoints(nativePolygonIds[index], polygons[index].toPoints31())
+			}
+			if (updated) return
+		}
+		clearPolygonCollection()
+		createPolygonCollection(polygons)
+	}
+
+	private fun createPolygonCollection(polygons: List<List<SolarEclipseMapCoordinate>>) {
 		if (polygons.isEmpty()) return
 		val collection = PolygonsCollection(ZoomLevel.ZoomLevel1, ZoomLevel.ZoomLevel20)
 		val color = NativeUtilities.createFColorARGB(corridorPaint.color)
 		polygons.forEach { polygon ->
 			val points = polygon.toPoints31()
-			if (points.size() >= 3) {
-				PolygonBuilder()
-					.setBaseOrder(baseOrder)
-					.setIsHidden(false)
-					.setPolygonId(polygonId++)
-					.setPoints(points)
-					.setFillColor(color)
-					.buildAndAddToCollection(collection)
-			}
+			val id = polygonId++
+			PolygonBuilder()
+				.setBaseOrder(baseOrder)
+				.setIsHidden(false)
+				.setPolygonId(id)
+				.setPoints(points)
+				.setFillColor(color)
+				.buildAndAddToCollection(collection)
+			nativePolygonIds.add(id)
 		}
 		polygonsCollection = collection
 	}
@@ -272,14 +293,25 @@ class SolarEclipseMapLayer(context: Context) : OsmandMapLayer(context) {
 			}
 		}
 
-	private fun clearGeometryCollections() {
+	private fun clearPolygonCollection() {
 		val renderer = mapRenderer
 		polygonsCollection?.let { renderer?.removeSymbolsProvider(it) }
-		vectorLinesCollection?.let { renderer?.removeSymbolsProvider(it) }
 		polygonsCollection = null
-		vectorLinesCollection = null
+		nativePolygonIds.clear()
 		polygonId = 1
-		nativeGeometryReady = false
+		nativePolygonGeometryDirty = true
+	}
+
+	private fun clearLineCollection() {
+		val renderer = mapRenderer
+		vectorLinesCollection?.let { renderer?.removeSymbolsProvider(it) }
+		vectorLinesCollection = null
+		nativeLineGeometryDirty = true
+	}
+
+	private fun clearGeometryCollections() {
+		clearPolygonCollection()
+		clearLineCollection()
 	}
 
 	private fun clearNativeCollections() {
@@ -294,12 +326,7 @@ class SolarEclipseMapLayer(context: Context) : OsmandMapLayer(context) {
 		clearNativeCollections()
 	}
 
-	override fun onDraw(canvas: Canvas, tileBox: RotatedTileBox, settings: DrawSettings) {
-		val current = state
-		if (current.active && current.eventKind == EclipseKind.Partial && mapRenderer != null) {
-			drawCanvasPolygons(canvas, tileBox, current)
-		}
-	}
+	override fun onDraw(canvas: Canvas, tileBox: RotatedTileBox, settings: DrawSettings) = Unit
 
 	override fun drawInScreenPixels(): Boolean = false
 }

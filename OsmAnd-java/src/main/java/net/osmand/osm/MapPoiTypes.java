@@ -664,6 +664,7 @@ public class MapPoiTypes {
 		ref.setTopVisible(poiAdditional.isTopVisible());
 		ref.setText(poiAdditional.isText());
 		ref.setOrder(poiAdditional.getOrder());
+		ref.setNonIndx(poiAdditional.isNonIndx());
 		ref.setHidden(poiAdditional.isHidden());
 		ref.setOsmTag(poiAdditional.getOsmTag());
 		ref.setNotEditableOsm(poiAdditional.isNotEditableOsm());
@@ -703,6 +704,8 @@ public class MapPoiTypes {
 		tp.setAdditional(lastType != null ? lastType :
 			 (lastFilter != null ? lastFilter : lastCategory));
 		tp.setTopVisible(Boolean.parseBoolean(parser.getAttributeValue("", "top")));
+		tp.setNonIndx(!Boolean.parseBoolean(parser.getAttributeValue("", "top")) ||
+				Boolean.parseBoolean(parser.getAttributeValue("", "no_indx")));
 		tp.setText("text".equals(parser.getAttributeValue("", "type")));
 		tp.setHidden(Boolean.parseBoolean(parser.getAttributeValue("", "hidden")));
 		String orderStr = parser.getAttributeValue("", "order");
@@ -751,6 +754,7 @@ public class MapPoiTypes {
 		if (lang != null) {
 			otag += ":" + lang;
 		}
+		tp.setNonIndx(Boolean.parseBoolean(parser.getAttributeValue("", "no_indx")));
 		tp.setBaseLangType(langBaseType);
 		tp.setLang(lang);
 		tp.setOsmTag(otag);

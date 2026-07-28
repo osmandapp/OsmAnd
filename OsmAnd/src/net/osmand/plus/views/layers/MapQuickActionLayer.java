@@ -225,9 +225,8 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 			quickActionsWidget.setSelectionListener(null);
 		}
 		if (quickActionsWidget != null) {
-			quickActionsWidget.updateVisibility(visible);
+			quickActionsWidget.updateVisibility(visible, mapActivity::updateStatusBarColor);
 		}
-		mapActivity.updateStatusBarColor();
 
 		setInvalidated(false);
 		return true;

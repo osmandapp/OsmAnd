@@ -848,7 +848,6 @@
     <string name="navigation_intent_invalid">തെറ്റായ ഘടന: %s</string>
     <string name="dahboard_options_dialog_title">ഡാഷ്ബോര്‍ഡ് സജ്ജീകരിക്കുക</string>
     <string name="contact_info">സമ്പര്‍ക്ക വിവരം</string>
-    <string name="confirm_download_roadmaps">നിങ്ങളുടെ കയ്യില്‍ പൂര്‍ണ്ണമായ ഭൂപടമുണ്ടല്ലോ, റോഡ് മാത്രമുള്ള ഭൂപടം ഡൗണ്‍ലോഡ് ചെയ്യണോ?</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="shared_string_contact">"സമ്പര്‍ക്കം "</string>
     <string name="dashboard_or_drawer_title">"മെനുവോ  ഡാഷ് ബോര്‍ഡോ  തീരുമാനം"</string>

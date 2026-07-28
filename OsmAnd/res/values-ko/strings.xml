@@ -1132,7 +1132,6 @@
     <string name="activate_srtm_plugin">SRTM 플러그인을 활성화해 주세요</string>
     <string name="later">나중에</string>
     <string name="downloads">다운로드</string>
-    <string name="confirm_download_roadmaps">모든 지도를 가지고 있더러도 지도를 다운로드 하시겠습니까?</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="value_downloaded_of_max">%2$.1f MB 에서 %1$.1f</string>
     <string name="access_direction_audio_feedback">오디오 길찾기</string>

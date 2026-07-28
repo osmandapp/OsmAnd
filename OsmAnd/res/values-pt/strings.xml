@@ -1224,7 +1224,6 @@
     <string name="lang_lb">Luxemburguês</string>
     <string name="lang_eo">Esperanto</string>
     <string name="downloads">Descargas</string>
-    <string name="confirm_download_roadmaps">Não é necessário o mapa só de estradas uma vez que já tem o mapa padrão (completo). Descarregar na mesma\?</string>
     <string name="later">Mais tarde</string>
     <string name="buy">Comprar</string>
     <string name="show_free_version_banner">Mostrar anúncio da versão gratuita</string>
@@ -5181,7 +5180,6 @@
     <string name="backup_deleted_all_data">Dados apagados.</string>
     <string name="backup_deleting_all_data">A apagar dados…</string>
     <string name="lang_crh">Tártaro da Crimeia (latim)</string>
-    <string name="auto_copy_media_to_osmand_storage">Cópia automática de média para o armazenamento OsmAnd</string>
     <string name="choose_from_gallery">Escolha na galeria</string>
     <string name="choose_from_files">Escolha de ficheiros</string>
     <string name="shared_string_media">Média</string>

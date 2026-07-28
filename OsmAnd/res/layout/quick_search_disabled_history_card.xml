@@ -13,7 +13,7 @@
 		android:id="@+id/card_container"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:background="@drawable/bg_quick_search_explore_card_bottom"
+		android:background="@drawable/bg_list_card_bottom_round"
 		android:orientation="vertical">
 
 		<include
@@ -40,6 +40,7 @@
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"
 				android:layout_weight="1"
+				android:layout_marginStart="@dimen/content_padding"
 				android:orientation="vertical">
 
 				<net.osmand.plus.widgets.TextViewEx
@@ -55,7 +56,8 @@
 					android:id="@+id/description"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:layout_marginTop="@dimen/content_padding_small_half"
+					android:layout_marginTop="@dimen/content_padding_half"
+					android:layout_marginBottom="@dimen/content_padding_minimal"
 					android:text="@string/search_and_navigation_history_disabled_descr"
 					android:textColor="?android:textColorSecondary"
 					android:textSize="@dimen/default_desc_text_size"
@@ -65,17 +67,19 @@
 					android:id="@+id/settings_button_container"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_marginTop="@dimen/content_padding_small_half">
+					android:layout_marginTop="@dimen/content_padding_half"
+					android:background="?attr/btn_history_disabled_card_bg">
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/settings_button"
 						android:layout_width="wrap_content"
 						android:layout_height="@dimen/route_info_buttons_height"
+						android:background="?attr/dlg_btn_ripple"
 						android:ellipsize="end"
 						android:gravity="center"
 						android:maxLines="1"
-						android:paddingStart="@dimen/content_padding"
-						android:paddingEnd="@dimen/content_padding"
+						android:paddingStart="@dimen/content_padding_small"
+						android:paddingEnd="@dimen/content_padding_small"
 						android:text="@string/open_history_settings"
 						android:textColor="?attr/active_color_basic"
 						android:textSize="@dimen/text_button_text_size"

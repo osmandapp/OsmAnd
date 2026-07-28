@@ -54111,6 +54111,26 @@ public final class OsmandOdb {
      * </pre>
      */
     int getSubcatfreq(int index);
+
+    // repeated string subcatWikidataIds = 7;
+    /**
+     * <code>repeated string subcatWikidataIds = 7;</code>
+     */
+    java.util.List<java.lang.String>
+    getSubcatWikidataIdsList();
+    /**
+     * <code>repeated string subcatWikidataIds = 7;</code>
+     */
+    int getSubcatWikidataIdsCount();
+    /**
+     * <code>repeated string subcatWikidataIds = 7;</code>
+     */
+    java.lang.String getSubcatWikidataIds(int index);
+    /**
+     * <code>repeated string subcatWikidataIds = 7;</code>
+     */
+    com.google.protobuf.ByteString
+        getSubcatWikidataIdsBytes(int index);
   }
   /**
    * Protobuf type {@code OsmAnd.OBF.OsmAndCategoryTable}
@@ -54202,6 +54222,14 @@ public final class OsmandOdb {
               input.popLimit(limit);
               break;
             }
+            case 58: {
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+                subcatWikidataIds_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000010;
+              }
+              subcatWikidataIds_.add(input.readBytes());
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -54215,6 +54243,9 @@ public final class OsmandOdb {
         }
         if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
           subcatfreq_ = java.util.Collections.unmodifiableList(subcatfreq_);
+        }
+        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+          subcatWikidataIds_ = new com.google.protobuf.UnmodifiableLazyStringList(subcatWikidataIds_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -54384,11 +54415,42 @@ public final class OsmandOdb {
       return subcatfreq_.get(index);
     }
 
+    // repeated string subcatWikidataIds = 7;
+    public static final int SUBCATWIKIDATAIDS_FIELD_NUMBER = 7;
+    private com.google.protobuf.LazyStringList subcatWikidataIds_;
+    /**
+     * <code>repeated string subcatWikidataIds = 7;</code>
+     */
+    public java.util.List<java.lang.String>
+        getSubcatWikidataIdsList() {
+      return subcatWikidataIds_;
+    }
+    /**
+     * <code>repeated string subcatWikidataIds = 7;</code>
+     */
+    public int getSubcatWikidataIdsCount() {
+      return subcatWikidataIds_.size();
+    }
+    /**
+     * <code>repeated string subcatWikidataIds = 7;</code>
+     */
+    public java.lang.String getSubcatWikidataIds(int index) {
+      return subcatWikidataIds_.get(index);
+    }
+    /**
+     * <code>repeated string subcatWikidataIds = 7;</code>
+     */
+    public com.google.protobuf.ByteString
+        getSubcatWikidataIdsBytes(int index) {
+      return subcatWikidataIds_.getByteString(index);
+    }
+
     private void initFields() {
       category_ = "";
       frequency_ = 0;
       subcategories_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       subcatfreq_ = java.util.Collections.emptyList();
+      subcatWikidataIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -54417,6 +54479,9 @@ public final class OsmandOdb {
       }
       for (int i = 0; i < subcatfreq_.size(); i++) {
         output.writeUInt32(4, subcatfreq_.get(i));
+      }
+      for (int i = 0; i < subcatWikidataIds_.size(); i++) {
+        output.writeBytes(7, subcatWikidataIds_.getByteString(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -54452,6 +54517,15 @@ public final class OsmandOdb {
         }
         size += dataSize;
         size += 1 * getSubcatfreqList().size();
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < subcatWikidataIds_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(subcatWikidataIds_.getByteString(i));
+        }
+        size += dataSize;
+        size += 1 * getSubcatWikidataIdsList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -54577,6 +54651,8 @@ public final class OsmandOdb {
         bitField0_ = (bitField0_ & ~0x00000004);
         subcatfreq_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000008);
+        subcatWikidataIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -54624,6 +54700,12 @@ public final class OsmandOdb {
           bitField0_ = (bitField0_ & ~0x00000008);
         }
         result.subcatfreq_ = subcatfreq_;
+        if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          subcatWikidataIds_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              subcatWikidataIds_);
+          bitField0_ = (bitField0_ & ~0x00000010);
+        }
+        result.subcatWikidataIds_ = subcatWikidataIds_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -54665,6 +54747,16 @@ public final class OsmandOdb {
           } else {
             ensureSubcatfreqIsMutable();
             subcatfreq_.addAll(other.subcatfreq_);
+          }
+          onChanged();
+        }
+        if (!other.subcatWikidataIds_.isEmpty()) {
+          if (subcatWikidataIds_.isEmpty()) {
+            subcatWikidataIds_ = other.subcatWikidataIds_;
+            bitField0_ = (bitField0_ & ~0x00000010);
+          } else {
+            ensureSubcatWikidataIdsIsMutable();
+            subcatWikidataIds_.addAll(other.subcatWikidataIds_);
           }
           onChanged();
         }
@@ -55013,6 +55105,99 @@ public final class OsmandOdb {
       public Builder clearSubcatfreq() {
         subcatfreq_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000008);
+        onChanged();
+        return this;
+      }
+
+      // repeated string subcatWikidataIds = 7;
+      private com.google.protobuf.LazyStringList subcatWikidataIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureSubcatWikidataIdsIsMutable() {
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+          subcatWikidataIds_ = new com.google.protobuf.LazyStringArrayList(subcatWikidataIds_);
+          bitField0_ |= 0x00000010;
+         }
+      }
+      /**
+       * <code>repeated string subcatWikidataIds = 7;</code>
+       */
+      public java.util.List<java.lang.String>
+          getSubcatWikidataIdsList() {
+        return java.util.Collections.unmodifiableList(subcatWikidataIds_);
+      }
+      /**
+       * <code>repeated string subcatWikidataIds = 7;</code>
+       */
+      public int getSubcatWikidataIdsCount() {
+        return subcatWikidataIds_.size();
+      }
+      /**
+       * <code>repeated string subcatWikidataIds = 7;</code>
+       */
+      public java.lang.String getSubcatWikidataIds(int index) {
+        return subcatWikidataIds_.get(index);
+      }
+      /**
+       * <code>repeated string subcatWikidataIds = 7;</code>
+       */
+      public com.google.protobuf.ByteString
+          getSubcatWikidataIdsBytes(int index) {
+        return subcatWikidataIds_.getByteString(index);
+      }
+      /**
+       * <code>repeated string subcatWikidataIds = 7;</code>
+       */
+      public Builder setSubcatWikidataIds(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureSubcatWikidataIdsIsMutable();
+        subcatWikidataIds_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string subcatWikidataIds = 7;</code>
+       */
+      public Builder addSubcatWikidataIds(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureSubcatWikidataIdsIsMutable();
+        subcatWikidataIds_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string subcatWikidataIds = 7;</code>
+       */
+      public Builder addAllSubcatWikidataIds(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureSubcatWikidataIdsIsMutable();
+        super.addAll(values, subcatWikidataIds_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string subcatWikidataIds = 7;</code>
+       */
+      public Builder clearSubcatWikidataIds() {
+        subcatWikidataIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string subcatWikidataIds = 7;</code>
+       */
+      public Builder addSubcatWikidataIdsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureSubcatWikidataIdsIsMutable();
+        subcatWikidataIds_.add(value);
         onChanged();
         return this;
       }
@@ -55937,6 +56122,21 @@ public final class OsmandOdb {
      */
     boolean getIsText();
 
+    // optional string wikidataId = 4;
+    /**
+     * <code>optional string wikidataId = 4;</code>
+     */
+    boolean hasWikidataId();
+    /**
+     * <code>optional string wikidataId = 4;</code>
+     */
+    java.lang.String getWikidataId();
+    /**
+     * <code>optional string wikidataId = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getWikidataIdBytes();
+
     // optional uint32 frequency = 5;
     /**
      * <code>optional uint32 frequency = 5;</code>
@@ -56002,6 +56202,26 @@ public final class OsmandOdb {
      */
     com.google.protobuf.ByteString
         getSubtypeValueBytes(int index);
+
+    // repeated string subcatWikidataIds = 12;
+    /**
+     * <code>repeated string subcatWikidataIds = 12;</code>
+     */
+    java.util.List<java.lang.String>
+    getSubcatWikidataIdsList();
+    /**
+     * <code>repeated string subcatWikidataIds = 12;</code>
+     */
+    int getSubcatWikidataIdsCount();
+    /**
+     * <code>repeated string subcatWikidataIds = 12;</code>
+     */
+    java.lang.String getSubcatWikidataIds(int index);
+    /**
+     * <code>repeated string subcatWikidataIds = 12;</code>
+     */
+    com.google.protobuf.ByteString
+        getSubcatWikidataIdsBytes(int index);
   }
   /**
    * Protobuf type {@code OsmAnd.OBF.OsmAndPoiSubtype}
@@ -56069,20 +56289,25 @@ public final class OsmandOdb {
               isText_ = input.readBool();
               break;
             }
-            case 40: {
+            case 34: {
               bitField0_ |= 0x00000008;
+              wikidataId_ = input.readBytes();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
               frequency_ = input.readUInt32();
               break;
             }
             case 48: {
-              bitField0_ |= 0x00000010;
+              bitField0_ |= 0x00000020;
               subtypeValuesSize_ = input.readUInt32();
               break;
             }
             case 56: {
-              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
                 subtypeValuesFreq_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000020;
+                mutable_bitField0_ |= 0x00000040;
               }
               subtypeValuesFreq_.add(input.readUInt32());
               break;
@@ -56090,9 +56315,9 @@ public final class OsmandOdb {
             case 58: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020) && input.getBytesUntilLimit() > 0) {
+              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040) && input.getBytesUntilLimit() > 0) {
                 subtypeValuesFreq_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000020;
+                mutable_bitField0_ |= 0x00000040;
               }
               while (input.getBytesUntilLimit() > 0) {
                 subtypeValuesFreq_.add(input.readUInt32());
@@ -56101,11 +56326,19 @@ public final class OsmandOdb {
               break;
             }
             case 66: {
-              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
                 subtypeValue_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000040;
+                mutable_bitField0_ |= 0x00000080;
               }
               subtypeValue_.add(input.readBytes());
+              break;
+            }
+            case 98: {
+              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+                subcatWikidataIds_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000100;
+              }
+              subcatWikidataIds_.add(input.readBytes());
               break;
             }
           }
@@ -56116,11 +56349,14 @@ public final class OsmandOdb {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
           subtypeValuesFreq_ = java.util.Collections.unmodifiableList(subtypeValuesFreq_);
         }
-        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+        if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
           subtypeValue_ = new com.google.protobuf.UnmodifiableLazyStringList(subtypeValue_);
+        }
+        if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+          subcatWikidataIds_ = new com.google.protobuf.UnmodifiableLazyStringList(subcatWikidataIds_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -56268,6 +56504,49 @@ public final class OsmandOdb {
       return isText_;
     }
 
+    // optional string wikidataId = 4;
+    public static final int WIKIDATAID_FIELD_NUMBER = 4;
+    private java.lang.Object wikidataId_;
+    /**
+     * <code>optional string wikidataId = 4;</code>
+     */
+    public boolean hasWikidataId() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional string wikidataId = 4;</code>
+     */
+    public java.lang.String getWikidataId() {
+      java.lang.Object ref = wikidataId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          wikidataId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string wikidataId = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getWikidataIdBytes() {
+      java.lang.Object ref = wikidataId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        wikidataId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     // optional uint32 frequency = 5;
     public static final int FREQUENCY_FIELD_NUMBER = 5;
     private int frequency_;
@@ -56275,7 +56554,7 @@ public final class OsmandOdb {
      * <code>optional uint32 frequency = 5;</code>
      */
     public boolean hasFrequency() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
      * <code>optional uint32 frequency = 5;</code>
@@ -56291,7 +56570,7 @@ public final class OsmandOdb {
      * <code>optional uint32 subtypeValuesSize = 6;</code>
      */
     public boolean hasSubtypeValuesSize() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
      * <code>optional uint32 subtypeValuesSize = 6;</code>
@@ -56365,14 +56644,46 @@ public final class OsmandOdb {
       return subtypeValue_.getByteString(index);
     }
 
+    // repeated string subcatWikidataIds = 12;
+    public static final int SUBCATWIKIDATAIDS_FIELD_NUMBER = 12;
+    private com.google.protobuf.LazyStringList subcatWikidataIds_;
+    /**
+     * <code>repeated string subcatWikidataIds = 12;</code>
+     */
+    public java.util.List<java.lang.String>
+        getSubcatWikidataIdsList() {
+      return subcatWikidataIds_;
+    }
+    /**
+     * <code>repeated string subcatWikidataIds = 12;</code>
+     */
+    public int getSubcatWikidataIdsCount() {
+      return subcatWikidataIds_.size();
+    }
+    /**
+     * <code>repeated string subcatWikidataIds = 12;</code>
+     */
+    public java.lang.String getSubcatWikidataIds(int index) {
+      return subcatWikidataIds_.get(index);
+    }
+    /**
+     * <code>repeated string subcatWikidataIds = 12;</code>
+     */
+    public com.google.protobuf.ByteString
+        getSubcatWikidataIdsBytes(int index) {
+      return subcatWikidataIds_.getByteString(index);
+    }
+
     private void initFields() {
       name_ = "";
       tagname_ = "";
       isText_ = false;
+      wikidataId_ = "";
       frequency_ = 0;
       subtypeValuesSize_ = 0;
       subtypeValuesFreq_ = java.util.Collections.emptyList();
       subtypeValue_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      subcatWikidataIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -56404,9 +56715,12 @@ public final class OsmandOdb {
         output.writeBool(3, isText_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeUInt32(5, frequency_);
+        output.writeBytes(4, getWikidataIdBytes());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeUInt32(5, frequency_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeUInt32(6, subtypeValuesSize_);
       }
       for (int i = 0; i < subtypeValuesFreq_.size(); i++) {
@@ -56414,6 +56728,9 @@ public final class OsmandOdb {
       }
       for (int i = 0; i < subtypeValue_.size(); i++) {
         output.writeBytes(8, subtypeValue_.getByteString(i));
+      }
+      for (int i = 0; i < subcatWikidataIds_.size(); i++) {
+        output.writeBytes(12, subcatWikidataIds_.getByteString(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -56438,9 +56755,13 @@ public final class OsmandOdb {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(5, frequency_);
+          .computeBytesSize(4, getWikidataIdBytes());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(5, frequency_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(6, subtypeValuesSize_);
       }
@@ -56461,6 +56782,15 @@ public final class OsmandOdb {
         }
         size += dataSize;
         size += 1 * getSubtypeValueList().size();
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < subcatWikidataIds_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(subcatWikidataIds_.getByteString(i));
+        }
+        size += dataSize;
+        size += 1 * getSubcatWikidataIdsList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -56584,14 +56914,18 @@ public final class OsmandOdb {
         bitField0_ = (bitField0_ & ~0x00000002);
         isText_ = false;
         bitField0_ = (bitField0_ & ~0x00000004);
-        frequency_ = 0;
+        wikidataId_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
-        subtypeValuesSize_ = 0;
+        frequency_ = 0;
         bitField0_ = (bitField0_ & ~0x00000010);
-        subtypeValuesFreq_ = java.util.Collections.emptyList();
+        subtypeValuesSize_ = 0;
         bitField0_ = (bitField0_ & ~0x00000020);
-        subtypeValue_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        subtypeValuesFreq_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000040);
+        subtypeValue_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        subcatWikidataIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
 
@@ -56635,22 +56969,32 @@ public final class OsmandOdb {
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.frequency_ = frequency_;
+        result.wikidataId_ = wikidataId_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.subtypeValuesSize_ = subtypeValuesSize_;
-        if (((bitField0_ & 0x00000020) == 0x00000020)) {
-          subtypeValuesFreq_ = java.util.Collections.unmodifiableList(subtypeValuesFreq_);
-          bitField0_ = (bitField0_ & ~0x00000020);
+        result.frequency_ = frequency_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
         }
-        result.subtypeValuesFreq_ = subtypeValuesFreq_;
+        result.subtypeValuesSize_ = subtypeValuesSize_;
         if (((bitField0_ & 0x00000040) == 0x00000040)) {
-          subtypeValue_ = new com.google.protobuf.UnmodifiableLazyStringList(
-              subtypeValue_);
+          subtypeValuesFreq_ = java.util.Collections.unmodifiableList(subtypeValuesFreq_);
           bitField0_ = (bitField0_ & ~0x00000040);
         }
+        result.subtypeValuesFreq_ = subtypeValuesFreq_;
+        if (((bitField0_ & 0x00000080) == 0x00000080)) {
+          subtypeValue_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              subtypeValue_);
+          bitField0_ = (bitField0_ & ~0x00000080);
+        }
         result.subtypeValue_ = subtypeValue_;
+        if (((bitField0_ & 0x00000100) == 0x00000100)) {
+          subcatWikidataIds_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              subcatWikidataIds_);
+          bitField0_ = (bitField0_ & ~0x00000100);
+        }
+        result.subcatWikidataIds_ = subcatWikidataIds_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -56680,6 +57024,11 @@ public final class OsmandOdb {
         if (other.hasIsText()) {
           setIsText(other.getIsText());
         }
+        if (other.hasWikidataId()) {
+          bitField0_ |= 0x00000008;
+          wikidataId_ = other.wikidataId_;
+          onChanged();
+        }
         if (other.hasFrequency()) {
           setFrequency(other.getFrequency());
         }
@@ -56689,7 +57038,7 @@ public final class OsmandOdb {
         if (!other.subtypeValuesFreq_.isEmpty()) {
           if (subtypeValuesFreq_.isEmpty()) {
             subtypeValuesFreq_ = other.subtypeValuesFreq_;
-            bitField0_ = (bitField0_ & ~0x00000020);
+            bitField0_ = (bitField0_ & ~0x00000040);
           } else {
             ensureSubtypeValuesFreqIsMutable();
             subtypeValuesFreq_.addAll(other.subtypeValuesFreq_);
@@ -56699,10 +57048,20 @@ public final class OsmandOdb {
         if (!other.subtypeValue_.isEmpty()) {
           if (subtypeValue_.isEmpty()) {
             subtypeValue_ = other.subtypeValue_;
-            bitField0_ = (bitField0_ & ~0x00000040);
+            bitField0_ = (bitField0_ & ~0x00000080);
           } else {
             ensureSubtypeValueIsMutable();
             subtypeValue_.addAll(other.subtypeValue_);
+          }
+          onChanged();
+        }
+        if (!other.subcatWikidataIds_.isEmpty()) {
+          if (subcatWikidataIds_.isEmpty()) {
+            subcatWikidataIds_ = other.subcatWikidataIds_;
+            bitField0_ = (bitField0_ & ~0x00000100);
+          } else {
+            ensureSubcatWikidataIdsIsMutable();
+            subcatWikidataIds_.addAll(other.subcatWikidataIds_);
           }
           onChanged();
         }
@@ -56946,13 +57305,87 @@ public final class OsmandOdb {
         return this;
       }
 
+      // optional string wikidataId = 4;
+      private java.lang.Object wikidataId_ = "";
+      /**
+       * <code>optional string wikidataId = 4;</code>
+       */
+      public boolean hasWikidataId() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string wikidataId = 4;</code>
+       */
+      public java.lang.String getWikidataId() {
+        java.lang.Object ref = wikidataId_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          wikidataId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string wikidataId = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getWikidataIdBytes() {
+        java.lang.Object ref = wikidataId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          wikidataId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string wikidataId = 4;</code>
+       */
+      public Builder setWikidataId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        wikidataId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string wikidataId = 4;</code>
+       */
+      public Builder clearWikidataId() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        wikidataId_ = getDefaultInstance().getWikidataId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string wikidataId = 4;</code>
+       */
+      public Builder setWikidataIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        wikidataId_ = value;
+        onChanged();
+        return this;
+      }
+
       // optional uint32 frequency = 5;
       private int frequency_ ;
       /**
        * <code>optional uint32 frequency = 5;</code>
        */
       public boolean hasFrequency() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
        * <code>optional uint32 frequency = 5;</code>
@@ -56964,7 +57397,7 @@ public final class OsmandOdb {
        * <code>optional uint32 frequency = 5;</code>
        */
       public Builder setFrequency(int value) {
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         frequency_ = value;
         onChanged();
         return this;
@@ -56973,7 +57406,7 @@ public final class OsmandOdb {
        * <code>optional uint32 frequency = 5;</code>
        */
       public Builder clearFrequency() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
         frequency_ = 0;
         onChanged();
         return this;
@@ -56985,7 +57418,7 @@ public final class OsmandOdb {
        * <code>optional uint32 subtypeValuesSize = 6;</code>
        */
       public boolean hasSubtypeValuesSize() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
        * <code>optional uint32 subtypeValuesSize = 6;</code>
@@ -56997,7 +57430,7 @@ public final class OsmandOdb {
        * <code>optional uint32 subtypeValuesSize = 6;</code>
        */
       public Builder setSubtypeValuesSize(int value) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000020;
         subtypeValuesSize_ = value;
         onChanged();
         return this;
@@ -57006,7 +57439,7 @@ public final class OsmandOdb {
        * <code>optional uint32 subtypeValuesSize = 6;</code>
        */
       public Builder clearSubtypeValuesSize() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000020);
         subtypeValuesSize_ = 0;
         onChanged();
         return this;
@@ -57015,9 +57448,9 @@ public final class OsmandOdb {
       // repeated uint32 subtypeValuesFreq = 7;
       private java.util.List<java.lang.Integer> subtypeValuesFreq_ = java.util.Collections.emptyList();
       private void ensureSubtypeValuesFreqIsMutable() {
-        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
           subtypeValuesFreq_ = new java.util.ArrayList<java.lang.Integer>(subtypeValuesFreq_);
-          bitField0_ |= 0x00000020;
+          bitField0_ |= 0x00000040;
          }
       }
       /**
@@ -57101,7 +57534,7 @@ public final class OsmandOdb {
        */
       public Builder clearSubtypeValuesFreq() {
         subtypeValuesFreq_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000040);
         onChanged();
         return this;
       }
@@ -57109,9 +57542,9 @@ public final class OsmandOdb {
       // repeated string subtypeValue = 8;
       private com.google.protobuf.LazyStringList subtypeValue_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureSubtypeValueIsMutable() {
-        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
+        if (!((bitField0_ & 0x00000080) == 0x00000080)) {
           subtypeValue_ = new com.google.protobuf.LazyStringArrayList(subtypeValue_);
-          bitField0_ |= 0x00000040;
+          bitField0_ |= 0x00000080;
          }
       }
       /**
@@ -57181,7 +57614,7 @@ public final class OsmandOdb {
        */
       public Builder clearSubtypeValue() {
         subtypeValue_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000080);
         onChanged();
         return this;
       }
@@ -57195,6 +57628,99 @@ public final class OsmandOdb {
   }
   ensureSubtypeValueIsMutable();
         subtypeValue_.add(value);
+        onChanged();
+        return this;
+      }
+
+      // repeated string subcatWikidataIds = 12;
+      private com.google.protobuf.LazyStringList subcatWikidataIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureSubcatWikidataIdsIsMutable() {
+        if (!((bitField0_ & 0x00000100) == 0x00000100)) {
+          subcatWikidataIds_ = new com.google.protobuf.LazyStringArrayList(subcatWikidataIds_);
+          bitField0_ |= 0x00000100;
+         }
+      }
+      /**
+       * <code>repeated string subcatWikidataIds = 12;</code>
+       */
+      public java.util.List<java.lang.String>
+          getSubcatWikidataIdsList() {
+        return java.util.Collections.unmodifiableList(subcatWikidataIds_);
+      }
+      /**
+       * <code>repeated string subcatWikidataIds = 12;</code>
+       */
+      public int getSubcatWikidataIdsCount() {
+        return subcatWikidataIds_.size();
+      }
+      /**
+       * <code>repeated string subcatWikidataIds = 12;</code>
+       */
+      public java.lang.String getSubcatWikidataIds(int index) {
+        return subcatWikidataIds_.get(index);
+      }
+      /**
+       * <code>repeated string subcatWikidataIds = 12;</code>
+       */
+      public com.google.protobuf.ByteString
+          getSubcatWikidataIdsBytes(int index) {
+        return subcatWikidataIds_.getByteString(index);
+      }
+      /**
+       * <code>repeated string subcatWikidataIds = 12;</code>
+       */
+      public Builder setSubcatWikidataIds(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureSubcatWikidataIdsIsMutable();
+        subcatWikidataIds_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string subcatWikidataIds = 12;</code>
+       */
+      public Builder addSubcatWikidataIds(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureSubcatWikidataIdsIsMutable();
+        subcatWikidataIds_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string subcatWikidataIds = 12;</code>
+       */
+      public Builder addAllSubcatWikidataIds(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureSubcatWikidataIdsIsMutable();
+        super.addAll(values, subcatWikidataIds_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string subcatWikidataIds = 12;</code>
+       */
+      public Builder clearSubcatWikidataIds() {
+        subcatWikidataIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000100);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string subcatWikidataIds = 12;</code>
+       */
+      public Builder addSubcatWikidataIdsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureSubcatWikidataIdsIsMutable();
+        subcatWikidataIds_.add(value);
         onChanged();
         return this;
       }
@@ -80788,87 +81314,89 @@ public final class OsmandOdb {
       "ategories\030\013 \003(\r\022\021\n\teloRating\030\014 \003(\r\022\017\n\007sh" +
       "iftTo\030\016 \001(\007\022\031\n\021shiftToNextZ8Tile\030\024 \001(\007\022\032" +
       "\n\022shiftToNextZ10Tile\030\025 \001(\007\022\032\n\022shiftToNex" +
-      "tZ12Tile\030\026 \001(\007\"e\n\023OsmAndCategoryTable\022\020\n" +
-      "\010category\030\001 \002(\t\022\021\n\tfrequency\030\002 \001(\r\022\025\n\rsu" +
-      "bcategories\030\003 \003(\t\022\022\n\nsubcatfreq\030\004 \003(\r\"E\n" +
-      "\023OsmAndSubtypesTable\022.\n\010subtypes\030\004 \003(\0132\034" +
-      ".OsmAnd.OBF.OsmAndPoiSubtype\"\240\001\n\020OsmAndP" +
-      "oiSubtype\022\014\n\004name\030\001 \002(\t\022\017\n\007tagname\030\002 \001(\t",
-      "\022\016\n\006isText\030\003 \002(\010\022\021\n\tfrequency\030\005 \001(\r\022\031\n\021s" +
-      "ubtypeValuesSize\030\006 \001(\r\022\031\n\021subtypeValuesF" +
-      "req\030\007 \003(\r\022\024\n\014subtypeValue\030\010 \003(\t\"2\n\021OsmAn" +
-      "dPoiTagGroup\022\n\n\002id\030\001 \002(\r\022\021\n\ttagValues\030\005 " +
-      "\003(\t\"T\n\022OsmAndPoiTagGroups\022\017\n\003ids\030\002 \003(\rB\002" +
-      "\020\001\022-\n\006groups\030\005 \003(\0132\035.OsmAnd.OBF.OsmAndPo" +
-      "iTagGroup\"\340\001\n\014OsmAndPoiBox\022\014\n\004zoom\030\001 \002(\r" +
-      "\022\014\n\004left\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\0223\n\ncategorie" +
-      "s\030\004 \001(\0132\037.OsmAnd.OBF.OsmAndPoiCategories" +
-      "\0221\n\ttagGroups\030\010 \001(\0132\036.OsmAnd.OBF.OsmAndP",
-      "oiTagGroups\022*\n\010subBoxes\030\n \003(\0132\030.OsmAnd.O" +
-      "BF.OsmAndPoiBox\022\023\n\013shiftToData\030\016 \001(\007\"@\n\023" +
-      "OsmAndPoiCategories\022\022\n\ncategories\030\003 \003(\r\022" +
-      "\025\n\rsubcategories\030\005 \003(\r\"i\n\020OsmAndPoiBoxDa" +
-      "ta\022\014\n\004zoom\030\001 \001(\r\022\t\n\001x\030\002 \001(\r\022\t\n\001y\030\003 \001(\r\0221" +
-      "\n\007poiData\030\005 \003(\0132 .OsmAnd.OBF.OsmAndPoiBo" +
-      "xDataAtom\"\333\001\n\024OsmAndPoiBoxDataAtom\022\n\n\002dx" +
-      "\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\022\n\ncategories\030\004 \003(\r\022\025" +
-      "\n\rsubcategories\030\005 \003(\r\022\014\n\004name\030\006 \001(\t\022\016\n\006n" +
-      "ameEn\030\007 \001(\t\022\n\n\002id\030\010 \001(\004\022\026\n\016textCategorie",
-      "s\030\016 \003(\r\022\022\n\ntextValues\030\017 \003(\t\022\023\n\013precision" +
-      "XY\030\020 \001(\005\022\025\n\ttagGroups\030\021 \003(\rB\002\020\001\"\032\n\007IdTab" +
-      "le\022\017\n\007routeId\030\001 \003(\022\"F\n\017RestrictionData\022\014" +
-      "\n\004type\030\001 \002(\005\022\014\n\004from\030\002 \002(\005\022\n\n\002to\030\003 \002(\005\022\013" +
-      "\n\003via\030\004 \001(\005\"x\n\tRouteData\022\016\n\006points\030\001 \002(\014" +
-      "\022\022\n\npointTypes\030\004 \001(\014\022\022\n\npointNames\030\005 \001(\014" +
-      "\022\r\n\005types\030\007 \002(\014\022\017\n\007routeId\030\014 \002(\005\022\023\n\013stri" +
-      "ngNames\030\016 \001(\014\"\304\005\n\022OsmAndRoutingIndex\022\014\n\004" +
-      "name\030\001 \002(\t\022?\n\005rules\030\002 \003(\01320.OsmAnd.OBF.O" +
-      "smAndRoutingIndex.RouteEncodingRule\022>\n\tr",
-      "ootBoxes\030\003 \003(\0132+.OsmAnd.OBF.OsmAndRoutin" +
-      "gIndex.RouteDataBox\022A\n\014basemapBoxes\030\004 \003(" +
-      "\0132+.OsmAnd.OBF.OsmAndRoutingIndex.RouteD" +
-      "ataBox\022=\n\006blocks\030\005 \003(\0132-.OsmAnd.OBF.OsmA" +
-      "ndRoutingIndex.RouteDataBlock\032;\n\021RouteEn" +
-      "codingRule\022\013\n\003tag\030\003 \002(\t\022\r\n\005value\030\005 \002(\t\022\n" +
-      "\n\002id\030\007 \001(\r\032\231\001\n\014RouteDataBox\022\014\n\004left\030\001 \002(" +
-      "\021\022\r\n\005right\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n\006bottom\030" +
-      "\004 \002(\021\022\023\n\013shiftToData\030\005 \001(\007\022:\n\005boxes\030\007 \003(" +
-      "\0132+.OsmAnd.OBF.OsmAndRoutingIndex.RouteD",
-      "ataBox\032\303\001\n\016RouteDataBlock\022$\n\007idTable\030\005 \001" +
-      "(\0132\023.OsmAnd.OBF.IdTable\022*\n\013dataObjects\030\006" +
-      " \003(\0132\025.OsmAnd.OBF.RouteData\0221\n\014restricti" +
-      "ons\030\007 \003(\0132\033.OsmAnd.OBF.RestrictionData\022," +
-      "\n\013stringTable\030\010 \001(\0132\027.OsmAnd.OBF.StringT" +
-      "able\"\231\010\n\024OsmAndHHRoutingIndex\022\017\n\007edition" +
-      "\030\001 \002(\003\022\017\n\007profile\030\002 \002(\t\022\025\n\rprofileParams" +
-      "\030\003 \003(\t\022/\n\016tagValuesTable\030\004 \001(\0132\027.OsmAnd." +
-      "OBF.StringTable\022E\n\npointBoxes\030\005 \002(\01321.Os" +
-      "mAnd.OBF.OsmAndHHRoutingIndex.HHRoutePoi",
-      "ntsBox\022L\n\rpointSegments\030\006 \003(\01325.OsmAnd.O" +
-      "BF.OsmAndHHRoutingIndex.HHRouteBlockSegm" +
-      "ents\032\324\001\n\020HHRoutePointsBox\022\014\n\004left\030\002 \002(\021\022" +
-      "\r\n\005right\030\003 \002(\021\022\013\n\003top\030\004 \002(\021\022\016\n\006bottom\030\005 " +
-      "\002(\021\022@\n\005boxes\030\006 \003(\01321.OsmAnd.OBF.OsmAndHH" +
-      "RoutingIndex.HHRoutePointsBox\022D\n\006points\030" +
-      "\007 \003(\01324.OsmAnd.OBF.OsmAndHHRoutingIndex." +
-      "HHRouteNetworkPoint\032\366\001\n\023HHRouteNetworkPo" +
-      "int\022\n\n\002id\030\001 \002(\005\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022" +
-      "\020\n\010globalId\030\004 \002(\005\022\016\n\006roadId\030\005 \002(\003\022\031\n\021roa",
-      "dStartEndIndex\030\006 \002(\005\022\021\n\tclusterId\030\007 \001(\005\022" +
-      "\023\n\013dualPointId\030\010 \001(\005\022\025\n\rdualClusterId\030\t " +
-      "\001(\005\022\022\n\nprofileIds\030\n \003(\005\022\022\n\npartialInd\030\013 " +
-      "\001(\005\022\027\n\013tagValueIds\030\014 \003(\005B\002\020\001\032\360\001\n\024HHRoute" +
-      "BlockSegments\022\024\n\014idRangeStart\030\001 \002(\005\022\025\n\ri" +
-      "dRangeLength\030\002 \002(\005\022\021\n\tprofileId\030\003 \001(\005\022J\n" +
-      "\013innerBlocks\030\006 \003(\01325.OsmAnd.OBF.OsmAndHH" +
-      "RoutingIndex.HHRouteBlockSegments\022L\n\rpoi" +
-      "ntSegments\030\004 \003(\01325.OsmAnd.OBF.OsmAndHHRo" +
-      "utingIndex.HHRoutePointSegments\032?\n\024HHRou",
-      "tePointSegments\022\022\n\nsegmentsIn\030\002 \002(\014\022\023\n\013s" +
-      "egmentsOut\030\003 \002(\014\"T\n\013OsmAndOwner\022\014\n\004name\030" +
-      "\001 \002(\t\022\020\n\010resource\030\002 \001(\t\022\023\n\013description\030\003" +
-      " \001(\t\022\020\n\010pluginid\030\004 \001(\tB\036\n\021net.osmand.bin" +
-      "aryB\tOsmandOdb"
+      "tZ12Tile\030\026 \001(\007\"\200\001\n\023OsmAndCategoryTable\022\020" +
+      "\n\010category\030\001 \002(\t\022\021\n\tfrequency\030\002 \001(\r\022\025\n\rs" +
+      "ubcategories\030\003 \003(\t\022\022\n\nsubcatfreq\030\004 \003(\r\022\031" +
+      "\n\021subcatWikidataIds\030\007 \003(\t\"E\n\023OsmAndSubty" +
+      "pesTable\022.\n\010subtypes\030\004 \003(\0132\034.OsmAnd.OBF." +
+      "OsmAndPoiSubtype\"\317\001\n\020OsmAndPoiSubtype\022\014\n",
+      "\004name\030\001 \002(\t\022\017\n\007tagname\030\002 \001(\t\022\016\n\006isText\030\003" +
+      " \002(\010\022\022\n\nwikidataId\030\004 \001(\t\022\021\n\tfrequency\030\005 " +
+      "\001(\r\022\031\n\021subtypeValuesSize\030\006 \001(\r\022\031\n\021subtyp" +
+      "eValuesFreq\030\007 \003(\r\022\024\n\014subtypeValue\030\010 \003(\t\022" +
+      "\031\n\021subcatWikidataIds\030\014 \003(\t\"2\n\021OsmAndPoiT" +
+      "agGroup\022\n\n\002id\030\001 \002(\r\022\021\n\ttagValues\030\005 \003(\t\"T" +
+      "\n\022OsmAndPoiTagGroups\022\017\n\003ids\030\002 \003(\rB\002\020\001\022-\n" +
+      "\006groups\030\005 \003(\0132\035.OsmAnd.OBF.OsmAndPoiTagG" +
+      "roup\"\340\001\n\014OsmAndPoiBox\022\014\n\004zoom\030\001 \002(\r\022\014\n\004l" +
+      "eft\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\0223\n\ncategories\030\004 \001",
+      "(\0132\037.OsmAnd.OBF.OsmAndPoiCategories\0221\n\tt" +
+      "agGroups\030\010 \001(\0132\036.OsmAnd.OBF.OsmAndPoiTag" +
+      "Groups\022*\n\010subBoxes\030\n \003(\0132\030.OsmAnd.OBF.Os" +
+      "mAndPoiBox\022\023\n\013shiftToData\030\016 \001(\007\"@\n\023OsmAn" +
+      "dPoiCategories\022\022\n\ncategories\030\003 \003(\r\022\025\n\rsu" +
+      "bcategories\030\005 \003(\r\"i\n\020OsmAndPoiBoxData\022\014\n" +
+      "\004zoom\030\001 \001(\r\022\t\n\001x\030\002 \001(\r\022\t\n\001y\030\003 \001(\r\0221\n\007poi" +
+      "Data\030\005 \003(\0132 .OsmAnd.OBF.OsmAndPoiBoxData" +
+      "Atom\"\333\001\n\024OsmAndPoiBoxDataAtom\022\n\n\002dx\030\002 \002(" +
+      "\021\022\n\n\002dy\030\003 \002(\021\022\022\n\ncategories\030\004 \003(\r\022\025\n\rsub",
+      "categories\030\005 \003(\r\022\014\n\004name\030\006 \001(\t\022\016\n\006nameEn" +
+      "\030\007 \001(\t\022\n\n\002id\030\010 \001(\004\022\026\n\016textCategories\030\016 \003" +
+      "(\r\022\022\n\ntextValues\030\017 \003(\t\022\023\n\013precisionXY\030\020 " +
+      "\001(\005\022\025\n\ttagGroups\030\021 \003(\rB\002\020\001\"\032\n\007IdTable\022\017\n" +
+      "\007routeId\030\001 \003(\022\"F\n\017RestrictionData\022\014\n\004typ" +
+      "e\030\001 \002(\005\022\014\n\004from\030\002 \002(\005\022\n\n\002to\030\003 \002(\005\022\013\n\003via" +
+      "\030\004 \001(\005\"x\n\tRouteData\022\016\n\006points\030\001 \002(\014\022\022\n\np" +
+      "ointTypes\030\004 \001(\014\022\022\n\npointNames\030\005 \001(\014\022\r\n\005t" +
+      "ypes\030\007 \002(\014\022\017\n\007routeId\030\014 \002(\005\022\023\n\013stringNam" +
+      "es\030\016 \001(\014\"\304\005\n\022OsmAndRoutingIndex\022\014\n\004name\030",
+      "\001 \002(\t\022?\n\005rules\030\002 \003(\01320.OsmAnd.OBF.OsmAnd" +
+      "RoutingIndex.RouteEncodingRule\022>\n\trootBo" +
+      "xes\030\003 \003(\0132+.OsmAnd.OBF.OsmAndRoutingInde" +
+      "x.RouteDataBox\022A\n\014basemapBoxes\030\004 \003(\0132+.O" +
+      "smAnd.OBF.OsmAndRoutingIndex.RouteDataBo" +
+      "x\022=\n\006blocks\030\005 \003(\0132-.OsmAnd.OBF.OsmAndRou" +
+      "tingIndex.RouteDataBlock\032;\n\021RouteEncodin" +
+      "gRule\022\013\n\003tag\030\003 \002(\t\022\r\n\005value\030\005 \002(\t\022\n\n\002id\030" +
+      "\007 \001(\r\032\231\001\n\014RouteDataBox\022\014\n\004left\030\001 \002(\021\022\r\n\005" +
+      "right\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021",
+      "\022\023\n\013shiftToData\030\005 \001(\007\022:\n\005boxes\030\007 \003(\0132+.O" +
+      "smAnd.OBF.OsmAndRoutingIndex.RouteDataBo" +
+      "x\032\303\001\n\016RouteDataBlock\022$\n\007idTable\030\005 \001(\0132\023." +
+      "OsmAnd.OBF.IdTable\022*\n\013dataObjects\030\006 \003(\0132" +
+      "\025.OsmAnd.OBF.RouteData\0221\n\014restrictions\030\007" +
+      " \003(\0132\033.OsmAnd.OBF.RestrictionData\022,\n\013str" +
+      "ingTable\030\010 \001(\0132\027.OsmAnd.OBF.StringTable\"" +
+      "\231\010\n\024OsmAndHHRoutingIndex\022\017\n\007edition\030\001 \002(" +
+      "\003\022\017\n\007profile\030\002 \002(\t\022\025\n\rprofileParams\030\003 \003(" +
+      "\t\022/\n\016tagValuesTable\030\004 \001(\0132\027.OsmAnd.OBF.S",
+      "tringTable\022E\n\npointBoxes\030\005 \002(\01321.OsmAnd." +
+      "OBF.OsmAndHHRoutingIndex.HHRoutePointsBo" +
+      "x\022L\n\rpointSegments\030\006 \003(\01325.OsmAnd.OBF.Os" +
+      "mAndHHRoutingIndex.HHRouteBlockSegments\032" +
+      "\324\001\n\020HHRoutePointsBox\022\014\n\004left\030\002 \002(\021\022\r\n\005ri" +
+      "ght\030\003 \002(\021\022\013\n\003top\030\004 \002(\021\022\016\n\006bottom\030\005 \002(\021\022@" +
+      "\n\005boxes\030\006 \003(\01321.OsmAnd.OBF.OsmAndHHRouti" +
+      "ngIndex.HHRoutePointsBox\022D\n\006points\030\007 \003(\013" +
+      "24.OsmAnd.OBF.OsmAndHHRoutingIndex.HHRou" +
+      "teNetworkPoint\032\366\001\n\023HHRouteNetworkPoint\022\n",
+      "\n\002id\030\001 \002(\005\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\020\n\010gl" +
+      "obalId\030\004 \002(\005\022\016\n\006roadId\030\005 \002(\003\022\031\n\021roadStar" +
+      "tEndIndex\030\006 \002(\005\022\021\n\tclusterId\030\007 \001(\005\022\023\n\013du" +
+      "alPointId\030\010 \001(\005\022\025\n\rdualClusterId\030\t \001(\005\022\022" +
+      "\n\nprofileIds\030\n \003(\005\022\022\n\npartialInd\030\013 \001(\005\022\027" +
+      "\n\013tagValueIds\030\014 \003(\005B\002\020\001\032\360\001\n\024HHRouteBlock" +
+      "Segments\022\024\n\014idRangeStart\030\001 \002(\005\022\025\n\ridRang" +
+      "eLength\030\002 \002(\005\022\021\n\tprofileId\030\003 \001(\005\022J\n\013inne" +
+      "rBlocks\030\006 \003(\01325.OsmAnd.OBF.OsmAndHHRouti" +
+      "ngIndex.HHRouteBlockSegments\022L\n\rpointSeg",
+      "ments\030\004 \003(\01325.OsmAnd.OBF.OsmAndHHRouting" +
+      "Index.HHRoutePointSegments\032?\n\024HHRoutePoi" +
+      "ntSegments\022\022\n\nsegmentsIn\030\002 \002(\014\022\023\n\013segmen" +
+      "tsOut\030\003 \002(\014\"T\n\013OsmAndOwner\022\014\n\004name\030\001 \002(\t" +
+      "\022\020\n\010resource\030\002 \001(\t\022\023\n\013description\030\003 \001(\t\022" +
+      "\020\n\010pluginid\030\004 \001(\tB\036\n\021net.osmand.binaryB\t" +
+      "OsmandOdb"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -81096,7 +81624,7 @@ public final class OsmandOdb {
           internal_static_OsmAnd_OBF_OsmAndCategoryTable_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndCategoryTable_descriptor,
-              new java.lang.String[] { "Category", "Frequency", "Subcategories", "Subcatfreq", });
+              new java.lang.String[] { "Category", "Frequency", "Subcategories", "Subcatfreq", "SubcatWikidataIds", });
           internal_static_OsmAnd_OBF_OsmAndSubtypesTable_descriptor =
             getDescriptor().getMessageTypes().get(31);
           internal_static_OsmAnd_OBF_OsmAndSubtypesTable_fieldAccessorTable = new
@@ -81108,7 +81636,7 @@ public final class OsmandOdb {
           internal_static_OsmAnd_OBF_OsmAndPoiSubtype_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndPoiSubtype_descriptor,
-              new java.lang.String[] { "Name", "Tagname", "IsText", "Frequency", "SubtypeValuesSize", "SubtypeValuesFreq", "SubtypeValue", });
+              new java.lang.String[] { "Name", "Tagname", "IsText", "WikidataId", "Frequency", "SubtypeValuesSize", "SubtypeValuesFreq", "SubtypeValue", "SubcatWikidataIds", });
           internal_static_OsmAnd_OBF_OsmAndPoiTagGroup_descriptor =
             getDescriptor().getMessageTypes().get(33);
           internal_static_OsmAnd_OBF_OsmAndPoiTagGroup_fieldAccessorTable = new

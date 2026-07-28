@@ -2,6 +2,7 @@ package net.osmand.plus.plugins.audionotes;
 
 import static net.osmand.IndexConstants.AV_INDEX_DIR;
 import static net.osmand.shared.media.MediaFileNameFormat.IMG_EXTENSION;
+import static net.osmand.shared.media.MediaFileNameFormat.isNewGeneratedMediaFileName;
 import static net.osmand.shared.media.MediaFileNameFormat.MPEG4_EXTENSION;
 import static net.osmand.shared.media.MediaFileNameFormat.THREEGP_EXTENSION;
 
@@ -135,7 +136,8 @@ public class RecordingsFileHelper {
 
 	boolean indexFile(boolean registerInGPX, @NonNull File file, boolean updatePhotoInformation) {
 		String name = file.getName();
-		if (CollectionUtils.endsWithAny(name, THREEGP_EXTENSION, MPEG4_EXTENSION, IMG_EXTENSION)) {
+		if (!isNewGeneratedMediaFileName(name)
+				&& CollectionUtils.endsWithAny(name, THREEGP_EXTENSION, MPEG4_EXTENSION, IMG_EXTENSION)) {
 			boolean newFileIndexed = indexSingleFile(file, updatePhotoInformation);
 			if (newFileIndexed && registerInGPX) {
 				Recording recording = recordingByFileName.get(name);
@@ -162,7 +164,8 @@ public class RecordingsFileHelper {
 	}
 
 	boolean cleanupSpace(@NonNull CamcorderProfile profile) {
-		File[] files = app.getAppPath(AV_INDEX_DIR).listFiles((dir, filename) -> filename.endsWith("." + MPEG4_EXTENSION));
+		File[] files = app.getAppPath(AV_INDEX_DIR).listFiles((dir, filename) ->
+				filename.endsWith("." + MPEG4_EXTENSION) && recordingByFileName.containsKey(filename));
 
 		if (files != null) {
 			double usedSpace = 0;
@@ -187,9 +190,6 @@ public class RecordingsFileHelper {
 					if (r != null) {
 						deleteRecording(r);
 						wasAnyDeleted = true;
-						usedSpace -= length;
-						availableSpace += length;
-					} else if (f.delete()) {
 						usedSpace -= length;
 						availableSpace += length;
 					}

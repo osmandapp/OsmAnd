@@ -1747,7 +1747,6 @@
     <string name="activate_srtm_plugin">Խնդրում ենք ակտիվացնել «Contour lines» plugin-ը</string>
     <string name="later">Ավելի ուշ</string>
     <string name="downloads">Ներբեռնումներ</string>
-    <string name="confirm_download_roadmaps">Ճանապարհային քարտեզի կարիք չկա, դուք արդեն ունեք ստանդարտ (ամբողջական) քարտեզ, ներբեռնել ճանապարհային քարտեզը\?</string>
     <string name="value_downloaded_of_max">%1$.1f %2$.1f ՄԲ</string>
     <string name="file_size_in_mb">%.1f ՄԲ</string>
     <string name="update_all">Թարմացնել բոլորը (%1$s ՄԲ)</string>

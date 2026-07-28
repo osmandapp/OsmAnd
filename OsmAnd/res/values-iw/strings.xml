@@ -1241,7 +1241,6 @@
     <string name="shared_string_go">התחלה</string>
     <string name="later">אחר כך</string>
     <string name="downloads">הורדות</string>
-    <string name="confirm_download_roadmaps">אין צורך להוריד את מפת הדרכים בלבד כיוון שכבר יש לך את המפה הסטנדרטית (המלאה). להוריד אותה בכל מקרה?</string>
     <string name="value_downloaded_of_max">%1$.1f מתוך %2$.1f מ״ב</string>
     <string name="file_size_in_mb">%.1f מ״ב</string>
     <string name="update_all">עדכון הכול (%1$s מ״ב)</string>
@@ -4119,7 +4118,6 @@
     <string name="camera_folder">תיקיית מצלמה</string>
     <string name="media_storage_main_storage_descr">הקבצים נשמרים לאחסון פרטי של היישומון. הם מוסתרים מהגלריה ומיישומונים אחרים.</string>
     <string name="media_storage_shared_storage_descr">הקבצים נשמרים לתיקיות ציבוריות (תמונות, סרטים, מוזיקה). הם גלויים בגלריה וב־Google Photos.</string>
-    <string name="media_storage_camera_folder_descr">קבצים נשמרים לסרט הצילום. לתשומת ליבך: השמע נשמר למוזיקה/OsmAnd.</string>
     <string name="media_storage_manually_specified_descr">הקבצים נשמרים לתיקייה מותאמת אישית ומסודרת לפי סוג (שמע, תמונה, סרטון).</string>
     <string name="change_media_storage_question">לשנות את אחסון המדיה?</string>
     <string name="change_media_storage_full_description">להעביר קובצי מדיה קיימים ליעד החדש?\n%1$s &gt; %2$s</string>
@@ -4140,4 +4138,18 @@
     <string name="tracks_backup_promo_description">אפשר לסנכרן את המסלולים שלך בין התקנים ומול האינטרנט עם OsmAnd Pro.</string>
     <string name="tracks_backup_promo_title">גיבוי וסנכרון של המסלולים שלך</string>
     <string name="free_download_limit_reached">הגעת למגבלת ההורדות בחינם</string>
+    <string name="background_color">צבע רקע</string>
+    <string name="widget_height">גובה הווידג׳ט</string>
+    <string name="row_height">גובה השורה</string>
+    <string name="shared_string_transparent">שקוף</string>
+    <string name="copy_from">העתקה מ־</string>
+    <string name="another_profile">פרופיל אחר</string>
+    <string name="astro_show_map">הצגת מפה</string>
+    <string name="astro_hide_map">הסתרת מפה</string>
+    <string name="astro_map_center_location">מרכז המפה: %1$s</string>
+    <string name="astro_solar_eclipse">ליקוי חמה</string>
+    <string name="astro_solar_eclipse_subtitle">חקירת ליקויי חמה ברחבי העולם</string>
+    <string name="astro_previous_solar_eclipse">ליקוי החמה הקודם</string>
+    <string name="astro_next_solar_eclipse">ליקוי החמה הבא</string>
+    <string name="astro_close_solar_eclipse">סגירת חוקר ליקויי חמה</string>
 </resources>

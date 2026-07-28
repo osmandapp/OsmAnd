@@ -8,7 +8,6 @@ import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.NAMES_ROW_K
 import static net.osmand.plus.wikipedia.WikiAlgorithms.WIKI_DATA_BASE_URL;
 import static net.osmand.plus.wikipedia.WikiAlgorithms.WIKI_LINK;
 import static net.osmand.util.CollectionUtils.equalsToAny;
-import static net.osmand.util.CollectionUtils.startsWithAny;
 
 import android.content.Context;
 import android.content.Intent;
@@ -33,7 +32,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.AdditionalInfoBundle;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
-import net.osmand.data.MapObject;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
@@ -244,14 +242,7 @@ public class AmenityUIHelper extends MenuBuilder {
 	}
 
 	private void initVariables() {
-		poiCategory = null;
-		String typeTag = additionalInfo.get(TYPE);
-		if (!Algorithms.isEmpty(typeTag)) {
-			poiCategory = MapPoiTypes.getDefault().getPoiCategoryByName(typeTag);
-		}
-		if (poiCategory == null) {
-			poiCategory = MapPoiTypes.getDefault().getOtherPoiCategory();
-		}
+		poiCategory = additionalInfo.getCategory();
 		subtype = additionalInfo.get(SUBTYPE);
 		poiTypes = app.getPoiTypes();
 		cuisineRow = null;
@@ -320,12 +311,21 @@ public class AmenityUIHelper extends MenuBuilder {
 	private AmenityInfoRow createPoiAdditionalInfoRow(@NonNull Context context,
 	                                                  @NonNull String key, @NonNull String vl,
 	                                                  @Nullable CollapsableView collapsableView) {
-		if (isKeyToSkip(key)) return null;
+		if (additionalInfo.isKeyToSkip(key) || (key.equals("note") && !osmEditingEnabled))
+			return null;
 
-		PoiType pType = fetchPoiAdditionalType(key, vl);
+		PoiType pType = additionalInfo.getPoiAdditionalType(key, vl);
+		poiType = poiCategory.getPoiTypeByKeyName(key);
+		if (poiType == null && pType == null) {
+			poiType = poiTypes.getPoiTypeByKey(key);
+		}
 		if (pType == null) {
 			String altKey = key.replaceAll(":", "_");
-			pType = fetchPoiAdditionalType(altKey, vl);
+			pType = additionalInfo.getPoiAdditionalType(altKey, vl);
+			poiType = poiCategory.getPoiTypeByKeyName(altKey);
+			if (poiType == null && pType == null) {
+				poiType = poiTypes.getPoiTypeByKey(altKey);
+			}
 		}
 		if (pType != null && pType.isFilterOnly()) {
 			return null;
@@ -364,27 +364,6 @@ public class AmenityUIHelper extends MenuBuilder {
 		lastBuiltRowIsDescription = rowBuilder.isDescription();
 		rowBuilder.setMatchWidthDivider(!rowBuilder.isDescription() && rowBuilder.isWiki());
 		return rowBuilder.build();
-	}
-
-	private boolean isKeyToSkip(@NonNull String key) {
-		return startsWithAny(key, COLLAPSABLE_PREFIX, ALT_NAME_WITH_LANG_PREFIX, LANG_YES)
-				|| equalsToAny(key, WIKI_PHOTO, WIKIDATA, WIKIMEDIA_COMMONS, "image", "mapillary", "subway_region")
-				|| (key.equals("note") && !osmEditingEnabled)
-				|| MapObject.isNameLangTag(key)
-				|| key.contains(ROUTE);
-	}
-
-	@Nullable
-	private PoiType fetchPoiAdditionalType(@NonNull String key, @Nullable String vl) {
-		poiType = poiCategory.getPoiTypeByKeyName(key);
-		AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(key);
-		if (pt == null && !Algorithms.isEmpty(vl) && vl.length() < 50) {
-			pt = poiTypes.getAnyPoiAdditionalTypeByKey(key + "_" + vl);
-		}
-		if (poiType == null && pt == null) {
-			poiType = poiTypes.getPoiTypeByKey(key);
-		}
-		return pt != null ? (PoiType) pt : null;
 	}
 
 	public void buildNamesRow(ViewGroup viewGroup, Map<String, String> namesMap, boolean altName) {

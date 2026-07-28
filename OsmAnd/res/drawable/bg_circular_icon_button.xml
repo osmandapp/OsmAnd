@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+	android:insetLeft="@dimen/content_padding_small_half"
+	android:insetTop="@dimen/content_padding_small_half"
+	android:insetRight="@dimen/content_padding_small_half"
+	android:insetBottom="@dimen/content_padding_small_half">
+
+	<shape android:shape="oval">
+		<size
+			android:width="36dp"
+			android:height="36dp" />
+		<solid android:color="@color/circular_icon_button_background_color" />
+	</shape>
+
+</inset>

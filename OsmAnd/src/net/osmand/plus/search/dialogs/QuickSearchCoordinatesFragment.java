@@ -4,7 +4,6 @@ import static android.text.InputType.TYPE_CLASS_PHONE;
 import static android.text.InputType.TYPE_CLASS_TEXT;
 import static android.text.InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS;
 import static android.text.InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS;
-import static android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -87,7 +86,6 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 	private static final String QUICK_SEARCH_COORDS_ZONE_KEY = "quick_search_coords_zone_key";
 	private static final String QUICK_SEARCH_COORDS_MGRS_KEY = "quick_search_coords_mgrs_key";
 	private static final String QUICK_SEARCH_COORDS_OLC_KEY = "quick_search_coords_olc_key";
-	private static final String QUICK_SEARCH_COORDS_OLC_INFO_KEY = "quick_search_coords_olc_info_key";
 	private static final String QUICK_SEARCH_COORDS_SWISS_GRID_EAST_KEY = "quick_search_coords_swiss_grid_east_key";
 	private static final String QUICK_SEARCH_COORDS_SWISS_GRID_NORTH_KEY = "quick_search_coords_swiss_grid_north_key";
 	private static final String QUICK_SEARCH_COORDS_MAIDENHEAD_KEY = "quick_search_coords_maidenhead_key";
@@ -112,7 +110,6 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 	private EditText zoneEdit;
 	private EditText mgrsEdit;
 	private EditText olcEdit;
-	private TextView olcInfo;
 	private EditText swissGridEastEdit;
 	private EditText swissGridNorthEdit;
 	private EditText maidenheadEdit;
@@ -164,7 +161,6 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 		zoneEdit = view.findViewById(R.id.zoneEditText);
 		mgrsEdit = view.findViewById(R.id.mgrsEditText);
 		olcEdit = view.findViewById(R.id.olcEditText);
-		olcInfo = view.findViewById(R.id.olcInfoTextView);
 		swissGridEastEdit = view.findViewById(R.id.swissGridEastEditText);
 		swissGridNorthEdit = view.findViewById(R.id.swissGridNorthEditText);
 		maidenheadEdit = view.findViewById(R.id.maidenheadEditText);
@@ -216,7 +212,6 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 		String zoneStr = getStringValue(savedInstanceState, QUICK_SEARCH_COORDS_ZONE_KEY, defaultZone);
 		String mgrsStr = getStringValue(savedInstanceState, QUICK_SEARCH_COORDS_MGRS_KEY, defaultMgrs);
 		String olcStr = getStringValue(savedInstanceState, QUICK_SEARCH_COORDS_OLC_KEY, defaultOlc);
-		String olcInfoStr = getStringValue(savedInstanceState, QUICK_SEARCH_COORDS_OLC_INFO_KEY, defaultOlc);
 		String swissGridEastStr = getStringValue(savedInstanceState, QUICK_SEARCH_COORDS_SWISS_GRID_EAST_KEY, defaultSwissGridEast);
 		String swissGridNorthStr = getStringValue(savedInstanceState, QUICK_SEARCH_COORDS_SWISS_GRID_NORTH_KEY, defaultSwissGridNorth);
 		String maidenheadStr = getStringValue(savedInstanceState, QUICK_SEARCH_COORDS_MAIDENHEAD_KEY, defaultMaidenhead);
@@ -236,7 +231,6 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 			mgrsEdit.setSelection(mgrsStr.length());
 			olcEdit.setText(olcStr);
 			olcEdit.setSelection(olcStr.length());
-			olcInfo.setText(olcInfoStr);
 			swissGridEastEdit.setText(swissGridEastStr);
 			swissGridEastEdit.setSelection(swissGridEastStr.length());
 			swissGridNorthEdit.setText(swissGridNorthStr);
@@ -379,7 +373,6 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 			TextView zoneEdit = view.findViewById(R.id.zoneEditText);
 			TextView mgrsEdit = view.findViewById(R.id.mgrsEditText);
 			TextView olcEdit = view.findViewById(R.id.olcEditText);
-			TextView olcInfo = view.findViewById(R.id.olcInfoTextView);
 			TextView swissGridEastEdit = view.findViewById(R.id.swissGridEastEditText);
 			TextView swissGridNorthEdit = view.findViewById(R.id.swissGridNorthEditText);
 			outState.putString(QUICK_SEARCH_COORDS_FORMAT_KEY, currentFormatId);
@@ -390,7 +383,6 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 			outState.putString(QUICK_SEARCH_COORDS_ZONE_KEY, zoneEdit.getText().toString());
 			outState.putString(QUICK_SEARCH_COORDS_MGRS_KEY, mgrsEdit.getText().toString());
 			outState.putString(QUICK_SEARCH_COORDS_OLC_KEY, olcEdit.getText().toString());
-			outState.putString(QUICK_SEARCH_COORDS_OLC_INFO_KEY, olcInfo.getText().toString());
 			outState.putString(QUICK_SEARCH_COORDS_SWISS_GRID_EAST_KEY, swissGridEastEdit.getText().toString());
 			outState.putString(QUICK_SEARCH_COORDS_SWISS_GRID_NORTH_KEY, swissGridNorthEdit.getText().toString());
 			outState.putString(QUICK_SEARCH_COORDS_MAIDENHEAD_KEY, maidenheadEdit.getText().toString());
@@ -529,7 +521,6 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 			view.findViewById(R.id.northingLayout).setVisibility(View.VISIBLE);
 			view.findViewById(R.id.zoneLayout).setVisibility(View.GONE);
 			view.findViewById(R.id.olcLayout).setVisibility(View.GONE);
-			view.findViewById(R.id.olcInfoLayout).setVisibility(View.GONE);
 			view.findViewById(R.id.latitudeLayout).setVisibility(View.GONE);
 			view.findViewById(R.id.longitudeLayout).setVisibility(View.GONE);
 			view.findViewById(R.id.mgrsLayout).setVisibility(View.GONE);
@@ -545,7 +536,6 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 				view.findViewById(R.id.northingLayout).setVisibility(View.GONE);
 				view.findViewById(R.id.zoneLayout).setVisibility(View.GONE);
 				view.findViewById(R.id.olcLayout).setVisibility(View.VISIBLE);
-				view.findViewById(R.id.olcInfoLayout).setVisibility(View.VISIBLE);
 				view.findViewById(R.id.latitudeLayout).setVisibility(View.GONE);
 				view.findViewById(R.id.longitudeLayout).setVisibility(View.GONE);
 				view.findViewById(R.id.mgrsLayout).setVisibility(View.GONE);
@@ -559,7 +549,6 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 				view.findViewById(R.id.northingLayout).setVisibility(View.VISIBLE);
 				view.findViewById(R.id.zoneLayout).setVisibility(View.VISIBLE);
 				view.findViewById(R.id.olcLayout).setVisibility(View.GONE);
-				view.findViewById(R.id.olcInfoLayout).setVisibility(View.GONE);
 				view.findViewById(R.id.latitudeLayout).setVisibility(View.GONE);
 				view.findViewById(R.id.longitudeLayout).setVisibility(View.GONE);
 				view.findViewById(R.id.mgrsLayout).setVisibility(View.GONE);
@@ -573,7 +562,6 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 				view.findViewById(R.id.northingLayout).setVisibility(View.GONE);
 				view.findViewById(R.id.zoneLayout).setVisibility(View.GONE);
 				view.findViewById(R.id.olcLayout).setVisibility(View.GONE);
-				view.findViewById(R.id.olcInfoLayout).setVisibility(View.GONE);
 				view.findViewById(R.id.latitudeLayout).setVisibility(View.GONE);
 				view.findViewById(R.id.longitudeLayout).setVisibility(View.GONE);
 				view.findViewById(R.id.mgrsLayout).setVisibility(View.VISIBLE);
@@ -588,7 +576,6 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 				view.findViewById(R.id.northingLayout).setVisibility(View.GONE);
 				view.findViewById(R.id.zoneLayout).setVisibility(View.GONE);
 				view.findViewById(R.id.olcLayout).setVisibility(View.GONE);
-				view.findViewById(R.id.olcInfoLayout).setVisibility(View.GONE);
 				view.findViewById(R.id.latitudeLayout).setVisibility(View.GONE);
 				view.findViewById(R.id.longitudeLayout).setVisibility(View.GONE);
 				view.findViewById(R.id.mgrsLayout).setVisibility(View.GONE);
@@ -602,7 +589,6 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 				view.findViewById(R.id.northingLayout).setVisibility(View.GONE);
 				view.findViewById(R.id.zoneLayout).setVisibility(View.GONE);
 				view.findViewById(R.id.olcLayout).setVisibility(View.GONE);
-				view.findViewById(R.id.olcInfoLayout).setVisibility(View.GONE);
 				view.findViewById(R.id.latitudeLayout).setVisibility(View.GONE);
 				view.findViewById(R.id.longitudeLayout).setVisibility(View.GONE);
 				view.findViewById(R.id.mgrsLayout).setVisibility(View.GONE);
@@ -616,7 +602,6 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 				view.findViewById(R.id.northingLayout).setVisibility(View.GONE);
 				view.findViewById(R.id.zoneLayout).setVisibility(View.GONE);
 				view.findViewById(R.id.olcLayout).setVisibility(View.GONE);
-				view.findViewById(R.id.olcInfoLayout).setVisibility(View.GONE);
 				view.findViewById(R.id.latitudeLayout).setVisibility(View.VISIBLE);
 				view.findViewById(R.id.longitudeLayout).setVisibility(View.VISIBLE);
 				view.findViewById(R.id.mgrsLayout).setVisibility(View.GONE);
@@ -628,33 +613,12 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 		}
 	}
 
-	private String provideOlcInfo(String olcString) {
-		try {
-			if (!OpenLocationCode.isValidCode(olcString))
-				return getString(R.string.navigate_point_olc_info_invalid);
-			OpenLocationCode olc = new OpenLocationCode(olcString);
-			if (olc.isShort())
-				return getString(R.string.navigate_point_olc_info_short);
-			OpenLocationCode.CodeArea area = olc.decode();
-			int areaWidth = (int) Math.ceil(MapUtils.getDistance(area.getNorthLatitude(), area.getWestLongitude(),
-					area.getNorthLatitude(), area.getEastLongitude()));
-			int areaHeight = (int) Math.ceil(MapUtils.getDistance(area.getNorthLatitude(), area.getWestLongitude(),
-					area.getSouthLatitude(), area.getWestLongitude()));
-			return getString(R.string.navigate_point_olc_info_area,
-					OsmAndFormatter.getFormattedDistance(areaWidth, app),
-					OsmAndFormatter.getFormattedDistance(areaHeight, app));
-		} catch (IllegalArgumentException iae) {
-			return getString(R.string.navigate_point_olc_info_invalid);
-		}
-	}
-
 	private void setInputTypeDependingOnFormat(EditText[] editTexts) {
 		for (EditText et : editTexts) {
 			if (CURRENT_FORMAT == PointDescription.FORMAT_DEGREES) {
 				et.setInputType(TYPE_CLASS_PHONE);
 			} else {
-				et.setInputType(TYPE_CLASS_TEXT | TYPE_TEXT_VARIATION_VISIBLE_PASSWORD |
-						TYPE_TEXT_FLAG_CAP_CHARACTERS | TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+				et.setInputType(TYPE_CLASS_TEXT | TYPE_TEXT_FLAG_CAP_CHARACTERS | TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 			}
 		}
 	}
@@ -747,7 +711,6 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 				} else {
 					olcEdit.setText(latEdit.getText());
 				}
-				olcInfo.setText(provideOlcInfo(olcEdit.getText().toString()));
 			} else if (CURRENT_FORMAT == PointDescription.SWISS_GRID_FORMAT || CURRENT_FORMAT == PointDescription.SWISS_GRID_PLUS_FORMAT) {
 				if (latLon != null) {
 					double[] swissGrid;
@@ -908,7 +871,6 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 				loc = new LatLon(ll.getLatitude(), ll.getLongitude());
 			} else if (CURRENT_FORMAT == LocationConvert.OLC_FORMAT) {
 				String olcText = olcEdit.getText().toString();
-				olcInfo.setText(provideOlcInfo(olcText));
 				loc = parseOlcCode(olcText);
 			} else if (CURRENT_FORMAT == LocationConvert.SWISS_GRID_FORMAT) {
 				double eastCoordinate = Double.parseDouble(swissGridEastEdit.getText().toString().replaceAll("\\s+", ""));
@@ -995,9 +957,7 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 			LatLon mapLocation = requireMapActivity().getMapLocation();
 			if (cityName.isEmpty()) {
 				if (mapLocation != null) {
-					OpenLocationCode newCode = code.recover(mapLocation.getLatitude(), mapLocation.getLongitude());
 					codeArea = code.recover(mapLocation.getLatitude(), mapLocation.getLongitude()).decode();
-					olcInfo.setText(provideOlcInfo(newCode.getCode()));
 				}
 			} else {
 				parseOlcCodeTask = new SearchCitiesTask(app, cityName, mapLocation, getSearchCitiesListener(olcTextCode));
@@ -1031,7 +991,7 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 						OpenLocationCode code = new OpenLocationCode(olcTextCode);
 						OpenLocationCode newCode = code.recover(latLon.getLatitude(), latLon.getLongitude());
 						CodeArea codeArea = newCode.decode();
-						updateCurrentLocation(new LatLon(codeArea.getCenterLatitude(), codeArea.getCenterLongitude()), newCode.getCode());
+						updateCurrentLocation(new LatLon(codeArea.getCenterLatitude(), codeArea.getCenterLongitude()));
 					}
 				}
 			}
@@ -1048,10 +1008,9 @@ public class QuickSearchCoordinatesFragment extends BaseFullScreenDialogFragment
 		searchProgressBar.setVisibility(visible ? View.VISIBLE : View.GONE);
 	}
 
-	private void updateCurrentLocation(LatLon latLon, String olcText) {
+	private void updateCurrentLocation(LatLon latLon) {
 		currentLatLon = latLon;
 		updateLocationCell(coordsView, currentLatLon, false);
-		olcInfo.setText(provideOlcInfo(olcText));
 		updateErrorVisibility();
 	}
 

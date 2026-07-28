@@ -1327,7 +1327,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="activate_srtm_plugin">Kali laska, aktyvujcie dadatak «Konturnyja linii»</string>
     <string name="later">Paźniej</string>
     <string name="downloads">Ściahvańnі</string>
-    <string name="confirm_download_roadmaps">Mapa aŭtadaroh nie patrebnaja, bo vy majecie standartnuju (poŭnuju) mapu? Sciahnuć usio roŭna?</string>
     <string name="value_downloaded_of_max">%1$.1f z %2$.1f Mb</string>
     <string name="file_size_in_mb">%.1f Mb</string>
     <string name="update_all">Abnavіć usie (%1$s MB)</string>

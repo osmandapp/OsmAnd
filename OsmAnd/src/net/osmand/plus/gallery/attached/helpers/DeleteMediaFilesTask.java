@@ -98,6 +98,9 @@ class DeleteMediaFilesTask extends AsyncTask<Void, Void, Integer> {
 			for (WptPt wpt : selectedGpxFile.getGpxFile().getPointsList()) {
 				addInternalPaths(res, wpt.getLinks());
 			}
+			for (WptPt routePoint : selectedGpxFile.getGpxFile().getRoutePoints()) {
+				addInternalPaths(res, routePoint.getLinks());
+			}
 		}
 		return res;
 	}

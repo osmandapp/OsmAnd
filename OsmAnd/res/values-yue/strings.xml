@@ -4473,7 +4473,6 @@
     <string name="activate_srtm_plugin">請啟用「地形」外掛元件</string>
     <string name="later">稍後</string>
     <string name="downloads">下載</string>
-    <string name="confirm_download_roadmaps">您已經下載了完整地圖，是否仍要下載僅包含道路的地圖？</string>
     <string name="value_downloaded_of_max">%1$.1f 從 %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">全部更新 (%1$s MB)</string>

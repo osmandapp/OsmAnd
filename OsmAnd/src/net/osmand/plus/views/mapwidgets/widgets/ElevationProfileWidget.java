@@ -46,9 +46,9 @@ import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.appearance.ResolvedPanelAppearance;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.primitives.TrkSegment;
@@ -215,8 +215,8 @@ public class ElevationProfileWidget extends MapWidget {
 	}
 
 	@Override
-	public void updateColors(@NonNull TextState textState) {
-		super.updateColors(textState);
+	protected void onPanelAppearanceChanged(@NonNull ResolvedPanelAppearance appearance) {
+		super.onPanelAppearanceChanged(appearance);
 		int primaryTextColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
 		int secondaryTextColor = ColorUtilities.getSecondaryTextColor(app, nightMode);
 		int dividerColorBasic = ColorUtilities.getDividerColor(app, nightMode);

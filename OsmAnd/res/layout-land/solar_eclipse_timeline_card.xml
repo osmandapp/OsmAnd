@@ -115,6 +115,7 @@
 			android:visibility="gone">
 
 			<TextView
+				android:id="@+id/eclipse_error_text"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:text="@string/astro_eclipse_load_error"
@@ -200,7 +201,7 @@
 					android:textColor="?android:attr/textColorSecondary"
 					android:textSize="11sp" />
 
-				<net.osmand.plus.plugins.astronomy.views.SolarEclipseTimelineView
+				<net.osmand.plus.plugins.astronomy.views.EclipseTimelineView
 					android:id="@+id/eclipse_timeline"
 					android:layout_width="match_parent"
 					android:layout_height="36dp"

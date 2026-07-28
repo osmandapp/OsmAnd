@@ -1322,7 +1322,6 @@
     <string name="failed_to_upload">Vieminen epäonnistui</string>
     <string name="successfully_uploaded_pattern">Viety {0}/{1}</string>
     <string name="tab_title_advanced">Edistynyt</string>
-    <string name="confirm_download_roadmaps">Vain tiet-karttaa ei tarvita, koska sinulla on jo vakio (täysi) kartta. Ladataanko se silti\?</string>
     <string name="rendering_value_low_name">Matala</string>
     <string name="rendering_value_high_name">Korkea</string>
     <string name="rendering_value_medium_w_name">Keskitaso</string>

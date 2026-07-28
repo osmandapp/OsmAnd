@@ -95,7 +95,7 @@ public class RegionPriorityProvider {
 
     private int calculatePriorityValue(BinaryMapIndexReader region) {
         for (int i = 0; i * BBOX_STEP <= BBOX_MAX; i++) {
-            QuadRect rect = MapUtils.calculateBbox(i * BBOX_STEP + 50, searchLocation);
+            QuadRect rect = MapUtils.calculate31BboxUsingRhumb(i * BBOX_STEP + 50, searchLocation);
             if (region.containsPoiData((int) rect.left, (int) rect.top, (int) rect.right, (int) rect.bottom)) {
                 return i;
             }

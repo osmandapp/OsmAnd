@@ -11,6 +11,9 @@
 		<item name="color_button_secondary_v2">@color/buttons_secondary_light_v2</item>
 		<item name="color_material_switch_outline">@color/material_switch_outline_light</item>
 		<item name="active_color_secondary">@color/active_color_secondary_light</item>
+		<item name="icon_button_background_hovered">@color/btn_bg_icon_hover_light</item>
+		<item name="icon_button_background_focused">@color/btn_bg_icon_focused_light</item>
+		<item name="icon_button_background_pressed">@color/btn_bg_icon_pressed_light</item>
 		<item name="ctx_menu_card_btn">@color/inactive_buttons_and_links_bg_light</item>
 		<item name="active_color_primary">@color/active_color_primary_light</item>
 		<item name="active_color_basic">@color/active_color_primary_light</item>

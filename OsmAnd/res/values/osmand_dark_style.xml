@@ -240,6 +240,7 @@
         <item name="dlg_btn_tertiary_harmful">@drawable/dlg_btn_tertiary_harmful</item>
         <item name="profile_save_btn">@drawable/btn_round_profile_night</item>
         <item name="profile_cancel_btn">@drawable/btn_round_profile_gray_n</item>
+        <item name="btn_history_disabled_card_bg">@drawable/dlg_btn_secondary_dark</item>
 
         <item name="buttonBarNegativeButtonStyle">@style/DialogButtonStyleDark</item>
         <item name="buttonBarPositiveButtonStyle">@style/DialogButtonStyleDark</item>
@@ -279,6 +280,9 @@
         <item name="status_bar_active_color">@color/status_bar_selection_color_dark</item>
         <item name="active_color_secondary">@color/active_color_secondary_dark</item>
         <item name="active_color_primary">@color/active_color_primary_dark</item>
+		<item name="icon_button_background_hovered">@color/btn_bg_icon_hover_dark</item>
+		<item name="icon_button_background_focused">@color/btn_bg_icon_focused_dark</item>
+		<item name="icon_button_background_pressed">@color/btn_bg_icon_pressed_dark</item>
         <item name="slider_label_text_dark">@color/slider_label_text_dark</item>
         <item name="app_bar_secondary_color">@color/app_bar_secondary_dark</item>
         <item name="map_button_icon_color">@color/map_button_icon_color_dark</item>

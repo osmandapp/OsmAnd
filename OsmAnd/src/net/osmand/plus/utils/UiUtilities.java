@@ -39,6 +39,7 @@ import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.ColorUtils;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.widget.TintableCompoundButton;
@@ -56,6 +57,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
+import net.osmand.plus.base.ISupportInsets;
 import net.osmand.plus.help.HelpArticleUtils;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.DayNightHelper;
@@ -68,11 +70,13 @@ import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.views.MapLayers;
+import net.osmand.plus.views.controls.VerticalWidgetPanel;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.configure.appearance.PanelAppearanceSettings;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.IComplexWidget;
 import net.osmand.plus.views.mapwidgets.widgets.CoordinatesBaseWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapMarkersBarWidget;
@@ -766,29 +770,27 @@ public class UiUtilities {
 		BaseFullScreenFragment fragmentBelowDashboard = fragmentsHelper.getVisibleBaseFullScreenFragment(R.id.routeMenuContainer, R.id.topFragmentContainer, R.id.bottomFragmentContainer);
 
 		int statusBarColorId = -1;
-		int navigationBarColorId = -1;
+		ISupportInsets navigationBarOwner = activity;
 		boolean nightModeForContent = true;
 		if (fragmentAboveDashboard != null) {
 			statusBarColorId = fragmentAboveDashboard.getStatusBarColorId();
-			navigationBarColorId = fragmentAboveDashboard.getNavigationBarColorId();
+			navigationBarOwner = fragmentAboveDashboard;
 			nightModeForContent = fragmentAboveDashboard.getContentStatusBarNightMode();
 		} else if (settingsFragmentAboveDashboard != null) {
 			statusBarColorId = settingsFragmentAboveDashboard.getStatusBarColorId();
-			navigationBarColorId = settingsFragmentAboveDashboard.getNavigationBarColorId();
+			navigationBarOwner = settingsFragmentAboveDashboard;
 			nightModeForContent = settingsFragmentAboveDashboard.getContentStatusBarNightMode();
 		} else if (activity.getDashboard().isVisible()) {
 			statusBarColorId = activity.getDashboard().getStatusBarColor();
 		} else if (fragmentBelowDashboard != null) {
 			statusBarColorId = fragmentBelowDashboard.getStatusBarColorId();
-			navigationBarColorId = fragmentBelowDashboard.getNavigationBarColorId();
+			navigationBarOwner = fragmentBelowDashboard;
 			nightModeForContent = fragmentBelowDashboard.getContentStatusBarNightMode();
 		} else if (mapLayers.getMapQuickActionLayer() != null
 				&& mapLayers.getMapQuickActionLayer().isWidgetVisible()) {
 			statusBarColorId = R.color.status_bar_transparent_gradient;
 		}
-		if (navigationBarColorId != -1) {
-			AndroidUiHelper.setNavigationBarColor(activity, ContextCompat.getColor(activity, navigationBarColorId), nightModeForContent);
-		}
+		navigationBarOwner.updateNavigationBarColor();
 		if (statusBarColorId != -1) {
 			AndroidUiHelper.setStatusBarColor(activity, ContextCompat.getColor(activity, statusBarColorId));
 			AndroidUiHelper.setStatusBarContentColor(activity.getWindow().getDecorView(), nightModeForContent);
@@ -806,17 +808,35 @@ public class UiUtilities {
 			color = toolbarController.getStatusBarColor(activity, nightMode);
 		}
 		if (color == NO_COLOR) {
-			ApplicationMode appMode = settings.getApplicationMode();
-			int defaultColorId = nightMode ? R.color.status_bar_transparent_dark : R.color.status_bar_transparent_light;
-			int colorIdForTopWidget = getStatusBarWidgetColor(activity, appMode, nightMode);
-			if (colorIdForTopWidget != -1) {
-				nightModeForContent = getStatusBarContentNightMode(activity, appMode, nightMode);
+			Integer customTopPanelColor = getCustomTopPanelColor(activity, nightMode);
+			if (mapControlsVisible && customTopPanelColor != null) {
+				color = customTopPanelColor;
+				int opaqueColor = ColorUtilities.removeAlpha(customTopPanelColor);
+				nightModeForContent = ColorUtils.calculateLuminance(opaqueColor) < 0.5;
+			} else {
+				ApplicationMode appMode = settings.getApplicationMode();
+				int defaultColorId = nightMode ? R.color.status_bar_transparent_dark : R.color.status_bar_transparent_light;
+				int colorIdForTopWidget = getStatusBarWidgetColor(activity, appMode, nightMode);
+				if (colorIdForTopWidget != -1) {
+					nightModeForContent = getStatusBarContentNightMode(activity, appMode, nightMode);
+				}
+				statusBarColorId = mapControlsVisible && colorIdForTopWidget != -1 ? colorIdForTopWidget : defaultColorId;
+				color = ContextCompat.getColor(activity, statusBarColorId);
 			}
-			statusBarColorId = mapControlsVisible && colorIdForTopWidget != -1 ? colorIdForTopWidget : defaultColorId;
-			color = ContextCompat.getColor(activity, statusBarColorId);
 		}
 		AndroidUiHelper.setStatusBarColor(activity, color);
 		AndroidUiHelper.setStatusBarContentColor(activity.getWindow().getDecorView(), nightModeForContent);
+	}
+
+	@Nullable
+	private static Integer getCustomTopPanelColor(@NonNull MapActivity activity, boolean nightMode) {
+		VerticalWidgetPanel panel = activity.findViewById(R.id.top_widgets_panel);
+		if (panel != null && panel.getVisibility() == View.VISIBLE && panel.isAnyRowVisible()) {
+			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(activity);
+			return PanelAppearanceSettings.getCommittedCustomBackgroundColor(
+					activity.getApp(), WidgetsPanel.TOP, layoutMode, nightMode);
+		}
+		return null;
 	}
 
 	@ColorRes

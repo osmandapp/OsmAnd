@@ -414,9 +414,25 @@
 		<item name="checkedIconMargin">0dp</item>
 	</style>
 
+	<style name="Widget.App.Material.CircularIconButton" parent="Widget.MaterialComponents.ShapeableImageView">
+		<item name="android:layout_width">@dimen/acceptable_touch_radius</item>
+		<item name="android:layout_height">@dimen/acceptable_touch_radius</item>
+		<item name="android:background">@drawable/ripple_circular_icon_button</item>
+		<item name="android:scaleType">center</item>
+		<item name="android:tint">?attr/default_icon_color</item>
+		<item name="android:clickable">true</item>
+		<item name="android:focusable">true</item>
+		<item name="shapeAppearanceOverlay">@style/Shape.Circle</item>
+	</style>
+
 	<style name="Shape.Card16">
 		<item name="cornerFamily">rounded</item>
 		<item name="cornerSize">16dp</item>
+	</style>
+
+	<style name="Shape.Circle">
+		<item name="cornerFamily">rounded</item>
+		<item name="cornerSize">50%</item>
 	</style>
 
 	<style name="Shape.Card28">

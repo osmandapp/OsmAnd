@@ -18,14 +18,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
+import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
+import androidx.preference.SwitchPreferenceCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.PlatformUtil;
@@ -36,13 +37,16 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.bottomsheets.ChangeMediaStorageBottomSheet;
 import net.osmand.plus.settings.datastorage.MoveFilesStopListener;
+import net.osmand.plus.settings.enums.MediaStorageType;
+import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.mediastorage.task.CollectMediaFilesTask;
 import net.osmand.plus.settings.mediastorage.task.CollectMediaFilesTask.MediaFilesCollection;
 import net.osmand.plus.settings.mediastorage.task.MoveMediaFilesTask;
 import net.osmand.plus.settings.mediastorage.task.ValidateMediaStorageTask;
-import net.osmand.plus.settings.enums.MediaStorageType;
-import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -67,6 +71,12 @@ public class MediaStorageFragment extends BaseSettingsFragment implements MoveFi
 	private MediaStorageType pendingStorageType;
 
 	@Override
+	@ColorRes
+	protected int getBackgroundColorRes() {
+		return ColorUtilities.getActivityBgColorId(isNightMode());
+	}
+
+	@Override
 	protected void setupPreferences() {
 		PreferenceScreen screen = getPreferenceScreen();
 		if (screen == null) {
@@ -77,19 +87,34 @@ public class MediaStorageFragment extends BaseSettingsFragment implements MoveFi
 			CheckBoxPreference preference = new CheckBoxPreference(requireContext());
 			preference.setKey(type.name());
 			preference.setTitle(type.getTitleId());
-			preference.setSummary(type.getDescriptionId());
+			preference.setSummary(getStorageSummary(type));
 			preference.setLayoutResource(R.layout.media_storage_list_item);
+			preference.setOrder(type.ordinal());
 			preference.setPersistent(false);
 			screen.addPreference(preference);
 			storageTypePrefs.add(preference);
 		}
+		requirePreference(settings.AUTO_COPY_MEDIA_TO_OSMAND_STORAGE.getId()).setOrder(storageTypePrefs.size());
 		currentStorageType = settings.MEDIA_STORAGE_TYPE.get();
 		updateView();
+	}
+
+	@NonNull
+	private CharSequence getStorageSummary(@NonNull MediaStorageType type) {
+		if (type == CAMERA_FOLDER) {
+			String title = getString(R.string.shared_string_note);
+			String note = getString(R.string.ltr_or_rtl_combine_via_colon, title, getString(R.string.media_storage_camera_folder_note_descr));
+			String text = getString(type.getDescriptionId(), note);
+			String prefix = getString(R.string.ltr_or_rtl_combine_via_colon, title, "").trim();
+			return UiUtilities.createCustomFontSpannable(FontCache.getMediumFont(), text, prefix);
+		}
+		return getString(type.getDescriptionId());
 	}
 
 	@Override
 	public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 		RecyclerView recyclerView = super.onCreateRecyclerView(inflater, parent, savedInstanceState);
+		recyclerView.setPadding(0, getResources().getDimensionPixelSize(R.dimen.content_padding), 0, recyclerView.getPaddingBottom());
 		recyclerView.setItemAnimator(null);
 		return recyclerView;
 	}
@@ -98,17 +123,28 @@ public class MediaStorageFragment extends BaseSettingsFragment implements MoveFi
 	protected void onBindPreferenceViewHolder(@NonNull Preference preference, @NonNull PreferenceViewHolder holder) {
 		super.onBindPreferenceViewHolder(preference, holder);
 		if (preference instanceof CheckBoxPreference) {
-			TextView summary = holder.itemView.findViewById(R.id.summary);
-			if (summary != null) {
-				summary.setText(preference.getSummary());
+			int index = storageTypePrefs.indexOf(preference);
+			int lastIndex = storageTypePrefs.size() - 1;
+			int backgroundId = index == 0 ? R.drawable.bg_list_card_top_round : index == lastIndex ? R.drawable.bg_list_card_bottom_round : 0;
+			if (backgroundId != 0) {
+				holder.itemView.setBackgroundResource(backgroundId);
+			} else {
+				holder.itemView.setBackgroundColor(ColorUtilities.getListBgColor(app, isNightMode()));
 			}
-			View divider = holder.itemView.findViewById(R.id.divider);
-			if (divider != null) {
-				MediaStorageType[] types = MediaStorageType.values();
-				boolean lastItem = types[types.length - 1].name().equals(preference.getKey());
-				AndroidUiHelper.updateVisibility(divider, !lastItem);
+			AndroidUiHelper.updateVisibility(holder.itemView.findViewById(R.id.divider), index != lastIndex);
+		} else if (preference instanceof SwitchPreferenceCompat) {
+			int padding = getResources().getDimensionPixelSize(R.dimen.content_padding);
+			ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) holder.itemView.getLayoutParams();
+			params.topMargin = padding;
+			holder.itemView.setLayoutParams(params);
+			holder.itemView.setBackgroundResource(R.drawable.bg_list_card_round);
+
+			View selectableView = holder.itemView.findViewById(R.id.selectable_list_item);
+			if (selectableView != null) {
+				selectableView.setPadding(0, padding, 0, padding);
 			}
 		}
+		holder.itemView.setClipToOutline(preference.isSelectable());
 	}
 
 	@Override
@@ -120,8 +156,10 @@ public class MediaStorageFragment extends BaseSettingsFragment implements MoveFi
 					applyNewStorageType(MediaStorageType.valueOf(typeName), resultData.getString(CHOSEN_MANUAL_URI), resultData.getBoolean(MOVE_MEDIA));
 				}
 			}
-		} else {
+		} else if (preference instanceof CheckBoxPreference) {
 			onStorageTypeSelected(preference.getKey());
+		} else {
+			return super.onPreferenceChange(preference, newValue);
 		}
 		return false;
 	}

@@ -45,7 +45,7 @@ public class SearchAlgorithms {
         return new CodePointPrefixMatch(leftOffset, rightOffset, commonPrefixCodePointLength);
     }
 
-    private static List<String> split(String name) {
+    public static List<String> split(String name) {
         int prev = -1;
         List<String> namesToAdd = new ArrayList<String>();
         for (int i = 0; i <= name.length(); ) {
@@ -395,6 +395,10 @@ public class SearchAlgorithms {
 		if(name == null || name.length() == 0) {
 			return false;
 		}
+		return startsWithDigit(name) && letters(name) < 2;
+	}
+
+	public static boolean startsWithDigit(String name) {
 		// it used to be inconcinstent check for Character.isDigit(name.charAt(0)) - '#3'
 		boolean startsWithDigit = false;
 		for (int i = 0; i < name.length(); i++) {
@@ -405,7 +409,7 @@ public class SearchAlgorithms {
 				break;
 			}
 		}
-		return startsWithDigit && letters(name) < 2;
+		return startsWithDigit;
 	}	
 	
 	// Split '18B', '18/B', '18-B', '18 B' -> ['18', 'B'] - for duplicates list filled in (check list.size() > set)

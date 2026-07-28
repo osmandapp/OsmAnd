@@ -117,6 +117,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.views.corenative.NativeCoreContext;
+import net.osmand.plus.views.mapwidgets.configure.appearance.PanelAppearanceSettingsManager;
 import net.osmand.plus.views.mapwidgets.utils.AverageGlideComputer;
 import net.osmand.plus.views.mapwidgets.utils.AverageSpeedComputer;
 import net.osmand.plus.voice.CommandPlayer;
@@ -164,6 +165,7 @@ public class OsmandApplication extends MultiDexApplication {
 	private final LocaleHelper localeHelper = new LocaleHelper(this);
 	private final ToastHelper toastHelper = new ToastHelper(this);
 	private final CoordinateFormatHelper coordinateFormatHelper = new CoordinateFormatHelper(this);
+	PanelAppearanceSettingsManager panelAppearanceSettingsManager;
 
 	// start variables
 	ResourceManager resourceManager;
@@ -439,9 +441,17 @@ public class OsmandApplication extends MultiDexApplication {
 		return settings;
 	}
 
-	public void setSettings(OsmandSettings settings) {
+	public synchronized void setSettings(OsmandSettings settings) {
 		this.settings = settings;
+		if (panelAppearanceSettingsManager != null) {
+			panelAppearanceSettingsManager.updateSettings(settings);
+		}
 		PluginsHelper.initPlugins(this);
+	}
+
+	@NonNull
+	public PanelAppearanceSettingsManager getPanelAppearanceSettingsManager() {
+		return panelAppearanceSettingsManager;
 	}
 
 	public SavingTrackHelper getSavingTrackHelper() {

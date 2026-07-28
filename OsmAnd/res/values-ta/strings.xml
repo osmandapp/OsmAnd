@@ -3107,7 +3107,6 @@
     <string name="failed_to_upload">பதிவேற்ற முடியவில்லை</string>
     <string name="closing_at">மூடுவது</string>
     <string name="show_free_version_banner">இலவச பதிப்பு பேனரைக் காட்டு</string>
-    <string name="confirm_download_roadmaps">உங்களிடம் நிலையான (முழு) வரைபடம் இருப்பதால் சாலைகள் மட்டும் வரைபடம் தேவையில்லை. எப்படியும் பதிவிறக்கவா?</string>
     <string name="use_drawer_btn">பட்டியல் பயன்படுத்தவும்</string>
     <string name="update_time">புதுப்பிப்பு நேரம்</string>
     <string name="missing_write_external_storage_permission">நினைவக கார்டைப் பயன்படுத்த ஒச்மண்டிற்கு இசைவு இல்லை</string>

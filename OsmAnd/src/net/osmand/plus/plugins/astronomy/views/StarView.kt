@@ -18,6 +18,8 @@ import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.graphics.Rect
 import android.graphics.RectF
+import android.graphics.RadialGradient
+import android.graphics.Shader
 import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.GestureDetector
@@ -31,6 +33,7 @@ import androidx.core.graphics.withTranslation
 import io.github.cosinekitty.astronomy.Aberration
 import io.github.cosinekitty.astronomy.EquatorEpoch
 import io.github.cosinekitty.astronomy.Observer
+import io.github.cosinekitty.astronomy.LunarEclipseState
 import io.github.cosinekitty.astronomy.Refraction
 import io.github.cosinekitty.astronomy.Time
 import io.github.cosinekitty.astronomy.Topocentric
@@ -81,6 +84,7 @@ class StarView @JvmOverloads constructor(
 		private const val MAX_VIEW_ANGLE = 150.0
 		private const val MAX_VIEW_ANGLE_2D = 220.0
 		const val SOLAR_ECLIPSE_VIEW_ANGLE = 1.5
+		const val LUNAR_ECLIPSE_VIEW_ANGLE = 3.0
 		private const val PHYSICAL_DISC_VIEW_ANGLE = 3.0
 		private const val SYMBOLIC_DISC_VIEW_ANGLE = 8.0
 	}
@@ -198,6 +202,30 @@ class StarView @JvmOverloads constructor(
 		style = Paint.Style.STROKE
 		strokeWidth = 1.5f
 	}
+	private val lunarMoonPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+		color = 0xFFE8E5DC.toInt()
+		style = Paint.Style.FILL
+	}
+	private val lunarMoonLimbPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+		color = 0xFF8D9299.toInt()
+		style = Paint.Style.STROKE
+		strokeWidth = 1.5f
+	}
+	private val lunarPenumbraGuidePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+		color = 0xFF87919E.toInt()
+		style = Paint.Style.STROKE
+		strokeWidth = 1.5f
+		pathEffect = DashPathEffect(floatArrayOf(8f, 6f), 0f)
+	}
+	private val lunarUmbraGuidePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+		color = 0xFF9A4C50.toInt()
+		style = Paint.Style.STROKE
+		strokeWidth = 2f
+	}
+	private val lunarShadowPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+		style = Paint.Style.FILL
+	}
+	private val lunarMoonClipPath = Path()
 
 	// --- View State ---
 	private var azimuthCenter = 180.0
@@ -249,6 +277,14 @@ class StarView @JvmOverloads constructor(
 				invalidate()
 			}
 		}
+	var useUnrefractedLunarPositions = false
+		set(value) {
+			if (field != value) {
+				field = value
+				recalculatePositions(currentTime, updateTargets = false, force = true)
+				invalidate()
+			}
+		}
 
 	// --- Interaction ---
 	private var lastTouchX = 0f
@@ -281,6 +317,7 @@ class StarView @JvmOverloads constructor(
 	private val skyObjects = mutableListOf<SkyObject>()
 	private var sunObject: SkyObject? = null
 	private var moonObject: SkyObject? = null
+	private var lunarEclipseState: LunarEclipseState? = null
 	private var solarDiscsOverlap = false
 	private var constellations = listOf<Constellation>()
 	private val skyObjectMap = mutableMapOf<Int, SkyObject>()
@@ -609,6 +646,12 @@ class StarView @JvmOverloads constructor(
 		invalidate()
 	}
 
+	fun setLunarEclipseState(state: LunarEclipseState?) {
+		if (lunarEclipseState == state) return
+		lunarEclipseState = state
+		invalidate()
+	}
+
 	fun setConstellations(list: List<Constellation>) {
 		//visualAnimator?.cancel()
 		constellations = list
@@ -915,7 +958,10 @@ class StarView @JvmOverloads constructor(
 		val body = obj.body
 		if (obj.type.isSunSystem() && body != null) {
 			val equ = equator(body, time, observer, EquatorEpoch.OfDate, Aberration.Corrected)
-			val refraction = if (useUnrefractedSolarPositions && obj.type.isSolarDisc()) {
+			val refraction = if (
+				useUnrefractedSolarPositions && obj.type.isSolarDisc() ||
+				useUnrefractedLunarPositions && obj.type == SkyObject.Type.MOON
+			) {
 				Refraction.None
 			} else {
 				Refraction.Normal
@@ -1092,7 +1138,9 @@ class StarView @JvmOverloads constructor(
 			?.let { drawSkyObject(canvas, it) }
 		moonObject
 			?.takeIf { shouldDrawSkyObject(it) }
-			?.let { drawSkyObject(canvas, it) }
+			?.let { moon ->
+				if (!drawLunarEclipseMoon(canvas)) drawSkyObject(canvas, moon)
+			}
 
 		// Draw Highlights
 
@@ -1745,6 +1793,80 @@ class StarView @JvmOverloads constructor(
 				}
 			}
 		}
+	}
+
+	private fun drawLunarEclipseMoon(canvas: Canvas): Boolean {
+		val state = lunarEclipseState ?: return false
+		if (viewAngle > SYMBOLIC_DISC_VIEW_ANGLE) return false
+		if (!skyToScreen(state.moon.azimuth, state.moon.altitude, tempPoint)) return true
+		if (!skyToScreen(
+				state.earthShadow.azimuth,
+				state.earthShadow.altitude,
+				tempPoint2,
+				allowLimitedOffScreen = true
+			)
+		) return true
+
+		val moonX = tempPoint.x
+		val moonY = tempPoint.y
+		val shadowX = tempPoint2.x
+		val shadowY = tempPoint2.y
+		val physicalMoonRadius = angularRadiusToPixels(
+			state.moon.azimuth,
+			state.moon.altitude,
+			state.moon.angularRadius
+		).coerceAtLeast(1f)
+		val symbolicMoonRadius = moonObject?.let { moon ->
+			max(2f, 15f - moon.magnitude * 2f) * 0.5f
+		} ?: 8f
+		val symbolicWeight = ((viewAngle - PHYSICAL_DISC_VIEW_ANGLE) /
+			(SYMBOLIC_DISC_VIEW_ANGLE - PHYSICAL_DISC_VIEW_ANGLE)).coerceIn(0.0, 1.0)
+		val moonRadius = (physicalMoonRadius +
+			(symbolicMoonRadius - physicalMoonRadius) * symbolicWeight).toFloat()
+		val umbraRadius = angularRadiusToPixels(
+			state.earthShadow.azimuth,
+			state.earthShadow.altitude,
+			state.earthShadow.umbraAngularRadius
+		).coerceAtLeast(1f)
+		val penumbraRadius = angularRadiusToPixels(
+			state.earthShadow.azimuth,
+			state.earthShadow.altitude,
+			state.earthShadow.penumbraAngularRadius
+		).coerceAtLeast(umbraRadius + 1f)
+		val guideAlpha = (255.0 * ((SYMBOLIC_DISC_VIEW_ANGLE - viewAngle) /
+			(SYMBOLIC_DISC_VIEW_ANGLE - PHYSICAL_DISC_VIEW_ANGLE)).coerceIn(0.0, 1.0)).toInt()
+
+		lunarPenumbraGuidePaint.alpha = guideAlpha
+		lunarUmbraGuidePaint.alpha = guideAlpha
+		canvas.drawCircle(shadowX, shadowY, penumbraRadius, lunarPenumbraGuidePaint)
+		canvas.drawCircle(shadowX, shadowY, umbraRadius, lunarUmbraGuidePaint)
+		canvas.drawCircle(moonX, moonY, moonRadius, lunarMoonPaint)
+
+		lunarMoonClipPath.reset()
+		lunarMoonClipPath.addCircle(moonX, moonY, moonRadius, Path.Direction.CW)
+		val checkpoint = canvas.save()
+		canvas.clipPath(lunarMoonClipPath)
+		val umbraFraction = (umbraRadius / penumbraRadius).coerceIn(0.05f, 0.95f)
+		lunarShadowPaint.shader = RadialGradient(
+			shadowX,
+			shadowY,
+			penumbraRadius,
+			intArrayOf(
+				0xE06E252A.toInt(),
+				0xD06E252A.toInt(),
+				0x66564B50,
+				0x00564B50
+			),
+			floatArrayOf(0f, (umbraFraction * 0.96f), umbraFraction, 1f),
+			Shader.TileMode.CLAMP
+		)
+		lunarShadowPaint.alpha = guideAlpha
+		canvas.drawCircle(shadowX, shadowY, penumbraRadius, lunarShadowPaint)
+		lunarShadowPaint.shader = null
+		lunarShadowPaint.alpha = 255
+		canvas.restoreToCount(checkpoint)
+		canvas.drawCircle(moonX, moonY, moonRadius, lunarMoonLimbPaint)
+		return true
 	}
 
 	private fun drawSkyObject(canvas: Canvas, obj: SkyObject) {

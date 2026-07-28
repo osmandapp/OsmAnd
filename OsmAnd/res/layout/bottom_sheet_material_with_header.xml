@@ -7,6 +7,7 @@
 	android:overScrollMode="never">
 
 	<com.google.android.material.card.MaterialCardView
+		android:id="@+id/bottomSheetCard"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content">
 
@@ -17,10 +18,11 @@
 			android:orientation="vertical">
 
 			<View
+				android:id="@+id/dragHandle"
 				android:layout_width="32dp"
 				android:layout_height="4dp"
 				android:layout_gravity="center_horizontal"
-				android:layout_marginTop="4dp"
+				android:layout_marginTop="@dimen/content_padding_small"
 				android:layout_marginBottom="2dp"
 				android:background="@drawable/rectangle_rounded"
 				android:backgroundTint="?attr/secondary_icon_color" />
@@ -30,9 +32,7 @@
 				android:layout_height="wrap_content"
 				android:gravity="center_vertical"
 				android:minHeight="@dimen/bottom_sheet_list_item_height"
-				android:orientation="horizontal"
-				android:paddingStart="@dimen/content_padding"
-				android:paddingEnd="4dp">
+				android:orientation="horizontal">
 
 				<net.osmand.plus.widgets.TextViewEx
 					android:id="@+id/title"
@@ -42,31 +42,17 @@
 					android:layout_weight="1"
 					android:ellipsize="end"
 					android:maxLines="1"
+					android:layout_marginHorizontal="@dimen/content_padding"
 					android:textColor="?attr/text_color_primary_v2"
 					tools:text="Title" />
 
-				<FrameLayout
+				<com.google.android.material.imageview.ShapeableImageView
 					android:id="@+id/closeBtn"
-					android:layout_width="@dimen/acceptable_touch_radius"
-					android:layout_height="@dimen/acceptable_touch_radius"
+					style="@style/Widget.App.Material.CircularIconButton"
 					android:layout_gravity="center"
-					android:background="?attr/selectableItemBackground">
-
-					<FrameLayout
-						android:layout_width="32dp"
-						android:layout_height="32dp"
-						android:layout_gravity="center"
-						android:background="@drawable/bg_circle" />
-
-					<com.google.android.material.imageview.ShapeableImageView
-						android:layout_width="24dp"
-						android:layout_height="24dp"
-						android:layout_gravity="center"
-						android:contentDescription="@string/shared_string_close"
-						android:src="@drawable/ic_action_close_rounded"
-						android:tint="?attr/default_icon_color" />
-
-				</FrameLayout>
+					android:contentDescription="@string/shared_string_close"
+					android:layout_marginEnd="@dimen/content_padding_round_medium"
+					android:src="@drawable/ic_action_close_rounded" />
 
 			</LinearLayout>
 

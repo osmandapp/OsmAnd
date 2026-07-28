@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.view.View
 import io.github.cosinekitty.astronomy.EclipseKind
+import io.github.cosinekitty.astronomy.LunarEclipseMapFrame
 import io.github.cosinekitty.astronomy.SolarEclipseMapFrame
 import io.github.cosinekitty.astronomy.SolarEclipseMapTrack
 import net.osmand.PlatformUtil
@@ -29,6 +30,7 @@ class AstronomyPlugin(app: OsmandApplication) : OsmandPlugin(app) {
 		private val LOG = PlatformUtil.getLog(AstronomyPlugin::class.java)
 		private const val SETTINGS_PREFERENCE_ID = "astronomy_settings"
 		private const val SOLAR_ECLIPSE_LAYER_Z_ORDER = 2.9f
+		private const val LUNAR_ECLIPSE_LAYER_Z_ORDER = 2.9f
 	}
 
 	private val astronomySettings by lazy { AstronomyPluginSettings(getSettingsPref()) }
@@ -38,6 +40,7 @@ class AstronomyPlugin(app: OsmandApplication) : OsmandPlugin(app) {
 	val dataProvider: AstroDataProvider get() = astroDataProvider
 	val recentSearchChips = mutableListOf<StarMapRecentChip>()
 	private var solarEclipseMapLayer: SolarEclipseMapLayer? = null
+	private var lunarEclipseMapLayer: LunarEclipseMapLayer? = null
 
 	override fun getId(): String {
 		return OsmAndCustomizationConstants.PLUGIN_ASTRONOMY
@@ -105,9 +108,15 @@ class AstronomyPlugin(app: OsmandApplication) : OsmandPlugin(app) {
 
 	override fun registerLayers(context: Context, mapActivity: MapActivity?) {
 		val mapView = app.osmandMap.mapView
-		val layer = solarEclipseMapLayer ?: return
-		if (!mapView.layers.contains(layer)) {
-			mapView.addLayer(layer, SOLAR_ECLIPSE_LAYER_Z_ORDER)
+		solarEclipseMapLayer?.let { layer ->
+			if (!mapView.layers.contains(layer)) {
+				mapView.addLayer(layer, SOLAR_ECLIPSE_LAYER_Z_ORDER)
+			}
+		}
+		lunarEclipseMapLayer?.let { layer ->
+			if (!mapView.layers.contains(layer)) {
+				mapView.addLayer(layer, LUNAR_ECLIPSE_LAYER_Z_ORDER)
+			}
 		}
 	}
 
@@ -120,6 +129,10 @@ class AstronomyPlugin(app: OsmandApplication) : OsmandPlugin(app) {
 				mapView.removeLayer(layer)
 			}
 			solarEclipseMapLayer = null
+			lunarEclipseMapLayer?.let { layer ->
+				mapView.removeLayer(layer)
+			}
+			lunarEclipseMapLayer = null
 		}
 	}
 
@@ -145,6 +158,22 @@ class AstronomyPlugin(app: OsmandApplication) : OsmandPlugin(app) {
 			mapView.addLayer(layer, SOLAR_ECLIPSE_LAYER_Z_ORDER)
 		}
 		layer.setEclipseData(true, eventKey, eventKind, track, frame)
+	}
+
+	fun setLunarEclipseMapData(active: Boolean, frame: LunarEclipseMapFrame?) {
+		val mapView = app.osmandMap.mapView
+		if (!active) {
+			lunarEclipseMapLayer?.let { layer -> mapView.removeLayer(layer) }
+			lunarEclipseMapLayer = null
+			return
+		}
+		val layer = lunarEclipseMapLayer ?: LunarEclipseMapLayer(app).also {
+			lunarEclipseMapLayer = it
+		}
+		if (!mapView.layers.contains(layer)) {
+			mapView.addLayer(layer, LUNAR_ECLIPSE_LAYER_Z_ORDER)
+		}
+		layer.setEclipseData(true, frame)
 	}
 
 	override fun onIndexItemDownloaded(item: IndexItem, updatingFile: Boolean) {

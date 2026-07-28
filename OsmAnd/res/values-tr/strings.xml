@@ -944,7 +944,6 @@
     <string name="poi_context_menu_modify_osm_change">OSM değişikliği değiştirme</string>
     <string name="other_menu_group">Diğer</string>
     <string name="plugins_menu_group">Eklentiler</string>
-    <string name="confirm_download_roadmaps">Standart (tam) haritanız olduğu için sadece-yol haritası gerekli değildir. Yine de indirin\?</string>
     <string name="value_downloaded_of_max">%1$.1f of %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Tüm güncelleyin (%1$s MB)</string>

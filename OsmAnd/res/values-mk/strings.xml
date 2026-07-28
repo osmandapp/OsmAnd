@@ -3623,7 +3623,6 @@
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Ažurirajte gi site (%1$s MB)</string>
     <string name="downloads">Prevzemanja</string>
-    <string name="confirm_download_roadmaps">Kartata samo za patišta ne e potrebna, bidejḱi ja imate standardnata (celosna) karta. Da go prezemete sepak\?</string>
     <string name="value_downloaded_of_max">%1$.1f od %2$.1f MB</string>
     <string name="other_menu_group">Drug</string>
     <string name="plugins_menu_group">Priklucoci</string>

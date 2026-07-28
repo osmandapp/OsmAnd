@@ -3,11 +3,15 @@
              xmlns:tools="http://schemas.android.com/tools"
              xmlns:app="http://schemas.android.com/apk/res-auto"
              android:layout_width="match_parent"
-             android:layout_height="match_parent">
+             android:layout_height="match_parent"
+             android:background="?attr/activity_background_color"
+             android:clipChildren="false"
+             android:clipToPadding="false">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="?attr/activity_background_color"
         android:orientation="vertical">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -134,176 +138,23 @@
 	                    android:clickable="false"
 	                    android:gravity="center_vertical"
 	                    android:orientation="vertical"
-	                    android:paddingStart="@dimen/content_padding"
 	                    android:paddingTop="@dimen/content_padding_small"
-	                    android:paddingEnd="@dimen/content_padding"
 	                    android:paddingBottom="@dimen/content_padding_small">
 
-						<HorizontalScrollView
-							android:id="@+id/search_result_chips_scroll"
-							android:layout_width="match_parent"
-							android:layout_height="36dp"
-							android:fillViewport="true"
-							android:overScrollMode="never"
-							android:scrollbars="none">
-
-						<LinearLayout
-							android:layout_width="wrap_content"
-							android:layout_height="match_parent"
-							android:gravity="center_vertical"
-							android:orientation="horizontal">
-
-							<LinearLayout
-								android:id="@+id/filter_chip"
-								android:layout_width="wrap_content"
-								android:layout_height="36dp"
-								android:layout_marginEnd="@dimen/content_padding_half"
-								android:background="@drawable/bg_search_toolbar_chip"
-								android:clickable="true"
-								android:contentDescription="@string/poi_filter_custom_filter"
-								android:focusable="true"
-								android:gravity="center"
-								android:minWidth="68dp"
-								android:orientation="horizontal"
-								android:paddingStart="@dimen/content_padding_half"
-								android:paddingEnd="@dimen/content_padding_half"
-								android:visibility="gone">
-
-								<androidx.appcompat.widget.AppCompatImageView
-									android:id="@+id/filter_chip_icon"
-									android:layout_width="@dimen/standard_icon_size"
-									android:layout_height="@dimen/standard_icon_size"
-									android:layout_gravity="center_vertical"
-									app:srcCompat="@drawable/ic_action_filter" />
-
-								<TextView
-									android:id="@+id/filter_chip_count"
-									android:layout_width="wrap_content"
-									android:layout_height="wrap_content"
-									android:layout_marginStart="@dimen/content_padding_small_half"
-									android:gravity="center"
-									android:includeFontPadding="false"
-									android:minWidth="16dp"
-									android:textColor="?android:attr/textColorPrimary"
-									android:textSize="@dimen/default_desc_text_size"
-									android:textStyle="bold"
-									android:visibility="gone"
-									tools:text="2"
-									tools:visibility="visible" />
-
-							</LinearLayout>
-
-							<LinearLayout
-								android:id="@+id/sort_chip"
-								android:layout_width="wrap_content"
-								android:layout_height="36dp"
-								android:layout_marginEnd="@dimen/content_padding_half"
-								android:background="@drawable/bg_search_toolbar_chip"
-								android:clickable="true"
-								android:focusable="true"
-								android:gravity="center"
-								android:minWidth="132dp"
-								android:orientation="horizontal"
-								android:paddingStart="@dimen/content_padding_small"
-								android:paddingEnd="@dimen/content_padding_half">
-
-								<androidx.appcompat.widget.AppCompatImageView
-									android:id="@+id/sort_chip_icon"
-									android:layout_width="@dimen/standard_icon_size"
-									android:layout_height="@dimen/standard_icon_size"
-									android:layout_gravity="center_vertical"
-									android:layout_marginEnd="@dimen/content_padding_half"
-									app:srcCompat="@drawable/ic_action_sort" />
-
-								<net.osmand.plus.widgets.TextViewEx
-									android:id="@+id/sort_chip_title"
-									android:layout_width="0dp"
-									android:layout_height="wrap_content"
-									android:layout_gravity="center_vertical"
-									android:layout_weight="1"
-									android:gravity="center"
-									android:text="@string/sort_by_relevance"
-									android:textColor="?android:textColorPrimary"
-									android:textSize="@dimen/default_desc_text_size"
-									app:typefaceWeight="medium" />
-
-								<androidx.appcompat.widget.AppCompatImageView
-									android:id="@+id/sort_chip_arrow"
-									android:layout_width="@dimen/standard_icon_size"
-									android:layout_height="@dimen/standard_icon_size"
-									android:layout_gravity="center_vertical"
-									android:layout_marginStart="@dimen/content_padding_half"
-									app:srcCompat="@drawable/ic_action_arrow_drop_down" />
-
-							</LinearLayout>
-
-							<LinearLayout
-								android:id="@+id/search_around_chip"
-								android:layout_width="wrap_content"
-								android:layout_height="36dp"
-								android:layout_marginEnd="@dimen/content_padding_half"
-								android:background="@drawable/bg_search_toolbar_chip"
-								android:clickable="true"
-								android:focusable="true"
-								android:gravity="center"
-								android:minWidth="148dp"
-								android:orientation="horizontal"
-								android:paddingStart="@dimen/content_padding_small"
-								android:paddingEnd="@dimen/content_padding_half"
-								android:visibility="gone"
-								tools:visibility="visible">
-
-								<androidx.appcompat.widget.AppCompatImageView
-									android:id="@+id/search_around_chip_icon"
-									android:layout_width="@dimen/standard_icon_size"
-									android:layout_height="@dimen/standard_icon_size"
-									android:layout_gravity="center_vertical"
-									android:layout_marginEnd="@dimen/content_padding_half"
-									app:srcCompat="@drawable/ic_show_on_map_outlined" />
-
-								<net.osmand.plus.widgets.TextViewEx
-									android:id="@+id/search_around_chip_title"
-									android:layout_width="0dp"
-									android:layout_height="wrap_content"
-									android:layout_gravity="center_vertical"
-									android:layout_weight="1"
-									android:gravity="center"
-									android:text="@string/search_around"
-									android:textColor="?android:textColorPrimary"
-									android:textSize="@dimen/default_desc_text_size"
-									app:typefaceWeight="medium" />
-
-								<androidx.appcompat.widget.AppCompatImageView
-									android:id="@+id/search_around_chip_arrow"
-									android:layout_width="@dimen/standard_icon_size"
-									android:layout_height="@dimen/standard_icon_size"
-									android:layout_gravity="center_vertical"
-									android:layout_marginStart="@dimen/content_padding_half"
-									app:srcCompat="@drawable/ic_action_arrow_drop_down" />
-
-							</LinearLayout>
-
-						</LinearLayout>
-
-						</HorizontalScrollView>
-
-						<HorizontalScrollView
-							android:id="@+id/top_filters_chip_scroll"
+						<net.osmand.plus.search.dialogs.ChipsLayout
+							android:id="@+id/search_result_filter_chips"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							android:overScrollMode="never"
-							android:scrollbars="none"
+							tools:layout_height="36dp" />
+
+						<net.osmand.plus.search.dialogs.ChipsLayout
+							android:id="@+id/search_result_poi_types_chips"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="@dimen/content_padding_small"
 							android:visibility="gone"
-							tools:visibility="visible">
-
-							<LinearLayout
-								android:id="@+id/top_filters_chip_container"
-								android:layout_width="wrap_content"
-								android:layout_height="match_parent"
-								android:gravity="center_vertical"
-								android:orientation="horizontal" />
-
-						</HorizontalScrollView>
+							tools:layout_height="36dp"
+							tools:visibility="visible" />
 
                 </LinearLayout>
 
@@ -311,7 +162,7 @@
 						android:id="@+id/advanced_coordinates_card"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:background="@drawable/bg_quick_search_explore_card"
+						android:background="@drawable/bg_list_card_round"
 						android:clickable="true"
 						android:focusable="true"
 						android:orientation="horizontal"
@@ -370,6 +221,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="0dp"
 			android:layout_weight="1"
+			android:background="?attr/activity_background_color"
 			android:orientation="vertical"
 			android:visibility="gone">
 
@@ -457,36 +309,43 @@
 
 	</LinearLayout>
 
-	<com.google.android.material.floatingactionbutton.FloatingActionButton
-		android:id="@+id/show_on_map_fab"
-		style="@style/MaterialOsmandFab"
+	<LinearLayout
+		android:id="@+id/fabs_container"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_gravity="bottom|end"
-		android:layout_margin="16dp"
-		android:contentDescription="@string/shared_string_show_on_map"
-		android:visibility="gone"
-		app:elevation="6dp"
-		app:pressedTranslationZ="8dp"
-		app:shapeAppearanceOverlay="@style/MaterialOsmandFab"
-		app:srcCompat="@drawable/ic_show_on_map_outlined"
-		tools:visibility="visible" />
+		android:layout_margin="@dimen/content_padding"
+		android:clipChildren="false"
+		android:clipToPadding="false"
+		android:orientation="vertical">
 
-	<com.google.android.material.floatingactionbutton.FloatingActionButton
-		android:id="@+id/fab"
-		style="@style/MaterialOsmandFab"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginBottom="@dimen/fab_margin_right"
-		android:layout_marginRight="@dimen/fab_margin_right"
-		android:layout_gravity="bottom|end"
-		android:layout_margin="16dp"
-		android:contentDescription="@string/save_filter"
-		android:visibility="gone"
-		app:elevation="6dp"
-		app:pressedTranslationZ="8dp"
-		app:shapeAppearanceOverlay="@style/MaterialOsmandFab"
-		app:srcCompat="@drawable/ic_action_save"
-		tools:visibility="visible" />
+		<com.google.android.material.floatingactionbutton.FloatingActionButton
+			android:id="@+id/fab"
+			style="@style/MaterialOsmandFab"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:contentDescription="@string/save_filter"
+			android:visibility="gone"
+			app:elevation="6dp"
+			app:pressedTranslationZ="8dp"
+			app:shapeAppearanceOverlay="@style/MaterialOsmandFab"
+			app:srcCompat="@drawable/ic_action_save"
+			tools:visibility="visible" />
+
+		<com.google.android.material.floatingactionbutton.FloatingActionButton
+			android:id="@+id/show_on_map_fab"
+			style="@style/MaterialOsmandFab"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/content_padding_half"
+			android:contentDescription="@string/shared_string_show_on_map"
+			android:visibility="gone"
+			app:elevation="6dp"
+			app:pressedTranslationZ="8dp"
+			app:shapeAppearanceOverlay="@style/MaterialOsmandFab"
+			app:srcCompat="@drawable/ic_show_on_map_outlined"
+			tools:visibility="visible" />
+
+	</LinearLayout>
 
 </FrameLayout>

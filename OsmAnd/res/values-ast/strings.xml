@@ -866,7 +866,6 @@
     <string name="downloads_left_template">Queden %1$s descargues</string>
     <string name="show_free_version_banner">Show free version banner</string>
     <string name="show_free_version_banner_description">Display the free version banner even in the paid version.</string>
-    <string name="confirm_download_roadmaps">The roads-only map is not needed, since you have the standard (full) map. Download it anyway\?</string>
     <string name="plugins_menu_group">Plugins</string>
     <string name="feedback">Feedback</string>
     <string name="map_legend">Lleenda del mapa</string>

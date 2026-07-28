@@ -1192,7 +1192,6 @@
     <string name="update_all">Обновяване на всичко (%1$s МБ)</string>
     <string name="file_size_in_mb">%.1f МБ</string>
     <string name="value_downloaded_of_max">%1$.1f от %2$.1f МБ</string>
-    <string name="confirm_download_roadmaps">Няма нужда да изтегляте пътната карта, защото вече имате стандартната (пълна) карта. Изтегляне въпреки това\?</string>
     <string name="downloads">Изтегляния</string>
     <string name="activate_srtm_plugin">Включете добавката „Релеф“</string>
     <string name="activate_seamarks_plugin">Включете добавката „Морски карти“</string>

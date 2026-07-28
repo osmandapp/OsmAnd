@@ -2179,6 +2179,86 @@ data class SolarEclipseState(
 )
 
 
+/** Contact times for a lunar eclipse. */
+data class LunarEclipseWindow(
+    val event: LunarEclipseInfo,
+    val p1: Time,
+    val p4: Time,
+    val u1: Time?,
+    val u4: Time?,
+    val u2: Time?,
+    val u3: Time?
+)
+
+
+/** The instantaneous phase of a lunar eclipse. */
+enum class LunarEclipsePhase {
+    None,
+    Penumbral,
+    Partial,
+    Total
+}
+
+
+/** Topocentric position and apparent size of Earth's shadow at the Moon. */
+data class ApparentEarthShadow(
+    val rightAscension: Double,
+    val declination: Double,
+    val azimuth: Double,
+    val altitude: Double,
+    val distanceAu: Double,
+    val umbraAngularRadius: Double,
+    val penumbraAngularRadius: Double
+)
+
+
+/** Instantaneous lunar eclipse geometry for an arbitrary time and observer. */
+data class LunarEclipseState(
+    val time: Time,
+    val moon: ApparentDisc,
+    val earthShadow: ApparentEarthShadow,
+    val centerSeparation: Double,
+    val phase: LunarEclipsePhase,
+    val umbralObscuration: Double,
+    val penumbralCoverage: Double,
+    val correctedMoonAltitude: Double
+)
+
+
+/** A geographic point used to render lunar eclipse visibility on a map. */
+data class LunarEclipseMapCoordinate(
+    val latitude: Double,
+    val longitude: Double
+)
+
+
+/** Antimeridian-aware bounds for lunar eclipse visibility geometry. */
+data class LunarEclipseMapBounds(
+    val north: Double,
+    val south: Double,
+    val west: Double,
+    val east: Double,
+    val crossesAntimeridian: Boolean
+)
+
+
+/** Geographic point where the Moon is directly overhead. */
+data class LunarEclipseSublunarPoint(
+    val time: Time,
+    val latitude: Double,
+    val longitude: Double
+)
+
+
+/** Map geometry showing where the Moon is above the apparent horizon. */
+data class LunarEclipseMapFrame(
+    val time: Time,
+    val visibilityPolygons: List<List<LunarEclipseMapCoordinate>>,
+    val sublunarPoint: LunarEclipseSublunarPoint,
+    val bounds: LunarEclipseMapBounds?
+)
+
+
 /**
  * Holds a time and the observed altitude of the Sun at that time.
  *
@@ -2661,6 +2741,147 @@ internal fun solarEclipseObscuration(hm: Vector, lo: Vector): Double {
 }
 
 
+/** Calculates lunar eclipse contacts from the semi-durations reported by [event]. */
+fun lunarEclipseWindow(event: LunarEclipseInfo): LunarEclipseWindow {
+    fun contact(minutes: Double, direction: Double): Time? =
+        minutes.takeIf { it > 0.0 }?.let { event.peak.addDays(direction * it / MINUTES_PER_DAY) }
+
+    return LunarEclipseWindow(
+        event = event,
+        p1 = event.peak.addDays(-event.sdPenum / MINUTES_PER_DAY),
+        p4 = event.peak.addDays(+event.sdPenum / MINUTES_PER_DAY),
+        u1 = contact(event.sdPartial, -1.0),
+        u4 = contact(event.sdPartial, +1.0),
+        u2 = contact(event.sdTotal, -1.0),
+        u3 = contact(event.sdTotal, +1.0)
+    )
+}
+
+
+/** Calculates Earth's apparent shadow and the eclipsed Moon for an observer. */
+fun lunarEclipseState(time: Time, observer: Observer): LunarEclipseState {
+    val shadow = earthShadow(time)
+    val moonEquatorial = equator(
+        Body.Moon,
+        time,
+        observer,
+        EquatorEpoch.OfDate,
+        Aberration.Corrected
+    )
+    val moonHorizontal = horizon(
+        time,
+        observer,
+        moonEquatorial.ra,
+        moonEquatorial.dec,
+        Refraction.None
+    )
+    val moonRadius = apparentAngularRadius(Body.Moon, moonEquatorial.dist)
+        ?: throw InternalError("Unable to calculate the Moon's apparent radius.")
+
+    val axisScale = (shadow.dir dot shadow.target) / (shadow.dir dot shadow.dir)
+    val shadowCenterEqj = axisScale * shadow.dir
+    val shadowTopocentricEqj = shadowCenterEqj - geoPos(time, observer)
+    val shadowEquatorial = gyration(
+        shadowTopocentricEqj,
+        PrecessDirection.From2000
+    ).toEquatorial()
+    val shadowHorizontal = horizon(
+        time,
+        observer,
+        shadowEquatorial.ra,
+        shadowEquatorial.dec,
+        Refraction.None
+    )
+    val shadowDistanceKm = shadowEquatorial.dist * KM_PER_AU
+    val umbraAngularRadius = datan(shadow.k / shadowDistanceKm)
+    val penumbraAngularRadius = datan(shadow.p / shadowDistanceKm)
+    val centerSeparation = moonEquatorial.vec.angleWith(shadowEquatorial.vec)
+
+    val phase = when {
+        shadow.r >= shadow.p + MOON_MEAN_RADIUS_KM -> LunarEclipsePhase.None
+        shadow.r >= shadow.k + MOON_MEAN_RADIUS_KM -> LunarEclipsePhase.Penumbral
+        shadow.r + MOON_MEAN_RADIUS_KM < shadow.k -> LunarEclipsePhase.Total
+        else -> LunarEclipsePhase.Partial
+    }
+    val umbralObscuration = if (phase == LunarEclipsePhase.Partial || phase == LunarEclipsePhase.Total) {
+        discObscuration(MOON_MEAN_RADIUS_KM, shadow.k, shadow.r).coerceIn(0.0, 1.0)
+    } else {
+        0.0
+    }
+    val penumbralCoverage = if (phase == LunarEclipsePhase.None) {
+        0.0
+    } else {
+        discObscuration(MOON_MEAN_RADIUS_KM, shadow.p, shadow.r).coerceIn(0.0, 1.0)
+    }
+    val correctedMoon = horizon(
+        time,
+        observer,
+        moonEquatorial.ra,
+        moonEquatorial.dec,
+        Refraction.Normal
+    )
+    return LunarEclipseState(
+        time = time,
+        moon = ApparentDisc(
+            rightAscension = moonEquatorial.ra,
+            declination = moonEquatorial.dec,
+            azimuth = moonHorizontal.azimuth,
+            altitude = moonHorizontal.altitude,
+            distanceAu = moonEquatorial.dist,
+            angularRadius = moonRadius
+        ),
+        earthShadow = ApparentEarthShadow(
+            rightAscension = shadowEquatorial.ra,
+            declination = shadowEquatorial.dec,
+            azimuth = shadowHorizontal.azimuth,
+            altitude = shadowHorizontal.altitude,
+            distanceAu = shadowEquatorial.dist,
+            umbraAngularRadius = umbraAngularRadius,
+            penumbraAngularRadius = penumbraAngularRadius
+        ),
+        centerSeparation = centerSeparation,
+        phase = phase,
+        umbralObscuration = umbralObscuration,
+        penumbralCoverage = penumbralCoverage,
+        correctedMoonAltitude = correctedMoon.altitude
+    )
+}
+
+
+private fun lunarEclipseInfo(shadow: ShadowInfo): LunarEclipseInfo {
+    var kind = EclipseKind.Penumbral
+    var obscuration = 0.0
+    val sdPenum = shadowSemiDurationMinutes(
+        shadow.time,
+        shadow.p + MOON_MEAN_RADIUS_KM,
+        200.0
+    )
+    var sdPartial = 0.0
+    var sdTotal = 0.0
+
+    if (shadow.r < shadow.k + MOON_MEAN_RADIUS_KM) {
+        kind = EclipseKind.Partial
+        sdPartial = shadowSemiDurationMinutes(
+            shadow.time,
+            shadow.k + MOON_MEAN_RADIUS_KM,
+            sdPenum
+        )
+        if (shadow.r + MOON_MEAN_RADIUS_KM < shadow.k) {
+            kind = EclipseKind.Total
+            obscuration = 1.0
+            sdTotal = shadowSemiDurationMinutes(
+                shadow.time,
+                shadow.k - MOON_MEAN_RADIUS_KM,
+                sdPartial
+            )
+        } else {
+            obscuration = discObscuration(MOON_MEAN_RADIUS_KM, shadow.k, shadow.r)
+        }
+    }
+    return LunarEclipseInfo(kind, obscuration, shadow.time, sdPenum, sdPartial, sdTotal)
+}
+
+
 /**
  * Searches for a lunar eclipse.
  *
@@ -2696,29 +2917,7 @@ fun searchLunarEclipse(startTime: Time): LunarEclipseInfo {
             // is closest to the line passing through the centers of the Sun and Earth.
             val shadow = peakEarthShadow(fullmoon)
             if (shadow.r < shadow.p + MOON_MEAN_RADIUS_KM) {
-                // This is at least a penumbral eclipse. We will return a result.
-                var kind = EclipseKind.Penumbral
-                var obscuration = 0.0
-                val sdPenum = shadowSemiDurationMinutes(shadow.time, shadow.p + MOON_MEAN_RADIUS_KM, 200.0)
-                var sdPartial = 0.0
-                var sdTotal = 0.0
-
-                if (shadow.r < shadow.k + MOON_MEAN_RADIUS_KM) {
-                    // This is at least a partial eclipse.
-                    kind = EclipseKind.Partial
-                    sdPartial = shadowSemiDurationMinutes(shadow.time, shadow.k + MOON_MEAN_RADIUS_KM, sdPenum)
-
-                    if (shadow.r + MOON_MEAN_RADIUS_KM < shadow.k) {
-                        // This is a total eclipse.
-                        kind = EclipseKind.Total
-                        obscuration = 1.0
-                        sdTotal = shadowSemiDurationMinutes(shadow.time, shadow.k - MOON_MEAN_RADIUS_KM, sdPartial)
-                    } else {
-                        obscuration = discObscuration(MOON_MEAN_RADIUS_KM, shadow.k, shadow.r)
-                    }
-                }
-
-                return LunarEclipseInfo(kind, obscuration, shadow.time, sdPenum, sdPartial, sdTotal)
+                return lunarEclipseInfo(shadow)
             }
         }
 
@@ -2749,6 +2948,25 @@ fun searchLunarEclipse(startTime: Time): LunarEclipseInfo {
  */
 fun nextLunarEclipse(prevEclipseTime: Time) =
     searchLunarEclipse(prevEclipseTime.addDays(10.0))
+
+
+/** Searches backward for the lunar eclipse immediately before [beforeTime]. */
+fun previousLunarEclipse(beforeTime: Time): LunarEclipseInfo {
+    val pruneLatitude = 1.8
+    var fmtime = beforeTime.addDays(-10.0)
+    for (fmcount in 0..11) {
+        val fullmoon = searchMoonPhase(180.0, fmtime, -40.0)
+            ?: throw InternalError("Failed to find the previous full moon.")
+        val moon = MoonContext(fullmoon).calcMoon()
+        if (moon.lat < pruneLatitude) {
+            val shadow = peakEarthShadow(fullmoon)
+            if (shadow.r < shadow.p + MOON_MEAN_RADIUS_KM)
+                return lunarEclipseInfo(shadow)
+        }
+        fmtime = fullmoon.addDays(-10.0)
+    }
+    throw InternalError("Failed to find a previous lunar eclipse within 12 full moons.")
+}
 
 
 /**
@@ -3246,6 +3464,38 @@ private fun eclipseConeBoundary(
 }
 
 
+private fun partialEclipseFootprintCenter(
+    shadowPoint: SolarEclipseMapCoordinate,
+    cone: EclipseShadowConeGeometry
+): SolarEclipseMapCoordinate? {
+    if (!cone.contains(shadowPoint))
+        return null
+
+    // For a partial eclipse the shadow axis misses Earth. Its closest surface point is on the
+    // day/night boundary used by EclipseShadowConeGeometry.contains, so tracing the footprint
+    // radially from that point collapses every night-side ray back to the same coordinate and
+    // creates a false V-shaped edge. Find the longest contained ray into the day side and trace
+    // from its midpoint instead, while keeping the original point as the displayed shadow marker.
+    var bestBearing = Double.NaN
+    var bestDistance = 0.0
+    for (bearing in 0 until 360 step 5) {
+        val probe = eclipseDestinationPoint(shadowPoint, 1.0, bearing.toDouble())
+        if (!cone.contains(probe))
+            continue
+        val boundary = eclipseConeBoundary(shadowPoint, bearing.toDouble(), cone, 14)
+        val distance = eclipseDistanceKm(shadowPoint, boundary)
+        if (distance > bestDistance) {
+            bestBearing = bearing.toDouble()
+            bestDistance = distance
+        }
+    }
+    if (!bestBearing.isFinite() || bestDistance <= 0.0)
+        return null
+    val center = eclipseDestinationPoint(shadowPoint, bestDistance / 2.0, bestBearing)
+    return center.takeIf(cone::contains)
+}
+
+
 private fun eclipseTrackSample(time: Time): EclipseTrackSample? {
     val context = eclipseShadowGeometryContext(time) ?: return null
     val shadowPoint = solarEclipseShadowPoint(context) ?: return null
@@ -3443,6 +3693,22 @@ private fun splitEclipsePolygonAtAntimeridian(
         unwrapped.add(UnwrappedEclipseCoordinate(points[index].latitude, longitude))
         previousLongitude = longitude
     }
+
+    var closingLongitude = points.first().longitude
+    while (closingLongitude - previousLongitude > 180.0) closingLongitude -= 360.0
+    while (closingLongitude - previousLongitude < -180.0) closingLongitude += 360.0
+    val longitudeWinding = round(
+        (closingLongitude - points.first().longitude) / 360.0
+    ).toInt()
+    if (longitudeWinding != 0) {
+        // A ring that winds once in longitude surrounds a pole. Closing its unwrapped Mercator
+        // path directly draws a diagonal across the world. Preserve the final boundary segment,
+        // then close along the projection edge where every longitude represents the same pole.
+        val poleLatitude = if (points.sumOf { it.latitude } >= 0.0) 90.0 else -90.0
+        unwrapped.add(UnwrappedEclipseCoordinate(points.first().latitude, closingLongitude))
+        unwrapped.add(UnwrappedEclipseCoordinate(poleLatitude, closingLongitude))
+        unwrapped.add(UnwrappedEclipseCoordinate(poleLatitude, points.first().longitude))
+    }
     val minimumWorld = floor((unwrapped.minOf { it.longitude } + 180.0) / 360.0).toInt()
     val maximumWorld = floor((unwrapped.maxOf { it.longitude } + 180.0) / 360.0).toInt()
     val result = mutableListOf<List<SolarEclipseMapCoordinate>>()
@@ -3564,9 +3830,14 @@ fun solarEclipseMapFrame(
     } else {
         null
     }
-    val footprint = if (penumbralCone?.contains(center) == true) {
+    val footprintCenter = when {
+        penumbralCone == null -> null
+        shadowPoint.central -> center.takeIf(penumbralCone::contains)
+        else -> partialEclipseFootprintCenter(center, penumbralCone)
+    }
+    val footprint = if (penumbralCone != null && footprintCenter != null) {
         (0 until 360 step 5).map { bearing ->
-            eclipseConeBoundary(center, bearing.toDouble(), penumbralCone, 14)
+            eclipseConeBoundary(footprintCenter, bearing.toDouble(), penumbralCone, 14)
         }
     } else {
         emptyList()
@@ -3577,6 +3848,193 @@ fun solarEclipseMapFrame(
         shadowPoint = shadowPoint,
         penumbralFootprintPolygons = polygons,
         bounds = eclipseMapBounds(footprint)
+    )
+}
+
+
+private data class LunarVisibilityLatitudeInterval(
+    val south: Double,
+    val north: Double
+)
+
+
+private data class LunarVisibilityLongitudeSample(
+    val longitude: Double,
+    val interval: LunarVisibilityLatitudeInterval
+)
+
+
+private fun lunarVisibilityLatitudeInterval(
+    center: LunarEclipseMapCoordinate,
+    longitude: Double,
+    radiusDegrees: Double
+): LunarVisibilityLatitudeInterval? {
+    val centerLatitude = center.latitude.degreesToRadians()
+    val longitudeDelta = (longitude - center.longitude).degreesToRadians()
+    val sineCoefficient = sin(centerLatitude)
+    val cosineCoefficient = cos(centerLatitude) * cos(longitudeDelta)
+    val amplitude = hypot(sineCoefficient, cosineCoefficient)
+    val threshold = cos(radiusDegrees.degreesToRadians())
+    if (amplitude < threshold)
+        return null
+
+    val phase = atan2(cosineCoefficient, sineCoefficient)
+    val crossing = asin((threshold / amplitude).coerceIn(-1.0, 1.0))
+    var south = Double.POSITIVE_INFINITY
+    var north = Double.NEGATIVE_INFINITY
+    for (turn in -1..1) {
+        val offset = 2.0 * PI * turn
+        val lower = max(-PI / 2.0, crossing + offset - phase)
+        val upper = min(+PI / 2.0, PI - crossing + offset - phase)
+        if (lower <= upper) {
+            south = min(south, lower)
+            north = max(north, upper)
+        }
+    }
+    if (!south.isFinite() || !north.isFinite())
+        return null
+    return LunarVisibilityLatitudeInterval(
+        south.radiansToDegrees().coerceIn(-90.0, 90.0),
+        north.radiansToDegrees().coerceIn(-90.0, 90.0)
+    )
+}
+
+
+private fun lunarVisibilityTransitionSample(
+    center: LunarEclipseMapCoordinate,
+    radiusDegrees: Double,
+    startLongitude: Double,
+    endLongitude: Double,
+    startVisible: Boolean
+): LunarVisibilityLongitudeSample {
+    var start = startLongitude
+    var end = endLongitude
+    repeat(24) {
+        val middle = (start + end) / 2.0
+        val middleVisible = lunarVisibilityLatitudeInterval(center, middle, radiusDegrees) != null
+        if (middleVisible == startVisible) start = middle else end = middle
+    }
+    val visibleLongitude = if (startVisible) start else end
+    val interval = lunarVisibilityLatitudeInterval(center, visibleLongitude, radiusDegrees)
+        ?: throw InternalError("Failed to calculate lunar visibility boundary.")
+    return LunarVisibilityLongitudeSample(visibleLongitude, interval)
+}
+
+
+private fun lunarVisibilityPolygons(
+    center: LunarEclipseMapCoordinate,
+    radiusDegrees: Double
+): List<List<LunarEclipseMapCoordinate>> {
+    val result = mutableListOf<List<LunarEclipseMapCoordinate>>()
+    var run = mutableListOf<LunarVisibilityLongitudeSample>()
+
+    fun finishRun() {
+        if (run.size >= 2) {
+            val polygon = run.map {
+                LunarEclipseMapCoordinate(it.interval.south, it.longitude)
+            } + run.asReversed().map {
+                LunarEclipseMapCoordinate(it.interval.north, it.longitude)
+            }
+            if (polygon.size >= 3) result.add(polygon)
+        }
+        run = mutableListOf()
+    }
+
+    var previousLongitude = -180.0
+    var previousVisible = false
+    for (longitudeDegrees in -180..180 step 5) {
+        val longitude = longitudeDegrees.toDouble()
+        val interval = lunarVisibilityLatitudeInterval(center, longitude, radiusDegrees)
+        val visible = interval != null
+        if (visible && !previousVisible && longitudeDegrees > -180) {
+            run.add(
+                lunarVisibilityTransitionSample(
+                    center,
+                    radiusDegrees,
+                    previousLongitude,
+                    longitude,
+                    startVisible = false
+                )
+            )
+        } else if (!visible && previousVisible) {
+            run.add(
+                lunarVisibilityTransitionSample(
+                    center,
+                    radiusDegrees,
+                    previousLongitude,
+                    longitude,
+                    startVisible = true
+                )
+            )
+            finishRun()
+        }
+        if (interval != null) {
+            run.add(LunarVisibilityLongitudeSample(longitude, interval))
+        }
+        previousLongitude = longitude
+        previousVisible = visible
+    }
+    finishRun()
+    return result
+}
+
+
+private fun lunarVisibilityBounds(
+    points: List<LunarEclipseMapCoordinate>
+): LunarEclipseMapBounds? {
+    if (points.isEmpty())
+        return null
+    val longitudes = points.map { ((it.longitude % 360.0) + 360.0) % 360.0 }.sorted()
+    var largestGap = -1.0
+    var gapIndex = 0
+    for (index in longitudes.indices) {
+        val next = if (index == longitudes.lastIndex) longitudes.first() + 360.0
+            else longitudes[index + 1]
+        val gap = next - longitudes[index]
+        if (gap > largestGap) {
+            largestGap = gap
+            gapIndex = index
+        }
+    }
+    val west360 = if (gapIndex == longitudes.lastIndex) longitudes.first()
+        else longitudes[gapIndex + 1]
+    val west = normalizeMapLongitude(west360)
+    val east = normalizeMapLongitude(longitudes[gapIndex])
+    return LunarEclipseMapBounds(
+        north = points.maxOf { it.latitude },
+        south = points.minOf { it.latitude },
+        west = west,
+        east = east,
+        crossesAntimeridian = west > east
+    )
+}
+
+
+/** Calculates the Moon-above-horizon visibility region for an arbitrary instant. */
+fun lunarEclipseMapFrame(time: Time): LunarEclipseMapFrame {
+    val moonEqd = rotationEqjEqd(time).rotate(geoMoon(time))
+    val projected = hypot(moonEqd.x, moonEqd.y)
+    val latitude = if (projected == 0.0) {
+        if (moonEqd.z >= 0.0) 90.0 else -90.0
+    } else {
+        datan(moonEqd.z / projected)
+    }
+    val longitude = normalizeMapLongitude(
+        datan2(moonEqd.y, moonEqd.x) - 15.0 * siderealTime(time)
+    )
+    val sublunar = LunarEclipseMapCoordinate(latitude, longitude)
+    val horizontalParallax = asin(
+        (EARTH_MEAN_RADIUS_KM / (moonEqd.length() * KM_PER_AU)).coerceIn(-1.0, 1.0)
+    ).radiansToDegrees()
+    val visibilityRadius = (90.0 - horizontalParallax + REFRACTION_NEAR_HORIZON)
+        .coerceIn(0.0, 89.999)
+    val polygons = lunarVisibilityPolygons(sublunar, visibilityRadius)
+    val boundsPoints = polygons.flatten()
+    return LunarEclipseMapFrame(
+        time = time,
+        visibilityPolygons = polygons,
+        sublunarPoint = LunarEclipseSublunarPoint(time, latitude, longitude),
+        bounds = lunarVisibilityBounds(boundsPoints)
     )
 }
 

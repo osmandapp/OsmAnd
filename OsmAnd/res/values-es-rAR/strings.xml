@@ -1137,7 +1137,6 @@
     <string name="favorite_category_dublicate_message">Usá un nombre de categoría que no exista ya.</string>
     <string name="favorite_category_name">Nombre de categoría</string>
     <string name="favorite_category_add_new_title">Agregar nueva categoría</string>
-    <string name="confirm_download_roadmaps">El mapa de sólo carreteras es innecesario, ya que tenés el mapa estándar (completo). ¿Descargar de todos modos?</string>
     <string name="value_downloaded_of_max">%1$.1f de %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Actualizar todo (%1$s MB)</string>
@@ -5042,7 +5041,6 @@
     <string name="obd_simulation_device">Simulación de dispositivo</string>
     <string name="astronomy_map">Mapa astronómico</string>
     <string name="navigate_point_format_maidenhead">Virginidad</string>
-    <string name="auto_copy_media_to_osmand_storage">Copia automática de archivos multimedia al almacenamiento de OsmAnd</string>
     <string name="choose_from_gallery">Elegí de la galería</string>
     <string name="choose_from_files">Selecciona entre archivos</string>
     <string name="shared_string_media">Medios de comunicación</string>

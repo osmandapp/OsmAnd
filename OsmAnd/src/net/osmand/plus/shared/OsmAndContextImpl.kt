@@ -137,7 +137,7 @@ class OsmAndContextImpl(private val app: OsmandApplication) : OsmAndContext {
 
 	private fun findNearestCityName(latLon: KLatLon): String {
 		val jLatLon = SharedUtil.jLatLon(latLon)
-		val rect = MapUtils.calculateBbox(CITY_SEARCH_RADIUS, jLatLon)
+		val rect = MapUtils.calculate31BboxUsingRhumb(CITY_SEARCH_RADIUS, jLatLon)
 		val offlineIndexes = app.resourceManager.getQuickSearchFiles(null).toList()
 		val iterator = SearchPhrase.getOfflineIndexes(rect, ADDRESS, offlineIndexes)
 

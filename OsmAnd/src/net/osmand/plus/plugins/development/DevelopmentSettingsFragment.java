@@ -96,6 +96,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		setupTestVoiceCommandsPref();
 		setupLogcatBufferPref();
 		setupPressedKeyInfoPref();
+		setupSpatialTextSearchPref();
 
 		setupTripRecordingPrefs();
 
@@ -195,6 +196,12 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		SwitchPreferenceEx debugRenderingInfo = findPreference(settings.SHOW_INFO_ABOUT_PRESSED_KEY.getId());
 		debugRenderingInfo.setDescription(getString(R.string.show_toast_about_key_pressed));
 		debugRenderingInfo.setIconSpaceReserved(false);
+	}
+
+	private void setupSpatialTextSearchPref() {
+		SwitchPreferenceEx preference = findPreference(app.getSettings().USE_SPATIAL_TEXT_SEARCH.getId());
+		preference.setDescription(R.string.use_spatial_text_search_description);
+		preference.setIconSpaceReserved(false);
 	}
 
 	private void setupTripRecordingPrefs() {
@@ -493,6 +500,10 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		} else if (GRID_LAYOUT_SHOW_LOGS.equals(prefId)) {
 			OsmandSettings.DEV_GRID_LAYOUT_SHOW_LOGS = !OsmandSettings.DEV_GRID_LAYOUT_SHOW_LOGS;
 			app.getOsmandMap().getMapView().refreshMap();
+			return true;
+		} else if (settings.USE_SPATIAL_TEXT_SEARCH.getId().equals(prefId) && newValue instanceof Boolean) {
+			settings.USE_SPATIAL_TEXT_SEARCH.set((Boolean) newValue);
+			app.getSearchUICore().initSearchUICore();
 			return true;
 		}
 		return super.onPreferenceChange(preference, newValue);

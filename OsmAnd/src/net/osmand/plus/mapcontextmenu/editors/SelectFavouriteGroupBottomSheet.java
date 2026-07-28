@@ -14,22 +14,32 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.myplaces.favorites.FavoriteFolder;
 import net.osmand.plus.myplaces.favorites.FavoriteFolderFormatter;
+import net.osmand.plus.myplaces.favorites.FavoriteFolderPath;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class SelectFavouriteGroupBottomSheet extends SelectPointsCategoryBottomSheet {
 
+	private static final String KEY_EXCLUDED_FOLDER_PATHS = "excluded_folder_paths";
+	private static final String KEY_INCLUDE_VIRTUAL_ROOT = "include_virtual_root";
+
 	private final Map<String, FavoriteFolder> favoriteFolders = new LinkedHashMap<>();
+	private final Set<String> excludedFolderPaths = new HashSet<>();
+	private boolean includeVirtualRoot;
 
 	@Override
 	protected int getDefaultColorId() {
@@ -49,6 +59,14 @@ public class SelectFavouriteGroupBottomSheet extends SelectPointsCategoryBottomS
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Bundle state = savedInstanceState != null ? savedInstanceState : getArguments();
+		if (state != null) {
+			ArrayList<String> excludedPaths = state.getStringArrayList(KEY_EXCLUDED_FOLDER_PATHS);
+			if (excludedPaths != null) {
+				excludedFolderPaths.addAll(excludedPaths);
+			}
+			includeVirtualRoot = state.getBoolean(KEY_INCLUDE_VIRTUAL_ROOT, false);
+		}
 
 		populateFavoriteFolderTargets();
 	}
@@ -59,13 +77,23 @@ public class SelectFavouriteGroupBottomSheet extends SelectPointsCategoryBottomS
 
 		FavouritesHelper helper = app.getFavoritesHelper();
 		for (FavoriteFolder folder : helper.getFlattenedFavoriteFolders(true)) {
-			if (folder.isRoot() && folder.getGroup() == null) {
+			if ((folder.isRoot() && folder.getGroup() == null && !includeVirtualRoot)
+					|| isExcluded(folder.getFullPath())) {
 				continue;
 			}
 			PointsGroup pointsGroup = createPointsGroup(folder);
 			pointsGroups.put(pointsGroup.getName(), pointsGroup);
 			favoriteFolders.put(folder.getFullPath(), folder);
 		}
+	}
+
+	private boolean isExcluded(@NonNull String folderPath) {
+		for (String excludedPath : excludedFolderPaths) {
+			if (FavoriteFolderPath.isDescendantOrSelf(folderPath, excludedPath)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@NonNull
@@ -150,13 +178,39 @@ public class SelectFavouriteGroupBottomSheet extends SelectPointsCategoryBottomS
 		dismiss();
 	}
 
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle bundle) {
+		super.onSaveInstanceState(bundle);
+		bundle.putStringArrayList(KEY_EXCLUDED_FOLDER_PATHS, new ArrayList<>(excludedFolderPaths));
+		bundle.putBoolean(KEY_INCLUDE_VIRTUAL_ROOT, includeVirtualRoot);
+	}
+
 	public static void showInstance(@NonNull FragmentManager manager,
 	                                @Nullable String selectedCategory,
 	                                @Nullable CategorySelectionListener listener) {
+		showInstance(manager, selectedCategory, null, false, listener);
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager,
+	                                @Nullable String selectedCategory,
+	                                @NonNull Collection<String> excludedFolderPaths,
+	                                @Nullable CategorySelectionListener listener) {
+		showInstance(manager, selectedCategory, excludedFolderPaths, true, listener);
+	}
+
+	private static void showInstance(@NonNull FragmentManager manager,
+	                                 @Nullable String selectedCategory,
+	                                 @Nullable Collection<String> excludedFolderPaths,
+	                                 boolean includeVirtualRoot,
+	                                 @Nullable CategorySelectionListener listener) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SelectFavouriteGroupBottomSheet fragment = new SelectFavouriteGroupBottomSheet();
 			Bundle args = new Bundle();
 			args.putString(KEY_SELECTED_CATEGORY, selectedCategory);
+			if (excludedFolderPaths != null) {
+				args.putStringArrayList(KEY_EXCLUDED_FOLDER_PATHS, new ArrayList<>(excludedFolderPaths));
+			}
+			args.putBoolean(KEY_INCLUDE_VIRTUAL_ROOT, includeVirtualRoot);
 
 			fragment.setArguments(args);
 			fragment.setListener(listener);

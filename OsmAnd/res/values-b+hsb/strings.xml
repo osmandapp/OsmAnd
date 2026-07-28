@@ -627,7 +627,6 @@
     <string name="buy">Kupić</string>
     <string name="later">Pozdźišo</string>
     <string name="downloads">Sćehnjenja</string>
-    <string name="confirm_download_roadmaps">Sy sej wěsty/wěsta, zo chceš sćahnyć jenož dróhowu kartu, hačrunjež maš hižo standardnu (dospołnu) kartu?</string>
     <string name="value_downloaded_of_max">%1$.1f wot %2$.1f MB</string>
     <string name="update_all">Zaktualizuj wšě (%1$s MB)</string>
     <string name="map_legend">Legenda karty</string>

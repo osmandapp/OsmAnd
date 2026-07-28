@@ -21,6 +21,7 @@ import net.osmand.plus.views.mapwidgets.MapWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.configure.appearance.PanelAppearanceSettingsManager;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.util.Algorithms;
 
@@ -39,6 +40,7 @@ public class WidgetsSettingsHelper {
 	private final MapWidgetRegistry widgetRegistry;
 	private final MapWidgetsFactory widgetsFactory;
 	private final MapButtonsHelper mapButtonsHelper;
+	private final PanelAppearanceSettingsManager appearanceSettingsManager;
 
 	private ApplicationMode appMode;
 	private ScreenLayoutMode layoutMode;
@@ -51,6 +53,7 @@ public class WidgetsSettingsHelper {
 		this.widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		this.widgetsFactory = new MapWidgetsFactory(mapActivity);
 		this.mapButtonsHelper = app.getMapButtonsHelper();
+		this.appearanceSettingsManager = app.getPanelAppearanceSettingsManager();
 	}
 
 	public void setAppMode(@NonNull ApplicationMode appMode) {
@@ -76,6 +79,9 @@ public class WidgetsSettingsHelper {
 
 		settings.getPanelsLayoutMode(mapActivity, layoutMode).resetModeToDefault(appMode);
 		settings.getTransparentMapThemePreference(layoutMode).resetModeToDefault(appMode);
+		for (WidgetsPanel panel : WidgetsPanel.values()) {
+			appearanceSettingsManager.get(panel).resetToDefault(appMode, layoutMode);
+		}
 		mapButtonsHelper.getCompassButtonState().getVisibilityPref().resetModeToDefault(appMode);
 		settings.SHOW_DISTANCE_RULER.resetModeToDefault(appMode);
 		mapButtonsHelper.resetButtonStatesForMode(appMode, mapButtonsHelper.getAllButtonsStates());
@@ -90,6 +96,9 @@ public class WidgetsSettingsHelper {
 		}
 		copyPrefFromAppMode(settings.getPanelsLayoutMode(mapActivity, layoutMode), fromAppMode);
 		copyPrefFromAppMode(settings.getTransparentMapThemePreference(layoutMode), fromAppMode);
+		for (WidgetsPanel panel : WidgetsPanel.values()) {
+			appearanceSettingsManager.get(panel).copyFromProfile(fromAppMode, appMode, layoutMode);
+		}
 		copyPrefFromAppMode(mapButtonsHelper.getCompassButtonState().getVisibilityPref(), fromAppMode);
 		copyPrefFromAppMode(settings.SHOW_DISTANCE_RULER, fromAppMode);
 		copyPrefFromAppMode(settings.POSITION_PLACEMENT_ON_MAP, fromAppMode);

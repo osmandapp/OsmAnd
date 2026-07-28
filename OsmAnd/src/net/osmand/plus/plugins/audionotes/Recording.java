@@ -18,6 +18,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.media.MediaCaptureHelper;
 import net.osmand.plus.media.MediaMetadataUtils;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.shared.media.MediaFileNameFormat;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -134,6 +135,9 @@ public class Recording {
 	}
 
 	public String getDescriptionName(String fileName) {
+		if (MediaFileNameFormat.isNewGeneratedMediaFileName(fileName)) {
+			return null;
+		}
 		int hashInd = fileName.lastIndexOf(SPLIT_DESC);
 		//backward compatibility
 		if (fileName.indexOf('.') - fileName.indexOf('_') > 12 &&
