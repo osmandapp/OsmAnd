@@ -5494,7 +5494,6 @@
     <string name="favorite_folder_name">Mapnaam</string>
     <string name="edit_folder">Bewerk map</string>
     <string name="shared_string_media">Media</string>
-    <string name="auto_copy_media_to_osmand_storage">Kopieer media automatisch naar OsmAnd-opslag</string>
     <string name="choose_from_gallery">Kies uit galerij</string>
     <string name="choose_from_files">Kies uit bestanden</string>
     <string name="no_media">Geen media</string>
@@ -5518,7 +5517,9 @@
     <string name="camera_folder">Cameramap</string>
     <string name="media_storage_main_storage_descr">Bestanden worden opgeslagen in de privéopslag van de app. Ze zijn niet zichtbaar in de Galerij en voor andere apps.</string>
     <string name="media_storage_shared_storage_descr">Bestanden worden opgeslagen in de openbare mappen (Afbeeldingen, Films, Muziek). Ze zijn zichtbaar in de Galerij en in Google Foto\'s.</string>
-    <string name="media_storage_camera_folder_descr">Bestanden worden opgeslagen in de Cameramap. Let op: audio wordt opgeslagen in Muziek/OsmAnd.</string>
+    <string name="shared_string_note">Let op</string>
+    <string name="media_storage_camera_folder_note_descr">audio wordt opgeslagen in Muziek/OsmAnd.</string>
+    <string name="media_storage_camera_folder_descr">Bestanden worden opgeslagen in de Cameramap. %1$s</string>
     <string name="media_storage_manually_specified_descr">Bestanden worden opgeslagen in een zelfgekozen map en gesorteerd op type (Audio, Foto, Video).</string>
     <string name="change_media_storage_question">Mediaopslag wijzigen?</string>
     <string name="change_media_storage_full_description">Bestaande mediabestanden verplaatsen naar de nieuwe locatie?\n%1$s &gt; %2$s</string>

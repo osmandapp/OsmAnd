@@ -34,9 +34,11 @@ import net.osmand.util.SearchAlgorithms;
 // UNIT TESTING: Venezia (Changed map data 2 Wikidataids)!, So city on first with good elo rating (Test other top visited cities)
 
 //////////// TESTING //////////
-// UNIT TESTING : '155 Park Avenue Wilkes Barre'
-// incorrect first result Result 5 (t5+0-w2-oth0-tp-1) - 41.2364, -75.8843 155 ["155 park avenue" [Building] '101 Parks Avenue (Iron Triangle)' 26282478473 25749 (41.2373 -75.8831), "wilkes barre" [POI Bar] 'Wilkes-Barre Republic Club' 6094142255 21383 (41.2298 -75.8826)]
+// UNIT TESTING!! '155 Park Avenue Wilkes Barre' incorrect first result Result 5 (t5+0-w2-oth0-tp-1) - 41.2364, -75.8843 155 ["155 park avenue" [Building] '101 Parks Avenue (Iron Triangle)' 26282478473 25749 (41.2373 -75.8831), "wilkes barre" [POI Bar] 'Wilkes-Barre Republic Club' 6094142255 21383 (41.2298 -75.8826)]
 // TEST ON FIX for sorting sumOther - s1 += r.otherWordsNotFound;
+
+
+// TEST? reuse fuel_diesel.json?  Kyiv 'ОККО mcdonalds', 'mcdonalds ОККО', 2058959270 POI_DEFAULT_RADIUS=200 (different), POI_DEFAULT_RADIUS=50 
 
 // UNIT TESTING: 2419 Avenue G, Dickinson, TX 77539, USA (FAILS border) - Add missing border
 // UNIT TESTING: (venezia district-street) 'Venezia Cannaregio Campo Saffa', 'Cannaregio 539D Campo Saffa', 'Venezia Cannaregio 539D'
@@ -55,7 +57,7 @@ import net.osmand.util.SearchAlgorithms;
 // UNIT TESTING: (poi additional germany) Gynaecologist - from all poi types should be result ! (not like old search)
 // UNIT TESTING: POI intersection 'fuel mcdonalds', 'cafe fuel', 'fuel burger'
 
-// UNIT TESTING: New york The plaza 
+// UNIT TESTING: New york The plaza (to fix)
 // UNIT TESTING: POI Name / Type + Address - 'Shell 2 Rožňavská'
 // UNIT TESTING: <POI Category> + Object - "Cafe вулиця Саксаганського", restaurant Antwerpen , Postcode + Type, 1181ZM cafe
 //               Hotel Berlin, see below, "нова пошта вулиця Саксаганського", "нова вулиця Саксаганського"; // brand +
@@ -70,7 +72,11 @@ import net.osmand.util.SearchAlgorithms;
 // REVIEW: Auto test New york, France, Italy (Slow?)
 // REVIEW: POI show stats (same for search ms...)
 // REVIEW: Web busy (?? 2 parallel) / timeout - "Foothill Boulevard Golden State Road Los Angeles United states of America" > 30+ sec
-// REVIEW: Web gaps for POI
+// REVIEW: Web gaps for POI category
+// REVIEW: Sort by elo display small / large
+// REVIEW: web url to search by maps
+
+// TODO Display low zooms for rare categories
 
 // TODO INDEX: Find POI Categories translations / synonyms via Common words - Стоматол., Dentist, Basilica 
 // TODO REVIEW: Abbrevations (synonyms / direction words) other languages?
@@ -79,14 +85,14 @@ import net.osmand.util.SearchAlgorithms;
 // TODO DEDUPLICATE: too many houses (duplicate names) in wiki maps - obstruct search by street "Ярославів Вал"`?
 // TEST DEDUPLICATE: wiki / travel maps / seamarks map
 
-// TODO '155 Park Avenue Wilkes-Barre' ??
-// TODO Extend POI tile bboxes +100m (Okko mcdonalds)? (add back ',' carrer_de_vic)?
-// TODO INVESTIGATE: Limit (2000->2500) patterson Below probably just distnace 
-// TODO '4 ave 8 paterson' (OK - '8 4 ave paterson', '4th ave 8 paterson' play order of assigned numbers to bdl ref)
+// TODO Extend POI tile bboxes 200m? intrnet_access (fuel_diesel) 
+// TODO INVESTIGATE: Limit (2000->2500) patterson 
+//      '4 ave 8 paterson' (OK - '8 4 ave paterson', '4th ave 8 paterson' play order of assigned numbers to bdl ref)
 
 /////////////// EXTRA FEATURES ///////////////
 // TODO INDEX: highway=services (Not index)
-// TODO 100km+: Calle 20 188 San Isidro Lima, mihia lake, нова пошта краматорськ 3, Нова Пошта (№5 not searchable by common words / name)
+// TODO 100km+: нова пошта краматорськ 3, Нова Пошта (№5 not searchable by common words / name), mihia lake
+// TODO 100km+: Calle 20 188 San Isidro Lima, 
 // SLOW: "Travessa de Santo António" x "Rua Joaquim Ribeiro de Carvalho" x "portugal" (39.7412, -8.8012 Barreira Urbanização Vale da Cabrita))
 //       "Foothill Boulevard" x "Golden State Road" x "Los Angeles" x "United states of America"
 // TODO FORBID (slow): to interconnect tokens between 2 words - issue "<Street> <City> <Hno>"?
@@ -230,7 +236,7 @@ public class SpatialSearchTestAndDocs {
 		
 		location = new LatLon(41.2364,-75.8843); // 649331066
 //		settings.OPTIM_READ_COMMON_WORDS_ATOMS = false;
-		settings.DEDUPLICATE_RES = false;
+//		settings.DEDUPLICATE_RES = true;
 		query = "155 Park Avenue Wilkes Barre"; // 155 Park Avenue Wilkes-Barre
 		
 //		query = "USA Salt Lake City Pennsylvania Street 41";
@@ -431,7 +437,7 @@ public class SpatialSearchTestAndDocs {
 		
 //		pattern = "Us_new-york_new"; // new-york, new-jersey
 //		pattern = "Us_new-"; 
-//		pattern = "Us_"; 
+		pattern = "Us_"; 
 //		location = new LatLon(40.78035, -73.96572); // central park
 //		location = new LatLon(40.64946, -74.00682); // brooklyn
 //		location = new LatLon(40.7428, -74.0572); // new jersey
@@ -449,12 +455,15 @@ public class SpatialSearchTestAndDocs {
 //		query = "57 street"; // central park - 265345338 east, 86216906 west, (26926268 (west)?),
 //		query = "new york 57th street manhattan";
 //		query = "4th ave"; //  unit '4 ave'
+		
+		
 //		query = "4th ave 8 paterson"; //  wrong city... 26240861988
-//		settings.OPTIM_READ_COMMON_WORDS_ATOMS= false;
+//		settings.OPTIM_READ_COMMON_WORDS_ATOMS = false; // false -ok
 //		settings.OPTIM_READ_CATEGORY_WORD_ATOMS = false;
-//		settings.OPTIM_READ_COMMON_WORDS_LIMIT = 2500;
-//		query = "4 8 ave paterson"; //  '8 4 ave paterson' ok, '4 ave 8 paterson' not ok To fix 26240861988 (- new LatLon(40.7428, -74.0572);)
-//		query = "little creek"; // little creek
+//		settings.OPTIM_READ_COMMON_WORDS_LIMIT = 5000; // 2500 not ok, 5000 ok
+//		location = new LatLon(40.4997, -74.0029); // OK US_
+		location = new LatLon(40.78035, -73.96572); // not OK US_
+		query = "4 8 ave paterson"; //  '8 4 ave paterson' ok, '4 ave 8 paterson' not ok To fix 26240861988 (- new LatLon(40.7428, -74.0572);)
 		// Result 4 - 40.8407, -74.0954 [[4th, 8] Building 2 4th Street (26238417818) 40.8441 -74.0910 , [ave, paterson] STREET_TYPE Paterson Avenue (651531238) 40.8374 -74.0997 ]
 		
 //		query = "2nd street"; // poi types '2 street' - broken
@@ -511,8 +520,9 @@ public class SpatialSearchTestAndDocs {
 //		query = "Ресторан Antwerpen ";
 //		query = "Cafe Gulliver";
 //		query = "Hotel amsterdam";
-//		settings.POI_DEFAULT_RADIUS = 200;
-//		query = "ОККО mcdonalds"; // "okko", "ОККО"
+//		settings.POI_DEFAULT_RADIUS = 50;
+//		query = "fuel mcdonalds"; // query = "ОККО mcdonalds"; 919084788? 
+//		query = "ОККО mcdonalds"; // 'ОККО mcdonalds' "okko", "ОККО", POI_DEFAULT_RADIUS -> 200: 828164061, 
 //		query = "Venezia";
 //		query = "Cafe вулиця Саксаганського";
 //		query = "нова пошта вулиця Саксаганського"; // brand + 

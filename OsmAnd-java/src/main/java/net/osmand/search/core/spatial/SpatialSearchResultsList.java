@@ -82,6 +82,15 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		}
 	}
 	
+	protected SpatialSearchResultsList(List<SpatialSearchToken> tokensList) {
+	    if (tokensList == null || tokensList.isEmpty()) {
+	        this.tokens = new SpatialSearchToken[0];
+	    } else {
+	        this.tokens = tokensList.toArray(new SpatialSearchToken[0]);
+	    }
+	    this.tCount = this.tokens.length;
+	}
+	
 	private void loadObjects(SpatialSearchContext ctx, int type, TLongObjectHashMap<MapObject> cache) throws IOException {
 		TLongObjectHashMap<Long> lstMap = new TLongObjectHashMap<>();
 		
@@ -861,16 +870,19 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		typeIntersection[0] = 0;
 		// 3. Precise intersection
 		// no cache for parent now needed
-		boolean intersect = true;
-		for (int i = 0; parent != null && i < parent.tCount; i++) {
-			NameIndexAtom pa = parent.linearResults.get(pindx * parent.tCount + i);
-			if (!pa.coords.intersects(a.coords)) {
-				intersect = false;
-				break;
+		if (!settings.DEV_USE_SKIP_HASH_TREE) {
+			// not needed for skip hash tree to be deleted
+			boolean intersect = true;
+			for (int i = 0; parent != null && i < parent.tCount; i++) {
+				NameIndexAtom pa = parent.linearResults.get(pindx * parent.tCount + i);
+				if (!pa.coords.intersects(a.coords)) {
+					intersect = false;
+					break;
+				}
 			}
-		}
-		if (!intersect) {
-			return false;
+			if (!intersect) {
+				return false;
+			}
 		}
 		// 4. New intersection check the limits
 		HashMap<Long, NameIndexAtom> atomObjs = new HashMap<>(4);
@@ -983,6 +995,7 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		
 		return true;
 	}
+	
 
 	@Override
 	public int compareTo(SpatialSearchResultsList o) {

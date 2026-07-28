@@ -4324,7 +4324,6 @@
     <string name="shared_string_start_time">Thời gian bắt đầu</string>
     <string name="shared_string_end_time">Thời gian kết thúc</string>
     <string name="file_can_not_be_moved">Không thể chuyển tệp.</string>
-    <string name="auto_copy_media_to_osmand_storage">Tự động sao chép nội dung đa phương tiện đến thư mục OsmAnd</string>
     <string name="choose_from_gallery">Chọn từ Bộ sưu tập</string>
     <string name="choose_from_files">Chọn từ Tệp</string>
     <string name="shared_string_media">Nội dung đa phương tiện</string>

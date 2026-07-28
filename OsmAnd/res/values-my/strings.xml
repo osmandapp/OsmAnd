@@ -368,4 +368,12 @@
     <string name="open_settings">Settings ဖွင့်ပါ</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="output"/>
+    <string name="astro_annular_solar_eclipse">နေကြတ်ခြင်း</string>
+    <string name="row_height">ရိုးအမြင့်</string>
+    <string name="text_color">စာသားအရောင်</string>
+    <string name="secondary_text_color">ဒုတိယစာသားအရောင်</string>
+    <string name="background_color">နောက်ခံအရောင်</string>
+    <string name="widget_height">ဝစ်ဂျက်အမြင့်</string>
+    <string name="shared_string_transparent">ဖောက်ထွင်းမြင်နိုင်သော</string>
+    <string name="custom_widget_colors">ဝစ်ဂျက်အရောင်</string>
 </resources>

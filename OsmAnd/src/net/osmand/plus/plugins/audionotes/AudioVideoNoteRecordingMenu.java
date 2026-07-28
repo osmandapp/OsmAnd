@@ -46,13 +46,21 @@ public class AudioVideoNoteRecordingMenu {
 	private int buttonsHeight;
 	private int topInset;
 	private int bottomInset;
+	private final boolean showInDialog;
+	@Nullable
+	private AudioRecordingBottomSheet recordingBottomSheet;
 
 	public static boolean showViewfinder = true;
 
 	public AudioVideoNoteRecordingMenu(AudioVideoNotesPlugin plugin, double lat, double lon) {
+		this(plugin, lat, lon, false);
+	}
+
+	public AudioVideoNoteRecordingMenu(AudioVideoNotesPlugin plugin, double lat, double lon, boolean showInDialog) {
 		this.plugin = plugin;
 		this.lat = lat;
 		this.lon = lon;
+		this.showInDialog = showInDialog;
 		handler = new Handler();
 		MapActivity mapActivity = requireMapActivity();
 		portraitMode = AndroidUiHelper.isOrientationPortrait(mapActivity);
@@ -71,7 +79,20 @@ public class AudioVideoNoteRecordingMenu {
 	}
 
 	protected void initView(@NonNull MapActivity mapActivity) {
-		view = mapActivity.findViewById(R.id.recording_note_layout);
+		if (showInDialog) {
+			recordingBottomSheet = AudioRecordingBottomSheet.showInstance(mapActivity, this);
+		}
+		if (view == null) {
+			if (recordingBottomSheet != null) {
+				recordingBottomSheet.close();
+				recordingBottomSheet = null;
+			}
+			view = mapActivity.findViewById(R.id.recording_note_layout);
+		}
+	}
+
+	void setView(@NonNull View view) {
+		this.view = view;
 	}
 
 	private void initAdditionalViews(@NonNull MapActivity mapActivity) {
@@ -122,7 +143,9 @@ public class AudioVideoNoteRecordingMenu {
 	}
 
 	public void show() {
-		requireMapActivity().getContextMenu().hide();
+		if (recordingBottomSheet == null) {
+			requireMapActivity().getContextMenu().hide();
+		}
 		view.setVisibility(View.VISIBLE);
 		if (plugin.getCurrentRecording().getType() != AVActionType.REC_PHOTO) {
 			startCounter();
@@ -133,9 +156,21 @@ public class AudioVideoNoteRecordingMenu {
 	public void hide() {
 		stopCounter();
 		view.setVisibility(View.GONE);
+		if (recordingBottomSheet != null) {
+			recordingBottomSheet.close();
+			recordingBottomSheet = null;
+		}
 		plugin.stopCamera();
 		viewfinder.removeAllViews();
 		onVisibilityChange();
+	}
+
+	void onRecordingDialogDismissed() {
+		recordingBottomSheet = null;
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null && plugin.isRecording()) {
+			plugin.stopAndSaveRecording(mapActivity);
+		}
 	}
 
 	private void onVisibilityChange() {
@@ -222,7 +257,7 @@ public class AudioVideoNoteRecordingMenu {
 		MapActivity mapActivity = plugin.getMapActivity();
 		CurrentRecording recording = plugin.getCurrentRecording();
 		boolean show = showViewfinder && recording != null && recording.getType() != REC_AUDIO;
-		if (isLandscapeLayout() && mapActivity != null) {
+		if (recordingBottomSheet == null && isLandscapeLayout() && mapActivity != null) {
 			int buttonsHeight = (int) view.getResources().getDimension(R.dimen.map_route_buttons_height);
 			int tileBoxHeight = mapActivity.getMapView().getCurrentRotatedTileBox().getPixHeight() - topInset - bottomInset;
 			int h = show ? tileBoxHeight : buttonsHeight;

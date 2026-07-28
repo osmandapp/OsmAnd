@@ -5444,7 +5444,9 @@
     <string name="camera_folder">Folder kamera</string>
     <string name="media_storage_main_storage_descr">File disimpan di penyimpanan aplikasi privat. File tersembunyi dari Galeri dan aplikasi lain.</string>
     <string name="media_storage_shared_storage_descr">File disimpan di folder publik (Gambar, Film, Musik). File terlihat di Galeri dan Google Foto.</string>
-    <string name="media_storage_camera_folder_descr">File disimpan di Camera Roll. Perlu diperhatikan: Audio disimpan di Musik/OsmAnd.</string>
+    <string name="shared_string_note">Perlu diperhatikan</string>
+    <string name="media_storage_camera_folder_note_descr">Audio disimpan di Musik/OsmAnd.</string>
+    <string name="media_storage_camera_folder_descr">File disimpan di Camera Roll. %1$s</string>
     <string name="media_storage_manually_specified_descr">File disimpan di folder khusus dan diurutkan berdasarkan jenisnya (Audio, Foto, Video).</string>
     <string name="change_media_storage_question">Ubah penyimpanan media?</string>
     <string name="change_media_storage_full_description">Pindahkan file media yang ada ke tujuan baru?\n%1$s &gt; %2$s</string>
@@ -5478,7 +5480,6 @@
     <string name="search_around_my_location">Lokasi saya</string>
     <string name="search_around_my_location_description">Cari di sekitar posisi Anda</string>
     <string name="sort_by_relevance">Relevansi</string>
-    <string name="auto_copy_media_to_osmand_storage">Salin media secara otomatis ke penyimpanan OsmAnd</string>
     <string name="choose_from_gallery">Pilih dari Galeri</string>
     <string name="choose_from_files">Pilih dari File</string>
     <string name="shared_string_media">Media</string>

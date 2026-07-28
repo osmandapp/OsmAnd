@@ -178,7 +178,7 @@
     <string name="map_and_text">Mapa i tekst</string>
     <string name="monitoring_is_enabled">Monitorowanie jest włączone</string>
     <string name="monitoring_is_disabled">Monitorowanie jest wyłączone</string>
-    <string name="time_on_the_move">czas w ruchu</string>
+    <string name="time_on_the_move">Czas w ruchu</string>
     <string name="average_altitude">Średnia wysokość</string>
     <string name="average_speed">Średnia prędkość</string>
     <string name="open_in_osmand">Pokaż w OsmAnd</string>
