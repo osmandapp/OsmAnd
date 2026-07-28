@@ -442,8 +442,11 @@ public class SpatialPoiSearch {
 
 	private List<Amenity> filterByZoomTile(SpatialSearchContext ctx, List<Amenity> amenities) {
 		int z = 16 - ctx.settings.SEARCH_POI_BY_CATEGORY_ZOOM;
+		if (z < 0) {
+			return amenities; // dedup disabled at this zoom, keep everything
+		}
 		TLongHashSet tiles = new TLongHashSet();
-		List<Amenity> res = new ArrayList<>();
+		List<Amenity> res = new ArrayList<>(amenities.size());
 		for (Amenity a : amenities) {
 			int x16 = MapUtils.get31TileNumberX(a.getLocation().getLongitude()) >> 15;
 			int y16 = MapUtils.get31TileNumberY(a.getLocation().getLatitude()) >> 15;
