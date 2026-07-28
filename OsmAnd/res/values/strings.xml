@@ -11,6 +11,7 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="search_on_web">Search on web</string>
 	<string name="shared_string_note">Note</string>
 	<string name="media_storage_camera_folder_note_descr">Audio is saved to Music/OsmAnd.</string>
 	<string name="always_keep_local_copy">Always keep a local copy</string>

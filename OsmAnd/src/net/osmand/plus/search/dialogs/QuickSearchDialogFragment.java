@@ -7,8 +7,10 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Spannable;
@@ -47,6 +49,7 @@ import net.osmand.data.City;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.map.WorldRegion;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
@@ -80,6 +83,7 @@ import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem.SearchMoreItemOnClickListener;
+import net.osmand.plus.search.listitems.QuickSearchSearchOnWebListItem;
 import net.osmand.plus.search.listitems.QuickSearchSimpleButtonListItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -100,6 +104,7 @@ import net.osmand.search.core.SearchCoreFactory.SearchAmenityTypesAPI;
 import net.osmand.search.core.spatial.SpatialTextSearchAPI;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import net.osmand.util.RegionCodeUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -2509,6 +2514,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		}
 		if (!PluginsHelper.onSearchFinished(this, phrase, isResultEmpty())) {
 			addMoreButton(isSearchMoreAvailable(phrase));
+			addSpatialSearchOnWebButton();
 		}
 	}
 
@@ -2552,6 +2558,88 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		}
 	}
 
+	private void addSpatialSearchOnWebButton() {
+		if (!isSpatialSearch() || paused || cancelPrev || mainSearchFragment == null || isTextEmpty()) {
+			return;
+		}
+		QuickSearchSearchOnWebListItem searchOnWebItem = new QuickSearchSearchOnWebListItem(app,
+				app.getString(R.string.search_on_web), v -> openSpatialSearchOnWeb());
+		mainSearchFragment.addListItem(searchOnWebItem);
+	}
+
+	private void openSpatialSearchOnWeb() {
+		MapActivity mapActivity = getMapActivity();
+		SearchPhrase phrase = getSpatialSearchPhrase();
+		LatLon requestLocation = phrase != null ? phrase.getSettings().getOriginalLocation() : null;
+		if (mapActivity != null && phrase != null && requestLocation != null) {
+			Intent intent = new Intent(Intent.ACTION_VIEW, buildSpatialSearchWebUri(phrase, requestLocation));
+			AndroidUtils.startActivityIfSafe(mapActivity, intent);
+		}
+	}
+
+	@Nullable
+	private SearchPhrase getSpatialSearchPhrase() {
+		SearchResultCollection collection = unfilteredResultCollection != null ? unfilteredResultCollection : getResultCollection();
+		return collection != null ? collection.getPhrase() : searchUICore.getPhrase();
+	}
+
+	private Uri buildSpatialSearchWebUri(@NonNull SearchPhrase phrase, @NonNull LatLon requestLocation) {
+		String fragmentToEncode = String.format(Locale.US, "%1$.6f/%2$.6f",
+				requestLocation.getLatitude(), requestLocation.getLongitude());
+		Uri.Builder builder = new Uri.Builder()
+				.scheme("https")
+				.authority("test.osmand.net")
+				.path("map/search/result")
+				.appendQueryParameter("engine", "spatial")
+				.appendQueryParameter("query", phrase.getFullSearchPhrase());
+		String maps = getSpatialSearchWebMaps(phrase);
+		if (!Algorithms.isEmpty(maps)) {
+			builder.appendQueryParameter("maps", maps);
+		}
+		return builder.encodedFragment(fragmentToEncode).build();
+	}
+
+	private String getSpatialSearchWebMaps(@NonNull SearchPhrase phrase) {
+		SpatialTextSearchAPI api = searchUICore.getApiByClass(SpatialTextSearchAPI.class);
+		if (api == null) {
+			return "";
+		}
+		List<String> selected = new ArrayList<>();
+		for (BinaryMapIndexReader reader : api.getSpatialSearchFiles(phrase)) {
+			String downloadName = getSearchMapDownloadName(reader);
+			if (!Algorithms.isEmpty(downloadName) && !selected.contains(downloadName)) {
+				selected.add(downloadName);
+			}
+		}
+		return RegionCodeUtils.encode(selected, getAllMapDownloadNames());
+	}
+
+	@Nullable
+	private String getSearchMapDownloadName(@Nullable BinaryMapIndexReader reader) {
+		File file = reader != null ? reader.getFile() : null;
+		if (file == null) {
+			return null;
+		}
+		String downloadName = WorldRegion.getRegionDownloadName(file.getName());
+		WorldRegion region = app.getRegions().getRegionDataByDownloadName(downloadName);
+		return region != null && region.isRegionMapDownload() ? region.getRegionDownloadName() : null;
+	}
+
+	private List<String> getAllMapDownloadNames() {
+		List<String> downloadNames = new ArrayList<>();
+		for (WorldRegion region : app.getRegions().getAllRegionData()) {
+			String downloadName = region.getRegionDownloadName();
+			if (region.isRegionMapDownload() && !Algorithms.isEmpty(downloadName)) {
+				downloadNames.add(downloadName);
+			}
+		}
+		return downloadNames;
+	}
+
+	private boolean isSpatialSearch() {
+		return searchUICore != null && searchUICore.isSpatialSearch();
+	}
+
 	public void increaseSearchRadius() {
 		if (showMoreSpatialSearchResults()) {
 			return;
@@ -2574,6 +2662,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				: getFilteredResultCollection(collection);
 		renderSearchResult(visibleResults, false);
 		addMoreButton(isSearchMoreAvailable(collection.getPhrase()));
+		addSpatialSearchOnWebButton();
 		return true;
 	}
 

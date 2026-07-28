@@ -904,7 +904,7 @@ public class SearchUICore {
 		});
 	}
 
-	private boolean isSpatialSearch() {
+	public boolean isSpatialSearch() {
 		for (SearchCoreAPI api : apis) {
 			if (api instanceof SpatialTextSearchAPI) {
 				return true;

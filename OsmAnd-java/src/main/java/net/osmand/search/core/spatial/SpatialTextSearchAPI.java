@@ -152,6 +152,10 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		return files;
 	}
 
+	public List<BinaryMapIndexReader> getSpatialSearchFiles(SearchPhrase phrase) {
+		return getSpatialSearchFiles(phrase, createSpatialSettings(phrase));
+	}
+
 	private List<BinaryMapIndexReader> getSpatialSearchFiles(SearchPhrase phrase, SpatialTextSearchSettings settings) {
 		List<BinaryMapIndexReader> files = new ArrayList<>();
 		addFiles(files, getSpatialSearchOfflineIndexes(phrase, settings));
