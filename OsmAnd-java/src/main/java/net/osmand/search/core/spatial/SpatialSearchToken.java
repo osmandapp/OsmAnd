@@ -609,6 +609,10 @@ public class SpatialSearchToken {
 			return type == CityBlocks.BOUNDARY_TYPE.index;
 		}
 		
+		public boolean isGeoArea() {
+			return isBoundary() || isCityVillage() || isPostcode();
+		}
+		
 		public boolean isCityVillage() {
 			return type == CityBlocks.CITY_TOWN_TYPE.index || type == CityBlocks.VILLAGES_TYPE.index;
 		}

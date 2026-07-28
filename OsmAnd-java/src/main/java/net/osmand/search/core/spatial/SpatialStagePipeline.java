@@ -3,7 +3,9 @@ package net.osmand.search.core.spatial;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import gnu.trove.list.array.TLongArrayList;
 import gnu.trove.map.hash.TLongObjectHashMap;
@@ -31,7 +33,7 @@ public class SpatialStagePipeline {
     
     private final SpatialSearchContext ctx;
     public static final int MAX_SUPPORTED_TOKENS = 31;
-    public static int MAX_STEPS = 8; // 1 - fully covered, 2 - 1 intersecction ,...
+    public static int MAX_STEPS = 1; // 1 - fully covered, 2 - 1 intersecction ,...
 
     public SpatialStagePipeline(SpatialSearchContext ctx) {
         this.ctx = ctx;
@@ -201,7 +203,7 @@ public class SpatialStagePipeline {
         
 		for (SpatialObjectRes obj : prep.objectsById.valueCollection()) {
 			prep.allObjectsTree.addObject(obj, obj.mainAtom1.coords.bbox31, obj.mainAtom1.id);
-			if (obj.mainAtom1.isBoundary() || obj.mainAtom1.isCityVillage() || obj.mainAtom1.isPostcode()) {
+			if (obj.mainAtom1.isGeoArea()) {
 				prep.areaObjectsTree.addObject(obj, obj.mainAtom1.coords.bbox31, obj.mainAtom1.id);
 			}
  		}
@@ -256,8 +258,191 @@ public class SpatialStagePipeline {
 		}
 		return false;
 	}
-    
+	
+	public static void printTree(SpatialPipelineResults prep) {
+	    if (prep == null || prep.objectsById == null) {
+	        System.out.println("=== MASK DISTRIBUTION: Prep or objectsById is null ===");
+	        return;
+	    }
 
+	    List<SpatialSearchToken> tokens = prep.tokens;
+	    int totalObjects = prep.objectsById.size();
+
+	    // Group masks and count their frequencies using TLongObjectHashMap
+	    TLongObjectHashMap<Integer> maskFrequencies = new TLongObjectHashMap<Integer>();
+
+	    for (SpatialObjectRes obj : prep.objectsById.valueCollection()) {
+	        long mask = obj.mainMask;
+	        Integer count = maskFrequencies.get(mask);
+	        maskFrequencies.put(mask, count == null ? 1 : count + 1);
+	    }
+
+	    // Convert the map entries to a list for sorting by popularity
+	    List<long[]> maskList = new ArrayList<>(); // Entry format: [mask, count]
+	    maskFrequencies.forEachEntry((mask, count) -> {
+	        maskList.add(new long[]{mask, count.longValue()});
+	        return true;
+	    });
+
+	    // Sort in descending order by frequency (most frequent masks first)
+	    maskList.sort((a, b) -> Long.compare(b[1], a[1]));
+
+	    // Print summary report
+	    System.out.println("==========================================================================================");
+	    System.out.printf("=== PREPARE: TOP POPULAR MASKS DISTRIBUTION (Total Objects: %,d | Unique Masks: %,d) ===\n", 
+	            totalObjects, maskList.size());
+	    System.out.println("==========================================================================================");
+	    System.out.printf("%-6s | %-8s | %-12s | %-10s | %-45s\n", 
+	            "Rank", "Bits", "Count", "% Share", "Tokens (Bitmask representation)");
+	    System.out.println("------------------------------------------------------------------------------------------");
+
+	    int topN = Math.min(25, maskList.size()); // Display Top 25 most frequent masks
+	    for (int i = 0; i < topN; i++) {
+	        long mask = maskList.get(i)[0];
+	        long count = maskList.get(i)[1];
+	        int bitCount = SpatialObjectRes.countCoveredTokens(mask);
+	        double share = (count * 100.0) / totalObjects;
+
+	        String tokensRepresentation = formatMaskTokens(mask, tokens);
+
+	        System.out.printf("#%-5d | %-8d | %,12d | %6.2f%%    | %-45s\n", 
+	                (i + 1), bitCount, count, share, tokensRepresentation);
+	    }
+	    System.out.println("==========================================================================================");
+	}
+
+	/**
+	 * Helper method to format bitmask bits into a readable list of token words.
+	 * Accommodates the 2-bits-per-token indexing scheme.
+	 */
+	private static String formatMaskTokens(long mask, List<SpatialSearchToken> tokens) {
+	    StringBuilder sb = new StringBuilder("[");
+	    boolean first = true;
+	    
+	    // Track processed tokens to avoid printing the same token twice if both bits are set
+	    int lastTokenIndex = -1;
+
+	    for (int bit = 0; bit < 64; bit++) {
+	        if ((mask & (1L << bit)) != 0) {
+	            // Convert bit position to token index (2 bits per token)
+	            int tokenIndex = bit >> 1; 
+
+	            if (tokenIndex != lastTokenIndex) {
+	                if (!first) {
+	                    sb.append(", ");
+	                }
+	                if (tokens != null && tokenIndex < tokens.size() && tokens.get(tokenIndex) != null) {
+	                    String word = tokens.get(tokenIndex).word;
+	                    sb.append(word != null ? word : "T" + tokenIndex);
+	                } else {
+	                    sb.append("T").append(tokenIndex);
+	                }
+	                first = false;
+	                lastTokenIndex = tokenIndex;
+	            }
+	        }
+	    }
+	    sb.append("]");
+	    return sb.toString();
+	}
+	
+	public static void evaluateMaskIntersections(SpatialPipelineResults prep) {
+	    if (prep == null || prep.objectsById == null || prep.tokens == null) {
+	        System.out.println("=== MASK COMBINATION COVERAGE ANALYSIS: Invalid input ===");
+	        return;
+	    }
+
+	    long startTime = System.nanoTime();
+	    int totalTokens = prep.tokens.size();
+
+	    // 1. Calculate mask frequency distribution across objects
+	    TLongObjectHashMap<Integer> maskFreqs = new TLongObjectHashMap<Integer>();
+	    int objs = 0;
+	    TLongObjectHashMap<Integer> maskAreaFreqs = new TLongObjectHashMap<Integer>();
+	    int areas = 0;
+	    for (SpatialObjectRes obj : prep.objectsById.valueCollection()) {
+	        long mask = obj.mainMask;
+	        Integer count = maskFreqs.get(mask);
+	        maskFreqs.put(mask, count == null ? 1 : count + 1);
+	        objs++;
+			if (obj.mainAtom1.isGeoArea()) {
+				count = maskAreaFreqs.get(mask);
+				maskAreaFreqs.put(mask, count == null ? 1 : count + 1);
+				areas++;
+			}
+	    }
+
+	    long[] masks = maskFreqs.keys();
+	    long[] areaMasks = maskAreaFreqs.keys();
+	    // Map: CoveredTokens -> (ObjectCount -> CombinationCount)
+	    // Example: 9 Tokens -> {1 obj -> 12 combinations, 2 objs -> 300 combinations, 3 objs -> 251 combinations}
+	    Map<Integer, Map<Integer, Long>> stats = new HashMap<>();
+	    for (int t = totalTokens; t >= 0; t--) {
+	        stats.put(t, new HashMap<Integer, Long>());
+	    }
+
+	    // --- DEPTH 1: Single Objects (1 Mask) ---
+		for (int i = 0; i < masks.length; i++) {
+			long maskA = masks[i];
+			int covered = SpatialObjectRes.countCoveredTokens(maskA);
+			Map<Integer, Long> depthMap = stats.get(covered);
+			depthMap.put(1, depthMap.getOrDefault(1, 0l) + maskFreqs.get(maskA));
+		}
+
+	    // --- DEPTH 2: Pairs (2 Masks) ---
+	    for (int i = 0; i < masks.length; i++) {
+			long maskA = masks[i];
+			for (int j = i; j < masks.length; j++) {
+				long maskB = masks[j];
+				if (!SpatialObjectRes.allowed(maskA, maskB)) {
+					continue;
+				}
+				long combined = SpatialObjectRes.combine2BitMasks(maskA, maskB, totalTokens);
+				int covered = SpatialObjectRes.countCoveredTokens(combined);
+				Map<Integer, Long> depthMap = stats.get(covered);
+				long totalAB = (long)maskFreqs.get(maskA) * (long)maskFreqs.get(maskB);
+				depthMap.put(2, depthMap.getOrDefault(2, 0l) + totalAB);
+				for (int k = 0; k < areaMasks.length; k++) {
+	                long maskC = areaMasks[k];
+	                if (!SpatialObjectRes.allowed(combined, maskC)) {
+						continue;
+					}
+	                long combinedABC = SpatialObjectRes.combine2BitMasks(combined, maskC, totalTokens);
+	                int coveredABC = SpatialObjectRes.countCoveredTokens(combinedABC);
+	                depthMap = stats.get(coveredABC);
+	                long totalABC = totalAB * (long)maskAreaFreqs.get(maskC);
+	                depthMap.put(3, depthMap.getOrDefault(3, 0l) + totalABC);
+	            }
+			}
+	    }
+	    long durationNs = System.nanoTime() - startTime;
+	    // 2. Print Summary Report
+	    System.out.println("==========================================================================================");
+	    System.out.printf("=== MASK COMBINATION COVERAGE ANALYSIS (Masks: %,d (%,d), Area masks: %,d (%,d)| Time: %.3f ms) ===\n", 
+	            maskFreqs.size(), objs, maskAreaFreqs.size(), areas, durationNs / 1_000_000.0);
+	    System.out.println("==========================================================================================");
+
+		for (int t = totalTokens; t > 0; t--) {
+			Map<Integer, Long> depthMap = stats.get(t);
+
+			long by1 = depthMap.getOrDefault(1, 0L);
+			long by2 = depthMap.getOrDefault(2, 0L);
+			long by3 = depthMap.getOrDefault(3, 0L);
+			long totalCombos = by1 + by2 + by3;
+			String label = String.format("%2d Tokens Covered", t);
+			System.out.printf("%-15s (%7s): by 1 obj: %6s, by 2 objs: %7s, by 3 objs: %7s\n", label,
+					formatCompactNumber(totalCombos), formatCompactNumber(by1), formatCompactNumber(by2),
+					formatCompactNumber(by3));
+		}
+	    System.out.println("==========================================================================================");
+	}
+	private static String formatCompactNumber(long number) {
+	    if (number < 1_000) return String.valueOf(number);
+	    if (number < 1_000_000) return String.format(java.util.Locale.US, "%.1fK", number / 1_000.0);
+	    if (number < 1_000_000_000L) return String.format(java.util.Locale.US, "%.1fM", number / 1_000_000.0);
+	    if (number < 1_000_000_000_000L) return String.format(java.util.Locale.US, "%.1fB", number / 1_000_000_000.0);
+	    return String.format(java.util.Locale.US, "%.1fT", number / 1_000_000_000_000.0);
+	}
     // =========================================================================
     // Execution Engine with Mode Control
     // =========================================================================
@@ -279,6 +464,8 @@ public class SpatialStagePipeline {
 		if (stage++ >= MAX_STEPS || ctx.isCancelled()) {
 			return prep.combinations;
 		}
+		evaluateMaskIntersections(prep);
+//		printTree(prep);
 		
 		// STEP 1
 		List<SpatialObjectRes> singleResults = new ArrayList<>();

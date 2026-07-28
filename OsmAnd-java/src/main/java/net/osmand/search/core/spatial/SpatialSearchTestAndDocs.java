@@ -439,8 +439,8 @@ public class SpatialSearchTestAndDocs {
 		
 //		pattern = "Us_new-york_new"; // new-york, new-jersey
 //		pattern = "Us_new-"; 
-		pattern = "Us_"; 
-		location = new LatLon(40.78035, -73.96572); // central park
+//		pattern = "Us_"; 
+//		location = new LatLon(40.78035, -73.96572); // central park
 //		location = new LatLon(40.64946, -74.00682); // brooklyn
 //		location = new LatLon(40.7428, -74.0572); // new jersey
 //		query = "New York The plaza";
@@ -450,8 +450,8 @@ public class SpatialSearchTestAndDocs {
 		// 40.78035, -73.96572 - unit test '4th av', '4 ave', '4th avenue'  - 85393997 Park avenue
 //		settings.OPTIM_LIMIT_INTERSECTIONS = 100_000;
 //		settings.DEV_USE_PIPELINE = true;
-		settings.MAX_PIPELINE_STAGE_TO_STOP = new int[0];
-		query = "New York 4 av 8";
+//		settings.MAX_PIPELINE_STAGE_TO_STOP = new int[0];
+//		query = "New York 4 av 8";
 //		query = "New York av 8";
 //		query = "4 ave 8";
 //		query = "New York 4 av"; // 160947243
@@ -496,11 +496,11 @@ public class SpatialSearchTestAndDocs {
 //		query = "Venezia";
 		
 		
-//		pattern = "Portugal";
+		pattern = "Portugal";
 //		settings.DEV_USE_PIPELINE = false;
 //		location = new LatLon(39.7412, -8.8012); // Barreira Urbanização Vale da Cabrita
 		// MATCH: Search Stats 5392.4 ms (read 11,248 KB) - 4979.9 ms 305,862 atoms (read 330.2, match 2981.5, poi 490.6), 361.8 ms compute 5,499 (loadBld 3.6, read 2.9)
-//		query = "Travessa de Santo António Rua Joaquim Ribeiro de Carvalho Portugal"; 
+		query = "Travessa de Santo António Rua Joaquim Ribeiro de Carvalho Portugal"; 
 		
 //		pattern = "France_ile-de-france";
 //		pattern = "France_";
