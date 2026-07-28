@@ -35,6 +35,14 @@ public class HashSkipTileQuadTreeJoiner<T, R> {
 		joinAllBuckets(callback, null, null);
 	}
 	
+	public HashSkipTileQuadTree<T> getTree1() {
+		return tree1;
+	}
+	
+	public HashSkipTileQuadTree<R> getTree2() {
+		return tree2;
+	}
+	
 	/**
 	 * Performs spatial join across all zoom bucket pairs between tree1 and tree2.
 	 */
