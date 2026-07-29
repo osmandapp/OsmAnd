@@ -165,7 +165,7 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 
 	private Iterator<BinaryMapIndexReader> getSpatialSearchOfflineIndexes(SearchPhrase phrase,
 			SpatialTextSearchSettings settings) {
-		return phrase.getRadiusOfflineIndexes(settings.SUGGESTED_SEARCH_RADIUS_KM * 1000, SearchPhraseDataType.POI);
+		return phrase.getRadiusOfflineIndexes(settings.SUGGESTED_SEARCH_RADIUS_KM * 1000, SearchPhraseDataType.MAP);
 	}
 
 	private void addRegionsFile(List<BinaryMapIndexReader> files, SearchPhrase phrase) {
