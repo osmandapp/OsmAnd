@@ -66,8 +66,7 @@ class EpsgCatalogRepository(private val app: OsmandApplication) {
 		var cursor: SQLiteCursor? = null
 		try {
 			cursor = db.rawQuery(
-				"SELECT c.method_code, crs.geodetic_crs_auth_name, crs.geodetic_crs_code, " +
-					"c.param3_code, c.param3_value, c.param3_uom_code " +
+				"SELECT c.method_code, crs.geodetic_crs_auth_name, crs.geodetic_crs_code " +
 					"FROM projected_crs crs " +
 					"JOIN conversion c ON c.auth_name = crs.conversion_auth_name AND c.code = crs.conversion_code " +
 					"WHERE crs.auth_name = 'EPSG' AND crs.code = ? AND IFNULL(crs.deprecated, 0) = 0 " +
@@ -86,20 +85,8 @@ class EpsgCatalogRepository(private val app: OsmandApplication) {
 				unsupportedGridCodes.add(code)
 				return null
 			}
-			val homv2AzimuthRadians = if (methodCode == HOTINE_OBLIQUE_MERCATOR_V2_METHOD &&
-				!cursor.isNull(3) && cursor.getString(3) == HOMV2_AZIMUTH_PARAMETER_CODE &&
-				!cursor.isNull(4) && !cursor.isNull(5)
-			) {
-				angleToRadians(cursor.getDouble(4), cursor.getString(5))
-			} else {
-				null
-			}
 			cursor.close()
 			cursor = null
-			if (methodCode == HOTINE_OBLIQUE_MERCATOR_V2_METHOD && homv2AzimuthRadians == null) {
-				unsupportedGridCodes.add(code)
-				return null
-			}
 
 			val usesWgs84 = baseCrsAuthName == EPSG_AUTH_NAME && baseCrsCode == WGS84_CRS_CODE
 			val transformationCodes = if (usesWgs84) {
@@ -115,8 +102,7 @@ class EpsgCatalogRepository(private val app: OsmandApplication) {
 				epsgCode = code,
 				projectionMethodCode = methodCode,
 				usesWgs84 = usesWgs84,
-				transformationCodes = transformationCodes,
-				homv2AzimuthRadians = homv2AzimuthRadians
+				transformationCodes = transformationCodes
 			).also { gridDefinitionCache[code] = it }
 		} catch (e: RuntimeException) {
 			LOG.error("Failed to read grid definition for EPSG:$code", e)
@@ -125,27 +111,6 @@ class EpsgCatalogRepository(private val app: OsmandApplication) {
 			cursor?.close()
 			db.close()
 		}
-	}
-
-	private fun angleToRadians(value: Double, unitCode: String): Double? {
-		val radians = when (unitCode) {
-			RADIANS_UNIT_CODE -> value
-			DEGREES_UNIT_CODE -> Math.toRadians(value)
-			GRADS_UNIT_CODE -> value * Math.PI / 200.0
-			SEXAGESIMAL_DMS_UNIT_CODE -> Math.toRadians(sexagesimalDmsToDegrees(value))
-			else -> return null
-		}
-		return radians.takeIf { it.isFinite() }
-	}
-
-	private fun sexagesimalDmsToDegrees(value: Double): Double {
-		val sign = if (value < 0.0) -1.0 else 1.0
-		val absolute = kotlin.math.abs(value)
-		val degrees = kotlin.math.floor(absolute)
-		val minutesAndSeconds = (absolute - degrees) * 100.0
-		val minutes = kotlin.math.floor(minutesAndSeconds)
-		val seconds = (minutesAndSeconds - minutes) * 100.0
-		return sign * (degrees + minutes / 60.0 + seconds / 3600.0)
 	}
 
 	fun listGridFormats(limit: Int = DEFAULT_LIST_LIMIT): List<CoordinateFormat> {
@@ -360,12 +325,6 @@ class EpsgCatalogRepository(private val app: OsmandApplication) {
 		private const val MAX_TRANSFORMATION_CANDIDATES = 16
 		private const val EPSG_AUTH_NAME = "EPSG"
 		private const val WGS84_CRS_CODE = "4326"
-		private const val HOTINE_OBLIQUE_MERCATOR_V2_METHOD = 9815
-		private const val HOMV2_AZIMUTH_PARAMETER_CODE = "8813"
-		private const val RADIANS_UNIT_CODE = "9101"
-		private const val DEGREES_UNIT_CODE = "9102"
-		private const val GRADS_UNIT_CODE = "9105"
-		private const val SEXAGESIMAL_DMS_UNIT_CODE = "9110"
 		// Projection methods implemented by GridConfiguration: TM, OSTEREO and HOMV2.
 		private const val SUPPORTED_PROJECTION_METHODS = "'9807', '9809', '9815'"
 		// Direct geog2D Helmert methods parsed by CoordinateTransformer.getEllipsoidParameters().
@@ -416,6 +375,5 @@ data class EpsgGridDefinition(
 	val epsgCode: Int,
 	val projectionMethodCode: Int,
 	val usesWgs84: Boolean,
-	val transformationCodes: List<Int>,
-	val homv2AzimuthRadians: Double?
+	val transformationCodes: List<Int>
 )
