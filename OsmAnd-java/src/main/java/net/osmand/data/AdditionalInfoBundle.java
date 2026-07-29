@@ -82,14 +82,40 @@ public class AdditionalInfoBundle {
 		return localizedAdditionalInfo;
 	}
 
-	public Map<String, Object> getVisibleTagInfo() {
+	public Map<String, Object> getVisibleTagInfo(boolean allowNoteTag) {
+		boolean showDefaultTags = isDefaultForCategory();
+		PoiCategory category = getCategory();
 		Map<String, Object> result = new LinkedHashMap<>();
 		for (Map.Entry<String, Object> entry : getFilteredLocalizedInfo().entrySet()) {
 			String key = entry.getKey();
 			if (!shouldDisplayKey(key) || isKeyToSkip(key)) {
 				continue;
 			}
+			if (!allowNoteTag && "note".equals(key)) {
+				continue;
+			}
 			Object value = entry.getValue();
+			String strValue = value instanceof String str ? str : null;
+
+			PoiType pType = getPoiAdditionalType(key, strValue);
+			PoiType poiType = category != null ? category.getPoiTypeByKeyName(key) : null;
+			if (poiType == null && pType == null) {
+				poiType = poiTypes.getPoiTypeByKey(key);
+			}
+			if (pType == null) {
+				String altKey = key.replace(':', '_');
+				pType = getPoiAdditionalType(altKey, strValue);
+				poiType = category != null ? category.getPoiTypeByKeyName(altKey) : null;
+				if (poiType == null && pType == null) {
+					poiType = poiTypes.getPoiTypeByKey(altKey);
+				}
+			}
+			if (pType != null && pType.isFilterOnly()) {
+				continue;
+			}
+			if (pType == null && poiType == null && !showDefaultTags) {
+				continue;
+			}
 			if (value instanceof Map) {
 				value = filterLocalizations((Map<String, Object>) value);
 				if (value == null) {
@@ -104,6 +130,16 @@ public class AdditionalInfoBundle {
 			}
 		}
 		return result;
+	}
+
+	private boolean isDefaultForCategory() {
+		PoiCategory category = getCategory();
+		String subtype = get(SUBTYPE);
+		if (category == null || Algorithms.isEmpty(subtype)) {
+			return false;
+		}
+		PoiType poiType = category.getPoiTypeByKeyName(subtype);
+		return poiType != null && poiType.isDefaultForCategory();
 	}
 
 	@SuppressWarnings("unchecked")

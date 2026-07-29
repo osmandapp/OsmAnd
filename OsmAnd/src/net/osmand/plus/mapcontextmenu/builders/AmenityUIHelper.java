@@ -102,7 +102,7 @@ public class AmenityUIHelper extends MenuBuilder {
 		Context context = view.getContext();
 		List<AmenityInfoRow> infoRows = new LinkedList<>();
 		List<AmenityInfoRow> descriptions = new LinkedList<>();
-		Map<String, Object> filteredInfo = additionalInfo.getVisibleTagInfo();
+		Map<String, Object> filteredInfo = additionalInfo.getVisibleTagInfo(osmEditingEnabled);
 		for (Entry<String, Object> entry : filteredInfo.entrySet()) {
 			String key = entry.getKey();
 			Object value = entry.getValue();
