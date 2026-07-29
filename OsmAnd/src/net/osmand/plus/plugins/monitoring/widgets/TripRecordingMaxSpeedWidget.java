@@ -36,7 +36,11 @@ public class TripRecordingMaxSpeedWidget extends BaseRecordingWidget {
 	                                   @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		super(mapActivity, widgetType, customId, widgetsPanel);
 		this.widgetState = widgetState;
-		updateWidgetView();
+	}
+
+	@Override
+	protected void setupView(@NonNull View view) {
+		super.setupView(view);
 		updateInfo(null);
 	}
 
