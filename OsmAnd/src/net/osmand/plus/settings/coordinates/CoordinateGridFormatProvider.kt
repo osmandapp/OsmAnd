@@ -85,7 +85,7 @@ class CoordinateGridFormatProvider(
 		definition: EpsgGridDefinition,
 		projection: Projection
 	): CoordinateGridProjectionParameters? {
-		val constants = readProjectionConstants(definition, projection) ?: return null
+		val constants = readProjectionConstants(definition.epsgCode, projection) ?: return null
 		if (definition.usesWgs84) {
 			// Custom projections still need an initialized Helmert scale in GridConfiguration.
 			return constants.withEllipsoid(CoordinateGridEllipsoidParameters.IDENTITY, null)
@@ -101,10 +101,9 @@ class CoordinateGridFormatProvider(
 	}
 
 	private fun readProjectionConstants(
-		definition: EpsgGridDefinition,
+		epsgCode: Int,
 		projection: Projection
 	): CoordinateGridProjectionConstants? {
-		val epsgCode = definition.epsgCode
 		return try {
 			val resourcesPath = app.getAppPath(null).absolutePath
 			val transformer = CoordinateTransformer(resourcesPath, epsgCode)
@@ -115,7 +114,7 @@ class CoordinateGridFormatProvider(
 				val refLonLat = PointD()
 				val falseEastingAndNorthing = PointD()
 				val scaleFactor = PointD()
-				val constantsRead = transformer.getConstants(
+				if (!transformer.getConstants(
 						projection,
 						lonBounds,
 						latBounds,
@@ -124,15 +123,7 @@ class CoordinateGridFormatProvider(
 						falseEastingAndNorthing,
 						scaleFactor
 					)
-				val homv2Azimuth = definition.homv2AzimuthRadians
-				val canUseHomv2Workaround = !constantsRead && projection == Projection.HOMV2 &&
-					homv2Azimuth != null && hasValidProjectionConstants(
-						lonBounds,
-						latBounds,
-						semiMajorAxisAndInverseFlattening,
-						scaleFactor
-					)
-				if (!constantsRead && !canUseHomv2Workaround) {
+				) {
 					return null
 				}
 				if (!hasValidProjectionConstants(
@@ -151,10 +142,7 @@ class CoordinateGridFormatProvider(
 					semiMajorAxisAndInverseFlattening = semiMajorAxisAndInverseFlattening.toValue(),
 					refLonLat = refLonLat.toValue(),
 					falseEastingAndNorthing = falseEastingAndNorthing.toValue(),
-					scaleFactor = CoordinateGridPoint(
-						scaleFactor.getX(),
-						homv2Azimuth ?: scaleFactor.getY()
-					)
+					scaleFactor = scaleFactor.toValue()
 				)
 			} finally {
 				transformer.delete()
@@ -176,7 +164,8 @@ class CoordinateGridFormatProvider(
 			lonBounds.getX() < lonBounds.getY() && latBounds.getX() < latBounds.getY() &&
 			semiMajorAxisAndInverseFlattening.getX().isFinite() &&
 			semiMajorAxisAndInverseFlattening.getX() > 0.0 &&
-			scaleFactor.getX().isFinite() && scaleFactor.getX() > 0.0
+			scaleFactor.getX().isFinite() && scaleFactor.getX() > 0.0 &&
+			scaleFactor.getY().isFinite()
 	}
 
 	private fun readEllipsoidParameters(
@@ -228,7 +217,7 @@ class CoordinateGridFormatProvider(
 
 	private fun resolveLegacyId(formatId: String?): String? {
 		val legacyFormat = formatId?.let { value ->
-			GridFormat.values().firstOrNull { it.name.equals(value, ignoreCase = true) }
+			GridFormat.entries.firstOrNull { it.name.equals(value, ignoreCase = true) }
 		}
 		return legacyFormat?.coordinateFormatId
 	}
