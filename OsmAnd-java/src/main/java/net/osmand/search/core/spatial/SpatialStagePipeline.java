@@ -12,20 +12,20 @@ import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.search.core.HashSkipTileQuadTree;
 import net.osmand.search.core.HashSkipTileQuadTreeJoiner;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
-import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSettings;
 
 // TODO ---------------
 // TODO Add non maximum results as well... (surplus words +-) -  germany_langestrasse
 // TODO other masks ?
-// TODO introduce mask into joiner index
-// TODO increase space
+// TODO common words to skip
 // TODO x2 speed up by using flags
 // TODO x1 implement correct mixing alternative masks!
+// TODO introduce mask check into joiner index ?
 public class SpatialStagePipeline {
     
     private final SpatialSearchContext ctx;
     
 	public static int EXCLUDE_MASKS = 8000; // speed up
+	public static boolean CHECK_EXCLUDED = false;
     public static int MAX_STEPS = 5; // 1 - fully covered, 2 - 1 intersecction ,...
 
     public SpatialStagePipeline(SpatialSearchContext ctx) {
@@ -46,7 +46,7 @@ public class SpatialStagePipeline {
     private static final long MASK_SET_01 = 0x5555_5555_5555_555FL;
     private static final long MASK_SET_02 = 0x5555_5555_5555_5550L;
     // ALLOWED &: 0000, 0011, 1100, 1111, 
-
+    
     public static class SpatialObjectRes {
     	public final NameIndexAtom[] atoms;  
     	public NameIndexAtom mainAtom1;
@@ -102,7 +102,6 @@ public class SpatialStagePipeline {
 			}
     	}
     	
-
 		void setAtom(NameIndexAtom atom, int index) {
 			atoms[index] = atom;
     		mainMask = setTokenState(mainMask, index, atom.isBuilding() || atom.isPOIRef() ? STATE_AMBIGUOUS : STATE_EXACT_MATCH);
@@ -120,9 +119,23 @@ public class SpatialStagePipeline {
 	    }
 	    
 	    public static boolean allowed(long m1, long m2) {
-	    	long i = (m1 & m2 & MASK_SET_01);
-	    	return i == 0;
+	    	return allowedSlow(m1, m2);
 	    }
+	    
+		public static boolean allowedFast(long m1, long m2) {
+			long i = m1 & m2 & MASK_SET_01;
+			return i < 16 && ((0x12L >> i) & 1L) == 0;
+		}
+	    
+		public static boolean allowedSlow(long m1, long m2) {
+			long i = (m1 & m2 & MASK_SET_01);
+			if ((i & 3) == 1) {
+				return false;
+			} else if (((i >> 2) & 3) == 1) {
+				return false;
+			}
+			return (i >> 4) == 0;
+		}
 	    
 	    public static long combine2BitMasks(long mask1, long mask2, int totalTokens) {
 			long result = 0L;
@@ -302,6 +315,9 @@ public class SpatialStagePipeline {
 					existing.mergeSame(atom, tokenIdx);
 				} else {
 					SpatialObjectRes obj = new SpatialObjectRes(totalTokens, atom, tokenIdx);
+					if(tokenIdx == 0 && atom.isGeoArea()) {
+						System.out.println(atom + " " + SpatialObjectRes.formatMaskTokens(obj.mainMask, tokens));
+					}
 					prep.objectsById.put(atom.id, obj);
 				}
 			}
@@ -445,7 +461,9 @@ public class SpatialStagePipeline {
 			time = System.nanoTime();
 		}
 		// check potential missing results
-		checkExcluded(tokensSize, prep);
+		if (CHECK_EXCLUDED) {
+			checkExcluded(tokensSize, prep);
+		}
 
 		return prep.combinations;
 	}
@@ -606,4 +624,5 @@ public class SpatialStagePipeline {
 
         return true;
     }
+    
 }

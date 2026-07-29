@@ -222,7 +222,7 @@ public class SpatialStagePipelineStats {
 	            "Rank", "Bits", "Count", "% Share", "Tokens (Bitmask representation)");
 	    System.out.println("------------------------------------------------------------------------------------------");
 
-	    int topN = Math.min(100, maskList.size()); // Display Top 25 most frequent masks
+	    int topN = Math.min(maskList.size(), maskList.size());
 	    for (int i = 0; i < topN; i++) {
 	        long mask = maskList.get(i)[0];
 	        long count = maskList.get(i)[1];
