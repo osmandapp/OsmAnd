@@ -97,23 +97,11 @@ public class AdditionalInfoBundle {
 			Object value = entry.getValue();
 			String strValue = value instanceof String str ? str : null;
 
-			PoiType pType = getPoiAdditionalType(key, strValue);
-			PoiType poiType = category != null ? category.getPoiTypeByKeyName(key) : null;
-			if (poiType == null && pType == null) {
-				poiType = poiTypes.getPoiTypeByKey(key);
-			}
-			if (pType == null) {
-				String altKey = key.replace(':', '_');
-				pType = getPoiAdditionalType(altKey, strValue);
-				poiType = category != null ? category.getPoiTypeByKeyName(altKey) : null;
-				if (poiType == null && pType == null) {
-					poiType = poiTypes.getPoiTypeByKey(altKey);
-				}
-			}
-			if (pType != null && pType.isFilterOnly()) {
+			ResolvedPoiType resolved = resolvePoiType(category, key, strValue);
+			if (resolved.pType != null && resolved.pType.isFilterOnly()) {
 				continue;
 			}
-			if (pType == null && poiType == null && !showDefaultTags) {
+			if (resolved.pType == null && resolved.poiType == null && !showDefaultTags) {
 				continue;
 			}
 			if (value instanceof Map) {
@@ -237,10 +225,37 @@ public class AdditionalInfoBundle {
 		return pt instanceof PoiType poiType ? poiType : null;
 	}
 
-	private boolean isKeyToSkip(String key) {
+	public ResolvedPoiType resolvePoiType(PoiCategory category, String key, String vl) {
+		PoiType pType = getPoiAdditionalType(key, vl);
+		PoiType poiType = category != null ? category.getPoiTypeByKeyName(key) : null;
+		if (poiType == null && pType == null) {
+			poiType = poiTypes.getPoiTypeByKey(key);
+		}
+		if (pType == null) {
+			String altKey = key.replace(':', '_');
+			pType = getPoiAdditionalType(altKey, vl);
+			poiType = category != null ? category.getPoiTypeByKeyName(altKey) : null;
+			if (poiType == null && pType == null) {
+				poiType = poiTypes.getPoiTypeByKey(altKey);
+			}
+		}
+		return new ResolvedPoiType(pType, poiType);
+	}
+
+	public boolean isKeyToSkip(String key) {
 		return CollectionUtils.startsWithAny(key, COLLAPSABLE_PREFIX, ALT_NAME_WITH_LANG_PREFIX, LANG_YES)
 				|| CollectionUtils.equalsToAny(key, WIKI_PHOTO, WIKIDATA, WIKIMEDIA_COMMONS, "image", "mapillary", "subway_region")
 				|| MapObject.isNameLangTag(key)
 				|| key.contains(ROUTE);
+	}
+
+	public static final class ResolvedPoiType {
+		public final PoiType pType;
+		public final PoiType poiType;
+
+		private ResolvedPoiType(PoiType pType, PoiType poiType) {
+			this.pType = pType;
+			this.poiType = poiType;
+		}
 	}
 }

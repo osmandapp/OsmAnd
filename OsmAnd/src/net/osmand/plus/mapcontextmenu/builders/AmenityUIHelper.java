@@ -309,22 +309,12 @@ public class AmenityUIHelper extends MenuBuilder {
 	private AmenityInfoRow createPoiAdditionalInfoRow(@NonNull Context context,
 	                                                  @NonNull String key, @NonNull String vl,
 	                                                  @Nullable CollapsableView collapsableView) {
-		if (key.equals("note") && !osmEditingEnabled)
+		if (additionalInfo.isKeyToSkip(key) || (key.equals("note") && !osmEditingEnabled))
 			return null;
 
-		PoiType pType = additionalInfo.getPoiAdditionalType(key, vl);
-		poiType = poiCategory.getPoiTypeByKeyName(key);
-		if (poiType == null && pType == null) {
-			poiType = poiTypes.getPoiTypeByKey(key);
-		}
-		if (pType == null) {
-			String altKey = key.replaceAll(":", "_");
-			pType = additionalInfo.getPoiAdditionalType(altKey, vl);
-			poiType = poiCategory.getPoiTypeByKeyName(altKey);
-			if (poiType == null && pType == null) {
-				poiType = poiTypes.getPoiTypeByKey(altKey);
-			}
-		}
+		AdditionalInfoBundle.ResolvedPoiType resolved = additionalInfo.resolvePoiType(poiCategory, key, vl);
+		PoiType pType = resolved.pType;
+		poiType = resolved.poiType;
 		if (pType != null && pType.isFilterOnly()) {
 			return null;
 		}
