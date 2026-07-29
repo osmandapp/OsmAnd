@@ -70,7 +70,6 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 	public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
 		SpatialTextSearchSettings settings = createSpatialSettings(phrase);
 		List<BinaryMapIndexReader> files = getSpatialSearchFiles(phrase, settings);
-		logSearchFiles("general", files);
 		if (Algorithms.isEmpty(files)) {
 			return false;
 		}
@@ -185,34 +184,6 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		if (reader != null && !files.contains(reader)) {
 			files.add(reader);
 		}
-	}
-
-	private void logSearchFiles(String searchType, List<BinaryMapIndexReader> files) {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Spatial search maps type=").append(searchType).append(" count=").append(files.size());
-		if (!files.isEmpty()) {
-			builder.append(": ");
-		}
-		for (int i = 0; i < files.size(); i++) {
-			if (i > 0) {
-				builder.append(", ");
-			}
-			builder.append(getSearchFileName(files.get(i)));
-		}
-		LOG.info(builder.toString());
-	}
-
-	private String getSearchFileName(BinaryMapIndexReader reader) {
-		if (reader == null) {
-			return "null";
-		}
-		File file = reader.getFile();
-		String name = file != null ? file.getName() : reader.getRegionName();
-		List<String> regionNames = reader.getRegionNames();
-		if (!Algorithms.isEmpty(regionNames)) {
-			name += " " + regionNames;
-		}
-		return name;
 	}
 
 	private void publishWithParent(SearchResultMatcher resultMatcher, SearchResult searchResult) {
