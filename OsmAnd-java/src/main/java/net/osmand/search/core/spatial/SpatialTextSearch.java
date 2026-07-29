@@ -64,7 +64,7 @@ public class SpatialTextSearch {
 
 		public boolean SEARCH_SUGGESTION = false; // incomplete to add '.' in the end
 		// not used in search as maps provided (web could multiply by 1.5x or adjust bbox)
-		public int SUGGESTED_SEARCH_RADIUS_KM = 300;  
+		public int SUGGESTED_SEARCH_RADIUS_KM = 400;  
 				
 		// lang to deduplicate results
 		public String LANG_DEDUPLICATE = ""; 
