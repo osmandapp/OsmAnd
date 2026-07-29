@@ -75,8 +75,7 @@ import net.osmand.util.SearchAlgorithms;
 // REVIEW: Web gaps for POI category
 // REVIEW: Sort by elo display small / large
 // REVIEW: web url to search by maps
-
-// TODO Display low zooms for rare categories
+// REVIEW: Display low zooms for rare categories
 
 // TODO INDEX: Find POI Categories translations / synonyms via Common words - Стоматол., Dentist, Basilica 
 // TODO REVIEW: Abbrevations (synonyms / direction words) other languages?
