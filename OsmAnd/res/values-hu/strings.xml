@@ -5250,4 +5250,6 @@
     <string name="rendering_attr_surface_laterite_name">Laterit</string>
     <string name="use_spatial_text_search">Térbeli szövegkeresés használata</string>
     <string name="use_spatial_text_search_description">Térbeli szövegkeresőmotor (kísérleti) használata a szabványos gyorskeresési API-k helyett.</string>
+    <string name="always_keep_local_copy">Mindig legyen helyi másolat</string>
+    <string name="always_keep_local_copy_description">A médiafájlok akkor is megmaradnak, ha az eredeti fájlt törlik a galériából vagy a fájlok közül.</string>
 </resources>

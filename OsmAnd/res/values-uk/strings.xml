@@ -5018,8 +5018,8 @@
         <item quantity="many">%d треків</item>
         <item quantity="other">%d трека</item>
     </plurals>
-    <string name="start_free_trial">Почати безкоштовний пробний період</string>
-    <string name="subscription_free_trial_with_price">Безкоштовно %1$s, потім %2$s</string>
+    <string name="start_free_trial">Почати безплатний пробний період</string>
+    <string name="subscription_free_trial_with_price">Безплатно %1$s, потім %2$s</string>
     <string name="subscription_then_price">потім %1$s</string>
     <string name="shared_string_radians">Радіани</string>
     <string name="shared_string_unlock">Розблокувати</string>
