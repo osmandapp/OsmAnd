@@ -39,8 +39,6 @@ import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.Sele
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.render.OsmandDashPathEffect;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
@@ -74,6 +72,7 @@ import net.osmand.plus.views.Renderable.StandardTrack;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProviderSelection;
 import net.osmand.plus.views.layers.ContextMenuLayer.IMoveObjectProvider;
 import net.osmand.plus.views.layers.MapTextLayer.MapTextProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
@@ -97,7 +96,6 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.*;
@@ -105,7 +103,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IMoveObjectProvider, MapTextProvider<WptPt>, RenameCallback {
+public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IMoveObjectProvider,
+		MapTextProvider<WptPt>, RenameCallback, IContextMenuProviderSelection {
 
 	private static final Log log = PlatformUtil.getLog(GPXLayer.class);
 
@@ -114,6 +113,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private static final int MAX_SUPPORTED_TRACK_WIDTH_DP = 48;
 	private static final long MANY_POINTS_VISIBLE_WARNING_THRESHOLD = 500_000L;
 	private static final int INVALID_EXTRA_ID = -1;
+	private static final int GPX_TRACK_ORDER = 1_000;
 	private static final int SPLIT_LABEL_EXTRA_ID_START = 1_000_000_000;
 
 	private Paint paint;
@@ -1617,6 +1617,19 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			return new PointDescription(PointDescription.POINT_TYPE_GPX, name);
 		}
 		return null;
+	}
+
+	@Override
+	public int getOrder(Object o) {
+		return o instanceof SelectedGpxPoint ? GPX_TRACK_ORDER : 0;
+	}
+
+	@Override
+	public void setSelectedObject(Object o) {
+	}
+
+	@Override
+	public void clearSelectedObject() {
 	}
 
 	private void removeCachedUnselectedTracks(List<SelectedGpxFile> selectedGpxFiles) {
