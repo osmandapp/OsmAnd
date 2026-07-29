@@ -35,6 +35,7 @@ import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.shared.gpx.TrackItem;
+import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
@@ -66,6 +67,8 @@ public class GpxSelectionHelper {
 	private static final String COLOR = "color";
 	private static final String SELECTED_BY_USER = "selected_by_user";
 	private static final String HIDDEN_GROUPS = "hidden_groups";
+	/** Avoid merging all segments into one general track at restore (OOM on huge GPX, #24420). */
+	private static final int MAX_TRACK_POINTS_FOR_GENERAL_TRACK = 100_000;
 
 	private final OsmandApplication app;
 	private final SavingTrackHelper savingTrackHelper;
@@ -257,6 +260,17 @@ public class GpxSelectionHelper {
 		saveCurrentSelections();
 	}
 
+	private static boolean shouldBuildGeneralTrack(@NonNull GpxFile gpx) {
+		int count = 0;
+		for (TrkSegment segment : gpx.getNonEmptyTrkSegments(false)) {
+			count += segment.getPoints().size();
+			if (count > MAX_TRACK_POINTS_FOR_GENERAL_TRACK) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	public void loadGPXTracks(@Nullable IProgress progress) {
 		String load = app.getSettings().SELECTED_GPX.get();
 		if (!Algorithms.isEmpty(load)) {
@@ -272,7 +286,7 @@ public class GpxSelectionHelper {
 						if (progress != null) {
 							progress.startTask(app.getString(R.string.loading_smth, fl.getName()), -1);
 						}
-						GpxFile gpx = SharedUtil.loadGpxFile(fl);
+						GpxFile gpx = SharedUtil.loadGpxFile(fl, null, false);
 						if (obj.has(COLOR)) {
 							int color = GpxUtilities.INSTANCE.parseColor(obj.getString(COLOR), 0);
 							gpx.setColor(color);
@@ -289,8 +303,10 @@ public class GpxSelectionHelper {
 							if (obj.has(HIDDEN_GROUPS)) {
 								readHiddenGroups(gpx, obj.getString(HIDDEN_GROUPS));
 							}
+							if (shouldBuildGeneralTrack(gpx)) {
+								gpx.addGeneralTrack();
+							}
 						}
-						gpx.addGeneralTrack();
 					} else if (obj.has(CURRENT_TRACK)) {
 						SelectedGpxFile file = savingTrackHelper.getCurrentTrack();
 						file.selectedByUser = selectedByUser;
