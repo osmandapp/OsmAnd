@@ -2438,8 +2438,8 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="purchases_feature_desc_wikivoyage">Explore Wikivoyage offline. Articles divided by countries and regions and available in all languages.</string>
     <string name="purchases_feature_desc_terrain">Terrain contour lines, grayscale hillshade and color scale slope indication, to show peaks and lowlands.</string>
     <string name="purchases_feature_desc_nautical">Get access to nautical depth information</string>
-    <string name="send_logcat_log">Send logcat log</string>
-    <string name="send_crash_log">Send crash log</string>
+    <string name="send_logcat_log">Send current session logs</string>
+    <string name="send_crash_log">Send app crashes logs</string>
     <string name="backup_promocode">Promocode</string>
     <string name="routing_attr_avoid_tunnels_name">Avoid tunnels</string>
     <string name="routing_attr_avoid_tunnels_description">Avoid tunnels</string>

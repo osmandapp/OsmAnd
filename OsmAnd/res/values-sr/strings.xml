@@ -5323,4 +5323,6 @@
     <string name="rendering_attr_surface_laterite_name">Латерит</string>
     <string name="use_spatial_text_search">Користите просторну претрагу текста</string>
     <string name="use_spatial_text_search_description">Замените стандардне АПИ-је за брзу претрагу експерименталном претрагом просторног текста.</string>
+    <string name="always_keep_local_copy">Увек чувај локалну копију</string>
+    <string name="always_keep_local_copy_description">Медији остају причвршћени чак и ако се оригинал обрише из галерије или датотека.</string>
 </resources>

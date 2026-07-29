@@ -5320,4 +5320,6 @@
     <string name="rendering_attr_surface_laterite_name">Laterit</string>
     <string name="use_spatial_text_search">Koristite prostornu pretragu teksta</string>
     <string name="use_spatial_text_search_description">Zamenite standardne API-je za brzu pretragu eksperimentalnom pretragom prostornog teksta.</string>
+    <string name="always_keep_local_copy">Uvek čuvaj lokalnu kopiju</string>
+    <string name="always_keep_local_copy_description">Mediji ostaju pričvršćeni čak i ako se original obriše iz galerije ili fajlova.</string>
 </resources>

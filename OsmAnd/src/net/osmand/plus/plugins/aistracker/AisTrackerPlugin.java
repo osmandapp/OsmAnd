@@ -114,7 +114,7 @@ public class AisTrackerPlugin extends OsmandPlugin {
 
 		private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(AisDataManager.class);
 
-		private static final int AIS_OBJECT_LIST_COUNTER_MAX = 200;
+		private static final int AIS_OBJECT_LIST_COUNTER_MAX = 20_000;
 		private final Map<Integer, AisObject> objects = new HashMap<>();
 		private Timer cleanupTimer;
 
@@ -169,10 +169,12 @@ public class AisTrackerPlugin extends OsmandPlugin {
 				obj = new AisObject(ais);
 				objects.put(ais.getMmsi(), obj);
 			}
-			if (objects.size() >= AIS_OBJECT_LIST_COUNTER_MAX) {
+			if (objects.size() > AIS_OBJECT_LIST_COUNTER_MAX) {
 				removeOldestAisObject(objects);
 			}
-			AisTrackerPlugin.this.onAisObjectReceived(obj);
+			if (objects.get(obj.getMmsi()) == obj) {
+				AisTrackerPlugin.this.onAisObjectReceived(obj);
+			}
 		}
 
 		@NonNull
