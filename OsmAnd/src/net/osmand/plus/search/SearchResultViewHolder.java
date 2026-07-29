@@ -4,7 +4,6 @@ import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FR
 
 import android.graphics.drawable.Drawable;
 import android.text.SpannableString;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -29,10 +28,14 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.builders.rows.PoiAdditionalUiRule;
+import net.osmand.plus.mapcontextmenu.builders.rows.PoiAdditionalUiRules;
 import net.osmand.plus.mapcontextmenu.controllers.NetworkRouteDrawable;
 import net.osmand.plus.mapcontextmenu.other.TrimToBackgroundTextView;
-import net.osmand.plus.search.dialogs.QuickSearchListAdapter;
+import net.osmand.plus.search.dialogs.SearchScopeChip;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.track.clickable.ClickableWayHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -41,6 +44,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
+import net.osmand.search.core.TopIndexFilter;
 import net.osmand.search.core.spatial.SpatialSearchResult;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
@@ -78,59 +82,53 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 		String name = item.getName();
 		title.setText(item.getSpannableName());
 
-		String desc = item.getTypeName();
-		if (item.getSearchResult() != null && item.getSearchResult().spatialResult != null) {
-			SpatialSearchResult spatialResult = item.getSearchResult().spatialResult;
-			if (spatialResult.isPoiCategory()) {
-				MapObject refObject = spatialResult.getReferenceObject();
-				if (refObject != null) {
-					desc = String.format("%s • %s", desc, refObject.getName());
-				}
-			}
-		}
-		Object searchResultObject = item.getSearchResult().object;
-		if (searchResultObject instanceof AbstractPoiType) {
-			AbstractPoiType abstractPoiType = (AbstractPoiType) searchResultObject;
-			String[] synonyms = abstractPoiType.getSynonyms().split(";");
-			QuickSearchHelper searchHelper = app.getSearchUICore();
-			SearchUICore searchUICore = searchHelper.getCore();
-			String searchPhrase = searchUICore.getPhrase().getText(true);
-			StringMatcher matcher = new NameStringMatcher(searchPhrase, CHECK_STARTS_FROM_SPACE);
+		if (item.getSpatialSearchResult() == null || !item.getSpatialSearchResult().isPoiCategory()) {
+			String desc = item.getTypeName();
+			Object searchResultObject = item.getSearchResult().object;
+			if (searchResultObject instanceof AbstractPoiType) {
+				AbstractPoiType abstractPoiType = (AbstractPoiType) searchResultObject;
+				String[] synonyms = abstractPoiType.getSynonyms().split(";");
+				QuickSearchHelper searchHelper = app.getSearchUICore();
+				SearchUICore searchUICore = searchHelper.getCore();
+				String searchPhrase = searchUICore.getPhrase().getText(true);
+				StringMatcher matcher = new NameStringMatcher(searchPhrase, CHECK_STARTS_FROM_SPACE);
 
-			if (!searchPhrase.isEmpty() && !matcher.matches(abstractPoiType.getTranslation())) {
-				if (matcher.matches(abstractPoiType.getEnTranslation())) {
-					desc = item.getTypeName() + " (" + abstractPoiType.getEnTranslation() + ")";
-				} else {
-					for (String syn : synonyms) {
-						if (matcher.matches(syn)) {
-							desc = item.getTypeName() + " (" + syn + ")";
-							break;
+				if (!searchPhrase.isEmpty() && !matcher.matches(abstractPoiType.getTranslation())) {
+					if (matcher.matches(abstractPoiType.getEnTranslation())) {
+						desc = item.getTypeName() + " (" + abstractPoiType.getEnTranslation() + ")";
+					} else {
+						for (String syn : synonyms) {
+							if (matcher.matches(syn)) {
+								desc = item.getTypeName() + " (" + syn + ")";
+								break;
+							}
 						}
 					}
 				}
 			}
-		}
 
-		boolean hasDesc = false;
-		if (subtitle != null) {
-			if (!Algorithms.isEmpty(desc) && !desc.equals(name)) {
-				subtitle.setText(desc);
-				subtitle.setVisibility(View.VISIBLE);
-				hasDesc = true;
-			} else {
-				subtitle.setVisibility(View.GONE);
+			boolean hasDesc = false;
+			if (subtitle != null) {
+				if (!Algorithms.isEmpty(desc) && !desc.equals(name)) {
+					subtitle.setText(desc);
+					subtitle.setVisibility(View.VISIBLE);
+					hasDesc = true;
+				} else {
+					subtitle.setVisibility(View.GONE);
+				}
 			}
-		}
-
-		Drawable typeIcon = item.getTypeIcon();
-		ImageView groupIcon = view.findViewById(R.id.type_name_icon);
-		if (groupIcon != null) {
-			if (typeIcon != null && hasDesc) {
-				groupIcon.setImageDrawable(typeIcon);
-				groupIcon.setVisibility(View.VISIBLE);
-			} else {
-				groupIcon.setVisibility(View.GONE);
+			Drawable typeIcon = item.getTypeIcon();
+			ImageView groupIcon = view.findViewById(R.id.type_name_icon);
+			if (groupIcon != null) {
+				if (typeIcon != null && hasDesc) {
+					groupIcon.setImageDrawable(typeIcon);
+					groupIcon.setVisibility(View.VISIBLE);
+				} else {
+					groupIcon.setVisibility(View.GONE);
+				}
 			}
+		} else {
+			bindSpatialCategoryPart(view, item, app, subtitle);
 		}
 
 		LinearLayout timeLayout = view.findViewById(R.id.time_layout);
@@ -158,6 +156,36 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 				}
 			} else {
 				timeLayout.setVisibility(View.GONE);
+			}
+		}
+	}
+
+	public static void bindSpatialCategoryPart(@NonNull View view, @NonNull QuickSearchListItem item,
+	                                           @NonNull OsmandApplication app, @NonNull TextView subtitle) {
+		SpatialSearchResult spatialSearchResult = item.getSpatialSearchResult();
+		if (spatialSearchResult == null || !spatialSearchResult.isPoiCategory()) {
+			return;
+		}
+		SearchScopeChip chip = view.findViewById(R.id.search_scope_chip);
+		ImageView groupIcon = view.findViewById(R.id.type_name_icon);
+		groupIcon.setVisibility(View.GONE);
+		ApplicationMode applicationMode = app.getSettings().getApplicationMode();
+		boolean nightMode = app.getDaynightHelper().isNightMode(applicationMode, ThemeUsageContext.APP);
+		if (chip != null) {
+			MapObject refObject = spatialSearchResult.getReferenceObject();
+			if (refObject != null) {
+				chip.setScopeName(refObject.getName(), nightMode);
+			}
+		}
+		subtitle.setText(app.getString(R.string.shared_string_near).toLowerCase());
+		subtitle.setVisibility(View.VISIBLE);
+
+		if (item.getSearchResult().object instanceof TopIndexFilter topIndexFilter) {
+			PoiAdditionalUiRule uiRule = PoiAdditionalUiRules.INSTANCE.findRule(topIndexFilter.getTag());
+			if (uiRule.getCustomIconId() != null) {
+				int iconColor = nightMode ? R.color.osmand_orange_dark : R.color.osmand_orange;
+				Drawable icon = app.getUIUtilities().getIcon(uiRule.getCustomIconId(), iconColor);
+				((ImageView)view.findViewById(R.id.imageView)).setImageDrawable(icon);
 			}
 		}
 	}

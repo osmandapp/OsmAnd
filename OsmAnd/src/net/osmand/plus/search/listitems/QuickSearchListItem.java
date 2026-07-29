@@ -38,6 +38,7 @@ import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
+import net.osmand.search.core.spatial.SpatialSearchResult;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
@@ -77,6 +78,15 @@ public class QuickSearchListItem {
 
 	public SearchResult getSearchResult() {
 		return searchResult;
+	}
+
+	@Nullable
+	public SpatialSearchResult getSpatialSearchResult() {
+		SearchResult searchResult = getSearchResult();
+		if(searchResult != null) {
+			return searchResult.spatialResult;
+		}
+		return null;
 	}
 
 	public boolean isDestinationHistoryItem() {

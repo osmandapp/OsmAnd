@@ -706,7 +706,9 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 	public static void updateCompass(@NonNull View view, @NonNull QuickSearchListItem item,
 	                                 @NonNull UpdateLocationViewCache updateLocationViewCache, boolean useMapCenter) {
-		boolean showCompass = item.getSearchResult().location != null;
+		SearchResult searchResult = item.getSearchResult();
+		boolean hideCompassForSpatialCategoryItem = searchResult != null && searchResult.spatialResult != null && searchResult.spatialResult.isPoiCategory();
+		boolean showCompass = item.getSearchResult().location != null && !hideCompassForSpatialCategoryItem;
 		if (showCompass) {
 			updateLocationView(view, item, updateLocationViewCache, useMapCenter);
 		}
