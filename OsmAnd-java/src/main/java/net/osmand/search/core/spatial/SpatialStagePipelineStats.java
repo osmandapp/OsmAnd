@@ -229,7 +229,7 @@ public class SpatialStagePipelineStats {
 	        int bitCount = SpatialObjectRes.countCoveredTokens(mask);
 	        double share = (count * 100.0) / totalObjects;
 
-	        String tokensRepresentation = SpatialStagePipeline.formatMaskTokens(mask, tokens);
+	        String tokensRepresentation = SpatialObjectRes.formatMaskTokens(mask, tokens);
 
 	        System.out.printf("#%-5d | %-8d | %,12d | %6.2f%%    | %-45s\n", 
 	                (i + 1), bitCount, count, share, tokensRepresentation);
