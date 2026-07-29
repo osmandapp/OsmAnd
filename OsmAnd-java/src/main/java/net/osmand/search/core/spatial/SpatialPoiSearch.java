@@ -352,7 +352,32 @@ public class SpatialPoiSearch {
 		cs.tokens.add(t);
 		t.addPoiCategoryMatch(a.id);
 	}
-	
+
+	public int getCategoryFrequency(SpatialSearchContext ctx, String categoryKey) {
+		SpatialPoiType a = getByKey(categoryKey);
+		if (a == null) {
+			return 0;
+		}
+		int total = 0;
+		for (SpatialSearchFileCache l : ctx.internalFile) {
+			if (l.poiFrequencies != null) {
+				Integer freq = l.poiFrequencies.get(a.key);
+				if (freq != null) {
+					total += freq;
+				}
+				if (a.singleType instanceof PoiFilter pf) {
+					for (PoiType p : pf.getPoiTypes()) {
+						freq = l.poiFrequencies.get(p.getKeyName());
+						if (freq != null) {
+							total += freq;
+						}
+					}
+				}
+			}
+		}
+		return total;
+	}
+
 	public void processPoiCategories(SpatialSearchContext ctx, List<SpatialSearchToken> tokens) {
 		Map<SpatialPoiType, PoiCatSearch> res = new LinkedHashMap<>();
 		for (SpatialSearchToken t : tokens) {
