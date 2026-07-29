@@ -36,6 +36,22 @@ Details: see commit message and `SpatialTokenMask` javadoc.
 
 ## How to test
 
+### Windows quick start (JDK 17)
+
+Install once:
+
+```powershell
+winget install EclipseAdoptium.Temurin.17.JDK
+```
+
+Run both test suites from repo root:
+
+```powershell
+.\run-spatial-mask-tests.ps1
+```
+
+Requires `JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8` and `GRADLE_OPTS=-Xmx4g` on Windows (the script sets them). Without UTF-8 the full OsmAnd-java compile fails on non-ASCII source files.
+
 ### 1. Unit tests (recommended first)
 
 From repo root:
