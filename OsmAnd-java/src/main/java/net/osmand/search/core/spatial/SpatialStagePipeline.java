@@ -27,6 +27,7 @@ public class SpatialStagePipeline {
     private final SpatialSearchContext ctx;
     
     public static int FREQUENT_OBJECTS_THRESHOLD = 5000;
+    public static int MAX_VIRTUAL_MASKS = 10000;
     
 	public static int EXCLUDE_MASKS = 8000; // speed up
 	public static boolean CHECK_EXCLUDED = false;
@@ -50,6 +51,7 @@ public class SpatialStagePipeline {
     private static final long MASK_SET_01 = 0x5555_5555_5555_555FL;
     private static final long MASK_SET_02 = 0x5555_5555_5555_5550L;
     // ALLOWED &: 0000, 0011, 1100, 1111, 
+
 
     
     public static class SpatialObjectRes {
@@ -370,7 +372,7 @@ public class SpatialStagePipeline {
 					(System.nanoTime() - time) / 1e6, nonCategoryRes);
 		}
 		int[] stops = ctx.settings.MAX_PIPELINE_STAGE_TO_STOP;
-		if (stops.length > 0 && nonCategoryRes > stops[Math.min(stops.length, stage) - 1]) {
+		if (stops.length > 0 && nonCategoryRes > stops[Math.min(stops.length, stage + 1) - 1]) {
 			return true;
 		}
 		return false;
@@ -500,6 +502,50 @@ public class SpatialStagePipeline {
 	    }
 	}
 	
+	private void pruneChildrenPotentialMasks(SpatialObjectsBucket parent, int totalTokens) {
+	    if (parent.getChildren().isEmpty()) {
+	        return;
+	    }
+	    long[] aliveParentMasks = parent.getMasks();
+	    if (aliveParentMasks.length == 0) {
+	        for (SpatialObjectsBucket child : parent.getChildren()) {
+	            clearSubtree(child);
+	        }
+	        return;
+	    }
+	    for (SpatialObjectsBucket child : parent.getChildren()) {
+	        if (child.isComputed()) {
+	            continue;
+	        }
+	        long[] edgeMasks = child.singleEdgeGroup.getMasks();
+	        TLongHashSet updatedChildMasks = new TLongHashSet();
+	        for (long pMask : aliveParentMasks) {
+	            for (long eMask : edgeMasks) {
+	                if (!SpatialObjectRes.allowed(pMask, eMask)) {
+	                    continue;
+	                }
+	                long combinedMask = SpatialObjectRes.combine2BitMasks(pMask, eMask, totalTokens);
+	                if (combinedMask != pMask) {
+	                    updatedChildMasks.add(combinedMask);
+	                }
+	            }
+	        }
+	        child.potentialMasks = updatedChildMasks;
+	        if (child.isEmpty()) {
+	            clearSubtree(child);
+	        } else {
+	            pruneChildrenPotentialMasks(child, totalTokens);
+	        }
+	    }
+	}
+	
+	private void clearSubtree(SpatialObjectsBucket node) {
+	    for (SpatialObjectsBucket child : node.getChildren()) {
+	        clearSubtree(child);
+	    }
+	    node.clear();
+	}
+	
 	private void compute(SpatialObjectsBucket b, List<SpatialObjectRes> res, SpatialPipelineResults prep) {
 	    if (b == null || b.isEmpty()) {
 	        return;
@@ -509,10 +555,11 @@ public class SpatialStagePipeline {
 	        return;
 	    }
 	    if (b.parent == null) {
-	        if (b.resObjectsByMasks != null) {
-	            b.markComputed(b.resTree, b.resObjectsByMasks);
-	            collectFullCoverageResults(b, res, prep.tokens.size());
+	    	if (b.resTree != null && !b.resTree.isEmpty()) {
+	            b.resTree.build(); 
 	        }
+	        b.markComputed(b.resTree, b.resObjectsByMasks);
+	        collectFullCoverageResults(b, res, prep.tokens.size());
 	        return;
 	    }
 	    if (!b.parent.isComputed()) {
@@ -562,7 +609,9 @@ public class SpatialStagePipeline {
 	        }
 	    }
 	    b.markComputed(resTree, resObjectsByMasks);
-
+	    if (!b.getChildren().isEmpty()) {
+	        pruneChildrenPotentialMasks(b, prep.tokens.size());
+	    }
 	    collectFullCoverageResults(b, res, prep.tokens.size());
 	}
 
@@ -582,96 +631,180 @@ public class SpatialStagePipeline {
 	    }
 	}
 	
-	private void virtualComputeSplit(SpatialObjectsBucket b, List<SpatialObjectsBucket> edges,
-			List<SpatialObjectsBucket> nextLevel) {
-		// TODO Auto-generated method stub
-		
+	private static class MaskGroupInfo {
+	    final long mask;
+	    int count;
+	    List<SpatialObjectRes> objects; // Заполняется только на D=1
+
+	    MaskGroupInfo(long mask, int count, List<SpatialObjectRes> objects) {
+	        this.mask = mask;
+	        this.count = count;
+	        this.objects = objects;
+	    }
 	}
 	
+	private void splitGroupInfoToBuckets(SpatialObjectsBucket parent, SpatialObjectsBucket singleEdgeGroup,
+			int edgeIndex, TLongObjectHashMap<MaskGroupInfo> maskMap, int totalTokens,
+			List<SpatialObjectsBucket> outputList) {
+		if (maskMap == null || maskMap.isEmpty()) {
+			return;
+		}
+		SpatialObjectsBucket fullCoveredBucket = null;
+		SpatialObjectsBucket combinedRareBucket = null;
+		long[] masks = maskMap.keys();
+		for (int i = 0; i < masks.length; i++) {
+			long mask = masks[i];
+			MaskGroupInfo info = maskMap.get(mask);
+			boolean isFullCovered = (SpatialObjectRes.countCoveredTokens(mask) == totalTokens);
+			if (isFullCovered) {
+				if (fullCoveredBucket == null) {
+					fullCoveredBucket = createBucketNode(parent, singleEdgeGroup, edgeIndex);
+				}
+				populateBucketMask(fullCoveredBucket, mask, info);
+				continue;
+			}
+			if (info.count >= FREQUENT_OBJECTS_THRESHOLD) {
+				SpatialObjectsBucket freqBucket = createBucketNode(parent, singleEdgeGroup, edgeIndex);
+				populateBucketMask(freqBucket, mask, info);
+				finalizeAndAddBucket(parent, freqBucket, outputList);
+				continue;
+			}
+			if (combinedRareBucket == null) {
+				combinedRareBucket = createBucketNode(parent, singleEdgeGroup, edgeIndex);
+			}
+			populateBucketMask(combinedRareBucket, mask, info);
+		}
+		if (fullCoveredBucket != null && !fullCoveredBucket.isEmpty()) {
+			finalizeAndAddBucket(parent, fullCoveredBucket, outputList);
+		}
+
+		if (combinedRareBucket != null && !combinedRareBucket.isEmpty()) {
+			finalizeAndAddBucket(parent, combinedRareBucket, outputList);
+		}
+	}
+	
+	private SpatialObjectsBucket createBucketNode(SpatialObjectsBucket parent, SpatialObjectsBucket singleEdgeGroup,
+			int edgeIndex) {
+		if (parent == null) {
+			SpatialObjectsBucket b = new SpatialObjectsBucket(edgeIndex);
+			b.potentialMasks = new TLongHashSet();
+			b.resTree = new HashSkipTileQuadTree<>();
+			b.resObjectsByMasks = new TLongObjectHashMap<>();
+			return b;
+		} else {
+			return new SpatialObjectsBucket(parent, singleEdgeGroup, new TLongHashSet(), edgeIndex);
+		}
+	}
+
+	private void populateBucketMask(SpatialObjectsBucket b, long mask, MaskGroupInfo info) {
+		if (b.potentialMasks == null) {
+			b.potentialMasks = new TLongHashSet();
+		}
+		b.potentialMasks.add(mask);
+		if (info.objects != null && !info.objects.isEmpty()) {
+			if (b.resObjectsByMasks == null)
+				b.resObjectsByMasks = new TLongObjectHashMap<>();
+			if (b.resTree == null)
+				b.resTree = new HashSkipTileQuadTree<>();
+
+			List<SpatialObjectRes> list = b.resObjectsByMasks.get(mask);
+			if (list == null) {
+				list = new ArrayList<>(info.objects.size());
+				b.resObjectsByMasks.put(mask, list);
+			}
+			list.addAll(info.objects);
+
+			for (int i = 0; i < info.objects.size(); i++) {
+				SpatialObjectRes obj = info.objects.get(i);
+				b.resTree.addObject(obj, obj.mainAtom1.coords.bbox31, obj.mainAtom1.id);
+			}
+		}
+	}
+
+	private void finalizeAndAddBucket(SpatialObjectsBucket parent, SpatialObjectsBucket bucket,
+			List<SpatialObjectsBucket> outputList) {
+		if (parent != null) {
+			parent.addChild(bucket);
+		}
+		outputList.add(bucket);
+	}
+
+	private void virtualComputeSplit(SpatialObjectsBucket b, List<SpatialObjectsBucket> edges,
+			List<SpatialObjectsBucket> nextLevel, SpatialPipelineResults prep) {
+		if (b == null || b.isEmpty()) {
+			return;
+		}
+		long[] parentMasks = b.getMasks();
+		if (parentMasks.length == 0) {
+			return;
+		}
+		final int totalTokens = prep.tokens.size();
+		for (int i = 0; i < edges.size(); i++) {
+			if (i < b.edgeIndex) {
+				continue;
+			}
+
+			SpatialObjectsBucket edge = edges.get(i);
+			long[] edgeMasks = edge.getMasks();
+			if (edgeMasks.length == 0) {
+				continue;
+			}
+			TLongObjectHashMap<MaskGroupInfo> combinedMaskMap = new TLongObjectHashMap<>();
+			for (long pMask : parentMasks) {
+				for (long eMask : edgeMasks) {
+					if (!SpatialObjectRes.allowed(pMask, eMask)) {
+						continue;
+					}
+					long combinedMask = SpatialObjectRes.combine2BitMasks(pMask, eMask, totalTokens);
+					if (combinedMask == pMask) {
+						continue; 
+					}
+
+					MaskGroupInfo info = combinedMaskMap.get(combinedMask);
+					if (info == null) {
+						info = new MaskGroupInfo(combinedMask, 0, null);
+						combinedMaskMap.put(combinedMask, info);
+					}
+					info.count++; 
+				}
+			}
+			if (combinedMaskMap.isEmpty()) {
+				continue;
+			}
+			int startIdx = nextLevel.size();
+			splitGroupInfoToBuckets(b, edge, i, combinedMaskMap, totalTokens, nextLevel);
+			for (int k = startIdx; k < nextLevel.size(); k++) {
+				SpatialObjectsBucket child = nextLevel.get(k);
+				if (child.getMasksCount() > MAX_VIRTUAL_MASKS) {
+					compute(child, new ArrayList<>(), prep);
+				}
+			}
+		}
+	}
 	private List<SpatialObjectsBucket> createInitialEdgeBuckets(SpatialPipelineResults prep) {
-	    final int totalTokens = prep.tokens.size();
-	    TLongObjectHashMap<List<SpatialObjectRes>> maskToObjects = new TLongObjectHashMap<>();
+	    TLongObjectHashMap<MaskGroupInfo> maskMap = new TLongObjectHashMap<>();
 	    for (SpatialObjectRes obj : prep.objectsById.valueCollection()) {
-	        List<SpatialObjectRes> list = maskToObjects.get(obj.mainMask);
-	        if (list == null) {
-	            list = new ArrayList<>();
-	            maskToObjects.put(obj.mainMask, list);
+	        long mask = obj.mainMask;
+	        MaskGroupInfo info = maskMap.get(mask);
+	        if (info == null) {
+	            info = new MaskGroupInfo(mask, 0, new ArrayList<>());
+	            maskMap.put(mask, info);
 	        }
-	        list.add(obj);
+	        info.objects.add(obj);
+	        info.count++;
 	    }
 
 	    List<SpatialObjectsBucket> edges = new ArrayList<>();
-	    int edgeIndexCounter = 0;
-	    SpatialObjectsBucket fullCoveredBucket = null;
-	    SpatialObjectsBucket combinedRareBucket = null;
-	    long[] masks = maskToObjects.keys();
-	    for (long mask : masks) {
-	        List<SpatialObjectRes> objects = maskToObjects.get(mask);
-	        int count = objects.size();
-	        boolean isFullCovered = (SpatialObjectRes.countCoveredTokens(mask) == totalTokens);
-
-	        // Категория A: Сразу FULL COVERED -> в отдельную группу для мгновенной отдачи
-	        if (isFullCovered) {
-	            if (fullCoveredBucket == null) {
-	                fullCoveredBucket = createEmptyBucket(edgeIndexCounter++);
-	            }
-	            addMaskToBucket(fullCoveredBucket, mask, objects);
-	            continue;
-	        }
-
-	        if (count >= FREQUENT_OBJECTS_THRESHOLD) {
-	            SpatialObjectsBucket freqBucket = createEmptyBucket(edgeIndexCounter++);
-	            addMaskToBucket(freqBucket, mask, objects);
-	            freqBucket.resTree.build();
-	            edges.add(freqBucket);
-	            continue;
-	        }
-
-	        // Категория C: РЕДКИЕ маски (< 5000) -> объединяем в единую общую группу
-	        if (combinedRareBucket == null) {
-	            combinedRareBucket = createEmptyBucket(edgeIndexCounter++);
-	        }
-	        addMaskToBucket(combinedRareBucket, mask, objects);
-	    }
-
-	    if (fullCoveredBucket != null && !fullCoveredBucket.isEmpty()) {
-	        fullCoveredBucket.resTree.build();
-	        edges.add(fullCoveredBucket);
-	    }
-
-	    if (combinedRareBucket != null && !combinedRareBucket.isEmpty()) {
-	        combinedRareBucket.resTree.build();
-	        edges.add(combinedRareBucket);
+	    splitGroupInfoToBuckets(null, null, 0, maskMap, prep.tokens.size(), edges);
+	    for (int i = 0; i < edges.size(); i++) {
+	        edges.get(i).edgeIndex = i;
 	    }
 
 	    return edges;
 	}
 
-	private SpatialObjectsBucket createEmptyBucket(int edgeIndex) {
-	    SpatialObjectsBucket b = new SpatialObjectsBucket(edgeIndex);
-	    b.potentialMasks = new TLongHashSet();
-	    b.resTree = new HashSkipTileQuadTree<>();
-	    b.resObjectsByMasks = new TLongObjectHashMap<>();
-	    return b;
-	}
-
-	private void addMaskToBucket(SpatialObjectsBucket b, long mask, List<SpatialObjectRes> objects) {
-	    b.potentialMasks.add(mask);
-
-	    List<SpatialObjectRes> list = b.resObjectsByMasks.get(mask);
-	    if (list == null) {
-	        list = new ArrayList<>(objects.size());
-	        b.resObjectsByMasks.put(mask, list);
-	    }
-	    list.addAll(objects);
-
-	    for (int i = 0; i < objects.size(); i++) {
-	        SpatialObjectRes obj = objects.get(i);
-	        b.resTree.addObject(obj, obj.mainAtom1.coords.bbox31, obj.mainAtom1.id);
-	    }
-	}
 	
-	public List<SpatialSearchResultsList> runPipeline2(List<SpatialSearchToken> tokens) throws IOException {
+	public List<SpatialSearchResultsList> runPipeline(List<SpatialSearchToken> tokens) throws IOException {
 		if (tokens == null || tokens.isEmpty()) {
 			return Collections.emptyList();
 		}
@@ -701,14 +834,11 @@ public class SpatialStagePipeline {
 			}
 			time = System.nanoTime();
 			for(SpatialObjectsBucket b : currentLevel) {
-				// compute b and add to queue
-				virtualComputeSplit(b, edges, nextLevel);
+				virtualComputeSplit(b, edges, nextLevel, prep);
 			}
 			level++;
 			currentLevel = nextLevel;
 		}
-		
-		
 		return prep.combinations;		
 	}
 	
@@ -718,7 +848,7 @@ public class SpatialStagePipeline {
 	// =========================================================================
     // Execution Engine with Mode Control
     // =========================================================================
-	public List<SpatialSearchResultsList> runPipeline(List<SpatialSearchToken> tokens) throws IOException {
+	public List<SpatialSearchResultsList> runPipeline1(List<SpatialSearchToken> tokens) throws IOException {
 		if (tokens == null || tokens.isEmpty()) {
 			return Collections.emptyList();
 		}
