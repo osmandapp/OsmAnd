@@ -172,11 +172,12 @@ public class SpatialTextSearch {
 		////////////////////////////////////////
 
 		//////// PIPELINE ALGORITHM ////////
-		public int[] MAX_PIPELINE_RES_TO_STOP = new int[] {100, 500};
+		public int PIPELINE_MAX_STEPS = 8; // 0 - fully covered 1 object, 1 - 2 objects, 2 - 3 objects ...
+		// {100, 500} - STOP EVALUATION - if at least 100 fully covered or 500 2 objects
+		public int[] MAX_PIPELINE_RES_TO_STOP = new int[] { 50, 3, 1 };
+//		public int[] MAX_PIPELINE_RES_TO_STOP = new int[] {1}; // just 1 result to stop
 		public int PIPELINE_FREQUENT_OBJECTS_THRESHOLD = 5000;
-	    public int PIPELINE_MAX_VIRTUAL_MASKS = 10;
-	    public int PIPELINE_MAX_STEPS = 4; // 1 - fully covered, 2 - 1 intersecction ,...
-//		public int[] MAX_PIPELINE_STAGE_TO_STOP = new int[] {1};
+	    public int PIPELINE_MAX_VIRTUAL_MASKS = 5;
 		
 		
 		public double evalEnlargeBoundary(Map<Integer, Double> mp, double dim) {

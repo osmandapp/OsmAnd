@@ -216,7 +216,7 @@ public class SpatialPipelineStats {
 	            "Rank", "Bits", "Count", "% Share", "Tokens (Bitmask representation)");
 	    System.out.println("------------------------------------------------------------------------------------------");
 
-	    int topN = Math.min(maskList.size(), maskList.size());
+	    int topN = Math.min(50, maskList.size());
 	    for (int i = 0; i < topN; i++) {
 	        long mask = maskList.get(i)[0];
 	        long count = maskList.get(i)[1];

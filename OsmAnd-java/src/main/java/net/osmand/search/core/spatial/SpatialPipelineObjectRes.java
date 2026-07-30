@@ -32,7 +32,6 @@ public class SpatialPipelineObjectRes {
 	public SpatialPipelineObjectRes(int tCount, NameIndexAtom atom, int index) {
 		atoms = new NameIndexAtom[tCount];
 		mainAtom1 = atom;
-		// TODO OPTIM_FLAG_POI_SAME_AS_CITY_STREET
 		int atomic = atom.atomicObject() ? 3 : 0;
 		if (atom.atomicObject() && atom.sameNameAreaObj != null) {
 			atomic = 1; // 01 - 2 atomic
@@ -47,8 +46,7 @@ public class SpatialPipelineObjectRes {
 
 	public void mergeSame(NameIndexAtom atom, int tokenIdx) {
 		// TODO x1 (duplicate words) implement correct mixing alternative masks!
-		// we need to separately process situation duplicate words in object and in
-		// query
+		// we need to separately process situation duplicate words in object and in query
 		if (mainAtom1.isPOIRef() || mainAtom1.isBuilding()) {
 			mainAtom1 = atom;
 		}
