@@ -126,7 +126,8 @@ public class SpatialStagePipeline {
 	    
 		public static boolean allowedFast(long m1, long m2) {
 			long i = m1 & m2 & MASK_SET_01;
-			return i < 16 && ((0x12L >> i) & 1L) == 0;
+			// 0x22F2 - mask that encodes incorect states as positions in long
+			return i < 16 && ((0x22F2 >> i) & 1L) == 0;
 		}
 	    
 		public static boolean allowedSlow(long m1, long m2) {
@@ -137,6 +138,11 @@ public class SpatialStagePipeline {
 				return false;
 			}
 			return (i >> 4) == 0;
+		}
+		
+		public static long getTokenState(long mask, int tokenIdx) {
+		    int shift = tokenIdx * 2 + 4; 
+		    return (mask >> shift) & 3L;
 		}
 	    
 	    public static long combine2BitMasks(long mask1, long mask2, int totalTokens) {

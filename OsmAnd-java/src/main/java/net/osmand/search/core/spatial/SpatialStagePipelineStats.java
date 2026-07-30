@@ -37,7 +37,7 @@ public class SpatialStagePipelineStats {
 
 	        // Extract active tokens using 2-bit state logic (shift = t * 2)
 	        for (int t = 0; t < totalTokens; t++) {
-	            if (getTokenState(mask, t) != 0) { // 0 = STATE_NO_MATCH
+	            if (SpatialObjectRes.getTokenState(mask, t) != 0) { // 0 = STATE_NO_MATCH
 	                tokenGlobalCounts[t]++;
 	            }
 	        }
@@ -68,7 +68,7 @@ public class SpatialStagePipelineStats {
 	        // Extract indices of active tokens for this mask
 	        List<Integer> activeTokenIndices = new ArrayList<>();
 	        for (int t = 0; t < totalTokens; t++) {
-	            if (getTokenState(mask, t) != 0) {
+	            if (SpatialObjectRes.getTokenState(mask, t) != 0) {
 	                activeTokenIndices.add(t);
 	            }
 	        }
@@ -122,11 +122,6 @@ public class SpatialStagePipelineStats {
 	    System.out.println("==========================================================================================");
 	}
 
-	// Helper to extract the 2-bit state (0, 1, or 2) for a given token index
-	private static long getTokenState(long mask, int tokenIdx) {
-	    int shift = tokenIdx * 2;
-	    return (mask >> shift) & 3L;
-	}
 
 	private static class MaskEntry {
 	    final long mask;
