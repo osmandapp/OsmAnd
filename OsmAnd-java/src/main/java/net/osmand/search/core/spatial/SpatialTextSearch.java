@@ -172,7 +172,8 @@ public class SpatialTextSearch {
 		////////////////////////////////////////
 
 		//////// PIPELINE ALGORITHM ////////
-		public int[] MAX_PIPELINE_STAGE_TO_STOP = new int[] {100, 500};
+//		public int[] MAX_PIPELINE_STAGE_TO_STOP = new int[] {100, 500};
+		public int[] MAX_PIPELINE_STAGE_TO_STOP = new int[] {0};
 		
 		
 		public double evalEnlargeBoundary(Map<Integer, Double> mp, double dim) {
