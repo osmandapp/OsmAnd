@@ -9,12 +9,12 @@ import java.util.Map;
 
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.hash.TLongHashSet;
-import net.osmand.search.core.spatial.SpatialPipelineSearch.SpatialPipelineResults;
+import net.osmand.search.core.spatial.SpatialPipelineSearch.SpatialPipelineContext;
 
 public class SpatialPipelineStats {
 	
 	
-	public static void printTokenTree(SpatialPipelineResults prep) {
+	public static void printTokenTree(SpatialPipelineContext prep) {
 	    if (prep == null || prep.objectsById == null) {
 	        System.out.println("=== TOKEN TREE: Prep or objectsById is null ===");
 	        return;
@@ -179,7 +179,7 @@ public class SpatialPipelineStats {
 	//////////////////////////////////////////////
 	////////////////////////////////////////////////
 	//////////////////////////////////////////////
-	public static void printTree(SpatialPipelineResults prep) {
+	public static void printTree(SpatialPipelineContext prep) {
 	    if (prep == null || prep.objectsById == null) {
 	        System.out.println("=== MASK DISTRIBUTION: Prep or objectsById is null ===");
 	        return;
@@ -233,7 +233,7 @@ public class SpatialPipelineStats {
 
 	
 	/////////////////////////////////////////////////
-	public static void evaluateMaskIntersections(SpatialPipelineResults prep) {
+	public static void evaluateMaskIntersections(SpatialPipelineContext prep) {
 	    if (prep == null || prep.objectsById == null || prep.tokens == null) {
 	        System.out.println("=== MASK COMBINATION COVERAGE ANALYSIS: Invalid input ===");
 	        return;
