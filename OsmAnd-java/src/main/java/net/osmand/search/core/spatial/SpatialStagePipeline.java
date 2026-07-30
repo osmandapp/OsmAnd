@@ -32,7 +32,7 @@ public class SpatialStagePipeline {
     
 	public static int EXCLUDE_MASKS = 8000; // speed up
 	public static boolean CHECK_EXCLUDED = false;
-    public static int MAX_STEPS = 3; // 1 - fully covered, 2 - 1 intersecction ,...
+    public static int MAX_STEPS = 4; // 1 - fully covered, 2 - 1 intersecction ,...
 
     public SpatialStagePipeline(SpatialSearchContext ctx) {
         this.ctx = ctx;
@@ -70,11 +70,11 @@ public class SpatialStagePipeline {
 			// TODO OPTIM_FLAG_POI_SAME_AS_CITY_STREET
 			int atomic = atom.atomicObject() ? 3 : 0;
 			if (atom.atomicObject() && atom.sameNameAreaObj != null) {
-				atomic = 2; // 01 - 2 atomic
+				atomic = 1; // 01 - 2 atomic
 			}
 			int category = atom.isPOI() ? 3 : 0;
 			if (atom.isPoiCategory()) {
-    			category = 2; // 01
+    			category = 1; // 01
     		}
     		mainMask = atomic | (category << 2);
     		setAtom(atom, index);
@@ -127,7 +127,7 @@ public class SpatialStagePipeline {
 	    }
 	    
 	    public static boolean allowed(long m1, long m2) {
-	    	return allowedSlow(m1, m2);
+	    	return allowedFast(m1, m2);
 	    }
 	    
 		public static boolean allowedFast(long m1, long m2) {
@@ -161,7 +161,8 @@ public class SpatialStagePipeline {
 			} else if (b2 == 0) {
 			    combinedAtomic = b1;
 			} else {
-			    combinedAtomic = b1 == 3 && b2 == 3 ? 1 : 2; // 1 atomic + 1 atomic : overflow 
+			    //combinedAtomic = b1 == 3 && b2 == 3 ? 1 : 2; // 1 atomic + 1 atomic : overflow
+				combinedAtomic = 1; // 1 atomic + 1 atomic : overflow
 			}
 			int p1 = (int) ((mask1 >> 2) & 3L);
 			int p2 = (int) ((mask2 >> 2) & 3L);
@@ -171,7 +172,8 @@ public class SpatialStagePipeline {
 			} else if (p2 == 0) {
 			    combinedPoi = p1;
 			} else {
-			    combinedPoi = (p1 == 3 && p2 == 3) ? 3 : 1; 
+			    //combinedPoi = (p1 == 3 && p2 == 3) ? 3 : 1;
+				combinedPoi = 1;
 			}
 			result |= (combinedPoi << 2) + combinedAtomic;
 			for (int i = 0; i < totalTokens; i++) {
