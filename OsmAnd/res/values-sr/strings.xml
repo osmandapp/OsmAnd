@@ -3038,8 +3038,8 @@
     <string name="routing_attr_avoid_tunnels_description">Избегавај прокопе</string>
     <string name="routing_attr_avoid_tunnels_name">Избегавај прокопе</string>
     <string name="backup_promocode">Попустни код</string>
-    <string name="send_crash_log">Пошаљите дневник рушења програма</string>
-    <string name="send_logcat_log">Пошаљи белешке дневника</string>
+    <string name="send_crash_log">Пошаљите дневнике рушења програма</string>
+    <string name="send_logcat_log">Пошаљи дневнике тренутних сесија</string>
     <string name="purchases_feature_desc_nautical">Добавите приступ подацима о морској дубини</string>
     <string name="purchases_feature_desc_terrain">Контурне линије тла, назначавање сивог сенчења падина и нагиба распоном боја, ради приказа врхова и низија.</string>
     <string name="purchases_feature_desc_wikivoyage">Истражите Википутовање ван мреже. Чланци су подељени по државама и облстима и доступни на свим језицима.</string>

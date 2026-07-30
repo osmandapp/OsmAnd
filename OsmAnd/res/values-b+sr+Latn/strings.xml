@@ -3137,7 +3137,7 @@
     <string name="cancel_anytime_in_huawei_appgallery">Otkaži bilo kada u Huavei ApGaleriji</string>
     <string name="shared_string_learn_more">Saznaj više</string>
     <string name="regular_price">Regularna cena</string>
-    <string name="send_crash_log">Pošalji log pada</string>
+    <string name="send_crash_log">Pošalji logove o padovima aplikacije</string>
     <string name="poi_routes">Rute</string>
     <string name="shared_string_includes">Uključuje</string>
     <string name="shared_string_grade">Stepen</string>
@@ -3404,7 +3404,7 @@
     <string name="purchases_feature_desc_hourly_map_updates">Obezbedi pristup češćem ažuriranju mapa, Izaberi između: ažuriranja po satu, dnevno ili nedeljno. Ažuriranja se preuzimaju postepeno, samo za promenjeno područje.</string>
     <string name="offline_wikivoyage">Oflajn Vikivojaž</string>
     <string name="purchases_feature_desc_unlimited_map_download">Nabavi neograničena preuzimanja offline mapa za sve kontinente i regione.</string>
-    <string name="send_logcat_log">Pošalji logkat log</string>
+    <string name="send_logcat_log">Pošalji dnevnike trenutnih sesija</string>
     <string name="delete_version_history">Obriši istoriju verzije</string>
     <string name="backup_version_history">Istorija verzija</string>
     <string name="restore_from_osmand_cloud">Vrati iz OsmAnd Cloud</string>

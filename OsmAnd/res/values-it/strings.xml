@@ -5223,7 +5223,7 @@
     <string name="astro_eclipse_phase_total">Totale</string>
     <string name="astro_eclipse_phase_partial">Parziale</string>
     <string name="astro_fit_eclipse_path">Adatta il percorso dell\'eclissi</string>
-    <string name="astro_show_map">Mostra mappa</string>
+    <string name="astro_show_map">Mostra la mappa</string>
     <string name="astro_hide_map">Nascondi mappa</string>
     <string name="astro_map_center_location">Centro mappa: %1$s</string>
     <string name="astro_solar_eclipse">Eclissi solare</string>
@@ -5332,4 +5332,6 @@
     <string name="lang_en_barebones">Inglese (semplificato)</string>
     <string name="access_pinch_zoom_magnification_descr">Usa uno zoom fluido anziché a scatti durante l\'ingrandimento con le dita.</string>
     <string name="traffic_warning_red_light_camera">Telecamera semaforica</string>
+    <string name="always_keep_local_copy">Conserva sempre una copia locale</string>
+    <string name="always_keep_local_copy_description">Il file multimediale rimane allegato anche se l\'originale viene eliminato dalla galleria o dai file.</string>
 </resources>

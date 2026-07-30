@@ -5607,4 +5607,17 @@
     <string name="astro_eclipse_start">Start</string>
     <string name="astro_eclipse_maximum">Maximum</string>
     <string name="astro_eclipse_end">Einde</string>
+    <string name="always_keep_local_copy">Behoud altijd een lokale kopie</string>
+    <string name="always_keep_local_copy_description">Media blijft gekoppeld zelfs als het origineel wordt verwijderd uit de galerij of bestanden.</string>
+    <string name="use_spatial_text_search">Gebruik ruimtelijk tekst-zoeken</string>
+    <string name="use_spatial_text_search_description">Vervang de standaard snelle zoek-API\'s door de experimentele ruimtelijke tekst-zoekmachine.</string>
+    <string name="astro_lunar_eclipse">Maansverduistering</string>
+    <string name="astro_lunar_eclipse_subtitle">Verken wereldwijde maansverduisteringen</string>
+    <string name="astro_previous_lunar_eclipse">Vorige maansverduistering</string>
+    <string name="astro_next_lunar_eclipse">Volgende maansverduistering</string>
+    <string name="astro_close_lunar_eclipse">Sluit maansverduisteringsverkenner</string>
+    <string name="astro_eclipse_load_error">Het lukte niet om deze wereldwijde zonsverduistering te berekenen.</string>
+    <string name="astro_loading_lunar_eclipse">Wereldwijde maansverduistering berekenen</string>
+    <string name="astro_lunar_eclipse_load_error">Het lukte niet om deze maansverduistering te berekenen.</string>
+    <string name="astro_total_lunar_eclipse">Totale maansverduistering</string>
 </resources>
