@@ -173,6 +173,9 @@ public class SpatialTextSearch {
 
 		//////// PIPELINE ALGORITHM ////////
 		public int[] MAX_PIPELINE_RES_TO_STOP = new int[] {100, 500};
+		public int PIPELINE_FREQUENT_OBJECTS_THRESHOLD = 5000;
+	    public int PIPELINE_MAX_VIRTUAL_MASKS = 10;
+	    public int PIPELINE_MAX_STEPS = 4; // 1 - fully covered, 2 - 1 intersecction ,...
 //		public int[] MAX_PIPELINE_STAGE_TO_STOP = new int[] {1};
 		
 		
@@ -571,7 +574,7 @@ public class SpatialTextSearch {
 		ctx.stats.step2Compute.start();
 //		res.combinations = findObjCombinationsSimpleIteration(res.tokens);
 		if (ctx.settings.DEV_USE_PIPELINE) {
-			res.combinations = new SpatialPipelineSearch(ctx).runPipeline(res.tokens);
+			res.combinations = new SpatialPipelineSearch(ctx, res.tokens).runPipeline();
 		} else {
 			res.combinations = findLongestCombinations(ctx, res.tokens);
 		}
