@@ -23,7 +23,7 @@ import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
 // TODO x2 speed up by using flags
 // TODO x1 implement correct mixing alternative masks!
 // TODO introduce mask check into joiner index ?
-public class SpatialStagePipeline {
+public class SpatialPipelineSearch {
     
     private final SpatialSearchContext ctx;
     
@@ -34,210 +34,10 @@ public class SpatialStagePipeline {
 	public static boolean CHECK_EXCLUDED = false;
     public static int MAX_STEPS = 4; // 1 - fully covered, 2 - 1 intersecction ,...
 
-    public SpatialStagePipeline(SpatialSearchContext ctx) {
+    public SpatialPipelineSearch(SpatialSearchContext ctx) {
         this.ctx = ctx;
     }
 
-
-	// MASK: 0x 01 00 10 ... 00 01
-	public static final int MAX_SUPPORTED_TOKENS = (64 - 4) / 2;
-	// 0-1 bits (atomic objects):
-	// 11 - 1 - atomic, 01 - 2 atomic, 00 - 0 atomic (& 01 intersection forbidden)
-	// 2-3 bits (poi & poi category):
-	// 11 - poi, 01 - poi category, 00 - other (& 01 intersection forbidden!)
-    public static final long STATE_NO_MATCH = 0L;      // 00
-    public static final long STATE_EXACT_MATCH = 1L;   // 01
-    public static final long STATE_AMBIGUOUS = 2L;     // 10
-//    public static final long STATE_ANY = 3L;           // 11
-    private static final long MASK_SET_01 = 0x5555_5555_5555_555FL;
-    private static final long MASK_SET_02 = 0x5555_5555_5555_5550L;
-    // ALLOWED &: 0000, 0011, 1100, 1111, 
-
-
-    
-    public static class SpatialObjectRes {
-    	public final NameIndexAtom[] atoms;  
-    	public NameIndexAtom mainAtom1;
-    	public NameIndexAtom mainAtom2;
-
-    	public long mainMask = 0;
-    	public TLongArrayList otherMasks = new TLongArrayList(); 
-    	
-
-    	public SpatialObjectRes(int tCount, NameIndexAtom atom, int index) {
-    		atoms = new NameIndexAtom[tCount];
-			mainAtom1 = atom;
-			// TODO OPTIM_FLAG_POI_SAME_AS_CITY_STREET
-			int atomic = atom.atomicObject() ? 3 : 0;
-			if (atom.atomicObject() && atom.sameNameAreaObj != null) {
-				atomic = 1; // 01 - 2 atomic
-			}
-			int category = atom.isPOI() ? 3 : 0;
-			if (atom.isPoiCategory()) {
-    			category = 1; // 01
-    		}
-    		mainMask = atomic | (category << 2);
-    		setAtom(atom, index);
-    	}
-    	
-    	public void mergeSame(NameIndexAtom atom, int tokenIdx) {
-			// TODO x1 (duplicate words) implement correct mixing alternative masks!
-			// we need to separately process situation duplicate words in object and in query
-			if (mainAtom1.isPOIRef() || mainAtom1.isBuilding()) {
-				mainAtom1 = atom;
-			}
-			setAtom(atom, tokenIdx);
-		}
-    	
-    	public SpatialObjectRes(long mask, SpatialObjectRes s1, SpatialObjectRes s2) {
-    		atoms = new NameIndexAtom[s1.atoms.length];
-    		this.mainMask = mask;
-			for (int i = 0; i < atoms.length; i++) {
-				NameIndexAtom a1 = s1.atoms[i];
-				NameIndexAtom a2 = s2.atoms[i];
-				if (a1 != null && !a1.isPOIRef() && !a1.isBuilding()) {
-					atoms[i] = a1;
-					mainAtom1 = a1;
-				} else if (a2 != null && !a2.isPOIRef() && !a2.isBuilding()) {
-					// couldn't be both same time
-					atoms[i] = a2;
-					mainAtom2 = a2;
-				} else if (a1 != null) {
-					atoms[i] = a1;
-				} else if (a2 != null) {
-					atoms[i] = a2;
-				}
-			}
-    	}
-    	
-		void setAtom(NameIndexAtom atom, int index) {
-			atoms[index] = atom;
-    		mainMask = setTokenState(mainMask, index, atom.isBuilding() || atom.isPOIRef() ? STATE_AMBIGUOUS : STATE_EXACT_MATCH);
-		}
-
-		public static long setTokenState(long currentMask, int tokenIdx, long state) {
-			int shift = tokenIdx * 2 + 4;
-			long clearMask = ~(3L << shift);
-			return (currentMask & clearMask) | ((state & 3L) << shift);
-		}
-
-	    public static int countCoveredTokens(long mask) {
-	        long activeTokensMask = (mask | (mask >>> 1)) & MASK_SET_02;
-	        return Long.bitCount(activeTokensMask);
-	    }
-	    
-	    public static boolean allowed(long m1, long m2) {
-	    	return allowedFast(m1, m2);
-	    }
-	    
-		public static boolean allowedFast(long m1, long m2) {
-			long i = m1 & m2 & MASK_SET_01;
-			// 0x22F2 - mask that encodes incorect states as positions in long
-			return i < 16 && ((0x22F2 >> i) & 1L) == 0;
-		}
-	    
-		public static boolean allowedSlow(long m1, long m2) {
-			long i = (m1 & m2 & MASK_SET_01);
-			if ((i & 3) == 1) {
-				return false;
-			} else if (((i >> 2) & 3) == 1) {
-				return false;
-			}
-			return (i >> 4) == 0;
-		}
-		
-		public static long getTokenState(long mask, int tokenIdx) {
-		    int shift = tokenIdx * 2 + 4; 
-		    return (mask >> shift) & 3L;
-		}
-	    
-	    public static long combine2BitMasks(long mask1, long mask2, int totalTokens) {
-			long result = 0L;
-			int b1 = (int) (mask1 & 3L);
-			int b2 = (int) (mask2 & 3L);
-			int combinedAtomic;
-			if (b1 == 0) {
-			    combinedAtomic = b2;
-			} else if (b2 == 0) {
-			    combinedAtomic = b1;
-			} else {
-			    //combinedAtomic = b1 == 3 && b2 == 3 ? 1 : 2; // 1 atomic + 1 atomic : overflow
-				combinedAtomic = 1; // 1 atomic + 1 atomic : overflow
-			}
-			int p1 = (int) ((mask1 >> 2) & 3L);
-			int p2 = (int) ((mask2 >> 2) & 3L);
-			int combinedPoi;
-			if (p1 == 0) {
-			    combinedPoi = p2;
-			} else if (p2 == 0) {
-			    combinedPoi = p1;
-			} else {
-			    //combinedPoi = (p1 == 3 && p2 == 3) ? 3 : 1;
-				combinedPoi = 1;
-			}
-			result |= (combinedPoi << 2) + combinedAtomic;
-			for (int i = 0; i < totalTokens; i++) {
-				int shift = i * 2 + 4;
-				long state1 = (mask1 >> shift) & 3L;
-				long state2 = (mask2 >> shift) & 3L;
-
-				long finalState;
-				if (state1 == STATE_EXACT_MATCH || state2 == STATE_EXACT_MATCH) {
-					finalState = STATE_EXACT_MATCH;
-				} else if (state1 == STATE_AMBIGUOUS || state2 == STATE_AMBIGUOUS) {
-					finalState = STATE_AMBIGUOUS;
-				} else {
-					finalState = STATE_NO_MATCH;
-				}
-				result |= (finalState << shift);
-			}
-			return result;
-		}
-
-	    /**
-		 * Helper method to format bitmask bits into a readable list of token words.
-		 * Accommodates the 2-bits-per-token indexing scheme.
-		 */
-		static String formatMaskTokens(long mask, List<SpatialSearchToken> tokens) {
-		    List<String> res = new ArrayList<String>(); 
-		    long atomicState = mask & 3L;
-		    if (atomicState == 3L) {        // 11
-		        res.add("A1");
-		    } else if (atomicState == 1L) { // 01
-		        res.add("A2");
-		    } else if (atomicState == 0L) { // 01
-		        res.add("A0");
-		    } else if (atomicState == 0L) { // 01
-		        res.add("A?");
-		    }
-		    long poiState = (mask >> 2) & 3L;
-		    if (poiState == 3L) {        // 11
-		        res.add("POI");
-		    } else if (poiState == 1L) { // 01
-		        res.add("POICAT");
-		    }
-
-		    int maxTokens = (64 - 4) / 2; // 30 токенов
-
-		    for (int tokenIndex = 0; tokenIndex < maxTokens; tokenIndex++) {
-		        int bitShift = 4 + (tokenIndex * 2);
-		        long tokenState = (mask >> bitShift) & 3L;
-		        if (tokenState != STATE_NO_MATCH) {
-		        	String symbol = tokenState == 1 ? "W" : "B";
-		            if (tokens != null && tokenIndex < tokens.size() && tokens.get(tokenIndex) != null) {
-		                String word = tokens.get(tokenIndex).word;
-		                res.add(word != null ? word : symbol + tokenIndex);
-		            } else {
-		                res.add(symbol + tokenIndex);
-		            }
-		        }
-		    }
-		    return res.toString();
-		}
-
-    }
-    
-    
     private static class MasksStats {
     	TLongObjectHashMap<Integer> masks = new TLongObjectHashMap<Integer>();
     	public final int intersections;
@@ -246,7 +46,7 @@ public class SpatialStagePipeline {
 			this.intersections = intersections;
 		}
 
-		int count(SpatialObjectRes obj) {
+		int count(SpatialPipelineObjectRes obj) {
 			Integer cnt = masks.get(obj.mainMask);
 			if (cnt == null) {
 				cnt = 1;
@@ -267,14 +67,14 @@ public class SpatialStagePipeline {
 		}
 
 		// stage 1
-		public final TLongObjectHashMap<SpatialObjectRes> objectsById = new TLongObjectHashMap<>();
-		public final TLongObjectHashMap<List<SpatialObjectRes>> excludedMasks = new TLongObjectHashMap<List<SpatialObjectRes>>();
+		public final TLongObjectHashMap<SpatialPipelineObjectRes> objectsById = new TLongObjectHashMap<>();
+		public final TLongObjectHashMap<List<SpatialPipelineObjectRes>> excludedMasks = new TLongObjectHashMap<List<SpatialPipelineObjectRes>>();
 		
 		public final List<MasksStats> masksStats = new ArrayList<>();
-        public final HashSkipTileQuadTree<SpatialObjectRes> allObjectsTree = new HashSkipTileQuadTree<>();
-        public final HashSkipTileQuadTree<SpatialObjectRes> areaObjectsTree = new HashSkipTileQuadTree<>();
+        public final HashSkipTileQuadTree<SpatialPipelineObjectRes> allObjectsTree = new HashSkipTileQuadTree<>();
+        public final HashSkipTileQuadTree<SpatialPipelineObjectRes> areaObjectsTree = new HashSkipTileQuadTree<>();
 		// stage 2, 3+        
-		public final List<HashSkipTileQuadTree<SpatialObjectRes>> pairsTree = new ArrayList<>();
+		public final List<HashSkipTileQuadTree<SpatialPipelineObjectRes>> pairsTree = new ArrayList<>();
 		
 		public final List<SpatialSearchResultsList> combinations = new ArrayList<SpatialSearchResultsList>();
         
@@ -282,8 +82,8 @@ public class SpatialStagePipeline {
 
 
     private SpatialPipelineResults prepare(List<SpatialSearchToken> tokens) {
-    	if (tokens.size() > MAX_SUPPORTED_TOKENS) {
-			tokens = tokens.subList(0, MAX_SUPPORTED_TOKENS);
+    	if (tokens.size() > SpatialPipelineObjectRes.MAX_SUPPORTED_TOKENS) {
+			tokens = tokens.subList(0, SpatialPipelineObjectRes.MAX_SUPPORTED_TOKENS);
 		}
         SpatialPipelineResults prep = new SpatialPipelineResults(tokens);
         int totalTokens = tokens.size();
@@ -294,13 +94,13 @@ public class SpatialStagePipeline {
 				if (deleted.contains(atom.indexInToken)) {
 					continue;
 				}
-				SpatialObjectRes existing = prep.objectsById.get(atom.id);
+				SpatialPipelineObjectRes existing = prep.objectsById.get(atom.id);
 				if (existing != null) {
 					existing.mergeSame(atom, tokenIdx);
 				} else {
-					SpatialObjectRes obj = new SpatialObjectRes(totalTokens, atom, tokenIdx);
+					SpatialPipelineObjectRes obj = new SpatialPipelineObjectRes(totalTokens, atom, tokenIdx);
 					if(tokenIdx == 0 && atom.isGeoArea()) {
-						System.out.println(atom + " " + SpatialObjectRes.formatMaskTokens(obj.mainMask, tokens));
+						System.out.println(atom + " " + SpatialPipelineObjectRes.formatMaskTokens(obj.mainMask, tokens));
 					}
 					prep.objectsById.put(atom.id, obj);
 				}
@@ -308,15 +108,15 @@ public class SpatialStagePipeline {
 		}
 		// calculate excluded masks
 		MasksStats masksStats = new MasksStats(1);
-		for (SpatialObjectRes obj : prep.objectsById.valueCollection()) {
+		for (SpatialPipelineObjectRes obj : prep.objectsById.valueCollection()) {
 			masksStats.count(obj);
 		}
 		prep.masksStats.add(masksStats);
 		
-		for (SpatialObjectRes obj : prep.objectsById.valueCollection()) {
+		for (SpatialPipelineObjectRes obj : prep.objectsById.valueCollection()) {
 			Integer cnt = masksStats.masks.get(obj.mainMask);
 			if (cnt > EXCLUDE_MASKS) {
-				List<SpatialObjectRes> elst = prep.excludedMasks.get(obj.mainMask);
+				List<SpatialPipelineObjectRes> elst = prep.excludedMasks.get(obj.mainMask);
 				if (elst == null) {
 					elst = new ArrayList<>();
 					prep.excludedMasks.put(obj.mainMask, elst);
@@ -337,7 +137,7 @@ public class SpatialStagePipeline {
 
 	
 	private boolean validateStageAndFinish(SpatialPipelineResults prep, int[] intStats,
-			List<SpatialObjectRes> preResults, int stage, long ptime) throws IOException {
+			List<SpatialPipelineObjectRes> preResults, int stage, long ptime) throws IOException {
 		
 		long time = System.nanoTime();
 		if (ctx.stats.printLogs) {
@@ -393,8 +193,8 @@ public class SpatialStagePipeline {
 	    public TLongHashSet potentialMasks = null;
 
 	    // 2. geometric actual
-	    public HashSkipTileQuadTree<SpatialObjectRes> resTree = null;
-	    public TLongObjectHashMap<List<SpatialObjectRes>> resObjectsByMasks = null;
+	    public HashSkipTileQuadTree<SpatialPipelineObjectRes> resTree = null;
+	    public TLongObjectHashMap<List<SpatialPipelineObjectRes>> resObjectsByMasks = null;
 
 	    // Lazy init
 	    private List<SpatialObjectsBucket> children = null;
@@ -419,16 +219,16 @@ public class SpatialStagePipeline {
 	        return resObjectsByMasks != null;
 	    }
 	    
-	    public HashSkipTileQuadTree<SpatialObjectRes> ensureTreeBuilt() {
+	    public HashSkipTileQuadTree<SpatialPipelineObjectRes> ensureTreeBuilt() {
 	        if (resTree == null && resObjectsByMasks != null && !resObjectsByMasks.isEmpty()) {
 	        	long t0 = System.nanoTime();
 	            resTree = new HashSkipTileQuadTree<>();
 	            long[] masks = resObjectsByMasks.keys();
 	            for (int i = 0; i < masks.length; i++) {
-	                List<SpatialObjectRes> list = resObjectsByMasks.get(masks[i]);
+	                List<SpatialPipelineObjectRes> list = resObjectsByMasks.get(masks[i]);
 	                if (list != null) {
 	                    for (int j = 0; j < list.size(); j++) {
-	                        SpatialObjectRes obj = list.get(j);
+	                        SpatialPipelineObjectRes obj = list.get(j);
 	                        int[] bb = obj.mainAtom1.coords.bbox31;
 	                        int[] clippedBBox = new int[] { bb[0], bb[1], bb[2], bb[3] };
 	                        if (obj.mainAtom2 != null) {
@@ -464,7 +264,7 @@ public class SpatialStagePipeline {
 	        if (resObjectsByMasks != null) {
 	            long[] keys = resObjectsByMasks.keys();
 	            for (int i = 0; i < keys.length; i++) {
-	                if (SpatialObjectRes.countCoveredTokens(keys[i]) == totalTokens) {
+	                if (SpatialPipelineObjectRes.countCoveredTokens(keys[i]) == totalTokens) {
 	                    return true;
 	                }
 	            }
@@ -474,7 +274,7 @@ public class SpatialStagePipeline {
 	        if (potentialMasks != null && !potentialMasks.isEmpty()) {
 	            long[] masks = potentialMasks.toArray();
 	            for (int i = 0; i < masks.length; i++) {
-	                if (SpatialObjectRes.countCoveredTokens(masks[i]) == totalTokens) {
+	                if (SpatialPipelineObjectRes.countCoveredTokens(masks[i]) == totalTokens) {
 	                    return true;
 	                }
 	            }
@@ -489,8 +289,8 @@ public class SpatialStagePipeline {
 	        return potentialMasks != null ? potentialMasks.toArray() : new long[0];
 	    }
 
-	    public void markComputed(HashSkipTileQuadTree<SpatialObjectRes> tree, 
-	                             TLongObjectHashMap<List<SpatialObjectRes>> objectsByMasks) {
+	    public void markComputed(HashSkipTileQuadTree<SpatialPipelineObjectRes> tree, 
+	                             TLongObjectHashMap<List<SpatialPipelineObjectRes>> objectsByMasks) {
 	        this.resTree = tree;
 	        this.resObjectsByMasks = objectsByMasks;
 	        this.potentialMasks = null; 
@@ -604,10 +404,10 @@ public class SpatialStagePipeline {
 	        TLongHashSet updatedChildMasks = new TLongHashSet();
 	        for (long pMask : aliveParentMasks) {
 	            for (long eMask : edgeMasks) {
-	                if (!SpatialObjectRes.allowed(pMask, eMask)) {
+	                if (!SpatialPipelineObjectRes.allowed(pMask, eMask)) {
 	                    continue;
 	                }
-	                long combinedMask = SpatialObjectRes.combine2BitMasks(pMask, eMask, totalTokens);
+	                long combinedMask = SpatialPipelineObjectRes.combine2BitMasks(pMask, eMask, totalTokens);
 	                if (combinedMask != pMask) {
 	                    updatedChildMasks.add(combinedMask);
 	                }
@@ -629,7 +429,7 @@ public class SpatialStagePipeline {
 	    node.clear();
 	}
 	
-	private void compute(SpatialObjectsBucket b, List<SpatialObjectRes> res, SpatialPipelineResults prep) {
+	private void compute(SpatialObjectsBucket b, List<SpatialPipelineObjectRes> res, SpatialPipelineResults prep) {
 	    if (b == null || b.isEmpty()) {
 	        return;
 	    }
@@ -648,29 +448,29 @@ public class SpatialStagePipeline {
 	    if (!b.singleEdgeGroup.isComputed()) {
 	        compute(b.singleEdgeGroup, res, prep);
 	    }
-	    HashSkipTileQuadTree<SpatialObjectRes> parentTree = b.parent.ensureTreeBuilt();
-	    HashSkipTileQuadTree<SpatialObjectRes> edgeTree = b.singleEdgeGroup.ensureTreeBuilt();
+	    HashSkipTileQuadTree<SpatialPipelineObjectRes> parentTree = b.parent.ensureTreeBuilt();
+	    HashSkipTileQuadTree<SpatialPipelineObjectRes> edgeTree = b.singleEdgeGroup.ensureTreeBuilt();
 
-	    HashSkipTileQuadTree<SpatialObjectRes> resTree = null;
-	    TLongObjectHashMap<List<SpatialObjectRes>> resObjectsByMasks = new TLongObjectHashMap<>();
+	    HashSkipTileQuadTree<SpatialPipelineObjectRes> resTree = null;
+	    TLongObjectHashMap<List<SpatialPipelineObjectRes>> resObjectsByMasks = new TLongObjectHashMap<>();
 
 	    if (parentTree != null && edgeTree != null && !parentTree.isEmpty() && !edgeTree.isEmpty()) {
 	    	long tJoin = System.nanoTime();
 	        final int totalTokens = prep.tokens.size();
-	        HashSkipTileQuadTreeJoiner<SpatialObjectRes, SpatialObjectRes> joiner =
+	        HashSkipTileQuadTreeJoiner<SpatialPipelineObjectRes, SpatialPipelineObjectRes> joiner =
 	                new HashSkipTileQuadTreeJoiner<>(parentTree, edgeTree);
 
 	        joiner.joinAllBuckets((e1, e2) -> {
 	        	metrics.pairsChecked++;
-	            SpatialObjectRes obj1 = e1.obj;
-	            SpatialObjectRes obj2 = e2.obj;
-	            if (!SpatialObjectRes.allowed(obj1.mainMask, obj2.mainMask)) {
+	            SpatialPipelineObjectRes obj1 = e1.obj;
+	            SpatialPipelineObjectRes obj2 = e2.obj;
+	            if (!SpatialPipelineObjectRes.allowed(obj1.mainMask, obj2.mainMask)) {
 	                return;
 	            }
 	            metrics.pairsAccepted++;
-	            long combinedMask = SpatialObjectRes.combine2BitMasks(obj1.mainMask, obj2.mainMask, totalTokens);
-	            SpatialObjectRes combinedObj = new SpatialObjectRes(combinedMask, obj1, obj2);
-	            List<SpatialObjectRes> list = resObjectsByMasks.get(combinedMask);
+	            long combinedMask = SpatialPipelineObjectRes.combine2BitMasks(obj1.mainMask, obj2.mainMask, totalTokens);
+	            SpatialPipelineObjectRes combinedObj = new SpatialPipelineObjectRes(combinedMask, obj1, obj2);
+	            List<SpatialPipelineObjectRes> list = resObjectsByMasks.get(combinedMask);
 	            if (list == null) {
 	                list = new ArrayList<>();
 	                resObjectsByMasks.put(combinedMask, list);
@@ -688,15 +488,15 @@ public class SpatialStagePipeline {
 	    collectFullCoverageResults(b, res, prep.tokens.size());
 	}
 
-	private void collectFullCoverageResults(SpatialObjectsBucket b, List<SpatialObjectRes> res, int totalTokens) {
+	private void collectFullCoverageResults(SpatialObjectsBucket b, List<SpatialPipelineObjectRes> res, int totalTokens) {
 	    if (b == null || b.resObjectsByMasks == null || b.resObjectsByMasks.isEmpty()) {
 	        return;
 	    }
 	    long[] masks = b.resObjectsByMasks.keys();
 	    for (int i = 0; i < masks.length; i++) {
 	        long mask = masks[i];
-	        if (SpatialObjectRes.countCoveredTokens(mask) == totalTokens) {
-	            List<SpatialObjectRes> list = b.resObjectsByMasks.get(mask);
+	        if (SpatialPipelineObjectRes.countCoveredTokens(mask) == totalTokens) {
+	            List<SpatialPipelineObjectRes> list = b.resObjectsByMasks.get(mask);
 	            if (list != null && !list.isEmpty()) {
 	                res.addAll(list);
 	            }
@@ -707,9 +507,9 @@ public class SpatialStagePipeline {
 	private static class MaskGroupInfo {
 //	    final long mask;
 	    int count;
-	    List<SpatialObjectRes> objects; 
+	    List<SpatialPipelineObjectRes> objects; 
 
-	    MaskGroupInfo(long mask, int count, List<SpatialObjectRes> objects) {
+	    MaskGroupInfo(long mask, int count, List<SpatialPipelineObjectRes> objects) {
 //	        this.mask = mask;
 	        this.count = count;
 	        this.objects = objects;
@@ -728,7 +528,7 @@ public class SpatialStagePipeline {
 	    for (int i = 0; i < masks.length; i++) {
 	        long mask = masks[i];
 	        MaskGroupInfo info = maskMap.get(mask);
-	        boolean isFullCovered = (SpatialObjectRes.countCoveredTokens(mask) == totalTokens);
+	        boolean isFullCovered = (SpatialPipelineObjectRes.countCoveredTokens(mask) == totalTokens);
 	        if (isFullCovered) {
 	            if (fullCoveredBucket == null) {
 	                fullCoveredBucket = createBucketNode(parent, singleEdgeGroup, edgeIndex);
@@ -785,7 +585,7 @@ public class SpatialStagePipeline {
 	        if (b.resObjectsByMasks == null) {
 	            b.resObjectsByMasks = new TLongObjectHashMap<>();
 	        }
-	        List<SpatialObjectRes> list = b.resObjectsByMasks.get(mask);
+	        List<SpatialPipelineObjectRes> list = b.resObjectsByMasks.get(mask);
 	        if (list == null) {
 	            list = new ArrayList<>(info.objects.size());
 	            b.resObjectsByMasks.put(mask, list);
@@ -827,11 +627,11 @@ public class SpatialStagePipeline {
 			for (long pMask : parentMasks) {
 				for (long eMask : edgeMasks) {
 					metrics.maskPairsEval++;
-					if (!SpatialObjectRes.allowed(pMask, eMask)) {
+					if (!SpatialPipelineObjectRes.allowed(pMask, eMask)) {
 						continue;
 					}
 					metrics.maskPairsAllowed++;
-					long combinedMask = SpatialObjectRes.combine2BitMasks(pMask, eMask, totalTokens);
+					long combinedMask = SpatialPipelineObjectRes.combine2BitMasks(pMask, eMask, totalTokens);
 					if (combinedMask == pMask) {
 						continue; 
 					}
@@ -851,7 +651,7 @@ public class SpatialStagePipeline {
 	}
 	private List<SpatialObjectsBucket> createInitialEdgeBuckets(SpatialPipelineResults prep) {
 	    TLongObjectHashMap<MaskGroupInfo> maskMap = new TLongObjectHashMap<>();
-	    for (SpatialObjectRes obj : prep.objectsById.valueCollection()) {
+	    for (SpatialPipelineObjectRes obj : prep.objectsById.valueCollection()) {
 	        long mask = obj.mainMask;
 	        MaskGroupInfo info = maskMap.get(mask);
 	        if (info == null) {
@@ -876,7 +676,7 @@ public class SpatialStagePipeline {
 	    if (tokens == null || tokens.isEmpty()) return Collections.emptyList();
 	    SpatialPipelineResults prep = prepare(tokens);
 	    int tokensSize = prep.tokens.size();
-	    SpatialStagePipelineStats.printTree(prep);
+	    SpatialPipelineStats.printTree(prep);
 	    List<SpatialObjectsBucket> edges = createInitialEdgeBuckets(prep);
 	    System.out.println("INITIAL - ");
 	    for(SpatialObjectsBucket e : edges) {
@@ -887,7 +687,7 @@ public class SpatialStagePipeline {
 	    while (level < MAX_STEPS && !currentLevel.isEmpty()) {
 	        metrics.resetLevel();
 	        long levelStart = System.nanoTime();
-	        List<SpatialObjectRes> res = new ArrayList<>();
+	        List<SpatialPipelineObjectRes> res = new ArrayList<>();
 	        int fcCount = 0, matCount = 0;
 	        for (SpatialObjectsBucket b : currentLevel) {
 	            if (b.hasFullCovered(tokensSize)) {
@@ -946,13 +746,13 @@ public class SpatialStagePipeline {
 			return prep.combinations;
 		}
 //		SpatialStagePipelineStats.evaluateMaskIntersections(prep);
-		SpatialStagePipelineStats.printTree(prep);
+		SpatialPipelineStats.printTree(prep);
 //		SpatialStagePipelineStats.printTokenTree(prep);
 		
 		// STEP 1
-		List<SpatialObjectRes> singleResults = new ArrayList<>();
-		for (SpatialObjectRes obj : prep.objectsById.valueCollection()) {
-			if (SpatialObjectRes.countCoveredTokens(obj.mainMask) == tokensSize) {
+		List<SpatialPipelineObjectRes> singleResults = new ArrayList<>();
+		for (SpatialPipelineObjectRes obj : prep.objectsById.valueCollection()) {
+			if (SpatialPipelineObjectRes.countCoveredTokens(obj.mainMask) == tokensSize) {
 				singleResults.add(obj);
 			}
 		}
@@ -965,7 +765,7 @@ public class SpatialStagePipeline {
 		}
 		
 		// STEP 2: Spatial Join Pairs
-		HashSkipTileQuadTreeJoiner<SpatialObjectRes, SpatialObjectRes> selfJoiner = new HashSkipTileQuadTreeJoiner<>(
+		HashSkipTileQuadTreeJoiner<SpatialPipelineObjectRes, SpatialPipelineObjectRes> selfJoiner = new HashSkipTileQuadTreeJoiner<>(
 				prep.allObjectsTree, prep.allObjectsTree);// prep.allObjectsTree);
 		
 		boolean exit = join(prep, stage, selfJoiner, time);
@@ -976,12 +776,12 @@ public class SpatialStagePipeline {
 		
 		// STEP 3: Spatial Join Pairs
 		for (; stage <= MAX_STEPS && !ctx.isCancelled() && !exit; stage++) {
-			HashSkipTileQuadTree<SpatialObjectRes> lastTree = prep.pairsTree.get(prep.pairsTree.size() - 1);
+			HashSkipTileQuadTree<SpatialPipelineObjectRes> lastTree = prep.pairsTree.get(prep.pairsTree.size() - 1);
 			if (lastTree.isEmpty()) {
 				break;
 			}
 			lastTree.build();
-			HashSkipTileQuadTreeJoiner<SpatialObjectRes, SpatialObjectRes> joiner = new HashSkipTileQuadTreeJoiner<>(
+			HashSkipTileQuadTreeJoiner<SpatialPipelineObjectRes, SpatialPipelineObjectRes> joiner = new HashSkipTileQuadTreeJoiner<>(
 					lastTree, prep.areaObjectsTree);
 			exit = join(prep, stage, joiner, time);
 			time = System.nanoTime();
@@ -1007,23 +807,23 @@ public class SpatialStagePipeline {
 				if (masksStats.intersections != stage) {
 					continue;
 				}
-				HashSkipTileQuadTree<SpatialObjectRes> partialTree = i == 0 ? prep.allObjectsTree
+				HashSkipTileQuadTree<SpatialPipelineObjectRes> partialTree = i == 0 ? prep.allObjectsTree
 						: prep.pairsTree.get(i - 1);
 
 				TLongHashSet found = new TLongHashSet();
 				for (int k = 0; k < excl.length; k++) {
 					long maskExcl = excl[k];
 					for (long m : masksStats.masks.keys()) {
-						if (!SpatialObjectRes.allowed(m, maskExcl)) {
+						if (!SpatialPipelineObjectRes.allowed(m, maskExcl)) {
 							continue;
 						}
-						long combined = SpatialObjectRes.combine2BitMasks(m, maskExcl, tokensSize);
-						if (SpatialObjectRes.countCoveredTokens(combined) == tokensSize) {
+						long combined = SpatialPipelineObjectRes.combine2BitMasks(m, maskExcl, tokensSize);
+						if (SpatialPipelineObjectRes.countCoveredTokens(combined) == tokensSize) {
 							Integer c1 = baseMasksStats.masks.get(maskExcl);
 							Integer c2 = masksStats.masks.get(m);
 							System.out.printf("Potential results %d intersections - missing %s (%,d) x %s (%,d < %,d ) = %,d \n",
-									stage + 1, SpatialObjectRes.formatMaskTokens(maskExcl, prep.tokens), c1,
-									SpatialObjectRes.formatMaskTokens(m, prep.tokens), c2, partialTree.getSize(), c1 * c2);
+									stage + 1, SpatialPipelineObjectRes.formatMaskTokens(maskExcl, prep.tokens), c1,
+									SpatialPipelineObjectRes.formatMaskTokens(m, prep.tokens), c2, partialTree.getSize(), c1 * c2);
 							found.add(maskExcl);
 						}
 					}
@@ -1031,16 +831,16 @@ public class SpatialStagePipeline {
 				if (found.size() == 0) {
 					continue;
 				}
-				HashSkipTileQuadTree<SpatialObjectRes> exclTree = new HashSkipTileQuadTree<>();
+				HashSkipTileQuadTree<SpatialPipelineObjectRes> exclTree = new HashSkipTileQuadTree<>();
 				for (long exclMask : found.toArray()) {
-					for (SpatialObjectRes r : prep.excludedMasks.get(exclMask)) {
+					for (SpatialPipelineObjectRes r : prep.excludedMasks.get(exclMask)) {
 						exclTree.addObject(r, r.mainAtom1.coords.bbox31, r.mainAtom1.id);
 					}
 				}
 				exclTree.build();
 
 				partialTree.build();
-				HashSkipTileQuadTreeJoiner<SpatialObjectRes, SpatialObjectRes> tailJoiner = new HashSkipTileQuadTreeJoiner<>(
+				HashSkipTileQuadTreeJoiner<SpatialPipelineObjectRes, SpatialPipelineObjectRes> tailJoiner = new HashSkipTileQuadTreeJoiner<>(
 						partialTree, exclTree);
 				boolean exit = join(prep, stage + 1, tailJoiner, time);
 				if (ctx.isCancelled() || exit) {
@@ -1053,10 +853,10 @@ public class SpatialStagePipeline {
 
 
 	private boolean join(SpatialPipelineResults prep, int stage,
-			HashSkipTileQuadTreeJoiner<SpatialObjectRes, SpatialObjectRes> joiner, long time) throws IOException {
-		List<SpatialObjectRes> pairResults = new ArrayList<>();
+			HashSkipTileQuadTreeJoiner<SpatialPipelineObjectRes, SpatialPipelineObjectRes> joiner, long time) throws IOException {
+		List<SpatialPipelineObjectRes> pairResults = new ArrayList<>();
 		final int tokensSize = prep.tokens.size();
-		HashSkipTileQuadTree<SpatialObjectRes> pairsTree = new HashSkipTileQuadTree<>();
+		HashSkipTileQuadTree<SpatialPipelineObjectRes> pairsTree = new HashSkipTileQuadTree<>();
 		prep.pairsTree.add(pairsTree);
 		final MasksStats ms = new MasksStats(stage);
 		prep.masksStats.add(ms);
@@ -1067,7 +867,7 @@ public class SpatialStagePipeline {
 		}
 		joiner.joinAllBuckets((e1, e2) -> {
 			itStats[0]++;
-			if (!SpatialObjectRes.allowed(e1.obj.mainMask, e2.obj.mainMask)) {
+			if (!SpatialPipelineObjectRes.allowed(e1.obj.mainMask, e2.obj.mainMask)) {
 				return;
 			}
 			// TODO check preformance this is covered by mask
@@ -1075,10 +875,10 @@ public class SpatialStagePipeline {
 //				return; // skip 1 side pairs by id
 //			} else 
 			itStats[1]++;
-			long combinedMask = SpatialObjectRes.combine2BitMasks(e1.obj.mainMask, e2.obj.mainMask, tokensSize);
-			SpatialObjectRes res = new SpatialObjectRes(combinedMask, e1.obj, e2.obj);
+			long combinedMask = SpatialPipelineObjectRes.combine2BitMasks(e1.obj.mainMask, e2.obj.mainMask, tokensSize);
+			SpatialPipelineObjectRes res = new SpatialPipelineObjectRes(combinedMask, e1.obj, e2.obj);
 			ms.count(res);
-			if (SpatialObjectRes.countCoveredTokens(combinedMask) == tokensSize) {
+			if (SpatialPipelineObjectRes.countCoveredTokens(combinedMask) == tokensSize) {
 				// TODO add combinations from combined mask
 				itStats[2]++;
 				pairResults.add(res);
@@ -1096,9 +896,9 @@ public class SpatialStagePipeline {
 		return false;
 	}
 
-	private SpatialSearchResultsList createResultList(List<SpatialSearchToken> tokens, List<SpatialObjectRes> r) {
+	private SpatialSearchResultsList createResultList(List<SpatialSearchToken> tokens, List<SpatialPipelineObjectRes> r) {
 		SpatialSearchResultsList singleResults = new SpatialSearchResultsList(tokens);
-		for (SpatialObjectRes res : r) {
+		for (SpatialPipelineObjectRes res : r) {
 			singleResults.tileIds.add(res.atoms[0].coords.bboxTileId);
 			for (int i = 0; i < res.atoms.length; i++) {
 				singleResults.linearResults.add(res.atoms[i]);
@@ -1107,7 +907,7 @@ public class SpatialStagePipeline {
 		return singleResults;
 	}
 	
-    public static boolean acceptPairSemantic(SpatialSearchContext ctx, SpatialObjectRes pair) {
+    public static boolean acceptPairSemantic(SpatialSearchContext ctx, SpatialPipelineObjectRes pair) {
 //        SpatialTextSearchSettings settings = ctx.settings;
 //        NameIndexAtom a1 = pair.mainAtom1;
 //        NameIndexAtom a2 = pair.mainAtom2;

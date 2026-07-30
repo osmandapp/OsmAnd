@@ -9,10 +9,9 @@ import java.util.Map;
 
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.hash.TLongHashSet;
-import net.osmand.search.core.spatial.SpatialStagePipeline.SpatialObjectRes;
-import net.osmand.search.core.spatial.SpatialStagePipeline.SpatialPipelineResults;
+import net.osmand.search.core.spatial.SpatialPipelineSearch.SpatialPipelineResults;
 
-public class SpatialStagePipelineStats {
+public class SpatialPipelineStats {
 	
 	
 	public static void printTokenTree(SpatialPipelineResults prep) {
@@ -29,7 +28,7 @@ public class SpatialStagePipelineStats {
 	    TLongObjectHashMap<Integer> maskFrequencies = new TLongObjectHashMap<>();
 	    long[] tokenGlobalCounts = new long[totalTokens];
 
-	    for (SpatialObjectRes obj : prep.objectsById.valueCollection()) {
+	    for (SpatialPipelineObjectRes obj : prep.objectsById.valueCollection()) {
 	        long mask = obj.mainMask;
 	        
 	        Integer currentCount = maskFrequencies.get(mask);
@@ -37,7 +36,7 @@ public class SpatialStagePipelineStats {
 
 	        // Extract active tokens using 2-bit state logic (shift = t * 2)
 	        for (int t = 0; t < totalTokens; t++) {
-	            if (SpatialObjectRes.getTokenState(mask, t) != 0) { // 0 = STATE_NO_MATCH
+	            if (SpatialPipelineObjectRes.getTokenState(mask, t) != 0) { // 0 = STATE_NO_MATCH
 	                tokenGlobalCounts[t]++;
 	            }
 	        }
@@ -51,7 +50,7 @@ public class SpatialStagePipelineStats {
 	    for (long mask : maskKeys) {
 	        int count = maskFrequencies.get(mask);
 	        sumOfAllMaskObjects += count;
-	        int activeCount = SpatialObjectRes.countCoveredTokens(mask);
+	        int activeCount = SpatialPipelineObjectRes.countCoveredTokens(mask);
 	        sortedMasks.add(new MaskEntry(mask, count, activeCount));
 	    }
 	    
@@ -68,7 +67,7 @@ public class SpatialStagePipelineStats {
 	        // Extract indices of active tokens for this mask
 	        List<Integer> activeTokenIndices = new ArrayList<>();
 	        for (int t = 0; t < totalTokens; t++) {
-	            if (SpatialObjectRes.getTokenState(mask, t) != 0) {
+	            if (SpatialPipelineObjectRes.getTokenState(mask, t) != 0) {
 	                activeTokenIndices.add(t);
 	            }
 	        }
@@ -192,7 +191,7 @@ public class SpatialStagePipelineStats {
 	    // Group masks and count their frequencies using TLongObjectHashMap
 	    TLongObjectHashMap<Integer> maskFrequencies = new TLongObjectHashMap<Integer>();
 
-	    for (SpatialObjectRes obj : prep.objectsById.valueCollection()) {
+	    for (SpatialPipelineObjectRes obj : prep.objectsById.valueCollection()) {
 	        long mask = obj.mainMask;
 	        Integer count = maskFrequencies.get(mask);
 	        maskFrequencies.put(mask, count == null ? 1 : count + 1);
@@ -221,10 +220,10 @@ public class SpatialStagePipelineStats {
 	    for (int i = 0; i < topN; i++) {
 	        long mask = maskList.get(i)[0];
 	        long count = maskList.get(i)[1];
-	        int bitCount = SpatialObjectRes.countCoveredTokens(mask);
+	        int bitCount = SpatialPipelineObjectRes.countCoveredTokens(mask);
 	        double share = (count * 100.0) / totalObjects;
 
-	        String tokensRepresentation = SpatialObjectRes.formatMaskTokens(mask, tokens);
+	        String tokensRepresentation = SpatialPipelineObjectRes.formatMaskTokens(mask, tokens);
 
 	        System.out.printf("#%-5d | %-8d | %,12d | %6.2f%%    | %-45s\n", 
 	                (i + 1), bitCount, count, share, tokensRepresentation);
@@ -248,7 +247,7 @@ public class SpatialStagePipelineStats {
 	    int objs = 0;
 	    TLongObjectHashMap<TLongHashSet> maskAreaFreqs = new TLongObjectHashMap<TLongHashSet>();
 	    int areas = 0;
-	    for (SpatialObjectRes obj : prep.objectsById.valueCollection()) {
+	    for (SpatialPipelineObjectRes obj : prep.objectsById.valueCollection()) {
 	        long mask = obj.mainMask;
 	        TLongHashSet ids = maskFreqs.get(mask);
 			if (ids == null) {
@@ -282,7 +281,7 @@ public class SpatialStagePipelineStats {
 	    // --- DEPTH 1: Single Objects (1 Mask) ---
 		for (int i = 0; i < masks.length; i++) {
 			long maskA = masks[i];
-			int covered = SpatialObjectRes.countCoveredTokens(maskA);
+			int covered = SpatialPipelineObjectRes.countCoveredTokens(maskA);
 			Map<Integer, Long> depthMap = stats.get(covered);
 			depthMap.put(1, depthMap.getOrDefault(1, 0l) + maskFreqs.get(maskA).size());
 			statByIds.get(covered).addAll(maskFreqs.get(maskA));
@@ -294,12 +293,12 @@ public class SpatialStagePipelineStats {
 			TLongHashSet aIds = maskFreqs.get(maskA);
 			for (int j = i; j < masks.length; j++) {
 				long maskB = masks[j];
-				if (!SpatialObjectRes.allowed(maskA, maskB)) {
+				if (!SpatialPipelineObjectRes.allowed(maskA, maskB)) {
 					continue;
 				}
-				long combined = SpatialObjectRes.combine2BitMasks(maskA, maskB, totalTokens);
+				long combined = SpatialPipelineObjectRes.combine2BitMasks(maskA, maskB, totalTokens);
 				TLongHashSet bIds = maskFreqs.get(maskB);
-				int coveredAB = SpatialObjectRes.countCoveredTokens(combined);
+				int coveredAB = SpatialPipelineObjectRes.countCoveredTokens(combined);
 				
 				Map<Integer, Long> depthMap2 = stats.get(coveredAB);
 				long totalAB = (long)aIds.size() * (long)bIds.size();
@@ -311,12 +310,12 @@ public class SpatialStagePipelineStats {
 				// depth 3
 				for (int k = 0; k < areaMasks.length; k++) {
 	                long maskC = areaMasks[k];
-	                if (!SpatialObjectRes.allowed(combined, maskC)) {
+	                if (!SpatialPipelineObjectRes.allowed(combined, maskC)) {
 						continue;
 					}
-	                long combinedABC = SpatialObjectRes.combine2BitMasks(combined, maskC, totalTokens);
+	                long combinedABC = SpatialPipelineObjectRes.combine2BitMasks(combined, maskC, totalTokens);
 	                TLongHashSet cIds = maskAreaFreqs.get(maskC);
-	                int coveredABC = SpatialObjectRes.countCoveredTokens(combinedABC);
+	                int coveredABC = SpatialPipelineObjectRes.countCoveredTokens(combinedABC);
 	                
 	                Map<Integer, Long> depthMap3 = stats.get(coveredABC);
 					long totalABC = totalAB * (long) cIds.size();

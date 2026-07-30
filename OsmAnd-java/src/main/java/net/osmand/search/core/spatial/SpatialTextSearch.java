@@ -571,7 +571,7 @@ public class SpatialTextSearch {
 		ctx.stats.step2Compute.start();
 //		res.combinations = findObjCombinationsSimpleIteration(res.tokens);
 		if (ctx.settings.DEV_USE_PIPELINE) {
-			res.combinations = new SpatialStagePipeline(ctx).runPipeline(res.tokens);
+			res.combinations = new SpatialPipelineSearch(ctx).runPipeline(res.tokens);
 		} else {
 			res.combinations = findLongestCombinations(ctx, res.tokens);
 		}
