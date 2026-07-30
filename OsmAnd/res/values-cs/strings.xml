@@ -3052,8 +3052,8 @@
     <string name="delete_version_history">Smazat historii verzí</string>
     <string name="routing_attr_avoid_tunnels_description">Vyhnout se tunelům</string>
     <string name="routing_attr_avoid_tunnels_name">Vyhnout se tunelům</string>
-    <string name="send_crash_log">Odeslat záznam o pádu</string>
-    <string name="send_logcat_log">Odeslat záznam z logcatu</string>
+    <string name="send_crash_log">Odeslat záznamy o pádu</string>
+    <string name="send_logcat_log">Odeslat záznamy z aktuální relace</string>
     <string name="backup_promocode">Promokód</string>
     <string name="shared_string_purchased">Zakoupeno</string>
     <string name="explore_wikipedia_offline">Prozkoumejte Wikipedii offline.</string>
@@ -5196,7 +5196,9 @@
     <string name="camera_folder">Složka fotoaparátu</string>
     <string name="media_storage_main_storage_descr">Soubory se ukládají do soukromého úložiště aplikací. Jsou skryté před Galerií a ostatními aplikacemi.</string>
     <string name="media_storage_shared_storage_descr">Soubory se ukládají do veřejných složek (Obrázky, Filmy, Hudba). Jsou viditelné v Galerii a Google Photos.</string>
-    <string name="media_storage_camera_folder_descr">Soubory se ukládají do složky Fotoaparát. Poznámka: Zvuk se ukládá do složky Hudba/OsmAnd.</string>
+    <string name="shared_string_note">Poznámka</string>
+    <string name="media_storage_camera_folder_note_descr">Zvuk se ukládá do složky Hudba/OsmAnd.</string>
+    <string name="media_storage_camera_folder_descr">Soubory se ukládají do složky Fotoaparát. %1$s</string>
     <string name="media_storage_manually_specified_descr">Soubory se ukládají do vlastní složky a třídí se podle typu (Zvuk, Foto, Video).</string>
     <string name="change_media_storage_question">Změnit úložiště médií?</string>
     <string name="change_media_storage_full_description">Přesunout existující mediální soubory do nového cíle?\n%1$s &gt; %2$s</string>
@@ -5225,7 +5227,6 @@
     <string name="gallery_sort_duration_long_short">Nejdelší doba trvání první</string>
     <string name="gallery_sort_duration_short_long">Nejkratší doba trvání první</string>
     <string name="navigate_point_format_maidenhead">Maidenhead</string>
-    <string name="auto_copy_media_to_osmand_storage">Automatické kopírování médií do úložiště OsmAnd</string>
     <string name="tracks_backup_promo_button">Získejte OsmAnd Pro</string>
     <string name="tracks_backup_promo_description">Synchronizujte své trasy mezi zařízeními a webem s OsmAnd Pro.</string>
     <string name="tracks_backup_promo_title">Zálohujte a synchronizujte své trasy</string>

@@ -5018,8 +5018,8 @@
         <item quantity="many">%d треків</item>
         <item quantity="other">%d трека</item>
     </plurals>
-    <string name="start_free_trial">Почати безкоштовний пробний період</string>
-    <string name="subscription_free_trial_with_price">Безкоштовно %1$s, потім %2$s</string>
+    <string name="start_free_trial">Почати безплатний пробний період</string>
+    <string name="subscription_free_trial_with_price">Безплатно %1$s, потім %2$s</string>
     <string name="subscription_then_price">потім %1$s</string>
     <string name="shared_string_radians">Радіани</string>
     <string name="shared_string_unlock">Розблокувати</string>
@@ -5187,7 +5187,9 @@
     <string name="camera_folder">Папка камери</string>
     <string name="media_storage_main_storage_descr">Файли зберігаються в приватній пам’яті програм. Вони приховані від Галереї та інших програм.</string>
     <string name="media_storage_shared_storage_descr">Файли зберігаються у загальнодоступних папках (Зображення, Фільми, Музика). Вони відображаються в Галереї та Google Фото.</string>
-    <string name="media_storage_camera_folder_descr">Файли зберігаються в папці «Камера». Примітка: Аудіо зберігається в папці «Музика/OsmAnd».</string>
+    <string name="shared_string_note">Примітка</string>
+    <string name="media_storage_camera_folder_note_descr">Аудіо зберігається в папці «Музика/OsmAnd».</string>
+    <string name="media_storage_camera_folder_descr">Файли зберігаються в папці «Камера». %1$s</string>
     <string name="media_storage_manually_specified_descr">Файли зберігаються в власну папку та сортуються за типом (аудіо, фото, відео).</string>
     <string name="change_media_storage_question">Змінити сховище медіафайлів?</string>
     <string name="change_media_storage_full_description">Перемістити існуючі медіафайли до нового місця розташування?\n%1$s &gt; %2$s</string>
@@ -5234,7 +5236,6 @@
     <string name="search_around_my_location">Моє місцезнаходження</string>
     <string name="search_around_my_location_description">Пошук навколо вашого місцезнаходження</string>
     <string name="sort_by_relevance">Релевантність</string>
-    <string name="auto_copy_media_to_osmand_storage">Автоматичне копіювання медіафайлів до сховища OsmAnd</string>
     <string name="tracks_backup_promo_button">Завантажте OsmAnd Pro</string>
     <string name="tracks_backup_promo_description">Синхронізуйте свої треки між пристроями та Інтернетом за допомогою OsmAnd Pro.</string>
     <string name="tracks_backup_promo_title">Резервне копіювання та синхронізація ваших треків</string>

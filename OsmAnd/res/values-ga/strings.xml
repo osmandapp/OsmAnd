@@ -5009,7 +5009,6 @@
     <string name="favorite_folder_duplicate_message">Bain úsáid as ainm fillteáin nach bhfuil ann cheana féin.</string>
     <string name="favorite_folder_name">Ainm fillteáin</string>
     <string name="edit_folder">Cuir fillteán in eagar</string>
-    <string name="auto_copy_media_to_osmand_storage">Cóipeáil meáin go huathoibríoch chuig stóras OsmAnd</string>
     <string name="choose_from_gallery">Roghnaigh ón nGailearaí</string>
     <string name="choose_from_files">Roghnaigh ó Chomhaid</string>
     <string name="shared_string_media">Meáin</string>
@@ -5021,7 +5020,9 @@
     <string name="camera_folder">Fillteán ceamara</string>
     <string name="media_storage_main_storage_descr">Sábháiltear comhaid i stóras príobháideach aipeanna. Tá siad i bhfolach ón nGailearaí agus ó aipeanna eile.</string>
     <string name="media_storage_shared_storage_descr">Sábháiltear comhaid i bhfillteáin phoiblí (Pictiúir, Scannáin, Ceol). Tá siad le feiceáil sa Ghailearaí agus i Google Photos.</string>
-    <string name="media_storage_camera_folder_descr">Sábháiltear comhaid chuig Rolla an Cheamara. Tabhair faoi deara: Sábháiltear fuaim chuig Ceol/OsmAnd.</string>
+    <string name="shared_string_note">Tabhair faoi deara</string>
+    <string name="media_storage_camera_folder_note_descr">Sábháiltear fuaim chuig Ceol/OsmAnd.</string>
+    <string name="media_storage_camera_folder_descr">Sábháiltear comhaid chuig Rolla an Cheamara. %1$s</string>
     <string name="media_storage_manually_specified_descr">Sábháiltear comhaid i bhfillteán saincheaptha agus déantar iad a shórtáil de réir cineáil (Fuaim, Grianghraf, Físeán).</string>
     <string name="change_media_storage_question">Athraigh stóráil meán?</string>
     <string name="change_media_storage_full_description">An bhfuil tú ag iarraidh comhaid meán atá ann cheana a bhogadh chuig an gceann scríbe nua?\n%1$s &gt; %2$s</string>
