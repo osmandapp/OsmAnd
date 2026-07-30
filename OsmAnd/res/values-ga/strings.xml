@@ -4044,7 +4044,7 @@
     <string name="magnetic_bearing_widget_desc">Uillinn idir tuaisceart maighnéadach agus an spriocphointe a breathnaíodh ó do shuíomh.</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s nó %2$s</string>
     <string name="purchases_feature_desc_osmand_cloud">Faigh OsmAnd Cloud chun na sonraí OsmAnd go léir a stóráil ar líne. Níor cailleadh sonraí tar éis iad a athshuiteáil. Déan cúltaca agus athchóirigh an fhaisnéis go léir go héasca.</string>
-    <string name="send_logcat_log">Seol logchomhad logcat</string>
+    <string name="send_logcat_log">Seol logaí seisiúin reatha</string>
     <string name="some_articles_may_not_available_in_lang">B\'fhéidir nach bhfuil roinnt alt Vicipéide ar fáil i do theanga.</string>
     <string name="shared_string_languages">Teangacha</string>
     <string name="shared_string_square">Cearnóg</string>
@@ -4172,7 +4172,7 @@
     <string name="time_to_navigation_point_widget_settings_desc">Tapáil an ghiuirléid chun modhanna a athrú.</string>
     <string name="storage_found_files_descr">Tapáil \"%1$s\" chun comhaid %2$s a chóipeáil ó \"%3$s\" go \"%4$s\". B\'fhéidir go dtógfaidh sé tamall.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Faigh rochtain ar nuashonruithe léarscáile níos minice. Nuashonruithe in aghaidh na huaire, go laethúil, nó go seachtainiúil. Déantar nuashonruithe a íoslódáil go hincriminteach, ach amháin don limistéar athraithe.</string>
-    <string name="send_crash_log">Seol logchomhad tuairteála</string>
+    <string name="send_crash_log">Seol logaí tuairteála aipeanna</string>
     <string name="osm_authorization_success">D\'éirigh leis an údarú</string>
     <string name="switch_osm_notes_visibility_desc">Taispeáin nó folaigh nótaí OSM ar an léarscáil.</string>
     <string name="quick_action_auto_zoom_off">Cas as uath-zúmáil</string>
@@ -5189,4 +5189,6 @@
     <string name="duplicate_map_replace_with_road">Ionadaigh le Bóthar amháin</string>
     <string name="rendering_attr_surface_clay_name">Cré</string>
     <string name="rendering_attr_surface_laterite_name">Latairít</string>
+    <string name="always_keep_local_copy">Coinnigh cóip áitiúil i gcónaí</string>
+    <string name="always_keep_local_copy_description">Fanann na meáin ceangailte fiú má scriostar an bunleagan ón ngailearaí nó ó na comhaid.</string>
 </resources>
