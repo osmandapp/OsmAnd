@@ -11,6 +11,16 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+    <string name="release_5_4">
+        • New spatial search — find places and search around a place\n\n
+        • Refreshed search UI: sorting, category filters, cleaner look\n\n
+        • Attach photos and media to Favorites\n\n
+        • Favorites: subgroups support and pinnable folders\n\n
+        • Coordinates: search, map grid, and POI display now support EPSG and Maidenhead locator\n\n
+        • Fixed navigation interruptions; switch between Standard and Fast routing\n\n
+        • Set Android Auto map scale separately from your phone\n\n
+        • Astronomy added solar &amp; lunar eclipses\n\n
+    </string>
 	<string name="shared_string_note">Note</string>
 	<string name="media_storage_camera_folder_note_descr">Audio is saved to Music/OsmAnd.</string>
 	<string name="always_keep_local_copy">Always keep a local copy</string>
