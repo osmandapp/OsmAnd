@@ -2312,12 +2312,15 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 					LOG.info("UI >> Showing API results <" + phrase + "> API=<" + searchApi + "> Results=" + apiResults.size());
 				}
 				boolean spatialSearchApi = isSpatialSearchApi(searchApi);
-				boolean append = getResultCollection() != null && !spatialSearchApi;
+				SearchResultCollection apiCollection = new SearchResultCollection(phrase, spatialSearchApi);
+				apiCollection.addSearchResults(apiResults, !spatialSearchApi, !spatialSearchApi);
+				boolean append = getResultCollection() != null;
 				if (append) {
 					if (isDebugMode) {
 						LOG.info("UI >> Appending API results <" + phrase + "> API=<" + searchApi + "> Result collection=" + getSearchResultCollectionFormattedSize(getResultCollection()));
 					}
-					getResultCollection().addSearchResults(apiResults, true, true);
+					setResultCollection(getResultCollection().combineWithCollection(apiCollection,
+							!spatialSearchApi, !spatialSearchApi));
 					if (isDebugMode) {
 						LOG.info("UI >> API results appended <" + phrase + "> API=<" + searchApi + "> Result collection=" + getSearchResultCollectionFormattedSize(getResultCollection()));
 					}
@@ -2325,9 +2328,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 					if (isDebugMode) {
 						LOG.info("UI >> Assign API results <" + phrase + "> API=<" + searchApi + ">");
 					}
-					SearchResultCollection resCollection = new SearchResultCollection(phrase, spatialSearchApi);
-					resCollection.addSearchResults(apiResults, !spatialSearchApi, !spatialSearchApi);
-					setResultCollection(resCollection);
+					setResultCollection(apiCollection);
 					if (isDebugMode) {
 						LOG.info("UI >> API results assigned <" + phrase + "> API=<" + searchApi + "> Result collection=" + getSearchResultCollectionFormattedSize(getResultCollection()));
 					}

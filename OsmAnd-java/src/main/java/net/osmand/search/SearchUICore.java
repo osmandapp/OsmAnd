@@ -23,6 +23,7 @@ import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreAPI;
 import net.osmand.search.core.SearchCoreFactory;
+import net.osmand.search.core.SearchCoreFactory.SearchAddressByNameAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchAmenityByNameAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchAmenityByTypeAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchAmenityTypesAPI;
@@ -918,11 +919,19 @@ public class SearchUICore {
 		for (SearchCoreAPI api : apis) {
 			if (api instanceof SpatialTextSearchAPI) {
 				spatialSearch = true;
-			} else if (!(api instanceof SearchAmenityTypesAPI)) {
+			} else if (isLegacyLocalMapSearchApi(api)) {
 				return false;
 			}
 		}
 		return spatialSearch;
+	}
+
+	private boolean isLegacyLocalMapSearchApi(SearchCoreAPI api) {
+		return api instanceof SearchAmenityByNameAPI
+				|| api instanceof SearchAmenityByTypeAPI
+				|| api instanceof SearchAddressByNameAPI
+				|| api instanceof SearchStreetByCityAPI
+				|| api instanceof SearchBuildingAndIntersectionsByStreetAPI;
 	}
 
 	private static class SearchPerformanceStats {

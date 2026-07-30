@@ -127,13 +127,23 @@ public class QuickSearchHelper implements ResourceListener {
 		core.resetSearch();
 		resultCollection = null;
 		if (useSpatialTextSearch()) {
-			core.registerAPI(new SearchAmenityTypesAPI(app.getPoiTypes()));
-			core.registerAPI(new SpatialTextSearchAPI(app.getPoiTypes()));
-			refreshCustomPoiFilters();
-			return;
+			registerSpatialMapSearchAPIs();
+		} else {
+			core.init();
 		}
-		core.init();
 
+		registerNonMapSearchAPIs();
+		refreshCustomPoiFilters();
+	}
+
+	private void registerSpatialMapSearchAPIs() {
+		SearchCoreFactory.SearchAmenityByNameAPI amenitiesApi = new SearchCoreFactory.SearchAmenityByNameAPI();
+		core.registerAPI(new SearchCoreFactory.SearchLocationAndUrlAPI(amenitiesApi,
+				app.getSettings()::isInternetConnectionAvailable));
+		core.registerAPI(new SpatialTextSearchAPI(app.getPoiTypes()));
+	}
+
+	private void registerNonMapSearchAPIs() {
 		// Register index item api
 		core.registerAPI(new SearchIndexItemApi(app));
 
@@ -149,8 +159,6 @@ public class QuickSearchHelper implements ResourceListener {
 		core.registerAPI(new SearchHistoryAPI(app));
 
 		core.registerAPI(new SearchOnlineApi(app));
-
-		refreshCustomPoiFilters();
 	}
 
 	private boolean useSpatialTextSearch() {
