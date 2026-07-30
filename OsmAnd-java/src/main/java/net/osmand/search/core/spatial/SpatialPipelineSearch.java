@@ -15,13 +15,12 @@ import net.osmand.search.core.spatial.SpatialSearchContext.SpatialSearchStats;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSettings;
 
-// TODO ---------------
-// TODO Add non maximum results as well... (surplus words +-) -  germany_langestrasse!
+// TODO x1 implement correct mixing alternative masks! Portugal!
 // TODO other masks ?fix
-// TODO enlarge bbox if failed
-// TODO common words to skip
-// TODO x1 implement correct mixing alternative masks!
-// TODO store bbox inside rees to not use atoms at all
+// TODO Add non maximum results as well... (surplus words +-) -  germany_langestrasse!
+// TODO enlarge bbox if failed 
+// TODO common words to skip - 14-45, West 31st Road 
+// TODO store bbox inside res to not use atoms at all
 // TODO introduce mask check into joiner index ?
 public class SpatialPipelineSearch {
     
@@ -356,20 +355,46 @@ public class SpatialPipelineSearch {
 	    }
 	}
 	
+	private static class MasksGroupInfo {
+		TLongObjectHashMap<MaskGroupInfo> map = new TLongObjectHashMap<MaskGroupInfo>();
+
+		public long[] keys() {
+			return map.keys();
+		}
+
+		public boolean isEmpty() {
+			return map.isEmpty();
+		}
+
+		public void add(long combinedMask, SpatialPipelineObjectRes obj) {
+			MaskGroupInfo info = map.get(combinedMask);
+			if (info == null) {
+				info = new MaskGroupInfo(combinedMask, 0);
+				map.put(combinedMask, info);
+			}
+			info.count++;
+			if (obj != null) {
+				if (info.objects == null) {
+					info.objects = new ArrayList<>();
+				}
+				info.objects.add(obj);
+			}
+		}
+	}
+	
 	private static class MaskGroupInfo {
 //	    final long mask;
 	    int count;
 	    List<SpatialPipelineObjectRes> objects; 
 
-	    MaskGroupInfo(long mask, int count, List<SpatialPipelineObjectRes> objects) {
+	    MaskGroupInfo(long mask, int count) {
 //	        this.mask = mask;
 	        this.count = count;
-	        this.objects = objects;
 	    }
 	}
 	
 	private void splitGroupInfoToBuckets(SpatialObjectsBucket parent, SpatialObjectsBucket singleEdgeGroup,
-	        int edgeIndex, TLongObjectHashMap<MaskGroupInfo> maskMap, List<SpatialObjectsBucket> outputList) {
+	        int edgeIndex, MasksGroupInfo maskMap, List<SpatialObjectsBucket> outputList) {
 	    if (maskMap == null || maskMap.isEmpty()) {
 	        return;
 	    }
@@ -379,7 +404,7 @@ public class SpatialPipelineSearch {
 	    int totalTokens = ctx.tokens.size();
 	    for (int i = 0; i < masks.length; i++) {
 	        long mask = masks[i];
-	        MaskGroupInfo info = maskMap.get(mask);
+	        MaskGroupInfo info = maskMap.map.get(mask);
 	        boolean isFullCovered = (SpatialPipelineObjectRes.countCoveredTokens(mask) == totalTokens);
 	        if (isFullCovered) {
 	            if (fullCoveredBucket == null) {
@@ -473,7 +498,7 @@ public class SpatialPipelineSearch {
 			if (edgeMasks.length == 0) {
 				continue;
 			}
-			TLongObjectHashMap<MaskGroupInfo> combinedMaskMap = new TLongObjectHashMap<>();
+			MasksGroupInfo combinedMaskMap = new MasksGroupInfo();
 			for (long pMask : parentMasks) {
 				for (long eMask : edgeMasks) {
 					ctx.metrics.maskPairsEval++;
@@ -483,14 +508,10 @@ public class SpatialPipelineSearch {
 					ctx.metrics.maskPairsAllowed++;
 					long combinedMask = SpatialPipelineObjectRes.combine2BitMasks(pMask, eMask, totalTokens);
 					if (combinedMask == pMask) {
-						continue;
+						throw new IllegalStateException();
+//						continue;
 					}
-					MaskGroupInfo info = combinedMaskMap.get(combinedMask);
-					if (info == null) {
-						info = new MaskGroupInfo(combinedMask, 0, null);
-						combinedMaskMap.put(combinedMask, info);
-					}
-					info.count++;
+					combinedMaskMap.add(combinedMask, null);
 				}
 			}
 			if (combinedMaskMap.isEmpty()) {
@@ -502,6 +523,7 @@ public class SpatialPipelineSearch {
 	
 	private SpatialPipelineContext prepareInitialBuckets() {
 		int totalTokens = ctx.tokens.size();
+		// combine & merge by tokens
 		for (int tokenIdx = 0; tokenIdx < totalTokens; tokenIdx++) {
 			SpatialSearchToken token = ctx.tokens.get(tokenIdx);
 			TIntHashSet deleted = token.getDeletedAtoms();
@@ -518,7 +540,20 @@ public class SpatialPipelineSearch {
 				}
 			}
 		}
-		ctx.initBuckets = createInitialEdgeBuckets();
+		// combine by masks
+	    MasksGroupInfo maskMap = new MasksGroupInfo();
+	    for (SpatialPipelineObjectRes obj : ctx.objectsById.valueCollection()) {
+	        long mask = obj.mainMask;
+	        maskMap.add(mask, obj);
+	    }
+	    // split into groups
+	    List<SpatialObjectsBucket> buckets = new ArrayList<>();
+	    splitGroupInfoToBuckets(null, null, 0, maskMap, buckets);
+	    // ???
+	    for (int i = 0; i < buckets.size(); i++) {
+	        buckets.get(i).edgeIndex = i;
+	    }
+	    ctx.initBuckets = buckets;
 		return ctx;
 	}
 	
@@ -568,28 +603,6 @@ public class SpatialPipelineSearch {
 		return singleResults;
 	}
 	
-	
-	private List<SpatialObjectsBucket> createInitialEdgeBuckets() {
-	    TLongObjectHashMap<MaskGroupInfo> maskMap = new TLongObjectHashMap<>();
-	    for (SpatialPipelineObjectRes obj : ctx.objectsById.valueCollection()) {
-	        long mask = obj.mainMask;
-	        MaskGroupInfo info = maskMap.get(mask);
-	        if (info == null) {
-	            info = new MaskGroupInfo(mask, 0, new ArrayList<>());
-	            maskMap.put(mask, info);
-	        }
-	        info.objects.add(obj);
-	        info.count++;
-	    }
-
-	    List<SpatialObjectsBucket> edges = new ArrayList<>();
-	    splitGroupInfoToBuckets(null, null, 0, maskMap, edges);
-	    for (int i = 0; i < edges.size(); i++) {
-	        edges.get(i).edgeIndex = i;
-	    }
-
-	    return edges;
-	}
 	
 	public List<SpatialSearchResultsList> runPipeline() throws IOException {
 		int tokensSize = ctx.tokens.size();

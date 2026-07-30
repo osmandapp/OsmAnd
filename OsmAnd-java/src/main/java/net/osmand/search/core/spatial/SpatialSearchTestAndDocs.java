@@ -79,7 +79,7 @@ import net.osmand.util.SearchAlgorithms;
 // TODO DEDUPLICATE: too many houses (duplicate names) in wiki maps - obstruct search by street "Ярославів Вал"`?
 // TEST DEDUPLICATE: wiki / travel maps / seamarks map
 
-// TODO Extend POI tile bboxes 200m? intrnet_access (fuel_diesel) 
+// TODO Extend POI tile bboxes 200m? internet_access (fuel_diesel) 
 // TODO INVESTIGATE: Limit (2000->2500) patterson 
 //      '4 ave 8 paterson' (OK - '8 4 ave paterson', '4th ave 8 paterson' play order of assigned numbers to bdl ref)
 
@@ -434,7 +434,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "Shell 2 Rožňavská";
 		
 //		pattern = "Us_new-york_new"; // new-york, new-jersey
-//		pattern = "Us_new-"; 
+		pattern = "Us_new-"; 
 //		pattern = "Us_"; 
 //		location = new LatLon(40.78035, -73.96572); // central park
 //		location = new LatLon(40.64946, -74.00682); // brooklyn
@@ -445,12 +445,12 @@ public class SpatialSearchTestAndDocs {
 		// 40.64946, -74.00682 - unit test '4th av', '4 ave', '4th avenue' 241843204, 247910224, 85393997 (..) brooklyn - not 48
 		// 40.78035, -73.96572 - unit test '4th av', '4 ave', '4th avenue'  - 85393997 Park avenue
 //		settings.OPTIM_LIMIT_INTERSECTIONS = 100_000;
-//		settings.DEV_USE_PIPELINE = true;
-//		settings.MAX_PIPELINE_STAGE_TO_STOP = new int[] {100000};
+//		settings.DEV_USE_PIPELINE = false;
+		settings.MAX_PIPELINE_RES_TO_STOP = new int[] {1000};
 //		query = "New York 4 av 8";
 //		query = "New York av 8";
 //		query = "4 ave 8";
-//		query = "New York 4 av"; // 160947243
+		query = "New York 4 av"; // 160947243
 //		query = "57th street"; // central park - 265345338 east, 86216906 west, (266926268 (west)?),
 //		query = "57 street"; // central park - 265345338 east, 86216906 west, (26926268 (west)?),
 //		query = "new york 57th street manhattan";
@@ -483,6 +483,7 @@ public class SpatialSearchTestAndDocs {
 //		pattern = "Italy_ven";
 //		pattern = "Map";
 //		pattern2 = "World_basemap_2";
+//		settings.DEV_USE_PIPELINE = false;
 		// ! unit test - search full address ! no double 539d (no intersectoin)
 		// Cannaregio 539D Campo Saffa, Venezia Cannaregio Campo Saffa  , 
 //		query = "Venezia Cannaregio Campo Saffa ";
@@ -492,15 +493,12 @@ public class SpatialSearchTestAndDocs {
 //		query = "Venezia";
 		
 		
-		pattern = "Portugal";
+//		pattern = "Portugal";
 //		settings.DEV_USE_PIPELINE = false;
 //		location = new LatLon(39.7412, -8.8012); // Barreira Urbanização Vale da Cabrita
 		// MATCH: Search Stats 5392.4 ms (read 11,248 KB) - 4979.9 ms 305,862 atoms (read 330.2, match 2981.5, poi 490.6), 361.8 ms compute 5,499 (loadBld 3.6, read 2.9)
-		settings.MAX_PIPELINE_RES_TO_STOP = new int[] {1000};
-		settings.PIPELINE_MAX_STEPS = 8;
-		settings.PIPELINE_MAX_VIRTUAL_MASKS = 1;
 //		query = "Travessa de Santo António Rua Joaquim Ribeiro de Carvalho Portugal";
-		query = "Travessa Santo António Rua Joaquim Ribeiro Carvalho Portugal ";
+//		query = "Travessa Santo António Rua Joaquim Ribeiro Carvalho Portugal ";
 //		query = "Travessa Santo António Joaquim Ribeiro Portugal ";
 		
 //		pattern = "France_ile-de-france";

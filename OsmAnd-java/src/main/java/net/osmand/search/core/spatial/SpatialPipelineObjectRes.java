@@ -185,7 +185,7 @@ public class SpatialPipelineObjectRes {
 			res.add("POIBUG");
 		} 
 
-		int maxTokens = (64 - 4) / 2; // 30 токенов
+		int maxTokens = MAX_SUPPORTED_TOKENS; // 30 tokens
 
 		for (int tokenIndex = 0; tokenIndex < maxTokens; tokenIndex++) {
 			int bitShift = 4 + (tokenIndex * 2);
