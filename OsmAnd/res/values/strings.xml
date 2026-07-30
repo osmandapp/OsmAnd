@@ -11,6 +11,25 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+    <string name="release_5_4">
+        • 3D Buildings support added\n\n
+        • Spherical map view\n\n
+        • Astronomy plugin with night map and star database\n\n
+        • New color modes for Speedometer: tolerance and speeding\n\n
+        • Separate widget layouts for Landscape and Portrait\n\n
+        • Trip recording widgets: Moving speed and Average speed\n\n
+        • Adapter voltage widget for Vehicle Metrics\n\n
+        • Vehicle metrics data in Track Analyzer\n\n
+        • Auto-organize tracks by year, length, activity &amp; more\n\n
+        • Palette editor for Terrain and Track visualization\n\n
+        • Improved search algorithms &amp; refreshed UI\n\n
+        • Elevation profiles fixed for Routes\n\n
+        • Favorites: new sorting options and UI refresh\n\n
+        • Share link to any POI\n\n
+        • Waypoint preview without closing the list\n\n
+        • Bicycle width parameter to avoid narrow roads\n\n
+        • Photo descriptions from Wikimedia\n\n
+    </string>
 	<string name="shared_string_note">Note</string>
 	<string name="media_storage_camera_folder_note_descr">Audio is saved to Music/OsmAnd.</string>
 	<string name="always_keep_local_copy">Always keep a local copy</string>
