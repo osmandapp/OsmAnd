@@ -2987,8 +2987,8 @@
     <string name="delete_version_history">Verziótörténet törlése</string>
     <string name="routing_attr_avoid_tunnels_description">Alagutak elkerülése</string>
     <string name="routing_attr_avoid_tunnels_name">Alagutak elkerülése</string>
-    <string name="send_crash_log">Összeomlási napló elküldése</string>
-    <string name="send_logcat_log">Logcat napló elküldése</string>
+    <string name="send_crash_log">Összeomlási naplók elküldése</string>
+    <string name="send_logcat_log">Aktuális munkamenet-naplók elküldése</string>
     <string name="backup_promocode">Promóciós kód</string>
     <string name="cancel_anytime_in_gplay">Bármikor lemondhatja a Google Play-ben.</string>
     <string name="offline_wikivoyage">Offline Wikivoyage útikalauz</string>
