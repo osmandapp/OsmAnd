@@ -27,7 +27,7 @@ public class SpatialStagePipeline {
     private final SpatialSearchContext ctx;
     
     public static int FREQUENT_OBJECTS_THRESHOLD = 5000;
-    public static int MAX_VIRTUAL_MASKS = 10000;
+    public static int MAX_VIRTUAL_MASKS = 100;
     
 	public static int EXCLUDE_MASKS = 8000; // speed up
 	public static boolean CHECK_EXCLUDED = false;
