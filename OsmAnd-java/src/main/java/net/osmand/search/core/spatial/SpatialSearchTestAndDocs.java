@@ -230,6 +230,7 @@ public class SpatialSearchTestAndDocs {
 		
 //		location = new LatLon(41.2364,-75.8843); // 649331066
 //		settings.OPTIM_READ_COMMON_WORDS_ATOMS = false;
+//		settings.MAX_PIPELINE_STAGE_TO_STOP = new int[] {100000};
 //		settings.DEDUPLICATE_RES = true;
 //		query = "155 Park Avenue Wilkes Barre"; // 155 Park Avenue Wilkes-Barre
 		
@@ -276,11 +277,11 @@ public class SpatialSearchTestAndDocs {
 //		query = "PA 75"; // Yes - ('PA 75', 'PA-75'), YES - 'PA75'
 //		query = "PA 21";  // 1336083883 DATA 'PA21' (+!'PA 21', +'PA-21',+'PA21') 
 
-		pattern = "Us_texas";
+//		pattern = "Us_texas";
 //		query = "Avenue G, Dickinson"; // 2630826474
 //		query = "2419 Avenue G, Dickinson, TX USA";
-		query = "2419 Avenue G, Dickinson, 77539 TX USA";
-		query = "2419 Avenue G Dickinson, 77539 TX USA";
+//		query = "2419 Avenue G, Dickinson, 77539 TX USA";
+//		query = "2419 Avenue G Dickinson, 77539 TX USA";
 //		query = "TX";
 
 		
@@ -445,7 +446,7 @@ public class SpatialSearchTestAndDocs {
 		// 40.78035, -73.96572 - unit test '4th av', '4 ave', '4th avenue'  - 85393997 Park avenue
 //		settings.OPTIM_LIMIT_INTERSECTIONS = 100_000;
 //		settings.DEV_USE_PIPELINE = true;
-//		settings.MAX_PIPELINE_STAGE_TO_STOP = new int[0];
+//		settings.MAX_PIPELINE_STAGE_TO_STOP = new int[] {100000};
 //		query = "New York 4 av 8";
 //		query = "New York av 8";
 //		query = "4 ave 8";
@@ -495,9 +496,10 @@ public class SpatialSearchTestAndDocs {
 //		settings.DEV_USE_PIPELINE = false;
 //		location = new LatLon(39.7412, -8.8012); // Barreira Urbanização Vale da Cabrita
 		// MATCH: Search Stats 5392.4 ms (read 11,248 KB) - 4979.9 ms 305,862 atoms (read 330.2, match 2981.5, poi 490.6), 361.8 ms compute 5,499 (loadBld 3.6, read 2.9)
-		settings.MAX_PIPELINE_STAGE_TO_STOP = new int[] {1};
+		settings.MAX_PIPELINE_RES_TO_STOP = new int[] {10};
 		SpatialPipelineSearch.MAX_STEPS = 8;
-		query = "Travessa de Santo António Rua Joaquim Ribeiro de Carvalho Portugal";
+		SpatialPipelineSearch.MAX_VIRTUAL_MASKS = 7;
+//		query = "Travessa de Santo António Rua Joaquim Ribeiro de Carvalho Portugal";
 		query = "Travessa Santo António Rua Joaquim Ribeiro Carvalho Portugal ";
 //		query = "Travessa Santo António Portugal ";
 		

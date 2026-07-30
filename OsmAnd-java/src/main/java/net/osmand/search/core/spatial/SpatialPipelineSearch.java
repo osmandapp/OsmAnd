@@ -29,10 +29,10 @@ public class SpatialPipelineSearch {
     
     public static int FREQUENT_OBJECTS_THRESHOLD = 5000;
     public static int MAX_VIRTUAL_MASKS = 10;
+    public static int MAX_STEPS = 4; // 1 - fully covered, 2 - 1 intersecction ,...
     
 	public static int EXCLUDE_MASKS = 8000; // speed up
 	public static boolean CHECK_EXCLUDED = false;
-    public static int MAX_STEPS = 4; // 1 - fully covered, 2 - 1 intersecction ,...
 
     public SpatialPipelineSearch(SpatialSearchContext ctx) {
         this.ctx = ctx;
@@ -174,7 +174,7 @@ public class SpatialPipelineSearch {
 			System.out.printf("PIPELINE STAGE %d LOAD (%.1f ms): %d complete results.\n", stage,
 					(System.nanoTime() - time) / 1e6, nonCategoryRes);
 		}
-		int[] stops = ctx.settings.MAX_PIPELINE_STAGE_TO_STOP;
+		int[] stops = ctx.settings.MAX_PIPELINE_RES_TO_STOP;
 		if (stops.length > 0 && nonCategoryRes > stops[Math.min(stops.length, stage + 1) - 1]) {
 			return true;
 		}

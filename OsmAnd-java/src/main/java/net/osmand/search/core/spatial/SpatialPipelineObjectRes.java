@@ -174,16 +174,18 @@ public class SpatialPipelineObjectRes {
 		} else if (atomicState == 1L) { // 01
 			res.add("A2");
 		} else if (atomicState == 0L) { // 01
-			res.add("A0");
-		} else if (atomicState == 0L) { // 01
-			res.add("A?");
+//			res.add("A0");
+		} else if (atomicState == 2L) { // 01
+			res.add("ABUG");
 		}
 		long poiState = (mask >> 2) & 3L;
 		if (poiState == 3L) { // 11
 			res.add("POI");
 		} else if (poiState == 1L) { // 01
 			res.add("POICAT");
-		}
+		} else if (atomicState == 2L) { // 01
+			res.add("POIBUG");
+		} 
 
 		int maxTokens = (64 - 4) / 2; // 30 токенов
 
