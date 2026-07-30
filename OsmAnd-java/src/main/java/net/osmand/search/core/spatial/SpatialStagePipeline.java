@@ -418,6 +418,7 @@ public class SpatialStagePipeline {
 	    
 	    public HashSkipTileQuadTree<SpatialObjectRes> ensureTreeBuilt() {
 	        if (resTree == null && resObjectsByMasks != null && !resObjectsByMasks.isEmpty()) {
+	        	long t0 = System.nanoTime();
 	            resTree = new HashSkipTileQuadTree<>();
 	            long[] masks = resObjectsByMasks.keys();
 	            for (int i = 0; i < masks.length; i++) {
@@ -434,6 +435,7 @@ public class SpatialStagePipeline {
 	                    }
 	                }
 	            }
+	            metrics.treeBuildNanos += (System.nanoTime() - t0);
 	        }
 	        if (resTree != null && !resTree.isEmpty() && !resTree.isBuilt()) {
 	            resTree.build();
@@ -527,6 +529,36 @@ public class SpatialStagePipeline {
 	    }
 	}
 	
+	private static class PipelineMetrics {
+	    long treeBuildNanos, joinNanos, pruneNanos;
+	    long pairsChecked, pairsAccepted;
+	    long maskPairsEval, maskPairsAllowed;
+	    void resetLevel() {
+	        treeBuildNanos = joinNanos = pruneNanos = 0;
+	        pairsChecked = pairsAccepted = 0;
+	    }
+	    void resetSplit() {
+	        maskPairsEval = maskPairsAllowed = 0;
+	    }
+	    void logLevel(int level, int buckets, int totalMasks, double computeMs, int fcCount, int matCount, int resCount) {
+	        System.out.printf("[D=%d] Buckets: %d | Masks: %,d | Comp: %.1fms (Tree: %.1fms, Join: %.1fms [%,d/%,d], Prune: %.1fms) | Mat: %d | Res: %,d\n",
+	                level, buckets, totalMasks, computeMs, 
+	                treeBuildNanos / 1e6, joinNanos / 1e6, pairsAccepted, pairsChecked, pruneNanos / 1e6, 
+	                matCount, resCount);
+	    }
+	    void logSplit(double splitMs, int nextBuckets, int nextMasks) {
+	        System.out.printf("      Split: %.1fms | Next Buckets: %d | Next Masks: %,d | Mask Pairs: %,d/%,d\n",
+	                splitMs, nextBuckets, nextMasks, maskPairsAllowed, maskPairsEval);
+	    }
+	}
+
+	private final PipelineMetrics metrics = new PipelineMetrics();
+	private static int countMasks(List<SpatialObjectsBucket> list) {
+	    int sum = 0;
+	    for (SpatialObjectsBucket b : list) sum += b.getMasksCount();
+	    return sum;
+	}
+	
 	private void pruneChildrenPotentialMasks(SpatialObjectsBucket parent, int totalTokens) {
 	    if (parent.getChildren().isEmpty()) {
 	        return;
@@ -575,29 +607,21 @@ public class SpatialStagePipeline {
 	    if (b == null || b.isEmpty()) {
 	        return;
 	    }
-
-	    // 1. Уже материализован — просто забираем полные совпадения (без геометрии)
 	    if (b.isComputed()) {
 	        collectFullCoverageResults(b, res, prep.tokens.size());
 	        return;
 	    }
-
-	    // 2. Бакет D=1 (Edge): помечаем его материализованным, не строя resTree!
 	    if (b.parent == null) {
 	        b.markComputed(null, b.resObjectsByMasks);
 	        collectFullCoverageResults(b, res, prep.tokens.size());
 	        return;
 	    }
-
-	    // 3. Рекурсивно гарантируем материализацию операндов
 	    if (!b.parent.isComputed()) {
 	        compute(b.parent, res, prep);
 	    }
 	    if (!b.singleEdgeGroup.isComputed()) {
 	        compute(b.singleEdgeGroup, res, prep);
 	    }
-
-	    // 4. ТРЕБУЕМ построения QuadTree ТОЛЬКО СЕЙЧАС (Strictly On-Demand for Join)!
 	    HashSkipTileQuadTree<SpatialObjectRes> parentTree = b.parent.ensureTreeBuilt();
 	    HashSkipTileQuadTree<SpatialObjectRes> edgeTree = b.singleEdgeGroup.ensureTreeBuilt();
 
@@ -605,16 +629,19 @@ public class SpatialStagePipeline {
 	    TLongObjectHashMap<List<SpatialObjectRes>> resObjectsByMasks = new TLongObjectHashMap<>();
 
 	    if (parentTree != null && edgeTree != null && !parentTree.isEmpty() && !edgeTree.isEmpty()) {
+	    	long tJoin = System.nanoTime();
 	        final int totalTokens = prep.tokens.size();
 	        HashSkipTileQuadTreeJoiner<SpatialObjectRes, SpatialObjectRes> joiner =
 	                new HashSkipTileQuadTreeJoiner<>(parentTree, edgeTree);
 
 	        joiner.joinAllBuckets((e1, e2) -> {
+	        	metrics.pairsChecked++;
 	            SpatialObjectRes obj1 = e1.obj;
 	            SpatialObjectRes obj2 = e2.obj;
 	            if (!SpatialObjectRes.allowed(obj1.mainMask, obj2.mainMask)) {
 	                return;
 	            }
+	            metrics.pairsAccepted++;
 	            long combinedMask = SpatialObjectRes.combine2BitMasks(obj1.mainMask, obj2.mainMask, totalTokens);
 	            SpatialObjectRes combinedObj = new SpatialObjectRes(combinedMask, obj1, obj2);
 	            List<SpatialObjectRes> list = resObjectsByMasks.get(combinedMask);
@@ -624,10 +651,13 @@ public class SpatialStagePipeline {
 	            }
 	            list.add(combinedObj);
 	        });
+	        metrics.joinNanos += (System.nanoTime() - tJoin); 
 	    }
 	    b.markComputed(resTree, resObjectsByMasks);
 	    if (!b.getChildren().isEmpty()) {
+	    	long tPrune = System.nanoTime();
 	        pruneChildrenPotentialMasks(b, prep.tokens.size());
+	        metrics.pruneNanos += (System.nanoTime() - tPrune);
 	    }
 	    collectFullCoverageResults(b, res, prep.tokens.size());
 	}
@@ -761,14 +791,15 @@ public class SpatialStagePipeline {
 			TLongObjectHashMap<MaskGroupInfo> combinedMaskMap = new TLongObjectHashMap<>();
 			for (long pMask : parentMasks) {
 				for (long eMask : edgeMasks) {
+					metrics.maskPairsEval++;
 					if (!SpatialObjectRes.allowed(pMask, eMask)) {
 						continue;
 					}
+					metrics.maskPairsAllowed++;
 					long combinedMask = SpatialObjectRes.combine2BitMasks(pMask, eMask, totalTokens);
 					if (combinedMask == pMask) {
 						continue; 
 					}
-
 					MaskGroupInfo info = combinedMaskMap.get(combinedMask);
 					if (info == null) {
 						info = new MaskGroupInfo(combinedMask, 0, null);
@@ -814,41 +845,47 @@ public class SpatialStagePipeline {
 
 	
 	public List<SpatialSearchResultsList> runPipeline(List<SpatialSearchToken> tokens) throws IOException {
-		if (tokens == null || tokens.isEmpty()) {
-			return Collections.emptyList();
-		}
-		long time = System.nanoTime();
-		SpatialPipelineResults prep = prepare(tokens);
-		if (ctx.stats.printLogs) {
-			System.out.printf("PIPELINE PREPARE tokens (%.1f ms): %,d objects\n", (System.nanoTime() - time) / 1e6, 
-					prep.allObjectsTree.getSize());
-		}
-		time = System.nanoTime();
-		int tokensSize = prep.tokens.size();
-		List<SpatialObjectsBucket> edges = createInitialEdgeBuckets(prep);
-		List<SpatialObjectsBucket> currentLevel = new ArrayList<>();
-		currentLevel.addAll(edges);
-		int level = 0;
-		while (level < MAX_STEPS) {
-			List<SpatialObjectsBucket> nextLevel = new ArrayList<>();
-			List<SpatialObjectRes> res = new ArrayList<>(); 
-			for(SpatialObjectsBucket b : currentLevel) {
-				if (b.hasFullCovered(tokensSize)) {
-					compute(b, res, prep);
-				}
-			}
-			boolean exit = validateStageAndFinish(prep, null, res, level, time);
-			if (exit) {
-				return prep.combinations;
-			}
-			time = System.nanoTime();
-			for(SpatialObjectsBucket b : currentLevel) {
-				virtualComputeSplit(b, edges, nextLevel, prep);
-			}
-			level++;
-			currentLevel = nextLevel;
-		}
-		return prep.combinations;		
+	    if (tokens == null || tokens.isEmpty()) return Collections.emptyList();
+	    SpatialPipelineResults prep = prepare(tokens);
+	    int tokensSize = prep.tokens.size();
+
+	    List<SpatialObjectsBucket> edges = createInitialEdgeBuckets(prep);
+	    List<SpatialObjectsBucket> currentLevel = new ArrayList<>(edges);
+	    int level = 0;
+	    while (level < MAX_STEPS && !currentLevel.isEmpty()) {
+	        metrics.resetLevel();
+	        long levelStart = System.nanoTime();
+	        List<SpatialObjectRes> res = new ArrayList<>();
+	        int fcCount = 0, matCount = 0;
+	        for (SpatialObjectsBucket b : currentLevel) {
+	            if (b.hasFullCovered(tokensSize)) {
+	                fcCount++;
+	                boolean wasComputed = b.isComputed();
+	                compute(b, res, prep);
+	                if (!wasComputed && b.isComputed()) matCount++;
+	            }
+	        }
+	        if (ctx.stats.printLogs) {
+	            metrics.logLevel(level + 1, currentLevel.size(), countMasks(currentLevel), 
+	                    (System.nanoTime() - levelStart) / 1e6, fcCount, matCount, res.size());
+	        }
+	        if (validateStageAndFinish(prep, null, res, level, levelStart)) {
+	            return prep.combinations;
+	        }
+	        metrics.resetSplit();
+	        long splitStart = System.nanoTime();
+	        List<SpatialObjectsBucket> nextLevel = new ArrayList<>();
+	        for (SpatialObjectsBucket b : currentLevel) {
+	            virtualComputeSplit(b, edges, nextLevel, prep);
+	        }
+
+	        if (ctx.stats.printLogs) {
+	            metrics.logSplit((System.nanoTime() - splitStart) / 1e6, nextLevel.size(), countMasks(nextLevel));
+	        }
+	        level++;
+	        currentLevel = nextLevel;
+	    }
+	    return prep.combinations;
 	}
 	
 
