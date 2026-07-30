@@ -122,9 +122,9 @@ public class SpatialStagePipelineStats {
 	    System.out.println("==========================================================================================");
 	}
 
-	// Helper to extract the 2-bit state (0, 1, or 2) for a given token index
+	// Token fields start after the 4-bit header (atomic + poi).
 	private static long getTokenState(long mask, int tokenIdx) {
-	    int shift = tokenIdx * 2;
+	    int shift = tokenIdx * 2 + SpatialTokenMask.HEADER_BITS;
 	    return (mask >> shift) & 3L;
 	}
 
