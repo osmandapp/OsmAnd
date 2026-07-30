@@ -3,6 +3,8 @@ package net.osmand.search.core.spatial;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import gnu.trove.list.array.TLongArrayList;
@@ -221,6 +223,36 @@ public class SpatialStagePipeline {
 
     }
     
+    public static class SpatialObjectsBucket {
+    	SpatialObjectsBucket parent = null;
+    	SpatialObjectsBucket singleEdgeGroup = null;
+    	TLongHashSet potentialMasks = null;
+    	List<SpatialObjectsBucket> children = new ArrayList<>();
+    	
+    	HashSkipTileQuadTree<SpatialObjectRes> resTree = null;
+    	TLongObjectHashMap<List<SpatialObjectRes>> resObjectsByMasks = null;
+    	
+    	public boolean hasFullCovered() {
+    		return true; // todo
+    	}
+
+		public long[] getMasks() {
+			if (resObjectsByMasks != null) {
+				return resObjectsByMasks.keys();
+			}
+			return potentialMasks.toArray();
+		}
+    	
+		public int getDepth() {
+			return (parent == null ? 0 : parent.getDepth()) + 1;
+		}
+
+		public boolean isEmpty() {
+			return false;
+		}
+    }
+    
+    
     private static class MasksStats {
     	TLongObjectHashMap<Integer> masks = new TLongObjectHashMap<Integer>();
     	public final int intersections;
@@ -248,7 +280,7 @@ public class SpatialStagePipeline {
 		public SpatialPipelineResults(List<SpatialSearchToken> tokens) {
 			this.tokens = tokens;
 		}
-		
+
 		// stage 1
 		public final TLongObjectHashMap<SpatialObjectRes> objectsById = new TLongObjectHashMap<>();
 		public final TLongObjectHashMap<List<SpatialObjectRes>> excludedMasks = new TLongObjectHashMap<List<SpatialObjectRes>>();
@@ -261,39 +293,6 @@ public class SpatialStagePipeline {
 		
 		public final List<SpatialSearchResultsList> combinations = new ArrayList<SpatialSearchResultsList>();
         
-    }
-
-
-    public static class SpatialSearchResultChain {
-        public final long chainId;
-        public final List<NameIndexAtom> atoms;
-        public final int[] bbox31;
-        public final long combinedMask;
-
-        public SpatialSearchResultChain(List<NameIndexAtom> atoms, int[] bbox31, long combinedMask) {
-            this.atoms = atoms;
-            this.bbox31 = bbox31;
-            this.combinedMask = combinedMask;
-
-            long idAcc = 0;
-            for (NameIndexAtom a : atoms) {
-                idAcc ^= a.id;
-            }
-            this.chainId = idAcc ^ combinedMask;
-        }
-
-        public boolean containsAtom(long atomId) {
-            for (NameIndexAtom a : atoms) {
-                if (a.id == atomId) return true;
-            }
-            return false;
-        }
-
-        public SpatialSearchResultChain extend(NameIndexAtom newArea, int[] newBBox, long newMask) {
-            List<NameIndexAtom> extendedAtoms = new ArrayList<>(this.atoms);
-            extendedAtoms.add(newArea);
-            return new SpatialSearchResultChain(extendedAtoms, newBBox, newMask);
-        }
     }
 
 
@@ -396,6 +395,50 @@ public class SpatialStagePipeline {
 		}
 		return false;
 	}
+
+    // =========================================================================
+    // Execution Engine with Mode Control v2
+    // =========================================================================
+	public List<SpatialSearchResultsList> runPipeline2(List<SpatialSearchToken> tokens) throws IOException {
+		if (tokens == null || tokens.isEmpty()) {
+			return Collections.emptyList();
+		}
+		long time = System.nanoTime();
+		SpatialPipelineResults prep = prepare(tokens);
+		if (ctx.stats.printLogs) {
+			System.out.printf("PIPELINE PREPARE tokens (%.1f ms): %,d objects\n", (System.nanoTime() - time) / 1e6, 
+					prep.allObjectsTree.getSize());
+		}
+		time = System.nanoTime();
+		
+		List<SpatialObjectsBucket> edges = new LinkedList<>();
+		TLongObjectHashMap<SpatialObjectRes> objectsById = prep.objectsById;
+		// TODO create bucket by masks group by mask and split by large to array initial
+	
+		List<SpatialObjectsBucket> currentLevel = new ArrayList<>();
+		currentLevel.addAll(edges);
+		int level = 0;
+		while (level < MAX_STEPS) {
+			List<SpatialObjectsBucket> nextLevel = new ArrayList<>();
+			for(SpatialObjectsBucket b : currentLevel) {
+				if (b.hasFullCovered()) {
+					// compute b and add to queue
+//					compute(b, edges, nextLevel);
+				}
+			}
+			for(SpatialObjectsBucket b : currentLevel) {
+				if (!b.isEmpty()) {
+					// compute b and add to queue
+//					virtualComputeSplit(b, edges, nextLevel);
+				}
+			}
+			level++;
+			currentLevel = nextLevel;
+		}
+		
+		
+		return prep.combinations;		
+	}
 	
 	
     // =========================================================================
@@ -469,6 +512,7 @@ public class SpatialStagePipeline {
 	}
 
 
+	// To be deleted
 	private void checkExcluded(final int tokensSize, SpatialPipelineResults prep) throws IOException {
 		long[] excl = prep.excludedMasks.keys();
 		System.out.println("Excluded masks: " + excl.length);
