@@ -359,6 +359,8 @@ public class HashSkipTileQuadTree<T> {
 			}
 		}
 	}
+	
+	
 
 	public int build() {
 		if (modified != null) {
@@ -499,6 +501,10 @@ public class HashSkipTileQuadTree<T> {
 	public ZoomBucket getZoomBucket(int z) {
 		checkIsBuilt();
 		return zoomBuckets[z];
+	}
+	
+	public boolean isBuilt() {
+		return modified != null;
 	}
 
 	private void checkIsBuilt() {

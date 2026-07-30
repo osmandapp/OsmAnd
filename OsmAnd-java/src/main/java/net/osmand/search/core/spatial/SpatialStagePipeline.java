@@ -31,7 +31,7 @@ public class SpatialStagePipeline {
     
 	public static int EXCLUDE_MASKS = 8000; // speed up
 	public static boolean CHECK_EXCLUDED = false;
-    public static int MAX_STEPS = 5; // 1 - fully covered, 2 - 1 intersecction ,...
+    public static int MAX_STEPS = 3; // 1 - fully covered, 2 - 1 intersecction ,...
 
     public SpatialStagePipeline(SpatialSearchContext ctx) {
         this.ctx = ctx;
@@ -415,6 +415,31 @@ public class SpatialStagePipeline {
 	    public boolean isComputed() {
 	        return resObjectsByMasks != null;
 	    }
+	    
+	    public HashSkipTileQuadTree<SpatialObjectRes> ensureTreeBuilt() {
+	        if (resTree == null && resObjectsByMasks != null && !resObjectsByMasks.isEmpty()) {
+	            resTree = new HashSkipTileQuadTree<>();
+	            long[] masks = resObjectsByMasks.keys();
+	            for (int i = 0; i < masks.length; i++) {
+	                List<SpatialObjectRes> list = resObjectsByMasks.get(masks[i]);
+	                if (list != null) {
+	                    for (int j = 0; j < list.size(); j++) {
+	                        SpatialObjectRes obj = list.get(j);
+	                        int[] bb = obj.mainAtom1.coords.bbox31;
+	                        int[] clippedBBox = new int[] { bb[0], bb[1], bb[2], bb[3] };
+	                        if (obj.mainAtom2 != null) {
+	                            SpatialSearchResultsList.clipBbox(clippedBBox, obj.mainAtom2.coords.bbox31);
+	                        }
+	                        resTree.addObject(obj, clippedBBox, obj.mainAtom1.id);
+	                    }
+	                }
+	            }
+	        }
+	        if (resTree != null && !resTree.isEmpty() && !resTree.isBuilt()) {
+	            resTree.build();
+	        }
+	        return resTree;
+	    }
 
 	    public boolean isEmpty() {
 	        if (resObjectsByMasks != null) {
@@ -550,18 +575,21 @@ public class SpatialStagePipeline {
 	    if (b == null || b.isEmpty()) {
 	        return;
 	    }
+
+	    // 1. Уже материализован — просто забираем полные совпадения (без геометрии)
 	    if (b.isComputed()) {
 	        collectFullCoverageResults(b, res, prep.tokens.size());
 	        return;
 	    }
+
+	    // 2. Бакет D=1 (Edge): помечаем его материализованным, не строя resTree!
 	    if (b.parent == null) {
-	    	if (b.resTree != null && !b.resTree.isEmpty()) {
-	            b.resTree.build(); 
-	        }
-	        b.markComputed(b.resTree, b.resObjectsByMasks);
+	        b.markComputed(null, b.resObjectsByMasks);
 	        collectFullCoverageResults(b, res, prep.tokens.size());
 	        return;
 	    }
+
+	    // 3. Рекурсивно гарантируем материализацию операндов
 	    if (!b.parent.isComputed()) {
 	        compute(b.parent, res, prep);
 	    }
@@ -569,10 +597,11 @@ public class SpatialStagePipeline {
 	        compute(b.singleEdgeGroup, res, prep);
 	    }
 
-	    HashSkipTileQuadTree<SpatialObjectRes> parentTree = b.parent.resTree;
-	    HashSkipTileQuadTree<SpatialObjectRes> edgeTree = b.singleEdgeGroup.resTree;
+	    // 4. ТРЕБУЕМ построения QuadTree ТОЛЬКО СЕЙЧАС (Strictly On-Demand for Join)!
+	    HashSkipTileQuadTree<SpatialObjectRes> parentTree = b.parent.ensureTreeBuilt();
+	    HashSkipTileQuadTree<SpatialObjectRes> edgeTree = b.singleEdgeGroup.ensureTreeBuilt();
 
-	    HashSkipTileQuadTree<SpatialObjectRes> resTree = new HashSkipTileQuadTree<>();
+	    HashSkipTileQuadTree<SpatialObjectRes> resTree = null;
 	    TLongObjectHashMap<List<SpatialObjectRes>> resObjectsByMasks = new TLongObjectHashMap<>();
 
 	    if (parentTree != null && edgeTree != null && !parentTree.isEmpty() && !edgeTree.isEmpty()) {
@@ -594,19 +623,7 @@ public class SpatialStagePipeline {
 	                resObjectsByMasks.put(combinedMask, list);
 	            }
 	            list.add(combinedObj);
-
-	            int[] bb1 = combinedObj.mainAtom1.coords.bbox31;
-	            int[] clippedBBox = new int[] { bb1[0], bb1[1], bb1[2], bb1[3] };
-	            if (combinedObj.mainAtom2 != null) {
-	                SpatialSearchResultsList.clipBbox(clippedBBox, combinedObj.mainAtom2.coords.bbox31);
-	            }
-
-	            resTree.addObject(combinedObj, clippedBBox, -1);
 	        });
-
-	        if (!resTree.isEmpty()) {
-	            resTree.build();
-	        }
 	    }
 	    b.markComputed(resTree, resObjectsByMasks);
 	    if (!b.getChildren().isEmpty()) {
@@ -632,12 +649,12 @@ public class SpatialStagePipeline {
 	}
 	
 	private static class MaskGroupInfo {
-	    final long mask;
+//	    final long mask;
 	    int count;
-	    List<SpatialObjectRes> objects; // Заполняется только на D=1
+	    List<SpatialObjectRes> objects; 
 
 	    MaskGroupInfo(long mask, int count, List<SpatialObjectRes> objects) {
-	        this.mask = mask;
+//	        this.mask = mask;
 	        this.count = count;
 	        this.objects = objects;
 	    }
@@ -684,41 +701,33 @@ public class SpatialStagePipeline {
 	}
 	
 	private SpatialObjectsBucket createBucketNode(SpatialObjectsBucket parent, SpatialObjectsBucket singleEdgeGroup,
-			int edgeIndex) {
-		if (parent == null) {
-			SpatialObjectsBucket b = new SpatialObjectsBucket(edgeIndex);
-			b.potentialMasks = new TLongHashSet();
-			b.resTree = new HashSkipTileQuadTree<>();
-			b.resObjectsByMasks = new TLongObjectHashMap<>();
-			return b;
-		} else {
-			return new SpatialObjectsBucket(parent, singleEdgeGroup, new TLongHashSet(), edgeIndex);
-		}
+	        int edgeIndex) {
+	    if (parent == null) {
+	        SpatialObjectsBucket b = new SpatialObjectsBucket(edgeIndex);
+	        b.potentialMasks = new TLongHashSet();
+	        b.resObjectsByMasks = new TLongObjectHashMap<>();
+	        return b;
+	    } else {
+	        return new SpatialObjectsBucket(parent, singleEdgeGroup, new TLongHashSet(), edgeIndex);
+	    }
 	}
 
 	private void populateBucketMask(SpatialObjectsBucket b, long mask, MaskGroupInfo info) {
-		if (b.potentialMasks == null) {
-			b.potentialMasks = new TLongHashSet();
-		}
-		b.potentialMasks.add(mask);
-		if (info.objects != null && !info.objects.isEmpty()) {
-			if (b.resObjectsByMasks == null)
-				b.resObjectsByMasks = new TLongObjectHashMap<>();
-			if (b.resTree == null)
-				b.resTree = new HashSkipTileQuadTree<>();
-
-			List<SpatialObjectRes> list = b.resObjectsByMasks.get(mask);
-			if (list == null) {
-				list = new ArrayList<>(info.objects.size());
-				b.resObjectsByMasks.put(mask, list);
-			}
-			list.addAll(info.objects);
-
-			for (int i = 0; i < info.objects.size(); i++) {
-				SpatialObjectRes obj = info.objects.get(i);
-				b.resTree.addObject(obj, obj.mainAtom1.coords.bbox31, obj.mainAtom1.id);
-			}
-		}
+	    if (b.potentialMasks == null) {
+	        b.potentialMasks = new TLongHashSet();
+	    }
+	    b.potentialMasks.add(mask);
+	    if (info.objects != null && !info.objects.isEmpty()) {
+	        if (b.resObjectsByMasks == null) {
+	            b.resObjectsByMasks = new TLongObjectHashMap<>();
+	        }
+	        List<SpatialObjectRes> list = b.resObjectsByMasks.get(mask);
+	        if (list == null) {
+	            list = new ArrayList<>(info.objects.size());
+	            b.resObjectsByMasks.put(mask, list);
+	        }
+	        list.addAll(info.objects);
+	    }
 	}
 
 	private void finalizeAndAddBucket(SpatialObjectsBucket parent, SpatialObjectsBucket bucket,
