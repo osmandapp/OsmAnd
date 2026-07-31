@@ -47,6 +47,11 @@ class SearchScopeChip @JvmOverloads constructor(
 	private var scopeName by mutableStateOf<String?>(null)
 	private var nightMode by mutableStateOf(false)
 
+	init {
+		isClickable = false
+		isFocusable = false
+	}
+
 	fun setScopeName(scopeName: CharSequence?, nightMode: Boolean) {
 		val name = scopeName?.toString()
 		this.scopeName = name
