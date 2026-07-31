@@ -497,10 +497,11 @@ public class SpatialSearchTestAndDocs {
 //		settings.DEV_USE_PIPELINE = false;
 //		location = new LatLon(39.7412, -8.8012); // Barreira Urbanização Vale da Cabrita
 		// MATCH: Search Stats 5392.4 ms (read 11,248 KB) - 4979.9 ms 305,862 atoms (read 330.2, match 2981.5, poi 490.6), 361.8 ms compute 5,499 (loadBld 3.6, read 2.9)
-		settings.MAX_PIPELINE_RES_TO_STOP = new int[] {100};
+		settings.MAX_PIPELINE_RES_TO_STOP = new int[] {10};
+		settings.PIPELINE_MAX_STEPS = 10;
 //		query = "Travessa de Santo António Rua Joaquim Ribeiro de Carvalho Portugal"; // 1
-//		query = "Travessa Santo António Rua Joaquim Ribeiro Portugal "; // 1
-		query = "Travessa Santo António Rua Joaquim Ribeiro Portugal "; // 20
+		query = "Travessa Santo António Rua Joaquim Ribeiro Carvalho Portugal "; // 1
+//		query = "Travessa Santo António Rua Joaquim Ribeiro Portugal "; // 20
 		
 //		pattern = "France_ile-de-france";
 //		pattern = "France_";

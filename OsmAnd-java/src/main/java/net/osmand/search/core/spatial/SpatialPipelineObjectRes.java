@@ -163,9 +163,7 @@ public class SpatialPipelineObjectRes {
 		mask2 >>= 4;
 		int shift = 4;
 		while (mask1 != 0 || mask2 != 0) {
-			shift += 2;
-			mask1 >>= 2;
-			mask2 >>= 2;
+			
 			long state1 = mask1 & 3L;
 			long state2 = mask2 & 3L;
 			long finalState;
@@ -177,6 +175,9 @@ public class SpatialPipelineObjectRes {
 				finalState = STATE_NO_MATCH;
 			}
 			result |= (finalState << shift);
+			mask1 >>= 2;
+			mask2 >>= 2;
+			shift += 2;
 		}
 		return result;
 	}

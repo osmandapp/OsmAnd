@@ -178,7 +178,7 @@ public class SpatialTextSearch {
 		public int[] MAX_PIPELINE_RES_TO_STOP = new int[] {50, 3, 1};
 //		public int[] MAX_PIPELINE_RES_TO_STOP = new int[] {1}; // just 1 result to stop
 		public int PIPELINE_FREQUENT_OBJECTS_THRESHOLD = 5000;
-	    public int PIPELINE_MAX_VIRTUAL_MASKS = 1;
+	    public int PIPELINE_MAX_VIRTUAL_MASKS = 10;
 		
 		
 		public double evalEnlargeBoundary(Map<Integer, Double> mp, double dim) {

@@ -218,15 +218,17 @@ public class SpatialPipelineSearch {
 	    public String toString() {
 			StringBuilder sb = new StringBuilder("Bucket [" + depth + "] {count=");
 	        sb.append(getMasksCount());
-	        if (resObjectsByMasks != null) {
-	            int totalObjs = 0;
-	            for (List<?> list : resObjectsByMasks.valueCollection()) {
-	                if (list != null) {
-	                    totalObjs += list.size();
-	                }
-	            }
-	            sb.append(", objs=").append(totalObjs);
-	        }
+			long totalObjs = 0;
+			if (resObjectsByMasks != null) {
+				for (List<?> list : resObjectsByMasks.valueCollection()) {
+					totalObjs += list.size();
+				}
+			} else if (potentialMasks != null) {
+				for (MaskGroupInfo list : potentialMasks.map.valueCollection()) {
+					totalObjs += list.count;
+				}
+			}
+	        sb.append(", objs=").append(totalObjs);
 	        sb.append(", masks=[");
 	        TLongObjectHashMap<?> masks = getMaskMaps();
 	        if (masks != null) {
@@ -375,6 +377,7 @@ public class SpatialPipelineSearch {
 	        return;
 	    }
 		int totalTokens = ctx.tokens.size();
+		boolean splitByFreq = toSplit.parent == null;
 		boolean split = false;
 		MasksGroupInfo pMasks = toSplit.potentialMasks;
 		if (!toSplit.isComputed()) {
@@ -382,11 +385,11 @@ public class SpatialPipelineSearch {
 				split = true;
 			} else if (ctx.settings.PIPELINE_MAX_VIRTUAL_MASKS < pMasks.map.size()) {
 				split = true;
-			} else if (ctx.settings.PIPELINE_FREQUENT_OBJECTS_THRESHOLD < pMasks.totalCounts()) {
+			} else if (splitByFreq && ctx.settings.PIPELINE_FREQUENT_OBJECTS_THRESHOLD < pMasks.totalCounts()) {
 				split = true;
 			}
 		}
-		if (!split) {
+		if (!split || toSplit.parent != null) {
 			finalizeAndAddBucket(toSplit, outputList);
 			return;
 		}
@@ -396,13 +399,20 @@ public class SpatialPipelineSearch {
 		for (int i = 0; i < masks.length; i++) {
 			long mask = masks[i];
 			boolean isFullCovered = (SpatialPipelineObjectRes.countCoveredTokens(mask) == totalTokens);
-			SpatialObjectsBucket bucket = isFullCovered ? fullCoveredBucket : combinedRareBucket;
+			boolean single = splitByFreq && pMasks.map.get(mask).count > ctx.settings.PIPELINE_FREQUENT_OBJECTS_THRESHOLD;
+			if (single) {
+				SpatialObjectsBucket bucket = new SpatialObjectsBucket(toSplit);
+				bucket.potentialMasks.map.put(mask, pMasks.map.get(mask));
+				finalizeAndAddBucket(bucket, outputList);
+				continue;
+			}
 			
+			SpatialObjectsBucket bucket = isFullCovered ? fullCoveredBucket : combinedRareBucket;
 			bucket.potentialMasks.map.put(mask, pMasks.map.get(mask));
 			boolean close = false;
 			if (bucket.getMasksCount() >= ctx.settings.PIPELINE_MAX_VIRTUAL_MASKS) {
 				close = true;
-			} else if (bucket.potentialMasks.totalCounts() >= ctx.settings.PIPELINE_FREQUENT_OBJECTS_THRESHOLD) {
+			} else if (splitByFreq && bucket.potentialMasks.totalCounts() >= ctx.settings.PIPELINE_FREQUENT_OBJECTS_THRESHOLD) {
 				close = true;
 			}
 			if (close) {
@@ -429,7 +439,7 @@ public class SpatialPipelineSearch {
 
 	long CROSS_INTERSECT_MAX = 50; // almost never intersect more
 	private void computeChildrenMasksCross(SpatialObjectsBucket bucket, List<SpatialObjectsBucket> edges,
-			List<SpatialObjectsBucket> nextLevel, boolean recompute) {
+			List<SpatialObjectsBucket> nextLevel) {
 		TLongObjectHashMap<?> parentMasks = bucket.getMaskMaps();
 		if (parentMasks == null) {
 //			computeMasksCross(b, edges, null, prep, false);
@@ -453,14 +463,15 @@ public class SpatialPipelineSearch {
 		if (bucket.isComputed()) {
 			return;
 		}
+		int masks = bucket.potentialMasks.map.size();
 		bucket.potentialMasks.map.clear();
-		TLongObjectIterator<?> eIterator = bucket.edge.getMaskMaps().iterator();
 		TLongObjectIterator<?> pIterator = bucket.parent.getMaskMaps().iterator();
 		while (pIterator.hasNext()) {
 			pIterator.advance();
+			long pMask = pIterator.key();
+			TLongObjectIterator<?> eIterator = bucket.edge.getMaskMaps().iterator();
 			while (eIterator.hasNext()) {
 				eIterator.advance();
-				long pMask = pIterator.key();
 				long eMask = eIterator.key();
 				ctx.metrics.maskPairsEval++;
 				if (!SpatialPipelineObjectRes.allowed(pMask, eMask)) {
@@ -475,6 +486,7 @@ public class SpatialPipelineSearch {
 				bucket.potentialMasks.add(combinedMask, estCross);
 			}
 		}
+		ctx.metrics.maskDelta += (bucket.potentialMasks.map.size() - masks);
 		if (bucket.children != null) {
 			for (SpatialObjectsBucket ch : bucket.children) {
 				computeMaskCross(ch);
@@ -546,7 +558,7 @@ public class SpatialPipelineSearch {
 			return true;
 		}
 		List<SpatialSearchResult> res = stageList.sortResults(ctx.searchContext, ctx.settings.DEDUPLICATE_RES);
-		int tsize = ctx.tokens.size();
+		int tsize = tokens.size();
 		for (SpatialSearchResult r : res) {
 			if (!r.isPoiCategory() && r.surplusWords + r.matchedTokens() == tsize) {
 				nonCategoryRes++;
@@ -605,7 +617,7 @@ public class SpatialPipelineSearch {
 				ctx.metrics.masksComputeTimer.start();
 				List<SpatialObjectsBucket> nextLevel = new ArrayList<>();
 				for (SpatialObjectsBucket b : currentLevel) {
-					computeChildrenMasksCross(b, ctx.initBuckets, nextLevel, false);
+					computeChildrenMasksCross(b, ctx.initBuckets, nextLevel);
 				}
 				ctx.metrics.logMasksCross(ctx, currentLevel, nextLevel, depth);
 				currentLevel = nextLevel;
@@ -682,7 +694,8 @@ public class SpatialPipelineSearch {
 		boolean doTiming = true;
 		Timer prepareTimer = new Timer();
 		Timer masksComputeTimer = new Timer();
-		long maskPairsEval, maskPairsAllowed;
+		long maskPairsEval, maskPairsAllowed, maskDelta;
+		Timer recalcMasks = new Timer();
 		
 		Timer geoComputeTimer = new Timer();
 
@@ -692,7 +705,6 @@ public class SpatialPipelineSearch {
 		int joins = 0;
 		long joinCross = 0;
 		
-		Timer recalcMasks = new Timer();
 		long pairsChecked, pairsAccepted;
 		
 	    
@@ -709,12 +721,15 @@ public class SpatialPipelineSearch {
 			geoComputeTimer.finish();
 			if (ctx.stats.printLogs) {
 				String s = String.format(
-						"Tree Built %,d (%.1f ms) | Joins %,d (%.1f ms) | Cross objs %,dK, check %,d, accept %,d | Prune (%.1f ms)",
-						tree, treeBuild.ms(), joins, join.ms(), joinCross / 1024, pairsChecked, pairsAccepted, recalcMasks.ms());
+						"Tree Built %,d (%.1f ms) | Joins %,d (%.1f ms) | Cross objs %,dK, check %,d, accept %,d | Prune (%.1f ms) %,d del masks: %,d eval -> %,d accept ",
+						tree, treeBuild.ms(), joins, join.ms(), joinCross / 1024, pairsChecked, pairsAccepted, recalcMasks.ms(), maskDelta, maskPairsEval, maskPairsAllowed);
 				System.out.printf(
 						"PIPELINE %d GEO CROSS (%.1f ms) - %,d RESULTS | %,d (%,d full) Buckets | %s\n",
 						level, geoComputeTimer.ms(), resCount, buckets.size(), fcCount, s);
 			}
+			maskPairsEval = 0;
+			maskPairsAllowed = 0;
+			maskDelta = 0;
 		}
 		
 		
@@ -726,6 +741,9 @@ public class SpatialPipelineSearch {
 						stage, masksComputeTimer.ms(), currentLevel.size(), nextLevel.size(), countMasks(currentLevel),
 						countMasks(nextLevel), maskPairsEval, maskPairsAllowed);
 			}
+			maskPairsEval = 0;
+			maskPairsAllowed = 0;
+			maskDelta = 0;
 		}
 
 		public void logPrepareTime(SpatialPipelineContext ctx) {
@@ -747,7 +765,7 @@ public class SpatialPipelineSearch {
 			geoComputeTimer.reset();
 			masksComputeTimer.reset();
 			joinCross = pairsChecked = pairsAccepted = 0;
-			maskPairsEval = maskPairsAllowed = 0;
+			maskDelta = maskPairsEval = maskPairsAllowed = 0;
 		}
 	    
 	    
