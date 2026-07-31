@@ -52,6 +52,16 @@ public class SpatialPipelineObjectRes {
 		}
 		setAtom(atom, tokenIdx);
 	}
+	
+	public long calculateMaskByTokens() {
+		long mask  = 0;
+		for (int i = 0; i < atoms.length; i++) {
+			if (atoms[i] != null) {
+				mask = setTokenState(mask, i, STATE_EXACT_MATCH);
+			}
+		}
+		return mask;
+	}
 
 	public SpatialPipelineObjectRes(long mask, SpatialPipelineObjectRes s1, SpatialPipelineObjectRes s2) {
 		atoms = new NameIndexAtom[s1.atoms.length];

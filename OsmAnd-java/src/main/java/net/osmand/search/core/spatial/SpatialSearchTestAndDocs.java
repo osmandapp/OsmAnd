@@ -434,7 +434,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "Shell 2 Rožňavská";
 		
 //		pattern = "Us_new-york_new"; // new-york, new-jersey
-		pattern = "Us_new-"; 
+//		pattern = "Us_new-"; 
 //		pattern = "Us_"; 
 //		location = new LatLon(40.78035, -73.96572); // central park
 //		location = new LatLon(40.64946, -74.00682); // brooklyn
@@ -446,11 +446,11 @@ public class SpatialSearchTestAndDocs {
 		// 40.78035, -73.96572 - unit test '4th av', '4 ave', '4th avenue'  - 85393997 Park avenue
 //		settings.OPTIM_LIMIT_INTERSECTIONS = 100_000;
 //		settings.DEV_USE_PIPELINE = false;
-		settings.MAX_PIPELINE_RES_TO_STOP = new int[] {1000};
+//		settings.MAX_PIPELINE_RES_TO_STOP = new int[] {1000};
 //		query = "New York 4 av 8";
 //		query = "New York av 8";
 //		query = "4 ave 8";
-		query = "New York 4 av"; // 160947243
+//		query = "New York 4 av"; // 160947243
 //		query = "57th street"; // central park - 265345338 east, 86216906 west, (266926268 (west)?),
 //		query = "57 street"; // central park - 265345338 east, 86216906 west, (26926268 (west)?),
 //		query = "new york 57th street manhattan";
@@ -493,13 +493,14 @@ public class SpatialSearchTestAndDocs {
 //		query = "Venezia";
 		
 		
-//		pattern = "Portugal";
+		pattern = "Portugal";
 //		settings.DEV_USE_PIPELINE = false;
 //		location = new LatLon(39.7412, -8.8012); // Barreira Urbanização Vale da Cabrita
 		// MATCH: Search Stats 5392.4 ms (read 11,248 KB) - 4979.9 ms 305,862 atoms (read 330.2, match 2981.5, poi 490.6), 361.8 ms compute 5,499 (loadBld 3.6, read 2.9)
-//		query = "Travessa de Santo António Rua Joaquim Ribeiro de Carvalho Portugal";
-//		query = "Travessa Santo António Rua Joaquim Ribeiro Carvalho Portugal ";
-//		query = "Travessa Santo António Joaquim Ribeiro Portugal ";
+		settings.MAX_PIPELINE_RES_TO_STOP = new int[] {100};
+//		query = "Travessa de Santo António Rua Joaquim Ribeiro de Carvalho Portugal"; // 1
+//		query = "Travessa Santo António Rua Joaquim Ribeiro Portugal "; // 1
+		query = "Travessa Santo António Rua Joaquim Ribeiro Portugal "; // 20
 		
 //		pattern = "France_ile-de-france";
 //		pattern = "France_";
@@ -509,9 +510,10 @@ public class SpatialSearchTestAndDocs {
 //		query = "Rue Jean Poulmarch 17bis"; //  17bis OK, 17 OK, 17 BIS - OK 'Rue Jean Poulmarch 17;17 bis' 
 //		query = "Dieu 8-bis"; // 'Rue Dieu 8 bis' , '8-bis', '8 bis'
 		// too many results
+//		settings.DEV_USE_PIPELINE = true;
 //		query = "rue de l'eglise"; // specific search - "rue de l'eglise", non specific "rue de"
 //		query = "rue de la fen."; // all strets
-//		query = "de la"; // "de la", "rue de la" only common words + high rating
+//		query = "rue de la"; // "de la", "rue de la" only common words + high rating
 //		query = "rû bas du rue";
 		
 //		pattern = "Us_cal";
