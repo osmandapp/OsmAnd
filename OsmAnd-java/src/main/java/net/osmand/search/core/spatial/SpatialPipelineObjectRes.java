@@ -1,6 +1,7 @@
 package net.osmand.search.core.spatial;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import gnu.trove.list.array.TLongArrayList;
@@ -23,6 +24,7 @@ public class SpatialPipelineObjectRes {
 	// ALLOWED &: 0000, 0011, 1100, 1111,
 
 	public final NameIndexAtom[] atoms;
+	public final int[] bbox;
 	public NameIndexAtom mainAtom1;
 	public NameIndexAtom mainAtom2;
 
@@ -31,6 +33,7 @@ public class SpatialPipelineObjectRes {
 
 	public SpatialPipelineObjectRes(int tCount, NameIndexAtom atom, int index) {
 		atoms = new NameIndexAtom[tCount];
+		bbox = atom.coords.bbox31;
 		mainAtom1 = atom;
 		int atomic = atom.atomicObject() ? 3 : 0;
 		if (atom.atomicObject() && atom.sameNameAreaObj != null) {
@@ -42,6 +45,31 @@ public class SpatialPipelineObjectRes {
 		}
 		mainMask = atomic | (category << 2);
 		setAtom(atom, index);
+	}
+	
+
+	public SpatialPipelineObjectRes(long mask, SpatialPipelineObjectRes s1, SpatialPipelineObjectRes s2) {
+		atoms = new NameIndexAtom[s1.atoms.length];
+		this.mainMask = mask;
+		this.bbox = new int[] { s1.bbox[0], s1.bbox[1], s1.bbox[2], s1.bbox[3] };
+		SpatialSearchResultsList.clipBbox(this.bbox, s2.bbox);
+		
+		for (int i = 0; i < atoms.length; i++) {
+			NameIndexAtom a1 = s1.atoms[i];
+			NameIndexAtom a2 = s2.atoms[i];
+			if (a1 != null && !a1.isPOIRef() && !a1.isBuilding()) {
+				atoms[i] = a1;
+				mainAtom1 = a1;
+			} else if (a2 != null && !a2.isPOIRef() && !a2.isBuilding()) {
+				// couldn't be both same time
+				atoms[i] = a2;
+				mainAtom2 = a2;
+			} else if (a1 != null) {
+				atoms[i] = a1;
+			} else if (a2 != null) {
+				atoms[i] = a2;
+			}
+		}
 	}
 
 	public void mergeSame(NameIndexAtom atom, int tokenIdx) {
@@ -63,26 +91,6 @@ public class SpatialPipelineObjectRes {
 		return mask;
 	}
 
-	public SpatialPipelineObjectRes(long mask, SpatialPipelineObjectRes s1, SpatialPipelineObjectRes s2) {
-		atoms = new NameIndexAtom[s1.atoms.length];
-		this.mainMask = mask;
-		for (int i = 0; i < atoms.length; i++) {
-			NameIndexAtom a1 = s1.atoms[i];
-			NameIndexAtom a2 = s2.atoms[i];
-			if (a1 != null && !a1.isPOIRef() && !a1.isBuilding()) {
-				atoms[i] = a1;
-				mainAtom1 = a1;
-			} else if (a2 != null && !a2.isPOIRef() && !a2.isBuilding()) {
-				// couldn't be both same time
-				atoms[i] = a2;
-				mainAtom2 = a2;
-			} else if (a1 != null) {
-				atoms[i] = a1;
-			} else if (a2 != null) {
-				atoms[i] = a2;
-			}
-		}
-	}
 
 	void setAtom(NameIndexAtom atom, int index) {
 		atoms[index] = atom;
@@ -175,42 +183,48 @@ public class SpatialPipelineObjectRes {
 	 * Accommodates the 2-bits-per-token indexing scheme.
 	 */
 	static String formatMaskTokens(long mask, List<SpatialSearchToken> tokens) {
-		List<String> res = new ArrayList<String>();
 		long atomicState = mask & 3L;
+		StringBuilder sb = new StringBuilder();
+		sb.append("_");
 		if (atomicState == 3L) { // 11
-			res.add("A1");
+			sb.append("A1");
 		} else if (atomicState == 1L) { // 01
-			res.add("A2");
+			sb.append("A2");
 		} else if (atomicState == 0L) { // 01
-//			res.add("A0");
+			sb.append("A0");
 		} else if (atomicState == 2L) { // 01
-			res.add("ABUG");
+			sb.append("BG");
 		}
 		long poiState = (mask >> 2) & 3L;
 		if (poiState == 3L) { // 11
-			res.add("POI");
+			sb.append("PO");
 		} else if (poiState == 1L) { // 01
-			res.add("POICAT");
+			sb.append("PC");
 		} else if (atomicState == 2L) { // 01
-			res.add("POIBUG");
-		} 
-
-		int maxTokens = MAX_SUPPORTED_TOKENS; // 30 tokens
-
-		for (int tokenIndex = 0; tokenIndex < maxTokens; tokenIndex++) {
-			int bitShift = 4 + (tokenIndex * 2);
-			long tokenState = (mask >> bitShift) & 3L;
-			if (tokenState != STATE_NO_MATCH) {
-				String symbol = tokenState == 1 ? "W" : "B";
-				if (tokens != null && tokenIndex < tokens.size() && tokens.get(tokenIndex) != null) {
-					String word = tokens.get(tokenIndex).word;
-					res.add(word != null ? word : symbol + tokenIndex);
-				} else {
-					res.add(symbol + tokenIndex);
-				}
-			}
+			sb.append("BG");
+		}  else {
+			sb.append("__");
 		}
-		return res.toString();
+		sb.append("_");
+		int maxTokens = MAX_SUPPORTED_TOKENS; // 30 tokens
+		mask = mask >> 4;
+		int c = 0;
+		for (int tokenIndex = 0; tokenIndex < maxTokens & mask != 0; tokenIndex++) {
+			long tokenState = mask & 3L;
+			String symbol = "_";
+			mask >>= 2;
+			if (tokenState != STATE_NO_MATCH) {
+				c++;
+				symbol = tokenState == 1 ? "W" : "B";
+			}
+			sb.append(symbol);
+		}
+		return c + sb.toString();
+	}
+
+	@Override
+	public String toString() {
+		return formatMaskTokens(mainMask, null) + " " + Arrays.toString(atoms);
 	}
 
 }
