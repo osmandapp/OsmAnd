@@ -60,7 +60,7 @@ public abstract class WikiArticleBaseDialogFragment extends WikiBaseDialogFragme
 			"(<img\\b[^>]*?\\bsrc\\s*=\\s*)([\"'])(.*?)\\2",
 			Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 	private static final Pattern LEGACY_WIKIMEDIA_THUMBNAIL_PATTERN = Pattern.compile(
-			"((?:https?:)?//upload\\.wikimedia\\.org/[^\\s\"'<>)]*/)320px-",
+			"((?:https?:)?//upload\\.wikimedia\\.org/[^\\s\"'<>]*?/)320px-",
 			Pattern.CASE_INSENSITIVE);
 	private static final String WIKIMEDIA_THUMBNAIL_SIZE = "330px-";
 	private static final Map<String, String> HEADER_IMAGE_URL_CACHE = new ConcurrentHashMap<>();
