@@ -94,6 +94,7 @@ public class Amenity extends MapObject {
 	public static final String DIFF_ELE_DOWN = "diff_ele_down";
 	public static final String DIFF_ELE_UP = "diff_ele_up";
 	public static final String ALT_NAME_TAG = "short";
+	public static final String ISLAND = "island";
 
 	private String subType;
 	private PoiCategory type;
@@ -763,6 +764,16 @@ public class Amenity extends MapObject {
 
 	public boolean isRouteArticle() {
 		return Algorithms.stringsEqual(ROUTE_ARTICLE, subType);
+	}
+	
+	public boolean isIsland() {
+		String[] split = subType.split(";");
+		for (String s : split) {
+			if (Algorithms.stringsEqual(ISLAND, s)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public boolean isSuperRoute() {
