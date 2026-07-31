@@ -5620,4 +5620,5 @@
     <string name="astro_loading_lunar_eclipse">Wereldwijde maansverduistering berekenen</string>
     <string name="astro_lunar_eclipse_load_error">Het lukte niet om deze maansverduistering te berekenen.</string>
     <string name="astro_total_lunar_eclipse">Totale maansverduistering</string>
+    <string name="astro_partial_lunar_eclipse">Gedeeltelijke maansverduistering</string>
 </resources>

@@ -5334,4 +5334,5 @@
     <string name="traffic_warning_red_light_camera">Telecamera semaforica</string>
     <string name="always_keep_local_copy">Conserva sempre una copia locale</string>
     <string name="always_keep_local_copy_description">Il file multimediale rimane allegato anche se l\'originale viene eliminato dalla galleria o dai file.</string>
+    <string name="use_spatial_text_search">Utilizza la ricerca testuale spaziale</string>
 </resources>
