@@ -296,7 +296,7 @@ public class SpatialPipelineStats {
 				if (!SpatialPipelineObjectRes.allowed(maskA, maskB)) {
 					continue;
 				}
-				long combined = SpatialPipelineObjectRes.combine2BitMasks(maskA, maskB, totalTokens);
+				long combined = SpatialPipelineObjectRes.combine2BitMasks(maskA, maskB);
 				TLongHashSet bIds = maskFreqs.get(maskB);
 				int coveredAB = SpatialPipelineObjectRes.countCoveredTokens(combined);
 				
@@ -313,7 +313,7 @@ public class SpatialPipelineStats {
 	                if (!SpatialPipelineObjectRes.allowed(combined, maskC)) {
 						continue;
 					}
-	                long combinedABC = SpatialPipelineObjectRes.combine2BitMasks(combined, maskC, totalTokens);
+	                long combinedABC = SpatialPipelineObjectRes.combine2BitMasks(combined, maskC);
 	                TLongHashSet cIds = maskAreaFreqs.get(maskC);
 	                int coveredABC = SpatialPipelineObjectRes.countCoveredTokens(combinedABC);
 	                

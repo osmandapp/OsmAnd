@@ -495,7 +495,8 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	public static String compareKeyString(SpatialSearchResult o) {
 		int e = (o.getTotalRating() - o.parent.MIN_ELO_RATING) / 64;
 		String elo = e > 0 ? "-"+e+"elo" : "";
-		return String.format("t%d+%d-w%d-oth%d%s-tp%d", o.parent.tCount, o.surplusWords, o.objs.size(), 
+		String sw = o.surplusWords >= 0 ? ("+" + o.surplusWords) : ("" + o.surplusWords);
+		return String.format("t%d%s-w%d-oth%d%s-tp%d", o.parent.tCount, sw, o.objs.size(), 
 				Math.min(o.sumOther(), 3), elo, o.sumTypeOrder());
 	}
 	

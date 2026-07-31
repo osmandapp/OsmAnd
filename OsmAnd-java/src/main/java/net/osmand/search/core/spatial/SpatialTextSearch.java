@@ -151,7 +151,7 @@ public class SpatialTextSearch {
 		// 2. If object does have other common words and they are not in query - skip it
 		// Problem search: School On Street - some schools have specifiers and some don't
 		// Below limit add all possible objects  
-		public int OPTIM_READ_COMMON_WORDS_LIMIT = 200_000; // 2000
+		public int OPTIM_READ_COMMON_WORDS_LIMIT = 200_000; // 2000 -> 2500
 		public boolean OPTIM_READ_COMMON_WITH_OTH_NON_FOUND_ATOMS = true;
 		public boolean OPTIM_READ_POI_CATEGORY_WORD_ATOMS = true;
 		// do not filter objects with such rating from results
@@ -411,7 +411,6 @@ public class SpatialTextSearch {
 				}
 				uniqueObjects += uniq;
 				fullResult.add(goalRes);
-				
 			}
 			if (uniqueObjects >= ctx.settings.LIMIT_STOP_GOALS_LEVEL_1__WHEN_REACHED_RES && depth1WithResults == 0) {
 				depth1WithResults = goal.length();
@@ -691,9 +690,6 @@ public class SpatialTextSearch {
 			int sz = 0;
 			for (SpatialSearchResult r : res.mainResults) {
 				sz++;
-				if (r.toString().contains("649331066")) {
-					System.out.println(r);
-				}
 				if (r.visibleLevel != level) {
 					level++;
 					System.out.printf("### %d - NEXT LEVEL %d (%s). "

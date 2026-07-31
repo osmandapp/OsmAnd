@@ -63,6 +63,18 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 	public SpatialSearchResultsList() {
 		this(null, null, null);
 	}
+	
+	protected SpatialSearchResultsList(SpatialSearchContext ctx, List<SpatialSearchToken> tokensList) {
+	    if (tokensList == null || tokensList.isEmpty()) {
+	        this.tokens = new SpatialSearchToken[0];
+	    } else {
+	        this.tokens = tokensList.toArray(new SpatialSearchToken[0]);
+	    }
+	    if (ctx != null) {
+			MIN_ELO_RATING = ctx.settings.MIN_ELO_RATING;
+		}
+	    this.tCount = this.tokens.length;
+	}
 
 	public SpatialSearchResultsList(SpatialSearchContext ctx, SpatialSearchToken token, SpatialSearchResultsList parent) {
 		if (token == null) {
@@ -75,21 +87,16 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 			}
 		}
 		tCount = tokens.length;
+		if (ctx != null) {
+			MIN_ELO_RATING = ctx.settings.MIN_ELO_RATING;
+		}
 		if (parent != null) {
 			limitIntersection = parent.limitIntersection == -1 ? (ctx.limitLocationBboxes.length) : parent.limitIntersection;
-			MIN_ELO_RATING = ctx.settings.MIN_ELO_RATING;
 			calculateMainIntersection(ctx, token, parent);
 		}
 	}
 	
-	protected SpatialSearchResultsList(List<SpatialSearchToken> tokensList) {
-	    if (tokensList == null || tokensList.isEmpty()) {
-	        this.tokens = new SpatialSearchToken[0];
-	    } else {
-	        this.tokens = tokensList.toArray(new SpatialSearchToken[0]);
-	    }
-	    this.tCount = this.tokens.length;
-	}
+	
 	
 	private void loadObjects(SpatialSearchContext ctx, int type, TLongObjectHashMap<MapObject> cache) throws IOException {
 		TLongObjectHashMap<Long> lstMap = new TLongObjectHashMap<>();

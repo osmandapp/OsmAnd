@@ -1,6 +1,5 @@
 package net.osmand.search.core.spatial;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -134,7 +133,7 @@ public class SpatialPipelineObjectRes {
 		return (mask >> shift) & 3L;
 	}
 
-	public static long combine2BitMasks(long mask1, long mask2, int totalTokens) {
+	public static long combine2BitMasks(long mask1, long mask2) {
 		long result = 0L;
 		int b1 = (int) (mask1 & 3L);
 		int b2 = (int) (mask2 & 3L);
@@ -160,11 +159,15 @@ public class SpatialPipelineObjectRes {
 			combinedPoi = 1;
 		}
 		result |= (combinedPoi << 2) + combinedAtomic;
-		for (int i = 0; i < totalTokens; i++) {
-			int shift = i * 2 + 4;
-			long state1 = (mask1 >> shift) & 3L;
-			long state2 = (mask2 >> shift) & 3L;
-
+		mask1 >>= 4;
+		mask2 >>= 4;
+		int shift = 4;
+		while (mask1 != 0 || mask2 != 0) {
+			shift += 2;
+			mask1 >>= 2;
+			mask2 >>= 2;
+			long state1 = mask1 & 3L;
+			long state2 = mask2 & 3L;
 			long finalState;
 			if (state1 == STATE_EXACT_MATCH || state2 == STATE_EXACT_MATCH) {
 				finalState = STATE_EXACT_MATCH;
