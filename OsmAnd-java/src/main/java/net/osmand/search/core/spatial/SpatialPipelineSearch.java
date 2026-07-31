@@ -444,7 +444,7 @@ public class SpatialPipelineSearch {
 				continue;
 			}
 			SpatialObjectsBucket child = new SpatialObjectsBucket(bucket, edge);
-			computeMaskCross(bucket);
+			computeMaskCross(child);
 			splitBucketIntoSmallBuckets(child, nextLevel);
 		}
 	}
