@@ -37,6 +37,12 @@ public class OpeningHoursParser {
 	private static final int WITHOUT_TIME_LIMIT = -1;
 	private static final int CURRENT_DAY_TIME_LIMIT = -2;
 
+	private static final int NO_NTH_WEEKDAY = 0;
+	private static final int FIRST_NTH_WEEKDAY = 1;
+	private static final int LAST_NTH_WEEKDAY = 5;
+	private static final int DAYS_IN_WEEK = 7;
+	private static final int NTH_WEEKDAY_FROM_END_OFFSET = LAST_NTH_WEEKDAY;
+
 	private static boolean twelveHourFormatting;
 	private static DateFormat twelveHourFormatter;
 	private static DateFormat twelveHourFormatterAmPm;
@@ -1529,17 +1535,18 @@ public class OpeningHoursParser {
 		 * Check if the day of "cal" matches the nth weekday restriction of "day" (like "Su[1]"), if any
 		 */
 		private boolean matchesDayNth(int day, Calendar cal) {
-			if (dayNth[day] == 0) {
+			if (dayNth[day] == NO_NTH_WEEKDAY) {
 				return true;
 			}
 			int mask = dayNth[day];
-			int dmonth = cal.get(Calendar.DAY_OF_MONTH) - 1;
-			int nthFromEnd = (cal.getActualMaximum(Calendar.DAY_OF_MONTH) - 1 - dmonth) / 7;
-			return (mask & (1 << (dmonth / 7))) != 0 || (mask & (1 << (5 + nthFromEnd))) != 0;
+			int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+			int nthFromStart = (dayOfMonth - 1) / DAYS_IN_WEEK + 1;
+			int nthFromEnd = (cal.getActualMaximum(Calendar.DAY_OF_MONTH) - dayOfMonth) / DAYS_IN_WEEK + 1;
+			return hasNthWeekday(mask, nthFromStart) || hasNthWeekday(mask, -nthFromEnd);
 		}
 
 		private boolean matchesPreviousDayNth(int previousDay, Calendar cal) {
-			if (dayNth[previousDay] == 0) {
+			if (dayNth[previousDay] == NO_NTH_WEEKDAY) {
 				return true;
 			}
 			Calendar pcal = (Calendar) cal.clone();
@@ -1574,7 +1581,7 @@ public class OpeningHoursParser {
 						builder.append(", "); //$NON-NLS-1$
 					}
 					builder.append(daysNames[getDayIndex(i)]);
-					if (dayNth[i] != 0) {
+					if (dayNth[i] != NO_NTH_WEEKDAY) {
 						appendNthString(builder, dayNth[i]);
 					}
 					dash = false;
@@ -1609,16 +1616,24 @@ public class OpeningHoursParser {
 		private static void appendNthString(StringBuilder builder, int mask) {
 			builder.append("[");
 			boolean first = true;
-			for (int bit = 0; bit < 10; bit++) {
-				if ((mask & (1 << bit)) != 0) {
-					if (!first) {
-						builder.append(",");
-					}
-					builder.append(bit < 5 ? bit + 1 : 4 - bit);
-					first = false;
-				}
+			for (int nth = FIRST_NTH_WEEKDAY; nth <= LAST_NTH_WEEKDAY; nth++) {
+				first = appendNthValue(builder, mask, nth, first);
+			}
+			for (int nth = -FIRST_NTH_WEEKDAY; nth >= -LAST_NTH_WEEKDAY; nth--) {
+				first = appendNthValue(builder, mask, nth, first);
 			}
 			builder.append("]");
+		}
+
+		private static boolean appendNthValue(StringBuilder builder, int mask, int nth, boolean first) {
+			if (!hasNthWeekday(mask, nth)) {
+				return first;
+			}
+			if (!first) {
+				builder.append(",");
+			}
+			builder.append(nth);
+			return false;
 		}
 
 		/**
@@ -2398,7 +2413,7 @@ public class OpeningHoursParser {
 		for (int i = 0; i < daysStr.length; i++) {
 			if (daysStr[i].equals(day)) {
 				int mask = parseNthMask(t.text.substring(bracket + 1, t.text.length() - 1));
-				if (mask != 0) {
+				if (mask != NO_NTH_WEEKDAY) {
 					t.type = TokenType.TOKEN_DAY_WEEK;
 					t.mainNumber = i;
 					t.nthMask = mask;
@@ -2410,21 +2425,34 @@ public class OpeningHoursParser {
 
 	/**
 	 * Parse an nth weekday list like "1", "-1" or "1,3" into a bit mask:
-	 * bits 0-4 for the 1st-5th weekday of the month, bits 5-9 for the last-5th last one
+	 * positive values count from the month start, negative values count from the month end
 	 */
 	private static int parseNthMask(String list) {
-		int mask = 0;
+		int mask = NO_NTH_WEEKDAY;
 		for (String part : list.split(",")) {
 			int n = Algorithms.parseIntSilently(part.trim(), 0);
-			if (n >= 1 && n <= 5) {
-				mask |= 1 << (n - 1);
-			} else if (n <= -1 && n >= -5) {
-				mask |= 1 << (4 - n);
-			} else {
-				return 0;
+			int nthMask = getNthWeekdayMask(n);
+			if (nthMask == NO_NTH_WEEKDAY) {
+				return NO_NTH_WEEKDAY;
 			}
+			mask |= nthMask;
 		}
 		return mask;
+	}
+
+	private static boolean hasNthWeekday(int mask, int nth) {
+		int nthMask = getNthWeekdayMask(nth);
+		return nthMask != NO_NTH_WEEKDAY && (mask & nthMask) != 0;
+	}
+
+	private static int getNthWeekdayMask(int nth) {
+		if (nth >= FIRST_NTH_WEEKDAY && nth <= LAST_NTH_WEEKDAY) {
+			return 1 << (nth - FIRST_NTH_WEEKDAY);
+		}
+		if (nth <= -FIRST_NTH_WEEKDAY && nth >= -LAST_NTH_WEEKDAY) {
+			return 1 << (NTH_WEEKDAY_FROM_END_OFFSET + (-nth - FIRST_NTH_WEEKDAY));
+		}
+		return NO_NTH_WEEKDAY;
 	}
 
 	private static List<List<String>> splitSequences(String format) {
