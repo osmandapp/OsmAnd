@@ -793,7 +793,7 @@ public class OpeningHoursParser {
 		/**
 		 * nth weekday of the month masks per day (like "Su[1]"), see parseNthMask
 		 */
-		private int[] dayNth = null;
+		private final int[] dayNth = new int[7];
 
 		/**
 		 * represents the list on which month it is open.
@@ -1522,9 +1522,6 @@ public class OpeningHoursParser {
 		}
 
 		void setDayNthMask(int day, int mask) {
-			if (dayNth == null) {
-				dayNth = new int[7];
-			}
 			dayNth[day] = mask;
 		}
 
@@ -1532,7 +1529,7 @@ public class OpeningHoursParser {
 		 * Check if the day of "cal" matches the nth weekday restriction of "day" (like "Su[1]"), if any
 		 */
 		private boolean matchesDayNth(int day, Calendar cal) {
-			if (dayNth == null || dayNth[day] == 0) {
+			if (dayNth[day] == 0) {
 				return true;
 			}
 			int mask = dayNth[day];
@@ -1542,7 +1539,7 @@ public class OpeningHoursParser {
 		}
 
 		private boolean matchesPreviousDayNth(int previousDay, Calendar cal) {
-			if (dayNth == null || dayNth[previousDay] == 0) {
+			if (dayNth[previousDay] == 0) {
 				return true;
 			}
 			Calendar pcal = (Calendar) cal.clone();
@@ -1577,7 +1574,7 @@ public class OpeningHoursParser {
 						builder.append(", "); //$NON-NLS-1$
 					}
 					builder.append(daysNames[getDayIndex(i)]);
-					if (dayNth != null && dayNth[i] != 0) {
+					if (dayNth[i] != 0) {
 						appendNthString(builder, dayNth[i]);
 					}
 					dash = false;
