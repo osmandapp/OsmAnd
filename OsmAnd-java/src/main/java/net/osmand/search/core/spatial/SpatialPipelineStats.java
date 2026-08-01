@@ -254,15 +254,15 @@ public class SpatialPipelineStats {
 				ids = new TLongHashSet();
 				maskFreqs.put(mask, ids);
 			}
-			maskFreqs.get(mask).add(obj.mainAtom1.id);
+			maskFreqs.get(mask).add(obj.mainAtom.id);
 	        objs++;
-			if (obj.mainAtom1.isGeoArea()) {
+			if (obj.mainAtom.isGeoArea()) {
 				ids = maskAreaFreqs.get(mask);
 				if (ids == null) {
 					ids = new TLongHashSet();
 					maskAreaFreqs.put(mask, ids);
 				}
-				maskAreaFreqs.get(mask).add(obj.mainAtom1.id);
+				maskAreaFreqs.get(mask).add(obj.mainAtom.id);
 				areas++;
 			}
 	    }

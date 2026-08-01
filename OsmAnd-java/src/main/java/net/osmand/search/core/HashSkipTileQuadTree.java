@@ -306,6 +306,10 @@ public class HashSkipTileQuadTree<T> {
 		}
 	}
 
+	public void addObject(T obj, int[] bbox31) {
+		addObject(obj, bbox31, -1);
+	}
+	
 	public void addObject(T obj, int[] bbox31, long externalId) {
 		long objId = externalId == -1 ? tileEntries.size() : externalId;
 		addTileEntry(obj, bbox31, objId, getNativeZoom(bbox31));

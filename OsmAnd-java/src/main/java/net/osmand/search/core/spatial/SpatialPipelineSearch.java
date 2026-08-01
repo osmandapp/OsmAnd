@@ -2,13 +2,13 @@ package net.osmand.search.core.spatial;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 import gnu.trove.iterator.TLongObjectIterator;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.hash.TIntHashSet;
+import net.osmand.search.core.HashQuadTree;
 import net.osmand.search.core.HashSkipTileQuadTree;
 import net.osmand.search.core.HashSkipTileQuadTreeJoiner;
 import net.osmand.search.core.spatial.SpatialSearchContext.SpatialSearchStats;
@@ -17,19 +17,18 @@ import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtomXY;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSettings;
 
 // DONE Add non maximum results as well... (surplus words +-) -  germany_remstal!
-// DONE REVIEW
+// DONE enlarge bbox if failed 
+// DONE Gen combinations of 2 refs
 
-// TODO implement mixing alternatives kyiv 
 // TODO x1 implement correct mixing alternative masks! Portugal!
-// TODO enlarge bbox if failed 
 // TODO common words to skip - 14-45, West 31st Road 
-// TODO other masks ?fix
 // TODO Cancel poi type intersection poi:
 //      1. (poiType != null && buildingPresent) {
 //      2. poiCategoryOnMatchingWord (not search apple city)
 //      3. poiCategoryOnNumber
 //      4. poi type only on p.isPOI().place
 //      5. if (poiTypeToken.incomplete) {
+
 // THINK LIMIT poi category -> elo by query (top 5?)?
 // THINK introduce mask check into joiner index ?
 public class SpatialPipelineSearch {
@@ -131,7 +130,7 @@ public class SpatialPipelineSearch {
 					if (list != null) {
 						for (int j = 0; j < list.size(); j++) {
 							SpatialPipelineObjectRes obj = list.get(j);
-							resTree.addObject(obj, obj.bbox, obj.mainAtom1.id);
+							resTree.addObject(obj, obj.bbox);
 						}
 					}
 				}
@@ -590,17 +589,29 @@ public class SpatialPipelineSearch {
 	
 	private SpatialSearchResultsList createResultList(List<SpatialSearchToken> tokens, List<SpatialPipelineObjectRes> r) {
 		SpatialSearchResultsList singleResults = new SpatialSearchResultsList(ctx.searchContext, tokens);
+		List<NameIndexAtom> atoms = new ArrayList<>();
 		for (SpatialPipelineObjectRes res : r) {
-			int nonNull = 0; 
-			singleResults.tileIds.add(res.mainAtom1.coords.bboxTileId);
-			for (int i = 0; i < res.atoms.length; i++) {
-				if (res.atoms[i] != null) {
-					nonNull++;
-					singleResults.linearResults.add(res.atoms[i]);
+			// actual size doesn't matter any more
+			int z = 15;
+			long tileId = HashQuadTree.encodeTileId(z, res.bbox[0] >> (31 - z), res.bbox[1] >> (31 - z));
+			
+			for (int refs = 0; refs < (res.refs2 != null ? 2 : 1); refs++) {
+				atoms.clear();
+				for (int i = 0; i < res.atoms.length; i++) {
+					NameIndexAtom atom = res.atoms[i];
+					if (atom == null && res.refs1 != null && refs == 0) {
+						atom = res.refs1[i];
+					} else if (atom == null && res.refs2 != null && refs == 1) {
+						atom = res.refs2[i];
+					}
+					if(atom != null) {
+						atoms.add(atom);
+					}
 				}
-			}
-			if(nonNull != tokens.size()) {
-				throw new IllegalStateException(String.format("%s - %d != %d", res, nonNull, tokens.size()));
+				if (atoms.size() == tokens.size()) {
+					singleResults.tileIds.add(tileId);
+					singleResults.linearResults.addAll(atoms);
+				}
 			}
 		}
 		return singleResults;
@@ -640,7 +651,7 @@ public class SpatialPipelineSearch {
 			b.resTree = null;
 			for (List<SpatialPipelineObjectRes> l : b.resObjectsByMasks.valueCollection()) {
 				for (SpatialPipelineObjectRes r : l) {
-					if (r.mainAtom1.isGeoArea()) {
+					if (r.mainAtom.isGeoArea()) {
 						double val = ctx.settings.evalEnlargeBoundary(ctx.settings.ENLARGE_BOUNDARIES,
 								NameIndexAtomXY.distanceInM(r.bbox));
 						if (val > 0) {
@@ -705,7 +716,7 @@ public class SpatialPipelineSearch {
 			}
 			TLongObjectHashMap<List<SpatialPipelineObjectRes>> groupByTokens = new TLongObjectHashMap<List<SpatialPipelineObjectRes>>();
 			for (SpatialPipelineObjectRes r : partialRes) {
-				long mask = r.calculateMaskByTokens();
+				long mask = r.maskOnlyByTokens();
 				if (!groupByTokens.contains(mask)) {
 					groupByTokens.put(mask, new ArrayList<>());
 				}

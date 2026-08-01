@@ -3,7 +3,6 @@ package net.osmand.search.core.spatial;
 import java.util.Arrays;
 import java.util.List;
 
-import gnu.trove.list.array.TLongArrayList;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
 
 public class SpatialPipelineObjectRes {
@@ -16,24 +15,25 @@ public class SpatialPipelineObjectRes {
 	// 11 - poi, 01 - poi category, 00 - other (& 01 intersection forbidden!)
 	public static final long STATE_NO_MATCH = 0L; // 00
 	public static final long STATE_EXACT_MATCH = 1L; // 01
-	public static final long STATE_AMBIGUOUS = 2L; // 10
+	public static final long STATE_REF = 2L; // 10
 //    public static final long STATE_ANY = 3L;           // 11
 	private static final long MASK_SET_01 = 0x5555_5555_5555_555FL;
 	private static final long MASK_SET_02 = 0x5555_5555_5555_5550L;
 	// ALLOWED &: 0000, 0011, 1100, 1111,
 
 	public final NameIndexAtom[] atoms;
+	public NameIndexAtom[] refs1;
+	public NameIndexAtom[] refs2; // max 2 refs
+	
 	public final int[] bbox;
-	public NameIndexAtom mainAtom1;
-	public NameIndexAtom mainAtom2;
+	public NameIndexAtom mainAtom;
 
 	public long mainMask = 0;
-	public TLongArrayList otherMasks = new TLongArrayList();
 
 	public SpatialPipelineObjectRes(int tCount, NameIndexAtom atom, int index) {
 		atoms = new NameIndexAtom[tCount];
 		bbox = atom.coords.bbox31;
-		mainAtom1 = atom;
+		mainAtom = atom;
 		int atomic = atom.atomicObject() ? 3 : 0;
 		if (atom.atomicObject() && atom.sameNameAreaObj != null) {
 			atomic = 1; // 01 - 2 atomic
@@ -52,18 +52,30 @@ public class SpatialPipelineObjectRes {
 		this.mainMask = mask;
 		this.bbox = new int[] { s1.bbox[0], s1.bbox[1], s1.bbox[2], s1.bbox[3] };
 		SpatialSearchResultsList.clipBbox(this.bbox, s2.bbox);
-		
+		// any atom doesn't matter
+		mainAtom = s1.mainAtom;
+		if ((s1.refs1 == null && s1.refs2 != null) || (s2.refs1 == null && s2.refs2 != null)) {
+			throw new IllegalStateException();
+		} else if ((s1.refs1 != null && s2.refs2 != null) || (s2.refs1 != null && s1.refs2 != null)) {
+			throw new IllegalStateException();
+		}
+		if (s1.refs1 != null && s2.refs1 != null) {
+			refs1 = s1.refs1;
+			refs2 = s2.refs1;
+		} else if (s1.refs1 != null) {
+			refs1 = s1.refs1;
+			refs2 = s1.refs2;
+		} else {
+			refs1 = s2.refs1;
+			refs2 = s2.refs2;
+		}
 		for (int i = 0; i < atoms.length; i++) {
 			NameIndexAtom a1 = s1.atoms[i];
 			NameIndexAtom a2 = s2.atoms[i];
-			if (a1 != null && !a1.isPOIRef() && !a1.isBuilding()) {
-				atoms[i] = a1;
-				mainAtom1 = a1;
-			} else if (a2 != null && !a2.isPOIRef() && !a2.isBuilding()) {
-				// couldn't be both same time
-				atoms[i] = a2;
-				mainAtom2 = a2;
-			} else if (a1 != null) {
+			if (a1 != null && a2 != null) {
+				throw new IllegalStateException();
+			}
+			if (a1 != null) {
 				atoms[i] = a1;
 			} else if (a2 != null) {
 				atoms[i] = a2;
@@ -74,27 +86,35 @@ public class SpatialPipelineObjectRes {
 	public void mergeSame(NameIndexAtom atom, int tokenIdx) {
 		// TODO x1 (duplicate words) implement correct mixing alternative masks!
 		// we need to separately process situation duplicate words in object and in query
-		if (mainAtom1.isPOIRef() || mainAtom1.isBuilding()) {
-			mainAtom1 = atom;
+		if (mainAtom.isPOIRef() || mainAtom.isBuilding()) {
+			mainAtom = atom;
 		}
 		setAtom(atom, tokenIdx);
 	}
 	
-	public long calculateMaskByTokens() {
-		long mask  = 0;
+	public long maskOnlyByTokens() {
+		long mask = 0;
 		for (int i = 0; i < atoms.length; i++) {
-			if (atoms[i] != null) {
+			if (atoms[i] != null || (refs1 != null && refs1[i] != null) || (refs2 != null && refs2[i] != null)) {
 				mask = setTokenState(mask, i, STATE_EXACT_MATCH);
 			}
 		}
 		return mask;
 	}
 
-
 	void setAtom(NameIndexAtom atom, int index) {
-		atoms[index] = atom;
-		mainMask = setTokenState(mainMask, index,
-				atom.isBuilding() || atom.isPOIRef() ? STATE_AMBIGUOUS : STATE_EXACT_MATCH);
+		boolean ref = atom.isBuilding() || atom.isPOIRef();
+		if(ref) {
+			if (refs1 == null) {
+				refs1 = new NameIndexAtom[atoms.length];
+			} else if (refs1[index] != null) {
+				throw new IllegalStateException();
+			}
+			refs1[index] = atom;
+		} else {
+			atoms[index] = atom;
+		}
+		mainMask = setTokenState(mainMask, index, ref ? STATE_REF : STATE_EXACT_MATCH);
 	}
 
 	public static long setTokenState(long currentMask, int tokenIdx, long state) {
@@ -163,14 +183,13 @@ public class SpatialPipelineObjectRes {
 		mask2 >>= 4;
 		int shift = 4;
 		while (mask1 != 0 || mask2 != 0) {
-			
 			long state1 = mask1 & 3L;
 			long state2 = mask2 & 3L;
 			long finalState;
 			if (state1 == STATE_EXACT_MATCH || state2 == STATE_EXACT_MATCH) {
 				finalState = STATE_EXACT_MATCH;
-			} else if (state1 == STATE_AMBIGUOUS || state2 == STATE_AMBIGUOUS) {
-				finalState = STATE_AMBIGUOUS;
+			} else if (state1 == STATE_REF || state2 == STATE_REF) {
+				finalState = STATE_REF;
 			} else {
 				finalState = STATE_NO_MATCH;
 			}
