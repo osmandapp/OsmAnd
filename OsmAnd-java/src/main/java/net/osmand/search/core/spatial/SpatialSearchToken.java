@@ -533,7 +533,7 @@ public class SpatialSearchToken {
 				ytop = bbox31[1];
 				ybottom = bbox31[3];
 			}
-			return distanceInM(xleft, xright, ytop, ybottom);
+			return distanceInM(xleft, ytop, xright,  ybottom);
 		}
 
 		public static double distanceInM(int xleft, int ytop, int xright, int ybottom) {

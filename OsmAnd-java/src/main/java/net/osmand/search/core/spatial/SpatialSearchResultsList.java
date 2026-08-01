@@ -429,9 +429,9 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 				LatLon loc = null;
 				if (bldres != null) {
 					loc = bldres.isInterpolation() ? bldres.getLocation(bldres.interpolation(bldName)) : null;
-					System.out.printf("Building found [%d] '%s' -'%s': %s\n", matchExtraWord[0], bldres, bldName, bldRefObj.object);
+//					System.out.printf("Building found [%d] '%s' -'%s': %s\n", matchExtraWord[0], bldres, bldName, bldRefObj.object);
 				} else {
-					System.out.printf("No building '%s': %s\n", bldName, bldRefObj.object + " " + ((Street) bldRefObj.object).getBuildings());
+//					System.out.printf("No building '%s': %s\n", bldName, bldRefObj.object + " " + ((Street) bldRefObj.object).getBuildings());
 				}
 				bldObj = new BuildingCache(bldres, indx, loc, matchExtraWord[0]);
 				bldCheckCache.put(cacheKey, bldObj);
