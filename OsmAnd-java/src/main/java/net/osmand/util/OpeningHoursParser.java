@@ -37,6 +37,7 @@ public class OpeningHoursParser {
 	private static final int WITHOUT_TIME_LIMIT = -1;
 	private static final int CURRENT_DAY_TIME_LIMIT = -2;
 
+	private static final int NO_TIME_MINUTES = -1;
 	private static final int NO_NTH_WEEKDAY = 0;
 	private static final int FIRST_NTH_WEEKDAY = 1;
 	private static final int LAST_NTH_WEEKDAY = 5;
@@ -506,7 +507,7 @@ public class OpeningHoursParser {
 
 		private String getTimeDay(Calendar cal, int limit, boolean opening, int sequenceIndex) {
 			String atTime = "";
-			int atTimeMinutes = -1;
+			int atTimeMinutes = NO_TIME_MINUTES;
 			ArrayList<OpeningHoursRule> rules = getRules(sequenceIndex);
 			OpeningHoursRule prevRule = null;
 			for (OpeningHoursRule r : rules) {
@@ -535,7 +536,7 @@ public class OpeningHoursParser {
 						atTime = basicRule.formatResult(atTimeMinutes);
 					} else {
 						atTime = r.getTime(cal, false, limit, opening);
-						atTimeMinutes = -1;
+						atTimeMinutes = NO_TIME_MINUTES;
 					}
 					prevRule = r;
 				}
@@ -1469,11 +1470,11 @@ public class OpeningHoursParser {
 					}
 				}
 			}
-			return -1;
+			return NO_TIME_MINUTES;
 		}
 
 		String formatResult(int timeMinutes) {
-			if (timeMinutes < 0) {
+			if (timeMinutes == NO_TIME_MINUTES) {
 				return "";
 			}
 			StringBuilder sb = new StringBuilder();
@@ -2223,7 +2224,7 @@ public class OpeningHoursParser {
 								}
 								if (array != null) {
 									array[pair[0].mainNumber] = true;
-									if (pair[0].type == TokenType.TOKEN_DAY_WEEK && pair[0].nthMask != 0) {
+									if (pair[0].type == TokenType.TOKEN_DAY_WEEK && pair[0].nthMask != NO_NTH_WEEKDAY) {
 										basic.setDayNthMask(pair[0].mainNumber, pair[0].nthMask);
 									}
 								}
