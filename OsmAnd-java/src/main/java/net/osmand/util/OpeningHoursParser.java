@@ -508,10 +508,9 @@ public class OpeningHoursParser {
 					if (atTime.length() > 0 && prevRule != null && !r.hasOverlapTimes(cal, prevRule, true)) {
 						return atTime;
 					}
-					if (isTimeRestrictedOffRule(r) && atTimeMinutes >= 0) {
+					if (isTimeRestrictedOffRule(r) && atTimeMinutes >= 0 && r instanceof BasicOpeningHourRule offRule) {
 						// Rules like "Jul-Aug 19:00-19:30 off" make only their own time ranges "off",
 						// so they adjust a time found by previous rules instead of discarding it
-						BasicOpeningHourRule offRule = (BasicOpeningHourRule) r;
 						int offTimeMinutes = offRule.getTimeMinutes(cal, false, limit, opening);
 						int currentTimeMinutes = cal.get(Calendar.HOUR_OF_DAY) * 60 + cal.get(Calendar.MINUTE);
 						if (opening) {
@@ -525,10 +524,9 @@ public class OpeningHoursParser {
 							atTimeMinutes = offTimeMinutes;
 							atTime = offRule.formatResult(offTimeMinutes);
 						}
-					} else if (r instanceof BasicOpeningHourRule) {
-						BasicOpeningHourRule rule = (BasicOpeningHourRule) r;
-						atTimeMinutes = rule.getTimeMinutes(cal, false, limit, opening);
-						atTime = rule.formatResult(atTimeMinutes);
+					} else if (r instanceof BasicOpeningHourRule basicRule) {
+						atTimeMinutes = basicRule.getTimeMinutes(cal, false, limit, opening);
+						atTime = basicRule.formatResult(atTimeMinutes);
 					} else {
 						atTime = r.getTime(cal, false, limit, opening);
 						atTimeMinutes = -1;
@@ -544,16 +542,14 @@ public class OpeningHoursParser {
 		 * by day-month or year ranges (like "Dec 24-Dec 31 off") which don't set weekdays
 		 */
 		private boolean appliesToDay(OpeningHoursRule r, Calendar cal) {
-			if (r instanceof BasicOpeningHourRule) {
-				return ((BasicOpeningHourRule) r).appliesToDay(cal);
+			if (r instanceof BasicOpeningHourRule basicRule) {
+				return basicRule.appliesToDay(cal);
 			}
 			return r.containsDay(cal) && r.containsMonth(cal);
 		}
 
 		private boolean isTimeRestrictedOffRule(OpeningHoursRule r) {
-			return r instanceof BasicOpeningHourRule
-					&& ((BasicOpeningHourRule) r).isOff()
-					&& ((BasicOpeningHourRule) r).timesSize() > 0;
+			return r instanceof BasicOpeningHourRule basicRule && basicRule.isOff() && basicRule.timesSize() > 0;
 		}
 
 		private String getTimeAnotherDay(Calendar cal, int limit, boolean opening, int sequenceIndex) {
