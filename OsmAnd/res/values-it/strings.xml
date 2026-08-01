@@ -5112,7 +5112,7 @@
     <string name="organize_by_summary">Organizza automaticamente le tue tracce in gruppi sulla base di un parametro selezionato come attività, velocità o posizione.</string>
     <string name="astronomy_plugin_name">Astronomia</string>
     <string name="favorite_folder_rename_conflict">Esiste già una cartella con questo nome.</string>
-    <string name="astro_designations">Nomenclature</string>
+    <string name="astro_designations">Nomenclatura</string>
     <string name="map_widget_memory_info_desc">Monitora l\'heap Java, le allocazioni native e la memoria grafica.</string>
     <string name="obd_alt_battery_voltage_desc">Mostra tensione sull\'adattatore OBD</string>
     <string name="shared_string_world_weather_map">Mappa metereologica mondiale</string>
