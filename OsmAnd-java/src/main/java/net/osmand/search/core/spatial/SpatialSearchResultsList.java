@@ -253,7 +253,6 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 					return;
 				}
 				NameIndexAtom poiAtom = null;
-				// TODO check
 				// mix of 2 refs or not present or street
 				for (int k = 0; k < tCount; k++) {
 					poiAtom = linearResults.get(indx * tCount + k);
@@ -379,7 +378,6 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 					break;
 				}
 				NameIndexAtom streetAtom = null;
-				// TODO check
 				for (int k = 0; k < tCount; k++) {
 					streetAtom = linearResults.get(indx * tCount + k);
 					if (streetAtom != null && streetAtom.isStreet() && streetAtom.id == bld.id) {
@@ -391,20 +389,6 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 					skipResults.put(indx, true);
 					return;
 				}
-				// don't intersect streets
-				// in duplicate words ref could point to same word of city name
-//				NameIndexAtom str = linearResults.get(indx * tCount + strTokenInd);
-//				if (str.id != bld.id) {
-//					System.out.println(bld + " ??? " + str);
-//					continue;
-//				}
-//				if (bld.isPOI() || bld.isPoiCategory()) {
-//					// buildind ind is reused for poi as well
-//					break;
-//				}
-//				if (str.isPOI() || str.isPoiCategory()) {
-//					break;
-//				}
 				blds.add(bld);
 				searchKey += tokens[i].word + " ";
 			} else if (bld.isStreet() && bld.isCityStreetName()) {
