@@ -2415,16 +2415,12 @@ public class OpeningHoursParser {
 	private static int parseNthMask(String list) {
 		int mask = 0;
 		for (String part : list.split(",")) {
-			try {
-				int n = Integer.parseInt(part.trim());
-				if (n >= 1 && n <= 5) {
-					mask |= 1 << (n - 1);
-				} else if (n <= -1 && n >= -5) {
-					mask |= 1 << (4 - n);
-				} else {
-					return 0;
-				}
-			} catch (NumberFormatException e) {
+			int n = Algorithms.parseIntSilently(part.trim(), 0);
+			if (n >= 1 && n <= 5) {
+				mask |= 1 << (n - 1);
+			} else if (n <= -1 && n >= -5) {
+				mask |= 1 << (4 - n);
+			} else {
 				return 0;
 			}
 		}
