@@ -27,6 +27,8 @@ public class SpatialPipelineObjectRes {
 	
 	public final int[] bbox;
 	public NameIndexAtom mainAtom;
+	
+	public SpatialPipelineObjectRes otherVariants;
 
 	public long mainMask = 0;
 
@@ -83,13 +85,40 @@ public class SpatialPipelineObjectRes {
 		}
 	}
 
-	public void mergeSame(NameIndexAtom atom, int tokenIdx) {
-		// TODO x1 (duplicate words) implement correct mixing alternative masks!
+	public void mergeSame(int tCount, NameIndexAtom atom, int tokenIdx) {
 		// we need to separately process situation duplicate words in object and in query
 		if (mainAtom.isPOIRef() || mainAtom.isBuilding()) {
 			mainAtom = atom;
 		}
-		setAtom(atom, tokenIdx);
+		boolean ref = atom.isPOIRef() || atom.isBuilding();
+		if (ref) {
+			setAtom(atom, tokenIdx);
+			return;
+		}
+		int firstInd ;
+		for (firstInd = 0; firstInd < tokenIdx; firstInd++) {
+			if (getTokenState(mainMask, firstInd) == STATE_EXACT_MATCH) {
+				break;
+			}
+		}
+		int otherWrds = mainAtom.otherFoundCnt + mainAtom.otherWordsCnt;
+		if (firstInd + otherWrds >= tokenIdx) {
+			setAtom(atom, tokenIdx);
+		} else if (otherVariants != null) {
+			otherVariants.mergeSame(tCount, atom, tokenIdx);
+		} else {
+			otherVariants = new SpatialPipelineObjectRes(tCount, atom, tokenIdx);
+		}
+	}
+	
+	public long maskWithoutRefs() {
+		long mask = 0;
+		for (int i = 0; i < atoms.length; i++) {
+			if (atoms[i] != null) {
+				mask = setTokenState(mask, i, STATE_EXACT_MATCH);
+			}
+		}
+		return mask;
 	}
 	
 	public long maskOnlyByTokens() {

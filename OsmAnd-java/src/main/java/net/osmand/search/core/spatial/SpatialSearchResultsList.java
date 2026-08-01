@@ -241,51 +241,48 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 	}
 
 	private void checkAmenityRef(List<SpatialSearchToken> missingTokens, int indx) {
-		NameIndexAtom poiAtom = null;
 		int refInd = 0;
 		String queryRef = null;
 		Set<String> objectRef = null;
 		for (refInd = 0; refInd < tCount; refInd++) {
 			NameIndexAtom refAtom = linearResults.get(indx * tCount + refInd);
-			
-			if (refAtom.buildingOrRefInd >= 0) {
+			if (refAtom.buildingOrRefInd >= 0 && refAtom.isPOI()) {
 				int amenityTokenInd = getTokenByOriginalOrder(refAtom.buildingOrRefInd);
 				if (amenityTokenInd < 0) {
 					skipResults.put(indx, true);
 					return;
 				}
-				NameIndexAtom psAtom = linearResults.get(indx * tCount + amenityTokenInd);
-				if (!psAtom.isPOI()) {
-					// return but not skip! (street or poi category)
-					return;
+				NameIndexAtom poiAtom = null;
+				// TODO check
+				// mix of 2 refs or not present or street
+				for (int k = 0; k < tCount; k++) {
+					poiAtom = linearResults.get(indx * tCount + k);
+					if (poiAtom != null && poiAtom.isPOI() && poiAtom.id == refAtom.id && poiAtom.object instanceof Amenity) {
+						break;
+					}
+					poiAtom = null;
 				}
-				if (poiAtom != null && psAtom.id != poiAtom.id) {
-					// mix of 2 refs
+				if (poiAtom == null) {
 					skipResults.put(indx, true);
 					return;
 				}
-				poiAtom = psAtom;
-				if (poiAtom != null && poiAtom.id == refAtom.id && poiAtom.object instanceof Amenity as) {
-					String ref = as.getAdditionalInfo("ref");
-					if (ref == null) {
-						ref = as.getAdditionalInfo("ref_post");
-					}
-					if (objectRef == null && ref != null) {
-						objectRef = SearchAlgorithms.getBuildingCompareSet(ref, tempBuildNames2);
-					} else {
-						int num = Algorithms.extractIntegerNumber(as.getName());
-						if (num > 0) {
-							objectRef = Collections.singleton(num + "");
-						}
-					}
-					if (queryRef == null) {
-						queryRef = tokens[refInd].word;
-					} else {
-						queryRef += " " + tokens[refInd].word;
-					}
+				Amenity as = (Amenity) poiAtom.object;
+				String ref = as.getAdditionalInfo("ref");
+				if (ref == null) {
+					ref = as.getAdditionalInfo("ref_post");
+				}
+				if (objectRef == null && ref != null) {
+					objectRef = SearchAlgorithms.getBuildingCompareSet(ref, tempBuildNames2);
 				} else {
-					skipResults.put(indx, true);
-					return;
+					int num = Algorithms.extractIntegerNumber(as.getName());
+					if (num > 0) {
+						objectRef = Collections.singleton(num + "");
+					}
+				}
+				if (queryRef == null) {
+					queryRef = tokens[refInd].word;
+				} else {
+					queryRef += " " + tokens[refInd].word;
 				}
 			}
 		}
@@ -375,21 +372,39 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		NameIndexAtom noBldStreet = null; 
 		for (int i = 0; i < tCount; i++) {
 			NameIndexAtom bld = linearResults.get(indx * tCount + i);
-			if (bld.buildingOrRefInd >= 0) {
+			if (bld.buildingOrRefInd >= 0 && !bld.isPOI() && !bld.isPoiCategory()) {
 				int strTokenInd = getTokenByOriginalOrder(bld.buildingOrRefInd);
 				if (strTokenInd < 0) {
 					skipResults.put(indx, true);
 					break;
 				}
+				NameIndexAtom streetAtom = null;
+				// TODO check
+				for (int k = 0; k < tCount; k++) {
+					streetAtom = linearResults.get(indx * tCount + k);
+					if (streetAtom != null && streetAtom.isStreet() && streetAtom.id == bld.id) {
+						break;
+					}
+					streetAtom = null;
+				}
+				if (streetAtom == null) {
+					skipResults.put(indx, true);
+					return;
+				}
 				// don't intersect streets
-				NameIndexAtom str = linearResults.get(indx * tCount + strTokenInd);
-				if (str.id != bld.id) {
-					continue;
-				}
-				if (str.isPOI() || str.isPoiCategory()) {
-					// buildind ind is reused for poi as well
-					break;
-				}
+				// in duplicate words ref could point to same word of city name
+//				NameIndexAtom str = linearResults.get(indx * tCount + strTokenInd);
+//				if (str.id != bld.id) {
+//					System.out.println(bld + " ??? " + str);
+//					continue;
+//				}
+//				if (bld.isPOI() || bld.isPoiCategory()) {
+//					// buildind ind is reused for poi as well
+//					break;
+//				}
+//				if (str.isPOI() || str.isPoiCategory()) {
+//					break;
+//				}
 				blds.add(bld);
 				searchKey += tokens[i].word + " ";
 			} else if (bld.isStreet() && bld.isCityStreetName()) {
@@ -414,9 +429,9 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 				LatLon loc = null;
 				if (bldres != null) {
 					loc = bldres.isInterpolation() ? bldres.getLocation(bldres.interpolation(bldName)) : null;
-//					System.out.printf("Building found [%d] '%s' -'%s': %s\n", matchExtraWord[0], bldres, bldName, bldRefObj.object);
+					System.out.printf("Building found [%d] '%s' -'%s': %s\n", matchExtraWord[0], bldres, bldName, bldRefObj.object);
 				} else {
-//					System.out.printf("No building '%s': %s\n", bldName, bldRefObj.object + " " + ((Street) bldRefObj.object).getBuildings());
+					System.out.printf("No building '%s': %s\n", bldName, bldRefObj.object + " " + ((Street) bldRefObj.object).getBuildings());
 				}
 				bldObj = new BuildingCache(bldres, indx, loc, matchExtraWord[0]);
 				bldCheckCache.put(cacheKey, bldObj);

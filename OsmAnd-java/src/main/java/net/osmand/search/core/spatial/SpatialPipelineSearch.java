@@ -3,7 +3,10 @@ package net.osmand.search.core.spatial;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import gnu.trove.iterator.TLongObjectIterator;
 import gnu.trove.map.hash.TLongObjectHashMap;
@@ -21,6 +24,7 @@ import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSetting
 // DONE Gen combinations of 2 refs
 
 // TODO x1 implement correct mixing alternative masks! Portugal!
+
 // TODO common words to skip - 14-45, West 31st Road 
 // TODO Cancel poi type intersection poi:
 //      1. (poiType != null && buildingPresent) {
@@ -33,7 +37,8 @@ import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSetting
 // THINK introduce mask check into joiner index ?
 public class SpatialPipelineSearch {
     
-    private final SpatialPipelineContext ctx;
+    private static final int MIN_RESULTS_PARTIAL = 0; // for testing now
+	private final SpatialPipelineContext ctx;
     
     public SpatialPipelineSearch(SpatialSearchContext ctx, List<SpatialSearchToken> tokens) {
         if (tokens.size() > SpatialPipelineObjectRes.MAX_SUPPORTED_TOKENS) {
@@ -60,7 +65,14 @@ public class SpatialPipelineSearch {
 		int nonCatResults = 0;
 		
 		public SpatialPipelineContext(List<SpatialSearchToken> tokens, SpatialSearchContext ctx) {
-			this.tokens = tokens;
+			this.tokens = new ArrayList<SpatialSearchToken>(tokens);
+			this.tokens.sort(new Comparator<SpatialSearchToken>() {
+
+				@Override
+				public int compare(SpatialSearchToken o1, SpatialSearchToken o2) {
+					return Integer.compare(o1.originalOrder, o2.originalOrder);
+				}
+			});
 			this.searchContext = ctx;
 			this.settings = ctx.settings;
 			this.stats = ctx.stats;
@@ -278,6 +290,9 @@ public class SpatialPipelineSearch {
 	            if (!SpatialPipelineObjectRes.allowed(obj1.mainMask, obj2.mainMask)) {
 	                return;
 	            }
+				if (obj1.mainAtom.id == obj2.mainAtom.id) {
+					return; // alternatives
+				}
 	            ctx.metrics.pairsAccepted++;
 	            long combinedMask = SpatialPipelineObjectRes.combine2BitMasks(obj1.mainMask, obj2.mainMask);
 	            SpatialPipelineObjectRes combinedObj = new SpatialPipelineObjectRes(combinedMask, obj1, obj2);
@@ -505,7 +520,6 @@ public class SpatialPipelineSearch {
 		return 1;
 	}
 	
-	// REVIEW tokens - masks! 
 	private SpatialPipelineContext prepareInitialBuckets() {
 		int totalTokens = ctx.tokens.size();
 		// combine & merge by tokens
@@ -518,7 +532,7 @@ public class SpatialPipelineSearch {
 				}
 				SpatialPipelineObjectRes existing = ctx.objectsById.get(atom.id);
 				if (existing != null) {
-					existing.mergeSame(atom, tokenIdx);
+					existing.mergeSame(totalTokens, atom, tokenIdx);
 				} else {
 					SpatialPipelineObjectRes obj = new SpatialPipelineObjectRes(totalTokens, atom, tokenIdx);
 					ctx.objectsById.put(atom.id, obj);
@@ -531,6 +545,16 @@ public class SpatialPipelineSearch {
 	    for (SpatialPipelineObjectRes obj : ctx.objectsById.valueCollection()) {
 	        long mask = obj.mainMask;
 	        mainBucket.potentialMasks.add(mask, obj);
+	        NameIndexAtom[] refs1 = obj.refs1;
+			while (obj.otherVariants != null) {
+	        	obj = obj.otherVariants;
+				for (int i = 0; refs1 != null && i < refs1.length; i++) {
+					if (refs1[i] != null) {
+						obj.setAtom(refs1[i], i);
+					}
+	        	}
+	        	mainBucket.potentialMasks.add(obj.mainMask, obj);
+	        }
 	    }
 	    List<SpatialObjectsBucket> buckets = new ArrayList<>();
 	    splitBucketIntoSmallBuckets(mainBucket, buckets);
@@ -604,7 +628,7 @@ public class SpatialPipelineSearch {
 					} else if (atom == null && res.refs2 != null && refs == 1) {
 						atom = res.refs2[i];
 					}
-					if(atom != null) {
+					if (atom != null) {
 						atoms.add(atom);
 					}
 				}
@@ -636,7 +660,7 @@ public class SpatialPipelineSearch {
 			enlargeBboxes(currentLevel);
 			depth = runSearch(tokensSize, depth, currentLevel);
 		}
-		if (ctx.overallResults == 0 && tokensSize > 1 && !ctx.isCancelled()) {
+		if (ctx.overallResults <= MIN_RESULTS_PARTIAL && tokensSize > 1 && !ctx.isCancelled()) {
 			if (ctx.stats.printLogs) {
 				System.out.printf("PIPELINE LOOKUP %d partial results\n", depth);
 			}
@@ -697,6 +721,29 @@ public class SpatialPipelineSearch {
 
 	private List<SpatialSearchResultsList> calculatePartialCoverage(int depth) throws IOException {
 		int tokensSize = ctx.tokens.size();
+		// collect full but without refs
+		Map<Integer, List<SpatialPipelineObjectRes>> fullWithoutRefs = new HashMap<>();
+		List<SpatialPipelineObjectRes> fullResults = new ArrayList<SpatialPipelineObjectRes>();
+		for (SpatialObjectsBucket b : ctx.allBuckets) {
+			if (b.hasFullCovered(tokensSize)) {
+				collectCoverageResults(b, fullResults, tokensSize);
+			}
+		}
+		for (SpatialPipelineObjectRes fullResult : fullResults) {
+			long noRefsMask = fullResult.maskWithoutRefs();
+			if (noRefsMask != fullResult.mainMask) {
+				int covered = SpatialPipelineObjectRes.countCoveredTokens(noRefsMask);
+				if (!fullWithoutRefs.containsKey(covered)) {
+					fullWithoutRefs.put(covered, new ArrayList<>());
+				}
+				fullResult.mainMask = noRefsMask;
+				fullResult.refs1 = null;
+				fullResult.refs2 = null;
+				fullWithoutRefs.get(covered).add(fullResult);
+			}
+		}
+		
+		// calculate partial
 		for (int targetTokens = tokensSize - 1; targetTokens >= 1; targetTokens--, depth++) {
 		    List<SpatialPipelineObjectRes> partialRes = new ArrayList<>();
 		    ctx.metrics.geoComputeTimer.start();
@@ -711,6 +758,9 @@ public class SpatialPipelineSearch {
 				}
 			}
 			ctx.metrics.logGeoCross(ctx, currentLevel, depth, proc, partialRes.size());
+			if (fullWithoutRefs.containsKey(targetTokens)) {
+				partialRes.addAll(fullWithoutRefs.get(targetTokens));
+			}
 			if (partialRes.isEmpty()) {
 				continue;
 			}
@@ -734,6 +784,7 @@ public class SpatialPipelineSearch {
 						lst.add(ctx.tokens.get(i));
 					}
 				}
+				
 				ex |= validateResultsAndFinish(res, depth, lst);
 
 			}
