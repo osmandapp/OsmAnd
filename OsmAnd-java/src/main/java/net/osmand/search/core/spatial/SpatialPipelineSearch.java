@@ -2,6 +2,7 @@ package net.osmand.search.core.spatial;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import net.osmand.search.core.HashSkipTileQuadTree;
 import net.osmand.search.core.HashSkipTileQuadTreeJoiner;
 import net.osmand.search.core.spatial.SpatialSearchContext.SpatialSearchStats;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
+import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtomXY;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSettings;
 
 // DONE Add non maximum results as well... (surplus words +-) -  germany_remstal!
@@ -56,6 +58,7 @@ public class SpatialPipelineSearch {
 		
 		final List<SpatialSearchResultsList> results = new ArrayList<SpatialSearchResultsList>();
 		int overallResults = 0;
+		int nonCatResults = 0;
 		
 		public SpatialPipelineContext(List<SpatialSearchToken> tokens, SpatialSearchContext ctx) {
 			this.tokens = tokens;
@@ -567,6 +570,7 @@ public class SpatialPipelineSearch {
 		if (res.size() > 0) {
 			ctx.results.add(stageList);
 			ctx.overallResults += res.size();
+			ctx.nonCatResults += nonCategoryRes;
 		}
 		if (ctx.stats.printLogs) {
 			String compString = tokens.size() == ctx.tokens.size() ? "complete"
@@ -610,7 +614,46 @@ public class SpatialPipelineSearch {
 		ctx.metrics.logPrepareTime(ctx);
 		
 		int depth = 0;
-		List<SpatialObjectsBucket> currentLevel = ctx.initBuckets;
+		depth = runSearch(tokensSize, depth, ctx.initBuckets);
+		
+		if (ctx.nonCatResults == 0 && tokensSize > 1 && !ctx.isCancelled()) {
+			if (ctx.stats.printLogs) {
+				System.out.printf("PIPELINE Enlarge bboxes on stage %d\n", depth);
+			}
+			ctx.allBuckets = new ArrayList<>(ctx.initBuckets); // 1st stage is skipped
+			List<SpatialObjectsBucket> currentLevel = ctx.initBuckets;
+			enlargeBboxes(currentLevel);
+			depth = runSearch(tokensSize, depth, currentLevel);
+		}
+		if (ctx.overallResults == 0 && tokensSize > 1 && !ctx.isCancelled()) {
+			if (ctx.stats.printLogs) {
+				System.out.printf("PIPELINE LOOKUP %d partial results\n", depth);
+			}
+			calculatePartialCoverage(depth);
+		}
+		return ctx.results;
+	}
+
+	private void enlargeBboxes(List<SpatialObjectsBucket> currentLevel) {
+		for (SpatialObjectsBucket b : currentLevel) {
+			b.children = null;
+			b.resTree = null;
+			for (List<SpatialPipelineObjectRes> l : b.resObjectsByMasks.valueCollection()) {
+				for (SpatialPipelineObjectRes r : l) {
+					if (r.mainAtom1.isGeoArea()) {
+						double val = ctx.settings.evalEnlargeBoundary(ctx.settings.ENLARGE_BOUNDARIES,
+								NameIndexAtomXY.distanceInM(r.bbox));
+						if (val > 0) {
+							NameIndexAtomXY.enlargeBbox(val, r.bbox);
+						}
+
+					}
+				}
+			}
+		}
+	}
+
+	private int runSearch(int tokensSize, int depth, List<SpatialObjectsBucket> currentLevel) throws IOException {
 		while (depth < ctx.settings.PIPELINE_MAX_STEPS && !currentLevel.isEmpty()) {
 			ctx.metrics.resetDepth();
 			if (depth > 0) {
@@ -634,14 +677,11 @@ public class SpatialPipelineSearch {
 			}
 			ctx.metrics.logGeoCross(ctx, currentLevel, depth, fullCoverageCount, res.size());
 			if (validateResultsAndFinish(res, depth, ctx.tokens)) {
-				return ctx.results;
+				return depth;
 			}
 			depth++;
 		}
-		if (ctx.overallResults == 0 && tokensSize > 1) {
-			calculatePartialCoverage(depth);
-		}
-		return ctx.results;
+		return depth;
 	}
 
 	private List<SpatialSearchResultsList> calculatePartialCoverage(int depth) throws IOException {
@@ -672,6 +712,7 @@ public class SpatialPipelineSearch {
 				groupByTokens.get(mask).add(r);
 			}
 			TLongObjectIterator<List<SpatialPipelineObjectRes>> it = groupByTokens.iterator();
+			boolean ex = false;
 			while (it.hasNext()) {
 				it.advance();
 				long mask = it.key();
@@ -682,9 +723,11 @@ public class SpatialPipelineSearch {
 						lst.add(ctx.tokens.get(i));
 					}
 				}
-				if (validateResultsAndFinish(res, depth, lst)) {
-					return ctx.results;
-				}
+				ex |= validateResultsAndFinish(res, depth, lst);
+
+			}
+			if (ex) {
+				return ctx.results;
 			}
 		}
 		return ctx.results;

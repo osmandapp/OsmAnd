@@ -65,12 +65,11 @@ import net.osmand.util.SearchAlgorithms;
 // UNIT TESTING: City > Boundary + location? Format strings (City > Boundary)...
 // UNIT TESTING: (Deduplicate categories brand id) - "okko", "ОККО" - (split 2 maps one without brand id one with)
 // REVIEWED TESTS OK '276 East End Centre Wilkes-Barre'
+// TODO Test poi category translations
 
 ////////// IN PROGRESS //////////
 // REVIEW (index_words_dashboard - common озеро): POI / ADDRESS - France, Germany, US, Europe, China, Peru
 // REVIEW: Auto test New york, France, Italy (Slow?)
-
-// TODO Display low zooms for rare categories
 
 // TODO INDEX: Find POI Categories translations / synonyms via Common words - Стоматол., Dentist, Basilica 
 // TODO REVIEW: Abbrevations (synonyms / direction words) other languages?

@@ -457,7 +457,7 @@ public class SpatialTextSearch {
 		int enlarge = 0;
 		for (SpatialSearchToken t : tokens) {
 			for (NameIndexAtom a : t.atoms) {
-				if (a.isBoundary() || a.isCityVillage() || a.isPostcode()) {
+				if (a.isGeoArea()) {
 					double val = ctx.settings.evalEnlargeBoundary(ctx.settings.ENLARGE_BOUNDARIES, 
 							a.coords.dimensionInM());
 					if (val > 0) {

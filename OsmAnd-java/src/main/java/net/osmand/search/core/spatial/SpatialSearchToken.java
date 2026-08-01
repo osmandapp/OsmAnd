@@ -504,11 +504,7 @@ public class SpatialSearchToken {
 				return;
 			}
 			if (bbox31 != null) {
-				int w = (int) ((bbox31[2] - bbox31[0]) * mult), h = (int) ((bbox31[3] - bbox31[1]) * mult);
-				bbox31[0] = Math.max(Math.min(bbox31[0], bbox31[0] - w), 0); // xleft
-				bbox31[2] = Math.max(bbox31[2] + w, bbox31[0]); // xright
-				bbox31[1] = Math.max(Math.min(bbox31[1], bbox31[1] - h), 0); // ytop
-				bbox31[3] = Math.max(bbox31[3] + h, bbox31[1]); // ybottom
+				enlargeBbox(mult, bbox31);
 			} else {
 				int w = (int) Math.ceil(mult);
 				bbox31 = new int[4];
@@ -520,6 +516,14 @@ public class SpatialSearchToken {
 			calcTileFromBbox();
 		}
 
+		public static void enlargeBbox(double mult, int[] bbox31) {
+			int w = (int) ((bbox31[2] - bbox31[0]) * mult), h = (int) ((bbox31[3] - bbox31[1]) * mult);
+			bbox31[0] = Math.max(Math.min(bbox31[0], bbox31[0] - w), 0); // xleft
+			bbox31[2] = Math.max(bbox31[2] + w, bbox31[0]); // xright
+			bbox31[1] = Math.max(Math.min(bbox31[1], bbox31[1] - h), 0); // ytop
+			bbox31[3] = Math.max(bbox31[3] + h, bbox31[1]); // ybottom
+		}
+
 		public double dimensionInM() {
 			int xleft = x16 << 15, xright = (x16 + 1) << 15;
 			int ytop = y16 << 15, ybottom = (y16 + 1) << 15;
@@ -529,9 +533,17 @@ public class SpatialSearchToken {
 				ytop = bbox31[1];
 				ybottom = bbox31[3];
 			}
+			return distanceInM(xleft, xright, ytop, ybottom);
+		}
+
+		public static double distanceInM(int xleft, int ytop, int xright, int ybottom) {
 			return MapUtils.getDistance(MapUtils.get31LatitudeY(ytop), MapUtils.get31LongitudeX(xleft),
 					MapUtils.get31LatitudeY(Math.max(ytop, ybottom)),
 					MapUtils.get31LongitudeX(Math.max(xleft, xright)));
+		}
+		
+		public static double distanceInM(int[] bbox) {
+			return distanceInM(bbox[0], bbox[1], bbox[2], bbox[3]);
 		}
 
 		
