@@ -4483,7 +4483,7 @@
     <string name="rendering_attr_alpineHiking_name">Grado di difficoltà dei sentieri escursionistici</string>
     <string name="graph_axis">Asse del grafico</string>
     <string name="y_axis_description">Selezionare fino a due opzioni per l\'asse Y.</string>
-    <string name="quick_action_search_view_title">Menù ricerca</string>
+    <string name="quick_action_search_view_title">Visualizzazione di ricerca</string>
     <string name="quick_action_search_view_desc">Un pulsante per aprire o chiudere il menù ricerca.</string>
     <string name="quick_action_navigation_view_desc">Un pulsante per aprire o chiudere la vista navigazione.</string>
     <string name="quick_action_navigation_view_title">Vista navigazione</string>
