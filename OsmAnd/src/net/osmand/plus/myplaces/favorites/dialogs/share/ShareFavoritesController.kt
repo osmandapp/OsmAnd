@@ -1,4 +1,4 @@
-package net.osmand.plus.myplaces.favorites.dialogs
+package net.osmand.plus.myplaces.favorites.dialogs.share
 
 import android.graphics.Typeface
 import android.os.AsyncTask
@@ -15,24 +15,18 @@ import net.osmand.plus.mapcontextmenu.other.ShareMenu.NativeShareDialogBuilder
 import net.osmand.plus.myplaces.favorites.FavoriteGroup
 import net.osmand.plus.myplaces.favorites.ShareFavoritesAsyncTask
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper.SettingsExportListener
-import net.osmand.plus.settings.backend.backup.exporttype.AttachedMediaExportType
-import net.osmand.plus.settings.backend.backup.items.AttachedMediaSettingsItem
 import net.osmand.plus.settings.backend.backup.items.SettingsItem
 import net.osmand.plus.utils.AndroidUtils
-import net.osmand.plus.utils.FileUtils
 import net.osmand.plus.utils.UiUtilities
-import net.osmand.util.Algorithms
 import java.io.File
-import java.util.Collections
 import java.util.Locale
-import java.util.UUID
 
 class ShareFavoritesController(
 	app: OsmandApplication,
 	private val group: FavoriteGroup
 ) : BaseDialogController(app) {
 
-	enum class State {
+	enum class DialogState {
 		READY,
 		PREPARING
 	}
@@ -41,10 +35,9 @@ class ShareFavoritesController(
 	private var gpxFile: File? = null
 	private var pointsDescription: Spanned? = null
 	private var exportItems: List<SettingsItem> = emptyList()
-	private var missingMedia = false
-	private val shareSessionId = UUID.randomUUID().toString()
-	private val gpxSessionDirectory = File(File(app.cacheDir, "share"), shareSessionId)
-	private val osfSessionDirectory = File(File(FileUtils.getTempDir(app), "share_favorites"), shareSessionId)
+	private var hasMissingMedia = false
+	private val fileSession = ShareFavoritesFileSession(app)
+	private val dataPreparer = ShareFavoritesDataPreparer(app)
 	private var preparationRunning = false
 	private var osfExportRunning = false
 	private var dialogResumed = false
@@ -53,7 +46,7 @@ class ShareFavoritesController(
 	private var pendingShare: PendingShare = PendingShare.None
 	private var actionInProgress = false
 
-	var state: State = State.PREPARING
+	var state: DialogState = DialogState.PREPARING
 		private set
 
 	var pointsOnlyDetails: String = ""
@@ -97,7 +90,7 @@ class ShareFavoritesController(
 	}
 
 	fun onPointsOnlyClicked() {
-		if (state != State.READY || abandoned || actionInProgress) {
+		if (state != DialogState.READY || abandoned || actionInProgress) {
 			return
 		}
 		val file = gpxFile ?: return
@@ -108,30 +101,26 @@ class ShareFavoritesController(
 	}
 
 	fun onPointsAndMediaClicked() {
-		if (state != State.READY || abandoned || actionInProgress || exportItems.isEmpty()) {
+		if (state != DialogState.READY || abandoned || actionInProgress || exportItems.isEmpty()) {
 			return
 		}
 		actionInProgress = true
-		if (missingMedia) {
+		if (hasMissingMedia) {
 			app.showToastMessage(R.string.share_favorites_missing_media_warning)
 		}
-		state = State.PREPARING
+		state = DialogState.PREPARING
 		notifyUiChanged()
 
 		try {
-			val directory = getOrCreateDirectory(osfSessionDirectory)
+			val directory = fileSession.getOrCreateOsfDirectory()
 			val fileName = gpxFile?.nameWithoutExtension
 			if (fileName == null) {
 				returnToReady()
 				return
 			}
 			osfExportRunning = true
-			app.fileSettingsHelper.exportSettings(
-				directory,
-				fileName,
-				createExportListener(),
-				exportItems,
-				true
+			app.fileSettingsHelper.exportSettings(directory, fileName,
+				createExportListener(), exportItems, true
 			)
 		} catch (e: RuntimeException) {
 			osfExportRunning = false
@@ -257,13 +246,6 @@ class ShareFavoritesController(
 		returnToReady()
 	}
 
-	private fun getOrCreateDirectory(directory: File): File {
-		if ((!directory.exists() && !directory.mkdirs()) || !directory.isDirectory) {
-			throw IllegalStateException("Could not create share directory: ${directory.absolutePath}")
-		}
-		return directory
-	}
-
 	private fun cleanupSessionIfPossible() {
 		if (!shareRequested && !preparationRunning && !osfExportRunning) {
 			cleanupSession()
@@ -271,17 +253,16 @@ class ShareFavoritesController(
 	}
 
 	private fun cleanupSession() {
-		Algorithms.removeAllFiles(gpxSessionDirectory)
-		Algorithms.removeAllFiles(osfSessionDirectory)
+		fileSession.cleanup()
 	}
 
 	private fun cleanupOsfSession() {
-		Algorithms.removeAllFiles(osfSessionDirectory)
+		fileSession.cleanupOsf()
 	}
 
 	private fun returnToReady() {
 		actionInProgress = false
-		state = State.READY
+		state = DialogState.READY
 		notifyUiChanged()
 	}
 
@@ -289,142 +270,57 @@ class ShareFavoritesController(
 		dialogManager.askRefreshDialogCompletely(PROCESS_ID)
 	}
 
-	private inner class PrepareShareDataTask : AsyncTask<Void, Void, PreparationResult>() {
+	private inner class PrepareShareDataTask : AsyncTask<Void, Void, ShareFavoritesDataPreparer.PreparationResult>() {
 
-		private var temporaryGpxFile: File? = null
-
-		override fun doInBackground(vararg params: Void?): PreparationResult {
-			return try {
-				prepareShareData()
-			} catch (e: Exception) {
-				temporaryGpxFile?.delete()
-				PreparationResult.Error(e)
-			}
+		override fun doInBackground(vararg params: Void?): ShareFavoritesDataPreparer.PreparationResult {
+			return dataPreparer.prepare(group, fileSession) { isCancelled }
 		}
 
-		private fun prepareShareData(): PreparationResult {
-			val groups = Collections.singletonList(group)
-			val originalDestination = ShareFavoritesAsyncTask.createDestinationFile(app, groups)
-			val destination = File(
-				getOrCreateDirectory(gpxSessionDirectory),
-				originalDestination.name
-			)
-			temporaryGpxFile = destination
-			val error = app.favoritesHelper.fileHelper.saveFile(groups, destination)
-			if (error != null || !destination.isFile) {
-				destination.delete()
-				return PreparationResult.Error(error)
-			}
-			if (isCancelled) {
-				return PreparationResult.Cancelled
-			}
-			val description = ShareFavoritesAsyncTask.buildPointsDescription(app, groups)
-			if (isCancelled) {
-				return PreparationResult.Cancelled
-			}
-			return prepareMediaShareData(groups, destination, description)
-		}
-
-		private fun prepareMediaShareData(
-			groups: List<FavoriteGroup>,
-			destination: File,
-			description: Spanned
-		): PreparationResult {
-			try {
-				val dataHelper = AttachedMediaDataHelper(app)
-				val links = dataHelper.collectMediaLinks(groups)
-				val mediaItems = AttachedMediaExportType.collectSettingsItems(app, groups)
-				if (isCancelled) {
-					return PreparationResult.Cancelled
-				}
-				if (mediaItems.isEmpty()) {
-					return PreparationResult.GpxOnly(destination, description)
-				}
-
-				val data = ArrayList<Any>(mediaItems.size + 1)
-				data.add(group)
-				data.addAll(mediaItems)
-				val items = app.fileSettingsHelper.prepareSettingsItems(data, emptyList(), true)
-				AttachedMediaExportType.processSettingsItems(app, groups, items)
-				if (isCancelled) {
-					return PreparationResult.Cancelled
-				}
-
-				val packedMedia = items.filterIsInstance<AttachedMediaSettingsItem>()
-				if (packedMedia.isEmpty()) {
-					return PreparationResult.GpxOnly(destination, description)
-				}
-				val packedHrefs = packedMedia.flatMapTo(hashSetOf()) { item -> item.hrefKeys }
-				val hasMissingMedia = links.any { link ->
-					val href = link.href?.trim()
-					!href.isNullOrEmpty() && !isRemoteHref(href) && href !in packedHrefs
-				}
-				val totalSize = destination.length() + packedMedia.sumOf { item -> item.size }
-				if (isCancelled) {
-					return PreparationResult.Cancelled
-				}
-				return PreparationResult.Ready(
-					destination,
-					description,
-					items,
-					packedMedia.size + 1,
-					totalSize,
-					hasMissingMedia
-				)
-			} catch (e: Exception) {
-				if (isCancelled) {
-					return PreparationResult.Cancelled
-				}
-				LOG.error(
-					"Failed to prepare attached media for Favorites; falling back to GPX: ${destination.absolutePath}",
-					e
-				)
-				return PreparationResult.GpxOnly(destination, description)
-			}
-		}
-
-		override fun onCancelled(result: PreparationResult?) {
-			temporaryGpxFile?.delete()
+		override fun onCancelled(result: ShareFavoritesDataPreparer.PreparationResult?) {
 			preparationTask = null
 			preparationRunning = false
 			cleanupSessionIfPossible()
 		}
 
-		override fun onPostExecute(result: PreparationResult) {
+		override fun onPostExecute(result: ShareFavoritesDataPreparer.PreparationResult) {
 			preparationTask = null
 			preparationRunning = false
-			if (abandoned) {
-				cleanupSessionIfPossible()
-				return
-			}
-			when (result) {
-				is PreparationResult.Ready -> applyReadyResult(result)
-				is PreparationResult.GpxOnly -> applyGpxOnlyResult(result)
-				is PreparationResult.Error -> {
-					result.cause?.let { LOG.error("Failed to prepare Favorites share data", it) }
-					cleanupSession()
-					app.showToastMessage(R.string.share_favorites_preparation_failed)
-					dialogManager.askDismissDialog(PROCESS_ID)
-				}
-				PreparationResult.Cancelled -> cleanupSessionIfPossible()
-			}
+			handlePreparationResult(result)
 		}
 	}
 
-	private fun applyGpxOnlyResult(result: PreparationResult.GpxOnly) {
+	private fun handlePreparationResult(result: ShareFavoritesDataPreparer.PreparationResult) {
+		if (abandoned) {
+			cleanupSessionIfPossible()
+			return
+		}
+		when (result) {
+			is ShareFavoritesDataPreparer.PreparationResult.Ready -> applyReadyResult(result)
+			is ShareFavoritesDataPreparer.PreparationResult.GpxOnly -> applyGpxOnlyResult(result)
+			is ShareFavoritesDataPreparer.PreparationResult.Error -> {
+				result.cause?.let { LOG.error("Failed to prepare Favorites share data", it) }
+				cleanupSession()
+				app.showToastMessage(R.string.share_favorites_preparation_failed)
+				dialogManager.askDismissDialog(PROCESS_ID)
+			}
+			ShareFavoritesDataPreparer.PreparationResult.Cancelled -> cleanupSessionIfPossible()
+		}
+	}
+
+	private fun applyGpxOnlyResult(result: ShareFavoritesDataPreparer.PreparationResult.GpxOnly) {
 		applyGpxResult(result.gpxFile, result.pointsDescription)
 		exportItems = emptyList()
-		missingMedia = false
-		state = State.READY
+		hasMissingMedia = false
+		state = DialogState.READY
 		notifyUiChanged()
 		pendingShare = PendingShare.Gpx(result.gpxFile, result.pointsDescription)
 		tryLaunchPendingShare()
 	}
 
-	private fun applyReadyResult(result: PreparationResult.Ready) {
+	private fun applyReadyResult(result: ShareFavoritesDataPreparer.PreparationResult.Ready) {
 		applyGpxResult(result.gpxFile, result.pointsDescription)
 		exportItems = result.exportItems
-		missingMedia = result.missingMedia
+		hasMissingMedia = result.missingMedia
 
 		val filesCount = app.resources.getQuantityString(
 			R.plurals.files_count,
@@ -437,7 +333,7 @@ class ShareFavoritesController(
 			filesCount,
 			AndroidUtils.formatSize(app, result.totalSourceSize)
 		)
-		state = State.READY
+		state = DialogState.READY
 		notifyUiChanged()
 	}
 
@@ -454,25 +350,6 @@ class ShareFavoritesController(
 		)
 	}
 
-	private sealed interface PreparationResult {
-		data class GpxOnly(
-			val gpxFile: File,
-			val pointsDescription: Spanned
-		) : PreparationResult
-
-		data class Ready(
-			val gpxFile: File,
-			val pointsDescription: Spanned,
-			val exportItems: List<SettingsItem>,
-			val fileCount: Int,
-			val totalSourceSize: Long,
-			val missingMedia: Boolean
-		) : PreparationResult
-
-		data class Error(val cause: Exception?) : PreparationResult
-		data object Cancelled : PreparationResult
-	}
-
 	private sealed interface PendingShare {
 		data object None : PendingShare
 
@@ -485,9 +362,9 @@ class ShareFavoritesController(
 	}
 
 	enum class ShareHandlingResult {
-		FALLBACK_TO_GPX,
+		GPX_FALLBACK_REQUIRED,
 		MEDIA_FLOW_STARTED,
-		ALREADY_IN_PROGRESS,
+		SHARE_FLOW_ALREADY_ACTIVE,
 		CANNOT_SHOW
 	}
 
@@ -507,12 +384,12 @@ class ShareFavoritesController(
 		): ShareHandlingResult {
 			val app = activity.application as OsmandApplication
 			if (AttachedMediaDataHelper(app).collectMediaLinks(listOf(group)).isEmpty()) {
-				return ShareHandlingResult.FALLBACK_TO_GPX
+				return ShareHandlingResult.GPX_FALLBACK_REQUIRED
 			}
 			val manager = activity.supportFragmentManager
 			if (getExistedInstance(app) != null
 					|| manager.findFragmentByTag(ShareFavoritesBottomSheet::class.java.simpleName) != null) {
-				return ShareHandlingResult.ALREADY_IN_PROGRESS
+				return ShareHandlingResult.SHARE_FLOW_ALREADY_ACTIVE
 			}
 			if (!ShareFavoritesBottomSheet.canBeAdded(manager)) {
 				return ShareHandlingResult.CANNOT_SHOW
@@ -522,11 +399,6 @@ class ShareFavoritesController(
 			ShareFavoritesBottomSheet.showInstance(manager)
 			controller.startPreparing()
 			return ShareHandlingResult.MEDIA_FLOW_STARTED
-		}
-
-		private fun isRemoteHref(href: String): Boolean {
-			return href.startsWith("http://", ignoreCase = true)
-					|| href.startsWith("https://", ignoreCase = true)
 		}
 	}
 }

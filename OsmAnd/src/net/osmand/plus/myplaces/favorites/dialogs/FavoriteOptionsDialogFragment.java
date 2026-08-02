@@ -38,7 +38,8 @@ import net.osmand.plus.myplaces.favorites.FavoriteFolderFormatter;
 import net.osmand.plus.myplaces.favorites.FavoriteFolderPath;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
-import net.osmand.plus.myplaces.favorites.dialogs.ShareFavoritesController.ShareHandlingResult;
+import net.osmand.plus.myplaces.favorites.dialogs.share.ShareFavoritesController;
+import net.osmand.plus.myplaces.favorites.dialogs.share.ShareFavoritesController.ShareHandlingResult;
 import net.osmand.plus.track.SelectTrackTabsFragment;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
@@ -308,7 +309,7 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 		if (activity == null) return;
 
 		ShareHandlingResult result = ShareFavoritesController.handleShareRequest(activity, group);
-		if (result == ShareHandlingResult.FALLBACK_TO_GPX) {
+		if (result == ShareHandlingResult.GPX_FALLBACK_REQUIRED) {
 			fragment.shareFavorites(Collections.singletonList(group));
 		}
 		dismiss();

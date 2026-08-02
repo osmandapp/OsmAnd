@@ -1,4 +1,4 @@
-package net.osmand.plus.myplaces.favorites.dialogs
+package net.osmand.plus.myplaces.favorites.dialogs.share
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -79,7 +79,7 @@ class ShareFavoritesBottomSheet : BaseMaterialBottomSheetWithHeader(), IDialog,
 
 	private fun updateContent() {
 		val controller = controller ?: return
-		val ready = controller.state == ShareFavoritesController.State.READY
+		val ready = controller.state == ShareFavoritesController.DialogState.READY
 		mainView.findViewById<View>(R.id.ready_state_container).visibility =
 			if (ready) View.VISIBLE else View.INVISIBLE
 		mainView.findViewById<View>(R.id.preparing_state_container).visibility =
