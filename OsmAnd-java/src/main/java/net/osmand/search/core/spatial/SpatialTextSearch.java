@@ -151,7 +151,7 @@ public class SpatialTextSearch {
 		// 2. If object does have other common words and they are not in query - skip it
 		// Problem search: School On Street - some schools have specifiers and some don't
 		// Below limit add all possible objects  
-		public int OPTIM_READ_COMMON_WORDS_LIMIT = 20_000; // FIXME before merge 2000 -> 2500
+		public int OPTIM_READ_COMMON_WORDS_LIMIT = 2500; // FIXME before merge 2000 -> 2500
 		public boolean OPTIM_READ_COMMON_WITH_OTH_NON_FOUND_ATOMS = true;
 		public boolean OPTIM_READ_POI_CATEGORY_WORD_ATOMS = true;
 		// do not filter objects with such rating from results

@@ -277,7 +277,8 @@ public class SpatialSearchContext {
 			nearbyLimit = 0;
 			int cnt = t.atoms.size();
 			while (nearbyLimit < cnts.length
-					&& cnts[nearbyLimit] + cnt < settings.OPTIM_READ_COMMON_WORDS_LIMIT) {
+					&& (cnts[nearbyLimit] + cnt < settings.OPTIM_READ_COMMON_WORDS_LIMIT || 
+							settings.DEV_USE_PIPELINE)) {
 				cnt += cnts[nearbyLimit];
 				nearbyLimit++;
 			}

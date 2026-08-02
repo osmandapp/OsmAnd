@@ -84,6 +84,8 @@ import net.osmand.util.SearchAlgorithms;
 
 /////////////// EXTRA FEATURES ///////////////
 //-------- PIPELINE ----------
+// TODO W&W
+// TODO US speed compare
 // TODO INVESTIGATE: Limit (2000->2500) patterson 
 //    '4 ave 8 paterson' (OK - '8 4 ave paterson', '4th ave 8 paterson' play order of assigned numbers to bdl ref)
 // TODO 100km+: нова пошта краматорськ 3, Нова Пошта (№5 not searchable by common words / name), mihia lake
@@ -91,6 +93,8 @@ import net.osmand.util.SearchAlgorithms;
 // SLOW: "Travessa de Santo António" x "Rua Joaquim Ribeiro de Carvalho" x "portugal" (39.7412, -8.8012 Barreira Urbanização Vale da Cabrita))
 //       "Foothill Boulevard" x "Golden State Road" x "Los Angeles" x "United states of America"
 // TODO FORBID (slow): to interconnect tokens between 2 words - issue "<Street> <City> <Hno>"?
+
+
 // -------- PIPELINE ----------
 // TODO INDEX: highway=services (Not index)
 // TODO Sorting before load objects (use elo and other buildings?) and limit results
@@ -436,10 +440,10 @@ public class SpatialSearchTestAndDocs {
 //		settings.ALLOW_HOUSE_POI_TYPE_INTERSECTION = false;
 //		query = "Shell 2 Rožňavská";
 		
-		pattern = "Us_new-york_new"; // new-york, new-jersey
+//		pattern = "Us_new-york_new"; // new-york, new-jersey
 //		pattern = "Us_new-"; 
-//		pattern = "Us_"; 
-//		location = new LatLon(40.78035, -73.96572); // central park
+		pattern = "Us_"; 
+		location = new LatLon(40.78035, -73.96572); // central park
 //		location = new LatLon(40.64946, -74.00682); // brooklyn
 //		location = new LatLon(40.7428, -74.0572); // new jersey
 //		query = "New York The plaza";
@@ -459,8 +463,8 @@ public class SpatialSearchTestAndDocs {
 //		query = "new york 57th street manhattan";
 //		query = "4th ave"; //  unit '4 ave'
 //		settings.MAX_PIPELINE_RES_TO_STOP= new int[] {1};
-		query = "apple city";
-		query = "harlem city";
+//		query = "apple city";
+//		query = "harlem city";
 		
 //		query = "4th ave 8 paterson"; //  wrong city... 26240861988
 //		settings.OPTIM_READ_COMMON_WORDS_ATOMS = false; // false -ok
@@ -468,7 +472,7 @@ public class SpatialSearchTestAndDocs {
 //		settings.OPTIM_READ_COMMON_WORDS_LIMIT = 5000; // 2500 not ok, 5000 ok
 //		location = new LatLon(40.4997, -74.0029); // OK US_
 //		location = new LatLon(40.78035, -73.96572); // not OK US_
-//		query = "4 8 ave paterson"; //  '8 4 ave paterson' ok, '4 ave 8 paterson' not ok To fix 26240861988 (- new LatLon(40.7428, -74.0572);)
+		query = "4 8 ave paterson"; //  '8 4 ave paterson' ok, '4 ave 8 paterson' not ok To fix 26240861988 (- new LatLon(40.7428, -74.0572);)
 		// Result 4 - 40.8407, -74.0954 [[4th, 8] Building 2 4th Street (26238417818) 40.8441 -74.0910 , [ave, paterson] STREET_TYPE Paterson Avenue (651531238) 40.8374 -74.0997 ]
 		
 //		query = "2nd street"; // poi types '2 street' - broken
