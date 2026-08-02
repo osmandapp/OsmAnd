@@ -91,12 +91,27 @@ public class SpatialPipelineObjectRes {
 		return a.name != null && a.name.startsWith(NameIndexReader.POI_CATEGORY_PREFIX);
 	}
 
+	public void alignOtherVariants() {
+		SpatialPipelineObjectRes obj = this;
+		long cat = ((mainMask >> 2) & 3) << 2;
+		while (obj.otherVariants != null) {
+			obj = obj.otherVariants;
+			obj.mainMask |= cat;
+			for (int i = 0; refs1 != null && i < refs1.length; i++) {
+				if (refs1[i] != null) {
+					obj.setAtom(refs1[i], i);
+				}
+			}
+			
+		}		
+	}
+	
 	public void mergeSame(int tCount, NameIndexAtom atom, int tokenIdx, boolean noPoiType) {
 		// we need to separately process situation duplicate words in object and in query
 		if (mainAtom.isPOIRef() || mainAtom.isBuilding()) {
 			mainAtom = atom;
 		}
-		if (noPoiType && ((mainMask >> 2) & 3L) == 3) {
+		if (noPoiType && !atom.isPoiCategory()) {
 			mainMask |= (3 << 2);
 		}
 		boolean ref = atom.isPOIRef() || atom.isBuilding() || atom.isPoiCategory();
@@ -233,8 +248,8 @@ public class SpatialPipelineObjectRes {
 		} else if (p2 == 0) {
 			combinedPoi = p1;
 		} else {
-			// combinedPoi = (p1 == 3 && p2 == 3) ? 3 : 1;
-			combinedPoi = 1;
+			combinedPoi = (p1 == 3 && p2 == 3) ? 3 : 1;
+//			combinedPoi = 1; // forbid category on all intersections
 		}
 		result |= (combinedPoi << 2) + combinedAtomic;
 		mask1 >>= 4;
@@ -307,5 +322,7 @@ public class SpatialPipelineObjectRes {
 	public String toString() {
 		return formatMaskTokens(mainMask, null) + " " + Arrays.toString(atoms);
 	}
+
+
 
 }

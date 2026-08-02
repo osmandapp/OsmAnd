@@ -571,14 +571,9 @@ public class SpatialPipelineSearch {
 		for (SpatialPipelineObjectRes obj : ctx.objectsById.valueCollection()) {
 			long mask = obj.mainMask;
 			mainBucket.potentialMasks.add(mask, obj);
-			NameIndexAtom[] refs1 = obj.refs1;
+			obj.alignOtherVariants();
 			while (obj.otherVariants != null) {
 				obj = obj.otherVariants;
-				for (int i = 0; refs1 != null && i < refs1.length; i++) {
-					if (refs1[i] != null) {
-						obj.setAtom(refs1[i], i);
-					}
-				}
 				mainBucket.potentialMasks.add(obj.mainMask, obj);
 			}
 		}

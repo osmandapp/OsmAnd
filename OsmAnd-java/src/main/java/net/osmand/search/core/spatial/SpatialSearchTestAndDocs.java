@@ -68,6 +68,9 @@ import net.osmand.util.SearchAlgorithms;
 // UNIT TESTING: Travessa de Santo António Rua Joaquim Ribeiro Carvalho Portugal 
 // UNIT TESTING: Test poi category translations (add ru / de in test)
 // UNIT TESTING: "apple city", "harlem city" (New york) - test that result odesn't appear "city" [POI_TYPE] + "apple" [CITY_TOWN_TYPE] 'New York' 
+// UNIT TESTING: '400 Susquehanna Boulevard Hazel Township'
+// UNIT TESTING: '10 Am Remsufer Remseck am Neckar'
+// UNIT TESTING: '500 East College Avenue State College' (partial, no poi type, n)
 
 ////////// IN PROGRESS //////////
 // REVIEW (index_words_dashboard - common озеро): POI / ADDRESS - France, Germany, US, Europe, China, Peru
@@ -81,11 +84,18 @@ import net.osmand.util.SearchAlgorithms;
 // TEST DEDUPLICATE: wiki / travel maps / seamarks map
 
 // TODO Extend POI tile bboxes 200m? internet_access (fuel_diesel) 
-
+// TODO Tests:
+// '10 Am Remsufer Remseck am Neckar'
+// '400 Susquehanna Boulevard Hazel Township'
+// '315 B Westside Avenue Elmira'
+// '315 A Westside Avenue Elmira'
+// '330 Innovation Boulevard University Park'
+// '42 South Market Street Mt Carmel'
+// PARTIAL
+// '500 East College Avenue State College'
+// TODO test 'Bar 4 avenue' 
 /////////////// EXTRA FEATURES ///////////////
 //-------- PIPELINE ----------
-// TODO W&W
-// TODO US speed compare
 // TODO INVESTIGATE: Limit (2000->2500) patterson 
 //    '4 ave 8 paterson' (OK - '8 4 ave paterson', '4th ave 8 paterson' play order of assigned numbers to bdl ref)
 // TODO 100km+: нова пошта краматорськ 3, Нова Пошта (№5 not searchable by common words / name), mihia lake
@@ -233,7 +243,10 @@ public class SpatialSearchTestAndDocs {
 //		query = "West Valley City";
 //		query = "2110 College Avenue Elmira";
 		
-//		pattern = "Us_penn";
+		pattern = "Us_penn";
+		
+		pattern2 = "Us_new";
+		query = "500 East College Avenue State College";
 		
 //		location = new LatLon(41.2364,-75.8843); // 649331066
 //		settings.OPTIM_READ_COMMON_WORDS_ATOMS = false;
@@ -442,8 +455,8 @@ public class SpatialSearchTestAndDocs {
 		
 //		pattern = "Us_new-york_new"; // new-york, new-jersey
 //		pattern = "Us_new-"; 
-		pattern = "Us_"; 
-		location = new LatLon(40.78035, -73.96572); // central park
+//		pattern = "Us_"; 
+//		location = new LatLon(40.78035, -73.96572); // central park
 //		location = new LatLon(40.64946, -74.00682); // brooklyn
 //		location = new LatLon(40.7428, -74.0572); // new jersey
 //		query = "New York The plaza";
@@ -472,7 +485,7 @@ public class SpatialSearchTestAndDocs {
 //		settings.OPTIM_READ_COMMON_WORDS_LIMIT = 5000; // 2500 not ok, 5000 ok
 //		location = new LatLon(40.4997, -74.0029); // OK US_
 //		location = new LatLon(40.78035, -73.96572); // not OK US_
-		query = "4 8 ave paterson"; //  '8 4 ave paterson' ok, '4 ave 8 paterson' not ok To fix 26240861988 (- new LatLon(40.7428, -74.0572);)
+//		query = "4 8 ave paterson"; //  '8 4 ave paterson' ok, '4 ave 8 paterson' not ok To fix 26240861988 (- new LatLon(40.7428, -74.0572);)
 		// Result 4 - 40.8407, -74.0954 [[4th, 8] Building 2 4th Street (26238417818) 40.8441 -74.0910 , [ave, paterson] STREET_TYPE Paterson Avenue (651531238) 40.8374 -74.0997 ]
 		
 //		query = "2nd street"; // poi types '2 street' - broken
