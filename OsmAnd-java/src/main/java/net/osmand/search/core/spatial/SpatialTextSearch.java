@@ -127,7 +127,7 @@ public class SpatialTextSearch {
 
 		// FEATURE #2. PIPELINE vs INTERSECTIONS algorithm 
 		// Use mechanism to smart selection results intead of all word x word intersections
-		public boolean DEV_USE_PIPELINE = false;
+		public boolean DEV_USE_PIPELINE = true;
 		
 		// print some poi cat - to be deleted once web/android completed
 		public int TEST_PRINT_POI_CAT_LIMIT = 0; // 10
