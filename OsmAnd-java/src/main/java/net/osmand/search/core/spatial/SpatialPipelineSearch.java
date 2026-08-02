@@ -27,13 +27,6 @@ import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSetting
 // DONE  common words to skip - (14-45, West 31st Road), (liectenstein_poi) , (dedupl_capraia)
 // DONE W&W duplicate words in name
 // DONE Cancel poi type intersection poi (germany_remstal):
-//      +1. (poiType != null && buildingPresent) - false
-//      +2. poiCategoryOnMatchingWord - token.hasPoiCategoryKeys (not search "apple city") ? needed?
-//      +3. poiCategoryOnNumber - token.likelyPartOfBuilding() || token.getMainNumber() > 0;
-//      +4. poi type only on p.isPOI().place = true, other false
-//      +5. if (poiTypeToken.incomplete) { false
-
-
 // THINK LIMIT poi category -> elo by query (top 5?)?
 // THINK introduce mask check into joiner index ?
 public class SpatialPipelineSearch {
@@ -664,9 +657,13 @@ public class SpatialPipelineSearch {
 					}
 					if (atom != null) {
 						boolean skip = false;
-						if (atom.isPoiCategory() && res.distinctObjects() > 1) {
+						if (atom.isPoiCategory() && res.distinctObjects() > 1 && i < tokens.size()) {
 							// skip incomplete (not efficient to do by masks)
-							skip = tokens.get(i).incomplete || tokens.get(i).hasPoiCategoryKeys();
+							skip = tokens.get(i).incomplete;
+							//|| tokens.get(i).hasPoiCategoryKeys(); // incorrect 'brand street'
+							if(ctx.searchContext.poiSearch.getById((int)atom.id).isPlace()) {
+								skip = true;
+							}
 						} 
 						if(!skip) {
 							atoms.add(atom);
