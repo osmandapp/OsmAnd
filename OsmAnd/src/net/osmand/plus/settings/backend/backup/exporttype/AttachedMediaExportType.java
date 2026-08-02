@@ -3,7 +3,6 @@ package net.osmand.plus.settings.backend.backup.exporttype;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -19,6 +18,7 @@ import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.mediastorage.MediaSource;
 import net.osmand.shared.gpx.primitives.Link;
 import net.osmand.shared.media.MediaFileNameFormat;
+import net.osmand.shared.media.MediaProvider;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -124,15 +124,21 @@ public class AttachedMediaExportType extends AbstractExportType {
 	@NonNull
 	private static Set<String> collectExistingMediaFileNames(@NonNull OsmandApplication app) {
 		Set<String> res = new HashSet<>();
-		File[] files = app.getAppPath(IndexConstants.AV_INDEX_DIR).listFiles();
+		String appBaseDir = app.getAppPath().getAbsolutePath();
+		collectFileNames(res, MediaProvider.getInternalMediaDir(appBaseDir));
+		collectFileNames(res, MediaProvider.getLegacyInternalMediaDir(appBaseDir));
+		return res;
+	}
+
+	private static void collectFileNames(@NonNull Set<String> names, @NonNull File dir) {
+		File[] files = dir.listFiles();
 		if (files != null) {
 			for (File file : files) {
 				if (file.isFile()) {
-					res.add(file.getName());
+					names.add(file.getName());
 				}
 			}
 		}
-		return res;
 	}
 
 	private static boolean isRemoteHref(@NonNull String href) {
@@ -160,14 +166,9 @@ public class AttachedMediaExportType extends AbstractExportType {
 		if (isSameInternalMediaFile(app, source, name)) {
 			return false;
 		}
-		if (Algorithms.isEmpty(name) || !MediaFileNameFormat.isManagedMediaFileName(name)) {
-			return true;
-		}
-		if (!usedNames.contains(name)) {
-			return false;
-		}
-		File target = new File(app.getAppPath(IndexConstants.AV_INDEX_DIR), name);
-		return !Algorithms.stringsEqual(source.getId(), target.getAbsolutePath());
+		return Algorithms.isEmpty(name)
+				|| !MediaFileNameFormat.isManagedMediaFileName(name)
+				|| usedNames.contains(name);
 	}
 
 	private static boolean isSameInternalMediaFile(@NonNull OsmandApplication app,
@@ -175,7 +176,12 @@ public class AttachedMediaExportType extends AbstractExportType {
 		if (Algorithms.isEmpty(name)) {
 			return false;
 		}
-		File target = new File(app.getAppPath(IndexConstants.AV_INDEX_DIR), name);
-		return Algorithms.stringsEqual(source.getId(), target.getAbsolutePath());
+		String appBaseDir = app.getAppPath().getAbsolutePath();
+		File target = new File(MediaProvider.getInternalMediaDir(appBaseDir), name);
+		if (Algorithms.stringsEqual(source.getId(), target.getAbsolutePath())) {
+			return true;
+		}
+		File legacyTarget = new File(MediaProvider.getLegacyInternalMediaDir(appBaseDir), name);
+		return !target.exists() && Algorithms.stringsEqual(source.getId(), legacyTarget.getAbsolutePath());
 	}
 }

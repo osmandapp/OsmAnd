@@ -5171,4 +5171,7 @@
     <string name="poi_rapids_grade_5">5 (experto)</string>
     <string name="poi_rapids_grade_6">6 (extremo)</string>
     <string name="poi_rapids_grade_x">X (no ejecutable)</string>
+    <string name="poi_water_type_filter">Tipo de agua</string>
+    <string name="poi_surface_laterite">Superficie: laterita</string>
+    <string name="poi_water_lake">Lago</string>
 </resources>

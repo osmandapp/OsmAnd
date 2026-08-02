@@ -3175,11 +3175,11 @@
     <string name="poi_boat_jetski_rental_no">Vodní skútry: ne</string>
     <string name="poi_gorge">Rokle</string>
     <string name="poi_mountain_area">Horská oblast</string>
-    <string name="poi_surface_clay">Antuka</string>
-    <string name="poi_surface_tartan">Tartan (Umělá běžecká trať)</string>
-    <string name="poi_surface_artificial_turf">Umělý trávník</string>
-    <string name="poi_surface_decoturf">DecoTurf (umělý tenisový povrch)</string>
-    <string name="poi_surface_metal_grid">Kovový rošt</string>
+    <string name="poi_surface_clay">Povrch: antuka</string>
+    <string name="poi_surface_tartan">Povrch: tartan</string>
+    <string name="poi_surface_artificial_turf">Povrch: umělý trávník</string>
+    <string name="poi_surface_decoturf">Povrch: DecoTurf</string>
+    <string name="poi_surface_metal_grid">Povrch: kovový rošt</string>
     <string name="poi_location_underground">Umístění: pod zemí</string>
     <string name="poi_location_underwater">Umístění: pod vodou</string>
     <string name="poi_location_overground">Umístění: u země</string>
@@ -4571,7 +4571,7 @@
     <string name="poi_cemt_i">I</string>
     <string name="poi_cemt_iii">III</string>
     <string name="poi_ship_no">Přístup lodí: ne</string>
-    <string name="poi_surface_chipseal">Asfaltový povrch</string>
+    <string name="poi_surface_chipseal">Povrch: Asfalt</string>
     <string name="poi_vending_machine_fuel">Ano</string>
     <string name="poi_tunnel_name">Název tunelu</string>
     <string name="poi_bridge_name">Název mostu</string>

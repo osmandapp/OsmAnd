@@ -2969,10 +2969,10 @@
     <string name="poi_location_overground">Lokacija: nadzemlje</string>
     <string name="poi_location_underwater">Lokacija: podvodna</string>
     <string name="poi_location_underground">Lokacija: podzemna</string>
-    <string name="poi_surface_metal_grid">Metalna mreža</string>
-    <string name="poi_surface_decoturf">Dekotrava</string>
-    <string name="poi_surface_artificial_turf">Veštačka trava</string>
-    <string name="poi_surface_tartan">Tartan</string>
+    <string name="poi_surface_metal_grid">Površina: Metalna rešetka</string>
+    <string name="poi_surface_decoturf">Površina: Dekotrava</string>
+    <string name="poi_surface_artificial_turf">Podloga: Veštačka trava</string>
+    <string name="poi_surface_tartan">Površina: Tartan</string>
     <string name="poi_surface_clay">Površina: glina</string>
     <string name="poi_mountain_area">Planinska oblast</string>
     <string name="poi_couloir">Kuloar</string>
@@ -4605,7 +4605,7 @@
     <string name="poi_recycling_plastic_bottle_tops">Čepovi od plastičnih boca</string>
     <string name="poi_barrier_board">Barijerna tabla</string>
     <string name="poi_barrier_tyres">Gume</string>
-    <string name="poi_surface_chipseal">Grubi asfalt</string>
+    <string name="poi_surface_chipseal">Površina: Grubi asfalt</string>
     <string name="poi_assembly_point">Mesto okupljanja</string>
     <string name="poi_healthcare_speciality_haematology">Hematologija</string>
     <string name="poi_healthcare_speciality_infectious_diseases">Zarazne bolesti</string>

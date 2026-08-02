@@ -70,6 +70,7 @@ import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
@@ -527,8 +528,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	public void recordAttachedAudio(double lat, double lon, @NonNull MapActivity activity,
-	                                @NonNull File file, @NonNull CallbackWithObject<File> callback) {
-		prepareAttachedMediaRecording(AVActionType.REC_AUDIO, file, callback);
+	                                @NonNull File file, boolean showInDialog,
+	                                @NonNull CallbackWithObject<File> callback) {
+		prepareAttachedMediaRecording(AVActionType.REC_AUDIO, file, callback, showInDialog);
 		recordAudio(lat, lon, activity);
 	}
 
@@ -546,7 +548,12 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	private void prepareAttachedMediaRecording(@NonNull AVActionType type, @NonNull File file,
 	                                           @NonNull CallbackWithObject<File> callback) {
-		pendingAttachedRecording = new CurrentRecording(type, file, callback);
+		prepareAttachedMediaRecording(type, file, callback, false);
+	}
+
+	private void prepareAttachedMediaRecording(@NonNull AVActionType type, @NonNull File file,
+			@NonNull CallbackWithObject<File> callback, boolean showInDialog) {
+		pendingAttachedRecording = new CurrentRecording(type, file, callback, showInDialog);
 		File parent = file.getParentFile();
 		if (parent != null) {
 			parent.mkdirs();
@@ -571,7 +578,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			if (actionType == AVActionType.REC_PHOTO) {
 				recordingMenu = new AudioVideoNoteRecordingMenuFullScreen(this, lat, lon);
 			} else {
-				recordingMenu = new AudioVideoNoteRecordingMenu(this, lat, lon);
+				recordingMenu = new AudioVideoNoteRecordingMenu(this, lat, lon, currentRecording.getShowInDialog());
 			}
 			recordingDone = false;
 			lockScreenOrientation();
@@ -724,6 +731,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				runMediaRecorder(activity, recorder, file);
 			} catch (Exception e) {
 				cancelPendingRecordingListeners();
+				closeRecordingMenu();
+				finishRecording();
 				audioRecorder.unmuteStreamMusicAndOutputGuidance();
 				log.error("Error starting audio recorder ", e);
 				app.showToastMessage(app.getString(R.string.recording_error) + " : " + e.getMessage());
@@ -1036,7 +1045,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		clearAttachedMediaRecording();
 		finishRecording();
 		CallbackWithObject<File> callback = attachedRecording != null ? attachedRecording.getResultCallback() : null;
-		if (callback != null && file != null && file.exists() && file.length() > 0) {
+		if (callback != null && FileUtils.isNonEmptyFile(file)) {
 			if (attachedRecording.getType() == AVActionType.REC_PHOTO) {
 				updateAttachedPhotoInformation(file);
 			}

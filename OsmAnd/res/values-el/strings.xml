@@ -2958,7 +2958,7 @@
     <string name="map_3d_mode_action">Λειτουργία 3D</string>
     <string name="folder">Φάκελος</string>
     <string name="delete_all_items">Διαγραφή όλων των αντικειμένων</string>
-    <string name="share_as_file">Κοινοποίηση σαν αρχείο</string>
+    <string name="share_as_file">Κοινοποίηση ως αρχείο</string>
     <string name="free_versions">Δωρεάν εκδόσεις</string>
     <string name="external_device_details_received_data">Ελήφθησαν δεδομένα</string>
     <string name="learn_more_about_sensors_link">Μάθετε περισσότερα για τους αισθητήρες.</string>
@@ -4960,7 +4960,6 @@
     <string name="no_media_descr">Μπορείτε να προσθέσετε φωτογραφίες, βίντεο ή ηχητικές σημειώσεις από την κάμερά σας ή τη βιβλιοθήκη σας.</string>
     <string name="choose_from_gallery">Επιλέξτε από τη Συλλογή</string>
     <string name="choose_from_files">Επιλέξτε από τα Αρχεία</string>
-    <string name="auto_copy_media_to_osmand_storage">Αυτόματη αντιγραφή πολυμέσων στον αποθηκευτικό χώρο του OsmAnd</string>
     <string name="navigate_point_format_maidenhead">Maidenhead</string>
     <string name="navigate_point_east_coordinate">Ανατολικές Συντεταγμένες</string>
     <string name="navigate_point_north_coordinate">Βόρειες Συντεταγμένες</string>
@@ -5094,4 +5093,10 @@
     <string name="astro_show_eclipse_on_map_loading">Εύρεση σκιάς έκλειψης…</string>
     <string name="astro_eclipse_map_error">Δεν είναι διαθέσιμη η σκιά της έκλειψης αυτήν τη στιγμή.</string>
     <string name="astro_eclipse_safety_warning">Ποτέ μην κοιτάτε απευθείας τον Ήλιο χωρίς κατάλληλη προστασία των ματιών. Οι ώρες έκλειψης είναι εκτιμήσεις.</string>
+    <string name="shared_string_note">Σημείωση</string>
+    <string name="media_storage_camera_folder_note_descr">Ο ήχος αποθηκεύεται στο Music/OsmAnd.</string>
+    <string name="always_keep_local_copy">Να διατηρείται πάντα ένα τοπικό αντίγραφο</string>
+    <string name="always_keep_local_copy_description">Το πολυμέσο μένει πάντα συνημμένο ακόμη κι αν το αρχικό έχει διαγραφεί από τη Συλλογή ή τα αρχεία.</string>
+    <string name="use_spatial_text_search">Χρήση αναζήτησης χωρικού κειμένου</string>
+    <string name="use_spatial_text_search_description">Αντικαθιστά την τυπική γρήγορη αναζήτηση μέσω API με την πειραματική μηχανή αναζήτησης χωρικού κειμένου.</string>
 </resources>

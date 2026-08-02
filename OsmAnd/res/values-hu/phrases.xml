@@ -3170,10 +3170,10 @@
     <string name="poi_couloir">Meredek sziklahasadék</string>
     <string name="poi_mountain_area">Hegyvidék</string>
     <string name="poi_surface_clay">Burkolat: agyag</string>
-    <string name="poi_surface_tartan">Műanyag (tartan)</string>
-    <string name="poi_surface_artificial_turf">Műfű</string>
-    <string name="poi_surface_decoturf">Műanyag (DecoTurf tenisz)</string>
-    <string name="poi_surface_metal_grid">Fémrács</string>
+    <string name="poi_surface_tartan">Burkolat: tartán</string>
+    <string name="poi_surface_artificial_turf">Burkolat: műfű</string>
+    <string name="poi_surface_decoturf">Burkolat: DecoTurf kemény burkolat</string>
+    <string name="poi_surface_metal_grid">Burkolat: fémrács</string>
     <string name="poi_location_underground">Hely: föld alatt</string>
     <string name="poi_location_underwater">Hely: víz alatt</string>
     <string name="poi_location_overground">Hely: föld fölött</string>
@@ -4530,7 +4530,7 @@
     <string name="poi_spikes">Tüskék</string>
     <string name="poi_sump_buster">Autócsapda</string>
     <string name="poi_wedge">Ék</string>
-    <string name="poi_surface_chipseal">Kátránytömítés</string>
+    <string name="poi_surface_chipseal">Burkolat: bitumenes kőzúzalék</string>
     <string name="poi_tank_trap">Tankcsapda</string>
     <string name="poi_bridge_name">Híd neve</string>
     <string name="poi_recycling_boats">Csónak</string>
