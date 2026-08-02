@@ -31,7 +31,9 @@ import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSetting
 // THINK introduce mask check into joiner index ?
 public class SpatialPipelineSearch {
 
-	private static final int MIN_RESULTS_PARTIAL = 0; // for testing now
+	public static int MIN_RESULTS_ENLARGE = 0;
+	public static int MIN_RESULTS_PARTIAL = 0; // for testing now
+	
 	private final SpatialPipelineContext ctx;
 
 	public SpatialPipelineSearch(SpatialSearchContext ctx, List<SpatialSearchToken> tokens) {
@@ -683,7 +685,7 @@ public class SpatialPipelineSearch {
 		int depth = 0;
 		depth = runSearch(tokensSize, depth, ctx.initBuckets);
 
-		if (ctx.nonCatResults == 0 && tokensSize > 1 && !ctx.isCancelled()) {
+		if (ctx.nonCatResults <= MIN_RESULTS_ENLARGE && tokensSize > 1 && !ctx.isCancelled()) {
 			if (ctx.stats.printLogs) {
 				System.out.printf("PIPELINE Enlarge bboxes on stage %d\n", depth);
 			}

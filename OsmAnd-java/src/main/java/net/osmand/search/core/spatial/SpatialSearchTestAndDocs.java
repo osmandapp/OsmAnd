@@ -70,9 +70,11 @@ import net.osmand.util.SearchAlgorithms;
 // UNIT TESTING: "apple city", "harlem city" (New york) - test that result odesn't appear "city" [POI_TYPE] + "apple" [CITY_TOWN_TYPE] 'New York' 
 // UNIT TESTING: +'500 East College Avenue State College' (partial, no poi type, n)
 // UNIT TESTING: +'Bar 4 avenue' (new york poi category present)
-// UNIT TESTING: '400 Susquehanna Boulevard Hazel Township'
 // UNIT TESTING: '10 Am Remsufer Remseck am Neckar'
-// UNIT TESTING: '315 B Westside Avenue Elmira'
+// UNIT TESTING: '315 B Westside Avenue Elmira' ('315B' should be no interpolation, '315 B')
+// NO UNIT TESTING: '400 Susquehanna Boulevard Hazel Township' (MISSING Hazel Township)
+// NO UNIT TESTING: '330 Innovation Boulevard University Park' (partial result missing university park)
+
 ////////// IN PROGRESS //////////
 // REVIEW (index_words_dashboard - common озеро): POI / ADDRESS - France, Germany, US, Europe, China, Peru
 // REVIEW: Auto test New york, France, Italy (Slow?)
@@ -84,26 +86,22 @@ import net.osmand.util.SearchAlgorithms;
 // TODO DEDUPLICATE: too many houses (duplicate names) in wiki maps - obstruct search by street "Ярославів Вал"`?
 // TEST DEDUPLICATE: wiki / travel maps / seamarks map
 
-// TODO Extend POI tile bboxes 200m? internet_access (fuel_diesel)
 // TODO Performance
 // TODO Tests:
 // '10 Am Remsufer Remseck am Neckar'
-// '400 Susquehanna Boulevard Hazel Township'
 // '315 B Westside Avenue Elmira'
-// '315 A Westside Avenue Elmira'
-// '330 Innovation Boulevard University Park'?
-// '42 South Market Street Mt Carmel'
-// PARTIAL
  
+// TODO Extend POI tile bboxes 200m? internet_access (fuel_diesel)
 /////////////// EXTRA FEATURES ///////////////
 //-------- PIPELINE ----------
-// TODO INVESTIGATE: Limit (2000->2500) patterson 
+// UNIT TESTING!
+// + INVESTIGATE: Limit (2000->2500) patterson 
 //    '4 ave 8 paterson' (OK - '8 4 ave paterson', '4th ave 8 paterson' play order of assigned numbers to bdl ref)
-// TODO 100km+: нова пошта краматорськ 3, Нова Пошта (№5 not searchable by common words / name), mihia lake
-// TODO 100km+: Calle 20 188 San Isidro Lima, 
-// SLOW: "Travessa de Santo António" x "Rua Joaquim Ribeiro de Carvalho" x "portugal" (39.7412, -8.8012 Barreira Urbanização Vale da Cabrita))
+// + 100km+: нова пошта краматорськ 3, Нова Пошта (№5 not searchable by common words / name), mihia lake
+// + 100km+: Calle 20 188 San Isidro Lima, 
+// + SLOW: "Travessa de Santo António" x "Rua Joaquim Ribeiro de Carvalho" x "portugal" (39.7412, -8.8012 Barreira Urbanização Vale da Cabrita))
 //       "Foothill Boulevard" x "Golden State Road" x "Los Angeles" x "United states of America"
-// TODO FORBID (slow): to interconnect tokens between 2 words - issue "<Street> <City> <Hno>"?
+// + FORBID (slow): to interconnect tokens between 2 words - issue "<Street> <City> <Hno>"?
 
 
 // -------- PIPELINE ----------
@@ -244,10 +242,12 @@ public class SpatialSearchTestAndDocs {
 //		query = "West Valley City";
 //		query = "2110 College Avenue Elmira";
 		
-//		pattern = "Us_penn";
+		pattern = "Us_penn";
 		
-//		pattern2 = "Us_new";
+		pattern2 = "Us_new";
 //		query = "500 East College Avenue State College";
+		query = "315 B Westside Avenue Elmira"; // '315 B', '315B'
+//		query = "'330 Innovation Boulevard University Park";
 		
 //		location = new LatLon(41.2364,-75.8843); // 649331066
 //		settings.OPTIM_READ_COMMON_WORDS_ATOMS = false;

@@ -508,6 +508,10 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 			}
 			return partial1;
 		}
+		if (partial2 != null && query.size() > 1) {
+			matchExtraWord[0] = -1;
+			return partial2;
+		}
 		if (interpolation != null) {
 			if (query.size() > 1) {
 				matchExtraWord[0] = -1;
