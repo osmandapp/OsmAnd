@@ -65,19 +65,35 @@ import net.osmand.util.SearchAlgorithms;
 // UNIT TESTING: City > Boundary + location? Format strings (City > Boundary)...
 // UNIT TESTING: (Deduplicate categories brand id) - "okko", "ОККО" - (split 2 maps one without brand id one with)
 // REVIEWED TESTS OK '276 East End Centre Wilkes-Barre'
-// UNIT TESTING: Travessa de Santo António Rua Joaquim Ribeiro Carvalho Portugal 
+// UNIT TESTING: Travessa de Santo António Rua Joaquim Ribeiro Carvalho Portugal (all query below + no portugal)
 // UNIT TESTING: Test poi category translations (add ru / de in test)
 // UNIT TESTING: "apple city", "harlem city" (New york) - test that result odesn't appear "city" [POI_TYPE] + "apple" [CITY_TOWN_TYPE] 'New York' 
 // UNIT TESTING: +'500 East College Avenue State College' (partial, no poi type, n)
 // UNIT TESTING: +'Bar 4 avenue' (new york poi category present)
-// UNIT TESTING: '10 Am Remsufer Remseck am Neckar'
-// UNIT TESTING: '315 B Westside Avenue Elmira' ('315B' should be no interpolation, '315 B')
+// UNIT TESTING: +'10 Am Remsufer Remseck am Neckar'
+// UNIT TESTING: +'315 B Westside Avenue Elmira' ('315B' should be no interpolation, '315 B')
 // NO UNIT TESTING: '400 Susquehanna Boulevard Hazel Township' (MISSING Hazel Township)
 // NO UNIT TESTING: '330 Innovation Boulevard University Park' (partial result missing university park)
+//-------- PIPELINE ----------
+// SPECIAL UNIT TESTING - BRANCHES
+// LIVE TESTING
+//+ INVESTIGATE: Limit (2000->2500) patterson 
+// '4 ave 8 paterson' (OK - '8 4 ave paterson', '4th ave 8 paterson' play order of assigned numbers to bdl ref)
+//+ 100km+: нова пошта краматорськ 3, Нова Пошта (№5 not searchable by common words / name), mihia lake
+//+ 100km+: Calle 20 188 San Isidro Lima, 
+//+ SLOW: "Travessa de Santo António" x "Rua Joaquim Ribeiro de Carvalho" x "portugal" (39.7412, -8.8012 Barreira Urbanização Vale da Cabrita))
+//    "Foothill Boulevard" x "Golden State Road" x "Los Angeles" x "United states of America"
+//+ FORBID (slow): to interconnect tokens between 2 words - issue "<Street> <City> <Hno>"?
+
+
+//-------- PIPELINE ----------
 
 ////////// IN PROGRESS //////////
 // REVIEW (index_words_dashboard - common озеро): POI / ADDRESS - France, Germany, US, Europe, China, Peru
 // REVIEW: Auto test New york, France, Italy (Slow?)
+// TODO Performance Pipeline
+// TODO 2419 Avenue G Dickinson, 77539 TX USA
+// TODO Extend POI tile bboxes 200m? internet_access (fuel_diesel)
 
 // TODO INDEX: Find POI Categories translations / synonyms via Common words - Стоматол., Dentist, Basilica 
 // TODO REVIEW: Abbrevations (synonyms / direction words) other languages?
@@ -86,25 +102,8 @@ import net.osmand.util.SearchAlgorithms;
 // TODO DEDUPLICATE: too many houses (duplicate names) in wiki maps - obstruct search by street "Ярославів Вал"`?
 // TEST DEDUPLICATE: wiki / travel maps / seamarks map
 
-// TODO Performance
-// TODO Tests:
-// '10 Am Remsufer Remseck am Neckar'
-// '315 B Westside Avenue Elmira'
- 
-// TODO Extend POI tile bboxes 200m? internet_access (fuel_diesel)
+
 /////////////// EXTRA FEATURES ///////////////
-//-------- PIPELINE ----------
-// UNIT TESTING!
-// + INVESTIGATE: Limit (2000->2500) patterson 
-//    '4 ave 8 paterson' (OK - '8 4 ave paterson', '4th ave 8 paterson' play order of assigned numbers to bdl ref)
-// + 100km+: нова пошта краматорськ 3, Нова Пошта (№5 not searchable by common words / name), mihia lake
-// + 100km+: Calle 20 188 San Isidro Lima, 
-// + SLOW: "Travessa de Santo António" x "Rua Joaquim Ribeiro de Carvalho" x "portugal" (39.7412, -8.8012 Barreira Urbanização Vale da Cabrita))
-//       "Foothill Boulevard" x "Golden State Road" x "Los Angeles" x "United states of America"
-// + FORBID (slow): to interconnect tokens between 2 words - issue "<Street> <City> <Hno>"?
-
-
-// -------- PIPELINE ----------
 // TODO INDEX: highway=services (Not index)
 // TODO Sorting before load objects (use elo and other buildings?) and limit results
 // TODO Suggestion based on common suffixes
@@ -195,12 +194,13 @@ public class SpatialSearchTestAndDocs {
 //		query = "Kelterstraße Kernen im Remstal";
 //		query = "3 Hofäckerstraße Kernen im Remstal";
 //		location = new LatLon(48.88223, 9.18768);
-		query = "1 W&W Platz Kornwestheim"; // duplicate word new maps needed
+//		query = "1 W&W Platz Kornwestheim"; // duplicate word new maps needed
 //		query = "1/1 Salierstraße Waiblingen"; // duplicate in house number priority 1st
 //		query = "24 Kelterstraße Kernen im Remstal";
 //		query = "2/1 Rathausplatz Esslingen am Neckar"; // not correct
 //		query = "9 Neustädter Straße Korb";
 //		query = "14/1 J.-F.-Weishaar-Straße Korb";
+		query = "10 Am Remsufer Remseck am Neckar";
 
 //		settings = SpatialTextSearchSettings.searchPoiCategoriesSettings(0, null);
 //		query = "Gyn.";
@@ -242,11 +242,11 @@ public class SpatialSearchTestAndDocs {
 //		query = "West Valley City";
 //		query = "2110 College Avenue Elmira";
 		
-		pattern = "Us_penn";
+//		pattern = "Us_penn";
 		
-		pattern2 = "Us_new";
+//		pattern2 = "Us_new";
 //		query = "500 East College Avenue State College";
-		query = "315 B Westside Avenue Elmira"; // '315 B', '315B'
+//		query = "315 B Westside Avenue Elmira"; // '315 B', '315B'
 //		query = "'330 Innovation Boulevard University Park";
 		
 //		location = new LatLon(41.2364,-75.8843); // 649331066

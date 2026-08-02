@@ -133,7 +133,7 @@ public class SpatialPipelineObjectRes {
 		if (mainAtom.otherFoundCnt + mainAtom.otherWordsCnt < atom.otherFoundCnt + atom.otherWordsCnt) {
 			mainAtom = atom;
 		}
-		
+
 		int otherWrds = mainAtom.otherFoundCnt + mainAtom.otherWordsCnt;
 		boolean join = mainAtom.isPOI() && (fromPoiCategory(mainAtom) || fromPoiCategory(atom));
 		if ((firstInd + otherWrds >= tokenIdx && (tokenIdx - lastInd) <= 1) || join) {
@@ -199,6 +199,49 @@ public class SpatialPipelineObjectRes {
 	public static int countCoveredTokens(long mask) {
 		long activeTokensMask = (mask | (mask >>> 1)) & MASK_SET_02;
 		return Long.bitCount(activeTokensMask);
+	}
+	
+	public static boolean extraCheck(SpatialPipelineObjectRes obj1, SpatialPipelineObjectRes obj2) {
+		if (obj1.mainAtom.id == obj2.mainAtom.id) {
+			// alternatives for same object
+			return false;
+		}
+		// no fast check to test street intersection with house - no need for now
+//		if(checkBuildingVsStreet(obj1, obj2)) { return false; }
+		
+		return true;
+	}
+
+	static boolean checkBuildingVsStreet(SpatialPipelineObjectRes obj1, SpatialPipelineObjectRes obj2) {
+		int minType1 = obj1.minType();
+		int minType2 = obj2.minType();
+		if (minType1 == SpatialSearchToken.BUILDING_TYPE) {
+			if (minType2 == SpatialSearchToken.STREET_TYPE || minType2 == SpatialSearchToken.BUILDING_TYPE) {
+				return true;
+			}
+		}
+		if (minType2 == SpatialSearchToken.BUILDING_TYPE) {
+			if (minType1 == SpatialSearchToken.STREET_TYPE) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public int minType() {
+		int minType = 100;
+		for (int i = 0; i < atoms.length; i++) {
+			if (atoms[i] != null) {
+				minType = Math.min(minType, atoms[i].type);
+			}
+			if (refs1 != null && refs1[i] != null) {
+				minType = Math.min(minType, refs1[i].type);
+			}
+			if (refs2 != null && refs2[i] != null) {
+				minType = Math.min(minType, refs2[i].type);
+			}
+		}
+		return minType;
 	}
 
 	public static boolean allowed(long m1, long m2) {
@@ -322,7 +365,6 @@ public class SpatialPipelineObjectRes {
 	public String toString() {
 		return formatMaskTokens(mainMask, null) + " " + Arrays.toString(atoms);
 	}
-
 
 
 }

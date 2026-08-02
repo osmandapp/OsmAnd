@@ -285,7 +285,7 @@ public class SpatialPipelineSearch {
 				if (!SpatialPipelineObjectRes.allowed(obj1.mainMask, obj2.mainMask)) {
 					return;
 				}
-				if (obj1.mainAtom.id == obj2.mainAtom.id) {
+				if (!SpatialPipelineObjectRes.extraCheck(obj1, obj2)) {
 					return; // alternatives
 				}
 				ctx.metrics.pairsAccepted++;
@@ -550,8 +550,15 @@ public class SpatialPipelineSearch {
 	private SpatialPipelineContext prepareInitialBuckets() {
 		int totalTokens = ctx.tokens.size();
 		// combine & merge by tokens
+		Map<String, SpatialSearchToken> dupTokens = new HashMap<>();
 		for (int tokenIdx = 0; tokenIdx < totalTokens; tokenIdx++) {
 			SpatialSearchToken token = ctx.tokens.get(tokenIdx);
+			SpatialSearchToken firstToken = dupTokens.get(token.word);
+			if (firstToken == null) {
+				dupTokens.put(token.word, token);
+			} else {
+				token = firstToken; // Bug in processing dup tokens (less data assigned to 2nd)
+			}
 			TIntHashSet deleted = token.getDeletedAtoms();
 			for (NameIndexAtom atom : token.atoms) {
 				if (deleted.contains(atom.indexInToken)) {
