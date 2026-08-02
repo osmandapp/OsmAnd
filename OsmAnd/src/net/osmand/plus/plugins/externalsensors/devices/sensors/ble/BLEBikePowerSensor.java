@@ -235,10 +235,8 @@ public class BLEBikePowerSensor extends BLEAbstractSensor {
 
 
 			//Parse power
-			int power = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, offset);
-			if (power > 0){
-				getDevice().fireSensorDataEvent(this, createBikePowerData(Math.round(power)));
-			}
+			int power = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_SINT16, offset);
+			getDevice().fireSensorDataEvent(this, createBikePowerData(Math.round(power)));
 			offset += 2;
 			if (pedalPowerBalancePresent){
 				offset += 1;
