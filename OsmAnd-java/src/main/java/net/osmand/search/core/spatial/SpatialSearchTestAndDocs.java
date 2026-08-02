@@ -72,6 +72,7 @@ import net.osmand.util.SearchAlgorithms;
 // UNIT TESTING: +'Bar 4 avenue' (new york poi category present)
 // UNIT TESTING: +'10 Am Remsufer Remseck am Neckar'
 // UNIT TESTING: +'315 B Westside Avenue Elmira' ('315B' should be no interpolation, '315 B')
+// UNIT TESTING: -'138 138 Scott Avenue Bellefonte' (Wrong data but good test if street = '138 Scott Avenue'
 // NO UNIT TESTING: '400 Susquehanna Boulevard Hazel Township' (MISSING Hazel Township)
 // NO UNIT TESTING: '330 Innovation Boulevard University Park' (partial result missing university park)
 //-------- PIPELINE ----------
@@ -91,8 +92,9 @@ import net.osmand.util.SearchAlgorithms;
 ////////// IN PROGRESS //////////
 // REVIEW (index_words_dashboard - common озеро): POI / ADDRESS - France, Germany, US, Europe, China, Peru
 // REVIEW: Auto test New york, France, Italy (Slow?)
+
+// TODO '138 138 Scott Avenue Bellefonte'
 // TODO Performance Pipeline
-// TODO 2419 Avenue G Dickinson, 77539 TX USA
 // TODO Extend POI tile bboxes 200m? internet_access (fuel_diesel)
 
 // TODO INDEX: Find POI Categories translations / synonyms via Common words - Стоматол., Dentist, Basilica 
@@ -200,7 +202,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "2/1 Rathausplatz Esslingen am Neckar"; // not correct
 //		query = "9 Neustädter Straße Korb";
 //		query = "14/1 J.-F.-Weishaar-Straße Korb";
-		query = "10 Am Remsufer Remseck am Neckar";
+//		query = "10 Am Remsufer Remseck am Neckar";
 
 //		settings = SpatialTextSearchSettings.searchPoiCategoriesSettings(0, null);
 //		query = "Gyn.";
@@ -242,12 +244,13 @@ public class SpatialSearchTestAndDocs {
 //		query = "West Valley City";
 //		query = "2110 College Avenue Elmira";
 		
-//		pattern = "Us_penn";
+		pattern = "Us_penn";
 		
-//		pattern2 = "Us_new";
+		pattern2 = "Us_new";
 //		query = "500 East College Avenue State College";
 //		query = "315 B Westside Avenue Elmira"; // '315 B', '315B'
 //		query = "'330 Innovation Boulevard University Park";
+		query = "138 138 Scott Avenue Bellefonte";
 		
 //		location = new LatLon(41.2364,-75.8843); // 649331066
 //		settings.OPTIM_READ_COMMON_WORDS_ATOMS = false;
@@ -299,10 +302,17 @@ public class SpatialSearchTestAndDocs {
 //		query = "PA 21";  // 1336083883 DATA 'PA21' (+!'PA 21', +'PA-21',+'PA21') 
 
 //		pattern = "Us_texas";
-//		query = "Avenue G, Dickinson"; // 2630826474
-//		query = "2419 Avenue G, Dickinson, TX USA";
-//		query = "2419 Avenue G, Dickinson, 77539 TX USA";
-//		query = "2419 Avenue G Dickinson, 77539 TX USA";
+//		location = new LatLon(29.4729, -95.0654);
+//		query = "Avenue G, Dickinson"; // 26308264745 ! (galveston 26308256593)
+//		query = "2419 Avenue G, Dickinson"; // +
+//		query = "2419 Avenue G, Dickinson, 77539 TX"; // +
+//		query = "2419 Avenue G, Dickinson, 77539 TX USA"; // +
+//		query = "2419 Avenue G Dickinson, 77539 TX USA"; // +
+//		settings.MAX_PIPELINE_RES_TO_STOP = new int[] {3};// FIX
+//		query = "2419 Avenue G Dickinson, TX USA";// - (1 result stops further as avenue g bbox too big)
+//		query = "2419 Avenue G Dickinson, USA"; // +
+//		query = "2419 Avenue G Dickinson, TX"; // +- 3 word
+//		query = "2419 Avenue G TX" +
 //		query = "TX";
 
 		
