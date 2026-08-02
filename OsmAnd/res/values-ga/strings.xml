@@ -5191,4 +5191,5 @@
     <string name="rendering_attr_surface_laterite_name">Latairít</string>
     <string name="always_keep_local_copy">Coinnigh cóip áitiúil i gcónaí</string>
     <string name="always_keep_local_copy_description">Fanann na meáin ceangailte fiú má scriostar an bunleagan ón ngailearaí nó ó na comhaid.</string>
+    <string name="release_5_4">• Cuardach spásúil nua — aimsigh áiteanna agus déan cuardach timpeall áite\n\n• Comhéadan úsáideora cuardaigh athnuaite: sórtáil, scagairí catagóire, cuma níos glaine\n\n• Ceangail grianghraif agus meáin le Ceanáin\n\n• Ceanáin: tacaíocht do fhoghrúpaí agus fillteáin inphionáilte\n\n• Comhordanáidí: tacaíonn cuardach, eangach léarscáile, agus taispeáint POI anois le EPSG agus aimsitheoir Maidenhead\n\n• Cur isteach loingseoireachta socraithe; aistrigh idir ródú Caighdeánach agus Tapa\n\n• Socraigh scála léarscáile Android Auto ar leithligh ó do ghuthán\n\n• Chuir réalteolaíocht éiclips gréine agus gealaí leis</string>
 </resources>
