@@ -119,6 +119,11 @@ public class SpatialPoiSearch {
 			return true;
 		}
 		
+		@Override
+		public String toString() {
+			return key;
+		}
+		
 	}
 
 	public SpatialPoiSearch(MapPoiTypes types) {

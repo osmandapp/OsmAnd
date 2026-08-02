@@ -67,6 +67,7 @@ import net.osmand.util.SearchAlgorithms;
 // REVIEWED TESTS OK '276 East End Centre Wilkes-Barre'
 // UNIT TESTING: Travessa de Santo António Rua Joaquim Ribeiro Carvalho Portugal 
 // UNIT TESTING: Test poi category translations (add ru / de in test)
+// UNIT TESTING: "apple city", "harlem city" (New york) - test that result odesn't appear "city" [POI_TYPE] + "apple" [CITY_TOWN_TYPE] 'New York' 
 
 ////////// IN PROGRESS //////////
 // REVIEW (index_words_dashboard - common озеро): POI / ADDRESS - France, Germany, US, Europe, China, Peru
@@ -181,7 +182,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "Kelterstraße Kernen im Remstal";
 //		query = "3 Hofäckerstraße Kernen im Remstal";
 //		location = new LatLon(48.88223, 9.18768);
-//		query = "1 W&W Platz Kornwestheim"; // duplicate word new maps needed
+		query = "1 W&W Platz Kornwestheim"; // duplicate word new maps needed
 //		query = "1/1 Salierstraße Waiblingen"; // duplicate in house number priority 1st
 //		query = "24 Kelterstraße Kernen im Remstal";
 //		query = "2/1 Rathausplatz Esslingen am Neckar"; // not correct
@@ -435,7 +436,7 @@ public class SpatialSearchTestAndDocs {
 //		settings.ALLOW_HOUSE_POI_TYPE_INTERSECTION = false;
 //		query = "Shell 2 Rožňavská";
 		
-//		pattern = "Us_new-york_new"; // new-york, new-jersey
+		pattern = "Us_new-york_new"; // new-york, new-jersey
 //		pattern = "Us_new-"; 
 //		pattern = "Us_"; 
 //		location = new LatLon(40.78035, -73.96572); // central park
@@ -457,7 +458,9 @@ public class SpatialSearchTestAndDocs {
 //		query = "57 street"; // central park - 265345338 east, 86216906 west, (26926268 (west)?),
 //		query = "new york 57th street manhattan";
 //		query = "4th ave"; //  unit '4 ave'
-		
+//		settings.MAX_PIPELINE_RES_TO_STOP= new int[] {1};
+		query = "apple city";
+		query = "harlem city";
 		
 //		query = "4th ave 8 paterson"; //  wrong city... 26240861988
 //		settings.OPTIM_READ_COMMON_WORDS_ATOMS = false; // false -ok
@@ -495,16 +498,16 @@ public class SpatialSearchTestAndDocs {
 //		query = "Venezia";
 		
 		
-		pattern = "Portugal";
+//		pattern = "Portugal";
 //		settings.DEV_USE_PIPELINE = false;
-		location = new LatLon(39.7412, -8.8012); 
+//		location = new LatLon(39.7412, -8.8012); 
 		// Barreira Urbanização Vale da Cabrita, 258548289, 696751116
 		// MATCH: Search Stats 5392.4 ms (read 11,248 KB) - 4979.9 ms 305,862 atoms (read 330.2, match 2981.5, poi 490.6), 361.8 ms compute 5,499 (loadBld 3.6, read 2.9)
 //		settings.MAX_PIPELINE_RES_TO_STOP = new int[] {10};
-		settings.PIPELINE_MAX_STEPS = 10;
-		settings.PIPELINE_MAX_VIRTUAL_MASKS = 3;
+//		settings.PIPELINE_MAX_STEPS = 10;
+//		settings.PIPELINE_MAX_VIRTUAL_MASKS = 3;
 //		query = "Travessa de Santo António Rua Joaquim Ribeiro de Carvalho Portugal"; // 1
-		query = "Travessa de Santo António Rua Joaquim Ribeiro de Carvalho Portugal "; // 1
+//		query = "Travessa de Santo António Rua Joaquim Ribeiro de Carvalho Portugal "; // 1
 //		query = "Travessa de Santo António rua Joaquim Ribeiro de Carvalho Portugal"; // 1
 //		query = "Travessa Santo António Rua Joaquim Ribeiro Portugal "; // 20
 		
@@ -531,7 +534,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "Golden State Road Foothill Boulevard Sylmar USA";
 
 		
-//		pattern = "World_basemap_mini";
+//		pattern2 = "World_basemap_mini";
 //		pattern = "Ukraine_";
 //		location = new LatLon(50, 30);
 //		settings.DEDUPLICATE_RES = false;

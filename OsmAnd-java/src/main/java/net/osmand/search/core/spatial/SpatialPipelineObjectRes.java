@@ -3,6 +3,7 @@ package net.osmand.search.core.spatial;
 import java.util.Arrays;
 import java.util.List;
 
+import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.binary.NameIndexReader;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
 
@@ -33,7 +34,7 @@ public class SpatialPipelineObjectRes {
 
 	public long mainMask = 0;
 
-	public SpatialPipelineObjectRes(int tCount, NameIndexAtom atom, int index) {
+	public SpatialPipelineObjectRes(int tCount, NameIndexAtom atom, int index, boolean noPoiType) {
 		atoms = new NameIndexAtom[tCount];
 		bbox = atom.coords.bbox31;
 		mainAtom = atom;
@@ -41,7 +42,7 @@ public class SpatialPipelineObjectRes {
 		if (atom.atomicObject() && atom.sameNameAreaObj != null) {
 			atomic = 1; // 01 - 2 atomic
 		}
-		int category = atom.isPOI() ? 3 : 0;
+		int category = noPoiType ? 3 : 0;
 		if (atom.isPoiCategory()) {
 			category = 1; // 01
 		}
@@ -90,10 +91,13 @@ public class SpatialPipelineObjectRes {
 		return a.name != null && a.name.startsWith(NameIndexReader.POI_CATEGORY_PREFIX);
 	}
 
-	public void mergeSame(int tCount, NameIndexAtom atom, int tokenIdx) {
+	public void mergeSame(int tCount, NameIndexAtom atom, int tokenIdx, boolean noPoiType) {
 		// we need to separately process situation duplicate words in object and in query
 		if (mainAtom.isPOIRef() || mainAtom.isBuilding()) {
 			mainAtom = atom;
+		}
+		if (noPoiType && ((mainMask >> 2) & 3L) == 3) {
+			mainMask |= (3 << 2);
 		}
 		boolean ref = atom.isPOIRef() || atom.isBuilding() || atom.isPoiCategory();
 		if (ref) {
@@ -120,9 +124,9 @@ public class SpatialPipelineObjectRes {
 		if ((firstInd + otherWrds >= tokenIdx && (tokenIdx - lastInd) <= 1) || join) {
 			setAtom(atom, tokenIdx);
 		} else if (otherVariants != null) {
-			otherVariants.mergeSame(tCount, atom, tokenIdx);
+			otherVariants.mergeSame(tCount, atom, tokenIdx, noPoiType);
 		} else {
-			otherVariants = new SpatialPipelineObjectRes(tCount, atom, tokenIdx);
+			otherVariants = new SpatialPipelineObjectRes(tCount, atom, tokenIdx, noPoiType);
 		}
 	}
 	
@@ -134,6 +138,16 @@ public class SpatialPipelineObjectRes {
 			}
 		}
 		return mask;
+	}
+	
+	public int distinctObjects() {
+		TLongHashSet ids = new TLongHashSet();
+		for (int i = 0; i < atoms.length; i++) {
+			if (atoms[i] != null) {
+				ids.add(atoms[i].id);
+			}
+		}
+		return ids.size();
 	}
 	
 	public long maskOnlyByTokens() {
@@ -148,7 +162,7 @@ public class SpatialPipelineObjectRes {
 
 	void setAtom(NameIndexAtom atom, int index) {
 		boolean ref = atom.isBuilding() || atom.isPOIRef();
-		if(ref) {
+		if (ref) {
 			if (refs1 == null) {
 				refs1 = new NameIndexAtom[atoms.length];
 			} else if (refs1[index] != null) {

@@ -23,19 +23,16 @@ import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSetting
 // DONE enlarge bbox if failed 
 // DONE Gen combinations of 2 refs
 // DONE duplicate words in query wilkes-barre
-// DONE x1 implement correct mixing alternative masks! 
+// DONE x1 implement correct mixing alternative masks! (de in Portugal) 
+// DONE  common words to skip - (14-45, West 31st Road), (liectenstein_poi) , (dedupl_capraia)
+// DONE W&W duplicate words in name
+// DONE Cancel poi type intersection poi (germany_remstal):
+//      +1. (poiType != null && buildingPresent) - false
+//      +2. poiCategoryOnMatchingWord - token.hasPoiCategoryKeys (not search "apple city") ? needed?
+//      +3. poiCategoryOnNumber - token.likelyPartOfBuilding() || token.getMainNumber() > 0;
+//      +4. poi type only on p.isPOI().place = true, other false
+//      +5. if (poiTypeToken.incomplete) { false
 
-
-
-// TODO Fix de in Portugal!
-// TODO common words to skip - (14-45, West 31st Road), (liectenstein_poi) , (dedupl_capraia)
-// TODO W&W duplicate words in name
-// TODO Cancel poi type intersection poi (germany_remstal):
-//      1. (poiType != null && buildingPresent) {
-//      2. poiCategoryOnMatchingWord (not search apple city)
-//      3. poiCategoryOnNumber
-//      4. poi type only on p.isPOI().place
-//      5. if (poiTypeToken.incomplete) {
 
 // THINK LIMIT poi category -> elo by query (top 5?)?
 // THINK introduce mask check into joiner index ?
@@ -525,6 +522,35 @@ public class SpatialPipelineSearch {
 		}
 		return 1;
 	}
+	
+
+	private boolean disallowPoiType(NameIndexAtom atom, SpatialSearchToken token) {
+		if (atom.isPOI()) {
+			if (atom.poiTypes == null) {
+				return true;
+			}
+			boolean match = false;
+			for (int k = 0; k < atom.poiTypes.size(); k++) {
+				int pType = atom.poiTypes.get(k);
+//				if ( pType == poiType.id) { should be handled by atom associated directly
+				if (ctx.searchContext.poiSearch.getById(pType).isPlace()) {
+					match = true;
+					break;
+				}
+			}
+			if (!match) {
+				return true;
+			}
+		}
+		if (atom.isBuilding()) {
+			return true;
+		}
+		if (token.likelyPartOfBuilding() || token.getMainNumber() > 0) {
+			return true;
+		}
+		return false;
+	}
+	
 
 	private SpatialPipelineContext prepareInitialBuckets() {
 		int totalTokens = ctx.tokens.size();
@@ -537,10 +563,11 @@ public class SpatialPipelineSearch {
 					continue;
 				}
 				SpatialPipelineObjectRes existing = ctx.objectsById.get(atom.id);
+				boolean noPoiType = disallowPoiType(atom, token);
 				if (existing != null) {
-					existing.mergeSame(totalTokens, atom, tokenIdx);
+					existing.mergeSame(totalTokens, atom, tokenIdx, noPoiType);
 				} else {
-					SpatialPipelineObjectRes obj = new SpatialPipelineObjectRes(totalTokens, atom, tokenIdx);
+					SpatialPipelineObjectRes obj = new SpatialPipelineObjectRes(totalTokens, atom, tokenIdx, noPoiType);
 					ctx.objectsById.put(atom.id, obj);
 				}
 			}
@@ -625,7 +652,7 @@ public class SpatialPipelineSearch {
 			// actual size doesn't matter any more
 			int z = 15;
 			long tileId = HashQuadTree.encodeTileId(z, res.bbox[0] >> (31 - z), res.bbox[1] >> (31 - z));
-
+			
 			for (int refs = 0; refs < (res.refs2 != null ? 2 : 1); refs++) {
 				atoms.clear();
 				for (int i = 0; i < res.atoms.length; i++) {
@@ -636,7 +663,14 @@ public class SpatialPipelineSearch {
 						atom = res.refs2[i];
 					}
 					if (atom != null) {
-						atoms.add(atom);
+						boolean skip = false;
+						if (atom.isPoiCategory() && res.distinctObjects() > 1) {
+							// skip incomplete (not efficient to do by masks)
+							skip = tokens.get(i).incomplete || tokens.get(i).hasPoiCategoryKeys();
+						} 
+						if(!skip) {
+							atoms.add(atom);
+						}
 					}
 				}
 				if (atoms.size() == tokens.size()) {
