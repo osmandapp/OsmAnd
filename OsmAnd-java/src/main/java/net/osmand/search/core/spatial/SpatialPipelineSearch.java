@@ -22,11 +22,15 @@ import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSetting
 // DONE Add non maximum results as well... (surplus words +-) -  germany_remstal!
 // DONE enlarge bbox if failed 
 // DONE Gen combinations of 2 refs
+// DONE duplicate words in query wilkes-barre
+// DONE x1 implement correct mixing alternative masks! 
 
-// TODO x1 implement correct mixing alternative masks! Portugal!
 
-// TODO common words to skip - 14-45, West 31st Road 
-// TODO Cancel poi type intersection poi:
+
+// TODO Fix de in Portugal!
+// TODO common words to skip - (14-45, West 31st Road), (liectenstein_poi) , (dedupl_capraia)
+// TODO W&W duplicate words in name
+// TODO Cancel poi type intersection poi (germany_remstal):
 //      1. (poiType != null && buildingPresent) {
 //      2. poiCategoryOnMatchingWord (not search apple city)
 //      3. poiCategoryOnNumber
@@ -788,7 +792,6 @@ public class SpatialPipelineSearch {
 				}
 
 				ex |= validateResultsAndFinish(res, depth, lst);
-
 			}
 			if (ex) {
 				return ctx.results;

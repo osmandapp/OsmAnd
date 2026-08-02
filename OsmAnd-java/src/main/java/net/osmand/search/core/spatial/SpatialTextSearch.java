@@ -127,7 +127,7 @@ public class SpatialTextSearch {
 
 		// FEATURE #2. PIPELINE vs INTERSECTIONS algorithm 
 		// Use mechanism to smart selection results intead of all word x word intersections
-		public boolean DEV_USE_PIPELINE = false;
+		public boolean DEV_USE_PIPELINE = true;
 		
 		// print some poi cat - to be deleted once web/android completed
 		public int TEST_PRINT_POI_CAT_LIMIT = 0; // 10
@@ -175,12 +175,11 @@ public class SpatialTextSearch {
 		public int PIPELINE_MAX_STEPS = 8; // 0 - fully covered 1 object, 1 - 2 objects, 2 - 3 objects ...
 		// {100, 500} - STOP EVALUATION - if at least 100 fully covered or 500 2 objects
 		public int MAX_PIPELINE_ANY_RES = 10000;
-		public int[] MAX_PIPELINE_RES_TO_STOP = new int[] {50, 3, 1};
+		public int[] MAX_PIPELINE_RES_TO_STOP = new int[] { 50, 3, 1 };
 //		public int[] MAX_PIPELINE_RES_TO_STOP = new int[] {1}; // just 1 result to stop
 		public int PIPELINE_FREQUENT_OBJECTS_THRESHOLD = 5000;
-	    public int PIPELINE_MAX_VIRTUAL_MASKS = 10;
-		
-		
+		public int PIPELINE_MAX_VIRTUAL_MASKS = 7;
+
 		public double evalEnlargeBoundary(Map<Integer, Double> mp, double dim) {
 			Iterator<Entry<Integer, Double>> it = mp.entrySet().iterator();
 			double val = 0;

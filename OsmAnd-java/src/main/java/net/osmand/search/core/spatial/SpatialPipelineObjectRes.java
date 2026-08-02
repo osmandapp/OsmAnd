@@ -3,6 +3,7 @@ package net.osmand.search.core.spatial;
 import java.util.Arrays;
 import java.util.List;
 
+import net.osmand.binary.NameIndexReader;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
 
 public class SpatialPipelineObjectRes {
@@ -84,29 +85,45 @@ public class SpatialPipelineObjectRes {
 			}
 		}
 	}
+	
+	private boolean fromPoiCategory(NameIndexAtom a) {
+		return a.name != null && a.name.startsWith(NameIndexReader.POI_CATEGORY_PREFIX);
+	}
 
 	public void mergeSame(int tCount, NameIndexAtom atom, int tokenIdx) {
 		// we need to separately process situation duplicate words in object and in query
 		if (mainAtom.isPOIRef() || mainAtom.isBuilding()) {
 			mainAtom = atom;
 		}
-		boolean ref = atom.isPOIRef() || atom.isBuilding();
+		boolean ref = atom.isPOIRef() || atom.isBuilding() || atom.isPoiCategory();
 		if (ref) {
 			setAtom(atom, tokenIdx);
 			return;
 		}
-		int firstInd ;
-		for (firstInd = 0; firstInd < tokenIdx; firstInd++) {
-			if (getTokenState(mainMask, firstInd) == STATE_EXACT_MATCH) {
-				break;
+		int firstInd = tokenIdx;
+		int lastInd = tokenIdx;
+		for (int ind = 0; ind < tokenIdx; ind++) {
+			if (getTokenState(mainMask, ind) == STATE_EXACT_MATCH) {
+				if (firstInd == tokenIdx) {
+					firstInd = ind;
+				}
+				lastInd = ind;
 			}
 		}
+		// test '2nd new street'
+		if (mainAtom.otherFoundCnt + mainAtom.otherWordsCnt < atom.otherFoundCnt + atom.otherWordsCnt) {
+			mainAtom = atom;
+		}
 		int otherWrds = mainAtom.otherFoundCnt + mainAtom.otherWordsCnt;
-		if (firstInd + otherWrds >= tokenIdx) {
+		boolean join = mainAtom.isPOI() && (fromPoiCategory(mainAtom) || fromPoiCategory(atom)); 
+		if ((firstInd + otherWrds >= tokenIdx && (tokenIdx - lastInd) <= 1) || join) {
 			setAtom(atom, tokenIdx);
 		} else if (otherVariants != null) {
 			otherVariants.mergeSame(tCount, atom, tokenIdx);
 		} else {
+			if(atom.name.contains("rua") && atom.name.contains("de")  && atom.name.contains("ribeira")) {
+				System.out.println(atom + "  " + tokenIdx);
+			}
 			otherVariants = new SpatialPipelineObjectRes(tCount, atom, tokenIdx);
 		}
 	}

@@ -65,7 +65,8 @@ import net.osmand.util.SearchAlgorithms;
 // UNIT TESTING: City > Boundary + location? Format strings (City > Boundary)...
 // UNIT TESTING: (Deduplicate categories brand id) - "okko", "ОККО" - (split 2 maps one without brand id one with)
 // REVIEWED TESTS OK '276 East End Centre Wilkes-Barre'
-// TODO Test poi category translations
+// UNIT TESTING: Travessa de Santo António Rua Joaquim Ribeiro Carvalho Portugal 
+// UNIT TESTING: Test poi category translations (add ru / de in test)
 
 ////////// IN PROGRESS //////////
 // REVIEW (index_words_dashboard - common озеро): POI / ADDRESS - France, Germany, US, Europe, China, Peru
@@ -79,16 +80,18 @@ import net.osmand.util.SearchAlgorithms;
 // TEST DEDUPLICATE: wiki / travel maps / seamarks map
 
 // TODO Extend POI tile bboxes 200m? internet_access (fuel_diesel) 
-// TODO INVESTIGATE: Limit (2000->2500) patterson 
-//      '4 ave 8 paterson' (OK - '8 4 ave paterson', '4th ave 8 paterson' play order of assigned numbers to bdl ref)
 
 /////////////// EXTRA FEATURES ///////////////
-// TODO INDEX: highway=services (Not index)
+//-------- PIPELINE ----------
+// TODO INVESTIGATE: Limit (2000->2500) patterson 
+//    '4 ave 8 paterson' (OK - '8 4 ave paterson', '4th ave 8 paterson' play order of assigned numbers to bdl ref)
 // TODO 100km+: нова пошта краматорськ 3, Нова Пошта (№5 not searchable by common words / name), mihia lake
 // TODO 100km+: Calle 20 188 San Isidro Lima, 
 // SLOW: "Travessa de Santo António" x "Rua Joaquim Ribeiro de Carvalho" x "portugal" (39.7412, -8.8012 Barreira Urbanização Vale da Cabrita))
 //       "Foothill Boulevard" x "Golden State Road" x "Los Angeles" x "United states of America"
 // TODO FORBID (slow): to interconnect tokens between 2 words - issue "<Street> <City> <Hno>"?
+// -------- PIPELINE ----------
+// TODO INDEX: highway=services (Not index)
 // TODO Sorting before load objects (use elo and other buildings?) and limit results
 // TODO Suggestion based on common suffixes
 // TODO Store and test conscription number for some cities - issue (RZR)
@@ -494,12 +497,15 @@ public class SpatialSearchTestAndDocs {
 		
 		pattern = "Portugal";
 //		settings.DEV_USE_PIPELINE = false;
-//		location = new LatLon(39.7412, -8.8012); // Barreira Urbanização Vale da Cabrita
+		location = new LatLon(39.7412, -8.8012); 
+		// Barreira Urbanização Vale da Cabrita, 258548289, 696751116
 		// MATCH: Search Stats 5392.4 ms (read 11,248 KB) - 4979.9 ms 305,862 atoms (read 330.2, match 2981.5, poi 490.6), 361.8 ms compute 5,499 (loadBld 3.6, read 2.9)
-		settings.MAX_PIPELINE_RES_TO_STOP = new int[] {10};
+//		settings.MAX_PIPELINE_RES_TO_STOP = new int[] {10};
 		settings.PIPELINE_MAX_STEPS = 10;
+		settings.PIPELINE_MAX_VIRTUAL_MASKS = 3;
 //		query = "Travessa de Santo António Rua Joaquim Ribeiro de Carvalho Portugal"; // 1
-		query = "Travessa Santo António Rua Joaquim Ribeiro Carvalho Portugal "; // 1
+		query = "Travessa de Santo António Rua Joaquim Ribeiro de Carvalho Portugal "; // 1
+//		query = "Travessa de Santo António rua Joaquim Ribeiro de Carvalho Portugal"; // 1
 //		query = "Travessa Santo António Rua Joaquim Ribeiro Portugal "; // 20
 		
 //		pattern = "France_ile-de-france";
