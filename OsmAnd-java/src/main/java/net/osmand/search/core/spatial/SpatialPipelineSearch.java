@@ -539,7 +539,7 @@ public class SpatialPipelineSearch {
 			return true;
 		}
 		if (token.likelyPartOfBuilding() || token.getMainNumber() > 0) {
-			return true;
+//			return true; // bar 4 avenue
 		}
 		return false;
 	}

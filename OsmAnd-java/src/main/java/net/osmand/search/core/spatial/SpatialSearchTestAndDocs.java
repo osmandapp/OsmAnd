@@ -68,10 +68,11 @@ import net.osmand.util.SearchAlgorithms;
 // UNIT TESTING: Travessa de Santo António Rua Joaquim Ribeiro Carvalho Portugal 
 // UNIT TESTING: Test poi category translations (add ru / de in test)
 // UNIT TESTING: "apple city", "harlem city" (New york) - test that result odesn't appear "city" [POI_TYPE] + "apple" [CITY_TOWN_TYPE] 'New York' 
+// UNIT TESTING: +'500 East College Avenue State College' (partial, no poi type, n)
+// UNIT TESTING: +'Bar 4 avenue' (new york poi category present)
 // UNIT TESTING: '400 Susquehanna Boulevard Hazel Township'
 // UNIT TESTING: '10 Am Remsufer Remseck am Neckar'
-// UNIT TESTING: '500 East College Avenue State College' (partial, no poi type, n)
-
+// UNIT TESTING: '315 B Westside Avenue Elmira'
 ////////// IN PROGRESS //////////
 // REVIEW (index_words_dashboard - common озеро): POI / ADDRESS - France, Germany, US, Europe, China, Peru
 // REVIEW: Auto test New york, France, Italy (Slow?)
@@ -83,17 +84,17 @@ import net.osmand.util.SearchAlgorithms;
 // TODO DEDUPLICATE: too many houses (duplicate names) in wiki maps - obstruct search by street "Ярославів Вал"`?
 // TEST DEDUPLICATE: wiki / travel maps / seamarks map
 
-// TODO Extend POI tile bboxes 200m? internet_access (fuel_diesel) 
+// TODO Extend POI tile bboxes 200m? internet_access (fuel_diesel)
+// TODO Performance
 // TODO Tests:
 // '10 Am Remsufer Remseck am Neckar'
 // '400 Susquehanna Boulevard Hazel Township'
 // '315 B Westside Avenue Elmira'
 // '315 A Westside Avenue Elmira'
-// '330 Innovation Boulevard University Park'
+// '330 Innovation Boulevard University Park'?
 // '42 South Market Street Mt Carmel'
 // PARTIAL
-// '500 East College Avenue State College'
-// TODO test 'Bar 4 avenue' 
+ 
 /////////////// EXTRA FEATURES ///////////////
 //-------- PIPELINE ----------
 // TODO INVESTIGATE: Limit (2000->2500) patterson 
@@ -243,10 +244,10 @@ public class SpatialSearchTestAndDocs {
 //		query = "West Valley City";
 //		query = "2110 College Avenue Elmira";
 		
-		pattern = "Us_penn";
+//		pattern = "Us_penn";
 		
-		pattern2 = "Us_new";
-		query = "500 East College Avenue State College";
+//		pattern2 = "Us_new";
+//		query = "500 East College Avenue State College";
 		
 //		location = new LatLon(41.2364,-75.8843); // 649331066
 //		settings.OPTIM_READ_COMMON_WORDS_ATOMS = false;
@@ -478,6 +479,7 @@ public class SpatialSearchTestAndDocs {
 //		settings.MAX_PIPELINE_RES_TO_STOP= new int[] {1};
 //		query = "apple city";
 //		query = "harlem city";
+//		query = "bar 4 ave";
 		
 //		query = "4th ave 8 paterson"; //  wrong city... 26240861988
 //		settings.OPTIM_READ_COMMON_WORDS_ATOMS = false; // false -ok
