@@ -308,7 +308,11 @@ public class SpatialTextSearch {
 				if (c1 != c2) {
 					return Integer.compare(c1, c2);
 				}
-				return o1.word.compareTo(o2.word);
+				int res = o1.word.compareTo(o2.word);
+				if(res != 0) {
+					return res;
+				}
+				return Integer.compare(o1.originalOrder, o2.originalOrder);
 			}
 
 		});
