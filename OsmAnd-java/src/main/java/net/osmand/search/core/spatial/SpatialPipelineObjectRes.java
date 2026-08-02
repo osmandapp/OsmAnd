@@ -114,16 +114,14 @@ public class SpatialPipelineObjectRes {
 		if (mainAtom.otherFoundCnt + mainAtom.otherWordsCnt < atom.otherFoundCnt + atom.otherWordsCnt) {
 			mainAtom = atom;
 		}
+		
 		int otherWrds = mainAtom.otherFoundCnt + mainAtom.otherWordsCnt;
-		boolean join = mainAtom.isPOI() && (fromPoiCategory(mainAtom) || fromPoiCategory(atom)); 
+		boolean join = mainAtom.isPOI() && (fromPoiCategory(mainAtom) || fromPoiCategory(atom));
 		if ((firstInd + otherWrds >= tokenIdx && (tokenIdx - lastInd) <= 1) || join) {
 			setAtom(atom, tokenIdx);
 		} else if (otherVariants != null) {
 			otherVariants.mergeSame(tCount, atom, tokenIdx);
 		} else {
-			if(atom.name.contains("rua") && atom.name.contains("de")  && atom.name.contains("ribeira")) {
-				System.out.println(atom + "  " + tokenIdx);
-			}
 			otherVariants = new SpatialPipelineObjectRes(tCount, atom, tokenIdx);
 		}
 	}
