@@ -56,7 +56,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 		NAUTICAL_DEPTH("nautical_depth", IndexConstants.NAUTICAL_INDEX_DIR, R.drawable.ic_action_nautical_depth),
 		FAVORITES_BACKUP("favorites_backup", IndexConstants.BACKUP_INDEX_DIR, R.drawable.ic_action_folder_favorites),
 		COLOR_PALETTE("colors_palette", IndexConstants.COLOR_PALETTE_DIR, R.drawable.ic_action_file_color_palette),
-		ATTACHED_MEDIA("attached_media", IndexConstants.AV_INDEX_DIR, R.drawable.ic_action_photo_dark);
+		ATTACHED_MEDIA("attached_media", IndexConstants.MEDIA_INDEX_DIR, R.drawable.ic_action_photo_dark);
 
 		private final String subtypeName;
 		private final String subtypeFolder;

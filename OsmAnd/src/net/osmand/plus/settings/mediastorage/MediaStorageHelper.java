@@ -63,6 +63,11 @@ public class MediaStorageHelper {
 	}
 
 	@NonNull
+	private File getLegacyInternalMediaDir() {
+		return MediaProvider.getLegacyInternalMediaDir(app.getAppPath().getAbsolutePath());
+	}
+
+	@NonNull
 	public String getStorageDisplayDirectory(@NonNull MediaStorageType storageType) {
 		return getStorageDisplayDirectory(storageType, app.getSettings().MEDIA_STORAGE_MANUAL_URI.get());
 	}
@@ -128,7 +133,10 @@ public class MediaStorageHelper {
 					MediaStorageUtils.getMediaStoreRelativePath(storageType, dirType), fileName);
 		}
 		File dir = MediaStorageUtils.resolveRawMediaDir(storageType, dirType, getInternalMediaDir());
-		return dir != null && new File(dir, fileName).exists();
+		if (dir != null && new File(dir, fileName).exists()) {
+			return true;
+		}
+		return storageType == MAIN_STORAGE && new File(getLegacyInternalMediaDir(), fileName).exists();
 	}
 
 	@Nullable
@@ -200,7 +208,8 @@ public class MediaStorageHelper {
 	}
 
 	private boolean isInInternalMediaDir(@NonNull File file) {
-		return MediaStorageUtils.isInDirectory(getInternalMediaDir(), file);
+		return MediaStorageUtils.isInDirectory(getInternalMediaDir(), file)
+				|| MediaStorageUtils.isInDirectory(getLegacyInternalMediaDir(), file);
 	}
 
 	/**
@@ -302,7 +311,7 @@ public class MediaStorageHelper {
 			return false;
 		}
 		if (location.getStorageType() == MAIN_STORAGE) {
-			return MediaStorageUtils.isInDirectory(getInternalMediaDir(), file);
+			return isInInternalMediaDir(file);
 		}
 		if (location.getStorageType() == MANUALLY_SPECIFIED) {
 			return false;

@@ -17,6 +17,7 @@ import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.shared.gpx.primitives.Link;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.media.LinkMediaFactory;
+import net.osmand.shared.media.MediaProvider;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -57,16 +58,16 @@ class DeleteMediaFilesTask extends AsyncTask<Void, Void, Integer> {
 
 	@NonNull
 	private List<MediaSource> collectUnreferencedSources() {
-		Set<String> paths = new HashSet<>();
-		addInternalPaths(paths, links);
-		paths.removeAll(collectReferencedPaths());
+		Set<String> fileNames = new HashSet<>();
+		addInternalFileNames(fileNames, links);
+		fileNames.removeAll(collectReferencedFileNames());
 
 		MediaStorageHelper storageHelper = new MediaStorageHelper(app);
 		MediaStorageLocation location = MediaStorageLocation.fromSettings(app);
 
 		List<MediaSource> res = new ArrayList<>();
-		for (String path : paths) {
-			MediaSource source = storageHelper.resolveMediaSource(location, LinkMediaFactory.createInternalUri(path), false);
+		for (String fileName : fileNames) {
+			MediaSource source = storageHelper.resolveMediaSource(location, LinkMediaFactory.createInternalMediaUri(fileName), false);
 			if (source != null) {
 				res.add(source);
 			}
@@ -89,23 +90,23 @@ class DeleteMediaFilesTask extends AsyncTask<Void, Void, Integer> {
 	}
 
 	@NonNull
-	private Set<String> collectReferencedPaths() {
+	private Set<String> collectReferencedFileNames() {
 		Set<String> res = new HashSet<>();
 		for (FavouritePoint point : app.getFavoritesHelper().getFavouritePoints()) {
-			addInternalPaths(res, point.getLinks());
+			addInternalFileNames(res, point.getLinks());
 		}
 		for (SelectedGpxFile selectedGpxFile : app.getSelectedGpxHelper().getSelectedGPXFiles()) {
 			for (WptPt wpt : selectedGpxFile.getGpxFile().getPointsList()) {
-				addInternalPaths(res, wpt.getLinks());
+				addInternalFileNames(res, wpt.getLinks());
 			}
 			for (WptPt routePoint : selectedGpxFile.getGpxFile().getRoutePoints()) {
-				addInternalPaths(res, routePoint.getLinks());
+				addInternalFileNames(res, routePoint.getLinks());
 			}
 		}
 		return res;
 	}
 
-	private static void addInternalPaths(@NonNull Set<String> res, @Nullable List<Link> links) {
+	private static void addInternalFileNames(@NonNull Set<String> res, @Nullable List<Link> links) {
 		if (links == null) {
 			return;
 		}
@@ -114,7 +115,10 @@ class DeleteMediaFilesTask extends AsyncTask<Void, Void, Integer> {
 			if (!Algorithms.isEmpty(href)) {
 				String path = LinkMediaFactory.getInternalPath(href.trim());
 				if (path != null) {
-					res.add(path);
+					String fileName = MediaProvider.getInternalMediaAliasFileName(path);
+					if (!Algorithms.isEmpty(fileName)) {
+						res.add(fileName);
+					}
 				}
 			}
 		}

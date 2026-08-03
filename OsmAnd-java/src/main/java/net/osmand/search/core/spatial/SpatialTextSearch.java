@@ -140,7 +140,7 @@ public class SpatialTextSearch {
 		// by deleting embedded or duplicate boundaries in each other
 		public boolean OPTIM_DELETE_EMBEDDED_BOUNDARIES = true;
 
-		// OPTIMIZATION #2
+		// OPTIMIZATION #2 (IMPORTANT for results - public transport stops)
 		// In case POI is called 'Bratislava' it will be not allowed to be searched as POIxPOI, POIxStreet
 		// Related frequent POIs like "City&Bike 4th Street..." or public transport stops
 		public boolean OPTIM_FLAG_POI_SAME_AS_CITY_STREET = true;

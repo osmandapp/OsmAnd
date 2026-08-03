@@ -3099,8 +3099,8 @@
     <string name="routing_attr_avoid_tunnels_description">Vyhnúť sa tunelom</string>
     <string name="routing_attr_avoid_tunnels_name">Vyhnúť sa tunelom</string>
     <string name="backup_promocode">Promokód</string>
-    <string name="send_crash_log">Odoslať záznam o páde aplikácie</string>
-    <string name="send_logcat_log">Odoslať záznam logcat</string>
+    <string name="send_crash_log">Odoslať záznamy o pádoch aplikácie</string>
+    <string name="send_logcat_log">Odoslať záznamy aktuálneho behu</string>
     <string name="purchases_feature_desc_nautical">Získajte prístup k údajom o námornej hĺbke</string>
     <string name="purchases_feature_desc_terrain">Terénne vrstevnice, mapy so sivými tieňovanými svahmi a mapy sklonov s farbami na zvýraznenie vrcholov a nížin.</string>
     <string name="purchases_feature_desc_wikivoyage">Skúmajte sprievodcov Wikivoyage offline. Články rozdelené podľa krajín a regiónov a dostupné vo všetkých jazykoch.</string>
@@ -5305,4 +5305,19 @@
     <string name="astro_designations">Označenia</string>
     <string name="rendering_attr_surface_clay_name">Íl</string>
     <string name="rendering_attr_surface_laterite_name">Laterit</string>
+    <string name="always_keep_local_copy">Vždy ponechať lokálnu kópiu</string>
+    <string name="always_keep_local_copy_description">Mediálny súbor zostane pripojený aj keď je originál vymazaný z galérie alebo súborov.</string>
+    <string name="astro_show_map">Zobraziť mapu</string>
+    <string name="astro_hide_map">Skryť mapu</string>
+    <string name="astro_map_center_location">Stred mapy: %1$s</string>
+    <string name="astro_solar_eclipse">Zatmenie Slnka</string>
+    <string name="astro_solar_eclipse_subtitle">Preskúmajte celosvetové zatmenia Slnka</string>
+    <string name="astro_previous_solar_eclipse">Predchádzajúce zatmenie Slnka</string>
+    <string name="astro_next_solar_eclipse">Nasledujúce zatmenie Slnka</string>
+    <string name="astro_total_solar_eclipse">Úplné zatmenie Slnka</string>
+    <string name="astro_annular_solar_eclipse">Prstencové zatmenie Slnka</string>
+    <string name="astro_partial_solar_eclipse">Čiastočné zatmenie Slnka</string>
+    <string name="astro_eclipse_phase_total">Úplné</string>
+    <string name="astro_eclipse_phase_annular">Prstencové</string>
+    <string name="astro_eclipse_phase_partial">Čiastočné</string>
 </resources>

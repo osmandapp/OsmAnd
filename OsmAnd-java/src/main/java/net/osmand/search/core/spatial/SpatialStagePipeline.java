@@ -1,9 +1,11 @@
 package net.osmand.search.core.spatial;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import gnu.trove.map.hash.TLongObjectHashMap;
+import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.search.core.HashSkipTileQuadTree;
 import net.osmand.search.core.HashSkipTileQuadTree.TileEntry;
 import net.osmand.search.core.HashSkipTileQuadTreeJoiner;
@@ -12,10 +14,9 @@ import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSetting
 
 public class SpatialStagePipeline {
 
-    // 2-Bit Token States
-    public static final long STATE_NO_MATCH = 0L;      // Token does not belong to object
-    public static final long STATE_EXACT_MATCH = 1L;   // Token explicitly belongs to object
-    public static final long STATE_AMBIGUOUS = 2L;     // Token is isBuilding or isPOIRef
+    public static final long STATE_NO_MATCH = 0L;      // 00
+    public static final long STATE_EXACT_MATCH = 1L;   // 01
+    public static final long STATE_AMBIGUOUS = 2L;     // 10
 
     private final SpatialSearchContext ctx;
 
@@ -23,15 +24,10 @@ public class SpatialStagePipeline {
         this.ctx = ctx;
     }
 
-    // =========================================================================
-    // DTO Models
-    // =========================================================================
-
     public static class PipelinePrepResult {
         public final List<NameIndexAtom> fullyCoveredAtoms = new ArrayList<>();
         public final HashSkipTileQuadTree<NameIndexAtom> allObjectsTree = new HashSkipTileQuadTree<>();
         public final HashSkipTileQuadTree<NameIndexAtom> areaObjectsTree = new HashSkipTileQuadTree<>();
-        // Unique atom.id -> List of token masks (handles duplicate words in query)
         public final TLongObjectHashMap<List<Long>> objectMasks = new TLongObjectHashMap<>();
     }
 
@@ -86,23 +82,14 @@ public class SpatialStagePipeline {
     public static class ConcreteAssignmentPair {
         public final SpatialSearchResultPair parentPair;
         public final long resolvedMask;
-        public final long assignedToA1Mask;
-        public final long assignedToA2Mask;
         public final NameIndexAtom refOwner;
 
-        public ConcreteAssignmentPair(SpatialSearchResultPair parentPair, long resolvedMask, 
-                                      long assignedToA1Mask, long assignedToA2Mask, NameIndexAtom refOwner) {
+        public ConcreteAssignmentPair(SpatialSearchResultPair parentPair, long resolvedMask, NameIndexAtom refOwner) {
             this.parentPair = parentPair;
             this.resolvedMask = resolvedMask;
-            this.assignedToA1Mask = assignedToA1Mask;
-            this.assignedToA2Mask = assignedToA2Mask;
             this.refOwner = refOwner;
         }
     }
-
-    // =========================================================================
-    // Bitmask Helper Utilities
-    // =========================================================================
 
     public static long setTokenState(long currentMask, int tokenIdx, long state) {
         int shift = tokenIdx * 2;
@@ -138,14 +125,19 @@ public class SpatialStagePipeline {
         return true;
     }
 
+    public static int countCoveredTokens(long mask, int totalTokens) {
+        int count = 0;
+        for (int i = 0; i < totalTokens; i++) {
+            long state = (mask >> (i * 2)) & 3L;
+            if (state != STATE_NO_MATCH) count++;
+        }
+        return count;
+    }
+
     public static List<ConcreteAssignmentPair> expandAmbiguousPairsAllOrNothing(
-            SpatialSearchResultPair pair, 
-            long mask1, 
-            long mask2, 
-            int totalTokens) {
+            SpatialSearchResultPair pair, long mask1, long mask2, int totalTokens) {
 
         List<ConcreteAssignmentPair> permutations = new ArrayList<>(2);
-
         List<Integer> ambiguousIndices = new ArrayList<>();
         for (int i = 0; i < totalTokens; i++) {
             long state = (pair.combinedMask >> (i * 2)) & 3L;
@@ -155,40 +147,24 @@ public class SpatialStagePipeline {
         }
 
         if (ambiguousIndices.isEmpty()) {
-            permutations.add(new ConcreteAssignmentPair(pair, pair.combinedMask, mask1, mask2, null));
+            permutations.add(new ConcreteAssignmentPair(pair, pair.combinedMask, null));
             return permutations;
         }
 
-        // Option A: Assign ALL ambiguous tokens to Atom 1
         long combinedMask1 = pair.combinedMask;
-        long resolvedMaskA1 = mask1;
-        long resolvedMaskA2 = mask2;
-
         for (int tokenIdx : ambiguousIndices) {
             combinedMask1 = setTokenState(combinedMask1, tokenIdx, STATE_EXACT_MATCH);
-            resolvedMaskA1 = setTokenState(resolvedMaskA1, tokenIdx, STATE_EXACT_MATCH);
-            resolvedMaskA2 = setTokenState(resolvedMaskA2, tokenIdx, STATE_NO_MATCH);
         }
-        permutations.add(new ConcreteAssignmentPair(pair, combinedMask1, resolvedMaskA1, resolvedMaskA2, pair.atom1));
+        permutations.add(new ConcreteAssignmentPair(pair, combinedMask1, pair.atom1));
 
-        // Option B: Assign ALL ambiguous tokens to Atom 2
         long combinedMask2 = pair.combinedMask;
-        long resolvedMaskB1 = mask1;
-        long resolvedMaskB2 = mask2;
-
         for (int tokenIdx : ambiguousIndices) {
             combinedMask2 = setTokenState(combinedMask2, tokenIdx, STATE_EXACT_MATCH);
-            resolvedMaskB1 = setTokenState(resolvedMaskB1, tokenIdx, STATE_NO_MATCH);
-            resolvedMaskB2 = setTokenState(resolvedMaskB2, tokenIdx, STATE_EXACT_MATCH);
         }
-        permutations.add(new ConcreteAssignmentPair(pair, combinedMask2, resolvedMaskB1, resolvedMaskB2, pair.atom2));
+        permutations.add(new ConcreteAssignmentPair(pair, combinedMask2, pair.atom2));
 
         return permutations;
     }
-
-    // =========================================================================
-    // Pipeline Preparation
-    // =========================================================================
 
     private PipelinePrepResult prepare(List<SpatialSearchToken> tokens) {
         PipelinePrepResult prep = new PipelinePrepResult();
@@ -247,11 +223,86 @@ public class SpatialStagePipeline {
         return prep;
     }
 
-    // =========================================================================
-    // Pipeline Core Execution
-    // =========================================================================
+    private static int calculateTypeIntersection(NameIndexAtom a1, NameIndexAtom a2) {
+        boolean a1Street = a1.isStreetBuilding();
+        boolean a2Street = a2.isStreetBuilding();
+        if (a1Street != a2Street) {
+            return 1;
+        }
+        return 2;
+    }
 
-    public List<SpatialSearchResultsList> runPipeline(List<SpatialSearchToken> tokens) {
+    private static void addCombinationResult(
+            SpatialSearchResultsList list, 
+            List<NameIndexAtom> atoms, 
+            List<SpatialSearchToken> tokens,
+            int typeIntersection) {
+
+        int tCount = tokens.size();
+        NameIndexAtom[] orderedAtoms = new NameIndexAtom[tCount];
+
+        for (NameIndexAtom atom : atoms) {
+            for (int i = 0; i < tCount; i++) {
+                if (tokens.get(i).atoms.contains(atom)) {
+                    orderedAtoms[i] = atom;
+                }
+            }
+        }
+
+        for (int i = 0; i < tCount; i++) {
+            if (orderedAtoms[i] == null) {
+                for (NameIndexAtom atom : atoms) {
+                    if (tokens.get(i).index.containsKey(atom.id)) {
+                        orderedAtoms[i] = atom;
+                        break;
+                    }
+                }
+            }
+            if (orderedAtoms[i] == null && !atoms.isEmpty()) {
+                orderedAtoms[i] = atoms.get(0);
+            }
+        }
+
+        int maxZoom = 0;
+        long mainTileId = 0;
+        for (NameIndexAtom a : orderedAtoms) {
+            if (a != null && a.coords != null && a.coords.bboxTileZoom > maxZoom) {
+                maxZoom = a.coords.bboxTileZoom;
+                mainTileId = a.coords.bboxTileId;
+            }
+        }
+
+        for (int i = 0; i < tCount; i++) {
+            list.linearResults.add(orderedAtoms[i]);
+        }
+
+        list.typeIntersections.add(typeIntersection);
+        list.tileIds.add(mainTileId);
+        list.tileZooms.add(maxZoom);
+
+        int combinationIndex = list.getCombinations() - 1;
+        list.quadTree.put(maxZoom, mainTileId, combinationIndex);
+    }
+
+    private boolean finalizeAndValidateStage(SpatialSearchResultsList stageList, String stageName) throws IOException {
+        System.out.printf("[PIPELINE-LOG] Finalizing %s with %d raw combinations...\n", stageName, stageList.getCombinations());
+        if (stageList.getCombinations() == 0 || ctx.isCancelled()) {
+            return false;
+        }
+
+        stageList.loadObjectsAndCalcBuildings(ctx);
+        if (ctx.isCancelled()) {
+            return false;
+        }
+
+        List<SpatialSearchResult> res = stageList.sortResults(ctx, ctx.settings.DEDUPLICATE_RES);
+        int validCount = res != null ? res.size() : 0;
+        System.out.printf("[PIPELINE-LOG] %s after load & deduplicate: %d valid results.\n", stageName, validCount);
+
+        return validCount > 0;
+    }
+
+    public List<SpatialSearchResultsList> runPipeline(List<SpatialSearchToken> tokens) throws IOException {
         List<SpatialSearchResultsList> combinations = new ArrayList<>();
         if (tokens == null || tokens.isEmpty()) {
             return combinations;
@@ -260,23 +311,28 @@ public class SpatialStagePipeline {
         PipelinePrepResult prep = prepare(tokens);
         int totalTokens = tokens.size();
 
-        // ---------------------------------------------------------------------
-        // STEP 1: Single objects fully covering all search tokens
-        // ---------------------------------------------------------------------
+        System.out.printf("[PIPELINE-LOG] Query Tokens (%d): %s\n", totalTokens, tokens);
+        System.out.printf("[PIPELINE-LOG] Step 1 candidates: %d fully covered atoms.\n", prep.fullyCoveredAtoms.size());
+
+        // STEP 1
         if (!prep.fullyCoveredAtoms.isEmpty()) {
             SpatialSearchResultsList step1List = new SpatialSearchResultsList(tokens);
             for (NameIndexAtom atom : prep.fullyCoveredAtoms) {
-                step1List.addResult(null, 0, atom, 0, ctx.settings);
+                addCombinationResult(step1List, List.of(atom), tokens, 0);
             }
-            combinations.add(step1List);
+
+            if (finalizeAndValidateStage(step1List, "STEP 1 (Single)")) {
+                combinations.add(step1List);
+            }
         }
 
-        // ---------------------------------------------------------------------
-        // STEP 2: Spatial Self-Join (Pairs)
-        // ---------------------------------------------------------------------
+        // STEP 2
         HashSkipTileQuadTree<SpatialSearchResultPair> step2PairsTree = new HashSkipTileQuadTree<>();
         HashSkipTileQuadTreeJoiner<NameIndexAtom, NameIndexAtom> selfJoiner =
                 new HashSkipTileQuadTreeJoiner<>(prep.allObjectsTree, prep.allObjectsTree);
+
+        TLongHashSet addedPairIds = new TLongHashSet();
+        int[] rawJoinedPairsCount = new int[1];
 
         selfJoiner.joinAllBuckets((e1, e2) -> {
             if (e1.objId == e2.objId) return;
@@ -286,117 +342,154 @@ public class SpatialStagePipeline {
 
             List<Long> masks1 = prep.objectMasks.get(a1.id);
             List<Long> masks2 = prep.objectMasks.get(a2.id);
+            if (masks1 == null || masks2 == null) return;
 
             for (long m1 : masks1) {
                 for (long m2 : masks2) {
                     long combinedMask = combine2BitMasks(m1, m2, totalTokens);
 
+                    // Условие: пара должна покрывать хотя бы 2 разных токена
+                    if (countCoveredTokens(combinedMask, totalTokens) < 2) {
+                        continue;
+                    }
+
                     int[] clippedBBox = new int[]{ a1.coords.bbox31[0], a1.coords.bbox31[1], a1.coords.bbox31[2], a1.coords.bbox31[3] };
                     SpatialSearchResultsList.clipBbox(clippedBBox, a2.coords.bbox31);
 
                     SpatialSearchResultPair pair = new SpatialSearchResultPair(a1, a2, clippedBBox, combinedMask);
-                    step2PairsTree.addObject(pair, clippedBBox, pair.pairId);
+                    if (addedPairIds.add(pair.pairId)) {
+                        rawJoinedPairsCount[0]++;
+                        step2PairsTree.addObject(pair, clippedBBox, pair.pairId);
+                    }
                 }
             }
         }, null, null);
 
         step2PairsTree.build();
+        System.out.printf("[PIPELINE-LOG] Step 2 Joiner found %d raw unique pairs.\n", rawJoinedPairsCount[0]);
 
-        // Collect and validate candidates from Step 2
         SpatialSearchResultsList step2List = new SpatialSearchResultsList(tokens);
+        List<SpatialSearchResultPair> validStep2Pairs = new ArrayList<>();
+        int semanticRejectedCount = 0;
+
         for (TileEntry<SpatialSearchResultPair> entry : step2PairsTree.getTileEntries()) {
             SpatialSearchResultPair pair = entry.obj;
 
-            long mask1 = prep.objectMasks.get(pair.atom1.id).get(0);
-            long mask2 = prep.objectMasks.get(pair.atom2.id).get(0);
+            List<Long> m1List = prep.objectMasks.get(pair.atom1.id);
+            List<Long> m2List = prep.objectMasks.get(pair.atom2.id);
+            long mask1 = (m1List != null && !m1List.isEmpty()) ? m1List.get(0) : 0L;
+            long mask2 = (m2List != null && !m2List.isEmpty()) ? m2List.get(0) : 0L;
 
             List<ConcreteAssignmentPair> assignments = expandAmbiguousPairsAllOrNothing(pair, mask1, mask2, totalTokens);
 
             for (ConcreteAssignmentPair assignment : assignments) {
-                if (isFullyCovered(assignment.resolvedMask, totalTokens)) {
+                // Если totalTokens <= 2, пара должна полностью покрывать запрос. Если > 2, она может быть поддеревом для Step 3.
+                boolean isCovered = (totalTokens <= 2) ? isFullyCovered(assignment.resolvedMask, totalTokens) 
+                                                       : countCoveredTokens(assignment.resolvedMask, totalTokens) >= 2;
+
+                if (isCovered) {
                     if (acceptPairSemantic(ctx, pair, assignment.refOwner)) {
-                        step2List.addResult(null, 0, pair.atom1, 0, ctx.settings);
-                        step2List.addResult(null, 0, pair.atom2, 0, ctx.settings);
+                        validStep2Pairs.add(pair);
+                        if (isFullyCovered(assignment.resolvedMask, totalTokens)) {
+                            int typeIntersection = calculateTypeIntersection(pair.atom1, pair.atom2);
+                            addCombinationResult(step2List, List.of(pair.atom1, pair.atom2), tokens, typeIntersection);
+                        }
+                    } else {
+                        semanticRejectedCount++;
                     }
                 }
             }
         }
 
-        if (step2List.getCombinations() > 0) {
+        System.out.printf("[PIPELINE-LOG] Step 2 Semantic Accepted Pairs: %d (Rejected: %d)\n", validStep2Pairs.size(), semanticRejectedCount);
+
+        if (finalizeAndValidateStage(step2List, "STEP 2 (Pairs)")) {
             combinations.add(step2List);
         }
 
-        // ---------------------------------------------------------------------
-        // STEP 3: Cascading Area Joins (Chains of 3+ objects)
-        // ---------------------------------------------------------------------
-        HashSkipTileQuadTree<SpatialSearchResultChain> currentChainTree = new HashSkipTileQuadTree<>();
+        // STEP 3 (Cascading Area Joins for 3+ Tokens)
+        if (totalTokens > 2 && !validStep2Pairs.isEmpty()) {
+            System.out.printf("[PIPELINE-LOG] Step 3 Starting with %d seed pairs...\n", validStep2Pairs.size());
 
-        for (TileEntry<SpatialSearchResultPair> entry : step2PairsTree.getTileEntries()) {
-            SpatialSearchResultPair pair = entry.obj;
-            List<NameIndexAtom> initialAtoms = List.of(pair.atom1, pair.atom2);
+            HashSkipTileQuadTree<SpatialSearchResultChain> currentChainTree = new HashSkipTileQuadTree<>();
+            for (SpatialSearchResultPair pair : validStep2Pairs) {
+                List<NameIndexAtom> initialAtoms = List.of(pair.atom1, pair.atom2);
+                SpatialSearchResultChain chain = new SpatialSearchResultChain(initialAtoms, pair.bbox31, pair.combinedMask);
+                currentChainTree.addObject(chain, chain.bbox31, chain.chainId);
+            }
+            currentChainTree.build();
 
-            SpatialSearchResultChain chain = new SpatialSearchResultChain(initialAtoms, pair.bbox31, pair.combinedMask);
-            currentChainTree.addObject(chain, chain.bbox31, chain.chainId);
-        }
-        currentChainTree.build();
+            int maxAreaDepth = Math.min(totalTokens, 4);
+            for (int depth = 3; depth <= maxAreaDepth; depth++) {
+                if (currentChainTree.getTileEntries().isEmpty() || ctx.isCancelled()) break;
 
-        int maxAreaDepth = 4;
-        for (int depth = 2; depth <= maxAreaDepth; depth++) {
-            if (currentChainTree.getTileEntries().isEmpty()) break;
+                HashSkipTileQuadTree<SpatialSearchResultChain> nextChainTree = new HashSkipTileQuadTree<>();
+                HashSkipTileQuadTreeJoiner<SpatialSearchResultChain, NameIndexAtom> chainJoiner =
+                        new HashSkipTileQuadTreeJoiner<>(currentChainTree, prep.areaObjectsTree);
 
-            HashSkipTileQuadTree<SpatialSearchResultChain> nextChainTree = new HashSkipTileQuadTree<>();
+                int[] joinedChainsCount = new int[1];
 
-            HashSkipTileQuadTreeJoiner<SpatialSearchResultChain, NameIndexAtom> chainJoiner =
-                    new HashSkipTileQuadTreeJoiner<>(currentChainTree, prep.areaObjectsTree);
+                chainJoiner.joinAllBuckets((eChain, eArea) -> {
+                    SpatialSearchResultChain chain = eChain.obj;
+                    NameIndexAtom areaAtom = eArea.obj;
 
-            chainJoiner.joinAllBuckets((eChain, eArea) -> {
-                SpatialSearchResultChain chain = eChain.obj;
-                NameIndexAtom areaAtom = eArea.obj;
+                    if (chain.containsAtom(areaAtom.id)) return;
 
-                if (chain.containsAtom(areaAtom.id)) return;
+                    List<Long> areaMasks = prep.objectMasks.get(areaAtom.id);
+                    long areaMask = (areaMasks != null && !areaMasks.isEmpty()) ? areaMasks.get(0) : 0L;
+                    long newMask = combine2BitMasks(chain.combinedMask, areaMask, totalTokens);
 
-                long areaMask = prep.objectMasks.get(areaAtom.id).get(0);
-                long newMask = combine2BitMasks(chain.combinedMask, areaMask, totalTokens);
+                    if (newMask == chain.combinedMask) return;
 
-                int[] newBBox = chain.bbox31.clone();
-                SpatialSearchResultsList.clipBbox(newBBox, areaAtom.coords.bbox31);
+                    int[] newBBox = chain.bbox31.clone();
+                    SpatialSearchResultsList.clipBbox(newBBox, areaAtom.coords.bbox31);
 
-                SpatialSearchResultChain newChain = chain.extend(areaAtom, newBBox, newMask);
-                nextChainTree.addObject(newChain, newBBox, newChain.chainId);
-            }, null, null);
+                    SpatialSearchResultChain newChain = chain.extend(areaAtom, newBBox, newMask);
+                    nextChainTree.addObject(newChain, newBBox, newChain.chainId);
+                    joinedChainsCount[0]++;
+                }, null, null);
 
-            nextChainTree.build();
+                nextChainTree.build();
+                System.out.printf("[PIPELINE-LOG] Step 3 Depth %d joined %d chains.\n", depth, joinedChainsCount[0]);
 
-            // Emit valid covered chains for this depth level
-            SpatialSearchResultsList step3List = new SpatialSearchResultsList(tokens);
-            for (TileEntry<SpatialSearchResultChain> entry : nextChainTree.getTileEntries()) {
-                SpatialSearchResultChain chain = entry.obj;
-                if (isFullyCovered(chain.combinedMask, totalTokens)) {
-                    for (NameIndexAtom atom : chain.atoms) {
-                        step3List.addResult(null, 0, atom, 0, ctx.settings);
+                SpatialSearchResultsList step3List = new SpatialSearchResultsList(tokens);
+                for (TileEntry<SpatialSearchResultChain> entry : nextChainTree.getTileEntries()) {
+                    SpatialSearchResultChain chain = entry.obj;
+                    if (isFullyCovered(chain.combinedMask, totalTokens)) {
+                        addCombinationResult(step3List, chain.atoms, tokens, 1);
                     }
                 }
-            }
 
-            if (step3List.getCombinations() > 0) {
-                combinations.add(step3List);
-            }
+                if (finalizeAndValidateStage(step3List, "STEP 3 (Depth " + depth + ")")) {
+                    combinations.add(step3List);
+                }
 
-            currentChainTree = nextChainTree;
+                currentChainTree = nextChainTree;
+            }
         }
 
+        System.out.printf("[PIPELINE-LOG] Pipeline Finished. Total Combinations: %d\n", combinations.size());
         return combinations;
     }
 
-    
     public static boolean acceptPairSemantic(SpatialSearchContext ctx, SpatialSearchResultPair pair, NameIndexAtom refOwner) {
         SpatialTextSearchSettings settings = ctx.settings;
         NameIndexAtom a1 = pair.atom1;
         NameIndexAtom a2 = pair.atom2;
 
+        if (a1.id == a2.id) {
+            return false;
+        }
+
         int atomicCount = (a1.atomicObject() ? 1 : 0) + (a2.atomicObject() ? 1 : 0);
         if (atomicCount > settings.LIMIT_ATOMIC_OBJECTS) {
             return false;
+        }
+
+        if (settings.OPTIM_FLAG_POI_SAME_AS_CITY_STREET) {
+            if (a1.sameNameAreaObj != null || a2.sameNameAreaObj != null) {
+                return false;
+            }
         }
 
         boolean twoStreets = a1.isStreetBuilding() && a2.isStreetBuilding();
@@ -405,11 +498,11 @@ public class SpatialStagePipeline {
         if (!settings.SEARCH_STREET_INTERSECTIONS && twoStreets) return false;
         if (!settings.SEARCH_POI_INTERSECTIONS && twoPOIs) return false;
 
-        if (a1.sameNameAreaObj != null || a2.sameNameAreaObj != null) return false;
-
         boolean hasPoiCategory = a1.isPoiCategory() || a2.isPoiCategory();
         boolean hasBuilding = a1.isBuilding() || a2.isBuilding();
-        if (hasPoiCategory && hasBuilding) return false;
+        if (hasPoiCategory && (hasBuilding || a1.isStreetBuilding() || a2.isStreetBuilding())) {
+            return false;
+        }
 
         if ((a1.buildingOrRefInd >= 0) && a2.isStreetBuilding() && !a1.isCityStreetName()) return false;
         if ((a2.buildingOrRefInd >= 0) && a1.isStreetBuilding() && !a2.isCityStreetName()) return false;

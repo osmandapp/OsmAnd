@@ -2134,7 +2134,7 @@
     <string name="poi_board_type_astronomy">Astronomie</string>
     <string name="poi_toll_hgv_yes">Péage poids lourd</string>
     <string name="poi_tactile_paving_yes">Oui;Bande podotactile</string>
-    <string name="poi_tactile_paving_no">Sans surface podotactile</string>
+    <string name="poi_tactile_paving_no">Sans bande podotactile</string>
     <string name="poi_railway_level_crossing">Passage à niveau</string>
     <string name="poi_xmas">Noël</string>
     <string name="poi_xmas_event">Événement de Noël</string>
