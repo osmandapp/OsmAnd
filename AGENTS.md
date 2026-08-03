@@ -20,7 +20,7 @@ The project is divided into several sub-projects:
 - `:OsmAnd-java`: Core logic in pure Java. Contains data models, rendering logic, routing, and search. Independent of Android APIs.
 - `:OsmAnd-api`: API for external applications to interact with OsmAnd.
 - `:OsmAnd-shared`: Kotlin Multiplatform (KMP) library shared between Android, iOS, and server (JVM).
-- `:plugins`: Contains various plugin sub-projects (e.g., `:plugins:Osmand-Nautical`, `:plugins:Osmand-Skimaps`).
+- `:plugins`: Contains various plugin sub-projects (e.g., `:plugins:Osmand-Nautical`, `:plugins:Osmand-Skimaps`, and APRS driver sources under `plugins/aprs-driver/` compiled into `:OsmAnd`).
 
 ## 3. Shared Code (Kotlin Multiplatform)
 The `:OsmAnd-shared` module is a **Kotlin Multiplatform (KMP)** library designed to share logic across Android, iOS, and JVM platforms.
@@ -43,7 +43,8 @@ The `:OsmAnd-shared` module is a **Kotlin Multiplatform (KMP)** library designed
 ### Plugin Architecture
 OsmAnd uses an internal plugin system to modularize features. 
 - **Base Class:** `net.osmand.plus.plugins.OsmandPlugin`.
-- **Location:** `OsmAnd/src/net/osmand/plus/plugins`.
+- **Built-in plugins:** `OsmAnd/src/net/osmand/plus/plugins` (AIS, weather, etc.).
+- **APRS driver plugin:** `OsmAnd/plugins/aprs-driver/` (merged into `:OsmAnd` via source sets; requires `aprs-core`).
 - Plugins can hook into:
   - Map layers (`registerLayers`)
   - Widgets (`createWidgets`)
