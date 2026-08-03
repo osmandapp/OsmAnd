@@ -73,7 +73,7 @@ class ShareFavoritesBottomSheet : BaseMaterialBottomSheetWithHeader(), IDialog,
 
 	override fun onAskDismissDialog(processId: String) {
 		if (processId == ShareFavoritesController.PROCESS_ID) {
-			dismiss()
+			dismissAllowingStateLoss()
 		}
 	}
 
