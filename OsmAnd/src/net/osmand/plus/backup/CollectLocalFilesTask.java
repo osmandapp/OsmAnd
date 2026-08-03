@@ -110,7 +110,9 @@ class CollectLocalFilesTask extends AsyncTask<Void, LocalFile, List<LocalFile>> 
 						createLocalFile(result, item, fileName, file, file.lastModified());
 					}
 				} else {
-					createLocalFile(result, item, fileName, file, file.lastModified());
+					long lastModified = fileItem.getSubtype() == FileSubtype.ATTACHED_MEDIA
+							? item.getLastModifiedTime() : file.lastModified();
+					createLocalFile(result, item, fileName, file, lastModified);
 				}
 			} else {
 				createLocalFile(result, item, fileName, null, item.getLastModifiedTime());
