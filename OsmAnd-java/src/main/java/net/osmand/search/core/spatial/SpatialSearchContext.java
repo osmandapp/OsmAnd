@@ -321,8 +321,10 @@ public class SpatialSearchContext {
 					HashSkipTileQuadTree<NameIndexAtom> poiTree = buildTree(new HashSkipTileQuadTree<>(), e.getValue());
 					poiTree.build();
 					HashSkipTileQuadTreeJoiner<NameIndexAtom, NameIndexAtom> joiner = new HashSkipTileQuadTreeJoiner<>(areasTree, poiTree);
+					TLongHashSet ids = new TLongHashSet();
 					joiner.joinAllBuckets((area, poi) -> {
-						if (area.obj.coords.contains(poi.obj.coords)) {
+						if (area.obj.coords.contains(poi.obj.coords) && !ids.contains(poi.obj.id)) {
+							ids.add(poi.obj.id);
 							// delete completely not correct for new york the plaza
 							// tokens.get(indx).removeAtom(poi.obj);
 							// mark to not intersect

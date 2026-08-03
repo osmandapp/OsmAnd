@@ -93,9 +93,9 @@ import net.osmand.util.SearchAlgorithms;
 // REVIEW: Auto test New york, France, Italy (Slow?)
 
 // TODO Duplicate '10 Am Remsufer Remseck am Neckar', '138 138 Scott Avenue Bellefonte', '8 av 8'
-// TODO Performance Pipeline
-// TODO Extend POI tile bboxes 200m? internet_access (fuel_diesel)
 
+// TODO Extend POI tile bboxes 200m? internet_access (fuel_diesel)
+// TODO Analyze Performance bootlenecks VisualVM (Pipeline + Intersection)
 // TODO INDEX: Find POI Categories translations / synonyms via Common words - Стоматол., Dentist, Basilica 
 // TODO REVIEW: Abbrevations (synonyms / direction words) other languages?
 // TODO REVIEW: Analyze Abbrevations / common skip (abbrevations 1st=first)
@@ -243,9 +243,8 @@ public class SpatialSearchTestAndDocs {
 //		query = "West Valley City";
 //		query = "2110 College Avenue Elmira";
 		
-		pattern = "Us_penn";
-		
-		pattern2 = "Us_new";
+//		pattern = "Us_penn";
+//		pattern2 = "Us_new";
 //		query = "500 East College Avenue State College";
 //		query = "315 B Westside Avenue Elmira"; // '315 B', '315B'
 //		query = "'330 Innovation Boulevard University Park";
@@ -253,8 +252,8 @@ public class SpatialSearchTestAndDocs {
 
 		// PERFORMANCE
 //		query = "115 1/2 East 9th Street Elmira";
-		settings.OPTIM_FLAG_POI_SAME_AS_CITY_STREET = true;
-		query = "341 East Hill Church Road Addison";
+//		settings.OPTIM_FLAG_POI_SAME_AS_CITY_STREET = true;
+//		query = "341 East Hill Church Road Addison";
 		
 //		location = new LatLon(41.2364,-75.8843); // 649331066
 //		settings.OPTIM_READ_COMMON_WORDS_ATOMS = false;
@@ -397,8 +396,8 @@ public class SpatialSearchTestAndDocs {
 //		location = new LatLon(50.4355, 30.6473); 
 //		settings.OPTIM_READ_CATEGORY_WORD_ATOMS = false;
 //		settings.OPTIM_READ_COMMON_WORDS_LIMIT = 10000;
-//		pattern = "Ukraine_";
 		
+//		pattern = "Ukraine_";
 //		location = new LatLon(48.020997, 30.968742);
 //		query = "Мигия озеро ";
 //		query = "Мигия water"; 
@@ -417,7 +416,9 @@ public class SpatialSearchTestAndDocs {
 //		query = "Veget.";
 //		query = "Mcdonalds";
 //		query = "Stomat.";
-		
+
+//		pattern = "Ukraine_kyiv-city";
+//		pattern2 = "World_";
 //		location = new LatLon(50.4631,30.4553);
 //		settings.OPTIM_READ_COMMON_WORDS_ATOMS = true;
 //		query = "mcdonald's";
@@ -427,6 +428,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "Ukraine kyiv saks.";
 //		query = ". entr."; // check dots
 //		query = "пузата хата mcdonal.";
+//		query = "окко 3 краматорск";
 //		
 //		query = "2 га Нова вулиця"; // unit test '2га' +, '2-га', '2', '2 га' (partial) unit test (260537333, 104438019)
 //		query = "2га Нова вулиця"; 

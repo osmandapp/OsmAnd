@@ -520,7 +520,7 @@ public class SpatialPipelineSearch {
 	
 
 	private boolean disallowPoiType(NameIndexAtom atom, SpatialSearchToken token) {
-		if (atom.isPOI()) {
+		if (atom.isPOI() && !atom.isPOIRef()) {
 			if (atom.poiTypes == null) {
 				return true;
 			}

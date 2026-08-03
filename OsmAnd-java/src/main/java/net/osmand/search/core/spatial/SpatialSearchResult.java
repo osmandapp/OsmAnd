@@ -323,6 +323,15 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 			if (first.atom.object != null) {
 				return ObfConstants.getOsmObjectId(first.atom.object);
 			}
+			if (first.isPoiCategory()) {
+				long poiTypeId = (first.atom.id << 3);
+				// suggest poi category for different cities in query (we can't chose which is better?)
+				if (objs.size() > 1) {
+					SpatialSearchResultRef second = objs.get(1);
+					poiTypeId += second.tokens.get(0).originalOrder;
+				}
+				return poiTypeId;
+			}
 			return first.atom.id;
 		}
 		return -1;
@@ -622,8 +631,12 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		SpatialPoiType cat = getPoiCategory(ctx.poiSearch);
 		if (cat != null) {
 			if (cat.wikidataId != null) {
-//				System.out.println(cat.key + " " + cat.wikidataId);
-				return "TYPE_" + cat.wikidataId;
+				// suggest poi category for different cities in query (we can't chose which is better?)
+				String suffixPos = "";
+				if (objs.size() > 1) {
+					suffixPos += "_" + objs.get(1).tokens.get(0).word;
+				}
+				return "TYPE_" + cat.wikidataId + suffixPos;
 			}
 		}
 		return null;
