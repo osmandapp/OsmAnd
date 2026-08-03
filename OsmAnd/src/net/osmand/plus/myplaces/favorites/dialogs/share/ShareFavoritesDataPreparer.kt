@@ -101,14 +101,17 @@ class ShareFavoritesDataPreparer(private val app: OsmandApplication) {
 				"Failed to prepare attached media for Favorites; falling back to GPX: ${destination.absolutePath}",
 				e
 			)
-			return PreparationResult.GpxOnly(destination, description)
+			return PreparationResult.GpxOnly(destination, description,
+				mediaPreparationFailed = true
+			)
 		}
 	}
 
 	sealed interface PreparationResult {
 		data class GpxOnly(
 			val gpxFile: File,
-			val pointsDescription: Spanned
+			val pointsDescription: Spanned,
+			val mediaPreparationFailed: Boolean = false
 		) : PreparationResult
 
 		data class Ready(
