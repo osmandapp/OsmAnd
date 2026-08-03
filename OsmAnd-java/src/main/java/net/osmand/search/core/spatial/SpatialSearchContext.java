@@ -33,6 +33,8 @@ import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
+import net.osmand.search.core.HashSkipTileQuadTree;
+import net.osmand.search.core.HashSkipTileQuadTreeJoiner;
 import net.osmand.search.core.TopIndexFilter;
 import net.osmand.search.core.spatial.SpatialPoiSearch.SpatialPoiType;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
@@ -306,23 +308,66 @@ public class SpatialSearchContext {
 	private void assignPoiFlagGeo(Map<TIntArrayList, List<AtomByTokens>> cities, List<SpatialSearchToken> tokens) {
 		Map<TIntArrayList, List<AtomByTokens>> streets = groupAtomsByTokens(tokens, t -> t.isStreet()); // check performance
 		Map<TIntArrayList, List<AtomByTokens>> pois = groupAtomsByTokens(tokens, t -> t.isPOI());
-		Iterator<Entry<TIntArrayList, List<AtomByTokens>>> it = pois.entrySet().iterator();
-		while (it.hasNext()) {
-			Entry<TIntArrayList, List<AtomByTokens>> e = it.next();
-			TIntArrayList lst = e.getKey();
-			List<AtomByTokens> cityNames = cities.get(lst);
-			if (cityNames != null) {
-				for (AtomByTokens poi : e.getValue()) {
-					markPOIAsArea(poi, cityNames, lst, tokens);
+		if (settings.DEV_FLAG_POI_SAME_AS_CITY_TREE) {
+			Iterator<Entry<TIntArrayList, List<AtomByTokens>>> it = pois.entrySet().iterator();
+			while (it.hasNext()) {
+				Entry<TIntArrayList, List<AtomByTokens>> e = it.next();
+				final TIntArrayList keySet = e.getKey();
+				HashSkipTileQuadTree<NameIndexAtom> areasTree = new HashSkipTileQuadTree<>();
+				buildTree(areasTree, cities.get(keySet));
+				buildTree(areasTree, streets.get(keySet));
+				if(!areasTree.isEmpty()) {
+					areasTree.build();
+					HashSkipTileQuadTree<NameIndexAtom> poiTree = buildTree(new HashSkipTileQuadTree<>(), e.getValue());
+					poiTree.build();
+					HashSkipTileQuadTreeJoiner<NameIndexAtom, NameIndexAtom> joiner = new HashSkipTileQuadTreeJoiner<>(areasTree, poiTree);
+					joiner.joinAllBuckets((area, poi) -> {
+						if (area.obj.coords.contains(poi.obj.coords)) {
+							// delete completely not correct for new york the plaza
+							// tokens.get(indx).removeAtom(poi.obj);
+							// mark to not intersect
+							TIntIterator keyIt = keySet.iterator();
+							while(keyIt.hasNext()) {
+								int indx = keyIt.next();
+								NameIndexAtom atomSet = tokens.get(indx).getAtomToken(poi.obj);
+								atomSet.sameNameAreaObj = area.obj;
+							}
+						}
+					});
 				}
 			}
-			List<AtomByTokens> streetNames = streets.get(lst);
-			if (streetNames != null) {
-				for (AtomByTokens poi : e.getValue()) {
-					markPOIAsArea(poi, streetNames, lst, tokens);
+		} else {
+			Iterator<Entry<TIntArrayList, List<AtomByTokens>>> it = pois.entrySet().iterator();
+			while (it.hasNext()) {
+				Entry<TIntArrayList, List<AtomByTokens>> e = it.next();
+				TIntArrayList lst = e.getKey();
+				List<AtomByTokens> cityNames = cities.get(lst);
+				if (cityNames != null) {
+					for (AtomByTokens poi : e.getValue()) {
+						markPOIAsArea(poi, cityNames, lst, tokens);
+					}
+				}
+				List<AtomByTokens> streetNames = streets.get(lst);
+				if (streetNames != null) {
+					for (AtomByTokens poi : e.getValue()) {
+						markPOIAsArea(poi, streetNames, lst, tokens);
+					}
 				}
 			}
 		}
+	}
+
+	private HashSkipTileQuadTree<NameIndexAtom> buildTree(HashSkipTileQuadTree<NameIndexAtom> objTree,
+			List<AtomByTokens> objs) {
+		if (objs == null) {
+			return objTree;
+		}
+		for (AtomByTokens largeArea : objs) {
+			if (largeArea.obj.coords.bbox31 != null) {
+				objTree.addObject(largeArea.obj, largeArea.obj.coords.bbox31);
+			}
+		}
+		return objTree;
 	}
 
 	private void markPOIAsArea(AtomByTokens poi, List<AtomByTokens> cityNames, TIntArrayList indxs,
