@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.gallery.attached.helpers.AttachedMediaDataHelper;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
@@ -13,6 +14,8 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.items.AttachedMediaSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.FavoritesSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.mediastorage.MediaSource;
@@ -119,6 +122,69 @@ public class AttachedMediaExportType extends AbstractExportType {
 			LOG.debug("Attached media export sources: items=" + itemsBySourceId.size());
 		}
 		return new ArrayList<>(itemsBySourceId.values());
+	}
+
+	public static void processSettingsItems(@NonNull OsmandApplication app,
+	                                        @NonNull Collection<FavoriteGroup> groups,
+	                                        @NonNull List<SettingsItem> items) {
+		Set<String> selectedFavoriteHrefs = collectMediaHrefs(app, groups);
+		Set<String> packedFileNames = collectPackedFileNames(items);
+		Map<String, String> hrefRewrites = new HashMap<>();
+		int exportedMediaItems = 0;
+
+		for (Iterator<SettingsItem> iterator = items.iterator(); iterator.hasNext(); ) {
+			SettingsItem item = iterator.next();
+			if (item instanceof AttachedMediaSettingsItem mediaItem) {
+				if (Collections.disjoint(mediaItem.getHrefKeys(), selectedFavoriteHrefs)) {
+					iterator.remove();
+				} else {
+					for (String key : mediaItem.getHrefKeys()) {
+						hrefRewrites.put(key, mediaItem.getRewrittenHref());
+					}
+					String fileName = BackupUtils.getItemFileName(mediaItem);
+					if (!packedFileNames.add(fileName)) {
+						iterator.remove();
+					} else {
+						exportedMediaItems++;
+					}
+				}
+			}
+		}
+		if (!hrefRewrites.isEmpty()) {
+			for (SettingsItem item : items) {
+				if (item instanceof FavoritesSettingsItem favoritesItem) {
+					favoritesItem.setHrefRewrites(hrefRewrites);
+				}
+			}
+		}
+		if (PluginsHelper.isDevelopment()) {
+			LOG.debug("Attached media export items: exported=" + exportedMediaItems + ", rewrites=" + hrefRewrites.size());
+		}
+	}
+
+	@NonNull
+	private static Set<String> collectMediaHrefs(@NonNull OsmandApplication app,
+	                                             @NonNull Collection<FavoriteGroup> groups) {
+		Set<String> res = new HashSet<>();
+		AttachedMediaDataHelper helper = new AttachedMediaDataHelper(app);
+		for (Link link : helper.collectMediaLinks(groups)) {
+			String href = link.getHref();
+			if (!Algorithms.isEmpty(href)) {
+				res.add(href.trim());
+			}
+		}
+		return res;
+	}
+
+	@NonNull
+	private static Set<String> collectPackedFileNames(@NonNull List<SettingsItem> items) {
+		Set<String> res = new HashSet<>();
+		for (SettingsItem item : items) {
+			if (item instanceof FileSettingsItem && !(item instanceof AttachedMediaSettingsItem)) {
+				res.add(BackupUtils.getItemFileName(item));
+			}
+		}
+		return res;
 	}
 
 	@NonNull

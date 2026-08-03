@@ -11,6 +11,18 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<plurals name="files_count">
+		<item quantity="one">%d file</item>
+		<item quantity="other">%d files</item>
+	</plurals>
+	<string name="preparing_file">Preparing file</string>
+	<string name="shared_string_archive">Archive</string>
+	<string name="share_favorites_with_media_description">Favorite points in %1$s have attached media. Share points only, or points with media as an archive.</string>
+	<string name="share_favorites_points_only">Points only</string>
+	<string name="share_favorites_points_and_media">Points and media</string>
+	<string name="share_favorites_preparation_failed">Could not prepare files for sharing.</string>
+	<string name="share_favorites_share_failed">Could not share the file.</string>
+	<string name="share_favorites_missing_media_warning">Some attached media could not be included.</string>
 	<string name="search_on_web">Search on web</string>
     <string name="release_5_4">
         • New spatial search — find places and search around a place\n\n

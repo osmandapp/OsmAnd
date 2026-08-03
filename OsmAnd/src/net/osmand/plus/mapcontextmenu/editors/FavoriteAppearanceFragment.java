@@ -267,7 +267,9 @@ public class FavoriteAppearanceFragment extends BaseFullScreenDialogFragment {
 			if (controller.getColor() != null) {
 				favouritesHelper.updateGroupColor(favoriteGroup, controller.getColor(), saveOption, false);
 				shouldSave = true;
-				controller.getColorCardController().getColorsPaletteController().renewLastUsedTime();
+				if (controller.getColor() != color) {
+					controller.getColorCardController().getColorsPaletteController().renewLastUsedTime();
+				}
 			}
 			if (controller.getIcon() != null) {
 				favouritesHelper.updateGroupIconName(favoriteGroup, controller.getIcon(), saveOption, false);
