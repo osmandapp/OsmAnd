@@ -29,7 +29,6 @@ import net.osmand.plus.plugins.externalsensors.dialogs.EditDevicePropertyDialog.
 import net.osmand.plus.plugins.externalsensors.dialogs.ForgetDeviceDialog.Companion.showInstance
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
-import net.osmand.plus.utils.UiUtilities
 
 class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListener,
 	ForgetDeviceDialog.ForgetDeviceListener,
@@ -370,9 +369,7 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
 				}
 			}
 			receivedDataAdapter.setItems(dataFields)
-			if (device.isBatteryLow) {
-				app.showShortToastMessage(R.string.external_device_low_battery)
-			}
+			device.showBatteryLevelWarningIfNeeded(app)
 		}
 	}
 
