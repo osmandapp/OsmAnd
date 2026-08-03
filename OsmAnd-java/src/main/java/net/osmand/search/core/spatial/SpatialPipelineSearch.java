@@ -557,7 +557,7 @@ public class SpatialPipelineSearch {
 			if (firstToken == null) {
 				dupTokens.put(token.word, token);
 			} else {
-				token = firstToken; // Bug in processing dup tokens (less data assigned to 2nd)
+//				token = firstToken; // Bug in processing dup tokens (less data assigned to 2nd)
 			}
 			TIntHashSet deleted = token.getDeletedAtoms();
 			for (NameIndexAtom atom : token.atoms) {
