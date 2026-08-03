@@ -436,9 +436,6 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 			if (bldObj.bld == null || !checkBuildingPoiLocation(ctx, indx, bldObj.bld, loc)) {
 				skipResults.put(indx, true);
 			} else {
-				if (bldRefObj.object.getName().equals("138 Scott Avenue")) {
-					System.out.println("??? " + bldObj);
-				}
 				// assign buildings
 				if (bldRefObj.bldObject == null || 
 						bldRefObj.bldObject.getName().length() < bldObj.bld.getName().length()) {
@@ -540,7 +537,7 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		}
 		if (partial1 != null) {
 			if (tempBuildNames1.size() > query.size()) {
-				matchExtraWord[0] = -1; 
+				matchExtraWord[0] = -1;
 			}
 			return partial1;
 		}
@@ -551,6 +548,9 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		if (interpolation != null) {
 			if (query.size() > 1) {
 				matchExtraWord[0] = -(query.size() - 1);
+			}
+			if (tempBuildNames1.size() > 1) {
+				matchExtraWord[0] = -(tempBuildNames1.size() - 1);
 			}
 			return interpolation;
 		}

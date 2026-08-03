@@ -71,7 +71,7 @@ import net.osmand.util.SearchAlgorithms;
 // UNIT TESTING: '500 East College Avenue State College' (partial, no poi type, n)
 // UNIT TESTING: 'Bar 4 avenue' (new york poi category present)
 // UNIT TESTING: '10 Am Remsufer Remseck am Neckar'
-// UNIT TESTING: '138 138 Scott Avenue Bellefonte' (Wrong data but good test if street = '138 Scott Avenue'
+// UNIT TESTING: '138 138 Scott Avenue Bellefonte' + '138 138 Scott Avenue' (Wrong data but good test if street = '138 Scott Avenue'
 // UNIT TESTING: '315 B Westside Avenue Elmira' ('315B' should be no interpolation, '315 B')
 // UNIT TESTING: REDO 2419 Avenue G Dickinson, TX USA 
 // UNIT TESTING: ( add to new york test) 8 ave 8?
@@ -249,8 +249,8 @@ public class SpatialSearchTestAndDocs {
 //		query = "315 B Westside Avenue Elmira"; // '315 B', '315B'
 //		query = "'330 Innovation Boulevard University Park";
 		query = "138 138 Scott Avenue Bellefonte";
-		settings.MAX_PIPELINE_RES_TO_STOP = new int[] {1};
-//		query = "138 138 Scott Avenue";
+//		settings.MAX_PIPELINE_RES_TO_STOP = new int[] {1};
+		query = "138 138 Scott Avenue";
 
 		// PERFORMANCE
 //		query = "115 1/2 East 9th Street Elmira";
