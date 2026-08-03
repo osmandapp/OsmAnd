@@ -313,6 +313,9 @@ class ShareFavoritesController(
 		hasMissingMedia = false
 		state = DialogState.READY
 		notifyUiChanged()
+		if (result.mediaPreparationFailed) {
+			app.showToastMessage(R.string.share_favorites_media_preparation_failed)
+		}
 		pendingShare = PendingShare.Gpx(result.gpxFile, result.pointsDescription)
 		tryLaunchPendingShare()
 	}
