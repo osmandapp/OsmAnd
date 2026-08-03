@@ -290,9 +290,8 @@ public class BLEBikePowerSensor extends BLEAbstractSensor {
 				break;
 			case BIKE_POWER:
 				BikePowerData powerData = lastBikePowerData;
-				double calculatedPower = powerData != null ? powerData.getCalculatedPower() : 0;
-				if (calculatedPower > 0) {
-					json.put(SENSOR_TAG_BIKE_POWER, DECIMAL_FORMAT.format(calculatedPower));
+				if (powerData != null) {
+					json.put(SENSOR_TAG_BIKE_POWER, powerData.getCalculatedPower());
 				}
 				break;
 			default:
