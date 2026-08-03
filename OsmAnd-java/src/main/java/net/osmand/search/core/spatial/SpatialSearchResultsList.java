@@ -21,6 +21,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.Building;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
+import net.osmand.data.QuadRect;
 import net.osmand.data.Street;
 import net.osmand.search.core.HashQuadTree;
 import net.osmand.search.core.HashSkipTileQuadTree;
@@ -405,12 +406,13 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 			String bldName = searchKey.trim();
 			String cacheKey = bldRefObj.id + " " + bldName;
 			BuildingCache bldObj = null;
+			LatLon loc = null;
 			if (bldCheckCache.containsKey(cacheKey)) {
 				bldObj = bldCheckCache.get(cacheKey);
 			} else {
 				int[] matchExtraWord = new int[1];
 				Building bldres = checkBuilding(ctx, bldRefObj, (Street) bldRefObj.object, bldName, matchExtraWord);
-				LatLon loc = null;
+				loc = null;
 				if (bldres != null) {
 					loc = bldres.isInterpolation() ? bldres.getLocation(bldres.interpolation(bldName)) : null;
 //					System.out.printf("Building found [%d] '%s' -'%s': %s\n", matchExtraWord[0], bldres, bldName, bldRefObj.object);
@@ -420,7 +422,7 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 				bldObj = new BuildingCache(bldres, indx, loc, matchExtraWord[0]);
 				bldCheckCache.put(cacheKey, bldObj);
 			}
-			if (bldObj.bld == null) {
+			if (bldObj.bld == null || !checkBuildingPoiLocation(ctx, indx, bldObj.bld, loc)) {
 				skipResults.put(indx, true);
 			} else {
 				// assign buildings
@@ -441,6 +443,26 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 	}
 	
 	
+	private boolean checkBuildingPoiLocation(SpatialSearchContext ctx, int indx, Building bld, LatLon loc) {
+		if (loc == null) {
+			loc = bld.getLocation();
+		}
+		List<NameIndexAtom> lst = getRawAtoms(indx);
+		int[] bldBbox = null;
+		for (NameIndexAtom p : lst) {
+			if (p.isPOI()) {
+				if (bldBbox == null) {
+					QuadRect qr = MapUtils.calculate31BboxUsingRhumb(ctx.settings.POI_HOUSE_DEFAULT_RADIUS, loc);
+					bldBbox = new int[] { (int) qr.left, (int) qr.top, (int) qr.right, (int) qr.bottom };
+				}
+				if (!p.coords.intersects(bldBbox)) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
 	private Building checkBuilding(SpatialSearchContext ctx, NameIndexAtom atom, Street street, String bld, int[] matchExtraWord) {
 		Building interpolation = null;
 		Building partial2 = null;

@@ -893,6 +893,7 @@ public class SpatialPipelineSearch {
 			prepareTimer.finish();
 			if (ctx.stats.printLogs) {
 				SpatialPipelineStats.printTree(ctx);
+//				SpatialPipelineStats.printTokenTree(ctx);
 				System.out.printf("PIPELINE 0 PREPARE (%.1f ms) %,d Buckets | %,d masks | %,d objects \n",
 						prepareTimer.ms(), ctx.initBuckets.size(), countMasks(ctx.initBuckets), ctx.objectsById.size());
 			}

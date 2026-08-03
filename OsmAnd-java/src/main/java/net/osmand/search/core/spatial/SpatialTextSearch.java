@@ -119,6 +119,7 @@ public class SpatialTextSearch {
 		// Create default bboxes for points POI / Address objects  
 		public int POI_DEFAULT_RADIUS = 50;
 		public int ADDR_DEFAULT_RADIUS = 1000;
+		public int POI_HOUSE_DEFAULT_RADIUS = 300;
 		
 		///////////// DEV FEATURES ///////////
 
@@ -143,7 +144,7 @@ public class SpatialTextSearch {
 		// OPTIMIZATION #2 (IMPORTANT for results - public transport stops)
 		// In case POI is called 'Bratislava' it will be not allowed to be searched as POIxPOI, POIxStreet
 		// Related frequent POIs like "City&Bike 4th Street..." or public transport stops
-		public boolean OPTIM_FLAG_POI_SAME_AS_CITY_STREET = true;
+		public boolean OPTIM_FLAG_POI_SAME_AS_CITY_STREET = false; // FIXME before merge
 
 		// OPTIMIZATION #3. IMPORTANT to filter results by words popular words (not effective in corner cases like paterson)
 		// 1. If object does have rare words and they are not in query - skip it 

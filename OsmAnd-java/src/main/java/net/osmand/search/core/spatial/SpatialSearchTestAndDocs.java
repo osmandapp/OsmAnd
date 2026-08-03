@@ -73,6 +73,7 @@ import net.osmand.util.SearchAlgorithms;
 // UNIT TESTING: '10 Am Remsufer Remseck am Neckar'
 // UNIT TESTING: '138 138 Scott Avenue Bellefonte' (Wrong data but good test if street = '138 Scott Avenue'
 // UNIT TESTING: '315 B Westside Avenue Elmira' ('315B' should be no interpolation, '315 B')
+// UNIT TESTING: REDO 2419 Avenue G Dickinson, TX USA 
 // UNIT TESTING: ( add to new york test) 8 ave 8?
 // NO UNIT TESTING: '400 Susquehanna Boulevard Hazel Township' (MISSING Hazel Township)
 // NO UNIT TESTING: '330 Innovation Boulevard University Park' (partial result missing university park)
@@ -92,8 +93,6 @@ import net.osmand.util.SearchAlgorithms;
 // REVIEW: Auto test New york, France, Italy (Slow?)
 
 // TODO Duplicate '10 Am Remsufer Remseck am Neckar', '138 138 Scott Avenue Bellefonte', '8 av 8'
-// TODO 2419 Avenue G Dickinson, TX USA
-
 // TODO Performance Pipeline
 // TODO Extend POI tile bboxes 200m? internet_access (fuel_diesel)
 
@@ -244,13 +243,18 @@ public class SpatialSearchTestAndDocs {
 //		query = "West Valley City";
 //		query = "2110 College Avenue Elmira";
 		
-//		pattern = "Us_penn";
+		pattern = "Us_penn";
 		
-//		pattern2 = "Us_new";
+		pattern2 = "Us_new";
 //		query = "500 East College Avenue State College";
 //		query = "315 B Westside Avenue Elmira"; // '315 B', '315B'
 //		query = "'330 Innovation Boulevard University Park";
 //		query = "138 138 Scott Avenue Bellefonte";
+
+		// PERFORMANCE
+//		query = "115 1/2 East 9th Street Elmira";
+		settings.OPTIM_FLAG_POI_SAME_AS_CITY_STREET = true;
+		query = "341 East Hill Church Road Addison";
 		
 //		location = new LatLon(41.2364,-75.8843); // 649331066
 //		settings.OPTIM_READ_COMMON_WORDS_ATOMS = false;
@@ -313,6 +317,9 @@ public class SpatialSearchTestAndDocs {
 //		query = "2419 Avenue G Dickinson, USA"; // +
 //		query = "2419 Avenue G Dickinson, TX"; // +- 3 word
 //		query = "2419 Avenue G TX" +
+//		settings.POI_HOUSE_DEFAULT_RADIUS = 500000;
+//		query = "2419 Avenue G Dickinson, TX USA";
+		
 //		query = "TX";
 
 		
@@ -532,7 +539,7 @@ public class SpatialSearchTestAndDocs {
 //		location = new LatLon(39.7412, -8.8012); 
 		// Barreira Urbanização Vale da Cabrita, 258548289, 696751116
 		// MATCH: Search Stats 5392.4 ms (read 11,248 KB) - 4979.9 ms 305,862 atoms (read 330.2, match 2981.5, poi 490.6), 361.8 ms compute 5,499 (loadBld 3.6, read 2.9)
-//		settings.MAX_PIPELINE_RES_TO_STOP = new int[] {10};
+//		settings.MAX_PIPELINE_RES_TO_STOP = new int[] {1000};
 //		settings.PIPELINE_MAX_STEPS = 10;
 //		settings.PIPELINE_MAX_VIRTUAL_MASKS = 3;
 //		query = "Travessa de Santo António Rua Joaquim Ribeiro de Carvalho Portugal"; // 1
