@@ -40,6 +40,7 @@ import net.osmand.plus.settings.coordinates.CoordinateFormat;
 import net.osmand.plus.settings.coordinates.CoordinateFormatHelper;
 import net.osmand.plus.settings.coordinates.CoordinateFormatIds;
 import net.osmand.plus.settings.coordinates.CoordinateFormatSettingsStorage;
+import net.osmand.plus.settings.coordinates.CoordinateSearchCallback;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
@@ -55,19 +56,22 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 	public static final String TAG = AddCoordinateFormatFragment.class.getSimpleName();
 
 	public static final String REQUEST_ADD_TO_EDIT = "coordinate_format_add_to_edit";
+	public static final String RESULT_FORMAT_ID = "coordinate_format_id";
 	public static final String ADD_SCREEN_BACK_STACK_TAG = TAG;
 
 	private static final String ARG_FOCUS_SEARCH = "focus_search";
 	private static final String ARG_ADD_FORMAT_MODE = "add_format_mode";
 	private static final String ARG_EXCLUDED_IDS = "excluded_ids";
 	private static final String ARG_CLOSE_RESULT_KEY = "close_result_key";
+	private static final String ARG_SELECTION_RESULT_KEY = "selection_result_key";
 	private static final String STATE_SEARCH_QUERY = "search_query";
 	private static final int SOFT_INPUT_MODE_NOT_SET = Integer.MIN_VALUE;
 
 	private enum AddFormatMode {
 		PREFERRED,
 		RECENT,
-		EDIT_DRAFT
+		EDIT_DRAFT,
+		GRID_SELECTION
 	}
 
 	private CoordinateFormatSettingsStorage formatPreferences;
@@ -84,6 +88,7 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 
 	private String searchQuery = "";
 	private String closeResultKey;
+	private String selectionResultKey;
 	private AddFormatMode addFormatMode = AddFormatMode.PREFERRED;
 	private boolean focusSearch;
 	private boolean closeOnSearchBack;
@@ -106,6 +111,7 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 		focusSearch = args != null && args.getBoolean(ARG_FOCUS_SEARCH);
 		closeOnSearchBack = focusSearch;
 		closeResultKey = args != null ? args.getString(ARG_CLOSE_RESULT_KEY) : null;
+		selectionResultKey = args != null ? args.getString(ARG_SELECTION_RESULT_KEY) : null;
 		ArrayList<String> argExcludedIds = args != null ? args.getStringArrayList(ARG_EXCLUDED_IDS) : null;
 		if (addFormatMode == AddFormatMode.EDIT_DRAFT && argExcludedIds != null) {
 			excludedIds.addAll(argExcludedIds);
@@ -186,6 +192,9 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 
 	private void reloadExcludedIds() {
 		excludedIds.clear();
+		if (addFormatMode == AddFormatMode.GRID_SELECTION) {
+			return;
+		}
 		excludedIds.addAll(formatPreferences.getPreferredIds(appMode));
 		if (addFormatMode == AddFormatMode.RECENT) {
 			for (String id : formatPreferences.getRecentIds()) {
@@ -319,7 +328,7 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 	private View createGeneralCard() {
 		List<CoordinateFormat> formats = new ArrayList<>();
 		for (CoordinateFormat format : BuiltInCoordinateFormat.getAll(app)) {
-			if (!excludedIds.contains(format.getId())) {
+			if (!excludedIds.contains(format.getId()) && isFormatSupported(format.getId())) {
 				formats.add(format);
 			}
 		}
@@ -347,7 +356,7 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 			return;
 		}
 		String query = searchQuery;
-		coordinateFormatHelper.searchFormats(query, results -> {
+		CoordinateSearchCallback callback = results -> {
 			if (searchResultsAdapter == null || !query.equals(searchQuery)) {
 				return;
 			}
@@ -358,10 +367,27 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 				}
 			}
 			searchResultsAdapter.notifyDataSetChanged();
-		});
+		};
+		if (addFormatMode == AddFormatMode.GRID_SELECTION) {
+			coordinateFormatHelper.searchGridFormats(query, callback);
+		} else {
+			coordinateFormatHelper.searchFormats(query, callback);
+		}
 	}
 
 	private void onFormatChosen(@NonNull String id) {
+		if (addFormatMode == AddFormatMode.GRID_SELECTION) {
+			if (coordinateFormatHelper.getGridFormatProvider().resolve(id) == null) {
+				app.showShortToastMessage(R.string.coordinate_grid_format_not_supported);
+				return;
+			}
+			formatPreferences.addRecentId(id);
+			Bundle result = new Bundle();
+			result.putString(RESULT_FORMAT_ID, id);
+			getParentFragmentManager().setFragmentResult(selectionResultKey, result);
+			closeAddScreen();
+			return;
+		}
 		if (addFormatMode == AddFormatMode.EDIT_DRAFT) {
 			Bundle result = new Bundle();
 			result.putString(REQUEST_ADD_TO_EDIT, id);
@@ -378,6 +404,11 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 			renderAddContent();
 			renderSearchResults();
 		}
+	}
+
+	private boolean isFormatSupported(@NonNull String formatId) {
+		return addFormatMode != AddFormatMode.GRID_SELECTION
+				|| coordinateFormatHelper.getGridFormatProvider().isSupported(formatId);
 	}
 
 	private void onBackPressed() {
@@ -439,6 +470,11 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 
 	@NonNull
 	private String getFormatSummary(@NonNull CoordinateFormat format) {
+		if (addFormatMode == AddFormatMode.GRID_SELECTION && format.getEpsgCode() != null
+				&& !Algorithms.isEmpty(format.getSubtitle())) {
+			return getString(R.string.ltr_or_rtl_combine_via_bold_point,
+					"EPSG:" + format.getEpsgCode(), format.getSubtitle());
+		}
 		return coordinateFormatHelper.getFormatSummary(format);
 	}
 
@@ -532,12 +568,14 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 	                                   @NonNull AddFormatMode addFormatMode,
 	                                   boolean focusSearch,
 	                                   @Nullable List<String> editableIds,
-	                                   @Nullable String closeResultKey) {
+	                                   @Nullable String closeResultKey,
+	                                   @Nullable String selectionResultKey) {
 		Bundle args = new Bundle();
 		args.putString(APP_MODE_KEY, appMode.getStringKey());
 		args.putString(ARG_ADD_FORMAT_MODE, addFormatMode.name());
 		args.putBoolean(ARG_FOCUS_SEARCH, focusSearch);
 		args.putString(ARG_CLOSE_RESULT_KEY, closeResultKey);
+		args.putString(ARG_SELECTION_RESULT_KEY, selectionResultKey);
 		if (addFormatMode == AddFormatMode.EDIT_DRAFT && editableIds != null) {
 			args.putStringArrayList(ARG_EXCLUDED_IDS, new ArrayList<>(editableIds));
 		}
@@ -550,7 +588,17 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 	                              @Nullable String closeResultKey) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			AddCoordinateFormatFragment fragment = new AddCoordinateFormatFragment();
-			applyArguments(fragment, appMode, AddFormatMode.RECENT, focusSearch, null, closeResultKey);
+			applyArguments(fragment, appMode, AddFormatMode.RECENT, focusSearch, null, closeResultKey, null);
+			fragment.show(fragmentManager, TAG);
+		}
+	}
+
+	public static void showGridSelectionDialog(@NonNull FragmentManager fragmentManager,
+	                                           @NonNull ApplicationMode appMode,
+	                                           @NonNull String resultKey) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			AddCoordinateFormatFragment fragment = new AddCoordinateFormatFragment();
+			applyArguments(fragment, appMode, AddFormatMode.GRID_SELECTION, true, null, null, resultKey);
 			fragment.show(fragmentManager, TAG);
 		}
 	}
@@ -560,7 +608,7 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 		AddCoordinateFormatFragment fragment = new AddCoordinateFormatFragment();
 		fragment.setShowsDialog(false);
 		AddFormatMode addFormatMode = addToEditDraft ? AddFormatMode.EDIT_DRAFT : AddFormatMode.PREFERRED;
-		applyArguments(fragment, appMode, addFormatMode, focusSearch, editableIds, null);
+		applyArguments(fragment, appMode, addFormatMode, focusSearch, editableIds, null, null);
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		if (!fragmentManager.isStateSaved()) {
 			fragmentManager.beginTransaction()

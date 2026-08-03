@@ -14,9 +14,13 @@ import net.osmand.plus.Version;
 import net.osmand.plus.base.containers.Limits;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.enums.GridFormat;
+import net.osmand.plus.settings.coordinates.CoordinateFormatIds;
+import net.osmand.plus.settings.coordinates.CoordinateGridFormat;
+import net.osmand.plus.settings.coordinates.CoordinateGridFormatProvider;
 import net.osmand.plus.settings.enums.GridLabelsPosition;
 import net.osmand.plus.views.OsmandMapTileView;
+
+import java.util.Objects;
 
 public class CoordinatesGridSettings {
 
@@ -24,10 +28,12 @@ public class CoordinatesGridSettings {
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
+	private final CoordinateGridFormatProvider gridFormatProvider;
 
 	public CoordinatesGridSettings(@NonNull OsmandApplication app) {
 		this.app = app;
 		this.settings = app.getSettings();
+		this.gridFormatProvider = app.getCoordinateFormatHelper().getGridFormatProvider();
 	}
 
 	public void toggleEnable() {
@@ -51,12 +57,17 @@ public class CoordinatesGridSettings {
 	}
 
 	@NonNull
-	public GridFormat getGridFormat(@NonNull ApplicationMode appMode) {
-		return settings.COORDINATE_GRID_FORMAT.getModeValue(appMode);
+	public CoordinateGridFormat getGridFormat(@NonNull ApplicationMode appMode) {
+		String formatId = settings.COORDINATE_GRID_FORMAT.getModeValue(appMode);
+		CoordinateGridFormat format = gridFormatProvider.resolve(formatId);
+		if (format == null) {
+			format = gridFormatProvider.resolve(CoordinateFormatIds.BUILTIN_DDD);
+		}
+		return Objects.requireNonNull(format);
 	}
 
-	public void setGridFormat(@NonNull ApplicationMode appMode, @NonNull GridFormat format) {
-		settings.COORDINATE_GRID_FORMAT.setModeValue(appMode, format);
+	public void setGridFormat(@NonNull ApplicationMode appMode, @NonNull CoordinateGridFormat format) {
+		settings.COORDINATE_GRID_FORMAT.setModeValue(appMode, format.getId());
 	}
 
 	@ColorInt
@@ -110,7 +121,7 @@ public class CoordinatesGridSettings {
 
 	@NonNull
 	public Limits<Integer> getZoomLevelsWithRestrictions(@NonNull ApplicationMode appMode,
-	                                                     @NonNull GridFormat gridFormat) {
+	                                                     @NonNull CoordinateGridFormat gridFormat) {
 		Limits<Integer> selected = getZoomLevels(appMode);
 		Limits<Integer> supported = getSupportedZoomLevels(gridFormat);
 		int min = MathUtils.clamp(selected.min(), supported.min(), supported.max());
@@ -151,7 +162,7 @@ public class CoordinatesGridSettings {
 	}
 
 	@NonNull
-	public Limits<Integer> getSupportedZoomLevels(@NonNull GridFormat gridFormat) {
+	public Limits<Integer> getSupportedZoomLevels(@NonNull CoordinateGridFormat gridFormat) {
 		int minZoom = 1;
 		if (isGridSupported(app)) {
 			GridConfiguration config = new GridConfiguration();
