@@ -28,6 +28,7 @@ import net.osmand.search.core.HashSkipTileQuadTree;
 import net.osmand.search.core.HashSkipTileQuadTreeJoiner;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSettings;
+import net.osmand.shared.gpx.GpxElevationTransfer;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.SearchAlgorithms;
@@ -253,16 +254,21 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 					skipResults.put(indx, true);
 					return;
 				}
-				NameIndexAtom poiAtom = null;
+				boolean wrong = false;
+				NameIndexAtom poiAtom  = null;
 				// mix of 2 refs or not present or street
 				for (int k = 0; k < tCount; k++) {
-					poiAtom = linearResults.get(indx * tCount + k);
-					if (poiAtom != null && poiAtom.isPOI() && poiAtom.id == refAtom.id && poiAtom.object instanceof Amenity) {
-						break;
+					NameIndexAtom check = linearResults.get(indx * tCount + k);
+					if (check != null && check.isPOI() && !check.isPOIRef()) {
+						if(check.id == refAtom.id) {
+							poiAtom = check;
+						} else {
+							wrong = true;
+							break;
+						}
 					}
-					poiAtom = null;
 				}
-				if (poiAtom == null) {
+				if (poiAtom == null || poiAtom.object == null || wrong) {
 					skipResults.put(indx, true);
 					return;
 				}
@@ -378,15 +384,20 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 					skipResults.put(indx, true);
 					break;
 				}
-				NameIndexAtom streetAtom = null;
+				boolean missing = false;
+				boolean otherStreet = false;
 				for (int k = 0; k < tCount; k++) {
-					streetAtom = linearResults.get(indx * tCount + k);
-					if (streetAtom != null && streetAtom.isStreet() && streetAtom.id == bld.id) {
-						break;
+					NameIndexAtom streetAtom = linearResults.get(indx * tCount + k);
+					if (streetAtom != null && streetAtom.isStreet()) {
+						if (streetAtom.id == bld.id) {
+							missing = false;
+						} else {
+							otherStreet = true;
+							break;
+						}
 					}
-					streetAtom = null;
 				}
-				if (streetAtom == null) {
+				if (missing || (otherStreet && !bld.isCityStreetName())) {
 					skipResults.put(indx, true);
 					return;
 				}
@@ -415,9 +426,9 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 				loc = null;
 				if (bldres != null) {
 					loc = bldres.isInterpolation() ? bldres.getLocation(bldres.interpolation(bldName)) : null;
-//					System.out.printf("Building found [%d] '%s' -'%s': %s\n", matchExtraWord[0], bldres, bldName, bldRefObj.object);
+//					System.out.printf("%d Building found [%d] '%s' -'%s': %s\n", indx, matchExtraWord[0], bldres, bldName, bldRefObj.object);
 				} else {
-//					System.out.printf("No building '%s': %s\n", bldName, bldRefObj.object + " " + ((Street) bldRefObj.object).getBuildings());
+//					System.out.printf("%d No building '%s': %s\n", indx, bldName, bldRefObj.object + " " + ((Street) bldRefObj.object).getBuildings());
 				}
 				bldObj = new BuildingCache(bldres, indx, loc, matchExtraWord[0]);
 				bldCheckCache.put(cacheKey, bldObj);
@@ -425,6 +436,9 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 			if (bldObj.bld == null || !checkBuildingPoiLocation(ctx, indx, bldObj.bld, loc)) {
 				skipResults.put(indx, true);
 			} else {
+				if (bldRefObj.object.getName().equals("138 Scott Avenue")) {
+					System.out.println("??? " + bldObj);
+				}
 				// assign buildings
 				if (bldRefObj.bldObject == null || 
 						bldRefObj.bldObject.getName().length() < bldObj.bld.getName().length()) {
@@ -536,7 +550,7 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		}
 		if (interpolation != null) {
 			if (query.size() > 1) {
-				matchExtraWord[0] = -1;
+				matchExtraWord[0] = -(query.size() - 1);
 			}
 			return interpolation;
 		}

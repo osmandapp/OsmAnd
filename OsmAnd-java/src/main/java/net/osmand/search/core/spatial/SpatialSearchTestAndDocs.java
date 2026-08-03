@@ -201,7 +201,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "2/1 Rathausplatz Esslingen am Neckar"; // not correct
 //		query = "9 Neustädter Straße Korb";
 //		query = "14/1 J.-F.-Weishaar-Straße Korb";
-		query = "10 Am Remsufer Remseck am Neckar";
+//		query = "10 Am Remsufer Remseck am Neckar";
 
 //		settings = SpatialTextSearchSettings.searchPoiCategoriesSettings(0, null);
 //		query = "Gyn.";
@@ -243,12 +243,14 @@ public class SpatialSearchTestAndDocs {
 //		query = "West Valley City";
 //		query = "2110 College Avenue Elmira";
 		
-//		pattern = "Us_penn";
+		pattern = "Us_penn";
 //		pattern2 = "Us_new";
 //		query = "500 East College Avenue State College";
 //		query = "315 B Westside Avenue Elmira"; // '315 B', '315B'
 //		query = "'330 Innovation Boulevard University Park";
-//		query = "138 138 Scott Avenue Bellefonte";
+		query = "138 138 Scott Avenue Bellefonte";
+		settings.MAX_PIPELINE_RES_TO_STOP = new int[] {1};
+//		query = "138 138 Scott Avenue";
 
 		// PERFORMANCE
 //		query = "115 1/2 East 9th Street Elmira";
@@ -287,7 +289,6 @@ public class SpatialSearchTestAndDocs {
 		
 //		query = "151 Weber Way Selinsgrove"; // Fixed: 2 word - addr:unit 
 //		query = "1544 PA-61 Pottsville"; // FIXED
-//		query = "138 138 Scott Avenue Bellefonte";
 //		query = "17815 PA-35 Port Royal"; // CHECK!
 //		query = "2039 Ridge Road Lowman"; // extend bbox hamlet // 822981342  -- unit test!
 		// test default enlarge 1 -> 2.5

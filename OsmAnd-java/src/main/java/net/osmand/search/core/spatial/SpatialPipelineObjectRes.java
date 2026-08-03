@@ -127,6 +127,13 @@ public class SpatialPipelineObjectRes {
 					firstInd = ind;
 				}
 				lastInd = ind;
+			} else if (getTokenState(mainMask, ind) == STATE_REF) {
+				// allow to swap 1 ind for duplicate name 8 8 ave
+				if (firstInd == lastInd && firstInd == ind - 1) {
+					lastInd = ind;
+					firstInd = ind;
+				}
+
 			}
 		}
 		// test '2nd new street'

@@ -550,12 +550,12 @@ public class SpatialPipelineSearch {
 	private SpatialPipelineContext prepareInitialBuckets() {
 		int totalTokens = ctx.tokens.size();
 		// combine & merge by tokens
-		Map<String, SpatialSearchToken> dupTokens = new HashMap<>();
+		Map<String, Integer> dupTokens = new HashMap<>();
 		for (int tokenIdx = 0; tokenIdx < totalTokens; tokenIdx++) {
 			SpatialSearchToken token = ctx.tokens.get(tokenIdx);
-			SpatialSearchToken firstToken = dupTokens.get(token.word);
-			if (firstToken == null) {
-				dupTokens.put(token.word, token);
+			Integer dupToken = dupTokens.get(token.word);
+			if (dupToken == null) {
+				dupTokens.put(token.word, tokenIdx);
 			} else {
 //				token = firstToken; // Bug in processing dup tokens (less data assigned to 2nd)
 			}
