@@ -128,7 +128,7 @@ public class SpatialTextSearch {
 
 		// FEATURE #2. PIPELINE vs INTERSECTIONS algorithm 
 		// Use mechanism to smart selection results intead of all word x word intersections
-		public boolean DEV_USE_PIPELINE = true;
+		public boolean DEV_USE_PIPELINE = false;
 		
 		// print some poi cat - to be deleted once web/android completed
 		public int TEST_PRINT_POI_CAT_LIMIT = 0; // 10
@@ -144,7 +144,7 @@ public class SpatialTextSearch {
 		// OPTIMIZATION #2 (IMPORTANT for results - public transport stops)
 		// In case POI is called 'Bratislava' it will be not allowed to be searched as POIxPOI, POIxStreet
 		// Related frequent POIs like "City&Bike 4th Street..." or public transport stops
-		public boolean OPTIM_FLAG_POI_SAME_AS_CITY_STREET = false; // FIXME before merge
+		public boolean OPTIM_FLAG_POI_SAME_AS_CITY_STREET = true; // FIXME before merge
 
 		// OPTIMIZATION #3. IMPORTANT to filter results by words popular words (not effective in corner cases like paterson)
 		// 1. If object does have rare words and they are not in query - skip it 
@@ -152,7 +152,7 @@ public class SpatialTextSearch {
 		// 2. If object does have other common words and they are not in query - skip it
 		// Problem search: School On Street - some schools have specifiers and some don't
 		// Below limit add all possible objects  
-		public int OPTIM_READ_COMMON_WORDS_LIMIT = 2500; // FIXME before merge 2000 -> 2500
+		public int OPTIM_READ_COMMON_WORDS_LIMIT = 100_000; // FIXME before merge 2000 -> 2500
 		public boolean OPTIM_READ_COMMON_WITH_OTH_NON_FOUND_ATOMS = true;
 		public boolean OPTIM_READ_POI_CATEGORY_WORD_ATOMS = true;
 		// do not filter objects with such rating from results
