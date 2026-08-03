@@ -1,0 +1,94 @@
+gradle
+gradlew
+gradlew.bat
+
+/net.osmand
+aarDependencies 
+libs/android*.jar
+libs/com.*.jar
+libs/org.*.jar
+libs/commons-logging-commons-logging-api-1.1.jar
+libs/fr.univ-valenciennes-bzip2-1.0.jar
+libs/it.unibo.alice.tuprolog-tuprolog-3.2.1.jar
+libs/commons-codec-commons-codec-1.11.jar
+libs/OsmAndCore_android-0.1-SNAPSHOT.jar
+
+# Huawei
+libs/huawei-*.jar
+huaweidrmlib/
+HwDRM_SDK_*
+drm_strings.xml
+agconnect-services.json
+OsmAndHms.jks
+
+# copy_widget_icons.sh
+res/drawable-large/map_*
+res/drawable-large-hdpi/map_*
+res/drawable-large-xhdpi/map_* 
+# copy_widget_icons.sh
+res/drawable-large/widget_*
+res/drawable-large-hdpi/widget_*
+res/drawable-large-xhdpi/widget_* 
+
+# rendering-styles/style-icons/
+h_*
+g_*
+mm_*
+mx_*
+
+valgrind/
+bin/
+dist/
+
+gen/
+local.properties
+raw/
+obj/
+libgnustl/
+libc++/
+cpd.xml
+jni/Local.mk
+out/
+use/
+osmand.properties
+osmand.xml
+assets/specialphrases/*
+assets/bundled_assets.json
+assets/voice/*
+assets/fonts/*
+assets/feature_articles/*
+assets/*.obf
+assets/activities.json
+assets/poi_categories.json
+assets/OsmAndCore_ResourcesBundle.index
+assets/OsmAndCore_ResourcesBundle/
+assets/weather/*
+assets/proj.db
+assets/heightmap/*
+assets/color-palette/*
+assets/models/*
+
+# Android Studio
+/.idea
+*.iml
+
+# Gradle
+.gradle
+/local.properties
+
+# MacOSX
+.DS_Store
+
+# Output
+/build
+
+# Project-specific
+/helpAssets
+/voiceAssets
+/resourcesSrc
+
+.project
+.classpath
+
+# c++
+/.cxx

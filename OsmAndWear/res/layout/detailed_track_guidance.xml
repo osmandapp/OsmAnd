@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/list_background_color"
+	android:clickable="true"
+	android:focusable="true"
+	android:orientation="vertical">
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/appbar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<include
+			android:id="@+id/toolbar"
+			layout="@layout/profile_preference_toolbar" />
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+
+		<ScrollView
+			android:id="@+id/scroll_view"
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_weight="1">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical">
+
+				<androidx.appcompat.widget.AppCompatImageView
+					android:id="@+id/descriptionImage"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center"
+					tools:src="@drawable/img_detailed_track_guidance" />
+
+				<TextView
+					android:id="@+id/title"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_margin="16dp"
+					android:text="@string/detailed_track_guidance_description"
+					android:textColor="?android:textColorPrimary"
+					android:textSize="@dimen/default_list_text_size" />
+
+				<include layout="@layout/simple_divider_item" />
+
+				<LinearLayout
+					android:id="@+id/buttons_container"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical">
+
+				</LinearLayout>
+
+				<include layout="@layout/simple_divider_item" />
+
+				<include
+					android:id="@+id/distance_slider"
+					layout="@layout/plan_route_threshold_slider" />
+
+			</LinearLayout>
+
+		</ScrollView>
+
+		<include
+			android:id="@+id/apply_button"
+			layout="@layout/bottom_buttons"/>
+
+	</LinearLayout>
+
+</LinearLayout>

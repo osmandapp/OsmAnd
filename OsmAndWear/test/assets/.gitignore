@@ -1,0 +1,9 @@
+/*.json
+/osm_live/*.json
+/search/*
+/routing/*
+*.obf
+*.osm
+*.gpx
+phrases.xml
+*.obf.gz

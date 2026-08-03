@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginTop="@dimen/content_padding_small"
+		android:layout_marginEnd="@dimen/content_padding"
+		android:gravity="center_vertical"
+		android:text="@string/distance_during_navigation"
+		android:textColor="?android:textColorPrimary"
+		android:textSize="@dimen/default_list_text_size"
+		app:typefaceWeight="medium" />
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/description"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginTop="@dimen/content_padding_half"
+		android:layout_marginEnd="@dimen/content_padding"
+		android:layout_marginBottom="@dimen/content_padding_small"
+		android:lineSpacingMultiplier="1.1"
+		tools:text="@string/distance_during_navigation_description"
+		android:textColor="?android:textColorSecondary"
+		android:textSize="@dimen/default_desc_text_size"
+		android:textStyle="normal" />
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/activity_background_color"
+		android:gravity="center"
+		android:paddingHorizontal="20dp"
+		android:paddingVertical="16dp">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/preview_icon"
+			android:layout_width="72dp"
+			android:layout_height="72dp"
+			android:layout_gravity="center"
+			tools:src="@drawable/ic_action_distance_number_precise" />
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/buttons_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center"
+		android:orientation="vertical">
+
+	</LinearLayout>
+
+</LinearLayout>

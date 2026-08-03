@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/list_background_color"
+	android:orientation="vertical">
+
+	<include
+		android:id="@+id/title"
+		layout="@layout/bottom_sheet_item_title" />
+
+	<include
+		android:id="@+id/item"
+		layout="@layout/cloud_change_item" />
+
+	<include
+		android:id="@+id/upload_item"
+		layout="@layout/cloud_change_item" />
+
+	<include
+		android:id="@+id/download_item"
+		layout="@layout/cloud_change_item" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
