@@ -4167,7 +4167,9 @@
     <string name="camera_folder">Папка камеры</string>
     <string name="media_storage_main_storage_descr">Файлы захоўваюцца ў прыватным сховішчы праграмы. Яны схаваныя ад Галерэі і іншых праграм.</string>
     <string name="media_storage_shared_storage_descr">Файлы захоўваюцца ў публічных папках (Малюнкі, Відэа, Музыка). Яны бачныя ў Галерэі і Google Фота.</string>
-    <string name="media_storage_camera_folder_descr">Файлы захоўваюцца ў Галерэю. Заўвага: аўдыя захоўваецца ў Музыка/OsmAnd.</string>
+    <string name="shared_string_note">Заўвага</string>
+    <string name="media_storage_camera_folder_note_descr">аўдыя захоўваецца ў Музыка/OsmAnd.</string>
+    <string name="media_storage_camera_folder_descr">Файлы захоўваюцца ў Галерэю. %1$s</string>
     <string name="media_storage_manually_specified_descr">Файлы захоўваюцца ў адмысловую папку і размяркоўваюцца па тыпе (Аўдыя, Фота, Відэа).</string>
     <string name="change_media_storage_question">Змяніць медыясховішча?</string>
     <string name="change_media_storage_full_description">Перамясціць існуючыя медыяфайлы ў новае месца?\n%1$s &gt; %2$s</string>

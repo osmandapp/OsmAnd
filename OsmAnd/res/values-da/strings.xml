@@ -3058,7 +3058,7 @@
     <string name="routing_attr_avoid_tunnels_description">Undgå tunneller</string>
     <string name="routing_attr_avoid_tunnels_name">Undgå tunneler</string>
     <string name="backup_promocode">Kampagnekode</string>
-    <string name="send_crash_log">Send nedbrudslog</string>
+    <string name="send_crash_log">Send logfiler om app-nedbrud</string>
     <string name="purchases_feature_desc_nautical">Få adgang til havdybdeoplysninger</string>
     <string name="purchases_feature_desc_terrain">Terræn-højdekurver, gråtonede terrænskygger og hældningsangivelse med farveskala for at vise toppe og lavlandsområder.</string>
     <string name="purchases_feature_desc_wikivoyage">Udforsk Wikivoyage offline. Artikler er opdelt efter lande og regioner og er tilgængelige på alle sprog.</string>
@@ -3140,7 +3140,7 @@
 \n
 \nDu kan til enhver tid administrere eller annullere dine abonnementer fra dine AppGallery-indstillinger.</string>
     <string name="use_native_pt">Indbygget udvikling af offentlig trafik</string>
-    <string name="send_logcat_log">Send logcat-log</string>
+    <string name="send_logcat_log">Send logfiler fra den aktuelle session</string>
     <string name="attribute">Egenskab</string>
     <string name="save_global_track_interval_descr">Angiv logningsintervallet for den generelle sporregistrering (aktiveres via modulet \"Optagelse af spor\" på kortet).</string>
     <string name="release_4_0">• Sikkerhedskopiering til skyen \n \n • Tilføjet nattilstand for \"Topo\" kortstil \n \n • Tilføjet mulighed for at downloade konturlinjer i fod \n \n • Spor kan nu farvelægges efter højde, hastighed eller hældning \n \n • Opdateret \"turoptagelse\" dialog \n \n • Afstand ved tryk flytte fra Radiusmåler til en separat indstilling \n \n • Ruteplanlægning: Du kan nu ændre navigationsindstillinger, få adgang til kortindstillinger og søge uden at forlade ruteplanlægningen \n \n • Ny \"Køb\" skærm med detaljeret købsinfo \n \n • Tilføjet mulighed for at ændre rutelinjens udseende \n \n • OsmAnd Live opdateringer flyttet til \"Downloads &gt; Opdateringer\"</string>
@@ -5204,7 +5204,6 @@
     <string name="shared_string_media">Medier</string>
     <string name="no_media">Ingen medier</string>
     <string name="no_media_descr">Du kan tilføje fotos, videoer eller lydnoter fra dit kamera eller dit bibliotek.</string>
-    <string name="auto_copy_media_to_osmand_storage">Kopier automatisk medier til OsmAnd-lageret</string>
     <string name="navigate_point_format_maidenhead">Maidenhead</string>
     <string name="navigate_point_east_coordinate">Østlig koordinat</string>
     <string name="navigate_point_north_coordinate">Nordlig koordinat</string>
@@ -5248,7 +5247,9 @@
     <string name="camera_folder">Kameramappe</string>
     <string name="media_storage_main_storage_descr">Filer gemmes i appens private lager. De er skjult for GallerI og andre apps.</string>
     <string name="media_storage_shared_storage_descr">Filer gemmes i de offentlige mapper (Billeder, Film, Musik). De kan ses i Galleri og Google Fotos.</string>
-    <string name="media_storage_camera_folder_descr">Filer gemmes i Kamerarullen. Bemærk: Lydfiler gemmes i Musik/OsmAnd.</string>
+    <string name="shared_string_note">Bemærk</string>
+    <string name="media_storage_camera_folder_note_descr">Lydfiler gemmes i Musik/OsmAnd.</string>
+    <string name="media_storage_camera_folder_descr">Filer gemmes i Kamerarullen. %1$s</string>
     <string name="media_storage_manually_specified_descr">Filerne gemmes i en brugerdefineret mappe og sorteres efter type (lyd, foto, video).</string>
     <string name="change_media_storage_question">Skift medielager?</string>
     <string name="change_media_storage_full_description">Skal eksisterende mediefiler flyttes til den nye destination?\n%1$s &gt; %2$s</string>
@@ -5376,4 +5377,9 @@
     <string name="duplicate_map_replace_with_road">Erstat med Kun vej</string>
     <string name="rendering_attr_surface_clay_name">Ler</string>
     <string name="rendering_attr_surface_laterite_name">Laterit</string>
+    <string name="use_spatial_text_search">Brug rumlig tekstsøgning</string>
+    <string name="use_spatial_text_search_description">Erstat de almindelige API\'er til hurtigsøgning med den eksperimentelle, rumlige tekstsøgningsmotor.</string>
+    <string name="always_keep_local_copy">Behold altid en lokal kopi</string>
+    <string name="always_keep_local_copy_description">Medie forbliver tilknyttet, selvom originalen slettes fra galleriet eller filer.</string>
+    <string name="release_5_4">• Ny rumlig søgning — find steder og søg i området omkring et sted\n\n • Opdateret søgebrugerflade: sortering, kategorifiltre, mere overskueligt design\n\n • Vedhæft billeder og mediefiler til Favoritter\n\n • Favoritter: understøttelse af undergrupper og mapper, der kan fastgøres\n\n • Koordinater: Søgning, kortgitter og visning af interessepunkter understøtter nu EPSG- og Maidenhead-koordinatsystemer\n\n • Afhjulpet problemer med navigationen; skift mellem standard- og hurtig ruteplanlægning\n\n • Indstil kortskalaen i Android Auto uafhængigt af din telefon\n\n • Astronomi: Sol- og måneformørkelser tilføjet</string>
 </resources>

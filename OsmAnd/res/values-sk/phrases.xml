@@ -2098,7 +2098,7 @@
     <string name="poi_resource_beryl">Beryl</string>
     <string name="poi_resource_bismuth">Bizmut</string>
     <string name="poi_resource_chromite">Chromit</string>
-    <string name="poi_resource_clay">Hlina</string>
+    <string name="poi_resource_clay">Íl</string>
     <string name="poi_resource_coal">Uhlie</string>
     <string name="poi_resource_copper">Meď</string>
     <string name="poi_resource_diamond">Diamanty</string>
@@ -3050,7 +3050,7 @@
     <string name="poi_government_transportation">Dopravná inštitúcia</string>
     <string name="poi_government_legislative">Legislatívna inštitúcia</string>
     <string name="poi_vhf">Kanál VHF</string>
-    <string name="poi_surface_metal_grid">Kovová mriežka</string>
+    <string name="poi_surface_metal_grid">Povrch: kovová mriežka</string>
     <string name="poi_location_underground">Umiestnenie: pod zemou</string>
     <string name="poi_location_underwater">Umiestnenie: pod vodou</string>
     <string name="poi_location_overground">Umiestnenie: nad zemou</string>
@@ -3208,7 +3208,7 @@
     <string name="poi_tower_construction_concealed">Konštrukcia: Skrytá/maskovaná</string>
     <string name="poi_gorge">Tiesňava</string>
     <string name="poi_mountain_area">Horská oblasť</string>
-    <string name="poi_surface_tartan">Tartan</string>
+    <string name="poi_surface_tartan">Povrch: Tartan</string>
     <string name="poi_agrarian">Poľnohospodárske potreby</string>
     <string name="poi_service_vehicle_muffler_yes">Tlmiče zvuku</string>
     <string name="poi_service_vehicle_alignment_yes">Geometria kolies</string>
@@ -3321,7 +3321,7 @@
     <string name="poi_boat_kayak_rental_no">Kajaky: nie</string>
     <string name="poi_boat_canoe_rental_yes">Kanoe: áno</string>
     <string name="poi_boat_canoe_rental_no">Kanoe: nie</string>
-    <string name="poi_surface_clay">Antuka</string>
+    <string name="poi_surface_clay">Povrch: Antuka</string>
     <string name="poi_generator_source_biomass">Zdroj energie: biomasa</string>
     <string name="poi_snowmobile_filter">Prístup snežným skútrom</string>
     <string name="poi_access_bus">Prístup autobusom verejnej dopravy</string>
@@ -3519,7 +3519,7 @@
     <string name="poi_sms">SMS</string>
     <string name="poi_climbing_crag_filter">Lezecká stena</string>
     <string name="poi_cellar_entrance">Vstup do pivnice</string>
-    <string name="poi_surface_artificial_turf">Umelý trávnik</string>
+    <string name="poi_surface_artificial_turf">Povrch: umelý trávnik</string>
     <string name="poi_atm_yes">Bankomat: áno</string>
     <string name="poi_healthcare_speciality_naturopathy">Prírodná medicína</string>
     <string name="poi_healthcare_speciality_manual_therapy">Manuálna terapia</string>
@@ -3617,7 +3617,7 @@
     <string name="poi_sms_yes">Áno;SMS</string>
     <string name="poi_taxi_office">Kancelária taxislužby</string>
     <string name="poi_cash_withdrawal_postbank">Postbank</string>
-    <string name="poi_surface_decoturf">DecoTurf</string>
+    <string name="poi_surface_decoturf">Povrch: DecoTurf</string>
     <string name="poi_healthcare_speciality_podiatry">Podológia</string>
     <string name="poi_health_specialty_obstetrics_caesarean_section_no">Zdravotná špecializácia: pôrodníctvo (cisársky rez): nie</string>
     <string name="poi_health_specialty_social_paediatrics_no">Zdravotná špecializácia: sociálna pediatria: nie</string>
@@ -4416,7 +4416,7 @@
     <string name="poi_recycling_toys">Hračky</string>
     <string name="poi_waste_organic">Prírodné materiály</string>
     <string name="poi_waste_dog_excrement">Psie výkaly</string>
-    <string name="poi_surface_chipseal">Kamienky na asfalte</string>
+    <string name="poi_surface_chipseal">Povrch: kamienky na asfalte</string>
     <string name="poi_recycling_pens">Perá</string>
     <string name="poi_recycling_electrical_appliances">Elektrické spotrebiče</string>
     <string name="poi_recycling_coffee_capsules">Kávové kapsuly</string>
@@ -4759,4 +4759,5 @@
     <string name="poi_healthcare_speciality_neonatology">Neonatológia</string>
     <string name="poi_cemt">CEMT klasifikácia splavnosti</string>
     <string name="poi_water_type_filter">Typ vody</string>
+    <string name="poi_surface_laterite">Povrch: laterit</string>
 </resources>

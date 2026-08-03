@@ -64,7 +64,6 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		setupEnableProxyPref();
 		setupLocationSourcePref();
 		setupAutoBackupPref();
-		setupAutoCopyMediaPref();
 		setupUninstallSpeedCamerasPref();
 	}
 
@@ -255,7 +254,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 
 	private void setupMediaStoragePref() {
 		Preference preference = findPreference(MEDIA_STORAGE_PREF_ID);
-		preference.setIcon(getContentIcon(R.drawable.ic_action_folder_av_notes));
+		preference.setIcon(getContentIcon(R.drawable.ic_action_folder_media));
 		preference.setSummary(settings.MEDIA_STORAGE_TYPE.get().toHumanString(app));
 	}
 
@@ -320,11 +319,6 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		SwitchPreferenceEx preference = findPreference(settings.AUTO_BACKUP_ENABLED.getId());
 		preference.setIcon(getPersistentPrefIcon(R.drawable.ic_action_android));
 		preference.setDescription(R.string.auto_backup_preference_desc);
-	}
-
-	private void setupAutoCopyMediaPref() {
-		SwitchPreferenceEx preference = findPreference(settings.AUTO_COPY_MEDIA_TO_OSMAND_STORAGE.getId());
-		preference.setIcon(getPersistentPrefIcon(R.drawable.ic_action_photo_album));
 	}
 
 	private void setupUninstallSpeedCamerasPref() {

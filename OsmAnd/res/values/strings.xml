@@ -15,6 +15,32 @@
 	<string name="coordinate_grid_outside_crs_area">This grid is visible only within the selected CRS area of use.</string>
 	<string name="coordinate_grid_visible_from_zoom_and_crs_area">This grid is visible from zoom level %1$d and only within the selected CRS area of use.</string>
 	<string name="coordinate_grid_format_not_supported">This coordinate format is not supported by Coordinate Grid.</string>
+	<plurals name="files_count">
+		<item quantity="one">%d file</item>
+		<item quantity="other">%d files</item>
+	</plurals>
+	<string name="preparing_file">Preparing file</string>
+	<string name="shared_string_archive">Archive</string>
+	<string name="share_favorites_with_media_description">Favorite points in %1$s have attached media. Share points only, or points with media as an archive.</string>
+	<string name="share_favorites_points_only">Points only</string>
+	<string name="share_favorites_points_and_media">Points and media</string>
+	<string name="share_favorites_preparation_failed">Could not prepare files for sharing.</string>
+	<string name="share_favorites_share_failed">Could not share the file.</string>
+	<string name="share_favorites_missing_media_warning">Some attached media could not be included.</string>
+    <string name="release_5_4">
+        • New spatial search — find places and search around a place\n\n
+        • Refreshed search UI: sorting, category filters, cleaner look\n\n
+        • Attach photos and media to Favorites\n\n
+        • Favorites: subgroups support and pinnable folders\n\n
+        • Coordinates: search, map grid, and POI display now support EPSG and Maidenhead locator\n\n
+        • Fixed navigation interruptions; switch between Standard and Fast routing\n\n
+        • Set Android Auto map scale separately from your phone\n\n
+        • Astronomy added solar &amp; lunar eclipses\n\n
+    </string>
+	<string name="shared_string_note">Note</string>
+	<string name="media_storage_camera_folder_note_descr">Audio is saved to Music/OsmAnd.</string>
+	<string name="always_keep_local_copy">Always keep a local copy</string>
+	<string name="always_keep_local_copy_description">Media stays attached even if the original is deleted from the gallery or files.</string>
 	<string name="use_spatial_text_search">Use spatial text search</string>
 	<string name="use_spatial_text_search_description">Replace the standard quick search APIs with the experimental spatial text search engine.</string>
 	<string name="astro_lunar_eclipse">Lunar eclipse</string>
@@ -131,7 +157,7 @@
 	<string name="camera_folder">Camera folder</string>
 	<string name="media_storage_main_storage_descr">Files are saved to private app storage. They are hidden from the Gallery and other apps.</string>
 	<string name="media_storage_shared_storage_descr">Files are saved to public folders (Pictures, Movies, Music). They are visible in the Gallery and Google Photos.</string>
-	<string name="media_storage_camera_folder_descr">Files are saved to the Camera Roll. Note: Audio is saved to Music/OsmAnd.</string>
+	<string name="media_storage_camera_folder_descr">Files are saved to the Camera Roll. %1$s</string>
 	<string name="media_storage_manually_specified_descr">Files are saved to a custom folder and sorted by type (Audio, Photo, Video).</string>
 	<string name="change_media_storage_question">Change media storage?</string>
 	<string name="change_media_storage_full_description">Move existing media files to the new destination?\n%1$s > %2$s</string>
@@ -165,7 +191,6 @@
 	<string name="search_around_my_location">My location</string>
 	<string name="search_around_my_location_description">Search around your position</string>
 	<string name="sort_by_relevance">Relevance</string>
-	<string name="auto_copy_media_to_osmand_storage">Auto-copy media to OsmAnd storage</string>
 	<string name="choose_from_gallery">Choose from Gallery</string>
 	<string name="choose_from_files">Choose from Files</string>
 	<string name="shared_string_media">Media</string>
@@ -2438,8 +2463,8 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="purchases_feature_desc_wikivoyage">Explore Wikivoyage offline. Articles divided by countries and regions and available in all languages.</string>
     <string name="purchases_feature_desc_terrain">Terrain contour lines, grayscale hillshade and color scale slope indication, to show peaks and lowlands.</string>
     <string name="purchases_feature_desc_nautical">Get access to nautical depth information</string>
-    <string name="send_logcat_log">Send logcat log</string>
-    <string name="send_crash_log">Send crash log</string>
+    <string name="send_logcat_log">Send current session logs</string>
+    <string name="send_crash_log">Send app crashes logs</string>
     <string name="backup_promocode">Promocode</string>
     <string name="routing_attr_avoid_tunnels_name">Avoid tunnels</string>
     <string name="routing_attr_avoid_tunnels_description">Avoid tunnels</string>

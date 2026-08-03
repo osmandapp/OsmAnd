@@ -4483,7 +4483,7 @@
     <string name="rendering_attr_alpineHiking_name">Grado di difficoltà dei sentieri escursionistici</string>
     <string name="graph_axis">Asse del grafico</string>
     <string name="y_axis_description">Selezionare fino a due opzioni per l\'asse Y.</string>
-    <string name="quick_action_search_view_title">Menù ricerca</string>
+    <string name="quick_action_search_view_title">Visualizzazione di ricerca</string>
     <string name="quick_action_search_view_desc">Un pulsante per aprire o chiudere il menù ricerca.</string>
     <string name="quick_action_navigation_view_desc">Un pulsante per aprire o chiudere la vista navigazione.</string>
     <string name="quick_action_navigation_view_title">Vista navigazione</string>
@@ -5112,7 +5112,7 @@
     <string name="organize_by_summary">Organizza automaticamente le tue tracce in gruppi sulla base di un parametro selezionato come attività, velocità o posizione.</string>
     <string name="astronomy_plugin_name">Astronomia</string>
     <string name="favorite_folder_rename_conflict">Esiste già una cartella con questo nome.</string>
-    <string name="astro_designations">Nomenclature</string>
+    <string name="astro_designations">Nomenclatura</string>
     <string name="map_widget_memory_info_desc">Monitora l\'heap Java, le allocazioni native e la memoria grafica.</string>
     <string name="obd_alt_battery_voltage_desc">Mostra tensione sull\'adattatore OBD</string>
     <string name="shared_string_world_weather_map">Mappa metereologica mondiale</string>
@@ -5157,7 +5157,6 @@
     <string name="choose_from_gallery">Scegli dalla galleria</string>
     <string name="choose_from_files">Scegli tra i file</string>
     <string name="shared_string_media">File multimediali</string>
-    <string name="auto_copy_media_to_osmand_storage">Copia automatica dei file multimediali nella memoria OsmAnd</string>
     <string name="no_media">Nessun file multimediale</string>
     <string name="no_media_descr">Puoi aggiungere foto, video o note audio dalla tua fotocamera o libreria.</string>
     <string name="access_pinch_zoom_magnification">Ingrandimento con due dita</string>
@@ -5174,7 +5173,9 @@
     <string name="camera_folder">Cartella della fotocamera</string>
     <string name="media_storage_main_storage_descr">I file sono salvati nell\'archivio privato dell\'app. Sono nascosti dalla Galleria e dalle altre app.</string>
     <string name="media_storage_shared_storage_descr">I file sono salvati nelle cartelle pubbliche (Immagini, Video, Musica). Sono visibili nella Galleria e in Google Foto.</string>
-    <string name="media_storage_camera_folder_descr">I file sono salvati nel Rullino fotografico. Nota: l\'audio è salvato in Musica/OsmAnd.</string>
+    <string name="shared_string_note">Nota</string>
+    <string name="media_storage_camera_folder_note_descr">L\'audio è salvato in Musica/OsmAnd.</string>
+    <string name="media_storage_camera_folder_descr">I file sono salvati nel Rullino fotografico. %1$s</string>
     <string name="media_storage_manually_specified_descr">I file sono salvati in una cartella personalizzata e ordinati per tipo (Audio, Foto, Video).</string>
     <string name="change_media_storage_question">Cambio l\'archivio multimediale?</string>
     <string name="change_media_storage_full_description">Sposto i file multimediali esistenti nella nuova destinazione?\n%1$s &gt; %2$s</string>
@@ -5222,7 +5223,7 @@
     <string name="astro_eclipse_phase_total">Totale</string>
     <string name="astro_eclipse_phase_partial">Parziale</string>
     <string name="astro_fit_eclipse_path">Adatta il percorso dell\'eclissi</string>
-    <string name="astro_show_map">Mostra mappa</string>
+    <string name="astro_show_map">Mostra la mappa</string>
     <string name="astro_hide_map">Nascondi mappa</string>
     <string name="astro_map_center_location">Centro mappa: %1$s</string>
     <string name="astro_solar_eclipse">Eclissi solare</string>
@@ -5331,4 +5332,7 @@
     <string name="lang_en_barebones">Inglese (semplificato)</string>
     <string name="access_pinch_zoom_magnification_descr">Usa uno zoom fluido anziché a scatti durante l\'ingrandimento con le dita.</string>
     <string name="traffic_warning_red_light_camera">Telecamera semaforica</string>
+    <string name="always_keep_local_copy">Conserva sempre una copia locale</string>
+    <string name="always_keep_local_copy_description">Il file multimediale rimane allegato anche se l\'originale viene eliminato dalla galleria o dai file.</string>
+    <string name="use_spatial_text_search">Utilizza la ricerca testuale spaziale</string>
 </resources>

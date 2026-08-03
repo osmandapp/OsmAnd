@@ -30,6 +30,7 @@ public class OsmMapUtils {
 
 	public static boolean isMultipolygon(Map<String, String> tags) {
 		return "multipolygon".equals(tags.get(OSMSettings.OSMTagKey.TYPE.getValue())) ||
+				"site".equals(tags.get(OSMSettings.OSMTagKey.TYPE.getValue())) || // probably limit only for poi creation
 				"protected_area".equals(tags.get(OSMSettings.OSMTagKey.BOUNDARY.getValue())) ||
 				"low_emission_zone".equals(tags.get(OSMSettings.OSMTagKey.BOUNDARY.getValue())) ||
 				"national_park".equals(tags.get(OSMSettings.OSMTagKey.BOUNDARY.getValue())) ||

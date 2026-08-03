@@ -3,11 +3,13 @@ package net.osmand.search.core.spatial;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -18,7 +20,6 @@ import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapPoiReaderAdapter;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
@@ -32,7 +33,6 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
-import net.osmand.search.core.HashQuadTree;
 import net.osmand.search.core.TopIndexFilter;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialSearchFileCache;
@@ -352,7 +352,32 @@ public class SpatialPoiSearch {
 		cs.tokens.add(t);
 		t.addPoiCategoryMatch(a.id);
 	}
-	
+
+	public int getCategoryFrequency(SpatialSearchContext ctx, String categoryKey) {
+		SpatialPoiType a = getByKey(categoryKey);
+		if (a == null) {
+			return 0;
+		}
+		int total = 0;
+		for (SpatialSearchFileCache l : ctx.internalFile) {
+			if (l.poiFrequencies != null) {
+				Integer freq = l.poiFrequencies.get(a.key);
+				if (freq != null) {
+					total += freq;
+				}
+				if (a.singleType instanceof PoiFilter pf) {
+					for (PoiType p : pf.getPoiTypes()) {
+						freq = l.poiFrequencies.get(p.getKeyName());
+						if (freq != null) {
+							total += freq;
+						}
+					}
+				}
+			}
+		}
+		return total;
+	}
+
 	public void processPoiCategories(SpatialSearchContext ctx, List<SpatialSearchToken> tokens) {
 		Map<SpatialPoiType, PoiCatSearch> res = new LinkedHashMap<>();
 		for (SpatialSearchToken t : tokens) {
@@ -437,7 +462,24 @@ public class SpatialPoiSearch {
 					MapUtils.get31TileNumberY(r.bottom), zoom, alimit);
 			iterateSearch(ctx, req, ctx.files, true);
 		}
-		return results;
+		return filterByZoomTile(ctx, results);
+	}
+
+	private List<Amenity> filterByZoomTile(SpatialSearchContext ctx, List<Amenity> amenities) {
+		int z = 16 - ctx.settings.SEARCH_POI_BY_CATEGORY_ZOOM;
+		if (z < 0) {
+			return amenities; // dedup disabled at this zoom, keep everything
+		}
+		TLongHashSet tiles = new TLongHashSet();
+		List<Amenity> res = new ArrayList<>(amenities.size());
+		for (Amenity a : amenities) {
+			int x16 = MapUtils.get31TileNumberX(a.getLocation().getLongitude()) >> 15;
+			int y16 = MapUtils.get31TileNumberY(a.getLocation().getLatitude()) >> 15;
+			if (!SpatialSearchContext.skipZoomTileDuplicate(tiles, x16, y16, z, a.getTravelEloNumber() > Amenity.DEFAULT_ELO)) {
+				res.add(a);
+			}
+		}
+		return res;
 	}
 	
 	public List<Amenity> loadPOIObjects(SpatialSearchContext ctx, SpatialPoiType spt,  LatLon latLon, int radMeters,
@@ -460,14 +502,28 @@ public class SpatialPoiSearch {
 		return results;
 	}
 
+	private static Set<String> groupChildTypes(SpatialPoiType spt) {
+		if (spt.singleType instanceof PoiFilter pf && !(spt.singleType instanceof PoiCategory)) {
+			Set<String> types = new HashSet<>();
+			for (PoiType p : pf.getPoiTypes()) {
+				types.add(p.getKeyName());
+			}
+			return types;
+		}
+		return Collections.emptySet();
+	}
 
 	private SearchRequest<Amenity> prepareRequest(SpatialPoiType spt, List<Amenity> results, int sleft, int stop, int sright,
 			int sbottom, int zoom, int[] alimit) {
+		final Set<String> groupTypes = groupChildTypes(spt);
 		SearchPoiTypeFilter typeFilter = spt.poiAdditional != null ? null : new SearchPoiTypeFilter() {
 
 			@Override
 			public boolean accept(PoiCategory type, String subcategory) {
 				if (spt.key.equals(type.getKeyName()) || spt.key.equals(subcategory)) {
+					return true;
+				}
+				if (groupTypes.contains(subcategory)) {
 					return true;
 				}
 				if (spt.parentTypes != null) {

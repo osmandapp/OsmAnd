@@ -173,13 +173,7 @@ class AstroArticleDialogFragment : WikiArticleBaseDialogFragment() {
 			if (!isAdded || articleHtml.isNullOrBlank()) {
 				return@launch
 			}
-			contentWebView.loadDataWithBaseURL(
-				getBaseUrl(),
-				createHtmlContent(),
-				"text/html",
-				"UTF-8",
-				null
-			)
+			loadHeaderImage(createHtmlContent(), wikidataId)
 		}
 	}
 

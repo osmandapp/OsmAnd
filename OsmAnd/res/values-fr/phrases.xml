@@ -2134,7 +2134,7 @@
     <string name="poi_board_type_astronomy">Astronomie</string>
     <string name="poi_toll_hgv_yes">Péage poids lourd</string>
     <string name="poi_tactile_paving_yes">Oui;Bande podotactile</string>
-    <string name="poi_tactile_paving_no">Sans surface podotactile</string>
+    <string name="poi_tactile_paving_no">Sans bande podotactile</string>
     <string name="poi_railway_level_crossing">Passage à niveau</string>
     <string name="poi_xmas">Noël</string>
     <string name="poi_xmas_event">Événement de Noël</string>
@@ -2896,10 +2896,10 @@
     <string name="poi_gorge">Gorge</string>
     <string name="poi_couloir">Couloir</string>
     <string name="poi_surface_clay">Surface : terre battue</string>
-    <string name="poi_surface_tartan">Tartan</string>
-    <string name="poi_surface_artificial_turf">Pelouse artificielle</string>
-    <string name="poi_surface_decoturf">Decoturf</string>
-    <string name="poi_surface_metal_grid">Grille métallique</string>
+    <string name="poi_surface_tartan">Surface : Tartan</string>
+    <string name="poi_surface_artificial_turf">Revêtement : Pelouse artificielle</string>
+    <string name="poi_surface_decoturf">Revêtement : DecoTurf</string>
+    <string name="poi_surface_metal_grid">Surface : Grille métallique</string>
     <string name="poi_location_underground">Emplacement : souterrain</string>
     <string name="poi_location_underwater">Emplacement : sous l\'eau</string>
     <string name="poi_location_overground">Emplacement : en surface</string>
@@ -4706,7 +4706,7 @@
     <string name="poi_us_maps_recreation_area_facility">Installation d\'aire de loisirs</string>
     <string name="poi_barrier_board">Panneau barrière</string>
     <string name="poi_tank_trap">Obstacle anti-char</string>
-    <string name="poi_surface_chipseal">Enduit de gravillons</string>
+    <string name="poi_surface_chipseal">Revêtement : enrobé gravillonné</string>
     <string name="poi_healthcare_speciality_travel_clinic">Clinique du voyage</string>
     <string name="poi_hang_gliding">Deltaplane</string>
     <string name="poi_padus_public_access_open">Accès : ouvert</string>
