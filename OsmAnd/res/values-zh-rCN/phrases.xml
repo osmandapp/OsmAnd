@@ -3926,4 +3926,14 @@
     <string name="poi_evangelical_church">福音派教堂</string>
     <string name="poi_presbyterian_church">长老会教堂</string>
     <string name="poi_access_main_tag">通行权限</string>
+    <string name="poi_denomination_ashkenazi">阿什肯纳兹犹太人</string>
+    <string name="poi_denomination_moravian">摩拉维亚教会</string>
+    <string name="poi_denomination_charismatic">灵恩派</string>
+    <string name="poi_denomination_syriac_orthodox">叙利亚东正教会</string>
+    <string name="poi_denomination_mission_covenant_church_of_sweden">瑞典行道会</string>
+    <string name="poi_denomination_gelug">格鲁派</string>
+    <string name="poi_denomination_celtic">凯尔特</string>
+    <string name="poi_denomination_kardecista">唯灵论</string>
+    <string name="poi_denomination_sephardi">塞法迪犹太人</string>
+    <string name="poi_piste_downhill">下坡滑道；滑雪滑道；滑雪坡</string>
 </resources>
