@@ -91,11 +91,8 @@ import net.osmand.util.SearchAlgorithms;
 // REVIEW (index_words_dashboard - common озеро): POI / ADDRESS - France, Germany, US, Europe, China, Peru
 // REVIEW: Auto test New york, France, Italy (Slow?)
 
-// '10 Am Remsufer Remseck am Neckar'
-// TODO '138 138 Scott Avenue Bellefonte'
-// TODO '8 av 8'
+// TODO Duplicate '10 Am Remsufer Remseck am Neckar', '138 138 Scott Avenue Bellefonte', '8 av 8'
 // TODO 2419 Avenue G Dickinson, TX USA
-
 
 // TODO Performance Pipeline
 // TODO Extend POI tile bboxes 200m? internet_access (fuel_diesel)
