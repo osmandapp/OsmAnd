@@ -11,10 +11,6 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
-	<string name="coordinate_grid_visible_from_zoom">This grid is visible from zoom level %1$d.</string>
-	<string name="coordinate_grid_outside_crs_area">This grid is visible only within the selected CRS area of use.</string>
-	<string name="coordinate_grid_visible_from_zoom_and_crs_area">This grid is visible from zoom level %1$d and only within the selected CRS area of use.</string>
-	<string name="coordinate_grid_format_not_supported">This coordinate format is not supported by Coordinate Grid.</string>
 	<string name="share_favorites_media_preparation_failed">Couldn\'t include attached media. Sharing points only.</string>
 	<plurals name="files_count">
 		<item quantity="one">%d file</item>

@@ -29,7 +29,6 @@ import net.osmand.plus.settings.enums.GridLabelsPosition;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.CoordinatesGridSettings;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
@@ -77,31 +76,14 @@ public class CoordinatesGridController extends BaseDialogController {
 		CoordinateGridFormat gridFormat = gridFormatProvider.resolve(formatId);
 		if (gridFormat != null) {
 			onSelectFormat(gridFormat);
-		} else {
-			app.showShortToastMessage(R.string.coordinate_grid_format_not_supported);
 		}
 	}
 
 	private void onSelectFormat(@NonNull CoordinateGridFormat format) {
 		setGridFormat(format);
-		showVisibilityHint(format);
 		if (screen != null) {
 			screen.updateFormatButton();
 			screen.updateZoomLevelsButton();
-		}
-	}
-
-	private void showVisibilityHint(@NonNull CoordinateGridFormat format) {
-		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
-		int minZoom = gridSettings.getSupportedZoomLevels(format).min();
-		boolean belowMinZoom = mapView.getZoom() < minZoom;
-		boolean outsideCrsArea = !format.isWithinArea(mapView.getLatitude(), mapView.getLongitude());
-		if (belowMinZoom && outsideCrsArea) {
-			app.showShortToastMessage(R.string.coordinate_grid_visible_from_zoom_and_crs_area, minZoom);
-		} else if (belowMinZoom) {
-			app.showShortToastMessage(R.string.coordinate_grid_visible_from_zoom, minZoom);
-		} else if (outsideCrsArea) {
-			app.showShortToastMessage(R.string.coordinate_grid_outside_crs_area);
 		}
 	}
 
