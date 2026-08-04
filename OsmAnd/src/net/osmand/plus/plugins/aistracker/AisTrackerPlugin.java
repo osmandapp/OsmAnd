@@ -24,6 +24,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.shared.aistracker.AisMessageListener;
 import net.osmand.shared.aistracker.AisDataListener;
+import net.osmand.shared.aistracker.AisLocation;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
@@ -175,6 +176,10 @@ public class AisTrackerPlugin extends OsmandPlugin {
 			if (objects.get(obj.getMmsi()) == obj) {
 				AisTrackerPlugin.this.onAisObjectReceived(obj);
 			}
+		}
+
+		@Override
+		public void onNmeaLocationReceived(@NonNull AisLocation location) {
 		}
 
 		@NonNull
