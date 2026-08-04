@@ -210,7 +210,11 @@ public class StreetNameWidget extends MapWidget {
 
 	public boolean updateWaypoint() {
 		View view = getView();
-		LocationPointWrapper point = waypointHelper.getMostImportantLocationPoint(null);
+		ApplicationMode mode = settings.getApplicationMode();
+		boolean customEnabled = widgetState.isCustomApproachThresholdsEnabled(mode);
+		int customDistance = customEnabled ? widgetState.getApproachPoiDistance(mode) : 0;
+		int customTime = customEnabled ? widgetState.getApproachPoiTime(mode) : 0;
+		LocationPointWrapper point = waypointHelper.getMostImportantLocationPoint(null, customDistance, customTime);
 		boolean changed = lastPoint != point;
 		lastPoint = point;
 		if (point == null) {

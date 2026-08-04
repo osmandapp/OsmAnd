@@ -168,6 +168,16 @@ public class AnnounceTimeDistances {
 		return false;
 	}
 
+	public boolean isPntApproachActive(float currentSpeed, double dist, int customDistance, int customTime) {
+		if (customDistance > 0 || customTime > 0) {
+			if (customDistance > 0 && dist <= customDistance) {
+				return true;
+			}
+			return customTime > 0 && isDistanceLess(currentSpeed, dist, (double) customTime * DEFAULT_SPEED);
+		}
+		return isTurnStateActive(currentSpeed, dist, STATE_LONG_PNT_APPROACH);
+	}
+
 	public boolean isTurnStateNotPassed(float currentSpeed, double dist, int turnType) {
 		switch (turnType) {
 			case STATE_TURN_IN:

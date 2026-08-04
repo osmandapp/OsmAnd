@@ -154,13 +154,12 @@ public class WaypointHelper {
 
 	public void removeVisibleLocationPoint(List<LocationPointWrapper> points) {
 		List<TargetPoint> ps = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
-		boolean[] checkedIntermediates = null;
+		final int[] targetsCount = {0};
+		final boolean[] checkedIntermediates = new boolean[ps.size()];
+		Arrays.fill(checkedIntermediates, true);
 		for (LocationPointWrapper lp : points) {
 			if (lp.type == TARGETS) {
-				if (checkedIntermediates == null) {
-					checkedIntermediates = new boolean[ps.size()];
-					Arrays.fill(checkedIntermediates, true);
-				}
+				targetsCount[0]++;
 				if (((TargetPoint) lp.point).intermediate) {
 					checkedIntermediates[((TargetPoint) lp.point).index] = false;
 				} else {
@@ -170,7 +169,7 @@ public class WaypointHelper {
 				locationPoints.get(lp.type).remove(lp);
 			}
 		}
-		if (checkedIntermediates != null) {
+		if (targetsCount[0] > 0) {
 			commitPointsRemoval(checkedIntermediates);
 		}
 	}
@@ -201,11 +200,18 @@ public class WaypointHelper {
 	}
 
 	public LocationPointWrapper getMostImportantLocationPoint(List<LocationPointWrapper> list) {
+		return getMostImportantLocationPoint(list, 0, 0);
+	}
+
+	public LocationPointWrapper getMostImportantLocationPoint(List<LocationPointWrapper> list, int customDistance, int customTime) {
 		if (list != null) {
 			list.clear();
 		}
 		LocationPointWrapper found = null;
+		final int[] minDistance = { Integer.MAX_VALUE };
 		AnnounceTimeDistances atd = getVoiceRouter().getAnnounceTimeDistances();
+		Location lastProjection = app.getRoutingHelper().getLastProjection();
+		float currentSpeed = atd.getSpeed(lastProjection);
 		for (int type = 0; type < locationPoints.size(); type++) {
 			if (type == ALARMS || type == TARGETS) {
 				continue;
@@ -214,19 +220,18 @@ public class WaypointHelper {
 			List<LocationPointWrapper> lp = locationPoints.get(type);
 			while (kIterator < lp.size()) {
 				LocationPointWrapper lwp = lp.get(kIterator);
-				if (lp.get(kIterator).routeIndex < route.getCurrentRoute()) {
-					// skip
-				} else {
-					if (atd.isTurnStateActive(0,
-							route.getDistanceToPoint(lwp.routeIndex), STATE_LONG_PNT_APPROACH)) {
-						if (found == null || found.routeIndex < lwp.routeIndex) {
+				// Check points that are upcoming or on the current segment
+				if (lwp.routeIndex >= route.getCurrentRoute()) {
+					int d = route.getDistanceToPoint(lastProjection, lwp.routeIndex);
+					if (atd.isPntApproachActive(currentSpeed, d, customDistance, customTime)) {
+						if (found == null || d < minDistance[0]) {
 							found = lwp;
+							minDistance[0] = d;
 							if (list != null) {
 								list.add(lwp);
 							}
 						}
 					}
-					break;
 				}
 				kIterator++;
 			}
