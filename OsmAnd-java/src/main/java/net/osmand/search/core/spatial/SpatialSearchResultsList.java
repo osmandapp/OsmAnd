@@ -281,7 +281,9 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 					objectRef = SearchAlgorithms.getBuildingCompareSet(ref, tempBuildNames2);
 				} else {
 					int num = Algorithms.extractIntegerNumber(as.getName());
-					if (num > 0) {
+					int snum = Algorithms.extractIntegerNumber(poiAtom.name);
+					// don't count twice (as query already assigned)
+					if (num > 0 && snum != num) {
 						objectRef = Collections.singleton(num + "");
 					}
 				}
@@ -297,6 +299,8 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 			int match = -1;
 			if (objectRef != null && objectRef.size() > 0) {
 				if (objectRef.equals(querySetRef)) {
+					// no use case to count duplicates
+					// if (tempBuildNames1.size() > objectRef.size()) {
 					match = 0;
 				} else if (querySetRef.size() == objectRef.size() + 1 && querySetRef.containsAll(objectRef)) {
 					match = 1;
@@ -304,8 +308,8 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 			}
 			if (match >= 0) {
 				extraNameMatch.put(indx, queryRef);
-				if(match > 0) {
-					surplusWords.put(indx, -1);
+				if (match > 0) {
+					surplusWords.put(indx, -match);
 				}
 			} else {
 				skipResults.put(indx, true);

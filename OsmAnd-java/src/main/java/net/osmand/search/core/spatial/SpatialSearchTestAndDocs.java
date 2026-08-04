@@ -92,7 +92,7 @@ import net.osmand.util.SearchAlgorithms;
 // REVIEW (index_words_dashboard - common озеро): POI / ADDRESS - France, Germany, US, Europe, China, Peru
 // REVIEW: Auto test New york, France, Italy (Slow?)
 
-// TODO Duplicate '10 Am Remsufer Remseck am Neckar', '138 138 Scott Avenue Bellefonte', '8 av 8'
+// TODO Duplicate '10 Am Remsufer Remseck am Neckar', +'138 138 Scott Avenue Bellefonte', +'8 av 8'
 
 // TODO Extend POI tile bboxes 200m? internet_access (fuel_diesel)
 // TODO Analyze Performance bootlenecks VisualVM (Pipeline + Intersection)
@@ -201,7 +201,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "2/1 Rathausplatz Esslingen am Neckar"; // not correct
 //		query = "9 Neustädter Straße Korb";
 //		query = "14/1 J.-F.-Weishaar-Straße Korb";
-//		query = "10 Am Remsufer Remseck am Neckar";
+		query = "10 Am Remsufer Remseck am Neckar";
 
 //		settings = SpatialTextSearchSettings.searchPoiCategoriesSettings(0, null);
 //		query = "Gyn.";
@@ -243,14 +243,14 @@ public class SpatialSearchTestAndDocs {
 //		query = "West Valley City";
 //		query = "2110 College Avenue Elmira";
 		
-		pattern = "Us_penn";
+//		pattern = "Us_penn";
 //		pattern2 = "Us_new";
 //		query = "500 East College Avenue State College";
 //		query = "315 B Westside Avenue Elmira"; // '315 B', '315B'
 //		query = "'330 Innovation Boulevard University Park";
-		query = "138 138 Scott Avenue Bellefonte";
+//		query = "138 138 Scott Avenue Bellefonte";
 //		settings.MAX_PIPELINE_RES_TO_STOP = new int[] {1};
-		query = "138 138 Scott Avenue";
+//		query = "138 138 Scott Avenue";
 
 		// PERFORMANCE
 //		query = "115 1/2 East 9th Street Elmira";
