@@ -53,6 +53,11 @@ class GpxTrackAnalysis {
 	var pointAttributes = mutableListOf<PointAttributes>()
 	var availableAttributes = mutableSetOf<String>()
 
+	// The per point list is only needed to render a track (charts, colorize, gps filter)
+	// Reindexing stores just the db columns, so it turns collecting off to keep the
+	// retained size of the analysis independent of the track points count
+	var collectPointData = true
+
 	var maxDistanceBetweenPoints = 0.0F
 
 	var hasSpeedInTrack = false
@@ -494,7 +499,7 @@ class GpxTrackAnalysis {
 			estimatedPointCount += segment.getNumberOfPoints()
 		}
 
-		pointAttributes = ArrayList(estimatedPointCount)
+		pointAttributes = if (collectPointData) ArrayList(estimatedPointCount) else mutableListOf()
 		availableAttributes = mutableSetOf()
 
 		for (s in splitSegments) {
@@ -842,7 +847,9 @@ class GpxTrackAnalysis {
 			point.attributes = attributes
 		}
 		pointsAnalyser?.onAnalysePoint(this, point, attributes)
-		pointAttributes.add(attributes)
+		if (collectPointData) {
+			pointAttributes.add(attributes)
+		}
 	}
 
 	private fun updateBounds(point: WptPt) {

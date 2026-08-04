@@ -51,17 +51,7 @@ public class ShareFavoritesAsyncTask extends AsyncTask<Void, Void, Void> {
 		this.listener = listener;
 		this.favouritesHelper = app.getFavoritesHelper();
 		this.activityRef = new WeakReference<>(activity);
-
-		File dir = new File(app.getCacheDir(), "share");
-		if (!dir.exists()) {
-			dir.mkdir();
-		}
-		if (this.groups.size() == 1) {
-			File file = app.getFavoritesHelper().getFileHelper().getExternalFile(this.groups.get(0));
-			destFile = new File(dir, file.getName());
-		} else {
-			destFile = new File(dir, FavouritesFileHelper.FAV_FILE_PREFIX + GPX_FILE_EXT);
-		}
+		destFile = createDestinationFile(app, groups);
 	}
 
 	@Override
@@ -74,11 +64,33 @@ public class ShareFavoritesAsyncTask extends AsyncTask<Void, Void, Void> {
 	@Override
 	protected Void doInBackground(Void... params) {
 		favouritesHelper.getFileHelper().saveFile(groups, destFile);
-		pointsDescription = Html.fromHtml(generateHtmlPrint(groups));
+		pointsDescription = buildPointsDescription(app, groups);
 		return null;
 	}
 
-	private String generateHtmlPrint(List<FavoriteGroup> groups) {
+	@NonNull
+	public static File createDestinationFile(@NonNull OsmandApplication app,
+	                                         @NonNull List<FavoriteGroup> groups) {
+		File dir = new File(app.getCacheDir(), "share");
+		if (!dir.exists()) {
+			dir.mkdirs();
+		}
+		if (groups.size() == 1) {
+			File file = app.getFavoritesHelper().getFileHelper().getExternalFile(groups.get(0));
+			return new File(dir, file.getName());
+		}
+		return new File(dir, FavouritesFileHelper.FAV_FILE_PREFIX + GPX_FILE_EXT);
+	}
+
+	@NonNull
+	public static Spanned buildPointsDescription(@NonNull OsmandApplication app,
+	                                             @NonNull List<FavoriteGroup> groups) {
+		return Html.fromHtml(generateHtmlPrint(app, groups));
+	}
+
+	@NonNull
+	private static String generateHtmlPrint(@NonNull OsmandApplication app,
+	                                        @NonNull List<FavoriteGroup> groups) {
 		StringBuilder html = new StringBuilder();
 		StringBuilder buffer = new StringBuilder();
 		html.append("<h1>My Favorites</h1>");
@@ -91,7 +103,7 @@ public class ShareFavoritesAsyncTask extends AsyncTask<Void, Void, Void> {
 			}
 
 			html.append(buffer);
-			boolean reachedLimit = generateHtmlForGroup(group.getPoints(), html);
+			boolean reachedLimit = generateHtmlForGroup(app, group.getPoints(), html);
 			if (reachedLimit) {
 				return html.append("<p>...</p>").toString();
 			}
@@ -99,7 +111,9 @@ public class ShareFavoritesAsyncTask extends AsyncTask<Void, Void, Void> {
 		return html.toString();
 	}
 
-	private boolean generateHtmlForGroup(List<FavouritePoint> points, StringBuilder html) {
+	private static boolean generateHtmlForGroup(@NonNull OsmandApplication app,
+	                                            @NonNull List<FavouritePoint> points,
+	                                            @NonNull StringBuilder html) {
 		StringBuilder buffer = new StringBuilder();
 		for (FavouritePoint fp : points) {
 			buffer.setLength(0);
@@ -130,11 +144,13 @@ public class ShareFavoritesAsyncTask extends AsyncTask<Void, Void, Void> {
 		}
 		FragmentActivity activity = activityRef.get();
 		if (AndroidUtils.isActivityNotDestroyed(activity) && destFile.exists()) {
-			shareFavorites(activity, destFile);
+			shareFavorites(app, activity, destFile, pointsDescription);
 		}
 	}
 
-	private void shareFavorites(@NonNull FragmentActivity activity, @NonNull File destFile) {
+	public static void shareFavorites(@NonNull OsmandApplication app,
+			@NonNull FragmentActivity activity, @NonNull File destFile,
+			@NonNull CharSequence pointsDescription) {
 		String type = "text/plain";
 		String extraText = String.valueOf(pointsDescription);
 		String extraSubject = app.getString(R.string.share_fav_subject);

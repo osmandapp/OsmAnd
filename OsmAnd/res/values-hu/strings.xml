@@ -2987,8 +2987,8 @@
     <string name="delete_version_history">Verziótörténet törlése</string>
     <string name="routing_attr_avoid_tunnels_description">Alagutak elkerülése</string>
     <string name="routing_attr_avoid_tunnels_name">Alagutak elkerülése</string>
-    <string name="send_crash_log">Összeomlási napló elküldése</string>
-    <string name="send_logcat_log">Logcat napló elküldése</string>
+    <string name="send_crash_log">Összeomlási naplók elküldése</string>
+    <string name="send_logcat_log">Aktuális munkamenet-naplók elküldése</string>
     <string name="backup_promocode">Promóciós kód</string>
     <string name="cancel_anytime_in_gplay">Bármikor lemondhatja a Google Play-ben.</string>
     <string name="offline_wikivoyage">Offline Wikivoyage útikalauz</string>
@@ -5075,7 +5075,6 @@
     <string name="shared_string_media">Média</string>
     <string name="no_media">Nincs média</string>
     <string name="no_media_descr">Fényképet, videót vagy hangjegyzetet adhat hozzá a fényképezőgépéről vagy az eszköz könyvtárából.</string>
-    <string name="auto_copy_media_to_osmand_storage">Média automatikus másolása az OsmAnd tárhelyére</string>
     <string name="navigate_point_format_maidenhead">Maidenhead</string>
     <string name="navigate_point_east_coordinate">Keleti koordináta</string>
     <string name="navigate_point_north_coordinate">Északi koordináta</string>
@@ -5119,7 +5118,9 @@
     <string name="camera_folder">Kamera mappája</string>
     <string name="media_storage_main_storage_descr">A fájlok a privát alkalmazástárhelyre lesznek mentve. Rejtve maradnak a galéria és más alkalmazások elől.</string>
     <string name="media_storage_shared_storage_descr">A fájlok nyilvános mappákba (képek, filmek, zene) lesznek mentve. Láthatóak a galériában és a Google fotókban.</string>
-    <string name="media_storage_camera_folder_descr">A fájlok a kamera mappájába lesznek mentve. Megjegyzés: A hangfájlok pedig a Music/OsmAnd mappába kerülnek.</string>
+    <string name="shared_string_note">Megjegyzés</string>
+    <string name="media_storage_camera_folder_note_descr">A hangfájlok pedig a Music/OsmAnd mappába kerülnek.</string>
+    <string name="media_storage_camera_folder_descr">A fájlok a kamera mappájába lesznek mentve. %1$s</string>
     <string name="media_storage_manually_specified_descr">A fájlok egy egyéni mappába lesznek mentve, és típus szerint rendezve (hang, fotó, videó).</string>
     <string name="change_media_storage_question">Módosítja a médiatárolót?</string>
     <string name="change_media_storage_full_description">Áthelyezi a meglévő médiafájlokat az új célhelyre?\n%1$s &gt; %2$s</string>
@@ -5249,4 +5250,7 @@
     <string name="rendering_attr_surface_laterite_name">Laterit</string>
     <string name="use_spatial_text_search">Térbeli szövegkeresés használata</string>
     <string name="use_spatial_text_search_description">Térbeli szövegkeresőmotor (kísérleti) használata a szabványos gyorskeresési API-k helyett.</string>
+    <string name="always_keep_local_copy">Mindig legyen helyi másolat</string>
+    <string name="always_keep_local_copy_description">A médiafájlok akkor is megmaradnak, ha az eredeti fájlt törlik a galériából vagy a fájlok közül.</string>
+    <string name="release_5_4">• Új térbeli keresés — helyek keresése és egy hely környékének átkutatása\n\n • Megújult keresőfelület: rendezés, kategóriaszűrők, letisztultabb megjelenés\n\n • Fotók és médiafájlok csatolása a kedvencekhez\n\n • Kedvencek: alcsoportok támogatása és kitűzhető mappák\n\n • Koordináták: a keresés, a térképrács és a POI-megjelenítés mostantól támogatja az EPSG és a Maidenhead helymeghatározó szolgáltatásokat\n\n • Navigáció megszakadásainak javítása; váltás a „Szabványos” és a „Gyors” útvonaltervezés között\n\n • Az Android Auto térkép méretarányának a telefontól független beállítása\n\n • A csillagászat részhez hozzá lett adva a nap- és holdfogyatkozások</string>
 </resources>

@@ -3038,8 +3038,8 @@
     <string name="routing_attr_avoid_tunnels_description">Избегавај прокопе</string>
     <string name="routing_attr_avoid_tunnels_name">Избегавај прокопе</string>
     <string name="backup_promocode">Попустни код</string>
-    <string name="send_crash_log">Пошаљите дневник рушења програма</string>
-    <string name="send_logcat_log">Пошаљи белешке дневника</string>
+    <string name="send_crash_log">Пошаљите дневнике рушења програма</string>
+    <string name="send_logcat_log">Пошаљи дневнике тренутних сесија</string>
     <string name="purchases_feature_desc_nautical">Добавите приступ подацима о морској дубини</string>
     <string name="purchases_feature_desc_terrain">Контурне линије тла, назначавање сивог сенчења падина и нагиба распоном боја, ради приказа врхова и низија.</string>
     <string name="purchases_feature_desc_wikivoyage">Истражите Википутовање ван мреже. Чланци су подељени по државама и облстима и доступни на свим језицима.</string>
@@ -3779,11 +3779,11 @@
     <string name="cloud_version_confirm_delete">Да ли избрисати \"%1$s\" из Облака ОсмАнда?</string>
     <string name="simulation_position_description">Изаберите датотеку трага ради употребе као извора за померање положаја.</string>
     <string name="shared_string_kilograms">килограми</string>
-    <string name="share_link">Дели везу</string>
+    <string name="share_link">Дели линк</string>
     <string name="skip_download">Прескочи преузимање</string>
     <string name="last_synchronized">Последње усклађивани</string>
     <string name="display_position_automatic_descr">Зависи од усмерења карте: дно за смер кретања, средиште за све остало.</string>
-    <string name="share_as_file">Дели као датотеку</string>
+    <string name="share_as_file">Дели као фајл</string>
     <string name="determine_location">Омогућава нам да одредимо ваш положај</string>
     <string name="y_axis">Y-оса</string>
     <string name="shared_string_cross_buy">Унакрсна куповина</string>
@@ -5148,7 +5148,6 @@
     <string name="shared_string_media">Медија</string>
     <string name="no_media">Нема медија</string>
     <string name="no_media_descr">Можете додати слике, видеа или звучне белешке из своје камере или књижнице.</string>
-    <string name="auto_copy_media_to_osmand_storage">Самостално умножавање садржаја у ОсмАндово складиште</string>
     <string name="navigate_point_format_maidenhead">Мејденхед положај</string>
     <string name="navigate_point_east_coordinate">Источна координата</string>
     <string name="navigate_point_north_coordinate">Северна координата</string>
@@ -5192,7 +5191,9 @@
     <string name="camera_folder">Омот камере</string>
     <string name="media_storage_main_storage_descr">Датотеке се чувају у пријатном складишту програма. Скривене су од галерије и других програма.</string>
     <string name="media_storage_shared_storage_descr">Датотеке се чувају у јавним омотима (слике, филмови, музика). Видљиве су у галерији и Гугловим сликама.</string>
-    <string name="media_storage_camera_folder_descr">Датотеке се чувају у омоту камерин свитак. Напомена: звук се чува у музици/ОсмАнду.</string>
+    <string name="shared_string_note">Напомена</string>
+    <string name="media_storage_camera_folder_note_descr">звук се чува у музици/ОсмАнду.</string>
+    <string name="media_storage_camera_folder_descr">Датотеке се чувају у омоту камерин свитак. %1$s</string>
     <string name="media_storage_manually_specified_descr">Датотеке се чувају у произвољном омоту и распоређују по врсти (звук, слика, видео).</string>
     <string name="change_media_storage_question">Променити складиште медија?</string>
     <string name="change_media_storage_full_description">Преместити постојеће медијске датотеке на ново одредиште?\n%1$s &gt; %2$s</string>
@@ -5322,4 +5323,7 @@
     <string name="rendering_attr_surface_laterite_name">Латерит</string>
     <string name="use_spatial_text_search">Користите просторну претрагу текста</string>
     <string name="use_spatial_text_search_description">Замените стандардне АПИ-је за брзу претрагу експерименталном претрагом просторног текста.</string>
+    <string name="always_keep_local_copy">Увек чувај локалну копију</string>
+    <string name="always_keep_local_copy_description">Медији остају причвршћени чак и ако се оригинал обрише из галерије или датотека.</string>
+    <string name="release_5_4">• Нова просторна претрага — пронађите места и претражите око места\n\n • Освежени КИ претраге: сортирање, филтери категорија, чистији изглед\n\n • Приложите фотографије и медије омиљенима\n\n • Омиљени: подршка за подгрупе и фасцикле које се могу закачити\n\n • Координате: претрага, мрежа мапе и приказ ТОИ сада подржавају EPSG и локатор Мејденхеда\n\n • Исправљени прекиди навигације; пребацивање између стандардног и брзог рутирања\n\n • Подесите размеру мапе за Андроид Ауто одвојено од телефона\n\n • Астрономија је додала помрачења Сунца и Месеца</string>
 </resources>

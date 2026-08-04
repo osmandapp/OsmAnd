@@ -2974,8 +2974,8 @@
     <string name="delete_version_history">Supprimer l\'historique des versions</string>
     <string name="routing_attr_avoid_tunnels_description">Éviter les tunnels</string>
     <string name="routing_attr_avoid_tunnels_name">Éviter les tunnels</string>
-    <string name="send_crash_log">Envoyer le journal des plantages</string>
-    <string name="send_logcat_log">Envoyer le journal logcat</string>
+    <string name="send_crash_log">Envoyer les journaux des plantages de l\'application</string>
+    <string name="send_logcat_log">Envoyer les journaux de la session actuelle</string>
     <string name="backup_promocode">Code promo</string>
     <string name="purchases_feature_desc_wikivoyage">Explorez Wikivoyage sans connexion Internet. Les articles sont découpés par pays et disponibles dans toutes les langues.</string>
     <string name="purchases_feature_desc_wikipedia">Donne accès à tous les articles Wikipédia associés aux points d\'intérêts de la carte, permettant d\'en savoir plus sur un lieu en quelques clics. Pensez à télécharger les articles Wikipédia des régions de votre choix pour les consulter hors ligne.</string>
@@ -5077,7 +5077,6 @@
     <string name="choose_from_files">Sélectionnez un fichier</string>
     <string name="shared_string_media">Médias</string>
     <string name="no_media">Aucun média</string>
-    <string name="auto_copy_media_to_osmand_storage">Copier automatiquement les fichiers multimédias vers le stockage d\'OsmAnd</string>
     <string name="navigate_point_format_maidenhead">Maidenhead</string>
     <string name="navigate_point_east_coordinate">Coordonnée Est</string>
     <string name="navigate_point_north_coordinate">Coordonnée Nord</string>
@@ -5121,7 +5120,9 @@
     <string name="camera_folder">Dossier « Appareil photo »</string>
     <string name="media_storage_main_storage_descr">Les fichiers sont enregistrés dans la mémoire interne de l\'application. Ils ne sont pas visibles dans la Galerie ni dans les autres applications.</string>
     <string name="media_storage_shared_storage_descr">Les fichiers sont enregistrés dans des dossiers publics (« Images », « Vidéos », « Musique »). Ils sont visibles dans la Galerie et sur Google Photos.</string>
-    <string name="media_storage_camera_folder_descr">Les fichiers sont enregistrés dans la pellicule. Remarque : les fichiers audio sont enregistrés dans le dossier « Musique/OsmAnd ».</string>
+    <string name="shared_string_note">Note</string>
+    <string name="media_storage_camera_folder_note_descr">Les fichiers audio sont stockés dans le dossier « Music/OsmAnd ».</string>
+    <string name="media_storage_camera_folder_descr">Les fichiers sont stockés dans le dossier pellicule. %1$s</string>
     <string name="media_storage_manually_specified_descr">Les fichiers sont enregistrés dans un dossier personnalisé et classés par type (audio, photo, vidéo).</string>
     <string name="change_media_storage_question">Modifier l\'emplacement du stockage ?</string>
     <string name="change_media_storage_full_description">Déplacer les fichiers multimédias existants vers la nouvelle destination ?\n%1$s &gt; %2$s</string>
@@ -5251,4 +5252,7 @@
     <string name="duplicate_map">Dupliquer la carte</string>
     <string name="use_spatial_text_search">Utiliser la recherche textuelle spatiale</string>
     <string name="use_spatial_text_search_description">Remplacer les API de recherche rapide standard par le moteur de recherche textuelle spatiale expérimental.</string>
+    <string name="always_keep_local_copy">Toujours conserver une copie locale</string>
+    <string name="always_keep_local_copy_description">L’élément média est conservé même dans le cas où l\'original est supprimé de la galerie ou des fichiers.</string>
+    <string name="release_5_4">• Nouvelle recherche spatiale : trouvez des lieux et effectuez des recherches autour d\'un lieu\n\n • Interface de recherche repensée : tri, filtres par catégorie, présentation plus épurée\n\n • Ajoutez des photos et des fichiers multimédias à vos Favoris\n\n • Favoris : prise en charge des sous-groupes et des dossiers épinglables\n\n • Coordonnées : la recherche, la grille cartographique et l’affichage des points d’intérêt prennent désormais en charge les systèmes de localisation EPSG et Maidenhead\n\n • Correction des interruptions de navigation ; basculez entre les itinéraires « Standard » et « Rapide »\n\n • Définissez l’échelle de la carte Android Auto indépendamment de celle de votre téléphone\n\n • Ajout des éclipses solaires et lunaires dans la section « Astronomie »</string>
 </resources>

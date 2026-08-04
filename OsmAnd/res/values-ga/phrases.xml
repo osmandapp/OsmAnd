@@ -1044,8 +1044,8 @@
     <string name="poi_boat_dinghy_rental_yes">Dinghy: tá</string>
     <string name="poi_boat_canoe_rental_no">Curach: níl</string>
     <string name="poi_government_archive">Cartlann</string>
-    <string name="poi_surface_tartan">TartanName</string>
-    <string name="poi_surface_metal_grid">Greille miotail</string>
+    <string name="poi_surface_tartan">Dromchla: Tartán</string>
+    <string name="poi_surface_metal_grid">Dromchla: Greille miotail</string>
     <string name="poi_location_underground">Suíomh: faoi thalamh</string>
     <string name="poi_location_rooftop">Suíomh: rooftop</string>
     <string name="poi_location_indoor">Suíomh: faoi dhíon</string>
@@ -1497,7 +1497,7 @@
     <string name="poi_wedge">Ding</string>
     <string name="poi_wicket_gate">Geata Wicket</string>
     <string name="poi_toy_library">Leabharlann bréagán</string>
-    <string name="poi_surface_chipseal">ChipsealName</string>
+    <string name="poi_surface_chipseal">Dromchla: Séal sceallóga</string>
     <string name="poi_lock_name">Cuir ainm faoi ghlas</string>
     <string name="poi_maxlength">Fad uasta</string>
     <string name="poi_lock_ref">Tagairt do ghlas</string>
@@ -1898,8 +1898,8 @@
     <string name="poi_motorcycle_tyres_no">Boinn: níl</string>
     <string name="poi_direction_ene">Treo: soir-ó thuaidh</string>
     <string name="poi_government_social_security">Slándáil shóisialta</string>
-    <string name="poi_surface_artificial_turf">Móin shaorga</string>
-    <string name="poi_surface_decoturf">DecoTurfName</string>
+    <string name="poi_surface_artificial_turf">Dromchla: Móna saorga</string>
+    <string name="poi_surface_decoturf">Dromchla: Móin Maisiúcháin</string>
     <string name="poi_visibility_area">Infheictheacht: limistéar</string>
     <string name="poi_operational_status_open">Oscail</string>
     <string name="poi_socket_cee_blue_voltage_filter">CEE voltas cónascaire gorm</string>

@@ -237,8 +237,8 @@ public class AppInitializer implements IProgress {
 	public boolean checkPreviousRunsForExceptions(Activity activity, boolean writeFileSize) {
 		initVariables();
 		long size = activity.getPreferences(Context.MODE_PRIVATE).getLong(EXCEPTION_FILE_SIZE, 0);
-		File file = app.getAppPath(FeedbackHelper.EXCEPTION_PATH);
-		if (file.exists() && file.length() > 0) {
+		File file = app.getFeedbackHelper().getCrashLog();
+		if (file != null) {
 			if (size != file.length() && !isFirstTime()) {
 				if (writeFileSize) {
 					activity.getPreferences(Context.MODE_PRIVATE).edit().putLong(EXCEPTION_FILE_SIZE, file.length()).commit();

@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.IProgress;
-import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -32,7 +31,7 @@ public class AttachedMediaSettingsItem extends FileSettingsItem {
 	private final String rewrittenHref;
 
 	public AttachedMediaSettingsItem(@NonNull OsmandApplication app, @NonNull MediaSource source, @NonNull String targetFileName) throws IllegalArgumentException {
-		super(app, new File(app.getAppPath(IndexConstants.AV_INDEX_DIR), targetFileName));
+		super(app, new File(app.getAppPath(FileSubtype.ATTACHED_MEDIA.getSubtypeFolder()), targetFileName));
 		this.source = source;
 		this.subtype = FileSubtype.ATTACHED_MEDIA;
 		this.rewrittenHref = LinkMediaFactory.createInternalMediaUri(targetFileName);

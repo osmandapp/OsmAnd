@@ -85,30 +85,46 @@ class MediaProvider(context: Context) {
 
 	companion object {
 
-		private const val INTERNAL_MEDIA_DIR = "avnotes"
+		private const val MEDIA_DIR = "media"
+		private const val LEGACY_MEDIA_DIR = "avnotes"
 
 		@JvmStatic
 		fun getInternalMediaDir(appBaseDir: String): File {
-			return File(appBaseDir, INTERNAL_MEDIA_DIR)
+			return File(appBaseDir, MEDIA_DIR)
 		}
 
 		@JvmStatic
-		fun getInternalMediaRelativePath(internalPath: String?): String? {
-			val fileName = LinkMediaFactory.getInternalMediaFileName(internalPath) ?: return null
-			return "$INTERNAL_MEDIA_DIR/$fileName"
+		fun getLegacyInternalMediaDir(appBaseDir: String): File {
+			return File(appBaseDir, LEGACY_MEDIA_DIR)
+		}
+
+		@JvmStatic
+		fun getInternalMediaAliasFileName(internalPath: String?): String? {
+			val path = internalPath?.trim { it.isWhitespace() || it == '/' } ?: return null
+			val prefix = when {
+				path.startsWith("$MEDIA_DIR/") -> "$MEDIA_DIR/"
+				path.startsWith("$LEGACY_MEDIA_DIR/") -> "$LEGACY_MEDIA_DIR/"
+				else -> return null
+			}
+			return path.removePrefix(prefix).takeIf { it.isNotEmpty() && !it.contains('/') }
 		}
 
 		/**
 		 * Resolves an internal media link path (`osmand://media/<name>`) to a physical file: the
-		 * canonical media folder first, with a literal fallback so legacy links still resolve.
+		 * canonical media folder first, then the legacy AV-notes folder, with a literal fallback
+		 * so other old internal links still resolve.
 		 */
 		@JvmStatic
 		fun resolveInternalMediaFile(appBaseDir: String, internalPath: String): File {
-			val relativePath = getInternalMediaRelativePath(internalPath)
-			if (relativePath != null) {
-				val file = File(appBaseDir, relativePath)
+			val fileName = getInternalMediaAliasFileName(internalPath)
+			if (fileName != null) {
+				val file = File(getInternalMediaDir(appBaseDir), fileName)
 				if (file.exists()) {
 					return file
+				}
+				val legacyFile = File(getLegacyInternalMediaDir(appBaseDir), fileName)
+				if (legacyFile.exists()) {
+					return legacyFile
 				}
 			}
 			return File(appBaseDir, internalPath)

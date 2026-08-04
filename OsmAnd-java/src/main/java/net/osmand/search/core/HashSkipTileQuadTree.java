@@ -35,6 +35,26 @@ public class HashSkipTileQuadTree<T> {
 		this.indxZooms = indexedZooms;
 	}
 	
+	// Extra index to be extended
+	public static class TreeExtraIndex<EntryIndex, ZoomIndex> {
+
+		public EntryIndex buildEntryIndex() {
+			return null;
+		}
+		
+		public <T> ZoomIndex buildZoomIndex(ZoomBucket bucket, HashSkipTileQuadTree<T> tree) {
+			return null;
+		}
+		
+		public boolean acceptJoinBucket(EntryIndex entry, ZoomIndex zoom) {
+			return true;
+		}
+		
+		public boolean acceptJoin(EntryIndex entry1, EntryIndex entry2) {
+			return true;
+		}
+	}
+	
 
 	public static class TileEntry<T> {
 		public final long objId;
@@ -286,6 +306,10 @@ public class HashSkipTileQuadTree<T> {
 		}
 	}
 
+	public void addObject(T obj, int[] bbox31) {
+		addObject(obj, bbox31, -1);
+	}
+	
 	public void addObject(T obj, int[] bbox31, long externalId) {
 		long objId = externalId == -1 ? tileEntries.size() : externalId;
 		addTileEntry(obj, bbox31, objId, getNativeZoom(bbox31));
@@ -339,6 +363,8 @@ public class HashSkipTileQuadTree<T> {
 			}
 		}
 	}
+	
+	
 
 	public int build() {
 		if (modified != null) {
@@ -480,6 +506,10 @@ public class HashSkipTileQuadTree<T> {
 		checkIsBuilt();
 		return zoomBuckets[z];
 	}
+	
+	public boolean isBuilt() {
+		return modified != null;
+	}
 
 	private void checkIsBuilt() {
 		if (modified == null) {
@@ -524,9 +554,16 @@ public class HashSkipTileQuadTree<T> {
 		return res;
 	}
 	
-	List<TileEntry<T>> getTileEntries() {
+	public boolean isEmpty() {
+		return tileEntries.isEmpty();
+	}
+	
+	public int getSize() {
+		return tileEntries.size();
+	}
+	
+	public List<TileEntry<T>> getTileEntries() {
 		return tileEntries;
 	}
-
 
 }

@@ -2969,10 +2969,10 @@
     <string name="poi_location_overground">Локација: надземље</string>
     <string name="poi_location_underwater">Локација: подводна</string>
     <string name="poi_location_underground">Локација: подземна</string>
-    <string name="poi_surface_metal_grid">Метална мрежа</string>
-    <string name="poi_surface_decoturf">Декотрава</string>
-    <string name="poi_surface_artificial_turf">Вештачка трава</string>
-    <string name="poi_surface_tartan">Тартан</string>
+    <string name="poi_surface_metal_grid">Површина: Метална решетка</string>
+    <string name="poi_surface_decoturf">Површина: Декотрава</string>
+    <string name="poi_surface_artificial_turf">Подлога: Вештачка трава</string>
+    <string name="poi_surface_tartan">Површина: Тартан</string>
     <string name="poi_surface_clay">Површина: глина</string>
     <string name="poi_mountain_area">Планинско подручје</string>
     <string name="poi_couloir">Кулуар</string>
@@ -4563,7 +4563,7 @@
     <string name="poi_lock_name">Брава воденог тока</string>
     <string name="poi_boat_private">Приступ чамцем: приватан</string>
     <string name="poi_barrier_planter">Плантер</string>
-    <string name="poi_surface_chipseal">Комбинован асфалт</string>
+    <string name="poi_surface_chipseal">Површина: Комбинован асфалт</string>
     <string name="poi_barrier_board">Баријерна плоча</string>
     <string name="poi_boat_destination">Приступ чамцем: одредиште</string>
     <string name="poi_boat_designated">Приступ чамцем: намењен</string>

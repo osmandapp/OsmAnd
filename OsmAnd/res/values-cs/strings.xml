@@ -3052,8 +3052,8 @@
     <string name="delete_version_history">Smazat historii verzí</string>
     <string name="routing_attr_avoid_tunnels_description">Vyhnout se tunelům</string>
     <string name="routing_attr_avoid_tunnels_name">Vyhnout se tunelům</string>
-    <string name="send_crash_log">Odeslat záznam o pádu</string>
-    <string name="send_logcat_log">Odeslat záznam z logcatu</string>
+    <string name="send_crash_log">Odeslat záznamy o pádu</string>
+    <string name="send_logcat_log">Odeslat záznamy z aktuální relace</string>
     <string name="backup_promocode">Promokód</string>
     <string name="shared_string_purchased">Zakoupeno</string>
     <string name="explore_wikipedia_offline">Prozkoumejte Wikipedii offline.</string>
@@ -5196,7 +5196,9 @@
     <string name="camera_folder">Složka fotoaparátu</string>
     <string name="media_storage_main_storage_descr">Soubory se ukládají do soukromého úložiště aplikací. Jsou skryté před Galerií a ostatními aplikacemi.</string>
     <string name="media_storage_shared_storage_descr">Soubory se ukládají do veřejných složek (Obrázky, Filmy, Hudba). Jsou viditelné v Galerii a Google Photos.</string>
-    <string name="media_storage_camera_folder_descr">Soubory se ukládají do složky Fotoaparát. Poznámka: Zvuk se ukládá do složky Hudba/OsmAnd.</string>
+    <string name="shared_string_note">Poznámka</string>
+    <string name="media_storage_camera_folder_note_descr">Zvuk se ukládá do složky Hudba/OsmAnd.</string>
+    <string name="media_storage_camera_folder_descr">Soubory se ukládají do složky Fotoaparát. %1$s</string>
     <string name="media_storage_manually_specified_descr">Soubory se ukládají do vlastní složky a třídí se podle typu (Zvuk, Foto, Video).</string>
     <string name="change_media_storage_question">Změnit úložiště médií?</string>
     <string name="change_media_storage_full_description">Přesunout existující mediální soubory do nového cíle?\n%1$s &gt; %2$s</string>
@@ -5225,7 +5227,6 @@
     <string name="gallery_sort_duration_long_short">Nejdelší doba trvání první</string>
     <string name="gallery_sort_duration_short_long">Nejkratší doba trvání první</string>
     <string name="navigate_point_format_maidenhead">Maidenhead</string>
-    <string name="auto_copy_media_to_osmand_storage">Automatické kopírování médií do úložiště OsmAnd</string>
     <string name="tracks_backup_promo_button">Získejte OsmAnd Pro</string>
     <string name="tracks_backup_promo_description">Synchronizujte své trasy mezi zařízeními a webem s OsmAnd Pro.</string>
     <string name="tracks_backup_promo_title">Zálohujte a synchronizujte své trasy</string>
@@ -5270,4 +5271,21 @@
     <string name="astro_map_center_location">Střed mapy: %1$s</string>
     <string name="astro_solar_eclipse">Zatmění slunce</string>
     <string name="astro_solar_eclipse_subtitle">Prozkoumejte celosvětová zatmění slunce</string>
+    <string name="release_5_4">• Nové prostorové vyhledávání — vyhledávání míst a okolí daného místa\n\n • Vylepšené uživatelské rozhraní vyhledávání: třídění, filtry podle kategorií, přehlednější vzhled\n\n • Přidávání fotografií a médií do oblíbených\n\n • Oblíbené: podskupiny a složky, které lze připnout\n\n • Souřadnice: vyhledávání, mapová mřížka a zobrazení bodů zájmu (POI) nyní podporují lokátory EPSG a Maidenhead\n\n • Opraveny výpadky navigace; přepínání mezi standardním a rychlým trasováním\n\n • Nastavení měřítka mapy v Android Auto nezávisle na nastavení v telefonu\n\n • Do sekce Astronomie přidány sluneční a měsíční zatmění</string>
+    <string name="always_keep_local_copy">Vždy držte lokální kopii</string>
+    <string name="always_keep_local_copy_description">Media zůstávají připojena i v případě, že je originál odstraněn z galerie nebo souborů.</string>
+    <string name="use_spatial_text_search">Použít prostorové vyhledávání textu</string>
+    <string name="use_spatial_text_search_description">Nahradit standardní rychlé vyhledávací rozhraní API s experimentálním systémem pro vyhledávání textu.</string>
+    <string name="astro_lunar_eclipse">Měsíční zatmění</string>
+    <string name="astro_lunar_eclipse_subtitle">Prozkoumejte po celém světě zatmění Měsíce</string>
+    <string name="astro_previous_lunar_eclipse">Předchozí zatmění Měsíce</string>
+    <string name="astro_next_lunar_eclipse">Další zatmění Měsíce</string>
+    <string name="astro_close_lunar_eclipse">Zavřít prohlížeč zatmění Měsíce</string>
+    <string name="astro_loading_lunar_eclipse">Výpočet zatmění Měsíce po celém světě</string>
+    <string name="astro_lunar_eclipse_load_error">Nelze vypočítat toto zatmění Měsíce.</string>
+    <string name="astro_total_lunar_eclipse">Úplné zatmění Měsíce</string>
+    <string name="astro_partial_lunar_eclipse">Částečné zatmění Měsíce</string>
+    <string name="astro_penumbral_lunar_eclipse">Penumbrální zatmění Měsíce</string>
+    <string name="astro_eclipse_phase_penumbral">Penumbrální</string>
+    <string name="astro_lunar_eclipse_calculating_state">Výpočet viditelnosti na mapě…</string>
 </resources>

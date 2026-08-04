@@ -3137,7 +3137,7 @@
     <string name="cancel_anytime_in_huawei_appgallery">Otkaži bilo kada u Huavei ApGaleriji</string>
     <string name="shared_string_learn_more">Saznaj više</string>
     <string name="regular_price">Regularna cena</string>
-    <string name="send_crash_log">Pošalji log pada</string>
+    <string name="send_crash_log">Pošalji logove o padovima aplikacije</string>
     <string name="poi_routes">Rute</string>
     <string name="shared_string_includes">Uključuje</string>
     <string name="shared_string_grade">Stepen</string>
@@ -3404,7 +3404,7 @@
     <string name="purchases_feature_desc_hourly_map_updates">Obezbedi pristup češćem ažuriranju mapa, Izaberi između: ažuriranja po satu, dnevno ili nedeljno. Ažuriranja se preuzimaju postepeno, samo za promenjeno područje.</string>
     <string name="offline_wikivoyage">Oflajn Vikivojaž</string>
     <string name="purchases_feature_desc_unlimited_map_download">Nabavi neograničena preuzimanja offline mapa za sve kontinente i regione.</string>
-    <string name="send_logcat_log">Pošalji logkat log</string>
+    <string name="send_logcat_log">Pošalji dnevnike trenutnih sesija</string>
     <string name="delete_version_history">Obriši istoriju verzije</string>
     <string name="backup_version_history">Istorija verzija</string>
     <string name="restore_from_osmand_cloud">Vrati iz OsmAnd Cloud</string>
@@ -5145,7 +5145,6 @@
     <string name="shared_string_media">Mediji</string>
     <string name="no_media">Nema medija</string>
     <string name="no_media_descr">Možete dodati fotografije, video zapise ili audio beleške sa kamere ili biblioteke.</string>
-    <string name="auto_copy_media_to_osmand_storage">Automatsko kopiranje medija u OsmAnd skladište</string>
     <string name="navigate_point_format_maidenhead">Mejdenhed</string>
     <string name="navigate_point_east_coordinate">Istočna koordinata</string>
     <string name="navigate_point_north_coordinate">Severna koordinata</string>
@@ -5189,7 +5188,9 @@
     <string name="camera_folder">Folder kamere</string>
     <string name="media_storage_main_storage_descr">Fajlovi se čuvaju u privatnoj memoriji aplikacije. Skrivene su od Galerije i drugih aplikacija.</string>
     <string name="media_storage_shared_storage_descr">Fajlovi se čuvaju u javnim fasciklama (Slike, Filmovi, Muzika). Vidljive su u Galeriji i Google fotografijama.</string>
-    <string name="media_storage_camera_folder_descr">Fajlovi se čuvaju u folderu Camera Roll. Napomena: Audio se čuva u Music/OsmAnd.</string>
+    <string name="shared_string_note">Napomena</string>
+    <string name="media_storage_camera_folder_note_descr">Audio se čuva u Music/OsmAnd.</string>
+    <string name="media_storage_camera_folder_descr">Fajlovi se čuvaju u folderu Camera Roll. %1$s</string>
     <string name="media_storage_manually_specified_descr">Fajlovi se čuvaju u prilagođenoj fascikli i sortiraju po tipu (Audio, Fotografija, Video).</string>
     <string name="change_media_storage_question">Promeniti skladište medija?</string>
     <string name="change_media_storage_full_description">Premestiti postojeće medijske fajlove na novu destinaciju?\n%1$s &gt; %2$s</string>
@@ -5319,4 +5320,7 @@
     <string name="rendering_attr_surface_laterite_name">Laterit</string>
     <string name="use_spatial_text_search">Koristite prostornu pretragu teksta</string>
     <string name="use_spatial_text_search_description">Zamenite standardne API-je za brzu pretragu eksperimentalnom pretragom prostornog teksta.</string>
+    <string name="always_keep_local_copy">Uvek čuvaj lokalnu kopiju</string>
+    <string name="always_keep_local_copy_description">Mediji ostaju pričvršćeni čak i ako se original obriše iz galerije ili fajlova.</string>
+    <string name="release_5_4">• Nova prostorna pretraga — pronađite mesta i pretražite oko mesta\n\n • Osveženi KI pretrage: sortiranje, filteri kategorija, čistiji izgled\n\n • Priložite fotografije i medije omiljenima\n\n • Omiljeni: podrška za podgrupe i fascikle koje se mogu zakačiti\n\n • Koordinate: pretraga, mreža mape i prikaz TOI sada podržavaju EPSG i lokator Mejdenheda\n\n • Ispravljeni prekidi navigacije; prebacivanje između standardnog i brzog rutiranja\n\n • Podesite razmeru mape za Android Auto odvojeno od telefona\n\n • Astronomija je dodala pomračenja Sunca i Meseca</string>
 </resources>

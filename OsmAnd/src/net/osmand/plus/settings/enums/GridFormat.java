@@ -20,14 +20,22 @@ public enum GridFormat implements EnumWithTitleId {
 	UTM(LocationConvert.UTM_FORMAT, R.string.navigate_point_format_utm),
 	OLC(LocationConvert.OLC_FORMAT, R.string.navigate_point_olc),
 	MGRS(LocationConvert.MGRS_FORMAT, R.string.navigate_point_format_mgrs),
+	SWISS_GRID(LocationConvert.SWISS_GRID_FORMAT, R.string.navigate_point_format_swiss_grid, 21781),
+	SWISS_GRID_PLUS(LocationConvert.SWISS_GRID_PLUS_FORMAT, R.string.navigate_point_format_swiss_grid_plus, 2056),
 	MAIDENHEAD(LocationConvert.MAIDENHEAD_FORMAT, R.string.navigate_point_format_maidenhead);
 
 	private final int id;
 	private final int titleId;
+	@Nullable private final Integer epsgCode;
 
 	GridFormat(int id, int titleId) {
+		this(id, titleId, null);
+	}
+
+	GridFormat(int id, int titleId, @Nullable Integer epsgCode) {
 		this.id = id;
 		this.titleId = titleId;
+		this.epsgCode = epsgCode;
 	}
 
 	@Override
@@ -42,22 +50,28 @@ public enum GridFormat implements EnumWithTitleId {
 			case UTM -> Projection.UTM;
 			case OLC -> Projection.OLC;
 			case MGRS -> Projection.MGRS;
+			case SWISS_GRID, SWISS_GRID_PLUS -> Projection.HOMV2;
 			case MAIDENHEAD -> Projection.MLS;
 		};
 	}
 
-	@Nullable
+	@NonNull
 	public Format getFormat() {
 		return switch (this) {
 			case DMS -> Format.DMS;
 			case DM -> Format.DM;
 			case DIGITAL -> Format.Decimal;
-			case UTM, OLC, MGRS, MAIDENHEAD -> Format.Decimal;
+			case UTM, OLC, MGRS, SWISS_GRID, SWISS_GRID_PLUS, MAIDENHEAD -> Format.Decimal;
 		};
 	}
 
 	public boolean needSuffixes() {
-		return !CollectionUtils.equalsToAny(this, UTM, OLC, MGRS, MAIDENHEAD);
+		return !CollectionUtils.equalsToAny(this, UTM, OLC, MGRS, SWISS_GRID, SWISS_GRID_PLUS, MAIDENHEAD);
+	}
+
+	@Nullable
+	public Integer getEpsgCode() {
+		return epsgCode;
 	}
 
 	@NonNull
@@ -69,6 +83,8 @@ public enum GridFormat implements EnumWithTitleId {
 			case UTM -> CoordinateFormatIds.BUILTIN_UTM;
 			case OLC -> CoordinateFormatIds.BUILTIN_OLC;
 			case MGRS -> CoordinateFormatIds.BUILTIN_MGRS;
+			case SWISS_GRID -> CoordinateFormatIds.BUILTIN_SWISS_GRID;
+			case SWISS_GRID_PLUS -> CoordinateFormatIds.BUILTIN_SWISS_GRID_PLUS;
 			case MAIDENHEAD -> CoordinateFormatIds.BUILTIN_MAIDENHEAD;
 		};
 	}
@@ -98,6 +114,10 @@ public enum GridFormat implements EnumWithTitleId {
 			return OLC;
 		} else if (CoordinateFormatIds.BUILTIN_MGRS.equals(normalized)) {
 			return MGRS;
+		} else if (CoordinateFormatIds.BUILTIN_SWISS_GRID.equals(normalized)) {
+			return SWISS_GRID;
+		} else if (CoordinateFormatIds.BUILTIN_SWISS_GRID_PLUS.equals(normalized)) {
+			return SWISS_GRID_PLUS;
 		} else if (CoordinateFormatIds.BUILTIN_MAIDENHEAD.equals(normalized)) {
 			return MAIDENHEAD;
 		}
@@ -112,6 +132,8 @@ public enum GridFormat implements EnumWithTitleId {
 				UTM.getCoordinateFormatId(),
 				OLC.getCoordinateFormatId(),
 				MGRS.getCoordinateFormatId(),
+				SWISS_GRID.getCoordinateFormatId(),
+				SWISS_GRID_PLUS.getCoordinateFormatId(),
 				MAIDENHEAD.getCoordinateFormatId());
 	}
 }

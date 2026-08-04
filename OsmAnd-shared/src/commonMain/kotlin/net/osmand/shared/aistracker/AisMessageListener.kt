@@ -33,28 +33,39 @@ import net.sf.marineapi.ais.message.AISMessage27
 import net.sf.marineapi.nmea.event.SentenceListener
 import net.sf.marineapi.nmea.parser.SentenceFactory
 import net.sf.marineapi.nmea.sentence.AISSentence
+import net.sf.marineapi.nmea.sentence.PositionSentence
 
 open class AisMessageListener {
-    private val dataListener: AisDataListener
+    private val aisObjectListener: AisObjectListener
+    private val nmeaLocationListener: NmeaLocationListener?
     private val scope = CoroutineScope(Dispatchers.Default + SupervisorJob())
-        private var networkJob: Job? = null
-        private val listeners = mutableListOf<SentenceListener>()
+    private var networkJob: Job? = null
+    private val listeners = mutableListOf<SentenceListener>()
 
     // For Simulation (File)
     protected constructor(dataListener: AisDataListener) {
-        this.dataListener = dataListener
+        this.aisObjectListener = dataListener
+        this.nmeaLocationListener = dataListener
+        initListeners()
+    }
+
+    constructor(aisObjectListener: AisObjectListener) {
+        this.aisObjectListener = aisObjectListener
+        this.nmeaLocationListener = null
         initListeners()
     }
 
     // For TCP
     constructor(dataListener: AisDataListener, serverIp: String, serverPort: Int) {
-        this.dataListener = dataListener
+        this.aisObjectListener = dataListener
+        this.nmeaLocationListener = dataListener
         startTcpConnection(serverIp, serverPort)
     }
 
     // For UDP
     constructor(dataListener: AisDataListener, udpPort: Int) {
-        this.dataListener = dataListener
+        this.aisObjectListener = dataListener
+        this.nmeaLocationListener = dataListener
         startUdpConnection(udpPort)
     }
 
@@ -126,9 +137,14 @@ open class AisMessageListener {
             }
 
             val sentence = SentenceFactory.instance.createParser(data)
-            if (sentence is AISSentence) {
-                for (listener in listeners) {
-                    listener.sentenceRead(net.sf.marineapi.nmea.event.SentenceEvent(this, sentence))
+            when (sentence) {
+                is AISSentence -> {
+                    for (listener in listeners) {
+                        listener.sentenceRead(net.sf.marineapi.nmea.event.SentenceEvent(this, sentence))
+                    }
+                }
+                is PositionSentence -> {
+                    NmeaLocationParser.parse(sentence)?.let { nmeaLocationListener?.onNmeaLocationReceived(it) }
                 }
             }
         } catch (_: Exception) {
@@ -367,7 +383,7 @@ open class AisMessageListener {
             }
         }
         if (ais != null) {
-            dataListener.onAisObjectReceived(ais)
+            aisObjectListener.onAisObjectReceived(ais)
         }
     }
 
@@ -432,6 +448,13 @@ open class AisMessageListener {
     }
 }
 
-interface AisDataListener {
+interface AisObjectListener {
     fun onAisObjectReceived(ais: AisObject)
+}
+
+interface NmeaLocationListener {
+    fun onNmeaLocationReceived(location: AisLocation)
+}
+
+interface AisDataListener : AisObjectListener, NmeaLocationListener {
 }

@@ -5196,7 +5196,9 @@
     <string name="camera_folder">Папка Камеры</string>
     <string name="media_storage_main_storage_descr">Файлы сохраняются в личном хранилище приложения. Они скрыты от просмотра в галерее и других приложениях.</string>
     <string name="media_storage_shared_storage_descr">Файлы сохраняются в общих папках (Изображения, Фильмы, Музыка). Они отображаются в Галерее и Google Фото.</string>
-    <string name="media_storage_camera_folder_descr">Файлы сохраняются в «Фотопленку». Примечание: аудиофайлы сохраняются в папке «Музыка/OsmAnd».</string>
+    <string name="shared_string_note">Примечание</string>
+    <string name="media_storage_camera_folder_note_descr">аудиофайлы сохраняются в папке «Музыка/OsmAnd».</string>
+    <string name="media_storage_camera_folder_descr">Файлы сохраняются в «Фотопленку». %1$s</string>
     <string name="media_storage_manually_specified_descr">Файлы сохраняются в пользовательскую папку и сортируются по типу (аудио, фото, видео).</string>
     <string name="change_media_storage_question">Изменить хранилище медиа?</string>
 </resources>

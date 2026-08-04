@@ -66,6 +66,10 @@ public class FavoriteComparator implements Comparator<Object> {
 		}
 
 		if (o1 instanceof FavouritePoint p1 && o2 instanceof FavouritePoint p2) {
+			boolean visible1 = p1.isVisible();
+			boolean visible2 = p2.isVisible();
+			if (visible1 != visible2) return visible1 ? -1 : 1;
+
 			return compareFavoritePoints(p1, p2);
 		}
 

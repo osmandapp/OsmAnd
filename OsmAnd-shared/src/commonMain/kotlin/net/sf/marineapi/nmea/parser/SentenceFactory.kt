@@ -206,6 +206,8 @@ class SentenceFactory private constructor() {
     fun reset() {
         stringConstructors.clear()
         talkerConstructors.clear()
+        registerParser("GGA", { s -> GGAParser(s) }, { t -> GGAParser(t) })
+        registerParser("RMC", { s -> RMCParser(s) }, { t -> RMCParser(t) })
         registerParser("VDM", { s -> VDMParser(s) }, { t -> VDMParser(t) })
         registerParser("VDO", { s -> VDOParser(s) }, { t -> VDOParser(t) })
     }

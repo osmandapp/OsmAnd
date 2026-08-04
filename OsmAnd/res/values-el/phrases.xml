@@ -2370,9 +2370,9 @@
     <string name="poi_bathing_no">Κολύμβηση: όχι</string>
     <string name="poi_boat_storage">Χώρος σκαφών</string>
     <string name="poi_conveying_yes">Κυλιόμενες σκάλες: ναι</string>
-    <string name="poi_bridge_ref">Αριθμός γέφυρας</string>
-    <string name="poi_tunnel_ref">Αριθμός σήραγγας</string>
-    <string name="poi_ref">Αριθμός</string>
+    <string name="poi_bridge_ref">Αναγνωριστικό γέφυρας</string>
+    <string name="poi_tunnel_ref">Αναγνωριστικό σήραγγας</string>
+    <string name="poi_ref">Αναγνωριστικό</string>
     <string name="poi_cargo_passengers">Επιβάτες</string>
     <string name="poi_cargo_vehicle">Οχήματα</string>
     <string name="poi_cargo_bicycle">Ποδήλατα</string>
@@ -4401,7 +4401,7 @@
     <string name="poi_radar_tower">Πύργος ραντάρ</string>
     <string name="poi_lavoir">Δημόσιο πλυσταριό</string>
     <string name="poi_geodesist">Γεωδαίτης</string>
-    <string name="poi_local_ref">Τοπική αναφορά</string>
+    <string name="poi_local_ref">Τοπικό αναγνωριστικό</string>
     <string name="poi_barrier_planter">Γλάστρα</string>
     <string name="poi_socket_type3a_output_filter">Έξοδος βύσματος τύπου 3a</string>
     <string name="poi_socket_typee_output_filter">Έξοδος βύσματος τύπου E</string>

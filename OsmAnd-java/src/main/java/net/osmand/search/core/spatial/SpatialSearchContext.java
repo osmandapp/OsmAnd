@@ -33,6 +33,8 @@ import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
+import net.osmand.search.core.HashSkipTileQuadTree;
+import net.osmand.search.core.HashSkipTileQuadTreeJoiner;
 import net.osmand.search.core.TopIndexFilter;
 import net.osmand.search.core.spatial.SpatialPoiSearch.SpatialPoiType;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
@@ -243,7 +245,7 @@ public class SpatialSearchContext {
 		}
 		// add partial once we read all files
 		for (SpatialSearchToken t : tokens) {
-			if (settings.OPTIM_READ_COMMON_WORDS_ATOMS || settings.OPTIM_READ_CATEGORY_WORD_ATOMS) {
+			if (settings.OPTIM_READ_COMMON_WITH_OTH_NON_FOUND_ATOMS || settings.OPTIM_READ_POI_CATEGORY_WORD_ATOMS) {
 				addPartialMatch(t, t.getPartialExactMatch());
 //				if(t.getPartialExactMatch().size() == 0) { // not correct
 					addPartialMatch(t, t.getPartialMatch());
@@ -277,7 +279,8 @@ public class SpatialSearchContext {
 			nearbyLimit = 0;
 			int cnt = t.atoms.size();
 			while (nearbyLimit < cnts.length
-					&& cnts[nearbyLimit] + cnt < settings.OPTIM_READ_COMMON_WORDS_LIMIT) {
+					&& (cnts[nearbyLimit] + cnt < settings.OPTIM_READ_COMMON_WORDS_LIMIT || 
+							settings.DEV_USE_PIPELINE)) {
 				cnt += cnts[nearbyLimit];
 				nearbyLimit++;
 			}
@@ -305,23 +308,68 @@ public class SpatialSearchContext {
 	private void assignPoiFlagGeo(Map<TIntArrayList, List<AtomByTokens>> cities, List<SpatialSearchToken> tokens) {
 		Map<TIntArrayList, List<AtomByTokens>> streets = groupAtomsByTokens(tokens, t -> t.isStreet()); // check performance
 		Map<TIntArrayList, List<AtomByTokens>> pois = groupAtomsByTokens(tokens, t -> t.isPOI());
-		Iterator<Entry<TIntArrayList, List<AtomByTokens>>> it = pois.entrySet().iterator();
-		while (it.hasNext()) {
-			Entry<TIntArrayList, List<AtomByTokens>> e = it.next();
-			TIntArrayList lst = e.getKey();
-			List<AtomByTokens> cityNames = cities.get(lst);
-			if (cityNames != null) {
-				for (AtomByTokens poi : e.getValue()) {
-					markPOIAsArea(poi, cityNames, lst, tokens);
+		if (settings.DEV_FLAG_POI_SAME_AS_CITY_TREE) {
+			Iterator<Entry<TIntArrayList, List<AtomByTokens>>> it = pois.entrySet().iterator();
+			while (it.hasNext()) {
+				Entry<TIntArrayList, List<AtomByTokens>> e = it.next();
+				final TIntArrayList keySet = e.getKey();
+				HashSkipTileQuadTree<NameIndexAtom> areasTree = new HashSkipTileQuadTree<>();
+				buildTree(areasTree, cities.get(keySet));
+				buildTree(areasTree, streets.get(keySet));
+				if(!areasTree.isEmpty()) {
+					areasTree.build();
+					HashSkipTileQuadTree<NameIndexAtom> poiTree = buildTree(new HashSkipTileQuadTree<>(), e.getValue());
+					poiTree.build();
+					HashSkipTileQuadTreeJoiner<NameIndexAtom, NameIndexAtom> joiner = new HashSkipTileQuadTreeJoiner<>(areasTree, poiTree);
+					TLongHashSet ids = new TLongHashSet();
+					joiner.joinAllBuckets((area, poi) -> {
+						if (area.obj.coords.contains(poi.obj.coords) && !ids.contains(poi.obj.id)) {
+							ids.add(poi.obj.id);
+							// delete completely not correct for new york the plaza
+							// tokens.get(indx).removeAtom(poi.obj);
+							// mark to not intersect
+							TIntIterator keyIt = keySet.iterator();
+							while(keyIt.hasNext()) {
+								int indx = keyIt.next();
+								NameIndexAtom atomSet = tokens.get(indx).getAtomToken(poi.obj);
+								atomSet.sameNameAreaObj = area.obj;
+							}
+						}
+					});
 				}
 			}
-			List<AtomByTokens> streetNames = streets.get(lst);
-			if (streetNames != null) {
-				for (AtomByTokens poi : e.getValue()) {
-					markPOIAsArea(poi, streetNames, lst, tokens);
+		} else {
+			Iterator<Entry<TIntArrayList, List<AtomByTokens>>> it = pois.entrySet().iterator();
+			while (it.hasNext()) {
+				Entry<TIntArrayList, List<AtomByTokens>> e = it.next();
+				TIntArrayList lst = e.getKey();
+				List<AtomByTokens> cityNames = cities.get(lst);
+				if (cityNames != null) {
+					for (AtomByTokens poi : e.getValue()) {
+						markPOIAsArea(poi, cityNames, lst, tokens);
+					}
+				}
+				List<AtomByTokens> streetNames = streets.get(lst);
+				if (streetNames != null) {
+					for (AtomByTokens poi : e.getValue()) {
+						markPOIAsArea(poi, streetNames, lst, tokens);
+					}
 				}
 			}
 		}
+	}
+
+	private HashSkipTileQuadTree<NameIndexAtom> buildTree(HashSkipTileQuadTree<NameIndexAtom> objTree,
+			List<AtomByTokens> objs) {
+		if (objs == null) {
+			return objTree;
+		}
+		for (AtomByTokens largeArea : objs) {
+			if (largeArea.obj.coords.bbox31 != null) {
+				objTree.addObject(largeArea.obj, largeArea.obj.coords.bbox31);
+			}
+		}
+		return objTree;
 	}
 
 	private void markPOIAsArea(AtomByTokens poi, List<AtomByTokens> cityNames, TIntArrayList indxs,
@@ -508,9 +556,7 @@ public class SpatialSearchContext {
 					continue;
 				}
 				MapObject obj = null;
-				if (settings.DEV_READ_ADDR_OBJECTS) {
-					obj = readAddrObject(lid, pid, null);
-				}
+//				obj = readAddrObject(lid, pid, null);
 				parseSuffixes(t, indx, suffixes, commonSuffixes, a, null, lid, pid, obj, allTokens);
 			}
 		} else if (!addr && settings.SEARCH_POI) {
@@ -522,10 +568,8 @@ public class SpatialSearchContext {
 				long lid = makePoiId(indInd, BinaryMapIndexReader.convertFixed32ToRef(a.getShiftTo()),
 						a.getPoiIndInBlock(0));
 				MapObject amenity = null;
-				if (settings.DEV_READ_POI_OBJECTS) {
-					amenity = readPoiObject(lid, null);
-				}
-				if (settings.SEARCH_POI_BY_CATEGORY_ONLY && skipFilteredZoomObject(t, a)) {
+//				amenity = readPoiObject(lid, null);
+				if (settings.SEARCH_POI_BY_CATEGORY_ONLY && skipFilteredZoomObject(t, a.getX(), a.getY(), a.getEloRatingCount() > 0, false)) {
 					continue;
 				}
 				parseSuffixes(t, indx, suffixes, commonSuffixes, null, a, lid, 0, amenity, allTokens);
@@ -533,10 +577,8 @@ public class SpatialSearchContext {
 		}
 	}
 
-	private boolean skipFilteredZoomObject(SpatialSearchToken t, OsmAndPoiNameIndexDataAtom a) {
+	private boolean skipFilteredZoomObject(SpatialSearchToken t, int x16, int y16, boolean elo, boolean add) {
 		int[] bbox = settings.SEARCH_POI_BY_CATEGORY_BBOX;
-		int x16 = a.getX();
-		int y16 = a.getY();
 //		bbox31 = SearchAlgorithms.decodeBboxForNameAtomsBytes(a.getBbox(), x16, y16);
 		if (bbox != null) {
 			if (x16 < bbox[0] || x16 > bbox[2] || y16 < bbox[1] || y16 > bbox[3]) {
@@ -544,16 +586,15 @@ public class SpatialSearchContext {
 			}
 		}
 		int z = 16 - settings.SEARCH_POI_BY_CATEGORY_ZOOM;
-		if (z >= 0) {
-			long tileId = MapUtils.interleaveBits(x16 >> z, y16 >> z);
-			if (t.cacheCategoryFilterObjects.contains(tileId) && a.getEloRatingCount() == 0) {
-				return true;
-			}
+		long tileId = MapUtils.interleaveBits(x16 >> z, y16 >> z);
+		if (t.cacheCategoryFilterObjects.contains(tileId) && !elo) {
+			return true;
+		}
+		if (add) {
 			t.cacheCategoryFilterObjects.add(tileId);
 		}
 		return false;
 	}
-	
 	
 	public void readPOIBboxes(int indInd, TLongHashSet tiles) throws IOException {
 		NameIndexReader nameIndex = null;
@@ -890,8 +931,11 @@ public class SpatialSearchContext {
 				nearByType, -1);
 		atom.poiTypes = poiTypes;
 		atom.elo = elo;
+		if (settings.SEARCH_POI_BY_CATEGORY_ONLY) {
+			skipFilteredZoomObject(t, atom.coords.x16, atom.coords.y16, atom.elo > 0, true);
+		}
 		// for all common always false, for some frequent could be optimization
-		if (settings.OPTIM_READ_COMMON_WORDS_ATOMS && cmnWord[0]) {
+		if (settings.OPTIM_READ_COMMON_WITH_OTH_NON_FOUND_ATOMS && cmnWord[0]) {
 			// name 'ru de rue' could match 'rue' it's because of prefix & suffixes
 			
 			if (other > 0) {
@@ -905,7 +949,7 @@ public class SpatialSearchContext {
 
 			}
 		}
-		if (settings.OPTIM_READ_CATEGORY_WORD_ATOMS && t.hasPoiCategoryKeys() && atom.isPOI()) {
+		if (settings.OPTIM_READ_POI_CATEGORY_WORD_ATOMS && t.hasPoiCategoryKeys() && atom.isPOI()) {
 			// we always add to partial so if we word overloaded we don't display it
 			// doesn't matter if we read token by name "cafe" or "#^cafe" the word associated with category
 			t.addPartialCommonAtom(atom, otherTokens, numericNotMatch);

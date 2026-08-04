@@ -215,6 +215,10 @@
 	<color name="chip_bg_selected_light">#C7DDFF</color>
 	<color name="chip_bg_selected_dark">#16396E</color>
 
+	<color name="chip_search_scope_bg_light">#EDEFF3</color>
+	<color name="chip_search_scope_bg_dark">#2E343D</color>
+
+
 	<color name="subscription_active_bg_color_light">#fff9b2</color>
 	<color name="subscription_active_bg_color_dark">#43453b</color>
 	<color name="subscription_active_div_color_light">#f3edae</color>

@@ -5494,7 +5494,6 @@
     <string name="favorite_folder_name">Mapnaam</string>
     <string name="edit_folder">Bewerk map</string>
     <string name="shared_string_media">Media</string>
-    <string name="auto_copy_media_to_osmand_storage">Kopieer media automatisch naar OsmAnd-opslag</string>
     <string name="choose_from_gallery">Kies uit galerij</string>
     <string name="choose_from_files">Kies uit bestanden</string>
     <string name="no_media">Geen media</string>
@@ -5518,7 +5517,9 @@
     <string name="camera_folder">Cameramap</string>
     <string name="media_storage_main_storage_descr">Bestanden worden opgeslagen in de privéopslag van de app. Ze zijn niet zichtbaar in de Galerij en voor andere apps.</string>
     <string name="media_storage_shared_storage_descr">Bestanden worden opgeslagen in de openbare mappen (Afbeeldingen, Films, Muziek). Ze zijn zichtbaar in de Galerij en in Google Foto\'s.</string>
-    <string name="media_storage_camera_folder_descr">Bestanden worden opgeslagen in de Cameramap. Let op: audio wordt opgeslagen in Muziek/OsmAnd.</string>
+    <string name="shared_string_note">Let op</string>
+    <string name="media_storage_camera_folder_note_descr">audio wordt opgeslagen in Muziek/OsmAnd.</string>
+    <string name="media_storage_camera_folder_descr">Bestanden worden opgeslagen in de Cameramap. %1$s</string>
     <string name="media_storage_manually_specified_descr">Bestanden worden opgeslagen in een zelfgekozen map en gesorteerd op type (Audio, Foto, Video).</string>
     <string name="change_media_storage_question">Mediaopslag wijzigen?</string>
     <string name="change_media_storage_full_description">Bestaande mediabestanden verplaatsen naar de nieuwe locatie?\n%1$s &gt; %2$s</string>
@@ -5606,4 +5607,18 @@
     <string name="astro_eclipse_start">Start</string>
     <string name="astro_eclipse_maximum">Maximum</string>
     <string name="astro_eclipse_end">Einde</string>
+    <string name="always_keep_local_copy">Behoud altijd een lokale kopie</string>
+    <string name="always_keep_local_copy_description">Media blijft gekoppeld zelfs als het origineel wordt verwijderd uit de galerij of bestanden.</string>
+    <string name="use_spatial_text_search">Gebruik ruimtelijk tekst-zoeken</string>
+    <string name="use_spatial_text_search_description">Vervang de standaard snelle zoek-API\'s door de experimentele ruimtelijke tekst-zoekmachine.</string>
+    <string name="astro_lunar_eclipse">Maansverduistering</string>
+    <string name="astro_lunar_eclipse_subtitle">Verken wereldwijde maansverduisteringen</string>
+    <string name="astro_previous_lunar_eclipse">Vorige maansverduistering</string>
+    <string name="astro_next_lunar_eclipse">Volgende maansverduistering</string>
+    <string name="astro_close_lunar_eclipse">Sluit maansverduisteringsverkenner</string>
+    <string name="astro_eclipse_load_error">Het lukte niet om deze wereldwijde zonsverduistering te berekenen.</string>
+    <string name="astro_loading_lunar_eclipse">Wereldwijde maansverduistering berekenen</string>
+    <string name="astro_lunar_eclipse_load_error">Het lukte niet om deze maansverduistering te berekenen.</string>
+    <string name="astro_total_lunar_eclipse">Totale maansverduistering</string>
+    <string name="astro_partial_lunar_eclipse">Gedeeltelijke maansverduistering</string>
 </resources>
