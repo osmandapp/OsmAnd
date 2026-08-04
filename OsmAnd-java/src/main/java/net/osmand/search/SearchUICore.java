@@ -1453,14 +1453,13 @@ public class SearchUICore {
 			case UNKNOWN_PHRASE_MATCH_WEIGHT:
 				// here we check how much each sub search result matches the phrase
 				// also we sort it by type house -> street/poi -> city/postcode/village/other
-				SearchPhrase ph = o1.requiredSearchPhrase;
 				double o1PhraseWeight = o1.getUnknownPhraseMatchWeight();
 				double o2PhraseWeight = o2.getUnknownPhraseMatchWeight();
 				if (o1PhraseWeight == o2PhraseWeight && o1PhraseWeight / SearchResult.MAX_PHRASE_WEIGHT_TOTAL > 1) {
-					if (!ph.getUnknownWordToSearchBuildingNameMatcher().matches(SearchPhrase.stripBraces(o1.localeName))) {
+					if (!o1.requiredSearchPhrase.getUnknownWordToSearchBuildingNameMatcher().matches(SearchPhrase.stripBraces(o1.localeName))) {
 						o1PhraseWeight--;
 					}
-					if (!ph.getUnknownWordToSearchBuildingNameMatcher().matches(SearchPhrase.stripBraces(o2.localeName))) {
+					if (!o2.requiredSearchPhrase.getUnknownWordToSearchBuildingNameMatcher().matches(SearchPhrase.stripBraces(o2.localeName))) {
 						o2PhraseWeight--;
 					}
 				}
