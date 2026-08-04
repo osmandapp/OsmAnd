@@ -377,10 +377,6 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 
 	private void onFormatChosen(@NonNull String id) {
 		if (addFormatMode == AddFormatMode.GRID_SELECTION) {
-			if (coordinateFormatHelper.getGridFormatProvider().resolve(id) == null) {
-				app.showShortToastMessage(R.string.coordinate_grid_format_not_supported);
-				return;
-			}
 			formatPreferences.addRecentId(id);
 			Bundle result = new Bundle();
 			result.putString(RESULT_FORMAT_ID, id);
