@@ -2740,8 +2740,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		float lastHeading = heading != null ? heading : 99;
 		heading = value;
 		if (Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
-			Location location = this.location;
-			app.runInUIThread(() -> updateLocationUI(location, value));
+			app.runInUIThread(() -> updateVisibleContent(value));
 		} else {
 			heading = lastHeading;
 		}
@@ -2754,13 +2753,13 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	private void updateLocationUI(Location location, Float heading) {
-		if (shouldUpdateContent(location, this.location)) {
+		if (shouldUpdateContentForLocation(location, this.location)) {
 			this.location = location;
 			updateContent(heading);
 		}
 	}
 
-	private boolean shouldUpdateContent(Location a, Location b) {
+	private boolean shouldUpdateContentForLocation(Location a, Location b) {
 		return b == null || a == null
 				|| !MapUtils.areLatLonEqual(a.getLatitude(), a.getLongitude(), b.getLatitude(), b.getLongitude())
 				|| Math.abs(MapUtils.degreesDiff(a.getBearing(), b.getBearing())) > MIN_COMPASS_DEGREES_TO_UPDATE_CONTENT;
@@ -2768,6 +2767,10 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 	public void updateContent(@Nullable Float heading) {
 		updateToolbarButton();
+		updateVisibleContent(heading);
+	}
+
+	private void updateVisibleContent(@Nullable Float heading) {
 		if (!paused && !cancelPrev) {
 			if (mainSearchFragment != null && searchView.getVisibility() == View.VISIBLE) {
 				mainSearchFragment.updateLocation(heading);
