@@ -119,6 +119,7 @@ public class SpatialTextSearch {
 		// Create default bboxes for points POI / Address objects  
 		public int POI_DEFAULT_RADIUS = 50;
 		public int ADDR_DEFAULT_RADIUS = 1000;
+		public int POI_HOUSE_DEFAULT_RADIUS = 300;
 		
 		///////////// DEV FEATURES ///////////
 
@@ -127,7 +128,7 @@ public class SpatialTextSearch {
 
 		// FEATURE #2. PIPELINE vs INTERSECTIONS algorithm 
 		// Use mechanism to smart selection results intead of all word x word intersections
-		public boolean DEV_USE_PIPELINE = false;
+		public boolean DEV_USE_PIPELINE = true;
 		
 		// print some poi cat - to be deleted once web/android completed
 		public int TEST_PRINT_POI_CAT_LIMIT = 0; // 10
@@ -143,7 +144,8 @@ public class SpatialTextSearch {
 		// OPTIMIZATION #2 (IMPORTANT for results - public transport stops)
 		// In case POI is called 'Bratislava' it will be not allowed to be searched as POIxPOI, POIxStreet
 		// Related frequent POIs like "City&Bike 4th Street..." or public transport stops
-		public boolean OPTIM_FLAG_POI_SAME_AS_CITY_STREET = true;
+		public boolean OPTIM_FLAG_POI_SAME_AS_CITY_STREET = true; 
+		public boolean DEV_FLAG_POI_SAME_AS_CITY_TREE = true;
 
 		// OPTIMIZATION #3. IMPORTANT to filter results by words popular words (not effective in corner cases like paterson)
 		// 1. If object does have rare words and they are not in query - skip it 
@@ -151,7 +153,7 @@ public class SpatialTextSearch {
 		// 2. If object does have other common words and they are not in query - skip it
 		// Problem search: School On Street - some schools have specifiers and some don't
 		// Below limit add all possible objects  
-		public int OPTIM_READ_COMMON_WORDS_LIMIT = 2000;
+		public int OPTIM_READ_COMMON_WORDS_LIMIT = 3000; 
 		public boolean OPTIM_READ_COMMON_WITH_OTH_NON_FOUND_ATOMS = true;
 		public boolean OPTIM_READ_POI_CATEGORY_WORD_ATOMS = true;
 		// do not filter objects with such rating from results
@@ -170,8 +172,16 @@ public class SpatialTextSearch {
 		// overall max without results (evaluate maximum 3 missing words)
 		public int MAX_TOTAL_LIMIT_GOAL_LEVEL = 3;
 		////////////////////////////////////////
-		
-		
+
+		//////// PIPELINE ALGORITHM ////////
+		public int PIPELINE_MAX_STEPS = 8; // 0 - fully covered 1 object, 1 - 2 objects, 2 - 3 objects ...
+		// {100, 500} - STOP EVALUATION - if at least 100 fully covered or 500 2 objects
+		public int MAX_PIPELINE_ANY_RES = 10000;
+		public int[] MAX_PIPELINE_RES_TO_STOP = new int[] { 50, 3, 1 };
+//		public int[] MAX_PIPELINE_RES_TO_STOP = new int[] {1}; // just 1 result to stop
+		public int PIPELINE_FREQUENT_OBJECTS_THRESHOLD = 5000;
+		public int PIPELINE_MAX_VIRTUAL_MASKS = 7;
+
 		public double evalEnlargeBoundary(Map<Integer, Double> mp, double dim) {
 			Iterator<Entry<Integer, Double>> it = mp.entrySet().iterator();
 			double val = 0;
@@ -300,7 +310,11 @@ public class SpatialTextSearch {
 				if (c1 != c2) {
 					return Integer.compare(c1, c2);
 				}
-				return o1.word.compareTo(o2.word);
+				int res = o1.word.compareTo(o2.word);
+				if(res != 0) {
+					return res;
+				}
+				return Integer.compare(o1.originalOrder, o2.originalOrder);
 			}
 
 		});
@@ -402,7 +416,6 @@ public class SpatialTextSearch {
 				}
 				uniqueObjects += uniq;
 				fullResult.add(goalRes);
-				
 			}
 			if (uniqueObjects >= ctx.settings.LIMIT_STOP_GOALS_LEVEL_1__WHEN_REACHED_RES && depth1WithResults == 0) {
 				depth1WithResults = goal.length();
@@ -449,7 +462,7 @@ public class SpatialTextSearch {
 		int enlarge = 0;
 		for (SpatialSearchToken t : tokens) {
 			for (NameIndexAtom a : t.atoms) {
-				if (a.isBoundary() || a.isCityVillage() || a.isPostcode()) {
+				if (a.isGeoArea()) {
 					double val = ctx.settings.evalEnlargeBoundary(ctx.settings.ENLARGE_BOUNDARIES, 
 							a.coords.dimensionInM());
 					if (val > 0) {
@@ -567,7 +580,7 @@ public class SpatialTextSearch {
 		ctx.stats.step2Compute.start();
 //		res.combinations = findObjCombinationsSimpleIteration(res.tokens);
 		if (ctx.settings.DEV_USE_PIPELINE) {
-			res.combinations = new SpatialStagePipeline(ctx).runPipeline(res.tokens);
+			res.combinations = new SpatialPipelineSearch(ctx, res.tokens).runPipeline();
 		} else {
 			res.combinations = findLongestCombinations(ctx, res.tokens);
 		}
@@ -682,9 +695,6 @@ public class SpatialTextSearch {
 			int sz = 0;
 			for (SpatialSearchResult r : res.mainResults) {
 				sz++;
-				if (r.toString().contains("649331066")) {
-					System.out.println(r);
-				}
 				if (r.visibleLevel != level) {
 					level++;
 					System.out.printf("### %d - NEXT LEVEL %d (%s). "

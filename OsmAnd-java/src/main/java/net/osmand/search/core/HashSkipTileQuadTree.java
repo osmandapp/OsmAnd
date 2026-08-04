@@ -306,6 +306,10 @@ public class HashSkipTileQuadTree<T> {
 		}
 	}
 
+	public void addObject(T obj, int[] bbox31) {
+		addObject(obj, bbox31, -1);
+	}
+	
 	public void addObject(T obj, int[] bbox31, long externalId) {
 		long objId = externalId == -1 ? tileEntries.size() : externalId;
 		addTileEntry(obj, bbox31, objId, getNativeZoom(bbox31));
@@ -359,6 +363,8 @@ public class HashSkipTileQuadTree<T> {
 			}
 		}
 	}
+	
+	
 
 	public int build() {
 		if (modified != null) {
@@ -500,6 +506,10 @@ public class HashSkipTileQuadTree<T> {
 		checkIsBuilt();
 		return zoomBuckets[z];
 	}
+	
+	public boolean isBuilt() {
+		return modified != null;
+	}
 
 	private void checkIsBuilt() {
 		if (modified == null) {
@@ -542,6 +552,14 @@ public class HashSkipTileQuadTree<T> {
 			}
 		}
 		return res;
+	}
+	
+	public boolean isEmpty() {
+		return tileEntries.isEmpty();
+	}
+	
+	public int getSize() {
+		return tileEntries.size();
 	}
 	
 	public List<TileEntry<T>> getTileEntries() {

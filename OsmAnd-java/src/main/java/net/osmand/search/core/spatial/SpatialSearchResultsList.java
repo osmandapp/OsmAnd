@@ -21,12 +21,14 @@ import net.osmand.data.Amenity;
 import net.osmand.data.Building;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
+import net.osmand.data.QuadRect;
 import net.osmand.data.Street;
 import net.osmand.search.core.HashQuadTree;
 import net.osmand.search.core.HashSkipTileQuadTree;
 import net.osmand.search.core.HashSkipTileQuadTreeJoiner;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSettings;
+import net.osmand.shared.gpx.GpxElevationTransfer;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.SearchAlgorithms;
@@ -63,6 +65,18 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 	public SpatialSearchResultsList() {
 		this(null, null, null);
 	}
+	
+	protected SpatialSearchResultsList(SpatialSearchContext ctx, List<SpatialSearchToken> tokensList) {
+	    if (tokensList == null || tokensList.isEmpty()) {
+	        this.tokens = new SpatialSearchToken[0];
+	    } else {
+	        this.tokens = tokensList.toArray(new SpatialSearchToken[0]);
+	    }
+	    if (ctx != null) {
+			MIN_ELO_RATING = ctx.settings.MIN_ELO_RATING;
+		}
+	    this.tCount = this.tokens.length;
+	}
 
 	public SpatialSearchResultsList(SpatialSearchContext ctx, SpatialSearchToken token, SpatialSearchResultsList parent) {
 		if (token == null) {
@@ -75,21 +89,16 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 			}
 		}
 		tCount = tokens.length;
+		if (ctx != null) {
+			MIN_ELO_RATING = ctx.settings.MIN_ELO_RATING;
+		}
 		if (parent != null) {
 			limitIntersection = parent.limitIntersection == -1 ? (ctx.limitLocationBboxes.length) : parent.limitIntersection;
-			MIN_ELO_RATING = ctx.settings.MIN_ELO_RATING;
 			calculateMainIntersection(ctx, token, parent);
 		}
 	}
 	
-	protected SpatialSearchResultsList(List<SpatialSearchToken> tokensList) {
-	    if (tokensList == null || tokensList.isEmpty()) {
-	        this.tokens = new SpatialSearchToken[0];
-	    } else {
-	        this.tokens = tokensList.toArray(new SpatialSearchToken[0]);
-	    }
-	    this.tCount = this.tokens.length;
-	}
+	
 	
 	private void loadObjects(SpatialSearchContext ctx, int type, TLongObjectHashMap<MapObject> cache) throws IOException {
 		TLongObjectHashMap<Long> lstMap = new TLongObjectHashMap<>();
@@ -234,51 +243,54 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 	}
 
 	private void checkAmenityRef(List<SpatialSearchToken> missingTokens, int indx) {
-		NameIndexAtom poiAtom = null;
 		int refInd = 0;
 		String queryRef = null;
 		Set<String> objectRef = null;
 		for (refInd = 0; refInd < tCount; refInd++) {
 			NameIndexAtom refAtom = linearResults.get(indx * tCount + refInd);
-			
-			if (refAtom.buildingOrRefInd >= 0) {
+			if (refAtom.buildingOrRefInd >= 0 && refAtom.isPOI()) {
 				int amenityTokenInd = getTokenByOriginalOrder(refAtom.buildingOrRefInd);
 				if (amenityTokenInd < 0) {
 					skipResults.put(indx, true);
 					return;
 				}
-				NameIndexAtom psAtom = linearResults.get(indx * tCount + amenityTokenInd);
-				if (!psAtom.isPOI()) {
-					// return but not skip! (street or poi category)
-					return;
-				}
-				if (poiAtom != null && psAtom.id != poiAtom.id) {
-					// mix of 2 refs
-					skipResults.put(indx, true);
-					return;
-				}
-				poiAtom = psAtom;
-				if (poiAtom != null && poiAtom.id == refAtom.id && poiAtom.object instanceof Amenity as) {
-					String ref = as.getAdditionalInfo("ref");
-					if (ref == null) {
-						ref = as.getAdditionalInfo("ref_post");
-					}
-					if (objectRef == null && ref != null) {
-						objectRef = SearchAlgorithms.getBuildingCompareSet(ref, tempBuildNames2);
-					} else {
-						int num = Algorithms.extractIntegerNumber(as.getName());
-						if (num > 0) {
-							objectRef = Collections.singleton(num + "");
+				boolean wrong = false;
+				NameIndexAtom poiAtom  = null;
+				// mix of 2 refs or not present or street
+				for (int k = 0; k < tCount; k++) {
+					NameIndexAtom check = linearResults.get(indx * tCount + k);
+					if (check != null && check.isPOI() && !check.isPOIRef()) {
+						if(check.id == refAtom.id) {
+							poiAtom = check;
+						} else {
+							wrong = true;
+							break;
 						}
 					}
-					if (queryRef == null) {
-						queryRef = tokens[refInd].word;
-					} else {
-						queryRef += " " + tokens[refInd].word;
-					}
-				} else {
+				}
+				if (poiAtom == null || poiAtom.object == null || wrong) {
 					skipResults.put(indx, true);
 					return;
+				}
+				Amenity as = (Amenity) poiAtom.object;
+				String ref = as.getAdditionalInfo("ref");
+				if (ref == null) {
+					ref = as.getAdditionalInfo("ref_post");
+				}
+				if (objectRef == null && ref != null) {
+					objectRef = SearchAlgorithms.getBuildingCompareSet(ref, tempBuildNames2);
+				} else {
+					int num = Algorithms.extractIntegerNumber(as.getName());
+					int snum = Algorithms.extractIntegerNumber(poiAtom.name);
+					// don't count twice (as query already assigned)
+					if (num > 0 && snum != num) {
+						objectRef = Collections.singleton(num + "");
+					}
+				}
+				if (queryRef == null) {
+					queryRef = tokens[refInd].word;
+				} else {
+					queryRef += " " + tokens[refInd].word;
 				}
 			}
 		}
@@ -287,6 +299,8 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 			int match = -1;
 			if (objectRef != null && objectRef.size() > 0) {
 				if (objectRef.equals(querySetRef)) {
+					// no use case to count duplicates
+					// if (tempBuildNames1.size() > objectRef.size()) {
 					match = 0;
 				} else if (querySetRef.size() == objectRef.size() + 1 && querySetRef.containsAll(objectRef)) {
 					match = 1;
@@ -294,8 +308,8 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 			}
 			if (match >= 0) {
 				extraNameMatch.put(indx, queryRef);
-				if(match > 0) {
-					surplusWords.put(indx, -1);
+				if (match > 0) {
+					surplusWords.put(indx, -match);
 				}
 			} else {
 				skipResults.put(indx, true);
@@ -368,20 +382,28 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		NameIndexAtom noBldStreet = null; 
 		for (int i = 0; i < tCount; i++) {
 			NameIndexAtom bld = linearResults.get(indx * tCount + i);
-			if (bld.buildingOrRefInd >= 0) {
+			if (bld.buildingOrRefInd >= 0 && !bld.isPOI() && !bld.isPoiCategory()) {
 				int strTokenInd = getTokenByOriginalOrder(bld.buildingOrRefInd);
 				if (strTokenInd < 0) {
 					skipResults.put(indx, true);
 					break;
 				}
-				// don't intersect streets
-				NameIndexAtom str = linearResults.get(indx * tCount + strTokenInd);
-				if (str.id != bld.id) {
-					continue;
+				boolean missing = false;
+				boolean otherStreet = false;
+				for (int k = 0; k < tCount; k++) {
+					NameIndexAtom streetAtom = linearResults.get(indx * tCount + k);
+					if (streetAtom != null && streetAtom.isStreet()) {
+						if (streetAtom.id == bld.id) {
+							missing = false;
+						} else {
+							otherStreet = true;
+							break;
+						}
+					}
 				}
-				if (str.isPOI() || str.isPoiCategory()) {
-					// buildind ind is reused for poi as well
-					break;
+				if (missing || (otherStreet && !bld.isCityStreetName())) {
+					skipResults.put(indx, true);
+					return;
 				}
 				blds.add(bld);
 				searchKey += tokens[i].word + " ";
@@ -399,22 +421,23 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 			String bldName = searchKey.trim();
 			String cacheKey = bldRefObj.id + " " + bldName;
 			BuildingCache bldObj = null;
+			LatLon loc = null;
 			if (bldCheckCache.containsKey(cacheKey)) {
 				bldObj = bldCheckCache.get(cacheKey);
 			} else {
 				int[] matchExtraWord = new int[1];
 				Building bldres = checkBuilding(ctx, bldRefObj, (Street) bldRefObj.object, bldName, matchExtraWord);
-				LatLon loc = null;
+				loc = null;
 				if (bldres != null) {
 					loc = bldres.isInterpolation() ? bldres.getLocation(bldres.interpolation(bldName)) : null;
-//					System.out.printf("Building found [%d] '%s' -'%s': %s\n", matchExtraWord[0], bldres, bldName, bldRefObj.object);
+//					System.out.printf("%d Building found [%d] '%s' -'%s': %s\n", indx, matchExtraWord[0], bldres, bldName, bldRefObj.object);
 				} else {
-//					System.out.printf("No building '%s': %s\n", bldName, bldRefObj.object + " " + ((Street) bldRefObj.object).getBuildings());
+//					System.out.printf("%d No building '%s': %s\n", indx, bldName, bldRefObj.object + " " + ((Street) bldRefObj.object).getBuildings());
 				}
 				bldObj = new BuildingCache(bldres, indx, loc, matchExtraWord[0]);
 				bldCheckCache.put(cacheKey, bldObj);
 			}
-			if (bldObj.bld == null) {
+			if (bldObj.bld == null || !checkBuildingPoiLocation(ctx, indx, bldObj.bld, loc)) {
 				skipResults.put(indx, true);
 			} else {
 				// assign buildings
@@ -435,6 +458,26 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 	}
 	
 	
+	private boolean checkBuildingPoiLocation(SpatialSearchContext ctx, int indx, Building bld, LatLon loc) {
+		if (loc == null) {
+			loc = bld.getLocation();
+		}
+		List<NameIndexAtom> lst = getRawAtoms(indx);
+		int[] bldBbox = null;
+		for (NameIndexAtom p : lst) {
+			if (p.isPOI()) {
+				if (bldBbox == null) {
+					QuadRect qr = MapUtils.calculate31BboxUsingRhumb(ctx.settings.POI_HOUSE_DEFAULT_RADIUS, loc);
+					bldBbox = new int[] { (int) qr.left, (int) qr.top, (int) qr.right, (int) qr.bottom };
+				}
+				if (!p.coords.intersects(bldBbox)) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
 	private Building checkBuilding(SpatialSearchContext ctx, NameIndexAtom atom, Street street, String bld, int[] matchExtraWord) {
 		Building interpolation = null;
 		Building partial2 = null;
@@ -498,13 +541,20 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		}
 		if (partial1 != null) {
 			if (tempBuildNames1.size() > query.size()) {
-				matchExtraWord[0] = -1; 
+				matchExtraWord[0] = -1;
 			}
 			return partial1;
 		}
+		if (partial2 != null && query.size() > 1) {
+			matchExtraWord[0] = -1;
+			return partial2;
+		}
 		if (interpolation != null) {
 			if (query.size() > 1) {
-				matchExtraWord[0] = -1;
+				matchExtraWord[0] = -(query.size() - 1);
+			}
+			if (tempBuildNames1.size() > 1) {
+				matchExtraWord[0] = -(tempBuildNames1.size() - 1);
 			}
 			return interpolation;
 		}
