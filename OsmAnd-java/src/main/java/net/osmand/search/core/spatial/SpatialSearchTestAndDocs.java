@@ -65,17 +65,37 @@ import net.osmand.util.SearchAlgorithms;
 // UNIT TESTING: City > Boundary + location? Format strings (City > Boundary)...
 // UNIT TESTING: (Deduplicate categories brand id) - "okko", "ОККО" - (split 2 maps one without brand id one with)
 // REVIEWED TESTS OK '276 East End Centre Wilkes-Barre'
+// UNIT TESTING: Travessa de Santo António Rua Joaquim Ribeiro Carvalho Portugal (all query below + no portugal)
+// UNIT TESTING: Test poi category translations (add ru / de in test)
+// UNIT TESTING: "apple city", "harlem city" (New york) - test that result odesn't appear "city" [POI_TYPE] + "apple" [CITY_TOWN_TYPE] 'New York' 
+// UNIT TESTING: '500 East College Avenue State College' (partial, no poi type, n)
+// UNIT TESTING: 'Bar 4 avenue' (new york poi category present)
+// UNIT TESTING: '10 Am Remsufer Remseck am Neckar'
+// UNIT TESTING: '138 138 Scott Avenue Bellefonte' + '138 138 Scott Avenue' (Wrong data but good test if street = '138 Scott Avenue'
+// UNIT TESTING: '315 B Westside Avenue Elmira' ('315B' should be no interpolation, '315 B')
+// UNIT TESTING: REDO 2419 Avenue G Dickinson, TX USA 
+// UNIT TESTING: ( add to new york test) 8 ave 8?
+// NO UNIT TESTING: '400 Susquehanna Boulevard Hazel Township' (MISSING Hazel Township)
+// NO UNIT TESTING: '330 Innovation Boulevard University Park' (partial result missing university park)
+
+//-------- PIPELINE ----------
+// LIVE TESTING
+//+ INVESTIGATE: Limit (2000->2500) patterson 
+// '4 ave 8 paterson' (OK - '8 4 ave paterson', '4th ave 8 paterson' play order of assigned numbers to bdl ref)
+//+ 100km+: нова пошта краматорськ 3, Нова Пошта (№5 not searchable by common words / name), mihia lake
+//+ 100km+: Calle 20 188 San Isidro Lima, 
+//+ SLOW: "Travessa de Santo António" x "Rua Joaquim Ribeiro de Carvalho" x "portugal" (39.7412, -8.8012 Barreira Urbanização Vale da Cabrita))
+//    "Foothill Boulevard" x "Golden State Road" x "Los Angeles" x "United states of America"
+//+ FORBID (slow): to interconnect tokens between 2 words - issue "<Street> <City> <Hno>"?
 
 ////////// IN PROGRESS //////////
 // REVIEW (index_words_dashboard - common озеро): POI / ADDRESS - France, Germany, US, Europe, China, Peru
 // REVIEW: Auto test New york, France, Italy (Slow?)
-// REVIEW: POI show stats (same for search ms...)
-// REVIEW: Web busy (?? 2 parallel) / timeout - "Foothill Boulevard Golden State Road Los Angeles United states of America" > 30+ sec
-// REVIEW: Web gaps for POI category
-// REVIEW: Sort by elo display small / large
-// REVIEW: web url to search by maps
-// REVIEW: Display low zooms for rare categories
 
+// TODO Duplicate '10 Am Remsufer Remseck am Neckar', +'138 138 Scott Avenue Bellefonte', +'8 av 8'
+
+// TODO Extend POI tile bboxes 200m? internet_access (fuel_diesel)
+// TODO Analyze Performance bootlenecks VisualVM (Pipeline + Intersection)
 // TODO INDEX: Find POI Categories translations / synonyms via Common words - Стоматол., Dentist, Basilica 
 // TODO REVIEW: Abbrevations (synonyms / direction words) other languages?
 // TODO REVIEW: Analyze Abbrevations / common skip (abbrevations 1st=first)
@@ -83,17 +103,9 @@ import net.osmand.util.SearchAlgorithms;
 // TODO DEDUPLICATE: too many houses (duplicate names) in wiki maps - obstruct search by street "Ярославів Вал"`?
 // TEST DEDUPLICATE: wiki / travel maps / seamarks map
 
-// TODO Extend POI tile bboxes 200m? intrnet_access (fuel_diesel) 
-// TODO INVESTIGATE: Limit (2000->2500) patterson 
-//      '4 ave 8 paterson' (OK - '8 4 ave paterson', '4th ave 8 paterson' play order of assigned numbers to bdl ref)
 
 /////////////// EXTRA FEATURES ///////////////
 // TODO INDEX: highway=services (Not index)
-// TODO 100km+: нова пошта краматорськ 3, Нова Пошта (№5 not searchable by common words / name), mihia lake
-// TODO 100km+: Calle 20 188 San Isidro Lima, 
-// SLOW: "Travessa de Santo António" x "Rua Joaquim Ribeiro de Carvalho" x "portugal" (39.7412, -8.8012 Barreira Urbanização Vale da Cabrita))
-//       "Foothill Boulevard" x "Golden State Road" x "Los Angeles" x "United states of America"
-// TODO FORBID (slow): to interconnect tokens between 2 words - issue "<Street> <City> <Hno>"?
 // TODO Sorting before load objects (use elo and other buildings?) and limit results
 // TODO Suggestion based on common suffixes
 // TODO Store and test conscription number for some cities - issue (RZR)
@@ -189,6 +201,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "2/1 Rathausplatz Esslingen am Neckar"; // not correct
 //		query = "9 Neustädter Straße Korb";
 //		query = "14/1 J.-F.-Weishaar-Straße Korb";
+		query = "10 Am Remsufer Remseck am Neckar";
 
 //		settings = SpatialTextSearchSettings.searchPoiCategoriesSettings(0, null);
 //		query = "Gyn.";
@@ -231,9 +244,22 @@ public class SpatialSearchTestAndDocs {
 //		query = "2110 College Avenue Elmira";
 		
 //		pattern = "Us_penn";
+//		pattern2 = "Us_new";
+//		query = "500 East College Avenue State College";
+//		query = "315 B Westside Avenue Elmira"; // '315 B', '315B'
+//		query = "'330 Innovation Boulevard University Park";
+//		query = "138 138 Scott Avenue Bellefonte";
+//		settings.MAX_PIPELINE_RES_TO_STOP = new int[] {1};
+//		query = "138 138 Scott Avenue";
+
+		// PERFORMANCE
+//		query = "115 1/2 East 9th Street Elmira";
+//		settings.OPTIM_FLAG_POI_SAME_AS_CITY_STREET = true;
+//		query = "341 East Hill Church Road Addison";
 		
 //		location = new LatLon(41.2364,-75.8843); // 649331066
 //		settings.OPTIM_READ_COMMON_WORDS_ATOMS = false;
+//		settings.MAX_PIPELINE_STAGE_TO_STOP = new int[] {100000};
 //		settings.DEDUPLICATE_RES = true;
 //		query = "155 Park Avenue Wilkes Barre"; // 155 Park Avenue Wilkes-Barre
 		
@@ -263,7 +289,6 @@ public class SpatialSearchTestAndDocs {
 		
 //		query = "151 Weber Way Selinsgrove"; // Fixed: 2 word - addr:unit 
 //		query = "1544 PA-61 Pottsville"; // FIXED
-//		query = "138 138 Scott Avenue Bellefonte";
 //		query = "17815 PA-35 Port Royal"; // CHECK!
 //		query = "2039 Ridge Road Lowman"; // extend bbox hamlet // 822981342  -- unit test!
 		// test default enlarge 1 -> 2.5
@@ -279,6 +304,24 @@ public class SpatialSearchTestAndDocs {
 //		query = "PA 75 27193"; // +'PA75', +'PA-75', +'PA 75'  Data 'PA-75', 27193  4472676432
 //		query = "PA 75"; // Yes - ('PA 75', 'PA-75'), YES - 'PA75'
 //		query = "PA 21";  // 1336083883 DATA 'PA21' (+!'PA 21', +'PA-21',+'PA21') 
+
+//		pattern = "Us_texas";
+//		location = new LatLon(29.4729, -95.0654);
+//		query = "Avenue G, Dickinson"; // 26308264745 ! (galveston 26308256593)
+//		query = "2419 Avenue G, Dickinson"; // +
+//		query = "2419 Avenue G, Dickinson, 77539 TX"; // +
+//		query = "2419 Avenue G, Dickinson, 77539 TX USA"; // +
+//		query = "2419 Avenue G Dickinson, 77539 TX USA"; // +
+//		settings.MAX_PIPELINE_RES_TO_STOP = new int[] {3};// FIX
+//		query = "2419 Avenue G Dickinson, TX USA";// - (1 result stops further as avenue g bbox too big)
+//		query = "2419 Avenue G Dickinson, USA"; // +
+//		query = "2419 Avenue G Dickinson, TX"; // +- 3 word
+//		query = "2419 Avenue G TX" +
+//		settings.POI_HOUSE_DEFAULT_RADIUS = 500000;
+//		query = "2419 Avenue G Dickinson, TX USA";
+		
+//		query = "TX";
+
 		
 //		pattern = "Us_penn";
 //		pattern = "Map";
@@ -286,11 +329,6 @@ public class SpatialSearchTestAndDocs {
 //		query = "Pennsylvania 1282 14871";
 //		query = "14871 Pennsylvania Avenue Pine City";
 //		query = "14871 Pennsylvania Avenue";
-//		pattern = "Us_texas";
-//		query = "Avenue G, Dickinson"; // 26308264745
-//		query = "2419 Avenue G, Dickinson, TX USA";
-//		query = "2419 Avenue G, Dickinson, 77539 TX USA";
-//		query = "TX";
 
 //		pattern = "Liechtenstein_europe_2.obf";
 //		query = "Vaduz Lettstrasse";
@@ -308,9 +346,9 @@ public class SpatialSearchTestAndDocs {
 //		query = "Vaduz ";
 //		query = "Jugendheim Malbun";
 
-		pattern = "Netherlands_";
+//		pattern = "Netherlands_";
 //		location = new LatLon(52.2827, 4.8601);
-		query = "harderwijk estrado"; // 't2+0-w2-oth1-tp4' t2+0-w2-oth2-tp0
+//		query = "harderwijk estrado"; // 't2+0-w2-oth1-tp4' t2+0-w2-oth2-tp0
 //		query = "harderwijk";
 //		query = "cafe harderwijk";
 //		query = "hotel amsterdam";
@@ -341,7 +379,7 @@ public class SpatialSearchTestAndDocs {
 		
 //		pattern = "Ukraine_kyiv";
 //		pattern = "Test_Ukraine_kyiv-city_europe_12.obf";
-//		pattern = "Ukraine_";
+		pattern = "Ukraine_";
 		
 		// poi types
 //		location = new LatLon(50.436423, 30.508097);
@@ -359,8 +397,8 @@ public class SpatialSearchTestAndDocs {
 //		location = new LatLon(50.4355, 30.6473); 
 //		settings.OPTIM_READ_CATEGORY_WORD_ATOMS = false;
 //		settings.OPTIM_READ_COMMON_WORDS_LIMIT = 10000;
-//		pattern = "Ukraine_";
 		
+//		pattern = "Ukraine_";
 //		location = new LatLon(48.020997, 30.968742);
 //		query = "Мигия озеро ";
 //		query = "Мигия water"; 
@@ -379,7 +417,9 @@ public class SpatialSearchTestAndDocs {
 //		query = "Veget.";
 //		query = "Mcdonalds";
 //		query = "Stomat.";
-		
+
+//		pattern = "Ukraine_kyiv-city";
+//		pattern2 = "World_";
 //		location = new LatLon(50.4631,30.4553);
 //		settings.OPTIM_READ_COMMON_WORDS_ATOMS = true;
 //		query = "mcdonald's";
@@ -389,6 +429,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "Ukraine kyiv saks.";
 //		query = ". entr."; // check dots
 //		query = "пузата хата mcdonal.";
+//		query = "окко 3 краматорск";
 //		
 //		query = "2 га Нова вулиця"; // unit test '2га' +, '2-га', '2', '2 га' (partial) unit test (260537333, 104438019)
 //		query = "2га Нова вулиця"; 
@@ -444,16 +485,21 @@ public class SpatialSearchTestAndDocs {
 //		query = "New York 55 st"; // 'NY s.' - 0.5s 100k, 'NY st' - 2s (700k)
 		// 40.64946, -74.00682 - unit test '4th av', '4 ave', '4th avenue' 241843204, 247910224, 85393997 (..) brooklyn - not 48
 		// 40.78035, -73.96572 - unit test '4th av', '4 ave', '4th avenue'  - 85393997 Park avenue
-//		settings.DEV_USE_SKIP_HASH_TREE = false;
+//		settings.OPTIM_LIMIT_INTERSECTIONS = 100_000;
+//		settings.DEV_USE_PIPELINE = false;
+//		settings.MAX_PIPELINE_RES_TO_STOP = new int[] {1000};
 //		query = "New York 4 av 8";
-//		query = "New York av 8";
+//		query = "8 av 8";
 //		query = "4 ave 8";
 //		query = "New York 4 av"; // 160947243
 //		query = "57th street"; // central park - 265345338 east, 86216906 west, (266926268 (west)?),
 //		query = "57 street"; // central park - 265345338 east, 86216906 west, (26926268 (west)?),
 //		query = "new york 57th street manhattan";
 //		query = "4th ave"; //  unit '4 ave'
-		
+//		settings.MAX_PIPELINE_RES_TO_STOP= new int[] {1};
+//		query = "apple city";
+//		query = "harlem city";
+//		query = "bar 4 ave";
 		
 //		query = "4th ave 8 paterson"; //  wrong city... 26240861988
 //		settings.OPTIM_READ_COMMON_WORDS_ATOMS = false; // false -ok
@@ -478,16 +524,31 @@ public class SpatialSearchTestAndDocs {
 		// See test - [8-8 Kinshi 3 Kinshi Sumida Tokyo], Rivière Tsumura
 		// India - Satyam node/2296788005#map=18/17.805646/83.356818
 		// +[Venezia, Cannaregio, 539D , Campo Saffa], +[Venezia Cannaregio 539D ] -[Venezia 539D  Campo Saffa] - expected
-		pattern = "Italy_ven";
+//		pattern = "Italy_ven";
 //		pattern = "Map";
 //		pattern2 = "World_basemap_2";
+//		settings.DEV_USE_PIPELINE = false;
 		// ! unit test - search full address ! no double 539d (no intersectoin)
 		// Cannaregio 539D Campo Saffa, Venezia Cannaregio Campo Saffa  , 
-		query = "Venezia Cannaregio Campo Saffa ";
+//		query = "Venezia Cannaregio Campo Saffa ";
 //		query = "Cannaregio 539D Campo Saffa";
 //		query = "Venezia Cannaregio 539D Campo Saffa";
 //		query = "Campo Saffa";
 //		query = "Venezia";
+		
+		
+//		pattern = "Portugal";
+//		settings.DEV_USE_PIPELINE = false;
+//		location = new LatLon(39.7412, -8.8012); 
+		// Barreira Urbanização Vale da Cabrita, 258548289, 696751116
+		// MATCH: Search Stats 5392.4 ms (read 11,248 KB) - 4979.9 ms 305,862 atoms (read 330.2, match 2981.5, poi 490.6), 361.8 ms compute 5,499 (loadBld 3.6, read 2.9)
+//		settings.MAX_PIPELINE_RES_TO_STOP = new int[] {1000};
+//		settings.PIPELINE_MAX_STEPS = 10;
+//		settings.PIPELINE_MAX_VIRTUAL_MASKS = 3;
+//		query = "Travessa de Santo António Rua Joaquim Ribeiro de Carvalho Portugal"; // 1
+//		query = "Travessa de Santo António Rua Joaquim Ribeiro de Carvalho Portugal "; // 1
+//		query = "Travessa de Santo António rua Joaquim Ribeiro de Carvalho Portugal"; // 1
+//		query = "Travessa Santo António Rua Joaquim Ribeiro Portugal "; // 20
 		
 //		pattern = "France_ile-de-france";
 //		pattern = "France_";
@@ -497,20 +558,22 @@ public class SpatialSearchTestAndDocs {
 //		query = "Rue Jean Poulmarch 17bis"; //  17bis OK, 17 OK, 17 BIS - OK 'Rue Jean Poulmarch 17;17 bis' 
 //		query = "Dieu 8-bis"; // 'Rue Dieu 8 bis' , '8-bis', '8 bis'
 		// too many results
+//		settings.DEV_USE_PIPELINE = true;
 //		query = "rue de l'eglise"; // specific search - "rue de l'eglise", non specific "rue de"
 //		query = "rue de la fen."; // all strets
-//		query = "de la"; // "de la", "rue de la" only common words + high rating
+//		query = "rue de la"; // "de la", "rue de la" only common words + high rating
 //		query = "rû bas du rue";
 		
 //		pattern = "Us_cal";
 //		pattern2 = "regions";
+//		settings.DEV_USE_PIPELINE = false;
 //		query = "Golden State Road Los Angeles United States"; // matched only 5?, United States - not found
 //		query = "Sylmar United States"; // not found
 //		query = "United States"; // not found 
 //		query = "Golden State Road Foothill Boulevard Sylmar USA";
 
 		
-//		pattern = "World_basemap_mini";
+//		pattern2 = "World_basemap_mini";
 //		pattern = "Ukraine_";
 //		location = new LatLon(50, 30);
 //		settings.DEDUPLICATE_RES = false;
@@ -605,14 +668,15 @@ public class SpatialSearchTestAndDocs {
 				System.out.println("Suggest search other region - " + bbox);
 			}
 		}
+		
 		boolean testOldPoiSearch = false;
-		boolean testNewByNamePoiSearch = false;
+		boolean testNewByNamePoiSearch = true;
 		String cat = "cafe"; // ice_rink, cafe, aquarium
 		int poiZoom = 10; //10;// 12
-//		QuadRect bbox = new QuadRect(29, 51, 32, 49); // zoom = 9
+		QuadRect bbox = new QuadRect(29, 51, 32, 49); // zoom = 9
 //		QuadRect bbox = new QuadRect(21, 51, 37, 45); // zoom = 7
 //		QuadRect bbox = new QuadRect(-79, 42, -73, 39); // zoom = 7 penn
-		QuadRect bbox = new QuadRect(-75, 42, -71, 39); // zoom = 8 newyork
+//		QuadRect bbox = new QuadRect(-75, 42, -71, 39); // zoom = 8 newyork
 		if (testOldPoiSearch) {
 			long nt = System.nanoTime();
 			SpatialPoiType type = poiSearch.getByKey(cat); // ice_rink, cafe

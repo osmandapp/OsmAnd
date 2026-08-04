@@ -97,6 +97,7 @@ import net.osmand.plus.settings.backend.menuitems.MainContextMenuItemsSettings;
 import net.osmand.plus.settings.backend.preferences.*;
 import net.osmand.plus.settings.backend.storages.ImpassableRoadsStorage;
 import net.osmand.plus.settings.backend.storages.IntermediatePointsStorage;
+import net.osmand.plus.settings.coordinates.CoordinateFormatIds;
 import net.osmand.plus.settings.coordinates.CoordinateFormatSettingsStorage;
 import net.osmand.plus.settings.enums.*;
 import net.osmand.plus.utils.AndroidUtils;
@@ -3496,8 +3497,8 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> SHOW_COORDINATES_GRID =
 			new BooleanPreference(this, "show_coordinates_grid", false).makeProfile();
 
-	public final OsmandPreference<GridFormat> COORDINATE_GRID_FORMAT =
-			new EnumStringPreference<>(this, "coordinates_grid_format", GridFormat.DIGITAL, GridFormat.values()).makeProfile();
+	public final CommonPreference<String> COORDINATE_GRID_FORMAT =
+			new StringPreference(this, "coordinates_grid_format", CoordinateFormatIds.BUILTIN_DDD).makeProfile();
 
 	public final CommonPreference<Integer> COORDINATE_GRID_MIN_ZOOM =
 			new IntPreference(this, "coordinate_grid_min_zoom", 0).makeProfile();
