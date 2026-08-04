@@ -28,7 +28,6 @@ import net.osmand.search.core.SearchCoreFactory.SearchBaseAPI;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.SearchPhraseDataType;
 import net.osmand.search.core.SearchResult;
-import net.osmand.search.core.SearchWord;
 import net.osmand.search.core.TopIndexFilter;
 import net.osmand.search.core.spatial.SpatialSearchResult.SpatialSearchResultRef;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
@@ -39,7 +38,6 @@ import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -141,15 +139,15 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		return context;
 	}
 
-	private List<BinaryMapIndexReader> getSpatialPoiSearchFiles(SearchPhrase phrase) {
-		return getSpatialPoiSearchFiles(phrase, createSpatialSettings(phrase));
-	}
+//	private List<BinaryMapIndexReader> getSpatialPoiSearchFiles(SearchPhrase phrase) {
+//		return getSpatialPoiSearchFiles(phrase, createSpatialSettings(phrase));
+//	}
 
-	private List<BinaryMapIndexReader> getSpatialPoiSearchFiles(SearchPhrase phrase, SpatialTextSearchSettings settings) {
-		List<BinaryMapIndexReader> files = new ArrayList<>();
-		addFiles(files, getSpatialSearchOfflineIndexes(phrase, settings));
-		return files;
-	}
+//	private List<BinaryMapIndexReader> getSpatialPoiSearchFiles(SearchPhrase phrase, SpatialTextSearchSettings settings) {
+//		List<BinaryMapIndexReader> files = new ArrayList<>();
+//		addFiles(files, getSpatialSearchOfflineIndexes(phrase, settings));
+//		return files;
+//	}
 
 	public List<BinaryMapIndexReader> getSpatialSearchFiles(SearchPhrase phrase) {
 		return getSpatialSearchFiles(phrase, createSpatialSettings(phrase));
@@ -221,7 +219,7 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		MapObject mainObject = spatialResult.getMainObject();
 
 		SearchResult result = mainObject != null
-				? convertMainObject(phrase, spatialResult, mainObject)
+				? convertMapObject(phrase, spatialResult, mainObject)
 				: convertPoiType(phrase, spatialResult, context);
 		if (result == null) {
 			return null;
@@ -237,18 +235,18 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		return result;
 	}
 
-	private SearchResult convertMainObject(SearchPhrase phrase,
-	                                       SpatialSearchResult spatialResult, MapObject mainObject) {
+	private SearchResult convertMapObject(SearchPhrase phrase,
+	                                      SpatialSearchResult spatialResult, MapObject mainObject) {
 		SearchResult result = new SearchResult(phrase);
 		result.object = mainObject;
-		result.objectType = getObjectType(null, mainObject, spatialResult);
+		result.objectType = getObjectType(null, mainObject, spatialResult); // TODO fixme atom is always null
 		result.location = mainObject.getLocation();
 		result.localeName = getLocaleName(mainObject, phrase);
 		result.otherNames = mainObject.getOtherNames(true, result.localeName);
 		result.priority = SEARCH_PRIORITY;
 		result.priorityDistance = 1;
 		result.preferredZoom = getPreferredZoom(result.objectType);
-		fillRelatedObject(result, null, phrase);
+//		fillRelatedObject(result, null, phrase);
 		if (mainObject instanceof Amenity amenity) {
 			result.cityName = amenity.getCityFromTagGroups(phrase.getSettings().getLang());
 		}
@@ -256,14 +254,14 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		return result;
 	}
 
-	private SpatialSearchResultRef getRef(SpatialSearchResult spatialResult, MapObject object) {
-		for (SpatialSearchResultRef ref : spatialResult.objs) {
-			if (ref.atom.object == object || ref.atom.bldObject == object) {
-				return ref;
-			}
-		}
-		return null;
-	}
+//	private SpatialSearchResultRef getRef(SpatialSearchResult spatialResult, MapObject object) {
+//		for (SpatialSearchResultRef ref : spatialResult.objs) {
+//			if (ref.atom.object == object || ref.atom.bldObject == object) {
+//				return ref;
+//			}
+//		}
+//		return null;
+//	}
 
 	private SearchResult convertPoiType(SearchPhrase phrase, SpatialSearchResult spatialResult, SpatialSearchContext context) {
 		SpatialPoiSearch.SpatialPoiType spatialPoiType = spatialResult.getPoiCategory(context.poiSearch);
@@ -271,7 +269,7 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		if (spatialPoiType == null) {
 			return null;
 		}
-		Object object = null;
+		Object object;
 		String localeName;
 		AbstractPoiType poiType = spatialPoiType.singleType;
 		if (poiType != null) {
@@ -294,12 +292,13 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		return result;
 	}
 
-	private String getTopIndexTranslation(String value) {
-		String key = TopIndexFilter.getValueKey(value);
-		String translate = poiTypes.getPoiTranslation(key);
-		return translate.equalsIgnoreCase(key) ? value : translate;
-	}
+//	private String getTopIndexTranslation(String value) {
+//		String key = TopIndexFilter.getValueKey(value);
+//		String translate = poiTypes.getPoiTranslation(key);
+//		return translate.equalsIgnoreCase(key) ? value : translate;
+//	}
 
+	// TODO refactor and remove atom from parameters
 	private ObjectType getObjectType(NameIndexAtom atom, MapObject object, SpatialSearchResult spatialResult) {
 		if ((atom != null && atom.isBuilding()) || object instanceof Building) {
 			return ObjectType.HOUSE;
@@ -347,19 +346,19 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		return object.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 	}
 
-	private BinaryMapIndexReader getFile(SpatialSearchContext context, NameIndexAtom atom) {
-		if (atom == null) {
-			return null;
-		}
-		int indexInd = context.getFileInd(atom.id);
-		for (SpatialTextSearch.SpatialSearchFileCache fileCache : context.internalFile) {
-			if (indexInd < fileCache.indexInd + fileCache.indexReaders.size()) {
-				int fileInd = fileCache.fileInd;
-				return fileInd >= 0 && fileInd < context.files.size() ? context.files.get(fileInd) : null;
-			}
-		}
-		return null;
-	}
+//	private BinaryMapIndexReader getFile(SpatialSearchContext context, NameIndexAtom atom) {
+//		if (atom == null) {
+//			return null;
+//		}
+//		int indexInd = context.getFileInd(atom.id);
+//		for (SpatialTextSearch.SpatialSearchFileCache fileCache : context.internalFile) {
+//			if (indexInd < fileCache.indexInd + fileCache.indexReaders.size()) {
+//				int fileInd = fileCache.fileInd;
+//				return fileInd >= 0 && fileInd < context.files.size() ? context.files.get(fileInd) : null;
+//			}
+//		}
+//		return null;
+//	}
 
 	private int getPreferredZoom(ObjectType type) {
 		if (type == ObjectType.HOUSE) {
@@ -380,17 +379,17 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		return PREFERRED_DEFAULT_ZOOM;
 	}
 
-	private void fillRelatedObject(SearchResult result, NameIndexAtom atom, SearchPhrase phrase) {
-		Object object = result.object;
-		if (object instanceof Street street) {
-			City city = street.getCity();
-			result.relatedObject = city;
-			result.localeRelatedObjectName = city == null ? null : city.getName(phrase.getSettings().getLang(),
-					phrase.getSettings().isTransliterate());
-		} else if (object instanceof Building && atom != null && atom.object instanceof Street street) {
-			result.relatedObject = street;
-			result.localeRelatedObjectName = street.getName(phrase.getSettings().getLang(),
-					phrase.getSettings().isTransliterate());
-		}
-	}
+//	private void fillRelatedObject(SearchResult result, NameIndexAtom atom, SearchPhrase phrase) {
+//		Object object = result.object;
+//		if (object instanceof Street street) {
+//			City city = street.getCity();
+//			result.relatedObject = city;
+//			result.localeRelatedObjectName = city == null ? null : city.getName(phrase.getSettings().getLang(),
+//					phrase.getSettings().isTransliterate());
+//		} else if (object instanceof Building && atom != null && atom.object instanceof Street street) {
+//			result.relatedObject = street;
+//			result.localeRelatedObjectName = street.getName(phrase.getSettings().getLang(),
+//					phrase.getSettings().isTransliterate());
+//		}
+//	}
 }
