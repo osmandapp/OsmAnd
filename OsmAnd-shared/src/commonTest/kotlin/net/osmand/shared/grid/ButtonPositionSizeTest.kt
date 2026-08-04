@@ -523,6 +523,37 @@ class ButtonPositionSizeTest {
 		assertTrue(!slider.overlap(ruler), "slider=${slider.bounds}, ruler=${ruler.bounds}")
 	}
 
+	@Test
+	fun testLandscapeRotation_transparencySliderShouldStayVisible() {
+		ButtonPositionSize.DEBUG_PRINT = false
+		val buttons = listOf(
+			ButtonPositionSize("map.view.layers", 6, true, true).setMoveAny(),
+			ButtonPositionSize("map.view.quick_search", 6, true, true).setMoveAny(),
+			ButtonPositionSize("map.view.compass", 6, true, true).setMoveAny(),
+			ButtonPositionSize("map.view.zoom_out", 7, false, false).setMoveAny(),
+			ButtonPositionSize("map.view.zoom_id", 7, false, false).setMoveAny(),
+			ButtonPositionSize("map.view.back_to_loc", 7, false, false).setMoveAny(),
+			ButtonPositionSize("map.view.menu", 7, true, false).setMoveAny(),
+			ButtonPositionSize("map.view.route_planning", 7, true, false).setMoveAny(),
+			ButtonPositionSize("map.view.map_3d", 7, false, false)
+				.setSize(7, 7).setMargin(8, 8).setMoveAny(),
+			ButtonPositionSize("map_ruler_layout", 7, true, false).setSize(7, 3).setMoveAny(),
+			ButtonPositionSize("map_transparency_layout", 10, true, false)
+				.setSize(10, 6).setMargin(49, 6).setMoveAny(),
+		)
 
+		val computed = ButtonPositionSize.computeNonOverlap(1, buttons, 109, 42)
+		assertTrue(computed)
+
+		val slider = buttons.first { it.id == "map_transparency_layout" }
+
+		// Landscape after rotation: slider remains visible at the fixed expected position.
+		assertTrue { check(buttons, "map_transparency_layout", 49.0, 30.0) }
+		assertTrue(
+			slider.bounds.left >= 0.0 && slider.bounds.right <= 109.0 &&
+				slider.bounds.top >= 0.0 && slider.bounds.bottom <= 42.0,
+			"slider is outside landscape grid: slider=${slider.bounds}"
+		)
+	}
 
 }
