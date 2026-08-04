@@ -4890,7 +4890,7 @@
     <string name="trip_recording_max_speed_widget_description">Mostra la velocità massima per il viaggio attualmente registrato. Toccare per passare dalla velocità massima complessiva alla velocità massima dell\'ultima salita o discesa.</string>
     <string name="trip_recording_average_slope_widget_description">Mostra la pendenza media per l\'ultima sezione in discesa o in salida del viaggio attualmente registrato.</string>
     <string name="max_axle_load_description">Fornisci il carico massimo per asse del tuo veicolo per evitare strade e ponti con limiti di peso.</string>
-    <string name="marine_render_descr">Stile di navigazione Marino altamente personalizzabile. Basato sullo stile Nautico. Funziona bene con la mappa Boe Mondiali e le mappe opzionali batimetriche.</string>
+    <string name="marine_render_descr">Stile di navigazione marittima altamente personalizzabile. Basato sullo stile nautico. Funziona al meglio con la mappa mondiale dei segnali nautici e con le mappe batimetriche opzionali.</string>
     <string name="rendering_attr_hideContours_name">Isobate</string>
     <string name="rendering_attr_hideContours_description">Nascondi isobate</string>
     <string name="rendering_attr_hideFairways_name">Percorso navigabile</string>
@@ -5224,7 +5224,7 @@
     <string name="astro_eclipse_phase_partial">Parziale</string>
     <string name="astro_fit_eclipse_path">Adatta il percorso dell\'eclissi</string>
     <string name="astro_show_map">Mostra la mappa</string>
-    <string name="astro_hide_map">Nascondi mappa</string>
+    <string name="astro_hide_map">Nascondi la mappa</string>
     <string name="astro_map_center_location">Centro mappa: %1$s</string>
     <string name="astro_solar_eclipse">Eclissi solare</string>
     <string name="astro_solar_eclipse_subtitle">Esplora le eclissi solari nel mondo</string>
@@ -5335,4 +5335,6 @@
     <string name="always_keep_local_copy">Conserva sempre una copia locale</string>
     <string name="always_keep_local_copy_description">Il file multimediale rimane allegato anche se l\'originale viene eliminato dalla galleria o dai file.</string>
     <string name="use_spatial_text_search">Utilizza la ricerca testuale spaziale</string>
+    <string name="release_5_4">• Nuova ricerca spaziale — trova luoghi e cerca nei dintorni di un luogo\n\n • Interfaccia di ricerca rinnovata: ordinamento, filtri per categoria, aspetto più pulito\n\n • Allega foto e file multimediali ai Preferiti\n\n • Preferiti: supporto per sottogruppi e cartelle bloccabili\n\n • Coordinate: la ricerca, la griglia della mappa e la visualizzazione dei PDI ora supportano EPSG e il localizzatore Maidenhead\n\n • Sistemate le interruzioni di navigazione; passaggio tra calcolo del percorso standard e veloce\n\n • Imposta la scala della mappa di Android Auto separatamente dal tuo telefono\n\n • L\'astronomia ha ricevuto le eclissi solari e lunari</string>
+    <string name="use_spatial_text_search_description">Sostituisci le API di ricerca rapida standard con il motore di ricerca testuale spaziale sperimentale.</string>
 </resources>
