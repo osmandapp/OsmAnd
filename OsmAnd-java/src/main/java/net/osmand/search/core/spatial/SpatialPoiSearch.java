@@ -480,9 +480,13 @@ public class SpatialPoiSearch {
 		for (Amenity a : amenities) {
 			int x16 = MapUtils.get31TileNumberX(a.getLocation().getLongitude()) >> 15;
 			int y16 = MapUtils.get31TileNumberY(a.getLocation().getLatitude()) >> 15;
-			if (!SpatialSearchContext.skipZoomTileDuplicate(tiles, x16, y16, z, a.getTravelEloNumber() > Amenity.DEFAULT_ELO)) {
-				res.add(a);
+			long tileId = MapUtils.interleaveBits(x16 >> z, y16 >> z);
+			boolean elo = a.getTravelEloNumber() > Amenity.DEFAULT_ELO;
+			if (tiles.contains(tileId) && !elo) {
+				continue;
 			}
+			tiles.add(tileId);
+			res.add(a);
 		}
 		return res;
 	}

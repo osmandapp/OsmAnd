@@ -379,7 +379,7 @@ public class SpatialSearchTestAndDocs {
 		
 //		pattern = "Ukraine_kyiv";
 //		pattern = "Test_Ukraine_kyiv-city_europe_12.obf";
-//		pattern = "Ukraine_";
+		pattern = "Ukraine_";
 		
 		// poi types
 //		location = new LatLon(50.436423, 30.508097);
@@ -668,14 +668,15 @@ public class SpatialSearchTestAndDocs {
 				System.out.println("Suggest search other region - " + bbox);
 			}
 		}
+		
 		boolean testOldPoiSearch = false;
-		boolean testNewByNamePoiSearch = false;
+		boolean testNewByNamePoiSearch = true;
 		String cat = "cafe"; // ice_rink, cafe, aquarium
 		int poiZoom = 10; //10;// 12
-//		QuadRect bbox = new QuadRect(29, 51, 32, 49); // zoom = 9
+		QuadRect bbox = new QuadRect(29, 51, 32, 49); // zoom = 9
 //		QuadRect bbox = new QuadRect(21, 51, 37, 45); // zoom = 7
 //		QuadRect bbox = new QuadRect(-79, 42, -73, 39); // zoom = 7 penn
-		QuadRect bbox = new QuadRect(-75, 42, -71, 39); // zoom = 8 newyork
+//		QuadRect bbox = new QuadRect(-75, 42, -71, 39); // zoom = 8 newyork
 		if (testOldPoiSearch) {
 			long nt = System.nanoTime();
 			SpatialPoiType type = poiSearch.getByKey(cat); // ice_rink, cafe

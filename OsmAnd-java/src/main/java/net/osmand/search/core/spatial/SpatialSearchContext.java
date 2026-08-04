@@ -569,7 +569,7 @@ public class SpatialSearchContext {
 						a.getPoiIndInBlock(0));
 				MapObject amenity = null;
 //				amenity = readPoiObject(lid, null);
-				if (settings.SEARCH_POI_BY_CATEGORY_ONLY && skipFilteredZoomObject(t, a)) {
+				if (settings.SEARCH_POI_BY_CATEGORY_ONLY && skipFilteredZoomObject(t, a.getX(), a.getY(), a.getEloRatingCount() > 0, false)) {
 					continue;
 				}
 				parseSuffixes(t, indx, suffixes, commonSuffixes, null, a, lid, 0, amenity, allTokens);
@@ -577,10 +577,8 @@ public class SpatialSearchContext {
 		}
 	}
 
-	private boolean skipFilteredZoomObject(SpatialSearchToken t, OsmAndPoiNameIndexDataAtom a) {
+	private boolean skipFilteredZoomObject(SpatialSearchToken t, int x16, int y16, boolean elo, boolean add) {
 		int[] bbox = settings.SEARCH_POI_BY_CATEGORY_BBOX;
-		int x16 = a.getX();
-		int y16 = a.getY();
 //		bbox31 = SearchAlgorithms.decodeBboxForNameAtomsBytes(a.getBbox(), x16, y16);
 		if (bbox != null) {
 			if (x16 < bbox[0] || x16 > bbox[2] || y16 < bbox[1] || y16 > bbox[3]) {
@@ -588,21 +586,15 @@ public class SpatialSearchContext {
 			}
 		}
 		int z = 16 - settings.SEARCH_POI_BY_CATEGORY_ZOOM;
-		return skipZoomTileDuplicate(t.cacheCategoryFilterObjects, x16, y16, z, a.getEloRatingCount() > 0);
-	}
-
-	static boolean skipZoomTileDuplicate(TLongHashSet tiles, int x16, int y16, int z, boolean hasRating) {
-		if (z < 0) {
-			return false;
-		}
 		long tileId = MapUtils.interleaveBits(x16 >> z, y16 >> z);
-		if (tiles.contains(tileId) && !hasRating) {
+		if (t.cacheCategoryFilterObjects.contains(tileId) && !elo) {
 			return true;
 		}
-		tiles.add(tileId);
+		if (add) {
+			t.cacheCategoryFilterObjects.add(tileId);
+		}
 		return false;
 	}
-	
 	
 	public void readPOIBboxes(int indInd, TLongHashSet tiles) throws IOException {
 		NameIndexReader nameIndex = null;
@@ -939,6 +931,9 @@ public class SpatialSearchContext {
 				nearByType, -1);
 		atom.poiTypes = poiTypes;
 		atom.elo = elo;
+		if (settings.SEARCH_POI_BY_CATEGORY_ONLY) {
+			skipFilteredZoomObject(t, atom.coords.x16, atom.coords.y16, atom.elo > 0, true);
+		}
 		// for all common always false, for some frequent could be optimization
 		if (settings.OPTIM_READ_COMMON_WITH_OTH_NON_FOUND_ATOMS && cmnWord[0]) {
 			// name 'ru de rue' could match 'rue' it's because of prefix & suffixes
