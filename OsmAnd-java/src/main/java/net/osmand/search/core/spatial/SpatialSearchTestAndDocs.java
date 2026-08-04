@@ -75,6 +75,7 @@ import net.osmand.util.SearchAlgorithms;
 // UNIT TESTING: '315 B Westside Avenue Elmira' ('315B' should be no interpolation, '315 B')
 // UNIT TESTING: REDO 2419 Avenue G Dickinson, TX USA 
 // UNIT TESTING: ( add to new york test) 8 ave 8?
+// UNIT TESTING: Japan_kanto_tokyo (see example below on neighborouds) - test on small osm.gz?
 // NO UNIT TESTING: '400 Susquehanna Boulevard Hazel Township' (MISSING Hazel Township)
 // NO UNIT TESTING: '330 Innovation Boulevard University Park' (partial result missing university park)
 
@@ -626,11 +627,17 @@ public class SpatialSearchTestAndDocs {
 //		query = "MakBy"; // 18 - 16 + 1 + 1 poi type
 //		query = "mcdonald's"; // 18 all synonym
 
-
 //		pattern ="usa_wilkes-barre.obf";
 //		pattern ="Us_penn";
 //		query = "226 Wilkes-Barre Township Boulevard Wilkes-Barre";
 //		query = "226 Wilkes-Barre Township Boulevard ";// 116894954
+		
+		
+//		pattern = "Japan_kanto_t";
+//		query = "錦糸三丁目 8-8"; //  155046029 18112 (35.6986 139.8146)]
+//		query = "錦糸三丁目 12"; //155046029 18112 (35.6992 139.8142)
+//		query = "墨田区 錦糸三丁目 8-8"; //  155046029 18112 (35.6986 139.8146)]
+//		query = "墨田区 錦糸三丁目 2";
 		
 		long t = System.nanoTime();
 
