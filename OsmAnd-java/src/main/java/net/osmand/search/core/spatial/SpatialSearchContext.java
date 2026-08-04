@@ -521,7 +521,7 @@ public class SpatialSearchContext {
 						a.getPoiIndInBlock(0));
 				MapObject amenity = null;
 //				amenity = readPoiObject(lid, null);
-				if (settings.SEARCH_POI_BY_CATEGORY_ONLY && skipFilteredZoomObject(t, a)) {
+				if (settings.SEARCH_POI_BY_CATEGORY_ONLY && skipFilteredZoomObject(t, indx, a)) {
 					continue;
 				}
 				parseSuffixes(t, indx, suffixes, commonSuffixes, null, a, lid, 0, amenity, allTokens);
@@ -529,7 +529,7 @@ public class SpatialSearchContext {
 		}
 	}
 
-	private boolean skipFilteredZoomObject(SpatialSearchToken t, OsmAndPoiNameIndexDataAtom a) {
+	private boolean skipFilteredZoomObject(SpatialSearchToken t, NameIndexReader indx, OsmAndPoiNameIndexDataAtom a) {
 		int[] bbox = settings.SEARCH_POI_BY_CATEGORY_BBOX;
 		int x16 = a.getX();
 		int y16 = a.getY();
@@ -539,8 +539,26 @@ public class SpatialSearchContext {
 				return true;
 			}
 		}
+		if (!atomMatchesTokenCategory(t, indx, a)) {
+			// atom of another category from the same prefix bucket: matchName will drop it later,
+			// so it must not claim a tile in the zoom dedup set
+			return false;
+		}
 		int z = 16 - settings.SEARCH_POI_BY_CATEGORY_ZOOM;
 		return skipZoomTileDuplicate(t.cacheCategoryFilterObjects, x16, y16, z, a.getEloRatingCount() > 0);
+	}
+
+	private boolean atomMatchesTokenCategory(SpatialSearchToken t, NameIndexReader indx, OsmAndPoiNameIndexDataAtom a) {
+		if (!t.categoryMatchMode) {
+			return true;
+		}
+		SpatialPoiType target = poiSearch.getByKey(t.word.substring(NameIndexReader.POI_CATEGORY_PREFIX.length()));
+		if (target == null) {
+			// cannot resolve searched category: keep old behavior
+			return true;
+		}
+		TIntArrayList poiTypes = parsePoiTypes(indx, a, null);
+		return poiTypes != null && poiTypes.contains(target.id);
 	}
 
 	static boolean skipZoomTileDuplicate(TLongHashSet tiles, int x16, int y16, int z, boolean hasRating) {
