@@ -93,8 +93,6 @@ import net.osmand.util.SearchAlgorithms;
 // REVIEW: Auto test New york, France, Italy (Slow?)
 
 // TODO Duplicate '10 Am Remsufer Remseck am Neckar', +'138 138 Scott Avenue Bellefonte', +'8 av 8'
-
-// TODO Extend POI tile bboxes 200m? internet_access (fuel_diesel)
 // TODO Analyze Performance bootlenecks VisualVM (Pipeline + Intersection)
 // TODO INDEX: Find POI Categories translations / synonyms via Common words - Стоматол., Dentist, Basilica 
 // TODO REVIEW: Abbrevations (synonyms / direction words) other languages?
@@ -105,6 +103,7 @@ import net.osmand.util.SearchAlgorithms;
 
 
 /////////////// EXTRA FEATURES ///////////////
+// TODO Extend POI tile bboxes 200m? internet_access (fuel_diesel)
 // TODO INDEX: highway=services (Not index)
 // TODO Sorting before load objects (use elo and other buildings?) and limit results
 // TODO Suggestion based on common suffixes
