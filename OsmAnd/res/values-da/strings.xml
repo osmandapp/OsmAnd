@@ -5382,4 +5382,17 @@
     <string name="always_keep_local_copy">Behold altid en lokal kopi</string>
     <string name="always_keep_local_copy_description">Medie forbliver tilknyttet, selvom originalen slettes fra galleriet eller filer.</string>
     <string name="release_5_4">• Ny rumlig søgning — find steder og søg i området omkring et sted\n\n • Opdateret søgebrugerflade: sortering, kategorifiltre, mere overskueligt design\n\n • Vedhæft billeder og mediefiler til Favoritter\n\n • Favoritter: understøttelse af undergrupper og mapper, der kan fastgøres\n\n • Koordinater: Søgning, kortgitter og visning af interessepunkter understøtter nu EPSG- og Maidenhead-koordinatsystemer\n\n • Afhjulpet problemer med navigationen; skift mellem standard- og hurtig ruteplanlægning\n\n • Indstil kortskalaen i Android Auto uafhængigt af din telefon\n\n • Astronomi: Sol- og måneformørkelser tilføjet</string>
+    <string name="share_favorites_media_preparation_failed">Det var ikke muligt at vedhæfte mediefiler. Deler kun punkter.</string>
+    <plurals name="files_count">
+        <item quantity="one">%d fil</item>
+        <item quantity="other">%d filer</item>
+    </plurals>
+    <string name="preparing_file">Forbereder fil</string>
+    <string name="shared_string_archive">Arkiv</string>
+    <string name="share_favorites_with_media_description">Favoritpunkter i %1$s har vedhæftede mediefiler. Del kun punkterne eller punkterne med mediefiler som et arkiv.</string>
+    <string name="share_favorites_points_only">Kun punkter</string>
+    <string name="share_favorites_points_and_media">Punkter og medier</string>
+    <string name="share_favorites_preparation_failed">Det var ikke muligt at forberede filerne til deling.</string>
+    <string name="share_favorites_share_failed">Det var ikke muligt at dele filen.</string>
+    <string name="share_favorites_missing_media_warning">Nogle af de vedhæftede mediefiler kunne ikke medtages.</string>
 </resources>
