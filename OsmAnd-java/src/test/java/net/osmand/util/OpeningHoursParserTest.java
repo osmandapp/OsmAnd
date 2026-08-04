@@ -915,6 +915,17 @@ public class OpeningHoursParserTest {
 		testInfo("06.10.2025 12:00", hours, "Open until 15:00");
 		testInfo("06.10.2025 16:00", hours, "Open until 20:00");
 
+		// overnight opening with an "off" window after midnight: the off start is 00:00
+		// in the next calendar day, so it must still shorten the closing time before midnight
+		hours = parseOpenedHours("Mo-Su 20:00-02:00; Mo-Su 00:00-01:00 off");
+		System.out.println(hours);
+		testOpened("06.10.2025 23:00", hours, true);
+		testInfo("06.10.2025 23:00", hours, "Will close at 00:00");
+		testOpened("07.10.2025 00:30", hours, false);
+		testInfo("07.10.2025 00:30", hours, "Will open at 01:00");
+		testOpened("07.10.2025 01:30", hours, true);
+		testInfo("07.10.2025 01:30", hours, "Will close at 02:00");
+
 		// whole-day "off" rules by year/day-month ranges must discard the opening time of that day (#21780)
 		hours = parseOpenedHours("Mo-Fr 09:00-20:00; Sa 09:00-18:00; 2025 Jan 07 - 2025 Feb 26 closed");
 		System.out.println(hours);
