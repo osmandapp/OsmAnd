@@ -516,49 +516,50 @@ public class OpeningHoursParser {
 			for (OpeningHoursRule r : rules) {
 				boolean appliesToDay = appliesToDay(r, cal);
 				boolean timeRestrictedOff = isTimeRestrictedOffRule(r);
-				boolean adjustsNextDayClosing = !opening && !appliesToDay && timeRestrictedOff && atTimeMinutes >= 0;
-				if (appliesToDay || adjustsNextDayClosing) {
-					if (appliesToDay && atTime.length() > 0 && prevRule != null && !r.hasOverlapTimes(cal, prevRule, true)) {
-						return atTime;
-					}
-					if (timeRestrictedOff && (opening || atTimeMinutes >= 0) && r instanceof BasicOpeningHourRule offRule) {
-						// Rules like "Jul-Aug 19:00-19:30 off" make only their own time ranges "off",
-						// so they adjust a time found by previous rules instead of discarding it
-						int currentTimeMinutes = cal.get(Calendar.HOUR_OF_DAY) * 60 + cal.get(Calendar.MINUTE);
-						if (opening) {
-							int offLimit = limit == CURRENT_DAY_TIME_LIMIT ? WITHOUT_TIME_LIMIT : limit;
-							int offTimeMinutes = offRule.getTimeMinutes(cal, false, offLimit, true);
-							boolean currentlyOff = offTimeMinutes != NO_TIME_MINUTES && offRule.containsTime(currentTimeMinutes)
-									&& prevRule instanceof BasicOpeningHourRule prevBasicRule
-									&& prevBasicRule.containsTime(offTimeMinutes);
-							if (offTimeMinutes != NO_TIME_MINUTES && ((atTimeMinutes >= 0 && offRule.containsTime(atTimeMinutes)) || currentlyOff)) {
-								// the opening time found before is turned off, it moves to the end of the "off" range
-								atTimeMinutes = offTimeMinutes;
-								atTime = offRule.formatResult(offTimeMinutes);
-							}
-						} else {
-							int offTimeAbsolute = getNextTimeRestrictedOffStart(cal, offRule, limit);
-							int atTimeAbsolute = atTimeMinutes < currentTimeMinutes ? atTimeMinutes + 24 * 60 : atTimeMinutes;
-							if (offTimeAbsolute != NO_TIME_MINUTES && offTimeAbsolute < atTimeAbsolute) {
-								// the "off" range starts before the closing time found before, so it closes earlier
-								atTimeMinutes = offTimeAbsolute % (24 * 60);
-								atTime = offRule.formatResult(atTimeMinutes);
-							}
+				boolean checkOffRule = timeRestrictedOff && (appliesToDay || (!opening && atTimeMinutes >= 0));
+				if (!appliesToDay && !checkOffRule) {
+					continue;
+				}
+				if (appliesToDay && atTime.length() > 0 && prevRule != null && !r.hasOverlapTimes(cal, prevRule, true)) {
+					return atTime;
+				}
+				if (checkOffRule && r instanceof BasicOpeningHourRule offRule) {
+					// Rules like "Jul-Aug 19:00-19:30 off" make only their own time ranges "off",
+					// so they adjust a time found by previous rules instead of discarding it
+					int currentTimeMinutes = cal.get(Calendar.HOUR_OF_DAY) * 60 + cal.get(Calendar.MINUTE);
+					if (opening) {
+						int offLimit = limit == CURRENT_DAY_TIME_LIMIT ? WITHOUT_TIME_LIMIT : limit;
+						int offTimeMinutes = offRule.getTimeMinutes(cal, false, offLimit, true);
+						boolean currentlyOff = offTimeMinutes != NO_TIME_MINUTES && offRule.containsTime(currentTimeMinutes)
+								&& prevRule instanceof BasicOpeningHourRule prevBasicRule
+								&& prevBasicRule.containsTime(offTimeMinutes);
+						if (offTimeMinutes != NO_TIME_MINUTES && ((atTimeMinutes >= 0 && offRule.containsTime(atTimeMinutes)) || currentlyOff)) {
+							// the opening time found before is turned off, it moves to the end of the "off" range
+							atTimeMinutes = offTimeMinutes;
+							atTime = offRule.formatResult(offTimeMinutes);
 						}
-					} else if (appliesToDay && r instanceof BasicOpeningHourRule basicRule) {
-						atTimeMinutes = basicRule.getTimeMinutes(cal, false, limit, opening);
-						int displayTimeMinutes = atTimeMinutes;
-						if (!opening && atTimeMinutes == NO_TIME_MINUTES && limit != WITHOUT_TIME_LIMIT) {
-							atTimeMinutes = basicRule.getTimeMinutes(cal, false, WITHOUT_TIME_LIMIT, false);
+					} else {
+						int offTimeAbsolute = getNextTimeRestrictedOffStart(cal, offRule, limit);
+						int atTimeAbsolute = atTimeMinutes < currentTimeMinutes ? atTimeMinutes + 24 * 60 : atTimeMinutes;
+						if (offTimeAbsolute != NO_TIME_MINUTES && offTimeAbsolute < atTimeAbsolute) {
+							// the "off" range starts before the closing time found before, so it closes earlier
+							atTimeMinutes = offTimeAbsolute % (24 * 60);
+							atTime = offRule.formatResult(atTimeMinutes);
 						}
-						atTime = basicRule.formatResult(displayTimeMinutes);
-					} else if (appliesToDay) {
-						atTime = r.getTime(cal, false, limit, opening);
-						atTimeMinutes = NO_TIME_MINUTES;
 					}
-					if (appliesToDay) {
-						prevRule = r;
+				} else if (appliesToDay && r instanceof BasicOpeningHourRule basicRule) {
+					atTimeMinutes = basicRule.getTimeMinutes(cal, false, limit, opening);
+					int displayTimeMinutes = atTimeMinutes;
+					if (!opening && atTimeMinutes == NO_TIME_MINUTES && limit != WITHOUT_TIME_LIMIT) {
+						atTimeMinutes = basicRule.getTimeMinutes(cal, false, WITHOUT_TIME_LIMIT, false);
 					}
+					atTime = basicRule.formatResult(displayTimeMinutes);
+				} else if (appliesToDay) {
+					atTime = r.getTime(cal, false, limit, opening);
+					atTimeMinutes = NO_TIME_MINUTES;
+				}
+				if (appliesToDay) {
+					prevRule = r;
 				}
 			}
 			return atTime;
@@ -567,7 +568,7 @@ public class OpeningHoursParser {
 		private int getNextTimeRestrictedOffStart(Calendar cal, BasicOpeningHourRule offRule, int limit) {
 			int currentTimeMinutes = cal.get(Calendar.HOUR_OF_DAY) * 60 + cal.get(Calendar.MINUTE);
 			int nextTime = NO_TIME_MINUTES;
-			Calendar ruleCal = cal;
+			Calendar ruleCal = (Calendar) cal.clone();
 			for (int dayOffset = 0; dayOffset <= 1; dayOffset++) {
 				if (appliesToDay(offRule, ruleCal)) {
 					for (int i = 0; i < offRule.timesSize(); i++) {
@@ -580,10 +581,7 @@ public class OpeningHoursParser {
 						}
 					}
 				}
-				if (dayOffset == 0) {
-					ruleCal = (Calendar) cal.clone();
-					ruleCal.add(Calendar.DAY_OF_MONTH, 1);
-				}
+				ruleCal.add(Calendar.DAY_OF_MONTH, 1);
 			}
 			return nextTime;
 		}
