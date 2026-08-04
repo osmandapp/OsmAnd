@@ -94,6 +94,7 @@ import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.*;
+import net.osmand.search.core.spatial.SpatialSearchResult;
 import net.osmand.search.core.SearchCoreFactory.SearchAmenityTypesAPI;
 import net.osmand.search.core.spatial.SpatialTextSearchAPI;
 import net.osmand.util.Algorithms;
@@ -2394,6 +2395,18 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		return resultCollection != null ? String.valueOf(resultCollection.getCurrentSearchResults().size()) : "empty";
 	}
 
+	public void completeSpatialCategorySearchResult(@NonNull SearchResult result) {
+		SearchSettings searchSettings = searchUICore.getPhrase().getSettings();
+		MapObject referenceObject = getSpatialCategoryReferenceObject(result);
+		LatLon location = referenceObject != null ? referenceObject.getLocation() : null;
+		if (location != null) {
+			searchSettings = searchSettings.setOriginalLocation(location);
+		}
+		searchSettings = searchSettings.setSearchBBox31(null);
+		searchUICore.updateSettings(searchSettings);
+		completeQueryWithObject(result);
+	}
+
 	public void completeQueryWithObject(@NonNull SearchResult result) {
 		if (result.object instanceof AbstractPoiType || result.object instanceof PoiUIFilter) {
 			resetFilterChipSession(result.object);
@@ -2429,6 +2442,12 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		if (result.objectType == ObjectType.CITY) {
 			openKeyboard();
 		}
+	}
+
+	@Nullable
+	private MapObject getSpatialCategoryReferenceObject(@NonNull SearchResult result) {
+		SpatialSearchResult spatialSearchResult = result.spatialResult;
+		return spatialSearchResult != null ? spatialSearchResult.getReferenceObject() : null;
 	}
 
 	private void openKeyboard() {

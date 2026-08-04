@@ -507,6 +507,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			SearchResultViewHolder.bindPOISearchResult(view, listItem, nightMode, calendar);
 			setupCheckBox(position, view, listItem);
 			updateCompass(view, listItem, updateLocationViewCache, useMapCenter);
+		} else if (listItem.isSpatialCategorySearchResult()) {
+			view = bindSpatialCategorySearchResultItem(position, convertView, listItem);
 		} else if (listItem.isDestinationHistoryItem()) {
 			view = getConvertView(convertView, R.layout.search_list_item_full);
 			SearchResultViewHolder.bindFullSearchResult(view, listItem);
@@ -523,6 +525,15 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			updateCompass(view, listItem, updateLocationViewCache, useMapCenter);
 			setupCheckBox(position, view, listItem);
 		}
+		return view;
+	}
+
+	private View bindSpatialCategorySearchResultItem(int position, @Nullable View convertView,
+	                                                 @NonNull QuickSearchListItem listItem) {
+		View view = getConvertView(convertView, R.layout.search_list_item);
+		SearchResultViewHolder.bindSpatialCategorySearchResult(view, listItem);
+		updateCompass(view, listItem, updateLocationViewCache, useMapCenter);
+		setupCheckBox(position, view, listItem);
 		return view;
 	}
 
@@ -706,8 +717,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 	public static void updateCompass(@NonNull View view, @NonNull QuickSearchListItem item,
 	                                 @NonNull UpdateLocationViewCache updateLocationViewCache, boolean useMapCenter) {
-		SearchResult searchResult = item.getSearchResult();
-		boolean hideCompassForSpatialCategoryItem = searchResult != null && searchResult.spatialResult != null && searchResult.spatialResult.isPoiCategory();
+		boolean hideCompassForSpatialCategoryItem = item.isSpatialCategorySearchResult();
 		boolean showCompass = item.getSearchResult().location != null && !hideCompassForSpatialCategoryItem;
 		if (showCompass) {
 			updateLocationView(view, item, updateLocationViewCache, useMapCenter);

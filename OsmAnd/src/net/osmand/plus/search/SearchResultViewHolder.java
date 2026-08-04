@@ -82,53 +82,49 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 		String name = item.getName();
 		title.setText(item.getSpannableName());
 
-		if (item.getSpatialSearchResult() == null || !item.getSpatialSearchResult().isPoiCategory()) {
-			String desc = item.getTypeName();
-			Object searchResultObject = item.getSearchResult().object;
-			if (searchResultObject instanceof AbstractPoiType) {
-				AbstractPoiType abstractPoiType = (AbstractPoiType) searchResultObject;
-				String[] synonyms = abstractPoiType.getSynonyms().split(";");
-				QuickSearchHelper searchHelper = app.getSearchUICore();
-				SearchUICore searchUICore = searchHelper.getCore();
-				String searchPhrase = searchUICore.getPhrase().getText(true);
-				StringMatcher matcher = new NameStringMatcher(searchPhrase, CHECK_STARTS_FROM_SPACE);
+		String desc = item.getTypeName();
+		Object searchResultObject = item.getSearchResult().object;
+		if (searchResultObject instanceof AbstractPoiType) {
+			AbstractPoiType abstractPoiType = (AbstractPoiType) searchResultObject;
+			String[] synonyms = abstractPoiType.getSynonyms().split(";");
+			QuickSearchHelper searchHelper = app.getSearchUICore();
+			SearchUICore searchUICore = searchHelper.getCore();
+			String searchPhrase = searchUICore.getPhrase().getText(true);
+			StringMatcher matcher = new NameStringMatcher(searchPhrase, CHECK_STARTS_FROM_SPACE);
 
-				if (!searchPhrase.isEmpty() && !matcher.matches(abstractPoiType.getTranslation())) {
-					if (matcher.matches(abstractPoiType.getEnTranslation())) {
-						desc = item.getTypeName() + " (" + abstractPoiType.getEnTranslation() + ")";
-					} else {
-						for (String syn : synonyms) {
-							if (matcher.matches(syn)) {
-								desc = item.getTypeName() + " (" + syn + ")";
-								break;
-							}
+			if (!searchPhrase.isEmpty() && !matcher.matches(abstractPoiType.getTranslation())) {
+				if (matcher.matches(abstractPoiType.getEnTranslation())) {
+					desc = item.getTypeName() + " (" + abstractPoiType.getEnTranslation() + ")";
+				} else {
+					for (String syn : synonyms) {
+						if (matcher.matches(syn)) {
+							desc = item.getTypeName() + " (" + syn + ")";
+							break;
 						}
 					}
 				}
 			}
+		}
 
-			boolean hasDesc = false;
-			if (subtitle != null) {
-				if (!Algorithms.isEmpty(desc) && !desc.equals(name)) {
-					subtitle.setText(desc);
-					subtitle.setVisibility(View.VISIBLE);
-					hasDesc = true;
-				} else {
-					subtitle.setVisibility(View.GONE);
-				}
+		boolean hasDesc = false;
+		if (subtitle != null) {
+			if (!Algorithms.isEmpty(desc) && !desc.equals(name)) {
+				subtitle.setText(desc);
+				subtitle.setVisibility(View.VISIBLE);
+				hasDesc = true;
+			} else {
+				subtitle.setVisibility(View.GONE);
 			}
-			Drawable typeIcon = item.getTypeIcon();
-			ImageView groupIcon = view.findViewById(R.id.type_name_icon);
-			if (groupIcon != null) {
-				if (typeIcon != null && hasDesc) {
-					groupIcon.setImageDrawable(typeIcon);
-					groupIcon.setVisibility(View.VISIBLE);
-				} else {
-					groupIcon.setVisibility(View.GONE);
-				}
+		}
+		Drawable typeIcon = item.getTypeIcon();
+		ImageView groupIcon = view.findViewById(R.id.type_name_icon);
+		if (groupIcon != null) {
+			if (typeIcon != null && hasDesc) {
+				groupIcon.setImageDrawable(typeIcon);
+				groupIcon.setVisibility(View.VISIBLE);
+			} else {
+				groupIcon.setVisibility(View.GONE);
 			}
-		} else {
-			bindSpatialCategoryPart(view, item, app, subtitle);
 		}
 
 		LinearLayout timeLayout = view.findViewById(R.id.time_layout);
@@ -157,6 +153,23 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 			} else {
 				timeLayout.setVisibility(View.GONE);
 			}
+		}
+	}
+
+	public static void bindSpatialCategorySearchResult(@NonNull View view, @NonNull QuickSearchListItem item) {
+		TextView title = view.findViewById(R.id.title);
+		TextView subtitle = view.findViewById(R.id.subtitle);
+		ImageView imageView = view.findViewById(R.id.imageView);
+
+		OsmandApplication app = (OsmandApplication) view.getContext().getApplicationContext();
+		imageView.setImageDrawable(item.getIcon());
+		setupIconContainer(view, imageView, app);
+		title.setText(item.getSpannableName());
+		bindSpatialCategoryPart(view, item, app, subtitle);
+
+		LinearLayout timeLayout = view.findViewById(R.id.time_layout);
+		if (timeLayout != null) {
+			timeLayout.setVisibility(View.GONE);
 		}
 	}
 

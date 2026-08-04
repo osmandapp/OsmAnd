@@ -763,7 +763,7 @@ public class SearchUICore {
 		final SearchPhrase searchPhrase = this.phrase.generateNewPhrase(text, resetSearchSettingsForNewRequest(searchSettings));
 		final SearchResultMatcher rm = new SearchResultMatcher(null, searchPhrase, requestNumber.get(), requestNumber, totalLimit);
 		searchInternal(searchPhrase, rm);
-		boolean skipResultSorting = shouldSkipResultSorting();
+		boolean skipResultSorting = shouldSkipResultSorting(searchPhrase);
 		SearchResultCollection resultCollection = new SearchResultCollection(searchPhrase, skipResultSorting);
 		if (rm.totalLimit != -1 && rm.count > rm.totalLimit) {
 			resultCollection.setUseLimit(true);
@@ -867,7 +867,7 @@ public class SearchUICore {
 					performanceStats.start();
 					searchInternal(phrase, rm);
 					if (!rm.isCancelled()) {
-						boolean skipResultSorting = shouldSkipResultSorting();
+						boolean skipResultSorting = shouldSkipResultSorting(phrase);
 						SearchResultCollection collection = new SearchResultCollection(phrase, skipResultSorting);
 						if (rm.totalLimit != -1 && rm.count > rm.totalLimit) {
 							collection.setUseLimit(true);
@@ -914,9 +914,12 @@ public class SearchUICore {
 		return false;
 	}
 
-	private boolean shouldSkipResultSorting() {
+	private boolean shouldSkipResultSorting(SearchPhrase phrase) {
 		boolean spatialSearch = false;
 		for (SearchCoreAPI api : apis) {
+			if (!api.isSearchAvailable(phrase) || api.getSearchPriority(phrase) == -1) {
+				continue;
+			}
 			if (api instanceof SpatialTextSearchAPI) {
 				spatialSearch = true;
 			} else if (isLegacyLocalMapSearchApi(api)) {

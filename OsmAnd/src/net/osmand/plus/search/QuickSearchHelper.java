@@ -55,7 +55,6 @@ import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreFactory;
-import net.osmand.search.core.SearchCoreFactory.SearchAmenityTypesAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchBaseAPI;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
@@ -140,7 +139,20 @@ public class QuickSearchHelper implements ResourceListener {
 		SearchCoreFactory.SearchAmenityByNameAPI amenitiesApi = new SearchCoreFactory.SearchAmenityByNameAPI();
 		core.registerAPI(new SearchCoreFactory.SearchLocationAndUrlAPI(amenitiesApi,
 				app.getSettings()::isInternetConnectionAvailable));
+		core.registerAPI(new SpatialCategoryAmenityByTypeAPI(app.getPoiTypes()));
 		core.registerAPI(new SpatialTextSearchAPI(app.getPoiTypes()));
+	}
+
+	private static class SpatialCategoryAmenityByTypeAPI extends SearchCoreFactory.SearchAmenityByTypeAPI {
+
+		public SpatialCategoryAmenityByTypeAPI(@NonNull MapPoiTypes types) {
+			super(types, null);
+		}
+
+		@Override
+		public int getSearchPriority(SearchPhrase p) {
+			return p.isLastWord(ObjectType.POI_TYPE) ? super.getSearchPriority(p) : -1;
+		}
 	}
 
 	private void registerNonMapSearchAPIs() {

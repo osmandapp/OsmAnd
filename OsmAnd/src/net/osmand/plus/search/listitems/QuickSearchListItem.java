@@ -89,6 +89,12 @@ public class QuickSearchListItem {
 		return null;
 	}
 
+	public boolean isSpatialCategorySearchResult() {
+		SpatialSearchResult spatialSearchResult = getSpatialSearchResult();
+		return spatialSearchResult != null && spatialSearchResult.isPoiCategory()
+				&& spatialSearchResult.getReferenceObject() != null;
+	}
+
 	public boolean isDestinationHistoryItem() {
 		return isDestinationHistory(searchResult);
 	}
