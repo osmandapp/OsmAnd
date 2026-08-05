@@ -41,30 +41,38 @@ open class DefaultPoiAdditionalRowBehaviour : IPoiAdditionalRowBehavior {
                 // (if this parameters was not predefined)
 
                 if (!builder.hasIcon()) { // if icon wasn't predefined
-                    var iconId = getIconId(context, poiType.iconKeyName)
+                    var resolvedIconName = poiType.iconKeyName
+                    var iconId = getIconId(context, resolvedIconName)
+                    var deepIconFound = false
                     if (iconId == 0) {
                         val category = poiType.osmTag.replace(":", "_")
                         if (category.isNotEmpty()) {
+                            resolvedIconName = category
                             iconId = getIconId(context, category)
                         }
                         val parentType = poiType.parentType
                         if (iconId == 0 && parentType is PoiType) {
+                            resolvedIconName = parentType.iconKeyName
                             iconId = getIconId(context, parentType.iconKeyName)
                             if (iconId == 0) {
                                 var iconName =
                                     parentType.osmTag + "_" + category + "_" + parentType.osmValue
-                                builder.setIcon(menuBuilder.getRowIcon(context, iconName))
-                                if (!builder.hasIcon()) {
+                                resolvedIconName = iconName
+                                deepIconFound = menuBuilder.getRowIcon(context, iconName) != null
+                                if (!deepIconFound) {
                                     iconName = parentType.osmTag + "_" + parentType.osmValue
-                                    builder.setIcon(menuBuilder.getRowIcon(context, iconName))
+                                    resolvedIconName = iconName
+                                    deepIconFound = menuBuilder.getRowIcon(context, iconName) != null
                                 }
                             }
                         }
                     }
                     builder.setIconId(iconId)
+                    builder.setIconName(resolvedIconName)
 
-                    if (!builder.hasIcon()) {
+                    if (iconId == 0 && !deepIconFound) {
                         builder.setIconId(R.drawable.ic_action_info_dark)
+                        builder.setIconName(null)
                     }
                 }
 

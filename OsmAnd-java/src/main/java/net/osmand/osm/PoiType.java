@@ -8,6 +8,7 @@ import java.util.Map;
 public class PoiType extends AbstractPoiType {
 
 	public static final int DEFAULT_ORDER = 90;
+	public static final int DEFAULT_GROUP_ORDER = 40;
 	public static final int DEFAULT_MIN_COUNT = 3;
 	public static final int DEFAULT_MAX_PER_MAP = 100;
 	

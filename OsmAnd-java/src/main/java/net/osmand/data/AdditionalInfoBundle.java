@@ -20,6 +20,7 @@ import net.osmand.shared.util.PoiAdditionalLangLookup;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -91,10 +92,10 @@ public class AdditionalInfoBundle {
 			if (!shouldDisplayKey(key) || isKeyToSkip(key)) {
 				continue;
 			}
-			if (!allowNoteTag && "note".equals(key)) {
+			Object value = entry.getValue();
+			if (!allowNoteTag && "note".equals(key) && value instanceof String) {
 				continue;
 			}
-			Object value = entry.getValue();
 			String strValue = value instanceof String str ? str : null;
 
 			ResolvedPoiType resolved = resolvePoiType(category, key, strValue);
@@ -118,6 +119,161 @@ public class AdditionalInfoBundle {
 			}
 		}
 		return result;
+	}
+
+	private static final String CUISINE_INFO_ID = COLLAPSABLE_PREFIX + Amenity.CUISINE;
+	private static final String DISH_INFO_ID = COLLAPSABLE_PREFIX + Amenity.DISH;
+
+	public List<AmenityRowData> getVisibleTags(boolean allowNoteTag) {
+		PoiCategory category = getCategory();
+		Map<String, Object> filteredInfo = getVisibleTagInfo(allowNoteTag);
+		List<AmenityRowData> rows = new ArrayList<>();
+		Map<String, List<PoiType>> collectedPoiTypes = new LinkedHashMap<>();
+		AmenityRowData cuisineRow = null;
+
+		for (Map.Entry<String, Object> entry : filteredInfo.entrySet()) {
+			String key = entry.getKey();
+			if (key.startsWith(COLLAPSABLE_PREFIX)) {
+				continue;
+			}
+			Object value = entry.getValue();
+			if (value instanceof String strValue) {
+				ResolvedPoiType resolved = resolvePoiType(category, key, strValue);
+				PoiType pType = resolved.pType;
+				PoiType poiType = resolved.poiType;
+				if (pType != null && !pType.isText() && !Algorithms.isEmpty(pType.getPoiAdditionalCategory())) {
+					continue;
+				}
+				if (pType != null) {
+					AmenityRowData row = new AmenityRowData.Builder(key).setValue(strValue).setOrder(pType.getOrder()).build();
+					if (Amenity.CUISINE.equals(key)) {
+						cuisineRow = row;
+					} else {
+						rows.add(row);
+					}
+				} else if (poiType != null) {
+					String categoryKey = poiType.getCategory().getKeyName();
+					if (!MapPoiTypes.OTHER_MAP_CATEGORY.equals(categoryKey)) {
+						collectedPoiTypes.computeIfAbsent(categoryKey, c -> new ArrayList<>()).add(poiType);
+					}
+				} else {
+					rows.add(new AmenityRowData.Builder(key).setValue(strValue).setOrder(PoiType.DEFAULT_ORDER).build());
+				}
+			} else if (value instanceof Map) {
+				AmenityRowData row = toLocalizedAmenityRowData(category, key, value);
+				if (row != null) {
+					rows.add(row);
+				}
+			}
+		}
+
+		if (cuisineRow != null && !containsAny(CUISINE_INFO_ID, DISH_INFO_ID)) {
+			rows.add(cuisineRow);
+		}
+
+		for (Map.Entry<String, Object> entry : filteredInfo.entrySet()) {
+			String key = entry.getKey();
+			if (!key.startsWith(COLLAPSABLE_PREFIX)) {
+				continue;
+			}
+			String rawValue = (String) entry.getValue();
+			if (Algorithms.isEmpty(rawValue)) {
+				continue;
+			}
+			List<PoiType> categoryTypes = new ArrayList<>();
+			for (String record : rawValue.split(Amenity.SEPARATOR)) {
+				AbstractPoiType type = poiTypes.getPoiAdditionalType(category, record);
+				if (type == null) {
+					type = poiTypes.getAnyPoiAdditionalTypeByKey(record);
+				}
+				if (type instanceof PoiType pt) {
+					categoryTypes.add(pt);
+				}
+			}
+			if (categoryTypes.isEmpty()) {
+				continue;
+			}
+			String poiAdditionalCategoryName = categoryTypes.get(0).getPoiAdditionalCategory();
+			// NB: intentionally comparing the collapsable_-prefixed key against bare Amenity.CUISINE/DISH,
+			// which never matches - reproduces a pre-existing bug from the pre-split code so this row
+			// stays byte-for-byte identical to the committed baseline (AmenityUIHelperSnapshotTest).
+			boolean cuisineOrDish = key.equals(Amenity.CUISINE) || key.equals(Amenity.DISH);
+			rows.add(new AmenityRowData.Builder(poiAdditionalCategoryName)
+					.setCollapsableRowType(AmenityRowData.CollapsableRowType.POI_TYPE_GROUP)
+					.setCollapsablePoiTypes(categoryTypes)
+					.setCollapsableCategory(category)
+					.setCollapsableExtraRow(cuisineOrDish ? cuisineRow : null)
+					.setPoiAdditional(true)
+					.setOrder(categoryTypes.get(0).getOrder())
+					.build());
+		}
+
+		for (List<PoiType> poiTypeList : collectedPoiTypes.values()) {
+			PoiCategory groupCategory = category;
+			for (PoiType pt : poiTypeList) {
+				groupCategory = pt.getCategory();
+			}
+			rows.add(new AmenityRowData.Builder(groupCategory.getKeyName())
+					.setCollapsableRowType(AmenityRowData.CollapsableRowType.POI_TYPE_GROUP)
+					.setCollapsablePoiTypes(poiTypeList)
+					.setCollapsableCategory(category)
+					.setPoiAdditional(false)
+					.setOrder(PoiType.DEFAULT_GROUP_ORDER)
+					.build());
+		}
+
+		return rows;
+	}
+
+	public Map<String, Object> getVisibleTagsAsMap(boolean allowNoteTag) {
+		Map<String, Object> result = new LinkedHashMap<>();
+		List<AmenityRowData> infoRows = getVisibleTags(allowNoteTag);
+		AmenityRowsBuilder.sortByOrderThenName(infoRows);
+		for (AmenityRowData row : infoRows) {
+			result.put(row.key, toMapValue(row));
+		}
+		return result;
+	}
+
+	private Object toMapValue(AmenityRowData row) {
+		if (row.collapsableRowType == AmenityRowData.CollapsableRowType.POI_TYPE_GROUP) {
+			StringBuilder sb = new StringBuilder();
+			for (PoiType pt : row.collapsablePoiTypes) {
+				if (!sb.isEmpty()) {
+					sb.append(Amenity.SEPARATOR);
+				}
+				sb.append(pt.getKeyName());
+			}
+			return sb.toString();
+		}
+		if (!Algorithms.isEmpty(row.collapsableRows)) {
+			Map<String, String> localizations = new LinkedHashMap<>();
+			for (AmenityRowData child : row.collapsableRows) {
+				localizations.put(child.key, child.value);
+			}
+			Map<String, Object> wrapper = new HashMap<>();
+			wrapper.put("localizations", localizations);
+			return wrapper;
+		}
+		return row.value;
+	}
+
+	@SuppressWarnings("unchecked")
+	private AmenityRowData toLocalizedAmenityRowData(PoiCategory category, String key, Object value) {
+		Object localizationsObj = ((Map<String, Object>) value).get("localizations");
+		if (!(localizationsObj instanceof Map)) {
+			return null;
+		}
+		List<AmenityRowData> children = new ArrayList<>();
+		for (Map.Entry<String, String> loc : ((Map<String, String>) localizationsObj).entrySet()) {
+			children.add(new AmenityRowData.Builder(loc.getKey()).setValue(loc.getValue()).build());
+		}
+		if (children.isEmpty()) {
+			return null;
+		}
+		PoiType pType = resolvePoiType(category, key, null).pType;
+		int order = pType != null ? pType.getOrder() : PoiType.DEFAULT_ORDER;
+		return new AmenityRowData.Builder(key).setCollapsableRows(children).setOrder(order).build();
 	}
 
 	private boolean isDefaultForCategory() {

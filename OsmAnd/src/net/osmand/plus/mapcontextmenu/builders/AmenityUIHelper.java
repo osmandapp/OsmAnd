@@ -1,18 +1,14 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_PHONE_ID;
 import static net.osmand.data.Amenity.*;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.ALT_NAMES_ROW_KEY;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.NAMES_ROW_KEY;
 import static net.osmand.plus.wikipedia.WikiAlgorithms.WIKI_DATA_BASE_URL;
 import static net.osmand.plus.wikipedia.WikiAlgorithms.WIKI_LINK;
-import static net.osmand.util.CollectionUtils.equalsToAny;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.text.TextUtils;
 import android.text.util.Linkify;
 import android.view.Gravity;
@@ -31,6 +27,8 @@ import androidx.core.util.PatternsCompat;
 import net.osmand.PlatformUtil;
 import net.osmand.data.AdditionalInfoBundle;
 import net.osmand.data.Amenity;
+import net.osmand.data.AmenityRowData;
+import net.osmand.data.AmenityRowsBuilder;
 import net.osmand.data.LatLon;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
@@ -67,8 +65,6 @@ public class AmenityUIHelper extends MenuBuilder {
 
 	public static final Log LOG = PlatformUtil.getLog(AmenityUIHelper.class);
 
-	private static final String CUISINE_INFO_ID = COLLAPSABLE_PREFIX + "cuisine";
-	private static final String DISH_INFO_ID = COLLAPSABLE_PREFIX + "dish";
 	public static final String US_MAPS_RECREATION_AREA = "us_maps_recreation_area";
 
 	private final AdditionalInfoBundle additionalInfo;
@@ -77,13 +73,8 @@ public class AmenityUIHelper extends MenuBuilder {
 	private Amenity wikiAmenity;
 	private MapPoiTypes poiTypes;
 	private PoiCategory poiCategory;
-	private PoiType poiType;
 	private String subtype;
-	private AmenityInfoRow cuisineRow = null;
-	private Map<String, List<PoiType>> poiAdditionalCategories = new HashMap<>();
-	private Map<String, List<PoiType>> collectedPoiTypes = new HashMap<>();
 	private boolean osmEditingEnabled = PluginsHelper.isActive(OsmEditingPlugin.class);
-	private boolean lastBuiltRowIsDescription = false;
 
 	public AmenityUIHelper(@NonNull MapActivity mapActivity, String preferredLang,
 			@NonNull AdditionalInfoBundle infoBundle) {
@@ -100,118 +91,128 @@ public class AmenityUIHelper extends MenuBuilder {
 	public void buildInternal(View view) {
 		initVariables();
 		Context context = view.getContext();
-		List<AmenityInfoRow> infoRows = new LinkedList<>();
-		List<AmenityInfoRow> descriptions = new LinkedList<>();
-		Map<String, Object> filteredInfo = additionalInfo.getVisibleTagInfo(osmEditingEnabled);
-		for (Entry<String, Object> entry : filteredInfo.entrySet()) {
-			String key = entry.getKey();
-			Object value = entry.getValue();
-			AmenityInfoRow infoRow = null;
-			if (value instanceof String strValue) {
-				infoRow = createPoiAdditionalInfoRow(context, key, strValue, null);
-			} else if (value != null) {
-				infoRow = createLocalizedAmenityInfoRow(context, key, value);
+		List<AmenityRowData> infoRows = new LinkedList<>();
+		List<AmenityRowData> descriptions = new LinkedList<>();
+
+		for (AmenityRowData baseRow : additionalInfo.getVisibleTags(osmEditingEnabled)) {
+			AmenityRowData amenityRow = buildRowData(context, baseRow);
+			if (amenityRow == null) {
+				continue;
 			}
-			if (infoRow != null) {
-				if (lastBuiltRowIsDescription) {
-					descriptions.add(infoRow);
-				} else if (Amenity.CUISINE.equals(key)) {
-					cuisineRow = infoRow;
-				} else if (poiType == null) {
-					infoRows.add(infoRow);
-				}
+			boolean isDescription = amenityRow.isText && amenityRow.iconId == R.drawable.ic_action_info_dark;
+			if (isDescription) {
+				descriptions.add(amenityRow);
+			} else {
+				infoRows.add(amenityRow);
 			}
 		}
 
-		if (cuisineRow != null && !additionalInfo.containsAny(CUISINE_INFO_ID, DISH_INFO_ID)) {
-			infoRows.add(cuisineRow);
+		AmenityRowsBuilder.sortByOrderThenName(infoRows);
+		for (AmenityRowData info : infoRows) {
+			buildAmenityRow(view, toAmenityInfoRow(context, info));
 		}
 
-		for (Entry<String, Object> e : filteredInfo.entrySet()) {
-			if (e.getKey().startsWith(COLLAPSABLE_PREFIX)) {
-				List<PoiType> categoryTypes = new ArrayList<>();
-
-				String rawValue = (String) e.getValue();
-				if (!Algorithms.isEmpty(rawValue)) {
-					StringBuilder builder = new StringBuilder();
-					List<String> records = new ArrayList<>(Arrays.asList(rawValue.split(Amenity.SEPARATOR)));
-					for (String record : records) {
-						AbstractPoiType type = poiTypes.getPoiAdditionalType(poiCategory, record);
-						if (type == null) {
-							type = poiTypes.getAnyPoiAdditionalTypeByKey(record);
-						}
-						if (type instanceof PoiType pt) {
-							categoryTypes.add(pt);
-							if (builder.length() > 0) {
-								builder.append(" • ");
-							}
-							builder.append(pt.getTranslation());
-						}
-					}
-					if (Algorithms.isEmpty(categoryTypes)) {
-						continue;
-					}
-					PoiType pType = categoryTypes.get(0);
-					String poiAdditionalCategoryName = pType.getPoiAdditionalCategory();
-					String poiAdditionalIconName = poiTypes.getPoiAdditionalCategoryIconName(poiAdditionalCategoryName);
-					Drawable icon = getRowIcon(view.getContext(), poiAdditionalIconName);
-					if (icon == null) {
-						icon = getRowIcon(view.getContext(), poiAdditionalCategoryName);
-					}
-					if (icon == null) {
-						icon = getRowIcon(view.getContext(), pType.getIconKeyName());
-					}
-					if (icon == null) {
-						icon = getRowIcon(R.drawable.ic_action_note_dark);
-					}
-					boolean cuisineOrDish = equalsToAny(e.getKey(), Amenity.CUISINE, Amenity.DISH);
-					CollapsableView collapsableView = getPoiTypeCollapsableView(view.getContext(), true,
-							categoryTypes, true, cuisineOrDish ? cuisineRow : null, poiCategory);
-					infoRows.add(new AmenityInfoRow.Builder(poiAdditionalCategoryName)
-							.setIcon(icon).setTextPrefix(pType.getPoiAdditionalCategoryTranslation())
-							.setText(builder.toString()).setCollapsableView(collapsableView)
-							.setOrder(pType.getOrder())
-							.setName(pType.getKeyName())
-							.setTextLinesLimit(1)
-							.build());
-				}
-			}
-		}
-
-		if (!collectedPoiTypes.isEmpty()) {
-			for (Map.Entry<String, List<PoiType>> e : collectedPoiTypes.entrySet()) {
-				List<PoiType> poiTypeList = e.getValue();
-				CollapsableView collapsableView = getPoiTypeCollapsableView(view.getContext(), true, poiTypeList, false, null, poiCategory);
-				PoiCategory poiCategory = this.poiCategory;
-				StringBuilder sb = new StringBuilder();
-				for (PoiType pt : poiTypeList) {
-					if (sb.length() > 0) {
-						sb.append(" • ");
-					}
-					sb.append(pt.getTranslation());
-					poiCategory = pt.getCategory();
-				}
-				Drawable icon = getRowIcon(view.getContext(), poiCategory.getIconKeyName());
-				infoRows.add(new AmenityInfoRow.Builder(poiCategory.getKeyName())
-						.setIcon(icon).setTextPrefix(poiCategory.getTranslation())
-						.setText(sb.toString()).setCollapsableView(collapsableView)
-						.setOrder(40).setName(poiCategory.getKeyName())
-						.setTextLinesLimit(1).build());
-			}
-		}
-
-		sortInfoRows(infoRows);
-		for (AmenityInfoRow info : infoRows) {
-			buildAmenityRow(view, info);
-		}
-
-		sortDescriptionRows(descriptions);
-		for (AmenityInfoRow info : descriptions) {
-			buildAmenityRow(view, info);
+		AmenityRowsBuilder.moveDescriptionInPreferredLangToFront(descriptions, getPreferredMapAppLang());
+		for (AmenityRowData info : descriptions) {
+			buildAmenityRow(view, toAmenityInfoRow(context, info));
 		}
 		if (PluginsHelper.getActivePlugin(OsmEditingPlugin.class) != null) {
 			buildWikiDataRow(view);
 		}
+	}
+
+	@Nullable
+	private AmenityRowData buildRowData(@NonNull Context context, @NonNull AmenityRowData baseRow) {
+		if (baseRow.collapsableRowType == AmenityRowData.CollapsableRowType.POI_TYPE_GROUP) {
+			return buildPoiTypeGroupRowData(context, baseRow);
+		}
+		if (!Algorithms.isEmpty(baseRow.collapsableRows)) {
+			return buildLocalizedRowData(context, baseRow);
+		}
+		return getRowDataBuilder(context, baseRow.key, baseRow.value).build();
+	}
+
+	@NonNull
+	private AmenityRowData buildPoiTypeGroupRowData(@NonNull Context context, @NonNull AmenityRowData baseRow) {
+		List<PoiType> categoryTypes = baseRow.collapsablePoiTypes;
+		PoiType firstType = categoryTypes.get(0);
+		AmenityRowData extraRow = baseRow.collapsableExtraRow != null
+				? getRowDataBuilder(context, baseRow.collapsableExtraRow.key, baseRow.collapsableExtraRow.value).build()
+				: null;
+		if (baseRow.poiAdditional) {
+			String poiAdditionalCategoryName = baseRow.key;
+			String poiAdditionalIconName = poiTypes.getPoiAdditionalCategoryIconName(poiAdditionalCategoryName);
+			String iconName = resolveExistingIconName(context,
+					poiAdditionalIconName, poiAdditionalCategoryName, firstType.getIconKeyName());
+			int iconId = iconName == null ? R.drawable.ic_action_note_dark : 0;
+			return AmenityRowsBuilder.buildPoiTypesGroupRow(poiAdditionalCategoryName,
+					firstType.getKeyName(), firstType.getPoiAdditionalCategoryTranslation(), categoryTypes,
+					firstType.getOrder(), iconId, iconName, extraRow, true, baseRow.collapsableCategory);
+		}
+		PoiCategory groupCategory = baseRow.collapsableCategory;
+		for (PoiType pt : categoryTypes) {
+			groupCategory = pt.getCategory();
+		}
+		return AmenityRowsBuilder.buildPoiTypesGroupRow(groupCategory.getKeyName(),
+				groupCategory.getKeyName(), groupCategory.getTranslation(), categoryTypes,
+				PoiType.DEFAULT_GROUP_ORDER, 0, groupCategory.getIconKeyName(), null, false, baseRow.collapsableCategory);
+	}
+
+	@Nullable
+	private AmenityRowData buildLocalizedRowData(@NonNull Context context, @NonNull AmenityRowData baseRow) {
+		Map<String, String> localizedAdditionalInfo = new LinkedHashMap<>();
+		for (AmenityRowData child : baseRow.collapsableRows) {
+			localizedAdditionalInfo.put(child.key, child.value);
+		}
+		Collection<String> availableLocales = collectAvailableLocalesFromTags(localizedAdditionalInfo.keySet());
+		Locale prefferedLocale = getPreferredLocale(availableLocales);
+		String headerKey = prefferedLocale != null ? baseRow.key + ":" + prefferedLocale.getLanguage() : baseRow.key;
+		String headerValue = localizedAdditionalInfo.get(headerKey);
+		if (headerValue == null) {
+			Entry<String, String> entry = localizedAdditionalInfo.entrySet().iterator().next();
+			headerKey = entry.getKey();
+			headerValue = entry.getValue();
+		}
+		if (isNoteKeyHiddenFromEditing(headerKey)) {
+			return null;
+		}
+
+		List<AmenityRowData> localizedRows = new ArrayList<>();
+		for (Entry<String, String> localizedEntry : localizedAdditionalInfo.entrySet()) {
+			String localizedKey = localizedEntry.getKey();
+			String localizedValue = localizedEntry.getValue();
+			if (!Objects.equals(headerKey, localizedKey) && !isNoteKeyHiddenFromEditing(localizedKey)) {
+				localizedRows.add(getRowDataBuilder(context, localizedKey, localizedValue).build());
+			}
+		}
+		AmenityRowsBuilder.sortByOrderThenName(localizedRows);
+
+		AmenityRowData.Builder headerBuilder = getRowDataBuilder(context, headerKey, headerValue);
+		if (headerBuilder.getCollapsableRowType() == AmenityRowData.CollapsableRowType.NONE) {
+			headerBuilder.setCollapsableRows(localizedRows);
+		}
+		return headerBuilder.build();
+	}
+
+	private boolean isNoteKeyHiddenFromEditing(@NonNull String key) {
+		return "note".equals(key) && !osmEditingEnabled;
+	}
+
+	@NonNull
+	private AmenityRowData.Builder getRowDataBuilder(@NonNull Context context, @NonNull String key, @NonNull String value) {
+		AdditionalInfoBundle.ResolvedPoiType resolved = additionalInfo.resolvePoiType(poiCategory, key, value);
+		AmenityRowData.Builder rowBuilder = new AmenityRowData.Builder(key).setValue(value);
+		PoiAdditionalUiRule poiAdditionalUiRule = PoiAdditionalUiRules.INSTANCE.findRule(key);
+		if (resolved.pType != null) {
+			poiAdditionalUiRule.fillRow(app, context, rowBuilder, this, resolved.pType, key, value, subtype);
+		} else {
+			PoiType fallbackType = new PoiType(poiTypes, poiCategory, null, key, poiCategory.getIconKeyName());
+			fallbackType.setText(true);
+			poiAdditionalUiRule.fillRow(app, context, rowBuilder, this, fallbackType, key, poiTypes.getPoiTranslation(value), subtype);
+		}
+		boolean isDescription = rowBuilder.isText() && rowBuilder.getIconId() == R.drawable.ic_action_info_dark;
+		rowBuilder.setMatchWidthDivider(!isDescription && rowBuilder.isWiki());
+		return rowBuilder;
 	}
 
 	@Override
@@ -243,115 +244,85 @@ public class AmenityUIHelper extends MenuBuilder {
 		poiCategory = additionalInfo.getCategory();
 		subtype = additionalInfo.get(SUBTYPE);
 		poiTypes = app.getPoiTypes();
-		cuisineRow = null;
-		poiAdditionalCategories = new HashMap<>();
-		collectedPoiTypes = new HashMap<>();
 		osmEditingEnabled = PluginsHelper.isActive(OsmEditingPlugin.class);
 	}
 
-	private void sortInfoRows(@NonNull List<AmenityInfoRow> infoRows) {
-		Collections.sort(infoRows, (row1, row2) -> {
-			if (row1.order < row2.order) {
-				return -1;
-			} else if (row1.order == row2.order) {
-				return row1.name.compareTo(row2.name);
-			} else {
-				return 1;
-			}
-		});
-	}
-
-	@Nullable
-	private AmenityInfoRow createLocalizedAmenityInfoRow(@NonNull Context context, @NonNull String key, @NonNull Object vl) {
-		Map<String, Object> map = (Map<String, Object>) vl;
-		Map<String, String> localizedAdditionalInfo = (Map<String, String>) map.get("localizations");
-		if (Algorithms.isEmpty(localizedAdditionalInfo)) {
-			return null;
+	@NonNull
+	private AmenityInfoRow toAmenityInfoRow(@NonNull Context context, @NonNull AmenityRowData data) {
+		AmenityInfoRow.Builder rowBuilder = new AmenityInfoRow.Builder(data.key)
+				.setIconId(data.iconId)
+				.setIconName(data.iconName)
+				.setTextPrefix(data.textPrefix)
+				.setText(data.text)
+				.setHiddenUrl(data.hiddenUrl)
+				.setCollapsableView(resolveCollapsableView(context, data))
+				.setTextColor(data.textColor)
+				.setIsWiki(data.isWiki)
+				.setIsText(data.isText)
+				.setNeedLinks(data.needLinks)
+				.setIsPhoneNumber(data.isPhoneNumber)
+				.setIsUrl(data.isUrl)
+				.setOrder(data.order)
+				.setName(data.name)
+				.setMatchWidthDivider(data.matchWidthDivider)
+				.setTextLinesLimit(data.textLinesLimit);
+		if (data.iconId == 0 && !Algorithms.isEmpty(data.iconName)) {
+			rowBuilder.setIcon(getRowIcon(context, data.iconName));
 		}
-		Collection<String> availableLocales = collectAvailableLocalesFromTags(localizedAdditionalInfo.keySet());
-		Locale prefferedLocale = getPreferredLocale(availableLocales);
-		String headerKey = prefferedLocale != null ? key + ":" + prefferedLocale.getLanguage() : key;
-		String headerValue = localizedAdditionalInfo.get(headerKey);
-		if (headerValue == null) {
-			Entry<String, String> entry = new ArrayList<>(localizedAdditionalInfo.entrySet()).get(0);
-			headerKey = entry.getKey();
-			headerValue = entry.getValue();
-		}
-
-		CollapsableView collapsableView = null;
-		if (!Algorithms.isEmpty(localizedAdditionalInfo)) {
-			List<AmenityInfoRow> infoRows = new ArrayList<>();
-			for (Entry<String, String> localizedEntry : localizedAdditionalInfo.entrySet()) {
-				String localizedKey = localizedEntry.getKey();
-				String localizedValue = localizedEntry.getValue();
-				if (localizedKey != null && localizedValue != null && !Objects.equals(headerKey, localizedKey)) {
-					AmenityInfoRow infoRow = createPoiAdditionalInfoRow(context, localizedKey, localizedValue, null);
-					if (infoRow != null) {
-						infoRows.add(infoRow);
-					}
-				}
-			}
-			if (infoRows.size() > 1) {
-				sortInfoRows(infoRows);
-			}
-			LinearLayout llv = buildCollapsableContentView(mapActivity, true, true);
-			for (AmenityInfoRow infoRow : infoRows) {
-				View container = createRowContainer(app, null);
-				buildDetailsRow(container, null, infoRow.text, infoRow.textPrefix, null, null, false, null);
-				llv.addView(container);
-			}
-			collapsableView = new CollapsableView(llv, this, true);
-		}
-		return createPoiAdditionalInfoRow(context, headerKey, headerValue, collapsableView);
-	}
-
-	@Nullable
-	private AmenityInfoRow createPoiAdditionalInfoRow(@NonNull Context context,
-	                                                  @NonNull String key, @NonNull String vl,
-	                                                  @Nullable CollapsableView collapsableView) {
-		if (additionalInfo.isKeyToSkip(key) || (key.equals("note") && !osmEditingEnabled))
-			return null;
-
-		AdditionalInfoBundle.ResolvedPoiType resolved = additionalInfo.resolvePoiType(poiCategory, key, vl);
-		PoiType pType = resolved.pType;
-		poiType = resolved.poiType;
-		if (pType != null && pType.isFilterOnly()) {
-			return null;
-		}
-
-		// filter poi additional categories on this step, they will be processed separately
-		if (pType != null && !pType.isText()) {
-			String categoryName = pType.getPoiAdditionalCategory();
-			if (!Algorithms.isEmpty(categoryName)) {
-				poiAdditionalCategories.computeIfAbsent(categoryName, k -> new ArrayList<>()).add(pType);
-				return null;
-			}
-		}
-
-		AmenityInfoRow.Builder rowBuilder = new AmenityInfoRow.Builder(key);
-		rowBuilder.setCollapsableView(collapsableView);
-
-		if (pType != null) {
-			PoiAdditionalUiRule poiAdditionalUiRule = PoiAdditionalUiRules.INSTANCE.findRule(key);
-			poiAdditionalUiRule.fillRow(app, context, rowBuilder, this, pType, key, vl, subtype);
-		} else if (poiType != null) {
-			String category = poiType.getCategory().getKeyName();
-			if (MapPoiTypes.OTHER_MAP_CATEGORY.equals(category)) {
-				return null; // the "Others" value is already displayed as a title
-			}
-			collectedPoiTypes.computeIfAbsent(category, s -> new ArrayList<>()).add(poiType);
-		} else if (showDefaultTags) {
-			pType = new PoiType(poiTypes, poiCategory, null, key, poiCategory.getIconKeyName());
-			pType.setText(true);
-			PoiAdditionalUiRule poiAdditionalUiRule = PoiAdditionalUiRules.INSTANCE.findRule(key);
-			poiAdditionalUiRule.fillRow(app, context, rowBuilder, this, pType, key, poiTypes.getPoiTranslation(vl), subtype);
-		} else {
-			return null; // skip non-translatable NON-poiType tags
-		}
-
-		lastBuiltRowIsDescription = rowBuilder.isDescription();
-		rowBuilder.setMatchWidthDivider(!rowBuilder.isDescription() && rowBuilder.isWiki());
 		return rowBuilder.build();
+	}
+
+	/**
+	 * The single place that turns a pure AmenityRowData.collapsableRowType tag back into
+	 * a real CollapsableView, since neither the widget nor its Android inputs
+	 * (Drawable, real click listeners) can live on AmenityRowData itself.
+	 */
+	@Nullable
+	private CollapsableView resolveCollapsableView(@NonNull Context context, @NonNull AmenityRowData data) {
+		switch (data.collapsableRowType) {
+			case PLAIN:
+				return buildCollapsableViewFromRows(context, data.collapsableRows);
+			case POI_TYPE_GROUP:
+				return getPoiTypeCollapsableView(context, true, data.collapsablePoiTypes,
+						data.poiAdditional, data.collapsableExtraRow, data.collapsableCategory);
+			case ELEVATION_PILLS: {
+				Set<String> texts = new LinkedHashSet<>();
+				for (AmenityRowData row : data.collapsableRows) {
+					texts.add(row.text);
+				}
+				return getDistanceCollapsableView(texts);
+			}
+			case OPENING_HOURS:
+				return getCollapsableTextView(app, true, data.collapsableRows.get(0).text);
+			case NONE:
+			default:
+				return null;
+		}
+	}
+
+	/**
+	 * Existence-only check (no Drawable kept) over candidate drawable names in
+	 * priority order - the icon itself is resolved lazily by name in {@link #toAmenityInfoRow}.
+	 */
+	@Nullable
+	private String resolveExistingIconName(@NonNull Context context, String... candidates) {
+		for (String candidate : candidates) {
+			if (!Algorithms.isEmpty(candidate) && getRowIcon(context, candidate) != null) {
+				return candidate;
+			}
+		}
+		return null;
+	}
+
+	@NonNull
+	private CollapsableView buildCollapsableViewFromRows(@NonNull Context context, @NonNull List<AmenityRowData> rows) {
+		LinearLayout llv = buildCollapsableContentView(mapActivity, true, true);
+		for (AmenityRowData row : rows) {
+			View container = createRowContainer(context, null);
+			buildDetailsRow(container, null, row.text, row.textPrefix, null, null, false, null);
+			llv.addView(container);
+		}
+		return new CollapsableView(llv, this, true);
 	}
 
 	public void buildNamesRow(ViewGroup viewGroup, Map<String, String> namesMap, boolean altName) {
@@ -397,21 +368,6 @@ public class AmenityUIHelper extends MenuBuilder {
 		return new CollapsableView(llv, this, true);
 	}
 
-	private void sortDescriptionRows(@NonNull List<AmenityInfoRow> descriptions) {
-		String langSuffix = ":" + getPreferredMapAppLang();
-		AmenityInfoRow descInPrefLang = null;
-		for (AmenityInfoRow desc : descriptions) {
-			if (desc.key.length() > langSuffix.length() && desc.key.endsWith(langSuffix)) {
-				descInPrefLang = desc;
-				break;
-			}
-		}
-		if (descInPrefLang != null) {
-			descriptions.remove(descInPrefLang);
-			descriptions.add(0, descInPrefLang);
-		}
-	}
-
 	@Nullable
 	public static String getSocialMediaUrl(String key, String value) {
 		// Remove leading and closing slashes
@@ -450,20 +406,20 @@ public class AmenityUIHelper extends MenuBuilder {
 		return null;
 	}
 
-	private void buildRow(View view, int iconId, String text, String textPrefix, String hiddenUrl,
-	                      boolean collapsable, CollapsableView collapsableView,
-	                      int textColor, boolean isWiki, boolean isText, boolean needLinks,
-	                      boolean isPhoneNumber, boolean isUrl, boolean matchWidthDivider, int textLinesLimit) {
-		buildRow(view, iconId == 0 ? null : getRowIcon(iconId), text, textPrefix, hiddenUrl,
+	private void resolveRow(View view, int iconId, String text, String textPrefix, String hiddenUrl,
+	                        boolean collapsable, CollapsableView collapsableView,
+	                        int textColor, boolean isWiki, boolean isText, boolean needLinks,
+	                        boolean isPhoneNumber, boolean isUrl, boolean matchWidthDivider, int textLinesLimit) {
+		resolveRow(view, iconId == 0 ? null : getRowIcon(iconId), text, textPrefix, hiddenUrl,
 				collapsable, collapsableView, textColor,
 				isWiki, isText, needLinks, isPhoneNumber, isUrl, matchWidthDivider, textLinesLimit);
 	}
 
-	protected void buildRow(View view, Drawable icon, String text, String textPrefix,
-	                        String hiddenUrl, boolean collapsable,
-	                        CollapsableView collapsableView, int textColor, boolean isWiki,
-	                        boolean isText, boolean needLinks, boolean isPhoneNumber, boolean isUrl,
-	                        boolean matchWidthDivider, int textLinesLimit) {
+	protected void resolveRow(View view, Drawable icon, String text, String textPrefix,
+	                          String hiddenUrl, boolean collapsable,
+	                          CollapsableView collapsableView, int textColor, boolean isWiki,
+	                          boolean isText, boolean needLinks, boolean isPhoneNumber, boolean isUrl,
+	                          boolean matchWidthDivider, int textLinesLimit) {
 		boolean light = isLightContent();
 
 		if (!isFirstRow()) {
@@ -642,12 +598,12 @@ public class AmenityUIHelper extends MenuBuilder {
 
 	public void buildAmenityRow(View view, AmenityInfoRow info) {
 		if (info.icon != null) {
-			buildRow(view, info.icon, info.text, info.textPrefix, info.hiddenUrl,
+			resolveRow(view, info.icon, info.text, info.textPrefix, info.hiddenUrl,
 					info.collapsable, info.collapsableView, info.textColor, info.isWiki, info.isText,
 					info.needLinks, info.isPhoneNumber,
 					info.isUrl, info.matchWidthDivider, info.textLinesLimit);
 		} else {
-			buildRow(view, info.iconId, info.text, info.textPrefix, info.hiddenUrl,
+			resolveRow(view, info.iconId, info.text, info.textPrefix, info.hiddenUrl,
 					info.collapsable, info.collapsableView, info.textColor, info.isWiki, info.isText,
 					info.needLinks, info.isPhoneNumber,
 					info.isUrl, info.matchWidthDivider, info.textLinesLimit);
@@ -656,7 +612,7 @@ public class AmenityUIHelper extends MenuBuilder {
 
 	private CollapsableView getPoiTypeCollapsableView(Context context, boolean collapsed,
 	                                                  @NonNull List<PoiType> categoryTypes,
-	                                                  boolean poiAdditional, AmenityInfoRow textRow, PoiCategory type) {
+	                                                  boolean poiAdditional, AmenityRowData textRow, PoiCategory type) {
 
 		List<TextViewEx> buttons = new ArrayList<>();
 
