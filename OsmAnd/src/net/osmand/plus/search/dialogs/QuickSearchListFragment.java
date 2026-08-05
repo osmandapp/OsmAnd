@@ -126,7 +126,9 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 					}
 				} else if (item.getType() == QuickSearchListItemType.SEARCH_RESULT) {
 					SearchResult sr = item.getSearchResult();
-					if (sr.objectType == POI
+					if (item.isSpatialCategorySearchResult()) {
+						onSpatialCategorySearchResultClick(sr);
+					} else if (sr.objectType == POI
 							|| sr.objectType == LOCATION
 							|| sr.objectType == HOUSE
 							|| sr.objectType == FAVORITE
@@ -148,6 +150,11 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 				}
 			}
 		}
+	}
+
+	private void onSpatialCategorySearchResultClick(@NonNull SearchResult searchResult) {
+		dialogFragment.completeSpatialCategorySearchResult(searchResult);
+		dialogFragment.onSearchResultSelected();
 	}
 
 	@Override

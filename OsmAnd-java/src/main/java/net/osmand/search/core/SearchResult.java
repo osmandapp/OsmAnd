@@ -19,6 +19,7 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
+import net.osmand.search.core.spatial.SpatialSearchResult;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.SearchAlgorithms;
@@ -48,12 +49,13 @@ public class SearchResult {
 	Collection<String> otherWordsMatch = null;
 
 	public Object object;
-	public List<MapObject> matchedObjects;
+	public SpatialSearchResult spatialResult;
 	public ObjectType objectType;
 	public BinaryMapIndexReader file;
 
 	public double priority;
 	public double priorityDistance;
+	public int spatialSearchVisibleLevel;
 
 	public LatLon location;
 	public int preferredZoom = PREFERRED_DEFAULT_ZOOM;
