@@ -5255,4 +5255,18 @@
     <string name="always_keep_local_copy">Toujours conserver une copie locale</string>
     <string name="always_keep_local_copy_description">L’élément média est conservé même dans le cas où l\'original est supprimé de la galerie ou des fichiers.</string>
     <string name="release_5_4">• Nouvelle recherche spatiale : trouvez des lieux et effectuez des recherches autour d\'un lieu\n\n • Interface de recherche repensée : tri, filtres par catégorie, présentation plus épurée\n\n • Ajoutez des photos et des fichiers multimédias à vos Favoris\n\n • Favoris : prise en charge des sous-groupes et des dossiers épinglables\n\n • Coordonnées : la recherche, la grille cartographique et l’affichage des points d’intérêt prennent désormais en charge les systèmes de localisation EPSG et Maidenhead\n\n • Correction des interruptions de navigation ; basculez entre les itinéraires « Standard » et « Rapide »\n\n • Définissez l’échelle de la carte Android Auto indépendamment de celle de votre téléphone\n\n • Ajout des éclipses solaires et lunaires dans la section « Astronomie »</string>
+    <string name="share_favorites_media_preparation_failed">Impossible d\'inclure les fichiers joints. Partage des points uniquement.</string>
+    <plurals name="files_count">
+        <item quantity="one">%d fichier</item>
+        <item quantity="many">%d fichiers</item>
+        <item quantity="other">%d fichiers</item>
+    </plurals>
+    <string name="preparing_file">Préparation du fichier</string>
+    <string name="shared_string_archive">Archive</string>
+    <string name="share_favorites_with_media_description">Les points favoris de %1$s contiennent des fichiers multimédias. Partagez uniquement les points ou les points accompagnés de fichiers multimédias sous forme d\'archive.</string>
+    <string name="share_favorites_points_only">Points uniquement</string>
+    <string name="share_favorites_points_and_media">Points et médias</string>
+    <string name="share_favorites_preparation_failed">Impossible de préparer les fichiers pour le partage.</string>
+    <string name="share_favorites_share_failed">Impossible de partager le fichier.</string>
+    <string name="share_favorites_missing_media_warning">Certains fichiers joints n\'ont pas pu être inclus.</string>
 </resources>
