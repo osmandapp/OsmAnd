@@ -30,7 +30,6 @@ import net.osmand.search.core.SearchPhrase.SearchPhraseDataType;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.TopIndexFilter;
 import net.osmand.search.core.spatial.SpatialSearchResult.SpatialSearchResultRef;
-import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialSearchResults;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSettings;
 import net.osmand.util.Algorithms;
@@ -214,44 +213,171 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		return false;
 	}
 
-	private SearchResult convertResult(SearchPhrase phrase, SpatialSearchContext context,
-	                                   SpatialSearchResult spatialResult) {
-		MapObject mainObject = spatialResult.getMainObject();
+	private SearchResult convertResult(SearchPhrase phrase, SpatialSearchContext context, SpatialSearchResult ssr) {
+		SearchResult result = new SearchResult(phrase);
 
-		SearchResult result = mainObject != null
-				? convertMapObject(phrase, spatialResult, mainObject)
-				: convertPoiType(phrase, spatialResult, context);
-		if (result == null) {
+		LatLon spatialLocation = ssr.getLatLon();
+		LatLon phraseLocation = phrase.getSettings().getOriginalLocation();
+		LatLon location = spatialLocation != null ? spatialLocation : phraseLocation; // nullable
+
+		String lang = phrase.getSettings().getLang();
+		boolean transliterate = phrase.getSettings().isTransliterate();
+
+		if (convertSpatialSearchResult(ssr, result, context.poiSearch, location, lang, transliterate) == null) {
 			return null;
 		}
-		result.spatialSearchVisibleLevel = spatialResult.visibleLevel();
-		result.spatialResult = spatialResult;
-		if (spatialResult.getLatLon() != null) {
-			result.location = spatialResult.getLatLon();
+
+		phrase.countUnknownWordsMatchMainResult(result);
+		return result;
+
+//		MapObject mainObject = spatialResult.getMainObject();
+//		SearchResult result = mainObject != null
+//				? convertMapObject(phrase, spatialResult, mainObject)
+//				: convertPoiType(phrase, spatialResult, context);
+
+//		if (result == null) {
+//			return null;
+//		}
+//		result.spatialSearchVisibleLevel = spatialResult.visibleLevel();
+//		result.spatialResult = spatialResult;
+
+//		if (spatialResult.getLatLon() != null) {
+//			result.location = spatialResult.getLatLon();
+//		}
+//		if (!Algorithms.isEmpty(spatialResult.getExtraNameMatch())) {
+//			result.alternateName = spatialResult.getExtraNameMatch();
+//		}
+
+//		return result;
+	}
+
+	public SearchResult convertSpatialSearchResult(SpatialSearchResult ssr, SearchResult result,
+	                                               SpatialPoiSearch poiTypeSearch, LatLon location,
+	                                               String lang, boolean transliterate) {
+		List<MapObject> objs = ssr.getObjects();
+
+		result.spatialResult = ssr;
+		result.location = location; // nullable
+		result.spatialSearchVisibleLevel = ssr.visibleLevel();
+
+		if (ssr.isPoiCategory()) {
+			return convertPoiType(ssr, result, poiTypeSearch);
+		} else if (!ssr.getObjects().isEmpty()) {
+			return convertMapObjects(ssr, objs, result, lang, transliterate);
 		}
-		if (!Algorithms.isEmpty(spatialResult.getExtraNameMatch())) {
-			result.alternateName = spatialResult.getExtraNameMatch();
+
+		return null;
+	}
+
+	private SearchResult convertMapObjects(SpatialSearchResult ssr, List<MapObject> mapObjects,
+	                                       SearchResult result, String lang, boolean transliterate) {
+		MapObject obj = ssr.getMainObject();
+		String extraNameMatch = ssr.getExtraNameMatch();
+
+		if (obj instanceof Building b && b.isInterpolation() && Algorithms.isNotEmpty(extraNameMatch)) {
+			result.localeName = extraNameMatch; // interpolated house number
+		} else {
+			result.localeName = obj.getName(lang, transliterate);
+			result.otherNames = obj.getOtherNames(transliterate, result.localeName);
+			if (Algorithms.isNotEmpty(extraNameMatch)) {
+				result.localeName += " (" + extraNameMatch + ")"; // ref
+			}
 		}
+
+		if (obj instanceof Amenity amenity) {
+			result.objectType = ObjectType.POI;
+			result.cityName = amenity.getCityFromTagGroups(lang);
+		} else if (obj instanceof Street) {
+			result.objectType = countStreetRefs(ssr) > 1 ? ObjectType.STREET_INTERSECTION : ObjectType.STREET;
+			City city = SpatialTextSearchAPI.getSpatialCity(mapObjects);
+			if (city != null) {
+				result.relatedObject = city;
+				result.localeRelatedObjectName = city.getName(lang, transliterate);
+			}
+		} else if (obj instanceof Building) {
+			result.objectType = ObjectType.HOUSE;
+			Street street = SpatialTextSearchAPI.getSpatialStreet(mapObjects);
+			if (street != null) {
+				result.relatedObject = street;
+				result.localeRelatedObjectName = street.getName(lang, transliterate);
+			}
+			City city = SpatialTextSearchAPI.getSpatialCity(mapObjects);
+			if (city != null) {
+				SearchResult parent = new SearchResult(result.requiredSearchPhrase);
+				parent.relatedObject = city;
+				parent.localeRelatedObjectName = city.getName(lang, transliterate);
+				result.parentSearchResult = parent;
+			}
+		} else if (obj instanceof City city) {
+			CityType type = city.getType();
+			if (type == CityType.CITY || type == CityType.TOWN) {
+				result.objectType = ObjectType.CITY;
+			} else if (type == CityType.POSTCODE) {
+				result.objectType = ObjectType.POSTCODE;
+			} else if (type == CityType.BOUNDARY) {
+				result.objectType = ObjectType.BOUNDARY;
+			} else {
+				result.objectType = ObjectType.VILLAGE;
+			}
+		} else {
+			result.objectType = ObjectType.LOCATION;
+		}
+
+		result.object = obj;
+		result.priorityDistance = 1;
+		result.priority = SEARCH_PRIORITY;
+		result.preferredZoom = getPreferredZoom(result.objectType);
+
 		return result;
 	}
 
-	private SearchResult convertMapObject(SearchPhrase phrase,
-	                                      SpatialSearchResult spatialResult, MapObject mainObject) {
-		SearchResult result = new SearchResult(phrase);
-		result.object = mainObject;
-		result.objectType = getObjectType(null, mainObject, spatialResult); // TODO fixme atom is always null
-		result.location = mainObject.getLocation();
-		result.localeName = getLocaleName(mainObject, phrase);
-		result.otherNames = mainObject.getOtherNames(true, result.localeName);
-		result.priority = SEARCH_PRIORITY;
-		result.priorityDistance = 1;
-		result.preferredZoom = getPreferredZoom(result.objectType);
-//		fillRelatedObject(result, null, phrase);
-		if (mainObject instanceof Amenity amenity) {
-			result.cityName = amenity.getCityFromTagGroups(phrase.getSettings().getLang());
+//	private SearchResult convertMapObject(SearchPhrase phrase,
+//	                                      SpatialSearchResult spatialResult, MapObject mainObject) {
+//		SearchResult result = new SearchResult(phrase);
+//		convertSpatialSearchResult(spatialResult, result);
+
+//		result.object = mainObject;
+//		result.priorityDistance = 1;
+//		result.priority = SEARCH_PRIORITY;
+//
+//		result.objectType = getObjectType(null, mainObject, spatialResult);
+//		result.preferredZoom = getPreferredZoom(result.objectType);
+//
+//		result.location = mainObject.getLocation();
+//
+//		result.localeName = getLocaleName(mainObject, phrase);
+//		result.otherNames = mainObject.getOtherNames(true, result.localeName);
+//
+	////		fillRelatedObject(result, null, phrase);
+//
+//		if (mainObject instanceof Amenity amenity) {
+//			result.cityName = amenity.getCityFromTagGroups(phrase.getSettings().getLang());
+//		}
+//
+//		phrase.countUnknownWordsMatchMainResult(result);
+//
+//		return result;
+//	}
+
+	private static Street getSpatialStreet(List<MapObject> objs) {
+		for (MapObject obj : objs) {
+			if (obj instanceof Street street) {
+				return street;
+			}
 		}
-		phrase.countUnknownWordsMatchMainResult(result);
-		return result;
+		return null;
+	}
+
+	private static City getSpatialCity(List<MapObject> objs) {
+		for (MapObject obj : objs) {
+			if (obj instanceof City city) {
+				return city;
+			}
+			if (obj instanceof Street street && street.getCity() != null) {
+				return street.getCity();
+			}
+		}
+		return null;
 	}
 
 //	private SpatialSearchResultRef getRef(SpatialSearchResult spatialResult, MapObject object) {
@@ -263,9 +389,8 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 //		return null;
 //	}
 
-	private SearchResult convertPoiType(SearchPhrase phrase, SpatialSearchResult spatialResult, SpatialSearchContext context) {
-		SpatialPoiSearch.SpatialPoiType spatialPoiType = spatialResult.getPoiCategory(context.poiSearch);
-
+	private SearchResult convertPoiType(SpatialSearchResult ssr, SearchResult result, SpatialPoiSearch poiTypeSearch) {
+		SpatialPoiSearch.SpatialPoiType spatialPoiType = ssr.getPoiCategory(poiTypeSearch);
 		if (spatialPoiType == null) {
 			return null;
 		}
@@ -281,14 +406,12 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		} else {
 			return null;
 		}
-		SearchResult result = new SearchResult(phrase);
 		result.object = object;
 		result.objectType = ObjectType.POI_TYPE;
 		result.localeName = localeName;
 		result.priority = SEARCH_PRIORITY;
 		result.priorityDistance = 0;
 		result.preferredZoom = PREFERRED_POI_ZOOM;
-		phrase.countUnknownWordsMatchMainResult(result);
 		return result;
 	}
 
@@ -298,39 +421,38 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 //		return translate.equalsIgnoreCase(key) ? value : translate;
 //	}
 
-	// TODO refactor and remove atom from parameters
-	private ObjectType getObjectType(NameIndexAtom atom, MapObject object, SpatialSearchResult spatialResult) {
-		if ((atom != null && atom.isBuilding()) || object instanceof Building) {
-			return ObjectType.HOUSE;
-		}
-		if ((atom != null && atom.isPOI()) || object instanceof Amenity) {
-			return ObjectType.POI;
-		}
-		if (object instanceof Street) {
-			return countStreetRefs(spatialResult) > 1 ? ObjectType.STREET_INTERSECTION : ObjectType.STREET;
-		}
-		if (object instanceof City city) {
-			CityType type = city.getType();
-			if (type == CityType.CITY || type == CityType.TOWN) {
-				return ObjectType.CITY;
-			} else if (type == CityType.POSTCODE) {
-				return ObjectType.POSTCODE;
-			} else if (type == CityType.BOUNDARY) {
-				return ObjectType.BOUNDARY;
-			}
-			return ObjectType.VILLAGE;
-		}
-		if (atom != null && atom.isPostcode()) {
-			return ObjectType.POSTCODE;
-		}
-		if (atom != null && atom.isBoundary()) {
-			return ObjectType.BOUNDARY;
-		}
-		if (atom != null && atom.isStreet()) {
-			return ObjectType.STREET;
-		}
-		return ObjectType.POI;
-	}
+//	private ObjectType getObjectType(NameIndexAtom atom, MapObject object, SpatialSearchResult spatialResult) {
+//		if ((atom != null && atom.isBuilding()) || object instanceof Building) {
+//			return ObjectType.HOUSE;
+//		}
+//		if ((atom != null && atom.isPOI()) || object instanceof Amenity) {
+//			return ObjectType.POI;
+//		}
+//		if (object instanceof Street) {
+//			return countStreetRefs(spatialResult) > 1 ? ObjectType.STREET_INTERSECTION : ObjectType.STREET;
+//		}
+//		if (object instanceof City city) {
+//			CityType type = city.getType();
+//			if (type == CityType.CITY || type == CityType.TOWN) {
+//				return ObjectType.CITY;
+//			} else if (type == CityType.POSTCODE) {
+//				return ObjectType.POSTCODE;
+//			} else if (type == CityType.BOUNDARY) {
+//				return ObjectType.BOUNDARY;
+//			}
+//			return ObjectType.VILLAGE;
+//		}
+//		if (atom != null && atom.isPostcode()) {
+//			return ObjectType.POSTCODE;
+//		}
+//		if (atom != null && atom.isBoundary()) {
+//			return ObjectType.BOUNDARY;
+//		}
+//		if (atom != null && atom.isStreet()) {
+//			return ObjectType.STREET;
+//		}
+//		return ObjectType.POI;
+//	}
 
 	private int countStreetRefs(SpatialSearchResult spatialResult) {
 		int count = 0;
@@ -342,9 +464,9 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 		return count;
 	}
 
-	private String getLocaleName(MapObject object, SearchPhrase phrase) {
-		return object.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
-	}
+//	private String getLocaleName(MapObject object, SearchPhrase phrase) {
+//		return object.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
+//	}
 
 //	private BinaryMapIndexReader getFile(SpatialSearchContext context, NameIndexAtom atom) {
 //		if (atom == null) {
