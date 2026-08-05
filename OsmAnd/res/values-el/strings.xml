@@ -5151,4 +5151,17 @@
     <string name="required_maps_get_accurate_list_online">Λάβετε μια πιο ακριβή λίστα από το διαδίκτυο</string>
     <string name="required_maps_calculate_with_existing_maps">Υπολογίσετε με τους υπάρχοντες χάρτες</string>
     <string name="required_maps_route_overview_desc">Αυτή η λίστα χαρτών είναι μια εκτίμηση βάσει μιας ευθείας γραμμής. Εάν πιστεύετε ότι η πραγματική διαδρομή σας παρακάμπτει τις ελλιπείς περιοχές, μπορείτε να:</string>
+    <string name="share_favorites_media_preparation_failed">Δεν ήταν δυνατή η συμπερίληψη των συνημμένων πολυμέσων. Κοινοποίηση σημείων μόνο.</string>
+    <plurals name="files_count">
+        <item quantity="one">%d αρχείο</item>
+        <item quantity="other">%d αρχεία</item>
+    </plurals>
+    <string name="preparing_file">Προετοιμασία αρχείου</string>
+    <string name="shared_string_archive">Αρχείο</string>
+    <string name="share_favorites_with_media_description">Αγαπημένα σημεία στο %1$s έχουν συνημμένα πολυμέσα. Κοινοποιήστε σημεία μόνο, ή σημεία με πολυμέσα ως αρχείο.</string>
+    <string name="share_favorites_points_only">Σημεία μόνο</string>
+    <string name="share_favorites_points_and_media">Σημεία και πολυμέσα</string>
+    <string name="share_favorites_preparation_failed">Δεν ήταν δυνατή η προετοιμασία των αρχείων για κοινοποίηση.</string>
+    <string name="share_favorites_share_failed">Δεν ήταν δυνατή η κοινοποίηση του αρχείου.</string>
+    <string name="share_favorites_missing_media_warning">Δεν ήταν δυνατή η συμπερίληψη μερικών συνημμένων πολυμέσων.</string>
 </resources>
