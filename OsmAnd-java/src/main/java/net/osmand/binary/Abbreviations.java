@@ -98,6 +98,10 @@ public class Abbreviations {
 		searchAbbreviations.put("first", "1st");
 		searchAbbreviations.put("second", "2nd");
 		searchAbbreviations.put("third", "3rd");
+		searchAbbreviations.put("fourth", "4th");
+		searchAbbreviations.put("fifth", "5th");
+		searchAbbreviations.put("sixth", "6th");
+		searchAbbreviations.put("seventh", "7th");
 	}
 
 	// common housenumber additions
