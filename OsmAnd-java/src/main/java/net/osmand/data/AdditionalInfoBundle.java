@@ -203,39 +203,6 @@ public class AdditionalInfoBundle {
 		return rows;
 	}
 
-	public Map<String, Object> getVisibleTagsAsMap(boolean allowNoteTag) {
-		Map<String, Object> result = new LinkedHashMap<>();
-		List<AmenityRowData> infoRows = getVisibleTags(allowNoteTag);
-		AmenityRowsBuilder.sortInfoRows(infoRows);
-		for (AmenityRowData row : infoRows) {
-			result.put(row.key, toMapValue(row));
-		}
-		return result;
-	}
-
-	private Object toMapValue(AmenityRowData row) {
-		if (row.collapsableRowType == AmenityRowData.CollapsableRowType.POI_TYPE_GROUP) {
-			StringBuilder sb = new StringBuilder();
-			for (PoiType pt : row.collapsablePoiTypes) {
-				if (!sb.isEmpty()) {
-					sb.append(Amenity.SEPARATOR);
-				}
-				sb.append(pt.getKeyName());
-			}
-			return sb.toString();
-		}
-		if (!Algorithms.isEmpty(row.collapsableRows)) {
-			Map<String, String> localizations = new LinkedHashMap<>();
-			for (AmenityRowData child : row.collapsableRows) {
-				localizations.put(child.key, child.value);
-			}
-			Map<String, Object> wrapper = new HashMap<>();
-			wrapper.put("localizations", localizations);
-			return wrapper;
-		}
-		return row.value;
-	}
-
 	@SuppressWarnings("unchecked")
 	private AmenityRowData toLocalizedAmenityRowData(String key, Map<String, Object> value, PoiType pType) {
 		Object localizationsObj = value.get("localizations");
