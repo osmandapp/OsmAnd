@@ -107,12 +107,12 @@ public class AmenityUIHelper extends MenuBuilder {
 			}
 		}
 
-		AmenityRowsBuilder.sortByOrderThenName(infoRows);
+		AmenityRowsBuilder.sortInfoRows(infoRows);
 		for (AmenityRowData info : infoRows) {
 			buildAmenityRow(view, toAmenityInfoRow(context, info));
 		}
 
-		AmenityRowsBuilder.moveDescriptionInPreferredLangToFront(descriptions, getPreferredMapAppLang());
+		AmenityRowsBuilder.sortDescriptionRows(descriptions, getPreferredMapAppLang());
 		for (AmenityRowData info : descriptions) {
 			buildAmenityRow(view, toAmenityInfoRow(context, info));
 		}
@@ -185,7 +185,7 @@ public class AmenityUIHelper extends MenuBuilder {
 				localizedRows.add(getRowDataBuilder(context, localizedKey, localizedValue).build());
 			}
 		}
-		AmenityRowsBuilder.sortByOrderThenName(localizedRows);
+		AmenityRowsBuilder.sortInfoRows(localizedRows);
 
 		AmenityRowData.Builder headerBuilder = getRowDataBuilder(context, headerKey, headerValue);
 		if (headerBuilder.getCollapsableRowType() == AmenityRowData.CollapsableRowType.NONE) {
@@ -272,11 +272,6 @@ public class AmenityUIHelper extends MenuBuilder {
 		return rowBuilder.build();
 	}
 
-	/**
-	 * The single place that turns a pure AmenityRowData.collapsableRowType tag back into
-	 * a real CollapsableView, since neither the widget nor its Android inputs
-	 * (Drawable, real click listeners) can live on AmenityRowData itself.
-	 */
 	@Nullable
 	private CollapsableView resolveCollapsableView(@NonNull Context context, @NonNull AmenityRowData data) {
 		switch (data.collapsableRowType) {
@@ -300,10 +295,6 @@ public class AmenityUIHelper extends MenuBuilder {
 		}
 	}
 
-	/**
-	 * Existence-only check (no Drawable kept) over candidate drawable names in
-	 * priority order - the icon itself is resolved lazily by name in {@link #toAmenityInfoRow}.
-	 */
 	@Nullable
 	private String resolveExistingIconName(@NonNull Context context, String... candidates) {
 		for (String candidate : candidates) {
@@ -406,20 +397,20 @@ public class AmenityUIHelper extends MenuBuilder {
 		return null;
 	}
 
-	private void resolveRow(View view, int iconId, String text, String textPrefix, String hiddenUrl,
-	                        boolean collapsable, CollapsableView collapsableView,
-	                        int textColor, boolean isWiki, boolean isText, boolean needLinks,
-	                        boolean isPhoneNumber, boolean isUrl, boolean matchWidthDivider, int textLinesLimit) {
-		resolveRow(view, iconId == 0 ? null : getRowIcon(iconId), text, textPrefix, hiddenUrl,
+	private void buildRow(View view, int iconId, String text, String textPrefix, String hiddenUrl,
+	                      boolean collapsable, CollapsableView collapsableView,
+	                      int textColor, boolean isWiki, boolean isText, boolean needLinks,
+	                      boolean isPhoneNumber, boolean isUrl, boolean matchWidthDivider, int textLinesLimit) {
+		buildRow(view, iconId == 0 ? null : getRowIcon(iconId), text, textPrefix, hiddenUrl,
 				collapsable, collapsableView, textColor,
 				isWiki, isText, needLinks, isPhoneNumber, isUrl, matchWidthDivider, textLinesLimit);
 	}
 
-	protected void resolveRow(View view, Drawable icon, String text, String textPrefix,
-	                          String hiddenUrl, boolean collapsable,
-	                          CollapsableView collapsableView, int textColor, boolean isWiki,
-	                          boolean isText, boolean needLinks, boolean isPhoneNumber, boolean isUrl,
-	                          boolean matchWidthDivider, int textLinesLimit) {
+	protected void buildRow(View view, Drawable icon, String text, String textPrefix,
+	                        String hiddenUrl, boolean collapsable,
+	                        CollapsableView collapsableView, int textColor, boolean isWiki,
+	                        boolean isText, boolean needLinks, boolean isPhoneNumber, boolean isUrl,
+	                        boolean matchWidthDivider, int textLinesLimit) {
 		boolean light = isLightContent();
 
 		if (!isFirstRow()) {
@@ -598,12 +589,12 @@ public class AmenityUIHelper extends MenuBuilder {
 
 	public void buildAmenityRow(View view, AmenityInfoRow info) {
 		if (info.icon != null) {
-			resolveRow(view, info.icon, info.text, info.textPrefix, info.hiddenUrl,
+			buildRow(view, info.icon, info.text, info.textPrefix, info.hiddenUrl,
 					info.collapsable, info.collapsableView, info.textColor, info.isWiki, info.isText,
 					info.needLinks, info.isPhoneNumber,
 					info.isUrl, info.matchWidthDivider, info.textLinesLimit);
 		} else {
-			resolveRow(view, info.iconId, info.text, info.textPrefix, info.hiddenUrl,
+			buildRow(view, info.iconId, info.text, info.textPrefix, info.hiddenUrl,
 					info.collapsable, info.collapsableView, info.textColor, info.isWiki, info.isText,
 					info.needLinks, info.isPhoneNumber,
 					info.isUrl, info.matchWidthDivider, info.textLinesLimit);

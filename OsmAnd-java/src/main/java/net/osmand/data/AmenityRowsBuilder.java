@@ -41,7 +41,7 @@ public class AmenityRowsBuilder {
 				.build();
 	}
 
-	public static void sortByOrderThenName(List<AmenityRowData> rows) {
+	public static void sortInfoRows(List<AmenityRowData> rows) {
 		Collections.sort(rows, (row1, row2) -> {
 			if (row1.order != row2.order) {
 				return Integer.compare(row1.order, row2.order);
@@ -50,7 +50,7 @@ public class AmenityRowsBuilder {
 		});
 	}
 
-	public static void moveDescriptionInPreferredLangToFront(List<AmenityRowData> descriptions, String preferredLang) {
+	public static void sortDescriptionRows(List<AmenityRowData> descriptions, String preferredLang) {
 		if (Algorithms.isEmpty(preferredLang)) {
 			return;
 		}

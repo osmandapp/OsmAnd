@@ -83,10 +83,16 @@ public class AdditionalInfoBundle {
 		return localizedAdditionalInfo;
 	}
 
-	public Map<String, Object> getVisibleTagInfo(boolean allowNoteTag) {
+	private static final String CUISINE_INFO_ID = COLLAPSABLE_PREFIX + Amenity.CUISINE;
+	private static final String DISH_INFO_ID = COLLAPSABLE_PREFIX + Amenity.DISH;
+
+	public List<AmenityRowData> getVisibleTags(boolean allowNoteTag) {
 		boolean showDefaultTags = isDefaultForCategory();
 		PoiCategory category = getCategory();
-		Map<String, Object> result = new LinkedHashMap<>();
+		List<AmenityRowData> rows = new ArrayList<>();
+		Map<String, List<PoiType>> collectedPoiTypes = new LinkedHashMap<>();
+		AmenityRowData cuisineRow = null;
+
 		for (Map.Entry<String, Object> entry : getFilteredLocalizedInfo().entrySet()) {
 			String key = entry.getKey();
 			if (!shouldDisplayKey(key) || isKeyToSkip(key)) {
@@ -99,48 +105,16 @@ public class AdditionalInfoBundle {
 			String strValue = value instanceof String str ? str : null;
 
 			ResolvedPoiType resolved = resolvePoiType(category, key, strValue);
-			if (resolved.pType != null && resolved.pType.isFilterOnly()) {
+			PoiType pType = resolved.pType;
+			PoiType poiType = resolved.poiType;
+			if (pType != null && pType.isFilterOnly()) {
 				continue;
 			}
-			if (resolved.pType == null && resolved.poiType == null && !showDefaultTags) {
+			if (pType == null && poiType == null && !showDefaultTags) {
 				continue;
 			}
-			if (value instanceof Map) {
-				value = filterLocalizations((Map<String, Object>) value);
-				if (value == null) {
-					continue;
-				}
-			}
-			result.put(key, value);
-		}
-		for (Map.Entry<String, String> entry : getFilteredInfo().entrySet()) {
-			if (entry.getKey().startsWith(COLLAPSABLE_PREFIX)) {
-				result.put(entry.getKey(), entry.getValue());
-			}
-		}
-		return result;
-	}
 
-	private static final String CUISINE_INFO_ID = COLLAPSABLE_PREFIX + Amenity.CUISINE;
-	private static final String DISH_INFO_ID = COLLAPSABLE_PREFIX + Amenity.DISH;
-
-	public List<AmenityRowData> getVisibleTags(boolean allowNoteTag) {
-		PoiCategory category = getCategory();
-		Map<String, Object> filteredInfo = getVisibleTagInfo(allowNoteTag);
-		List<AmenityRowData> rows = new ArrayList<>();
-		Map<String, List<PoiType>> collectedPoiTypes = new LinkedHashMap<>();
-		AmenityRowData cuisineRow = null;
-
-		for (Map.Entry<String, Object> entry : filteredInfo.entrySet()) {
-			String key = entry.getKey();
-			if (key.startsWith(COLLAPSABLE_PREFIX)) {
-				continue;
-			}
-			Object value = entry.getValue();
-			if (value instanceof String strValue) {
-				ResolvedPoiType resolved = resolvePoiType(category, key, strValue);
-				PoiType pType = resolved.pType;
-				PoiType poiType = resolved.poiType;
+			if (strValue != null) {
 				if (pType != null && !pType.isText() && !Algorithms.isEmpty(pType.getPoiAdditionalCategory())) {
 					continue;
 				}
@@ -160,7 +134,11 @@ public class AdditionalInfoBundle {
 					rows.add(new AmenityRowData.Builder(key).setValue(strValue).setOrder(PoiType.DEFAULT_ORDER).build());
 				}
 			} else if (value instanceof Map) {
-				AmenityRowData row = toLocalizedAmenityRowData(category, key, value);
+				Object filtered = filterLocalizations((Map<String, Object>) value);
+				if (filtered == null) {
+					continue;
+				}
+				AmenityRowData row = toLocalizedAmenityRowData(key, (Map<String, Object>) filtered, pType);
 				if (row != null) {
 					rows.add(row);
 				}
@@ -171,12 +149,12 @@ public class AdditionalInfoBundle {
 			rows.add(cuisineRow);
 		}
 
-		for (Map.Entry<String, Object> entry : filteredInfo.entrySet()) {
+		for (Map.Entry<String, String> entry : getFilteredInfo().entrySet()) {
 			String key = entry.getKey();
 			if (!key.startsWith(COLLAPSABLE_PREFIX)) {
 				continue;
 			}
-			String rawValue = (String) entry.getValue();
+			String rawValue = entry.getValue();
 			if (Algorithms.isEmpty(rawValue)) {
 				continue;
 			}
@@ -228,7 +206,7 @@ public class AdditionalInfoBundle {
 	public Map<String, Object> getVisibleTagsAsMap(boolean allowNoteTag) {
 		Map<String, Object> result = new LinkedHashMap<>();
 		List<AmenityRowData> infoRows = getVisibleTags(allowNoteTag);
-		AmenityRowsBuilder.sortByOrderThenName(infoRows);
+		AmenityRowsBuilder.sortInfoRows(infoRows);
 		for (AmenityRowData row : infoRows) {
 			result.put(row.key, toMapValue(row));
 		}
@@ -259,8 +237,8 @@ public class AdditionalInfoBundle {
 	}
 
 	@SuppressWarnings("unchecked")
-	private AmenityRowData toLocalizedAmenityRowData(PoiCategory category, String key, Object value) {
-		Object localizationsObj = ((Map<String, Object>) value).get("localizations");
+	private AmenityRowData toLocalizedAmenityRowData(String key, Map<String, Object> value, PoiType pType) {
+		Object localizationsObj = value.get("localizations");
 		if (!(localizationsObj instanceof Map)) {
 			return null;
 		}
@@ -271,7 +249,6 @@ public class AdditionalInfoBundle {
 		if (children.isEmpty()) {
 			return null;
 		}
-		PoiType pType = resolvePoiType(category, key, null).pType;
 		int order = pType != null ? pType.getOrder() : PoiType.DEFAULT_ORDER;
 		return new AmenityRowData.Builder(key).setCollapsableRows(children).setOrder(order).build();
 	}
