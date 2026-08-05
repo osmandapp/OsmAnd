@@ -365,13 +365,18 @@ public class SpatialSearchTestAndDocs {
 		
  
 //		pattern = "Turkey_";
+		pattern = "turkey_sokak.obf";
 //		query = "Sokak 23018. Balikesir"; // OK
 //		query = "2301. Sokak"; // Test 23018., 23018 - Fixed NameIndexCreator - parsePureIntegerSuffix
 		// ALL - Search Stats 1569.2 ms - 554.0 ms 59,656 atoms (read 318.8, match 134.1), 985.8 ms compute 693,139 (loadBld 396.2, read 149.5)
         // NO INTER - Search Stats 871.5 ms - 546.4 ms 59,656 atoms (read 313.7, match 135.6), 299.9 ms compute 4,735 (loadBld 54.1, read 37.2)
 //		query = "Sokak 2";// 380657094 2.Sokak, 202159401
-//		location = new LatLon(40.7627, 29.8454);  
+//		location = new LatLon(40.7627, 29.8454);
+		location = new LatLon(39.112451, 27.191182);
+//		location = new LatLon(38.3839, 27.1882);
+		
 //		query = "2/1 21038 Sokak"; // 1380369156
+		query = "2/6. Sokak";
 		// "2.Sokak", "2 Sokak", "Sokak 2", "2. Sokak", "32/2 Sokak" + housenumber (?)
 		
 		
@@ -379,7 +384,7 @@ public class SpatialSearchTestAndDocs {
 		
 //		pattern = "Ukraine_kyiv";
 //		pattern = "Test_Ukraine_kyiv-city_europe_12.obf";
-		pattern = "Ukraine_";
+//		pattern = "Ukraine_";
 		
 		// poi types
 //		location = new LatLon(50.436423, 30.508097);
@@ -577,6 +582,7 @@ public class SpatialSearchTestAndDocs {
 //		pattern = "Ukraine_";
 //		location = new LatLon(50, 30);
 //		settings.DEDUPLICATE_RES = false;
+//		query = "Pizza позняки";
 //		query = "Кафе Antwerpen ";
 //		query = "Ресторан Antwerpen ";
 //		query = "Cafe Gulliver";
