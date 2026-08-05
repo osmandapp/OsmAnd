@@ -3,10 +3,13 @@
 	android:id="@+id/freeVersionBannerHeader"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:background="?attr/activity_background_color"
-	android:paddingTop="@dimen/content_padding_small"
-	android:paddingBottom="@dimen/content_padding_small">
+	android:background="?attr/activity_background_color">
 
-	<include layout="@layout/free_version_banner" />
+	<include
+		layout="@layout/free_version_banner"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/content_padding_small"
+		android:layout_marginBottom="@dimen/content_padding_small" />
 
 </FrameLayout>
