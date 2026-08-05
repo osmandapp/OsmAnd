@@ -123,6 +123,14 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private static final String QUICK_SEARCH_CURRENT_FILTER_ID_KEY = "quick_search_current_filter_id_key";
 	private static final String QUICK_SEARCH_CURRENT_CATEGORY_FILTER_PARAMS_KEY = "quick_search_current_category_filter_params_key";
 	private static final String QUICK_SEARCH_SELECTED_RESULT_POI_TYPE_NAMES_KEY = "quick_search_selected_result_poi_type_names_key";
+	private static final String QUICK_SEARCH_SPATIAL_SCOPE_NAME_KEY = "quick_search_spatial_scope_name_key";
+	private static final String QUICK_SEARCH_SPATIAL_SCOPE_LAT_KEY = "quick_search_spatial_scope_lat_key";
+	private static final String QUICK_SEARCH_SPATIAL_SCOPE_LON_KEY = "quick_search_spatial_scope_lon_key";
+	private static final String QUICK_SEARCH_SPATIAL_SCOPE_BBOX_LEFT_KEY = "quick_search_spatial_scope_bbox_left_key";
+	private static final String QUICK_SEARCH_SPATIAL_SCOPE_BBOX_TOP_KEY = "quick_search_spatial_scope_bbox_top_key";
+	private static final String QUICK_SEARCH_SPATIAL_SCOPE_BBOX_RIGHT_KEY = "quick_search_spatial_scope_bbox_right_key";
+	private static final String QUICK_SEARCH_SPATIAL_SCOPE_BBOX_BOTTOM_KEY = "quick_search_spatial_scope_bbox_bottom_key";
+	private static final String QUICK_SEARCH_USE_SPATIAL_SCOPE_KEY = "quick_search_use_spatial_scope_key";
 
 	private static final String QUICK_SEARCH_RUN_SEARCH_FIRST_TIME_KEY = "quick_search_run_search_first_time_key";
 	private static final String QUICK_SEARCH_PHRASE_DEFINED_KEY = "quick_search_phrase_defined_key";
@@ -179,8 +187,12 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 	private LatLon centerLatLon;
 	private net.osmand.Location location;
+	private LatLon spatialSearchLocation;
+	private QuadRect spatialSearchBBox31;
+	private String spatialSearchScopeName;
 	private Float heading;
 	private boolean useMapCenter;
+	private boolean useSpatialSearchLocation;
 	private boolean paused;
 	private boolean cancelPrev;
 	private boolean searching;
@@ -240,7 +252,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 	private enum SearchAroundOption {
 		MAP_CENTER(R.string.shared_string_map_center, R.drawable.ic_show_on_map_outlined),
-		MY_LOCATION(R.string.search_around_my_location, R.drawable.ic_action_location_marker_outlined);
+		MY_LOCATION(R.string.search_around_my_location, R.drawable.ic_action_location_marker_outlined),
+		SPATIAL_LOCATION(0, R.drawable.ic_show_on_map_outlined);
 
 		final int titleId;
 		final int iconId;
@@ -312,6 +325,22 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			if (selectedPoiTypeNames != null) {
 				selectedResultPoiTypeNames.addAll(selectedPoiTypeNames);
 			}
+			spatialSearchScopeName = savedInstanceState.getString(QUICK_SEARCH_SPATIAL_SCOPE_NAME_KEY);
+			double spatialLat = savedInstanceState.getDouble(QUICK_SEARCH_SPATIAL_SCOPE_LAT_KEY, Double.NaN);
+			double spatialLon = savedInstanceState.getDouble(QUICK_SEARCH_SPATIAL_SCOPE_LON_KEY, Double.NaN);
+			if (!Double.isNaN(spatialLat) && !Double.isNaN(spatialLon)) {
+				spatialSearchLocation = new LatLon(spatialLat, spatialLon);
+			}
+			double bboxLeft = savedInstanceState.getDouble(QUICK_SEARCH_SPATIAL_SCOPE_BBOX_LEFT_KEY, Double.NaN);
+			double bboxTop = savedInstanceState.getDouble(QUICK_SEARCH_SPATIAL_SCOPE_BBOX_TOP_KEY, Double.NaN);
+			double bboxRight = savedInstanceState.getDouble(QUICK_SEARCH_SPATIAL_SCOPE_BBOX_RIGHT_KEY, Double.NaN);
+			double bboxBottom = savedInstanceState.getDouble(QUICK_SEARCH_SPATIAL_SCOPE_BBOX_BOTTOM_KEY, Double.NaN);
+			if (!Double.isNaN(bboxLeft) && !Double.isNaN(bboxTop)
+					&& !Double.isNaN(bboxRight) && !Double.isNaN(bboxBottom)) {
+				spatialSearchBBox31 = new QuadRect(bboxLeft, bboxTop, bboxRight, bboxBottom);
+			}
+			useSpatialSearchLocation = savedInstanceState.getBoolean(QUICK_SEARCH_USE_SPATIAL_SCOPE_KEY, false)
+					&& spatialSearchLocation != null;
 		}
 		if (searchQuery == null && arguments != null) {
 			searchType = QuickSearchType.valueOf(arguments.getString(QUICK_SEARCH_TYPE_KEY, QuickSearchType.REGULAR.name()));
@@ -473,6 +502,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 					}
 				}
 				if (!searchQuery.equalsIgnoreCase(newQueryText)) {
+					resetSpatialSearchScope();
 					categorySearchByFilter = false;
 					currentSearchFilterId = null;
 					currentCategoryFilterParams = null;
@@ -499,7 +529,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		clearButton.setOnClickListener(v -> {
 			if (!searchEditText.getText().toString().isEmpty()) {
 				clearLastWord();
-			} else if (useMapCenter && location != null) {
+			} else if ((useMapCenter || useSpatialSearchLocation) && location != null) {
 				searchAroundMyLocation();
 			}
 			updateSendEmptySearchBottomBar(false);
@@ -558,7 +588,21 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			}
 
 			hide();
+			applySearchAroundMapPosition(activity);
 		}
+	}
+
+	private void applySearchAroundMapPosition(@NonNull MapActivity activity) {
+		if (useSpatialSearchLocation && spatialSearchLocation != null) {
+			moveMapTo(activity, spatialSearchLocation);
+		} else if (!useMapCenter && location != null) {
+			moveMapTo(activity, new LatLon(location.getLatitude(), location.getLongitude()));
+		}
+	}
+
+	private void moveMapTo(@NonNull MapActivity activity, @NonNull LatLon latLon) {
+		app.runInUIThread(()->{
+			activity.getMapView().setLatLon(latLon.getLatitude(), latLon.getLongitude(), true);});
 	}
 
 	@Override
@@ -588,6 +632,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 	private void onBackButtonPressed() {
 		if (tabBarHidden) {
+			resetSpatialSearchScope();
 			if (!addressSearchStack.isEmpty()) {
 				String newText = addressSearchStack.pop().getFullSearchPhrase();
 				searchEditText.setText(newText);
@@ -958,7 +1003,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 		SearchAroundOption searchAroundOption = getSelectedSearchAroundOption();
 		searchAroundChip.iconId = searchAroundOption.iconId;
-		searchAroundChip.title = getString(searchAroundOption.titleId);
+		searchAroundChip.title = getSearchAroundOptionTitle(searchAroundOption);
 		searchAroundChip.visible = searchVisible && isSearchAroundChipVisible();
 		searchAroundChip.dropdownItems = getSearchAroundOptions();
 
@@ -1152,6 +1197,13 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	private boolean isSearchAroundChipVisible() {
+		if (spatialSearchLocation != null) {
+			return true;
+		}
+		return isMapCenterSearchAroundAvailable();
+	}
+
+	private boolean isMapCenterSearchAroundAvailable() {
 		if (location == null) {
 			return false;
 		}
@@ -1164,7 +1216,20 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	private SearchAroundOption getSelectedSearchAroundOption() {
+		if (useSpatialSearchLocation && spatialSearchLocation != null) {
+			return SearchAroundOption.SPATIAL_LOCATION;
+		}
 		return useMapCenter ? SearchAroundOption.MAP_CENTER : SearchAroundOption.MY_LOCATION;
+	}
+
+	@NonNull
+	private String getSearchAroundOptionTitle(@NonNull SearchAroundOption option) {
+		if (option == SearchAroundOption.SPATIAL_LOCATION) {
+			return !Algorithms.isEmpty(spatialSearchScopeName)
+					? spatialSearchScopeName
+					: getString(R.string.shared_string_location);
+		}
+		return getString(option.titleId);
 	}
 
 	private void onDropdownItemClick(@NonNull String chipId, int itemId) {
@@ -1283,26 +1348,38 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private List<ChipsLayout.DropdownItem> getSearchAroundOptions() {
 		List<ChipsLayout.DropdownItem> options = new ArrayList<>();
 		SearchAroundOption selectedOption = getSelectedSearchAroundOption();
-		options.add(new ChipsLayout.DropdownItem(
-				SearchAroundOption.MAP_CENTER.ordinal(),
-				0,
-				getString(SearchAroundOption.MAP_CENTER.titleId),
-				getMapCenterDistanceDescription(),
-				selectedOption == SearchAroundOption.MAP_CENTER));
+		if (isMapCenterSearchAroundAvailable()) {
+			options.add(new ChipsLayout.DropdownItem(
+					SearchAroundOption.MAP_CENTER.ordinal(),
+					0,
+					getString(SearchAroundOption.MAP_CENTER.titleId),
+					getMapCenterDistanceDescription(),
+					selectedOption == SearchAroundOption.MAP_CENTER));
+		}
 		options.add(new ChipsLayout.DropdownItem(
 				SearchAroundOption.MY_LOCATION.ordinal(),
 				0,
 				getString(SearchAroundOption.MY_LOCATION.titleId),
 				getString(R.string.search_around_my_location_description),
 				selectedOption == SearchAroundOption.MY_LOCATION));
+		if (spatialSearchLocation != null) {
+			options.add(new ChipsLayout.DropdownItem(
+					SearchAroundOption.SPATIAL_LOCATION.ordinal(),
+					0,
+					getSearchAroundOptionTitle(SearchAroundOption.SPATIAL_LOCATION),
+					null,
+					selectedOption == SearchAroundOption.SPATIAL_LOCATION));
+		}
 		return options;
 	}
 
 	private void onSearchAroundOptionSelected(@NonNull SearchAroundOption option) {
 		if (option == SearchAroundOption.MAP_CENTER) {
 			searchAroundMapCenter();
-		} else {
+		} else if (option == SearchAroundOption.MY_LOCATION) {
 			searchAroundMyLocation();
+		} else {
+			searchAroundSpatialLocation();
 		}
 	}
 
@@ -1335,9 +1412,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			return;
 		}
 		useMapCenter = true;
-		SearchSettings ss = searchUICore.getSearchSettings().setOriginalLocation(
-				new LatLon(mapCenter.getLatitude(), mapCenter.getLongitude()));
-		searchUICore.updateSettings(ss);
+		useSpatialSearchLocation = false;
+		updateSearchAroundLocation(mapCenter);
 		updateUseMapCenterUI();
 		updateClearButtonAndHint();
 		updateClearButtonVisibility(true);
@@ -1350,17 +1426,45 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			return;
 		}
 		useMapCenter = false;
+		useSpatialSearchLocation = false;
 		centerLatLon = null;
 		updateUseMapCenterUI();
 		LatLon centerLatLon = new LatLon(location.getLatitude(), location.getLongitude());
-		SearchSettings ss = searchUICore.getSearchSettings().setOriginalLocation(
-				new LatLon(centerLatLon.getLatitude(), centerLatLon.getLongitude()));
-		searchUICore.updateSettings(ss);
+		updateSearchAroundLocation(centerLatLon);
 		updateClearButtonAndHint();
 		updateClearButtonVisibility(true);
 		startLocationUpdate();
 		updateToolbarButton();
 		rerunCurrentSearchQuery();
+	}
+
+	private void searchAroundSpatialLocation() {
+		if (spatialSearchLocation == null) {
+			return;
+		}
+		useMapCenter = false;
+		useSpatialSearchLocation = true;
+		centerLatLon = null;
+		updateUseMapCenterUI();
+		updateSearchAroundLocation(spatialSearchLocation);
+		updateClearButtonAndHint();
+		updateClearButtonVisibility(true);
+		updateToolbarButton();
+		rerunCurrentSearchQuery();
+	}
+
+	private void updateSearchAroundLocation(@NonNull LatLon location) {
+		LatLon searchLocation = new LatLon(location.getLatitude(), location.getLongitude());
+		SearchSettings searchSettings = searchUICore.getSearchSettings().setOriginalLocation(searchLocation);
+		searchSettings = searchSettings.setSearchBBox31(null);
+		searchUICore.updateSettings(searchSettings);
+		SearchPhrase phrase = searchUICore.getPhrase();
+		if (phrase != null && phrase.isLastWord(POI_TYPE)) {
+			SearchWord word = phrase.getLastSelectedWord();
+			if (word != null && word.getResult() != null) {
+				word.getResult().location = searchLocation;
+			}
+		}
 	}
 
 	private void rerunCurrentSearchQuery() {
@@ -1466,6 +1570,10 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			searchLatLon = centerLatLon;
 			useMapCenter = true;
 		}
+		if (useSpatialSearchLocation && spatialSearchLocation != null) {
+			searchLatLon = spatialSearchLocation;
+			useMapCenter = false;
+		}
 
 		String appLang = app.getLanguage();
 		String mapLang = settings.MAP_PREFERRED_LOCALE.get();
@@ -1524,6 +1632,20 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			outState.putDouble(QUICK_SEARCH_LAT_KEY, centerLatLon.getLatitude());
 			outState.putDouble(QUICK_SEARCH_LON_KEY, centerLatLon.getLongitude());
 		}
+		if (spatialSearchLocation != null) {
+			outState.putDouble(QUICK_SEARCH_SPATIAL_SCOPE_LAT_KEY, spatialSearchLocation.getLatitude());
+			outState.putDouble(QUICK_SEARCH_SPATIAL_SCOPE_LON_KEY, spatialSearchLocation.getLongitude());
+		}
+		if (spatialSearchBBox31 != null) {
+			outState.putDouble(QUICK_SEARCH_SPATIAL_SCOPE_BBOX_LEFT_KEY, spatialSearchBBox31.left);
+			outState.putDouble(QUICK_SEARCH_SPATIAL_SCOPE_BBOX_TOP_KEY, spatialSearchBBox31.top);
+			outState.putDouble(QUICK_SEARCH_SPATIAL_SCOPE_BBOX_RIGHT_KEY, spatialSearchBBox31.right);
+			outState.putDouble(QUICK_SEARCH_SPATIAL_SCOPE_BBOX_BOTTOM_KEY, spatialSearchBBox31.bottom);
+		}
+		if (spatialSearchScopeName != null) {
+			outState.putString(QUICK_SEARCH_SPATIAL_SCOPE_NAME_KEY, spatialSearchScopeName);
+		}
+		outState.putBoolean(QUICK_SEARCH_USE_SPATIAL_SCOPE_KEY, useSpatialSearchLocation);
 		outState.putBoolean(QUICK_SEARCH_FAB_VISIBLE_KEY, fabVisible);
 		super.onSaveInstanceState(outState);
 	}
@@ -1571,6 +1693,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 	private boolean processBackAction() {
 		if (addressSearch && isSearchViewVisible()) {
+			resetSpatialSearchScope();
 			searchEditText.setText("");
 			return true;
 		}
@@ -1613,7 +1736,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 	private void updateClearButtonAndHint() {
 		searchEditText.setEnabled(true);
-		if (useMapCenter && location != null && searchEditText.length() == 0) {
+		if ((useMapCenter || useSpatialSearchLocation) && location != null && searchEditText.length() == 0) {
 			LatLon latLon = searchUICore.getSearchSettings().getOriginalLocation();
 			double d = MapUtils.getDistance(latLon, location.getLatitude(), location.getLongitude());
 			String dist = OsmAndFormatter.getFormattedDistance((float) d, app);
@@ -1631,7 +1754,9 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 	private void updateClearButtonVisibility(boolean show) {
 		if (show) {
-			clearButton.setVisibility(searchEditText.length() > 0 || (useMapCenter && location != null) ? View.VISIBLE : View.GONE);
+			boolean visible = searchEditText.length() > 0
+					|| ((useMapCenter || useSpatialSearchLocation) && location != null);
+			clearButton.setVisibility(visible ? View.VISIBLE : View.GONE);
 		} else {
 			clearButton.setVisibility(View.GONE);
 		}
@@ -2396,10 +2521,18 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	public void completeSpatialCategorySearchResult(@NonNull SearchResult result) {
+		resetSpatialSearchScope();
 		SearchSettings searchSettings = searchUICore.getPhrase().getSettings();
 		MapObject referenceObject = getSpatialCategoryReferenceObject(result);
 		LatLon location = referenceObject != null ? referenceObject.getLocation() : null;
 		if (location != null) {
+			spatialSearchLocation = new LatLon(location.getLatitude(), location.getLongitude());
+			spatialSearchScopeName = referenceObject.getName();
+			spatialSearchBBox31 = getSpatialCategoryBBox31(referenceObject);
+			useSpatialSearchLocation = true;
+			useMapCenter = false;
+			centerLatLon = null;
+			result.location = spatialSearchLocation;
 			searchSettings = searchSettings.setOriginalLocation(location);
 		}
 		searchSettings = searchSettings.setSearchBBox31(null);
@@ -2448,6 +2581,52 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private MapObject getSpatialCategoryReferenceObject(@NonNull SearchResult result) {
 		SpatialSearchResult spatialSearchResult = result.spatialResult;
 		return spatialSearchResult != null ? spatialSearchResult.getReferenceObject() : null;
+	}
+
+	@Nullable
+	private QuadRect getSpatialCategoryBBox31(@NonNull MapObject referenceObject) {
+		int[] bbox31 = referenceObject.getBbox31();
+		if (bbox31 == null || bbox31.length < 4) {
+			return null;
+		}
+		return new QuadRect(bbox31[0], bbox31[1], bbox31[2], bbox31[3]);
+	}
+
+	private void resetSpatialSearchScope() {
+		boolean wasUsingSpatialSearchLocation = useSpatialSearchLocation;
+		spatialSearchLocation = null;
+		spatialSearchBBox31 = null;
+		spatialSearchScopeName = null;
+		useSpatialSearchLocation = false;
+		if (wasUsingSpatialSearchLocation) {
+			restoreDefaultSearchLocation();
+		}
+	}
+
+	private void restoreDefaultSearchLocation() {
+		if (searchUICore == null) {
+			return;
+		}
+		LatLon searchLatLon = null;
+		LatLon mapCenter = getCurrentMapCenter();
+		if (location != null) {
+			searchLatLon = new LatLon(location.getLatitude(), location.getLongitude());
+			useMapCenter = false;
+			if (mapCenter != null) {
+				double distance = MapUtils.getDistance(mapCenter, location.getLatitude(), location.getLongitude());
+				if (distance >= DISTANCE_THRESHOLD) {
+					searchLatLon = mapCenter;
+					useMapCenter = true;
+				}
+			}
+		} else if (mapCenter != null) {
+			searchLatLon = mapCenter;
+			useMapCenter = true;
+		}
+		if (searchLatLon != null) {
+			updateSearchAroundLocation(searchLatLon);
+		}
+		updateUseMapCenterUI();
 	}
 
 	private void openKeyboard() {
