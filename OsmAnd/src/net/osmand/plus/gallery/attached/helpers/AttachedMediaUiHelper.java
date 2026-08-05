@@ -25,6 +25,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -101,13 +102,13 @@ public class AttachedMediaUiHelper {
 		List<PopUpMenuItem> items = new ArrayList<>();
 		items.add(createAddMenuItem(R.string.recording_context_menu_precord,
 				R.drawable.ic_action_photo_dark, iconColor,
-				() -> takeNote(AVActionType.REC_PHOTO, latLon, target, false, onMediaChanged), false));
+				() -> takeNote(AVActionType.REC_PHOTO, target, false, onMediaChanged), false));
 		items.add(createAddMenuItem(R.string.recording_context_menu_vrecord,
 				R.drawable.ic_action_video_dark, iconColor,
-				() -> takeNote(AVActionType.REC_VIDEO, latLon, target, false, onMediaChanged), false));
+				() -> takeNote(AVActionType.REC_VIDEO, target, false, onMediaChanged), false));
 		items.add(createAddMenuItem(R.string.recording_context_menu_arecord,
 				R.drawable.ic_action_micro_dark, iconColor,
-				() -> takeNote(AVActionType.REC_AUDIO, latLon, target, showAudioRecordingInDialog, onMediaChanged), false));
+				() -> takeNote(AVActionType.REC_AUDIO, target, showAudioRecordingInDialog, onMediaChanged), false));
 		items.add(createAddMenuItem(R.string.choose_from_gallery,
 				R.drawable.ic_action_photo_album, iconColor,
 				() -> chooseFromGallery(target, latLon, onMediaChanged), true));
@@ -139,9 +140,8 @@ public class AttachedMediaUiHelper {
 		return target instanceof FavouritePoint || target instanceof WptPt;
 	}
 
-	private void takeNote(@NonNull AVActionType type, @NonNull LatLon latLon,
-	                      @NonNull Linkable target, boolean showAudioRecordingInDialog,
-	                      @Nullable Runnable onMediaChanged) {
+	private void takeNote(@NonNull AVActionType type, @NonNull Linkable target,
+	                      boolean showAudioRecordingInDialog, @Nullable Runnable onMediaChanged) {
 		AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
 		if (plugin != null && !plugin.isActive()) {
 			PluginsHelper.enablePluginIfNeeded(mapActivity, app, plugin, true);
@@ -150,14 +150,13 @@ public class AttachedMediaUiHelper {
 			if (plugin.isRecording()) {
 				plugin.stopRecording(mapActivity, true, true);
 			} else {
-				captureAttachedMedia(plugin, type, latLon, target, showAudioRecordingInDialog, onMediaChanged);
+				captureAttachedMedia(plugin, type, target, showAudioRecordingInDialog, onMediaChanged);
 			}
 		}
 	}
 
 	private void captureAttachedMedia(@NonNull AudioVideoNotesPlugin plugin, @NonNull AVActionType type,
-	                                  @NonNull LatLon latLon, @NonNull Linkable target,
-	                                  boolean showAudioRecordingInDialog, @Nullable Runnable onMediaChanged) {
+	                                  @NonNull Linkable target, boolean showAudioRecordingInDialog, @Nullable Runnable onMediaChanged) {
 		MediaDirType dirType = getMediaDirType(type);
 		String extension = getMediaExtension(type);
 		MediaStorageLocation storageLocation = MediaStorageLocation.fromSettings(app);
@@ -187,13 +186,17 @@ public class AttachedMediaUiHelper {
 			}
 			return true;
 		};
+		Location location = app.getLocationProvider().getLastKnownLocation();
+		double lat = location != null ? location.getLatitude() : Double.NaN;
+		double lon = location != null ? location.getLongitude() : Double.NaN;
+
 		switch (type) {
 			case REC_PHOTO ->
-					plugin.takeAttachedPhoto(latLon.getLatitude(), latLon.getLongitude(), mapActivity, captureFile, callback);
+					plugin.takeAttachedPhoto(lat, lon, mapActivity, captureFile, callback);
 			case REC_VIDEO ->
-					plugin.recordAttachedVideo(latLon.getLatitude(), latLon.getLongitude(), mapActivity, captureFile, callback);
+					plugin.recordAttachedVideo(lat, lon, mapActivity, captureFile, callback);
 			case REC_AUDIO ->
-					plugin.recordAttachedAudio(latLon.getLatitude(), latLon.getLongitude(), mapActivity, captureFile, showAudioRecordingInDialog, callback);
+					plugin.recordAttachedAudio(lat, lon, mapActivity, captureFile, showAudioRecordingInDialog, callback);
 		}
 	}
 
