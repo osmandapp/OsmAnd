@@ -586,6 +586,9 @@ public class SpatialSearchContext {
 			}
 		}
 		int z = 16 - settings.SEARCH_POI_BY_CATEGORY_ZOOM;
+		if (z < 0) {
+			return false;
+		}
 		long tileId = MapUtils.interleaveBits(x16 >> z, y16 >> z);
 		if (t.cacheCategoryFilterObjects.contains(tileId) && !elo) {
 			return true;

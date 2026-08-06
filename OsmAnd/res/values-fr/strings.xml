@@ -5092,7 +5092,7 @@
     <string name="coordinate_format_last_item_warning">Au moins un format de coordonnées est requis.</string>
     <string name="coordinate_format_select_other">Choisissez un autre format</string>
     <string name="coordinate_format_primary">Primaire</string>
-    <string name="gallery_media_playback_error">Impossible de lire le fichier multimédia.</string>
+    <string name="gallery_media_playback_error">Impossible de lire le fichier média.</string>
     <string name="gallery_open_in">Ouvrir avec</string>
     <string name="gallery_seek_back_seconds">−%1$ds</string>
     <string name="gallery_seek_forward_seconds">+%1$ds</string>
@@ -5125,8 +5125,8 @@
     <string name="media_storage_camera_folder_descr">Les fichiers sont stockés dans le dossier pellicule. %1$s</string>
     <string name="media_storage_manually_specified_descr">Les fichiers sont enregistrés dans un dossier personnalisé et classés par type (audio, photo, vidéo).</string>
     <string name="change_media_storage_question">Modifier l\'emplacement du stockage ?</string>
-    <string name="change_media_storage_full_description">Déplacer les fichiers multimédias existants vers la nouvelle destination ?\n%1$s &gt; %2$s</string>
-    <string name="media_storage_directory_not_writable">Les fichiers multimédias n\'ont pas pu être enregistrés dans le répertoire indiqué</string>
+    <string name="change_media_storage_full_description">Déplacer les fichiers médias existants vers le nouvel emplacement ?\n%1$s &gt; %2$s</string>
+    <string name="media_storage_directory_not_writable">Les fichiers médias n\'ont pas pu être enregistrés dans le dossier indiqué</string>
     <string name="route_calculation_method">Méthode de calcul d\'itinéraire</string>
     <string name="route_calculation_method_auto">Automatique (le plus rapide)</string>
     <string name="route_calculation_method_auto_desc">Tente d\'utiliser le calcul d\'itinéraire rapide. Passe automatiquement au calcul standard si les dates de la carte ne correspondent pas.</string>
@@ -5179,7 +5179,7 @@
     <string name="required_maps_calculate_with_existing_maps">Effectuer les calculs avec les cartes existantes</string>
     <string name="attached_media">Fichiers média joints</string>
     <string name="traffic_warning_red_light_camera">Radar de feu rouge</string>
-    <string name="attached_media_delete_confirmation">Souhaitez-vous supprimer les %1$d éléments multimédias de ce point ? Les fichiers multimédias enregistrés par l\'application et non associés à un emplacement seront également supprimés de l\'appareil.</string>
+    <string name="attached_media_delete_confirmation">Souhaitez-vous supprimer les %1$d éléments multimédias de ce point ? Les fichiers médias enregistrés par l\'application et non associés à un emplacement seront également supprimés de l\'appareil.</string>
     <string name="sort_by_nearest_to_current_location">Proximité de la position actuelle</string>
     <string name="astro_fit_eclipse_path">Ajuster la trajectoire de l\'éclipse</string>
     <string name="astro_show_map">Afficher la carte</string>
@@ -5255,4 +5255,18 @@
     <string name="always_keep_local_copy">Toujours conserver une copie locale</string>
     <string name="always_keep_local_copy_description">L’élément média est conservé même dans le cas où l\'original est supprimé de la galerie ou des fichiers.</string>
     <string name="release_5_4">• Nouvelle recherche spatiale : trouvez des lieux et effectuez des recherches autour d\'un lieu\n\n • Interface de recherche repensée : tri, filtres par catégorie, présentation plus épurée\n\n • Ajoutez des photos et des fichiers multimédias à vos Favoris\n\n • Favoris : prise en charge des sous-groupes et des dossiers épinglables\n\n • Coordonnées : la recherche, la grille cartographique et l’affichage des points d’intérêt prennent désormais en charge les systèmes de localisation EPSG et Maidenhead\n\n • Correction des interruptions de navigation ; basculez entre les itinéraires « Standard » et « Rapide »\n\n • Définissez l’échelle de la carte Android Auto indépendamment de celle de votre téléphone\n\n • Ajout des éclipses solaires et lunaires dans la section « Astronomie »</string>
+    <string name="share_favorites_media_preparation_failed">Impossible d\'inclure les fichiers médias associés. Partage des points uniquement.</string>
+    <plurals name="files_count">
+        <item quantity="one">%d fichier</item>
+        <item quantity="many">%d fichiers</item>
+        <item quantity="other">%d fichiers</item>
+    </plurals>
+    <string name="preparing_file">Préparation du fichier</string>
+    <string name="shared_string_archive">Archive</string>
+    <string name="share_favorites_with_media_description">Les points favoris dans %1$s contiennent des fichiers médias. Partagez uniquement les points ou les points et les fichiers médias sous forme d\'archive.</string>
+    <string name="share_favorites_points_only">Points uniquement</string>
+    <string name="share_favorites_points_and_media">Points et médias</string>
+    <string name="share_favorites_preparation_failed">Impossible de préparer les fichiers pour le partage.</string>
+    <string name="share_favorites_share_failed">Impossible de partager le fichier.</string>
+    <string name="share_favorites_missing_media_warning">Certains fichiers médias n\'ont pu être inclus.</string>
 </resources>

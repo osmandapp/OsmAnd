@@ -3107,7 +3107,7 @@
     <string name="poi_service_vehicle_diagnostics_yes">Diagnostics</string>
     <string name="poi_service_vehicle_car_parts_yes">Pièces détachées automobiles</string>
     <string name="poi_service_vehicle_batteries_yes">Batteries</string>
-    <string name="poi_service_vehicle_air_conditioning_yes">Air conditionnée</string>
+    <string name="poi_service_vehicle_air_conditioning_yes">Air conditionné</string>
     <string name="poi_service_vehicle_motor_yes">Moteur</string>
     <string name="poi_service_vehicle_insurance_yes">Assurance</string>
     <string name="poi_service_vehicle_tyres_yes">Pneumatiques</string>
@@ -3527,7 +3527,7 @@
     <string name="poi_adult_gaming_centre">Centre de jeux pour adultes</string>
     <string name="poi_service_vehicle_oil_change_yes">Vidange d\'huile</string>
     <string name="poi_service_vehicle_body_repair_yes">Carrosserie</string>
-    <string name="poi_service_vehicle_electrical_yes">électricité</string>
+    <string name="poi_service_vehicle_electrical_yes">Électricité</string>
     <string name="poi_climbing_adventure">Parcours acrobatique en hauteur</string>
     <string name="poi_course">Course</string>
     <string name="poi_license_classes">Classes de permis</string>
