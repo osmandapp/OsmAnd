@@ -3,10 +3,10 @@ package net.osmand.plus.settings.backend.backup.exporttype;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.gallery.attached.helpers.AttachedMediaDataHelper;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
@@ -14,11 +14,14 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.items.AttachedMediaSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.FavoritesSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.mediastorage.MediaSource;
 import net.osmand.shared.gpx.primitives.Link;
 import net.osmand.shared.media.MediaFileNameFormat;
+import net.osmand.shared.media.MediaProvider;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -121,18 +124,87 @@ public class AttachedMediaExportType extends AbstractExportType {
 		return new ArrayList<>(itemsBySourceId.values());
 	}
 
-	@NonNull
-	private static Set<String> collectExistingMediaFileNames(@NonNull OsmandApplication app) {
-		Set<String> res = new HashSet<>();
-		File[] files = app.getAppPath(IndexConstants.AV_INDEX_DIR).listFiles();
-		if (files != null) {
-			for (File file : files) {
-				if (file.isFile()) {
-					res.add(file.getName());
+	public static void processSettingsItems(@NonNull OsmandApplication app,
+	                                        @NonNull Collection<FavoriteGroup> groups,
+	                                        @NonNull List<SettingsItem> items) {
+		Set<String> selectedFavoriteHrefs = collectMediaHrefs(app, groups);
+		Set<String> packedFileNames = collectPackedFileNames(items);
+		Map<String, String> hrefRewrites = new HashMap<>();
+		int exportedMediaItems = 0;
+
+		for (Iterator<SettingsItem> iterator = items.iterator(); iterator.hasNext(); ) {
+			SettingsItem item = iterator.next();
+			if (item instanceof AttachedMediaSettingsItem mediaItem) {
+				if (Collections.disjoint(mediaItem.getHrefKeys(), selectedFavoriteHrefs)) {
+					iterator.remove();
+				} else {
+					for (String key : mediaItem.getHrefKeys()) {
+						hrefRewrites.put(key, mediaItem.getRewrittenHref());
+					}
+					String fileName = BackupUtils.getItemFileName(mediaItem);
+					if (!packedFileNames.add(fileName)) {
+						iterator.remove();
+					} else {
+						exportedMediaItems++;
+					}
 				}
 			}
 		}
+		if (!hrefRewrites.isEmpty()) {
+			for (SettingsItem item : items) {
+				if (item instanceof FavoritesSettingsItem favoritesItem) {
+					favoritesItem.setHrefRewrites(hrefRewrites);
+				}
+			}
+		}
+		if (PluginsHelper.isDevelopment()) {
+			LOG.debug("Attached media export items: exported=" + exportedMediaItems + ", rewrites=" + hrefRewrites.size());
+		}
+	}
+
+	@NonNull
+	private static Set<String> collectMediaHrefs(@NonNull OsmandApplication app,
+	                                             @NonNull Collection<FavoriteGroup> groups) {
+		Set<String> res = new HashSet<>();
+		AttachedMediaDataHelper helper = new AttachedMediaDataHelper(app);
+		for (Link link : helper.collectMediaLinks(groups)) {
+			String href = link.getHref();
+			if (!Algorithms.isEmpty(href)) {
+				res.add(href.trim());
+			}
+		}
 		return res;
+	}
+
+	@NonNull
+	private static Set<String> collectPackedFileNames(@NonNull List<SettingsItem> items) {
+		Set<String> res = new HashSet<>();
+		for (SettingsItem item : items) {
+			if (item instanceof FileSettingsItem && !(item instanceof AttachedMediaSettingsItem)) {
+				res.add(BackupUtils.getItemFileName(item));
+			}
+		}
+		return res;
+	}
+
+	@NonNull
+	private static Set<String> collectExistingMediaFileNames(@NonNull OsmandApplication app) {
+		Set<String> res = new HashSet<>();
+		String appBaseDir = app.getAppPath().getAbsolutePath();
+		collectFileNames(res, MediaProvider.getInternalMediaDir(appBaseDir));
+		collectFileNames(res, MediaProvider.getLegacyInternalMediaDir(appBaseDir));
+		return res;
+	}
+
+	private static void collectFileNames(@NonNull Set<String> names, @NonNull File dir) {
+		File[] files = dir.listFiles();
+		if (files != null) {
+			for (File file : files) {
+				if (file.isFile()) {
+					names.add(file.getName());
+				}
+			}
+		}
 	}
 
 	private static boolean isRemoteHref(@NonNull String href) {
@@ -160,14 +232,9 @@ public class AttachedMediaExportType extends AbstractExportType {
 		if (isSameInternalMediaFile(app, source, name)) {
 			return false;
 		}
-		if (Algorithms.isEmpty(name) || !MediaFileNameFormat.isManagedMediaFileName(name)) {
-			return true;
-		}
-		if (!usedNames.contains(name)) {
-			return false;
-		}
-		File target = new File(app.getAppPath(IndexConstants.AV_INDEX_DIR), name);
-		return !Algorithms.stringsEqual(source.getId(), target.getAbsolutePath());
+		return Algorithms.isEmpty(name)
+				|| !MediaFileNameFormat.isManagedMediaFileName(name)
+				|| usedNames.contains(name);
 	}
 
 	private static boolean isSameInternalMediaFile(@NonNull OsmandApplication app,
@@ -175,7 +242,12 @@ public class AttachedMediaExportType extends AbstractExportType {
 		if (Algorithms.isEmpty(name)) {
 			return false;
 		}
-		File target = new File(app.getAppPath(IndexConstants.AV_INDEX_DIR), name);
-		return Algorithms.stringsEqual(source.getId(), target.getAbsolutePath());
+		String appBaseDir = app.getAppPath().getAbsolutePath();
+		File target = new File(MediaProvider.getInternalMediaDir(appBaseDir), name);
+		if (Algorithms.stringsEqual(source.getId(), target.getAbsolutePath())) {
+			return true;
+		}
+		File legacyTarget = new File(MediaProvider.getLegacyInternalMediaDir(appBaseDir), name);
+		return !target.exists() && Algorithms.stringsEqual(source.getId(), legacyTarget.getAbsolutePath());
 	}
 }

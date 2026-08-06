@@ -1208,7 +1208,8 @@ public class AppVersionUpgradeOnInit {
 				storage.setPreferredIds(appMode, getLegacyCoordinateFormatPreferredIds(legacyFormat));
 			}
 			if (!settings.COORDINATE_GRID_FORMAT.isSetForMode(appMode)) {
-				settings.COORDINATE_GRID_FORMAT.setModeValue(appMode, getLegacyCoordinateGridFormat(legacyFormat));
+				settings.COORDINATE_GRID_FORMAT.setModeValue(appMode,
+						getLegacyCoordinateGridFormat(legacyFormat).getCoordinateFormatId());
 			}
 		}
 	}
@@ -1233,6 +1234,8 @@ public class AppVersionUpgradeOnInit {
 			case LocationConvert.UTM_FORMAT -> GridFormat.UTM;
 			case LocationConvert.OLC_FORMAT -> GridFormat.OLC;
 			case LocationConvert.MGRS_FORMAT -> GridFormat.MGRS;
+			case LocationConvert.SWISS_GRID_FORMAT -> GridFormat.SWISS_GRID;
+			case LocationConvert.SWISS_GRID_PLUS_FORMAT -> GridFormat.SWISS_GRID_PLUS;
 			case LocationConvert.MAIDENHEAD_FORMAT -> GridFormat.MAIDENHEAD;
 			default -> GridFormat.DIGITAL;
 		};

@@ -6,6 +6,7 @@ import static net.osmand.plus.search.listitems.QuickSearchListItemType.BOTTOM_SH
 import static net.osmand.plus.search.listitems.QuickSearchListItemType.CARD_DIVIDER;
 import static net.osmand.plus.search.listitems.QuickSearchListItemType.HEADER;
 import static net.osmand.plus.search.listitems.QuickSearchListItemType.SEARCH_MORE;
+import static net.osmand.plus.search.listitems.QuickSearchListItemType.SEARCH_ON_WEB;
 import static net.osmand.plus.search.listitems.QuickSearchListItemType.TOP_SHADOW;
 import static net.osmand.search.core.ObjectType.POI_TYPE;
 
@@ -70,6 +71,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	private final int dp1;
 
 	private boolean hasSearchMoreItem;
+	private boolean hasSearchOnWebItem;
 
 	private OnSelectionListener selectionListener;
 	private boolean selectionMode;
@@ -157,10 +159,13 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		setNotifyOnChange(false);
 		clear();
 		hasSearchMoreItem = false;
+		hasSearchOnWebItem = false;
 		for (QuickSearchListItem item : items) {
 			add(item);
 			if (!hasSearchMoreItem && item.getType() == SEARCH_MORE) {
 				hasSearchMoreItem = true;
+			} else if (!hasSearchOnWebItem && item.getType() == SEARCH_ON_WEB) {
+				hasSearchOnWebItem = true;
 			}
 		}
 		setNotifyOnChange(true);
@@ -168,26 +173,32 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	}
 
 	public void addListItem(@NonNull QuickSearchListItem item) {
-		if (hasSearchMoreItem && item.getType() == SEARCH_MORE) {
+		if ((hasSearchMoreItem && item.getType() == SEARCH_MORE)
+				|| (hasSearchOnWebItem && item.getType() == SEARCH_ON_WEB)) {
 			return;
 		}
 		setNotifyOnChange(false);
 		add(item);
 		if (item.getType() == SEARCH_MORE) {
 			hasSearchMoreItem = true;
+		} else if (item.getType() == SEARCH_ON_WEB) {
+			hasSearchOnWebItem = true;
 		}
 		setNotifyOnChange(true);
 		notifyDataSetChanged();
 	}
 
 	public void insertListItem(@NonNull QuickSearchListItem item, int index) {
-		if (hasSearchMoreItem && item.getType() == SEARCH_MORE) {
+		if ((hasSearchMoreItem && item.getType() == SEARCH_MORE)
+				|| (hasSearchOnWebItem && item.getType() == SEARCH_ON_WEB)) {
 			return;
 		}
 		setNotifyOnChange(false);
 		insert(item, index);
 		if (item.getType() == SEARCH_MORE) {
 			hasSearchMoreItem = true;
+		} else if (item.getType() == SEARCH_ON_WEB) {
+			hasSearchOnWebItem = true;
 		}
 		setNotifyOnChange(true);
 		notifyDataSetChanged();
@@ -200,7 +211,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		}
 		QuickSearchListItem item = getItem(position);
 		QuickSearchListItemType type = item != null ? item.getType() : null;
-		return type != null && type != HEADER && type != TOP_SHADOW && type != BOTTOM_SHADOW && type != SEARCH_MORE;
+		return type != null && type != HEADER && type != TOP_SHADOW && type != BOTTOM_SHADOW
+				&& type != SEARCH_MORE && type != SEARCH_ON_WEB;
 	}
 
 	@Override
@@ -228,6 +240,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			view = bindFreeVersionBannerItem(convertView);
 		} else if (type == SEARCH_MORE) {
 			view = bindSearchMoreItem(convertView, listItem);
+		} else if (type == SEARCH_ON_WEB) {
+			view = bindSearchOnWebItem(convertView, listItem);
 		} else if (type == QuickSearchListItemType.BUTTON) {
 			if (listItem instanceof QuickSearchSimpleButtonListItem) {
 				view = bindSimpleButtonItem(convertView, listItem);
@@ -358,7 +372,9 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		((TextView) view.findViewById(R.id.empty_search_title)).setText(textTitle);
 		View primaryButton = view.findViewById(R.id.primary_button);
 
-		((TextView) view.findViewById(R.id.title)).setText(getIncreaseSearchButtonTitle(app, searchPhrase));
+		((TextView) view.findViewById(R.id.title)).setText(searchMoreItem.hasCustomName()
+				? searchMoreItem.getName()
+				: getIncreaseSearchButtonTitle(app, searchPhrase));
 
 		primaryButton.setVisibility(searchMoreItem.isSearchMoreAvailable() ? View.VISIBLE : View.GONE);
 		primaryButton.setOnClickListener(new View.OnClickListener() {
@@ -377,6 +393,22 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 				searchMoreItem.onSecondaryButtonClick();
 			}
 		});
+		return view;
+	}
+
+	private View bindSearchOnWebItem(@Nullable View convertView,
+	                                 @NonNull QuickSearchListItem listItem) {
+		View view = getConvertView(convertView, R.layout.search_more_list_item);
+		QuickSearchSearchOnWebListItem searchOnWebItem = (QuickSearchSearchOnWebListItem) listItem;
+
+		view.findViewById(R.id.empty_search).setVisibility(View.GONE);
+		view.findViewById(R.id.more_divider).setVisibility(View.GONE);
+		view.findViewById(R.id.secondary_button).setVisibility(View.GONE);
+
+		View primaryButton = view.findViewById(R.id.primary_button);
+		primaryButton.setVisibility(View.VISIBLE);
+		primaryButton.setOnClickListener(searchOnWebItem.getOnClickListener());
+		((TextView) view.findViewById(R.id.title)).setText(searchOnWebItem.getName());
 		return view;
 	}
 
@@ -475,6 +507,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			SearchResultViewHolder.bindPOISearchResult(view, listItem, nightMode, calendar);
 			setupCheckBox(position, view, listItem);
 			updateCompass(view, listItem, updateLocationViewCache, useMapCenter);
+		} else if (listItem.isSpatialCategorySearchResult()) {
+			view = bindSpatialCategorySearchResultItem(position, convertView, listItem);
 		} else if (listItem.isDestinationHistoryItem()) {
 			view = getConvertView(convertView, R.layout.search_list_item_full);
 			SearchResultViewHolder.bindFullSearchResult(view, listItem);
@@ -491,6 +525,15 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			updateCompass(view, listItem, updateLocationViewCache, useMapCenter);
 			setupCheckBox(position, view, listItem);
 		}
+		return view;
+	}
+
+	private View bindSpatialCategorySearchResultItem(int position, @Nullable View convertView,
+	                                                 @NonNull QuickSearchListItem listItem) {
+		View view = getConvertView(convertView, R.layout.search_list_item);
+		SearchResultViewHolder.bindSpatialCategorySearchResult(view, listItem);
+		updateCompass(view, listItem, updateLocationViewCache, useMapCenter);
+		setupCheckBox(position, view, listItem);
 		return view;
 	}
 
@@ -612,7 +655,10 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 				divider.setVisibility(View.GONE);
 			} else {
 				divider.setVisibility(View.VISIBLE);
-				if (getItem(position + 1).getType() == SEARCH_MORE
+				QuickSearchListItem nextItem = position < getCount() - 1 ? getItem(position + 1) : null;
+				QuickSearchListItemType nextItemType = nextItem != null ? nextItem.getType() : null;
+				if (nextItemType == SEARCH_MORE
+						|| nextItemType == SEARCH_ON_WEB
 						|| listItem.getType() == QuickSearchListItemType.SELECT_ALL) {
 					LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp1);
 					p.setMargins(0, 0, 0, 0);
@@ -671,7 +717,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 	public static void updateCompass(@NonNull View view, @NonNull QuickSearchListItem item,
 	                                 @NonNull UpdateLocationViewCache updateLocationViewCache, boolean useMapCenter) {
-		boolean showCompass = item.getSearchResult().location != null;
+		boolean hideCompassForSpatialCategoryItem = item.isSpatialCategorySearchResult();
+		boolean showCompass = item.getSearchResult().location != null && !hideCompassForSpatialCategoryItem;
 		if (showCompass) {
 			updateLocationView(view, item, updateLocationViewCache, useMapCenter);
 		}

@@ -77,6 +77,7 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 	private OnGlobalLayoutListener onGlobalLayoutListener;
 
 	private int color;
+	private boolean colorSelected;
 	private String iconName = DEFAULT_ICON_NAME;
 	private BackgroundType backgroundType = DEFAULT_BACKGROUND_TYPE;
 
@@ -383,6 +384,7 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 	@Override
 	public void onPaletteItemSelected(@NonNull PaletteItem item) {
 		if (item instanceof PaletteItem.Solid solidItem) {
+			colorSelected = true;
 			setColor(solidItem.getColorInt());
 			updateContent();
 		}
@@ -481,7 +483,9 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 	}
 
 	protected void savePressed() {
-		getColorController().renewLastUsedTime();
+		if (colorSelected) {
+			getColorController().renewLastUsedTime();
+		}
 		save(true);
 	}
 

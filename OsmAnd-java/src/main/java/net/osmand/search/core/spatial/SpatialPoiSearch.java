@@ -17,6 +17,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock;
 
 import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
@@ -53,6 +54,7 @@ public class SpatialPoiSearch {
 	public static class SpatialPoiType {
 		public final AbstractPoiType singleType;
 		public final String poiAdditional;
+		public final PoiSubType poiSubType;
 		final List<String> names = new ArrayList<String>();
 		final String key;
 		final int id;
@@ -66,13 +68,19 @@ public class SpatialPoiSearch {
 			this.key = pt.getKeyName();
 			this.id = id;
 			this.poiAdditional = null;
+			this.poiSubType = null;
 		}
 		
 		public SpatialPoiType(String additional, String key, int id) {
+			this(null, additional, key, id);
+		}
+
+		public SpatialPoiType(PoiSubType poiSubType, String additional, String key, int id) {
 			this.singleType = null;
 			this.key = key;
 			this.id = id;
 			this.poiAdditional = additional;
+			this.poiSubType = poiSubType;
 		}
 		
 		public boolean isPlace() {
@@ -117,6 +125,11 @@ public class SpatialPoiSearch {
 			}
 			names.add(name);
 			return true;
+		}
+		
+		@Override
+		public String toString() {
+			return key;
 		}
 		
 	}
@@ -268,7 +281,7 @@ public class SpatialPoiSearch {
 					int freq = possibleValuesFreqs != null && k < possibleValuesFreqs.size() ? possibleValuesFreqs.get(k) : 0;
 					SpatialPoiType topValue = byKey.get(fullKey);
 					if (topValue == null) {
-						topValue = new SpatialPoiType(topValueName, fullKey, ids.getAndIncrement());
+						topValue = new SpatialPoiType(subType, topValueName, fullKey, ids.getAndIncrement());
 						if (wikidataId.length() > 0) {
 							String[] otherNames = wikidataId.split(";");
 							topValue.wikidataId = otherNames[0];
@@ -351,7 +364,32 @@ public class SpatialPoiSearch {
 		cs.tokens.add(t);
 		t.addPoiCategoryMatch(a.id);
 	}
-	
+
+	public int getCategoryFrequency(SpatialSearchContext ctx, String categoryKey) {
+		SpatialPoiType a = getByKey(categoryKey);
+		if (a == null) {
+			return 0;
+		}
+		int total = 0;
+		for (SpatialSearchFileCache l : ctx.internalFile) {
+			if (l.poiFrequencies != null) {
+				Integer freq = l.poiFrequencies.get(a.key);
+				if (freq != null) {
+					total += freq;
+				}
+				if (a.singleType instanceof PoiFilter pf) {
+					for (PoiType p : pf.getPoiTypes()) {
+						freq = l.poiFrequencies.get(p.getKeyName());
+						if (freq != null) {
+							total += freq;
+						}
+					}
+				}
+			}
+		}
+		return total;
+	}
+
 	public void processPoiCategories(SpatialSearchContext ctx, List<SpatialSearchToken> tokens) {
 		Map<SpatialPoiType, PoiCatSearch> res = new LinkedHashMap<>();
 		for (SpatialSearchToken t : tokens) {
@@ -436,7 +474,28 @@ public class SpatialPoiSearch {
 					MapUtils.get31TileNumberY(r.bottom), zoom, alimit);
 			iterateSearch(ctx, req, ctx.files, true);
 		}
-		return results;
+		return filterByZoomTile(ctx, results);
+	}
+
+	private List<Amenity> filterByZoomTile(SpatialSearchContext ctx, List<Amenity> amenities) {
+		int z = 16 - ctx.settings.SEARCH_POI_BY_CATEGORY_ZOOM;
+		if (z < 0) {
+			return amenities; // dedup disabled at this zoom, keep everything
+		}
+		TLongHashSet tiles = new TLongHashSet();
+		List<Amenity> res = new ArrayList<>(amenities.size());
+		for (Amenity a : amenities) {
+			int x16 = MapUtils.get31TileNumberX(a.getLocation().getLongitude()) >> 15;
+			int y16 = MapUtils.get31TileNumberY(a.getLocation().getLatitude()) >> 15;
+			long tileId = MapUtils.interleaveBits(x16 >> z, y16 >> z);
+			boolean elo = a.getTravelEloNumber() > Amenity.DEFAULT_ELO;
+			if (tiles.contains(tileId) && !elo) {
+				continue;
+			}
+			tiles.add(tileId);
+			res.add(a);
+		}
+		return res;
 	}
 	
 	public List<Amenity> loadPOIObjects(SpatialSearchContext ctx, SpatialPoiType spt,  LatLon latLon, int radMeters,

@@ -1,5 +1,7 @@
 package net.osmand.osm.edit;
 
+import net.osmand.osm.edit.OSMSettings.OSMTagKey;
+
 public class OSMSettings {
 	
 	public enum OSMTagKey {
@@ -38,6 +40,7 @@ public class OSMSettings {
 		PLACE("place"), //$NON-NLS-1$
 		ADDR_HOUSE_NUMBER("addr:housenumber"), //$NON-NLS-1$
 		ADDR_UNIT("addr:unit"), //$NON-NLS-1$
+		ADDR_BLOCK_NUMBER("addr:block_number"), //$NON-NLS-1$
 		ADDR2_HOUSE_NUMBER("addr2:housenumber"), //$NON-NLS-1$
 		ADDR_HOUSE_NAME("addr:housename"), //$NON-NLS-1$
 		ADDR_STREET("addr:street"), //$NON-NLS-1$
@@ -46,6 +49,7 @@ public class OSMSettings {
 		ADDR_CITY("addr:city"), //$NON-NLS-1$
 		ADDR_SUBURB("addr:suburb"), //$NON-NLS-1$
 		ADDR_PLACE("addr:place"), //$NON-NLS-1$
+		ADDR_NEIGHBOURHOOD("addr:neighbourhood"), //$NON-NLS-1$
 		ADDR_POSTCODE("addr:postcode"), //$NON-NLS-1$
 		ADDR_INTERPOLATION("addr:interpolation"), //$NON-NLS-1$
 		ADDRESS_TYPE("address:type"), //$NON-NLS-1$
