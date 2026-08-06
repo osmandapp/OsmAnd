@@ -37,7 +37,13 @@ import net.osmand.util.SearchAlgorithms;
 
 //////////// TESTING //////////
 // ### fuel_diesel.json (broken cafe fuel)
-// FIX TESTING: POI intersection 'fuel mcdonalds', 'cafe fuel', 'fuel burger' (cafe fuel broken)
+//     ! FIX TESTING: POI intersection 'fuel mcdonalds', 'cafe fuel', 'fuel burger' (cafe fuel broken)
+
+// ### germany_remstal.json - Missing kernen im remstal
+// ### netherlands_huns.json - Missing postcode data
+// ### usa_pa75.json - missing boundary for PA as regions?
+// ### ukraine_school.json - Missing A+ school - школа А+ (nothing found on website)
+// Result 2 (t2+0-w1-oth1-tp0) - ["школа а" [POI School] 'Початкова школа А+' 731005224 6351 (50.3700 30.4470)]
 
 // ### usa_new_york.json (missing 57th street, missing west/east) -
 // UNIT TESTING: 'Bar 4 avenue' (new york poi category present)
@@ -333,9 +339,10 @@ public class SpatialSearchTestAndDocs {
 //		query = "Vaduz ";
 //		query = "Jugendheim Malbun";
 
-//		pattern = "Netherlands_";
+		pattern = "Netherlands_";
 //		location = new LatLon(52.2827, 4.8601);
 //		query = "harderwijk estrado"; // 't2+0-w2-oth1-tp4' t2+0-w2-oth2-tp0
+		query = "Muziekpodium Harderwijk";
 //		query = "harderwijk";
 //		query = "cafe harderwijk";
 //		query = "hotel amsterdam";
@@ -369,17 +376,17 @@ public class SpatialSearchTestAndDocs {
 		
 //		pattern = "regions.ocbf" ;
 		
-		pattern = "Ukraine_zh";
+//		pattern = "Ukraine_zh";
 //		pattern = "Test_Ukraine_kyiv-city_europe_12.obf";
 //		pattern = "Ukraine_";
 		
 		// poi types
-		location = new LatLon(50.436423, 30.508097);
+//		location = new LatLon(50.436423, 30.508097);
 //		settings.SEARCH_POI = false;
 //		query =  NameIndexReader.POI_CATEGORY_PREFIX + "cafe";
 //		settings.DEV_PRINT_POI_CAT_LIMIT = 1000; 
 //		settings.DEV_PRINT_POI_CAT_RADIUS_KM = 10;
-		query = "okko cafe";
+//		query = "okko cafe";
 //		query = "atm bank"; 
 //		query = "Aquarium";
 //		query = "Fuel diesel";
@@ -410,7 +417,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "Mcdonalds";
 //		query = "Stomat.";
 
-//		pattern = "Ukraine_kyiv-city";
+		pattern = "Ukraine_";
 //		pattern2 = "World_";
 //		location = new LatLon(50.4631,30.4553);
 //		settings.OPTIM_READ_COMMON_WORDS_ATOMS = true;
@@ -437,7 +444,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "Школа 25 Володимирська вулиця"; // Школа 25 Володимирська вулиця ALWAYS_READ_COMMON_WORDS_ATOMS = true
 //		query = "андріівський узвіз Школа "; // ALWAYS_READ_COMMON_WORDS_ATOMS = true
 //		query = "Школа ";
-//		query = "Школа А+";
+		query = "Школа А+";
 //		query = "25-та школа"; // 25-та школа, 25-та school
 		
 //		query = "школа №25"; // test '№25', '25'? -- 'школа', 'школа №25', 'школа 25' // 63112526
