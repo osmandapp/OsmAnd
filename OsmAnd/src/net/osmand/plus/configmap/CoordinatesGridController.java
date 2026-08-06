@@ -20,11 +20,9 @@ import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.coordinates.CoordinateFormatHelper;
-import net.osmand.plus.settings.coordinates.CoordinateFormatSettingsStorage;
 import net.osmand.plus.settings.coordinates.CoordinateGridFormat;
 import net.osmand.plus.settings.coordinates.CoordinateGridFormatProvider;
 import net.osmand.plus.settings.enums.EnumWithTitleId;
-import net.osmand.plus.settings.enums.GridFormat;
 import net.osmand.plus.settings.enums.GridLabelsPosition;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.InsetsUtils.InsetSide;
@@ -37,7 +35,6 @@ import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -171,17 +168,6 @@ public class CoordinatesGridController extends BaseDialogController {
 	@NonNull
 	public String getSelectedCoordinateFormatId() {
 		return getGridFormat().getId();
-	}
-
-	@NonNull
-	public List<String> getSupportedCoordinateFormatIds() {
-		CoordinateFormatSettingsStorage storage = app.getSettings().getCoordinateFormatSettingsStorage();
-		LinkedHashSet<String> formatIds = new LinkedHashSet<>();
-		formatIds.addAll(storage.getPreferredIds(getSelectedAppMode()));
-		formatIds.addAll(storage.getRecentIds());
-		formatIds.addAll(GridFormat.getSupportedCoordinateFormatIds());
-		formatIds.add(getSelectedCoordinateFormatId());
-		return gridFormatProvider.filterSupportedIds(new ArrayList<>(formatIds));
 	}
 
 	public void setGridFormat(@NonNull CoordinateGridFormat format) {
