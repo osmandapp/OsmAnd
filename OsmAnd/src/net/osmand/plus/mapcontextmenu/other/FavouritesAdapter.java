@@ -8,10 +8,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.favorites.FavoriteFolderFormatter;
@@ -34,6 +36,13 @@ public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 		this.app = (OsmandApplication) context.getApplicationContext();
 		this.favouritePoints = FavouritePoints;
 		cache = UpdateLocationUtils.getUpdateLocationViewCache(context);
+	}
+
+	/**
+	 * Show distances and directions relative to the given location instead of the current one
+	 */
+	public void setReferenceLocation(@Nullable LatLon location) {
+		cache.specialFrom = location;
 	}
 
 	@Override

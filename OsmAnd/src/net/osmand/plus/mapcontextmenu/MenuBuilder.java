@@ -118,12 +118,14 @@ import org.apache.commons.logging.Log;
 import java.lang.ref.WeakReference;
 import java.text.DateFormat;
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class MenuBuilder {
 
 	private static final Log LOG = PlatformUtil.getLog(MenuBuilder.class);
 	public static final float SHADOW_HEIGHT_TOP_DP = 17f;
 	public static final int TITLE_LIMIT = 60;
+	private static final Pattern HTML_TAG_PATTERN = Pattern.compile("<\\s*[a-zA-Z]+[^>]*>");
 
 	protected static final String[] arrowChars = {"=>", " - "};
 
@@ -1062,7 +1064,7 @@ public class MenuBuilder {
 		textView.setTypeface(DEFAULT);
 		textView.setTextSize(16);
 		textView.setTextColor(ColorUtilities.getPrimaryTextColor(app, !light));
-		textView.setText(WikiArticleHelper.getPartialContent(description));
+		textView.setText(getDescriptionPreview(description));
 
 		if (customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID) && Linkify.addLinks(textView, Linkify.ALL)) {
 			textView.setMovementMethod(null);
@@ -1092,6 +1094,15 @@ public class MenuBuilder {
 		setDividerWidth(true);
 
 		return ll;
+	}
+
+	private String getDescriptionPreview(@NonNull String description) {
+		if (HTML_TAG_PATTERN.matcher(description).find()) {
+			return WikiArticleHelper.getPartialContent(description);
+		}
+		// plain text descriptions (e.g. of favorite points) keep their line breaks,
+		// the view is limited by maxLines and the "Read Full" button
+		return description;
 	}
 
 	protected void handlePhoneClick(@Nullable String title, @Nullable String text, @NonNull View view) {
