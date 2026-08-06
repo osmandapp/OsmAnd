@@ -2169,7 +2169,7 @@
     <string name="open_saved_track">Otvori sačuvanu trasu</string>
     <string name="shared_string_is_saved">je sačuvano</string>
     <string name="one_point_error">Dodaj bar dve tačke.</string>
-    <string name="shared_string_redo">Ponovi</string>
+    <string name="shared_string_redo">Povrati</string>
     <string name="release_3_8">• Osvežena je mogućnost rute: omogućava upotrebu različitih vrsta navođenja po delu i uključivanje ruta \n \n • Novi meni za trase: Odaberi boju, debljinu, strelice smera prikaza, sličice početka i završetka \n \n • Poboljšana je vidljivost biciklističkih čvorova. \n \n • Trase se sada mogu tapkati, imaju priručni meni sa osnovnim podacima. \n \n • Poboljšani su motori pretrage \n \n • Poboljšane su mogućnosti praćenja trasa u navođenju \n \n • Rešeni problemi sa uvozom / izvozom podešavanja profila</string>
     <string name="sort_last_modified">Poslednje izmenjeno</string>
     <string name="sort_name_descending">Ime: Z – A</string>
@@ -5323,4 +5323,18 @@
     <string name="always_keep_local_copy">Uvek čuvaj lokalnu kopiju</string>
     <string name="always_keep_local_copy_description">Mediji ostaju pričvršćeni čak i ako se original obriše iz galerije ili fajlova.</string>
     <string name="release_5_4">• Nova prostorna pretraga — pronađite mesta i pretražite oko mesta\n\n • Osveženi KI pretrage: sortiranje, filteri kategorija, čistiji izgled\n\n • Priložite fotografije i medije omiljenima\n\n • Omiljeni: podrška za podgrupe i fascikle koje se mogu zakačiti\n\n • Koordinate: pretraga, mreža mape i prikaz TOI sada podržavaju EPSG i lokator Mejdenheda\n\n • Ispravljeni prekidi navigacije; prebacivanje između standardnog i brzog rutiranja\n\n • Podesite razmeru mape za Android Auto odvojeno od telefona\n\n • Astronomija je dodala pomračenja Sunca i Meseca</string>
+    <string name="share_favorites_media_preparation_failed">Nije moguće uključiti priložene medije. Samo deljenje tačaka.</string>
+    <plurals name="files_count">
+        <item quantity="one">%d fajl</item>
+        <item quantity="few">%d fajla</item>
+        <item quantity="other">%d fajlova</item>
+    </plurals>
+    <string name="preparing_file">Priprema fajla</string>
+    <string name="shared_string_archive">Arhiva</string>
+    <string name="share_favorites_with_media_description">Omiljene tačke u %1$s imaju priložene medije. Delite samo tačke ili tačke sa medijima kao arhivu.</string>
+    <string name="share_favorites_points_only">Samo tačke</string>
+    <string name="share_favorites_points_and_media">Tačke i mediji</string>
+    <string name="share_favorites_preparation_failed">Nije bila uspešna priprema fajlova za deljenje.</string>
+    <string name="share_favorites_share_failed">Deljenje fajla nije uspelo.</string>
+    <string name="share_favorites_missing_media_warning">Neki priloženi mediji nisu mogli biti uključeni.</string>
 </resources>
