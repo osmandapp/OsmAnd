@@ -37,7 +37,6 @@ import net.osmand.util.SearchAlgorithms;
 
 //////////// TESTING //////////
 
-// ### fuel_diesel.json - REDO 'cafe fuel' - (t2+0-w1-oth0-tp0) - ["cafe fuel" [POI Fuel] 'UPG' 621685642
 // ### germany_remstal.json - Missing kernen im remstal
 // ### netherlands_huns.json - Missing postcode data
 // ### usa_pa75.json - missing boundary for PA as regions?
@@ -64,7 +63,6 @@ import net.osmand.util.SearchAlgorithms;
 // UNIT TESTING!! '155 Park Avenue Wilkes Barre' incorrect first result Result 5 (t5+0-w2-oth0-tp-1) - 41.2364, -75.8843 155 ["155 park avenue" [Building] '101 Parks Avenue (Iron Triangle)' 26282478473 25749 (41.2373 -75.8831), "wilkes barre" [POI Bar] 'Wilkes-Barre Republic Club' 6094142255 21383 (41.2298 -75.8826)]
 //     TEST ON FIX for sorting sumOther - s1 += r.otherWordsNotFound;
 // UNIT TESTING: POI Name / Type + Address - 'Shell 2 Rožňavská'
-// UNIT TESTING: Postcode + Type: 1181ZM cafe; // brand +
 // UNIT TESTING: 'нова пошта краматорськ', 'нова пошта краматорськ 3', 'нова пошта краматорськ 5'  - no brand !! (3 in ref, 5 in name) 5 (5 N7846074085, N1482296639)
 // UNIT TESTING: (poi additional germany) Gynaecologist - from all poi types should be result ! (not like old search)
 // UNIT TESTING DEDUPLICATE: Street related to city or suburb what to show (RZR)
@@ -78,7 +76,6 @@ import net.osmand.util.SearchAlgorithms;
 // UNIT TESTING: Japan_kanto_tokyo (see example below on neighborouds) - test on small osm.gz?
 // UNIT TESTING: Test poi category translations (add ru / de in test)
 
-// NO UNIT TESTING: '276 East End Centre Wilkes-Barre'
 // NO UNIT TESTING: '400 Susquehanna Boulevard Hazel Township' (MISSING Hazel Township)
 // NO UNIT TESTING: '330 Innovation Boulevard University Park' (partial result missing university park)
 
