@@ -2864,7 +2864,7 @@
     <string name="routing_engine_vehicle_type_walking">A piedi</string>
     <string name="routing_engine_vehicle_type_hgv">Mezzi pesanti</string>
     <string name="routing_engine_vehicle_type_truck">Camion</string>
-    <string name="routing_engine_vehicle_type_scooter">Scooter</string>
+    <string name="routing_engine_vehicle_type_scooter">Monopattino</string>
     <string name="routing_engine_vehicle_type_racingbike">Bici da corsa</string>
     <string name="routing_engine_vehicle_type_mtb">MTB</string>
     <string name="message_server_error">Errore del server: %1$s</string>
@@ -4729,7 +4729,7 @@
     <string name="show_image_previews">Mostra l\'immagine precedente</string>
     <string name="quick_action_showhide_coordinates_grid_descr">Inverti la visibilità della griglia di coordinate sulla mappa.</string>
     <string name="layer_coordinates_grid">Griglia delle coordinate</string>
-    <string name="release_5_0">• Scopri i POI più quotati con la nuova modalità Esplora\n\n• Tutti i percorsi OSM, ora ricercabili! Escursionismo, ciclismo, MTB e altro\n\n• Il nuovo widget di navigazione combina la freccia di svolta e le istruzioni di navigazione\n\n• Widget di informazioni sul percorso attuale: visualizza ETA, orario di arrivo e distanza\n\n• Seleziona piste da sci e percorsi MTB sulla mappa per informazioni dettagliate\n\n• Possibilità di selezionare le dimensioni del widget per i pannelli sinistro e destro\n\n• Aggiunta griglia di coordinate con coordinate geografiche\n\n• Aggiunta possibilità di personalizzare l\'aspetto predefinito dei gruppi preferiti\n\n• Android Auto: visualizza ETA e distanza dal waypoint successivo; i nomi delle città ora compaiono nei risultati di ricerca\n\n• Le vette più importanti sono ora individuabili tramite mappa e ricerca\n\n• Altezze delle vette delle montagne in piedi\n\n• Aggiunto: falesie e aree di arrampicata sulla mappa\n\n• Migliorata la ricerca degli indirizzi negli Stati Uniti\n\n• Aggiunto TTS ebraico per la navigazione</string>
+    <string name="release_5_0">• Scopri i POI più quotati con la nuova modalità Esplora\n\n• Tutti i percorsi OSM, ora ricercabili! Escursionismo, ciclismo, MTB e altro\n\n• Il nuovo widget di navigazione combina la freccia di svolta e le istruzioni di navigazione\n\n• Widget di informazioni sul percorso attuale: visualizza ETA, orario di arrivo e distanza\n\n• Seleziona piste da sci e percorsi MTB sulla mappa per informazioni dettagliate\n\n• Possibilità di selezionare le dimensioni del widget per i pannelli sinistro e destro\n\n• Aggiunta griglia di coordinate con coordinate geografiche\n\n• Aggiunta possibilità di personalizzare l\'aspetto predefinito dei gruppi preferiti\n\n• Android Auto: visualizza ETA e distanza dal waypoint successivo; i nomi delle città ora compaiono nei risultati di ricerca\n\n• Le vette più importanti sono ora individuabili tramite mappa e ricerca\n\n• Altezze delle vette delle montagne in piedi\n\n• Aggiunte: falesie e aree di arrampicata sulla mappa\n\n• La ricerca degli indirizzi negli Stati Uniti è stata migliorata\n\n• Aggiunto TTS ebraico per la navigazione</string>
     <string name="equator">Equatore</string>
     <string name="prime_meridian">Primo meridiano</string>
     <string name="meridian_180">180º meridiano</string>
@@ -5338,7 +5338,7 @@
     <string name="use_spatial_text_search_description">Sostituisci le API di ricerca rapida standard con il motore di ricerca testuale spaziale sperimentale.</string>
     <string name="preparing_file">Preparazione del file</string>
     <string name="share_favorites_points_only">Solo punti</string>
-    <string name="share_favorites_points_and_media">Punti e media</string>
+    <string name="share_favorites_points_and_media">Punti e file multimediali</string>
     <string name="share_favorites_preparation_failed">Non posso preparare i file per condividerli.</string>
     <string name="share_favorites_share_failed">Con posso condividere i file.</string>
     <string name="share_favorites_missing_media_warning">Alcuni media allegati non possono essere inclusi.</string>
@@ -5368,4 +5368,5 @@
     <string name="duplicate_map_replace_with_road">Sostitutisci con Solo-strade</string>
     <string name="rendering_attr_surface_clay_name">Argilla</string>
     <string name="rendering_attr_surface_laterite_name">Laterite</string>
+    <string name="share_favorites_media_preparation_failed">Impossibile includere i file multimediali allegati. Condivisi solo i punti.</string>
 </resources>
