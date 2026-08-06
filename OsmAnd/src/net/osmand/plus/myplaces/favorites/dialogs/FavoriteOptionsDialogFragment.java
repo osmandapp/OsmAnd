@@ -226,15 +226,14 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 			items.add(moveItem);
 		}
 
-		boolean canAddToMarkers = group != null && !group.getPoints().isEmpty();
-		if (canAddToMarkers || hasSubtreePoints) {
+		FavoriteGroup markersGroup = group != null && !group.getPoints().isEmpty() ? group : null;
+		if (markersGroup != null || hasSubtreePoints) {
 			items.add(new DividerHalfItem(getContext()));
 		}
 
-		if (canAddToMarkers) {
+		if (markersGroup != null) {
 			MapMarkersHelper markersHelper = app.getMapMarkersHelper();
-			FavoriteGroup favoriteGroup = group;
-			MapMarkersGroup markersGr = markersHelper.getMarkersGroup(favoriteGroup);
+			MapMarkersGroup markersGr = markersHelper.getMarkersGroup(markersGroup);
 			boolean synced = markersGr != null;
 
 			BaseBottomSheetItem markersGroupItem = new SimpleBottomSheetItem.Builder()
@@ -245,7 +244,7 @@ public class FavoriteOptionsDialogFragment extends MenuBottomSheetDialogFragment
 						if (synced) {
 							markersHelper.removeMarkersGroup(markersGr);
 						} else {
-							markersHelper.addOrEnableGroup(favoriteGroup);
+							markersHelper.addOrEnableGroup(markersGroup);
 						}
 						dismiss();
 						MapActivity.launchMapActivityMoveToTop(requireActivity());
