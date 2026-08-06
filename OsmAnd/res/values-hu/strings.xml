@@ -1609,7 +1609,7 @@
     <string name="my_location">Saját helyzet</string>
     <string name="shared_string_finish">Befejezés</string>
     <string name="plan_route">Útvonal tervezése</string>
-    <string name="shared_string_sort">Sorba rendezés</string>
+    <string name="shared_string_sort">Rendezés</string>
     <string name="coordinate_input">Koordináta bevitele</string>
     <string name="marker_save_as_track_descr">Jelölők exportálása az alábbi GPX-fájlba:</string>
     <string name="move_to_history">Áthelyezés az előzményekbe</string>
@@ -2723,7 +2723,7 @@
     <string name="osm_edit_logout_success">Kijelentkezett</string>
     <string name="snowmobile_render_descr">Motoros szán vezetéshez külön utakkal és pályákkal.</string>
     <string name="shared_string_graph">Grafikon</string>
-    <string name="message_graph_will_be_available_after_recalculation">Várjon.\nAz ábra az útvonal újratervezése után lesz látható.</string>
+    <string name="message_graph_will_be_available_after_recalculation">Kis türelmet.\nA grafikon az útvonal újraszámítása után lesz elérhető.</string>
     <string name="shared_string_local_maps">Helyi térképek</string>
     <string name="icon_group_amenity">Hasznos és fontos létesítmény</string>
     <string name="icon_group_special">Különleges</string>
@@ -4214,7 +4214,7 @@
     <string name="use_nearby_roads_summary">Offline térképet használ a közeli utak és magassági adatok megkereséséhez. Módosíthatja a nyomvonal geometriáját.</string>
     <string name="use_nearby_roads">Közeli utak használata</string>
     <string name="retrieve_elevation_data_summary">Az OsmAnd le tudja kérni a magassági adatokat a közeli utakról vagy domborzati térképekről.</string>
-    <string name="use_terrain_maps">Domborzati térkép használata</string>
+    <string name="use_terrain_maps">Domborzati térképek használata</string>
     <string name="use_terrain_maps_summary">Domborzati térkép használata a magassági adatokhoz. A nyomvonal geometriája változatlan marad.</string>
     <string name="shared_string_osm_id">OSM-azonosító</string>
     <string name="delete_actions_button">Gomb törlése</string>
@@ -5140,7 +5140,7 @@
     <string name="ais_receive_in_background">Az AIS-adatok fogadása akkor is lehetséges, ha az OsmAnd szünetel.</string>
     <string name="ais_receive_in_background_description">Ha engedélyezve van, az AIS-üzenetfigyelő továbbra is fut, ha az OsmAnd szünetel vagy háttérben van. Ha le van tiltva, akkor az OsmAnd háttérben való futása esetén nem érkeznek üzenetek.</string>
     <string name="shared_string_recent">Legutóbbi</string>
-    <string name="sort_by_nearest_to_map_center">Térkép közepéhez legközelebbiek</string>
+    <string name="sort_by_nearest_to_map_center">Legközelebbi a térkép közepéhez</string>
     <string name="last_week">Elmúlt héten</string>
     <string name="history_is_turned_off">Az előzmények ki vannak kapcsolva</string>
     <string name="search_and_navigation_history_disabled_descr">A keresési és navigációs előzmények ki vannak kapcsolva. A legutóbbi tevékenységek megtekintéséhez engedélyezze a beállításokban az előzményeket.</string>
@@ -5266,4 +5266,5 @@
     <string name="share_favorites_share_failed">Nem sikerült megosztani a fájlt.</string>
     <string name="share_favorites_missing_media_warning">Néhány csatolt médiafájl nem volt beilleszthető.</string>
     <string name="share_favorites_media_preparation_failed">Nem sikerült beilleszteni a csatolt médiafájlokat. Csak pontok megosztása.</string>
+    <string name="search_on_web">Keresés a világhálón</string>
 </resources>
