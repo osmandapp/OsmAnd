@@ -236,7 +236,7 @@ public class SpatialTextSearch {
 			SpatialTextSearchSettings settings = new SpatialTextSearchSettings();
 //			settings.SEARCH_STREET_INTERSECTIONS = false;
 //			settings.SEARCH_POI_INTERSECTIONS = false;
-//			settings.SEARCH_SUGGESTION = true;
+			settings.SEARCH_SUGGESTION = true;
 //			settings.SUGGEST_SEARCH_POI_CATEGORY_WITH_REF = false;
 //			settings.OPTIM_LIMIT_INTERSECTIONS = 5000;
 //			settings.OPTIM_READ_COMMON_WORDS_LIMIT = 500;

@@ -137,6 +137,7 @@ public class QuickSearchHelper implements ResourceListener {
 
 	private void registerSpatialMapSearchAPIs() {
 		SearchCoreFactory.SearchAmenityByNameAPI amenitiesApi = new SearchCoreFactory.SearchAmenityByNameAPI();
+		core.registerAPI(new SearchCoreFactory.SearchAmenityTypesAPI(app.getPoiTypes()));
 		core.registerAPI(new SearchCoreFactory.SearchLocationAndUrlAPI(amenitiesApi,
 				app.getSettings()::isInternetConnectionAvailable));
 		core.registerAPI(new SpatialCategoryAmenityByTypeAPI(app.getPoiTypes()));

@@ -50,12 +50,14 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 
 	private final MapPoiTypes poiTypes;
 	private final SpatialTextSearch spatialTextSearch = new SpatialTextSearch();
+	private final SpatialPoiSearch poiSearch;
 
 	public SpatialTextSearchAPI(MapPoiTypes poiTypes) {
 		super(ObjectType.CITY, ObjectType.VILLAGE, ObjectType.BOUNDARY, ObjectType.POSTCODE,
 				ObjectType.STREET, ObjectType.HOUSE, ObjectType.STREET_INTERSECTION, ObjectType.POI,
 				ObjectType.POI_TYPE);
 		this.poiTypes = poiTypes;
+		poiSearch = new SpatialPoiSearch(poiTypes);
 	}
 
 	@Override
@@ -71,13 +73,14 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 			return false;
 		}
 		LOG.info("\nStart new spatial search");
-		SpatialPoiSearch poiSearch = new SpatialPoiSearch(poiTypes);
 		SpatialSearchContext context = createSpatialContext(phrase, resultMatcher, files, poiSearch, settings);
 		LOG.info("Spatial search setting " + (context.settings.SEARCH_SUGGESTION ? "SUGGESTION" : "Default"));
 		LOG.info("Spatial search setting.LANG_DEDUPLICATE " + context.settings.LANG_DEDUPLICATE);
 		LOG.info("Spatial search setting.SUGGESTED_SEARCH_RADIUS_KM " + context.settings.SUGGESTED_SEARCH_RADIUS_KM);
 
+		LOG.info("Spatial search start call spatialTextSearch.searchAPI");
 		SpatialSearchResults results = spatialTextSearch.searchAPI(phrase.getFullSearchPhrase(), context);
+		LOG.info("Spatial search after call spatialTextSearch.searchAPI");
 		if (results.mainResults == null) {
 			return true;
 		}
