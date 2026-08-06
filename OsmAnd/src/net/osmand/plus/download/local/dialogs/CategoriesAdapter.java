@@ -87,7 +87,8 @@ public class CategoriesAdapter extends RecyclerView.Adapter<ViewHolder> {
 		} else if (holder instanceof CategoryViewHolder) {
 			LocalCategory category = (LocalCategory) items.get(position);
 			CategoryViewHolder viewHolder = (CategoryViewHolder) holder;
-			viewHolder.bindView(category);
+			boolean afterBanner = position > 0 && items.get(position - 1) == FREE_VERSION_BANNER_ITEM;
+			viewHolder.bindView(category, !afterBanner);
 		} else if (holder instanceof GroupViewHolder) {
 			LocalGroup group = (LocalGroup) items.get(position);
 			boolean lastItem = position == getItemCount() - 1;
