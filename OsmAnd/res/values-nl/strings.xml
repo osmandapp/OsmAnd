@@ -5621,4 +5621,17 @@
     <string name="astro_lunar_eclipse_load_error">Het lukte niet om deze maansverduistering te berekenen.</string>
     <string name="astro_total_lunar_eclipse">Totale maansverduistering</string>
     <string name="astro_partial_lunar_eclipse">Gedeeltelijke maansverduistering</string>
+    <string name="share_favorites_media_preparation_failed">Kon gekoppelde media niet toevoegen. Alleen de punten worden gedeeld.</string>
+    <plurals name="files_count">
+        <item quantity="one">%d bestand</item>
+        <item quantity="other">%d bestanden</item>
+    </plurals>
+    <string name="preparing_file">Bestand voorbereiden</string>
+    <string name="shared_string_archive">Archief</string>
+    <string name="share_favorites_with_media_description">De favorieten in %1$s hebben gekoppelde media. Deel alleen de punten of ook de media als een archief.</string>
+    <string name="share_favorites_points_only">Alleen punten</string>
+    <string name="share_favorites_points_and_media">Punten en media</string>
+    <string name="share_favorites_preparation_failed">Kon bestanden niet voorbereiden om te delen.</string>
+    <string name="share_favorites_share_failed">Kon bestand niet delen.</string>
+    <string name="share_favorites_missing_media_warning">Enkele gekoppelde media konden niet worden toegevoegd.</string>
 </resources>
