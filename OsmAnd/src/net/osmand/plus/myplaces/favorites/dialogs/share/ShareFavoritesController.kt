@@ -12,6 +12,7 @@ import net.osmand.plus.R
 import net.osmand.plus.base.dialog.BaseDialogController
 import net.osmand.plus.gallery.attached.helpers.AttachedMediaDataHelper
 import net.osmand.plus.mapcontextmenu.other.ShareMenu.NativeShareDialogBuilder
+import net.osmand.plus.myplaces.favorites.FavoriteFolderFormatter
 import net.osmand.plus.myplaces.favorites.FavoriteGroup
 import net.osmand.plus.myplaces.favorites.ShareFavoritesAsyncTask
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper.SettingsExportListener
@@ -23,7 +24,8 @@ import java.util.Locale
 
 class ShareFavoritesController(
 	app: OsmandApplication,
-	private val group: FavoriteGroup
+	private val groups: List<FavoriteGroup>,
+	private val folderPath: String
 ) : BaseDialogController(app) {
 
 	enum class DialogState {
@@ -65,7 +67,7 @@ class ShareFavoritesController(
 
 	val description: CharSequence
 		get() {
-			val folderName = group.getDisplayName(app)
+			val folderName = FavoriteFolderFormatter.getDisplayName(app, folderPath)
 			val text = getString(R.string.share_favorites_with_media_description, folderName)
 			return UiUtilities.createSpannableString(text, Typeface.BOLD, folderName)
 		}
@@ -273,7 +275,7 @@ class ShareFavoritesController(
 	private inner class PrepareShareDataTask : AsyncTask<Void, Void, ShareFavoritesDataPreparer.PreparationResult>() {
 
 		override fun doInBackground(vararg params: Void?): ShareFavoritesDataPreparer.PreparationResult {
-			return dataPreparer.prepare(group, fileSession) { isCancelled }
+			return dataPreparer.prepare(groups, folderPath, fileSession) { isCancelled }
 		}
 
 		override fun onCancelled(result: ShareFavoritesDataPreparer.PreparationResult?) {
@@ -383,10 +385,11 @@ class ShareFavoritesController(
 		@JvmStatic
 		fun handleShareRequest(
 			activity: FragmentActivity,
-			group: FavoriteGroup
+			groups: List<FavoriteGroup>,
+			folderPath: String
 		): ShareHandlingResult {
 			val app = activity.application as OsmandApplication
-			if (AttachedMediaDataHelper(app).collectMediaLinks(listOf(group)).isEmpty()) {
+			if (AttachedMediaDataHelper(app).collectMediaLinks(groups).isEmpty()) {
 				return ShareHandlingResult.GPX_FALLBACK_REQUIRED
 			}
 			val manager = activity.supportFragmentManager
@@ -397,7 +400,7 @@ class ShareFavoritesController(
 			if (!ShareFavoritesBottomSheet.canBeAdded(manager)) {
 				return ShareHandlingResult.CANNOT_SHOW
 			}
-			val controller = ShareFavoritesController(app, group)
+			val controller = ShareFavoritesController(app, groups, folderPath)
 			app.dialogManager.register(PROCESS_ID, controller)
 			ShareFavoritesBottomSheet.showInstance(manager)
 			controller.startPreparing()

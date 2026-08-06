@@ -15,14 +15,14 @@ import java.io.File
 class ShareFavoritesDataPreparer(private val app: OsmandApplication) {
 
 	fun prepare(
-		group: FavoriteGroup,
+		groups: List<FavoriteGroup>,
+		folderPath: String,
 		fileSession: ShareFavoritesFileSession,
 		isCancelled: () -> Boolean
 	): PreparationResult {
 		var destination: File? = null
 		return try {
-			val groups = listOf(group)
-			val originalDestination = ShareFavoritesAsyncTask.createDestinationFile(app, groups)
+			val originalDestination = ShareFavoritesAsyncTask.createDestinationFile(app, groups, folderPath)
 			val gpxFile = fileSession.createGpxDestination(originalDestination.name)
 			destination = gpxFile
 			val error = app.favoritesHelper.fileHelper.saveFile(groups, gpxFile)
@@ -36,7 +36,7 @@ class ShareFavoritesDataPreparer(private val app: OsmandApplication) {
 				if (isCancelled()) {
 					PreparationResult.Cancelled
 				} else {
-					prepareMediaShareData(group, gpxFile, description, isCancelled)
+					prepareMediaShareData(groups, gpxFile, description, isCancelled)
 				}
 			}
 		} catch (e: Exception) {
@@ -46,13 +46,12 @@ class ShareFavoritesDataPreparer(private val app: OsmandApplication) {
 	}
 
 	private fun prepareMediaShareData(
-		group: FavoriteGroup,
+		groups: List<FavoriteGroup>,
 		destination: File,
 		description: Spanned,
 		isCancelled: () -> Boolean
 	): PreparationResult {
 		try {
-			val groups = listOf(group)
 			val dataHelper = AttachedMediaDataHelper(app)
 			val links = dataHelper.collectMediaLinks(groups)
 			val mediaItems = AttachedMediaExportType.collectSettingsItems(app, groups)
@@ -63,8 +62,8 @@ class ShareFavoritesDataPreparer(private val app: OsmandApplication) {
 				return PreparationResult.GpxOnly(destination, description)
 			}
 
-			val data = ArrayList<Any>(mediaItems.size + 1)
-			data.add(group)
+			val data = ArrayList<Any>(mediaItems.size + groups.size)
+			data.addAll(groups)
 			data.addAll(mediaItems)
 			val items = app.fileSettingsHelper.prepareSettingsItems(data, emptyList(), true)
 			AttachedMediaExportType.processSettingsItems(app, groups, items)
