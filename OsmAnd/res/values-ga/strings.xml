@@ -5208,4 +5208,5 @@
     <string name="share_favorites_preparation_failed">Níorbh fhéidir comhaid a ullmhú le haghaidh comhroinnte.</string>
     <string name="share_favorites_share_failed">Níorbh fhéidir an comhad a roinnt.</string>
     <string name="share_favorites_missing_media_warning">Níorbh fhéidir roinnt meán ceangailte a chur san áireamh.</string>
+    <string name="search_on_web">Cuardaigh ar an ngréasán</string>
 </resources>
