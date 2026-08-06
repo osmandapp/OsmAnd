@@ -36,38 +36,36 @@ import net.osmand.util.SearchAlgorithms;
 // UNIT TESTING: Travessa de Santo António Rua Joaquim Ribeiro Carvalho Portugal
 
 //////////// TESTING //////////
+// ### fuel_diesel.json (broken cafe fuel)
 // FIX TESTING: POI intersection 'fuel mcdonalds', 'cafe fuel', 'fuel burger' (cafe fuel broken)
 
-// UNIT TESTING!! '155 Park Avenue Wilkes Barre' incorrect first result Result 5 (t5+0-w2-oth0-tp-1) - 41.2364, -75.8843 155 ["155 park avenue" [Building] '101 Parks Avenue (Iron Triangle)' 26282478473 25749 (41.2373 -75.8831), "wilkes barre" [POI Bar] 'Wilkes-Barre Republic Club' 6094142255 21383 (41.2298 -75.8826)]
-// TEST ON FIX for sorting sumOther - s1 += r.otherWordsNotFound;
-
+// ### usa_new_york.json (missing 57th street, missing west/east) -
 // UNIT TESTING: 'Bar 4 avenue' (new york poi category present)
 // UNIT TESTING: ( add to new york test) 8 ave 8?
+// UNIT TESTING: "apple city", "harlem city" (New york) - test that result odesn't appear "city" [POI_TYPE] + "apple" [CITY_TOWN_TYPE] 'New York' 
 
-// UNIT TESTING: 2419 Avenue G, Dickinson, TX 77539, USA (FAILS border) - Add missing border
-// UNIT TESTING: (venezia district-street) 'Venezia Cannaregio Campo Saffa', 'Cannaregio 539D Campo Saffa', 'Venezia Cannaregio 539D'
-// UNIT TESTING: 'Pennsylvania Avenue Philadelphia Philadelphia County Pennsylvania USA' (duplicate words) res - 39.963028, -75.174270
+// ### uk_saksag.json (NO street intersection, No City Antwerpen)  
+// UNIT TESTING: "саксаг. Володимирська"; // 
+// UNIT TESTING: (2 house + ref) 'саксаг. 63/28, 2' (ref + 2 +house), 'саксаг. 28', 'саксаг. 63', 'саксаг. 63/28', "Cafe вулиця Саксаганського", restaurant Antwerpen , "нова пошта вулиця Саксаганського", "нова вулиця Саксаганського"
 
+// ### makby.json (double check 6 queries and numbers)
 // UNIT TESTING: Brands See makby queries and file! // 20: 16 (brand/name Mac.by), 3 (no brand, name Mac.by), ...
-// UNIT TESTING: "саксаг. Володимирська"; // street intersection
-// UNIT TESTING: (2 house + ref) 'саксаг. 63/28, 2' (ref + 2 +house), 'саксаг. 28', 'саксаг. 63', 'саксаг. 63/28'
 
+// ### usa_tx_avenue_g.json (1. Missing Postcode 2. Missing USA 3. Test Fix on TX restaurant) 
+// UNIT TESTING: 2419 Avenue G, Dickinson, TX 77539, USA (FAILS border) - Add missing border
+
+// OTHER tests  (15)
+// UNIT TESTING: 'Pennsylvania Avenue Philadelphia Philadelphia County Pennsylvania USA' (duplicate words) res - 39.963028, -75.174270
+// UNIT TESTING!! '155 Park Avenue Wilkes Barre' incorrect first result Result 5 (t5+0-w2-oth0-tp-1) - 41.2364, -75.8843 155 ["155 park avenue" [Building] '101 Parks Avenue (Iron Triangle)' 26282478473 25749 (41.2373 -75.8831), "wilkes barre" [POI Bar] 'Wilkes-Barre Republic Club' 6094142255 21383 (41.2298 -75.8826)]
+//     TEST ON FIX for sorting sumOther - s1 += r.otherWordsNotFound;
 // UNIT TESTING: POI Name / Type + Address - 'Shell 2 Rožňavská'
-// UNIT TESTING: <POI Category> + Object, Postcode + Type, 1181ZM cafe; // brand +
-// UNIT TESTING: нова пошта <street>, нова пошта <city>, just <post_ref> (нова пошта 3 краматорск), 5 <>... 
-//               "Cafe вулиця Саксаганського", restaurant Antwerpen , "нова пошта вулиця Саксаганського", "нова вулиця Саксаганського"
-// UNIT TESTING: Deduplicate brands by search 'по.' (search) - results brand langs - 'Поїхали з нами' / 'Поехали с нами'
-// UNIT TESTING: нова пошта краматорськ  - no brand !! (3 in ref, 5 in name) 5 (5 N7846074085, N1482296639)
-
-// UNIT TESTING: (by id): O128894
+// UNIT TESTING: Postcode + Type: 1181ZM cafe; // brand +
+// UNIT TESTING: 'нова пошта краматорськ', 'нова пошта краматорськ 3', 'нова пошта краматорськ 5'  - no brand !! (3 in ref, 5 in name) 5 (5 N7846074085, N1482296639)
 // UNIT TESTING: (poi additional germany) Gynaecologist - from all poi types should be result ! (not like old search)
-
-// UNIT TESTING: City > Boundary + location? Format strings (City > Boundary)...
-// UNIT TESTING DEDUPLICATE: Street related to city or suburb what to show
+// UNIT TESTING DEDUPLICATE: Street related to city or suburb what to show (RZR)
 // UNIT TESTING: (failing) 763 Ro-Ki Boulevard Nichols
 // UNIT TESTING: "Travessa de Santo António" x "Rua Joaquim Ribeiro de Carvalho" x "portugal" (39.7412, -8.8012 Barreira Urbanização Vale da Cabrita))
 //               - FORBID (slow): to interconnect tokens between 2 words - issue "<Street> <City> <Hno>"?
-// UNIT TESTING: "apple city", "harlem city" (New york) - test that result odesn't appear "city" [POI_TYPE] + "apple" [CITY_TOWN_TYPE] 'New York' 
 // UNIT TESTING: '500 East College Avenue State College' (partial, no poi type, n)
 // UNIT TESTING: '10 Am Remsufer Remseck am Neckar'
 // UNIT TESTING: '138 138 Scott Avenue Bellefonte' + '138 138 Scott Avenue' (Wrong data but good test if street = '138 Scott Avenue'
