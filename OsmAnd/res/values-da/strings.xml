@@ -2690,7 +2690,7 @@
     <string name="open_saved_track">Åbn gemt spor</string>
     <string name="shared_string_is_saved">er gemt</string>
     <string name="one_point_error">Tilføj mindst to punkter.</string>
-    <string name="shared_string_redo">Omgøre</string>
+    <string name="shared_string_redo">Gentag</string>
     <string name="navigate_to_track_descr">Naviger fra min position til sporet</string>
     <string name="pass_whole_track_descr">Punkt på sporet for at navigere</string>
     <string name="number_of_gpx_files_selected_pattern">%s sporfiler valgt</string>
@@ -2717,8 +2717,7 @@
     <string name="use_live_routing">OsmAnd Live-data</string>
     <string name="osm_edit_logout_success">Logget ud</string>
     <string name="shared_string_graph">Graf</string>
-    <string name="message_graph_will_be_available_after_recalculation">Vent venligst.
-\nGrafen vil være tilgængelig efter genberegning af rute.</string>
+    <string name="message_graph_will_be_available_after_recalculation">Vent venligst.\nGraf vil være tilgængelig efter genberegning af rute.</string>
     <string name="shared_string_local_maps">Lokale kort</string>
     <string name="icon_group_special">Særlig</string>
     <string name="icon_group_transport">Transport</string>
@@ -3451,7 +3450,7 @@
     <string name="calculating_altitude">Beregner højde</string>
     <string name="calculate_online">Beregn online</string>
     <string name="track_attach_to_the_roads_descr">Sporet vil blive forbundet til vejene ved hjælp af offline-kortene, og sporets geometri vil blive ændret.</string>
-    <string name="get_altitude_data">Få højdedata</string>
+    <string name="get_altitude_data">Hent højdedata</string>
     <string name="shared_string_speed">Hastighed</string>
     <string name="app_mode_mountain_bicycle">Mountainbike</string>
     <string name="gps_info_widget_desc">Viser antallet af satellitter, der er synlige og bruges i øjeblikket.</string>
@@ -4325,7 +4324,7 @@
     <string name="vertical_exaggeration">Vertikal overdrivelse</string>
     <string name="use_terrain_maps">Brug terrænkort</string>
     <string name="use_nearby_roads_summary">Bruger offline-kort til at finde veje og højdedata i nærheden. Justerer muligvis sporets geometri.</string>
-    <string name="use_nearby_roads">Brug veje i nærheden</string>
+    <string name="use_nearby_roads">Brug nærliggende veje</string>
     <string name="retrieve_elevation_data_summary">OsmAnd kan hente højdedata fra nærliggende veje eller terrænkort.</string>
     <string name="use_terrain_maps_summary">Bruger terrænkort til højdedata. Sporgeometrien forbliver uændret.</string>
     <string name="delete_actions_button_confirmation">Er du sikker på, at du vil slette \"%1$s\" med alle tilføjede handlinger?</string>
@@ -5395,4 +5394,5 @@
     <string name="share_favorites_preparation_failed">Det var ikke muligt at forberede filerne til deling.</string>
     <string name="share_favorites_share_failed">Det var ikke muligt at dele filen.</string>
     <string name="share_favorites_missing_media_warning">Nogle af de vedhæftede mediefiler kunne ikke medtages.</string>
+    <string name="search_on_web">Søg på nettet</string>
 </resources>
