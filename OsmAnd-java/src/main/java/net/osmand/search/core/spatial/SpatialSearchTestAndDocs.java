@@ -36,9 +36,8 @@ import net.osmand.util.SearchAlgorithms;
 // UNIT TESTING: Travessa de Santo António Rua Joaquim Ribeiro Carvalho Portugal
 
 //////////// TESTING //////////
-// ### fuel_diesel.json (broken cafe fuel)
-//     ! FIX TESTING: POI intersection 'fuel mcdonalds', 'cafe fuel', 'fuel burger' (cafe fuel broken)
 
+// ### fuel_diesel.json - REDO 'cafe fuel' - (t2+0-w1-oth0-tp0) - ["cafe fuel" [POI Fuel] 'UPG' 621685642
 // ### germany_remstal.json - Missing kernen im remstal
 // ### netherlands_huns.json - Missing postcode data
 // ### usa_pa75.json - missing boundary for PA as regions?
@@ -397,7 +396,7 @@ public class SpatialSearchTestAndDocs {
 //		settings.OPTIM_READ_CATEGORY_WORD_ATOMS = false;
 //		settings.OPTIM_READ_COMMON_WORDS_LIMIT = 10000;
 		
-//		pattern = "Ukraine_";
+		pattern = "Ukraine_";
 //		location = new LatLon(48.020997, 30.968742);
 //		query = "Мигия озеро ";
 //		query = "Мигия water"; 
@@ -408,7 +407,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "Нова пошта харків";
 		
 //		query = "shop Fuel";
-//		query = "Cafe Fuel";
+		query = "Cafe Fuel";
 //		query = "bank приватбанк"; // прив.
 //		query = "при.";
 //		query = "Cafe";
@@ -417,8 +416,8 @@ public class SpatialSearchTestAndDocs {
 //		query = "Mcdonalds";
 //		query = "Stomat.";
 
-		pattern = "Ukraine_";
-//		pattern2 = "World_";
+//		pattern = "Ukraine_";
+//		pattern2 = "Moldova";
 //		location = new LatLon(50.4631,30.4553);
 //		settings.OPTIM_READ_COMMON_WORDS_ATOMS = true;
 //		query = "mcdonald's";
@@ -444,7 +443,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "Школа 25 Володимирська вулиця"; // Школа 25 Володимирська вулиця ALWAYS_READ_COMMON_WORDS_ATOMS = true
 //		query = "андріівський узвіз Школа "; // ALWAYS_READ_COMMON_WORDS_ATOMS = true
 //		query = "Школа ";
-		query = "Школа А+";
+//		query = "Школа А+";
 //		query = "25-та школа"; // 25-та школа, 25-та school
 		
 //		query = "школа №25"; // test '№25', '25'? -- 'школа', 'школа №25', 'школа 25' // 63112526

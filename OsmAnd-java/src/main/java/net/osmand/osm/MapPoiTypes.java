@@ -933,10 +933,10 @@ public class MapPoiTypes {
 
 	public String getBasePoiName(AbstractPoiType abstractPoiType) {
 		String name = abstractPoiType.getKeyName();
-		if(name.startsWith("osmand_")) {
+		if (name.startsWith("osmand_")) {
 			name = name.substring("osmand_".length());
 		}
-		if(name.startsWith("amenity_")) {
+		if (name.startsWith("amenity_")) {
 			name = name.substring("amenity_".length());
 		}
 		name = name.replace('_', ' ');
