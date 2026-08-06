@@ -28,7 +28,7 @@ class CoordinateFormatSelectorBottomSheet : BaseMaterialBottomSheetWithHeader() 
 	private lateinit var targetAppMode: ApplicationMode
 	private var selectedFormatId: String? = null
 	private var showSelectOtherFormat: Boolean = true
-	private var formatIds: List<String>? = null
+	private var gridFormatsOnly: Boolean = false
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -37,9 +37,7 @@ class CoordinateFormatSelectorBottomSheet : BaseMaterialBottomSheetWithHeader() 
 			?: currentAppMode
 		selectedFormatId = CoordinateFormatIds.normalize(arguments?.getString(ARG_SELECTED_FORMAT_ID))
 		showSelectOtherFormat = arguments?.getBoolean(ARG_SHOW_SELECT_OTHER_FORMAT, true) ?: true
-		formatIds = arguments?.getStringArrayList(ARG_FORMAT_IDS)
-			?.mapNotNull { CoordinateFormatIds.normalize(it) }
-			?.distinct()
+		gridFormatsOnly = arguments?.getBoolean(ARG_GRID_FORMATS_ONLY, false) ?: false
 	}
 
 	override fun onCreateView(
@@ -79,15 +77,14 @@ class CoordinateFormatSelectorBottomSheet : BaseMaterialBottomSheetWithHeader() 
 
 	private fun bindFormats() {
 		val preferences = osmandSettings.coordinateFormatSettingsStorage
-		val fixedFormatIds = formatIds
-		val preferredIds = fixedFormatIds ?: preferences.getPreferredIds(targetAppMode)
 		val selectedId = selectedFormatId ?: preferences.getPrimaryId(targetAppMode)
-		val preferredFormats = resolveFormats(preferredIds)
-		val recentFormats = if (fixedFormatIds == null) {
-			resolveFormats(preferences.getRecentIds().filterNot { it in preferredIds })
-		} else {
-			emptyList()
+		val preferredIds = filterSupportedIds(preferences.getPreferredIds(targetAppMode))
+		val recentIds = ArrayList(filterSupportedIds(preferences.getRecentIds()).filterNot { it in preferredIds })
+		if (selectedId !in preferredIds && selectedId !in recentIds) {
+			recentIds.add(0, selectedId)
 		}
+		val preferredFormats = resolveFormats(preferredIds)
+		val recentFormats = resolveFormats(recentIds)
 
 		val preferredContainer = mainView.findViewById<LinearLayout>(R.id.preferredFormatsContainer)
 		preferredContainer.removeAllViews()
@@ -218,6 +215,14 @@ class CoordinateFormatSelectorBottomSheet : BaseMaterialBottomSheetWithHeader() 
 		return osmandApp.coordinateFormatHelper.resolveFormats(ids)
 	}
 
+	private fun filterSupportedIds(ids: List<String>): List<String> {
+		return if (gridFormatsOnly) {
+			osmandApp.coordinateFormatHelper.gridFormatProvider.filterSupportedIds(ids)
+		} else {
+			ids
+		}
+	}
+
 	interface FormatSelectionListener {
 		fun onFormatSelected(formatId: String)
 		fun onSelectOtherFormat()
@@ -234,7 +239,7 @@ class CoordinateFormatSelectorBottomSheet : BaseMaterialBottomSheetWithHeader() 
 		private const val ARG_APP_MODE_KEY = "app_mode_key"
 		private const val ARG_SELECTED_FORMAT_ID = "selected_format_id"
 		private const val ARG_SHOW_SELECT_OTHER_FORMAT = "show_select_other_format"
-		private const val ARG_FORMAT_IDS = "format_ids"
+		private const val ARG_GRID_FORMATS_ONLY = "grid_formats_only"
 
 		@JvmStatic
 		@JvmOverloads
@@ -244,7 +249,7 @@ class CoordinateFormatSelectorBottomSheet : BaseMaterialBottomSheetWithHeader() 
 			appMode: ApplicationMode? = null,
 			selectedFormatId: String? = null,
 			showSelectOtherFormat: Boolean = true,
-			formatIds: List<String>? = null
+			gridFormatsOnly: Boolean = false
 		) {
 			if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 				CoordinateFormatSelectorBottomSheet().apply {
@@ -253,7 +258,7 @@ class CoordinateFormatSelectorBottomSheet : BaseMaterialBottomSheetWithHeader() 
 						putString(ARG_APP_MODE_KEY, appMode?.stringKey)
 						putString(ARG_SELECTED_FORMAT_ID, selectedFormatId)
 						putBoolean(ARG_SHOW_SELECT_OTHER_FORMAT, showSelectOtherFormat)
-						formatIds?.let { putStringArrayList(ARG_FORMAT_IDS, ArrayList(it)) }
+						putBoolean(ARG_GRID_FORMATS_ONLY, gridFormatsOnly)
 					}
 				}.show(fragmentManager, TAG)
 			}

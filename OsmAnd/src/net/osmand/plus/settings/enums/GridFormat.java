@@ -10,8 +10,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.settings.coordinates.CoordinateFormatIds;
 import net.osmand.util.CollectionUtils;
 
-import java.util.List;
-
 public enum GridFormat implements EnumWithTitleId {
 
 	DMS(LocationConvert.FORMAT_SECONDS, R.string.dd_mm_ss_format),
@@ -122,19 +120,6 @@ public enum GridFormat implements EnumWithTitleId {
 			return MAIDENHEAD;
 		}
 		return null;
-	}
-
-	@NonNull
-	public static List<String> getSupportedCoordinateFormatIds() {
-		return List.of(DMS.getCoordinateFormatId(),
-				DM.getCoordinateFormatId(),
-				DIGITAL.getCoordinateFormatId(),
-				UTM.getCoordinateFormatId(),
-				OLC.getCoordinateFormatId(),
-				MGRS.getCoordinateFormatId(),
-				SWISS_GRID.getCoordinateFormatId(),
-				SWISS_GRID_PLUS.getCoordinateFormatId(),
-				MAIDENHEAD.getCoordinateFormatId());
 	}
 }
 

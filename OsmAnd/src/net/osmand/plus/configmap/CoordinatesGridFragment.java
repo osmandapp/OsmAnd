@@ -157,7 +157,7 @@ public class CoordinatesGridFragment extends BaseFullScreenFragment
 				settings.getApplicationMode(),
 				controller.getSelectedCoordinateFormatId(),
 				true,
-				controller.getSupportedCoordinateFormatIds()));
+				true));
 		setupSelectableBackground(button);
 		updateFormatButton();
 	}
