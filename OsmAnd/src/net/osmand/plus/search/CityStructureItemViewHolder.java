@@ -132,11 +132,10 @@ public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 				typeName = app.getString(R.string.intersection);
 			}
 		} else if (mapObject instanceof Building) {
-			StringBuilder address = new StringBuilder(item.getSearchResult().localeRelatedObjectName);
 			if (item.getSearchResult().relatedObject instanceof Street street) {
-				address.append(", ").append(street.getCity().getName());
+				title = String.format("%s, %s", title, street.getName());
+				addressText = street.getCity().getName();
 			}
-			addressText = address.toString();
 			typeName = app.getString(R.string.search_address_building);
 		}
 		addressTv.setText(addressText);
