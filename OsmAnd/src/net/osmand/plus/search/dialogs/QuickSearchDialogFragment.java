@@ -65,6 +65,7 @@ import net.osmand.plus.plugins.accessibility.NavigationInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.poi.RearrangePoiFiltersFragment;
 import net.osmand.plus.resources.RegionAddressRepository;
+import net.osmand.plus.search.CityStructureItemViewHolder;
 import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
 import net.osmand.plus.search.ShareHistoryAsyncTask;
@@ -1079,7 +1080,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			return poiTypeNames;
 		}
 		Map<String, Integer> uniquePoiTypes = new LinkedHashMap<>();
-		for (SearchResult result : collection.getCurrentSearchResults()) {
+		for (SearchResult result : collection.getVisibleSpatialSearchResults()) {
 			String poiTypeName = getPoiTypeNameForResult(result);
 			if (!Algorithms.isEmpty(poiTypeName)) {
 				Integer count = uniquePoiTypes.get(poiTypeName);
@@ -1096,17 +1097,14 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 	@Nullable
 	private String getPoiTypeNameForResult(@NonNull SearchResult result) {
-		AbstractPoiType poiType = getPoiTypeForResult(result);
-		return poiType != null ? poiType.getTranslation() : null;
-	}
-
-	@Nullable
-	private AbstractPoiType getPoiTypeForResult(@NonNull SearchResult result) {
 		Object object = result.object;
 		if (object instanceof Amenity amenity) {
-			return getPoiTypeForAmenity(amenity);
+			AbstractPoiType poiType = getPoiTypeForAmenity(amenity);
+			return poiType != null ? poiType.getTranslation() : null;
 		} else if (object instanceof PoiType type) {
-			return type;
+			return type.getTranslation();
+		} else if(object instanceof MapObject mapObject) {
+			return CityStructureItemViewHolder.getTypeName(app, mapObject);
 		}
 		return null;
 	}
