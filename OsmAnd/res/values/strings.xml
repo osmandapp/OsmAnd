@@ -11,6 +11,12 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="approach_poi_distance">Approach POI distance</string>
+	<string name="approach_poi_distance_descr">Trigger POI alerts when within this distance.</string>
+	<string name="approach_poi_time">Approach POI time</string>
+	<string name="approach_poi_time_descr">Trigger POI alerts when within this time to arrival.</string>
+	<string name="custom_approach_thresholds">Custom approach thresholds</string>
+	<string name="custom_approach_thresholds_descr">Enable manual distance and time overrides for POI approach alerts.</string>
 	<string name="share_favorites_media_preparation_failed">Couldn\'t include attached media. Sharing points only.</string>
 	<plurals name="files_count">
 		<item quantity="one">%d file</item>
