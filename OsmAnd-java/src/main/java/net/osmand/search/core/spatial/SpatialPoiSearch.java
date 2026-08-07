@@ -152,7 +152,7 @@ public class SpatialPoiSearch {
 				}
 				addToIndex(pt, null);
 				for (PoiType add : pt.getPoiAdditionals()) {
-					if (add.isTopVisible() && !"no".equals(poiTypes.getBasePoiName(add))) {
+					if (add.isTopVisible() && !add.getKeyName().endsWith("_no")) {
 						addToIndex(add, pt);
 					}
 				}

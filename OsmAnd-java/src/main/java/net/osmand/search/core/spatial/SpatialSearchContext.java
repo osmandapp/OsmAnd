@@ -656,6 +656,10 @@ public class SpatialSearchContext {
 				cache.put(ofirstid + (i << SHIFT_FILE_IND), lst.get(i));
 			}
 		}
+		if (poiInd >= lst.size()) {
+			System.err.printf("Error reading %d - %d object from %s \n", shift, poiInd, c.file);
+			return null;
+		}
 		MapObject amenity = lst.get(poiInd);
 		stats.readObjsBytes += (bmir.getBytesRead() - bytesRead);
 		stats.sub2ReadObjTime.finish();

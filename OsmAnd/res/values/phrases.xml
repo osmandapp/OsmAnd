@@ -5609,7 +5609,7 @@
 	<string name="poi_climbing_route">Climbing route</string>
 	<string name="poi_climbing_route_bottom">Climbing route bottom</string>
 
-	<string name="poi_cafe_yes">Yes</string>
+	<string name="poi_cafe_yes">Cafe: yes</string>
 
 	<string name="poi_sled_yes">Sled: yes</string>
 	<string name="poi_sled_no">Sled: no</string>
