@@ -46,18 +46,19 @@ import net.osmand.util.SearchAlgorithms;
 // UNIT TESTING: "саксаг. Володимирська"; // 
 // UNIT TESTING: (2 house + ref) 'саксаг. 63/28, 2' (ref + 2 +house), 'саксаг. 28', 'саксаг. 63', 'саксаг. 63/28', "Cafe вулиця Саксаганського", restaurant Antwerpen , "нова пошта вулиця Саксаганського", "нова вулиця Саксаганського"
 
-// OTHER tests  (10)
+// ## usa_penn_avenue.json: (add ro-ki ignore) UNIT TESTING: (failing) 763 Ro-Ki Boulevard Nichols
+
 // 1. UNIT TESTING!! '155 Park Avenue Wilkes Barre' incorrect first result Result 5 (t5+0-w2-oth0-tp-1) - 41.2364, -75.8843 155 ["155 park avenue" [Building] '101 Parks Avenue (Iron Triangle)' 26282478473 25749 (41.2373 -75.8831), "wilkes barre" [POI Bar] 'Wilkes-Barre Republic Club' 6094142255 21383 (41.2298 -75.8826)]
-//     TEST ON FIX for sorting sumOther - s1 += r.otherWordsNotFound;
-// 2. UNIT TESTING: 'нова пошта краматорськ', 'нова пошта краматорськ 3', 'нова пошта краматорськ 5'  - no brand !! (3 in ref, 5 in name) 5 (5 N7846074085, N1482296639)
-// 3. UNIT TESTING: (poi additional germany) Gynaecologist - from all poi types should be result ! (not like old search)
-// 4. UNIT TESTING DEDUPLICATE: Street related to city or suburb what to show (RZR)
-// 5. UNIT TESTING: (failing) 763 Ro-Ki Boulevard Nichols
-// 6. UNIT TESTING: "Travessa de Santo António" x "Rua Joaquim Ribeiro de Carvalho" x "portugal" (39.7412, -8.8012 Barreira Urbanização Vale da Cabrita))
-//               - FORBID (slow): to interconnect tokens between 2 words - issue "<Street> <City> <Hno>"?
-// 7. UNIT TESTING: '10 Am Remsufer Remseck am Neckar'
-// 8. UNIT TESTING: Japan_kanto_tokyo (see example below on neighborouds) - test on small osm.gz?
-// 9. UNIT TESTING: Test poi category translations (add ru / de in test)
+// TEST ON FIX for sorting sumOther - s1 += r.otherWordsNotFound;
+// 2. UNIT TESTING: '10 Am Remsufer Remseck am Neckar'
+// 3. UNIT TESTING: "Travessa de Santo António" x "Rua Joaquim Ribeiro de Carvalho" x "portugal" (39.7412, -8.8012 Barreira Urbanização Vale da Cabrita))
+//   - FORBID (slow): to interconnect tokens between 2 words - issue "<Street> <City> <Hno>"?
+
+// OTHER tests  (4)
+// 1. UNIT TESTING: (poi additional germany) Gynaecologist - from all poi types should be result ! (not like old search)
+// 2. UNIT TESTING DEDUPLICATE: Street related to city or suburb what to show (RZR)
+// 3. UNIT TESTING: Japan_kanto_tokyo (see example below on neighborouds) - test on small osm.gz?
+// 4. UNIT TESTING: Test poi category translations (add ru / de in test)
 
 // NO UNIT TESTING: '400 Susquehanna Boulevard Hazel Township' (MISSING Hazel Township)
 // NO UNIT TESTING: '330 Innovation Boulevard University Park' (partial result missing university park)
