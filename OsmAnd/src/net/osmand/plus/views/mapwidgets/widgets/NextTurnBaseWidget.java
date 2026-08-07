@@ -125,7 +125,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 
 		int layoutId = getContentLayoutId();
 		renderedWidgetSize = verticalWidget
-				? resolveWidgetSize(widgetState.getWidgetSizePref().get())
+				? widgetState.getWidgetSizePref().get()
 				: null;
 		UiUtilities.getInflater(mapActivity, nightMode).inflate(layoutId, container);
 		findViews();
@@ -157,7 +157,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 
 	@LayoutRes
 	private int getProperVerticalLayoutId(@NonNull ResizableWidgetState resizableWidgetState) {
-		return switch (resolveWidgetSize(resizableWidgetState.getWidgetSizePref().get())) {
+		return switch (resizableWidgetState.getWidgetSizePref().get()) {
 			case SMALL -> R.layout.navigation_widget_small;
 			case MEDIUM ->
 					isFullRow ? R.layout.navigation_widget_full : R.layout.navigation_widget_half;
@@ -255,7 +255,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 	}
 
 	private void checkShieldOverflow() {
-		if (verticalWidget && WidgetSize.SMALL == resolveWidgetSize(getWidgetSizePref().get())) {
+		if (verticalWidget && WidgetSize.SMALL == getWidgetSizePref().get()) {
 			ScrollUtils.addOnGlobalLayoutListener(shieldImagesContainer, () -> {
 				int containerWidth = shieldImagesContainer.getWidth();
 				int usedWidth = 0;
@@ -404,7 +404,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 
 	@Override
 	protected void onPanelAppearanceChanged(@NonNull ResolvedPanelAppearance appearance) {
-		if (verticalWidget && renderedWidgetSize != resolveWidgetSize(getWidgetSizePref().get())) {
+		if (verticalWidget && renderedWidgetSize != getWidgetSizePref().get()) {
 			recreateView();
 			return;
 		}
@@ -559,7 +559,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 			return;
 		}
 
-		WidgetSize currentWidgetSize = resolveWidgetSize(widgetState.getWidgetSizePref().get());
+		WidgetSize currentWidgetSize = widgetState.getWidgetSizePref().get();
 		String subText = distanceSubView.getText().toString();
 		String formattedSubText = null;
 		switch (currentWidgetSize) {

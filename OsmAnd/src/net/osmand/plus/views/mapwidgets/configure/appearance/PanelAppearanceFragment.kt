@@ -34,6 +34,7 @@ import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.views.mapwidgets.WidgetsPanel
 import net.osmand.plus.views.mapwidgets.appearance.PanelColorTarget
 import net.osmand.plus.views.mapwidgets.appearance.ResolvedPanelAppearance
+import net.osmand.plus.views.mapwidgets.configure.WidgetsSettingsHelper
 import net.osmand.plus.widgets.popup.PopUpMenu
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData
 import net.osmand.plus.widgets.popup.PopUpMenuItem
@@ -258,6 +259,9 @@ class PanelAppearanceFragment : BaseOsmAndFragment() {
 				.showTopDivider(mode == PanelSizeMode.SMALL)
 				.setOnClickListener {
 					pref.setModeValue(selectedAppMode, mode)
+					mode.widgetSize?.let { size ->
+						widgetsSettingsHelper()?.applyWidgetsSize(panel, size)
+					}
 					onAppearanceChanged()
 				}
 				.create()
@@ -275,11 +279,21 @@ class PanelAppearanceFragment : BaseOsmAndFragment() {
 				.showTopDivider(mode == PanelIconMode.OFF)
 				.setOnClickListener {
 					pref.setModeValue(selectedAppMode, mode)
+					mode.showIcon?.let { showIcon ->
+						widgetsSettingsHelper()?.applyWidgetsIconVisibility(panel, showIcon)
+					}
 					onAppearanceChanged()
 				}
 				.create()
 		}
 		showMenu(anchorView, items)
+	}
+
+	private fun widgetsSettingsHelper(): WidgetsSettingsHelper? {
+		val mapActivity = activity as? MapActivity ?: return null
+		return WidgetsSettingsHelper(mapActivity, selectedAppMode).apply {
+			setLayoutMode(layoutMode)
+		}
 	}
 
 	private fun showTextColorMenu(anchorView: View, secondary: Boolean) {

@@ -32,6 +32,7 @@ import net.osmand.plus.utils.InsetsUtils
 import net.osmand.plus.views.controls.MapHudLayout
 import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControllerType
 import net.osmand.plus.views.mapwidgets.WidgetsPanel
+import net.osmand.plus.views.mapwidgets.configure.WidgetsSettingsHelper
 import net.osmand.plus.views.mapwidgets.configure.dialogs.ConfigureScreenFragment.SCREEN_LAYOUT_MODE
 import net.osmand.plus.widgets.TextViewEx
 import net.osmand.plus.widgets.popup.PopUpMenu
@@ -295,13 +296,27 @@ class WidgetsAppearanceFragment : BaseFullScreenFragment(), CopyAppModePrefsList
 	override fun copyAppModePrefs(appMode: ApplicationMode) {
 		app.panelAppearanceSettingsManager[selectedPanel]
 			.copyFromProfile(appMode, selectedAppMode, layoutMode)
+		applyPanelParametersToWidgets()
 		onAppearanceChanged()
 	}
 
 	private fun copyFromPanel(fromPanel: WidgetsPanel) {
 		app.panelAppearanceSettingsManager[selectedPanel]
 			.copyFromPanel(fromPanel, selectedAppMode, layoutMode)
+		applyPanelParametersToWidgets()
 		onAppearanceChanged()
+	}
+
+	private fun applyPanelParametersToWidgets() {
+		val mapActivity = activity as? MapActivity ?: return
+		val appearanceSettings = app.panelAppearanceSettingsManager[selectedPanel]
+		val helper = WidgetsSettingsHelper(mapActivity, selectedAppMode)
+		helper.setLayoutMode(layoutMode)
+
+		appearanceSettings.getSizeModePref(layoutMode).getModeValue(selectedAppMode).widgetSize
+			?.let { helper.applyWidgetsSize(selectedPanel, it) }
+		appearanceSettings.getIconModePref(layoutMode).getModeValue(selectedAppMode).showIcon
+			?.let { helper.applyWidgetsIconVisibility(selectedPanel, it) }
 	}
 
 	private fun resetSelectedPanel() {

@@ -16,10 +16,8 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.enums.PanelIconMode;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
-import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
@@ -29,7 +27,6 @@ import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
 import net.osmand.plus.views.mapwidgets.appearance.PanelAppearanceConsumer;
 import net.osmand.plus.views.mapwidgets.appearance.ResolvedPanelAppearance;
-import net.osmand.plus.views.mapwidgets.configure.appearance.PanelAppearanceSettings;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
 
 import java.util.List;
@@ -76,34 +73,6 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 
 	@LayoutRes
 	protected abstract int getLayoutId();
-
-	@NonNull
-	protected WidgetSize resolveWidgetSize(@NonNull WidgetSize individualSize) {
-		ResolvedPanelAppearance appearance = panelAppearance;
-		if (appearance != null && appearance.getPanel() == panel) {
-			WidgetSize resolvedSize = appearance.getSizeMode().getWidgetSize();
-			return resolvedSize != null ? resolvedSize : individualSize;
-		}
-		return PanelAppearanceSettings.resolveWidgetSize(app, panel, individualSize, mapActivity);
-	}
-
-	@NonNull
-	protected PanelIconMode resolvePanelIconMode() {
-		ResolvedPanelAppearance appearance = panelAppearance;
-		if (appearance != null && appearance.getPanel() == panel) {
-			return appearance.getIconMode();
-		}
-		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(mapActivity);
-		return app.getPanelAppearanceSettingsManager().get(panel).getIconModePref(layoutMode).get();
-	}
-
-	protected boolean resolveIconVisibility(boolean individualShowIcon) {
-		return switch (resolvePanelIconMode()) {
-			case ON -> true;
-			case OFF -> false;
-			case ORIGINAL -> individualShowIcon;
-		};
-	}
 
 	public void initView() {
 		if (view == null) {
