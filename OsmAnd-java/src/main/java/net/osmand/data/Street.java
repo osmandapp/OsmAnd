@@ -136,6 +136,20 @@ public class Street extends MapObject {
 		}
 		return nm;
 	}
+	
+	public String getNameCityPart(String lang, boolean transliterate) {
+		String nm = getName(lang, transliterate);
+		int t = nm.lastIndexOf('(');
+		if (t > 0) {
+			String cityPart = nm.substring(t + 1);
+			if ((t = cityPart.lastIndexOf(')')) != -1) {
+				cityPart = cityPart.substring(0, t);
+			}
+			return cityPart;
+		}
+		return "";
+	}
+
 
 	public JSONObject toJSON() {
 		return toJSON(true);
