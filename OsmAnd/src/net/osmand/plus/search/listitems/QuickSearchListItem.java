@@ -433,6 +433,7 @@ public class QuickSearchListItem {
 
 	@Nullable
 	public static String getStreetCityPart(SearchResult searchResult) {
+		//todo replace with street.getNameWithoutCityPart(lang, transliterate))
 		if (searchResult.localeName.endsWith(")")) {
 			int i = searchResult.localeName.indexOf('(');
 			if (i > 0) {
