@@ -76,10 +76,13 @@ public class FavouritesFileHelper {
 
 	@NonNull
 	public File getExternalFile(@NonNull FavoriteGroup group) {
-		File favDir = getExternalDir();
-		String fileName = group.getName().isEmpty() ? FAV_FILE_PREFIX
-				: FAV_FILE_PREFIX + FAV_GROUP_NAME_SEPARATOR + getGroupFileName(group.getName());
-		return new File(favDir, fileName + GPX_FILE_EXT);
+		return new File(getExternalDir(), getFolderFileName(group.getName()) + GPX_FILE_EXT);
+	}
+
+	@NonNull
+	public static String getFolderFileName(@NonNull String folderPath) {
+		return folderPath.isEmpty() ? FAV_FILE_PREFIX
+				: FAV_FILE_PREFIX + FAV_GROUP_NAME_SEPARATOR + getGroupFileName(folderPath);
 	}
 
 	@NonNull

@@ -46,12 +46,19 @@ public class ShareFavoritesAsyncTask extends AsyncTask<Void, Void, Void> {
 	public ShareFavoritesAsyncTask(@NonNull FragmentActivity activity,
 	                               @NonNull List<FavoriteGroup> groups,
 	                               @Nullable ShareFavoritesListener listener) {
+		this(activity, groups, null, listener);
+	}
+
+	public ShareFavoritesAsyncTask(@NonNull FragmentActivity activity,
+	                               @NonNull List<FavoriteGroup> groups,
+	                               @Nullable String folderPath,
+	                               @Nullable ShareFavoritesListener listener) {
 		this.app = AndroidUtils.getApp(activity);
 		this.groups = groups;
 		this.listener = listener;
 		this.favouritesHelper = app.getFavoritesHelper();
 		this.activityRef = new WeakReference<>(activity);
-		destFile = createDestinationFile(app, groups);
+		destFile = createDestinationFile(app, groups, folderPath);
 	}
 
 	@Override
@@ -70,10 +77,14 @@ public class ShareFavoritesAsyncTask extends AsyncTask<Void, Void, Void> {
 
 	@NonNull
 	public static File createDestinationFile(@NonNull OsmandApplication app,
-	                                         @NonNull List<FavoriteGroup> groups) {
+	                                         @NonNull List<FavoriteGroup> groups,
+	                                         @Nullable String folderPath) {
 		File dir = new File(app.getCacheDir(), "share");
 		if (!dir.exists()) {
 			dir.mkdirs();
+		}
+		if (folderPath != null) {
+			return new File(dir, FavouritesFileHelper.getFolderFileName(folderPath) + GPX_FILE_EXT);
 		}
 		if (groups.size() == 1) {
 			File file = app.getFavoritesHelper().getFileHelper().getExternalFile(groups.get(0));
@@ -97,7 +108,7 @@ public class ShareFavoritesAsyncTask extends AsyncTask<Void, Void, Void> {
 
 		for (FavoriteGroup group : groups) {
 			buffer.setLength(0);
-			buffer.append("<h3>").append(group.getDisplayName(app)).append("</h3>");
+			buffer.append("<h3>").append(FavoriteFolderFormatter.getBreadcrumb(app, group.getName())).append("</h3>");
 			if (buffer.length() + html.length() > MAX_CHARS_IN_DESCRIPTION) {
 				return html.append("<p>...</p>").toString();
 			}
