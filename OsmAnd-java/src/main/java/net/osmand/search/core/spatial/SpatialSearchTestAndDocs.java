@@ -47,9 +47,6 @@ import net.osmand.util.SearchAlgorithms;
 // UNIT TESTING: "саксаг. Володимирська"; // 
 // UNIT TESTING: (2 house + ref) 'саксаг. 63/28, 2' (ref + 2 +house), 'саксаг. 28', 'саксаг. 63', 'саксаг. 63/28', "Cafe вулиця Саксаганського", restaurant Antwerpen , "нова пошта вулиця Саксаганського", "нова вулиця Саксаганського"
 
-// ### usa_tx_avenue_g.json (1. Missing Postcode 2. Missing USA 3. Test Fix on TX restaurant) 
-// UNIT TESTING: 2419 Avenue G, Dickinson, TX 77539, USA (FAILS border) - Add missing border
-
 // OTHER tests  (10)
 // 1. UNIT TESTING!! '155 Park Avenue Wilkes Barre' incorrect first result Result 5 (t5+0-w2-oth0-tp-1) - 41.2364, -75.8843 155 ["155 park avenue" [Building] '101 Parks Avenue (Iron Triangle)' 26282478473 25749 (41.2373 -75.8831), "wilkes barre" [POI Bar] 'Wilkes-Barre Republic Club' 6094142255 21383 (41.2298 -75.8826)]
 //     TEST ON FIX for sorting sumOther - s1 += r.otherWordsNotFound;
