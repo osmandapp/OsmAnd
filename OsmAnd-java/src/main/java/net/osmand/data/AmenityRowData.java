@@ -1,23 +1,30 @@
-package net.osmand.plus.mapcontextmenu.builders.rows;
+package net.osmand.data;
 
-import android.graphics.drawable.Drawable;
-
-import androidx.annotation.NonNull;
-
-import net.osmand.plus.R;
-import net.osmand.plus.mapcontextmenu.CollapsableView;
+import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiType;
 import net.osmand.util.Algorithms;
 
-public class AmenityInfoRow {
+import java.util.List;
+
+public class AmenityRowData {
+
+	public enum CollapsableRowType {
+		NONE, PLAIN, POI_TYPE_GROUP, ELEVATION_PILLS, OPENING_HOURS
+	}
 
 	public final String key;
-	public final Drawable icon;
+	public final String value;
 	public final int iconId;
 	public final String iconName;
 	public final String textPrefix;
 	public final String text;
 	public final String hiddenUrl;
-	public final CollapsableView collapsableView;
+	public final List<AmenityRowData> collapsableRows;
+	public final CollapsableRowType collapsableRowType;
+	public final List<PoiType> collapsablePoiTypes;
+	public final PoiCategory collapsableCategory;
+	public final boolean poiAdditional;
+	public final AmenityRowData collapsableExtraRow;
 	public final boolean collapsable;
 	public final int textColor;
 	public final boolean isWiki;
@@ -30,16 +37,21 @@ public class AmenityInfoRow {
 	public final boolean matchWidthDivider;
 	public final int textLinesLimit;
 
-	private AmenityInfoRow(@NonNull Builder builder) {
+	private AmenityRowData(Builder builder) {
 		this.key = builder.key;
-		this.icon = builder.icon;
+		this.value = builder.value;
 		this.iconId = builder.iconId;
 		this.iconName = builder.iconName;
 		this.textPrefix = builder.textPrefix;
 		this.text = builder.text;
 		this.hiddenUrl = builder.hiddenUrl;
-		this.collapsableView = builder.collapsableView;
-		this.collapsable = builder.collapsableView != null;
+		this.collapsableRows = builder.collapsableRows;
+		this.collapsableRowType = builder.collapsableRowType;
+		this.collapsablePoiTypes = builder.collapsablePoiTypes;
+		this.collapsableCategory = builder.collapsableCategory;
+		this.poiAdditional = builder.poiAdditional;
+		this.collapsableExtraRow = builder.collapsableExtraRow;
+		this.collapsable = builder.collapsableRowType != CollapsableRowType.NONE;
 		this.textColor = builder.textColor;
 		this.isWiki = builder.isWiki;
 		this.isText = builder.isText;
@@ -54,13 +66,18 @@ public class AmenityInfoRow {
 
 	public static class Builder {
 		private final String key;
-		private Drawable icon;
+		private String value;
 		private int iconId;
 		private String iconName;
 		private String textPrefix = "";
 		private String text;
 		private String hiddenUrl;
-		private CollapsableView collapsableView;
+		private List<AmenityRowData> collapsableRows;
+		private CollapsableRowType collapsableRowType = CollapsableRowType.NONE;
+		private List<PoiType> collapsablePoiTypes;
+		private PoiCategory collapsableCategory;
+		private boolean poiAdditional;
+		private AmenityRowData collapsableExtraRow;
 		private int textColor;
 		private boolean isWiki;
 		private boolean isText;
@@ -72,19 +89,30 @@ public class AmenityInfoRow {
 		private boolean matchWidthDivider;
 		private int textLinesLimit = 0;
 
+		public Builder(String key) {
+			this.key = key;
+		}
 
-		public Builder(@NonNull String key) { this.key = key; }
-
-		// Setters
-		public Builder setIcon(Drawable icon) { this.icon = icon; return this; }
+		public Builder setValue(String value) { this.value = value; return this; }
 		public Builder setIconId(int iconId) { this.iconId = iconId; return this; }
 		public Builder setIconName(String iconName) { this.iconName = iconName; return this; }
 		public Builder setTextPrefix(String textPrefix) { this.textPrefix = textPrefix; return this; }
-		public Builder setTextPrefixIfNotPresent(String textPrefix) { if (!hasTextPrefix()) setTextPrefix(textPrefix); return this; }
 		public Builder setText(String text) { this.text = text; return this; }
-		public Builder setTextIfNotPresent(String text) { if (!hasText()) setText(text); return this; }
 		public Builder setHiddenUrl(String hiddenUrl) { this.hiddenUrl = hiddenUrl; return this; }
-		public Builder setCollapsableView(CollapsableView view) { this.collapsableView = view; return this; }
+
+		public Builder setCollapsableRows(List<AmenityRowData> collapsableRows) {
+			this.collapsableRows = collapsableRows;
+			if (collapsableRowType == CollapsableRowType.NONE && collapsableRows != null) {
+				collapsableRowType = CollapsableRowType.PLAIN;
+			}
+			return this;
+		}
+		public Builder setCollapsableRowType(CollapsableRowType collapsableRowType) { this.collapsableRowType = collapsableRowType; return this; }
+		public Builder setCollapsablePoiTypes(List<PoiType> collapsablePoiTypes) { this.collapsablePoiTypes = collapsablePoiTypes; return this; }
+		public Builder setCollapsableCategory(PoiCategory collapsableCategory) { this.collapsableCategory = collapsableCategory; return this; }
+		public Builder setPoiAdditional(boolean poiAdditional) { this.poiAdditional = poiAdditional; return this; }
+		public Builder setCollapsableExtraRow(AmenityRowData collapsableExtraRow) { this.collapsableExtraRow = collapsableExtraRow; return this; }
+
 		public Builder setTextColor(int color) { this.textColor = color; return this; }
 		public Builder setIsWiki(boolean wiki) { this.isWiki = wiki; return this; }
 		public Builder setIsText(boolean textFlag) { this.isText = textFlag; return this; }
@@ -96,31 +124,27 @@ public class AmenityInfoRow {
 		public Builder setMatchWidthDivider(boolean match) { this.matchWidthDivider = match; return this; }
 		public Builder setTextLinesLimit(int limit) { this.textLinesLimit = limit; return this; }
 
-		// Getters
+		public Builder setTextIfNotPresent(String text) { if (!hasText()) setText(text); return this; }
+		public Builder setTextPrefixIfNotPresent(String textPrefix) { if (!hasTextPrefix()) setTextPrefix(textPrefix); return this; }
+
 		public String getKey() { return key; }
-		public Drawable getIcon() { return icon; }
+		public String getValue() { return value; }
 		public int getIconId() { return iconId; }
 		public String getIconName() { return iconName; }
-		public boolean hasIcon() { return iconId != 0 || icon != null; }
+		public boolean hasIcon() { return iconId != 0; }
 		public String getTextPrefix() { return textPrefix; }
 		public boolean hasTextPrefix() { return !Algorithms.isEmpty(textPrefix); }
 		public String getText() { return text; }
 		public boolean hasText() { return !Algorithms.isEmpty(text); }
 		public String getHiddenUrl() { return hiddenUrl; }
 		public boolean hasHiddenUrl() { return !Algorithms.isEmpty(hiddenUrl); }
-		public CollapsableView getCollapsableView() { return collapsableView; }
-		public boolean isCollapsable() {return collapsableView != null;}
-		public int getTextColor() { return textColor; }
+		public CollapsableRowType getCollapsableRowType() { return collapsableRowType; }
 		public boolean isWiki() { return isWiki; }
 		public boolean isText() { return isText; }
-		public boolean isNeedLinks() { return needLinks && collapsableView == null; }
-		public boolean isPhoneNumber() { return isPhoneNumber; }
-		public boolean isUrl() { return isUrl; }
-		public int getOrder() { return order; }
-		public String getName() { return name; }
-		public boolean isDescription() { return isText && iconId == R.drawable.ic_action_info_dark; }
-		public int getTextLinesLimit() { return textLinesLimit; }
+		public boolean isNeedLinks() { return needLinks && collapsableRowType == CollapsableRowType.NONE; }
 
-		public AmenityInfoRow build() { return new AmenityInfoRow(this); }
+		public AmenityRowData build() {
+			return new AmenityRowData(this);
+		}
 	}
 }
