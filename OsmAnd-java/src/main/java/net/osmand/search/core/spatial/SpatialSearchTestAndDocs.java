@@ -69,14 +69,10 @@ import net.osmand.util.SearchAlgorithms;
 // 7. UNIT TESTING: (failing) 763 Ro-Ki Boulevard Nichols
 // 8. UNIT TESTING: "Travessa de Santo António" x "Rua Joaquim Ribeiro de Carvalho" x "portugal" (39.7412, -8.8012 Barreira Urbanização Vale da Cabrita))
 //               - FORBID (slow): to interconnect tokens between 2 words - issue "<Street> <City> <Hno>"?
-// 10. UNIT TESTING: '10 Am Remsufer Remseck am Neckar'
+// 9. UNIT TESTING: '10 Am Remsufer Remseck am Neckar'
 
-// 9. UNIT TESTING: '500 East College Avenue State College' (partial, no poi type, n)
-// 11. UNIT TESTING: '138 138 Scott Avenue Bellefonte' + '138 138 Scott Avenue' (Wrong data but good test if street = '138 Scott Avenue'
-// 12. UNIT TESTING: '315 B Westside Avenue Elmira' ('315B' should be no interpolation, '315 B')
-
-// 13. UNIT TESTING: Japan_kanto_tokyo (see example below on neighborouds) - test on small osm.gz?
-// 14. UNIT TESTING: Test poi category translations (add ru / de in test)
+// 10. UNIT TESTING: Japan_kanto_tokyo (see example below on neighborouds) - test on small osm.gz?
+// 11. UNIT TESTING: Test poi category translations (add ru / de in test)
 
 // NO UNIT TESTING: '400 Susquehanna Boulevard Hazel Township' (MISSING Hazel Township)
 // NO UNIT TESTING: '330 Innovation Boulevard University Park' (partial result missing university park)
