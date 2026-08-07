@@ -27,34 +27,23 @@ import net.osmand.util.SearchAlgorithms;
 // UNIT TESTING: 'tongass national forest', 'national', national forest'
 // UNIT TESTING: 'rue de l'eglise', 'rue de la', 'rue de la fen.', 'rû bas du rue' (too many results) 
 // UNIT TESTING: 'Venezia', 'Everest', 'Rio de Janeiro', 'остров Пасхи'
-// UNIT TESTING: 25-та школа (keep failing too many results)
+// UNIT TESTING: 25-та школа
 // UNIT TESTING: 100km+ "Мигия озеро" (non freq-common word + enlarge), - partialMatch+partialExactMatch
 // UNIT TESTING: 100km+ Calle 20 188 San Isidro Lima 
 // UNIT TESTING: 100km+ нова пошта краматорськ  - no brand (3, 5) 5 (5 N7846074085, N1482296639)
-// UNIT TESTING: Venezia (Changed map data 2 Wikidataids)!, So city on first with good elo rating (Test other top visited cities)
 // UNIT TESTING: '4 ave 8 paterson' (OK - '8 4 ave paterson', '4th ave 8 paterson' play order of assigned numbers to bdl ref)
 // UNIT TESTING: Travessa de Santo António Rua Joaquim Ribeiro Carvalho Portugal
 
 //////////// TESTING //////////
 // ### ukraine_school.json - Missing A+ school - школа А+ (nothing found on website)
-// Result 2 (t2+0-w1-oth1-tp0) - ["школа а" [POI School] 'Початкова школа А+' 731005224 6351 (50.3700 30.4470)]
-
-// ### usa_new_york.json  -
-// UNIT TESTING: "apple city", "harlem city" (New york) - test that result odesn't appear "city" [POI_TYPE] + "apple" [CITY_TOWN_TYPE] 'New York' 
-
+// 		Result 2 (t2+0-w1-oth1-tp0) - ["школа а" [POI School] 'Початкова школа А+' 731005224 6351 (50.3700 30.4470)]
+// ### usa_new_york.json  - "apple city", "harlem city" (New york) - test that result odesn't appear "city" [POI_TYPE] + "apple" [CITY_TOWN_TYPE] 'New York' 
 // ### uk_saksag.json (NO street intersection, No City Antwerpen)  
-// UNIT TESTING: "саксаг. Володимирська"; // 
-// UNIT TESTING: (2 house + ref) 'саксаг. 63/28, 2' (ref + 2 +house), 'саксаг. 28', 'саксаг. 63', 'саксаг. 63/28', "Cafe вулиця Саксаганського", restaurant Antwerpen , "нова пошта вулиця Саксаганського", "нова вулиця Саксаганського"
+// ### usa_penn_avenue.json: (add ro-ki ignore) UNIT TESTING: (failing) 763 Ro-Ki Boulevard Nichols
+// ### usa_wilkes-barre.json '155 Park Avenue Wilkes Barre': duplicate result not present
+// ### portugal_travessa.json: See comment
+// ### ge3.json: '10 Am Remsufer Remseck am Neckar' - see comment
 
-// ## usa_penn_avenue.json: (add ro-ki ignore) UNIT TESTING: (failing) 763 Ro-Ki Boulevard Nichols
-
-// 1. UNIT TESTING!! '155 Park Avenue Wilkes Barre' incorrect first result Result 5 (t5+0-w2-oth0-tp-1) - 41.2364, -75.8843 155 ["155 park avenue" [Building] '101 Parks Avenue (Iron Triangle)' 26282478473 25749 (41.2373 -75.8831), "wilkes barre" [POI Bar] 'Wilkes-Barre Republic Club' 6094142255 21383 (41.2298 -75.8826)]
-// TEST ON FIX for sorting sumOther - s1 += r.otherWordsNotFound;
-// 2. UNIT TESTING: '10 Am Remsufer Remseck am Neckar'
-// 3. UNIT TESTING: "Travessa de Santo António" x "Rua Joaquim Ribeiro de Carvalho" x "portugal" (39.7412, -8.8012 Barreira Urbanização Vale da Cabrita))
-//   - FORBID (slow): to interconnect tokens between 2 words - issue "<Street> <City> <Hno>"?
-
-// OTHER tests  (4)
 // 1. UNIT TESTING: (poi additional germany) Gynaecologist - from all poi types should be result ! (not like old search)
 // 2. UNIT TESTING DEDUPLICATE: Street related to city or suburb what to show (RZR)
 // 3. UNIT TESTING: Japan_kanto_tokyo (see example below on neighborouds) - test on small osm.gz?
@@ -174,6 +163,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "2/1 Rathausplatz Esslingen am Neckar"; // not correct
 //		query = "9 Neustädter Straße Korb";
 //		query = "14/1 J.-F.-Weishaar-Straße Korb";
+		settings.DEV_USE_PIPELINE = false;
 		query = "10 Am Remsufer Remseck am Neckar";
 
 //		settings = SpatialTextSearchSettings.searchPoiCategoriesSettings(0, null);
@@ -216,7 +206,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "West Valley City";
 //		query = "2110 College Avenue Elmira";
 		
-//		pattern = "Us_penn";
+//		jpattern = "Us_penn";
 //		pattern2 = "Us_new";
 //		query = "500 East College Avenue State College";
 //		query = "315 B Westside Avenue Elmira"; // '315 B', '315B'
@@ -233,7 +223,7 @@ public class SpatialSearchTestAndDocs {
 //		location = new LatLon(41.2364,-75.8843); // 649331066
 //		settings.OPTIM_READ_COMMON_WORDS_ATOMS = false;
 //		settings.MAX_PIPELINE_STAGE_TO_STOP = new int[] {100000};
-//		settings.DEDUPLICATE_RES = true;
+//		settings.DEDUPLICATE_RES = false;
 //		query = "155 Park Avenue Wilkes Barre"; // 155 Park Avenue Wilkes-Barre
 		
 //		query = "USA Salt Lake City Pennsylvania Street 41";
@@ -319,10 +309,10 @@ public class SpatialSearchTestAndDocs {
 //		query = "Vaduz ";
 //		query = "Jugendheim Malbun";
 
-		pattern = "Netherlands_";
+//		pattern = "Netherlands_";
 //		location = new LatLon(52.2827, 4.8601);
 //		query = "harderwijk estrado"; // 't2+0-w2-oth1-tp4' t2+0-w2-oth2-tp0
-		query = "Muziekpodium Harderwijk";
+//		query = "Muziekpodium Harderwijk";
 //		query = "harderwijk";
 //		query = "cafe harderwijk";
 //		query = "hotel amsterdam";
@@ -377,7 +367,7 @@ public class SpatialSearchTestAndDocs {
 //		settings.OPTIM_READ_CATEGORY_WORD_ATOMS = false;
 //		settings.OPTIM_READ_COMMON_WORDS_LIMIT = 10000;
 		
-		pattern = "Ukraine_";
+//		pattern = "Ukraine_";
 //		location = new LatLon(48.020997, 30.968742);
 //		query = "Мигия озеро ";
 //		query = "Мигия water"; 
@@ -388,7 +378,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "Нова пошта харків";
 		
 //		query = "shop Fuel";
-		query = "Cafe Fuel";
+//		query = "Cafe Fuel";
 //		query = "bank приватбанк"; // прив.
 //		query = "при.";
 //		query = "Cafe";
