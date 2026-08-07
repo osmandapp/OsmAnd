@@ -442,7 +442,7 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 
 	@NonNull
 	public WidgetSize getWidgetSize() {
-		return resolveWidgetSize(getWidgetSizePref().get());
+		return getWidgetSizePref().get();
 	}
 
 	@NonNull
