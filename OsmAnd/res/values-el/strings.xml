@@ -5164,4 +5164,5 @@
     <string name="share_favorites_preparation_failed">Δεν ήταν δυνατή η προετοιμασία των αρχείων για κοινοποίηση.</string>
     <string name="share_favorites_share_failed">Δεν ήταν δυνατή η κοινοποίηση του αρχείου.</string>
     <string name="share_favorites_missing_media_warning">Δεν ήταν δυνατή η συμπερίληψη μερικών συνημμένων πολυμέσων.</string>
+    <string name="search_on_web">Αναζήτηση στον ιστό</string>
 </resources>
