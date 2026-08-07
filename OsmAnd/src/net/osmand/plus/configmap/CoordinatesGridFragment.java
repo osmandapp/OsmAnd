@@ -21,6 +21,7 @@ import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.palette.view.PaletteElements;
 import net.osmand.plus.settings.coordinates.CoordinateFormatSelectorBottomSheet;
+import net.osmand.plus.settings.fragments.AddCoordinateFormatFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
@@ -34,6 +35,7 @@ public class CoordinatesGridFragment extends BaseFullScreenFragment
 
 	public static final String TAG = CoordinatesGridFragment.class.getSimpleName();
 	private static final String GRID_FORMAT_REQUEST_KEY = "coordinates_grid_format";
+	private static final String GRID_ADD_FORMAT_REQUEST_KEY = "coordinates_grid_add_format";
 
 	private View view;
 	private int profileColor;
@@ -129,6 +131,13 @@ public class CoordinatesGridFragment extends BaseFullScreenFragment
 
 	private void setupFormatButton() {
 		View button = view.findViewById(R.id.format_button);
+		getChildFragmentManager().setFragmentResultListener(GRID_ADD_FORMAT_REQUEST_KEY, this,
+				(requestKey, result) -> {
+					String formatId = result.getString(AddCoordinateFormatFragment.RESULT_FORMAT_ID);
+					if (formatId != null) {
+						controller.onCoordinateFormatSelected(formatId);
+					}
+				});
 		CoordinateFormatSelectorBottomSheet.setupResultListener(getChildFragmentManager(), this,
 				new CoordinateFormatSelectorBottomSheet.FormatSelectionListener() {
 					@Override
@@ -138,6 +147,8 @@ public class CoordinatesGridFragment extends BaseFullScreenFragment
 
 					@Override
 					public void onSelectOtherFormat() {
+						view.post(() -> AddCoordinateFormatFragment.showGridSelectionDialog(
+								getChildFragmentManager(), settings.getApplicationMode(), GRID_ADD_FORMAT_REQUEST_KEY));
 					}
 				}, GRID_FORMAT_REQUEST_KEY);
 		button.setOnClickListener(v -> CoordinateFormatSelectorBottomSheet.showInstance(
@@ -145,8 +156,8 @@ public class CoordinatesGridFragment extends BaseFullScreenFragment
 				GRID_FORMAT_REQUEST_KEY,
 				settings.getApplicationMode(),
 				controller.getSelectedCoordinateFormatId(),
-				false,
-				controller.getSupportedCoordinateFormatIds()));
+				true,
+				true));
 		setupSelectableBackground(button);
 		updateFormatButton();
 	}

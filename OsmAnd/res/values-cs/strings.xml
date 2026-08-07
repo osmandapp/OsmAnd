@@ -5271,4 +5271,21 @@
     <string name="astro_map_center_location">Střed mapy: %1$s</string>
     <string name="astro_solar_eclipse">Zatmění slunce</string>
     <string name="astro_solar_eclipse_subtitle">Prozkoumejte celosvětová zatmění slunce</string>
+    <string name="release_5_4">• Nové prostorové vyhledávání — vyhledávání míst a okolí daného místa\n\n • Vylepšené uživatelské rozhraní vyhledávání: třídění, filtry podle kategorií, přehlednější vzhled\n\n • Přidávání fotografií a médií do oblíbených\n\n • Oblíbené: podskupiny a složky, které lze připnout\n\n • Souřadnice: vyhledávání, mapová mřížka a zobrazení bodů zájmu (POI) nyní podporují lokátory EPSG a Maidenhead\n\n • Opraveny výpadky navigace; přepínání mezi standardním a rychlým trasováním\n\n • Nastavení měřítka mapy v Android Auto nezávisle na nastavení v telefonu\n\n • Do sekce Astronomie přidány sluneční a měsíční zatmění</string>
+    <string name="always_keep_local_copy">Vždy držte lokální kopii</string>
+    <string name="always_keep_local_copy_description">Media zůstávají připojena i v případě, že je originál odstraněn z galerie nebo souborů.</string>
+    <string name="use_spatial_text_search">Použít prostorové vyhledávání textu</string>
+    <string name="use_spatial_text_search_description">Nahradit standardní rychlé vyhledávací rozhraní API s experimentálním systémem pro vyhledávání textu.</string>
+    <string name="astro_lunar_eclipse">Měsíční zatmění</string>
+    <string name="astro_lunar_eclipse_subtitle">Prozkoumejte po celém světě zatmění Měsíce</string>
+    <string name="astro_previous_lunar_eclipse">Předchozí zatmění Měsíce</string>
+    <string name="astro_next_lunar_eclipse">Další zatmění Měsíce</string>
+    <string name="astro_close_lunar_eclipse">Zavřít prohlížeč zatmění Měsíce</string>
+    <string name="astro_loading_lunar_eclipse">Výpočet zatmění Měsíce po celém světě</string>
+    <string name="astro_lunar_eclipse_load_error">Nelze vypočítat toto zatmění Měsíce.</string>
+    <string name="astro_total_lunar_eclipse">Úplné zatmění Měsíce</string>
+    <string name="astro_partial_lunar_eclipse">Částečné zatmění Měsíce</string>
+    <string name="astro_penumbral_lunar_eclipse">Penumbrální zatmění Měsíce</string>
+    <string name="astro_eclipse_phase_penumbral">Penumbrální</string>
+    <string name="astro_lunar_eclipse_calculating_state">Výpočet viditelnosti na mapě…</string>
 </resources>

@@ -742,6 +742,9 @@ public class AmenitySearcher {
                 .buildSearchRequest(x, x + 1, y, y + 1, 15, null, new ResultMatcher<>() {
                     @Override
                     public boolean publish(BinaryMapDataObject object) {
+                        if (object.isDeleted()) {
+                            return false;
+                        }
                         if (matcher == null || matcher.publish(object)) {
                             list.add(object);
                             return true;
@@ -840,7 +843,7 @@ public class AmenitySearcher {
 
     private boolean copyCoordinates(BaseDetailsObject detailsObject, BinaryMapDataObject mapObject) {
         int pointsLength = mapObject.getPointsLength();
-        if (detailsObject.getPointsLength() < pointsLength) {
+        if (pointsLength > 2) {
             detailsObject.clearGeometry();
             for (int i = 0; i < pointsLength; i++) {
                 detailsObject.addX(mapObject.getPoint31XTile(i));

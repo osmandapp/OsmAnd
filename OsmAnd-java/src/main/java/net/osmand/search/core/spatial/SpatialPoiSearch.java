@@ -54,6 +54,7 @@ public class SpatialPoiSearch {
 	public static class SpatialPoiType {
 		public final AbstractPoiType singleType;
 		public final String poiAdditional;
+		public final PoiSubType poiSubType;
 		final List<String> names = new ArrayList<String>();
 		final String key;
 		final int id;
@@ -67,13 +68,19 @@ public class SpatialPoiSearch {
 			this.key = pt.getKeyName();
 			this.id = id;
 			this.poiAdditional = null;
+			this.poiSubType = null;
 		}
 		
 		public SpatialPoiType(String additional, String key, int id) {
+			this(null, additional, key, id);
+		}
+
+		public SpatialPoiType(PoiSubType poiSubType, String additional, String key, int id) {
 			this.singleType = null;
 			this.key = key;
 			this.id = id;
 			this.poiAdditional = additional;
+			this.poiSubType = poiSubType;
 		}
 		
 		public boolean isPlace() {
@@ -120,6 +127,11 @@ public class SpatialPoiSearch {
 			return true;
 		}
 		
+		@Override
+		public String toString() {
+			return key;
+		}
+		
 	}
 
 	public SpatialPoiSearch(MapPoiTypes types) {
@@ -140,7 +152,7 @@ public class SpatialPoiSearch {
 				}
 				addToIndex(pt, null);
 				for (PoiType add : pt.getPoiAdditionals()) {
-					if (add.isTopVisible() && !"no".equals(poiTypes.getBasePoiName(add))) {
+					if (add.isTopVisible() && !add.getKeyName().endsWith("_no")) {
 						addToIndex(add, pt);
 					}
 				}
@@ -269,7 +281,7 @@ public class SpatialPoiSearch {
 					int freq = possibleValuesFreqs != null && k < possibleValuesFreqs.size() ? possibleValuesFreqs.get(k) : 0;
 					SpatialPoiType topValue = byKey.get(fullKey);
 					if (topValue == null) {
-						topValue = new SpatialPoiType(topValueName, fullKey, ids.getAndIncrement());
+						topValue = new SpatialPoiType(subType, topValueName, fullKey, ids.getAndIncrement());
 						if (wikidataId.length() > 0) {
 							String[] otherNames = wikidataId.split(";");
 							topValue.wikidataId = otherNames[0];
@@ -475,9 +487,13 @@ public class SpatialPoiSearch {
 		for (Amenity a : amenities) {
 			int x16 = MapUtils.get31TileNumberX(a.getLocation().getLongitude()) >> 15;
 			int y16 = MapUtils.get31TileNumberY(a.getLocation().getLatitude()) >> 15;
-			if (!SpatialSearchContext.skipZoomTileDuplicate(tiles, x16, y16, z, a.getTravelEloNumber() > Amenity.DEFAULT_ELO)) {
-				res.add(a);
+			long tileId = MapUtils.interleaveBits(x16 >> z, y16 >> z);
+			boolean elo = a.getTravelEloNumber() > Amenity.DEFAULT_ELO;
+			if (tiles.contains(tileId) && !elo) {
+				continue;
 			}
+			tiles.add(tileId);
+			res.add(a);
 		}
 		return res;
 	}

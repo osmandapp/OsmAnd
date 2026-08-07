@@ -5320,4 +5320,22 @@
     <string name="astro_eclipse_phase_total">Úplné</string>
     <string name="astro_eclipse_phase_annular">Prstencové</string>
     <string name="astro_eclipse_phase_partial">Čiastočné</string>
+    <string name="share_favorites_media_preparation_failed">Nedá sa zahrnúť pripojené médium. Zdieľajú sa len body.</string>
+    <plurals name="files_count">
+        <item quantity="one">%d súbor</item>
+        <item quantity="few">%d súbory</item>
+        <item quantity="many">%d súborov</item>
+        <item quantity="other">%d súborov</item>
+    </plurals>
+    <string name="preparing_file">Pripravuje sa súbor</string>
+    <string name="shared_string_archive">Archív</string>
+    <string name="share_favorites_with_media_description">Obľúbené body v %1$s majú pripojené mediálne súbory. Zdieľajte len body, alebo body s médiami ako archív.</string>
+    <string name="share_favorites_points_only">Len body</string>
+    <string name="share_favorites_points_and_media">Body a médiá</string>
+    <string name="share_favorites_preparation_failed">Nepodarilo sa pripraviť súbory na zdieľanie.</string>
+    <string name="share_favorites_share_failed">Nepodarilo sa zdieľať súbor.</string>
+    <string name="share_favorites_missing_media_warning">Niektoré pripojené mediálne súbory sa nepodarilo zahrnúť.</string>
+    <string name="release_5_4">• Nové priestorové vyhľadávanie — nájdite miesta a hľadajte okolo miesta\n\n • Vynovené rozhranie pre vyhľadávanie: triedenie, filtre kategórií, prehľadnejší vzhľad\n\n • Pripájanie fotografií a médií k obľúbeným bodom\n\n • Obľúbené: podskupiny a pripnuteľné priečinky\n\n • Súradnice: vyhľadávanie, mapová mriežka a zobrazenie bodov záujmu podporujú aj lokátory EPSG a Maidenhead\n\n • Opravené výpadky navigácie; prepínanie medzi štandardným a rýchlym výpočtom trasy\n\n • Nastavenie mierky mapy pre Android Auto nezávisle od nastavenia pre telefón\n\n • Modul Astronómia pridal zatmenia Slnka a Mesiaca</string>
+    <string name="astro_lunar_eclipse_calculating_state">Výpočet viditeľnosti v strede mapy…</string>
+    <string name="astro_lunar_eclipse_visibility_loading">Výpočet viditeľnosti…</string>
 </resources>

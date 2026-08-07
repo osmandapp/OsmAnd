@@ -4,6 +4,7 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              android:descendantFocusability="blocksDescendants"
               android:orientation="vertical">
 
     <LinearLayout
@@ -118,9 +119,20 @@
                         android:id="@+id/subtitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:textColor="?android:textColorSecondary"
                         android:textSize="@dimen/default_desc_text_size"
                         tools:text="City" />
+
+                    <net.osmand.plus.search.dialogs.SearchScopeChip
+                        android:id="@+id/search_scope_chip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="4dp"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
                 </LinearLayout>
 
                 <LinearLayout

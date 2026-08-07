@@ -230,7 +230,7 @@
     <string name="poi_glacier_type_hanging">Menggantung</string>
     <string name="poi_glacier_type_mountain">Gunung</string>
     <string name="poi_glacier_type_rock">Batu</string>
-    <string name="poi_service_vehicle_tyres_yes">Ban</string>
+    <string name="poi_service_vehicle_tyres_yes">Ban;Ban Luar;Ban;Ban</string>
     <string name="poi_service_vehicle_insurance_yes">Asuransi</string>
     <string name="poi_service_vehicle_truck_repair_yes">Perbaikan truk</string>
     <string name="poi_service_vehicle_glass_yes">Kaca</string>
@@ -496,7 +496,7 @@
     <string name="poi_department_store">Toko serba ada</string>
     <string name="poi_video">Toko video</string>
     <string name="poi_vacuum_cleaner">Toko penyedot debu</string>
-    <string name="poi_tyres">Toko ban</string>
+    <string name="poi_tyres">Ban;Ban Luar;Ban;Toko Ban;Ban Luar</string>
     <string name="poi_toys">Toko mainan</string>
     <string name="poi_ticket">Penjualan tiket</string>
     <string name="poi_stationery">Toko alat tulis</string>
@@ -2230,7 +2230,7 @@
     <string name="poi_substation_compression">Kompresi</string>
     <string name="poi_rtsa_scale_3a">3A</string>
     <string name="poi_flare">Flare gas;Tumpukan flare</string>
-    <string name="poi_hazard_additional_contamination">Bahaya: kontaminasi</string>
+    <string name="poi_hazard_additional_contamination">Kontaminasi</string>
     <string name="poi_changing_table_location_male_toilet">Lokasi meja ganti: toilet pria</string>
     <string name="poi_changing_table_location_unisex_toilet">Lokasi meja ganti: toilet unisex</string>
     <string name="poi_changing_table_count">Jumlah meja ganti</string>
@@ -2545,7 +2545,7 @@
     <string name="poi_motorcycle_rental_no">Penyewaan: tidak</string>
     <string name="poi_motorcycle_repair_yes">Perbaikan</string>
     <string name="poi_couloir">Koridor</string>
-    <string name="poi_surface_clay">Tanah liat</string>
+    <string name="poi_surface_clay">Permukaan: tanah liat</string>
     <string name="poi_socket_bs1363_yes">BS 1363</string>
     <string name="poi_socket_chademo_voltage_high">Tinggi</string>
     <string name="poi_rtsa_scale_2a">2A</string>
@@ -2644,7 +2644,7 @@
     <string name="poi_toilets_disposal_pitlatrine">Pembuangan toilet: jamban lubang</string>
     <string name="poi_xmas_shop">Toko Natal</string>
     <string name="poi_cuisine_pizza">Pizza</string>
-    <string name="poi_cuisine_doner">Doner kebab (shawarma)</string>
+    <string name="poi_cuisine_doner">Kebab doner (shawarma);Hidangan</string>
     <string name="poi_cuisine_sushi">Sushi</string>
     <string name="poi_cuisine_bistro">Bistro</string>
     <string name="poi_cuisine_couscous">Kuskus</string>
@@ -3150,7 +3150,7 @@
     <string name="poi_cuisine_donut">Donat</string>
     <string name="poi_aquaculture_fish">Akuakultur: ikan</string>
     <string name="poi_xmas_shop_christmas_tree">Toko pohon</string>
-    <string name="poi_cuisine">Masakan</string>
+    <string name="poi_cuisine">Jenis masakan</string>
     <string name="poi_cuisine_barbecue">Barbeku</string>
     <string name="poi_cuisine_noodle">Mi</string>
     <string name="poi_cuisine_ramen">Ramen</string>
@@ -3224,7 +3224,7 @@
     <string name="poi_winter_room_yes">Ruangan musim dingin: ya</string>
     <string name="poi_government_legislative">Institusi legislatif</string>
     <string name="poi_vhf">Saluran VHF</string>
-    <string name="poi_surface_tartan">Tartan</string>
+    <string name="poi_surface_tartan">Permukaan: Tartan</string>
     <string name="poi_location_wall">Lokasi: dinding</string>
     <string name="poi_visibility_house">Visibilitas: rumah</string>
     <string name="poi_water_place_durability_emergency">Ketahanan tempat air: darurat</string>
@@ -3298,8 +3298,8 @@
     <string name="poi_rtsa_scale_nc">n/c</string>
     <string name="poi_rtsa_scale_2b_asterisk">2B*</string>
     <string name="poi_rtsa_scale_3b_asterisk">3B*</string>
-    <string name="poi_hazard_additional_erosion">Bahaya: erosi</string>
-    <string name="poi_hazard_additional_avalanche">Bahaya: longsoran salju</string>
+    <string name="poi_hazard_additional_erosion">Erosi</string>
+    <string name="poi_hazard_additional_avalanche">Longsoran salju</string>
     <string name="poi_changing_table_yes">Ya;Meja ganti: ya</string>
     <string name="poi_changing_table_no">Tidak;Meja ganti: tidak</string>
     <string name="poi_changing_table_fee_no">Biaya meja ganti: tidak</string>
@@ -3493,7 +3493,7 @@
     <string name="poi_waste_cigarettes">Rokok</string>
     <string name="poi_spikes">Paku</string>
     <string name="poi_tank_trap">Perangkap tank</string>
-    <string name="poi_surface_chipseal">Chipseal</string>
+    <string name="poi_surface_chipseal">Permukaan: chipseal</string>
     <string name="poi_maxlength">Panjang maksimum</string>
     <string name="poi_boat_designated">Akses perahu: ditetapkan</string>
     <string name="poi_lock_ref">Referensi kunci</string>
@@ -3739,8 +3739,8 @@
     <string name="poi_direction_nnw">Arah: utara-barat laut</string>
     <string name="poi_direction_up">Arah: atas</string>
     <string name="poi_direction_down">Arah: bawah</string>
-    <string name="poi_surface_decoturf">DecoTurf</string>
-    <string name="poi_surface_metal_grid">Kisi-kisi logam</string>
+    <string name="poi_surface_decoturf">Permukaan: DecoTurf</string>
+    <string name="poi_surface_metal_grid">Permukaan: kisi logam</string>
     <string name="poi_location_entrance">Lokasi: pintu masuk</string>
     <string name="poi_visibility_street">Visibilitas: jalan</string>
     <string name="poi_visibility_area">Visibilitas: area</string>
@@ -3768,7 +3768,7 @@
     <string name="poi_substation_transmission">Transmisi</string>
     <string name="poi_substation_traction">Traksi</string>
     <string name="poi_change_delete">Objek yang dihapus</string>
-    <string name="poi_hazard_additional_minefield">Bahaya: ladang ranjau</string>
+    <string name="poi_hazard_additional_minefield">Ladang ranjau</string>
     <string name="poi_changing_table_location_room">Lokasi meja ganti: ruangan</string>
     <string name="poi_agricultural_yes">Akses kendaraan pertanian: ya</string>
     <string name="poi_parking_space">Tempat parkir</string>
@@ -4065,7 +4065,7 @@
     <string name="poi_owner">Pemilik</string>
     <string name="poi_animal_shelter_purpose_release_yes">Pelepasan: ya</string>
     <string name="poi_reservation_members_only">Khusus anggota</string>
-    <string name="poi_surface_artificial_turf">Rumput buatan</string>
+    <string name="poi_surface_artificial_turf">Permukaan: rumput sintetis</string>
     <string name="poi_socket_nema_14_50_output">Soket: NEMA 14-50: output</string>
     <string name="poi_climbing_quality_solid">Padat</string>
     <string name="poi_climbing_bolted_yes">Jangkar tetap: ya</string>
@@ -4077,7 +4077,7 @@
     <string name="poi_substation_inspection_gauge">Pengukur inspeksi</string>
     <string name="poi_toll_gantry">Gantri tol</string>
     <string name="poi_rescue_box">Kotak penyelamat</string>
-    <string name="poi_hazard_additional_flood">Bahaya: banjir</string>
+    <string name="poi_hazard_additional_flood">Banjir</string>
     <string name="poi_motorcar_private">Akses mobil: pribadi</string>
     <string name="poi_bus_no">Akses bus: tidak</string>
     <string name="poi_taxi_no">Akses taksi: tidak</string>
@@ -4204,7 +4204,7 @@
     <string name="poi_toilets_disposal_flush">Pembuangan toilet: siram</string>
     <string name="poi_xmas">Natal</string>
     <string name="poi_cuisine_burger">Burger</string>
-    <string name="poi_cuisine_kebab">Kebab</string>
+    <string name="poi_cuisine_kebab">Kebab;Hidangan</string>
     <string name="poi_cuisine_fish_and_chips">Ikan dan kentang goreng</string>
     <string name="poi_cuisine_sausage">Sosis</string>
     <string name="poi_cuisine_wine">Anggur</string>
@@ -4237,7 +4237,7 @@
     <string name="poi_rtsa_scale_1a">1A</string>
     <string name="poi_rtsa_scale_nc_asterisk">n/c*</string>
     <string name="poi_rtsa_scale_3b">3B</string>
-    <string name="poi_hazard_additional_nuclear">Bahaya: nuklir</string>
+    <string name="poi_hazard_additional_nuclear">Nuklir</string>
     <string name="poi_hookah_lounge">Lounge shisha</string>
     <string name="poi_foot_permissive">Akses pejalan kaki: permisif</string>
     <string name="poi_caravan_no">Akses karavan: tidak</string>
@@ -4389,7 +4389,7 @@
     <string name="poi_us_maps_recreation_area_activity_tubing">Tubing</string>
     <string name="poi_us_maps_recreation_area_activity_viewing_plants">Melihat tanaman</string>
     <string name="poi_mcdonalds">McDonald\'s</string>
-    <string name="poi_hazard_additional_falling_rocks">Bahaya: jatuhan batu</string>
+    <string name="poi_hazard_additional_falling_rocks">Runtuhan batu</string>
     <string name="poi_emergency_bay">Teluk darurat</string>
     <string name="poi_dressing_room">Kamar ganti</string>
     <string name="poi_snowmobile_designated">Ditentukan;Ditentukan untuk mobil salju</string>
@@ -4925,7 +4925,7 @@
     <string name="poi_xmas_event">Acara Natal</string>
     <string name="poi_xmas_pyramid">Piramida Natal</string>
     <string name="poi_public_bookcase_type_metal_cabinet">Jenis: lemari logam</string>
-    <string name="poi_cuisine_crepe">Krep</string>
+    <string name="poi_cuisine_crepe">Krep;Krep</string>
     <string name="poi_cuisine_heuriger">Heuriger</string>
     <string name="poi_cuisine_curry">Kari</string>
     <string name="poi_cuisine_buschenschank">Buschenschank</string>
@@ -5156,4 +5156,22 @@
     <string name="poi_hazard_queues_likely">Sering ada antrean</string>
     <string name="poi_hazard_side_winds">Angin samping</string>
     <string name="poi_hazard_ice">Es</string>
+    <string name="poi_surface_laterite">Permukaan: laterit</string>
+    <string name="poi_canoe_put_in">Peluncuran kano</string>
+    <string name="poi_canoe_egress">Pendaratan kano</string>
+    <string name="poi_canoe_put_in_egress">Peluncuran dan pendaratan kano</string>
+    <string name="poi_whitewater_hazard">Bahaya arung jeram</string>
+    <string name="poi_sample_collection">Pengambilan sampel;Darah;Laboratorium;Tes</string>
+    <string name="poi_sample_collection_yes">Ya</string>
+    <string name="poi_sample_collection_covid19">COVID19</string>
+    <string name="poi_sample_collection_blood">Darah</string>
+    <string name="poi_rapids_grade_0">0 (air tenang)</string>
+    <string name="poi_rapids_grade_1">1 (mudah)</string>
+    <string name="poi_rapids_grade_2">2 (pemula)</string>
+    <string name="poi_rapids_grade_3">3 (menengah)</string>
+    <string name="poi_rapids_grade_4">4 (lanjutan)</string>
+    <string name="poi_rapids_grade_5">5 (ahli)</string>
+    <string name="poi_rapids_grade_6">6 (ekstrem)</string>
+    <string name="poi_rapids_grade_x">X (tidak dapat dilalui)</string>
+    <string name="poi_water_lake">Danau</string>
 </resources>
