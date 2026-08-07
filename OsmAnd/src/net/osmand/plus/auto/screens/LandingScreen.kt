@@ -16,6 +16,7 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import net.osmand.plus.R
 import net.osmand.plus.auto.NavigationSession
+import net.osmand.util.Algorithms
 
 class LandingScreen(
     carContext: CarContext,
@@ -53,6 +54,25 @@ class LandingScreen(
         }
         val actionStripBuilder = ActionStrip.Builder()
         updateCompass()
+
+        val state = app.mapButtonsHelper.androidAutoButtonState
+        if (state != null && state.isEnabled) {
+            actionStripBuilder.addAction(
+                Action.Builder()
+                    .setIcon(CarIcon.Builder(IconCompat.createWithResource(carContext, R.drawable.ic_quick_action)).build())
+                    .setOnClickListener {
+                        val actions = state.quickActions
+                        if (!Algorithms.isEmpty(actions)) {
+                            val mapActivity = app.osmandMap.mapView.mapActivity
+                            if (mapActivity != null) {
+                                actions[0].execute(mapActivity, null)
+                                invalidate()
+                            }
+                        }
+                    }
+                    .build())
+        }
+
         actionStripBuilder.addAction(settingsAction)
         actionStripBuilder.addAction(createSearchAction())
         val mapActionStripBuilder = ActionStrip.Builder()

@@ -17,6 +17,7 @@ import com.google.gson.reflect.TypeToken;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.quickaction.ButtonAppearanceParams;
+import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.actions.ChangeMapOrientationAction;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -47,9 +48,17 @@ public class QuickActionButtonState extends MapButtonState {
 	public QuickActionButtonState(@NonNull OsmandApplication app, @NonNull String id) {
 		super(app, id);
 		this.visibilityPref = addPreference(settings.registerBooleanPreference(id + "_state", false)).makeProfile();
-		this.namePref = addPreference(settings.registerStringPreference(id + "_name", null)).makeGlobal().storeLastModifiedTime();
-		this.quickActionsPref = addPreference(settings.registerStringPreference(id + "_list", null)).makeGlobal().storeLastModifiedTime();
-		this.quickActionLayer = app.getOsmandMap().getMapLayers().getMapQuickActionLayer();
+		boolean isAndroidAuto = Algorithms.stringsEqual(id, MapButtonsHelper.ANDROID_AUTO_BUTTON_ID);
+		CommonPreference<String> namePref = settings.registerStringPreference(id + "_name", null);
+		if (isAndroidAuto) {
+			this.namePref = addPreference(settings.registerStringPreference(id + "_name", null)).makeProfile().storeLastModifiedTime();
+			this.quickActionsPref = addPreference(settings.registerStringPreference(id + "_list", null)).makeProfile().storeLastModifiedTime();
+			this.quickActionLayer = app.getOsmandMap().getMapLayers().getMapQuickActionLayer();
+		} else {
+			this.namePref = addPreference(settings.registerStringPreference(id + "_name", null)).makeGlobal().storeLastModifiedTime();
+			this.quickActionsPref = addPreference(settings.registerStringPreference(id + "_list", null)).makeGlobal().storeLastModifiedTime();
+			this.quickActionLayer = app.getOsmandMap().getMapLayers().getMapQuickActionLayer();
+		}
 	}
 
 	@Override

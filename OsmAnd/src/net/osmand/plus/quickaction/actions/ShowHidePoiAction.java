@@ -51,7 +51,8 @@ public class ShowHidePoiAction extends QuickAction {
 			.nameActionRes(R.string.quick_action_verb_show_hide)
 			.nameRes(defaultActionNameId)
 			.iconRes(R.drawable.ic_action_info_dark)
-			.category(QuickActionType.CONFIGURE_MAP);
+			.category(QuickActionType.CONFIGURE_MAP)
+			.allowedInAndroidAuto(true);
 
 	public static final String KEY_FILTERS = "filters";
 
