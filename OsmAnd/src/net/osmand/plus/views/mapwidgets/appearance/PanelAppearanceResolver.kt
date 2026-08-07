@@ -143,6 +143,16 @@ object PanelAppearanceResolver {
 				R.color.widgettext_shadow_day
 			}
 		)
+		val surfaceColor = if (backgroundMode == PanelBackgroundMode.DEFAULT) {
+			null
+		} else {
+			val reference = if (background.isOpaque) {
+				backgroundColor
+			} else {
+				getDefaultBackgroundColor(app, panel, nightMode)
+			}
+			DynamicWidgetColors.resolve(reference).surface
+		}
 		return ResolvedPanelAppearance(
 			panel = panel,
 			nightMode = nightMode,
@@ -152,6 +162,7 @@ object PanelAppearanceResolver {
 			textShadowColor = textShadowColor,
 			textShadowRadius = textShadowRadius,
 			background = background,
+			surfaceColor = surfaceColor,
 			dividerColor = dividerColor,
 			standaloneDividerColor = standaloneDividerColor,
 			panelBorderColor = ContextCompat.getColor(app, panelBorderColorRes),
