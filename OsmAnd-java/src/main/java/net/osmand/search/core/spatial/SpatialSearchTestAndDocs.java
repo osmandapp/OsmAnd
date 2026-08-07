@@ -37,14 +37,10 @@ import net.osmand.util.SearchAlgorithms;
 
 //////////// TESTING //////////
 
-// ### netherlands_huns.json - Missing postcode data
-// ### usa_pa75.json - missing boundary for PA as regions?
 // ### ukraine_school.json - Missing A+ school - школа А+ (nothing found on website)
 // Result 2 (t2+0-w1-oth1-tp0) - ["школа а" [POI School] 'Початкова школа А+' 731005224 6351 (50.3700 30.4470)]
 
-// ### usa_new_york.json (missing 57th street, missing west/east) -
-// UNIT TESTING: 'Bar 4 avenue' (new york poi category present)
-// UNIT TESTING: ( add to new york test) 8 ave 8?
+// ### usa_new_york.json  -
 // UNIT TESTING: "apple city", "harlem city" (New york) - test that result odesn't appear "city" [POI_TYPE] + "apple" [CITY_TOWN_TYPE] 'New York' 
 
 // ### uk_saksag.json (NO street intersection, No City Antwerpen)  
@@ -54,7 +50,7 @@ import net.osmand.util.SearchAlgorithms;
 // ### usa_tx_avenue_g.json (1. Missing Postcode 2. Missing USA 3. Test Fix on TX restaurant) 
 // UNIT TESTING: 2419 Avenue G, Dickinson, TX 77539, USA (FAILS border) - Add missing border
 
-// OTHER tests  (14)
+// OTHER tests  (10)
 // 1. UNIT TESTING!! '155 Park Avenue Wilkes Barre' incorrect first result Result 5 (t5+0-w2-oth0-tp-1) - 41.2364, -75.8843 155 ["155 park avenue" [Building] '101 Parks Avenue (Iron Triangle)' 26282478473 25749 (41.2373 -75.8831), "wilkes barre" [POI Bar] 'Wilkes-Barre Republic Club' 6094142255 21383 (41.2298 -75.8826)]
 //     TEST ON FIX for sorting sumOther - s1 += r.otherWordsNotFound;
 // 2. UNIT TESTING: POI Name / Type + Address - 'Shell 2 Rožňavská'
@@ -65,7 +61,6 @@ import net.osmand.util.SearchAlgorithms;
 // 7. UNIT TESTING: "Travessa de Santo António" x "Rua Joaquim Ribeiro de Carvalho" x "portugal" (39.7412, -8.8012 Barreira Urbanização Vale da Cabrita))
 //               - FORBID (slow): to interconnect tokens between 2 words - issue "<Street> <City> <Hno>"?
 // 8. UNIT TESTING: '10 Am Remsufer Remseck am Neckar'
-
 // 9. UNIT TESTING: Japan_kanto_tokyo (see example below on neighborouds) - test on small osm.gz?
 // 10. UNIT TESTING: Test poi category translations (add ru / de in test)
 
