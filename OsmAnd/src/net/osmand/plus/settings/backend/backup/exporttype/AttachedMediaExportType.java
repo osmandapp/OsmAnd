@@ -6,7 +6,6 @@ import androidx.annotation.Nullable;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.gallery.attached.helpers.AttachedMediaDataHelper;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
@@ -15,9 +14,9 @@ import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.items.AttachedMediaSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FavoritesSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.plus.settings.mediastorage.MediaDirType;
 import net.osmand.plus.settings.mediastorage.MediaSource;
 import net.osmand.shared.gpx.primitives.Link;
 import net.osmand.shared.media.MediaFileNameFormat;
@@ -49,10 +48,7 @@ public class AttachedMediaExportType extends AbstractExportType {
 	@NonNull
 	@Override
 	public List<?> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup) {
-		if (!offlineBackup) {
-			return Collections.emptyList();
-		}
-		return collectSettingsItems(app, app.getFavoritesHelper().getFavoriteGroups());
+		return collectSettingsItems(app, app.getFavoritesHelper().getFavoriteGroups(), !offlineBackup);
 	}
 
 	@NonNull
@@ -92,6 +88,12 @@ public class AttachedMediaExportType extends AbstractExportType {
 
 	@NonNull
 	public static List<AttachedMediaSettingsItem> collectSettingsItems(@NonNull OsmandApplication app, @NonNull Collection<FavoriteGroup> groups) {
+		return collectSettingsItems(app, groups, false);
+	}
+
+	@NonNull
+	private static List<AttachedMediaSettingsItem> collectSettingsItems(@NonNull OsmandApplication app,
+			@NonNull Collection<FavoriteGroup> groups, boolean cloudBackup) {
 		AttachedMediaDataHelper helper = new AttachedMediaDataHelper(app);
 		Map<String, AttachedMediaSettingsItem> itemsBySourceId = new LinkedHashMap<>();
 		Set<String> usedNames = collectExistingMediaFileNames(app);
@@ -110,7 +112,7 @@ public class AttachedMediaExportType extends AbstractExportType {
 				continue;
 			}
 			try {
-				String targetName = assignTargetFileName(app, source, usedNames);
+				String targetName = assignTargetFileName(app, source, usedNames, cloudBackup);
 				AttachedMediaSettingsItem item = new AttachedMediaSettingsItem(app, source, targetName);
 				item.addHrefKey(href);
 				itemsBySourceId.put(source.getId(), item);
@@ -124,67 +126,23 @@ public class AttachedMediaExportType extends AbstractExportType {
 		return new ArrayList<>(itemsBySourceId.values());
 	}
 
-	public static void processSettingsItems(@NonNull OsmandApplication app,
-	                                        @NonNull Collection<FavoriteGroup> groups,
-	                                        @NonNull List<SettingsItem> items) {
-		Set<String> selectedFavoriteHrefs = collectMediaHrefs(app, groups);
-		Set<String> packedFileNames = collectPackedFileNames(items);
+	public static void applyMediaLinkRewrites(@NonNull List<SettingsItem> items) {
 		Map<String, String> hrefRewrites = new HashMap<>();
-		int exportedMediaItems = 0;
-
-		for (Iterator<SettingsItem> iterator = items.iterator(); iterator.hasNext(); ) {
-			SettingsItem item = iterator.next();
-			if (item instanceof AttachedMediaSettingsItem mediaItem) {
-				if (Collections.disjoint(mediaItem.getHrefKeys(), selectedFavoriteHrefs)) {
-					iterator.remove();
-				} else {
-					for (String key : mediaItem.getHrefKeys()) {
-						hrefRewrites.put(key, mediaItem.getRewrittenHref());
-					}
-					String fileName = BackupUtils.getItemFileName(mediaItem);
-					if (!packedFileNames.add(fileName)) {
-						iterator.remove();
-					} else {
-						exportedMediaItems++;
-					}
-				}
-			}
-		}
-		if (!hrefRewrites.isEmpty()) {
-			for (SettingsItem item : items) {
-				if (item instanceof FavoritesSettingsItem favoritesItem) {
-					favoritesItem.setHrefRewrites(hrefRewrites);
-				}
-			}
-		}
-		if (PluginsHelper.isDevelopment()) {
-			LOG.debug("Attached media export items: exported=" + exportedMediaItems + ", rewrites=" + hrefRewrites.size());
-		}
-	}
-
-	@NonNull
-	private static Set<String> collectMediaHrefs(@NonNull OsmandApplication app,
-	                                             @NonNull Collection<FavoriteGroup> groups) {
-		Set<String> res = new HashSet<>();
-		AttachedMediaDataHelper helper = new AttachedMediaDataHelper(app);
-		for (Link link : helper.collectMediaLinks(groups)) {
-			String href = link.getHref();
-			if (!Algorithms.isEmpty(href)) {
-				res.add(href.trim());
-			}
-		}
-		return res;
-	}
-
-	@NonNull
-	private static Set<String> collectPackedFileNames(@NonNull List<SettingsItem> items) {
-		Set<String> res = new HashSet<>();
 		for (SettingsItem item : items) {
-			if (item instanceof FileSettingsItem && !(item instanceof AttachedMediaSettingsItem)) {
-				res.add(BackupUtils.getItemFileName(item));
+			if (item instanceof AttachedMediaSettingsItem mediaItem) {
+				for (String key : mediaItem.getHrefKeys()) {
+					hrefRewrites.put(key, mediaItem.getRewrittenHref());
+				}
 			}
 		}
-		return res;
+		if (hrefRewrites.isEmpty()) {
+			return;
+		}
+		for (SettingsItem item : items) {
+			if (item instanceof FavoritesSettingsItem favoritesItem) {
+				favoritesItem.setMediaHrefRewrites(hrefRewrites);
+			}
+		}
 	}
 
 	@NonNull
@@ -214,14 +172,23 @@ public class AttachedMediaExportType extends AbstractExportType {
 
 	@NonNull
 	private static String assignTargetFileName(@NonNull OsmandApplication app,
-			@NonNull MediaSource source, @NonNull Set<String> usedNames) {
+			@NonNull MediaSource source, @NonNull Set<String> usedNames, boolean cloudBackup) {
 		String name = source.getFileName();
 		if (shouldGenerateTargetFileName(app, source, name, usedNames)) {
 			String extension = Algorithms.isEmpty(name) ? "" : Algorithms.getFileNameExtension(name);
-			if (Algorithms.isEmpty(extension)) {
+			if (Algorithms.isEmpty(extension) || (cloudBackup && !MediaDirType.isSupportedExtension(extension))) {
 				extension = source.getDirType().getExtension();
 			}
-			name = MediaFileNameFormat.createUniqueMediaFileName(extension, usedNames::contains);
+			if (cloudBackup) {
+				String baseName = Algorithms.getFileNameWithoutExtension(name);
+				if (!MediaFileNameFormat.isShortLinkString(baseName)) {
+					baseName = source.getDirType().getDirName();
+				}
+				name = MediaFileNameFormat.createUniqueGeneratedMediaFileName(
+						baseName + ".1." + extension, usedNames::contains);
+			} else {
+				name = MediaFileNameFormat.createUniqueMediaFileName(extension, usedNames::contains);
+			}
 		}
 		usedNames.add(name);
 		return name;

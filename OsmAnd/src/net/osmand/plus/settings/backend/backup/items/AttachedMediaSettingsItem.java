@@ -35,10 +35,6 @@ public class AttachedMediaSettingsItem extends FileSettingsItem {
 		this.source = source;
 		this.subtype = FileSubtype.ATTACHED_MEDIA;
 		this.rewrittenHref = LinkMediaFactory.createInternalMediaUri(targetFileName);
-
-		for (String key : source.getHrefKeys()) {
-			addHrefKey(key);
-		}
 	}
 
 	@NonNull
