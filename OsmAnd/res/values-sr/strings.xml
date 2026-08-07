@@ -1048,7 +1048,7 @@
     <string name="my_location">Мој положај</string>
     <string name="shared_string_finish">Крај</string>
     <string name="plan_route">План путовања</string>
-    <string name="shared_string_sort">Разврстај</string>
+    <string name="shared_string_sort">Сортирај</string>
     <string name="coordinate_input">Унос координата</string>
     <string name="marker_save_as_track_descr">Извезите ознаке у следећу датотеку ГПИкс-а:</string>
     <string name="move_to_history">Премести у историју</string>
@@ -2792,8 +2792,7 @@
     <string name="use_native_pt">Развој матичног јавног превоза</string>
     <string name="use_native_pt_desc">Пребаците се на прорачун навођења јавног превоза Јава (безбедан)</string>
     <string name="shared_string_graph">Графикон</string>
-    <string name="message_graph_will_be_available_after_recalculation">Молимо сачекајте.
-\nГрафикон ће бити доступан након поновног израчунавања путање.</string>
+    <string name="message_graph_will_be_available_after_recalculation">Молимо сачекајте.\nГрафик ће бити доступан након поновног израчунавања руте.</string>
     <string name="shared_string_local_maps">Местне карте</string>
     <string name="icon_group_amenity">Пријатност</string>
     <string name="icon_group_special">Нарочита</string>
@@ -3246,7 +3245,7 @@
 \nНема утицај на брзину израчунавања краћих путања.</string>
     <string name="shared_string_uphill">Узбрдо</string>
     <string name="gps_filter_precision">Прецизност ГПС-а</string>
-    <string name="save_as_copy">Сачувај као умножак</string>
+    <string name="save_as_copy">Сачувај као копију</string>
     <string name="shared_string_precision">Прецизност</string>
     <string name="distance_between_points">Удаљеност између тачака</string>
     <string name="shared_string_statistics">Статистика</string>
@@ -4279,7 +4278,7 @@
     <string name="relief_3d_download_description">Потребне су додатне карте за преглед тла на карти.</string>
     <string name="vertical_exaggeration_description">Променом вредности лествице можете нагласити просторне облине.</string>
     <string name="vertical_exaggeration">Усправно претеривање</string>
-    <string name="use_terrain_maps">Користи карте тла</string>
+    <string name="use_terrain_maps">Користи мапе терена</string>
     <string name="use_nearby_roads">Користи оближње путеве</string>
     <string name="use_terrain_maps_summary">Користе се карте тла за податке о надморској висини. Изглед трага остаје непромењен.</string>
     <string name="use_nearby_roads_summary">Користи се ванмрежна карта ради проналажења оближњих путева и података о успону. Може прилагодити изглед трага.</string>
@@ -4691,7 +4690,7 @@
     <string name="layer_coordinates_grid">Координатна мрежа</string>
     <string name="choose_location">Изабери положај</string>
     <string name="point_location">Положај тачке</string>
-    <string name="shared_string_manual">Упутство</string>
+    <string name="shared_string_manual">Ручно</string>
     <string name="shared_string_map_center">Средиште карте</string>
     <string name="choose_location_on_map">Изаберите положај на карти.</string>
     <string name="equator">Екватор</string>
@@ -5213,7 +5212,7 @@
     <string name="ais_receive_in_background">Примајте АИС податке чак и ако је ОсмАнд заустављен.</string>
     <string name="ais_receive_in_background_description">Уколико је омогућено, АИС-ов слушалац порука наставља дејство ако ли је ОсмАнд заустављен или у позадини. Ако ли је онемогућено, поруке се не примају ако је ОсмАнд у позадини.</string>
     <string name="shared_string_recent">Недавно</string>
-    <string name="sort_by_nearest_to_map_center">Најближе средишту карте</string>
+    <string name="sort_by_nearest_to_map_center">Најближе центру мапе</string>
     <string name="last_week">Прошле седмице</string>
     <string name="history_is_turned_off">Повест је искључена</string>
     <string name="search_and_navigation_history_disabled_descr">Повест претраге и навођења су онемогућене. Омогућите их у поставкама ради прегледа скорашњих дејстава овде.</string>
@@ -5340,4 +5339,5 @@
     <string name="share_favorites_preparation_failed">Није била успешна припрема датотека за дељење.</string>
     <string name="share_favorites_share_failed">Дељење датотеке није успело.</string>
     <string name="share_favorites_missing_media_warning">Неки приложени медији нису могли бити укључени.</string>
+    <string name="search_on_web">Претрага на вебу</string>
 </resources>

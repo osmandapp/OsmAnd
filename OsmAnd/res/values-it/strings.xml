@@ -1095,7 +1095,7 @@
     <string name="traffic_warning_hazard">Pericolo</string>
     <string name="dahboard_options_dialog_title">Configura il pannello di controllo</string>
     <string name="shared_string_card_was_hidden">La scheda è stata nascosta</string>
-    <string name="shared_string_undo">Annulla azione</string>
+    <string name="shared_string_undo">Annulla</string>
     <string name="shared_string_skip">Salta</string>
     <string name="app_name_osmand">OsmAnd</string>
     <string name="lang_new">Newa/Bhasa del Nepal</string>
@@ -2777,7 +2777,7 @@
     <string name="open_saved_track">Apri la traccia salvata</string>
     <string name="shared_string_is_saved">è salvato</string>
     <string name="one_point_error">Aggiungi almeno due punti.</string>
-    <string name="shared_string_redo">Ripeti</string>
+    <string name="shared_string_redo">Rifai</string>
     <string name="release_3_8">• Aggiornata la funzione Pianifica un percorso: consente di utilizzare diversi tipi di navigazione per segmento e l\'inclusione di tracce \n \n • Nuovo menu Aspetto per le tracce: seleziona il colore, lo spessore, le frecce di direzione del display, le icone di inizio e fine \n \n • Migliorata la visibilità dei nodi ciclabili \n \n • Le tracce adesso si possono toccare, hanno un nuovo menù contestuale con informazioni di base \n \n • Migliorati gli algoritmi di ricerca \n \n • Migliorate le opzioni Segui traccia in Navigazione \n \n • Corretti i problemi con l\'importazione/esportazione delle impostazioni del profilo</string>
     <string name="simplified_track">Traccia semplificata</string>
     <string name="sort_last_modified">Cronologico</string>
@@ -2801,8 +2801,7 @@
     <string name="use_native_pt_desc">Cambia a Java (sicuro) calcolo del percorso su Trasporto Pubblico</string>
     <string name="osm_edit_logout_success">Disconnessione effettuata</string>
     <string name="shared_string_graph">Grafico</string>
-    <string name="message_graph_will_be_available_after_recalculation">Attendere prego... 
-\nIl grafo sarà disponibile dopo il ricalcolo del percorso.</string>
+    <string name="message_graph_will_be_available_after_recalculation">Per favore attendere.\nIl grafico sarà disponibile dopo il ricalcolo del percorso.</string>
     <string name="navigate_point_mgrs">MGRS (Military Grid Reference System)</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="shared_string_local_maps">Mappe locali</string>
@@ -2865,7 +2864,7 @@
     <string name="routing_engine_vehicle_type_walking">A piedi</string>
     <string name="routing_engine_vehicle_type_hgv">Mezzi pesanti</string>
     <string name="routing_engine_vehicle_type_truck">Camion</string>
-    <string name="routing_engine_vehicle_type_scooter">Scooter</string>
+    <string name="routing_engine_vehicle_type_scooter">Monopattino</string>
     <string name="routing_engine_vehicle_type_racingbike">Bici da corsa</string>
     <string name="routing_engine_vehicle_type_mtb">MTB</string>
     <string name="message_server_error">Errore del server: %1$s</string>
@@ -4730,7 +4729,7 @@
     <string name="show_image_previews">Mostra l\'immagine precedente</string>
     <string name="quick_action_showhide_coordinates_grid_descr">Inverti la visibilità della griglia di coordinate sulla mappa.</string>
     <string name="layer_coordinates_grid">Griglia delle coordinate</string>
-    <string name="release_5_0">• Scopri i POI più quotati con la nuova modalità Esplora\n\n• Tutti i percorsi OSM, ora ricercabili! Escursionismo, ciclismo, MTB e altro\n\n• Il nuovo widget di navigazione combina la freccia di svolta e le istruzioni di navigazione\n\n• Widget di informazioni sul percorso attuale: visualizza ETA, orario di arrivo e distanza\n\n• Seleziona piste da sci e percorsi MTB sulla mappa per informazioni dettagliate\n\n• Possibilità di selezionare le dimensioni del widget per i pannelli sinistro e destro\n\n• Aggiunta griglia di coordinate con coordinate geografiche\n\n• Aggiunta possibilità di personalizzare l\'aspetto predefinito dei gruppi preferiti\n\n• Android Auto: visualizza ETA e distanza dal waypoint successivo; i nomi delle città ora compaiono nei risultati di ricerca\n\n• Le vette più importanti sono ora individuabili tramite mappa e ricerca\n\n• Altezze delle vette delle montagne in piedi\n\n• Aggiunto: falesie e aree di arrampicata sulla mappa\n\n• Migliorata la ricerca degli indirizzi negli Stati Uniti\n\n• Aggiunto TTS ebraico per la navigazione</string>
+    <string name="release_5_0">• Scopri i POI più quotati con la nuova modalità Esplora\n\n• Tutti i percorsi OSM, ora ricercabili! Escursionismo, ciclismo, MTB e altro\n\n• Il nuovo widget di navigazione combina la freccia di svolta e le istruzioni di navigazione\n\n• Widget di informazioni sul percorso attuale: visualizza ETA, orario di arrivo e distanza\n\n• Seleziona piste da sci e percorsi MTB sulla mappa per informazioni dettagliate\n\n• Possibilità di selezionare le dimensioni del widget per i pannelli sinistro e destro\n\n• Aggiunta griglia di coordinate con coordinate geografiche\n\n• Aggiunta possibilità di personalizzare l\'aspetto predefinito dei gruppi preferiti\n\n• Android Auto: visualizza ETA e distanza dal waypoint successivo; i nomi delle città ora compaiono nei risultati di ricerca\n\n• Le vette più importanti sono ora individuabili tramite mappa e ricerca\n\n• Altezze delle vette delle montagne in piedi\n\n• Aggiunte: falesie e aree di arrampicata sulla mappa\n\n• La ricerca degli indirizzi negli Stati Uniti è stata migliorata\n\n• Aggiunto TTS ebraico per la navigazione</string>
     <string name="equator">Equatore</string>
     <string name="prime_meridian">Primo meridiano</string>
     <string name="meridian_180">180º meridiano</string>
@@ -5253,7 +5252,7 @@
     <string name="astro_rise">Levata</string>
     <string name="astro_set">Occaso</string>
     <string name="star_altitude_name">Altitudine della stella</string>
-    <string name="sort_by_nearest_to_current_location">Più vicino alla posizione attuale</string>
+    <string name="sort_by_nearest_to_current_location">Il più vicino alla localizzazione attuale</string>
     <string name="route_calculation_using_standard_algorithm">Utilizzo dell\'algoritmo di instradamento Standard (più lento).</string>
     <string name="route_calculation_missing_maps">Mappe mancanti</string>
     <string name="route_calculation_missing_maps_desc">Alcune mappe offline necessarie per questo percorso mancano. Scaricale per continuare.</string>
@@ -5274,7 +5273,7 @@
     <string name="required_maps_get_accurate_list_online">Ottieni un elenco accurato online</string>
     <string name="required_maps_calculate_with_existing_maps">Calcola con le mappe esistenti</string>
     <string name="attached_media">Media allegati</string>
-    <string name="sort_by_nearest_to_map_center">Più vicino al centro mappa</string>
+    <string name="sort_by_nearest_to_map_center">Il più vicino al centro della mappa</string>
     <string name="last_week">La scorsa settimana</string>
     <string name="history_is_turned_off">La cronologia è disattivata</string>
     <string name="search_and_navigation_history_disabled_descr">La cronologia di ricerca e navigazione è disattivata. Abilitala nelle impostazioni per vedere l\'attività recente.</string>
@@ -5337,4 +5336,37 @@
     <string name="use_spatial_text_search">Utilizza la ricerca testuale spaziale</string>
     <string name="release_5_4">• Nuova ricerca spaziale — trova luoghi e cerca nei dintorni di un luogo\n\n • Interfaccia di ricerca rinnovata: ordinamento, filtri per categoria, aspetto più pulito\n\n • Allega foto e file multimediali ai Preferiti\n\n • Preferiti: supporto per sottogruppi e cartelle bloccabili\n\n • Coordinate: la ricerca, la griglia della mappa e la visualizzazione dei PDI ora supportano EPSG e il localizzatore Maidenhead\n\n • Sistemate le interruzioni di navigazione; passaggio tra calcolo del percorso standard e veloce\n\n • Imposta la scala della mappa di Android Auto separatamente dal tuo telefono\n\n • L\'astronomia ha ricevuto le eclissi solari e lunari</string>
     <string name="use_spatial_text_search_description">Sostituisci le API di ricerca rapida standard con il motore di ricerca testuale spaziale sperimentale.</string>
+    <string name="preparing_file">Preparazione del file</string>
+    <string name="share_favorites_points_only">Solo punti</string>
+    <string name="share_favorites_points_and_media">Punti e file multimediali</string>
+    <string name="share_favorites_preparation_failed">Non posso preparare i file per condividerli.</string>
+    <string name="share_favorites_share_failed">Con posso condividere i file.</string>
+    <string name="share_favorites_missing_media_warning">Alcuni media allegati non possono essere inclusi.</string>
+    <string name="search_on_web">Ricerca web</string>
+    <string name="astro_lunar_eclipse">Eclissi lunare</string>
+    <string name="astro_lunar_eclipse_subtitle">Esplora le eclissi di luna nel mondo</string>
+    <string name="astro_previous_lunar_eclipse">Eclissi lunari passate</string>
+    <string name="astro_next_lunar_eclipse">Prossime eclissi lunari</string>
+    <string name="astro_close_lunar_eclipse">Chiudi l\'esploratore di eclissi lunari</string>
+    <string name="astro_loading_lunar_eclipse">Sto calcolando le eclissi lunari mondiali</string>
+    <string name="astro_lunar_eclipse_load_error">Non sono in grado di calcolare questa eclissi lunare.</string>
+    <string name="astro_total_lunar_eclipse">Eclissi lunare totale</string>
+    <string name="astro_partial_lunar_eclipse">Eclissi lunare parziale</string>
+    <string name="astro_penumbral_lunar_eclipse">Eclissi lunare penombra</string>
+    <string name="astro_eclipse_phase_penumbral">Penombra</string>
+    <string name="text_color">Colore del testo</string>
+    <string name="secondary_text_color">Colore del testo secondario</string>
+    <string name="background_color">Colore di sfondo</string>
+    <string name="widget_height">Altezza del widget</string>
+    <string name="row_height">Altezza della riga</string>
+    <string name="shared_string_transparent">Trasparenza</string>
+    <string name="panel_appearance_original_description">%1$s preserva la dimensione e l\'icona di ogni widget.</string>
+    <string name="copy_from">Copia da</string>
+    <string name="another_profile">Un altro profilo</string>
+    <string name="duplicate_map">Mappa duplicata</string>
+    <string name="duplicate_map_replace_with_standard">Sostituisci con Standard</string>
+    <string name="duplicate_map_replace_with_road">Sostitutisci con Solo-strade</string>
+    <string name="rendering_attr_surface_clay_name">Argilla</string>
+    <string name="rendering_attr_surface_laterite_name">Laterite</string>
+    <string name="share_favorites_media_preparation_failed">Impossibile includere i file multimediali allegati. Condivisi solo i punti.</string>
 </resources>

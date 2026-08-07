@@ -273,4 +273,8 @@
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
     <string name="shared_string_error">שגיאה</string>
     <string name="send_live_location_error">שגיאה בשליחת מיקום בזמן אמת: %1$s</string>
+    <string name="location_source_summary">כברירת מחדל, OsmAnd המותקן מגוגל פליי משתמש בשירותי המיקום של גוגל כדי לקבוע מיקום.\n\nאם מתקבל מיקום לא מדוייק או בשימוש במכשיר ללא שירותי גוגל פליי, נסה להחליף ל־Android API</string>
+    <string name="location_source">מקור מיקום</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="time_ago">לפני</string>
 </resources>
