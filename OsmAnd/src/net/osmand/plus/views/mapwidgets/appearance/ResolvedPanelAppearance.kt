@@ -43,6 +43,7 @@ class ResolvedPanelAppearance(
 	@ColorInt val textShadowColor: Int,
 	val textShadowRadius: Int,
 	val background: ResolvedPanelBackground,
+	@ColorInt val surfaceColor: Int?,
 	@ColorInt val dividerColor: Int,
 	@ColorInt val standaloneDividerColor: Int,
 	@ColorInt val panelBorderColor: Int,

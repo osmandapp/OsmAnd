@@ -81,11 +81,25 @@
 
 	</com.google.android.material.appbar.AppBarLayout>
 
-	<View
-		android:id="@+id/map_preview_area"
+	<FrameLayout
 		android:layout_width="match_parent"
 		android:layout_height="0dp"
-		android:layout_weight="1" />
+		android:layout_weight="1">
+
+		<View
+			android:id="@+id/map_preview_area"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent" />
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/bottom_sheet_shadow"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/abp__shadow_height"
+			android:layout_gravity="bottom"
+			android:scaleType="fitXY"
+			app:srcCompat="@drawable/bg_shadow_list_top" />
+
+	</FrameLayout>
 
 	<FrameLayout
 		android:id="@+id/bottom_sheet"

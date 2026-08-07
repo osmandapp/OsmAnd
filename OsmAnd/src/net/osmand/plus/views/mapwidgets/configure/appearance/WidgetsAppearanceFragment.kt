@@ -18,6 +18,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.BaseFullScreenFragment
+import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener
@@ -31,6 +32,7 @@ import net.osmand.plus.utils.InsetsUtils
 import net.osmand.plus.views.controls.MapHudLayout
 import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControllerType
 import net.osmand.plus.views.mapwidgets.WidgetsPanel
+import net.osmand.plus.views.mapwidgets.configure.WidgetsSettingsHelper
 import net.osmand.plus.views.mapwidgets.configure.dialogs.ConfigureScreenFragment.SCREEN_LAYOUT_MODE
 import net.osmand.plus.widgets.TextViewEx
 import net.osmand.plus.widgets.popup.PopUpMenu
@@ -77,6 +79,7 @@ class WidgetsAppearanceFragment : BaseFullScreenFragment(), CopyAppModePrefsList
 	private lateinit var tabLayout: TabLayout
 	private lateinit var viewPager: ViewPager2
 	private lateinit var toolbarTitle: TextViewEx
+	private lateinit var sheetShadow: View
 	private var previewActive = false
 
 	override fun onCreate(savedInstanceState: Bundle?) {
@@ -105,9 +108,11 @@ class WidgetsAppearanceFragment : BaseFullScreenFragment(), CopyAppModePrefsList
 		tabLayout = view.findViewById(R.id.tab_layout)
 		viewPager = view.findViewById(R.id.view_pager)
 		toolbarTitle = view.findViewById(R.id.toolbar_title)
+		sheetShadow = view.findViewById(R.id.bottom_sheet_shadow)
 
 		setupToolbar(view)
 		setupTabLayout()
+		updateSheetShadow()
 
 		view.findViewById<View>(R.id.map_preview_area).addOnLayoutChangeListener {
 			_, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom ->
@@ -199,12 +204,17 @@ class WidgetsAppearanceFragment : BaseFullScreenFragment(), CopyAppModePrefsList
 		toolbarTitle.setText(selectedPanel.getTitleId(AndroidUtils.isLayoutRtl(app)))
 	}
 
+	private fun updateSheetShadow() {
+		AndroidUiHelper.updateVisibility(sheetShadow, selectedPanel != WidgetsPanel.BOTTOM)
+	}
+
 	private fun setupTabLayout() {
 		viewPager.adapter = PanelsTabAdapter(this)
 		viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
 			override fun onPageSelected(position: Int) {
 				selectedPanel = WidgetsPanel.entries[position]
 				updateToolbarTitle()
+				updateSheetShadow()
 				if (previewActive) {
 					refreshPreview(true)
 				} else {
@@ -286,13 +296,27 @@ class WidgetsAppearanceFragment : BaseFullScreenFragment(), CopyAppModePrefsList
 	override fun copyAppModePrefs(appMode: ApplicationMode) {
 		app.panelAppearanceSettingsManager[selectedPanel]
 			.copyFromProfile(appMode, selectedAppMode, layoutMode)
+		applyPanelParametersToWidgets()
 		onAppearanceChanged()
 	}
 
 	private fun copyFromPanel(fromPanel: WidgetsPanel) {
 		app.panelAppearanceSettingsManager[selectedPanel]
 			.copyFromPanel(fromPanel, selectedAppMode, layoutMode)
+		applyPanelParametersToWidgets()
 		onAppearanceChanged()
+	}
+
+	private fun applyPanelParametersToWidgets() {
+		val mapActivity = activity as? MapActivity ?: return
+		val appearanceSettings = app.panelAppearanceSettingsManager[selectedPanel]
+		val helper = WidgetsSettingsHelper(mapActivity, selectedAppMode)
+		helper.setLayoutMode(layoutMode)
+
+		appearanceSettings.getSizeModePref(layoutMode).getModeValue(selectedAppMode).widgetSize
+			?.let { helper.applyWidgetsSize(selectedPanel, it) }
+		appearanceSettings.getIconModePref(layoutMode).getModeValue(selectedAppMode).showIcon
+			?.let { helper.applyWidgetsIconVisibility(selectedPanel, it) }
 	}
 
 	private fun resetSelectedPanel() {
