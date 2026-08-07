@@ -69,6 +69,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	private PublicTransportGeometryWayContext publicTransportWayContext;
 	private RouteGeometryWay routeGeometry;
 	private PublicTransportGeometryWay publicTransportRouteGeometry;
+	private Object lastWalkingRouteSegments;
 
 	private final ColoringTypeAvailabilityCache coloringAvailabilityCache;
 
@@ -474,8 +475,13 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 				}
 			}
 			List<TransportRouteResult> routes = transportHelper.getRoutes();
-			TransportRouteResult route = routes != null && routes.size() > currentRoute ? routes.get(currentRoute) : null;
+			TransportRouteResult route = routes != null && currentRoute >= 0 && currentRoute < routes.size() ? routes.get(currentRoute) : null;
 			routeGeometry.clearRoute();
+			Object walkingRouteSegments = transportHelper.getWalkingRouteSegments();
+			if (walkingRouteSegments != lastWalkingRouteSegments) {
+				lastWalkingRouteSegments = walkingRouteSegments;
+				publicTransportRouteGeometry.clearRoute();
+			}
 			boolean routeUpdated = publicTransportRouteGeometry.updateRoute(tileBox, route);
 			boolean draw = routeUpdated || renderState.shouldRebuildTransportRoute
 					|| !publicTransportRouteGeometry.hasMapRenderer() || mapActivityInvalidated || mapRendererChanged;

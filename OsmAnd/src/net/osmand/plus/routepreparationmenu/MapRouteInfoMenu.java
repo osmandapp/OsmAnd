@@ -105,6 +105,9 @@ import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.transport.online.OnlineTransportOptionsBottomSheet;
+import net.osmand.plus.transport.online.OnlineTransportState;
+import net.osmand.plus.transport.online.OnlineTransportTimeBottomSheet;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -127,6 +130,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	public static final int DEFAULT_MENU_STATE = 0;
 	private static final int MAX_PEDESTRIAN_ROUTE_DURATION = 30 * 60;
 	private static final double STANDARD_LONG_ROUTE_SEGMENT_DISTANCE = 300_000;
+	private static final long NEXT_DEPARTURE_SEARCH_OFFSET = 60_000;
 
 	public static int directionInfo = -1;
 	public static boolean chooseRoutesVisible;
@@ -591,6 +595,20 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					pedestrianRouteCard.setListener(this);
 					menuCards.add(pedestrianRouteCard);
 				}
+				long latestDeparture = -1;
+				for (TransportRouteResult r : routes) {
+					if (!r.getSegments().isEmpty()) {
+						long dep = r.getSegments().get(0).departureTimeMillis;
+						if (dep > latestDeparture) {
+							latestDeparture = dep;
+						}
+					}
+				}
+				if (latestDeparture > 0) {
+					LaterDeparturesCard laterCard = new LaterDeparturesCard(mapActivity, latestDeparture + NEXT_DEPARTURE_SEARCH_OFFSET);
+					laterCard.setListener(this);
+					menuCards.add(laterCard);
+				}
 				bottomShadowVisible = routes.isEmpty();
 			} else {
 				RouteMenuAppModes mode = app.getRoutingOptionsHelper().getRouteMenuAppMode(routingHelper.getAppMode());
@@ -892,6 +910,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				AvoidRoadsBottomSheetDialogFragment.showInstance(mapActivity, null, null, true, null);
 			} else if (card instanceof PedestrianRouteCard) {
 				updateApplicationMode(null, ApplicationMode.PEDESTRIAN);
+			} else if (card instanceof LaterDeparturesCard) {
+				OnlineTransportState.setTimeMillis(((LaterDeparturesCard) card).getLaterTimeMillis());
+				OnlineTransportState.setArriveBy(false);
+				app.getRoutingHelper().onSettingsChanged(true);
 			} else if (card instanceof AttachTrackToRoadsBannerCard) {
 				if (MeasurementToolFragment.showSnapToRoadsDialog(mapActivity, true)) {
 					hide();
@@ -1146,6 +1168,25 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		optionsContainer.removeAllViews();
 		if (mode == null) {
 			return;
+		}
+		if (routingHelper.isPublicTransportMode() && app.getSettings().USE_ONLINE_PUBLIC_TRANSPORT.get()) {
+			int margin = AndroidUtils.dpToPx(app, 3);
+			LinearLayout timeBtn = createToolbarOptionView(!OnlineTransportState.isNow(),
+					OnlineTransportTimeBottomSheet.getLabel(app), R.drawable.ic_action_time, R.drawable.ic_action_time,
+					v -> OnlineTransportTimeBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), this::updateOptionsButtons));
+			if (timeBtn != null) {
+				LinearLayout.LayoutParams params = getContainerButtonLayoutParams(mapActivity, false);
+				AndroidUtils.setMargins(params, margin, 0, margin, 0);
+				optionsContainer.addView(timeBtn, params);
+			}
+			LinearLayout optBtn = createToolbarOptionView(false, app.getString(R.string.shared_string_options),
+					R.drawable.ic_action_settings, R.drawable.ic_action_settings,
+					v -> OnlineTransportOptionsBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), this::updateOptionsButtons));
+			if (optBtn != null) {
+				LinearLayout.LayoutParams params = getContainerButtonLayoutParams(mapActivity, false);
+				AndroidUtils.setMargins(params, margin, 0, margin, 0);
+				optionsContainer.addView(optBtn, params);
+			}
 		}
 		createRoutingParametersButtons(mapActivity, mode, optionsContainer);
 		int endPadding = mapActivity.getResources().getDimensionPixelSize(R.dimen.action_bar_image_side_margin);
