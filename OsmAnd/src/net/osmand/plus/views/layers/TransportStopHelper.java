@@ -108,7 +108,8 @@ public class TransportStopHelper {
 						&& MapUtils.getDistance(stop.getLocation(), loc) < MAX_DISTANCE_BETWEEN_AMENITY_AND_LOCAL_STOPS
 						&& (nearestStop == null
 						|| nearestStop.getLocation().equals(stop.getLocation())))
-						|| stop.getLocation().equals(loc)) {
+						|| stop.getLocation().equals(loc)
+						|| stop.isConnectedToStop(amenity.getId())) {
 					stopAggregated.addLocalTransportStop(stop);
 					if (nearestStop == null) {
 						nearestStop = stop;
