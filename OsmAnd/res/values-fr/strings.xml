@@ -2275,7 +2275,7 @@
     <string name="update_all_maps_q">Mettre à jour %1$d cartes \?</string>
     <string name="track_storage_directory_descrp">Les traces peuvent être enregistrées dans le dossier « rec » ou dans des dossiers mensuels ou journaliers.</string>
     <string name="store_tracks_in_rec_directory">Enregistrer les traces dans le dossier « rec »</string>
-    <string name="store_tracks_in_daily_directories">Enregistrer les traces dans des dossiers quotidiens</string>
+    <string name="store_tracks_in_daily_directories">Enregistrer les traces dans des dossiers journaliers</string>
     <string name="release_3_5">• Mise à jour des paramètres de l\'application et des profiles : les paramètres sont désormais organisés par type ; chaque profile peut être paramétré indépendamment. \n \n • Fenêtre suggérant le téléchargement de carte lors du déplacement sur la carte \n \n • Correction du mode sombre \n \n • Correction de plusieurs problèmes sur le calcul d\'itinéraire \n \n • Mise à jour de la carte de base avec un réseau routier plus détaillé \n \n • Correction du flou sur certains zones \n \n • Itinéraire à ski : ajout du profile d\'altitude et de la complexité de l\'itinéraire dans le détail de l\'itinéraire \n \n • Corrections de bugs</string>
     <string name="apply_preference_to_all_profiles">Appliquer cette modification à tous les profils ou uniquement au profil sélectionné.</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Privilégier les routes non revêtues</string>
@@ -2689,8 +2689,8 @@
     <string name="simplified_track_description">Seul l\'itinéraire sera enregistré, les points de passage seront supprimés.</string>
     <string name="shared_string_redo">Rétablir</string>
     <string name="sort_last_modified">Récents</string>
-    <string name="sort_name_descending">Nom : Z – A</string>
-    <string name="sort_name_ascending">Nom : A – Z</string>
+    <string name="sort_name_descending">Nom : Z – A</string>
+    <string name="sort_name_ascending">Nom : A – Z</string>
     <string name="start_finish_icons">Icônes de départ et d\'arrivée</string>
     <string name="contour_lines_thanks">Merci pour votre achat de « Topographie »</string>
     <string name="routing_attr_avoid_footways_description">Éviter les trottoirs</string>
@@ -2703,8 +2703,7 @@
     <string name="use_native_pt">Développement du transport en commun autochtone</string>
     <string name="osm_edit_logout_success">Déconnecté</string>
     <string name="osm_live_payment_subscription_management_hw">Le paiement est prélevé sur votre compte AppGallery lors de la confirmation de l’achat.\n\nL’abonnement est renouvelé automatiquement, sauf annulation avant la période de renouvellement choisie.\n\nVous pouvez gérer ou annuler vos abonnements à tout moment dans les paramètres AppGallery.</string>
-    <string name="message_graph_will_be_available_after_recalculation">Veuillez patienter.
-\nLe graphique sera disponible à l\'issue du calcul d\'itinéraire.</string>
+    <string name="message_graph_will_be_available_after_recalculation">Veuillez patienter.\nLe graphique sera disponible après le recalcul de l\'itinéraire.</string>
     <string name="snowmobile_render_descr">Pour la conduite en motoneige avec des routes et des pistes dédiées.</string>
     <string name="shared_string_graph">Graphique</string>
     <string name="shared_string_local_maps">Cartes locales</string>
@@ -3200,7 +3199,7 @@
     <string name="gps_filter_precision">Précision GPS</string>
     <string name="gps_filter_smoothing">Lissage</string>
     <string name="save_changes_into_file">Enregistrer les modifications dans le fichier</string>
-    <string name="save_as_copy">Enregistrer comme copie</string>
+    <string name="save_as_copy">Enregistrer une copie</string>
     <string name="shared_string_gps_filter">Filtre GPS</string>
     <string name="distance_between_points">Distance entre les points</string>
     <string name="shared_string_precision">Précision</string>
@@ -3682,7 +3681,7 @@
     <string name="y_axis">Ordonnées</string>
     <string name="value_downloaded_of_mb">Téléchargement %1$.1f/%2$.1f MB</string>
     <string name="share_link">Partager le lien</string>
-    <string name="share_as_file">Partager en tant que fichier</string>
+    <string name="share_as_file">Partager comme fichier</string>
     <string name="skip_download">Ignorer le téléchargement</string>
     <string name="determine_location">Nous permet d’estimer votre position</string>
     <string name="last_synchronized">Dernière synchronisation</string>
@@ -4009,7 +4008,7 @@
     <string name="track_filter_date_selected_format">%s - %s</string>
     <string name="filter_by_name">Filtrer par nom</string>
     <string name="shared_string_reset_all">Tout réinitialiser</string>
-    <string name="filter_tracks_count">Filtre : %d</string>
+    <string name="filter_tracks_count">Filtre : %d</string>
     <string name="date_of_creation">Date de création</string>
     <string name="filter_screen_title">Filtrer</string>
     <string name="shared_string_cache">Cache</string>
@@ -4605,7 +4604,7 @@
     <string name="popular_places">Lieux populaires</string>
     <string name="point_location">Emplacement du point</string>
     <string name="choose_location">Choisir un emplacement</string>
-    <string name="shared_string_manual">Manuel</string>
+    <string name="shared_string_manual">Manuelle</string>
     <string name="show_image_previews">Afficher les aperçus des images</string>
     <string name="quick_action_showhide_coordinates_grid_descr">Afficher/masquer la grille de coordonnées sur la carte.</string>
     <string name="layer_coordinates_grid">Grille de coordonnées</string>
@@ -4860,7 +4859,7 @@
     <string name="astro_globular_clusters">Amas globulaires</string>
     <string name="astro_galaxy_clusters">Amas de galaxies</string>
     <string name="astro_black_holes">Trous noirs</string>
-    <string name="shared_string_azimuth">Azimut</string>
+    <string name="shared_string_azimuth">Azimuth</string>
     <string name="shared_string_magnitude">Magnitude</string>
     <string name="gpx_too_many_points_visible_warning">L\'affichage sur la carte d\'un grand nombre de traces GPX provoque une utilisation élevée de la mémoire</string>
     <string name="sort_highest_first">Plus grand en premier</string>
@@ -4893,8 +4892,8 @@
     <string name="map_screen_layout">Disposition de l\'écran de la carte</string>
     <string name="map_screen_layout_descr">Choisissez d\'utiliser une seule mise en page pour toutes les orientations ou de personnaliser les modes Portrait et Paysage séparément.</string>
     <string name="galactic_line">Ligne galactique</string>
-    <string name="meridian_line">Ligne méridienne</string>
-    <string name="equator_line">Ligne équatoriale</string>
+    <string name="meridian_line">Lignes méridiennes</string>
+    <string name="equator_line">Équateur</string>
     <string name="backup_deleted_all_data">Données supprimées.</string>
     <string name="backup_deleting_all_data">Suppression des données…</string>
     <string name="astro_solar_system">Système solaire</string>
@@ -4908,7 +4907,7 @@
     <string name="astro_visible_objects">Objets visibles</string>
     <string name="astro_rendering">Rendu</string>
     <string name="astro_configure_view">Configurer l\'affichage</string>
-    <string name="astro_daily_path">Itinéraire quotidien</string>
+    <string name="astro_daily_path">Trajectoire quotidienne</string>
     <string name="delete_groups_confirmation">Supprimer des groupes ?</string>
     <string name="add_to_track">Ajouter à l\'itinéraire</string>
     <string name="unpin_folder">Désépingler le dossier</string>
@@ -4968,7 +4967,7 @@
     <string name="astro_az_short">Az</string>
     <string name="astronomy_schedule">Calendrier</string>
     <string name="astro_catalogs">Catalogues</string>
-    <string name="astro_path">Chemin</string>
+    <string name="astro_path">Trajectoire</string>
     <string name="astro_direction">Direction</string>
     <string name="astro_locate">Localiser</string>
     <string name="astro_type_earth">Terre</string>
@@ -4994,8 +4993,8 @@
     <string name="astro_search_in_location">Dans %1$s</string>
     <string name="astro_search_rises_tomorrow">↗ %1$s %2$s</string>
     <string name="astro_search_sets_tomorrow">↘ %1$s %2$s</string>
-    <string name="astro_filter_naked_eye">Visible à l’œil nu</string>
-    <string name="astro_filter_visible_tonight">Visible de nuit</string>
+    <string name="astro_filter_naked_eye">Visible à l\'oeil nu</string>
+    <string name="astro_filter_visible_tonight">Visible cette nuit</string>
     <string name="astro_filter_visible_now">Visible maintenant</string>
     <string name="astro_filter_show_all">Tout afficher</string>
     <string name="astro_explore_my_data">Mes données</string>
@@ -5011,8 +5010,8 @@
     <string name="astro_search_info_deep_sky">Les objets du ciel profond comprennent les galaxies, les nébuleuses, les amas d\'étoiles et d\'autres cibles astronomiques lointaines.</string>
     <string name="astro_my_data_no_favorites_title">Rien ici</string>
     <string name="astro_my_data_no_favorites_description">Vous pouvez ajouter des objets à vos favoris à partir de leur menu contextuel</string>
-    <string name="astro_my_data_no_daily_paths_title">Aucun chemin quotidien</string>
-    <string name="astro_my_data_no_daily_paths_description">Activez un chemin quotidien pour un objet à partir de son menu contextuel afin de le voir ici</string>
+    <string name="astro_my_data_no_daily_paths_title">Aucune course quotidienne</string>
+    <string name="astro_my_data_no_daily_paths_description">Activez une course quotidienne pour un objet à partir de son menu contextuel afin de le voir ici</string>
     <string name="astro_my_data_no_directions_title">Aucune direction définie</string>
     <string name="astro_my_data_no_directions_description">Les directions vous permettent de conserver une flèche visible pointant vers un objet. Activez cette fonction à partir du menu contextuel.</string>
     <string name="astro_search_never_rises">↓ Ne se lève jamais</string>
@@ -5038,7 +5037,7 @@
     <string name="astro_expand_your_universe_description">Accédez à la base de données étendue regroupant les catalogues du ciel profond, les articles Wikipédia et le mode AR hors ligne.</string>
     <string name="astro_offline_knowledge_base_title">Base de connaissances hors ligne</string>
     <string name="astro_offline_knowledge_base_description">Téléchargez la base de données étendue pour accéder, hors ligne, aux articles Wikipédia et aux catalogues du ciel profond.</string>
-    <string name="astro_schedule_next_day_note">⁺¹ Le lendemain.</string>
+    <string name="astro_schedule_next_day_note">⁺¹ Jour suivant.</string>
     <string name="astro_visibility_show_today">Afficher la visibilité d\'aujourd\'hui</string>
     <string name="astro_schedule_show_current_week">Afficher la semaine en cours</string>
     <string name="release_5_3">• Prise en charge des bâtiments en 3D ajoutée\n\n • Affichage de la carte en vue sphérique\n\n • Module d\'extension d\'astronomie avec carte nocturne et base de données des étoiles\n\n • Nouveaux modes de couleur pour le compteur de vitesse : tolérance et excès de vitesse\n\n • Dispositions distinctes des widgets pour les modes paysage et portrait\n\n • Widgets d\'enregistrement de trajet : vitesse de déplacement et vitesse moyenne\n\n • Widget de tension de l\'adaptateur pour les données du véhicule\n\n • Données du véhicule dans l\'analyseur de parcours\n\n • Organisation automatique des parcours par année, longueur, activité et plus encore\n\n • Éditeur de palette pour la visualisation du terrain et des parcours\n\n • Algorithmes de recherche améliorés et interface utilisateur actualisée\n\n • Profils d\'altitude corrigés pour les itinéraires\n\n • Favoris : nouvelles options de tri et interface utilisateur actualisée\n\n • Partage de lien vers n\'importe quel point d\'intérêt\n\n • Aperçu des points de cheminement sans fermer la liste\n\n • Paramètre de largeur du vélo pour éviter les routes étroites\n\n • Descriptions des photos provenant de Wikimedia</string>

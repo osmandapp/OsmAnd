@@ -4094,7 +4094,7 @@
     <string name="poi_climbing_area">Klatreområde</string>
     <string name="poi_climbing_route">Klatrerute</string>
     <string name="poi_climbing_route_bottom">Klatrerute bund</string>
-    <string name="poi_cafe_yes">Ja</string>
+    <string name="poi_cafe_yes">Cafe: Ja</string>
     <string name="poi_roundtrip_yes">Rundtur: ja</string>
     <string name="poi_recycling_glass_bottles_colour">Farvede glasflasker</string>
     <string name="poi_roundtrip_no">Rundtur: nej</string>
@@ -4311,4 +4311,5 @@
     <string name="poi_water_type_filter">Vandtype</string>
     <string name="poi_surface_laterite">Overflade: Laterit</string>
     <string name="poi_surface_chipseal">Overflade: Chipseal</string>
+    <string name="poi_sled_yes">Slæde: Ja</string>
 </resources>
