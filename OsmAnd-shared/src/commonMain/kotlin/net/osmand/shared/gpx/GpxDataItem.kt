@@ -98,6 +98,11 @@ class GpxDataItem(
 					GpxParameter.SHOW_ARROWS,
 					if (gpxFile.isShowArrowsSet()) gpxFile.isShowArrows() else null)
 
+			GpxParameter.LINE_DASHED ->
+				setParameter(
+					GpxParameter.LINE_DASHED,
+					if (gpxFile.isLineDashedSet()) gpxFile.isLineDashed() else null)
+
 			GpxParameter.SHOW_START_FINISH -> {
 				setParameter(
 					GpxParameter.SHOW_START_FINISH,
