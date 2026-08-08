@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="traffic_plugin_name">Traffic</string>
+	<string name="traffic_plugin_description">Shows live road traffic from TomTom as a coloured overlay and factors it into car routing. Requires a personal TomTom API key and an internet connection.</string>
+	<string name="traffic_show_overlay">Show traffic overlay</string>
+	<string name="traffic_routing">Traffic-aware routing</string>
+	<string name="traffic_routing_description">Route the car profile with TomTom live traffic. Sets up the routing engine automatically from your API key.</string>
+	<string name="traffic_api_key">TomTom API key</string>
+	<string name="traffic_api_key_description">Personal TomTom API key, used for the traffic overlay tiles and traffic-aware routing.</string>
+	<string name="traffic_auto_reroute">Re-route for traffic</string>
+	<string name="traffic_auto_reroute_description">While navigating, periodically recalculate the route to avoid newly reported jams.</string>
 <!--
 	README:
 	- The preferred way to help with translations is via https://hosted.weblate.org/engage/osmand/
