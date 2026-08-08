@@ -5369,4 +5369,9 @@
     <string name="rendering_attr_surface_clay_name">Argilla</string>
     <string name="rendering_attr_surface_laterite_name">Laterite</string>
     <string name="share_favorites_media_preparation_failed">Impossibile includere i file multimediali allegati. Condivisi solo i punti.</string>
+    <plurals name="files_count">
+        <item quantity="one">%d file</item>
+        <item quantity="many">%d file</item>
+        <item quantity="other">%d file</item>
+    </plurals>
 </resources>
