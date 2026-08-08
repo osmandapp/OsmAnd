@@ -1588,6 +1588,9 @@ public class RouteResultPreparation {
 	protected RoadSplitStructure calculateRoadSplitStructure(RouteSegmentResult prevSegm, RouteSegmentResult currentSegm,
 			List<RouteSegmentResult> attachedRoutes, String turnLanesPrevSegm) {
 		RoadSplitStructure rs = new RoadSplitStructure();
+		if (isInsignificantRoadAttached(prevSegm, currentSegm, attachedRoutes)) {
+			return rs;
+		}
 		int speakPriority = Math.max(highwaySpeakPriority(prevSegm.getObject().getHighway()), highwaySpeakPriority(currentSegm.getObject().getHighway()));
 		double currentAngle = MapUtils.normalizeDegrees360(currentSegm.getBearingBegin());
 		double prevAngle = MapUtils.normalizeDegrees360(prevSegm.getBearingBegin() - 180);
@@ -1668,6 +1671,18 @@ public class RouteResultPreparation {
 			
 		}
 		return rs;
+	}
+
+	private boolean isInsignificantRoadAttached(RouteSegmentResult prevSegm, RouteSegmentResult currentSegm, List<RouteSegmentResult> attachedRoutes) {
+		if (prevSegm.getObject().getId() != currentSegm.getObject().getId()) {
+			return false;
+		}
+		if (attachedRoutes.size() != 1) {
+			return false;
+		}
+		int priority = highwaySpeakPriority(currentSegm.getObject().getHighway());
+		int priorityAttached = highwaySpeakPriority(attachedRoutes.get(0).getObject().getHighway());
+		return priorityAttached - priority >= MAX_SPEAK_PRIORITY - 1;
 	}
 	
 	protected TurnType createSimpleKeepLeftRightTurn(boolean leftSide, RouteSegmentResult prevSegm,
