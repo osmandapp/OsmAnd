@@ -1240,8 +1240,8 @@
     <string name="map_source">Map-fonto</string>
     <string name="show_location">Montri vian pozicion</string>
     <string name="search_POI_level_btn">Serĉi pli</string>
-    <string name="position_on_map_center">centre</string>
-    <string name="position_on_map_bottom">sube</string>
+    <string name="position_on_map_center">Centre</string>
+    <string name="position_on_map_bottom">Sube</string>
     <string name="navigate_point_latitude">Latitudo</string>
     <string name="navigate_point_longitude">Longitudo</string>
     <string name="navigate_point_format_D">GGG.GGGGG</string>
@@ -1530,7 +1530,7 @@
     <string name="full_version_thanks">Dankon al vi pro aĉeti la pagan version de OsmAnd!</string>
     <string name="parking_options">Parkumaj agordoj</string>
     <string name="do_not_show_startup_messages">Ne montri mesaĝojn je starto</string>
-    <string name="shared_string_automatic">aŭtomate</string>
+    <string name="shared_string_automatic">Aŭtomate</string>
     <string name="right_side_navigation">Dekstr‑flanka trafiko</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Aŭtomata Navigado Direkte al celo) estas mapa kaj naviga aplikaĵo kun aliro al liberaj, tutmondaj kaj altkvalitaj datumoj de OSM.
 \n
@@ -5271,4 +5271,37 @@
     <string name="release_5_4">• nova spaca serĉilo – trovi lokojn kaj serĉi ĉirkaŭ lokoj\n\n• rekonstruita serĉo: eblo ordigi kaj filtri, pli klara vido\n\n• aldoni fotojn kaj aŭdvidaĵojn al ŝatataj punktoj\n\n• ŝatataj punktoj: subdosierujoj kaj alpingeblaj dosierujoj\n\n• koordinatoj: serĉado, kradoj kaj vidigo de interesejoj nun subtenas EPSG kaj Maidenhead Locator\n\n• riparitaj problemoj pri navigoj, rapide ŝanĝi inter norma kaj rapida kurs-difinadoj\n\n• skali Android Auto sendepende de via telefono\n\n• Astronomio: kalkuli sunaj kaj lunaj eklipsoj</string>
     <string name="shared_string_note">Rimarko</string>
     <string name="media_storage_camera_folder_note_descr">Sonaj dosieroj konserviĝos en la dosierujo Music/OsmAnd.</string>
+    <string name="always_keep_local_copy">Ĉiam teni lokan kopion</string>
+    <string name="always_keep_local_copy_description">Aŭdvidaĵoj ne foriĝos, eĉ kiam la originala dosiero estos forigita el la galerio aŭ dosieroj.</string>
+    <string name="use_spatial_text_search">Uzi spacan serĉilon</string>
+    <string name="use_spatial_text_search_description">Anstataŭigi la norman rapidan serĉilon per la testa spaca serĉilo.</string>
+    <string name="astro_lunar_eclipse">Luna eklipso</string>
+    <string name="astro_lunar_eclipse_subtitle">Esplori lunajn eklipsojn tuttere</string>
+    <string name="astro_previous_lunar_eclipse">Antaŭa luna eklipso</string>
+    <string name="astro_next_lunar_eclipse">Sekva luna eklipso</string>
+    <string name="astro_close_lunar_eclipse">Fermi vidigilon de lunaj eklipsoj</string>
+    <string name="astro_loading_lunar_eclipse">Kalkulado de lunaj eklipsoj</string>
+    <string name="astro_lunar_eclipse_load_error">Ne povas kalkuli tiun ĉi lunan eklipson.</string>
+    <string name="astro_total_lunar_eclipse">Plena luna eklipso</string>
+    <string name="astro_partial_lunar_eclipse">Parta luna eklipso</string>
+    <string name="astro_penumbral_lunar_eclipse">Duonombra luna eklipso</string>
+    <string name="astro_eclipse_phase_penumbral">duonombra</string>
+    <string name="astro_eclipse_phase_none">neeklipsita</string>
+    <string name="astro_lunar_eclipse_calculating_state">Kalkulado de videblo ĉe la map-centro…</string>
+    <string name="astro_lunar_eclipse_local_status">%1$s • %2$.1f%%-ombra eklipso • altitudo de Luno: %3$.1f°</string>
+    <string name="astro_lunar_eclipse_simple_status">%1$s • altitudo de Luno: %2$.1f°</string>
+    <string name="astro_lunar_eclipse_below_horizon">%1$s • Luno sub la horizonto (%2$.1f°)</string>
+    <string name="astro_lunar_eclipse_timeline_description">Proceso de luna eklipso. Ŝovumu por transsalti al ŝajnigata tempo.</string>
+    <string name="astro_fit_lunar_eclipse_visibility">Centrigi videblon</string>
+    <string name="astro_lunar_eclipse_visibility_loading">Kalkulado de videblo…</string>
+    <string name="astro_lunar_eclipse_map_error">Regiono de videblo de la luna eklipso ne estas disponebla nun.</string>
+    <string name="astro_lunar_eclipse_rendering_note">Kolorigita mapo: Luno super la horizonto. Koloro kaj intenso de ombro estas nur skizaj.</string>
+    <string name="custom_widget_colors">Propraj koloroj de fenestraĵoj</string>
+    <string name="custom_widget_colors_description">Pliigu videblon tuj. Malŝlosu plenan alĝustigon de koloroj por havigu perfektan videblon de fenestraĵoj sur ĉiu fono de mapo: taga kaj nokta.</string>
+    <string name="unlock_custom_colors">Malŝlosi proprajn kolorojn</string>
+    <string name="text_color">Koloro de teksto</string>
+    <string name="secondary_text_color">Koloro de alia teksto</string>
+    <string name="background_color">Koloro de fono</string>
+    <string name="widget_height">Alto de fenestraĵo</string>
+    <string name="row_height">Alto de vico</string>
 </resources>
