@@ -1420,7 +1420,17 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	private void searchAroundMyLocation() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null) {
+			return;
+		}
+		if (!OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
+			OsmAndLocationProvider.requestFineLocationPermissionIfNeeded(mapActivity);
+			return;
+		}
+		startLocationUpdate();
 		if (location == null) {
+			app.showToastMessage(R.string.unknown_location);
 			return;
 		}
 		useMapCenter = false;
@@ -1431,7 +1441,6 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		updateSearchAroundLocation(centerLatLon);
 		updateClearButtonAndHint();
 		updateClearButtonVisibility(true);
-		startLocationUpdate();
 		updateToolbarButton();
 		rerunCurrentSearchQuery();
 	}
