@@ -113,7 +113,7 @@ class ShareFavoritesBottomSheet : BaseMaterialBottomSheetWithHeader(), IDialog,
 
 	override fun shouldSkipCollapsed(): Boolean = true
 
-	override fun shouldShowDragHandle(): Boolean = false
+	override fun getDragHandleVisibility(): Int = View.GONE
 
 	override fun onDestroy() {
 		super.onDestroy()

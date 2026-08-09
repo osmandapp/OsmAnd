@@ -81,7 +81,7 @@ class DuplicateMapDownloadBottomSheet : BaseMaterialBottomSheetWithHeader(), IDi
 
 	override fun shouldSkipCollapsed(): Boolean = true
 
-	override fun shouldShowDragHandle(): Boolean = false
+	override fun getDragHandleVisibility(): Int = View.INVISIBLE
 
 	override fun onDestroy() {
 		super.onDestroy()

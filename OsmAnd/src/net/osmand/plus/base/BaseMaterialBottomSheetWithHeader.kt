@@ -26,8 +26,7 @@ abstract class BaseMaterialBottomSheetWithHeader : BaseMaterialModalBottomSheetD
 	): View {
 		updateNightMode()
 		mainView = inflate(getLayoutId(), container, false)
-		mainView.findViewById<View>(R.id.dragHandle)?.visibility =
-			if (shouldShowDragHandle()) View.VISIBLE else View.INVISIBLE
+		mainView.findViewById<View>(R.id.dragHandle)?.visibility = getDragHandleVisibility()
 		setupHeaderCloseButton(mainView)
 		setupRoundedCorners()
 		return mainView
@@ -43,7 +42,7 @@ abstract class BaseMaterialBottomSheetWithHeader : BaseMaterialModalBottomSheetD
 
 	protected open fun getLayoutId(): Int = R.layout.bottom_sheet_material_with_header
 
-	protected open fun shouldShowDragHandle(): Boolean = true
+	protected open fun getDragHandleVisibility(): Int = View.VISIBLE
 
 	private fun setupRoundedCorners() {
 		val card = mainView.findViewById<MaterialCardView>(R.id.bottomSheetCard)
