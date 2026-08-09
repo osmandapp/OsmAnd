@@ -31,7 +31,7 @@ import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.util.Algorithms;
 
-public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
+public class MapObjectViewHolder extends RecyclerView.ViewHolder {
 
 	public final OsmandApplication app;
 	public final UpdateLocationViewCache locationViewCache;
@@ -47,8 +47,8 @@ public class CityStructureItemViewHolder extends RecyclerView.ViewHolder {
 
 	public boolean nightMode;
 
-	public CityStructureItemViewHolder(@NonNull View view,
-	                                   @NonNull UpdateLocationViewCache locationViewCache) {
+	public MapObjectViewHolder(@NonNull View view,
+	                           @NonNull UpdateLocationViewCache locationViewCache) {
 		super(view);
 
 		this.app = AndroidUtils.getApp(view.getContext());
