@@ -4505,7 +4505,7 @@
     <string name="poi_osmwiki">Populárne miesta (Wikipédia)</string>
     <string name="poi_network_foot">Sieť trás (turistika)</string>
     <string name="poi_network_cycling">Sieť trás (cyklistika)</string>
-    <string name="poi_cafe_yes">Áno</string>
+    <string name="poi_cafe_yes">Kaviareň: Áno</string>
     <string name="poi_piste_type">Typ zjazdovky</string>
     <string name="poi_access_notes">Poznámky o prístupe</string>
     <string name="poi_contact_website">Webová stránka</string>
