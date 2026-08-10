@@ -39,7 +39,7 @@
     <string name="poi_beacon_cardinal">Balise cardinale</string>
     <string name="poi_beacon_lateral">Balise latérale</string>
     <string name="poi_beacon_safe_water">Marque d\'eaux saines</string>
-    <string name="poi_beacon_special_purpose">Marque spéciale</string>
+    <string name="poi_beacon_special_purpose">Balise à usage spécifique</string>
     <string name="poi_beauty">Salon de beauté</string>
     <string name="poi_beverages">Magasin de boissons</string>
     <string name="poi_bicycle">Magasin de vélos</string>
@@ -2157,7 +2157,7 @@
     <string name="poi_shelter_type_building">Bâtiment</string>
     <string name="poi_shelter_type_wildlife_hide">Observation d\'animaux sauvages</string>
     <string name="poi_shelter_type_rock_shelter">Balme</string>
-    <string name="poi_shelter_type_sun_shelter">Soleil</string>
+    <string name="poi_shelter_type_sun_shelter">Abri contre le soleil</string>
     <string name="poi_shelter_type_field_shelter">Campagne</string>
     <string name="poi_shelter_type_tent">Tente</string>
     <string name="poi_shelter_type_abandoned">Abandonné</string>
@@ -3529,7 +3529,7 @@
     <string name="poi_service_vehicle_body_repair_yes">Carrosserie</string>
     <string name="poi_service_vehicle_electrical_yes">Électricité</string>
     <string name="poi_climbing_adventure">Parcours acrobatique en hauteur</string>
-    <string name="poi_course">Course</string>
+    <string name="poi_course">Cours</string>
     <string name="poi_license_classes">Classes de permis</string>
     <string name="poi_pipeline_substation">Sous-station de pipeline</string>
     <string name="poi_substation_minor_distribution">Distribution mineure</string>
