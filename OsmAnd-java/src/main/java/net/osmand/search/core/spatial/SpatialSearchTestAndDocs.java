@@ -48,6 +48,7 @@ import net.osmand.util.SearchAlgorithms;
 // 2. UNIT TESTING DEDUPLICATE: Street related to city or suburb what to show (RZR)
 // 3. UNIT TESTING: Japan_kanto_tokyo (see example below on neighborouds) - test on small osm.gz?
 // 4. UNIT TESTING: Test poi category translations (add ru / de in test)
+// 5. Test conscription number for some cities - issue (RZR)
 
 // NO UNIT TESTING: '400 Susquehanna Boulevard Hazel Township' (MISSING Hazel Township)
 // NO UNIT TESTING: '330 Innovation Boulevard University Park' (partial result missing university park)
@@ -58,27 +59,26 @@ import net.osmand.util.SearchAlgorithms;
 // REVIEW Duplicate '10 Am Remsufer Remseck am Neckar', +'138 138 Scott Avenue Bellefonte', +'8 av 8'
 // REVIEW Analyze Performance & Android bootlenecks VisualVM (Pipeline + Intersection)
 
+// TODO INDEX: highway=services (Not index)
+
 // TODO INDEX: Find POI Categories translations / synonyms via Common words - Стоматол., Dentist, Basilica 
 // TODO REVIEW: Abbrevations (synonyms / direction words) other languages?
 // TODO REVIEW: Analyze Abbrevations / common skip (abbrevations 1st=first)
+
+// TODO Web worldwide search on missing results test "Arizona"
 // TODO DEDUPLICATE: Index place=state, county.. + wikidata id for boundaries (regions.ocbf) & display them - analyze
 // TODO DEDUPLICATE: too many houses (duplicate names) in wiki maps - obstruct search by street "Ярославів Вал"`?
 // TEST DEDUPLICATE: wiki / travel maps / seamarks map
+// TODO Search in large parks, neighborhood same as in boundaries (index bbox POI), residential way/56238205
 
 /////////////// EXTRA FEATURES ///////////////
 // TODO Extend POI tile bboxes 200m? internet_access (fuel_diesel)
-// TODO INDEX: highway=services (Not index)
 // TODO Sorting before load objects (use elo and other buildings?) and limit results
-// TODO Suggestion based on common suffixes
-// TODO Store and test conscription number for some cities - issue (RZR)
-// TODO Search in large parks, neighborhood same as in boundaries (index bbox POI), residential way/56238205
-// TODO Japan test, housename, block_number + housenumber, neighbourhood + quarter - street + India assign houses to suburbs / neighbourhood / blocks
+// TODO Auto-Corrections / Suggestion based on common suffixes
 // TODO Postcode needs to load street and check buildings! Store postcode as bbox not as City! - '1186RZ 324' (NL, UK) 
 // TODO Search near key objects (subway station artificial bbox)
-// TODO Web worldwide search on missing results test "Arizona"
 // TODO New Geocoding for cases ("NC 42" == "NC-42") - geo index for prefixes
 // TODO Add flats: https://www.openstreetmap.org/node/5843642738
-// TODO Auto-Corrections
 // TODO English postcodes
 // TODO Precise Boundary 'Chernihiv sport life' mostly Kyiv - check precise boundary for filter
 // TODO Short word split "Ro-ki" vs "Roki" 
@@ -367,8 +367,9 @@ public class SpatialSearchTestAndDocs {
 //		settings.OPTIM_READ_CATEGORY_WORD_ATOMS = false;
 //		settings.OPTIM_READ_COMMON_WORDS_LIMIT = 10000;
 		
-//		pattern = "Ukraine_";
-//		location = new LatLon(48.020997, 30.968742);
+		pattern = "Ukraine_";
+		location = new LatLon(48.020997, 30.968742);
+		query = "банк";
 //		query = "Мигия озеро ";
 //		query = "Мигия water"; 
 //		query = "fuel Хлібна Кава"; 
@@ -413,8 +414,10 @@ public class SpatialSearchTestAndDocs {
 //		query = "Яр. вал 29-г";
 //		query = "Школа 25 Володимирська вулиця"; // Школа 25 Володимирська вулиця ALWAYS_READ_COMMON_WORDS_ATOMS = true
 //		query = "андріівський узвіз Школа "; // ALWAYS_READ_COMMON_WORDS_ATOMS = true
-//		query = "Школа ";
 //		query = "Школа А+";
+//		query = "Школа A+";
+//		query = "початкова А+";
+//		query = "початкова A+";
 //		query = "25-та школа"; // 25-та школа, 25-та school
 		
 //		query = "школа №25"; // test '№25', '25'? -- 'школа', 'школа №25', 'школа 25' // 63112526
@@ -646,7 +649,7 @@ public class SpatialSearchTestAndDocs {
 		}
 		
 		boolean testOldPoiSearch = false;
-		boolean testNewByNamePoiSearch = true;
+		boolean testNewByNamePoiSearch = false;
 		String cat = "cafe"; // ice_rink, cafe, aquarium
 		int poiZoom = 10; //10;// 12
 		QuadRect bbox = new QuadRect(29, 51, 32, 49); // zoom = 9
@@ -748,6 +751,8 @@ public class SpatialSearchTestAndDocs {
 				return "отель;готель;гатэль";
 			} else if (keyName.equals("cafe")) {
 				return "кафе";
+			} else if (keyName.equals("bank")) {
+				return "банк";
 			} else if (keyName.equals("rugby_union")) {
 				return "rugby 9";
 			} else if (keyName.equals("9pin")) {
