@@ -250,12 +250,10 @@ public class SpatialSearchToken {
 				int res = Integer.compare(atom.otherWordsCnt + atom.otherFoundCnt,
 						existing.otherWordsCnt + existing.otherFoundCnt);
 				// '2 south 2nd street' vs '25 садова вулиця' (25-та) -
-				// don't use it for now as it replaces building link 
-				// (if it stops working -then analyse should be done in checkBuilding and find duplicate assigned word) 
-				if (res == 0) {
-					// A+ school
-//					res = Boolean.compare(atom.isBuilding() || atom.isPOIRef(),
-//						existing.isBuilding() || existing.isPOIRef());
+				if (res == 0 && !SearchAlgorithms.isNumber2Letters(wordAligned)) {
+					// a school
+					res = Boolean.compare(atom.isBuilding() || atom.isPOIRef(),
+						existing.isBuilding() || existing.isPOIRef());
 				}
 				boolean replace = res < 0;
 				if (replace) {

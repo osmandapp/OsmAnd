@@ -18,6 +18,7 @@ import net.osmand.search.core.spatial.SpatialSearchContext.SpatialSearchStats;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtomXY;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSettings;
+import net.osmand.util.SearchAlgorithms;
 
 // DONE Add non maximum results as well... (surplus words +-) -  germany_remstal!
 // DONE enlarge bbox if failed 
@@ -558,7 +559,10 @@ public class SpatialPipelineSearch {
 			if (lastDupToken == null) {
 				lastDupToken = tokenIdx;
 			}
-//			token = ctx.tokens.get(lastDupToken); // fixes 'Am Remsufer Remseck am Neckar' but incorrect for '138 138 Scott Avenue Bellefonte' 
+//			if (!SearchAlgorithms.isNumber2Letters(token.wordAligned)) {
+				// fixes 'Am Remsufer Remseck am Neckar' but incorrect for '138 138 Scott Avenue Bellefonte' & 'W&W'
+//				token = ctx.tokens.get(lastDupToken); 
+//			}
 			TIntHashSet deleted = token.getDeletedAtoms();
 			for (NameIndexAtom atom : token.atoms) {
 				if (deleted.contains(atom.indexInToken)) {

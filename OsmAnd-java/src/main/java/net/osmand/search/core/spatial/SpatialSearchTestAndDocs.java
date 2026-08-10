@@ -57,9 +57,6 @@ import net.osmand.util.SearchAlgorithms;
 // REVIEW (index_words_dashboard - common озеро): POI / ADDRESS - France, Germany, US, Europe, China, Peru
 // REVIEW Auto test Analyze Performance & Android bootlenecks VisualVM (Pipeline + Intersection)
 
-// TODO FIX - A+, '10 Am Remsufer Remseck am Neckar'
-// TODO FIX ORDER - (tests)
-
 // TODO INDEX: Find POI Categories translations / synonyms via Common words - Стоматол., Dentist, Basilica 
 // TODO REVIEW: Abbrevations (synonyms / direction words) other languages?
 // TODO REVIEW: Analyze Abbrevations / common skip (abbrevations 1st=first)
@@ -70,6 +67,7 @@ import net.osmand.util.SearchAlgorithms;
 // TEST DEDUPLICATE: wiki / travel maps / seamarks map
 
 /////////////// EXTRA FEATURES ///////////////
+// TODO FIX ORDER - (tests)
 // TODO Search in large parks, neighborhood same as in boundaries (index bbox POI), residential way/56238205
 // TODO Extend POI tile bboxes 200m? internet_access (fuel_diesel)
 // TODO Sorting before load objects (use elo and other buildings?) and limit results
@@ -162,7 +160,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "2/1 Rathausplatz Esslingen am Neckar"; // not correct
 //		query = "9 Neustädter Straße Korb";
 //		query = "14/1 J.-F.-Weishaar-Straße Korb";
-//		settings.DEV_USE_PIPELINE = true;
+		settings.DEV_USE_PIPELINE = true;
 		query = "10 Am Remsufer Remseck am Neckar"; 
 
 //		settings = SpatialTextSearchSettings.searchPoiCategoriesSettings(0, null);
@@ -414,11 +412,15 @@ public class SpatialSearchTestAndDocs {
 //		query = "Яр. вал 29-г";
 //		query = "Школа 25 Володимирська вулиця"; // Школа 25 Володимирська вулиця ALWAYS_READ_COMMON_WORDS_ATOMS = true
 //		query = "андріівський узвіз Школа "; // ALWAYS_READ_COMMON_WORDS_ATOMS = true
-//		query = "Школа А+";
-//		query = "Школа A+";
-//		query = "початкова А+";
-//		query = "початкова A+";
 //		query = "25-та школа"; // 25-та школа, 25-та school
+		
+//		pattern = "Ukraine_kyiv";
+//		query = "Школа А+"; // +
+//		query = "початкова А+"; // - -> +
+//		query = "початкова школа А+"; // - -> +
+//		query = "початкова A+"; // latin - -> +
+//		query = "школа A+"; // latin - -> +
+//		query = "school A+"; // latin not supported (category needed)?
 		
 //		query = "школа №25"; // test '№25', '25'? -- 'школа', 'школа №25', 'школа 25' // 63112526
 //		query = "ВЕЛОwatt";
@@ -756,6 +758,8 @@ public class SpatialSearchTestAndDocs {
 				return "кафе";
 			} else if (keyName.equals("bank")) {
 				return "банк";
+//			} else if (keyName.equals("school")) {
+//				return "школа";
 			} else if (keyName.equals("rugby_union")) {
 				return "rugby 9";
 			} else if (keyName.equals("9pin")) {
