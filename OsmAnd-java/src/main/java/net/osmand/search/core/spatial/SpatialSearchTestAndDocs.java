@@ -59,7 +59,7 @@ import net.osmand.util.SearchAlgorithms;
 // REVIEW: Auto test New york, France, Italy (Slow?)
 // REVIEW Duplicate '10 Am Remsufer Remseck am Neckar', +'138 138 Scott Avenue Bellefonte', +'8 av 8'
 // REVIEW Analyze Performance & Android bootlenecks VisualVM (Pipeline + Intersection)
-// TODO FIX - A+, 2 2 Sokak, summit
+// TODO FIX - A+, 2 2 Sokak, prepipeline
 // TODO FIX ORDER - (tests)
 
 // TODO INDEX: Find POI Categories translations / synonyms via Common words - Стоматол., Dentist, Basilica 
@@ -164,7 +164,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "2/1 Rathausplatz Esslingen am Neckar"; // not correct
 //		query = "9 Neustädter Straße Korb";
 //		query = "14/1 J.-F.-Weishaar-Straße Korb";
-		settings.DEV_USE_PIPELINE = false;
+//		settings.DEV_USE_PIPELINE = true;
 		query = "10 Am Remsufer Remseck am Neckar";
 
 //		settings = SpatialTextSearchSettings.searchPoiCategoriesSettings(0, null);
@@ -331,7 +331,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "vegan cafe"; // vegan-no Popov exclude
 		
  
-//		pattern = "Turkey_";
+		pattern = "Turkey_";
 //		pattern = "turkey_sokak.obf";
 //		query = "Sokak 23018. Balikesir"; // OK
 //		query = "2301. Sokak"; // Test 23018., 23018 - Fixed NameIndexCreator - parsePureIntegerSuffix
@@ -341,6 +341,9 @@ public class SpatialSearchTestAndDocs {
 //		location = new LatLon(40.7627, 29.8454);
 //		location = new LatLon(39.112451, 27.191182);
 //		location = new LatLon(38.3839, 27.1882);
+		location = new LatLon(40.8798, 29.3973);
+		
+		query = "2 2 Sokak";
 		
 //		query = "2/1 21038 Sokak"; // 1380369156
 //		query = "2/6. Sokak";
@@ -416,9 +419,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "54-та Садова вулиця 8"; // interpolation
 //		query = "Яр. вал 29-г";
 //		query = "Школа 25 Володимирська вулиця"; // Школа 25 Володимирська вулиця ALWAYS_READ_COMMON_WORDS_ATOMS = true
-		pattern = "ukraine_school";
 //		query = "андріівський узвіз Школа "; // ALWAYS_READ_COMMON_WORDS_ATOMS = true
-		query = "school "; 
 //		query = "Школа А+";
 //		query = "Школа A+";
 //		query = "початкова А+";

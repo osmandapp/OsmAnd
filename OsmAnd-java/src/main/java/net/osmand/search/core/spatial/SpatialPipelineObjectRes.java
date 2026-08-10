@@ -106,7 +106,7 @@ public class SpatialPipelineObjectRes {
 		}		
 	}
 	
-	public void mergeSame(int tCount, NameIndexAtom atom, int tokenIdx, boolean noPoiType) {
+	public void mergeSame(int tCount, NameIndexAtom atom, int tokenIdx, boolean noPoiType, int lastDupToken) {
 		// we need to separately process situation duplicate words in object and in query
 		if (mainAtom.isPOIRef() || mainAtom.isBuilding()) {
 			mainAtom = atom;
@@ -142,11 +142,13 @@ public class SpatialPipelineObjectRes {
 		}
 
 		int otherWrds = mainAtom.otherFoundCnt + mainAtom.otherWordsCnt;
-		boolean join = mainAtom.isPOI() && (fromPoiCategory(mainAtom) || fromPoiCategory(atom));
-		if ((firstInd + otherWrds >= tokenIdx && (tokenIdx - lastInd) <= 1) || join) {
+		boolean joinSymbolsOk = (firstInd + otherWrds >= tokenIdx && (tokenIdx - lastInd) <= 1);
+		boolean joinCategoryOk = mainAtom.isPOI() && (fromPoiCategory(mainAtom) || fromPoiCategory(atom));
+		if ((joinCategoryOk || joinSymbolsOk)  && lastDupToken != tokenIdx - 1
+				) {
 			setAtom(atom, tokenIdx);
 		} else if (otherVariants != null) {
-			otherVariants.mergeSame(tCount, atom, tokenIdx, noPoiType);
+			otherVariants.mergeSame(tCount, atom, tokenIdx, noPoiType, lastDupToken);
 		} else {
 			otherVariants = new SpatialPipelineObjectRes(tCount, atom, tokenIdx, noPoiType);
 		}

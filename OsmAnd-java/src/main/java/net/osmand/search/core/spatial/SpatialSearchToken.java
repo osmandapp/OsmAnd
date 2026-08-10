@@ -345,15 +345,25 @@ public class SpatialSearchToken {
 	String[] matchSplitName(String name) {
 		name = SearchAlgorithms.alignChars(name);
 		String[] res = null;
-		if (wordAligned.length() < name.length()
+		if (wordAligned.length() < name.length() 
 				&& collatorMain.getCollator().equals(name.substring(0, wordAligned.length()), wordAligned)) {
 			res = new String[2];
 			res[0] = name.substring(0, wordAligned.length());
-			res[1] = name.substring(wordAligned.length());
-			while (res[1].length() > 0 && !Character.isLetter(res[1].charAt(0))
-					&& !Character.isDigit(res[1].charAt(0))) {
-				res[1] = res[1].substring(1);
+			// don't split numbers
+			if (Character.isDigit(name.charAt(wordAligned.length()))
+					&& Character.isDigit(name.charAt(wordAligned.length() - 1))) {
+				return null;
 			}
+			int sub = wordAligned.length();
+			for (; sub < name.length(); sub++) {
+				if (Character.isLetter(name.charAt(sub)) || Character.isDigit(name.charAt(sub))) {
+					break;
+				}
+			}
+			if (sub >= name.length()) {
+				return null;
+			}
+			res[1] = name.substring(sub);
 		}
 		return res;
 	}

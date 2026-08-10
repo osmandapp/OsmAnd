@@ -553,11 +553,10 @@ public class SpatialPipelineSearch {
 		Map<String, Integer> dupTokens = new HashMap<>();
 		for (int tokenIdx = 0; tokenIdx < totalTokens; tokenIdx++) {
 			SpatialSearchToken token = ctx.tokens.get(tokenIdx);
-			Integer dupToken = dupTokens.get(token.word);
-			if (dupToken == null) {
-				dupTokens.put(token.word, tokenIdx);
-			} else {
-//				token = firstToken; // Bug in processing dup tokens (less data assigned to 2nd)
+			Integer lastDupToken = dupTokens.get(token.word);
+			dupTokens.put(token.word, tokenIdx);
+			if (lastDupToken == null) {
+				lastDupToken = tokenIdx;
 			}
 			TIntHashSet deleted = token.getDeletedAtoms();
 			for (NameIndexAtom atom : token.atoms) {
@@ -567,7 +566,7 @@ public class SpatialPipelineSearch {
 				SpatialPipelineObjectRes existing = ctx.objectsById.get(atom.id);
 				boolean noPoiType = disallowPoiType(atom, token);
 				if (existing != null) {
-					existing.mergeSame(totalTokens, atom, tokenIdx, noPoiType);
+					existing.mergeSame(totalTokens, atom, tokenIdx, noPoiType, lastDupToken);
 				} else {
 					SpatialPipelineObjectRes obj = new SpatialPipelineObjectRes(totalTokens, atom, tokenIdx, noPoiType);
 					ctx.objectsById.put(atom.id, obj);
