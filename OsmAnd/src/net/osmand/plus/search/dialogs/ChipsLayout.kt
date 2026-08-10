@@ -385,7 +385,8 @@ private fun ChipAnchor(
 					text = textColor(ChipsLayout.TextColorStyle.PRIMARY),
 					secondaryText = textColor(ChipsLayout.TextColorStyle.SECONDARY),
 					icon = iconColor(ChipsLayout.IconColorStyle.DEFAULT, nightMode),
-					selected = activeColor
+					selected = activeColor,
+					control = inActiveColor
 				),
 				title = if (chip.menuTitleId != 0) stringResource(chip.menuTitleId) else null
 			)
