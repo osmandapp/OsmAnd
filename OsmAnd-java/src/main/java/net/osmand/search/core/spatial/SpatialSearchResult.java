@@ -326,7 +326,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 			if (first.isPoiCategory()) {
 				long poiTypeId = (first.atom.id << 3);
 				// suggest poi category for different cities in query (we can't chose which is better?)
-				if (objs.size() > 1) {
+				if (objs.size() == 2) {
 					SpatialSearchResultRef second = objs.get(1);
 					poiTypeId += second.tokens.get(0).originalOrder;
 				}

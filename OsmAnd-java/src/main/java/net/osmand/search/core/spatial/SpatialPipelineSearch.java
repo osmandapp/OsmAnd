@@ -558,6 +558,7 @@ public class SpatialPipelineSearch {
 			if (lastDupToken == null) {
 				lastDupToken = tokenIdx;
 			}
+//			token = ctx.tokens.get(lastDupToken); // fixes 'Am Remsufer Remseck am Neckar' but incorrect for '138 138 Scott Avenue Bellefonte' 
 			TIntHashSet deleted = token.getDeletedAtoms();
 			for (NameIndexAtom atom : token.atoms) {
 				if (deleted.contains(atom.indexInToken)) {

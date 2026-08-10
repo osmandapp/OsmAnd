@@ -49,17 +49,15 @@ import net.osmand.util.SearchAlgorithms;
 // 3. UNIT TESTING: Test poi category translations (add ru / de in test)
 // 4. UNIT TESTING: Test conscription number for some cities - "Bratislava Raketova 3248/6";
 
+// TESTING : highway=services (Not index)
 // NO UNIT TESTING: '400 Susquehanna Boulevard Hazel Township' (MISSING Hazel Township)
 // NO UNIT TESTING: '330 Innovation Boulevard University Park' (partial result missing university park)
 
 ////////// IN PROGRESS //////////
-// TESTING : highway=services (Not index)
-
 // REVIEW (index_words_dashboard - common озеро): POI / ADDRESS - France, Germany, US, Europe, China, Peru
-// REVIEW: Auto test New york, France, Italy (Slow?)
-// REVIEW Duplicate '10 Am Remsufer Remseck am Neckar', +'138 138 Scott Avenue Bellefonte', +'8 av 8'
-// REVIEW Analyze Performance & Android bootlenecks VisualVM (Pipeline + Intersection)
-// TODO FIX - A+, 2 2 Sokak, prepipeline
+// REVIEW Auto test Analyze Performance & Android bootlenecks VisualVM (Pipeline + Intersection)
+
+// TODO FIX - A+, '10 Am Remsufer Remseck am Neckar'
 // TODO FIX ORDER - (tests)
 
 // TODO INDEX: Find POI Categories translations / synonyms via Common words - Стоматол., Dentist, Basilica 
@@ -70,9 +68,9 @@ import net.osmand.util.SearchAlgorithms;
 // TODO DEDUPLICATE: Index place=state, county.. + wikidata id for boundaries (regions.ocbf) & display them - analyze
 // TODO DEDUPLICATE: too many houses (duplicate names) in wiki maps - obstruct search by street "Ярославів Вал"`?
 // TEST DEDUPLICATE: wiki / travel maps / seamarks map
-// TODO Search in large parks, neighborhood same as in boundaries (index bbox POI), residential way/56238205
 
 /////////////// EXTRA FEATURES ///////////////
+// TODO Search in large parks, neighborhood same as in boundaries (index bbox POI), residential way/56238205
 // TODO Extend POI tile bboxes 200m? internet_access (fuel_diesel)
 // TODO Sorting before load objects (use elo and other buildings?) and limit results
 // TODO Auto-Corrections / Suggestion based on common suffixes
@@ -165,7 +163,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "9 Neustädter Straße Korb";
 //		query = "14/1 J.-F.-Weishaar-Straße Korb";
 //		settings.DEV_USE_PIPELINE = true;
-		query = "10 Am Remsufer Remseck am Neckar";
+		query = "10 Am Remsufer Remseck am Neckar"; 
 
 //		settings = SpatialTextSearchSettings.searchPoiCategoriesSettings(0, null);
 //		query = "Gyn.";
@@ -293,9 +291,6 @@ public class SpatialSearchTestAndDocs {
 //		query = "14871 Pennsylvania Avenue Pine City";
 //		query = "14871 Pennsylvania Avenue";
 
-		pattern = "Map";
-		query = "Burger king";
-				
 //		pattern = "Liechtenstein_europe_2.obf";
 //		query = "Vaduz Lettstrasse";
 //		query = "Fast food"; // "Burger Fast food";
@@ -331,7 +326,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "vegan cafe"; // vegan-no Popov exclude
 		
  
-		pattern = "Turkey_";
+//		pattern = "Turkey_";
 //		pattern = "turkey_sokak.obf";
 //		query = "Sokak 23018. Balikesir"; // OK
 //		query = "2301. Sokak"; // Test 23018., 23018 - Fixed NameIndexCreator - parsePureIntegerSuffix
@@ -341,10 +336,9 @@ public class SpatialSearchTestAndDocs {
 //		location = new LatLon(40.7627, 29.8454);
 //		location = new LatLon(39.112451, 27.191182);
 //		location = new LatLon(38.3839, 27.1882);
-		location = new LatLon(40.8798, 29.3973);
+//		location = new LatLon(40.8798, 29.3973);
 		
-		query = "2 2 Sokak";
-		
+//		query = "2 2 Sokak";
 //		query = "2/1 21038 Sokak"; // 1380369156
 //		query = "2/6. Sokak";
 		// "2.Sokak", "2 Sokak", "Sokak 2", "2. Sokak", "32/2 Sokak" + housenumber (?)
