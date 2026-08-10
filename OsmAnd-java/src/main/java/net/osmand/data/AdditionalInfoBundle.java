@@ -119,7 +119,8 @@ public class AdditionalInfoBundle {
 					continue;
 				}
 				if (pType != null) {
-					AmenityRowData row = new AmenityRowData.Builder(key).setValue(strValue).setOrder(pType.getOrder()).build();
+					AmenityRowData row = new AmenityRowData.Builder(key).setValue(strValue).setOrder(pType.getOrder())
+							.setIsDescription(key.contains(Amenity.DESCRIPTION)).build();
 					if (Amenity.CUISINE.equals(key)) {
 						cuisineRow = row;
 					} else {
@@ -131,7 +132,8 @@ public class AdditionalInfoBundle {
 						collectedPoiTypes.computeIfAbsent(categoryKey, c -> new ArrayList<>()).add(poiType);
 					}
 				} else {
-					rows.add(new AmenityRowData.Builder(key).setValue(strValue).setOrder(PoiType.DEFAULT_ORDER).build());
+					rows.add(new AmenityRowData.Builder(key).setValue(strValue).setOrder(PoiType.DEFAULT_ORDER)
+							.setIsDescription(key.contains(Amenity.DESCRIPTION)).build());
 				}
 			} else if (value instanceof Map) {
 				Object filtered = filterLocalizations((Map<String, Object>) value);
@@ -217,7 +219,8 @@ public class AdditionalInfoBundle {
 			return null;
 		}
 		int order = pType != null ? pType.getOrder() : PoiType.DEFAULT_ORDER;
-		return new AmenityRowData.Builder(key).setCollapsableRows(children).setOrder(order).build();
+		return new AmenityRowData.Builder(key).setCollapsableRows(children).setOrder(order)
+				.setIsDescription(key.contains(Amenity.DESCRIPTION)).build();
 	}
 
 	private boolean isDefaultForCategory() {

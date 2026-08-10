@@ -99,8 +99,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			if (amenityRow == null) {
 				continue;
 			}
-			boolean isDescription = amenityRow.isText && amenityRow.iconId == R.drawable.ic_action_info_dark;
-			if (isDescription) {
+			if (amenityRow.isDescription) {
 				descriptions.add(amenityRow);
 			} else {
 				infoRows.add(amenityRow);
@@ -129,7 +128,7 @@ public class AmenityUIHelper extends MenuBuilder {
 		if (!Algorithms.isEmpty(baseRow.collapsableRows)) {
 			return buildLocalizedRowData(context, baseRow);
 		}
-		return getRowDataBuilder(context, baseRow.key, baseRow.value).build();
+		return getRowDataBuilder(context, baseRow.key, baseRow.value, baseRow.isDescription).build();
 	}
 
 	@NonNull
@@ -137,7 +136,8 @@ public class AmenityUIHelper extends MenuBuilder {
 		List<PoiType> categoryTypes = baseRow.collapsablePoiTypes;
 		PoiType firstType = categoryTypes.get(0);
 		AmenityRowData extraRow = baseRow.collapsableExtraRow != null
-				? getRowDataBuilder(context, baseRow.collapsableExtraRow.key, baseRow.collapsableExtraRow.value).build()
+				? getRowDataBuilder(context, baseRow.collapsableExtraRow.key, baseRow.collapsableExtraRow.value,
+						baseRow.collapsableExtraRow.isDescription).build()
 				: null;
 		if (baseRow.poiAdditional) {
 			String poiAdditionalCategoryName = baseRow.key;
@@ -182,12 +182,12 @@ public class AmenityUIHelper extends MenuBuilder {
 			String localizedKey = localizedEntry.getKey();
 			String localizedValue = localizedEntry.getValue();
 			if (!Objects.equals(headerKey, localizedKey) && !isNoteKeyHiddenFromEditing(localizedKey)) {
-				localizedRows.add(getRowDataBuilder(context, localizedKey, localizedValue).build());
+				localizedRows.add(getRowDataBuilder(context, localizedKey, localizedValue, baseRow.isDescription).build());
 			}
 		}
 		AmenityRowsBuilder.sortInfoRows(localizedRows);
 
-		AmenityRowData.Builder headerBuilder = getRowDataBuilder(context, headerKey, headerValue);
+		AmenityRowData.Builder headerBuilder = getRowDataBuilder(context, headerKey, headerValue, baseRow.isDescription);
 		if (headerBuilder.getCollapsableRowType() == AmenityRowData.CollapsableRowType.NONE) {
 			headerBuilder.setCollapsableRows(localizedRows);
 		}
@@ -199,9 +199,10 @@ public class AmenityUIHelper extends MenuBuilder {
 	}
 
 	@NonNull
-	private AmenityRowData.Builder getRowDataBuilder(@NonNull Context context, @NonNull String key, @NonNull String value) {
+	private AmenityRowData.Builder getRowDataBuilder(@NonNull Context context, @NonNull String key, @NonNull String value,
+			boolean isDescription) {
 		AdditionalInfoBundle.ResolvedPoiType resolved = additionalInfo.resolvePoiType(poiCategory, key, value);
-		AmenityRowData.Builder rowBuilder = new AmenityRowData.Builder(key).setValue(value);
+		AmenityRowData.Builder rowBuilder = new AmenityRowData.Builder(key).setValue(value).setIsDescription(isDescription);
 		PoiAdditionalUiRule poiAdditionalUiRule = PoiAdditionalUiRules.INSTANCE.findRule(key);
 		if (resolved.pType != null) {
 			poiAdditionalUiRule.fillRow(app, context, rowBuilder, this, resolved.pType, key, value, subtype);
@@ -210,8 +211,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			fallbackType.setText(true);
 			poiAdditionalUiRule.fillRow(app, context, rowBuilder, this, fallbackType, key, poiTypes.getPoiTranslation(value), subtype);
 		}
-		boolean isDescription = rowBuilder.isText() && rowBuilder.getIconId() == R.drawable.ic_action_info_dark;
-		rowBuilder.setMatchWidthDivider(!isDescription && rowBuilder.isWiki());
+		rowBuilder.setMatchWidthDivider(!rowBuilder.isDescription() && rowBuilder.isWiki());
 		return rowBuilder;
 	}
 

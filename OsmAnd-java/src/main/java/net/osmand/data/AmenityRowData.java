@@ -29,6 +29,7 @@ public class AmenityRowData {
 	public final int textColor;
 	public final boolean isWiki;
 	public final boolean isText;
+	public final boolean isDescription;
 	public final boolean needLinks;
 	public final boolean isPhoneNumber;
 	public final boolean isUrl;
@@ -55,6 +56,7 @@ public class AmenityRowData {
 		this.textColor = builder.textColor;
 		this.isWiki = builder.isWiki;
 		this.isText = builder.isText;
+		this.isDescription = builder.isDescription;
 		this.needLinks = builder.needLinks;
 		this.isPhoneNumber = builder.isPhoneNumber;
 		this.isUrl = builder.isUrl;
@@ -81,6 +83,7 @@ public class AmenityRowData {
 		private int textColor;
 		private boolean isWiki;
 		private boolean isText;
+		private boolean isDescription;
 		private boolean needLinks;
 		private boolean isPhoneNumber;
 		private boolean isUrl;
@@ -116,6 +119,7 @@ public class AmenityRowData {
 		public Builder setTextColor(int color) { this.textColor = color; return this; }
 		public Builder setIsWiki(boolean wiki) { this.isWiki = wiki; return this; }
 		public Builder setIsText(boolean textFlag) { this.isText = textFlag; return this; }
+		public Builder setIsDescription(boolean isDescription) { this.isDescription = isDescription; return this; }
 		public Builder setNeedLinks(boolean needLinks) { this.needLinks = needLinks; return this; }
 		public Builder setIsPhoneNumber(boolean isPhoneNumber) { this.isPhoneNumber = isPhoneNumber; return this; }
 		public Builder setIsUrl(boolean isUrl) { this.isUrl = isUrl; return this; }
@@ -141,6 +145,7 @@ public class AmenityRowData {
 		public CollapsableRowType getCollapsableRowType() { return collapsableRowType; }
 		public boolean isWiki() { return isWiki; }
 		public boolean isText() { return isText; }
+		public boolean isDescription() { return isDescription; }
 		public boolean isNeedLinks() { return needLinks && collapsableRowType == CollapsableRowType.NONE; }
 
 		public AmenityRowData build() {
