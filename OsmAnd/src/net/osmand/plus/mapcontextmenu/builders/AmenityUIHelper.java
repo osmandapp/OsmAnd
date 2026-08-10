@@ -58,7 +58,6 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.util.*;
-import java.util.Map.Entry;
 
 
 public class AmenityUIHelper extends MenuBuilder {
@@ -75,6 +74,7 @@ public class AmenityUIHelper extends MenuBuilder {
 	private PoiCategory poiCategory;
 	private String subtype;
 	private boolean osmEditingEnabled = PluginsHelper.isActive(OsmEditingPlugin.class);
+	private List<String> preferredLangCandidates;
 
 	public AmenityUIHelper(@NonNull MapActivity mapActivity, String preferredLang,
 			@NonNull AdditionalInfoBundle infoBundle) {
@@ -94,7 +94,7 @@ public class AmenityUIHelper extends MenuBuilder {
 		List<AmenityRowData> infoRows = new LinkedList<>();
 		List<AmenityRowData> descriptions = new LinkedList<>();
 
-		for (AmenityRowData baseRow : additionalInfo.getVisibleTags(osmEditingEnabled)) {
+		for (AmenityRowData baseRow : additionalInfo.getVisibleTags(osmEditingEnabled, preferredLangCandidates)) {
 			AmenityRowData amenityRow = buildRowData(context, baseRow);
 			if (amenityRow == null) {
 				continue;
@@ -160,34 +160,19 @@ public class AmenityUIHelper extends MenuBuilder {
 
 	@Nullable
 	private AmenityRowData buildLocalizedRowData(@NonNull Context context, @NonNull AmenityRowData baseRow) {
-		Map<String, String> localizedAdditionalInfo = new LinkedHashMap<>();
-		for (AmenityRowData child : baseRow.collapsableRows) {
-			localizedAdditionalInfo.put(child.key, child.value);
-		}
-		Collection<String> availableLocales = collectAvailableLocalesFromTags(localizedAdditionalInfo.keySet());
-		Locale prefferedLocale = getPreferredLocale(availableLocales);
-		String headerKey = prefferedLocale != null ? baseRow.key + ":" + prefferedLocale.getLanguage() : baseRow.key;
-		String headerValue = localizedAdditionalInfo.get(headerKey);
-		if (headerValue == null) {
-			Entry<String, String> entry = localizedAdditionalInfo.entrySet().iterator().next();
-			headerKey = entry.getKey();
-			headerValue = entry.getValue();
-		}
-		if (isNoteKeyHiddenFromEditing(headerKey)) {
+		if (isNoteKeyHiddenFromEditing(baseRow.key)) {
 			return null;
 		}
 
 		List<AmenityRowData> localizedRows = new ArrayList<>();
-		for (Entry<String, String> localizedEntry : localizedAdditionalInfo.entrySet()) {
-			String localizedKey = localizedEntry.getKey();
-			String localizedValue = localizedEntry.getValue();
-			if (!Objects.equals(headerKey, localizedKey) && !isNoteKeyHiddenFromEditing(localizedKey)) {
-				localizedRows.add(getRowDataBuilder(context, localizedKey, localizedValue, baseRow.isDescription).build());
+		for (AmenityRowData child : baseRow.collapsableRows) {
+			if (!isNoteKeyHiddenFromEditing(child.key)) {
+				localizedRows.add(getRowDataBuilder(context, child.key, child.value, baseRow.isDescription).build());
 			}
 		}
 		AmenityRowsBuilder.sortInfoRows(localizedRows);
 
-		AmenityRowData.Builder headerBuilder = getRowDataBuilder(context, headerKey, headerValue, baseRow.isDescription);
+		AmenityRowData.Builder headerBuilder = getRowDataBuilder(context, baseRow.key, baseRow.value, baseRow.isDescription);
 		if (headerBuilder.getCollapsableRowType() == AmenityRowData.CollapsableRowType.NONE) {
 			headerBuilder.setCollapsableRows(localizedRows);
 		}
@@ -245,6 +230,7 @@ public class AmenityUIHelper extends MenuBuilder {
 		subtype = additionalInfo.get(SUBTYPE);
 		poiTypes = app.getPoiTypes();
 		osmEditingEnabled = PluginsHelper.isActive(OsmEditingPlugin.class);
+		preferredLangCandidates = LocaleHelper.getPreferredLangCandidates(app);
 	}
 
 	@NonNull

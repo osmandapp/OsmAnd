@@ -86,7 +86,7 @@ public class AdditionalInfoBundle {
 	private static final String CUISINE_INFO_ID = COLLAPSABLE_PREFIX + Amenity.CUISINE;
 	private static final String DISH_INFO_ID = COLLAPSABLE_PREFIX + Amenity.DISH;
 
-	public List<AmenityRowData> getVisibleTags(boolean allowNoteTag) {
+	public List<AmenityRowData> getVisibleTags(boolean allowNoteTag, List<String> preferredLangs) {
 		boolean showDefaultTags = isDefaultForCategory();
 		PoiCategory category = getCategory();
 		List<AmenityRowData> rows = new ArrayList<>();
@@ -140,7 +140,7 @@ public class AdditionalInfoBundle {
 				if (filtered == null) {
 					continue;
 				}
-				AmenityRowData row = toLocalizedAmenityRowData(key, (Map<String, Object>) filtered, pType);
+				AmenityRowData row = toLocalizedAmenityRowData(key, (Map<String, Object>) filtered, pType, preferredLangs);
 				if (row != null) {
 					rows.add(row);
 				}
@@ -206,7 +206,8 @@ public class AdditionalInfoBundle {
 	}
 
 	@SuppressWarnings("unchecked")
-	private AmenityRowData toLocalizedAmenityRowData(String key, Map<String, Object> value, PoiType pType) {
+	private AmenityRowData toLocalizedAmenityRowData(String key, Map<String, Object> value, PoiType pType,
+			List<String> preferredLangs) {
 		Object localizationsObj = value.get("localizations");
 		if (!(localizationsObj instanceof Map)) {
 			return null;
@@ -218,9 +219,29 @@ public class AdditionalInfoBundle {
 		if (children.isEmpty()) {
 			return null;
 		}
+		AmenityRowData header = pickHeader(children, preferredLangs);
+		List<AmenityRowData> otherLangs = new ArrayList<>(children);
+		otherLangs.remove(header);
 		int order = pType != null ? pType.getOrder() : PoiType.DEFAULT_ORDER;
-		return new AmenityRowData.Builder(key).setCollapsableRows(children).setOrder(order)
-				.setIsDescription(key.contains(Amenity.DESCRIPTION)).build();
+		return new AmenityRowData.Builder(header.key).setValue(header.value).setCollapsableRows(otherLangs)
+				.setOrder(order).setIsDescription(key.contains(Amenity.DESCRIPTION)).build();
+	}
+
+	private AmenityRowData pickHeader(List<AmenityRowData> children, List<String> preferredLangs) {
+		if (preferredLangs != null) {
+			for (String lang : preferredLangs) {
+				if (Algorithms.isEmpty(lang)) {
+					continue;
+				}
+				String suffix = ":" + lang;
+				for (AmenityRowData child : children) {
+					if (child.key.endsWith(suffix)) {
+						return child;
+					}
+				}
+			}
+		}
+		return children.get(0);
 	}
 
 	private boolean isDefaultForCategory() {
