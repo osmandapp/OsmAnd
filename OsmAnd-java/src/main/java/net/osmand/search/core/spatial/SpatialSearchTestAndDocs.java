@@ -45,21 +45,22 @@ import net.osmand.util.SearchAlgorithms;
 // ### ge3.json: '10 Am Remsufer Remseck am Neckar' - see comment
 
 // 1. UNIT TESTING: (poi additional germany) Gynaecologist - from all poi types should be result ! (not like old search)
-// 2. UNIT TESTING DEDUPLICATE: Street related to city or suburb what to show (RZR)
-// 3. UNIT TESTING: Japan_kanto_tokyo (see example below on neighborouds) - test on small osm.gz?
-// 4. UNIT TESTING: Test poi category translations (add ru / de in test)
-// 5. Test conscription number for some cities - issue (RZR)
+// 2. UNIT TESTING: Japan_kanto_tokyo (see example below on neighborouds) - test on small osm.gz?
+// 3. UNIT TESTING: Test poi category translations (add ru / de in test)
+// 4. UNIT TESTING: Test conscription number for some cities - "Bratislava Raketova 3248/6";
 
 // NO UNIT TESTING: '400 Susquehanna Boulevard Hazel Township' (MISSING Hazel Township)
 // NO UNIT TESTING: '330 Innovation Boulevard University Park' (partial result missing university park)
 
 ////////// IN PROGRESS //////////
+// TESTING : highway=services (Not index)
+
 // REVIEW (index_words_dashboard - common озеро): POI / ADDRESS - France, Germany, US, Europe, China, Peru
 // REVIEW: Auto test New york, France, Italy (Slow?)
 // REVIEW Duplicate '10 Am Remsufer Remseck am Neckar', +'138 138 Scott Avenue Bellefonte', +'8 av 8'
 // REVIEW Analyze Performance & Android bootlenecks VisualVM (Pipeline + Intersection)
-
-// TODO INDEX: highway=services (Not index)
+// TODO FIX - A+, 2 2 Sokak, summit
+// TODO FIX ORDER - (tests)
 
 // TODO INDEX: Find POI Categories translations / synonyms via Common words - Стоматол., Dentist, Basilica 
 // TODO REVIEW: Abbrevations (synonyms / direction words) other languages?
@@ -287,12 +288,14 @@ public class SpatialSearchTestAndDocs {
 
 		
 //		pattern = "Us_penn";
-//		pattern = "Map";
 //		query = "14871 Bly Road";
 //		query = "Pennsylvania 1282 14871";
 //		query = "14871 Pennsylvania Avenue Pine City";
 //		query = "14871 Pennsylvania Avenue";
 
+		pattern = "Map";
+		query = "Burger king";
+				
 //		pattern = "Liechtenstein_europe_2.obf";
 //		query = "Vaduz Lettstrasse";
 //		query = "Fast food"; // "Burger Fast food";
@@ -367,9 +370,9 @@ public class SpatialSearchTestAndDocs {
 //		settings.OPTIM_READ_CATEGORY_WORD_ATOMS = false;
 //		settings.OPTIM_READ_COMMON_WORDS_LIMIT = 10000;
 		
-		pattern = "Ukraine_";
-		location = new LatLon(48.020997, 30.968742);
-		query = "банк";
+//		pattern = "Ukraine_";
+//		location = new LatLon(48.020997, 30.968742);
+//		query = "банк";
 //		query = "Мигия озеро ";
 //		query = "Мигия water"; 
 //		query = "fuel Хлібна Кава"; 
@@ -413,7 +416,9 @@ public class SpatialSearchTestAndDocs {
 //		query = "54-та Садова вулиця 8"; // interpolation
 //		query = "Яр. вал 29-г";
 //		query = "Школа 25 Володимирська вулиця"; // Школа 25 Володимирська вулиця ALWAYS_READ_COMMON_WORDS_ATOMS = true
+		pattern = "ukraine_school";
 //		query = "андріівський узвіз Школа "; // ALWAYS_READ_COMMON_WORDS_ATOMS = true
+		query = "school "; 
 //		query = "Школа А+";
 //		query = "Школа A+";
 //		query = "початкова А+";
@@ -445,6 +450,9 @@ public class SpatialSearchTestAndDocs {
 //		settings.DEDUPLICATE_RES = false;
 //		settings.ALLOW_HOUSE_POI_TYPE_INTERSECTION = false;
 //		query = "Shell 2 Rožňavská";
+//		query = "Bratislava Raketova 3248/6";
+//		query = "Bratislava Raketova 6";
+//		query = "Raketova 3248";
 		
 //		pattern = "Us_new-york_new"; // new-york, new-jersey
 //		pattern = "Us_new-"; 

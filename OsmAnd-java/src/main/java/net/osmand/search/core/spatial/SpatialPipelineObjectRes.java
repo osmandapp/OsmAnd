@@ -210,6 +210,9 @@ public class SpatialPipelineObjectRes {
 	
 	public static boolean extraCheck(SpatialPipelineObjectRes obj1, SpatialPipelineObjectRes obj2) {
 		if (obj1.mainAtom.id == obj2.mainAtom.id) {
+			return false;
+		}
+		if (obj1.hasId(obj2.mainAtom.id) || obj2.hasId(obj1.mainAtom.id)) {
 			// alternatives for same object
 			return false;
 		}
@@ -218,6 +221,16 @@ public class SpatialPipelineObjectRes {
 		
 		return true;
 	}
+
+	private boolean hasId(long id) {
+		for (NameIndexAtom a : atoms) {
+			if (a != null && a.id == id) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 
 	static boolean checkBuildingVsStreet(SpatialPipelineObjectRes obj1, SpatialPipelineObjectRes obj2) {
 		int minType1 = obj1.minType();
