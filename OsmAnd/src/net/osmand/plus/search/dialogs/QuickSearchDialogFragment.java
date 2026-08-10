@@ -943,7 +943,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				true,
 				false,
 				ChipsLayout.TextColorStyle.PRIMARY,
-				ChipsLayout.IconColorStyle.DEFAULT,
+				ChipsLayout.IconColorStyle.PRIMARY,
 				0,
 				new ArrayList<>(),
 				false,
