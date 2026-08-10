@@ -69,7 +69,7 @@ public class Postcode {
 		rules.put("Guatemala",                                   Arrays.asList("(?i)(?:GT-?)?(\\d{5})",                         "$1"));
 		rules.put("Guinea-bissau",                               Arrays.asList("(?i)(?:GW-?)?(\\d{4})",                         "$1"));
 		rules.put("Haiti",                                       Arrays.asList("(?i)(?:HT-?)?(\\d{4})",                         "$1"));
-		rules.put("Honduras",                                    Arrays.asList("(?i)(?:HN-?)?([A-Z]{2})\\W*(\\d{4}))",          "$1$2"));
+		rules.put("Honduras",                                    Arrays.asList("(?i)(?:HN-?)?([A-Z]{2})\\W*(\\d{4})",           "$1$2"));
 		rules.put("Hungary",                                     Arrays.asList("(?i)(?:HU-?)?(\\d{4})",                         "$1"));
 		rules.put("Iceland",                                     Arrays.asList("(?i)(?:IS-?)?(\\d{3})",                         "$1"));
 		rules.put("India",                                       Arrays.asList("(?i)(?:IN-?)?(\\d{6})",                         "$1"));
