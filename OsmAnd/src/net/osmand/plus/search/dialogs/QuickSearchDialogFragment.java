@@ -1072,10 +1072,10 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			lastResultPoiTypeNames.clear();
 			return new ArrayList<>();
 		}
-		List<String> poiTypeNames = getSearchResultPoiTypeNames();
-		if (poiTypeNames.isEmpty() && preservePoiTypeChips) {
+		if (preservePoiTypeChips) {
 			return new ArrayList<>(lastResultPoiTypeNames);
 		}
+		List<String> poiTypeNames = getSearchResultPoiTypeNames();
 		lastResultPoiTypeNames.clear();
 		lastResultPoiTypeNames.addAll(poiTypeNames);
 		return poiTypeNames;
