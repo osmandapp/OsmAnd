@@ -220,6 +220,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private String currentSearchFilterId;
 	private String currentCategoryFilterParams;
 	private final List<String> selectedResultPoiTypeNames = new ArrayList<>();
+	private final List<String> lastResultPoiTypeNames = new ArrayList<>();
+	private boolean preservePoiTypeChips;
 	private List<SearchResult> nearestCities;
 	private LatLon storedOriginalLocation;
 
@@ -943,7 +945,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				true,
 				false,
 				ChipsLayout.TextColorStyle.PRIMARY,
-				ChipsLayout.IconColorStyle.DEFAULT,
+				ChipsLayout.IconColorStyle.PRIMARY,
 				0,
 				new ArrayList<>(),
 				false,
@@ -1066,10 +1068,17 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 	@NonNull
 	private List<String> getPoiTypesChipsSource() {
-		if (isSearchViewVisible()) {
-			return getSearchResultPoiTypeNames();
+		if (!isSearchViewVisible()) {
+			lastResultPoiTypeNames.clear();
+			return new ArrayList<>();
 		}
-		return new ArrayList<>();
+		if (preservePoiTypeChips) {
+			return new ArrayList<>(lastResultPoiTypeNames);
+		}
+		List<String> poiTypeNames = getSearchResultPoiTypeNames();
+		lastResultPoiTypeNames.clear();
+		lastResultPoiTypeNames.addAll(poiTypeNames);
+		return poiTypeNames;
 	}
 
 	@NonNull
@@ -1141,6 +1150,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private void applyResultPoiTypeFilters() {
 		SearchResultCollection source = unfilteredResultCollection != null ? unfilteredResultCollection : getResultCollection();
 		if (source == null) {
+			updateTopFilterChips();
 			return;
 		}
 		unfilteredResultCollection = source;
@@ -1801,8 +1811,10 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private void setResultCollection(SearchResultCollection resultCollection, boolean preserveSelectedPoiTypeNames) {
 		if (resultCollection == null) {
 			unfilteredResultCollection = null;
+			preservePoiTypeChips = preserveSelectedPoiTypeNames;
 			if (!preserveSelectedPoiTypeNames) {
 				selectedResultPoiTypeNames.clear();
+				lastResultPoiTypeNames.clear();
 			}
 		}
 		searchHelper.setResultCollection(resultCollection);
@@ -2297,6 +2309,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		foundPartialLocation = false;
 		if (!searchMore) {
 			unfilteredResultCollection = null;
+			preservePoiTypeChips = preserveSelectedPoiTypeNames;
 			if (!preserveSelectedPoiTypeNames) {
 				selectedResultPoiTypeNames.clear();
 			}
@@ -2688,6 +2701,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	private void onSearchFinished(SearchPhrase phrase) {
+		preservePoiTypeChips = false;
 		SearchResultCollection collection = unfilteredResultCollection != null ? unfilteredResultCollection : getResultCollection();
 		if (collection != null && retainAvailableResultPoiTypeFilters(collection)) {
 			SearchResultCollection visibleResults = selectedResultPoiTypeNames.isEmpty()
@@ -2695,6 +2709,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 					: getFilteredResultCollection(collection);
 			renderSearchResult(visibleResults, false);
 		}
+		updateTopFilterChips();
 		if (!PluginsHelper.onSearchFinished(this, phrase, isResultEmpty())) {
 			addMoreButton(isSearchMoreAvailable(phrase));
 			addSpatialSearchOnWebButton();
