@@ -15,7 +15,7 @@ public class AmenityRowsBuilder {
 	}
 
 	public static AmenityRowData buildPoiTypesGroupRow(String key, String name, String textPrefix,
-			List<PoiType> types, int order, int iconId, String iconName, AmenityRowData extraCollapsableRow,
+			List<PoiType> types, int order, int iconId, String iconName,
 			boolean poiAdditional, PoiCategory collapsableCategory) {
 		StringBuilder text = new StringBuilder();
 		for (PoiType pt : types) {
@@ -37,7 +37,6 @@ public class AmenityRowsBuilder {
 				.setCollapsablePoiTypes(types)
 				.setPoiAdditional(poiAdditional)
 				.setCollapsableCategory(collapsableCategory)
-				.setCollapsableExtraRow(extraCollapsableRow)
 				.build();
 	}
 

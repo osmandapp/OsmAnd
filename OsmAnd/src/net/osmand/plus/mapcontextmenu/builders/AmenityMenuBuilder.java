@@ -241,7 +241,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	}
 
 	public void buildInternalRows(@NonNull View view) {
-		amenityUIHelper = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), infoBundle);
+		amenityUIHelper = new AmenityUIHelper(mapActivity, infoBundle);
 		amenityUIHelper.setLight(isLightContent());
 		amenityUIHelper.setLatLon(getLatLon());
 		amenityUIHelper.setCollapseExpandListener(getCollapseExpandListener());

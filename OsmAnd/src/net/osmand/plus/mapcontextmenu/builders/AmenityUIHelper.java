@@ -68,7 +68,6 @@ public class AmenityUIHelper extends MenuBuilder {
 
 	private final AdditionalInfoBundle additionalInfo;
 
-	private String preferredLang;
 	private Amenity wikiAmenity;
 	private MapPoiTypes poiTypes;
 	private PoiCategory poiCategory;
@@ -76,15 +75,9 @@ public class AmenityUIHelper extends MenuBuilder {
 	private boolean osmEditingEnabled = PluginsHelper.isActive(OsmEditingPlugin.class);
 	private List<String> preferredLangCandidates;
 
-	public AmenityUIHelper(@NonNull MapActivity mapActivity, String preferredLang,
-			@NonNull AdditionalInfoBundle infoBundle) {
+	public AmenityUIHelper(@NonNull MapActivity mapActivity, @NonNull AdditionalInfoBundle infoBundle) {
 		super(mapActivity);
-		this.preferredLang = preferredLang;
 		this.additionalInfo = infoBundle;
-	}
-
-	public void setPreferredLang(String lang) {
-		this.preferredLang = lang;
 	}
 
 	@Override
@@ -135,10 +128,6 @@ public class AmenityUIHelper extends MenuBuilder {
 	private AmenityRowData buildPoiTypeGroupRowData(@NonNull Context context, @NonNull AmenityRowData baseRow) {
 		List<PoiType> categoryTypes = baseRow.collapsablePoiTypes;
 		PoiType firstType = categoryTypes.get(0);
-		AmenityRowData extraRow = baseRow.collapsableExtraRow != null
-				? getRowDataBuilder(context, baseRow.collapsableExtraRow.key, baseRow.collapsableExtraRow.value,
-						baseRow.collapsableExtraRow.isDescription).build()
-				: null;
 		if (baseRow.poiAdditional) {
 			String poiAdditionalCategoryName = baseRow.key;
 			String poiAdditionalIconName = poiTypes.getPoiAdditionalCategoryIconName(poiAdditionalCategoryName);
@@ -147,7 +136,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			int iconId = iconName == null ? R.drawable.ic_action_note_dark : 0;
 			return AmenityRowsBuilder.buildPoiTypesGroupRow(poiAdditionalCategoryName,
 					firstType.getKeyName(), firstType.getPoiAdditionalCategoryTranslation(), categoryTypes,
-					firstType.getOrder(), iconId, iconName, extraRow, true, baseRow.collapsableCategory);
+					firstType.getOrder(), iconId, iconName, true, baseRow.collapsableCategory);
 		}
 		PoiCategory groupCategory = baseRow.collapsableCategory;
 		for (PoiType pt : categoryTypes) {
@@ -155,7 +144,7 @@ public class AmenityUIHelper extends MenuBuilder {
 		}
 		return AmenityRowsBuilder.buildPoiTypesGroupRow(groupCategory.getKeyName(),
 				groupCategory.getKeyName(), groupCategory.getTranslation(), categoryTypes,
-				PoiType.DEFAULT_GROUP_ORDER, 0, groupCategory.getIconKeyName(), null, false, baseRow.collapsableCategory);
+				PoiType.DEFAULT_GROUP_ORDER, 0, groupCategory.getIconKeyName(), false, baseRow.collapsableCategory);
 	}
 
 	@Nullable
@@ -265,7 +254,7 @@ public class AmenityUIHelper extends MenuBuilder {
 				return buildCollapsableViewFromRows(context, data.collapsableRows);
 			case POI_TYPE_GROUP:
 				return getPoiTypeCollapsableView(context, true, data.collapsablePoiTypes,
-						data.poiAdditional, data.collapsableExtraRow, data.collapsableCategory);
+						data.poiAdditional, data.collapsableCategory);
 			case ELEVATION_PILLS: {
 				Set<String> texts = new LinkedHashSet<>();
 				for (AmenityRowData row : data.collapsableRows) {
@@ -589,7 +578,7 @@ public class AmenityUIHelper extends MenuBuilder {
 
 	private CollapsableView getPoiTypeCollapsableView(Context context, boolean collapsed,
 	                                                  @NonNull List<PoiType> categoryTypes,
-	                                                  boolean poiAdditional, AmenityRowData textRow, PoiCategory type) {
+	                                                  boolean poiAdditional, PoiCategory type) {
 
 		List<TextViewEx> buttons = new ArrayList<>();
 
@@ -623,13 +612,6 @@ public class AmenityUIHelper extends MenuBuilder {
 			if (buttons.size() > 3 && categoryTypes.size() > 4) {
 				button.setVisibility(View.GONE);
 			}
-			view.addView(button);
-		}
-
-		if (textRow != null) {
-			TextViewEx button = buildButtonInCollapsableView(context, true, false, false);
-			String name = textRow.textPrefix + ": " + textRow.text.toLowerCase();
-			button.setText(name);
 			view.addView(button);
 		}
 

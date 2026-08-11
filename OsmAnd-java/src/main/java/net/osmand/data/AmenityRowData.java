@@ -24,7 +24,6 @@ public class AmenityRowData {
 	public final List<PoiType> collapsablePoiTypes;
 	public final PoiCategory collapsableCategory;
 	public final boolean poiAdditional;
-	public final AmenityRowData collapsableExtraRow;
 	public final boolean collapsable;
 	public final int textColor;
 	public final boolean isWiki;
@@ -51,7 +50,6 @@ public class AmenityRowData {
 		this.collapsablePoiTypes = builder.collapsablePoiTypes;
 		this.collapsableCategory = builder.collapsableCategory;
 		this.poiAdditional = builder.poiAdditional;
-		this.collapsableExtraRow = builder.collapsableExtraRow;
 		this.collapsable = builder.collapsableRowType != CollapsableRowType.NONE;
 		this.textColor = builder.textColor;
 		this.isWiki = builder.isWiki;
@@ -79,7 +77,6 @@ public class AmenityRowData {
 		private List<PoiType> collapsablePoiTypes;
 		private PoiCategory collapsableCategory;
 		private boolean poiAdditional;
-		private AmenityRowData collapsableExtraRow;
 		private int textColor;
 		private boolean isWiki;
 		private boolean isText;
@@ -114,7 +111,6 @@ public class AmenityRowData {
 		public Builder setCollapsablePoiTypes(List<PoiType> collapsablePoiTypes) { this.collapsablePoiTypes = collapsablePoiTypes; return this; }
 		public Builder setCollapsableCategory(PoiCategory collapsableCategory) { this.collapsableCategory = collapsableCategory; return this; }
 		public Builder setPoiAdditional(boolean poiAdditional) { this.poiAdditional = poiAdditional; return this; }
-		public Builder setCollapsableExtraRow(AmenityRowData collapsableExtraRow) { this.collapsableExtraRow = collapsableExtraRow; return this; }
 
 		public Builder setTextColor(int color) { this.textColor = color; return this; }
 		public Builder setIsWiki(boolean wiki) { this.isWiki = wiki; return this; }

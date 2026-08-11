@@ -174,15 +174,10 @@ public class AdditionalInfoBundle {
 				continue;
 			}
 			String poiAdditionalCategoryName = categoryTypes.get(0).getPoiAdditionalCategory();
-			// NB: intentionally comparing the collapsable_-prefixed key against bare Amenity.CUISINE/DISH,
-			// which never matches - reproduces a pre-existing bug from the pre-split code so this row
-			// stays byte-for-byte identical to the committed baseline (AmenityUIHelperSnapshotTest).
-			boolean cuisineOrDish = key.equals(Amenity.CUISINE) || key.equals(Amenity.DISH);
 			rows.add(new AmenityRowData.Builder(poiAdditionalCategoryName)
 					.setCollapsableRowType(AmenityRowData.CollapsableRowType.POI_TYPE_GROUP)
 					.setCollapsablePoiTypes(categoryTypes)
 					.setCollapsableCategory(category)
-					.setCollapsableExtraRow(cuisineOrDish ? cuisineRow : null)
 					.setPoiAdditional(true)
 					.setOrder(categoryTypes.get(0).getOrder())
 					.build());
