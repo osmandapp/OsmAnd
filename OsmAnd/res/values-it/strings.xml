@@ -5377,4 +5377,11 @@
     <string name="shared_string_archive">Archivia</string>
     <string name="share_favorites_with_media_description">Ai punti preferiti in %1$s sono allegati file multimediali. Condividi solo i punti, oppure i punti con i contenuti multimediali come archivio.</string>
     <string name="astro_eclipse_phase_none">Non eclissato</string>
+    <string name="astro_lunar_eclipse_calculating_state">Elaborazione dell\'aspetto nel centro della mappa…</string>
+    <string name="astro_lunar_eclipse_simple_status">%1$s • Altitudine Luna: %2$.1f°</string>
+    <string name="astro_lunar_eclipse_below_horizon">%1$s • Luna sotto l\'orizzonte (%2$.1f°)</string>
+    <string name="astro_lunar_eclipse_visibility_loading">Calcolo della visibilità…</string>
+    <string name="astro_lunar_eclipse_map_error">La visibilità dell\'eclissi lunare della regione non è disponibile in questo momento.</string>
+    <string name="astro_lunar_eclipse_rendering_note">Colore della mappa: Luna sopra l\'orizzonte. Ombre colori e luminosità sono indicative.</string>
+    <string name="custom_widget_colors">Colore del widget personalizzati</string>
 </resources>
