@@ -234,6 +234,7 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 		TextView subtitle = view.findViewById(R.id.subtitle);
 		ImageView imageView = view.findViewById(R.id.imageView);
 
+		cancelPhotoRequest(imageView);
 		imageView.setImageDrawable(item.getIcon());
 		title.setText(item.getSpannableName());
 		String typeName = item.getTypeName();
@@ -263,8 +264,8 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 				: app.getString(R.string.ltr_or_rtl_combine_via_bold_point, typeName, activityName));
 		AndroidUiHelper.updateVisibility(subtitle, true);
 
+		cancelPhotoRequest(imageView);
 		imageView.setImageDrawable(item.getIcon());
-		imageView.setTag(null);
 		AndroidUiHelper.updateVisibility(imageView, true);
 		setupIconContainer(view, imageView, app);
 		FrameLayout imageContainer = view.findViewById(R.id.image_container);
@@ -329,6 +330,11 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 
 	public static void resetTrackStatistics(@NonNull View view) {
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.track_statistics), false);
+	}
+
+	private static void cancelPhotoRequest(@NonNull ImageView imageView) {
+		Picasso.get().cancelRequest(imageView);
+		imageView.setTag(null);
 	}
 
 	public static void bindCoordinatesSearchResult(@NonNull View view, @NonNull QuickSearchListItem item) {
