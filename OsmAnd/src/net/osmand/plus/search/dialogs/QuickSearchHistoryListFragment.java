@@ -8,7 +8,6 @@ import android.widget.ListView;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.Amenity;
@@ -24,7 +23,6 @@ import net.osmand.plus.settings.fragments.HistoryItemsFragment;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.SearchCoreFactory;
 import net.osmand.search.core.SearchPhrase;
-import net.osmand.search.core.SearchResult;
 
 import java.util.List;
 
@@ -117,7 +115,7 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 			if (fragmentManager != null && index >= 0 && index < getListAdapter().getCount()) {
 				QuickSearchListItem item = getListAdapter().getItem(index);
 				if (item != null) {
-					HistoryEntry entry = getEntryFromSearchItem(item);
+					HistoryEntry entry = item.getHistoryEntry();
 					if (entry != null) {
 						HistoryItemsFragment.showInstance(fragmentManager, entry.getSource(), dialogFragment);
 					}
@@ -125,20 +123,6 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 			}
 			return true;
 		});
-	}
-
-	@Nullable
-	private HistoryEntry getEntryFromSearchItem(@NonNull QuickSearchListItem item) {
-		SearchResult searchResult = item.getSearchResult();
-		if (searchResult != null) {
-			if (searchResult.object instanceof HistoryEntry historyEntry) {
-				return historyEntry;
-			}
-			if (searchResult.relatedObject instanceof HistoryEntry historyEntry) {
-				return historyEntry;
-			}
-		}
-		return null;
 	}
 
 	@Override

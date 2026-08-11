@@ -103,6 +103,19 @@ public class QuickSearchListItem {
 		return isLegacySearchHistory(searchResult);
 	}
 
+	@Nullable
+	public HistoryEntry getHistoryEntry() {
+		if (searchResult != null) {
+			if (searchResult.object instanceof HistoryEntry historyEntry) {
+				return historyEntry;
+			}
+			if (searchResult.relatedObject instanceof HistoryEntry historyEntry) {
+				return historyEntry;
+			}
+		}
+		return null;
+	}
+
 	public static String getCityTypeStr(Context ctx, CityType type) {
 		switch (type) {
 			case CITY:

@@ -42,7 +42,9 @@ import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.search.listitems.QuickSearchDisabledHistoryItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.settings.enums.HistorySource;
+import net.osmand.plus.settings.fragments.HistoryItemsFragment;
 import net.osmand.plus.settings.fragments.HistorySettingsDialogFragment;
+import net.osmand.plus.settings.fragments.OnPreferenceChanged;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
@@ -65,7 +67,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class QuickSearchHistoryFragment extends BaseFullScreenDialogFragment implements OsmAndCompassListener, OsmAndLocationListener {
+public class QuickSearchHistoryFragment extends BaseFullScreenDialogFragment implements OsmAndCompassListener,
+		OsmAndLocationListener, OnPreferenceChanged {
 
 	public static final String TAG = QuickSearchHistoryFragment.class.getSimpleName();
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(QuickSearchHistoryFragment.class);
@@ -295,14 +298,34 @@ public class QuickSearchHistoryFragment extends BaseFullScreenDialogFragment imp
 			}
 		});
 		listView.setOnItemClickListener((parent, itemView, position, id) -> {
-			QuickSearchHistoryAdapter.Item item = adapter.getItem(position);
-			if (item != null && item.getListItem() != null) {
-				onHistoryItemClick(item.getListItem());
+			QuickSearchListItem listItem = getResultItem(position);
+			if (listItem != null) {
+				onHistoryItemClick(listItem);
 			}
+		});
+		listView.setOnItemLongClickListener((parent, itemView, position, id) -> {
+			QuickSearchListItem listItem = getResultItem(position);
+			HistoryEntry entry = listItem != null ? listItem.getHistoryEntry() : null;
+			FragmentManager fragmentManager = getFragmentManager();
+			if (entry != null && fragmentManager != null) {
+				HistoryItemsFragment.showInstance(fragmentManager, entry.getSource(), this);
+				return true;
+			}
+			return false;
 		});
 
 		adapter = new QuickSearchHistoryAdapter(app, mapActivity, nightMode);
 		listView.setAdapter(adapter);
+	}
+
+	@Nullable
+	private QuickSearchListItem getResultItem(int position) {
+		if (adapter == null || position < 0 || position >= adapter.getCount()) {
+			return null;
+		}
+		QuickSearchHistoryAdapter.Item item = adapter.getItem(position);
+		QuickSearchListItem listItem = item != null ? item.getListItem() : null;
+		return listItem instanceof QuickSearchDisabledHistoryItem ? null : listItem;
 	}
 
 	private void onHistoryItemClick(@NonNull QuickSearchListItem item) {
@@ -732,6 +755,11 @@ public class QuickSearchHistoryFragment extends BaseFullScreenDialogFragment imp
 			updateSourceChip();
 			updateHistoryItems(searchEditText.getText().toString());
 		}
+	}
+
+	@Override
+	public void onPreferenceChanged(@NonNull String prefId) {
+		reloadHistory();
 	}
 
 	@Override

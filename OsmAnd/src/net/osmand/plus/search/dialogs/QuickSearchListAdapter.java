@@ -422,7 +422,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 	private View bindSimpleButtonItem(@Nullable View convertView,
 	                                  @NonNull QuickSearchListItem listItem) {
-		View view = getConvertView(convertView, R.layout.setting_action_button);
+		View view = getConvertView(convertView, R.layout.card_action_button);
 		((TextView) view.findViewById(R.id.action_title)).setText(listItem.getName());
 		return view;
 	}
