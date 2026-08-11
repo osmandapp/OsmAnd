@@ -52,6 +52,11 @@ class SearchScopeChip @JvmOverloads constructor(
 		isFocusable = false
 	}
 
+	override fun onDetachedFromWindow() {
+		disposeComposition()
+		super.onDetachedFromWindow()
+	}
+
 	fun setScopeName(scopeName: CharSequence?, nightMode: Boolean) {
 		val name = scopeName?.toString()
 		this.scopeName = name
