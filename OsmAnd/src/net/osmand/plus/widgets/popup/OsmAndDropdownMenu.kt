@@ -44,7 +44,8 @@ data class OsmAndDropdownMenuColors(
 	val text: Color,
 	val secondaryText: Color,
 	val icon: Color,
-	val selected: Color
+	val selected: Color,
+	val control: Color
 )
 
 enum class OsmAndDropdownMenuSelectionStyle {
@@ -107,7 +108,10 @@ fun <T> OsmAndDropdownMenu(
 								selected = option.selected,
 								onClick = null,
 								enabled = option.enabled,
-								colors = RadioButtonDefaults.colors(selectedColor = colors.selected)
+								colors = RadioButtonDefaults.colors(
+									selectedColor = colors.selected,
+									unselectedColor = colors.control
+								)
 							)
 						}
 						Spacer(modifier = Modifier.width(MENU_CONTENT_SPACING))
@@ -132,7 +136,7 @@ fun <T> OsmAndDropdownMenu(
 					Text(
 						text = option.title,
 						color = colors.text.copy(alpha = if (option.enabled) 1f else .5f),
-						fontSize = 18.sp,
+						fontSize = 16.sp,
 						maxLines = 1,
 						overflow = TextOverflow.Ellipsis
 					)
@@ -175,6 +179,6 @@ fun <T> OsmAndDropdownMenu(
 }
 
 private val MENU_ITEM_HEIGHT = 56.dp
-private val MENU_HORIZONTAL_PADDING = 24.dp
-private val MENU_CONTENT_SPACING = 24.dp
+private val MENU_HORIZONTAL_PADDING = 12.dp
+private val MENU_CONTENT_SPACING = 12.dp
 private val MENU_ICON_SIZE = 24.dp

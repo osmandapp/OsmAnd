@@ -812,15 +812,7 @@ public class MapPoiTypes {
 	}
 
 	private PoiType getPoiAdditionalByKey(AbstractPoiType p, String name) {
-		List<PoiType> pp = p.getPoiAdditionals();
-		if (pp != null) {
-			for (PoiType pt : pp) {
-				if (pt.getKeyName().equals(name)) {
-					return pt;
-				}
-			}
-		}
-		return null;
+		return p.getPoiAdditionalByKeyName(name);
 	}
 
 	public PoiType getTextPoiAdditionalByKey(String name) {
