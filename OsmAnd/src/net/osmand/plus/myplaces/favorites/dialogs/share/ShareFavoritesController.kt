@@ -275,6 +275,7 @@ class ShareFavoritesController(
 	private inner class PrepareShareDataTask : AsyncTask<Void, Void, ShareFavoritesDataPreparer.PreparationResult>() {
 
 		override fun doInBackground(vararg params: Void?): ShareFavoritesDataPreparer.PreparationResult {
+			fileSession.cleanupExpiredGpxSessions()
 			return dataPreparer.prepare(groups, folderPath, fileSession) { isCancelled }
 		}
 

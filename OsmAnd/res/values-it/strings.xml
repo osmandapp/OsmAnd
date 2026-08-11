@@ -5339,8 +5339,8 @@
     <string name="preparing_file">Preparazione del file</string>
     <string name="share_favorites_points_only">Solo punti</string>
     <string name="share_favorites_points_and_media">Punti e file multimediali</string>
-    <string name="share_favorites_preparation_failed">Non posso preparare i file per condividerli.</string>
-    <string name="share_favorites_share_failed">Con posso condividere i file.</string>
+    <string name="share_favorites_preparation_failed">Impossibile preparare i file per la condivisione.</string>
+    <string name="share_favorites_share_failed">Impossibile condividere il file.</string>
     <string name="share_favorites_missing_media_warning">Alcuni media allegati non possono essere inclusi.</string>
     <string name="search_on_web">Ricerca web</string>
     <string name="astro_lunar_eclipse">Eclissi lunare</string>
@@ -5374,4 +5374,7 @@
         <item quantity="many">%d file</item>
         <item quantity="other">%d file</item>
     </plurals>
+    <string name="shared_string_archive">Archivia</string>
+    <string name="share_favorites_with_media_description">Ai punti preferiti in %1$s sono allegati file multimediali. Condividi solo i punti, oppure i punti con i contenuti multimediali come archivio.</string>
+    <string name="astro_eclipse_phase_none">Non eclissato</string>
 </resources>

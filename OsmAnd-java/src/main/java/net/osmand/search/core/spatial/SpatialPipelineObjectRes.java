@@ -106,7 +106,7 @@ public class SpatialPipelineObjectRes {
 		}		
 	}
 	
-	public void mergeSame(int tCount, NameIndexAtom atom, int tokenIdx, boolean noPoiType) {
+	public void mergeSame(int tCount, NameIndexAtom atom, int tokenIdx, boolean noPoiType, int lastDupToken) {
 		// we need to separately process situation duplicate words in object and in query
 		if (mainAtom.isPOIRef() || mainAtom.isBuilding()) {
 			mainAtom = atom;
@@ -142,11 +142,13 @@ public class SpatialPipelineObjectRes {
 		}
 
 		int otherWrds = mainAtom.otherFoundCnt + mainAtom.otherWordsCnt;
-		boolean join = mainAtom.isPOI() && (fromPoiCategory(mainAtom) || fromPoiCategory(atom));
-		if ((firstInd + otherWrds >= tokenIdx && (tokenIdx - lastInd) <= 1) || join) {
+		boolean joinSymbolsOk = (firstInd + otherWrds >= tokenIdx && (tokenIdx - lastInd) <= 1);
+		boolean joinCategoryOk = mainAtom.isPOI() && (fromPoiCategory(mainAtom) || fromPoiCategory(atom));
+		if ((joinCategoryOk || joinSymbolsOk)  && lastDupToken != tokenIdx - 1
+				) {
 			setAtom(atom, tokenIdx);
 		} else if (otherVariants != null) {
-			otherVariants.mergeSame(tCount, atom, tokenIdx, noPoiType);
+			otherVariants.mergeSame(tCount, atom, tokenIdx, noPoiType, lastDupToken);
 		} else {
 			otherVariants = new SpatialPipelineObjectRes(tCount, atom, tokenIdx, noPoiType);
 		}
@@ -210,6 +212,9 @@ public class SpatialPipelineObjectRes {
 	
 	public static boolean extraCheck(SpatialPipelineObjectRes obj1, SpatialPipelineObjectRes obj2) {
 		if (obj1.mainAtom.id == obj2.mainAtom.id) {
+			return false;
+		}
+		if (obj1.hasId(obj2.mainAtom.id) || obj2.hasId(obj1.mainAtom.id)) {
 			// alternatives for same object
 			return false;
 		}
@@ -218,6 +223,16 @@ public class SpatialPipelineObjectRes {
 		
 		return true;
 	}
+
+	private boolean hasId(long id) {
+		for (NameIndexAtom a : atoms) {
+			if (a != null && a.id == id) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 
 	static boolean checkBuildingVsStreet(SpatialPipelineObjectRes obj1, SpatialPipelineObjectRes obj2) {
 		int minType1 = obj1.minType();
