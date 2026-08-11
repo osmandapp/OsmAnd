@@ -506,6 +506,10 @@ public class SearchHistoryHelper {
 		if (!Algorithms.isEmpty(typeName)) {
 			entry.setTypeName(typeName);
 		}
+		if (searchResult.objectType == ObjectType.LOCATION && Algorithms.isEmpty(entry.getAddress())
+				&& !Algorithms.isEmpty(searchResult.localeRelatedObjectName)) {
+			entry.setAddress(searchResult.localeRelatedObjectName);
+		}
 	}
 
 	@Nullable

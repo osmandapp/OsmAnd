@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -48,6 +49,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
+import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
 import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.search.core.TopIndexFilter;
@@ -325,6 +327,19 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 
 	public static void resetTrackStatistics(@NonNull View view) {
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.track_statistics), false);
+	}
+
+	public static void bindCoordinatesSearchResult(@NonNull View view, @NonNull QuickSearchListItem item) {
+		OsmandApplication app = AndroidUtils.getApp(view.getContext());
+		ImageView imageView = view.findViewById(R.id.imageView);
+
+		imageView.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_coordinates_location));
+		setupIconContainer(view, imageView, app);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.time_layout), false);
+	}
+
+	public static boolean isCoordinatesItem(@Nullable SearchResult searchResult) {
+		return searchResult != null && searchResult.objectType == ObjectType.LOCATION;
 	}
 
 	public static void bindPOISearchResult(@NonNull View view, @NonNull QuickSearchListItem item,

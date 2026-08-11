@@ -158,6 +158,13 @@ public class QuickSearchHistoryAdapter extends ArrayAdapter<QuickSearchHistoryAd
 			view = getView(convertView, R.layout.search_list_item_full);
 			SearchResultViewHolder.bindFullSearchResult(view, listItem);
 			bindDestinationDate(view, listItem);
+		} else if (SearchResultViewHolder.isCoordinatesItem(searchResult)) {
+			view = getView(convertView, R.layout.search_legacy_history_list_item);
+			SearchResultViewHolder.bindSearchResult(view, listItem, calendar);
+			SearchResultViewHolder.bindCoordinatesSearchResult(view, listItem);
+		} else if (searchResult != null && searchResult.objectType == ObjectType.POI_TYPE) {
+			view = getView(convertView, R.layout.search_category_list_item);
+			SearchResultViewHolder.bindSearchResult(view, listItem, calendar);
 		} else if (listItem.isLegacyHistoryItem()) {
 			view = getView(convertView, R.layout.search_legacy_history_list_item);
 			SearchResultViewHolder.bindSearchResult(view, listItem, calendar);
