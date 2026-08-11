@@ -18,9 +18,9 @@ import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.search.listitems.QuickSearchDisabledHistoryItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.track.data.GPXInfo;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.CardItemPosition;
 import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.search.core.ObjectType;
@@ -186,15 +186,7 @@ public class QuickSearchHistoryAdapter extends ArrayAdapter<QuickSearchHistoryAd
 	private void setupBackground(int position, @NonNull View view) {
 		boolean first = position == 0;
 		boolean last = isLastResultInGroup(position);
-		if (first && last) {
-			view.setBackgroundResource(R.drawable.bg_list_card_round);
-		} else if (first) {
-			view.setBackgroundResource(R.drawable.bg_list_card_top_round);
-		} else if (last) {
-			view.setBackgroundResource(R.drawable.bg_list_card_bottom_round);
-		} else {
-			view.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
-		}
+		UiUtilities.applyCardItemBackground(view, CardItemPosition.get(first, last));
 	}
 
 	private void updateDivider(int position, @NonNull View view) {

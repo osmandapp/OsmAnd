@@ -20,6 +20,8 @@ import net.osmand.plus.search.dialogs.QuickSearchDialogFragment.SearchVisibility
 import net.osmand.plus.search.listitems.NearbyPlacesCard;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.settings.fragments.HistoryItemsFragment;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.CardItemPosition;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.SearchCoreFactory;
 import net.osmand.search.core.SearchPhrase;
@@ -150,7 +152,7 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 		View historyHeader = inflate(R.layout.recently_visited_header, getListView(), false);
 		historyTitleContainer = historyHeader.findViewById(R.id.history_title_container);
 		historyCollapseIndicator = historyHeader.findViewById(R.id.explicit_indicator);
-		historyHeader.setOnClickListener(v -> {
+		historyTitleContainer.setOnClickListener(v -> {
 			historyCollapsed = !historyCollapsed;
 			app.getSettings().EXPLORE_HISTORY_ROW_COLLAPSED.set(historyCollapsed);
 			updateHistoryCollapseIndicator();
@@ -166,9 +168,8 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 
 	private void updateHistoryCollapseIndicator() {
 		if (historyTitleContainer != null) {
-			historyTitleContainer.setBackgroundResource(historyCollapsed
-					? R.drawable.bg_list_card_round
-					: R.drawable.bg_list_card_top_round);
+			UiUtilities.applyCardItemBackground(historyTitleContainer,
+					historyCollapsed ? CardItemPosition.SINGLE : CardItemPosition.TOP);
 		}
 		if (historyCollapseIndicator != null) {
 			int iconRes = historyCollapsed ? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up;

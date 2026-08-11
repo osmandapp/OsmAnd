@@ -220,6 +220,36 @@ public class UiUtilities {
 		AndroidUtils.setBackground(view, background);
 	}
 
+	public enum CardItemPosition {
+		SINGLE(R.drawable.ripple_list_card_round),
+		TOP(R.drawable.ripple_list_card_top_round),
+		MIDDLE(R.drawable.ripple_list_card),
+		BOTTOM(R.drawable.ripple_list_card_bottom_round);
+
+		@DrawableRes
+		private final int backgroundId;
+
+		CardItemPosition(@DrawableRes int backgroundId) {
+			this.backgroundId = backgroundId;
+		}
+
+		@NonNull
+		public static CardItemPosition get(boolean first, boolean last) {
+			if (first && last) {
+				return SINGLE;
+			} else if (first) {
+				return TOP;
+			} else if (last) {
+				return BOTTOM;
+			}
+			return MIDDLE;
+		}
+	}
+
+	public static void applyCardItemBackground(@NonNull View view, @NonNull CardItemPosition position) {
+		view.setBackgroundResource(position.backgroundId);
+	}
+
 	public static Drawable getColoredSelectableDrawable(Context ctx, int color, float alpha) {
 		int colorWithAlpha = ColorUtilities.getColorWithAlpha(color, alpha);
 		return getColoredSelectableDrawable(ctx, colorWithAlpha);
