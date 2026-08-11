@@ -5634,4 +5634,5 @@
     <string name="share_favorites_preparation_failed">Kon bestanden niet voorbereiden om te delen.</string>
     <string name="share_favorites_share_failed">Kon bestand niet delen.</string>
     <string name="share_favorites_missing_media_warning">Enkele gekoppelde media konden niet worden toegevoegd.</string>
+    <string name="search_on_web">Zoek op het internet</string>
 </resources>

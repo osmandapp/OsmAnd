@@ -5262,7 +5262,7 @@
     </plurals>
     <string name="preparing_file">Préparation du fichier</string>
     <string name="shared_string_archive">Archive</string>
-    <string name="share_favorites_with_media_description">Les points favoris dans %1$s contiennent des fichiers médias. Partagez uniquement les points ou les points et les fichiers médias sous forme d\'archive.</string>
+    <string name="share_favorites_with_media_description">Les points favoris dans %1$s contiennent des fichiers médias. Partagez uniquement les points, ou les points et les fichiers médias sous forme d\'archive.</string>
     <string name="share_favorites_points_only">Points uniquement</string>
     <string name="share_favorites_points_and_media">Points et médias</string>
     <string name="share_favorites_preparation_failed">Impossible de préparer les fichiers pour le partage.</string>

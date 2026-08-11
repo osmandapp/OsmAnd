@@ -235,7 +235,7 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 
 		if (ssr.isPoiCategory()) {
 			return convertPoiType(ssr, result, poiTypeSearch);
-		} else if (!ssr.getObjects().isEmpty()) {
+		} else if (Algorithms.isNotEmpty(objs)) {
 			return convertMapObjects(ssr, objs, result, lang, transliterate);
 		}
 
@@ -245,6 +245,10 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 	private SearchResult convertMapObjects(SpatialSearchResult ssr, List<MapObject> mapObjects,
 	                                       SearchResult result, String lang, boolean transliterate) {
 		MapObject obj = ssr.getMainObject();
+		if (obj == null) {
+			return null;
+		}
+
 		String extraNameMatch = ssr.getExtraNameMatch();
 
 		if (obj instanceof Building b && b.isInterpolation() && Algorithms.isNotEmpty(extraNameMatch)) {

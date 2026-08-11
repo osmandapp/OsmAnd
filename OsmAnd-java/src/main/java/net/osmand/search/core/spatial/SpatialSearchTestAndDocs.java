@@ -45,40 +45,37 @@ import net.osmand.util.SearchAlgorithms;
 // ### ge3.json: '10 Am Remsufer Remseck am Neckar' - see comment
 
 // 1. UNIT TESTING: (poi additional germany) Gynaecologist - from all poi types should be result ! (not like old search)
-// 2. UNIT TESTING DEDUPLICATE: Street related to city or suburb what to show (RZR)
-// 3. UNIT TESTING: Japan_kanto_tokyo (see example below on neighborouds) - test on small osm.gz?
-// 4. UNIT TESTING: Test poi category translations (add ru / de in test)
+// 2. UNIT TESTING: Japan_kanto_tokyo (see example below on neighborouds) - test on small osm.gz?
+// 3. UNIT TESTING: Test poi category translations (add ru / de in test)
+// 4. UNIT TESTING: Test conscription number for some cities - "Bratislava Raketova 3248/6";
 
+// TESTING : highway=services (Not index)
 // NO UNIT TESTING: '400 Susquehanna Boulevard Hazel Township' (MISSING Hazel Township)
 // NO UNIT TESTING: '330 Innovation Boulevard University Park' (partial result missing university park)
 
 ////////// IN PROGRESS //////////
 // REVIEW (index_words_dashboard - common озеро): POI / ADDRESS - France, Germany, US, Europe, China, Peru
-// REVIEW: Auto test New york, France, Italy (Slow?)
-// REVIEW Duplicate '10 Am Remsufer Remseck am Neckar', +'138 138 Scott Avenue Bellefonte', +'8 av 8'
-// REVIEW Analyze Performance & Android bootlenecks VisualVM (Pipeline + Intersection)
+// REVIEW Auto test Analyze Performance & Android bootlenecks VisualVM (Pipeline + Intersection)
 
 // TODO INDEX: Find POI Categories translations / synonyms via Common words - Стоматол., Dentist, Basilica 
 // TODO REVIEW: Abbrevations (synonyms / direction words) other languages?
 // TODO REVIEW: Analyze Abbrevations / common skip (abbrevations 1st=first)
+
+// TODO Web worldwide search on missing results test "Arizona"
 // TODO DEDUPLICATE: Index place=state, county.. + wikidata id for boundaries (regions.ocbf) & display them - analyze
 // TODO DEDUPLICATE: too many houses (duplicate names) in wiki maps - obstruct search by street "Ярославів Вал"`?
 // TEST DEDUPLICATE: wiki / travel maps / seamarks map
 
 /////////////// EXTRA FEATURES ///////////////
-// TODO Extend POI tile bboxes 200m? internet_access (fuel_diesel)
-// TODO INDEX: highway=services (Not index)
-// TODO Sorting before load objects (use elo and other buildings?) and limit results
-// TODO Suggestion based on common suffixes
-// TODO Store and test conscription number for some cities - issue (RZR)
+// TODO FIX ORDER - (tests)
 // TODO Search in large parks, neighborhood same as in boundaries (index bbox POI), residential way/56238205
-// TODO Japan test, housename, block_number + housenumber, neighbourhood + quarter - street + India assign houses to suburbs / neighbourhood / blocks
+// TODO Extend POI tile bboxes 200m? internet_access (fuel_diesel)
+// TODO Sorting before load objects (use elo and other buildings?) and limit results
+// TODO Auto-Corrections / Suggestion based on common suffixes
 // TODO Postcode needs to load street and check buildings! Store postcode as bbox not as City! - '1186RZ 324' (NL, UK) 
 // TODO Search near key objects (subway station artificial bbox)
-// TODO Web worldwide search on missing results test "Arizona"
 // TODO New Geocoding for cases ("NC 42" == "NC-42") - geo index for prefixes
 // TODO Add flats: https://www.openstreetmap.org/node/5843642738
-// TODO Auto-Corrections
 // TODO English postcodes
 // TODO Precise Boundary 'Chernihiv sport life' mostly Kyiv - check precise boundary for filter
 // TODO Short word split "Ro-ki" vs "Roki" 
@@ -163,8 +160,8 @@ public class SpatialSearchTestAndDocs {
 //		query = "2/1 Rathausplatz Esslingen am Neckar"; // not correct
 //		query = "9 Neustädter Straße Korb";
 //		query = "14/1 J.-F.-Weishaar-Straße Korb";
-		settings.DEV_USE_PIPELINE = false;
-		query = "10 Am Remsufer Remseck am Neckar";
+		settings.DEV_USE_PIPELINE = true;
+		query = "10 Am Remsufer Remseck am Neckar"; 
 
 //		settings = SpatialTextSearchSettings.searchPoiCategoriesSettings(0, null);
 //		query = "Gyn.";
@@ -287,7 +284,6 @@ public class SpatialSearchTestAndDocs {
 
 		
 //		pattern = "Us_penn";
-//		pattern = "Map";
 //		query = "14871 Bly Road";
 //		query = "Pennsylvania 1282 14871";
 //		query = "14871 Pennsylvania Avenue Pine City";
@@ -338,7 +334,9 @@ public class SpatialSearchTestAndDocs {
 //		location = new LatLon(40.7627, 29.8454);
 //		location = new LatLon(39.112451, 27.191182);
 //		location = new LatLon(38.3839, 27.1882);
+//		location = new LatLon(40.8798, 29.3973);
 		
+//		query = "2 2 Sokak";
 //		query = "2/1 21038 Sokak"; // 1380369156
 //		query = "2/6. Sokak";
 		// "2.Sokak", "2 Sokak", "Sokak 2", "2. Sokak", "32/2 Sokak" + housenumber (?)
@@ -369,6 +367,7 @@ public class SpatialSearchTestAndDocs {
 		
 //		pattern = "Ukraine_";
 //		location = new LatLon(48.020997, 30.968742);
+//		query = "банк";
 //		query = "Мигия озеро ";
 //		query = "Мигия water"; 
 //		query = "fuel Хлібна Кава"; 
@@ -413,9 +412,15 @@ public class SpatialSearchTestAndDocs {
 //		query = "Яр. вал 29-г";
 //		query = "Школа 25 Володимирська вулиця"; // Школа 25 Володимирська вулиця ALWAYS_READ_COMMON_WORDS_ATOMS = true
 //		query = "андріівський узвіз Школа "; // ALWAYS_READ_COMMON_WORDS_ATOMS = true
-//		query = "Школа ";
-//		query = "Школа А+";
 //		query = "25-та школа"; // 25-та школа, 25-та school
+		
+//		pattern = "Ukraine_kyiv";
+//		query = "Школа А+"; // +
+//		query = "початкова А+"; // - -> +
+//		query = "початкова школа А+"; // - -> +
+//		query = "початкова A+"; // latin - -> +
+//		query = "школа A+"; // latin - -> +
+//		query = "school A+"; // latin not supported (category needed)?
 		
 //		query = "школа №25"; // test '№25', '25'? -- 'школа', 'школа №25', 'школа 25' // 63112526
 //		query = "ВЕЛОwatt";
@@ -442,6 +447,9 @@ public class SpatialSearchTestAndDocs {
 //		settings.DEDUPLICATE_RES = false;
 //		settings.ALLOW_HOUSE_POI_TYPE_INTERSECTION = false;
 //		query = "Shell 2 Rožňavská";
+//		query = "Bratislava Raketova 3248/6";
+//		query = "Bratislava Raketova 6";
+//		query = "Raketova 3248";
 		
 //		pattern = "Us_new-york_new"; // new-york, new-jersey
 //		pattern = "Us_new-"; 
@@ -646,7 +654,7 @@ public class SpatialSearchTestAndDocs {
 		}
 		
 		boolean testOldPoiSearch = false;
-		boolean testNewByNamePoiSearch = true;
+		boolean testNewByNamePoiSearch = false;
 		String cat = "cafe"; // ice_rink, cafe, aquarium
 		int poiZoom = 10; //10;// 12
 		QuadRect bbox = new QuadRect(29, 51, 32, 49); // zoom = 9
@@ -748,6 +756,10 @@ public class SpatialSearchTestAndDocs {
 				return "отель;готель;гатэль";
 			} else if (keyName.equals("cafe")) {
 				return "кафе";
+			} else if (keyName.equals("bank")) {
+				return "банк";
+//			} else if (keyName.equals("school")) {
+//				return "школа";
 			} else if (keyName.equals("rugby_union")) {
 				return "rugby 9";
 			} else if (keyName.equals("9pin")) {

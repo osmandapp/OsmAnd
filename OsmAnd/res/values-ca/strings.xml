@@ -3797,7 +3797,7 @@
     <string name="plugin_ais_tracker_description">Mostra les posicions de l\'AIS i la informació sobre els vaixells propers. Les dades AIS es reben a través de la xarxa des d\'un receptor extern AIS.</string>
     <string name="plugin_ais_tracker_disclaimer">DISCLAIMER\n\nAquest connector és un projecte d\'afició i no està destinat a aplicacions crítiques. No garanteix fiabilitat ni exactitud. No confieu en aquest programari per a la navegació, la seguretat de la vida o qualsevol altra operació essencial.</string>
     <string name="shared_string_length">Longitud</string>
-    <string name="shared_string_avg_altitude">Mitjana. altitud</string>
+    <string name="shared_string_avg_altitude">Altitud mitjana</string>
     <string name="shared_string_avg_speed">Mín. velocitat</string>
     <string name="no_places_available">No hi ha llocs a la regió visible</string>
     <string name="no_photo_for_location_desc">Encara no s\'han afegit fotos d\'usuari per a aquesta ubicació</string>
@@ -4880,4 +4880,5 @@
     <string name="astro_previous_lunar_eclipse">Eclipsi lunar anterior</string>
     <string name="astro_next_lunar_eclipse">Eclipsi lunar següent</string>
     <string name="astro_close_lunar_eclipse">Tancar el cercador d\'eclipsis lunars</string>
+    <string name="shared_string_note">Nota</string>
 </resources>

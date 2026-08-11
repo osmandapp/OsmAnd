@@ -780,7 +780,10 @@ public class QuickSearchListItem {
 		} else if (searchResult != null && searchResult.object instanceof MapObject mapObject) {
 			String title = mapObject.getName(mapLang);
 			String altName = Algorithms.isEmpty(searchResult.alternateName) ? mapObject.getName() : searchResult.alternateName;
-			if (Algorithms.isEmpty(title) && Algorithms.isEmpty(altName)) {
+			if (mapObject instanceof Building building && building.isInterpolation()
+					&& Algorithms.isNotEmpty(searchResult.localeName)) {
+				return searchResult.localeName; // interpolated house number
+			} else if (Algorithms.isEmpty(title) && Algorithms.isEmpty(altName)) {
 				return getSpannableName();
 			} else if (Algorithms.isEmpty(title)) {
 				return altName;

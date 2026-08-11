@@ -192,9 +192,12 @@ public class SpatialPipelineStats {
 	    TLongObjectHashMap<Integer> maskFrequencies = new TLongObjectHashMap<Integer>();
 
 	    for (SpatialPipelineObjectRes obj : prep.objectsById.valueCollection()) {
-	        long mask = obj.mainMask;
-	        Integer count = maskFrequencies.get(mask);
-	        maskFrequencies.put(mask, count == null ? 1 : count + 1);
+			while (obj != null) {
+				long mask = obj.mainMask;
+				Integer count = maskFrequencies.get(mask);
+				maskFrequencies.put(mask, count == null ? 1 : count + 1);
+				obj = obj.otherVariants;
+			}
 	    }
 
 	    // Convert the map entries to a list for sorting by popularity
