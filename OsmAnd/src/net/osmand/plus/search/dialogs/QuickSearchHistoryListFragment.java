@@ -119,7 +119,7 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 				if (item != null) {
 					HistoryEntry entry = item.getHistoryEntry();
 					if (entry != null) {
-						HistoryItemsFragment.showInstance(fragmentManager, entry.getSource(), dialogFragment);
+						HistoryItemsFragment.showInstance(fragmentManager, entry.getSource(), dialogFragment, entry);
 					}
 				}
 			}

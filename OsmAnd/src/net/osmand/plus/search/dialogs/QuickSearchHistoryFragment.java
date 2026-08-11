@@ -312,7 +312,7 @@ public class QuickSearchHistoryFragment extends BaseFullScreenDialogFragment imp
 			HistoryEntry entry = listItem != null ? listItem.getHistoryEntry() : null;
 			FragmentManager fragmentManager = getFragmentManager();
 			if (entry != null && fragmentManager != null) {
-				HistoryItemsFragment.showInstance(fragmentManager, entry.getSource(), this);
+				HistoryItemsFragment.showInstance(fragmentManager, entry.getSource(), this, entry);
 				return true;
 			}
 			return false;
