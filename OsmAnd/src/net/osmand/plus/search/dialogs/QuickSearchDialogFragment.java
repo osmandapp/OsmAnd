@@ -2513,7 +2513,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 						SearchPhrase regionPhrase = object.requiredSearchPhrase;
 						boolean spatialSearchApi = isSpatialSearchApi(regionResultApi);
 						regionResultCollection = new SearchResultCollection(regionPhrase, spatialSearchApi)
-								.addSearchResults(results, !spatialSearchApi, !spatialSearchApi);
+								.addSearchResults(results, !spatialSearchApi, true);
 						showRegionResults(object.file, regionPhrase, regionResultCollection, resultListener);
 						break;
 					case PARTIAL_LOCATION:
@@ -2562,14 +2562,14 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				}
 				boolean spatialSearchApi = isSpatialSearchApi(searchApi);
 				SearchResultCollection apiCollection = new SearchResultCollection(phrase, spatialSearchApi);
-				apiCollection.addSearchResults(apiResults, !spatialSearchApi, !spatialSearchApi);
+				apiCollection.addSearchResults(apiResults, !spatialSearchApi, true);
 				boolean append = getResultCollection() != null;
 				if (append) {
 					if (isDebugMode) {
 						LOG.info("UI >> Appending API results <" + phrase + "> API=<" + searchApi + "> Result collection=" + getSearchResultCollectionFormattedSize(getResultCollection()));
 					}
 					setResultCollection(getResultCollection().combineWithCollection(apiCollection,
-							!spatialSearchApi, !spatialSearchApi));
+							!spatialSearchApi, true));
 					if (isDebugMode) {
 						LOG.info("UI >> API results appended <" + phrase + "> API=<" + searchApi + "> Result collection=" + getSearchResultCollectionFormattedSize(getResultCollection()));
 					}
