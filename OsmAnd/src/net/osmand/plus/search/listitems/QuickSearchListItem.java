@@ -21,6 +21,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
+import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI.HistorySearchResult;
 import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.mapcontextmenu.controllers.NetworkRouteDrawable;
 import net.osmand.plus.mapmarkers.MapMarker;
@@ -106,6 +107,9 @@ public class QuickSearchListItem {
 	@Nullable
 	public HistoryEntry getHistoryEntry() {
 		if (searchResult != null) {
+			if (searchResult instanceof HistorySearchResult historySearchResult) {
+				return historySearchResult.getHistoryEntry();
+			}
 			if (searchResult.object instanceof HistoryEntry historyEntry) {
 				return historyEntry;
 			}
