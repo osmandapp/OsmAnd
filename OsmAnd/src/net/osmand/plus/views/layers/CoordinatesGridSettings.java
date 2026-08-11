@@ -20,7 +20,9 @@ import net.osmand.plus.settings.coordinates.CoordinateGridFormatProvider;
 import net.osmand.plus.settings.enums.GridLabelsPosition;
 import net.osmand.plus.views.OsmandMapTileView;
 
+import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class CoordinatesGridSettings {
 
@@ -29,6 +31,7 @@ public class CoordinatesGridSettings {
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
 	private final CoordinateGridFormatProvider gridFormatProvider;
+	private final Map<String, Limits<Integer>> supportedZoomLevels = new ConcurrentHashMap<>();
 
 	public CoordinatesGridSettings(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -163,7 +166,18 @@ public class CoordinatesGridSettings {
 
 	@NonNull
 	public Limits<Integer> getSupportedZoomLevels(@NonNull CoordinateGridFormat gridFormat) {
+		Limits<Integer> cached = supportedZoomLevels.get(gridFormat.getId());
+		if (cached == null) {
+			cached = calculateSupportedZoomLevels(gridFormat);
+			supportedZoomLevels.put(gridFormat.getId(), cached);
+		}
+		return cached;
+	}
+
+	@NonNull
+	private Limits<Integer> calculateSupportedZoomLevels(@NonNull CoordinateGridFormat gridFormat) {
 		int minZoom = 1;
+		int maxZoom = SUPPORTED_MAX_ZOOM;
 		if (isGridSupported(app)) {
 			GridConfiguration config = new GridConfiguration();
 			Projection projection = gridFormat.getProjection();
@@ -178,8 +192,19 @@ public class CoordinatesGridSettings {
 			GridParameters params = config.getGridParameters();
 			ZoomLevel min = params.getMinZoom();
 			minZoom = min.swigValue();
+			maxZoom = Math.min(maxZoom, getSupportedMaxZoom(params));
 		}
-		return new Limits<>(minZoom, SUPPORTED_MAX_ZOOM);
+		return new Limits<>(minZoom, maxZoom);
+	}
+
+	private static int getSupportedMaxZoom(@NonNull GridParameters params) {
+		int maxZoom = Math.max(getZoomValue(params.getMaxZoomForFloat()), getZoomValue(params.getMaxZoomForMixed()));
+		return maxZoom > 0 ? maxZoom : SUPPORTED_MAX_ZOOM;
+	}
+
+	private static int getZoomValue(@NonNull ZoomLevel zoomLevel) {
+		int value = zoomLevel.swigValue();
+		return value > 0 && value <= ZoomLevel.MaxZoomLevel.swigValue() ? value : 0;
 	}
 
 	public float getTextScale(@NonNull ApplicationMode appMode) {

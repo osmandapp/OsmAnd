@@ -7,6 +7,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.ColorARGB;
@@ -36,9 +37,13 @@ import net.osmand.plus.views.controls.ViewChangeProvider.ViewChangeListener;
 import net.osmand.plus.views.controls.VerticalWidgetPanel;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 
+import org.apache.commons.logging.Log;
+
 import java.util.Objects;
 
 public class CoordinatesGridLayer extends OsmandMapLayer {
+
+	private static final Log LOG = PlatformUtil.getLog(CoordinatesGridLayer.class);
 
 	private static final float DEFAULT_MARGIN_FACTOR = 8.0f;
 
@@ -49,6 +54,7 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 
 	private GridConfiguration gridConfig;
 	private GridMarksProvider marksProvider;
+	private float defaultGranularity;
 
 	private CoordinateGridFormat cachedGridFormat;
 	private Limits<Integer> cachedZoomLimits;
@@ -145,6 +151,7 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 			if (gridConfig == null || !mapRenderer.hasSymbolsProvider(marksProvider)) {
 				forceConfigurationUpdate = gridConfig != null;
 				gridConfig = new GridConfiguration();
+				defaultGranularity = gridConfig.getSecondaryGranularity();
 				initVariables(appMode);
 				updateAppearance = true;
 			} else {
@@ -225,6 +232,8 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 		gridConfig.setPrimaryProjection(Projection.WGS84);
 		gridConfig.setPrimaryFormat(format);
 		cachedGridFormat.applyProjectionConfiguration(gridConfig);
+		Float granularity = cachedGridFormat.getGranularity();
+		gridConfig.setSecondaryGranularity(granularity != null ? granularity : defaultGranularity);
 		gridConfig.setPrimaryColor(color);
 		gridConfig.setPrimaryMinZoomLevel(minZoom);
 		gridConfig.setPrimaryMaxZoomLevel(maxZoom);
@@ -249,6 +258,9 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 			marksProvider.setSecondary(true, "N", "S", "E", "W");
 		} else {
 			marksProvider.setSecondary(true, "", "", "", "");
+		}
+		if (!gridConfig.isValid()) {
+			LOG.warn("Invalid grid configuration for format: " + cachedGridFormat.getId());
 		}
 	}
 
