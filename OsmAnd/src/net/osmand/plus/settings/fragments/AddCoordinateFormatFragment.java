@@ -22,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.graphics.Insets;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -45,6 +46,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
+import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
 
@@ -145,7 +147,20 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 		setupToolbar(view);
 		setupSearch(view);
 		renderAddContent();
+		applyLegacyStatusBarInset(view);
 		return view;
+	}
+
+	private void applyLegacyStatusBarInset(@NonNull View view) {
+		if (InsetsUtils.isEdgeToEdgeSupported()) {
+			return;
+		}
+		Insets sysBars = InsetsUtils.getSysBars(view.getContext(), null);
+		View appBar = view.findViewById(R.id.search_app_bar);
+		if (sysBars != null && appBar != null) {
+			appBar.setPadding(appBar.getPaddingLeft(), appBar.getPaddingTop() + sysBars.top,
+					appBar.getPaddingRight(), appBar.getPaddingBottom());
+		}
 	}
 
 	@Override

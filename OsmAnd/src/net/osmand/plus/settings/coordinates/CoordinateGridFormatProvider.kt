@@ -270,15 +270,24 @@ data class CoordinateGridFormat(
 	val needSuffixes: Boolean,
 	val projectionParameters: CoordinateGridProjectionParameters? = null
 ) {
+
+	val granularity: Float?
+		get() = when (projection) {
+			Projection.OLC, Projection.MLS -> LOCATOR_GRID_GRANULARITY
+			else -> null
+		}
+
 	fun applyProjectionConfiguration(configuration: GridConfiguration) {
 		configuration.setSecondaryProjection(projection)
 		configuration.setSecondaryFormat(format)
-		configuration.setProjectionParameters()
-		projectionParameters?.applyTo(configuration, projection)
+		projectionParameters?.let {
+			configuration.setProjectionParameters()
+			it.applyTo(configuration, projection)
+		}
 	}
 
-	fun isWithinArea(latitude: Double, longitude: Double): Boolean {
-		return projectionParameters?.contains(latitude, longitude) ?: true
+	private companion object {
+		private const val LOCATOR_GRID_GRANULARITY = 3.0f
 	}
 }
 
