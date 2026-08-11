@@ -25,6 +25,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.NavigationSession;
+import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
@@ -54,7 +55,6 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 	private static final float COMPASS_CIRCLE_FITTING_RADIUS_COEF = 1.25f;
 	private static final float CIRCLE_ANGLE_STEP = 5;
 	private static final int SHOW_COMPASS_MIN_ZOOM = 8;
-	private static final float MIN_COMPASS_HEADING_CHANGE = 1f;
 	private static final long COMPASS_REFRESH_INTERVAL_MS = 100L;
 
 	private OsmandApplication app;
@@ -246,7 +246,8 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 	}
 
 	private boolean hasSignificantHeadingChange(float heading) {
-		return Math.abs(MapUtils.degreesDiff(cachedHeading, heading)) >= MIN_COMPASS_HEADING_CHANGE;
+		return Math.abs(MapUtils.degreesDiff(cachedHeading, heading))
+				> MapViewTrackingUtilities.COMPASS_HEADING_THRESHOLD;
 	}
 
 	private void cancelPendingCompassRefresh() {
