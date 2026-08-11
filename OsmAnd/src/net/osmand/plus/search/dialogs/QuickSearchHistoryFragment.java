@@ -38,6 +38,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
+import net.osmand.plus.search.SearchTrackDataResolver;
+import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.search.listitems.QuickSearchDisabledHistoryItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
@@ -108,6 +110,7 @@ public class QuickSearchHistoryFragment extends BaseFullScreenDialogFragment imp
 	}
 
 	private QuickSearchHistoryAdapter adapter;
+	private SearchTrackDataResolver trackDataResolver;
 	private TextView titleView;
 	private AppCompatEditText searchEditText;
 	private ImageButton settingsButton;
@@ -149,6 +152,7 @@ public class QuickSearchHistoryFragment extends BaseFullScreenDialogFragment imp
 		updateNightMode();
 		View view = inflate(R.layout.quick_search_history_fragment, container, false);
 
+		trackDataResolver = new SearchTrackDataResolver(app, this::onTrackDataResolved);
 		setupToolbar(view);
 		setupChips(view);
 		setupList(view);
@@ -314,8 +318,14 @@ public class QuickSearchHistoryFragment extends BaseFullScreenDialogFragment imp
 			return false;
 		});
 
-		adapter = new QuickSearchHistoryAdapter(app, mapActivity, nightMode);
+		adapter = new QuickSearchHistoryAdapter(app, mapActivity, nightMode, trackDataResolver);
 		listView.setAdapter(adapter);
+	}
+
+	private void onTrackDataResolved() {
+		if (isAdded() && searchEditText != null) {
+			updateHistoryItems(searchEditText.getText().toString());
+		}
 	}
 
 	@Nullable
@@ -379,10 +389,18 @@ public class QuickSearchHistoryFragment extends BaseFullScreenDialogFragment imp
 			SearchResult result = SearchHistoryAPI.createSearchResult(app, entry, phrase);
 			QuickSearchListItem item = new QuickSearchListItem(app, result);
 			if (Algorithms.isEmpty(normalizedQuery) || matchesQuery(item, normalizedQuery)) {
-				records.add(new HistoryRecord(app, entry, item));
+				records.add(new HistoryRecord(app, entry, item, getRecordLocation(result)));
 			}
 		}
 		return records;
+	}
+
+	@Nullable
+	private LatLon getRecordLocation(@NonNull SearchResult result) {
+		if (result.objectType == ObjectType.GPX_TRACK) {
+			return trackDataResolver.resolve((GPXInfo) result.relatedObject).getStartLocation();
+		}
+		return result.location;
 	}
 
 	@NonNull
@@ -429,11 +447,10 @@ public class QuickSearchHistoryFragment extends BaseFullScreenDialogFragment imp
 	}
 
 	private double getDistance(@NonNull HistoryRecord record, @Nullable LatLon origin) {
-		SearchResult result = record.item.getSearchResult();
-		if (origin == null || result == null || result.location == null) {
+		if (origin == null || record.location == null) {
 			return Double.MAX_VALUE;
 		}
-		return MapUtils.getDistance(origin, result.location);
+		return MapUtils.getDistance(origin, record.location);
 	}
 
 	@Nullable
@@ -660,10 +677,14 @@ public class QuickSearchHistoryFragment extends BaseFullScreenDialogFragment imp
 		final long time;
 		final QuickSearchListItem item;
 		final String filterCategoryName;
+		@Nullable
+		final LatLon location;
 
-		HistoryRecord(@NonNull OsmandApplication app, @NonNull HistoryEntry entry, @NonNull QuickSearchListItem item) {
+		HistoryRecord(@NonNull OsmandApplication app, @NonNull HistoryEntry entry,
+		              @NonNull QuickSearchListItem item, @Nullable LatLon location) {
 			this.time = entry.getLastAccessTime();
 			this.item = item;
+			this.location = location;
 			this.filterCategoryName = getFilterCategoryName(app, entry, item);
 		}
 
@@ -773,6 +794,14 @@ public class QuickSearchHistoryFragment extends BaseFullScreenDialogFragment imp
 	public void onPause() {
 		super.onPause();
 		stopLocationUpdate();
+	}
+
+	@Override
+	public void onDestroyView() {
+		if (trackDataResolver != null) {
+			trackDataResolver.release();
+		}
+		super.onDestroyView();
 	}
 
 	@Override

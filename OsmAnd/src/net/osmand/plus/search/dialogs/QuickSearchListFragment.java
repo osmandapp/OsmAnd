@@ -185,6 +185,14 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 	}
 
 	@Override
+	public void onDestroyView() {
+		if (listAdapter != null) {
+			listAdapter.release();
+		}
+		super.onDestroyView();
+	}
+
+	@Override
 	public QuickSearchListAdapter getListAdapter() {
 		return listAdapter;
 	}

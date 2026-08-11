@@ -34,6 +34,8 @@ import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.CityStructureItemViewHolder;
 import net.osmand.plus.search.SearchResultViewHolder;
+import net.osmand.plus.search.SearchTrackData;
+import net.osmand.plus.search.SearchTrackDataResolver;
 import net.osmand.plus.search.WikiItemViewHolder;
 import net.osmand.plus.search.listitems.*;
 import net.osmand.plus.track.data.GPXInfo;
@@ -79,6 +81,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	private boolean exploreHistoryCard;
 	private final List<QuickSearchListItem> selectedItems = new ArrayList<>();
 	private final UpdateLocationViewCache updateLocationViewCache;
+	private final SearchTrackDataResolver trackDataResolver;
 
 	public interface OnSelectionListener {
 
@@ -99,6 +102,14 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		bigDividerMargin = AndroidUtils.dpToPx(app, 72);
 		dp1 = AndroidUtils.dpToPx(app, 1f);
 		updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(activity);
+		trackDataResolver = new SearchTrackDataResolver(app, this::notifyDataSetChanged);
+	}
+
+	/**
+	 * Stops track metadata updates. Should be called when the owning screen is destroyed
+	 */
+	public void release() {
+		trackDataResolver.release();
 	}
 
 	public void setAccessibilityAssistant(AccessibilityAssistant accessibilityAssistant) {
@@ -499,9 +510,11 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 				bindIndexItem(view, indexItem, activity, nightMode);
 			}
 		} else if (searchResult != null && searchResult.objectType == ObjectType.GPX_TRACK) {
-			view = getConvertView(convertView, R.layout.search_gpx_list_item);
-			bindGpxTrack(view, listItem, (GPXInfo) searchResult.relatedObject);
+			view = getConvertView(convertView, R.layout.search_list_item_full);
+			SearchTrackData trackData = trackDataResolver.resolve((GPXInfo) searchResult.relatedObject);
+			SearchResultViewHolder.bindTrackSearchResult(view, listItem, trackData, nightMode);
 			setupCheckBox(position, view, listItem);
+			updateCompass(view, listItem, updateLocationViewCache, useMapCenter, trackData.getStartLocation());
 		} else if (searchResult != null && searchResult.objectType == ObjectType.POI) {
 			view = getConvertView(convertView, R.layout.search_list_item_full);
 			SearchResultViewHolder.bindPOISearchResult(view, listItem, nightMode, calendar);
@@ -717,16 +730,32 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 	public static void updateCompass(@NonNull View view, @NonNull QuickSearchListItem item,
 	                                 @NonNull UpdateLocationViewCache updateLocationViewCache, boolean useMapCenter) {
+		SearchResult searchResult = item.getSearchResult();
+		updateCompass(view, item, updateLocationViewCache, useMapCenter,
+				searchResult != null ? searchResult.location : null);
+	}
+
+	public static void updateCompass(@NonNull View view, @NonNull QuickSearchListItem item,
+	                                 @NonNull UpdateLocationViewCache updateLocationViewCache,
+	                                 boolean useMapCenter, @Nullable LatLon location) {
 		boolean hideCompassForSpatialCategoryItem = item.isSpatialCategorySearchResult();
-		boolean showCompass = item.getSearchResult().location != null && !hideCompassForSpatialCategoryItem;
+		boolean showCompass = location != null && !hideCompassForSpatialCategoryItem;
 		if (showCompass) {
-			updateLocationView(view, item, updateLocationViewCache, useMapCenter);
+			updateLocationView(view, item, updateLocationViewCache, useMapCenter, location);
 		}
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.compass_layout), showCompass);
 	}
 
 	public static void updateLocationView(@NonNull View view, @NonNull QuickSearchListItem item,
 	                                      @NonNull UpdateLocationViewCache updateLocationViewCache, boolean useMapCenter) {
+		SearchResult searchResult = item.getSearchResult();
+		updateLocationView(view, item, updateLocationViewCache, useMapCenter,
+				searchResult != null ? searchResult.location : null);
+	}
+
+	public static void updateLocationView(@NonNull View view, @NonNull QuickSearchListItem item,
+	                                      @NonNull UpdateLocationViewCache updateLocationViewCache,
+	                                      boolean useMapCenter, @Nullable LatLon location) {
 		OsmandApplication app = AndroidUtils.getApp(view.getContext());
 		TextView distanceText = view.findViewById(R.id.distance);
 		ImageView direction = view.findViewById(R.id.direction);
@@ -735,11 +764,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		if (phrase != null && useMapCenter) {
 			updateLocationViewCache.specialFrom = phrase.getSettings().getOriginalLocation();
 		}
-		LatLon toloc = null;
-		if (item.getSearchResult() != null) {
-			toloc = item.getSearchResult().location;
-		}
-		UpdateLocationUtils.updateLocationView(app, updateLocationViewCache, direction, distanceText, toloc);
+		UpdateLocationUtils.updateLocationView(app, updateLocationViewCache, direction, distanceText, location);
 	}
 
 	public void setPoiUIFilter(@Nullable PoiUIFilter poiUIFilter) {
