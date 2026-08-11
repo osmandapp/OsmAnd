@@ -126,14 +126,16 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 		}
 		Drawable typeIcon = item.getTypeIcon();
 		ImageView groupIcon = view.findViewById(R.id.type_name_icon);
+		boolean groupIconVisible = typeIcon != null && hasDesc;
 		if (groupIcon != null) {
-			if (typeIcon != null && hasDesc) {
+			if (groupIconVisible) {
 				groupIcon.setImageDrawable(typeIcon);
 				groupIcon.setVisibility(View.VISIBLE);
 			} else {
 				groupIcon.setVisibility(View.GONE);
 			}
 		}
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.dot_divider), hasDesc && !groupIconVisible);
 
 		LinearLayout timeLayout = view.findViewById(R.id.time_layout);
 		if (timeLayout != null) {

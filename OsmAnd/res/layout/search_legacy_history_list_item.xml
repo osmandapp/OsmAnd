@@ -79,6 +79,19 @@
 							android:textSize="@dimen/default_desc_text_size"
 							tools:text="100500 km" />
 
+						<TextView
+							android:id="@+id/dot_divider"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_gravity="center_vertical"
+							android:layout_marginStart="@dimen/content_padding_small_half"
+							android:layout_marginEnd="@dimen/content_padding_small_half"
+							android:text="•"
+							android:textColor="?android:textColorSecondary"
+							android:textSize="@dimen/default_desc_text_size"
+							android:visibility="gone"
+							tools:visibility="visible" />
+
 					</LinearLayout>
 
 					<androidx.appcompat.widget.AppCompatImageView
