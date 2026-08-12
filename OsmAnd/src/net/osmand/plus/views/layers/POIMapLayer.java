@@ -567,7 +567,9 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(
 					getContext(), getColor(amenity), true, iconId != null ? iconId : R.drawable.mx_special_marker);
 			pointImageDrawable.setAlpha(0.8f);
-			Bitmap bitmap = pointImageDrawable.getBigMergedBitmap(getTextScale(), false);
+			Bitmap bitmap = app.getPoiTypes().isOtherCategory(amenity.getType())
+					? pointImageDrawable.getSmallMergedBitmap(getTextScale())
+					: pointImageDrawable.getBigMergedBitmap(getTextScale(), false);
 
 			MapMarkerBuilder mapMarkerBuilder = new MapMarkerBuilder();
 			mapMarkerBuilder.setIsAccuracyCircleSupported(false)
