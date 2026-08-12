@@ -184,10 +184,7 @@ public class AdditionalInfoBundle {
 		}
 
 		for (List<PoiType> poiTypeList : collectedPoiTypes.values()) {
-			PoiCategory groupCategory = category;
-			for (PoiType pt : poiTypeList) {
-				groupCategory = pt.getCategory();
-			}
+			PoiCategory groupCategory = poiTypeList.get(0).getCategory();
 			rows.add(new AmenityRowData.Builder(groupCategory.getKeyName())
 					.setCollapsableRowType(AmenityRowData.CollapsableRowType.POI_TYPE_GROUP)
 					.setCollapsablePoiTypes(poiTypeList)

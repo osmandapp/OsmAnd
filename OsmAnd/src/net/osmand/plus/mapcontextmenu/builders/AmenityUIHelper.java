@@ -138,10 +138,7 @@ public class AmenityUIHelper extends MenuBuilder {
 					firstType.getKeyName(), firstType.getPoiAdditionalCategoryTranslation(), categoryTypes,
 					firstType.getOrder(), iconId, iconName, true, baseRow.collapsableCategory);
 		}
-		PoiCategory groupCategory = baseRow.collapsableCategory;
-		for (PoiType pt : categoryTypes) {
-			groupCategory = pt.getCategory();
-		}
+		PoiCategory groupCategory = firstType.getCategory();
 		return AmenityRowsBuilder.buildPoiTypesGroupRow(groupCategory.getKeyName(),
 				groupCategory.getKeyName(), groupCategory.getTranslation(), categoryTypes,
 				PoiType.DEFAULT_GROUP_ORDER, 0, groupCategory.getIconKeyName(), false, baseRow.collapsableCategory);

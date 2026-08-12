@@ -93,6 +93,32 @@ public class AmenityRowData {
 			this.key = key;
 		}
 
+		public static Builder from(AmenityRowData row) {
+			return new Builder(row.key)
+					.setValue(row.value)
+					.setIconId(row.iconId)
+					.setIconName(row.iconName)
+					.setTextPrefix(row.textPrefix)
+					.setText(row.text)
+					.setHiddenUrl(row.hiddenUrl)
+					.setCollapsableRows(row.collapsableRows)
+					.setCollapsableRowType(row.collapsableRowType)
+					.setCollapsablePoiTypes(row.collapsablePoiTypes)
+					.setCollapsableCategory(row.collapsableCategory)
+					.setPoiAdditional(row.poiAdditional)
+					.setTextColor(row.textColor)
+					.setIsWiki(row.isWiki)
+					.setIsText(row.isText)
+					.setIsDescription(row.isDescription)
+					.setNeedLinks(row.needLinks)
+					.setIsPhoneNumber(row.isPhoneNumber)
+					.setIsUrl(row.isUrl)
+					.setOrder(row.order)
+					.setName(row.name)
+					.setMatchWidthDivider(row.matchWidthDivider)
+					.setTextLinesLimit(row.textLinesLimit);
+		}
+
 		public Builder setValue(String value) { this.value = value; return this; }
 		public Builder setIconId(int iconId) { this.iconId = iconId; return this; }
 		public Builder setIconName(String iconName) { this.iconName = iconName; return this; }
