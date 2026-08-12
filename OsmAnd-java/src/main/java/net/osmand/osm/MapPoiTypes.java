@@ -861,27 +861,24 @@ public class MapPoiTypes {
 		return null;
 	}
 
-	private static class EmptyPoiType extends AbstractPoiType {
-		public EmptyPoiType(String keyName, MapPoiTypes registry) {
-			super(keyName, registry);
-		}
+	private AbstractPoiType EMPTY_POI_TYPE = new AbstractPoiType("EMPTY", this) {
 
 		@Override
 		public Map<PoiCategory, LinkedHashSet<String>> putTypes(Map<PoiCategory, LinkedHashSet<String>> acceptedTypes) {
 			return Collections.emptyMap();
 		}
-	}
+	};
 
 	public AbstractPoiType getAnyPoiAdditionalTypeByKey(String name) {
 		AbstractPoiType pt = dynCacheByKey.get(name);
 		if (pt == null) {
 			pt = getAnyPoiAdditionalTypeByKeyNoCache(name);
 			if (pt == null) {
-				pt = new EmptyPoiType(name, this);
+				pt = EMPTY_POI_TYPE;
 			}
 			dynCacheByKey.put(name, pt);
 		}
-		if (pt instanceof EmptyPoiType) {
+		if (pt == EMPTY_POI_TYPE) {
 			return null;
 		}
 		return pt;
