@@ -247,6 +247,10 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 			result = addResult(result, (extraNameMatch != null ?  extraNameMatch : b.getName())
 					+ "_" + getShortLink(ZOOM_SIMILARITY_10_M));
 		}
+		String wikipedia = getWikipedia();
+		if (wikipedia != null) {
+			result = addResult(result, getShortLink(ZOOM_SIMILARITY_10_M) + wikipedia);
+		}
 		return result;
 	}
 	
@@ -422,10 +426,10 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 					}
 				}
 				LatLon resLoc = atom.getResultLocation();
-				return String.format("\"%s\" [%s] '%s' %s (%.4f %.4f)", words.toString().trim(), type, name,
+				return String.format(Locale.US, "\"%s\" [%s] '%s' %s (%.4f %.4f)", words.toString().trim(), type, name,
 						"" + ObfConstants.getOsmObjectId(idObject) + " " + (atom.id % 0xffff), resLoc.getLatitude(), resLoc.getLongitude());
 			} else if(atom.isPoiCategory()) {
-				return String.format("\"%s\" [%s] '%s' id=%d, obj=%,d ", words.toString().trim(), atom.typeStr(), atom.name,
+				return String.format(Locale.US, "\"%s\" [%s] '%s' id=%d, obj=%,d ", words.toString().trim(), atom.typeStr(), atom.name,
 						atom.id, atom.otherWordsCnt );
 			}
 			return atom.simpleName(words.toString()); 
@@ -655,6 +659,17 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 			return "";
 		}
 		return MapUtils.createShortLinkString(loc.getLatitude(), loc.getLongitude(), zoom);
+	}
+	
+	private String getWikipedia() {
+		if (getFirstRefObject(true) instanceof Amenity amenity) {
+			String wiki = amenity.getAdditionalInfo(Amenity.WIKIPEDIA);
+			if (wiki != null) {
+				String[] split = wiki.split("/");
+				return split[split.length - 1];
+			}
+		}
+		return null;
 	}
 }
 	
