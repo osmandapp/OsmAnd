@@ -86,12 +86,12 @@ public class AdditionalInfoBundle {
 	private static final String CUISINE_INFO_ID = COLLAPSABLE_PREFIX + Amenity.CUISINE;
 	private static final String DISH_INFO_ID = COLLAPSABLE_PREFIX + Amenity.DISH;
 
-	public List<AmenityRowData> getVisibleTags(boolean allowNoteTag, List<String> preferredLangs) {
+	public List<AmenityTagEntry> getVisibleTags(boolean allowNoteTag, List<String> preferredLangs) {
 		boolean showDefaultTags = isDefaultForCategory();
 		PoiCategory category = getCategory();
-		List<AmenityRowData> rows = new ArrayList<>();
+		List<AmenityTagEntry> entries = new ArrayList<>();
 		Map<String, List<PoiType>> collectedPoiTypes = new LinkedHashMap<>();
-		AmenityRowData cuisineRow = null;
+		AmenityTagEntry cuisineEntry = null;
 
 		for (Map.Entry<String, Object> entry : getFilteredLocalizedInfo().entrySet()) {
 			String key = entry.getKey();
@@ -119,12 +119,12 @@ public class AdditionalInfoBundle {
 					continue;
 				}
 				if (pType != null) {
-					AmenityRowData row = new AmenityRowData.Builder(key).setValue(strValue).setOrder(pType.getOrder())
+					AmenityTagEntry tagEntry = new AmenityTagEntry.Builder(key).setValue(strValue).setOrder(pType.getOrder())
 							.setIsDescription(key.contains(Amenity.DESCRIPTION)).build();
 					if (Amenity.CUISINE.equals(key)) {
-						cuisineRow = row;
+						cuisineEntry = tagEntry;
 					} else {
-						rows.add(row);
+						entries.add(tagEntry);
 					}
 				} else if (poiType != null) {
 					String categoryKey = poiType.getCategory().getKeyName();
@@ -132,7 +132,7 @@ public class AdditionalInfoBundle {
 						collectedPoiTypes.computeIfAbsent(categoryKey, c -> new ArrayList<>()).add(poiType);
 					}
 				} else {
-					rows.add(new AmenityRowData.Builder(key).setValue(strValue).setOrder(PoiType.DEFAULT_ORDER)
+					entries.add(new AmenityTagEntry.Builder(key).setValue(strValue).setOrder(PoiType.DEFAULT_ORDER)
 							.setIsDescription(key.contains(Amenity.DESCRIPTION)).build());
 				}
 			} else if (value instanceof Map) {
@@ -140,15 +140,15 @@ public class AdditionalInfoBundle {
 				if (filtered == null) {
 					continue;
 				}
-				AmenityRowData row = toLocalizedAmenityRowData(key, (Map<String, Object>) filtered, pType, preferredLangs);
-				if (row != null) {
-					rows.add(row);
+				AmenityTagEntry tagEntry = toLocalizedAmenityTagEntry(key, (Map<String, Object>) filtered, pType, preferredLangs);
+				if (tagEntry != null) {
+					entries.add(tagEntry);
 				}
 			}
 		}
 
-		if (cuisineRow != null && !containsAny(CUISINE_INFO_ID, DISH_INFO_ID)) {
-			rows.add(cuisineRow);
+		if (cuisineEntry != null && !containsAny(CUISINE_INFO_ID, DISH_INFO_ID)) {
+			entries.add(cuisineEntry);
 		}
 
 		for (Map.Entry<String, String> entry : getFilteredInfo().entrySet()) {
@@ -174,8 +174,8 @@ public class AdditionalInfoBundle {
 				continue;
 			}
 			String poiAdditionalCategoryName = categoryTypes.get(0).getPoiAdditionalCategory();
-			rows.add(new AmenityRowData.Builder(poiAdditionalCategoryName)
-					.setCollapsableRowType(AmenityRowData.CollapsableRowType.POI_TYPE_GROUP)
+			entries.add(new AmenityTagEntry.Builder(poiAdditionalCategoryName)
+					.setCollapsableEntryType(AmenityTagEntry.CollapsableEntryType.POI_TYPE_GROUP)
 					.setCollapsablePoiTypes(categoryTypes)
 					.setCollapsableCategory(category)
 					.setPoiAdditional(true)
@@ -185,8 +185,8 @@ public class AdditionalInfoBundle {
 
 		for (List<PoiType> poiTypeList : collectedPoiTypes.values()) {
 			PoiCategory groupCategory = poiTypeList.get(0).getCategory();
-			rows.add(new AmenityRowData.Builder(groupCategory.getKeyName())
-					.setCollapsableRowType(AmenityRowData.CollapsableRowType.POI_TYPE_GROUP)
+			entries.add(new AmenityTagEntry.Builder(groupCategory.getKeyName())
+					.setCollapsableEntryType(AmenityTagEntry.CollapsableEntryType.POI_TYPE_GROUP)
 					.setCollapsablePoiTypes(poiTypeList)
 					.setCollapsableCategory(category)
 					.setPoiAdditional(false)
@@ -194,39 +194,39 @@ public class AdditionalInfoBundle {
 					.build());
 		}
 
-		return rows;
+		return entries;
 	}
 
 	@SuppressWarnings("unchecked")
-	private AmenityRowData toLocalizedAmenityRowData(String key, Map<String, Object> value, PoiType pType,
+	private AmenityTagEntry toLocalizedAmenityTagEntry(String key, Map<String, Object> value, PoiType pType,
 			List<String> preferredLangs) {
 		Object localizationsObj = value.get("localizations");
 		if (!(localizationsObj instanceof Map)) {
 			return null;
 		}
-		List<AmenityRowData> children = new ArrayList<>();
+		List<AmenityTagEntry> children = new ArrayList<>();
 		for (Map.Entry<String, String> loc : ((Map<String, String>) localizationsObj).entrySet()) {
-			children.add(new AmenityRowData.Builder(loc.getKey()).setValue(loc.getValue()).build());
+			children.add(new AmenityTagEntry.Builder(loc.getKey()).setValue(loc.getValue()).build());
 		}
 		if (children.isEmpty()) {
 			return null;
 		}
-		AmenityRowData header = pickHeader(children, preferredLangs);
-		List<AmenityRowData> otherLangs = new ArrayList<>(children);
+		AmenityTagEntry header = pickHeader(children, preferredLangs);
+		List<AmenityTagEntry> otherLangs = new ArrayList<>(children);
 		otherLangs.remove(header);
 		int order = pType != null ? pType.getOrder() : PoiType.DEFAULT_ORDER;
-		return new AmenityRowData.Builder(header.key).setValue(header.value).setCollapsableRows(otherLangs)
+		return new AmenityTagEntry.Builder(header.key).setValue(header.value).setCollapsableEntries(otherLangs)
 				.setOrder(order).setIsDescription(key.contains(Amenity.DESCRIPTION)).build();
 	}
 
-	private AmenityRowData pickHeader(List<AmenityRowData> children, List<String> preferredLangs) {
+	private AmenityTagEntry pickHeader(List<AmenityTagEntry> children, List<String> preferredLangs) {
 		if (preferredLangs != null) {
 			for (String lang : preferredLangs) {
 				if (Algorithms.isEmpty(lang)) {
 					continue;
 				}
 				String suffix = ":" + lang;
-				for (AmenityRowData child : children) {
+				for (AmenityTagEntry child : children) {
 					if (child.key.endsWith(suffix)) {
 						return child;
 					}

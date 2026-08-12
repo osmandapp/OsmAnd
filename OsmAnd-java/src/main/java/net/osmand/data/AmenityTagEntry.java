@@ -6,9 +6,9 @@ import net.osmand.util.Algorithms;
 
 import java.util.List;
 
-public class AmenityRowData {
+public class AmenityTagEntry {
 
-	public enum CollapsableRowType {
+	public enum CollapsableEntryType {
 		NONE, PLAIN, POI_TYPE_GROUP, ELEVATION_PILLS, OPENING_HOURS
 	}
 
@@ -19,8 +19,8 @@ public class AmenityRowData {
 	public final String textPrefix;
 	public final String text;
 	public final String hiddenUrl;
-	public final List<AmenityRowData> collapsableRows;
-	public final CollapsableRowType collapsableRowType;
+	public final List<AmenityTagEntry> collapsableEntries;
+	public final CollapsableEntryType collapsableEntryType;
 	public final List<PoiType> collapsablePoiTypes;
 	public final PoiCategory collapsableCategory;
 	public final boolean poiAdditional;
@@ -37,7 +37,7 @@ public class AmenityRowData {
 	public final boolean matchWidthDivider;
 	public final int textLinesLimit;
 
-	private AmenityRowData(Builder builder) {
+	private AmenityTagEntry(Builder builder) {
 		this.key = builder.key;
 		this.value = builder.value;
 		this.iconId = builder.iconId;
@@ -45,12 +45,12 @@ public class AmenityRowData {
 		this.textPrefix = builder.textPrefix;
 		this.text = builder.text;
 		this.hiddenUrl = builder.hiddenUrl;
-		this.collapsableRows = builder.collapsableRows;
-		this.collapsableRowType = builder.collapsableRowType;
+		this.collapsableEntries = builder.collapsableEntries;
+		this.collapsableEntryType = builder.collapsableEntryType;
 		this.collapsablePoiTypes = builder.collapsablePoiTypes;
 		this.collapsableCategory = builder.collapsableCategory;
 		this.poiAdditional = builder.poiAdditional;
-		this.collapsable = builder.collapsableRowType != CollapsableRowType.NONE;
+		this.collapsable = builder.collapsableEntryType != CollapsableEntryType.NONE;
 		this.textColor = builder.textColor;
 		this.isWiki = builder.isWiki;
 		this.isText = builder.isText;
@@ -72,8 +72,8 @@ public class AmenityRowData {
 		private String textPrefix = "";
 		private String text;
 		private String hiddenUrl;
-		private List<AmenityRowData> collapsableRows;
-		private CollapsableRowType collapsableRowType = CollapsableRowType.NONE;
+		private List<AmenityTagEntry> collapsableEntries;
+		private CollapsableEntryType collapsableEntryType = CollapsableEntryType.NONE;
 		private List<PoiType> collapsablePoiTypes;
 		private PoiCategory collapsableCategory;
 		private boolean poiAdditional;
@@ -93,30 +93,30 @@ public class AmenityRowData {
 			this.key = key;
 		}
 
-		public static Builder from(AmenityRowData row) {
-			return new Builder(row.key)
-					.setValue(row.value)
-					.setIconId(row.iconId)
-					.setIconName(row.iconName)
-					.setTextPrefix(row.textPrefix)
-					.setText(row.text)
-					.setHiddenUrl(row.hiddenUrl)
-					.setCollapsableRows(row.collapsableRows)
-					.setCollapsableRowType(row.collapsableRowType)
-					.setCollapsablePoiTypes(row.collapsablePoiTypes)
-					.setCollapsableCategory(row.collapsableCategory)
-					.setPoiAdditional(row.poiAdditional)
-					.setTextColor(row.textColor)
-					.setIsWiki(row.isWiki)
-					.setIsText(row.isText)
-					.setIsDescription(row.isDescription)
-					.setNeedLinks(row.needLinks)
-					.setIsPhoneNumber(row.isPhoneNumber)
-					.setIsUrl(row.isUrl)
-					.setOrder(row.order)
-					.setName(row.name)
-					.setMatchWidthDivider(row.matchWidthDivider)
-					.setTextLinesLimit(row.textLinesLimit);
+		public static Builder from(AmenityTagEntry entry) {
+			return new Builder(entry.key)
+					.setValue(entry.value)
+					.setIconId(entry.iconId)
+					.setIconName(entry.iconName)
+					.setTextPrefix(entry.textPrefix)
+					.setText(entry.text)
+					.setHiddenUrl(entry.hiddenUrl)
+					.setCollapsableEntries(entry.collapsableEntries)
+					.setCollapsableEntryType(entry.collapsableEntryType)
+					.setCollapsablePoiTypes(entry.collapsablePoiTypes)
+					.setCollapsableCategory(entry.collapsableCategory)
+					.setPoiAdditional(entry.poiAdditional)
+					.setTextColor(entry.textColor)
+					.setIsWiki(entry.isWiki)
+					.setIsText(entry.isText)
+					.setIsDescription(entry.isDescription)
+					.setNeedLinks(entry.needLinks)
+					.setIsPhoneNumber(entry.isPhoneNumber)
+					.setIsUrl(entry.isUrl)
+					.setOrder(entry.order)
+					.setName(entry.name)
+					.setMatchWidthDivider(entry.matchWidthDivider)
+					.setTextLinesLimit(entry.textLinesLimit);
 		}
 
 		public Builder setValue(String value) { this.value = value; return this; }
@@ -126,14 +126,14 @@ public class AmenityRowData {
 		public Builder setText(String text) { this.text = text; return this; }
 		public Builder setHiddenUrl(String hiddenUrl) { this.hiddenUrl = hiddenUrl; return this; }
 
-		public Builder setCollapsableRows(List<AmenityRowData> collapsableRows) {
-			this.collapsableRows = collapsableRows;
-			if (collapsableRowType == CollapsableRowType.NONE && collapsableRows != null) {
-				collapsableRowType = CollapsableRowType.PLAIN;
+		public Builder setCollapsableEntries(List<AmenityTagEntry> collapsableEntries) {
+			this.collapsableEntries = collapsableEntries;
+			if (collapsableEntryType == CollapsableEntryType.NONE && collapsableEntries != null) {
+				collapsableEntryType = CollapsableEntryType.PLAIN;
 			}
 			return this;
 		}
-		public Builder setCollapsableRowType(CollapsableRowType collapsableRowType) { this.collapsableRowType = collapsableRowType; return this; }
+		public Builder setCollapsableEntryType(CollapsableEntryType collapsableEntryType) { this.collapsableEntryType = collapsableEntryType; return this; }
 		public Builder setCollapsablePoiTypes(List<PoiType> collapsablePoiTypes) { this.collapsablePoiTypes = collapsablePoiTypes; return this; }
 		public Builder setCollapsableCategory(PoiCategory collapsableCategory) { this.collapsableCategory = collapsableCategory; return this; }
 		public Builder setPoiAdditional(boolean poiAdditional) { this.poiAdditional = poiAdditional; return this; }
@@ -164,14 +164,14 @@ public class AmenityRowData {
 		public boolean hasText() { return !Algorithms.isEmpty(text); }
 		public String getHiddenUrl() { return hiddenUrl; }
 		public boolean hasHiddenUrl() { return !Algorithms.isEmpty(hiddenUrl); }
-		public CollapsableRowType getCollapsableRowType() { return collapsableRowType; }
+		public CollapsableEntryType getCollapsableEntryType() { return collapsableEntryType; }
 		public boolean isWiki() { return isWiki; }
 		public boolean isText() { return isText; }
 		public boolean isDescription() { return isDescription; }
-		public boolean isNeedLinks() { return needLinks && collapsableRowType == CollapsableRowType.NONE; }
+		public boolean isNeedLinks() { return needLinks && collapsableEntryType == CollapsableEntryType.NONE; }
 
-		public AmenityRowData build() {
-			return new AmenityRowData(this);
+		public AmenityTagEntry build() {
+			return new AmenityTagEntry(this);
 		}
 	}
 }

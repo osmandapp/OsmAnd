@@ -7,14 +7,14 @@ import net.osmand.util.Algorithms;
 import java.util.Collections;
 import java.util.List;
 
-public class AmenityRowsBuilder {
+public class AmenityTagEntriesBuilder {
 
 	public static final String TRANSLATIONS_SEPARATOR = " • ";
 
-	private AmenityRowsBuilder() {
+	private AmenityTagEntriesBuilder() {
 	}
 
-	public static AmenityRowData buildPoiTypesGroupRow(String key, String name, String textPrefix,
+	public static AmenityTagEntry buildPoiTypesGroupEntry(String key, String name, String textPrefix,
 			List<PoiType> types, int order, int iconId, String iconName,
 			boolean poiAdditional, PoiCategory collapsableCategory) {
 		StringBuilder text = new StringBuilder();
@@ -25,7 +25,7 @@ public class AmenityRowsBuilder {
 			}
 			text.append(translation);
 		}
-		return new AmenityRowData.Builder(key)
+		return new AmenityTagEntry.Builder(key)
 				.setName(name)
 				.setTextPrefix(textPrefix)
 				.setText(text.toString())
@@ -33,29 +33,29 @@ public class AmenityRowsBuilder {
 				.setIconId(iconId)
 				.setIconName(iconName)
 				.setTextLinesLimit(1)
-				.setCollapsableRowType(AmenityRowData.CollapsableRowType.POI_TYPE_GROUP)
+				.setCollapsableEntryType(AmenityTagEntry.CollapsableEntryType.POI_TYPE_GROUP)
 				.setCollapsablePoiTypes(types)
 				.setPoiAdditional(poiAdditional)
 				.setCollapsableCategory(collapsableCategory)
 				.build();
 	}
 
-	public static void sortInfoRows(List<AmenityRowData> rows) {
-		Collections.sort(rows, (row1, row2) -> {
-			if (row1.order != row2.order) {
-				return Integer.compare(row1.order, row2.order);
+	public static void sortInfoEntries(List<AmenityTagEntry> entries) {
+		Collections.sort(entries, (entry1, entry2) -> {
+			if (entry1.order != entry2.order) {
+				return Integer.compare(entry1.order, entry2.order);
 			}
-			return Algorithms.compare(row1.name, row2.name);
+			return Algorithms.compare(entry1.name, entry2.name);
 		});
 	}
 
-	public static void sortDescriptionRows(List<AmenityRowData> descriptions, String preferredLang) {
+	public static void sortDescriptionEntries(List<AmenityTagEntry> descriptions, String preferredLang) {
 		if (Algorithms.isEmpty(preferredLang)) {
 			return;
 		}
 		String langSuffix = ":" + preferredLang;
-		AmenityRowData descInPrefLang = null;
-		for (AmenityRowData desc : descriptions) {
+		AmenityTagEntry descInPrefLang = null;
+		for (AmenityTagEntry desc : descriptions) {
 			if (desc.key.length() > langSuffix.length() && desc.key.endsWith(langSuffix)) {
 				descInPrefLang = desc;
 				break;
