@@ -628,8 +628,6 @@ public class MapPoiTypes {
 		if (otherCategory == null) {
 			throw new IllegalArgumentException("No poi category other");
 		}
-		this.poiAdditionalByKeyHitCache = new HashMap<>();
-		this.poiAdditionalByKeyMissCache = new HashSet<>();
 		init = true;
 		log.info("Time to init poi types " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
 	}
@@ -826,7 +824,7 @@ public class MapPoiTypes {
 		return null;
 	}
 
-	private AbstractPoiType getPoiAdditionalType(PoiCategory category, String name) {
+	public AbstractPoiType getPoiAdditionalType(PoiCategory category, String name) {
 		PoiType add = getPoiAdditionalByKey(category, name);
 		if (add != null) {
 			return add;
@@ -846,31 +844,14 @@ public class MapPoiTypes {
 		return null;
 	}
 
-	private volatile Set<String> poiAdditionalByKeyMissCache = new HashSet<>();
-	private volatile Map<String, AbstractPoiType> poiAdditionalByKeyHitCache = new HashMap<>();
-
 	public AbstractPoiType getAnyPoiAdditionalTypeByKey(String name) {
-		Set<String> missCache = poiAdditionalByKeyMissCache;
-		if (missCache.contains(name)) {
-			return null;
-		}
-		Map<String, AbstractPoiType> hitCache = poiAdditionalByKeyHitCache;
-		AbstractPoiType cachedType = hitCache.get(name);
-		if (cachedType != null) {
-			return cachedType;
-		}
-		for (PoiCategory pc : categories) {
+		for (int i = 0; i < categories.size(); i++) {
+			PoiCategory pc = categories.get(i);
 			AbstractPoiType add = getPoiAdditionalType(pc, name);
 			if (add != null) {
-				Map<String, AbstractPoiType> freshHitCache = new HashMap<>(hitCache);
-				freshHitCache.put(name, add);
-				poiAdditionalByKeyHitCache = freshHitCache;
 				return add;
 			}
 		}
-		Set<String> freshMissCache = new HashSet<>(missCache);
-		freshMissCache.add(name);
-		poiAdditionalByKeyMissCache = freshMissCache;
 		return null;
 	}
 
