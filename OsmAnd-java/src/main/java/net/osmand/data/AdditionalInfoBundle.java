@@ -56,7 +56,7 @@ public class AdditionalInfoBundle {
 
 	public Map<String, String> getFilteredInfo() {
 		if (filteredAdditionalInfo == null) {
-			Map<String, String> result = new HashMap<>();
+			Map<String, String> result = new LinkedHashMap<>();
 			for (String origKey : getAdditionalInfoKeys()) {
 				String key;
 				if (origKey.equals(AMENITY_PREFIX + Amenity.OPENING_HOURS)) {
