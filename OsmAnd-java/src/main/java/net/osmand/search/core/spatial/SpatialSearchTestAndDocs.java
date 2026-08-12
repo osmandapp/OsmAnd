@@ -21,19 +21,6 @@ import net.osmand.search.core.spatial.SpatialTextSearch.SpatialSearchResults;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSettings;
 import net.osmand.util.SearchAlgorithms;
 
-//////////// LIVE TESTING //////////
-// UNIT TESTING: Fix 36K national park - live test? (don't index small islands > 100 POI !!!)
-// UNIT TESTING: "Gate D18"... (too many results check Limit results "Gate")?
-// UNIT TESTING: 'tongass national forest', 'national', national forest'
-// UNIT TESTING: 'rue de l'eglise', 'rue de la', 'rue de la fen.', 'rû bas du rue' (too many results) 
-// UNIT TESTING: 'Venezia', 'Everest', 'Rio de Janeiro', 'остров Пасхи'
-// UNIT TESTING: 25-та школа
-// UNIT TESTING: 100km+ "Мигия озеро" (non freq-common word + enlarge), - partialMatch+partialExactMatch
-// UNIT TESTING: 100km+ Calle 20 188 San Isidro Lima 
-// UNIT TESTING: 100km+ нова пошта краматорськ  - no brand (3, 5) 5 (5 N7846074085, N1482296639)
-// UNIT TESTING: '4 ave 8 paterson' (OK - '8 4 ave paterson', '4th ave 8 paterson' play order of assigned numbers to bdl ref)
-// UNIT TESTING: Travessa de Santo António Rua Joaquim Ribeiro Carvalho Portugal
-
 //////////// TESTING //////////
 // ### ukraine_school.json - Missing A+ school - школа А+ (nothing found on website)
 // 		Result 2 (t2+0-w1-oth1-tp0) - ["школа а" [POI School] 'Початкова школа А+' 731005224 6351 (50.3700 30.4470)]
@@ -48,14 +35,18 @@ import net.osmand.util.SearchAlgorithms;
 // 2. UNIT TESTING: Japan_kanto_tokyo (see example below on neighborouds) - test on small osm.gz?
 // 3. UNIT TESTING: Test poi category translations (add ru / de in test)
 // 4. UNIT TESTING: Test conscription number for some cities - "Bratislava Raketova 3248/6";
+// 5. UNIT TESTING: 'tongass national forest', 'national', national forest'
+// 6. UNIT TESTING: "Мигия озеро"
+// 7. UNIT TESTING: 'rû bas du rue', 'rue de l'eglise' (extra rue de la)
+// 8. UNIT TESTING: World - 'Venezia', 'Everest', 'Rio de Janeiro', 'остров Пасхи'
 
-// TESTING : highway=services (Not index)
 // NO UNIT TESTING: '400 Susquehanna Boulevard Hazel Township' (MISSING Hazel Township)
 // NO UNIT TESTING: '330 Innovation Boulevard University Park' (partial result missing university park)
 
 ////////// IN PROGRESS //////////
 // REVIEW (index_words_dashboard - common озеро): POI / ADDRESS - France, Germany, US, Europe, China, Peru
 // REVIEW Auto test Analyze Performance & Android bootlenecks VisualVM (Pipeline + Intersection)
+// TODO FIX ORDER -  (tests)
 
 // TODO INDEX: Find POI Categories translations / synonyms via Common words - Стоматол., Dentist, Basilica 
 // TODO REVIEW: Abbrevations (synonyms / direction words) other languages?
@@ -63,13 +54,11 @@ import net.osmand.util.SearchAlgorithms;
 
 // TODO Web worldwide search on missing results test "Arizona"
 // TODO DEDUPLICATE: Index place=state, county.. + wikidata id for boundaries (regions.ocbf) & display them - analyze
-// TODO DEDUPLICATE: too many houses (duplicate names) in wiki maps - obstruct search by street "Ярославів Вал"`?
-// TEST DEDUPLICATE: wiki / travel maps / seamarks map
+// TODO DEDUPLICATE: Travel / Wiki - too many houses (duplicate names) in wiki maps - obstruct search by street "Ярославів Вал"`?
+// TODO Extend POI tile bboxes 200m? internet_access (fuel_diesel)
+// TODO Search in large parks, neighborhood same as in boundaries (index bbox POI), residential way/56238205
 
 /////////////// EXTRA FEATURES ///////////////
-// TODO FIX ORDER - (tests)
-// TODO Search in large parks, neighborhood same as in boundaries (index bbox POI), residential way/56238205
-// TODO Extend POI tile bboxes 200m? internet_access (fuel_diesel)
 // TODO Sorting before load objects (use elo and other buildings?) and limit results
 // TODO Auto-Corrections / Suggestion based on common suffixes
 // TODO Postcode needs to load street and check buildings! Store postcode as bbox not as City! - '1186RZ 324' (NL, UK) 
