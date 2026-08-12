@@ -87,10 +87,19 @@ public class AdditionalInfoBundle {
 	private static final String DISH_INFO_ID = COLLAPSABLE_PREFIX + Amenity.DISH;
 
 	public List<AmenityTagEntry> getVisibleTags(boolean allowNoteTag, List<String> preferredLangs) {
-		boolean showDefaultTags = isDefaultForCategory();
 		PoiCategory category = getCategory();
-		List<AmenityTagEntry> entries = new ArrayList<>();
 		Map<String, List<PoiType>> collectedPoiTypes = new LinkedHashMap<>();
+
+		List<AmenityTagEntry> entries = collectPlainRows(allowNoteTag, preferredLangs, category, collectedPoiTypes);
+		entries.addAll(collectCollapsableGroups(category));
+		entries.addAll(collectPoiTypeGroups(category, collectedPoiTypes));
+		return entries;
+	}
+
+	private List<AmenityTagEntry> collectPlainRows(boolean allowNoteTag, List<String> preferredLangs,
+			PoiCategory category, Map<String, List<PoiType>> collectedPoiTypes) {
+		boolean showDefaultTags = isDefaultForCategory();
+		List<AmenityTagEntry> entries = new ArrayList<>();
 		AmenityTagEntry cuisineEntry = null;
 
 		for (Map.Entry<String, Object> entry : getFilteredLocalizedInfo().entrySet()) {
@@ -107,7 +116,7 @@ public class AdditionalInfoBundle {
 			ResolvedPoiType resolved = resolvePoiType(category, key, strValue);
 			PoiType pType = resolved.pType;
 			PoiType poiType = resolved.poiType;
-			if (pType != null && pType.isFilterOnly()) {
+			if (isFilterOnlyOrGrouped(pType)) {
 				continue;
 			}
 			if (pType == null && poiType == null && !showDefaultTags) {
@@ -115,9 +124,6 @@ public class AdditionalInfoBundle {
 			}
 
 			if (strValue != null) {
-				if (pType != null && !pType.isText() && !Algorithms.isEmpty(pType.getPoiAdditionalCategory())) {
-					continue;
-				}
 				if (pType != null) {
 					AmenityTagEntry tagEntry = new AmenityTagEntry.Builder(key).setValue(strValue).setOrder(pType.getOrder())
 							.setIsDescription(key.contains(Amenity.DESCRIPTION)).build();
@@ -150,7 +156,11 @@ public class AdditionalInfoBundle {
 		if (cuisineEntry != null && !containsAny(CUISINE_INFO_ID, DISH_INFO_ID)) {
 			entries.add(cuisineEntry);
 		}
+		return entries;
+	}
 
+	private List<AmenityTagEntry> collectCollapsableGroups(PoiCategory category) {
+		List<AmenityTagEntry> entries = new ArrayList<>();
 		for (Map.Entry<String, String> entry : getFilteredInfo().entrySet()) {
 			String key = entry.getKey();
 			if (!key.startsWith(COLLAPSABLE_PREFIX)) {
@@ -182,7 +192,11 @@ public class AdditionalInfoBundle {
 					.setOrder(categoryTypes.get(0).getOrder())
 					.build());
 		}
+		return entries;
+	}
 
+	private List<AmenityTagEntry> collectPoiTypeGroups(PoiCategory category, Map<String, List<PoiType>> collectedPoiTypes) {
+		List<AmenityTagEntry> entries = new ArrayList<>();
 		for (List<PoiType> poiTypeList : collectedPoiTypes.values()) {
 			PoiCategory groupCategory = poiTypeList.get(0).getCategory();
 			entries.add(new AmenityTagEntry.Builder(groupCategory.getKeyName())
@@ -193,7 +207,6 @@ public class AdditionalInfoBundle {
 					.setOrder(PoiType.DEFAULT_GROUP_ORDER)
 					.build());
 		}
-
 		return entries;
 	}
 
@@ -234,6 +247,11 @@ public class AdditionalInfoBundle {
 			}
 		}
 		return children.get(0);
+	}
+
+	private boolean isFilterOnlyOrGrouped(PoiType pType) {
+		return pType != null && (pType.isFilterOnly()
+				|| (!pType.isText() && !Algorithms.isEmpty(pType.getPoiAdditionalCategory())));
 	}
 
 	private boolean isDefaultForCategory() {
