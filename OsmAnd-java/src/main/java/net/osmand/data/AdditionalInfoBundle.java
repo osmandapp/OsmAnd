@@ -253,16 +253,10 @@ public class AdditionalInfoBundle {
 			return value;
 		}
 		Map<String, String> filtered = new LinkedHashMap<>();
-		boolean anySkipped = false;
 		for (Map.Entry<String, String> loc : ((Map<String, String>) localizationsObj).entrySet()) {
-			if (isKeyToSkip(loc.getKey())) {
-				anySkipped = true;
-			} else {
+			if (!isKeyToSkip(loc.getKey())) {
 				filtered.put(loc.getKey(), loc.getValue());
 			}
-		}
-		if (anySkipped) {
-			filtered.keySet().removeIf(key -> !key.contains(":"));
 		}
 		if (filtered.isEmpty()) {
 			return null;
