@@ -245,7 +245,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		amenityUIHelper.setLight(isLightContent());
 		amenityUIHelper.setLatLon(getLatLon());
 		amenityUIHelper.setCollapseExpandListener(getCollapseExpandListener());
-		amenityUIHelper.setShowDefault(this.showDefaultTags);
 		amenityUIHelper.buildInternal(view);
 	}
 

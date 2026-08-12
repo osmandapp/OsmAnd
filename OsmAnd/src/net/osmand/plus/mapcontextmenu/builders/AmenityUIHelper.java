@@ -674,7 +674,4 @@ public class AmenityUIHelper extends MenuBuilder {
 		return null;
 	}
 
-	public void setShowDefault(boolean showDefault) {
-		this.showDefaultTags = showDefault;
-	}
 }
