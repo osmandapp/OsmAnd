@@ -1130,7 +1130,10 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			}
 		}
 		filterChips.updateContent(filterChipItems);
-		searchResultPoiTypesChips.updateContent(topChips);
+		searchResultPoiTypesChips.setContentEnabled(!searching);
+		if (!searching) {
+			searchResultPoiTypesChips.updateContent(topChips);
+		}
 		boolean filterChipsVisible = searchVisible && hasVisibleChip(filterChipItems);
 		filterChips.setVisibility(filterChipsVisible ? View.VISIBLE : View.GONE);
 		boolean poiTypesChipsVisible = searchVisible && !topChips.isEmpty();
@@ -1923,13 +1926,23 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private void setResultCollection(SearchResultCollection resultCollection, boolean preserveSelectedPoiTypeNames) {
 		if (resultCollection == null) {
 			unfilteredResultCollection = null;
-			preservePoiTypeChips = preserveSelectedPoiTypeNames;
+			preservePoiTypeChips = preserveSelectedPoiTypeNames || shouldPreservePoiTypeChipsDuringSearch();
 			if (!preserveSelectedPoiTypeNames) {
 				selectedResultPoiTypeNames.clear();
+			}
+			if (!preservePoiTypeChips) {
 				lastResultPoiTypeNames.clear();
 			}
 		}
 		searchHelper.setResultCollection(resultCollection);
+	}
+
+	private boolean shouldPreservePoiTypeChipsDuringSearch() {
+		return searching && isSearchViewVisible() && !lastResultPoiTypeNames.isEmpty();
+	}
+
+	private boolean shouldPreservePoiTypeChipsForNewSearch(@NonNull String text) {
+		return !Algorithms.isEmpty(text) && isSearchViewVisible() && !lastResultPoiTypeNames.isEmpty();
 	}
 
 	public SearchResultCollection getResultCollection() {
@@ -2421,7 +2434,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		foundPartialLocation = false;
 		if (!searchMore) {
 			unfilteredResultCollection = null;
-			preservePoiTypeChips = preserveSelectedPoiTypeNames;
+			preservePoiTypeChips = preserveSelectedPoiTypeNames || shouldPreservePoiTypeChipsForNewSearch(text);
 			if (!preserveSelectedPoiTypeNames) {
 				selectedResultPoiTypeNames.clear();
 			}
