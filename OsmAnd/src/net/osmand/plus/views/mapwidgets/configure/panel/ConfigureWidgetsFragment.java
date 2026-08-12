@@ -198,7 +198,7 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 		setupToolbar();
 		setupTabLayout();
 		setupApplyButton();
-		updateScreen();
+		updateScreen(false);
 
 		return view;
 	}
@@ -368,7 +368,7 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 		SearchWidgetsFragment.showInstance(requireMapActivity(), selectedPanel, ConfigureWidgetsFragment.this);
 	}
 
-	private void updateScreen() {
+	private void updateScreen(boolean updateWithAnimation) {
 		AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) collapsingToolbarLayout.getLayoutParams();
 		params.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_NO_SCROLL);
 		if (isEditMode) {
@@ -380,12 +380,33 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 
 			tabLayout.setClickable(false);
 			tabLayout.setFocusable(false);
+			if (!updateWithAnimation) {
+				tabLayout.setVisibility(View.GONE);
+				tabLayout.setAlpha(1f);
+				tabLayout.setTranslationY(0f);
+				viewPager.setTranslationY(0f);
+				shadowView.setVisibility(View.GONE);
+				shadowView.setTranslationY(0f);
+				bottomButtons.setTranslationY(0f);
+				bottomButtonsShadow.setTranslationY(0f);
+			}
 		} else {
 			tabLayout.setVisibility(View.VISIBLE);
 
 			params.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS);
 			tabLayout.setClickable(true);
 			tabLayout.setFocusable(true);
+			if (!updateWithAnimation) {
+				tabLayout.setAlpha(1f);
+				tabLayout.setTranslationY(0f);
+				viewPager.setTranslationY(0f);
+				shadowView.setVisibility(View.VISIBLE);
+				shadowView.setTranslationY(0f);
+				bottomButtons.setVisibility(View.GONE);
+				bottomButtons.setTranslationY(0f);
+				bottomButtonsShadow.setVisibility(View.GONE);
+				bottomButtonsShadow.setTranslationY(0f);
+			}
 		}
 
 		updateFabPosition(isEditMode);
@@ -426,7 +447,7 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 
 	private void toggleEditMode(boolean editMode) {
 		isEditMode = editMode;
-		updateScreen();
+		updateScreen(true);
 		animateOnUpdateEditMode();
 	}
 
