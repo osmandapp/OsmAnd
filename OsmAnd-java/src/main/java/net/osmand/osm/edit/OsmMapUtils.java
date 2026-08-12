@@ -15,6 +15,7 @@ public class OsmMapUtils {
 	
 	private static final double POLY_CENTER_PRECISION= 1e-6;
 	private static final int LOOP_LIMITATION = 10000000;
+	private static final double POLY_CELL_ALLOWED_DIFFERENCE = 0.2; //20%
 
 	public static double getDistance(Node e1, Node e2) {
 		return MapUtils.getDistance(e1.getLatitude(), e1.getLongitude(), e2.getLatitude(), e2.getLongitude());
@@ -608,10 +609,14 @@ public class OsmMapUtils {
         }
         
         // take centroid as the first best guess
-        Cell bestCell = getCentroidCell(rings);
-        if(bestCell == null) {
+		Cell centroidCell = getCentroidCell(rings);
+        if(centroidCell == null) {
         	 return new LatLon(minX, minY);
         }
+
+		Cell bestCell = centroidCell;
+        Cell bestCenterCell = bestCell;
+        double centerCellSizeSq = cellSize * cellSize;
 
         // special case for rectangular polygons
         Cell bboxCell = new Cell(minX + width / 2, minY + height / 2, 0, rings);
@@ -631,6 +636,14 @@ public class OsmMapUtils {
                 bestCell = cell;
             }
 
+			// update the best cell in polygon center area if we found a better one
+            double dx = cell.x - centroidCell.x;
+            double dy = cell.y - centroidCell.y;
+			boolean isCenterAreaCell = dx * dx + dy * dy <= centerCellSizeSq;
+            if (cell.d > bestCenterCell.d && isCenterAreaCell) {
+                bestCenterCell = cell;
+            }
+
             // do not drill down further if there's no chance of a better solution
 //            System.out.println(String.format("check for precision: cell.max - bestCell.d = %f Precision: %f", cell.max, precision));
             if (cell.max - bestCell.d <= POLY_CENTER_PRECISION) continue;
@@ -643,6 +656,12 @@ public class OsmMapUtils {
             cellQueue.add(new Cell(cell.x + h, cell.y + h, h, rings));
             count++;
         }
+
+		// If the best point near polygon center is almost as good as the best polygon point (< 20% diff),
+		// then prefer it. To avoid placing icons in wierd places far away from the intuitive visual center of polygon.
+		if ((bestCell.d > 0 && bestCenterCell.d > 0) && (bestCell.d - bestCenterCell.d) < bestCell.d * POLY_CELL_ALLOWED_DIFFERENCE) {
+			bestCell = bestCenterCell;
+		}
 //        System.out.println(String.format("Best lat/lon: %f, %f", bestCell.y, bestCell.x));
         return new LatLon(bestCell.y, bestCell.x);
     }
