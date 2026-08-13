@@ -5221,7 +5221,7 @@
     <string name="route_calculation_using_fast_algorithm">Utilizzo dell\'algoritmo di calcolo veloce del percorso.</string>
     <string name="astro_eclipse_phase_total">Totale</string>
     <string name="astro_eclipse_phase_partial">Parziale</string>
-    <string name="astro_fit_eclipse_path">Adatta il percorso dell\'eclissi</string>
+    <string name="astro_fit_eclipse_path">Inquadra il percorso dell\'eclissi</string>
     <string name="astro_show_map">Mostra la mappa</string>
     <string name="astro_hide_map">Nascondi la mappa</string>
     <string name="astro_map_center_location">Centro mappa: %1$s</string>
