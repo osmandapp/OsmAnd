@@ -50,7 +50,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 	private FavouritesHelper favoritesHelper;
 	private FavoriteGroup personalGroup;
 	@Nullable
-	private Map<String, String> mediaHrefRewrites;
+	private Map<String, String> hrefRewrites;
 
 	public FavoritesSettingsItem(@NonNull OsmandApplication app, @NonNull List<FavoriteGroup> items) {
 		super(app, null, items);
@@ -288,16 +288,16 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 		};
 	}
 
-	public void setMediaHrefRewrites(@Nullable Map<String, String> mediaHrefRewrites) {
-		this.mediaHrefRewrites = mediaHrefRewrites;
+	public void setHrefRewrites(@Nullable Map<String, String> hrefRewrites) {
+		this.hrefRewrites = hrefRewrites;
 	}
 
 	@Nullable
 	@Override
 	public SettingsItemWriter<? extends SettingsItem> getWriter() {
 		GpxFile gpxFile = favoritesHelper.getFileHelper().asGpxFile(items);
-		if (!Algorithms.isEmpty(mediaHrefRewrites)) {
-			rewriteMediaLinks(gpxFile, mediaHrefRewrites);
+		if (!Algorithms.isEmpty(hrefRewrites)) {
+			rewriteMediaLinks(gpxFile, hrefRewrites);
 		}
 		return getGpxWriter(gpxFile);
 	}

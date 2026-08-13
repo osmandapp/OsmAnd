@@ -1,5 +1,7 @@
 package net.osmand.plus.backup;
 
+import static net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype.ATTACHED_MEDIA;
+
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
@@ -110,8 +112,7 @@ class CollectLocalFilesTask extends AsyncTask<Void, LocalFile, List<LocalFile>> 
 						createLocalFile(result, item, fileName, file, file.lastModified());
 					}
 				} else {
-					long lastModified = fileItem.getSubtype() == FileSubtype.ATTACHED_MEDIA
-							? item.getLastModifiedTime() : file.lastModified();
+					long lastModified = fileItem.getSubtype() == ATTACHED_MEDIA ? item.getLastModifiedTime() : file.lastModified();
 					createLocalFile(result, item, fileName, file, lastModified);
 				}
 			} else {

@@ -16,7 +16,6 @@ import net.osmand.plus.settings.backend.backup.items.AttachedMediaSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FavoritesSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
-import net.osmand.plus.settings.mediastorage.MediaDirType;
 import net.osmand.plus.settings.mediastorage.MediaSource;
 import net.osmand.shared.gpx.primitives.Link;
 import net.osmand.shared.media.MediaFileNameFormat;
@@ -48,7 +47,7 @@ public class AttachedMediaExportType extends AbstractExportType {
 	@NonNull
 	@Override
 	public List<?> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup) {
-		return collectSettingsItems(app, app.getFavoritesHelper().getFavoriteGroups(), !offlineBackup);
+		return collectSettingsItems(app, app.getFavoritesHelper().getFavoriteGroups(), offlineBackup);
 	}
 
 	@NonNull
@@ -88,12 +87,12 @@ public class AttachedMediaExportType extends AbstractExportType {
 
 	@NonNull
 	public static List<AttachedMediaSettingsItem> collectSettingsItems(@NonNull OsmandApplication app, @NonNull Collection<FavoriteGroup> groups) {
-		return collectSettingsItems(app, groups, false);
+		return collectSettingsItems(app, groups, true);
 	}
 
 	@NonNull
 	private static List<AttachedMediaSettingsItem> collectSettingsItems(@NonNull OsmandApplication app,
-			@NonNull Collection<FavoriteGroup> groups, boolean cloudBackup) {
+			@NonNull Collection<FavoriteGroup> groups, boolean offlineBackup) {
 		AttachedMediaDataHelper helper = new AttachedMediaDataHelper(app);
 		Map<String, AttachedMediaSettingsItem> itemsBySourceId = new LinkedHashMap<>();
 		Set<String> usedNames = collectExistingMediaFileNames(app);
@@ -102,7 +101,7 @@ public class AttachedMediaExportType extends AbstractExportType {
 			if (Algorithms.isEmpty(href) || isRemoteHref(href)) {
 				continue;
 			}
-			MediaSource source = helper.resolveExportMediaSource(href);
+			MediaSource source = helper.resolveExportMediaSource(href, offlineBackup);
 			if (source == null) {
 				continue;
 			}
@@ -112,7 +111,7 @@ public class AttachedMediaExportType extends AbstractExportType {
 				continue;
 			}
 			try {
-				String targetName = assignTargetFileName(app, source, usedNames, cloudBackup);
+				String targetName = assignTargetFileName(app, source, usedNames, offlineBackup);
 				AttachedMediaSettingsItem item = new AttachedMediaSettingsItem(app, source, targetName);
 				item.addHrefKey(href);
 				itemsBySourceId.put(source.getId(), item);
@@ -140,7 +139,7 @@ public class AttachedMediaExportType extends AbstractExportType {
 		}
 		for (SettingsItem item : items) {
 			if (item instanceof FavoritesSettingsItem favoritesItem) {
-				favoritesItem.setMediaHrefRewrites(hrefRewrites);
+				favoritesItem.setHrefRewrites(hrefRewrites);
 			}
 		}
 	}
@@ -172,22 +171,17 @@ public class AttachedMediaExportType extends AbstractExportType {
 
 	@NonNull
 	private static String assignTargetFileName(@NonNull OsmandApplication app,
-			@NonNull MediaSource source, @NonNull Set<String> usedNames, boolean cloudBackup) {
+			@NonNull MediaSource source, @NonNull Set<String> usedNames, boolean offlineBackup) {
 		String name = source.getFileName();
 		if (shouldGenerateTargetFileName(app, source, name, usedNames)) {
-			String extension = Algorithms.isEmpty(name) ? "" : Algorithms.getFileNameExtension(name);
-			if (Algorithms.isEmpty(extension) || (cloudBackup && !MediaDirType.isSupportedExtension(extension))) {
-				extension = source.getDirType().getExtension();
-			}
-			if (cloudBackup) {
-				String baseName = Algorithms.getFileNameWithoutExtension(name);
-				if (!MediaFileNameFormat.isShortLinkString(baseName)) {
-					baseName = source.getDirType().getDirName();
+			if (offlineBackup) {
+				String extension = Algorithms.getFileNameExtension(name);
+				if (Algorithms.isEmpty(extension)) {
+					extension = source.getDirType().getExtension();
 				}
-				name = MediaFileNameFormat.createUniqueGeneratedMediaFileName(
-						baseName + ".1." + extension, usedNames::contains);
-			} else {
 				name = MediaFileNameFormat.createUniqueMediaFileName(extension, usedNames::contains);
+			} else {
+				name = MediaFileNameFormat.createUniqueGeneratedMediaFileName(name, usedNames::contains);
 			}
 		}
 		usedNames.add(name);
