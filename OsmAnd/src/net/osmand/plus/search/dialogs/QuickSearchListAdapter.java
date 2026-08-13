@@ -32,7 +32,7 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
 import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.search.CityStructureItemViewHolder;
+import net.osmand.plus.search.MapObjectViewHolder;
 import net.osmand.plus.search.SearchResultViewHolder;
 import net.osmand.plus.search.WikiItemViewHolder;
 import net.osmand.plus.search.listitems.*;
@@ -466,9 +466,9 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 	private View bindAdministrativeItem(@Nullable View convertView, @NonNull QuickSearchListItem item) {
 		View view = getConvertView(convertView, R.layout.search_list_item_administrative);
-		CityStructureItemViewHolder viewHolder = (CityStructureItemViewHolder) view.getTag(R.id.view_holder_as_tag);
+		MapObjectViewHolder viewHolder = (MapObjectViewHolder) view.getTag(R.id.view_holder_as_tag);
 		if (viewHolder == null) {
-			viewHolder = new CityStructureItemViewHolder(view, updateLocationViewCache);
+			viewHolder = new MapObjectViewHolder(view, updateLocationViewCache);
 			view.setTag(R.id.view_holder_as_tag, viewHolder);
 		}
 		viewHolder.setNightMode(nightMode);

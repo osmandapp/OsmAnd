@@ -144,7 +144,7 @@ public class SearchUICore {
 			SearchResultCollection src = new SearchResultCollection(phrase, skipSorting || collection.skipSorting,
 					Math.max(spatialSearchVisibleLevel, collection.spatialSearchVisibleLevel));
 			src.addSearchResults(searchResults, false, false);
-			src.addSearchResults(collection.searchResults, resort && !src.skipSorting, removeDuplicates && !src.skipSorting);
+			src.addSearchResults(collection.searchResults, resort && !src.skipSorting, removeDuplicates);
 			return src;
 		}
 		
@@ -606,7 +606,7 @@ public class SearchUICore {
 			if (rm.totalLimit != -1 && rm.count > rm.totalLimit) {
 				collection.setUseLimit(true);
 			}
-			collection.addSearchResults(rm.getRequestResults(), resortAll && !skipResultSorting, removeDuplicates && !skipResultSorting);
+			collection.addSearchResults(rm.getRequestResults(), resortAll && !skipResultSorting, removeDuplicates);
 			if (debugMode) {
 				LOG.info("Finish shallow search <" + sphrase + "> Results=" + rm.getRequestResults().size());
 			}
@@ -768,7 +768,7 @@ public class SearchUICore {
 		if (rm.totalLimit != -1 && rm.count > rm.totalLimit) {
 			resultCollection.setUseLimit(true);
 		}
-		resultCollection.addSearchResults(rm.getRequestResults(), !skipResultSorting, !skipResultSorting);
+		resultCollection.addSearchResults(rm.getRequestResults(), !skipResultSorting, true);
 		if (phrase.getSettings().isExportObjects()) {
 			phrase.getSettings().setExportedCities(rm.getExportedCities());
 			phrase.getSettings().setExportedObjects(rm.getExportedObjects());
@@ -875,7 +875,7 @@ public class SearchUICore {
 						if (debugMode) {
 							LOG.info("Processing search results <" + phrase + ">");
 						}
-						collection.addSearchResults(rm.getRequestResults(), !skipResultSorting, !skipResultSorting);
+						collection.addSearchResults(rm.getRequestResults(), !skipResultSorting, true);
 						performanceStats.sampleMemory();
 						if (debugMode) {
 							LOG.info("Finishing search <" + phrase + "> Results=" + rm.getRequestResults().size());
