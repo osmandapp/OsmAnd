@@ -107,7 +107,7 @@ android {
 	}
 }
 
-version = System.getenv("OSMAND_SHARED_ANDROID_BINARIES_IVY_REVISION") ?: "master-snapshot"
+version = System.getenv("OSMAND_SHARED_ANDROID_BINARIES_IVY_REVISION") ?: "5.4"
 publishing {
 	repositories {
 		ivy {
