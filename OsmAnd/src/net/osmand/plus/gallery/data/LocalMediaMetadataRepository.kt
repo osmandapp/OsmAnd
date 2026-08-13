@@ -188,7 +188,7 @@ class LocalMediaMetadataRepository(
 
 	private fun extractLocation(item: MediaItem, file: File?, contentUri: Uri?): LatLon? {
 		val location = when {
-			file != null -> MediaMetadataUtils.getLocation(file, file.name)
+			file != null -> MediaMetadataUtils.getLocation(file)
 			contentUri != null -> extractContentLocation(item, contentUri)
 			else -> null
 		}
@@ -207,7 +207,7 @@ class LocalMediaMetadataRepository(
 				MediaMetadataUtils.parseMediaLocation(it.extractMetadata(METADATA_KEY_LOCATION))
 			}
 		}
-		return location ?: MediaMetadataUtils.getLocationFromLegacyFileName(item.title)
+		return location ?: MediaMetadataUtils.getLocationFromFileName(item.title)
 	}
 
 	private fun resolveFile(item: MediaItem): File? {
