@@ -5327,4 +5327,19 @@
     <string name="astro_eclipse_phase_partial">parta</string>
     <string name="astro_eclipse_not_visible_here">neobservebla el la map-centro • altitudo de Suno: %1$.1f°</string>
     <string name="astro_eclipse_not_visible_below_horizon">neobservebla el la map-centro • Suno sub la horizonto (%1$.1f°)</string>
+    <string name="astro_eclipse_local_status">%1$s • %2$.1f%% eklipsita • altitudo de Suno: %3$.1f°</string>
+    <string name="astro_eclipse_below_horizon">%1$s • sub la horizonto (%2$.1f°)</string>
+    <string name="astro_eclipse_calculating_local_state">Kalkulado de videblo en la map-centro…</string>
+    <string name="astro_eclipse_timeline_description">Proceso de suna eklipso. Ŝovumu por transsalti al ŝajnigata tempo.</string>
+    <string name="astro_eclipse_start">komenco</string>
+    <string name="astro_eclipse_maximum">maksimumo</string>
+    <string name="astro_eclipse_end">fino</string>
+    <string name="astro_show_eclipse_on_map_loading">Kalkulado de ombro de eklipso…</string>
+    <string name="astro_eclipse_map_error">Ne povas kalkuli ombron de eklipso nun.</string>
+    <string name="astro_eclipse_safety_warning">Neniam rigardu senpere al la Suno sen konforma protekto al okuloj. Tempoj de eklipsoj estas proksimumaj.</string>
+    <string name="duplicate_map">Duplikata mapo</string>
+    <string name="duplicate_map_standard_exists_desc">Vi jam havas la norman mapon de %1$s. Elŝuti la nur-vojan mapon duobligos la datumojn kaj povos etigi efikecon de la aplikaĵo.\n\nAnstataŭigo malebligos al vi serĉi per adreso kaj forigos datumojn pri interesejoj ampleksataj en la norma mapo.</string>
+    <string name="duplicate_map_road_only_exists_desc">Vi jam havas la nur-vojan mapon de %1$s. Elŝuti la norman mapon duobligos la datumojn kaj povos etigi efikecon de la aplikaĵo.</string>
+    <string name="duplicate_map_replace_with_standard">Anstataŭigi per norma</string>
+    <string name="duplicate_map_replace_with_road">Anstataŭigi per nur-voja</string>
 </resources>
