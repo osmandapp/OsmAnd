@@ -209,6 +209,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             String description = article.getDescription();
             String title = FileUtils.isValidFileName(description) ? description : article.getTitle();
             gpxFile = new GpxFile(title, article.getLang(), article.getContent());
+            gpxFile.setAuthor(Version.getFullVersion(app));
         }
 
         if (gpxFileExtensions.containsKey(TAG_URL) && gpxFileExtensions.containsKey(TAG_URL_TEXT)) {

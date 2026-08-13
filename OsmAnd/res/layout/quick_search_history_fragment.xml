@@ -104,9 +104,7 @@
 			android:layout_height="wrap_content"
 			android:background="?attr/activity_background_color"
 			android:orientation="vertical"
-			android:paddingStart="@dimen/content_padding"
 			android:paddingTop="@dimen/content_padding_small"
-			android:paddingEnd="@dimen/content_padding"
 			android:paddingBottom="@dimen/content_padding_small">
 
 			<net.osmand.plus.search.dialogs.ChipsLayout

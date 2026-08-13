@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
@@ -181,7 +180,6 @@ public abstract class ConfigureMapOptionFragment extends BaseFullScreenFragment 
 
 	protected void setupToolBar(@NonNull View view) {
 		View appbar = view.findViewById(R.id.appbar);
-		ViewCompat.setElevation(appbar, 5.0f);
 
 		TextView title = appbar.findViewById(R.id.title);
 		title.setText(getToolbarTitle());

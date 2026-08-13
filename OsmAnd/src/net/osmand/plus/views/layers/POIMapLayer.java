@@ -1,6 +1,7 @@
 package net.osmand.plus.views.layers;
 
 import static net.osmand.core.android.MapRendererContext.SELECTED_POI_SECTION;
+import static net.osmand.core.android.MapRendererContext.POI_SYMBOL_SECTION;
 import static net.osmand.core.android.MapRendererContext.TOP_PLACES_POI_SECTION;
 import static net.osmand.data.PointDescription.POINT_TYPE_POI;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
@@ -102,6 +103,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	private MapTextLayer mapTextLayer;
 
 	private POITileProvider poiTileProvider;
+	private MapMarkersCollection customObjectsCollection;
 	private float textScale = 1f;
 	private boolean nightMode;
 	private boolean textVisible;
@@ -260,6 +262,14 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			@NonNull
 			private Set<Amenity> collectDisplayedPoints(@NonNull QuadRect latLonBounds, int zoom, @NonNull List<Amenity> res) {
 				Set<Amenity> displayedPoints = new HashSet<>();
+				if (customObjectsDelegate != null) {
+					for (Amenity amenity : res) {
+						if (shouldDraw(amenity, zoom)) {
+							displayedPoints.add(amenity);
+						}
+					}
+					return displayedPoints;
+				}
 
 				int minTileX = (int) MapUtils.getTileNumberX(zoom, latLonBounds.left);
 				int maxTileX = (int) MapUtils.getTileNumberX(zoom, latLonBounds.right);
@@ -348,7 +358,6 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				topPlacesBitmaps.keySet().retainAll(places.keySet());
 			}
 			topPlacesList = topPlaces.values();
-			LOG.debug("updateTopPlaces: Updated " + topPlacesList.size() + " top places for the current view");
 		}
 		if (topPlacesList != null) {
 			if (!topPlacesList.isEmpty()) {
@@ -376,7 +385,6 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			return false;
 		});
 
-		LOG.debug("fetchImages: Preparing to fetch images for " + places.size() + " top places");
 		for (Amenity place : places) {
 			Long placeId = place.getId();
 			String url = place.getWikiIconUrl();
@@ -419,7 +427,6 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 	private void cancelLoadingImages() {
 		if (loadingImages != null) {
-			LOG.debug("cancelLoadingImages: Cancelling all top places image load tasks");
 			loadingImages.values().forEach(LoadingImage::cancel);
 			loadingImages = null;
 			topPlaces = null;
@@ -462,7 +469,6 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				break;
 			}
 		}
-		LOG.debug("obtainTopPlacesToDisplay: Filtered " + res.size() + " top places to display out of " + places.size() + " total places");
 		return res;
 	}
 
@@ -475,7 +481,6 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 		List<Amenity> places = topPlaces != null ? new ArrayList<>(topPlaces.values()) : null;
 		if (places == null) {
-			LOG.debug("updateTopPlacesCollection: clearing top places markers collection (places list is null)");
 			clearMapMarkersCollections();
 			return;
 		}
@@ -514,7 +519,6 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				mapMarkersCollection.removeMarker(existingMapPoints.get(i));
 			}
 		}
-		LOG.debug("updateTopPlacesCollection: Displaying " + mapPlaces.size() + " top places on map");
 		for (MapTopPlace place : mapPlaces) {
 			if (place.alreadyExists) {
 				continue;
@@ -532,6 +536,54 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 					.buildAndAddToCollection(mapMarkersCollection);
 		}
 		mapRenderer.addSymbolsProvider(TOP_PLACES_POI_SECTION, mapMarkersCollection);
+	}
+
+	private void updateCustomObjectsCollection(@NonNull List<Amenity> amenities) {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer == null) {
+			return;
+		}
+		clearCustomObjectsCollection();
+		customObjectsCollection = new MapMarkersCollection();
+		int markerId = 1;
+		for (Amenity amenity : amenities) {
+			LatLon location = amenity.getLocation();
+			if (location == null) {
+				continue;
+			}
+			PointI position = NativeUtilities.getPoint31FromLatLon(
+					location.getLatitude(), location.getLongitude());
+			String id = amenity.getGpxIcon();
+			if (id == null) {
+				id = RenderingIcons.getIconNameForAmenity(app, amenity);
+			}
+			Integer iconId = id != null ? RenderingIcons.getResId(id) : null;
+			PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(
+					getContext(), getColor(amenity), true, iconId != null ? iconId : R.drawable.mx_special_marker);
+			pointImageDrawable.setAlpha(0.8f);
+			Bitmap bitmap = app.getPoiTypes().isOtherCategory(amenity.getType())
+					? pointImageDrawable.getSmallMergedBitmap(getTextScale())
+					: pointImageDrawable.getBigMergedBitmap(getTextScale(), false);
+
+			MapMarkerBuilder mapMarkerBuilder = new MapMarkerBuilder();
+			mapMarkerBuilder.setIsAccuracyCircleSupported(false)
+					.setMarkerId(markerId++)
+					.setBaseOrder(getPointsOrder())
+					.setPinIcon(NativeUtilities.createSkImageFromBitmap(bitmap))
+					.setPosition(position)
+					.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.CenterVertical)
+					.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal)
+					.buildAndAddToCollection(customObjectsCollection);
+		}
+		mapRenderer.addSymbolsProvider(POI_SYMBOL_SECTION, customObjectsCollection);
+	}
+
+	private void clearCustomObjectsCollection() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null && customObjectsCollection != null) {
+			mapRenderer.removeSymbolsProvider(customObjectsCollection);
+		}
+		customObjectsCollection = null;
 	}
 
 	@Override
@@ -701,6 +753,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		Set<PoiUIFilter> routeTrackFilters = travelRendererHelper.getRouteTrackFilters();
 		String routeArticlePointsFilterByName = routeArticlePointsFilter != null ? routeArticlePointsFilter.getFilterByName() : null;
 		DataSourceType wikiDataSource = app.getSettings().WIKI_DATA_SOURCE_TYPE.get();
+		boolean customObjectsChanged = customObjectsDelegate != null && customObjectsDelegate.isChanged();
 		boolean dataChanged = false;
 		if (this.filters != selectedPoiFilters
 				|| this.wikiDataSource != wikiDataSource
@@ -713,6 +766,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				|| this.routeArticlePointsFilter != routeArticlePointsFilter
 				|| this.routeTrackFilters != routeTrackFilters
 				|| this.fileVisibilityChanged
+				|| customObjectsChanged
 				|| !Algorithms.stringsEqual(this.routeArticlePointsFilterByName, routeArticlePointsFilterByName)) {
 			this.filters = selectedPoiFilters;
 			this.wikiDataSource = wikiDataSource;
@@ -727,11 +781,27 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			this.routeArticlePointsFilterByName = routeArticlePointsFilterByName;
 			this.fileVisibilityChanged = false;
 			data.clearCache();
+			if (customObjectsDelegate != null) {
+				customObjectsDelegate.acceptChanges();
+			}
 			dataChanged = true;
 		}
 		int zoom = tileBox.getZoom();
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
+			if (customObjectsDelegate != null) {
+				clearPoiTileProvider();
+				clearMapMarkersCollections();
+				cancelLoadingImages();
+				List<Amenity> customObjects = customObjectsDelegate.getMapObjects();
+				updateVisiblePlaces(customObjects, tileBox.getLatLonBounds());
+				if (customObjectsChanged || mapActivityInvalidated || customObjectsCollection == null) {
+					updateCustomObjectsCollection(customObjects);
+				}
+				mapActivityInvalidated = false;
+				return;
+			}
+			clearCustomObjectsCollection();
 			if (shouldDraw(zoom)) {
 				float textScale = app.getOsmandMap().getTextScale();
 				boolean textScaleChanged = this.textScale != textScale;
@@ -747,7 +817,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 						|| textVisibleChanged || mapActivityInvalidated) {
 					clearPoiTileProvider();
 					clearMapMarkersCollections();
-					if (!collectFilters().isEmpty()) {
+					if (!collectFilters().isEmpty() || customObjectsDelegate != null) {
 						float density = view.getDensity();
 						TextRasterizer.Style textStyle = MapTextLayer.getTextStyle(getContext(),
 								nightMode, textScale, density);
@@ -879,6 +949,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	protected void cleanupResources() {
 		super.cleanupResources();
 		imageCircleBitmap = null;
+		clearCustomObjectsCollection();
 		clearSelectedTopPlaceCollection();
 		clearPoiTileProvider();
 	}

@@ -408,13 +408,18 @@ public class StreetNameWidget extends MapWidget {
 	@Override
 	protected boolean updateVisibility(boolean visible) {
 		boolean updatedVisibility = super.updateVisibility(visible);
-		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(getMapActivity());
-		if (updatedVisibility && widgetType.getPanel(settings, layoutMode) == WidgetsPanel.TOP) {
+		if (updatedVisibility && isVerticalWidget()) {
 			MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
 			if (mapInfoLayer != null) {
-				mapInfoLayer.updateVerticalPanels();
+				mapInfoLayer.updateRow(this);
 			}
-			mapActivity.updateStatusBarColor();
+			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(getMapActivity());
+			if (widgetType.getPanel(settings, layoutMode) == WidgetsPanel.TOP) {
+				if (mapInfoLayer != null) {
+					mapInfoLayer.updateVerticalPanels();
+				}
+				mapActivity.updateStatusBarColor();
+			}
 		}
 		return updatedVisibility;
 	}

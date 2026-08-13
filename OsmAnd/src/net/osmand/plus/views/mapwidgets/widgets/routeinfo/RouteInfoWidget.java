@@ -115,14 +115,7 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 		renderedWidgetSize = getWidgetSize();
 		renderedNightMode = nightMode;
 		collectViews();
-		int color = ColorUtilities.getSecondaryActiveColor(app, nightMode);
-		Drawable normal = UiUtilities.createTintedDrawable(app, R.drawable.rectangle_rounded_small, color);
-
-		int rippleDrawableId = nightMode ? R.drawable.ripple_solid_dark_3dp : R.drawable.ripple_solid_light_3dp;
-		Drawable selected = AppCompatResources.getDrawable(app, rippleDrawableId);
-
-		Drawable drawable = UiUtilities.getLayeredIcon(normal, selected);
-		AndroidUtils.setBackground(container.findViewById(R.id.button_body), drawable);
+		updateExpandButtonBackground(getPanelAppearance());
 		updateWidgetRowView();
 
 		View buttonTappableArea = container.findViewById(R.id.button_tappable_area);
@@ -153,6 +146,23 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 		View blocksDivider = container.findViewById(R.id.blocks_divider);
 		View secondaryBlock = container.findViewById(R.id.secondary_block);
 		AndroidUiHelper.setVisibility(secondaryBlockVisible, blocksDivider, secondaryBlock);
+	}
+
+	private void updateExpandButtonBackground(@Nullable ResolvedPanelAppearance appearance) {
+		View buttonBody = getView().findViewById(R.id.button_body);
+		if (buttonBody == null) {
+			return;
+		}
+		Integer surfaceColor = appearance != null ? appearance.getSurfaceColor() : null;
+		int color = surfaceColor != null
+				? surfaceColor
+				: ColorUtilities.getSecondaryActiveColor(app, nightMode);
+		Drawable normal = UiUtilities.createTintedDrawable(app, R.drawable.rectangle_rounded_small, color);
+
+		int rippleDrawableId = nightMode ? R.drawable.ripple_solid_dark_3dp : R.drawable.ripple_solid_light_3dp;
+		Drawable selected = AppCompatResources.getDrawable(app, rippleDrawableId);
+
+		AndroidUtils.setBackground(buttonBody, UiUtilities.getLayeredIcon(normal, selected));
 	}
 
 	private void collectViews() {
@@ -404,6 +414,7 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 
 	private void applyRouteInfoAppearance(@NonNull ResolvedPanelAppearance appearance) {
 		PanelAppearanceApplier.applyBackground(getView(), appearance);
+		updateExpandButtonBackground(appearance);
 		PanelAppearanceApplier.applyPrimaryText(tvPrimaryLine1, appearance);
 		PanelAppearanceApplier.applySecondaryText(tvSecondaryLine1, appearance);
 		PanelAppearanceApplier.applyPrimaryText(tvPrimaryLine2, appearance);
@@ -431,7 +442,7 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 
 	@NonNull
 	public WidgetSize getWidgetSize() {
-		return resolveWidgetSize(getWidgetSizePref().get());
+		return getWidgetSizePref().get();
 	}
 
 	@NonNull

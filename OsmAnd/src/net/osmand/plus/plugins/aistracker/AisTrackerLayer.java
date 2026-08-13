@@ -84,6 +84,7 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 	private static final float COLLISION_PADDING_DP = 4f;
 	private static final long RENDER_UPDATE_INTERVAL_MS = 200;
 	private static final double ZOOM_EPSILON = 0.02;
+	private static final boolean SHOW_RENDER_LOGS = false;
 
 	private final AisTrackerPlugin plugin = PluginsHelper.requirePlugin(AisTrackerPlugin.class);
 	private final Paint bitmapPaint = new Paint();
@@ -761,7 +762,11 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 		renderedRecords = new LinkedHashMap<>(selection.desired);
 		peakDrawableCount = Math.max(peakDrawableCount, objectDrawables.size());
 
-		if (LOG.isDebugEnabled()) {
+		showLog(selection, actualDesired, previous);
+	}
+
+	private void showLog(SelectionResult selection, Set<Integer> actualDesired, Set<Integer> previous) {
+		if (SHOW_RENDER_LOGS) {
 			Set<Integer> actual = new HashSet<>(actualDesired);
 			Set<Integer> retained = new HashSet<>(previous);
 			retained.retainAll(actual);

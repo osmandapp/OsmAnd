@@ -74,6 +74,7 @@ class GallerySortBarView @JvmOverloads constructor(
 		val textColor = colorAttr(android.R.attr.textColorPrimary)
 		val secondaryTextColor = colorAttr(android.R.attr.textColorSecondary)
 		val iconColor = colorAttr(R.attr.default_icon_color)
+		val controlColor = colorAttr(R.attr.secondary_icon_color)
 		val horizontalPadding = with(LocalDensity.current) { horizontalContentPaddingPx.toDp() }
 		val menuOptions = sortModes.mapIndexed { index, mode ->
 			val nextMode = sortModes.getOrNull(index + 1)
@@ -138,7 +139,8 @@ class GallerySortBarView @JvmOverloads constructor(
 						text = textColor,
 						secondaryText = secondaryTextColor,
 						icon = iconColor,
-						selected = iconColor
+						selected = iconColor,
+						control = controlColor
 					),
 					selectionStyle = OsmAndDropdownMenuSelectionStyle.CHECKMARK
 				)

@@ -35,10 +35,6 @@ public class AttachedMediaSettingsItem extends FileSettingsItem {
 		this.source = source;
 		this.subtype = FileSubtype.ATTACHED_MEDIA;
 		this.rewrittenHref = LinkMediaFactory.createInternalMediaUri(targetFileName);
-
-		for (String key : source.getHrefKeys()) {
-			addHrefKey(key);
-		}
 	}
 
 	@NonNull
@@ -75,17 +71,26 @@ public class AttachedMediaSettingsItem extends FileSettingsItem {
 		return true;
 	}
 
+	@Override
+	public void delete() {
+		if (source.isAppManaged()) {
+			try {
+				source.delete();
+			} catch (IOException e) {
+				SettingsHelper.LOG.error("Failed to delete attached media source: " + source.getId(), e);
+			}
+		} else {
+			super.delete();
+		}
+	}
+
 	@DrawableRes
 	public int getIconId() {
-		switch (source.getDirType()) {
-			case AUDIO:
-				return R.drawable.ic_action_micro_dark;
-			case VIDEO:
-				return R.drawable.ic_action_video_dark;
-			case PHOTO:
-			default:
-				return R.drawable.ic_action_photo_dark;
-		}
+		return switch (source.getDirType()) {
+			case AUDIO -> R.drawable.ic_action_micro_dark;
+			case VIDEO -> R.drawable.ic_action_video_dark;
+			default -> R.drawable.ic_action_photo_dark;
+		};
 	}
 
 	@NonNull

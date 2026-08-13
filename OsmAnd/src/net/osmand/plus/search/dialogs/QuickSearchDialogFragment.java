@@ -65,6 +65,7 @@ import net.osmand.plus.plugins.accessibility.NavigationInfo;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.poi.RearrangePoiFiltersFragment;
 import net.osmand.plus.resources.RegionAddressRepository;
+import net.osmand.plus.search.MapObjectViewHolder;
 import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
 import net.osmand.plus.search.ShareHistoryAsyncTask;
@@ -89,6 +90,7 @@ import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.CustomMapObjects;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.search.SearchUICore;
@@ -209,6 +211,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private boolean expired;
 	private boolean poiFilterApplied;
 	private boolean fabVisible;
+	private boolean spatialSearchMapObjectsApplied;
 	private boolean sendEmptySearchBottomBarVisible;
 	private boolean runSearchFirstTime;
 	private boolean phraseDefined;
@@ -219,6 +222,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private String currentSearchFilterId;
 	private String currentCategoryFilterParams;
 	private final List<String> selectedResultPoiTypeNames = new ArrayList<>();
+	private final List<String> lastResultPoiTypeNames = new ArrayList<>();
+	private boolean preservePoiTypeChips;
 	private List<SearchResult> nearestCities;
 	private LatLon storedOriginalLocation;
 
@@ -578,18 +583,105 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			contextMenu.close();
 			contextMenu.closeActiveToolbar();
 
-			showToolbar(filter, title);
+			List<QuickSearchListItem> searchItems = getExploreSpatialSearchItems();
+			showToolbar(filter, title, searchItems == null);
+			if (searchItems != null) {
+				applySpatialSearchMapObjects(activity, searchItems);
+			}
 			activity.updateStatusBarColor();
 			activity.refreshMap();
 
 			if (filter != null) {
 				FragmentManager manager = activity.getSupportFragmentManager();
-				ExplorePlacesFragment.Companion.showInstance(manager, filter);
+				if (searchItems != null) {
+					ExplorePlacesFragment.Companion.showInstance(manager, filter, searchItems);
+				} else {
+					ExplorePlacesFragment.Companion.showInstance(manager, filter);
+				}
 			}
 
 			hide();
 			applySearchAroundMapPosition(activity);
 		}
+	}
+
+	@Nullable
+	private List<QuickSearchListItem> getExploreSpatialSearchItems() {
+		SearchResultCollection collection = unfilteredResultCollection != null
+				? unfilteredResultCollection
+				: getResultCollection();
+		if (collection == null || !collection.isSkipSorting()) {
+			return null;
+		}
+		if (!selectedResultPoiTypeNames.isEmpty()) {
+			collection = getFilteredResultCollection(collection);
+		}
+		List<SearchResult> results = collection.getVisibleSpatialSearchResults();
+		List<QuickSearchListItem> items = new ArrayList<>();
+		if (!Algorithms.isEmpty(results)) {
+			for (SearchResult result : results) {
+				if (result.object instanceof MapObject) {
+					items.add(new QuickSearchListItem(app, result));
+				}
+			}
+		}
+		return items;
+	}
+
+	private void applySpatialSearchMapObjects(@NonNull MapActivity activity,
+	                                          @NonNull List<QuickSearchListItem> searchItems) {
+		List<Amenity> amenities = new ArrayList<>();
+		for (QuickSearchListItem item : searchItems) {
+			SearchResult searchResult = item.getSearchResult();
+			Object object = searchResult.object;
+			if (object instanceof Amenity amenity) {
+				amenities.add(amenity);
+			} else if (object instanceof MapObject mapObject) {
+				Amenity amenity = createSpatialSearchMapAmenity(searchResult, mapObject);
+				if (amenity != null) {
+					amenities.add(amenity);
+				}
+			}
+		}
+		if (activity.getMapLayers().getPoiMapLayer().customObjectsDelegate == null) {
+			activity.getMapLayers().getPoiMapLayer().customObjectsDelegate = new CustomMapObjects<>();
+		}
+		activity.getMapLayers().getPoiMapLayer().setCustomMapObjects(amenities);
+		spatialSearchMapObjectsApplied = true;
+	}
+
+	@Nullable
+	private Amenity createSpatialSearchMapAmenity(@NonNull SearchResult searchResult,
+	                                              @NonNull MapObject mapObject) {
+		LatLon location = searchResult.location != null ? searchResult.location : mapObject.getLocation();
+		if (location == null) {
+			return null;
+		}
+		Amenity amenity = new Amenity();
+		amenity.setLocation(location);
+		amenity.setName(QuickSearchListItem.getName(app, searchResult));
+		amenity.setType(app.getPoiTypes().getOtherPoiCategory());
+		amenity.setSubType("");
+		amenity.setAdditionalInfo(Amenity.GPX_ICON, getSpatialSearchMapIconName(searchResult));
+		return amenity;
+	}
+
+	@NonNull
+	private String getSpatialSearchMapIconName(@NonNull SearchResult searchResult) {
+		return searchResult.objectType == ObjectType.HOUSE
+				? "ic_action_building"
+				: "ic_action_street_name";
+	}
+
+	private void clearSpatialSearchMapObjects() {
+		MapActivity activity = getMapActivity();
+		if (!spatialSearchMapObjectsApplied || activity == null) {
+			return;
+		}
+		activity.getMapLayers().getPoiMapLayer().setCustomMapObjects(Collections.emptyList());
+		activity.getMapLayers().getPoiMapLayer().customObjectsDelegate = null;
+		spatialSearchMapObjectsApplied = false;
+		activity.refreshMap();
 	}
 
 	private void applySearchAroundMapPosition(@NonNull MapActivity activity) {
@@ -712,9 +804,14 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	public void showToolbar(@Nullable PoiUIFilter filter, String title) {
+		showToolbar(filter, title, true);
+	}
+
+	private void showToolbar(@Nullable PoiUIFilter filter, String title, boolean applyPoiFilter) {
 		toolbarVisible = true;
 		toolbarTitle = title;
-		if (filter != null) {
+		if (filter != null && applyPoiFilter) {
+			clearSpatialSearchMapObjects();
 			app.getPoiFilters().replaceSelectedPoiFilters(filter);
 		}
 		toolbarController.setSelectedFilter(filter);
@@ -723,6 +820,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	public void hideToolbar() {
+		clearSpatialSearchMapObjects();
 		toolbarVisible = false;
 		getMapActivity().hideTopToolbar(toolbarController);
 	}
@@ -780,12 +878,19 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		paused = false;
 		cancelPrev = false;
 		hidden = false;
+		refreshSearchContentAfterShow();
 		addressSearchStack.clear();
 		if (interruptedSearch) {
 			addMoreButton(true);
 			interruptedSearch = false;
 		}
 		visibilityChanged(true);
+	}
+
+	private void refreshSearchContentAfterShow() {
+		updateClearButtonAndHint();
+		updateClearButtonVisibility(true);
+		updateToolbarButton();
 	}
 
 	public void hide() {
@@ -814,6 +919,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	public void closeSearch() {
+		clearSpatialSearchMapObjects();
 		app.getPoiFilters().restoreSelectedPoiFilters();
 		dismissAllowingStateLoss();
 	}
@@ -942,7 +1048,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				true,
 				false,
 				ChipsLayout.TextColorStyle.PRIMARY,
-				ChipsLayout.IconColorStyle.DEFAULT,
+				ChipsLayout.IconColorStyle.PRIMARY,
 				0,
 				new ArrayList<>(),
 				false,
@@ -1024,7 +1130,10 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			}
 		}
 		filterChips.updateContent(filterChipItems);
-		searchResultPoiTypesChips.updateContent(topChips);
+		searchResultPoiTypesChips.setContentEnabled(!searching);
+		if (!searching) {
+			searchResultPoiTypesChips.updateContent(topChips);
+		}
 		boolean filterChipsVisible = searchVisible && hasVisibleChip(filterChipItems);
 		filterChips.setVisibility(filterChipsVisible ? View.VISIBLE : View.GONE);
 		boolean poiTypesChipsVisible = searchVisible && !topChips.isEmpty();
@@ -1065,10 +1174,17 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 	@NonNull
 	private List<String> getPoiTypesChipsSource() {
-		if (isSearchViewVisible()) {
-			return getSearchResultPoiTypeNames();
+		if (!isSearchViewVisible()) {
+			lastResultPoiTypeNames.clear();
+			return new ArrayList<>();
 		}
-		return new ArrayList<>();
+		if (preservePoiTypeChips) {
+			return new ArrayList<>(lastResultPoiTypeNames);
+		}
+		List<String> poiTypeNames = getSearchResultPoiTypeNames();
+		lastResultPoiTypeNames.clear();
+		lastResultPoiTypeNames.addAll(poiTypeNames);
+		return poiTypeNames;
 	}
 
 	@NonNull
@@ -1079,7 +1195,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			return poiTypeNames;
 		}
 		Map<String, Integer> uniquePoiTypes = new LinkedHashMap<>();
-		for (SearchResult result : collection.getCurrentSearchResults()) {
+		for (SearchResult result : collection.getVisibleSpatialSearchResults()) {
 			String poiTypeName = getPoiTypeNameForResult(result);
 			if (!Algorithms.isEmpty(poiTypeName)) {
 				Integer count = uniquePoiTypes.get(poiTypeName);
@@ -1096,17 +1212,14 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 	@Nullable
 	private String getPoiTypeNameForResult(@NonNull SearchResult result) {
-		AbstractPoiType poiType = getPoiTypeForResult(result);
-		return poiType != null ? poiType.getTranslation() : null;
-	}
-
-	@Nullable
-	private AbstractPoiType getPoiTypeForResult(@NonNull SearchResult result) {
 		Object object = result.object;
 		if (object instanceof Amenity amenity) {
-			return getPoiTypeForAmenity(amenity);
+			AbstractPoiType poiType = getPoiTypeForAmenity(amenity);
+			return poiType != null ? poiType.getTranslation() : null;
 		} else if (object instanceof PoiType type) {
-			return type;
+			return type.getTranslation();
+		} else if(object instanceof MapObject mapObject) {
+			return MapObjectViewHolder.getTypeName(app, mapObject);
 		}
 		return null;
 	}
@@ -1143,6 +1256,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private void applyResultPoiTypeFilters() {
 		SearchResultCollection source = unfilteredResultCollection != null ? unfilteredResultCollection : getResultCollection();
 		if (source == null) {
+			updateTopFilterChips();
 			return;
 		}
 		unfilteredResultCollection = source;
@@ -1422,7 +1536,17 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	private void searchAroundMyLocation() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null) {
+			return;
+		}
+		if (!OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
+			OsmAndLocationProvider.requestFineLocationPermissionIfNeeded(mapActivity);
+			return;
+		}
+		startLocationUpdate();
 		if (location == null) {
+			app.showToastMessage(R.string.unknown_location);
 			return;
 		}
 		useMapCenter = false;
@@ -1433,7 +1557,6 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		updateSearchAroundLocation(centerLatLon);
 		updateClearButtonAndHint();
 		updateClearButtonVisibility(true);
-		startLocationUpdate();
 		updateToolbarButton();
 		rerunCurrentSearchQuery();
 	}
@@ -1803,11 +1926,23 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private void setResultCollection(SearchResultCollection resultCollection, boolean preserveSelectedPoiTypeNames) {
 		if (resultCollection == null) {
 			unfilteredResultCollection = null;
+			preservePoiTypeChips = preserveSelectedPoiTypeNames || shouldPreservePoiTypeChipsDuringSearch();
 			if (!preserveSelectedPoiTypeNames) {
 				selectedResultPoiTypeNames.clear();
 			}
+			if (!preservePoiTypeChips) {
+				lastResultPoiTypeNames.clear();
+			}
 		}
 		searchHelper.setResultCollection(resultCollection);
+	}
+
+	private boolean shouldPreservePoiTypeChipsDuringSearch() {
+		return searching && isSearchViewVisible() && !lastResultPoiTypeNames.isEmpty();
+	}
+
+	private boolean shouldPreservePoiTypeChipsForNewSearch(@NonNull String text) {
+		return !Algorithms.isEmpty(text) && isSearchViewVisible() && !lastResultPoiTypeNames.isEmpty();
 	}
 
 	public SearchResultCollection getResultCollection() {
@@ -2299,6 +2434,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		foundPartialLocation = false;
 		if (!searchMore) {
 			unfilteredResultCollection = null;
+			preservePoiTypeChips = preserveSelectedPoiTypeNames || shouldPreservePoiTypeChipsForNewSearch(text);
 			if (!preserveSelectedPoiTypeNames) {
 				selectedResultPoiTypeNames.clear();
 			}
@@ -2390,7 +2526,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 						SearchPhrase regionPhrase = object.requiredSearchPhrase;
 						boolean spatialSearchApi = isSpatialSearchApi(regionResultApi);
 						regionResultCollection = new SearchResultCollection(regionPhrase, spatialSearchApi)
-								.addSearchResults(results, !spatialSearchApi, !spatialSearchApi);
+								.addSearchResults(results, !spatialSearchApi, true);
 						showRegionResults(object.file, regionPhrase, regionResultCollection, resultListener);
 						break;
 					case PARTIAL_LOCATION:
@@ -2439,14 +2575,14 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				}
 				boolean spatialSearchApi = isSpatialSearchApi(searchApi);
 				SearchResultCollection apiCollection = new SearchResultCollection(phrase, spatialSearchApi);
-				apiCollection.addSearchResults(apiResults, !spatialSearchApi, !spatialSearchApi);
+				apiCollection.addSearchResults(apiResults, !spatialSearchApi, true);
 				boolean append = getResultCollection() != null;
 				if (append) {
 					if (isDebugMode) {
 						LOG.info("UI >> Appending API results <" + phrase + "> API=<" + searchApi + "> Result collection=" + getSearchResultCollectionFormattedSize(getResultCollection()));
 					}
 					setResultCollection(getResultCollection().combineWithCollection(apiCollection,
-							!spatialSearchApi, !spatialSearchApi));
+							!spatialSearchApi, true));
 					if (isDebugMode) {
 						LOG.info("UI >> API results appended <" + phrase + "> API=<" + searchApi + "> Result collection=" + getSearchResultCollectionFormattedSize(getResultCollection()));
 					}
@@ -2690,6 +2826,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	private void onSearchFinished(SearchPhrase phrase) {
+		preservePoiTypeChips = false;
 		SearchResultCollection collection = unfilteredResultCollection != null ? unfilteredResultCollection : getResultCollection();
 		if (collection != null && retainAvailableResultPoiTypeFilters(collection)) {
 			SearchResultCollection visibleResults = selectedResultPoiTypeNames.isEmpty()
@@ -2697,6 +2834,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 					: getFilteredResultCollection(collection);
 			renderSearchResult(visibleResults, false);
 		}
+		updateTopFilterChips();
 		if (!PluginsHelper.onSearchFinished(this, phrase, isResultEmpty())) {
 			addMoreButton(isSearchMoreAvailable(phrase));
 			addSpatialSearchOnWebButton();
@@ -2990,8 +3128,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		float lastHeading = heading != null ? heading : 99;
 		heading = value;
 		if (Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
-			Location location = this.location;
-			app.runInUIThread(() -> updateLocationUI(location, value));
+			app.runInUIThread(() -> updateVisibleContent(value));
 		} else {
 			heading = lastHeading;
 		}
@@ -3004,13 +3141,13 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	private void updateLocationUI(Location location, Float heading) {
-		if (shouldUpdateContent(location, this.location)) {
+		if (shouldUpdateContentForLocation(location, this.location)) {
 			this.location = location;
 			updateContent(heading);
 		}
 	}
 
-	private boolean shouldUpdateContent(Location a, Location b) {
+	private boolean shouldUpdateContentForLocation(Location a, Location b) {
 		return b == null || a == null
 				|| !MapUtils.areLatLonEqual(a.getLatitude(), a.getLongitude(), b.getLatitude(), b.getLongitude())
 				|| Math.abs(MapUtils.degreesDiff(a.getBearing(), b.getBearing())) > MIN_COMPASS_DEGREES_TO_UPDATE_CONTENT;
@@ -3018,6 +3155,10 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 	public void updateContent(@Nullable Float heading) {
 		updateToolbarButton();
+		updateVisibleContent(heading);
+	}
+
+	private void updateVisibleContent(@Nullable Float heading) {
 		if (!paused && !cancelPrev) {
 			if (mainSearchFragment != null && searchView.getVisibility() == View.VISIBLE) {
 				mainSearchFragment.updateLocation(heading);

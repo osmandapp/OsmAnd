@@ -35,6 +35,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.AbstractComposeView
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -168,6 +169,7 @@ class ChipsLayout @JvmOverloads constructor(
 	private var appMode by mutableStateOf<ApplicationMode?>(null)
 	private var themeUsageContext by mutableStateOf(ThemeUsageContext.APP)
 	private var nightMode by mutableStateOf(resolveNightMode())
+	private var chipsContentEnabled by mutableStateOf(true)
 	private var chipClickListener: OnChipClickListener? = null
 	private var dropdownItemClickListener: OnDropdownItemClickListener? = null
 
@@ -196,11 +198,19 @@ class ChipsLayout @JvmOverloads constructor(
 		dropdownItemClickListener = listener
 	}
 
+	fun setContentEnabled(enabled: Boolean) {
+		chipsContentEnabled = enabled
+		if (!enabled) {
+			expandedChipId = null
+		}
+	}
+
 	@Composable
 	override fun Content() {
 		ObserveThemeChanges()
 		ChipsLayoutContent(
 			items = items,
+			contentEnabled = chipsContentEnabled,
 			nightMode = nightMode,
 			expandedChipId = expandedChipId,
 			onExpandedChipChanged = { expandedChipId = it },
@@ -249,6 +259,7 @@ class ChipsLayout @JvmOverloads constructor(
 @Composable
 private fun ChipsLayoutContent(
 	items: List<ChipsLayout.ChipData>,
+	contentEnabled: Boolean,
 	nightMode: Boolean,
 	expandedChipId: String?,
 	onExpandedChipChanged: (String?) -> Unit,
@@ -257,10 +268,16 @@ private fun ChipsLayoutContent(
 ) {
 	val activityBackground = colorAttr(R.attr.activity_background_color)
 	val listBackground = colorAttr(R.attr.list_background_color)
+	val chipBackground = colorResource(if (nightMode) R.color.chip_bg_dark else R.color.chip_bg_light)
+	val chipOutlineColor = colorResource(
+		if (nightMode) R.color.btn_outline_secondary_dark else R.color.btn_outline_secondary_light
+	)
 	val dividerColor = colorAttr(R.attr.divider_color_basic)
 	val activeColor = colorAttr(R.attr.active_color_primary)
 	val inActiveColor = colorAttr(R.attr.secondary_icon_color)
-	val activeBackground = colorAttr(R.attr.active_color_secondary)
+	val chipSelectedBackground = colorResource(
+		if (nightMode) R.color.chip_bg_selected_dark else R.color.chip_bg_selected_light
+	)
 	val contentPadding = dimensionResource(R.dimen.content_padding)
 	val halfPadding = dimensionResource(R.dimen.content_padding_half)
 	val chips = items.filter { it.visible }
@@ -276,7 +293,7 @@ private fun ChipsLayoutContent(
 		Row(
 			modifier = Modifier
 				.fillMaxWidth()
-				.height(36.dp)
+				.height(CHIPS_ROW_HEIGHT)
 				.horizontalScroll(rememberScrollState()),
 			horizontalArrangement = Arrangement.spacedBy(halfPadding),
 			verticalAlignment = Alignment.CenterVertically
@@ -285,6 +302,7 @@ private fun ChipsLayoutContent(
 			chips.forEach { chip ->
 				ChipAnchor(
 					chip = chip,
+					contentEnabled = contentEnabled,
 					expanded = expandedChipId == chip.id,
 					changeExpandedState = { expanded ->
 						onExpandedChipChanged(if (expanded) chip.id else null)
@@ -292,10 +310,12 @@ private fun ChipsLayoutContent(
 					onChipClick = onChipClick,
 					onDropdownItemClick = onDropdownItemClick,
 					listBackground = listBackground,
+					chipBackground = chipBackground,
+					chipOutlineColor = chipOutlineColor,
 					dividerColor = dividerColor,
 					activeColor = activeColor,
 					inActiveColor = inActiveColor,
-					activeBackground = activeBackground,
+					chipSelectedBackground = chipSelectedBackground,
 					nightMode = nightMode
 				)
 			}
@@ -307,27 +327,31 @@ private fun ChipsLayoutContent(
 @Composable
 private fun ChipAnchor(
 	chip: ChipsLayout.ChipData,
+	contentEnabled: Boolean,
 	expanded: Boolean,
 	changeExpandedState: (Boolean) -> Unit,
 	onChipClick: (String) -> Unit,
 	onDropdownItemClick: (String, Int) -> Unit,
 	listBackground: Color,
+	chipBackground: Color,
+	chipOutlineColor: Color,
 	dividerColor: Color,
 	activeColor: Color,
 	inActiveColor: Color,
-	activeBackground: Color,
+	chipSelectedBackground: Color,
 	nightMode: Boolean
 ) {
 	Box {
 		val chipId = chip.id
 		OsmandFilterChip(
 			chipData = chip,
+			contentEnabled = contentEnabled,
 			contentDescription = chip.contentDescription,
 			selected = chip.selected || expanded,
 			onClick = {
-				if (chip.hasDropDown && chip.enabled) {
+				if (chip.hasDropDown && chip.enabled && contentEnabled) {
 					changeExpandedState(true)
-				} else if (chip.enabled) {
+				} else if (chip.enabled && contentEnabled) {
 					val clickListener = chip.onClickListener
 					if (clickListener != null) {
 						clickListener.onChipClick(chipId)
@@ -336,11 +360,11 @@ private fun ChipAnchor(
 					}
 				}
 			},
-			listBackground = listBackground,
-			dividerColor = dividerColor,
+			chipBackground = chipBackground,
+			chipOutlineColor = chipOutlineColor,
 			activeColor = activeColor,
 			inActiveColor = inActiveColor,
-			activeBackground = activeBackground,
+			chipSelectedBackground = chipSelectedBackground,
 			nightMode = nightMode
 		)
 		if (chip.hasDropDown) {
@@ -356,7 +380,7 @@ private fun ChipAnchor(
 				)
 			}
 			OsmAndDropdownMenu(
-				expanded = expanded && chip.enabled,
+				expanded = expanded && chip.enabled && contentEnabled,
 				onDismissRequest = { changeExpandedState(false) },
 				options = menuOptions,
 				onOptionSelected = { itemId ->
@@ -374,7 +398,8 @@ private fun ChipAnchor(
 					text = textColor(ChipsLayout.TextColorStyle.PRIMARY),
 					secondaryText = textColor(ChipsLayout.TextColorStyle.SECONDARY),
 					icon = iconColor(ChipsLayout.IconColorStyle.DEFAULT, nightMode),
-					selected = activeColor
+					selected = activeColor,
+					control = inActiveColor
 				),
 				title = if (chip.menuTitleId != 0) stringResource(chip.menuTitleId) else null
 			)
@@ -385,37 +410,40 @@ private fun ChipAnchor(
 @Composable
 private fun OsmandFilterChip(
 	chipData: ChipsLayout.ChipData,
+	contentEnabled: Boolean,
 	contentDescription: String? = null,
 	selected: Boolean,
 	onClick: () -> Unit,
-	listBackground: Color,
-	dividerColor: Color,
+	chipBackground: Color,
+	chipOutlineColor: Color,
 	activeColor: Color,
 	inActiveColor: Color,
-	activeBackground: Color,
+	chipSelectedBackground: Color,
 	nightMode: Boolean
 ) {
+	val enabled = contentEnabled && chipData.enabled
 	val labelColor = textColor(chipData.titleColor)
 	val leadingIconColor = iconColor(chipData.iconColor, nightMode)
-	val trailingIconColor = if (chipData.enabled) {
+	val trailingIconColor = if (enabled) {
 		labelColor
 	} else {
 		iconColor(ChipsLayout.IconColorStyle.SECONDARY, nightMode)
 	}
 	val trailingIconVisible =
-		chipData.hasDropDown && (chipData.enabled || chipData.showDropDownIconWhenDisabled)
+		chipData.hasDropDown && (enabled || chipData.showDropDownIconWhenDisabled)
 	val title = chipData.title
 	val iconOnly = title == null && chipData.iconId != 0
+	val checkmarkVisible = selected && chipData.iconId == 0 && !iconOnly
 	FilterChip(
 		selected = selected,
 		onClick = onClick,
-		enabled = chipData.enabled,
+		enabled = enabled,
 		label = {
 			if (iconOnly) {
 				Icon(
 					painter = painterResource(chipData.iconId),
 					contentDescription = contentDescription,
-					tint = leadingIconColor.copy(alpha = if (chipData.enabled) 1f else .5f),
+					tint = leadingIconColor.copy(alpha = if (enabled) 1f else .5f),
 					modifier = Modifier.size(18.dp)
 				)
 			} else if (title != null) {
@@ -428,8 +456,17 @@ private fun OsmandFilterChip(
 				)
 			}
 		},
-		modifier = Modifier.height(36.dp),
-		leadingIcon = if (chipData.iconId != 0 && !iconOnly) {
+		modifier = Modifier.height(CHIP_HEIGHT),
+		leadingIcon = if (checkmarkVisible) {
+			{
+				Icon(
+					painter = painterResource(R.drawable.ic_action_done),
+					contentDescription = null,
+					tint = activeColor,
+					modifier = Modifier.size(18.dp)
+				)
+			}
+		} else if (chipData.iconId != 0 && !iconOnly) {
 			{
 				Icon(
 					painter = painterResource(chipData.iconId),
@@ -455,29 +492,32 @@ private fun OsmandFilterChip(
 		},
 		shape = RoundedCornerShape(8.dp),
 		colors = FilterChipDefaults.filterChipColors(
-			containerColor = listBackground,
+			containerColor = chipBackground,
 			labelColor = labelColor,
 			iconColor = leadingIconColor,
-			disabledContainerColor = listBackground,
+			disabledContainerColor = chipBackground,
 			disabledLabelColor = labelColor.copy(alpha = .5f),
 			disabledLeadingIconColor = leadingIconColor.copy(alpha = .5f),
 			disabledTrailingIconColor = trailingIconColor,
-			selectedContainerColor = activeBackground,
+			selectedContainerColor = chipSelectedBackground,
 			selectedLabelColor = labelColor,
 			selectedLeadingIconColor = leadingIconColor,
 			selectedTrailingIconColor = labelColor
 		),
 		border = FilterChipDefaults.filterChipBorder(
-			enabled = chipData.enabled,
+			enabled = enabled,
 			selected = selected,
-			borderColor = dividerColor,
-			selectedBorderColor = activeColor,
-			disabledBorderColor = dividerColor,
+			borderColor = chipOutlineColor,
+			selectedBorderColor = Color.Transparent,
+			disabledBorderColor = chipOutlineColor,
 			borderWidth = 1.dp,
-			selectedBorderWidth = 1.dp
+			selectedBorderWidth = 0.dp
 		)
 	)
 }
+
+private val CHIP_HEIGHT = 36.dp
+private val CHIPS_ROW_HEIGHT = 38.dp
 
 @Composable
 private fun textColor(style: ChipsLayout.TextColorStyle): Color {

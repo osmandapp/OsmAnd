@@ -281,10 +281,13 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 					objectRef = SearchAlgorithms.getBuildingCompareSet(ref, tempBuildNames2);
 				} else {
 					int num = Algorithms.extractIntegerNumber(as.getName());
-					int snum = Algorithms.extractIntegerNumber(poiAtom.name);
-					// don't count twice (as query already assigned)
-					if (num > 0 && snum != num) {
-						objectRef = Collections.singleton(num + "");
+					if (num > 0) {
+						Set<String> objectSet = SearchAlgorithms.getBuildingCompareSet(poiAtom.name, tempBuildNames2);
+						// don't count twice (as query already assigned)
+						String numInTheName = num + "";
+						if (!objectSet.contains(numInTheName)) {
+							objectRef = Collections.singleton(numInTheName);
+						}
 					}
 				}
 				if (queryRef == null) {

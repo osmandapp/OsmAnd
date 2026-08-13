@@ -250,9 +250,11 @@ public class SpatialSearchToken {
 				int res = Integer.compare(atom.otherWordsCnt + atom.otherFoundCnt,
 						existing.otherWordsCnt + existing.otherFoundCnt);
 				// '2 south 2nd street' vs '25 садова вулиця' (25-та) -
-				// don't use it for now as it replaces building link 
-				// (if it stops working -then analyse should be done in checkBuilding and find duplicate assigned word) 
-//				res = Boolean.compare(atom.isBuilding(), existing.isBuilding());
+				if (res == 0 && !SearchAlgorithms.isNumber2Letters(wordAligned)) {
+					// a school
+					res = Boolean.compare(atom.isBuilding() || atom.isPOIRef(),
+						existing.isBuilding() || existing.isPOIRef());
+				}
 				boolean replace = res < 0;
 				if (replace) {
 					atom.indexInToken = existing.indexInToken;
@@ -341,15 +343,25 @@ public class SpatialSearchToken {
 	String[] matchSplitName(String name) {
 		name = SearchAlgorithms.alignChars(name);
 		String[] res = null;
-		if (wordAligned.length() < name.length()
+		if (wordAligned.length() < name.length() 
 				&& collatorMain.getCollator().equals(name.substring(0, wordAligned.length()), wordAligned)) {
 			res = new String[2];
 			res[0] = name.substring(0, wordAligned.length());
-			res[1] = name.substring(wordAligned.length());
-			while (res[1].length() > 0 && !Character.isLetter(res[1].charAt(0))
-					&& !Character.isDigit(res[1].charAt(0))) {
-				res[1] = res[1].substring(1);
+			// don't split numbers
+			if (Character.isDigit(name.charAt(wordAligned.length()))
+					&& Character.isDigit(name.charAt(wordAligned.length() - 1))) {
+				return null;
 			}
+			int sub = wordAligned.length();
+			for (; sub < name.length(); sub++) {
+				if (Character.isLetter(name.charAt(sub)) || Character.isDigit(name.charAt(sub))) {
+					break;
+				}
+			}
+			if (sub >= name.length()) {
+				return null;
+			}
+			res[1] = name.substring(sub);
 		}
 		return res;
 	}

@@ -5197,4 +5197,5 @@
     <string name="share_favorites_preparation_failed">無法準備要分享的檔案。</string>
     <string name="share_favorites_share_failed">無法分享檔案。</string>
     <string name="share_favorites_missing_media_warning">部分附加媒體無法一併納入。</string>
+    <string name="search_on_web">在網路上搜尋</string>
 </resources>

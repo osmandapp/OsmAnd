@@ -552,6 +552,16 @@ public class UpdatesIndexFragment extends BaseNestedListFragment implements Down
 			}
 		}
 
+		@Override
+		public boolean areAllItemsEnabled() {
+			return false;
+		}
+
+		@Override
+		public boolean isEnabled(int position) {
+			return !(showSubscriptionPurchaseBanner && getItemViewType(position) == OSM_LIVE_BANNER);
+		}
+
 		@NonNull
 		@Override
 		public View getView(int position, View convertView, @NonNull ViewGroup parent) {

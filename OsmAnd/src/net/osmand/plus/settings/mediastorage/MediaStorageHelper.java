@@ -162,7 +162,11 @@ public class MediaStorageHelper {
 
 	@Nullable
 	public MediaSource resolveManagedMediaSource(@NonNull MediaStorageLocation location, @Nullable String href) {
-		return resolveMediaSource(location, href, false);
+		MediaSource source = resolveMediaSource(location, href, false);
+		if (source != null) {
+			source.markAppManaged();
+		}
+		return source;
 	}
 
 	@Nullable

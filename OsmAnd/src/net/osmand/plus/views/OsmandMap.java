@@ -160,7 +160,9 @@ public class OsmandMap {
 		} else {
 			densityToSet = mapDensity;
 		}
-		return densityToSet;
+		//todo revert when aa scale setting fixed
+//		return densityToSet;
+		return settings.MAP_DENSITY.get();
 	}
 
 	public float getMapDensity() {

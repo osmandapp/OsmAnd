@@ -5,6 +5,7 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.RADIUS_RULER;
 import android.content.Context;
 import android.graphics.*;
 import android.graphics.Paint.Style;
+import android.os.SystemClock;
 import android.util.DisplayMetrics;
 import android.view.View;
 
@@ -19,10 +20,12 @@ import net.osmand.core.jni.PointI;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.NavigationSession;
+import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
@@ -46,12 +49,13 @@ import net.osmand.util.MapUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RadiusRulerControlLayer extends OsmandMapLayer {
+public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCompassListener {
 
 	private static final int TEXT_SIZE = 14;
 	private static final float COMPASS_CIRCLE_FITTING_RADIUS_COEF = 1.25f;
 	private static final float CIRCLE_ANGLE_STEP = 5;
 	private static final int SHOW_COMPASS_MIN_ZOOM = 8;
+	private static final long COMPASS_REFRESH_INTERVAL_MS = 100L;
 
 	private OsmandApplication app;
 	private MapWidgetRegistry widgetRegistry;
@@ -99,6 +103,16 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	};
 
 	private float cachedHeading;
+	private long lastCompassRefreshTime;
+	@Nullable
+	private View compassRefreshView;
+
+	private final Runnable compassRefreshRunnable = () -> {
+		compassRefreshView = null;
+		if (isCompassRulerVisible()) {
+			refreshCompassRuler(SystemClock.uptimeMillis());
+		}
+	};
 
 	public RadiusRulerControlLayer(@NonNull Context ctx) {
 		super(ctx);
@@ -178,18 +192,71 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 
 	@Override
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
+		resetCompassRefreshState();
+		getApplication().getLocationProvider().removeCompassListener(this);
 		super.setMapActivity(mapActivity);
 		if (mapActivity != null) {
 			rightWidgetsPanel = mapActivity.findViewById(R.id.map_right_widgets_panel);
 			leftWidgetsPanel = mapActivity.findViewById(R.id.map_left_widgets_panel);
 			topWidgetsPanel = mapActivity.findViewById(R.id.top_widgets_panel);
 			bottomWidgetsPanel = mapActivity.findViewById(R.id.map_bottom_widgets_panel);
+			getApplication().getLocationProvider().addCompassListener(this);
 		} else {
 			rightWidgetsPanel = null;
 			leftWidgetsPanel = null;
 			topWidgetsPanel = null;
 			bottomWidgetsPanel = null;
 		}
+	}
+
+	@Override
+	public void destroyLayer() {
+		resetCompassRefreshState();
+		getApplication().getLocationProvider().removeCompassListener(this);
+		super.destroyLayer();
+	}
+
+	@Override
+	public void updateCompassValue(float value) {
+		if (!isCompassRulerVisible() || !hasSignificantHeadingChange(value)) {
+			return;
+		}
+
+		cachedHeading = value;
+		long currentTime = SystemClock.uptimeMillis();
+		long elapsedTime = currentTime - lastCompassRefreshTime;
+		if (lastCompassRefreshTime == 0 || elapsedTime >= COMPASS_REFRESH_INTERVAL_MS) {
+			cancelPendingCompassRefresh();
+			refreshCompassRuler(currentTime);
+		} else if (compassRefreshView == null) {
+			View mapView = view.getView();
+			if (mapView != null) {
+				compassRefreshView = mapView;
+				mapView.postDelayed(compassRefreshRunnable, COMPASS_REFRESH_INTERVAL_MS - elapsedTime);
+			}
+		}
+	}
+
+	private void refreshCompassRuler(long refreshTime) {
+		lastCompassRefreshTime = refreshTime;
+		view.refreshMap();
+	}
+
+	private boolean hasSignificantHeadingChange(float heading) {
+		return Math.abs(MapUtils.degreesDiff(cachedHeading, heading))
+				> MapViewTrackingUtilities.COMPASS_HEADING_THRESHOLD;
+	}
+
+	private void cancelPendingCompassRefresh() {
+		if (compassRefreshView != null) {
+			compassRefreshView.removeCallbacks(compassRefreshRunnable);
+		}
+		compassRefreshView = null;
+	}
+
+	private void resetCompassRefreshState() {
+		cancelPendingCompassRefresh();
+		lastCompassRefreshTime = 0;
 	}
 
 	private Paint initPaintWithStyle(Paint.Style style, int color) {
@@ -273,6 +340,14 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 			case RIGHT -> panel = rightWidgetsPanel;
 		}
 		return panel == null || panel.getVisibility() == View.VISIBLE;
+	}
+
+	private boolean isCompassRulerVisible() {
+		return view != null
+				&& app.getSettings().RADIUS_RULER_MODE.get() != RadiusRulerMode.EMPTY
+				&& app.getSettings().SHOW_COMPASS_ON_RADIUS_RULER.get()
+				&& view.getZoom() >= SHOW_COMPASS_MIN_ZOOM
+				&& isRulerWidgetOn();
 	}
 
 	private int getCompassCircleIndex(RotatedTileBox tb, QuadPoint center) {

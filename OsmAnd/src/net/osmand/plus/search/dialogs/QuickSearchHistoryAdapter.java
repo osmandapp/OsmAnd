@@ -112,6 +112,8 @@ public class QuickSearchHistoryAdapter extends ArrayAdapter<QuickSearchHistoryAd
 		}
 		if (item.headerTitle != null) {
 			View view = getView(convertView, R.layout.quick_search_history_section_header);
+			View topSpace = view.findViewById(R.id.top_space);
+			topSpace.setVisibility(position == 0 ? View.GONE : View.VISIBLE);
 			View header = view.findViewById(R.id.header);
 			header.setBackgroundResource(R.drawable.bg_list_card_top_round);
 			TextView title = view.findViewById(R.id.title);

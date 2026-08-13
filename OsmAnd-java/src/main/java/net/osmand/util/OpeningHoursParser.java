@@ -1988,9 +1988,9 @@ public class OpeningHoursParser {
 		public Token(TokenType tokenType, String string) {
 			type = tokenType;
 			text = string;
-			try {
-				mainNumber = Integer.parseInt(string);
-			} catch(NumberFormatException e){
+			if (Algorithms.isNotEmpty(string) && Character.isDigit(string.charAt(string.length() - 1))
+					&& (Character.isDigit(string.charAt(0)) || '-' == string.charAt(0) || '+' == string.charAt(0))) {
+				mainNumber = Algorithms.parseIntSilently(string, -1);
 			}
 		}
 		public Token(TokenType tokenType, int tokenMainNumber) {

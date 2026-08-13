@@ -13,10 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.data.Amenity;
+import net.osmand.data.MapObject;
 import net.osmand.plus.R;
 import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.search.CityStructureItemViewHolder;
-import net.osmand.plus.search.NearbyPlacesAdapter.NearbyItemClickListener;
+import net.osmand.plus.search.MapObjectViewHolder;
 import net.osmand.plus.search.SearchResultViewHolder;
 import net.osmand.plus.search.WikiItemViewHolder;
 import net.osmand.plus.search.dialogs.QuickSearchListAdapter;
@@ -25,6 +25,7 @@ import net.osmand.plus.search.listitems.QuickSearchWikiItem;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
+import net.osmand.search.core.SearchResult;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -35,9 +36,10 @@ public class ExplorePlacesAdapter extends RecyclerView.Adapter<ViewHolder> {
 	private static final int POI_TYPE = 0;
 	private static final int WIKI_TYPE = 1;
 	private static final int CITY_TYPE = 2;
+	private static final int MAP_OBJECT_TYPE = 3;
 
 	private final UpdateLocationViewCache locationViewCache;
-	private final NearbyItemClickListener itemClickListener;
+	private final ExploreItemClickListener itemClickListener;
 	@NonNull
 	private final Calendar calendar = Calendar.getInstance();
 	private final boolean nightMode;
@@ -47,7 +49,7 @@ public class ExplorePlacesAdapter extends RecyclerView.Adapter<ViewHolder> {
 	private PoiUIFilter poiUIFilter;
 
 	public ExplorePlacesAdapter(@NonNull Context context, @Nullable PoiUIFilter poiUIFilter,
-			@Nullable NearbyItemClickListener itemClickListener, boolean nightMode) {
+			@Nullable ExploreItemClickListener itemClickListener, boolean nightMode) {
 		this.nightMode = nightMode;
 		this.poiUIFilter = poiUIFilter;
 		this.itemClickListener = itemClickListener;
@@ -64,9 +66,9 @@ public class ExplorePlacesAdapter extends RecyclerView.Adapter<ViewHolder> {
 	public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 		LayoutInflater inflater = UiUtilities.getInflater(parent.getContext(), nightMode);
 		return switch (viewType) {
-			case CITY_TYPE -> {
+			case CITY_TYPE, MAP_OBJECT_TYPE -> {
 				View view = inflater.inflate(R.layout.search_list_item_administrative, parent, false);
-				yield new CityStructureItemViewHolder(view, locationViewCache);
+				yield new MapObjectViewHolder(view, locationViewCache);
 			}
 			case WIKI_TYPE -> {
 				View view = inflater.inflate(R.layout.search_nearby_item_vertical, parent, false);
@@ -85,11 +87,11 @@ public class ExplorePlacesAdapter extends RecyclerView.Adapter<ViewHolder> {
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 		QuickSearchListItem item = items.get(position);
 		holder.itemView.setOnClickListener(v -> {
-			if (itemClickListener != null && item.getSearchResult().object instanceof Amenity amenity) {
-				itemClickListener.onNearbyItemClicked(amenity);
+			if (itemClickListener != null) {
+				itemClickListener.onExploreItemClicked(item.getSearchResult());
 			}
 		});
-		if (holder instanceof CityStructureItemViewHolder viewHolder) {
+		if (holder instanceof MapObjectViewHolder viewHolder) {
 			viewHolder.setNightMode(nightMode);
 			viewHolder.bindItem(item, false);
 		} else if (holder instanceof WikiItemViewHolder viewHolder) {
@@ -119,6 +121,8 @@ public class ExplorePlacesAdapter extends RecyclerView.Adapter<ViewHolder> {
 			return WIKI_TYPE;
 		} else if (item.getType() == SEARCH_RESULT && amenity != null) {
 			return POI_TYPE;
+		} else if (item.getType() == SEARCH_RESULT && item.getSearchResult().object instanceof MapObject) {
+			return MAP_OBJECT_TYPE;
 		}
 		throw new IllegalArgumentException("Unsupported view type " + item);
 	}
@@ -126,5 +130,10 @@ public class ExplorePlacesAdapter extends RecyclerView.Adapter<ViewHolder> {
 	@Override
 	public int getItemCount() {
 		return items.size();
+	}
+
+	public interface ExploreItemClickListener {
+
+		void onExploreItemClicked(@NonNull SearchResult searchResult);
 	}
 }

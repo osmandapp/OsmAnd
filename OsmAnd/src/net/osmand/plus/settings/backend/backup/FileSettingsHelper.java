@@ -9,6 +9,8 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.backend.backup.exporttype.AttachedMediaExportType;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.utils.AndroidUtils;
 
@@ -55,6 +57,16 @@ public class FileSettingsHelper extends SettingsHelper {
 
 	public FileSettingsHelper(@NonNull OsmandApplication app) {
 		super(app);
+	}
+
+	@Override
+	public List<SettingsItem> getFilteredSettingsItems(List<ExportType> acceptedTypes,
+			boolean export, boolean addEmptyItems, boolean offlineBackup) {
+		List<SettingsItem> items = super.getFilteredSettingsItems(acceptedTypes, export, addEmptyItems, offlineBackup);
+		if (export) {
+			AttachedMediaExportType.applyMediaLinkRewrites(items);
+		}
+		return items;
 	}
 
 	@Nullable
@@ -129,6 +141,9 @@ public class FileSettingsHelper extends SettingsHelper {
 	public void exportSettings(@NonNull File fileDir, @NonNull String fileName,
 							   @Nullable SettingsExportListener listener,
 							   @NonNull List<SettingsItem> items, boolean exportItemsFiles) {
+		if (exportItemsFiles) {
+			AttachedMediaExportType.applyMediaLinkRewrites(items);
+		}
 		File file = new File(fileDir, fileName + OSMAND_SETTINGS_FILE_EXT);
 		ExportFileTask exportAsyncTask = new ExportFileTask(this, file, listener, items, exportItemsFiles);
 		exportAsyncTasks.put(file, exportAsyncTask);

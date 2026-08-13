@@ -741,8 +741,7 @@
     <string name="use_live_public_transport">Data OsmAnd Live</string>
     <string name="use_live_routing">Data OsmAnd Live</string>
     <string name="shared_string_graph">Grafik</string>
-    <string name="message_graph_will_be_available_after_recalculation">Mohon tunggu.
-\nGrafik akan tersedia setelah rekalkulasi rute.</string>
+    <string name="message_graph_will_be_available_after_recalculation">Mohon tunggu.\nGrafik akan tersedia setelah perhitungan ulang rute.</string>
     <string name="shared_string_local_maps">Peta lokal</string>
     <string name="icon_group_special">Spesial</string>
     <string name="icon_group_service">Layanan</string>
@@ -2080,7 +2079,7 @@
     <string name="av_camera_focus_infinity">Fokus ditetapkan ke tak terbatas</string>
     <string name="av_camera_focus_macro">Mode fokus makro (close-up)</string>
     <string name="av_camera_pic_size_descr">Tetapkan ukuran gambar kamera</string>
-    <string name="shared_string_undo">Urungkan</string>
+    <string name="shared_string_undo">Batalkan</string>
     <string name="activate_seamarks_plugin">Mohon aktifkan plugin \'Tampilan peta bahari\'</string>
     <string name="activate_srtm_plugin">Mohon aktifkan plugin \'Topografi\'</string>
     <string name="shared_string_contact">Kontak</string>
@@ -4699,7 +4698,7 @@
     <string name="use_terrain_maps_summary">Gunakan peta medan untuk data ketinggian. Geometri trek tidak akan diubah.</string>
     <string name="retrieve_elevation_data_summary">OsmAnda bisa mendapatkan data ketinggian dari jalan yang dekat atau peta medan.</string>
     <string name="shared_string_scale">Skala</string>
-    <string name="use_nearby_roads">Gunakan jalan yang dekat</string>
+    <string name="use_nearby_roads">Gunakan jalan terdekat</string>
     <string name="relief_3d_download_description">Peta tambahan diperlukan untuk menampilkan Medan di peta.</string>
     <string name="required_maps">Peta yang Diperlukan</string>
     <string name="missing_maps_header">Peta hilang atau kedaluwarsa</string>
@@ -5367,7 +5366,7 @@
     <string name="shared_string_step">Langkah</string>
     <string name="shared_string_unlock">Buka</string>
     <string name="shared_string_recent">Terbaru</string>
-    <string name="sort_by_nearest_to_map_center">Terdekat ke pusat peta</string>
+    <string name="sort_by_nearest_to_map_center">Terdekat dari pusat peta</string>
     <string name="last_week">Minggu lalu</string>
     <string name="unpin_folder">Cabut sematan folder</string>
     <string name="pin_folder">Sematkan folder</string>

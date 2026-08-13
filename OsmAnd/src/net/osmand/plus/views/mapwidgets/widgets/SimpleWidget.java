@@ -74,7 +74,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 		container.removeAllViews();
 
 		int layoutId = getContentLayoutId();
-		renderedWidgetSize = resolveWidgetSize(widgetState.getWidgetSizePref().get());
+		renderedWidgetSize = widgetState.getWidgetSizePref().get();
 		UiUtilities.getInflater(mapActivity, nightMode).inflate(layoutId, container);
 		findViews();
 		container.setOnLongClickListener(v -> {
@@ -98,7 +98,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 
 	@Override
 	public void updateValueAlign(boolean fullRow) {
-		if (WidgetSize.SMALL != resolveWidgetSize(getWidgetSizePref().get())) {
+		if (WidgetSize.SMALL != getWidgetSizePref().get()) {
 			ViewGroup.LayoutParams textViewLayoutParams = textView.getLayoutParams();
 			if (textViewLayoutParams instanceof FrameLayout.LayoutParams params) {
 				textView.setGravity(fullRow ? Gravity.CENTER : Gravity.START | Gravity.CENTER_VERTICAL);
@@ -132,7 +132,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 
 	@LayoutRes
 	private int getProperSideLayoutId(@NonNull SimpleWidgetState simpleWidgetState) {
-		return switch (resolveWidgetSize(simpleWidgetState.getWidgetSizePref().get())) {
+		return switch (simpleWidgetState.getWidgetSizePref().get()) {
 			case SMALL -> R.layout.map_hud_widget;
 			case LARGE -> R.layout.simple_map_widget_large;
 			default -> R.layout.simple_map_widget_medium;
@@ -141,7 +141,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 
 	@LayoutRes
 	private int getProperVerticalLayoutId(@NonNull SimpleWidgetState simpleWidgetState) {
-		return switch (resolveWidgetSize(simpleWidgetState.getWidgetSizePref().get())) {
+		return switch (simpleWidgetState.getWidgetSizePref().get()) {
 			case SMALL ->
 					isFullRow ? R.layout.simple_map_widget_small_full : R.layout.simple_map_widget_small;
 			case LARGE -> R.layout.simple_map_widget_large;
@@ -162,7 +162,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 
 	public boolean shouldShowIcon() {
 		return isSmallSize() && !isVerticalWidget()
-				|| resolveIconVisibility(widgetState.getShowIconPref().get());
+				|| widgetState.getShowIconPref().get();
 	}
 
 	@NonNull
@@ -385,7 +385,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 
 	@Override
 	protected void onPanelAppearanceChanged(@NonNull ResolvedPanelAppearance appearance) {
-		if (renderedWidgetSize != resolveWidgetSize(getWidgetSizePref().get())) {
+		if (renderedWidgetSize != getWidgetSizePref().get()) {
 			recreateView();
 			return;
 		}
@@ -395,7 +395,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 		}
 		if (isVerticalWidget()) {
 			applySimpleWidgetAppearance(appearance);
-		} else if (WidgetSize.SMALL != resolveWidgetSize(getWidgetSizePref().get()) && widgetName != null) {
+		} else if (WidgetSize.SMALL != getWidgetSizePref().get() && widgetName != null) {
 			applySimpleWidgetAppearance(appearance);
 		} else {
 			super.onPanelAppearanceChanged(appearance);
@@ -435,6 +435,6 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 	}
 
 	private boolean isSmallSize() {
-		return resolveWidgetSize(getWidgetSizePref().get()) == WidgetSize.SMALL;
+		return getWidgetSizePref().get() == WidgetSize.SMALL;
 	}
 }

@@ -18,6 +18,7 @@ import net.osmand.search.core.spatial.SpatialSearchContext.SpatialSearchStats;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtomXY;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSettings;
+import net.osmand.util.SearchAlgorithms;
 
 // DONE Add non maximum results as well... (surplus words +-) -  germany_remstal!
 // DONE enlarge bbox if failed 
@@ -553,12 +554,15 @@ public class SpatialPipelineSearch {
 		Map<String, Integer> dupTokens = new HashMap<>();
 		for (int tokenIdx = 0; tokenIdx < totalTokens; tokenIdx++) {
 			SpatialSearchToken token = ctx.tokens.get(tokenIdx);
-			Integer dupToken = dupTokens.get(token.word);
-			if (dupToken == null) {
-				dupTokens.put(token.word, tokenIdx);
-			} else {
-//				token = firstToken; // Bug in processing dup tokens (less data assigned to 2nd)
+			Integer lastDupToken = dupTokens.get(token.word);
+			dupTokens.put(token.word, tokenIdx);
+			if (lastDupToken == null) {
+				lastDupToken = tokenIdx;
 			}
+//			if (!SearchAlgorithms.isNumber2Letters(token.wordAligned)) {
+				// fixes 'Am Remsufer Remseck am Neckar' but incorrect for '138 138 Scott Avenue Bellefonte' & 'W&W'
+//				token = ctx.tokens.get(lastDupToken); 
+//			}
 			TIntHashSet deleted = token.getDeletedAtoms();
 			for (NameIndexAtom atom : token.atoms) {
 				if (deleted.contains(atom.indexInToken)) {
@@ -567,7 +571,7 @@ public class SpatialPipelineSearch {
 				SpatialPipelineObjectRes existing = ctx.objectsById.get(atom.id);
 				boolean noPoiType = disallowPoiType(atom, token);
 				if (existing != null) {
-					existing.mergeSame(totalTokens, atom, tokenIdx, noPoiType);
+					existing.mergeSame(totalTokens, atom, tokenIdx, noPoiType, lastDupToken);
 				} else {
 					SpatialPipelineObjectRes obj = new SpatialPipelineObjectRes(totalTokens, atom, tokenIdx, noPoiType);
 					ctx.objectsById.put(atom.id, obj);

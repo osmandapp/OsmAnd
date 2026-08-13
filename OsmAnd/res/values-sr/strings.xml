@@ -1048,7 +1048,7 @@
     <string name="my_location">Мој положај</string>
     <string name="shared_string_finish">Крај</string>
     <string name="plan_route">План путовања</string>
-    <string name="shared_string_sort">Разврстај</string>
+    <string name="shared_string_sort">Сортирај</string>
     <string name="coordinate_input">Унос координата</string>
     <string name="marker_save_as_track_descr">Извезите ознаке у следећу датотеку ГПИкс-а:</string>
     <string name="move_to_history">Премести у историју</string>
@@ -2773,7 +2773,7 @@
     <string name="all_previous_segments_will_be_recalc">Сви претходни делови ће се поново израчунати помоћу изабраног налога.</string>
     <string name="open_saved_track">Отвори сачувани траг</string>
     <string name="shared_string_is_saved">је сачувано</string>
-    <string name="shared_string_redo">Понови</string>
+    <string name="shared_string_redo">Поврати</string>
     <string name="release_3_8">• Освежена је могућност путање: омогућава употребу различитих врста навођења по делу и укључивање трагова \n \n • Нови изборник трагова: одаберите боју, дебљину, стрелице смера приказа, сличице почетка и завршетка \n \n • Побољшана је видљивост бициклистичких чворова. \n \n • Трагови се сада могу тапкати, имају приручни изборник са основним подацима. \n \n • Побољшани су погони претраге \n \n • Побољшане су могућности праћења трагова у навођењу \n \n • Решени проблеми са увозом / извозом подешавања налога</string>
     <string name="sort_last_modified">Последња измена</string>
     <string name="sort_name_descending">Име: З – А</string>
@@ -2792,8 +2792,7 @@
     <string name="use_native_pt">Развој матичног јавног превоза</string>
     <string name="use_native_pt_desc">Пребаците се на прорачун навођења јавног превоза Јава (безбедан)</string>
     <string name="shared_string_graph">Графикон</string>
-    <string name="message_graph_will_be_available_after_recalculation">Молимо сачекајте.
-\nГрафикон ће бити доступан након поновног израчунавања путање.</string>
+    <string name="message_graph_will_be_available_after_recalculation">Молимо сачекајте.\nГрафик ће бити доступан након поновног израчунавања руте.</string>
     <string name="shared_string_local_maps">Местне карте</string>
     <string name="icon_group_amenity">Пријатност</string>
     <string name="icon_group_special">Нарочита</string>
@@ -3246,7 +3245,7 @@
 \nНема утицај на брзину израчунавања краћих путања.</string>
     <string name="shared_string_uphill">Узбрдо</string>
     <string name="gps_filter_precision">Прецизност ГПС-а</string>
-    <string name="save_as_copy">Сачувај као умножак</string>
+    <string name="save_as_copy">Сачувај као копију</string>
     <string name="shared_string_precision">Прецизност</string>
     <string name="distance_between_points">Удаљеност између тачака</string>
     <string name="shared_string_statistics">Статистика</string>
@@ -4279,7 +4278,7 @@
     <string name="relief_3d_download_description">Потребне су додатне карте за преглед тла на карти.</string>
     <string name="vertical_exaggeration_description">Променом вредности лествице можете нагласити просторне облине.</string>
     <string name="vertical_exaggeration">Усправно претеривање</string>
-    <string name="use_terrain_maps">Користи карте тла</string>
+    <string name="use_terrain_maps">Користи мапе терена</string>
     <string name="use_nearby_roads">Користи оближње путеве</string>
     <string name="use_terrain_maps_summary">Користе се карте тла за податке о надморској висини. Изглед трага остаје непромењен.</string>
     <string name="use_nearby_roads_summary">Користи се ванмрежна карта ради проналажења оближњих путева и података о успону. Може прилагодити изглед трага.</string>
@@ -4691,7 +4690,7 @@
     <string name="layer_coordinates_grid">Координатна мрежа</string>
     <string name="choose_location">Изабери положај</string>
     <string name="point_location">Положај тачке</string>
-    <string name="shared_string_manual">Упутство</string>
+    <string name="shared_string_manual">Ручно</string>
     <string name="shared_string_map_center">Средиште карте</string>
     <string name="choose_location_on_map">Изаберите положај на карти.</string>
     <string name="equator">Екватор</string>
@@ -5213,7 +5212,7 @@
     <string name="ais_receive_in_background">Примајте АИС податке чак и ако је ОсмАнд заустављен.</string>
     <string name="ais_receive_in_background_description">Уколико је омогућено, АИС-ов слушалац порука наставља дејство ако ли је ОсмАнд заустављен или у позадини. Ако ли је онемогућено, поруке се не примају ако је ОсмАнд у позадини.</string>
     <string name="shared_string_recent">Недавно</string>
-    <string name="sort_by_nearest_to_map_center">Најближе средишту карте</string>
+    <string name="sort_by_nearest_to_map_center">Најближе центру мапе</string>
     <string name="last_week">Прошле седмице</string>
     <string name="history_is_turned_off">Повест је искључена</string>
     <string name="search_and_navigation_history_disabled_descr">Повест претраге и навођења су онемогућене. Омогућите их у поставкама ради прегледа скорашњих дејстава овде.</string>
@@ -5326,4 +5325,19 @@
     <string name="always_keep_local_copy">Увек чувај локалну копију</string>
     <string name="always_keep_local_copy_description">Медији остају причвршћени чак и ако се оригинал обрише из галерије или датотека.</string>
     <string name="release_5_4">• Нова просторна претрага — пронађите места и претражите око места\n\n • Освежени КИ претраге: сортирање, филтери категорија, чистији изглед\n\n • Приложите фотографије и медије омиљенима\n\n • Омиљени: подршка за подгрупе и фасцикле које се могу закачити\n\n • Координате: претрага, мрежа мапе и приказ ТОИ сада подржавају EPSG и локатор Мејденхеда\n\n • Исправљени прекиди навигације; пребацивање између стандардног и брзог рутирања\n\n • Подесите размеру мапе за Андроид Ауто одвојено од телефона\n\n • Астрономија је додала помрачења Сунца и Месеца</string>
+    <string name="share_favorites_media_preparation_failed">Није могуће укључити приложене медије. Само дељење тачака.</string>
+    <plurals name="files_count">
+        <item quantity="one">%d датотека</item>
+        <item quantity="few">%d датотеке</item>
+        <item quantity="other">%d датотека</item>
+    </plurals>
+    <string name="preparing_file">Припрема датотеке</string>
+    <string name="shared_string_archive">Архива</string>
+    <string name="share_favorites_with_media_description">Омиљене тачке у %1$s имају приложене медије. Делите само тачке или тачке са медијима као архиву.</string>
+    <string name="share_favorites_points_only">Само тачке</string>
+    <string name="share_favorites_points_and_media">Тачке и медији</string>
+    <string name="share_favorites_preparation_failed">Није била успешна припрема датотека за дељење.</string>
+    <string name="share_favorites_share_failed">Дељење датотеке није успело.</string>
+    <string name="share_favorites_missing_media_warning">Неки приложени медији нису могли бити укључени.</string>
+    <string name="search_on_web">Претрага на вебу</string>
 </resources>
