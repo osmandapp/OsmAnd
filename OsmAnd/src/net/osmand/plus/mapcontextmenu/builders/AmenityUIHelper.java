@@ -121,7 +121,9 @@ public class AmenityUIHelper extends MenuBuilder {
 		if (!Algorithms.isEmpty(baseEntry.collapsableEntries)) {
 			return buildLocalizedEntryData(context, baseEntry);
 		}
-		return getEntryDataBuilder(context, baseEntry.key, baseEntry.value, baseEntry.isDescription).build();
+		AmenityTagEntry.Builder entryBuilder = getEntryDataBuilder(context, baseEntry.key, baseEntry.value,
+				baseEntry.isDescription, baseEntry.resolvedType);
+		return entryBuilder != null ? entryBuilder.build() : null;
 	}
 
 	@NonNull
@@ -154,12 +156,21 @@ public class AmenityUIHelper extends MenuBuilder {
 		List<AmenityTagEntry> localizedEntries = new ArrayList<>();
 		for (AmenityTagEntry child : baseEntry.collapsableEntries) {
 			if (!isNoteKeyHiddenFromEditing(child.key)) {
-				localizedEntries.add(getEntryDataBuilder(context, child.key, child.value, baseEntry.isDescription).build());
+				AdditionalInfoBundle.ResolvedPoiType childResolved = additionalInfo.resolvePoiType(poiCategory, child.key, child.value);
+				AmenityTagEntry.Builder childBuilder = getEntryDataBuilder(context, child.key, child.value,
+						baseEntry.isDescription, childResolved);
+				if (childBuilder != null) {
+					localizedEntries.add(childBuilder.build());
+				}
 			}
 		}
 		AmenityTagEntriesBuilder.sortInfoEntries(localizedEntries);
 
-		AmenityTagEntry.Builder headerBuilder = getEntryDataBuilder(context, baseEntry.key, baseEntry.value, baseEntry.isDescription);
+		AmenityTagEntry.Builder headerBuilder = getEntryDataBuilder(context, baseEntry.key, baseEntry.value,
+				baseEntry.isDescription, baseEntry.resolvedType);
+		if (headerBuilder == null) {
+			return null;
+		}
 		if (headerBuilder.getCollapsableEntryType() == AmenityTagEntry.CollapsableEntryType.NONE) {
 			headerBuilder.setCollapsableEntries(localizedEntries);
 		}
@@ -170,14 +181,16 @@ public class AmenityUIHelper extends MenuBuilder {
 		return "note".equals(key) && !osmEditingEnabled;
 	}
 
-	@NonNull
+	@Nullable
 	private AmenityTagEntry.Builder getEntryDataBuilder(@NonNull Context context, @NonNull String key, @NonNull String value,
-			boolean isDescription) {
-		AdditionalInfoBundle.ResolvedPoiType resolved = additionalInfo.resolvePoiType(poiCategory, key, value);
+			boolean isDescription, @NonNull AdditionalInfoBundle.ResolvedPoiType resolvedType) {
+		if (resolvedType.additionalType == null && resolvedType.categoryType != null) {
+			return null;
+		}
 		AmenityTagEntry.Builder entryBuilder = new AmenityTagEntry.Builder(key).setValue(value).setIsDescription(isDescription);
 		PoiAdditionalUiRule poiAdditionalUiRule = PoiAdditionalUiRules.INSTANCE.findRule(key);
-		if (resolved.pType != null) {
-			poiAdditionalUiRule.fillRow(app, context, entryBuilder, this, resolved.pType, key, value, subtype);
+		if (resolvedType.additionalType != null) {
+			poiAdditionalUiRule.fillRow(app, context, entryBuilder, this, resolvedType.additionalType, key, value, subtype);
 		} else {
 			PoiType fallbackType = new PoiType(poiTypes, poiCategory, null, key, poiCategory.getIconKeyName());
 			fallbackType.setText(true);

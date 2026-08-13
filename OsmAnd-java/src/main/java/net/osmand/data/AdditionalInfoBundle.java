@@ -113,40 +113,40 @@ public class AdditionalInfoBundle {
 			}
 			String strValue = value instanceof String str ? str : null;
 
-			ResolvedPoiType resolved = resolvePoiType(category, key, strValue);
-			PoiType pType = resolved.pType;
-			PoiType poiType = resolved.poiType;
-			if (isFilterOnlyOrGrouped(pType)) {
+			ResolvedPoiType resolvedType = resolvePoiType(category, key, strValue);
+			PoiType additionalType = resolvedType.additionalType;
+			PoiType categoryType = resolvedType.categoryType;
+			if (isFilterOnlyOrGrouped(additionalType)) {
 				continue;
 			}
-			if (pType == null && poiType == null && !showDefaultTags) {
+			if (additionalType == null && categoryType == null && !showDefaultTags) {
 				continue;
 			}
 
 			if (strValue != null) {
-				if (pType != null) {
-					AmenityTagEntry tagEntry = new AmenityTagEntry.Builder(key).setValue(strValue).setOrder(pType.getOrder())
-							.setIsDescription(key.contains(Amenity.DESCRIPTION)).build();
+				if (additionalType != null) {
+					AmenityTagEntry tagEntry = new AmenityTagEntry.Builder(key).setValue(strValue).setOrder(additionalType.getOrder())
+							.setResolvedType(resolvedType).setIsDescription(key.contains(Amenity.DESCRIPTION)).build();
 					if (Amenity.CUISINE.equals(key)) {
 						cuisineEntry = tagEntry;
 					} else {
 						entries.add(tagEntry);
 					}
-				} else if (poiType != null) {
-					String categoryKey = poiType.getCategory().getKeyName();
+				} else if (categoryType != null) {
+					String categoryKey = categoryType.getCategory().getKeyName();
 					if (!MapPoiTypes.OTHER_MAP_CATEGORY.equals(categoryKey)) {
-						collectedPoiTypes.computeIfAbsent(categoryKey, c -> new ArrayList<>()).add(poiType);
+						collectedPoiTypes.computeIfAbsent(categoryKey, c -> new ArrayList<>()).add(categoryType);
 					}
 				} else {
 					entries.add(new AmenityTagEntry.Builder(key).setValue(strValue).setOrder(PoiType.DEFAULT_ORDER)
-							.setIsDescription(key.contains(Amenity.DESCRIPTION)).build());
+							.setResolvedType(resolvedType).setIsDescription(key.contains(Amenity.DESCRIPTION)).build());
 				}
 			} else if (value instanceof Map) {
 				Object filtered = filterLocalizations((Map<String, Object>) value);
 				if (filtered == null) {
 					continue;
 				}
-				AmenityTagEntry tagEntry = toLocalizedAmenityTagEntry(key, (Map<String, Object>) filtered, pType, preferredLangs);
+				AmenityTagEntry tagEntry = toLocalizedAmenityTagEntry(key, (Map<String, Object>) filtered, resolvedType, preferredLangs);
 				if (tagEntry != null) {
 					entries.add(tagEntry);
 				}
@@ -211,7 +211,7 @@ public class AdditionalInfoBundle {
 	}
 
 	@SuppressWarnings("unchecked")
-	private AmenityTagEntry toLocalizedAmenityTagEntry(String key, Map<String, Object> value, PoiType pType,
+	private AmenityTagEntry toLocalizedAmenityTagEntry(String key, Map<String, Object> value, ResolvedPoiType resolvedType,
 			List<String> preferredLangs) {
 		Object localizationsObj = value.get("localizations");
 		if (!(localizationsObj instanceof Map)) {
@@ -227,9 +227,9 @@ public class AdditionalInfoBundle {
 		AmenityTagEntry header = pickHeader(children, preferredLangs);
 		List<AmenityTagEntry> otherLangs = new ArrayList<>(children);
 		otherLangs.remove(header);
-		int order = pType != null ? pType.getOrder() : PoiType.DEFAULT_ORDER;
+		int order = resolvedType.additionalType != null ? resolvedType.additionalType.getOrder() : PoiType.DEFAULT_ORDER;
 		return new AmenityTagEntry.Builder(header.key).setValue(header.value).setCollapsableEntries(otherLangs)
-				.setOrder(order).setIsDescription(key.contains(Amenity.DESCRIPTION)).build();
+				.setResolvedType(resolvedType).setOrder(order).setIsDescription(key.contains(Amenity.DESCRIPTION)).build();
 	}
 
 	private AmenityTagEntry pickHeader(List<AmenityTagEntry> children, List<String> preferredLangs) {
@@ -354,20 +354,20 @@ public class AdditionalInfoBundle {
 	}
 
 	public ResolvedPoiType resolvePoiType(PoiCategory category, String key, String vl) {
-		PoiType pType = getPoiAdditionalType(key, vl);
-		PoiType poiType = category != null ? category.getPoiTypeByKeyName(key) : null;
-		if (poiType == null && pType == null) {
-			poiType = poiTypes.getPoiTypeByKey(key);
+		PoiType additionalType = getPoiAdditionalType(key, vl);
+		PoiType categoryType = category != null ? category.getPoiTypeByKeyName(key) : null;
+		if (categoryType == null && additionalType == null) {
+			categoryType = poiTypes.getPoiTypeByKey(key);
 		}
-		if (pType == null) {
+		if (additionalType == null) {
 			String altKey = key.replace(':', '_');
-			pType = getPoiAdditionalType(altKey, vl);
-			poiType = category != null ? category.getPoiTypeByKeyName(altKey) : null;
-			if (poiType == null && pType == null) {
-				poiType = poiTypes.getPoiTypeByKey(altKey);
+			additionalType = getPoiAdditionalType(altKey, vl);
+			categoryType = category != null ? category.getPoiTypeByKeyName(altKey) : null;
+			if (categoryType == null && additionalType == null) {
+				categoryType = poiTypes.getPoiTypeByKey(altKey);
 			}
 		}
-		return new ResolvedPoiType(pType, poiType);
+		return new ResolvedPoiType(additionalType, categoryType);
 	}
 
 	public boolean isKeyToSkip(String key) {
@@ -378,12 +378,12 @@ public class AdditionalInfoBundle {
 	}
 
 	public static final class ResolvedPoiType {
-		public final PoiType pType;
-		public final PoiType poiType;
+		public final PoiType additionalType;
+		public final PoiType categoryType;
 
-		private ResolvedPoiType(PoiType pType, PoiType poiType) {
-			this.pType = pType;
-			this.poiType = poiType;
+		private ResolvedPoiType(PoiType additionalType, PoiType categoryType) {
+			this.additionalType = additionalType;
+			this.categoryType = categoryType;
 		}
 	}
 }

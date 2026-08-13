@@ -14,6 +14,7 @@ public class AmenityTagEntry {
 
 	public final String key;
 	public final String value;
+	public final AdditionalInfoBundle.ResolvedPoiType resolvedType;
 	public final int iconId;
 	public final List<String> iconNameCandidates;
 	public final int fallbackIconId;
@@ -41,6 +42,7 @@ public class AmenityTagEntry {
 	private AmenityTagEntry(Builder builder) {
 		this.key = builder.key;
 		this.value = builder.value;
+		this.resolvedType = builder.resolvedType;
 		this.iconId = builder.iconId;
 		this.iconNameCandidates = builder.iconNameCandidates;
 		this.fallbackIconId = builder.fallbackIconId;
@@ -69,6 +71,7 @@ public class AmenityTagEntry {
 	public static class Builder {
 		private final String key;
 		private String value;
+		private AdditionalInfoBundle.ResolvedPoiType resolvedType;
 		private int iconId;
 		private List<String> iconNameCandidates = List.of();
 		private int fallbackIconId;
@@ -99,6 +102,7 @@ public class AmenityTagEntry {
 		public static Builder from(AmenityTagEntry entry) {
 			return new Builder(entry.key)
 					.setValue(entry.value)
+					.setResolvedType(entry.resolvedType)
 					.setIconId(entry.iconId)
 					.setIconNameCandidates(entry.iconNameCandidates)
 					.setFallbackIconId(entry.fallbackIconId)
@@ -124,6 +128,7 @@ public class AmenityTagEntry {
 		}
 
 		public Builder setValue(String value) { this.value = value; return this; }
+		public Builder setResolvedType(AdditionalInfoBundle.ResolvedPoiType resolvedType) { this.resolvedType = resolvedType; return this; }
 		public Builder setIconId(int iconId) { this.iconId = iconId; return this; }
 		public Builder setIconNameCandidates(List<String> iconNameCandidates) { this.iconNameCandidates = iconNameCandidates; return this; }
 		public Builder setFallbackIconId(int fallbackIconId) { this.fallbackIconId = fallbackIconId; return this; }
