@@ -12,7 +12,6 @@ public class AmenityInfoRow {
 	public final String key;
 	public final Drawable icon;
 	public final int iconId;
-	public final String iconName;
 	public final String textPrefix;
 	public final String text;
 	public final String hiddenUrl;
@@ -33,7 +32,6 @@ public class AmenityInfoRow {
 		this.key = builder.key;
 		this.icon = builder.icon;
 		this.iconId = builder.iconId;
-		this.iconName = builder.iconName;
 		this.textPrefix = builder.textPrefix;
 		this.text = builder.text;
 		this.hiddenUrl = builder.hiddenUrl;
@@ -55,7 +53,6 @@ public class AmenityInfoRow {
 		private final String key;
 		private Drawable icon;
 		private int iconId;
-		private String iconName;
 		private String textPrefix = "";
 		private String text;
 		private String hiddenUrl;
@@ -77,7 +74,6 @@ public class AmenityInfoRow {
 		// Setters
 		public Builder setIcon(Drawable icon) { this.icon = icon; return this; }
 		public Builder setIconId(int iconId) { this.iconId = iconId; return this; }
-		public Builder setIconName(String iconName) { this.iconName = iconName; return this; }
 		public Builder setTextPrefix(String textPrefix) { this.textPrefix = textPrefix; return this; }
 		public Builder setTextPrefixIfNotPresent(String textPrefix) { if (!hasTextPrefix()) setTextPrefix(textPrefix); return this; }
 		public Builder setText(String text) { this.text = text; return this; }
@@ -99,7 +95,6 @@ public class AmenityInfoRow {
 		public String getKey() { return key; }
 		public Drawable getIcon() { return icon; }
 		public int getIconId() { return iconId; }
-		public String getIconName() { return iconName; }
 		public boolean hasIcon() { return iconId != 0 || icon != null; }
 		public String getTextPrefix() { return textPrefix; }
 		public boolean hasTextPrefix() { return !Algorithms.isEmpty(textPrefix); }

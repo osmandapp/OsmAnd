@@ -131,17 +131,18 @@ public class AmenityUIHelper extends MenuBuilder {
 		if (baseEntry.poiAdditional) {
 			String poiAdditionalCategoryName = baseEntry.key;
 			String poiAdditionalIconName = poiTypes.getPoiAdditionalCategoryIconName(poiAdditionalCategoryName);
-			String iconName = resolveExistingIconName(context,
+			List<String> iconNameCandidates = nonEmptyIconNames(
 					poiAdditionalIconName, poiAdditionalCategoryName, firstType.getIconKeyName());
-			int iconId = iconName == null ? R.drawable.ic_action_note_dark : 0;
 			return AmenityTagEntriesBuilder.buildPoiTypesGroupEntry(poiAdditionalCategoryName,
 					firstType.getKeyName(), firstType.getPoiAdditionalCategoryTranslation(), categoryTypes,
-					firstType.getOrder(), iconId, iconName, true, baseEntry.collapsableCategory);
+					firstType.getOrder(), 0, iconNameCandidates, R.drawable.ic_action_note_dark,
+					true, baseEntry.collapsableCategory);
 		}
 		PoiCategory groupCategory = firstType.getCategory();
 		return AmenityTagEntriesBuilder.buildPoiTypesGroupEntry(groupCategory.getKeyName(),
 				groupCategory.getKeyName(), groupCategory.getTranslation(), categoryTypes,
-				PoiType.DEFAULT_GROUP_ORDER, 0, groupCategory.getIconKeyName(), false, baseEntry.collapsableCategory);
+				PoiType.DEFAULT_GROUP_ORDER, 0, List.of(groupCategory.getIconKeyName()), 0,
+				false, baseEntry.collapsableCategory);
 	}
 
 	@Nullable
@@ -223,7 +224,6 @@ public class AmenityUIHelper extends MenuBuilder {
 	private AmenityInfoRow toAmenityInfoRow(@NonNull Context context, @NonNull AmenityTagEntry data) {
 		AmenityInfoRow.Builder rowBuilder = new AmenityInfoRow.Builder(data.key)
 				.setIconId(data.iconId)
-				.setIconName(data.iconName)
 				.setTextPrefix(data.textPrefix)
 				.setText(data.text)
 				.setHiddenUrl(data.hiddenUrl)
@@ -238,8 +238,19 @@ public class AmenityUIHelper extends MenuBuilder {
 				.setName(data.name)
 				.setMatchWidthDivider(data.matchWidthDivider)
 				.setTextLinesLimit(data.textLinesLimit);
-		if (data.iconId == 0 && !Algorithms.isEmpty(data.iconName)) {
-			rowBuilder.setIcon(getRowIcon(context, data.iconName));
+		if (data.iconId == 0) {
+			Drawable icon = null;
+			for (String candidate : data.iconNameCandidates) {
+				icon = getRowIcon(context, candidate);
+				if (icon != null) {
+					break;
+				}
+			}
+			if (icon != null) {
+				rowBuilder.setIcon(icon);
+			} else if (data.fallbackIconId != 0) {
+				rowBuilder.setIconId(data.fallbackIconId);
+			}
 		}
 		return rowBuilder.build();
 	}
@@ -267,14 +278,15 @@ public class AmenityUIHelper extends MenuBuilder {
 		}
 	}
 
-	@Nullable
-	private String resolveExistingIconName(@NonNull Context context, String... candidates) {
+	@NonNull
+	private List<String> nonEmptyIconNames(String... candidates) {
+		List<String> result = new ArrayList<>();
 		for (String candidate : candidates) {
-			if (!Algorithms.isEmpty(candidate) && getRowIcon(context, candidate) != null) {
-				return candidate;
+			if (!Algorithms.isEmpty(candidate)) {
+				result.add(candidate);
 			}
 		}
-		return null;
+		return result;
 	}
 
 	@NonNull

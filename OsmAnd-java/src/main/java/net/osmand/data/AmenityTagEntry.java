@@ -15,7 +15,8 @@ public class AmenityTagEntry {
 	public final String key;
 	public final String value;
 	public final int iconId;
-	public final String iconName;
+	public final List<String> iconNameCandidates;
+	public final int fallbackIconId;
 	public final String textPrefix;
 	public final String text;
 	public final String hiddenUrl;
@@ -41,7 +42,8 @@ public class AmenityTagEntry {
 		this.key = builder.key;
 		this.value = builder.value;
 		this.iconId = builder.iconId;
-		this.iconName = builder.iconName;
+		this.iconNameCandidates = builder.iconNameCandidates;
+		this.fallbackIconId = builder.fallbackIconId;
 		this.textPrefix = builder.textPrefix;
 		this.text = builder.text;
 		this.hiddenUrl = builder.hiddenUrl;
@@ -68,7 +70,8 @@ public class AmenityTagEntry {
 		private final String key;
 		private String value;
 		private int iconId;
-		private String iconName;
+		private List<String> iconNameCandidates = List.of();
+		private int fallbackIconId;
 		private String textPrefix = "";
 		private String text;
 		private String hiddenUrl;
@@ -97,7 +100,8 @@ public class AmenityTagEntry {
 			return new Builder(entry.key)
 					.setValue(entry.value)
 					.setIconId(entry.iconId)
-					.setIconName(entry.iconName)
+					.setIconNameCandidates(entry.iconNameCandidates)
+					.setFallbackIconId(entry.fallbackIconId)
 					.setTextPrefix(entry.textPrefix)
 					.setText(entry.text)
 					.setHiddenUrl(entry.hiddenUrl)
@@ -121,7 +125,8 @@ public class AmenityTagEntry {
 
 		public Builder setValue(String value) { this.value = value; return this; }
 		public Builder setIconId(int iconId) { this.iconId = iconId; return this; }
-		public Builder setIconName(String iconName) { this.iconName = iconName; return this; }
+		public Builder setIconNameCandidates(List<String> iconNameCandidates) { this.iconNameCandidates = iconNameCandidates; return this; }
+		public Builder setFallbackIconId(int fallbackIconId) { this.fallbackIconId = fallbackIconId; return this; }
 		public Builder setTextPrefix(String textPrefix) { this.textPrefix = textPrefix; return this; }
 		public Builder setText(String text) { this.text = text; return this; }
 		public Builder setHiddenUrl(String hiddenUrl) { this.hiddenUrl = hiddenUrl; return this; }
@@ -156,7 +161,6 @@ public class AmenityTagEntry {
 		public String getKey() { return key; }
 		public String getValue() { return value; }
 		public int getIconId() { return iconId; }
-		public String getIconName() { return iconName; }
 		public boolean hasIcon() { return iconId != 0; }
 		public String getTextPrefix() { return textPrefix; }
 		public boolean hasTextPrefix() { return !Algorithms.isEmpty(textPrefix); }

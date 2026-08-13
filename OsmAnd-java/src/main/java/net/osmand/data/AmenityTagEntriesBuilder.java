@@ -15,7 +15,7 @@ public class AmenityTagEntriesBuilder {
 	}
 
 	public static AmenityTagEntry buildPoiTypesGroupEntry(String key, String name, String textPrefix,
-			List<PoiType> types, int order, int iconId, String iconName,
+			List<PoiType> types, int order, int iconId, List<String> iconNameCandidates, int fallbackIconId,
 			boolean poiAdditional, PoiCategory collapsableCategory) {
 		StringBuilder text = new StringBuilder();
 		for (PoiType pt : types) {
@@ -31,7 +31,8 @@ public class AmenityTagEntriesBuilder {
 				.setText(text.toString())
 				.setOrder(order)
 				.setIconId(iconId)
-				.setIconName(iconName)
+				.setIconNameCandidates(iconNameCandidates)
+				.setFallbackIconId(fallbackIconId)
 				.setTextLinesLimit(1)
 				.setCollapsableEntryType(AmenityTagEntry.CollapsableEntryType.POI_TYPE_GROUP)
 				.setCollapsablePoiTypes(types)

@@ -41,38 +41,32 @@ open class DefaultPoiAdditionalRowBehaviour : IPoiAdditionalRowBehavior {
                 // (if this parameters was not predefined)
 
                 if (!builder.hasIcon()) { // if icon wasn't predefined
-                    var resolvedIconName = poiType.iconKeyName
-                    var iconId = getIconId(context, resolvedIconName)
-                    var deepIconFound = false
+                    var iconId = getIconId(context, poiType.iconKeyName)
                     if (iconId == 0) {
                         val category = poiType.osmTag.replace(":", "_")
                         if (category.isNotEmpty()) {
-                            resolvedIconName = category
                             iconId = getIconId(context, category)
                         }
                         val parentType = poiType.parentType
                         if (iconId == 0 && parentType is PoiType) {
-                            resolvedIconName = parentType.iconKeyName
                             iconId = getIconId(context, parentType.iconKeyName)
                             if (iconId == 0) {
-                                var iconName =
-                                    parentType.osmTag + "_" + category + "_" + parentType.osmValue
-                                resolvedIconName = iconName
-                                deepIconFound = menuBuilder.getRowIcon(context, iconName) != null
-                                if (!deepIconFound) {
-                                    iconName = parentType.osmTag + "_" + parentType.osmValue
-                                    resolvedIconName = iconName
-                                    deepIconFound = menuBuilder.getRowIcon(context, iconName) != null
-                                }
+                                // not verified here: getRowIcon needs a Drawable, which this
+                                // data-only builder can't hold - toAmenityInfoRow resolves
+                                // these candidates once and reuses the result
+                                builder.setIconNameCandidates(
+                                    listOf(
+                                        parentType.osmTag + "_" + category + "_" + parentType.osmValue,
+                                        parentType.osmTag + "_" + parentType.osmValue
+                                    )
+                                )
                             }
                         }
                     }
                     builder.setIconId(iconId)
-                    builder.setIconName(resolvedIconName)
 
-                    if (iconId == 0 && !deepIconFound) {
-                        builder.setIconId(R.drawable.ic_action_info_dark)
-                        builder.setIconName(null)
+                    if (iconId == 0) {
+                        builder.setFallbackIconId(R.drawable.ic_action_info_dark)
                     }
                 }
 
