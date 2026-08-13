@@ -24,14 +24,22 @@ class MediaNote private constructor(
 
 	fun isAttachedMedia(): Boolean = mediaItem != null && target != null && link != null
 
-	fun isPhoto(): Boolean = recording?.isPhoto ?: mediaItem?.type == MediaType.PHOTO
+	fun isPhoto(): Boolean = (recording?.isPhoto ?: mediaItem?.type) == MediaType.PHOTO
 
-	fun isVideo(): Boolean = recording?.isVideo ?: mediaItem?.type == MediaType.VIDEO
+	fun isVideo(): Boolean = (recording?.isVideo ?: mediaItem?.type) == MediaType.VIDEO
 
-	fun isAudio(): Boolean = recording?.isAudio ?: mediaItem?.type == MediaType.AUDIO
+	fun isAudio(): Boolean = (recording?.isAudio ?: mediaItem?.type) == MediaType.AUDIO
 
 	fun getLastModified(repository: MediaMetadataRepository): Long {
-		return recording?.lastModified ?: mediaItem?.let { repository.getCached(it)?.dateMillis } ?: 0L
+		return recording?.lastModified ?: mediaItem?.let {
+			repository.getCached(it)?.lastModifiedTimeMs
+		} ?: 0L
+	}
+
+	fun getDisplayTime(repository: MediaMetadataRepository): Long {
+		return recording?.lastModified ?: mediaItem?.let {
+			repository.getCached(it)?.run { creationTimeMs ?: lastModifiedTimeMs }
+		} ?: 0L
 	}
 
 	fun getName(context: Context, repository: MediaMetadataRepository, includingType: Boolean): String {
@@ -39,7 +47,7 @@ class MediaNote private constructor(
 
 		val type = getType(context)
 		val title = mediaItem?.title?.trim().orEmpty()
-		val date = getLastModified(repository).takeIf { it > 0 }
+		val date = getDisplayTime(repository).takeIf { it > 0 }
 		val genericTitle = title.equals(type, ignoreCase = true) || title.equals(mediaItem?.type?.typeName, ignoreCase = true)
 		if (title.isNotEmpty() && !genericTitle) {
 			return title

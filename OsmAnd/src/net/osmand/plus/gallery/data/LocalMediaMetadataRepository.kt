@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Handler
 import android.os.Looper
 import android.provider.DocumentsContract
+import android.provider.MediaStore
 import android.provider.OpenableColumns
 import android.util.LruCache
 import net.osmand.Location
@@ -14,10 +15,15 @@ import net.osmand.data.LatLon
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.media.MediaMetadataUtils
 import net.osmand.plus.utils.AndroidUtils
+import net.osmand.shared.gpx.GpxUtilities
 import net.osmand.shared.media.MediaProvider
 import net.osmand.shared.media.domain.MediaItem
 import net.osmand.shared.media.domain.MediaType
 import java.io.File
+import java.text.ParsePosition
+import java.text.SimpleDateFormat
+import java.util.Locale
+import java.util.TimeZone
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.Executors
 import java.util.concurrent.atomic.AtomicBoolean
@@ -30,9 +36,10 @@ import androidx.core.net.toUri
  *
  * All the "dirty" knowledge lives here and only here: how a [MediaItem] maps
  * to a local [File] or content:// uri, that size/date come from the file
- * system or [OpenableColumns], and that duration/posters are decoded with
- * [MediaMetadataRetriever]. When the backend lands, this class is replaced by
- * a backend-backed implementation; nothing above the interfaces changes.
+ * system, provider columns, or embedded metadata, and that duration/posters
+ * are decoded with [MediaMetadataRetriever]. When the backend lands, this class
+ * is replaced by a backend-backed implementation; nothing above the interfaces
+ * changes.
  */
 class LocalMediaMetadataRepository(
 	private val app: OsmandApplication
@@ -40,6 +47,21 @@ class LocalMediaMetadataRepository(
 
 	private val executor = Executors.newSingleThreadExecutor()
 	private val mainHandler = Handler(Looper.getMainLooper())
+	private val creationTimeFormats by lazy {
+		listOf(
+			"yyyyMMdd'T'HHmmss.SSSX",
+			"yyyyMMdd'T'HHmmssX",
+			"yyyyMMdd'T'HHmmss",
+			"yyyyMMdd",
+			"yyyy-MM-dd",
+			"yyyy MM dd"
+		).map { pattern ->
+			SimpleDateFormat(pattern, Locale.US).apply {
+				isLenient = false
+				timeZone = TimeZone.getTimeZone("UTC")
+			}
+		}
+	}
 
 	private val metadata = ConcurrentHashMap<String, GalleryMediaMetadata>()
 	private val noPosterIds = ConcurrentHashMap.newKeySet<String>()
@@ -122,27 +144,47 @@ class LocalMediaMetadataRepository(
 		val file = resolveFile(item)
 		val contentUri = if (file == null) resolveContentUri(item) else null
 
-		var sizeBytes = file?.length()?.takeIf { it > 0 }
-		var dateMillis = file?.lastModified()?.takeIf { it > 0 }
-		if (contentUri != null && (sizeBytes == null || dateMillis == null)) {
-			queryContentMetadata(contentUri).let { (size, date) ->
-				if (sizeBytes == null) sizeBytes = size
-				if (dateMillis == null) dateMillis = date
+		val sizeBytes = file?.length()?.takeIf { it > 0 }
+			?: contentUri?.let { queryContentLong(it, OpenableColumns.SIZE) }
+		val lastModifiedTimeMs = file?.lastModified()?.takeIf { it > 0 }
+			?: contentUri?.let {
+				queryContentLong(it, DocumentsContract.Document.COLUMN_LAST_MODIFIED)
+					?: queryContentLong(it, MediaStore.MediaColumns.DATE_MODIFIED)?.times(1000L)
 			}
-		}
 		val durationMs = if (item.type == MediaType.VIDEO || item.type == MediaType.AUDIO) {
 			extractDuration(file, contentUri)
 		} else {
 			null
 		}
+		val creationTimeMs = contentUri?.let {
+			queryContentLong(it, MediaStore.MediaColumns.DATE_TAKEN)
+		}
+			?: extractCreationTime(item, file, contentUri)
 		val latLon = extractLocation(item, file, contentUri)
 		return GalleryMediaMetadata(
 			sizeBytes = sizeBytes,
-			dateMillis = dateMillis,
+			lastModifiedTimeMs = lastModifiedTimeMs,
 			durationMs = durationMs,
-			latLon = latLon
+			latLon = latLon,
+			creationTimeMs = creationTimeMs
 		)
 	}
+
+	private fun extractCreationTime(item: MediaItem, file: File?, contentUri: Uri?): Long? =
+		when (item.type) {
+			MediaType.PHOTO -> runCatching {
+				file?.let { MediaMetadataUtils.getPhotoCreationTime(it) }
+					?: contentUri?.let { uri ->
+						app.contentResolver.openInputStream(uri)?.use { stream ->
+							MediaMetadataUtils.getPhotoCreationTime(stream)
+						}
+					}
+			}.getOrNull()
+			MediaType.VIDEO, MediaType.AUDIO -> withRetriever(file, contentUri) {
+				parseCreationTime(it.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DATE))
+			}
+			else -> null
+		}
 
 	private fun extractLocation(item: MediaItem, file: File?, contentUri: Uri?): LatLon? {
 		val location = when {
@@ -197,31 +239,31 @@ class LocalMediaMetadataRepository(
 		}
 	}
 
-	private fun queryContentMetadata(uri: Uri): Pair<Long?, Long?> {
-		var sizeBytes: Long? = null
-		var dateMillis: Long? = null
-		try {
-			val projection = arrayOf(
-				OpenableColumns.SIZE,
-				DocumentsContract.Document.COLUMN_LAST_MODIFIED
-			)
-			app.contentResolver.query(uri, projection, null, null, null)?.use { cursor ->
-				if (cursor.moveToFirst()) {
-					val sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE)
-					if (sizeIndex >= 0 && !cursor.isNull(sizeIndex)) {
-						sizeBytes = cursor.getLong(sizeIndex).takeIf { it > 0 }
-					}
-					val dateIndex =
-						cursor.getColumnIndex(DocumentsContract.Document.COLUMN_LAST_MODIFIED)
-					if (dateIndex >= 0 && !cursor.isNull(dateIndex)) {
-						dateMillis = cursor.getLong(dateIndex).takeIf { it > 0 }
-					}
-				}
+	private fun queryContentLong(uri: Uri, column: String): Long? = try {
+		app.contentResolver.query(uri, arrayOf(column), null, null, null)?.use { cursor ->
+			val index = cursor.getColumnIndex(column)
+			if (cursor.moveToFirst() && index >= 0 && !cursor.isNull(index)) {
+				cursor.getLong(index).takeIf { it > 0 }
+			} else {
+				null
 			}
-		} catch (_: Exception) {
-			// Not all providers support these columns; size/date stay unknown.
 		}
-		return sizeBytes to dateMillis
+	} catch (_: Exception) {
+		null
+	}
+
+	private fun parseCreationTime(value: String?): Long? {
+		val date = value?.trim()?.takeIf { it.isNotEmpty() } ?: return null
+		val position = ParsePosition(0)
+		for (format in creationTimeFormats) {
+			position.index = 0
+			position.errorIndex = -1
+			val time = format.parse(date, position)?.time
+			if (position.index == date.length && time != null && time > 0) {
+				return time
+			}
+		}
+		return GpxUtilities.parseTime(date).takeIf { it > 0 }
 	}
 
 	private fun extractDuration(file: File?, contentUri: Uri?): Long? =
