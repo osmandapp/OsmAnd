@@ -81,7 +81,7 @@ public class AdvancedEditPoiFragment extends BaseFullScreenFragment implements E
 		EditPoiContentAdapter.EditPoiListener editPoiListener = new EditPoiContentAdapter.EditPoiListener() {
 			@Override
 			public void onAddNewItem(int position, int buttonType) {
-				long id = System.currentTimeMillis();
+				long id = EditPoiContentAdapter.nextItemId();
 				contentAdapter.getItems().add(position, new TagItem("", "", id));
 				contentAdapter.notifyItemInserted(position);
 				recyclerView.postDelayed(() -> {
@@ -140,7 +140,55 @@ public class AdvancedEditPoiFragment extends BaseFullScreenFragment implements E
 		return collection;
 	}
 
-	public record TagItem(@NonNull String tag, @NonNull String value, long id) {
+
+	public static class TagItem {
+
+		private final long id;
+
+		@NonNull
+		private String tag;
+		@NonNull
+		private String value;
+		@NonNull
+		private String appliedTag;
+
+		public TagItem(@NonNull String tag, @NonNull String value, long id) {
+			this.tag = tag;
+			this.value = value;
+			this.appliedTag = tag;
+			this.id = id;
+		}
+
+		public long getId() {
+			return id;
+		}
+
+		@NonNull
+		public String getTag() {
+			return tag;
+		}
+
+		public void setTag(@NonNull String tag) {
+			this.tag = tag;
+		}
+
+		@NonNull
+		public String getValue() {
+			return value;
+		}
+
+		public void setValue(@NonNull String value) {
+			this.value = value;
+		}
+
+		@NonNull
+		public String getAppliedTag() {
+			return appliedTag;
+		}
+
+		public void setAppliedTag(@NonNull String appliedTag) {
+			this.appliedTag = appliedTag;
+		}
 	}
 
 	public void setValueData(@NonNull String[] values) {
@@ -186,7 +234,7 @@ public class AdvancedEditPoiFragment extends BaseFullScreenFragment implements E
 					|| tag.getKey().equals(currentPoiTypeKey)) {
 				continue;
 			}
-			list.add(new TagItem(tag.getKey(), tag.getValue(), System.currentTimeMillis()));
+			list.add(new TagItem(tag.getKey(), tag.getValue(), EditPoiContentAdapter.nextItemId()));
 		}
 
 		editPoiData.setIsInEdit(false);
@@ -224,6 +272,9 @@ public class AdvancedEditPoiFragment extends BaseFullScreenFragment implements E
 	public void onPause() {
 		super.onPause();
 		getData().deleteListener(mTagsChangedListener);
+		if (contentAdapter != null) {
+			contentAdapter.clearFocus();
+		}
 	}
 
 	private EditPoiDialogFragment getEditPoiFragment() {

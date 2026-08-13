@@ -247,6 +247,10 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 			result = addResult(result, (extraNameMatch != null ?  extraNameMatch : b.getName())
 					+ "_" + getShortLink(ZOOM_SIMILARITY_10_M));
 		}
+		String wikipedia = getWikipedia();
+		if (wikipedia != null) {
+			result = addResult(result, getShortLink(ZOOM_SIMILARITY_10_M) + wikipedia);
+		}
 		return result;
 	}
 	
@@ -322,6 +326,15 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 			}
 			if (first.atom.object != null) {
 				return ObfConstants.getOsmObjectId(first.atom.object);
+			}
+			if (first.isPoiCategory()) {
+				long poiTypeId = (first.atom.id << 3);
+				// suggest poi category for different cities in query (we can't chose which is better?)
+				if (objs.size() == 2) {
+					SpatialSearchResultRef second = objs.get(1);
+					poiTypeId += second.tokens.get(0).originalOrder;
+				}
+				return poiTypeId;
 			}
 			return first.atom.id;
 		}
@@ -413,10 +426,10 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 					}
 				}
 				LatLon resLoc = atom.getResultLocation();
-				return String.format("\"%s\" [%s] '%s' %s (%.4f %.4f)", words.toString().trim(), type, name,
+				return String.format(Locale.US, "\"%s\" [%s] '%s' %s (%.4f %.4f)", words.toString().trim(), type, name,
 						"" + ObfConstants.getOsmObjectId(idObject) + " " + (atom.id % 0xffff), resLoc.getLatitude(), resLoc.getLongitude());
 			} else if(atom.isPoiCategory()) {
-				return String.format("\"%s\" [%s] '%s' id=%d, obj=%,d ", words.toString().trim(), atom.typeStr(), atom.name,
+				return String.format(Locale.US, "\"%s\" [%s] '%s' id=%d, obj=%,d ", words.toString().trim(), atom.typeStr(), atom.name,
 						atom.id, atom.otherWordsCnt );
 			}
 			return atom.simpleName(words.toString()); 
@@ -495,7 +508,8 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	public static String compareKeyString(SpatialSearchResult o) {
 		int e = (o.getTotalRating() - o.parent.MIN_ELO_RATING) / 64;
 		String elo = e > 0 ? "-"+e+"elo" : "";
-		return String.format("t%d+%d-w%d-oth%d%s-tp%d", o.parent.tCount, o.surplusWords, o.objs.size(), 
+		String sw = o.surplusWords >= 0 ? ("+" + o.surplusWords) : ("" + o.surplusWords);
+		return String.format("t%d%s-w%d-oth%d%s-tp%d", o.parent.tCount, sw, o.objs.size(), 
 				Math.min(o.sumOther(), 3), elo, o.sumTypeOrder());
 	}
 	
@@ -621,8 +635,12 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		SpatialPoiType cat = getPoiCategory(ctx.poiSearch);
 		if (cat != null) {
 			if (cat.wikidataId != null) {
-//				System.out.println(cat.key + " " + cat.wikidataId);
-				return "TYPE_" + cat.wikidataId;
+				// suggest poi category for different cities in query (we can't chose which is better?)
+				String suffixPos = "";
+				if (objs.size() > 1) {
+					suffixPos += "_" + objs.get(1).tokens.get(0).word;
+				}
+				return "TYPE_" + cat.wikidataId + suffixPos;
 			}
 		}
 		return null;
@@ -641,6 +659,17 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 			return "";
 		}
 		return MapUtils.createShortLinkString(loc.getLatitude(), loc.getLongitude(), zoom);
+	}
+	
+	private String getWikipedia() {
+		if (getFirstRefObject(true) instanceof Amenity amenity) {
+			String wiki = amenity.getAdditionalInfo(Amenity.WIKIPEDIA);
+			if (wiki != null) {
+				String[] split = wiki.split("/");
+				return split[split.length - 1];
+			}
+		}
+		return null;
 	}
 }
 	

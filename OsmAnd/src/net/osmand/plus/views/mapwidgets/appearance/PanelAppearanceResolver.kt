@@ -40,11 +40,6 @@ object PanelAppearanceResolver {
 			ColorUtilities.getColor(app, if (nightMode) R.color.widgettext_night else R.color.widgettext_day)
 		}
 		var secondaryTextColor = ColorUtilities.getSecondaryTextColor(app, nightMode)
-		val textShadowColor = ContextCompat.getColor(
-			app,
-			if (nightMode) R.color.widgettext_shadow_night else R.color.widgettext_shadow_day
-		)
-		val textShadowRadius = if (!transparent && !nightMode) 0 else (4 * density).toInt()
 
 		val flatDrawableRes: Int
 		val rectangleDrawableRes: Int
@@ -139,6 +134,25 @@ object PanelAppearanceResolver {
 			backgroundColor,
 			backgroundTint
 		)
+		val textShadowRadius = if (background.isOpaque) 0 else (4 * density).toInt()
+		val textShadowColor = ContextCompat.getColor(
+			app,
+			if (isLightColor(primaryTextColor)) {
+				R.color.widgettext_shadow_night
+			} else {
+				R.color.widgettext_shadow_day
+			}
+		)
+		val surfaceColor = if (backgroundMode == PanelBackgroundMode.DEFAULT) {
+			null
+		} else {
+			val reference = if (background.isOpaque) {
+				backgroundColor
+			} else {
+				getDefaultBackgroundColor(app, panel, nightMode)
+			}
+			DynamicWidgetColors.resolve(reference).surface
+		}
 		return ResolvedPanelAppearance(
 			panel = panel,
 			nightMode = nightMode,
@@ -148,6 +162,7 @@ object PanelAppearanceResolver {
 			textShadowColor = textShadowColor,
 			textShadowRadius = textShadowRadius,
 			background = background,
+			surfaceColor = surfaceColor,
 			dividerColor = dividerColor,
 			standaloneDividerColor = standaloneDividerColor,
 			panelBorderColor = ContextCompat.getColor(app, panelBorderColorRes),
@@ -167,11 +182,14 @@ object PanelAppearanceResolver {
 		}
 	}
 
+	private fun isLightColor(@ColorInt color: Int): Boolean {
+		return ColorUtils.calculateLuminance(ColorUtilities.removeAlpha(color)) > 0.5
+	}
+
 	private fun resolvePressedBackgroundColor(@ColorInt backgroundColor: Int): Int {
 		val alpha = Color.alpha(backgroundColor)
 		val opaqueBackground = ColorUtilities.removeAlpha(backgroundColor)
-		val lightBackground = ColorUtils.calculateLuminance(opaqueBackground) > 0.5
-		val overlay = if (lightBackground) {
+		val overlay = if (isLightColor(backgroundColor)) {
 			ColorUtilities.getColorWithAlpha(Color.BLACK, LIGHT_BACKGROUND_PRESSED_OVERLAY_OPACITY)
 		} else {
 			ColorUtilities.getColorWithAlpha(Color.WHITE, DARK_BACKGROUND_PRESSED_OVERLAY_OPACITY)

@@ -30,7 +30,7 @@
     <string name="index_name_tts_voice">Indicaciones por voz (TTS, preferido)</string>
     <string name="amenity_type_osmwiki">Wikipedia (sin conexión)</string>
     <string name="amenity_type_user_defined">Definido por el usuario</string>
-    <string name="profile_settings">Ajustes de perfiles específicos</string>
+    <string name="profile_settings">Configuración específica del perfil</string>
     <string name="settings_preset">Perfil predefinido</string>
     <string name="routing_settings">Navegación</string>
     <string name="global_settings">Ajustes globales</string>
@@ -191,7 +191,7 @@
     <string name="poi_context_menu_call">Mostrar teléfono del PDI</string>
     <string name="website">Sitio web</string>
     <string name="phone">Teléfono</string>
-    <string name="unknown_location">Ubicación desconocida.</string>
+    <string name="unknown_location">Aún no se conoce la ubicación.</string>
     <string name="voice">Voz grabada</string>
     <string name="gpx_files_not_found">Sin archivos GPX en la carpeta de trazas</string>
     <string name="error_reading_gpx">No se pudieron leer los datos GPX.</string>
@@ -752,7 +752,7 @@
     <string name="gpx_info_diff_altitude">Rango de altitud: %1$s</string>
     <string name="gpx_info_asc_altitude">Descendido/ascendido: %1$s</string>
     <string name="map_widget_plain_time">Hora actual</string>
-    <string name="shared_string_waypoint">Punto de referencia</string>
+    <string name="shared_string_waypoint">Punto de ruta</string>
     <string name="layer_amenity_label">Nombres de puntos (PDI, favoritos)</string>
     <string name="show_zoom_buttons_navigation">Mostrar botones de zoom</string>
     <string name="route_descr_destination">Destino</string>
@@ -805,7 +805,7 @@
     <string name="rendering_value_bicycle_name">Bicicleta</string>
     <string name="rendering_value_pedestrian_name">A pie</string>
     <string name="shared_string_more">Más…</string>
-    <string name="shared_string_waypoints">Puntos de referencia</string>
+    <string name="shared_string_waypoints">Puntos de ruta</string>
     <string name="way_alarms">Advertencias de tráfico</string>
     <string name="speak_favorites">Favoritos cercanos</string>
     <string name="speak_poi">PDI cercanos</string>
@@ -932,7 +932,7 @@
     <string name="your_edits">Tus ediciones</string>
     <string name="waypoint_visit_after">Visitar luego</string>
     <string name="waypoint_visit_before">Visitar antes</string>
-    <string name="simulate_your_location">Simular tu ubicación</string>
+    <string name="simulate_your_location">Simular su ubicación</string>
     <string name="drawer">Lista plana</string>
     <string name="short_location_on_map">Lat %1$s
 \nLon %2$s</string>
@@ -1241,7 +1241,7 @@
     <string name="reports_for">Informe para</string>
     <string name="rendering_attr_hideUnderground_name">Objetos subterráneos</string>
     <string name="data_is_not_available">Datos no disponibles</string>
-    <string name="shared_string_read_more">Leer más</string>
+    <string name="shared_string_read_more">Conocer más</string>
     <string name="shared_string_email_address">Correo electrónico</string>
     <string name="shared_string_status">Estado</string>
     <string name="shared_string_save_changes">Guardar cambios</string>
@@ -1476,7 +1476,7 @@
     <string name="quick_action_map_overlay_switch">Mapa superpuesto cambiado a «%s».</string>
     <string name="quick_action_map_underlay_switch">Mapa subyacente cambiado a «%s».</string>
     <string name="shared_string_slope">Pendientes</string>
-    <string name="add_new_folder">Añadir nueva carpeta</string>
+    <string name="add_new_folder">Añadir carpeta nueva</string>
     <string name="points_delete_multiple">¿Borrar %1$d punto(s)\?</string>
     <string name="shared_string_gpx_track">Traza</string>
     <string name="max_speed">Velocidad máxima</string>
@@ -1633,7 +1633,7 @@
     <string name="none_point_error">Añadir al menos un punto.</string>
     <string name="mappilary_no_internet_desc">Las fotos de Mapillary solo están disponibles en línea.</string>
     <string name="retry">Reintentar</string>
-    <string name="add_waypoint">Añadir punto de referencia</string>
+    <string name="add_waypoint">Añadir punto de ruta</string>
     <string name="save_gpx_waypoint">Guardar punto GPX</string>
     <string name="waypoint_one">Punto de referencia 1</string>
     <string name="do_not_use_animations">Sin animaciones</string>
@@ -1646,7 +1646,7 @@
     <string name="measurement_tool_snap_to_road_descr">OsmAnd conectará los puntos a las rutas del perfil elegido.</string>
     <string name="choose_navigation_type">Elegir perfil de navegación</string>
     <string name="empty_state_favourites">Añadir favoritos</string>
-    <string name="empty_state_favourites_desc">Importa los favoritos o añádelos marcando puntos en el mapa.</string>
+    <string name="empty_state_favourites_desc">Importe favoritos o añádalos marcando puntos en el mapa.</string>
     <string name="import_track">Importar archivo GPX</string>
     <string name="import_track_desc">El archivo «%1$s» no contiene puntos de referencia. ¿Quiere importarlo como una traza?</string>
     <string name="move_point">Mover punto</string>
@@ -1714,7 +1714,7 @@
     <string name="appearance_on_the_map">Aspecto en el mapa</string>
     <string name="add_track_to_markers_descr">Elige una traza para añadir sus puntos de referencia a los marcadores.</string>
     <string name="add_favourites_group_to_markers_descr">Elige una categoría de favoritos para añadir a los marcadores.</string>
-    <string name="shared_string_gpx_waypoints">Puntos de referencia de la traza</string>
+    <string name="shared_string_gpx_waypoints">Puntos de ruta de la traza</string>
     <string name="favourites_group">Categoría de favoritos</string>
     <string name="add_group">Añadir un grupo</string>
     <string name="add_group_descr">Importar grupos desde Favoritos o puntos de referencia GPX.</string>
@@ -2015,7 +2015,7 @@
     <string name="routing_attr_avoid_sett_name">Sin empedrar</string>
     <string name="routing_attr_avoid_sett_description">Evita calles con adoquines naturales</string>
     <string name="shared_string_degrees">Grados</string>
-    <string name="shared_string_milliradians">Miliradián</string>
+    <string name="shared_string_milliradians">Milirradianes</string>
     <string name="angular_measeurement">Unidad angular</string>
     <string name="routing_attr_avoid_tram_name">Sin tranvías</string>
     <string name="routing_attr_avoid_tram_description">Evita usar tranvías</string>
@@ -2698,8 +2698,8 @@
     <string name="shared_string_redo">Rehacer</string>
     <string name="release_3_8">• Se ha actualizado la función «Planificar ruta»: permite usar diferentes tipos de navegación por segmento y la inclusión de trazas \n \n • Nuevo menú con el aspecto de las trazas: elegir el color, el grosor, mostrar las flechas de dirección y los iconos de inicio y fin. \n \n • Mejoras en la visibilidad de los nodos de bicicleta. \n \n • Las trazas ahora se pueden pulsar, contiene un menú contextual con información básica. \n \n • Algoritmos de búsqueda mejorados \n \n • Mejoras en las opciones de seguimiento de la navegación \n \n • Se han solucionado los problemas de la importación y exportación en los ajustes de los perfiles</string>
     <string name="sort_last_modified">Último modificado</string>
-    <string name="sort_name_descending">Nombre: Z – A</string>
-    <string name="sort_name_ascending">Nombre: A – Z</string>
+    <string name="sort_name_descending">Nombre: Z-A</string>
+    <string name="sort_name_ascending">Nombre: A-Z</string>
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="what_is_new">Novedades</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
@@ -2758,8 +2758,7 @@
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="routing_attr_allow_intermittent_name">Permitir cursos de agua intermitentes</string>
     <string name="shared_string_graph">Gráfico</string>
-    <string name="message_graph_will_be_available_after_recalculation">Ten paciencia.
-\nEl gráfico estará disponible al recalcular la ruta.</string>
+    <string name="message_graph_will_be_available_after_recalculation">Espere un momento.\nEl gráfico estará disponible una vez que se haya recalculado la ruta.</string>
     <string name="login_open_street_map">Iniciar sesión en OpenStreetMap</string>
     <string name="login_open_street_map_org">Ingresar en OpenStreetMap.org</string>
     <string name="sign_in_with_open_street_map">Ingresar con OpenStreetMap</string>
@@ -2792,7 +2791,7 @@
     <string name="keep_it_empty_if_not">Si no, mantenerlo vacío</string>
     <string name="edit_track">Editar traza</string>
     <string name="edit_online_routing_engine">Editar motor de navegación en línea</string>
-    <string name="delete_waypoints">Borrar puntos de referencia</string>
+    <string name="delete_waypoints">Eliminar puntos de ruta</string>
     <string name="delete_online_routing_engine">¿Quitar este motor de navegación en línea\?</string>
     <string name="copy_to_map_favorites">Copiar a favoritos</string>
     <string name="copy_address">Copiar dirección</string>
@@ -3479,7 +3478,7 @@
     <string name="map_widget_camera_distance">Elevación de la cámara</string>
     <string name="map_widget_zoom_level">Nivel del zoom</string>
     <string name="map_widget_target_distance">Distancia de la cámara al objetivo</string>
-    <string name="import_as_one_track">Importar como una traza</string>
+    <string name="import_as_one_track">Importar como una sola traza</string>
     <string name="shared_string_large">Largo</string>
     <string name="shared_string_normal">Normal</string>
     <string name="how_to_use">Cómo usar:</string>
@@ -3782,15 +3781,15 @@
     <string name="bluetooth_found_title">Encontrado: %d</string>
     <string name="bluetooth_not_supported">Bluetooth incompatible</string>
     <string name="ble_search_again">Volver a buscar</string>
-    <string name="ant_plus_nothing_found_text">Incapaz de encontrar cualquier sensor</string>
-    <string name="ant_plus_nothing_found_description">Asegúrate de que \n- El Bluetooth esté activado \n- El sensor esté activado \n- Este dispositivo esté cerca del sensor</string>
+    <string name="ant_plus_nothing_found_text">No se pudo hallar ningún sensor</string>
+    <string name="ant_plus_nothing_found_description">Cerciórese de que: \n• El Bluetooth esté activado \n• El sensor esté activado \n• Este dispositivo esté cerca del sensor</string>
     <string name="ant_plus_bluetooth_off">Bluetooth desactivado</string>
     <string name="ant_plus_bluetooth_off_description">Active los sensores de búsqueda y vinculación del Bluetooth.</string>
     <string name="ant_plus_searching_text">Buscando sensores</string>
     <string name="ant_plus_searching_text_description">Por favor, acerque el dispositivo al sensor. Debe activar el sensor para que OsmAnd pueda encontrarlo.</string>
     <string name="ant_plus_help_title">Desconozco el tipo de sensor</string>
     <string name="ant_plus_searching">Buscando</string>
-    <string name="ant_plus_pair_new_sensor">Vincular nuevo sensor</string>
+    <string name="ant_plus_pair_new_sensor">Emparejar sensor nuevo</string>
     <string name="ant_plus_open_settings">Abrir los ajustes</string>
     <string name="ant_plus_pair_new_sensor_ble">Vincular sensor de Bluetooth LE</string>
     <string name="learn_more_about_sensors_link">Aprende más sobre los sensores.</string>
@@ -3803,12 +3802,12 @@
     <string name="external_device_details_pair">Vincular</string>
     <string name="external_device_details_disconnect">Desconectar</string>
     <string name="ant_plus_pair_new_sensor_ant_plus">Vincular sensor de ANT+</string>
-    <string name="ant_plus_pair_bluetooth_prompt">Puedes vincular con OsmAnd, sensores «Bluetooth LE» y «ANT+».</string>
+    <string name="ant_plus_pair_bluetooth_prompt">Puede emparejar sensores Bluetooth LE y ANT+ con OsmAnd.</string>
     <string name="is_imported">%1$s ha sido importado.</string>
     <string name="file_already_exists_description">«%1$s». Ya existe un fichero con ese nombre. Al reemplazarlo, se sobrescribirán todos los cambios realizados con la versión actual.</string>
     <string name="file_already_exists">El archivo ya existe</string>
     <string name="nav_profile_confirm_delete">¿Borrar «%1$s»?</string>
-    <string name="no_search_results">Sin resultados</string>
+    <string name="no_search_results">Ningún resultado</string>
     <string name="search_track_by_name">Buscar traza por el nombre</string>
     <string name="number_of_tracks">%1$s trazas</string>
     <string name="rendering_attr_lightDetail_name">Iluminación</string>
@@ -3846,7 +3845,7 @@
     <string name="rssi_widget_desc">Muestra el nivel RSSI del dispositivo externo.</string>
     <string name="map_widget_rssi">Indicador de fuerza de la señal recibida (RSSI)</string>
     <string name="tracks_empty_folder_description">Esta carpeta no contiene trazas aún.</string>
-    <string name="tracks_empty_folder">Carpeta vacía</string>
+    <string name="tracks_empty_folder"></string>
     <string name="track_not_recorded">No grabado</string>
     <string name="shared_string_new_track">Nueva traza</string>
     <string name="shared_string_visible_on_map">Visible en el mapa</string>
@@ -3881,7 +3880,7 @@
     <string name="osmand_cloud_deletion_subscriptions_warning">Esto no cancelará la suscripción a OsmAnd Pro.</string>
     <string name="manage_subscriptions">Gestionar las suscripciones.</string>
     <string name="delete_account_warning">¿Borrar la cuenta «%1$s»?</string>
-    <string name="shared_string_deleting">Borrando</string>
+    <string name="shared_string_deleting">Eliminando</string>
     <string name="deleting_complete">Borrado completo</string>
     <string name="delete_account">Borrar cuenta</string>
     <string name="backup_error_delete_account_email_match">El correo electrónico no coincide con el nombre de usuario</string>
@@ -4068,12 +4067,12 @@
     <string name="trash_is_empty_banner_desc">Los elementos borrados desde OsmAnd Cloud estarán disponibles aquí durante %1$s días.</string>
     <string name="delete_trash_item_confirmation_desc">¿Borrar «%1$s» permanentemente?</string>
     <string name="shared_string_empty_trash">Vaciar papelera</string>
-    <string name="shared_string_delete_immediately">Borrar de inmediato</string>
+    <string name="shared_string_delete_immediately">Eliminar de inmediato</string>
     <string name="shared_string_is_deleted">«%1$s» se borró.</string>
     <string name="cloud_item_restored">«%1$s» se restauró en Cloud.</string>
     <string name="trash_is_empty">Papelera vacía</string>
     <string name="shared_string_trash">Papelera</string>
-    <string name="shared_string_delete_item">Borrar elemento</string>
+    <string name="shared_string_delete_item">Eliminar elemento</string>
     <string name="root_folder">Carpeta raíz</string>
     <string name="shared_string_rows">Filas</string>
     <string name="all_folders">Todas las carpetas</string>
@@ -4224,7 +4223,7 @@
     <string name="maps_that_also_be_used">Mapas extras a usar: %1$s</string>
     <string name="required_maps">Mapas necesarios</string>
     <string name="missing_maps_description">Algunos mapas sin conexión necesarios para esta ruta desaparecieron o están desactualizados. Descarga o actualiza estos mapas.</string>
-    <string name="missing_maps_header">Mapas perdidos o desactualizados</string>
+    <string name="missing_maps_header">Mapas desactualizados o faltantes</string>
     <string name="route_line_use_coloring_speed">La línea de la ruta se colorea según la velocidad del movimiento.</string>
     <string name="route_line_use_coloring_altitude">La línea de la ruta se colorea según la elevación de la altitud.</string>
     <string name="visualized_by">Visualizado por</string>
@@ -4299,7 +4298,7 @@
     <string name="quick_action_audio_note">Nota de voz</string>
     <string name="quick_action_video_note">Nota de vídeo</string>
     <string name="quick_action_photo_note">Nota fotográfica</string>
-    <string name="quick_action_track_waypoint">Punto de referencia de la traza</string>
+    <string name="quick_action_track_waypoint">Punto de ruta de la traza</string>
     <string name="quick_action_verb_pause_resume">Pausar / Reanudar</string>
     <string name="quick_action_verb_turn_on_off">Activar / Desactivar</string>
     <string name="quick_action_verb_start_stop">Iniciar / Parar</string>
@@ -4575,7 +4574,7 @@
     <string name="rendering_attr_showClimbingRoutes_description">Mostrar rutas de escalada</string>
     <string name="rendering_attr_showClimbingRoutes_name">Rutas de escalada</string>
     <string name="ais_load_data">Cargar datos AIS desde un archivo</string>
-    <string name="ais_address_settings">Configuración de la dirección IP</string>
+    <string name="ais_address_settings">Configuración de dirección IP</string>
     <string name="ais_address_settings_description">Elija el protocolo NMEA (UDP/TCP) y defina las direcciones</string>
     <string name="shared_string_road_exit">Salida</string>
     <string name="popular_places_nearby">Sitios populares cerca</string>
@@ -4909,8 +4908,8 @@
     <string name="map_screen_layout_descr">Elija si desea utilizar un diseño único para todas las orientaciones o personalizar Vertical y Horizontal por separado.</string>
     <string name="panels_layout_descr">Elija un diseño para los paneles superior e inferior. Pueden ser anchos, abarcando todo el ancho de la pantalla, o compactos, encajando entre los paneles laterales y los botones.</string>
     <string name="galactic_line">Línea galáctica</string>
-    <string name="meridian_line">Línea meridiana</string>
-    <string name="equator_line">Línea del Ecuador</string>
+    <string name="meridian_line">Línea del meridiano</string>
+    <string name="equator_line">Línea del ecuador</string>
     <string name="delete_groups_confirmation">¿Quiere eliminar los grupos?</string>
     <string name="add_to_track">Añadir a traza</string>
     <string name="unpin_folder">Desanclar carpeta</string>
@@ -4947,15 +4946,15 @@
         <item quantity="many">%d pistas</item>
         <item quantity="other">%d pistas</item>
     </plurals>
-    <string name="gradient_no_data_point_summary">Color aplicado cuando faltan datos o estos no están definidos.</string>
+    <string name="gradient_no_data_point_summary">Color aplicado cuando hay datos faltantes o no definidos.</string>
     <string name="gradient_input_value_too_low_warn">El valor mínimo permitido es %1$s.</string>
     <string name="gradient_input_value_too_high_warn">El valor máximo permitido es %1$s.</string>
     <string name="gradient_input_value_duplicate_warn">Este valor ya existe en la paleta.</string>
-    <string name="gradient_input_invalid_value_warn">Por favor, ingrese un número válido.</string>
+    <string name="gradient_input_invalid_value_warn">Introduzca un número válido.</string>
     <string name="unexpected_error_occurred_warn">Se produjo un error inesperado.</string>
-    <string name="relative_gradient_point_avg_summary">Color para el valor promedio de la pista.</string>
-    <string name="relative_gradient_point_min_summary">Color para el valor mínimo encontrado en la pista.</string>
-    <string name="no_objects_found">No se encontraron objetos</string>
+    <string name="relative_gradient_point_avg_summary">Color para el valor medio de la traza.</string>
+    <string name="relative_gradient_point_min_summary">Color para el valor mínimo encontrado en la traza.</string>
+    <string name="no_objects_found">No se encontró ningún objeto</string>
     <string name="astro_search_info_solar_system">El Sistema Solar es el conjunto de cuerpos celestes unidos por la gravedad del Sol y las masas que orbitan a su alrededor, entre los cuales destacan sus ocho planetas, uno de los cuales es la Tierra.</string>
     <string name="astro_search_info_constellations">Una constelación es una zona de la esfera celeste en la que un grupo de estrellas visibles forma una figura o contorno perceptible.</string>
     <string name="astro_search_info_stars">Las estrellas son objetos astronómicos luminosos formados por plasma, que se mantienen unidos gracias a su propia gravedad.</string>
@@ -5022,19 +5021,19 @@
     <string name="astro_type_constellation">Constelación</string>
     <string name="shared_string_maximum">Máximo</string>
     <string name="shared_string_minimum">Mínimo</string>
-    <string name="shared_string_ratio">radio</string>
+    <string name="shared_string_ratio">proporción</string>
     <string name="shared_string_percentage">porcentaje</string>
     <string name="remove_step">Quitar paso</string>
     <string name="shared_string_value">Valor</string>
-    <string name="gradient_range_type_fixed_summary">Los colores se asignan a valores numéricos absolutos (ej. 50 Km/h).</string>
+    <string name="gradient_range_type_fixed_summary">Los colores se asignan a números absolutos concretos (p. ej., 50 km/h).</string>
     <string name="gradient_range_type_fixed">Valores fijos</string>
-    <string name="gradient_range_type_relative_summary">Los colores se ajustan automáticamente en función del rango mínimo y máximo de la pista.</string>
+    <string name="gradient_range_type_relative_summary">Los colores se ajustan automáticamente según el intervalo mínimo/máximo de la traza.</string>
     <string name="gradient_range_type_relative">Relativo</string>
     <string name="edit_palette">Editar paleta</string>
     <string name="add_palette">Añadir paleta</string>
-    <string name="delete_palette">Borrar paleta</string>
-    <string name="delete_colors_palette_dialog_summary">¿Estás seguro de que quieres eliminar la paleta %1$s?</string>
-    <string name="astro_min_magnitude">Magnitud min.</string>
+    <string name="delete_palette">Eliminar paleta</string>
+    <string name="delete_colors_palette_dialog_summary">¿Confirma que quiere eliminar %1$s paleta?</string>
+    <string name="astro_min_magnitude">Magnitud mín.</string>
     <string name="intersection">Intersección</string>
     <string name="astro_daily_path">Camino diario</string>
     <string name="astro_deep_sky">Cielo profundo</string>
@@ -5052,7 +5051,7 @@
     <string name="astro_offline_knowledge_base_description">Descarga la base de datos extendida para acceder a artículos de Wikipedia y catálogos del cielo profundo sin conexión.</string>
     <string name="astro_schedule_next_day_note">⁺¹ Día siguiente.</string>
     <string name="astro_visibility_show_today">Mostrar la visibilidad de hoy</string>
-    <string name="astro_schedule_show_current_week">Mostrar la semana actual</string>
+    <string name="astro_schedule_show_current_week">Mostrar semana actual</string>
     <string name="start_free_trial">Comenzar la prueba gratuita</string>
     <string name="shared_string_unlock">Desbloquear</string>
     <string name="subscription_free_trial_with_price">%1$s gratis, luego %2$s</string>
@@ -5133,4 +5132,6 @@
     <string name="attached_media">Adjuntar archivos</string>
     <string name="shared_string_recent">Reciente</string>
     <string name="sort_by_nearest_to_map_center">Cercano al centro del mapa</string>
+    <string name="routing_attr_motor_type_ethanol_name">Etanol</string>
+    <string name="astronomy_map">Mapa astronómico</string>
 </resources>

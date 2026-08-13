@@ -84,7 +84,8 @@ class GpxReader(private val adapter: GpxReaderAdapter)
 		val gpxFile = GpxUtilities.loadGpxFile(file, null, false)
 		val updatedItem = item ?: GpxDataItem(file)
 		if (gpxFile.error == null) {
-			updatedItem.setAnalysis(gpxFile.getAnalysis(file.lastModified(), null, null, analyser))
+			updatedItem.setAnalysis(gpxFile.getAnalysis(file.lastModified(), null, null, analyser,
+				collectPointData = false))
 			if (!updatedItem.isRegularTrack()) {
 				return updatedItem
 			}

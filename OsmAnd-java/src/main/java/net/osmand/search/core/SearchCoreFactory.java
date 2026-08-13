@@ -2060,7 +2060,7 @@ public class SearchCoreFactory {
 		private LatLon searchOLCLocation(SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
 			List<String> unknownWords = phrase.getUnknownSearchWords();
 			String text = !unknownWords.isEmpty() ? unknownWords.get(0) : phrase.getUnknownWordToSearch();
-			
+
 			final List<String> allowedTypes = Arrays.asList("village", "town", "city"); // ascending priority
 			QuadRect searchBBox31 = new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
 			final NameStringMatcher nm = new NameStringMatcher(text, CHECK_STARTS_FROM_SPACE);
@@ -2086,11 +2086,11 @@ public class SearchCoreFactory {
 					if (object.objectType == POI) {
 						amenity = (Amenity) object.object;
 					}
-					
+
 					if (amenity == null) {
 						return false;
 					}
-					
+
 					String subType = amenity.getSubType();
 					String localeName = amenity.getName(lang, transliterate);
 					Collection<String> otherNames = object.otherNames;

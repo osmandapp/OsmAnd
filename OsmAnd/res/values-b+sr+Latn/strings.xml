@@ -1444,7 +1444,7 @@
     <string name="move_to_history">Premesti u istoriju</string>
     <string name="marker_save_as_track_descr">Izvezi markere u sledeću datoteku GPX-a:</string>
     <string name="coordinate_input">Unos koordinata</string>
-    <string name="shared_string_sort">Sortiranje</string>
+    <string name="shared_string_sort">Sortiraj</string>
     <string name="plan_route">Plan rute</string>
     <string name="shared_string_finish">Kraj</string>
     <string name="my_location">Moja pozicija</string>
@@ -2169,7 +2169,7 @@
     <string name="open_saved_track">Otvori sačuvanu trasu</string>
     <string name="shared_string_is_saved">je sačuvano</string>
     <string name="one_point_error">Dodaj bar dve tačke.</string>
-    <string name="shared_string_redo">Ponovi</string>
+    <string name="shared_string_redo">Povrati</string>
     <string name="release_3_8">• Osvežena je mogućnost rute: omogućava upotrebu različitih vrsta navođenja po delu i uključivanje ruta \n \n • Novi meni za trase: Odaberi boju, debljinu, strelice smera prikaza, sličice početka i završetka \n \n • Poboljšana je vidljivost biciklističkih čvorova. \n \n • Trase se sada mogu tapkati, imaju priručni meni sa osnovnim podacima. \n \n • Poboljšani su motori pretrage \n \n • Poboljšane su mogućnosti praćenja trasa u navođenju \n \n • Rešeni problemi sa uvozom / izvozom podešavanja profila</string>
     <string name="sort_last_modified">Poslednje izmenjeno</string>
     <string name="sort_name_descending">Ime: Z – A</string>
@@ -2190,8 +2190,7 @@
     <string name="use_native_pt_desc">Prebaci se na Java (bezbedno) izračunavanje rute javnog prevoza</string>
     <string name="osm_edit_logout_success">Odjavljen</string>
     <string name="shared_string_graph">Grafikon</string>
-    <string name="message_graph_will_be_available_after_recalculation">Molimo sačekaj.
-\nGrafikon će biti dostupan nakon ponovnog izračunavanja rute.</string>
+    <string name="message_graph_will_be_available_after_recalculation">Molimo sačekajte.\nGrafik će biti dostupan nakon ponovnog izračunavanja rute.</string>
     <string name="shared_string_local_maps">Lokalne mape</string>
     <string name="icon_group_amenity">Slobodno vreme</string>
     <string name="icon_group_special">Specijalna</string>
@@ -3061,7 +3060,7 @@
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Fixme oznake</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Šematski prikaz ikona na niskim nivoima zumiranja za one TOI koje se obično ne prikazuju</string>
     <string name="distance_between_points">Udaljenost između tačaka</string>
-    <string name="save_as_copy">Sačuvaj kao kupiju</string>
+    <string name="save_as_copy">Sačuvaj kao kopiju</string>
     <string name="storage_migration_wrong_folder_warning">Nema podataka OsmAnda u odabranom folderu. Pokušaj ponovo.</string>
     <string name="from_to_with_params">Od %1$s do %2$s</string>
     <string name="progress_complete">%1$s završeno</string>
@@ -4277,9 +4276,9 @@
     <string name="relief_3d_download_description">Potrebne su dodatne mape za prikaz terena na mapi.</string>
     <string name="vertical_exaggeration_description">Promenom vrednosti skale možeš naglasiti 3D reljef.</string>
     <string name="delete_actions_button">Dugme za brisanje</string>
-    <string name="use_nearby_roads">Koristite obližnje puteve</string>
+    <string name="use_nearby_roads">Koristi obližnje puteve</string>
     <string name="shared_string_osm_id">OSM ID</string>
-    <string name="use_terrain_maps">Koristi Terenske mape</string>
+    <string name="use_terrain_maps">Koristi mape terena</string>
     <string name="delete_actions_button_confirmation">Da li ste sigurni da želite da izbrišete \"%1$s\" sa svim dodatim radnjama?</string>
     <string name="use_terrain_maps_summary">Koriste se mape terena za podatke o nadmorskoj visini. Geometrija putanje ostaje nepromenjena.</string>
     <string name="use_nearby_roads_summary">Koristi se vanmrežna mapa radi pronalaženja obližnjih puteva i podataka o nadmorskoj visini. Može prilagoditi geometriju putanje.</string>
@@ -4685,7 +4684,7 @@
     <string name="popular_places">Popularna mesta</string>
     <string name="choose_location">Izaberite lokaciju</string>
     <string name="point_location">Tačka lokacije</string>
-    <string name="shared_string_manual">Uputstvo</string>
+    <string name="shared_string_manual">Ručno</string>
     <string name="shared_string_map_center">Centar mape</string>
     <string name="choose_location_on_map">Izaberite lokaciju na mapi.</string>
     <string name="layer_coordinates_grid">Koordinatna mreža</string>
@@ -5323,4 +5322,19 @@
     <string name="always_keep_local_copy">Uvek čuvaj lokalnu kopiju</string>
     <string name="always_keep_local_copy_description">Mediji ostaju pričvršćeni čak i ako se original obriše iz galerije ili fajlova.</string>
     <string name="release_5_4">• Nova prostorna pretraga — pronađite mesta i pretražite oko mesta\n\n • Osveženi KI pretrage: sortiranje, filteri kategorija, čistiji izgled\n\n • Priložite fotografije i medije omiljenima\n\n • Omiljeni: podrška za podgrupe i fascikle koje se mogu zakačiti\n\n • Koordinate: pretraga, mreža mape i prikaz TOI sada podržavaju EPSG i lokator Mejdenheda\n\n • Ispravljeni prekidi navigacije; prebacivanje između standardnog i brzog rutiranja\n\n • Podesite razmeru mape za Android Auto odvojeno od telefona\n\n • Astronomija je dodala pomračenja Sunca i Meseca</string>
+    <string name="share_favorites_media_preparation_failed">Nije moguće uključiti priložene medije. Samo deljenje tačaka.</string>
+    <plurals name="files_count">
+        <item quantity="one">%d fajl</item>
+        <item quantity="few">%d fajla</item>
+        <item quantity="other">%d fajlova</item>
+    </plurals>
+    <string name="preparing_file">Priprema fajla</string>
+    <string name="shared_string_archive">Arhiva</string>
+    <string name="share_favorites_with_media_description">Omiljene tačke u %1$s imaju priložene medije. Delite samo tačke ili tačke sa medijima kao arhivu.</string>
+    <string name="share_favorites_points_only">Samo tačke</string>
+    <string name="share_favorites_points_and_media">Tačke i mediji</string>
+    <string name="share_favorites_preparation_failed">Nije bila uspešna priprema fajlova za deljenje.</string>
+    <string name="share_favorites_share_failed">Deljenje fajla nije uspelo.</string>
+    <string name="share_favorites_missing_media_warning">Neki priloženi mediji nisu mogli biti uključeni.</string>
+    <string name="search_on_web">Pretraga na vebu</string>
 </resources>

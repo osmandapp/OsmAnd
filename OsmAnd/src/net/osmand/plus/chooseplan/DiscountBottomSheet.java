@@ -27,10 +27,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.widget.NestedScrollView;
 import androidx.core.graphics.Insets;
@@ -118,23 +116,23 @@ public class DiscountBottomSheet extends BaseMaterialBottomSheetDialogFragment i
 		}
 	};
 
-	private static final List<BannerFeatureItem> MAPS_PLUS_BANNER_FEATURES = Arrays.asList(
-			new BannerFeatureItem(OsmAndFeature.UNLIMITED_MAP_DOWNLOADS),
-			new BannerFeatureItem(OsmAndFeature.ANDROID_AUTO),
-			new BannerFeatureItem(OsmAndFeature.OSMAND_CLOUD),
-			new BannerFeatureItem(OsmAndFeature.TERRAIN)
+	private static final List<OsmAndFeature> MAPS_PLUS_BANNER_FEATURES = Arrays.asList(
+			OsmAndFeature.UNLIMITED_MAP_DOWNLOADS,
+			OsmAndFeature.ANDROID_AUTO,
+			OsmAndFeature.OSMAND_CLOUD,
+			OsmAndFeature.TERRAIN
 	);
-	private static final List<BannerFeatureItem> OSMAND_PRO_BANNER_FEATURES = Arrays.asList(
-			new BannerFeatureItem(OsmAndFeature.OSMAND_CLOUD),
-			new BannerFeatureItem(OsmAndFeature.HOURLY_MAP_UPDATES),
-			new BannerFeatureItem(OsmAndFeature.UNLIMITED_MAP_DOWNLOADS),
-			new BannerFeatureItem(OsmAndFeature.VEHICLE_METRICS)
+	private static final List<OsmAndFeature> OSMAND_PRO_BANNER_FEATURES = Arrays.asList(
+			OsmAndFeature.OSMAND_CLOUD,
+			OsmAndFeature.HOURLY_MAP_UPDATES,
+			OsmAndFeature.UNLIMITED_MAP_DOWNLOADS,
+			OsmAndFeature.VEHICLE_METRICS
 	);
-	private static final List<BannerFeatureItem> OSMAND_PRO_WITH_MAPS_PLUS_BANNER_FEATURES = Arrays.asList(
-			new BannerFeatureItem(OsmAndFeature.OSMAND_CLOUD),
-			new BannerFeatureItem(OsmAndFeature.HOURLY_MAP_UPDATES),
-			new BannerFeatureItem(OsmAndFeature.RELIEF_3D),
-			new BannerFeatureItem(OsmAndFeature.VEHICLE_METRICS)
+	private static final List<OsmAndFeature> OSMAND_PRO_WITH_MAPS_PLUS_BANNER_FEATURES = Arrays.asList(
+			OsmAndFeature.OSMAND_CLOUD,
+			OsmAndFeature.HOURLY_MAP_UPDATES,
+			OsmAndFeature.RELIEF_3D,
+			OsmAndFeature.VEHICLE_METRICS
 	);
 
 	@Nullable
@@ -244,12 +242,8 @@ public class DiscountBottomSheet extends BaseMaterialBottomSheetDialogFragment i
 		FlowLayout listContainer = view.findViewById(R.id.list_container);
 		listContainer.removeAllViews();
 		int spacing = getResources().getDimensionPixelSize(R.dimen.content_padding_small_half);
-		for (BannerFeatureItem item : getBannerFeatureItems(inAppSku)) {
-			View itemView = createFeatureChip(item);
-			if (item.feature != null) {
-				itemView.setOnClickListener(v -> bindChoosePlanContent(view, item.feature, inAppSku, args));
-			}
-			listContainer.addView(itemView, new FlowLayout.LayoutParams(spacing, spacing));
+		for (OsmAndFeature feature : getBannerFeatures(inAppSku)) {
+			listContainer.addView(createFeatureChip(feature), new FlowLayout.LayoutParams(spacing, spacing));
 		}
 		listContainer.addView(createLearnMoreChip(), new FlowLayout.LayoutParams(spacing, spacing));
 
@@ -288,7 +282,7 @@ public class DiscountBottomSheet extends BaseMaterialBottomSheetDialogFragment i
 	}
 
 	@NonNull
-	private List<BannerFeatureItem> getBannerFeatureItems(@Nullable String inAppSku) {
+	private List<OsmAndFeature> getBannerFeatures(@Nullable String inAppSku) {
 		if (isMapsPlusSku(inAppSku)) {
 			return MAPS_PLUS_BANNER_FEATURES;
 		} else if (InAppPurchaseUtils.isMapsPlusAvailable(getApp(), false) || InAppPurchaseUtils.isFullVersionAvailable(getApp(), false)) {
@@ -297,7 +291,7 @@ public class DiscountBottomSheet extends BaseMaterialBottomSheetDialogFragment i
 		return OSMAND_PRO_BANNER_FEATURES;
 	}
 
-	private View createFeatureChip(@NonNull BannerFeatureItem item) {
+	private View createFeatureChip(@NonNull OsmAndFeature feature) {
 		LinearLayout chip = new LinearLayout(requireContext());
 		chip.setGravity(android.view.Gravity.CENTER_VERTICAL);
 		chip.setOrientation(LinearLayout.HORIZONTAL);
@@ -310,11 +304,11 @@ public class DiscountBottomSheet extends BaseMaterialBottomSheetDialogFragment i
 		int iconSize = getResources().getDimensionPixelSize(R.dimen.standard_icon_size);
 		LinearLayout.LayoutParams iconParams = new LinearLayout.LayoutParams(iconSize, iconSize);
 		iconParams.setMarginEnd(dpToPx(10f));
-		icon.setImageResource(item.getIconId(isNightMode()));
+		icon.setImageResource(feature.getIconId(isNightMode()));
 		chip.addView(icon, iconParams);
 
 		TextViewEx title = new TextViewEx(requireContext());
-		title.setText(getString(item.titleId));
+		title.setText(getString(feature.getListTitleId()));
 		title.setTextColor(ColorUtilities.getPrimaryTextColor(getApp(), isNightMode()));
 		title.setTextSize(android.util.TypedValue.COMPLEX_UNIT_PX,
 				getResources().getDimension(R.dimen.default_list_text_size));
@@ -822,35 +816,6 @@ public class DiscountBottomSheet extends BaseMaterialBottomSheetDialogFragment i
 			return true;
 		}
 		return false;
-	}
-
-	private static class BannerFeatureItem {
-
-		@StringRes
-		final int titleId;
-		@DrawableRes
-		final int dayIconId;
-		@DrawableRes
-		final int nightIconId;
-		@Nullable
-		final OsmAndFeature feature;
-
-		BannerFeatureItem(@NonNull OsmAndFeature feature) {
-			this(feature.getListTitleId(), feature.getIconId(false), feature.getIconId(true), feature);
-		}
-
-		BannerFeatureItem(@StringRes int titleId, @DrawableRes int dayIconId, @DrawableRes int nightIconId,
-		                  @Nullable OsmAndFeature feature) {
-			this.titleId = titleId;
-			this.dayIconId = dayIconId;
-			this.nightIconId = nightIconId;
-			this.feature = feature;
-		}
-
-		@DrawableRes
-		int getIconId(boolean nightMode) {
-			return nightMode ? nightIconId : dayIconId;
-		}
 	}
 
 	private static class DiscountBadgeSpan extends ReplacementSpan {

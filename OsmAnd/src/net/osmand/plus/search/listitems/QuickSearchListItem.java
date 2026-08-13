@@ -38,6 +38,7 @@ import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
+import net.osmand.search.core.spatial.SpatialSearchResult;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
@@ -77,6 +78,21 @@ public class QuickSearchListItem {
 
 	public SearchResult getSearchResult() {
 		return searchResult;
+	}
+
+	@Nullable
+	public SpatialSearchResult getSpatialSearchResult() {
+		SearchResult searchResult = getSearchResult();
+		if(searchResult != null) {
+			return searchResult.spatialResult;
+		}
+		return null;
+	}
+
+	public boolean isSpatialCategorySearchResult() {
+		SpatialSearchResult spatialSearchResult = getSpatialSearchResult();
+		return spatialSearchResult != null && spatialSearchResult.isPoiCategory()
+				&& spatialSearchResult.getReferenceObject() != null;
 	}
 
 	public boolean isDestinationHistoryItem() {
@@ -417,6 +433,7 @@ public class QuickSearchListItem {
 
 	@Nullable
 	public static String getStreetCityPart(SearchResult searchResult) {
+		//todo replace with street.getNameWithoutCityPart(lang, transliterate))
 		if (searchResult.localeName.endsWith(")")) {
 			int i = searchResult.localeName.indexOf('(');
 			if (i > 0) {
@@ -763,7 +780,10 @@ public class QuickSearchListItem {
 		} else if (searchResult != null && searchResult.object instanceof MapObject mapObject) {
 			String title = mapObject.getName(mapLang);
 			String altName = Algorithms.isEmpty(searchResult.alternateName) ? mapObject.getName() : searchResult.alternateName;
-			if (Algorithms.isEmpty(title) && Algorithms.isEmpty(altName)) {
+			if (mapObject instanceof Building building && building.isInterpolation()
+					&& Algorithms.isNotEmpty(searchResult.localeName)) {
+				return searchResult.localeName; // interpolated house number
+			} else if (Algorithms.isEmpty(title) && Algorithms.isEmpty(altName)) {
 				return getSpannableName();
 			} else if (Algorithms.isEmpty(title)) {
 				return altName;

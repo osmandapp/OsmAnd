@@ -5192,4 +5192,21 @@
     <string name="always_keep_local_copy">Coinnigh cóip áitiúil i gcónaí</string>
     <string name="always_keep_local_copy_description">Fanann na meáin ceangailte fiú má scriostar an bunleagan ón ngailearaí nó ó na comhaid.</string>
     <string name="release_5_4">• Cuardach spásúil nua — aimsigh áiteanna agus déan cuardach timpeall áite\n\n• Comhéadan úsáideora cuardaigh athnuaite: sórtáil, scagairí catagóire, cuma níos glaine\n\n• Ceangail grianghraif agus meáin le Ceanáin\n\n• Ceanáin: tacaíocht do fhoghrúpaí agus fillteáin inphionáilte\n\n• Comhordanáidí: tacaíonn cuardach, eangach léarscáile, agus taispeáint POI anois le EPSG agus aimsitheoir Maidenhead\n\n• Cur isteach loingseoireachta socraithe; aistrigh idir ródú Caighdeánach agus Tapa\n\n• Socraigh scála léarscáile Android Auto ar leithligh ó do ghuthán\n\n• Chuir réalteolaíocht éiclips gréine agus gealaí leis</string>
+    <string name="share_favorites_media_preparation_failed">Níorbh fhéidir meáin cheangailte a chur san áireamh. Pointí comhroinnte amháin.</string>
+    <plurals name="files_count">
+        <item quantity="one">%d comhad</item>
+        <item quantity="two">%d comhaid</item>
+        <item quantity="few">%d comhaid</item>
+        <item quantity="many">%d comhaid</item>
+        <item quantity="other">%d comhaid</item>
+    </plurals>
+    <string name="preparing_file">Comhad á ullmhú</string>
+    <string name="shared_string_archive">Cartlann</string>
+    <string name="share_favorites_with_media_description">Tá meáin ceangailte le pointí is fearr leat i %1$s. Comhroinn pointí amháin, nó pointí le meáin mar chartlann.</string>
+    <string name="share_favorites_points_only">Pointí amháin</string>
+    <string name="share_favorites_points_and_media">Pointí agus meáin</string>
+    <string name="share_favorites_preparation_failed">Níorbh fhéidir comhaid a ullmhú le haghaidh comhroinnte.</string>
+    <string name="share_favorites_share_failed">Níorbh fhéidir an comhad a roinnt.</string>
+    <string name="share_favorites_missing_media_warning">Níorbh fhéidir roinnt meán ceangailte a chur san áireamh.</string>
+    <string name="search_on_web">Cuardaigh ar an ngréasán</string>
 </resources>

@@ -23,6 +23,7 @@ import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreAPI;
 import net.osmand.search.core.SearchCoreFactory;
+import net.osmand.search.core.SearchCoreFactory.SearchAddressByNameAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchAmenityByNameAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchAmenityByTypeAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchAmenityTypesAPI;
@@ -119,18 +120,31 @@ public class SearchUICore {
 	public static class SearchResultCollection {
 		private final List<SearchResult> searchResults = new ArrayList<>();
 		private final SearchPhrase phrase;
+		private final boolean skipSorting;
+		private int spatialSearchVisibleLevel;
 		private boolean useLimit;
 		private static final int DEPTH_TO_CHECK_SAME_SEARCH_RESULTS = 20;
 		private static final Integer DOMINATED_CITY_CRITERIA = 5;
 
 		public SearchResultCollection(SearchPhrase phrase) {
+			this(phrase, false);
+		}
+
+		public SearchResultCollection(SearchPhrase phrase, boolean skipSorting) {
+			this(phrase, skipSorting, 0);
+		}
+
+		public SearchResultCollection(SearchPhrase phrase, boolean skipSorting, int spatialSearchVisibleLevel) {
 			this.phrase = phrase;
+			this.skipSorting = skipSorting;
+			this.spatialSearchVisibleLevel = spatialSearchVisibleLevel;
 		}
 
 		public SearchResultCollection combineWithCollection(SearchResultCollection collection, boolean resort, boolean removeDuplicates) {
-			SearchResultCollection src = new SearchResultCollection(phrase);
+			SearchResultCollection src = new SearchResultCollection(phrase, skipSorting || collection.skipSorting,
+					Math.max(spatialSearchVisibleLevel, collection.spatialSearchVisibleLevel));
 			src.addSearchResults(searchResults, false, false);
-			src.addSearchResults(collection.searchResults, resort, removeDuplicates);
+			src.addSearchResults(collection.searchResults, resort && !src.skipSorting, removeDuplicates && !src.skipSorting);
 			return src;
 		}
 		
@@ -224,6 +238,49 @@ public class SearchUICore {
 
 		public List<SearchResult> getCurrentSearchResults() {
 			return Collections.unmodifiableList(searchResults);
+		}
+
+		public List<SearchResult> getVisibleSpatialSearchResults() {
+			if (!skipSorting) {
+				return getCurrentSearchResults();
+			}
+			List<SearchResult> visibleResults = new ArrayList<>();
+			for (int level = 0; level <= spatialSearchVisibleLevel; level++) {
+				for (SearchResult result : searchResults) {
+					if (result.spatialSearchVisibleLevel == level) {
+						visibleResults.add(result);
+					}
+				}
+			}
+			return Collections.unmodifiableList(visibleResults);
+		}
+
+		public boolean hasMoreSpatialSearchResults() {
+			if (!skipSorting) {
+				return false;
+			}
+			for (SearchResult result : searchResults) {
+				if (result.spatialSearchVisibleLevel > spatialSearchVisibleLevel) {
+					return true;
+				}
+			}
+			return false;
+		}
+
+		public boolean showMoreSpatialSearchResults() {
+			if (!hasMoreSpatialSearchResults()) {
+				return false;
+			}
+			spatialSearchVisibleLevel++;
+			return true;
+		}
+
+		public boolean isSkipSorting() {
+			return skipSorting;
+		}
+
+		public int getSpatialSearchVisibleLevel() {
+			return spatialSearchVisibleLevel;
 		}
 
 		public SearchPhrase getPhrase() {
@@ -544,11 +601,12 @@ public class SearchUICore {
 			SearchResultMatcher rm = new SearchResultMatcher(matcher, sphrase, ai.get(), ai, totalLimit);
 			api.search(sphrase, rm);
 
-			SearchResultCollection collection = new SearchResultCollection(sphrase);
+			boolean skipResultSorting = api instanceof SpatialTextSearchAPI;
+			SearchResultCollection collection = new SearchResultCollection(sphrase, skipResultSorting);
 			if (rm.totalLimit != -1 && rm.count > rm.totalLimit) {
 				collection.setUseLimit(true);
 			}
-			collection.addSearchResults(rm.getRequestResults(), resortAll, removeDuplicates);
+			collection.addSearchResults(rm.getRequestResults(), resortAll && !skipResultSorting, removeDuplicates && !skipResultSorting);
 			if (debugMode) {
 				LOG.info("Finish shallow search <" + sphrase + "> Results=" + rm.getRequestResults().size());
 			}
@@ -705,11 +763,12 @@ public class SearchUICore {
 		final SearchPhrase searchPhrase = this.phrase.generateNewPhrase(text, resetSearchSettingsForNewRequest(searchSettings));
 		final SearchResultMatcher rm = new SearchResultMatcher(null, searchPhrase, requestNumber.get(), requestNumber, totalLimit);
 		searchInternal(searchPhrase, rm);
-		SearchResultCollection resultCollection = new SearchResultCollection(searchPhrase);
+		boolean skipResultSorting = shouldSkipResultSorting(searchPhrase);
+		SearchResultCollection resultCollection = new SearchResultCollection(searchPhrase, skipResultSorting);
 		if (rm.totalLimit != -1 && rm.count > rm.totalLimit) {
 			resultCollection.setUseLimit(true);
 		}
-		resultCollection.addSearchResults(rm.getRequestResults(), true, true);
+		resultCollection.addSearchResults(rm.getRequestResults(), !skipResultSorting, !skipResultSorting);
 		if (phrase.getSettings().isExportObjects()) {
 			phrase.getSettings().setExportedCities(rm.getExportedCities());
 			phrase.getSettings().setExportedObjects(rm.getExportedObjects());
@@ -740,7 +799,7 @@ public class SearchUICore {
 					if (onSearchStart != null) {
 						onSearchStart.run();
 					}
-					final SearchPerformanceStats performanceStats = new SearchPerformanceStats(getSearchType());
+					final SearchPerformanceStats performanceStats = new SearchPerformanceStats(isSpatialSearch() ? "spatial" : "general");
 					final SearchResultMatcher rm = new SearchResultMatcher(matcher, phrase, request, requestNumber, totalLimit,
 							performanceStats);
 					if (debugMode) {
@@ -767,7 +826,7 @@ public class SearchUICore {
 							Thread.sleep(TIMEOUT_BEFORE_FILTER);
 
 							if (!filtered) {
-								final SearchResultCollection quickRes = new SearchResultCollection(phrase);
+								final SearchResultCollection quickRes = new SearchResultCollection(phrase, currentSearchResult.isSkipSorting());
 								if (debugMode) {
 									LOG.info("Filtering current data <" + phrase + "> Results=" + currentSearchResult.searchResults.size());
 								}
@@ -808,14 +867,15 @@ public class SearchUICore {
 					performanceStats.start();
 					searchInternal(phrase, rm);
 					if (!rm.isCancelled()) {
-						SearchResultCollection collection = new SearchResultCollection(phrase);
+						boolean skipResultSorting = shouldSkipResultSorting(phrase);
+						SearchResultCollection collection = new SearchResultCollection(phrase, skipResultSorting);
 						if (rm.totalLimit != -1 && rm.count > rm.totalLimit) {
 							collection.setUseLimit(true);
 						}
 						if (debugMode) {
 							LOG.info("Processing search results <" + phrase + ">");
 						}
-						collection.addSearchResults(rm.getRequestResults(), true, true);
+						collection.addSearchResults(rm.getRequestResults(), !skipResultSorting, !skipResultSorting);
 						performanceStats.sampleMemory();
 						if (debugMode) {
 							LOG.info("Finishing search <" + phrase + "> Results=" + rm.getRequestResults().size());
@@ -845,13 +905,36 @@ public class SearchUICore {
 		});
 	}
 
-	private String getSearchType() {
+	public boolean isSpatialSearch() {
 		for (SearchCoreAPI api : apis) {
 			if (api instanceof SpatialTextSearchAPI) {
-				return "spatial";
+				return true;
 			}
 		}
-		return "general";
+		return false;
+	}
+
+	private boolean shouldSkipResultSorting(SearchPhrase phrase) {
+		boolean spatialSearch = false;
+		for (SearchCoreAPI api : apis) {
+			if (!api.isSearchAvailable(phrase) || api.getSearchPriority(phrase) == -1) {
+				continue;
+			}
+			if (api instanceof SpatialTextSearchAPI) {
+				spatialSearch = true;
+			} else if (isLegacyLocalMapSearchApi(api)) {
+				return false;
+			}
+		}
+		return spatialSearch;
+	}
+
+	private boolean isLegacyLocalMapSearchApi(SearchCoreAPI api) {
+		return api instanceof SearchAmenityByNameAPI
+				|| api instanceof SearchAmenityByTypeAPI
+				|| api instanceof SearchAddressByNameAPI
+				|| api instanceof SearchStreetByCityAPI
+				|| api instanceof SearchBuildingAndIntersectionsByStreetAPI;
 	}
 
 	private static class SearchPerformanceStats {
@@ -911,6 +994,9 @@ public class SearchUICore {
 
 
 	public boolean isSearchMoreAvailable(SearchPhrase phrase) {
+		if (currentSearchResult != null && currentSearchResult.hasMoreSpatialSearchResults()) {
+			return true;
+		}
 		for (SearchCoreAPI api : apis) {
 			if (api.isSearchAvailable(phrase) && api.getSearchPriority(phrase) >= 0
 					&& api.isSearchMoreAvailable(phrase)) {
@@ -1367,14 +1453,13 @@ public class SearchUICore {
 			case UNKNOWN_PHRASE_MATCH_WEIGHT:
 				// here we check how much each sub search result matches the phrase
 				// also we sort it by type house -> street/poi -> city/postcode/village/other
-				SearchPhrase ph = o1.requiredSearchPhrase;
 				double o1PhraseWeight = o1.getUnknownPhraseMatchWeight();
 				double o2PhraseWeight = o2.getUnknownPhraseMatchWeight();
 				if (o1PhraseWeight == o2PhraseWeight && o1PhraseWeight / SearchResult.MAX_PHRASE_WEIGHT_TOTAL > 1) {
-					if (!ph.getUnknownWordToSearchBuildingNameMatcher().matches(SearchPhrase.stripBraces(o1.localeName))) {
+					if (!o1.requiredSearchPhrase.getUnknownWordToSearchBuildingNameMatcher().matches(SearchPhrase.stripBraces(o1.localeName))) {
 						o1PhraseWeight--;
 					}
-					if (!ph.getUnknownWordToSearchBuildingNameMatcher().matches(SearchPhrase.stripBraces(o2.localeName))) {
+					if (!o2.requiredSearchPhrase.getUnknownWordToSearchBuildingNameMatcher().matches(SearchPhrase.stripBraces(o2.localeName))) {
 						o2PhraseWeight--;
 					}
 				}

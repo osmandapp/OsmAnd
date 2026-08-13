@@ -1,6 +1,5 @@
 package net.osmand.plus.views.mapwidgets.configure.appearance
 
-import android.content.Context
 import androidx.annotation.ColorInt
 import net.osmand.StateChangedListener
 import net.osmand.plus.R
@@ -13,7 +12,6 @@ import net.osmand.plus.settings.enums.PanelIconMode
 import net.osmand.plus.settings.enums.PanelSizeMode
 import net.osmand.plus.settings.enums.PanelTextColorMode
 import net.osmand.plus.settings.enums.ScreenLayoutMode
-import net.osmand.plus.settings.enums.WidgetSize
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.views.mapwidgets.WidgetsPanel
 import net.osmand.plus.views.mapwidgets.appearance.PanelAppearanceState
@@ -48,14 +46,6 @@ class PanelAppearanceSettings internal constructor(
 		}
 
 		@JvmStatic
-		fun resolveWidgetSize(app: OsmandApplication, panel: WidgetsPanel,
-		                      individualSize: WidgetSize, ctx: Context): WidgetSize {
-			val layoutMode = ScreenLayoutMode.getDefault(ctx)
-			val mode = app.panelAppearanceSettingsManager[panel].getSizeModePref(layoutMode).get()
-			return mode.widgetSize ?: individualSize
-		}
-
-		@JvmStatic
 		fun getCommittedCustomBackgroundColor(app: OsmandApplication, panel: WidgetsPanel,
 		                                      layoutMode: ScreenLayoutMode?, nightMode: Boolean): Int? {
 			val background = app.panelAppearanceSettingsManager
@@ -64,17 +54,6 @@ class PanelAppearanceSettings internal constructor(
 				background.color
 			} else {
 				null
-			}
-		}
-
-		@JvmStatic
-		fun resolveIconVisibility(app: OsmandApplication, panel: WidgetsPanel,
-		                          individualShowIcon: Boolean, ctx: Context): Boolean {
-			val layoutMode = ScreenLayoutMode.getDefault(ctx)
-			return when (app.panelAppearanceSettingsManager[panel].getIconModePref(layoutMode).get()) {
-				PanelIconMode.ON -> true
-				PanelIconMode.OFF -> false
-				else -> individualShowIcon
 			}
 		}
 	}

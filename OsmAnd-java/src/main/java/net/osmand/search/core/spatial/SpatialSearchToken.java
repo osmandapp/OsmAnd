@@ -9,6 +9,7 @@ import com.google.protobuf.ByteString;
 
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TLongObjectHashMap;
+import gnu.trove.set.hash.TIntHashSet;
 import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -61,7 +62,7 @@ public class SpatialSearchToken {
 	HashSkipTileQuadTree<Integer> quadTreeSkip = new HashSkipTileQuadTree<>();
 	
 	TLongObjectHashMap<NameIndexAtom> indexByOsmIds = new TLongObjectHashMap<>();
-	Set<Integer> deletedAtoms = new HashSet<Integer>();
+	TIntHashSet deletedAtoms = new TIntHashSet();
 	
 	// partial place holder
 	List<PartialMatch> partialExactMatch = new ArrayList<>();
@@ -141,6 +142,7 @@ public class SpatialSearchToken {
 		return collatorMain;
 	}
 	
+	
 	public boolean isOnlyFullMatch() {
 		return incomplete && word.length() <= MIN_CHAR_INCOMPLETE + 1;
 	}
@@ -206,6 +208,11 @@ public class SpatialSearchToken {
 		NameIndexAtom na = index.get(atom.id);
 		deletedAtoms.add(na.indexInToken);
 	}
+	
+
+	TIntHashSet getDeletedAtoms() {
+		return deletedAtoms;
+	}
 
 	void enlargeBbox(NameIndexAtom atom, double mult) {
 		NameIndexAtom na = index.get(atom.id);
@@ -243,9 +250,11 @@ public class SpatialSearchToken {
 				int res = Integer.compare(atom.otherWordsCnt + atom.otherFoundCnt,
 						existing.otherWordsCnt + existing.otherFoundCnt);
 				// '2 south 2nd street' vs '25 садова вулиця' (25-та) -
-				// don't use it for now as it replaces building link 
-				// (if it stops working -then analyse should be done in checkBuilding and find duplicate assigned word) 
-//				res = Boolean.compare(atom.isBuilding(), existing.isBuilding());
+				if (res == 0 && !SearchAlgorithms.isNumber2Letters(wordAligned)) {
+					// a school
+					res = Boolean.compare(atom.isBuilding() || atom.isPOIRef(),
+						existing.isBuilding() || existing.isPOIRef());
+				}
 				boolean replace = res < 0;
 				if (replace) {
 					atom.indexInToken = existing.indexInToken;
@@ -334,15 +343,25 @@ public class SpatialSearchToken {
 	String[] matchSplitName(String name) {
 		name = SearchAlgorithms.alignChars(name);
 		String[] res = null;
-		if (wordAligned.length() < name.length()
+		if (wordAligned.length() < name.length() 
 				&& collatorMain.getCollator().equals(name.substring(0, wordAligned.length()), wordAligned)) {
 			res = new String[2];
 			res[0] = name.substring(0, wordAligned.length());
-			res[1] = name.substring(wordAligned.length());
-			while (res[1].length() > 0 && !Character.isLetter(res[1].charAt(0))
-					&& !Character.isDigit(res[1].charAt(0))) {
-				res[1] = res[1].substring(1);
+			// don't split numbers
+			if (Character.isDigit(name.charAt(wordAligned.length()))
+					&& Character.isDigit(name.charAt(wordAligned.length() - 1))) {
+				return null;
 			}
+			int sub = wordAligned.length();
+			for (; sub < name.length(); sub++) {
+				if (Character.isLetter(name.charAt(sub)) || Character.isDigit(name.charAt(sub))) {
+					break;
+				}
+			}
+			if (sub >= name.length()) {
+				return null;
+			}
+			res[1] = name.substring(sub);
 		}
 		return res;
 	}
@@ -497,11 +516,7 @@ public class SpatialSearchToken {
 				return;
 			}
 			if (bbox31 != null) {
-				int w = (int) ((bbox31[2] - bbox31[0]) * mult), h = (int) ((bbox31[3] - bbox31[1]) * mult);
-				bbox31[0] = Math.max(Math.min(bbox31[0], bbox31[0] - w), 0); // xleft
-				bbox31[2] = Math.max(bbox31[2] + w, bbox31[0]); // xright
-				bbox31[1] = Math.max(Math.min(bbox31[1], bbox31[1] - h), 0); // ytop
-				bbox31[3] = Math.max(bbox31[3] + h, bbox31[1]); // ybottom
+				enlargeBbox(mult, bbox31);
 			} else {
 				int w = (int) Math.ceil(mult);
 				bbox31 = new int[4];
@@ -513,6 +528,14 @@ public class SpatialSearchToken {
 			calcTileFromBbox();
 		}
 
+		public static void enlargeBbox(double mult, int[] bbox31) {
+			int w = (int) ((bbox31[2] - bbox31[0]) * mult), h = (int) ((bbox31[3] - bbox31[1]) * mult);
+			bbox31[0] = Math.max(Math.min(bbox31[0], bbox31[0] - w), 0); // xleft
+			bbox31[2] = Math.max(bbox31[2] + w, bbox31[0]); // xright
+			bbox31[1] = Math.max(Math.min(bbox31[1], bbox31[1] - h), 0); // ytop
+			bbox31[3] = Math.max(bbox31[3] + h, bbox31[1]); // ybottom
+		}
+
 		public double dimensionInM() {
 			int xleft = x16 << 15, xright = (x16 + 1) << 15;
 			int ytop = y16 << 15, ybottom = (y16 + 1) << 15;
@@ -522,9 +545,17 @@ public class SpatialSearchToken {
 				ytop = bbox31[1];
 				ybottom = bbox31[3];
 			}
+			return distanceInM(xleft, ytop, xright,  ybottom);
+		}
+
+		public static double distanceInM(int xleft, int ytop, int xright, int ybottom) {
 			return MapUtils.getDistance(MapUtils.get31LatitudeY(ytop), MapUtils.get31LongitudeX(xleft),
 					MapUtils.get31LatitudeY(Math.max(ytop, ybottom)),
 					MapUtils.get31LongitudeX(Math.max(xleft, xright)));
+		}
+		
+		public static double distanceInM(int[] bbox) {
+			return distanceInM(bbox[0], bbox[1], bbox[2], bbox[3]);
 		}
 
 		
@@ -600,6 +631,10 @@ public class SpatialSearchToken {
 		
 		public boolean isBoundary() {
 			return type == CityBlocks.BOUNDARY_TYPE.index;
+		}
+		
+		public boolean isGeoArea() {
+			return isBoundary() || isCityVillage() || isPostcode();
 		}
 		
 		public boolean isCityVillage() {
@@ -682,8 +717,8 @@ public class SpatialSearchToken {
 
 	}
 
-
-	
-
+	public String getToken() {
+		return word;
+	}
 
 }

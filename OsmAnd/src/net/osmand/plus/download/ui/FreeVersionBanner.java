@@ -15,6 +15,7 @@ import android.widget.Space;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
 
 import com.google.android.material.card.MaterialCardView;
 
@@ -26,7 +27,6 @@ import net.osmand.plus.helpers.DiscountHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FontCache;
 import net.osmand.util.Algorithms;
 
@@ -70,6 +70,17 @@ public class FreeVersionBanner {
 		freeVersionDescriptionTextView = freeVersionBanner.findViewById(R.id.freeVersionDescriptionTextView);
 		freeVersionCtaArrow = freeVersionBanner.findViewById(R.id.freeVersionCtaArrow);
 		freeVersionCtaDiscountBadge = freeVersionBanner.findViewById(R.id.freeVersionCtaDiscountBadge);
+
+		updateCtaArrowDirection();
+		freeVersionBanner.findViewById(R.id.bannerTopLayout).setOnClickListener(onBannerClickListener);
+		freeVersionCtaContainer.setOnClickListener(onBannerClickListener);
+	}
+
+	private void updateCtaArrowDirection() {
+		Drawable arrow = AppCompatResources.getDrawable(activity, R.drawable.ic_arrow_forward);
+		if (arrow != null) {
+			freeVersionCtaArrow.setImageDrawable(AndroidUtils.getDrawableForDirection(activity, arrow.mutate()));
+		}
 	}
 
 	public void initFreeVersionBanner() {
@@ -88,48 +99,51 @@ public class FreeVersionBanner {
 			}
 			return;
 		}
-		int downloadsLeft = getDownloadsLeft(false);
+		updateBanner(getDownloadsLeft(true));
+	}
+
+	private void updateBanner(int downloadsLeft) {
 		updateBannerState(downloadsLeft);
 		updateDownloadsProgress(downloadsLeft);
 		downloadsLeftTextView.setText(activity.getString(R.string.downloads_left_template, String.valueOf(downloadsLeft)));
-		freeVersionBanner.findViewById(R.id.bannerTopLayout).setOnClickListener(onBannerClickListener);
 	}
 
 	private void updateBannerState(int downloadsLeft) {
 		boolean limitReached = downloadsLeft == 0;
 		boolean nightMode = app.getDaynightHelper().isNightMode(settings.getApplicationMode(), ThemeUsageContext.APP);
-		updateBannerColors(nightMode);
+		updateBannerColors();
 		freeVersionTitleTextView.setText(limitReached ? R.string.free_download_limit_reached : R.string.free_version_title);
 		downloadsLeftTextView.setVisibility(limitReached ? View.GONE : View.VISIBLE);
 		freeVersionSubtitleTextView.setVisibility(limitReached ? View.VISIBLE : View.GONE);
 		freeVersionDescriptionTextView.setText(R.string.get_unlimited_downloads);
-		freeVersionCtaContainer.setOnClickListener(onBannerClickListener);
 		boolean hasDiscount = updateCtaDiscountBadge(nightMode);
 		boolean filledCta = limitReached || hasDiscount;
 		int ctaBackgroundId = R.drawable.free_version_banner_cta_neutral_ripple;
-		int ctaMargin = 0;
+		int ctaHorizontalMargin = 0;
 		int ctaTopMargin = 0;
+		int ctaBottomMargin = 0;
+		LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) freeVersionCtaContainer.getLayoutParams();
 		if (filledCta) {
-			ctaMargin = (int) app.getResources().getDimension(R.dimen.content_padding);
-			ctaTopMargin = (int) app.getResources().getDimension(R.dimen.content_padding_small);
+			int touchOverhang = (layoutParams.height - freeVersionCtaContentContainer.getLayoutParams().height) / 2;
+			ctaHorizontalMargin = (int) app.getResources().getDimension(R.dimen.content_padding);
+			ctaTopMargin = (int) app.getResources().getDimension(R.dimen.content_padding_small) - touchOverhang;
+			ctaBottomMargin = ctaHorizontalMargin - touchOverhang;
 			ctaBackgroundId = nightMode
 					? R.drawable.free_version_banner_cta_bg_ripple_dark
 					: R.drawable.free_version_banner_cta_bg_ripple;
 		}
-		LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) freeVersionCtaContainer.getLayoutParams();
-		layoutParams.leftMargin = ctaMargin;
-		layoutParams.rightMargin = ctaMargin;
-		layoutParams.bottomMargin = ctaMargin;
+		layoutParams.leftMargin = ctaHorizontalMargin;
+		layoutParams.rightMargin = ctaHorizontalMargin;
+		layoutParams.bottomMargin = ctaBottomMargin;
 		layoutParams.topMargin = ctaTopMargin;
-		freeVersionCtaContainer.setBackgroundResource(ctaBackgroundId);
+		freeVersionCtaContentContainer.setBackgroundResource(ctaBackgroundId);
 		freeVersionCtaContainer.setVisibility(View.VISIBLE);
 	}
 
-	private void updateBannerColors(boolean nightMode) {
+	private void updateBannerColors() {
 		int backgroundColor = AndroidUtils.getColorFromAttr(activity, R.attr.list_background_color);
 		if (freeVersionBanner instanceof MaterialCardView cardView) {
 			cardView.setCardBackgroundColor(backgroundColor);
-			cardView.setRadius(activity.getResources().getDimension(R.dimen.radius_double_large));
 			cardView.setCardElevation(0);
 		} else {
 			freeVersionBanner.setBackgroundColor(backgroundColor);
@@ -137,7 +151,6 @@ public class FreeVersionBanner {
 		int textColor = AndroidUtils.getColorFromAttr(activity, android.R.attr.textColor);
 		int textColorSecondary = AndroidUtils.getColorFromAttr(activity, android.R.attr.textColorSecondary);
 		freeVersionTitleTextView.setTextColor(textColor);
-		freeVersionDescriptionTextView.setTextColor(ColorUtilities.getActiveColor(app, nightMode));
 		downloadsLeftTextView.setTextColor(textColorSecondary);
 		freeVersionSubtitleTextView.setTextColor(textColorSecondary);
 	}
@@ -185,9 +198,7 @@ public class FreeVersionBanner {
 	}
 
 	protected void updateAvailableDownloads() {
-		int downloadsLeft = getDownloadsLeft(true);
-		updateBannerState(downloadsLeft);
-		updateDownloadsProgress(downloadsLeft);
+		updateBanner(getDownloadsLeft(true));
 	}
 
 	private int getDownloadsLeft(boolean includeActiveTasks) {

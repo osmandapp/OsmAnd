@@ -14,9 +14,15 @@ import net.osmand.plus.Version;
 import net.osmand.plus.base.containers.Limits;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.enums.GridFormat;
+import net.osmand.plus.settings.coordinates.CoordinateFormatIds;
+import net.osmand.plus.settings.coordinates.CoordinateGridFormat;
+import net.osmand.plus.settings.coordinates.CoordinateGridFormatProvider;
 import net.osmand.plus.settings.enums.GridLabelsPosition;
 import net.osmand.plus.views.OsmandMapTileView;
+
+import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class CoordinatesGridSettings {
 
@@ -24,10 +30,13 @@ public class CoordinatesGridSettings {
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
+	private final CoordinateGridFormatProvider gridFormatProvider;
+	private final Map<String, Limits<Integer>> supportedZoomLevels = new ConcurrentHashMap<>();
 
 	public CoordinatesGridSettings(@NonNull OsmandApplication app) {
 		this.app = app;
 		this.settings = app.getSettings();
+		this.gridFormatProvider = app.getCoordinateFormatHelper().getGridFormatProvider();
 	}
 
 	public void toggleEnable() {
@@ -51,12 +60,17 @@ public class CoordinatesGridSettings {
 	}
 
 	@NonNull
-	public GridFormat getGridFormat(@NonNull ApplicationMode appMode) {
-		return settings.COORDINATE_GRID_FORMAT.getModeValue(appMode);
+	public CoordinateGridFormat getGridFormat(@NonNull ApplicationMode appMode) {
+		String formatId = settings.COORDINATE_GRID_FORMAT.getModeValue(appMode);
+		CoordinateGridFormat format = gridFormatProvider.resolve(formatId);
+		if (format == null) {
+			format = gridFormatProvider.resolve(CoordinateFormatIds.BUILTIN_DDD);
+		}
+		return Objects.requireNonNull(format);
 	}
 
-	public void setGridFormat(@NonNull ApplicationMode appMode, @NonNull GridFormat format) {
-		settings.COORDINATE_GRID_FORMAT.setModeValue(appMode, format);
+	public void setGridFormat(@NonNull ApplicationMode appMode, @NonNull CoordinateGridFormat format) {
+		settings.COORDINATE_GRID_FORMAT.setModeValue(appMode, format.getId());
 	}
 
 	@ColorInt
@@ -110,7 +124,7 @@ public class CoordinatesGridSettings {
 
 	@NonNull
 	public Limits<Integer> getZoomLevelsWithRestrictions(@NonNull ApplicationMode appMode,
-	                                                     @NonNull GridFormat gridFormat) {
+	                                                     @NonNull CoordinateGridFormat gridFormat) {
 		Limits<Integer> selected = getZoomLevels(appMode);
 		Limits<Integer> supported = getSupportedZoomLevels(gridFormat);
 		int min = MathUtils.clamp(selected.min(), supported.min(), supported.max());
@@ -151,8 +165,19 @@ public class CoordinatesGridSettings {
 	}
 
 	@NonNull
-	public Limits<Integer> getSupportedZoomLevels(@NonNull GridFormat gridFormat) {
+	public Limits<Integer> getSupportedZoomLevels(@NonNull CoordinateGridFormat gridFormat) {
+		Limits<Integer> cached = supportedZoomLevels.get(gridFormat.getId());
+		if (cached == null) {
+			cached = calculateSupportedZoomLevels(gridFormat);
+			supportedZoomLevels.put(gridFormat.getId(), cached);
+		}
+		return cached;
+	}
+
+	@NonNull
+	private Limits<Integer> calculateSupportedZoomLevels(@NonNull CoordinateGridFormat gridFormat) {
 		int minZoom = 1;
+		int maxZoom = SUPPORTED_MAX_ZOOM;
 		if (isGridSupported(app)) {
 			GridConfiguration config = new GridConfiguration();
 			Projection projection = gridFormat.getProjection();
@@ -167,8 +192,19 @@ public class CoordinatesGridSettings {
 			GridParameters params = config.getGridParameters();
 			ZoomLevel min = params.getMinZoom();
 			minZoom = min.swigValue();
+			maxZoom = Math.min(maxZoom, getSupportedMaxZoom(params));
 		}
-		return new Limits<>(minZoom, SUPPORTED_MAX_ZOOM);
+		return new Limits<>(minZoom, maxZoom);
+	}
+
+	private static int getSupportedMaxZoom(@NonNull GridParameters params) {
+		int maxZoom = Math.max(getZoomValue(params.getMaxZoomForFloat()), getZoomValue(params.getMaxZoomForMixed()));
+		return maxZoom > 0 ? maxZoom : SUPPORTED_MAX_ZOOM;
+	}
+
+	private static int getZoomValue(@NonNull ZoomLevel zoomLevel) {
+		int value = zoomLevel.swigValue();
+		return value > 0 && value <= ZoomLevel.MaxZoomLevel.swigValue() ? value : 0;
 	}
 
 	public float getTextScale(@NonNull ApplicationMode appMode) {

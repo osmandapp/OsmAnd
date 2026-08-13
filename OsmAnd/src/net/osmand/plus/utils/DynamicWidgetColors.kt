@@ -11,15 +11,18 @@ object DynamicWidgetColors {
 	@ColorInt private val SECONDARY_WHITE = withOpacity(Color.WHITE, 0.6f)
 	@ColorInt private val SECONDARY_BLACK = withOpacity(Color.BLACK, 0.6f)
 	@ColorInt private val DIVIDER_WHITE = withOpacity(Color.WHITE, 0.2f)
-	@ColorInt private val DIVIDER_BLACK = withOpacity(Color.BLACK, 0.2f)
+	@ColorInt private val DIVIDER_BLACK = withOpacity(Color.BLACK, 0.1f)
+	@ColorInt private val SURFACE_WHITE = withOpacity(Color.WHITE, 0.2f)
+	@ColorInt private val SURFACE_BLACK = withOpacity(Color.BLACK, 0.1f)
 
-	private val WHITE_ACCENTS = AccentColors(Color.WHITE, SECONDARY_WHITE, DIVIDER_WHITE)
-	private val BLACK_ACCENTS = AccentColors(Color.BLACK, SECONDARY_BLACK, DIVIDER_BLACK)
+	private val WHITE_ACCENTS = AccentColors(Color.WHITE, SECONDARY_WHITE, DIVIDER_WHITE, SURFACE_WHITE)
+	private val BLACK_ACCENTS = AccentColors(Color.BLACK, SECONDARY_BLACK, DIVIDER_BLACK, SURFACE_BLACK)
 
 	data class AccentColors(
 		@ColorInt val primaryText: Int,
 		@ColorInt val secondaryText: Int,
-		@ColorInt val divider: Int
+		@ColorInt val divider: Int,
+		@ColorInt val surface: Int
 	)
 
 	@JvmStatic

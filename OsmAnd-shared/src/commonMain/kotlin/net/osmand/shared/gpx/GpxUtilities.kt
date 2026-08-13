@@ -618,11 +618,10 @@ object GpxUtilities {
 	}
 
 	private fun writeNotNullLink(serializer: XmlSerializer, link: Link?) {
-		if (link != null) {
+		val href = link?.href
+		if (link != null && !href.isNullOrBlank()) {
 			serializer.startTag(null, "link")
-			if (link.href != null) {
-				serializer.attribute(null, "href", link.href!!)
-			}
+			serializer.attribute(null, "href", href)
 			writeNotNullText(serializer, "text", link.text)
 			writeNotNullText(serializer, "type", link.type)
 			serializer.endTag(null, "link")

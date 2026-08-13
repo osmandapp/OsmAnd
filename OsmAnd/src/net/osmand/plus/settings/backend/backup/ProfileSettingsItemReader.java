@@ -101,7 +101,7 @@ public class ProfileSettingsItemReader<T extends ProfileSettingsItem> extends Os
 				}
 				if (!json.has(settings.COORDINATE_GRID_FORMAT.getId())) {
 					settings.COORDINATE_GRID_FORMAT.setModeValue(appMode,
-							AppVersionUpgradeOnInit.getLegacyCoordinateGridFormat(legacyFormat));
+							AppVersionUpgradeOnInit.getLegacyCoordinateGridFormat(legacyFormat).getCoordinateFormatId());
 				}
 			} catch (Exception e) {
 				SettingsHelper.LOG.error("Failed to migrate legacy coordinate format from imported settings", e);
