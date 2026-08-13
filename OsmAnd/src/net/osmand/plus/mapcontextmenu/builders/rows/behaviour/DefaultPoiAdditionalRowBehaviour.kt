@@ -51,9 +51,6 @@ open class DefaultPoiAdditionalRowBehaviour : IPoiAdditionalRowBehavior {
                         if (iconId == 0 && parentType is PoiType) {
                             iconId = getIconId(context, parentType.iconKeyName)
                             if (iconId == 0) {
-                                // not verified here: getRowIcon needs a Drawable, which this
-                                // data-only builder can't hold - toAmenityInfoRow resolves
-                                // these candidates once and reuses the result
                                 builder.setIconNameCandidates(
                                     listOf(
                                         parentType.osmTag + "_" + category + "_" + parentType.osmValue,
