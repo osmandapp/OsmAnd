@@ -363,9 +363,7 @@ public class EditPoiDialogFragment extends BaseFullScreenDialogFragment {
 	}
 
 	public void trySave() {
-		if (onSaveButtonClickListener != null) {
-			onSaveButtonClickListener.onSaveButtonClick();
-		}
+		applyPendingInput();
 		String tagWithExceedingValue = isTextLengthInRange();
 		boolean poiTypeChanged = editPoiData.isPoiTypeChanged()
 				&& !Algorithms.stringsEqual(editPoiData.getPoiTypeString(), editPoiData.getTag(POI_TYPE_TAG));
@@ -498,7 +496,14 @@ public class EditPoiDialogFragment extends BaseFullScreenDialogFragment {
 				}, getActivity(), openstreetmapUtil, action == Action.MODIFY ? editPoiData.getChangedTags() : null);
 	}
 
+	private void applyPendingInput() {
+		if (onSaveButtonClickListener != null) {
+			onSaveButtonClickListener.onSaveButtonClick();
+		}
+	}
+
 	private void dismissCheckForChanges() {
+		applyPendingInput();
 		if (editPoiData.hasChanges()) {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
