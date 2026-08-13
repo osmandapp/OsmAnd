@@ -3321,7 +3321,7 @@
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etichette Note</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Mostra etichette Note</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icone a zoom bassi</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualizzazione schematica delle icone a bassi livelli di zoom per quei POI che di solito non vengono visualizzati</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Una rappresentazione schematica delle icone a bassi livelli di zoom per quei PDI che di solito non sono visualizzati</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Aumenta la visibilità dei tunnel dei corsi d\'acqua</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Aumenta la visibilità dei tunnel dei corsi d\'acqua</string>
     <string name="rendering_value_omit_name">Ometti</string>
@@ -5221,7 +5221,7 @@
     <string name="route_calculation_using_fast_algorithm">Utilizzo dell\'algoritmo di calcolo veloce del percorso.</string>
     <string name="astro_eclipse_phase_total">Totale</string>
     <string name="astro_eclipse_phase_partial">Parziale</string>
-    <string name="astro_fit_eclipse_path">Adatta il percorso dell\'eclissi</string>
+    <string name="astro_fit_eclipse_path">Inquadra il percorso dell\'eclissi</string>
     <string name="astro_show_map">Mostra la mappa</string>
     <string name="astro_hide_map">Nascondi la mappa</string>
     <string name="astro_map_center_location">Centro mappa: %1$s</string>
@@ -5352,7 +5352,7 @@
     <string name="astro_lunar_eclipse_load_error">Non sono in grado di calcolare questa eclissi lunare.</string>
     <string name="astro_total_lunar_eclipse">Eclissi lunare totale</string>
     <string name="astro_partial_lunar_eclipse">Eclissi lunare parziale</string>
-    <string name="astro_penumbral_lunar_eclipse">Eclissi lunare penombra</string>
+    <string name="astro_penumbral_lunar_eclipse">Eclissi lunare penombrale</string>
     <string name="astro_eclipse_phase_penumbral">Penombra</string>
     <string name="text_color">Colore del testo</string>
     <string name="secondary_text_color">Colore del testo secondario</string>
@@ -5384,4 +5384,5 @@
     <string name="astro_lunar_eclipse_map_error">La visibilità dell\'eclissi lunare della regione non è disponibile in questo momento.</string>
     <string name="astro_lunar_eclipse_rendering_note">Colore della mappa: Luna sopra l\'orizzonte. Ombre colori e luminosità sono indicative.</string>
     <string name="custom_widget_colors">Colore del widget personalizzati</string>
+    <string name="astro_lunar_eclipse_local_status">%1$s • %2$.1f%% oscuramento ombrale • Altitudine lunare: %3$.1f°</string>
 </resources>

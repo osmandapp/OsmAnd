@@ -5180,7 +5180,7 @@
     <string name="traffic_warning_red_light_camera">Radar de feu rouge</string>
     <string name="attached_media_delete_confirmation">Souhaitez-vous supprimer les %1$d éléments multimédias de ce point ? Les fichiers médias enregistrés par l\'application et non associés à un emplacement seront également supprimés de l\'appareil.</string>
     <string name="sort_by_nearest_to_current_location">Proximité de la position actuelle</string>
-    <string name="astro_fit_eclipse_path">Ajuster la trajectoire de l\'éclipse</string>
+    <string name="astro_fit_eclipse_path">Centrer la carte sur l\'éclipse</string>
     <string name="astro_show_map">Afficher la carte</string>
     <string name="astro_hide_map">Masquer la carte</string>
     <string name="astro_map_center_location">Centre de la carte : %1$s</string>
