@@ -418,8 +418,8 @@ public class NotesFragment extends BaseOsmAndListFragment implements FragmentSta
 
 	private List<MediaNote> sortNotesByDateDescending(List<MediaNote> notes) {
 		Collections.sort(notes, (first, second) -> {
-			long firstTime = first.getLastModified(app.getGalleryHelper().getMetadataRepository());
-			long secondTime = second.getLastModified(app.getGalleryHelper().getMetadataRepository());
+			long firstTime = first.getDisplayTime(app.getGalleryHelper().getMetadataRepository());
+			long secondTime = second.getDisplayTime(app.getGalleryHelper().getMetadataRepository());
 			if (firstTime < secondTime) {
 				return 1;
 			} else if (firstTime == secondTime) {

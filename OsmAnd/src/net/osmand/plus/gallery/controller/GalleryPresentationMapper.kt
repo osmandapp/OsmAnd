@@ -24,7 +24,7 @@ class GalleryPresentationMapper(
 
 	fun presentation(item: MediaItem): GalleryMediaPresentation {
 		val metadata = repository.getCached(item)
-		val date = metadata?.dateMillis?.let {
+		val date = (metadata?.creationTimeMs ?: metadata?.lastModifiedTimeMs)?.let {
 			DateFormat.getMediumDateFormat(app).format(Date(it))
 		}
 		val size = metadata?.sizeBytes?.takeIf { it > 0 }?.let {

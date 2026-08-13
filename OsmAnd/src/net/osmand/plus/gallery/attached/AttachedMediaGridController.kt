@@ -164,9 +164,9 @@ class AttachedMediaGridController(
 			GallerySortMode.NAME_Z_A -> media.sortedWith(byName.reversed())
 			GallerySortMode.LAST_MODIFIED,
 			GallerySortMode.NEWEST_FIRST ->
-				media.sortedByDescending { metadataOf(it)?.dateMillis ?: Long.MIN_VALUE }
+				media.sortedByDescending { metadataOf(it)?.lastModifiedTimeMs ?: Long.MIN_VALUE }
 			GallerySortMode.OLDEST_FIRST ->
-				media.sortedBy { metadataOf(it)?.dateMillis ?: Long.MAX_VALUE }
+				media.sortedBy { metadataOf(it)?.lastModifiedTimeMs ?: Long.MAX_VALUE }
 			GallerySortMode.DURATION_LONG_SHORT ->
 				media.sortedByDescending { metadataOf(it)?.durationMs ?: Long.MIN_VALUE }
 			GallerySortMode.DURATION_SHORT_LONG ->
