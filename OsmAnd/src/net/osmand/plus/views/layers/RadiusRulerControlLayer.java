@@ -104,12 +104,10 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 
 	private float cachedHeading;
 	private long lastCompassRefreshTime;
-	private boolean compassRefreshScheduled;
 	@Nullable
 	private View compassRefreshView;
 
 	private final Runnable compassRefreshRunnable = () -> {
-		compassRefreshScheduled = false;
 		compassRefreshView = null;
 		if (isCompassRulerVisible()) {
 			refreshCompassRuler(SystemClock.uptimeMillis());
@@ -230,10 +228,9 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 		if (lastCompassRefreshTime == 0 || elapsedTime >= COMPASS_REFRESH_INTERVAL_MS) {
 			cancelPendingCompassRefresh();
 			refreshCompassRuler(currentTime);
-		} else if (!compassRefreshScheduled) {
+		} else if (compassRefreshView == null) {
 			View mapView = view.getView();
 			if (mapView != null) {
-				compassRefreshScheduled = true;
 				compassRefreshView = mapView;
 				mapView.postDelayed(compassRefreshRunnable, COMPASS_REFRESH_INTERVAL_MS - elapsedTime);
 			}
@@ -255,7 +252,6 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 			compassRefreshView.removeCallbacks(compassRefreshRunnable);
 		}
 		compassRefreshView = null;
-		compassRefreshScheduled = false;
 	}
 
 	private void resetCompassRefreshState() {
