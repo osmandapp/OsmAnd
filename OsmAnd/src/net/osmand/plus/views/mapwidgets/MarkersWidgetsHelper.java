@@ -20,6 +20,7 @@ import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WidgetsRegistryListener;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
+import net.osmand.plus.views.mapwidgets.widgets.MapMarkersBarWidget;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -66,6 +67,14 @@ public class MarkersWidgetsHelper implements WidgetsRegistryListener {
 	public boolean isMapMarkersBarWidgetVisible() {
 		boolean visible = isBarWidgetsVisible();
 		return visible && mapActivity.findViewById(R.id.map_hud_layout).getVisibility() == View.VISIBLE;
+	}
+
+	public void updateCompassValue(float heading) {
+		for (MapWidget widget : barWidgets) {
+			if (widget instanceof MapMarkersBarWidget && widget.isViewVisible()) {
+				((MapMarkersBarWidget) widget).updateCompassValue(heading);
+			}
+		}
 	}
 
 	private boolean isBarWidgetsVisible() {
