@@ -119,9 +119,10 @@ public class ConfigureMapDialogs {
 	                                       @NonNull OsmandPreference<Float> mapDensity,
 	                                       int value) {
 		mapDensity.set(value / 100.0f);
-		if (!view.isCarView()) {
+		//todo revert when aa scale setting fixed
+//		if (!view.isCarView()) {
 			view.applyDisplayScaleSettings();
-		}
+//		}
 	}
 
 	private record MapMagnifierValues(@NonNull TIntArrayList percentValues,
