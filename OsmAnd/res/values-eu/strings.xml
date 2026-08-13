@@ -5036,4 +5036,13 @@
     <string name="route_calculation_missing_maps">Falta diren mapak</string>
     <string name="route_calculation_missing_maps_desc">Ibilbide honetarako behar diren mapa batzuk falta dira. Deskargatu jarraitzeko.</string>
     <string name="route_calculation_mixed_maps_desc">Bidratze azkarra ez dago erabilgarri mapa-data mistoak direla eta. Kalkulu Estandarra aldatzeak minutu batzuk behar izan ditzake.</string>
+    <string name="share_favorites_media_preparation_failed">Ezin izan da erantsitako multimedia-edukia sartu. Puntuak partekatzea soilik.</string>
+    <plurals name="files_count">
+        <item quantity="one">Fitxategi %d</item>
+        <item quantity="other">%d fitxategi</item>
+    </plurals>
+    <string name="preparing_file">Fitxategia prestatzen</string>
+    <string name="share_favorites_points_and_media">Puntuak eta multimedia</string>
+    <string name="share_favorites_preparation_failed">Ezin izan da prestatu fitxategiak partekatzeko.</string>
+    <string name="share_favorites_share_failed">Ezin izan da fitxategia partekatu.</string>
 </resources>
