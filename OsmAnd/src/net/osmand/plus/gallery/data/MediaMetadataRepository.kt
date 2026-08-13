@@ -9,11 +9,14 @@ import net.osmand.shared.media.domain.MediaItem
  *
  * All fields are optional: the current temporary implementation fills what it
  * can read locally (size, date, duration, location), while [heading] and
- * [posterUri] are reserved for the future backend.
+ * [posterUri] are reserved for the future backend. [lastModifiedTimeMs] is the
+ * file or provider modification time; [creationTimeMs] is read from
+ * MediaStore, EXIF, or the audio/video container.
  */
 data class GalleryMediaMetadata(
 	val sizeBytes: Long? = null,
-	val dateMillis: Long? = null,
+	val lastModifiedTimeMs: Long? = null,
+	val creationTimeMs: Long? = null,
 	val durationMs: Long? = null,
 	val latLon: LatLon? = null,
 	val heading: Float? = null,
