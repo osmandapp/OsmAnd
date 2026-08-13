@@ -10,6 +10,7 @@ import net.osmand.plus.backup.BackupExporter.NetworkExportProgressListener;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.items.AttachedMediaSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
@@ -107,7 +108,9 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 		long size = 0;
 		BackupHelper backupHelper = app.getBackupHelper();
 		for (SettingsItem item : items) {
-			if (item instanceof FileSettingsItem) {
+			if (item instanceof AttachedMediaSettingsItem) {
+				size += item.getEstimatedSize() + APPROXIMATE_FILE_SIZE_BYTES;
+			} else if (item instanceof FileSettingsItem) {
 				List<File> filesToUpload = backupHelper.collectItemFilesForUpload((FileSettingsItem) item);
 				for (File file : filesToUpload) {
 					size += file.length() + APPROXIMATE_FILE_SIZE_BYTES;

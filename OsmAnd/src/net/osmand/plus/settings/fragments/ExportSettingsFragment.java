@@ -25,12 +25,10 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu.NativeShareDialogBuilder;
-import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper.SettingsExportListener;
-import net.osmand.plus.settings.backend.backup.exporttype.AttachedMediaExportType;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.exporttype.MapSourcesExportType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
@@ -204,17 +202,8 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 		File tempDir = FileUtils.getTempDir(app);
 		String fileName = getFileName();
 		List<SettingsItem> items = app.getFileSettingsHelper().prepareSettingsItems(getSelectedData(), Collections.emptyList(), true);
-		processAttachedMediaItems(items);
 		progress.setMax(getMaxProgress(items));
 		app.getFileSettingsHelper().exportSettings(tempDir, fileName, getSettingsExportListener(), items, true);
-	}
-
-	private void processAttachedMediaItems(@NonNull List<SettingsItem> items) {
-		List<FavoriteGroup> groups = (List<FavoriteGroup>) selectedItemsMap.get(ExportType.FAVORITES);
-		if (Algorithms.isEmpty(groups)) {
-			groups = Collections.emptyList();
-		}
-		AttachedMediaExportType.processSettingsItems(app, groups, items);
 	}
 
 	private int getMaxProgress(List<SettingsItem> items) {

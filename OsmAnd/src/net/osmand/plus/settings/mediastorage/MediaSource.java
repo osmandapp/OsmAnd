@@ -21,6 +21,7 @@ public abstract class MediaSource {
 	private final MediaDirType dirType;
 	private final Set<String> hrefKeys = new LinkedHashSet<>();
 	private final long length;
+	private boolean appManaged;
 
 	MediaSource(@NonNull String href, @NonNull String fileName, long length,
 	            @Nullable String mimeType, @NonNull MediaDirType dirType) {
@@ -54,6 +55,14 @@ public abstract class MediaSource {
 	@NonNull
 	public MediaDirType getDirType() {
 		return dirType;
+	}
+
+	public boolean isAppManaged() {
+		return appManaged;
+	}
+
+	void markAppManaged() {
+		appManaged = true;
 	}
 
 	@NonNull

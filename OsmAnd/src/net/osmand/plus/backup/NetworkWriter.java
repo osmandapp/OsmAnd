@@ -8,6 +8,7 @@ import net.osmand.plus.backup.BackupListeners.OnUploadFileListener;
 import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.settings.backend.backup.AbstractWriter;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
+import net.osmand.plus.settings.backend.backup.items.AttachedMediaSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
@@ -73,11 +74,11 @@ public class NetworkWriter extends AbstractWriter {
 	private String uploadEntry(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
 	                           @NonNull String fileName)
 			throws UserNotRegisteredException, IOException {
-		if (itemWriter.getItem() instanceof FileSettingsItem) {
+		SettingsItem item = itemWriter.getItem();
+		if (item instanceof FileSettingsItem && !(item instanceof AttachedMediaSettingsItem)) {
 			return uploadDirWithFiles(itemWriter, fileName);
-		} else {
-			return uploadItemFile(itemWriter, fileName, getUploadFileListener(itemWriter.getItem()));
 		}
+		return uploadItemFile(itemWriter, fileName, getUploadFileListener(item));
 	}
 
 	@Nullable

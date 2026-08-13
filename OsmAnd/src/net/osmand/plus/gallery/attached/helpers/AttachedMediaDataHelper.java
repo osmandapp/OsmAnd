@@ -67,8 +67,9 @@ public class AttachedMediaDataHelper {
 	}
 
 	@Nullable
-	public MediaSource resolveExportMediaSource(@Nullable String href) {
-		return mediaStorageHelper.resolveMediaSource(MediaStorageLocation.fromSettings(app), href, true);
+	public MediaSource resolveExportMediaSource(@Nullable String href, boolean includeNonManagedMedia) {
+		MediaStorageLocation location = MediaStorageLocation.fromSettings(app);
+		return includeNonManagedMedia ? mediaStorageHelper.resolveMediaSource(location, href, true) : mediaStorageHelper.resolveManagedMediaSource(location, href);
 	}
 
 	public void addMediaLinks(@NonNull Linkable target, @NonNull List<Link> links, @Nullable Runnable onMediaChanged) {

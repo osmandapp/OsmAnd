@@ -66,7 +66,6 @@ class ShareFavoritesDataPreparer(private val app: OsmandApplication) {
 			data.addAll(groups)
 			data.addAll(mediaItems)
 			val items = app.fileSettingsHelper.prepareSettingsItems(data, emptyList(), true)
-			AttachedMediaExportType.processSettingsItems(app, groups, items)
 			if (isCancelled()) {
 				return PreparationResult.Cancelled
 			}
