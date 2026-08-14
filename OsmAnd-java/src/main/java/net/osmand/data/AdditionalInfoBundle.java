@@ -3,6 +3,7 @@ package net.osmand.data;
 import static net.osmand.data.Amenity.ALT_NAME_WITH_LANG_PREFIX;
 import static net.osmand.data.Amenity.COLLAPSABLE_PREFIX;
 import static net.osmand.data.Amenity.LANG_YES;
+import static net.osmand.data.Amenity.NOTE;
 import static net.osmand.data.Amenity.ROUTE;
 import static net.osmand.data.Amenity.SUBTYPE;
 import static net.osmand.data.Amenity.TYPE;
@@ -35,6 +36,7 @@ public class AdditionalInfoBundle {
 			PROFILE_TYPE_EXTENSION, ADDRESS_EXTENSION, AMENITY_ORIGIN_EXTENSION,
 			TYPE, SUBTYPE, ORIGIN_EXTENSION
 	);
+	public static final String LOCALIZATIONS = "localizations";
 
 	private final Map<String, String> additionalInfo;
 	private final MapPoiTypes poiTypes;
@@ -104,11 +106,11 @@ public class AdditionalInfoBundle {
 
 		for (Map.Entry<String, Object> entry : getFilteredLocalizedInfo().entrySet()) {
 			String key = entry.getKey();
-			if (!shouldDisplayKey(key) || isKeyToSkip(key)) {
+			if (isKeyToSkip(key) || !shouldDisplayKey(key)) {
 				continue;
 			}
 			Object value = entry.getValue();
-			if (!allowNoteTag && "note".equals(key) && value instanceof String) {
+			if (!allowNoteTag && NOTE.equals(key) && value instanceof String) {
 				continue;
 			}
 			String strValue = value instanceof String str ? str : null;
@@ -150,11 +152,11 @@ public class AdditionalInfoBundle {
 							.build());
 				}
 			} else if (value instanceof Map<?, ?> mapValue) {
-				Map<String, Object> filtered = filterLocalizations(mapValue);
-				if (filtered == null) {
+				Map<String, String> localizations = extractLocalizations(mapValue);
+				if (localizations == null) {
 					continue;
 				}
-				AmenityTagEntry tagEntry = toLocalizedAmenityTagEntry(key, filtered, resolvedType, preferredLangs);
+				AmenityTagEntry tagEntry = toLocalizedAmenityTagEntry(key, localizations, resolvedType, preferredLangs);
 				if (tagEntry != null) {
 					entries.add(tagEntry);
 				}
@@ -219,16 +221,11 @@ public class AdditionalInfoBundle {
 		return entries;
 	}
 
-	private AmenityTagEntry toLocalizedAmenityTagEntry(String key, Map<?, ?> value, ResolvedPoiType resolvedType,
-	                                                   List<String> preferredLangs) {
-		if (!(value.get("localizations") instanceof Map<?, ?> localizations)) {
-			return null;
-		}
+	private AmenityTagEntry toLocalizedAmenityTagEntry(String key, Map<String, String> localizations,
+	                                                   ResolvedPoiType resolvedType, List<String> preferredLangs) {
 		List<AmenityTagEntry> children = new ArrayList<>();
-		for (Map.Entry<?, ?> loc : localizations.entrySet()) {
-			if (loc.getKey() instanceof String locKey && loc.getValue() instanceof String locValue) {
-				children.add(new AmenityTagEntry.Builder(locKey).setValue(locValue).build());
-			}
+		for (Map.Entry<String, String> loc : localizations.entrySet()) {
+			children.add(new AmenityTagEntry.Builder(loc.getKey()).setValue(loc.getValue()).build());
 		}
 		if (children.isEmpty()) {
 			return null;
@@ -267,7 +264,7 @@ public class AdditionalInfoBundle {
 
 	private boolean isFilterOnlyOrGrouped(PoiType pType) {
 		return pType != null && (pType.isFilterOnly()
-				|| (!pType.isText() && !Algorithms.isEmpty(pType.getPoiAdditionalCategory())));
+				|| (!pType.isText() && Algorithms.isNotEmpty(pType.getPoiAdditionalCategory())));
 	}
 
 	private boolean isDefaultForCategory() {
@@ -280,8 +277,8 @@ public class AdditionalInfoBundle {
 		return poiType != null && poiType.isDefaultForCategory();
 	}
 
-	private Map<String, Object> filterLocalizations(Map<?, ?> value) {
-		if (!(value.get("localizations") instanceof Map<?, ?> localizations)) {
+	private Map<String, String> extractLocalizations(Map<?, ?> value) {
+		if (!(value.get(LOCALIZATIONS) instanceof Map<?, ?> localizations)) {
 			return null;
 		}
 		Map<String, String> filtered = new LinkedHashMap<>();
@@ -291,19 +288,10 @@ public class AdditionalInfoBundle {
 				filtered.put(locKey, locValue);
 			}
 		}
-		if (filtered.isEmpty()) {
-			return null;
-		}
-		Map<String, Object> result = new LinkedHashMap<>();
-		result.put("localizations", filtered);
-		return result;
+		return filtered.isEmpty() ? null : filtered;
 	}
 
 	private boolean shouldDisplayKey(String key) {
-		AbstractPoiType t = poiTypes.getAnyPoiAdditionalTypeByKey(key);
-		if (t instanceof PoiType poiType && poiType.isHidden()) {
-			return false;
-		}
 		if (key.contains(Amenity.WIKIPEDIA)
 				|| key.contains(Amenity.CONTENT)
 				|| key.contains(Amenity.SHORT_DESCRIPTION)
@@ -313,6 +301,10 @@ public class AdditionalInfoBundle {
 		if (MapPoiTypes.ROUTE_ARTICLE.equals(get(SUBTYPE)) && key.contains(Amenity.DESCRIPTION)) {
 			return false;
 		}
+		AbstractPoiType t = poiTypes.getAnyPoiAdditionalTypeByKey(key);
+		if (t instanceof PoiType poiType && poiType.isHidden()) {
+			return false;
+		}
 		return !Amenity.NAME.equals(key);
 	}
 
@@ -320,7 +312,7 @@ public class AdditionalInfoBundle {
 		PoiCategory poiCategory = null;
 		if (additionalInfo != null) {
 			String typeTag = additionalInfo.get(TYPE);
-			if (!Algorithms.isEmpty(typeTag)) {
+			if (Algorithms.isNotEmpty(typeTag)) {
 				poiCategory = MapPoiTypes.getDefault().getPoiCategoryByName(typeTag);
 			}
 			if (poiCategory == null) {
@@ -362,7 +354,7 @@ public class AdditionalInfoBundle {
 
 	public PoiType getPoiAdditionalType(String key, String vl) {
 		AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(key);
-		if (pt == null && !Algorithms.isEmpty(vl) && vl.length() < 50) {
+		if (pt == null && Algorithms.isNotEmpty(vl) && vl.length() < 50) {
 			pt = poiTypes.getAnyPoiAdditionalTypeByKey(key + "_" + vl);
 		}
 		return pt instanceof PoiType poiType ? poiType : null;

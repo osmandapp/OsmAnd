@@ -64,8 +64,6 @@ public class AmenityUIHelper extends MenuBuilder {
 
 	public static final Log LOG = PlatformUtil.getLog(AmenityUIHelper.class);
 
-	public static final String US_MAPS_RECREATION_AREA = "us_maps_recreation_area";
-
 	private final AdditionalInfoBundle additionalInfo;
 
 	private Amenity wikiAmenity;
@@ -85,8 +83,8 @@ public class AmenityUIHelper extends MenuBuilder {
 	public void buildInternal(View view) {
 		initVariables();
 		Context context = view.getContext();
-		List<AmenityTagEntry> infoEntries = new LinkedList<>();
-		List<AmenityTagEntry> descriptions = new LinkedList<>();
+		List<AmenityTagEntry> infoEntries = new ArrayList<>();
+		List<AmenityTagEntry> descriptions = new ArrayList<>();
 
 		List<AmenityTagEntry> visibleTags = additionalInfo.getVisibleTags(osmEditingEnabled, preferredLangCandidates);
 		for (AmenityTagEntry baseEntry : visibleTags) {
@@ -180,7 +178,7 @@ public class AmenityUIHelper extends MenuBuilder {
 	}
 
 	private boolean isNoteKeyHiddenFromEditing(@NonNull String key) {
-		return "note".equals(key) && !osmEditingEnabled;
+		return NOTE.equals(key) && !osmEditingEnabled;
 	}
 
 	@Nullable
@@ -687,7 +685,7 @@ public class AmenityUIHelper extends MenuBuilder {
 		Object object = map.get(key);
 		if (object instanceof Map<?, ?>) {
 			Map<String, Object> descriptions = (Map<String, Object>) object;
-			Map<String, String> localizations = (Map<String, String>) descriptions.get("localizations");
+			Map<String, String> localizations = (Map<String, String>) descriptions.get(AdditionalInfoBundle.LOCALIZATIONS);
 			Collection<String> locales = AmenityUIHelper.collectAvailableLocalesFromTags(localizations.keySet());
 
 			Locale locale = LocaleHelper.getPreferredNameLocale(app, locales);
