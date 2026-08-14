@@ -413,7 +413,7 @@ public class OsmandRegions {
 			List<BinaryMapDataObject> list = query(x, y);
 			for (BinaryMapDataObject o : list) {
 				if (contain(o, x, y)) {
-					String name = mapIndexFields.get(mapIndexFields.nameType, o);
+					String name = getLocaleName(o);
 					if (name != null) {
 						return name;
 					}
@@ -423,6 +423,15 @@ public class OsmandRegions {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	private String getLocaleName(BinaryMapDataObject o) {
+		String name = mapIndexFields.get(mapIndexFields.nameType, o);
+		if (name == null) {
+			return null;
+		}
+		WorldRegion region = fullNamesToRegionData.get(getFullName(o));
+		return region != null ? region.getLocaleName() : name;
 	}
 
 	public List<BinaryMapDataObject> query(int lx, int rx, int ty, int by) throws IOException {
