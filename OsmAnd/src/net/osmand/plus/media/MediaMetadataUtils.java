@@ -47,6 +47,28 @@ public final class MediaMetadataUtils {
 	}
 
 	@Nullable
+	public static Long getPhotoCreationTime(@NonNull File file) throws IOException {
+		return getPhotoCreationTime(new ExifInterface(file.getAbsolutePath()));
+	}
+
+	@Nullable
+	public static Long getPhotoCreationTime(@NonNull InputStream inputStream) throws IOException {
+		return getPhotoCreationTime(new ExifInterface(inputStream));
+	}
+
+	@Nullable
+	private static Long getPhotoCreationTime(@NonNull ExifInterface exif) {
+		Long dateTime = exif.getDateTimeOriginal();
+		if (dateTime == null) {
+			dateTime = exif.getDateTimeDigitized();
+		}
+		if (dateTime == null) {
+			dateTime = exif.getDateTime();
+		}
+		return dateTime != null && dateTime > 0 ? dateTime : null;
+	}
+
+	@Nullable
 	private static Location getPhotoInformation(@NonNull ExifInterface exif) {
 		float[] latLon = new float[2];
 		if (!exif.getLatLong(latLon)) {
