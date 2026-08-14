@@ -264,7 +264,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		return result;
 	}
 
-	public void addExtraResult(SpatialSearchResult other, String lang) {
+	public boolean addExtraResult(SpatialSearchResult other, String lang) {
 		MapObject object = getFirstRefObject(false);
 		MapObject otherObj = other.getFirstRefObject(false);
 		if (otherObj == null) {
@@ -282,16 +282,18 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 					}
 				}
 			}
-			return; // nothing to merge
-		} 
+			return false; // nothing to merge
+		}
 		if (object instanceof Amenity a && unitedObject == null) {
 			unitedObject = new BaseDetailsObject(a, lang);
 		}
 		if (unitedObject != null) {
 			unitedObject.addObject(otherObj);
 		} else if (otherObj instanceof Amenity a) {
+			if (object instanceof City || object instanceof Street || object instanceof Building) {
+				return false; // do not unite City/Street/Building until full implementation in BaseDetailsObject
+			}
 			unitedObject = new BaseDetailsObject(a, lang);
-			// here we merge city, building,
 			unitedObject.addObject(object);
 		} else {
 			// case 2 objects are not amenities (same buildings)
@@ -311,9 +313,10 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 				}
 			}
 		}
+		return true;
 	}
 
-	
+
 	public long getIdDeduplication() {
 		if (!objs.isEmpty()) {
 			SpatialSearchResultRef first = objs.get(0);
