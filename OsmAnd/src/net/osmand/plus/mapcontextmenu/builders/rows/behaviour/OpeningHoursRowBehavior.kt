@@ -15,7 +15,7 @@ object OpeningHoursRowBehavior : DefaultPoiAdditionalRowBehaviour() {
 		    var vl = value
 		    val formattedValue = vl.replace("; ", "\n").replace(",", ", ")
 		    builder.setCollapsableEntries(listOf(AmenityTagEntry.Builder(key).setText(formattedValue).build()))
-		    builder.setCollapsableEntryType(AmenityTagEntry.CollapsableEntryType.OPENING_HOURS)
+		    builder.collapsableEntryType = AmenityTagEntry.CollapsableEntryType.OPENING_HOURS
 
 		    val openingHours = OpeningHoursParser.parseOpenedHours(vl)
 		    if (openingHours != null) {

@@ -4,7 +4,6 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.util.Algorithms;
 
-import java.util.Collections;
 import java.util.List;
 
 public class AmenityTagEntriesBuilder {
@@ -15,12 +14,12 @@ public class AmenityTagEntriesBuilder {
 	}
 
 	public static AmenityTagEntry buildPoiTypesGroupEntry(String key, String name, String textPrefix,
-			List<PoiType> types, int order, int iconId, List<String> iconNameCandidates, int fallbackIconId,
-			boolean poiAdditional, PoiCategory collapsableCategory) {
+                  List<PoiType> types, int order, int iconId, List<String> iconNameCandidates,
+                  int fallbackIconId, boolean poiAdditional, PoiCategory collapsableCategory) {
 		StringBuilder text = new StringBuilder();
 		for (PoiType pt : types) {
 			String translation = pt.getTranslation();
-			if (text.length() > 0) {
+			if (!text.isEmpty()) {
 				text.append(TRANSLATIONS_SEPARATOR);
 			}
 			text.append(translation);
@@ -42,7 +41,7 @@ public class AmenityTagEntriesBuilder {
 	}
 
 	public static void sortInfoEntries(List<AmenityTagEntry> entries) {
-		Collections.sort(entries, (entry1, entry2) -> {
+		entries.sort((entry1, entry2) -> {
 			if (entry1.order != entry2.order) {
 				return Integer.compare(entry1.order, entry2.order);
 			}

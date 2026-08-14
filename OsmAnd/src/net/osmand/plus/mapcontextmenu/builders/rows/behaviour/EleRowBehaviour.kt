@@ -26,7 +26,7 @@ object EleRowBehaviour : DefaultPoiAdditionalRowBehaviour() {
 				val elevationData: MutableSet<String> = HashSet()
 				elevationData.add(collapsibleVal)
 				builder.setCollapsableEntries(elevationData.map { AmenityTagEntry.Builder(it).setText(it).build() })
-				builder.setCollapsableEntryType(AmenityTagEntry.CollapsableEntryType.ELEVATION_PILLS)
+				builder.collapsableEntryType = AmenityTagEntry.CollapsableEntryType.ELEVATION_PILLS
 			} catch (ex: NumberFormatException) {
 				LOG.error(ex)
 			}

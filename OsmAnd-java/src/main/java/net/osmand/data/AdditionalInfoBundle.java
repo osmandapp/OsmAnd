@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -97,7 +96,8 @@ public class AdditionalInfoBundle {
 	}
 
 	private List<AmenityTagEntry> collectPlainRows(boolean allowNoteTag, List<String> preferredLangs,
-			PoiCategory category, Map<String, List<PoiType>> collectedPoiTypes) {
+	                                               PoiCategory category,
+	                                               Map<String, List<PoiType>> collectedPoiTypes) {
 		boolean showDefaultTags = isDefaultForCategory();
 		List<AmenityTagEntry> entries = new ArrayList<>();
 		AmenityTagEntry cuisineEntry = null;
@@ -125,8 +125,12 @@ public class AdditionalInfoBundle {
 
 			if (strValue != null) {
 				if (additionalType != null) {
-					AmenityTagEntry tagEntry = new AmenityTagEntry.Builder(key).setValue(strValue).setOrder(additionalType.getOrder())
-							.setResolvedType(resolvedType).setIsDescription(key.contains(Amenity.DESCRIPTION)).build();
+					AmenityTagEntry tagEntry = new AmenityTagEntry.Builder(key)
+							.setValue(strValue)
+							.setOrder(additionalType.getOrder())
+							.setResolvedType(resolvedType)
+							.setIsDescription(key.contains(Amenity.DESCRIPTION))
+							.build();
 					if (Amenity.CUISINE.equals(key)) {
 						cuisineEntry = tagEntry;
 					} else {
@@ -138,15 +142,19 @@ public class AdditionalInfoBundle {
 						collectedPoiTypes.computeIfAbsent(categoryKey, c -> new ArrayList<>()).add(categoryType);
 					}
 				} else {
-					entries.add(new AmenityTagEntry.Builder(key).setValue(strValue).setOrder(PoiType.DEFAULT_ORDER)
-							.setResolvedType(resolvedType).setIsDescription(key.contains(Amenity.DESCRIPTION)).build());
+					entries.add(new AmenityTagEntry.Builder(key)
+							.setValue(strValue)
+							.setOrder(PoiType.DEFAULT_ORDER)
+							.setResolvedType(resolvedType)
+							.setIsDescription(key.contains(Amenity.DESCRIPTION))
+							.build());
 				}
-			} else if (value instanceof Map) {
-				Object filtered = filterLocalizations((Map<String, Object>) value);
+			} else if (value instanceof Map<?, ?> mapValue) {
+				Map<String, Object> filtered = filterLocalizations(mapValue);
 				if (filtered == null) {
 					continue;
 				}
-				AmenityTagEntry tagEntry = toLocalizedAmenityTagEntry(key, (Map<String, Object>) filtered, resolvedType, preferredLangs);
+				AmenityTagEntry tagEntry = toLocalizedAmenityTagEntry(key, filtered, resolvedType, preferredLangs);
 				if (tagEntry != null) {
 					entries.add(tagEntry);
 				}
@@ -195,7 +203,8 @@ public class AdditionalInfoBundle {
 		return entries;
 	}
 
-	private List<AmenityTagEntry> collectPoiTypeGroups(PoiCategory category, Map<String, List<PoiType>> collectedPoiTypes) {
+	private List<AmenityTagEntry> collectPoiTypeGroups(PoiCategory category, Map<String,
+			List<PoiType>> collectedPoiTypes) {
 		List<AmenityTagEntry> entries = new ArrayList<>();
 		for (List<PoiType> poiTypeList : collectedPoiTypes.values()) {
 			PoiCategory groupCategory = poiTypeList.get(0).getCategory();
@@ -210,16 +219,16 @@ public class AdditionalInfoBundle {
 		return entries;
 	}
 
-	@SuppressWarnings("unchecked")
-	private AmenityTagEntry toLocalizedAmenityTagEntry(String key, Map<String, Object> value, ResolvedPoiType resolvedType,
-			List<String> preferredLangs) {
-		Object localizationsObj = value.get("localizations");
-		if (!(localizationsObj instanceof Map)) {
+	private AmenityTagEntry toLocalizedAmenityTagEntry(String key, Map<?, ?> value, ResolvedPoiType resolvedType,
+	                                                   List<String> preferredLangs) {
+		if (!(value.get("localizations") instanceof Map<?, ?> localizations)) {
 			return null;
 		}
 		List<AmenityTagEntry> children = new ArrayList<>();
-		for (Map.Entry<String, String> loc : ((Map<String, String>) localizationsObj).entrySet()) {
-			children.add(new AmenityTagEntry.Builder(loc.getKey()).setValue(loc.getValue()).build());
+		for (Map.Entry<?, ?> loc : localizations.entrySet()) {
+			if (loc.getKey() instanceof String locKey && loc.getValue() instanceof String locValue) {
+				children.add(new AmenityTagEntry.Builder(locKey).setValue(locValue).build());
+			}
 		}
 		if (children.isEmpty()) {
 			return null;
@@ -227,9 +236,16 @@ public class AdditionalInfoBundle {
 		AmenityTagEntry header = pickHeader(children, preferredLangs);
 		List<AmenityTagEntry> otherLangs = new ArrayList<>(children);
 		otherLangs.remove(header);
-		int order = resolvedType.additionalType != null ? resolvedType.additionalType.getOrder() : PoiType.DEFAULT_ORDER;
-		return new AmenityTagEntry.Builder(header.key).setValue(header.value).setCollapsableEntries(otherLangs)
-				.setResolvedType(resolvedType).setOrder(order).setIsDescription(key.contains(Amenity.DESCRIPTION)).build();
+		int order = resolvedType.additionalType != null
+				? resolvedType.additionalType.getOrder()
+				: PoiType.DEFAULT_ORDER;
+		return new AmenityTagEntry.Builder(header.key)
+				.setValue(header.value)
+				.setCollapsableEntries(otherLangs)
+				.setResolvedType(resolvedType)
+				.setOrder(order)
+				.setIsDescription(key.contains(Amenity.DESCRIPTION))
+				.build();
 	}
 
 	private AmenityTagEntry pickHeader(List<AmenityTagEntry> children, List<String> preferredLangs) {
@@ -264,22 +280,21 @@ public class AdditionalInfoBundle {
 		return poiType != null && poiType.isDefaultForCategory();
 	}
 
-	@SuppressWarnings("unchecked")
-	private Map<String, Object> filterLocalizations(Map<String, Object> value) {
-		Object localizationsObj = value.get("localizations");
-		if (!(localizationsObj instanceof Map)) {
-			return value;
+	private Map<String, Object> filterLocalizations(Map<?, ?> value) {
+		if (!(value.get("localizations") instanceof Map<?, ?> localizations)) {
+			return null;
 		}
 		Map<String, String> filtered = new LinkedHashMap<>();
-		for (Map.Entry<String, String> loc : ((Map<String, String>) localizationsObj).entrySet()) {
-			if (!isKeyToSkip(loc.getKey())) {
-				filtered.put(loc.getKey(), loc.getValue());
+		for (Map.Entry<?, ?> loc : localizations.entrySet()) {
+			if (loc.getKey() instanceof String locKey && loc.getValue() instanceof String locValue
+					&& !isKeyToSkip(locKey)) {
+				filtered.put(locKey, locValue);
 			}
 		}
 		if (filtered.isEmpty()) {
 			return null;
 		}
-		Map<String, Object> result = new HashMap<>();
+		Map<String, Object> result = new LinkedHashMap<>();
 		result.put("localizations", filtered);
 		return result;
 	}
@@ -372,7 +387,8 @@ public class AdditionalInfoBundle {
 
 	public boolean isKeyToSkip(String key) {
 		return CollectionUtils.startsWithAny(key, COLLAPSABLE_PREFIX, ALT_NAME_WITH_LANG_PREFIX, LANG_YES)
-				|| CollectionUtils.equalsToAny(key, WIKI_PHOTO, WIKIDATA, WIKIMEDIA_COMMONS, "image", "mapillary", "subway_region")
+				|| CollectionUtils.equalsToAny(key, WIKI_PHOTO, WIKIDATA, WIKIMEDIA_COMMONS, "image", "mapillary",
+				"subway_region")
 				|| MapObject.isNameLangTag(key)
 				|| key.contains(ROUTE);
 	}

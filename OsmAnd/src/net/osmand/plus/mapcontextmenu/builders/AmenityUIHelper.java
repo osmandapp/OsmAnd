@@ -75,7 +75,8 @@ public class AmenityUIHelper extends MenuBuilder {
 	private boolean osmEditingEnabled = PluginsHelper.isActive(OsmEditingPlugin.class);
 	private List<String> preferredLangCandidates;
 
-	public AmenityUIHelper(@NonNull MapActivity mapActivity, @NonNull AdditionalInfoBundle infoBundle) {
+	public AmenityUIHelper(@NonNull MapActivity mapActivity,
+	                       @NonNull AdditionalInfoBundle infoBundle) {
 		super(mapActivity);
 		this.additionalInfo = infoBundle;
 	}
@@ -87,7 +88,8 @@ public class AmenityUIHelper extends MenuBuilder {
 		List<AmenityTagEntry> infoEntries = new LinkedList<>();
 		List<AmenityTagEntry> descriptions = new LinkedList<>();
 
-		for (AmenityTagEntry baseEntry : additionalInfo.getVisibleTags(osmEditingEnabled, preferredLangCandidates)) {
+		List<AmenityTagEntry> visibleTags = additionalInfo.getVisibleTags(osmEditingEnabled, preferredLangCandidates);
+		for (AmenityTagEntry baseEntry : visibleTags) {
 			AmenityTagEntry amenityEntry = buildEntryData(context, baseEntry);
 			if (amenityEntry == null) {
 				continue;
@@ -116,7 +118,7 @@ public class AmenityUIHelper extends MenuBuilder {
 	@Nullable
 	private AmenityTagEntry buildEntryData(@NonNull Context context, @NonNull AmenityTagEntry baseEntry) {
 		if (baseEntry.collapsableEntryType == AmenityTagEntry.CollapsableEntryType.POI_TYPE_GROUP) {
-			return buildPoiTypeGroupEntryData(context, baseEntry);
+			return buildPoiTypeGroupEntryData(baseEntry);
 		}
 		if (!Algorithms.isEmpty(baseEntry.collapsableEntries)) {
 			return buildLocalizedEntryData(context, baseEntry);
@@ -127,7 +129,7 @@ public class AmenityUIHelper extends MenuBuilder {
 	}
 
 	@NonNull
-	private AmenityTagEntry buildPoiTypeGroupEntryData(@NonNull Context context, @NonNull AmenityTagEntry baseEntry) {
+	private AmenityTagEntry buildPoiTypeGroupEntryData(@NonNull AmenityTagEntry baseEntry) {
 		List<PoiType> categoryTypes = baseEntry.collapsablePoiTypes;
 		PoiType firstType = categoryTypes.get(0);
 		if (baseEntry.poiAdditional) {
@@ -135,10 +137,9 @@ public class AmenityUIHelper extends MenuBuilder {
 			String poiAdditionalIconName = poiTypes.getPoiAdditionalCategoryIconName(poiAdditionalCategoryName);
 			List<String> iconNameCandidates = nonEmptyIconNames(
 					poiAdditionalIconName, poiAdditionalCategoryName, firstType.getIconKeyName());
-			return AmenityTagEntriesBuilder.buildPoiTypesGroupEntry(poiAdditionalCategoryName,
-					firstType.getKeyName(), firstType.getPoiAdditionalCategoryTranslation(), categoryTypes,
-					firstType.getOrder(), 0, iconNameCandidates, R.drawable.ic_action_note_dark,
-					true, baseEntry.collapsableCategory);
+			return AmenityTagEntriesBuilder.buildPoiTypesGroupEntry(poiAdditionalCategoryName, firstType.getKeyName(),
+					firstType.getPoiAdditionalCategoryTranslation(), categoryTypes, firstType.getOrder(), 0,
+					iconNameCandidates, R.drawable.ic_action_note_dark, true, baseEntry.collapsableCategory);
 		}
 		PoiCategory groupCategory = firstType.getCategory();
 		return AmenityTagEntriesBuilder.buildPoiTypesGroupEntry(groupCategory.getKeyName(),
@@ -156,9 +157,10 @@ public class AmenityUIHelper extends MenuBuilder {
 		List<AmenityTagEntry> localizedEntries = new ArrayList<>();
 		for (AmenityTagEntry child : baseEntry.collapsableEntries) {
 			if (!isNoteKeyHiddenFromEditing(child.key)) {
-				AdditionalInfoBundle.ResolvedPoiType childResolved = additionalInfo.resolvePoiType(poiCategory, child.key, child.value);
-				AmenityTagEntry.Builder childBuilder = getEntryDataBuilder(context, child.key, child.value,
-						baseEntry.isDescription, childResolved);
+				AdditionalInfoBundle.ResolvedPoiType childResolved =
+						additionalInfo.resolvePoiType(poiCategory, child.key, child.value);
+				AmenityTagEntry.Builder childBuilder =
+						getEntryDataBuilder(context, child.key, child.value, baseEntry.isDescription, childResolved);
 				if (childBuilder != null) {
 					localizedEntries.add(childBuilder.build());
 				}
@@ -182,19 +184,23 @@ public class AmenityUIHelper extends MenuBuilder {
 	}
 
 	@Nullable
-	private AmenityTagEntry.Builder getEntryDataBuilder(@NonNull Context context, @NonNull String key, @NonNull String value,
-			boolean isDescription, @NonNull AdditionalInfoBundle.ResolvedPoiType resolvedType) {
+	private AmenityTagEntry.Builder getEntryDataBuilder(@NonNull Context context, @NonNull String key,
+	                                                    @NonNull String value, boolean isDescription,
+	                                                    @NonNull AdditionalInfoBundle.ResolvedPoiType resolvedType) {
 		if (resolvedType.additionalType == null && resolvedType.categoryType != null) {
 			return null;
 		}
-		AmenityTagEntry.Builder entryBuilder = new AmenityTagEntry.Builder(key).setValue(value).setIsDescription(isDescription);
+		AmenityTagEntry.Builder entryBuilder =
+				new AmenityTagEntry.Builder(key).setValue(value).setIsDescription(isDescription);
 		PoiAdditionalUiRule poiAdditionalUiRule = PoiAdditionalUiRules.INSTANCE.findRule(key);
 		if (resolvedType.additionalType != null) {
-			poiAdditionalUiRule.fillRow(app, context, entryBuilder, this, resolvedType.additionalType, key, value, subtype);
+			poiAdditionalUiRule.fillRow(app, context, entryBuilder, this, resolvedType.additionalType,
+					key, value, subtype);
 		} else {
 			PoiType fallbackType = new PoiType(poiTypes, poiCategory, null, key, poiCategory.getIconKeyName());
 			fallbackType.setText(true);
-			poiAdditionalUiRule.fillRow(app, context, entryBuilder, this, fallbackType, key, poiTypes.getPoiTranslation(value), subtype);
+			poiAdditionalUiRule.fillRow(app, context, entryBuilder, this, fallbackType, key,
+					poiTypes.getPoiTranslation(value), subtype);
 		}
 		entryBuilder.setMatchWidthDivider(!entryBuilder.isDescription() && entryBuilder.isWiki());
 		return entryBuilder;
@@ -303,7 +309,8 @@ public class AmenityUIHelper extends MenuBuilder {
 	}
 
 	@NonNull
-	private CollapsableView buildCollapsableViewFromEntries(@NonNull Context context, @NonNull List<AmenityTagEntry> entries) {
+	private CollapsableView buildCollapsableViewFromEntries(@NonNull Context context,
+	                                                        @NonNull List<AmenityTagEntry> entries) {
 		LinearLayout llv = buildCollapsableContentView(mapActivity, true, true);
 		for (AmenityTagEntry entry : entries) {
 			View container = createRowContainer(context, null);

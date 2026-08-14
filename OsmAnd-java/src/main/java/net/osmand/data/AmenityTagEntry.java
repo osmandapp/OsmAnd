@@ -127,14 +127,45 @@ public class AmenityTagEntry {
 					.setTextLinesLimit(entry.textLinesLimit);
 		}
 
-		public Builder setValue(String value) { this.value = value; return this; }
-		public Builder setResolvedType(AdditionalInfoBundle.ResolvedPoiType resolvedType) { this.resolvedType = resolvedType; return this; }
-		public Builder setIconId(int iconId) { this.iconId = iconId; return this; }
-		public Builder setIconNameCandidates(List<String> iconNameCandidates) { this.iconNameCandidates = iconNameCandidates; return this; }
-		public Builder setFallbackIconId(int fallbackIconId) { this.fallbackIconId = fallbackIconId; return this; }
-		public Builder setTextPrefix(String textPrefix) { this.textPrefix = textPrefix; return this; }
-		public Builder setText(String text) { this.text = text; return this; }
-		public Builder setHiddenUrl(String hiddenUrl) { this.hiddenUrl = hiddenUrl; return this; }
+		public Builder setValue(String value) {
+			this.value = value;
+			return this;
+		}
+
+		public Builder setResolvedType(AdditionalInfoBundle.ResolvedPoiType resolvedType) {
+			this.resolvedType = resolvedType;
+			return this;
+		}
+
+		public Builder setIconId(int iconId) {
+			this.iconId = iconId;
+			return this;
+		}
+
+		public Builder setIconNameCandidates(List<String> iconNameCandidates) {
+			this.iconNameCandidates = iconNameCandidates;
+			return this;
+		}
+
+		public Builder setFallbackIconId(int fallbackIconId) {
+			this.fallbackIconId = fallbackIconId;
+			return this;
+		}
+
+		public Builder setTextPrefix(String textPrefix) {
+			this.textPrefix = textPrefix;
+			return this;
+		}
+
+		public Builder setText(String text) {
+			this.text = text;
+			return this;
+		}
+
+		public Builder setHiddenUrl(String hiddenUrl) {
+			this.hiddenUrl = hiddenUrl;
+			return this;
+		}
 
 		public Builder setCollapsableEntries(List<AmenityTagEntry> collapsableEntries) {
 			this.collapsableEntries = collapsableEntries;
@@ -143,41 +174,151 @@ public class AmenityTagEntry {
 			}
 			return this;
 		}
-		public Builder setCollapsableEntryType(CollapsableEntryType collapsableEntryType) { this.collapsableEntryType = collapsableEntryType; return this; }
-		public Builder setCollapsablePoiTypes(List<PoiType> collapsablePoiTypes) { this.collapsablePoiTypes = collapsablePoiTypes; return this; }
-		public Builder setCollapsableCategory(PoiCategory collapsableCategory) { this.collapsableCategory = collapsableCategory; return this; }
-		public Builder setPoiAdditional(boolean poiAdditional) { this.poiAdditional = poiAdditional; return this; }
 
-		public Builder setTextColor(int color) { this.textColor = color; return this; }
-		public Builder setIsWiki(boolean wiki) { this.isWiki = wiki; return this; }
-		public Builder setIsText(boolean textFlag) { this.isText = textFlag; return this; }
-		public Builder setIsDescription(boolean isDescription) { this.isDescription = isDescription; return this; }
-		public Builder setNeedLinks(boolean needLinks) { this.needLinks = needLinks; return this; }
-		public Builder setIsPhoneNumber(boolean isPhoneNumber) { this.isPhoneNumber = isPhoneNumber; return this; }
-		public Builder setIsUrl(boolean isUrl) { this.isUrl = isUrl; return this; }
-		public Builder setOrder(int order) { this.order = order; return this; }
-		public Builder setName(String name) { this.name = name; return this; }
-		public Builder setMatchWidthDivider(boolean match) { this.matchWidthDivider = match; return this; }
-		public Builder setTextLinesLimit(int limit) { this.textLinesLimit = limit; return this; }
+		public Builder setCollapsableEntryType(CollapsableEntryType collapsableEntryType) {
+			this.collapsableEntryType = collapsableEntryType;
+			return this;
+		}
 
-		public Builder setTextIfNotPresent(String text) { if (!hasText()) setText(text); return this; }
-		public Builder setTextPrefixIfNotPresent(String textPrefix) { if (!hasTextPrefix()) setTextPrefix(textPrefix); return this; }
+		public Builder setCollapsablePoiTypes(List<PoiType> collapsablePoiTypes) {
+			this.collapsablePoiTypes = collapsablePoiTypes;
+			return this;
+		}
 
-		public String getKey() { return key; }
-		public String getValue() { return value; }
-		public int getIconId() { return iconId; }
-		public boolean hasIcon() { return iconId != 0; }
-		public String getTextPrefix() { return textPrefix; }
-		public boolean hasTextPrefix() { return !Algorithms.isEmpty(textPrefix); }
-		public String getText() { return text; }
-		public boolean hasText() { return !Algorithms.isEmpty(text); }
-		public String getHiddenUrl() { return hiddenUrl; }
-		public boolean hasHiddenUrl() { return !Algorithms.isEmpty(hiddenUrl); }
-		public CollapsableEntryType getCollapsableEntryType() { return collapsableEntryType; }
-		public boolean isWiki() { return isWiki; }
-		public boolean isText() { return isText; }
-		public boolean isDescription() { return isDescription; }
-		public boolean isNeedLinks() { return needLinks && collapsableEntryType == CollapsableEntryType.NONE; }
+		public Builder setCollapsableCategory(PoiCategory collapsableCategory) {
+			this.collapsableCategory = collapsableCategory;
+			return this;
+		}
+
+		public Builder setPoiAdditional(boolean poiAdditional) {
+			this.poiAdditional = poiAdditional;
+			return this;
+		}
+
+		public Builder setTextColor(int color) {
+			this.textColor = color;
+			return this;
+		}
+
+		public Builder setIsWiki(boolean wiki) {
+			this.isWiki = wiki;
+			return this;
+		}
+
+		public Builder setIsText(boolean textFlag) {
+			this.isText = textFlag;
+			return this;
+		}
+
+		public Builder setIsDescription(boolean isDescription) {
+			this.isDescription = isDescription;
+			return this;
+		}
+
+		public Builder setNeedLinks(boolean needLinks) {
+			this.needLinks = needLinks;
+			return this;
+		}
+
+		public Builder setIsPhoneNumber(boolean isPhoneNumber) {
+			this.isPhoneNumber = isPhoneNumber;
+			return this;
+		}
+
+		public Builder setIsUrl(boolean isUrl) {
+			this.isUrl = isUrl;
+			return this;
+		}
+
+		public Builder setOrder(int order) {
+			this.order = order;
+			return this;
+		}
+
+		public Builder setName(String name) {
+			this.name = name;
+			return this;
+		}
+
+		public Builder setMatchWidthDivider(boolean match) {
+			this.matchWidthDivider = match;
+			return this;
+		}
+
+		public Builder setTextLinesLimit(int limit) {
+			this.textLinesLimit = limit;
+			return this;
+		}
+
+		public Builder setTextIfNotPresent(String text) {
+			if (!hasText()) setText(text);
+			return this;
+		}
+
+		public Builder setTextPrefixIfNotPresent(String textPrefix) {
+			if (!hasTextPrefix()) setTextPrefix(textPrefix);
+			return this;
+		}
+
+		public String getKey() {
+			return key;
+		}
+
+		public String getValue() {
+			return value;
+		}
+
+		public int getIconId() {
+			return iconId;
+		}
+
+		public boolean hasIcon() {
+			return iconId != 0;
+		}
+
+		public String getTextPrefix() {
+			return textPrefix;
+		}
+
+		public boolean hasTextPrefix() {
+			return !Algorithms.isEmpty(textPrefix);
+		}
+
+		public String getText() {
+			return text;
+		}
+
+		public boolean hasText() {
+			return !Algorithms.isEmpty(text);
+		}
+
+		public String getHiddenUrl() {
+			return hiddenUrl;
+		}
+
+		public boolean hasHiddenUrl() {
+			return !Algorithms.isEmpty(hiddenUrl);
+		}
+
+		public CollapsableEntryType getCollapsableEntryType() {
+			return collapsableEntryType;
+		}
+
+		public boolean isWiki() {
+			return isWiki;
+		}
+
+		public boolean isText() {
+			return isText;
+		}
+
+		public boolean isDescription() {
+			return isDescription;
+		}
+
+		public boolean isNeedLinks() {
+			return needLinks && collapsableEntryType == CollapsableEntryType.NONE;
+		}
 
 		public AmenityTagEntry build() {
 			return new AmenityTagEntry(this);
