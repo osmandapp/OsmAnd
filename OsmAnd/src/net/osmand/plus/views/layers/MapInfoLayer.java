@@ -125,14 +125,12 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		widgetsUpdateScheduled = false;
 
 		MapActivity activity = getMapActivity();
-		OsmandSettings settings = activity != null ? activity.getSettings() : null;
-		if (activity != null && settings.MAP_ACTIVITY_ENABLED) {
+		if (activity != null && activity.getSettings().MAP_ACTIVITY_ENABLED) {
 			if (activity.isMapVisible()) {
 				long currentTime = SystemClock.uptimeMillis();
 				long elapsedTime = currentTime - lastWidgetsUpdateTime;
 				if (elapsedTime >= WIDGETS_UPDATE_INTERVAL_MS) {
 					updateWidgetsInternal(view.getCurrentRotatedTileBox(), drawSettings);
-					lastWidgetsUpdateTime = SystemClock.uptimeMillis();
 				}
 			}
 			scheduleWidgetsUpdate();
@@ -689,7 +687,6 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		this.drawSettings = drawSettings;
 		if (getMapActivity() != null) {
 			updateWidgetsInternal(tileBox, drawSettings);
-			lastWidgetsUpdateTime = SystemClock.uptimeMillis();
 			scheduleWidgetsUpdate();
 		}
 	}
@@ -712,6 +709,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		for (WidgetsContainer container : additionalWidgets) {
 			container.update(drawSettings);
 		}
+		lastWidgetsUpdateTime = SystemClock.uptimeMillis();
 	}
 
 	private void scheduleWidgetsUpdate() {
