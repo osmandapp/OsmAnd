@@ -7,11 +7,7 @@ import java.util.List;
 
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.NameIndexReader;
-import net.osmand.data.Amenity;
-import net.osmand.data.City;
-import net.osmand.data.LatLon;
-import net.osmand.data.MapObject;
-import net.osmand.data.QuadRect;
+import net.osmand.data.*;
 import net.osmand.map.OsmandRegions;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
@@ -606,6 +602,10 @@ public class SpatialSearchTestAndDocs {
 //		query = "墨田区 錦糸三丁目 8-8"; //  155046029 18112 (35.6986 139.8146)]
 //		query = "墨田区 錦糸三丁目 2";
 		
+		query = "Саксаганського";
+		pattern = "Ukr";
+		pattern2 = "World";
+		
 		long t = System.nanoTime();
 
 		List<BinaryMapIndexReader> ls = new ArrayList<BinaryMapIndexReader>();
@@ -714,7 +714,7 @@ public class SpatialSearchTestAndDocs {
 		SpatialSearchResults rs = a.searchTest(query, searchContext, 1000);
 		if (rs.mainResults != null) {
 			for (SpatialSearchResult s : rs.mainResults) {
-				MapObject unitedObject = s.unitedObject.getSyntheticAmenity();
+				MapObject unitedObject = s.unitedObject.getSyntheticMapObject();
 				String out = s.toString(searchContext);
 				if (unitedObject != null) {
 					out += " United:" + unitedObject.toString();

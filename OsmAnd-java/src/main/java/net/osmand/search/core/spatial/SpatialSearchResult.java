@@ -105,7 +105,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	
 	private MapObject getFirstRefObject(boolean useUnited) {
 		if (useUnited && unitedObject != null) {
-			return unitedObject.getSyntheticAmenity();
+			return unitedObject.getSyntheticMapObject();
 		}
 		if (objs.size() > 0) {
 			SpatialSearchResultRef o = objs.get(0);
@@ -129,7 +129,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	
 	public MapObject getReferenceObject() {
 		if (unitedObject != null) {
-			return unitedObject.getSyntheticAmenity();
+			return unitedObject.getSyntheticMapObject();
 		}
 		for (SpatialSearchResultRef ref : objs) {
 			if (ref.atom.bldObject != null) {
@@ -185,7 +185,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		MapObject firstRefObject = null;
 		if (unitedObject != null) {
 			firstRefObject = getFirstRefObject(false);
-			o.add(unitedObject.getSyntheticAmenity());
+			o.add(unitedObject.getSyntheticMapObject());
 		}
 		for (SpatialSearchResultRef r : objs) {
 			if (r.atom.bldObject != null && r.atom.bldObject != firstRefObject) {
@@ -284,33 +284,26 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 			}
 			return; // nothing to merge
 		} 
-		if (object instanceof Amenity a && unitedObject == null) {
-			unitedObject = new BaseDetailsObject(a, lang);
+		if (unitedObject == null) {
+			unitedObject = new BaseDetailsObject(object, lang);
 		}
-		if (unitedObject != null) {
-			unitedObject.addObject(otherObj);
-		} else if (otherObj instanceof Amenity a) {
-			unitedObject = new BaseDetailsObject(a, lang);
-			// here we merge city, building,
-			unitedObject.addObject(object);
-		} else {
-			// case 2 objects are not amenities (same buildings)
-			if (object instanceof Building && otherObj instanceof Building) {
-				Street s1 = getMatchRefObject(Street.class);
-				Street s2 = other.getMatchRefObject(Street.class);
-				// add suburb city part to first item
-				if (s1 != null && s2 != null && !s1.getCity().getName().equals(s2.getCity().getName()) && 
-						!s1.getName().contains("(")) {
-					s1.setName(s1.getName() + " (" + s2.getCity().getName() + ")");
-					Map<String, String> namesMap = s1.getNamesMap(true);
-					Iterator<Entry<String, String>> it = namesMap.entrySet().iterator();
-					while(it.hasNext()) {
-						Entry<String, String> e = it.next();
-						s1.setName(e.getKey(), e.getValue() + " (" + s2.getCity().getName() + ")");
-					}
+		// case 2 objects are not amenities (same buildings)
+		if (object instanceof Building && otherObj instanceof Building) {
+			Street s1 = getMatchRefObject(Street.class);
+			Street s2 = other.getMatchRefObject(Street.class);
+			// add suburb city part to first item
+			if (s1 != null && s2 != null && !s1.getCity().getName().equals(s2.getCity().getName()) &&
+					!s1.getName().contains("(")) {
+				s1.setName(s1.getName() + " (" + s2.getCity().getName() + ")");
+				Map<String, String> namesMap = s1.getNamesMap(true);
+				Iterator<Entry<String, String>> it = namesMap.entrySet().iterator();
+				while (it.hasNext()) {
+					Entry<String, String> e = it.next();
+					s1.setName(e.getKey(), e.getValue() + " (" + s2.getCity().getName() + ")");
 				}
 			}
 		}
+		unitedObject.addObject(otherObj);
 	}
 
 	

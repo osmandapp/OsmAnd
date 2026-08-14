@@ -793,7 +793,7 @@ public class AmenitySearcher {
                 detailsObject.addObject(renderedObject);
 
                 Amenity amenity = detailsObject.getSyntheticAmenity();
-                if (detailsObject.getPointsLength() < renderedObject.getX().size()) {
+                if (amenity != null && detailsObject.getPointsLength() < renderedObject.getX().size()) {
                     amenity.setX(renderedObject.getX());
                     amenity.setY(renderedObject.getY());
                 }
@@ -824,14 +824,14 @@ public class AmenitySearcher {
             xx = renderedObject.getX();
             yy = renderedObject.getY();
         }
-        if (object instanceof BaseDetailsObject base) {
+        if (object instanceof BaseDetailsObject base && base.getSyntheticAmenity() != null) {
             xx = base.getSyntheticAmenity().getX();
             yy = base.getSyntheticAmenity().getY();
         }
         if (xx != null && yy != null && !xx.isEmpty()) {
             detailsObject.setX(xx);
             detailsObject.setY(yy);
-        } else {
+        } else if (detailsObject.getSyntheticAmenity() != null) {
             List<BinaryMapDataObject> dataObjects = searchBinaryMapDataForAmenity(detailsObject.getSyntheticAmenity(), 1);
             for (BinaryMapDataObject dataObject : dataObjects) {
                 if (copyCoordinates(detailsObject, dataObject)) {

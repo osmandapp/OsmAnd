@@ -32,7 +32,7 @@ public class BaseDetailsObject {
 	private String obfResourceName;
 	private SearchResultResource searchResultResource;
 
-	protected Amenity syntheticAmenity = new Amenity();
+	protected MapObject syntheticMapObject = null;
 	private int[] bbox31;
 
 	private ObjectCompleteness objectCompleteness = ObjectCompleteness.EMPTY;
@@ -67,12 +67,19 @@ public class BaseDetailsObject {
 		}
 	}
 
+	public MapObject getSyntheticMapObject() {
+		return syntheticMapObject;
+	}
+	
 	public Amenity getSyntheticAmenity() {
-		return syntheticAmenity;
+		if (syntheticMapObject instanceof Amenity am) {
+			return am;
+		}
+		return null;
 	}
 
 	public LatLon getLocation() {
-		return syntheticAmenity.getLocation();
+		return syntheticMapObject.getLocation();
 	}
 
 	public List<Object> getObjects() {
@@ -101,17 +108,13 @@ public class BaseDetailsObject {
 	
 	private boolean addObjectNoCombine(Object object) {
 		if (bbox31 == null && object instanceof City c) {
-			// we don't support merge of cities direct but take bbox31
 			bbox31 = c.getBbox31();
-			return true;
 		} else if (bbox31 == null && object instanceof Street s) {
-			// we don't support merge of cities direct but take bbox31
 			QuadRect bb = s.getBboxPoints();
 			if (bb != null) {
 				bbox31 = new int[] { MapUtils.get31TileNumberX(bb.left), MapUtils.get31TileNumberY(bb.top),
 						MapUtils.get31TileNumberX(bb.right), MapUtils.get31TileNumberY(bb.bottom) };
 			}
-			return true;
 		}
 		if (!isSupportedObjectType(object)) {
 			return false;
@@ -144,6 +147,8 @@ public class BaseDetailsObject {
 			return amenity != null ? amenity.getWikidata() : null;
 		} else if (object instanceof RenderedObject renderedObject) {
 			return renderedObject.getTagValue(WIKIDATA);
+		} else if (object instanceof MapObject mapObject) {
+			return mapObject.getWikidata();
 		}
 		return null;
 	}
@@ -264,19 +269,26 @@ public class BaseDetailsObject {
 	}
 
 	private void combineData() {
-		syntheticAmenity = new Amenity();
-		syntheticAmenity.setBbox31(bbox31);
+		if (isAddressType()) {
+			syntheticMapObject = getAddressObject();
+		} else {
+			Amenity synthetic = new Amenity();
+			synthetic.setBbox31(bbox31);
+			syntheticMapObject = synthetic;
+		}
 		sortObjects();
 		for (Object object : objects) {
 			mergeObject(object, objects.size() == 1);
 		}
-		if (this.objectCompleteness.ordinal() < ObjectCompleteness.FULL.ordinal()) {
-			this.objectCompleteness = syntheticAmenity.getType() == null ? ObjectCompleteness.EMPTY : ObjectCompleteness.COMBINED;
-		}
-		if (syntheticAmenity.getType() == null) {
-			syntheticAmenity.setType(MapPoiTypes.getDefault().getUserDefinedCategory());
-			syntheticAmenity.setSubType("");
-			this.objectCompleteness = ObjectCompleteness.EMPTY;
+		if (syntheticMapObject instanceof Amenity syntheticAmenity) {
+			if (this.objectCompleteness.ordinal() < ObjectCompleteness.FULL.ordinal()) {
+				this.objectCompleteness = syntheticAmenity.getType() == null ? ObjectCompleteness.EMPTY : ObjectCompleteness.COMBINED;
+			}
+			if (syntheticAmenity.getType() == null) {
+				syntheticAmenity.setType(MapPoiTypes.getDefault().getUserDefinedCategory());
+				syntheticAmenity.setSubType("");
+				this.objectCompleteness = ObjectCompleteness.EMPTY;
+			}
 		}
 	}
 
@@ -289,9 +301,9 @@ public class BaseDetailsObject {
 				processAmenity(amenity, isSingleObject);
 			} else {
 				processId(transportStop);
-				syntheticAmenity.copyNames(transportStop);
-				if (syntheticAmenity.getLocation() == null) {
-					syntheticAmenity.setLocation(transportStop.getLocation());
+				syntheticMapObject.copyNames(transportStop);
+				if (syntheticMapObject.getLocation() == null) {
+					syntheticMapObject.setLocation(transportStop.getLocation());
 				}
 			}
 		} else if (object instanceof RenderedObject renderedObject) {
@@ -300,34 +312,34 @@ public class BaseDetailsObject {
 				long osmId = ObfConstants.getOsmObjectId(renderedObject);
 				long objectId = ObfConstants.createMapObjectIdFromCleanOsmId(osmId, type);
 
-				if (syntheticAmenity.getId() == null && objectId > 0) {
-					syntheticAmenity.setId(objectId);
+				if (syntheticMapObject.getId() == null && objectId > 0) {
+					syntheticMapObject.setId(objectId);
 				}
 			}
-			if (syntheticAmenity.getType() == null) {
+			if (syntheticMapObject instanceof Amenity syntheticAmenity && syntheticAmenity.getType() == null) {
 				Amenity amenity = convertRenderedObjectToAmenity(renderedObject, MapPoiTypes.getDefault());
 				syntheticAmenity.setType(amenity.getType());
 				syntheticAmenity.setSubType(amenity.getSubType());
 				syntheticAmenity.copyAdditionalInfo(renderedObject.getTags(), false);
 			}
-			syntheticAmenity.copyNames(renderedObject);
-			if (syntheticAmenity.getLocation() == null) {
-				syntheticAmenity.setLocation(renderedObject.getLocation());
+			syntheticMapObject.copyNames(renderedObject);
+			if (syntheticMapObject.getLocation() == null) {
+				syntheticMapObject.setLocation(renderedObject.getLocation());
 			}
-			if (syntheticAmenity.getLocation() == null) {
-				syntheticAmenity.setLocation(renderedObject.getLabelLatLon());
+			if (syntheticMapObject.getLocation() == null) {
+				syntheticMapObject.setLocation(renderedObject.getLabelLatLon());
 			}
 			processPolygonCoordinates(renderedObject.getX(), renderedObject.getY());
 		}
 	}
 
 	protected void processId(MapObject object) {
-		processId(syntheticAmenity, object);
+		processId(syntheticMapObject, object);
 	}
 
-	protected static void processId(Amenity syntheticAmenity, MapObject object) {
-		if (syntheticAmenity.getId() == null && ObfConstants.isOsmUrlAvailable(object)) {
-			syntheticAmenity.setId(object.getId());
+	protected static void processId(MapObject syntheticMapObject, MapObject object) {
+		if (syntheticMapObject.getId() == null && ObfConstants.isOsmUrlAvailable(object)) {
+			syntheticMapObject.setId(object.getId());
 		}
 	}
 
@@ -351,56 +363,60 @@ public class BaseDetailsObject {
 	}
 
 	protected void processAmenity(Amenity amenity, boolean isSingleObject) {
-		mergeAmenityData(syntheticAmenity, amenity, lang, isSingleObject);
+		mergeAmenityData(syntheticMapObject, amenity, lang, isSingleObject);
 	}
 
-	public static void mergeAmenityData(Amenity syntheticAmenity, Amenity amenity, String lang, boolean isSingleObject) {
-		processId(syntheticAmenity, amenity);
+	public static void mergeAmenityData(MapObject syntheticMapObject, Amenity amenity, String lang, boolean isSingleObject) {
+		processId(syntheticMapObject, amenity);
 
 		LatLon location = amenity.getLocation();
-		if (syntheticAmenity.getLocation() == null && location != null) {
-			syntheticAmenity.setLocation(location);
+		if (syntheticMapObject.getLocation() == null && location != null) {
+			syntheticMapObject.setLocation(location);
 		}
+		syntheticMapObject.copyNames(amenity);
 		PoiCategory type = amenity.getType();
-		if (syntheticAmenity.getType() == null && type != null) {
-			syntheticAmenity.setType(type);
-		}
-		String subType = amenity.getSubType();
-		if (subType != null && !Algorithms.stringsEqual(subType, syntheticAmenity.getSubType())) {
-			updateAmenitySubTypes(syntheticAmenity, subType);
-		}
-		String mapIconName = amenity.getMapIconName();
-		if (syntheticAmenity.getMapIconName() == null && mapIconName != null) {
-			syntheticAmenity.setMapIconName(mapIconName);
-		}
-		String regionName = amenity.getRegionName();
-		if (syntheticAmenity.getRegionName() == null && regionName != null) {
-			syntheticAmenity.setRegionName(regionName);
-		}
-		Map<Integer, List<BinaryMapIndexReader.TagValuePair>> groups = amenity.getTagGroups();
-		if (syntheticAmenity.getTagGroups() == null && groups != null) {
-			syntheticAmenity.setTagGroups(new HashMap<>(groups));
-		}
-		int travelElo = amenity.getTravelEloNumber();
-		if (syntheticAmenity.getTravelEloNumber() == DEFAULT_ELO && travelElo != DEFAULT_ELO) {
-			syntheticAmenity.setTravelEloNumber(travelElo);
-		}
-		syntheticAmenity.copyNames(amenity);
-		boolean shouldCopyAdditionalInfo = getResourceType(amenity) != SearchResultResource.TRAVEL
-				|| getLangForTravel(amenity).equals(lang); // avoid articles in another language
-		if (isSingleObject || shouldCopyAdditionalInfo) {
-			syntheticAmenity.copyAdditionalInfo(amenity, false);
-		}
-		processPolygonCoordinates(syntheticAmenity, amenity.getX(), amenity.getY());
-
-		Set<String> contentLocales = amenity.getSupportedContentLocales();
-		if (!Algorithms.isEmpty(contentLocales)) {
-			syntheticAmenity.updateContentLocales(contentLocales);
+		if (syntheticMapObject instanceof Amenity syntheticAmenity) {
+			if (syntheticAmenity.getType() == null && type != null) {
+				syntheticAmenity.setType(type);
+			}
+			String subType = amenity.getSubType();
+			if (subType != null && !Algorithms.stringsEqual(subType, syntheticAmenity.getSubType())) {
+				updateAmenitySubTypes(syntheticAmenity, subType);
+			}
+			String mapIconName = amenity.getMapIconName();
+			if (syntheticAmenity.getMapIconName() == null && mapIconName != null) {
+				syntheticAmenity.setMapIconName(mapIconName);
+			}
+			String regionName = amenity.getRegionName();
+			if (syntheticAmenity.getRegionName() == null && regionName != null) {
+				syntheticAmenity.setRegionName(regionName);
+			}
+			Map<Integer, List<BinaryMapIndexReader.TagValuePair>> groups = amenity.getTagGroups();
+			if (syntheticAmenity.getTagGroups() == null && groups != null) {
+				syntheticAmenity.setTagGroups(new HashMap<>(groups));
+			}
+			int travelElo = amenity.getTravelEloNumber();
+			if (syntheticAmenity.getTravelEloNumber() == DEFAULT_ELO && travelElo != DEFAULT_ELO) {
+				syntheticAmenity.setTravelEloNumber(travelElo);
+			}
+			boolean shouldCopyAdditionalInfo = getResourceType(amenity) != SearchResultResource.TRAVEL
+					|| getLangForTravel(amenity).equals(lang); // avoid articles in another language
+			if (isSingleObject || shouldCopyAdditionalInfo) {
+				syntheticAmenity.copyAdditionalInfo(amenity, false);
+			}
+			processPolygonCoordinates(syntheticAmenity, amenity.getX(), amenity.getY());
+	
+			Set<String> contentLocales = amenity.getSupportedContentLocales();
+			if (!Algorithms.isEmpty(contentLocales)) {
+				syntheticAmenity.updateContentLocales(contentLocales);
+			}
 		}
 	}
 
 	private void processPolygonCoordinates(TIntArrayList x, TIntArrayList y) {
-		processPolygonCoordinates(syntheticAmenity, x, y);
+		if (syntheticMapObject instanceof Amenity syntheticAmenity) {
+			processPolygonCoordinates(syntheticAmenity, x, y);
+		}
 	}
 
 	private static void processPolygonCoordinates(Amenity syntheticAmenity, TIntArrayList x, TIntArrayList y) {
@@ -468,7 +484,7 @@ public class BaseDetailsObject {
 	}
 
 	public SearchResultResource getResourceType() {
-		if (searchResultResource == null) {
+		if (searchResultResource == null && syntheticMapObject instanceof Amenity syntheticAmenity) {
 			searchResultResource = findObfType(obfResourceName, syntheticAmenity);
 		}
 		return searchResultResource;
@@ -479,41 +495,58 @@ public class BaseDetailsObject {
 	}
 
 	public void setMapIconName(String mapIconName) {
-		this.syntheticAmenity.setMapIconName(mapIconName);
+		if (syntheticMapObject instanceof Amenity syntheticAmenity) {
+			syntheticAmenity.setMapIconName(mapIconName);
+		}
 	}
 
 	public void setX(TIntArrayList x) {
-		this.syntheticAmenity.getX().addAll(x);
+		if (syntheticMapObject instanceof Amenity syntheticAmenity) {
+			syntheticAmenity.getX().addAll(x);
+		}
 	}
 
 	public void setY(TIntArrayList y) {
-		this.syntheticAmenity.getY().addAll(y);
+		if (syntheticMapObject instanceof Amenity syntheticAmenity) {
+			syntheticAmenity.getY().addAll(y);
+		}
 	}
 
 	public void addX(int x) {
-		this.syntheticAmenity.getX().add(x);
+		if (syntheticMapObject instanceof Amenity syntheticAmenity) {
+			syntheticAmenity.getX().add(x);
+		}
 	}
 
 	public void addY(int y) {
-		this.syntheticAmenity.getY().add(y);
+		if (syntheticMapObject instanceof Amenity syntheticAmenity) {
+			syntheticAmenity.getY().add(y);
+		}
 	}
 
 	public boolean hasGeometry() {
-		return !this.syntheticAmenity.getX().isEmpty() && !this.syntheticAmenity.getY().isEmpty();
+		if (syntheticMapObject instanceof Amenity syntheticAmenity) {
+			return !syntheticAmenity.getX().isEmpty() && !syntheticAmenity.getY().isEmpty();
+		}
+		return false;
 	}
 
 	public int getPointsLength() {
-		return this.syntheticAmenity.getX().size();
+		if (syntheticMapObject instanceof Amenity syntheticAmenity) {
+			return syntheticAmenity.getX().size();
+		}
+		return 0;
 	}
 
 	public void clearGeometry() {
-		this.syntheticAmenity.getY().clear();
-		this.syntheticAmenity.getX().clear();
+		if (syntheticMapObject instanceof Amenity syntheticAmenity) {
+			syntheticAmenity.getY().clear();
+			syntheticAmenity.getX().clear();
+		}
 	}
 
 	protected boolean isSupportedObjectType(Object object) {
-		return object instanceof Amenity || object instanceof TransportStop
-				|| object instanceof RenderedObject || object instanceof BaseDetailsObject;
+		return object instanceof MapObject || object instanceof BaseDetailsObject;
 	}
 
 	public List<Amenity> getAmenities() {
@@ -546,14 +579,14 @@ public class BaseDetailsObject {
 		return renderedObjects;
 	}
 
-	private static SearchResultResource findObfType(String obfResourceName, Amenity amenity) {
+	private static SearchResultResource findObfType(String obfResourceName, MapObject mapObject) {
 		if (obfResourceName != null && obfResourceName.contains("basemap")) {
 			return SearchResultResource.BASEMAP;
 		}
 		if (obfResourceName != null && (obfResourceName.contains("travel") || obfResourceName.contains("wikivoyage"))) {
 			return SearchResultResource.TRAVEL;
 		}
-		if (amenity.getType().isWiki()) {
+		if (mapObject instanceof Amenity amenity && amenity.getType().isWiki()) {
 			return SearchResultResource.WIKIPEDIA;
 		}
 		return SearchResultResource.DETAILED;
@@ -575,7 +608,9 @@ public class BaseDetailsObject {
 			amenity = (Amenity) object;
 		}
 		if (object instanceof BaseDetailsObject) {
-			amenity = ((BaseDetailsObject) object).syntheticAmenity;
+			if (((BaseDetailsObject) object).syntheticMapObject instanceof Amenity am) {
+				amenity = am;
+			}
 		}
 		if (amenity != null && getResourceType(object) == SearchResultResource.TRAVEL) {
 			String lang = amenity.getTagSuffix(Amenity.LANG_YES + ":");
@@ -599,12 +634,18 @@ public class BaseDetailsObject {
 		if (object instanceof RenderedObject) {
 			return 4;
 		}
+		if (object instanceof MapObject) {
+			return 2;
+		}
 		return 5;
 	}
 
 	@Override
 	public String toString() {
-		return getSyntheticAmenity().toString();
+		if (isAddressType()) {
+			return objects.get(0).toString();
+		}
+		return getSyntheticMapObject().toString();
 	}
 
 	public static Amenity convertRenderedObjectToAmenity(RenderedObject renderedObject, MapPoiTypes mapPoiTypes) {
@@ -681,6 +722,30 @@ public class BaseDetailsObject {
 		am.setX(renderedObject.getX());
 		am.setY(renderedObject.getY());
 		return am;
+	}
+	
+	private boolean isAddressType() {
+		if (objects.size() > 0) {
+			Object o = objects.get(0);
+			if (o instanceof Street || o instanceof City || o instanceof Building) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private MapObject getAddressObject() {
+		Object o = objects.get(0);
+		if (o instanceof Street street) {
+			return street;
+		}
+		if (o instanceof City city) {
+			return city;
+		}
+		if (o instanceof Building building) {
+			return building;
+		}
+		return null;
 	}
 
 }

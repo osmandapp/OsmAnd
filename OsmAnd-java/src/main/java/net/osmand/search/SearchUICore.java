@@ -355,7 +355,7 @@ public class SearchUICore {
 			for (SearchResult iterated : list) {
 				base.addObject(iterated.object);
 
-				unique.object = base.getSyntheticAmenity();
+				unique.object = base.getSyntheticMapObject();
 				if (iterated.otherNames != null) {
 					if (!iterated.localeName.equals(unique.localeName)) {
 						iterated.otherNames.add(iterated.localeName);
