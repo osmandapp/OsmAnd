@@ -30,18 +30,8 @@ import net.osmand.util.SearchAlgorithms;
 // ### usa_wilkes-barre.json '155 Park Avenue Wilkes Barre': duplicate result not present
 // ### portugal_travessa.json: See comment
 // ### ge3.json: '10 Am Remsufer Remseck am Neckar' - see comment
-
-// 1. UNIT TESTING: (poi additional germany) Gynaecologist - from all poi types should be result ! (not like old search)
-// 2. UNIT TESTING: Japan_kanto_tokyo (see example below on neighborouds) - test on small osm.gz?
-// 3. UNIT TESTING: Test poi category translations (add ru / de in test)
-// 4. UNIT TESTING: Test conscription number for some cities - "Bratislava Raketova 3248/6";
-// 5. UNIT TESTING: 'tongass national forest', 'national', national forest'
-// 6. UNIT TESTING: "Мигия озеро"
-// 7. UNIT TESTING: 'rû bas du rue', 'rue de l'eglise' (extra rue de la)
-// 8. UNIT TESTING: World - 'Venezia', 'Everest', 'Rio de Janeiro', 'остров Пасхи'
-
-// NO UNIT TESTING: '400 Susquehanna Boulevard Hazel Township' (MISSING Hazel Township)
-// NO UNIT TESTING: '330 Innovation Boulevard University Park' (partial result missing university park)
+// ### uk_mihiia.json
+// ### World.json 'остров Пасхи'
 
 ////////// IN PROGRESS //////////
 // REVIEW (index_words_dashboard - common озеро): POI / ADDRESS - France, Germany, US, Europe, China, Peru
