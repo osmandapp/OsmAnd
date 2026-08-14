@@ -142,7 +142,7 @@ public class OsmAndFormatter {
 		long minutes = (seconds / 60) % 60;
 		if (hours > 0) {
 			return numberFormat.format(hours) + " "
-					+ app.getString(R.string.osmand_parking_hour)
+					+ app.getString(R.string.int_hour)
 					+ (minutes > 0 ? " " + numberFormat.format(minutes) + " "
 					+ app.getString(R.string.shared_string_minute_lowercase) : "");
 		} else if (minutes > 0) {
