@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.shared.SharedUtil;
-import net.osmand.data.LatLon;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
@@ -61,7 +60,7 @@ public class TrackTabsHelper {
 	@NonNull
 	public List<TrackTab> getSortedTrackTabs(boolean useSubdirs) {
 		List<TrackTab> result = getTrackTabs();
-		result.sort(new TracksComparator(getRootSortMode(), getDefaultLocation(), useSubdirs));
+		result.sort(new TracksComparator(getRootSortMode(), app, useSubdirs));
 		return result;
 	}
 
@@ -288,12 +287,11 @@ public class TrackTabsHelper {
 	}
 
 	public void sortTrackTab(@NonNull TrackTab trackTab) {
-		LatLon latLon = getDefaultLocation();
 		if (trackTab.type == TrackTabType.ON_MAP) {
 			List<Object> visibleItems = getVisibleItems();
 			List<Object> recentlyVisibleItems = getRecentlyVisibleItems();
 
-			TracksComparator comparator = new TracksComparator(trackTab, latLon);
+			TracksComparator comparator = new TracksComparator(trackTab, app);
 			Collections.sort(visibleItems, comparator);
 			Collections.sort(recentlyVisibleItems, comparator);
 
@@ -302,7 +300,7 @@ public class TrackTabsHelper {
 			trackTab.items.addAll(visibleItems);
 			trackTab.items.addAll(recentlyVisibleItems);
 		} else {
-			Collections.sort(trackTab.items, new TracksComparator(trackTab, latLon));
+			Collections.sort(trackTab.items, new TracksComparator(trackTab, app));
 		}
 	}
 
@@ -335,8 +333,4 @@ public class TrackTabsHelper {
 		return app.getTrackSortModesHelper().getRootFolderSortMode();
 	}
 
-	@NonNull
-	private LatLon getDefaultLocation() {
-		return app.getMapViewTrackingUtilities().getDefaultLocation();
-	}
 }

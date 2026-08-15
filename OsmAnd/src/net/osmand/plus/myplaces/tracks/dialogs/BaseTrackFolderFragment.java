@@ -28,7 +28,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
-import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -314,8 +313,7 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 	}
 
 	private void sortItems(@NonNull List<Object> items, @NonNull TracksSortMode sortMode) {
-		LatLon latLon = app.getMapViewTrackingUtilities().getDefaultLocation();
-		Collections.sort(items, new TracksComparator(sortMode, latLon));
+		Collections.sort(items, new TracksComparator(sortMode, app));
 	}
 
 	public void showTrackOnMap(@NonNull TrackItem trackItem) {
