@@ -2907,7 +2907,7 @@
     <string name="rename_track">Rinomina la traccia</string>
     <string name="change_folder">Cambia cartella</string>
     <string name="shared_string_sec">sec</string>
-    <string name="announcement_time_passing">Passaggio</string>
+    <string name="announcement_time_passing">Al passaggio</string>
     <string name="announcement_time_approach">Avvicinamento</string>
     <string name="announcement_time_prepare_long">Preparazione lunga</string>
     <string name="announcement_time_prepare">Prepararsi</string>
@@ -5341,7 +5341,7 @@
     <string name="share_favorites_points_and_media">Punti e file multimediali</string>
     <string name="share_favorites_preparation_failed">Impossibile preparare i file per la condivisione.</string>
     <string name="share_favorites_share_failed">Impossibile condividere il file.</string>
-    <string name="share_favorites_missing_media_warning">Alcuni media allegati non possono essere inclusi.</string>
+    <string name="share_favorites_missing_media_warning">Alcuni file multimediali allegati non possono essere inclusi.</string>
     <string name="search_on_web">Ricerca web</string>
     <string name="astro_lunar_eclipse">Eclissi lunare</string>
     <string name="astro_lunar_eclipse_subtitle">Esplora le eclissi di luna nel mondo</string>
