@@ -5344,8 +5344,8 @@
     <string name="share_favorites_missing_media_warning">Alcuni file multimediali allegati non possono essere inclusi.</string>
     <string name="search_on_web">Ricerca web</string>
     <string name="astro_lunar_eclipse">Eclissi lunare</string>
-    <string name="astro_lunar_eclipse_subtitle">Esplora le eclissi di luna nel mondo</string>
-    <string name="astro_previous_lunar_eclipse">Eclissi lunari passate</string>
+    <string name="astro_lunar_eclipse_subtitle">Esplora le eclissi lunari nel mondo</string>
+    <string name="astro_previous_lunar_eclipse">Eclissi lunare precedente</string>
     <string name="astro_next_lunar_eclipse">Prossime eclissi lunari</string>
     <string name="astro_close_lunar_eclipse">Chiudi l\'esploratore di eclissi lunari</string>
     <string name="astro_loading_lunar_eclipse">Sto calcolando le eclissi lunari mondiali</string>
@@ -5378,11 +5378,13 @@
     <string name="share_favorites_with_media_description">Ai punti preferiti in %1$s sono allegati file multimediali. Condividi solo i punti, oppure i punti con i contenuti multimediali come archivio.</string>
     <string name="astro_eclipse_phase_none">Non eclissato</string>
     <string name="astro_lunar_eclipse_calculating_state">Elaborazione dell\'aspetto nel centro della mappa…</string>
-    <string name="astro_lunar_eclipse_simple_status">%1$s • Altitudine Luna: %2$.1f°</string>
+    <string name="astro_lunar_eclipse_simple_status">%1$s • Altitudine lunare: %2$.1f°</string>
     <string name="astro_lunar_eclipse_below_horizon">%1$s • Luna sotto l\'orizzonte (%2$.1f°)</string>
     <string name="astro_lunar_eclipse_visibility_loading">Calcolo della visibilità…</string>
     <string name="astro_lunar_eclipse_map_error">La visibilità dell\'eclissi lunare della regione non è disponibile in questo momento.</string>
     <string name="astro_lunar_eclipse_rendering_note">Colore della mappa: Luna sopra l\'orizzonte. Ombre colori e luminosità sono indicative.</string>
     <string name="custom_widget_colors">Colore del widget personalizzati</string>
     <string name="astro_lunar_eclipse_local_status">%1$s • %2$.1f%% oscuramento ombrale • Altitudine lunare: %3$.1f°</string>
+    <string name="astro_lunar_eclipse_timeline_description">Linea temporale dell\'eclissi lunare. Scorri per modificare l\'orario simulato.</string>
+    <string name="astro_fit_lunar_eclipse_visibility">Adatta la visibilità</string>
 </resources>
