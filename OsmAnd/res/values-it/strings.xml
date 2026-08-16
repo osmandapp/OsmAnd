@@ -2864,7 +2864,7 @@
     <string name="routing_engine_vehicle_type_walking">A piedi</string>
     <string name="routing_engine_vehicle_type_hgv">Mezzi pesanti</string>
     <string name="routing_engine_vehicle_type_truck">Camion</string>
-    <string name="routing_engine_vehicle_type_scooter">Monopattino</string>
+    <string name="routing_engine_vehicle_type_scooter">Scooter</string>
     <string name="routing_engine_vehicle_type_racingbike">Bici da corsa</string>
     <string name="routing_engine_vehicle_type_mtb">MTB</string>
     <string name="message_server_error">Errore del server: %1$s</string>
