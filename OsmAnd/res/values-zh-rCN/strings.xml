@@ -5234,4 +5234,12 @@
     <string name="shared_string_recent">最近使用</string>
     <string name="backup_deleting_all_data">正在删除数据…</string>
     <string name="backup_deleted_all_data">已删除数据。</string>
+    <string name="share_favorites_media_preparation_failed">无法包含附加媒体。仅共享积分。</string>
+    <plurals name="files_count">
+        <item quantity="other">%d 文件</item>
+    </plurals>
+    <string name="preparing_file">正在准备文件</string>
+    <string name="shared_string_archive">归档</string>
+    <string name="share_favorites_with_media_description">%1$s 中的收藏点附有媒体。仅分享点，或将带媒体的点作为档案分享。</string>
+    <string name="share_favorites_points_only">仅限积分</string>
 </resources>
