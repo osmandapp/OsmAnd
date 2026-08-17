@@ -23,6 +23,7 @@ import android.text.style.StyleSpan;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -39,20 +40,24 @@ import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import org.apache.commons.logging.Log;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class GpsFilterHelper {
+	private static final Log LOG = PlatformUtil.getLog(GpsFilterHelper.class);
 
 	private final OsmandApplication app;
 	private final Set<GpsFilterListener> listeners = new HashSet<>();
 
 	private final Executor singleThreadExecutor = Executors.newSingleThreadExecutor();
-	private GpsFilterTask gpsFilterTask;
+	private final Map<FilteredSelectedGpxFile, GpsFilterTask> filterTasks = new ConcurrentHashMap<>();
 
 	public GpsFilterHelper(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -71,36 +76,65 @@ public class GpsFilterHelper {
 	}
 
 	public void filterGpxFile(@NonNull FilteredSelectedGpxFile filteredSelectedGpxFile, boolean cancelPrevious) {
-		if (cancelPrevious && gpsFilterTask != null) {
-			gpsFilterTask.cancel(false);
+		GpsFilterTask previousTask = filterTasks.remove(filteredSelectedGpxFile);
+		if (previousTask != null) {
+			previousTask.cancel(false);
 		}
-		filteredSelectedGpxFile.setFiltering(true);
-		gpsFilterTask = new GpsFilterTask(app, filteredSelectedGpxFile, listeners);
-		OsmAndTaskManager.executeTask(gpsFilterTask, singleThreadExecutor);
+		int generation = filteredSelectedGpxFile.beginFiltering();
+		GpsFilterTask task = new GpsFilterTask(app, filteredSelectedGpxFile,
+				new HashSet<>(listeners), generation);
+		filterTasks.put(filteredSelectedGpxFile, task);
+		OsmAndTaskManager.executeTask(task, singleThreadExecutor);
+	}
+
+	public void cancelFiltering(@NonNull FilteredSelectedGpxFile filteredSelectedGpxFile) {
+		GpsFilterTask task = filterTasks.remove(filteredSelectedGpxFile);
+		filteredSelectedGpxFile.cancelFiltering();
+		if (task != null) {
+			task.cancel(false);
+		}
 	}
 
 	@SuppressWarnings("deprecation")
-	private static class GpsFilterTask extends AsyncTask<Void, Void, Boolean> {
+	private class GpsFilterTask extends AsyncTask<Void, Void, Boolean> {
 
 		private final OsmandApplication app;
 		private final FilteredSelectedGpxFile filteredSelectedGpxFile;
 		private final Set<GpsFilterListener> listeners;
+		private final int generation;
 
 		private GpxFile filteredGpxFile;
 		private GpxTrackAnalysis trackAnalysis;
 
 		public GpsFilterTask(@NonNull OsmandApplication app,
 		                     @NonNull FilteredSelectedGpxFile filteredGpx,
-		                     @NonNull Set<GpsFilterListener> listeners) {
+		                     @NonNull Set<GpsFilterListener> listeners,
+		                     int generation) {
 			this.app = app;
 			this.filteredSelectedGpxFile = filteredGpx;
 			this.listeners = listeners;
+			this.generation = generation;
 		}
 
 		@Override
 		protected Boolean doInBackground(Void... voids) {
+			try {
+				return filterGpxFile();
+			} catch (RuntimeException error) {
+				LOG.error("Failed to filter GPX file", error);
+				return false;
+			}
+		}
+
+		private boolean filterGpxFile() {
+			if (isCancelled() || !filteredSelectedGpxFile.isCurrentFilterGeneration(generation)) {
+				return false;
+			}
 			SelectedGpxFile sourceSelectedGpxFile = filteredSelectedGpxFile.getSourceSelectedGpxFile();
 			filteredSelectedGpxFile.prepareForFiltering(app);
+			if (isCancelled() || !filteredSelectedGpxFile.isCurrentFilterGeneration(generation)) {
+				return false;
+			}
 			GpxFile sourceGpx = sourceSelectedGpxFile.getGpxFile();
 
 			filteredGpxFile = sourceGpx.clone();
@@ -162,10 +196,6 @@ public class GpsFilterHelper {
 				}
 			}
 
-			if (filteredSelectedGpxFile.isJoinSegments()) {
-				filteredGpxFile.addGeneralTrack();
-			}
-
 			trackAnalysis = filteredGpxFile.getAnalysis(System.currentTimeMillis());
 			return true;
 		}
@@ -185,21 +215,24 @@ public class GpsFilterHelper {
 
 		@Override
 		protected void onPostExecute(@NonNull Boolean successfulFinish) {
-			if (successfulFinish && !isCancelled()) {
-				filteredSelectedGpxFile.updateGpxFile(app, filteredGpxFile);
-				filteredSelectedGpxFile.setTrackAnalysis(trackAnalysis);
+			boolean published = successfulFinish && !isCancelled()
+					&& filteredSelectedGpxFile.publishFilteredResult(
+							app, filteredGpxFile, trackAnalysis, generation);
+			if (published) {
 				for (GpsFilterListener listener : listeners) {
 					listener.onFinishFiltering(filteredGpxFile);
 				}
 			} else {
-				filteredSelectedGpxFile.setFiltering(false);
+				filteredSelectedGpxFile.finishFiltering(generation);
 			}
+			filterTasks.remove(filteredSelectedGpxFile, this);
 			app.getOsmandMap().refreshMap();
 		}
 
 		@Override
 		protected void onCancelled() {
-			filteredSelectedGpxFile.setFiltering(false);
+			filteredSelectedGpxFile.finishFiltering(generation);
+			filterTasks.remove(filteredSelectedGpxFile, this);
 			app.getOsmandMap().refreshMap();
 		}
 	}

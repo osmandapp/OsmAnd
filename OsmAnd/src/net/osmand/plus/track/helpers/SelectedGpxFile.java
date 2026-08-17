@@ -30,9 +30,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class SelectedGpxFile {
 	private static final Log LOG = PlatformUtil.getLog(SelectedGpxFile.class);
+	private static final ExecutorService FULL_ANALYSIS_EXECUTOR = Executors.newSingleThreadExecutor();
 
 	public boolean notShowNavigationDialog;
 	public boolean selectedByUser = true;
@@ -40,6 +43,10 @@ public class SelectedGpxFile {
 	protected GpxFile gpxFile;
 	protected GpxTrackAnalysis trackAnalysis;
 	protected long analysisParametersVersion;
+	private final Object analysisLock = new Object();
+	private int analysisGeneration;
+	private int runningAnalysisGeneration = -1;
+	private boolean fullAnalysisRunning;
 
 	protected List<TrkSegment> processedPointsToDisplay = new ArrayList<>();
 	protected List<GpxDisplayGroup> splitGroups;
@@ -61,13 +68,27 @@ public class SelectedGpxFile {
 	private FilteredSelectedGpxFile filteredSelectedGpxFile;
 
 	public void setGpxFile(@NonNull GpxFile gpxFile, @NonNull OsmandApplication app) {
-		this.gpxFile = gpxFile;
+		FilteredSelectedGpxFile filtered = filteredSelectedGpxFile;
+		if (filtered != null) {
+			app.getGpsFilterHelper().cancelFiltering(filtered);
+		}
+		synchronized (analysisLock) {
+			this.gpxFile = gpxFile;
+			trackAnalysis = null;
+			modifiedTime = gpxFile.getModifiedTime();
+			pointsModifiedTime = gpxFile.getPointsModifiedTime();
+			analysisParametersVersion = 0;
+			analysisGeneration++;
+			fullAnalysisRunning = false;
+			runningAnalysisGeneration = -1;
+			analysisLock.notifyAll();
+		}
 		if (!Algorithms.isEmpty(gpxFile.getTracks())) {
 			this.color = gpxFile.getTracks().get(0).getColor(0);
 		}
 		processPoints(app);
-		if (filteredSelectedGpxFile != null) {
-			app.getGpsFilterHelper().filterGpxFile(filteredSelectedGpxFile, false);
+		if (filtered != null) {
+			app.getGpsFilterHelper().filterGpxFile(filtered, false);
 		}
 	}
 
@@ -79,42 +100,162 @@ public class SelectedGpxFile {
 		return getFullTrackAnalysis(app);
 	}
 
-	public synchronized GpxTrackAnalysis getFullTrackAnalysis(@NonNull OsmandApplication app) {
-		if (isTrackAnalysisOutdated(app) || trackAnalysis == null || !trackAnalysis.getCollectPointData()) {
-			update(app);
+	public GpxTrackAnalysis getFullTrackAnalysis(@NonNull OsmandApplication app) {
+		boolean interrupted = false;
+		try {
+			while (true) {
+				AnalysisRequest request;
+				synchronized (analysisLock) {
+					while (true) {
+						if (isFullTrackAnalysisAvailableLocked(app)) {
+							return trackAnalysis;
+						}
+						if (!fullAnalysisRunning) {
+							request = startFullAnalysisLocked(app);
+							break;
+						}
+						try {
+							analysisLock.wait();
+						} catch (InterruptedException e) {
+							interrupted = true;
+						}
+					}
+				}
+
+				try {
+					GpxTrackAnalysis analysis = calculateTrackAnalysis(request, true);
+					GpxTrackAnalysis published = finishFullAnalysis(app, request, analysis);
+					if (published != null) {
+						return published;
+					}
+				} catch (RuntimeException | Error error) {
+					finishFullAnalysis(app, request, null);
+					throw error;
+				}
+			}
+		} finally {
+			if (interrupted) {
+				Thread.currentThread().interrupt();
+			}
 		}
-		return trackAnalysis;
 	}
 
-	public synchronized GpxTrackAnalysis getTrackSummaryAnalysis(@NonNull OsmandApplication app) {
-		if (isTrackAnalysisOutdated(app) || trackAnalysis == null) {
-			update(app);
+	public GpxTrackAnalysis getTrackSummaryAnalysis(@NonNull OsmandApplication app) {
+		while (true) {
+			AnalysisRequest request;
+			synchronized (analysisLock) {
+				if (!isTrackAnalysisOutdatedLocked(app) && trackAnalysis != null) {
+					return trackAnalysis;
+				}
+				request = createAnalysisRequestLocked(app);
+			}
+
+			GpxTrackAnalysis summary = calculateTrackAnalysis(request, false);
+			synchronized (analysisLock) {
+				if (isAnalysisRequestCurrentLocked(request, app)) {
+					if (trackAnalysis == null || !trackAnalysis.getCollectPointData()
+							|| isTrackAnalysisOutdatedLocked(app)) {
+						trackAnalysis = summary;
+						modifiedTime = request.fileModifiedTime;
+						analysisParametersVersion = request.parametersVersion;
+						pointsModifiedTime = request.pointsModifiedTime;
+					}
+					return trackAnalysis;
+				}
+			}
 		}
-		return trackAnalysis;
 	}
 
 	public GpxTrackAnalysis getTrackAnalysisToDisplay(OsmandApplication app) {
-		return filteredSelectedGpxFile != null && !filteredSelectedGpxFile.isFiltering()
+		return filteredSelectedGpxFile != null && filteredSelectedGpxFile.isFilterReady()
 				? filteredSelectedGpxFile.getFullTrackAnalysis(app)
 				: getFullTrackAnalysis(app);
 	}
 
 	public GpxTrackAnalysis getTrackSummaryAnalysisToDisplay(OsmandApplication app) {
-		return filteredSelectedGpxFile != null && !filteredSelectedGpxFile.isFiltering()
+		return filteredSelectedGpxFile != null && filteredSelectedGpxFile.isFilterReady()
 				? filteredSelectedGpxFile.getTrackSummaryAnalysis(app)
 				: getTrackSummaryAnalysis(app);
 	}
 
+	@Nullable
+	public GpxTrackAnalysis getAvailableFullTrackAnalysisToDisplay(@NonNull OsmandApplication app) {
+		FilteredSelectedGpxFile filtered = filteredSelectedGpxFile;
+		return filtered != null && filtered.isFilterReady()
+				? filtered.getAvailableFullTrackAnalysis(app)
+				: getAvailableFullTrackAnalysis(app);
+	}
+
+	public void requestFullTrackAnalysisToDisplay(@NonNull OsmandApplication app) {
+		FilteredSelectedGpxFile filtered = filteredSelectedGpxFile;
+		if (filtered != null && filtered.isFilterReady()) {
+			filtered.requestFullTrackAnalysis(app);
+		} else {
+			requestFullTrackAnalysis(app);
+		}
+	}
+
+	@Nullable
+	public GpxTrackAnalysis getAvailableFullTrackAnalysis(@NonNull OsmandApplication app) {
+		synchronized (analysisLock) {
+			return isFullTrackAnalysisAvailableLocked(app) ? trackAnalysis : null;
+		}
+	}
+
+	public void requestFullTrackAnalysis(@NonNull OsmandApplication app) {
+		AnalysisRequest request;
+		synchronized (analysisLock) {
+			if (isFullTrackAnalysisAvailableLocked(app) || fullAnalysisRunning) {
+				return;
+			}
+			request = startFullAnalysisLocked(app);
+		}
+		FULL_ANALYSIS_EXECUTOR.execute(() -> {
+			try {
+				if (!isAnalysisRequestCurrent(request, app)) {
+					finishFullAnalysis(app, request, null);
+					return;
+				}
+				GpxTrackAnalysis analysis = calculateTrackAnalysis(request, true);
+				if (finishFullAnalysis(app, request, analysis) != null) {
+					app.runInUIThread(() -> app.getOsmandMap().refreshMap());
+				}
+			} catch (RuntimeException error) {
+				finishFullAnalysis(app, request, null);
+				LOG.error("Failed to calculate selected GPX analysis", error);
+			} catch (Error error) {
+				finishFullAnalysis(app, request, null);
+				throw error;
+			}
+		});
+	}
+
+	public void cancelPendingFullAnalysis() {
+		synchronized (analysisLock) {
+			analysisGeneration++;
+			fullAnalysisRunning = false;
+			runningAnalysisGeneration = -1;
+			analysisLock.notifyAll();
+		}
+	}
+
 	public void setTrackAnalysis(@NonNull GpxTrackAnalysis trackAnalysis) {
-		this.trackAnalysis = trackAnalysis;
+		synchronized (analysisLock) {
+			this.trackAnalysis = trackAnalysis;
+			fullAnalysisRunning = false;
+			runningAnalysisGeneration = -1;
+			analysisLock.notifyAll();
+		}
 	}
 
 	public void setTrackSummaryAnalysis(@NonNull GpxTrackAnalysis trackAnalysis,
 	                                    long modifiedTime,
 	                                    long analysisParametersVersion) {
-		this.trackAnalysis = trackAnalysis;
-		this.modifiedTime = modifiedTime;
-		this.analysisParametersVersion = analysisParametersVersion;
+		synchronized (analysisLock) {
+			this.trackAnalysis = trackAnalysis;
+			this.modifiedTime = modifiedTime;
+			this.analysisParametersVersion = analysisParametersVersion;
+		}
 	}
 
 	public void setSplitGroups(@Nullable List<GpxDisplayGroup> splitGroups) {
@@ -129,29 +270,108 @@ public class SelectedGpxFile {
 		return dataItem != null ? dataItem.getAnalysisParametersVersion() : 0;
 	}
 
-	private boolean isTrackAnalysisOutdated(@NonNull OsmandApplication app) {
+	private boolean isTrackAnalysisOutdatedLocked(@NonNull OsmandApplication app) {
 		return modifiedTime != gpxFile.getModifiedTime()
+				|| pointsModifiedTime != gpxFile.getPointsModifiedTime()
 				|| analysisParametersVersion != getAnalysisParametersVersion(app);
 	}
 
-	protected void update(@NonNull OsmandApplication app) {
-		long analysisStart = System.currentTimeMillis();
-		modifiedTime = gpxFile.getModifiedTime();
-		analysisParametersVersion = getAnalysisParametersVersion(app);
-		pointsModifiedTime = gpxFile.getPointsModifiedTime();
+	private boolean isFullTrackAnalysisAvailableLocked(@NonNull OsmandApplication app) {
+		return trackAnalysis != null && trackAnalysis.getCollectPointData()
+				&& !isTrackAnalysisOutdatedLocked(app);
+	}
 
-		long fileTimestamp = Algorithms.isEmpty(gpxFile.getPath())
+	@NonNull
+	private AnalysisRequest startFullAnalysisLocked(@NonNull OsmandApplication app) {
+		AnalysisRequest request = createAnalysisRequestLocked(app);
+		fullAnalysisRunning = true;
+		runningAnalysisGeneration = request.generation;
+		return request;
+	}
+
+	@NonNull
+	private AnalysisRequest createAnalysisRequestLocked(@NonNull OsmandApplication app) {
+		GpxFile file = gpxFile;
+		long fileTimestamp = Algorithms.isEmpty(file.getPath())
 				? System.currentTimeMillis()
-				: new File(gpxFile.getPath()).lastModified();
-		trackAnalysis = gpxFile.getAnalysis(fileTimestamp, null, null, PluginsHelper.getTrackPointsAnalyser());
-		if (!showCurrentTrack) {
-			String path = gpxFile.getPath();
+				: new File(file.getPath()).lastModified();
+		return new AnalysisRequest(file, analysisGeneration, file.getModifiedTime(),
+				file.getPointsModifiedTime(), getAnalysisParametersVersion(app), fileTimestamp);
+	}
+
+	private boolean isAnalysisRequestCurrentLocked(@NonNull AnalysisRequest request,
+	                                               @NonNull OsmandApplication app) {
+		return analysisGeneration == request.generation && gpxFile == request.gpxFile
+				&& gpxFile.getModifiedTime() == request.fileModifiedTime
+				&& gpxFile.getPointsModifiedTime() == request.pointsModifiedTime
+				&& getAnalysisParametersVersion(app) == request.parametersVersion;
+	}
+
+	private boolean isAnalysisRequestCurrent(@NonNull AnalysisRequest request,
+	                                         @NonNull OsmandApplication app) {
+		synchronized (analysisLock) {
+			return isAnalysisRequestCurrentLocked(request, app);
+		}
+	}
+
+	@NonNull
+	private GpxTrackAnalysis calculateTrackAnalysis(@NonNull AnalysisRequest request,
+	                                                boolean collectPointData) {
+		long analysisStart = System.currentTimeMillis();
+		GpxTrackAnalysis analysis = request.gpxFile.getAnalysis(request.fileTimestamp, null, null,
+				PluginsHelper.getTrackPointsAnalyser(), collectPointData);
+		if (collectPointData && !showCurrentTrack) {
+			String path = request.gpxFile.getPath();
 			LOG.info("Calculated full selected GPX analysis name="
 					+ (Algorithms.isEmpty(path) ? "inMemoryTrack" : new File(path).getName())
-					+ ", points=" + trackAnalysis.getPoints()
+					+ ", points=" + analysis.getPoints()
 					+ " in " + (System.currentTimeMillis() - analysisStart) + " ms");
 		}
+		return analysis;
+	}
 
+	@Nullable
+	private GpxTrackAnalysis finishFullAnalysis(@NonNull OsmandApplication app,
+	                                            @NonNull AnalysisRequest request,
+	                                            @Nullable GpxTrackAnalysis analysis) {
+		synchronized (analysisLock) {
+			boolean ownsRunningRequest = fullAnalysisRunning
+					&& runningAnalysisGeneration == request.generation;
+			if (!ownsRunningRequest) {
+				return null;
+			}
+			fullAnalysisRunning = false;
+			runningAnalysisGeneration = -1;
+			if (analysis != null && isAnalysisRequestCurrentLocked(request, app)) {
+				trackAnalysis = analysis;
+				modifiedTime = request.fileModifiedTime;
+				pointsModifiedTime = request.pointsModifiedTime;
+				analysisParametersVersion = request.parametersVersion;
+			}
+			analysisLock.notifyAll();
+			return analysis != null && trackAnalysis == analysis ? analysis : null;
+		}
+	}
+
+	private static class AnalysisRequest {
+		@NonNull
+		private final GpxFile gpxFile;
+		private final int generation;
+		private final long fileModifiedTime;
+		private final long pointsModifiedTime;
+		private final long parametersVersion;
+		private final long fileTimestamp;
+
+		private AnalysisRequest(@NonNull GpxFile gpxFile, int generation,
+		                        long fileModifiedTime, long pointsModifiedTime,
+		                        long parametersVersion, long fileTimestamp) {
+			this.gpxFile = gpxFile;
+			this.generation = generation;
+			this.fileModifiedTime = fileModifiedTime;
+			this.pointsModifiedTime = pointsModifiedTime;
+			this.parametersVersion = parametersVersion;
+			this.fileTimestamp = fileTimestamp;
+		}
 	}
 
 	private void updateSplit(@NonNull OsmandApplication app) {
@@ -275,14 +495,14 @@ public class SelectedGpxFile {
 
 	@NonNull
 	public final QuadRect getBoundsToDisplay() {
-		return filteredSelectedGpxFile != null
+		return filteredSelectedGpxFile != null && filteredSelectedGpxFile.isFilterReady()
 				? filteredSelectedGpxFile.getBoundsToDisplay()
 				: bounds;
 	}
 
 	@NonNull
 	public final AreaI getAreaToDisplay() {
-		if (filteredSelectedGpxFile != null) {
+		if (filteredSelectedGpxFile != null && filteredSelectedGpxFile.isFilterReady()) {
 			return filteredSelectedGpxFile.getAreaToDisplay();
 		}
 
@@ -333,7 +553,7 @@ public class SelectedGpxFile {
 	}
 
 	public GpxFile getGpxFileToDisplay() {
-		return filteredSelectedGpxFile != null && !filteredSelectedGpxFile.isFiltering()
+		return filteredSelectedGpxFile != null && filteredSelectedGpxFile.isFilterReady()
 				? filteredSelectedGpxFile.getGpxFile() : gpxFile;
 	}
 
@@ -381,13 +601,17 @@ public class SelectedGpxFile {
 	}
 
 	public List<GpxDisplayGroup> getSplitGroups(@NonNull OsmandApplication app) {
-		if (modifiedTime != gpxFile.getModifiedTime()) {
-			update(app);
+		if (filteredSelectedGpxFile != null) {
+			return filteredSelectedGpxFile.isFilterReady()
+					? filteredSelectedGpxFile.getSplitGroups(app) : null;
+		}
+		if (pointsModifiedTime != gpxFile.getPointsModifiedTime()) {
+			processPoints(app);
 		}
 		if (!splitProcessed) {
 			updateSplit(app);
 		}
-		return filteredSelectedGpxFile != null ? filteredSelectedGpxFile.getSplitGroups(app) : splitGroups;
+		return splitGroups;
 	}
 
 	public void setSplitGroups(List<GpxDisplayGroup> displayGroups, OsmandApplication app) {
@@ -426,10 +650,10 @@ public class SelectedGpxFile {
 	}
 
 	public boolean hasFilters() {
-		return filteredSelectedGpxFile != null && !filteredSelectedGpxFile.isFiltering();
+		return filteredSelectedGpxFile != null && filteredSelectedGpxFile.isFilterReady();
 	}
 
 	public boolean isFiltering() {
-		return filteredSelectedGpxFile != null && filteredSelectedGpxFile.isFiltering();
+		return filteredSelectedGpxFile != null && !filteredSelectedGpxFile.isFilterReady();
 	}
 }

@@ -38,6 +38,7 @@ object GpxDbHelper : GpxReaderAdapter {
 	private var initialized: Boolean = false
 	private var reconciliationRunning = AtomicBoolean(false)
 	private var reconciliationComplete = AtomicBoolean(false)
+	private var reconciliationAttempted = AtomicBoolean(false)
 
 	fun interface GpxDataItemCallback {
 		fun isCancelled(): Boolean = false
@@ -76,10 +77,11 @@ object GpxDbHelper : GpxReaderAdapter {
 	fun isFilesystemReconciliationComplete() = reconciliationComplete.value
 
 	fun startFilesystemReconciliation() {
-		if (!initialized || reconciliationComplete.value ||
+		if (!initialized || reconciliationAttempted.value ||
 				!reconciliationRunning.compareAndSet(expected = false, new = true)) {
 			return
 		}
+		reconciliationAttempted.value = true
 		CoroutineScope(Dispatchers.IO).launch {
 			try {
 				reconcileFilesystem()
@@ -88,6 +90,7 @@ object GpxDbHelper : GpxReaderAdapter {
 				log.error("Failed to reconcile GPX database with filesystem", error)
 			} finally {
 				reconciliationRunning.value = false
+				startQueuedReaders()
 			}
 		}
 	}
@@ -105,8 +108,10 @@ object GpxDbHelper : GpxReaderAdapter {
 			if (!insideRoot || !file.exists()) {
 				missingFiles.add(file)
 			} else {
+				val actualModifiedTime = file.lastModified()
 				val storedModifiedTime = item.getParameter<Long>(GpxParameter.FILE_LAST_MODIFIED_TIME)
-				if (storedModifiedTime != file.lastModified()) {
+				if (storedModifiedTime != actualModifiedTime
+						|| GpxDbUtils.isAnalyseNeeded(item, actualModifiedTime)) {
 					modifiedItems.add(file to item)
 				}
 			}
@@ -117,16 +122,22 @@ object GpxDbHelper : GpxReaderAdapter {
 			dataItems[file] === snapshotItem &&
 					(!isInsideGpxRoot(file, gpxRoot) || !file.exists())
 		}
+		var removedFiles = 0
 		if (filesToRemove.isNotEmpty()) {
-			database.remove(filesToRemove)
-			removeFromCacheBulk(filesToRemove)
+			if (database.remove(filesToRemove)) {
+				removeFromCacheBulk(filesToRemove)
+				removedFiles = filesToRemove.size
+			} else {
+				log.error("Failed to remove missing GPX rows during filesystem reconciliation")
+			}
 		}
 
 		var removedDirs = 0
 		dirSnapshot.forEach { (file, snapshotItem) ->
 			if (dirItems[file] === snapshotItem &&
 					(!isInsideGpxRoot(file, gpxRoot) || !file.exists())) {
-				if (remove(file)) {
+				if (database.remove(file)) {
+					removeFromCache(file)
 					removedDirs++
 				}
 			}
@@ -134,21 +145,32 @@ object GpxDbHelper : GpxReaderAdapter {
 
 		var queuedModifiedItems = 0
 		modifiedItems.forEach { (file, item) ->
-			if (dataItems[file] === item && file.exists() &&
-					item.getParameter<Long>(GpxParameter.FILE_LAST_MODIFIED_TIME) != file.lastModified()) {
-				readGpxItem(file, item, null)
-				queuedModifiedItems++
+			if (dataItems[file] === item && file.exists()) {
+				val actualModifiedTime = file.lastModified()
+				if (item.getParameter<Long>(GpxParameter.FILE_LAST_MODIFIED_TIME) != actualModifiedTime
+						|| GpxDbUtils.isAnalyseNeeded(item, actualModifiedTime)) {
+					readGpxItem(file, item, null, false)
+					queuedModifiedItems++
+				}
 			}
 		}
 		log.info(
 			"Reconciled GPX filesystem in ${currentTimeMillis() - start} ms: " +
-					"checked=${dataSnapshot.size}, removed=${filesToRemove.size}, " +
+					"checked=${dataSnapshot.size}, removed=$removedFiles, " +
 					"removedDirs=$removedDirs, queuedModified=$queuedModifiedItems"
 		)
 	}
 
 	private fun isInsideGpxRoot(file: KFile, normalizedRoot: String): Boolean {
 		val path = normalizePath(file.path())
+		return hasPathPrefix(path, normalizedRoot)
+	}
+
+	internal fun isPathInsideGpxRoot(path: String, root: String): Boolean {
+		return hasPathPrefix(normalizePath(path), normalizePath(root))
+	}
+
+	private fun hasPathPrefix(path: String, normalizedRoot: String): Boolean {
 		return path == normalizedRoot || if (normalizedRoot == "/") {
 			path.startsWith(normalizedRoot)
 		} else {
@@ -158,7 +180,18 @@ object GpxDbHelper : GpxReaderAdapter {
 
 	private fun normalizePath(path: String): String {
 		val normalized = path.replace('\\', '/')
-		return if (normalized.length > 1) normalized.trimEnd('/') else normalized
+		val absolute = normalized.startsWith('/')
+		val segments = mutableListOf<String>()
+		normalized.split('/').forEach { segment ->
+			when {
+				segment.isEmpty() || segment == "." -> Unit
+				segment == ".." && segments.isNotEmpty() && segments.last() != ".." ->
+					segments.removeAt(segments.lastIndex)
+				else -> segments.add(segment)
+			}
+		}
+		val prefix = if (absolute) "/" else ""
+		return prefix + segments.joinToString("/")
 	}
 
 	fun getItemsVersion() = itemsVersion.get()
@@ -332,8 +365,12 @@ object GpxDbHelper : GpxReaderAdapter {
 		if (item != null && !file.exists()) {
 			return null
 		}
-		if (readIfNeeded && GpxDbUtils.isAnalyseNeeded(item) && GpxDataItem.isRegularTrack(file)) {
-			readGpxItem(file, item, callback)
+		if (readIfNeeded && GpxDataItem.isRegularTrack(file)) {
+			val shouldCheckAnalysis = callback != null || !isReading(file)
+			if (shouldCheckAnalysis && GpxDbUtils.isAnalyseNeeded(item)) {
+				val reconciliationFinished = reconciliationAttempted.value && !reconciliationRunning.value
+				readGpxItem(file, item, callback, reconciliationFinished)
+			}
 		}
 		return item
 	}
@@ -374,16 +411,29 @@ object GpxDbHelper : GpxReaderAdapter {
 	fun isReading(file: KFile): Boolean =
 		readerSync.synchronize { readingItemsMap.contains(file) || readers.any { it.isReading(file) } }
 
-	private fun readGpxItem(file: KFile, item: GpxDataItem?, callback: GpxDataItemCallback?) {
+	private fun readGpxItem(
+		file: KFile,
+		item: GpxDataItem?,
+		callback: GpxDataItemCallback?,
+		startReader: Boolean = true
+	) {
 		readerSync.synchronize {
 			if (callback != null) {
 				readingItemsCallbacks.getOrPut(file) { mutableListOf() }?.apply { add(callback) }
 			}
 			if (!isReading(file)) {
 				readingItemsMap[file] = item ?: GpxDataItem(file)
-				if (readers.size < READER_TASKS_LIMIT) {
+				if (startReader && readers.size < READER_TASKS_LIMIT) {
 					startReading()
 				}
+			}
+		}
+	}
+
+	private fun startQueuedReaders() {
+		readerSync.synchronize {
+			while (readingItemsMap.isNotEmpty() && readers.size < READER_TASKS_LIMIT) {
+				startReading()
 			}
 		}
 	}

@@ -94,6 +94,10 @@ public class GpxSelectionHelper {
 	}
 
 	public void clearAllGpxFilesToShow(boolean backupSelection) {
+		List<PendingSelection> pendingSnapshot;
+		synchronized (pendingSelections) {
+			pendingSnapshot = new ArrayList<>(pendingSelections.values());
+		}
 		cancelPendingRestore();
 		selectedGpxFilesBackUp.clear();
 		if (backupSelection) {
@@ -106,34 +110,54 @@ public class GpxSelectionHelper {
 					gpxDisplayHelper.cancelTrackSplitting(file);
 				}
 			}
+			for (PendingSelection selection : pendingSnapshot) {
+				File file = new File(selection.path);
+				BackupSelection backup = BackupSelection.fromPath(
+						selection.path, file.lastModified(), selection.selectedByUser);
+				selectedGpxFilesBackUp.put(backup.key, backup);
+			}
+		}
+		for (SelectedGpxFile file : selectedGPXFiles) {
+			file.cancelPendingFullAnalysis();
+			FilteredSelectedGpxFile filtered = file.getFilteredSelectedGpxFile();
+			if (filtered != null) {
+				app.getGpsFilterHelper().cancelFiltering(filtered);
+			}
 		}
 		selectedGPXFiles = new ArrayList<>();
 		saveCurrentSelections();
 	}
 
 	public void restoreSelectedGpxFiles() {
-		for (BackupSelection backup : new ArrayList<>(selectedGpxFilesBackUp.values())) {
+		int generation = restoreGeneration.incrementAndGet();
+		synchronized (pendingSelections) {
+			pendingSelections.clear();
+		}
+		List<BackupSelection> backups = new ArrayList<>(selectedGpxFilesBackUp.values());
+		selectedGpxFilesBackUp.clear();
+		for (BackupSelection backup : backups) {
 			if (!backup.currentTrack) {
 				File file = new File(backup.path);
-				if (file.exists() && !file.isDirectory()) {
-					if (backup.gpxFile == null || file.lastModified() > backup.modifiedTime) {
-						OsmAndTaskManager.executeTask(new GpxFileLoaderTask(file, null, false, result -> {
-							if (result != null && result.getError() == null) {
-								selectGpxFile(result, GpxSelectionParams.getDefaultSelectionParams());
-								saveCurrentSelections();
-							}
-							return true;
-						}));
+				if (file.isFile()) {
+					if (backup.gpxFile == null || file.lastModified() != backup.modifiedTime) {
+						PendingSelection selection = new PendingSelection(
+								backup.path, backup.selectedByUser, null, null, generation);
+						synchronized (pendingSelections) {
+							pendingSelections.put(selection.key, selection);
+						}
 					} else {
-						selectGpxFile(backup.gpxFile, GpxSelectionParams.getDefaultSelectionParams());
+						selectGpxFile(backup.gpxFile, GpxSelectionParams.getDefaultSelectionParams()
+								.setSelectedByUser(backup.selectedByUser));
 					}
 				}
 			} else {
 				selectGpxFile(savingTrackHelper.getCurrentTrack().gpxFile,
-						GpxSelectionParams.getDefaultSelectionParams());
+						GpxSelectionParams.getDefaultSelectionParams()
+								.setSelectedByUser(backup.selectedByUser));
 			}
 		}
 		saveCurrentSelections();
+		startPendingGpxRestore();
 	}
 
 	@NonNull
@@ -161,14 +185,66 @@ public class GpxSelectionHelper {
 	}
 
 	public boolean isAnyGpxFileSelected() {
-		return !selectedGPXFiles.isEmpty();
+		if (!selectedGPXFiles.isEmpty()) {
+			return true;
+		}
+		synchronized (pendingSelections) {
+			return !pendingSelections.isEmpty();
+		}
 	}
 
 	public static boolean isGpxFileSelected(@NonNull OsmandApplication app, @Nullable GpxFile gpxFile) {
 		GpxSelectionHelper helper = app.getSelectedGpxHelper();
 		return gpxFile != null &&
 				((gpxFile.isShowCurrentTrack() && helper.getSelectedCurrentRecordingTrack() != null) ||
-						(gpxFile.getPath() != null && helper.getSelectedFileByPath(gpxFile.getPath()) != null));
+						(gpxFile.getPath() != null && (helper.getSelectedFileByPath(gpxFile.getPath()) != null
+								|| helper.isPendingSelection(gpxFile.getPath()))));
+	}
+
+	public boolean isPendingSelection(@NonNull String path) {
+		synchronized (pendingSelections) {
+			return pendingSelections.containsKey(path);
+		}
+	}
+
+	public void cancelPendingSelection(@NonNull String path) {
+		boolean removed;
+		synchronized (pendingSelections) {
+			removed = pendingSelections.remove(path) != null;
+		}
+		removed |= selectedGpxFilesBackUp.remove(path) != null;
+		if (removed) {
+			saveCurrentSelections();
+		}
+	}
+
+	public void renamePendingSelection(@NonNull String oldPath, @NonNull String newPath) {
+		PendingSelection renamed = null;
+		synchronized (pendingSelections) {
+			PendingSelection previous = pendingSelections.remove(oldPath);
+			if (previous != null) {
+				renamed = new PendingSelection(newPath, previous.selectedByUser,
+						previous.color, previous.hiddenGroups, restoreGeneration.get());
+				pendingSelections.put(renamed.key, renamed);
+			}
+		}
+		BackupSelection renamedBackup = null;
+		BackupSelection previousBackup = selectedGpxFilesBackUp.remove(oldPath);
+		if (previousBackup != null) {
+			GpxFile backupFile = previousBackup.gpxFile;
+			if (backupFile != null) {
+				backupFile.setPath(newPath);
+			}
+			renamedBackup = new BackupSelection(newPath, false, previousBackup.modifiedTime,
+					previousBackup.selectedByUser, backupFile);
+			selectedGpxFilesBackUp.put(renamedBackup.key, renamedBackup);
+		}
+		if (renamed != null || renamedBackup != null) {
+			saveCurrentSelections();
+			if (renamed != null && !app.isApplicationInitializing()) {
+				startPendingGpxRestore();
+			}
+		}
 	}
 
 	public void addListener(@NonNull SelectGpxTaskListener listener) {
@@ -181,13 +257,21 @@ public class GpxSelectionHelper {
 
 	@Nullable
 	public String getGpxDescription() {
-		int size = selectedGPXFiles.size();
+		List<PendingSelection> pendingSnapshot;
+		synchronized (pendingSelections) {
+			pendingSnapshot = new ArrayList<>(pendingSelections.values());
+		}
+		int size = selectedGPXFiles.size() + pendingSnapshot.size();
 		if (size == 1) {
-			GpxFile currentGPX = app.getSavingTrackHelper().getCurrentGpx();
-			if (selectedGPXFiles.get(0).getGpxFile() == currentGPX) {
-				return app.getString(R.string.shared_string_currently_recording_track);
+			if (!selectedGPXFiles.isEmpty()) {
+				GpxFile currentGPX = app.getSavingTrackHelper().getCurrentGpx();
+				if (selectedGPXFiles.get(0).getGpxFile() == currentGPX) {
+					return app.getString(R.string.shared_string_currently_recording_track);
+				}
+				File file = new File(selectedGPXFiles.get(0).getGpxFile().getPath());
+				return Algorithms.getFileNameWithoutExtension(file).replace('_', ' ');
 			}
-			File file = new File(selectedGPXFiles.get(0).getGpxFile().getPath());
+			File file = new File(pendingSnapshot.get(0).path);
 			return Algorithms.getFileNameWithoutExtension(file).replace('_', ' ');
 		} else if (size == 0) {
 			return null;
@@ -224,7 +308,7 @@ public class GpxSelectionHelper {
 			return null;
 		}
 		File file = new File(path);
-		boolean modified = file.lastModified() > backup.modifiedTime;
+		boolean modified = file.lastModified() != backup.modifiedTime;
 		return file.isFile() && !modified ? backup.gpxFile : null;
 	}
 
@@ -365,29 +449,49 @@ public class GpxSelectionHelper {
 		}
 
 		File file = new File(selection.path);
+		if (!file.isFile()) {
+			removePendingSelection(selection);
+			saveCurrentSelections();
+			app.runInUIThread(() -> loadNextPendingSelection(generation));
+			return;
+		}
+		long scheduledModifiedTime = file.lastModified();
 		long fileRestoreStart = System.currentTimeMillis();
 		OsmAndTaskManager.executeTask(new GpxFileLoaderTask(file, null, false, gpx -> {
-			if (isPendingSelectionActive(selection, generation)) {
-				if (gpx != null && gpx.getError() == null) {
-					if (selection.color != null) {
-						gpx.setColor(selection.color);
+			try {
+				if (isPendingSelectionActive(selection, generation)) {
+					boolean fileUnchanged = file.isFile() && file.lastModified() == scheduledModifiedTime
+							&& gpx != null && gpx.getModifiedTime() == scheduledModifiedTime;
+					if (gpx != null && gpx.getError() == null && fileUnchanged) {
+						if (selection.color != null) {
+							gpx.setColor(selection.color);
+						}
+						if (selection.hiddenGroups != null) {
+							readHiddenGroups(gpx, selection.hiddenGroups);
+						}
+						GpxSelectionParams params = GpxSelectionParams.newInstance()
+								.showOnMap().syncGroup().setSelectedByUser(selection.selectedByUser);
+						SelectedGpxFile selectedFile = selectGpxFile(gpx, params);
+						log.info("Restored selected GPX name=" + file.getName()
+								+ ", size=" + file.length()
+								+ ", points=" + (selectedFile != null ? selectedFile.getPointsToDisplayCount() : 0)
+								+ " in " + (System.currentTimeMillis() - fileRestoreStart) + " ms");
+						app.getOsmandMap().refreshMap();
+						removePendingSelection(selection);
+					} else if (!file.isFile() || gpx == null || gpx.getError() != null) {
+						removePendingSelection(selection);
+					} else {
+						markPendingSelectionForRetry(selection);
 					}
-					if (selection.hiddenGroups != null) {
-						readHiddenGroups(gpx, selection.hiddenGroups);
-					}
-					GpxSelectionParams params = GpxSelectionParams.newInstance()
-							.showOnMap().syncGroup().setSelectedByUser(selection.selectedByUser);
-					SelectedGpxFile selectedFile = selectGpxFile(gpx, params);
-					log.info("Restored selected GPX name=" + file.getName()
-							+ ", size=" + file.length()
-							+ ", points=" + (selectedFile != null ? selectedFile.getPointsToDisplayCount() : 0)
-							+ " in " + (System.currentTimeMillis() - fileRestoreStart) + " ms");
-					app.getOsmandMap().refreshMap();
+					saveCurrentSelections();
 				}
-				removePendingSelection(selection);
+			} catch (RuntimeException error) {
+				log.error("Failed to restore selected GPX " + selection.path, error);
+				// Keep the pending preference for a retry on the next process start.
 				saveCurrentSelections();
+			} finally {
+				loadNextPendingSelection(generation);
 			}
-			loadNextPendingSelection(generation);
 			return true;
 		}));
 	}
@@ -396,7 +500,9 @@ public class GpxSelectionHelper {
 	private PendingSelection getNextPendingSelection(int generation) {
 		synchronized (pendingSelections) {
 			for (PendingSelection selection : pendingSelections.values()) {
-				if (selection.generation == generation) {
+				if (selection.generation == generation && !selection.restoreAttempted) {
+					selection.restoreAttempted = true;
+					selection.restoreAttempts++;
 					return selection;
 				}
 			}
@@ -417,6 +523,18 @@ public class GpxSelectionHelper {
 		synchronized (pendingSelections) {
 			if (pendingSelections.get(selection.key) == selection) {
 				pendingSelections.remove(selection.key);
+			}
+		}
+	}
+
+	private void markPendingSelectionForRetry(@NonNull PendingSelection selection) {
+		synchronized (pendingSelections) {
+			if (pendingSelections.get(selection.key) == selection) {
+				if (selection.restoreAttempts < 2) {
+					pendingSelections.remove(selection.key);
+					selection.restoreAttempted = false;
+					pendingSelections.put(selection.key, selection);
+				}
 			}
 		}
 	}
@@ -535,13 +653,16 @@ public class GpxSelectionHelper {
 	public SelectedGpxFile selectGpxFile(@NonNull GpxFile gpx, @NonNull GpxSelectionParams params) {
 		boolean showOnMap = params.isShowOnMap();
 		boolean currentTrack = gpx.isShowCurrentTrack();
+		boolean pendingSelection = !currentTrack && !Algorithms.isEmpty(gpx.getPath())
+				&& isPendingSelection(gpx.getPath());
 		if (!currentTrack && !Algorithms.isEmpty(gpx.getPath())) {
 			synchronized (pendingSelections) {
 				pendingSelections.remove(gpx.getPath());
 			}
 		}
 		KFile file = new KFile(gpx.getPath());
-		GpxDataItem dataItem = file.exists() ? app.getGpxDbHelper().getItem(file) : null;
+		GpxDataItem dataItem = file.exists()
+				? app.getGpxDbHelper().getItem(file, !pendingSelection) : null;
 
 		SelectedGpxFile selectedFile = currentTrack ? savingTrackHelper.getCurrentTrack() : getSelectedFileByPath(gpx.getPath());
 		if (!currentTrack && (showOnMap || !params.shouldUpdateSelected())) {
@@ -550,7 +671,9 @@ public class GpxSelectionHelper {
 			}
 			if (dataItem != null) {
 				selectedFile.setJoinSegments(dataItem.getParameter(JOIN_SEGMENTS));
-
+			}
+			selectedFile.setGpxFile(gpx, app);
+			if (dataItem != null) {
 				GpxTrackAnalysis analysis = dataItem.getAnalysis();
 				Long itemModifiedTime = dataItem.getParameter(FILE_LAST_MODIFIED_TIME);
 				if (analysis != null && itemModifiedTime != null
@@ -560,7 +683,6 @@ public class GpxSelectionHelper {
 							analysis, itemModifiedTime, dataItem.getAnalysisParametersVersion());
 				}
 			}
-			selectedFile.setGpxFile(gpx, app);
 		}
 		if (selectedFile != null) {
 			selectedFile.notShowNavigationDialog = params.isNotShowNavigationDialog();
@@ -602,6 +724,11 @@ public class GpxSelectionHelper {
 			}
 		} else {
 			selectedFiles.remove(selectedGpxFile);
+			selectedGpxFile.cancelPendingFullAnalysis();
+			FilteredSelectedGpxFile filtered = selectedGpxFile.getFilteredSelectedGpxFile();
+			if (filtered != null) {
+				app.getGpsFilterHelper().cancelFiltering(filtered);
+			}
 
 			if (gpxDisplayHelper.isSplittingTrack(selectedGpxFile)) {
 				gpxDisplayHelper.cancelTrackSplitting(selectedGpxFile);
@@ -678,6 +805,8 @@ public class GpxSelectionHelper {
 		@Nullable
 		private final String hiddenGroups;
 		private final int generation;
+		private boolean restoreAttempted;
+		private int restoreAttempts;
 
 		private PendingSelection(@NonNull String path,
 		                         boolean selectedByUser,
