@@ -123,7 +123,9 @@ public abstract class SettingsItem {
 		// - Where is type prefix ? filename same for different types
 		fileName = BackupUtils.removeLeadingSlash(fileName);
 		String name = BackupUtils.removeLeadingSlash(getFileName());
-		return name != null && (name.endsWith(fileName) || fileName.startsWith(name + File.separator));
+		return name != null && (name.endsWith(fileName)
+				|| (fileName.length() > name.length() && fileName.startsWith(name)
+				&& fileName.charAt(name.length()) == File.separatorChar));
 	}
 
 	public boolean shouldReadOnCollecting() {
