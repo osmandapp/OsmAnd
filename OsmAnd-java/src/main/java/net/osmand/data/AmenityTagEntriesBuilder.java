@@ -54,16 +54,13 @@ public class AmenityTagEntriesBuilder {
 			return;
 		}
 		String langSuffix = ":" + preferredLang;
-		AmenityTagEntry descInPrefLang = null;
-		for (AmenityTagEntry desc : descriptions) {
+		for (var it = descriptions.iterator(); it.hasNext(); ) {
+			AmenityTagEntry desc = it.next();
 			if (desc.key.length() > langSuffix.length() && desc.key.endsWith(langSuffix)) {
-				descInPrefLang = desc;
+				it.remove();
+				descriptions.add(0, desc);
 				break;
 			}
-		}
-		if (descInPrefLang != null) {
-			descriptions.remove(descInPrefLang);
-			descriptions.add(0, descInPrefLang);
 		}
 	}
 }

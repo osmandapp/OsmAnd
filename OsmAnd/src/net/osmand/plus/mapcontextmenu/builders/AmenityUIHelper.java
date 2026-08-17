@@ -52,7 +52,6 @@ import net.osmand.plus.views.layers.POIMapLayer;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -66,7 +65,6 @@ public class AmenityUIHelper extends MenuBuilder {
 
 	private final AdditionalInfoBundle additionalInfo;
 
-	private Amenity wikiAmenity;
 	private MapPoiTypes poiTypes;
 	private PoiCategory poiCategory;
 	private String subtype;
@@ -185,14 +183,14 @@ public class AmenityUIHelper extends MenuBuilder {
 	private AmenityTagEntry.Builder getEntryDataBuilder(@NonNull Context context, @NonNull String key,
 	                                                    @NonNull String value, boolean isDescription,
 	                                                    @NonNull AdditionalInfoBundle.ResolvedPoiType resolvedType) {
-		if (resolvedType.additionalType == null && resolvedType.categoryType != null) {
+		if (resolvedType.additionalType() == null && resolvedType.categoryType() != null) {
 			return null;
 		}
 		AmenityTagEntry.Builder entryBuilder =
 				new AmenityTagEntry.Builder(key).setValue(value).setIsDescription(isDescription);
 		PoiAdditionalUiRule poiAdditionalUiRule = PoiAdditionalUiRules.INSTANCE.findRule(key);
-		if (resolvedType.additionalType != null) {
-			poiAdditionalUiRule.fillRow(app, context, entryBuilder, this, resolvedType.additionalType,
+		if (resolvedType.additionalType() != null) {
+			poiAdditionalUiRule.fillRow(app, context, entryBuilder, this, resolvedType.additionalType(),
 					key, value, subtype);
 		} else {
 			PoiType fallbackType = new PoiType(poiTypes, poiCategory, null, key, poiCategory.getIconKeyName());
@@ -206,8 +204,7 @@ public class AmenityUIHelper extends MenuBuilder {
 
 	@Override
 	protected void openWikiUrl(@NonNull String url, boolean light) {
-		LatLon location = wikiAmenity != null ? wikiAmenity.getLocation() : getLatLon();
-		WikiArticleHelper.askShowArticle(mapActivity, !light, location, url);
+		WikiArticleHelper.askShowArticle(mapActivity, !light, getLatLon(), url);
 	}
 
 	public void buildWikiDataRow(@NonNull View view) {
@@ -562,12 +559,6 @@ public class AmenityUIHelper extends MenuBuilder {
 			baseView.addView(collapsableView.getContentView());
 		}
 
-		if (isWiki) {
-			buildReadFullButton(llText, app.getString(R.string.context_menu_read_full_article), v -> {
-				WikipediaDialogFragment.showInstance(mapActivity, wikiAmenity, null);
-			});
-		}
-
 		((LinearLayout) view).addView(baseView);
 
 		if (!collapsable) {
@@ -577,8 +568,6 @@ public class AmenityUIHelper extends MenuBuilder {
 				ll.setOnClickListener(v -> handleUrlClick(textPrefix, text, hiddenUrl, light, v));
 			} else if (isEmailAction) {
 				ll.setOnClickListener(v -> handleEmailClick(textPrefix, text, v));
-			} else if (isWiki) {
-				ll.setOnClickListener(v -> WikipediaDialogFragment.showInstance(mapActivity, wikiAmenity, null));
 			} else if (isText && text.length() > 200) {
 				ll.setOnClickListener(v -> POIMapLayer.showPlainDescriptionDialog(view.getContext(), app, text, textPrefix));
 			}

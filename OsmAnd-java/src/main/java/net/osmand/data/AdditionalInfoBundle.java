@@ -116,8 +116,8 @@ public class AdditionalInfoBundle {
 			String strValue = value instanceof String str ? str : null;
 
 			ResolvedPoiType resolvedType = resolvePoiType(category, key, strValue);
-			PoiType additionalType = resolvedType.additionalType;
-			PoiType categoryType = resolvedType.categoryType;
+			PoiType additionalType = resolvedType.additionalType();
+			PoiType categoryType = resolvedType.categoryType();
 			if (isFilterOnlyOrGrouped(additionalType)) {
 				continue;
 			}
@@ -233,8 +233,8 @@ public class AdditionalInfoBundle {
 		AmenityTagEntry header = pickHeader(children, preferredLangs);
 		List<AmenityTagEntry> otherLangs = new ArrayList<>(children);
 		otherLangs.remove(header);
-		int order = resolvedType.additionalType != null
-				? resolvedType.additionalType.getOrder()
+		int order = resolvedType.additionalType() != null
+				? resolvedType.additionalType().getOrder()
 				: PoiType.DEFAULT_ORDER;
 		return new AmenityTagEntry.Builder(header.key)
 				.setValue(header.value)
@@ -269,8 +269,11 @@ public class AdditionalInfoBundle {
 
 	private boolean isDefaultForCategory() {
 		PoiCategory category = getCategory();
+		if (category == null) {
+			return false;
+		}
 		String subtype = get(SUBTYPE);
-		if (category == null || Algorithms.isEmpty(subtype)) {
+		if (Algorithms.isEmpty(subtype)) {
 			return false;
 		}
 		PoiType poiType = category.getPoiTypeByKeyName(subtype);
@@ -385,13 +388,6 @@ public class AdditionalInfoBundle {
 				|| key.contains(ROUTE);
 	}
 
-	public static final class ResolvedPoiType {
-		public final PoiType additionalType;
-		public final PoiType categoryType;
-
-		private ResolvedPoiType(PoiType additionalType, PoiType categoryType) {
-			this.additionalType = additionalType;
-			this.categoryType = categoryType;
-		}
+	public record ResolvedPoiType(PoiType additionalType, PoiType categoryType) {
 	}
 }
