@@ -29,6 +29,7 @@ import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RouteStatisticsHelper;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -99,6 +100,9 @@ public class CachedTrack {
 	public List<TrkSegment> getTrackSegments(@Nullable GradientScaleType scaleType,
 	                                         @Nullable GradientScaleType outlineScaleType,
 	                                         @NonNull String paletteName) {
+		if (selectedGpxFile.isFiltering()) {
+			return Collections.emptyList();
+		}
 		boolean cleared = clearOutdatedCache();
 		String trackId = scaleType + "_" + paletteName + "_" + outlineScaleType;
 		List<TrkSegment> segments = nonSimplifiedSegmentsCache.get(trackId);
@@ -127,6 +131,9 @@ public class CachedTrack {
 	public List<TrkSegment> getSimplifiedTrackSegments(int zoom,
 	                                                   @NonNull GradientScaleType scaleType,
 	                                                   @NonNull String paletteName) {
+		if (selectedGpxFile.isFiltering()) {
+			return Collections.emptyList();
+		}
 		boolean cleared = clearOutdatedCache();
 		String trackId = zoom + "_" + scaleType + "_" + paletteName;
 		List<TrkSegment> segments = simplifiedSegmentsCache.get(trackId);

@@ -21,7 +21,6 @@ import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.OsmAndTaskManager;
@@ -75,6 +74,7 @@ public class GpsFilterHelper {
 		if (cancelPrevious && gpsFilterTask != null) {
 			gpsFilterTask.cancel(false);
 		}
+		filteredSelectedGpxFile.setFiltering(true);
 		gpsFilterTask = new GpsFilterTask(app, filteredSelectedGpxFile, listeners);
 		OsmAndTaskManager.executeTask(gpsFilterTask, singleThreadExecutor);
 	}
@@ -88,7 +88,6 @@ public class GpsFilterHelper {
 
 		private GpxFile filteredGpxFile;
 		private GpxTrackAnalysis trackAnalysis;
-		private List<GpxDisplayGroup> displayGroups;
 
 		public GpsFilterTask(@NonNull OsmandApplication app,
 		                     @NonNull FilteredSelectedGpxFile filteredGpx,
@@ -101,6 +100,7 @@ public class GpsFilterHelper {
 		@Override
 		protected Boolean doInBackground(Void... voids) {
 			SelectedGpxFile sourceSelectedGpxFile = filteredSelectedGpxFile.getSourceSelectedGpxFile();
+			filteredSelectedGpxFile.prepareForFiltering(app);
 			GpxFile sourceGpx = sourceSelectedGpxFile.getGpxFile();
 
 			filteredGpxFile = sourceGpx.clone();
@@ -167,8 +167,6 @@ public class GpsFilterHelper {
 			}
 
 			trackAnalysis = filteredGpxFile.getAnalysis(System.currentTimeMillis());
-			displayGroups = processSplit(filteredGpxFile);
-
 			return true;
 		}
 
@@ -185,27 +183,24 @@ public class GpsFilterHelper {
 					&& (firstOrLast || smoothingFilter.acceptPoint(point, pointIndex, cumulativeDistance, singlePoint));
 		}
 
-		@Nullable
-		private List<GpxDisplayGroup> processSplit(@NonNull GpxFile gpxFile) {
-			List<GpxDataItem> dataItems = app.getGpxDbHelper().getSplitItemsBlocking();
-			for (GpxDataItem dataItem : dataItems) {
-				if (dataItem.getFile().absolutePath().equals(gpxFile.getPath())) {
-					return app.getGpxDisplayHelper().processSplitSync(gpxFile, dataItem);
-				}
-			}
-			return null;
-		}
-
 		@Override
 		protected void onPostExecute(@NonNull Boolean successfulFinish) {
 			if (successfulFinish && !isCancelled()) {
 				filteredSelectedGpxFile.updateGpxFile(app, filteredGpxFile);
 				filteredSelectedGpxFile.setTrackAnalysis(trackAnalysis);
-				filteredSelectedGpxFile.setSplitGroups(displayGroups);
 				for (GpsFilterListener listener : listeners) {
 					listener.onFinishFiltering(filteredGpxFile);
 				}
+			} else {
+				filteredSelectedGpxFile.setFiltering(false);
 			}
+			app.getOsmandMap().refreshMap();
+		}
+
+		@Override
+		protected void onCancelled() {
+			filteredSelectedGpxFile.setFiltering(false);
+			app.getOsmandMap().refreshMap();
 		}
 	}
 
@@ -224,7 +219,7 @@ public class GpsFilterHelper {
 		protected final StyleSpan boldSpan;
 
 		public GpsFilter(@NonNull OsmandApplication app, @NonNull SelectedGpxFile selectedGpxFile) {
-			this.analysis = selectedGpxFile.getTrackAnalysis(app);
+			this.analysis = selectedGpxFile.getTrackSummaryAnalysis(app);
 
 			this.selectedMaxValue = getMaxValue();
 			if (isRangeSupported()) {

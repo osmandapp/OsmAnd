@@ -33,7 +33,6 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 public class TrackTabsHelper {
@@ -202,7 +201,7 @@ public class TrackTabsHelper {
 	public void processRecentlyVisibleTracks() {
 		recentlyVisibleTrackItem.clear();
 		boolean monitoringActive = PluginsHelper.isActive(OsmandMonitoringPlugin.class);
-		for (GpxFile gpxFile : gpxSelectionHelper.getSelectedGpxFilesBackUp().keySet()) {
+		for (GpxFile gpxFile : gpxSelectionHelper.getBackupSelectedGpxFiles()) {
 			SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(gpxFile.getPath());
 			if (selectedGpxFile == null && (!gpxFile.isShowCurrentTrack() || monitoringActive)) {
 				recentlyVisibleTrackItem.add(new TrackItem(gpxFile));

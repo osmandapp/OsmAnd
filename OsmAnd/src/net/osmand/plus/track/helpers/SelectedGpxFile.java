@@ -3,6 +3,7 @@ package net.osmand.plus.track.helpers;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.PlatformUtil;
 import net.osmand.core.jni.AreaI;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.TrackArea;
@@ -23,13 +24,15 @@ import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import org.apache.commons.logging.Log;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
 public class SelectedGpxFile {
+	private static final Log LOG = PlatformUtil.getLog(SelectedGpxFile.class);
 
 	public boolean notShowNavigationDialog;
 	public boolean selectedByUser = true;
@@ -73,21 +76,45 @@ public class SelectedGpxFile {
 	}
 
 	public GpxTrackAnalysis getTrackAnalysis(@NonNull OsmandApplication app) {
-		if (modifiedTime != gpxFile.getModifiedTime()
-				|| analysisParametersVersion != getAnalysisParametersVersion(app)) {
+		return getFullTrackAnalysis(app);
+	}
+
+	public synchronized GpxTrackAnalysis getFullTrackAnalysis(@NonNull OsmandApplication app) {
+		if (isTrackAnalysisOutdated(app) || trackAnalysis == null || !trackAnalysis.getCollectPointData()) {
+			update(app);
+		}
+		return trackAnalysis;
+	}
+
+	public synchronized GpxTrackAnalysis getTrackSummaryAnalysis(@NonNull OsmandApplication app) {
+		if (isTrackAnalysisOutdated(app) || trackAnalysis == null) {
 			update(app);
 		}
 		return trackAnalysis;
 	}
 
 	public GpxTrackAnalysis getTrackAnalysisToDisplay(OsmandApplication app) {
-		return filteredSelectedGpxFile != null
-				? filteredSelectedGpxFile.getTrackAnalysis(app)
-				: getTrackAnalysis(app);
+		return filteredSelectedGpxFile != null && !filteredSelectedGpxFile.isFiltering()
+				? filteredSelectedGpxFile.getFullTrackAnalysis(app)
+				: getFullTrackAnalysis(app);
+	}
+
+	public GpxTrackAnalysis getTrackSummaryAnalysisToDisplay(OsmandApplication app) {
+		return filteredSelectedGpxFile != null && !filteredSelectedGpxFile.isFiltering()
+				? filteredSelectedGpxFile.getTrackSummaryAnalysis(app)
+				: getTrackSummaryAnalysis(app);
 	}
 
 	public void setTrackAnalysis(@NonNull GpxTrackAnalysis trackAnalysis) {
 		this.trackAnalysis = trackAnalysis;
+	}
+
+	public void setTrackSummaryAnalysis(@NonNull GpxTrackAnalysis trackAnalysis,
+	                                    long modifiedTime,
+	                                    long analysisParametersVersion) {
+		this.trackAnalysis = trackAnalysis;
+		this.modifiedTime = modifiedTime;
+		this.analysisParametersVersion = analysisParametersVersion;
 	}
 
 	public void setSplitGroups(@Nullable List<GpxDisplayGroup> splitGroups) {
@@ -102,7 +129,13 @@ public class SelectedGpxFile {
 		return dataItem != null ? dataItem.getAnalysisParametersVersion() : 0;
 	}
 
+	private boolean isTrackAnalysisOutdated(@NonNull OsmandApplication app) {
+		return modifiedTime != gpxFile.getModifiedTime()
+				|| analysisParametersVersion != getAnalysisParametersVersion(app);
+	}
+
 	protected void update(@NonNull OsmandApplication app) {
+		long analysisStart = System.currentTimeMillis();
 		modifiedTime = gpxFile.getModifiedTime();
 		analysisParametersVersion = getAnalysisParametersVersion(app);
 		pointsModifiedTime = gpxFile.getPointsModifiedTime();
@@ -111,12 +144,14 @@ public class SelectedGpxFile {
 				? System.currentTimeMillis()
 				: new File(gpxFile.getPath()).lastModified();
 		trackAnalysis = gpxFile.getAnalysis(fileTimestamp, null, null, PluginsHelper.getTrackPointsAnalyser());
-
-		updateSplit(app);
-
-		if (filteredSelectedGpxFile != null) {
-			filteredSelectedGpxFile.update(app);
+		if (!showCurrentTrack) {
+			String path = gpxFile.getPath();
+			LOG.info("Calculated full selected GPX analysis name="
+					+ (Algorithms.isEmpty(path) ? "inMemoryTrack" : new File(path).getName())
+					+ ", points=" + trackAnalysis.getPoints()
+					+ " in " + (System.currentTimeMillis() - analysisStart) + " ms");
 		}
+
 	}
 
 	private void updateSplit(@NonNull OsmandApplication app) {
@@ -132,8 +167,9 @@ public class SelectedGpxFile {
 	}
 
 	public void processPoints(@NonNull OsmandApplication app) {
-		update(app);
-
+		pointsModifiedTime = gpxFile.getPointsModifiedTime();
+		splitGroups = null;
+		splitProcessed = showCurrentTrack;
 		processedPointsToDisplay = gpxFile.processPoints();
 		routePoints = false;
 		if (processedPointsToDisplay.isEmpty()) {
@@ -297,7 +333,8 @@ public class SelectedGpxFile {
 	}
 
 	public GpxFile getGpxFileToDisplay() {
-		return filteredSelectedGpxFile != null ? filteredSelectedGpxFile.getGpxFile() : gpxFile;
+		return filteredSelectedGpxFile != null && !filteredSelectedGpxFile.isFiltering()
+				? filteredSelectedGpxFile.getGpxFile() : gpxFile;
 	}
 
 	public GpxFile getModifiableGpxFile() {
@@ -361,12 +398,11 @@ public class SelectedGpxFile {
 		if (filteredSelectedGpxFile != null) {
 			filteredSelectedGpxFile.setSplitGroups(displayGroups, app);
 		} else {
+			if (pointsModifiedTime != gpxFile.getPointsModifiedTime() || forceUpdate) {
+				processPoints(app);
+			}
 			this.splitProcessed = true;
 			this.splitGroups = displayGroups;
-
-			if (modifiedTime != gpxFile.getModifiedTime() || forceUpdate) {
-				update(app);
-			}
 		}
 	}
 
@@ -378,6 +414,9 @@ public class SelectedGpxFile {
 	@NonNull
 	public FilteredSelectedGpxFile createFilteredSelectedGpxFile(@NonNull OsmandApplication app, @Nullable GpxDataItem item) {
 		filteredSelectedGpxFile = new FilteredSelectedGpxFile(app, this, item);
+		if (item != null) {
+			app.getGpsFilterHelper().filterGpxFile(filteredSelectedGpxFile, false);
+		}
 		return filteredSelectedGpxFile;
 	}
 
@@ -387,6 +426,10 @@ public class SelectedGpxFile {
 	}
 
 	public boolean hasFilters() {
-		return filteredSelectedGpxFile != null;
+		return filteredSelectedGpxFile != null && !filteredSelectedGpxFile.isFiltering();
+	}
+
+	public boolean isFiltering() {
+		return filteredSelectedGpxFile != null && filteredSelectedGpxFile.isFiltering();
 	}
 }

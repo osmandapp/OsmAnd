@@ -22,6 +22,7 @@ import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.io.KFile;
 
+import java.util.Collections;
 import java.util.List;
 
 public class FilteredSelectedGpxFile extends SelectedGpxFile {
@@ -31,6 +32,7 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 
 	private int totalPointsCount;
 	private int leftPointsCount;
+	private volatile boolean filtering;
 
 	@NonNull
 	private final SmoothingFilter smoothingFilter;
@@ -48,9 +50,6 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 		this.joinSegments = sourceSelectedGpxFile.joinSegments;
 
 		setGpxFile(sourceSelectedGpxFile.gpxFile.clone(), app);
-		if (joinSegments) {
-			gpxFile.addGeneralTrack();
-		}
 
 		smoothingFilter = new SmoothingFilter(app, sourceSelectedGpxFile);
 		speedFilter = new SpeedFilter(app, sourceSelectedGpxFile);
@@ -88,6 +87,7 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 		}
 		modifiedTime = gpxFile.getModifiedTime();
 		processPoints(app);
+		filtering = false;
 
 		leftPointsCount = calculatePointsCount(gpxFile);
 		totalPointsCount = calculatePointsCount(sourceSelectedGpxFile.getGpxFile());
@@ -133,9 +133,26 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 	@NonNull
 	@Override
 	public List<TrkSegment> getPointsToDisplay() {
-		return joinSegments && gpxFile != null && gpxFile.getGeneralTrack() != null
+		return filtering ? Collections.emptyList()
+				: joinSegments && gpxFile != null && gpxFile.getGeneralTrack() != null
 				? gpxFile.getGeneralTrack().getSegments()
 				: processedPointsToDisplay;
+	}
+
+	public boolean isFiltering() {
+		return filtering;
+	}
+
+	public void setFiltering(boolean filtering) {
+		this.filtering = filtering;
+	}
+
+	public void prepareForFiltering(@NonNull OsmandApplication app) {
+		GpxTrackAnalysis sourceAnalysis = sourceSelectedGpxFile.getFullTrackAnalysis(app);
+		smoothingFilter.updateAnalysis(sourceAnalysis);
+		speedFilter.updateAnalysis(sourceAnalysis);
+		altitudeFilter.updateAnalysis(sourceAnalysis);
+		hdopFilter.updateAnalysis(sourceAnalysis);
 	}
 
 	@NonNull
