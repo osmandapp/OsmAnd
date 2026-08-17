@@ -15,8 +15,8 @@ import androidx.annotation.Nullable;
 
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.shared.SharedUtil;
-import net.osmand.data.LatLon;
 import net.osmand.plus.myplaces.tracks.VisibleTracksGroup;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.shared.gpx.data.ComparableTracksGroup;
@@ -38,22 +38,22 @@ public class TracksComparator implements Comparator<Object> {
 	public final Collator collator = OsmAndCollator.primaryCollator();
 	private boolean useSubdirs = false;
 
-	public TracksComparator(@NonNull TrackTab trackTab, @NonNull LatLon latLon) {
+	public TracksComparator(@NonNull TrackTab trackTab, @NonNull OsmandApplication app) {
 		this.trackTab = trackTab;
 		this.sortMode = trackTab.getSortMode();
-		this.latLon = SharedUtil.kLatLon(latLon);
+		this.latLon = SharedUtil.kLatLon(TrackSortModesHelper.getReferenceLocation(app, sortMode));
 	}
 
 	public TracksComparator(@NonNull TracksSortMode sortMode,
-	                        @NonNull LatLon latLon, boolean useSubdirs) {
-		this(sortMode, latLon);
+	                        @NonNull OsmandApplication app, boolean useSubdirs) {
+		this(sortMode, app);
 		this.useSubdirs = useSubdirs;
 	}
 
-	public TracksComparator(@NonNull TracksSortMode sortMode, @NonNull LatLon latLon) {
+	public TracksComparator(@NonNull TracksSortMode sortMode, @NonNull OsmandApplication app) {
 		this.trackTab = null;
 		this.sortMode = sortMode;
-		this.latLon = SharedUtil.kLatLon(latLon);
+		this.latLon = SharedUtil.kLatLon(TrackSortModesHelper.getReferenceLocation(app, sortMode));
 	}
 
 	@Override
@@ -161,7 +161,7 @@ public class TracksComparator implements Comparator<Object> {
 		}
 
 		switch (sortMode) {
-			case NEAREST:
+			case NEAREST, NEAREST_TO_MAP_CENTER:
 				analysis1 = dataItem1 != null ? dataItem1.getAnalysis() : null;
 				analysis2 = dataItem2 != null ? dataItem2.getAnalysis() : null;
 				return compareNearestItems(item1, item2, analysis1, analysis2);

@@ -19,7 +19,6 @@ import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener
 import net.osmand.plus.myplaces.tracks.TracksSearchFilter
 import net.osmand.plus.settings.enums.TracksSortMode
-import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.utils.UpdateLocationUtils
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache
@@ -56,7 +55,6 @@ class SearchTracksAdapter(
         }
         locationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(context)
         locationViewCache.arrowResId = R.drawable.ic_direction_arrow
-        locationViewCache.arrowColor = ColorUtilities.getActiveIconColorId(nightMode)
     }
 
     fun getFilteredItems(): Set<TrackItem> {
@@ -74,8 +72,7 @@ class SearchTracksAdapter(
     }
 
     private fun sortItems() {
-        val latLon = app.mapViewTrackingUtilities.defaultLocation
-        Collections.sort(items, TracksComparator(sortMode, latLon))
+        Collections.sort(items, TracksComparator(sortMode, app))
     }
 
     fun setSortTracksListener(sortTracksListener: SortTracksListener?) {
