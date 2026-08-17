@@ -26,13 +26,13 @@
 	<string name="share_favorites_missing_media_warning">Some attached media could not be included.</string>
 	<string name="search_on_web">Search on web</string>
     <string name="release_5_4">
-        • New spatial search — find places and search around a place\n\n
         • Refreshed search UI: sorting, category filters, cleaner look\n\n
         • Attach photos and media to Favorites\n\n
         • Favorites: subgroups support and pinnable folders\n\n
         • Coordinates: search, map grid, and POI display now support EPSG and Maidenhead locator\n\n
         • Fixed navigation interruptions; switch between Standard and Fast routing\n\n
         • Set Android Auto map scale separately from your phone\n\n
+        • New spatial search — find places and search around a place\n\n
         • Astronomy added solar &amp; lunar eclipses\n\n
     </string>
 	<string name="shared_string_note">Note</string>
