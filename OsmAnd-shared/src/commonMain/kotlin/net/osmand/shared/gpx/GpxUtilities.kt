@@ -1776,9 +1776,7 @@ object GpxUtilities {
 				point.setColor(pointsGroup.color)
 			}
 			val iconName = point.getIconName()
-			if (KAlgorithms.isEmpty(pointsGroup.iconName) && !KAlgorithms.isEmpty(iconName)) {
-				pointsGroup.iconName = iconName
-			} else if (!KAlgorithms.isEmpty(pointsGroup.iconName) && KAlgorithms.isEmpty(iconName)) {
+			if (!KAlgorithms.isEmpty(pointsGroup.iconName) && KAlgorithms.isEmpty(iconName)) {
 				point.setIconName(pointsGroup.iconName)
 			}
 			val backgroundType = point.getBackgroundType()
