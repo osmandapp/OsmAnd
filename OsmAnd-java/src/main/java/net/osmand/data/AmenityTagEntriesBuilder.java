@@ -19,7 +19,7 @@ public class AmenityTagEntriesBuilder {
 		StringBuilder text = new StringBuilder();
 		for (PoiType pt : types) {
 			String translation = pt.getTranslation();
-			if (!text.isEmpty()) {
+			if (Algorithms.isNotEmpty(text)) {
 				text.append(TRANSLATIONS_SEPARATOR);
 			}
 			text.append(translation);
