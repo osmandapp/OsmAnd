@@ -37,13 +37,11 @@ import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtyp
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidNetworkUtils.NetworkResult;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
 import org.apache.commons.logging.Log;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -561,33 +559,34 @@ public class BackupHelper {
 		}
 		OperationLog operationLog = new OperationLog("downloadFileList", DEBUG);
 		operationLog.startOperation();
-		AndroidNetworkUtils.sendRequest(app, LIST_FILES_URL, params, "Download file list", false, false,
-				(resultJson, error, resultCode) -> {
+
+		AndroidNetworkUtils.<CloudFileListParseResult>sendRequestWithInputStream(
+				app, LIST_FILES_URL, params,
+				"Download file list", false, false,
+				inputStream -> StreamingCloudFileListParser.parse(inputStream, app),
+				(parseResult, error, resultCode) -> {
 					int status;
 					String message;
 					List<RemoteFile> remoteFiles = new ArrayList<>();
 					if (!Algorithms.isEmpty(error)) {
 						status = STATUS_SERVER_ERROR;
 						message = "Download file list error: " + new BackupError(error);
-					} else if (!Algorithms.isEmpty(resultJson)) {
-						try {
-							JSONObject res = new JSONObject(resultJson);
-							String totalZipSize = res.getString("totalZipSize");
-							String totalFiles = res.getString("totalFiles");
-							String totalFileVersions = res.getString("totalFileVersions");
-							maximumAccountSize = Algorithms.parseLongSilently(res.getString("maximumAccountSize"), 0);
-							JSONArray allFiles = res.getJSONArray("allFiles");
-							for (int i = 0; i < allFiles.length(); i++) {
-								remoteFiles.add(new RemoteFile(allFiles.getJSONObject(i)));
-							}
-							status = STATUS_SUCCESS;
-							message = "Total files: " + totalFiles + " " +
-									"Total zip size: " + AndroidUtils.formatSize(app, Long.parseLong(totalZipSize)) + " " +
-									"Total file versions: " + totalFileVersions;
-						} catch (JSONException e) {
-							status = STATUS_PARSE_JSON_ERROR;
-							message = "Download file list error: json parsing";
+					} else if (parseResult != null) {
+						Integer parseStatus = parseResult.getStatus();
+						Long parsedMaxAccountSize = parseResult.getMaximumAccountSize();
+						if (parsedMaxAccountSize != null) {
+							maximumAccountSize = parsedMaxAccountSize;
 						}
+						if (parseStatus == null) {
+							RuntimeException runtimeException = parseResult.getRuntimeException();
+							if (runtimeException != null) {
+								throw runtimeException;
+							}
+							throw new IllegalStateException(parseResult.getMessage());
+						}
+						status = parseStatus;
+						message = parseResult.getMessage();
+						remoteFiles.addAll(parseResult.getRemoteFiles());
 					} else {
 						status = STATUS_EMPTY_RESPONSE_ERROR;
 						message = "Download file list error: empty response";

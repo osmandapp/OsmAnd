@@ -18,7 +18,6 @@ import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.shared.util.NetworkImageLoader;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -42,7 +41,6 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.net.UnknownHostException;
 import java.text.MessageFormat;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,10 +49,6 @@ import java.util.Map.Entry;
 import java.util.concurrent.Executor;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
-
-import okhttp3.HttpUrl;
-import okhttp3.OkHttpClient;
-import okhttp3.Response;
 
 public class AndroidNetworkUtils {
 
@@ -66,6 +60,19 @@ public class AndroidNetworkUtils {
 
 	public interface OnRequestResultListener {
 		void onResult(@Nullable String result, @Nullable String error, @Nullable Integer resultCode);
+	}
+
+	/**
+	 * Consumes a successful HTTP response synchronously while its connection is open.
+	 * AndroidNetworkUtils owns the response stream and guarantees final cleanup.
+	 */
+	public interface InputStreamResponseHandler<T> {
+		@Nullable
+		T handle(@NonNull InputStream inputStream) throws IOException;
+	}
+
+	public interface OnInputStreamRequestResultListener<T> {
+		void onResult(@Nullable T result, @Nullable String error, @Nullable Integer resultCode);
 	}
 
 	public interface OnFileUploadCallback {
@@ -422,18 +429,61 @@ public class AndroidNetworkUtils {
 	                                 @Nullable Map<String, String> parameters,
 	                                 @Nullable String userOperation, boolean toastAllowed,
 	                                 boolean post, @Nullable OnRequestResultListener listener) {
+		return sendFormRequest(app, baseUrl, parameters, userOperation, toastAllowed, post,
+				AndroidNetworkUtils::streamToString, listener == null ? null : listener::onResult);
+	}
+
+	@Nullable
+	public static <T> T sendRequestWithInputStream(@Nullable OsmandApplication app,
+	                                              @NonNull String baseUrl,
+	                                              @Nullable Map<String, String> parameters,
+	                                              @Nullable String userOperation,
+	                                              boolean toastAllowed, boolean post,
+	                                              @NonNull InputStreamResponseHandler<T> responseHandler,
+	                                              @Nullable OnInputStreamRequestResultListener<T> listener) {
+		return sendFormRequest(app, baseUrl, parameters, userOperation, toastAllowed, post,
+				preserveHandlerNullPointerException(responseHandler), listener);
+	}
+
+	@Nullable
+	private static <T> T sendFormRequest(@Nullable OsmandApplication app,
+	                                    @NonNull String baseUrl,
+	                                    @Nullable Map<String, String> parameters,
+	                                    @Nullable String userOperation,
+	                                    boolean toastAllowed, boolean post,
+	                                    @NonNull InputStreamResponseHandler<T> responseHandler,
+	                                    @Nullable OnInputStreamRequestResultListener<T> listener) {
 		String paramsSeparator = baseUrl.indexOf('?') == -1 ? "?" : "&";
 		String contentType = "application/x-www-form-urlencoded;charset=UTF-8";
-		String params = getParameters(app, parameters, listener, userOperation, toastAllowed);
+
+		OnRequestResultListener parameterListener = listener == null ? null
+				: (result, error, resultCode) -> listener.onResult(null, error, resultCode);
+
+		String params = getParameters(app, parameters, parameterListener, userOperation, toastAllowed);
 		String url = params == null || post ? baseUrl : baseUrl + paramsSeparator + params;
-		return sendRequest(app, url, params, userOperation, contentType, toastAllowed, post, listener);
+
+		return executeRequest(app, url, params, userOperation, contentType,
+				toastAllowed, post, responseHandler, listener);
 	}
 
 	public static String sendRequest(@Nullable OsmandApplication app, @NonNull String url,
 	                                 @Nullable String body, @Nullable String userOperation,
 	                                 @Nullable String contentType, boolean toastAllowed,
 	                                 boolean post, @Nullable OnRequestResultListener listener) {
-		String result = null;
+		return executeRequest(app, url, body, userOperation, contentType, toastAllowed, post,
+				AndroidNetworkUtils::streamToString, listener == null ? null : listener::onResult);
+	}
+
+	@Nullable
+	private static <T> T executeRequest(@Nullable OsmandApplication app,
+	                                    @NonNull String url,
+	                                    @Nullable String body,
+	                                    @Nullable String userOperation,
+	                                    @Nullable String contentType,
+	                                    boolean toastAllowed, boolean post,
+	                                    @NonNull InputStreamResponseHandler<T> responseHandler,
+	                                    @Nullable OnInputStreamRequestResultListener<T> listener) {
+		T result = null;
 		String error = null;
 		Integer resultCode = null;
 		HttpURLConnection connection = null;
@@ -453,11 +503,22 @@ public class AndroidNetworkUtils {
 				}
 				InputStream errorStream = connection.getErrorStream();
 				if (errorStream != null) {
-					error = streamToString(errorStream);
+					try {
+						error = streamToString(errorStream);
+					} finally {
+						Algorithms.closeStream(errorStream);
+					}
 				}
 			} else {
-				result = streamToString(connection.getInputStream());
+				InputStream inputStream = connection.getInputStream();
+				try {
+					result = responseHandler.handle(inputStream);
+				} finally {
+					Algorithms.closeStream(inputStream);
+				}
 			}
+		} catch (ResponseHandlerNullPointerException e) {
+			throw e.getHandlerException();
 		} catch (NullPointerException e) {
 			// that's tricky case why NPE is thrown to fix that problem httpClient could be used
 			if (app != null) {
@@ -489,6 +550,35 @@ public class AndroidNetworkUtils {
 			listener.onResult(result, error, resultCode);
 		}
 		return result;
+	}
+
+	@NonNull
+	private static <T> InputStreamResponseHandler<T> preserveHandlerNullPointerException(
+			@NonNull InputStreamResponseHandler<T> responseHandler) {
+		return inputStream -> {
+			try {
+				return responseHandler.handle(inputStream);
+			} catch (NullPointerException e) {
+				// Raw NPEs are historically mapped to authorization failure by the legacy String path.
+				throw new ResponseHandlerNullPointerException(e);
+			}
+		};
+	}
+
+	private static class ResponseHandlerNullPointerException extends RuntimeException {
+
+		@NonNull
+		private final NullPointerException handlerException;
+
+		ResponseHandlerNullPointerException(@NonNull NullPointerException handlerException) {
+			super(handlerException);
+			this.handlerException = handlerException;
+		}
+
+		@NonNull
+		NullPointerException getHandlerException() {
+			return handlerException;
+		}
 	}
 
 	@NonNull
