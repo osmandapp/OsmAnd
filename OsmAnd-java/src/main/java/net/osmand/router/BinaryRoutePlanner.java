@@ -469,8 +469,8 @@ public class BinaryRoutePlanner {
 		int y = segment.road.getPoint31YTile(segment.getSegmentEnd());
 		float priority = router.defineSpeedPriority(segment.road, segment.isPositive());
 		float speed = (router.defineRoutingSpeed(segment.road, segment.isPositive()) * priority);
-		if (speed == 0) {
-			speed = router.getDefaultSpeed() * priority;
+		if (speed <= 0) {
+			speed = router.getDefaultSpeed();
 		}
 		// speed can not exceed max default speed according to A*
 		if (speed > router.getMaxSpeed()) {
