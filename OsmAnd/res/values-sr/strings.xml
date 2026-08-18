@@ -257,7 +257,7 @@
     <string name="simulate_initial_startup_descr">Поставља указивач као да се ОсмАнд покреће први пут, све остале поставке оставља непромењеним.</string>
     <string name="simulate_initial_startup">Подражавај прво покретање програма</string>
     <string name="share_menu_location">Дели свој положај</string>
-    <string name="shared_string_send">Шаљи</string>
+    <string name="shared_string_send">Пошаљи</string>
     <string name="favorite_category_dublicate_message">Употребите име врсте која већ не постоји.</string>
     <string name="favorite_category_name">Име врсте</string>
     <string name="favorite_category_add_new_title">Додај нову врсту</string>
@@ -3558,7 +3558,7 @@
     <string name="map_settings_weather_air_pressure">Ваздушни притисак</string>
     <string name="precipitation_widget_desc">Приказује падавине на тренутном средишту карте.</string>
     <string name="weather_temperature_fahrenheit">Фаренхајт</string>
-    <string name="share_crash_log">Подели дневник рушења програма</string>
+    <string name="share_crash_log">Подели дневник рушења</string>
     <string name="dismiss_changes_descr">Све промене ће бити одбачене.</string>
     <string name="restart_now">Препокрени сада</string>
     <string name="map_rendering_engine_v1">Издање 1</string>
