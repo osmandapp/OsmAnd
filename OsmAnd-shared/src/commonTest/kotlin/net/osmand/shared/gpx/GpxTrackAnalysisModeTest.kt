@@ -34,6 +34,21 @@ class GpxTrackAnalysisModeTest {
 		assertEquals(full.timeSpan, summary.timeSpan)
 	}
 
+	@Test
+	fun databaseSummaryExposesElevationMetricsWithoutPointData() {
+		val summary = GpxTrackAnalysis().apply {
+			collectPointData = false
+			minElevation = 168.0
+			maxElevation = 425.0
+			avgElevation = 286.0
+			diffElevationUp = 1904.0
+			diffElevationDown = 1679.0
+		}
+
+		assertFalse(summary.hasElevationData())
+		assertTrue(summary.hasElevationMetrics())
+	}
+
 	private fun createPoint(lat: Double, lon: Double, elevation: Double, time: Long) =
 		WptPt().apply {
 			this.lat = lat
