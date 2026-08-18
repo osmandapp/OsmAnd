@@ -117,7 +117,7 @@ public class Algorithms {
 	}
 
 	public static boolean isEmpty(CharSequence s) {
-		return s == null || s.length() == 0;
+		return s == null || s.length() == 0; // Use length() == 0 because StringBuilder.isEmpty() added in API >= 35
 	}
 
 	public static boolean isNotEmpty(CharSequence s) {
