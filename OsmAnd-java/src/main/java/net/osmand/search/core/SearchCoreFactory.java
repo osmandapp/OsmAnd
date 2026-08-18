@@ -10,6 +10,7 @@ import static net.osmand.binary.ObfConstants.isTagNonIndexedForSearchAsName;
 import static net.osmand.data.Amenity.POPULATION;
 import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
+import static net.osmand.search.core.ObjectType.BOUNDARY;
 import static net.osmand.search.core.ObjectType.POI;
 import static net.osmand.util.LocationParser.parseOpenLocationCode;
 import static net.osmand.util.SearchAlgorithms.splitAndNormalize;
@@ -549,7 +550,8 @@ public class SearchCoreFactory {
 								sr.objectType = ObjectType.POSTCODE;
 								sr.priorityDistance = 0;
 							} else if (type == CityType.BOUNDARY) {
-								if ((locSpecified && !villagesBbox.contains(x, y, x, y))
+								boolean isRegion = sr.file.getRegionName().equals("Regions");
+								if (!isRegion && (locSpecified && !villagesBbox.contains(x, y, x, y))
 										|| !phrase.isSearchTypeAllowed(ObjectType.BOUNDARY)) {
 									return false;
 								}
@@ -654,7 +656,7 @@ public class SearchCoreFactory {
 					}
                     offlineIterator = phrase.getOfflineIndexes(rect, SearchPhraseDataType.ADDRESS);
                 }
-
+				
 				int lastRegionPriority = 0;
 				int lastResultCount = resultMatcher.getCount();
 				while (offlineIterator.hasNext() && wordToSearch.length() > 0) {
@@ -734,6 +736,29 @@ public class SearchCoreFactory {
 						break;
 					}
 					lastRegionPriority = regionPriority;
+				}
+
+				int cnt = resultMatcher.getCount() - lastResultCount;
+				if (cnt == 0 && !longDistance && !phrase.hasObjectType(BOUNDARY)) {
+					if (phrase.getSettings().getRegions() == null) {
+						return;
+					}
+					BinaryMapIndexReader regionsReader = phrase.getSettings().getRegions().getReader();
+					SearchRequest<MapObject> reqRegions = BinaryMapIndexReader.buildAddressByNameRequest(rm, rawDataCollector,
+							phrase.getFullSearchPhrase().toLowerCase(),
+							StringMatcherMode.MULTISEARCH);
+					reqRegions.setBBox(0, 0,0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
+					currentFile[0] = regionsReader;
+					immediateResults.clear();
+					req.setSearchStat(phrase.getSettings().getStat());
+					regionsReader.searchAddressDataByName(reqRegions);
+					for (SearchResult res : immediateResults) {
+						if (res.objectType == ObjectType.BOUNDARY) {
+							if (matchAddressName(phrase, null, res, true)) {
+								subSearchApiOrPublish(phrase, resultMatcher, res, this);
+							}
+						}
+					}
 				}
 			}
 		}
