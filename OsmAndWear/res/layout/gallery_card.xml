@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	android:paddingBottom="@dimen/content_padding_small">
+
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/recycler_view"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content" />
+
+	<net.osmand.plus.widgets.dialogbutton.DialogButton
+		android:id="@+id/view_all"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="@dimen/content_padding"
+		android:paddingHorizontal="@dimen/content_padding"
+		app:dialogButtonHeight="@dimen/dialog_button_height"
+		app:dialogButtonTitle="@string/shared_string_view_all"
+		app:dialogButtonTopMargin="@dimen/content_padding_small"
+		app:dialogButtonTouchableHeight="@dimen/bottom_sheet_list_item_height"
+		app:dialogButtonType="secondaryActive" />
+
+</LinearLayout>

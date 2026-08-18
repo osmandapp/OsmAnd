@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <style name="SplashScreenBaseTheme" parent="OsmandDarkTheme.NoActionbar" />
+</resources>

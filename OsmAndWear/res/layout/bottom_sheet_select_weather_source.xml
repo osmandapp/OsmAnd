@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/list_background_color"
+	android:orientation="vertical"
+	android:paddingBottom="@dimen/content_padding_round_medium">
+
+	<include layout="@layout/bottom_sheet_item_title_with_description" />
+
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/recycler_view"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/content_padding_small"
+		android:layout_marginBottom="@dimen/content_padding_half"
+		android:orientation="horizontal" />
+
+	<net.osmand.plus.widgets.dialogbutton.DialogButton
+		android:id="@+id/cancel_btn"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		app:dialogButtonTitle="@string/shared_string_cancel"
+		app:dialogButtonType="secondary"
+		tools:dialogButtonTitle="Cancel" />
+
+</LinearLayout>

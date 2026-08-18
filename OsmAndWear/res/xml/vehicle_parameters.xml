@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:title="@string/vehicle_parameters">
+
+
+	<Preference
+		android:key="vehicle_parameters_info"
+		android:layout="@layout/preference_info"
+		android:persistent="false"
+		android:selectable="false"
+		tools:icon="@drawable/ic_action_info_dark"
+		tools:title="@string/route_parameters_info" />
+
+</PreferenceScreen>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/text1"
+    android:background="?attr/selectableItemBackground"
+    android:textColor="?android:textColorPrimary"
+    android:singleLine="true"
+    android:textSize="@dimen/default_list_text_size"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="24dp"
+    android:paddingRight="24dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:ellipsize="marquee"
+    android:textAlignment="inherit"
+	android:paddingStart="24dp"
+	android:paddingEnd="24dp" />

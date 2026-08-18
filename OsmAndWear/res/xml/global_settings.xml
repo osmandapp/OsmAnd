@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:title="@string/osmand_settings">
+
+	<Preference
+		android:icon="@drawable/ic_world_globe_dark"
+		android:key="default_application_mode_string"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/settings_preset" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:icon="@drawable/ic_action_map_language"
+		android:key="preferred_locale"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/preferred_locale" />
+
+	<Preference
+		android:key="external_storage_dir"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/application_dir"
+		app:fragment="net.osmand.plus.settings.datastorage.DataStorageFragment"
+		tools:icon="@drawable/ic_action_folder" />
+
+	<Preference
+		android:key="map_rendering_engine"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/map_rendering_engine"
+		tools:icon="@drawable/ic_map" />
+
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
+	<PreferenceCategory
+		android:key="privacy_and_security"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/settings_privacy_and_security" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:icon="@drawable/ic_action_privacy_and_security"
+		android:key="send_anonymous_data"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:persistent="false"
+		android:summaryOff="@string/shared_string_off"
+		android:summaryOn="@string/shared_string_on"
+		android:title="@string/analytics_pref_title" />
+
+	<Preference
+		android:icon="@drawable/ic_action_world_globe"
+		android:key="send_unique_user_identifier"
+		android:layout="@layout/preference_with_end_description"
+		android:summaryOff="@string/shared_string_off"
+		android:summaryOn="@string/shared_string_on"
+		android:title="@string/shared_string_identifiers"
+		app:fragment="net.osmand.plus.settings.fragments.SendUniqueIdentifiersFragment" />
+
+	<Preference
+		android:key="history"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/shared_string_history"
+		app:fragment="net.osmand.plus.settings.fragments.HistorySettingsFragment"
+		tools:icon="@drawable/ic_action_history" />
+
+	<Preference
+		android:key="enable_proxy"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/proxy_pref_title"
+		app:fragment="net.osmand.plus.settings.fragments.ProxySettingsFragment"
+		tools:summary="@string/shared_string_on"
+		tools:icon="@drawable/ic_action_proxy" />
+
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
+	<PreferenceCategory
+		android:key="other"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/shared_string_other" />
+
+	<Preference
+		android:key="dialogs_and_notifications"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/dialogs_and_notifications_title"
+		app:fragment="net.osmand.plus.settings.fragments.DialogsAndNotificationsSettingsFragment"
+		tools:icon="@drawable/ic_action_notification" />
+
+	<Preference
+		android:key="location_source"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/location_source"
+		tools:icon="@drawable/ic_action_device_location" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="auto_backup_enabled"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_off"
+		android:summaryOn="@string/shared_string_on"
+		android:title="@string/auto_backup_title"
+		tools:icon="@drawable/ic_action_android" />
+
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
+	<PreferenceCategory
+		android:key="legal"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/shared_string_legal" />
+
+	<Preference
+		android:key="speed_cameras_uninstalled"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		tools:icon="@drawable/ic_speed_camera_disabled"
+		tools:title="@string/uninstall_speed_cameras" />
+
+</PreferenceScreen>

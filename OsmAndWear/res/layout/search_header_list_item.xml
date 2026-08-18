@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/top_divider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/activity_background_color"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <include layout="@layout/card_bottom_divider"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="8dp"/>
+
+        <include layout="@layout/card_top_divider"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:minHeight="48dp"
+        android:paddingLeft="56dp"
+        android:paddingRight="16dp"
+	    android:paddingEnd="16dp"
+	    android:paddingStart="56dp">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="@dimen/default_desc_text_size"/>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="56dp"
+        android:background="?attr/dashboard_divider"
+	    android:layout_marginStart="56dp" />
+
+</LinearLayout>

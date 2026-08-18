@@ -1,4 +1,5 @@
 include ':OsmAnd'
+include ':OsmAndWear'
 include ':OsmAnd-java'
 include ':OsmAnd-api'
 include ':OsmAnd-telegram'

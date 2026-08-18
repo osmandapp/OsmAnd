@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+	   android:drawable="@drawable/marker_circle_background_on_map_n"
+	   android:insetBottom="11dp"
+	   android:insetLeft="11dp"
+	   android:insetRight="11dp"
+	   android:insetTop="11dp"/>
