@@ -22,7 +22,22 @@ class GpxDataItem(
 
 	fun setAnalysis(analysis: GpxTrackAnalysis?) {
 		this.analysis = analysis
-		updateAnalysisParameters()
+	}
+
+	@Suppress("UNCHECKED_CAST")
+	override fun <T> getParameter(parameter: GpxParameter): T? {
+		if (parameter.analysisParameter) {
+			val value = analysis?.getGpxParameter(parameter) ?: parameter.defaultValue
+			return value as? T
+		}
+		return super.getParameter(parameter)
+	}
+
+	override fun hasParameter(parameter: GpxParameter): Boolean {
+		if (parameter.analysisParameter) {
+			return analysis?.getGpxParameter(parameter) != null
+		}
+		return super.hasParameter(parameter)
 	}
 
 	fun copyData(item: GpxDataItem) {
@@ -38,16 +53,6 @@ class GpxDataItem(
 			}
 		}
 		setAnalysis(item.analysis)
-	}
-
-	private fun updateAnalysisParameters() {
-		val hasAnalysis = analysis != null
-		for (gpxParameter in GpxParameter.entries) {
-			if (gpxParameter.analysisParameter) {
-				map[gpxParameter] =
-					if (hasAnalysis) analysis?.getGpxParameter(gpxParameter) else null
-			}
-		}
 	}
 
 	fun readGpxParams(gpxFile: GpxFile) {
