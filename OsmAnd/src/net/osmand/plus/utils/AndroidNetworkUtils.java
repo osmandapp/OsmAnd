@@ -429,6 +429,72 @@ public class AndroidNetworkUtils {
 		return sendRequest(app, url, params, userOperation, contentType, toastAllowed, post, listener);
 	}
 
+	public static String sendRequest(@Nullable OsmandApplication app, @NonNull String baseUrl,
+	                                 @Nullable Map<String, String> parameters,
+	                                 @Nullable String userOperation, boolean toastAllowed,
+	                                 boolean post, @Nullable Map<String, String> headers,
+	                                 @Nullable OnRequestResultListener listener) {
+		String paramsSeparator = baseUrl.indexOf('?') == -1 ? "?" : "&";
+		String contentType = "application/x-www-form-urlencoded;charset=UTF-8";
+		String params = getParameters(app, parameters, listener, userOperation, toastAllowed);
+		String url = params == null || post ? baseUrl : baseUrl + paramsSeparator + params;
+		String result = null;
+		String error = null;
+		Integer resultCode = null;
+		HttpURLConnection connection = null;
+		try {
+			connection = acquireConnection(app, url, params, contentType, post, headers);
+			resultCode = connection.getResponseCode();
+			if (resultCode != HttpURLConnection.HTTP_OK) {
+				if (app != null) {
+					error = (!Algorithms.isEmpty(userOperation) ? userOperation + " " : "")
+							+ app.getString(R.string.failed_op) + ": " + connection.getResponseMessage();
+				} else {
+					error = (!Algorithms.isEmpty(userOperation) ? userOperation + " " : "")
+							+ "failed: " + connection.getResponseMessage();
+				}
+				if (toastAllowed && app != null) {
+					app.showToastMessage(error);
+				}
+				InputStream errorStream = connection.getErrorStream();
+				if (errorStream != null) {
+					error = streamToString(errorStream);
+				}
+			} else {
+				result = streamToString(connection.getInputStream());
+			}
+		} catch (NullPointerException e) {
+			if (app != null) {
+				error = app.getString(R.string.auth_failed);
+			} else {
+				error = "Authorization failed";
+			}
+			if (toastAllowed && app != null) {
+				app.showToastMessage(error);
+			}
+		} catch (MalformedURLException e) {
+			if (app != null) {
+				error = MessageFormat.format(app.getString(R.string.shared_string_action_template)
+						+ ": " + app.getString(R.string.shared_string_unexpected_error), userOperation);
+			} else {
+				error = "Action " + userOperation + ": Unexpected error";
+			}
+			if (toastAllowed && app != null) {
+				app.showToastMessage(error);
+			}
+		} catch (IOException e) {
+			error = processIOError(app, userOperation, toastAllowed);
+		} finally {
+			if (connection != null) {
+				connection.disconnect();
+			}
+		}
+		if (listener != null) {
+			listener.onResult(result, error, resultCode);
+		}
+		return result;
+	}
+
 	public static String sendRequest(@Nullable OsmandApplication app, @NonNull String url,
 	                                 @Nullable String body, @Nullable String userOperation,
 	                                 @Nullable String contentType, boolean toastAllowed,
@@ -495,11 +561,24 @@ public class AndroidNetworkUtils {
 	private static HttpURLConnection acquireConnection(@Nullable OsmandApplication app,
 	                                                   @NonNull String url, @Nullable String body,
 	                                                   @Nullable String contentType, boolean post) throws IOException {
+		return acquireConnection(app, url, body, contentType, post, null);
+	}
+
+	@NonNull
+	private static HttpURLConnection acquireConnection(@Nullable OsmandApplication app,
+	                                                   @NonNull String url, @Nullable String body,
+	                                                   @Nullable String contentType, boolean post,
+	                                                   @Nullable Map<String, String> headers) throws IOException {
 		HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
 		connection.setRequestProperty("Accept-Charset", "UTF-8");
 		connection.setRequestProperty("User-Agent", app != null ? Version.getFullVersion(app) : "OsmAnd");
 		connection.setConnectTimeout(CONNECT_TIMEOUT);
 		connection.setReadTimeout(READ_TIMEOUT);
+		if (headers != null) {
+			for (Entry<String, String> header : headers.entrySet()) {
+				connection.setRequestProperty(header.getKey(), header.getValue());
+			}
+		}
 		if (body != null && post) {
 			connection.setDoInput(true);
 			connection.setDoOutput(true);
@@ -584,6 +663,11 @@ public class AndroidNetworkUtils {
 	}
 
 	public static String downloadFile(@NonNull String url, @NonNull File fileToSave, boolean gzip, @Nullable IProgress progress) {
+		return downloadFile(url, fileToSave, gzip, progress, null);
+	}
+
+	public static String downloadFile(@NonNull String url, @NonNull File fileToSave, boolean gzip,
+	                                  @Nullable IProgress progress, @Nullable Map<String, String> headers) {
 		String error = null;
 		HttpURLConnection connection = null;
 		try {
@@ -592,6 +676,11 @@ public class AndroidNetworkUtils {
 			connection.setReadTimeout(READ_TIMEOUT);
 			if (gzip) {
 				connection.setRequestProperty("Accept-Encoding", "deflate, gzip");
+			}
+			if (headers != null) {
+				for (Entry<String, String> header : headers.entrySet()) {
+					connection.setRequestProperty(header.getKey(), header.getValue());
+				}
 			}
 			connection.connect();
 			if (connection.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND) {

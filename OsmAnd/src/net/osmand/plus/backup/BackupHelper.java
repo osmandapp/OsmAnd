@@ -452,8 +452,6 @@ public class BackupHelper {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
-		params.put("deviceid", getDeviceId());
-		params.put("accessToken", getAccessToken());
 		params.put("name", fileName);
 		params.put("type", type);
 		params.put("clienttime", String.valueOf(clienttime));
@@ -461,6 +459,8 @@ public class BackupHelper {
 
 		Map<String, String> headers = new HashMap<>();
 		headers.put("Accept-Encoding", "deflate, gzip");
+		headers.put("X-Device-Id", getDeviceId());
+		headers.put("X-Access-Token", getAccessToken());
 
 		OperationLog operationLog = new OperationLog("uploadFile", DEBUG);
 		operationLog.startOperation(type + " " + fileName);
@@ -551,17 +551,20 @@ public class BackupHelper {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
-		params.put("deviceid", getDeviceId());
-		params.put("accessToken", getAccessToken());
 		params.put("allVersions", "true");
 
 		List<ExportType> types = ExportType.getEnabledExportTypes(app, autoSync);
 		if (!Algorithms.isEmpty(types)) {
 			params.put("type", BackupUtils.encodeExportTypes(types));
 		}
+
+		Map<String, String> authHeaders = new HashMap<>();
+		authHeaders.put("X-Device-Id", getDeviceId());
+		authHeaders.put("X-Access-Token", getAccessToken());
+
 		OperationLog operationLog = new OperationLog("downloadFileList", DEBUG);
 		operationLog.startOperation();
-		AndroidNetworkUtils.sendRequest(app, LIST_FILES_URL, params, "Download file list", false, false,
+		AndroidNetworkUtils.sendRequest(app, LIST_FILES_URL, params, "Download file list", false, false, authHeaders,
 				(resultJson, error, resultCode) -> {
 					int status;
 					String message;
@@ -652,10 +655,11 @@ public class BackupHelper {
 		String type = remoteFile.getType();
 		String fileName = remoteFile.getName();
 		StringBuilder builder = new StringBuilder(DOWNLOAD_FILE_URL);
+		Map<String, String> authHeaders = new HashMap<>();
+		authHeaders.put("X-Device-Id", getDeviceId());
+		authHeaders.put("X-Access-Token", getAccessToken());
 		try {
 			Map<String, String> params = new HashMap<>();
-			params.put("deviceid", getDeviceId());
-			params.put("accessToken", getAccessToken());
 			params.put("name", fileName);
 			params.put("type", type);
 			params.put("updatetime", String.valueOf(remoteFile.getUpdatetimems()));
@@ -709,7 +713,7 @@ public class BackupHelper {
 				}
 			};
 			iProgress.startWork(remoteFile.getFilesize() / 1024);
-			error = AndroidNetworkUtils.downloadFile(builder.toString(), file, true, iProgress);
+			error = AndroidNetworkUtils.downloadFile(builder.toString(), file, true, iProgress, authHeaders);
 		} catch (UnsupportedEncodingException e) {
 			error = "UnsupportedEncodingException";
 		}

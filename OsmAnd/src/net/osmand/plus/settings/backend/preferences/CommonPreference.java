@@ -34,6 +34,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 
 	private boolean cache;
 	private boolean global;
+	private boolean secure;
 	private boolean shared;
 	private boolean lastModifiedTimeStored;
 	private String pluginId;
@@ -103,6 +104,12 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		return this;
 	}
 
+	public final CommonPreference<T> makeSecure() {
+		secure = true;
+		global = true;
+		return this;
+	}
+
 	public final CommonPreference<T> cache() {
 		cache = true;
 		return this;
@@ -128,6 +135,9 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 	}
 
 	protected final Object getPreferences() {
+		if (secure) {
+			return settings.getSecurePreferences();
+		}
 		return settings.getPreferences(global);
 	}
 
