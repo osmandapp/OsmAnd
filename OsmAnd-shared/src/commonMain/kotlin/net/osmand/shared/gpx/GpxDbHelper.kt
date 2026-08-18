@@ -132,13 +132,13 @@ object GpxDbHelper : GpxReaderAdapter {
 			}
 		}
 
-		var removedDirs = 0
+		var removedDirRows = 0
 		dirSnapshot.forEach { (file, snapshotItem) ->
 			if (dirItems[file] === snapshotItem &&
 					(!isInsideGpxRoot(file, gpxRoot) || !file.exists())) {
 				if (database.remove(file)) {
 					removeFromCache(file)
-					removedDirs++
+					removedDirRows++
 				}
 			}
 		}
@@ -157,7 +157,7 @@ object GpxDbHelper : GpxReaderAdapter {
 		log.info(
 			"Reconciled GPX filesystem in ${currentTimeMillis() - start} ms: " +
 					"checked=${dataSnapshot.size}, removed=$removedFiles, " +
-					"removedDirs=$removedDirs, queuedModified=$queuedModifiedItems"
+					"removedDirRows=$removedDirRows, queuedModified=$queuedModifiedItems"
 		)
 	}
 

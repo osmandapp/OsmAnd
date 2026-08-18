@@ -41,6 +41,47 @@ class GpxDatabase {
 			"SELECT %s, count (*) as $TMP_NAME_COLUMN_COUNT FROM $GPX_TABLE_NAME%s group by %s ORDER BY %s %s"
 
 		val BATCH_SIZE = 100
+
+		internal fun resolveItemFile(
+			appDir: KFile,
+			gpxDir: KFile,
+			fileName: String,
+			storedFileDir: String,
+			directory: Boolean
+		): KFile {
+			if (fileName == gpxDir.name()) {
+				return gpxDir
+			}
+			val fileDir = getRelativeFileDir(appDir, gpxDir, storedFileDir)
+			val storedDir = if (fileDir.isEmpty()) gpxDir else KFile(gpxDir, fileDir)
+			// File rows store their parent directory, while nested directory rows store
+			// the directory's own relative path in FILE_DIR.
+			return if (directory && storedDir != gpxDir && storedDir.name() == fileName) {
+				storedDir
+			} else {
+				KFile(storedDir, fileName)
+			}
+		}
+
+		private fun getRelativeFileDir(appDir: KFile, gpxDir: KFile, storedFileDir: String): String {
+			val appPath = appDir.path().trimEnd('/')
+			val gpxPath = gpxDir.path().trimEnd('/')
+			return when {
+				storedFileDir == gpxPath -> ""
+				storedFileDir.startsWith("$gpxPath/") -> storedFileDir.removePrefix("$gpxPath/")
+				storedFileDir == appPath -> ""
+				storedFileDir.startsWith("$appPath/") -> {
+					val relativeToApp = storedFileDir.removePrefix("$appPath/")
+					when {
+						relativeToApp == gpxDir.name() -> ""
+						relativeToApp.startsWith("${gpxDir.name()}/") ->
+							relativeToApp.removePrefix("${gpxDir.name()}/")
+						else -> relativeToApp
+					}
+				}
+				else -> storedFileDir
+			}
+		}
 	}
 
 	fun openConnection(readonly: Boolean): SQLiteConnection? {
@@ -186,7 +227,7 @@ class GpxDatabase {
 	}
 
 	private fun readGpxDataItem(query: SQLiteCursor): GpxDataItem {
-		val file = readItemFile(query)
+		val file = readItemFile(query, directory = false)
 		val item = GpxDataItem.fromDatabase(file)
 		val analysis = GpxTrackAnalysis().apply { collectPointData = false }
 		processItemParameters(item, query, entries, analysis)
@@ -194,19 +235,13 @@ class GpxDatabase {
 		return item
 	}
 
-	private fun readItemFile(query: SQLiteCursor): KFile {
-		var fileDir: String = query.getString(query.getColumnIndex(FILE_DIR.columnName))
+	private fun readItemFile(query: SQLiteCursor, directory: Boolean): KFile {
+		val fileDir: String = query.getString(query.getColumnIndex(FILE_DIR.columnName))
 		val fileName = query.getString(query.getColumnIndex(FILE_NAME.columnName))
 
 		val appDir = PlatformUtil.getOsmAndContext().getAppDir()
 		val gpxDir = PlatformUtil.getOsmAndContext().getGpxDir()
-		if (fileName == gpxDir.name()) {
-			return gpxDir
-		}
-		fileDir = fileDir.replace(gpxDir.toString(), "")
-		fileDir = fileDir.replace(appDir.toString(), "")
-		val dir = if (fileDir.isEmpty()) gpxDir else KFile(gpxDir, fileDir)
-		return KFile(dir, fileName)
+		return resolveItemFile(appDir, gpxDir, fileName, fileDir, directory)
 	}
 
 	private fun processItemParameters(
@@ -240,7 +275,7 @@ class GpxDatabase {
 	}
 
 	private fun readGpxDirItem(query: SQLiteCursor): GpxDirItem {
-		val file = readItemFile(query)
+		val file = readItemFile(query, directory = true)
 		val item = GpxDirItem.fromDatabase(file)
 		processItemParameters(item, query, GpxParameter.getGpxDirParameters(), null)
 		return item
