@@ -169,6 +169,16 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		getPreferenceScreen().addPreference(timeConditionalRouting);
 	}
 
+	private void setupOnlinePublicTransportPref() {
+		SwitchPreferenceEx onlinePublicTransport = createSwitchPreferenceEx(settings.USE_ONLINE_PUBLIC_TRANSPORT.getId(),
+				R.string.use_online_public_transport, R.layout.preference_with_descr_dialog_and_switch);
+		onlinePublicTransport.setDescription(getString(R.string.use_online_public_transport_descr));
+		onlinePublicTransport.setSummaryOn(R.string.shared_string_enabled);
+		onlinePublicTransport.setSummaryOff(R.string.shared_string_disabled);
+		onlinePublicTransport.setIconSpaceReserved(true);
+		getPreferenceScreen().addPreference(onlinePublicTransport);
+	}
+
 	private void setupOsmLiveForPublicTransportPref() {
 		SwitchPreferenceEx useOsmLiveForPublicTransport = createSwitchPreferenceEx(settings.USE_OSM_LIVE_FOR_PUBLIC_TRANSPORT.getId(),
 				R.string.use_live_public_transport, R.layout.preference_with_descr_dialog_and_switch);
@@ -204,6 +214,10 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	private void setupRoutingPrefs() {
 		PreferenceScreen screen = getPreferenceScreen();
 		ApplicationMode am = getSelectedAppMode();
+
+		if (am.isDerivedRoutingFrom(ApplicationMode.PUBLIC_TRANSPORT)) {
+			setupOnlinePublicTransportPref();
+		}
 
 		SwitchPreferenceEx fastRoute = createSwitchPreferenceEx(app.getSettings().FAST_ROUTE_MODE.getId(), R.string.fast_route_mode, R.layout.preference_with_descr_dialog_and_switch);
 		fastRoute.setIcon(getRoutingPrefIcon(app.getSettings().FAST_ROUTE_MODE.getId()));

@@ -23,6 +23,7 @@ public class TransportStop extends MapObject {
 	private List<TransportStopExit> exits;
 	private List<TransportRoute> routes = null;
 	private TransportStopAggregated transportStopAggregated;
+	private String platform;
 
 	public TransportStop() {}
 	
@@ -36,6 +37,14 @@ public class TransportStop extends MapObject {
 
 	public void setRoutes(List<TransportRoute> routes) {
 		this.routes = routes;
+	}
+
+	public String getPlatform() {
+		return platform;
+	}
+
+	public void setPlatform(String platform) {
+		this.platform = platform;
 	}
 	
 	public void addRoute(TransportRoute rt) {

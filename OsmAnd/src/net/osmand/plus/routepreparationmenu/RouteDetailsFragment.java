@@ -444,9 +444,14 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		Drawable icon = getContentIcon(drawableResId);
 
 		Typeface typeface = FontCache.getMediumFont();
-		String timeText = OsmAndFormatter.getFormattedDurationShortMinutes(startTime[0]);
+		String timeText = getStopTimeText(segment.departureTimeMillis, startTime[0]);
 
-		SpannableString secondaryText = new SpannableString(getString(R.string.sit_on_the_stop));
+		String sitText = getString(R.string.sit_on_the_stop);
+		String startPlatform = getPlatformText(startStop);
+		if (startPlatform != null) {
+			sitText = getString(R.string.ltr_or_rtl_combine_via_bold_point, sitText, startPlatform);
+		}
+		SpannableString secondaryText = new SpannableString(sitText);
 		secondaryText.setSpan(new ForegroundColorSpan(getMainFontColor()), 0, secondaryText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 		SpannableString title = new SpannableString(startStop.getName(getPreferredMapLang(), isTransliterateNames()));
@@ -460,7 +465,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 			}
 		});
 
-		buildTransportStopRouteRow(stopsContainer, transportStopRoute, new OnClickListener() {
+		buildTransportStopRouteRow(stopsContainer, transportStopRoute, transportRoute.getUrl(), new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				showRouteSegmentOnMap(segment);
@@ -470,7 +475,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		for (TransportRouteResultSegment alt : segment.alternatives) {
 			TransportStopRoute altTransportStopRoute = TransportStopRoute.getTransportStopRoute(alt.route,
 					alt.getTravelStops().get(0));
-			buildTransportStopRouteRow(stopsContainer, altTransportStopRoute, new OnClickListener() {
+			buildTransportStopRouteRow(stopsContainer, altTransportStopRoute, null, new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					showRouteSegmentOnMap(alt);
@@ -524,9 +529,14 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		}
 		// fix later for schedule
 		startTime[0] += (int) segment.getTravelTime();
-		String textTime = OsmAndFormatter.getFormattedDurationShortMinutes(startTime[0]);
+		String textTime = getStopTimeText(segment.arrivalTimeMillis, startTime[0]);
 
-		secondaryText = new SpannableString(getString(R.string.exit_at));
+		String exitText = getString(R.string.exit_at);
+		String endPlatform = getPlatformText(endStop);
+		if (endPlatform != null) {
+			exitText = getString(R.string.ltr_or_rtl_combine_via_bold_point, exitText, endPlatform);
+		}
+		secondaryText = new SpannableString(exitText);
 		secondaryText.setSpan(new CustomTypefaceSpan(typeface), 0, secondaryText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		int spaceIndex = secondaryText.toString().indexOf(" ");
 		if (spaceIndex != -1) {
@@ -546,7 +556,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		((ViewGroup) view).addView(baseContainer);
 
 		if (nextSegment != null) {
-			double walkDist = (long) getWalkDistance(segment, nextSegment, segment.walkDist);
+			double walkDist = (long) getWalkDistance(segment, nextSegment, nextSegment.walkDist);
 
 			if (walkDist > 0) {
 				int walkTime = (int) getWalkTime(segment, nextSegment, walkDist, walkSpeed);
@@ -619,6 +629,26 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		}
 	}
 
+	private String getStopTimeText(long epochMillis, int fallbackDurationSec) {
+		if (epochMillis > 0) {
+			return OsmAndFormatter.getFormattedTimeShort(epochMillis / 1000, false);
+		}
+		return OsmAndFormatter.getFormattedDurationShortMinutes(fallbackDurationSec);
+	}
+
+	@Nullable
+	private String getPlatformText(@NonNull TransportStop stop) {
+		String platform = stop.getPlatform();
+		if (platform == null) {
+			return null;
+		}
+		int slash = platform.indexOf('/');
+		if (slash > 0 && slash < platform.length() - 1) {
+			return getString(R.string.transit_platform_track, platform.substring(0, slash), platform.substring(slash + 1));
+		}
+		return getString(R.string.transit_platform, platform);
+	}
+
 	private void buildStartItem(@NonNull View view, TargetPoint start, int[] startTime,
 								TransportRouteResultSegment segment, double walkSpeed) {
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
@@ -637,7 +667,13 @@ public class RouteDetailsFragment extends ContextMenuFragment
 			name = getString(R.string.shared_string_my_location);
 		}
 		Spannable startTitle = new SpannableString(name);
-		String text = OsmAndFormatter.getFormattedDurationShortMinutes(startTime[0]);
+		double walkDist = (long) getWalkDistance(null, segment, segment.walkDist);
+		int walkTime = (int) getWalkTime(null, segment, walkDist, walkSpeed);
+		if (walkTime < 60) {
+			walkTime = 60;
+		}
+		long startEpoch = segment.departureTimeMillis > 0 ? segment.departureTimeMillis - walkTime * 1000L : -1;
+		String text = getStopTimeText(startEpoch, startTime[0]);
 
 		int drawableId = start == null ? R.drawable.ic_action_location_color : R.drawable.list_startpoint;
 		Drawable icon = app.getUIUtilities().getIcon(drawableId);
@@ -651,11 +687,6 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		addWalkRouteIcon(imagesContainer);
 		buildRowDivider(infoContainer, true);
 
-		double walkDist = (long) getWalkDistance(null, segment, segment.walkDist);
-		int walkTime = (int) getWalkTime(null, segment, walkDist, walkSpeed);
-		if (walkTime < 60) {
-			walkTime = 60;
-		}
 		startTime[0] += walkTime;
 		SpannableStringBuilder title = new SpannableStringBuilder(Algorithms.capitalizeFirstLetter(getString(R.string.shared_string_walk)));
 		title.setSpan(new ForegroundColorSpan(getSecondaryColor()), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -760,7 +791,8 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		buildRowDivider(infoContainer, true);
 		addWalkRouteIcon(imagesContainer);
 
-		String timeStr = OsmAndFormatter.getFormattedDurationShortMinutes(startTime[0] + walkTime);
+		long destEpoch = segment.arrivalTimeMillis > 0 ? segment.arrivalTimeMillis + walkTime * 1000L : -1;
+		String timeStr = getStopTimeText(destEpoch, startTime[0] + walkTime);
 		String name = getRoutePointDescription(destination.getLatLon(), destination.getOnlyName());
 		SpannableString title = new SpannableString(name);
 		title.setSpan(new CustomTypefaceSpan(typeface), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -931,7 +963,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	}
 
 	public void buildTransportStopRouteRow(@NonNull View view, @NonNull TransportStopRoute transportStopRoute,
-										   OnClickListener onClickListener) {
+										   @Nullable String ticketUrl, OnClickListener onClickListener) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return;
@@ -964,6 +996,21 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		AndroidUtils.setMargins(routeBadgeParams, 0, dpToPx(6), 0, dpToPx(8));
 		routeBadge.setLayoutParams(routeBadgeParams);
 		llText.addView(routeBadge);
+
+		if (ticketUrl != null) {
+			ImageView ticketIcon = new ImageView(view.getContext());
+			ticketIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_price_tag));
+			ticketIcon.setContentDescription(getString(R.string.transit_buy_ticket));
+			ticketIcon.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+			LinearLayout.LayoutParams ticketParams = new LinearLayout.LayoutParams(dpToPx(40), dpToPx(40));
+			ticketParams.gravity = Gravity.CENTER_VERTICAL;
+			AndroidUtils.setMargins(ticketParams, dpToPx(4), 0, dpToPx(4), 0);
+			ticketIcon.setLayoutParams(ticketParams);
+			AndroidUtils.setPadding(ticketIcon, dpToPx(8), dpToPx(8), dpToPx(8), dpToPx(8));
+			ticketIcon.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
+			ticketIcon.setOnClickListener(v -> AndroidUtils.openUrl(v.getContext(), ticketUrl, isNightMode()));
+			ll.addView(ticketIcon);
+		}
 
 		if (onClickListener != null) {
 			ll.setOnClickListener(onClickListener);

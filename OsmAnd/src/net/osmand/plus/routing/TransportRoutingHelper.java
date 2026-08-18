@@ -22,6 +22,7 @@ import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.transport.online.OnlineTransportRouteTranslator;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.NativeTransportRoutingResult;
@@ -130,6 +131,10 @@ public class TransportRoutingHelper {
 			return walkingRouteSegments.get(new Pair<>(s1, s2));
 		}
 		return null;
+	}
+
+	public Map<Pair<TransportRouteResultSegment, TransportRouteResultSegment>, RouteCalculationResult> getWalkingRouteSegments() {
+		return walkingRouteSegments;
 	}
 
 	public int getWalkingTime(@NonNull List<TransportRouteResultSegment> segments) {
@@ -277,7 +282,7 @@ public class TransportRoutingHelper {
 						updateProgress(params);
 					}
 				} else {
-					if (routes != null && routes.size() > 0) {
+					if (routes != null && routes.size() > 0 && currentRoute < 0) {
 						setCurrentRoute(0);
 					}
 					progressRoute.finish();
@@ -528,6 +533,13 @@ public class TransportRoutingHelper {
 			GeneralRouter prouter = config.getRouter(params.mode.getRoutingProfile());
 			TransportRoutingConfiguration cfg = new TransportRoutingConfiguration(prouter, params.params);
 
+			if (settings.USE_ONLINE_PUBLIC_TRANSPORT.get()) {
+				List<TransportRouteResult> res = OnlineTransportRouteTranslator.buildRoutes(settings, params.params, params.start, params.end, cfg);
+				if (!res.isEmpty()) {
+					return res;
+				}
+			}
+
 			TransportRoutingContext ctx = new TransportRoutingContext(cfg, library, files);
 			ctx.calculationProgress = params.calculationProgress;
 			if (ctx.library != null && !settings.PT_SAFE_MODE.get() && !DISABLE_NATIVE) {
@@ -713,6 +725,18 @@ public class TransportRoutingHelper {
 			try {
 				res = calculateRouteImpl(params, lib);
 				if (res != null && !params.calculationProgress.isCancelled) {
+					if (params.ctx.getSettings().USE_ONLINE_PUBLIC_TRANSPORT.get()) {
+						// online transit: show the result immediately, walking legs are routed after and refine the display
+						synchronized (transportRoutingHelper) {
+							transportRoutingHelper.routes = res;
+							transportRoutingHelper.currentRoute = res.isEmpty() ? -1 : 0;
+							transportRoutingHelper.walkingRouteSegments = null;
+							if (params.resultListener != null) {
+								params.resultListener.onRouteCalculated(res);
+							}
+						}
+						transportRoutingHelper.setNewRoute(res);
+					}
 					calculateWalkingRoutes(res);
 				}
 			} catch (Exception e) {

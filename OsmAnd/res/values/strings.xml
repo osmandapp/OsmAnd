@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="use_online_public_transport">Online public transport timetables</string>
+	<string name="use_online_public_transport_descr">Route public transport using live online timetables instead of offline OSM schedules. Requires an internet connection.</string>
+	<string name="transit_departure_time">Departure time</string>
+	<string name="transit_leave_now">Leave now</string>
+	<string name="transit_depart_at">Depart at…</string>
+	<string name="transit_arrive_by">Arrive by…</string>
+	<string name="transit_arrive_prefix">Arrive %1$s</string>
+	<string name="transit_later_departures">Later departures</string>
+	<string name="transit_optimize">Optimize</string>
+	<string name="transit_opt_best">Best route</string>
+	<string name="transit_opt_fewest_changes">Fewest transfers</string>
+	<string name="transit_opt_least_walking">Least walking</string>
+	<string name="transit_wheelchair">Wheelchair accessible</string>
+	<string name="transit_platform">Platform %1$s</string>
+	<string name="transit_platform_track">Platform %1$s, track %2$s</string>
+	<string name="transit_buy_ticket">Buy ticket</string>
 <!--
 	README:
 	- The preferred way to help with translations is via https://hosted.weblate.org/engage/osmand/
@@ -2743,6 +2759,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="icon_group_special">Special</string>
     <string name="icon_group_amenity">Amenity</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="ltr_or_rtl_combine_via_arrow">%1$s → %2$s</string>
     <string name="shared_string_local_maps">Local maps</string>
     <string name="message_graph_will_be_available_after_recalculation">Please wait.\nGraph will be available after route recalculation.</string>
     <string name="shared_string_graph">Graph</string>

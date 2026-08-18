@@ -16,6 +16,7 @@ public class TransportRoute extends MapObject {
 	private List<TransportStop> forwardStops = new ArrayList<TransportStop>();
 	private String ref;
 	private String operator;
+	private String url;
 	private String type;
 	private Integer dist = null;
 	private String color;
@@ -35,6 +36,7 @@ public class TransportRoute extends MapObject {
 		this.names = r.names;
 		this.id = r.id;
 		this.operator = r.operator;
+		this.url = r.url;
 		this.ref = r.ref;
 		this.type = r.type;
 		this.color = r.color;
@@ -282,6 +284,14 @@ public class TransportRoute extends MapObject {
 		return operator;
 	}
 	
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
 	public void setOperator(String operator) {
 		this.operator = operator;
 	}
