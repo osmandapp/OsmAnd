@@ -547,8 +547,9 @@ class GpxTrackAnalysis {
 				}
 				updateHdop(point)
 
+				val hasPartialStart = j == 1 && s.startCoeff > 0
 				var distance = point.attributes?.distance ?: -1f
-				if (j == 1 && s.startCoeff > 0) {
+				if (hasPartialStart) {
 					distance = -1f
 				}
 				if (j > 0) {
@@ -625,7 +626,7 @@ class GpxTrackAnalysis {
 					a
 				}
 
-				// Update fields (no new object created)
+				// Update fields
 				attributes.distance = distance
 				attributes.timeDiff = timeDiff.toFloat()
 				attributes.firstPoint = firstPoint
@@ -842,9 +843,6 @@ class GpxTrackAnalysis {
 		}
 		if (!hasElevationData() && !attributes.elevation.isNaN()) {
 			setHasData(POINT_ELEVATION, true)
-		}
-		if (point.attributes != attributes) {
-			point.attributes = attributes
 		}
 		pointsAnalyser?.onAnalysePoint(this, point, attributes)
 		if (collectPointData) {
@@ -1095,6 +1093,10 @@ class GpxTrackAnalysis {
 	}
 
 	fun interface TrackPointsAnalyser {
+		/**
+		 * The supplied attribute may be detached from `point.attributes` for interval-specific
+		 * boundary calculations. Implementations should read and update the supplied attribute.
+		 */
 		fun onAnalysePoint(analysis: GpxTrackAnalysis, point: WptPt, attribute: PointAttributes)
 	}
 }
