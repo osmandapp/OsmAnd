@@ -13,6 +13,7 @@ import android.text.TextUtils;
 import android.text.style.StyleSpan;
 import android.view.View;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -66,6 +67,7 @@ import net.osmand.plus.plugins.osmedit.quickactions.AddPOIAction;
 import net.osmand.plus.plugins.osmedit.quickactions.ShowHideOSMBugAction;
 import net.osmand.plus.plugins.osmedit.quickactions.ShowHideOSMEditsAction;
 import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
@@ -93,6 +95,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 
@@ -623,6 +626,30 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	@Override
 	public Drawable getAssetResourceImage() {
 		return app.getUIUtilities().getIcon(R.drawable.osm_editing);
+	}
+
+	/**
+	 * Resolve the icon of the (possibly modified) POI type of an edited entity
+	 */
+	@DrawableRes
+	public static int getPoiTypeIconId(@NonNull OsmandApplication app, @NonNull Entity entity) {
+		String poiTranslation = entity.getTag(POI_TYPE_TAG);
+		if (poiTranslation != null) {
+			Map<String, PoiType> poiTypeMap = app.getPoiTypes().getAllTranslatedNames(false);
+			PoiType poiType = poiTypeMap.get(poiTranslation.toLowerCase());
+			if (poiType != null) {
+				String id = null;
+				if (RenderingIcons.containsBigIcon(poiType.getIconKeyName())) {
+					id = poiType.getIconKeyName();
+				} else if (RenderingIcons.containsBigIcon(poiType.getOsmTag() + "_" + poiType.getOsmValue())) {
+					id = poiType.getOsmTag() + "_" + poiType.getOsmValue();
+				}
+				if (id != null) {
+					return RenderingIcons.getBigIconResourceId(id);
+				}
+			}
+		}
+		return 0;
 	}
 
 	public static String getEditName(OsmPoint point) {

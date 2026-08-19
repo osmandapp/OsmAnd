@@ -50,6 +50,7 @@ public abstract class SelectFavouriteBottomSheet extends MenuBottomSheetDialogFr
 		sortMode = settings.FAVORITES_SORT_MODE.get();
 
 		adapter = new FavouritesAdapter(requireContext(), points);
+		adapter.setReferenceLocation(getReferenceLocation());
 		favouritesHelper = app.getFavoritesHelper();
 		if (favouritesHelper.isFavoritesLoaded()) {
 			loadFavorites();
@@ -122,9 +123,12 @@ public abstract class SelectFavouriteBottomSheet extends MenuBottomSheetDialogFr
 
 	private void sortFavourites() {
 		Collator collator = Collator.getInstance();
-		Location location = app.getLocationProvider().getLastStaleKnownLocation();
-		LatLon latLon = location != null ? new LatLon(location.getLatitude(), location.getLongitude())
-				: app.getMapViewTrackingUtilities().getMapLocation();
+		LatLon latLon = getReferenceLocation();
+		if (latLon == null) {
+			Location location = app.getLocationProvider().getLastStaleKnownLocation();
+			latLon = location != null ? new LatLon(location.getLatitude(), location.getLongitude())
+					: app.getMapViewTrackingUtilities().getMapLocation();
+		}
 
 		FavouritesComparator comparator = new FavouritesComparator(app, collator, latLon, sortMode);
 		Collections.sort(points, comparator);
@@ -208,6 +212,15 @@ public abstract class SelectFavouriteBottomSheet extends MenuBottomSheetDialogFr
 	@Override
 	protected int getCustomHeight() {
 		return dpToPx(300);
+	}
+
+	/**
+	 * @return the location distances and directions should relate to,
+	 * or null to use the current location
+	 */
+	@Nullable
+	protected LatLon getReferenceLocation() {
+		return null;
 	}
 
 	protected abstract void onFavouriteSelected(@NonNull FavouritePoint favourite);

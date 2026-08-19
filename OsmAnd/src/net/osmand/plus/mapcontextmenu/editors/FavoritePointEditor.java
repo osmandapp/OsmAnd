@@ -13,9 +13,11 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Entity.EntityType;
+import net.osmand.osm.edit.OSMSettings.OSMTagKey;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
+import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.search.AmenitySearcher;
@@ -73,6 +75,11 @@ public class FavoritePointEditor extends PointEditor {
 		}
 		favorite = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), title, lastCategory, altitude, 0);
 		favorite.setDescription("");
+		if (Algorithms.isEmpty(address) && object instanceof OpenstreetmapPoint point) {
+			// use the address entered in the OSM editor, reverse geocoding
+			// is not available for edited points yet
+			address = getEntityAddress(point.getEntity());
+		}
 		favorite.setAddress(address.isEmpty() ? title : address);
 
 		Amenity amenity = null;
@@ -97,7 +104,25 @@ public class FavoritePointEditor extends PointEditor {
 		} else if (object instanceof RenderedObject renderedObject) {
 			setMapObject(renderedObject);
 		}
+		if (object instanceof OpenstreetmapPoint point) {
+			// the icon should reflect the possibly modified type of the edited POI,
+			// map data may still contain the previous type (or none for created POIs)
+			int iconId = OsmEditingPlugin.getPoiTypeIconId(app, point.getEntity());
+			if (iconId != 0) {
+				favorite.setIconId(iconId);
+			}
+		}
 		FavoritePointEditorFragment.showInstance(mapActivity);
+	}
+
+	@NonNull
+	private String getEntityAddress(@NonNull Entity entity) {
+		String street = entity.getTag(OSMTagKey.ADDR_STREET);
+		String houseNumber = entity.getTag(OSMTagKey.ADDR_HOUSE_NUMBER);
+		if (!Algorithms.isEmpty(street)) {
+			return Algorithms.isEmpty(houseNumber) ? street : street + " " + houseNumber;
+		}
+		return "";
 	}
 
 	private void setAmenity(@NonNull Amenity amenity) {

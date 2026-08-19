@@ -56,6 +56,14 @@ public class SelectFavouriteToReplaceBottomSheet extends SelectFavouriteBottomSh
 	}
 
 	@Nullable
+	@Override
+	protected LatLon getReferenceLocation() {
+		// when replacing, distances should relate to the new point, not to the current location
+		FavouritePoint point = getReplacementPoint();
+		return point != null ? new LatLon(point.getLatitude(), point.getLongitude()) : null;
+	}
+
+	@Nullable
 	private FavouritePoint getReplacementPoint() {
 		Fragment target = getTargetFragment();
 		if (target instanceof FavoritePointEditorFragment editorFragment) {

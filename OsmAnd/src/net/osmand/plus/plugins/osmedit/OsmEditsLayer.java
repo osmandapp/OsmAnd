@@ -27,7 +27,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
 import net.osmand.plus.AppInitEvents;
 import net.osmand.plus.AppInitializeListener;
@@ -42,7 +41,6 @@ import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
 import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapLocalUtil;
 import net.osmand.plus.plugins.osmedit.helpers.OsmBugsLocalUtil;
-import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -62,7 +60,6 @@ import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvider, IMoveObjectProvider,
 		MapTextProvider<OpenstreetmapPoint> {
@@ -224,21 +221,8 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 		if (osmPoint.getGroup() == POI) {
 			OpenstreetmapPoint osmP = (OpenstreetmapPoint) osmPoint;
 			int iconResId = 0;
-			String poiTranslation = osmP.getEntity().getTag(Entity.POI_TYPE_TAG);
-			if (poiTranslation != null && ctx != null) {
-				Map<String, PoiType> poiTypeMap = app.getPoiTypes().getAllTranslatedNames(false);
-				PoiType poiType = poiTypeMap.get(poiTranslation.toLowerCase());
-				if (poiType != null) {
-					String id = null;
-					if (RenderingIcons.containsBigIcon(poiType.getIconKeyName())) {
-						id = poiType.getIconKeyName();
-					} else if (RenderingIcons.containsBigIcon(poiType.getOsmTag() + "_" + poiType.getOsmValue())) {
-						id = poiType.getOsmTag() + "_" + poiType.getOsmValue();
-					}
-					if (id != null) {
-						iconResId = RenderingIcons.getBigIconResourceId(id);
-					}
-				}
+			if (ctx != null) {
+				iconResId = OsmEditingPlugin.getPoiTypeIconId(app, osmP.getEntity());
 			}
 			if (iconResId == 0) {
 				iconResId = R.drawable.ic_action_info_dark;
