@@ -257,9 +257,14 @@ public class SpatialSearchToken {
 		if (existing != null) {
 			if (existing != atom) {
 				// compare convention like method important!
+				// a school
+				int res = Boolean.compare(atom.name.startsWith(NameIndexReader.POI_CATEGORY_PREFIX), 
+						existing.name.startsWith(NameIndexReader.POI_CATEGORY_PREFIX));
 				// select shortest available version
-				int res = Integer.compare(atom.otherWordsCnt + atom.otherFoundCnt,
-						existing.otherWordsCnt + existing.otherFoundCnt);
+				if (res == 0) {
+					res = Integer.compare(atom.otherWordsCnt + atom.otherFoundCnt,
+							existing.otherWordsCnt + existing.otherFoundCnt);
+				}
 				// '2 south 2nd street' vs '25 садова вулиця' (25-та) -
 				if (res == 0 && !SearchAlgorithms.isNumber2Letters(wordAligned)) {
 					// a school

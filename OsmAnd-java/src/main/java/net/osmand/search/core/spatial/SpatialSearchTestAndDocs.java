@@ -393,7 +393,9 @@ public class SpatialSearchTestAndDocs {
 //		query = "андріівський узвіз Школа "; // ALWAYS_READ_COMMON_WORDS_ATOMS = true
 //		query = "25-та школа"; // 25-та школа, 25-та school
 		
-//		pattern = "Ukraine_kyiv";
+		pattern = "Ukraine_kyiv";
+//		settings.DEV_USE_PIPELINE = false;
+//		query = "А+"; // + 731005224 34010
 //		query = "Школа А+"; // +
 //		query = "початкова А+"; // - -> +
 //		query = "початкова школа А+"; // - -> +
@@ -420,9 +422,9 @@ public class SpatialSearchTestAndDocs {
 //		query = "Holmby road 18 B"; // 'Holmby 18 B', 'Holmby 18-B', 'Holmby 18B'
 //		query = "Holmby Melbourne 18B";
 		
-		pattern = "Slovakia";
-		pattern2 = "Ukraine_";
-		query = "Bratislava Billa";
+//		pattern = "Slovakia";
+//		pattern2 = "Ukraine_";
+//		query = "Bratislava Billa";
 //		settings.DEDUPLICATE_RES = false;
 //		settings.ALLOW_HOUSE_POI_TYPE_INTERSECTION = false;
 //		query = "Shell 2 Rožňavská";
@@ -496,7 +498,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "Venezia";
 		
 		
-		pattern = "Portugal";
+//		pattern = "Portugal";
 //		settings.DEV_USE_PIPELINE = false;
 //		location = new LatLon(39.7412, -8.8012); 
 		// Barreira Urbanização Vale da Cabrita, 258548289, 696751116
@@ -508,7 +510,7 @@ public class SpatialSearchTestAndDocs {
 //		pattern = "portugal_travessa.gen";
 //		query = "Travessa de Santo António Rua Joaquim Ribeiro de Carvalho Portugal"; // 1
 //		query = "Travessa de Santo António Rua Joaquim Ribeiro de Carvalho Portugal "; // 1
-		query = "Travessa de Santo António rua Joaquim Ribeiro de Carvalho Portugal"; // 1
+//		query = "Travessa de Santo António rua Joaquim Ribeiro de Carvalho Portugal"; // 1
 		
 //		query = "Santo António Carvalho Portugal"; // 1
 //		query = " Santo António Ribeiro"; // 20
@@ -747,8 +749,8 @@ public class SpatialSearchTestAndDocs {
 				return "банк";
 			} else if (keyName.equals("island")) {
 				return "остров";
-//			} else if (keyName.equals("school")) {
-//				return "школа";
+			} else if (keyName.equals("school")) {
+				return "школа";
 			} else if (keyName.equals("rugby_union")) {
 				return "rugby 9";
 			} else if (keyName.equals("9pin")) {
