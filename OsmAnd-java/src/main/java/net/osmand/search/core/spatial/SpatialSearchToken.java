@@ -286,11 +286,11 @@ public class SpatialSearchToken {
 	boolean matchName(String name, TIntArrayList poiTypes) {
 //		System.out.printf("query '%s' matches '%s' %s\n", word, name, collatorMain.matches(name) || 
 //				collatorMain.matches(name.replace(' ', '-')));
-		if (name.startsWith(NameIndexReader.POI_CATEGORY_PREFIX)) {
-			return poiTypes != null && matchPoiCategoryKeys(poiTypes);
-		}
 		if (categoryMatchMode) {
 			return name.equals(word);
+		}
+		if (name.startsWith(NameIndexReader.POI_CATEGORY_PREFIX)) {
+			return poiTypes != null && matchPoiCategoryKeys(poiTypes);
 		}
 		Boolean cache = fastMatchCheck.get(name);
 		if (cache != null) {
