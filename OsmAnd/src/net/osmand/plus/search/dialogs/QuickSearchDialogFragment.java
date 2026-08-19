@@ -106,6 +106,7 @@ import net.osmand.util.RegionCodeUtils;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 
 public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment implements OsmAndCompassListener,
 		OsmAndLocationListener, DownloadEvents, OnPreferenceChanged {
@@ -2576,7 +2577,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	                            SearchPhrase phrase,
 	                            boolean hasRegionCollection,
 	                            SearchResultListener resultListener) {
-		app.runInUIThread(() -> {
+		CompletableFuture.runAsync(() -> {
 			if (!paused && !cancelPrev) {
 				if (isDebugMode) {
 					LOG.info("UI >> Showing API results <" + phrase + "> API=<" + searchApi + "> Results=" + apiResults.size());
@@ -2611,7 +2612,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				}
 				displayToastIfAnyImpreciseResults(apiResults);
 			}
-		});
+		}, app::runInUIThread).join();
 	}
 
 	private boolean isSpatialSearchApi(SearchCoreAPI searchApi) {
@@ -2631,7 +2632,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	                               SearchPhrase phrase,
 	                               SearchResultCollection regionResultCollection,
 	                               SearchResultListener resultListener) {
-		app.runInUIThread(() -> {
+		CompletableFuture.runAsync(() -> {
 			if (!paused && !cancelPrev) {
 				if (isDebugMode) {
 					LOG.info("UI >> Showing region results <" + phrase + "> Region=<" + region.getFile().getName() + "> Results=" + getSearchResultCollectionFormattedSize(regionResultCollection));
@@ -2657,7 +2658,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 					}
 				}
 			}
-		});
+		}, app::runInUIThread).join();
 	}
 
 	private String getSearchResultCollectionFormattedSize(@Nullable SearchResultCollection resultCollection) {
