@@ -2459,9 +2459,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private void runCoreSearchInternal(String text, boolean showQuickResult, boolean searchMore,
 	                                   SearchResultListener resultListener, boolean preserveSelectedPoiTypeNames) {
 		searchUICore.search(text, showQuickResult, new ResultMatcher<SearchResult>() {
-			SearchResultCollection regionResultCollection;
-			SearchCoreAPI regionResultApi;
-			List<SearchResult> results = new ArrayList<>();
+			ProcessTopIndex processTopIndexAfterSearch = ProcessTopIndex.NO;
 
 			@Override
 			public boolean publish(SearchResult object) {
@@ -2478,15 +2476,33 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 						}
 						break;
 					case SEARCH_FINISHED:
+						// SearchUICore has finished processing the collection on its worker thread.
+						SearchResultCollection completedResults = searchUICore.getCurrentSearchResult();
+						SearchPhrase completedPhrase = object.requiredSearchPhrase;
+						ProcessTopIndex processAfterSearch = processTopIndexAfterSearch;
 						app.runInUIThread(() -> {
-							if (paused) {
+							if (paused || completedPhrase != searchUICore.getPhrase()) {
 								return;
 							}
 							searching = false;
-							if (resultListener == null || resultListener.searchFinished(object.requiredSearchPhrase)) {
+							setResultCollection(completedResults);
+							if (resultListener != null) {
+								resultListener.publish(completedResults, false);
+							}
+							displayToastIfAnyImpreciseResults(completedResults.getCurrentSearchResults());
+							if (resultListener == null || resultListener.searchFinished(completedPhrase)) {
 								hideProgressBar();
-								SearchPhrase phrase = object.requiredSearchPhrase;
-								onSearchFinished(phrase);
+								onSearchFinished(completedPhrase);
+							}
+							switch (processAfterSearch) {
+								case FILTER:
+									onFilterChipClick();
+									break;
+								case MAP:
+									onShowOnMapButtonClick();
+									break;
+								case NO:
+									break;
 							}
 						});
 						break;
@@ -2496,44 +2512,20 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 						}
 						break;
 					case SEARCH_API_FINISHED:
-						SearchCoreAPI searchApi = (SearchCoreAPI) object.object;
-						List<SearchResult> apiResults;
-						SearchPhrase phrase = object.requiredSearchPhrase;
-						SearchCoreAPI regionApi = regionResultApi;
-						SearchResultCollection regionCollection = regionResultCollection;
-						boolean hasRegionCollection = (searchApi == regionApi && regionCollection != null);
-						if (hasRegionCollection) {
-							apiResults = regionCollection.getCurrentSearchResults();
-						} else {
-							apiResults = results;
+						if (processTopIndexAfterLoad != ProcessTopIndex.NO) {
+							processTopIndexAfterSearch = processTopIndexAfterLoad;
+							processTopIndexAfterLoad = ProcessTopIndex.NO;
 						}
-						regionResultApi = null;
-						regionResultCollection = null;
-						results = new ArrayList<>();
-						showApiResults(searchApi, apiResults, phrase, hasRegionCollection, resultListener);
-						switch (processTopIndexAfterLoad) {
-							case FILTER:
-								app.runInUIThread(() -> onFilterChipClick());
-								break;
-							case MAP:
-								app.runInUIThread(() -> onShowOnMapButtonClick());
-								break;
-						}
-						processTopIndexAfterLoad = ProcessTopIndex.NO;
 						break;
 					case SEARCH_API_REGION_FINISHED:
-						regionResultApi = (SearchCoreAPI) object.object;
-						SearchPhrase regionPhrase = object.requiredSearchPhrase;
-						boolean spatialSearchApi = isSpatialSearchApi(regionResultApi);
-						regionResultCollection = new SearchResultCollection(regionPhrase, spatialSearchApi)
-								.addSearchResults(results, !spatialSearchApi, true);
-						showRegionResults(object.file, regionPhrase, regionResultCollection, resultListener);
+						// Partial results stay worker-owned until SEARCH_FINISHED publishes the final collection.
 						break;
 					case PARTIAL_LOCATION:
 						showLocationToolbar();
 						break;
 					default:
-						results.add(object);
+						// SearchResultMatcher also stores this result in its worker-owned requestResults list.
+						break;
 				}
 
 				return true;
@@ -2563,53 +2555,6 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		});
 	}
 
-	private void showApiResults(SearchCoreAPI searchApi,
-	                            List<SearchResult> apiResults,
-	                            SearchPhrase phrase,
-	                            boolean hasRegionCollection,
-	                            SearchResultListener resultListener) {
-		app.runInUIThread(() -> {
-			if (!paused && !cancelPrev) {
-				if (isDebugMode) {
-					LOG.info("UI >> Showing API results <" + phrase + "> API=<" + searchApi + "> Results=" + apiResults.size());
-				}
-				boolean spatialSearchApi = isSpatialSearchApi(searchApi);
-				SearchResultCollection apiCollection = new SearchResultCollection(phrase, spatialSearchApi);
-				apiCollection.addSearchResults(apiResults, !spatialSearchApi, true);
-				boolean append = getResultCollection() != null;
-				if (append) {
-					if (isDebugMode) {
-						LOG.info("UI >> Appending API results <" + phrase + "> API=<" + searchApi + "> Result collection=" + getSearchResultCollectionFormattedSize(getResultCollection()));
-					}
-					setResultCollection(getResultCollection().combineWithCollection(apiCollection,
-							!spatialSearchApi, true));
-					if (isDebugMode) {
-						LOG.info("UI >> API results appended <" + phrase + "> API=<" + searchApi + "> Result collection=" + getSearchResultCollectionFormattedSize(getResultCollection()));
-					}
-				} else {
-					if (isDebugMode) {
-						LOG.info("UI >> Assign API results <" + phrase + "> API=<" + searchApi + ">");
-					}
-					setResultCollection(apiCollection);
-					if (isDebugMode) {
-						LOG.info("UI >> API results assigned <" + phrase + "> API=<" + searchApi + "> Result collection=" + getSearchResultCollectionFormattedSize(getResultCollection()));
-					}
-				}
-				if (!hasRegionCollection && resultListener != null) {
-					resultListener.publish(getResultCollection(), append);
-				}
-				if (isDebugMode) {
-					LOG.info("UI >> API results shown <" + phrase + "> API=<" + searchApi + "> Results=" + getSearchResultCollectionFormattedSize(getResultCollection()));
-				}
-				displayToastIfAnyImpreciseResults(apiResults);
-			}
-		});
-	}
-
-	private boolean isSpatialSearchApi(SearchCoreAPI searchApi) {
-		return searchApi instanceof SpatialTextSearchAPI;
-	}
-
 	private void displayToastIfAnyImpreciseResults(List<SearchResult> apiResults) {
 		for (SearchResult apiResult : apiResults) {
 			if (apiResult.hasImpreciseCoordinates()) {
@@ -2617,39 +2562,6 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				break;
 			}
 		}
-	}
-
-	private void showRegionResults(BinaryMapIndexReader region,
-	                               SearchPhrase phrase,
-	                               SearchResultCollection regionResultCollection,
-	                               SearchResultListener resultListener) {
-		app.runInUIThread(() -> {
-			if (!paused && !cancelPrev) {
-				if (isDebugMode) {
-					LOG.info("UI >> Showing region results <" + phrase + "> Region=<" + region.getFile().getName() + "> Results=" + getSearchResultCollectionFormattedSize(regionResultCollection));
-				}
-				if (getResultCollection() != null) {
-					if (isDebugMode) {
-						LOG.info("UI >> Combining region results <" + phrase + "> Region=<" + region.getFile().getName() + "> Result collection=" + getSearchResultCollectionFormattedSize(getResultCollection()));
-					}
-					SearchResultCollection resCollection = getResultCollection().combineWithCollection(regionResultCollection, true, true);
-					if (isDebugMode) {
-						LOG.info("UI >> Region results combined <" + phrase + "> Region=<" + region.getFile().getName() + "> Result collection=" + getSearchResultCollectionFormattedSize(resCollection));
-					}
-					if (resultListener != null) {
-						resultListener.publish(resCollection, true);
-					}
-					if (isDebugMode) {
-						LOG.info("UI >> Region results shown <" + phrase + "> Region=<" + region.getFile().getName() + "> Results=" + getSearchResultCollectionFormattedSize(resCollection));
-					}
-				} else if (resultListener != null) {
-					resultListener.publish(regionResultCollection, false);
-					if (isDebugMode) {
-						LOG.info("UI >> Region results shown <" + phrase + "> Region=<" + region.getFile().getName() + "> Results=" + getSearchResultCollectionFormattedSize(regionResultCollection));
-					}
-				}
-			}
-		});
 	}
 
 	private String getSearchResultCollectionFormattedSize(@Nullable SearchResultCollection resultCollection) {
