@@ -63,7 +63,7 @@ public class MediaCaptureHelper {
 	@NonNull
 	public static File getBaseFileName(double lat, double lon, @NonNull File dir, @NonNull String ext) {
 		dir.mkdirs();
-		String fileName = MediaFileNameFormat.createUniqueLegacyMediaFileName(lat, lon, ext, name -> new File(dir, name).exists());
+		String fileName = MediaFileNameFormat.createUniqueMediaFileName(lat, lon, ext, name -> new File(dir, name).exists());
 		return new File(dir, fileName);
 	}
 
