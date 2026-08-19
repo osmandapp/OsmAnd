@@ -1,8 +1,10 @@
 package net.osmand.search.core.spatial;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import com.google.protobuf.ByteString;
@@ -78,14 +80,14 @@ public class SpatialSearchToken {
 	int mainNumber = -1;
 	CollatorStringMatcher[] otherMatch;
 	
+	Map<String, Boolean> fastMatchCheck = new HashMap<String, Boolean>();
+	Map<String, Boolean> fastPrefMatchCheck = new HashMap<String, Boolean>();
 	
 	boolean categoryMatchMode = false;
 	TLongHashSet cacheCategoryFilterObjects = new TLongHashSet();
 	
 	public record PartialMatch(NameIndexAtom atom, List<SpatialSearchToken> other, boolean nonNumericMatch) {
-		
 	}
-
 
 	public SpatialSearchToken(int MIN_CHAR_INCOMPLETE, String ow, String original, int order) {
 		this.MIN_CHAR_INCOMPLETE = MIN_CHAR_INCOMPLETE;
@@ -158,18 +160,23 @@ public class SpatialSearchToken {
 			
 			@Override
 			public boolean matchKey(String key) {
-				stats.sub1MatchTime.start();
+				stats.sub1PartMatchTime.start();
 				if (categoryMatchMode) {
 					boolean ret = word.startsWith(key);
-					stats.sub1MatchTime.finish();
+					stats.sub1PartMatchTime.finish();
 					return ret;
 				} else if (key.startsWith(NameIndexReader.POI_CATEGORY_PREFIX) && poiCategoryKeysToAutocomplete.size() > 0) {
 					for (String poiCatKey : poiCategoryKeysToAutocomplete) {
 						if (poiCatKey.startsWith(key.substring(NameIndexReader.POI_CATEGORY_PREFIX.length()))) {
-							stats.sub1MatchTime.finish();
+							stats.sub1PartMatchTime.finish();
 							return true;
 						}
 					}
+				}
+				Boolean cache = fastPrefMatchCheck.get(key);
+				if (cache != null) {
+					stats.sub1PartMatchTime.finish();
+					return cache;
 				}
 				
 				String alignedKey = SearchAlgorithms.alignChars(key);
@@ -192,8 +199,8 @@ public class SpatialSearchToken {
 					// query 'pa 21' match 'pa21' key
 					matched = true;
 				}
-				
-				stats.sub1MatchTime.finish();
+				fastPrefMatchCheck.put(key, matched);
+				stats.sub1PartMatchTime.finish();
 				return matched;
 			}
 		};
@@ -279,29 +286,42 @@ public class SpatialSearchToken {
 	boolean matchName(String name, TIntArrayList poiTypes) {
 //		System.out.printf("query '%s' matches '%s' %s\n", word, name, collatorMain.matches(name) || 
 //				collatorMain.matches(name.replace(' ', '-')));
-		if (categoryMatchMode) {
-			return name.equals(word);
-		}
 		if (name.startsWith(NameIndexReader.POI_CATEGORY_PREFIX)) {
 			return poiTypes != null && matchPoiCategoryKeys(poiTypes);
 		}
-		if (mainNumber > 0) {
-			if (mainNumber == Algorithms.extractFirstIntegerNumber(name)) {
-				return true;
-			}
+		if (categoryMatchMode) {
+			return name.equals(word);
 		}
-		if (otherMatch != null) {
-			for (CollatorStringMatcher o : otherMatch) {
-				if (o.matches(name)) {
-					return true;
+		Boolean cache = fastMatchCheck.get(name);
+		if (cache != null) {
+			return cache;
+		}
+		boolean res = false;
+		try {
+			if (mainNumber > 0) {
+				if (mainNumber == Algorithms.extractFirstIntegerNumber(name)) {
+					res = true;
+					return res;
 				}
 			}
-		}
-		if ((noDotCollatorMain == null ? collatorMain : noDotCollatorMain).matches(name)) {
-			return true;
-		}
-		if (noHyphenCollatorMain != null && noHyphenCollatorMain.matches(name)) {
-			return true;
+			if (otherMatch != null) {
+				for (CollatorStringMatcher o : otherMatch) {
+					if (o.matches(name)) {
+						res = true;
+						return res;
+					}
+				}
+			}
+			if ((noDotCollatorMain == null ? collatorMain : noDotCollatorMain).matches(name)) {
+				res = true;
+				return res;
+			}
+			if (noHyphenCollatorMain != null && noHyphenCollatorMain.matches(name)) {
+				res = true;
+				return res;
+			}
+		} finally {
+			fastMatchCheck.put(name, res);
 		}
 		return false;
 	}

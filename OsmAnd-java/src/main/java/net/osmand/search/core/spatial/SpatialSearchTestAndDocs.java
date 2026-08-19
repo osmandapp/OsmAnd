@@ -420,15 +420,18 @@ public class SpatialSearchTestAndDocs {
 //		query = "Holmby road 18 B"; // 'Holmby 18 B', 'Holmby 18-B', 'Holmby 18B'
 //		query = "Holmby Melbourne 18B";
 		
-//		pattern = "Slovakia";
-//		pattern2 = "World_";
-//		query = "Bratislava Billa";
+		pattern = "Slovakia";
+		pattern2 = "Ukraine_";
+		query = "Bratislava Billa";
 //		settings.DEDUPLICATE_RES = false;
 //		settings.ALLOW_HOUSE_POI_TYPE_INTERSECTION = false;
 //		query = "Shell 2 Rožňavská";
 //		query = "Bratislava Raketova 3248/6";
 //		query = "Bratislava Raketova 6";
 //		query = "Raketova 3248";
+
+//		settings.PIPELINE_MAX_STEPS = 1;
+//		settings.DEV_USE_PIPELINE_COMMON_LIMIT = true;
 		
 //		pattern = "Us_new-york_new"; // new-york, new-jersey
 //		pattern = "Us_new-"; 
@@ -493,18 +496,22 @@ public class SpatialSearchTestAndDocs {
 //		query = "Venezia";
 		
 		
-//		pattern = "Portugal";
+		pattern = "Portugal";
 //		settings.DEV_USE_PIPELINE = false;
 //		location = new LatLon(39.7412, -8.8012); 
 		// Barreira Urbanização Vale da Cabrita, 258548289, 696751116
 		// MATCH: Search Stats 5392.4 ms (read 11,248 KB) - 4979.9 ms 305,862 atoms (read 330.2, match 2981.5, poi 490.6), 361.8 ms compute 5,499 (loadBld 3.6, read 2.9)
 //		settings.MAX_PIPELINE_RES_TO_STOP = new int[] {1000};
-//		settings.PIPELINE_MAX_STEPS = 10;
+//		settings.PIPELINE_MAX_STEPS = 1;
+//		settings.DEV_USE_PIPELINE_COMMON_LIMIT = true;
 //		settings.PIPELINE_MAX_VIRTUAL_MASKS = 3;
+//		pattern = "portugal_travessa.gen";
 //		query = "Travessa de Santo António Rua Joaquim Ribeiro de Carvalho Portugal"; // 1
 //		query = "Travessa de Santo António Rua Joaquim Ribeiro de Carvalho Portugal "; // 1
-//		query = "Travessa de Santo António rua Joaquim Ribeiro de Carvalho Portugal"; // 1
-//		query = "Travessa Santo António Rua Joaquim Ribeiro Portugal "; // 20
+		query = "Travessa de Santo António rua Joaquim Ribeiro de Carvalho Portugal"; // 1
+		
+//		query = "Santo António Carvalho Portugal"; // 1
+//		query = " Santo António Ribeiro"; // 20
 		
 //		pattern = "France_ile-de-france";
 //		pattern = "France_";
@@ -550,6 +557,7 @@ public class SpatialSearchTestAndDocs {
 //		query = "1181ZM cafe"; // TEST missing pois (postcode) 
 		
 //		pattern = "Italy_";
+//		pattern = "World_";
 //		query = "о. Пасхи"; // o
 //		query = "остров Пасхи"; // o. -> остров - not supported data need to be updated
 //		query = "New york";
@@ -737,6 +745,8 @@ public class SpatialSearchTestAndDocs {
 				return "кафе";
 			} else if (keyName.equals("bank")) {
 				return "банк";
+			} else if (keyName.equals("island")) {
+				return "остров";
 //			} else if (keyName.equals("school")) {
 //				return "школа";
 			} else if (keyName.equals("rugby_union")) {
