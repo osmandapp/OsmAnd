@@ -1145,7 +1145,7 @@
     <string name="shared_string_contact">Contact</string>
     <string name="osm_edit_created_poi">POI OSM créé</string>
     <string name="map_legend">Légende de la carte</string>
-    <string name="shared_string_upload">Envoyer</string>
+    <string name="shared_string_upload">Télécharger</string>
     <string name="shared_string_update">Mettre à jour</string>
     <string name="read_more">En savoir +</string>
     <string name="whats_new">Nouveautés de la version</string>
@@ -3611,7 +3611,7 @@
     <string name="map_rendering_engine">Moteur de rendu de carte</string>
     <string name="show_borders_of_downloaded_maps">Afficher les bordures des cartes téléchargées</string>
     <string name="rendering_engine_failed">Le rendu de carte OsmAnd a planté récemment.</string>
-    <string name="share_crash_log">Partager le journal d\'erreur</string>
+    <string name="share_crash_log">Partager le journal des erreurs</string>
     <string name="dismiss_changes_descr">Toutes les modifications seront annulées.</string>
     <string name="restart_now">Redémarrer maintenant</string>
     <string name="mtb_scale">Échelle de difficulté VTT</string>
