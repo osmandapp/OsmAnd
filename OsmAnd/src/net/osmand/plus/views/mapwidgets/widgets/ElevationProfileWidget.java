@@ -186,7 +186,8 @@ public class ElevationProfileWidget extends MapWidget {
 
 	@Override
 	public void updateInfo(@NonNull View view, @Nullable DrawSettings drawSettings) {
-		boolean visible = visibilityHelper.shouldShowElevationProfileWidget();
+		boolean visible = visibilityHelper.shouldShowElevationProfileWidget()
+				&& !(panel == WidgetsPanel.BOTTOM && visibilityHelper.shouldHideBottomWidgets());
 		updateVisibility(visible);
 		if (visible) {
 			updateInfoImpl();

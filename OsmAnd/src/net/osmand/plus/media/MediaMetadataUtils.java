@@ -1,7 +1,7 @@
 package net.osmand.plus.media;
 
 import static android.media.MediaMetadataRetriever.METADATA_KEY_LOCATION;
-import static net.osmand.shared.media.MediaFileNameFormat.isManagedMediaFileName;
+import static net.osmand.shared.media.MediaFileNameFormat.getShortLink;
 
 import android.media.MediaMetadataRetriever;
 import android.media.MediaRecorder;
@@ -136,9 +136,9 @@ public final class MediaMetadataUtils {
 	}
 
 	@Nullable
-	public static Location getLocation(@NonNull File file, @NonNull String legacyFileName) {
+	public static Location getLocation(@NonNull File file) {
 		MediaType mediaType = MediaType.fromFileName(file.getName());
-		Location location = getLocationFromLegacyFileName(legacyFileName);
+		Location location = getLocationFromFileName(file.getName());
 		if (location == null && mediaType == MediaType.PHOTO) {
 			try {
 				location = getPhotoInformation(file);
@@ -193,22 +193,9 @@ public final class MediaMetadataUtils {
 	}
 
 	@Nullable
-	public static Location getLocationFromLegacyFileName(@NonNull String fileName) {
-		String name = Algorithms.getFileNameWithoutExtension(fileName);
-		int indexSeparator = name.lastIndexOf('.');
-		if (indexSeparator < 0 || !isManagedMediaFileName(fileName.replace('@', '~'))) {
-			return null;
-		}
-		String shortLink = name.substring(0, indexSeparator);
-		int nameSeparator = shortLink.lastIndexOf(' ');
-		if (nameSeparator >= 0) {
-			shortLink = shortLink.substring(nameSeparator + 1);
-		}
-		String typePrefix = MediaType.fromFileName(fileName).getTypeName() + "_";
-		if (shortLink.startsWith(typePrefix)) {
-			shortLink = shortLink.substring(typePrefix.length());
-		}
-		if (Algorithms.isEmpty(shortLink)) {
+	public static Location getLocationFromFileName(@NonNull String fileName) {
+		String shortLink = getShortLink(fileName);
+		if (shortLink == null) {
 			return null;
 		}
 		GeoParsedPoint point = MapUtils.decodeShortLinkString(shortLink);

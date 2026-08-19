@@ -130,6 +130,7 @@ public class WidgetsVisibilityHelper {
 		return shouldHideVerticalWidgets()
 				|| isContextMenuFragmentVisible()
 				|| isInTrackMenuMode()
+				|| isInAddGpxPointMode()
 				|| (isRecMenuVisible() && !isPortrait());
 	}
 
