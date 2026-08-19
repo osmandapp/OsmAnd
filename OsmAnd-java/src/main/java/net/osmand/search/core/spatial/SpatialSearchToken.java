@@ -351,9 +351,9 @@ public class SpatialSearchToken {
 		}
 		String[] res = null;
 		String cutName = name.substring(0, wordAligned.length());
-		boolean isTopIndex = cutName.startsWith(TOP_INDEX_CATEGORY) || wordAligned.startsWith(TOP_INDEX_CATEGORY);
-		boolean collatorEquals = !isTopIndex && collatorMain.getCollator().equals(cutName, wordAligned);
 		boolean fastEquals = wordAligned.equals(cutName);
+		boolean isTopIndex = cutName.startsWith(TOP_INDEX_CATEGORY) || wordAligned.startsWith(TOP_INDEX_CATEGORY);
+		boolean collatorEquals = !fastEquals && !isTopIndex && collatorMain.getCollator().equals(cutName, wordAligned);
 		if (fastEquals || collatorEquals) {
 			res = new String[2];
 			res[0] = cutName;
