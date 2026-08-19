@@ -786,12 +786,59 @@ public class BinaryMapPoiReaderAdapter {
 //					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 //					return;
 //				}
+				break; 
+			case OsmandOdb.OsmAndPoiNameIndexDataAtom.BBOX_FIELD_NUMBER:
+				int size = codedIS.readRawVarint32();
+				long old = codedIS.pushLimitLong((long) size);
+
+				TIntArrayList lst = new TIntArrayList();
+				while (codedIS.getBytesUntilLimit() > 0) {
+					lst.add(codedIS.readRawVarint32());
+				}
+				codedIS.popLimit(old);
+
+				if (lst.size() >= 5) {
+					int z = lst.get(0);
+					int dz = 31 - z;
+
+					int left = lst.get(1);
+					int width = lst.get(2);
+					int top = lst.get(3);
+					int height = lst.get(4);
+
+					int right = left + width;
+					int bottom = top + height;
+
+					// [left, top, right, bottom]
+					int[] bbox31 = new int[] {
+							left << dz,
+							top << dz,
+							right << dz,
+							bottom << dz
+					};
+					prinBBox(bbox31);
+				}
 				break;
 			default:
 				skipUnknownField(t);
 				break;
 			}
 		}
+	}
+
+	private void prinBBox(int[] bbox) {
+		if (bbox == null)
+			return;
+		double lon = MapUtils.get31LongitudeX(bbox[0]);
+		double lon2 = MapUtils.get31LongitudeX(bbox[2]);
+		double lat = MapUtils.get31LatitudeY((bbox[1]));
+		double lat2 = MapUtils.get31LatitudeY(bbox[3]);
+		System.out.printf(Locale.US, "LATITUDE,LONGITUDE\n");
+		System.out.printf(Locale.US, "%.5f,%.5f\n", lat, lon);
+		System.out.printf(Locale.US, "%.5f,%.5f\n", lat, lon2);
+		System.out.printf(Locale.US, "%.5f,%.5f\n", lat2, lon2);
+		System.out.printf(Locale.US, "%.5f,%.5f\n", lat2, lon);
+		System.out.printf(Locale.US, "%.5f,%.5f\n", lat, lon);
 	}
 
 	protected void searchPoiIndex(int left31, int right31, int top31, int bottom31,

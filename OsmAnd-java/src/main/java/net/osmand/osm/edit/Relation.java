@@ -6,7 +6,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
+import net.osmand.data.MapObject;
+import net.osmand.data.QuadRect;
 
 import static net.osmand.osm.edit.OSMSettings.*;
 
@@ -156,6 +159,22 @@ public class Relation extends Entity {
 			}
 		}
 		return false;
+	}
+	
+	public QuadRect getLatLonBbox() {
+		QuadRect quad = null;
+		for (RelationMember m : getMembers()) {
+			double lat = m.getEntity().getLatitude();
+			double lon = m.getEntity().getLongitude();
+			if (lat == 0 && lon == 0) {
+				continue;
+			}
+			if (quad == null) {
+				quad = new QuadRect(lon, lat, lon, lat);
+			}
+			quad.include(lon, lat);
+		}
+		return quad;
 	}
 
 }

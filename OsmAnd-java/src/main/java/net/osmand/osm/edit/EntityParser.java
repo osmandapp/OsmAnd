@@ -208,7 +208,17 @@ public class EntityParser {
 		if (am != null && checkAmenitiesToAdd(am, amenitiesList)) {
 			parseMapObject(am, entity, ts, setNameFromRef);
 			setWikipediaUrl(am, ts);
+			addBboxToAmenity(entity, am);
 			amenitiesList.add(am);
+		}
+	}
+	
+	private static void addBboxToAmenity(Entity entity, Amenity am) {
+		if (entity instanceof Way way) {
+			am.setBbox31(way.getLatLonBBox());
+		}
+		if (entity instanceof Relation relation) {
+			am.setBbox31(relation.getLatLonBbox());
 		}
 	}
 

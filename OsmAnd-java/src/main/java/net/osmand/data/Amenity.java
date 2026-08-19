@@ -1002,6 +1002,11 @@ public class Amenity extends MapObject {
 		this.bbox31 = bbox31;
 	}
 	
+	public void setBbox31(QuadRect bbox) {
+		this.bbox31 = new int[] { MapUtils.get31TileNumberX(bbox.left), MapUtils.get31TileNumberY(bbox.top),
+				MapUtils.get31TileNumberX(bbox.right), MapUtils.get31TileNumberY(bbox.bottom) };
+	}	
+	
 	@Override
 	public int[] getBbox31() {
 		return bbox31;
