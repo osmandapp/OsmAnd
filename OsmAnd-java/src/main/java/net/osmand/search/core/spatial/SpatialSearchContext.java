@@ -501,10 +501,10 @@ public class SpatialSearchContext {
 			if (matchedPrefixes == null) {
 				stats.sub1FileAtomsTime.start();
 				matchedPrefixes = b.readFullNameIndex(indx.setQuery(t.word, t.getPrefixMatcher(stats)));
+				stats.sub1FileAtomsTime.finish();
 				if (matchedPrefixes == null) {
 					continue;
 				}
-				stats.sub1FileAtomsTime.finish();
 			}
 			for (PrefixNameValue prefix : matchedPrefixes) {
 				parseAtomSuffixes(t, indxInd, indx, prefix, tokens);

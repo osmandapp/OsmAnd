@@ -75,8 +75,8 @@ public class Algorithms {
 		}
 		for (int i = 0; i < s.length(); i++) {
 			char ch = s.charAt(i);
-			for (int j = 0; j < chars.length; j++) {
-				if (ch == chars[j]) {
+			for (char aChar : chars) {
+				if (ch == aChar) {
 					return true;
 				}
 			}

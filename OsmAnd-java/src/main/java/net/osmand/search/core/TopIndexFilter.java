@@ -68,7 +68,7 @@ public class TopIndexFilter implements BinaryMapIndexReader.SearchPoiAdditionalF
 
 	public static String getValueKey(String value) {
 		value = SearchAlgorithms.alignChars(value);
-		return value.toLowerCase().replace(':', '_').replaceAll("\'", "").replace(' ', '_').replaceAll("\"", "");
+		return value.toLowerCase().replace(':', '_').replace("'", "").replace(' ', '_').replace("\"", "");
 	}
 
 	public String getValue() {
