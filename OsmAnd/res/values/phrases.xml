@@ -198,6 +198,10 @@
 	<string name="poi_covered_booth_filter">Booth</string>
 	<string name="poi_rapids_filter">Rapids grade</string>
 	<string name="poi_water_type_filter">Water type</string>
+	<string name="poi_mtb_filter">Suitable for MTB</string>
+	<string name="poi_ski_filter">Suitable for ski</string>
+	<string name="poi_horse_filter">Suitable for horse riding</string>
+	<string name="poi_winter_hiking_filter">Suitable for winter hiking</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -4264,7 +4268,7 @@
 	<string name="poi_bicycle_permissive">Bicycle access: permissive</string>
 	<string name="poi_bicycle_customers">Bicycle access: customers</string>
 
-	<string name="poi_horse_yes">Horses allowed</string>
+	<string name="poi_horse_yes">Yes</string>
 	<string name="poi_horse_no">Horses not allowed</string>
 	<string name="poi_horse_private">Horse access: private</string>
 	<string name="poi_horse_destination">Horse access: destination</string>
@@ -4295,7 +4299,7 @@
 	<string name="poi_coach_yes">Coach access: yes</string>
 	<string name="poi_coach_no">Coach access: no</string>
 
-	<string name="poi_ski_yes">Ski access: yes</string>
+	<string name="poi_ski_yes">Yes</string>
 	<string name="poi_ski_no">Ski access: no</string>
 
 	<string name="poi_snowmobile_private">Snowmobile access: private</string>
@@ -5770,4 +5774,8 @@
 	<string name="poi_rapids_grade_x">X (not runnable)</string>
 
 	<string name="poi_water_lake">Lake</string>
+
+	<string name="poi_mtb_yes">Yes</string>
+	<string name="poi_winter_hiking_yes">Yes</string>
+
 </resources>
