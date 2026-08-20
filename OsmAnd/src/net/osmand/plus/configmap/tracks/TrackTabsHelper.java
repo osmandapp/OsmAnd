@@ -299,7 +299,6 @@ public class TrackTabsHelper {
 
 	public void sortTrackTab(@NonNull TrackTab trackTab) {
 		long started = System.currentTimeMillis();
-		LatLon latLon = getDefaultLocation();
 		if (trackTab.type == TrackTabType.ON_MAP) {
 			List<Object> visibleItems = getVisibleItems();
 			List<Object> recentlyVisibleItems = getRecentlyVisibleItems();
