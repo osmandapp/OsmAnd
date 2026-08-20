@@ -273,7 +273,14 @@ data class CoordinateGridFormat(
 
 	val granularity: Float?
 		get() = when (projection) {
-			Projection.OLC, Projection.MLS -> LOCATOR_GRID_GRANULARITY
+			Projection.OLC -> OLC_GRID_GRANULARITY
+			Projection.MLS -> MLS_GRID_GRANULARITY
+			else -> null
+		}
+
+	val maxZoom: Int?
+		get() = when (projection) {
+			Projection.OLC -> OLC_GRID_MAX_ZOOM
 			else -> null
 		}
 
@@ -287,7 +294,9 @@ data class CoordinateGridFormat(
 	}
 
 	private companion object {
-		private const val LOCATOR_GRID_GRANULARITY = 3.0f
+		private const val OLC_GRID_GRANULARITY = 3.0f
+		private const val MLS_GRID_GRANULARITY = 6.0f
+		private const val OLC_GRID_MAX_ZOOM = 18
 	}
 }
 
