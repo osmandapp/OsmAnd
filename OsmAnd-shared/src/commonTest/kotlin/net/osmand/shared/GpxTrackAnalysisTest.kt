@@ -57,6 +57,29 @@ class GpxTrackAnalysisTest {
 	}
 
 	@Test
+	fun exactSubsegmentStartKeepsWholeTrackAttributesIntact() {
+		val segment = createSparseSegment()
+		val totalDistanceBefore = analyze(segment).totalDistance
+		val sourceAttributes = requireNotNull(segment.points[1].attributes)
+		val sourceDistance = sourceAttributes.distance
+		val sourceTimeDiff = sourceAttributes.timeDiff
+		// Uphill/downhill intervals start at existing extremum points.
+		val subsegment = SplitSegment(1, segment.points.size, segment)
+
+		val startAttributes = GpxTrackAnalysis()
+			.prepareInformation(0, null, subsegment)
+			.pointAttributes[0]
+
+		assertTrue(startAttributes !== sourceAttributes)
+		assertEquals(0f, startAttributes.distance)
+		assertEquals(0f, startAttributes.timeDiff)
+		assertSame(sourceAttributes, segment.points[1].attributes)
+		assertEquals(sourceDistance, sourceAttributes.distance)
+		assertEquals(sourceTimeDiff, sourceAttributes.timeDiff)
+		assertEquals(totalDistanceBefore, analyze(segment).totalDistance, 0.001f)
+	}
+
+	@Test
 	fun splitSlopeUsesPartialBoundaryAttributes() {
 		val segment = createSlowUphillSegment()
 		analyze(segment)
