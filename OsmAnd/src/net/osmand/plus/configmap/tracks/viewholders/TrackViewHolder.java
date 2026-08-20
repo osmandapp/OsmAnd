@@ -150,7 +150,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 			setupIcon(color, width, showArrows);
 
 			SelectedGpxFile selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
-			GpxTrackAnalysis analysis = selectedGpxFile.getTrackAnalysis(app);
+			GpxTrackAnalysis analysis = selectedGpxFile.getTrackSummaryAnalysis(app);
 			buildDescriptionRow(sortMode, trackItem, analysis, null, shouldShowFolder);
 		}
 	}

@@ -6,13 +6,20 @@ import kotlin.collections.HashMap
 import net.osmand.shared.gpx.GpxParameter.*
 import net.osmand.shared.io.KFile
 
-abstract class DataItem(val file: KFile) {
+abstract class DataItem protected constructor(
+	val file: KFile,
+	initializeFileParameters: Boolean
+) {
 	protected val map: MutableMap<GpxParameter, Any?> = HashMap()
 	private var analysisParametersVersion = AtomicLong(0)
 
 	init {
-		initFileParameters()
+		if (initializeFileParameters) {
+			initFileParameters()
+		}
 	}
+
+	protected constructor(file: KFile) : this(file, true)
 
 	private fun initFileParameters() {
 		map[FILE_NAME] = file.name()
