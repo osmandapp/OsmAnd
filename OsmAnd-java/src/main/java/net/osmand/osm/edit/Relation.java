@@ -6,10 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
-import net.osmand.data.MapObject;
-import net.osmand.data.QuadRect;
 
 import static net.osmand.osm.edit.OSMSettings.*;
 
