@@ -5707,4 +5707,6 @@
     <string name="astro_close_solar_eclipse">Fechar o explorador do eclipse solar</string>
     <string name="astro_loading_solar_eclipse">Cálculo do eclipse solar em todo o mundo</string>
     <string name="duplicate_map">Mapa duplicado</string>
+    <string name="share_favorites_media_preparation_failed">Não foi possível incluir os arquivos anexados. Apenas pontos de compartilhamento.</string>
+    <string name="preparing_file">Preparando o arquivo</string>
 </resources>

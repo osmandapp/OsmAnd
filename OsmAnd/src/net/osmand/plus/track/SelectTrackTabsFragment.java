@@ -14,12 +14,14 @@ import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.SelectTrackTabsHelper;
 import net.osmand.plus.configmap.tracks.TrackTab;
+import net.osmand.plus.configmap.tracks.TrackTabType;
 import net.osmand.plus.configmap.tracks.TrackTabsHelper;
 import net.osmand.plus.configmap.tracks.TracksAdapter.ItemVisibilityCallback;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -81,6 +83,14 @@ public class SelectTrackTabsFragment extends BaseTracksTabsFragment {
 		setViewPagerAdapter(viewPager, tabs);
 		tabLayout.setViewPager(viewPager);
 		viewPager.setCurrentItem(preselectedTabIndex);
+		viewPager.addOnPageChangeListener(new SimpleOnPageChangeListener() {
+			@Override
+			public void onPageSelected(int position) {
+				if (trackTabsHelper.sortTrackTabIfNeeded(getSelectedTab())) {
+					updateTabsContent();
+				}
+			}
+		});
 	}
 
 	@NonNull
@@ -100,6 +110,7 @@ public class SelectTrackTabsFragment extends BaseTracksTabsFragment {
 	@Override
 	public void loadTracksFinished(@NonNull TrackFolder folder) {
 		trackTabsHelper.updateTrackItems(folder);
+		trackTabsHelper.sortTrackTabIfNeeded(getTab(TrackTabType.ON_MAP.name()));
 		AndroidUiHelper.updateVisibility(progressBar, false);
 		updateTrackTabs();
 		updateTabsContent();

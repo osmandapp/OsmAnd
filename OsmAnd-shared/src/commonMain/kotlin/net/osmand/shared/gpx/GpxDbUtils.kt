@@ -269,15 +269,16 @@ object GpxDbUtils {
 	}
 
 	fun isAnalyseNeeded(item: GpxDataItem?): Boolean {
-		if (item != null) {
-			return !item.hasData() || item.getAnalysis() == null
-					|| item.getAnalysis()!!.wptCategoryNames == null
-					|| (item.getAnalysis()!!.getLatLonStart() == null && item.getAnalysis()!!.points > 0)
-					|| item.requireParameter(FILE_LAST_MODIFIED_TIME) as Long != item.file.lastModified()
-					|| item.requireParameter(FILE_CREATION_TIME) as Long <= 0
-					|| createDataVersion(ANALYSIS_VERSION) > item.requireParameter(DATA_VERSION) as Int
-		}
-		return true
+		return item == null || isAnalyseNeeded(item, item.file.lastModified())
+	}
+
+	internal fun isAnalyseNeeded(item: GpxDataItem, actualModifiedTime: Long): Boolean {
+		return !item.hasData() || item.getAnalysis() == null
+				|| item.getAnalysis()!!.wptCategoryNames == null
+				|| (item.getAnalysis()!!.getLatLonStart() == null && item.getAnalysis()!!.points > 0)
+				|| item.requireParameter(FILE_LAST_MODIFIED_TIME) as Long != actualModifiedTime
+				|| item.requireParameter(FILE_CREATION_TIME) as Long <= 0
+				|| createDataVersion(ANALYSIS_VERSION) > item.requireParameter(DATA_VERSION) as Int
 	}
 
 	fun getGpxFileDir(file: KFile): String {

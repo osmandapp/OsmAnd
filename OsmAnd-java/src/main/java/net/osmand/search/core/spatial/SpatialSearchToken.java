@@ -1,8 +1,10 @@
 package net.osmand.search.core.spatial;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import com.google.protobuf.ByteString;
@@ -24,6 +26,7 @@ import net.osmand.data.Building;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.Street;
+import net.osmand.osm.MapPoiTypes;
 import net.osmand.search.core.HashQuadTree;
 import net.osmand.search.core.HashSkipTileQuadTree;
 import net.osmand.search.core.spatial.SpatialSearchContext.SpatialSearchStats;
@@ -41,6 +44,9 @@ public class SpatialSearchToken {
 	public static final int POI_TYPE = -1;
 	public static final int STREET_TYPE = CityBlocks.STREET_TYPE.index;
 	public static final String DOT_INCOMPLETE_STRING = CollatorStringMatcher.INCOMPLETE_DOT + "";
+
+	private static final String TOP_INDEX_CATEGORY =
+			NameIndexReader.POI_CATEGORY_PREFIX + MapPoiTypes.TOP_INDEX_ADDITIONAL_PREFIX;
 
 	int MIN_CHAR_INCOMPLETE;
 	
@@ -78,14 +84,14 @@ public class SpatialSearchToken {
 	int mainNumber = -1;
 	CollatorStringMatcher[] otherMatch;
 	
+	Map<String, Boolean> fastMatchCheck = new HashMap<String, Boolean>();
+	Map<String, Boolean> fastPrefMatchCheck = new HashMap<String, Boolean>();
 	
 	boolean categoryMatchMode = false;
 	TLongHashSet cacheCategoryFilterObjects = new TLongHashSet();
 	
 	public record PartialMatch(NameIndexAtom atom, List<SpatialSearchToken> other, boolean nonNumericMatch) {
-		
 	}
-
 
 	public SpatialSearchToken(int MIN_CHAR_INCOMPLETE, String ow, String original, int order) {
 		this.MIN_CHAR_INCOMPLETE = MIN_CHAR_INCOMPLETE;
@@ -158,18 +164,23 @@ public class SpatialSearchToken {
 			
 			@Override
 			public boolean matchKey(String key) {
-				stats.sub1MatchTime.start();
+				stats.sub1PartMatchTime.start();
 				if (categoryMatchMode) {
 					boolean ret = word.startsWith(key);
-					stats.sub1MatchTime.finish();
+					stats.sub1PartMatchTime.finish();
 					return ret;
 				} else if (key.startsWith(NameIndexReader.POI_CATEGORY_PREFIX) && poiCategoryKeysToAutocomplete.size() > 0) {
 					for (String poiCatKey : poiCategoryKeysToAutocomplete) {
 						if (poiCatKey.startsWith(key.substring(NameIndexReader.POI_CATEGORY_PREFIX.length()))) {
-							stats.sub1MatchTime.finish();
+							stats.sub1PartMatchTime.finish();
 							return true;
 						}
 					}
+				}
+				Boolean cache = fastPrefMatchCheck.get(key);
+				if (cache != null) {
+					stats.sub1PartMatchTime.finish();
+					return cache;
 				}
 				
 				String alignedKey = SearchAlgorithms.alignChars(key);
@@ -192,8 +203,8 @@ public class SpatialSearchToken {
 					// query 'pa 21' match 'pa21' key
 					matched = true;
 				}
-				
-				stats.sub1MatchTime.finish();
+				fastPrefMatchCheck.put(key, matched);
+				stats.sub1PartMatchTime.finish();
 				return matched;
 			}
 		};
@@ -246,9 +257,14 @@ public class SpatialSearchToken {
 		if (existing != null) {
 			if (existing != atom) {
 				// compare convention like method important!
+				// a school
+				int res = Boolean.compare(atom.name.startsWith(NameIndexReader.POI_CATEGORY_PREFIX), 
+						existing.name.startsWith(NameIndexReader.POI_CATEGORY_PREFIX));
 				// select shortest available version
-				int res = Integer.compare(atom.otherWordsCnt + atom.otherFoundCnt,
-						existing.otherWordsCnt + existing.otherFoundCnt);
+				if (res == 0) {
+					res = Integer.compare(atom.otherWordsCnt + atom.otherFoundCnt,
+							existing.otherWordsCnt + existing.otherFoundCnt);
+				}
 				// '2 south 2nd street' vs '25 садова вулиця' (25-та) -
 				if (res == 0 && !SearchAlgorithms.isNumber2Letters(wordAligned)) {
 					// a school
@@ -285,23 +301,36 @@ public class SpatialSearchToken {
 		if (name.startsWith(NameIndexReader.POI_CATEGORY_PREFIX)) {
 			return poiTypes != null && matchPoiCategoryKeys(poiTypes);
 		}
-		if (mainNumber > 0) {
-			if (mainNumber == Algorithms.extractFirstIntegerNumber(name)) {
-				return true;
-			}
+		Boolean cache = fastMatchCheck.get(name);
+		if (cache != null) {
+			return cache;
 		}
-		if (otherMatch != null) {
-			for (CollatorStringMatcher o : otherMatch) {
-				if (o.matches(name)) {
-					return true;
+		boolean res = false;
+		try {
+			if (mainNumber > 0) {
+				if (mainNumber == Algorithms.extractFirstIntegerNumber(name)) {
+					res = true;
+					return res;
 				}
 			}
-		}
-		if ((noDotCollatorMain == null ? collatorMain : noDotCollatorMain).matches(name)) {
-			return true;
-		}
-		if (noHyphenCollatorMain != null && noHyphenCollatorMain.matches(name)) {
-			return true;
+			if (otherMatch != null) {
+				for (CollatorStringMatcher o : otherMatch) {
+					if (o.matches(name)) {
+						res = true;
+						return res;
+					}
+				}
+			}
+			if ((noDotCollatorMain == null ? collatorMain : noDotCollatorMain).matches(name)) {
+				res = true;
+				return res;
+			}
+			if (noHyphenCollatorMain != null && noHyphenCollatorMain.matches(name)) {
+				res = true;
+				return res;
+			}
+		} finally {
+			fastMatchCheck.put(name, res);
 		}
 		return false;
 	}
@@ -342,11 +371,17 @@ public class SpatialSearchToken {
 	
 	String[] matchSplitName(String name) {
 		name = SearchAlgorithms.alignChars(name);
+		if (wordAligned.length() >= name.length()) {
+			return null;
+		}
 		String[] res = null;
-		if (wordAligned.length() < name.length() 
-				&& collatorMain.getCollator().equals(name.substring(0, wordAligned.length()), wordAligned)) {
+		String cutName = name.substring(0, wordAligned.length());
+		boolean fastEquals = wordAligned.equals(cutName);
+		boolean isTopIndex = cutName.startsWith(TOP_INDEX_CATEGORY) || wordAligned.startsWith(TOP_INDEX_CATEGORY);
+		boolean collatorEquals = !fastEquals && !isTopIndex && collatorMain.getCollator().equals(cutName, wordAligned);
+		if (fastEquals || collatorEquals) {
 			res = new String[2];
-			res[0] = name.substring(0, wordAligned.length());
+			res[0] = cutName;
 			// don't split numbers
 			if (Character.isDigit(name.charAt(wordAligned.length()))
 					&& Character.isDigit(name.charAt(wordAligned.length() - 1))) {

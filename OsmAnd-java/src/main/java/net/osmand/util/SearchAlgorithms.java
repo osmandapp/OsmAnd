@@ -165,10 +165,10 @@ public class SearchAlgorithms {
     }
 
     public static String removeQuotes(String s) {
-        if (!s.contains("«") && !s.contains("»")) {
-            return s;
-        }
-        return s.replace("«", "").replace("»", "");
+	    if (s.contains("«") || s.contains("»")) {
+		    return s.replace("«", "").replace("»", "");
+	    }
+	    return s;
     }
     
     public static String alignChars(String fullText) {

@@ -92,6 +92,7 @@ import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.io.KFile;
 import net.osmand.shared.palette.data.PaletteChangeEvent;
 import net.osmand.shared.routing.ColoringType;
+import net.osmand.shared.routing.Gpx3DWallColorType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -877,6 +878,11 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				float trackWidth = getTrackWidth(width, defaultTrackWidth);
 				int trackColor = appearanceHelper.getTrackColor(gpxFile, cachedColor, gpxItem, dirItem, selected);
 				GradientScaleType scaleType = coloringType.toGradientScaleType();
+				if (scaleType != null && !selectedGpxFile.isShowCurrentTrack()
+						&& selectedGpxFile.getAvailableFullTrackAnalysisToDisplay(app) == null) {
+					selectedGpxFile.requestFullTrackAnalysisToDisplay(app);
+					scaleType = null;
+				}
 
 				List<TrkSegment> segments = scaleType != null
 						? getCachedSegments(selectedGpxFile, scaleType, gradientColorPalette, false)
@@ -1305,6 +1311,19 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		ColoringType outlineColoringType = ColoringType.Companion.valueOf(track3DStyle.getWallColorType());
 		GradientScaleType scaleType = coloringType.toGradientScaleType();
 		GradientScaleType outlineScaleType = outlineColoringType != null ? outlineColoringType.toGradientScaleType() : null;
+		boolean analysisPending = !currentTrack && (scaleType != null || outlineScaleType != null)
+				&& selectedGpxFile.getAvailableFullTrackAnalysisToDisplay(app) == null;
+		if (analysisPending) {
+			selectedGpxFile.requestFullTrackAnalysisToDisplay(app);
+			coloringType = ColoringType.TRACK_SOLID;
+			scaleType = null;
+			outlineScaleType = null;
+			if (outlineColoringType != null && outlineColoringType.isGradient()) {
+				outlineColoringType = ColoringType.TRACK_SOLID;
+				track3DStyle = new Track3DStyle(track3DStyle.getVisualizationType(), Gpx3DWallColorType.SOLID,
+						track3DStyle.getLinePositionType(), track3DStyle.getExaggeration(), track3DStyle.getElevation());
+			}
+		}
 
 		boolean gradient = scaleType != null || hasMapRenderer && outlineScaleType != null;
 		if (!gpxFile.hasTrkPt() && gradient) {

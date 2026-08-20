@@ -84,7 +84,7 @@ class ImportTrackViewHolder extends ViewHolder {
 	}
 
 	private void setupStatisticsRow(@NonNull ImportTrackItem item) {
-		GpxTrackAnalysis analysis = item.selectedGpxFile.getTrackAnalysis(app);
+		GpxTrackAnalysis analysis = item.selectedGpxFile.getTrackSummaryAnalysis(app);
 		GpxBlockStatisticsBuilder builder = new GpxBlockStatisticsBuilder(app, item.selectedGpxFile, nightMode);
 		builder.setBlocksView(recyclerView, false);
 		builder.initStatBlocks(null, ColorUtilities.getActiveColor(app, nightMode), analysis);

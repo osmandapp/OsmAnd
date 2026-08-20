@@ -74,6 +74,7 @@ public class SpatialSearchContext {
 		public Timer step1Atoms = new Timer();
 		public Timer sub1FileAtomsTime = new Timer();
 		public Timer sub1MatchTime = new Timer();
+		public Timer sub1PartMatchTime = sub1MatchTime; // new Timer();
 		public Timer sub1PoiNameBoundaryTime = new Timer();
 		public int tokenObjs;
 		
@@ -100,9 +101,11 @@ public class SpatialSearchContext {
 	
 		public class Timer {
 			public long time = 0;
+			public int intervals = 0; 
 			public long endTime = System.nanoTime();
 			
 			public void start() {
+				intervals++;
 				if (doTiming) {
 					time -= System.nanoTime();
 				}
@@ -122,10 +125,15 @@ public class SpatialSearchContext {
 		@Override
 		public String toString() {
 			return String.format(
-					"Search Stats %.1f ms (read %,d KB) - %.1f ms %,d atoms (read %.1f, match %.1f, poi %.1f), "
-					+ "%.1f ms compute %,d (loadBld %.1f, read %.1f)",
+					"Search Stats %.1f ms (read %,d KB): 1. Atoms %.1f ms %,d (read %.1f %d, match %.1f %,d, "
+					// + "pmatch %.1f %,d, 
+					+ "poi %.1f), "
+					+ "2. Compute %.1f ms %,d (validate %.1f > read %.1f)",
 					requestTime.ms(), (readTableBytes + readAtomsBytes + readObjsBytes) / 1024,
-					step1Atoms.ms(), tokenObjs,  sub1FileAtomsTime.ms(), sub1MatchTime.ms(), sub1PoiNameBoundaryTime.ms(),
+					step1Atoms.ms(), tokenObjs,  sub1FileAtomsTime.ms(), sub1FileAtomsTime.intervals, 
+					sub1MatchTime.ms(), sub1MatchTime.intervals, 
+					// sub1PartMatchTime.ms(), sub1PartMatchTime.intervals,  
+					sub1PoiNameBoundaryTime.ms(),
 					step2Compute.ms(), maxCombinations, sub2LoadObjectsBldTime.ms(), sub2ReadObjTime.ms());
 		}
 
@@ -493,10 +501,10 @@ public class SpatialSearchContext {
 			if (matchedPrefixes == null) {
 				stats.sub1FileAtomsTime.start();
 				matchedPrefixes = b.readFullNameIndex(indx.setQuery(t.word, t.getPrefixMatcher(stats)));
+				stats.sub1FileAtomsTime.finish();
 				if (matchedPrefixes == null) {
 					continue;
 				}
-				stats.sub1FileAtomsTime.finish();
 			}
 			for (PrefixNameValue prefix : matchedPrefixes) {
 				parseAtomSuffixes(t, indxInd, indx, prefix, tokens);

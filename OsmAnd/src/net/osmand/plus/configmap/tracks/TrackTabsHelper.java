@@ -8,6 +8,7 @@ import static net.osmand.plus.configmap.tracks.TracksAdapter.TYPE_SORT_TRACKS;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
@@ -25,6 +26,8 @@ import net.osmand.shared.gpx.enums.TracksSortScope;
 import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -32,10 +35,11 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 public class TrackTabsHelper {
+
+	private static final Log LOG = PlatformUtil.getLog(TrackTabsHelper.class);
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -43,6 +47,7 @@ public class TrackTabsHelper {
 	private final ItemsSelectionHelper<TrackItem> itemsSelectionHelper;
 
 	private final Set<TrackItem> recentlyVisibleTrackItem = new HashSet<>();
+	private final Set<String> sortedTrackTabIds = new HashSet<>();
 	protected final Map<String, TrackTab> trackTabs = new LinkedHashMap<>();
 
 	public TrackTabsHelper(@NonNull OsmandApplication app) {
@@ -80,6 +85,8 @@ public class TrackTabsHelper {
 	}
 
 	public void updateTrackItems(@NonNull TrackFolder rootFolder) {
+		long started = System.currentTimeMillis();
+		sortedTrackTabIds.clear();
 		List<TrackItem> allTrackItems = new ArrayList<>(rootFolder.getFlattenedTrackItems());
 		addCurrentTrackItemIfPresent(allTrackItems);
 		itemsSelectionHelper.setAllItems(allTrackItems);
@@ -89,7 +96,9 @@ public class TrackTabsHelper {
 
 		updateTrackTabs(rootFolder);
 		loadTabsSortModes();
-		sortTrackTabsContent();
+		LOG.info("Prepared GPX track tabs count=" + trackTabs.size()
+				+ ", tracks=" + allTrackItems.size()
+				+ " in " + (System.currentTimeMillis() - started) + " ms");
 	}
 
 	protected void updateTrackTabs(@NonNull TrackFolder rootFolder) {
@@ -201,7 +210,7 @@ public class TrackTabsHelper {
 	public void processRecentlyVisibleTracks() {
 		recentlyVisibleTrackItem.clear();
 		boolean monitoringActive = PluginsHelper.isActive(OsmandMonitoringPlugin.class);
-		for (GpxFile gpxFile : gpxSelectionHelper.getSelectedGpxFilesBackUp().keySet()) {
+		for (GpxFile gpxFile : gpxSelectionHelper.getBackupSelectedGpxFiles()) {
 			SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(gpxFile.getPath());
 			if (selectedGpxFile == null && (!gpxFile.isShowCurrentTrack() || monitoringActive)) {
 				recentlyVisibleTrackItem.add(new TrackItem(gpxFile));
@@ -280,13 +289,16 @@ public class TrackTabsHelper {
 		gpxSelectionHelper.saveTracksVisibility(itemsSelectionHelper.getSelectedItems());
 	}
 
-	private void sortTrackTabsContent() {
-		for (TrackTab trackTab : trackTabs.values()) {
-			sortTrackTab(trackTab);
+	public boolean sortTrackTabIfNeeded(@Nullable TrackTab trackTab) {
+		if (trackTab == null || sortedTrackTabIds.contains(trackTab.getId())) {
+			return false;
 		}
+		sortTrackTab(trackTab);
+		return true;
 	}
 
 	public void sortTrackTab(@NonNull TrackTab trackTab) {
+		long started = System.currentTimeMillis();
 		if (trackTab.type == TrackTabType.ON_MAP) {
 			List<Object> visibleItems = getVisibleItems();
 			List<Object> recentlyVisibleItems = getRecentlyVisibleItems();
@@ -302,6 +314,10 @@ public class TrackTabsHelper {
 		} else {
 			Collections.sort(trackTab.items, new TracksComparator(trackTab, app));
 		}
+		sortedTrackTabIds.add(trackTab.getId());
+		LOG.info("Sorted GPX track tab id=" + trackTab.getId()
+				+ ", items=" + trackTab.items.size()
+				+ " in " + (System.currentTimeMillis() - started) + " ms");
 	}
 
 	public void loadTabsSortModes() {

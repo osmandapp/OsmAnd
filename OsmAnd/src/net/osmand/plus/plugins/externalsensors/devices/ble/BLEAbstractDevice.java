@@ -87,6 +87,8 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 			device = new BLERunningSCDDevice(bluetoothAdapter, address);
 		} else if (BLEBPICPDevice.getServiceUUID().equals(uuid)) {
 			device = new BLEBPICPDevice(bluetoothAdapter, address);
+		} else if (BLEBikePowerDevice.getServiceUUID().equals(uuid)) {
+			device = new BLEBikePowerDevice(bluetoothAdapter, address);
 		}
 		if (device != null) {
 			device.deviceName = name;
