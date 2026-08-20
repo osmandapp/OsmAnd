@@ -27,7 +27,8 @@ public class NavRemoveNextDestination extends QuickAction {
 			.iconRes(R.drawable.ic_action_navigation_skip_destination)
 			.nonEditable()
 			.category(QuickActionType.NAVIGATION)
-			.nameActionRes(R.string.shared_string_remove);
+			.nameActionRes(R.string.shared_string_remove)
+			.allowedInAndroidAuto(true);
 
 	public NavRemoveNextDestination() {
 		super(TYPE);

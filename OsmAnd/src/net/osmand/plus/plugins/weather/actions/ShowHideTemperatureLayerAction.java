@@ -14,7 +14,8 @@ public class ShowHideTemperatureLayerAction extends BaseWeatherQuickAction {
 			.nameActionRes(R.string.quick_action_verb_show_hide)
 			.nameRes(R.string.temperature_layer)
 			.iconRes(R.drawable.ic_action_thermometer).nonEditable()
-			.category(QuickActionType.CONFIGURE_MAP);
+			.category(QuickActionType.CONFIGURE_MAP)
+			.allowedInAndroidAuto(true);
 
 	public ShowHideTemperatureLayerAction() {
 		super(TYPE);
