@@ -16,7 +16,7 @@ class MergeLocalizedTagsAlgorithm private constructor(private val langLookup: Po
 	companion object {
 		fun execute(langLookup: PoiAdditionalLangLookup, originalDict: Map<String, String>): Map<String, Any> {
 			val instance = MergeLocalizedTagsAlgorithm(langLookup)
-			return instance.executeImpl(HashMap(originalDict))
+			return instance.executeImpl(LinkedHashMap(originalDict))
 		}
 	}
 

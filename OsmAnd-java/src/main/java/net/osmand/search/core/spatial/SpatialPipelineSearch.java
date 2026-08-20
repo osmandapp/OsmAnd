@@ -18,18 +18,7 @@ import net.osmand.search.core.spatial.SpatialSearchContext.SpatialSearchStats;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtomXY;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSettings;
-import net.osmand.util.SearchAlgorithms;
 
-// DONE Add non maximum results as well... (surplus words +-) -  germany_remstal!
-// DONE enlarge bbox if failed 
-// DONE Gen combinations of 2 refs
-// DONE duplicate words in query wilkes-barre
-// DONE x1 implement correct mixing alternative masks! (de in Portugal) 
-// DONE  common words to skip - (14-45, West 31st Road), (liectenstein_poi) , (dedupl_capraia)
-// DONE W&W duplicate words in name
-// DONE Cancel poi type intersection poi (germany_remstal):
-// THINK LIMIT poi category -> elo by query (top 5?)?
-// THINK introduce mask check into joiner index ?
 public class SpatialPipelineSearch {
 
 	public static int MIN_RESULTS_ENLARGE = 0;

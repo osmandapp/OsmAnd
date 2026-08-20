@@ -24,6 +24,7 @@ public class GpxFileLoaderTask extends AsyncTask<Void, Void, GpxFile> {
 	private final File file;
 	private final InputStream inputStream;
 	private final CallbackWithObject<GpxFile> callback;
+	private final boolean addGeneralTrack;
 
 	private final WeakReference<Activity> activityRef;
 	private ProgressDialog progressDialog;
@@ -52,9 +53,17 @@ public class GpxFileLoaderTask extends AsyncTask<Void, Void, GpxFile> {
 	public GpxFileLoaderTask(@NonNull File file,
 	                         @Nullable Activity progressContext,
 	                         @Nullable CallbackWithObject<GpxFile> callback) {
+		this(file, progressContext, true, callback);
+	}
+
+	public GpxFileLoaderTask(@NonNull File file,
+	                         @Nullable Activity progressContext,
+	                         boolean addGeneralTrack,
+	                         @Nullable CallbackWithObject<GpxFile> callback) {
 		this.file = file;
 		this.inputStream = null;
 		this.callback = callback;
+		this.addGeneralTrack = addGeneralTrack;
 		this.activityRef = new WeakReference<>(progressContext);
 	}
 
@@ -64,6 +73,7 @@ public class GpxFileLoaderTask extends AsyncTask<Void, Void, GpxFile> {
 		this.file = null;
 		this.inputStream = inputStream;
 		this.callback = callback;
+		this.addGeneralTrack = true;
 		this.activityRef = new WeakReference<>(progressContext);
 	}
 
@@ -81,7 +91,7 @@ public class GpxFileLoaderTask extends AsyncTask<Void, Void, GpxFile> {
 	@Override
 	protected GpxFile doInBackground(Void... voids) {
 		return file != null
-				? SharedUtil.loadGpxFile(file) : SharedUtil.loadGpxFile(inputStream);
+				? SharedUtil.loadGpxFile(file, null, addGeneralTrack) : SharedUtil.loadGpxFile(inputStream);
 	}
 
 	@Override

@@ -151,6 +151,7 @@ public class FileUtils {
 		app.getMapButtonsHelper().onRenameGpxFile(src.getAbsolutePath(), dest.getAbsolutePath());
 
 		GpxSelectionHelper gpxSelectionHelper = app.getSelectedGpxHelper();
+		gpxSelectionHelper.renamePendingSelection(src.getAbsolutePath(), dest.getAbsolutePath());
 		SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(src.getAbsolutePath());
 		if (selectedGpxFile != null) {
 			gpxFile = selectedGpxFile.getGpxFile();
@@ -223,8 +224,9 @@ public class FileUtils {
 	}
 
 	public static boolean removeGpxFile(@NonNull OsmandApplication app, @NonNull File file) {
+		GpxSelectionHelper helper = app.getSelectedGpxHelper();
+		helper.cancelPendingSelection(file.getAbsolutePath());
 		if (file.exists()) {
-			GpxSelectionHelper helper = app.getSelectedGpxHelper();
 			SelectedGpxFile selected = helper.getSelectedFileByPath(file.getAbsolutePath());
 			file.delete();
 			if (selected != null) {

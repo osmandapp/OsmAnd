@@ -101,6 +101,7 @@ public class GPXUtilities {
 		SUPPORTED_EXTENSION_TAGS.put("speed_sensor", PointAttributes.SENSOR_TAG_SPEED);
 		SUPPORTED_EXTENSION_TAGS.put("cad", PointAttributes.SENSOR_TAG_CADENCE);
 		SUPPORTED_EXTENSION_TAGS.put("cadence", PointAttributes.SENSOR_TAG_CADENCE);
+		SUPPORTED_EXTENSION_TAGS.put("power", PointAttributes.SENSOR_TAG_BIKE_POWER);
 		SUPPORTED_EXTENSION_TAGS.put("temp", PointAttributes.SENSOR_TAG_TEMPERATURE_W);
 		SUPPORTED_EXTENSION_TAGS.put("wtemp", PointAttributes.SENSOR_TAG_TEMPERATURE_W);
 		SUPPORTED_EXTENSION_TAGS.put("atemp", PointAttributes.SENSOR_TAG_TEMPERATURE_A);

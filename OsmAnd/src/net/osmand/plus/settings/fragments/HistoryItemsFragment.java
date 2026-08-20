@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.Location;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
@@ -34,6 +35,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.ui.DeleteAllDataConfirmationBottomSheet.OnConfirmDeletionListener;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.settings.fragments.DeleteHistoryTask.DeleteHistoryListener;
 import net.osmand.plus.settings.fragments.HistoryAdapter.OnItemSelectedListener;
@@ -42,6 +44,8 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
+import net.osmand.search.core.SearchResult;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -54,9 +58,13 @@ import java.util.Set;
 public abstract class HistoryItemsFragment extends BaseFullScreenDialogFragment implements OnItemSelectedListener,
 		OsmAndCompassListener, OsmAndLocationListener, OnConfirmDeletionListener, DeleteHistoryListener {
 
+	private static final String PRESELECTED_ITEM_KEY = "preselected_item_key";
+
 	protected final List<Object> items = new ArrayList<>();
 	protected final Set<Object> selectedItems = new HashSet<>();
 	protected final Map<Integer, List<?>> itemsGroups = new HashMap<>();
+
+	private int preselectedPosition = -1;
 
 	protected View appbar;
 	protected DialogButton deleteButton;
@@ -75,6 +83,40 @@ public abstract class HistoryItemsFragment extends BaseFullScreenDialogFragment 
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		updateHistoryItems();
+		if (savedInstanceState == null) {
+			selectPreselectedItem();
+		}
+	}
+
+	private void selectPreselectedItem() {
+		Bundle args = getArguments();
+		String key = args != null ? args.getString(PRESELECTED_ITEM_KEY) : null;
+		if (Algorithms.isEmpty(key)) {
+			return;
+		}
+		for (int i = 0; i < items.size(); i++) {
+			Object item = items.get(i);
+			if (item instanceof SearchResult searchResult
+					&& key.equals(getItemKey(HistorySettingsFragment.getHistoryEntry(searchResult)))) {
+				selectedItems.add(item);
+				preselectedPosition = i;
+				break;
+			}
+		}
+	}
+
+	@Nullable
+	protected static String getItemKey(@Nullable HistoryEntry entry) {
+		return entry != null ? PointDescription.serializeToString(entry.getName()) : null;
+	}
+
+	protected void setPreselectedItem(@Nullable HistoryEntry entry) {
+		String key = getItemKey(entry);
+		if (!Algorithms.isEmpty(key)) {
+			Bundle args = getArguments() != null ? getArguments() : new Bundle();
+			args.putString(PRESELECTED_ITEM_KEY, key);
+			setArguments(args);
+		}
 	}
 
 	@Nullable
@@ -97,6 +139,9 @@ public abstract class HistoryItemsFragment extends BaseFullScreenDialogFragment 
 		adapter = new HistoryAdapter(mapActivity, this, nightMode);
 		adapter.updateSettingsItems(items, itemsGroups, selectedItems);
 		recyclerView.setAdapter(adapter);
+		if (preselectedPosition >= 0) {
+			recyclerView.scrollToPosition(preselectedPosition);
+		}
 
 		setupToolbar(view);
 		setupButtons(view);
@@ -344,10 +389,15 @@ public abstract class HistoryItemsFragment extends BaseFullScreenDialogFragment 
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull HistorySource source, @Nullable Fragment target) {
+		showInstance(manager, source, target, null);
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull HistorySource source,
+	                                @Nullable Fragment target, @Nullable HistoryEntry preselectedEntry) {
 		if (source == NAVIGATION) {
-			NavigationHistorySettingsFragment.showInstance(manager, target);
+			NavigationHistorySettingsFragment.showInstance(manager, target, preselectedEntry);
 		} else if (source == SEARCH) {
-			SearchHistorySettingsFragment.showInstance(manager, target);
+			SearchHistorySettingsFragment.showInstance(manager, target, preselectedEntry);
 		}
 	}
 }

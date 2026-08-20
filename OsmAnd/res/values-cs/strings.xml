@@ -1079,7 +1079,7 @@
     <string name="error_message_pattern">Chyba: {0}</string>
     <string name="dahboard_options_dialog_title">Nastavení domovské stránky</string>
     <string name="shared_string_card_was_hidden">Karta byla skryta</string>
-    <string name="shared_string_undo">Zpět</string>
+    <string name="shared_string_undo">Vrátit</string>
     <string name="tab_title_basic">Základní</string>
     <string name="tab_title_advanced">Rozšířené</string>
     <string name="building_number">Číslo domu</string>
@@ -1662,7 +1662,7 @@
     <string name="my_location">Moje poloha</string>
     <string name="shared_string_finish">Dokončit</string>
     <string name="plan_route">Naplánovat trasu</string>
-    <string name="shared_string_sort">Seřadit</string>
+    <string name="shared_string_sort">Řadit</string>
     <string name="coordinate_input">Zadání souřadnic</string>
     <string name="marker_save_as_track_descr">Vyexportovat vaše značky do tohoto GPX souboru:</string>
     <string name="move_to_history">Přesunout do historie</string>
@@ -5248,7 +5248,7 @@
     <string name="coordinate_format_select_other">Vyberte jiný formát</string>
     <string name="coordinate_format_primary">Primární</string>
     <string name="shared_string_recent">Nedávné</string>
-    <string name="sort_by_nearest_to_map_center">Blízko středu mapy</string>
+    <string name="sort_by_nearest_to_map_center">Nejblíž ke středu mapy</string>
     <string name="last_week">Minulý týden</string>
     <string name="history_is_turned_off">Historie je vypnutá</string>
     <string name="search_and_navigation_history_disabled_descr">Historie vyhledávání a navigace jsou zakázány. Povolte je v nastavení, abyste mohli vidět tuto aktivitu.</string>
@@ -5259,7 +5259,7 @@
     <string name="search_around_my_location_description">Hledat okolo mojí polohy</string>
     <string name="sort_by_relevance">Relevance</string>
     <string name="routing_attr_motor_type_ethanol_name">Etanol</string>
-    <string name="sort_by_nearest_to_current_location">Nejblíže k aktuální poloze</string>
+    <string name="sort_by_nearest_to_current_location">Nejblíž k aktuální poloze</string>
     <string name="attached_media_delete_confirmation">Smazat %1$d mediálních položek od tohoto bodu? Média uložená aplikací a nepřipojená nikde jinde budou také smazána ze zařízení.</string>
     <string name="android_auto_missing_maps_desc">Stáhněte si chybějící mapy trasy, abyste mohli pokračovat.</string>
     <string name="android_auto_possible_missing_maps_desc">Možná chybí některé mapy. Zkuste pokračovat s použitím stávajících map.</string>

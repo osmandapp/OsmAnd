@@ -5,6 +5,9 @@ buildscript {
         mavenCentral()
         maven {
             url 'https://developer.huawei.com/repo/'
+            content {
+                includeGroupByRegex 'com\\.huawei(\\..*)?'
+            }
         }
     }
     dependencies {
@@ -21,7 +24,7 @@ buildscript {
 }
 
 plugins {
-	id "de.undercouch.download" version "4.1.1"
+	id "de.undercouch.download" version "5.7.0"
 }
 
 
@@ -47,6 +50,9 @@ allprojects {
         }
         maven {
             url 'https://developer.huawei.com/repo/'
+            content {
+                includeGroupByRegex 'com\\.huawei(\\..*)?'
+            }
         }
     }
 }

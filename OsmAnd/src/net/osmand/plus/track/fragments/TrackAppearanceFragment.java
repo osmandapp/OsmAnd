@@ -805,7 +805,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 			inflate(R.layout.list_item_divider_basic, container, true);
 
-			track3DCard = new Track3DCard(mapActivity, selectedGpxFile.getTrackAnalysis(app), trackDrawInfo);
+			track3DCard = new Track3DCard(mapActivity, selectedGpxFile.getTrackSummaryAnalysis(app), trackDrawInfo);
 			addCard(container, track3DCard);
 			addCard(container, new ActionsCard(mapActivity));
 		}

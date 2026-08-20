@@ -96,7 +96,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 
 		if (!Algorithms.isEmpty(amenityExtensions)) {
 			AdditionalInfoBundle bundle = new AdditionalInfoBundle(app.getPoiTypes(), amenityExtensions);
-			AmenityUIHelper helper = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), bundle);
+			AmenityUIHelper helper = new AmenityUIHelper(mapActivity, bundle);
 			helper.setLight(isLightContent());
 			helper.setLatLon(getLatLon());
 			helper.setCollapseExpandListener(getCollapseExpandListener());

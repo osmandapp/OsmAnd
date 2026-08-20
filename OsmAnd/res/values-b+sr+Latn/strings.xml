@@ -1642,7 +1642,7 @@
     <string name="favorite_category_add_new_title">Dodaj novu kategoriju</string>
     <string name="favorite_category_name">Naziv kategorije</string>
     <string name="favorite_category_dublicate_message">Ime već postoji.</string>
-    <string name="shared_string_send">Šalji</string>
+    <string name="shared_string_send">Pošalji</string>
     <string name="share_menu_location">Deli poziciju</string>
     <string name="share_geo">geo:</string>
     <string name="simulate_initial_startup">Simuliraj prvo pokretanje aplikacije</string>
@@ -3521,7 +3521,7 @@
     <string name="weather_wind_kn">kn</string>
     <string name="wind_widget_desc">Prikazuje brzine vetra na trenutnom središtu mape.</string>
     <string name="weather_temperature_fahrenheit">Farenhajt</string>
-    <string name="share_crash_log">Podeli dnevnik rušenja programa</string>
+    <string name="share_crash_log">Podeli dnevnik rušenja</string>
     <string name="map_widget_ant_bicycle_dist">Rastojanje bicikla</string>
     <string name="available_as_part_of_subscription_plan">Dostupno kao deo pretplate %1$s.</string>
     <string name="relative_bearing_widget_desc">Prikazuje ugao između pravca tvog kretanja i ciljne tačke.</string>
