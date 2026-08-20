@@ -43,6 +43,12 @@ public class OsmMapUtils {
 	public static boolean isSuperRoute(Map<String, String> tags) {
 		return "superroute".equals(tags.get(OSMSettings.OSMTagKey.TYPE.getValue()));
 	}
+	
+	public static boolean requireIndexBbox(Map<String, String> tags) {
+		return "multipolygon".equals(tags.get(OSMSettings.OSMTagKey.TYPE.getValue())) || 
+				"residential".equals((tags.get(OSMSettings.OSMTagKey.LANDUSE.getValue()))) ||
+				"national_park".equals(tags.get(OSMSettings.OSMTagKey.BOUNDARY.getValue()));
+	}
 
 	public static LatLon getCenter(Entity e) {
 		return getCenter(e, false);
