@@ -5728,4 +5728,18 @@
     <string name="duplicate_map_replace_with_road">Ganti dengan Khusus Jalan</string>
     <string name="rendering_attr_surface_clay_name">Clay</string>
     <string name="rendering_attr_surface_laterite_name">Laterit</string>
+    <string name="share_favorites_media_preparation_failed">Tidak dapat menyertakan media terlampir. Hanya membagikan poin.</string>
+    <plurals name="files_count">
+        <item quantity="other">%d file</item>
+    </plurals>
+    <string name="preparing_file">Menyiapkan file</string>
+    <string name="shared_string_archive">Arsip</string>
+    <string name="share_favorites_with_media_description">Poin favorit di %1$s memiliki media terlampir. Bagikan poin saja, atau poin dengan media sebagai arsip.</string>
+    <string name="share_favorites_points_only">Hanya poin</string>
+    <string name="share_favorites_points_and_media">Poin dan media</string>
+    <string name="share_favorites_preparation_failed">Tidak dapat menyiapkan file untuk dibagikan.</string>
+    <string name="share_favorites_share_failed">Tidak dapat membagikan file.</string>
+    <string name="share_favorites_missing_media_warning">Beberapa media terlampir tidak dapat disertakan.</string>
+    <string name="search_on_web">Cari di web</string>
+    <string name="release_5_4">• Pencarian spasial baru — temukan tempat dan cari di sekitar suatu tempat\n\n • UI pencarian yang diperbarui: pengurutan, filter kategori, tampilan lebih bersih\n\n • Lampirkan foto dan media ke Favorit\n\n • Favorit: dukungan subgrup dan folder yang dapat disematkan\n\n • Koordinat: pencarian, grid peta, dan tampilan POI kini mendukung EPSG dan locator Maidenhead\n\n • Diperbaiki gangguan navigasi; beralih antara rute Standar dan Cepat\n\n • Atur skala peta Android Auto secara terpisah dari ponsel Anda\n\n • Astronomi menambahkan gerhana matahari &amp; bulan</string>
 </resources>

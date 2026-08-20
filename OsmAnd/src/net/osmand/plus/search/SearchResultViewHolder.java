@@ -1,6 +1,9 @@
 package net.osmand.plus.search;
 
 import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE;
+import static net.osmand.plus.helpers.AmenityExtensionsHelper.MIN_UPHILL_DOWNHILL_FIXED_TO_SHOW;
+import static net.osmand.plus.helpers.AmenityExtensionsHelper.MIN_UPHILL_DOWNHILL_PERCENT_TO_SHOW;
+import static net.osmand.plus.utils.OsmAndFormatterParams.NO_TRAILING_ZEROS;
 
 import android.graphics.drawable.Drawable;
 import android.text.SpannableString;
@@ -12,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,11 +43,15 @@ import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.track.clickable.ClickableWayHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
+import net.osmand.search.core.ObjectType;
+import net.osmand.search.core.SearchResult;
+import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.search.core.TopIndexFilter;
 import net.osmand.search.core.spatial.SpatialSearchResult;
 import net.osmand.util.Algorithms;
@@ -118,14 +126,16 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 		}
 		Drawable typeIcon = item.getTypeIcon();
 		ImageView groupIcon = view.findViewById(R.id.type_name_icon);
+		boolean groupIconVisible = typeIcon != null && hasDesc;
 		if (groupIcon != null) {
-			if (typeIcon != null && hasDesc) {
+			if (groupIconVisible) {
 				groupIcon.setImageDrawable(typeIcon);
 				groupIcon.setVisibility(View.VISIBLE);
 			} else {
 				groupIcon.setVisibility(View.GONE);
 			}
 		}
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.dot_divider), hasDesc && !groupIconVisible);
 
 		LinearLayout timeLayout = view.findViewById(R.id.time_layout);
 		if (timeLayout != null) {
@@ -220,11 +230,20 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	public static void bindFullSearchResult(@NonNull View view, @NonNull QuickSearchListItem item) {
+		OsmandApplication app = AndroidUtils.getApp(view.getContext());
 		TextView title = view.findViewById(R.id.title);
 		TextView subtitle = view.findViewById(R.id.subtitle);
 		ImageView imageView = view.findViewById(R.id.imageView);
 
+		cancelPhotoRequest(imageView);
 		imageView.setImageDrawable(item.getIcon());
+		AndroidUiHelper.updateVisibility(imageView, true);
+		setupIconContainer(view, imageView, app);
+		FrameLayout imageContainer = view.findViewById(R.id.image_container);
+		if (imageContainer != null) {
+			imageContainer.setBackgroundColor(AndroidUtils.getColorFromAttr(view.getContext(),
+					R.attr.activity_background_color));
+		}
 		title.setText(item.getSpannableName());
 		String typeName = item.getTypeName();
 		subtitle.setText(typeName);
@@ -233,6 +252,110 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.time_layout), false);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.description), false);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.shieldSign), false);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.dot_divider), !Algorithms.isEmpty(typeName));
+		resetTrackStatistics(view);
+	}
+
+	public static void bindTrackSearchResult(@NonNull View view, @NonNull QuickSearchListItem item,
+	                                         @NonNull SearchTrackData trackData, boolean nightMode) {
+		OsmandApplication app = AndroidUtils.getApp(view.getContext());
+		TextView title = view.findViewById(R.id.title);
+		TextView subtitle = view.findViewById(R.id.subtitle);
+		TextView addressTv = view.findViewById(R.id.address);
+		ImageView imageView = view.findViewById(R.id.imageView);
+
+		title.setText(getTrackTitle(item));
+
+		String typeName = app.getString(R.string.shared_string_gpx_track);
+		String activityName = trackData.getActivityName();
+		subtitle.setText(Algorithms.isEmpty(activityName) ? typeName
+				: app.getString(R.string.ltr_or_rtl_combine_via_bold_point, typeName, activityName));
+		AndroidUiHelper.updateVisibility(subtitle, true);
+
+		cancelPhotoRequest(imageView);
+		imageView.setImageDrawable(item.getIcon());
+		AndroidUiHelper.updateVisibility(imageView, true);
+		setupIconContainer(view, imageView, app);
+		FrameLayout imageContainer = view.findViewById(R.id.image_container);
+		if (imageContainer != null) {
+			imageContainer.setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode));
+		}
+
+		String address = trackData.getAddress();
+		AndroidUiHelper.setTextAndChangeVisibility(addressTv, address);
+		bindTrackStatistics(view, trackData.getLength(), trackData.getUphill(), trackData.getDownhill(),
+				!Algorithms.isEmpty(address));
+
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.time_layout), false);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.description), false);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.shieldSign), false);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.dot_divider), true);
+	}
+
+	@NonNull
+	private static String getTrackTitle(@NonNull QuickSearchListItem item) {
+		SearchResult searchResult = item.getSearchResult();
+		String name = searchResult != null ? searchResult.localeName : null;
+		if (Algorithms.isEmpty(name)) {
+			name = item.getName();
+		}
+		String title = Algorithms.isEmpty(name) ? null : GpxHelper.INSTANCE.getGpxTitle(name);
+		return title != null ? title.replace("/", " • ").trim() : "";
+	}
+
+	public static void bindTrackStatistics(@NonNull View view, float length, double uphill,
+	                                       double downhill, boolean hasAddress) {
+		View statistics = view.findViewById(R.id.track_statistics);
+		if (statistics == null) {
+			return;
+		}
+		boolean hasLength = length > 0;
+		AndroidUiHelper.updateVisibility(statistics, hasLength);
+		if (!hasLength) {
+			return;
+		}
+		OsmandApplication app = AndroidUtils.getApp(view.getContext());
+		TextView lengthText = view.findViewById(R.id.track_length);
+		lengthText.setText(OsmAndFormatter.getFormattedDistance((float) length, app, NO_TRAILING_ZEROS));
+
+		bindSlopeValue(view, R.id.track_uphill_icon, R.id.track_uphill, uphill, length, app);
+		bindSlopeValue(view, R.id.track_downhill_icon, R.id.track_downhill, downhill, length, app);
+
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.track_statistics_divider), hasAddress);
+	}
+
+	private static void bindSlopeValue(@NonNull View view, int iconId, int textId, double value,
+	                                   float length, @NonNull OsmandApplication app) {
+		boolean visible = value >= MIN_UPHILL_DOWNHILL_FIXED_TO_SHOW
+				&& value / length * 100 > MIN_UPHILL_DOWNHILL_PERCENT_TO_SHOW;
+		AndroidUiHelper.updateVisibility(view.findViewById(iconId), visible);
+		TextView textView = view.findViewById(textId);
+		AndroidUiHelper.updateVisibility(textView, visible);
+		if (visible) {
+			textView.setText(OsmAndFormatter.getFormattedDistance((float) value, app, NO_TRAILING_ZEROS));
+		}
+	}
+
+	public static void resetTrackStatistics(@NonNull View view) {
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.track_statistics), false);
+	}
+
+	private static void cancelPhotoRequest(@NonNull ImageView imageView) {
+		Picasso.get().cancelRequest(imageView);
+		imageView.setTag(null);
+	}
+
+	public static void bindCoordinatesSearchResult(@NonNull View view, @NonNull QuickSearchListItem item) {
+		OsmandApplication app = AndroidUtils.getApp(view.getContext());
+		ImageView imageView = view.findViewById(R.id.imageView);
+
+		imageView.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_coordinates_location));
+		setupIconContainer(view, imageView, app);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.time_layout), false);
+	}
+
+	public static boolean isCoordinatesItem(@Nullable SearchResult searchResult) {
+		return searchResult != null && searchResult.objectType == ObjectType.LOCATION;
 	}
 
 	public static void bindPOISearchResult(@NonNull View view, @NonNull QuickSearchListItem item,
@@ -263,17 +386,26 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 
 		String description = null;
 		String photoUrl = null;
+		boolean routeTrack = false;
 		if (amenity != null) {
 			photoUrl = amenity.getWikiIconUrl();
 			ClickableWayHelper clickableWayHelper = app.getClickableWayHelper();
 			if (amenity.isRouteTrack() || clickableWayHelper.isClickableWayAmenity(amenity)) {
+				routeTrack = true;
 				typeName = amenity.getRouteActivityType();
 				hasRouteShield = QuickSearchListItem.getRouteShieldDrawable(app, amenity) != null;
-				address = String.format("%s • %s", AmenityExtensionsHelper.getAmenityMetricsFormatted(amenity, app), address);
 			}
 		}
 
 		AndroidUiHelper.setTextAndChangeVisibility(addressTv, address);
+		if (routeTrack) {
+			bindTrackStatistics(view, AmenityExtensionsHelper.getAmenityDistanceMeters(amenity),
+					AmenityExtensionsHelper.getAmenityUphillMeters(amenity),
+					AmenityExtensionsHelper.getAmenityDownhillMeters(amenity),
+					!Algorithms.isEmpty(address));
+		} else {
+			resetTrackStatistics(view);
+		}
 		subtitle.setText(typeName);
 
 		if (timeLayout != null) {

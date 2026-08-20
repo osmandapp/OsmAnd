@@ -42,7 +42,6 @@ import net.osmand.shared.gpx.data.SmartFolder;
 import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.shared.gpx.filters.TrackFolderAnalysis;
 import net.osmand.shared.gpx.data.TracksGroup;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
@@ -102,7 +101,6 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 		this.nightMode = nightMode;
 		locationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(context);
 		locationViewCache.arrowResId = R.drawable.ic_direction_arrow;
-		locationViewCache.arrowColor = ColorUtilities.getActiveIconColorId(nightMode);
 		this.selectedFolder = selectedFolder;
 		sortMode = TracksSortMode.getDefaultSortMode(selectedFolder == null ? null : selectedFolder.getId());
 	}

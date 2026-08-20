@@ -520,7 +520,7 @@
     <string name="arrived_at_destination">Ankommet.</string>
     <string name="invalid_locations">Ugyldige koordinater</string>
     <string name="loading_data">Indlæser data…</string>
-    <string name="previous_run_crashed">Sidste OsmAnd kørsel fejlede. Logfilen er i {0}. Rapporter hændelsen og vedhæft logfilen.</string>
+    <string name="previous_run_crashed">Sidste kørsel af OsmAnd havde nedbrud. Logfilen er i {0}. Rapporter problemet og vedhæft logfilen.</string>
     <string name="saving_gpx_tracks">Gemmer GPX-fil…</string>
     <string name="finished_task">Færdig</string>
     <string name="data_settings">Data</string>
@@ -2181,7 +2181,7 @@
     <string name="default_speed_setting_descr">Ændre standardhastighedsindstillinger</string>
     <string name="new_profile">Ny profil</string>
     <string name="shared_string_crash">Nedbrud</string>
-    <string name="last_launch_crashed">Sidste kørsel af OsmAnd mislykkedes. Hjælp med at forbedre OsmAnd ved at dele fejlmeddelelsen.</string>
+    <string name="last_launch_crashed">Sidste kørsel af OsmAnd havde nedbrud. Hjælp med at forbedre OsmAnd ved at dele fejlmeddelelsen.</string>
     <string name="app_mode_ufo">UFO</string>
     <string name="release_3_4">• App-profiler: opret en brugerdefineret profil med en brugerdefineret ikon og farve\n\n • Tilpas enhver profilers standard- og min/max hastigheder\n\n •Tilføjet et modul til de aktuelle koordinater\n\n • Tilføjede muligheder for at vise kompasset og en radiuslineal på kortet\n\n • Rettet logføring af baggrundsspor\n\n • Forbedret hentning af kort i baggrunden\n\n • Returned \'Turn screen on\' option\n\n • Rettet Wikipedia sprogvalg\n\n • Rettet kompasknappens opførsel under navigationen\n\n • Andre fejlrettelser</string>
     <string name="app_mode_personal_transporter">Person transport</string>
@@ -3665,7 +3665,7 @@
     <string name="show_borders_of_downloaded_maps">Vis grænser for downloadede kort</string>
     <string name="show_map_symbols_desc">Tekst, vejskilte og andre.</string>
     <string name="rendering_engine_failed">OsmAnd\'s kortgengivelse er for nylig brudt ned.</string>
-    <string name="share_crash_log">Del log over nedbrud</string>
+    <string name="share_crash_log">Del nedbrudsrapport</string>
     <string name="dismiss_changes_descr">Alle ændringer vil blive afvist.</string>
     <string name="restart_now">Genstart nu</string>
     <string name="map_rendering_engine_v1">Version 1</string>

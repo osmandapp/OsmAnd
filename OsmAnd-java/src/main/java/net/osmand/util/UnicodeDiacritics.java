@@ -9,7 +9,7 @@ import java.util.BitSet;
  */
 public final class UnicodeDiacritics {
 
-	private static final BitSet BMP_MAY_NEED_DIACRITIC_PROCESSING = new BitSet(65536);
+	private static final boolean[] BMP_MAY_NEED_DIACRITIC_PROCESSING = new boolean[65536]; // BitSet is 4x slower
 	private String lastKey;
 	private String lastValue;
 
@@ -26,7 +26,7 @@ public final class UnicodeDiacritics {
 		char[] buf = new char[2];
 		for (int cp = 0; cp < 65536; cp++) {
 			if (bmpCodePointNeedsDiacriticProcessingInit(cp, buf)) {
-				BMP_MAY_NEED_DIACRITIC_PROCESSING.set(cp);
+				BMP_MAY_NEED_DIACRITIC_PROCESSING[cp] = true;
 			}
 		}
 	}
@@ -47,7 +47,7 @@ public final class UnicodeDiacritics {
 		return false;
 	}
 
-	private boolean stringMayNeedDiacriticProcessing(CharSequence input) {
+	private boolean stringMayNeedDiacriticProcessing(String input) {
 		for (int i = 0, len = input.length(); i < len; ) {
 			char ch = input.charAt(i);
 			int cp;
@@ -59,7 +59,7 @@ public final class UnicodeDiacritics {
 				cp = ch;
 				step = 1;
 			}
-			if ((cp <= 0xFFFF && BMP_MAY_NEED_DIACRITIC_PROCESSING.get(cp))
+			if ((cp <= 0xFFFF && BMP_MAY_NEED_DIACRITIC_PROCESSING[cp])
 					|| (cp > 0xFFFF && Character.getType(cp) == Character.NON_SPACING_MARK)) {
 				return true;
 			}

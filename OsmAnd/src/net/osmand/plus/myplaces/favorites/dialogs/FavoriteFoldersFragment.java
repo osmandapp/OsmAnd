@@ -23,6 +23,7 @@ import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet.CategorySelectionListener;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.favorites.FavoriteFolder;
+import net.osmand.plus.myplaces.favorites.FavoriteFolderPath;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.dialogs.FavoriteFoldersAdapter.FavoriteAdapterListener;
 import net.osmand.plus.myplaces.favorites.dialogs.SortFavoriteViewHolder.SortFavoriteListener;
@@ -106,6 +107,7 @@ public class FavoriteFoldersFragment extends BaseFavoriteListFragment
 	public void onResume() {
 		super.onResume();
 		updateContent();
+		restoreState(getArguments());
 	}
 
 	protected FavoriteAdapterListener getFavoriteFolderListener(){
@@ -311,7 +313,20 @@ public class FavoriteFoldersFragment extends BaseFavoriteListFragment
 			String folderPath = selectedFolderPath;
 			selectedFolderPath = null;
 			selectedGroup = null;
+			openFolderWithParents(folderPath);
+		}
+	}
+
+	private void openFolderWithParents(@NonNull String folderPath) {
+		List<String> segments = FavoriteFolderPath.split(folderPath);
+		if (segments.size() < 2) {
 			openFolder(folderPath);
+			return;
+		}
+		List<String> parentSegments = new ArrayList<>();
+		for (String segment : segments) {
+			parentSegments.add(segment);
+			openFolder(FavoriteFolderPath.join(parentSegments));
 		}
 	}
 

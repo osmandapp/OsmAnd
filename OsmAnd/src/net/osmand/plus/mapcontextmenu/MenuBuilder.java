@@ -138,7 +138,6 @@ public class MenuBuilder {
 	protected boolean firstRow;
 	protected boolean matchWidthDivider;
 	protected Amenity amenity;
-	protected boolean showDefaultTags = false;
 	private LatLon latLon;
 	private boolean hidden;
 	private boolean showTitleIfTruncated = true;
@@ -285,13 +284,6 @@ public class MenuBuilder {
 
 	public void setAmenity(Amenity amenity) {
 		this.amenity = amenity;
-		if (amenity != null) {
-			PoiCategory pc = amenity.getType();
-			PoiType pt = pc.getPoiTypeByKeyName(amenity.getSubType());
-			if (pt != null && pt.isDefaultForCategory()) {
-				showDefaultTags = true;
-			}
-		}
 	}
 
 	public void addMenuPlugin(@NonNull OsmandPlugin plugin) {

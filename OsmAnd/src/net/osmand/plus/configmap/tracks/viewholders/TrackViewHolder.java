@@ -21,9 +21,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.data.LatLon;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.configmap.tracks.TrackSortModesHelper;
 import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -174,15 +176,19 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 				appendDistanceDescription(builder, trackItem, analysis, shouldShowFolder);
 			} else if (sortMode == DURATION_ASCENDING || sortMode == DURATION_DESCENDING) {
 				appendDurationDescription(builder, trackItem, analysis, shouldShowFolder);
-			} else if (sortMode == NEAREST) {
-				appendNearestDescription(builder, trackItem, analysis, cityName, shouldShowFolder);
+			} else if (isNearestSortMode(sortMode)) {
+				appendNearestDescription(builder, sortMode, trackItem, analysis, cityName, shouldShowFolder);
 			} else if (sortMode == LAST_MODIFIED) {
 				appendLastModifiedDescription(builder, trackItem, analysis, shouldShowFolder);
 			}
 			description.setText(builder);
 		}
-		boolean showDirection = sortMode == NEAREST && analysis != null && analysis.getLatLonStart() != null;
+		boolean showDirection = isNearestSortMode(sortMode) && analysis != null && analysis.getLatLonStart() != null;
 		AndroidUiHelper.updateVisibility(directionIcon, showDirection);
+	}
+
+	private boolean isNearestSortMode(@NonNull TracksSortMode sortMode) {
+		return sortMode == NEAREST || sortMode == NEAREST_TO_MAP_CENTER;
 	}
 
 	private void setupIcon(@NonNull GpxDataItem item) {
@@ -256,13 +262,15 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	private void appendNearestDescription(@NonNull SpannableStringBuilder builder,
+	                                      @NonNull TracksSortMode sortMode,
 										  @NonNull TrackItem trackItem,
 	                                      @NonNull GpxTrackAnalysis analysis,
 	                                      @Nullable String cityName,
 	                                      boolean shouldShowFolder) {
 		KLatLon latLon = analysis.getLatLonStart();
 		if (latLon != null) {
-			UpdateLocationInfo locationInfo = new UpdateLocationInfo(app, null, SharedUtil.jLatLon(latLon));
+			LatLon fromLoc = TrackSortModesHelper.getDisplayReferenceLocation(app, sortMode);
+			UpdateLocationInfo locationInfo = new UpdateLocationInfo(app, fromLoc, SharedUtil.jLatLon(latLon));
 			builder.append(UpdateLocationUtils.getFormattedDistance(app, locationInfo, locationViewCache));
 
 			if (!Algorithms.isEmpty(cityName)) {

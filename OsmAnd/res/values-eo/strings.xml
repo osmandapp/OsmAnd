@@ -3052,8 +3052,8 @@
     <string name="restore_from_osmand_cloud">Restarigi el OsmAnd-Nubo</string>
     <string name="routing_attr_avoid_tunnels_description">Eviti tunelojn</string>
     <string name="routing_attr_avoid_tunnels_name">Sen tuneloj</string>
-    <string name="send_crash_log">Sendi pane-protokolon</string>
-    <string name="send_logcat_log">Sendi «logcat»</string>
+    <string name="send_crash_log">Sendi pane-protokolojn</string>
+    <string name="send_logcat_log">Sendi protokolon de nuna seanco</string>
     <string name="backup_promocode">Reklamkodo</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s aŭ %2$s</string>
     <string name="continue_with">Pluigi kun %1$s</string>
@@ -3594,7 +3594,7 @@
     <string name="map_widget_altitude_current_location">Altitudo: nuna pozicio</string>
     <string name="map_widget_altitude_map_center_desc">Vidigas altecon super la marnivelo por la montrata centro de la mapo.</string>
     <string name="map_widget_altitude_desc">Fenestraĵoj montrantaj supermaran altecon de via nuna pozicio aŭ de la map-centro.</string>
-    <string name="external_sensors_plugin_description">Aliro al eksteraj sentiloj por legi koran pulson, rapidon de pedalado, rapidon kaj povumon de biciklado. Postulas por ke la aparato estu konektita al kongruaj sentiloj per la sendrata protokolo ANT+.</string>
+    <string name="external_sensors_plugin_description">Aliro al eksteraj sentiloj por legi koran pulson, rapidon de pedalado, rapidon kaj povumon de biciklado. Postulas por ke la aparato estu konektita al akordaj sentiloj per la sendrata protokolo ANT+.</string>
     <string name="map_widget_rendering_fps">Rapido de map-bildigado</string>
     <string name="map_widget_rendering_fps_desc">Montras kiel rapide la mapo kaj ĝiaj elementoj estas bildigataj sur la ekrano (en kadroj en sekundo [FPS]).</string>
     <string name="ant_missing_dependency_descr">Ne trovis la postulatan servon “%1$s”. \nVi devas instali aŭ ĝisdatigi ĝin. \nĈu malfermi la vendejon Google Play por instali la servon?</string>
@@ -3945,7 +3945,7 @@
     <string name="osmand_cloud_delete_account_confirmation_descr">Ĉu forigi vian konton en OsmAnd-Nubo?
 \n
 \nTiu ĉi ago estas neinversigebla.</string>
-    <string name="backup_error_delete_account_email_match">Retpoŝta adreso ne kongruas kun uzantnomo</string>
+    <string name="backup_error_delete_account_email_match">Retpoŝta adreso ne akordas kun uzantnomo</string>
     <string name="verify_account_deletion_descr">Ni devas verigi vian konton antaŭ ol forigi ĝin. \n \nEnigu la retpoŝtan adreson, per kiu ĝi registriĝis. Sekve unufoja pasvorto estos sendita al ĝi.</string>
     <string name="osmand_cloud_deleting_account_descr">Baldaŭ ĉiuj viaj datumoj kaj via konto estos forigitaj el OsmAnd-Nubo.
 \n
@@ -4127,13 +4127,13 @@
     <string name="key_is_already_assigned_error">La klavo “%1$s” estas jam asignita al la ago: “%2$s”</string>
     <string name="cloud_trash_clear_confirmation">Ĉu neinversigeble forigi ĉiujn objektojn en la rubujo?</string>
     <string name="key_event_action_zoom_in">Pligrandigi</string>
-    <string name="empty_smart_folder_title">Neniu kongrua spuro</string>
+    <string name="empty_smart_folder_title">Neniu akorda spuro</string>
     <string name="enable_to_use_external_input_device">Aktivigu por uzi eksterajn enigajn aparatojn kun OsmAnd</string>
     <string name="key_event_action_change_map_orientation">Ŝanĝi map-orientiĝon</string>
     <string name="smart_folder_name_present">Inteligenta dosierujo kun tiu ĉi nomo jam ekzistas</string>
     <string name="root_folder">Ĉefdosierujo</string>
     <string name="key_event_action_previous_app_profile">Antaŭa aplikaĵa profilo</string>
-    <string name="empty_smart_folder_description">Kongruaj spuroj montriĝos tie ĉi</string>
+    <string name="empty_smart_folder_description">Akordaj spuroj montriĝos tie ĉi</string>
     <string name="key_event_action_move_left">Movi maldekstren</string>
     <string name="restore_from_trash">Restarigi el rubujo</string>
     <string name="all_folders">Ĉiuj dosierujoj</string>
@@ -4182,7 +4182,7 @@
     <string name="shared_string_trash">Rubujo</string>
     <string name="loading_tracks">Reŝargado de spuroj</string>
     <string name="shared_string_delete_item">Forigi objekton</string>
-    <string name="searching_matching_tracks">Serĉi ĉiujn kongruajn spurojn</string>
+    <string name="searching_matching_tracks">Serĉi ĉiujn akordajn spurojn</string>
     <string name="change_button">Ŝanĝi butonon</string>
     <string name="download_to_device">Elŝuti al aparato</string>
     <string name="rendering_attr_showToll_name">Voj-impostejoj</string>
@@ -4267,7 +4267,7 @@
     <string name="routing_type">Speco de kurs-difinado</string>
     <string name="shared_string_all_colors">Ĉiuj koloroj</string>
     <string name="lang_ta_in">Tamila (Hinda)</string>
-    <string name="release_4_7">• nova fenestraĵo “Rapidmezurilo” kongrua kun Android Auto \n \n • eblo alĝustigi ekranon de mapo per aldoni plurajn butonojn “Rapida ago” \n \n • plibonigita legeblo de datumoj sur diagramoj \n \n • eblo filtri spurojn laŭ datumoj de eksteraj sentiloj \n \n • plibonigita alĝustigeblo de aspekto de grupoj de spuroj \n \n • subteno por pliajn etikedojn por GPX \n \n • elekto inter precizaj kaj rondigitaj valoroj por distancoj \n \n • samaspektigita ekrano de elekto de spuro \n \n • OpenStreetMap: transigo al ensalut-metodo OAuth 2.0</string>
+    <string name="release_4_7">• nova fenestraĵo “Rapidmezurilo” akorda kun Android Auto \n \n • eblo alĝustigi ekranon de mapo per aldoni plurajn butonojn “Rapida ago” \n \n • plibonigita legeblo de datumoj sur diagramoj \n \n • eblo filtri spurojn laŭ datumoj de eksteraj sentiloj \n \n • plibonigita alĝustigeblo de aspekto de grupoj de spuroj \n \n • subteno por pliajn etikedojn por GPX \n \n • elekto inter precizaj kaj rondigitaj valoroj por distancoj \n \n • samaspektigita ekrano de elekto de spuro \n \n • OpenStreetMap: transigo al ensalut-metodo OAuth 2.0</string>
     <string name="distance_during_navigation">Distanco dum navigi</string>
     <string name="precise">Preciza</string>
     <string name="round_up">Rondigita</string>
@@ -5342,4 +5342,7 @@
     <string name="duplicate_map_road_only_exists_desc">Vi jam havas la nur-vojan mapon de %1$s. Elŝuti la norman mapon duobligos la datumojn kaj povos etigi efikecon de la aplikaĵo.</string>
     <string name="duplicate_map_replace_with_standard">Anstataŭigi per norma</string>
     <string name="duplicate_map_replace_with_road">Anstataŭigi per nur-voja</string>
+    <string name="media_storage_camera_folder_descr">Konservas dosierojn al la dosierujo de fotilo (DCIM/OsmAnd). %1$s</string>
+    <string name="rendering_attr_surface_clay_name">Argilo</string>
+    <string name="rendering_attr_surface_laterite_name">Laterito</string>
 </resources>

@@ -1,10 +1,10 @@
 package net.osmand.plus.mapcontextmenu.builders.rows
 
 import android.content.Context
+import net.osmand.data.AmenityTagEntry.Builder
 import net.osmand.osm.PoiType
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.mapcontextmenu.MenuBuilder
-import net.osmand.plus.mapcontextmenu.builders.rows.AmenityInfoRow.Builder
 import net.osmand.plus.mapcontextmenu.builders.rows.behaviour.DefaultPoiAdditionalRowBehaviour
 import net.osmand.plus.mapcontextmenu.builders.rows.behaviour.IPoiAdditionalRowBehavior
 import net.osmand.plus.mapcontextmenu.builders.rows.behaviour.PoiRowParams
@@ -26,24 +26,25 @@ class PoiAdditionalUiRule(
     fun fillRow(
         app: OsmandApplication,
         context: Context,
-        rowBuilder: Builder,
+        entryBuilder: Builder,
         menuBuilder: MenuBuilder,
         poiType: PoiType?,
         key: String,
         value: String,
         subtype: String?
     ) {
-        fillRow(PoiRowParams(
+        val params = PoiRowParams(
             app = app,
             context = context,
-            builder = rowBuilder,
+            builder = entryBuilder,
             menuBuilder = menuBuilder,
             poiType = poiType,
             rule = this,
             key = key,
             value = value,
             subtype = subtype
-        ))
+        )
+        fillRow(params)
     }
 
     private fun fillRow(params: PoiRowParams) {

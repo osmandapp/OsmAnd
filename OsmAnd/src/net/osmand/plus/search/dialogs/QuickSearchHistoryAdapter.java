@@ -11,16 +11,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.search.SearchResultViewHolder;
+import net.osmand.plus.search.SearchTrackData;
+import net.osmand.plus.search.SearchTrackDataResolver;
 import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.search.listitems.QuickSearchDisabledHistoryItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.track.data.GPXInfo;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.CardItemPosition;
 import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.search.core.ObjectType;
@@ -42,16 +45,18 @@ public class QuickSearchHistoryAdapter extends ArrayAdapter<QuickSearchHistoryAd
 	private final boolean nightMode;
 	private final Calendar calendar = Calendar.getInstance();
 	private final UpdateLocationViewCache locationViewCache;
+	private final SearchTrackDataResolver trackDataResolver;
 
 	private final List<Item> items = new ArrayList<>();
 	private boolean useMapCenter;
 	private boolean showDestinationDate;
 
 	public QuickSearchHistoryAdapter(@NonNull OsmandApplication app, @NonNull FragmentActivity activity,
-			boolean nightMode) {
+			boolean nightMode, @NonNull SearchTrackDataResolver trackDataResolver) {
 		super(activity, R.layout.search_list_item);
 		this.app = app;
 		this.nightMode = nightMode;
+		this.trackDataResolver = trackDataResolver;
 		inflater = UiUtilities.getInflater(activity, nightMode);
 		locationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(activity);
 	}
@@ -142,9 +147,12 @@ public class QuickSearchHistoryAdapter extends ArrayAdapter<QuickSearchHistoryAd
 	private View bindResultItem(int position, @Nullable View convertView, @NonNull QuickSearchListItem listItem) {
 		SearchResult searchResult = listItem.getSearchResult();
 		LinearLayout view;
+		LatLon compassLocation = searchResult != null ? searchResult.location : null;
 		if (searchResult != null && searchResult.objectType == ObjectType.GPX_TRACK) {
-			view = getView(convertView, R.layout.search_gpx_list_item);
-			QuickSearchListAdapter.bindGpxTrack(view, listItem, (GPXInfo) searchResult.relatedObject);
+			view = getView(convertView, R.layout.search_list_item_full);
+			SearchTrackData trackData = trackDataResolver.resolve((GPXInfo) searchResult.relatedObject);
+			SearchResultViewHolder.bindTrackSearchResult(view, listItem, trackData, nightMode);
+			compassLocation = trackData.getStartLocation();
 		} else if (searchResult != null && searchResult.objectType == ObjectType.POI) {
 			view = getView(convertView, R.layout.search_list_item_full);
 			SearchResultViewHolder.bindPOISearchResult(view, listItem, nightMode, calendar);
@@ -152,6 +160,13 @@ public class QuickSearchHistoryAdapter extends ArrayAdapter<QuickSearchHistoryAd
 			view = getView(convertView, R.layout.search_list_item_full);
 			SearchResultViewHolder.bindFullSearchResult(view, listItem);
 			bindDestinationDate(view, listItem);
+		} else if (SearchResultViewHolder.isCoordinatesItem(searchResult)) {
+			view = getView(convertView, R.layout.search_legacy_history_list_item);
+			SearchResultViewHolder.bindSearchResult(view, listItem, calendar);
+			SearchResultViewHolder.bindCoordinatesSearchResult(view, listItem);
+		} else if (searchResult != null && searchResult.objectType == ObjectType.POI_TYPE) {
+			view = getView(convertView, R.layout.search_category_list_item);
+			SearchResultViewHolder.bindSearchResult(view, listItem, calendar);
 		} else if (listItem.isLegacyHistoryItem()) {
 			view = getView(convertView, R.layout.search_legacy_history_list_item);
 			SearchResultViewHolder.bindSearchResult(view, listItem, calendar);
@@ -160,7 +175,7 @@ public class QuickSearchHistoryAdapter extends ArrayAdapter<QuickSearchHistoryAd
 			SearchResultViewHolder.bindSearchResult(view, listItem, calendar);
 		}
 		if (view.findViewById(R.id.compass_layout) != null) {
-			QuickSearchListAdapter.updateCompass(view, listItem, locationViewCache, useMapCenter);
+			QuickSearchListAdapter.updateCompass(view, listItem, locationViewCache, useMapCenter, compassLocation);
 		}
 		setupBackground(position, view);
 		updateDivider(position, view);
@@ -188,15 +203,7 @@ public class QuickSearchHistoryAdapter extends ArrayAdapter<QuickSearchHistoryAd
 	private void setupBackground(int position, @NonNull View view) {
 		boolean first = position == 0;
 		boolean last = isLastResultInGroup(position);
-		if (first && last) {
-			view.setBackgroundResource(R.drawable.bg_list_card_round);
-		} else if (first) {
-			view.setBackgroundResource(R.drawable.bg_list_card_top_round);
-		} else if (last) {
-			view.setBackgroundResource(R.drawable.bg_list_card_bottom_round);
-		} else {
-			view.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
-		}
+		UiUtilities.applyCardItemBackground(view, CardItemPosition.get(first, last));
 	}
 
 	private void updateDivider(int position, @NonNull View view) {

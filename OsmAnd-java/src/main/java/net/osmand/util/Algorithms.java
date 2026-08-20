@@ -75,8 +75,8 @@ public class Algorithms {
 		}
 		for (int i = 0; i < s.length(); i++) {
 			char ch = s.charAt(i);
-			for (int j = 0; j < chars.length; j++) {
-				if (ch == chars[j]) {
+			for (char aChar : chars) {
+				if (ch == aChar) {
 					return true;
 				}
 			}
@@ -117,7 +117,7 @@ public class Algorithms {
 	}
 
 	public static boolean isEmpty(CharSequence s) {
-		return s == null || s.length() == 0;
+		return s == null || s.length() == 0; // Use length() == 0 because StringBuilder.isEmpty() added in API >= 35
 	}
 
 	public static boolean isNotEmpty(CharSequence s) {
