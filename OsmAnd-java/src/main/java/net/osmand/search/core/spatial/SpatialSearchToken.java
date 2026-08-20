@@ -257,9 +257,9 @@ public class SpatialSearchToken {
 		if (existing != null) {
 			if (existing != atom) {
 				// compare convention like method important!
-				// a school
 				int res = Boolean.compare(atom.name.startsWith(NameIndexReader.POI_CATEGORY_PREFIX), 
 						existing.name.startsWith(NameIndexReader.POI_CATEGORY_PREFIX));
+//				res = 0; // Test a school 
 				// select shortest available version
 				if (res == 0) {
 					res = Integer.compare(atom.otherWordsCnt + atom.otherFoundCnt,
