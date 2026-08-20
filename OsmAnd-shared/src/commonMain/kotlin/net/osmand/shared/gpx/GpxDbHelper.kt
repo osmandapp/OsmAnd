@@ -210,6 +210,8 @@ object GpxDbHelper : GpxReaderAdapter {
 
 	fun getItems() = dataItems.values.toList()
 
+	fun getRecentlyModifiedItems(limit: Int) = database.getRecentlyModifiedItems(limit)
+
 	fun getDirItems() = dirItems.values.toList()
 
 	private suspend fun readItems(): List<GpxDataItem> = database.getGpxDataItems()
