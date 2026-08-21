@@ -392,7 +392,7 @@ public class SpatialSearchTestAndDocs {
 		pattern = "Ukraine_kyiv";
 //		settings.DEV_USE_PIPELINE = false;
 //		query = "А+"; // + 731005224 34010
-//		query = "Школа А+"; // +
+		query = "Школа А+"; // +
 //		query = "початкова А+"; // - -> +
 //		query = "початкова школа А+"; // - -> +
 //		query = "початкова A+"; // latin - -> +

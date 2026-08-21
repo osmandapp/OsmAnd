@@ -409,11 +409,11 @@ dependencies {
 	implementation 'com.android.billingclient:billing:8.0.0'
 	// turn off for now
 	//implementation 'com.atilika.kuromoji:kuromoji-ipadic:0.9.0'
-	implementation 'com.squareup.picasso:picasso:2.71828'
+	implementation 'com.squareup.picasso:picasso:2.8' // keep at 2.8 for AndroidX support
 	//implementation("io.coil-kt.coil3:coil-core:3.1.0")
 	//implementation("io.coil-kt.coil3:coil-network-okhttp:3.1.0")
 
-	implementation 'me.zhanghai.android.materialprogressbar:library:1.4.2'
+	implementation 'me.zhanghai.android.materialprogressbar:library:1.6.1'
 	implementation "net.osmand:antpluginlib:3.8.0@aar"
 	// JS core
 	implementation group: 'org.mozilla', name: 'rhino', version: '1.7.9'
