@@ -23,6 +23,7 @@ public class OSMSettings {
 		TUNNEL("tunnel"), //$NON-NLS-1$
 		TOLL("toll"), //$NON-NLS-1$
 		JUNCTION("junction"), //$NON-NLS-1$
+		FERRY("ferry"), //$NON-NLS-1$
 		
 		AREA("area"),
 		
@@ -35,6 +36,9 @@ public class OSMSettings {
 		REF("ref"), //$NON-NLS-1$
 		RCN_REF("rcn_ref"), //$NON-NLS-1$
 		RWN_REF("rwn_ref"), //$NON-NLS-1$
+		PT_VERSION("public_transport:version"), //$NON-NLS-1$
+		DURATION("duration"), //$NON-NLS-1$
+		STOP("stop"), //$NON-NLS-1$
 		
 		// address
 		PLACE("place"), //$NON-NLS-1$
