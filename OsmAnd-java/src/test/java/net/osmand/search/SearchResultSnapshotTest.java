@@ -1,18 +1,13 @@
 package net.osmand.search;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import net.osmand.data.LatLon;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreFactory.SearchBaseAPI;
 import net.osmand.search.core.SearchPhrase;
+import net.osmand.search.core.SearchProgressListener;
 import net.osmand.search.core.SearchResult;
-import net.osmand.search.core.SearchResult.SearchResultFactory;
 import net.osmand.search.core.SearchResultCollectionSnapshot;
 import net.osmand.search.core.SearchResultProgressSnapshot;
 import net.osmand.search.core.SearchResultProgressSnapshot.Stage;
@@ -21,6 +16,11 @@ import net.osmand.search.core.SearchSettings;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class SearchResultSnapshotTest {
 
