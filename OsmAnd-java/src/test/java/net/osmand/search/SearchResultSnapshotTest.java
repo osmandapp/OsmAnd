@@ -146,7 +146,7 @@ public class SearchResultSnapshotTest {
 		Assert.assertFalse(firstProgress.shouldAppend());
 		Assert.assertEquals(7, firstProgress.getResultCollection().getRequestId());
 		Assert.assertEquals(1, firstProgress.getResultCollection().getCurrentSearchResults().size());
-		Assert.assertEquals(1, matcher.getRequestResults().size());
+		Assert.assertEquals(2, matcher.getRequestResults().size());
 		Assert.assertEquals("First", firstProgress.getResultCollection().getCurrentSearchResults().get(0).getLocaleName());
 
 		TestSearchApi secondApi = new TestSearchApi();
@@ -200,7 +200,7 @@ public class SearchResultSnapshotTest {
 
 		Assert.assertEquals(Arrays.asList(11L), startedRequests);
 		Assert.assertEquals(Arrays.asList(11L), partialLocationRequests);
-		Assert.assertEquals(1, matcher.getRequestResults().size());
+		Assert.assertEquals(2, matcher.getRequestResults().size());
 		Assert.assertEquals(1, progressSnapshots.size());
 		SearchResultProgressSnapshot progress = progressSnapshots.get(0);
 		Assert.assertEquals(Stage.API_FINISHED, progress.getStage());

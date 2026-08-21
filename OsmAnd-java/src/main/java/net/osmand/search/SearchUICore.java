@@ -1369,14 +1369,14 @@ public class SearchUICore {
 			}
 			object.parentSearchResult = parentSearchResult;
 			if (matcher == null || matcher.publish(object)) {
-				if (object.objectType == ObjectType.PARTIAL_LOCATION) {
+				boolean partialLocation = object.objectType == ObjectType.PARTIAL_LOCATION;
+				if (partialLocation) {
 					if (progressListener != null) {
 						progressListener.onPartialLocation(request, object.requiredSearchPhrase);
 					}
-					return true;
 				}
 				count++;
-				if (progressListener != null) {
+				if (progressListener != null && !partialLocation) {
 					apiResults.add(object);
 				}
 				if (totalLimit == -1 || count < totalLimit) {
