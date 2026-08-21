@@ -12,6 +12,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.primitives.Link;
 import net.osmand.shared.gpx.primitives.Linkable;
@@ -149,7 +150,11 @@ public class FavouritePoint implements LocationPoint, Linkable {
 		return iconId;
 	}
 
-	public int getIconIdOrDefault() {
+	public int getIconIdOrDefault(@NonNull Context ctx) {
+		if(iconId == 0 && !Algorithms.isEmpty(getCategory())) {
+			OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+			iconId = app.getFavoritesHelper().getOriginalIconId(this);
+		}
 		return iconId == 0 ? DEFAULT_UI_ICON_ID : iconId;
 	}
 
@@ -200,7 +205,7 @@ public class FavouritePoint implements LocationPoint, Linkable {
 		if (isSpecialPoint()) {
 			return specialPointType.getIconId(ctx);
 		}
-		return getIconIdOrDefault();
+		return getIconIdOrDefault(ctx);
 	}
 
 	public double getLatitude() {
