@@ -506,8 +506,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private void updateCompassVal() {
 		Float heading = getHeading();
 		if (heading != null) {
-			for (OsmAndCompassListener c : compassListeners) {
-				c.updateCompassValue(heading);
+			List<OsmAndCompassListener> listeners = compassListeners;
+			for (int i = 0, size = listeners.size(); i < size; i++) {
+				listeners.get(i).updateCompassValue(heading);
 			}
 		}
 	}
@@ -522,8 +523,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	private void updateLocation(net.osmand.Location location) {
-		for (OsmAndLocationListener listener : locationListeners) {
-			listener.updateLocation(location);
+		List<OsmAndLocationListener> listeners = locationListeners;
+		for (int i = 0, size = listeners.size(); i < size; i++) {
+			listeners.get(i).updateLocation(location);
 		}
 	}
 

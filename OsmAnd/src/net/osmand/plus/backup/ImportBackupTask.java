@@ -201,11 +201,12 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 	protected void onProgressUpdate(ItemProgressInfo... progressInfos) {
 		if (importListener != null) {
 			for (ItemProgressInfo info : progressInfos) {
-				ItemProgressInfo prevInfo = getItemProgressInfo(info.type, info.fileName);
+				String itemKey = info.type + info.fileName;
+				ItemProgressInfo prevInfo = itemsProgress.get(itemKey);
 				if (prevInfo != null) {
 					info.setWork(prevInfo.getWork());
 				}
-				itemsProgress.put(info.type + info.fileName, info);
+				itemsProgress.put(itemKey, info);
 
 				if (info.isFinished()) {
 					importListener.onImportItemFinished(info.type, info.fileName);

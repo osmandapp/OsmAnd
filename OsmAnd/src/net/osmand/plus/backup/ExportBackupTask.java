@@ -166,11 +166,12 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 				} else if (object instanceof ItemProgressInfo) {
 					ItemProgressInfo info = (ItemProgressInfo) object;
 
-					ItemProgressInfo prevInfo = getItemProgressInfo(info.type, info.fileName);
+					String itemKey = info.type + info.fileName;
+					ItemProgressInfo prevInfo = itemsProgress.get(itemKey);
 					if (prevInfo != null) {
 						info.setWork(prevInfo.work);
 					}
-					itemsProgress.put(info.type + info.fileName, info);
+					itemsProgress.put(itemKey, info);
 
 					if (info.finished) {
 						listener.onBackupExportItemFinished(info.type, info.fileName);

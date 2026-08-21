@@ -63,7 +63,7 @@ public class FavoriteAppearanceFragment extends BaseFullScreenDialogFragment {
 	private FavoriteGroup favoriteGroup;
 
 	private int color;
-	private String iconName = DEFAULT_ICON_NAME;
+	private String iconName;
 	private BackgroundType backgroundType = DEFAULT_BACKGROUND_TYPE;
 
 	@Override
@@ -73,14 +73,14 @@ public class FavoriteAppearanceFragment extends BaseFullScreenDialogFragment {
 		dialogManager = app.getDialogManager();
 
 		groupName = pointsGroup.getName();
-		setColor(pointsGroup.getColor());
-		setIconName(pointsGroup.getIconName());
 		setBackgroundType(BackgroundType.getByTypeName(pointsGroup.getBackgroundType(), DEFAULT_BACKGROUND_TYPE));
 
-		favoriteGroup = favouritesHelper.getGroup(pointsGroup.getName());
+		favoriteGroup = favouritesHelper.getGroup(groupName);
 		if (favoriteGroup == null) {
 			dismiss();
 		}
+		setColor(favoriteGroup.getColor());
+		setIconName(favoriteGroup.getIconName());
 
 		registerFavoriteAppearanceController();
 	}
@@ -148,7 +148,7 @@ public class FavoriteAppearanceFragment extends BaseFullScreenDialogFragment {
 		return collection;
 	}
 
-	private void setupCards(){
+	private void setupCards() {
 		FragmentActivity activity = requireActivity();
 		ViewGroup cardContainer = view.findViewById(R.id.cards_container);
 		setupCard(activity, cardContainer, controller.getColorCardController());
@@ -156,7 +156,7 @@ public class FavoriteAppearanceFragment extends BaseFullScreenDialogFragment {
 		setupCard(activity, cardContainer, controller.getShapesController());
 	}
 
-	private void setupCard(@NonNull FragmentActivity activity, @NonNull ViewGroup cardContainer, @NonNull IMultiStateCardController controller){
+	private void setupCard(@NonNull FragmentActivity activity, @NonNull ViewGroup cardContainer, @NonNull IMultiStateCardController controller) {
 		inflate(R.layout.list_item_divider, cardContainer, true);
 		MultiStateCard card = new MultiStateCard(activity, controller, false);
 		cardContainer.addView(card.build());
@@ -176,7 +176,7 @@ public class FavoriteAppearanceFragment extends BaseFullScreenDialogFragment {
 	}
 
 	public void setIconName(@Nullable String iconName) {
-		this.iconName = iconName != null ? iconName : DEFAULT_ICON_NAME;
+		this.iconName = iconName;
 	}
 
 	@DrawableRes
@@ -185,8 +185,7 @@ public class FavoriteAppearanceFragment extends BaseFullScreenDialogFragment {
 	}
 
 	public void setIcon(@DrawableRes int iconId) {
-		String name = RenderingIcons.getBigIconName(iconId);
-		iconName = name != null ? name : DEFAULT_ICON_NAME;
+		iconName = RenderingIcons.getBigIconName(iconId);
 	}
 
 	@NonNull
@@ -262,28 +261,22 @@ public class FavoriteAppearanceFragment extends BaseFullScreenDialogFragment {
 	}
 
 	public void editPointsGroup(@NonNull SaveOption saveOption) {
-		boolean shouldSave = false;
 		if (favoriteGroup != null) {
 			if (controller.getColor() != null) {
 				favouritesHelper.updateGroupColor(favoriteGroup, controller.getColor(), saveOption, false);
-				shouldSave = true;
 				if (controller.getColor() != color) {
 					controller.getColorCardController().getColorsPaletteController().renewLastUsedTime();
 				}
 			}
+			favouritesHelper.updateGroupIconName(favoriteGroup, controller.getIcon(), saveOption, false);
 			if (controller.getIcon() != null) {
-				favouritesHelper.updateGroupIconName(favoriteGroup, controller.getIcon(), saveOption, false);
-				shouldSave = true;
 				controller.getIconController().addIconToLastUsed(controller.getIcon());
 			}
 			if (controller.getShape() != null) {
 				favouritesHelper.updateGroupBackgroundType(favoriteGroup, controller.getShape(), saveOption, false);
-				shouldSave = true;
 			}
 
-			if (shouldSave) {
-				favouritesHelper.saveSelectedGroupsIntoFile(Collections.singletonList(favoriteGroup), true);
-			}
+			favouritesHelper.saveSelectedGroupsIntoFile(Collections.singletonList(favoriteGroup), true);
 		}
 
 		Fragment targetFragment = getTargetFragment();

@@ -402,6 +402,32 @@ class GpxDatabase {
 		return items.toList()
 	}
 
+	fun getRecentlyModifiedItems(limit: Int): List<GpxDataItem> {
+		if (limit <= 0) return emptyList()
+
+		val query = """
+        ${GpxDbUtils.getSelectGpxQuery()}
+        ORDER BY ${FILE_LAST_MODIFIED_TIME.columnName} DESC
+        LIMIT ?
+    	""".trimIndent()
+
+		val db = openConnection(true) ?: return emptyList()
+		try {
+			val cursor = db.rawQuery(query, arrayOf(limit.toString())) ?: return emptyList()
+			try {
+				val items = mutableListOf<GpxDataItem>()
+				while (cursor.moveToNext()) {
+					items.add(readGpxDataItem(cursor))
+				}
+				return items
+			} finally {
+				cursor.close()
+			}
+		} finally {
+			db.close()
+		}
+	}
+
 	fun getGpxDataItemsBlocking(): List<GpxDataItem> = runBlocking { getGpxDataItems() }
 
 	suspend fun getGpxDataItems(): List<GpxDataItem> = withContext(Dispatchers.IO) {

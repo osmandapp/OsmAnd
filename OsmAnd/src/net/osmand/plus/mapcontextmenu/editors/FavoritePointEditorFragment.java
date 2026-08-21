@@ -34,6 +34,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.mapcontextmenu.editors.icon.EditorIconController;
+import net.osmand.plus.mapcontextmenu.editors.icon.data.IconsCategory;
 import net.osmand.plus.myplaces.favorites.FavoriteFolderFormatter;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
@@ -82,7 +84,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		}
 	}
 
-	private void setupEditor(){
+	private void setupEditor() {
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
 			editor = activity.getContextMenu().getFavoritePointEditor();
@@ -149,8 +151,47 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		if (ctx != null) {
 			String groupIdName = FavoriteGroup.convertDisplayNameToGroupIdName(ctx, group.getName());
 			this.group = favouritesHelper.getGroup(groupIdName);
-			super.setPointsGroup(group, updateAppearance);
+			super.setPointsGroup(group, true);
+			setIconName(getIconNameForGroup());
+			selectIconInController();
+			updateContent();
 		}
+	}
+
+	@NonNull
+	private String getIconNameForGroup() {
+		String iconName = group != null ? group.getIconName() : null;
+		if (!Algorithms.isEmpty(iconName)) {
+			return iconName;
+		}
+
+		FavouritePoint favorite = getFavorite();
+		if (favorite != null) {
+			int iconId = favouritesHelper.getOriginalIconId(favorite);
+			if (iconId == 0) {
+				iconId = favorite.getIconId();
+			}
+			iconName = RenderingIcons.getBigIconName(iconId);
+			if (!Algorithms.isEmpty(iconName)) {
+				return iconName;
+			}
+		}
+		return getDefaultIconName();
+	}
+
+	private void selectIconInController() {
+		EditorIconController controller = EditorIconController.getInstance(app, this, getIconName());
+		controller.onIconSelectedFromPalette(getIconName(), getIconCategoryKey(controller, getIconName()));
+	}
+
+	@Nullable
+	private String getIconCategoryKey(@NonNull EditorIconController controller, @NonNull String iconName) {
+		for (IconsCategory category : controller.getCategories()) {
+			if (category.containsIcon(iconName)) {
+				return category.getKey();
+			}
+		}
+		return null;
 	}
 
 	@Override
@@ -210,11 +251,11 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 			if (builder != null && !skipConfirmationDialog) {
 				builder.setPositiveButton(R.string.shared_string_ok, (dialog, which) ->
 						doSave(activity, favorite, point.getName(), point.getCategory(), point.getDescription(),
-								point.getAddress(), point.getColor(), point.getBackgroundType(), point.getIconIdOrDefault(), needDismiss));
+								point.getAddress(), point.getColor(), point.getBackgroundType(), point.getIconIdOrDefault(app), needDismiss));
 				builder.create().show();
 			} else {
 				doSave(activity, favorite, point.getName(), point.getCategory(), point.getDescription(), point.getAddress(),
-						point.getColor(), point.getBackgroundType(), point.getIconIdOrDefault(), needDismiss);
+						point.getColor(), point.getBackgroundType(), point.getIconIdOrDefault(app), needDismiss);
 			}
 			saved = true;
 		}
@@ -222,7 +263,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 
 	private boolean isChanged(FavouritePoint favorite, FavouritePoint point) {
 		return favorite.getColor() == point.getColor() &&
-				favorite.getIconIdOrDefault() == point.getIconIdOrDefault() &&
+				favorite.getIconIdOrDefault(app) == point.getIconIdOrDefault(app) &&
 				favorite.getName().equals(point.getName()) &&
 				favorite.getCategory().equals(point.getCategory()) &&
 				favorite.getBackgroundType().equals(point.getBackgroundType()) &&
@@ -446,9 +487,16 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	@DrawableRes
 	private int getInitialIconId() {
 		FavouritePoint favorite = getFavorite();
-		int iconId = favorite != null ? favorite.getIconId() : 0;
+		int iconId = 0;
 		FavoriteGroup group = getGroup();
-		if (group != null && iconId == 0) {
+		FavoritePointEditor editor = getFavoritePointEditor();
+		if (editor != null && editor.isNew() && group != null && !Algorithms.isEmpty(group.getIconName())) {
+			iconId = RenderingIcons.getBigIconResourceId(group.getIconName());
+		}
+		if (iconId == 0 && favorite != null) {
+			iconId = favorite.getIconId();
+		}
+		if (iconId == 0 && group != null) {
 			iconId = RenderingIcons.getBigIconResourceId(group.getIconName());
 		}
 		if (iconId == 0) {

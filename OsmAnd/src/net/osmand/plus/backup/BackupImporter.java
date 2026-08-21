@@ -356,7 +356,9 @@ class BackupImporter {
 			RemoteFile remoteFile = remoteFileEntry.getValue();
 			boolean hasInfo = false;
 			for (String remoteInfoName : remoteInfoNames) {
-				if (itemFileName.equals(remoteInfoName) || itemFileName.startsWith(remoteInfoName + "/")) {
+				if (itemFileName.equals(remoteInfoName)
+						|| (itemFileName.startsWith(remoteInfoName)
+						&& itemFileName.charAt(remoteInfoName.length()) == '/')) {
 					hasInfo = true;
 					break;
 				}
@@ -393,7 +395,9 @@ class BackupImporter {
 			while (it.hasNext()) {
 				Entry<String, RemoteFile> fileEntry = it.next();
 				String remoteFileName = fileEntry.getKey();
-				if (remoteFileName.startsWith(typeFileName + "/")) {
+				if (remoteFileName.length() > typeFileName.length()
+						&& remoteFileName.startsWith(typeFileName)
+						&& remoteFileName.charAt(typeFileName.length()) == '/') {
 					res.add(fileEntry.getValue());
 					it.remove();
 				}
