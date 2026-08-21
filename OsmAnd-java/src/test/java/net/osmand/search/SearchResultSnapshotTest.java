@@ -3,13 +3,19 @@ package net.osmand.search;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
+import net.osmand.ResultMatcher;
 import net.osmand.data.LatLon;
 import net.osmand.search.SearchUICore.SearchResultCollection;
+import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.ObjectType;
+import net.osmand.search.core.SearchCoreFactory.SearchBaseAPI;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchResultCollectionSnapshot;
+import net.osmand.search.core.SearchResultProgressSnapshot;
+import net.osmand.search.core.SearchResultProgressSnapshot.Stage;
 import net.osmand.search.core.SearchResultSnapshot;
 import net.osmand.search.core.SearchSettings;
 
@@ -79,6 +85,45 @@ public class SearchResultSnapshotTest {
 		Assert.assertEquals(1, expanded.getSpatialSearchVisibleLevel());
 	}
 
+	@Test
+	public void testMatcherAggregatesApiProgressInCore() {
+		SearchPhrase phrase = createPhrase();
+		AtomicInteger requestNumber = new AtomicInteger(7);
+		List<SearchResult> published = new ArrayList<>();
+		SearchResultMatcher matcher = new SearchResultMatcher(new ResultMatcher<SearchResult>() {
+			@Override
+			public boolean publish(SearchResult object) {
+				published.add(object);
+				return true;
+			}
+
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+		}, phrase, requestNumber.get(), requestNumber, -1);
+
+		TestSearchApi firstApi = new TestSearchApi();
+		matcher.publish(createResult(phrase, "First", 0));
+		matcher.apiSearchFinished(firstApi, phrase);
+		SearchResultProgressSnapshot firstProgress = published.get(published.size() - 1).progressSnapshot;
+
+		Assert.assertEquals(Stage.API_FINISHED, firstProgress.getStage());
+		Assert.assertSame(firstApi, firstProgress.getSearchApi());
+		Assert.assertFalse(firstProgress.shouldAppend());
+		Assert.assertEquals(7, firstProgress.getResultCollection().getRequestId());
+		Assert.assertEquals(1, firstProgress.getResultCollection().getCurrentSearchResults().size());
+		Assert.assertEquals("First", firstProgress.getResultCollection().getCurrentSearchResults().get(0).getLocaleName());
+
+		TestSearchApi secondApi = new TestSearchApi();
+		matcher.publish(createResult(phrase, "Second", 0));
+		matcher.apiSearchFinished(secondApi, phrase);
+		SearchResultProgressSnapshot secondProgress = published.get(published.size() - 1).progressSnapshot;
+
+		Assert.assertTrue(secondProgress.shouldAppend());
+		Assert.assertEquals(2, secondProgress.getResultCollection().getCurrentSearchResults().size());
+	}
+
 	private SearchPhrase createPhrase() {
 		SearchSettings settings = new SearchSettings((SearchSettings) null);
 		settings = settings.setOriginalLocation(new LatLon(0, 0));
@@ -92,5 +137,11 @@ public class SearchResultSnapshotTest {
 		result.location = new LatLon(0, 0);
 		result.spatialSearchVisibleLevel = visibleLevel;
 		return result;
+	}
+
+	private static class TestSearchApi extends SearchBaseAPI {
+		TestSearchApi() {
+			super(ObjectType.LOCATION);
+		}
 	}
 }

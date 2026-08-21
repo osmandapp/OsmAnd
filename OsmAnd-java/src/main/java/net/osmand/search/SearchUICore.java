@@ -34,6 +34,8 @@ import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchResultCollectionSnapshot;
+import net.osmand.search.core.SearchResultProgressSnapshot;
+import net.osmand.search.core.SearchResultProgressSnapshot.Stage;
 import net.osmand.search.core.SearchSettings;
 import net.osmand.search.core.SearchSettings.SortType;
 import net.osmand.search.core.SearchWord;
@@ -860,7 +862,7 @@ public class SearchUICore {
 								}
 								if (!rm.isCancelled()) {
 									currentSearchResult = quickRes;
-									rm.filterFinished(phrase);
+									rm.filterFinished(phrase, quickRes);
 								}
 								filtered = true;
 							}
@@ -894,7 +896,7 @@ public class SearchUICore {
 						if (phrase.getSettings().isExportObjects()) {
 							rm.createTestJSON(collection);
 						}
-						rm.searchFinished(phrase);
+						rm.searchFinished(phrase, collection);
 						if (onResultsComplete != null) {
 							onResultsComplete.run();
 						}
@@ -1139,6 +1141,10 @@ public class SearchUICore {
 		private SearchPhrase phrase;
 		private List<MapObject> exportedObjects;
 		private List<City> exportedCities;
+		private List<SearchResult> apiResults = new ArrayList<>();
+		private SearchResultCollection aggregatedResults;
+		private SearchResultCollection lastRegionResults;
+		private SearchCoreAPI lastRegionApi;
 
 			public SearchResultMatcher(ResultMatcher<SearchResult> matcher, SearchPhrase phrase, int request,
 									   AtomicInteger requestNumber, int totalLimit) {
@@ -1187,44 +1193,84 @@ public class SearchUICore {
 			}
 		}
 
-		public void filterFinished(SearchPhrase phrase) {
+		public void filterFinished(SearchPhrase phrase, SearchResultCollection collection) {
 			if (matcher != null) {
 				SearchResult sr = new SearchResult(phrase);
 				sr.objectType = ObjectType.FILTER_FINISHED;
+				sr.progressSnapshot = new SearchResultProgressSnapshot(Stage.FILTER_FINISHED, null, null,
+						collection.toSnapshot(request), false, false);
 				matcher.publish(sr);
 			}
 		}
 
-		public void searchFinished(SearchPhrase phrase) {
+		public void searchFinished(SearchPhrase phrase, SearchResultCollection collection) {
 			if (matcher != null) {
 				SearchResult sr = new SearchResult(phrase);
 				sr.objectType = ObjectType.SEARCH_FINISHED;
+				sr.progressSnapshot = new SearchResultProgressSnapshot(Stage.SEARCH_FINISHED, null, null,
+						collection.toSnapshot(request), false, false);
 				matcher.publish(sr);
 			}
 		}
 
 		public void apiSearchFinished(SearchCoreAPI api, SearchPhrase phrase) {
 			if (matcher != null) {
+				boolean spatialSearchApi = api instanceof SpatialTextSearchAPI;
+				SearchResultCollection apiCollection = api == lastRegionApi && lastRegionResults != null
+						? lastRegionResults
+						: createApiResultCollection(phrase, spatialSearchApi);
+				boolean append = aggregatedResults != null;
+				aggregatedResults = append
+						? aggregatedResults.combineWithCollection(apiCollection, !spatialSearchApi, true)
+						: apiCollection;
 				SearchResult sr = new SearchResult(phrase);
 				sr.objectType = ObjectType.SEARCH_API_FINISHED;
 				sr.object = api;
 				sr.parentSearchResult = parentSearchResult;
+				sr.progressSnapshot = new SearchResultProgressSnapshot(Stage.API_FINISHED, api, null,
+						aggregatedResults.toSnapshot(request), append, hasImpreciseResults());
 				matcher.publish(sr);
+				apiResults = new ArrayList<>();
+				lastRegionResults = null;
+				lastRegionApi = null;
 			}
 		}
 
 		public void apiSearchRegionFinished(SearchCoreAPI api, BinaryMapIndexReader region, SearchPhrase phrase) {
 			if (matcher != null) {
+				boolean spatialSearchApi = api instanceof SpatialTextSearchAPI;
+				lastRegionResults = createApiResultCollection(phrase, spatialSearchApi);
+				lastRegionApi = api;
+				boolean append = aggregatedResults != null;
+				SearchResultCollection visibleResults = append
+						? aggregatedResults.combineWithCollection(lastRegionResults, true, true)
+						: lastRegionResults;
 				SearchResult sr = new SearchResult(phrase);
 				sr.objectType = ObjectType.SEARCH_API_REGION_FINISHED;
 				sr.object = api;
 				sr.parentSearchResult = parentSearchResult;
 				sr.file = region;
+				sr.progressSnapshot = new SearchResultProgressSnapshot(Stage.REGION_FINISHED, api, region,
+						visibleResults.toSnapshot(request), append, false);
 				matcher.publish(sr);
 				if (debugMode) {
 					LOG.info("API region search done <" + phrase + "> API=<" + api + "> Region=<" + region.getFile().getName() + ">");
 				}
 			}
+		}
+
+		private SearchResultCollection createApiResultCollection(SearchPhrase phrase, boolean spatialSearchApi) {
+			return new SearchResultCollection(phrase, spatialSearchApi)
+					.addSearchResults(apiResults, !spatialSearchApi, true);
+		}
+
+		private boolean hasImpreciseResults() {
+			for (SearchResult result : apiResults) {
+				if (result.hasImpreciseCoordinates()) {
+					return true;
+				}
+			}
+			return false;
 		}
 
 		@Override
@@ -1270,6 +1316,9 @@ public class SearchUICore {
 			object.parentSearchResult = parentSearchResult;
 			if (matcher == null || matcher.publish(object)) {
 				count++;
+				if (matcher != null) {
+					apiResults.add(object);
+				}
 				if (totalLimit == -1 || count < totalLimit) {
 					requestResults.add(object);
 				}
