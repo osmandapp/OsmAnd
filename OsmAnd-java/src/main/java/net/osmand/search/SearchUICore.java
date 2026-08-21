@@ -33,6 +33,7 @@ import net.osmand.search.core.SearchExportSettings;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchResult;
+import net.osmand.search.core.SearchResultCollectionSnapshot;
 import net.osmand.search.core.SearchSettings;
 import net.osmand.search.core.SearchSettings.SortType;
 import net.osmand.search.core.SearchWord;
@@ -138,6 +139,15 @@ public class SearchUICore {
 			this.phrase = phrase;
 			this.skipSorting = skipSorting;
 			this.spatialSearchVisibleLevel = spatialSearchVisibleLevel;
+		}
+
+		public SearchResultCollectionSnapshot toSnapshot() {
+			return toSnapshot(SearchResultCollectionSnapshot.NO_REQUEST_ID);
+		}
+
+		public SearchResultCollectionSnapshot toSnapshot(long requestId) {
+			return SearchResultCollectionSnapshot.from(requestId, phrase, searchResults, skipSorting,
+					spatialSearchVisibleLevel, useLimit);
 		}
 
 		public SearchResultCollection combineWithCollection(SearchResultCollection collection, boolean resort, boolean removeDuplicates) {
