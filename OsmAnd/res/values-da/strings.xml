@@ -987,7 +987,7 @@
     <string name="osmand_parking_hour">t</string>
     <string name="shared_string_minute_lowercase">min</string>
     <string name="osmand_parking_time_left">tilbage</string>
-    <string name="parking_place_limited">Tidsbegrænset parkering til</string>
+    <string name="parking_place_limited">Parkering tidsbegrænset til</string>
     <string name="your_edits">Redigeringer</string>
     <string name="osmand_parking_overdue">Udløbet</string>
     <string name="delay_to_start_navigation">Start sving-for-sving vejledning efter…</string>
