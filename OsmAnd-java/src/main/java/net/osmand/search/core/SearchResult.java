@@ -55,7 +55,6 @@ public class SearchResult {
 
 	public Object object;
 	public SpatialSearchResult spatialResult;
-	public SearchResultProgressSnapshot progressSnapshot;
 	public ObjectType objectType;
 	public BinaryMapIndexReader file;
 

@@ -1230,41 +1230,33 @@ public class SearchUICore {
 		}
 
 		public void filterFinished(SearchPhrase phrase, SearchResultCollection collection) {
-			if (hasProgressConsumer()) {
+			if (progressListener != null) {
 				SearchResultProgressSnapshot progress = new SearchResultProgressSnapshot(Stage.FILTER_FINISHED,
 						null, null, collection.toSnapshot(request), false, false, false);
-				if (progressListener != null) {
-					progressListener.onProgress(progress);
-				}
-				if (matcher == null) {
-					return;
-				}
+				progressListener.onProgress(progress);
+			}
+			if (matcher != null) {
 				SearchResult sr = new SearchResult(phrase);
 				sr.objectType = ObjectType.FILTER_FINISHED;
-				sr.progressSnapshot = progress;
 				matcher.publish(sr);
 			}
 		}
 
 		public void searchFinished(SearchPhrase phrase, SearchResultCollection collection) {
-			if (hasProgressConsumer()) {
+			if (progressListener != null) {
 				SearchResultProgressSnapshot progress = new SearchResultProgressSnapshot(Stage.SEARCH_FINISHED,
 						null, null, collection.toSnapshot(request), false, false, false);
-				if (progressListener != null) {
-					progressListener.onProgress(progress);
-				}
-				if (matcher == null) {
-					return;
-				}
+				progressListener.onProgress(progress);
+			}
+			if (matcher != null) {
 				SearchResult sr = new SearchResult(phrase);
 				sr.objectType = ObjectType.SEARCH_FINISHED;
-				sr.progressSnapshot = progress;
 				matcher.publish(sr);
 			}
 		}
 
 		public void apiSearchFinished(SearchCoreAPI api, SearchPhrase phrase) {
-			if (hasProgressConsumer()) {
+			if (progressListener != null) {
 				boolean spatialSearchApi = api instanceof SpatialTextSearchAPI;
 				boolean hasRegionResults = api == lastRegionApi && lastRegionResults != null;
 				SearchResultCollection apiCollection = hasRegionResults
@@ -1276,25 +1268,22 @@ public class SearchUICore {
 						: apiCollection;
 				SearchResultProgressSnapshot progress = new SearchResultProgressSnapshot(Stage.API_FINISHED, api, null,
 						aggregatedResults.toSnapshot(request), append, hasImpreciseResults(), hasRegionResults);
-				if (progressListener != null) {
-					progressListener.onProgress(progress);
-				}
-				if (matcher != null) {
-					SearchResult sr = new SearchResult(phrase);
-					sr.objectType = ObjectType.SEARCH_API_FINISHED;
-					sr.object = api;
-					sr.parentSearchResult = parentSearchResult;
-					sr.progressSnapshot = progress;
-					matcher.publish(sr);
-				}
+				progressListener.onProgress(progress);
 				apiResults = new ArrayList<>();
 				lastRegionResults = null;
 				lastRegionApi = null;
 			}
+			if (matcher != null) {
+				SearchResult sr = new SearchResult(phrase);
+				sr.objectType = ObjectType.SEARCH_API_FINISHED;
+				sr.object = api;
+				sr.parentSearchResult = parentSearchResult;
+				matcher.publish(sr);
+			}
 		}
 
 		public void apiSearchRegionFinished(SearchCoreAPI api, BinaryMapIndexReader region, SearchPhrase phrase) {
-			if (hasProgressConsumer()) {
+			if (progressListener != null) {
 				boolean spatialSearchApi = api instanceof SpatialTextSearchAPI;
 				lastRegionResults = createApiResultCollection(phrase, spatialSearchApi);
 				lastRegionApi = api;
@@ -1304,18 +1293,17 @@ public class SearchUICore {
 						: lastRegionResults;
 				SearchResultProgressSnapshot progress = new SearchResultProgressSnapshot(Stage.REGION_FINISHED, api, region,
 						visibleResults.toSnapshot(request), append, false, true);
-				if (progressListener != null) {
-					progressListener.onProgress(progress);
-				}
-				if (matcher != null) {
-					SearchResult sr = new SearchResult(phrase);
-					sr.objectType = ObjectType.SEARCH_API_REGION_FINISHED;
-					sr.object = api;
-					sr.parentSearchResult = parentSearchResult;
-					sr.file = region;
-					sr.progressSnapshot = progress;
-					matcher.publish(sr);
-				}
+				progressListener.onProgress(progress);
+			}
+			if (matcher != null) {
+				SearchResult sr = new SearchResult(phrase);
+				sr.objectType = ObjectType.SEARCH_API_REGION_FINISHED;
+				sr.object = api;
+				sr.parentSearchResult = parentSearchResult;
+				sr.file = region;
+				matcher.publish(sr);
+			}
+			if (progressListener != null || matcher != null) {
 				if (debugMode) {
 					LOG.info("API region search done <" + phrase + "> API=<" + api + "> Region=<" + region.getFile().getName() + ">");
 				}
@@ -1325,10 +1313,6 @@ public class SearchUICore {
 		private SearchResultCollection createApiResultCollection(SearchPhrase phrase, boolean spatialSearchApi) {
 			return new SearchResultCollection(phrase, spatialSearchApi)
 					.addSearchResults(apiResults, !spatialSearchApi, true);
-		}
-
-		private boolean hasProgressConsumer() {
-			return matcher != null || progressListener != null;
 		}
 
 		private boolean hasImpreciseResults() {
@@ -1392,7 +1376,7 @@ public class SearchUICore {
 					return true;
 				}
 				count++;
-				if (hasProgressConsumer()) {
+				if (progressListener != null) {
 					apiResults.add(object);
 				}
 				if (totalLimit == -1 || count < totalLimit) {

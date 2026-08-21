@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import net.osmand.ResultMatcher;
 import net.osmand.data.LatLon;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
@@ -111,19 +110,28 @@ public class SearchResultSnapshotTest {
 	public void testMatcherAggregatesApiProgressInCore() {
 		SearchPhrase phrase = createPhrase();
 		AtomicInteger requestNumber = new AtomicInteger(7);
-		List<SearchResult> published = new ArrayList<>();
-		SearchResultMatcher matcher = new SearchResultMatcher(new ResultMatcher<SearchResult>() {
+		List<SearchResultProgressSnapshot> published = new ArrayList<>();
+		SearchProgressListener progressListener = new SearchProgressListener() {
 			@Override
-			public boolean publish(SearchResult object) {
-				published.add(object);
-				return true;
+			public void onSearchStarted(long requestId, SearchPhrase phrase) {
+			}
+
+			@Override
+			public void onProgress(SearchResultProgressSnapshot progress) {
+				published.add(progress);
+			}
+
+			@Override
+			public void onPartialLocation(long requestId, SearchPhrase phrase) {
 			}
 
 			@Override
 			public boolean isCancelled() {
 				return false;
 			}
-		}, phrase, requestNumber.get(), requestNumber, -1);
+		};
+		SearchResultMatcher matcher = new SearchResultMatcher(null, progressListener, phrase,
+				requestNumber.get(), requestNumber, -1);
 
 		TestSearchApi firstApi = new TestSearchApi();
 		SearchResult partialLocation = createResult(phrase, "Partial", 0);
@@ -131,7 +139,7 @@ public class SearchResultSnapshotTest {
 		matcher.publish(partialLocation);
 		matcher.publish(createResult(phrase, "First", 0));
 		matcher.apiSearchFinished(firstApi, phrase);
-		SearchResultProgressSnapshot firstProgress = published.get(published.size() - 1).progressSnapshot;
+		SearchResultProgressSnapshot firstProgress = published.get(published.size() - 1);
 
 		Assert.assertEquals(Stage.API_FINISHED, firstProgress.getStage());
 		Assert.assertSame(firstApi, firstProgress.getSearchApi());
@@ -144,7 +152,7 @@ public class SearchResultSnapshotTest {
 		TestSearchApi secondApi = new TestSearchApi();
 		matcher.publish(createResult(phrase, "Second", 0));
 		matcher.apiSearchFinished(secondApi, phrase);
-		SearchResultProgressSnapshot secondProgress = published.get(published.size() - 1).progressSnapshot;
+		SearchResultProgressSnapshot secondProgress = published.get(published.size() - 1);
 
 		Assert.assertTrue(secondProgress.shouldAppend());
 		Assert.assertEquals(2, secondProgress.getResultCollection().getCurrentSearchResults().size());
