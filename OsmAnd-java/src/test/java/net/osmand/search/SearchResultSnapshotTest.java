@@ -13,6 +13,7 @@ import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreFactory.SearchBaseAPI;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
+import net.osmand.search.core.SearchResult.SearchResultFactory;
 import net.osmand.search.core.SearchResultCollectionSnapshot;
 import net.osmand.search.core.SearchResultProgressSnapshot;
 import net.osmand.search.core.SearchResultProgressSnapshot.Stage;
@@ -53,12 +54,19 @@ public class SearchResultSnapshotTest {
 	public void testCollectionSnapshotIsImmutableAndKeepsRequestId() {
 		SearchPhrase phrase = createPhrase();
 		SearchResultCollection collection = new SearchResultCollection(phrase);
-		collection.addSearchResults(Arrays.asList(createResult(phrase, "Result", 0)), false, false);
+		SearchResult sourceResult = createResult(phrase, "Result", 0);
+		collection.addSearchResults(Arrays.asList(sourceResult), false, false);
 
 		SearchResultCollectionSnapshot snapshot = collection.toSnapshot(42);
+		SearchResultCollection uiCollection = SearchResultCollection.fromSnapshot(snapshot);
+		SearchResult uiResult = uiCollection.getCurrentSearchResults().get(0);
 
 		Assert.assertEquals(42, snapshot.getRequestId());
 		Assert.assertEquals(1, snapshot.getCurrentSearchResults().size());
+		Assert.assertNotSame(sourceResult, uiResult);
+		uiResult.localeName = "UI change";
+		Assert.assertEquals("Result", sourceResult.localeName);
+		Assert.assertEquals("Result", snapshot.getCurrentSearchResults().get(0).getLocaleName());
 		try {
 			snapshot.getCurrentSearchResults().clear();
 			Assert.fail("Snapshot results must be immutable");
@@ -86,6 +94,20 @@ public class SearchResultSnapshotTest {
 	}
 
 	@Test
+	public void testSnapshotCopyPreservesSearchResultSubtype() {
+		SearchPhrase phrase = createPhrase();
+		TestSearchResult source = new TestSearchResult(phrase, "extra");
+		source.objectType = ObjectType.LOCATION;
+		source.localeName = "Result";
+
+		SearchResult copy = SearchResultSnapshot.from(source).toSearchResult();
+
+		Assert.assertTrue(copy instanceof TestSearchResult);
+		Assert.assertEquals("extra", ((TestSearchResult) copy).getExtraData());
+		Assert.assertNotSame(source, copy);
+	}
+
+	@Test
 	public void testMatcherAggregatesApiProgressInCore() {
 		SearchPhrase phrase = createPhrase();
 		AtomicInteger requestNumber = new AtomicInteger(7);
@@ -104,6 +126,9 @@ public class SearchResultSnapshotTest {
 		}, phrase, requestNumber.get(), requestNumber, -1);
 
 		TestSearchApi firstApi = new TestSearchApi();
+		SearchResult partialLocation = createResult(phrase, "Partial", 0);
+		partialLocation.objectType = ObjectType.PARTIAL_LOCATION;
+		matcher.publish(partialLocation);
 		matcher.publish(createResult(phrase, "First", 0));
 		matcher.apiSearchFinished(firstApi, phrase);
 		SearchResultProgressSnapshot firstProgress = published.get(published.size() - 1).progressSnapshot;
@@ -113,6 +138,7 @@ public class SearchResultSnapshotTest {
 		Assert.assertFalse(firstProgress.shouldAppend());
 		Assert.assertEquals(7, firstProgress.getResultCollection().getRequestId());
 		Assert.assertEquals(1, firstProgress.getResultCollection().getCurrentSearchResults().size());
+		Assert.assertEquals(1, matcher.getRequestResults().size());
 		Assert.assertEquals("First", firstProgress.getResultCollection().getCurrentSearchResults().get(0).getLocaleName());
 
 		TestSearchApi secondApi = new TestSearchApi();
@@ -142,6 +168,25 @@ public class SearchResultSnapshotTest {
 	private static class TestSearchApi extends SearchBaseAPI {
 		TestSearchApi() {
 			super(ObjectType.LOCATION);
+		}
+	}
+
+	private static class TestSearchResult extends SearchResult {
+		private final String extraData;
+
+		TestSearchResult(SearchPhrase phrase, String extraData) {
+			super(phrase);
+			this.extraData = extraData;
+		}
+
+		String getExtraData() {
+			return extraData;
+		}
+
+		@Override
+		public SearchResultFactory getSnapshotResultFactory() {
+			String data = extraData;
+			return phrase -> new TestSearchResult(phrase, data);
 		}
 	}
 }

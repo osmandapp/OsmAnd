@@ -36,6 +36,7 @@ import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchResultCollectionSnapshot;
 import net.osmand.search.core.SearchResultProgressSnapshot;
 import net.osmand.search.core.SearchResultProgressSnapshot.Stage;
+import net.osmand.search.core.SearchResultSnapshot;
 import net.osmand.search.core.SearchSettings;
 import net.osmand.search.core.SearchSettings.SortType;
 import net.osmand.search.core.SearchWord;
@@ -150,6 +151,14 @@ public class SearchUICore {
 		public SearchResultCollectionSnapshot toSnapshot(long requestId) {
 			return SearchResultCollectionSnapshot.from(requestId, phrase, searchResults, skipSorting,
 					spatialSearchVisibleLevel, useLimit);
+		}
+
+		public static SearchResultCollection fromSnapshot(SearchResultCollectionSnapshot snapshot) {
+			SearchResultCollection collection = new SearchResultCollection(snapshot.getPhrase(), snapshot.isSkipSorting(),
+					snapshot.getSpatialSearchVisibleLevel());
+			collection.searchResults.addAll(SearchResultSnapshot.toSearchResults(snapshot.getCurrentSearchResults()));
+			collection.useLimit = snapshot.getUseLimit();
+			return collection;
 		}
 
 		public SearchResultCollection combineWithCollection(SearchResultCollection collection, boolean resort, boolean removeDuplicates) {
@@ -701,6 +710,10 @@ public class SearchUICore {
 		return currentSearchResult;
 	}
 
+	public boolean isCurrentSearchRequest(long requestId) {
+		return requestNumber.get() == requestId;
+	}
+
 	public SearchPhrase getPhrase() {
 		return phrase;
 	}
@@ -1198,7 +1211,7 @@ public class SearchUICore {
 				SearchResult sr = new SearchResult(phrase);
 				sr.objectType = ObjectType.FILTER_FINISHED;
 				sr.progressSnapshot = new SearchResultProgressSnapshot(Stage.FILTER_FINISHED, null, null,
-						collection.toSnapshot(request), false, false);
+						collection.toSnapshot(request), false, false, false);
 				matcher.publish(sr);
 			}
 		}
@@ -1208,7 +1221,7 @@ public class SearchUICore {
 				SearchResult sr = new SearchResult(phrase);
 				sr.objectType = ObjectType.SEARCH_FINISHED;
 				sr.progressSnapshot = new SearchResultProgressSnapshot(Stage.SEARCH_FINISHED, null, null,
-						collection.toSnapshot(request), false, false);
+						collection.toSnapshot(request), false, false, false);
 				matcher.publish(sr);
 			}
 		}
@@ -1216,7 +1229,8 @@ public class SearchUICore {
 		public void apiSearchFinished(SearchCoreAPI api, SearchPhrase phrase) {
 			if (matcher != null) {
 				boolean spatialSearchApi = api instanceof SpatialTextSearchAPI;
-				SearchResultCollection apiCollection = api == lastRegionApi && lastRegionResults != null
+				boolean hasRegionResults = api == lastRegionApi && lastRegionResults != null;
+				SearchResultCollection apiCollection = hasRegionResults
 						? lastRegionResults
 						: createApiResultCollection(phrase, spatialSearchApi);
 				boolean append = aggregatedResults != null;
@@ -1228,7 +1242,7 @@ public class SearchUICore {
 				sr.object = api;
 				sr.parentSearchResult = parentSearchResult;
 				sr.progressSnapshot = new SearchResultProgressSnapshot(Stage.API_FINISHED, api, null,
-						aggregatedResults.toSnapshot(request), append, hasImpreciseResults());
+						aggregatedResults.toSnapshot(request), append, hasImpreciseResults(), hasRegionResults);
 				matcher.publish(sr);
 				apiResults = new ArrayList<>();
 				lastRegionResults = null;
@@ -1251,7 +1265,7 @@ public class SearchUICore {
 				sr.parentSearchResult = parentSearchResult;
 				sr.file = region;
 				sr.progressSnapshot = new SearchResultProgressSnapshot(Stage.REGION_FINISHED, api, region,
-						visibleResults.toSnapshot(request), append, false);
+						visibleResults.toSnapshot(request), append, false, true);
 				matcher.publish(sr);
 				if (debugMode) {
 					LOG.info("API region search done <" + phrase + "> API=<" + api + "> Region=<" + region.getFile().getName() + ">");
@@ -1315,6 +1329,9 @@ public class SearchUICore {
 			}
 			object.parentSearchResult = parentSearchResult;
 			if (matcher == null || matcher.publish(object)) {
+				if (object.objectType == ObjectType.PARTIAL_LOCATION) {
+					return true;
+				}
 				count++;
 				if (matcher != null) {
 					apiResults.add(object);

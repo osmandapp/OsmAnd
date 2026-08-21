@@ -20,20 +20,26 @@ public final class SearchResultProgressSnapshot {
 	private final SearchResultCollectionSnapshot resultCollection;
 	private final boolean append;
 	private final boolean impreciseResults;
+	private final boolean regionResultsPublished;
 
 	public SearchResultProgressSnapshot(Stage stage, SearchCoreAPI searchApi, BinaryMapIndexReader region,
 	                                    SearchResultCollectionSnapshot resultCollection, boolean append,
-	                                    boolean impreciseResults) {
+	                                    boolean impreciseResults, boolean regionResultsPublished) {
 		this.stage = Objects.requireNonNull(stage);
 		this.searchApi = searchApi;
 		this.region = region;
 		this.resultCollection = Objects.requireNonNull(resultCollection);
 		this.append = append;
 		this.impreciseResults = impreciseResults;
+		this.regionResultsPublished = regionResultsPublished;
 	}
 
 	public Stage getStage() {
 		return stage;
+	}
+
+	public long getRequestId() {
+		return resultCollection.getRequestId();
 	}
 
 	public SearchCoreAPI getSearchApi() {
@@ -54,5 +60,9 @@ public final class SearchResultProgressSnapshot {
 
 	public boolean hasImpreciseResults() {
 		return impreciseResults;
+	}
+
+	public boolean hasPublishedRegionResults() {
+		return regionResultsPublished;
 	}
 }

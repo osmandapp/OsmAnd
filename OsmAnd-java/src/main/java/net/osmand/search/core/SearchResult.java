@@ -27,6 +27,11 @@ import net.osmand.util.SearchAlgorithms;
 
 public class SearchResult {
 
+	@FunctionalInterface
+	public interface SearchResultFactory {
+		SearchResult create(SearchPhrase phrase);
+	}
+
 	public static final String DELIMITER = " ";
 	private static final String HYPHEN = "-";
 	static final int NEAREST_METERS_LIMIT = 30000;
@@ -100,6 +105,11 @@ public class SearchResult {
 
 	public SearchResult(SearchPhrase sp) {
 		this.requiredSearchPhrase = sp;
+	}
+
+	/** Returns a factory that recreates this result subtype without retaining this mutable instance. */
+	public SearchResultFactory getSnapshotResultFactory() {
+		return SearchResult::new;
 	}
 
 	public boolean hasImpreciseCoordinates() {

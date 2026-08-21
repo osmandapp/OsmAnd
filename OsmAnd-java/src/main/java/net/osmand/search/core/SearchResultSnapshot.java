@@ -10,6 +10,7 @@ import java.util.Objects;
 
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
+import net.osmand.search.core.SearchResult.SearchResultFactory;
 import net.osmand.search.core.SearchResult.SearchResultResource;
 import net.osmand.search.core.spatial.SpatialSearchResult;
 import net.osmand.util.MapUtils;
@@ -24,7 +25,9 @@ import net.osmand.util.MapUtils;
 public final class SearchResultSnapshot {
 
 	private final SearchPhrase requiredSearchPhrase;
+	private final SearchResultFactory resultFactory;
 	private final SearchResultSnapshot parentSearchResult;
+	private final String wordsSpan;
 	private final Object object;
 	private final SpatialSearchResult spatialResult;
 	private final ObjectType objectType;
@@ -43,6 +46,7 @@ public final class SearchResultSnapshot {
 	private final Object relatedObject;
 	private final double distRelatedObjectName;
 	private final boolean impreciseCoordinates;
+	private final boolean firstUnknownWordMatches;
 	private final double unknownPhraseMatchWeight;
 	private final int foundWordCount;
 	private final int depth;
@@ -55,7 +59,9 @@ public final class SearchResultSnapshot {
 
 	private SearchResultSnapshot(SearchResult result, SearchResultSnapshot parentSearchResult) {
 		requiredSearchPhrase = result.requiredSearchPhrase;
+		resultFactory = result.getSnapshotResultFactory();
 		this.parentSearchResult = parentSearchResult;
+		wordsSpan = result.wordsSpan;
 		object = result.object;
 		spatialResult = result.spatialResult;
 		objectType = result.objectType;
@@ -74,6 +80,7 @@ public final class SearchResultSnapshot {
 		relatedObject = result.relatedObject;
 		distRelatedObjectName = result.distRelatedObjectName;
 		impreciseCoordinates = result.hasImpreciseCoordinates();
+		firstUnknownWordMatches = result.firstUnknownWordMatches;
 		unknownPhraseMatchWeight = result.getUnknownPhraseMatchWeight();
 		foundWordCount = result.getFoundWordCount();
 		depth = result.getDepth();
@@ -88,6 +95,19 @@ public final class SearchResultSnapshot {
 
 	public static SearchResultSnapshot from(SearchResult result) {
 		return from(Objects.requireNonNull(result), new IdentityHashMap<>());
+	}
+
+	public SearchResult toSearchResult() {
+		return toSearchResult(new IdentityHashMap<>());
+	}
+
+	public static List<SearchResult> toSearchResults(List<SearchResultSnapshot> snapshots) {
+		Map<SearchResultSnapshot, SearchResult> results = new IdentityHashMap<>();
+		List<SearchResult> result = new ArrayList<>(snapshots.size());
+		for (SearchResultSnapshot snapshot : snapshots) {
+			result.add(Objects.requireNonNull(snapshot).toSearchResult(results));
+		}
+		return result;
 	}
 
 	static List<SearchResultSnapshot> fromAll(List<SearchResult> results) {
@@ -115,6 +135,40 @@ public final class SearchResultSnapshot {
 
 	private static List<String> copyStrings(Collection<String> source) {
 		return source == null ? null : Collections.unmodifiableList(new ArrayList<>(source));
+	}
+
+	private SearchResult toSearchResult(Map<SearchResultSnapshot, SearchResult> results) {
+		SearchResult result = results.get(this);
+		if (result != null) {
+			return result;
+		}
+		SearchResult parent = parentSearchResult != null ? parentSearchResult.toSearchResult(results) : null;
+		result = Objects.requireNonNull(resultFactory.create(requiredSearchPhrase));
+		result.parentSearchResult = parent;
+		result.wordsSpan = wordsSpan;
+		result.object = object;
+		result.spatialResult = spatialResult;
+		result.objectType = objectType;
+		result.file = file;
+		result.priority = priority;
+		result.priorityDistance = priorityDistance;
+		result.spatialSearchVisibleLevel = spatialSearchVisibleLevel;
+		result.location = location;
+		result.preferredZoom = preferredZoom;
+		result.localeName = localeName;
+		result.alternateName = alternateName;
+		result.addressName = addressName;
+		result.cityName = cityName;
+		result.otherNames = otherNames != null ? new ArrayList<>(otherNames) : null;
+		result.localeRelatedObjectName = localeRelatedObjectName;
+		result.relatedObject = relatedObject;
+		result.distRelatedObjectName = distRelatedObjectName;
+		result.setImpreciseCoordinates(impreciseCoordinates);
+		result.setFirstUnknownWordMatches(firstUnknownWordMatches);
+		result.setUnknownPhraseMatchWeight(unknownPhraseMatchWeight);
+		result.setOtherWordsMatch(otherWordsMatch != null ? new ArrayList<>(otherWordsMatch) : null);
+		results.put(this, result);
+		return result;
 	}
 
 	public SearchPhrase getRequiredSearchPhrase() {

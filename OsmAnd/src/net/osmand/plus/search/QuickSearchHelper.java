@@ -59,6 +59,7 @@ import net.osmand.search.core.SearchCoreFactory.SearchBaseAPI;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchResult;
+import net.osmand.search.core.SearchResult.SearchResultFactory;
 import net.osmand.search.core.SearchSettings;
 import net.osmand.search.core.spatial.SpatialTextSearchAPI;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -481,6 +482,12 @@ public class QuickSearchHelper implements ResourceListener {
 			@NonNull
 			public HistoryEntry getHistoryEntry() {
 				return historyEntry;
+			}
+
+			@Override
+			public SearchResultFactory getSnapshotResultFactory() {
+				HistoryEntry entry = historyEntry;
+				return phrase -> new HistorySearchResult(phrase, entry);
 			}
 		}
 
