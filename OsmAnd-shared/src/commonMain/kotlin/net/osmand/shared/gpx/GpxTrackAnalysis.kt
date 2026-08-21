@@ -505,6 +505,7 @@ class GpxTrackAnalysis {
 		for (s in splitSegments) {
 			val numberOfPoints = s.getNumberOfPoints()
 			var segmentDistance = 0f
+			var detachedStartAttributes: PointAttributes? = null
 			metricEnd += s.metricEnd
 			secondaryMetricEnd += s.secondaryMetricEnd
 			_points += numberOfPoints
@@ -547,8 +548,11 @@ class GpxTrackAnalysis {
 				}
 				updateHdop(point)
 
+				val hasPartialStart = j == 1 && s.startCoeff > 0
+				val hasExactSubsegmentStart = j == 0 && s.startPointInd > 0 && s.startCoeff == 0.0
+				val needsDetachedAttributes = hasPartialStart || hasExactSubsegmentStart
 				var distance = point.attributes?.distance ?: -1f
-				if (j == 1 && s.startCoeff > 0) {
+				if (hasPartialStart) {
 					distance = -1f
 				}
 				if (j > 0) {
@@ -618,20 +622,28 @@ class GpxTrackAnalysis {
 					}
 				}
 
-				// Reuse existing PointAttributes to avoid per‑point allocation
-				val attributes = point.attributes ?: run {
-					val a = PointAttributes(0f, 0f, false, false)
-					point.attributes = a
-					a
+				// Reuse existing PointAttributes to avoid per-point allocation. Points affected by
+				// an interval start have interval-specific values, so keep their attributes detached.
+				val attributes = if (needsDetachedAttributes) {
+					point.attributes?.copy() ?: PointAttributes(0f, 0f, false, false)
+				} else {
+					point.attributes ?: run {
+						val a = PointAttributes(0f, 0f, false, false)
+						point.attributes = a
+						a
+					}
 				}
 
-				// Update fields (no new object created)
+				// Update fields
 				attributes.distance = distance
 				attributes.timeDiff = timeDiff.toFloat()
 				attributes.firstPoint = firstPoint
 				attributes.lastPoint = lastPoint
 				attributes.speed = speed
 				attributes.elevation = elevation
+				if (needsDetachedAttributes) {
+					detachedStartAttributes = attributes
+				}
 
 				addWptAttribute(point, attributes, pointsAnalyser)
 				if (attributes.sensorSpeed > 0 && !attributes.sensorSpeed.isInfinite()) {
@@ -767,7 +779,7 @@ class GpxTrackAnalysis {
 				}
 
 			}
-			processElevationDiff(s)
+			processElevationDiff(s, detachedStartAttributes)
 		}
 
 		if (!joinSegments && totalDistanceWithoutGaps > 0) {
@@ -842,9 +854,6 @@ class GpxTrackAnalysis {
 		}
 		if (!hasElevationData() && !attributes.elevation.isNaN()) {
 			setHasData(POINT_ELEVATION, true)
-		}
-		if (point.attributes != attributes) {
-			point.attributes = attributes
 		}
 		pointsAnalyser?.onAnalysePoint(this, point, attributes)
 		if (collectPointData) {
@@ -939,7 +948,10 @@ class GpxTrackAnalysis {
 		return if (valuesCount > 0) (totalSum.toDouble() / valuesCount).toInt() else 0
 	}
 
-	private fun processElevationDiff(segment: SplitSegment) {
+	private fun processElevationDiff(
+		segment: SplitSegment,
+		detachedStartAttributes: PointAttributes?
+	) {
 		val approximator = getElevationApproximator(segment)
 		approximator.approximate()
 		val distances = approximator.getDistances()
@@ -956,14 +968,14 @@ class GpxTrackAnalysis {
 
 			if (segLastUp != null) {
 				val upDist = calculateTotalDistanceForSlope(segLastUp, indexes, distances)
-				val upMaxSpeed = calculateMaxSpeedForSlope(segLastUp, segment)
-                val upMovingTime = calculateMovingTimeForSlope(segLastUp, segment)
+				val upMaxSpeed = calculateMaxSpeedForSlope(segLastUp, segment, detachedStartAttributes)
+				val upMovingTime = calculateMovingTimeForSlope(segLastUp, segment, detachedStartAttributes)
 				this.lastUphill = segLastUp.copy(distance = upDist, maxSpeed = upMaxSpeed, movingTime = upMovingTime)
 			}
 			if (segLastDown != null) {
 				val downDist = calculateTotalDistanceForSlope(segLastDown, indexes, distances)
-				val downMaxSpeed = calculateMaxSpeedForSlope(segLastDown, segment)
-                val downMovingTime = calculateMovingTimeForSlope(segLastDown, segment)
+				val downMaxSpeed = calculateMaxSpeedForSlope(segLastDown, segment, detachedStartAttributes)
+				val downMovingTime = calculateMovingTimeForSlope(segLastDown, segment, detachedStartAttributes)
 				this.lastDownhill = segLastDown.copy(distance = downDist, maxSpeed = downMaxSpeed, movingTime = downMovingTime)
 			}
 		}
@@ -988,16 +1000,18 @@ class GpxTrackAnalysis {
 
 	private fun calculateMaxSpeedForSlope(
 		slope: ElevationDiffsCalculator.SlopeInfo?,
-		segment: SplitSegment
+		segment: SplitSegment,
+		detachedStartAttributes: PointAttributes?
 	): Float {
 		if (slope == null) return 0.0f
 		val startIdx = slope.startPointIndex
 		val endIdx = slope.endPointIndex
 		if (startIdx > endIdx) return 0.0f
+		val detachedStartIndex = if (segment.startCoeff > 0) 1 else 0
 		var maxSpeed = 0.0f
 		for (i in startIdx..endIdx) {
 			val pt = segment[i]
-			val attributes = pt.attributes
+			val attributes = detachedStartAttributes?.takeIf { i == detachedStartIndex } ?: pt.attributes
 			val speed = if (attributes != null && !attributes.speed.isNaN()) attributes.speed else pt.speed
 
 			if (speed > maxSpeed) {
@@ -1009,12 +1023,14 @@ class GpxTrackAnalysis {
  
     private fun calculateMovingTimeForSlope(
         slope: ElevationDiffsCalculator.SlopeInfo?,
-        segment: SplitSegment
+        segment: SplitSegment,
+        detachedStartAttributes: PointAttributes?
     ): Long {
         if (slope == null) return 0L
         val startIdx = slope.startPointIndex
         val endIdx = slope.endPointIndex
         if (startIdx >= endIdx) return 0L
+        val detachedStartIndex = if (segment.startCoeff > 0) 1 else 0
         var movingTime = 0L
         for (i in (startIdx + 1)..endIdx) {
             val prev = segment[i - 1]
@@ -1025,7 +1041,7 @@ class GpxTrackAnalysis {
             val timeDiffSec = (timeDiffMillis / 1000).toInt()
             if (timeDiffSec <= 0) continue
 
-            val attributes = pt.attributes
+            val attributes = detachedStartAttributes?.takeIf { i == detachedStartIndex } ?: pt.attributes
             var distance = attributes?.distance ?: -1f
             if (distance < 0f) {
                 distance = KMapUtils.getEllipsoidDistance(prev.lat, prev.lon, pt.lat, pt.lon).toFloat()
@@ -1095,6 +1111,10 @@ class GpxTrackAnalysis {
 	}
 
 	fun interface TrackPointsAnalyser {
+		/**
+		 * The supplied attribute may be detached from `point.attributes` for interval-specific
+		 * boundary calculations. Implementations should read and update the supplied attribute.
+		 */
 		fun onAnalysePoint(analysis: GpxTrackAnalysis, point: WptPt, attribute: PointAttributes)
 	}
 }
