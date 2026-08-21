@@ -105,7 +105,6 @@ import net.osmand.util.RegionCodeUtils;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.CompletableFuture;
 
 public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment implements OsmAndCompassListener,
 		OsmAndLocationListener, DownloadEvents, OnPreferenceChanged {
@@ -2467,7 +2466,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				cancelPrev = false;
 				if (!paused && resultListener != null) {
 					app.runInUIThread(() -> {
-						if (!paused && searchUICore.isCurrentSearchRequest(requestId)) {
+						if (!paused && !cancelPrev && searchUICore.isCurrentSearchRequest(requestId)) {
 							resultListener.searchStarted(phrase);
 						}
 					});
@@ -2481,15 +2480,14 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				}
 				switch (progress.getStage()) {
 					case SEARCH_FINISHED:
-						SearchResultCollection finalResults = getProgressResultCollection(progress);
-						SearchPhrase phrase = progress.getResultCollection().getPhrase();
 						app.runInUIThread(() -> {
-							if (paused || !isCurrentProgressSnapshot(progress)) {
+							if (paused || cancelPrev || !isCurrentProgressSnapshot(progress)) {
 								return;
 							}
-							if (finalResults != null) {
-								setResultCollection(finalResults);
-							}
+							SearchResultCollection finalResults = SearchResultCollection.fromSnapshot(
+									progress.getResultCollection());
+							SearchPhrase phrase = finalResults.getPhrase();
+							setResultCollection(finalResults);
 							searching = false;
 							if (resultListener == null || resultListener.searchFinished(phrase)) {
 								hideProgressBar();
@@ -2498,10 +2496,11 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 						});
 						break;
 					case FILTER_FINISHED:
-						SearchResultCollection filteredResults = getProgressResultCollection(progress);
-						if (resultListener != null && filteredResults != null) {
+						if (resultListener != null) {
 							app.runInUIThread(() -> {
-								if (isCurrentProgressSnapshot(progress)) {
+								if (!paused && !cancelPrev && isCurrentProgressSnapshot(progress)) {
+									SearchResultCollection filteredResults = SearchResultCollection.fromSnapshot(
+											progress.getResultCollection());
 									resultListener.publish(filteredResults, false);
 								}
 							});
@@ -2511,10 +2510,18 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 						showApiResults(progress, resultListener);
 						switch (processTopIndexAfterLoad) {
 							case FILTER:
-								app.runInUIThread(() -> onFilterChipClick());
+								app.runInUIThread(() -> {
+									if (!paused && !cancelPrev && isCurrentProgressSnapshot(progress)) {
+										onFilterChipClick();
+									}
+								});
 								break;
 							case MAP:
-								app.runInUIThread(() -> onShowOnMapButtonClick());
+								app.runInUIThread(() -> {
+									if (!paused && !cancelPrev && isCurrentProgressSnapshot(progress)) {
+										onShowOnMapButtonClick();
+									}
+								});
 								break;
 						}
 						processTopIndexAfterLoad = ProcessTopIndex.NO;
@@ -2529,9 +2536,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 			@Override
 			public void onPartialLocation(long requestId, SearchPhrase phrase) {
-				if (!paused && !cancelPrev && searchUICore.isCurrentSearchRequest(requestId)) {
-					showLocationToolbar();
-				}
+				showLocationToolbar(requestId);
 			}
 
 			@Override
@@ -2548,19 +2553,15 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		}
 	}
 
-	@Nullable
-	private SearchResultCollection getProgressResultCollection(@NonNull SearchResultProgressSnapshot progress) {
-		return isCurrentProgressSnapshot(progress)
-				? SearchResultCollection.fromSnapshot(progress.getResultCollection())
-				: null;
-	}
-
 	private boolean isCurrentProgressSnapshot(@Nullable SearchResultProgressSnapshot progress) {
 		return progress != null && searchUICore.isCurrentSearchRequest(progress.getRequestId());
 	}
 
-	private void showLocationToolbar() {
+	private void showLocationToolbar(long requestId) {
 		app.runInUIThread(() -> {
+			if (paused || cancelPrev || !searchUICore.isCurrentSearchRequest(requestId)) {
+				return;
+			}
 			foundPartialLocation = true;
 			if (isAdded()) {
 				updateToolbarButton();
@@ -2570,11 +2571,12 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 	private void showApiResults(@NonNull SearchResultProgressSnapshot progress,
 	                            @Nullable SearchResultListener resultListener) {
-		SearchCoreAPI searchApi = progress.getSearchApi();
-		SearchResultCollection resultCollection = SearchResultCollection.fromSnapshot(progress.getResultCollection());
-		SearchPhrase phrase = resultCollection.getPhrase();
-		CompletableFuture.runAsync(() -> {
+		app.runInUIThread(() -> {
 			if (!paused && !cancelPrev && isCurrentProgressSnapshot(progress)) {
+				SearchCoreAPI searchApi = progress.getSearchApi();
+				SearchResultCollection resultCollection = SearchResultCollection.fromSnapshot(
+						progress.getResultCollection());
+				SearchPhrase phrase = resultCollection.getPhrase();
 				if (isDebugMode) {
 					LOG.info("UI >> Showing API results <" + phrase + "> API=<" + searchApi + "> Results="
 							+ getSearchResultCollectionFormattedSize(resultCollection));
@@ -2591,16 +2593,17 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 					app.showToastMessage(R.string.imprecise_coordinates);
 				}
 			}
-		}, app::runInUIThread).join();
+		});
 	}
 
 	private void showRegionResults(@NonNull SearchResultProgressSnapshot progress,
 	                               @Nullable SearchResultListener resultListener) {
-		BinaryMapIndexReader region = progress.getRegion();
-		SearchResultCollection resultCollection = SearchResultCollection.fromSnapshot(progress.getResultCollection());
-		SearchPhrase phrase = resultCollection.getPhrase();
-		CompletableFuture.runAsync(() -> {
+		app.runInUIThread(() -> {
 			if (!paused && !cancelPrev && isCurrentProgressSnapshot(progress)) {
+				BinaryMapIndexReader region = progress.getRegion();
+				SearchResultCollection resultCollection = SearchResultCollection.fromSnapshot(
+						progress.getResultCollection());
+				SearchPhrase phrase = resultCollection.getPhrase();
 				if (isDebugMode) {
 					LOG.info("UI >> Showing region results <" + phrase + "> Region=<" + region.getFile().getName()
 							+ "> Results=" + getSearchResultCollectionFormattedSize(resultCollection));
@@ -2613,7 +2616,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 							+ "> Results=" + getSearchResultCollectionFormattedSize(resultCollection));
 				}
 			}
-		}, app::runInUIThread).join();
+		});
 	}
 
 	private String getSearchResultCollectionFormattedSize(@Nullable SearchResultCollection resultCollection) {
