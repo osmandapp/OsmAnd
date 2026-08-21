@@ -40,7 +40,6 @@ import com.google.android.material.tabs.TabLayout;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.*;
 import net.osmand.map.WorldRegion;
@@ -2459,77 +2458,81 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 	private void runCoreSearchInternal(String text, boolean showQuickResult, boolean searchMore,
 	                                   SearchResultListener resultListener, boolean preserveSelectedPoiTypeNames) {
-		searchUICore.search(text, showQuickResult, new ResultMatcher<SearchResult>() {
+		searchUICore.searchWithProgress(text, showQuickResult, new SearchProgressListener() {
 			@Override
-			public boolean publish(SearchResult object) {
-				if (object.objectType == SEARCH_STARTED) {
-					cancelPrev = false;
+			public void onSearchStarted(long requestId, SearchPhrase phrase) {
+				if (!searchUICore.isCurrentSearchRequest(requestId)) {
+					return;
 				}
-				if (paused || cancelPrev) {
-					return false;
-				}
-				switch (object.objectType) {
-					case SEARCH_STARTED:
-						if (resultListener != null) {
-							app.runInUIThread(() -> resultListener.searchStarted(object.requiredSearchPhrase));
+				cancelPrev = false;
+				if (!paused && resultListener != null) {
+					app.runInUIThread(() -> {
+						if (!paused && searchUICore.isCurrentSearchRequest(requestId)) {
+							resultListener.searchStarted(phrase);
 						}
-						break;
+					});
+				}
+			}
+
+			@Override
+			public void onProgress(SearchResultProgressSnapshot progress) {
+				if (paused || cancelPrev || !isCurrentProgressSnapshot(progress)) {
+					return;
+				}
+				switch (progress.getStage()) {
 					case SEARCH_FINISHED:
-						SearchResultCollection finalResults = getProgressResultCollection(object);
+						SearchResultCollection finalResults = getProgressResultCollection(progress);
+						SearchPhrase phrase = progress.getResultCollection().getPhrase();
 						app.runInUIThread(() -> {
-							if (paused || !isCurrentProgressSnapshot(object.progressSnapshot)) {
+							if (paused || !isCurrentProgressSnapshot(progress)) {
 								return;
 							}
 							if (finalResults != null) {
 								setResultCollection(finalResults);
 							}
 							searching = false;
-							if (resultListener == null || resultListener.searchFinished(object.requiredSearchPhrase)) {
+							if (resultListener == null || resultListener.searchFinished(phrase)) {
 								hideProgressBar();
-								SearchPhrase phrase = object.requiredSearchPhrase;
 								onSearchFinished(phrase);
 							}
 						});
 						break;
 					case FILTER_FINISHED:
-						SearchResultCollection filteredResults = getProgressResultCollection(object);
+						SearchResultCollection filteredResults = getProgressResultCollection(progress);
 						if (resultListener != null && filteredResults != null) {
 							app.runInUIThread(() -> {
-								if (isCurrentProgressSnapshot(object.progressSnapshot)) {
+								if (isCurrentProgressSnapshot(progress)) {
 									resultListener.publish(filteredResults, false);
 								}
 							});
 						}
 						break;
-					case SEARCH_API_FINISHED:
-						if (isCurrentProgressSnapshot(object.progressSnapshot)) {
-							showApiResults(object.progressSnapshot, resultListener);
-							switch (processTopIndexAfterLoad) {
-								case FILTER:
-									app.runInUIThread(() -> onFilterChipClick());
-									break;
-								case MAP:
-									app.runInUIThread(() -> onShowOnMapButtonClick());
-									break;
-							}
-							processTopIndexAfterLoad = ProcessTopIndex.NO;
+					case API_FINISHED:
+						showApiResults(progress, resultListener);
+						switch (processTopIndexAfterLoad) {
+							case FILTER:
+								app.runInUIThread(() -> onFilterChipClick());
+								break;
+							case MAP:
+								app.runInUIThread(() -> onShowOnMapButtonClick());
+								break;
 						}
+						processTopIndexAfterLoad = ProcessTopIndex.NO;
 						break;
-					case SEARCH_API_REGION_FINISHED:
-						if (isCurrentProgressSnapshot(object.progressSnapshot)) {
-							showRegionResults(object.progressSnapshot, resultListener);
-						}
-						break;
-					case PARTIAL_LOCATION:
-						showLocationToolbar();
+					case REGION_FINISHED:
+						showRegionResults(progress, resultListener);
 						break;
 					default:
 						break;
 				}
-
-				return true;
 			}
 
+			@Override
+			public void onPartialLocation(long requestId, SearchPhrase phrase) {
+				if (!paused && !cancelPrev && searchUICore.isCurrentSearchRequest(requestId)) {
+					showLocationToolbar();
+				}
+			}
 
 			@Override
 			public boolean isCancelled() {
@@ -2546,8 +2549,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	@Nullable
-	private SearchResultCollection getProgressResultCollection(@NonNull SearchResult event) {
-		SearchResultProgressSnapshot progress = event.progressSnapshot;
+	private SearchResultCollection getProgressResultCollection(@NonNull SearchResultProgressSnapshot progress) {
 		return isCurrentProgressSnapshot(progress)
 				? SearchResultCollection.fromSnapshot(progress.getResultCollection())
 				: null;

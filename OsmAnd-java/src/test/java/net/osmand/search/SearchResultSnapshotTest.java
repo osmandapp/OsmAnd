@@ -150,6 +150,57 @@ public class SearchResultSnapshotTest {
 		Assert.assertEquals(2, secondProgress.getResultCollection().getCurrentSearchResults().size());
 	}
 
+	@Test
+	public void testProgressListenerReceivesSnapshotsWithoutMutableResults() {
+		SearchPhrase phrase = createPhrase();
+		AtomicInteger requestNumber = new AtomicInteger(11);
+		List<Long> startedRequests = new ArrayList<>();
+		List<Long> partialLocationRequests = new ArrayList<>();
+		List<SearchResultProgressSnapshot> progressSnapshots = new ArrayList<>();
+		SearchProgressListener progressListener = new SearchProgressListener() {
+			@Override
+			public void onSearchStarted(long requestId, SearchPhrase phrase) {
+				startedRequests.add(requestId);
+			}
+
+			@Override
+			public void onProgress(SearchResultProgressSnapshot progress) {
+				progressSnapshots.add(progress);
+			}
+
+			@Override
+			public void onPartialLocation(long requestId, SearchPhrase phrase) {
+				partialLocationRequests.add(requestId);
+			}
+
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+		};
+		SearchResultMatcher matcher = new SearchResultMatcher(null, progressListener, phrase,
+				requestNumber.get(), requestNumber, -1);
+
+		matcher.searchStarted(phrase);
+		SearchResult partialLocation = createResult(phrase, "Partial", 0);
+		partialLocation.objectType = ObjectType.PARTIAL_LOCATION;
+		matcher.publish(partialLocation);
+		SearchResult sourceResult = createResult(phrase, "Result", 0);
+		matcher.publish(sourceResult);
+		matcher.apiSearchFinished(new TestSearchApi(), phrase);
+		sourceResult.localeName = "Changed";
+
+		Assert.assertEquals(Arrays.asList(11L), startedRequests);
+		Assert.assertEquals(Arrays.asList(11L), partialLocationRequests);
+		Assert.assertEquals(1, matcher.getRequestResults().size());
+		Assert.assertEquals(1, progressSnapshots.size());
+		SearchResultProgressSnapshot progress = progressSnapshots.get(0);
+		Assert.assertEquals(Stage.API_FINISHED, progress.getStage());
+		Assert.assertEquals(11, progress.getRequestId());
+		Assert.assertEquals("Result",
+				progress.getResultCollection().getCurrentSearchResults().get(0).getLocaleName());
+	}
+
 	private SearchPhrase createPhrase() {
 		SearchSettings settings = new SearchSettings((SearchSettings) null);
 		settings = settings.setOriginalLocation(new LatLon(0, 0));

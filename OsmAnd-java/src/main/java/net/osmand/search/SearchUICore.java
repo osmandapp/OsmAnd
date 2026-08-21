@@ -32,6 +32,7 @@ import net.osmand.search.core.SearchCoreFactory.SearchStreetByCityAPI;
 import net.osmand.search.core.SearchExportSettings;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
+import net.osmand.search.core.SearchProgressListener;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchResultCollectionSnapshot;
 import net.osmand.search.core.SearchResultProgressSnapshot;
@@ -802,9 +803,20 @@ public class SearchUICore {
 	}
 
 	public void search(final String text, final boolean delayedExecution, final ResultMatcher<SearchResult> matcher) {
-		search(text, delayedExecution, matcher, null);
+		search(text, delayedExecution, matcher, null, null);
 	}
 	public void search(final String text, final boolean delayedExecution, final ResultMatcher<SearchResult> matcher, 
+			SearchSettings overrideSettings) {
+		search(text, delayedExecution, matcher, null, overrideSettings);
+	}
+
+	public void searchWithProgress(final String text, final boolean delayedExecution,
+			SearchProgressListener progressListener) {
+		search(text, delayedExecution, null, progressListener, null);
+	}
+
+	private void search(final String text, final boolean delayedExecution,
+			ResultMatcher<SearchResult> matcher, SearchProgressListener progressListener,
 			SearchSettings overrideSettings) {
 		if (overrideSettings != null) {
 			this.searchSettings = overrideSettings;
@@ -825,8 +837,8 @@ public class SearchUICore {
 						onSearchStart.run();
 					}
 					final SearchPerformanceStats performanceStats = new SearchPerformanceStats(isSpatialSearch() ? "spatial" : "general");
-					final SearchResultMatcher rm = new SearchResultMatcher(matcher, phrase, request, requestNumber, totalLimit,
-							performanceStats);
+					final SearchResultMatcher rm = new SearchResultMatcher(matcher, progressListener, phrase, request,
+							requestNumber, totalLimit, performanceStats);
 					if (debugMode) {
 						LOG.info("Starting search <" + phrase.toString() + ">");
 					}
@@ -1145,6 +1157,7 @@ public class SearchUICore {
 		public static class SearchResultMatcher implements ResultMatcher<SearchResult> {
 			private final List<SearchResult> requestResults = new ArrayList<>();
 			private final ResultMatcher<SearchResult> matcher;
+			private final SearchProgressListener progressListener;
 			private final int request;
 			private final SearchPerformanceStats performanceStats;
 			int totalLimit;
@@ -1161,12 +1174,19 @@ public class SearchUICore {
 
 			public SearchResultMatcher(ResultMatcher<SearchResult> matcher, SearchPhrase phrase, int request,
 									   AtomicInteger requestNumber, int totalLimit) {
-				this(matcher, phrase, request, requestNumber, totalLimit, null);
+				this(matcher, null, phrase, request, requestNumber, totalLimit, null);
 			}
 
-			private SearchResultMatcher(ResultMatcher<SearchResult> matcher, SearchPhrase phrase, int request,
-										AtomicInteger requestNumber, int totalLimit, SearchPerformanceStats performanceStats) {
+			SearchResultMatcher(ResultMatcher<SearchResult> matcher, SearchProgressListener progressListener,
+					SearchPhrase phrase, int request, AtomicInteger requestNumber, int totalLimit) {
+				this(matcher, progressListener, phrase, request, requestNumber, totalLimit, null);
+			}
+
+			private SearchResultMatcher(ResultMatcher<SearchResult> matcher, SearchProgressListener progressListener,
+					SearchPhrase phrase, int request, AtomicInteger requestNumber, int totalLimit,
+					SearchPerformanceStats performanceStats) {
 				this.matcher = matcher;
+				this.progressListener = progressListener;
 				this.phrase = phrase;
 				this.request = request;
 				this.requestNumber = requestNumber;
@@ -1199,6 +1219,9 @@ public class SearchUICore {
 		}
 
 		public void searchStarted(SearchPhrase phrase) {
+			if (progressListener != null) {
+				progressListener.onSearchStarted(request, phrase);
+			}
 			if (matcher != null) {
 				SearchResult sr = new SearchResult(phrase);
 				sr.objectType = ObjectType.SEARCH_STARTED;
@@ -1207,27 +1230,41 @@ public class SearchUICore {
 		}
 
 		public void filterFinished(SearchPhrase phrase, SearchResultCollection collection) {
-			if (matcher != null) {
+			if (hasProgressConsumer()) {
+				SearchResultProgressSnapshot progress = new SearchResultProgressSnapshot(Stage.FILTER_FINISHED,
+						null, null, collection.toSnapshot(request), false, false, false);
+				if (progressListener != null) {
+					progressListener.onProgress(progress);
+				}
+				if (matcher == null) {
+					return;
+				}
 				SearchResult sr = new SearchResult(phrase);
 				sr.objectType = ObjectType.FILTER_FINISHED;
-				sr.progressSnapshot = new SearchResultProgressSnapshot(Stage.FILTER_FINISHED, null, null,
-						collection.toSnapshot(request), false, false, false);
+				sr.progressSnapshot = progress;
 				matcher.publish(sr);
 			}
 		}
 
 		public void searchFinished(SearchPhrase phrase, SearchResultCollection collection) {
-			if (matcher != null) {
+			if (hasProgressConsumer()) {
+				SearchResultProgressSnapshot progress = new SearchResultProgressSnapshot(Stage.SEARCH_FINISHED,
+						null, null, collection.toSnapshot(request), false, false, false);
+				if (progressListener != null) {
+					progressListener.onProgress(progress);
+				}
+				if (matcher == null) {
+					return;
+				}
 				SearchResult sr = new SearchResult(phrase);
 				sr.objectType = ObjectType.SEARCH_FINISHED;
-				sr.progressSnapshot = new SearchResultProgressSnapshot(Stage.SEARCH_FINISHED, null, null,
-						collection.toSnapshot(request), false, false, false);
+				sr.progressSnapshot = progress;
 				matcher.publish(sr);
 			}
 		}
 
 		public void apiSearchFinished(SearchCoreAPI api, SearchPhrase phrase) {
-			if (matcher != null) {
+			if (hasProgressConsumer()) {
 				boolean spatialSearchApi = api instanceof SpatialTextSearchAPI;
 				boolean hasRegionResults = api == lastRegionApi && lastRegionResults != null;
 				SearchResultCollection apiCollection = hasRegionResults
@@ -1237,13 +1274,19 @@ public class SearchUICore {
 				aggregatedResults = append
 						? aggregatedResults.combineWithCollection(apiCollection, !spatialSearchApi, true)
 						: apiCollection;
-				SearchResult sr = new SearchResult(phrase);
-				sr.objectType = ObjectType.SEARCH_API_FINISHED;
-				sr.object = api;
-				sr.parentSearchResult = parentSearchResult;
-				sr.progressSnapshot = new SearchResultProgressSnapshot(Stage.API_FINISHED, api, null,
+				SearchResultProgressSnapshot progress = new SearchResultProgressSnapshot(Stage.API_FINISHED, api, null,
 						aggregatedResults.toSnapshot(request), append, hasImpreciseResults(), hasRegionResults);
-				matcher.publish(sr);
+				if (progressListener != null) {
+					progressListener.onProgress(progress);
+				}
+				if (matcher != null) {
+					SearchResult sr = new SearchResult(phrase);
+					sr.objectType = ObjectType.SEARCH_API_FINISHED;
+					sr.object = api;
+					sr.parentSearchResult = parentSearchResult;
+					sr.progressSnapshot = progress;
+					matcher.publish(sr);
+				}
 				apiResults = new ArrayList<>();
 				lastRegionResults = null;
 				lastRegionApi = null;
@@ -1251,7 +1294,7 @@ public class SearchUICore {
 		}
 
 		public void apiSearchRegionFinished(SearchCoreAPI api, BinaryMapIndexReader region, SearchPhrase phrase) {
-			if (matcher != null) {
+			if (hasProgressConsumer()) {
 				boolean spatialSearchApi = api instanceof SpatialTextSearchAPI;
 				lastRegionResults = createApiResultCollection(phrase, spatialSearchApi);
 				lastRegionApi = api;
@@ -1259,14 +1302,20 @@ public class SearchUICore {
 				SearchResultCollection visibleResults = append
 						? aggregatedResults.combineWithCollection(lastRegionResults, true, true)
 						: lastRegionResults;
-				SearchResult sr = new SearchResult(phrase);
-				sr.objectType = ObjectType.SEARCH_API_REGION_FINISHED;
-				sr.object = api;
-				sr.parentSearchResult = parentSearchResult;
-				sr.file = region;
-				sr.progressSnapshot = new SearchResultProgressSnapshot(Stage.REGION_FINISHED, api, region,
+				SearchResultProgressSnapshot progress = new SearchResultProgressSnapshot(Stage.REGION_FINISHED, api, region,
 						visibleResults.toSnapshot(request), append, false, true);
-				matcher.publish(sr);
+				if (progressListener != null) {
+					progressListener.onProgress(progress);
+				}
+				if (matcher != null) {
+					SearchResult sr = new SearchResult(phrase);
+					sr.objectType = ObjectType.SEARCH_API_REGION_FINISHED;
+					sr.object = api;
+					sr.parentSearchResult = parentSearchResult;
+					sr.file = region;
+					sr.progressSnapshot = progress;
+					matcher.publish(sr);
+				}
 				if (debugMode) {
 					LOG.info("API region search done <" + phrase + "> API=<" + api + "> Region=<" + region.getFile().getName() + ">");
 				}
@@ -1276,6 +1325,10 @@ public class SearchUICore {
 		private SearchResultCollection createApiResultCollection(SearchPhrase phrase, boolean spatialSearchApi) {
 			return new SearchResultCollection(phrase, spatialSearchApi)
 					.addSearchResults(apiResults, !spatialSearchApi, true);
+		}
+
+		private boolean hasProgressConsumer() {
+			return matcher != null || progressListener != null;
 		}
 
 		private boolean hasImpreciseResults() {
@@ -1290,6 +1343,9 @@ public class SearchUICore {
 		@Override
 		public boolean publish(SearchResult object) {
 			sampleMemory();
+			if (progressListener != null && isCancelled()) {
+				return false;
+			}
 			// disable boundary for end results
 			if (object.objectType == ObjectType.BOUNDARY) {
 				return false;
@@ -1330,10 +1386,13 @@ public class SearchUICore {
 			object.parentSearchResult = parentSearchResult;
 			if (matcher == null || matcher.publish(object)) {
 				if (object.objectType == ObjectType.PARTIAL_LOCATION) {
+					if (progressListener != null) {
+						progressListener.onPartialLocation(request, object.requiredSearchPhrase);
+					}
 					return true;
 				}
 				count++;
-				if (matcher != null) {
+				if (hasProgressConsumer()) {
 					apiResults.add(object);
 				}
 				if (totalLimit == -1 || count < totalLimit) {
@@ -1347,7 +1406,9 @@ public class SearchUICore {
 		@Override
 		public boolean isCancelled() {
 			boolean cancelled = request != requestNumber.get();
-			return cancelled || (matcher != null && matcher.isCancelled());
+			return cancelled
+					|| (matcher != null && matcher.isCancelled())
+					|| (progressListener != null && progressListener.isCancelled());
 		}
 
 		public List<MapObject> getExportedObjects() {
