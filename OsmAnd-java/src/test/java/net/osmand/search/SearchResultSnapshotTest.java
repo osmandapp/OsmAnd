@@ -159,6 +159,58 @@ public class SearchResultSnapshotTest {
 	}
 
 	@Test
+	public void testMatcherStartsAggregationFromIndependentSnapshot() {
+		SearchPhrase previousPhrase = createPhrase();
+		SearchResult previousResult = createResult(previousPhrase, "Existing", 0);
+		SearchResultCollection previousCollection = new SearchResultCollection(previousPhrase);
+		previousCollection.addSearchResults(Arrays.asList(previousResult), false, false);
+		SearchResultCollectionSnapshot initialResults = previousCollection.toSnapshot();
+
+		SearchPhrase currentPhrase = createPhrase();
+		AtomicInteger requestNumber = new AtomicInteger(13);
+		List<SearchResultProgressSnapshot> published = new ArrayList<>();
+		SearchProgressListener progressListener = new SearchProgressListener() {
+			@Override
+			public void onSearchStarted(long requestId, SearchPhrase phrase) {
+			}
+
+			@Override
+			public void onProgress(SearchResultProgressSnapshot progress) {
+				published.add(progress);
+			}
+
+			@Override
+			public void onPartialLocation(long requestId, SearchPhrase phrase) {
+			}
+
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+		};
+		SearchResultMatcher matcher = new SearchResultMatcher(null, progressListener, currentPhrase,
+				requestNumber.get(), requestNumber, -1, initialResults);
+
+		matcher.publish(createResult(currentPhrase, "New", 0));
+		matcher.apiSearchFinished(new TestSearchApi(), currentPhrase);
+
+		Assert.assertEquals(1, published.size());
+		SearchResultProgressSnapshot progress = published.get(0);
+		Assert.assertTrue(progress.shouldAppend());
+		Assert.assertEquals(2, progress.getResultCollection().getCurrentSearchResults().size());
+		Assert.assertSame(currentPhrase, progress.getResultCollection().getPhrase());
+		Assert.assertSame(previousPhrase, initialResults.getPhrase());
+		Assert.assertSame(previousPhrase,
+				initialResults.getCurrentSearchResults().get(0).getRequiredSearchPhrase());
+
+		SearchResultCollection aggregated = SearchResultCollection.fromSnapshot(progress.getResultCollection());
+		for (SearchResult result : aggregated.getCurrentSearchResults()) {
+			Assert.assertSame(currentPhrase, result.requiredSearchPhrase);
+			Assert.assertNotSame(previousResult, result);
+		}
+	}
+
+	@Test
 	public void testProgressListenerReceivesSnapshotsWithoutMutableResults() {
 		SearchPhrase phrase = createPhrase();
 		AtomicInteger requestNumber = new AtomicInteger(11);

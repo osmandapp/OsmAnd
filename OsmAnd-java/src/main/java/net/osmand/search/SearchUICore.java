@@ -162,6 +162,15 @@ public class SearchUICore {
 			return collection;
 		}
 
+		public static SearchResultCollection fromSnapshot(SearchResultCollectionSnapshot snapshot, SearchPhrase phrase) {
+			SearchResultCollection collection = new SearchResultCollection(phrase, snapshot.isSkipSorting(),
+					snapshot.getSpatialSearchVisibleLevel());
+			collection.searchResults.addAll(SearchResultSnapshot.toSearchResults(
+					snapshot.getCurrentSearchResults(), phrase));
+			collection.useLimit = snapshot.getUseLimit();
+			return collection;
+		}
+
 		public SearchResultCollection combineWithCollection(SearchResultCollection collection, boolean resort, boolean removeDuplicates) {
 			SearchResultCollection src = new SearchResultCollection(phrase, skipSorting || collection.skipSorting,
 					Math.max(spatialSearchVisibleLevel, collection.spatialSearchVisibleLevel));
@@ -803,21 +812,26 @@ public class SearchUICore {
 	}
 
 	public void search(final String text, final boolean delayedExecution, final ResultMatcher<SearchResult> matcher) {
-		search(text, delayedExecution, matcher, null, null);
+		search(text, delayedExecution, matcher, null, null, null);
 	}
 	public void search(final String text, final boolean delayedExecution, final ResultMatcher<SearchResult> matcher, 
 			SearchSettings overrideSettings) {
-		search(text, delayedExecution, matcher, null, overrideSettings);
+		search(text, delayedExecution, matcher, null, overrideSettings, null);
 	}
 
 	public void searchWithProgress(final String text, final boolean delayedExecution,
 			SearchProgressListener progressListener) {
-		search(text, delayedExecution, null, progressListener, null);
+		searchWithProgress(text, delayedExecution, progressListener, null);
+	}
+
+	public void searchWithProgress(final String text, final boolean delayedExecution,
+			SearchProgressListener progressListener, SearchResultCollectionSnapshot initialResults) {
+		search(text, delayedExecution, null, progressListener, null, initialResults);
 	}
 
 	private void search(final String text, final boolean delayedExecution,
 			ResultMatcher<SearchResult> matcher, SearchProgressListener progressListener,
-			SearchSettings overrideSettings) {
+			SearchSettings overrideSettings, SearchResultCollectionSnapshot initialResults) {
 		if (overrideSettings != null) {
 			this.searchSettings = overrideSettings;
 		}
@@ -838,7 +852,7 @@ public class SearchUICore {
 					}
 					final SearchPerformanceStats performanceStats = new SearchPerformanceStats(isSpatialSearch() ? "spatial" : "general");
 					final SearchResultMatcher rm = new SearchResultMatcher(matcher, progressListener, phrase, request,
-							requestNumber, totalLimit, performanceStats);
+							requestNumber, totalLimit, performanceStats, initialResults);
 					if (debugMode) {
 						LOG.info("Starting search <" + phrase.toString() + ">");
 					}
@@ -1174,17 +1188,23 @@ public class SearchUICore {
 
 			public SearchResultMatcher(ResultMatcher<SearchResult> matcher, SearchPhrase phrase, int request,
 									   AtomicInteger requestNumber, int totalLimit) {
-				this(matcher, null, phrase, request, requestNumber, totalLimit, null);
+				this(matcher, null, phrase, request, requestNumber, totalLimit, null, null);
 			}
 
 			SearchResultMatcher(ResultMatcher<SearchResult> matcher, SearchProgressListener progressListener,
 					SearchPhrase phrase, int request, AtomicInteger requestNumber, int totalLimit) {
-				this(matcher, progressListener, phrase, request, requestNumber, totalLimit, null);
+				this(matcher, progressListener, phrase, request, requestNumber, totalLimit, null, null);
+			}
+
+			SearchResultMatcher(ResultMatcher<SearchResult> matcher, SearchProgressListener progressListener,
+					SearchPhrase phrase, int request, AtomicInteger requestNumber, int totalLimit,
+					SearchResultCollectionSnapshot initialResults) {
+				this(matcher, progressListener, phrase, request, requestNumber, totalLimit, null, initialResults);
 			}
 
 			private SearchResultMatcher(ResultMatcher<SearchResult> matcher, SearchProgressListener progressListener,
 					SearchPhrase phrase, int request, AtomicInteger requestNumber, int totalLimit,
-					SearchPerformanceStats performanceStats) {
+					SearchPerformanceStats performanceStats, SearchResultCollectionSnapshot initialResults) {
 				this.matcher = matcher;
 				this.progressListener = progressListener;
 				this.phrase = phrase;
@@ -1192,6 +1212,9 @@ public class SearchUICore {
 				this.requestNumber = requestNumber;
 				this.totalLimit = totalLimit;
 				this.performanceStats = performanceStats;
+				this.aggregatedResults = initialResults != null
+						? SearchResultCollection.fromSnapshot(initialResults, phrase)
+						: null;
 			}
 
 		public SearchResult setParentSearchResult(SearchResult parentSearchResult) {

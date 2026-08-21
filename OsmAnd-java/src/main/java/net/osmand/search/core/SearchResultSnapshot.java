@@ -98,14 +98,19 @@ public final class SearchResultSnapshot {
 	}
 
 	public SearchResult toSearchResult() {
-		return toSearchResult(new IdentityHashMap<>());
+		return toSearchResult(new IdentityHashMap<>(), null);
 	}
 
 	public static List<SearchResult> toSearchResults(List<SearchResultSnapshot> snapshots) {
+		return toSearchResults(snapshots, null);
+	}
+
+	public static List<SearchResult> toSearchResults(List<SearchResultSnapshot> snapshots,
+	                                                 SearchPhrase requiredSearchPhrase) {
 		Map<SearchResultSnapshot, SearchResult> results = new IdentityHashMap<>();
 		List<SearchResult> result = new ArrayList<>(snapshots.size());
 		for (SearchResultSnapshot snapshot : snapshots) {
-			result.add(Objects.requireNonNull(snapshot).toSearchResult(results));
+			result.add(Objects.requireNonNull(snapshot).toSearchResult(results, requiredSearchPhrase));
 		}
 		return result;
 	}
@@ -137,13 +142,17 @@ public final class SearchResultSnapshot {
 		return source == null ? null : Collections.unmodifiableList(new ArrayList<>(source));
 	}
 
-	private SearchResult toSearchResult(Map<SearchResultSnapshot, SearchResult> results) {
+	private SearchResult toSearchResult(Map<SearchResultSnapshot, SearchResult> results,
+	                                    SearchPhrase requiredSearchPhrase) {
 		SearchResult result = results.get(this);
 		if (result != null) {
 			return result;
 		}
-		SearchResult parent = parentSearchResult != null ? parentSearchResult.toSearchResult(results) : null;
-		result = Objects.requireNonNull(resultFactory.create(requiredSearchPhrase));
+		SearchResult parent = parentSearchResult != null
+				? parentSearchResult.toSearchResult(results, requiredSearchPhrase)
+				: null;
+		SearchPhrase resultPhrase = requiredSearchPhrase != null ? requiredSearchPhrase : this.requiredSearchPhrase;
+		result = Objects.requireNonNull(resultFactory.create(resultPhrase));
 		result.parentSearchResult = parent;
 		result.wordsSpan = wordsSpan;
 		result.object = object;

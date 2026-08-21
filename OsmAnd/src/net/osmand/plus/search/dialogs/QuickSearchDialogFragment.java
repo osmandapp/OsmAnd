@@ -2457,6 +2457,9 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 	private void runCoreSearchInternal(String text, boolean showQuickResult, boolean searchMore,
 	                                   SearchResultListener resultListener, boolean preserveSelectedPoiTypeNames) {
+		SearchResultCollection previousResults = searchMore ? getResultCollection() : null;
+		// The worker reconstructs its own SearchResult instances and rebases them to the new phrase.
+		SearchResultCollectionSnapshot initialResults = previousResults != null ? previousResults.toSnapshot() : null;
 		searchUICore.searchWithProgress(text, showQuickResult, new SearchProgressListener() {
 			@Override
 			public void onSearchStarted(long requestId, SearchPhrase phrase) {
@@ -2484,10 +2487,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 							if (paused || cancelPrev || !isCurrentProgressSnapshot(progress)) {
 								return;
 							}
-							SearchResultCollection finalResults = SearchResultCollection.fromSnapshot(
-									progress.getResultCollection());
-							SearchPhrase phrase = finalResults.getPhrase();
-							setResultCollection(finalResults);
+							// API snapshots own the visible results; the final core snapshot also contains PARTIAL_LOCATION.
+							SearchPhrase phrase = progress.getResultCollection().getPhrase();
 							searching = false;
 							if (resultListener == null || resultListener.searchFinished(phrase)) {
 								hideProgressBar();
@@ -2543,7 +2544,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 			public boolean isCancelled() {
 				return paused || cancelPrev;
 			}
-		});
+		}, initialResults);
 
 		if (!searchMore) {
 			setResultCollection(null, preserveSelectedPoiTypeNames);
