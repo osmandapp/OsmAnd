@@ -5224,13 +5224,13 @@
     <string name="astro_fit_eclipse_path">Inquadra il percorso dell\'eclissi</string>
     <string name="astro_show_map">Mostra la mappa</string>
     <string name="astro_hide_map">Nascondi la mappa</string>
-    <string name="astro_map_center_location">Centro mappa: %1$s</string>
+    <string name="astro_map_center_location">Centro della mappa: %1$s</string>
     <string name="astro_solar_eclipse">Eclissi solare</string>
     <string name="astro_solar_eclipse_subtitle">Esplora le eclissi solari nel mondo</string>
     <string name="astro_previous_solar_eclipse">Eclissi solare precedente</string>
     <string name="astro_next_solar_eclipse">Eclissi solare successiva</string>
-    <string name="astro_close_solar_eclipse">Chiudi l\'esploratore delle eclissi solari</string>
-    <string name="astro_loading_solar_eclipse">Calcolo dell\'eclissi solare globale</string>
+    <string name="astro_close_solar_eclipse">Chiudi l\'esploratore dell\'eclissi solare</string>
+    <string name="astro_loading_solar_eclipse">Calcolo dell\'eclissi solare nel mondo</string>
     <string name="astro_eclipse_load_error">Impossibile calcolare questa eclissi solare globale.</string>
     <string name="astro_total_solar_eclipse">Eclissi solare totale</string>
     <string name="astro_annular_solar_eclipse">Eclissi solare anulare</string>
@@ -5347,7 +5347,7 @@
     <string name="astro_lunar_eclipse_subtitle">Esplora le eclissi lunari nel mondo</string>
     <string name="astro_previous_lunar_eclipse">Eclissi lunare precedente</string>
     <string name="astro_next_lunar_eclipse">Eclissi lunare successiva</string>
-    <string name="astro_close_lunar_eclipse">Chiudi l\'esploratore di eclisse lunare</string>
+    <string name="astro_close_lunar_eclipse">Chiudi l\'esploratore dell\'eclissi lunare</string>
     <string name="astro_loading_lunar_eclipse">Sto calcolando l\'eclissi lunare in tutto il mondo</string>
     <string name="astro_lunar_eclipse_load_error">Impossibile calcolare questa eclissi lunare.</string>
     <string name="astro_total_lunar_eclipse">Eclissi lunare totale</string>
@@ -5360,7 +5360,7 @@
     <string name="widget_height">Altezza del widget</string>
     <string name="row_height">Altezza della riga</string>
     <string name="shared_string_transparent">Trasparente</string>
-    <string name="panel_appearance_original_description">%1$s preserva la dimensione e l\'icona di ogni widget.</string>
+    <string name="panel_appearance_original_description">%1$s preserva la dimensione e l\'icona individuale per ogni widget.</string>
     <string name="copy_from">Copia da</string>
     <string name="another_profile">Un altro profilo</string>
     <string name="duplicate_map">Mappa duplicata</string>
