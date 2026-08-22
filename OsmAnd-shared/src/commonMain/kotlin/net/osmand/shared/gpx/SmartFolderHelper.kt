@@ -258,20 +258,25 @@ class SmartFolderHelper {
 	}
 
 	fun addTrackItemToSmartFolder(item: TrackItem) {
-		val newSet = allAvailableTrackItems
-		newSet.add(item)
-		allAvailableTrackItems = newSet
+		replaceAvailableTrackItems(listOf(item))
 		addTracksToSmartFolders(arrayListOf(item), smartFolderCollection)
 	}
 
 	fun addTrackItemsToSmartFolder(items: List<TrackItem>) {
+		replaceAvailableTrackItems(items)
 		if (smartFolderCollection.isEmpty()) {
 			return
 		}
-		val newSet = allAvailableTrackItems
-		newSet.addAll(items)
-		allAvailableTrackItems = newSet
 		addTracksToSmartFolders(items, smartFolderCollection)
+	}
+
+	private fun replaceAvailableTrackItems(items: List<TrackItem>) {
+		val newSet = HashSet(allAvailableTrackItems)
+		for (item in items) {
+			newSet.remove(item)
+			newSet.add(item)
+		}
+		allAvailableTrackItems = newSet
 	}
 
 	private fun addTracksToSmartFolders(items: List<TrackItem>, smartFolders: List<SmartFolder>) {

@@ -56,18 +56,24 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 	}
 
 	/**
-	 * Ensures the track is present in the folder and forces a cache update.
+	 * Ensures the latest track instance is present in the folder and forces a cache update.
 	 * Since [TrackItem] is mutable, its properties (e.g., Activity) might have changed
 	 * even if it's already in the list, requiring a re-evaluation of organized groups.
 	 */
 	fun addTrackItem(trackItem: TrackItem, forceInvalidate: Boolean = false) {
-		var added = false
+		var changed = false
 		val currentItems = getTrackItems()
-		if (!currentItems.contains(trackItem)) {
+		val index = currentItems.indexOf(trackItem)
+		if (index == -1) {
 			trackItems = KCollectionUtils.addToList(currentItems, trackItem)
-			added = true
+			changed = true
+		} else if (currentItems[index] !== trackItem) {
+			val updatedItems = ArrayList(currentItems)
+			updatedItems[index] = trackItem
+			trackItems = updatedItems
+			changed = true
 		}
-		if (added || forceInvalidate) {
+		if (changed || forceInvalidate) {
 			invalidateCache()
 		}
 	}
