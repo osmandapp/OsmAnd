@@ -9,7 +9,6 @@ import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.shared.data.StringIntPair;
 import net.osmand.shared.gpx.TrackItem;
 import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.shared.gpx.filters.BaseTrackFilter;
@@ -17,7 +16,6 @@ import net.osmand.shared.gpx.filters.DateTrackFilter;
 import net.osmand.shared.gpx.filters.FilterChangedListener;
 import net.osmand.shared.gpx.filters.ListTrackFilter;
 import net.osmand.shared.gpx.filters.RangeTrackFilter;
-import net.osmand.shared.gpx.filters.SingleFieldTrackFilterParams;
 import net.osmand.shared.gpx.filters.TextTrackFilter;
 import net.osmand.shared.gpx.filters.TrackFilterType;
 import net.osmand.shared.gpx.filters.TrackFiltersHelper;
@@ -76,6 +74,7 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 		app.getTaskManager().runInBackground(new OsmAndTaskManager.OsmAndTaskRunnable<Void, Void, Void>() {
 			@Override
 			protected Void doInBackground(Void... voids) {
+				List<TrackItem> trackItemsSnapshot = new ArrayList<>(trackItems);
 				DateTrackFilter dateFilter = (DateTrackFilter) getFilterByType(TrackFilterType.DATE_CREATION);
 				if (dateFilter != null) {
 					long minDate = app.getGpxDbHelper().getTracksMinCreateDate();
@@ -91,14 +90,7 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 						case SINGLE_FIELD_LIST -> {
 							ListTrackFilter filter = (ListTrackFilter) getFilterByType(trackFilterType);
 							if (filter != null) {
-								SingleFieldTrackFilterParams filterParams = (SingleFieldTrackFilterParams) trackFilterType.getAdditionalData();
-								List<StringIntPair> items = app.getGpxDbHelper().getStringIntItemsCollection(
-										trackFilterType.getProperty().getColumnName(),
-										filterParams.includeEmptyValues(),
-										filterParams.sortByName(),
-										filterParams.sortDescending()
-								);
-								filter.setFullItemsCollection(items);
+								filter.setFullItemsCollection(trackItemsSnapshot);
 								if (trackFilterType == TrackFilterType.FOLDER) {
 									if (currentFolder != null) {
 										filter.setFirstItem(currentFolder.getRelativePath());
@@ -178,19 +170,13 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 			results.values = res;
 			results.count = res.size();
 		}
-		ListTrackFilter folderFilter = (ListTrackFilter) getFilterByType(TrackFilterType.FOLDER);
-		if (folderFilter != null) {
-			if (Algorithms.isEmpty(filterSpecificSearchResults)) {
-				List<StringIntPair> items = app.getGpxDbHelper().getStringIntItemsCollection(
-						folderFilter.getTrackFilterType().getProperty().getColumnName(),
-						folderFilter.getCollectionFilterParams().includeEmptyValues(),
-						folderFilter.getCollectionFilterParams().sortByName(),
-						folderFilter.getCollectionFilterParams().sortDescending()
-				);
-				folderFilter.setFullItemsCollection(items);
-			} else {
-				List<TrackItem> ignoreFoldersItems = filterSpecificSearchResults.get(TrackFilterType.FOLDER);
-				folderFilter.updateFullCollection(ignoreFoldersItems);
+		for (BaseTrackFilter filter : currentFilters) {
+			if (filter instanceof ListTrackFilter listFilter) {
+				listFilter.setFullItemsCollection(trackItems);
+				if (filterCount > 0) {
+					List<TrackItem> filterItems = filterSpecificSearchResults.get(filter.getTrackFilterType());
+					listFilter.updateFullCollection(filterItems);
+				}
 			}
 		}
 		LOG.debug("found " + results.count + " tracks");
@@ -327,4 +313,3 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 		return new HashMap<>(filterSpecificSearchResults);
 	}
 }
-
