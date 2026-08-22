@@ -2352,7 +2352,7 @@
     <string name="poi_deaf_description">Leírás siketeknek</string>
     <string name="poi_defibrillator">Defibrillátor;félautomata</string>
     <string name="poi_defibrillator_yes">Defibrillátor</string>
-    <string name="poi_horse_yes">Lóval szabad</string>
+    <string name="poi_horse_yes">Igen</string>
     <string name="poi_horse_no">Lóval tilos</string>
     <string name="poi_stone_type_coat_of_arms">Típus: címer</string>
     <string name="poi_material_wood">Anyag: fa</string>
@@ -3682,7 +3682,7 @@
     <string name="poi_tourist_bus_no">Turistabusszal nem használható</string>
     <string name="poi_coach_yes">Távolsági busszal használható</string>
     <string name="poi_coach_no">Távolsági busszal nem használható</string>
-    <string name="poi_ski_yes">Sível használható</string>
+    <string name="poi_ski_yes">Igen</string>
     <string name="poi_ski_no">Sível nem használható</string>
     <string name="poi_snowmobile_private">Hójáróval a tulajdonos engedélyével használható</string>
     <string name="poi_snowmobile_no">Hójáróval nem használható</string>
@@ -5174,4 +5174,10 @@
     <string name="poi_water_type_filter">Víz típusa</string>
     <string name="poi_water_lake">Tó</string>
     <string name="poi_surface_laterite">Burkolat: laterit</string>
+    <string name="poi_mtb_filter">Alkalmas hegyikerékpározáshoz</string>
+    <string name="poi_ski_filter">Alkalmas sieléshez</string>
+    <string name="poi_horse_filter">Alkalmas lovagláshoz</string>
+    <string name="poi_winter_hiking_filter">Alkalmas téli túrázáshoz</string>
+    <string name="poi_mtb_yes">Igen</string>
+    <string name="poi_winter_hiking_yes">Igen</string>
 </resources>
