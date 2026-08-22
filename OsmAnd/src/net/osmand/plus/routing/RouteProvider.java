@@ -26,6 +26,8 @@ import net.osmand.plus.measurementtool.GpxApproximationParams;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.OnlineRoutingResponse;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.traffic.TrafficPlugin;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -127,9 +129,11 @@ public class RouteProvider {
 						params.mode.getRouteService().getName()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			}
 			try {
-				RouteCalculationResult res;
 				boolean calcGPXRoute = shouldCalculateGpxRoute(params);
-				if (calcGPXRoute && !params.gpxRoute.calculateOsmAndRoute) {
+				RouteCalculationResult res = findTrafficRoute(params);
+				if (res != null) {
+					// live traffic-aware route provided by the traffic plugin
+				} else if (calcGPXRoute && !params.gpxRoute.calculateOsmAndRoute) {
 					res = gpxRouteHelper.calculateGpxRoute(params);
 				} else if (params.mode.getRouteService() == RouteService.OSMAND) {
 					res = findVectorMapsRoute(params, calcGPXRoute);
@@ -811,6 +815,25 @@ public class RouteProvider {
 		}
 
 		return new RouteCalculationResult("Route is empty");
+	}
+
+	private RouteCalculationResult findTrafficRoute(@NonNull RouteCalculationParams params) {
+		TrafficPlugin plugin = PluginsHelper.getActivePlugin(TrafficPlugin.class);
+		OnlineRoutingEngine engine = plugin != null ? plugin.getTrafficEngine(params.mode) : null;
+		if (engine == null) {
+			return null;
+		}
+		try {
+			OnlineRoutingResponse response = params.ctx.getOnlineRoutingHelper()
+					.calculateRouteOnline(engine, getPathFromParams(params), params);
+			if (response != null && !Algorithms.isEmpty(response.getRoute()) && !Algorithms.isEmpty(response.getDirections())) {
+				params.intermediates = null;
+				return new RouteCalculationResult(response.getRoute(), response.getDirections(), params, null, false);
+			}
+		} catch (IOException | JSONException e) {
+			log.error("Traffic routing failed", e);
+		}
+		return null;
 	}
 
 	private static List<LatLon> getPathFromParams(RouteCalculationParams params) {
