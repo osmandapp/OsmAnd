@@ -16,6 +16,10 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+	buildFeatures {
+		buildConfig = true
+	}
+
 	lintOptions {
 		abortOnError false
 	}
@@ -307,6 +311,7 @@ tasks.register('collectExternalResources') {
 }
 
 // Legacy core build
+import groovy.xml.XmlParser
 import org.apache.tools.ant.taskdefs.condition.Os
 
 tasks.register('buildOsmAndCore', Exec) {
