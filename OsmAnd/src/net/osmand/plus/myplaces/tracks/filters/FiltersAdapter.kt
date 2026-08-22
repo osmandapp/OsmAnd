@@ -102,7 +102,7 @@ class FiltersAdapter(
 
 	fun onTracksFilteringComplete() {
 		for (i in 0 until items.size) {
-			if (items[i].trackFilterType.updateOnOtherFiltersChangeNeeded) {
+			if (items[i] is ListTrackFilter || items[i].trackFilterType.updateOnOtherFiltersChangeNeeded) {
 				notifyItemChanged(i)
 			}
 		}
