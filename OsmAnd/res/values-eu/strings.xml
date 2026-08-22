@@ -5045,4 +5045,15 @@
     <string name="share_favorites_points_and_media">Puntuak eta multimedia</string>
     <string name="share_favorites_preparation_failed">Ezin izan da prestatu fitxategiak partekatzeko.</string>
     <string name="share_favorites_share_failed">Ezin izan da fitxategia partekatu.</string>
+    <string name="shared_string_archive"></string>
+    <string name="share_favorites_with_media_description">%1$s-ko puntu gogokoenek multimedia erantsi dute. Partekatu puntuak soilik, edo puntuak multimediarekin artxibo gisa.</string>
+    <string name="share_favorites_points_only">Puntuak bakarrik</string>
+    <string name="share_favorites_missing_media_warning">Ezin izan dira erantsitako multimedia batzuk sartu.</string>
+    <string name="search_on_web">Bilatu webean</string>
+    <string name="release_5_4">• Bilaketa espazial berria — bilatu tokiak eta bilatu leku baten inguruan\n\n • Bilaketa-interfazea freskatua: ordenatzea, kategoria-iragazkiak, itxura garbiagoa\n\n • Erantsi argazkiak eta multimedia gogokoetara\n\n • Gogokoak: azpitaldeen laguntza eta finkatu daitezkeen karpetak\n\n • Koordenatuak: bilaketak, mapa-sareak eta intereseguneak bistaratzeak orain EPSG eta Maidenhead bilatzailea onartzen dituzte\n\n • Nabigazio-etenaldiak konpondu ditu; bideratze estandarra eta azkarra artean aldatzea\n\n • Ezarri Android Auto maparen eskala telefonotik bereizita\n\n • Astronomiak eguzki eta ilargi eklipseak gehitu ditu</string>
+    <string name="shared_string_note">Oharra</string>
+    <string name="media_storage_camera_folder_note_descr">Audioa /OsmAnd-en gordeko da.</string>
+    <string name="always_keep_local_copy">Audioa /OsmAnd-en gordeko da</string>
+    <string name="always_keep_local_copy_description">Multimedia erantsita geratzen da jatorrizkoa galeriatik edo fitxategietatik ezabatu arren.</string>
+    <string name="use_spatial_text_search">Erabili testu bilaketa espaziala</string>
 </resources>
