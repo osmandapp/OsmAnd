@@ -5045,7 +5045,7 @@
     <string name="share_favorites_points_and_media">Puntuak eta multimedia</string>
     <string name="share_favorites_preparation_failed">Ezin izan da prestatu fitxategiak partekatzeko.</string>
     <string name="share_favorites_share_failed">Ezin izan da fitxategia partekatu.</string>
-    <string name="shared_string_archive"></string>
+    <string name="shared_string_archive"/>
     <string name="share_favorites_with_media_description">%1$s-ko puntu gogokoenek multimedia erantsi dute. Partekatu puntuak soilik, edo puntuak multimediarekin artxibo gisa.</string>
     <string name="share_favorites_points_only">Puntuak bakarrik</string>
     <string name="share_favorites_missing_media_warning">Ezin izan dira erantsitako multimedia batzuk sartu.</string>
