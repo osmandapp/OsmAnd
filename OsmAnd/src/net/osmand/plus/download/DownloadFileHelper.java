@@ -318,16 +318,7 @@ public class DownloadFileHelper {
 						fs = de.fileToDownload;
 						first = false;
 					} else {
-						String name = entry.getName();
-						// small simplification
-						int ind = name.lastIndexOf('_');
-						if (ind > 0) {
-							// cut version
-							int i = name.indexOf('.', ind);
-							if (i > 0) {
-								name = name.substring(0, ind) + name.substring(i);
-							}
-						}
+						String name = Algorithms.removeFileVersionSuffix(entry.getName());
 						fs = new File(de.fileToDownload.getParent(), name);
 					}
 				} else {
