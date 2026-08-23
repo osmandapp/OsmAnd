@@ -177,6 +177,7 @@ class BackupImporter {
 					}
 					updateFileM5Digest(remoteFile, item, file);
 					updateFileUploadTime(remoteFile, item);
+					FavoritesBackupMerger.onDownloadSuccess(app, item, remoteFile);
 					if (PluginsHelper.isDevelopment()) {
 						UploadedFileInfo info = backupHelper.getUploadedFileInfo(remoteFile.getType(), remoteFile.getName());
 						LOG.debug(" importItemFile file info " + info);
