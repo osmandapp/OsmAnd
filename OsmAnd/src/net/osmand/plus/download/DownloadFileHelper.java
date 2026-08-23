@@ -318,7 +318,14 @@ public class DownloadFileHelper {
 						fs = de.fileToDownload;
 						first = false;
 					} else {
-						String name = Algorithms.removeFileVersionSuffix(entry.getName());
+						String name = entry.getName();
+						int separatorIndex = name.lastIndexOf('_');
+						if (separatorIndex > 0) {
+							int extensionIndex = name.indexOf('.', separatorIndex);
+							if (extensionIndex > 0) {
+								name = Algorithms.removeFileVersionSuffix(name);
+							}
+						}
 						fs = new File(de.fileToDownload.getParent(), name);
 					}
 				} else {
