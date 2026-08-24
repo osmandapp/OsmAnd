@@ -4896,8 +4896,8 @@
     <string name="rendering_attr_hideFairways_description">Nascondi i percorsi navigabili</string>
     <string name="rendering_attr_hideLightSectors_name">Settori di luce</string>
     <string name="rendering_attr_hideLightSectors_description">Nascondi i settori di luce</string>
-    <string name="rendering_attr_hideLightSectorSources_name">Sorgenti settori luce</string>
-    <string name="rendering_attr_hideLightSectorSources_description">Nascondi i sorgenti settori luce</string>
+    <string name="rendering_attr_hideLightSectorSources_name">Fonti dei settori luce</string>
+    <string name="rendering_attr_hideLightSectorSources_description">Nascondi le fonti dei settori di luce</string>
     <string name="rendering_attr_hideMinorContours_name">Curve batimetriche minori</string>
     <string name="rendering_attr_hideMinorContours_description">Nascondi le curve batimetriche minori</string>
     <string name="rendering_attr_hideNoLNAM_name">Boe OSM (alcune)</string>
