@@ -5184,7 +5184,7 @@
     <string name="rendering_attr_surface_clay_name">黏土</string>
     <string name="rendering_attr_surface_laterite_name">紅土</string>
     <string name="traffic_warning_red_light_camera">闖紅燈照相機</string>
-    <string name="release_5_4">• 全新空間搜尋功能：尋找地點並搜尋地點周邊資訊\n\n • 搜尋介面全面更新：新增排序功能、分類篩選器，並採用更簡潔的視覺設計\n\n • 可將照片與媒體檔案附加至「收藏」\n\n • 「收藏」功能：新增子群組支援及可釘選的資料夾\n\n • 座標：搜尋、地圖網格及興趣點顯示現已支援 EPSG 與 Maidenhead 定位系統\n\n • 修復導航中斷問題；可在「標準」與「快速」路線規劃間切換\n\n • 可獨立於手機設定 Android Auto 的地圖比例尺\n\n • 天文學功能新增日食與月食資訊</string>
+    <string name="release_5_4">• 搜尋介面全面更新：新增排序功能、分類篩選器，並採用更簡潔的視覺設計\n\n • 可將照片與媒體檔案附加至「收藏」\n\n • 「收藏」功能：新增子群組支援及可釘選的資料夾\n\n • 座標：搜尋、地圖網格及興趣點顯示現已支援 EPSG 與 Maidenhead 定位系統\n\n • 修復導航中斷問題；可在「標準」與「快速」路線規劃間切換\n\n • 可獨立於手機設定 Android Auto 的地圖比例尺\n\n• 全新空間搜尋功能：尋找地點並搜尋地點周邊資訊\n\n • 天文學功能新增日食與月食資訊</string>
     <string name="share_favorites_media_preparation_failed">無法附上媒體檔案。僅分享點。</string>
     <plurals name="files_count">
         <item quantity="other">%d 個檔案</item>
