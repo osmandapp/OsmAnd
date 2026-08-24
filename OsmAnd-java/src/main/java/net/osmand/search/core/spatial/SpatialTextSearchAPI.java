@@ -195,7 +195,8 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 
 	@Override
 	public int getSearchPriority(SearchPhrase phrase) {
-		if (!phrase.isUnknownSearchWordPresent() || phrase.isLastWord(ObjectType.POI_TYPE)) {
+		if (!phrase.isUnknownSearchWordPresent()
+				|| phrase.isLastWord(ObjectType.POI_TYPE, ObjectType.STREET)) {
 			return -1;
 		}
 		return SEARCH_PRIORITY;
