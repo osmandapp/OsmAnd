@@ -70,7 +70,14 @@ public class FavoritesBackupMergerTest {
 				group(point("A", 2)), DEFAULT_COLOR));
 		assertNull(FavoritesBackupMerger.mergeGroups(base, group(),
 				group(edited), DEFAULT_COLOR));
-		assertNull(FavoritesBackupMerger.mergeGroups(base, group(), group(), DEFAULT_COLOR));
+	}
+
+	@Test
+	public void mergesSameDeletion() {
+		FavoriteGroup merged = FavoritesBackupMerger.mergeGroups(
+				group(point("A", 1)), group(), group(), DEFAULT_COLOR);
+		assertNotNull(merged);
+		assertEquals(0, merged.getPoints().size());
 	}
 
 	@Test

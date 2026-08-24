@@ -209,6 +209,9 @@ final class FavoritesBackupMerger {
 			FavouritePoint basePoint = entry.getValue();
 			FavouritePoint localPoint = localPoints.remove(entry.getKey());
 			FavouritePoint remotePoint = remotePoints.remove(entry.getKey());
+			if (localPoint == null && remotePoint == null) {
+				continue;
+			}
 			boolean localUnchanged = samePoint(basePoint, localPoint, inheritedColor);
 			boolean remoteUnchanged = samePoint(basePoint, remotePoint, inheritedColor);
 			if (!localUnchanged && !remoteUnchanged) {
