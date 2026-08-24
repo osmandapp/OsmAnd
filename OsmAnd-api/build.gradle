@@ -3,18 +3,13 @@ apply plugin: 'ivy-publish'
 apply from: rootProject.file("versions.gradle")
 
 android {
-    compileSdk osmand_compileSdk
+    compileSdk = osmand_compileSdk
     buildToolsVersion = osmand_buildToolsVersion
 
     defaultConfig {
         minSdkVersion osmand_minSdk
         targetSdkVersion osmand_targetSdk
-        versionCode 2
-        versionName "2.0"
         namespace = "net.osmand.aidlapi"
-    }
-    lintOptions {
-        abortOnError false
     }
     sourceSets {
         main {
@@ -34,6 +29,9 @@ android {
         singleVariant('debug') {
             withJavadocJar()
         }
+    }
+    lint {
+        abortOnError false
     }
 }
 

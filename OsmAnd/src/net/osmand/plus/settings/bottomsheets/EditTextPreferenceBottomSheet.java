@@ -53,7 +53,7 @@ public class EditTextPreferenceBottomSheet extends BasePreferenceBottomSheet {
 		editText.setText(text);
 		editText.requestFocus();
 
-		ViewGroup editTextLayout = view.findViewById(R.id.text_field_boxes_editTextLayout);
+		ViewGroup editTextLayout = view.findViewById(studio.carbonylgroup.textfieldboxes.R.id.text_field_boxes_editTextLayout);
 		if (editTextLayout != null && editTextLayout.getLayoutParams() instanceof ViewGroup.MarginLayoutParams params) {
 			params.setMargins(params.leftMargin, dpToPx(9), params.rightMargin, params.bottomMargin);
 		}

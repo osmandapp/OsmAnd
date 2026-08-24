@@ -1,8 +1,9 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 apply plugin: 'com.android.application'
 apply from: 'build-common.gradle'
 apply from: rootProject.file("versions.gradle")
 
-apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-parcelize'
 apply plugin: 'org.jetbrains.kotlin.plugin.compose'
 
@@ -21,6 +22,12 @@ apply plugin: 'org.jetbrains.kotlin.plugin.compose'
 //            </patternset>
 //        </unzip>
 // Less important
+
+kotlin {
+	compilerOptions {
+		jvmTarget = JvmTarget.JVM_17
+	}
+}
 
 android {
 	signingConfigs {
@@ -45,10 +52,6 @@ android {
 		coreLibraryDesugaringEnabled true
 	}
 
-	kotlinOptions {
-		jvmTarget = "17"
-	}
-
 	defaultConfig {
 		minSdkVersion osmand_minSdk
 		versionCode 5399
@@ -58,10 +61,6 @@ android {
 		versionName System.getenv("APK_VERSION_SUFFIX")? versionName + System.getenv("APK_VERSION_SUFFIX").toString(): versionName
 	}
 
-	lintOptions {
-		lintConfig file("lint.xml")
-		warningsAsErrors false
-	}
 
 	bundle {
 		language {
@@ -86,21 +85,26 @@ android {
 		}
 		gplayFull {
 			java.srcDirs = ["src-google"]
+			kotlin.directories.addAll(["src-google"])
 		}
 		gplayFree {
 			java.srcDirs = ["src-google"]
+			kotlin.directories.addAll(["src-google"])
 			manifest.srcFile "AndroidManifest-gplayFree.xml"
 		}
 		androidFull {
 			java.srcDirs = ["src-google", "src-osmand"]
+			kotlin.directories.addAll(["src-google", "src-osmand"])
 			manifest.srcFile "AndroidManifest-androidFull.xml"
 		}
 		nightlyFree {
 			java.srcDirs = ["src-google", "src-osmand"]
+			kotlin.directories.addAll(["src-google", "src-osmand"])
 			manifest.srcFile "AndroidManifest-nightlyFree.xml"
 		}
 		huawei {
 			java.srcDirs = ["src-huawei"]
+			kotlin.directories.addAll(["src-huawei"])
 			manifest.srcFile "AndroidManifest-huawei.xml"
 		}
 
@@ -112,9 +116,18 @@ android {
 	buildFeatures {
 		aidl true
 		compose true
+		resValues = true
 	}
 
 	flavorDimensions "version", "coreversion", "abi"
+	androidResources {
+		noCompress = 'qz'
+	}
+	lint {
+		abortOnError false
+		lintConfig file('lint.xml')
+		warningsAsErrors false
+	}
 	productFlavors {
 		// Version
 		nightlyFree {
@@ -167,7 +180,7 @@ android {
 			signingConfig signingConfigs.publishing
 			minifyEnabled true
 			shrinkResources false
-			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 		}
 	}
 
@@ -189,6 +202,11 @@ android {
 		def mapSourceSetPathsName= "map${taskName}SourceSetPaths"
 		tasks.named(mapSourceSetPathsName).configure { osmandTask ->
 			println(osmandTask.getName())
+			osmandTask.dependsOn(copyIcons)
+		}
+		def processNavigationResources = "process${taskName}NavigationResources"
+		tasks.named(processNavigationResources).configure { osmandTask ->
+			println(osmandTask.getName() + " process navigation resources")
 			osmandTask.dependsOn(copyIcons)
 		}
 		def mergeResources= "merge${taskName}Resources"

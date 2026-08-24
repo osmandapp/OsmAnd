@@ -133,7 +133,7 @@ public class SplitSegmentDialogFragment extends BaseFullScreenDialogFragment imp
 
 		Toolbar toolbar = view.findViewById(R.id.split_interval_toolbar);
 		TextView title = toolbar.findViewById(R.id.title);
-		title.setTextAppearance(nightMode ? R.style.TextAppearance_AppCompat_Widget_ActionBar_Title : R.style.Widget_Styled_LightActionBarTitle);
+		title.setTextAppearance(nightMode ? androidx.appcompat.R.style.TextAppearance_AppCompat_Widget_ActionBar_Title : R.style.Widget_Styled_LightActionBarTitle);
 
 		toolbar.setNavigationIcon(getIcon(AndroidUtils.getNavigationIconResId(app)));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
