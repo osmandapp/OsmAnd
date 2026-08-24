@@ -31,6 +31,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class DownloadResources extends DownloadResourceGroup {
@@ -247,7 +248,7 @@ public class DownloadResources extends DownloadResourceGroup {
 				continue;
 			}
 			if (type == DownloadActivityType.DEPTH_MAP_FILE) {
-				String fileName = item.getFileName().toLowerCase();
+				String fileName = item.getFileName().toLowerCase(Locale.US);
 				if (fileName.startsWith(WORLD_CONTOURS_SUFFIX)) {
 					nauticalWorldwideMaps.addItem(item);
 				} else if (InAppPurchaseUtils.isDepthContoursAvailable(app)) {
@@ -283,7 +284,7 @@ public class DownloadResources extends DownloadResourceGroup {
 			}
 
 			String basename = item.getBasename();
-			WorldRegion region = regs.getRegionDataByDownloadName(basename.toLowerCase());
+			WorldRegion region = regs.getRegionDataByDownloadName(basename.toLowerCase(Locale.US));
 			if (region != null) {
 				if (!isMapCreatedByJoiningSubregions(region, type)) {
 					if (!groupByRegion.containsKey(region)) {
@@ -294,7 +295,7 @@ public class DownloadResources extends DownloadResourceGroup {
 			} else {
 				String fileName = item.getFileName();
 				if (fileName.contains("World")) {
-					if (CollectionUtils.startsWithAny(fileName.toLowerCase(), WORLD_SEAMARKS_KEY, WORLD_SEAMARKS_OLD_KEY)) {
+					if (CollectionUtils.startsWithAny(fileName.toLowerCase(Locale.US), WORLD_SEAMARKS_KEY, WORLD_SEAMARKS_OLD_KEY)) {
 						nauticalWorldwideMaps.addItem(item);
 					} else {
 						worldMaps.addItem(item);
@@ -306,7 +307,7 @@ public class DownloadResources extends DownloadResourceGroup {
 					String fileNameRegionName = fileName.substring(fileName.indexOf('_') + 1, fileName.indexOf('.'));
 					if (fileNameRegionName.contains("_") &&
 							!fileNameRegionName.endsWith(WorldRegion.AUSTRALIA_AND_OCEANIA_REGION_ID)) {
-						String[] parts = fileNameRegionName.toLowerCase().split("_");
+						String[] parts = fileNameRegionName.toLowerCase(Locale.US).split("_");
 						String countryPart = parts[0], regionPart = parts[1]; // us, northamerica
 						WorldRegion weatherRegion = regs.getRegionData(regionPart + "_" + countryPart);
 						if (weatherRegion != null) {
