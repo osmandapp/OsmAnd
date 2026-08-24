@@ -2056,7 +2056,7 @@
     <string name="poi_animal_training">動物訓練</string>
     <string name="poi_animal_training_dog">訓狗</string>
     <string name="poi_animal_training_horse">訓馬</string>
-    <string name="poi_horse_yes">准許馬進出</string>
+    <string name="poi_horse_yes">是</string>
     <string name="poi_horse_no">不准許馬進出</string>
     <string name="poi_animal_yes">准許動物進出</string>
     <string name="poi_animal_no">不准許動物進出</string>
@@ -3641,7 +3641,7 @@
     <string name="poi_tourist_bus_no">遊覽車進入：否</string>
     <string name="poi_coach_yes">長途公車進入：是</string>
     <string name="poi_coach_no">長途公車進入：否</string>
-    <string name="poi_ski_yes">滑雪進入：是</string>
+    <string name="poi_ski_yes">是</string>
     <string name="poi_ski_no">滑雪進入：否</string>
     <string name="poi_snowmobile_private">雪地摩托車進入：私人</string>
     <string name="poi_snowmobile_no">雪地摩托車進入：否</string>
@@ -5174,4 +5174,10 @@
     <string name="poi_water_type_filter">水體類型</string>
     <string name="poi_water_lake">湖</string>
     <string name="poi_surface_laterite">表面：紅土</string>
+    <string name="poi_mtb_filter">適用於登山車</string>
+    <string name="poi_ski_filter">適用於滑雪</string>
+    <string name="poi_horse_filter">適用於騎馬</string>
+    <string name="poi_winter_hiking_filter">適用於冬季健行</string>
+    <string name="poi_mtb_yes">是</string>
+    <string name="poi_winter_hiking_yes">是</string>
 </resources>
