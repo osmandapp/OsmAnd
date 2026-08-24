@@ -119,6 +119,29 @@ android {
 		tasks.named(mapSourceSetPathsName).configure { osmandTask ->
 			println(osmandTask.getName())
 		}
+		if (taskName.endsWith("Debug")) {
+			tasks.named("compile${taskName}AndroidTestAidl").configure { osmandTask ->
+				osmandTask.dependsOn(copyJavaSources)
+			}
+			tasks.named("process${taskName}AndroidTestManifest").configure { osmandTask ->
+				osmandTask.dependsOn(copyJavaSources)
+			}
+			tasks.named("merge${taskName}AndroidTestAssets").configure { osmandTask ->
+				osmandTask.dependsOn(copyJavaSources)
+			}
+			tasks.named("merge${taskName}AndroidTestJniLibFolders").configure { osmandTask ->
+				osmandTask.dependsOn(copyJavaSources)
+			}
+			tasks.named("merge${taskName}AndroidTestResources").configure { osmandTask ->
+				osmandTask.dependsOn(copyJavaSources)
+			}
+			tasks.named("generate${taskName}AndroidTestResources").configure { osmandTask ->
+				osmandTask.dependsOn(copyJavaSources)
+			}
+			tasks.named("merge${taskName}AndroidTestShaders").configure { osmandTask ->
+				osmandTask.dependsOn(copyJavaSources)
+			}
+		}
 	}
 
 }
