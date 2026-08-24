@@ -182,6 +182,14 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 				}
 			}
 			for (FavoriteGroup group : appliedItems) {
+				// Empty groups have no points to trigger addFavourite(), but still need a local file.
+				FavoriteGroup localGroup = favoritesHelper.getGroup(group.getName());
+				if (localGroup == null) {
+					localGroup = favoritesHelper.addFavoriteGroup(group.getName(), group.getColor(),
+							group.getIconName(), group.getBackgroundType());
+				}
+				localGroup.copyAppearance(group);
+
 				PointsGroup pointsGroup = group.toPointsGroup(app);
 				for (FavouritePoint point : group.getPoints()) {
 					favoritesHelper.addFavourite(point, pointsGroup, new AddFavoriteOptions());
