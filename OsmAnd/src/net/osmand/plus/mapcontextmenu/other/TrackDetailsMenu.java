@@ -347,21 +347,24 @@ public class TrackDetailsMenu {
 		GpxDisplayItem gpxItem = getGpxItem();
 		TrkSegment segment = getTrackSegment(chart);
 		boolean joinSegments = selectedGpxFile != null && selectedGpxFile.isJoinSegments();
+		boolean timeWithoutGaps = gpxItem != null && shouldCalculateWithoutGaps(gpxItem);
 
-		WptPt point = getPointAtChartPos(chart, gpxItem, segment, pos, joinSegments, true);
+		WptPt point = getPointAtChartPos(chart, gpxItem, segment, pos, joinSegments, true, timeWithoutGaps);
 		return point == null ? null : new LatLon(point.getLat(), point.getLon());
 	}
 
 	@Nullable
 	public static LatLon getLocationAtPos(@Nullable LineChart chart, @Nullable GpxDisplayItem gpxItem,
-			@Nullable TrkSegment segment, float pos, boolean joinSegments) {
-		WptPt point = getPointAtChartPos(chart, gpxItem, segment, pos, joinSegments, true);
+			@Nullable TrkSegment segment, float pos, boolean joinSegments, boolean timeWithoutGaps) {
+		WptPt point = getPointAtChartPos(chart, gpxItem, segment, pos,
+				joinSegments, true, timeWithoutGaps);
 		return point == null ? null : new LatLon(point.getLat(), point.getLon());
 	}
 
 	@Nullable
 	public static WptPt getPointAtChartPos(@Nullable LineChart chart, @Nullable GpxDisplayItem gpxItem,
-			@Nullable TrkSegment segment, float pos, boolean joinSegments, boolean preciseLocation) {
+			@Nullable TrkSegment segment, float pos, boolean joinSegments, boolean preciseLocation,
+			boolean timeWithoutGaps) {
 		LineData lineData = chart != null ? chart.getLineData() : null;
 		List<ILineDataSet> dataSets = lineData != null ? lineData.getDataSets() : null;
 
@@ -369,7 +372,7 @@ public class TrackDetailsMenu {
 			GpxFile gpxFile = gpxItem.group.getGpxFile();
 			if (gpxItem.chartAxisType == TIME || gpxItem.chartAxisType == TIME_OF_DAY) {
 				float time = pos * 1000;
-				return GpxUtils.getSegmentPointByTime(segment, gpxFile, time, preciseLocation, joinSegments);
+				return GpxUtils.getSegmentPointByTime(segment, gpxFile, time, preciseLocation, timeWithoutGaps);
 			} else {
 				OrderedLineDataSet dataSet = (OrderedLineDataSet) dataSets.get(0);
 				float distance = pos * dataSet.getDivX();

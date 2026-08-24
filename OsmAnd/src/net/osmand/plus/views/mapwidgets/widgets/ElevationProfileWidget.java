@@ -543,7 +543,10 @@ public class ElevationProfileWidget extends MapWidget {
 		Highlight highlight = getSelectedHighlight();
 		if (highlight != null) {
 			TrackChartPoints trackChartPoints = getTrackChartPoints();
-			LatLon location = TrackDetailsMenu.getLocationAtPos(chart, gpxItem, segment, highlight.getX(), true);
+			// This profile uses the distance axis; update this if a time axis is added.
+			boolean timeWithoutGaps = false;
+			LatLon location = TrackDetailsMenu.getLocationAtPos(
+					chart, gpxItem, segment, highlight.getX(), true, timeWithoutGaps);
 			if (location != null) {
 				trackChartPoints.setHighlightedPoint(location);
 			}

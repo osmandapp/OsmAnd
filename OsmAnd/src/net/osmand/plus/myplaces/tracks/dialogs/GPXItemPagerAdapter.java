@@ -229,6 +229,18 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private List<ILineDataSet> getDataSets(LineChart chart, GPXTabItemType tabType,
 	                                       GPXDataSetType firstType, GPXDataSetType secondType) {
 		List<ILineDataSet> dataSets = dataSetsMap.get(tabType);
+		boolean withoutGaps = shouldCalculateWithoutGaps();
+		if (chart != null && analysis != null) {
+			dataSets = ChartUtils.getDataSets(chart, app, analysis, firstType, secondType, selectedMainAxisType, withoutGaps);
+			if (!Algorithms.isEmpty(dataSets)) {
+				dataSetsMap.remove(tabType);
+			}
+			dataSetsMap.put(tabType, dataSets);
+		}
+		return dataSets;
+	}
+
+	private boolean shouldCalculateWithoutGaps() {
 		boolean withoutGaps = true;
 		if (isShowCurrentTrack()) {
 			GpxFile gpxFile = displayHelper.getGpx();
@@ -239,14 +251,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			boolean joinSegments = item != null ? item.getParameter(JOIN_SEGMENTS) : false;
 			withoutGaps = gpxItem.isGeneralTrack() && joinSegments;
 		}
-		if (chart != null && analysis != null) {
-			dataSets = ChartUtils.getDataSets(chart, app, analysis, firstType, secondType, selectedMainAxisType, withoutGaps);
-			if (!Algorithms.isEmpty(dataSets)) {
-				dataSetsMap.remove(tabType);
-			}
-			dataSetsMap.put(tabType, dataSets);
-		}
-		return dataSets;
+		return withoutGaps;
 	}
 
 	@Nullable
@@ -265,7 +270,9 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private WptPt getPoint(LineChart chart, float pos) {
 		TrkSegment segment = getTrackSegment(chart);
 		boolean joinSegments = displayHelper.isJoinSegments();
-		return TrackDetailsMenu.getPointAtChartPos(chart, gpxItem, segment, pos, joinSegments, false);
+		boolean timeWithoutGaps = shouldCalculateWithoutGaps();
+		return TrackDetailsMenu.getPointAtChartPos(
+				chart, gpxItem, segment, pos, joinSegments, false, timeWithoutGaps);
 	}
 
 	@Override
