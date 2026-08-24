@@ -81,6 +81,18 @@ public class FavoritesBackupMergerTest {
 	}
 
 	@Test
+	public void rejectsDifferentRenamesOfSamePoint() {
+		assertNull(FavoritesBackupMerger.mergeGroups(group(point("A", 1)),
+				group(point("B", 1)), group(point("C", 1)), DEFAULT_COLOR));
+	}
+
+	@Test
+	public void rejectsDeletionAgainstRename() {
+		assertNull(FavoritesBackupMerger.mergeGroups(group(point("A", 1)),
+				group(), group(point("B", 1)), DEFAULT_COLOR));
+	}
+
+	@Test
 	public void rejectsGroupAppearanceChanges() {
 		FavoriteGroup base = group(point("A", 1));
 		FavoriteGroup remote = group(point("A", 1));

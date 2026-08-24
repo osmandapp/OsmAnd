@@ -204,12 +204,20 @@ final class FavoritesBackupMerger {
 		}
 
 		int inheritedColor = base.getColor() == 0 ? defaultColor : base.getColor();
+		Map<String, FavouritePoint> localAdditions = new TreeMap<>(localPoints);
+		Map<String, FavouritePoint> remoteAdditions = new TreeMap<>(remotePoints);
+		localAdditions.keySet().removeAll(basePoints.keySet());
+		remoteAdditions.keySet().removeAll(basePoints.keySet());
 		List<FavouritePoint> mergedPoints = new ArrayList<>();
 		for (Map.Entry<String, FavouritePoint> entry : basePoints.entrySet()) {
 			FavouritePoint basePoint = entry.getValue();
 			FavouritePoint localPoint = localPoints.remove(entry.getKey());
 			FavouritePoint remotePoint = remotePoints.remove(entry.getKey());
 			if (localPoint == null && remotePoint == null) {
+				if (hasRename(basePoint, localAdditions, inheritedColor)
+						|| hasRename(basePoint, remoteAdditions, inheritedColor)) {
+					return null;
+				}
 				continue;
 			}
 			boolean localUnchanged = samePoint(basePoint, localPoint, inheritedColor);
@@ -251,6 +259,17 @@ final class FavoritesBackupMerger {
 		return points;
 	}
 
+	private static boolean hasRename(@NonNull FavouritePoint basePoint,
+	                                 @NonNull Map<String, FavouritePoint> additions,
+	                                 int defaultColor) {
+		for (FavouritePoint point : additions.values()) {
+			if (samePointContent(basePoint, point, defaultColor)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	private static boolean sameAppearance(@NonNull FavoriteGroup first,
 	                                      @NonNull FavoriteGroup second,
 	                                      int defaultColor) {
@@ -287,7 +306,13 @@ final class FavoritesBackupMerger {
 	                                 int defaultColor) {
 		return second != null
 				&& Objects.equals(first.getName(), second.getName())
-				&& Objects.equals(first.getCategory(), second.getCategory())
+				&& samePointContent(first, second, defaultColor);
+	}
+
+	private static boolean samePointContent(@NonNull FavouritePoint first,
+	                                        @NonNull FavouritePoint second,
+	                                        int defaultColor) {
+		return Objects.equals(first.getCategory(), second.getCategory())
 				&& sameText(first.getDescription(), second.getDescription())
 				&& sameText(first.getAddress(), second.getAddress())
 				&& sameText(first.getComment(), second.getComment())
