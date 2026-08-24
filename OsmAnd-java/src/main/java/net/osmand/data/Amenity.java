@@ -21,6 +21,7 @@ import net.osmand.shared.wiki.WikiImage;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.*;
@@ -775,12 +776,19 @@ public class Amenity extends MapObject {
 		json.put("subType", subType);
 		json.put("type", type.getKeyName());
 		json.put("openingHours", openingHours);
-		if (additionalInfo != null && additionalInfo.size() > 0) {
+		if (additionalInfo != null && !additionalInfo.isEmpty()) {
 			JSONObject additionalInfoObj = new JSONObject();
 			for (Entry<String, String> e : additionalInfo.entrySet()) {
 				additionalInfoObj.put(e.getKey(), e.getValue());
 			}
 			json.put("additionalInfo", additionalInfoObj);
+		}
+		if (bbox31 != null && bbox31.length == 4) {
+			JSONArray bboxJson = new JSONArray();
+			for (int coordinate : bbox31) {
+				bboxJson.put(coordinate);
+			}
+			json.put("bbox31", bboxJson);
 		}
 
 		return json;
@@ -810,6 +818,14 @@ public class Amenity extends MapObject {
 				String value = namesObj.getString(key);
 				amenity.setAdditionalInfo(key, value);
 			}
+		}
+		Object bboxValue = json.opt("bbox31");
+		JSONArray bboxJson = bboxValue instanceof JSONArray ? (JSONArray) bboxValue
+				: bboxValue instanceof String ? new JSONArray((String) bboxValue) : null;
+		if (bboxJson != null && bboxJson.length() == 4) {
+			amenity.setBbox31(new int[] {
+					bboxJson.getInt(0), bboxJson.getInt(1), bboxJson.getInt(2), bboxJson.getInt(3)
+			});
 		}
 		return amenity;
 	}
