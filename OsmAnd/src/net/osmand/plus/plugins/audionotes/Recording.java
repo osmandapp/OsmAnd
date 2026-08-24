@@ -135,20 +135,7 @@ public class Recording {
 	}
 
 	public String getDescriptionName(String fileName) {
-		if (MediaFileNameFormat.isNewGeneratedMediaFileName(fileName)) {
-			return null;
-		}
-		int hashInd = fileName.lastIndexOf(SPLIT_DESC);
-		//backward compatibility
-		if (fileName.indexOf('.') - fileName.indexOf('_') > 12 &&
-				hashInd < fileName.indexOf('_')) {
-			hashInd = fileName.indexOf('_');
-		}
-		if (hashInd == -1) {
-			return null;
-		} else {
-			return fileName.substring(0, hashInd);
-		}
+		return MediaFileNameFormat.getDescription(fileName);
 	}
 
 	public String getOtherName(String fileName) {

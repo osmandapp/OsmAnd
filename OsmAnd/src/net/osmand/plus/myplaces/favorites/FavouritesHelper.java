@@ -17,6 +17,7 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.RouteDataObject;
+import net.osmand.data.Amenity;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -24,6 +25,7 @@ import net.osmand.data.SpecialPointType;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.favorites.FavoriteDeletionsJournal.ReadResult;
@@ -32,6 +34,7 @@ import net.osmand.plus.myplaces.favorites.add.AddFavoriteResult;
 import net.osmand.plus.myplaces.favorites.dialogs.FavoriteSortModesHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
+import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.utils.ColorUtilities;
@@ -342,7 +345,7 @@ public class FavouritesHelper {
 			if (fp.getBackgroundType() == FavouritePoint.DEFAULT_BACKGROUND_TYPE) {
 				fp.setBackgroundType(null);
 			}
-			if (fp.getIconIdOrDefault() == FavouritePoint.DEFAULT_UI_ICON_ID) {
+			if (fp.getIconIdOrDefault(app) == FavouritePoint.DEFAULT_UI_ICON_ID) {
 				fp.setIconId(0);
 			}
 			FavoriteGroup group = getOrCreateGroup(fp);
@@ -894,7 +897,7 @@ public class FavouritesHelper {
 		Map<String, FavoriteGroup> tmpFlatGroups = new LinkedHashMap<>(flatGroups);
 		tmpFlatGroups.put(group.getName(), group);
 		flatGroups = tmpFlatGroups;
-		if (FavoriteGroup.isBaseFavoriteOrPersonalGroup(group.getName())){
+		if (FavoriteGroup.isBaseFavoriteOrPersonalGroup(group.getName())) {
 			group.setPinned(true);
 		}
 		invalidateFavoriteFolderCache();
@@ -1056,11 +1059,15 @@ public class FavouritesHelper {
 		updateGroupColor(group, color, saveOption, saveImmediately);
 	}
 
-	public void updateGroupIconName(@NonNull FavoriteGroup group, @NonNull String iconName,
+	public void updateGroupIconName(@NonNull FavoriteGroup group, @Nullable String iconName,
 	                                @NonNull SaveOption saveOption, boolean saveImmediately) {
 		if (saveOption.shouldUpdatePoints()) {
 			for (FavouritePoint point : group.getPoints()) {
-				point.setIconIdFromName(iconName);
+				if (Algorithms.isEmpty(iconName)) {
+					point.setIconId(getOriginalIconId(point));
+				} else {
+					point.setIconIdFromName(iconName);
+				}
 			}
 		}
 		if (saveOption.shouldUpdateGroup()) {
@@ -1070,6 +1077,19 @@ public class FavouritesHelper {
 		if (saveImmediately) {
 			saveCurrentPointsIntoFile(true);
 		}
+	}
+
+	@DrawableRes
+	public int getOriginalIconId(@NonNull FavouritePoint point) {
+		String originName = point.getAmenityOriginName();
+		if (!Algorithms.isEmpty(originName)) {
+			AmenityExtensionsHelper helper = new AmenityExtensionsHelper(app);
+			Amenity amenity = helper.findAmenity(originName, point.getLatitude(), point.getLongitude());
+			if (amenity != null) {
+				return RenderingIcons.getPreselectedIconId(app, amenity);
+			}
+		}
+		return 0;
 	}
 
 	public void updateGroupIconName(@NonNull FavoriteGroup group, @NonNull String iconName,

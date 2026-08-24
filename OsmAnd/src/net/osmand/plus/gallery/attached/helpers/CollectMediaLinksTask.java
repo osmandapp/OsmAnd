@@ -16,8 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.mediastorage.MediaDirType;
@@ -47,19 +47,17 @@ class CollectMediaLinksTask extends AsyncTask<Void, Void, List<Link>> {
 	private final ContentResolver contentResolver;
 	private final MediaStorageHelper mediaStorageHelper;
 
-	private final LatLon latLon;
 	private final List<Uri> uris;
 	private final MediaStorageLocation storageLocation;
 	private final CallbackWithObject<List<Link>> callback;
 	private final boolean autoCopyMedia;
 	private final int persistableUriFlags;
 
-	CollectMediaLinksTask(@NonNull OsmandApplication app, @NonNull LatLon latLon, @NonNull List<Uri> uris,
+	CollectMediaLinksTask(@NonNull OsmandApplication app, @NonNull List<Uri> uris,
 			int persistableUriFlags, @NonNull CallbackWithObject<List<Link>> callback) {
 		this.app = app;
 		this.contentResolver = app.getContentResolver();
 		this.mediaStorageHelper = new MediaStorageHelper(app);
-		this.latLon = latLon;
 		this.autoCopyMedia = app.getSettings().AUTO_COPY_MEDIA_TO_OSMAND_STORAGE.get();
 		this.storageLocation = MediaStorageLocation.fromSettings(app);
 		this.uris = new ArrayList<>(uris);
@@ -143,7 +141,11 @@ class CollectMediaLinksTask extends AsyncTask<Void, Void, List<Link>> {
 	private Link copyMediaToOsmAndStorage(@NonNull PickedMedia media) {
 		String extension = getMediaExtension(media);
 		MediaDirType dirType = getMediaDirType(media, extension);
-		String fileName = MediaFileNameFormat.createUniqueMediaFileName(extension, name -> mediaStorageHelper.mediaFileExists(storageLocation, dirType, name));
+		Location location = app.getLocationProvider().getLastKnownLocation();
+		double lat = location != null ? location.getLatitude() : Double.NaN;
+		double lon = location != null ? location.getLongitude() : Double.NaN;
+		String fileName = MediaFileNameFormat.createUniqueMediaFileName(lat, lon, extension,
+				name -> mediaStorageHelper.mediaFileExists(storageLocation, dirType, name));
 		String mimeType = MediaStorageUtils.getMimeType(media.mimeType(), fileName, dirType);
 		MediaTarget target = mediaStorageHelper.createTarget(storageLocation, dirType, fileName, mimeType);
 		if (target == null) {

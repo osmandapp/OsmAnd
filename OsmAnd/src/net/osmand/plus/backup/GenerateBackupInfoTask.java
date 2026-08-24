@@ -73,7 +73,8 @@ public class GenerateBackupInfoTask extends AsyncTask<Void, Void, BackupInfo> {
 				}
 				operationLog.log("=== deletedRemoteFiles ===");
 				*/
-		List<RemoteFile> remoteFiles = new ArrayList<>(uniqueRemoteFiles.values());
+		List<RemoteFile> remoteFiles = new ArrayList<>(uniqueRemoteFiles.size() + deletedRemoteFiles.size());
+		remoteFiles.addAll(uniqueRemoteFiles.values());
 		remoteFiles.addAll(deletedRemoteFiles.values());
 		for (RemoteFile remoteFile : remoteFiles) {
 			ExportType exportType = ExportType.findBy(remoteFile);

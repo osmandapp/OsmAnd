@@ -102,6 +102,8 @@ public class BackupHelper {
 	public static final int SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT = 110;
 	public static final int SERVER_ERROR_CODE_USER_IS_ALREADY_REGISTERED = 111;
 
+	private static final Map<String, String> UPLOAD_HEADERS = Collections.singletonMap("Accept-Encoding", "deflate, gzip");
+
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
 	private final BackupDbHelper dbHelper;
@@ -459,12 +461,9 @@ public class BackupHelper {
 		params.put("clienttime", String.valueOf(clienttime));
 		params.put("autoSync", String.valueOf(autoSync));
 
-		Map<String, String> headers = new HashMap<>();
-		headers.put("Accept-Encoding", "deflate, gzip");
-
 		OperationLog operationLog = new OperationLog("uploadFile", DEBUG);
 		operationLog.startOperation(type + " " + fileName);
-		NetworkResult networkResult = AndroidNetworkUtils.uploadFile(UPLOAD_FILE_URL, streamWriter, fileName, true, params, headers,
+		NetworkResult networkResult = AndroidNetworkUtils.uploadFile(UPLOAD_FILE_URL, streamWriter, fileName, true, params, UPLOAD_HEADERS,
 				new AbstractProgress() {
 
 					private ProgressHelper progressHelper;

@@ -1534,7 +1534,7 @@
     <string name="poi_tomb_pyramid">Type : pyramide</string>
     <string name="poi_historic_civilization_celtic">Civilisation : celtique</string>
     <string name="poi_historic_civilization_minoan">Civilisation : minoenne</string>
-    <string name="poi_horse_yes">Chevaux autorisés</string>
+    <string name="poi_horse_yes">Oui</string>
     <string name="poi_horse_no">Chevaux interdits</string>
     <string name="poi_animal_yes">Animaux autorisés</string>
     <string name="poi_animal_no">Animaux interdits</string>
@@ -3661,7 +3661,7 @@
     <string name="poi_tourist_bus_no">Accès aux bus de tourisme : non</string>
     <string name="poi_coach_yes">Accès aux autocars : oui</string>
     <string name="poi_coach_no">Accès aux autocars : non</string>
-    <string name="poi_ski_yes">Accès à ski : oui</string>
+    <string name="poi_ski_yes">Oui</string>
     <string name="poi_ski_no">Accès à ski : non</string>
     <string name="poi_snowmobile_private">Accès en motoneige : privé</string>
     <string name="poi_agricultural_yes">Accès véhicules agricoles : oui</string>
@@ -5174,4 +5174,10 @@
     <string name="poi_water_lake">Lac</string>
     <string name="poi_water_type_filter">Type d\'eau</string>
     <string name="poi_surface_laterite">Surface : latérite</string>
+    <string name="poi_mtb_filter">Convient au VTT</string>
+    <string name="poi_ski_filter">Adapté au ski</string>
+    <string name="poi_horse_filter">Adapté à l\'équitation</string>
+    <string name="poi_winter_hiking_filter">Idéal pour la randonnée hivernale</string>
+    <string name="poi_mtb_yes">Oui</string>
+    <string name="poi_winter_hiking_yes">Oui</string>
 </resources>

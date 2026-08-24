@@ -2,7 +2,6 @@ package net.osmand.plus.plugins.audionotes;
 
 import static net.osmand.IndexConstants.AV_INDEX_DIR;
 import static net.osmand.shared.media.MediaFileNameFormat.IMG_EXTENSION;
-import static net.osmand.shared.media.MediaFileNameFormat.isNewGeneratedMediaFileName;
 import static net.osmand.shared.media.MediaFileNameFormat.MPEG4_EXTENSION;
 import static net.osmand.shared.media.MediaFileNameFormat.THREEGP_EXTENSION;
 
@@ -23,8 +22,6 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
-import net.osmand.util.GeoParsedPoint;
-import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -97,19 +94,13 @@ public class RecordingsFileHelper {
 		}
 		Recording recording = new Recording(file);
 
-		String legacyFileName = recording.getOtherName(file.getName());
-		Location fileLocation = MediaMetadataUtils.getLocation(file, legacyFileName);
-		if (fileLocation != null) {
-			recording.setLatitude(fileLocation.getLatitude());
-			recording.setLongitude(fileLocation.getLongitude());
-		} else {
-			int separator = legacyFileName.indexOf('.');
-			String shortLink = separator > 0 ? legacyFileName.substring(0, separator) : legacyFileName;
-			GeoParsedPoint point = MapUtils.decodeShortLinkString(shortLink);
-			recording.setLatitude(point.getLatitude());
-			recording.setLongitude(point.getLongitude());
-			log.warn("Recording location resolved with legacy fallback: " + file.getAbsolutePath());
+		Location fileLocation = MediaMetadataUtils.getLocation(file);
+		if (fileLocation == null) {
+			log.warn("Recording location unavailable: " + file.getAbsolutePath());
+			return false;
 		}
+		recording.setLatitude(fileLocation.getLatitude());
+		recording.setLongitude(fileLocation.getLongitude());
 		Float heading = app.getLocationProvider().getHeading();
 		Location loc = app.getLocationProvider().getLastKnownLocation();
 
@@ -136,8 +127,7 @@ public class RecordingsFileHelper {
 
 	boolean indexFile(boolean registerInGPX, @NonNull File file, boolean updatePhotoInformation) {
 		String name = file.getName();
-		if (!isNewGeneratedMediaFileName(name)
-				&& CollectionUtils.endsWithAny(name, THREEGP_EXTENSION, MPEG4_EXTENSION, IMG_EXTENSION)) {
+		if (CollectionUtils.endsWithAny(name, THREEGP_EXTENSION, MPEG4_EXTENSION, IMG_EXTENSION)) {
 			boolean newFileIndexed = indexSingleFile(file, updatePhotoInformation);
 			if (newFileIndexed && registerInGPX) {
 				Recording recording = recordingByFileName.get(name);

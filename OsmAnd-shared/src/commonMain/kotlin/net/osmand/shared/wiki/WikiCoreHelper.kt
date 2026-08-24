@@ -97,6 +97,9 @@ object WikiCoreHelper {
 			wikiTitle?.takeIf { it.isNotEmpty() }?.let {
 				params.add("wiki=${UrlEncoder.encode(it)}")
 			}
+			wikiImages.firstOrNull()?.let {
+				params.add("file=${UrlEncoder.encode(it.wikiMediaTag)}")
+			}
 			if (params.isNotEmpty()) {
 				val urlParams = params.joinToString("&")
 				val finalUrl = "$OSMAND_API_ENDPOINT$WIKI_PLACE_ACTION$urlParams&addMetaData=true"
@@ -218,7 +221,14 @@ object WikiCoreHelper {
 			if (obj is JsonObject) {
 				val wikiImage = parseImageDataWithMetaData(obj)
 				if (wikiImage != null && isUrlFileImage(wikiImage)) {
-					wikiImages.add(wikiImage)
+					val index = wikiImages.indexOfFirst {
+						it.wikiMediaTag.replace(' ', '_') == wikiImage.wikiMediaTag.replace(' ', '_')
+					}
+					if (index >= 0) {
+						wikiImages[index] = wikiImage
+					} else {
+						wikiImages.add(wikiImage)
+					}
 				}
 			}
 		}

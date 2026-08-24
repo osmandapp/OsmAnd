@@ -5119,4 +5119,20 @@
     <string name="sort_by_nearest_to_map_center">Cel mai aproape de centrul hărții</string>
     <string name="last_week">Săptămâna trecută</string>
     <string name="history_is_turned_off">Istoria este oprită</string>
+    <string name="share_favorites_media_preparation_failed">Nu se poate include media atașată. Se vor partaja doar punctele.</string>
+    <plurals name="files_count">
+        <item quantity="one">%d fișier</item>
+        <item quantity="few">%d fișiere</item>
+        <item quantity="other">%d de fișiere</item>
+    </plurals>
+    <string name="preparing_file">Se pregătește fișierul</string>
+    <string name="shared_string_archive">Arhivă</string>
+    <string name="share_favorites_with_media_description">Punctele favocire din %1$s au media atașată. Se partajează doar punctele, sau punctele cu media într-o arhivă.</string>
+    <string name="share_favorites_points_only">Doar puncte</string>
+    <string name="share_favorites_points_and_media">Puncte și media</string>
+    <string name="share_favorites_preparation_failed">Nu se pot pregăti fișierele pentru partajare.</string>
+    <string name="share_favorites_share_failed">Nu se poate partaja fișierul.</string>
+    <string name="share_favorites_missing_media_warning">Unele media atașate nu pot fi incluse.</string>
+    <string name="search_on_web">Caută pe internet</string>
+    <string name="shared_string_note">Notiță</string>
 </resources>

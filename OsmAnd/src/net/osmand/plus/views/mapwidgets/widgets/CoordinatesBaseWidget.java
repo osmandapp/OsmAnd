@@ -94,6 +94,11 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 		checkLayoutDirection();
 	}
 
+	protected boolean shouldShowWidget() {
+		return visibilityHelper.shouldShowTopCoordinatesWidget()
+				&& !(panel == WidgetsPanel.BOTTOM && visibilityHelper.shouldHideBottomWidgets());
+	}
+
 	private void checkLayoutDirection() {
 		boolean isLayoutRtl = AndroidUtils.isLayoutMirrored(getView());
 		if (cachedLayoutRtl != isLayoutRtl) {
