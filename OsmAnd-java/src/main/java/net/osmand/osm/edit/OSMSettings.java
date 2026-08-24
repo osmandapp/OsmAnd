@@ -78,6 +78,7 @@ public class OSMSettings {
 		HISTORIC("historic"), //$NON-NLS-1$
 		NATURAL("natural"), //$NON-NLS-1$
 		INTERNET_ACCESS("internet_access"), //$NON-NLS-1$
+		FERRY_TERMINAL("ferry_terminal"), //$NON-NLS-1$
 		
 		
 		CONTACT_WEBSITE("contact:website"), //$NON-NLS-1$
