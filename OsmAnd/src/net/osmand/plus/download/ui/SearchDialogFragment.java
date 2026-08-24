@@ -72,6 +72,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class SearchDialogFragment extends BaseFullScreenDialogFragment implements DownloadEvents,
@@ -471,10 +472,10 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 			private void processGroup(DownloadResourceGroup group, List<Object> filter, List<List<String>> conds) {
 				String name = null;
 				if (group.getRegion() != null && group.getRegion().getRegionSearchText() != null) {
-					name = group.getRegion().getRegionSearchText().toLowerCase();
+					name = group.getRegion().getRegionSearchText().toLowerCase(Locale.US);
 				}
 				if (name == null) {
-					name = group.getName(ctx).toLowerCase();
+					name = group.getName(ctx).toLowerCase(Locale.US);
 				}
 				if (group.getType().isScreen() && group.getParentGroup() != null
 						&& group.getParentGroup().getParentGroup() != null
@@ -510,7 +511,7 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 						|| group.getType() == DownloadResourceGroupType.FONTS_HEADER) {
 					if (group.getIndividualResources() != null) {
 						for (IndexItem item : group.getIndividualResources()) {
-							name = item.getVisibleName(ctx, osmandRegions, false).toLowerCase();
+							name = item.getVisibleName(ctx, osmandRegions, false).toLowerCase(Locale.US);
 							if (isMatch(conds, false, name)) {
 								filter.add(item);
 								break;
@@ -636,7 +637,7 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 					for (String or : ors) {
 						ArrayList<String> cond = new ArrayList<>();
 						for (String term : or.split("\\s")) {
-							String t = term.trim().toLowerCase();
+							String t = term.trim().toLowerCase(Locale.US);
 							if (t.length() > 0) {
 								cond.add(t);
 							}
