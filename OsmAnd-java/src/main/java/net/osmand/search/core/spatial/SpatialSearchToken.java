@@ -539,7 +539,9 @@ public class SpatialSearchToken {
 			this.y16 = poi.getY();
 			bboxTileZoom = 16;
 			bboxTileId = HashQuadTree.encodeTileId(bboxTileZoom, x16, y16);
-			decodeBBox(poi.hasBbox() ? poi.getBbox() : null);
+			if (settings.USE_POI_BBOX) {
+				decodeBBox(poi.hasBbox() ? poi.getBbox() : null);
+			}
 			if (bbox31 == null && settings.DEV_USE_SKIP_HASH_TREE) {
 				bbox31 = MapUtils.calc31BboxRhumb(settings.POI_DEFAULT_RADIUS, x16, y16, 16);
 				calcTileFromBbox();
