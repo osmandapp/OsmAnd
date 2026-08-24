@@ -179,14 +179,18 @@ public class ObfConstants {
 		return id != null && id > 0;
 	}
 
-	public static EntityType getOsmEntityType(BinaryMapDataObject object) {
-		if(isIdFromRelation(object.getId())) {
+	public static EntityType getOsmEntityType(long id) {
+		if(isIdFromRelation(id)) {
 			return EntityType.RELATION;
 		}
-		if(object.getId() % 2 == 0) {
+		if(id % 2 == 0) {
 			return EntityType.NODE;
 		}
 		return EntityType.WAY;
+	}
+
+	public static EntityType getOsmEntityType(BinaryMapDataObject object) {
+		return getOsmEntityType(object.getId());
 	}
 	
 	private static long getOsmId(long id) {
