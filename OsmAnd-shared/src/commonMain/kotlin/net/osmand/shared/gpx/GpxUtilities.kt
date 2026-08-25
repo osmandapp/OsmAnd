@@ -67,6 +67,7 @@ object GpxUtilities {
 	const val AMENITY_PREFIX = "amenity_"
 	const val ORIGIN_EXTENSION = "origin"
 	const val AMENITY_ORIGIN_EXTENSION = AMENITY_PREFIX + ORIGIN_EXTENSION
+	const val OSM_URL_EXTENSION = "osm_url"
 	const val ACTIVITY_TYPE = OSMAND_EXTENSIONS_PREFIX + "activity"
 
 	const val GAP_PROFILE_TYPE = "gap"

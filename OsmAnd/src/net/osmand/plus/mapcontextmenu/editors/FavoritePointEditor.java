@@ -1,5 +1,7 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
+import static net.osmand.shared.gpx.GpxUtilities.OSM_URL_EXTENSION;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -11,11 +13,14 @@ import net.osmand.data.Amenity;
 import net.osmand.data.BaseDetailsObject;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.data.MapObject;
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Entity.EntityType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.search.AmenitySearcher;
@@ -104,12 +109,23 @@ public class FavoritePointEditor extends PointEditor {
 		favorite.setAmenityOriginName(amenity.toStringEn());
 		favorite.setIconId(RenderingIcons.getPreselectedIconId(app, amenity));
 		favorite.setAmenityExtensions(amenity.getAmenityExtensions(app.getPoiTypes(), true));
+		setOsmUrl(amenity);
 	}
 
 	private void setMapObject(@NonNull RenderedObject renderedObject) {
 		favorite.setAmenityOriginName(renderedObject.toStringEn());
 		if (renderedObject.getIconRes() != null) {
 			favorite.setIconId(RenderingIcons.getResId(renderedObject.getIconRes()));
+		}
+		setOsmUrl(renderedObject);
+	}
+
+	private void setOsmUrl(@NonNull MapObject object) {
+		if (PluginsHelper.isEnabled(OsmEditingPlugin.class)) {
+			String url = ObfConstants.getOsmUrlForId(object);
+			if (!Algorithms.isEmpty(url)) {
+				favorite.getAmenityExtensions().put(OSM_URL_EXTENSION, url);
+			}
 		}
 	}
 
