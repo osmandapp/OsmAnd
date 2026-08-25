@@ -5635,7 +5635,7 @@
     <string name="share_favorites_share_failed">Kon bestand niet delen.</string>
     <string name="share_favorites_missing_media_warning">Enkele gekoppelde media konden niet worden toegevoegd.</string>
     <string name="search_on_web">Zoek op het internet</string>
-    <string name="release_5_4">• Nieuwe ruimtelijke zoekfunctie — vind plaatsen en zoek rondom een plaats\n\n • Vernieuwde zoekinterface: sortering, categoriefilters en een overzichtelijker uiterlijk\n\n • Koppel foto\'s en media aan Favorieten\n\n • Favorieten: ondersteuning voor subgroepen en vast te zetten mappen\n\n • Coördinaten: zoeken, kaartraster en weergave van interessepunten (POI) ondersteunen nu EPSG- en Maidenhead-locator\n\n • Navigatieonderbrekingen opgelost; wissel tussen Standaard en Snelle routering\n\n • Stel Android Auto kaartschaal afzonderlijk van die op je telefoon in\n\n • Astronomie ondersteuning voor zons- en maansverduisteringen toegevoegd</string>
+    <string name="release_5_4">• Vernieuwde zoekinterface: sortering, categoriefilters en een overzichtelijker uiterlijk\n\n • Koppel foto\'s en media aan Favorieten\n\n • Favorieten: ondersteuning voor subgroepen en vast te zetten mappen\n\n • Coördinaten: zoeken, kaartraster en weergave van interessepunten (POI) ondersteunen nu EPSG- en Maidenhead-locator\n\n • Navigatieonderbrekingen opgelost; wissel tussen Standaard en Snelle routering\n\n • Stel Android Auto kaartschaal afzonderlijk van die op je telefoon in\n\n • Nieuwe ruimtelijke zoekfunctie — vind plaatsen en zoek rondom een plaats\n\n • Astronomie ondersteuning voor zons- en maansverduisteringen toegevoegd</string>
     <string name="astro_penumbral_lunar_eclipse">Penumbrale maansverduistering</string>
     <string name="astro_eclipse_phase_penumbral">Penumbraal</string>
     <string name="astro_eclipse_phase_none">Niet verduisterd</string>
@@ -5666,4 +5666,20 @@
     <string name="astro_eclipse_safety_warning">Kijk nooit rechtstreeks naar de zon zonder geschikte beschermingsmiddelen. Verduisteringstijden zijn schattingen.</string>
     <string name="sort_by_nearest_to_current_location">Dichtstbij huidige locatie</string>
     <string name="duplicate_map">Kaart dupliceren</string>
+    <string name="astro_lunar_eclipse_calculating_state">Berekent het uiterlijk in het midden van de kaart…</string>
+    <string name="astro_lunar_eclipse_map_error">Op dit moment is nog niet bekend waar de maansverduistering te zien zal zijn.</string>
+    <string name="astro_eclipse_not_visible_here">Niet zichtbaar vanaf het midden van de kaart • Zonhoogte: %1$.1f°</string>
+    <string name="astro_eclipse_not_visible_below_horizon">Niet zichtbaar vanaf het midden van de kaart • Zon onder de horizon (%1$.1f°)</string>
+    <string name="astro_eclipse_calculating_local_state">Berekent het uiterlijk in het midden van de kaart…</string>
+    <string name="astro_eclipse_map_error">De schaduw van de verduistering kan op dit moment niet worden weergegeven.</string>
+    <string name="attached_media_delete_confirmation">%1$d mediabestanden van dit punt verwijderen? Media die door de app worden opgeslagen en nergens anders zijn gekoppeld, worden ook van het apparaat verwijderd.</string>
+    <string name="duplicate_map_standard_exists_desc">Je hebt al de standaardkaart voor %1$s. Het downloaden van de alleen-wegenkaart leidt tot dubbele data en kan de prestaties verminderen.\n\nBij vervanging worden de adreszoekfunctie en POI-gegevens uit de standaardkaart verwijderd.</string>
+    <string name="duplicate_map_road_only_exists_desc">Je hebt al de alleen-wegenkaart voor %1$s. Het downloaden van de standaardkaart leidt tot dubbele data en kan de prestaties verminderen.</string>
+    <string name="duplicate_map_replace_with_standard">Vervang door Standaard</string>
+    <string name="duplicate_map_replace_with_road">Vervang door Alleen-wegen</string>
+    <string name="route_calculation_calculating_fast_route">Snelle route berekenen...</string>
+    <string name="route_calculation_missing_maps_estimate_desc">Mogelijk ontbrekende kaarten gedetecteerd gebaseerd op een rechte lijn.\nAls je route deze gebieden vermijdt, gebruik bestaande kaarten.</string>
+    <string name="route_calculation_route_not_found_desc">Snelle routering kon geen route vinden. Overschakelen naar standaardrouteberekening.</string>
+    <string name="route_calculation_unavailable_parameters_desc">Snelle routering is niet beschikbaar met de geselecteerde routeparameters. Overschakelen naar de standaardberekening.</string>
+    <string name="route_calculation_standard_long_route_desc">Standaardrouteberekening voor lange routes (&gt;300 km) kan aanzienlijk lang duren. Het toevoegen van een routepunt kan dit versnellen.</string>
 </resources>
