@@ -423,7 +423,9 @@ public class SpatialSearchTestAndDocs {
 //		query = "Holmby Melbourne 18B";
 		
 //		pattern = "Slovakia";
-//		pattern2 = "Ukraine_";
+//		location = new LatLon(45.04, 30.0);
+//		location = new LatLon(46.3848, 25.0420);
+//		pattern2 = "World";
 //		query = "Bratislava Billa";
 //		settings.DEDUPLICATE_RES = false;
 //		settings.ALLOW_HOUSE_POI_TYPE_INTERSECTION = false;

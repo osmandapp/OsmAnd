@@ -117,10 +117,13 @@ public class CloudTrashController {
 	}
 
 	public void deleteItem(@NonNull TrashItem item) {
+		if (item.deletedFile == null) {
+			log.error("Failed to delete trash item: deletion marker is missing for " + item.oldFile.getName());
+			return;
+		}
 		try {
-			List<RemoteFile> files = item.getRemoteFiles();
 			String message = app.getString(R.string.shared_string_is_deleted, item.getName(app));
-			backupHelper.deleteFiles(files, true, new TrashDeletionListener(message));
+			backupHelper.emptyTrash(Collections.singletonList(item.deletedFile), new TrashDeletionListener(message));
 		} catch (UserNotRegisteredException e) {
 			log.error(e);
 		}
@@ -167,11 +170,13 @@ public class CloudTrashController {
 	public void clearTrash() {
 		List<RemoteFile> files = new ArrayList<>();
 		for (TrashItem item : collectTrashItems()) {
-			files.addAll(item.getRemoteFiles());
+			if (item.deletedFile != null) {
+				files.add(item.deletedFile);
+			}
 		}
 		try {
 			String message = app.getString(R.string.trash_is_empty);
-			backupHelper.deleteFiles(files, true, new TrashDeletionListener(message));
+			backupHelper.emptyTrash(files, new TrashDeletionListener(message));
 		} catch (UserNotRegisteredException e) {
 			log.error(e);
 		}

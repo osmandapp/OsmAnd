@@ -2262,7 +2262,7 @@
     <string name="poi_animal_training">Тренинг животиња</string>
     <string name="poi_animal_training_dog">Пас</string>
     <string name="poi_animal_training_horse">Коњ</string>
-    <string name="poi_horse_yes">Дозвољено коњима</string>
+    <string name="poi_horse_yes">Да</string>
     <string name="poi_horse_no">Недозвољено коњима</string>
     <string name="poi_animal_yes">Дозвољено животињама</string>
     <string name="poi_animal_no">Недозвољено животињама</string>
@@ -2556,7 +2556,7 @@
     <string name="poi_tourist_bus_yes">Приступ за туристичке аутобусе: да</string>
     <string name="poi_tourist_bus_designated">Приступ за туристичке аутобусе: намењен</string>
     <string name="poi_tourist_bus_no">Приступ за туристичке аутобусе: не</string>
-    <string name="poi_ski_yes">Ски приступ: да</string>
+    <string name="poi_ski_yes">Да</string>
     <string name="poi_ski_no">Ски приступ: не</string>
     <string name="poi_snowmobile_private">Приступ за сноумобил: приватни</string>
     <string name="poi_snowmobile_no">Приступ за сноумобил: не</string>
@@ -5174,4 +5174,10 @@
     <string name="poi_water_type_filter">Врста воде</string>
     <string name="poi_water_lake">Језеро</string>
     <string name="poi_surface_laterite">Површина: латерит</string>
+    <string name="poi_mtb_filter">Погодно за МТБ</string>
+    <string name="poi_ski_filter">Погодно за скијање</string>
+    <string name="poi_horse_filter">Погодно за јахање</string>
+    <string name="poi_winter_hiking_filter">Погодно за зимско планинарење</string>
+    <string name="poi_mtb_yes">Да</string>
+    <string name="poi_winter_hiking_yes">Да</string>
 </resources>
