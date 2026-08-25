@@ -105,7 +105,8 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	
 	private MapObject getFirstRefObject(boolean useUnited) {
 		if (useUnited && unitedObject != null) {
-			return unitedObject.getSyntheticAmenity();
+			MapObject addressObject = unitedObject.getAddressObject();
+			return addressObject != null ? addressObject : unitedObject.getSyntheticAmenity();
 		}
 		if (objs.size() > 0) {
 			SpatialSearchResultRef o = objs.get(0);
@@ -129,7 +130,8 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	
 	public MapObject getReferenceObject() {
 		if (unitedObject != null) {
-			return unitedObject.getSyntheticAmenity();
+			MapObject addressObject = unitedObject.getAddressObject();
+			return addressObject != null ? addressObject : unitedObject.getSyntheticAmenity();
 		}
 		for (SpatialSearchResultRef ref : objs) {
 			if (ref.atom.bldObject != null) {
@@ -185,6 +187,10 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		MapObject firstRefObject = null;
 		if (unitedObject != null) {
 			firstRefObject = getFirstRefObject(false);
+			MapObject addressObject = unitedObject.getAddressObject();
+			if (addressObject != null) {
+				o.add(addressObject);
+			}
 			o.add(unitedObject.getSyntheticAmenity());
 		}
 		for (SpatialSearchResultRef r : objs) {
@@ -475,6 +481,9 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		if (getFirstRefObject(true) instanceof Amenity a) {
 			return Math.max(parent.MIN_ELO_RATING, a.getTravelEloNumber());
 		}
+		if (getFirstRefObject(false) instanceof Amenity a) {
+			return Math.max(parent.MIN_ELO_RATING, a.getTravelEloNumber());
+		}
 		return parent.MIN_ELO_RATING;
 	}
 	
@@ -621,8 +630,6 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	public int compareTo(SpatialSearchResult o) {
 		return compare(this, o, null);
 	}
-	
-	
 
 	private String getWikidata(SpatialSearchContext ctx) {
 		MapObject mapObject = getFirstRefObject(true); 
