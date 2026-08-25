@@ -34,18 +34,14 @@ import net.osmand.util.SearchAlgorithms;
 // ### World.json 'остров Пасхи'
 
 ////////// IN PROGRESS //////////
-// REVIEW (index_words_dashboard - common озеро): POI / ADDRESS - France, Germany, US, Europe, China, Peru
-// REVIEW Auto test Analyze Performance & Android bootlenecks VisualVM (Pipeline + Intersection)
 // TODO FIX ORDER -  (tests)
 
 // TODO INDEX: Find POI Categories translations / synonyms via Common words - Стоматол., Dentist, Basilica 
 // TODO REVIEW: Abbrevations (synonyms / direction words) other languages?
 // TODO REVIEW: Analyze Abbrevations / common skip (abbrevations 1st=first)
 
-// TODO Web worldwide search on missing results test "Arizona"
 // TODO DEDUPLICATE: Index place=state, county.. + wikidata id for boundaries (regions.ocbf) & display them - analyze
 // TODO DEDUPLICATE: Travel / Wiki - too many houses (duplicate names) in wiki maps - obstruct search by street "Ярославів Вал"`?
-// TODO Extend POI tile bboxes 200m? internet_access (fuel_diesel)
 // TODO Search in large parks, neighborhood same as in boundaries (index bbox POI), residential way/56238205
 
 /////////////// EXTRA FEATURES ///////////////
@@ -422,11 +418,12 @@ public class SpatialSearchTestAndDocs {
 //		query = "Holmby road 18 B"; // 'Holmby 18 B', 'Holmby 18-B', 'Holmby 18B'
 //		query = "Holmby Melbourne 18B";
 		
-//		pattern = "Slovakia";
+		pattern = "Slovakia";
 //		location = new LatLon(45.04, 30.0);
-//		location = new LatLon(46.3848, 25.0420);
-//		pattern2 = "World";
-//		query = "Bratislava Billa";
+		location = new LatLon(46.3848, 25.0420);
+//		settings.DEDUPLICATE_RES = false;
+		pattern2 = "World_basemap_mini";
+		query = "Bratislava Billa";
 //		settings.DEDUPLICATE_RES = false;
 //		settings.ALLOW_HOUSE_POI_TYPE_INTERSECTION = false;
 //		query = "Shell 2 Rožňavská";

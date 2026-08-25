@@ -495,6 +495,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		for (SpatialSearchResultRef r : objs) {
 			if (r.atom.object instanceof Amenity a) {
 				rating = Math.max(rating, a.getTravelEloNumber());
+				rating = Math.max(rating, r.atom.elo);
 			}
 		}
 		return rating;
@@ -559,12 +560,12 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		if (res != 0) {
 			return res;
 		}
-		res = -Integer.compare(o1.sumTypeOrder(), o2.sumTypeOrder());
+		// sort poi intersection differently
+		res = -Integer.compare(o1.getTotalRating(), o2.getTotalRating());
 		if (res != 0) {
 			return res;
 		}
-		// sort poi intersection differently
-		res = -Integer.compare(o1.getTotalRating(), o2.getTotalRating());
+		res = -Integer.compare(o1.sumTypeOrder(), o2.sumTypeOrder());
 		if (res != 0) {
 			return res;
 		}
