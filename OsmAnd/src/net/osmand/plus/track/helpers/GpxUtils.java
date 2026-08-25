@@ -160,11 +160,18 @@ public class GpxUtils {
 
 	@Nullable
 	public static WptPt getSegmentPointByTime(@NonNull TrkSegment segment, @NonNull GpxFile gpxFile,
-	                                          float time, boolean preciseLocation, boolean joinSegments) {
-		if (!segment.getGeneralSegment() || joinSegments) {
+	                                          float time, boolean preciseLocation, boolean timeWithoutGaps) {
+		if (!segment.getGeneralSegment()) {
 			return getSegmentPointByTime(segment, time, 0, preciseLocation);
 		}
+		return timeWithoutGaps
+				? getSegmentPointByTimeWithoutGaps(gpxFile, time, preciseLocation)
+				: getSegmentPointByTimeIncludingGaps(gpxFile, time, preciseLocation);
+	}
 
+	@Nullable
+	private static WptPt getSegmentPointByTimeWithoutGaps(@NonNull GpxFile gpxFile, float time,
+	                                                      boolean preciseLocation) {
 		long passedSegmentsTime = 0;
 		for (Track track : gpxFile.getTracks()) {
 			if (track.isGeneralTrack()) {
@@ -181,6 +188,41 @@ public class GpxUtils {
 				long segmentEndTime = Algorithms.isEmpty(seg.getPoints()) ?
 						0 : seg.getPoints().get(seg.getPoints().size() - 1).getTime();
 				passedSegmentsTime += segmentEndTime - segmentStartTime;
+			}
+		}
+
+		return null;
+	}
+
+	@Nullable
+	private static WptPt getSegmentPointByTimeIncludingGaps(@NonNull GpxFile gpxFile, float time,
+	                                                        boolean preciseLocation) {
+		long firstSegmentStartTime = 0;
+		boolean hasFirstSegment = false;
+		WptPt previousSegmentEnd = null;
+		for (Track track : gpxFile.getTracks()) {
+			if (track.isGeneralTrack()) {
+				continue;
+			}
+
+			for (TrkSegment seg : track.getSegments()) {
+				if (Algorithms.isEmpty(seg.getPoints())) {
+					continue;
+				}
+				WptPt segmentStart = seg.getPoints().get(0);
+				if (!hasFirstSegment) {
+					firstSegmentStartTime = segmentStart.getTime();
+					hasFirstSegment = true;
+				}
+				long passedSegmentsTime = segmentStart.getTime() - firstSegmentStartTime;
+				if (time < passedSegmentsTime) {
+					return previousSegmentEnd;
+				}
+				WptPt point = getSegmentPointByTime(seg, time, passedSegmentsTime, preciseLocation);
+				if (point != null) {
+					return point;
+				}
+				previousSegmentEnd = seg.getPoints().get(seg.getPoints().size() - 1);
 			}
 		}
 

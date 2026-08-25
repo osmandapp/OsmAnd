@@ -28,6 +28,11 @@ public class OsmMapUtils {
 	public static double getDistance(Node e1, LatLon point) {
 		return MapUtils.getDistance(e1.getLatitude(), e1.getLongitude(), point.getLatitude(), point.getLongitude());
 	}
+	
+	public static boolean indexPoiBboxForSearch(Map<String, String> tags) {
+//		return "multipolygon".equals(tags.get(OSMSettings.OSMTagKey.TYPE.getValue()));
+		return true;
+	}
 
 	public static boolean isMultipolygon(Map<String, String> tags) {
 		return "multipolygon".equals(tags.get(OSMSettings.OSMTagKey.TYPE.getValue())) ||

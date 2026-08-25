@@ -5174,10 +5174,10 @@
     <string name="poi_water_type_filter">Víz típusa</string>
     <string name="poi_water_lake">Tó</string>
     <string name="poi_surface_laterite">Burkolat: laterit</string>
-    <string name="poi_mtb_filter">Alkalmas hegyikerékpározáshoz</string>
-    <string name="poi_ski_filter">Alkalmas sieléshez</string>
-    <string name="poi_horse_filter">Alkalmas lovagláshoz</string>
-    <string name="poi_winter_hiking_filter">Alkalmas téli túrázáshoz</string>
+    <string name="poi_mtb_filter">Hegyikerékpározásra alkalmas</string>
+    <string name="poi_ski_filter">Síelésre alkalmas</string>
+    <string name="poi_horse_filter">Lovaglásra alkalmas</string>
+    <string name="poi_winter_hiking_filter">Téli túrázásra alkalmas</string>
     <string name="poi_mtb_yes">Igen</string>
     <string name="poi_winter_hiking_yes">Igen</string>
 </resources>

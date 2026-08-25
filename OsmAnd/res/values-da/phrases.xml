@@ -4312,4 +4312,8 @@
     <string name="poi_surface_laterite">Overflade: Laterit</string>
     <string name="poi_surface_chipseal">Overflade: Chipseal</string>
     <string name="poi_sled_yes">Slæde: Ja</string>
+    <string name="poi_mtb_filter">Velegnet til MTB</string>
+    <string name="poi_ski_filter">Velegnet til ski</string>
+    <string name="poi_horse_filter">Velegnet til ridning</string>
+    <string name="poi_winter_hiking_filter">Velegnet til vintervandring</string>
 </resources>

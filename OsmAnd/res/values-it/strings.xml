@@ -4896,8 +4896,8 @@
     <string name="rendering_attr_hideFairways_description">Nascondi i percorsi navigabili</string>
     <string name="rendering_attr_hideLightSectors_name">Settori di luce</string>
     <string name="rendering_attr_hideLightSectors_description">Nascondi i settori di luce</string>
-    <string name="rendering_attr_hideLightSectorSources_name">Sorgenti settori luce</string>
-    <string name="rendering_attr_hideLightSectorSources_description">Nascondi i sorgenti settori luce</string>
+    <string name="rendering_attr_hideLightSectorSources_name">Fonti dei settori luce</string>
+    <string name="rendering_attr_hideLightSectorSources_description">Nascondi le fonti dei settori di luce</string>
     <string name="rendering_attr_hideMinorContours_name">Curve batimetriche minori</string>
     <string name="rendering_attr_hideMinorContours_description">Nascondi le curve batimetriche minori</string>
     <string name="rendering_attr_hideNoLNAM_name">Boe OSM (alcune)</string>
@@ -5334,7 +5334,7 @@
     <string name="always_keep_local_copy">Conserva sempre una copia locale</string>
     <string name="always_keep_local_copy_description">Il file multimediale rimane allegato anche se l\'originale viene eliminato dalla galleria o dai file.</string>
     <string name="use_spatial_text_search">Utilizza la ricerca testuale spaziale</string>
-    <string name="release_5_4">• Nuova ricerca spaziale — trova luoghi e cerca nei dintorni di un luogo\n\n • Interfaccia di ricerca rinnovata: ordinamento, filtri per categoria, aspetto più pulito\n\n • Allega foto e file multimediali ai Preferiti\n\n • Preferiti: supporto per sottogruppi e cartelle bloccabili\n\n • Coordinate: la ricerca, la griglia della mappa e la visualizzazione dei PDI ora supportano EPSG e il localizzatore Maidenhead\n\n • Sistemate le interruzioni di navigazione; passaggio tra calcolo del percorso standard e veloce\n\n • Imposta la scala della mappa di Android Auto separatamente dal tuo telefono\n\n • L\'astronomia ha ricevuto le eclissi solari e lunari</string>
+    <string name="release_5_4">• Interfaccia di ricerca rinnovata: ordinamento, filtri per categoria, aspetto più pulito\n\n• Allega foto e file multimediali ai Preferiti\n\n• Preferiti: supporto per sottogruppi e cartelle bloccabili\n\n• Coordinate: la ricerca, la griglia della mappa e la visualizzazione dei PDI ora supportano EPSG e il localizzatore Maidenhead\n\n• Sistemate le interruzioni di navigazione; passaggio tra calcolo del percorso standard e veloce\n\n• Imposta la scala della mappa di Android Auto separatamente dal tuo telefono\n\n• Nuova ricerca spaziale — trova luoghi e cerca nei dintorni di un luogo\n\n• L\'astronomia ha ricevuto le eclissi solari e lunari</string>
     <string name="use_spatial_text_search_description">Sostituisci le API di ricerca rapida standard con il motore di ricerca testuale spaziale sperimentale.</string>
     <string name="preparing_file">Preparazione del file</string>
     <string name="share_favorites_points_only">Solo punti</string>

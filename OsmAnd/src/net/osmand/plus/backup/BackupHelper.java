@@ -77,6 +77,7 @@ public class BackupHelper {
 	public static final String DOWNLOAD_FILE_URL = SERVER_URL + "/userdata/download-file";
 	public static final String DELETE_FILE_URL = SERVER_URL + "/userdata/delete-file";
 	public static final String DELETE_FILE_VERSION_URL = SERVER_URL + "/userdata/delete-file-version";
+	public static final String EMPTY_TRASH_URL = SERVER_URL + "/userdata/empty-trash";
 	public static final String ACCOUNT_DELETE_URL = SERVER_URL + "/userdata/delete-account";
 	public static final String SEND_CODE_URL = SERVER_URL + "/userdata/send-code";
 	public static final String CHECK_CODE_URL = SERVER_URL + "/userdata/auth/confirm-code";
@@ -530,6 +531,12 @@ public class BackupHelper {
 			@Nullable OnDeleteFilesListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 		executor.runCommand(new DeleteFilesCommand(this, remoteFiles, byVersion, listener));
+	}
+
+	public void emptyTrash(@NonNull List<RemoteFile> deletedFiles,
+			@Nullable OnDeleteFilesListener listener) throws UserNotRegisteredException {
+		checkRegistered();
+		executor.runCommand(new EmptyTrashCommand(this, deletedFiles, listener));
 	}
 
 	void deleteFilesSync(@NonNull List<RemoteFile> remoteFiles, boolean byVersion,

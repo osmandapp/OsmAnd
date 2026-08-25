@@ -2,8 +2,6 @@ package net.osmand.shared.gpx.filters
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
-import net.osmand.shared.data.StringIntPair
-import net.osmand.shared.gpx.GpxParameter
 import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.SerialNames
@@ -34,17 +32,7 @@ open class ListTrackFilter : BaseTrackFilter {
 		}
 
 	fun updateFullCollection(items: List<TrackItem>?) {
-		if (KAlgorithms.isEmpty(items)) {
-			allItemsCollection = HashMap()
-		} else {
-			val newCollection = HashMap<String, Int>()
-			for (item in items!!) {
-				val folderName = item.dataItem?.getParameter(GpxParameter.FILE_DIR) ?: ""
-				val count = newCollection[folderName] ?: 0
-				newCollection[folderName] = count + 1
-			}
-			allItemsCollection = newCollection
-		}
+		allItemsCollection = createItemsCollection(items)
 	}
 
 	override fun isEnabled(): Boolean {
@@ -75,17 +63,35 @@ open class ListTrackFilter : BaseTrackFilter {
 			filterChangedListener?.onFilterChanged()
 		}
 
-	fun setFullItemsCollection(collection: List<StringIntPair>) {
-		val tmpAllItems = ArrayList<String>()
-		val tmpAllItemsCollection = HashMap<String, Int>()
-		for (pair in collection) {
-			if (pair.string != null && pair.integer != null) {
-				tmpAllItems.add(pair.string)
-				tmpAllItemsCollection[pair.string] = pair.integer
+	fun setFullItemsCollection(items: List<TrackItem>?) {
+		val collection = createItemsCollection(items)
+		for (selectedItem in selectedItems) {
+			if (!collection.containsKey(selectedItem)) {
+				collection[selectedItem] = 0
 			}
 		}
-		allItems = tmpAllItems
-		allItemsCollection = tmpAllItemsCollection
+		val sortedEntries = collection.entries.sortedWith { first, second ->
+			val comparison = if (collectionFilterParams.sortByName()) {
+				first.key.compareTo(second.key)
+			} else {
+				first.value.compareTo(second.value)
+			}
+			val directedComparison = if (collectionFilterParams.sortDescending()) -comparison else comparison
+			if (directedComparison != 0) directedComparison else first.key.compareTo(second.key)
+		}
+		allItems = ArrayList(sortedEntries.map { it.key })
+		allItemsCollection = collection
+	}
+
+	private fun createItemsCollection(items: List<TrackItem>?): HashMap<String, Int> {
+		val collection = HashMap<String, Int>()
+		for (item in items.orEmpty()) {
+			val value = getTrackPropertyValue(item)
+			if (value.isNotEmpty() || collectionFilterParams.includeEmptyValues()) {
+				collection[value] = (collection[value] ?: 0) + 1
+			}
+		}
+		return collection
 	}
 
 	fun setSelectedItems(selectedItems: List<String>) {
