@@ -141,7 +141,26 @@ public class QuickSearchHelper implements ResourceListener {
 		core.registerAPI(new SearchCoreFactory.SearchLocationAndUrlAPI(amenitiesApi,
 				app.getSettings()::isInternetConnectionAvailable));
 		core.registerAPI(new SpatialCategoryAmenityByTypeAPI(app.getPoiTypes()));
+		core.registerAPI(new SpatialBuildingAndIntersectionsByStreetAPI());
 		core.registerAPI(new SpatialTextSearchAPI(app.getPoiTypes()));
+	}
+
+	private static class SpatialBuildingAndIntersectionsByStreetAPI
+			extends SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI {
+
+		@Override
+		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
+			if (phrase.getLastSelectedWord().getResult().object instanceof Street street
+					&& street.getBuildings().isEmpty() && street.getIntersectedStreets().isEmpty()) {
+				return true;
+			}
+			return super.search(phrase, resultMatcher);
+		}
+
+		@Override
+		public int getSearchPriority(SearchPhrase phrase) {
+			return phrase.isLastWord(ObjectType.STREET) ? super.getSearchPriority(phrase) : -1;
+		}
 	}
 
 	private static class SpatialCategoryAmenityByTypeAPI extends SearchCoreFactory.SearchAmenityByTypeAPI {

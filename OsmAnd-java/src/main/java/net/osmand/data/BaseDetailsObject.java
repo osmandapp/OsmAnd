@@ -101,17 +101,13 @@ public class BaseDetailsObject {
 	
 	private boolean addObjectNoCombine(Object object) {
 		if (bbox31 == null && object instanceof City c) {
-			// we don't support merge of cities direct but take bbox31
 			bbox31 = c.getBbox31();
-			return true;
 		} else if (bbox31 == null && object instanceof Street s) {
-			// we don't support merge of cities direct but take bbox31
 			QuadRect bb = s.getBboxPoints();
 			if (bb != null) {
 				bbox31 = new int[] { MapUtils.get31TileNumberX(bb.left), MapUtils.get31TileNumberY(bb.top),
 						MapUtils.get31TileNumberX(bb.right), MapUtils.get31TileNumberY(bb.bottom) };
 			}
-			return true;
 		}
 		if (!isSupportedObjectType(object)) {
 			return false;
@@ -144,6 +140,8 @@ public class BaseDetailsObject {
 			return amenity != null ? amenity.getWikidata() : null;
 		} else if (object instanceof RenderedObject renderedObject) {
 			return renderedObject.getTagValue(WIKIDATA);
+		} else if (object instanceof MapObject mapObject) {
+			return mapObject.getWikidata();
 		}
 		return null;
 	}
@@ -512,8 +510,9 @@ public class BaseDetailsObject {
 	}
 
 	protected boolean isSupportedObjectType(Object object) {
-		return object instanceof Amenity || object instanceof TransportStop
-				|| object instanceof RenderedObject || object instanceof BaseDetailsObject;
+		return object instanceof Amenity || object instanceof TransportStop || object instanceof RenderedObject
+				|| object instanceof City || object instanceof Street || object instanceof Building
+				|| object instanceof BaseDetailsObject;
 	}
 
 	public List<Amenity> getAmenities() {
@@ -681,6 +680,21 @@ public class BaseDetailsObject {
 		am.setX(renderedObject.getX());
 		am.setY(renderedObject.getY());
 		return am;
+	}
+
+	public MapObject getAddressObject() {
+		for (Object object : objects) {
+			if (object instanceof Building building) {
+				return building;
+			}
+			if (object instanceof Street street) {
+				return street;
+			}
+			if (object instanceof City city) {
+				return city;
+			}
+		}
+		return null;
 	}
 
 }
