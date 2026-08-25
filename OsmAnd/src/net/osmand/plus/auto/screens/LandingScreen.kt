@@ -128,7 +128,7 @@ class LandingScreen(
 
     private fun updateCompass() {
         val settings = app.settings
-        val nightMode = app.settings.AA_MAP_NIGHT_MODE.get().isNightMode(carContext.isDarkMode)
+        val nightMode = app.daynightHelper.isNightModeForCar(carContext)
         val compassMode = settings.compassMode
         compassResId = compassMode.getIconId(nightMode)
     }

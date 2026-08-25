@@ -29,12 +29,4 @@ public enum AndroidAutoMapMode {
 	public int getIconId() {
 		return iconId;
 	}
-
-	public boolean isNightMode(boolean carDarkMode) {
-		return switch (this) {
-			case DAY -> false;
-			case NIGHT -> true;
-			case AUTOMATIC -> carDarkMode;
-		};
-	}
 }
