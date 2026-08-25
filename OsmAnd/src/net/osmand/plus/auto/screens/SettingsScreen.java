@@ -15,6 +15,7 @@ import androidx.core.graphics.drawable.IconCompat;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.AndroidAutoMapMode;
 
 /**
  * Settings screen demo.
@@ -35,19 +36,19 @@ public final class SettingsScreen extends BaseAndroidAutoScreen {
 		ListTemplate.Builder templateBuilder = new ListTemplate.Builder();
 
 		// Create 2 sections with three settings each.
-        ItemList.Builder sectionABuilder = new ItemList.Builder();
-        sectionABuilder.addItem(new Row.Builder()
-				.setTitle(getCarContext().getString(R.string.voice_announcements))
+		ItemList.Builder sectionABuilder = new ItemList.Builder();
+		sectionABuilder.addItem(new Row.Builder()
+				.setTitle(getApp().getString(R.string.voice_announcements))
 				.setToggle(
 						new Toggle.Builder(
 								(value) -> osmandSettings.VOICE_MUTE.set(!value))
 								.setChecked(!osmandSettings.VOICE_MUTE.get())
 								.build())
 				.build()
-        );
+		);
 		sectionABuilder.addItem(new Row.Builder()
-				.setTitle(getCarContext().getString(R.string.display_distance_to_first_intermediate))
-				.addText(getCarContext().getString(R.string.display_distance_to_first_intermediate_summary))
+				.setTitle(getApp().getString(R.string.display_distance_to_first_intermediate))
+				.addText(getApp().getString(R.string.display_distance_to_first_intermediate_summary))
 				.setToggle(
 						new Toggle.Builder(osmandSettings.USE_LEFT_DISTANCE_TO_INTERMEDIATE::set)
 								.setChecked(osmandSettings.USE_LEFT_DISTANCE_TO_INTERMEDIATE.get())
@@ -58,11 +59,27 @@ public final class SettingsScreen extends BaseAndroidAutoScreen {
 		templateBuilder.addSectionedList(
 				SectionedItemList.create(
 						sectionABuilder.build(),
-						getCarContext().getString(R.string.shared_string_navigation)));
+						getApp().getString(R.string.shared_string_navigation)));
+
+		AndroidAutoMapMode mapMode = osmandSettings.AA_MAP_NIGHT_MODE.get();
+		Row.Builder mapModeRowBuilder = new Row.Builder()
+				.setTitle(getApp().getString(R.string.map_mode))
+				.addText(getApp().getString(mapMode.getTitleId()))
+				.setBrowsable(true)
+				.setOnClickListener(() -> getScreenManager().pushForResult(
+						new MapModeScreen(getCarContext()), result -> invalidate()));
+
+		ItemList.Builder configureMapModeBuilder = new ItemList.Builder();
+		configureMapModeBuilder.addItem(mapModeRowBuilder.build());
+
+		templateBuilder.addSectionedList(
+				SectionedItemList.create(
+						configureMapModeBuilder.build(),
+						getApp().getString(R.string.configure_map)));
 
 		CarIcon icon = new CarIcon.Builder(IconCompat.createWithResource(getApp(), R.drawable.ic_action_map_magnifier)).build();
 		Row.Builder magnifierRowBuilder = new Row.Builder()
-				.setTitle(getCarContext().getString(R.string.map_magnifier))
+				.setTitle(getApp().getString(R.string.map_magnifier))
 				.setImage(icon)
 				.setBrowsable(true)
 				.setOnClickListener(() -> {
@@ -77,7 +94,7 @@ public final class SettingsScreen extends BaseAndroidAutoScreen {
 //		templateBuilder.addSectionedList(
 //				SectionedItemList.create(
 //						configureMapSectionBuilder.build(),
-//						getCarContext().getString(R.string.configure_map)));
+//						getApp().getString(R.string.configure_map)));
 
         /*
         ItemList.Builder sectionBBuilder = new ItemList.Builder();
@@ -90,11 +107,11 @@ public final class SettingsScreen extends BaseAndroidAutoScreen {
         templateBuilder.addSectionedList(
                 SectionedItemList.create(
                         sectionBBuilder.build(),
-                        getCarContext().getString(R.string.settings_section_b_label)));
+                        getApp().getString(R.string.settings_section_b_label)));
          */
 		return templateBuilder
 				.setHeaderAction(Action.BACK)
-				.setTitle(getCarContext().getString(R.string.shared_string_settings))
+				.setTitle(getApp().getString(R.string.shared_string_settings))
 				.build();
 	}
 }
