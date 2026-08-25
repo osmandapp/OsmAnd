@@ -119,7 +119,8 @@ public class GenerateBackupInfoTask extends AsyncTask<Void, Void, BackupInfo> {
 			if (exportType == null || !exportType.isAvailable()) {
 				continue;
 			}
-			boolean hasRemoteFile = uniqueRemoteFiles.containsKey(localFile.getTypeFileName());
+			boolean hasRemoteFile = uniqueRemoteFiles.containsKey(localFile.getTypeFileName())
+					|| deletedRemoteFiles.containsKey(localFile.getTypeFileName());
 			boolean toDelete = info.localFilesToDelete.contains(localFile);
 			if (!hasRemoteFile && !toDelete) {
 				boolean shouldSkip = shouldSkip(localFile);
