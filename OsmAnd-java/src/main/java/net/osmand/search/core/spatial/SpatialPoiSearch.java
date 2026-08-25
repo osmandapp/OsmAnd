@@ -119,10 +119,6 @@ public class SpatialPoiSearch {
 			if (tokensInName == 0 || nms.size() < tokensInName) {
 				tokensInName = nms.size();
 			}
-			if (nms.size() > tokensInName) {
-				// very likely buggy name
-				return false;
-			}
 			names.add(name);
 			return true;
 		}
