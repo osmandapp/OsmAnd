@@ -23,17 +23,19 @@ import net.osmand.util.SearchAlgorithms;
 
 ////////// IN PROGRESS //////////
 // TODO FIX ORDER -  (tests)
-
 // TODO FIX TEST - category 8
-// TODO 'Bratislava billa' - basemap POI higher rating (change sorting)
-// TODO 'Hardware store' - Store is city?
+// TODO 'Hardware store' - Store is city? 
 // TODO 'Bank', 'Billa' - translations for poi categories 
 
-// TODO INDEX: Find POI Categories translations / synonyms via Common words - Стоматол., Dentist, Basilica 
-// TODO REVIEW: Abbrevations (synonyms / direction words) other languages?
-// TODO REVIEW: Analyze Abbrevations / common skip (abbrevations 1st=first)
-// TODO DEDUPLICATE: Index place=state, county.. + wikidata id for boundaries (regions.ocbf) & display them - analyze
-// TODO DEDUPLICATE: Travel / Wiki - too many houses (duplicate names) in wiki maps - obstruct search by street "Ярославів Вал"`?
+// DEDUPLICATE: Unit test - "Ярославів Вал"
+// DEDUPLICATE: Index place=state, province (World_basemap_mini) + county, ... (normal maps).. + wikidata id for boundaries (regions.ocbf) & display them - analyze
+// DEDUPLICATE: Add missing boundaries to Adress section (probably national parks?)
+// DEDUPLICATE: Duplicate village POI - - 'Khotiv' - missing wikidata on relation amenity. When generating amenity relation, wikidata tag could be taken from admin_centre, admin_center, ...
+
+// REVIEW: Compare Unit tests with Live maps
+// REVIEW: Find POI Categories translations / synonyms via Common words - Стоматол., Dentist, Basilica 
+// REVIEW: Abbrevations (synonyms / direction words) other languages? - https://github.com/osmandapp/OsmAnd/issues/16359
+// REVIEW: Analyze Abbrevations / common skip (abbrevations 1st=first) 
 
 /////////////// EXTRA FEATURES ///////////////
 // TODO Sorting before load objects (use elo and other buildings?) and limit results
