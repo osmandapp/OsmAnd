@@ -19,20 +19,66 @@ public class RegionPriorityProvider {
     private LinkedHashMap<BinaryMapIndexReader, Integer> regionsPriority;
     private LatLon searchLocation;
 
-    public RegionPriorityProvider(SearchPhrase phrase) {
+    private static volatile RegionPriorityProvider instance;
+    private int lastIndexesCount = -1;
+    private static final double LOCATION_SHIFT_THRESHOLD_METERS = 30000; // 30 km
+
+    private RegionPriorityProvider() {
         this.priorityMap = new TreeMap<>();
-        if (phrase != null && phrase.getSettings() != null) {
-            this.searchLocation = phrase.getSettings().getOriginalLocation();
+    }
+
+    public static RegionPriorityProvider getInstance(SearchPhrase phrase) {
+        if (instance == null) {
+            synchronized (RegionPriorityProvider.class) {
+                if (instance == null) {
+                    instance = new RegionPriorityProvider();
+                }
+            }
+        }
+        instance.checkAndUpdate(phrase);
+        return instance;
+    }
+
+    private synchronized void checkAndUpdate(SearchPhrase phrase) {
+        if (phrase == null || phrase.getSettings() == null) {
+            return;
+        }
+
+        LatLon newLocation = phrase.getSettings().getOriginalLocation();
+        int cnt = phrase.getOfflineIndexes().size();
+        if (shouldReinitialize(newLocation, cnt)) {
+            this.searchLocation = newLocation == null ? this.searchLocation : newLocation;
+            this.lastIndexesCount = cnt;
+            this.priorityMap.clear();
+            this.regionsPriority = null;
             initPriorityMap(phrase);
         }
     }
 
-    public Collection<BinaryMapIndexReader> getOfflineIndexes() {
-       initRegionsPriority();
-       return regionsPriority.keySet();
+    private boolean shouldReinitialize(LatLon newLocation, int cnt) {
+        if (this.searchLocation == null || this.lastIndexesCount != cnt) {
+            return true;
+        }
+
+        if (newLocation != null) {
+            double distance = MapUtils.getDistance(this.searchLocation, newLocation);
+            return distance >= LOCATION_SHIFT_THRESHOLD_METERS;
+        }
+        return false;
     }
 
-    public List<BinaryMapIndexReader> getOfflineIndexes(int minRadius, int maxRadius) {
+    public Collection<BinaryMapIndexReader> getOfflineIndexes(SearchPhrase phrase) {
+        checkAndUpdate(phrase);
+        initRegionsPriority();
+        if (regionsPriority == null) {
+            return Collections.emptyList();
+        }
+        phrase.getOfflineIndexes();
+        return regionsPriority.keySet();
+    }
+
+    public List<BinaryMapIndexReader> getOfflineIndexes(int minRadius, int maxRadius, SearchPhrase phrase) {
+        checkAndUpdate(phrase);
         List<BinaryMapIndexReader> result = new ArrayList<>();
 
         int minPriority = (int) Math.floor((double) minRadius / BBOX_STEP);
@@ -56,6 +102,9 @@ public class RegionPriorityProvider {
             return 0;
         }
         initRegionsPriority();
+        if (regionsPriority == null) {
+            return 0;
+        }
         Integer priority = regionsPriority.get(reader);
         if (priority == null) {
             return 0;
@@ -69,10 +118,10 @@ public class RegionPriorityProvider {
         }
         regionsPriority = new LinkedHashMap<>();
         for (Map.Entry<Integer, List<BinaryMapIndexReader>> entry : priorityMap.entrySet()) {
-            int prority = entry.getKey();
+            int priority = entry.getKey();
             for (BinaryMapIndexReader reader : entry.getValue()) {
                 if (!regionsPriority.containsKey(reader)) {
-                    regionsPriority.put(reader, prority);
+                    regionsPriority.put(reader, priority);
                 }
             }
         }

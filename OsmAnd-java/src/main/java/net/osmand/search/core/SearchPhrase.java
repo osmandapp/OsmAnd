@@ -88,7 +88,7 @@ public class SearchPhrase {
 		this.settings = settings;
 		this.clt = clt;
 		if (settings != null) {
-			this.regionPriorityProvider = new RegionPriorityProvider(this);
+			this.regionPriorityProvider = RegionPriorityProvider.getInstance(this);
 		}
 	}
 	
@@ -396,7 +396,7 @@ public class SearchPhrase {
 	public Iterator<BinaryMapIndexReader> getRadiusOfflineIndexes(int minMeters, int maxMeters, SearchPhraseDataType dataType) {
 		List<BinaryMapIndexReader> list;
 		if (regionPriorityProvider != null) {
-			list = regionPriorityProvider.getOfflineIndexes(minMeters, maxMeters);
+			list = regionPriorityProvider.getOfflineIndexes(minMeters, maxMeters, this);
 		} else {
 			list = indexes != null ? indexes : settings.getOfflineIndexes();
 		}
@@ -407,7 +407,7 @@ public class SearchPhrase {
 	public Iterator<BinaryMapIndexReader> getOfflineIndexes(QuadRect rect, SearchPhraseDataType dataType) {
 		Collection<BinaryMapIndexReader> list;
 		if (regionPriorityProvider != null) {
-			list = regionPriorityProvider.getOfflineIndexes();
+			list = regionPriorityProvider.getOfflineIndexes(this);
 		} else {
 			list = indexes != null ? indexes : settings.getOfflineIndexes();
 		}
