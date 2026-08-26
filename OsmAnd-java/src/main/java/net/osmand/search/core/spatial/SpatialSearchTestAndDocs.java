@@ -21,28 +21,19 @@ import net.osmand.search.core.spatial.SpatialTextSearch.SpatialSearchResults;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSettings;
 import net.osmand.util.SearchAlgorithms;
 
-//////////// TESTING //////////
-// ### ukraine_school.json - Missing A+ school - школа А+ (nothing found on website)
-// 		Result 2 (t2+0-w1-oth1-tp0) - ["школа а" [POI School] 'Початкова школа А+' 731005224 6351 (50.3700 30.4470)]
-// ### usa_new_york.json  - "apple city", "harlem city" (New york) - test that result odesn't appear "city" [POI_TYPE] + "apple" [CITY_TOWN_TYPE] 'New York' 
-// ### uk_saksag.json (NO street intersection, No City Antwerpen)  
-// ### usa_penn_avenue.json: (add ro-ki ignore) UNIT TESTING: (failing) 763 Ro-Ki Boulevard Nichols
-// ### usa_wilkes-barre.json '155 Park Avenue Wilkes Barre': duplicate result not present
-// ### portugal_travessa.json: See comment
-// ### ge3.json: '10 Am Remsufer Remseck am Neckar' - see comment
-// ### uk_mihiia.json
-// ### World.json 'остров Пасхи'
-
 ////////// IN PROGRESS //////////
 // TODO FIX ORDER -  (tests)
+
+// TODO FIX TEST - category 8
+// TODO 'Bratislava billa' - basemap POI higher rating (change sorting)
+// TODO 'Hardware store' - Store is city?
+// TODO 'Bank', 'Billa' - translations for poi categories 
 
 // TODO INDEX: Find POI Categories translations / synonyms via Common words - Стоматол., Dentist, Basilica 
 // TODO REVIEW: Abbrevations (synonyms / direction words) other languages?
 // TODO REVIEW: Analyze Abbrevations / common skip (abbrevations 1st=first)
-
 // TODO DEDUPLICATE: Index place=state, county.. + wikidata id for boundaries (regions.ocbf) & display them - analyze
 // TODO DEDUPLICATE: Travel / Wiki - too many houses (duplicate names) in wiki maps - obstruct search by street "Ярославів Вал"`?
-// TODO Search in large parks, neighborhood same as in boundaries (index bbox POI), residential way/56238205
 
 /////////////// EXTRA FEATURES ///////////////
 // TODO Sorting before load objects (use elo and other buildings?) and limit results
