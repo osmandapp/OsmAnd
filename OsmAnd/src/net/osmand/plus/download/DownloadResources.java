@@ -51,6 +51,7 @@ public class DownloadResources extends DownloadResourceGroup {
 	public boolean downloadFromInternetFailed;
 	public boolean mapVersionIsIncreased;
 	private List<IndexItem> rawResources;
+	private List<IndexItem> customResources = Collections.emptyList();
 	private Map<WorldRegion, List<IndexItem>> groupByRegion;
 	private OutdatedIndexesCollection outdatedItems = OutdatedIndexesCollection.emptyInstance();
 
@@ -182,6 +183,14 @@ public class DownloadResources extends DownloadResourceGroup {
 				outdatedItems = OutdatedIndexesCollector.collect(app, filtered, deprecatedItems);
 			}
 		}
+		updateCustomDownloadedFiles();
+	}
+
+	private void updateCustomDownloadedFiles() {
+		List<IndexItem> customItems = customResources;
+		for (IndexItem item : customItems) {
+			item.setDownloaded(item.getTargetFile(app).exists());
+		}
 	}
 
 	protected void updateOutdatedFiles() {
@@ -195,6 +204,7 @@ public class DownloadResources extends DownloadResourceGroup {
 
 	protected boolean prepareData(List<IndexItem> resources) {
 		this.rawResources = resources;
+		List<IndexItem> customResources = new ArrayList<>();
 
 		DownloadResourceGroup deprecatedMapsGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.DELETED_MAPS);
 		addGroup(deprecatedMapsGroup);
@@ -325,7 +335,7 @@ public class DownloadResources extends DownloadResourceGroup {
 		if (!Algorithms.isEmpty(customRegions)) {
 			addGroup(extraMapsGroup);
 			for (WorldRegion region : customRegions) {
-				buildRegionsGroups(region, extraMapsGroup);
+				buildRegionsGroups(region, extraMapsGroup, customResources);
 			}
 		}
 
@@ -402,6 +412,7 @@ public class DownloadResources extends DownloadResourceGroup {
 		replaceIndividualSrtmWithGroups(region);
 		createMultipleDownloadItems(region);
 		trimEmptyGroups();
+		this.customResources = Collections.unmodifiableList(customResources);
 		updateLoadedFiles();
 		return true;
 	}
@@ -527,7 +538,8 @@ public class DownloadResources extends DownloadResourceGroup {
 		return collectedItems;
 	}
 
-	private void buildRegionsGroups(WorldRegion region, DownloadResourceGroup group) {
+	private void buildRegionsGroups(WorldRegion region, DownloadResourceGroup group,
+	                                List<IndexItem> customResources) {
 		LinkedList<WorldRegion> queue = new LinkedList<>();
 		LinkedList<DownloadResourceGroup> parent = new LinkedList<>();
 		queue.add(region);
@@ -540,10 +552,10 @@ public class DownloadResources extends DownloadResourceGroup {
 			mainGrp.region = reg;
 			parentGroup.addGroup(mainGrp);
 
-			if (reg instanceof CustomRegion) {
-				CustomRegion customRegion = (CustomRegion) reg;
+			if (reg instanceof CustomRegion customRegion) {
 				List<IndexItem> indexItems = customRegion.loadIndexItems();
 				if (!Algorithms.isEmpty(indexItems)) {
+					customResources.addAll(indexItems);
 					DownloadResourceGroup flatFiles = new DownloadResourceGroup(mainGrp, REGION_MAPS);
 					for (IndexItem ii : indexItems) {
 						flatFiles.addItem(ii);
