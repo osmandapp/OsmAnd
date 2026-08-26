@@ -139,7 +139,7 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 	public void onFrameRendered(@NonNull Canvas canvas, @NonNull Rect visibleArea, @NonNull Rect stableArea) {
 		SurfaceRenderer surfaceRenderer = getSurfaceRenderer();
 		if (surfaceRenderer != null) {
-			DrawSettings drawSettings = new DrawSettings(getCarContext().isDarkMode(), false, surfaceRenderer.getDensity());
+			DrawSettings drawSettings = new DrawSettings(isNightMode(), false, surfaceRenderer.getDensity());
 
 			alarmWidget.updateInfo(drawSettings, true);
 			speedometerWidget.updateInfo(drawSettings, drawSettings.isNightMode());
@@ -395,9 +395,13 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 
 	private void updateCompass() {
 		OsmandSettings settings = getApp().getSettings();
-		boolean nightMode = getCarContext().isDarkMode();
+		boolean nightMode = isNightMode();
 		CompassMode compassMode = settings.getCompassMode();
 		compassResId = compassMode.getIconId(nightMode);
+	}
+
+	private boolean isNightMode() {
+		return getApp().getSettings().AA_MAP_NIGHT_MODE.get().isNightMode(getCarContext().isDarkMode());
 	}
 
 	private void updateUse3DButton() {

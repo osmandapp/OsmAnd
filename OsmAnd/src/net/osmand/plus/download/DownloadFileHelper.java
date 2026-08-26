@@ -319,13 +319,11 @@ public class DownloadFileHelper {
 						first = false;
 					} else {
 						String name = entry.getName();
-						// small simplification
-						int ind = name.lastIndexOf('_');
-						if (ind > 0) {
-							// cut version
-							int i = name.indexOf('.', ind);
-							if (i > 0) {
-								name = name.substring(0, ind) + name.substring(i);
+						int separatorIndex = name.lastIndexOf('_');
+						if (separatorIndex > 0) {
+							int extensionIndex = name.indexOf('.', separatorIndex);
+							if (extensionIndex > 0) {
+								name = Algorithms.removeFileVersionSuffix(name);
 							}
 						}
 						fs = new File(de.fileToDownload.getParent(), name);
