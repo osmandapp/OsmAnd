@@ -1,24 +1,28 @@
 package net.osmand.plus.myplaces.tracks.filters.viewholders
 
-import android.app.Activity
-import android.app.DatePickerDialog
 import android.os.Build
 import android.view.View
-import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.ImageView
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.DateValidatorPointBackward
+import com.google.android.material.datepicker.DateValidatorPointForward
+import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
+import net.osmand.plus.utils.AndroidUtils
 import net.osmand.shared.gpx.filters.DateTrackFilter
 import net.osmand.plus.widgets.OsmandTextFieldBoxes
 import net.osmand.plus.widgets.TextViewEx
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText
 import java.text.SimpleDateFormat
 import java.util.Calendar
-import java.util.Date
 import java.util.Locale
+import java.util.TimeZone
 
 class FilterDateViewHolder(itemView: View, nightMode: Boolean) :
 	RecyclerView.ViewHolder(itemView) {
@@ -36,6 +40,12 @@ class FilterDateViewHolder(itemView: View, nightMode: Boolean) :
 	private val valueFromInputContainer: OsmandTextFieldBoxes
 	private val valueToInputContainer: OsmandTextFieldBoxes
 	private val DATE_FORMAT = SimpleDateFormat("d MMM yyyy", Locale.getDefault())
+
+	companion object {
+		private const val DATE_FROM_PICKER_TAG = "track_filter_date_from_picker"
+		private const val DATE_TO_PICKER_TAG = "track_filter_date_to_picker"
+		private val UTC_TIME_ZONE: TimeZone = TimeZone.getTimeZone("UTC")
+	}
 
 	init {
 		app = itemView.context.applicationContext as OsmandApplication
@@ -56,68 +66,123 @@ class FilterDateViewHolder(itemView: View, nightMode: Boolean) :
 		valueToInputContainer = itemView.findViewById(R.id.value_to)
 	}
 
-	fun bindView(filter: DateTrackFilter, activity: Activity) {
+	fun bindView(filter: DateTrackFilter, fragmentManager: FragmentManager) {
 		this.filter = filter
 		title.text = filter.trackFilterType.getName()
 		updateExpandState()
 		updateValues()
 		valueFromInputContainer.setOnClickListener {
-			dateFromClickListener(activity)
+			dateFromClickListener(fragmentManager)
 		}
-		valueToInputContainer.setOnClickListener { dateToClickListener(activity) }
+		valueToInputContainer.setOnClickListener { dateToClickListener(fragmentManager) }
 		valueFromInput.setOnClickListener {
-			dateFromClickListener(activity)
+			dateFromClickListener(fragmentManager)
 		}
-		valueToInput.setOnClickListener { dateToClickListener(activity) }
+		valueToInput.setOnClickListener { dateToClickListener(fragmentManager) }
+
+		restoreDatePicker(fragmentManager, DATE_FROM_PICKER_TAG, dateFromSetter)
+		restoreDatePicker(fragmentManager, DATE_TO_PICKER_TAG, dateToSetter)
 	}
 
-	private fun dateFromClickListener(activity: Activity) {
+	private fun dateFromClickListener(fragmentManager: FragmentManager) {
 		filter?.let {
-			showDatePicker(activity, it.valueFrom, dateFromSetter).maxDate = it.valueTo
+			val end = toPickerDate(it.valueTo)
+			val selection = toPickerDate(it.valueFrom).coerceAtMost(end)
+			val constraints = CalendarConstraints.Builder()
+				.setEnd(end)
+				.setOpenAt(selection)
+				.setValidator(DateValidatorPointBackward.before(end))
+				.build()
+			showDatePicker(
+				fragmentManager, DATE_FROM_PICKER_TAG, selection, constraints, dateFromSetter)
 		}
 	}
 
-	private fun dateToClickListener(activity: Activity) {
+	private fun dateToClickListener(fragmentManager: FragmentManager) {
 		filter?.let {
-			showDatePicker(activity, it.valueTo, dateToSetter).minDate = it.valueFrom
+			val start = toPickerDate(it.valueFrom)
+			val selection = toPickerDate(it.valueTo).coerceAtLeast(start)
+			val constraints = CalendarConstraints.Builder()
+				.setStart(start)
+				.setOpenAt(selection)
+				.setValidator(DateValidatorPointForward.from(start))
+				.build()
+			showDatePicker(
+				fragmentManager, DATE_TO_PICKER_TAG, selection, constraints, dateToSetter)
 		}
 	}
 
 	private fun showDatePicker(
-		activity: Activity,
-		now: Long,
-		dateSetter: DatePickerDialog.OnDateSetListener
-	): DatePicker {
-		val nowCalendar = Calendar.getInstance()
-		nowCalendar.time = Date(now)
-		val dialog = DatePickerDialog(
-			activity, dateSetter,
-			nowCalendar[Calendar.YEAR],
-			nowCalendar[Calendar.MONTH],
-			nowCalendar[Calendar.DAY_OF_MONTH])
-		dialog.show()
-		return dialog.datePicker
+		fragmentManager: FragmentManager,
+		tag: String,
+		selection: Long,
+		constraints: CalendarConstraints,
+		dateSetter: MaterialPickerOnPositiveButtonClickListener<Long>
+	) {
+		if (!AndroidUtils.isFragmentCanBeAdded(fragmentManager, tag, true)) {
+			return
+		}
+		val picker = MaterialDatePicker.Builder.datePicker()
+			.setTheme(
+				if (nightMode) R.style.ThemeOverlay_App_Material_DatePicker_Dark
+				else R.style.ThemeOverlay_App_Material_DatePicker_Light)
+			.setSelection(selection)
+			.setCalendarConstraints(constraints)
+			.build()
+		picker.addOnPositiveButtonClickListener(dateSetter)
+		picker.show(fragmentManager, tag)
 	}
 
-	private var dateFromSetter: DatePickerDialog.OnDateSetListener =
-		DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-			val from = Calendar.getInstance()
-			from[Calendar.YEAR] = year
-			from[Calendar.MONTH] = month
-			from[Calendar.DAY_OF_MONTH] = dayOfMonth
-			filter?.valueFrom = from.time.time
+	@Suppress("UNCHECKED_CAST")
+	private fun restoreDatePicker(
+		fragmentManager: FragmentManager,
+		tag: String,
+		dateSetter: MaterialPickerOnPositiveButtonClickListener<Long>
+	) {
+		val picker = fragmentManager.findFragmentByTag(tag) as? MaterialDatePicker<Long>
+		picker?.addOnPositiveButtonClickListener(dateSetter)
+	}
+
+	private var dateFromSetter =
+		MaterialPickerOnPositiveButtonClickListener<Long> { selection ->
+			filter?.valueFrom = toStartOfDay(selection)
 			updateValues()
 		}
 
-	private var dateToSetter: DatePickerDialog.OnDateSetListener =
-		DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-			val from = Calendar.getInstance()
-			from[Calendar.YEAR] = year
-			from[Calendar.MONTH] = month
-			from[Calendar.DAY_OF_MONTH] = dayOfMonth
-			filter?.valueTo = from.time.time
+	private var dateToSetter =
+		MaterialPickerOnPositiveButtonClickListener<Long> { selection ->
+			filter?.valueTo = toEndOfDay(selection)
 			updateValues()
 		}
+
+	private fun toPickerDate(localTime: Long): Long {
+		val local = Calendar.getInstance()
+		local.timeInMillis = localTime
+		val utc = Calendar.getInstance(UTC_TIME_ZONE)
+		utc.clear()
+		utc.set(local[Calendar.YEAR], local[Calendar.MONTH], local[Calendar.DAY_OF_MONTH])
+		return utc.timeInMillis
+	}
+
+	private fun toStartOfDay(pickerDate: Long): Long = toLocalDate(pickerDate).timeInMillis
+
+	private fun toEndOfDay(pickerDate: Long): Long {
+		val local = toLocalDate(pickerDate)
+		local[Calendar.HOUR_OF_DAY] = 23
+		local[Calendar.MINUTE] = 59
+		local[Calendar.SECOND] = 59
+		local[Calendar.MILLISECOND] = 999
+		return local.timeInMillis
+	}
+
+	private fun toLocalDate(pickerDate: Long): Calendar {
+		val utc = Calendar.getInstance(UTC_TIME_ZONE)
+		utc.timeInMillis = pickerDate
+		val local = Calendar.getInstance()
+		local.clear()
+		local.set(utc[Calendar.YEAR], utc[Calendar.MONTH], utc[Calendar.DAY_OF_MONTH])
+		return local
+	}
 
 	private fun updateExpandState() {
 		val iconRes =
