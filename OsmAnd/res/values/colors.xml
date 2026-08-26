@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<color name="lunar_eclipse_visibility">#7E57C2</color>
+	<color name="lunar_eclipse_marker">#ECEFF1</color>
+	<color name="lunar_eclipse_marker_outline">#4527A0</color>
+	<color name="lunar_eclipse_marker_halo">#FFFFFF</color>
+	<color name="solar_eclipse_path">#FFFF00</color>
+	<color name="solar_eclipse_marker">#F44336</color>
+	<color name="solar_eclipse_marker_outline">#1A1A1A</color>
+	<color name="solar_eclipse_marker_halo">#FFFFFF</color>
+
 	<!-- Background -->
 	<color name="activity_background_color_light">#f0f0f0</color>
 	<color name="activity_background_color_dark">#0D0D0D</color>
@@ -183,11 +192,32 @@
     <color name="btn_text_on_secondary_light">#237BFF</color>
     <color name="btn_text_on_secondary_dark">#237BFF</color>
 
+	<color name="btn_icon_on_secondary_light">#237BFF</color>
+    <color name="btn_icon_on_secondary_dark">#237BFF</color>
+
     <color name="btn_text_on_disabled_light">#666666</color>
     <color name="btn_text_on_disabled_dark">#666666</color>
 
+	<!-- Icon Button -->
+	<color name="btn_bg_icon_hover_light">#F0F0F0</color>
+	<color name="btn_bg_icon_hover_dark">#303436</color>
+
+	<color name="btn_bg_icon_focused_light">#DEEBFF</color>
+    <color name="btn_bg_icon_focused_dark">#16396E</color>
+
+	<color name="btn_bg_icon_pressed_light">#ADCEFF</color>
+    <color name="btn_bg_icon_pressed_dark">#131C2A</color>
+
+	<!-- Chip -->
 	<color name="chip_bg_light">#FFFFFF</color>
     <color name="chip_bg_dark">#1E1F20</color>
+
+	<color name="chip_bg_selected_light">#C7DDFF</color>
+	<color name="chip_bg_selected_dark">#16396E</color>
+
+	<color name="chip_search_scope_bg_light">#EDEFF3</color>
+	<color name="chip_search_scope_bg_dark">#2E343D</color>
+
 
 	<color name="subscription_active_bg_color_light">#fff9b2</color>
 	<color name="subscription_active_bg_color_dark">#43453b</color>
@@ -196,6 +226,8 @@
 	<color name="feature_purchased_bg">#78cc5c</color>
 	<color name="osmand_pro_item_bg">#223EA4</color>
 	<color name="maps_plus_item_bg">#FFA64D</color>
+	<color name="maps_plus_badge_text_light">#4D17C0</color>
+	<color name="maps_plus_badge_text_dark">#B99CFF</color>
 	<color name="purchase_sc_feature_list_bg_dark">@color/list_background_color_dark</color>
 	<color name="purchase_sc_feature_list_bg_light">#f3f4f5</color>
 	<color name="purchase_sc_selected_plan_bg_dark">@color/activity_background_color_dark</color>
@@ -277,6 +309,7 @@
 	<!-- Widgets  -->
 	<color name="color_transparent">#0000</color>
 	<color name="color_black_transparent">#90000000</color>
+	<color name="color_black_transparent_30">#4D000000</color>
 	<color name="widgettext_night">#ffC8C8C8</color>
 	<color name="widgettext_day">#000</color>
 	<color name="widget_units_color_light">#666666</color>
@@ -634,4 +667,8 @@
 	<color name="sale_badge_dark">#E82A3B</color>
 	<color name="banner_feature_bg_light">#EDF1F7</color>
 	<color name="banner_feature_bg_dark">#2E3238</color>
+	
+
+
+
 </resources>

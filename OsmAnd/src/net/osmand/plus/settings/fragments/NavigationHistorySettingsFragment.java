@@ -113,8 +113,14 @@ public class NavigationHistorySettingsFragment extends HistoryItemsFragment {
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment target) {
+		showInstance(fragmentManager, target, null);
+	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment target,
+	                                @Nullable HistoryEntry preselectedEntry) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			NavigationHistorySettingsFragment fragment = new NavigationHistorySettingsFragment();
+			fragment.setPreselectedItem(preselectedEntry);
 			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);
 		}

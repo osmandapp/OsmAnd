@@ -2,8 +2,10 @@ package net.osmand.plus.search.history;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.data.City.CityType;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.settings.enums.HistorySource;
+import net.osmand.search.core.ObjectType;
 import net.osmand.util.Algorithms;
 
 public class HistoryEntry {
@@ -20,6 +22,7 @@ public class HistoryEntry {
 	private long lastAccessedTime;
 	private int[] intervals = new int[0];
 	private double[] intervalValues = new double[0];
+	private HistoryItemMetadata metadata = new HistoryItemMetadata();
 
 
 	public HistoryEntry(double lat, double lon, @NonNull PointDescription name,
@@ -160,5 +163,113 @@ public class HistoryEntry {
 
 	public void setLastAccessTime(long time) {
 		lastAccessedTime = time;
+	}
+
+	public void copyMetadataFrom(@NonNull HistoryEntry entry) {
+		metadata = entry.metadata;
+	}
+
+	public void fillMissingMetadataFrom(@NonNull HistoryEntry entry) {
+		metadata = metadata.fillMissingFrom(entry.metadata);
+	}
+
+	public boolean hasMetadata() {
+		return metadata.hasMetadata();
+	}
+
+	public ObjectType getObjectType() {
+		return metadata.getObjectType();
+	}
+
+	public void setObjectType(ObjectType objectType) {
+		metadata = metadata.withObjectType(objectType);
+	}
+
+	public CityType getCityType() {
+		return metadata.getCityType();
+	}
+
+	public void setCityType(CityType cityType) {
+		metadata = metadata.withCityType(cityType);
+	}
+
+	public String getDisplayName() {
+		return metadata.getDisplayName();
+	}
+
+	public void setDisplayName(String displayName) {
+		metadata = metadata.withDisplayName(displayName);
+	}
+
+	public String getPoiCategoryKey() {
+		return metadata.getPoiCategoryKey();
+	}
+
+	public void setPoiCategoryKey(String poiCategoryKey) {
+		metadata = metadata.withPoiCategoryKey(poiCategoryKey);
+	}
+
+	public String getPoiSubtypeKey() {
+		return metadata.getPoiSubtypeKey();
+	}
+
+	public void setPoiSubtypeKey(String poiSubtypeKey) {
+		metadata = metadata.withPoiSubtypeKey(poiSubtypeKey);
+	}
+
+	public String getTypeName() {
+		return metadata.getTypeName();
+	}
+
+	public void setTypeName(String typeName) {
+		metadata = metadata.withTypeName(typeName);
+	}
+
+	public String getAddress() {
+		return metadata.getAddress();
+	}
+
+	public void setAddress(String address) {
+		metadata = metadata.withAddress(address);
+	}
+
+	public String getRelatedObjectName() {
+		return metadata.getRelatedObjectName();
+	}
+
+	public void setRelatedObjectName(String relatedObjectName) {
+		metadata = metadata.withRelatedObjectName(relatedObjectName);
+	}
+
+	public String getOpeningHours() {
+		return metadata.getOpeningHours();
+	}
+
+	public void setOpeningHours(String openingHours) {
+		metadata = metadata.withOpeningHours(openingHours);
+	}
+
+	public String getAlternateName() {
+		return metadata.getAlternateName();
+	}
+
+	public void setAlternateName(String alternateName) {
+		metadata = metadata.withAlternateName(alternateName);
+	}
+
+	public String getPhotoUrl() {
+		return metadata.getPhotoUrl();
+	}
+
+	public void setPhotoUrl(String photoUrl) {
+		metadata = metadata.withPhotoUrl(photoUrl);
+	}
+
+	public Long getOsmId() {
+		return metadata.getOsmId();
+	}
+
+	public void setOsmId(Long osmId) {
+		metadata = metadata.withOsmId(osmId);
 	}
 }

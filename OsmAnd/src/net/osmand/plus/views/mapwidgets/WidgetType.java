@@ -358,7 +358,9 @@ public enum WidgetType {
 
 	@Nullable
 	public WidgetInfoBaseFragment getSettingsFragment(@NonNull Context ctx, @Nullable MapWidgetInfo widgetInfo) {
-		if (this == ELEVATION_PROFILE) {
+		if (this == COORDINATES_MAP_CENTER || this == COORDINATES_CURRENT_LOCATION) {
+			return new CoordinatesWidgetInfoFragment();
+		} else if (this == ELEVATION_PROFILE) {
 			return isPurchased(ctx) ? new ElevationProfileWidgetInfoFragment() : null;
 		} else if (this == MARKERS_TOP_BAR) {
 			return new MapMarkersBarWidgetSettingFragment();

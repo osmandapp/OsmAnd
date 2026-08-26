@@ -4,7 +4,6 @@ import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.R;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.util.Algorithms;
 
@@ -113,7 +112,6 @@ public class AmenityInfoRow {
 		public boolean isUrl() { return isUrl; }
 		public int getOrder() { return order; }
 		public String getName() { return name; }
-		public boolean isDescription() { return isText && iconId == R.drawable.ic_action_info_dark; }
 		public int getTextLinesLimit() { return textLinesLimit; }
 
 		public AmenityInfoRow build() { return new AmenityInfoRow(this); }

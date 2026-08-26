@@ -215,7 +215,7 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 				? app.getSavingTrackHelper().getCurrentTrack()
 				: app.getSelectedGpxHelper().getSelectedFileByPath(gpxFilePath);
 		if (selectedGpxFile != null) {
-			setupGpxTrackInfo(trackInfoContainer, gpxName, selectedGpxFile.getTrackAnalysis(app), app);
+			setupGpxTrackInfo(trackInfoContainer, gpxName, selectedGpxFile.getTrackSummaryAnalysis(app), app);
 		} else {
 			GpxDataItem gpxDataItem = app.getGpxDbHelper().getItem(SharedUtil.kFile(file), item -> {
 				if (item.getAnalysis() != null) {

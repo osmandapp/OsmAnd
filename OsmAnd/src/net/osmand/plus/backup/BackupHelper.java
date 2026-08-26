@@ -77,6 +77,7 @@ public class BackupHelper {
 	public static final String DOWNLOAD_FILE_URL = SERVER_URL + "/userdata/download-file";
 	public static final String DELETE_FILE_URL = SERVER_URL + "/userdata/delete-file";
 	public static final String DELETE_FILE_VERSION_URL = SERVER_URL + "/userdata/delete-file-version";
+	public static final String EMPTY_TRASH_URL = SERVER_URL + "/userdata/empty-trash";
 	public static final String ACCOUNT_DELETE_URL = SERVER_URL + "/userdata/delete-account";
 	public static final String SEND_CODE_URL = SERVER_URL + "/userdata/send-code";
 	public static final String CHECK_CODE_URL = SERVER_URL + "/userdata/auth/confirm-code";
@@ -101,6 +102,8 @@ public class BackupHelper {
 	public static final int SERVER_ERROR_CODE_SUBSCRIPTION_WAS_USED_FOR_ANOTHER_ACCOUNT = 109;
 	public static final int SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT = 110;
 	public static final int SERVER_ERROR_CODE_USER_IS_ALREADY_REGISTERED = 111;
+
+	private static final Map<String, String> UPLOAD_HEADERS = Collections.singletonMap("Accept-Encoding", "deflate, gzip");
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -459,12 +462,9 @@ public class BackupHelper {
 		params.put("clienttime", String.valueOf(clienttime));
 		params.put("autoSync", String.valueOf(autoSync));
 
-		Map<String, String> headers = new HashMap<>();
-		headers.put("Accept-Encoding", "deflate, gzip");
-
 		OperationLog operationLog = new OperationLog("uploadFile", DEBUG);
 		operationLog.startOperation(type + " " + fileName);
-		NetworkResult networkResult = AndroidNetworkUtils.uploadFile(UPLOAD_FILE_URL, streamWriter, fileName, true, params, headers,
+		NetworkResult networkResult = AndroidNetworkUtils.uploadFile(UPLOAD_FILE_URL, streamWriter, fileName, true, params, UPLOAD_HEADERS,
 				new AbstractProgress() {
 
 					private ProgressHelper progressHelper;
@@ -531,6 +531,12 @@ public class BackupHelper {
 			@Nullable OnDeleteFilesListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 		executor.runCommand(new DeleteFilesCommand(this, remoteFiles, byVersion, listener));
+	}
+
+	public void emptyTrash(@NonNull List<RemoteFile> deletedFiles,
+			@Nullable OnDeleteFilesListener listener) throws UserNotRegisteredException {
+		checkRegistered();
+		executor.runCommand(new EmptyTrashCommand(this, deletedFiles, listener));
 	}
 
 	void deleteFilesSync(@NonNull List<RemoteFile> remoteFiles, boolean byVersion,

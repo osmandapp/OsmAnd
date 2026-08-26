@@ -218,7 +218,7 @@
     <string name="direction">Direzione</string>
     <string name="precision">Precisione</string>
     <string name="altitude">Altitudine</string>
-    <string name="bearing">Rilevamento (angolo di rotta)</string>
+    <string name="bearing">Rilevamento</string>
     <string name="proxy_key">Chiave</string>
     <string name="proxy_password">Password</string>
     <string name="proxy_username">Nome utente</string>
@@ -244,7 +244,7 @@
     <string name="shared_string_apply">Applica</string>
     <string name="timeline_no_data_descr">Non abbiamo raccolto dati per il giorno selezionato</string>
     <string name="timeline_no_data">Nessun dato</string>
-    <string name="shared_string_end">Fine</string>
+    <string name="shared_string_end">Termina</string>
     <string name="shared_string_start">Avvia</string>
     <string name="set_time_timeline_descr">Seleziona l\'ora da visualizzare</string>
     <string name="start_end_date">Data di inizio - fine</string>

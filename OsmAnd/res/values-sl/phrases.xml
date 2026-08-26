@@ -336,9 +336,9 @@
     <string name="poi_guest_house">Gostišče</string>
     <string name="poi_hostel">Hostel</string>
     <string name="poi_motel">Motel</string>
-    <string name="poi_alpine_hut">Planinska koča;Zavetišče</string>
+    <string name="poi_alpine_hut">Planinska koča;Zavetje</string>
     <string name="poi_apartment">Apartma</string>
-    <string name="poi_hunting_lodge">Lovska koča;Zavetišče</string>
+    <string name="poi_hunting_lodge">Lovska koča;Zavetje</string>
     <string name="poi_place_of_worship">Svetišče</string>
     <string name="poi_religion_christian">Krščansko svetišče</string>
     <string name="poi_religion_jewish">Židovsko svetišče</string>
@@ -364,7 +364,7 @@
     <string name="poi_cemetery">Pokopališče</string>
     <string name="poi_grave_yard">Cerkveno pokopališče</string>
     <string name="poi_tomb">Grobnica</string>
-    <string name="poi_shelter">Zavetišče</string>
+    <string name="poi_shelter">Zavetje</string>
     <string name="poi_funicular">Tirna vzpenjača</string>
     <string name="poi_wine_cellar">Vinska klet</string>
     <string name="poi_craft_winery">Vinarna</string>
@@ -918,7 +918,7 @@
     <string name="poi_standpipe">Hidrant</string>
     <string name="poi_escape_lane">Pas za pobeg</string>
     <string name="poi_motorway_junction">Avtocestno križišče</string>
-    <string name="poi_turning_circle">Obračalni krog</string>
+    <string name="poi_turning_circle">Obračališče</string>
     <string name="poi_aerialway_pylon">Žičniški drog</string>
     <string name="poi_aerialway_magic_carpet">Tapetna vlečnica</string>
     <string name="poi_ferry_terminal">Terminal za trajekte</string>
@@ -965,7 +965,7 @@
     <string name="poi_diet">Prehrana</string>
     <string name="poi_service_car">Avtoservis</string>
     <string name="poi_permanent_camping">Stalno kampiranje</string>
-    <string name="poi_shelter_filter">Zavetišče</string>
+    <string name="poi_shelter_filter">Zavetje</string>
     <string name="poi_butcher_type">Osnovna vrsta mesa</string>
     <string name="poi_coffee_filter">Kava</string>
     <string name="poi_ice_cream_filter">Sladoled</string>
@@ -1087,7 +1087,7 @@
     <string name="poi_office_religion">Verski urad</string>
     <string name="poi_financial">Finančni urad</string>
     <string name="poi_raceway">Dirkališče</string>
-    <string name="poi_cabin">Kabina;Zavetišče</string>
+    <string name="poi_cabin">Kabina;Zavetje</string>
     <string name="poi_religion_zoroastrian">Zoroastrizem</string>
     <string name="poi_religion_voodoo">Vudu</string>
     <string name="poi_religion_bahai">Bahaizem</string>
@@ -1095,11 +1095,11 @@
     <string name="poi_religion_jain">Džainizem</string>
     <string name="poi_religion_multifaith">Večvernost</string>
     <string name="poi_religion_unitarian_universalist">Unitaristični univerzalizem</string>
-    <string name="poi_wilderness_hut">Neoskrbovana planinska koča;Zavetišče</string>
+    <string name="poi_wilderness_hut">Neoskrbovana planinska koča;Zavetje</string>
     <string name="poi_attraction_water_slide">Vodni tobogan</string>
     <string name="poi_lodging">Nastanitev</string>
-    <string name="poi_chalet">Počitniška hišica;Zavetišče</string>
-    <string name="poi_lean_to">Prizidek;Zavetišče</string>
+    <string name="poi_chalet">Počitniška hišica;Zavetje</string>
+    <string name="poi_lean_to">Prizidek;Zavetje</string>
     <string name="poi_religion_scientologist">Scientologizem</string>
     <string name="poi_religion_pagan">Poganstvo</string>
     <string name="poi_religion_tenrikyo">Tenrikyo</string>
@@ -1414,8 +1414,8 @@
     <string name="poi_generator_source_nuclear">Vir energije: jedrska</string>
     <string name="poi_generator_source_gas">Vir energije: plin</string>
     <string name="poi_animal_shelter_wildlife">za divje živali</string>
-    <string name="poi_animal_shelter_dog_cat">Za pse, mačke</string>
-    <string name="poi_animal_shelter_dog">za pse</string>
+    <string name="poi_animal_shelter_dog_cat">Psi, mačke</string>
+    <string name="poi_animal_shelter_dog">Psi</string>
     <string name="poi_rural">Podeželska</string>
     <string name="poi_urban">Urbana</string>
     <string name="poi_trees_pomegranate">Granatno jabolko</string>
@@ -1861,8 +1861,8 @@
     <string name="poi_enforcement_access">Uveljavitev: dostop</string>
     <string name="poi_enforcement_toll">Uveljavitev: cestnina</string>
     <string name="poi_animal_shelter">Zavetišče za živali</string>
-    <string name="poi_animal_shelter_cat">za mačke</string>
-    <string name="poi_animal_shelter_bird">za ptice</string>
+    <string name="poi_animal_shelter_cat">Mačke</string>
+    <string name="poi_animal_shelter_bird">Ptice</string>
     <string name="poi_animal_shelter_mammal">za sesalce</string>
     <string name="poi_seats">Št. sedežev</string>
     <string name="poi_backrest_yes">Naslonjalo: da</string>
@@ -2299,7 +2299,7 @@
     <string name="poi_cairn">Kup kamenja</string>
     <string name="poi_historic_era_mesolithic">Zgodovinsko obdobje: mezolitik</string>
     <string name="poi_historic_period_dominate">Zgodovinsko obdobje: prevladujoče (285 n. št. - 476 n. št.)</string>
-    <string name="poi_historic_period_roman_greece">Zgodovinsko obdobje: Rimska Grčija (146 pr. n. št. - 330 n. št.)</string>
+    <string name="poi_historic_period_roman_greece">Zgodovinsko obdobje: Rimska Grčija (146 pr. n. št. – 330 n. št.)</string>
     <string name="poi_historic_period_greek_dark_ages">Zgodovinsko obdobje: grška temna doba (1100-800 pr. n. št.)</string>
     <string name="poi_historic_period_christian_egypt">Zgodovinsko obdobje: krščanski Egipt</string>
     <string name="poi_historic_period_alexander_the_great">Zgodovinsko obdobje: Aleksander Veliki</string>
@@ -2307,7 +2307,7 @@
     <string name="poi_historic_period_first_intermediate_period">Zgodovinsko obdobje: prvo vmesno obdobje (2181 - 2055 pr. n. št.)</string>
     <string name="poi_historic_period_predynastic_egypt">Zgodovinsko obdobje: preddinastični Egipt</string>
     <string name="poi_historic_period_middle_kingdom">Zgodovinsko obdobje: srednje kraljestvo (2055 - 1650 pr. n. št.)</string>
-    <string name="poi_historic_period_roman_republic">Zgodovinsko obdobje: Rimska republika (508 pr. n. št. - 27 pr. n. št.)</string>
+    <string name="poi_historic_period_roman_republic">Zgodovinsko obdobje: Rimska republika (508 pr. n. št. – 27 pr. n. št.)</string>
     <string name="poi_historic_period_classical_greece">Zgodovinsko obdobje: klasična Grčija (5.-4. stol. p. n. št.)</string>
     <string name="poi_historic_period_bronze_age">Zgodovinsko obdobje: bronasta doba</string>
     <string name="poi_animal_yes">Dovoljene živali</string>
@@ -2419,13 +2419,13 @@
     <string name="poi_defibrillator_yes">Defibrilator: da</string>
     <string name="poi_tomb_rock_cut">Vrsta: vklesana skala</string>
     <string name="poi_tomb_vault">Vrsta: trezor</string>
-    <string name="poi_historic_civilization_ancient_roman">Civilizacija: starorimska (753 pr. n. št. - 284 n. št.)</string>
+    <string name="poi_historic_civilization_ancient_roman">Civilizacija: starorimska (753 pr. n. št. – 284 n. št.)</string>
     <string name="poi_historic_civilization_nuragic">Civilizacija: nuragična (18. pr. n. št. – 2. n. št.)</string>
     <string name="poi_historic_civilization_ancient_greek">Civilizacija: starogrška</string>
     <string name="poi_historic_civilization_byzantine">Civilizacija: bizantinska (285 n. št. - 1453 n. št.)</string>
     <string name="poi_historic_civilization_imperial_chinese">Civilizacija: cesarska kitajska (221 pr. n. št. - 1911 n. št.)</string>
     <string name="poi_historic_civilization_ancient_egyptian">Civilizacija: staroegipčanska (do 332 pr. n. št.)</string>
-    <string name="poi_historic_civilization_western_roman">Civilizacija: zahodnorimska (285 n. št. - 476 n. št.)</string>
+    <string name="poi_historic_civilization_western_roman">Civilizacija: zahodnorimska (285 n. št. – 476 n. št.)</string>
     <string name="poi_historic_civilization_mycenaean">Civilizacija: mikenska</string>
     <string name="poi_historic_civilization_dacian">Civilizacija: dačanska</string>
     <string name="poi_historic_civilization_roman_and_byzantine_egyptian">Civilizacija: rimska in bizantinska egipčanska</string>
@@ -2439,7 +2439,7 @@
     <string name="poi_historic_period_ptolemaic_egypt">Zgodovinsko obdobje: ptolemajski Egipt (305 pr. n. št. - 30 pr. n. št.)</string>
     <string name="poi_historic_period_byzantine_egypt">Zgodovinsko obdobje: bizantinski Egipt (30 pr. n. št. - 641 n. št.)</string>
     <string name="poi_historic_period_persian_occupation">Zgodovinsko obdobje: perzijska okupacija</string>
-    <string name="poi_historic_period_roman_kingdom">Zgodovinsko obdobje: Rimsko kraljestvo (753 pr. n. št. - 509 pr. n. št.)</string>
+    <string name="poi_historic_period_roman_kingdom">Zgodovinsko obdobje: Rimsko kraljestvo (753 pr. n. št. – 509 pr. n. št.)</string>
     <string name="poi_historic_period_villager">Zgodovinsko obdobje: vaščansko (doba I, II, 1580 pr. n. št. - 133 n. št.)</string>
     <string name="poi_historic_period_imperial">Zgodovinsko obdobje: cesarsko (doba V, 900 n. št. - 1200 n. št.)</string>
     <string name="poi_historic_era_paleolithic">Zgodovinsko obdobje: paleolitik (2,6 milijona let - 10000 p. s.)</string>
@@ -3922,8 +3922,8 @@
     <string name="poi_operator_type_ngo">Vrsta operaterja: nevladna organizacija</string>
     <string name="poi_operator_type_consortium">Vrsta operaterja: konzorcij</string>
     <string name="poi_direction_northwest">Severozahodna smer</string>
-    <string name="poi_shelter_no">Zavetišče: ne</string>
-    <string name="poi_shelter_yes">Da;Zavetišče</string>
+    <string name="poi_shelter_no">Zavetje: ne</string>
+    <string name="poi_shelter_yes">Da;Zavetje</string>
     <string name="poi_manufacturer">Proizvajalec</string>
     <string name="poi_payment_calling_cards_no">Klicne kartice niso sprejete</string>
     <string name="poi_groundskeeping">Trgovina s potrebščinami za urejanje prostora</string>
@@ -4596,7 +4596,7 @@
     <string name="poi_cycle_network">Kolesarsko omrežje</string>
     <string name="poi_state_proposed">Stanje: predlagano</string>
     <string name="poi_state_alternate">Stanje: nadomestno</string>
-    <string name="poi_state_connection">Stanje: povezaja</string>
+    <string name="poi_state_connection">Stanje: povezava</string>
     <string name="poi_state_inuse">Stanje: v uporabi</string>
     <string name="poi_state_recommended">Stanje: priporočeno</string>
     <string name="poi_state_temporary">Stanje: začasno</string>
@@ -4785,4 +4785,6 @@
     <string name="poi_indoor_seating_bar_table">Notranja sedišča, barski pult</string>
     <string name="poi_aerodrome_type_airfield">Letališče</string>
     <string name="poi_cuisine_fish">Ribe</string>
+    <string name="poi_roman_catholic_church">Rimokatoliška cerkev</string>
+    <string name="poi_romanian_orthodox_church">Romunska pravoslavna cerkev</string>
 </resources>

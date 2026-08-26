@@ -10,8 +10,6 @@ import net.osmand.util.Algorithms;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Date;
-
 public class RemoteFile {
 
 	private int userid;
@@ -20,9 +18,7 @@ public class RemoteFile {
 	private int filesize;
 	private String type;
 	private String name;
-	private Date updatetime;
 	private long updatetimems;
-	private Date clienttime;
 	private long clienttimems;
 	private int zipSize;
 
@@ -49,11 +45,9 @@ public class RemoteFile {
 		}
 		if (json.has("updatetimems")) {
 			updatetimems = json.getLong("updatetimems");
-			updatetime = new Date(updatetimems);
 		}
 		if (json.has("clienttimems")) {
 			clienttimems = json.getLong("clienttimems");
-			clienttime = new Date(clienttimems);
 		}
 		if (json.has("zipSize")) {
 			zipSize = json.getInt("zipSize");
@@ -106,16 +100,8 @@ public class RemoteFile {
 		}
 	}
 
-	public Date getUpdatetime() {
-		return updatetime;
-	}
-
 	public long getUpdatetimems() {
 		return updatetimems;
-	}
-
-	public Date getClienttime() {
-		return clienttime;
 	}
 
 	public long getClienttimems() {
@@ -142,15 +128,23 @@ public class RemoteFile {
 				updatetimems == that.updatetimems &&
 				clienttimems == that.clienttimems &&
 				Algorithms.objectEquals(type, that.type) &&
-				Algorithms.objectEquals(name, that.name) &&
-				Algorithms.objectEquals(updatetime, that.updatetime) &&
-				Algorithms.objectEquals(clienttime, that.clienttime);
+				Algorithms.objectEquals(name, that.name);
 	}
 
 	@Override
 	public int hashCode() {
-		return Algorithms.hash(id, userid, deviceid, filesize, type, name,
-				updatetime, updatetimems, clienttime, clienttimems);
+		int result = 1;
+		result = 31 * result + Long.hashCode(id);
+		result = 31 * result + userid;
+		result = 31 * result + deviceid;
+		result = 31 * result + filesize;
+		result = 31 * result + (type != null ? type.hashCode() : 0);
+		result = 31 * result + (name != null ? name.hashCode() : 0);
+		result = 31 * result + Long.hashCode(updatetimems);
+		result = 31 * result + Long.hashCode(updatetimems);
+		result = 31 * result + Long.hashCode(clienttimems);
+		result = 31 * result + Long.hashCode(clienttimems);
+		return result;
 	}
 
 	@NonNull

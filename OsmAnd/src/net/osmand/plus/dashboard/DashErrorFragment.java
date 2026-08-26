@@ -1,6 +1,8 @@
 package net.osmand.plus.dashboard;
 
 
+import static net.osmand.plus.feedback.FeedbackHelper.EXCEPTION_PATH;
+
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
@@ -14,7 +16,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData.ShouldShowFunction;
 import net.osmand.plus.feedback.CrashBottomSheetDialogFragment;
-import net.osmand.plus.feedback.FeedbackHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.FontCache;
 
@@ -36,7 +37,7 @@ public class DashErrorFragment extends DashBaseFragment {
 		View view = inflate(R.layout.dash_error_fragment, container, false);
 		Typeface typeface = FontCache.getMediumFont();
 
-		String message = MessageFormat.format(getString(R.string.previous_run_crashed), FeedbackHelper.EXCEPTION_PATH);
+		String message = MessageFormat.format(getString(R.string.previous_run_crashed), EXCEPTION_PATH);
 		TextView tvMessage = view.findViewById(R.id.error_header);
 		tvMessage.setTypeface(typeface);
 		tvMessage.setText(message);

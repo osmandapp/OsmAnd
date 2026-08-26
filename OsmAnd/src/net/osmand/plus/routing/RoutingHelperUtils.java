@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
@@ -18,7 +19,6 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,7 +31,7 @@ public class RoutingHelperUtils {
 
 	private static final int CACHE_RADIUS = 100000;
 	public static final int MAX_BEARING_DEVIATION = 45;
-	private static final Log log = LogFactory.getLog(RoutingHelperUtils.class);
+	private static final Log log = PlatformUtil.getLog(RoutingHelperUtils.class);
 
 	@NonNull
 	public static String formatStreetName(@Nullable String name, @Nullable String ref, @Nullable String destination,

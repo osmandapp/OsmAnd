@@ -18,6 +18,12 @@ public class AMapWidget extends AidlParams {
 	private boolean rightPanelByDefault = true;
 	private Intent intentOnClick;
 
+	private String groupId;
+
+	private String menuIconUri;
+	private String lightIconUri;
+	private String darkIconUri;
+
 	public AMapWidget(String id, String menuIconName, String menuTitle,
 	                  String lightIconName, String darkIconName, String text, String description,
 	                  int order, Intent intentOnClick) {
@@ -92,6 +98,41 @@ public class AMapWidget extends AidlParams {
 		return intentOnClick;
 	}
 
+	public void setGroupId(String groupId) {
+		this.groupId = groupId;
+	}
+
+	public String getGroupId() {
+		return groupId;
+	}
+
+	/**
+	 * Sets custom widget icons as content URIs. When set, they take
+	 * precedence over the resource-name icons. The external app must grant OsmAnd
+	 * read access to the URIs (e.g. FileProvider URIs with read permission).
+	 *
+	 * @param menuIconUri  icon shown in the configure menu (optional).
+	 * @param lightIconUri widget icon for the light theme.
+	 * @param darkIconUri  widget icon for the dark theme.
+	 */
+	public void setIconUris(String menuIconUri, String lightIconUri, String darkIconUri) {
+		this.menuIconUri = menuIconUri;
+		this.lightIconUri = lightIconUri;
+		this.darkIconUri = darkIconUri;
+	}
+
+	public String getMenuIconUri() {
+		return menuIconUri;
+	}
+
+	public String getLightIconUri() {
+		return lightIconUri;
+	}
+
+	public String getDarkIconUri() {
+		return darkIconUri;
+	}
+
 	@Override
 	public void writeToBundle(Bundle bundle) {
 		bundle.putString("id", id);
@@ -104,6 +145,10 @@ public class AMapWidget extends AidlParams {
 		bundle.putInt("order", order);
 		bundle.putBoolean("rightPanelByDefault", rightPanelByDefault);
 		bundle.putParcelable("intentOnClick", intentOnClick);
+		bundle.putString("groupId", groupId);
+		bundle.putString("menuIconUri", menuIconUri);
+		bundle.putString("lightIconUri", lightIconUri);
+		bundle.putString("darkIconUri", darkIconUri);
 	}
 
 	@Override
@@ -119,5 +164,9 @@ public class AMapWidget extends AidlParams {
 		order = bundle.getInt("order");
 		rightPanelByDefault = bundle.getBoolean("rightPanelByDefault");
 		intentOnClick = bundle.getParcelable("intentOnClick");
+		groupId = bundle.getString("groupId");
+		menuIconUri = bundle.getString("menuIconUri");
+		lightIconUri = bundle.getString("lightIconUri");
+		darkIconUri = bundle.getString("darkIconUri");
 	}
 }

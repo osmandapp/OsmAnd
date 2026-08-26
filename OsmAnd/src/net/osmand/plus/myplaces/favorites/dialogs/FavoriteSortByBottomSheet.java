@@ -118,7 +118,7 @@ public class FavoriteSortByBottomSheet extends MenuBottomSheetDialogFragment {
 
 		private boolean shouldShowDivider(@NonNull FavoriteListSortMode mode) {
 			return mode == FavoriteListSortMode.LAST_MODIFIED || mode == FavoriteListSortMode.NAME_DESCENDING
-					|| mode == FavoriteListSortMode.FARTHEST;
+					|| mode == FavoriteListSortMode.NEAREST_TO_MAP_CENTER;
 					//|| mode == FavoriteSortMode.DATE_DESCENDING || mode == FavoriteSortMode.DISTANCE_ASCENDING;
 		}
 

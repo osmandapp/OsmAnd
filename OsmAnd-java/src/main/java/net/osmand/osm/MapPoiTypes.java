@@ -1,21 +1,35 @@
 package net.osmand.osm;
 
-import net.osmand.PlatformUtil;
-import net.osmand.StringMatcher;
-import net.osmand.data.Amenity;
-import net.osmand.osm.edit.OsmMapUtils;
-import net.osmand.util.Algorithms;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.Collator;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.Collator;
-import java.util.*;
-import java.util.Map.Entry;
+import net.osmand.PlatformUtil;
+import net.osmand.StringMatcher;
+import net.osmand.data.Amenity;
+import net.osmand.osm.edit.OsmMapUtils;
+import net.osmand.util.Algorithms;
 
 
 public class MapPoiTypes {
@@ -26,6 +40,8 @@ public class MapPoiTypes {
 	private List<PoiCategory> categories = new ArrayList<PoiCategory>();
 	private Set<String> forbiddenTypes = new HashSet<>();
 	private PoiCategory otherCategory;
+	List<PoiType> textPoiAdditionals = new ArrayList<PoiType>();
+	private List<String> publicTransportTypes;
 
 	public static final String WIKI_LANG = "wiki_lang";
 	public static final String WIKI_PLACE = "wiki_place";
@@ -41,19 +57,20 @@ public class MapPoiTypes {
 	public static final String ROUTES_PREFIX = "routes_"; // routes:routes_xxx (any activity type)
 	public static final String ROUTE_TRACK_POINT = "route_track_point";
 
+	public static final String TOP_INDEX_ADDITIONAL_PREFIX = "top_index_";
 	private PoiTranslator poiTranslator = null;
 	private boolean init;
+	
+	// caches
 	Map<String, PoiType> poiTypesByTag = new LinkedHashMap<String, PoiType>();
 	Map<String, PoiType> defaultPoiTypesByTag = new HashMap<String, PoiType>();
 	Map<String, String> deprecatedTags = new LinkedHashMap<String, String>();
 	Map<String, String> poiAdditionalCategoryIconNames = new LinkedHashMap<String, String>();
 	Map<String, Integer> poiCategoryIndex = new HashMap<>();
-	List<PoiType> textPoiAdditionals = new ArrayList<PoiType>();
-
+	Map<String, AbstractPoiType> dynCacheByKey = new ConcurrentHashMap<>();
 	public Map<String, PoiType> topIndexPoiAdditional = new LinkedHashMap<String, PoiType>();
-	public static final String TOP_INDEX_ADDITIONAL_PREFIX = "top_index_";
+	
 
-	private List<String> publicTransportTypes;
 
 	public MapPoiTypes(String fileName) {
 		this.resourceName = fileName;
@@ -664,6 +681,7 @@ public class MapPoiTypes {
 		ref.setTopVisible(poiAdditional.isTopVisible());
 		ref.setText(poiAdditional.isText());
 		ref.setOrder(poiAdditional.getOrder());
+		ref.setNonIndx(poiAdditional.isNonIndx());
 		ref.setHidden(poiAdditional.isHidden());
 		ref.setOsmTag(poiAdditional.getOsmTag());
 		ref.setNotEditableOsm(poiAdditional.isNotEditableOsm());
@@ -703,6 +721,8 @@ public class MapPoiTypes {
 		tp.setAdditional(lastType != null ? lastType :
 			 (lastFilter != null ? lastFilter : lastCategory));
 		tp.setTopVisible(Boolean.parseBoolean(parser.getAttributeValue("", "top")));
+		tp.setNonIndx(!Boolean.parseBoolean(parser.getAttributeValue("", "top")) ||
+				Boolean.parseBoolean(parser.getAttributeValue("", "no_indx")));
 		tp.setText("text".equals(parser.getAttributeValue("", "type")));
 		tp.setHidden(Boolean.parseBoolean(parser.getAttributeValue("", "hidden")));
 		String orderStr = parser.getAttributeValue("", "order");
@@ -751,6 +771,7 @@ public class MapPoiTypes {
 		if (lang != null) {
 			otag += ":" + lang;
 		}
+		tp.setNonIndx(Boolean.parseBoolean(parser.getAttributeValue("", "no_indx")));
 		tp.setBaseLangType(langBaseType);
 		tp.setLang(lang);
 		tp.setOsmTag(otag);
@@ -808,15 +829,7 @@ public class MapPoiTypes {
 	}
 
 	private PoiType getPoiAdditionalByKey(AbstractPoiType p, String name) {
-		List<PoiType> pp = p.getPoiAdditionals();
-		if (pp != null) {
-			for (PoiType pt : pp) {
-				if (pt.getKeyName().equals(name)) {
-					return pt;
-				}
-			}
-		}
-		return null;
+		return p.getPoiAdditionalByKeyName(name);
 	}
 
 	public PoiType getTextPoiAdditionalByKey(String name) {
@@ -848,7 +861,30 @@ public class MapPoiTypes {
 		return null;
 	}
 
+	private AbstractPoiType EMPTY_POI_TYPE = new AbstractPoiType("EMPTY", this) {
+
+		@Override
+		public Map<PoiCategory, LinkedHashSet<String>> putTypes(Map<PoiCategory, LinkedHashSet<String>> acceptedTypes) {
+			return Collections.emptyMap();
+		}
+	};
+
 	public AbstractPoiType getAnyPoiAdditionalTypeByKey(String name) {
+		AbstractPoiType pt = dynCacheByKey.get(name);
+		if (pt == null) {
+			pt = getAnyPoiAdditionalTypeByKeyNoCache(name);
+			if (pt == null) {
+				pt = EMPTY_POI_TYPE;
+			}
+			dynCacheByKey.put(name, pt);
+		}
+		if (pt == EMPTY_POI_TYPE) {
+			return null;
+		}
+		return pt;
+	}
+	
+	private AbstractPoiType getAnyPoiAdditionalTypeByKeyNoCache(String name) {
 		for (int i = 0; i < categories.size(); i++) {
 			PoiCategory pc = categories.get(i);
 			AbstractPoiType add = getPoiAdditionalType(pc, name);
@@ -929,10 +965,10 @@ public class MapPoiTypes {
 
 	public String getBasePoiName(AbstractPoiType abstractPoiType) {
 		String name = abstractPoiType.getKeyName();
-		if(name.startsWith("osmand_")) {
+		if (name.startsWith("osmand_")) {
 			name = name.substring("osmand_".length());
 		}
-		if(name.startsWith("amenity_")) {
+		if (name.startsWith("amenity_")) {
 			name = name.substring("amenity_".length());
 		}
 		name = name.replace('_', ' ');

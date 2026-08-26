@@ -4,32 +4,31 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:background="?attr/activity_background_color"
+	android:paddingTop="@dimen/content_padding"
+	android:paddingBottom="@dimen/content_padding"
 	app:shimmer_base_alpha="1.0"
 	app:shimmer_highlight_alpha="0.2">
 
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:background="?attr/activity_background_color"
+		android:background="@drawable/bg_list_card_round"
 		android:orientation="vertical">
-
-		<include layout="@layout/list_item_divider" />
 
 		<LinearLayout
 			android:id="@+id/nearby_title_container"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:background="?attr/list_background_color"
+			android:layout_height="@dimen/list_group_header_height"
 			android:orientation="horizontal">
 
 			<net.osmand.plus.widgets.TextViewEx
 				style="@style/TitleStyle.Medium"
 				android:layout_width="0dp"
-				android:layout_height="wrap_content"
+				android:layout_height="match_parent"
 				android:layout_marginStart="@dimen/content_padding"
-				android:layout_marginTop="@dimen/content_padding_small"
-				android:layout_marginBottom="@dimen/content_padding_small"
 				android:layout_weight="1"
+				android:gravity="center_vertical"
 				android:text="@string/popular_places_nearby"
 				android:textColor="?android:textColorPrimary" />
 
@@ -70,41 +69,19 @@
 					android:id="@+id/nearByList"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:background="?attr/list_background_color"
 					android:padding="0dp" />
 
-				<FrameLayout
-					android:id="@+id/show_all_button"
+				<View
 					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:background="?attr/list_background_color"
-					android:minHeight="@dimen/route_info_list_item_height"
-					android:orientation="vertical">
+					android:layout_height="1dp"
+					android:layout_marginStart="@dimen/content_padding"
+					android:background="?attr/divider_color_basic" />
 
-					<View
-						android:id="@+id/divider_list"
-						android:layout_width="match_parent"
-						android:layout_height="1dp"
-						android:layout_gravity="top"
-						android:layout_marginStart="@dimen/content_padding"
-						android:background="?attr/divider_color_basic" />
-
-					<net.osmand.plus.widgets.TextViewEx
-						android:id="@+id/show_all_btn"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:layout_gravity="center_vertical|start"
-						android:layout_marginStart="@dimen/content_padding"
-						android:paddingTop="@dimen/list_header_padding"
-						android:paddingBottom="@dimen/list_header_padding"
-						android:text="@string/shared_string_show_all"
-						android:textAllCaps="true"
-						android:textColor="?attr/active_color_basic"
-						android:textSize="@dimen/default_sub_text_size"
-						app:typefaceWeight="medium"
-						tools:text="SHOW ALL"
-						tools:visibility="visible" />
-				</FrameLayout>
+				<include
+					android:id="@+id/show_all_button"
+					layout="@layout/card_action_button"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content" />
 
 			</LinearLayout>
 
@@ -113,8 +90,6 @@
 		<include layout="@layout/nearby_places_no_internet" />
 
 		<include layout="@layout/empty_nearby_places" />
-
-		<include layout="@layout/list_item_divider" />
 
 	</LinearLayout>
 </FrameLayout>

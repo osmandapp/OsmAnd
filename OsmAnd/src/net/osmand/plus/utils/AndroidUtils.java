@@ -253,6 +253,43 @@ public class AndroidUtils {
 		return FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", file);
 	}
 
+	private static final int PERSISTABLE_URI_MODE_FLAGS = Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION;
+
+	/** Persists the required permission only when {@code grantedFlags} actually covers it. */
+	public static boolean takePersistableUriPermission(@NonNull Context context, @NonNull Uri uri, int grantedFlags, int requiredFlags) {
+		int requiredModeFlags = requiredFlags & PERSISTABLE_URI_MODE_FLAGS;
+		if ((grantedFlags & requiredModeFlags) != requiredModeFlags) {
+			return false;
+		}
+		return takePersistableUriPermission(context, uri, requiredFlags);
+	}
+
+	public static boolean takePersistableUriPermission(@NonNull Context context, @NonNull Uri uri, int requiredFlags) {
+		return updatePersistableUriPermission(context, uri, requiredFlags, true);
+	}
+
+	public static boolean releasePersistableUriPermission(@NonNull Context context, @NonNull Uri uri, int requiredFlags) {
+		return updatePersistableUriPermission(context, uri, requiredFlags, false);
+	}
+
+	private static boolean updatePersistableUriPermission(@NonNull Context context, @NonNull Uri uri, int requiredFlags, boolean take) {
+		int modeFlags = requiredFlags & PERSISTABLE_URI_MODE_FLAGS;
+		if (modeFlags == 0) {
+			return false;
+		}
+		try {
+			if (take) {
+				context.getContentResolver().takePersistableUriPermission(uri, modeFlags);
+			} else {
+				context.getContentResolver().releasePersistableUriPermission(uri, modeFlags);
+			}
+			return true;
+		} catch (RuntimeException e) {
+			LOG.warn("Failed to " + (take ? "persist" : "release") + " URI permission: " + uri, e);
+			return false;
+		}
+	}
+
 	public static boolean startActivityIfSafe(@NonNull Context context, @NonNull Intent intent) {
 		return startActivityIfSafe(context, intent, null);
 	}

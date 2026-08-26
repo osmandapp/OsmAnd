@@ -3,18 +3,15 @@ package net.osmand.plus.helpers;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
-import androidx.appcompat.content.res.AppCompatResources;
+import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.osm.AbstractPoiType;
@@ -27,9 +24,12 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.DiscountBottomSheet;
 import net.osmand.plus.chooseplan.MapsPlusPlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.chooseplan.OsmAndProPlanFragment;
+import net.osmand.plus.chooseplan.button.PurchasingUtils;
+import net.osmand.plus.chooseplan.button.SubscriptionButton;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.inapp.InAppPurchases;
@@ -43,7 +43,6 @@ import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONArray;
@@ -52,6 +51,7 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -76,10 +76,12 @@ public class DiscountHelper {
 	private static final String OPEN_ACTIVITY = "open_activity";
 
 	private static final String SHOW_CHOOSE_PLAN_PREFIX = "show-choose-plan:";
+	private static final String SELECTED_CHOOSE_PLAN_BUTTON_KEY = "selected_choose_plan_btn";
 	private static final String CHOOSE_PLAN_TYPE_FREE = "free-version";
 	private static final String CHOOSE_PLAN_TYPE_SEA_DEPTH = "sea-depth";
 	private static final String CHOOSE_PLAN_TYPE_HILLSHADE = "hillshade";
 	private static final String CHOOSE_PLAN_TYPE_WIKIPEDIA = "wikipedia";
+	private static final String WEATHER = "weather";
 	private static final String CHOOSE_PLAN_TYPE_WIKIVOYAGE = "wikivoyage";
 	private static final String CHOOSE_PLAN_TYPE_OSMAND_CLOUD = "osmand-cloud";
 	private static final String CHOOSE_PLAN_TYPE_ADVANCED_WIDGETS = "advanced-widgets";
@@ -100,7 +102,8 @@ public class DiscountHelper {
 	public static void checkAndDisplay(MapActivity mapActivity) {
 		OsmandApplication app = mapActivity.getApp();
 		OsmandSettings settings = app.getSettings();
-		if (settings.DO_NOT_SHOW_STARTUP_MESSAGES.get() || !settings.INAPPS_READ.get()) {
+		boolean forceShowDiscountBottomSheet = settings.SHOULD_SHOW_DISCOUNT_BOTTOM_SHEET.get();
+		if (!settings.INAPPS_READ.get() && !(Version.isDeveloperVersion(app) && forceShowDiscountBottomSheet)) {
 			return;
 		}
 		if (mBannerVisible) {
@@ -143,21 +146,27 @@ public class DiscountHelper {
 
 			@Override
 			protected void onPostExecute(String response) {
-				if (!Algorithms.isEmpty(response)) {
-					processDiscountResponse(response, mapActivity);
+				try {
+					JSONObject obj = null;
+					if (settings.SHOULD_SHOW_DISCOUNT_BOTTOM_SHEET.get()) {
+						obj = new JSONObject(app.getString(R.string.test_discount_response));
+					} else if (!Algorithms.isEmpty(response)) {
+						obj = new JSONObject(response);
+					}
+					if (obj != null && obj.length() > 0) {
+						processDiscountResponse(obj, mapActivity);
+					}
+				} catch (JSONException e) {
+					logError("JSON parsing error: ", e);
 				}
 			}
 		});
 	}
 
 	@SuppressLint("SimpleDateFormat")
-	private static void processDiscountResponse(String response, MapActivity mapActivity) {
+	private static void processDiscountResponse(@NonNull JSONObject obj, MapActivity mapActivity) {
 		try {
 			OsmandApplication app = mapActivity.getApp();
-			JSONObject obj = new JSONObject(response);
-			if (obj.length() == 0) {
-				return;
-			}
 			ControllerData data = ControllerData.parse(app, obj);
 			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 			Date start = df.parse(obj.getString("start"));
@@ -169,6 +178,15 @@ public class DiscountHelper {
 			boolean showChristmasDialog = obj.optBoolean("show_christmas_dialog", false);
 
 			if (!validateUrl(app, data.url)) {
+				return;
+			}
+
+			if (app.getSettings().SHOULD_SHOW_DISCOUNT_BOTTOM_SHEET.get()) {
+				InAppPurchaseHelper purchaseHelper = mapActivity.getPurchaseHelper();
+				if (purchaseHelper != null) {
+					purchaseHelper.requestInventory(false);
+				}
+				showDiscountBanner(mapActivity, data);
 				return;
 			}
 
@@ -266,6 +284,19 @@ public class DiscountHelper {
 		return true;
 	}
 
+	@Nullable
+	private static String getChoosePlanType(@NonNull String url) {
+		if (url.startsWith(SHOW_CHOOSE_PLAN_PREFIX) && url.length() > SHOW_CHOOSE_PLAN_PREFIX.length()) {
+			return url.substring(SHOW_CHOOSE_PLAN_PREFIX.length());
+		}
+		return null;
+	}
+
+	@Nullable
+	private static String getCurrentSalePlanType() {
+		return mData == null ? null : mData.choosePlanType;
+	}
+
 	public static String parseUrl(OsmandApplication app, String url) {
 		if (!Algorithms.isEmpty(url)) {
 			int i = url.indexOf("osmand-market-app:");
@@ -285,56 +316,114 @@ public class DiscountHelper {
 		return result;
 	}
 
-	private static void showDiscountBanner(MapActivity mapActivity, ControllerData data) {
-		int iconId = mapActivity.getResources().getIdentifier(data.iconId, "drawable", mapActivity.getApp().getPackageName());
-		DiscountBarController toolbarController = new DiscountBarController();
-		if (data.bgColor != -1) {
-			LayerDrawable bgLand = (LayerDrawable) AppCompatResources.getDrawable(mapActivity, R.drawable.discount_bar_bg_land);
-			if (bgLand != null) {
-				((GradientDrawable) bgLand.findDrawableByLayerId(R.id.color_bg)).setColor(data.bgColor);
-			}
-			ColorDrawable bg = new ColorDrawable(data.bgColor);
-			toolbarController.setBgs(bg, bg, bgLand, bgLand);
-		}
-		toolbarController.setTitle(data.message);
-		toolbarController.setTitleTextClrs(data.titleColor, data.titleColor);
-		toolbarController.setDescription(data.description);
-		toolbarController.setDescrTextClrs(data.descrColor, data.descrColor);
-		toolbarController.setBackBtnIconIds(iconId, iconId);
-		toolbarController.setBackBtnIconClrs(data.iconColor, data.iconColor);
-		toolbarController.setStatusBarColor(data.statusBarColor);
-		if (!TextUtils.isEmpty(data.textBtnTitle)) {
-			toolbarController.setTextBtnVisible(true);
-			toolbarController.setTextBtnTitle(data.textBtnTitle);
-			toolbarController.setTextBtnTitleClrs(data.textBtnTitleColor, data.textBtnTitleColor);
-		}
-		if (!Algorithms.isEmpty(data.url)) {
-			View.OnClickListener clickListener = v -> {
-				mapActivity.getApp().logEvent("motd_click");
-				mBannerVisible = false;
-				mapActivity.hideTopToolbar(toolbarController);
-				openUrl(mapActivity, data.url);
-			};
-			toolbarController.setOnBackButtonClickListener(clickListener);
-			toolbarController.setOnTitleClickListener(clickListener);
-			toolbarController.setOnTextBtnClickListener(clickListener);
-		}
-		toolbarController.setOnCloseButtonClickListener(v -> {
-			mapActivity.getApp().logEvent("motd_close");
-			mBannerVisible = false;
-			mapActivity.hideTopToolbar(toolbarController);
-		});
-
+	private static void showDiscountBanner(@NonNull MapActivity mapActivity, ControllerData data) {
 		mData = data;
-		mBannerVisible = true;
-
-		mapActivity.showTopToolbar(toolbarController);
+		mBannerVisible = DiscountBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), data);
+		mapActivity.getMapActions().updateDrawerMenu();
 	}
 
 	private static void showPoiFilter(MapActivity mapActivity, PoiUIFilter poiFilter) {
 		QuickSearchHelper.showPoiFilterOnMap(mapActivity, poiFilter, () -> mFilterVisible = false);
 		mFilter = poiFilter;
 		mFilterVisible = true;
+	}
+
+	public static void onDiscountBottomSheetDismissed() {
+		mBannerVisible = false;
+	}
+
+	@Nullable
+	public static String getCurrentSaleTitle() {
+		return mData != null ? mData.message : null;
+	}
+
+	@Nullable
+	public static String getCurrentSaleDiscount(@NonNull OsmandApplication app, boolean nightMode, boolean includeMapsPlan) {
+		if (mData == null) {
+			return null;
+		}
+		if (!Algorithms.isEmpty(mData.discount)) {
+			return mData.discount;
+		}
+		InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
+		if (purchaseHelper == null) {
+			return null;
+		}
+		List<InAppSubscription> subscriptions = getCurrentSaleSubscriptions(app, purchaseHelper, includeMapsPlan);
+		List<SubscriptionButton> buttons = PurchasingUtils.collectSubscriptionButtons(app, purchaseHelper, subscriptions, nightMode);
+		for (SubscriptionButton button : buttons) {
+			InAppSubscription subscription = button.getPurchaseItem();
+			if (button.isDiscountApplied()
+					&& subscription.getIntroductoryInfo() != null
+					&& !Algorithms.isEmpty(button.getDiscount())) {
+				return button.getDiscount();
+			}
+		}
+		return null;
+	}
+
+	@NonNull
+	private static List<InAppSubscription> getCurrentSaleSubscriptions(@NonNull OsmandApplication app,
+	                                                                   @NonNull InAppPurchaseHelper purchaseHelper, boolean includeMapsPlan) {
+		if (mData != null && !Algorithms.isEmpty(mData.choosePlanType)) {
+			String planType = mData.choosePlanType;
+			if (CHOOSE_PLAN_TYPE_PRO.equals(planType)) {
+				return PurchasingUtils.getVisibleProSubscriptions(app, purchaseHelper);
+			} else if (CHOOSE_PLAN_TYPE_MAPS_PLUS.equals(planType) && includeMapsPlan) {
+				return PurchasingUtils.getVisibleMapsSubscriptions(app, purchaseHelper);
+			}
+			OsmAndFeature feature = mData.getChoosePlanFeature();
+			if (feature != null && (!feature.isAvailableInMapsPlus() || includeMapsPlan)) {
+				return getFeatureSubscriptions(app, purchaseHelper, feature);
+			}
+		}
+		return Collections.emptyList();
+	}
+
+	@NonNull
+	private static List<InAppSubscription> getFeatureSubscriptions(@NonNull OsmandApplication app,
+	                                                               @NonNull InAppPurchaseHelper purchaseHelper,
+	                                                               @NonNull OsmAndFeature feature) {
+		List<InAppSubscription> result = new ArrayList<>();
+		if (feature.isAvailableInMapsPlus()) {
+			result.addAll(PurchasingUtils.getVisibleMapsSubscriptions(app, purchaseHelper));
+		}
+		result.addAll(PurchasingUtils.getVisibleProSubscriptions(app, purchaseHelper));
+		return result;
+	}
+
+	public static boolean hasCurrentSale() {
+		return mData != null && !Algorithms.isEmpty(mData.message);
+	}
+
+	public static boolean shouldShowCurrentSaleInDrawer(@NonNull OsmandApplication app) {
+		return hasCurrentSale() && !Version.isPaidVersion(app);
+	}
+
+	@DrawableRes
+	public static int getCurrentSaleDrawerIconId(boolean nightMode) {
+		return isCurrentSaleProPurchase()
+				? (nightMode ? R.drawable.ic_action_osmand_pro_logo_colored_night : R.drawable.ic_action_osmand_pro_logo_colored)
+				: R.drawable.ic_action_osmand_maps_plus;
+	}
+
+	private static boolean isCurrentSaleProPurchase() {
+		String planType = getCurrentSalePlanType();
+		return CHOOSE_PLAN_TYPE_PRO.equals(planType);
+	}
+
+	public static void openCurrentSale(@NonNull MapActivity mapActivity) {
+		if (mData != null && !Algorithms.isEmpty(mData.url)) {
+			openUrl(mapActivity, mData.url);
+		} else {
+			ChoosePlanFragment.showDefaultInstance(mapActivity);
+		}
+	}
+
+	public static void onDiscountBottomSheetClicked(@NonNull MapActivity mapActivity, @NonNull String url) {
+		mapActivity.getApp().logEvent("motd_click");
+		mBannerVisible = false;
+		openUrl(mapActivity, url);
 	}
 
 	public static void openUrl(MapActivity mapActivity, String url) {
@@ -415,7 +504,7 @@ public class DiscountHelper {
 	private static void showDialogForPlanType(@NonNull MapActivity mapActivity, @NonNull String planType) {
 		String selectedButtonId = null;
 		if (mData != null && mData.urlParams != null) {
-			selectedButtonId = mData.urlParams.optString("selected_choose_plan_btn");
+			selectedButtonId = mData.urlParams.optString(SELECTED_CHOOSE_PLAN_BUTTON_KEY);
 		}
 		switch (planType) {
 			case CHOOSE_PLAN_TYPE_FREE:
@@ -503,30 +592,128 @@ public class DiscountHelper {
 		}
 	}
 
-	private static class ControllerData {
+	public static class ControllerData {
 
-		String message;
-		String description;
-		String iconId;
-		String url;
-		String textBtnTitle;
+		private String choosePlanType;
+		private String message;
+		private String description;
+		private String iconId;
+		private String url;
+		private String textBtnTitle;
+		private String discount;
 
 		@ColorInt
-		int iconColor = -1;
+		private int iconColor = -1;
 		@ColorInt
-		int bgColor = -1;
+		private int bgColor = -1;
 		@ColorInt
-		int titleColor = -1;
+		private int titleColor = -1;
 		@ColorInt
-		int descrColor = -1;
+		private int descrColor = -1;
 		@ColorInt
-		int statusBarColor = -1;
+		private int statusBarColor = -1;
 		@ColorInt
-		int textBtnTitleColor = -1;
+		private int textBtnTitleColor = -1;
 
-		JSONObject urlParams;
-		JSONObject activityJson;
-		JSONArray oneOfConditions;
+		private JSONObject urlParams;
+		private JSONObject activityJson;
+		private JSONArray oneOfConditions;
+
+		@Nullable
+		public String getChoosePlanType() {
+			return choosePlanType;
+		}
+
+		@Nullable
+		public String getMessage() {
+			return message;
+		}
+
+		@Nullable
+		public String getDescription() {
+			return description;
+		}
+
+		@Nullable
+		public String getIconId() {
+			return iconId;
+		}
+
+		@Nullable
+		public String getUrl() {
+			return url;
+		}
+
+		@Nullable
+		public String getTextBtnTitle() {
+			return textBtnTitle;
+		}
+
+		@Nullable
+		public String getDiscount() {
+			return discount;
+		}
+
+		@Nullable
+		public String getSelectedChoosePlanButtonId() {
+			return urlParams == null ? null : urlParams.optString(SELECTED_CHOOSE_PLAN_BUTTON_KEY);
+		}
+
+		@ColorInt
+		public int getIconColor() {
+			return iconColor;
+		}
+
+		@ColorInt
+		public int getTitleColor() {
+			return titleColor;
+		}
+
+		@ColorInt
+		public int getDescriptionColor() {
+			return descrColor;
+		}
+
+		@ColorInt
+		public int getTextBtnTitleColor() {
+			return textBtnTitleColor;
+		}
+
+		@Nullable
+		public OsmAndFeature getChoosePlanFeature() {
+			String planType = choosePlanType;
+			if (Algorithms.isEmpty(planType)) {
+				return null;
+			}
+			switch (planType) {
+				case WEATHER:
+					return OsmAndFeature.WEATHER;
+				case CHOOSE_PLAN_TYPE_SEA_DEPTH:
+					return OsmAndFeature.NAUTICAL;
+				case CHOOSE_PLAN_TYPE_HILLSHADE:
+					return OsmAndFeature.TERRAIN;
+				case CHOOSE_PLAN_TYPE_WIKIPEDIA:
+					return OsmAndFeature.WIKIPEDIA;
+				case CHOOSE_PLAN_TYPE_WIKIVOYAGE:
+					return OsmAndFeature.WIKIVOYAGE;
+				case CHOOSE_PLAN_TYPE_OSMAND_CLOUD:
+					return OsmAndFeature.OSMAND_CLOUD;
+				case CHOOSE_PLAN_TYPE_ADVANCED_WIDGETS:
+					return OsmAndFeature.ADVANCED_WIDGETS;
+				case CHOOSE_PLAN_TYPE_HOURLY_MAP_UPDATES:
+					return OsmAndFeature.HOURLY_MAP_UPDATES;
+				case CHOOSE_PLAN_TYPE_MONTHLY_MAP_UPDATES:
+					return OsmAndFeature.MONTHLY_MAP_UPDATES;
+				case CHOOSE_PLAN_TYPE_UNLIMITED_MAP_DOWNLOADS:
+					return OsmAndFeature.UNLIMITED_MAP_DOWNLOADS;
+				case CHOOSE_PLAN_TYPE_COMBINED_WIKI:
+					return OsmAndFeature.COMBINED_WIKI;
+				case CHOOSE_PLAN_TYPE_EXTERNAL_SENSORS_SUPPORT:
+					return OsmAndFeature.EXTERNAL_SENSORS_SUPPORT;
+				default:
+					return null;
+			}
+		}
 
 		static ControllerData parse(OsmandApplication app, JSONObject obj) throws JSONException {
 			ControllerData res = new ControllerData();
@@ -534,7 +721,9 @@ public class DiscountHelper {
 			res.description = obj.getString("description");
 			res.iconId = obj.getString("icon");
 			res.url = parseUrl(app, obj.getString("url"));
+			res.choosePlanType = DiscountHelper.getChoosePlanType(res.url);
 			res.textBtnTitle = obj.optString("button_title");
+			res.discount = obj.optString("discount");
 			res.iconColor = parseColor("icon_color_default_light", obj);
 			res.bgColor = parseColor("bg_color", obj);
 			res.titleColor = parseColor("title_color", obj);
@@ -553,31 +742,6 @@ public class DiscountHelper {
 				return Algorithms.parseColor(color);
 			}
 			return -1;
-		}
-	}
-
-	public static class DiscountBarController extends TopToolbarController {
-
-		private int statusBarColor = NO_COLOR;
-
-		DiscountBarController() {
-			super(TopToolbarControllerType.DISCOUNT);
-			setSingleLineTitle(false);
-			setBackBtnIconClrIds(0, 0);
-			setCloseBtnIconClrIds(0, 0);
-			setTitleTextClrIds(R.color.text_color_tab_active_light, R.color.text_color_tab_active_dark);
-			setDescrTextClrIds(R.color.text_color_tab_active_light, R.color.text_color_tab_active_dark);
-			setBgIds(R.color.discount_bar_bg, R.color.discount_bar_bg,
-					R.drawable.discount_bar_bg_land, R.drawable.discount_bar_bg_land);
-		}
-
-		@Override
-		public int getStatusBarColor(Context context, boolean nightMode) {
-			return statusBarColor;
-		}
-
-		void setStatusBarColor(int statusBarColor) {
-			this.statusBarColor = statusBarColor;
 		}
 	}
 
@@ -613,7 +777,8 @@ public class DiscountHelper {
 		@Override
 		boolean matches(@NonNull String value) {
 			return switch (value) {
-				case FEATURE_PRO -> !InAppPurchaseUtils.isOsmAndProPurchased(app) && !InAppPurchaseUtils.isPromoSubscribed(app);
+				case FEATURE_PRO ->
+						!InAppPurchaseUtils.isOsmAndProPurchased(app) && !InAppPurchaseUtils.isPromoSubscribed(app);
 				case FEATURE_MAPS ->
 						!InAppPurchaseUtils.isMapsPlusPurchased(app) && !InAppPurchaseUtils.isFullVersionPurchased(app);
 				case FEATURE_LIVE -> !InAppPurchaseUtils.isLiveUpdatesPurchased(app);

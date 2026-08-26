@@ -69,13 +69,15 @@ public final class SettingsScreen extends BaseAndroidAutoScreen {
 					getScreenManager().push(new MapMagnifierScreen(getCarContext()));
 				});
 
-		ItemList.Builder configureMapSectionBuilder = new ItemList.Builder();
-		configureMapSectionBuilder.addItem(magnifierRowBuilder.build());
 
-		templateBuilder.addSectionedList(
-				SectionedItemList.create(
-						configureMapSectionBuilder.build(),
-						getCarContext().getString(R.string.configure_map)));
+		//todo revert when aa scale setting fixed
+//		ItemList.Builder configureMapSectionBuilder = new ItemList.Builder();
+//		configureMapSectionBuilder.addItem(magnifierRowBuilder.build());
+
+//		templateBuilder.addSectionedList(
+//				SectionedItemList.create(
+//						configureMapSectionBuilder.build(),
+//						getCarContext().getString(R.string.configure_map)));
 
         /*
         ItemList.Builder sectionBBuilder = new ItemList.Builder();

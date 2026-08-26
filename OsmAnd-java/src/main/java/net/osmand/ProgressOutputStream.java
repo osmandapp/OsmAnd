@@ -45,4 +45,9 @@ public class ProgressOutputStream extends OutputStream {
 		this.out.write(b);
 		submitProgress(1);
 	}
+
+	@Override
+	public void flush() throws IOException {
+		out.flush();
+	}
 }

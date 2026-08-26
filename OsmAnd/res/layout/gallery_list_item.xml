@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="@android:color/transparent"
+	android:foreground="?attr/selectableItemBackground"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center_vertical"
+		android:minHeight="@dimen/bottom_sheet_list_item_height"
+		android:orientation="horizontal"
+		android:paddingHorizontal="@dimen/content_padding"
+		android:paddingVertical="@dimen/content_padding_half">
+
+		<androidx.appcompat.widget.AppCompatCheckBox
+			android:id="@+id/selection_check"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:background="@null"
+			android:clickable="false"
+			android:focusable="false"
+			android:minWidth="0dp"
+			android:minHeight="0dp"
+			android:padding="0dp"
+			android:visibility="gone"
+			tools:visibility="visible" />
+
+		<FrameLayout
+			android:layout_width="@dimen/gallery_list_preview_size"
+			android:layout_height="@dimen/gallery_list_preview_size">
+
+			<ImageView
+				android:id="@+id/image"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:scaleType="centerCrop"
+				tools:src="@drawable/mm_tourism_museum" />
+
+			<View
+				android:id="@+id/video_scrim"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:background="@color/color_black_transparent_30"
+				android:visibility="gone"
+				tools:visibility="visible" />
+
+			<ImageView
+				android:id="@+id/play_icon"
+				android:layout_width="@dimen/standard_icon_size"
+				android:layout_height="@dimen/standard_icon_size"
+				android:layout_gravity="center"
+				android:visibility="gone"
+				tools:src="@drawable/ic_action_play_in_shape"
+				tools:visibility="visible" />
+
+		</FrameLayout>
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_weight="1"
+			android:orientation="vertical">
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/title"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:ellipsize="middle"
+				android:maxLines="1"
+				android:textSize="@dimen/default_list_text_size"
+				app:typefaceWeight="medium"
+				tools:text="Photo_2025-12-03_10-15-42.jpg" />
+
+			<TextView
+				android:id="@+id/description"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="2dp"
+				android:maxLines="1"
+				android:textSize="@dimen/default_sub_text_size"
+				tools:text="3 Dec 2025 • 1.2 MB • 03:45" />
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<View
+		android:id="@+id/divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginStart="@dimen/content_padding"
+		android:background="?attr/divider_color" />
+
+</LinearLayout>

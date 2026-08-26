@@ -24,6 +24,9 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 public class MapUtils {
 
 	public static final int ROUNDING_ERROR = 3;
+	// for haversine use R = 6372.8 km instead of 6371 km
+	public static final double HAVERSINE_EARTH_RADIUS_METERS = 6372800.0;
+	public static final double VECTOR_LINE_EARTH_RADIUS_METERS = 6371000.0;
 	private static final int EARTH_RADIUS_B = 6356752;
 	static final int EARTH_RADIUS_A = 6378137;
 	public static final double MIN_LATITUDE = -85.0511;
@@ -193,24 +196,6 @@ public class MapUtils {
 	/**
 	 * Gets distance in meters
 	 */
-	public static double getDistance(double lat1, double lon1, double lat2, double lon2) {
-		double R = 6372.8; // for haversine use R = 6372.8 km instead of 6371 km
-		double dLat = toRadians(lat2 - lat1);
-		double dLon = toRadians(lon2 - lon1);
-		double sinHalfLat = Math.sin(dLat / 2);
-		double sinHalfLon = Math.sin(dLon / 2);
-		double a = sinHalfLat * sinHalfLat +
-				Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
-						sinHalfLon * sinHalfLon;
-		//double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-		//return R * c * 1000;
-		// simplify haversine:
-		return (2 * R * 1000 * Math.asin(Math.sqrt(a)));
-	}
-
-	/**
-	 * Gets distance in meters
-	 */
 	public static double getDistance(LatLon l1, LatLon l2) {
 		return getDistance(l1.getLatitude(), l1.getLongitude(), l2.getLatitude(), l2.getLongitude());
 	}
@@ -222,31 +207,54 @@ public class MapUtils {
 		return getDistance(l1.getLatitude(), l1.getLongitude(), l2.getLatitude(), l2.getLongitude());
 	}
 
+	/**
+	 * Gets distance in meters.
+	 */
+	public static double getDistance(double lat1, double lon1, double lat2, double lon2) {
+		return getDistance(lat1, lon1, lat2, lon2, HAVERSINE_EARTH_RADIUS_METERS);
+	}
+
+	/**
+	 * Gets distance in meters using the specified Earth radius.
+	 */
+	public static double getDistance(double lat1, double lon1, double lat2, double lon2, double earthRadiusMeters) {
+		double dLat = toRadians(lat2 - lat1);
+		double dLon = toRadians(lon2 - lon1);
+		double sinHalfLat = Math.sin(dLat / 2);
+		double sinHalfLon = Math.sin(dLon / 2);
+		double a = sinHalfLat * sinHalfLat
+				+ Math.cos(toRadians(lat1))
+				* Math.cos(toRadians(lat2))
+				* sinHalfLon
+				* sinHalfLon;
+		return 2 * earthRadiusMeters * Math.asin(Math.sqrt(a));
+	}
+
 	public static double checkLongitude(double longitude) {
 		if (longitude >= MIN_LONGITUDE && longitude <= MAX_LONGITUDE) {
 			return longitude;
 		}
-		while (longitude <= MIN_LONGITUDE || longitude > MAX_LONGITUDE) {
-			if (longitude < 0) {
-				longitude += LONGITUDE_TURN;
-			} else {
-				longitude -= LONGITUDE_TURN;
-			}
+		double mod = (longitude - MIN_LONGITUDE) % LONGITUDE_TURN;
+		if (mod < 0) {
+			mod += LONGITUDE_TURN;
 		}
-		return longitude;
+		return mod + MIN_LONGITUDE;
+	}
+
+	public static boolean isValidLatLon(double latitude, double longitude) {
+		return latitude >= -90.0 && latitude <= 90.0
+				&& longitude >= MIN_LONGITUDE && longitude <= MAX_LONGITUDE;
 	}
 
 	public static double checkLatitude(double latitude) {
 		if (latitude >= MIN_LATITUDE && latitude <= MAX_LATITUDE) {
 			return latitude;
 		}
-		while (latitude < -90 || latitude > 90) {
-			if (latitude < 0) {
-				latitude += LATITUDE_TURN;
-			} else {
-				latitude -= LATITUDE_TURN;
-			}
+		double mod = (latitude - (-LATITUDE_TURN / 2)) % LATITUDE_TURN;
+		if (mod < 0) {
+			mod += LATITUDE_TURN;
 		}
+		latitude = mod + (-90.0);
 		if (latitude < MIN_LATITUDE) {
 			return MIN_LATITUDE;
 		} else if (latitude > MAX_LATITUDE) {
@@ -436,7 +444,9 @@ public class MapUtils {
 	public static String buildShortOsmUrl(double latitude, double longitude, int zoom) {
 		return BASE_SHORT_OSM_URL + createShortLinkString(latitude, longitude, zoom) + "?m";
 	}
-
+	
+	// Zoom represents 1 pixel (256x256) in the tile of the given zoom
+	// 1 symbol - (z=-5), 2 symbols (z=-2), 3 symbols (z=1), 4 symbols (z=4), 5 symbols (z=7)
 	public static String createShortLinkString(double latitude, double longitude, int zoom) {
 		long lat = (long) (((latitude + 90d)/180d)*(1L << 32));
 		long lon = (long) (((longitude + 180d)/360d)*(1L << 32));
@@ -520,13 +530,31 @@ public class MapUtils {
 	/**
 	 * interleaves the bits of two 32-bit numbers. the result is known as a Morton code.
 	 */
-	public static long interleaveBits(long x, long y) {
+	public static long interleaveBitsSlow(long x, long y) {
 		long c = 0;
 		for (byte b = 31; b >= 0; b--) {
 			c = (c << 1) | ((x >> b) & 1);
 			c = (c << 1) | ((y >> b) & 1);
 		}
 		return c;
+	}
+
+	public static long interleaveBits(long x, long y) {
+		return interleaveBitsFast(x, y);
+	}
+	
+	public static long interleaveBitsFast(long x, long y) {
+		return splitBits(y) | (splitBits(x) << 1);
+	}
+
+	private static long splitBits(long v) {
+	    v &= 0x00000000FFFFFFFFL;               
+	    v = (v | (v << 16)) & 0x0000FFFF0000FFFFL;
+	    v = (v | (v <<  8)) & 0x00FF00FF00FF00FFL;
+	    v = (v | (v <<  4)) & 0x0F0F0F0F0F0F0F0FL;
+	    v = (v | (v <<  2)) & 0x3333333333333333L;
+	    v = (v | (v <<  1)) & 0x5555555555555555L;
+	    return v;
 	}
 
 	/**
@@ -722,6 +750,15 @@ public class MapUtils {
 	}
 
 	public static QuadRect calculateLatLonBbox(double latitude, double longitude, int radiusMeters) {
+		QuadRect rect = calculate31Bbox(latitude, longitude, radiusMeters);
+		rect.left = MapUtils.get31LongitudeX((int) rect.left);
+		rect.top = MapUtils.get31LatitudeY((int) rect.top);
+		rect.right = MapUtils.get31LongitudeX((int) rect.right);
+		rect.bottom = MapUtils.get31LatitudeY((int) rect.bottom);
+		return rect;
+	}
+
+	public static QuadRect calculate31Bbox(double latitude, double longitude, int radiusMeters) {
 		int zoom = 16;
 		double coeff = radiusMeters / MapUtils.getTileDistanceWidth(latitude, zoom);
 		double tx = MapUtils.getTileNumberX(zoom, longitude);
@@ -733,11 +770,33 @@ public class MapUtils {
 		double bottomRightY = Math.min(max, ty + coeff);
 		double pw = MapUtils.getPowZoom(31 - zoom);
 		QuadRect rect = new QuadRect(topLeftX * pw, topLeftY * pw, bottomRightX * pw, bottomRightY * pw);
-		rect.left = MapUtils.get31LongitudeX((int) rect.left);
-		rect.top = MapUtils.get31LatitudeY((int) rect.top);
-		rect.right = MapUtils.get31LongitudeX((int) rect.right);
-		rect.bottom = MapUtils.get31LatitudeY((int) rect.bottom);
 		return rect;
+	}
+	
+	public static int[] calc31BboxRhumb(int radiusMeters, int x, int y, int z) {
+		double lat = MapUtils.getLatitudeFromTile(z, y + 0.5);
+		double lon = MapUtils.getLongitudeFromTile(z, x + 0.5);
+		double deltaLat = radiusMeters / METERS_IN_DEGREE;
+		double deltaLon = radiusMeters / (METERS_IN_DEGREE * Math.cos(Math.toRadians(lat)));
+		double northLat = lat + deltaLat;
+		double southLat = lat - deltaLat;
+		double westLon = lon - deltaLon;
+		double eastLon = lon + deltaLon;
+		int top = MapUtils.get31TileNumberY(Math.min(MAX_LATITUDE, northLat));
+		int left = MapUtils.get31TileNumberX(Math.max(MIN_LONGITUDE, westLon));
+		int bottom = MapUtils.get31TileNumberY(Math.max(MIN_LATITUDE, southLat));
+		int right = MapUtils.get31TileNumberX(Math.min(MAX_LONGITUDE, eastLon));
+		return new int[] { left, top, right, bottom };
+	}
+	
+	public static QuadRect calculate31BboxUsingRhumb(int radiusMeters, LatLon l) {
+		LatLon northWest = MapUtils.rhumbDestinationPoint(l.getLatitude(), l.getLongitude(), radiusMeters, 315);
+		LatLon southEast = MapUtils.rhumbDestinationPoint(l.getLatitude(), l.getLongitude(), radiusMeters, 135);
+		int top = MapUtils.get31TileNumberY(Math.min(MAX_LATITUDE, northWest.getLatitude()));
+		int left = MapUtils.get31TileNumberX(Math.max(MIN_LONGITUDE, northWest.getLongitude()));
+		int bottom = MapUtils.get31TileNumberY(Math.max(MIN_LATITUDE, southEast.getLatitude()));
+		int right = MapUtils.get31TileNumberX(Math.min(MAX_LONGITUDE, southEast.getLongitude()));
+		return new QuadRect(left, top, right, bottom);
 	}
 
 	public static float getInterpolatedY(float x1, float y1, float x2, float y2, float x) {
@@ -958,4 +1017,6 @@ public class MapUtils {
 		bbox.top = Math.max(-90.0, Math.min(90.0, bbox.top));
 		bbox.bottom = Math.max(-90.0, Math.min(90.0, bbox.bottom));
 	}
+	
+	
 }

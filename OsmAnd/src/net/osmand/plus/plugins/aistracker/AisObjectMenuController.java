@@ -1,10 +1,9 @@
 package net.osmand.plus.plugins.aistracker;
 
-import static net.osmand.plus.plugins.aistracker.AisObjType.AIS_ATON;
-import static net.osmand.plus.plugins.aistracker.AisObjType.AIS_ATON_VIRTUAL;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.UNSPECIFIED_AID_TYPE;
-import static net.osmand.plus.plugins.aistracker.AisTrackerHelper.getCpa;
 import static net.osmand.plus.utils.OsmAndFormatter.FORMAT_MINUTES;
+import static net.osmand.shared.aistracker.AisObjType.AIS_ATON;
+import static net.osmand.shared.aistracker.AisObjType.AIS_ATON_VIRTUAL;
+import static net.osmand.shared.aistracker.AisObjectConstants.UNSPECIFIED_AID_TYPE;
 
 import android.annotation.SuppressLint;
 
@@ -19,9 +18,16 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.shared.aistracker.AisCpa;
+import net.osmand.shared.aistracker.AisLatLon;
+import net.osmand.shared.aistracker.AisLocation;
+import net.osmand.shared.aistracker.AisObjType;
+import net.osmand.shared.aistracker.AisObject;
+import net.osmand.shared.aistracker.AisObjectConstants;
+import net.osmand.shared.aistracker.AisTrackerMath;
 
 import java.util.Iterator;
-import java.util.SortedSet;
+import java.util.Set;
 
 public class AisObjectMenuController extends MenuController {
     private AisObject aisObject;
@@ -47,17 +53,17 @@ public class AisObjectMenuController extends MenuController {
     }
 
     @SuppressLint("DefaultLocale")
-    private void addCpaInfo(@Nullable Location myLocation, @NonNull SortedSet<Integer> msgTypes) {
+    private void addCpaInfo(@Nullable Location myLocation, @NonNull Set<Integer> msgTypes) {
         if (msgTypes.contains(21) || msgTypes.contains(9)) {
             return;
         }
         if ((aisObject.getCog() != AisObjectConstants.INVALID_COG) &&
                 (aisObject.getSog() != AisObjectConstants.INVALID_SOG)) {
-            AisTrackerHelper.Cpa cpa = new AisTrackerHelper.Cpa();
-            Location aisLocation = aisObject.getCurrentLocation();
-            if ((aisLocation != null) && (myLocation != null)) {
-                getCpa(myLocation, aisLocation, cpa);
-                if (cpa.isValid()) {
+            AisCpa cpa = new AisCpa();
+            AisLocation aisLocation = aisObject.getExtrapolatedLocation(System.currentTimeMillis());
+            if (aisLocation != null && myLocation != null) {
+                AisTrackerMath.INSTANCE.getCpa(AisObjectAndroidHelperKt.toAisLocation(myLocation), aisLocation, cpa);
+                if (cpa.getValid()) {
                     double cpaTime = cpa.getTcpa();
                     boolean isPositive = cpaTime >= 0;
                     cpaTime = Math.abs(cpaTime);
@@ -65,7 +71,7 @@ public class AisObjectMenuController extends MenuController {
                         if (isPositive) {
                             long hours = (long)cpaTime;
                             double minutes = (cpaTime % 1 - hours) * 60.0;
-                            addMenuItem("CPA", String.format("%.1f nm", cpa.getCpaDist()));
+                            addMenuItem("CPA", String.format("%.1f nm", cpa.getCpa()));
                             if (hours >= 2.0) {
                                 addMenuItem("TCPA", String.format("%d hours %.0f min", hours, minutes));
                             } else if (hours >= 1.0) {
@@ -75,7 +81,7 @@ public class AisObjectMenuController extends MenuController {
                             }
                         }
                         /* else {
-                            addMenuItem("CPA", String.format("%.1f nm", cpa.getCpaDist()));
+                            addMenuItem("CPA", String.format("%.1f nm", cpa.getCpa()));
                             addMenuItem("TCPA", String.format("-%.1f hours", cpaTime));
                         }
                          */
@@ -93,7 +99,7 @@ public class AisObjectMenuController extends MenuController {
         }
     }
     private void addMenuItem(@NonNull String type, @Nullable String value,
-                             @Nullable SortedSet<Integer> msgTypes, Integer[] selection) {
+                             @Nullable Set<Integer> msgTypes, Integer[] selection) {
         if (msgTypes != null) {
             for (Integer i : selection) {
                 if (msgTypes.contains(i)) {
@@ -119,10 +125,10 @@ public class AisObjectMenuController extends MenuController {
     @SuppressLint("DefaultLocale")
     @Override
     public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
-        SortedSet<Integer> msgTypes = aisObject.getMsgTypes();
+        Set<Integer> msgTypes = aisObject.getMsgTypes();
         Iterator<Integer> iter = msgTypes.iterator();
         String msgTypesString = "";
-        LatLon position = aisObject.getPosition();
+        AisLatLon position = aisObject.getPosition();
         long lastUpdate = (System.currentTimeMillis() - aisObject.getLastUpdate()) / 1000;
 
         addMenuItem("MMSI",  Integer.toString(aisObject.getMmsi()));
@@ -132,8 +138,19 @@ public class AisObjectMenuController extends MenuController {
                             ", " + LocationConvert.convertLongitude(position.getLongitude(), FORMAT_MINUTES, true) );
             if (this.app != null) {
                 Location ownPosition = app.getLocationProvider().getLastKnownLocation();
-                float distance = aisObject.getDistanceInNauticalMiles();
-                float bearing = aisObject.getBearing();
+                float distance = -1.0f;
+                float bearing = -1.0f;
+                if (ownPosition != null && aisObject.getPosition() != null) {
+                    Location aisLoc = new Location("");
+                    aisLoc.setLatitude(aisObject.getPosition().getLatitude());
+                    aisLoc.setLongitude(aisObject.getPosition().getLongitude());
+                    distance = ownPosition.distanceTo(aisLoc) / 1852.0f;
+                    bearing = ownPosition.bearingTo(aisLoc);
+                    if (bearing < 0.0f) {
+                        bearing += 360.0f;
+                    }
+                }
+
                 if (distance >= 0.0f) {
                     try {
                         addMenuItem("Distance",  String.format("%.1f nm", distance));
@@ -232,7 +249,7 @@ public class AisObjectMenuController extends MenuController {
     @Override
     public String getTypeStr() {
         String result = "";
-        SortedSet<Integer> msgTypes = aisObject.getMsgTypes();
+        Set<Integer> msgTypes = aisObject.getMsgTypes();
         AisObjType objectClass = aisObject.getObjectClass();
         for (Integer i : new Integer[]{5, 19, 24}) {
             if (msgTypes.contains(i)) {

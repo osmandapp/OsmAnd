@@ -522,34 +522,17 @@ public class ItemViewHolder {
 	}
 
 	protected void download(DownloadItem item, DownloadResourceGroup parentOptional) {
-		boolean handled = false;
 		if (parentOptional != null && item instanceof IndexItem indexItem) {
 			WorldRegion region = DownloadResourceGroup.getRegion(parentOptional);
 			context.setDownloadItem(region, indexItem.getTargetFile(app).getAbsolutePath());
-		}
-		if (item.getType() == DownloadActivityType.ROADS_FILE && parentOptional != null) {
-			for (IndexItem ii : parentOptional.getIndividualResources()) {
-				if (ii.getType() == DownloadActivityType.NORMAL_FILE) {
-					if (ii.isDownloaded()) {
-						handled = true;
-						confirmDownload(item);
-					}
-					break;
-				}
+
+			File conflict = DuplicateMapHelper.findConflictingFile(app, indexItem, parentOptional);
+			if (conflict != null) {
+				DuplicateMapDownloadDialogController.showDialog(context, indexItem, conflict);
+				return;
 			}
 		}
-		if (!handled) {
-			startDownload(item);
-		}
-	}
-
-	private void confirmDownload(@NonNull DownloadItem item) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(context);
-		builder.setTitle(R.string.are_you_sure);
-		builder.setMessage(R.string.confirm_download_roadmaps);
-		builder.setNegativeButton(R.string.shared_string_cancel, null);
-		builder.setPositiveButton(R.string.shared_string_download, (dialog, which) -> startDownload(item));
-		builder.show();
+		startDownload(item);
 	}
 
 	private void startDownload(DownloadItem item) {

@@ -63,6 +63,7 @@ public class Building extends MapObject {
 	public int getInterpolationInterval() {
 		return interpolationInterval;
 	}
+	
 	public void setInterpolationInterval(int interpolationNumber) {
 		this.interpolationInterval = interpolationNumber;
 	}
@@ -114,6 +115,9 @@ public class Building extends MapObject {
 		return name;
 	}
 	
+	public boolean isInterpolation() {
+		return getInterpolationType() != null || getInterpolationInterval() > 0;
+	}
 
 	public float interpolation(String hno) {
 		if (getInterpolationType() != null || getInterpolationInterval() > 0

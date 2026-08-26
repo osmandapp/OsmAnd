@@ -159,7 +159,7 @@ public class BasicEditPoiFragment extends BaseFullScreenFragment implements OnFr
 
 		list.add(TYPE_BASIC_INFO);
 		for (int i = 0; i < openingHoursAdapter.openingHours.getRules().size(); i++) {
-			list.add(new OpenHoursItem(i, System.currentTimeMillis()));
+			list.add(new OpenHoursItem(i, EditPoiContentAdapter.nextItemId()));
 		}
 		list.add(TYPE_ADD_OPENING_HOURS);
 

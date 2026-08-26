@@ -173,13 +173,13 @@ public class SearchSettings {
 	public QuadRect getSearchBBox31() {
 		return searchBBox31;
 	}
-	
+
 	public SearchSettings setSearchBBox31(QuadRect searchBBox31) {
 		SearchSettings s = new SearchSettings(this);
 		s.searchBBox31 = searchBBox31;
 		return s;
 	}
-	
+
 	public boolean isTransliterate() {
 		return transliterateIfMissing;
 	}

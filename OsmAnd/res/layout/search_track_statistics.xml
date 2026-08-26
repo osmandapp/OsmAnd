@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/track_statistics"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:gravity="center_vertical"
+	android:orientation="horizontal"
+	android:visibility="gone"
+	tools:visibility="visible">
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/track_length_icon"
+		android:layout_width="12sp"
+		android:layout_height="12sp"
+		android:layout_gravity="center_vertical"
+		android:layout_marginEnd="@dimen/gpx_small_icon_margin"
+		android:tint="?attr/default_icon_color"
+		app:srcCompat="@drawable/ic_action_length_12" />
+
+	<TextView
+		android:id="@+id/track_length"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
+		android:includeFontPadding="false"
+		android:maxLines="1"
+		android:textColor="?android:textColorSecondary"
+		android:textSize="@dimen/default_desc_text_size"
+		tools:text="12 km" />
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/track_uphill_icon"
+		android:layout_width="12sp"
+		android:layout_height="12sp"
+		android:layout_gravity="center_vertical"
+		android:layout_marginStart="@dimen/content_padding_small_half"
+		android:layout_marginEnd="@dimen/gpx_small_icon_margin"
+		android:tint="?attr/default_icon_color"
+		app:srcCompat="@drawable/ic_action_arrow_up_12" />
+
+	<TextView
+		android:id="@+id/track_uphill"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
+		android:includeFontPadding="false"
+		android:maxLines="1"
+		android:textColor="?android:textColorSecondary"
+		android:textSize="@dimen/default_desc_text_size"
+		tools:text="500 m" />
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/track_downhill_icon"
+		android:layout_width="12sp"
+		android:layout_height="12sp"
+		android:layout_gravity="center_vertical"
+		android:layout_marginStart="@dimen/content_padding_small_half"
+		android:layout_marginEnd="@dimen/gpx_small_icon_margin"
+		android:tint="?attr/default_icon_color"
+		app:srcCompat="@drawable/ic_action_arrow_down_12" />
+
+	<TextView
+		android:id="@+id/track_downhill"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
+		android:includeFontPadding="false"
+		android:maxLines="1"
+		android:textColor="?android:textColorSecondary"
+		android:textSize="@dimen/default_desc_text_size"
+		tools:text="480 m" />
+
+	<TextView
+		android:id="@+id/track_statistics_divider"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
+		android:layout_marginStart="@dimen/content_padding_small_half"
+		android:layout_marginEnd="@dimen/content_padding_small_half"
+		android:includeFontPadding="false"
+		android:text="•"
+		android:textColor="?android:textColorSecondary"
+		android:textSize="@dimen/default_desc_text_size" />
+
+</LinearLayout>

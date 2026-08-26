@@ -151,6 +151,7 @@ public class FileUtils {
 		app.getMapButtonsHelper().onRenameGpxFile(src.getAbsolutePath(), dest.getAbsolutePath());
 
 		GpxSelectionHelper gpxSelectionHelper = app.getSelectedGpxHelper();
+		gpxSelectionHelper.renamePendingSelection(src.getAbsolutePath(), dest.getAbsolutePath());
 		SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(src.getAbsolutePath());
 		if (selectedGpxFile != null) {
 			gpxFile = selectedGpxFile.getGpxFile();
@@ -223,8 +224,9 @@ public class FileUtils {
 	}
 
 	public static boolean removeGpxFile(@NonNull OsmandApplication app, @NonNull File file) {
+		GpxSelectionHelper helper = app.getSelectedGpxHelper();
+		helper.cancelPendingSelection(file.getAbsolutePath());
 		if (file.exists()) {
-			GpxSelectionHelper helper = app.getSelectedGpxHelper();
 			SelectedGpxFile selected = helper.getSelectedFileByPath(file.getAbsolutePath());
 			file.delete();
 			if (selected != null) {
@@ -319,6 +321,10 @@ public class FileUtils {
 
 	public static boolean isValidFileName(@Nullable String name) {
 		return name != null && !ILLEGAL_FILE_NAME_CHARACTERS.matcher(name).find();
+	}
+
+	public static boolean isNonEmptyFile(@Nullable File file) {
+		return file != null && file.exists() && file.length() > 0;
 	}
 
 	public static boolean isValidDirName(@NonNull String name) {
@@ -434,8 +440,7 @@ public class FileUtils {
 		}
 	}
 
-	public static List<File> collectFiles(@NonNull File dir, @NonNull String ext,
-			@NonNull List<File> list) {
+	public static List<File> collectFiles(@NonNull File dir, @NonNull String ext, @NonNull List<File> list) {
 		if (dir.exists() && dir.canRead()) {
 			File[] files = dir.listFiles();
 			if (Algorithms.isEmpty(files)) {

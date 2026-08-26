@@ -27,6 +27,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -100,6 +101,7 @@ public class GPXUtilities {
 		SUPPORTED_EXTENSION_TAGS.put("speed_sensor", PointAttributes.SENSOR_TAG_SPEED);
 		SUPPORTED_EXTENSION_TAGS.put("cad", PointAttributes.SENSOR_TAG_CADENCE);
 		SUPPORTED_EXTENSION_TAGS.put("cadence", PointAttributes.SENSOR_TAG_CADENCE);
+		SUPPORTED_EXTENSION_TAGS.put("power", PointAttributes.SENSOR_TAG_BIKE_POWER);
 		SUPPORTED_EXTENSION_TAGS.put("temp", PointAttributes.SENSOR_TAG_TEMPERATURE_W);
 		SUPPORTED_EXTENSION_TAGS.put("wtemp", PointAttributes.SENSOR_TAG_TEMPERATURE_W);
 		SUPPORTED_EXTENSION_TAGS.put("atemp", PointAttributes.SENSOR_TAG_TEMPERATURE_A);
@@ -993,7 +995,8 @@ public class GPXUtilities {
 			if (fout.getParentFile() != null) {
 				fout.getParentFile().mkdirs();
 			}
-			output = new OutputStreamWriter(new FileOutputStream(fout), "UTF-8"); //$NON-NLS-1$
+			output = new BufferedWriter(
+					new OutputStreamWriter(new FileOutputStream(fout), "UTF-8"), 32 * 1024); //$NON-NLS-1$
 			if (Algorithms.isEmpty(file.path)) {
 				file.path = fout.getAbsolutePath();
 			}

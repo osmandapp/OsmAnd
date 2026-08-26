@@ -141,7 +141,9 @@ public class UpdateLocationUtils {
 			toLocation = toLoc;
 			fromLocation = specialFrom;
 			useCenter = fromLocation != null;
-			if (fromLocation == null) {
+			if (fromLocation != null) {
+				heading = getMapHeading(app);
+			} else {
 				OsmAndLocationProvider locationProvider = app.getLocationProvider();
 				Location lastKnownLocation = locationProvider.getLastKnownLocation();
 				heading = locationProvider.getHeading();
@@ -155,16 +157,19 @@ public class UpdateLocationUtils {
 					useCenter = true;
 					stale = false;
 					fromLocation = app.getMapViewTrackingUtilities().getMapLocation();
-					heading = app.getMapViewTrackingUtilities().getMapRotate();
-					if (heading != null) {
-						heading = -heading;
-					}
+					heading = getMapHeading(app);
 				}
 			}
 			if (toLocation != null) {
 				Location.distanceBetween(toLocation.getLatitude(), toLocation.getLongitude(),
 						fromLocation.getLatitude(), fromLocation.getLongitude(), mes);
 			}
+		}
+
+		@Nullable
+		private static Float getMapHeading(@NonNull OsmandApplication app) {
+			Float mapRotate = app.getMapViewTrackingUtilities().getMapRotate();
+			return mapRotate != null ? -mapRotate : null;
 		}
 	}
 

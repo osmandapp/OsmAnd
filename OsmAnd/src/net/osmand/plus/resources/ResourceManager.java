@@ -1062,7 +1062,7 @@ public class ResourceManager {
 	}
 
 	private static class AssetEntryList {
-		List<AssetEntry> assets = new ArrayList<>();
+		AssetEntry[] assets = new AssetEntry[0];
 	}
 
 	@NonNull
@@ -1083,7 +1083,7 @@ public class ResourceManager {
 			}
 		}
 		isBundledAssetsXml.close();
-		return new AssetsCollection(app, lst.assets);
+		return new AssetsCollection(app, Arrays.asList(lst.assets));
 	}
 
 	public static boolean copyAssets(@NonNull AssetManager manager, @NonNull String name,

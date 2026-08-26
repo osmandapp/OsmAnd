@@ -105,8 +105,8 @@ public class AmenityExtensionsHelper {
 	@Nullable
 	public static String getAmenityMetricsFormatted(@NonNull Amenity amenity, @NonNull OsmandApplication app) {
 		float distMeters = getAmenityDistanceMeters(amenity);
-		float upMeters = Algorithms.parseFloatSilently(amenity.getAdditionalInfo(TravelGpx.DIFF_ELEVATION_UP), 0);
-		float downMeters = Algorithms.parseFloatSilently(amenity.getAdditionalInfo(TravelGpx.DIFF_ELEVATION_DOWN), 0);
+		float upMeters = getAmenityUphillMeters(amenity);
+		float downMeters = getAmenityDownhillMeters(amenity);
 
 		String dist = OsmAndFormatter.getFormattedDistance(distMeters, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
 		String uphill = OsmAndFormatter.getFormattedDistance(upMeters, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
@@ -128,7 +128,15 @@ public class AmenityExtensionsHelper {
 		return metrics.isEmpty() ? null : String.join(" ", metrics);
 	}
 
-	private static float getAmenityDistanceMeters(Amenity amenity) {
+	public static float getAmenityUphillMeters(@NonNull Amenity amenity) {
+		return Algorithms.parseFloatSilently(amenity.getAdditionalInfo(TravelGpx.DIFF_ELEVATION_UP), 0);
+	}
+
+	public static float getAmenityDownhillMeters(@NonNull Amenity amenity) {
+		return Algorithms.parseFloatSilently(amenity.getAdditionalInfo(TravelGpx.DIFF_ELEVATION_DOWN), 0);
+	}
+
+	public static float getAmenityDistanceMeters(@NonNull Amenity amenity) {
 		String distanceTag = amenity.getAdditionalInfo(TravelGpx.DISTANCE);
 		float km = Algorithms.parseFloatSilently(distanceTag, 0);
 		if (km > 0 && !distanceTag.contains(".")) {

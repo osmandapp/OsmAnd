@@ -34,7 +34,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.concurrent.ConcurrentHashMap;
 
 import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.list.array.TIntArrayList;
@@ -237,7 +236,7 @@ public class OsmandRegions {
 	}
 
 	public String getLocaleName(String downloadName, String divider, boolean includingParent, WorldRegion baseParentRegion, boolean reversed) {
-		final String lc = downloadName.toLowerCase();
+		final String lc = downloadName.toLowerCase(Locale.US);
 		if (downloadNamesToFullNames.containsKey(lc)) {
 			String fullName = downloadNamesToFullNames.get(lc);
 			return getLocaleNameByFullName(fullName, divider, includingParent, baseParentRegion, reversed);
@@ -414,7 +413,7 @@ public class OsmandRegions {
 			List<BinaryMapDataObject> list = query(x, y);
 			for (BinaryMapDataObject o : list) {
 				if (contain(o, x, y)) {
-					String name = mapIndexFields.get(mapIndexFields.nameType, o);
+					String name = getLocaleName(o);
 					if (name != null) {
 						return name;
 					}
@@ -424,6 +423,15 @@ public class OsmandRegions {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	private String getLocaleName(BinaryMapDataObject o) {
+		String name = mapIndexFields.get(mapIndexFields.nameType, o);
+		if (name == null) {
+			return null;
+		}
+		WorldRegion region = fullNamesToRegionData.get(getFullName(o));
+		return region != null ? region.getLocaleName() : name;
 	}
 
 	public List<BinaryMapDataObject> query(int lx, int rx, int ty, int by) throws IOException {
@@ -515,7 +523,7 @@ public class OsmandRegions {
 		if (downloadName == null) {
 			return null;
 		} else {
-			return getRegionData(downloadNamesToFullNames.get(downloadName.toLowerCase()));
+			return getRegionData(downloadNamesToFullNames.get(downloadName.toLowerCase(Locale.US)));
 		}
 	}
 
@@ -643,7 +651,7 @@ public class OsmandRegions {
 			if (tp.tag.startsWith("name") || tp.tag.equals("key_name")
 					|| tp.tag.startsWith("alt_name") || tp.tag.startsWith("short_name")
 					|| tp.tag.equals("name:abbreviation") || tp.tag.equals("ref")) {
-				final String vl = it.value().toLowerCase();
+				final String vl = it.value().toLowerCase(Locale.US);
 				if (ind.indexOf(vl) == -1 || tp.tag.equals("ref")) {
 					ind.append(" ").append(vl);
 				}
@@ -769,7 +777,7 @@ public class OsmandRegions {
 				System.out.println(or.getLocaleName(or.getDownloadName(b), false));
 			}
 			if (or.isDownloadOfType(b, MAP_TYPE)) {
-				found.add(nm.toLowerCase());
+				found.add(nm.toLowerCase(Locale.US));
 				String localName = b.getNameByType(or.mapIndexFields.nameLocaleType);
 				if (or.mapIndexFields.nameLocale2Type != null) {
 					localName = b.getNameByType(or.mapIndexFields.nameLocale2Type);
@@ -1034,6 +1042,10 @@ public class OsmandRegions {
 		if (reader != null) {
 			reader.close();
 		}
+	}
+
+	public BinaryMapIndexReader getFile() {
+		return reader;
 	}
 
 }

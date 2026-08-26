@@ -64,6 +64,7 @@ public class StorageMigrationFragment extends BaseFullScreenDialogFragment imple
 	private static final String EXISTING_FILES_KEY = "existing_files";
 	private static final String SELECTED_STORAGE_KEY = "selected_storage";
 	private static final String CURRENT_STORAGE_KEY = "current_storage";
+	private static final String SHARED_STORAGE_MIGRATION_KEY = "shared_storage_migration";
 
 	private StorageItem selectedStorage;
 	private StorageItem currentStorage;
@@ -85,6 +86,7 @@ public class StorageMigrationFragment extends BaseFullScreenDialogFragment imple
 	private int remainingCount;
 	private int generalProgress;
 	private boolean copyFinished;
+	private boolean sharedStorageMigration = true;
 
 	private boolean usedOnMap;
 
@@ -101,6 +103,7 @@ public class StorageMigrationFragment extends BaseFullScreenDialogFragment imple
 			generalProgress = savedInstanceState.getInt(GENERAL_PROGRESS_KEY);
 			copyFinished = savedInstanceState.getBoolean(COPY_FINISHED_KEY);
 			usedOnMap = savedInstanceState.getBoolean(USED_ON_MAP_KEY);
+			sharedStorageMigration = savedInstanceState.getBoolean(SHARED_STORAGE_MIGRATION_KEY);
 			selectedStorage = savedInstanceState.getParcelable(SELECTED_STORAGE_KEY);
 			currentStorage = savedInstanceState.getParcelable(CURRENT_STORAGE_KEY);
 
@@ -148,6 +151,7 @@ public class StorageMigrationFragment extends BaseFullScreenDialogFragment imple
 		outState.putInt(GENERAL_PROGRESS_KEY, generalProgress);
 		outState.putBoolean(COPY_FINISHED_KEY, copyFinished);
 		outState.putBoolean(USED_ON_MAP_KEY, usedOnMap);
+		outState.putBoolean(SHARED_STORAGE_MIGRATION_KEY, sharedStorageMigration);
 		outState.putLong(FILES_SIZE_KEY, filesSize.first);
 		outState.putLong(ESTIMATED_SIZE_KEY, filesSize.second);
 		outState.putParcelable(SELECTED_STORAGE_KEY, selectedStorage);
@@ -211,17 +215,19 @@ public class StorageMigrationFragment extends BaseFullScreenDialogFragment imple
 	private void setupButtons() {
 		DialogButton actionButton = mainView.findViewById(R.id.dismiss_button);
 		actionButton.setOnClickListener(v -> {
-			FragmentActivity activity = getActivity();
-			if (restartListener != null) {
-				restartListener.onRestartSelected();
-			} else {
-				if (activity != null) {
+			if (sharedStorageMigration) {
+				FragmentActivity activity = getActivity();
+				if (restartListener != null) {
+					restartListener.onRestartSelected();
+				} else if (activity != null) {
 					RestartActivity.doRestartSilent(activity);
 				}
+			} else {
+				dismiss();
 			}
 		});
 		actionButton.setButtonType(DialogButtonType.PRIMARY);
-		actionButton.setTitleId(R.string.shared_string_restart);
+		actionButton.setTitleId(sharedStorageMigration ? R.string.shared_string_restart : R.string.shared_string_close);
 		AndroidUiHelper.updateVisibility(actionButton, copyFinished);
 	}
 
@@ -293,7 +299,7 @@ public class StorageMigrationFragment extends BaseFullScreenDialogFragment imple
 		View container = mainView.findViewById(R.id.restart_required);
 		TextView title = container.findViewById(android.R.id.title);
 		title.setText(R.string.restart_is_required);
-		AndroidUiHelper.updateVisibility(container, copyFinished);
+		AndroidUiHelper.updateVisibility(container, copyFinished && sharedStorageMigration);
 		AndroidUiHelper.updateVisibility(container.findViewById(android.R.id.icon), false);
 	}
 
@@ -366,7 +372,9 @@ public class StorageMigrationFragment extends BaseFullScreenDialogFragment imple
 		this.errors = errors;
 		this.existingFiles = existingFiles;
 		generalProgress = (int) (filesSize.second / 1024);
-		app.getSettings().SHARED_STORAGE_MIGRATION_FINISHED.set(true);
+		if (sharedStorageMigration) {
+			app.getSettings().SHARED_STORAGE_MIGRATION_FINISHED.set(true);
+		}
 		if (isAdded()) {
 			updateContent();
 			if (closeDialog != null && closeDialog.isShowing()) {
@@ -382,11 +390,13 @@ public class StorageMigrationFragment extends BaseFullScreenDialogFragment imple
 	                                                    int generalProgress,
 	                                                    int filesCount,
 	                                                    boolean usedOnMap,
+	                                                    boolean sharedStorageMigration,
 	                                                    @Nullable StorageMigrationRestartListener listener,
 	                                                    @Nullable MoveFilesStopListener cancelTaskListener) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			StorageMigrationFragment fragment = new StorageMigrationFragment();
 			fragment.usedOnMap = usedOnMap;
+			fragment.sharedStorageMigration = sharedStorageMigration;
 			fragment.filesSize = filesSize;
 			fragment.filesCount = filesCount;
 			fragment.selectedStorage = selectedStorage;

@@ -206,6 +206,9 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 		viewPager.addOnPageChangeListener(new SimpleOnPageChangeListener() {
 			@Override
 			public void onPageSelected(int position) {
+				if (trackTabsHelper.sortTrackTabIfNeeded(getSelectedTab())) {
+					updateTabsContent();
+				}
 				updateButtonsState();
 			}
 		});
@@ -272,6 +275,10 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 	public void loadTracksFinished(@NonNull TrackFolder folder) {
 		if (isAdded()) {
 			trackTabsHelper.updateTrackItems(folder);
+			String initialTabId = preselectedTabParams != null
+					? preselectedTabParams.getTabId()
+					: TrackTabType.ON_MAP.name();
+			trackTabsHelper.sortTrackTabIfNeeded(getTab(initialTabId));
 			AndroidUiHelper.updateVisibility(progressBar, false);
 			updateTrackTabs();
 			applyPreselectedParams();

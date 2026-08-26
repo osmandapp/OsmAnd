@@ -106,7 +106,7 @@
     <string name="shared_string_settings">Nastavitve</string>
     <string name="osmand_service">Delovanje v ozadju</string>
     <string name="shared_string_map">Zemljevid</string>
-    <string name="average_altitude">Povprečna nadmorska višina</string>
+    <string name="average_altitude">Povprečna višina</string>
     <string name="average_speed">Povprečna hitrost</string>
     <string name="shared_string_update">Posodobitev</string>
     <string name="received_gps_points">Število prejetih točk GPX: %1$s</string>

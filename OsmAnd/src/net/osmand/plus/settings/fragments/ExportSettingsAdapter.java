@@ -152,6 +152,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		setupIcon(icon, exportType.getIconId(), !Algorithms.isEmpty(selectedItems));
 
 		ThreeStateCheckbox checkBox = child.findViewById(R.id.check_box);
+
 		if (selectedItems == null) {
 			checkBox.setState(UNCHECKED);
 		} else if (selectedItems.containsAll(items)) {
@@ -177,7 +178,8 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		});
 		int checkBoxColor = checkBox.getState() == UNCHECKED ? secondaryColorRes : activeColorRes;
 		CompoundButtonCompat.setButtonTintList(checkBox, ColorStateList.valueOf(ContextCompat.getColor(app, checkBoxColor)));
-		child.findViewById(R.id.check_box_container).setOnClickListener(view -> {
+		View checkBoxContainer = child.findViewById(R.id.check_box_container);
+		checkBoxContainer.setOnClickListener(view -> {
 			if (!Algorithms.isEmpty(items)) {
 				checkBox.performClick();
 				boolean selected = checkBox.getState() == CHECKED;

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	android:paddingHorizontal="@dimen/content_padding"
+	android:paddingVertical="@dimen/content_padding_small">
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/description"
+		style="@style/DescStyle"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:textColor="?android:textColorPrimary"
+		tools:text="A map for this region is already installed. Choose how to continue." />
+
+	<net.osmand.plus.widgets.dialogbutton.DialogButton
+		android:id="@+id/replaceButton"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		app:dialogButtonTopMargin="@dimen/dialog_content_margin"
+		app:dialogButtonType="secondary"
+		tools:dialogButtonTitle="Replace with Standard" />
+
+	<net.osmand.plus.widgets.dialogbutton.DialogButton
+		android:id="@+id/keepBothButton"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		app:dialogButtonTopMargin="@dimen/dialog_content_margin"
+		app:dialogButtonTitle="@string/keep_both"
+		app:dialogButtonType="secondary" />
+
+</LinearLayout>

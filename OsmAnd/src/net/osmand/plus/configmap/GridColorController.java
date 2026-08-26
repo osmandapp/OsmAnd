@@ -103,13 +103,16 @@ public class GridColorController extends MapColorPaletteController {
 	public static void showDialog(@NonNull FragmentActivity activity,
 	                              @NonNull CoordinatesGridSettings gridSettings) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
+		if (MapColorPaletteController.getExistedInstance(app) != null) {
+			return;
+		}
 		GridColorController controller = new GridColorController(app, gridSettings);
 
-		DialogManager dialogManager = app.getDialogManager();
-		dialogManager.register(controller.getProcessId(), controller);
-
 		FragmentManager manager = activity.getSupportFragmentManager();
-		MapColorPaletteFragment.showInstance(manager);
+		if (MapColorPaletteFragment.showInstance(manager)) {
+			DialogManager dialogManager = app.getDialogManager();
+			dialogManager.register(controller.getProcessId(), controller);
+		}
 	}
 }
 

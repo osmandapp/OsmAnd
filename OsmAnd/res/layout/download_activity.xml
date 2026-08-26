@@ -35,8 +35,6 @@
 				android:layout_height="match_parent"
 				android:orientation="vertical">
 
-				<include layout="@layout/free_version_banner" />
-
 				<include layout="@layout/progress_with_two_texts" />
 
 				<androidx.viewpager.widget.ViewPager

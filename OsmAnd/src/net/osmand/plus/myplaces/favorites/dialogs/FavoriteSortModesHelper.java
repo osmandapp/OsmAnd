@@ -3,6 +3,7 @@ package net.osmand.plus.myplaces.favorites.dialogs;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.myplaces.favorites.FavoriteFolderPath;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
@@ -98,6 +99,22 @@ public class FavoriteSortModesHelper {
 
 	public void syncSettings() {
 		saveToPreference();
+	}
+
+	@NonNull
+	public static LatLon getReferenceLocation(@NonNull OsmandApplication app,
+	                                           @NonNull FavoriteListSortMode sortMode) {
+		return sortMode == FavoriteListSortMode.NEAREST_TO_MAP_CENTER
+				? app.getMapViewTrackingUtilities().getMapLocation()
+				: app.getMapViewTrackingUtilities().getDefaultLocation();
+	}
+
+	@Nullable
+	public static LatLon getDisplayReferenceLocation(@NonNull OsmandApplication app,
+	                                                  @NonNull FavoriteListSortMode sortMode) {
+		return sortMode == FavoriteListSortMode.NEAREST_TO_MAP_CENTER
+				? getReferenceLocation(app, sortMode)
+				: null;
 	}
 
 	private void loadFromPreference() {

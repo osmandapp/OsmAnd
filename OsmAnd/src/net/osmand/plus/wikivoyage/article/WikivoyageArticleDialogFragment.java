@@ -324,7 +324,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 
 		updateSaveButton();
 		selectedLangTv.setText(Algorithms.capitalizeFirstLetter(selectedLang));
-		contentWebView.loadDataWithBaseURL(getBaseUrl(), createHtmlContent(), "text/html", "UTF-8", null);
+		injectCachedImagesToHtmlAndReload(createHtmlContent());
 	}
 
 	private void updateTrackButton(boolean processing, @Nullable GpxFile gpxFile) {

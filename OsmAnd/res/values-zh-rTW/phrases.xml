@@ -2056,7 +2056,7 @@
     <string name="poi_animal_training">動物訓練</string>
     <string name="poi_animal_training_dog">訓狗</string>
     <string name="poi_animal_training_horse">訓馬</string>
-    <string name="poi_horse_yes">准許馬進出</string>
+    <string name="poi_horse_yes">是</string>
     <string name="poi_horse_no">不准許馬進出</string>
     <string name="poi_animal_yes">准許動物進出</string>
     <string name="poi_animal_no">不准許動物進出</string>
@@ -3161,7 +3161,7 @@
     <string name="poi_seamark_clearance_width">可視寬度</string>
     <string name="poi_government_transportation">交通運輸機關</string>
     <string name="poi_government_legislative">議會機關</string>
-    <string name="poi_vhf">VHF頻道</string>
+    <string name="poi_vhf">VHF 頻道</string>
     <string name="poi_operational_status">操作狀態</string>
     <string name="poi_water_supply_type">供水類型</string>
     <string name="poi_water_purification">水淨化</string>
@@ -3169,11 +3169,11 @@
     <string name="poi_gorge">峽谷</string>
     <string name="poi_couloir">走廊</string>
     <string name="poi_mountain_area">山區</string>
-    <string name="poi_surface_clay">粘土</string>
-    <string name="poi_surface_tartan">格子花呢</string>
-    <string name="poi_surface_artificial_turf">人工草坪</string>
-    <string name="poi_surface_decoturf">DecoTurf</string>
-    <string name="poi_surface_metal_grid">金屬網格</string>
+    <string name="poi_surface_clay">路面：黏土</string>
+    <string name="poi_surface_tartan">路面：PU</string>
+    <string name="poi_surface_artificial_turf">路面：人工草坪</string>
+    <string name="poi_surface_decoturf">路面：DecoTurf</string>
+    <string name="poi_surface_metal_grid">路面：金屬網格</string>
     <string name="poi_location_underground">位置：地下</string>
     <string name="poi_location_underwater">位置：水下</string>
     <string name="poi_location_overground">位置：地上</string>
@@ -3641,7 +3641,7 @@
     <string name="poi_tourist_bus_no">遊覽車進入：否</string>
     <string name="poi_coach_yes">長途公車進入：是</string>
     <string name="poi_coach_no">長途公車進入：否</string>
-    <string name="poi_ski_yes">滑雪進入：是</string>
+    <string name="poi_ski_yes">是</string>
     <string name="poi_ski_no">滑雪進入：否</string>
     <string name="poi_snowmobile_private">雪地摩托車進入：私人</string>
     <string name="poi_snowmobile_no">雪地摩托車進入：否</string>
@@ -4539,7 +4539,7 @@
     <string name="poi_tank_trap">反坦克障礙物</string>
     <string name="poi_barrier_tyres">輪胎</string>
     <string name="poi_toy_library">兒童玩具圖書館</string>
-    <string name="poi_surface_chipseal">碎石密封</string>
+    <string name="poi_surface_chipseal">路面：碎石密封</string>
     <string name="poi_cemt">CEMT</string>
     <string name="poi_lock_name">船閘名稱</string>
     <string name="poi_draft">航道深度</string>
@@ -4936,7 +4936,7 @@
     <string name="poi_climbing_area">攀岩區</string>
     <string name="poi_climbing_route">攀登路線</string>
     <string name="poi_climbing_route_bottom">攀登路線底部</string>
-    <string name="poi_cafe_yes">是</string>
+    <string name="poi_cafe_yes">咖啡廳：是</string>
     <string name="poi_cafe_filter">咖啡廳</string>
     <string name="poi_sled_yes">雪橇：是</string>
     <string name="poi_sled_no">雪橇：否</string>
@@ -5173,4 +5173,11 @@
     <string name="poi_rapids_grade_x">X（無法進入）</string>
     <string name="poi_water_type_filter">水體類型</string>
     <string name="poi_water_lake">湖</string>
+    <string name="poi_surface_laterite">表面：紅土</string>
+    <string name="poi_mtb_filter">適用於登山車</string>
+    <string name="poi_ski_filter">適用於滑雪</string>
+    <string name="poi_horse_filter">適用於騎馬</string>
+    <string name="poi_winter_hiking_filter">適用於冬季健行</string>
+    <string name="poi_mtb_yes">是</string>
+    <string name="poi_winter_hiking_yes">是</string>
 </resources>

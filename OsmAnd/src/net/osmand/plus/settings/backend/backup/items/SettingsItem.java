@@ -123,7 +123,9 @@ public abstract class SettingsItem {
 		// - Where is type prefix ? filename same for different types
 		fileName = BackupUtils.removeLeadingSlash(fileName);
 		String name = BackupUtils.removeLeadingSlash(getFileName());
-		return name != null && (name.endsWith(fileName) || fileName.startsWith(name + File.separator));
+		return name != null && (name.endsWith(fileName)
+				|| (fileName.length() > name.length() && fileName.startsWith(name)
+				&& fileName.charAt(name.length()) == File.separatorChar));
 	}
 
 	public boolean shouldReadOnCollecting() {
@@ -255,18 +257,10 @@ public abstract class SettingsItem {
 			public void writeToStream(@NonNull OutputStream outputStream, @Nullable IProgress progress) throws IOException {
 				JSONObject json = writeItemsToJson(new JSONObject());
 				try {
-					int bytesDivisor = 1024;
-					byte[] bytes = json.toString(2).getBytes("UTF-8");
-					if (progress != null) {
-						progress.startWork(bytes.length / bytesDivisor);
-					}
-					Algorithms.streamCopy(new ByteArrayInputStream(bytes), outputStream, progress, bytesDivisor);
+					SettingsHelper.writeJson(json, outputStream, progress);
 				} catch (JSONException e) {
 					warnings.add(app.getString(R.string.settings_item_write_error, String.valueOf(getType())));
 					SettingsHelper.LOG.error("Failed to write json to stream", e);
-				}
-				if (progress != null) {
-					progress.finishTask();
 				}
 			}
 		};

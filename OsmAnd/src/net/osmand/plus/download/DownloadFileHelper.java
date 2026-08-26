@@ -1,5 +1,7 @@
 package net.osmand.plus.download;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -226,6 +228,7 @@ public class DownloadFileHelper {
 					return false;
 				}
 			}
+			removeFilesAfterSuccessfulInstall(de);
 			if (de.type == DownloadActivityType.SRTM_COUNTRY_FILE) {
 				removePreviousSrtmFile(de);
 			}
@@ -240,6 +243,31 @@ public class DownloadFileHelper {
 		}
 	}
 
+	private void removeFilesAfterSuccessfulInstall(@NonNull DownloadEntry entry) {
+		if (entry.targetFile == null || entry.filesToDeleteAfterSuccessfulInstall == null) {
+			return;
+		}
+		File targetFile = entry.targetFile.getAbsoluteFile();
+		boolean filesRemoved = false;
+		for (File file : entry.filesToDeleteAfterSuccessfulInstall) {
+			if (file != null && !targetFile.equals(file.getAbsoluteFile())
+					&& removeFileAndCloseResource(file)) {
+				filesRemoved = true;
+			}
+		}
+		if (filesRemoved) {
+			ctx.getDownloadThread().updateLoadedFiles();
+		}
+	}
+
+	private boolean removeFileAndCloseResource(@NonNull File file) {
+		if (file.exists() && Algorithms.removeAllFiles(file)) {
+			ctx.getResourceManager().closeFile(file.getName());
+			return true;
+		}
+		return false;
+	}
+
 	private void removePreviousSrtmFile(DownloadEntry entry) {
 		String meterExt = IndexConstants.BINARY_SRTM_MAP_INDEX_EXT;
 		String feetExt = IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT;
@@ -251,13 +279,7 @@ public class DownloadFileHelper {
 			fileName = fileName.replace(feetExt, meterExt);
 		}
 
-		File previous = new File(fileName);
-		if (previous != null && previous.exists()) {
-			boolean successful = Algorithms.removeAllFiles(previous);
-			if (successful) {
-				ctx.getResourceManager().closeFile(previous.getName());
-			}
-		}
+		removeFileAndCloseResource(new File(fileName));
 	}
 
 	private void unzipFile(IndexItem.DownloadEntry de, IProgress progress,  List<InputStream> is) throws IOException {

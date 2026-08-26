@@ -24,6 +24,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.chooseplan.button.OneTimePaymentButton;
 import net.osmand.plus.chooseplan.button.PriceButton;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
@@ -256,7 +257,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 				Version.isInAppPurchaseSupported());
 
 		priceButtons = MapsPlusPlanFragment.collectPriceButtons(app, purchaseHelper, nightMode);
-		price = priceButtons.size() == 0 ? null : Collections.min(priceButtons).getPrice();
+		price = getMapsPlusContinuePrice(priceButtons);
 
 		boolean fullVersion = !Version.isFreeVersion(app);
 		boolean subscribedToMaps = InAppPurchaseUtils.isMapsPlusAvailable(app, false);
@@ -290,6 +291,16 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 		if (mapsPlusPurchased) {
 			updatePurchasedButton(mapsPlusView, fullVersion);
 		}
+	}
+
+	@Nullable
+	private CharSequence getMapsPlusContinuePrice(@NonNull List<PriceButton<?>> priceButtons) {
+		for (PriceButton<?> button : priceButtons) {
+			if (button instanceof OneTimePaymentButton) {
+				return button.getPrice();
+			}
+		}
+		return priceButtons.isEmpty() ? null : Collections.min(priceButtons).getPrice();
 	}
 
 	private void updateContinueButton(@NonNull View view, int iconId, String plan,

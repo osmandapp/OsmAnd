@@ -5,6 +5,7 @@ import android.os.AsyncTask.Status.RUNNING
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Pair
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +23,8 @@ import net.osmand.CallbackWithObject
 import net.osmand.Location
 import net.osmand.PlatformUtil
 import net.osmand.data.Amenity
+import net.osmand.data.MapObject
+import net.osmand.data.PointDescription
 import net.osmand.map.IMapLocationListener
 import net.osmand.plus.AppInitializeListener
 import net.osmand.plus.AppInitializer
@@ -35,7 +38,6 @@ import net.osmand.plus.base.BaseFullScreenFragment
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.poi.PoiUIFilter
-import net.osmand.plus.search.NearbyPlacesAdapter.NearbyItemClickListener
 import net.osmand.plus.search.listitems.QuickSearchListItem
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.InsetTarget
@@ -47,12 +49,13 @@ import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton
 import net.osmand.plus.views.mapwidgets.TopToolbarView
 import net.osmand.plus.widgets.EmptyStateRecyclerView
 import net.osmand.plus.wikipedia.WikipediaPlugin
+import net.osmand.search.core.SearchResult
 import net.osmand.util.MapUtils
 import org.apache.commons.logging.Log
 import java.util.concurrent.Executors
 import kotlin.math.abs
 
-class ExplorePlacesFragment : BaseFullScreenFragment(), NearbyItemClickListener,
+class ExplorePlacesFragment : BaseFullScreenFragment(), ExplorePlacesAdapter.ExploreItemClickListener,
 	OsmAndLocationListener, OsmAndCompassListener, IMapLocationListener, MapZoomChangeListener {
 
 	private val log: Log = PlatformUtil.getLog(ExplorePlacesFragment::class.java)
@@ -64,6 +67,7 @@ class ExplorePlacesFragment : BaseFullScreenFragment(), NearbyItemClickListener,
 
 	private var poiUIFilter: PoiUIFilter? = null
 	private var adapter: ExplorePlacesAdapter? = null
+	private var searchItems: List<QuickSearchListItem>? = null
 
 	private var visiblePlaces: List<Amenity>? = null
 	private var location: Location? = null
@@ -196,6 +200,7 @@ class ExplorePlacesFragment : BaseFullScreenFragment(), NearbyItemClickListener,
 		recyclerView?.layoutManager = LinearLayoutManager(view.context)
 		recyclerView?.adapter = adapter
 		recyclerView?.setEmptyView(view.findViewById(R.id.empty_view))
+		searchItems?.let { adapter?.setItems(it) }
 	}
 
 	private fun buildZoomButtons(view: View) {
@@ -270,6 +275,9 @@ class ExplorePlacesFragment : BaseFullScreenFragment(), NearbyItemClickListener,
 	}
 
 	private fun updatePoints() {
+		if (searchItems != null) {
+			return
+		}
 		if (app.osmandMap.mapView.isMapInteractionActive || poiUIFilter == null || isListHidden()) {
 			return
 		}
@@ -371,21 +379,27 @@ class ExplorePlacesFragment : BaseFullScreenFragment(), NearbyItemClickListener,
 		}, LIST_UPDATE_PERIOD.toLong())
 	}
 
-	private fun showPointInContextMenu(amenity: Amenity) {
+	private fun showPointInContextMenu(searchResult: SearchResult) {
 		mapActivity?.apply {
 			val contextMenuLayer = mapLayers.contextMenuLayer
 			val poiMapLayer = mapLayers.poiMapLayer
+			val objectLocation = (searchResult.`object` as? MapObject)?.location
+			val location = searchResult.location ?: objectLocation ?: return
+			val pointDescriptionObject: Pair<PointDescription, Any> =
+				QuickSearchListItem.getPointDescriptionObject(app, searchResult)
+			val menuObject = pointDescriptionObject.second ?: searchResult.`object`
+			val provider = if (menuObject is Amenity) poiMapLayer else null
 			contextMenuLayer.showContextMenu(
-				amenity.location,
-				poiMapLayer.getObjectName(amenity),
-				amenity,
-				poiMapLayer)
+				location,
+				pointDescriptionObject.first,
+				menuObject,
+				provider)
 		}
 	}
 
-	override fun onNearbyItemClicked(amenity: Amenity) {
+	override fun onExploreItemClicked(searchResult: SearchResult) {
 		mapActivity?.let {
-			showPointInContextMenu(amenity)
+			showPointInContextMenu(searchResult)
 			hideList()
 		}
 	}
@@ -526,9 +540,18 @@ class ExplorePlacesFragment : BaseFullScreenFragment(), NearbyItemClickListener,
 		private const val POI_UI_FILTER_ID = "poi_ui_filter_id"
 
 		fun showInstance(manager: FragmentManager, poiUIFilter: PoiUIFilter) {
+			showInstance(manager, poiUIFilter, null)
+		}
+
+		fun showInstance(
+			manager: FragmentManager,
+			poiUIFilter: PoiUIFilter,
+			searchItems: List<QuickSearchListItem>?
+		) {
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 				val fragment = ExplorePlacesFragment()
 				fragment.poiUIFilter = poiUIFilter
+				fragment.searchItems = searchItems
 				manager.beginTransaction()
 					.addToBackStack(TAG)
 					.replace(R.id.fragmentContainer, fragment, TAG)

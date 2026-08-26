@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
+import net.osmand.data.AdditionalInfoBundle;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -21,6 +22,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.gallery.data.GalleryKey;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.mapcontextmenu.BuildRowAttrs;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
@@ -83,7 +85,8 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	protected void buildTopInternal(View view) {
 		super.buildTopInternal(view);
 		buildGroupFavouritesView(view);
-		buildMediaLinksRow(view, point.getLinks(), point);
+		GalleryKey galleryKey = new GalleryKey.Favorite(point.getKey());
+		buildAttachedMediaRow(view, galleryKey, point);
 	}
 
 	@Override
@@ -92,8 +95,8 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 		buildCommentRow(view, point.getComment());
 
 		if (!Algorithms.isEmpty(amenityExtensions)) {
-			AdditionalInfoBundle bundle = new AdditionalInfoBundle(app, amenityExtensions);
-			AmenityUIHelper helper = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), bundle);
+			AdditionalInfoBundle bundle = new AdditionalInfoBundle(app.getPoiTypes(), amenityExtensions);
+			AmenityUIHelper helper = new AmenityUIHelper(mapActivity, bundle);
 			helper.setLight(isLightContent());
 			helper.setLatLon(getLatLon());
 			helper.setCollapseExpandListener(getCollapseExpandListener());

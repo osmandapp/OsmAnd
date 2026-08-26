@@ -40,12 +40,12 @@ public class QuadTree<T> {
 	}
 	
 	private void clear(Node<T> rt) {
-		if(rt != null ){
-			if(rt.data != null) {
+		if (rt != null) {
+			if (rt.data != null) {
 				rt.data.clear();
 			}
-			if(rt.children != null) {
-				for(Node<T> c : rt.children) {
+			if (rt.children != null) {
+				for (Node<T> c : rt.children) {
 					clear(c);
 				}
 			}

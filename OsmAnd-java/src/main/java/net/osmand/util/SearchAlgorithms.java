@@ -1,9 +1,14 @@
 package net.osmand.util;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.text.Normalizer;
 import java.util.*;
-import java.util.function.Function;
 
+import com.google.protobuf.ByteString;
+import com.google.protobuf.CodedInputStream;
+
+import gnu.trove.list.array.TIntArrayList;
 import net.osmand.binary.Abbreviations;
 import net.osmand.binary.CommonWords;
 
@@ -20,7 +25,8 @@ public class SearchAlgorithms {
     
     private SearchAlgorithms() {}
 
-    private record CodePointPrefixMatch(int leftOffset, int rightOffset, int commonPrefixCodePointLength) {}
+	private record CodePointPrefixMatch(int leftOffset, int rightOffset, int commonPrefixCodePointLength) {
+	}
 
     private static CodePointPrefixMatch startWith(String token, String prefix) {
         int leftOffset = 0;
@@ -39,36 +45,17 @@ public class SearchAlgorithms {
         return new CodePointPrefixMatch(leftOffset, rightOffset, commonPrefixCodePointLength);
     }
 
-    private static int suffixOffsetAfterPrefix(String token, String prefix) {
-        CodePointPrefixMatch prefixMatch = startWith(token, prefix);
-        if (prefixMatch.rightOffset != prefix.length()) {
-            return -1;
-        }
-        return prefixMatch.leftOffset < token.length() ? prefixMatch.leftOffset : -1;
-    }
-
-    private static String substringByCodePoints(String value, int codePointCount) {
-        if (codePointCount <= 0 || value.isEmpty()) {
-            return "";
-        }
-        int availableCodePointCount = value.codePointCount(0, value.length());
-        if (codePointCount >= availableCodePointCount) {
-            return value;
-        }
-        return value.substring(0, value.offsetByCodePoints(0, codePointCount));
-    }
-
-    private static List<String> split(String name) {
+    public static List<String> split(String name) {
         int prev = -1;
-        Set<String> namesToAdd = new LinkedHashSet<>();
-
+        List<String> namesToAdd = new ArrayList<String>();
         for (int i = 0; i <= name.length(); ) {
             boolean tokenCharacter = false;
             int currentCodePointCharCount = 1;
             if (i != name.length()) {
                 int codePoint = name.codePointAt(i);
                 currentCodePointCharCount = Character.charCount(codePoint);
-                tokenCharacter = isTokenCharacter(name, i, prev != -1) || codePoint == '\'';
+                tokenCharacter = isTokenCharacter(name, i, prev != -1) 
+                		|| codePoint == '\'' || codePoint == '.'; // dr.luth
             }
             if (!tokenCharacter) {
                 if (prev != -1) {
@@ -83,36 +70,55 @@ public class SearchAlgorithms {
             }
             i += currentCodePointCharCount;
         }
-        return new ArrayList<>(namesToAdd);
+        return namesToAdd;
     }
-
+    
     /**
      * Produces unique normalized tokens from the query, plus Arabic-normalized variants when applicable.
      */
-    public static List<String> splitAndNormalize(String query) {
-        String normalizedQuery = canonicalizePunctuation(query);
-        Set<String> queryTokens = new LinkedHashSet<>();
-        for (String token : split(normalizedQuery)) {
-            String normalizedToken = normalizeToken(token);
-            if (!normalizedToken.isEmpty()) {
-                queryTokens.add(normalizedToken);
-            }
-        }
-        if (ArabicNormalizer.isSpecialArabic(normalizedQuery)) {
-            String arabic = ArabicNormalizer.normalize(normalizedQuery);
-            if (arabic != null && !arabic.equals(normalizedQuery)) {
-                for (String token : split(arabic)) {
-                    String normalizedToken = normalizeToken(token);
-                    if (!normalizedToken.isEmpty()) {
-                        queryTokens.add(normalizedToken);
-                    }
-                }
-            }
-        }
-        return new ArrayList<>(queryTokens);
-    }
+	public static List<String> splitAndNormalize(String query, boolean unique) {
+		return splitAndNormalize(query, null, unique);
+	}
+	
+	public static List<String> splitAndNormalize(String query, List<String> original, boolean unique) {
+		String normalizedQuery = canonicalizePunctuation(query);
+		List<String> queryTokens = new ArrayList<>();
+		for (String token : split(normalizedQuery)) {
+			String normalizedToken = normalizeToken(token);
+			if (!normalizedToken.isEmpty()) {
+				queryTokens.add(normalizedToken);
+				if (original != null) {
+					original.add(token);
+				}
+			}
+		}
+		if (ArabicNormalizer.isSpecialArabic(normalizedQuery)) {
+			String arabic = ArabicNormalizer.normalize(normalizedQuery);
+			if (arabic != null && !arabic.equals(normalizedQuery)) {
+				queryTokens.clear();
+				if (original != null) {
+					original.clear();
+				}
+				for (String token : split(arabic)) {
+					String normalizedToken = normalizeToken(token);
+					if (!normalizedToken.isEmpty()) {
+						queryTokens.add(normalizedToken);
+						if (original != null) {
+							original.add(token);
+						}
+					}
+				}
+			}
+		}
+		if (unique) {
+			Set<String> st = new LinkedHashSet<String>(queryTokens);
+			queryTokens.clear();
+			queryTokens.addAll(st);
+		}
+		return queryTokens;
+	}
     
-    private static String normalizeToken(String token) {
+    public static String normalizeToken(String token) {
         if (token == null) {
             return "";
         }
@@ -159,11 +165,23 @@ public class SearchAlgorithms {
     }
 
     public static String removeQuotes(String s) {
-        if (!s.contains("«") && !s.contains("»")) {
-            return s;
-        }
-        return s.replace("«", "").replace("»", "");
+	    if (s.contains("«") || s.contains("»")) {
+		    return s.replace("«", "").replace("»", "");
+	    }
+	    return s;
     }
+    
+    public static String alignChars(String fullText) {
+		if (ArabicNormalizer.isSpecialArabic(fullText)) {
+			String normalized = ArabicNormalizer.normalize(fullText);
+			fullText = normalized == null ? fullText : normalized;
+		}
+		fullText = removeApostrophes(fullText);
+		fullText = replaceGermanSS(fullText);
+		fullText = removeQuotes(fullText);
+		fullText = UnicodeDiacritics.getInstance().stripDiacritics(fullText);
+		return fullText;
+	}
     
     public static String removeApostrophes(String s) {
         if (!Algorithms.containsChar(s, APOSTROPHES)) {
@@ -186,27 +204,20 @@ public class SearchAlgorithms {
         return sb.toString();
     }
     
-    public static String nameIndexPreparePrefix(String token, int maxPrefixLength) {
-        String normalizedToken = normalizeToken(token);
-	    if (maxPrefixLength <= 0) {
-		    return "";
-	    }
-        if (normalizedToken.codePointCount(0, normalizedToken.length()) > maxPrefixLength) {
-	        return substringByCodePoints(normalizedToken, maxPrefixLength);
-        }
-        return normalizedToken;
-    }
-
     private static boolean isTokenCharacter(String value, int index, boolean tokenAlreadyStarted) {
         int character = value.codePointAt(index);
         if (Character.isLetter(character) || Character.isDigit(character)) {
             return true;
-        }
+        }        
         int nextIndex = index + Character.charCount(character);
         int previousIndex = index > 0 ? value.offsetByCodePoints(index, -1) : -1;
-        boolean isHyphenNearNumber = character == '-'
+        
+        boolean isHyphenNearNumber = (character == '-')
                 && ((nextIndex < value.length() && Character.isDigit(value.codePointAt(nextIndex)))
                 || (previousIndex >= 0 && Character.isDigit(value.codePointAt(previousIndex))));
+        // dot belongs to word same as '''
+//        boolean lastSymbolDot = character == '.' 
+//				&& previousIndex >= 0 && Character.isLetter(value.codePointAt(previousIndex));
         if (isHyphenNearNumber) {
             return true;
         }
@@ -249,14 +260,10 @@ public class SearchAlgorithms {
     }
 
     private static final int MARKER_LCP_LENGTH = SUFFIX_DICT_MARKER_MAX - SUFFIX_DICT_MARKER_BASE;
-    public record SuffixEntry(String resolvedSuffix, String encodedSuffix) {}
-    public static final String EMPTY_SUFFIX_DICTIONARY_SENTINEL = "\uE100";
+    // compatible with default writer split "" 
+    public static final String EMPTY_SUFFIX_DICTIONARY_SENTINEL = "";
+    public static final String OLD_EMPTY_SUFFIX_DICTIONARY_SENTINEL = "\uE100";
     
-    public static class SuffixDictionary<T> {
-        public final List<SuffixEntry> dictionaryEntries = new ArrayList<>();
-        public final Map<String, Integer> resolvedSuffixToIndex = new HashMap<>();
-        public final Map<T, int[]> bitsets = new LinkedHashMap<>();
-    }
 
     private static boolean startsWithSuffixMarker(String value) {
         if (value.isEmpty()) {
@@ -267,12 +274,13 @@ public class SearchAlgorithms {
                 || (markerCodePoint >= SUFFIX_DICT_MARKER_BASE && markerCodePoint <= SUFFIX_DICT_MARKER_MAX);
     }
     
-    private static String nameIndexEncodeSuffix(String suffix) {
-        return startsWithSuffixMarker(suffix) ? SUFFIX_DICT_MARKER_RAW_ESCAPE + suffix : suffix;
-    }
-
+    
     private static int countCodePoints(String value) {
         return value.codePointCount(0, value.length());
+    }
+    
+	private static String nameIndexEncodeSuffix(String suffix) {
+        return startsWithSuffixMarker(suffix) ? SUFFIX_DICT_MARKER_RAW_ESCAPE + suffix : suffix;
     }
     
     public static String nameIndexEncodeSuffix(String suffix, String previousSuffix) {
@@ -291,64 +299,7 @@ public class SearchAlgorithms {
         return countCodePoints(deltaEncodedSuffix) < countCodePoints(encodedRawSuffix) ? deltaEncodedSuffix : encodedRawSuffix;
     }
 
-    /**
-     * Collects unique suffixes for the prefix, stores them once in sorted encoded form, and builds per-object bitsets.
-     */
-    public static <T> SuffixDictionary<T> nameIndexBuildSuffixDictionary(String prefix, List<T> objects,
-                                                                         Function<T, Collection<String>> tokenSupplier) {
-        SuffixDictionary<T> data = new SuffixDictionary<>();
-        TreeSet<String> sortedSuffixes = new TreeSet<>();
-        Map<T, Set<String>> suffixesByObject = new LinkedHashMap<>();
-        for (T object : objects) {
-            Set<String> objectSuffixes = new LinkedHashSet<>();
-            suffixesByObject.put(object, objectSuffixes);
-            for (String token : tokenSupplier.apply(object)) {
-                int suffixOffset = suffixOffsetAfterPrefix(token, prefix);
-                String suffix;
-                if (suffixOffset < 0) {
-                    if (!Objects.equals(token, prefix)) {
-                        continue;
-                    }
-                    suffix = "";
-                } else {
-                    suffix = Normalizer.normalize(token.substring(suffixOffset), Normalizer.Form.NFC);
-                }
-                if (suffix == null) {
-                    continue;
-                }
-                objectSuffixes.add(suffix);
-                sortedSuffixes.add(suffix);
-            }
-        }
-        String previousSuffix = null;
-        for (String suffix : sortedSuffixes) {
-            String encodedSuffix = nameIndexEncodeSuffix(suffix, previousSuffix);
-            SuffixEntry entry = new SuffixEntry(suffix, encodedSuffix);
-            data.resolvedSuffixToIndex.put(entry.resolvedSuffix(), data.dictionaryEntries.size());
-            data.dictionaryEntries.add(entry);
-            previousSuffix = suffix;
-        }
-        int dictionaryWordCount = (data.dictionaryEntries.size() + Integer.SIZE - 1) / Integer.SIZE;
-        if (dictionaryWordCount == 0) {
-            return data;
-        }
-        for (T object : objects) {
-            int[] bitsetWords = new int[dictionaryWordCount];
-            Set<String> objectSuffixes = suffixesByObject.get(object);
-            if (objectSuffixes != null) {
-                for (String suffix : objectSuffixes) {
-                    Integer suffixIndex = data.resolvedSuffixToIndex.get(suffix);
-                    if (suffixIndex == null) {
-                        continue;
-                    }
-                    bitsetWords[suffixIndex >> 5] |= 1 << (suffixIndex & 31);
-                }
-            }
-            data.bitsets.put(object, bitsetWords);
-        }
-        return data;
-    }
-
+ 
     public static String replaceGermanSS(String fullText) {
         int i;
         while ((i = fullText.indexOf('ß')) != -1) {
@@ -357,7 +308,7 @@ public class SearchAlgorithms {
         return fullText;
     }
 
-	public static void removeCommonWords(List<String> names) {
+	public static void removeCommonWords(CommonWords cw, List<String> names) {
 		// remove all common words (most common delete first) but leave at least 1
 		int pos = 0;
 		while (names.size() > 1 && pos != -1) {
@@ -365,7 +316,7 @@ public class SearchAlgorithms {
 			pos = -1;
 			for (int k = 0; k < names.size(); k++) {
 				String word = names.get(k);
-				int prio = CommonWords.getCommon(word);
+				int prio = cw.getCommon(word);
 				if (Abbreviations.isConjunction(word)) {
 					prio = 0;
 				}
@@ -379,4 +330,134 @@ public class SearchAlgorithms {
 			}
 		}
 	}
+	
+	
+	// [zoom - default = 15 - 1km],[xzoom-left],[xzoom-right-delta],[y-top],[y-bottom-delta],...
+	// input is boundary encoded - 4 first uints is bbox -  of x31-left, y31-top, x31-right, y31-bottom
+	public static int[] encodeBboxForNameAtoms(int zoom, int[] bbox31) {
+		int[] res = new int[bbox31.length + 1];
+		res[0] = zoom;
+		int dz = 31 - zoom;
+		// support for array of bboxes could be added later 
+		// without it some width could be negative -180 meridian
+		res[1] = bbox31[0] >> dz;
+		res[2] = Math.max(1, (bbox31[2] >> dz) - res[1]);
+		res[3] = bbox31[1] >> dz;
+		res[4] = Math.max(1, (bbox31[3] >> dz) - res[3]);
+		return res;
+	}
+	
+	// return array of x31-left, y31-top, x31-right, y31-bottom
+	public static int[] decodeBboxForNameAtoms(int[] vls, int x16, int y16, int zDec) {
+		if (vls.length < 5) {
+			return null;
+		}
+		int zoom = vls[0];
+		int[] res = new int[((vls.length - 1) / 4) * 4];
+		for(int ind = 0; ind < res.length; ind+=4) {
+			res[ind] = ((x16 >> (16 - zoom)) - vls[ind + 1]) << (zDec - zoom);
+			res[ind + 1] = ((y16 >> (16 - zoom)) - vls[ind + 3]) << (zDec - zoom);
+			res[ind + 2] = ((vls[ind + 2] + 1) << (zDec - zoom)) - 1 + res[ind];
+			res[ind + 3] = ((vls[ind + 4] + 1) << (zDec - zoom)) - 1 + res[ind + 1];
+		}
+		return res;
+	}
+	
+	public static int[] decodeBboxForNameAtomsBytes(ByteString bbox, int x16, int y16) {
+		int[] dBbox = null;
+		if (bbox != null) {
+			ByteArrayInputStream bis = new ByteArrayInputStream(bbox.toByteArray());
+			TIntArrayList lst = new TIntArrayList();
+			while (bis.available() > 0) {
+				try {
+					int n = CodedInputStream.readRawVarint32(bis);
+					lst.add(n);
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
+			}
+			dBbox = SearchAlgorithms.decodeBboxForNameAtoms(lst.toArray(), x16, y16, 31);
+		}
+		return dBbox;
+	}
+	
+	public static int letters(String s) {
+		int count = 0;
+		for (int i = 0; i < s.length(); i++) {
+			if (!Character.isDigit(s.charAt(i)) && Character.isLetter(s.charAt(i))) {
+				count++;
+			}
+		}
+		return count;
+	}
+
+	public static boolean isNumber2Letters(String name) {
+		if(name == null || name.length() == 0) {
+			return false;
+		}
+		return startsWithDigit(name) && letters(name) < 2;
+	}
+
+	public static boolean startsWithDigit(String name) {
+		// it used to be inconcinstent check for Character.isDigit(name.charAt(0)) - '#3'
+		boolean startsWithDigit = false;
+		for (int i = 0; i < name.length(); i++) {
+			if (Character.isDigit(name.charAt(i))) {
+				startsWithDigit = true;
+				break;
+			} else if (Character.isLetter(name.charAt(i))) {
+				break;
+			}
+		}
+		return startsWithDigit;
+	}	
+	
+	// Split '18B', '18/B', '18-B', '18 B' -> ['18', 'B'] - for duplicates list filled in (check list.size() > set)
+	public static Set<String> getBuildingCompareSet(String name, List<String> inCaseDuplicates) {
+		if (inCaseDuplicates != null) {
+			inCaseDuplicates.clear();
+		}
+		Set<String> resultSet = null;
+		StringBuilder currentToken = new StringBuilder();
+		int lastType = 0;
+		for (int i = 0; i < name.length(); i++) {
+			char ch = name.charAt(i);
+			int type = Character.isDigit(ch) ? 1 : (Character.isLetter(ch) ? 2 : 0);
+			boolean addToken = false;
+			if (type != lastType) {
+				addToken = true;
+			}
+			if (addToken && currentToken.length() > 0) {
+				if (resultSet == null) {
+					resultSet = new TreeSet<String>();
+				}
+				String toAdd = currentToken.toString().toLowerCase();
+				if (inCaseDuplicates != null) {
+					inCaseDuplicates.add(toAdd);
+				}
+				resultSet.add(toAdd);
+				currentToken.setLength(0); // Clear buffer
+			}
+			if (type > 0) {
+				currentToken.append(ch);
+			}
+			lastType = type;
+		}
+		if (currentToken.length() > 0) {
+			if (resultSet == null) {
+				return Collections.singleton(currentToken.toString().toLowerCase());
+			}
+			String toAdd = currentToken.toString().toLowerCase();
+			if (inCaseDuplicates != null) {
+				inCaseDuplicates.add(toAdd);
+			}
+			resultSet.add(toAdd);
+		}
+		if (resultSet == null) {
+			return Collections.singleton(name.toLowerCase());
+		}
+		return resultSet;
+	}
+
 }
+

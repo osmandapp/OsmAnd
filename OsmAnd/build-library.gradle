@@ -5,6 +5,7 @@ apply from: rootProject.file("versions.gradle")
 
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-parcelize'
+apply plugin: 'org.jetbrains.kotlin.plugin.compose'
 
 android {
 
@@ -23,6 +24,7 @@ android {
 
 	buildFeatures {
 		aidl true
+		compose true
 	}
 
 	sourceSets {
@@ -105,6 +107,3 @@ project.afterEvaluate {
 	}
 }
 
-dependencies {
-	implementation 'com.google.android.gms:play-services-location:21.3.0'
-}

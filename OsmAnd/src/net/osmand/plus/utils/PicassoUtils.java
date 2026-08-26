@@ -47,6 +47,7 @@ public class PicassoUtils {
 
 	private final Cache diskCache;
 	private final LruCache memoryCache;
+	private final OkHttpClient okHttpClient;
 
 	private final Map<String, Boolean> cached = new HashMap<>();
 
@@ -56,7 +57,7 @@ public class PicassoUtils {
 		diskCache = new Cache(cacheDir, calculateDiskCacheSize(cacheDir));
 		memoryCache = new LruCache(app);
 
-		OkHttpClient okHttpClient = new OkHttpClient.Builder().cache(diskCache).build();
+		okHttpClient = new OkHttpClient.Builder().cache(diskCache).build();
 		Picasso picasso = new Picasso.Builder(app)
 				.downloader(new OkHttp3Downloader(okHttpClient))
 				.memoryCache(memoryCache)
@@ -99,6 +100,11 @@ public class PicassoUtils {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	@NonNull
+	public OkHttpClient getOkHttpClient() {
+		return okHttpClient;
 	}
 
 	public synchronized static PicassoUtils getPicasso(@NonNull OsmandApplication app) {

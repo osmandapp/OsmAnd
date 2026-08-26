@@ -69,12 +69,12 @@ import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener {
 
@@ -103,7 +103,7 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 	public OfflineForecastHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		settings = app.getSettings();
-		offlineForecastInfo = new HashMap<>();
+		offlineForecastInfo = new ConcurrentHashMap<>();
 		totalCacheSize = new WeatherTotalCacheSize(this);
 	}
 
@@ -695,8 +695,7 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 		if (destinationTilesCount <= 0) {
 			return;
 		}
-		int downloadedTilesCount = getOfflineForecastProgressInfo(regionId);
-		setOfflineForecastProgressInfo(regionId, ++downloadedTilesCount);
+		int downloadedTilesCount = getOrCreateCachedInfo(regionId).incrementDownloadProgress();
 
 		float currentProgress = (float) downloadedTilesCount / destinationTilesCount;
 		if (progress != null) {
@@ -880,12 +879,7 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 
 	@NonNull
 	private OfflineForecastInfo getOrCreateCachedInfo(@NonNull String regionId) {
-		OfflineForecastInfo info = getCachedInfo(regionId);
-		if (info == null) {
-			info = new OfflineForecastInfo();
-			offlineForecastInfo.put(regionId, info);
-		}
-		return info;
+		return offlineForecastInfo.computeIfAbsent(regionId, key -> new OfflineForecastInfo());
 	}
 
 	private void runAsync(@NonNull Runnable runnable) {

@@ -79,7 +79,7 @@
 		android:selectable="false" />
 
 	<Preference
-		android:key="coordinates_format"
+		android:key="coordinate_formats"
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/coords_format"
 		app:fragment="net.osmand.plus.settings.fragments.CoordinatesFormatFragment" />

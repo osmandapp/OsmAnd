@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/list_background_color"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:id="@+id/selectable_list_item"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/list_background_color"
+		android:gravity="center_vertical"
+		android:minHeight="68dp"
+		android:orientation="horizontal"
+		android:paddingStart="4dp"
+		android:paddingTop="@dimen/content_padding_half"
+		android:paddingEnd="4dp"
+		android:paddingBottom="@dimen/content_padding_half">
+
+		<ImageButton
+			android:id="@+id/removeButton"
+			style="@style/Widget.AppCompat.ActionButton"
+			android:layout_width="48dp"
+			android:layout_height="48dp"
+			android:layout_gravity="center_vertical"
+			android:contentDescription="@string/shared_string_remove"
+			android:padding="5dp"
+			android:scaleType="center"
+			tools:src="@drawable/ic_action_remove" />
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="20dp"
+			android:layout_weight="1"
+			android:orientation="vertical">
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@android:id/title"
+				style="@style/TitleStyle"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:ellipsize="end"
+				android:maxLines="2"
+				android:textColor="?attr/text_color_primary_v2"
+				tools:text="DDD.DDDDD" />
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@android:id/summary"
+				style="@style/DescStyle"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:ellipsize="end"
+				android:maxLines="2"
+				android:textColor="?android:attr/textColorSecondary"
+				tools:text="49.41869, 8.67339" />
+
+		</LinearLayout>
+
+		<ImageButton
+			android:id="@+id/dragHandle"
+			style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+			android:layout_width="48dp"
+			android:layout_height="48dp"
+			android:contentDescription="@string/drag_to_reorder_content_description"
+			android:scaleType="center"
+			tools:src="@drawable/ic_action_item_move" />
+
+	</LinearLayout>
+
+	<View
+		android:id="@+id/divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginStart="72dp"
+		android:background="?attr/divider_color" />
+
+</LinearLayout>

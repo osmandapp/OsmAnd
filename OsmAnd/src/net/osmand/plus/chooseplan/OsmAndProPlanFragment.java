@@ -53,22 +53,10 @@ public class OsmAndProPlanFragment extends SelectedPlanFragment {
 	public static List<PriceButton<?>> collectPriceButtons(OsmandApplication app,
 														   InAppPurchaseHelper purchaseHelper,
 	                                                       boolean nightMode) {
-		List<InAppSubscription> subscriptions = getVisibleSubscriptions(app, purchaseHelper);
+		List<InAppSubscription> subscriptions = PurchasingUtils.getVisibleProSubscriptions(app, purchaseHelper);
 		List<SubscriptionButton> subscriptionButtons =
 				PurchasingUtils.collectSubscriptionButtons(app, purchaseHelper, subscriptions, nightMode);
 		return new ArrayList<>(subscriptionButtons);
-	}
-
-	public static List<InAppSubscription> getVisibleSubscriptions(OsmandApplication app, InAppPurchaseHelper purchaseHelper) {
-		InAppPurchases purchases = app.getInAppPurchaseHelper().getInAppPurchases();
-		List<InAppSubscription> subscriptions = new ArrayList<>();
-		List<InAppSubscription> visibleSubscriptions = purchaseHelper.getSubscriptions().getVisibleSubscriptions();
-		for (InAppSubscription subscription : visibleSubscriptions) {
-			if (purchases.isOsmAndPro(subscription)) {
-				subscriptions.add(subscription);
-			}
-		}
-		return subscriptions;
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity) {

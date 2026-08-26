@@ -7,7 +7,7 @@ import net.osmand.shared.gpx.PointAttributes
 import net.osmand.shared.routing.RouteColorize
 import net.osmand.shared.util.KAlgorithms
 
-class WptPt : GpxExtensions {
+class WptPt : GpxExtensions, Linkable {
 
 	var lat: Double = 0.0
 	var lon: Double = 0.0
@@ -58,7 +58,7 @@ class WptPt : GpxExtensions {
 			}
 		}
 
-	var links: List<Link>?
+	override var links: List<Link>?
 		get() = metadata?.links
 		set(value) = setMetadataValue(if (value.isNullOrEmpty()) null else ArrayList(value)) { links = it }
 
@@ -113,10 +113,14 @@ class WptPt : GpxExtensions {
 		}
 	}
 
-	fun addLink(link: Link) {
+	override fun addLink(link: Link) {
 		val data = ensureMetadata()
 		val links = data.links ?: ArrayList<Link>().also { data.links = it }
 		links.add(link)
+	}
+
+	override fun removeLink(link: Link) {
+		metadata?.links?.remove(link)
 	}
 
 	fun getColor(): Int {
@@ -182,6 +186,8 @@ class WptPt : GpxExtensions {
 		setIconName(icon)
 		setBackgroundType(background)
 	}
+
+	fun getKey() = "${name.orEmpty()}__${category.orEmpty()}"
 
 	fun getIconName(): String? {
 		return getExtensionsToRead()[GpxUtilities.ICON_NAME_EXTENSION]

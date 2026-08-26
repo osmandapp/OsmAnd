@@ -12,7 +12,6 @@
     <string name="delete_search_history">Хайсан түүхийг устгах</string>
     <string name="restart_search">Дахин хайх</string>
     <string name="srtm_menu_download_descr">татах</string>
-    <string name="do_not_send_anonymous_app_usage_desc">татах</string>
     <string name="search_map_hint">Хот болон улс хайх</string>
     <string name="custom_search">Чөлөөт хайлт</string>
     <string name="coords_search">Координат хайх</string>

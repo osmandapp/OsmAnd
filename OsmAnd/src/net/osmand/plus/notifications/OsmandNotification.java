@@ -8,14 +8,23 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationCompat.Builder;
 import androidx.core.app.NotificationManagerCompat;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 
+import org.apache.commons.logging.Log;
+
+import java.util.HashSet;
+import java.util.Set;
+
 public abstract class OsmandNotification {
+
+	private static final Log LOG = PlatformUtil.getLog(OsmandNotification.class);
 
 	private static final boolean CLEAR_NOTIFICATION_IF_CHANGED = false;
 
@@ -24,6 +33,7 @@ public abstract class OsmandNotification {
 	public static final int DOWNLOAD_NOTIFICATION_SERVICE_ID = 8;
 	public static final int CAR_APP_NOTIFICATION_SERVICE_ID = 9;
 	public static final int FALLBACK_NOTIFICATION_SERVICE_ID = 10;
+	public static final int AIS_NOTIFICATION_SERVICE_ID = 11;
 	public static final int TOP_NOTIFICATION_SERVICE_ID = 100;
 
 	public static final int WEAR_NAVIGATION_NOTIFICATION_SERVICE_ID = 1005;
@@ -31,6 +41,7 @@ public abstract class OsmandNotification {
 	public static final int WEAR_DOWNLOAD_NOTIFICATION_SERVICE_ID = 1008;
 	public static final int WEAR_CAR_APP_NOTIFICATION_SERVICE_ID = 1009;
 	public static final int WEAR_FALLBACK_NOTIFICATION_SERVICE_ID = 1010;
+	public static final int WEAR_AIS_NOTIFICATION_SERVICE_ID = 1011;
 
 	protected OsmandApplication app;
 	protected boolean ongoing = true;
@@ -52,6 +63,7 @@ public abstract class OsmandNotification {
 		FALLBACK,
 		DOWNLOAD,
 		CAR_APP,
+		AIS,
 	}
 
 	public OsmandNotification(OsmandApplication app, String groupName) {
@@ -134,7 +146,6 @@ public abstract class OsmandNotification {
 	public void onNotificationDismissed() {
 	}
 
-	@SuppressLint("MissingPermission")
 	private void notifyWearable(NotificationManagerCompat notificationManager, boolean stateChanged) {
 		Builder wearNotificationBuilder = buildNotification(null, true);
 		if (wearNotificationBuilder != null) {
@@ -142,11 +153,10 @@ public abstract class OsmandNotification {
 			if (stateChanged && CLEAR_NOTIFICATION_IF_CHANGED) {
 				notificationManager.cancel(getOsmandWearableNotificationId());
 			}
-			notificationManager.notify(getOsmandWearableNotificationId(), wearNotification);
+			notifySafely(notificationManager, wearNotification, getOsmandWearableNotificationId());
 		}
 	}
 
-	@SuppressLint("MissingPermission")
 	public boolean showNotification() {
 		if (isEnabled()) {
 			Builder notificationBuilder = buildNotification(null, false);
@@ -157,7 +167,7 @@ public abstract class OsmandNotification {
 				if (stateChanged && CLEAR_NOTIFICATION_IF_CHANGED) {
 					notificationManager.cancel(notificationId);
 				}
-				notificationManager.notify(notificationId, notification);
+				notifySafely(notificationManager, notification, notificationId);
 				notifyWearable(notificationManager, stateChanged);
 				return true;
 			}
@@ -165,7 +175,6 @@ public abstract class OsmandNotification {
 		return false;
 	}
 
-	@SuppressLint("MissingPermission")
 	public boolean refreshNotification() {
 		if (isEnabled()) {
 			Builder notificationBuilder = buildNotification(null, false);
@@ -176,7 +185,7 @@ public abstract class OsmandNotification {
 				if (stateChanged && CLEAR_NOTIFICATION_IF_CHANGED) {
 					notificationManager.cancel(notificationId);
 				}
-				notificationManager.notify(notificationId, notification);
+				notifySafely(notificationManager, notification, notificationId);
 				notifyWearable(notificationManager, stateChanged);
 				return true;
 			} else {
@@ -186,6 +195,20 @@ public abstract class OsmandNotification {
 			notificationManager.cancel(getOsmandNotificationId());
 		}
 		return false;
+	}
+
+	private final Set<Integer> failedNotificationIds = new HashSet<>();
+
+	@SuppressLint("MissingPermission")
+	private void notifySafely(@NonNull NotificationManagerCompat manager, @NonNull Notification notification, int id) {
+		try {
+			manager.notify(id, notification);
+			failedNotificationIds.remove(id);
+		} catch (RuntimeException e) {
+			if (failedNotificationIds.add(id)) {
+				LOG.error("Failed to post notification " + id, e);
+			}
+		}
 	}
 
 	private Notification getNotification(Builder notificationBuilder, boolean forceBuild) {
@@ -203,4 +226,3 @@ public abstract class OsmandNotification {
 		notificationManager.cancel(getOsmandWearableNotificationId());
 	}
 }
-

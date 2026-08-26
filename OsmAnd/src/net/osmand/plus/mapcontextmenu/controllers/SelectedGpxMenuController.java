@@ -85,7 +85,7 @@ public class SelectedGpxMenuController extends MenuController {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null && selectedGpxPoint.getSelectedGpxFile() != null) {
 				SelectedGpxFile selectedGpxFile = selectedGpxPoint.getSelectedGpxFile();
-				GpxTrackAnalysis analysis = selectedGpxFile.getTrackAnalysis(mapActivity.getApp());
+				GpxTrackAnalysis analysis = selectedGpxFile.getTrackSummaryAnalysis(mapActivity.getApp());
 				if (analysis != null) {
 					String path = selectedGpxFile.getGpxFile().getPath();
 					KFile file = selectedGpxFile.isShowCurrentTrack() || Algorithms.isEmpty(path)

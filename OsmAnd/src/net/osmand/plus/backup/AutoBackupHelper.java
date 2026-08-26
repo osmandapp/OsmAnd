@@ -140,8 +140,10 @@ public class AutoBackupHelper implements OnPrepareBackupListener {
 			case FAVORITES: {
 				app.getFavoritesHelper().addListener(new FavoritesListener() {
 					@Override
-					public void onSavingFavoritesFinished() {
-						requestAutoBackup();
+					public void onSavingFavoritesFinished(boolean success) {
+						if (success) {
+							requestAutoBackup();
+						}
 					}
 				});
 			}

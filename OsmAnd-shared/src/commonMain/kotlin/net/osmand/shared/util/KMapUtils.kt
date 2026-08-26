@@ -16,6 +16,9 @@ import kotlin.math.*
 object KMapUtils {
 
 	const val ROUNDING_ERROR = 3
+	// for haversine use R = 6372.8 km instead of 6371 km
+	const val HAVERSINE_EARTH_RADIUS_METERS = 6372800.0
+	const val VECTOR_LINE_EARTH_RADIUS_METERS = 6371000.0
 	private const val EARTH_RADIUS_B = 6356752
 	private const val EARTH_RADIUS_A = 6378137
 	const val MIN_LATITUDE = -85.0511
@@ -81,15 +84,23 @@ object KMapUtils {
 		return intArrayOf(finalX, finalY)
 	}
 
-	fun getDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
-		val R = 6372.8 // for haversine use R = 6372.8 km instead of 6371 km
+	fun getDistance(
+		lat1: Double,
+		lon1: Double,
+		lat2: Double,
+		lon2: Double,
+		earthRadiusMeters: Double
+	): Double {
 		val dLat = (lat2 - lat1).toRadians()
 		val dLon = (lon2 - lon1).toRadians()
 		val sinHalfLat = sin(dLat / 2)
 		val sinHalfLon = sin(dLon / 2)
-		val a =
-			sinHalfLat * sinHalfLat + cos(lat1.toRadians()) * cos(lat2.toRadians()) * sinHalfLon * sinHalfLon
-		return 2 * R * 1000 * asin(sqrt(a))
+		val a = sinHalfLat * sinHalfLat + cos(lat1.toRadians()) * cos(lat2.toRadians()) * sinHalfLon * sinHalfLon
+		return 2 * earthRadiusMeters * asin(sqrt(a))
+	}
+
+	fun getDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
+		return getDistance(lat1, lon1, lat2, lon2, HAVERSINE_EARTH_RADIUS_METERS)
 	}
 
 	fun getDistance(l1: KLatLon, l2: KLatLon): Double {
@@ -219,6 +230,10 @@ object KMapUtils {
 			adjustedLongitude += if (adjustedLongitude < 0) LONGITUDE_TURN else -LONGITUDE_TURN
 		}
 		return adjustedLongitude
+	}
+
+	fun isValidLatLon(latitude: Double, longitude: Double): Boolean {
+		return latitude in -90.0..90.0 && longitude in MIN_LONGITUDE..MAX_LONGITUDE
 	}
 
 	fun checkLatitude(latitude: Double): Double {

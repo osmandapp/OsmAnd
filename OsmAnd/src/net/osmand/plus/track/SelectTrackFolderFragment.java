@@ -28,7 +28,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.Location;
-import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
@@ -330,8 +329,7 @@ public class SelectTrackFolderFragment extends BaseFullScreenDialogFragment impl
 		this.sortMode = sortMode;
 		TrackTab trackTab = adapter.getTrackTab();
 		trackTab.setSortMode(sortMode);
-		LatLon latLon = app.getMapViewTrackingUtilities().getDefaultLocation();
-		Collections.sort(trackTab.items, new TracksComparator(trackTab, latLon));
+		Collections.sort(trackTab.items, new TracksComparator(trackTab, app));
 		adapter.notifyDataSetChanged();
 	}
 

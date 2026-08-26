@@ -10,6 +10,7 @@ import androidx.appcompat.widget.SwitchCompat;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.PanelIconMode;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 
 public class BaseSimpleWidgetInfoFragment extends BaseResizableWidgetSettingFragment {
@@ -65,10 +66,15 @@ public class BaseSimpleWidgetInfoFragment extends BaseResizableWidgetSettingFrag
 
 	@Override
 	protected void applySettings() {
+		boolean iconVisibilityChanged = showIcon != shouldShowIconPref.get();
 		shouldShowIconPref.set(showIcon);
 		if (widgetInfo != null) {
 			if (widgetInfo.widget instanceof SimpleWidget simpleWidget) {
 				simpleWidget.updateWidgetView();
+			}
+			if (iconVisibilityChanged) {
+				app.getPanelAppearanceSettingsManager().get(widgetInfo.getWidgetPanel())
+						.getIconModePref(layoutMode).setModeValue(appMode, PanelIconMode.ORIGINAL);
 			}
 		}
 		super.applySettings();

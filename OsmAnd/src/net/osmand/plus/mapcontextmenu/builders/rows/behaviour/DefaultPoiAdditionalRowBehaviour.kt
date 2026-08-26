@@ -16,6 +16,7 @@ open class DefaultPoiAdditionalRowBehaviour : IPoiAdditionalRowBehavior {
             builder.setIsWiki(rule.isWikipedia)
                 .setNeedLinks(rule.isNeedLinks)
                 .setIsPhoneNumber(rule.isPhoneNumber)
+                .setTextLinesLimit(rule.textLinesLimit)
         }
     }
 
@@ -50,20 +51,19 @@ open class DefaultPoiAdditionalRowBehaviour : IPoiAdditionalRowBehavior {
                         if (iconId == 0 && parentType is PoiType) {
                             iconId = getIconId(context, parentType.iconKeyName)
                             if (iconId == 0) {
-                                var iconName =
-                                    parentType.osmTag + "_" + category + "_" + parentType.osmValue
-                                builder.setIcon(menuBuilder.getRowIcon(context, iconName))
-                                if (!builder.hasIcon()) {
-                                    iconName = parentType.osmTag + "_" + parentType.osmValue
-                                    builder.setIcon(menuBuilder.getRowIcon(context, iconName))
-                                }
+                                builder.setIconNameCandidates(
+                                    listOf(
+                                        parentType.osmTag + "_" + category + "_" + parentType.osmValue,
+                                        parentType.osmTag + "_" + parentType.osmValue
+                                    )
+                                )
                             }
                         }
                     }
                     builder.setIconId(iconId)
 
-                    if (!builder.hasIcon()) {
-                        builder.setIconId(R.drawable.ic_action_info_dark)
+                    if (iconId == 0) {
+                        builder.setFallbackIconId(R.drawable.ic_action_info_dark)
                     }
                 }
 

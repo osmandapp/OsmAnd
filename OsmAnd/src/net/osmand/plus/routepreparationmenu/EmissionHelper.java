@@ -58,11 +58,12 @@ public class EmissionHelper {
 	}
 
 	public enum MotorType {
-		PETROL(7.85f, 2.80f), // L
-		DIESEL(6.59f, 3.17f), // L
-		LPG(10.60f, 1.86f), // L
-		GAS(4.90f, 2.28f), // kg
-		ELECTRIC(21.1f, 0.42f), // kWh fuelEmissionFactor "UE except France"
+		PETROL(7.48f, 2.80f), // L //Normal Gasoline
+		DIESEL(6.61f, 3.17f), // L
+		LPG(10.50f, 1.86f), // L
+		GAS(4.73f, 2.28f), // kg //CNG
+		ELECTRIC(19.02f, 0.42f), // kWh fuelEmissionFactor "UE except France"
+		ETHANOL(8.02f, 1.68f), // L, Biolcohol (E85)
 		HYBRID(5.61f, 2.80f); // L, hybrid petrol
 
 		public final float fuelConsumption; // unit (L/kwH/kg)/100km

@@ -1,10 +1,13 @@
 package net.osmand.router;
 
+import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapRouteReaderAdapter;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,6 +18,8 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class RouteStatisticsHelper {
+
+	private static final Log LOG = PlatformUtil.getLog(RouteStatisticsHelper.class);
 
 	public static final String UNDEFINED_ATTR = "undefined";
 	public static final String ROUTE_INFO_PREFIX = "routeInfo_";
@@ -390,7 +395,14 @@ public class RouteStatisticsHelper {
 			//String additional = attrName + "=" + attribute;
 			boolean mainTagAdded = false;
 			StringBuilder additional = new StringBuilder(slopeClass >= 0 ? (BOUNDARIES_CLASS[slopeClass] + ";") : "");
+			int encodingRulesSize = routeObject.region.quickGetEncodingRulesSize();
 			for (int type : routeObject.getTypes()) {
+				if (type < 0 || type >= encodingRulesSize) {
+					LOG.warn("Skipping invalid route encoding rule id=" + type
+							+ " for route object id=" + routeObject.getId()
+							+ ", rules=" + encodingRulesSize);
+					continue;
+				}
 				BinaryMapRouteReaderAdapter.RouteTypeRule tp = routeObject.region.quickGetEncodingRule(type);
 				if (tp.getTag().equals("highway") || tp.getTag().equals("route")
 						|| tp.getTag().equals("railway") || tp.getTag().equals("aeroway")

@@ -32,6 +32,7 @@ import net.osmand.plus.dashboard.DashboardType;
 import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.help.HelpActivity;
+import net.osmand.plus.helpers.DiscountHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.liveupdates.LiveUpdatesFragment;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
@@ -410,6 +411,7 @@ public class MapActivityActions extends MapActions {
 	private ContextMenuAdapter createNormalOptionsMenu(@NonNull MapActivity activity,
 			@NonNull ContextMenuAdapter adapter, boolean nightMode) {
 		createProfilesController(activity, adapter, nightMode, false);
+		addSaleToDrawer(activity, adapter, nightMode);
 
 		adapter.addItem(new ContextMenuItem(DRAWER_DASHBOARD_ID)
 				.setTitleId(R.string.home, activity)
@@ -689,6 +691,24 @@ public class MapActivityActions extends MapActions {
 					activity.startActivity(intent);
 					return true;
 
+				}));
+	}
+
+	private void addSaleToDrawer(@NonNull MapActivity activity, @NonNull ContextMenuAdapter adapter, boolean nightMode) {
+		if (!DiscountHelper.shouldShowCurrentSaleInDrawer(app)) {
+			return;
+		}
+		adapter.addItem(new ContextMenuItem(DRAWER_SALE_ID)
+				.setLayout(R.layout.drawer_sale_list_item)
+				.setTitle(DiscountHelper.getCurrentSaleTitle())
+				.setSecondaryDescription(DiscountHelper.getCurrentSaleDiscount(app, nightMode, true))
+				.setIcon(DiscountHelper.getCurrentSaleDrawerIconId(nightMode))
+				.setUseNaturalIconColor(true)
+				.setListener((uiAdapter, view, item, isChecked) -> {
+					app.logEvent("drawer_sale_open");
+					activity.closeDrawer();
+					DiscountHelper.openCurrentSale(activity);
+					return true;
 				}));
 	}
 

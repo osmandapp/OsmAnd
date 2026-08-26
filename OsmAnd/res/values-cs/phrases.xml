@@ -2140,7 +2140,7 @@
     <string name="poi_animal_training">Drezura</string>
     <string name="poi_animal_training_dog">Pes</string>
     <string name="poi_animal_training_horse">Kůň</string>
-    <string name="poi_horse_yes">Koně povoleni</string>
+    <string name="poi_horse_yes">Ano</string>
     <string name="poi_horse_no">Koně nejsou povoleni</string>
     <string name="poi_animal_yes">Zvířata povolena</string>
     <string name="poi_animal_no">Zvířata nejsou povolena</string>
@@ -2219,7 +2219,7 @@
     <string name="poi_bridge_ref">Číslo mostu</string>
     <string name="poi_tunnel_ref">Číslo tunelu</string>
     <string name="poi_ref">Referenční číslo</string>
-    <string name="poi_cargo_passengers">Cestující</string>
+    <string name="poi_cargo_passengers">Osobní doprava</string>
     <string name="poi_cargo_vehicle">Vozidla</string>
     <string name="poi_cargo_bicycle">Kola</string>
     <string name="poi_cargo_container">Kontejnery</string>
@@ -3175,11 +3175,11 @@
     <string name="poi_boat_jetski_rental_no">Vodní skútry: ne</string>
     <string name="poi_gorge">Rokle</string>
     <string name="poi_mountain_area">Horská oblast</string>
-    <string name="poi_surface_clay">Antuka</string>
-    <string name="poi_surface_tartan">Tartan (Umělá běžecká trať)</string>
-    <string name="poi_surface_artificial_turf">Umělý trávník</string>
-    <string name="poi_surface_decoturf">DecoTurf (umělý tenisový povrch)</string>
-    <string name="poi_surface_metal_grid">Kovový rošt</string>
+    <string name="poi_surface_clay">Povrch: antuka</string>
+    <string name="poi_surface_tartan">Povrch: tartan</string>
+    <string name="poi_surface_artificial_turf">Povrch: umělý trávník</string>
+    <string name="poi_surface_decoturf">Povrch: DecoTurf</string>
+    <string name="poi_surface_metal_grid">Povrch: kovový rošt</string>
     <string name="poi_location_underground">Umístění: pod zemí</string>
     <string name="poi_location_underwater">Umístění: pod vodou</string>
     <string name="poi_location_overground">Umístění: u země</string>
@@ -3637,7 +3637,7 @@
     <string name="poi_tourist_bus_no">Přístup turistických autobusů: ne</string>
     <string name="poi_coach_yes">Přístup dálkových autobusů: ano</string>
     <string name="poi_coach_no">Přístup dálkových autobusů: ne</string>
-    <string name="poi_ski_yes">Přístup lyžařů: ano</string>
+    <string name="poi_ski_yes">Ano</string>
     <string name="poi_ski_no">Přístup lyžařů: ne</string>
     <string name="poi_snowmobile_private">Přístup sněžných skútrů: soukromý</string>
     <string name="poi_snowmobile_no">Přístup sněžných skútrů: ne</string>
@@ -4571,7 +4571,7 @@
     <string name="poi_cemt_i">I</string>
     <string name="poi_cemt_iii">III</string>
     <string name="poi_ship_no">Přístup lodí: ne</string>
-    <string name="poi_surface_chipseal">Asfaltový povrch</string>
+    <string name="poi_surface_chipseal">Povrch: Asfalt</string>
     <string name="poi_vending_machine_fuel">Ano</string>
     <string name="poi_tunnel_name">Název tunelu</string>
     <string name="poi_bridge_name">Název mostu</string>

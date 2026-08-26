@@ -6,7 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
+import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
+import net.osmand.ProgressOutputStream;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
@@ -32,8 +34,16 @@ import net.osmand.shared.gpx.GpxDirItem;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumMap;
@@ -41,6 +51,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import okio.Utf8;
 
 public abstract class SettingsHelper {
 
@@ -53,6 +65,7 @@ public abstract class SettingsHelper {
 	public static final String SETTINGS_VERSION_KEY = "settings_version";
 
 	public static final int BUFFER = 1024;
+	private static final int JSON_BUFFER_SIZE = 32 * 1024;
 
 	public static final Log LOG = PlatformUtil.getLog(SettingsHelper.class);
 
@@ -107,6 +120,26 @@ public abstract class SettingsHelper {
 
 	public OsmandApplication getApp() {
 		return app;
+	}
+
+	public static void writeJson(@NonNull JSONObject json, @NonNull OutputStream outputStream,
+	                             @Nullable IProgress progress) throws IOException, JSONException {
+		String jsonString = json.toString(2);
+		OutputStream targetStream = outputStream;
+		if (progress != null) {
+			long work = Utf8.size(jsonString) / BUFFER;
+			progress.startWork((int) Math.min(work, Integer.MAX_VALUE));
+			targetStream = new ProgressOutputStream(outputStream, progress, BUFFER);
+		}
+		try {
+			Writer writer = new BufferedWriter(new OutputStreamWriter(targetStream, StandardCharsets.UTF_8), JSON_BUFFER_SIZE);
+			writer.write(jsonString);
+			writer.flush();
+		} finally {
+			if (progress != null) {
+				progress.finishTask();
+			}
+		}
 	}
 
 	public List<SettingsItem> getFilteredSettingsItems(List<ExportType> acceptedTypes,

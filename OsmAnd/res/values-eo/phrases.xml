@@ -3165,11 +3165,11 @@
     <string name="poi_gorge">Kanjono</string>
     <string name="poi_couloir">Akvosulko</string>
     <string name="poi_mountain_area">Montara areo</string>
-    <string name="poi_surface_clay">argilo</string>
-    <string name="poi_surface_tartan">tartano</string>
-    <string name="poi_surface_artificial_turf">artefarita herbo</string>
-    <string name="poi_surface_decoturf">DecoTurf</string>
-    <string name="poi_surface_metal_grid">metala krado</string>
+    <string name="poi_surface_clay">Pavimo: argilo</string>
+    <string name="poi_surface_tartan">Pavimo: tartano</string>
+    <string name="poi_surface_artificial_turf">Pavimo: artefarita herbo</string>
+    <string name="poi_surface_decoturf">Pavimo: DecoTurf</string>
+    <string name="poi_surface_metal_grid">Pavimo: metala krado</string>
     <string name="poi_location_underground">Loko: subtere</string>
     <string name="poi_location_underwater">Loko: subakve</string>
     <string name="poi_location_overground">Loko: supertere</string>
@@ -4539,7 +4539,7 @@
     <string name="poi_sinkhole_estavelle">Dolino: dudirekta (estavelo)</string>
     <string name="poi_spikes">Trafika pikil-strio</string>
     <string name="poi_toy_library">Biblioteko de ludiloj</string>
-    <string name="poi_surface_chipseal">Asfalto kun rompŝtono</string>
+    <string name="poi_surface_chipseal">Pavimo: asfalto kun rompŝtonoj</string>
     <string name="poi_cemt_ii">II (regiona, Kampine-ŝipoj)</string>
     <string name="poi_cemt">CEMT (Klasifiko de Eŭropaj Enlandaj Akvovojoj)</string>
     <string name="poi_lock_name">Nomo de kluzo</string>
@@ -4937,7 +4937,7 @@
     <string name="poi_climbing_area">Grimpada tereno</string>
     <string name="poi_climbing_route">Grimpada kurso</string>
     <string name="poi_climbing_route_bottom">Malsupro de grimpada kurso</string>
-    <string name="poi_cafe_yes">jes</string>
+    <string name="poi_cafe_yes">Kafejo: jes</string>
     <string name="poi_route_activity_type_mountain_biking">Montbiciklaj kursoj</string>
     <string name="poi_route_activity_type_road_cycling">Ŝose-biciklaj kursoj</string>
     <string name="poi_network_cycling">Reto de kurso (bicikla)</string>
@@ -4954,7 +4954,7 @@
     <string name="poi_network_foot">Reto de kurso (piedirada)</string>
     <string name="poi_osmwiki">Popularaj ejoj (Vikipedio)</string>
     <string name="poi_mosque">Moskeo</string>
-    <string name="poi_buddhist_temple">Budhisma templo</string>
+    <string name="poi_buddhist_temple">Budaisma templo</string>
     <string name="poi_hindu_temple">Hinduisma templo</string>
     <string name="poi_shinto_shrine">Ŝintoisma templo</string>
     <string name="poi_synagogue">Sinagogo</string>
@@ -5161,7 +5161,7 @@
     <string name="poi_sample_collection_blood">sango</string>
     <string name="poi_yoga">Jogo</string>
     <string name="poi_memorial_type">Speco de memorigaĵo</string>
-    <string name="poi_covered_booth_filter">budo</string>
+    <string name="poi_covered_booth_filter">Kovrita (budo)</string>
     <string name="poi_rapids_filter">Malfacilo de rivero</string>
     <string name="poi_rapids_grade_0">0 (kvieta akvo)</string>
     <string name="poi_rapids_grade_1">1 (facila)</string>
@@ -5171,4 +5171,7 @@
     <string name="poi_rapids_grade_5">5 (por spertuloj)</string>
     <string name="poi_rapids_grade_6">6 (ekstrema)</string>
     <string name="poi_rapids_grade_x">X (nenetraflosebla)</string>
+    <string name="poi_water_type_filter">Speco de akvujo</string>
+    <string name="poi_water_lake">lago</string>
+    <string name="poi_surface_laterite">Pavimo: laterito</string>
 </resources>

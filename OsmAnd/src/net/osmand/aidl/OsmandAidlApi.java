@@ -1171,6 +1171,26 @@ public class OsmandAidlApi {
 		return false;
 	}
 
+	boolean addWidgetGroup(String packName, AidlWidgetGroupWrapper group) {
+		if (group != null) {
+			ConnectedApp connectedApp = connectedApps.get(packName);
+			if (connectedApp != null) {
+				return connectedApp.addWidgetGroup(group);
+			}
+		}
+		return false;
+	}
+
+	boolean removeWidgetGroup(String packName, String groupId, boolean removeWidgets) {
+		if (!Algorithms.isEmpty(groupId)) {
+			ConnectedApp connectedApp = connectedApps.get(packName);
+			if (connectedApp != null) {
+				return connectedApp.removeWidgetGroup(groupId, removeWidgets);
+			}
+		}
+		return false;
+	}
+
 	boolean addMapLayer(String packName, AidlMapLayerWrapper layer) {
 		if (layer != null) {
 			ConnectedApp connectedApp = connectedApps.get(packName);
@@ -2648,11 +2668,11 @@ public class OsmandAidlApi {
 	}
 
 	private static boolean hasUnsafeCopyPath(@Nullable String destinationDir, @Nullable String fileName) {
-		if (Algorithms.isEmpty(fileName) || fileName.contains("/")) {
+		if (Algorithms.isEmpty(fileName) || fileName.contains("/") || fileName.equals("..")) {
 			return true;
 		}
 		return Algorithms.isNotEmpty(destinationDir) && (destinationDir.contains("/../")
-				|| destinationDir.startsWith("../") || destinationDir.endsWith("/.."));
+				|| destinationDir.startsWith("../") || destinationDir.endsWith("/..") || destinationDir.equals(".."));
 	}
 
 	private static class GpxAsyncLoaderTask extends AsyncTask<Void, Void, GpxFile> {

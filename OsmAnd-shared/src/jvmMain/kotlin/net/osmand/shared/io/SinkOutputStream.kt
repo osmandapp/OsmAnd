@@ -2,12 +2,18 @@ package net.osmand.shared.io
 
 import okio.BufferedSink
 import okio.IOException
-import okio.Okio
 import okio.Sink
 import okio.buffer
 import java.io.OutputStream
 
-class SinkOutputStream(sink: Sink) : OutputStream() {
+/**
+ * [OutputStream] over an okio [Sink].
+ *
+ * With [closeSink] = false, [close] only flushes — for caller-owned sinks that must
+ * stay open (e.g. AtomicFile streams closed by finishWrite()).
+ */
+class SinkOutputStream(sink: Sink, private val closeSink: Boolean = true) : OutputStream() {
+
 	private val bufferedSink: BufferedSink = sink.buffer()
 
 	@Throws(IOException::class)
@@ -25,8 +31,19 @@ class SinkOutputStream(sink: Sink) : OutputStream() {
 		bufferedSink.flush()
 	}
 
+	/**
+	 * Closes the underlying sink, or — when [closeSink] is false — only flushes it.
+	 *
+	 * The flush-only mode deliberately deviates from the [OutputStream.close] contract:
+	 * all buffered bytes are pushed through, but the sink stays open and the caller
+	 * remains responsible for closing it.
+	 */
 	@Throws(IOException::class)
 	override fun close() {
-		bufferedSink.close()
+		if (closeSink) {
+			bufferedSink.close()
+		} else {
+			flush()
+		}
 	}
 }

@@ -4,12 +4,14 @@ import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 import static net.osmand.shared.gpx.GpxUtilities.DEFAULT_ICON_NAME;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
@@ -32,6 +34,10 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.textfield.TextInputLayout;
 
 import net.osmand.data.BackgroundType;
+import net.osmand.data.LatLon;
+import net.osmand.plus.gallery.attached.AttachedMediaRowController;
+import net.osmand.plus.gallery.data.GalleryKey;
+import net.osmand.shared.gpx.primitives.Linkable;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
@@ -64,6 +70,8 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 		implements CardListener, IExternalPaletteListener, OnIconsPaletteListener<String> {
 
 	protected ShapesCard shapesCard;
+	@Nullable
+	protected EditorMediaCardBuilder mediaCardBuilder;
 
 	protected View view;
 	protected EditText nameEdit;
@@ -71,11 +79,13 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 	private OnGlobalLayoutListener onGlobalLayoutListener;
 
 	private int color;
+	private boolean colorSelected;
 	private String iconName = DEFAULT_ICON_NAME;
 	private BackgroundType backgroundType = DEFAULT_BACKGROUND_TYPE;
 
 	private int scrollViewY;
 	private int layoutHeightPrevious;
+	private boolean touchScrolling;
 
 	protected boolean cancelled;
 
@@ -162,6 +172,7 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 		createIconSelector();
 		createColorSelector();
 		createShapeSelector();
+		createMediaSelector();
 		updateContent();
 
 		return view;
@@ -208,6 +219,10 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
+		if (mediaCardBuilder != null) {
+			mediaCardBuilder.detach();
+			mediaCardBuilder = null;
+		}
 		FragmentActivity activity = getActivity();
 		if (activity != null && !activity.isChangingConfigurations()) {
 			EditorColorController.onDestroy(app);
@@ -228,15 +243,29 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 		toolbar.setNavigationOnClickListener(v -> showExitDialog());
 	}
 
+	@SuppressLint("ClickableViewAccessibility")
 	private void setupScrollListener() {
 		ScrollView scrollView = view.findViewById(R.id.editor_scroll_view);
 		scrollViewY = scrollView.getScrollY();
+		touchScrolling = false;
+		scrollView.setOnTouchListener((v, event) -> {
+			int action = event.getActionMasked();
+			touchScrolling = action != MotionEvent.ACTION_UP && action != MotionEvent.ACTION_CANCEL;
+			onScrollViewTouched(v, event);
+			return false;
+		});
 		scrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
-			if (scrollViewY != scrollView.getScrollY()) {
-				scrollViewY = scrollView.getScrollY();
-				onMainScrollChanged();
+			int scrollY = scrollView.getScrollY();
+			if (scrollViewY != scrollY) {
+				scrollViewY = scrollY;
+				if (touchScrolling) {
+					onMainScrollChanged();
+				}
 			}
 		});
+	}
+
+	protected void onScrollViewTouched(@NonNull View scrollView, @NonNull MotionEvent event) {
 	}
 
 	protected void onMainScrollChanged() {
@@ -323,6 +352,44 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 		}
 	}
 
+	private void createMediaSelector() {
+		View mediaSection = view.findViewById(R.id.media_card_section);
+		MapActivity mapActivity = getMapActivity();
+		GalleryKey key = getMediaGalleryKey();
+		Linkable target = getMediaTarget();
+		LatLon latLon = getMediaLatLon();
+		if (mapActivity == null || key == null || target == null || latLon == null) {
+			if (mediaSection != null) {
+				mediaSection.setVisibility(View.GONE);
+			}
+			return;
+		}
+		app.getGalleryHelper().getAttachedMediaRegistry().register(key, target);
+		AttachedMediaRowController controller =
+				new AttachedMediaRowController(app, key, target, latLon, true);
+		mediaCardBuilder = new EditorMediaCardBuilder(mapActivity, nightMode, controller);
+
+		ViewGroup container = view.findViewById(R.id.media_card_container);
+		container.addView(mediaCardBuilder.getCardView());
+		mediaSection.setVisibility(View.VISIBLE);
+		mediaCardBuilder.load();
+	}
+
+	@Nullable
+	protected GalleryKey getMediaGalleryKey() {
+		return null;
+	}
+
+	@Nullable
+	protected Linkable getMediaTarget() {
+		return null;
+	}
+
+	@Nullable
+	protected LatLon getMediaLatLon() {
+		return null;
+	}
+
 	@Override
 	public void onCardPressed(@NonNull BaseCard card) {
 		if (card instanceof ShapesCard) {
@@ -334,6 +401,7 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 	@Override
 	public void onPaletteItemSelected(@NonNull PaletteItem item) {
 		if (item instanceof PaletteItem.Solid solidItem) {
+			colorSelected = true;
 			setColor(solidItem.getColorInt());
 			updateContent();
 		}
@@ -432,7 +500,9 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 	}
 
 	protected void savePressed() {
-		getColorController().renewLastUsedTime();
+		if (colorSelected) {
+			getColorController().renewLastUsedTime();
+		}
 		save(true);
 	}
 

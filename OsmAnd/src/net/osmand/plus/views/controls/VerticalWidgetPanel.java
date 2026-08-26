@@ -13,7 +13,6 @@ import android.widget.TableLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListUpdateCallback;
@@ -23,20 +22,19 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.PanelBackgroundMode;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetsUtils;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.layers.MapInfoLayer.TextState;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.appearance.ResolvedPanelAppearance;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
-import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportMultiRow;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportWidgetResizing;
-import net.osmand.plus.views.mapwidgets.widgets.LanesWidget;
-import net.osmand.plus.views.mapwidgets.widgets.MapMarkersBarWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.LinearLayoutEx;
 import net.osmand.util.Algorithms;
@@ -53,6 +51,11 @@ public class VerticalWidgetPanel extends LinearLayoutEx implements WidgetsContai
 	private final List<Row> visibleRows = new ArrayList<>();
 	private boolean topPanel;
 	private boolean nightMode;
+	private boolean visibilityAllowed = true;
+	@NonNull
+	private PanelBackgroundMode backgroundMode = PanelBackgroundMode.DEFAULT;
+	private boolean backgroundOpaque;
+	private int standaloneDividerColor;
 
 	public VerticalWidgetPanel(@NonNull Context context) {
 		this(context, null);
@@ -71,6 +74,7 @@ public class VerticalWidgetPanel extends LinearLayoutEx implements WidgetsContai
 		app = (OsmandApplication) context.getApplicationContext();
 		settings = app.getSettings();
 		nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
+		standaloneDividerColor = ColorUtilities.getDividerColor(app, nightMode);
 		widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		definePanelSide(context, attrs);
 		init();
@@ -120,24 +124,24 @@ public class VerticalWidgetPanel extends LinearLayoutEx implements WidgetsContai
 	}
 
 	private void applyShadow() {
-		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(getContext());
-		boolean isTransparentWidgets = app.getSettings().getTransparentMapThemePreference(layoutMode).get();
 		setClipToPadding(false);
 		setOutlineProvider(ViewOutlineProvider.BOUNDS);
-		ViewCompat.setElevation(this, isAnyRowVisible() && !isTransparentWidgets? 5f : 0);
+		ViewCompat.setElevation(this, isAnyRowVisible() && backgroundOpaque ? 5f : 0);
+	}
+
+	public void setVisibilityAllowed(boolean visibilityAllowed) {
+		this.visibilityAllowed = visibilityAllowed;
 	}
 
 	private void updateVisibility() {
-		boolean isAnyRowVisible = isAnyRowVisible();
+		boolean isAnyRowVisible = isAnyRowVisible() && visibilityAllowed;
 		AndroidUiHelper.updateVisibility(this, isAnyRowVisible);
 
 		for (VerticalPanelVisibilityListener listener : visibilityListeners) {
 			listener.isVisible(isAnyRowVisible);
 		}
 		if (InsetsUtils.isEdgeToEdgeSupported() && !topPanel) {
-			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(getContext());
-			boolean transparentWidgets = app.getSettings().getTransparentMapThemePreference(layoutMode).get();
-			if (isAnyRowVisible && !transparentWidgets) {
+			if (isAnyRowVisible && backgroundMode == PanelBackgroundMode.DEFAULT) {
 				setBackgroundColor(ColorUtilities.getWidgetBackgroundColor(app, nightMode));
 			} else {
 				setBackgroundColor(Color.TRANSPARENT);
@@ -240,9 +244,9 @@ public class VerticalWidgetPanel extends LinearLayoutEx implements WidgetsContai
 		updateVisibility();
 	}
 
-	private void updateDividerColors(boolean nightMode) {
+	private void updateDividerColors() {
 		for (Row row : visibleRows) {
-			row.updateDividerColor(nightMode);
+			row.updateDividerColor();
 		}
 	}
 
@@ -253,14 +257,17 @@ public class VerticalWidgetPanel extends LinearLayoutEx implements WidgetsContai
 		}
 	}
 
-	public void updateColors(@NonNull TextState textState) {
-		boolean oldNightMode = nightMode;
-		nightMode = textState.night;
+	@Override
+	public void applyPanelAppearance(@NonNull ResolvedPanelAppearance appearance) {
+		nightMode = appearance.getNightMode();
+		backgroundMode = appearance.getBackground().getMode();
+		backgroundOpaque = appearance.getBackground().isOpaque();
+		standaloneDividerColor = appearance.getStandaloneDividerColor();
 		invalidate();
 		updateRows();
-		if (oldNightMode != nightMode) {
-			updateDividerColors(nightMode);
-		}
+		updateDividerColors();
+		updateVisibility();
+		applyShadow();
 	}
 
 	private void updateValueAlign(List<MapWidgetInfo> widgetsInRow, int visibleViewsInRowCount) {
@@ -417,21 +424,18 @@ public class VerticalWidgetPanel extends LinearLayoutEx implements WidgetsContai
 				MapWidget widget = enabledMapWidgets.get(i).widget;
 				if (widget.isViewVisible()) {
 					visibleViewsInRowCount++;
+					rowWidgetsSupportBottomDivider &= widget.supportsPanelRowDivider();
 					int nextWidgetIndex = i + 1;
 					showHideVerticalDivider(i, nextWidgetIndex < enabledMapWidgets.size() && enabledMapWidgets.get(nextWidgetIndex).widget.isViewVisible());
 				} else {
 					showHideVerticalDivider(i, false);
-				}
-				if (widget instanceof MapMarkersBarWidget || widget instanceof LanesWidget) {
-					rowWidgetsSupportBottomDivider = false;
 				}
 			}
 			updateFullRowState(enabledMapWidgets, visibleViewsInRowCount);
 			updateValueAlign(enabledMapWidgets, visibleViewsInRowCount);
 
 			Context context = getContext();
-			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(context);
-			boolean transparentMode = app.getSettings().getTransparentMapThemePreference(layoutMode).get();
+			boolean transparentMode = backgroundMode == PanelBackgroundMode.TRANSPARENT;
 			boolean lastRow = index == totalRows - 1;
 			boolean firstRow = index == 0;
 
@@ -443,20 +447,22 @@ public class VerticalWidgetPanel extends LinearLayoutEx implements WidgetsContai
 
 			AndroidUiHelper.updateVisibility(getTopDivider(), showTopDivider);
 			AndroidUiHelper.updateVisibility(getBottomDivider(), showBottomDivider);
+
+			updateDividerColor();
 		}
 
-		public void updateDividerColor(boolean nightMode) {
+		public void updateDividerColor() {
 			LinearLayout container = getRowContainer();
 			for (int i = 1; i <= container.getChildCount(); i++) {
 				if (i % 2 == 0) {
 					View divider = container.getChildAt(i - 1).findViewById(R.id.vertical_divider);
 					if (divider != null) {
-						divider.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.divider_color_dark : R.color.divider_color_light));
+						divider.setBackgroundColor(standaloneDividerColor);
 					}
 				}
 			}
-			getTopDivider().setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.divider_color_dark : R.color.divider_color_light));
-			getBottomDivider().setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.divider_color_dark : R.color.divider_color_light));
+			getTopDivider().setBackgroundColor(standaloneDividerColor);
+			getBottomDivider().setBackgroundColor(standaloneDividerColor);
 		}
 
 		private void showHideVerticalDivider(int widgetIndex, boolean show) {

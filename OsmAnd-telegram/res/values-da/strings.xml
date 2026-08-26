@@ -143,7 +143,7 @@
     <string name="shared_string_minute_short">min</string>
     <string name="shared_string_second_short">sek</string>
     <string name="welcome_descr"><b>OsmAnd Tracker</b> giver mulighed for at dele placering og se placering af andre i OsmAnd.<br/><br/>Programmet bruger Telegram API, så der skal bruges en Telegram konto.</string>
-    <string name="my_location">Placering</string>
+    <string name="my_location">Min placering</string>
     <string name="last_updated_location">Sidste ajourførte placering:</string>
     <string name="successfully_sent_and_updated">Sendt korrekt og opdateret</string>
     <string name="not_possible_to_send_to_telegram_chats">Ikke muligt at sende til Telegram samtaler:</string>

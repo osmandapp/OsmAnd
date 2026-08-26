@@ -15,6 +15,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.backup.ui.DeleteAllDataConfirmationBottomSheet.OnConfirmDeletionListener;
+import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI.HistorySearchResult;
 import net.osmand.plus.search.history.SearchHistoryHelper;
 import net.osmand.plus.search.history.HistoryEntry;
 import net.osmand.plus.helpers.TargetPointsHelper;
@@ -26,6 +27,8 @@ import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FontCache;
+import net.osmand.plus.utils.InsetTarget.Type;
+import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.search.core.SearchResult;
 
 import org.apache.commons.logging.Log;
@@ -51,6 +54,15 @@ public class HistorySettingsFragment extends BaseSettingsFragment implements OnC
 	@ColorRes
 	protected int getBackgroundColorRes() {
 		return ColorUtilities.getActivityBgColorId(isNightMode());
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		if (getParentFragment() instanceof HistorySettingsDialogFragment) {
+			collection.removeType(Type.ROOT_INSET);
+		}
+		return collection;
 	}
 
 	@Override
@@ -201,7 +213,9 @@ public class HistorySettingsFragment extends BaseSettingsFragment implements OnC
 
 	@Nullable
 	protected static HistoryEntry getHistoryEntry(SearchResult searchResult) {
-		if (searchResult.object instanceof HistoryEntry) {
+		if (searchResult instanceof HistorySearchResult historySearchResult) {
+			return historySearchResult.getHistoryEntry();
+		} else if (searchResult.object instanceof HistoryEntry) {
 			return (HistoryEntry) searchResult.object;
 		} else if (searchResult.relatedObject instanceof HistoryEntry) {
 			return (HistoryEntry) searchResult.relatedObject;

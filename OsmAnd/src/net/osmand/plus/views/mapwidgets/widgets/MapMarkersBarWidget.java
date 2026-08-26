@@ -52,6 +52,8 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 	private ImageButton okButton2nd;
 
 	private LatLon customLatLon;
+	private MapMarker displayedFirstMarker;
+	private MapMarker displayedSecondMarker;
 
 	@Override
 	protected int getLayoutId() {
@@ -140,6 +142,8 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 		int zoom = mapActivity.getMapView().getZoom();
 		List<MapMarker> markers = markersHelper.getMapMarkers();
 		if (markers.isEmpty() || zoom < 3 || shouldHide()) {
+			displayedFirstMarker = null;
+			displayedSecondMarker = null;
 			updateVisibility(false);
 			return;
 		}
@@ -156,7 +160,8 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 		boolean defaultLatLon = customLatLon == null;
 		Float heading = mapActivity.getMapViewTrackingUtilities().getHeading();
 
-		updateFirstMarker(latLon, markers.get(0), heading, !defaultLatLon);
+		displayedFirstMarker = markers.get(0);
+		updateFirstMarker(latLon, displayedFirstMarker, heading, !defaultLatLon);
 		updateSecondMarker(latLon, markers, heading, !defaultLatLon);
 		updateVisibility(true);
 	}
@@ -168,6 +173,7 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 
 	public void updateSecondMarker(@NonNull LatLon center, @NonNull List<MapMarker> markers,
 			@Nullable Float heading, boolean customLocation) {
+		displayedSecondMarker = null;
 		if (markers.size() > 1 && settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get() == 2) {
 			MapMarker secondMarker = markers.get(1);
 			if (!customLocation) {
@@ -179,6 +185,7 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 					}
 				}
 			}
+			displayedSecondMarker = secondMarker;
 			updateMarker(center, heading, secondMarker, arrowImg2nd, distText2nd, okButton2nd, addressText2nd,
 					false, customLocation);
 			AndroidUiHelper.updateVisibility(markerContainer2nd, true);
@@ -187,16 +194,24 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 		}
 	}
 
+	public void updateCompassValue(float heading) {
+		if (customLatLon != null || !isViewVisible() || arrowImg == null || displayedFirstMarker == null) {
+			return;
+		}
+		LatLon location = app.getMapViewTrackingUtilities().getDefaultLocation();
+		updateMarkerDirection(location, displayedFirstMarker, heading, arrowImg);
+		if (arrowImg2nd != null && displayedSecondMarker != null && markerContainer2nd != null
+				&& markerContainer2nd.getVisibility() == View.VISIBLE) {
+			updateMarkerDirection(location, displayedSecondMarker, heading, arrowImg2nd);
+		}
+	}
+
 	private void updateMarker(@NonNull LatLon latlon, @Nullable Float heading,
 			@NonNull MapMarker marker,
 			@NonNull ImageView arrowImg, @NonNull TextView distText,
 			@NonNull ImageButton okButton, @NonNull TextView addressText,
 			boolean firstMarker, boolean customLocation) {
-		float[] distInfo = new float[2];
-		if (marker.point != null) {
-			Location.distanceBetween(marker.getLatitude(), marker.getLongitude(),
-					latlon.getLatitude(), latlon.getLongitude(), distInfo);
-		}
+		float[] distInfo = getMarkerDistanceInfo(latlon, marker);
 
 		if (customLocation) {
 			heading = 0f;
@@ -211,9 +226,7 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 			dd = new DirectionDrawable(app, arrowImg.getWidth(), arrowImg.getHeight());
 		}
 		dd.setImage(R.drawable.ic_arrow_marker_diretion, MapMarker.getColorId(marker.colorIndex));
-		if (heading != null) {
-			dd.setAngle(distInfo[1] - heading + 180);
-		}
+		updateDirectionAngle(dd, distInfo[1], heading);
 		if (newImage) {
 			arrowImg.setImageDrawable(dd);
 		}
@@ -233,6 +246,32 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 		addressText.setText(descr);
 	}
 
+	private void updateMarkerDirection(@NonNull LatLon location, @NonNull MapMarker marker,
+	                                   float heading, @NonNull ImageView arrowImg) {
+		if (arrowImg.getDrawable() instanceof DirectionDrawable) {
+			float[] distInfo = getMarkerDistanceInfo(location, marker);
+			updateDirectionAngle((DirectionDrawable) arrowImg.getDrawable(), distInfo[1], heading);
+			arrowImg.invalidate();
+		}
+	}
+
+	@NonNull
+	private float[] getMarkerDistanceInfo(@NonNull LatLon location, @NonNull MapMarker marker) {
+		float[] distInfo = new float[2];
+		if (marker.point != null) {
+			Location.distanceBetween(marker.getLatitude(), marker.getLongitude(),
+					location.getLatitude(), location.getLongitude(), distInfo);
+		}
+		return distInfo;
+	}
+
+	private void updateDirectionAngle(@NonNull DirectionDrawable drawable,
+	                                  float bearing, @Nullable Float heading) {
+		if (heading != null) {
+			drawable.setAngle(bearing - heading + 180);
+		}
+	}
+
 	@Override
 	protected boolean updateVisibility(boolean visible) {
 		boolean updatedVisibility = super.updateVisibility(visible);
@@ -249,5 +288,10 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 		super.attachView(container, panel, followingWidgets);
 		View bottomShadow = getView().findViewById(R.id.bottom_shadow);
 		AndroidUiHelper.updateVisibility(bottomShadow, followingWidgets.isEmpty());
+	}
+
+	@Override
+	public boolean supportsPanelRowDivider() {
+		return false;
 	}
 }

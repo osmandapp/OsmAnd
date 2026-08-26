@@ -19,18 +19,19 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.OutlinedTextContainer;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
+import net.osmand.plus.views.mapwidgets.appearance.PanelAppearanceConsumer;
+import net.osmand.plus.views.mapwidgets.appearance.ResolvedPanelAppearance;
 import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
 
 import java.util.List;
 
-public abstract class MapWidget {
+public abstract class MapWidget implements PanelAppearanceConsumer {
 
 	protected final OsmandApplication app;
 	protected final OsmandSettings settings;
@@ -48,6 +49,8 @@ public abstract class MapWidget {
 	protected String customId;
 
 	private View view;
+	@Nullable
+	private ResolvedPanelAppearance panelAppearance;
 
 	public MapWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType,
 			@Nullable String customId, @Nullable WidgetsPanel panel) {
@@ -84,6 +87,18 @@ public abstract class MapWidget {
 			setupView(view);
 		}
 		return view;
+	}
+
+	public final void recreateView() {
+		recreateViewInternal();
+		ResolvedPanelAppearance appearance = panelAppearance;
+		if (appearance != null && appearance.getPanel() == panel) {
+			onPanelAppearanceChanged(appearance);
+		}
+	}
+
+	protected void recreateViewInternal() {
+
 	}
 
 	protected void setupView(@NonNull View view) {
@@ -149,8 +164,21 @@ public abstract class MapWidget {
 
 	protected abstract void updateInfo(@NonNull View view, @Nullable DrawSettings drawSettings);
 
-	public void updateColors(@NonNull TextState textState) {
-		nightMode = textState.night;
+	@Override
+	public final void applyPanelAppearance(@NonNull ResolvedPanelAppearance appearance) {
+		panelAppearance = appearance;
+		nightMode = appearance.getNightMode();
+		getView();
+		onPanelAppearanceChanged(appearance);
+	}
+
+	protected void onPanelAppearanceChanged(@NonNull ResolvedPanelAppearance appearance) {
+
+	}
+
+	@Nullable
+	protected final ResolvedPanelAppearance getPanelAppearance() {
+		return panelAppearance;
 	}
 
 	protected boolean updateVisibility(boolean visible) {
@@ -159,6 +187,10 @@ public abstract class MapWidget {
 
 	public boolean isViewVisible() {
 		return getView().getVisibility() == View.VISIBLE;
+	}
+
+	public boolean supportsPanelRowDivider() {
+		return true;
 	}
 
 	public boolean isAttached() {
@@ -211,34 +243,6 @@ public abstract class MapWidget {
 				AndroidUiHelper.updateVisibility(textShadow, false);
 			}
 		}
-	}
-
-	public static void updateTextOutline(@Nullable OutlinedTextContainer textContainer, @NonNull TextState textState) {
-		if (textContainer == null) {
-			return;
-		}
-
-		if (textState.textShadowRadius > 0) {
-			textContainer.setStrokeWidth(textState.textShadowRadius);
-			int color = textState.textShadowColor;
-			if (color != 0) {
-				textContainer.setStrokeColor(textState.textShadowColor);
-			}
-			textContainer.showOutline(true);
-		} else {
-			textContainer.showOutline(false);
-		}
-		textContainer.invalidateTextViews();
-	}
-
-	public static void updateTextContainer(@Nullable OutlinedTextContainer textContainer, @NonNull TextState textState) {
-		if (textContainer == null) {
-			return;
-		}
-
-		int typefaceStyle = textState.textBold ? Typeface.BOLD : Typeface.NORMAL;
-		textContainer.setTextColor(textState.textColor);
-		textContainer.setTypeface(Typeface.DEFAULT, typefaceStyle);
 	}
 
 	@NonNull

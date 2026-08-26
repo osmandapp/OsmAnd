@@ -3119,7 +3119,7 @@
     <string name="poi_government_treasury">Казначейство</string>
     <string name="poi_government_transportation">Транспортное учреждение</string>
     <string name="poi_government_legislative">Законодательное учреждение</string>
-    <string name="poi_surface_clay">Глина</string>
+    <string name="poi_surface_clay">Поверхность: глина</string>
     <string name="poi_location_underground">Расположение: под землёй</string>
     <string name="poi_location_underwater">Расположение: под водой</string>
     <string name="poi_location_overground">Расположение: над землёй</string>

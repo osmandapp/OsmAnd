@@ -15,8 +15,10 @@
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			android:background="?attr/activity_background_color"
+			android:clipToPadding="false"
 			android:divider="@null"
 			android:dividerHeight="0dp"
-			android:drawSelectorOnTop="true" />
+			android:drawSelectorOnTop="true"
+			android:paddingBottom="@dimen/bottom_sheet_list_item_height" />
 	</LinearLayout>
 </FrameLayout>

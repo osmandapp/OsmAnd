@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu.builders.rows.behaviour
 
 import net.osmand.PlatformUtil
+import net.osmand.data.AmenityTagEntry
 import net.osmand.plus.utils.OsmAndFormatter
 import net.osmand.shared.settings.enums.AltitudeMetrics
 
@@ -24,7 +25,8 @@ object EleRowBehaviour : DefaultPoiAdditionalRowBehaviour() {
 				}
 				val elevationData: MutableSet<String> = HashSet()
 				elevationData.add(collapsibleVal)
-				builder.setCollapsableView(menuBuilder.getDistanceCollapsableView(elevationData))
+				builder.setCollapsableEntries(elevationData.map { AmenityTagEntry.Builder(it).setText(it).build() })
+				builder.collapsableEntryType = AmenityTagEntry.CollapsableEntryType.ELEVATION_PILLS
 			} catch (ex: NumberFormatException) {
 				LOG.error(ex)
 			}

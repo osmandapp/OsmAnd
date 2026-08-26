@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
@@ -30,16 +31,17 @@ import net.osmand.plus.myplaces.tracks.dialogs.viewholders.FolderStatsViewHolder
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.RecordingTrackViewHolder;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.RecordingTrackViewHolder.RecordingTrackListener;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.SmartFolderViewHolder;
+import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TrackFreeBackupCardViewHolder;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TrackFolderViewHolder;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TracksGroupViewHolder.TrackGroupsListener;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.VisibleTracksViewHolder;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.shared.gpx.data.OrganizedTracksGroup;
 import net.osmand.shared.gpx.data.SmartFolder;
 import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.shared.gpx.filters.TrackFolderAnalysis;
 import net.osmand.shared.gpx.data.TracksGroup;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
@@ -64,8 +66,10 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 	public static final int TYPE_EMPTY_SMART_FOLDER_LOADING = 10;
 	public static final int TYPE_EMPTY_FOLDER_LOADING = 11;
 	public static final int TYPE_ORGANIZED_TRACKS = 12;
+	public static final int TYPE_FREE_BACKUP_CARD = 13;
 
 	private final OsmandApplication app;
+	private final FragmentActivity activity;
 	private final UpdateLocationViewCache locationViewCache;
 	private final List<Object> items = new ArrayList<>();
 
@@ -81,6 +85,8 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 	private EmptyTracksListener emptyTracksListener;
 	@Nullable
 	private EmptySmartFolderListener emptySmartFolderListener;
+	@Nullable
+	private CardListener cardListener;
 
 	private final boolean nightMode;
 	private final TrackFolder selectedFolder;
@@ -88,12 +94,13 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 	private boolean selectionMode;
 	private boolean shouldShowFolder;
 
-	public TrackFoldersAdapter(@NonNull Context context, boolean nightMode, @Nullable TrackFolder selectedFolder) {
+	public TrackFoldersAdapter(@NonNull FragmentActivity activity, boolean nightMode, @Nullable TrackFolder selectedFolder) {
+		this.activity = activity;
+		Context context = activity;
 		this.app = (OsmandApplication) context.getApplicationContext();
 		this.nightMode = nightMode;
 		locationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(context);
 		locationViewCache.arrowResId = R.drawable.ic_direction_arrow;
-		locationViewCache.arrowColor = ColorUtilities.getActiveIconColorId(nightMode);
 		this.selectedFolder = selectedFolder;
 		sortMode = TracksSortMode.getDefaultSortMode(selectedFolder == null ? null : selectedFolder.getId());
 	}
@@ -140,6 +147,10 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 		this.emptySmartFolderListener = emptySmartFolderListener;
 	}
 
+	public void setCardListener(@Nullable CardListener cardListener) {
+		this.cardListener = cardListener;
+	}
+
 	@NonNull
 	@Override
 	public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -184,6 +195,9 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 			case TYPE_EMPTY_TRACKS:
 				view = inflater.inflate(R.layout.track_folder_empty_state, parent, false);
 				return new EmptyTracksViewHolder(view, emptyTracksListener);
+			case TYPE_FREE_BACKUP_CARD:
+				view = inflater.inflate(R.layout.favorite_free_backup_card_item, parent, false);
+				return new TrackFreeBackupCardViewHolder(view, activity, cardListener);
 			default:
 				throw new IllegalArgumentException("Unsupported view type " + viewType);
 		}
@@ -218,6 +232,8 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 				return TYPE_EMPTY_TRACKS;
 			} else if (TYPE_EMPTY_SMART_FOLDER == item) {
 				return TYPE_EMPTY_SMART_FOLDER;
+			} else if (TYPE_FREE_BACKUP_CARD == item) {
+				return TYPE_FREE_BACKUP_CARD;
 			}
 		}
 		throw new IllegalArgumentException("Unsupported view type");
@@ -273,6 +289,8 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 			viewHolder.bindView();
 		} else if (holder instanceof SmartFolderViewHolder viewHolder) {
 			viewHolder.bindView((SmartFolder) items.get(position), lastItem);
+		} else if (holder instanceof TrackFreeBackupCardViewHolder viewHolder) {
+			viewHolder.bindView();
 		}
 	}
 

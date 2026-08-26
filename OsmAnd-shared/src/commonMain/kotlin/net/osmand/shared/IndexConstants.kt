@@ -62,6 +62,8 @@ object IndexConstants {
 
 	const val OBJ_FILE_EXT = ".obj"
 
+	const val TMP_FILE_EXT = ".tmp"
+
 	const val POI_TABLE = "poi"
 
 	const val INDEX_DOWNLOAD_DOMAIN = "download.osmand.net"

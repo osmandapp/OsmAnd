@@ -42,10 +42,9 @@ object ImportGpx {
 	@Throws(IOException::class)
 	fun loadGPXFileFromKml(kml: Source): Pair<GpxFile, Long> {
 		return try {
-			val res = convertKmlToGpxString(kml)
-			val byteStr = res.encodeToByteArray()
-			val gpxStream: Source = Buffer().write(byteStr)
-			Pair(loadGpxFile(gpxStream), byteStr.size.toLong())
+			val gpxBuffer = convertKmlToGpxBuffer(kml)
+			val fileSize = gpxBuffer.size
+			Pair(loadGpxFile(gpxBuffer), fileSize)
 		} catch (e: Exception) {
 			errorImport("KML to GPX transform error: ${e.message}")
 		}
@@ -58,13 +57,13 @@ object ImportGpx {
 		return Pair(gpxFile, 0)
 	}
 
-	private fun convertKmlToGpxString(kml: Source): String {
+	private fun convertKmlToGpxBuffer(kml: Source): Buffer {
 		val writer = Buffer()
 		val serializer = startGpxDocument(writer)
 		val documentName = parseKmlStreaming(kml, serializer, writer, flushEvery = Int.MAX_VALUE)
 		writeMetadata(serializer, documentName)
 		endGpxDocument(serializer)
-		return writer.readUtf8()
+		return writer
 	}
 
 	fun convertKmlToGpxStream(

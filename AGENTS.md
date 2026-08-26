@@ -103,6 +103,7 @@ Many resources (icons, fonts, voice files) are not in the main `res` folder but 
 - **Use the Plugin system** for new optional features.
 - **Follow existing style:** OsmAnd has a long history, so consistency with existing code is crucial.
 - **Resource handling:** Be aware that many resources are dynamically collected; check `OsmAnd/build-common.gradle` for details.
+- **Android API compatibility** The app must work on every supported Android version starting from minSdk. Do not call newer platform APIs unless they are guarded by an SDK-version check or accessed through a compatible AndroidX/helper API.
 
 ## 8. Common Tasks for Agents
 - **Adding a new Setting:** Register it in `OsmandSettings` and add it to the relevant settings fragment.
@@ -112,7 +113,15 @@ Many resources (icons, fonts, voice files) are not in the main `res` folder but 
 - **Updating Plugins:** Most plugin-specific code is in `net.osmand.plus.plugins`.
 
 ## 9. Restrictions
-- **Building Gradle project:** YOU MUST NEVER run Gradle buid task by yourself! EVEN for verifying build errors!!!
+- **Building Gradle project:** YOU MUST NEVER run Gradle build task by yourself! EVEN for verifying build errors!!!
+- **No manual Gradle build emulation:** YOU MUST NEVER reconstruct an Android/Gradle compilation classpath from cached JARs, transformed dependencies, generated classes, or build directories, and MUST NEVER invoke `kotlinc`, `javac`, or similar tools to compile a full Android fragment, source set, module, or project as a substitute for Gradle. Do not spend time resolving cascading classpath errors. Unless the user explicitly requests additional verification, use only fast, targeted checks such as `git diff --check`, XML/resource syntax validation, or isolated tests that have a direct, already-available runtime.
+- **New files for git** When creating source, resource, or documentation files intended for the change, add them to VCS. Do not add temporary, generated, local, or diagnostic files. Never change .gitignore file unless explicitly requested. Do not commit unless explicitly requested.
 
----
+## 10. Language Preference
+- **Java / Kotlin / Compose usage**
+  - Prefer Kotlin for new Android code: In Kotlin-enabled Android modules such as :OsmAnd, :OsmAnd-shared, and plugin modules, generate new classes, functions, UI components, and Compose-related code in Kotlin by default.
+  - Use Java in Java-only modules: In :OsmAnd-java, :OsmAnd-api, and other Java-only/core modules, write new code in Java unless the module is explicitly being migrated to Kotlin.
+  - Preserve existing file language: When modifying existing .java files, keep the change in Java unless the PR explicitly migrates that file/class to Kotlin.
+  - Follow local architecture: Prefer Kotlin/Compose for future Android UI migration work, but do not introduce Kotlin into Java-only modules just to satisfy the default language preference.
+
 *Note: This file is a living document and should be updated as the project evolves.*

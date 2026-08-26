@@ -22,12 +22,12 @@ enum class FavoriteListSortMode(
         iconId = R.drawable.ic_action_sort_by_name_descending,
     ),
     NEAREST(
-        nameId = R.string.distance_nearest,
+        nameId = R.string.sort_by_nearest_to_current_location,
         iconId = R.drawable.ic_action_nearby,
     ),
-    FARTHEST(
-        nameId = R.string.distance_farthest,
-        iconId = R.drawable.ic_action_nearby,
+    NEAREST_TO_MAP_CENTER(
+        nameId = R.string.sort_by_nearest_to_map_center,
+        iconId = R.drawable.ic_action_nearest_map_center,
     ),
     DATE_ASCENDING(
         nameId = R.string.sort_date_ascending,
@@ -58,7 +58,7 @@ enum class FavoriteListSortMode(
                     .toTypedArray()
             } else {
                 entries
-                    .filter { it != NEAREST && it != FARTHEST }
+                    .filter { it != NEAREST && it != NEAREST_TO_MAP_CENTER }
                     .toTypedArray()
             }
         }

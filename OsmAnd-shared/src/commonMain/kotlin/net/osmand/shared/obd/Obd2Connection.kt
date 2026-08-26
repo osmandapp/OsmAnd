@@ -183,7 +183,7 @@ class Obd2Connection(
 		if (normalizedResponse.startsWith(unspacedCommand))
 			normalizedResponse = normalizedResponse.substring(unspacedCommand.length)
 		commandType?.let {
-			if (!normalizedResponse.startsWith(it.responseCodeText)) {
+			if (!normalizedResponse.startsWith(it.responseCodeText) && fullCommand != OBDCommand.OBD_ALT_BATTERY_VOLTAGE_COMMAND.textCommand) {
 				val responseStart = normalizedResponse.indexOf(it.responseCodeText)
 				if (responseStart != -1) {
 					normalizedResponse = normalizedResponse.substring(responseStart)

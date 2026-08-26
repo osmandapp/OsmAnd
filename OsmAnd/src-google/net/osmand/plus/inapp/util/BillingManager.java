@@ -166,6 +166,12 @@ public class BillingManager implements PurchasesUpdatedListener {
 					.getSubscriptionOfferDetails();
 			if (offerDetails != null) {
 				offerToken = offerDetails.get(selectedOfferIndex).getOfferToken();
+			} else {
+				List<ProductDetails.OneTimePurchaseOfferDetails> oneTimeOfferDetails =
+						productDetails.getOneTimePurchaseOfferDetailsList();
+				if (oneTimeOfferDetails != null && selectedOfferIndex < oneTimeOfferDetails.size()) {
+					offerToken = oneTimeOfferDetails.get(selectedOfferIndex).getOfferToken();
+				}
 			}
 			ArrayList<BillingFlowParams.ProductDetailsParams> productDetailsParamsList = new ArrayList<>();
 			BillingFlowParams.ProductDetailsParams.Builder productDetailsParams = BillingFlowParams.ProductDetailsParams.newBuilder()

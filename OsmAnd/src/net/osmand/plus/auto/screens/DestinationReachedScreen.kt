@@ -28,22 +28,9 @@ class DestinationReachedScreen(carContext: CarContext) : BaseAndroidAutoScreen(c
 	override fun getTemplate(): Template {
 		return MapWithContentTemplate.Builder()
 			.setActionStrip(
-				createSearchAction().let { searchAction ->
-					ActionStrip.Builder()
-						.addAction(searchAction)
-						.addAction(
-							Action.Builder()
-								.setIcon(
-									CarIcon.Builder(
-										IconCompat.createWithResource(
-											carContext,
-											R.drawable.ic_action_search_dark)
-									).build())
-								.setOnClickListener { recenterMap() }
-								.build()
-						)
-						.build()
-				}
+				ActionStrip.Builder()
+					.addAction(createSearchAction())
+					.build()
 			)
 			.setContentTemplate(createArrivalListTemplate())
 			.build()

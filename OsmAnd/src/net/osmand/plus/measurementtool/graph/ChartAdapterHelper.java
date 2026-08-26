@@ -82,6 +82,7 @@ public class ChartAdapterHelper {
 		View.OnTouchListener chartTouchListener = (v, ev) -> {
 			if (ev.getSource() != 0) {
 				Chart sourceChart = (Chart) v;
+				float[] visibleWindowBeforeTouch = getVisibleValueWindow(sourceChart);
 				float value = getHighlightValueByTouchX(sourceChart, ev.getX());
 				if (mainView != null) {
 					mainView.requestDisallowInterceptTouchEvent(true);
@@ -101,8 +102,11 @@ public class ChartAdapterHelper {
 					activeTouchSourceChart = null;
 				}
 
-				syncVisibleValueWindow(sourceChart, graphAdapters);
-//				sourceChart.post(() -> syncVisibleValueWindow(sourceChart, graphAdapters));
+				sourceChart.post(() -> {
+					if (hasVisibleValueWindowChanged(sourceChart, visibleWindowBeforeTouch)) {
+						syncVisibleValueWindow(sourceChart, graphAdapters);
+					}
+				});
 			}
 			return false;
 		};
@@ -195,6 +199,12 @@ public class ChartAdapterHelper {
 			};
 		}
 		return new float[] {0, 0};
+	}
+
+	private static boolean hasVisibleValueWindowChanged(@NonNull Chart chart, @NonNull float[] previousWindow) {
+		float[] currentWindow = getVisibleValueWindow(chart);
+		return currentWindow.length == previousWindow.length
+				&& (currentWindow[0] != previousWindow[0] || currentWindow[1] != previousWindow[1]);
 	}
 
 	private static void applyVisibleValueWindow(@NonNull Chart chart, float min, float max) {

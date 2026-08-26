@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-	android:title="@string/application_dir">
+	android:title="@string/main_storage">
 
 	<Preference
 		android:key="memory_usage"

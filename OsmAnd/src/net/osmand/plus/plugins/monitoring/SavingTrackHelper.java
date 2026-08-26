@@ -274,7 +274,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 
 				GpxDataItem item = new GpxDataItem(fKout);
 				setTrackAppearance(item);
-				item.setAnalysis(gpx.getAnalysis(fout.lastModified()));
+				item.setAnalysis(gpx.getAnalysis(fout.lastModified(), null, null, null, false));
 
 				app.getGpxDbHelper().add(item);
 				lastTimeFileSaved = fout.lastModified();

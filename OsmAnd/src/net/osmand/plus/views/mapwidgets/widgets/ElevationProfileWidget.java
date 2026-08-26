@@ -46,9 +46,9 @@ import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.appearance.ResolvedPanelAppearance;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.primitives.TrkSegment;
@@ -186,7 +186,8 @@ public class ElevationProfileWidget extends MapWidget {
 
 	@Override
 	public void updateInfo(@NonNull View view, @Nullable DrawSettings drawSettings) {
-		boolean visible = visibilityHelper.shouldShowElevationProfileWidget();
+		boolean visible = visibilityHelper.shouldShowElevationProfileWidget()
+				&& !(panel == WidgetsPanel.BOTTOM && visibilityHelper.shouldHideBottomWidgets());
 		updateVisibility(visible);
 		if (visible) {
 			updateInfoImpl();
@@ -215,8 +216,8 @@ public class ElevationProfileWidget extends MapWidget {
 	}
 
 	@Override
-	public void updateColors(@NonNull TextState textState) {
-		super.updateColors(textState);
+	protected void onPanelAppearanceChanged(@NonNull ResolvedPanelAppearance appearance) {
+		super.onPanelAppearanceChanged(appearance);
 		int primaryTextColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
 		int secondaryTextColor = ColorUtilities.getSecondaryTextColor(app, nightMode);
 		int dividerColorBasic = ColorUtilities.getDividerColor(app, nightMode);
@@ -505,15 +506,16 @@ public class ElevationProfileWidget extends MapWidget {
 		lastPointIndex = Math.min(points.size() - 1, lastPointIndex + 1);
 		if (lastPointIndex > firstPointIndex) {
 			int pointsCount = lastPointIndex - firstPointIndex + 1;
+			final int startIndex = firstPointIndex;
 			ElevationDiffsCalculator elevationDiffsCalc = new ElevationDiffsCalculator() {
 				@Override
 				public double getPointDistance(int index) {
-					return points.get(index).getDistance();
+					return points.get(startIndex + index).getDistance();
 				}
 
 				@Override
 				public double getPointElevation(int index) {
-					return points.get(index).getEle();
+					return points.get(startIndex + index).getEle();
 				}
 
 				@Override
@@ -542,7 +544,10 @@ public class ElevationProfileWidget extends MapWidget {
 		Highlight highlight = getSelectedHighlight();
 		if (highlight != null) {
 			TrackChartPoints trackChartPoints = getTrackChartPoints();
-			LatLon location = TrackDetailsMenu.getLocationAtPos(chart, gpxItem, segment, highlight.getX(), true);
+			// This profile uses the distance axis; update this if a time axis is added.
+			boolean timeWithoutGaps = false;
+			LatLon location = TrackDetailsMenu.getLocationAtPos(
+					chart, gpxItem, segment, highlight.getX(), true, timeWithoutGaps);
 			if (location != null) {
 				trackChartPoints.setHighlightedPoint(location);
 			}

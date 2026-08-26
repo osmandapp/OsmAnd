@@ -39,7 +39,7 @@
     <string name="poi_beacon_cardinal">Balise cardinale</string>
     <string name="poi_beacon_lateral">Balise latérale</string>
     <string name="poi_beacon_safe_water">Marque d\'eaux saines</string>
-    <string name="poi_beacon_special_purpose">Marque spéciale</string>
+    <string name="poi_beacon_special_purpose">Balise à usage spécifique</string>
     <string name="poi_beauty">Salon de beauté</string>
     <string name="poi_beverages">Magasin de boissons</string>
     <string name="poi_bicycle">Magasin de vélos</string>
@@ -543,7 +543,7 @@
     <string name="poi_healthcare_yes">Centre de soins médicaux</string>
     <string name="poi_bookmaker">Preneur de paris</string>
     <string name="poi_running_track">Piste de course</string>
-    <string name="poi_base">BASE jump</string>
+    <string name="poi_base">Base jumping</string>
     <string name="poi_roller_skating">Patinage à roulettes</string>
     <string name="poi_historic_cannon">Canon historique</string>
     <string name="poi_club_automobile">Club automobile</string>
@@ -709,7 +709,7 @@
     <string name="poi_junction">Carrefour</string>
     <string name="poi_forest">Forêt</string>
     <string name="poi_landuse_railway">Zone ferroviaire</string>
-    <string name="poi_village_green">Village green (GB)</string>
+    <string name="poi_village_green">Place du village</string>
     <string name="poi_sailing">Navigation à voile</string>
     <string name="poi_charity">Boutique caritative</string>
     <string name="poi_tomb">Sépulture</string>
@@ -1534,7 +1534,7 @@
     <string name="poi_tomb_pyramid">Type : pyramide</string>
     <string name="poi_historic_civilization_celtic">Civilisation : celtique</string>
     <string name="poi_historic_civilization_minoan">Civilisation : minoenne</string>
-    <string name="poi_horse_yes">Chevaux autorisés</string>
+    <string name="poi_horse_yes">Oui</string>
     <string name="poi_horse_no">Chevaux interdits</string>
     <string name="poi_animal_yes">Animaux autorisés</string>
     <string name="poi_animal_no">Animaux interdits</string>
@@ -1916,7 +1916,7 @@
     <string name="poi_leaf_type_leafless">Sans feuilles</string>
     <string name="poi_deadlock">Impasse</string>
     <string name="poi_water_characteristic_mineral">Minéral</string>
-    <string name="poi_information_guidepost">Point de repère</string>
+    <string name="poi_information_guidepost">Poteau indicateur</string>
     <string name="poi_fire_hydrant_count">Bouche incendie</string>
     <string name="poi_payment_fuel_type">Cartes carburant</string>
     <string name="poi_additional_type">Supplémentaire</string>
@@ -2134,7 +2134,7 @@
     <string name="poi_board_type_astronomy">Astronomie</string>
     <string name="poi_toll_hgv_yes">Péage poids lourd</string>
     <string name="poi_tactile_paving_yes">Oui;Bande podotactile</string>
-    <string name="poi_tactile_paving_no">Sans surface podotactile</string>
+    <string name="poi_tactile_paving_no">Sans bande podotactile</string>
     <string name="poi_railway_level_crossing">Passage à niveau</string>
     <string name="poi_xmas">Noël</string>
     <string name="poi_xmas_event">Événement de Noël</string>
@@ -2157,7 +2157,7 @@
     <string name="poi_shelter_type_building">Bâtiment</string>
     <string name="poi_shelter_type_wildlife_hide">Observation d\'animaux sauvages</string>
     <string name="poi_shelter_type_rock_shelter">Balme</string>
-    <string name="poi_shelter_type_sun_shelter">Soleil</string>
+    <string name="poi_shelter_type_sun_shelter">Abri contre le soleil</string>
     <string name="poi_shelter_type_field_shelter">Campagne</string>
     <string name="poi_shelter_type_tent">Tente</string>
     <string name="poi_shelter_type_abandoned">Abandonné</string>
@@ -2710,7 +2710,7 @@
     <string name="poi_motorcycle_type">Type de moto</string>
     <string name="poi_payment_ep_minipay_yes">Minipay</string>
     <string name="poi_vending_water">Vente d\'eau</string>
-    <string name="poi_fuel_autogas">GPL/LPG</string>
+    <string name="poi_fuel_autogas">GPL</string>
     <string name="poi_crop_rape">Culture : colza</string>
     <string name="poi_animal_shelter_type">Animaux accepté</string>
     <string name="poi_animal_shelter_purpose">Objectif</string>
@@ -2895,11 +2895,11 @@
     <string name="poi_tower_construction_freestanding">Construction : autoportante</string>
     <string name="poi_gorge">Gorge</string>
     <string name="poi_couloir">Couloir</string>
-    <string name="poi_surface_clay">Argile</string>
-    <string name="poi_surface_tartan">Tartan</string>
-    <string name="poi_surface_artificial_turf">Pelouse artificielle</string>
-    <string name="poi_surface_decoturf">Decoturf</string>
-    <string name="poi_surface_metal_grid">Grille métallique</string>
+    <string name="poi_surface_clay">Surface : terre battue</string>
+    <string name="poi_surface_tartan">Surface : Tartan</string>
+    <string name="poi_surface_artificial_turf">Revêtement : Pelouse artificielle</string>
+    <string name="poi_surface_decoturf">Revêtement : DecoTurf</string>
+    <string name="poi_surface_metal_grid">Surface : Grille métallique</string>
     <string name="poi_location_underground">Emplacement : souterrain</string>
     <string name="poi_location_underwater">Emplacement : sous l\'eau</string>
     <string name="poi_location_overground">Emplacement : en surface</string>
@@ -3107,7 +3107,7 @@
     <string name="poi_service_vehicle_diagnostics_yes">Diagnostics</string>
     <string name="poi_service_vehicle_car_parts_yes">Pièces détachées automobiles</string>
     <string name="poi_service_vehicle_batteries_yes">Batteries</string>
-    <string name="poi_service_vehicle_air_conditioning_yes">Air conditionnée</string>
+    <string name="poi_service_vehicle_air_conditioning_yes">Air conditionné</string>
     <string name="poi_service_vehicle_motor_yes">Moteur</string>
     <string name="poi_service_vehicle_insurance_yes">Assurance</string>
     <string name="poi_service_vehicle_tyres_yes">Pneumatiques</string>
@@ -3527,9 +3527,9 @@
     <string name="poi_adult_gaming_centre">Centre de jeux pour adultes</string>
     <string name="poi_service_vehicle_oil_change_yes">Vidange d\'huile</string>
     <string name="poi_service_vehicle_body_repair_yes">Carrosserie</string>
-    <string name="poi_service_vehicle_electrical_yes">électricité</string>
+    <string name="poi_service_vehicle_electrical_yes">Électricité</string>
     <string name="poi_climbing_adventure">Parcours acrobatique en hauteur</string>
-    <string name="poi_course">Course</string>
+    <string name="poi_course">Cours</string>
     <string name="poi_license_classes">Classes de permis</string>
     <string name="poi_pipeline_substation">Sous-station de pipeline</string>
     <string name="poi_substation_minor_distribution">Distribution mineure</string>
@@ -3661,7 +3661,7 @@
     <string name="poi_tourist_bus_no">Accès aux bus de tourisme : non</string>
     <string name="poi_coach_yes">Accès aux autocars : oui</string>
     <string name="poi_coach_no">Accès aux autocars : non</string>
-    <string name="poi_ski_yes">Accès à ski : oui</string>
+    <string name="poi_ski_yes">Oui</string>
     <string name="poi_ski_no">Accès à ski : non</string>
     <string name="poi_snowmobile_private">Accès en motoneige : privé</string>
     <string name="poi_agricultural_yes">Accès véhicules agricoles : oui</string>
@@ -3925,7 +3925,7 @@
     <string name="poi_operator_type_cooperative">Type d\'opérateur : coopérative</string>
     <string name="poi_operator_type_consortium">Type d\'opérateur : consortium</string>
     <string name="poi_operator_type_community">Type d\'opérateur : communautaire</string>
-    <string name="poi_operator_type_ngo">Type d\'opérateur : ONG</string>
+    <string name="poi_operator_type_ngo">Type d\'opérateur : ONG</string>
     <string name="poi_operator_type_religious">Type d\'opérateur : religieux</string>
     <string name="poi_operator_type_government">Type d\'opérateur : gouvernemental</string>
     <string name="poi_operator_type_private">Type d\'opérateur : privé</string>
@@ -4706,7 +4706,7 @@
     <string name="poi_us_maps_recreation_area_facility">Installation d\'aire de loisirs</string>
     <string name="poi_barrier_board">Panneau barrière</string>
     <string name="poi_tank_trap">Obstacle anti-char</string>
-    <string name="poi_surface_chipseal">Enduit de gravillons</string>
+    <string name="poi_surface_chipseal">Revêtement : enrobé gravillonné</string>
     <string name="poi_healthcare_speciality_travel_clinic">Clinique du voyage</string>
     <string name="poi_hang_gliding">Deltaplane</string>
     <string name="poi_padus_public_access_open">Accès : ouvert</string>
@@ -4962,7 +4962,7 @@
     <string name="poi_camp_site_deluxe">De luxe</string>
     <string name="poi_climbing_route">Voie d\'escalade</string>
     <string name="poi_climbing_route_bottom">Bas de la voie d\'escalade</string>
-    <string name="poi_cafe_yes">Oui</string>
+    <string name="poi_cafe_yes">Café : oui</string>
     <string name="poi_osmwiki">Lieux populaires (Wikipédia)</string>
     <string name="poi_mosque">Mosquée</string>
     <string name="poi_buddhist_temple">Temple bouddhiste</string>
@@ -5027,7 +5027,7 @@
     <string name="poi_courier">Bureau de messagerie</string>
     <string name="poi_surveyor">Bureau d\'arpentage</string>
     <string name="poi_office_university">Bureau de l\'université</string>
-    <string name="poi_harbour_master">Capitaine du port</string>
+    <string name="poi_harbour_master">Capitainerie</string>
     <string name="poi_bail_bond_agent">Agent de cautionnement</string>
     <string name="poi_translator">Traducteur</string>
     <string name="poi_visa">Visa</string>
@@ -5173,4 +5173,11 @@
     <string name="poi_rapids_grade_0">0 (eau calme)</string>
     <string name="poi_water_lake">Lac</string>
     <string name="poi_water_type_filter">Type d\'eau</string>
+    <string name="poi_surface_laterite">Surface : latérite</string>
+    <string name="poi_mtb_filter">Convient au VTT</string>
+    <string name="poi_ski_filter">Adapté au ski</string>
+    <string name="poi_horse_filter">Adapté à l\'équitation</string>
+    <string name="poi_winter_hiking_filter">Idéal pour la randonnée hivernale</string>
+    <string name="poi_mtb_yes">Oui</string>
+    <string name="poi_winter_hiking_yes">Oui</string>
 </resources>

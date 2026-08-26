@@ -12,12 +12,19 @@ import net.osmand.IndexConstants;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReaderStats.SearchStat;
 import net.osmand.data.Amenity;
+import net.osmand.data.Building;
+import net.osmand.data.City;
+import net.osmand.data.City.CityType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.data.MapObject;
 import net.osmand.data.PointDescription;
+import net.osmand.data.Street;
 import net.osmand.map.WorldRegion;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -53,6 +60,7 @@ import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
+import net.osmand.search.core.spatial.SpatialTextSearchAPI;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 
@@ -114,8 +122,60 @@ public class QuickSearchHelper implements ResourceListener {
 	public void initSearchUICore() {
 		mapsIndexed = false;
 		setRepositoriesForSearchUICore(app);
-		core.init();
+		core.clearAPIs();
+		core.resetSearch();
+		resultCollection = null;
+		if (useSpatialTextSearch()) {
+			registerSpatialMapSearchAPIs();
+		} else {
+			core.init();
+		}
 
+		registerNonMapSearchAPIs();
+		refreshCustomPoiFilters();
+	}
+
+	private void registerSpatialMapSearchAPIs() {
+		SearchCoreFactory.SearchAmenityByNameAPI amenitiesApi = new SearchCoreFactory.SearchAmenityByNameAPI();
+		core.registerAPI(new SearchCoreFactory.SearchAmenityTypesAPI(app.getPoiTypes()));
+		core.registerAPI(new SearchCoreFactory.SearchLocationAndUrlAPI(amenitiesApi,
+				app.getSettings()::isInternetConnectionAvailable));
+		core.registerAPI(new SpatialCategoryAmenityByTypeAPI(app.getPoiTypes()));
+		core.registerAPI(new SpatialBuildingAndIntersectionsByStreetAPI());
+		core.registerAPI(new SpatialTextSearchAPI(app.getPoiTypes()));
+	}
+
+	private static class SpatialBuildingAndIntersectionsByStreetAPI
+			extends SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI {
+
+		@Override
+		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
+			if (phrase.getLastSelectedWord().getResult().object instanceof Street street
+					&& street.getBuildings().isEmpty() && street.getIntersectedStreets().isEmpty()) {
+				return true;
+			}
+			return super.search(phrase, resultMatcher);
+		}
+
+		@Override
+		public int getSearchPriority(SearchPhrase phrase) {
+			return phrase.isLastWord(ObjectType.STREET) ? super.getSearchPriority(phrase) : -1;
+		}
+	}
+
+	private static class SpatialCategoryAmenityByTypeAPI extends SearchCoreFactory.SearchAmenityByTypeAPI {
+
+		public SpatialCategoryAmenityByTypeAPI(@NonNull MapPoiTypes types) {
+			super(types, null);
+		}
+
+		@Override
+		public int getSearchPriority(SearchPhrase p) {
+			return p.isLastWord(ObjectType.POI_TYPE) ? super.getSearchPriority(p) : -1;
+		}
+	}
+
+	private void registerNonMapSearchAPIs() {
 		// Register index item api
 		core.registerAPI(new SearchIndexItemApi(app));
 
@@ -131,8 +191,10 @@ public class QuickSearchHelper implements ResourceListener {
 		core.registerAPI(new SearchHistoryAPI(app));
 
 		core.registerAPI(new SearchOnlineApi(app));
+	}
 
-		refreshCustomPoiFilters();
+	private boolean useSpatialTextSearch() {
+		return app.getSettings().USE_SPATIAL_TEXT_SEARCH.get();
 	}
 
 	public void refreshCustomPoiFilters() {
@@ -427,6 +489,20 @@ public class QuickSearchHelper implements ResourceListener {
 
 		private final OsmandApplication app;
 
+		public static class HistorySearchResult extends SearchResult {
+			private final HistoryEntry historyEntry;
+
+			public HistorySearchResult(@NonNull SearchPhrase phrase, @NonNull HistoryEntry historyEntry) {
+				super(phrase);
+				this.historyEntry = historyEntry;
+			}
+
+			@NonNull
+			public HistoryEntry getHistoryEntry() {
+				return historyEntry;
+			}
+		}
+
 		public SearchHistoryAPI(OsmandApplication app) {
 			super(ObjectType.RECENT_OBJ);
 			this.app = app;
@@ -441,7 +517,7 @@ public class QuickSearchHelper implements ResourceListener {
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
 			int priority = 0;
 			SearchHistoryHelper historyHelper = app.getSearchHistoryHelper();
-			for (HistoryEntry entry : historyHelper.getHistoryEntries(false)) {
+			for (HistoryEntry entry : historyHelper.getVisibleHistoryEntries(null, false, false)) {
 				SearchResult result = createSearchResult(app, entry, phrase);
 				result.priority = SEARCH_HISTORY_OBJECT_PRIORITY + (priority++);
 
@@ -456,11 +532,11 @@ public class QuickSearchHelper implements ResourceListener {
 
 		@NonNull
 		public static SearchResult createSearchResult(OsmandApplication app, HistoryEntry entry, SearchPhrase phrase) {
-			SearchResult result = new SearchResult(phrase);
+			SearchResult result = new HistorySearchResult(phrase, entry);
 
 			PointDescription description = entry.getName();
 			String name = description.getName();
-			result.localeName = name;
+			result.localeName = getHistoryDisplayName(app, entry, name);
 
 			if (description.isPoiType()) {
 				MapPoiTypes poiTypes = app.getPoiTypes();
@@ -494,13 +570,240 @@ public class QuickSearchHelper implements ResourceListener {
 				result.object = entry;
 				result.objectType = ObjectType.GPX_TRACK;
 				result.relatedObject = gpxInfo;
-			} else {
+			} else if (entry.getObjectType() == ObjectType.POI) {
+				Amenity amenity = createHistoryAmenity(app, entry);
+				if (amenity != null) {
+					result.object = amenity;
+					result.objectType = ObjectType.POI;
+					result.relatedObject = entry;
+					result.location = new LatLon(entry.getLat(), entry.getLon());
+					result.preferredZoom = SearchCoreFactory.PREFERRED_DEFAULT_RECENT_ZOOM;
+					result.addressName = entry.getAddress();
+					result.alternateName = entry.getAlternateName();
+					SearchSettings settings = phrase.getSettings();
+					result.localeName = amenity.getName(settings.getLang(), settings.isTransliterate());
+					if (Algorithms.isEmpty(result.localeName)) {
+						result.localeName = getHistoryDisplayName(app, entry, name);
+					}
+				} else {
+					result.object = entry;
+					result.objectType = ObjectType.RECENT_OBJ;
+					result.location = new LatLon(entry.getLat(), entry.getLon());
+					result.preferredZoom = SearchCoreFactory.PREFERRED_DEFAULT_RECENT_ZOOM;
+					result.addressName = entry.getAddress();
+					result.alternateName = entry.getAlternateName();
+				}
+			} else if (!createHistoryObjectSearchResult(app, entry, result)) {
 				result.object = entry;
 				result.objectType = ObjectType.RECENT_OBJ;
 				result.location = new LatLon(entry.getLat(), entry.getLon());
 				result.preferredZoom = SearchCoreFactory.PREFERRED_DEFAULT_RECENT_ZOOM;
+				result.addressName = entry.getAddress();
+				result.alternateName = entry.getAlternateName();
 			}
 			return result;
+		}
+
+		private static boolean createHistoryObjectSearchResult(@NonNull OsmandApplication app,
+				@NonNull HistoryEntry entry, @NonNull SearchResult result) {
+			ObjectType objectType = entry.getObjectType();
+			if (objectType == null || objectType == ObjectType.RECENT_OBJ || objectType == ObjectType.POI_TYPE
+					|| objectType == ObjectType.POI || objectType == ObjectType.GPX_TRACK) {
+				return false;
+			}
+			String displayName = getHistoryDisplayName(app, entry, entry.getName().getName());
+			if (Algorithms.isEmpty(displayName)) {
+				return false;
+			}
+			LatLon location = new LatLon(entry.getLat(), entry.getLon());
+			result.objectType = objectType;
+			result.location = location;
+			result.preferredZoom = SearchCoreFactory.PREFERRED_DEFAULT_RECENT_ZOOM;
+			result.localeName = displayName;
+			result.localeRelatedObjectName = entry.getRelatedObjectName();
+			result.addressName = entry.getAddress();
+			result.alternateName = entry.getAlternateName();
+			switch (objectType) {
+				case CITY:
+				case VILLAGE:
+				case BOUNDARY:
+					CityType cityType = getCityType(entry, objectType);
+					if (cityType == null) {
+						return false;
+					}
+					result.object = createHistoryCity(cityType, displayName, location, entry.getOsmId());
+					return true;
+				case POSTCODE:
+					City postcode = City.createPostcode(displayName);
+					postcode.setLocation(location);
+					result.object = postcode;
+					return true;
+				case STREET:
+					City streetCity = createRelatedCity(entry, location);
+					result.object = createHistoryStreet(streetCity, displayName, location, entry.getOsmId());
+					result.relatedObject = streetCity;
+					if (Algorithms.isEmpty(result.localeRelatedObjectName)) {
+						result.localeRelatedObjectName = getContextName(entry);
+					}
+					return true;
+				case HOUSE:
+					Street relatedStreet = createRelatedStreet(entry, location);
+					Building building = new Building();
+					fillHistoryMapObject(building, displayName, location, entry.getOsmId());
+					result.object = building;
+					result.relatedObject = relatedStreet;
+					if (Algorithms.isEmpty(result.localeRelatedObjectName)) {
+						result.localeRelatedObjectName = !Algorithms.isEmpty(relatedStreet.getName())
+								? relatedStreet.getName()
+								: getContextName(entry);
+					}
+					return true;
+				case STREET_INTERSECTION:
+					City intersectionCity = createRelatedCity(entry, location);
+					result.object = createHistoryStreet(intersectionCity, displayName, location, entry.getOsmId());
+					if (!Algorithms.isEmpty(entry.getRelatedObjectName())) {
+						result.relatedObject = createHistoryStreet(intersectionCity, entry.getRelatedObjectName(), location, null);
+					}
+					return true;
+				case LOCATION:
+					result.object = location;
+					return true;
+				case FAVORITE:
+					String favoriteCategory = entry.getTypeName();
+					result.object = new FavouritePoint(entry.getLat(), entry.getLon(), displayName,
+							Algorithms.isEmpty(favoriteCategory) ? "" : favoriteCategory);
+					return true;
+				case WPT:
+					WptPt wptPt = new WptPt();
+					wptPt.setLat(entry.getLat());
+					wptPt.setLon(entry.getLon());
+					wptPt.setName(displayName);
+					wptPt.setCategory(entry.getTypeName());
+					result.object = wptPt;
+					return true;
+				default:
+					return false;
+			}
+		}
+
+		@Nullable
+		private static String getContextName(@NonNull HistoryEntry entry) {
+			String typeName = entry.getTypeName();
+			if (!Algorithms.isEmpty(typeName)) {
+				return typeName;
+			}
+			return !Algorithms.isEmpty(entry.getAddress()) ? entry.getAddress() : null;
+		}
+
+		@NonNull
+		private static City createRelatedCity(@NonNull HistoryEntry entry, @NonNull LatLon location) {
+			String cityName = getContextName(entry);
+			if (Algorithms.isEmpty(cityName)) {
+				cityName = entry.getAddress();
+			}
+			if (Algorithms.isEmpty(cityName)) {
+				cityName = "";
+			}
+			return createHistoryCity(CityType.CITY, cityName, location, null);
+		}
+
+		@NonNull
+		private static Street createRelatedStreet(@NonNull HistoryEntry entry, @NonNull LatLon location) {
+			City city = createRelatedCity(entry, location);
+			String streetName = entry.getRelatedObjectName();
+			if (Algorithms.isEmpty(streetName)) {
+				streetName = entry.getTypeName();
+			}
+			if (Algorithms.isEmpty(streetName)) {
+				streetName = "";
+			}
+			return createHistoryStreet(city, streetName, location, null);
+		}
+
+		@NonNull
+		private static City createHistoryCity(@NonNull CityType cityType, @NonNull String name,
+				@NonNull LatLon location, @Nullable Long id) {
+			City city = new City(cityType);
+			fillHistoryMapObject(city, name, location, id);
+			return city;
+		}
+
+		@NonNull
+		private static Street createHistoryStreet(@NonNull City city, @NonNull String name,
+				@NonNull LatLon location, @Nullable Long id) {
+			Street street = new Street(city);
+			fillHistoryMapObject(street, name, location, id);
+			return street;
+		}
+
+		private static void fillHistoryMapObject(@NonNull MapObject object, @NonNull String name,
+				@NonNull LatLon location, @Nullable Long id) {
+			object.setName(name);
+			object.setLocation(location);
+			if (id != null) {
+				object.setId(id);
+			}
+		}
+
+		@Nullable
+		private static CityType getCityType(@NonNull HistoryEntry entry, @NonNull ObjectType objectType) {
+			CityType cityType = entry.getCityType();
+			if (cityType != null) {
+				return cityType;
+			}
+			return switch (objectType) {
+				case CITY -> CityType.CITY;
+				case VILLAGE -> CityType.VILLAGE;
+				case BOUNDARY -> CityType.BOUNDARY;
+				default -> null;
+			};
+		}
+
+		@NonNull
+		private static String getHistoryDisplayName(@NonNull OsmandApplication app,
+				@NonNull HistoryEntry entry, @NonNull String fallbackName) {
+			if (!Algorithms.isEmpty(entry.getDisplayName())) {
+				return entry.getDisplayName();
+			}
+			PointDescription description = entry.getName();
+			String simpleName = description.getSimpleName(app, false);
+			return !Algorithms.isEmpty(simpleName) ? simpleName : fallbackName;
+		}
+
+		@Nullable
+		private static Amenity createHistoryAmenity(@NonNull OsmandApplication app, @NonNull HistoryEntry entry) {
+			String poiSubtypeKey = entry.getPoiSubtypeKey();
+			if (Algorithms.isEmpty(poiSubtypeKey)) {
+				return null;
+			}
+			MapPoiTypes poiTypes = app.getPoiTypes();
+			PoiCategory category = !Algorithms.isEmpty(entry.getPoiCategoryKey())
+					? poiTypes.getPoiCategoryByName(entry.getPoiCategoryKey())
+					: null;
+			if (category == null) {
+				AbstractPoiType poiType = poiTypes.getAnyPoiTypeByKey(poiSubtypeKey);
+				if (poiType instanceof PoiCategory poiCategory) {
+					category = poiCategory;
+				} else if (poiType instanceof PoiType type) {
+					category = type.getCategory();
+				}
+			}
+			if (category == null) {
+				category = poiTypes.getOtherPoiCategory();
+			}
+			Amenity amenity = new Amenity();
+			amenity.setType(category);
+			amenity.setSubType(poiSubtypeKey);
+			amenity.setName(!Algorithms.isEmpty(entry.getDisplayName()) ? entry.getDisplayName() : entry.getName().getName());
+			amenity.setLocation(entry.getLat(), entry.getLon());
+			amenity.setId(entry.getOsmId());
+			if (!Algorithms.isEmpty(entry.getOpeningHours())) {
+				amenity.setOpeningHours(entry.getOpeningHours());
+			}
+			if (!Algorithms.isEmpty(entry.getPhotoUrl())) {
+				amenity.setWikiIconUrl(entry.getPhotoUrl());
+			}
+			return amenity;
 		}
 
 		@Override

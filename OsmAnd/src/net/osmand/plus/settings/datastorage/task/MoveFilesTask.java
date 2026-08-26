@@ -83,7 +83,7 @@ public class MoveFilesTask extends AsyncTask<Void, Object, Map<String, Pair<Stri
 			});
 			progressHelper.setTimeInterval(100); // update progress each 100 ms
 			migrationListener = StorageMigrationFragment.showInstance(manager, to, from, filesSize,
-					copyProgress, files.size(), false, restartListener, stopTaskListener);
+					copyProgress, files.size(), false, true, restartListener, stopTaskListener);
 		}
 	}
 

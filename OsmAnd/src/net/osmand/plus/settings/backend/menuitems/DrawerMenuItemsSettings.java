@@ -12,6 +12,7 @@ public class DrawerMenuItemsSettings extends ContextMenuItemsSettings {
 	private static final List<String> originalOrderIds = new ArrayList<>();
 
 	static {
+		originalOrderIds.add(DRAWER_SALE_ID);
 		originalOrderIds.add(DRAWER_DASHBOARD_ID);
 		originalOrderIds.add(DRAWER_MAP_MARKERS_ID);
 		originalOrderIds.add(DRAWER_MY_PLACES_ID);

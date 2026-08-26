@@ -3,6 +3,7 @@ package net.osmand.data;
 
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
+import net.osmand.binary.ObfConstants;
 import net.osmand.util.Algorithms;
 import net.osmand.util.TransliterationHelper;
 
@@ -35,6 +36,12 @@ public abstract class MapObject implements Comparable<MapObject> {
 	protected long fileOffset = 0;
 	protected Long id = null;
 	private Object referenceFile = null;
+	
+	public static final String NAME_REF_ATTR = "ref";
+	public static final String NAME_PLACE_ATTR = "place";
+	public static final String NAME_ADMIN_LEVEL_ATTR = "admin_level";
+	public static final String NAME_WIKIDATA_ATTR = "wikidata";
+	public static final String NAME_ETYMOLOGY_ATTR = "etymology";
 
 
 	public void setId(Long id) {
@@ -117,8 +124,9 @@ public abstract class MapObject implements Comparable<MapObject> {
 		}
 		if (names != null) {
 			for (String key : names.keySet()) {
-				// skip name:place, name:admin_level...
-				if (key.equals("admin_level") || key.equals("place")) {
+				// skip name:place, name:admin_level... (for search and indexing!)
+				if (key.equals(NAME_ADMIN_LEVEL_ATTR) || key.equals(NAME_PLACE_ATTR) 
+						|| key.contains(NAME_ETYMOLOGY_ATTR) || key.equals(NAME_WIKIDATA_ATTR)) {
 					continue;
 				}
 				String name = names.get(key);
@@ -245,7 +253,12 @@ public abstract class MapObject implements Comparable<MapObject> {
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " " + name + "(" + id + ")";
+		// no ternary here: mixing Long and long operands unboxes a null id and throws NPE
+		Long osmId = id;
+		if (id != null && id >= 0) {
+			osmId = ObfConstants.getOsmIdFromMapObjectId(id);
+		}
+		return getClass().getSimpleName() + " " + name + "(" + osmId + ")";
 	}
 
 	@Override
@@ -410,6 +423,13 @@ public abstract class MapObject implements Comparable<MapObject> {
 		}
 	}
 
+	protected QuadRect getMinBbox(LatLon ll) {
+		double d = 0.002;
+		QuadRect qr = new QuadRect(ll.getLongitude() - d, ll.getLatitude() + d, 
+				ll.getLongitude() + d, ll.getLatitude() - d);
+		return qr;
+	}
+	
 	public static boolean isNameLangTag(String tag) {
 		if (tag.startsWith("name:")) {
 			// languages code <= 3
@@ -422,5 +442,14 @@ public abstract class MapObject implements Comparable<MapObject> {
 			}
 		}
 		return false;
+	}
+	
+	public int[] getBbox31() {
+		return null;
+	}
+
+	public String getWikidata() {
+		String wikidata = names != null ? names.get(NAME_WIKIDATA_ATTR) : null;
+		return Algorithms.isNotEmpty(wikidata) ? unzipContent(wikidata) : null;
 	}
 }

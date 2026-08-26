@@ -13,7 +13,7 @@
 		android:layout_height="wrap_content"
 		android:orientation="horizontal">
 
-		<ImageView
+		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/icon"
 			android:layout_width="24dp"
 			android:layout_height="24dp"
@@ -27,7 +27,7 @@
 			android:orientation="vertical"
 			android:paddingHorizontal="24dp">
 
-			<TextView
+			<net.osmand.plus.widgets.TextViewEx
 				android:id="@+id/title"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
 				android:textSize="@dimen/default_list_text_size"
 				android:textStyle="bold" />
 
-			<TextView
+			<net.osmand.plus.widgets.TextViewEx
 				android:id="@+id/description"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
@@ -72,5 +72,16 @@
 			app:drawableStartCompat="@drawable/ic_action_mapillary" />
 
 	</FrameLayout>
+
+	<net.osmand.plus.widgets.dialogbutton.DialogButton
+		android:id="@+id/no_media_action_dialog_button"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="48dp"
+		android:visibility="gone"
+		app:dialogButtonTopMargin="@dimen/content_padding"
+		app:dialogButtonTitle="@string/shared_string_add"
+		app:dialogButtonHeight="@dimen/dialog_button_height"
+		app:dialogButtonType="secondary" />
 
 </LinearLayout>

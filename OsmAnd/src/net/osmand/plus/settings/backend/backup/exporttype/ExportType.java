@@ -7,7 +7,6 @@ import static net.osmand.plus.settings.backend.backup.exporttype.AbstractMapExpo
 import static net.osmand.util.CollectionUtils.addAllIfNotContains;
 import static net.osmand.util.CollectionUtils.addIfNotContains;
 import static net.osmand.util.CollectionUtils.filterElementsWithCondition;
-import static net.osmand.util.CollectionUtils.searchElementWithCondition;
 
 import android.content.Context;
 
@@ -40,6 +39,7 @@ public enum ExportType {
 	POI_TYPES(new PoiTypesExportType()),
 	AVOID_ROADS(new AvoidRoadsExportType()),
 	FAVORITES(new FavoritesExportType()),
+	ATTACHED_MEDIA(new AttachedMediaExportType()),
 	TRACKS(new TracksExportType()),
 	GPX_DIR(new GpxDirExportType()),
 	OSM_NOTES(new OsmNotesExportType()),
@@ -63,6 +63,8 @@ public enum ExportType {
 	VOICE(new VoiceExportType()),
 	FAVORITES_BACKUP(new FavoritesBackupExportType()),
 	COLOR_PALETTE(new ColorPaletteExportType());
+
+	private static final ExportType[] CACHED_VALUES = values();
 
 	@NonNull
 	private final IExportType instance;
@@ -151,8 +153,12 @@ public enum ExportType {
 
 	@Nullable
 	public static ExportType findBy(@NonNull OsmandApplication app, @NonNull Object object) {
-		return searchElementWithCondition(valuesList(),
-				exportType -> exportType.instance.isRelatedObject(app, object));
+		for (ExportType exportType : CACHED_VALUES) {
+			if (exportType.instance.isRelatedObject(app, object)) {
+				return exportType;
+			}
+		}
+		return null;
 	}
 
 	@Nullable
@@ -163,10 +169,18 @@ public enum ExportType {
 		if (Objects.equals(SettingsItemType.FILE.name(), remoteFile.getType())) {
 			return findBy(FileSubtype.getSubtypeByFileName(remoteFile.getName()));
 		}
-		return searchElementWithCondition(valuesList(), exportType -> {
+		return findBySettingsItemType(remoteFile.getType());
+	}
+
+	@Nullable
+	private static ExportType findBySettingsItemType(@NonNull String itemType) {
+		for (ExportType exportType : CACHED_VALUES) {
 			SettingsItemType relatedSettingsType = exportType.instance.getRelatedSettingsItemType();
-			return Objects.equals(relatedSettingsType.name(), remoteFile.getType());
-		});
+			if (Objects.equals(relatedSettingsType.name(), itemType)) {
+				return exportType;
+			}
+		}
+		return null;
 	}
 
 	@Nullable
@@ -174,20 +188,27 @@ public enum ExportType {
 		if (item.getType() == SettingsItemType.FILE) {
 			return findBy(((FileSettingsItem) item).getSubtype());
 		}
-		return searchElementWithCondition(valuesList(),
-				exportType -> exportType.instance.getRelatedSettingsItemType() == item.getType());
+		return findBySettingsItemType(item.getType().name());
 	}
 
 	@Nullable
 	public static ExportType findBy(@NonNull FileSubtype fileSubtype) {
-		return searchElementWithCondition(valuesList(),
-				type -> type.instance.getRelatedFileSubtypes().contains(fileSubtype));
+		for (ExportType exportType : CACHED_VALUES) {
+			if (exportType.instance.getRelatedFileSubtypes().contains(fileSubtype)) {
+				return exportType;
+			}
+		}
+		return null;
 	}
 
 	@Nullable
 	public static ExportType findBy(@NonNull LocalItemType localItemType) {
-		return searchElementWithCondition(valuesList(),
-				exportType -> exportType.instance.getRelatedLocalItemType() == localItemType);
+		for (ExportType exportType : CACHED_VALUES) {
+			if (exportType.instance.getRelatedLocalItemType() == localItemType) {
+				return exportType;
+			}
+		}
+		return null;
 	}
 
 	@NonNull

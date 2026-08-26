@@ -42,6 +42,38 @@
 				android:textSize="@dimen/default_list_text_size"
 				tools:text="Title" />
 
+			<LinearLayout
+				android:id="@+id/trailing_badge"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				android:layout_marginEnd="@dimen/content_padding_half"
+				android:background="@drawable/bg_popup_menu_trailing_badge"
+				android:gravity="center_vertical"
+				android:minHeight="@dimen/popup_trailing_badge_min_height"
+				android:orientation="horizontal"
+				android:paddingHorizontal="@dimen/text_margin_small"
+				android:paddingVertical="@dimen/text_margin_small"
+				android:visibility="gone"
+				tools:visibility="visible">
+
+				<ImageView
+					android:id="@+id/trailing_badge_icon"
+					android:layout_width="@dimen/standard_icon_size"
+					android:layout_height="@dimen/standard_icon_size"
+					tools:src="@drawable/ic_action_osmand_maps_plus" />
+
+				<TextView
+					android:id="@+id/trailing_badge_title"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="@dimen/text_margin_small"
+					android:textColor="?attr/active_color_basic"
+					android:textSize="@dimen/default_list_text_size"
+					tools:text="Get" />
+
+			</LinearLayout>
+
 			<RadioButton
 				android:id="@+id/compound_button"
 				android:layout_width="wrap_content"

@@ -2,7 +2,16 @@ package net.osmand.shared.gpx
 
 import net.osmand.shared.io.KFile
 
-class GpxDirItem(file: KFile) : DataItem(file) {
+class GpxDirItem private constructor(
+	file: KFile,
+	initializeFileParameters: Boolean
+) : DataItem(file, initializeFileParameters) {
+
+	constructor(file: KFile) : this(file, true)
+
+	companion object {
+		internal fun fromDatabase(file: KFile) = GpxDirItem(file, false)
+	}
 
 	override fun isValidValue(parameter: GpxParameter, value: Any?): Boolean {
 		if (parameter.isAppearanceParameter()) {

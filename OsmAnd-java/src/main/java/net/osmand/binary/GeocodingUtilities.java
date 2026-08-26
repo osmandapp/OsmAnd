@@ -216,14 +216,14 @@ public class GeocodingUtilities {
 	private List<String> prepareStreetName(String streetName, boolean includeCommonWords) {
 		List<String> words = new ArrayList<>();
 		// "Tempelhofer Damm" == "Tempelhofer Damm (Tempelhof-Schöneberg)"
-		for (String word : SearchAlgorithms.splitAndNormalize(SearchPhrase.stripBraces(streetName))) {
-			if (Algorithms.isNotEmpty(word) && (includeCommonWords || CommonWords.getCommonGeocoding(word) == -1)) {
+		for (String word : SearchAlgorithms.splitAndNormalize(SearchPhrase.stripBraces(streetName), true)) {
+			if (Algorithms.isNotEmpty(word) && (includeCommonWords || CommonWords.getInstance().getCommonGeocoding(word) == -1)) {
 				words.add(word);
 			}
 		}
 		return words; // keep original order ("NC 42" - search by "NC" not by "42")
 	}
-
+	
 	private boolean matchStreetName(String s1, String s2, boolean matchWithCommonWords) {
 		if (Algorithms.isEmpty(s1) || Algorithms.isEmpty(s2)) {
 			return false;
@@ -263,7 +263,7 @@ public class GeocodingUtilities {
 
 		boolean addCommonWords = false;
 		for (String word : streetNamesUsed) {
-			if (CommonWords.isNumber2Letters(word)) {
+			if (SearchAlgorithms.isNumber2Letters(word)) {
 				addCommonWords = true; // 1-я Цэнтральная вуліца
 				break;
 			}

@@ -28,7 +28,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
-import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -62,6 +61,7 @@ import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFil
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TracksGroupViewHolder.TrackGroupsListener;
 import net.osmand.plus.myplaces.tracks.tasks.OpenGpxDetailsTask;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.shared.gpx.enums.TracksSortScope;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.shared.SharedUtil;
@@ -237,11 +237,14 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 	}
 
 	protected void setupAdapter(@NonNull View view) {
-		adapter = new TrackFoldersAdapter(view.getContext(), nightMode, selectedFolder);
+		adapter = new TrackFoldersAdapter(requireActivity(), nightMode, selectedFolder);
 		adapter.setSortTracksListener(this);
 		adapter.setTrackGroupsListener(this);
 		adapter.setTrackSelectionListener(this);
 		adapter.setEmptyTracksListener(this);
+		if (this instanceof CardListener cardListener) {
+			adapter.setCardListener(cardListener);
+		}
 
 		recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));
@@ -310,8 +313,7 @@ public abstract class BaseTrackFolderFragment extends BaseFullScreenFragment imp
 	}
 
 	private void sortItems(@NonNull List<Object> items, @NonNull TracksSortMode sortMode) {
-		LatLon latLon = app.getMapViewTrackingUtilities().getDefaultLocation();
-		Collections.sort(items, new TracksComparator(sortMode, latLon));
+		Collections.sort(items, new TracksComparator(sortMode, app));
 	}
 
 	public void showTrackOnMap(@NonNull TrackItem trackItem) {

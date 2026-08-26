@@ -4,6 +4,7 @@ apply from: rootProject.file("versions.gradle")
 
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-parcelize'
+apply plugin: 'org.jetbrains.kotlin.plugin.compose'
 
 // Global Parameters accepted
 // TARGET_APP_NAME    - app name
@@ -110,6 +111,7 @@ android {
 
 	buildFeatures {
 		aidl true
+		compose true
 	}
 
 	flavorDimensions "version", "coreversion", "abi"
@@ -163,6 +165,9 @@ android {
 		}
 		release {
 			signingConfig signingConfigs.publishing
+			minifyEnabled true
+			shrinkResources false
+			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 		}
 	}
 

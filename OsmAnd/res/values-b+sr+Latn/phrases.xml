@@ -2262,7 +2262,7 @@
     <string name="poi_animal_training">Dresura životinja</string>
     <string name="poi_animal_training_dog">Pas</string>
     <string name="poi_animal_training_horse">Konj</string>
-    <string name="poi_horse_yes">Dozvoljeno konjima</string>
+    <string name="poi_horse_yes">Da</string>
     <string name="poi_horse_no">Nedozvoljeno konjima</string>
     <string name="poi_animal_yes">Dozvoljeno životinjama</string>
     <string name="poi_animal_no">Nedozvoljeno životinjama</string>
@@ -2556,7 +2556,7 @@
     <string name="poi_tourist_bus_yes">Pristup za turističke autobuse: da</string>
     <string name="poi_tourist_bus_designated">Pristup za turističke autobuse: namenjeno</string>
     <string name="poi_tourist_bus_no">Pristup za turističke autobuse: ne</string>
-    <string name="poi_ski_yes">Ski pristup: da</string>
+    <string name="poi_ski_yes">Da</string>
     <string name="poi_ski_no">Ski pristup: ne</string>
     <string name="poi_snowmobile_private">Pristup za snoumobil: privatni</string>
     <string name="poi_snowmobile_no">Pristup za snoumobil: ne</string>
@@ -2969,11 +2969,11 @@
     <string name="poi_location_overground">Lokacija: nadzemlje</string>
     <string name="poi_location_underwater">Lokacija: podvodna</string>
     <string name="poi_location_underground">Lokacija: podzemna</string>
-    <string name="poi_surface_metal_grid">Metalna mreža</string>
-    <string name="poi_surface_decoturf">Dekotrava</string>
-    <string name="poi_surface_artificial_turf">Veštačka trava</string>
-    <string name="poi_surface_tartan">Tartan</string>
-    <string name="poi_surface_clay">Glina</string>
+    <string name="poi_surface_metal_grid">Površina: Metalna rešetka</string>
+    <string name="poi_surface_decoturf">Površina: Dekotrava</string>
+    <string name="poi_surface_artificial_turf">Podloga: Veštačka trava</string>
+    <string name="poi_surface_tartan">Površina: Tartan</string>
+    <string name="poi_surface_clay">Površina: glina</string>
     <string name="poi_mountain_area">Planinska oblast</string>
     <string name="poi_couloir">Kuloar</string>
     <string name="poi_gorge">Klisura</string>
@@ -4605,7 +4605,7 @@
     <string name="poi_recycling_plastic_bottle_tops">Čepovi od plastičnih boca</string>
     <string name="poi_barrier_board">Barijerna tabla</string>
     <string name="poi_barrier_tyres">Gume</string>
-    <string name="poi_surface_chipseal">Grubi asfalt</string>
+    <string name="poi_surface_chipseal">Površina: Grubi asfalt</string>
     <string name="poi_assembly_point">Mesto okupljanja</string>
     <string name="poi_healthcare_speciality_haematology">Hematologija</string>
     <string name="poi_healthcare_speciality_infectious_diseases">Zarazne bolesti</string>
@@ -4935,7 +4935,7 @@
     <string name="poi_route_activity_type_rafting">Splavarenje</string>
     <string name="poi_climbing_route">Ruta za penjanje</string>
     <string name="poi_climbing_route_bottom">Penjačka ruta dno</string>
-    <string name="poi_cafe_yes">Da</string>
+    <string name="poi_cafe_yes">Kafe: da</string>
     <string name="poi_climbing_area">Područje za penjanje</string>
     <string name="poi_cafe_filter">Kafe filter</string>
     <string name="poi_sled_yes">Sled: da</string>
@@ -5173,4 +5173,11 @@
     <string name="poi_rapids_grade_x">X (ne može se kretati)</string>
     <string name="poi_water_type_filter">Vrsta vode</string>
     <string name="poi_water_lake">Jezero</string>
+    <string name="poi_surface_laterite">Površina: laterit</string>
+    <string name="poi_mtb_filter">Pogodno za MTB</string>
+    <string name="poi_ski_filter">Pogodno za skijanje</string>
+    <string name="poi_horse_filter">Pogodno za jahanje</string>
+    <string name="poi_winter_hiking_filter">Pogodno za zimsko planinarenje</string>
+    <string name="poi_mtb_yes">Da</string>
+    <string name="poi_winter_hiking_yes">Da</string>
 </resources>

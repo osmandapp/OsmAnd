@@ -12,9 +12,10 @@ import androidx.fragment.app.Fragment;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.configmap.ConfigureMapOptionFragment;
+import net.osmand.plus.configmap.MapColorPaletteFragment;
 import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.DiscountHelper.DiscountBarController;
 import net.osmand.plus.helpers.MapFragmentsHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MapContextMenuFragment;
@@ -24,6 +25,7 @@ import net.osmand.plus.measurementtool.SnapTrackWarningFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.views.mapwidgets.configure.appearance.WidgetsAppearanceFragment;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.views.MapLayers;
@@ -54,6 +56,23 @@ public class WidgetsVisibilityHelper {
 		fragmentsHelper = mapActivity.getFragmentsHelper();
 	}
 
+	@Nullable
+	public WidgetsPanel getAppearancePreviewPanel() {
+		WidgetsAppearanceFragment appearanceFragment = fragmentsHelper.getWidgetsAppearanceFragment();
+		if (appearanceFragment != null) {
+			return appearanceFragment.getSelectedPanel();
+		}
+		ConfigureMapOptionFragment optionFragment = fragmentsHelper.getConfigureMapOptionFragment();
+		if (optionFragment instanceof MapColorPaletteFragment paletteFragment) {
+			return paletteFragment.getPreviewPanel();
+		}
+		return null;
+	}
+
+	public boolean isInAppearancePreviewMode() {
+		return getAppearancePreviewPanel() != null;
+	}
+
 	public boolean shouldShowQuickActionButton() {
 		return isQuickActionLayerOn()
 				&& !isInConfigureMapOptionMode()
@@ -61,12 +80,13 @@ public class WidgetsVisibilityHelper {
 	}
 
 	public boolean shouldShowMap3DButton() {
-		return isInConfigureMapOptionMode()
-				|| shouldShowFabButton();
+		return !isInAppearancePreviewMode()
+				&& (isInConfigureMapOptionMode() || shouldShowFabButton());
 	}
 
 	public boolean shouldShowFabButton() {
-		return !isInChangeMarkerPositionMode()
+		return !isInAppearancePreviewMode()
+				&& !isInChangeMarkerPositionMode()
 				&& !isInGpxDetailsMode()
 				&& !isInTrackMenuMode()
 				&& !isInRouteLineAppearanceMode()
@@ -80,9 +100,10 @@ public class WidgetsVisibilityHelper {
 	}
 
 	public boolean shouldShowTopCoordinatesWidget() {
-		return !mapActivity.shouldHideTopControls()
+		return !isInAppearancePreviewMode()
+				&& !mapActivity.shouldHideTopControls()
 				&& mapActivity.getMapRouteInfoMenu().shouldShowTopControls()
-				&& (!mapActivity.isTopToolbarActive() || isTopToolbarDiscountBar())
+				&& !mapActivity.isTopToolbarActive()
 				&& !isInRouteLineAppearanceMode()
 				&& !isInChoosingRoutesMode()
 				&& !isInWaypointsChoosingMode()
@@ -98,26 +119,24 @@ public class WidgetsVisibilityHelper {
 	public boolean shouldHideVerticalWidgets() {
 		return isMapRouteInfoMenuVisible()
 				|| isExplorePlacesMode()
-				|| (mapActivity.isTopToolbarActive() && !isTopToolbarDiscountBar())
+				|| mapActivity.isTopToolbarActive()
 				|| mapActivity.shouldHideTopControls()
 				|| isInRouteLineAppearanceMode()
-				|| isInConfigureMapOptionMode()
+				|| isInConfigureMapOptionModeHidingWidgets()
 				|| !shouldShowElementOnActiveScreen(VERTICAL_WIDGETS);
-	}
-
-	public boolean isTopToolbarDiscountBar() {
-		return mapLayers.getMapInfoLayer().getTopToolbarController() instanceof DiscountBarController;
 	}
 
 	public boolean shouldHideBottomWidgets() {
 		return shouldHideVerticalWidgets()
 				|| isContextMenuFragmentVisible()
 				|| isInTrackMenuMode()
+				|| isInAddGpxPointMode()
 				|| (isRecMenuVisible() && !isPortrait());
 	}
 
 	public boolean shouldShowBottomMenuButtons() {
-		return !mapActivity.shouldHideTopControls()
+		return !isInAppearancePreviewMode()
+				&& !mapActivity.shouldHideTopControls()
 				&& !isInMovingMarkerMode()
 				&& !isInGpxDetailsMode()
 				&& !isInChoosingRoutesMode()
@@ -131,6 +150,9 @@ public class WidgetsVisibilityHelper {
 	}
 
 	public boolean shouldShowZoomButtons() {
+		if (isInAppearancePreviewMode()) {
+			return false;
+		}
 		boolean screensAllowed = shouldShowElementOnActiveScreen(ZOOM_BUTTONS);
 		boolean additionalDialogsHide = !isInGpxApproximationMode()
 				&& !isInChoosingRoutesMode()
@@ -143,12 +165,14 @@ public class WidgetsVisibilityHelper {
 		return showTopControls
 				&& !isInFollowTrackMode()
 				&& !isInConfigureMapOptionMode()
+				&& !isInWidgetsAppearanceMode()
 				&& !isInPlanRouteMode()
 				&& (additionalDialogsHide || !isPortrait());
 	}
 
 	public boolean shouldHideCompass() {
-		return mapActivity.shouldHideTopControls()
+		return isInAppearancePreviewMode()
+				|| mapActivity.shouldHideTopControls()
 				|| isTrackDetailsMenuOpened()
 				|| isInChoosingRoutesMode()
 				|| isInWaypointsChoosingMode()
@@ -158,7 +182,8 @@ public class WidgetsVisibilityHelper {
 	}
 
 	public boolean shouldShowTopButtons() {
-		return !mapActivity.shouldHideTopControls()
+		return !isInAppearancePreviewMode()
+				&& !mapActivity.shouldHideTopControls()
 				&& !isInAttachToRoads()
 				&& !isTrackDetailsMenuOpened()
 				&& !isInChoosingRoutesMode()
@@ -186,6 +211,7 @@ public class WidgetsVisibilityHelper {
 				|| (isInTrackMenuMode() && !isPortrait());
 
 		return showTopControls
+				&& !isInAppearancePreviewMode()
 				&& !isInConfigureMapOptionMode()
 				&& !isInPlanRouteMode()
 				&& !(isMapLinkedToLocation() && routingHelper.isFollowingMode())
@@ -214,13 +240,14 @@ public class WidgetsVisibilityHelper {
 	}
 
 	public boolean shouldShowSuggestMapBanner() {
-		return !isInRouteLineAppearanceMode()
+		return !isInAppearancePreviewMode()
+				&& !isInRouteLineAppearanceMode()
 				&& !isInConfigureMapOptionMode()
 				&& shouldShowElementOnActiveScreen(SUGGEST_MAP_BANNER);
 	}
 
 	public boolean shouldShowSpeedometer() {
-		return shouldShowElementOnActiveScreen(SPEEDOMETER);
+		return !isInAppearancePreviewMode() && shouldShowElementOnActiveScreen(SPEEDOMETER);
 	}
 
 	public static boolean isWidgetEnabled(@NonNull MapActivity activity, @NonNull WidgetsPanel panel,
@@ -358,6 +385,15 @@ public class WidgetsVisibilityHelper {
 
 	public boolean isInConfigureMapOptionMode() {
 		return fragmentsHelper.getConfigureMapOptionFragment() != null;
+	}
+
+	private boolean isInWidgetsAppearanceMode() {
+		return fragmentsHelper.getWidgetsAppearanceFragment() != null;
+	}
+
+	private boolean isInConfigureMapOptionModeHidingWidgets() {
+		ConfigureMapOptionFragment fragment = fragmentsHelper.getConfigureMapOptionFragment();
+		return fragment != null && !fragment.shouldShowMapWidgets();
 	}
 
 	private boolean isInWeatherForecastMode() {

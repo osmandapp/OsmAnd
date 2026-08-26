@@ -1,6 +1,7 @@
 package net.osmand.data;
 
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -34,13 +35,48 @@ public class Street extends MapObject {
 		}
 		return intersectedStreets;
 	}
-
+	
 	public void addIntersectedStreet(Street s) {
 		if (intersectedStreets == null) {
 			intersectedStreets = new ArrayList<Street>();
 		}
 		intersectedStreets.add(s);
 	}
+	
+	@Override
+	public int[] getBbox31() {
+		QuadRect bb = getBboxPoints();
+		if (bb != null) {
+			return new int[] { MapUtils.get31TileNumberX(bb.left), MapUtils.get31TileNumberY(bb.top),
+					MapUtils.get31TileNumberX(bb.right), MapUtils.get31TileNumberY(bb.bottom) };
+		}
+		return null;
+	}
+	
+	public QuadRect getBboxPoints() {
+		LatLon ll = getLocation();
+		if (ll != null) {
+			QuadRect qr = getMinBbox(ll);
+			if (buildings.isEmpty()) {
+				// use intersected streets however it's much larger
+				for (Street is : getIntersectedStreets()) {
+					LatLon l2 = is.getLocation();
+					if (l2 != null) {
+						qr.include(l2.getLongitude(), l2.getLatitude());
+					}
+				}
+			}
+			for (Building b : buildings) {
+				LatLon l2 = b.getLocation();
+				if (l2 != null) {
+					qr.include(l2.getLongitude(), l2.getLatitude());
+				}
+			}
+			return qr;
+		}
+		return null;
+	}
+
 
 	public void addBuildingCheckById(Building building) {
 		if (buildingsByIdCache == null) {
@@ -100,6 +136,20 @@ public class Street extends MapObject {
 		}
 		return nm;
 	}
+	
+	public String getNameCityPart(String lang, boolean transliterate) {
+		String nm = getName(lang, transliterate);
+		int t = nm.lastIndexOf('(');
+		if (t > 0) {
+			String cityPart = nm.substring(t + 1);
+			if ((t = cityPart.lastIndexOf(')')) != -1) {
+				cityPart = cityPart.substring(0, t);
+			}
+			return cityPart;
+		}
+		return "";
+	}
+
 
 	public JSONObject toJSON() {
 		return toJSON(true);

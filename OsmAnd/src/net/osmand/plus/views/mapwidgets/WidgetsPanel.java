@@ -195,10 +195,6 @@ public enum WidgetsPanel {
 		return orderPreference.setModeValue(appMode, stringBuilder.toString());
 	}
 
-	public boolean contains(@NonNull String widgetId, @NonNull OsmandSettings settings, @Nullable ScreenLayoutMode layoutMode) {
-		return contains(widgetId, settings, settings.getApplicationMode(), layoutMode);
-	}
-
 	public boolean contains(@NonNull String widgetId, @NonNull OsmandSettings settings,
 			@NonNull ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode) {
 		return getWidgetOrder(appMode,layoutMode, widgetId, settings) != DEFAULT_ORDER;

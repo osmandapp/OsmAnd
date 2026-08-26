@@ -7,12 +7,10 @@ import net.osmand.IProgress;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.items.OsmandSettingsItem;
-import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -48,17 +46,9 @@ public abstract class OsmandSettingsItemWriter<T extends OsmandSettingsItem> ext
 			}
 		}
 		try {
-			int bytesDivisor = 1024;
-			byte[] bytes = json.toString(2).getBytes("UTF-8");
-			if (progress != null) {
-				progress.startWork(bytes.length / bytesDivisor);
-			}
-			Algorithms.streamCopy(new ByteArrayInputStream(bytes), outputStream, progress, bytesDivisor);
+			SettingsHelper.writeJson(json, outputStream, progress);
 		} catch (JSONException e) {
 			SettingsHelper.LOG.error("Failed to write json to stream", e);
-		}
-		if (progress != null) {
-			progress.finishTask();
 		}
 	}
 }

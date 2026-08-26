@@ -167,6 +167,8 @@
 		<attr name="dlg_btn_transparent" format="reference" />
 		<attr name="dlg_btn_stroked" format="reference" />
 		<attr name="dlg_btn_stroked_secondary_content" format="reference" />
+		<attr name="dlg_btn_accent_stroked" format="reference" />
+		<attr name="dlg_btn_accent_stroked_text" format="reference" />
 		<attr name="dlg_btn_tertiary_text" format="reference" />
 		<attr name="dlg_btn_tertiary_harmful" format="reference" />
 		<attr name="stroked_btn_contour" format="reference" />
@@ -201,6 +203,12 @@
 	    <attr name="slider_label_text_dark" format="reference" />
 	    <attr name="app_bar_secondary_color" format="reference"/>
 	    <attr name="map_button_icon_color" format="reference"/>
+		<attr name="btn_text_on_secondary" format="reference" />
+	    <attr name="btn_icon_on_secondary" format="reference"/>
+		<attr name="icon_button_background_hovered" format="reference" />
+		<attr name="icon_button_background_focused" format="reference" />
+		<attr name="icon_button_background_pressed" format="reference" />
+		<attr name="btn_history_disabled_card_bg" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">
@@ -334,6 +342,7 @@
 			<enum name="stroked_secondary" value="6" />
 			<enum name="tertiary" value="7" />
 			<enum name="tertiary_harmful" value="8" />
+			<enum name="accentStroked" value="9" />
 		</attr>
 		<attr name="dialogButtonTopMargin" format="dimension" />
 		<attr name="dialogButtonBottomMargin" format="dimension" />

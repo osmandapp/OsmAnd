@@ -260,7 +260,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 
 					BillingManager billingManager = getBillingManager();
 					if (billingManager != null) {
-						billingManager.initiatePurchaseFlow(activity, productDetails, 0);
+						billingManager.initiatePurchaseFlow(activity, productDetails, getSelectedOneTimePurchaseOfferIndex(productDetails));
 					} else {
 						throw new IllegalStateException("BillingManager disposed");
 					}
@@ -288,7 +288,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					}
 					BillingManager billingManager = getBillingManager();
 					if (billingManager != null) {
-						billingManager.initiatePurchaseFlow(activity, productDetails, 0);
+						billingManager.initiatePurchaseFlow(activity, productDetails, getSelectedOneTimePurchaseOfferIndex(productDetails));
 					} else {
 						throw new IllegalStateException("BillingManager disposed");
 					}
@@ -635,13 +635,47 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				}
 			}
 		} else {
-			ProductDetails.OneTimePurchaseOfferDetails purchaseOfferDetails = productDetails.getOneTimePurchaseOfferDetails();
+			ProductDetails.OneTimePurchaseOfferDetails purchaseOfferDetails = getSelectedOneTimePurchaseOffer(productDetails);
 			if (purchaseOfferDetails != null) {
+				String currencyCode = purchaseOfferDetails.getPriceCurrencyCode();
+				double priceValue = purchaseOfferDetails.getPriceAmountMicros() / 1000000d;
+				Long fullPriceMicros = purchaseOfferDetails.getFullPriceMicros();
+				double originalPriceValue = fullPriceMicros != null ? fullPriceMicros / 1000000d : priceValue;
 				inAppPurchase.setPrice(purchaseOfferDetails.getFormattedPrice());
-				inAppPurchase.setOriginalPrice(purchaseOfferDetails.getFormattedPrice());
-				inAppPurchase.setPriceCurrencyCode(purchaseOfferDetails.getPriceCurrencyCode());
+				inAppPurchase.setOriginalPrice(inAppPurchase.getFormattedPrice(ctx, originalPriceValue, currencyCode));
+				inAppPurchase.setPriceCurrencyCode(currencyCode);
+				inAppPurchase.setPriceValue(priceValue);
+				inAppPurchase.setOriginalPriceValue(originalPriceValue);
 			}
 		}
+	}
+
+	@Nullable
+	private ProductDetails.OneTimePurchaseOfferDetails getSelectedOneTimePurchaseOffer(@NonNull ProductDetails productDetails) {
+		List<ProductDetails.OneTimePurchaseOfferDetails> offerDetails = productDetails.getOneTimePurchaseOfferDetailsList();
+		if (Algorithms.isEmpty(offerDetails)) {
+			return productDetails.getOneTimePurchaseOfferDetails();
+		}
+		return offerDetails.get(getSelectedOneTimePurchaseOfferIndex(productDetails));
+	}
+
+	private int getSelectedOneTimePurchaseOfferIndex(@NonNull ProductDetails productDetails) {
+		List<ProductDetails.OneTimePurchaseOfferDetails> offerDetails = productDetails.getOneTimePurchaseOfferDetailsList();
+		if (Algorithms.isEmpty(offerDetails)) {
+			return 0;
+		}
+		int selectedOfferIndex = 0;
+		long selectedPriceMicros = offerDetails.get(0).getPriceAmountMicros();
+		for (int i = 0; i < offerDetails.size(); i++) {
+			ProductDetails.OneTimePurchaseOfferDetails offer = offerDetails.get(i);
+			Long fullPriceMicros = offer.getFullPriceMicros();
+			long priceMicros = offer.getPriceAmountMicros();
+			if (fullPriceMicros != null && fullPriceMicros > priceMicros && priceMicros < selectedPriceMicros) {
+				selectedOfferIndex = i;
+				selectedPriceMicros = priceMicros;
+			}
+		}
+		return selectedOfferIndex;
 	}
 
 	@Nullable

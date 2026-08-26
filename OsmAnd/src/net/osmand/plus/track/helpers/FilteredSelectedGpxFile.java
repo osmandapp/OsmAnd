@@ -22,6 +22,7 @@ import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.io.KFile;
 
+import java.util.Collections;
 import java.util.List;
 
 public class FilteredSelectedGpxFile extends SelectedGpxFile {
@@ -31,6 +32,9 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 
 	private int totalPointsCount;
 	private int leftPointsCount;
+	private volatile boolean filtering;
+	private volatile boolean filterReady;
+	private int filterGeneration;
 
 	@NonNull
 	private final SmoothingFilter smoothingFilter;
@@ -48,9 +52,6 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 		this.joinSegments = sourceSelectedGpxFile.joinSegments;
 
 		setGpxFile(sourceSelectedGpxFile.gpxFile.clone(), app);
-		if (joinSegments) {
-			gpxFile.addGeneralTrack();
-		}
 
 		smoothingFilter = new SmoothingFilter(app, sourceSelectedGpxFile);
 		speedFilter = new SpeedFilter(app, sourceSelectedGpxFile);
@@ -62,6 +63,7 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 			altitudeFilter.updateValues(dataItem.getParameter(MIN_FILTER_ALTITUDE), dataItem.getParameter(MAX_FILTER_ALTITUDE));
 			hdopFilter.updateValue(dataItem.getParameter(MAX_FILTER_HDOP));
 		}
+		filterReady = dataItem == null;
 	}
 
 	@Override
@@ -71,30 +73,34 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 		totalPointsCount = calculatePointsCount(getSourceSelectedGpxFile().getGpxFile());
 	}
 
-	@Override
-	protected void update(@NonNull OsmandApplication app) {
-		GpxTrackAnalysis sourceAnalysis = sourceSelectedGpxFile.trackAnalysis;
-		smoothingFilter.updateAnalysis(sourceAnalysis);
-		speedFilter.updateAnalysis(sourceAnalysis);
-		altitudeFilter.updateAnalysis(sourceAnalysis);
-		hdopFilter.updateAnalysis(sourceAnalysis);
-		app.getGpsFilterHelper().filterGpxFile(this, false);
-	}
-
-	public void updateGpxFile(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile) {
+	public synchronized boolean publishFilteredResult(@NonNull OsmandApplication app,
+	                                                  @NonNull GpxFile gpxFile,
+	                                                  @NonNull GpxTrackAnalysis analysis,
+	                                                  int generation) {
+		if (generation != filterGeneration) {
+			return false;
+		}
 		this.gpxFile = gpxFile;
 		if (gpxFile.getTracks().size() > 0) {
 			color = gpxFile.getTracks().get(0).getColor(0);
 		}
 		modifiedTime = gpxFile.getModifiedTime();
+		analysisParametersVersion = sourceSelectedGpxFile.analysisParametersVersion;
 		processPoints(app);
+		setTrackAnalysis(analysis);
+		filtering = false;
+		filterReady = true;
 
 		leftPointsCount = calculatePointsCount(gpxFile);
 		totalPointsCount = calculatePointsCount(sourceSelectedGpxFile.getGpxFile());
+		return true;
 	}
 
 	@Override
 	public void processPoints(@NonNull OsmandApplication app) {
+		pointsModifiedTime = gpxFile.getPointsModifiedTime();
+		splitGroups = null;
+		splitProcessed = false;
 		processedPointsToDisplay = gpxFile.processPoints();
 		updateBounds();
 		updateArea(hasMapRenderer(app));
@@ -133,9 +139,49 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 	@NonNull
 	@Override
 	public List<TrkSegment> getPointsToDisplay() {
-		return joinSegments && gpxFile != null && gpxFile.getGeneralTrack() != null
+		return !filterReady ? Collections.emptyList()
+				: joinSegments && gpxFile != null && gpxFile.getGeneralTrack() != null
 				? gpxFile.getGeneralTrack().getSegments()
 				: processedPointsToDisplay;
+	}
+
+	public boolean isFiltering() {
+		return filtering;
+	}
+
+	public boolean isFilterReady() {
+		return filterReady;
+	}
+
+	public synchronized int beginFiltering() {
+		filterGeneration++;
+		filtering = true;
+		filterReady = false;
+		return filterGeneration;
+	}
+
+	public synchronized void finishFiltering(int generation) {
+		if (generation == filterGeneration) {
+			filtering = false;
+		}
+	}
+
+	public synchronized void cancelFiltering() {
+		filterGeneration++;
+		filtering = false;
+		filterReady = false;
+	}
+
+	public synchronized boolean isCurrentFilterGeneration(int generation) {
+		return generation == filterGeneration;
+	}
+
+	public void prepareForFiltering(@NonNull OsmandApplication app) {
+		GpxTrackAnalysis sourceAnalysis = sourceSelectedGpxFile.getFullTrackAnalysis(app);
+		smoothingFilter.updateAnalysis(sourceAnalysis);
+		speedFilter.updateAnalysis(sourceAnalysis);
+		altitudeFilter.updateAnalysis(sourceAnalysis);
+		hdopFilter.updateAnalysis(sourceAnalysis);
 	}
 
 	@NonNull

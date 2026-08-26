@@ -185,19 +185,25 @@ public class MapDisplayPositionManager implements ViewportListener {
 				if (rect.isEmpty()) {
 					continue;
 				}
+				Rect localRect = getLocalCoveredScreenRect(rect, tileBox);
+				if (localRect == null) {
+					continue;
+				}
 
 				int width = right - left;
 				int height = bottom - top;
+				float centerX = (left + right) / 2f;
+				float centerY = (top + bottom) / 2f;
 
-				boolean leftHalf = rect.exactCenterX() < width / 2f;
-				boolean topHalf = rect.exactCenterY() < height / 2f;
+				boolean leftHalf = localRect.exactCenterX() < centerX;
+				boolean topHalf = localRect.exactCenterY() < centerY;
 
 				int shrinkWidth = leftHalf
-						? Math.max(left, rect.right) - left
-						: right - Math.min(right, rect.left);
+						? Math.max(left, localRect.right) - left
+						: right - Math.min(right, localRect.left);
 				int shrinkHeight = topHalf
-						? Math.max(top, rect.bottom) - top
-						: bottom - Math.min(bottom, rect.top);
+						? Math.max(top, localRect.bottom) - top
+						: bottom - Math.min(bottom, localRect.top);
 
 				int lostAreaByWidth = shrinkWidth * height;
 				int lostAreaByHeight = shrinkHeight * width;
@@ -223,6 +229,21 @@ public class MapDisplayPositionManager implements ViewportListener {
 		}
 
 		return new Rect(left, top, right, bottom);
+	}
+
+	@Nullable
+	private Rect getLocalCoveredScreenRect(@NonNull Rect screenRect, @NonNull RotatedTileBox tileBox) {
+		View view = mapView.getView();
+		if (view == null) {
+			return null;
+		}
+		int[] mapLocationOnScreen = AndroidUtils.getLocationOnScreen(view);
+		Rect localRect = new Rect(screenRect);
+		localRect.offset(-mapLocationOnScreen[0], -mapLocationOnScreen[1]);
+		if (!localRect.intersect(0, 0, tileBox.getPixWidth(), tileBox.getPixHeight())) {
+			return null;
+		}
+		return localRect;
 	}
 
 	private void refreshMapIfNeeded(boolean shouldRefreshMap) {

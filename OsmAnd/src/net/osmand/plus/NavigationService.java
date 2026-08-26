@@ -3,6 +3,7 @@ package net.osmand.plus;
 import static android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION;
 import static net.osmand.plus.OsmAndLocationProvider.NOT_SWITCH_TO_NETWORK_WHEN_GPS_LOST_MS;
 import static net.osmand.plus.OsmAndLocationProvider.isRunningOnEmulator;
+import static net.osmand.plus.notifications.OsmandNotification.NotificationType.AIS;
 import static net.osmand.plus.notifications.OsmandNotification.NotificationType.GPX;
 import static net.osmand.plus.notifications.OsmandNotification.NotificationType.NAVIGATION;
 import static net.osmand.plus.notifications.OsmandNotification.TOP_NOTIFICATION_SERVICE_ID;
@@ -33,6 +34,7 @@ import net.osmand.plus.settings.enums.LocationSource;
 import org.apache.commons.logging.Log;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class NavigationService extends Service {
 
@@ -46,6 +48,7 @@ public class NavigationService extends Service {
 	// global id don't conflict with others
 	public static int USED_BY_NAVIGATION = 1;
 	public static int USED_BY_GPX = 2;
+	public static int USED_BY_AIS = 4;
 	public static final String USAGE_INTENT = "SERVICE_USED_BY";
 
 	private final NavigationServiceBinder binder = new NavigationServiceBinder();
@@ -53,7 +56,7 @@ public class NavigationService extends Service {
 	private OsmandSettings settings;
 	private RoutingHelper routingHelper;
 
-	protected int usedBy;
+	private final AtomicInteger usedBy = new AtomicInteger(0);
 	private OsmAndLocationProvider locationProvider;
 	private LocationServiceHelper locationServiceHelper;
 	private StateChangedListener<LocationSource> locationSourceListener;
@@ -69,15 +72,15 @@ public class NavigationService extends Service {
 	}
 
 	public int getUsedBy() {
-		return usedBy;
+		return usedBy.get();
 	}
 
 	public boolean isUsed() {
-		return usedBy != 0;
+		return usedBy.get() != 0;
 	}
 
 	public boolean isUsedBy(int type) {
-		return (usedBy & type) == type;
+		return (usedBy.get() & type) == type;
 	}
 
 	private void onServiceChanged(boolean start) {
@@ -103,18 +106,16 @@ public class NavigationService extends Service {
 	}
 
 	public void addUsageIntent(int usageIntent) {
-		usedBy |= usageIntent;
+		usedBy.updateAndGet(value -> value | usageIntent);
 		onServiceChanged(true);
 	}
 
 	public void stopIfNeeded(@NonNull Context context, int usageIntent) {
 		LOG.info(">>>> NavigationService stopIfNeeded = " + usageIntent);
 		OsmandApplication app = getApp();
-		if ((usedBy & usageIntent) > 0) {
-			usedBy &= ~usageIntent;
-		}
+		usedBy.updateAndGet(value -> (value & usageIntent) > 0 ? value & ~usageIntent : value);
 		onServiceChanged(false);
-		if (usedBy == 0) {
+		if (usedBy.get() == 0) {
 			context.stopService(new Intent(context, NavigationService.class));
 		} else {
 			app.getNotificationHelper().updateTopNotification();
@@ -127,7 +128,7 @@ public class NavigationService extends Service {
 		LOG.info(">>>> NavigationService onStartCommand");
 		int usageIntent = intent != null ? intent.getIntExtra(USAGE_INTENT, 0) : 0;
 		if (isUsed()) {
-			LOG.info(">>>> NavigationService is used by = " + usedBy);
+			LOG.info(">>>> NavigationService is used by = " + usedBy.get());
 			addUsageIntent(usageIntent);
 			return START_REDELIVER_INTENT;
 		}
@@ -135,13 +136,13 @@ public class NavigationService extends Service {
 		OsmandApplication app = getApp();
 		settings = app.getSettings();
 		routingHelper = app.getRoutingHelper();
-		usedBy = usageIntent;
+		usedBy.set(usageIntent);
 
 		locationProvider = app.getLocationProvider();
 		locationServiceHelper = app.createLocationServiceHelper();
 		app.setNavigationService(this);
 
-		NotificationType type = isUsedBy(USED_BY_NAVIGATION) ? NAVIGATION : GPX;
+		NotificationType type = isUsedBy(USED_BY_NAVIGATION) ? NAVIGATION : isUsedBy(USED_BY_GPX) ? GPX : AIS;
 		NotificationHelper notificationHelper = app.getNotificationHelper();
 		Notification notification = notificationHelper.buildTopNotification(this, type);
 
@@ -151,8 +152,8 @@ public class NavigationService extends Service {
 				startForeground(notification);
 			} catch (Exception e) {
 				app.setNavigationService(null);
-				LOG.error("Failed to start NavigationService (usedBy=" + usedBy + ")", e);
-				usedBy = 0;
+				LOG.error("Failed to start NavigationService (usedBy=" + usedBy.get() + ")", e);
+				usedBy.set(0);
 				return START_NOT_STICKY;
 			}
 			try {
@@ -161,7 +162,7 @@ public class NavigationService extends Service {
 				LOG.error(e.getMessage(), e);
 			}
 		} else {
-			LOG.error("NavigationService could not be started because the notification is null. usedBy=" + usedBy);
+			LOG.error("NavigationService could not be started because the notification is null. usedBy=" + usedBy.get());
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 				try {
 					startForeground(notificationHelper.buildFallbackNotification());
@@ -198,7 +199,7 @@ public class NavigationService extends Service {
 
 		OsmandApplication app = getApp();
 		app.setNavigationService(null);
-		usedBy = 0;
+		usedBy.set(0);
 		removeLocationUpdates();
 		removeLocationSourceListener();
 

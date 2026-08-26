@@ -77,7 +77,7 @@
     <string name="by_distance">Távolság szerint</string>
     <string name="by_name">Név szerint</string>
     <string name="by_group">Csoport szerint</string>
-    <string name="shared_string_sort">Sorba rendezés</string>
+    <string name="shared_string_sort">Rendezés</string>
     <string name="shared_string_sort_by">Rendezés e szerint:</string>
     <string name="choose_osmand_desc">Jelölje ki az OsmAnd azon verzióját, amelyben a partnerek láthatóak lesznek a térképen.</string>
     <string name="choose_osmand">Használandó OsmAnd verzió kijelölése</string>
@@ -157,7 +157,7 @@
     <string name="nm_h">tengeri mérföld/óra</string>
     <string name="m_s">m/s</string>
     <string name="km_h">km/h</string>
-    <string name="mile_per_hour">mf/h</string>
+    <string name="mile_per_hour">m/h</string>
     <string name="si_kmh">km/h</string>
     <string name="si_mph">mérföld/h</string>
     <string name="si_m_s">m/s</string>

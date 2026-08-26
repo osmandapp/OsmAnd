@@ -37,6 +37,13 @@ public class OpeningHoursParser {
 	private static final int WITHOUT_TIME_LIMIT = -1;
 	private static final int CURRENT_DAY_TIME_LIMIT = -2;
 
+	private static final int NO_TIME_MINUTES = -1;
+	private static final int NO_NTH_WEEKDAY = 0;
+	private static final int FIRST_NTH_WEEKDAY = 1;
+	private static final int LAST_NTH_WEEKDAY = 5;
+	private static final int DAYS_IN_WEEK = 7;
+	private static final int NTH_WEEKDAY_FROM_END_OFFSET = LAST_NTH_WEEKDAY;
+
 	private static boolean twelveHourFormatting;
 	private static DateFormat twelveHourFormatter;
 	private static DateFormat twelveHourFormatterAmPm;
@@ -350,6 +357,9 @@ public class OpeningHoursParser {
 			for (int i = rules.size() - 1; i >= 0 ; i--) {
 				OpeningHoursRule rule = rules.get(i);
 				if (rule.contains(cal)) {
+					if (isTimeRestrictedOffRule(rule)) {
+						return false;
+					}
 					boolean checkNextNotNeeded = overlap || !isCheckNextNeeded(cal, rules, i, rule);
 					boolean open = rule.isOpenedForTime(cal);
 					if (open || !checkNextNotNeeded) {
@@ -473,6 +483,15 @@ public class OpeningHoursParser {
 		}
 
 		private String getTime(Calendar cal, int limit, boolean opening, int sequenceIndex) {
+			if (!opening) {
+				// an overnight session of the previous day which is still open ends before
+				// anything the rules of the current day contribute (like "Fr 09:00-16:30"
+				// while a "Mo-Th 09:00-00:30" session is running at Friday 00:15)
+				String spillOverClosing = getSpillOverClosing(cal, limit, sequenceIndex);
+				if (!Algorithms.isEmpty(spillOverClosing)) {
+					return spillOverClosing;
+				}
+			}
 			String time = getTimeDay(cal, limit, opening, sequenceIndex);
 			if (Algorithms.isEmpty(time)) {
 				time = getTimeAnotherDay(cal, limit, opening, sequenceIndex);
@@ -480,21 +499,106 @@ public class OpeningHoursParser {
 			return time;
 		}
 
+		private String getSpillOverClosing(Calendar cal, int limit, int sequenceIndex) {
+			for (OpeningHoursRule r : getRules(sequenceIndex)) {
+				if (r.containsPreviousDay(cal) && r.containsMonth(cal) && r.isOpenedForTime(cal, true)) {
+					return r.getTime(cal, true, limit, false);
+				}
+			}
+			return "";
+		}
+
 		private String getTimeDay(Calendar cal, int limit, boolean opening, int sequenceIndex) {
 			String atTime = "";
+			int atTimeMinutes = NO_TIME_MINUTES;
 			ArrayList<OpeningHoursRule> rules = getRules(sequenceIndex);
 			OpeningHoursRule prevRule = null;
 			for (OpeningHoursRule r : rules) {
-				if (r.containsDay(cal) && r.containsMonth(cal)) {
-					if (atTime.length() > 0 && prevRule != null && !r.hasOverlapTimes(cal, prevRule, true)) {
-						return atTime;
-					} else {
-						atTime = r.getTime(cal, false, limit, opening);
-					}
+				boolean appliesToDay = appliesToDay(r, cal);
+				boolean timeRestrictedOff = isTimeRestrictedOffRule(r);
+				boolean checkOffRule = timeRestrictedOff && (appliesToDay || (!opening && atTimeMinutes >= 0));
+				if (!appliesToDay && !checkOffRule) {
+					continue;
 				}
-				prevRule = r;
+				if (appliesToDay && atTime.length() > 0 && prevRule != null && !r.hasOverlapTimes(cal, prevRule, true)) {
+					return atTime;
+				}
+				if (checkOffRule && r instanceof BasicOpeningHourRule offRule) {
+					// Rules like "Jul-Aug 19:00-19:30 off" make only their own time ranges "off",
+					// so they adjust a time found by previous rules instead of discarding it
+					int currentTimeMinutes = cal.get(Calendar.HOUR_OF_DAY) * 60 + cal.get(Calendar.MINUTE);
+					if (opening) {
+						int offLimit = limit == CURRENT_DAY_TIME_LIMIT ? WITHOUT_TIME_LIMIT : limit;
+						int offTimeMinutes = offRule.getTimeMinutes(cal, false, offLimit, true);
+						boolean currentlyOff = offTimeMinutes != NO_TIME_MINUTES && offRule.containsTime(currentTimeMinutes)
+								&& prevRule instanceof BasicOpeningHourRule prevBasicRule
+								&& prevBasicRule.containsTime(offTimeMinutes);
+						if (offTimeMinutes != NO_TIME_MINUTES && ((atTimeMinutes >= 0 && offRule.containsTime(atTimeMinutes)) || currentlyOff)) {
+							// the opening time found before is turned off, it moves to the end of the "off" range
+							atTimeMinutes = offTimeMinutes;
+							atTime = offRule.formatResult(offTimeMinutes);
+						}
+					} else {
+						int offTimeAbsolute = getNextTimeRestrictedOffStart(cal, offRule, limit);
+						int atTimeAbsolute = atTimeMinutes < currentTimeMinutes ? atTimeMinutes + 24 * 60 : atTimeMinutes;
+						if (offTimeAbsolute != NO_TIME_MINUTES && offTimeAbsolute < atTimeAbsolute) {
+							// the "off" range starts before the closing time found before, so it closes earlier
+							atTimeMinutes = offTimeAbsolute % (24 * 60);
+							atTime = offRule.formatResult(atTimeMinutes);
+						}
+					}
+				} else if (appliesToDay && r instanceof BasicOpeningHourRule basicRule) {
+					atTimeMinutes = basicRule.getTimeMinutes(cal, false, limit, opening);
+					int displayTimeMinutes = atTimeMinutes;
+					if (!opening && atTimeMinutes == NO_TIME_MINUTES && limit != WITHOUT_TIME_LIMIT) {
+						atTimeMinutes = basicRule.getTimeMinutes(cal, false, WITHOUT_TIME_LIMIT, false);
+					}
+					atTime = basicRule.formatResult(displayTimeMinutes);
+				} else if (appliesToDay) {
+					atTime = r.getTime(cal, false, limit, opening);
+					atTimeMinutes = NO_TIME_MINUTES;
+				}
+				if (appliesToDay) {
+					prevRule = r;
+				}
 			}
 			return atTime;
+		}
+
+		private int getNextTimeRestrictedOffStart(Calendar cal, BasicOpeningHourRule offRule, int limit) {
+			int currentTimeMinutes = cal.get(Calendar.HOUR_OF_DAY) * 60 + cal.get(Calendar.MINUTE);
+			int nextTime = NO_TIME_MINUTES;
+			Calendar ruleCal = (Calendar) cal.clone();
+			for (int dayOffset = 0; dayOffset <= 1; dayOffset++) {
+				if (appliesToDay(offRule, ruleCal)) {
+					for (int i = 0; i < offRule.timesSize(); i++) {
+						int timeMinutes = offRule.getStartTime(i);
+						int absoluteMinutes = dayOffset * 24 * 60 + timeMinutes;
+						int diff = absoluteMinutes - currentTimeMinutes;
+						if (diff >= 0 && (limit == WITHOUT_TIME_LIMIT || diff <= limit)
+								&& (nextTime == NO_TIME_MINUTES || absoluteMinutes < nextTime)) {
+							nextTime = absoluteMinutes;
+						}
+					}
+				}
+				ruleCal.add(Calendar.DAY_OF_MONTH, 1);
+			}
+			return nextTime;
+		}
+
+		/**
+		 * Check if the rule applies to the calendar day of "cal", including rules defined
+		 * by day-month or year ranges (like "Dec 24-Dec 31 off") which don't set weekdays
+		 */
+		private boolean appliesToDay(OpeningHoursRule r, Calendar cal) {
+			if (r instanceof BasicOpeningHourRule basicRule) {
+				return basicRule.appliesToDay(cal);
+			}
+			return r.containsDay(cal) && r.containsMonth(cal);
+		}
+
+		private boolean isTimeRestrictedOffRule(OpeningHoursRule r) {
+			return r instanceof BasicOpeningHourRule basicRule && basicRule.isOff() && basicRule.timesSize() > 0;
 		}
 
 		private String getTimeAnotherDay(Calendar cal, int limit, boolean opening, int sequenceIndex) {
@@ -532,6 +636,9 @@ public class OpeningHoursParser {
 			for (int i = rules.size() - 1; i >= 0; i--) {
 				OpeningHoursRule rule = rules.get(i);
 				if (rule.contains(cal)) {
+					if (isTimeRestrictedOffRule(rule)) {
+						return rule.toLocalRuleString();
+					}
 					boolean checkNextNotNeeded = overlap || !isCheckNextNeeded(cal, rules, i, rule);
 					boolean open = rule.isOpenedForTime(cal);
 					if (open || !checkNextNotNeeded) {
@@ -734,6 +841,11 @@ public class OpeningHoursParser {
 		 */
 		private boolean[] days = new boolean[7];
 		private boolean hasDays = false;
+
+		/**
+		 * nth weekday of the month masks per day (like "Su[1]"), see parseNthMask
+		 */
+		private final int[] dayNth = new int[7];
 
 		/**
 		 * represents the list on which month it is open.
@@ -1049,7 +1161,7 @@ public class OpeningHoursParser {
 				int endTime = this.endTimes.get(i);
 				if (startTime < endTime || endTime == -1) {
 					// one day working like 10:00-20:00 (not 20:00-04:00)
-					if (days[d] && !checkPrevious) {
+					if (days[d] && matchesDayNth(d, cal) && !checkPrevious) {
 						if (time >= startTime && (endTime == -1 || time <= endTime)) {
 							return !off;
 						}
@@ -1057,9 +1169,9 @@ public class OpeningHoursParser {
 				} else {
 					// opening_hours includes day wrap like
 					// "We 20:00-03:00" or "We 07:00-07:00"
-					if (time >= startTime && days[d] && !checkPrevious) {
+					if (time >= startTime && days[d] && matchesDayNth(d, cal) && !checkPrevious) {
 						return !off;
-					} else if (time < endTime && days[p] && checkPrevious) {
+					} else if (time < endTime && days[p] && matchesPreviousDayNth(p, cal) && checkPrevious) {
 						// check in previous day
 						return !off;
 					}
@@ -1346,7 +1458,10 @@ public class OpeningHoursParser {
 
 		@Override
 		public String getTime(Calendar cal, boolean checkAnotherDay, int limit, boolean opening) {
-			StringBuilder sb = new StringBuilder();
+			return formatResult(getTimeMinutes(cal, checkAnotherDay, limit, opening));
+		}
+
+		int getTimeMinutes(Calendar cal, boolean checkAnotherDay, int limit, boolean opening) {
 			int d = getCurrentDay(cal);
 			int ad = opening ? getNextDay(d) : getPreviousDay(d);
 			int time = getCurrentTimeInMinutes(cal);
@@ -1357,9 +1472,10 @@ public class OpeningHoursParser {
 					if (startTime < endTime || endTime == -1) {
 						if (days[d] && !checkAnotherDay) {
 							int diff = startTime - time;
-							if (limit == WITHOUT_TIME_LIMIT || (time <= startTime && (diff <= limit || limit == CURRENT_DAY_TIME_LIMIT))) { 
-								formatTime(startTime, sb);
-								break;
+							// for "off" rules skip time ranges that are already over
+							if ((limit == WITHOUT_TIME_LIMIT && (!off || diff >= 0))
+									|| (time <= startTime && (diff <= limit || limit == CURRENT_DAY_TIME_LIMIT))) {
+								return startTime;
 							}
 						}
 					} else {
@@ -1369,9 +1485,10 @@ public class OpeningHoursParser {
 						} else if (time > endTime && days[ad] && checkAnotherDay) {
 							diff = 24 * 60 - endTime  + time;
 						}
-						if (limit == WITHOUT_TIME_LIMIT || ((diff != -1 && diff <= limit) || limit == CURRENT_DAY_TIME_LIMIT)) {
-							formatTime(startTime, sb);
-							break;
+						// don't accept the time if the day checks above didn't match (diff == -1),
+						// otherwise a "Mo-Th 09:00-00:30" rule reports Friday night as opening at 09:00
+						if (limit == WITHOUT_TIME_LIMIT || (diff != -1 && (diff <= limit || limit == CURRENT_DAY_TIME_LIMIT))) {
+							return startTime;
 						}
 					}
 				} else {
@@ -1379,29 +1496,108 @@ public class OpeningHoursParser {
 						if (days[d] && !checkAnotherDay) {
 							int diff = endTime - time;
 							if ((limit == WITHOUT_TIME_LIMIT && diff >= 0) || (time <= endTime && diff <= limit)) {
-								formatTime(endTime, sb);
-								break;
+								return endTime;
 							}
 						}
 					} else {
 						int diff = -1;
-						if (time <= endTime && days[d] && !checkAnotherDay) {
+						if ((time >= startTime || time <= endTime) && days[d] && !checkAnotherDay) {
+							// still inside an overnight session of the current day: the closing
+							// time is "endTime" on the next calendar day, so during the evening
+							// part (time >= startTime) the minutes-to-close must cross midnight
 							diff = 24 * 60 - time + endTime;
 						} else if (time < endTime && days[ad] && checkAnotherDay) {
 							diff = endTime - time;
 						}
 						if (limit == WITHOUT_TIME_LIMIT || (diff != -1 && diff <= limit)) {
-							formatTime(endTime, sb);
-							break;
+							return endTime;
 						}
 					}
 				}
 			}
+			return NO_TIME_MINUTES;
+		}
+
+		String formatResult(int timeMinutes) {
+			if (timeMinutes == NO_TIME_MINUTES) {
+				return "";
+			}
+			StringBuilder sb = new StringBuilder();
+			formatTime(timeMinutes, sb);
 			String res = sb.toString();
 			if (res.length() > 0 && !Algorithms.isEmpty(comment)) {
 				res += " - " + comment;
 			}
 			return res;
+		}
+
+		/**
+		 * Check if the time "timeMinutes" (in minutes of the day) is within the time ranges of this rule
+		 */
+		boolean containsTime(int timeMinutes) {
+			for (int i = 0; i < startTimes.size(); i++) {
+				int startTime = startTimes.get(i);
+				int endTime = endTimes.get(i);
+				if (endTime == -1 || startTime >= endTime) {
+					// open-ended or over-midnight range
+					if (timeMinutes >= startTime || (endTime != -1 && timeMinutes < endTime)) {
+						return true;
+					}
+				} else if (timeMinutes >= startTime && timeMinutes < endTime) {
+					return true;
+				}
+			}
+			return false;
+		}
+
+		/**
+		 * Check if the rule applies to the calendar day of "cal", including rules defined
+		 * by day-month or year ranges which don't set weekdays
+		 */
+		public boolean appliesToDay(Calendar cal) {
+			if (!containsMonth(cal)) {
+				return false;
+			}
+			int month = cal.get(Calendar.MONTH);
+			int dmonth = cal.get(Calendar.DAY_OF_MONTH) - 1;
+			boolean thisDay = true;
+			if (hasYears()) {
+				thisDay = isOpened(cal.get(Calendar.YEAR), month, dmonth);
+			} else if (hasDayMonths()) {
+				thisDay = dayMonths[month][dmonth];
+			}
+			return thisDay && (!hasDays || (containsDay(cal) && matchesDayNth(getCurrentDay(cal), cal)));
+		}
+
+		public boolean isOff() {
+			return off;
+		}
+
+		void setDayNthMask(int day, int mask) {
+			dayNth[day] = mask;
+		}
+
+		/**
+		 * Check if the day of "cal" matches the nth weekday restriction of "day" (like "Su[1]"), if any
+		 */
+		private boolean matchesDayNth(int day, Calendar cal) {
+			if (dayNth[day] == NO_NTH_WEEKDAY) {
+				return true;
+			}
+			int mask = dayNth[day];
+			int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+			int nthFromStart = (dayOfMonth - 1) / DAYS_IN_WEEK + 1;
+			int nthFromEnd = (cal.getActualMaximum(Calendar.DAY_OF_MONTH) - dayOfMonth) / DAYS_IN_WEEK + 1;
+			return hasNthWeekday(mask, nthFromStart) || hasNthWeekday(mask, -nthFromEnd);
+		}
+
+		private boolean matchesPreviousDayNth(int previousDay, Calendar cal) {
+			if (dayNth[previousDay] == NO_NTH_WEEKDAY) {
+				return true;
+			}
+			Calendar pcal = (Calendar) cal.clone();
+			pcal.add(Calendar.DAY_OF_MONTH, -1);
+			return matchesDayNth(previousDay, pcal);
 		}
 
 		@Override
@@ -1431,6 +1627,9 @@ public class OpeningHoursParser {
 						builder.append(", "); //$NON-NLS-1$
 					}
 					builder.append(daysNames[getDayIndex(i)]);
+					if (dayNth[i] != NO_NTH_WEEKDAY) {
+						appendNthString(builder, dayNth[i]);
+					}
 					dash = false;
 				}
 			}
@@ -1458,6 +1657,29 @@ public class OpeningHoursParser {
 			if(!first) {
 				builder.append(" ");
 			}
+		}
+
+		private static void appendNthString(StringBuilder builder, int mask) {
+			builder.append("[");
+			boolean first = true;
+			for (int nth = FIRST_NTH_WEEKDAY; nth <= LAST_NTH_WEEKDAY; nth++) {
+				first = appendNthValue(builder, mask, nth, first);
+			}
+			for (int nth = -FIRST_NTH_WEEKDAY; nth >= -LAST_NTH_WEEKDAY; nth--) {
+				first = appendNthValue(builder, mask, nth, first);
+			}
+			builder.append("]");
+		}
+
+		private static boolean appendNthValue(StringBuilder builder, int mask, int nth, boolean first) {
+			if (!hasNthWeekday(mask, nth)) {
+				return first;
+			}
+			if (!first) {
+				builder.append(",");
+			}
+			builder.append(nth);
+			return false;
 		}
 
 		/**
@@ -1565,7 +1787,7 @@ public class OpeningHoursParser {
 				}
 			}
 			if (thisDay && hasDays) {
-				thisDay = days[day];
+				thisDay = days[day] && matchesDayNth(day, cal);
 			}
 			// potential error for Dec 31 12:00-01:00
 			boolean previousDay = true; // hasDays || hasDayMonths() || hasFullYears(); // CHECK?
@@ -1579,7 +1801,7 @@ public class OpeningHoursParser {
 				}
 			}
 			if (previousDay && hasDays) {
-				previousDay = days[previous];
+				previousDay = days[previous] && matchesPreviousDayNth(previous, cal);
 			}
 			if (!thisDay && !previousDay) {
 				return 0;
@@ -1766,9 +1988,9 @@ public class OpeningHoursParser {
 		public Token(TokenType tokenType, String string) {
 			type = tokenType;
 			text = string;
-			try {
-				mainNumber = Integer.parseInt(string);
-			} catch(NumberFormatException e){
+			if (Algorithms.isNotEmpty(string) && Character.isDigit(string.charAt(string.length() - 1))
+					&& (Character.isDigit(string.charAt(0)) || '-' == string.charAt(0) || '+' == string.charAt(0))) {
+				mainNumber = Algorithms.parseIntSilently(string, -1);
 			}
 		}
 		public Token(TokenType tokenType, int tokenMainNumber) {
@@ -1777,6 +1999,7 @@ public class OpeningHoursParser {
 			text = Integer.toString(mainNumber);
 		}
 		int mainNumber = -1;
+		int nthMask = 0;
 		TokenType type;
 		String text;
 		Token parent;
@@ -1824,17 +2047,26 @@ public class OpeningHoursParser {
 		int startWord = 0;
 		StringBuilder commentStr = new StringBuilder();
 		boolean comment = false;
+		boolean bracket = false;
 		for (int i = 0; i <= localRuleString.length(); i++) {
 			char ch = i == localRuleString.length() ? ' ' : localRuleString.charAt(i);
+			if (i == localRuleString.length()) {
+				bracket = false;
+			}
 			boolean delimiter = false;
 			Token del = null;
-			if (Character.isWhitespace(ch)) {
-				delimiter = true;
+			if (ch == '[' && !comment) {
+				// keep nth weekday brackets like "Su[1]" or "Su[-1]" together as one token
+				bracket = true;
+			} else if (ch == ']' && !comment) {
+				bracket = false;
+			} else if (Character.isWhitespace(ch)) {
+				delimiter = !bracket;
 			} else if (ch == ':') {
 				del = new Token(TokenType.TOKEN_COLON, ":");
-			} else if (ch == '-') {
+			} else if (ch == '-' && !bracket) {
 				del = new Token(TokenType.TOKEN_DASH, "-");
-			} else if (ch == ',') {
+			} else if (ch == ',' && !bracket) {
 				del = new Token(TokenType.TOKEN_COMMA, ",");
 			} else if (ch == '"') {
 				if (comment) {
@@ -1866,6 +2098,9 @@ public class OpeningHoursParser {
 		for (Token t : tokens) {
 			if (t.type == TokenType.TOKEN_UNKNOWN) {
 				findInArray(t, daysStr, TokenType.TOKEN_DAY_WEEK);
+			}
+			if (t.type == TokenType.TOKEN_UNKNOWN) {
+				findNthWeekday(t, daysStr);
 			}
 			if (t.type == TokenType.TOKEN_UNKNOWN) {
 				findInArray(t, monthsStr, TokenType.TOKEN_MONTH);
@@ -1948,6 +2183,15 @@ public class OpeningHoursParser {
 							: tokenDayMonth ? null : basic.getDays();
 					for (Token[] pair : listOfPairs) {
 						if (pair[0] != null && pair[1] != null) {
+							Token holidayToken = pair[0].type == TokenType.TOKEN_HOLIDAY ? pair[0]
+									: pair[1].type == TokenType.TOKEN_HOLIDAY ? pair[1] : null;
+							if (holidayToken != null
+									&& (pair[0].type == TokenType.TOKEN_DAY_WEEK || pair[1].type == TokenType.TOKEN_DAY_WEEK)) {
+								// "PH Su" means "public holidays falling on Sunday", so the weekday only
+								// restricts the holiday and must not fill the weekday range Mo-Su (#23990)
+								setHolidayFlag(basic, holidayToken.mainNumber);
+								continue;
+							}
 							Token firstMonthToken = pair[0].parent == null && pair[0].type == TokenType.TOKEN_MONTH ? pair[0] : pair[0].parent;
 							Token lastMonthToken = pair[1].parent == null && pair[1].type == TokenType.TOKEN_MONTH ? pair[1] : pair[1].parent;
 							if (tokenDayMonth && firstMonthToken != null) {
@@ -2017,13 +2261,7 @@ public class OpeningHoursParser {
 
 						} else if (pair[0] != null) {
 							if (pair[0].type == TokenType.TOKEN_HOLIDAY) {
-								if (pair[0].mainNumber == 0) {
-									basic.publicHoliday = true;
-								} else if (pair[0].mainNumber == 1) {
-									basic.schoolHoliday = true;
-								} else if (pair[0].mainNumber == 2) {
-									basic.easter = true;
-								}
+								setHolidayFlag(basic, pair[0].mainNumber);
 							} else if (pair[0].mainNumber >= 0) {
 								Token firstMonthToken = pair[0].parent;
 								if (tokenDayMonth && firstMonthToken != null) {
@@ -2031,6 +2269,9 @@ public class OpeningHoursParser {
 								}
 								if (array != null) {
 									array[pair[0].mainNumber] = true;
+									if (pair[0].type == TokenType.TOKEN_DAY_WEEK && pair[0].nthMask != NO_NTH_WEEKDAY) {
+										basic.setDayNthMask(pair[0].mainNumber, pair[0].nthMask);
+									}
 								}
 							}
 						}
@@ -2153,6 +2394,16 @@ public class OpeningHoursParser {
 		rules.add(0, basic);
 	}
 
+	private static void setHolidayFlag(BasicOpeningHourRule basic, int holidayIndex) {
+		if (holidayIndex == 0) {
+			basic.publicHoliday = true;
+		} else if (holidayIndex == 1) {
+			basic.schoolHoliday = true;
+		} else if (holidayIndex == 2) {
+			basic.easter = true;
+		}
+	}
+
 	private static void fillFirstLastYearsDayOfMonth(BasicOpeningHourRule basic, Token[] pair) {
 		int startMonth = pair[0].parent == null ? pair[0].mainNumber : pair[0].parent.mainNumber;
 		int startDayOfMonth = pair[0].parent == null ? 0 : pair[0].mainNumber;
@@ -2194,6 +2445,60 @@ public class OpeningHoursParser {
 				break;
 			}
 		}
+	}
+
+	/**
+	 * Recognize nth weekday tokens like "su[1]", "su[-1]" or "su[1,3]"
+	 */
+	private static void findNthWeekday(Token t, String[] daysStr) {
+		int bracket = t.text.indexOf('[');
+		if (bracket <= 0 || !t.text.endsWith("]")) {
+			return;
+		}
+		String day = t.text.substring(0, bracket);
+		for (int i = 0; i < daysStr.length; i++) {
+			if (daysStr[i].equals(day)) {
+				int mask = parseNthMask(t.text.substring(bracket + 1, t.text.length() - 1));
+				if (mask != NO_NTH_WEEKDAY) {
+					t.type = TokenType.TOKEN_DAY_WEEK;
+					t.mainNumber = i;
+					t.nthMask = mask;
+				}
+				return;
+			}
+		}
+	}
+
+	/**
+	 * Parse an nth weekday list like "1", "-1" or "1,3" into a bit mask:
+	 * positive values count from the month start, negative values count from the month end
+	 */
+	private static int parseNthMask(String list) {
+		int mask = NO_NTH_WEEKDAY;
+		for (String part : list.split(",")) {
+			int n = Algorithms.parseIntSilently(part.trim(), 0);
+			int nthMask = getNthWeekdayMask(n);
+			if (nthMask == NO_NTH_WEEKDAY) {
+				return NO_NTH_WEEKDAY;
+			}
+			mask |= nthMask;
+		}
+		return mask;
+	}
+
+	private static boolean hasNthWeekday(int mask, int nth) {
+		int nthMask = getNthWeekdayMask(nth);
+		return nthMask != NO_NTH_WEEKDAY && (mask & nthMask) != 0;
+	}
+
+	private static int getNthWeekdayMask(int nth) {
+		if (nth >= FIRST_NTH_WEEKDAY && nth <= LAST_NTH_WEEKDAY) {
+			return 1 << (nth - FIRST_NTH_WEEKDAY);
+		}
+		if (nth <= -FIRST_NTH_WEEKDAY && nth >= -LAST_NTH_WEEKDAY) {
+			return 1 << (NTH_WEEKDAY_FROM_END_OFFSET + (-nth - FIRST_NTH_WEEKDAY));
+		}
+		return NO_NTH_WEEKDAY;
 	}
 
 	private static List<List<String>> splitSequences(String format) {

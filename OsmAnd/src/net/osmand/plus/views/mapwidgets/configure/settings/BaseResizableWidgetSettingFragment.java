@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.enums.PanelSizeMode;
 import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportWidgetResizing;
@@ -94,12 +95,17 @@ public class BaseResizableWidgetSettingFragment extends WidgetInfoBaseFragment {
 	@Override
 	protected void applySettings() {
 		if (widgetInfo != null && widgetInfo.widget instanceof ISupportWidgetResizing widgetResizing) {
+			boolean sizeChanged = selectedWidgetSize != widgetResizing.getWidgetSizePref().get();
 			boolean isVerticalPanel = widgetInfo.getWidgetPanel().isPanelVertical();
 			if (isVerticalPanel) {
 				updateRowWidgets(widgetInfo);
 			} else {
 				widgetResizing.getWidgetSizePref().set(selectedWidgetSize);
 				widgetResizing.recreateView();
+			}
+			if (sizeChanged) {
+				app.getPanelAppearanceSettingsManager().get(widgetInfo.getWidgetPanel())
+						.getSizeModePref(layoutMode).setModeValue(appMode, PanelSizeMode.ORIGINAL);
 			}
 		}
 		app.getOsmandMap().getMapLayers().getMapInfoLayer().recreateControls();

@@ -132,7 +132,7 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 		visibilityDescription.setText(uploadVisibility.getDescriptionId());
 
 		List<ChipItem> itemsVisibility = new ArrayList<>();
-		for (UploadVisibility visibilityType : UploadVisibility.values()) {
+		for (UploadVisibility visibilityType : UploadVisibility.getAvailableValues()) {
 			String title = getString(visibilityType.getTitleId());
 			ChipItem item = new ChipItem(title);
 			item.title = title;
@@ -185,7 +185,8 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 			Set<String> tags = tagsText != null ? parseTags(tagsText.toString()) : Collections.emptySet();
 
 			UploadGpxListener listener = getUploadListener(activity);
-			UploadGPXFilesTask task = new UploadGPXFilesTask(app, tags, description, defaultActivity, uploadVisibility, listener);
+			UploadVisibility visibility = uploadVisibility != null ? uploadVisibility : UploadVisibility.getDefaultValue();
+			UploadGPXFilesTask task = new UploadGPXFilesTask(app, tags, description, defaultActivity, visibility, listener);
 			OsmAndTaskManager.executeTask(task, files);
 		});
 		dismiss();

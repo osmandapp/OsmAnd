@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="poi_fuel_type">Loại nhiên liệu</string>
+    <string name="poi_fuel_avia_type">Loại nhiên liệu (hàng không)</string>
+    <string name="poi_payment_type">Kiểu thanh toán</string>
+    <string name="poi_payment_fuel_type">Thẻ nhiên liệu</string>
+    <string name="poi_self_service">Tự phục vụ</string>
+    <string name="poi_shop">Cửa hàng</string>
+    <string name="poi_shop_general">Cửa hàng tạp hóa</string>
+    <string name="poi_shop_food">Cửa hàng tiện lợi và siêu thị</string>
+</resources>

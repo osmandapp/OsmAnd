@@ -354,8 +354,8 @@ public class VoiceRouter {
 			boolean speakTrafficWarnings = settings.SPEAK_TRAFFIC_WARNINGS.get();
 			boolean speakTunnels = type == AlarmInfoType.TUNNEL && settings.SPEAK_TUNNELS.get();
 			boolean speakPedestrian = type == AlarmInfoType.PEDESTRIAN && settings.SPEAK_PEDESTRIAN.get();
-			boolean speakSpeedCamera = type == AlarmInfoType.SPEED_CAMERA && settings.SPEAK_SPEED_CAMERA.get();
-			boolean speakPrefType = type == AlarmInfoType.TUNNEL || type == AlarmInfoType.PEDESTRIAN || type == AlarmInfoType.SPEED_CAMERA;
+			boolean speakSpeedCamera = (type == AlarmInfoType.SPEED_CAMERA || type == AlarmInfoType.RED_LIGHT_CAMERA) && settings.SPEAK_SPEED_CAMERA.get();
+			boolean speakPrefType = type == AlarmInfoType.TUNNEL || type == AlarmInfoType.PEDESTRIAN || type == AlarmInfoType.SPEED_CAMERA || type == AlarmInfoType.RED_LIGHT_CAMERA;
 
 			if (speakSpeedCamera || speakPedestrian || speakTunnels || speakTrafficWarnings && !speakPrefType) {
 				CommandBuilder p = getNewCommandPlayerToPlay();

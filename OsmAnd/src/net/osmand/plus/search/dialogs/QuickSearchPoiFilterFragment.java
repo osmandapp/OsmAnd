@@ -341,6 +341,10 @@ public class QuickSearchPoiFilterFragment extends BaseFullScreenDialogFragment {
 	public void onDismiss(@NonNull DialogInterface dialog) {
 		hideKeyboard();
 		super.onDismiss(dialog);
+		QuickSearchDialogFragment fragment = (QuickSearchDialogFragment) getParentFragment();
+		if (fragment != null) {
+			fragment.updateContent(null);
+		}
 	}
 
 	private void hideKeyboard() {

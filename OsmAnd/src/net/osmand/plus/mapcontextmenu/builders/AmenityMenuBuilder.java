@@ -4,6 +4,7 @@ import static net.osmand.data.Amenity.DESCRIPTION;
 import static net.osmand.data.Amenity.SHORT_DESCRIPTION;
 import static net.osmand.data.Amenity.WIKIDATA;
 import static net.osmand.data.Amenity.WIKIPEDIA;
+import static net.osmand.data.AdditionalInfoBundle.LOCALIZATIONS;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.NEAREST_POI_KEY;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.NEAREST_WIKI_KEY;
 import static net.osmand.plus.wikivoyage.data.TravelObfHelper.TAG_URL;
@@ -27,6 +28,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import net.osmand.PlatformUtil;
+import net.osmand.data.AdditionalInfoBundle;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.osm.edit.OSMSettings;
@@ -80,7 +82,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	public void build(@NonNull ViewGroup view, @Nullable Object object) {
 		extensions = amenity.getAmenityExtensions(app.getPoiTypes(), false);
 		setCustomOnlinePhotosPosition(extensions.containsKey(WIKIDATA));
-		infoBundle = new AdditionalInfoBundle(app, extensions);
+		infoBundle = new AdditionalInfoBundle(app.getPoiTypes(), extensions);
 
 		super.build(view, object);
 	}
@@ -191,7 +193,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				}
 			} else {
 				Map<String, Object> map = (Map<String, Object>) value;
-				Map<String, String> localizations = (Map<String, String>) map.get("localizations");
+				Map<String, String> localizations = (Map<String, String>) map.get(LOCALIZATIONS);
 				if (Algorithms.isEmpty(localizations)) {
 					return null;
 				}
@@ -240,11 +242,10 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	}
 
 	public void buildInternalRows(@NonNull View view) {
-		amenityUIHelper = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), infoBundle);
+		amenityUIHelper = new AmenityUIHelper(mapActivity, infoBundle);
 		amenityUIHelper.setLight(isLightContent());
 		amenityUIHelper.setLatLon(getLatLon());
 		amenityUIHelper.setCollapseExpandListener(getCollapseExpandListener());
-		amenityUIHelper.setShowDefault(this.showDefaultTags);
 		amenityUIHelper.buildInternal(view);
 	}
 
@@ -352,7 +353,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	}
 
 	@Override
-	protected Map<String, String> getAdditionalImageParams() {
+	@NonNull
+	public Map<String, String> getAdditionalImageParams() {
 		return AmenityExtensionsHelper.getImagesParams(extensions);
 	}
 }

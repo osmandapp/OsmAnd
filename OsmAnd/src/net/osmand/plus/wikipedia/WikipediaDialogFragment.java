@@ -235,7 +235,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 
 			selectedLangTv.setText(Algorithms.capitalizeFirstLetter(langSelected));
 			selectedLangTv.setOnClickListener(view -> showPopupLangMenu(selectedLangTv, langSelected));
-			contentWebView.loadDataWithBaseURL(getBaseUrl(), createHtmlContent(), "text/html", "UTF-8", null);
+			loadHeaderImage(createHtmlContent(), amenity.getWikidata());
 		}
 	}
 

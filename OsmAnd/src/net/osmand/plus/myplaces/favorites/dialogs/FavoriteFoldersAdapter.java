@@ -19,6 +19,7 @@ import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.dialogs.SortFavoriteViewHolder.SortFavoriteListener;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.settings.enums.FavoriteListSortMode;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
@@ -47,6 +48,7 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 	private final OsmandApplication app;
 	private final FragmentActivity activity;
 	private final UpdateLocationViewCache locationViewCache;
+	private final UpdateLocationViewCache hiddenLocationViewCache;
 	private final List<Object> items = new ArrayList<>();
 
 	@Nullable
@@ -81,6 +83,8 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 		this.listener = listener;
 		this.cardListener = cardListener;
 		locationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(activity);
+		hiddenLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(activity);
+		hiddenLocationViewCache.arrowColor = ColorUtilities.getDefaultIconColorId(nightMode);
 		sortMode = FavoriteListSortMode.NAME_ASCENDING;
 
 		setHasStableIds(false);
@@ -115,7 +119,7 @@ public class FavoriteFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 				return new FavoriteFreeBackupCardViewHolder(view, activity, cardListener);
 			case TYPE_FAVORITE:
 				view = inflater.inflate(R.layout.track_list_item, parent, false);
-				return new FavoriteViewHolder(view, locationViewCache, nightMode);
+				return new FavoriteViewHolder(view, locationViewCache, hiddenLocationViewCache, nightMode);
 			case TYPE_FOLDER:
 				view = inflater.inflate(R.layout.track_list_item, parent, false);
 				return new FavoriteFolderViewHolder(view, nightMode);

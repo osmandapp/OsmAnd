@@ -42,7 +42,8 @@ public class CrashBottomSheetDialogFragment extends MenuBottomSheetDialogFragmen
 	public static boolean shouldShow(@Nullable OsmandSettings settings, @NonNull MapActivity activity) {
 		OsmandApplication app = activity.getApp();
 		if (app.getAppCustomization().isFeatureEnabled(FRAGMENT_CRASH_ID)) {
-			return app.getAppInitializer().checkPreviousRunsForExceptions(activity, settings != null);
+			return !app.getRoutingHelper().isFollowingMode()
+					&& app.getAppInitializer().checkPreviousRunsForExceptions(activity, settings != null);
 		}
 		return false;
 	}

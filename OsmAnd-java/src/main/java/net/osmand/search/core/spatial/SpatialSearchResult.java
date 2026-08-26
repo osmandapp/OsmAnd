@@ -1,0 +1,682 @@
+package net.osmand.search.core.spatial;
+
+import java.util.*;
+import java.util.Map.Entry;
+
+import net.osmand.binary.ObfConstants;
+import net.osmand.data.Amenity;
+import net.osmand.data.BaseDetailsObject;
+import net.osmand.data.Building;
+import net.osmand.data.City;
+import net.osmand.data.City.CityType;
+import net.osmand.data.LatLon;
+import net.osmand.data.MapObject;
+import net.osmand.data.QuadRect;
+import net.osmand.data.Street;
+import net.osmand.search.core.HashQuadTree;
+import net.osmand.search.core.spatial.SpatialPoiSearch.SpatialPoiType;
+import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
+import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
+import net.osmand.util.SearchAlgorithms;
+
+public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
+
+	final int parentInd;
+	final SpatialSearchResultsList parent;
+	final List<SpatialSearchResultRef> objs = new ArrayList<>();
+	final LatLon preciseLatlon;
+	final String extraNameMatch; // refs and interpolation
+	final int surplusWords; // negative some building numbers not found, positive some extra tokens matched
+	int visibleLevel;
+	public BaseDetailsObject unitedObject;
+	int biggestCityType = -1;
+
+	private static final List<String> FILTER_DUPLICATE_POI_SUBTYPE = new ArrayList<String>(
+			Arrays.asList("building", "internet_access_yes"));
+	final int ZOOM_SIMILARITY_70_KM = 9 - 8; // 1 symbol - tile z=9 - 1 pixel of z=1
+	final int ZOOM_SIMILARITY_10_KM = 12 - 8; // 2 symbols - tile z=12
+	final int ZOOM_SIMILARITY_1_KM = 15 - 8; // 3 symbols
+	final int ZOOM_SIMILARITY_10_M = 18 - 8; // 4 symbols
+	
+	SpatialSearchResult(SpatialSearchResultsList parentList, int parentInd, LatLon preciseLatlon, String extraName,
+			Integer surplusWords) {
+		this.parentInd = parentInd;
+		this.parent = parentList;
+		this.preciseLatlon = preciseLatlon;
+		this.extraNameMatch = extraName;
+		for (int i = 0; i < parent.tCount; i++) {
+			NameIndexAtom atom = parent.linearResults.get(parentInd * parentList.tCount + i);
+			SpatialSearchToken token = parent.tokens[i];
+			SpatialSearchResultRef ref = null;
+			// find same object or object & parent 
+			for (SpatialSearchResultRef check : objs) {
+				if (atom.id == check.atom.id) {
+					ref = check;
+					if (!atom.isBuilding() && !atom.isPOIRef()) {
+						if (ref.otherWordsFound > 0) {
+							ref.otherWordsFound--;
+						} else if (ref.otherWordsNotFound > 0) {
+							ref.otherWordsNotFound--;
+						}
+					}
+					// building-street
+					if (check.atom.type > atom.type) {
+						// existing street - swap
+						check.atom = atom;
+						break;
+					}
+				}
+			}
+			if (ref == null) {
+				ref = new SpatialSearchResultRef(atom);
+				ref.otherWordsFound = atom.otherFoundCnt;
+				if (atom.isBuilding() || atom.isPOIRef()) {
+					ref.otherWordsFound++;
+				}
+				ref.otherWordsNotFound = atom.otherWordsCnt;
+				objs.add(ref);
+			}
+			ref.tokens.add(token);
+		}
+		this.surplusWords = surplusWords != null ? surplusWords : 0;
+		sortObjects();
+	}
+	
+	void sortObjects() {
+		for (SpatialSearchResultRef r : objs) {
+			Collections.sort(r.tokens, (o1, o2) -> Integer.compare(o1.originalOrder, o2.originalOrder));
+		}
+		Collections.sort(objs, (o1, o2) -> {
+			int r = Integer.compare(o1.typeOrder(true), o2.typeOrder(true));
+			if (r != 0) {
+				return r;
+			}
+			return Integer.compare(o1.tokens.get(0).originalOrder, o2.tokens.get(0).originalOrder);
+		});
+	}
+
+	SpatialSearchResultRef getFirstRef() {
+		if (objs.size() > 0) {
+			return objs.get(0);
+		}
+		return null;
+	}
+	
+	private MapObject getFirstRefObject(boolean useUnited) {
+		if (useUnited && unitedObject != null) {
+			MapObject addressObject = unitedObject.getAddressObject();
+			return addressObject != null ? addressObject : unitedObject.getSyntheticAmenity();
+		}
+		if (objs.size() > 0) {
+			SpatialSearchResultRef o = objs.get(0);
+			if (o.atom.bldObject != null) {
+				return o.atom.bldObject;
+			}
+			return o.atom.object;
+		}
+		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private <T> T getMatchRefObject(Class<T> cl) {
+		for (SpatialSearchResultRef r : objs) {
+			if (cl.isInstance(r.atom.object)) {
+				return (T) r.atom.object;
+			}
+		}
+		return null;
+	}
+	
+	public MapObject getReferenceObject() {
+		if (unitedObject != null) {
+			MapObject addressObject = unitedObject.getAddressObject();
+			return addressObject != null ? addressObject : unitedObject.getSyntheticAmenity();
+		}
+		for (SpatialSearchResultRef ref : objs) {
+			if (ref.atom.bldObject != null) {
+				return ref.atom.bldObject;
+			}
+			if (ref.atom.object != null) {
+				return ref.atom.object;
+			}
+		}
+		return null;
+	}
+
+	public int[] getViewBBox31() {
+		MapObject obj = getReferenceObject();
+		if(obj == null) {
+			return null;
+		}
+		if (obj.getBbox31() != null) {
+			return obj.getBbox31();
+		}
+		LatLon latLon = obj.getLocation();
+		int radius = 1000;
+		if (obj instanceof City c) {
+			radius = (int) c.getType().getRadius();
+		} else if (obj instanceof Amenity a) {
+			CityType ct = CityType.valueFromString(a.getSubType());
+			if (ct != null) {
+				radius = (int) ct.getRadius();
+			}
+		}
+		QuadRect bbox = MapUtils.calculate31Bbox(latLon.getLatitude(), latLon.getLongitude(), radius);
+		return new int[] { (int) bbox.left, (int) bbox.top, (int) bbox.right, (int) bbox.bottom };
+	}
+	
+	public int[] getBBox31() {
+		MapObject obj = getReferenceObject();
+		if (obj != null) {
+			return obj.getBbox31();
+		}
+		return null;
+	}
+	
+	/**
+	 * @return main object location (if search is poi category use getReferenceObject)
+	 */
+	public MapObject getMainObject() {
+		return getFirstRefObject(true);
+	}
+	
+	public List<MapObject> getObjects() {
+		// street & building overlap same object so filter them 
+		List<MapObject> o = new ArrayList<>();
+		MapObject firstRefObject = null;
+		if (unitedObject != null) {
+			firstRefObject = getFirstRefObject(false);
+			MapObject addressObject = unitedObject.getAddressObject();
+			if (addressObject != null) {
+				o.add(addressObject);
+			}
+			o.add(unitedObject.getSyntheticAmenity());
+		}
+		for (SpatialSearchResultRef r : objs) {
+			if (r.atom.bldObject != null && r.atom.bldObject != firstRefObject) {
+				o.add(r.atom.bldObject);
+			}
+			if (r.atom.object != null && r.atom.object != firstRefObject && !o.contains(r.atom.object)) {
+				o.add(r.atom.object);
+			}
+		}
+		return o;
+	}
+
+	public boolean isPoiCategory() {
+		return !objs.isEmpty() && objs.get(0).isPoiCategory();
+	}
+	
+	public SpatialPoiType getPoiCategory(SpatialPoiSearch poiSearch) {
+		if (!objs.isEmpty() && objs.get(0).isPoiCategory()) {
+			return poiSearch.getById((int) objs.get(0).atom.id);
+		}
+		return null;
+	}
+
+	public String getExtraNameMatch() {
+		return extraNameMatch;
+	}
+
+	public LatLon getLatLon() {
+		if (preciseLatlon != null) {
+			return preciseLatlon;
+		}
+		for (SpatialSearchResultRef r : objs) {
+			if (!r.atom.isPoiCategory()) {
+				return r.atom.getResultLocation();
+			}
+		}
+		return null;
+	}
+
+	public int visibleLevel() {
+		return visibleLevel;
+	}
+
+	public List<String> extraDeduplicateKeys(SpatialSearchContext ctx) {
+		List<String> result = null;
+		result = addResult(result, getWikidata(ctx));
+		result = addResult(result, getRouteId());
+		MapObject mapObject = getFirstRefObject(true);		
+		if (mapObject instanceof Amenity amenity) {
+			if (amenity.getType().getKeyName().equals("natural")) {
+				String name = SearchAlgorithms.normalizeToken(SearchAlgorithms.alignChars(amenity.getName()));
+				String link = getShortLink(ZOOM_SIMILARITY_10_KM);
+				if (name != null && link != null) {
+					result = addResult(result, name + "_" + link);
+				}
+			}
+		}
+		if(mapObject instanceof Building b) {
+			result = addResult(result, (extraNameMatch != null ?  extraNameMatch : b.getName())
+					+ "_" + getShortLink(ZOOM_SIMILARITY_10_M));
+		}
+		String wikipedia = getWikipedia();
+		if (wikipedia != null) {
+			result = addResult(result, getShortLink(ZOOM_SIMILARITY_10_M) + wikipedia);
+		}
+		return result;
+	}
+	
+	private List<String> addResult(List<String> result, String value) {
+		if (!Algorithms.isEmpty(value)) {
+			if (result == null) {
+				result = new ArrayList<String>();
+			}
+			result.add(value);
+		}
+		return result;
+	}
+
+	public void addExtraResult(SpatialSearchResult other, String lang) {
+		MapObject object = getFirstRefObject(false);
+		MapObject otherObj = other.getFirstRefObject(false);
+		if (otherObj == null) {
+			// poi category search find bbox that has a point on merge (not necessary sameobject)
+			if (object == null) {
+				MapObject targetObject = getReferenceObject();
+				MapObject refObject = other.getReferenceObject();
+				if (targetObject instanceof Amenity a && a.getBbox31() == null && 
+						refObject != null && a.getLocation() != null) {
+					int[] bbox31 = refObject.getBbox31();
+					int y = MapUtils.get31TileNumberY(a.getLocation().getLatitude());
+					int x = MapUtils.get31TileNumberX(a.getLocation().getLongitude());
+					if (bbox31 != null && bbox31[0] <= x && bbox31[2] >= x && bbox31[1] <= y && bbox31[3] >= y) {
+						a.setBbox31(refObject.getBbox31());
+					}
+				}
+			}
+			return; // nothing to merge
+		} 
+		if (object instanceof Amenity a && unitedObject == null) {
+			unitedObject = new BaseDetailsObject(a, lang);
+		}
+		if (unitedObject != null) {
+			unitedObject.addObject(otherObj);
+		} else if (otherObj instanceof Amenity a) {
+			unitedObject = new BaseDetailsObject(a, lang);
+			// here we merge city, building,
+			unitedObject.addObject(object);
+		} else {
+			// case 2 objects are not amenities (same buildings)
+			if (object instanceof Building && otherObj instanceof Building) {
+				Street s1 = getMatchRefObject(Street.class);
+				Street s2 = other.getMatchRefObject(Street.class);
+				// add suburb city part to first item
+				if (s1 != null && s2 != null && !s1.getCity().getName().equals(s2.getCity().getName()) && 
+						!s1.getName().contains("(")) {
+					s1.setName(s1.getName() + " (" + s2.getCity().getName() + ")");
+					Map<String, String> namesMap = s1.getNamesMap(true);
+					Iterator<Entry<String, String>> it = namesMap.entrySet().iterator();
+					while(it.hasNext()) {
+						Entry<String, String> e = it.next();
+						s1.setName(e.getKey(), e.getValue() + " (" + s2.getCity().getName() + ")");
+					}
+				}
+			}
+		}
+	}
+
+	
+	public long getIdDeduplication() {
+		if (!objs.isEmpty()) {
+			SpatialSearchResultRef first = objs.get(0);
+			// street intersection (!) or building interpolation
+			if (preciseLatlon != null && !first.isPoiCategory()) {
+				int y31 = MapUtils.get31TileNumberY(preciseLatlon.getLatitude());
+				int x31 = MapUtils.get31TileNumberX(preciseLatlon.getLongitude());
+				long id = HashQuadTree.encodeTileId31(19, x31, y31);
+				return id;
+			}
+			if (first.atom.object != null) {
+				return ObfConstants.getOsmObjectId(first.atom.object);
+			}
+			if (first.isPoiCategory()) {
+				long poiTypeId = (first.atom.id << 3);
+				// suggest poi category for different cities in query (we can't chose which is better?)
+				if (objs.size() == 2) {
+					SpatialSearchResultRef second = objs.get(1);
+					poiTypeId += second.tokens.get(0).originalOrder;
+				}
+				return poiTypeId;
+			}
+			return first.atom.id;
+		}
+		return -1;
+	}
+	
+	@Override
+	public String toString() {
+		return toString(null);
+	}
+	
+	public String toString(SpatialSearchContext ctx) {
+		String r = "";
+		if (getWikidata(ctx) != null) {
+			r += getWikidata(ctx) + " ";
+		}
+		// only for test getBBox31
+//		if (getViewBBox31() != null) {
+//			int[] bb = getViewBBox31();
+//			r += String.format("`%.4f, %.4f, %.4f, %.4f`", MapUtils.get31LongitudeX(bb[0]),
+//					MapUtils.get31LatitudeY(bb[1]), MapUtils.get31LongitudeX(bb[2]), MapUtils.get31LatitudeY(bb[3]));
+//		}
+		if (preciseLatlon != null) {
+			r += String.format("%.4f, %.4f ", preciseLatlon.getLatitude(), preciseLatlon.getLongitude());
+		}
+		if (extraNameMatch != null) {
+			r += extraNameMatch + " ";
+		}
+		return r + objs.toString();
+	}
+
+	public static class SpatialSearchResultRef {
+		static final int MAX_TYPE_ORDER = 5;
+		NameIndexAtom atom;
+		List<SpatialSearchToken> tokens = new ArrayList<>();
+		int otherWordsFound = 0;
+		int otherWordsNotFound = 0;
+		
+		public SpatialSearchResultRef(NameIndexAtom atom) {
+			this.atom = atom;
+		}
+		
+		public boolean extraNameRelated() {
+			return atom.buildingOrRefInd >= 0;
+		}
+
+		public boolean isPoiCategory() {
+			return atom.isPoiCategory();
+		}
+		
+		// This is final order for words in result
+		// It also affects on sorting order that's why (boundary == 4 == city) to sort by distance
+		public int typeOrder(boolean wordsOrder) {
+			if (atom.isPoiCategory()) {
+				// push to first token
+				return -2;
+			} else if (atom.isBuilding()) {
+				return -1;
+			} else if (atom.isPOI()) {
+				return 0;
+			} else if (atom.isStreet()) {
+				return 1;
+			} else if (atom.isPostcode()) {
+				return 3;
+			} else if (atom.isBoundary()) {
+				// different sorting words in result & different between results 
+				return wordsOrder ? MAX_TYPE_ORDER : 4;
+			}
+			// all cities, villages, hamlets
+			return 4;
+		}
+		
+		@Override
+		public String toString() {
+			StringBuilder words = new StringBuilder();
+			for (SpatialSearchToken s : tokens) {
+				words.append(" ") .append(s.word);
+			}
+			if (atom.object != null) {
+				MapObject idObject = atom.object;
+				String name = atom.object.getName();
+				String type = atom.typeStr();
+				if (atom.bldObject != null) {
+					name = atom.bldObject.getName() + " " + name;
+				} else if (atom.object instanceof Amenity a) {
+					type += " " + a.getSubTypeStr();
+					if (a.getTravelEloNumber() > Amenity.DEFAULT_ELO) {
+						type += " " + a.getTravelEloNumber();// " " + a.getCityFromTagGroups("");
+					}
+				}
+				LatLon resLoc = atom.getResultLocation();
+				return String.format(Locale.US, "\"%s\" [%s] '%s' %s (%.4f %.4f)", words.toString().trim(), type, name,
+						"" + ObfConstants.getOsmObjectId(idObject) + " " + (atom.id % 0xffff), resLoc.getLatitude(), resLoc.getLongitude());
+			} else if(atom.isPoiCategory()) {
+				return String.format(Locale.US, "\"%s\" [%s] '%s' id=%d, obj=%,d ", words.toString().trim(), atom.typeStr(), atom.name,
+						atom.id, atom.otherWordsCnt );
+			}
+			return atom.simpleName(words.toString()); 
+		}
+		
+		public NameIndexAtom getNameIndexAtom() {
+			return atom;
+		}
+	}
+	
+	public int getObjectsSize() {
+		return objs.size();
+	}
+	
+	public int matchedTokens() {
+		return parent.tCount;
+	}
+	
+	public SpatialSearchResultsList getParent() {
+		return parent;
+	}
+
+	public int sumOther() {
+		int s1 = 0;
+		for (SpatialSearchResultRef r : objs) {
+			// TESTED but didn't work
+//			v1. Math.max(0, r.atom.otherWordsCnt + r.atom.otherFoundCnt - r.tokens.size());
+//			v2. s1 += r.atom.otherWordsCnt;
+			s1 += r.otherWordsNotFound;
+		}
+		return s1;
+	}
+	
+	public int sumTypeOrder() {
+		int s1 = 0;
+		for (SpatialSearchResultRef r : objs) {
+			s1 += r.typeOrder(false);
+		}
+		return s1;
+	}
+
+	public int getMainRating() {
+		if (getFirstRefObject(true) instanceof Amenity a) {
+			return Math.max(parent.MIN_ELO_RATING, a.getTravelEloNumber());
+		}
+		if (getFirstRefObject(false) instanceof Amenity a) {
+			return Math.max(parent.MIN_ELO_RATING, a.getTravelEloNumber());
+		}
+		return parent.MIN_ELO_RATING;
+	}
+	
+	public int getTotalRating() {
+		int rating = parent.MIN_ELO_RATING; // MIN Rating to make higher
+		if (unitedObject != null && unitedObject.getSyntheticAmenity() != null) {
+			rating = Math.max(rating, unitedObject.getSyntheticAmenity().getTravelEloNumber());
+		}
+		for (SpatialSearchResultRef r : objs) {
+			if (r.atom.object instanceof Amenity a) {
+				rating = Math.max(rating, a.getTravelEloNumber());
+			}
+		}
+		return rating;
+	}
+	
+	public long compareKey() {
+		return compareKey(this);
+	}
+	
+	private static long addCompareKey(long key, int bits, int value) {
+		int max = (1 << bits) - 1;
+		if(value < 0) {
+			value = Math.max(0, max + value);
+		} else {
+			value = Math.min(max, value);
+		}
+		return (key << bits) + value;
+	}
+	
+	public static String compareKeyString(SpatialSearchResult o) {
+		int e = (o.getTotalRating() - o.parent.MIN_ELO_RATING) / 64;
+		String elo = e > 0 ? "-"+e+"elo" : "";
+		String sw = o.surplusWords >= 0 ? ("+" + o.surplusWords) : ("" + o.surplusWords);
+		return String.format("t%d%s-w%d-oth%d%s-tp%d", o.parent.tCount, sw, o.objs.size(), 
+				Math.min(o.sumOther(), 3), elo, o.sumTypeOrder());
+	}
+	
+	public static long compareKey(SpatialSearchResult o) {
+		long key = 0;
+		key = addCompareKey(key, 6, -o.parent.tCount); // 6 bit - 64
+		key = addCompareKey(key, 3, -o.surplusWords); // 3 bit - 8
+		key = addCompareKey(key, 6, o.objs.size()); // 6 bit - 64
+		key = addCompareKey(key, 3, Math.min(o.sumOther(), 3)); // 3 bit - 3
+		key = addCompareKey(key, 6, -(o.getTotalRating() - o.parent.MIN_ELO_RATING) / 64); // 6 bit - 64 - group by 64 bucket
+		key = addCompareKey(key, 6, -o.sumTypeOrder()); // 6 bit - 64
+		// total 6+6+3+5+6+12 = 35
+		return key;
+	}
+	
+	public static int compare(SpatialSearchResult o1, SpatialSearchResult o2, LatLon center) {
+		int res = -Boolean.compare(o1.isPoiCategory(), o2.isPoiCategory());
+		if (res != 0) {
+			return res;
+		}
+		res = -Integer.compare(o1.parent.tCount, o2.parent.tCount);
+		if (res != 0) {
+			return res;
+		}
+		res = -Integer.compare(o1.surplusWords, o2.surplusWords); // buildings 18 matches 18 B
+		if (res != 0) {
+			return res;
+		}
+		res = Integer.compare(o1.objs.size(), o2.objs.size());
+		if (res != 0) {
+			return res;
+		}
+		res = Integer.compare(o1.sumOther(), o2.sumOther());
+		if (res != 0) {
+			return res;
+		}
+		res = -Integer.compare(o1.getMainRating(), o2.getMainRating());
+		if (res != 0) {
+			return res;
+		}
+		res = -Integer.compare(o1.sumTypeOrder(), o2.sumTypeOrder());
+		if (res != 0) {
+			return res;
+		}
+		// sort poi intersection differently
+		res = -Integer.compare(o1.getTotalRating(), o2.getTotalRating());
+		if (res != 0) {
+			return res;
+		}
+		if (center != null) {
+			double d1 = getDistance(o1, center);
+			double d2 = getDistance(o2, center);
+			if ((int) d1 != (int) d2) {
+				res = Double.compare(d1, d2);
+				if (res != 0) {
+					return res;
+				}
+			}
+		}
+		res = Integer.compare(o1.getBiggestCityType(), o2.getBiggestCityType());
+		if (res != 0) {
+			return res;
+		}
+		
+		if (o1.getFirstRefObject(false) instanceof Amenity a1 && o2.getFirstRefObject(false) instanceof Amenity a2) {
+			int i1 = FILTER_DUPLICATE_POI_SUBTYPE.indexOf(a1.getSubType());
+			int i2 = FILTER_DUPLICATE_POI_SUBTYPE.indexOf(a2.getSubType());
+			res = Integer.compare(i1, i2);
+			if (res != 0) {
+				return res;
+			}
+		}
+		if (res != 0) {
+			return res;
+		}
+//		res = -Integer.compare(o1.parentInd, o2.parentInd);
+//		if (res != 0) {
+//			return res;
+//		}
+		return -Long.compare(o1.getFirstRef().atom.id, o2.getFirstRef().atom.id);
+	}
+
+	private static double getDistance(SpatialSearchResult o1, LatLon center) {
+		double d1 = o1.getLatLon() == null ? 0 : MapUtils.getDistance(center, o1.getLatLon());
+		if (o1.getFirstRefObject(false) instanceof City c) {
+			// distance to center shorten by its radius (so boundary will be sorted down comparing to city)
+			d1 -= c.getType().getRadius();
+		}
+		return d1;
+	}
+
+	private int getBiggestCityType() {
+		if (biggestCityType == -1) {
+			biggestCityType = City.CityType.values().length;
+			for (SpatialSearchResultRef ref : objs) {
+				if (ref.atom.object instanceof Street street) {
+					// immediately return as other <city> are not related to street <suburb>
+					biggestCityType = street.getCity().getType().ordinal();
+					return biggestCityType;
+				} else if (ref.atom.object instanceof City c) {
+					biggestCityType = Math.min(biggestCityType, c.getType().ordinal());
+				}
+			}
+		}
+		return biggestCityType;
+	}
+
+	@Override
+	public int compareTo(SpatialSearchResult o) {
+		return compare(this, o, null);
+	}
+
+	private String getWikidata(SpatialSearchContext ctx) {
+		MapObject mapObject = getFirstRefObject(true); 
+		if (mapObject != null) {
+			return mapObject.getWikidata();
+		} 
+		if (ctx == null || ctx.poiSearch == null) {
+			return null;
+		}
+		SpatialPoiType cat = getPoiCategory(ctx.poiSearch);
+		if (cat != null) {
+			if (cat.wikidataId != null) {
+				// suggest poi category for different cities in query (we can't chose which is better?)
+				String suffixPos = "";
+				if (objs.size() > 1) {
+					suffixPos += "_" + objs.get(1).tokens.get(0).word;
+				}
+				return "TYPE_" + cat.wikidataId + suffixPos;
+			}
+		}
+		return null;
+	}
+
+	private String getRouteId() {
+		if (getFirstRefObject(true) instanceof Amenity amenity) {
+			return amenity.getRouteId();
+		}
+		return null;
+	}
+
+	private String getShortLink(int zoom) {
+		LatLon loc = getLatLon();
+		if (loc == null) {
+			return "";
+		}
+		return MapUtils.createShortLinkString(loc.getLatitude(), loc.getLongitude(), zoom);
+	}
+	
+	private String getWikipedia() {
+		if (getFirstRefObject(true) instanceof Amenity amenity) {
+			String wiki = amenity.getAdditionalInfo(Amenity.WIKIPEDIA);
+			if (wiki != null) {
+				String[] split = wiki.split("/");
+				return split[split.length - 1];
+			}
+		}
+		return null;
+	}
+}
+	

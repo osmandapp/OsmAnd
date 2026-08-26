@@ -74,7 +74,7 @@ public class MapWidgetRegistry {
 		notifyWidgetVisibilityChanged(widgetInfo);
 
 		if (widgetInfo.isCustomWidget() && (enabled == null || !enabled)) {
-			settings.getCustomWidgetsKeys(layoutMode).removeValue(widgetInfo.key);
+			settings.getCustomWidgetsKeys(layoutMode).removeValueForProfile(appMode, widgetInfo.key);
 		}
 
 		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
@@ -150,7 +150,7 @@ public class MapWidgetRegistry {
 	private void reorderWidgets(@NonNull List<MapWidgetInfo> widgetInfos, @Nullable ScreenLayoutMode layoutMode) {
 		Map<WidgetsPanel, Set<MapWidgetInfo>> newAllWidgets = new HashMap<>();
 		for (MapWidgetInfo widgetInfo : widgetInfos) {
-			WidgetsPanel panel = widgetInfo.getUpdatedPanel(layoutMode);
+			WidgetsPanel panel = widgetInfo.getUpdatedPanel(settings.getApplicationMode(), layoutMode);
 			widgetInfo.pageIndex = panel.getWidgetPage(widgetInfo.key, settings, layoutMode);
 			widgetInfo.priority = panel.getWidgetOrder(widgetInfo.key, settings, layoutMode);
 
@@ -324,7 +324,7 @@ public class MapWidgetRegistry {
 				boolean passEnabled = !enabledMode || widget.isEnabledForAppMode(appMode, widgetsVisibility);
 				boolean passAvailable = !availableMode || WidgetsAvailabilityHelper.isWidgetAvailable(app, widget.key, appMode);
 				boolean defaultAvailable = !defaultMode || !widget.isCustomWidget();
-				boolean passMatchedPanels = !matchingPanelsMode || panels.contains(widget.getUpdatedPanel(layoutMode));
+				boolean passMatchedPanels = !matchingPanelsMode || panels.contains(widget.getUpdatedPanel(appMode, layoutMode));
 				boolean passTypeAllowed = widgetType.isAllowed();
 				boolean passPanelAllowed = widgetType.isPanelsAllowed(panels);
 

@@ -21,6 +21,7 @@ import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.RouteCalculationMethod;
 import net.osmand.plus.simulation.SimulationProvider;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.router.FastRoutingState;
@@ -975,7 +976,8 @@ public class RoutingHelper {
 	}
 
 	public boolean shouldDrawFastRoutingProgressBar() {
-		return !routeRecalculationHelper.isCurrentSlowRoutingActive();
+		RouteCalculationMethod method = settings.ROUTE_CALCULATION_METHOD.getModeValue(mode);
+		return method.isFastRoutingPossible(mode) && !routeRecalculationHelper.isCurrentSlowRoutingActive();
 	}
 
 	public boolean hasCurrentMissingMaps() {

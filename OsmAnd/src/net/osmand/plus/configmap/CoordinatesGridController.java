@@ -18,14 +18,16 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.containers.Limits;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.coordinates.CoordinateFormatHelper;
+import net.osmand.plus.settings.coordinates.CoordinateGridFormat;
+import net.osmand.plus.settings.coordinates.CoordinateGridFormatProvider;
+import net.osmand.plus.settings.enums.EnumWithTitleId;
+import net.osmand.plus.settings.enums.GridLabelsPosition;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.InsetsUtils.InsetSide;
-import net.osmand.plus.views.layers.CoordinatesGridSettings;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.enums.EnumWithTitleId;
-import net.osmand.plus.settings.enums.GridFormat;
-import net.osmand.plus.settings.enums.GridLabelsPosition;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.views.layers.CoordinatesGridSettings;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
@@ -33,19 +35,23 @@ import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Set;
 import java.util.List;
+import java.util.Set;
 
 public class CoordinatesGridController extends BaseDialogController {
 
 	private static final String PROCESS_ID = "configure_coordinates_grid";
 
 	private final CoordinatesGridSettings gridSettings;
+	private final CoordinateFormatHelper coordinateFormatHelper;
+	private final CoordinateGridFormatProvider gridFormatProvider;
 	private ICoordinatesGridScreen screen;
 
 	public CoordinatesGridController(@NonNull OsmandApplication app) {
 		super(app);
 		gridSettings = new CoordinatesGridSettings(app);
+		coordinateFormatHelper = app.getCoordinateFormatHelper();
+		gridFormatProvider = coordinateFormatHelper.getGridFormatProvider();
 	}
 
 	public void bindScreen(@NonNull ICoordinatesGridScreen screen) {
@@ -60,15 +66,17 @@ public class CoordinatesGridController extends BaseDialogController {
 
 	@NonNull
 	public String getSelectedFormatName() {
-		GridFormat gridFormat = getGridFormat();
-		return getString(gridFormat.getTitleId());
+		return coordinateFormatHelper.resolveFormats(List.of(getSelectedCoordinateFormatId())).get(0).getTitle();
 	}
 
-	public void onFormatSelectorClicked(@NonNull View anchorView, @ColorInt int color, boolean nightMode) {
-		showPopUpMenu(anchorView, GridFormat.values(), getGridFormat(), this::onSelectFormat, color, nightMode);
+	public void onCoordinateFormatSelected(@NonNull String formatId) {
+		CoordinateGridFormat gridFormat = gridFormatProvider.resolve(formatId);
+		if (gridFormat != null) {
+			onSelectFormat(gridFormat);
+		}
 	}
 
-	private void onSelectFormat(@NonNull GridFormat format) {
+	private void onSelectFormat(@NonNull CoordinateGridFormat format) {
 		setGridFormat(format);
 		if (screen != null) {
 			screen.updateFormatButton();
@@ -153,11 +161,16 @@ public class CoordinatesGridController extends BaseDialogController {
 	}
 
 	@NonNull
-	public GridFormat getGridFormat() {
+	public CoordinateGridFormat getGridFormat() {
 		return gridSettings.getGridFormat(getSelectedAppMode());
 	}
 
-	public void setGridFormat(@NonNull GridFormat format) {
+	@NonNull
+	public String getSelectedCoordinateFormatId() {
+		return getGridFormat().getId();
+	}
+
+	public void setGridFormat(@NonNull CoordinateGridFormat format) {
 		gridSettings.setGridFormat(getSelectedAppMode(), format);
 	}
 

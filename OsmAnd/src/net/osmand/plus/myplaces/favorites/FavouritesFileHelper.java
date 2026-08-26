@@ -6,6 +6,8 @@ import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.ZIP_EXT;
 import static net.osmand.shared.gpx.GpxFile.XML_COLON;
 
+import android.util.AtomicFile;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -14,7 +16,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
-import net.osmand.plus.myplaces.favorites.SaveFavoritesTask.SaveFavoritesListener;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -25,8 +26,12 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -49,6 +54,11 @@ public class FavouritesFileHelper {
 
 	private final OsmandApplication app;
 	private final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
+	private final Object saveLock = new Object();
+
+	private boolean saveRunning;
+	@Nullable
+	private SaveBatch pendingSave;
 
 	protected FavouritesFileHelper(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -66,10 +76,13 @@ public class FavouritesFileHelper {
 
 	@NonNull
 	public File getExternalFile(@NonNull FavoriteGroup group) {
-		File favDir = getExternalDir();
-		String fileName = group.getName().isEmpty() ? FAV_FILE_PREFIX
-				: FAV_FILE_PREFIX + FAV_GROUP_NAME_SEPARATOR + getGroupFileName(group.getName());
-		return new File(favDir, fileName + GPX_FILE_EXT);
+		return new File(getExternalDir(), getFolderFileName(group.getName()) + GPX_FILE_EXT);
+	}
+
+	@NonNull
+	public static String getFolderFileName(@NonNull String folderPath) {
+		return folderPath.isEmpty() ? FAV_FILE_PREFIX
+				: FAV_FILE_PREFIX + FAV_GROUP_NAME_SEPARATOR + getGroupFileName(folderPath);
 	}
 
 	@NonNull
@@ -85,6 +98,7 @@ public class FavouritesFileHelper {
 	public Map<String, FavoriteGroup> loadInternalGroups() {
 		Map<String, FavoriteGroup> groups = new LinkedHashMap<>();
 		File file = getInternalFile();
+		recoverAtomicFile(file);
 		if (file.exists()) {
 			loadFileGroups(file, groups, false);
 		}
@@ -134,19 +148,71 @@ public class FavouritesFileHelper {
 		}
 	}
 
-	public void saveFavoritesIntoFile(@NonNull List<FavoriteGroup> groups, boolean saveAllGroups,
-			@Nullable SaveFavoritesListener listener) {
-		SaveFavoritesTask task = new SaveFavoritesTask(this, groups, saveAllGroups, listener);
-		OsmAndTaskManager.executeTask(task, singleThreadExecutor);
+	public void saveFavoritesIntoFile(@NonNull List<FavoriteGroup> groups, boolean saveAllGroups, @Nullable FavoritesListener listener) {
+		enqueueSave(groups, saveAllGroups, listener, null);
 	}
 
-	public void saveFavoritesIntoFileSync(@NonNull List<FavoriteGroup> groups, boolean saveAllGroups,
-			@Nullable SaveFavoritesListener listener) {
-		SaveFavoritesTask task = new SaveFavoritesTask(this, groups, saveAllGroups, listener);
+	public void saveFavoritesIntoFileSync(@NonNull List<FavoriteGroup> groups, boolean saveAllGroups, @Nullable FavoritesListener listener) {
+		CountDownLatch waiter = new CountDownLatch(1);
+		enqueueSave(groups, saveAllGroups, listener, waiter);
 		try {
-			OsmAndTaskManager.executeTask(task, singleThreadExecutor).get();
-		} catch (ExecutionException | InterruptedException e) {
-			log.error(e);
+			waiter.await();
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
+			log.error(e.getMessage(), e);
+		}
+	}
+
+	private void enqueueSave(@NonNull List<FavoriteGroup> groups, boolean saveAllGroups,
+			@Nullable FavoritesListener listener, @Nullable CountDownLatch waiter) {
+		SaveBatch batchToStart = null;
+		synchronized (saveLock) {
+			if (!saveRunning) {
+				saveRunning = true;
+				batchToStart = new SaveBatch(groups, saveAllGroups, listener, waiter);
+			} else if (pendingSave == null) {
+				pendingSave = new SaveBatch(groups, saveAllGroups, listener, waiter);
+			} else {
+				pendingSave.merge(groups, saveAllGroups, listener, waiter);
+			}
+		}
+		if (batchToStart != null) {
+			startSave(batchToStart);
+		}
+	}
+
+	private void startSave(@NonNull SaveBatch batch) {
+		try {
+			SaveFavoritesTask task = new SaveFavoritesTask(app, this, batch.getGroups(), batch.getSaveAllGroups(),
+					(success, journalState) -> onSaveFinished(batch, success, journalState));
+			OsmAndTaskManager.executeTask(task, singleThreadExecutor);
+		} catch (RuntimeException e) {
+			log.error("Failed to start favorites save", e);
+			onSaveFinished(batch, false, null);
+		}
+	}
+
+	private void onSaveFinished(@NonNull SaveBatch completedBatch, boolean success,
+	                            @Nullable FavoriteDeletionsJournal.JournalState journalState) {
+		SaveBatch batchToStart;
+		synchronized (saveLock) {
+			batchToStart = pendingSave;
+			pendingSave = null;
+			if (batchToStart == null) {
+				saveRunning = false;
+			}
+		}
+		if (success && completedBatch.getSaveAllGroups() && journalState != null) {
+			FavoriteDeletionsJournal.clearIfUnchanged(app, journalState);
+		}
+		for (CountDownLatch waiter : completedBatch.getWaiters()) {
+			waiter.countDown();
+		}
+		for (FavoritesListener listener : completedBatch.getListeners()) {
+			app.runInUIThread(() -> listener.onSavingFavoritesFinished(success));
+		}
+		if (batchToStart != null) {
+			startSave(batchToStart);
 		}
 	}
 
@@ -178,10 +244,31 @@ public class FavouritesFileHelper {
 		if (!dir.exists() || !dir.isDirectory()) {
 			return null;
 		}
-		return dir.listFiles((d, name) ->
-				name.startsWith(FAV_FILE_PREFIX + FAV_GROUP_NAME_SEPARATOR)
-						|| name.equals(FAV_FILE_PREFIX + GPX_FILE_EXT)
-						|| name.equals(LEGACY_FAV_FILE_PREFIX + GPX_FILE_EXT));
+		File[] remnants = dir.listFiles((d, name) -> name.endsWith(".new") || name.endsWith(".bak"));
+		if (!Algorithms.isEmpty(remnants)) {
+			for (File remnant : remnants) {
+				String baseName = remnant.getName().substring(0, remnant.getName().length() - 4);
+				if (isFavoritesFileName(baseName)) {
+					recoverAtomicFile(new File(dir, baseName));
+				}
+			}
+		}
+		return dir.listFiles((d, name) -> isFavoritesFileName(name));
+	}
+
+	private static boolean isFavoritesFileName(@NonNull String name) {
+		return (name.startsWith(FAV_FILE_PREFIX + FAV_GROUP_NAME_SEPARATOR)
+				&& name.endsWith(GPX_FILE_EXT))
+				|| name.equals(FAV_FILE_PREFIX + GPX_FILE_EXT)
+				|| name.equals(LEGACY_FAV_FILE_PREFIX + GPX_FILE_EXT);
+	}
+
+	private static void recoverAtomicFile(@NonNull File file) {
+		try (FileInputStream ignored = new AtomicFile(file).openRead()) {
+			// Opening recovers a previous valid base file and removes stale temporary data.
+		} catch (IOException ignored) {
+			// No committed base file exists yet.
+		}
 	}
 
 	@NonNull
@@ -197,6 +284,31 @@ public class FavouritesFileHelper {
 	public Exception saveFile(@NonNull List<FavoriteGroup> favoriteGroups, @NonNull File file) {
 		GpxFile gpx = asGpxFile(favoriteGroups);
 		return SharedUtil.writeGpxFile(file, gpx);
+	}
+
+	@Nullable
+	protected Exception saveFileAtomic(@NonNull List<FavoriteGroup> favoriteGroups, @NonNull File file) {
+		File parent = file.getParentFile();
+		if (parent != null && !parent.exists()) {
+			parent.mkdirs();
+		}
+		GpxFile gpx = asGpxFile(favoriteGroups);
+		AtomicFile atomicFile = new AtomicFile(file);
+		FileOutputStream output = null;
+		try {
+			output = atomicFile.startWrite();
+			Exception error = SharedUtil.writeGpx(output, gpx, null);
+			if (error != null) {
+				throw error;
+			}
+			atomicFile.finishWrite(output);
+			return null;
+		} catch (Exception e) {
+			if (output != null) {
+				atomicFile.failWrite(output);
+			}
+			return e;
+		}
 	}
 
 	@NonNull

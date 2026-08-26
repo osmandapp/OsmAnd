@@ -15,13 +15,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.plus.settings.enums.ThemeUsageContext;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.plugins.audionotes.Recording;
+import net.osmand.plus.gallery.controller.GalleryPresentationMapper;
+import net.osmand.plus.gallery.model.GalleryMediaPresentation;
+import net.osmand.plus.plugins.audionotes.MediaNote;
 import net.osmand.plus.plugins.audionotes.NotesFragment;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 
 import java.util.List;
 import java.util.Set;
@@ -36,11 +38,12 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 	private static final int TYPE_COUNT = 5;
 
 	private final OsmandApplication app;
+	private final GalleryPresentationMapper presentationMapper;
 	private NotesAdapterListener listener;
 	private final List<Object> items;
 
 	private boolean selectionMode;
-	private Set<Recording> selected;
+	private Set<MediaNote> selected;
 
 	private boolean portrait;
 
@@ -52,7 +55,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 		this.selectionMode = selectionMode;
 	}
 
-	public void setSelected(Set<Recording> selected) {
+	public void setSelected(Set<MediaNote> selected) {
 		this.selected = selected;
 	}
 
@@ -64,6 +67,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 		super(app, R.layout.note, items);
 		this.app = app;
 		this.items = items;
+		presentationMapper = new GalleryPresentationMapper(app, app.getGalleryHelper().getMetadataRepository());
 	}
 
 	@NonNull
@@ -95,8 +99,8 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 				setupHeader(type, (HeaderViewHolder) row.getTag());
 			} else {
 				Object item = getItem(position);
-				if (item instanceof Recording) {
-					setupItem(position, (Recording) item, (ItemViewHolder) row.getTag());
+				if (item instanceof MediaNote) {
+					setupItem(position, (MediaNote) item, (ItemViewHolder) row.getTag());
 				}
 			}
 
@@ -126,8 +130,8 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 
 			for (int i = headerInd + 1; i < items.size(); i++) {
 				Object item = items.get(i);
-				if (item instanceof Recording) {
-					createItem(parent, inflater, ll, i, (Recording) item);
+				if (item instanceof MediaNote) {
+					createItem(parent, inflater, ll, i, (MediaNote) item);
 				} else {
 					break;
 				}
@@ -137,7 +141,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 		}
 	}
 
-	private void createItem(@NonNull ViewGroup parent, LayoutInflater inflater, LinearLayout ll, int pos, Recording item) {
+	private void createItem(@NonNull ViewGroup parent, LayoutInflater inflater, LinearLayout ll, int pos, MediaNote item) {
 		ItemViewHolder itemVH = new ItemViewHolder(inflater.inflate(R.layout.note_list_item, parent, false));
 		setupItem(pos, item, itemVH);
 		ll.addView(itemVH.view);
@@ -154,7 +158,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 	@Override
 	public int getItemViewType(int position) {
 		Object item = getItem(position);
-		if (item instanceof Recording) {
+		if (item instanceof MediaNote) {
 			return TYPE_ITEM;
 		}
 		return (int) item;
@@ -207,16 +211,20 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 		return R.string.shared_string_video;
 	}
 
-	private void setupItem(int position, Recording recording, ItemViewHolder holder) {
+	private void setupItem(int position, MediaNote note, ItemViewHolder holder) {
 		setupBackground(holder.view);
-		if (recording == NotesFragment.SHARE_LOCATION_FILE) {
+		if (note == NotesFragment.SHARE_LOCATION_FILE) {
 			holder.title.setText(R.string.av_locations);
 			holder.description.setText(getLocationsDescId());
 		} else {
-			holder.title.setText(recording.getName(app, true));
-			holder.description.setText(recording.getExtendedDescription(app));
-			int iconRes = recording.isAudio() ? R.drawable.ic_type_audio
-					: (recording.isVideo() ? R.drawable.ic_type_video : R.drawable.ic_type_img);
+			holder.title.setText(note.getName(app, app.getGalleryHelper().getMetadataRepository(), true));
+			if (note.isRecording()) {
+				holder.description.setText(note.getRecording().getExtendedDescription(app));
+			} else {
+				GalleryMediaPresentation presentation = presentationMapper.presentation(note.getMediaItem());
+				holder.description.setText(presentation.getDescription());
+			}
+			int iconRes = note.isAudio() ? R.drawable.ic_type_audio : (note.isVideo() ? R.drawable.ic_type_video : R.drawable.ic_type_img);
 			int colorRes = ColorUtilities.getDefaultIconColorId(app.getDaynightHelper().isNightMode(ThemeUsageContext.APP));
 			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes, colorRes));
 		}
@@ -226,17 +234,17 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 		holder.checkBox.setVisibility(selectionMode ? View.VISIBLE : View.GONE);
 		holder.options.setVisibility(selectionMode ? View.GONE : View.VISIBLE);
 		if (selectionMode) {
-			holder.checkBox.setChecked(selected.contains(recording));
+			holder.checkBox.setChecked(selected.contains(note));
 			holder.checkBox.setOnClickListener(v -> {
 				if (listener != null) {
-					listener.onCheckBoxClick(recording, holder.checkBox.isChecked());
+					listener.onCheckBoxClick(note, holder.checkBox.isChecked());
 				}
 			});
 		} else {
 			holder.options.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_overflow_menu_white));
 			holder.options.setOnClickListener(v -> {
 				if (listener != null) {
-					listener.onOptionsClick(recording);
+					listener.onOptionsClick(note);
 				}
 			});
 		}
@@ -246,7 +254,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 				holder.checkBox.performClick();
 			} else {
 				if (listener != null) {
-					listener.onItemClick(recording, position);
+					listener.onItemClick(note, position);
 				}
 			}
 		});
@@ -293,13 +301,13 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 	}
 
 	private boolean hideBottomDivider(int pos) {
-		return pos == items.size() - 1 || !(getItem(pos + 1) instanceof Recording);
+		return pos == items.size() - 1 || !(getItem(pos + 1) instanceof MediaNote);
 	}
 
 	private boolean isSelectAllChecked(int type) {
 		for (Object item : items) {
-			if (item instanceof Recording) {
-				if (type != TYPE_DATE_HEADER && !isAppropriate((Recording) item, type)) {
+			if (item instanceof MediaNote) {
+				if (type != TYPE_DATE_HEADER && !isAppropriate((MediaNote) item, type)) {
 					continue;
 				}
 				if (!selected.contains(item)) {
@@ -310,13 +318,13 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 		return true;
 	}
 
-	private boolean isAppropriate(Recording rec, int type) {
+	private boolean isAppropriate(MediaNote note, int type) {
 		if (type == TYPE_AUDIO_HEADER) {
-			return rec.isAudio();
+			return note.isAudio();
 		} else if (type == TYPE_PHOTO_HEADER) {
-			return rec.isPhoto();
+			return note.isPhoto();
 		}
-		return rec.isVideo();
+		return note.isVideo();
 	}
 
 	private class HeaderViewHolder {
@@ -363,10 +371,10 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 
 		void onHeaderClick(int type, boolean checked);
 
-		void onCheckBoxClick(Recording rec, boolean checked);
+		void onCheckBoxClick(MediaNote note, boolean checked);
 
-		void onItemClick(Recording rec, int position);
+		void onItemClick(MediaNote note, int position);
 
-		void onOptionsClick(Recording rec);
+		void onOptionsClick(MediaNote note);
 	}
 }

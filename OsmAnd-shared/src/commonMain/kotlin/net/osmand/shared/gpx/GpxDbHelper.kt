@@ -1,14 +1,14 @@
 package net.osmand.shared.gpx
 
 import co.touchlab.stately.collections.ConcurrentMutableMap
+import co.touchlab.stately.concurrency.AtomicBoolean
 import co.touchlab.stately.concurrency.AtomicInt
 import co.touchlab.stately.concurrency.Synchronizable
 import co.touchlab.stately.concurrency.synchronize
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import net.osmand.shared.api.SQLiteAPI.SQLiteConnection
 import net.osmand.shared.data.StringIntPair
@@ -36,6 +36,9 @@ object GpxDbHelper : GpxReaderAdapter {
 	private var readerSync = Synchronizable()
 
 	private var initialized: Boolean = false
+	private var reconciliationRunning = AtomicBoolean(false)
+	private var reconciliationComplete = AtomicBoolean(false)
+	private var reconciliationAttempted = AtomicBoolean(false)
 
 	fun interface GpxDataItemCallback {
 		fun isCancelled(): Boolean = false
@@ -56,52 +59,140 @@ object GpxDbHelper : GpxReaderAdapter {
 	private suspend fun loadGpxItems() {
 		val start = currentTimeMillis()
 		val items = readItems()
-		val startEx = currentTimeMillis()
-		val fileExistenceMap = getFileExistenceMap(items)
-		log.info("Time to getFileExistenceMap ${currentTimeMillis() - startEx} ms, ${items.size} items")
-
-		val itemsToCache = mutableMapOf<KFile, GpxDataItem>()
-		val itemsToRemove = mutableSetOf<KFile>()
-		items.forEach { item ->
-			val file = item.file
-			if (fileExistenceMap[file] == true) {
-				itemsToCache[file] = item
-			} else {
-				itemsToRemove.add(file)
-			}
-		}
-		putToCacheBulk(itemsToCache)
-		removeFromCacheBulk(itemsToRemove)
-		database.remove(itemsToRemove)
-		log.info("Time to loadGpxItems ${currentTimeMillis() - start} ms, ${items.size} items")
-	}
-
-	private suspend fun getFileExistenceMap(
-		items: List<GpxDataItem>,
-		batchSize: Int = 100
-	): Map<KFile, Boolean> = coroutineScope {
-		val gpxPath = PlatformUtil.getOsmAndContext().getGpxDir().path()
-		items.chunked(batchSize).map { batch ->
-			async(Dispatchers.IO) { batch.associate {
-				it.file to (it.file.exists() && it.file.path().startsWith(gpxPath)) } }
-		}.awaitAll().fold(mutableMapOf()) { acc, map -> acc.apply { putAll(map) } }
+		putToCacheBulk(items.associateBy { it.file })
+		log.info("Hydrated GPX metadata cache in ${currentTimeMillis() - start} ms, ${items.size} items")
 	}
 
 	private fun loadGpxDirItems() {
 		val start = currentTimeMillis()
 		val items = readDirItems()
-		items.forEach { item ->
-			val file = item.file
-			if (file.exists()) {
-				putToCache(item)
-			} else {
-				remove(file)
-			}
-		}
-		log.info("Time to loadGpxDirItems ${currentTimeMillis() - start} ms, items count ${dirItems.size}")
+		items.forEach { putToCache(it) }
+		log.info("Hydrated GPX directory metadata in ${currentTimeMillis() - start} ms, items count ${dirItems.size}")
 	}
 
 	fun isInitialized() = initialized
+
+	fun isFilesystemReconciliationRunning() = reconciliationRunning.value
+
+	fun isFilesystemReconciliationComplete() = reconciliationComplete.value
+
+	fun startFilesystemReconciliation() {
+		if (!initialized || reconciliationAttempted.value ||
+				!reconciliationRunning.compareAndSet(expected = false, new = true)) {
+			return
+		}
+		reconciliationAttempted.value = true
+		CoroutineScope(Dispatchers.IO).launch {
+			try {
+				reconcileFilesystem()
+				reconciliationComplete.value = true
+			} catch (error: Throwable) {
+				log.error("Failed to reconcile GPX database with filesystem", error)
+			} finally {
+				reconciliationRunning.value = false
+				startQueuedReaders()
+			}
+		}
+	}
+
+	private fun reconcileFilesystem() {
+		val start = currentTimeMillis()
+		val gpxRoot = normalizePath(PlatformUtil.getOsmAndContext().getGpxDir().path())
+		val dataSnapshot = dataItems.entries.associate { it.key to it.value }
+		val dirSnapshot = dirItems.entries.associate { it.key to it.value }
+		val missingFiles = mutableSetOf<KFile>()
+		val modifiedItems = mutableListOf<Pair<KFile, GpxDataItem>>()
+
+		dataSnapshot.forEach { (file, item) ->
+			val insideRoot = isInsideGpxRoot(file, gpxRoot)
+			if (!insideRoot || !file.exists()) {
+				missingFiles.add(file)
+			} else {
+				val actualModifiedTime = file.lastModified()
+				val storedModifiedTime = item.getParameter<Long>(GpxParameter.FILE_LAST_MODIFIED_TIME)
+				if (storedModifiedTime != actualModifiedTime
+						|| GpxDbUtils.isAnalyseNeeded(item, actualModifiedTime)) {
+					modifiedItems.add(file to item)
+				}
+			}
+		}
+
+		val filesToRemove = missingFiles.filterTo(mutableSetOf()) { file ->
+			val snapshotItem = dataSnapshot[file]
+			dataItems[file] === snapshotItem &&
+					(!isInsideGpxRoot(file, gpxRoot) || !file.exists())
+		}
+		var removedFiles = 0
+		if (filesToRemove.isNotEmpty()) {
+			if (database.remove(filesToRemove)) {
+				removeFromCacheBulk(filesToRemove)
+				removedFiles = filesToRemove.size
+			} else {
+				log.error("Failed to remove missing GPX rows during filesystem reconciliation")
+			}
+		}
+
+		var removedDirRows = 0
+		dirSnapshot.forEach { (file, snapshotItem) ->
+			if (dirItems[file] === snapshotItem &&
+					(!isInsideGpxRoot(file, gpxRoot) || !file.exists())) {
+				if (database.remove(file)) {
+					removeFromCache(file)
+					removedDirRows++
+				}
+			}
+		}
+
+		var queuedModifiedItems = 0
+		modifiedItems.forEach { (file, item) ->
+			if (dataItems[file] === item && file.exists()) {
+				val actualModifiedTime = file.lastModified()
+				if (item.getParameter<Long>(GpxParameter.FILE_LAST_MODIFIED_TIME) != actualModifiedTime
+						|| GpxDbUtils.isAnalyseNeeded(item, actualModifiedTime)) {
+					readGpxItem(file, item, null, false)
+					queuedModifiedItems++
+				}
+			}
+		}
+		log.info(
+			"Reconciled GPX filesystem in ${currentTimeMillis() - start} ms: " +
+					"checked=${dataSnapshot.size}, removed=$removedFiles, " +
+					"removedDirRows=$removedDirRows, queuedModified=$queuedModifiedItems"
+		)
+	}
+
+	private fun isInsideGpxRoot(file: KFile, normalizedRoot: String): Boolean {
+		val path = normalizePath(file.path())
+		return hasPathPrefix(path, normalizedRoot)
+	}
+
+	internal fun isPathInsideGpxRoot(path: String, root: String): Boolean {
+		return hasPathPrefix(normalizePath(path), normalizePath(root))
+	}
+
+	private fun hasPathPrefix(path: String, normalizedRoot: String): Boolean {
+		return path == normalizedRoot || if (normalizedRoot == "/") {
+			path.startsWith(normalizedRoot)
+		} else {
+			path.startsWith("$normalizedRoot/")
+		}
+	}
+
+	private fun normalizePath(path: String): String {
+		val normalized = path.replace('\\', '/')
+		val absolute = normalized.startsWith('/')
+		val segments = mutableListOf<String>()
+		normalized.split('/').forEach { segment ->
+			when {
+				segment.isEmpty() || segment == "." -> Unit
+				segment == ".." && segments.isNotEmpty() && segments.last() != ".." ->
+					segments.removeAt(segments.lastIndex)
+				else -> segments.add(segment)
+			}
+		}
+		val prefix = if (absolute) "/" else ""
+		return prefix + segments.joinToString("/")
+	}
 
 	fun getItemsVersion() = itemsVersion.get()
 
@@ -210,6 +301,8 @@ object GpxDbHelper : GpxReaderAdapter {
 
 	fun getItems() = dataItems.values.toList()
 
+	fun getRecentlyModifiedItems(limit: Int) = database.getRecentlyModifiedItems(limit)
+
 	fun getDirItems() = dirItems.values.toList()
 
 	private suspend fun readItems(): List<GpxDataItem> = database.getGpxDataItems()
@@ -271,8 +364,15 @@ object GpxDbHelper : GpxReaderAdapter {
 			return null
 		}
 		val item = dataItems[file]
-		if (readIfNeeded && GpxDbUtils.isAnalyseNeeded(item) && GpxDataItem.isRegularTrack(file)) {
-			readGpxItem(file, item, callback)
+		if (item != null && !file.exists()) {
+			return null
+		}
+		if (readIfNeeded && GpxDataItem.isRegularTrack(file)) {
+			val shouldCheckAnalysis = callback != null || !isReading(file)
+			if (shouldCheckAnalysis && GpxDbUtils.isAnalyseNeeded(item)) {
+				val reconciliationFinished = reconciliationAttempted.value && !reconciliationRunning.value
+				readGpxItem(file, item, callback, reconciliationFinished)
+			}
 		}
 		return item
 	}
@@ -313,16 +413,29 @@ object GpxDbHelper : GpxReaderAdapter {
 	fun isReading(file: KFile): Boolean =
 		readerSync.synchronize { readingItemsMap.contains(file) || readers.any { it.isReading(file) } }
 
-	private fun readGpxItem(file: KFile, item: GpxDataItem?, callback: GpxDataItemCallback?) {
+	private fun readGpxItem(
+		file: KFile,
+		item: GpxDataItem?,
+		callback: GpxDataItemCallback?,
+		startReader: Boolean = true
+	) {
 		readerSync.synchronize {
 			if (callback != null) {
 				readingItemsCallbacks.getOrPut(file) { mutableListOf() }?.apply { add(callback) }
 			}
 			if (!isReading(file)) {
 				readingItemsMap[file] = item ?: GpxDataItem(file)
-				if (readers.size < READER_TASKS_LIMIT) {
+				if (startReader && readers.size < READER_TASKS_LIMIT) {
 					startReading()
 				}
+			}
+		}
+	}
+
+	private fun startQueuedReaders() {
+		readerSync.synchronize {
+			while (readingItemsMap.isNotEmpty() && readers.size < READER_TASKS_LIMIT) {
+				startReading()
 			}
 		}
 	}

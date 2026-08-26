@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/itemContainer"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/selectableItemBackground"
+	android:minHeight="@dimen/bottom_sheet_medium_list_item_height">
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/itemText"
+		style="@style/TitleStyle"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
+		android:ellipsize="end"
+		android:gravity="center_vertical"
+		android:maxLines="2"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingTop="@dimen/content_padding_half"
+		android:paddingEnd="@dimen/content_padding"
+		android:paddingBottom="@dimen/content_padding_half"
+		android:textColor="?attr/active_color_basic"
+		tools:text="https://example.com/very/long/link" />
+
+	<View
+		android:id="@+id/divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_gravity="bottom"
+		android:layout_marginStart="@dimen/content_padding"
+		android:background="?attr/divider_color" />
+
+</FrameLayout>

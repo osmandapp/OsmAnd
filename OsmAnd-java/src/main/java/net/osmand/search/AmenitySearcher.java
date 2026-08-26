@@ -208,6 +208,7 @@ public class AmenitySearcher {
 
             List<AmenityIndexRepository> repos = getAmenityRepositories(includeTravel, travelFileVisibility);
 
+            Set<Long> allIds = new HashSet<>(); // live updates filter
             for (AmenityIndexRepository repo : repos) {
                 if (matcher != null && matcher.isCancelled()) {
                     break;
@@ -216,15 +217,19 @@ public class AmenitySearcher {
                         && repo.checkContainsInt(top31, left31, bottom31, right31)) {
                     List<Amenity> foundAmenities = repo.searchAmenities(top31, left31, bottom31, right31,
                             zoom, filter, additionalFilter, matcher, priorityQueue, searchResultsLimit);
+
                     if (foundAmenities != null && priorityQueue == null) {
+                        Set<Long> localIds = new HashSet<>();
                         for (Amenity amenity : foundAmenities) {
                             Long id = amenity.getId();
                             if (amenity.isClosed()) {
                                 closedAmenities.add(id);
-                            } else if (!closedAmenities.contains(id)) {
+                            } else if (!closedAmenities.contains(id) && !allIds.contains(id)) {
                                 actualAmenities.add(amenity);
+                                localIds.add(id);
                             }
                         }
+                        allIds.addAll(localIds);
                     }
                 }
             }
@@ -737,6 +742,9 @@ public class AmenitySearcher {
                 .buildSearchRequest(x, x + 1, y, y + 1, 15, null, new ResultMatcher<>() {
                     @Override
                     public boolean publish(BinaryMapDataObject object) {
+                        if (object.isDeleted()) {
+                            return false;
+                        }
                         if (matcher == null || matcher.publish(object)) {
                             list.add(object);
                             return true;
@@ -835,7 +843,7 @@ public class AmenitySearcher {
 
     private boolean copyCoordinates(BaseDetailsObject detailsObject, BinaryMapDataObject mapObject) {
         int pointsLength = mapObject.getPointsLength();
-        if (detailsObject.getPointsLength() < pointsLength) {
+        if (pointsLength > 2) {
             detailsObject.clearGeometry();
             for (int i = 0; i < pointsLength; i++) {
                 detailsObject.addX(mapObject.getPoint31XTile(i));

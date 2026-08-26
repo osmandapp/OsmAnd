@@ -4,7 +4,6 @@
 	android:id="@+id/no_internet"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:background="?attr/list_background_color"
 	android:orientation="horizontal"
 	android:visibility="gone">
 

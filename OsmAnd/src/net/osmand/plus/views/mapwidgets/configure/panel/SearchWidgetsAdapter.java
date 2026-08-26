@@ -15,6 +15,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.configure.WidgetIconsHelper;
+import net.osmand.plus.views.mapwidgets.configure.panel.SearchWidgetsFragment.ExternalGroupItem;
 import net.osmand.plus.views.mapwidgets.configure.panel.SearchWidgetsFragment.GroupItem;
 import net.osmand.plus.views.mapwidgets.configure.panel.holders.SearchWidgetViewHolder;
 
@@ -74,6 +75,8 @@ public class SearchWidgetsAdapter extends RecyclerView.Adapter<RecyclerView.View
 				viewHolder.bind(selectedAppMode, listener, (WidgetType) item, nightMode, showDivider);
 			} else if (item instanceof GroupItem) {
 				viewHolder.bind(selectedAppMode, listener, (GroupItem) item, nightMode, showDivider);
+			} else if (item instanceof ExternalGroupItem) {
+				viewHolder.bind(selectedAppMode, listener, (ExternalGroupItem) item, nightMode, showDivider);
 			} else if (item instanceof MapWidgetInfo) {
 				viewHolder.bind(selectedAppMode, iconsHelper, listener, (MapWidgetInfo) item, nightMode, showDivider);
 			}

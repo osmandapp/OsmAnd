@@ -44,7 +44,7 @@ public class SettingsExporter extends Exporter {
 		try {
 			ZipEntry entry = new ZipEntry("items.json");
 			zos.putNextEntry(entry);
-			zos.write(json.toString(2).getBytes("UTF-8"));
+			SettingsHelper.writeJson(json, zos, null);
 			zos.closeEntry();
 			if (exportItemsFiles) {
 				writeItemFiles(zos);

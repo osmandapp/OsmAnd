@@ -97,15 +97,7 @@ public class CloudSyncCard extends BaseCard implements OnBackupSyncListener, OnP
 		SyncBackupTask syncTask = settingsHelper.getSyncTask(SYNC_ITEMS_KEY);
 		if (syncTask != null) {
 			icon.setImageDrawable(getIcon(R.drawable.ic_action_update_colored));
-
-			int progress = syncTask.getGeneralProgress();
-			int maxProgress = syncTask.getMaxProgress();
-			int percentage = maxProgress != 0 ? ProgressHelper.normalizeProgressPercent(progress * 100 / maxProgress) : 0;
-
-			title.setText(app.getString(R.string.cloud_sync_progress, percentage + "%"));
-
-			progressBar.setMax(maxProgress);
-			progressBar.setProgress(progress);
+			updateProgress(syncTask);
 		} else {
 			PrepareBackupResult backup = backupHelper.getBackup();
 			BackupStatus status = BackupStatus.getBackupStatus(app, backup);
@@ -120,6 +112,27 @@ public class CloudSyncCard extends BaseCard implements OnBackupSyncListener, OnP
 		AndroidUiHelper.updateVisibility(progressBar, syncTask != null);
 		AndroidUiHelper.updateVisibility(description, syncTask == null);
 		AndroidUiHelper.updateVisibility(header.findViewById(R.id.bottom_divider), false);
+	}
+
+	private void updateProgress() {
+		SyncBackupTask syncTask = settingsHelper.getSyncTask(SYNC_ITEMS_KEY);
+		if (syncTask == null) {
+			setupHeader();
+			return;
+		}
+		updateProgress(syncTask);
+	}
+
+	private void updateProgress(@NonNull SyncBackupTask syncTask) {
+		int progress = syncTask.getGeneralProgress();
+		int maxProgress = syncTask.getMaxProgress();
+		int percentage = maxProgress != 0 ? ProgressHelper.normalizeProgressPercent(progress * 100 / maxProgress) : 0;
+
+		TextView title = header.findViewById(R.id.title);
+		title.setText(app.getString(R.string.cloud_sync_progress, percentage + "%"));
+
+		progressBar.setMax(maxProgress);
+		progressBar.setProgress(progress);
 	}
 
 	private void setupSyncButton(@NonNull PrepareBackupResult backup) {
@@ -241,7 +254,7 @@ public class CloudSyncCard extends BaseCard implements OnBackupSyncListener, OnP
 
 	@Override
 	public void onBackupProgressUpdate(int progress) {
-		app.runInUIThread(this::setupHeader);
+		app.runInUIThread(this::updateProgress);
 	}
 
 	@Override

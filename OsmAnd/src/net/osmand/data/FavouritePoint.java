@@ -12,8 +12,10 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.primitives.Link;
+import net.osmand.shared.gpx.primitives.Linkable;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
@@ -26,7 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class FavouritePoint implements LocationPoint {
+public class FavouritePoint implements LocationPoint, Linkable {
 
 	private static final String DELIMITER = "__";
 	private static final String HIDDEN = "hidden";
@@ -148,7 +150,11 @@ public class FavouritePoint implements LocationPoint {
 		return iconId;
 	}
 
-	public int getIconIdOrDefault() {
+	public int getIconIdOrDefault(@NonNull Context ctx) {
+		if(iconId == 0 && !Algorithms.isEmpty(getCategory())) {
+			OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+			iconId = app.getFavoritesHelper().getOriginalIconId(this);
+		}
 		return iconId == 0 ? DEFAULT_UI_ICON_ID : iconId;
 	}
 
@@ -199,7 +205,7 @@ public class FavouritePoint implements LocationPoint {
 		if (isSpecialPoint()) {
 			return specialPointType.getIconId(ctx);
 		}
-		return getIconIdOrDefault();
+		return getIconIdOrDefault(ctx);
 	}
 
 	public double getLatitude() {
@@ -270,6 +276,7 @@ public class FavouritePoint implements LocationPoint {
 		this.comment = comment;
 	}
 
+	@Override
 	@Nullable
 	public List<Link> getLinks() {
 		return links;
@@ -277,6 +284,21 @@ public class FavouritePoint implements LocationPoint {
 
 	public void setLinks(@Nullable List<Link> links) {
 		this.links = Algorithms.isEmpty(links) ? null : new ArrayList<>(links);
+	}
+
+	@Override
+	public void addLink(@NonNull Link link) {
+		if (links == null) {
+			links = new ArrayList<>();
+		}
+		links.add(link);
+	}
+
+	@Override
+	public void removeLink(@NonNull Link link) {
+		if (links != null) {
+			links.remove(link);
+		}
 	}
 
 	@Nullable
@@ -289,13 +311,6 @@ public class FavouritePoint implements LocationPoint {
 			return res;
 		}
 		return null;
-	}
-
-	public void addLink(@NonNull Link link) {
-		if (links == null) {
-			links = new ArrayList<>();
-		}
-		links.add(link);
 	}
 
 	@Nullable

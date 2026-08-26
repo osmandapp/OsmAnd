@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<item
+		android:state_focused="true"
+		android:color="?attr/icon_button_background_focused" />
+	<item
+		android:state_hovered="true"
+		android:color="?attr/icon_button_background_hovered" />
+	<item android:color="?attr/icon_button_background_hovered" />
+
+</selector>

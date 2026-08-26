@@ -3,8 +3,9 @@ package org.openplacereviews.opendb.util;
 
 import java.util.*;
 
+import net.osmand.PlatformUtil;
+
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * Class uses for work with Json Object represent as Map.
@@ -15,7 +16,7 @@ public class JsonObjectUtils {
 	private static final int GET_OPERATION = 0;
 	private static final int SET_OPERATION = 1;
 	private static final int DELETE_OPERATION = 2;
-	protected static final Log LOGGER = LogFactory.getLog(JsonObjectUtils.class);
+	protected static final Log LOGGER = PlatformUtil.getLog(JsonObjectUtils.class);
 	
 	private static class OperationAccess {
 		private final int operation;

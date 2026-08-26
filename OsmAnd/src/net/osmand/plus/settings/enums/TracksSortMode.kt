@@ -11,8 +11,13 @@ enum class TracksSortMode(
 	val scopes: Array<TracksSortScope>
 ) {
 	NEAREST(
-		nameId = R.string.shared_string_nearest,
+		nameId = R.string.sort_by_nearest_to_current_location,
 		iconId = R.drawable.ic_action_nearby,
+		scopes = arrayOf(TracksSortScope.TRACKS)
+	),
+	NEAREST_TO_MAP_CENTER(
+		nameId = R.string.sort_by_nearest_to_map_center,
+		iconId = R.drawable.ic_action_nearest_map_center,
 		scopes = arrayOf(TracksSortScope.TRACKS)
 	),
 	LAST_MODIFIED(

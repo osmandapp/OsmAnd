@@ -305,9 +305,20 @@ class GpxFile : GpxExtensions {
 		toDistance: Double?,
 		pointsAnalyzer: GpxTrackAnalysis.TrackPointsAnalyser?
 	): GpxTrackAnalysis {
+		return getAnalysis(fileTimestamp, fromDistance, toDistance, pointsAnalyzer, true)
+	}
+
+	fun getAnalysis(
+		fileTimestamp: Long,
+		fromDistance: Double?,
+		toDistance: Double?,
+		pointsAnalyzer: GpxTrackAnalysis.TrackPointsAnalyser?,
+		collectPointData: Boolean
+	): GpxTrackAnalysis {
 		val parameters = if (path.isNotEmpty())
 			GpxDbHelper.getItem(KFile(path), false)?.getAnalysisCalculationParameters() else null
-		return getAnalysis(fileTimestamp, fromDistance, toDistance, parameters, pointsAnalyzer)
+		return getAnalysis(fileTimestamp, fromDistance, toDistance, parameters, pointsAnalyzer,
+			collectPointData)
 	}
 
 	fun getAnalysis(
@@ -317,7 +328,19 @@ class GpxFile : GpxExtensions {
 		parameters: Map<GpxParameter, Any?>?,
 		pointsAnalyzer: GpxTrackAnalysis.TrackPointsAnalyser?
 	): GpxTrackAnalysis {
+		return getAnalysis(fileTimestamp, fromDistance, toDistance, parameters, pointsAnalyzer, true)
+	}
+
+	fun getAnalysis(
+		fileTimestamp: Long,
+		fromDistance: Double?,
+		toDistance: Double?,
+		parameters: Map<GpxParameter, Any?>?,
+		pointsAnalyzer: GpxTrackAnalysis.TrackPointsAnalyser?,
+		collectPointData: Boolean
+	): GpxTrackAnalysis {
 		val analysis = GpxTrackAnalysis()
+		analysis.collectPointData = collectPointData
 		analysis.name = path
 		analysis.wptPoints = points.size
 		analysis.setWptCategoryNames(getWaypointCategories())

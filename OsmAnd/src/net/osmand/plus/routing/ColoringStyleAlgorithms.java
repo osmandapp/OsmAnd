@@ -58,7 +58,7 @@ public class ColoringStyleAlgorithms {
 		String attributeName = coloringStyle.getRouteInfoAttribute();
 		if (coloringType.isGradient()) {
 			GradientScaleType scaleType = coloringType.toGradientScaleType();
-			GpxTrackAnalysis analysis = selectedGpxFile.getTrackAnalysisToDisplay(app);
+			GpxTrackAnalysis analysis = selectedGpxFile.getTrackSummaryAnalysisToDisplay(app);
 			if (analysis != null && scaleType != null) {
 				return analysis.isColorizationTypeAvailable(scaleType.toColorizationType());
 			}

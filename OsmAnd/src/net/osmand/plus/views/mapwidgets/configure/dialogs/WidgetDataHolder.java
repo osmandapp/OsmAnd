@@ -3,7 +3,9 @@ package net.osmand.plus.views.mapwidgets.configure.dialogs;
 import android.os.Bundle;
 
 import net.osmand.aidl.AidlMapWidgetWrapper;
+import net.osmand.aidl.AidlWidgetGroupWrapper;
 import net.osmand.aidl.ConnectedApp;
+import net.osmand.util.Algorithms;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
@@ -30,6 +32,8 @@ public class WidgetDataHolder {
 	public static final String KEY_WIDGET_TYPE = "widget_type_name";
 	public static final String KEY_EXTERNAL_WIDGET_ID = "aidl_widget_id";
 	public static final String KEY_EXTERNAL_PROVIDER_PACKAGE = "external_provider_package";
+	public static final String KEY_EXTERNAL_GROUP_ID = "aidl_group_id";
+	public static final String KEY_EXTERNAL_GROUP_WIDGET_IDS = "aidl_group_widget_ids";
 
 	private final OsmandApplication app;
 
@@ -43,12 +47,50 @@ public class WidgetDataHolder {
 	private String externalProviderPackage;
 	private AidlMapWidgetWrapper aidlWidgetData;
 
+	private String externalGroupId;
+	private String externalGroupName;
+	private String externalGroupDescription;
+	private ArrayList<String> externalGroupWidgetIds;
+	private List<AidlMapWidgetWrapper> aidlGroupWidgets;
+
 	public WidgetDataHolder(@NonNull OsmandApplication app, @NonNull Bundle bundle) {
 		this.app = app;
 
 		widgetsPanel = WidgetsPanel.valueOf(bundle.getString(KEY_WIDGETS_PANEL_ID));
 		if (bundle.containsKey(KEY_GROUP_NAME)) {
 			widgetGroup = WidgetGroup.valueOf(bundle.getString(KEY_GROUP_NAME));
+		} else if (bundle.containsKey(KEY_EXTERNAL_GROUP_ID)) {
+			externalProviderPackage = bundle.getString(KEY_EXTERNAL_PROVIDER_PACKAGE);
+			externalGroupId = bundle.getString(KEY_EXTERNAL_GROUP_ID);
+			if (!Algorithms.isEmpty(externalProviderPackage)) {
+				connectedApp = app.getAidlApi().getConnectedApp(externalProviderPackage);
+			}
+			externalGroupWidgetIds = bundle.getStringArrayList(KEY_EXTERNAL_GROUP_WIDGET_IDS);
+			aidlGroupWidgets = new ArrayList<>();
+			if (connectedApp != null) {
+				AidlWidgetGroupWrapper groupData = connectedApp.getWidgetGroups().get(externalGroupId);
+				if (groupData != null) {
+					externalGroupName = Algorithms.isEmpty(groupData.getName()) ? externalGroupId : groupData.getName();
+					externalGroupDescription = groupData.getDescription();
+				} else {
+					externalGroupName = externalGroupId;
+				}
+				if (externalGroupWidgetIds != null) {
+					for (String sourceId : externalGroupWidgetIds) {
+						AidlMapWidgetWrapper widget = connectedApp.getWidgets().get(sourceId);
+						if (widget != null) {
+							aidlGroupWidgets.add(widget);
+						}
+					}
+				} else {
+					for (AidlMapWidgetWrapper widget : connectedApp.getWidgets().values()) {
+						if (externalGroupId.equals(widget.getGroupId())) {
+							aidlGroupWidgets.add(widget);
+						}
+					}
+				}
+				aidlGroupWidgets.sort((first, second) -> Integer.compare(first.getOrder(), second.getOrder()));
+			}
 		} else if (bundle.containsKey(KEY_EXTERNAL_PROVIDER_PACKAGE)) {
 			aidlWidgetId = bundle.getString(KEY_EXTERNAL_WIDGET_ID);
 			externalProviderPackage = bundle.getString(KEY_EXTERNAL_PROVIDER_PACKAGE);
@@ -83,6 +125,8 @@ public class WidgetDataHolder {
 			return getString(widgetGroup.titleId);
 		} else if (widgetType != null) {
 			return getString(widgetType.titleId);
+		} else if (externalGroupName != null) {
+			return externalGroupName;
 		} else if (aidlWidgetData != null) {
 			return aidlWidgetData.getMenuTitle();
 		}
@@ -90,7 +134,12 @@ public class WidgetDataHolder {
 	}
 
 	public int getWidgetsCount() {
-		return widgetGroup != null ? widgetGroup.getWidgets(widgetsPanel).size() : 1;
+		if (widgetGroup != null) {
+			return widgetGroup.getWidgets(widgetsPanel).size();
+		} else if (aidlGroupWidgets != null) {
+			return aidlGroupWidgets.size();
+		}
+		return 1;
 	}
 
 	/**
@@ -115,10 +164,17 @@ public class WidgetDataHolder {
 			return getString(widgetGroup.descId);
 		} else if (widgetType != null && widgetType.descId != 0) {
 			return getString(widgetType.descId);
+		} else if (aidlGroupWidgets != null && externalGroupDescription != null) {
+			return externalGroupDescription;
 		} else if (connectedApp != null) {
 			return connectedApp.getName();
 		}
 		return null;
+	}
+
+	@Nullable
+	public List<AidlMapWidgetWrapper> getAidlGroupWidgets() {
+		return aidlGroupWidgets;
 	}
 
 	@Nullable
@@ -192,6 +248,12 @@ public class WidgetDataHolder {
 			outState.putString(KEY_GROUP_NAME, widgetGroup.name());
 		} else if (widgetType != null) {
 			outState.putString(KEY_WIDGET_TYPE, widgetType.name());
+		} else if (externalGroupId != null) {
+			outState.putString(KEY_EXTERNAL_PROVIDER_PACKAGE, externalProviderPackage);
+			outState.putString(KEY_EXTERNAL_GROUP_ID, externalGroupId);
+			if (externalGroupWidgetIds != null) {
+				outState.putStringArrayList(KEY_EXTERNAL_GROUP_WIDGET_IDS, externalGroupWidgetIds);
+			}
 		} else {
 			outState.putString(KEY_EXTERNAL_WIDGET_ID, aidlWidgetId);
 			outState.putString(KEY_EXTERNAL_PROVIDER_PACKAGE, externalProviderPackage);

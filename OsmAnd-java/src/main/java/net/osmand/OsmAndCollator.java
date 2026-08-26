@@ -1,8 +1,5 @@
 package net.osmand;
 
-import net.osmand.util.ArabicNormalizer;
-import net.osmand.util.SearchAlgorithms;
-
 import java.util.Locale;
 
 public class OsmAndCollator {
@@ -37,20 +34,21 @@ public class OsmAndCollator {
 
 			@Override
 			public int compare(String source, String target) {
-				source = normalize(source);
-				target = normalize(target);
+				// SearchAlgorithms. should be used alignChars
+//				source = normalize(source);
+//				target = normalize(target);
 				return instance.compare(source, target);
 			}
 
-			private String normalize(String s) {
-				if (ArabicNormalizer.isSpecialArabic(s)) {
-					String normalized = ArabicNormalizer.normalize(s);
-					s = normalized == null ? s : normalized;
-				}
-				s = SearchAlgorithms.removeApostrophes(s);
-				s = SearchAlgorithms.removeQuotes(s);
-				return s;
-			}
+//			private String normalize(String s) {
+//				if (ArabicNormalizer.isSpecialArabic(s)) {
+//					String normalized = ArabicNormalizer.normalize(s);
+//					s = normalized == null ? s : normalized;
+//				}
+//				s = SearchAlgorithms.removeApostrophes(s);
+//				s = SearchAlgorithms.removeQuotes(s);
+//				return s;
+//			}
 		};
 	}
 	

@@ -37,6 +37,7 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class EditPoiContentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 	public static final int TYPE_DESCRIPTION_ITEM = 1;
@@ -49,6 +50,8 @@ public class EditPoiContentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 	public static final int PAYLOAD_NAME = 0;
 	public static final int PAYLOAD_AMENITY = 1;
 	public static final int PAYLOAD_FOCUS_ON_ITEM = 2;
+
+	private static final AtomicLong ITEM_ID_COUNTER = new AtomicLong(100);
 
 	private final LayoutInflater themedInflater;
 	private final OsmandApplication app;
@@ -86,6 +89,10 @@ public class EditPoiContentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 		editPoiAdapterListener = getTagItemHolderListener();
 	}
 
+	public static long nextItemId() {
+		return ITEM_ID_COUNTER.incrementAndGet();
+	}
+
 	private EditPoiAdapterListener getTagItemHolderListener() {
 		return new EditPoiAdapterListener() {
 			@Override
@@ -101,8 +108,10 @@ public class EditPoiContentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
 			@Override
 			public void removeItem(int position) {
-				notifyItemRemoved(position);
-				items.remove(position);
+				if (position >= 0 && position < items.size()) {
+					items.remove(position);
+					notifyItemRemoved(position);
+				}
 			}
 
 			@SuppressLint("NotifyDataSetChanged")
@@ -147,11 +156,8 @@ public class EditPoiContentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 		if (object instanceof Integer integer) {
 			return integer;
 		} else if (object instanceof TagItem tagItem) {
-			if (Algorithms.isEmpty(tagItem.tag())) {
-				return tagItem.id();
-			} else {
-				return tagItem.tag().hashCode();
-			}
+
+			return tagItem.getId();
 		} else if (object instanceof OpenHoursItem openHoursItem) {
 			return openHoursItem.id();
 		}
@@ -199,7 +205,7 @@ public class EditPoiContentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 		if (holder instanceof DescriptionItemHolder descriptionItemHolder) {
 			descriptionItemHolder.bindView(getData());
 		} else if (holder instanceof TagItemHolder tagItemHolder && item instanceof TagItem tagItem) {
-			tagItemHolder.bindView(holder, tagItem, getData(), editPoiListener, editPoiAdapterListener);
+			tagItemHolder.bindView(tagItem, getData(), editPoiListener, editPoiAdapterListener);
 		} else if (holder instanceof AddItemHolder addItemHolder) {
 			addItemHolder.bindView(editPoiListener);
 		} else if (holder instanceof BasicInfoHolder basicInfoHolder) {

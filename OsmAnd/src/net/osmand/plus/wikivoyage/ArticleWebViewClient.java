@@ -24,6 +24,7 @@ import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.shared.data.KQuadRect;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
+import net.osmand.util.Algorithms;
 
 public class ArticleWebViewClient extends WebViewClient {
 
@@ -79,10 +80,10 @@ public class ArticleWebViewClient extends WebViewClient {
 			return AndroidUtils.startActivityIfSafe(activity, intent);
 		} else if (url.contains(PREFIX_GEO)) {
 			fragment.closeAll();
+			OsmandSettings settings = app.getSettings();
 			String coordinates = url.replace(PREFIX_GEO, "");
 			WptPt gpxPoint = WikivoyageUtils.findNearestPoint(gpxFile.getPointsList(), coordinates);
 			if (gpxPoint != null) {
-				OsmandSettings settings = app.getSettings();
 				settings.setMapLocationToShow(gpxPoint.getLatitude(), gpxPoint.getLongitude(),
 						settings.getLastKnownMapZoom(),
 						new PointDescription(PointDescription.POINT_TYPE_WPT, gpxPoint.getName()),
@@ -90,6 +91,15 @@ public class ArticleWebViewClient extends WebViewClient {
 						gpxPoint);
 
 				MapActivity.launchMapActivityMoveToTop(activity);
+			} else {
+				LatLon latLon = WikivoyageUtils.parseGeoCoordinates(coordinates);
+				if (latLon != null) {
+					settings.setMapLocationToShow(latLon.getLatitude(), latLon.getLongitude(),
+							settings.getLastKnownMapZoom(),
+							new PointDescription(PointDescription.POINT_TYPE_MARKER, null));
+
+					MapActivity.launchMapActivityMoveToTop(activity);
+				}
 			}
 		} else if (isWebPage) {
 			WikiArticleHelper.warnAboutExternalLoad(url, activity, isNightMode());

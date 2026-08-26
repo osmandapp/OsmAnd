@@ -7,6 +7,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.ColorARGB;
@@ -25,7 +26,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.containers.Limits;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.enums.GridFormat;
+import net.osmand.plus.settings.coordinates.CoordinateGridFormat;
 import net.osmand.plus.settings.enums.GridLabelsPosition;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
@@ -36,9 +37,13 @@ import net.osmand.plus.views.controls.ViewChangeProvider.ViewChangeListener;
 import net.osmand.plus.views.controls.VerticalWidgetPanel;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 
+import org.apache.commons.logging.Log;
+
 import java.util.Objects;
 
 public class CoordinatesGridLayer extends OsmandMapLayer {
+
+	private static final Log LOG = PlatformUtil.getLog(CoordinatesGridLayer.class);
 
 	private static final float DEFAULT_MARGIN_FACTOR = 8.0f;
 
@@ -49,8 +54,9 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 
 	private GridConfiguration gridConfig;
 	private GridMarksProvider marksProvider;
+	private float defaultGranularity;
 
-	private GridFormat cachedGridFormat;
+	private CoordinateGridFormat cachedGridFormat;
 	private Limits<Integer> cachedZoomLimits;
 	private GridLabelsPosition cachedLabelsPosition;
 	@ColorInt private int cachedGridColorDay;
@@ -82,7 +88,6 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 		settings.COORDINATE_GRID_FORMAT.addListener(settingsListener);
 		settings.COORDINATE_GRID_MIN_ZOOM.addListener(settingsListener);
 		settings.COORDINATE_GRID_MAX_ZOOM.addListener(settingsListener);
-		settings.COORDINATES_FORMAT.addListener(settingsListener);
 		settings.COORDINATES_GRID_LABELS_POSITION.addListener(settingsListener);
 		settings.COORDINATES_GRID_COLOR_DAY.addListener(settingsListener);
 		settings.COORDINATES_GRID_COLOR_NIGHT.addListener(settingsListener);
@@ -139,15 +144,20 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 		boolean updateAppearance = false;
 		boolean zoomLevelsUpdated = false;
 		boolean marginFactorUpdated = false;
+		boolean forceConfigurationUpdate = false;
 
 		boolean show = gridSettings.isEnabled(appMode);
 		if (show) {
 			if (gridConfig == null || !mapRenderer.hasSymbolsProvider(marksProvider)) {
+				forceConfigurationUpdate = gridConfig != null;
 				gridConfig = new GridConfiguration();
+				defaultGranularity = gridConfig.getSecondaryGranularity();
 				initVariables(appMode);
 				updateAppearance = true;
 			} else {
+				CoordinateGridFormat previousGridFormat = cachedGridFormat;
 				updateAppearance = updateVariables(appMode);
+				forceConfigurationUpdate = !Objects.equals(previousGridFormat, cachedGridFormat);
 				zoomLevelsUpdated = updateZoomLevels(appMode);
 				marginFactorUpdated = updateLabelsMarginFactor();
 			}
@@ -159,7 +169,7 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 		boolean updated = updateAppearance || zoomLevelsUpdated || marginFactorUpdated;
 		if (gridConfig != null && (cachedGridEnabled != show || updated)) {
 			cachedGridEnabled = show;
-			updateGridVisibility(mapRenderer, cachedGridEnabled);
+			updateGridVisibility(mapRenderer, cachedGridEnabled, forceConfigurationUpdate);
 		}
 	}
 
@@ -176,8 +186,8 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 
 	private boolean updateVariables(@NonNull ApplicationMode appMode) {
 		boolean updated = false;
-		GridFormat newGridFormat = gridSettings.getGridFormat(appMode);
-		if (cachedGridFormat != newGridFormat) {
+		CoordinateGridFormat newGridFormat = gridSettings.getGridFormat(appMode);
+		if (!Objects.equals(cachedGridFormat, newGridFormat)) {
 			cachedGridFormat = newGridFormat;
 			updated = true;
 		}
@@ -211,7 +221,6 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 
 	private void updateGridAppearance() {
 		Format format = cachedGridFormat.getFormat();
-		Projection projection = cachedGridFormat.getProjection();
 		ZoomLevel minZoom = ZoomLevel.swigToEnum(cachedZoomLimits.min());
 		ZoomLevel maxZoom = ZoomLevel.swigToEnum(cachedZoomLimits.max());
 
@@ -222,12 +231,13 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 
 		gridConfig.setPrimaryProjection(Projection.WGS84);
 		gridConfig.setPrimaryFormat(format);
+		cachedGridFormat.applyProjectionConfiguration(gridConfig);
+		Float granularity = cachedGridFormat.getGranularity();
+		gridConfig.setSecondaryGranularity(granularity != null ? granularity : defaultGranularity);
 		gridConfig.setPrimaryColor(color);
 		gridConfig.setPrimaryMinZoomLevel(minZoom);
 		gridConfig.setPrimaryMaxZoomLevel(maxZoom);
 
-		gridConfig.setSecondaryProjection(projection);
-		gridConfig.setSecondaryFormat(format);
 		gridConfig.setSecondaryColor(color);
 		gridConfig.setSecondaryMinZoomLevel(minZoom);
 		gridConfig.setSecondaryMaxZoomLevel(maxZoom);
@@ -244,10 +254,13 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 
 		boolean drawLabelsInCenter = cachedLabelsPosition == GridLabelsPosition.CENTER;
 		marksProvider.setSecondaryStyle(secondaryStyle, 2.0f * cachedTextScale, drawLabelsInCenter);
-		if (cachedGridFormat.needSuffixes()) {
+		if (cachedGridFormat.getNeedSuffixes()) {
 			marksProvider.setSecondary(true, "N", "S", "E", "W");
 		} else {
 			marksProvider.setSecondary(true, "", "", "", "");
+		}
+		if (!gridConfig.isValid()) {
+			LOG.warn("Invalid grid configuration for format: " + cachedGridFormat.getId());
 		}
 	}
 
@@ -317,7 +330,13 @@ public class CoordinatesGridLayer extends OsmandMapLayer {
 		return style;
 	}
 
-	private void updateGridVisibility(@NonNull MapRendererView mapRenderer, boolean visible) {
+	private void updateGridVisibility(@NonNull MapRendererView mapRenderer, boolean visible,
+	                                  boolean forceConfigurationUpdate) {
+		if (visible && forceConfigurationUpdate) {
+			gridConfig.setPrimaryGrid(false);
+			gridConfig.setSecondaryGrid(false);
+			mapRenderer.setGridConfiguration(gridConfig);
+		}
 		gridConfig.setPrimaryGrid(visible);
 		gridConfig.setSecondaryGrid(visible);
 		mapRenderer.setGridConfiguration(gridConfig);

@@ -2,6 +2,7 @@ package net.osmand.plus.search.dialogs;
 
 import static net.osmand.search.core.ObjectType.*;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -46,6 +47,7 @@ import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.widgets.callback.OnClickListenerContainer;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
@@ -117,11 +119,16 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 		if (index >= 0 && index < listAdapter.getCount()) {
 			QuickSearchListItem item = listAdapter.getItem(index);
 			if (item != null) {
-				if (item.getType() == QuickSearchListItemType.BUTTON) {
-					((QuickSearchButtonListItem) item).getOnClickListener().onClick(view);
+				if (item instanceof OnClickListenerContainer clickListenerContainer) {
+					View.OnClickListener listener = clickListenerContainer.getOnClickListener();
+					if (listener != null) {
+						listener.onClick(view);
+					}
 				} else if (item.getType() == QuickSearchListItemType.SEARCH_RESULT) {
 					SearchResult sr = item.getSearchResult();
-					if (sr.objectType == POI
+					if (item.isSpatialCategorySearchResult()) {
+						onSpatialCategorySearchResultClick(sr);
+					} else if (sr.objectType == POI
 							|| sr.objectType == LOCATION
 							|| sr.objectType == HOUSE
 							|| sr.objectType == FAVORITE
@@ -145,7 +152,13 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 		}
 	}
 
+	private void onSpatialCategorySearchResultClick(@NonNull SearchResult searchResult) {
+		dialogFragment.completeSpatialCategorySearchResult(searchResult);
+		dialogFragment.onSearchResultSelected();
+	}
+
 	@Override
+	@SuppressLint("ClickableViewAccessibility")
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		dialogFragment = (QuickSearchDialogFragment) getParentFragment();
@@ -169,6 +182,14 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 			}
 			return false;
 		});
+	}
+
+	@Override
+	public void onDestroyView() {
+		if (listAdapter != null) {
+			listAdapter.release();
+		}
+		super.onDestroyView();
 	}
 
 	@Override
@@ -245,18 +266,23 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 
 				SearchHistoryHelper historyHelper = app.getSearchHistoryHelper();
 				historyHelper.addNewItemToHistory(searchResult.location.getLatitude(),
-						searchResult.location.getLongitude(), pair.first, HistorySource.SEARCH);
+						searchResult.location.getLongitude(), pair.first, HistorySource.SEARCH, searchResult);
 
 				travelHelper.openTrackMenu(travelGpx, activity, amenity.getGpxFileName(null), amenity.getLocation(), true);
 				return; // TravelGpx
 			} else if (clickableWayHelper.isClickableWayAmenity(amenity)) {
+				SearchHistoryHelper historyHelper = app.getSearchHistoryHelper();
+				historyHelper.addNewItemToHistory(searchResult.location.getLatitude(),
+						searchResult.location.getLongitude(), pair.first, HistorySource.SEARCH, searchResult);
+
 				clickableWayHelper.openClickableWayAmenity(amenity, true);
 				return; // ClickableWay
 			}
 		}
+		Object historyObject = SearchHistoryHelper.createHistoryObject(pair.second, searchResult);
 		showOnMap(activity, dialogFragment,
 				searchResult.location.getLatitude(), searchResult.location.getLongitude(),
-				searchResult.preferredZoom, pair.first, pair.second);
+				searchResult.preferredZoom, pair.first, historyObject);
 	}
 
 	private void showGpxTrackResult(SearchResult searchResult) {
@@ -339,7 +365,7 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 		}
 	}
 
-	public void updateLocation(Float heading) {
+	public void updateLocation(@Nullable Float heading) {
 		if (listAdapter != null && !touching && !scrolling) {
 			dialogFragment.getAccessibilityAssistant().lockEvents();
 			listAdapter.notifyDataSetChanged();
@@ -348,10 +374,13 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 			if (selected != null) {
 				try {
 					int position = getListView().getPositionForView(selected);
-					if ((position != AdapterView.INVALID_POSITION) && (position >= getListView().getHeaderViewsCount())) {
-						dialogFragment.getNavigationInfo().updateTargetDirection(
-								listAdapter.getItem(position - getListView().getHeaderViewsCount()).getSearchResult().location,
-								heading.floatValue());
+					if ((position != AdapterView.INVALID_POSITION) && (position >= getListView().getHeaderViewsCount()) && heading != null) {
+						QuickSearchListItem item = listAdapter.getItem(position - getListView().getHeaderViewsCount());
+						if (item != null) {
+							dialogFragment.getNavigationInfo().updateTargetDirection(
+									item.getSearchResult().location,
+									heading);
+						}
 					}
 				} catch (Exception ignored) {
 				}
@@ -394,7 +423,7 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 							item.getSearchResult().objectType == firstItemObjectType) {
 						separateTypeLastIndex = i;
 					} else {
-						if (separateTypeLastIndex < listItems.size() - 1 && !(item instanceof QuickSearchButtonListItem)) {
+						if (separateTypeLastIndex < listItems.size() - 1 && !(item.getType() == QuickSearchListItemType.BUTTON)) {
 							items.add(i, new QuickSearchCardDividerListItem(app));
 						}
 						break;

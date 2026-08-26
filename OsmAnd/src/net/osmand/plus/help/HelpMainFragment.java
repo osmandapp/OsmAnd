@@ -1,6 +1,5 @@
 package net.osmand.plus.help;
 
-import static net.osmand.plus.feedback.FeedbackHelper.EXCEPTION_PATH;
 import static net.osmand.plus.help.HelpArticleUtils.createArticleItem;
 
 import android.content.Intent;
@@ -27,7 +26,6 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BaseFullScreenFragment;
-import net.osmand.plus.feedback.FeedbackHelper;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
@@ -46,11 +44,9 @@ import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.util.Algorithms;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class HelpMainFragment extends BaseFullScreenFragment implements OnItemClickListener, OnItemLongClickListener {
 
@@ -159,8 +155,7 @@ public class HelpMainFragment extends BaseFullScreenFragment implements OnItemCl
 
 		HelpActivity activity = (HelpActivity) requireActivity();
 
-		File exceptionLog = app.getAppPath(FeedbackHelper.EXCEPTION_PATH);
-		if (exceptionLog.exists()) {
+		if (app.getFeedbackHelper().hasCrashLogs()) {
 			items.add(new PopUpMenuItem.Builder(activity)
 					.setTitleId(R.string.send_crash_log)
 					.setIcon(getContentIcon(R.drawable.ic_action_bug_outlined_send))
@@ -315,8 +310,7 @@ public class HelpMainFragment extends BaseFullScreenFragment implements OnItemCl
 		items.add(createMenuItem(app.getString(R.string.open_issue_on_github), app.getString(R.string.open_issue_on_github_descr),
 				R.drawable.ic_action_social_github, getUrlItemClickListener(app.getString(R.string.issues_github))));
 
-		File exceptionLog = app.getAppPath(EXCEPTION_PATH);
-		if (exceptionLog.exists()) {
+		if (app.getFeedbackHelper().hasCrashLogs()) {
 			items.add(createMenuItem(app.getString(R.string.send_crash_log), app.getString(R.string.send_crash_log_descr),
 					R.drawable.ic_action_bug_outlined_send, (uiAdapter, view, item, isChecked) -> {
 						app.getFeedbackHelper().sendCrashLog();

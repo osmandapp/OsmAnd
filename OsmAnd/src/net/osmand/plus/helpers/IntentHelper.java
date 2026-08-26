@@ -93,6 +93,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -995,7 +996,7 @@ public class IntentHelper {
 
 	@NonNull
 	public static List<Uri> getIntentUris(@NonNull Intent intent) {
-		List<Uri> uris = new ArrayList<>();
+		LinkedHashSet<Uri> uris = new LinkedHashSet<>();
 		Uri data = intent.getData();
 		if (data != null) {
 			uris.add(data);
@@ -1009,6 +1010,6 @@ public class IntentHelper {
 				}
 			}
 		}
-		return uris;
+		return new ArrayList<>(uris);
 	}
 }

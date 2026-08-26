@@ -37,7 +37,11 @@ public class TripRecordingSlopeWidget extends BaseRecordingWidget {
 		super(mapActivity, widgetType, customId, widgetsPanel);
 		this.widgetState = widgetState;
 		savingTrackHelper = app.getSavingTrackHelper();
-		updateWidgetView();
+	}
+
+	@Override
+	protected void setupView(@NonNull View view) {
+		super.setupView(view);
 		updateInfo(null);
 	}
 

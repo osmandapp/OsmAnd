@@ -583,6 +583,46 @@ public class InAppPurchasesImpl extends InAppPurchases {
 		}
 	}
 
+	private static class InAppPurchaseOsmAndTestProAnnualFull extends InAppPurchaseAnnualSubscription {
+
+		private static final String SKU_OSMAND_PRO_ANNUAL_FULL = "osmand_test_pro_annual_free";
+
+		InAppPurchaseOsmAndTestProAnnualFull() {
+			super(OSMAND_PRO_ID, SKU_OSMAND_PRO_ANNUAL_FULL);
+		}
+
+		private InAppPurchaseOsmAndTestProAnnualFull(@NonNull String sku) {
+			super(OSMAND_PRO_ID, sku);
+		}
+
+		@NonNull
+		@Override
+		public int[] getScope() {
+			return OSMAND_PRO_SCOPE;
+		}
+
+		@Override
+		public boolean isLegacy() {
+			return false;
+		}
+
+		@Override
+		public String getDefaultPrice(Context ctx) {
+			return ctx.getString(R.string.osm_pro_annual_price);
+		}
+
+		@Override
+		public String getDefaultMonthlyPrice(Context ctx) {
+			return ctx.getString(R.string.osm_pro_annual_monthly_price);
+		}
+
+		@Nullable
+		@Override
+		protected InAppSubscription newInstance(@NonNull String sku) {
+			return sku.startsWith(getSkuNoVersion()) ? new InAppPurchaseOsmAndProAnnualFull(sku) : null;
+		}
+	}
+
 	private static class InAppPurchaseOsmAndProAnnualFree extends InAppPurchaseAnnualSubscription {
 
 		private static final String SKU_OSMAND_PRO_ANNUAL_FREE = "osmand_pro_annual_free";

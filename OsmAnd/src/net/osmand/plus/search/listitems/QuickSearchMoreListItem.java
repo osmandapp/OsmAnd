@@ -66,6 +66,10 @@ public class QuickSearchMoreListItem extends QuickSearchListItem {
 		return searchMoreAvailable;
 	}
 
+	public boolean hasCustomName() {
+		return name != null;
+	}
+
 	public void setSearchMoreAvailable(boolean searchMoreAvailable) {
 		this.searchMoreAvailable = searchMoreAvailable;
 	}

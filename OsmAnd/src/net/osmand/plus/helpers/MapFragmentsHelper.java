@@ -52,6 +52,7 @@ import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.track.fragments.GpsFilterFragment;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.views.mapwidgets.configure.appearance.WidgetsAppearanceFragment;
 import net.osmand.plus.utils.AndroidUtils;
 
 import org.apache.commons.logging.Log;
@@ -86,7 +87,8 @@ public class MapFragmentsHelper implements OnPreferenceStartFragmentCallback {
 	public BaseFullScreenFragment getVisibleBaseFullScreenFragment(int... ids) {
 		for (int id : ids) {
 			Fragment fragment = getSupportFragmentManager().findFragmentById(id);
-			if (fragment != null && !fragment.isRemoving() && fragment instanceof BaseFullScreenFragment
+			if (fragment != null && fragment.isAdded() && !fragment.isRemoving()
+					&& fragment instanceof BaseFullScreenFragment
 					&& ((BaseFullScreenFragment) fragment).getStatusBarColorId() != -1) {
 				return (BaseFullScreenFragment) fragment;
 			}
@@ -98,7 +100,8 @@ public class MapFragmentsHelper implements OnPreferenceStartFragmentCallback {
 	public BaseSettingsFragment getVisibleBaseSettingsFragment(int... ids) {
 		for (int id : ids) {
 			Fragment fragment = getSupportFragmentManager().findFragmentById(id);
-			if (fragment != null && !fragment.isRemoving() && fragment instanceof BaseSettingsFragment
+			if (fragment != null && fragment.isAdded() && !fragment.isRemoving()
+					&& fragment instanceof BaseSettingsFragment
 					&& ((BaseSettingsFragment) fragment).getStatusBarColorId() != -1) {
 				return (BaseSettingsFragment) fragment;
 			}
@@ -221,6 +224,11 @@ public class MapFragmentsHelper implements OnPreferenceStartFragmentCallback {
 	@Nullable
 	public ConfigureMapOptionFragment getConfigureMapOptionFragment() {
 		return getFragment(ConfigureMapOptionFragment.TAG);
+	}
+
+	@Nullable
+	public WidgetsAppearanceFragment getWidgetsAppearanceFragment() {
+		return getFragment(WidgetsAppearanceFragment.Companion.getTAG());
 	}
 
 	@Nullable

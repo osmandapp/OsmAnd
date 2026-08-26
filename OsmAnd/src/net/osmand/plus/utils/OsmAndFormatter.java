@@ -90,7 +90,7 @@ public class OsmAndFormatter {
 	public static final float MILS_IN_DEGREE = 17.777778f;
 	private static final String[] CARDINAL_DIRECTIONS = {"N", "NE", "E", "SE", "S", "SW", "W", "NW"};
 
-	public static final int FORMAT_DEGREES_SHORT = 8;
+	public static final int FORMAT_DEGREES_SHORT = 9;
 	public static final int FORMAT_DEGREES = LocationConvert.FORMAT_DEGREES;
 	public static final int FORMAT_MINUTES = LocationConvert.FORMAT_MINUTES;
 	public static final int FORMAT_SECONDS = LocationConvert.FORMAT_SECONDS;
@@ -99,6 +99,7 @@ public class OsmAndFormatter {
 	public static final int MGRS_FORMAT = LocationConvert.MGRS_FORMAT;
 	public static final int SWISS_GRID_FORMAT = LocationConvert.SWISS_GRID_FORMAT;
 	public static final int SWISS_GRID_PLUS_FORMAT = LocationConvert.SWISS_GRID_PLUS_FORMAT;
+	public static final int MAIDENHEAD_FORMAT = LocationConvert.MAIDENHEAD_FORMAT;
 	private static final char DELIMITER_DEGREES = '°';
 	private static final char DELIMITER_MINUTES = '\'';
 	private static final char DELIMITER_SECONDS = '″';
@@ -141,7 +142,7 @@ public class OsmAndFormatter {
 		long minutes = (seconds / 60) % 60;
 		if (hours > 0) {
 			return numberFormat.format(hours) + " "
-					+ app.getString(R.string.osmand_parking_hour)
+					+ app.getString(R.string.int_hour)
 					+ (minutes > 0 ? " " + numberFormat.format(minutes) + " "
 					+ app.getString(R.string.shared_string_minute_lowercase) : "");
 		} else if (minutes > 0) {
@@ -979,11 +980,12 @@ public class OsmAndFormatter {
 			formatSymbols.setGroupingSeparator(' ');
 			DecimalFormat swissGridFormat = new DecimalFormat("###,###.##", formatSymbols);
 			result.append(swissGridFormat.format(swissGrid[0])).append(", ").append(swissGridFormat.format(swissGrid[1]));
+		} else if (outputFormat == MAIDENHEAD_FORMAT) {
+			result.append(MaidenheadPoint.toMaidenhead(lat, lon));
 		}
 		String formattedCoordinates = result.toString();
 		return forceLTR ? TextDirectionUtil.markAsLTR(formattedCoordinates) : formattedCoordinates;
 	}
-
 
 	private static String formatCoordinate(double coordinate, int outputType) {
 

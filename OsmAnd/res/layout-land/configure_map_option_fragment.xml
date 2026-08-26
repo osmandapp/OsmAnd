@@ -24,48 +24,51 @@
 				android:id="@+id/appbar"
 				android:layout_width="match_parent"
 				android:layout_height="@dimen/toolbar_height"
-				android:background="?attr/list_background_color">
+				android:background="?attr/list_background_color"
+				app:elevation="4dp">
 
 				<androidx.appcompat.widget.Toolbar
 					android:id="@+id/toolbar"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:minHeight="@dimen/toolbar_height">
+					android:minHeight="@dimen/toolbar_height"
+					app:titleMarginEnd="0dp"
+					app:titleMarginStart="0dp">
 
 					<LinearLayout
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
+						android:minHeight="@dimen/toolbar_height"
 						android:orientation="horizontal">
 
 						<ImageButton
 							android:id="@+id/back_button"
-							style="@style/Widget.AppCompat.ActionButton"
+							style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
 							android:layout_width="@dimen/toolbar_height"
 							android:layout_height="@dimen/toolbar_height"
-							android:layout_gravity="center_vertical"
+							android:layout_gravity="center"
 							android:contentDescription="@string/shared_string_back"
-							tools:srcCompat="@drawable/ic_arrow_back"
+							tools:srcCompat="@drawable/ic_action_close"
 							tools:tint="?attr/default_icon_color" />
 
-						<TextView
+						<net.osmand.plus.widgets.TextViewEx
 							android:id="@+id/title"
 							android:layout_width="0dp"
 							android:layout_height="wrap_content"
 							android:layout_gravity="center_vertical"
+							android:layout_marginHorizontal="@dimen/content_padding"
 							android:layout_weight="1"
-							android:letterSpacing="@dimen/text_button_letter_spacing"
 							android:textColor="?android:textColorPrimary"
-							android:textSize="@dimen/default_header_text_size"
-							app:lineHeight="@dimen/default_title_line_height"
+							android:textSize="@dimen/dialog_header_text_size"
 							app:typefaceWeight="medium"
 							tools:text="@string/shared_string_toolbar" />
 
 						<ImageButton
 							android:id="@+id/reset_button"
-							style="@style/Widget.AppCompat.ActionButton"
+							style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
 							android:layout_width="@dimen/toolbar_height"
 							android:layout_height="@dimen/toolbar_height"
-							android:layout_gravity="center_vertical"
+							android:layout_gravity="center"
 							android:contentDescription="@string/reset_to_default"
 							tools:srcCompat="@drawable/ic_action_reset"
 							tools:tint="?attr/default_icon_color" />

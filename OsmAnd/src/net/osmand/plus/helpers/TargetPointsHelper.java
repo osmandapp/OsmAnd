@@ -504,9 +504,7 @@ public class TargetPointsHelper {
 		if (routingHelper.getAppMode().getRouteService() != RouteService.OSMAND) {
 			return false;
 		}
-		if (settings.ROUTING_TYPE.get().isHHRouting() &&
-				(ApplicationMode.CAR.isDerivedRoutingFrom(routingHelper.getAppMode())
-						|| ApplicationMode.BICYCLE.isDerivedRoutingFrom(routingHelper.getAppMode()))) {
+		if (settings.ROUTE_CALCULATION_METHOD.get().isFastRoutingPossible(routingHelper.getAppMode())) {
 			return false;
 		}
 		Location current = routingHelper.getLastProjection();

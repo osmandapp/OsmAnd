@@ -566,7 +566,7 @@
     <string name="poi_healthcare_yes">Medicinsk facilitet</string>
     <string name="poi_palaeontological_site">Palæontologisk område</string>
     <string name="poi_motorway_junction">Motorvejskryds</string>
-    <string name="poi_pier">Mole</string>
+    <string name="poi_pier">Både-/badebro</string>
     <string name="poi_leisure_track">Løbsbane</string>
     <string name="poi_ridge">Højderyg</string>
     <string name="poi_glacier">Gletscher</string>
@@ -3165,11 +3165,11 @@
     <string name="poi_gorge">Kløft</string>
     <string name="poi_couloir">Couloir</string>
     <string name="poi_mountain_area">Bjergområde</string>
-    <string name="poi_surface_clay">Ler</string>
+    <string name="poi_surface_clay">Overflade: Ler</string>
     <string name="poi_surface_tartan">Tartan</string>
-    <string name="poi_surface_artificial_turf">Kunstgræs</string>
-    <string name="poi_surface_decoturf">DecoTurf</string>
-    <string name="poi_surface_metal_grid">Metalgitter</string>
+    <string name="poi_surface_artificial_turf">Overflade: Kunstgræs</string>
+    <string name="poi_surface_decoturf">Overflade: DecoTurf</string>
+    <string name="poi_surface_metal_grid">Overflade: Metalgitter</string>
     <string name="poi_location_underground">Placering: under jorden</string>
     <string name="poi_location_underwater">Placering: under vandet</string>
     <string name="poi_location_overground">Placering: over jorden</string>
@@ -4094,7 +4094,7 @@
     <string name="poi_climbing_area">Klatreområde</string>
     <string name="poi_climbing_route">Klatrerute</string>
     <string name="poi_climbing_route_bottom">Klatrerute bund</string>
-    <string name="poi_cafe_yes">Ja</string>
+    <string name="poi_cafe_yes">Cafe: Ja</string>
     <string name="poi_roundtrip_yes">Rundtur: ja</string>
     <string name="poi_recycling_glass_bottles_colour">Farvede glasflasker</string>
     <string name="poi_roundtrip_no">Rundtur: nej</string>
@@ -4309,4 +4309,11 @@
     <string name="poi_trolley_bay">Bås til indkøbsvogne</string>
     <string name="poi_water_lake">Sø</string>
     <string name="poi_water_type_filter">Vandtype</string>
+    <string name="poi_surface_laterite">Overflade: Laterit</string>
+    <string name="poi_surface_chipseal">Overflade: Chipseal</string>
+    <string name="poi_sled_yes">Slæde: Ja</string>
+    <string name="poi_mtb_filter">Velegnet til MTB</string>
+    <string name="poi_ski_filter">Velegnet til ski</string>
+    <string name="poi_horse_filter">Velegnet til ridning</string>
+    <string name="poi_winter_hiking_filter">Velegnet til vintervandring</string>
 </resources>

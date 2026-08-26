@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -217,11 +218,6 @@ public abstract class PointEditorFragment extends EditorFragment {
 		});
 		createGroupSelector();
 
-		view.findViewById(R.id.editor_scroll_view).setOnTouchListener((v, event) -> {
-			descriptionEdit.getParent().requestDisallowInterceptTouchEvent(false);
-			return false;
-		});
-
 		descriptionEdit.setOnTouchListener((v, event) -> {
 			descriptionEdit.getParent().requestDisallowInterceptTouchEvent(true);
 			return false;
@@ -251,6 +247,13 @@ public abstract class PointEditorFragment extends EditorFragment {
 		int activeColor = ColorUtilities.getActiveColorId(nightMode);
 		Drawable icon = getIcon(iconId, activeColor);
 		addDelDescription.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
+	}
+
+	@Override
+	protected void onScrollViewTouched(@NonNull View scrollView, @NonNull MotionEvent event) {
+		if (descriptionEdit != null) {
+			descriptionEdit.getParent().requestDisallowInterceptTouchEvent(false);
+		}
 	}
 
 	@Override

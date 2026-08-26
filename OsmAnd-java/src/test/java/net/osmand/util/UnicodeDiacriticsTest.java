@@ -1,11 +1,9 @@
 package net.osmand.util;
 
-import net.osmand.CollatorStringMatcher;
+import java.util.Locale;
 
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.Locale;
 
 public class UnicodeDiacriticsTest {
 
@@ -20,7 +18,7 @@ public class UnicodeDiacriticsTest {
 	@Test
 	public void testAlignCharsGermanStreet() {
 		Assert.assertEquals("auhofstrasse",
-				CollatorStringMatcher.alignChars("Auhofstraße").toLowerCase(Locale.ROOT));
+				SearchAlgorithms.alignChars("Auhofstraße").toLowerCase(Locale.ROOT));
 	}
 
 	@Test

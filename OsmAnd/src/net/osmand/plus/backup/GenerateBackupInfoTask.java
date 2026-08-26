@@ -73,7 +73,8 @@ public class GenerateBackupInfoTask extends AsyncTask<Void, Void, BackupInfo> {
 				}
 				operationLog.log("=== deletedRemoteFiles ===");
 				*/
-		List<RemoteFile> remoteFiles = new ArrayList<>(uniqueRemoteFiles.values());
+		List<RemoteFile> remoteFiles = new ArrayList<>(uniqueRemoteFiles.size() + deletedRemoteFiles.size());
+		remoteFiles.addAll(uniqueRemoteFiles.values());
 		remoteFiles.addAll(deletedRemoteFiles.values());
 		for (RemoteFile remoteFile : remoteFiles) {
 			ExportType exportType = ExportType.findBy(remoteFile);
@@ -118,7 +119,8 @@ public class GenerateBackupInfoTask extends AsyncTask<Void, Void, BackupInfo> {
 			if (exportType == null || !exportType.isAvailable()) {
 				continue;
 			}
-			boolean hasRemoteFile = uniqueRemoteFiles.containsKey(localFile.getTypeFileName());
+			boolean hasRemoteFile = uniqueRemoteFiles.containsKey(localFile.getTypeFileName())
+					|| deletedRemoteFiles.containsKey(localFile.getTypeFileName());
 			boolean toDelete = info.localFilesToDelete.contains(localFile);
 			if (!hasRemoteFile && !toDelete) {
 				boolean shouldSkip = shouldSkip(localFile);
@@ -127,6 +129,7 @@ public class GenerateBackupInfoTask extends AsyncTask<Void, Void, BackupInfo> {
 				}
 			}
 		}
+		FavoritesBackupMerger.prepareMergeUploads(app, backupHelper, info);
 		info.createItemCollections(app);
 
 		operationLog.log("=== filesToUpload ===");

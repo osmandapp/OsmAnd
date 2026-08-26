@@ -1,12 +1,9 @@
 package net.osmand.shared.gpx
 
-import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import net.osmand.shared.api.SQLiteAPI.*
 import net.osmand.shared.data.StringIntPair
 import net.osmand.shared.extensions.currentTimeMillis
@@ -44,6 +41,47 @@ class GpxDatabase {
 			"SELECT %s, count (*) as $TMP_NAME_COLUMN_COUNT FROM $GPX_TABLE_NAME%s group by %s ORDER BY %s %s"
 
 		val BATCH_SIZE = 100
+
+		internal fun resolveItemFile(
+			appDir: KFile,
+			gpxDir: KFile,
+			fileName: String,
+			storedFileDir: String,
+			directory: Boolean
+		): KFile {
+			if (fileName == gpxDir.name()) {
+				return gpxDir
+			}
+			val fileDir = getRelativeFileDir(appDir, gpxDir, storedFileDir)
+			val storedDir = if (fileDir.isEmpty()) gpxDir else KFile(gpxDir, fileDir)
+			// File rows store their parent directory, while nested directory rows store
+			// the directory's own relative path in FILE_DIR.
+			return if (directory && storedDir != gpxDir && storedDir.name() == fileName) {
+				storedDir
+			} else {
+				KFile(storedDir, fileName)
+			}
+		}
+
+		private fun getRelativeFileDir(appDir: KFile, gpxDir: KFile, storedFileDir: String): String {
+			val appPath = appDir.path().trimEnd('/')
+			val gpxPath = gpxDir.path().trimEnd('/')
+			return when {
+				storedFileDir == gpxPath -> ""
+				storedFileDir.startsWith("$gpxPath/") -> storedFileDir.removePrefix("$gpxPath/")
+				storedFileDir == appPath -> ""
+				storedFileDir.startsWith("$appPath/") -> {
+					val relativeToApp = storedFileDir.removePrefix("$appPath/")
+					when {
+						relativeToApp == gpxDir.name() -> ""
+						relativeToApp.startsWith("${gpxDir.name()}/") ->
+							relativeToApp.removePrefix("${gpxDir.name()}/")
+						else -> relativeToApp
+					}
+				}
+				else -> storedFileDir
+			}
+		}
 	}
 
 	fun openConnection(readonly: Boolean): SQLiteConnection? {
@@ -189,27 +227,21 @@ class GpxDatabase {
 	}
 
 	private fun readGpxDataItem(query: SQLiteCursor): GpxDataItem {
-		val file = readItemFile(query)
-		val item = GpxDataItem(file)
-		val analysis = GpxTrackAnalysis()
+		val file = readItemFile(query, directory = false)
+		val item = GpxDataItem.fromDatabase(file)
+		val analysis = GpxTrackAnalysis().apply { collectPointData = false }
 		processItemParameters(item, query, entries, analysis)
 		item.setAnalysis(analysis)
 		return item
 	}
 
-	private fun readItemFile(query: SQLiteCursor): KFile {
-		var fileDir: String = query.getString(query.getColumnIndex(FILE_DIR.columnName))
+	private fun readItemFile(query: SQLiteCursor, directory: Boolean): KFile {
+		val fileDir: String = query.getString(query.getColumnIndex(FILE_DIR.columnName))
 		val fileName = query.getString(query.getColumnIndex(FILE_NAME.columnName))
 
 		val appDir = PlatformUtil.getOsmAndContext().getAppDir()
 		val gpxDir = PlatformUtil.getOsmAndContext().getGpxDir()
-		if (fileName == gpxDir.name()) {
-			return gpxDir
-		}
-		fileDir = fileDir.replace(gpxDir.toString(), "")
-		fileDir = fileDir.replace(appDir.toString(), "")
-		val dir = if (fileDir.isEmpty()) gpxDir else KFile(gpxDir, fileDir)
-		return KFile(dir, fileName)
+		return resolveItemFile(appDir, gpxDir, fileName, fileDir, directory)
 	}
 
 	private fun processItemParameters(
@@ -243,8 +275,8 @@ class GpxDatabase {
 	}
 
 	private fun readGpxDirItem(query: SQLiteCursor): GpxDirItem {
-		val file = readItemFile(query)
-		val item = GpxDirItem(file)
+		val file = readItemFile(query, directory = true)
+		val item = GpxDirItem.fromDatabase(file)
 		processItemParameters(item, query, GpxParameter.getGpxDirParameters(), null)
 		return item
 	}
@@ -370,77 +402,39 @@ class GpxDatabase {
 		return items.toList()
 	}
 
+	fun getRecentlyModifiedItems(limit: Int): List<GpxDataItem> {
+		if (limit <= 0) return emptyList()
+
+		val query = """
+        ${GpxDbUtils.getSelectGpxQuery()}
+        ORDER BY ${FILE_LAST_MODIFIED_TIME.columnName} DESC
+        LIMIT ?
+    	""".trimIndent()
+
+		val db = openConnection(true) ?: return emptyList()
+		try {
+			val cursor = db.rawQuery(query, arrayOf(limit.toString())) ?: return emptyList()
+			try {
+				val items = mutableListOf<GpxDataItem>()
+				while (cursor.moveToNext()) {
+					items.add(readGpxDataItem(cursor))
+				}
+				return items
+			} finally {
+				cursor.close()
+			}
+		} finally {
+			db.close()
+		}
+	}
+
 	fun getGpxDataItemsBlocking(): List<GpxDataItem> = runBlocking { getGpxDataItems() }
 
-	suspend fun getGpxDataItems(): List<GpxDataItem> = coroutineScope {
-		val items = mutableListOf<GpxDataItem>()
-		val deferredResults = mutableListOf<Deferred<List<GpxDataItem>>>()
-		var offset = 0
-		val itemsCount = getGpxDirItemsCount()
-		while (offset < itemsCount) {
-			val currentOffset = offset
-			val deferredBatch = async(Dispatchers.IO) {
-				var db: SQLiteConnection? = null
-				try {
-					db = openConnection(true)
-					if (db != null) {
-						fetchBatchData(db, currentOffset, BATCH_SIZE)
-					} else {
-						emptyList()
-					}
-				} finally {
-					db?.close()
-				}
-			}
-			deferredResults.add(deferredBatch)
-			offset += BATCH_SIZE
-		}
-
-		deferredResults.awaitAll().forEach { batchItems ->
-			items.addAll(batchItems)
-		}
-		return@coroutineScope items.toList()
-	}
-
-	private fun getGpxDirItemsCount(): Int {
-		var res = 0
-		var db: SQLiteConnection? = null
-		try {
-			db = openConnection(true)
-			db?.let {
-				var query: SQLiteCursor? = null
-				try {
-					query = db.rawQuery("SELECT COUNT(*) FROM $GPX_TABLE_NAME", null)
-					if (query != null && query.moveToFirst()) {
-						res = query.getInt(0)
-					}
-				} finally {
-					query?.close()
-				}
-			}
-		} finally {
-			db?.close()
-		}
-		return res
-	}
-
-	private fun fetchBatchData(db: SQLiteConnection, offset: Int, batchSize: Int): List<GpxDataItem> {
+	suspend fun getGpxDataItems(): List<GpxDataItem> = withContext(Dispatchers.IO) {
 		val time = currentTimeMillis()
-		val batchItems = mutableListOf<GpxDataItem>()
-		var query: SQLiteCursor? = null
-		try {
-			val paginatedQuery = "${GpxDbUtils.getSelectGpxQuery()} ORDER BY ${FILE_NAME.columnName} LIMIT $batchSize OFFSET $offset"
-			query = db.rawQuery(paginatedQuery, null)
-			if (query != null && query.moveToFirst()) {
-				do {
-					batchItems.add(readGpxDataItem(query))
-				} while (query.moveToNext())
-			}
-		} finally {
-			query?.close()
-		}
-		log.info("loadGpxItems fetchBatchData offset=$offset batchItems=${batchItems.size} in ${currentTimeMillis() - time} ms")
-		return batchItems
+		val items = getGpxDataItemsSync()
+		log.info("Loaded GPX database metadata count=${items.size} in ${currentTimeMillis() - time} ms")
+		items
 	}
 
 	fun getGpxDirItems(): List<GpxDirItem> {

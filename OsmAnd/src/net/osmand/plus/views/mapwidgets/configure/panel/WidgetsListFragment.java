@@ -73,6 +73,16 @@ public class WidgetsListFragment extends BaseNestedFragment implements Confirmat
 		this.selectedPanel = panel;
 	}
 
+	@NonNull
+	@Override
+	public ApplicationMode getAppMode() {
+		Fragment fragment = getParentFragment();
+		if (fragment instanceof ConfigureWidgetsFragment configureFragment) {
+			return configureFragment.getSelectedAppMode();
+		}
+		return super.getAppMode();
+	}
+
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -118,9 +128,11 @@ public class WidgetsListFragment extends BaseNestedFragment implements Confirmat
 		}
 
 		if (isEditMode()) {
-			List<Object> savedList = controller.getReorderList();
+			List<Object> savedList = controller.getReorderList(selectedPanel);
 			if (!Algorithms.isEmpty(savedList)) {
 				updateAdapter(new ArrayList<>(savedList), false);
+			} else {
+				updateWidgetItems(originalWidgetsData, false);
 			}
 		} else {
 			updateWidgetItems(originalWidgetsData, false);
@@ -197,9 +209,6 @@ public class WidgetsListFragment extends BaseNestedFragment implements Confirmat
 			enabledWidgetsIds.add(key);
 		}
 
-		applyWidgetsPanel(newWidgetToCreate);
-		applyWidgetsVisibility(enabledWidgetsIds);
-
 		List<List<String>> orderList = new ArrayList<>();
 		for (List<MapWidgetInfo> page : widgetsData) {
 			List<String> orderIds = new ArrayList<>();
@@ -209,11 +218,13 @@ public class WidgetsListFragment extends BaseNestedFragment implements Confirmat
 			orderList.add(orderIds);
 		}
 
+		applyWidgetsPanel(newWidgetToCreate);
+		applyWidgetsVisibility(enabledWidgetsIds);
 		applyWidgetsOrder(orderList);
 
 		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null) {
-			mapInfoLayer.recreateControls();
+			mapInfoLayer.recreateAllControls(requireMapActivity());
 		}
 	}
 
@@ -254,7 +265,7 @@ public class WidgetsListFragment extends BaseNestedFragment implements Confirmat
 		Fragment parent = getParentFragment();
 		if (parent instanceof ConfigureWidgetsFragment configureWidgetsFragment) {
 			if (isEditMode() && selectedPanel == configureWidgetsFragment.getSelectedPanel()) {
-				controller.setReorderList(adapter.getItems());
+				controller.setReorderList(selectedPanel, adapter.getItems());
 			}
 		}
 	}
@@ -377,6 +388,9 @@ public class WidgetsListFragment extends BaseNestedFragment implements Confirmat
 	}
 
 	public void updateEditMode() {
+		if (isEditMode()) {
+			originalWidgetsData = getPagedWidgets();
+		}
 		List<Object> newItems = getUpdatedItems(originalWidgetsData);
 		updateAdapter(newItems, true);
 	}
@@ -384,8 +398,9 @@ public class WidgetsListFragment extends BaseNestedFragment implements Confirmat
 	@Override
 	public void onWidgetSelectedToAdd(@NonNull String widgetId, @NonNull WidgetsPanel widgetsPanel, boolean recreateControls) {
 		MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
-		if (widgetInfo != null) {
+		if (widgetInfo != null && widgetsPanel == selectedPanel) {
 			adapter.addWidget(widgetInfo);
+			updateReorderList();
 		}
 	}
 

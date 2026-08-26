@@ -183,6 +183,7 @@ public class BinaryMapIndexReaderStats {
 		public String requestWord = "";
 		Map<BinaryMapIndexReaderApiName, StatByAPI> byApis = new HashMap<>();
 		Map<String, WordSearchStat> wordStats = new HashMap<String, WordSearchStat>();
+		public boolean isBatch;
 
 		public Map<String, WordSearchStat> getWordStats() {
 			return wordStats;

@@ -255,7 +255,7 @@ public abstract class GeometryWay<T extends CommonGeometryWayContext, D extends 
 					double prevLon = locationProvider.getLongitude(previous);
 					double lat = locationProvider.getLatitude(i);
 					double lon = locationProvider.getLongitude(i);
-					dist = MapUtils.getDistance(prevLat, prevLon, lat, lon);
+					dist = getSegmentDistance(prevLat, prevLon, lat, lon);
 				}
 				if (!previousVisible && !ignorePrevious) {
 					if (previous != -1 && !isPreviousPointFarAway(locationProvider, previous, i)) {
@@ -422,9 +422,7 @@ public abstract class GeometryWay<T extends CommonGeometryWayContext, D extends 
 			}
 		}
 		if (lastProjection != null && lastX31 != 0 && lastY31 != 0) {
-			passedDist += (float) MapUtils.measuredDist31(
-					MapUtils.get31TileNumberX(lastProjection.getLongitude()),
-					MapUtils.get31TileNumberY(lastProjection.getLatitude()), lastX31, lastY31);
+			passedDist += (float) getProjectionDistance(lastProjection, lastX31, lastY31);
 		}
 
 		if (passedLineId > 0) {
@@ -450,6 +448,16 @@ public abstract class GeometryWay<T extends CommonGeometryWayContext, D extends 
 
 	protected boolean shouldDrawArrows() {
 		return true;
+	}
+
+	protected double getSegmentDistance(double lat1, double lon1, double lat2, double lon2) {
+		return MapUtils.getDistance(lat1, lon1, lat2, lon2);
+	}
+
+	protected double getProjectionDistance(@NonNull Location projection, int x31, int y31) {
+		return MapUtils.measuredDist31(
+				MapUtils.get31TileNumberX(projection.getLongitude()),
+				MapUtils.get31TileNumberY(projection.getLatitude()), x31, y31);
 	}
 
 	public void drawRouteSegment(@NonNull RotatedTileBox tb, @Nullable Canvas canvas,

@@ -13,10 +13,10 @@ import androidx.car.app.model.OnClickListener;
 import androidx.car.app.model.ParkedOnlyOnClickListener;
 import androidx.car.app.model.Template;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ import java.util.List;
  */
 public class RequestPermissionScreen extends BaseAndroidAutoScreen {
 
-	private static final Log log = LogFactory.getLog(RequestPermissionScreen.class);
+	private static final Log log = PlatformUtil.getLog(RequestPermissionScreen.class);
 
 	/**
 	 * Callback called when the location permission is granted.

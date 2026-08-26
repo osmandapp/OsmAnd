@@ -74,7 +74,7 @@ public class LocalCategoriesFragment extends LocalBaseFragment implements Downlo
 	}
 
 	private void setupRecyclerView(@NonNull View view) {
-		adapter = new CategoriesAdapter(this, nightMode);
+		adapter = new CategoriesAdapter(requireDownloadActivity(), this, nightMode);
 
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
@@ -97,6 +97,9 @@ public class LocalCategoriesFragment extends LocalBaseFragment implements Downlo
 			}
 			if (memoryInfo.hasData()) {
 				items.add(0, memoryInfo);
+				if (DownloadActivity.shouldShowFreeVersionBanner(app)) {
+					items.add(1, CategoriesAdapter.FREE_VERSION_BANNER_ITEM);
+				}
 			}
 			adapter.setItems(items, memoryInfo);
 		}

@@ -288,6 +288,7 @@ public class ViewCreator {
 
 	private void setupTitle(@NonNull TextView tvTitle, @NonNull ContextMenuItem item) {
 		int colorId = ColorUtilities.getDefaultIconColorId(nightMode);
+		colorId = item.useNaturalIconColor() ? 0 : colorId;
 		Drawable drawable = item.getIcon() != INVALID_ID
 				? iconsCache.getIcon(item.getIcon(), colorId)
 				: null;

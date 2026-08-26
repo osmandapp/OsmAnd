@@ -924,7 +924,7 @@ public class GpxUiHelper {
 		SelectedGpxFile selectedGpxFile = getSelectedGpxFile(app, trackItem);
 		GpxTrackAnalysis analysis = null;
 		if (selectedGpxFile != null && selectedGpxFile.isLoaded()) {
-			analysis = selectedGpxFile.getTrackAnalysis(app);
+			analysis = selectedGpxFile.getTrackSummaryAnalysis(app);
 		} else if (trackItem.isShowCurrentTrack()) {
 			analysis = app.getSavingTrackHelper().getCurrentTrack().getTrackAnalysis(app);
 		} else if (trackItem.getFile() != null) {

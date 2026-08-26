@@ -414,19 +414,50 @@ public class WidgetsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 	}
 
 	public void addPage() {
+		removeEmptyStateItem();
 		int page = getLastPage();
 		page++;
 		insertToEndOfAddedWidgets(new PageItem(page));
+		ensureEditModeFooter();
 	}
 
 	public void addWidget(@NonNull MapWidgetInfo widgetInfo) {
+		removeEmptyStateItem();
 		int page = getLastPage();
-		if (isVerticalPanel) {
+		if (isVerticalPanel || page == 0) {
 			page++;
 			insertToEndOfAddedWidgets(new PageItem(page));
 		}
 
 		insertToEndOfAddedWidgets(new WidgetItem(widgetInfo));
+		ensureEditModeFooter();
+	}
+
+	private void removeEmptyStateItem() {
+		for (int i = items.size() - 1; i >= 0; i--) {
+			Object item = items.get(i);
+			if (item instanceof Integer integer && integer == VIEW_TYPE_EMPTY_STATE) {
+				items.remove(i);
+				notifyItemRemoved(i);
+				return;
+			}
+		}
+	}
+
+	private void ensureEditModeFooter() {
+		if (!isEditMode) {
+			return;
+		}
+		ensureListItem(VIEW_TYPE_ADD_PAGE);
+		ensureListItem(VIEW_TYPE_SPACE);
+	}
+
+	private void ensureListItem(int viewType) {
+		if (!items.contains(viewType)) {
+			items.add(viewType);
+			notifyItemInserted(items.size() - 1);
+			listener.refreshAll();
+		}
 	}
 
 	@SuppressLint("NotifyDataSetChanged")

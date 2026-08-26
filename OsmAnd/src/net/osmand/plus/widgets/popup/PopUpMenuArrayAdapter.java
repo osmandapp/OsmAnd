@@ -71,8 +71,28 @@ public class PopUpMenuArrayAdapter extends ArrayAdapter<PopUpMenuItem> {
 			Drawable icon = item.getIcon();
 			if (icon != null) {
 				ivIcon.setImageDrawable(icon);
+				ivIcon.setVisibility(View.VISIBLE);
 			} else {
 				ivIcon.setVisibility(View.GONE);
+			}
+			View trailingBadgeView = convertView.findViewById(R.id.trailing_badge);
+			if (trailingBadgeView != null) {
+				PopUpMenuItem.TrailingBadge trailingBadge = item.getTrailingBadge();
+				if (trailingBadge != null) {
+					ImageView badgeIcon = trailingBadgeView.findViewById(R.id.trailing_badge_icon);
+					TextView badgeTitle = trailingBadgeView.findViewById(R.id.trailing_badge_title);
+					Drawable badgeIconDrawable = trailingBadge.getIcon();
+					badgeIcon.setImageDrawable(badgeIconDrawable);
+					badgeIcon.setVisibility(badgeIconDrawable != null ? View.VISIBLE : View.GONE);
+					badgeTitle.setText(trailingBadge.getTitle());
+					Integer badgeTitleColor = trailingBadge.getTitleColor();
+					badgeTitle.setTextColor(badgeTitleColor != null
+							? badgeTitleColor
+							: ColorUtilities.getActiveColor(getContext(), nightMode));
+					trailingBadgeView.setVisibility(View.VISIBLE);
+				} else {
+					trailingBadgeView.setVisibility(View.GONE);
+				}
 			}
 			CompoundButton singleCompound = convertView.findViewById(R.id.compound_button);
 			CompoundButton radioCompound = convertView.findViewById(R.id.compound_button_radio);

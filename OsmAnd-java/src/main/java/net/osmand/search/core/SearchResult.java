@@ -12,10 +12,17 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
+import net.osmand.data.MapObject;
 import net.osmand.data.Street;
-import net.osmand.osm.*;
+import net.osmand.osm.AbstractPoiType;
+import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiFilter;
+import net.osmand.osm.PoiType;
+import net.osmand.search.core.spatial.SpatialSearchResult;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import net.osmand.util.SearchAlgorithms;
 
 
 public class SearchResult {
@@ -42,11 +49,13 @@ public class SearchResult {
 	Collection<String> otherWordsMatch = null;
 
 	public Object object;
+	public SpatialSearchResult spatialResult;
 	public ObjectType objectType;
 	public BinaryMapIndexReader file;
 
 	public double priority;
 	public double priorityDistance;
+	public int spatialSearchVisibleLevel;
 
 	public LatLon location;
 	public int preferredZoom = PREFERRED_DEFAULT_ZOOM;
@@ -94,6 +103,10 @@ public class SearchResult {
 
 	public boolean hasImpreciseCoordinates() {
 		return impreciseCoordinates;
+	}
+
+	public void setFirstUnknownWordMatches(boolean firstUnknownWordMatches) {
+		this.firstUnknownWordMatches = firstUnknownWordMatches;
 	}
 
 	public void setImpreciseCoordinates(boolean imprecise) {
@@ -247,7 +260,7 @@ public class SearchResult {
 
 	private boolean allWordsMatched(String name, SearchResult exactResult, CheckWordsMatchCount cnt) {
 		List<String> searchPhraseNames = getSearchPhraseNames();
-		name = CollatorStringMatcher.alignChars(name);
+		name = SearchAlgorithms.alignChars(name);
 		List<String> localResultNames;
 		if (!Algorithms.isEmpty(name) && name.indexOf('(') != -1) {
 			name = SearchPhrase.stripBraces(name);
@@ -309,11 +322,11 @@ public class SearchResult {
 		String fw = requiredSearchPhrase.getFirstUnknownSearchWord();
 		List<String> ow = requiredSearchPhrase.getUnknownSearchWords();
 		if (fw != null && fw.length() > 0) {
-			searchPhraseNames.add(CollatorStringMatcher.alignChars(fw));
+			searchPhraseNames.add(SearchAlgorithms.alignChars(fw));
 		}
 		if (ow != null) {
 			for(String o : ow) {
-				searchPhraseNames.add(CollatorStringMatcher.alignChars(o));
+				searchPhraseNames.add(SearchAlgorithms.alignChars(o));
 			}
 			
 		}
@@ -322,7 +335,7 @@ public class SearchResult {
 		if (parentSearchResult != null && requiredSearchPhrase == parentSearchResult.requiredSearchPhrase
 				&& parentSearchResult.getOtherWordsMatch() != null) {
 			for (String s : parentSearchResult.getOtherWordsMatch()) {
-				int i = searchPhraseNames.indexOf(CollatorStringMatcher.alignChars(s));
+				int i = searchPhraseNames.indexOf(SearchAlgorithms.alignChars(s));
 				if (i != -1) {
 					searchPhraseNames.remove(i);
 				}

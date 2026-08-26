@@ -58,7 +58,7 @@ public class MapsPlusPlanFragment extends SelectedPlanFragment {
 	public static List<PriceButton<?>> collectPriceButtons(OsmandApplication app,
 														   InAppPurchaseHelper purchaseHelper,
 														   boolean nightMode) {
-		List<InAppSubscription> subscriptions = getVisibleSubscriptions(app, purchaseHelper);
+		List<InAppSubscription> subscriptions = PurchasingUtils.getVisibleMapsSubscriptions(app, purchaseHelper);
 		List<PriceButton<?>> priceButtons = new ArrayList<>(
 				PurchasingUtils.collectSubscriptionButtons(app, purchaseHelper, subscriptions, nightMode));
 		OneTimePaymentButton oneTimePaymentButton = PurchasingUtils.getOneTimePaymentButton(app);
@@ -66,18 +66,6 @@ public class MapsPlusPlanFragment extends SelectedPlanFragment {
 			priceButtons.add(oneTimePaymentButton);
 		}
 		return priceButtons;
-	}
-
-	protected static List<InAppSubscription> getVisibleSubscriptions(OsmandApplication app, InAppPurchaseHelper purchaseHelper) {
-		InAppPurchases purchases = app.getInAppPurchaseHelper().getInAppPurchases();
-		List<InAppSubscription> subscriptions = new ArrayList<>();
-		List<InAppSubscription> visibleSubscriptions = purchaseHelper.getSubscriptions().getVisibleSubscriptions();
-		for (InAppSubscription subscription : visibleSubscriptions) {
-			if (purchases.isMaps(subscription)) {
-				subscriptions.add(subscription);
-			}
-		}
-		return subscriptions;
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity) {

@@ -239,6 +239,7 @@ public class BackupExporter extends Exporter {
 					errors.put(type + "/" + fileName, error);
 				} else {
 					markOldFileForDeletion(item, fileName);
+					FavoritesBackupMerger.onUploadSuccess(backupHelper.getApp(), item, fileName, uploadTime);
 				}
 				int p = dataProgress.addAndGet(APPROXIMATE_FILE_SIZE_BYTES / 1024);
 				if (listener != null) {

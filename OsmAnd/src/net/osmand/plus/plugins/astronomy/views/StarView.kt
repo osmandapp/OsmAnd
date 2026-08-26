@@ -18,6 +18,8 @@ import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.graphics.Rect
 import android.graphics.RectF
+import android.graphics.RadialGradient
+import android.graphics.Shader
 import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.GestureDetector
@@ -31,10 +33,12 @@ import androidx.core.graphics.withTranslation
 import io.github.cosinekitty.astronomy.Aberration
 import io.github.cosinekitty.astronomy.EquatorEpoch
 import io.github.cosinekitty.astronomy.Observer
+import io.github.cosinekitty.astronomy.LunarEclipseState
 import io.github.cosinekitty.astronomy.Refraction
 import io.github.cosinekitty.astronomy.Time
 import io.github.cosinekitty.astronomy.Topocentric
 import io.github.cosinekitty.astronomy.Vector
+import io.github.cosinekitty.astronomy.apparentAngularRadius
 import io.github.cosinekitty.astronomy.equator
 import io.github.cosinekitty.astronomy.horizon
 import io.github.cosinekitty.astronomy.rotationEclEqd
@@ -59,6 +63,16 @@ import kotlin.math.tan
 import androidx.core.graphics.withRotation
 import net.osmand.plus.utils.UiUtilities
 
+data class StarViewCameraState(
+	val azimuth: Double,
+	val altitude: Double,
+	val viewAngle: Double,
+	val is2DMode: Boolean,
+	val panX: Float,
+	val panY: Float,
+	val roll: Double
+)
+
 class StarView @JvmOverloads constructor(
 	context: Context,
 	attrs: AttributeSet? = null,
@@ -66,9 +80,13 @@ class StarView @JvmOverloads constructor(
 ) : View(context, attrs, defStyleAttr) {
 
 	companion object {
-		private const val MIN_VIEW_ANGLE = 10.0
+		private const val MIN_VIEW_ANGLE = 0.75
 		private const val MAX_VIEW_ANGLE = 150.0
 		private const val MAX_VIEW_ANGLE_2D = 220.0
+		const val SOLAR_ECLIPSE_VIEW_ANGLE = 1.5
+		const val LUNAR_ECLIPSE_VIEW_ANGLE = 3.0
+		private const val PHYSICAL_DISC_VIEW_ANGLE = 3.0
+		private const val SYMBOLIC_DISC_VIEW_ANGLE = 8.0
 	}
 
 	// --- Graphics ---
@@ -167,6 +185,47 @@ class StarView @JvmOverloads constructor(
 	private var arrowToDestinationBmp: Bitmap? = null
 	private var arrowLightBmp: Bitmap? = null
 	private val directionArrowPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { isFilterBitmap = true }
+	private val sunDiscPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+		color = 0xFFFFF4B0.toInt()
+		style = Paint.Style.FILL
+	}
+	private val sunGlowPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+		color = 0x55FFD54F
+		style = Paint.Style.FILL
+	}
+	private val moonDiscPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+		color = Color.BLACK
+		style = Paint.Style.FILL
+	}
+	private val moonLimbPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+		color = 0xFF59636D.toInt()
+		style = Paint.Style.STROKE
+		strokeWidth = 1.5f
+	}
+	private val lunarMoonPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+		color = 0xFFE8E5DC.toInt()
+		style = Paint.Style.FILL
+	}
+	private val lunarMoonLimbPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+		color = 0xFF8D9299.toInt()
+		style = Paint.Style.STROKE
+		strokeWidth = 1.5f
+	}
+	private val lunarPenumbraGuidePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+		color = 0xFF87919E.toInt()
+		style = Paint.Style.STROKE
+		strokeWidth = 1.5f
+		pathEffect = DashPathEffect(floatArrayOf(8f, 6f), 0f)
+	}
+	private val lunarUmbraGuidePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+		color = 0xFF9A4C50.toInt()
+		style = Paint.Style.STROKE
+		strokeWidth = 2f
+	}
+	private val lunarShadowPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+		style = Paint.Style.FILL
+	}
+	private val lunarMoonClipPath = Path()
 
 	// --- View State ---
 	private var azimuthCenter = 180.0
@@ -210,6 +269,22 @@ class StarView @JvmOverloads constructor(
 	var showSun = true
 	var showMoon = true
 	var showPlanets = true
+	var useUnrefractedSolarPositions = false
+		set(value) {
+			if (field != value) {
+				field = value
+				recalculatePositions(currentTime, updateTargets = false, force = true)
+				invalidate()
+			}
+		}
+	var useUnrefractedLunarPositions = false
+		set(value) {
+			if (field != value) {
+				field = value
+				recalculatePositions(currentTime, updateTargets = false, force = true)
+				invalidate()
+			}
+		}
 
 	// --- Interaction ---
 	private var lastTouchX = 0f
@@ -240,6 +315,10 @@ class StarView @JvmOverloads constructor(
 	// --- Astronomy Data ---
 	private var skyObjectsOrig: List<SkyObject>? = null
 	private val skyObjects = mutableListOf<SkyObject>()
+	private var sunObject: SkyObject? = null
+	private var moonObject: SkyObject? = null
+	private var lunarEclipseState: LunarEclipseState? = null
+	private var solarDiscsOverlap = false
 	private var constellations = listOf<Constellation>()
 	private val skyObjectMap = mutableMapOf<Int, SkyObject>()
 
@@ -329,6 +408,7 @@ class StarView @JvmOverloads constructor(
 	private var visualAnimator: ValueAnimator? = null
 
 	fun setObserverLocation(lat: Double, lon: Double, alt: Double) {
+		if (observer.latitude == lat && observer.longitude == lon && observer.height == alt) return
 		observer = Observer(lat, lon, alt)
 		recalculatePositions(currentTime, updateTargets = false, force = true)
 		invalidate()
@@ -344,10 +424,22 @@ class StarView @JvmOverloads constructor(
 		}
 	}
 
-	private fun animateTo(azimuth: Double, altitude: Double, targetViewAngle: Double? = null) {
+	private fun animateTo(
+		azimuth: Double,
+		altitude: Double,
+		targetViewAngle: Double? = null,
+		resetPan: Boolean = false,
+		targetPanX: Float? = null,
+		targetPanY: Float? = null
+	) {
 		val startAz = azimuthCenter
 		val startAlt = altitudeCenter
 		val startAngle = viewAngle
+		val finalAngle = targetViewAngle?.let { clampViewAngle(it) }
+		val startPanX = panX
+		val startPanY = panY
+		val finalPanX = targetPanX ?: if (resetPan) 0f else startPanX
+		val finalPanY = targetPanY ?: if (resetPan) 0f else startPanY
 		val targetAlt = max(-90.0, min(90.0, altitude))
 
 		visualAnimator?.cancel()
@@ -358,8 +450,12 @@ class StarView @JvmOverloads constructor(
 				val fraction = animator.animatedValue as Float
 				azimuthCenter = interpolateAngle(startAz, azimuth, fraction)
 				altitudeCenter = startAlt + (targetAlt - startAlt) * fraction
-				if (targetViewAngle != null) {
-					updateViewAngle(startAngle + (targetViewAngle - startAngle) * fraction)
+				if (finalAngle != null) {
+					setViewAngleDirect(startAngle + (finalAngle - startAngle) * fraction)
+				}
+				if (resetPan || targetPanX != null || targetPanY != null) {
+					panX = startPanX + (finalPanX - startPanX) * fraction
+					panY = startPanY + (finalPanY - startPanY) * fraction
 				}
 				invalidate()
 			}
@@ -373,8 +469,76 @@ class StarView @JvmOverloads constructor(
 
 	fun getViewAngle() = viewAngle
 
+	fun captureCameraState() = StarViewCameraState(
+		azimuth = azimuthCenter,
+		altitude = altitudeCenter,
+		viewAngle = viewAngle,
+		is2DMode = is2DMode,
+		panX = panX,
+		panY = panY,
+		roll = roll
+	)
+
+	fun restoreCameraState(state: StarViewCameraState) {
+		visualAnimator?.cancel()
+		is2DMode = state.is2DMode
+		azimuthCenter = state.azimuth
+		altitudeCenter = state.altitude
+		viewAngle = clampViewAngle(state.viewAngle)
+		panX = state.panX
+		panY = state.panY
+		roll = state.roll
+		onViewAngleChangeListener?.invoke(viewAngle)
+		invalidate()
+	}
+
+	fun showTimeAndFocusObject(
+		time: Time,
+		obj: SkyObject,
+		targetViewAngle: Double = SOLAR_ECLIPSE_VIEW_ANGLE,
+		targetX: Float = width / 2f,
+		targetY: Float = height / 2f
+	) {
+		visualAnimator?.cancel()
+		if (currentTime.ut != time.ut) setDateTime(time, animate = false)
+		calculatePosition(obj, time, updateTargets = false)
+		animateTo(
+			obj.azimuth,
+			obj.altitude,
+			targetViewAngle,
+			resetPan = true,
+			targetPanX = targetX - width / 2f,
+			targetPanY = targetY - height / 2f
+		)
+	}
+
+	fun showTimeAndCenterObject(
+		time: Time,
+		obj: SkyObject,
+		targetX: Float = width / 2f,
+		targetY: Float = height / 2f
+	) {
+		visualAnimator?.cancel()
+		if (currentTime.ut != time.ut) setDateTime(time, animate = false)
+		centerObject(obj, targetX, targetY)
+	}
+
+	fun centerObject(
+		obj: SkyObject,
+		targetX: Float = width / 2f,
+		targetY: Float = height / 2f
+	) {
+		visualAnimator?.cancel()
+		calculatePosition(obj, currentTime, updateTargets = false)
+		panX = targetX - width / 2f
+		panY = targetY - height / 2f
+		azimuthCenter = obj.azimuth
+		altitudeCenter = obj.altitude.coerceIn(-90.0, 90.0)
+		invalidate()
+	}
+
 	private fun updateViewAngle(newAngle: Double, focusX: Float = width / 2f, focusY: Float = height / 2f) {
-		val finalAngle = max(getMinViewAngle(), min(getMaxViewAngle(), newAngle))
+		val finalAngle = clampViewAngle(newAngle)
 		if (abs(this.viewAngle - finalAngle) > 0.001) {
 			if (width > 0 && height > 0) {
 				if (is2DMode) {
@@ -402,6 +566,17 @@ class StarView @JvmOverloads constructor(
 			this.viewAngle = finalAngle
 			onViewAngleChangeListener?.invoke(finalAngle)
 			invalidate()
+		}
+	}
+
+	private fun clampViewAngle(angle: Double): Double =
+		max(getMinViewAngle(), min(getMaxViewAngle(), angle))
+
+	private fun setViewAngleDirect(angle: Double) {
+		val finalAngle = clampViewAngle(angle)
+		if (abs(viewAngle - finalAngle) > 0.001) {
+			viewAngle = finalAngle
+			onViewAngleChangeListener?.invoke(finalAngle)
 		}
 	}
 
@@ -448,6 +623,8 @@ class StarView @JvmOverloads constructor(
 		skyObjects.addAll(objects)
 		// Sort by magnitude (ascending): brighter objects (lower mag) come first
 		skyObjects.sortBy { it.magnitude }
+		sunObject = objects.firstOrNull { it.type == SkyObject.Type.SUN }
+		moonObject = objects.firstOrNull { it.type == SkyObject.Type.MOON }
 		skyObjectMap.clear()
 		objects.forEach { skyObjectMap[it.hip] = it }
 
@@ -466,6 +643,12 @@ class StarView @JvmOverloads constructor(
 		pathCache.keys.removeAll(toRemove)
 		pinnedObjects.addAll(celestialPathObjects)
 
+		invalidate()
+	}
+
+	fun setLunarEclipseState(state: LunarEclipseState?) {
+		if (lunarEclipseState == state) return
+		lunarEclipseState = state
 		invalidate()
 	}
 
@@ -775,7 +958,15 @@ class StarView @JvmOverloads constructor(
 		val body = obj.body
 		if (obj.type.isSunSystem() && body != null) {
 			val equ = equator(body, time, observer, EquatorEpoch.OfDate, Aberration.Corrected)
-			hor = horizon(time, observer, equ.ra, equ.dec, Refraction.Normal)
+			val refraction = if (
+				useUnrefractedSolarPositions && obj.type.isSolarDisc() ||
+				useUnrefractedLunarPositions && obj.type == SkyObject.Type.MOON
+			) {
+				Refraction.None
+			} else {
+				Refraction.Normal
+			}
+			hor = horizon(time, observer, equ.ra, equ.dec, refraction)
 			obj.distAu = equ.dist
 		} else {
 			hor = horizon(time, observer, obj.ra, obj.dec, Refraction.Normal)
@@ -937,12 +1128,19 @@ class StarView @JvmOverloads constructor(
 		}
 
 		drawConstellationLabels(canvas)
+		solarDiscsOverlap = viewAngle <= PHYSICAL_DISC_VIEW_ANGLE && calculateSunMoonDiscsOverlap()
 
 		skyObjects.forEach { obj ->
-			if (isObjectVisibleInSettings(obj) || selectedObject == obj) {
-				drawSkyObject(canvas, obj)
-			}
+			if (!obj.type.isSolarDisc() && shouldDrawSkyObject(obj)) drawSkyObject(canvas, obj)
 		}
+		sunObject
+			?.takeIf { shouldDrawSkyObject(it) }
+			?.let { drawSkyObject(canvas, it) }
+		moonObject
+			?.takeIf { shouldDrawSkyObject(it) }
+			?.let { moon ->
+				if (!drawLunarEclipseMoon(canvas)) drawSkyObject(canvas, moon)
+			}
 
 		// Draw Highlights
 
@@ -1597,6 +1795,80 @@ class StarView @JvmOverloads constructor(
 		}
 	}
 
+	private fun drawLunarEclipseMoon(canvas: Canvas): Boolean {
+		val state = lunarEclipseState ?: return false
+		if (viewAngle > SYMBOLIC_DISC_VIEW_ANGLE) return false
+		if (!skyToScreen(state.moon.azimuth, state.moon.altitude, tempPoint)) return true
+		if (!skyToScreen(
+				state.earthShadow.azimuth,
+				state.earthShadow.altitude,
+				tempPoint2,
+				allowLimitedOffScreen = true
+			)
+		) return true
+
+		val moonX = tempPoint.x
+		val moonY = tempPoint.y
+		val shadowX = tempPoint2.x
+		val shadowY = tempPoint2.y
+		val physicalMoonRadius = angularRadiusToPixels(
+			state.moon.azimuth,
+			state.moon.altitude,
+			state.moon.angularRadius
+		).coerceAtLeast(1f)
+		val symbolicMoonRadius = moonObject?.let { moon ->
+			max(2f, 15f - moon.magnitude * 2f) * 0.5f
+		} ?: 8f
+		val symbolicWeight = ((viewAngle - PHYSICAL_DISC_VIEW_ANGLE) /
+			(SYMBOLIC_DISC_VIEW_ANGLE - PHYSICAL_DISC_VIEW_ANGLE)).coerceIn(0.0, 1.0)
+		val moonRadius = (physicalMoonRadius +
+			(symbolicMoonRadius - physicalMoonRadius) * symbolicWeight).toFloat()
+		val umbraRadius = angularRadiusToPixels(
+			state.earthShadow.azimuth,
+			state.earthShadow.altitude,
+			state.earthShadow.umbraAngularRadius
+		).coerceAtLeast(1f)
+		val penumbraRadius = angularRadiusToPixels(
+			state.earthShadow.azimuth,
+			state.earthShadow.altitude,
+			state.earthShadow.penumbraAngularRadius
+		).coerceAtLeast(umbraRadius + 1f)
+		val guideAlpha = (255.0 * ((SYMBOLIC_DISC_VIEW_ANGLE - viewAngle) /
+			(SYMBOLIC_DISC_VIEW_ANGLE - PHYSICAL_DISC_VIEW_ANGLE)).coerceIn(0.0, 1.0)).toInt()
+
+		lunarPenumbraGuidePaint.alpha = guideAlpha
+		lunarUmbraGuidePaint.alpha = guideAlpha
+		canvas.drawCircle(shadowX, shadowY, penumbraRadius, lunarPenumbraGuidePaint)
+		canvas.drawCircle(shadowX, shadowY, umbraRadius, lunarUmbraGuidePaint)
+		canvas.drawCircle(moonX, moonY, moonRadius, lunarMoonPaint)
+
+		lunarMoonClipPath.reset()
+		lunarMoonClipPath.addCircle(moonX, moonY, moonRadius, Path.Direction.CW)
+		val checkpoint = canvas.save()
+		canvas.clipPath(lunarMoonClipPath)
+		val umbraFraction = (umbraRadius / penumbraRadius).coerceIn(0.05f, 0.95f)
+		lunarShadowPaint.shader = RadialGradient(
+			shadowX,
+			shadowY,
+			penumbraRadius,
+			intArrayOf(
+				0xE06E252A.toInt(),
+				0xD06E252A.toInt(),
+				0x66564B50,
+				0x00564B50
+			),
+			floatArrayOf(0f, (umbraFraction * 0.96f), umbraFraction, 1f),
+			Shader.TileMode.CLAMP
+		)
+		lunarShadowPaint.alpha = guideAlpha
+		canvas.drawCircle(shadowX, shadowY, penumbraRadius, lunarShadowPaint)
+		lunarShadowPaint.shader = null
+		lunarShadowPaint.alpha = 255
+		canvas.restoreToCount(checkpoint)
+		canvas.drawCircle(moonX, moonY, moonRadius, lunarMoonLimbPaint)
+		return true
+	}
+
 	private fun drawSkyObject(canvas: Canvas, obj: SkyObject) {
 		if (!skyToScreen(obj.azimuth, obj.altitude, tempPoint)) return
 
@@ -1621,13 +1893,38 @@ class StarView @JvmOverloads constructor(
 		if (obj.type == SkyObject.Type.STAR && constrainedZoomFactor > 0.5) {
 			radius *= 0.7f
 		}
-		if (obj.type == SkyObject.Type.SUN || obj.type == SkyObject.Type.MOON) {
-			radius *= 0.5f
+		if (obj.type.isSolarDisc()) {
+			val symbolicRadius = radius * 0.5f
+			val angularRadius = obj.body?.let { body ->
+				obj.distAu.takeIf { it > 0.0 }?.let { apparentAngularRadius(body, it) }
+			}
+			if (angularRadius != null) {
+				val physicalRadius = angularRadiusToPixels(obj.azimuth, obj.altitude, angularRadius)
+				val symbolicWeight = ((viewAngle - PHYSICAL_DISC_VIEW_ANGLE) /
+					(SYMBOLIC_DISC_VIEW_ANGLE - PHYSICAL_DISC_VIEW_ANGLE)).coerceIn(0.0, 1.0)
+				radius = (physicalRadius + (symbolicRadius - physicalRadius) * symbolicWeight).toFloat()
+			} else {
+				radius = symbolicRadius
+			}
 		}
 
-		paint.style = Paint.Style.FILL
-		paint.color = color
-		canvas.drawCircle(tempPoint.x, tempPoint.y, radius, paint)
+		when {
+			obj.type == SkyObject.Type.SUN && viewAngle <= PHYSICAL_DISC_VIEW_ANGLE -> {
+				canvas.drawCircle(tempPoint.x, tempPoint.y, radius * 1.7f, sunGlowPaint)
+				canvas.drawCircle(tempPoint.x, tempPoint.y, radius * 1.3f, sunGlowPaint)
+				canvas.drawCircle(tempPoint.x, tempPoint.y, radius, sunDiscPaint)
+			}
+			obj.type == SkyObject.Type.MOON &&
+				viewAngle <= PHYSICAL_DISC_VIEW_ANGLE && solarDiscsOverlap -> {
+				canvas.drawCircle(tempPoint.x, tempPoint.y, radius, moonDiscPaint)
+				canvas.drawCircle(tempPoint.x, tempPoint.y, radius, moonLimbPaint)
+			}
+			else -> {
+				paint.style = Paint.Style.FILL
+				paint.color = color
+				canvas.drawCircle(tempPoint.x, tempPoint.y, radius, paint)
+			}
+		}
 
 		val objRect = RectF(
 			tempPoint.x - radius,
@@ -1638,6 +1935,9 @@ class StarView @JvmOverloads constructor(
 
 		// 2. Dynamic Label Visibility
 		var showLabel = true
+		if (obj.type.isSolarDisc() && viewAngle <= PHYSICAL_DISC_VIEW_ANGLE && solarDiscsOverlap) {
+			showLabel = false
+		}
 		if (obj.type == SkyObject.Type.STAR) {
 			// Don't show HIP names
 			if (obj.name.startsWith("HIP", ignoreCase = true)) {
@@ -1696,6 +1996,35 @@ class StarView @JvmOverloads constructor(
 		}
 	}
 
+	private fun shouldDrawSkyObject(obj: SkyObject): Boolean =
+		isObjectVisibleInSettings(obj) || selectedObject == obj
+
+	private fun SkyObject.Type.isSolarDisc(): Boolean =
+		this == SkyObject.Type.SUN || this == SkyObject.Type.MOON
+
+	private fun calculateSunMoonDiscsOverlap(): Boolean {
+		val sun = sunObject ?: return false
+		val moon = moonObject ?: return false
+		if (!shouldDrawSkyObject(sun) || !shouldDrawSkyObject(moon)) return false
+
+		val sunRadius = sun.body?.let { body ->
+			sun.distAu.takeIf { it > 0.0 }?.let { apparentAngularRadius(body, it) }
+		} ?: return false
+		val moonRadius = moon.body?.let { body ->
+			moon.distAu.takeIf { it > 0.0 }?.let { apparentAngularRadius(body, it) }
+		} ?: return false
+
+		val sunAltitude = Math.toRadians(sun.altitude)
+		val moonAltitude = Math.toRadians(moon.altitude)
+		val azimuthDelta = Math.toRadians(sun.azimuth - moon.azimuth)
+		val separationCos = (
+			sin(sunAltitude) * sin(moonAltitude) +
+				cos(sunAltitude) * cos(moonAltitude) * cos(azimuthDelta)
+		).coerceIn(-1.0, 1.0)
+		val separation = Math.toDegrees(acos(separationCos))
+		return separation < sunRadius + moonRadius
+	}
+
 	var isCameraMode: Boolean = false
 
 	var is2DMode: Boolean = false
@@ -1738,6 +2067,17 @@ class StarView @JvmOverloads constructor(
 		val maxTanHalf = sqrt(maxDistSq) * 1.0 / (2.0 * projScale)
 		val t2 = maxTanHalf * maxTanHalf
 		minCosCVisible = (1.0 - t2) / (1.0 + t2)
+	}
+
+	private fun angularRadiusToPixels(azimuth: Double, altitude: Double, angularRadiusDegrees: Double): Float {
+		if (angularRadiusDegrees <= 0.0) return 0f
+		val azRad = Math.toRadians(azimuth - azimuthCenter)
+		val altRad = Math.toRadians(altitude)
+		val cosC = projSinAltCenter * sin(altRad) +
+			projCosAltCenter * cos(altRad) * cos(azRad)
+		if (cosC <= -0.999999) return 0f
+		val localScale = (2.0 / (1.0 + cosC)) * projScale
+		return (localScale * 2.0 * tan(Math.toRadians(angularRadiusDegrees) / 2.0)).toFloat()
 	}
 
 	private fun skyToScreen(azimuth: Double, altitude: Double, outPoint: PointF,

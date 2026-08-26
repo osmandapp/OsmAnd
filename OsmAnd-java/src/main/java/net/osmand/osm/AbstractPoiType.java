@@ -2,6 +2,7 @@ package net.osmand.osm;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ public abstract class AbstractPoiType {
 	protected final MapPoiTypes registry;
 	private List<PoiType> poiAdditionals = null;
 	private List<PoiType> poiAdditionalsCategorized = null;
+	private Map<String, PoiType> poiAdditionalsByKeyName = null;
 	private boolean topVisible;
 	private String lang;
 	private AbstractPoiType baseLangType;
@@ -22,6 +24,7 @@ public abstract class AbstractPoiType {
 	private String enTranslation;
 	private String translation;
 	private final String iconName;
+	private boolean nonIndx;
 
 	public AbstractPoiType(String keyName, MapPoiTypes registry) {
 		this(keyName, registry, null);
@@ -117,11 +120,23 @@ public abstract class AbstractPoiType {
 		return registry.hasValidTranslation(this);
 	}
 
+	public void setNonIndx(boolean nonIndx) {
+		this.nonIndx = nonIndx;
+	}
+	
+	public boolean isNonIndx() {
+		return nonIndx;
+	}
+	
 	public void addPoiAdditional(PoiType tp) {
 		if (poiAdditionals == null) {
 			poiAdditionals = new ArrayList<>();
 		}
 		poiAdditionals.add(tp);
+		if (poiAdditionalsByKeyName == null) {
+			poiAdditionalsByKeyName = new HashMap<>();
+		}
+		poiAdditionalsByKeyName.put(tp.getKeyName(), tp);
 		if (tp.getPoiAdditionalCategory() != null) {
 			if (poiAdditionalsCategorized == null) {
 				poiAdditionalsCategorized = new ArrayList<>();
@@ -130,15 +145,8 @@ public abstract class AbstractPoiType {
 		}
 	}
 
-	public void addPoiAdditionalsCategorized(List<PoiType> tps) {
-		if (poiAdditionals == null) {
-			poiAdditionals = new ArrayList<>();
-		}
-		poiAdditionals.addAll(tps);
-		if (poiAdditionalsCategorized == null) {
-			poiAdditionalsCategorized = new ArrayList<>();
-		}
-		poiAdditionalsCategorized.addAll(tps);
+	public PoiType getPoiAdditionalByKeyName(String name) {
+		return poiAdditionalsByKeyName != null ? poiAdditionalsByKeyName.get(name) : null;
 	}
 
 	public List<PoiType> getPoiAdditionals() {

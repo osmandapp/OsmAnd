@@ -266,12 +266,15 @@
         <item name="dlg_btn_stroked_secondary_content">@color/dlg_btn_stroked_secondary_content_light</item>
         <item name="dlg_btn_transparent">@drawable/dlg_btn_transparent_light</item>
         <item name="dlg_btn_stroked">@drawable/dlg_btn_stroked_light</item>
+        <item name="dlg_btn_accent_stroked">@drawable/dlg_btn_accent_stroked_light</item>
+        <item name="dlg_btn_accent_stroked_text">@color/dlg_btn_accent_stroked_text_light</item>
         <item name="dlg_btn_tertiary_text">@color/button_color_active_light</item>
         <item name="dlg_btn_tertiary_harmful">@drawable/dlg_btn_tertiary_harmful</item>
         <item name="dlg_btn_secondary_harmful_text">@color/color_osm_edit_delete</item>
         <item name="stroked_btn_contour">@drawable/stroked_btn_contour_light</item>
         <item name="profile_save_btn">@drawable/btn_round_profile_blue</item>
         <item name="profile_cancel_btn">@drawable/btn_round_profile_gray</item>
+        <item name="btn_history_disabled_card_bg">@drawable/dlg_btn_secondary_light</item>
 
         <item name="buttonBarNegativeButtonStyle">@style/DialogButtonStyleLight</item>
         <item name="buttonBarPositiveButtonStyle">@style/DialogButtonStyleLight</item>
@@ -311,9 +314,14 @@
         <item name="status_bar_active_color">@color/status_bar_selection_color_light</item>
         <item name="active_color_secondary">@color/active_color_secondary_light</item>
         <item name="active_color_primary">@color/active_color_primary_light</item>
+		<item name="icon_button_background_hovered">@color/btn_bg_icon_hover_light</item>
+		<item name="icon_button_background_focused">@color/btn_bg_icon_focused_light</item>
+		<item name="icon_button_background_pressed">@color/btn_bg_icon_pressed_light</item>
         <item name="slider_label_text_dark">@color/slider_label_text_light</item>
         <item name="app_bar_secondary_color">@color/app_bar_secondary_light</item>
         <item name="map_button_icon_color">@color/map_button_icon_color_light</item>
+        <item name="btn_icon_on_secondary">@color/btn_icon_on_secondary_light</item>
+        <item name="btn_text_on_secondary">@color/btn_text_on_secondary_light</item>
     </style>
 
 </resources>

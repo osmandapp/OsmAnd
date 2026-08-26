@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
+import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
@@ -124,6 +125,22 @@ public class TrackSortModesHelper {
 
 	public void syncSettings() {
 		saveToPreference();
+	}
+
+	@NonNull
+	public static LatLon getReferenceLocation(@NonNull OsmandApplication app,
+	                                          @NonNull TracksSortMode sortMode) {
+		return sortMode == TracksSortMode.NEAREST_TO_MAP_CENTER
+				? app.getMapViewTrackingUtilities().getMapLocation()
+				: app.getMapViewTrackingUtilities().getDefaultLocation();
+	}
+
+	@Nullable
+	public static LatLon getDisplayReferenceLocation(@NonNull OsmandApplication app,
+	                                                 @NonNull TracksSortMode sortMode) {
+		return sortMode == TracksSortMode.NEAREST_TO_MAP_CENTER
+				? getReferenceLocation(app, sortMode)
+				: null;
 	}
 
 	private void loadFromPreference(@NonNull OsmandApplication app) {

@@ -12,7 +12,6 @@ import static net.osmand.plus.views.mapwidgets.configure.dialogs.ConfigureScreen
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,7 +23,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.PanelsLayoutMode;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.utils.AndroidUtils;
@@ -33,6 +31,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.configure.appearance.WidgetsAppearanceFragment;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.PanelsLayoutFragment;
 import net.osmand.plus.views.mapwidgets.configure.panel.ConfigureWidgetsFragment;
 import net.osmand.util.CollectionUtils;
@@ -79,7 +78,7 @@ public class ConfigureWidgetsCard extends MapBaseCard {
 		setupWidgetGroupView(view.findViewById(R.id.bottom_panel), widgets, BOTTOM, appMode);
 
 		boolean useSeparateLayouts = settings.USE_SEPARATE_LAYOUTS.get();
-		setupTransparentWidgetsButton(appMode, useSeparateLayouts);
+		setupAppearanceButton(appMode, useSeparateLayouts);
 		setupPanelsLayout(view.findViewById(R.id.panels_layout), useSeparateLayouts);
 	}
 
@@ -136,34 +135,14 @@ public class ConfigureWidgetsCard extends MapBaseCard {
 		return widgetRegistry.getFilteredWidgets(widgets, appMode, layoutMode, filter, Collections.singletonList(panel)).size();
 	}
 
-	private void setupTransparentWidgetsButton(@NonNull ApplicationMode appMode, boolean showShortDivider) {
-		View button = view.findViewById(R.id.transparent_widgets_button);
+	private void setupAppearanceButton(@NonNull ApplicationMode appMode, boolean showShortDivider) {
+		View button = view.findViewById(R.id.appearance_button);
+		ConfigureButtonsCard.setupButton(button, getString(R.string.shared_string_appearance),
+				null, R.drawable.ic_action_appearance, true, nightMode);
 
-		CommonPreference<Boolean> preference = settings.getTransparentMapThemePreference(layoutMode);
-		boolean enabled = preference.getModeValue(appMode);
-		ConfigureButtonsCard.setupButton(button, getString(R.string.map_widget_transparent), null, R.drawable.ic_action_appearance, enabled, nightMode);
+		button.setOnClickListener(v -> WidgetsAppearanceFragment.showInstance(getMapActivity(), appMode, layoutMode));
 
-		CompoundButton compoundButton = button.findViewById(R.id.compound_button);
-		compoundButton.setChecked(enabled);
-		compoundButton.setClickable(false);
-		compoundButton.setFocusable(false);
-
-		int activeColor = appMode.getProfileColor(nightMode);
-		int defColor = ColorUtilities.getDefaultIconColor(app, nightMode);
-		UiUtilities.setupCompoundButton(nightMode, activeColor, compoundButton);
-
-		ImageView icon = button.findViewById(R.id.icon);
-		icon.setColorFilter(enabled ? activeColor : defColor);
-
-		button.setOnClickListener(v -> {
-			boolean isChecked = !preference.get();
-			compoundButton.setChecked(isChecked);
-			icon.setColorFilter(isChecked ? activeColor : defColor);
-
-			preference.setModeValue(appMode, isChecked);
-			mapActivity.refreshMap();
-		});
-		AndroidUiHelper.updateVisibility(compoundButton, true);
+		AndroidUiHelper.updateVisibility(button.findViewById(R.id.compound_button), false);
 		AndroidUiHelper.updateVisibility(button.findViewById(R.id.short_divider), showShortDivider);
 	}
 

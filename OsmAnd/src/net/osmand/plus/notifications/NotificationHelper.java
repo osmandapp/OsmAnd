@@ -31,6 +31,7 @@ public class NotificationHelper {
 
 	private NavigationNotification navigationNotification;
 	private GpxNotification gpxNotification;
+	private AisNotification aisNotification;
 	private CarAppNotification carAppNotification;
 	private DownloadNotification downloadNotification;
 	private FallbackNotification fallbackNotification;
@@ -44,11 +45,13 @@ public class NotificationHelper {
 	private void init() {
 		navigationNotification = new NavigationNotification(app);
 		gpxNotification = new GpxNotification(app);
+		aisNotification = new AisNotification(app);
 		downloadNotification = new DownloadNotification(app);
 		carAppNotification = new CarAppNotification(app);
 		fallbackNotification = new FallbackNotification(app);
 		all.add(navigationNotification);
 		all.add(gpxNotification);
+		all.add(aisNotification);
 		all.add(downloadNotification);
 		all.add(carAppNotification);
 	}
@@ -109,6 +112,9 @@ public class NotificationHelper {
 		}
 		if (gpxNotification.isEnabled(service)) {
 			res.add(gpxNotification);
+		}
+		if (aisNotification.isEnabled(service)) {
+			res.add(aisNotification);
 		}
 		return res;
 	}

@@ -7,6 +7,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.data.City.CityType;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
@@ -18,6 +19,7 @@ import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 import net.osmand.plus.settings.enums.HistorySource;
+import net.osmand.search.core.ObjectType;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONArray;
@@ -85,8 +87,8 @@ public abstract class HistorySettingsItem extends CollectionSettingsItem<History
 			// leave the last accessed history entry between the duplicate and the original
 			for (HistoryEntry duplicate : duplicateItems) {
 				PointDescription name = duplicate.getName();
-				HistoryEntry original = searchHistoryHelper.getEntryByName(name);
-				if (original.getLastAccessTime() < duplicate.getLastAccessTime()) {
+				HistoryEntry original = searchHistoryHelper.getEntryByName(name, duplicate.getSource());
+				if (original != null && original.getLastAccessTime() < duplicate.getLastAccessTime()) {
 					appliedItems.remove(original);
 					appliedItems.add(duplicate);
 				}
@@ -121,6 +123,20 @@ public abstract class HistorySettingsItem extends CollectionSettingsItem<History
 						PointDescription.deserializeFromString(serializedPointDescription, new LatLon(lat, lon)), source);
 				historyEntry.setLastAccessTime(lastAccessed);
 				historyEntry.setFrequency(intervals, intervalValues);
+				historyEntry.setObjectType(getObjectType(object.optString("objectType")));
+				historyEntry.setCityType(getCityType(object.optString("cityType")));
+				historyEntry.setDisplayName(getOptionalString(object, "displayName"));
+				historyEntry.setPoiCategoryKey(getOptionalString(object, "poiCategoryKey"));
+				historyEntry.setPoiSubtypeKey(getOptionalString(object, "poiSubtypeKey"));
+				historyEntry.setTypeName(getOptionalString(object, "typeName"));
+				historyEntry.setAddress(getOptionalString(object, "address"));
+				historyEntry.setRelatedObjectName(getOptionalString(object, "relatedObjectName"));
+				historyEntry.setOpeningHours(getOptionalString(object, "openingHours"));
+				historyEntry.setAlternateName(getOptionalString(object, "alternateName"));
+				historyEntry.setPhotoUrl(getOptionalString(object, "photoUrl"));
+				if (object.has("osmId") && !object.isNull("osmId")) {
+					historyEntry.setOsmId(object.optLong("osmId"));
+				}
 				items.add(historyEntry);
 			}
 		} catch (JSONException e) {
@@ -145,6 +161,24 @@ public abstract class HistorySettingsItem extends CollectionSettingsItem<History
 					jsonObject.put("intervals", historyEntry.getIntervals());
 					jsonObject.put("intervalValues", historyEntry.getIntervalsValues());
 					jsonObject.put("source", historyEntry.getSource().name());
+					if (historyEntry.getObjectType() != null) {
+						jsonObject.put("objectType", historyEntry.getObjectType().name());
+					}
+					if (historyEntry.getCityType() != null) {
+						jsonObject.put("cityType", historyEntry.getCityType().name());
+					}
+					putOptionalString(jsonObject, "displayName", historyEntry.getDisplayName());
+					putOptionalString(jsonObject, "poiCategoryKey", historyEntry.getPoiCategoryKey());
+					putOptionalString(jsonObject, "poiSubtypeKey", historyEntry.getPoiSubtypeKey());
+					putOptionalString(jsonObject, "typeName", historyEntry.getTypeName());
+					putOptionalString(jsonObject, "address", historyEntry.getAddress());
+					putOptionalString(jsonObject, "relatedObjectName", historyEntry.getRelatedObjectName());
+					putOptionalString(jsonObject, "openingHours", historyEntry.getOpeningHours());
+					putOptionalString(jsonObject, "alternateName", historyEntry.getAlternateName());
+					putOptionalString(jsonObject, "photoUrl", historyEntry.getPhotoUrl());
+					if (historyEntry.getOsmId() != null) {
+						jsonObject.put("osmId", historyEntry.getOsmId());
+					}
 					jsonArray.put(jsonObject);
 				}
 				json.put("items", jsonArray);
@@ -156,11 +190,49 @@ public abstract class HistorySettingsItem extends CollectionSettingsItem<History
 		return json;
 	}
 
+	@Nullable
+	private String getOptionalString(@NonNull JSONObject object, @NonNull String key) {
+		String value = object.optString(key, null);
+		return Algorithms.isEmpty(value) ? null : value;
+	}
+
+	private void putOptionalString(@NonNull JSONObject object, @NonNull String key, @Nullable String value)
+			throws JSONException {
+		if (!Algorithms.isEmpty(value)) {
+			object.put(key, value);
+		}
+	}
+
+	@Nullable
+	private ObjectType getObjectType(@Nullable String objectTypeName) {
+		if (!Algorithms.isEmpty(objectTypeName)) {
+			try {
+				return ObjectType.valueOf(objectTypeName);
+			} catch (IllegalArgumentException e) {
+				SettingsHelper.LOG.warn("Unsupported history object type: " + objectTypeName);
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	private CityType getCityType(@Nullable String cityTypeName) {
+		if (!Algorithms.isEmpty(cityTypeName)) {
+			try {
+				return CityType.valueOf(cityTypeName);
+			} catch (IllegalArgumentException e) {
+				SettingsHelper.LOG.warn("Unsupported history city type: " + cityTypeName);
+			}
+		}
+		return null;
+	}
+
 	@Override
 	public boolean isDuplicate(@NonNull HistoryEntry historyEntry) {
 		PointDescription pointDescription = historyEntry.getName();
 		for (HistoryEntry entry : existingItems) {
-			if (Algorithms.objectEquals(pointDescription, entry.getName())) {
+			if (historyEntry.getSource() == entry.getSource()
+					&& Algorithms.objectEquals(pointDescription, entry.getName())) {
 				return true;
 			}
 		}

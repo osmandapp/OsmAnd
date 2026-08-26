@@ -16,10 +16,11 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.mapwidgets.OutlinedTextContainer;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.appearance.PanelAppearanceApplier;
+import net.osmand.plus.views.mapwidgets.appearance.ResolvedPanelAppearance;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportSidePanel;
 
 public abstract class TextInfoWidget extends MapWidget implements ISupportSidePanel {
@@ -194,28 +195,18 @@ public abstract class TextInfoWidget extends MapWidget implements ISupportSidePa
 	}
 
 	@Override
-	public void updateColors(@NonNull TextState textState) {
-		super.updateColors(textState);
-		updateTextColor(smallTextView, smallTextViewShadow, textState.textColor, textState.textShadowColor,
-				textState.textBold, textState.textShadowRadius);
-
-		updateTextOutline(textView, textState);
-		updateTextContainer(textView, textState);
+	protected void onPanelAppearanceChanged(@NonNull ResolvedPanelAppearance appearance) {
+		super.onPanelAppearanceChanged(appearance);
+		PanelAppearanceApplier.applyPrimaryText(textView, appearance);
+		PanelAppearanceApplier.applySecondaryText(smallTextView, smallTextViewShadow, appearance);
 
 		int iconId = getIconId();
 		if (iconId != 0) {
 			setImageDrawable(iconId);
 		}
 
-		getView().setBackgroundResource(getBackgroundResource(textState));
-		if (bottomDivider != null) {
-			bottomDivider.setBackgroundResource(textState.widgetDividerColorId);
-		}
-	}
-
-	@DrawableRes
-	protected int getBackgroundResource(@NonNull TextState textState) {
-		return textState.widgetBackgroundId;
+		PanelAppearanceApplier.applyBackground(getView(), appearance);
+		PanelAppearanceApplier.applyDivider(bottomDivider, appearance);
 	}
 
 	@Override

@@ -2030,4 +2030,6 @@
     <string name="poi_skiing">Ski</string>
     <string name="poi_route_activity_type_waterskiing">Vannski</string>
     <string name="poi_sample_collection">Prøvetaking;Blod;Laboratorie;Test</string>
+    <string name="poi_water_lake">Innsjø</string>
+    <string name="poi_water_type_filter">Type vann</string>
 </resources>

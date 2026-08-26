@@ -48,6 +48,7 @@ import net.osmand.plus.plugins.externalsensors.devices.ant.AntTemperatureDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLEAbstractDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLEBPICPDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLEBikeSCDDevice;
+import net.osmand.plus.plugins.externalsensors.devices.ble.BLEBikePowerDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLEHeartRateDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLEOBDDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLERunningSCDDevice;
@@ -197,6 +198,8 @@ public abstract class DevicesHelper implements DeviceListener, DevicePreferences
 					bluetoothAdapter != null ? new BLEBPICPDevice(bluetoothAdapter, deviceId) : null;
 			case BLE_BICYCLE_SCD ->
 					bluetoothAdapter != null ? new BLEBikeSCDDevice(bluetoothAdapter, deviceId) : null;
+			case BLE_BICYCLE_POWER ->
+					bluetoothAdapter != null ? new BLEBikePowerDevice(bluetoothAdapter, deviceId) : null;
 			case BLE_RUNNING_SCDS ->
 					bluetoothAdapter != null ? new BLERunningSCDDevice(bluetoothAdapter, deviceId) : null;
 			default -> null;

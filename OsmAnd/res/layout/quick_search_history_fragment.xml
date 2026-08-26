@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/activity_background_color"
+	android:orientation="vertical">
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/appbar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		app:elevation="0dp">
+
+		<androidx.appcompat.widget.Toolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/dashboard_map_toolbar"
+			android:background="?attr/list_background_color"
+			android:minHeight="@dimen/dashboard_map_toolbar"
+			android:padding="0dp"
+			android:theme="?attr/toolbar_theme"
+			app:contentInsetStartWithNavigation="@dimen/toolbar_inset_start_with_navigation"
+			app:contentInsetStart="0dp"
+			app:contentInsetLeft="0dp"
+			app:contentInsetEnd="0dp"
+			app:contentInsetRight="0dp">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:gravity="center_vertical"
+				android:orientation="horizontal">
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/title"
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_marginStart="@dimen/content_padding"
+					android:layout_marginLeft="@dimen/content_padding"
+					android:layout_marginEnd="@dimen/content_padding"
+					android:layout_marginRight="@dimen/content_padding"
+					android:layout_weight="1"
+					android:background="?attr/selectableItemBackground"
+					android:clickable="true"
+					android:ellipsize="end"
+					android:focusable="true"
+					android:gravity="center_vertical"
+					android:maxLines="1"
+					android:text="@string/shared_string_history"
+					android:textColor="?attr/searchbar_text"
+					android:textSize="@dimen/dialog_header_text_size" />
+
+				<androidx.appcompat.widget.AppCompatEditText
+					android:id="@+id/search"
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_marginStart="@dimen/content_padding"
+					android:layout_marginLeft="@dimen/content_padding"
+					android:layout_marginEnd="@dimen/content_padding"
+					android:layout_marginRight="@dimen/content_padding"
+					android:layout_weight="1"
+					android:background="@null"
+					android:ellipsize="end"
+					android:hint="@string/shared_string_history"
+					android:imeOptions="actionSearch"
+					android:inputType="text"
+					android:maxLines="1"
+					android:singleLine="true"
+					android:textColor="?attr/searchbar_text"
+					android:textColorHint="?attr/searchbar_text_hint"
+					android:textSize="@dimen/dialog_header_text_size"
+					android:visibility="gone"
+					tools:text="History" />
+
+				<ImageButton
+					android:id="@+id/settings_button"
+					style="@style/Widget.AppCompat.ActionButton"
+					android:layout_width="48dp"
+					android:layout_height="48dp"
+					android:contentDescription="@string/shared_string_settings" />
+
+				<ImageButton
+					android:id="@+id/clear_button"
+					style="@style/Widget.AppCompat.ActionButton"
+					android:layout_width="48dp"
+					android:layout_height="48dp"
+					android:contentDescription="@string/shared_string_clear"
+					android:visibility="gone" />
+
+			</LinearLayout>
+
+		</androidx.appcompat.widget.Toolbar>
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:background="?attr/ctx_menu_info_divider" />
+
+		<LinearLayout
+			android:id="@+id/chips_toolbar_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="?attr/activity_background_color"
+			android:orientation="vertical"
+			android:paddingTop="@dimen/content_padding_small"
+			android:paddingBottom="@dimen/content_padding_small">
+
+			<net.osmand.plus.search.dialogs.ChipsLayout
+				android:id="@+id/chips_toolbar"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" />
+
+			<net.osmand.plus.search.dialogs.ChipsLayout
+				android:id="@+id/type_chips_toolbar"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/content_padding_small"
+				android:visibility="gone"
+				tools:visibility="visible" />
+
+		</LinearLayout>
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<ListView
+		android:id="@+id/list"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:clipToPadding="false"
+		android:divider="@null"
+		android:dividerHeight="0dp"
+		android:listSelector="@android:color/transparent"
+		android:scrollbars="vertical" />
+
+</LinearLayout>

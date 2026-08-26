@@ -1,17 +1,22 @@
 package net.osmand.shared.xml
 
 import net.osmand.shared.io.KFile
-import net.osmand.shared.io.SinkStringWriter
+import net.osmand.shared.io.SinkOutputStream
 import okio.IOException
 import okio.Sink
+import java.io.BufferedWriter
 import java.io.File
 import java.io.OutputStreamWriter
-import java.io.StringWriter
+import java.io.Writer
 
 actual class XmlSerializer actual constructor() {
+	private companion object {
+		const val BUFFER_SIZE = 32 * 1024
+	}
+
 	private val serializer = org.kxml2.io.KXmlSerializer()
-	private var outputStream: OutputStreamWriter? = null
-	private var stringWriter: StringWriter? = null
+	private var outputStream: Writer? = null
+	private var stringWriter: Writer? = null
 
 	@Throws(IllegalArgumentException::class, IllegalStateException::class)
 	actual fun setFeature(name: String, state: Boolean) = serializer.setFeature(name, state)
@@ -32,14 +37,14 @@ actual class XmlSerializer actual constructor() {
 		val fout = File(file.absolutePath())
 		fout.parentFile?.mkdirs()
 
-		outputStream = OutputStreamWriter(fout.outputStream(), "UTF-8")
+		outputStream = BufferedWriter(OutputStreamWriter(fout.outputStream(), Charsets.UTF_8), BUFFER_SIZE)
 		serializer.setOutput(outputStream)
 	}
 
 	@Throws(IOException::class, IllegalArgumentException::class, IllegalStateException::class)
 	actual fun setOutput(output: Sink) {
 		stringWriter?.close()
-		stringWriter = SinkStringWriter(output)
+		stringWriter = BufferedWriter(OutputStreamWriter(SinkOutputStream(output, false), Charsets.UTF_8), BUFFER_SIZE)
 		serializer.setOutput(stringWriter)
 	}
 

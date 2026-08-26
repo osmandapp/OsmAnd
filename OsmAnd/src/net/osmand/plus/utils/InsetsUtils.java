@@ -376,12 +376,14 @@ public class InsetsUtils {
 
 	public static void processNavigationBarColor(@NonNull ISupportInsets iSupportInsets) {
 		boolean contentLight = iSupportInsets.isNavigationBarContentLight();
-		int colorId = iSupportInsets.getNavigationBarColorId();
 		Activity activity = iSupportInsets.requireActivity();
 
 		if (isEdgeToEdgeSupported()) {
-			if (colorId != -1) {
-				AndroidUiHelper.setNavigationBarColor(activity, activity.getColor(colorId), contentLight);
+			Integer color = iSupportInsets.getNavigationBarColor();
+			if (color != null) {
+				int opaqueColor = ColorUtilities.removeAlpha(color);
+				AndroidUiHelper.setNavigationBarColor(activity, color,
+						ColorUtils.calculateLuminance(opaqueColor) >= 0.5);
 			} else {
 				AndroidUiHelper.setNavigationBarColor(activity, Color.TRANSPARENT, contentLight);
 			}

@@ -3,6 +3,8 @@ package net.osmand.search.core;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
+import net.osmand.util.MapUtils;
+
 import java.util.List;
 import java.util.Map;
 
@@ -93,7 +95,7 @@ public class RegionPriorityProvider {
 
     private int calculatePriorityValue(BinaryMapIndexReader region) {
         for (int i = 0; i * BBOX_STEP <= BBOX_MAX; i++) {
-            QuadRect rect = SearchPhrase.calculateBbox(i * BBOX_STEP + 50, searchLocation);
+            QuadRect rect = MapUtils.calculate31BboxUsingRhumb(i * BBOX_STEP + 50, searchLocation);
             if (region.containsPoiData((int) rect.left, (int) rect.top, (int) rect.right, (int) rect.bottom)) {
                 return i;
             }

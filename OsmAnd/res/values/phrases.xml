@@ -198,6 +198,10 @@
 	<string name="poi_covered_booth_filter">Booth</string>
 	<string name="poi_rapids_filter">Rapids grade</string>
 	<string name="poi_water_type_filter">Water type</string>
+	<string name="poi_mtb_filter">Suitable for MTB</string>
+	<string name="poi_ski_filter">Suitable for ski</string>
+	<string name="poi_horse_filter">Suitable for horse riding</string>
+	<string name="poi_winter_hiking_filter">Suitable for winter hiking</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -2277,6 +2281,17 @@
 	<string name="poi_surface_ice">Surface: ice</string>
 	<string name="poi_surface_salt">Surface: salt</string>
 	<string name="poi_surface_snow">Surface: snow</string>
+	<string name="poi_surface_clay">Surface: clay</string>
+	<string name="poi_surface_tartan">Surface: Tartan</string>
+	<string name="poi_surface_artificial_turf">Surface: Artificial turf</string>
+	<string name="poi_surface_decoturf">Surface: DecoTurf</string>
+	<string name="poi_surface_metal_grid">Surface: Metal grid</string>
+	<string name="poi_surface_chipseal">Surface: Chipseal</string>
+	<string name="poi_surface_acrylic">Surface: acrylic</string>
+	<string name="poi_surface_carpet">Surface: carpet</string>
+	<string name="poi_surface_plastic">Surface: plastic</string>
+	<string name="poi_surface_rubber">Surface: rubber</string>
+	<string name="poi_surface_laterite">Surface: laterite</string>
 
 	<string name="poi_route_bus_ref">Bus</string>
 	<string name="poi_route_share_taxi_ref">Share taxi</string>
@@ -3662,12 +3677,6 @@
 	<string name="poi_couloir">Couloir</string>
 	<string name="poi_mountain_area">Mountain area</string>
 
-	<string name="poi_surface_clay">Clay</string>
-	<string name="poi_surface_tartan">Tartan</string>
-	<string name="poi_surface_artificial_turf">Artificial turf</string>
-	<string name="poi_surface_decoturf">DecoTurf</string>
-	<string name="poi_surface_metal_grid">Metal grid</string>
-
 	<string name="poi_location_underground">Location: underground</string>
 	<string name="poi_location_underwater">Location: underwater</string>
 	<string name="poi_location_overground">Location: overground</string>
@@ -4259,7 +4268,7 @@
 	<string name="poi_bicycle_permissive">Bicycle access: permissive</string>
 	<string name="poi_bicycle_customers">Bicycle access: customers</string>
 
-	<string name="poi_horse_yes">Horses allowed</string>
+	<string name="poi_horse_yes">Yes</string>
 	<string name="poi_horse_no">Horses not allowed</string>
 	<string name="poi_horse_private">Horse access: private</string>
 	<string name="poi_horse_destination">Horse access: destination</string>
@@ -4290,7 +4299,7 @@
 	<string name="poi_coach_yes">Coach access: yes</string>
 	<string name="poi_coach_no">Coach access: no</string>
 
-	<string name="poi_ski_yes">Ski access: yes</string>
+	<string name="poi_ski_yes">Yes</string>
 	<string name="poi_ski_no">Ski access: no</string>
 
 	<string name="poi_snowmobile_private">Snowmobile access: private</string>
@@ -5210,8 +5219,6 @@
 
 	<string name="poi_toy_library">Toy library</string>
 
-	<string name="poi_surface_chipseal">Chipseal</string>
-
 	<string name="poi_lock_name">Lock name</string>
 	<string name="poi_draft">Fairway depth</string>
 	<string name="poi_maxlength">Maximum length</string>
@@ -5250,11 +5257,6 @@
 	<string name="poi_bridge_name">Bridge name</string>
 
 	<string name="poi_vending_machine_fuel">Yes</string>
-
-	<string name="poi_surface_acrylic">Surface: acrylic</string>
-	<string name="poi_surface_carpet">Surface: carpet</string>
-	<string name="poi_surface_plastic">Surface: plastic</string>
-	<string name="poi_surface_rubber">Surface: rubber</string>
 
 	<string name="poi_assembly_point">Assembly point</string>
 	<string name="poi_not_pt_shelter_yes">Shelter (not for public transport)</string>
@@ -5611,7 +5613,7 @@
 	<string name="poi_climbing_route">Climbing route</string>
 	<string name="poi_climbing_route_bottom">Climbing route bottom</string>
 
-	<string name="poi_cafe_yes">Yes</string>
+	<string name="poi_cafe_yes">Cafe: yes</string>
 
 	<string name="poi_sled_yes">Sled: yes</string>
 	<string name="poi_sled_no">Sled: no</string>
@@ -5772,5 +5774,8 @@
 	<string name="poi_rapids_grade_x">X (not runnable)</string>
 
 	<string name="poi_water_lake">Lake</string>
+
+	<string name="poi_mtb_yes">Yes</string>
+	<string name="poi_winter_hiking_yes">Yes</string>
 
 </resources>

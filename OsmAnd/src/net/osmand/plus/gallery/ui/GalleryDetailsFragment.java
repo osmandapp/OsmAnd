@@ -1,7 +1,5 @@
 package net.osmand.plus.gallery.ui;
 
-import static net.osmand.plus.gallery.ui.GalleryPhotoPagerFragment.SELECTED_POSITION_KEY;
-
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,14 +19,12 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseFullScreenFragment;
-import net.osmand.plus.gallery.controller.GalleryController;
+import net.osmand.plus.gallery.controller.GalleryPagerController;
 import net.osmand.plus.gallery.model.GalleryItem;
-import net.osmand.plus.gallery.model.GalleryItem.Media;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.views.mapwidgets.configure.dialogs.DistanceByTapFragment;
 import net.osmand.plus.wikipedia.WikiAlgorithms;
 import net.osmand.shared.media.MediaUriResolver;
 import net.osmand.shared.media.domain.MediaDetails;
@@ -40,11 +36,13 @@ import java.util.List;
 
 public class GalleryDetailsFragment extends BaseFullScreenFragment {
 
-	public static final String TAG = DistanceByTapFragment.class.getSimpleName();
+	public static final String TAG = GalleryDetailsFragment.class.getSimpleName();
 
-	private GalleryController controller;
+	private static final String SELECTED_ITEM_ID_KEY = "selected_item_id";
 
-	private int selectedPosition;
+	private String selectedItemId;
+
+	private GalleryPagerController controller;
 
 	@Override
 	public int getStatusBarColorId() {
@@ -55,13 +53,12 @@ public class GalleryDetailsFragment extends BaseFullScreenFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		controller = (GalleryController) app.getDialogManager().findController(GalleryController.PROCESS_ID);
 
 		Bundle args = getArguments();
-		if (savedInstanceState != null && savedInstanceState.containsKey(SELECTED_POSITION_KEY)) {
-			selectedPosition = savedInstanceState.getInt(SELECTED_POSITION_KEY);
-		} else if (args != null && args.containsKey(SELECTED_POSITION_KEY)) {
-			selectedPosition = args.getInt(SELECTED_POSITION_KEY);
+		if (savedInstanceState != null && savedInstanceState.containsKey(SELECTED_ITEM_ID_KEY)) {
+			selectedItemId = savedInstanceState.getString(SELECTED_ITEM_ID_KEY);
+		} else if (args != null && args.containsKey(SELECTED_ITEM_ID_KEY)) {
+			selectedItemId = args.getString(SELECTED_ITEM_ID_KEY);
 		}
 	}
 
@@ -70,6 +67,12 @@ public class GalleryDetailsFragment extends BaseFullScreenFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
+
+		controller = GalleryPagerController.getExistingInstance(app);
+		if (controller == null || Algorithms.isEmpty(selectedItemId)) {
+			return null;
+		}
+
 		View view = inflate(R.layout.gallery_details_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
@@ -95,8 +98,17 @@ public class GalleryDetailsFragment extends BaseFullScreenFragment {
 
 	@Nullable
 	private GalleryItem.Media getSelectedGalleryItem() {
-		List<Media> items = controller.getOnlinePhotoItems();
-		return selectedPosition >= 0 && selectedPosition < items.size() ? items.get(selectedPosition) : null;
+		if (controller == null || Algorithms.isEmpty(selectedItemId)) {
+			return null;
+		}
+
+		List<GalleryItem.Media> items = controller.getMediaItems();
+		for (GalleryItem.Media item : items) {
+			if (Algorithms.stringsEqual(item.getMediaItem().getId(), selectedItemId)) {
+				return item;
+			}
+		}
+		return null;
 	}
 
 	private void updateContent(@NonNull View view) {
@@ -104,7 +116,9 @@ public class GalleryDetailsFragment extends BaseFullScreenFragment {
 		container.removeAllViews();
 
 		GalleryItem.Media media = getSelectedGalleryItem();
-		if (media == null) return;
+		if (media == null) {
+			return;
+		}
 
 		MediaItem mediaItem = media.getMediaItem();
 		MediaDetails details = mediaItem.getDetails();
@@ -223,15 +237,17 @@ public class GalleryDetailsFragment extends BaseFullScreenFragment {
 
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
-		outState.putInt(SELECTED_POSITION_KEY, selectedPosition);
+		if (!Algorithms.isEmpty(selectedItemId)) {
+			outState.putString(SELECTED_ITEM_ID_KEY, selectedItemId);
+		}
 		super.onSaveInstanceState(outState);
 	}
 
-	public static void showInstance(@NonNull FragmentActivity activity, int selectedPosition) {
+	public static void showInstance(@NonNull FragmentActivity activity, @NonNull String selectedItemId) {
 		FragmentManager manager = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			Bundle bundle = new Bundle();
-			bundle.putInt(SELECTED_POSITION_KEY, selectedPosition);
+			bundle.putString(SELECTED_ITEM_ID_KEY, selectedItemId);
 			GalleryDetailsFragment fragment = new GalleryDetailsFragment();
 			fragment.setArguments(bundle);
 			manager.beginTransaction()

@@ -83,7 +83,7 @@
 				android:layout_height="wrap_content" />
 
 			<net.osmand.plus.widgets.dialogbutton.DialogButton
-				android:id="@+id/view_all"
+				android:id="@+id/primary_action_button"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginBottom="@dimen/content_padding"

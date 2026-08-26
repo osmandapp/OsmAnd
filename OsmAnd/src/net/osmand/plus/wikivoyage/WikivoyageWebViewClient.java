@@ -71,21 +71,20 @@ public class WikivoyageWebViewClient extends WebViewClient {
 			WikiArticleHelper.warnAboutExternalLoad(url, activity, nightMode);
 		} else if (url.startsWith(PREFIX_GEO)) {
 			if (article != null && article.getGpxFile() != null) {
+				OsmandSettings settings = app.getSettings();
 				GpxFile gpxFile = article.getGpxFile();
 				List<WptPt> points = gpxFile.getPointsList();
 				String coordinates = url.replace(PREFIX_GEO, "");
 				WptPt gpxPoint = WikivoyageUtils.findNearestPoint(points, coordinates);
 
 				if (gpxPoint != null) {
-					OsmandSettings settings = app.getSettings();
 					settings.setMapLocationToShow(gpxPoint.getLatitude(), gpxPoint.getLongitude(),
 							settings.getLastKnownMapZoom(),
 							new PointDescription(PointDescription.POINT_TYPE_WPT, gpxPoint.getName()),
 							false,
 							gpxPoint);
 
-					if (activity instanceof WikivoyageExploreActivity) {
-						WikivoyageExploreActivity exploreActivity = (WikivoyageExploreActivity) activity;
+					if (activity instanceof WikivoyageExploreActivity exploreActivity) {
 						exploreActivity.setArticle(article);
 					}
 
@@ -95,6 +94,15 @@ public class WikivoyageWebViewClient extends WebViewClient {
 					gpxFile.setPath(path.getAbsolutePath());
 					app.getSelectedGpxHelper().setGpxFileToDisplay(gpxFile);
 					MapActivity.launchMapActivityMoveToTop(activity);
+				} else {
+					LatLon latLon = WikivoyageUtils.parseGeoCoordinates(coordinates);
+					if (latLon != null) {
+						settings.setMapLocationToShow(latLon.getLatitude(), latLon.getLongitude(),
+								settings.getLastKnownMapZoom(),
+								new PointDescription(PointDescription.POINT_TYPE_MARKER, null));
+						fragmentManager.popBackStackImmediate();
+						MapActivity.launchMapActivityMoveToTop(activity);
+					}
 				}
 			}
 		} else {

@@ -277,7 +277,7 @@ public class AlarmWidget {
 				//else case is done by drawing red ring
 			}
 			text = String.valueOf(alarm.getIntValue());
-		} else if (alarm.getType() == SPEED_CAMERA) {
+		} else if (alarm.getType() == SPEED_CAMERA || alarm.getType() == RED_LIGHT_CAMERA) {
 			locImgId = R.drawable.warnings_speed_camera;
 		} else if (alarm.getType() == BORDER_CONTROL) {
 			locImgId = R.drawable.warnings_border_control;
@@ -324,7 +324,7 @@ public class AlarmWidget {
 			bottomText = null;
 		}
 		boolean visible;
-		if (alarm.getType() == SPEED_CAMERA) {
+		if (alarm.getType() == SPEED_CAMERA || alarm.getType() == RED_LIGHT_CAMERA) {
 			visible = cams;
 		} else if (alarm.getType() == PEDESTRIAN) {
 			visible = peds;

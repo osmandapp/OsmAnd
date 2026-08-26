@@ -397,7 +397,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			displayHelper.setFilteredGpxFile(selectedGpxFile.getFilteredSelectedGpxFile().getGpxFile());
 		}
 		if (analysis == null) {
-			analysis = selectedGpxFile.getTrackAnalysisToDisplay(app);
+			analysis = selectedGpxFile.getTrackSummaryAnalysisToDisplay(app);
 		}
 	}
 
@@ -1262,7 +1262,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			} else if (buttonIndex == ALTITUDE_CORRECTION_BUTTON_INDEX) {
 				GpxTrackAnalysis analysis = this.analysis != null
 						? this.analysis
-						: selectedGpxFile.getTrackAnalysis(app);
+						: selectedGpxFile.getTrackSummaryAnalysis(app);
 				if (analysis.hasElevationData()) {
 					SRTMPlugin plugin = PluginsHelper.getActivePlugin(SRTMPlugin.class);
 					if (plugin != null && plugin.is3DReliefAllowed()) {
@@ -1584,7 +1584,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	private void openTrackAnalyzeOnMap(@NonNull GpxFile gpxFile) {
-		GpxTrackAnalysis analysis = this.analysis != null ? this.analysis : selectedGpxFile.getTrackAnalysisToDisplay(app);
+		GpxTrackAnalysis analysis = this.analysis != null && this.analysis.getCollectPointData()
+				? this.analysis : selectedGpxFile.getTrackAnalysisToDisplay(app);
 		GpxDisplayItem gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpxFile, TrackDetailsMenu.ChartPointLayer.GPX, analysis);
 		if (gpxItem != null) {
 			GPXItemPagerAdapter.prepareGpxItemChartTypes(gpxItem, null, app.getSettings());
@@ -1760,6 +1761,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	@Override
 	public void onFinishFiltering(@NonNull GpxFile filteredGpxFile) {
 		displayHelper.setFilteredGpxFile(filteredGpxFile);
+		analysis = selectedGpxFile.getTrackSummaryAnalysisToDisplay(app);
 		updateContent();
 	}
 

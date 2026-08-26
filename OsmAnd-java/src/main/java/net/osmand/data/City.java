@@ -3,6 +3,7 @@ package net.osmand.data;
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.OSMSettings.OSMTagKey;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -126,8 +127,51 @@ public class City extends MapObject {
 		return isin.contains(name.toLowerCase());
 	}
 	
+	@Override
 	public int[] getBbox31() {
 		return bbox31;
+	}
+	
+	public void calculateBbox31FromStreets() {
+		for (Street s : getStreets()) {
+			// could be more precise with min max
+			updateBbox31WithLoc(s.getBboxPoints());
+		}
+ 	}
+	
+	public boolean updateBbox31WithLoc(LatLon location) {
+		return updateBbox31WithLoc(getMinBbox(location));
+	}
+	
+	public boolean updateBbox31WithLoc(QuadRect quadRect) {
+		int lx = MapUtils.get31TileNumberX(quadRect.left);
+		int rx = MapUtils.get31TileNumberX(quadRect.right);
+		int ty = MapUtils.get31TileNumberY(quadRect.top);
+		int by = MapUtils.get31TileNumberY(quadRect.bottom);
+		if (bbox31 != null) {
+			if (by > bbox31[3] || ty < bbox31[1] || rx > bbox31[2] || lx < bbox31[0]) {
+				bbox31[0] = Math.min(lx, bbox31[0]);
+				bbox31[1] = Math.min(ty, bbox31[1]);
+				bbox31[2] = Math.max(rx, bbox31[2]);
+				bbox31[3] = Math.max(by, bbox31[3]);
+				return true;
+			}
+		} else {
+			int cx = MapUtils.get31TileNumberX(getLocation().getLongitude());
+			int cy = MapUtils.get31TileNumberY(getLocation().getLatitude());
+			bbox31 = new int[4];
+			bbox31[0] = Math.min(lx, cx);
+			bbox31[1] = Math.min(ty, cy);
+			bbox31[2] = Math.max(rx, cx);
+			bbox31[3] = Math.max(by, cy);
+			return true;
+		}
+		return false;
+	}
+	
+	public void setBbox31(QuadRect bbox) {
+		this.bbox31 = new int[] { MapUtils.get31TileNumberX(bbox.left), MapUtils.get31TileNumberY(bbox.top),
+				MapUtils.get31TileNumberX(bbox.right), MapUtils.get31TileNumberY(bbox.bottom) };
 	}
 	
 	public void setBbox31(int[] bbox31) {
@@ -191,7 +235,6 @@ public class City extends MapObject {
 
 	// Be attentive ! Working with street names ignoring case
 	private Set<String> isin = null;
-	
 	
 	public Set<String> getIsin() {
 		return isin;
@@ -337,4 +380,7 @@ public class City extends MapObject {
 		}
 		return c;
 	}
+
+
+	
 }

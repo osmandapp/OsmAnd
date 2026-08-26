@@ -7,8 +7,6 @@
     <string name="how_to_open_link">లంకెను ఎలా తెరవాలి?</string>
     <string name="download_all">అన్ని దింపుకోండి</string>
     <string name="shared_string_restart">అనువర్తనాన్ని పునఃప్రారంభించండి</string>
-    <string name="show_images">చిత్రాలను చూపించు</string>
-    <string name="add_destination_query">ముందు గమ్యస్థానమును తెలుపండి</string>
     <string name="work_button">పని</string>
     <string name="shared_string_capacity">సామర్ధ్యం</string>
     <string name="shared_string_width">వెడల్పు</string>
@@ -16,14 +14,11 @@
     <string name="add_destination_point">గమ్యస్థానమును జోడించండి</string>
     <string name="shared_string_min_speed">కనిష్ట వేగం</string>
     <string name="shared_string_max_speed">ఘరిష్ట వేగం</string>
-    <string name="minmax_speed_dialog_title">కనిష్ట లేదా ఘరిష్ట వేగాన్ని సముదాయం చేయండి</string>
     <string name="shared_string_crash">కూలీపొవు</string>
     <string name="app_mode_scooter">మోటారు బండి</string>
     <string name="app_mode_offroad">దారికి దూరంగ</string>
     <string name="routing_attr_max_num_changes_description">గరిష్ట సంఖ్యలొ మర్పులను పేర్కొనండి</string>
     <string name="routing_attr_max_num_changes_name">మార్పుల సంఖ్య</string>
-    <string name="turn_screen_on_router">మలుపులో మెల్కొలపండి</string>
-    <string name="turn_screen_on_time_descr">"తెర  మీద  చేసే సమయన్ని సముదాయం  చేయండి"</string>
     <string name="rendering_attr_winter_road_name">శీతాకాలపు దారి</string>
     <string name="rendering_attr_ice_road_name">మంచు దారి</string>
     <string name="routeInfo_winter_ice_road_name">శీతకాలం మరియు మంచు దారులు</string>
@@ -38,7 +33,6 @@
     <string name="temporary_conditional_routing">తాత్కాలిక హద్దులు ఎన్నుకో</string>
     <string name="import_from_file">ఫైల్ నుండి దిగుమతి చేయండి</string>
     <string name="import_routing_file">రూటింగ్ ఫైలు దిగుమతి చేయండి</string>
-    <string name="import_profile">ప్రొఫైల్ ను దిగుమతి చేయండి</string>
     <string name="multimedia_notes_prefs_descr">చిత్ర పరిమాణం, ఆడియో మరియు వీడియో నాణ్యత</string>
     <string name="osm_editing_prefs_descr">లాగిన్, సంకేతపదం, ఆఫ్‌లైన్ ఎడిటింగ్</string>
     <string name="accessibility_prefs_descr">ప్రతిమ, రంగు మరియు పేరును ఎంచుకోండి</string>
@@ -51,8 +45,6 @@
     <string name="monitoring_min_speed">కనిష్ట వేగం</string>
     <string name="monitoring_min_accuracy">కనిష్ట ఖచ్చితత్వం</string>
     <string name="monitoring_min_distance">కనిష్ట స్థానభ్రంశం</string>
-    <string name="multimedia_use_system_camera">సిస్టమ్ అనువర్తనాన్ని ఉపయోగించండి</string>
-    <string name="multimedia_photo_play_sound">కెమెరా షటర్ ధ్వని</string>
     <string name="osm_authorization_success">ప్రమాణీకరణ విజయవంతమైంది</string>
     <string name="rearrange_categories">కేటగిరీలను తిరిగి అమర్చండి</string>
     <string name="shared_string_available">అందుబాటులో</string>
@@ -89,18 +81,14 @@
     <string name="shared_string_speedometer">స్పీడోమీటరు</string>
     <string name="user_login">లాగిన్</string>
     <string name="rendering_attr_padusHideBoundaries_name">బహిరంగ భూ సరిహద్దులను దాచివేయు</string>
-    <string name="use_login_and_password">వాడుకరి పేరు, సంకేతపదం వాడండి</string>
     <string name="lang_ta_in">తమిలం (భారతదేశము)</string>
     <string name="shared_string_all_colors">అన్ని రంగులు</string>
-    <string name="routing_type_a_star_2_phase">ఏ స్టార్ 2-ఫేస్</string>
     <string name="shared_string_additional">అదనపు</string>
-    <string name="routing_type_a_star_classic">ఏ స్టార్ క్లాసిక్</string>
     <string name="battery_optimization_banner_content">ఆండ్రాయిడ్ బ్యాటరీ ఆప్టిమైజేషన్ రికార్డ్ చేయబడిన ట్రాక్ లలో అంతరాలు మరియు తప్పులకు కారణమవుతుంది.</string>
     <string name="dont_ask_anymore">ఇంక అడగొద్దు</string>
     <string name="speed_limit_warning">వేగ పరిమితి హెచ్చరిక</string>
     <string name="when_exceeded">మించినప్పుడు</string>
     <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
-    <string name="login_and_pass">వాడుకరి పేరు, సంకేతపదం</string>
     <string name="shared_string_unchanged">మారలేదు</string>
     <string name="map_widget_map_scale">మ్యాప్ స్కేల్</string>
 </resources>

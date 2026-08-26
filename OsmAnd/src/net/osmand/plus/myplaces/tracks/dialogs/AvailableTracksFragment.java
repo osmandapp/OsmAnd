@@ -3,6 +3,7 @@ package net.osmand.plus.myplaces.tracks.dialogs;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.plus.configmap.tracks.TrackTabType.ON_MAP;
 import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_EMPTY_TRACKS;
+import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_FREE_BACKUP_CARD;
 import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_SORT_TRACKS;
 import static net.osmand.plus.utils.AndroidUtils.getViewOnScreenY;
 
@@ -23,6 +24,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.configmap.tracks.PreselectedTabParams;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.R;
@@ -35,6 +38,8 @@ import net.osmand.plus.myplaces.tracks.VisibleTracksGroup;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.RecordingTrackViewHolder.RecordingTrackListener;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.shared.gpx.GpxDbHelper;
@@ -53,7 +58,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class AvailableTracksFragment extends BaseTrackFolderFragment implements SmartFolderUpdateListener {
+public class AvailableTracksFragment extends BaseTrackFolderFragment implements SmartFolderUpdateListener, CardListener {
 
 	public static final String TAG = TrackItemsFragment.class.getSimpleName();
 
@@ -214,6 +219,9 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		boolean isSmartFoldersEmpty = Algorithms.isEmpty(smartFolderHelper.getSmartFolders());
 
 		items.add(TYPE_SORT_TRACKS);
+		if (rootFolder != null && TracksFreeBackupCard.shouldShow(app, rootFolder)) {
+			items.add(TYPE_FREE_BACKUP_CARD);
+		}
 		if (osmMonitoringEnabled) {
 			items.add(recordingTrackItem);
 		}
@@ -234,6 +242,26 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 			items.add(rootFolder.getFolderAnalysis());
 		}
 		return items;
+	}
+
+	@Override
+	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
+		if (card instanceof TracksFreeBackupCard
+				&& buttonIndex == TracksFreeBackupCard.GET_OSMAND_PRO_BUTTON_INDEX) {
+			ChoosePlanFragment.showInstance(requireActivity(), OsmAndFeature.OSMAND_CLOUD);
+		}
+	}
+
+	@Override
+	public void onCardPressed(@NonNull BaseCard card) {
+		if (card instanceof TracksFreeBackupCard) {
+			ChoosePlanFragment.showInstance(requireActivity(), OsmAndFeature.OSMAND_CLOUD);
+		}
+	}
+
+	@Override
+	public void onCardLayoutNeeded(@NonNull BaseCard card) {
+		updateContent();
 	}
 
 	private void updateRecordingTrack() {

@@ -49,6 +49,14 @@
 					app:typefaceWeight="medium"
 					tools:text="@string/map_widget_left" />
 
+				<LinearLayout
+					android:id="@+id/actions_container"
+					android:layout_width="wrap_content"
+					android:layout_height="match_parent"
+					android:layout_gravity="center_vertical"
+					android:gravity="center_vertical"
+					android:orientation="horizontal" />
+
 			</LinearLayout>
 
 		</androidx.appcompat.widget.Toolbar>
@@ -74,7 +82,7 @@
 				android:background="?attr/list_background_color"
 				android:clipToPadding="false"
 				android:paddingHorizontal="13dp"
-				android:paddingBottom="@dimen/content_padding"/>
+				android:paddingBottom="@dimen/content_padding_large"/>
 
 		</LinearLayout>
 

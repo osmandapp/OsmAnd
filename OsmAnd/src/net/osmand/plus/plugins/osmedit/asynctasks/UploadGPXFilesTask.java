@@ -33,14 +33,14 @@ public class UploadGPXFilesTask extends AsyncTask<File, String, String> {
 
 	public UploadGPXFilesTask(@NonNull OsmandApplication app, @NonNull Set<String> tags,
 			@NonNull String description, @Nullable String defaultActivity,
-			@Nullable UploadVisibility visibility, @Nullable UploadGpxListener listener) {
+			@NonNull UploadVisibility visibility, @Nullable UploadGpxListener listener) {
 		this.app = app;
 		this.gpxDbHelper = app.getGpxDbHelper();
 		this.remoteUtil = new OpenstreetmapRemoteUtil(app);
 		this.tags = tags;
 		this.description = description;
 		this.defaultActivity = defaultActivity;
-		this.visibility = visibility != null ? visibility.asUrlParam() : UploadVisibility.PRIVATE.asUrlParam();
+		this.visibility = visibility.asUrlParam();
 		this.listener = listener;
 	}
 

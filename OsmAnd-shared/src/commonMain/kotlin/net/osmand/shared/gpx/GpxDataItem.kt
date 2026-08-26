@@ -4,14 +4,19 @@ import net.osmand.shared.io.KFile
 import net.osmand.shared.routing.ColoringType
 import net.osmand.shared.util.PlatformUtil
 
-class GpxDataItem(
-	file: KFile
-) : DataItem(file) {
+class GpxDataItem private constructor(
+	file: KFile,
+	initializeFileParameters: Boolean
+) : DataItem(file, initializeFileParameters) {
+
+	constructor(file: KFile) : this(file, true)
 
 	private var analysis: GpxTrackAnalysis? = null
 
 	companion object {
 		fun isRegularTrack(file: KFile) = file.path().startsWith(PlatformUtil.getOsmAndContext().getGpxDir().path())
+
+		internal fun fromDatabase(file: KFile) = GpxDataItem(file, false)
 	}
 
 	fun isRegularTrack() = Companion.isRegularTrack(file)

@@ -27,18 +27,34 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RequiredMapsController implements IDialogController, DownloadEvents {
 
 	public static final String PROCESS_ID = "download_missing_maps";
 
+	public enum RequiredMapType {
+		USED,
+		MISSING,
+		OUTDATED
+	}
+
+	public record RequiredMapItem(@NonNull DownloadItem downloadItem,
+	                              @NonNull RequiredMapType type) {
+
+
+	}
+
 	private final OsmandApplication app;
 
 	private List<DownloadItem> mapsToDownload = new ArrayList<>();
-	private List<DownloadItem> missingMaps = new ArrayList<>();
-	private List<DownloadItem> usedMaps = new ArrayList<>();
+	private List<RequiredMapItem> mapsToProcess = new ArrayList<>();
+	private List<RequiredMapItem> routeOverviewItems = new ArrayList<>();
 	private boolean usedMapsPresent;
+	private boolean missingMapsPresent;
+	private boolean outdatedMapsPresent;
 	private final ItemsSelectionHelper<DownloadItem> itemsSelectionHelper = new ItemsSelectionHelper<>();
 
 	private boolean loadingMapsInProgress = false;
@@ -65,18 +81,18 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 		if (!loadingMapsInProgress) {
 			updateMapsToDownload();
 			itemsSelectionHelper.setAllItems(mapsToDownload);
-			itemsSelectionHelper.setSelectedItems(missingMaps);
+			itemsSelectionHelper.setSelectedItems(mapsToDownload);
 		}
 	}
 
 	@NonNull
-	public List<DownloadItem> getMapsToDownload() {
-		return mapsToDownload;
+	public List<RequiredMapItem> getMapsToProcess() {
+		return mapsToProcess;
 	}
 
 	@NonNull
-	public List<DownloadItem> getUsedMaps() {
-		return usedMaps;
+	public List<RequiredMapItem> getRouteOverviewItems() {
+		return routeOverviewItems;
 	}
 
 	public boolean isItemSelected(@NonNull DownloadItem downloadItem) {
@@ -84,36 +100,63 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 	}
 
 	private void updateMapsToDownload() {
-		RouteCalculationResult route = app.getRoutingHelper().getRoute();
-		MissingMapsCalculationResult result = route.getMissingMapsCalculationResult();
-
-		if (result == null) {
-			result = app.getRoutingHelper().getCurrentMissingMapsCalculationResult();
-		}
+		MissingMapsCalculationResult result = getMissingMapsResult(app);
 
 		List<WorldRegion> used = result != null ? result.getUsedMaps() : Collections.emptyList();
 		List<WorldRegion> missing = result != null ? result.getMissingMaps() : Collections.emptyList();
-		List<WorldRegion> download = result != null ? result.getMapsToDownload() : Collections.emptyList();
+		List<WorldRegion> outdated = result != null ? result.getMapsToUpdate() : Collections.emptyList();
 
-		this.mapsToDownload = collectMapsForRegions(download);
-		this.missingMaps = collectMapsForRegions(missing);
+		Map<String, RequiredMapItem> processItems = new LinkedHashMap<>();
+		collectMapItemsForRegions(missing, RequiredMapType.MISSING, processItems, false);
+		collectMapItemsForRegions(outdated, RequiredMapType.OUTDATED, processItems, false);
+		this.mapsToProcess = new ArrayList<>(processItems.values());
+		this.mapsToDownload = collectDownloadItems(mapsToProcess);
+		this.missingMapsPresent = !Algorithms.isEmpty(missing);
+		this.outdatedMapsPresent = containsType(mapsToProcess, RequiredMapType.OUTDATED);
 		this.usedMapsPresent = !Algorithms.isEmpty(used);
-		this.usedMaps = collectMapsForRegions(used);
+
+		Map<String, RequiredMapItem> overviewItems = new LinkedHashMap<>();
+		collectMapItemsForRegions(used, RequiredMapType.USED, overviewItems, true);
+		collectMapItemsForRegions(missing, RequiredMapType.MISSING, overviewItems, true);
+		collectMapItemsForRegions(outdated, RequiredMapType.OUTDATED, overviewItems, true);
+		this.routeOverviewItems = new ArrayList<>(overviewItems.values());
 	}
 
-	private List<DownloadItem> collectMapsForRegions(@NonNull List<WorldRegion> regions) {
-		List<DownloadItem> result = new ArrayList<>();
+	private void collectMapItemsForRegions(@NonNull List<WorldRegion> regions,
+	                                       @NonNull RequiredMapType type,
+	                                       @NonNull Map<String, RequiredMapItem> result,
+	                                       boolean replaceExisting) {
 		if (!Algorithms.isEmpty(regions)) {
 			DownloadResources resources = app.getDownloadThread().getIndexes();
-			for (WorldRegion missingRegion : regions) {
-				for (DownloadItem downloadItem : resources.getDownloadItems(missingRegion)) {
+			for (WorldRegion region : regions) {
+				for (DownloadItem downloadItem : resources.getDownloadItems(region)) {
 					if (downloadItem.getType() == DownloadActivityType.NORMAL_FILE) {
-						result.add(downloadItem);
+						String key = downloadItem.getFileName();
+						if (replaceExisting || !result.containsKey(key)) {
+							result.put(key, new RequiredMapItem(downloadItem, type));
+						}
 					}
 				}
 			}
 		}
+	}
+
+	@NonNull
+	private List<DownloadItem> collectDownloadItems(@NonNull List<RequiredMapItem> items) {
+		List<DownloadItem> result = new ArrayList<>();
+		for (RequiredMapItem item : items) {
+			result.add(item.downloadItem());
+		}
 		return result;
+	}
+
+	private boolean containsType(@NonNull List<RequiredMapItem> items, @NonNull RequiredMapType type) {
+		for (RequiredMapItem item : items) {
+			if (item.type() == type) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void onIgnoreMissingMapsButtonClicked() {
@@ -154,7 +197,8 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 			downloadSizeMb += downloadItem.getSizeToDownloadInMb();
 		}
 		String size = DownloadItem.getFormattedMb(app, downloadSizeMb);
-		String btnTitle = app.getString(R.string.shared_string_download);
+		String btnTitle = app.getString(outdatedMapsPresent && !missingMapsPresent
+				? R.string.shared_string_update : R.string.shared_string_download);
 		boolean displaySize = !loadingMapsInProgress && downloadSizeMb > 0;
 		return displaySize ? app.getString(R.string.ltr_or_rtl_combine_via_dash, btnTitle, size) : btnTitle;
 	}
@@ -234,6 +278,29 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 
 	public boolean shouldShowUseDownloadedMapsBanner() {
 		return usedMapsPresent;
+	}
+
+	public int getToolbarTitleId() {
+		if (missingMapsPresent && outdatedMapsPresent) {
+			return R.string.required_maps_missing_and_outdated_title;
+		} else if (outdatedMapsPresent) {
+			return R.string.update_maps;
+		}
+		return R.string.route_calculation_missing_maps;
+	}
+
+	public static boolean hasMapsToDisplay(@NonNull OsmandApplication app) {
+		MissingMapsCalculationResult result = getMissingMapsResult(app);
+		return result != null
+				&& (!Algorithms.isEmpty(result.getMapsToDownload())
+				|| !Algorithms.isEmpty(result.getUsedMaps()));
+	}
+
+	@Nullable
+	private static MissingMapsCalculationResult getMissingMapsResult(@NonNull OsmandApplication app) {
+		RouteCalculationResult route = app.getRoutingHelper().getRoute();
+		MissingMapsCalculationResult result = route.getMissingMapsCalculationResult();
+		return result != null ? result : app.getRoutingHelper().getCurrentMissingMapsCalculationResult();
 	}
 
 	private boolean isInternetConnectionAvailable() {

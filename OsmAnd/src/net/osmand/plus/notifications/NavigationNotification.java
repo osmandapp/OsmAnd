@@ -14,9 +14,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.car.app.notification.CarAppExtender;
 import androidx.car.app.notification.CarPendingIntent;
@@ -56,6 +56,8 @@ public class NavigationNotification extends OsmandNotification {
 	public static final String GROUP_NAME = "NAVIGATION";
 
 	private boolean leftSide;
+	private Bitmap turnBitmap;
+	private TurnDrawable turnDrawable;
 
 	public NavigationNotification(OsmandApplication app) {
 		super(app, GROUP_NAME);
@@ -171,14 +173,7 @@ public class NavigationNotification extends OsmandNotification {
 				}
 
 				if (turnType != null) {
-					TurnDrawable drawable = new TurnDrawable(app, false);
-					int height = (int) app.getResources().getDimension(android.R.dimen.notification_large_icon_height);
-					int width = (int) app.getResources().getDimension(android.R.dimen.notification_large_icon_width);
-					drawable.setBounds(0, 0, width, height);
-					drawable.setTurnType(turnType);
-					drawable.setTurnImminent(turnImminent, deviatedFromRoute);
-					drawable.updateColors(!app.getSettings().isLightSystemTheme());
-					turnBitmap = drawableToBitmap(drawable);
+					turnBitmap = getTurnBitmap(turnType, turnImminent, deviatedFromRoute);
 				}
 
 				notificationTitle = OsmAndFormatter.getFormattedDistance(nextTurnDistance, app, OsmAndFormatterParams.USE_LOWER_BOUNDS)
@@ -288,17 +283,27 @@ public class NavigationNotification extends OsmandNotification {
 		return app.getLocationProvider().getLastKnownLocation();
 	}
 
-	public Bitmap drawableToBitmap(Drawable drawable) {
-		int height = (int) app.getResources().getDimension(android.R.dimen.notification_large_icon_height);
+	@NonNull
+	private Bitmap getTurnBitmap(@NonNull TurnType turnType, int turnImminent, boolean deviatedFromRoute) {
 		int width = (int) app.getResources().getDimension(android.R.dimen.notification_large_icon_width);
+		int height = (int) app.getResources().getDimension(android.R.dimen.notification_large_icon_height);
 
-		Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-		Canvas canvas = new Canvas(bitmap);
+		if (turnDrawable == null) {
+			turnDrawable = new TurnDrawable(app, false);
+		}
+		if (turnBitmap == null || turnBitmap.isRecycled() || turnBitmap.getWidth() != width || turnBitmap.getHeight() != height) {
+			turnBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+		}
+		turnDrawable.setBounds(0, 0, width, height);
+		turnDrawable.setTurnType(turnType);
+		turnDrawable.setTurnImminent(turnImminent, deviatedFromRoute);
+		turnDrawable.updateColors(!app.getSettings().isLightSystemTheme());
+
+		Canvas canvas = new Canvas(turnBitmap);
 		canvas.drawColor(0, PorterDuff.Mode.CLEAR);
-		drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-		drawable.draw(canvas);
+		turnDrawable.draw(canvas);
 
-		return bitmap;
+		return turnBitmap;
 	}
 
 	@Override

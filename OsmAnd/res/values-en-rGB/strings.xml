@@ -5,17 +5,11 @@
 		This file is manually maintained in res/values-en-rGB and should ONLY contain strings where a different spelling should be used for English as used in the United Kingdom
 	-->
 	<string name="litres">Litres</string>
-    <string name="colour_of_circles">Colour of circles</string>
     <string name="add_edit_favorite">Add / Edit Favourite</string>
     <string name="favorites_item">Favourites</string>
-    <string name="slope_description">Slope uses colours to visualise terrain steepness.</string>
-    <string name="search_street_in_neighborhood_cities">Search for street in neighbourhood cities</string>
     <string name="custom_color">Custom colour</string>
     <string name="keep_passed_markers_descr">Markers added as a group of Favourites or GPX waypoints marked "Passed" will remain on the map. If the group is not active, the markers will disappear from the map.</string>
     <string name="osmand_net_previously_installed">All offline data in the old installed app will be supported by the new one, but Favourite points must be exported from the old app and then imported in the new one.</string>
-    <string name="import_file_favourites">Save data as GPX file or import waypoints to \'Favourites\'?</string>
-    <string name="fav_file_to_load_not_found">GPX file containing Favourites not found at {0}</string>
-    <string name="quick_favorites_show_favorites_dialog">Show Favourites dialog</string>
     <string name="base_profile_descr_aircraft">Aeroplane, gliding</string>
     <string name="rendering_attr_currentTrackColor_name">GPX colour</string>
     <string name="rendering_attr_currentTrackColor_description">GPX colour</string>
@@ -31,12 +25,8 @@
     <string name="import_gpx_file_description">can be imported as Favourites points, or as track file.</string>
     <string name="import_as_favorites">Import as Favourites</string>
     <string name="search_favorites">Search favourites</string>
-    <string name="favourites_edit_dialog_title">Favourite information</string>
-    <string name="save_as_favorites_points">Save as group of favourites</string>
-    <string name="change_color">Change colour</string>
     <string name="srtm_color_scheme">Colour scheme</string>
     <string name="towards">towards</string>
-    <string name="access_default_color">Default colour</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Colouring according to route scope</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Colouring according to OSMC</string>
     <string name="shared_string_favorite">Favourite</string>
@@ -45,7 +35,6 @@
     <string name="shared_string_my_favorites">My Favourites</string>
     <string name="traffic_warning_railways">Railway crossing</string>
     <string name="traffic_warning_pedestrian">Pedestrian crossing</string>
-    <string name="show_railway_warnings">Railway crossings</string>
     <string name="show_pedestrian_warnings">Pedestrian crossings</string>
     <string name="rendering_attr_subwayMode_name">Underground routes</string>
     <string name="fav_point_emoticons_message">The favourite point name has been modified to %1$s to facilitate properly saving the string with emoticons to a file.</string>
@@ -53,37 +42,20 @@
     <string name="fav_point_dublicate_message">Specified favourite name already in use, was changed to %1$s to avoid duplication.</string>
     <string name="speak_favorites">Nearby Favourites</string>
     <string name="rendering_attr_coloredBuildings_name">Colour-code buildings by type</string>
-    <string name="osmo_edit_color">Display colour</string>
-    <string name="favourites_list_activity">Select favourite</string>
     <string name="rendering_attr_roadColors_description">Select a road colour scheme:</string>
     <string name="rendering_attr_roadColors_name">Road colour scheme</string>
-    <string name="favourites_search_desc">Favourites search</string>
-    <string name="fav_export_confirmation">File with previously exported favourites already exists. Do you want to replace it?</string>
-    <string name="search_position_favorites">Favourites…</string>
-    <string name="favourites_delete_multiple_succesful">Favourite point(s) deleted successfully.</string>
     <string name="favorite_delete_multiple">You are going to delete %1$d favourite(s) and %2$d favourite group(s). Are you sure?</string>
     <string name="fav_imported_sucessfully">Favourites successfully imported</string>
-    <string name="fav_saved_sucessfully">Favourites successfully saved to {0}</string>
     <string name="no_fav_to_save">No favourite points to save</string>
     <string name="share_fav_subject">Favourites shared via OsmAnd</string>
-    <string name="fav_points_edited">Favourite point was edited</string>
-    <string name="fav_points_not_exist">No favourite points exist</string>
-    <string name="add_favorite_dialog_top_text">Enter favourite name</string>
-    <string name="add_favorite_dialog_default_favourite_name">Favourite</string>
-    <string name="add_favorite_dialog_favourite_added_template">Favourite point \'\'{0}\'\' was added successfully.</string>
     <string name="favourites_context_menu_add">Add favourite</string>
     <string name="favourites_context_menu_edit">Edit favourite</string>
     <string name="favourites_context_menu_delete">Delete favourite</string>
     <string name="favourites_remove_dialog_msg">Delete favourite point \'%s\'?</string>
-    <string name="favourites_remove_dialog_success">Favourite point {0} was successfully deleted.</string>
     <string name="replace_favorite_confirmation">Are you sure you want to replace favourite %1$s?</string>
-    <string name="always_center_position_on_map">Position placement always in centre</string>
     <string name="choose_auto_follow_route">Auto-centre map view</string>
     <string name="auto_follow_route_navigation">Auto-centre nav only</string>
-    <string name="auto_follow_route_navigation_descr">Auto-centre map view only while navigating.</string>
     <string name="auto_follow_location_enabled">Auto-centre map view in use.</string>
-    <string name="search_position_map_view">Current map centre</string>
-    <string name="search_near_map">Search near current map centre</string>
     <string name="position_on_map_center">Centre</string>
     <string name="route_general_information">Total distance %1$s, travelling time %2$d h %3$d m.</string>
     <string name="rendering_attr_contourColorScheme_name">Contour lines colour scheme</string>
@@ -91,14 +63,10 @@
     <string name="quick_action_replace_destination_desc">Tapping the action button will replace the destination with the screen centre location.</string>
     <string name="quick_action_add_first_intermediate_desc">Tapping the action button will add a first intermediate point at the screen centre location.</string>
     <string name="quick_action_add_parking_descr">Tapping the action button will add a parking place at the screen centre location.</string>
-    <string name="quick_action_add_osm_bug_descr">Tapping the action button will add an OSM note at the screen centre location.</string>
-    <string name="quick_action_add_poi_descr">Tapping the action button will add a POI at the screen centre location.</string>
     <string name="quick_action_add_marker_descr">Tapping the action button will add a map marker at the screen centre location.</string>
-    <string name="quick_action_add_gpx_descr">Tapping the action button will add a GPX waypoint at the screen centre location.</string>
     <string name="quick_action_showhide_favorites_descr">Tapping the action button will show or hide the favourite points on the map.</string>
     <string name="quick_action_category_descr">Category to save the Favourite in:</string>
     <string name="analyze_on_map">Analyse on map</string>
-    <string name="purchase_cancelled_dialog_title">You have cancelled your OsmAnd Live subscription</string>
     <string name="show_transparency_seekbar">Show transparency slider</string>
     <string name="app_mode_camper">Camper</string>
     <string name="osm_live_payment_discount_descr">Save %1$s</string>
@@ -122,7 +90,6 @@
 \n • Fix bugs with RTL
 \n
 \n</string>
-    <string name="choose_osmand_theme_descr">Customise app appearance.</string>
     <string name="release_3_4">• App profiles: Create a custom profile for your own needs, with a custom icon and colour
 \n
 \n • Now customize any profile\'s default and min/max speeds
@@ -146,7 +113,6 @@
 \n</string>
     <string name="auto_zoom_map_descr">Zoom level according to your speed (while the map is synchronised with current position).</string>
     <string name="customize_route_line">Customise route line</string>
-    <string name="intermediate_items_sort_return">Optimised order of intermediate destinations en-route to the destination.</string>
     <string name="osmand_extended_description_part3">Map
 \n • Displays POIs (point of interests) around you
 \n • Adjusts the map to your direction of motion (or compass)
@@ -172,7 +138,6 @@
 \n • Display specialised online tiles, satellite view (from Bing), different overlays like touring/navigation GPX tracks and additional layers with customizable transparency
 \n • Optionally display place names in English, local, or phonetic spelling
 \n</string>
-    <string name="choose_auto_follow_route_descr">Time until the map view synchronises with the current position.</string>
     <string name="ui_customization_description">Customise the number of items in \"Drawer\", \"Configure Map\" and \"Context Menu\".
 \n
 \nTurn off unused plugins to hide all their controls. %1$s.</string>
@@ -206,14 +171,12 @@
     <string name="original_color_description">Each point would keep its own colour.</string>
     <string name="ais_load_data">Load AIS data from file</string>
     <string name="popular_places">Popular places</string>
-    <string name="recently_visited">Recently visited</string>
     <string name="popular_places_nearby">Popular places nearby</string>
     <string name="choose_location">Choose a location</string>
     <string name="shared_string_map_center">Map centre</string>
     <string name="choose_location_on_map">Choose a location on the map.</string>
     <string name="apply_to_all_points">Apply to all points</string>
     <string name="hmd_promo">HMD Promo for %1$s months</string>
-    <string name="show_list">Show list</string>
     <string name="ais_address_settings">IP address settings</string>
     <string name="ais_nmea_protocol">Protocol for NMEA data reception</string>
     <string name="obd_simulation_device">Simulation device</string>
@@ -246,15 +209,12 @@
     <string name="sensors_not_available_for_ar">Sensors not available for AR</string>
     <string name="year">Year</string>
     <string name="ar_mode_enabled">AR Mode Enabled</string>
-    <string name="years_2_4">Years</string>
     <string name="ar_mode_disabled">AR Mode Disabled</string>
-    <string name="years_5">Years</string>
     <string name="release_5_3">• 3D Buildings support added\n\n • Spherical map view\n\n • Astronomy plugin with night map and star database\n\n • New color modes for Speedometer: tolerance and speeding\n\n • Separate widget layouts for Landscape and Portrait\n\n • Trip recording widgets: Moving speed and Average speed\n\n • Adapter voltage widget for Vehicle Metrics\n\n • Vehicle metrics data in Track Analyzer\n\n • Auto-organize tracks by year, length, activity &amp; more\n\n • Palette editor for Terrain and Track visualization\n\n • Improved search algorithms &amp; refreshed UI\n\n • Elevation profiles fixed for Routes\n\n • Favorites: new sorting options and UI refresh\n\n • Share link to any POI\n\n • Waypoint preview without closing the list\n\n • Bicycle width parameter to avoid narrow roads\n\n • Photo descriptions from Wikimedia</string>
     <string name="months_3">Three months</string>
     <string name="purchases_feature_desc_astronomy">Explore the night sky with an offline map and celestial catalog. Plan observations using smart visibility graphs, daily schedules, and an interactive AR mode.</string>
     <string name="years_3">Three years</string>
     <string name="shared_string_clear_filters">Clear filters</string>
-    <string name="price_free">Free</string>
     <string name="astro_sort_newest_first">Newest first</string>
     <string name="astro_sort_oldest_first">Oldest first</string>
     <string name="astro_expand_your_universe_title">Expand your universe</string>
@@ -266,12 +226,9 @@
     <string name="shared_string_milliradians">Milliradians</string>
     <string name="astro_visibility_show_today">Show today visibility</string>
     <string name="astro_schedule_show_current_week">Show current week</string>
-    <string name="astro_next_day_suffix">⁺¹</string>
     <string name="start_free_trial">Start free trial</string>
     <string name="subscription_free_trial_with_price">%1$s free, then %2$s</string>
-    <string name="access_intermediate_arrival_time">Intermediate arrival time</string>
     <string name="subscription_then_price">then %1$s</string>
-    <string name="map_widget_intermediate_time">Intermediate time</string>
     <string name="shared_string_radians">Radians</string>
     <string name="shared_string_previous">Previous</string>
     <string name="shared_string_unlock">Unlock</string>
@@ -307,7 +264,6 @@
         <item quantity="other">%d objects</item>
     </plurals>
     <string name="make_as_start_point">Make this the point of departure</string>
-    <string name="astro_search_constellation_with_code">Constellation (%1$s)</string>
     <string name="keep_and_add_destination_point">Add as subsequent destination</string>
     <string name="astro_search_type_in_location">%1$s in %2$s</string>
     <string name="subsequent_dest_description">Move destination up, and create it</string>
@@ -332,7 +288,6 @@
     <string name="astro_filter_visible_tonight">Visible tonight</string>
     <string name="shared_string_search">Search</string>
     <string name="astro_filter_visible_now">Visible now</string>
-    <string name="address_search_desc">Address search</string>
     <string name="astro_filter_show_all">Show all</string>
     <string name="astro_sort_sets_soonest">Sets soonest</string>
     <string name="shared_string_target_points">Destinations</string>
@@ -419,11 +374,9 @@
     <string name="help_article_map_interact_with_map_name">Interact with map</string>
     <string name="gradient_input_invalid_value_warn">Please enter a valid number.</string>
     <string name="help_article_map_map_context_menu_name">Map Context menu</string>
-    <string name="value_cannot_be_edited_warn">This value cannot be edited.</string>
     <string name="help_article_map_point_layers_on_map_name">Points on the map</string>
     <string name="unexpected_error_occurred_warn">An unexpected error occurred.</string>
     <string name="help_article_map_raster_maps_name">Raster Maps (Online / Offline)</string>
-    <string name="relative_gradient_point_m_summary">Colour for the maximum value found in the track.</string>
     <string name="help_article_map_track_context_menu_name">Tracks Context menu</string>
     <string name="relative_gradient_point_avg_summary">Colour for the average value of the track.</string>
     <string name="help_article_map_tracks_on_map_name">Tracks and Routes</string>
@@ -461,7 +414,6 @@
     <string name="help_article_navigation_routing_osmand_routing_name">About OsmAnd routing</string>
     <string name="intersection">Intersection</string>
     <string name="help_article_navigation_routing_pedestrian_routing_name">Pedestrian routing</string>
-    <string name="stars_articles">Stars articles</string>
     <string name="help_article_navigation_routing_public_transport_navigation_name">Public Transport routing</string>
     <string name="delete_groups_confirmation">Delete groups?</string>
     <string name="help_article_navigation_routing_ski_routing_name">Ski slopes and routes</string>
@@ -499,9 +451,7 @@
     <string name="help_article_purchases_ios_name">iOS purchases</string>
     <string name="astro_solar_system">Solar system</string>
     <string name="help_article_search_search_all_name">Search All</string>
-    <string name="building_3d_day_color_content_desc">3d buildings day theme color</string>
     <string name="help_article_search_search_coordinates_name">Search Coordinates</string>
-    <string name="building_3d_night_color_content_desc">3d buildings night theme colour</string>
     <string name="help_article_search_search_poi_name">Search POI</string>
     <string name="building_3d_low_details_content_desc">3d buildings low details</string>
     <string name="help_article_start_with_name">Begin with OsmAnd</string>
@@ -568,7 +518,6 @@
     <string name="history_preferences_descr">You can disable history logging individually for each history type.</string>
     <string name="month_year_creation">Month and Year of creation</string>
     <string name="nearest_city">Nearest city</string>
-    <string name="settings_preset_descr">Map view and navigation settings are remembered per use profile. Set your default profile here.</string>
     <string name="avg_speed">Avg. speed</string>
     <string name="unit_of_length">Units of length</string>
     <string name="organize_by_max_speed">Max. speed</string>
@@ -578,12 +527,8 @@
     <string name="gpx_too_many_points_visible_warning">Large amount of visible GPX tracks leads to high memory usage</string>
     <string name="astronomy_plugin_name">Astronomy</string>
     <string name="coordinates">Coordinates</string>
-    <string name="astronomy_plugin_description">Star charts, 3D star map</string>
-    <string name="coords_format_descr">Format for geographical coordinates.</string>
     <string name="star_map">Star map</string>
-    <string name="star_charts_name">Star charts</string>
     <string name="star_visibility_name">Star visibility</string>
-    <string name="send_log">Send log</string>
     <string name="star_altitude_name">Star altitude</string>
     <string name="copy_build_version">Copy build version</string>
     <string name="astro_name_sun">Sun</string>
@@ -604,7 +549,6 @@
     <string name="azimuthal_grid">Azimuthal Grid</string>
     <string name="equatorial_grid">Equatorial Grid</string>
     <string name="ecliptic_line">Ecliptic Line</string>
-    <string name="magnitude_filter">Magnitude filter</string>
     <string name="astro_planets">Planets</string>
     <string name="astro_constellation">Constellation</string>
     <string name="astro_constellations">Constellations</string>
@@ -621,8 +565,6 @@
     <string name="astro_galaxy_clusters">Galaxy Clusters</string>
     <string name="compass_click_desc">Double tap the compass button to switch the map orientation mode.</string>
     <string name="astro_black_holes">Black Holes</string>
-    <string name="driving_region_descr">Select driving region: US, Europe, UK, Asia, and others.</string>
-    <string name="visible_layers_and_objects">Visible Layers &amp; Objects</string>
     <string name="driving_region">Driving region</string>
     <string name="shared_string_azimuth">Azimuth</string>
     <string name="shared_string_automatic">Automatic</string>
@@ -650,7 +592,6 @@
     <string name="bicycle_width_limit_description">Provide your bicycle width to avoid narrow cycle paths.</string>
     <string name="monitoring_min_distance">Minimum displacement</string>
     <string name="copy_link">Copy link</string>
-    <string name="is_parking_time_limited">Is parking time limited?</string>
     <string name="save_track_logging_accuracy">Logging accuracy</string>
     <string name="efficient_grid">Efficient grid</string>
     <string name="monitoring_min_accuracy">Minimum accuracy</string>
@@ -665,9 +606,7 @@
     <string name="deleted_maps_prompt">These maps are no longer supported and have been replaced by smaller regions. Please remove them and download the new versions.</string>
     <string name="reset_plugin_to_default">Reset plugin settings to default</string>
     <string name="unsupported_maps">Unsupported maps</string>
-    <string name="save_heading">Include heading</string>
     <string name="quick_action_weather_layers">A toggle to show or hide weather layers on the map.</string>
-    <string name="save_heading_descr">Save heading to each track point while recording.</string>
     <string name="quick_action_wind_animation_layer">A toggle to show or hide the wind animation layer on the map.</string>
     <string name="distance_circles">Distance-circles</string>
     <string name="wind_animation_layer">Wind animation layer</string>
@@ -746,9 +685,7 @@
     <string name="descent">Descent</string>
     <string name="magnetic_bearing_widget_desc">Angle between magnetic north and the target point observed from your location.</string>
     <string name="map_orientations_choose_description">Leave empty to switch between all available modes, or add only your preferred ones.</string>
-    <string name="time_to_go_desc">Time in minutes or hours needed to reach your destination.</string>
     <string name="map_orientations">Map orientations</string>
-    <string name="arrival_time_widget_desc">Time of arrival at the destination point.</string>
     <string name="lanes_widgets_desc">Shows the current road lanes layout and highlights the ones to take while navigating.</string>
     <string name="write_location_provider_description">Save location provider to each track point while recording</string>
     <string name="route_guidance_desc">Provides real-time route guidance, including distance to the next turn, road name, current street name, and lane information. Widgets are active during navigation.</string>
@@ -761,7 +698,6 @@
     <string name="reverse_mode_calculate_route">Calculate route</string>
     <string name="coordinates_widget_desc">Shows the geographic coordinates of current geolocation.</string>
     <string name="reverse_mode_calculate_route_desc">Calculate a new, optimized route to the start.</string>
-    <string name="quick_action_coordinates_widget_descr">A toggle to show or hide the Coordinates widget on the map.</string>
     <string name="reverse_mode_original_track">Original track</string>
     <string name="mapillary_widget_descr">Allows quick contributions to Mapillary.</string>
     <string name="reverse_mode_original_track_desc">Follow the exact track back to the start.\nWarning: This can be dangerous as it ignores one-way traffic on roads.</string>
@@ -785,12 +721,10 @@
     <string name="next_turn_information_desc">Shows the upcoming turn direction and street name.</string>
     <string name="map_widget_group_sunrise_sunset_desc">These widgets show information about the next sunrise and sunset.</string>
     <string name="description_purchases_fastspring">You can manage your purchases through the FastSpring account management portal.</string>
-    <string name="map_widget_group_sunrise_sunset">Sunrise, sunset</string>
     <string name="description_subscription_fastspring">You can manage or cancel your subscription through the FastSpring account management portal.</string>
     <string name="manage_purchases">Manage purchases</string>
     <string name="angular_measeurement">Angular unit</string>
     <string name="failed_to_connect">Failed to connect to %1s</string>
-    <string name="angular_measeurement_descr">Change what azimuth is measured in.</string>
     <string name="shared_string_osm_link">OSM link</string>
     <string name="coordinates_format">Coordinate format</string>
     <string name="deleting">Deleting…</string>
@@ -842,11 +776,9 @@
     <string name="travel_guides">Guides</string>
     <string name="map_markers_desc">Widget shows distance or estimated time of arrival (ETA) for first two markers in the map markers list.</string>
     <string name="msg_gpx_waypoints_copied_to_favorites">GPX waypoints (%1$d) copied to favourites.</string>
-    <string name="route_maneuvers">Route maneuvers</string>
     <string name="msg_favorites_skipped_as_existing">Favourite points (%1$d) were skipped as already existing.</string>
     <string name="navigation_points">Navigation points</string>
     <string name="saved_to_device">Saved to device</string>
-    <string name="route_maneuvers_desc">Navigational widgets are enabled during navigation to display information such as distance, arrival or left time, next turns, bearing, current street name, lanes information, max speed, approaching alerts, POIs, waypoints.</string>
     <string name="save_to_device_error">Error saving to device</string>
     <string name="navigation_points_desc">Navigational widgets are enabled during navigation to display information such as distance, arrival or remaining time, next turns, bearing, current/next street name, lane information, max speed, approaching alerts, POIs, waypoints.</string>
     <string name="save_to_device">Save to device</string>
@@ -870,7 +802,6 @@
     <string name="wikidata">Wikidata</string>
     <string name="position_on_map_bottom">Bottom</string>
     <string name="prediction_time_description">Position icon in OsmAnd animates with each GPS update (once per second). A slight delay may occur, particularly during rapid movement or when the GPS sigis unstable.</string>
-    <string name="map_widget_appearance_rem">Remaining elements</string>
     <string name="prediction_time_advanced_description">Adjust the prediction time to minimise delay.</string>
     <string name="map_widget_compass">Compass</string>
 </resources>

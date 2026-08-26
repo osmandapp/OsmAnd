@@ -98,7 +98,8 @@ public class TrackColorController extends ColoringStyleCardController implements
 	public GradientPaletteController getGradientPaletteController(@NonNull GradientScaleType gradientScaleType) {
 		GradientPaletteCategory paletteCategory = gradientScaleType.toPaletteCategory();
 		if (gradientPaletteController == null) {
-			gradientPaletteController = new GradientPaletteController(app, paletteCategory, selectedGpx.getTrackAnalysis(app));
+			gradientPaletteController = new GradientPaletteController(
+					app, paletteCategory, selectedGpx.getTrackSummaryAnalysis(app));
 		}
 		gradientPaletteController.updatePalette(paletteCategory, drawInfo.getGradientColorName());
 		gradientPaletteController.setPaletteListener(getExternalListener());
@@ -113,7 +114,7 @@ public class TrackColorController extends ColoringStyleCardController implements
 	@NonNull
 	private IColoringStyleDetailsController getColoringStyleDetailsController() {
 		if (coloringStyleDetailsController == null) {
-			GpxTrackAnalysis analysis = selectedGpx != null ? selectedGpx.getTrackAnalysis(app) : null;
+			GpxTrackAnalysis analysis = selectedGpx != null ? selectedGpx.getTrackSummaryAnalysis(app) : null;
 			ColoringStyle selectedColoringStyle = drawInfo.getColoringStyle();
 			coloringStyleDetailsController = new ColoringStyleDetailsCardController(app, selectedColoringStyle, analysis);
 		}

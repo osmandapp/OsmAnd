@@ -22,28 +22,28 @@ public class ItemMenuBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 	public static final String TAG = "ItemMenuBottomSheetDialogFragment";
 
 	private ItemMenuFragmentListener listener;
-	private Recording recording;
+	private MediaNote note;
 
 	public void setListener(ItemMenuFragmentListener listener) {
 		this.listener = listener;
 	}
 
-	public void setRecording(Recording recording) {
-		this.recording = recording;
+	public void setNote(MediaNote note) {
+		this.note = note;
 	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		if (recording != null) {
-			items.add(new TitleItem(recording.getName(getContext(), true)));
+		if (note != null) {
+			items.add(new TitleItem(note.getName(getContext(), app.getGalleryHelper().getMetadataRepository(), true)));
 
 			BaseBottomSheetItem playItem = new SimpleBottomSheetItem.Builder()
-					.setIcon(getContentIcon(recording.isPhoto() ? R.drawable.ic_action_view : R.drawable.ic_play_dark))
-					.setTitle(getString(recording.isPhoto() ? R.string.watch : R.string.recording_context_menu_play))
+					.setIcon(getContentIcon(note.isPhoto() ? R.drawable.ic_action_view : R.drawable.ic_play_dark))
+					.setTitle(getString(note.isPhoto() ? R.string.watch : R.string.recording_context_menu_play))
 					.setLayoutId(R.layout.bottom_sheet_item_simple)
 					.setOnClickListener(v -> {
 						if (listener != null) {
-							listener.playOnClick(recording);
+							listener.playOnClick(note);
 						}
 						dismiss();
 					})
@@ -60,7 +60,7 @@ public class ItemMenuBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 					.setLayoutId(R.layout.bottom_sheet_item_simple)
 					.setOnClickListener(v -> {
 						if (listener != null) {
-							listener.shareOnClick(recording);
+							listener.shareOnClick(note);
 						}
 						dismiss();
 					})
@@ -68,13 +68,13 @@ public class ItemMenuBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 			items.add(shareItem);
 
 			BaseBottomSheetItem showOnMapItem = new BottomSheetItemWithDescription.Builder()
-					.setDescription(getString(R.string.route_descr_lat_lon, recording.getLatitude(), recording.getLongitude()))
+					.setDescription(getString(R.string.route_descr_lat_lon, note.getLatitude(), note.getLongitude()))
 					.setIcon(getContentIcon(R.drawable.ic_show_on_map))
 					.setTitle(getString(R.string.shared_string_show_on_map))
 					.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
 					.setOnClickListener(v -> {
 						if (listener != null) {
-							listener.showOnMapOnClick(recording);
+							listener.showOnMapOnClick(note);
 						}
 						dismiss();
 					})
@@ -83,18 +83,20 @@ public class ItemMenuBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 
 			items.add(new DividerHalfItem(getContext()));
 
-			BaseBottomSheetItem renameItem = new SimpleBottomSheetItem.Builder()
-					.setIcon(getContentIcon(R.drawable.ic_action_edit_dark))
-					.setTitle(getString(R.string.shared_string_rename))
-					.setLayoutId(R.layout.bottom_sheet_item_simple)
-					.setOnClickListener(v -> {
-						if (listener != null) {
-							listener.renameOnClick(recording);
-						}
-						dismiss();
-					})
-					.create();
-			items.add(renameItem);
+			if (note.isRecording()) {
+				BaseBottomSheetItem renameItem = new SimpleBottomSheetItem.Builder()
+						.setIcon(getContentIcon(R.drawable.ic_action_edit_dark))
+						.setTitle(getString(R.string.shared_string_rename))
+						.setLayoutId(R.layout.bottom_sheet_item_simple)
+						.setOnClickListener(v -> {
+							if (listener != null) {
+								listener.renameOnClick(note);
+							}
+							dismiss();
+						})
+						.create();
+				items.add(renameItem);
+			}
 
 			BaseBottomSheetItem deleteItem = new SimpleBottomSheetItem.Builder()
 					.setIcon(getContentIcon(R.drawable.ic_action_delete_dark))
@@ -102,7 +104,7 @@ public class ItemMenuBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 					.setLayoutId(R.layout.bottom_sheet_item_simple)
 					.setOnClickListener(v -> {
 						if (listener != null) {
-							listener.deleteOnClick(recording);
+							listener.deleteOnClick(note);
 						}
 						dismiss();
 					})
@@ -126,12 +128,12 @@ public class ItemMenuBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager,
 	                                @NonNull ItemMenuFragmentListener listener,
-	                                @NonNull Recording rec) {
+	                                @NonNull MediaNote note) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			ItemMenuBottomSheetDialogFragment fragment = new ItemMenuBottomSheetDialogFragment();
 			fragment.setUsedOnMap(false);
 			fragment.setListener(listener);
-			fragment.setRecording(rec);
+			fragment.setNote(note);
 			fragment.setRetainInstance(true);
 			fragment.show(fragmentManager, TAG);
 		}
@@ -139,14 +141,14 @@ public class ItemMenuBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 
 	interface ItemMenuFragmentListener {
 
-		void playOnClick(Recording recording);
+		void playOnClick(MediaNote note);
 
-		void shareOnClick(Recording recording);
+		void shareOnClick(MediaNote note);
 
-		void showOnMapOnClick(Recording recording);
+		void showOnMapOnClick(MediaNote note);
 
-		void renameOnClick(Recording recording);
+		void renameOnClick(MediaNote note);
 
-		void deleteOnClick(Recording recording);
+		void deleteOnClick(MediaNote note);
 	}
 }

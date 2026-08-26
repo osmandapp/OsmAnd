@@ -6,8 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.widgets.callback.OnClickListenerContainer;
 
-public class QuickSearchDisabledHistoryItem extends QuickSearchListItem {
+public class QuickSearchDisabledHistoryItem extends QuickSearchListItem implements OnClickListenerContainer {
 
 	private final View.OnClickListener listener;
 
@@ -20,8 +21,8 @@ public class QuickSearchDisabledHistoryItem extends QuickSearchListItem {
 		return QuickSearchListItemType.DISABLED_HISTORY;
 	}
 
+	@Override
 	public View.OnClickListener getOnClickListener() {
 		return listener;
 	}
 }
-

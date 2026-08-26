@@ -163,7 +163,8 @@ public abstract class MapWidgetInfo implements Comparable<MapWidgetInfo> {
 	}
 
 	@NonNull
-	public abstract WidgetsPanel getUpdatedPanel(ScreenLayoutMode layoutMode);
+	public abstract WidgetsPanel getUpdatedPanel(@NonNull ApplicationMode appMode,
+	                                             @Nullable ScreenLayoutMode layoutMode);
 
 	public boolean isEnabledForAppMode(@NonNull ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode) {
 		return isEnabledForAppMode(appMode, getWidgetsVisibility(getApp(), appMode, layoutMode));

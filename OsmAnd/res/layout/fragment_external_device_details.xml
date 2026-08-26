@@ -18,6 +18,7 @@
 		<include layout="@layout/connected_device_card" />
 
 		<ScrollView
+			android:id="@+id/scroll_view"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent">
 

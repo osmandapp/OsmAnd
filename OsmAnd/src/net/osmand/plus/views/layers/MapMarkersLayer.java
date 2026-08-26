@@ -49,6 +49,7 @@ import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmAndConstants;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -85,7 +86,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvider,
-		IContextMenuProviderSelection, ContextMenuLayer.IMoveObjectProvider {
+		IContextMenuProviderSelection, ContextMenuLayer.IMoveObjectProvider, OsmAndCompassListener {
 
 	public static class VectorLinePair {
 		public VectorLine inline;
@@ -206,9 +207,11 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
+		getApplication().getLocationProvider().removeCompassListener(this);
 		super.setMapActivity(mapActivity);
 		if (mapActivity != null) {
 			markersWidgetsHelper = new MarkersWidgetsHelper(mapActivity);
+			getApplication().getLocationProvider().addCompassListener(this);
 			longTapDetector = new GestureDetector(mapActivity, new GestureDetector.SimpleOnGestureListener() {
 				@Override
 				public void onLongPress(MotionEvent e) {
@@ -222,6 +225,19 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			}
 			longTapDetector = null;
 		}
+	}
+
+	@Override
+	public void updateCompassValue(float value) {
+		if (markersWidgetsHelper != null) {
+			markersWidgetsHelper.updateCompassValue(value);
+		}
+	}
+
+	@Override
+	public void destroyLayer() {
+		getApplication().getLocationProvider().removeCompassListener(this);
+		super.destroyLayer();
 	}
 
 	@NonNull

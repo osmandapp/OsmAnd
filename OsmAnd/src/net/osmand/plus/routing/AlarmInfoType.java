@@ -18,7 +18,8 @@ public enum AlarmInfoType {
 	PEDESTRIAN(8, R.string.traffic_warning_pedestrian),
 	HAZARD(9, R.string.traffic_warning_hazard),
 	MAXIMUM(10, R.string.traffic_warning),
-	TUNNEL(11, R.string.tunnel_warning);
+	TUNNEL(11, R.string.tunnel_warning),
+	RED_LIGHT_CAMERA(12, R.string.traffic_warning_red_light_camera);
 
 	private final int priority;
 	private final int titleId;
@@ -35,5 +36,9 @@ public enum AlarmInfoType {
 	@NonNull
 	public String getVisualName(@NonNull Context ctx) {
 		return ctx.getString(titleId);
+	}
+
+	public boolean isTrafficCamera() {
+		return this == SPEED_CAMERA || this == RED_LIGHT_CAMERA;
 	}
 }

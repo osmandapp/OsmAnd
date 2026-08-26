@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:title="@string/media_storage">
+
+	<SwitchPreferenceCompat
+		android:key="auto_copy_media_to_osmand_storage"
+		android:layout="@layout/preference_switch_with_descr"
+		android:summary="@string/always_keep_local_copy_description"
+		android:title="@string/always_keep_local_copy"
+		app:iconSpaceReserved="false" />
+
+</PreferenceScreen>

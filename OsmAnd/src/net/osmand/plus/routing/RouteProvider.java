@@ -1,10 +1,6 @@
 package net.osmand.plus.routing;
 
 
-import static net.osmand.plus.settings.enums.RoutingType.A_STAR_2_PHASE;
-import static net.osmand.plus.settings.enums.RoutingType.HH_CPP;
-import static net.osmand.plus.settings.enums.RoutingType.HH_JAVA;
-
 import android.os.Bundle;
 import android.util.Base64;
 
@@ -14,6 +10,7 @@ import net.osmand.Location;
 import net.osmand.LocationsHolder;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
+import net.osmand.plus.settings.enums.RouteCalculationMethod;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
@@ -35,7 +32,6 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.ApproximationType;
-import net.osmand.plus.settings.enums.RoutingType;
 import net.osmand.router.*;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
@@ -304,13 +300,16 @@ public class RouteProvider {
 		RoutePlannerFrontEnd.CALCULATE_MISSING_MAPS = !OsmandSettings.IGNORE_MISSING_MAPS;
 		RoutePlannerFrontEnd.CONTINUE_ON_MISSING_MAPS = !OsmandSettings.STOP_ON_MISSING_MAPS;
 
-		RoutingType routingType = settings.ROUTING_TYPE.getModeValue(params.mode);
-		if (routingType.isHHRouting()) {
+		RouteCalculationMethod method = settings.ROUTE_CALCULATION_METHOD.getModeValue(params.mode);
+
+		if (method.isFastRoutingPossible(params.mode)) {
 			router.setDefaultHHRoutingConfig();
-			router.setHHRouteCpp(routingType == HH_CPP);
 		} else {
 			router.setHHRoutingConfig(null);
 		}
+
+		router.setHHRouteCpp(!settings.SAFE_MODE.get());
+		router.setUseOnlyHHRouting(method.isFastRoutingOnly(params.mode));
 
 		ApproximationType approximationType = settings.APPROXIMATION_TYPE.getModeValue(params.mode);
 		router.setUseNativeApproximation(approximationType.isNativeApproximation());
@@ -374,7 +373,7 @@ public class RouteProvider {
 			}
 		}
 		boolean complex = !skipComplex && params.mode.isDerivedRoutingFrom(ApplicationMode.CAR)
-				&& (routingType == A_STAR_2_PHASE || routingType == HH_JAVA || routingType == HH_CPP)
+				// Setting using RoutingType A_STAR_CLASSIC/A_STAR_2_PHASE is deprecated
 				&& precalculated == null && router.getRecalculationEnd(ctx) == null;
 
 		RoutingContext complexCtx = null;

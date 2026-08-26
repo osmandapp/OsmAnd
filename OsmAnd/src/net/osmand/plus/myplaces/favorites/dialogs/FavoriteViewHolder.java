@@ -7,6 +7,7 @@ import static net.osmand.plus.utils.AndroidUtils.dpToPx;
 import static net.osmand.plus.utils.UpdateLocationUtils.getFormattedDistance;
 import static net.osmand.plus.utils.UpdateLocationUtils.updateDirectionDrawable;
 
+import android.graphics.Typeface;
 import android.text.SpannableStringBuilder;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -27,6 +28,7 @@ import net.osmand.plus.myplaces.favorites.dialogs.FavoriteFoldersAdapter.Favorit
 import net.osmand.plus.settings.enums.FavoriteListSortMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationInfo;
@@ -42,6 +44,7 @@ public class FavoriteViewHolder extends RecyclerView.ViewHolder {
 	private final OsmandApplication app;
 	private final boolean nightMode;
 	private final UpdateLocationViewCache locationViewCache;
+	private final UpdateLocationViewCache hiddenLocationViewCache;
 
 	private final TextView title;
 	private final TextView description;
@@ -55,11 +58,13 @@ public class FavoriteViewHolder extends RecyclerView.ViewHolder {
 	private final ImageView directionIcon;
 	private final LinearLayout infoContainer;
 
-	public FavoriteViewHolder(@NonNull View itemView, UpdateLocationViewCache locationViewCache, boolean nightMode) {
+	public FavoriteViewHolder(@NonNull View itemView, UpdateLocationViewCache locationViewCache,
+	                          UpdateLocationViewCache hiddenLocationViewCache, boolean nightMode) {
 		super(itemView);
 		this.app = (OsmandApplication) itemView.getContext().getApplicationContext();
 		this.nightMode = nightMode;
 		this.locationViewCache = locationViewCache;
+		this.hiddenLocationViewCache = hiddenLocationViewCache;
 
 		title = itemView.findViewById(R.id.title);
 		description = itemView.findViewById(R.id.description);
@@ -100,10 +105,7 @@ public class FavoriteViewHolder extends RecyclerView.ViewHolder {
 
 		title.setText(favouritePoint.getDisplayName(app), TextView.BufferType.SPANNABLE);
 		title.setMaxLines(2);
-
-		int color = app.getFavoritesHelper().getColorWithCategory(favouritePoint,
-				ColorUtilities.getColor(app, R.color.color_favorite));
-		imageView.setImageDrawable(PointImageUtils.getFromPoint(app, color, false, favouritePoint));
+		bindAppearance(favouritePoint);
 
 		int iconSize = (int) app.getResources().getDimension(R.dimen.favorites_my_places_icon_size);
 		LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) imageView.getLayoutParams();
@@ -123,6 +125,21 @@ public class FavoriteViewHolder extends RecyclerView.ViewHolder {
 		AndroidUiHelper.updateVisibility(divider, showDivider);
 
 		bindSelectionMode(selectionMode, listener, favouritePoint);
+	}
+
+	private void bindAppearance(@NonNull FavouritePoint favouritePoint) {
+		boolean visible = favouritePoint.isVisible();
+		if (visible) {
+			title.setTypeface(FontCache.getNormalFont());
+			title.setTextColor(ColorUtilities.getPrimaryTextColor(app, nightMode));
+		} else {
+			title.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
+			title.setTextColor(ColorUtilities.getSecondaryTextColor(app, nightMode));
+		}
+		int color = visible
+				? app.getFavoritesHelper().getColorWithCategory(favouritePoint, ColorUtilities.getColor(app, R.color.color_favorite))
+				: ColorUtilities.getDefaultIconColor(app, nightMode);
+		imageView.setImageDrawable(PointImageUtils.getFromPoint(app, color, false, favouritePoint));
 	}
 
 	@Nullable
@@ -167,10 +184,14 @@ public class FavoriteViewHolder extends RecyclerView.ViewHolder {
 
 	public void bindLocation(@NonNull FavoriteListSortMode sortMode, @NonNull FavouritePoint favouritePoint,
 	                         boolean showFolderNameOnSecondLine) {
+		LatLon fromLoc = FavoriteSortModesHelper.getDisplayReferenceLocation(app, sortMode);
 		LatLon toLoc = new LatLon(favouritePoint.getLatitude(), favouritePoint.getLongitude());
-		UpdateLocationInfo info = new UpdateLocationInfo(app, null, toLoc);
-		String descriptionText = getFormattedDistance(app, info, locationViewCache).toString();
-		updateDirectionDrawable(app, directionIcon, info, locationViewCache);
+		UpdateLocationInfo info = new UpdateLocationInfo(app, fromLoc, toLoc);
+		UpdateLocationViewCache viewCache = favouritePoint.isVisible()
+				? locationViewCache
+				: hiddenLocationViewCache;
+		String descriptionText = getFormattedDistance(app, info, viewCache).toString();
+		updateDirectionDrawable(app, directionIcon, info, viewCache);
 
 		String address = prepareAddress(favouritePoint.getAddress());
 		if (!Algorithms.isEmpty(address)) {

@@ -5,7 +5,7 @@ import static net.osmand.plus.download.local.LocalItemType.MAP_DATA;
 import static net.osmand.plus.download.local.LocalItemType.ROAD_DATA;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_AUDIO;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_CHOOSE;
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_TAKEPICTURE;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_PHOTO;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_VIDEO;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.DEFAULT_ACTION_SETTING_ID;
 import static net.osmand.plus.plugins.srtm.TerrainMode.DEFAULT_KEY;
@@ -38,6 +38,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+import net.osmand.LocationConvert;
 import net.osmand.data.LatLon;
 import net.osmand.data.SpecialPointType;
 import net.osmand.plus.api.SettingsAPI;
@@ -48,7 +49,7 @@ import net.osmand.plus.download.local.LocalItemUtils;
 import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile;
 import net.osmand.plus.keyevent.devices.ParrotDeviceProfile;
 import net.osmand.plus.keyevent.devices.WunderLINQDeviceProfile;
-import net.osmand.plus.gallery.helpers.AttachedMediaDataHelper;
+import net.osmand.plus.gallery.attached.helpers.AttachedMediaDataHelper;
 import net.osmand.plus.mapmarkers.MarkersDb39HelperLegacy;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -65,8 +66,12 @@ import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.preferences.*;
+import net.osmand.plus.settings.coordinates.CoordinateFormatIds;
+import net.osmand.plus.settings.coordinates.CoordinateFormatSettingsStorage;
 import net.osmand.plus.settings.enums.CompassMode;
+import net.osmand.plus.settings.enums.GridFormat;
 import net.osmand.plus.settings.enums.LocalSortMode;
+import net.osmand.plus.settings.enums.PanelBackgroundMode;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
@@ -74,6 +79,7 @@ import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsIdsMapper;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.configure.appearance.PanelAppearanceSettings;
 import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 import net.osmand.util.Algorithms;
 
@@ -167,8 +173,10 @@ public class AppVersionUpgradeOnInit {
 	public static final int VERSION_5_3_02 = 5302;
 	public static final int VERSION_5_3_04 = 5304;
 	public static final int VERSION_5_3_05 = 5305;
+	public static final int VERSION_5_3_06 = 5306;
+	public static final int VERSION_5_4_01 = 5401;
 
-	public static final int LAST_APP_VERSION = VERSION_5_3_05;
+	public static final int LAST_APP_VERSION = VERSION_5_4_01;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -337,6 +345,14 @@ public class AppVersionUpgradeOnInit {
 				}
 				if (prevAppVersion < VERSION_5_3_05) {
 					app.getAppInitializer().addOnFinishListener(init -> migrateAudioVideoNotesToFavorites());
+				}
+				if (prevAppVersion < VERSION_5_3_06) {
+					migrateCoordinateFormatSettings(settings);
+				}
+				if (prevAppVersion < VERSION_5_4_01) {
+					app.getAppInitializer().addOnStartListener(
+							init -> migrateTransparentWidgetsToPanelsAppearance()
+					);
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -612,7 +628,7 @@ public class AppVersionUpgradeOnInit {
 			return AV_NOTES_RECORD_AUDIO.id;
 		} else if (audioVideoNotesStateId == AV_DEFAULT_ACTION_VIDEO) {
 			return AV_NOTES_RECORD_VIDEO.id;
-		} else if (audioVideoNotesStateId == AV_DEFAULT_ACTION_TAKEPICTURE) {
+		} else if (audioVideoNotesStateId == AV_DEFAULT_ACTION_PHOTO) {
 			return AV_NOTES_TAKE_PHOTO.id;
 		} else {
 			return AV_NOTES_ON_REQUEST.id;
@@ -1075,6 +1091,24 @@ public class AppVersionUpgradeOnInit {
 		}
 	}
 
+	private void migrateTransparentWidgetsToPanelsAppearance() {
+		OsmandSettings settings = app.getSettings();
+		List<ScreenLayoutMode> layoutModes = new ArrayList<>(Arrays.asList(ScreenLayoutMode.values()));
+		layoutModes.add(null);
+
+		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
+			for (ScreenLayoutMode layoutMode : layoutModes) {
+				CommonPreference<Boolean> transparentPreference = settings.getTransparentMapThemePreference(layoutMode);
+				if (transparentPreference.isSetForMode(appMode) && transparentPreference.getModeValue(appMode)) {
+					for (WidgetsPanel panel : WidgetsPanel.values()) {
+						PanelAppearanceSettings appearanceSettings = app.getPanelAppearanceSettingsManager().get(panel);
+						appearanceSettings.getBackgroundModePref(layoutMode).setModeValue(appMode, PanelBackgroundMode.TRANSPARENT);
+					}
+				}
+			}
+		}
+	}
+
 	private void migrateWidgetPanelsPages() {
 		OsmandSettings settings = app.getSettings();
 		for (WidgetsPanel panel : WidgetsPanel.values()) {
@@ -1164,6 +1198,47 @@ public class AppVersionUpgradeOnInit {
 			plugin.indexingFiles(true, false);
 			new AttachedMediaDataHelper(app).convertRecordingsToFavorites(plugin.getAllRecordings());
 		}
+	}
+
+	private void migrateCoordinateFormatSettings(@NonNull OsmandSettings settings) {
+		CoordinateFormatSettingsStorage storage = settings.getCoordinateFormatSettingsStorage();
+		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
+			int legacyFormat = storage.getLegacyFormatPreference().getModeValue(appMode);
+			if (!storage.isPreferredIdsSetForMode(appMode)) {
+				storage.setPreferredIds(appMode, getLegacyCoordinateFormatPreferredIds(legacyFormat));
+			}
+			if (!settings.COORDINATE_GRID_FORMAT.isSetForMode(appMode)) {
+				settings.COORDINATE_GRID_FORMAT.setModeValue(appMode,
+						getLegacyCoordinateGridFormat(legacyFormat).getCoordinateFormatId());
+			}
+		}
+	}
+
+	@NonNull
+	public static List<String> getLegacyCoordinateFormatPreferredIds(int legacyFormat) {
+		LinkedHashSet<String> ids = new LinkedHashSet<>();
+		String primaryId = CoordinateFormatIds.fromOldFormat(legacyFormat);
+		if (primaryId != null) {
+			ids.add(primaryId);
+		}
+		ids.addAll(CoordinateFormatIds.ALL_BUILT_IN_FORMAT_IDS);
+		return Collections.unmodifiableList(new ArrayList<>(ids));
+	}
+
+	@NonNull
+	public static GridFormat getLegacyCoordinateGridFormat(int legacyFormat) {
+		return switch (legacyFormat) {
+			case LocationConvert.FORMAT_SECONDS -> GridFormat.DMS;
+			case LocationConvert.FORMAT_MINUTES -> GridFormat.DM;
+			case LocationConvert.FORMAT_DEGREES -> GridFormat.DIGITAL;
+			case LocationConvert.UTM_FORMAT -> GridFormat.UTM;
+			case LocationConvert.OLC_FORMAT -> GridFormat.OLC;
+			case LocationConvert.MGRS_FORMAT -> GridFormat.MGRS;
+			case LocationConvert.SWISS_GRID_FORMAT -> GridFormat.SWISS_GRID;
+			case LocationConvert.SWISS_GRID_PLUS_FORMAT -> GridFormat.SWISS_GRID_PLUS;
+			case LocationConvert.MAIDENHEAD_FORMAT -> GridFormat.MAIDENHEAD;
+			default -> GridFormat.DIGITAL;
+		};
 	}
 
 	private static final String DISABLE_MODE_STRING = "-1.0";

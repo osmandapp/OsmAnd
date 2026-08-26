@@ -446,4 +446,17 @@ public class BinaryMapDataObject {
 		}
 		return obj + " " + ObfConstants.getOsmObjectId(this);
 	}
+
+	public boolean isDeleted() {
+		if (mapIndex != null && types != null && types.length > 0) {
+			for (int i = 0; i < types.length; i++) {
+				int t = types[i];
+				TagValuePair tvp = mapIndex.decodeType(t);
+				if (tvp.tag.equals("osmand_change")) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }

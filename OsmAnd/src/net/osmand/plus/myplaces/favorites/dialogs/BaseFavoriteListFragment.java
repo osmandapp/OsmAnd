@@ -273,9 +273,13 @@ public abstract class BaseFavoriteListFragment extends BaseFullScreenFragment
 	}
 
 	public void shareFavorites(@NonNull List<FavoriteGroup> groups) {
+		shareFavorites(groups, null);
+	}
+
+	public void shareFavorites(@NonNull List<FavoriteGroup> groups, @Nullable String folderPath) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			OsmAndTaskManager.executeTask(new ShareFavoritesAsyncTask(activity, groups, this));
+			OsmAndTaskManager.executeTask(new ShareFavoritesAsyncTask(activity, groups, folderPath, this));
 		}
 	}
 

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="horizontal">
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/title"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
+		android:layout_weight="1"
+		android:drawablePadding="@dimen/bottom_sheet_icon_margin"
+		android:gravity="center_vertical"
+		android:minHeight="@dimen/list_item_height"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingLeft="@dimen/content_padding"
+		android:paddingEnd="@dimen/content_padding"
+		android:paddingRight="@dimen/content_padding"
+		android:textAppearance="@style/TextAppearance.ListItemTitle"
+		android:textStyle="normal"
+		tools:drawableStart="@drawable/ic_action_search_dark"
+		tools:text="@string/layer_poi" />
+
+	<TextView
+		android:id="@+id/secondary_description"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
+		android:layout_marginEnd="24dp"
+		android:background="@drawable/free_version_banner_cta_discount_bg"
+		android:gravity="center"
+		android:minWidth="52dp"
+		android:paddingLeft="@dimen/content_padding_half"
+		android:paddingTop="@dimen/content_padding_small_half"
+		android:paddingRight="@dimen/content_padding_half"
+		android:paddingBottom="@dimen/content_padding_small_half"
+		android:textColor="@color/active_buttons_and_links_text_light"
+		android:textSize="@dimen/default_desc_text_size"
+		tools:text="-50%" />
+
+</LinearLayout>

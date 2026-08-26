@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content">
+
+	<LinearLayout
+		android:id="@+id/ready_state_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingTop="@dimen/content_padding_small_half"
+		android:paddingEnd="@dimen/content_padding"
+		android:paddingBottom="@dimen/content_padding">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/description"
+			style="@style/TitleStyle"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:textColor="?android:textColorPrimary"
+			tools:text="Favorite points in Summer Trip have attached media. Share points only, or points with media as an archive." />
+
+		<com.google.android.material.card.MaterialCardView
+			android:id="@+id/points_only_button"
+			style="@style/Widget.App.Material.ActionTileCard"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:minHeight="@dimen/dialog_button_ex_height"
+			android:layout_marginTop="@dimen/content_padding_small_double"
+			android:clickable="true"
+			android:focusable="true"
+			android:stateListAnimator="@null"
+			app:cardBackgroundColor="?attr/active_color_secondary"
+			app:cardElevation="0dp"
+			app:rippleColor="@color/share_favorites_card_ripple"
+			app:shapeAppearanceOverlay="@style/Shape.Card6"
+			app:strokeWidth="0dp">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:duplicateParentState="true"
+				android:layout_gravity="center"
+				android:gravity="center"
+				android:orientation="vertical"
+				android:paddingStart="@dimen/content_padding_small"
+				android:paddingEnd="@dimen/content_padding_small">
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/points_only_title"
+					style="@style/TitleStyle.Medium"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:duplicateParentState="true"
+					android:text="@string/share_favorites_points_only"
+					android:textColor="?attr/active_color_primary" />
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/points_only_description"
+					style="@style/DescStyle"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:duplicateParentState="true"
+					android:textColor="?attr/text_color_secondary"
+					tools:text="GPX • 45 KB" />
+
+			</LinearLayout>
+
+		</com.google.android.material.card.MaterialCardView>
+
+		<com.google.android.material.card.MaterialCardView
+			android:id="@+id/points_and_media_button"
+			style="@style/Widget.App.Material.ActionTileCard"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:minHeight="@dimen/dialog_button_ex_height"
+			android:layout_marginTop="@dimen/content_padding"
+			android:clickable="true"
+			android:focusable="true"
+			android:stateListAnimator="@null"
+			app:cardBackgroundColor="?attr/ctx_menu_card_btn"
+			app:cardElevation="0dp"
+			app:rippleColor="@color/share_favorites_card_ripple"
+			app:shapeAppearanceOverlay="@style/Shape.Card6"
+			app:strokeWidth="0dp">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:duplicateParentState="true"
+				android:layout_gravity="center"
+				android:gravity="center"
+				android:orientation="vertical"
+				android:paddingStart="@dimen/content_padding_small"
+				android:paddingEnd="@dimen/content_padding_small">
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/points_and_media_title"
+					style="@style/TitleStyle.Medium"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:duplicateParentState="true"
+					android:text="@string/share_favorites_points_and_media"
+					android:textColor="?attr/active_color_primary" />
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/points_and_media_description"
+					style="@style/DescStyle"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:duplicateParentState="true"
+					android:textColor="?attr/text_color_secondary"
+					tools:text="Archive • 12 files • 138 MB" />
+
+			</LinearLayout>
+
+		</com.google.android.material.card.MaterialCardView>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/preparing_state_container"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:gravity="center"
+		android:orientation="vertical"
+		android:padding="@dimen/content_padding"
+		tools:visibility="gone">
+
+		<ProgressBar
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:indeterminate="true" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			style="@style/DescStyle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/content_padding_small"
+			android:text="@string/preparing_file"
+			android:textColor="?android:textColorPrimary" />
+
+	</LinearLayout>
+
+</FrameLayout>

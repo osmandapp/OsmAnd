@@ -24,6 +24,11 @@ import net.osmand.util.Algorithms;
 public class EntityParser {
 
 	public static void parseMapObject(MapObject mo, Entity e, Map<String, String> tags) {
+		parseMapObject(mo, e, tags, true);
+	}
+	
+	public static void parseMapObject(MapObject mo, Entity e, Map<String, String> tags,
+			boolean setNameFromRef) {
 		mo.setId(e.getId());
 		// use for all to make this type consistent everywhere (since 5.2)
 //		if (mo instanceof Amenity ) {
@@ -68,7 +73,7 @@ public class EntityParser {
 				mo.setLocation(l.getLatitude(), l.getLongitude());
 			}
 		}
-		if (mo.getName().length() == 0) {
+		if (mo.getName().length() == 0 && setNameFromRef) {
 			setNameFromRef(mo, tags);
 		}
 		if (mo.getName().length() == 0) {
@@ -159,7 +164,7 @@ public class EntityParser {
 
 
 	public static List<Amenity> parseAmenities(MapPoiTypes poiTypes, Entity entity, Map<String, String> tags,
-			List<Amenity> amenitiesList) {
+			List<Amenity> amenitiesList, boolean setNameFromRef) {
 		amenitiesList.clear();
 		// it could be collection of amenities
 		boolean relation = entity instanceof Relation;
@@ -187,20 +192,21 @@ public class EntityParser {
 						}
 					}
 					for (Amenity am : multiAmenitiesByType.values()) {
-						addAmenity(entity, amenitiesList, ts, am);
+						addAmenity(entity, amenitiesList, ts, am, setNameFromRef);
 					}
 				} else {
 					Amenity am = poiTypes.parseAmenity(key, value, purerelation, ts);
-					addAmenity(entity, amenitiesList, ts, am);
+					addAmenity(entity, amenitiesList, ts, am, setNameFromRef);
 				}
 			}
 		}
 		return amenitiesList;
 	}
 
-	private static void addAmenity(Entity entity, List<Amenity> amenitiesList, Map<String, String> ts, Amenity am) {
+	private static void addAmenity(Entity entity, List<Amenity> amenitiesList, Map<String, String> ts, 
+			Amenity am, boolean setNameFromRef) {
 		if (am != null && checkAmenitiesToAdd(am, amenitiesList)) {
-			parseMapObject(am, entity, ts);
+			parseMapObject(am, entity, ts, setNameFromRef);
 			setWikipediaUrl(am, ts);
 			amenitiesList.add(am);
 		}

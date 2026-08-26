@@ -5,6 +5,7 @@ import net.osmand.shared.media.domain.MediaItem
 import net.osmand.shared.media.domain.MediaOrigin
 import net.osmand.shared.media.domain.MediaPreviewUris
 import net.osmand.shared.media.domain.MediaType
+import net.osmand.shared.util.KAlgorithms
 import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 
@@ -15,6 +16,7 @@ object LinkMediaFactory {
 	private const val HTTP_SCHEME = "http://"
 	private const val HTTPS_SCHEME = "https://"
 	private const val OSMAND_SCHEME = "osmand://"
+	private const val INTERNAL_MEDIA_LINK_NAMESPACE = "media"
 
 	@JvmStatic
 	@JvmOverloads
@@ -27,8 +29,30 @@ object LinkMediaFactory {
 		return OSMAND_SCHEME + path
 	}
 
-	private fun fromLink(link: Link?, origin: MediaOrigin): MediaItem? {
-		val uri = link?.href?.trim()?.takeIf { it.isNotEmpty() } ?: return null
+	@JvmStatic
+	fun createInternalMediaUri(fileName: String): String {
+		return createInternalUri("$INTERNAL_MEDIA_LINK_NAMESPACE/$fileName")
+	}
+
+	/** Extracts the bare file name from an internal link path such as "media/x.1.jpg". */
+	@JvmStatic
+	fun getInternalMediaFileName(internalPath: String?): String? {
+		return internalPath
+			?.trim { it.isWhitespace() || it == '/' }
+			?.let { KAlgorithms.getFileWithoutDirs(it) }
+			?.takeIf { it.isNotEmpty() }
+	}
+
+	@JvmStatic
+	fun getMediaId(link: Link?): String? {
+		val uri = normalizedHref(link) ?: return null
+		return getInternalPath(uri) ?: uri
+	}
+
+	private fun normalizedHref(link: Link?): String? = link?.href?.trim()?.takeIf { it.isNotEmpty() }
+
+	private fun fromLink(link: Link, origin: MediaOrigin): MediaItem? {
+		val uri = normalizedHref(link) ?: return null
 		val type = getMediaType(link.type, uri)
 		if (type == MediaType.UNKNOWN) {
 			return null
@@ -66,9 +90,8 @@ object LinkMediaFactory {
 	private fun isRemoteUri(uri: String) = uri.startsWith(HTTP_SCHEME, ignoreCase = true)
 			|| uri.startsWith(HTTPS_SCHEME, ignoreCase = true)
 
-	private fun isOsmandUri(uri: String) = uri.startsWith(OSMAND_SCHEME, ignoreCase = true)
-
-	private fun getInternalPath(uri: String): String? {
+	@JvmStatic
+	fun getInternalPath(uri: String): String? {
 		if (!uri.startsWith(OSMAND_SCHEME, ignoreCase = true)) {
 			return null
 		}
@@ -98,43 +121,12 @@ object LinkMediaFactory {
 				return MediaType.UNKNOWN
 			}
 		}
-		return getMediaTypeByExtension(uri)
+		return MediaType.fromFileName(uri)
 	}
 
 	private fun isGenericMimeType(mimeType: String): Boolean {
 		return mimeType == "*/*"
 				|| mimeType == "application/octet-stream"
 				|| mimeType == "binary/octet-stream"
-	}
-
-	private fun getMediaTypeByExtension(uri: String): MediaType {
-		return when (getExtension(uri)) {
-			"jpg", "jpeg", "png", "gif", "webp", "bmp", "heic", "heif", "svg" -> MediaType.PHOTO
-			"mp4", "m4v", "mov", "avi", "mkv", "webm" -> MediaType.VIDEO
-			"3gp", "3gpp", "mp3", "m4a", "aac", "wav", "ogg", "oga", "opus", "amr" -> MediaType.AUDIO
-			else -> MediaType.UNKNOWN
-		}
-	}
-
-	private fun getExtension(uri: String): String? {
-		var end = uri.length
-		val queryIndex = uri.indexOf('?')
-		val fragmentIndex = uri.indexOf('#')
-		if (queryIndex >= 0) {
-			end = queryIndex
-		}
-		if (fragmentIndex in 0..<end) {
-			end = fragmentIndex
-		}
-		if (end == 0) {
-			return null
-		}
-		val slashIndex = uri.lastIndexOf('/', end - 1)
-		val dotIndex = uri.lastIndexOf('.', end - 1)
-		return if (dotIndex > slashIndex && dotIndex + 1 < end) {
-			uri.substring(dotIndex + 1, end).lowercase()
-		} else {
-			null
-		}
 	}
 }

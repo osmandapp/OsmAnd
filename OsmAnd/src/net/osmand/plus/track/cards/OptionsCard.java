@@ -230,7 +230,7 @@ public class OptionsCard extends MapBaseCard {
 
 	private BaseBottomSheetItem createUploadOsmItem() {
 		OsmEditingPlugin osmEditingPlugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
-		if (osmEditingPlugin != null && selectedGpxFile.getTrackAnalysis(app).isTimeMoving()) {
+		if (osmEditingPlugin != null && selectedGpxFile.getTrackSummaryAnalysis(app).isTimeMoving()) {
 			return new SimpleBottomSheetItem.Builder()
 					.setIcon(getActiveIcon(R.drawable.ic_action_upload_to_openstreetmap))
 					.setTitle(app.getString(R.string.upload_to_openstreetmap))

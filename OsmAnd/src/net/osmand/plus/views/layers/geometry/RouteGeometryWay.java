@@ -1,5 +1,7 @@
 package net.osmand.plus.views.layers.geometry;
 
+import static net.osmand.util.MapUtils.VECTOR_LINE_EARTH_RADIUS_METERS;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -269,6 +271,21 @@ public class RouteGeometryWay extends
 	@Override
 	protected boolean shouldDrawArrows() {
 		return drawDirectionArrows;
+	}
+
+	@Override
+	protected double getSegmentDistance(double lat1, double lon1, double lat2, double lon2) {
+		return MapUtils.getDistance(lat1, lon1, lat2, lon2, VECTOR_LINE_EARTH_RADIUS_METERS);
+	}
+
+	@Override
+	protected double getProjectionDistance(@NonNull Location projection, int x31, int y31) {
+		return MapUtils.getDistance(
+				projection.getLatitude(),
+				projection.getLongitude(),
+				MapUtils.get31LatitudeY(y31),
+				MapUtils.get31LongitudeX(x31),
+				VECTOR_LINE_EARTH_RADIUS_METERS);
 	}
 
 	public void clearRoute() {

@@ -2,7 +2,6 @@ package net.osmand.plus.settings.fragments;
 
 import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
 import static net.osmand.plus.settings.backend.OsmandSettings.ROUTING_PREFERENCE_PREFIX;
-import static net.osmand.plus.settings.enums.RoutingType.HH_JAVA;
 import static net.osmand.plus.settings.fragments.DangerousGoodsFragment.getHazmatUsaClass;
 import static net.osmand.plus.settings.fragments.SettingsScreenType.DANGEROUS_GOODS;
 import static net.osmand.plus.utils.AndroidUtils.getRoutingStringPropertyName;
@@ -53,10 +52,11 @@ import net.osmand.plus.settings.bottomsheets.ElevationDateBottomSheet;
 import net.osmand.plus.settings.bottomsheets.GoodsRestrictionsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.HazmatCategoryBottomSheet;
 import net.osmand.plus.settings.bottomsheets.RecalculateRouteInDeviationBottomSheet;
+import net.osmand.plus.settings.bottomsheets.RouteCalculationMethodBottomSheet;
 import net.osmand.plus.settings.controllers.ViaFerrataDialogController;
 import net.osmand.plus.settings.enums.ApproximationType;
 import net.osmand.plus.settings.enums.DrivingRegion;
-import net.osmand.plus.settings.enums.RoutingType;
+import net.osmand.plus.settings.enums.RouteCalculationMethod;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.settings.preferences.ListParameters;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
@@ -227,6 +227,10 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 			getPreferenceScreen().addPreference(straightAngle);
 		}
 
+		if (settings.ROUTE_CALCULATION_METHOD.get().canProfileUseFastRouting(am)) {
+			setupRouteCalculationMethodPref(screen);
+		}
+
 		addDividerPref();
 		setupRouteRecalcHeader(screen);
 		setupSelectRouteRecalcDistance(screen);
@@ -317,6 +321,23 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		setupTimeConditionalRoutingPref();
 	}
 
+	private void setupRouteCalculationMethodPref(@NonNull PreferenceScreen screen) {
+		RouteCalculationMethod[] methods = RouteCalculationMethod.values();
+		String[] names = new String[methods.length];
+		Integer[] values = new Integer[methods.length];
+
+		for (int i = 0; i < names.length; i++) {
+			RouteCalculationMethod method = methods[i];
+			values[i] = method.ordinal();
+			names[i] = method.toHumanString(app);
+		}
+
+		ListPreferenceEx preference = createListPreferenceEx(settings.ROUTE_CALCULATION_METHOD.getId(), names,
+				values, R.string.route_calculation_method, R.layout.preference_with_descr);
+		preference.setIcon(getPersistentPrefIcon(R.drawable.ic_action_route_direct));
+		screen.addPreference(preference);
+	}
+
 	public static Preference createRoutingParameterPref(@NonNull Context ctx,
 			@NonNull RoutingParameter p) {
 		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
@@ -404,7 +425,6 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 			setupOsmLiveForPublicTransportPref();
 			setupNativePublicTransport();
 		} else {
-			setupRoutingTypePref();
 			setupApproximationTypePref();
 			setupAutoZoomPref();
 			setupOsmLiveForRoutingPref();
@@ -452,46 +472,6 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		displayData.nightMode = isNightMode();
 		displayData.widthMode = PopUpMenuWidthMode.STANDARD;
 		PopUpMenu.show(displayData);
-	}
-
-	private void showRoutingTypeDialog(@NonNull Preference preference) {
-		List<PopUpMenuItem> items = new ArrayList<>();
-
-		RoutingType selectedType = settings.ROUTING_TYPE.getModeValue(getSelectedAppMode());
-
-		for (RoutingType type : RoutingType.values()) {
-			items.add(new PopUpMenuItem.Builder(app)
-					.setTitleId(type.getTitleId())
-					.setSelected(selectedType == type)
-					.showTopDivider(type == HH_JAVA)
-					.showCompoundBtn(getActiveProfileColor())
-					.setOnClickListener(v -> onPreferenceChange(preference, type))
-					.create());
-		}
-
-		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
-		displayData.anchorView = getListView().findViewWithTag(preference);
-		displayData.menuItems = items;
-		displayData.nightMode = isNightMode();
-		displayData.widthMode = PopUpMenuWidthMode.STANDARD;
-		PopUpMenu.show(displayData);
-	}
-
-	private void setupRoutingTypePref() {
-		RoutingType[] types = RoutingType.values();
-		String[] names = new String[types.length];
-		Integer[] values = new Integer[types.length];
-
-		for (int i = 0; i < names.length; i++) {
-			RoutingType type = types[i];
-			values[i] = type.ordinal();
-			names[i] = type.toHumanString(app);
-		}
-
-		ListPreferenceEx preference = createListPreferenceEx(settings.ROUTING_TYPE.getId(), names,
-				values, R.string.routing_type, R.layout.preference_with_descr);
-		preference.setIcon(getContentIcon(R.drawable.ic_action_route_points));
-		getPreferenceScreen().addPreference(preference);
 	}
 
 	private void showApproximationTypeDialog(@NonNull Preference preference) {
@@ -587,8 +567,10 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 			if (manager != null) {
 				AvoidRoadsPreferencesBottomSheet.showInstance(manager, prefId, this, appMode, false, isProfileDependent());
 			}
-		} else if (settings.ROUTING_TYPE.getId().equals(prefId)) {
-			showRoutingTypeDialog(preference);
+		} else if (settings.ROUTE_CALCULATION_METHOD.getId().equals(prefId)) {
+			if (manager != null) {
+				RouteCalculationMethodBottomSheet.showInstance(manager, prefId, this, appMode, isProfileDependent());
+			}
 		} else if (settings.APPROXIMATION_TYPE.getId().equals(prefId)) {
 			showApproximationTypeDialog(preference);
 		} else {

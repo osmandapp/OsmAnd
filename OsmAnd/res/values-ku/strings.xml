@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="local_indexes_cat_av">Daneya Deng/Vîdyoyê</string>
     <string name="stop_routing_confirm">Tu dixwazî navîgasyonê bisekinînî?</string>
     <string name="recording_context_menu_show">Nîşan bide</string>
     <string name="av_def_action_picture">Wêneyek bikişîne</string>
     <string name="recording_context_menu_precord">Fotografek bikişîne</string>
     <string name="av_def_action_video">Vîdyoyek çêke</string>
     <string name="av_def_action_audio">Deng qeyd bike</string>
-    <string name="recording_camera_not_available">Kamera ne berdest e</string>
-    <string name="application_dir_change_warning3">Gelo tu dixwazî OsmAnd daneyên dosyeyê jî ji cihê armanca te ya nû re kopî bike?</string>
     <string name="specified_directiory_not_writeable">Nexşe li wê cihê ku hatibû diyarkirin nikare were çêkirin</string>
     <string name="favorite_category_add_new">Nû Têxe</string>
     <string name="si_nm">Mîlê behrê</string>
     <string name="shared_string_trip_recording">Qeydkirina gerrê</string>
-    <string name="favourites_edit_dialog_title">Agahdariyên favorî</string>
     <string name="shared_string_upload">Bar bike</string>
     <string name="go_to_map">Nexşeyê nîşan bide</string>
     <string name="shared_string_near">Nêzîk</string>
@@ -31,19 +27,12 @@
     <string name="shared_string_hide">Veşêre</string>
     <string name="shared_string_contact">Têkilî</string>
     <string name="feedback">Gotinên we</string>
-    <string name="search_on_the_map_item">Lêgerîna Nexşeyê</string>
     <string name="other_menu_group">A din</string>
-    <string name="route_distance">Dûrahî:</string>
-    <string name="route_duration">Mudet:</string>
     <string name="show_on_start">Di despêkê de nîşan bide</string>
-    <string name="map_viewing_item">Dîtina nexşeyê</string>
-    <string name="navigation_item_description">Navîgasyonê saz bike.</string>
     <string name="downloads">Yên barkirî</string>
     <string name="later">Paşê</string>
     <string name="buy">Bikirre</string>
     <string name="roads">Riyan</string>
-    <string name="features_menu_group">Taybetmendî</string>
-    <string name="enter_country_name">Navê welatê binivîsin</string>
     <string name="are_you_sure">Te biryar da?</string>
     <string name="working_days">Rojên Karê</string>
     <string name="poi_dialog_poi_type">Cureya POIyê</string>
@@ -71,7 +60,6 @@
     <string name="weekly">Hefteyî</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="value_downloaded_of_max">%1$.1f of %2$.1f MB</string>
-    <string name="help_us_to_improve_menu_group">Ji bo perisandina Osmand alîkariyê bidin</string>
     <string name="plugins_menu_group">Lehikan</string>
     <string name="closing_at">Girtin</string>
     <string name="opening_at">Vekirin</string>
@@ -87,21 +75,15 @@
     <string name="donations">Bexş bike</string>
     <string name="osm_live_subscribe_btn">Bibe abone</string>
     <string name="osm_live_active">Çalak</string>
-    <string name="osm_live_not_active">Neçalak e</string>
     <string name="reports_for">Ji bo raporkirina</string>
     <string name="update_now">Niha rojane bike</string>
     <string name="sort_by">Tesnîfkirina gorî</string>
     <string name="do_not_use_animations">Ti anîmasyon tine ye</string>
-    <string name="do_not_use_animations_descr">Di sepanê de anîmasyonan disekinîne.</string>
     <string name="exit_without_saving">Bêyî qeydkirin dixwazî derkevî?</string>
     <string name="line">Xet</string>
-    <string name="save_as_line">Wekê xetekê qeyd bike</string>
     <string name="shared_string_markers">Hêmaker</string>
     <string name="coordinates_format">Formata koordînatê</string>
     <string name="use_system_keyboard">Klavyeya amûrê bi kar bîne</string>
-    <string name="fast_coordinates_input_descr">Formata koordînatan hilbijêre. Tu hertim dikarî li \'Eyar\'an biguherînî.</string>
-    <string name="use_location">Cihê bi kar bîne</string>
-    <string name="add_location_as_first_point_descr">Bo rêgeha herî baş cihê xwe wekî cihê destpêkê hilbijêre.</string>
     <string name="my_location">Cihê min</string>
     <string name="shared_string_finish">Xilasek</string>
     <string name="plan_route">Plana rêgehê</string>
@@ -110,8 +92,6 @@
     <string name="yesterday">Duh</string>
     <string name="shared_string_install">Daxe</string>
     <string name="display_zoom_level">Dereceya Nêzîkbûnê: %1$s</string>
-    <string name="favorite_group_name">Navê komê</string>
-    <string name="change_color">Rengê biguherîne</string>
     <string name="wrong_format">Awayê çewt</string>
     <string name="shared_string_road">Rê</string>
     <string name="show_map">Nexşêyê nîşan bide</string>
@@ -154,7 +134,6 @@
     <string name="error_avoid_specific_road">Rêya din nehate dîtin</string>
     <string name="day_off_label">girtî</string>
     <string name="clear_all_intermediates">Hemû nuqteyên li navberê paqij bike</string>
-    <string name="group_deleted">Kom hate jêbirin</string>
     <string name="rendering_attr_whiteWaterSports_name">Werzîşên avê yên ekstrem</string>
     <string name="distance_farthest">Mesafe: Pêşî yê dûrtirîn</string>
     <string name="distance_nearest">Mesafe: pêşî yê nêzîktirîn</string>
@@ -164,7 +143,6 @@
     <string name="optional_point_name">Navê nuqeteyê yê ne mecbûrî</string>
     <string name="transport_nearby_routes_within">Rotayên nêzî te</string>
     <string name="transport_nearby_routes">NÊZÎK</string>
-    <string name="enter_the_file_name">Navê dosyeyê têkeve.</string>
     <string name="map_import_error">Xetaya îdxalkirina nexşeyê</string>
     <string name="map_imported_successfully">Nexşe bi serkeftî hate îdxalkirin</string>
     <string name="make_as_start_point">Bike Nuqteya Destpêkê</string>

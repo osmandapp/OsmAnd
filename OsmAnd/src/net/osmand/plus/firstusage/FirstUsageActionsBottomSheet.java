@@ -13,6 +13,9 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.utils.InsetTargetsCollection;
+import net.osmand.plus.utils.InsetsUtils.InsetSide;
 
 public class FirstUsageActionsBottomSheet extends BaseFirstUsageBottomSheet {
 
@@ -39,6 +42,16 @@ public class FirstUsageActionsBottomSheet extends BaseFirstUsageBottomSheet {
 				dismiss();
 			}));
 		}
+	}
+
+	@Override
+	public InsetTargetsCollection getInsetTargets() {
+		InsetTargetsCollection collection = super.getInsetTargets();
+		collection.add(InsetTarget.createCustomBuilder(R.id.container)
+				.portraitSides(InsetSide.BOTTOM)
+				.landscapeSides(InsetSide.BOTTOM)
+				.applyPadding(true));
+		return collection;
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity, @NonNull Fragment target) {

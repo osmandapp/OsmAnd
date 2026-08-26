@@ -47,7 +47,7 @@ class OBDSimulationSource {
 				else -> {
 					when (fullCommand.replace("\r", "").trim()) {
 						"AT RV" -> {
-							bufferToRead = "12.9V>"
+							bufferToRead = "14.1V>"
 							return@runBlocking
 						}
 

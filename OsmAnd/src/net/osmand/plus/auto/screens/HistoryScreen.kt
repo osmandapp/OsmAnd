@@ -95,7 +95,7 @@ class HistoryScreen(
 		val limitedResults = results.subList(0, resultsSize.coerceAtMost(contentLimit - 1))
 		for (result in limitedResults) {
 			val searchResult =
-				SearchHistoryAPI.createSearchResult(app, result, SearchPhrase.emptyPhrase())
+				SearchHistoryAPI.createSearchResult(app, result, SearchPhrase.emptyPhrase(app.getSearchUICore().getCore().getSearchSettings()))
 			val listItem = QuickSearchListItem(app, searchResult)
 			if (listItem.searchResult.objectType == ObjectType.GPX_TRACK && listItem.searchResult.location == null) {
 				val gpxInfo = listItem.searchResult.relatedObject as GPXInfo

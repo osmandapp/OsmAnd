@@ -1,8 +1,11 @@
 package net.osmand.plus.configmap;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -17,6 +20,7 @@ import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.helpers.DayNightHelper.MapThemeProvider;
 import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.shared.palette.domain.PaletteItem;
 
 import java.util.Arrays;
@@ -41,6 +45,9 @@ public abstract class MapColorPaletteController extends BaseDialogController imp
 
 	public interface IMapColorPaletteControllerListener extends IExternalPaletteListener, OnPaletteModeSelectedListener {
 		void updateStatusBar();
+
+		default void onAvailabilityChanged() {
+		}
 	}
 
 	public MapColorPaletteController(@NonNull OsmandApplication app,
@@ -64,8 +71,49 @@ public abstract class MapColorPaletteController extends BaseDialogController imp
 
 	public abstract void onCloseScreen(@NonNull MapActivity activity);
 
+	@Nullable
+	public WidgetsPanel getPreviewPanel() {
+		return null;
+	}
+
+	public boolean shouldShowMapWidgets() {
+		return getPreviewPanel() != null;
+	}
+
 	@NonNull
 	public abstract String getDialogTitle();
+
+	@StringRes
+	public int getColorSectionTitleId() {
+		return R.string.shared_string_color;
+	}
+
+	public boolean isColorSelectionAvailable() {
+		return true;
+	}
+
+	@DrawableRes
+	public int getUnavailableIconId() {
+		return 0;
+	}
+
+	@StringRes
+	public int getUnavailableTitleId() {
+		return 0;
+	}
+
+	@StringRes
+	public int getUnavailableDescriptionId() {
+		return 0;
+	}
+
+	@StringRes
+	public int getUnavailableActionTitleId() {
+		return 0;
+	}
+
+	public void onUnavailableAction(@NonNull FragmentActivity activity) {
+	}
 
 	public abstract void onApplyChanges();
 

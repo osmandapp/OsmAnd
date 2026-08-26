@@ -23,7 +23,9 @@ import net.osmand.util.OpeningHoursParser;
 
 import org.apache.commons.logging.Log;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -238,6 +240,23 @@ public class LocaleHelper {
 			}
 		}
 		return null;
+	}
+
+	@NonNull
+	public static List<String> getPreferredLangCandidates(@NonNull OsmandApplication app) {
+		List<String> candidates = new ArrayList<>();
+		String preferredLocaleId = app.getSettings().PREFERRED_LOCALE.get();
+		if (!Algorithms.isEmpty(preferredLocaleId)) {
+			candidates.add(preferredLocaleId);
+		}
+		LocaleListCompat deviceLanguages = ConfigurationCompat.getLocales(Resources.getSystem().getConfiguration());
+		for (int index = 0; index < deviceLanguages.size(); index++) {
+			Locale locale = deviceLanguages.get(index);
+			if (locale != null) {
+				candidates.add(locale.getLanguage());
+			}
+		}
+		return candidates;
 	}
 
 	@NonNull
