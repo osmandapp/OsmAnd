@@ -96,25 +96,21 @@ class LiveSender extends AsyncTask<Void, Void, Void> {
 		}
 		String url = "https://" + baseUrl + "/userdata/translation/msg";
 		for (Map.Entry<String, Map<String, String>> entry : paramsByTranslation.entrySet()) {
-			int code = post(url, entry.getValue());
-			if (code == HttpURLConnection.HTTP_GONE) {
-				// Translation deleted on the server — stop broadcasting into it.
-				app.getSettings().LIVE_MONITORING_TRANSLATIONS.removeValue(entry.getKey());
-				log.info("Live track translation gone (410) — removed from broadcast set");
-			}
+			post(url, entry.getValue(), entry.getKey());
 		}
 		queue.poll();
 	}
 
-	private int post(@NonNull String url, @NonNull Map<String, String> params) {
-		int[] code = {-1};
+	private void post(@NonNull String url, @NonNull Map<String, String> params, @NonNull String translation) {
 		AndroidNetworkUtils.sendRequest(app, url, params, null, false, true,
 				(result, error, resultCode) -> {
-					if (resultCode != null) {
-						code[0] = resultCode;
+					if (resultCode != null && resultCode == HttpURLConnection.HTTP_GONE) {
+						app.getSettings().LIVE_MONITORING_TRANSLATIONS.removeValue(translation);
+						log.info("Live track translation gone (410) — removed from broadcast set");
+					} else if (resultCode == null || resultCode / 100 != 2) {
+						log.error("Error sending live track point: " + resultCode + " : " + error);
 					}
 				});
-		return code[0];
 	}
 
 	private int sendToUrl(@NonNull String urlStr) {
