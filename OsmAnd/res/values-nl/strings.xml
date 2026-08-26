@@ -3463,7 +3463,7 @@
     <string name="shared_string_not_included">Niet inbegrepen</string>
     <string name="cancel_anytime_in_gplay">Annuleer het abonnement op elk moment via Google Play.</string>
     <string name="nautical_depth">Zeediepte</string>
-    <string name="send_crash_log">Crashrapport verzenden</string>
+    <string name="send_crash_log">App-crashrapport verzenden</string>
     <string name="you_can_get_feature_as_part_of_pattern">Verkrijg \"%1$s\" als onderdeel van het %2$s abonnement. Vergelijking:</string>
     <string name="offline_wikipeadia">Offline Wikipedia</string>
     <string name="route_line_use_map_style_width">Standaard breedte gebruiken voor kaartstijl (%1$s).</string>
@@ -3503,7 +3503,7 @@
     <string name="duration_ago">%1$s geleden</string>
     <string name="last_backup">Laatste back-up</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
-    <string name="send_logcat_log">Logcat log verzenden</string>
+    <string name="send_logcat_log">Huidige sessielogbestanden verzenden</string>
     <string name="shared_string_grade">Helling</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="map_widget_current_speed">Huidige snelheid</string>
@@ -5682,4 +5682,12 @@
     <string name="route_calculation_route_not_found_desc">Snelle routering kon geen route vinden. Overschakelen naar standaardrouteberekening.</string>
     <string name="route_calculation_unavailable_parameters_desc">Snelle routering is niet beschikbaar met de geselecteerde routeparameters. Overschakelen naar de standaardberekening.</string>
     <string name="route_calculation_standard_long_route_desc">Standaardrouteberekening voor lange routes (&gt;300 km) kan aanzienlijk lang duren. Het toevoegen van een routepunt kan dit versnellen.</string>
+    <string name="route_calculation_fast_missing_or_outdated_maps_desc">Sommige offline kaarten die nodig zijn voor deze route ontbreken of zijn verouderd. Download of werk ze bij ze om door te gaan.</string>
+    <string name="route_calculation_fast_route_not_found_desc">Snelle routering kon geen route berekenen met de huidige kaarten.</string>
+    <string name="route_calculation_fast_missing_hh_cache_desc">Snelle routeringsdata ontbreekt in de kaarten. Werk de kaarten bij of kies een andere berekeningsmethode.</string>
+    <string name="route_calculation_fast_unavailable_parameters_desc">Snelle routering is niet beschikbaar met de geselecteerde routeparameters. Pas de routeparameters aan of kies een andere berekeningsmethode.</string>
+    <string name="required_maps_route_overview_desc">Deze kaartlijst is gebaseerd op een rechte lijn. Als je denkt dat je werkelijke route deze ontbrekende gebieden omzeilt, kun je:</string>
+    <string name="required_maps_get_accurate_list_online">Online een nauwkeurige lijst ophalen</string>
+    <string name="rendering_attr_surface_clay_name">Klei</string>
+    <string name="rendering_attr_surface_laterite_name">Lateriet</string>
 </resources>
