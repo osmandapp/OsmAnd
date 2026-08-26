@@ -98,7 +98,7 @@ public class SpatialTextSearch {
 		public boolean ALLOW_HOUSE_POI_TYPE_INTERSECTION = true;
 		// no intersection recorded but streets are nearby
 		public boolean ALLOW_VIRTUAL_STREET_INTERSECTIONS = true;
-		// not tested feature yet questions related to city
+		// SHOULD BE false: '<NAME>' inside '<NAME_AREA>', then <NAME_AREA> be part of Address section not POI
 		public boolean USE_POI_BBOX = false;
 		
 		// Enlarge boundaries in case result is not found
