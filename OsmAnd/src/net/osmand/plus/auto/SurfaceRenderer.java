@@ -273,6 +273,10 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 	 * Callback called when the car configuration changes.
 	 */
 	public void onCarConfigurationChanged() {
+		boolean newDarkMode = isNightMode();
+		if (darkMode != newDarkMode && mapView != null) {
+			mapView.refreshMap(true);
+		}
 		renderFrame();
 	}
 
