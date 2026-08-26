@@ -21,6 +21,7 @@ import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.SymbolSubsectionConfiguration;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.resources.AsyncLoadingThread;
 import net.osmand.plus.resources.ResourceManager;
@@ -160,7 +161,14 @@ public class MapVectorLayer extends BaseMapLayer {
 			if (visible) {
 				MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
 				if (mapRendererContext != null) {
-					mapRendererContext.setNightMode(drawSettings.isNightMode());
+					boolean nightMode;
+					OsmandApplication app = getApplication();
+					if (view.isCarView() && app.getCarNavigationSession() != null) {
+						nightMode = app.getDaynightHelper().isNightModeForCar(app.getCarNavigationSession().getCarContext());
+					} else {
+						nightMode = drawSettings.isNightMode();
+					}
+					mapRendererContext.setNightMode(nightMode);
 					mapRendererContext.updateLocalization();
 				}
 			}

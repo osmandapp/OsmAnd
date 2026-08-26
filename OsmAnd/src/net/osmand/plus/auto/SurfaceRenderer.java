@@ -273,6 +273,10 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 	 * Callback called when the car configuration changes.
 	 */
 	public void onCarConfigurationChanged() {
+		boolean newDarkMode = isNightMode();
+		if (darkMode != newDarkMode && mapView != null) {
+			mapView.refreshMap(true);
+		}
 		renderFrame();
 	}
 
@@ -550,7 +554,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 
 	private boolean isNightMode() {
 		OsmandApplication app = (OsmandApplication) carContext.getApplicationContext();
-		return app.getSettings().AA_MAP_NIGHT_MODE.get().isNightMode(carContext.isDarkMode());
+		return app.getDaynightHelper().isNightModeForCar(carContext);
 	}
 
 	public float getCachedRatioX() {
