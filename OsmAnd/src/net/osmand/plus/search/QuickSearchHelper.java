@@ -60,7 +60,6 @@ import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
-import net.osmand.search.core.spatial.SpatialTextSearchAPI;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 
@@ -125,54 +124,10 @@ public class QuickSearchHelper implements ResourceListener {
 		core.clearAPIs();
 		core.resetSearch();
 		resultCollection = null;
-		if (useSpatialTextSearch()) {
-			registerSpatialMapSearchAPIs();
-		} else {
-			core.init();
-		}
+		core.init(useSpatialTextSearch());
 
 		registerNonMapSearchAPIs();
 		refreshCustomPoiFilters();
-	}
-
-	private void registerSpatialMapSearchAPIs() {
-		SearchCoreFactory.SearchAmenityByNameAPI amenitiesApi = new SearchCoreFactory.SearchAmenityByNameAPI();
-		core.registerAPI(new SearchCoreFactory.SearchAmenityTypesAPI(app.getPoiTypes()));
-		core.registerAPI(new SearchCoreFactory.SearchLocationAndUrlAPI(amenitiesApi,
-				app.getSettings()::isInternetConnectionAvailable));
-		core.registerAPI(new SpatialCategoryAmenityByTypeAPI(app.getPoiTypes()));
-		core.registerAPI(new SpatialBuildingAndIntersectionsByStreetAPI());
-		core.registerAPI(new SpatialTextSearchAPI(app.getPoiTypes()));
-	}
-
-	private static class SpatialBuildingAndIntersectionsByStreetAPI
-			extends SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI {
-
-		@Override
-		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
-			if (phrase.getLastSelectedWord().getResult().object instanceof Street street
-					&& street.getBuildings().isEmpty() && street.getIntersectedStreets().isEmpty()) {
-				return true;
-			}
-			return super.search(phrase, resultMatcher);
-		}
-
-		@Override
-		public int getSearchPriority(SearchPhrase phrase) {
-			return phrase.isLastWord(ObjectType.STREET) ? super.getSearchPriority(phrase) : -1;
-		}
-	}
-
-	private static class SpatialCategoryAmenityByTypeAPI extends SearchCoreFactory.SearchAmenityByTypeAPI {
-
-		public SpatialCategoryAmenityByTypeAPI(@NonNull MapPoiTypes types) {
-			super(types, null);
-		}
-
-		@Override
-		public int getSearchPriority(SearchPhrase p) {
-			return p.isLastWord(ObjectType.POI_TYPE) ? super.getSearchPriority(p) : -1;
-		}
 	}
 
 	private void registerNonMapSearchAPIs() {
