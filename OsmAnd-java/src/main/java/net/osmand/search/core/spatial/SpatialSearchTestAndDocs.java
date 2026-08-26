@@ -25,7 +25,6 @@ import net.osmand.util.SearchAlgorithms;
 // TODO FIX ORDER -  (tests)
 
 // TODO FIX TEST - category 8
-// TODO FIX TEST - atm
 // TODO 'Bratislava billa' - basemap POI higher rating (change sorting)
 // TODO 'Hardware store' - Store is city?
 // TODO 'Bank', 'Billa' - translations for poi categories 
