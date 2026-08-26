@@ -652,12 +652,7 @@ public class MapRenderRepositories {
 		}
 		try {
 			// find selected rendering type
-			boolean nightMode;
-			if (app.getOsmandMap().getMapView().isCarView() && app.getCarNavigationSession() != null) {
-				nightMode = app.getDaynightHelper().isNightModeForCar(app.getCarNavigationSession().getCarContext());
-			} else {
-				nightMode = app.getDaynightHelper().isNightMode(app.getSettings().getApplicationMode(), ThemeUsageContext.MAP);
-			}
+			boolean nightMode= app.getDaynightHelper().isNightMode(app.getSettings().getApplicationMode(), ThemeUsageContext.MAP, true);
 
 			// boolean moreDetail = prefs.SHOW_MORE_MAP_DETAIL.get();
 			RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();

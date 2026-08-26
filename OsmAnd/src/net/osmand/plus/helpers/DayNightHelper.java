@@ -25,6 +25,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.AndroidAutoMapMode;
 import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.SunriseSunset;
 
 import org.apache.commons.logging.Log;
@@ -126,6 +127,17 @@ public class DayNightHelper implements SensorEventListener {
 
 	public boolean isNightMode(@NonNull ApplicationMode appMode,
 	                           @NonNull ThemeUsageContext usageContext) {
+		return isNightMode(appMode, usageContext, false);
+	}
+
+	public boolean isNightMode(@NonNull ApplicationMode appMode,
+	                           @NonNull ThemeUsageContext usageContext, boolean checkCarSettings) {
+		if (checkCarSettings) {
+			OsmandMapTileView mapTileView = app.getOsmandMap().getMapView();
+			if (mapTileView.isCarView() && app.getCarNavigationSession() != null) {
+				return app.getDaynightHelper().isNightModeForCar(app.getCarNavigationSession().getCarContext());
+			}
+		}
 		boolean appNightMode = !settings.isLightContentForMode(appMode);
 		if (usageContext == ThemeUsageContext.APP) {
 			return appNightMode;
