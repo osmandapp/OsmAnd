@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+	<style name="ThemeOverlay.App.Material.DatePicker" parent="ThemeOverlay.Material3.MaterialCalendar">
+		<item name="textInputStyle">@style/Widget.Material3.TextInputLayout.OutlinedBox</item>
+
+		<item name="textAppearanceHeadlineLarge">@style/TextAppearance.Material3.HeadlineLarge</item>
+		<item name="textAppearanceTitleMedium">@style/TextAppearance.Material3.TitleMedium</item>
+		<item name="textAppearanceTitleSmall">@style/TextAppearance.Material3.TitleSmall</item>
+		<item name="textAppearanceBodyLarge">@style/TextAppearance.Material3.BodyLarge</item>
+		<item name="textAppearanceBodySmall">@style/TextAppearance.Material3.BodySmall</item>
+		<item name="textAppearanceLabelLarge">@style/TextAppearance.Material3.LabelLarge</item>
+
+		<item name="shapeAppearanceCornerExtraLarge">@style/ShapeAppearance.Material3.Corner.ExtraLarge</item>
+		<item name="shapeAppearanceCornerExtraSmall">@style/ShapeAppearance.Material3.Corner.ExtraSmall</item>
+		<item name="shapeCornerFamily">rounded</item>
+		<item name="shapeCornerSizeExtraLarge">28dp</item>
+		<item name="shapeCornerSizeExtraSmall">4dp</item>
+	</style>
+
+	<style name="ThemeOverlay.App.Material.DatePicker.Light">
+		<item name="colorSurface">@color/card_and_list_background_light</item>
+		<item name="colorSurfaceContainerHigh">@color/card_and_list_background_light</item>
+
+		<item name="colorPrimary">@color/active_color_primary_light</item>
+		<item name="colorOnPrimary">@color/btn_text_on_primary_light</item>
+
+		<item name="colorOnSurface">@color/text_color_primary_light</item>
+
+		<item name="colorOnSurfaceVariant">@color/text_color_secondary_light</item>
+
+		<item name="colorSecondaryContainer">@color/active_color_secondary_light</item>
+		<item name="colorOnSecondaryContainer">@color/text_color_primary_light</item>
+
+		<item name="colorOutline">@color/stroked_buttons_and_links_outline_light</item>
+		<item name="colorOnPrimaryContainer">@color/active_color_primary_light</item>
+		<item name="colorError">@color/color_invalid</item>
+		<item name="colorOnError">@color/btn_text_on_primary_light</item>
+	</style>
+
+	<style name="ThemeOverlay.App.Material.DatePicker.Dark">
+		<item name="colorSurface">@color/card_and_list_background_dark</item>
+		<item name="colorSurfaceContainerHigh">@color/card_and_list_background_dark</item>
+
+		<item name="colorPrimary">@color/active_color_primary_dark</item>
+		<item name="colorOnPrimary">@color/btn_text_on_primary_dark</item>
+
+		<item name="colorOnSurface">@color/text_color_primary_dark</item>
+
+		<item name="colorOnSurfaceVariant">@color/text_color_secondary_dark</item>
+
+		<item name="colorSecondaryContainer">@color/active_color_secondary_dark</item>
+		<item name="colorOnSecondaryContainer">@color/text_color_primary_dark</item>
+
+		<item name="colorOutline">@color/stroked_buttons_and_links_outline_dark</item>
+		<item name="colorOnPrimaryContainer">@color/active_color_primary_dark</item>
+		<item name="colorError">@color/color_invalid</item>
+		<item name="colorOnError">@color/btn_text_on_primary_dark</item>
+	</style>
+
+</resources>
