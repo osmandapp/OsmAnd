@@ -66,6 +66,10 @@ public class DownloadResources extends DownloadResourceGroup {
 		return outdatedItems;
 	}
 
+	public boolean isItemOutdated(@NonNull String targetFileName) {
+		return outdatedItems.allFileNames().contains(targetFileName);
+	}
+
 	@Nullable
 	public IndexItem getWorldBaseMapItem() {
 		DownloadResourceGroup worldMaps = getSubGroupById(DownloadResourceGroupType.WORLD_MAPS.getDefaultId());
