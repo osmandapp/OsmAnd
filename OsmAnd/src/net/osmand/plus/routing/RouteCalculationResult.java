@@ -25,6 +25,7 @@ import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingContext;
 import net.osmand.router.TurnType;
 import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.routing.details.RouteDetailsSnapshot;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -52,6 +53,7 @@ public class RouteCalculationResult {
 	private final String errorMessage;
 	private final int[] listDistance;
 	private final int[] intermediatePoints;
+	private final RouteDetailsSnapshot routeDetailsSnapshot;
 
 	// Route information
 	private final float routingTime;
@@ -99,6 +101,7 @@ public class RouteCalculationResult {
 		this.routeRecalcDistance = 0;
 		this.routeVisibleAngle = 0;
 		this.initialCalculation = false;
+		this.routeDetailsSnapshot = RouteCalculationResultSnapshotAdapter.create(this);
 	}
 
 	public RouteCalculationResult(List<Location> list, List<RouteDirectionInfo> directions,
@@ -144,6 +147,7 @@ public class RouteCalculationResult {
 		}
 		this.initialCalculation = params.initialCalculation;
 		this.gpxFile = params.gpxFile;
+		this.routeDetailsSnapshot = RouteCalculationResultSnapshotAdapter.create(this);
 	}
 
 	public RouteCalculationResult(List<RouteSegmentResult> list, RouteCalculationParams params, RoutingContext rctx,
@@ -197,6 +201,7 @@ public class RouteCalculationResult {
 				ctx.getSettings().ROUTE_STRAIGHT_ANGLE.getModeValue(mode) : 0;
 		this.initialCalculation = params.initialCalculation;
 		this.gpxFile = params.gpxFile;
+		this.routeDetailsSnapshot = RouteCalculationResultSnapshotAdapter.create(this);
 	}
 
 	public ApplicationMode getAppMode() {
@@ -1179,6 +1184,18 @@ public class RouteCalculationResult {
 		return nextIntermediate;
 	}
 
+	int getCurrentDirectionInfoForSnapshot() {
+		return currentDirectionInfo;
+	}
+
+	int[] getIntermediateDirectionIndexesForSnapshot() {
+		return intermediatePoints.clone();
+	}
+
+	int getListDistanceForSnapshot(int index) {
+		return getListDistance(index);
+	}
+
 	public int getCurrentRouteForLocation(@NonNull Location location) {
 		int currentRoute = this.currentRoute;
 		if (currentRoute == 0) {
@@ -1515,5 +1532,10 @@ public class RouteCalculationResult {
 
 	public GpxFile getGpxFile() {
 		return gpxFile;
+	}
+
+	/** Returns the immutable platform-neutral copy created once with this calculated route. */
+	public RouteDetailsSnapshot getRouteDetailsSnapshot() {
+		return routeDetailsSnapshot;
 	}
 }
