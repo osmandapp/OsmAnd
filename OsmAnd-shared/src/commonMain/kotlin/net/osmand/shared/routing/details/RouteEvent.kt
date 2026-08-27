@@ -41,7 +41,12 @@ enum class RouteEventType(val androidPriority: Int) {
 	TUNNEL(11),
 
 	@SerialName("red_light_camera")
-	RED_LIGHT_CAMERA(12),
+	RED_LIGHT_CAMERA(12);
+
+	/** Exact equivalent of Android `AlarmInfoType.isTrafficCamera()`. */
+	fun isTrafficCamera(): Boolean {
+		return this == SPEED_CAMERA || this == RED_LIGHT_CAMERA
+	}
 }
 
 /**
@@ -59,6 +64,30 @@ data class RouteEvent(
 	val intValue: Int = 0,
 	val floatValue: Float = 0f,
 ) {
+	/**
+	 * Exact equivalent of Android `AlarmInfo.updateDistanceAndGetPriority(float, float)`.
+	 *
+	 * The Android method does not mutate the alarm despite its legacy name.
+	 */
+	fun updateDistanceAndGetPriority(timeSeconds: Float, distanceMeters: Float): Int {
+		if (distanceMeters > 1500) {
+			return Int.MAX_VALUE
+		}
+		if (timeSeconds < 6 || distanceMeters < 75 || type == RouteEventType.SPEED_LIMIT) {
+			return type.androidPriority
+		}
+		if (type.isTrafficCamera() && (timeSeconds < 15 || distanceMeters < 150)) {
+			return type.androidPriority
+		}
+		if (type == RouteEventType.TOLL_BOOTH && (timeSeconds < 30 || distanceMeters < 500)) {
+			return type.androidPriority
+		}
+		if (timeSeconds < 7 || distanceMeters < 100) {
+			return type.androidPriority + RouteEventType.MAXIMUM.androidPriority
+		}
+		return Int.MAX_VALUE
+	}
+
 	init {
 		require(locationIndex >= -1) { "Route event location index must preserve a valid Android sentinel" }
 		require(lastLocationIndex >= -1) { "Route event last location index must preserve a valid Android sentinel" }
