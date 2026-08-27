@@ -19,7 +19,6 @@ import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
 import android.content.ClipData;
 import android.content.Intent;
 import android.net.Uri;
-import android.net.Uri.Builder;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -80,6 +79,7 @@ import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.ConfigureScreenFragment;
+import net.osmand.router.GeneralRouter;
 import net.osmand.search.AmenitySearcher;
 import net.osmand.search.AmenitySearcher.Request;
 import net.osmand.search.AmenitySearcher.Settings;
@@ -97,8 +97,10 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class IntentHelper {
 
@@ -107,10 +109,12 @@ public class IntentHelper {
 	private static final String URL_SCHEME = "https";
 	private static final String URL_AUTHORITY = "osmand.net";
 	private static final String URL_PATH = "map";
+	private static final String URL_PATH_COMPONENT_NAVIGATE = "navigate";
 	private static final String URL_PARAMETER_START = "start";
 	private static final String URL_PARAMETER_END = "end";
 	private static final String URL_PARAMETER_TOKEN = "token";
 	private static final String URL_PARAMETER_MODE = "profile";
+	private static final String URL_PARAMETER_ROUTING_PARAMS = "params";
 	private static final String URL_PARAMETER_INTERMEDIATE_POINTS = "via";
 	public static final int REQUEST_CODE_CREATE_FILE = 1101;
 
@@ -161,12 +165,12 @@ public class IntentHelper {
 		Intent intent = mapActivity.getIntent();
 		if (intent != null && isUriHierarchical(intent)) {
 			Uri data = intent.getData();
-			boolean hasNavigationDestination = data.getQueryParameterNames().contains(URL_PARAMETER_END);
-			if (isOsmAndMapUrl(data) && hasNavigationDestination) {
+			if (isOsmAndMapNavigationUrl(data, true)) {
 				String startLatLonParam = data.getQueryParameter(URL_PARAMETER_START);
 				String endLatLonParam = data.getQueryParameter(URL_PARAMETER_END);
 				String appModeKeyParam = data.getQueryParameter(URL_PARAMETER_MODE);
 				String intermediatePointsParam = data.getQueryParameter(URL_PARAMETER_INTERMEDIATE_POINTS);
+				final String routingParam = data.getQueryParameter(URL_PARAMETER_ROUTING_PARAMS);
 
 				if (Algorithms.isEmpty(endLatLonParam)) {
 					LOG.error("Malformed OsmAnd navigation URL: destination location is missing");
@@ -197,11 +201,11 @@ public class IntentHelper {
 						@Override
 						public void onFinish(@NonNull AppInitializer init) {
 							init.removeListener(this);
-							buildRoute(startLatLon, endLatLon, appMode, points);
+							buildRoute(startLatLon, endLatLon, appMode, points, routingParam);
 						}
 					});
 				} else {
-					buildRoute(startLatLon, endLatLon, appMode, points);
+					buildRoute(startLatLon, endLatLon, appMode, points, routingParam);
 				}
 				clearIntent(intent);
 				return true;
@@ -271,7 +275,8 @@ public class IntentHelper {
 	}
 
 	private void buildRoute(@Nullable LatLon start, @NonNull LatLon end,
-	                        @Nullable ApplicationMode appMode, @Nullable List<LatLon> points) {
+	                        @Nullable ApplicationMode appMode, @Nullable List<LatLon> points,
+							@Nullable String routingSettingsQueryParam) {
 		if (appMode != null) {
 			app.getRoutingHelper().setAppMode(appMode);
 		}
@@ -285,9 +290,33 @@ public class IntentHelper {
 						null, settings.getIntermediatePoints().size());
 			}
 		}
+		if (routingSettingsQueryParam != null) {
+			applyRoutingParams(appMode, routingSettingsQueryParam);
+		}
 
 		mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, appMode, start,
 				null, hasIntermediatePoints, true, MapRouteInfoMenu.DEFAULT_MENU_STATE);
+	}
+
+	private void buildRoute(@Nullable LatLon start, @NonNull LatLon end,
+	                        @Nullable ApplicationMode appMode, @Nullable List<LatLon> points) {
+		buildRoute(start, end, appMode, points, null);
+	}
+
+    private void applyRoutingParams(@Nullable final ApplicationMode appMode, @NonNull String routingSettingsQueryParam) {
+		if (appMode == null) return;
+		
+		final List<RoutingUriQueryHandler.KeyValue> params = parseRoutingParams(routingSettingsQueryParam);
+		if (Algorithms.isEmpty(params)) return;
+
+		final RoutingSettingsProvider rsProvider =
+				RoutingUriQueryHandlerKt.commonRoutingSettingsProviderImpl(app, appMode);
+		if (rsProvider == null) return;
+
+		final RoutingSettingsApplier rsApplier =
+				RoutingUriQueryHandlerKt.commonRoutingSettingsApplierImpl(app, appMode);
+
+		RoutingUriQueryHandler.loadParamsIntoApp(appMode, params, rsProvider, rsApplier);
 	}
 
 	private boolean parseSetPinOnMapIntent() {
@@ -460,6 +489,12 @@ public class IntentHelper {
 	}
 
 	@Nullable
+	private List<RoutingUriQueryHandler.KeyValue> parseRoutingParams(@Nullable String parameter) {
+		if (Algorithms.isEmpty(parameter)) return null;
+		return RoutingUriQueryHandler.parseRoutingParamsQueryValue(parameter);
+	}
+
+	@Nullable
 	private List<LatLon> parseIntermediatePoints(@Nullable String parameter) {
 		if (!Algorithms.isEmpty(parameter)) {
 			String[] params = parameter.split("[,;]");
@@ -510,6 +545,26 @@ public class IntentHelper {
 	private boolean isOsmAndMapUrl(@NonNull Uri uri) {
 		return isOsmAndSite(uri) && isPathPrefix(uri, "/map");
 	}
+
+	/**
+	 * Checks if given url can be treated as a "navigation" url
+	 * @param data url to check.
+	 *             Url is considered a navigation url if its path is /map/navigate
+	 *             and its query contains "end" param
+	 * @param acceptLegacyPath if true, also accept urls with /map path
+	 * @return true if url can be treated as a "navigation" url, false otherwise
+	 */
+	@SuppressWarnings("SameParameterValue")
+	private boolean isOsmAndMapNavigationUrl(@NonNull final Uri data, final boolean acceptLegacyPath) {
+		if (!isOsmAndSite(data)) return false;
+		if (acceptLegacyPath){
+			if (!hasPathPrefix(data, URL_PATH)) return false;
+		} else {
+			if (!hasExactPath(data, URL_PATH, URL_PATH_COMPONENT_NAVIGATE)) return false;
+		}
+		return data.getQueryParameterNames().contains(URL_PARAMETER_END);
+	}
+
 
 	private boolean parseOpenLocationMenuIntent() {
 		Intent intent = mapActivity.getIntent();
@@ -903,44 +958,81 @@ public class IntentHelper {
 		return path != null && path.startsWith(pathPrefix);
 	}
 
+	@SuppressWarnings("SameParameterValue")
+    private boolean hasExactPath(@NonNull final Uri uri, @NonNull final String... pathSegments) {
+		final List<String> uriPathSegments = uri.getPathSegments();
+		if (uriPathSegments.size() != pathSegments.length) return false;
+		return hasPathPrefix(uri, pathSegments);
+	}
+
+	@SuppressWarnings("SameParameterValue")
+	private boolean hasPathPrefix(@NonNull final Uri uri, @NonNull final String... pathSegments) {
+		final List<String> uriPathSegments = uri.getPathSegments();
+		if (uriPathSegments.size() < pathSegments.length) return false;
+		for (int i = 0; i < pathSegments.length; i++) {
+			if (!Objects.equals(uriPathSegments.get(i), pathSegments[i])) return false;
+		}
+		return true;
+	}
+
 	public static String generateRouteUrl(@NonNull OsmandApplication app) {
-		OsmandSettings settings = app.getSettings();
-		OsmandMapTileView mapTileView = app.getOsmandMap().getMapView();
-
-		LatLon startPoint = settings.getPointToStart();
-		LatLon endPoint = settings.getPointToNavigate();
-		List<LatLon> intermediatePoints = settings.getIntermediatePoints();
-
-		Builder builder = new Builder();
-		builder.scheme(URL_SCHEME)
+		final Uri.Builder builder = new Uri.Builder()
+				.scheme(URL_SCHEME)
 				.authority(URL_AUTHORITY)
-				.appendPath(URL_PATH);
+				.path(URL_PATH)
+				.appendPath(URL_PATH_COMPONENT_NAVIGATE);
 
+		final OsmandSettings settings = app.getSettings();
+
+		final LatLon startPoint = settings.getPointToStart();
 		if (startPoint != null) {
-			String startPointCoordinates = Algorithms.formatLatlon(startPoint);
-			builder.appendQueryParameter(URL_PARAMETER_START, startPointCoordinates);
+			final String startValue = Algorithms.formatLatlon(startPoint);
+			builder.appendQueryParameter(URL_PARAMETER_START, startValue);
 		}
 
+		final List<LatLon> intermediatePoints = settings.getIntermediatePoints();
 		if (!Algorithms.isEmpty(intermediatePoints)) {
-			StringBuilder stringBuilder = new StringBuilder();
-			for (LatLon latLon : intermediatePoints) {
-				stringBuilder.append(";")
-						.append(getFormattedCoordinate(latLon.getLatitude()))
-						.append(",")
-						.append(getFormattedCoordinate(latLon.getLongitude()));
-			}
-			builder.appendQueryParameter(URL_PARAMETER_INTERMEDIATE_POINTS, stringBuilder.substring(1));
+			final String intermediatesValue = intermediatePoints
+					.stream()
+					.map(Algorithms::formatLatlon)
+					.collect(Collectors.joining(";"));
+			builder.appendQueryParameter(URL_PARAMETER_INTERMEDIATE_POINTS, intermediatesValue);
 		}
 
+		final LatLon endPoint = settings.getPointToNavigate();
 		if (endPoint != null) {
-			String endPointCoordinates = Algorithms.formatLatlon(endPoint);
-			builder.appendQueryParameter(URL_PARAMETER_END, endPointCoordinates);
+			final String endValue = Algorithms.formatLatlon(endPoint);
+			builder.appendQueryParameter(URL_PARAMETER_END, endValue);
 		}
 
-		builder.appendQueryParameter(URL_PARAMETER_MODE, app.getRoutingHelper().getAppMode().getStringKey())
-				.encodedFragment(mapTileView.getZoom() + "/" + getFormattedCoordinate(mapTileView.getLatitude()) + "/" + getFormattedCoordinate(mapTileView.getLongitude()));
+		final ApplicationMode appMode = app.getRoutingHelper().getAppMode();
+		builder.appendQueryParameter(URL_PARAMETER_MODE, appMode.getStringKey());
+
+		final String paramsValue = getRoutingParamsQueryValue(app, appMode);
+		if (paramsValue != null) {
+			builder.appendQueryParameter(URL_PARAMETER_ROUTING_PARAMS, paramsValue);
+		}
+
+		final OsmandMapTileView mapTileView = app.getOsmandMap().getMapView();
+		final int zoom = mapTileView.getZoom();
+		final double lat = mapTileView.getLatitude();
+		final double lon = mapTileView.getLongitude();
+		final String fragment = zoom + "/" + getFormattedCoordinate(lat) + "/" + getFormattedCoordinate(lon);
+		builder.encodedFragment(fragment);
 
 		return builder.build().toString();
+	}
+
+	@Nullable
+	private static String getRoutingParamsQueryValue(final OsmandApplication app, final ApplicationMode appMode) {
+		final GeneralRouter appRouter = app.getRouter(appMode);
+		if (appRouter == null) return null;
+
+		final RoutingSettingsProvider rsProvider =
+				RoutingUriQueryHandlerKt.commonRoutingSettingsProviderImpl(app, appMode);
+		if (rsProvider == null) return null;
+
+		return RoutingUriQueryHandler.getRoutingParamsQueryValueForAppMode(appMode, rsProvider);
 	}
 
 	private static String getFormattedCoordinate(double coordinate) {
