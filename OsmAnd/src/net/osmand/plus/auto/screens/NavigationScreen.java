@@ -401,7 +401,7 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 	}
 
 	private boolean isNightMode() {
-		return getApp().getSettings().AA_MAP_NIGHT_MODE.get().isNightMode(getCarContext().isDarkMode());
+		return getApp().getDaynightHelper().isNightModeForCar(getCarContext());
 	}
 
 	private void updateUse3DButton() {
