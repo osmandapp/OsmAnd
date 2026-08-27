@@ -18,11 +18,9 @@ import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class RouteStatisticsHelper {
 
@@ -31,8 +29,6 @@ public class RouteStatisticsHelper {
 	public static final String UNDEFINED_ATTR = "undefined";
 	public static final String ROUTE_INFO_PREFIX = "routeInfo_";
 
-	private static final double H_STEP = 5;
-	private static final double H_SLOPE_APPROX = 100;
 	private static final int MIN_INCLINE = -101;
 	private static final int MIN_DIVIDED_INCLINE = -20;
 	private static final int MAX_INCLINE = 100;
@@ -83,16 +79,6 @@ public class RouteStatisticsHelper {
 		}
 	}
 	
-
-	private static class RouteSegmentWithIncline {
-		RouteDataObject obj;
-		float dist;
-		float h;
-		float[] interpolatedHeightByStep;
-		float[] slopeByStep;
-		String[] slopeClassUserString;
-		int[] slopeClass;
-	}
 
 	public static List<RouteStatistics> calculateRouteStatistic(List<RouteSegmentResult> route,
 	                                                            RenderingRulesStorage currentRenderer,
@@ -235,122 +221,6 @@ public class RouteStatisticsHelper {
 		return attributeNames;
 	}
 
-	private static List<RouteSegmentWithIncline> calculateInclineRouteSegments(List<RouteSegmentResult> route) {
-		List<RouteSegmentWithIncline> input = new ArrayList<>();
-		float prevHeight = 0;
-		int totalArrayHeightsLength = 0;
-		for(RouteSegmentResult r : route) {
-			float[] heightValues = r.getHeightValues();
-			RouteSegmentWithIncline incl = new RouteSegmentWithIncline();
-			incl.dist = r.getDistance();
-			incl.obj = r.getObject();
-			input.add(incl);
-			float prevH = prevHeight;
-			int indStep = 0;
-			if (incl.dist > H_STEP) {
-				// for 10.1 meters 3 points (0, 5, 10)
-				incl.interpolatedHeightByStep = new float[(int) ((incl.dist) / H_STEP) + 1];
-				totalArrayHeightsLength += incl.interpolatedHeightByStep.length;
-			}
-			if (heightValues != null && heightValues.length > 0) {
-				int indH = 2;
-				float distCum = 0;
-				prevH = heightValues[1];
-				incl.h = prevH ;
-				if(incl.interpolatedHeightByStep != null && incl.interpolatedHeightByStep.length > indStep) {
-					incl.interpolatedHeightByStep[indStep++] = prevH;
-				}
-				while (incl.interpolatedHeightByStep != null &&
-						indStep < incl.interpolatedHeightByStep.length && indH < heightValues.length) {
-					float dist = heightValues[indH] + distCum;
-					if(dist > indStep * H_STEP) {
-						if(dist == distCum) {
-							incl.interpolatedHeightByStep[indStep] = prevH;
-						} else {
-							incl.interpolatedHeightByStep[indStep] = (float) (prevH +
-									(indStep * H_STEP - distCum) *
-											(heightValues[indH + 1] - prevH) / (dist - distCum));
-						}
-						indStep++;
-					} else {
-						distCum = dist;
-						prevH = heightValues[indH + 1];
-						indH += 2;
-					}
-				}
-
-			} else {
-				incl.h = prevH;
-			}
-			while(incl.interpolatedHeightByStep != null && 
-					indStep < incl.interpolatedHeightByStep.length) {
-				incl.interpolatedHeightByStep[indStep++] = prevH;
-			}
-			prevHeight = prevH;
-		}
-		int slopeSmoothShift = (int) (H_SLOPE_APPROX / (2 * H_STEP));
-		float[] heightArray = new float[totalArrayHeightsLength];
-		int iter = 0;
-		for(int i = 0; i < input.size(); i ++) {
-			RouteSegmentWithIncline rswi = input.get(i);
-			for(int k = 0; rswi.interpolatedHeightByStep != null &&
-						k < rswi.interpolatedHeightByStep.length; k++) {
-				heightArray[iter++] = rswi.interpolatedHeightByStep[k];
-			}
-		}
-		iter = 0;
-		int minSlope = Integer.MAX_VALUE;
-		int maxSlope = Integer.MIN_VALUE;
-		for(int i = 0; i < input.size(); i ++) {
-			RouteSegmentWithIncline rswi = input.get(i);
-			if(rswi.interpolatedHeightByStep != null) {
-				rswi.slopeByStep = new float[rswi.interpolatedHeightByStep.length];
-				for (int k = 0; k < rswi.slopeByStep.length; k++) {
-					if (iter > slopeSmoothShift && iter + slopeSmoothShift < heightArray.length) {
-						double slope = (heightArray[iter + slopeSmoothShift] - heightArray[iter - slopeSmoothShift]) * 100
-								/ H_SLOPE_APPROX;
-						rswi.slopeByStep[k] = (float) slope;
-						minSlope = Math.min((int) slope, minSlope);
-						maxSlope = Math.max((int) slope, maxSlope);
-						
-						
-					}
-					iter++;
-				}
-			}
-		}
-		String[] classFormattedStrings = new String[BOUNDARIES_ARRAY.length];
-		classFormattedStrings[0] = formatSlopeString(minSlope, MIN_DIVIDED_INCLINE);
-		classFormattedStrings[1] = formatSlopeString(minSlope, MIN_DIVIDED_INCLINE);
-		classFormattedStrings[BOUNDARIES_ARRAY.length - 1] = formatSlopeString(MAX_DIVIDED_INCLINE, maxSlope);
-		for (int k = 2; k < BOUNDARIES_ARRAY.length - 1; k++) {
-			classFormattedStrings[k] = formatSlopeString(BOUNDARIES_ARRAY[k - 1], BOUNDARIES_ARRAY[k]);
-		}
-		for(int i = 0; i < input.size(); i ++) {
-			RouteSegmentWithIncline rswi = input.get(i);
-			if(rswi.slopeByStep != null) {
-				rswi.slopeClass = new int[rswi.slopeByStep.length];
-				rswi.slopeClassUserString = new String[rswi.slopeByStep.length];
-				for (int t = 0; t < rswi.slopeClass.length; t++) {
-					for (int k = 0; k < BOUNDARIES_ARRAY.length; k++) {
-						if (rswi.slopeByStep[t] <= BOUNDARIES_ARRAY[k] || k == BOUNDARIES_ARRAY.length - 1) {
-							rswi.slopeClass[t] = k;
-							rswi.slopeClassUserString[t] = classFormattedStrings[k];
-							break;
-						}
-					}
-					// end of break
-				}
-			}
-		}
-		return input;
-	}
-
-	private static String formatSlopeString(int slope, int next) {
-		return String.format("%d%% .. %d%%", slope, next);
-	}
-
-
 	public static class RouteStatisticComputer {
 
 		final RenderingRulesStorage currentRenderer;
@@ -365,98 +235,6 @@ public class RouteStatisticsHelper {
 			this.defaultRenderer = defaultRenderer;
 			this.currentRenderingRuleSearchRequest = currentRenderingRuleSearchRequest;
 			this.defaultRenderingRuleSearchRequest = defaultRenderingRuleSearchRequest;
-		}
-
-
-		public RouteStatistics computeStatistic(List<RouteSegmentWithIncline> route, String attribute) {
-			List<RouteSegmentAttribute> routeAttributes = processRoute(route, attribute);
-			Map<String, RouteSegmentAttribute> partition = makePartition(routeAttributes);
-			float totalDistance = computeTotalDistance(routeAttributes);
-			return new RouteStatistics(attribute, routeAttributes, partition, totalDistance);
-		}
-
-		Map<String, RouteSegmentAttribute> makePartition(List<RouteSegmentAttribute> routeAttributes) {
-			final Map<String, RouteSegmentAttribute> partition = new TreeMap<>();
-			for (RouteSegmentAttribute attribute : routeAttributes) {
-				RouteSegmentAttribute attr = partition.get(attribute.getUserPropertyName());
-				if (attr == null) {
-					attr = new RouteSegmentAttribute(attribute);
-					partition.put(attribute.getUserPropertyName(), attr);
-				}
-				attr.incrementDistanceBy(attribute.getDistance());
-			}
-			List<String> keys = new ArrayList<String>(partition.keySet());
-			Collections.sort(keys, new Comparator<String>() {
-
-				@Override
-				public int compare(String o1, String o2) {
-					if (o1.equalsIgnoreCase(UNDEFINED_ATTR)) {
-						return 1;
-					}
-					if (o2.equalsIgnoreCase(UNDEFINED_ATTR)) {
-						return -1;
-					}
-					int cmp = Integer.compare(partition.get(o1).slopeIndex, partition.get(o2).slopeIndex);
-					if(cmp != 0) {
-						return cmp;
-					}
-					return -Float.compare(partition.get(o1).getDistance(), partition.get(o2).getDistance());
-				}
-			});
-			Map<String, RouteSegmentAttribute> sorted = new LinkedHashMap<String, RouteStatisticsHelper.RouteSegmentAttribute>();
-			for (String k : keys) {
-				sorted.put(k, partition.get(k));
-			}
-
-			return sorted;
-		}
-
-		private float computeTotalDistance(List<RouteSegmentAttribute> attributes) {
-			float distance = 0f;
-			for (RouteSegmentAttribute attribute : attributes) {
-				distance += attribute.getDistance();
-			}
-			return distance;
-		}
-
-		protected List<RouteSegmentAttribute> processRoute(List<RouteSegmentWithIncline> route, String attribute) {
-			List<RouteSegmentAttribute> routes = new ArrayList<>();
-			RouteSegmentAttribute prev = null;
-			for (RouteSegmentWithIncline segment : route) {
-				if(segment.slopeClass == null || segment.slopeClass.length == 0) {
-					RouteSegmentAttribute current = classifySegment(attribute, -1, segment.obj);
-					current.distance = segment.dist;
-					if (prev != null && prev.getPropertyName() != null &&
-						prev.getPropertyName().equals(current.getPropertyName())) {
-						prev.incrementDistanceBy(current.distance);
-					} else {
-						routes.add(current);
-						prev = current;
-					}
-				} else {
-					for(int i = 0; i < segment.slopeClass.length; i++) {
-						float d = (float) (i == 0 ? (segment.dist - H_STEP * (segment.slopeClass.length - 1)) : H_STEP);
-						if(i > 0 && segment.slopeClass[i] == segment.slopeClass[i-1]) {
-							prev.incrementDistanceBy(d);
-						} else {
-							RouteSegmentAttribute current = classifySegment(attribute, 
-									segment.slopeClass[i], segment.obj);
-							current.distance = d;
-							if (prev != null && prev.getPropertyName() != null &&
-								prev.getPropertyName().equals(current.getPropertyName())) {
-								prev.incrementDistanceBy(current.distance);
-							} else {
-								if(current.slopeIndex == segment.slopeClass[i]) {
-									current.setUserPropertyName(segment.slopeClassUserString[i]);
-								}
-								routes.add(current);
-								prev = current;
-							}
-						}
-					}
-				}
-			}
-			return routes;
 		}
 
 		public RouteSegmentAttribute classifySegment(String attribute, int slopeClass, RouteDataObject routeObject) {
@@ -522,13 +300,6 @@ public class RouteStatisticsHelper {
 			this.propertyName = propertyName == null ? UNDEFINED_ATTR : propertyName;
 			this.slopeIndex = slopeIndex >= 0 && BOUNDARIES_CLASS[slopeIndex].endsWith(this.propertyName) ? slopeIndex : -1;
  			this.color = color;
-		}
-
-		RouteSegmentAttribute(RouteSegmentAttribute segmentAttribute) {
-			this.propertyName = segmentAttribute.getPropertyName();
-			this.color = segmentAttribute.getColor();
-			this.slopeIndex = segmentAttribute.slopeIndex;
-			this.userPropertyName = segmentAttribute.userPropertyName;
 		}
 
 		public String getUserPropertyName() {
