@@ -5,6 +5,13 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.shared.routing.details.RouteAttributeClassification;
+import net.osmand.shared.routing.details.RouteAttributeClassificationRequest;
+import net.osmand.shared.routing.details.RouteAttributeClassifier;
+import net.osmand.shared.routing.details.RouteSegment;
+import net.osmand.shared.routing.details.RouteStatistic;
+import net.osmand.shared.routing.details.RouteStatisticElement;
+import net.osmand.shared.routing.details.RouteStatisticsCalculator;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -105,21 +112,103 @@ public class RouteStatisticsHelper {
 		if (route == null) {
 			return Collections.emptyList();
 		}
-		List<RouteSegmentWithIncline> routeSegmentWithInclines = calculateInclineRouteSegments(route);
-		List<RouteStatistics>  result = new ArrayList<>();
 		if (Algorithms.isEmpty(attributesNames)) {
 			attributesNames = getRouteStatisticAttrsNames(currentRenderer, defaultRenderer, false);
 		}
-		for (String attr : attributesNames) {
-			RouteStatisticComputer statisticComputer =
-					new RouteStatisticComputer(currentRenderer, defaultRenderer, currentSearchRequest, defaultSearchRequest);
-			RouteStatistics routeStatistics = statisticComputer.computeStatistic(routeSegmentWithInclines, attr);
-			Map<String, RouteSegmentAttribute> partitions = routeStatistics.partition;
-			if (!partitions.isEmpty() && (partitions.size() != 1 || !routeStatistics.partition.containsKey(UNDEFINED_ATTR))) {
-				result.add(routeStatistics);
+		List<RouteSegment> sharedRoute = new ArrayList<>(route.size());
+		for (int i = 0; i < route.size(); i++) {
+			// Statistics use segment values only; these synthetic ranges satisfy the shared contract
+			// without reconstructing RouteCalculationResult's point-aligned segment list here.
+			sharedRoute.add(RouteSegmentResultSnapshotAdapter.toSnapshot(route.get(i), i, i));
+		}
+		List<RouteStatistic> sharedStatistics = RouteStatisticsCalculator.INSTANCE.calculate(
+				sharedRoute,
+				attributesNames,
+				new SharedRouteAttributeClassifier(
+						currentRenderer,
+						defaultRenderer,
+						currentSearchRequest,
+						defaultSearchRequest));
+		return toCompatibilityStatistics(sharedStatistics);
+	}
+
+	private static List<RouteStatistics> toCompatibilityStatistics(List<RouteStatistic> sharedStatistics) {
+		List<RouteStatistics> result = new ArrayList<>(sharedStatistics.size());
+		for (RouteStatistic statistic : sharedStatistics) {
+			List<RouteSegmentAttribute> elements = toCompatibilityAttributes(statistic.getElements());
+			Map<String, RouteSegmentAttribute> partition = new LinkedHashMap<>();
+			for (RouteSegmentAttribute attribute : toCompatibilityAttributes(statistic.getPartition())) {
+				partition.put(attribute.getUserPropertyName(), attribute);
 			}
+			result.add(new RouteStatistics(
+					statistic.getName(),
+					elements,
+					partition,
+					statistic.getTotalDistanceMeters()));
 		}
 		return result;
+	}
+
+	private static List<RouteSegmentAttribute> toCompatibilityAttributes(List<RouteStatisticElement> sharedAttributes) {
+		List<RouteSegmentAttribute> result = new ArrayList<>(sharedAttributes.size());
+		for (RouteStatisticElement sharedAttribute : sharedAttributes) {
+			RouteSegmentAttribute attribute = new RouteSegmentAttribute(
+					sharedAttribute.getPropertyName(),
+					sharedAttribute.getColor(),
+					-1);
+			attribute.setUserPropertyName(sharedAttribute.getUserPropertyName());
+			attribute.incrementDistanceBy(sharedAttribute.getDistanceMeters());
+			result.add(attribute);
+		}
+		return result;
+	}
+
+	/** Keeps Android rendering objects outside common code while preserving current/default fallback. */
+	private static class SharedRouteAttributeClassifier implements RouteAttributeClassifier {
+
+		private final RenderingRulesStorage currentRenderer;
+		private final RenderingRulesStorage defaultRenderer;
+		private final RenderingRuleSearchRequest currentSearchRequest;
+		private final RenderingRuleSearchRequest defaultSearchRequest;
+
+		SharedRouteAttributeClassifier(RenderingRulesStorage currentRenderer,
+		                               RenderingRulesStorage defaultRenderer,
+		                               RenderingRuleSearchRequest currentSearchRequest,
+		                               RenderingRuleSearchRequest defaultSearchRequest) {
+			this.currentRenderer = currentRenderer;
+			this.defaultRenderer = defaultRenderer;
+			this.currentSearchRequest = currentSearchRequest;
+			this.defaultSearchRequest = defaultSearchRequest;
+		}
+
+		@Override
+		public RouteAttributeClassification classify(RouteAttributeClassificationRequest request) {
+			RouteAttributeClassification classification = classify(
+					request, currentRenderer, currentSearchRequest);
+			return classification != null
+					? classification
+					: classify(request, defaultRenderer, defaultSearchRequest);
+		}
+
+		private RouteAttributeClassification classify(RouteAttributeClassificationRequest request,
+		                                              RenderingRulesStorage renderer,
+		                                              RenderingRuleSearchRequest baseSearchRequest) {
+			if (renderer == null) {
+				return null;
+			}
+			RenderingRuleSearchRequest searchRequest = new RenderingRuleSearchRequest(baseSearchRequest);
+			if (request.getMainTag() != null) {
+				searchRequest.setStringFilter(renderer.PROPS.R_TAG, request.getMainTag());
+				searchRequest.setStringFilter(renderer.PROPS.R_VALUE, request.getMainValue());
+			}
+			searchRequest.setStringFilter(renderer.PROPS.R_ADDITIONAL, request.getAdditional());
+			if (!searchRequest.searchRenderingAttribute(request.getAttributeName())) {
+				return null;
+			}
+			return new RouteAttributeClassification(
+					searchRequest.getStringPropertyValue(renderer.PROPS.R_ATTR_STRING_VALUE),
+					searchRequest.getIntPropertyValue(renderer.PROPS.R_ATTR_COLOR_VALUE));
+		}
 	}
 
 	public static List<String> getRouteStatisticAttrsNames(RenderingRulesStorage currentRenderer,

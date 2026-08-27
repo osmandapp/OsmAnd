@@ -1000,13 +1000,8 @@ public class RouteCalculationResult {
 	 * At the end always update listDistance local vars and time
 	 */
 	private static void updateListDistanceTime(int[] listDistance, List<Location> locations) {
-		if (listDistance.length > 0) {
-			listDistance[locations.size() - 1] = 0;
-			for (int i = locations.size() - 1; i > 0; i--) {
-				listDistance[i - 1] = Math.round(locations.get(i - 1).distanceTo(locations.get(i)));
-				listDistance[i - 1] += listDistance[i];
-			}
-		}
+		int[] calculatedDistances = SharedRouteDetailsProvider.calculateDistancesToFinish(locations);
+		System.arraycopy(calculatedDistances, 0, listDistance, 0, calculatedDistances.length);
 	}
 
 	/**
@@ -1014,15 +1009,7 @@ public class RouteCalculationResult {
 	 * At the end always update listDistance local vars and time
 	 */
 	private static void updateDirectionsTime(List<RouteDirectionInfo> directions, int[] listDistance) {
-		int sumExpectedTime = 0;
-		for (int i = directions.size() - 1; i >= 0; i--) {
-			directions.get(i).distance = listDistance[directions.get(i).routePointOffset];
-			if (i < directions.size() - 1) {
-				directions.get(i).distance -= listDistance[directions.get(i + 1).routePointOffset];
-			}
-			sumExpectedTime += directions.get(i).getExpectedTime();
-			directions.get(i).afterLeftTime = sumExpectedTime;
-		}
+		SharedRouteDetailsProvider.updateDirectionDistancesAndTimes(directions, listDistance);
 	}
 
 	//////////////////// MUST BE ALL SYNCHRONIZED ??? //////////////////////
@@ -1350,15 +1337,7 @@ public class RouteCalculationResult {
 
 	@Nullable
 	public Location getRouteLocationByDistance(int meters) {
-		int increase = meters > 0 ? 1 : -1;
-		for (int i = increase; currentRoute < locations.size() && currentRoute + i >= 0 && currentRoute + i < locations.size(); i = i + increase) {
-			Location loc = locations.get(currentRoute + i);
-			double dist = MapUtils.getDistance(locations.get(currentRoute), loc);
-			if (dist >= Math.abs(meters)) {
-				return loc;
-			}
-		}
-		return null;
+		return SharedRouteDetailsProvider.getRouteLocationByDistance(locations, currentRoute, meters);
 	}
 
 	public boolean directionsAvailable() {

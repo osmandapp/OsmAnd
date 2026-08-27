@@ -64,6 +64,7 @@ import net.osmand.plus.routepreparationmenu.cards.RouteStatisticCard;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.SharedRouteDetailsProvider;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
@@ -87,6 +88,7 @@ import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
+import net.osmand.shared.routing.details.RouteCumulativeInfo;
 import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
@@ -1545,14 +1547,9 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	public static CumulativeInfo getRouteDirectionCumulativeInfo(int position, List<
 			RouteDirectionInfo> routeDirections) {
 		CumulativeInfo cumulativeInfo = new CumulativeInfo();
-		if (position >= routeDirections.size()) {
-			return cumulativeInfo;
-		}
-		for (int i = 0; i < position; i++) {
-			RouteDirectionInfo routeDirectionInfo = routeDirections.get(i);
-			cumulativeInfo.time += routeDirectionInfo.getExpectedTime();
-			cumulativeInfo.distance += routeDirectionInfo.distance;
-		}
+		RouteCumulativeInfo sharedInfo = SharedRouteDetailsProvider.getCumulativeInfo(position, routeDirections);
+		cumulativeInfo.distance = sharedInfo.getDistanceMeters();
+		cumulativeInfo.time = sharedInfo.getTimeSeconds();
 		return cumulativeInfo;
 	}
 
