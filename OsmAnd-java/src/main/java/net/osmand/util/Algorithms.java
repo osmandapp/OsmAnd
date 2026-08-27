@@ -275,6 +275,21 @@ public class Algorithms {
 		return name;
 	}
 
+	/**
+	 * Removes a trailing {@code _<integer>} version segment immediately before a file extension or at the end of a name.
+	 */
+	public static String removeFileVersionSuffix(String fileName) {
+		int separatorIndex = fileName.lastIndexOf('_');
+		if (separatorIndex >= 0) {
+			int extensionIndex = fileName.indexOf('.', separatorIndex + 1);
+			int suffixEnd = extensionIndex >= 0 ? extensionIndex : fileName.length();
+			if (separatorIndex + 1 < suffixEnd && isInt(fileName.substring(separatorIndex + 1, suffixEnd))) {
+				return fileName.substring(0, separatorIndex) + fileName.substring(suffixEnd);
+			}
+		}
+		return fileName;
+	}
+
 	public static String getFileExtension(File f) {
 		return getFileNameExtension(f.getName());
 	}
