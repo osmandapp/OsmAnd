@@ -32,6 +32,8 @@ public class AlarmInfo implements LocationPoint {
 	private float floatValue;
 	private double latitude;
 	private double longitude;
+	@Nullable private String sourceTag;
+	@Nullable private String sourceValue;
 
 	public AlarmInfo(@NonNull AlarmInfoType type, int locationIndex) {
 		this.type = type;
@@ -71,6 +73,16 @@ public class AlarmInfo implements LocationPoint {
 
 	public int getLastLocationIndex() {
 		return lastLocationIndex;
+	}
+
+	@Nullable
+	public String getSourceTag() {
+		return sourceTag;
+	}
+
+	@Nullable
+	public String getSourceValue() {
+		return sourceValue;
 	}
 
 	public void setLastLocationIndex(int lastLocationIndex) {
@@ -130,6 +142,8 @@ public class AlarmInfo implements LocationPoint {
 			alarmInfo = new AlarmInfo(PEDESTRIAN, locInd);
 		}
 		if (alarmInfo != null) {
+			alarmInfo.sourceTag = ruleType.getTag();
+			alarmInfo.sourceValue = ruleType.getValue();
 			alarmInfo.setLatLon(loc.getLatitude(), loc.getLongitude());
 		}
 		return alarmInfo;
