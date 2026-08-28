@@ -247,7 +247,7 @@
     <string name="saving_gpx_tracks">Salvataggio del file GPX…</string>
     <string name="finished_task">Completato</string>
     <string name="data_settings">Dati</string>
-    <string name="osm_editing_plugin_name">Modifiche OSM</string>
+    <string name="osm_editing_plugin_name">Modifica di OpenStreetMap</string>
     <string name="auto_zoom_map_descr">Livello di Zoom automatico in base alla velocità (fintanto che la mappa è sincronizzata con la posizione corrente).</string>
     <string name="auto_zoom_map">Zoom automatico mappa</string>
     <string name="save_current_track">Salva la traccia corrente</string>
@@ -1178,7 +1178,7 @@
     <string name="world_map_download_descr">La mappa di base (copertura mondiale a piccoli livelli di zoom) è mancante o non aggiornata. Valuta se scaricarla per un ambiente completo.</string>
     <string name="map_legend">Legenda della mappa</string>
     <string name="shared_string_upload">Carica</string>
-    <string name="feedback">Feedback</string>
+    <string name="feedback">Riscontro</string>
     <string name="shared_string_update">Aggiorna</string>
     <string name="rendering_attr_showProposed_name">Oggetti proposti</string>
     <string name="read_more">Altro</string>
@@ -1764,7 +1764,7 @@
     <string name="shared_string_paste">Incolla</string>
     <string name="looking_for_tracks_with_waypoints">Cerco tracce con punti intermedi</string>
     <string name="shared_string_more_without_dots">Altro</string>
-    <string name="empty_state_osm_edits">Crea o modifica oggetti OSM</string>
+    <string name="empty_state_osm_edits">Crea o modifica oggetti di OpenStreetMap</string>
     <string name="empty_state_osm_edits_descr">Crea o modifica PDI OSM, apri o commenta note OSM, e invia tracce GPX registrate.</string>
     <string name="shared_string_deleted">Cancellato</string>
     <string name="shared_string_edited">Modificato</string>

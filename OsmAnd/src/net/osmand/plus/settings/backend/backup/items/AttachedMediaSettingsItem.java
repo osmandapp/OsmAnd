@@ -10,10 +10,12 @@ import net.osmand.IProgress;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.audionotes.Recording;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 import net.osmand.plus.settings.mediastorage.MediaSource;
 import net.osmand.shared.media.LinkMediaFactory;
+import net.osmand.shared.media.MediaFileNameFormat;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -96,7 +98,14 @@ public class AttachedMediaSettingsItem extends FileSettingsItem {
 	@NonNull
 	@Override
 	public String getPublicName(@NonNull Context ctx) {
-		return source.getFileName();
+		String fileName = source.getFileName();
+		if (MediaFileNameFormat.isManagedMediaFileName(fileName)) {
+			String formattedName = Recording.getNameForMultimediaFile(app, fileName, getLocalModifiedTime());
+			if (!Algorithms.isEmpty(formattedName)) {
+				return formattedName;
+			}
+		}
+		return fileName;
 	}
 
 	@Nullable

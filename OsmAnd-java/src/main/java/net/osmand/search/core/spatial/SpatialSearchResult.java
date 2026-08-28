@@ -33,7 +33,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	int biggestCityType = -1;
 
 	private static final List<String> FILTER_DUPLICATE_POI_SUBTYPE = new ArrayList<String>(
-			Arrays.asList("building", "internet_access_yes"));
+			Arrays.asList("building", "internet_access_yes", "atm"));
 	final int ZOOM_SIMILARITY_70_KM = 9 - 8; // 1 symbol - tile z=9 - 1 pixel of z=1
 	final int ZOOM_SIMILARITY_10_KM = 12 - 8; // 2 symbols - tile z=12
 	final int ZOOM_SIMILARITY_1_KM = 15 - 8; // 3 symbols
@@ -478,23 +478,26 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	}
 
 	public int getMainRating() {
-		if (getFirstRefObject(true) instanceof Amenity a) {
-			return Math.max(parent.MIN_ELO_RATING, a.getTravelEloNumber());
+		int elo = parent.MIN_ELO_RATING;
+		if (objs.size() > 0) {
+			SpatialSearchResultRef o = objs.get(0);
+			elo = Math.max(elo, o.atom.elo);
+			if (o.atom.object instanceof Amenity a) {
+				elo = Math.max(elo, a.getTravelEloNumber());
+			}
+			if (unitedObject != null && unitedObject.getSyntheticAmenity() != null) {
+				elo = Math.max(elo, unitedObject.getSyntheticAmenity().getTravelEloNumber());
+			}
 		}
-		if (getFirstRefObject(false) instanceof Amenity a) {
-			return Math.max(parent.MIN_ELO_RATING, a.getTravelEloNumber());
-		}
-		return parent.MIN_ELO_RATING;
+		return elo;
 	}
 	
 	public int getTotalRating() {
-		int rating = parent.MIN_ELO_RATING; // MIN Rating to make higher
-		if (unitedObject != null && unitedObject.getSyntheticAmenity() != null) {
-			rating = Math.max(rating, unitedObject.getSyntheticAmenity().getTravelEloNumber());
-		}
+		int rating = getMainRating();
 		for (SpatialSearchResultRef r : objs) {
 			if (r.atom.object instanceof Amenity a) {
 				rating = Math.max(rating, a.getTravelEloNumber());
+				rating = Math.max(rating, r.atom.elo);
 			}
 		}
 		return rating;
@@ -559,12 +562,12 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		if (res != 0) {
 			return res;
 		}
-		res = -Integer.compare(o1.sumTypeOrder(), o2.sumTypeOrder());
+		// sort poi intersection differently
+		res = -Integer.compare(o1.getTotalRating(), o2.getTotalRating());
 		if (res != 0) {
 			return res;
 		}
-		// sort poi intersection differently
-		res = -Integer.compare(o1.getTotalRating(), o2.getTotalRating());
+		res = -Integer.compare(o1.sumTypeOrder(), o2.sumTypeOrder());
 		if (res != 0) {
 			return res;
 		}

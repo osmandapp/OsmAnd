@@ -3,6 +3,44 @@
 
 	<style name="OsmandMaterialLightTheme" parent="Theme.Material3.Light">
 
+		<item name="colorPrimary">@color/primary_light</item>
+		<item name="colorOnPrimary">@color/on_primary_light</item>
+		<item name="colorPrimaryContainer">@color/primary_container_light</item>
+		<item name="colorOnPrimaryContainer">@color/on_primary_container_light</item>
+		
+		<item name="colorSecondary">@color/secondary_light</item>
+		<item name="colorOnSecondary">@color/on_primary_light</item>
+		
+		<item name="colorSurface">@color/surface_light</item>
+		<item name="colorSurfaceContainer">@color/surface_container_light</item>
+		<item name="colorSurfaceContainerLow">@color/surface_container_light</item>
+		<item name="colorSurfaceContainerHigh">@color/surface_container_highest_light</item>
+		<item name="colorSurfaceContainerHighest">@color/surface_container_highest_light</item>
+		<item name="colorOnSurface">@color/on_surface_light</item>
+		<item name="colorOnSurfaceVariant">@color/on_surface_variant_light</item>
+		
+		<item name="colorOutline">@color/outline_light</item>
+		<item name="colorOutlineVariant">@color/outline_variant_light</item>
+		
+		<item name="colorError">@color/error_light</item>
+		<item name="colorOnError">@color/on_error_light</item>
+		
+		<item name="android:colorBackground">@color/surface_light</item>
+		<item name="scrimBackground">@color/scrim_light</item>
+
+		<item name="colorPrimaryPressed">@color/primary_pressed_light</item>
+		<item name="colorPrimaryContainerPressed">@color/primary_container_pressed_light</item>
+		<item name="colorSurfaceContainerHighestPressed">@color/surface_container_highest_pressed_light</item>
+		<item name="colorOnSurfaceTertiary">@color/on_surface_tertiary_light</item>
+		<item name="colorOnSurfaceDisabled">@color/on_surface_disabled_light</item>
+		<item name="colorOutlineDisabled">@color/outline_disabled_light</item>
+		
+		<item name="colorSuccess">@color/success_light</item>
+		<item name="colorWarning">@color/warning_light</item>
+		<item name="colorSuccessIcon">@color/success_icon_light</item>
+		<item name="colorWarningIcon">@color/warning_icon_light</item>
+		<item name="colorErrorIcon">@color/error_icon_light</item>
+
 		<item name="text_color_primary_v2">@color/text_color_primary_light_v2</item>
 		<item name="icon_color_default_v2">@color/icon_color_default_light_v2</item>
 		<item name="icon_color_active_v2">@color/icon_color_active_light_v2</item>
