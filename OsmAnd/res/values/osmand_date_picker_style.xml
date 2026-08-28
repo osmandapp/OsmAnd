@@ -18,43 +18,41 @@
 	</style>
 
 	<style name="ThemeOverlay.App.Material.DatePicker.Light">
-		<item name="colorSurface">@color/card_and_list_background_light</item>
-		<item name="colorSurfaceContainerHigh">@color/card_and_list_background_light</item>
+		<item name="colorPrimary">@color/primary_light</item>
+		<item name="colorOnPrimary">@color/on_primary_light</item>
 
-		<item name="colorPrimary">@color/active_color_primary_light</item>
-		<item name="colorOnPrimary">@color/btn_text_on_primary_light</item>
+		<item name="colorSurface">@color/surface_light</item>
+		<item name="colorSurfaceContainerHigh">@color/surface_container_highest_light</item>
+		<item name="colorOnSurface">@color/on_surface_light</item>
+		<item name="colorOnSurfaceVariant">@color/on_surface_variant_light</item>
 
-		<item name="colorOnSurface">@color/text_color_primary_light</item>
+		<item name="colorSecondaryContainer">@color/primary_container_light</item>
+		<item name="colorOnSecondaryContainer">@color/on_primary_container_light</item>
 
-		<item name="colorOnSurfaceVariant">@color/text_color_secondary_light</item>
+		<item name="colorOutline">@color/outline_light</item>
+		<item name="colorControlActivated">@color/primary_light</item>
 
-		<item name="colorSecondaryContainer">@color/active_color_secondary_light</item>
-		<item name="colorOnSecondaryContainer">@color/text_color_primary_light</item>
-
-		<item name="colorOutline">@color/stroked_buttons_and_links_outline_light</item>
-		<item name="colorOnPrimaryContainer">@color/active_color_primary_light</item>
-		<item name="colorError">@color/color_invalid</item>
-		<item name="colorOnError">@color/btn_text_on_primary_light</item>
+		<item name="colorError">@color/error_light</item>
+		<item name="colorOnError">@color/on_error_light</item>
 	</style>
 
 	<style name="ThemeOverlay.App.Material.DatePicker.Dark">
-		<item name="colorSurface">@color/card_and_list_background_dark</item>
-		<item name="colorSurfaceContainerHigh">@color/card_and_list_background_dark</item>
+		<item name="colorPrimary">@color/primary_dark</item>
+		<item name="colorOnPrimary">@color/on_primary_dark</item>
 
-		<item name="colorPrimary">@color/active_color_primary_dark</item>
-		<item name="colorOnPrimary">@color/btn_text_on_primary_dark</item>
+		<item name="colorSurface">@color/surface_dark</item>
+		<item name="colorSurfaceContainerHigh">@color/surface_container_highest_dark</item>
+		<item name="colorOnSurface">@color/on_surface_dark</item>
+		<item name="colorOnSurfaceVariant">@color/on_surface_variant_dark</item>
 
-		<item name="colorOnSurface">@color/text_color_primary_dark</item>
+		<item name="colorSecondaryContainer">@color/primary_container_dark</item>
+		<item name="colorOnSecondaryContainer">@color/on_primary_container_dark</item>
 
-		<item name="colorOnSurfaceVariant">@color/text_color_secondary_dark</item>
+		<item name="colorOutline">@color/outline_dark</item>
+		<item name="colorControlActivated">@color/primary_dark</item>
 
-		<item name="colorSecondaryContainer">@color/active_color_secondary_dark</item>
-		<item name="colorOnSecondaryContainer">@color/text_color_primary_dark</item>
-
-		<item name="colorOutline">@color/stroked_buttons_and_links_outline_dark</item>
-		<item name="colorOnPrimaryContainer">@color/active_color_primary_dark</item>
-		<item name="colorError">@color/color_invalid</item>
-		<item name="colorOnError">@color/btn_text_on_primary_dark</item>
+		<item name="colorError">@color/error_dark</item>
+		<item name="colorOnError">@color/on_error_dark</item>
 	</style>
 
 </resources>
