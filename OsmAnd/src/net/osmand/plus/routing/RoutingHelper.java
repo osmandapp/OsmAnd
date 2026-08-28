@@ -31,6 +31,7 @@ import net.osmand.router.RouteExporter;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.routing.details.RouteEvent;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -313,7 +314,34 @@ public class RoutingHelper {
 						res.getCalculateTime(), res.getVisitedSegments(), res.getLoadedTiles());
 				app.showToastMessage(msg);
 			}
+			if (PluginsHelper.isDevelopment()) {
+				String msg = formatRouteAlertsDebug(SharedRouteDetailsProvider.getSnapshot(res).getEvents());
+				log.info(msg);
+				app.showToastMessage(msg);
+			}
 		});
+	}
+
+	@NonNull
+	static String formatRouteAlertsDebug(@NonNull List<RouteEvent> events) {
+		StringBuilder message = new StringBuilder("Route alerts/warnings: ").append(events.size());
+		for (int index = 0; index < events.size(); index++) {
+			RouteEvent event = events.get(index);
+			message.append('\n')
+					.append(index + 1).append(". ")
+					.append(event.getType().name())
+					.append(" @").append(event.getLocationIndex());
+			if (event.getLastLocationIndex() >= 0) {
+				message.append("..").append(event.getLastLocationIndex());
+			}
+			if (event.getIntValue() != 0) {
+				message.append(" int=").append(event.getIntValue());
+			}
+			if (event.getFloatValue() != 0f) {
+				message.append(" float=").append(event.getFloatValue());
+			}
+		}
+		return message.toString();
 	}
 
 	public GPXRouteParamsBuilder getCurrentGPXRoute() {
