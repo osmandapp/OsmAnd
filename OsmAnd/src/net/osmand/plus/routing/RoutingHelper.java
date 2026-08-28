@@ -323,7 +323,7 @@ public class RoutingHelper {
 	}
 
 	@NonNull
-	static String formatRouteAlertsDebug(@NonNull List<RouteEvent> events) {
+	private static String formatRouteAlertsDebug(@NonNull List<RouteEvent> events) {
 		StringBuilder message = new StringBuilder("Route alerts/warnings: ").append(events.size());
 		for (int index = 0; index < events.size(); index++) {
 			RouteEvent event = events.get(index);

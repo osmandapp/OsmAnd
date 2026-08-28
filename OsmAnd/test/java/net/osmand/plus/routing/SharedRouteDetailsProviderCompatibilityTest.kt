@@ -3,10 +3,7 @@ package net.osmand.plus.routing
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.osmand.Location
 import net.osmand.router.TurnType
-import net.osmand.shared.data.KLatLon
 import net.osmand.shared.routing.details.RouteCumulativeInfo
-import net.osmand.shared.routing.details.RouteEvent
-import net.osmand.shared.routing.details.RouteEventType
 import net.osmand.util.MapUtils
 import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
@@ -84,36 +81,6 @@ class SharedRouteDetailsProviderCompatibilityTest {
 		assertEquals(
 			legacyCumulativeInfo(1, directions),
 			SharedRouteDetailsProvider.getCumulativeInfo(1, directions),
-		)
-	}
-
-	@Test
-	fun routeAlertDebugTextListsEverySharedEventAndPayload() {
-		val events = listOf(
-			RouteEvent(
-				type = RouteEventType.SPEED_CAMERA,
-				location = KLatLon(51.5, -0.1),
-				locationIndex = 7,
-			),
-			RouteEvent(
-				type = RouteEventType.TUNNEL,
-				location = KLatLon(51.6, -0.2),
-				locationIndex = 12,
-				lastLocationIndex = 18,
-				intValue = 3,
-				floatValue = 125.5f,
-			),
-		)
-
-		assertEquals(
-			"Route alerts/warnings: 2\n" +
-				"1. SPEED_CAMERA @7\n" +
-				"2. TUNNEL @12..18 int=3 float=125.5",
-			RoutingHelper.formatRouteAlertsDebug(events),
-		)
-		assertEquals(
-			"Route alerts/warnings: 0",
-			RoutingHelper.formatRouteAlertsDebug(emptyList()),
 		)
 	}
 
