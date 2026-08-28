@@ -15,6 +15,8 @@
 		<item name="shapeCornerFamily">rounded</item>
 		<item name="shapeCornerSizeExtraLarge">28dp</item>
 		<item name="shapeCornerSizeExtraSmall">4dp</item>
+
+		<item name="colorControlActivated">?attr/colorPrimary</item>
 	</style>
 
 	<style name="ThemeOverlay.App.Material.DatePicker.Light">
@@ -26,11 +28,10 @@
 		<item name="colorOnSurface">@color/on_surface_light</item>
 		<item name="colorOnSurfaceVariant">@color/on_surface_variant_light</item>
 
-		<item name="colorSecondaryContainer">@color/primary_container_light</item>
-		<item name="colorOnSecondaryContainer">@color/on_primary_container_light</item>
+		<item name="colorSecondaryContainer">@color/secondary_container_light</item>
+		<item name="colorOnSecondaryContainer">@color/on_secondary_container_light</item>
 
 		<item name="colorOutline">@color/outline_light</item>
-		<item name="colorControlActivated">@color/primary_light</item>
 
 		<item name="colorError">@color/error_light</item>
 		<item name="colorOnError">@color/on_error_light</item>
@@ -45,11 +46,10 @@
 		<item name="colorOnSurface">@color/on_surface_dark</item>
 		<item name="colorOnSurfaceVariant">@color/on_surface_variant_dark</item>
 
-		<item name="colorSecondaryContainer">@color/primary_container_dark</item>
-		<item name="colorOnSecondaryContainer">@color/on_primary_container_dark</item>
+		<item name="colorSecondaryContainer">@color/secondary_container_dark</item>
+		<item name="colorOnSecondaryContainer">@color/on_secondary_container_dark</item>
 
 		<item name="colorOutline">@color/outline_dark</item>
-		<item name="colorControlActivated">@color/primary_dark</item>
 
 		<item name="colorError">@color/error_dark</item>
 		<item name="colorOnError">@color/on_error_dark</item>
