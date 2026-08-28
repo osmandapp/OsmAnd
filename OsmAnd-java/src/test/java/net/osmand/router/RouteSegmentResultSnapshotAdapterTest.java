@@ -37,7 +37,7 @@ public class RouteSegmentResultSnapshotAdapterTest {
 				new String[]{"Raw road", "A 1", "Centre", "B 2"}
 		);
 		road.id = 42L;
-		road.types = new int[]{4, 5, 6, 7, 8, 9, 10, 11, 99};
+		road.types = new int[]{4, 5, 6, 7, 8, 9, 10, 11};
 		road.pointsX = new int[]{0, 1};
 		road.pointsY = new int[]{0, 1};
 		road.heightDistanceArray = new float[]{0f, 12f, 100f, 14f};

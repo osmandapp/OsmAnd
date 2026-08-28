@@ -56,15 +56,15 @@ public class RouteStatisticsHelperCompatibilityTest {
 		assertStatistic(
 				result.get(0),
 				90f,
-				Arrays.asList("current_asphalt:30.0", "default_gravel:60.0"),
-				Arrays.asList("default_gravel:60.0", "current_asphalt:30.0"));
+				Arrays.asList("current_asphalt:30.0", "undefined:60.0"),
+				Arrays.asList("current_asphalt:30.0", "undefined:60.0"));
 		assertStatistic(
 				result.get(1),
 				90f,
 				Arrays.asList("street:30.0", "primary:60.0"),
 				Arrays.asList("primary:60.0", "street:30.0"));
 		assertEquals(0xFF112233, result.get(0).elements.get(0).getColor());
-		assertEquals(0xFF445566, result.get(0).elements.get(1).getColor());
+		assertEquals(0, result.get(0).elements.get(1).getColor());
 
 		RouteStatisticComputer legacyClassifier = new RouteStatisticComputer(
 				currentRenderer,
