@@ -715,10 +715,6 @@
     <!-- pick them up via styles.xml without a translation layer.      -->
     <!--                                                               -->
     <!-- Pressed states use baked opaque values, not M3 state layers.  -->
-    <!-- Alpha-based states lose contrast in direct sunlight, which    -->
-    <!-- matters for outdoor navigation. Do not "fix" these to alpha.  -->
-    <!-- Scrim is the one intentional exception: it must be            -->
-    <!-- translucent because arbitrary content sits underneath.        -->
     <!-- ============================================================ -->
 
     <color name="surface_light">@color/palette_neutral_95</color>
@@ -781,6 +777,11 @@
 
     <color name="scrim_light">#52000000</color>
     <color name="scrim_dark">#52000000</color>
+
+	<color name="map_region_downloaded_fill">#66339944</color>
+	<color name="map_region_outdated_fill">#66FF8800</color>
+	<color name="map_region_deactivated_fill">#66858594</color>
+
 	
 
 
