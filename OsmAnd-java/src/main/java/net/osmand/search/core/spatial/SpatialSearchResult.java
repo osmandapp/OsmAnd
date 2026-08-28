@@ -38,6 +38,8 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	final int ZOOM_SIMILARITY_10_KM = 12 - 8; // 2 symbols - tile z=12
 	final int ZOOM_SIMILARITY_1_KM = 15 - 8; // 3 symbols
 	final int ZOOM_SIMILARITY_10_M = 18 - 8; // 4 symbols
+	Set<String> TRANSPORT_SUBTYPES_MINOR = new HashSet<>(Arrays.asList("public_transport_stop_position", "public_transport_platform"));
+	Set<String> TRANSPORT_SUBTYPES_MAJOR = new HashSet<>(Arrays.asList("railway_station", "public_transport_station", "bus_station", "aerialway_station"));
 	
 	SpatialSearchResult(SpatialSearchResultsList parentList, int parentInd, LatLon preciseLatlon, String extraName,
 			Integer surplusWords) {
@@ -244,7 +246,15 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 			if (amenity.getType().getKeyName().equals("natural")) {
 				String name = SearchAlgorithms.normalizeToken(SearchAlgorithms.alignChars(amenity.getName()));
 				String link = getShortLink(ZOOM_SIMILARITY_10_KM);
-				if (name != null && link != null) {
+				if (!Algorithms.isEmpty(name) && link != null) {
+					result = addResult(result, name + "_" + link);
+				}
+			}
+			String subType = amenity.getSubType();
+			if (TRANSPORT_SUBTYPES_MAJOR.contains(subType) || TRANSPORT_SUBTYPES_MINOR.contains(subType)) {
+				String name = SearchAlgorithms.normalizeToken(SearchAlgorithms.alignChars(amenity.getName()));
+				String link = getShortLink(ZOOM_SIMILARITY_1_KM);
+				if (!Algorithms.isEmpty(name) && link != null) {
 					result = addResult(result, name + "_" + link);
 				}
 			}
@@ -290,6 +300,21 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 			}
 			return; // nothing to merge
 		} 
+		if (object instanceof Amenity first && otherObj instanceof Amenity second) {
+			String firstSubtype = first.getSubType();
+			String secondSubType = second.getSubType();
+			if (TRANSPORT_SUBTYPES_MINOR.contains(firstSubtype) && TRANSPORT_SUBTYPES_MAJOR.contains(secondSubType)) {
+				BaseDetailsObject united = new BaseDetailsObject(second, lang);
+				if (unitedObject != null) {
+					united.addObject(unitedObject);
+				}
+				united.addObject(first);
+				unitedObject = united;
+				objs.clear();
+				objs.addAll(other.objs); // switch to other object
+			}
+			
+		}
 		if (object instanceof Amenity a && unitedObject == null) {
 			unitedObject = new BaseDetailsObject(a, lang);
 		}
