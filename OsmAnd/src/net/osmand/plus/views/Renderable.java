@@ -98,6 +98,7 @@ public class Renderable {
 
         protected GpxGeometryWay geometryWay;
         protected boolean drawArrows;
+        protected boolean dashed;
         protected Track3DStyle track3DStyle;
 
         public RenderableSegment(List<WptPt> points, double segmentSize) {
@@ -113,6 +114,12 @@ public class Renderable {
         public boolean setDrawArrows(boolean drawArrows) {
             boolean changed = this.drawArrows != drawArrows;
             this.drawArrows = drawArrows;
+            return changed;
+        }
+
+        public boolean setDashed(boolean dashed) {
+            boolean changed = this.dashed != dashed;
+            this.dashed = dashed;
             return changed;
         }
 
