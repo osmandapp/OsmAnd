@@ -52,7 +52,6 @@
         <item name="android:statusBarColor">@color/status_bar_main_dark</item>
         <item name="mapBackground">@color/map_background_color_dark</item>
         <item name="chart_marker_background">@drawable/chart_marker_background_dark</item>
-        <item name="chart_label_background">@drawable/chart_label_background_dark</item>
         <item name="chart_grid_line_color">@color/gpx_chart_grid_dark</item>
         <item name="chart_x_grid_line_axis_color">@color/chart_axis_x_grid_line_dark</item>
         <item name="chart_y_grid_line_axis_color">@color/chart_axis_grid_line_dark</item>

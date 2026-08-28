@@ -4,7 +4,7 @@
 	android:layout_height="wrap_content"
 	android:orientation="vertical">
 
-	<com.github.mikephil.charting.charts.GradientChart
+	<net.osmand.plus.charts.GradientChart
 		android:id="@+id/chart"
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/route_info_chart_height" />

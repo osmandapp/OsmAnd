@@ -31,7 +31,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.PagerAdapter;
 
-import com.github.mikephil.charting.charts.ElevationChart;
+import net.osmand.plus.charts.ElevationChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -342,7 +342,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		return view;
 	}
 
-	private void setupSpeedTab(View view, com.github.mikephil.charting.charts.ElevationChart chart, int position) {
+	private void setupSpeedTab(View view, net.osmand.plus.charts.ElevationChart chart, int position) {
 		if (analysis != null && analysis.isSpeedSpecified()) {
 			if (analysis.hasSpeedData()) {
 				setupChartWithAppearance(chart);

@@ -1,7 +1,7 @@
 package net.osmand.plus.charts;
 
 import static android.text.format.DateUtils.HOUR_IN_MILLIS;
-import static com.github.mikephil.charting.charts.ElevationChart.GRID_LINE_LENGTH_X_AXIS_DP;
+import static net.osmand.plus.charts.ElevationChart.GRID_LINE_LENGTH_X_AXIS_DP;
 import static net.osmand.plus.charts.GPXDataSetAxisType.DISTANCE;
 import static net.osmand.plus.charts.GPXDataSetAxisType.TIME;
 import static net.osmand.plus.charts.GPXDataSetAxisType.TIME_OF_DAY;
@@ -20,7 +20,6 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import com.github.mikephil.charting.charts.BarLineChartBase;
-import com.github.mikephil.charting.charts.ElevationChart;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -36,7 +35,6 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.utils.Utils;
 
 import net.osmand.gpx.ElevationDiffsCalculator;
 import net.osmand.gpx.ElevationDiffsCalculator.Extremum;
@@ -374,7 +372,7 @@ public class ChartUtils {
 		xAxis.setDrawGridLines(true);
 		xAxis.setGridLineWidth(1.0F);
 		xAxis.setGridColor(xAxisGridColor);
-		xAxis.enableGridDashedLine(Utils.dpToPx(app, GRID_LINE_LENGTH_X_AXIS_DP), Float.MAX_VALUE, 0.0F);
+		xAxis.enableGridDashedLine(AndroidUtils.dpToPx(app, GRID_LINE_LENGTH_X_AXIS_DP), Float.MAX_VALUE, 0.0F);
 		xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
 		xAxis.setTextColor(labelsColor);
 		xAxis.setAvoidFirstLastClipping(true);

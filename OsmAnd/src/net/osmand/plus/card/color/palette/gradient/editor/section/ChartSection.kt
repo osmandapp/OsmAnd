@@ -3,7 +3,7 @@ package net.osmand.plus.card.color.palette.gradient.editor.section
 import android.graphics.Color
 import android.view.View
 import android.view.ViewGroup
-import com.github.mikephil.charting.charts.GradientChart
+import net.osmand.plus.charts.GradientChart
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.LineData
 import net.osmand.plus.OsmandApplication
