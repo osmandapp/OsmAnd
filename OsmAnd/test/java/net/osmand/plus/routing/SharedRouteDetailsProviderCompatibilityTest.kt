@@ -71,6 +71,20 @@ class SharedRouteDetailsProviderCompatibilityTest {
 	}
 
 	@Test
+	fun cumulativeTotalsAcceptAndroidNanAverageSpeed() {
+		val directions = listOf(
+			direction(offset = 0, averageSpeed = Float.NaN).apply {
+				distance = 0
+			},
+		)
+
+		assertEquals(
+			legacyCumulativeInfo(1, directions),
+			SharedRouteDetailsProvider.getCumulativeInfo(1, directions),
+		)
+	}
+
+	@Test
 	fun signedRouteLocationLookupReturnsTheSameAndroidLocationInstance() {
 		val locations = (0..4).map { index -> location(0.0, index * 0.001) }
 		val currentRoutePointIndex = 2

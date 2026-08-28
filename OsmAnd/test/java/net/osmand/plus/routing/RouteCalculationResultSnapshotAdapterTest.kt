@@ -142,6 +142,18 @@ class RouteCalculationResultSnapshotAdapterTest {
 	}
 
 	@Test
+	fun maneuverCopyPreservesAndroidNanAverageSpeed() {
+		val direction = RouteDirectionInfo(Float.NaN, TurnType.straight()).apply {
+			distance = 0
+		}
+
+		val snapshot = RouteCalculationResultSnapshotAdapter.copyManeuver(direction)
+
+		assertTrue(snapshot.averageSpeedMetersPerSecond.isNaN())
+		assertEquals(0, snapshot.expectedTimeSeconds)
+	}
+
+	@Test
 	fun alarmCopyMapsEveryStoredBackendValueWithoutUiData() {
 		val alarm = AlarmInfo(AlarmInfoType.RED_LIGHT_CAMERA, 7).apply {
 			lastLocationIndex = 9

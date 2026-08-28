@@ -68,6 +68,10 @@ data class RouteExitInfo(
  *
  * Android uses `0` as the ordinary default for [routeEndPointOffset]. It is therefore preserved
  * verbatim and is not required to follow [routePointOffset].
+ *
+ * [averageSpeedMetersPerSecond] also remains verbatim. Android's direction aggregation can produce
+ * `NaN` for a zero-distance, zero-time group, and `RouteDirectionInfo.getExpectedTime()` preserves
+ * Java's `Math.round(NaN) == 0` behavior.
  */
 @Serializable
 data class RouteManeuver(
@@ -101,7 +105,6 @@ data class RouteManeuver(
 		require(distanceMeters >= 0) { "Maneuver distance must not be negative" }
 		require(expectedTimeSeconds >= 0) { "Maneuver expected time must not be negative" }
 		require(afterLeftTimeSeconds >= 0) { "Maneuver time to finish must not be negative" }
-		require(averageSpeedMetersPerSecond.isFinite()) { "Maneuver average speed must be finite" }
 		require(turnAngleDegrees.isFinite()) { "Maneuver turn angle must be finite" }
 		require(otherTurnAngles?.all { it.isFinite() } != false) { "Other maneuver angles must be finite" }
 	}
