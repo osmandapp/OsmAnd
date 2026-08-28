@@ -221,6 +221,7 @@
 		<attr name="colorSuccessIcon" format="reference" />
 		<attr name="colorWarningIcon" format="reference" />
 		<attr name="colorErrorIcon" format="reference" />
+		<attr name="colorBrandAccent" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">
