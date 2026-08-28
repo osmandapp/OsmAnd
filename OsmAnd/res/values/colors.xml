@@ -702,9 +702,11 @@
     <color name="palette_orange_40">#CC6D00</color>
 
     <color name="palette_red_65">#EE5D70</color>
+	<color name="palette_red_50">#E71832</color>
     <color name="palette_red_45">#CF162D</color>
 
     <color name="palette_green_50">#34CB66</color>
+	<color name="palette_green_40">#339944</color>
     <color name="palette_green_30">#1F7A3D</color>
 
     <!-- ============================================================ -->
@@ -761,12 +763,21 @@
 
     <color name="error_light">@color/palette_red_45</color>
     <color name="error_dark">@color/palette_red_65</color>
+	<color name="error_icon_light">@color/palette_red_50</color>
+	<color name="error_icon_dark">@color/palette_red_50</color>
     <color name="on_error_light">@color/palette_neutral_100</color>
     <color name="on_error_dark">@color/palette_neutral_15</color>
+
     <color name="success_light">@color/palette_green_30</color>
     <color name="success_dark">@color/palette_green_50</color>
+	<color name="success_icon_light">@color/palette_green_40</color>
+	<color name="success_icon_dark">@color/palette_green_40</color>
+	
     <color name="warning_light">@color/palette_orange_40</color>
     <color name="warning_dark">@color/palette_orange_50</color>
+	<color name="warning_icon_light">@color/palette_orange_50</color>
+	<color name="warning_icon_dark">@color/palette_orange_50</color>
+
 
     <color name="scrim_light">#52000000</color>
     <color name="scrim_dark">#52000000</color>
