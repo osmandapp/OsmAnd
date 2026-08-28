@@ -9,7 +9,9 @@
 		<item name="colorOnPrimaryContainer">@color/on_primary_container_dark</item>
 		
 		<item name="colorSecondary">@color/secondary_dark</item>
-		<item name="colorOnSecondary">@color/on_primary_dark</item>
+		<item name="colorOnSecondary">@color/on_secondary_dark</item>
+		<item name="colorSecondaryContainer">@color/secondary_container_dark</item>
+		<item name="colorOnSecondaryContainer">@color/on_secondary_container_dark</item>
 		
 		<item name="colorSurface">@color/surface_dark</item>
 		<item name="colorSurfaceContainer">@color/surface_container_dark</item>

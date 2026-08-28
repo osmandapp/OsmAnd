@@ -680,6 +680,8 @@
     <color name="palette_blue_77">#8A9DFF</color>
     <color name="palette_blue_60">#3355FF</color>
     <color name="palette_blue_48">#0029F5</color>
+	<color name="palette_blue_muted_93">#E8EAF2</color>
+	<color name="palette_blue_muted_60">#7B88B7</color>
     <color name="palette_blue_muted_45">#516094</color>
     <color name="palette_blue_muted_30">#364063</color>
 
@@ -747,8 +749,17 @@
     <color name="on_primary_container_light">@color/palette_blue_muted_30</color>
     <color name="on_primary_container_dark">@color/palette_blue_93</color>
 
-    <color name="secondary_light">@color/palette_orange_40</color>
-    <color name="secondary_dark">@color/palette_orange_50</color>
+	<color name="brand_accent_light">@color/palette_orange_50</color>
+	<color name="brand_accent_dark">@color/palette_orange_50</color>
+
+	<color name="secondary_light">@color/palette_blue_muted_45</color>
+	<color name="secondary_dark">@color/palette_blue_muted_60</color>
+	<color name="on_secondary_light">@color/palette_neutral_100</color>
+	<color name="on_secondary_dark">@color/palette_neutral_15</color>
+	<color name="secondary_container_light">@color/palette_blue_muted_93</color>
+	<color name="secondary_container_dark">@color/palette_blue_muted_30</color>
+	<color name="on_secondary_container_light">@color/palette_blue_muted_30</color>
+	<color name="on_secondary_container_dark">@color/palette_blue_muted_93</color>
 
     <color name="outline_light">@color/palette_neutral_55</color>
     <color name="outline_dark">@color/palette_neutral_55</color>
