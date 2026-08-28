@@ -1174,7 +1174,7 @@
     <string name="poi_tourist_bus_no">Rochtain ar bhusanna turasóireachta: níl</string>
     <string name="poi_coach_yes">Rochtain cóiste: yes</string>
     <string name="poi_coach_no">Rochtain ar chóiste: níl</string>
-    <string name="poi_ski_yes">Rochtain sciála: yes</string>
+    <string name="poi_ski_yes">Tá</string>
     <string name="poi_ski_no">Rochtain sciála: níl</string>
     <string name="poi_snowmobile_private">Rochtain snowmobile: príobháideach</string>
     <string name="poi_snowmobile_no">Rochtain snowmobile: níl</string>
@@ -4428,7 +4428,7 @@
     <string name="poi_horse_no">Ní cheadaítear capaill</string>
     <string name="poi_bicycle_private">Rochtain ar rothair: príobháideach</string>
     <string name="poi_bicycle_destination">Rochtain rothar: ceann scríbe</string>
-    <string name="poi_horse_yes">Capaill ceadaithe</string>
+    <string name="poi_horse_yes">Tá</string>
     <string name="poi_horse_private">Rochtain ar chapall: príobháideach</string>
     <string name="poi_horse_destination">Rochtain capall: ceann scríbe</string>
     <string name="poi_foot_destination">Rochtain do choisithe: ceann scríbe</string>
@@ -5174,4 +5174,10 @@
     <string name="poi_water_type_filter">Cineál uisce</string>
     <string name="poi_water_lake">Loch</string>
     <string name="poi_surface_laterite">Dromchla: laterít</string>
+    <string name="poi_mtb_filter">Oiriúnach do Mhótarbhealach</string>
+    <string name="poi_ski_filter">Oiriúnach le haghaidh sciála</string>
+    <string name="poi_horse_filter">Oiriúnach le haghaidh marcaíocht capall</string>
+    <string name="poi_winter_hiking_filter">Oiriúnach do shiúlóidí geimhridh</string>
+    <string name="poi_mtb_yes">Tá</string>
+    <string name="poi_winter_hiking_yes">Tá</string>
 </resources>
