@@ -185,13 +185,15 @@ object RouteStatisticsCalculator {
 
 		for (segment in result) {
 			val slopes = segment.slopes ?: continue
-			segment.slopeClassIndexes = IntArray(slopes.size)
-			segment.slopeClassUserNames = Array(slopes.size) { "" }
+			val slopeClassIndexes = IntArray(slopes.size)
+			val slopeClassUserNames = Array(slopes.size) { "" }
+			segment.slopeClassIndexes = slopeClassIndexes
+			segment.slopeClassUserNames = slopeClassUserNames
 			for (slopeIndex in slopes.indices) {
 				for (classIndex in slopeBoundaries.indices) {
 					if (slopes[slopeIndex] <= slopeBoundaries[classIndex] || classIndex == slopeBoundaries.lastIndex) {
-						segment.slopeClassIndexes[slopeIndex] = classIndex
-						segment.slopeClassUserNames[slopeIndex] = formattedSlopeClasses[classIndex]
+						slopeClassIndexes[slopeIndex] = classIndex
+						slopeClassUserNames[slopeIndex] = formattedSlopeClasses[classIndex]
 						break
 					}
 				}
