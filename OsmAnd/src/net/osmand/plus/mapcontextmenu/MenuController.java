@@ -50,6 +50,8 @@ import net.osmand.plus.plugins.audionotes.AudioVideoNoteMenuController;
 import net.osmand.plus.plugins.audionotes.Recording;
 import net.osmand.plus.plugins.mapillary.MapillaryImage;
 import net.osmand.plus.plugins.mapillary.MapillaryMenuController;
+import net.osmand.plus.plugins.panoramax.PanoramaxImage;
+import net.osmand.plus.plugins.panoramax.PanoramaxMenuController;
 import net.osmand.plus.plugins.osmedit.OsmBugsLayer.OpenStreetNote;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
 import net.osmand.plus.plugins.osmedit.menu.EditPOIMenuController;
@@ -236,6 +238,8 @@ public abstract class MenuController extends BaseMenuController implements Colla
 				menuController = new RenderedObjectMenuController(mapActivity, pointDescription, (RenderedObject) object);
 			} else if (object instanceof MapillaryImage) {
 				menuController = new MapillaryMenuController(mapActivity, pointDescription, (MapillaryImage) object);
+			} else if (object instanceof PanoramaxImage) {
+				menuController = new PanoramaxMenuController(mapActivity, pointDescription, (PanoramaxImage) object);
 			} else if (object instanceof AisObject) {
 				menuController = new AisObjectMenuController(mapActivity, pointDescription, (AisObject) object);
 			} else if (object instanceof SelectedGpxPoint) {

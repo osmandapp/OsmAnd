@@ -63,6 +63,9 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.mapillary.MapillaryFiltersFragment;
 import net.osmand.plus.plugins.mapillary.MapillaryFirstDialogFragment;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
+import net.osmand.plus.plugins.panoramax.PanoramaxFiltersFragment;
+import net.osmand.plus.plugins.panoramax.PanoramaxFirstDialogFragment;
+import net.osmand.plus.plugins.panoramax.PanoramaxPlugin;
 import net.osmand.plus.plugins.openseamaps.NauticalDepthContourFragment;
 import net.osmand.plus.plugins.osmedit.menu.OsmNotesMenu;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
@@ -327,6 +330,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			tv.setText(R.string.map_overlay);
 		} else if (isCurrentType(MAPILLARY)) {
 			tv.setText(R.string.street_level_imagery);
+		} else if (isCurrentType(PANORAMAX)) {
+			tv.setText(R.string.panoramax);
 		} else if (isCurrentType(CONTOUR_LINES)) {
 			tv.setText(R.string.download_srtm_maps);
 		} else if (isCurrentType(OSM_NOTES)) {
@@ -592,6 +597,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 					ConfigureMapFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(MAPILLARY)) {
 					MapillaryFiltersFragment.showInstance(fragmentManager);
+				} else if (isCurrentType(PANORAMAX)) {
+					PanoramaxFiltersFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(TRAVEL_ROUTES)) {
 					TravelRoutesFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(TRANSPORT_LINES)) {
@@ -663,6 +670,12 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			MapillaryPlugin plugin = PluginsHelper.getPlugin(MapillaryPlugin.class);
 			if (plugin != null && plugin.SHOW_MAPILLARY.get() && !plugin.MAPILLARY_FIRST_DIALOG_SHOWN.get()) {
 				MapillaryFirstDialogFragment.showInstance(mapActivity);
+			}
+
+			PanoramaxPlugin panoramaxPlugin = PluginsHelper.getPlugin(PanoramaxPlugin.class);
+			if (panoramaxPlugin != null && panoramaxPlugin.SHOW_PANORAMAX.get()
+					&& !panoramaxPlugin.PANORAMAX_FIRST_DIALOG_SHOWN.get()) {
+				PanoramaxFirstDialogFragment.showInstance(mapActivity);
 			}
 		}
 		mapActivity.updateStatusBarColor();
@@ -1032,7 +1045,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	public boolean isCurrentTypeHasIndividualFragment() {
 		return isCurrentType(
-				CONFIGURE_MAP, MAPILLARY, TERRAIN, RELIEF_3D, MAP_ROUTES, RENDERING_CLASS,
+				CONFIGURE_MAP, MAPILLARY, PANORAMAX, TERRAIN, RELIEF_3D, MAP_ROUTES, RENDERING_CLASS,
 				TRAVEL_ROUTES, TRANSPORT_LINES, WEATHER, WEATHER_LAYER, WEATHER_CONTOURS,
 				NAUTICAL_DEPTH, COORDINATE_GRID, BUILDINGS_3D
 		);
@@ -1098,7 +1111,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 		DashboardType previous = visibleTypes.getPrevious();
 		if (previous != null) {
-			if (isCurrentType(MAPILLARY)) {
+			if (isCurrentType(MAPILLARY, PANORAMAX)) {
 				hideKeyboard();
 			}
 			visibleTypes.pop(); // Remove current visible type.
