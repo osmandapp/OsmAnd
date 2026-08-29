@@ -6,7 +6,6 @@ import net.osmand.router.RouteSegmentResultSnapshotAdapter
 import net.osmand.shared.data.KLatLon
 import net.osmand.shared.routing.details.RouteDetailsSnapshot
 import net.osmand.shared.routing.details.RouteEvent
-import net.osmand.shared.routing.details.RouteEventType
 import net.osmand.shared.routing.details.RouteManeuver
 import net.osmand.shared.routing.details.RoutePoint
 import net.osmand.shared.routing.details.RouteSegment
@@ -129,7 +128,7 @@ object RouteCalculationResultSnapshotAdapter {
 	}
 
 	internal fun copyEvent(source: AlarmInfo): RouteEvent = RouteEvent(
-		type = RouteEventType.valueOf(source.type.name),
+		type = source.type,
 		location = KLatLon(source.latitude, source.longitude),
 		locationIndex = source.locationIndex,
 		lastLocationIndex = source.lastLocationIndex,

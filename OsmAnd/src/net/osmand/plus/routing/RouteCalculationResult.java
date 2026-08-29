@@ -25,6 +25,7 @@ import net.osmand.router.RoutingContext;
 import net.osmand.router.TurnType;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.routing.details.RouteDetailsSnapshot;
+import net.osmand.shared.routing.details.RouteEventType;
 import net.osmand.shared.routing.details.RouteExitInfo;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -249,7 +250,7 @@ public class RouteCalculationResult {
 					// For STOP and TRAFFIC_CALMING first check if it has directional info
 					boolean forward = res.isForwardDirection();
 					boolean directionApplicable = rdo.isDirectionApplicable(forward, intId,
-							info.getType() == AlarmInfoType.STOP ? res.getStartPointIndex() : -1, res.getEndPointIndex());
+							info.getType() == RouteEventType.STOP ? res.getStartPointIndex() : -1, res.getEndPointIndex());
 					if (!directionApplicable) {
 						continue;
 					}
@@ -323,7 +324,7 @@ public class RouteCalculationResult {
 			if (s.getObject().tunnel()) {
 				if (tunnelAlarm == null) {
 					LatLon latLon = s.getPoint(i);
-					tunnelAlarm = new AlarmInfo(AlarmInfoType.TUNNEL, prevLocationSize);
+					tunnelAlarm = new AlarmInfo(RouteEventType.TUNNEL, prevLocationSize);
 					tunnelAlarm.setLatLon(latLon.getLatitude(), latLon.getLongitude());
 					tunnelAlarm.setFloatValue(s.getDistance());
 					alarms.add(tunnelAlarm);

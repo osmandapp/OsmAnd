@@ -137,7 +137,7 @@ class RouteCalculationResultSnapshotAdapterTest {
 
 	@Test
 	fun alarmCopyMapsEveryStoredBackendValueWithoutUiData() {
-		val alarm = AlarmInfo(AlarmInfoType.RED_LIGHT_CAMERA, 7).apply {
+		val alarm = AlarmInfo(RouteEventType.RED_LIGHT_CAMERA, 7).apply {
 			lastLocationIndex = 9
 			intValue = 50
 			floatValue = 13.8889f

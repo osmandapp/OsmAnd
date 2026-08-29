@@ -1,14 +1,14 @@
 package net.osmand.plus.helpers;
 
-import static net.osmand.plus.routing.AlarmInfoType.PEDESTRIAN;
-import static net.osmand.plus.routing.AlarmInfoType.RAILWAY;
-import static net.osmand.plus.routing.AlarmInfoType.RED_LIGHT_CAMERA;
-import static net.osmand.plus.routing.AlarmInfoType.SPEED_CAMERA;
-import static net.osmand.plus.routing.AlarmInfoType.TUNNEL;
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_ALARM_ANNOUNCE;
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_PNT_APPROACH;
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_ALARM_ANNOUNCE;
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_PNT_APPROACH;
+import static net.osmand.shared.routing.details.RouteEventType.PEDESTRIAN;
+import static net.osmand.shared.routing.details.RouteEventType.RAILWAY;
+import static net.osmand.shared.routing.details.RouteEventType.RED_LIGHT_CAMERA;
+import static net.osmand.shared.routing.details.RouteEventType.SPEED_CAMERA;
+import static net.osmand.shared.routing.details.RouteEventType.TUNNEL;
 
 import android.os.AsyncTask;
 
@@ -28,7 +28,6 @@ import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.routing.AlarmInfo;
-import net.osmand.plus.routing.AlarmInfoType;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
@@ -37,6 +36,7 @@ import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.shared.routing.details.RouteEventType;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.util.MapUtils;
@@ -79,8 +79,8 @@ public class WaypointHelper {
 	private static final int SAME_ALARM_INTERVAL = 30;//in seconds
 	private List<List<LocationPointWrapper>> locationPoints = new ArrayList<>();
 	private final ConcurrentHashMap<LocationPoint, Integer> locationPointsStates = new ConcurrentHashMap<>();
-	private final ConcurrentHashMap<AlarmInfoType, AlarmInfo> lastAnnouncedAlarms = new ConcurrentHashMap<>();
-	private final ConcurrentHashMap<AlarmInfoType, Long> lastAnnouncedAlarmsTime = new ConcurrentHashMap<>();
+	private final ConcurrentHashMap<RouteEventType, AlarmInfo> lastAnnouncedAlarms = new ConcurrentHashMap<>();
+	private final ConcurrentHashMap<RouteEventType, Long> lastAnnouncedAlarmsTime = new ConcurrentHashMap<>();
 	private TIntArrayList pointsProgress = new TIntArrayList();
 	private RouteCalculationResult route;
 
@@ -435,7 +435,7 @@ public class WaypointHelper {
 								approachPoints.add(lwp);
 							} else if (type == ALARMS && (state == null || state == NOT_ANNOUNCED)) {
 								AlarmInfo alarm = (AlarmInfo) point;
-								AlarmInfoType t = alarm.getType();
+								RouteEventType t = alarm.getType();
 								if (beforeTunnelEntrance(currentRoute, alarm)) {
 									kIterator++;
 									continue;
@@ -717,7 +717,7 @@ public class WaypointHelper {
 		AlarmInfo prevSpeedCam = null;
 		AlarmInfo prevRailway = null;
 		for (AlarmInfo alarmInfo : route.getAlarmInfo()) {
-			AlarmInfoType type = alarmInfo.getType();
+			RouteEventType type = alarmInfo.getType();
 			if (type == SPEED_CAMERA || type == RED_LIGHT_CAMERA) {
 				if (settings.SHOW_CAMERAS.getModeValue(mode) || settings.SPEAK_SPEED_CAMERA.getModeValue(mode)) {
 					// ignore double speed cams

@@ -369,7 +369,7 @@ public class RoutingHelper {
 			if (index > 0) {
 				message.append("\n\n");
 			}
-			String visualName = AlarmInfoType.valueOf(event.getType().name()).getVisualName(app);
+			String visualName = AlarmInfo.getVisualName(app, event.getType());
 			int geometryPointIndex = findRoutePointIndex(snapshot, event);
 			RouteSegment sourceSegment = findRouteSegmentWithType(snapshot, geometryPointIndex, sourceTag);
 			String resolvedValue = markerValue;

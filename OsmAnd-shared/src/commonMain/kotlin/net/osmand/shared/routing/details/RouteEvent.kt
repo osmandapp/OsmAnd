@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import net.osmand.shared.data.KLatLon
 
-/** Exact mapping of Android `AlarmInfoType`, including its `MAXIMUM` sentinel. */
+/** Cross-platform route event type, including Android's `MAXIMUM` priority sentinel. */
 @Serializable
 enum class RouteEventType(val androidPriority: Int) {
 	@SerialName("speed_camera")
@@ -43,7 +43,7 @@ enum class RouteEventType(val androidPriority: Int) {
 	@SerialName("red_light_camera")
 	RED_LIGHT_CAMERA(12);
 
-	/** Exact equivalent of Android `AlarmInfoType.isTrafficCamera()`. */
+	/** Whether this event is one of the traffic-camera variants. */
 	fun isTrafficCamera(): Boolean {
 		return this == SPEED_CAMERA || this == RED_LIGHT_CAMERA
 	}

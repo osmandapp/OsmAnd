@@ -1,17 +1,17 @@
 package net.osmand.plus.routing;
 
 import static net.osmand.data.PointDescription.POINT_TYPE_ALARM;
-import static net.osmand.plus.routing.AlarmInfoType.BORDER_CONTROL;
-import static net.osmand.plus.routing.AlarmInfoType.HAZARD;
-import static net.osmand.plus.routing.AlarmInfoType.MAXIMUM;
-import static net.osmand.plus.routing.AlarmInfoType.PEDESTRIAN;
-import static net.osmand.plus.routing.AlarmInfoType.RAILWAY;
-import static net.osmand.plus.routing.AlarmInfoType.SPEED_CAMERA;
-import static net.osmand.plus.routing.AlarmInfoType.SPEED_LIMIT;
-import static net.osmand.plus.routing.AlarmInfoType.STOP;
-import static net.osmand.plus.routing.AlarmInfoType.TOLL_BOOTH;
-import static net.osmand.plus.routing.AlarmInfoType.TRAFFIC_CALMING;
-import static net.osmand.plus.routing.AlarmInfoType.RED_LIGHT_CAMERA;
+import static net.osmand.shared.routing.details.RouteEventType.BORDER_CONTROL;
+import static net.osmand.shared.routing.details.RouteEventType.HAZARD;
+import static net.osmand.shared.routing.details.RouteEventType.MAXIMUM;
+import static net.osmand.shared.routing.details.RouteEventType.PEDESTRIAN;
+import static net.osmand.shared.routing.details.RouteEventType.RAILWAY;
+import static net.osmand.shared.routing.details.RouteEventType.RED_LIGHT_CAMERA;
+import static net.osmand.shared.routing.details.RouteEventType.SPEED_CAMERA;
+import static net.osmand.shared.routing.details.RouteEventType.SPEED_LIMIT;
+import static net.osmand.shared.routing.details.RouteEventType.STOP;
+import static net.osmand.shared.routing.details.RouteEventType.TOLL_BOOTH;
+import static net.osmand.shared.routing.details.RouteEventType.TRAFFIC_CALMING;
 
 import android.content.Context;
 
@@ -22,10 +22,12 @@ import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.R;
+import net.osmand.shared.routing.details.RouteEventType;
 
 public class AlarmInfo implements LocationPoint {
 
-	private final AlarmInfoType type;
+	private final RouteEventType type;
 	protected final int locationIndex;
 	private int lastLocationIndex = -1;
 	private int intValue;
@@ -35,13 +37,13 @@ public class AlarmInfo implements LocationPoint {
 	@Nullable private String sourceTag;
 	@Nullable private String sourceValue;
 
-	public AlarmInfo(@NonNull AlarmInfoType type, int locationIndex) {
+	public AlarmInfo(@NonNull RouteEventType type, int locationIndex) {
 		this.type = type;
 		this.locationIndex = locationIndex;
 	}
 
 	@NonNull
-	public AlarmInfoType getType() {
+	public RouteEventType getType() {
 		return type;
 	}
 
@@ -155,24 +157,57 @@ public class AlarmInfo implements LocationPoint {
 		}
 		// 1 level of priorities
 		if (time < 6 || distance < 75 || type == SPEED_LIMIT) {
-			return type.getPriority();
+			return type.getAndroidPriority();
 		}
 		if ((type == SPEED_CAMERA || type == RED_LIGHT_CAMERA) && (time < 15 || distance < 150)) {
-			return type.getPriority();
+			return type.getAndroidPriority();
 		}
 		if (type == TOLL_BOOTH && (time < 30 || distance < 500)) {
-			return type.getPriority();
+			return type.getAndroidPriority();
 		}
 		// 2nd level
 		if (time < 7 || distance < 100) {
-			return type.getPriority() + MAXIMUM.getPriority();
+			return type.getAndroidPriority() + MAXIMUM.getAndroidPriority();
 		}
 		return Integer.MAX_VALUE;
 	}
 
+	@NonNull
+	public static String getVisualName(@NonNull Context ctx, @NonNull RouteEventType type) {
+		// Android resource IDs stay in the Android wrapper; only the backend event type is shared.
+		switch (type) {
+			case SPEED_CAMERA:
+				return ctx.getString(R.string.traffic_warning_speed_camera);
+			case SPEED_LIMIT:
+				return ctx.getString(R.string.traffic_warning_speed_limit);
+			case BORDER_CONTROL:
+				return ctx.getString(R.string.traffic_warning_border_control);
+			case RAILWAY:
+				return ctx.getString(R.string.traffic_warning_railways);
+			case TRAFFIC_CALMING:
+				return ctx.getString(R.string.traffic_warning_calming);
+			case TOLL_BOOTH:
+				return ctx.getString(R.string.traffic_warning_payment);
+			case STOP:
+				return ctx.getString(R.string.traffic_warning_stop);
+			case PEDESTRIAN:
+				return ctx.getString(R.string.traffic_warning_pedestrian);
+			case HAZARD:
+				return ctx.getString(R.string.traffic_warning_hazard);
+			case MAXIMUM:
+				return ctx.getString(R.string.traffic_warning);
+			case TUNNEL:
+				return ctx.getString(R.string.tunnel_warning);
+			case RED_LIGHT_CAMERA:
+				return ctx.getString(R.string.traffic_warning_red_light_camera);
+			default:
+				throw new IllegalArgumentException("Unsupported route event type: " + type);
+		}
+	}
+
 	@Override
 	public PointDescription getPointDescription(@NonNull Context ctx) {
-		return new PointDescription(POINT_TYPE_ALARM, type.getVisualName(ctx));
+		return new PointDescription(POINT_TYPE_ALARM, getVisualName(ctx, type));
 	}
 
 	@Override

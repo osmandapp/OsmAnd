@@ -29,6 +29,7 @@ import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.TurnType;
+import net.osmand.shared.routing.details.RouteEventType;
 import net.osmand.shared.routing.details.RouteExitInfo;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -346,16 +347,16 @@ public class VoiceRouter {
 	}
 
 	public void announceAlarm(AlarmInfo info, float speed) {
-		AlarmInfoType type = info.getType();
-		if (type == AlarmInfoType.SPEED_LIMIT) {
+		RouteEventType type = info.getType();
+		if (type == RouteEventType.SPEED_LIMIT) {
 			announceSpeedAlarm(info.getIntValue(), speed);
 		} else {
 			OsmandSettings settings = router.getSettings();
 			boolean speakTrafficWarnings = settings.SPEAK_TRAFFIC_WARNINGS.get();
-			boolean speakTunnels = type == AlarmInfoType.TUNNEL && settings.SPEAK_TUNNELS.get();
-			boolean speakPedestrian = type == AlarmInfoType.PEDESTRIAN && settings.SPEAK_PEDESTRIAN.get();
-			boolean speakSpeedCamera = (type == AlarmInfoType.SPEED_CAMERA || type == AlarmInfoType.RED_LIGHT_CAMERA) && settings.SPEAK_SPEED_CAMERA.get();
-			boolean speakPrefType = type == AlarmInfoType.TUNNEL || type == AlarmInfoType.PEDESTRIAN || type == AlarmInfoType.SPEED_CAMERA || type == AlarmInfoType.RED_LIGHT_CAMERA;
+			boolean speakTunnels = type == RouteEventType.TUNNEL && settings.SPEAK_TUNNELS.get();
+			boolean speakPedestrian = type == RouteEventType.PEDESTRIAN && settings.SPEAK_PEDESTRIAN.get();
+			boolean speakSpeedCamera = type.isTrafficCamera() && settings.SPEAK_SPEED_CAMERA.get();
+			boolean speakPrefType = type == RouteEventType.TUNNEL || type == RouteEventType.PEDESTRIAN || type.isTrafficCamera();
 
 			if (speakSpeedCamera || speakPedestrian || speakTunnels || speakTrafficWarnings && !speakPrefType) {
 				CommandBuilder p = getNewCommandPlayerToPlay();
@@ -364,7 +365,7 @@ public class VoiceRouter {
 				}
 				play(p);
 				// See Issue 2377: Announce destination again - after some motorway tolls roads split shortly after the toll
-				if (type == AlarmInfoType.TOLL_BOOTH) {
+				if (type == RouteEventType.TOLL_BOOTH) {
 					suppressDest = false;
 				}
 			}
