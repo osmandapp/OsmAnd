@@ -277,7 +277,7 @@ public class DownloadSearchHelper {
 
 	/**
 	 * Countries are the regions directly under a continent. Regions that are not placed under any
-	 * continent (Russia and its subregions) are represented by their topmost non-world parent.
+	 * continent are represented by their topmost parent below the world.
 	 */
 	@Nullable
 	public static WorldRegion getCountryRegion(@Nullable WorldRegion region) {
@@ -293,7 +293,9 @@ public class DownloadSearchHelper {
 				&& !WorldRegion.WORLD.equals(result.getSuperregion().getRegionId())) {
 			result = result.getSuperregion();
 		}
-		return WorldRegion.WORLD.equals(result.getRegionId()) ? null : result;
+		// the region itself is placed right under the world - a continent, or a country
+		// that is not a part of one - and has no country above it
+		return result != region ? result : null;
 	}
 
 	private void processGroup(@NonNull DownloadResourceGroup group, @NonNull List<Object> filter,

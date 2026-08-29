@@ -63,11 +63,13 @@ public class DownloadSearchHelperTest extends AndroidTest {
 	private static final String EXAMPLES_ASSET = "download/search_examples.json";
 	private static final String REPORT_FILE = "download_search_report.html";
 
-	private static final String EUROPE_ID = "europe";
+	private static final String UKRAINE_ID = "europe_ukraine";
+	private static final String NETHERLANDS_ID = "europe_netherlands";
+	private static final String GERMANY_ID = "europe_germany";
 	private static final String US_ID = "northamerica_us";
 
 	private static final List<String> AMBIGUOUS_QUERIES = Arrays.asList(
-			"berlin", "york", "washington", "georgia", "london", "hamburg", "new hampshire");
+			"berlin", "hamburg", "kyiv", "holland", "utrecht", "york", "washington", "georgia");
 
 	private static final List<ReportScreen> REPORT = new ArrayList<>();
 
@@ -108,24 +110,23 @@ public class DownloadSearchHelperTest extends AndroidTest {
 	}
 
 	@Test
-	public void europeAndUsSearchIsUnambiguous() {
-		DownloadResources europe = prepareIndexes(collectRegionMaps(EUROPE_ID));
-		DownloadResources us = prepareIndexes(collectRegionMaps(US_ID));
-		DownloadResources both = prepareIndexes(collectRegionMaps(EUROPE_ID, US_ID));
-
-		checkQueries("Europe", europe);
-		checkQueries("United States", us);
-		checkQueries("Europe + United States", both);
+	public void searchIsUnambiguousAcrossCountries() {
+		checkQueries("Ukraine", prepareIndexes(collectRegionMaps(UKRAINE_ID)));
+		checkQueries("Netherlands", prepareIndexes(collectRegionMaps(NETHERLANDS_ID)));
+		checkQueries("Germany", prepareIndexes(collectRegionMaps(GERMANY_ID)));
+		checkQueries("United States", prepareIndexes(collectRegionMaps(US_ID)));
+		checkQueries("All four countries",
+				prepareIndexes(collectRegionMaps(UKRAINE_ID, NETHERLANDS_ID, GERMANY_ID, US_ID)));
 	}
 
 	@Test
 	public void cityIsHiddenWhenItsMapIsAlreadyListed() {
-		DownloadResources europe = prepareIndexes(collectRegionMaps(EUROPE_ID));
-		IndexItem berlinMap = findByBasename(europe, "germany_berlin_europe");
+		DownloadResources germany = prepareIndexes(collectRegionMaps(GERMANY_ID));
+		IndexItem berlinMap = findByBasename(germany, "germany_berlin_europe");
 		DownloadSearchHelper helper = createHelper(true);
 
-		List<Object> withoutCity = helper.search(europe, "berlin", Collections.emptyList());
-		List<Object> withCity = helper.search(europe, "berlin",
+		List<Object> withoutCity = helper.search(germany, "berlin", Collections.emptyList());
+		List<Object> withCity = helper.search(germany, "berlin",
 				Collections.singletonList(new CityItem("Berlin", cityAmenity(), berlinMap)));
 
 		assertEquals("A city pointing to a listed map must not add a row",
@@ -198,11 +199,40 @@ public class DownloadSearchHelperTest extends AndroidTest {
 	public void countryRegionIsResolvedForNestedRegions() {
 		assertEquals("Germany", countryOf("germany_berlin_europe"));
 		assertEquals("Germany", countryOf("germany_europe"));
+		assertEquals("Ukraine", countryOf("ukraine_kyiv-city_europe"));
+		assertEquals("Netherlands", countryOf("netherlands_noord-holland_europe"));
 		assertEquals("United States", countryOf("us_new-hampshire_northamerica"));
-		// Russia is placed directly under the world, not under a continent
-		assertEquals("Russia", countryOf("russia_moscow_asia"));
+		// continents and the world itself have no country
+		assertNull(DownloadSearchHelper.getCountryName(regions.getRegionData("europe")));
 		assertNull(DownloadSearchHelper.getCountryRegion(regions.getWorldRegion()));
 		assertNull(DownloadSearchHelper.getCountryName(null));
+	}
+
+	/**
+	 * Most countries sit under a continent. A few are placed at the top level next to the
+	 * continents instead, and their subregions fall back to that topmost parent.
+	 */
+	@Test
+	public void countryIsResolvedForBothRegionTreeShapes() {
+		WorldRegion world = new WorldRegion(WorldRegion.WORLD);
+
+		WorldRegion continent = new WorldRegion("continent");
+		WorldRegion country = new WorldRegion("continent_country");
+		WorldRegion province = new WorldRegion("continent_country_province");
+		world.addSubregion(continent);
+		continent.addSubregion(country);
+		country.addSubregion(province);
+
+		WorldRegion topLevelCountry = new WorldRegion(WorldRegion.RUSSIA_REGION_ID);
+		WorldRegion topLevelProvince = new WorldRegion("top_province");
+		world.addSubregion(topLevelCountry);
+		topLevelCountry.addSubregion(topLevelProvince);
+
+		assertEquals(country, DownloadSearchHelper.getCountryRegion(province));
+		assertEquals(country, DownloadSearchHelper.getCountryRegion(country));
+		assertEquals(topLevelCountry, DownloadSearchHelper.getCountryRegion(topLevelProvince));
+		assertNull(DownloadSearchHelper.getCountryRegion(continent));
+		assertNull(DownloadSearchHelper.getCountryRegion(world));
 	}
 
 	@Test
