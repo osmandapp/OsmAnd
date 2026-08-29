@@ -112,7 +112,7 @@ object RouteEventBackend {
 		}
 		var previousCamera: RouteEvent? = null
 		var previousRailway: RouteEvent? = null
-		val selected = mutableListOf<RouteEventSelection>()
+		val selected = ArrayList<RouteEventSelection>()
 		for (event in events) {
 			when {
 				event.type.isTrafficCamera() -> {
@@ -150,11 +150,8 @@ object RouteEventBackend {
 				}
 			}
 		}
-		return selected.withIndex()
-			.sortedWith(
-				compareBy<IndexedValue<RouteEventSelection>> { it.value.event.locationIndex }
-					.thenBy { it.index },
-			)
-			.map { it.value }
+		// MutableList.sortWith is stable, so events with the same route index retain input order.
+		selected.sortWith(compareBy { it.event.locationIndex })
+		return selected
 	}
 }

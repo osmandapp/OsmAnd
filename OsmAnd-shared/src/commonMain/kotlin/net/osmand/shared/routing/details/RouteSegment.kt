@@ -37,7 +37,7 @@ data class RouteSegment(
 	val roundabout: Boolean = false,
 	val tunnel: Boolean = false,
 	val routeTypes: List<RouteTypeAttribute> = emptyList(),
-	val heightValues: List<Float> = emptyList(),
+	val heightValues: FloatArray = floatArrayOf(),
 ) {
 	init {
 		require(routePointStartIndex >= 0) { "Route segment start index must not be negative" }

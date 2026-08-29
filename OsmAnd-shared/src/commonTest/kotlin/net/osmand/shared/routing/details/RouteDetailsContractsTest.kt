@@ -66,7 +66,7 @@ class RouteDetailsContractsTest {
 				RouteTypeAttribute("access", "yes"),
 				RouteTypeAttribute("access", "destination"),
 			),
-			heightValues = listOf(0f, 5f, 111.319f, 6f),
+			heightValues = floatArrayOf(0f, 5f, 111.319f, 6f),
 		)
 		val maneuvers = listOf(
 			RouteManeuver(

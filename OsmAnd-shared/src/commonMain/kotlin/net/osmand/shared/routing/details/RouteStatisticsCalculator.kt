@@ -172,6 +172,7 @@ object RouteStatisticsCalculator {
 				}
 				globalIndex++
 			}
+			segment.interpolatedHeights = null
 		}
 
 		val formattedSlopeClasses = Array(slopeBoundaries.size) { "" }
@@ -186,18 +187,17 @@ object RouteStatisticsCalculator {
 		for (segment in result) {
 			val slopes = segment.slopes ?: continue
 			val slopeClassIndexes = IntArray(slopes.size)
-			val slopeClassUserNames = Array(slopes.size) { "" }
 			segment.slopeClassIndexes = slopeClassIndexes
-			segment.slopeClassUserNames = slopeClassUserNames
+			segment.formattedSlopeClasses = formattedSlopeClasses
 			for (slopeIndex in slopes.indices) {
 				for (classIndex in slopeBoundaries.indices) {
 					if (slopes[slopeIndex] <= slopeBoundaries[classIndex] || classIndex == slopeBoundaries.lastIndex) {
 						slopeClassIndexes[slopeIndex] = classIndex
-						slopeClassUserNames[slopeIndex] = formattedSlopeClasses[classIndex]
 						break
 					}
 				}
 			}
+			segment.slopes = null
 		}
 		return result
 	}
@@ -239,7 +239,8 @@ object RouteStatisticsCalculator {
 							previous.distanceMeters += current.distanceMeters
 						} else {
 							if (current.slopeIndex == slopeClassIndexes[index]) {
-								current.userPropertyName = segment.slopeClassUserNames!![index]
+								current.userPropertyName =
+									segment.formattedSlopeClasses!![slopeClassIndexes[index]]
 							}
 							routeAttributes.add(current)
 							previous = current
@@ -329,10 +330,10 @@ object RouteStatisticsCalculator {
 
 	private class RouteSegmentWithIncline(
 		val segment: RouteSegment,
-		val interpolatedHeights: FloatArray?,
+		var interpolatedHeights: FloatArray?,
 		var slopes: FloatArray? = null,
 		var slopeClassIndexes: IntArray? = null,
-		var slopeClassUserNames: Array<String>? = null,
+		var formattedSlopeClasses: Array<String>? = null,
 	)
 
 	private data class MutableRouteAttribute(

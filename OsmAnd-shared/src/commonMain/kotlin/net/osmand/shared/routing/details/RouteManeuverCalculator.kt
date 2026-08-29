@@ -13,7 +13,7 @@ data class RouteCumulativeInfo(
 /** Result of Android-compatible intermediate-point association and direction splitting. */
 data class RouteIntermediateCalculation(
 	val maneuvers: List<RouteManeuver>,
-	val intermediateDirectionIndices: List<Int>,
+	val intermediateDirectionIndices: IntArray,
 )
 
 /**
@@ -35,17 +35,26 @@ object RouteManeuverCalculator {
 	fun updateDistancesAndTimes(
 		maneuvers: List<RouteManeuver>,
 		geometry: RouteGeometryCalculation,
+	): List<RouteManeuver> = updateDistancesAndTimes(
+		maneuvers,
+		geometry.distanceToFinishMeters,
+	)
+
+	/** Platform overload for an already calculated Android `listDistance` array. */
+	fun updateDistancesAndTimes(
+		maneuvers: List<RouteManeuver>,
+		distanceToFinishMeters: IntArray,
 	): List<RouteManeuver> {
-		require(maneuvers.all { it.routePointOffset in geometry.distanceToFinishMeters.indices }) {
+		require(maneuvers.all { it.routePointOffset in distanceToFinishMeters.indices }) {
 			"Maneuver route point offset must reference Android listDistance"
 		}
 		val updated = maneuvers.toMutableList()
 		var sumExpectedTime = 0
 		for (index in maneuvers.lastIndex downTo 0) {
 			val maneuver = maneuvers[index]
-			var distance = geometry.distanceToFinishMeters[maneuver.routePointOffset]
+			var distance = distanceToFinishMeters[maneuver.routePointOffset]
 			if (index < maneuvers.lastIndex) {
-				distance -= geometry.distanceToFinishMeters[maneuvers[index + 1].routePointOffset]
+				distance -= distanceToFinishMeters[maneuvers[index + 1].routePointOffset]
 			}
 			val expectedTime = javaRoundFloat(distance / maneuver.averageSpeedMetersPerSecond)
 			sumExpectedTime += expectedTime
@@ -55,7 +64,7 @@ object RouteManeuverCalculator {
 				afterLeftTimeSeconds = sumExpectedTime,
 			)
 		}
-		return updated.toList()
+		return updated
 	}
 
 	/** Immutable port of Android Route Details cumulative row totals. */
@@ -73,9 +82,32 @@ object RouteManeuverCalculator {
 	}
 
 	/**
+	 * Calculates every legacy position result in one pass.
+	 *
+	 * The final entry deliberately remains zero because [cumulativeInfoBefore] returns zero when
+	 * `position == maneuvers.size`; iOS currently relies on that boundary behavior.
+	 */
+	fun cumulativeInfoByPosition(maneuvers: List<RouteManeuver>): List<RouteCumulativeInfo> =
+		cumulativeInfoByPosition(ManeuverMetricsAccessor(maneuvers))
+
+	fun cumulativeInfoByPosition(accessor: IManeuverMetricsAccessor): List<RouteCumulativeInfo> {
+		val maneuverCount = accessor.getManeuversCount()
+		val result = ArrayList<RouteCumulativeInfo>(maneuverCount + 1)
+		var distance = 0
+		var time = 0
+		for (index in 0 until maneuverCount) {
+			result.add(RouteCumulativeInfo(distance, time))
+			distance += accessor.getDistanceMeters(index)
+			time += accessor.getExpectedTimeSeconds(index)
+		}
+		result.add(RouteCumulativeInfo(0, 0))
+		return result
+	}
+
+	/**
 	 * Immutable port of Android `calculateIntermediateIndexes` indexing and split logic.
 	 *
-	 * The returned index list intentionally starts with Android's zero-filled sentinel values. If
+	 * The returned index array intentionally starts with Android's zero-filled sentinel values. If
 	 * any intermediate is farther than 3000 metres, Android returns before splitting directions and
 	 * leaves every index at zero; this method does the same.
 	 */
@@ -84,20 +116,40 @@ object RouteManeuverCalculator {
 		maneuvers: List<RouteManeuver>,
 		intermediates: List<KLatLon>,
 	): RouteIntermediateCalculation {
-		val intermediateDirectionIndices = MutableList(intermediates.size) { 0 }
-		val intermediateLocations = MutableList(intermediates.size) { 0 }
-		for (currentIntermediate in intermediates.indices) {
+		return calculateIntermediateIndexesFromAccessors(
+			KLatLonAccessor(locations),
+			maneuvers,
+			KLatLonAccessor(intermediates),
+		)
+	}
+
+	fun calculateIntermediateIndexesFromAccessors(
+		routeLocations: ILocationAccessor,
+		maneuvers: List<RouteManeuver>,
+		intermediateLocations: ILocationAccessor,
+	): RouteIntermediateCalculation {
+		val routeLocationCount = routeLocations.getLocationsCount()
+		val intermediateLocationCount = intermediateLocations.getLocationsCount()
+		val intermediateDirectionIndices = IntArray(intermediateLocationCount)
+		val matchedRouteLocationIndices = IntArray(intermediateLocationCount)
+		for (currentIntermediate in 0 until intermediateLocationCount) {
 			var closestDistance = MAX_INTERMEDIATE_DISTANCE_METERS
-			val intermediate = intermediates[currentIntermediate]
+			val intermediateLatitude = intermediateLocations.getLatitude(currentIntermediate)
+			val intermediateLongitude = intermediateLocations.getLongitude(currentIntermediate)
 			val previousLocation = if (currentIntermediate == 0) {
 				0
 			} else {
-				intermediateLocations[currentIntermediate - 1]
+				matchedRouteLocationIndices[currentIntermediate - 1]
 			}
-			for (currentLocation in previousLocation until locations.size) {
-				val currentDistance = KMapUtils.getDistance(intermediate, locations[currentLocation])
+			for (currentLocation in previousLocation until routeLocationCount) {
+				val currentDistance = KMapUtils.getDistance(
+					intermediateLatitude,
+					intermediateLongitude,
+					routeLocations.getLatitude(currentLocation),
+					routeLocations.getLongitude(currentLocation),
+				)
 				if (currentDistance < closestDistance) {
-					intermediateLocations[currentIntermediate] = currentLocation
+					matchedRouteLocationIndices[currentIntermediate] = currentLocation
 					closestDistance = currentDistance
 				} else if (currentDistance > CLOSE_INTERMEDIATE_DISTANCE_METERS &&
 					closestDistance < CLOSE_INTERMEDIATE_DISTANCE_METERS) {
@@ -107,7 +159,7 @@ object RouteManeuverCalculator {
 			if (closestDistance == MAX_INTERMEDIATE_DISTANCE_METERS) {
 				return RouteIntermediateCalculation(
 					maneuvers = maneuvers.toList(),
-					intermediateDirectionIndices = intermediateDirectionIndices.toList(),
+					intermediateDirectionIndices = intermediateDirectionIndices,
 				)
 			}
 		}
@@ -115,13 +167,15 @@ object RouteManeuverCalculator {
 		val updatedManeuvers = maneuvers.toMutableList()
 		var currentDirection = 0
 		var currentIntermediate = 0
-		while (currentIntermediate < intermediates.size && currentDirection < updatedManeuvers.size) {
+		while (currentIntermediate < intermediateLocationCount && currentDirection < updatedManeuvers.size) {
 			val locationIndex = updatedManeuvers[currentDirection].routePointOffset
-			if (locationIndex >= intermediateLocations[currentIntermediate]) {
-				if (locationIndex > intermediateLocations[currentIntermediate] &&
+			if (locationIndex >= matchedRouteLocationIndices[currentIntermediate]) {
+				if (locationIndex > matchedRouteLocationIndices[currentIntermediate] &&
 					KMapUtils.getDistance(
-						intermediates[currentIntermediate],
-						locations[locationIndex],
+						intermediateLocations.getLatitude(currentIntermediate),
+						intermediateLocations.getLongitude(currentIntermediate),
+						routeLocations.getLatitude(locationIndex),
+						routeLocations.getLongitude(locationIndex),
 					) > MANEUVER_SPLIT_DISTANCE_METERS) {
 					val toSplit = updatedManeuvers[currentDirection]
 					val currentAverageSpeed = updatedManeuvers[max(0, currentDirection - 1)]
@@ -130,7 +184,7 @@ object RouteManeuverCalculator {
 						currentDirection,
 						RouteManeuver(
 							turnTypeValue = RouteManeuverType.STRAIGHT.legacyValue,
-							routePointOffset = intermediateLocations[currentIntermediate],
+							routePointOffset = matchedRouteLocationIndices[currentIntermediate],
 							routeEndPointOffset = 0,
 							distanceMeters = 0,
 							expectedTimeSeconds = 0,
@@ -150,8 +204,8 @@ object RouteManeuverCalculator {
 			currentDirection++
 		}
 		return RouteIntermediateCalculation(
-			maneuvers = updatedManeuvers.toList(),
-			intermediateDirectionIndices = intermediateDirectionIndices.toList(),
+			maneuvers = updatedManeuvers,
+			intermediateDirectionIndices = intermediateDirectionIndices,
 		)
 	}
 }

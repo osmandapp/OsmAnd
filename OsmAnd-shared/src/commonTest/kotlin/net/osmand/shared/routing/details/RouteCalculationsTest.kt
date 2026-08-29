@@ -2,6 +2,7 @@ package net.osmand.shared.routing.details
 
 import net.osmand.shared.data.KLatLon
 import kotlin.test.Test
+import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
@@ -20,17 +21,20 @@ class RouteCalculationsTest {
 			actual = RouteGeometryCalculator.distanceBetween(locations[0], locations[1]),
 			absoluteTolerance = 0.01f,
 		)
-		assertEquals(
-			expected = listOf(221_893, 110_574, 0),
+		assertContentEquals(
+			expected = intArrayOf(221_893, 110_574, 0),
 			actual = RouteGeometryCalculator.calculate(locations).distanceToFinishMeters,
 		)
 	}
 
 	@Test
 	fun routeGeometryHandlesEmptyAndSinglePointRoutes() {
-		assertEquals(emptyList(), RouteGeometryCalculator.calculate(emptyList()).distanceToFinishMeters)
-		assertEquals(
-			listOf(0),
+		assertContentEquals(
+			intArrayOf(),
+			RouteGeometryCalculator.calculate(emptyList()).distanceToFinishMeters,
+		)
+		assertContentEquals(
+			intArrayOf(0),
 			RouteGeometryCalculator.calculate(listOf(KLatLon(0.0, 0.0))).distanceToFinishMeters,
 		)
 	}
@@ -73,6 +77,12 @@ class RouteCalculationsTest {
 		assertEquals(
 			RouteCumulativeInfo(distanceMeters = 0, timeSeconds = 0),
 			RouteManeuverCalculator.cumulativeInfoBefore(updated.size, updated),
+		)
+		assertEquals(
+			(0..updated.size).map { position ->
+				RouteManeuverCalculator.cumulativeInfoBefore(position, updated)
+			},
+			RouteManeuverCalculator.cumulativeInfoByPosition(updated),
 		)
 	}
 

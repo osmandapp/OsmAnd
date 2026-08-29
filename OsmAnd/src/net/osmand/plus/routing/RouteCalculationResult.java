@@ -52,7 +52,10 @@ public class RouteCalculationResult {
 	private final String errorMessage;
 	private final int[] listDistance;
 	private final int[] intermediatePoints;
-	private final RouteDetailsSnapshot routeDetailsSnapshot;
+	private final int snapshotCurrentRoutePointIndex;
+	private final int snapshotCurrentDirectionIndex;
+	private final int snapshotNextIntermediateIndex;
+	private volatile RouteDetailsSnapshot routeDetailsSnapshot;
 
 	// Route information
 	private final float routingTime;
@@ -100,7 +103,9 @@ public class RouteCalculationResult {
 		this.routeRecalcDistance = 0;
 		this.routeVisibleAngle = 0;
 		this.initialCalculation = false;
-		this.routeDetailsSnapshot = RouteCalculationResultSnapshotAdapter.create(this);
+		this.snapshotCurrentRoutePointIndex = this.currentRoute;
+		this.snapshotCurrentDirectionIndex = this.currentDirectionInfo;
+		this.snapshotNextIntermediateIndex = this.nextIntermediate;
 	}
 
 	public RouteCalculationResult(List<Location> list, List<RouteDirectionInfo> directions,
@@ -147,7 +152,9 @@ public class RouteCalculationResult {
 		}
 		this.initialCalculation = params.initialCalculation;
 		this.gpxFile = params.gpxFile;
-		this.routeDetailsSnapshot = RouteCalculationResultSnapshotAdapter.create(this);
+		this.snapshotCurrentRoutePointIndex = this.currentRoute;
+		this.snapshotCurrentDirectionIndex = this.currentDirectionInfo;
+		this.snapshotNextIntermediateIndex = this.nextIntermediate;
 	}
 
 	public RouteCalculationResult(List<RouteSegmentResult> list, RouteCalculationParams params, RoutingContext rctx,
@@ -202,7 +209,9 @@ public class RouteCalculationResult {
 				ctx.getSettings().ROUTE_STRAIGHT_ANGLE.getModeValue(mode) : 0;
 		this.initialCalculation = params.initialCalculation;
 		this.gpxFile = params.gpxFile;
-		this.routeDetailsSnapshot = RouteCalculationResultSnapshotAdapter.create(this);
+		this.snapshotCurrentRoutePointIndex = this.currentRoute;
+		this.snapshotCurrentDirectionIndex = this.currentDirectionInfo;
+		this.snapshotNextIntermediateIndex = this.nextIntermediate;
 	}
 
 	public ApplicationMode getAppMode() {
@@ -940,8 +949,7 @@ public class RouteCalculationResult {
 	 * At the end always update listDistance local vars and time
 	 */
 	private static void updateListDistanceTime(int[] listDistance, List<Location> locations) {
-		int[] calculatedDistances = SharedRouteDetailsProvider.calculateDistancesToFinish(locations);
-		System.arraycopy(calculatedDistances, 0, listDistance, 0, calculatedDistances.length);
+		SharedRouteDetailsProvider.calculateDistancesToFinish(locations, listDistance);
 	}
 
 	/**
@@ -1453,8 +1461,23 @@ public class RouteCalculationResult {
 		return gpxFile;
 	}
 
-	/** Returns the immutable platform-neutral copy created once with this calculated route. */
+	/** Returns a lazily created immutable platform-neutral copy of this calculated route. */
+	@NonNull
 	public RouteDetailsSnapshot getRouteDetailsSnapshot() {
-		return routeDetailsSnapshot;
+		RouteDetailsSnapshot snapshot = routeDetailsSnapshot;
+		if (snapshot == null) {
+			synchronized (this) {
+				snapshot = routeDetailsSnapshot;
+				if (snapshot == null) {
+					snapshot = RouteCalculationResultSnapshotAdapter.create(
+							this,
+							snapshotCurrentRoutePointIndex,
+							snapshotCurrentDirectionIndex,
+							snapshotNextIntermediateIndex);
+					routeDetailsSnapshot = snapshot;
+				}
+			}
+		}
+		return snapshot;
 	}
 }

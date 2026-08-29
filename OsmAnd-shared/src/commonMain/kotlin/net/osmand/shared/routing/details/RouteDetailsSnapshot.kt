@@ -25,8 +25,8 @@ data class RouteDetailsSnapshot(
 ) {
 	init {
 		require(schemaVersion > 0) { "Route details schema version must be positive" }
-		require(points.zipWithNext().all { (first, second) ->
-			first.distanceToFinishMeters >= second.distanceToFinishMeters
+		require((1 until points.size).all { index ->
+			points[index - 1].distanceToFinishMeters >= points[index].distanceToFinishMeters
 		}) { "Android route distances to finish must be ordered" }
 		if (points.isNotEmpty()) {
 			require(points.last().distanceToFinishMeters == 0) {

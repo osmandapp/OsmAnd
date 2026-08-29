@@ -1534,9 +1534,9 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		}
 	}
 
-	public static RouteCumulativeInfo getRouteDirectionCumulativeInfo(int position, List<
-			RouteDirectionInfo> routeDirections) {
-		return SharedRouteDetailsProvider.getCumulativeInfo(position, routeDirections);
+	public static List<RouteCumulativeInfo> getRouteDirectionCumulativeInfoByPosition(
+			List<RouteDirectionInfo> routeDirections) {
+		return SharedRouteDetailsProvider.getCumulativeInfoByPosition(routeDirections);
 	}
 
 	public static String getTimeDescription(OsmandApplication app, RouteDirectionInfo model) {

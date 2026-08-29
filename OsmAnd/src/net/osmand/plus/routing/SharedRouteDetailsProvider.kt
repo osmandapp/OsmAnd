@@ -5,49 +5,52 @@ import net.osmand.Location
 import net.osmand.data.LatLon
 import net.osmand.plus.R
 import net.osmand.router.TurnType
-import net.osmand.shared.data.KLatLon
+import net.osmand.shared.routing.details.ILocationAccessor
+import net.osmand.shared.routing.details.IManeuverMetricsAccessor
 import net.osmand.shared.routing.details.RouteCumulativeInfo
-import net.osmand.shared.routing.details.RouteGeometryCalculation
 import net.osmand.shared.routing.details.RouteGeometryCalculator
 import net.osmand.shared.routing.details.RouteManeuverCalculator
 
 /**
  * Android compatibility entry point for the shared route-details backend.
  *
- * Android navigation and UI models remain the public compatibility surface. This provider copies
- * only the inputs needed by a shared calculation and maps its result back to those existing types.
+ * Android navigation and UI models remain the public compatibility surface. This provider exposes
+ * route coordinates through a read-only accessor, copies only the smaller structured inputs needed
+ * by a shared calculation, and maps its result back to those existing types.
  */
 object SharedRouteDetailsProvider {
 
 	@JvmStatic
 	fun calculateDistancesToFinish(locations: List<Location>): IntArray =
-		RouteGeometryCalculator.calculate(locations.map { it.toSharedLocation() })
-			.distanceToFinishMeters
-			.toIntArray()
+		IntArray(locations.size).also { result -> calculateDistancesToFinish(locations, result) }
+
+	@JvmStatic
+	fun calculateDistancesToFinish(locations: List<Location>, result: IntArray) {
+		RouteGeometryCalculator.calculateInto(LocationAccessor(locations), result)
+	}
 
 	@JvmStatic
 	fun updateDirectionDistancesAndTimes(
 		directions: List<RouteDirectionInfo>,
 		distanceToFinishMeters: IntArray,
 	) {
-		val geometry = RouteGeometryCalculation(distanceToFinishMeters.toList())
 		val updated = RouteManeuverCalculator.updateDistancesAndTimes(
 			directions.map(RouteCalculationResultSnapshotAdapter::copyManeuver),
-			geometry,
+			distanceToFinishMeters,
 		)
-		directions.zip(updated).forEach { (direction, maneuver) ->
+		for (index in directions.indices) {
+			val direction = directions[index]
+			val maneuver = updated[index]
 			direction.distance = maneuver.distanceMeters
 			direction.afterLeftTime = maneuver.afterLeftTimeSeconds
 		}
 	}
 
 	@JvmStatic
-	fun getCumulativeInfo(
-		position: Int,
+	fun getCumulativeInfoByPosition(
 		directions: List<RouteDirectionInfo>,
-	): RouteCumulativeInfo = RouteManeuverCalculator.cumulativeInfoBefore(
-		position,
-		directions.map(RouteCalculationResultSnapshotAdapter::copyManeuver),
+	): List<RouteCumulativeInfo> = RouteManeuverCalculator.cumulativeInfoByPosition(
+		ManeuverMetricsAccessor(directions),
 	)
 
 	@JvmStatic
@@ -62,10 +65,10 @@ object SharedRouteDetailsProvider {
 			return
 		}
 		val originalManeuvers = directions.map(RouteCalculationResultSnapshotAdapter::copyManeuver)
-		val calculation = RouteManeuverCalculator.calculateIntermediateIndexes(
-			locations.map { it.toSharedLocation() },
+		val calculation = RouteManeuverCalculator.calculateIntermediateIndexesFromAccessors(
+			LocationAccessor(locations),
 			originalManeuvers,
-			intermediates.map { KLatLon(it.latitude, it.longitude) },
+			LatLonAccessor(intermediates),
 		)
 		val updatedDirections = ArrayList<RouteDirectionInfo>(calculation.maneuvers.size)
 		var originalIndex = 0
@@ -102,15 +105,44 @@ object SharedRouteDetailsProvider {
 		currentRoutePointIndex: Int,
 		distanceMeters: Int,
 	): Location? {
-		val sharedLocations = locations.map { it.toSharedLocation() }
-		val sharedLocation = RouteGeometryCalculator.locationByDistance(
-			sharedLocations,
+		val index = RouteGeometryCalculator.locationIndexByDistance(
+			LocationAccessor(locations),
 			currentRoutePointIndex,
 			distanceMeters,
-		) ?: return null
-		val index = sharedLocations.indexOfFirst { it === sharedLocation }
-		return locations.getOrNull(index)
+		)
+		if (index < 0) {
+			return null
+		}
+		return locations[index]
 	}
 
-	private fun Location.toSharedLocation(): KLatLon = KLatLon(latitude, longitude)
+	private class LocationAccessor(
+		private val locations: List<Location>,
+	) : ILocationAccessor {
+		override fun getLocationsCount(): Int = locations.size
+
+		override fun getLatitude(index: Int): Double = locations[index].latitude
+
+		override fun getLongitude(index: Int): Double = locations[index].longitude
+	}
+
+	private class LatLonAccessor(
+		private val locations: List<LatLon>,
+	) : ILocationAccessor {
+		override fun getLocationsCount(): Int = locations.size
+
+		override fun getLatitude(index: Int): Double = locations[index].latitude
+
+		override fun getLongitude(index: Int): Double = locations[index].longitude
+	}
+
+	private class ManeuverMetricsAccessor(
+		private val directions: List<RouteDirectionInfo>,
+	) : IManeuverMetricsAccessor {
+		override fun getManeuversCount(): Int = directions.size
+
+		override fun getDistanceMeters(index: Int): Int = directions[index].distance
+
+		override fun getExpectedTimeSeconds(index: Int): Int = directions[index].expectedTime
+	}
 }

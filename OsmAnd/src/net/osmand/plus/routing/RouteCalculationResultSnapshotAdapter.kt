@@ -13,11 +13,24 @@ import net.osmand.shared.routing.details.RouteServiceType
 import net.osmand.shared.routing.details.RouteSummary
 import kotlin.math.abs
 
-/** Android-only eager copier from navigation result objects to the shared route-details contract. */
+/** Android-only copier used when a full shared route-details snapshot is explicitly requested. */
 object RouteCalculationResultSnapshotAdapter {
 
 	@JvmStatic
-	fun create(source: RouteCalculationResult): RouteDetailsSnapshot {
+	fun create(source: RouteCalculationResult): RouteDetailsSnapshot = create(
+		source,
+		source.currentRoute,
+		source.getCurrentDirectionInfoForSnapshot(),
+		source.nextIntermediate,
+	)
+
+	@JvmStatic
+	fun create(
+		source: RouteCalculationResult,
+		currentRoutePointIndex: Int,
+		currentDirectionIndex: Int,
+		nextIntermediateIndex: Int,
+	): RouteDetailsSnapshot {
 		val locations = source.immutableAllLocations
 		val directions = source.immutableAllDirections
 		return RouteDetailsSnapshot(
@@ -29,9 +42,9 @@ object RouteCalculationResultSnapshotAdapter {
 			events = source.alarmInfo.map(::copyEvent),
 			summary = copySummary(source, directions),
 			statistics = emptyList(),
-			currentRoutePointIndex = source.currentRoute,
-			currentDirectionIndex = source.getCurrentDirectionInfoForSnapshot(),
-			nextIntermediateIndex = source.nextIntermediate,
+			currentRoutePointIndex = currentRoutePointIndex,
+			currentDirectionIndex = currentDirectionIndex,
+			nextIntermediateIndex = nextIntermediateIndex,
 			intermediateRoutePointOffsets = copyIntermediateRoutePointOffsets(
 				source.getIntermediateDirectionIndexesForSnapshot(),
 				directions,

@@ -75,7 +75,7 @@ public class RouteStatisticsHelper {
 		for (int i = 0; i < route.size(); i++) {
 			// Statistics use segment values only; these synthetic ranges satisfy the shared contract
 			// without reconstructing RouteCalculationResult's point-aligned segment list here.
-			sharedRoute.add(RouteSegmentResultSnapshotAdapter.toSnapshot(route.get(i), i, i));
+			sharedRoute.add(RouteSegmentResultSnapshotAdapter.toStatisticsSnapshot(route.get(i), i));
 		}
 		return RouteStatisticsCalculator.INSTANCE.calculate(
 				sharedRoute,

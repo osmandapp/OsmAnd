@@ -54,10 +54,11 @@ class SharedRouteDetailsProviderCompatibilityTest {
 
 		assertEquals(expected.map(LegacyDirectionValue::distance), directions.map { it.distance })
 		assertEquals(expected.map(LegacyDirectionValue::afterLeftTime), directions.map { it.afterLeftTime })
-		for (position in -1..directions.size + 1) {
+		val cumulativeInfoByPosition = SharedRouteDetailsProvider.getCumulativeInfoByPosition(directions)
+		for (position in 0..directions.size) {
 			assertEquals(
 				legacyCumulativeInfo(position, directions),
-				SharedRouteDetailsProvider.getCumulativeInfo(position, directions),
+				cumulativeInfoByPosition[position],
 			)
 		}
 	}
@@ -72,7 +73,7 @@ class SharedRouteDetailsProviderCompatibilityTest {
 
 		assertEquals(
 			legacyCumulativeInfo(1, directions),
-			SharedRouteDetailsProvider.getCumulativeInfo(1, directions),
+			SharedRouteDetailsProvider.getCumulativeInfoByPosition(directions)[1],
 		)
 	}
 

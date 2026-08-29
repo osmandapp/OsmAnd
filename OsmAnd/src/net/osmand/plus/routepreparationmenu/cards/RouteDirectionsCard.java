@@ -72,9 +72,12 @@ public class RouteDirectionsCard extends MapBaseCard {
 
 	private void createRouteDirections(LinearLayout cardsContainer) {
 		List<RouteDirectionInfo> routeDirections = routingHelper.getRouteDirections();
+		List<RouteCumulativeInfo> cumulativeInfoByPosition =
+				RouteDetailsFragment.getRouteDirectionCumulativeInfoByPosition(routeDirections);
 		for (int i = 0; i < routeDirections.size(); i++) {
 			RouteDirectionInfo routeDirectionInfo = routeDirections.get(i);
-			View view = getRouteDirectionView(i, routeDirectionInfo, routeDirections);
+			View view = getRouteDirectionView(i, routeDirectionInfo, routeDirections,
+					cumulativeInfoByPosition.get(i));
 			cardsContainer.addView(view);
 		}
 	}
@@ -84,7 +87,9 @@ public class RouteDirectionsCard extends MapBaseCard {
 		return Algorithms.formatDuration(timeInSeconds, app.accessibilityEnabled());
 	}
 
-	private View getRouteDirectionView(int directionInfoIndex, RouteDirectionInfo model, List<RouteDirectionInfo> directionsInfo) {
+	private View getRouteDirectionView(int directionInfoIndex, RouteDirectionInfo model,
+	                                   List<RouteDirectionInfo> directionsInfo,
+	                                   RouteCumulativeInfo cumulativeInfo) {
 		MapActivity mapActivity = getMapActivity();
 		View row = themedInflater.inflate(R.layout.route_info_list_item, null);
 
@@ -126,7 +131,6 @@ public class RouteDirectionsCard extends MapBaseCard {
 			timeLabel.setText("");
 			row.setContentDescription("");
 		}
-		RouteCumulativeInfo cumulativeInfo = RouteDetailsFragment.getRouteDirectionCumulativeInfo(directionInfoIndex, directionsInfo);
 		cumulativeDistanceLabel.setText(OsmAndFormatter.getFormattedDistance(
 				cumulativeInfo.getDistanceMeters(), app));
 		cumulativeTimeLabel.setText(Algorithms.formatDuration(

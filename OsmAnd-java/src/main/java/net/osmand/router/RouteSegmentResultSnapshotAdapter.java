@@ -45,11 +45,40 @@ public final class RouteSegmentResultSnapshotAdapter {
 		);
 	}
 
+	/** Copies only the fields consumed by the shared statistics calculator. */
+	public static RouteSegment toStatisticsSnapshot(RouteSegmentResult source, int syntheticIndex) {
+		RouteDataObject road = source.getObject();
+		return new RouteSegment(
+				syntheticIndex,
+				syntheticIndex,
+				source.getStartPointIndex(),
+				source.getEndPointIndex(),
+				source.getDistance(),
+				0,
+				0,
+				road.getId(),
+				source.isForwardDirection(),
+				null,
+				null,
+				null,
+				null,
+				null,
+				0,
+				-1,
+				0,
+				false,
+				false,
+				copyRouteTypes(road),
+				copyHeightValues(source.getHeightValues())
+		);
+	}
+
 	private static List<RouteTypeAttribute> copyRouteTypes(RouteDataObject road) {
-		List<RouteTypeAttribute> result = new ArrayList<>();
+		int[] types = road.getTypes();
+		List<RouteTypeAttribute> result = new ArrayList<>(types.length);
 		RouteRegion region = road.region;
 		int encodingRulesSize = region.quickGetEncodingRulesSize();
-		for (int type : road.getTypes()) {
+		for (int type : types) {
 			if (type < 0 || type >= encodingRulesSize) {
 				continue;
 			}
@@ -61,11 +90,8 @@ public final class RouteSegmentResultSnapshotAdapter {
 		return result;
 	}
 
-	private static List<Float> copyHeightValues(float[] heightValues) {
-		List<Float> result = new ArrayList<>(heightValues.length);
-		for (float heightValue : heightValues) {
-			result.add(heightValue);
-		}
-		return result;
+	private static float[] copyHeightValues(float[] heightValues) {
+		// RouteSegmentResult.getHeightValues() already returns a new array owned by this conversion.
+		return heightValues;
 	}
 }

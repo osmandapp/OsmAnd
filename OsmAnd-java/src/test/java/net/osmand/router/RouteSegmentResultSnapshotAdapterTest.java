@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -81,13 +82,13 @@ public class RouteSegmentResultSnapshotAdapterTest {
 				),
 				snapshot.getRouteTypes()
 		);
-		assertEquals(Arrays.asList(0f, 12f, 100f, 14f), snapshot.getHeightValues());
+		assertArrayEquals(new float[]{0f, 12f, 100f, 14f}, snapshot.getHeightValues(), 0f);
 
 		road.types = new int[]{4};
 		road.heightDistanceArray[1] = 99f;
 		source.setDistance(1f);
 		assertEquals(100f, snapshot.getDistanceMeters(), 0f);
 		assertEquals(8, snapshot.getRouteTypes().size());
-		assertEquals(Arrays.asList(0f, 12f, 100f, 14f), snapshot.getHeightValues());
+		assertArrayEquals(new float[]{0f, 12f, 100f, 14f}, snapshot.getHeightValues(), 0f);
 	}
 }

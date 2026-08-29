@@ -661,6 +661,8 @@ public class ChooseRouteFragment extends BaseFullScreenFragment implements Conte
 	private StringBuilder generateHtmlPrint(List<RouteDirectionInfo> directionsInfo, String title) {
 		StringBuilder html = new StringBuilder();
 		boolean accessibilityEnabled = app.accessibilityEnabled();
+		List<RouteCumulativeInfo> cumulativeInfoByPosition =
+				RouteDetailsFragment.getRouteDirectionCumulativeInfoByPosition(directionsInfo);
 		html.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
 		html.append("<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\">");
 		html.append("<head>");
@@ -699,7 +701,7 @@ public class ChooseRouteFragment extends BaseFullScreenFragment implements Conte
 			html.append("<td>");
 			html.append(i + 1).append(". ").append(description);
 			html.append("</td>");
-			RouteCumulativeInfo cumulativeInfo = RouteDetailsFragment.getRouteDirectionCumulativeInfo(i, directionsInfo);
+			RouteCumulativeInfo cumulativeInfo = cumulativeInfoByPosition.get(i);
 			html.append("<td>");
 			sb = new StringBuilder();
 			sb.append(OsmAndFormatter.getFormattedDistance(cumulativeInfo.getDistanceMeters(), app));

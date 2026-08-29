@@ -113,7 +113,7 @@ class RouteStatisticsCalculatorTest {
 			route = listOf(
 				segment(
 					distance = 110f,
-					heightValues = listOf(0f, 0f, 110f, 22f),
+					heightValues = floatArrayOf(0f, 0f, 110f, 22f),
 				),
 			),
 			attributeNames = listOf("routeInfo_steepness"),
@@ -154,7 +154,7 @@ class RouteStatisticsCalculatorTest {
 		val additionalFilters = mutableListOf<String>()
 
 		RouteStatisticsCalculator.calculate(
-			route = listOf(segment(110f, heightValues = listOf(0f, 0f, 110f, 44f))),
+			route = listOf(segment(110f, heightValues = floatArrayOf(0f, 0f, 110f, 44f))),
 			attributeNames = listOf("routeInfo_steepness"),
 			classifier = classifier { request ->
 				additionalFilters.add(request.additional)
@@ -193,7 +193,7 @@ class RouteStatisticsCalculatorTest {
 	private fun segment(
 		distance: Float,
 		routeTypes: List<RouteTypeAttribute> = emptyList(),
-		heightValues: List<Float> = emptyList(),
+		heightValues: FloatArray = floatArrayOf(),
 	): RouteSegment = RouteSegment(
 		routePointStartIndex = 0,
 		routePointEndIndex = 0,
