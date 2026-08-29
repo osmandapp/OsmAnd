@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    <string name="gpx_line_style">Line style</string>
+    <string name="gpx_line_style_dashed">Dashed</string>
+    <string name="gpx_line_style_dotted">Dotted</string>
+    <string name="gpx_dotted_line">Dotted line</string>
     <string name="gpx_dashed_line">Dashed line</string>
 <!--
 	README:

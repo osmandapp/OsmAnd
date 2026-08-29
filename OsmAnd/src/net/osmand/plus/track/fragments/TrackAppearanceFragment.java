@@ -64,12 +64,12 @@ import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
 import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.track.cards.ActionsCard;
-import net.osmand.plus.track.cards.DashedLineCard;
 import net.osmand.plus.track.cards.DirectionArrowsCard;
 import net.osmand.plus.track.cards.ShowStartFinishCard;
 import net.osmand.plus.track.cards.SplitIntervalCard;
 import net.osmand.plus.track.cards.Track3DCard;
 import net.osmand.plus.track.fragments.controller.TrackColorController;
+import net.osmand.plus.track.fragments.controller.TrackLineStyleController;
 import net.osmand.plus.track.fragments.controller.TrackWidthController;
 import net.osmand.plus.track.fragments.controller.TrackWidthController.ITrackWidthSelectedListener;
 import net.osmand.plus.track.helpers.GpxAppearanceHelper;
@@ -795,7 +795,6 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				addCard(container, splitIntervalCard);
 			}
 			addCard(container, new DirectionArrowsCard(mapActivity, trackDrawInfo));
-			addCard(container, new DashedLineCard(mapActivity, trackDrawInfo));
 			addCard(container, new ShowStartFinishCard(mapActivity, trackDrawInfo));
 
 			inflate(R.layout.list_item_divider_basic, container, true);
@@ -807,6 +806,11 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 			TrackWidthController trackWidthController = getWidthCardController();
 			addCard(container, new HeadedContentCard(mapActivity, trackWidthController));
+
+			inflate(R.layout.list_item_divider_basic, container, true);
+
+			TrackLineStyleController lineStyleController = getLineStyleCardController();
+			addCard(container, new HeadedContentCard(mapActivity, lineStyleController));
 
 			inflate(R.layout.list_item_divider_basic, container, true);
 
@@ -837,6 +841,10 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			}
 		};
 		return TrackWidthController.getInstance(app, trackDrawInfo, onNeedScrollListener, this);
+	}
+
+	private TrackLineStyleController getLineStyleCardController() {
+		return new TrackLineStyleController(app, trackDrawInfo, dashed -> refreshMap());
 	}
 
 	public List<GpxDisplayGroup> getGpxDisplayGroups() {
