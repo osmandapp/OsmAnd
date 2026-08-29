@@ -29,8 +29,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class AmenityExtensionsHelper {
 	public static final double MIN_UPHILL_DOWNHILL_FIXED_TO_SHOW = 10.0;
@@ -100,6 +102,18 @@ public class AmenityExtensionsHelper {
 			updatedExtensions.putAll(amenity.getAmenityExtensions(app.getPoiTypes(), false));
 		}
 		return updatedExtensions;
+	}
+
+	@NonNull
+	public static Set<String> getStoredExtensionFallbackKeys(@NonNull Map<String, String> storedExtensions) {
+		Set<String> fallbackKeys = new HashSet<>();
+		for (String key : storedExtensions.keySet()) {
+			// These prefixes already identify fields persisted from an Amenity by OsmAnd.
+			if (!key.startsWith(AMENITY_PREFIX) && !key.startsWith(OSM_PREFIX)) {
+				fallbackKeys.add(key);
+			}
+		}
+		return fallbackKeys;
 	}
 
 	@NonNull
