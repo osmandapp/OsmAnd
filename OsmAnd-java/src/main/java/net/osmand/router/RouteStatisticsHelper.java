@@ -175,20 +175,23 @@ public class RouteStatisticsHelper {
 			this.defaultRenderingRuleSearchRequest = defaultRenderingRuleSearchRequest;
 		}
 
-		public RouteSegmentAttribute classifySegment(String attribute, int slopeClass, RouteDataObject routeObject) {
-			RouteSegmentAttribute res = new RouteSegmentAttribute(UNDEFINED_ATTR, 0, -1);
+		public RouteAttributeClassification classifySegment(String attribute, int slopeClass, RouteDataObject routeObject) {
+			RouteAttributeClassification res = new RouteAttributeClassification(UNDEFINED_ATTR, 0);
 			RenderingRuleSearchRequest currentRequest = 
 					currentRenderer == null ? null : new RenderingRuleSearchRequest(currentRenderingRuleSearchRequest);
 			if (currentRenderer != null
 					&& searchRenderingAttribute(attribute, currentRenderer, currentRequest, routeObject, slopeClass)) {
-				res = new RouteSegmentAttribute(currentRequest.getStringPropertyValue(currentRenderer.PROPS.R_ATTR_STRING_VALUE),
-						currentRequest.getIntPropertyValue(currentRenderer.PROPS.R_ATTR_COLOR_VALUE), slopeClass);
+				String propertyName = currentRequest.getStringPropertyValue(currentRenderer.PROPS.R_ATTR_STRING_VALUE);
+				res = new RouteAttributeClassification(
+						propertyName == null ? UNDEFINED_ATTR : propertyName,
+						currentRequest.getIntPropertyValue(currentRenderer.PROPS.R_ATTR_COLOR_VALUE));
 			} else {
 				RenderingRuleSearchRequest defaultRequest = new RenderingRuleSearchRequest(defaultRenderingRuleSearchRequest);
 				if (searchRenderingAttribute(attribute, defaultRenderer, defaultRequest, routeObject, slopeClass)) {
-					res = new RouteSegmentAttribute(
-							defaultRequest.getStringPropertyValue(defaultRenderer.PROPS.R_ATTR_STRING_VALUE),
-							defaultRequest.getIntPropertyValue(defaultRenderer.PROPS.R_ATTR_COLOR_VALUE), slopeClass);
+					String propertyName = defaultRequest.getStringPropertyValue(defaultRenderer.PROPS.R_ATTR_STRING_VALUE);
+					res = new RouteAttributeClassification(
+							propertyName == null ? UNDEFINED_ATTR : propertyName,
+							defaultRequest.getIntPropertyValue(defaultRenderer.PROPS.R_ATTR_COLOR_VALUE));
 				}
 			}
 			return res;
@@ -226,47 +229,4 @@ public class RouteStatisticsHelper {
 		}
 	}
 
-	public static class RouteSegmentAttribute {
-
-		private final int color;
-		private final String propertyName;
-		private final int slopeIndex;
-		private float distance;
-		private String userPropertyName;
-
-		RouteSegmentAttribute(String propertyName, int color, int slopeIndex) {
-			this.propertyName = propertyName == null ? UNDEFINED_ATTR : propertyName;
-			this.slopeIndex = slopeIndex >= 0 && BOUNDARIES_CLASS[slopeIndex].endsWith(this.propertyName) ? slopeIndex : -1;
- 			this.color = color;
-		}
-
-		public String getUserPropertyName() {
-			return userPropertyName == null ? propertyName : userPropertyName;
-		}
-
-		public void setUserPropertyName(String userPropertyName) {
-			this.userPropertyName = userPropertyName;
-		}
-
-		public float getDistance() {
-			return distance;
-		}
-
-		public void incrementDistanceBy(float distance) {
-			this.distance += distance;
-		}
-
-		public String getPropertyName() {
-			return propertyName;
-		}
-
-		public int getColor() {
-			return color;
-		}
-
-		@Override
-		public String toString() {
-			return String.format("%s - %.0f m %d", getUserPropertyName(), getDistance(), getColor());
-		}
-	}
 }

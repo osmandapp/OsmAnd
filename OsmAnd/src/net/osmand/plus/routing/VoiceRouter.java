@@ -27,9 +27,9 @@ import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomiz
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
-import net.osmand.router.ExitInfo;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.TurnType;
+import net.osmand.shared.routing.details.RouteExitInfo;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -566,7 +566,7 @@ public class VoiceRouter {
 	private void playGoAhead(int dist, RouteDirectionInfo next, StreetName streetName) {
 		CommandBuilder p = getNewCommandPlayerToPlay();
 		String tParam = getTurnType(next.getTurnType());
-		ExitInfo exitInfo = next.getExitInfo();
+		RouteExitInfo exitInfo = next.getExitInfo();
 		if (p != null) {
 			p.goAhead(dist, streetName);
 			if (tParam != null && exitInfo != null && !Algorithms.isEmpty(exitInfo.getRef()) && settings.SPEAK_EXIT_NUMBER_NAMES.get()) {
@@ -636,7 +636,7 @@ public class VoiceRouter {
 		return new StreetName(result);
 	}
 
-	private StreetName getSpeakableExitName(RouteDirectionInfo routeInfo, ExitInfo exitInfo, boolean includeDest) {
+	private StreetName getSpeakableExitName(RouteDirectionInfo routeInfo, RouteExitInfo exitInfo, boolean includeDest) {
 		Map<String, String> result = new HashMap<>();
 		if (exitInfo == null || !router.getSettings().SPEAK_STREET_NAMES.get()) {
 			return new StreetName(result);
@@ -732,7 +732,7 @@ public class VoiceRouter {
 		if (p != null && router.getSettings().TURN_BY_TURN_DIRECTIONS.get()) {
 			String tParam = getTurnType(next.getTurnType());
 			boolean isPlay = true;
-			ExitInfo exitInfo = next.getExitInfo();
+			RouteExitInfo exitInfo = next.getExitInfo();
 			if (tParam != null) {
 				if (exitInfo != null && !Algorithms.isEmpty(exitInfo.getRef()) && settings.SPEAK_EXIT_NUMBER_NAMES.get()) {
 					String stringRef = getSpeakableExitRef(exitInfo.getRef());
@@ -806,7 +806,7 @@ public class VoiceRouter {
 		CommandBuilder p = getNewCommandPlayerToPlay();
 		if (p != null && router.getSettings().TURN_BY_TURN_DIRECTIONS.get()) {
 			String tParam = getTurnType(next.getTurnType());
-			ExitInfo exitInfo = next.getExitInfo();
+			RouteExitInfo exitInfo = next.getExitInfo();
 			boolean isplay = true;
 			if (tParam != null) {
 				if (exitInfo != null && !Algorithms.isEmpty(exitInfo.getRef()) && settings.SPEAK_EXIT_NUMBER_NAMES.get()) {

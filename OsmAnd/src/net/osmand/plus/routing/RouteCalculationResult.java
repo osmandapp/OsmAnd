@@ -18,7 +18,6 @@ import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.router.ExitInfo;
 import net.osmand.router.MissingMapsCalculationResult;
 import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RouteSegmentResult;
@@ -26,6 +25,7 @@ import net.osmand.router.RoutingContext;
 import net.osmand.router.TurnType;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.routing.details.RouteDetailsSnapshot;
+import net.osmand.shared.routing.details.RouteExitInfo;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -39,8 +39,6 @@ import java.util.List;
 public class RouteCalculationResult {
 	private static final Log log = PlatformUtil.getLog(RouteCalculationResult.class);
 
-	private static final double DISTANCE_CLOSEST_TO_INTERMEDIATE = 3000;
-	private static final double DISTANCE_THRESHOLD_TO_INTERMEDIATE = 25;
 	private static final double DISTANCE_THRESHOLD_TO_INTRODUCE_FIRST_AND_LAST_POINTS = 15;
 
 	public static final String FIRST_LAST_LOCATION_PROVIDER = "FirstLastLocationProvider";
@@ -133,7 +131,8 @@ public class RouteCalculationResult {
 		this.listDistance = new int[locations.size()];
 		updateListDistanceTime(this.listDistance, this.locations);
 		this.alarmInfo = new ArrayList<>();
-		calculateIntermediateIndexes(params.ctx, this.locations, params.intermediates, localDirections, this.intermediatePoints);
+		SharedRouteDetailsProvider.calculateIntermediateIndexes(
+				params.ctx, this.locations, params.intermediates, localDirections, this.intermediatePoints);
 		this.directions = Collections.unmodifiableList(localDirections);
 		updateDirectionsTime(this.directions, this.listDistance);
 		this.routeService = params.mode.getRouteService();
@@ -188,7 +187,8 @@ public class RouteCalculationResult {
 		this.locations = Collections.unmodifiableList(locations);
 		this.segments = Collections.unmodifiableList(segments);
 		this.listDistance = new int[locations.size()];
-		calculateIntermediateIndexes(ctx, this.locations, intermediates, computeDirections, this.intermediatePoints);
+		SharedRouteDetailsProvider.calculateIntermediateIndexes(
+				ctx, this.locations, intermediates, computeDirections, this.intermediatePoints);
 		updateListDistanceTime(this.listDistance, this.locations);
 		this.appMode = mode;
 		this.routeService = mode.getRouteService();
@@ -230,66 +230,6 @@ public class RouteCalculationResult {
 
 	public boolean isInitialCalculation() {
 		return initialCalculation;
-	}
-
-	private static void calculateIntermediateIndexes(Context ctx, List<Location> locations,
-	                                                 List<LatLon> intermediates, List<RouteDirectionInfo> localDirections, int[] intermediatePoints) {
-		if (intermediates != null && localDirections != null) {
-			int[] interLocations = new int[intermediates.size()];
-			for (int currentIntermediate = 0; currentIntermediate < intermediates.size(); currentIntermediate++) {
-				double setDistance = DISTANCE_CLOSEST_TO_INTERMEDIATE;
-				LatLon currentIntermediatePoint = intermediates.get(currentIntermediate);
-				int prevLocation = currentIntermediate == 0 ? 0 : interLocations[currentIntermediate - 1];
-				for (int currentLocation = prevLocation; currentLocation < locations.size();
-				     currentLocation++) {
-					double currentDistance = getDistanceToLocation(locations, currentIntermediatePoint, currentLocation);
-					if (currentDistance < setDistance) {
-						interLocations[currentIntermediate] = currentLocation;
-						setDistance = currentDistance;
-					} else if (currentDistance > DISTANCE_THRESHOLD_TO_INTERMEDIATE &&
-							setDistance < DISTANCE_THRESHOLD_TO_INTERMEDIATE) {
-						// finish search
-						break;
-					}
-
-				}
-				if (setDistance == DISTANCE_CLOSEST_TO_INTERMEDIATE) {
-					return;
-				}
-			}
-
-
-			int currentDirection = 0;
-			int currentIntermediate = 0;
-			while (currentIntermediate < intermediates.size() && currentDirection < localDirections.size()) {
-				int locationIndex = localDirections.get(currentDirection).routePointOffset;
-				if (locationIndex >= interLocations[currentIntermediate]) {
-					// split directions
-					if (locationIndex > interLocations[currentIntermediate]
-							&& getDistanceToLocation(locations, intermediates.get(currentIntermediate), locationIndex) > 50) {
-						RouteDirectionInfo toSplit = localDirections.get(currentDirection);
-						// intermediate point should split using average speed from its actual (previous) segment
-						float currentAvgSpeed = localDirections.get(Math.max(0, currentDirection - 1)).getAverageSpeed();
-						RouteDirectionInfo info = new RouteDirectionInfo(currentAvgSpeed, TurnType.straight());
-						info.setRef(toSplit.getRef());
-						info.setStreetName(toSplit.getStreetName());
-						info.setRouteDataObject(toSplit.getRouteDataObject());
-						info.setDestinationName(toSplit.getDestinationName());
-						info.routePointOffset = interLocations[currentIntermediate];
-						info.setDescriptionRoute(ctx.getString(R.string.route_head));//; //$NON-NLS-1$
-						localDirections.add(currentDirection, info);
-					}
-					intermediatePoints[currentIntermediate] = currentDirection;
-					currentIntermediate++;
-				}
-				currentDirection++;
-			}
-		}
-	}
-
-	private static double getDistanceToLocation(List<Location> locations, LatLon p, int currentLocation) {
-		return MapUtils.getDistance(p,
-				locations.get(currentLocation).getLatitude(), locations.get(currentLocation).getLongitude());
 	}
 
 	private static void attachAlarmInfo(List<AlarmInfo> alarms, RouteSegmentResult res, int intId, int locInd) {
@@ -464,13 +404,12 @@ public class RouteCalculationResult {
 					currentExitRef = current.getObject().getExitRef();
 					currentExitName = current.getObject().getExitName();
 					if (s.hasExitInfo()) {
-						ExitInfo exitInfo = new ExitInfo();
 						actualExitRef = currentExitRef;
-						exitInfo.setRef(currentExitRef);
 						actualExitName = currentExitName;
-						exitInfo.setExitStreetName(currentExitName);
+						RouteExitInfo exitInfo = new RouteExitInfo(currentExitRef, currentExitName);
 						info.setExitInfo(exitInfo);
-						if (!exitInfo.isEmpty() && info.getDestinationRef() == null && routeInd > 0) {
+						if ((exitInfo.getRef() != null || exitInfo.getExitStreetName() != null)
+								&& info.getDestinationRef() == null && routeInd > 0) {
 							// set ref and road name (or shield icon) from previous segment because exit point is not consist of highway ref
 							RouteSegmentResult previous;
 							previous = list.get(routeInd - 1);

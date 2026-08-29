@@ -4,8 +4,8 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
-import net.osmand.router.RouteStatisticsHelper.RouteSegmentAttribute;
 import net.osmand.router.RouteStatisticsHelper.RouteStatisticComputer;
+import net.osmand.shared.routing.details.RouteAttributeClassification;
 import net.osmand.shared.routing.details.RouteStatistic;
 import net.osmand.shared.routing.details.RouteStatisticElement;
 
@@ -161,7 +161,7 @@ public class RouteStatisticsHelperCompatibilityTest {
 		return result;
 	}
 
-	private static void assertAttributeEquals(RouteSegmentAttribute expected, RouteStatisticElement actual) {
+	private static void assertAttributeEquals(RouteAttributeClassification expected, RouteStatisticElement actual) {
 		assertEquals(expected.getPropertyName(), actual.getPropertyName());
 		assertEquals(expected.getColor(), actual.getColor());
 	}

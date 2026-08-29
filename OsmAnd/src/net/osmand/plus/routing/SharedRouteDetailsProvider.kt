@@ -1,6 +1,10 @@
 package net.osmand.plus.routing
 
+import android.content.Context
 import net.osmand.Location
+import net.osmand.data.LatLon
+import net.osmand.plus.R
+import net.osmand.router.TurnType
 import net.osmand.shared.data.KLatLon
 import net.osmand.shared.routing.details.RouteCumulativeInfo
 import net.osmand.shared.routing.details.RouteGeometryCalculation
@@ -45,6 +49,52 @@ object SharedRouteDetailsProvider {
 		position,
 		directions.map(RouteCalculationResultSnapshotAdapter::copyManeuver),
 	)
+
+	@JvmStatic
+	fun calculateIntermediateIndexes(
+		context: Context?,
+		locations: List<Location>,
+		intermediates: List<LatLon>?,
+		directions: MutableList<RouteDirectionInfo>,
+		intermediatePoints: IntArray,
+	) {
+		if (intermediates == null) {
+			return
+		}
+		val originalManeuvers = directions.map(RouteCalculationResultSnapshotAdapter::copyManeuver)
+		val calculation = RouteManeuverCalculator.calculateIntermediateIndexes(
+			locations.map { it.toSharedLocation() },
+			originalManeuvers,
+			intermediates.map { KLatLon(it.latitude, it.longitude) },
+		)
+		val updatedDirections = ArrayList<RouteDirectionInfo>(calculation.maneuvers.size)
+		var originalIndex = 0
+		for (maneuver in calculation.maneuvers) {
+			if (originalIndex < originalManeuvers.size &&
+				maneuver.routePointOffset == originalManeuvers[originalIndex].routePointOffset) {
+				updatedDirections.add(directions[originalIndex])
+				originalIndex++
+			} else {
+				val toSplit = directions[originalIndex]
+				updatedDirections.add(RouteDirectionInfo(
+					maneuver.averageSpeedMetersPerSecond,
+					TurnType.straight(),
+				).apply {
+					ref = maneuver.ref
+					streetName = maneuver.streetName
+					routeDataObject = toSplit.routeDataObject
+					destinationName = maneuver.destinationName
+					routePointOffset = maneuver.routePointOffset
+					setDescriptionRoute(requireNotNull(context).getString(R.string.route_head))
+				})
+			}
+		}
+		directions.clear()
+		directions.addAll(updatedDirections)
+		calculation.intermediateDirectionIndices.forEachIndexed { index, directionIndex ->
+			intermediatePoints[index] = directionIndex
+		}
+	}
 
 	@JvmStatic
 	fun getRouteLocationByDistance(

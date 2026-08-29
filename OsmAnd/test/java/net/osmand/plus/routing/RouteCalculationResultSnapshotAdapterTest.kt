@@ -3,9 +3,9 @@ package net.osmand.plus.routing
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.osmand.Location
 import net.osmand.plus.settings.backend.ApplicationMode
-import net.osmand.router.ExitInfo
 import net.osmand.router.TurnType
 import net.osmand.shared.routing.details.RouteEventType
+import net.osmand.shared.routing.details.RouteExitInfo
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertSame
@@ -89,10 +89,7 @@ class RouteCalculationResultSnapshotAdapterTest {
 			ref = "A 1"
 			destinationName = "Centre"
 			destinationRef = "B 2"
-			exitInfo = ExitInfo().apply {
-				ref = "3"
-				exitStreetName = "Exit Road"
-			}
+			exitInfo = RouteExitInfo("3", "Exit Road")
 		}
 
 		val snapshot = RouteCalculationResultSnapshotAdapter.copyManeuver(direction)

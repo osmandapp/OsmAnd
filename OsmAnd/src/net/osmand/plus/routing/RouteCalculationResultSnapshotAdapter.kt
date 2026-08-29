@@ -7,7 +7,6 @@ import net.osmand.shared.data.KLatLon
 import net.osmand.shared.routing.details.RouteDetailsSnapshot
 import net.osmand.shared.routing.details.RouteEvent
 import net.osmand.shared.routing.details.RouteEventType
-import net.osmand.shared.routing.details.RouteExitInfo
 import net.osmand.shared.routing.details.RouteManeuver
 import net.osmand.shared.routing.details.RoutePoint
 import net.osmand.shared.routing.details.RouteSegment
@@ -125,7 +124,7 @@ object RouteCalculationResultSnapshotAdapter {
 			ref = source.ref,
 			destinationName = source.destinationName,
 			destinationRef = source.destinationRef,
-			exitInfo = exit?.let { RouteExitInfo(it.ref, it.exitStreetName) },
+			exitInfo = exit,
 		)
 	}
 
