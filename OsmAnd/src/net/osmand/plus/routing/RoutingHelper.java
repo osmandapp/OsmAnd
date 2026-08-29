@@ -541,6 +541,10 @@ public class RoutingHelper {
 		if (!Algorithms.isEmpty(segment.getHighway())) {
 			//appendDebugValue(road, "highway=" + segment.getHighway());
 		}
+		String surface = findRouteTypeValue(segment, "surface");
+		if (!Algorithms.isEmpty(surface)) {
+			appendDebugValue(road, "surface=" + surface);
+		}
 		return road.toString();
 	}
 
