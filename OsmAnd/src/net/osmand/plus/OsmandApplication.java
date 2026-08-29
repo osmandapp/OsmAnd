@@ -813,6 +813,8 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void setCarNavigationSession(@Nullable NavigationSession carNavigationSession) {
+		NavigationSession.logDiag("setCarNavigationSession " + System.identityHashCode(this.carNavigationSession)
+				+ " -> " + System.identityHashCode(carNavigationSession));
 		this.carNavigationSession = carNavigationSession;
 		if (carNavigationSession != null) {
 			List<OsmandPlugin> enabledPlugins = PluginsHelper.getEnabledPlugins();
