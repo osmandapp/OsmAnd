@@ -8,7 +8,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
-class RouteEventBackendTest {
+class RouteEventHelperTest {
 
 	@Test
 	fun routeTagsMapExactlyLikeAndroidAlarmInfo() {
@@ -26,7 +26,7 @@ class RouteEventBackendTest {
 		)
 
 		for ((tag, value, expectedType) in mappings) {
-			val event = RouteEventBackend.createFromRouteTag(tag, value, 7, location)
+			val event = RouteEventHelper.createFromRouteTag(tag, value, 7, location)
 			assertEquals(expectedType, event?.type)
 			assertEquals(7, event?.locationIndex)
 			assertEquals(location, event?.location)
@@ -53,17 +53,17 @@ class RouteEventBackendTest {
 		)
 
 		for ((tag, value) in unsupported) {
-			assertNull(RouteEventBackend.createFromRouteTag(tag, value, 0, location))
+			assertNull(RouteEventHelper.createFromRouteTag(tag, value, 0, location))
 		}
-		assertNull(RouteEventBackend.createFromRouteTag("highway", null, 0, location))
-		assertNull(RouteEventBackend.createFromRouteTag(null, "stop", 0, location))
+		assertNull(RouteEventHelper.createFromRouteTag("highway", null, 0, location))
+		assertNull(RouteEventHelper.createFromRouteTag(null, "stop", 0, location))
 		assertEquals(
 			RouteEventType.TRAFFIC_CALMING,
-			RouteEventBackend.createFromRouteTag("traffic_calming", null, 0, location)?.type,
+			RouteEventHelper.createFromRouteTag("traffic_calming", null, 0, location)?.type,
 		)
 		assertEquals(
 			RouteEventType.HAZARD,
-			RouteEventBackend.createFromRouteTag("hazard", null, 0, location)?.type,
+			RouteEventHelper.createFromRouteTag("hazard", null, 0, location)?.type,
 		)
 	}
 
@@ -71,7 +71,7 @@ class RouteEventBackendTest {
 	fun speedLimitCreationMatchesAndroidAlarmInfo() {
 		val location = KLatLon(52.0, 13.0)
 
-		val event = RouteEventBackend.createSpeedLimit(
+		val event = RouteEventHelper.createSpeedLimit(
 			speed = 50,
 			location = location,
 			speedMetersPerSecond = 13.8889f,
@@ -89,19 +89,52 @@ class RouteEventBackendTest {
 	fun priorityThresholdsMatchAndroidAlarmInfo() {
 		assertEquals(
 			Int.MAX_VALUE,
-			event(RouteEventType.SPEED_LIMIT).updateDistanceAndGetPriority(0f, 1501f),
+			RouteEventHelper.updateDistanceAndGetPriority(RouteEventType.SPEED_LIMIT, 0f, 1501f),
 		)
-		assertEquals(2, event(RouteEventType.SPEED_LIMIT).updateDistanceAndGetPriority(100f, 1500f))
-		assertEquals(7, event(RouteEventType.STOP).updateDistanceAndGetPriority(5.9f, 1500f))
-		assertEquals(7, event(RouteEventType.STOP).updateDistanceAndGetPriority(100f, 74.9f))
-		assertEquals(1, event(RouteEventType.SPEED_CAMERA).updateDistanceAndGetPriority(14.9f, 1000f))
-		assertEquals(12, event(RouteEventType.RED_LIGHT_CAMERA).updateDistanceAndGetPriority(100f, 149f))
-		assertEquals(6, event(RouteEventType.TOLL_BOOTH).updateDistanceAndGetPriority(29.9f, 1000f))
-		assertEquals(6, event(RouteEventType.TOLL_BOOTH).updateDistanceAndGetPriority(100f, 499f))
-		assertEquals(17, event(RouteEventType.STOP).updateDistanceAndGetPriority(6.9f, 500f))
-		assertEquals(17, event(RouteEventType.STOP).updateDistanceAndGetPriority(100f, 99f))
-		assertEquals(Int.MAX_VALUE, event(RouteEventType.STOP).updateDistanceAndGetPriority(7f, 100f))
-		assertEquals(Int.MAX_VALUE, event(RouteEventType.SPEED_CAMERA).updateDistanceAndGetPriority(15f, 150f))
+		assertEquals(
+			2,
+			RouteEventHelper.updateDistanceAndGetPriority(RouteEventType.SPEED_LIMIT, 100f, 1500f),
+		)
+		assertEquals(
+			7,
+			RouteEventHelper.updateDistanceAndGetPriority(RouteEventType.STOP, 5.9f, 1500f),
+		)
+		assertEquals(
+			7,
+			RouteEventHelper.updateDistanceAndGetPriority(RouteEventType.STOP, 100f, 74.9f),
+		)
+		assertEquals(
+			1,
+			RouteEventHelper.updateDistanceAndGetPriority(RouteEventType.SPEED_CAMERA, 14.9f, 1000f),
+		)
+		assertEquals(
+			12,
+			RouteEventHelper.updateDistanceAndGetPriority(RouteEventType.RED_LIGHT_CAMERA, 100f, 149f),
+		)
+		assertEquals(
+			6,
+			RouteEventHelper.updateDistanceAndGetPriority(RouteEventType.TOLL_BOOTH, 29.9f, 1000f),
+		)
+		assertEquals(
+			6,
+			RouteEventHelper.updateDistanceAndGetPriority(RouteEventType.TOLL_BOOTH, 100f, 499f),
+		)
+		assertEquals(
+			17,
+			RouteEventHelper.updateDistanceAndGetPriority(RouteEventType.STOP, 6.9f, 500f),
+		)
+		assertEquals(
+			17,
+			RouteEventHelper.updateDistanceAndGetPriority(RouteEventType.STOP, 100f, 99f),
+		)
+		assertEquals(
+			Int.MAX_VALUE,
+			RouteEventHelper.updateDistanceAndGetPriority(RouteEventType.STOP, 7f, 100f),
+		)
+		assertEquals(
+			Int.MAX_VALUE,
+			RouteEventHelper.updateDistanceAndGetPriority(RouteEventType.SPEED_CAMERA, 15f, 150f),
+		)
 	}
 
 	@Test
@@ -138,7 +171,7 @@ class RouteEventBackendTest {
 			speakTrafficWarnings = true,
 		)
 
-		val selected = RouteEventBackend.select(input, options)
+		val selected = RouteEventHelper.select(input, options)
 
 		assertEquals(listOf(0, 3, 4, 5, 6, 7, 8), selected.map { it.event.locationIndex })
 		assertEquals(listOf(true, false, true, false, true, true, false), selected.map { it.announce })
@@ -158,8 +191,8 @@ class RouteEventBackendTest {
 			event(RouteEventType.RAILWAY, index = 5, longitude = longitudeForMeters(51.0)),
 		)
 
-		val cameras = RouteEventBackend.select(cameraEvents, options(showCameras = true))
-		val railways = RouteEventBackend.select(railwayEvents, options())
+		val cameras = RouteEventHelper.select(cameraEvents, options(showCameras = true))
+		val railways = RouteEventHelper.select(railwayEvents, options())
 
 		assertEquals(listOf(4, 6), cameras.map { it.event.locationIndex })
 		assertEquals(listOf(5, 7), railways.map { it.event.locationIndex })
@@ -175,13 +208,13 @@ class RouteEventBackendTest {
 			event(RouteEventType.STOP, index = 4),
 		)
 
-		assertEquals(emptyList(), RouteEventBackend.select(events, options(routingAlarmsEnabled = false)))
+		assertEquals(emptyList(), RouteEventHelper.select(events, options(routingAlarmsEnabled = false)))
 
-		val railwayOnly = RouteEventBackend.select(events, options())
+		val railwayOnly = RouteEventHelper.select(events, options())
 		assertEquals(listOf(RouteEventType.RAILWAY), railwayOnly.map { it.event.type })
 		assertEquals(listOf(false), railwayOnly.map(RouteEventSelection::announce))
 
-		val spokenOnly = RouteEventBackend.select(
+		val spokenOnly = RouteEventHelper.select(
 			events,
 			options(
 				speakSpeedCameras = true,
@@ -206,7 +239,7 @@ class RouteEventBackendTest {
 			event(RouteEventType.MAXIMUM, index = 3),
 		)
 
-		val selected = RouteEventBackend.select(events, options(showTrafficWarnings = true))
+		val selected = RouteEventHelper.select(events, options(showTrafficWarnings = true))
 
 		assertEquals(events, selected.map(RouteEventSelection::event))
 		assertTrue(selected.none(RouteEventSelection::announce))

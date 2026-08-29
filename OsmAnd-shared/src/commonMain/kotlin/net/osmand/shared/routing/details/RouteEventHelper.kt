@@ -23,18 +23,42 @@ data class RouteEventSelection(
 )
 
 /**
- * Shared home for ports of Android route-event methods; Android has no class named
- * `RouteEventBackend`.
+ * Shared home for ports of Android route-event methods; there is no legacy Android class named
+ * `RouteEventHelper` to port wholesale.
  *
- * Tag classification follows `AlarmInfo.createAlarmInfo`. Event selection follows
- * `WaypointHelper.calculateAlarms` and the alarm-specific result of `WaypointHelper.sortList`.
- * Native direction applicability remains in the later Android adapter because it requires a
- * `RouteDataObject`.
+ * Tag classification follows `AlarmInfo.createAlarmInfo`. Priority follows
+ * `AlarmInfo.updateDistanceAndGetPriority`. Event selection follows `WaypointHelper.calculateAlarms`
+ * and the alarm-specific result of `WaypointHelper.sortList`. Native direction applicability
+ * remains in the later Android adapter because it requires a `RouteDataObject`.
  */
-object RouteEventBackend {
+object RouteEventHelper {
 
 	private const val DUPLICATE_CAMERA_DISTANCE_METERS = 150.0
 	private const val DUPLICATE_RAILWAY_DISTANCE_METERS = 50.0
+
+	/** Exact equivalent of Android `AlarmInfo.updateDistanceAndGetPriority(float, float)`. */
+	fun updateDistanceAndGetPriority(
+		type: RouteEventType,
+		timeSeconds: Float,
+		distanceMeters: Float,
+	): Int {
+		if (distanceMeters > 1500) {
+			return Int.MAX_VALUE
+		}
+		if (timeSeconds < 6 || distanceMeters < 75 || type == RouteEventType.SPEED_LIMIT) {
+			return type.androidPriority
+		}
+		if (type.isTrafficCamera() && (timeSeconds < 15 || distanceMeters < 150)) {
+			return type.androidPriority
+		}
+		if (type == RouteEventType.TOLL_BOOTH && (timeSeconds < 30 || distanceMeters < 500)) {
+			return type.androidPriority
+		}
+		if (timeSeconds < 7 || distanceMeters < 100) {
+			return type.androidPriority + RouteEventType.MAXIMUM.androidPriority
+		}
+		return Int.MAX_VALUE
+	}
 
 	/** Exact immutable equivalent of Android `AlarmInfo.createSpeedLimit`. */
 	fun createSpeedLimit(
@@ -58,7 +82,19 @@ object RouteEventBackend {
 		locationIndex: Int,
 		location: KLatLon,
 	): RouteEvent? {
-		val type = when (tag) {
+		val type = classifyType(tag, value)
+		return type?.let {
+			RouteEvent(
+				type = it,
+				location = location,
+				locationIndex = locationIndex,
+			)
+		}
+	}
+
+	/** Type-only form used by Android before its native direction-applicability check. */
+	fun classifyType(tag: String?, value: String?): RouteEventType? {
+		return when (tag) {
 			"highway" -> when (value) {
 				"speed_camera" -> RouteEventType.SPEED_CAMERA
 				"stop" -> RouteEventType.STOP
@@ -87,13 +123,6 @@ object RouteEventBackend {
 				else -> null
 			}
 			else -> null
-		}
-		return type?.let {
-			RouteEvent(
-				type = it,
-				location = location,
-				locationIndex = locationIndex,
-			)
 		}
 	}
 
