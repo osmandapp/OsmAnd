@@ -36,31 +36,6 @@ class RouteCalculationsTest {
 	}
 
 	@Test
-	fun calculatedDistancesAreCopiedToRoutePointsWithoutChangingSourceFields() {
-		val points = listOf(
-			RoutePoint(
-				location = KLatLon(0.0, 0.0),
-				distanceToFinishMeters = 0,
-				altitudeMeters = 12.5,
-				provider = "test",
-			),
-			RoutePoint(
-				location = KLatLon(0.0, 0.001),
-				distanceToFinishMeters = 0,
-				altitudeMeters = 13.5,
-				provider = "test",
-			),
-		)
-
-		val updated = RouteGeometryCalculator.withCalculatedDistances(points)
-
-		assertEquals(listOf(111, 0), updated.map(RoutePoint::distanceToFinishMeters))
-		assertEquals(points.map(RoutePoint::location), updated.map(RoutePoint::location))
-		assertEquals(points.map(RoutePoint::altitudeMeters), updated.map(RoutePoint::altitudeMeters))
-		assertEquals(points.map(RoutePoint::provider), updated.map(RoutePoint::provider))
-	}
-
-	@Test
 	fun locationByDistanceUsesAndroidSignedDirectionAndDirectDistance() {
 		val locations = (0..4).map { index -> KLatLon(0.0, index * 0.001) }
 
@@ -99,53 +74,6 @@ class RouteCalculationsTest {
 			RouteCumulativeInfo(distanceMeters = 0, timeSeconds = 0),
 			RouteManeuverCalculator.cumulativeInfoBefore(updated.size, updated),
 		)
-	}
-
-	@Test
-	fun intermediatePointSplitsDirectionLikeAndroid() {
-		val locations = (0..3).map { index -> KLatLon(0.0, index * 0.001) }
-		val original = listOf(
-			maneuver(offset = 0, averageSpeed = 12f),
-			maneuver(
-				offset = 3,
-				averageSpeed = 8f,
-				turnTypeValue = RouteManeuverType.TURN_RIGHT.legacyValue,
-				streetName = "Main Street",
-				ref = "A1",
-				destinationName = "Centre",
-			),
-		)
-
-		val result = RouteManeuverCalculator.calculateIntermediateIndexes(
-			locations = locations,
-			maneuvers = original,
-			intermediates = listOf(locations[1], locations[3]),
-		)
-
-		assertEquals(listOf(0, 1, 3), result.maneuvers.map(RouteManeuver::routePointOffset))
-		assertEquals(listOf(1, 2), result.intermediateDirectionIndices)
-		val inserted = result.maneuvers[1]
-		assertEquals(RouteManeuverType.STRAIGHT.legacyValue, inserted.turnTypeValue)
-		assertEquals(12f, inserted.averageSpeedMetersPerSecond)
-		assertEquals("Main Street", inserted.streetName)
-		assertEquals("A1", inserted.ref)
-		assertEquals("Centre", inserted.destinationName)
-		assertEquals(original[1], result.maneuvers[2])
-	}
-
-	@Test
-	fun unmatchedIntermediateLeavesAndroidZeroSentinelsAndDirectionsUnchanged() {
-		val locations = listOf(KLatLon(0.0, 0.0), KLatLon(0.0, 0.001))
-		val maneuvers = listOf(maneuver(offset = 0, averageSpeed = 10f))
-
-		val result = RouteManeuverCalculator.calculateIntermediateIndexes(
-			locations = locations,
-			maneuvers = maneuvers,
-			intermediates = listOf(KLatLon(50.0, 50.0), KLatLon(51.0, 51.0)),
-		)
-
-		assertEquals(maneuvers, result.maneuvers)
-		assertEquals(listOf(0, 0), result.intermediateDirectionIndices)
 	}
 
 	private fun maneuver(

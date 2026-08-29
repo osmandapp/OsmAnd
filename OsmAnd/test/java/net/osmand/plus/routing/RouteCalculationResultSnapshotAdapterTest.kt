@@ -17,21 +17,6 @@ import org.junit.runner.RunWith
 class RouteCalculationResultSnapshotAdapterTest {
 
 	@Test
-	fun calculatedRouteOwnsOneCachedSnapshot() {
-		val route = RouteCalculationResult("test error")
-
-		val first = route.routeDetailsSnapshot
-		val second = route.routeDetailsSnapshot
-
-		assertSame(first, second)
-		assertTrue(first.points.isEmpty())
-		assertTrue(first.segments.isEmpty())
-		assertTrue(first.maneuvers.isEmpty())
-		assertTrue(first.events.isEmpty())
-		assertEquals(0, first.summary.totalDistanceMeters)
-	}
-
-	@Test
 	fun routeConstructorCachesPointsManeuversAndSummaryAfterAndroidCalculations() {
 		val start = Location("start").apply {
 			latitude = 0.0

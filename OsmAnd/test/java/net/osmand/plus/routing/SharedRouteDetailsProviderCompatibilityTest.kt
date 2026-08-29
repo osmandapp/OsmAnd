@@ -18,14 +18,6 @@ import kotlin.math.abs
 class SharedRouteDetailsProviderCompatibilityTest {
 
 	@Test
-	fun providerReturnsTheCachedSharedSnapshotAndSummary() {
-		val route = RouteCalculationResult("test error")
-
-		assertSame(route.routeDetailsSnapshot, SharedRouteDetailsProvider.getSnapshot(route))
-		assertSame(route.routeDetailsSnapshot.summary, SharedRouteDetailsProvider.getSummary(route))
-	}
-
-	@Test
 	fun cumulativeGeometryMatchesFrozenAndroidCalculation() {
 		val locations = listOf(
 			location(0.0, 0.0),

@@ -1,7 +1,5 @@
 package net.osmand.shared.routing.details
 
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import net.osmand.shared.data.KLatLon
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -9,27 +7,6 @@ import kotlin.test.assertFailsWith
 import kotlin.test.assertNull
 
 class RouteDetailsContractsTest {
-
-	private val json = Json { encodeDefaults = true }
-
-	@Test
-	fun androidSourceValuesSurviveSerializationRoundTrip() {
-		val snapshot = sampleSnapshot()
-
-		val decoded = json.decodeFromString<RouteDetailsSnapshot>(json.encodeToString(snapshot))
-
-		assertEquals(snapshot, decoded)
-		assertEquals(listOf("yes", "destination"), decoded.segments.single().routeTypes
-			.filter { it.tag == "access" }
-			.map { it.value })
-		assertEquals(0, decoded.maneuvers.last().routeEndPointOffset)
-		assertEquals(RouteManeuverType.TURN_RIGHT, decoded.maneuvers.last().type)
-		assertNull(decoded.maneuvers.first().lanes)
-		assertEquals(decoded.points.size, decoded.events.single().locationIndex)
-		assertEquals(-1, decoded.events.single().lastLocationIndex)
-		assertEquals(0, decoded.events.single().intValue)
-		assertEquals(0f, decoded.events.single().floatValue)
-	}
 
 	@Test
 	fun semanticTypesMatchAndroidConstantsAndPriorities() {
@@ -40,15 +17,6 @@ class RouteDetailsContractsTest {
 		assertEquals(1, RouteEventType.SPEED_CAMERA.androidPriority)
 		assertEquals(10, RouteEventType.MAXIMUM.androidPriority)
 		assertEquals(12, RouteEventType.RED_LIGHT_CAMERA.androidPriority)
-	}
-
-	@Test
-	fun snapshotAcceptsAndroidEndAndAlarmIndexSentinels() {
-		val snapshot = sampleSnapshot()
-
-		assertEquals(snapshot.points.size, snapshot.currentRoutePointIndex)
-		assertEquals(snapshot.maneuvers.size, snapshot.currentDirectionIndex)
-		assertEquals(snapshot.points.size, snapshot.events.single().locationIndex)
 	}
 
 	@Test

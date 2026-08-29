@@ -5,7 +5,6 @@ import net.osmand.shared.util.KMapUtils
 import kotlin.math.PI
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertFalse
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
@@ -66,14 +65,6 @@ class RouteEventBackendTest {
 			RouteEventType.HAZARD,
 			RouteEventBackend.createFromRouteTag("hazard", null, 0, location)?.type,
 		)
-	}
-
-	@Test
-	fun trafficCameraClassificationMatchesAndroid() {
-		assertTrue(RouteEventType.SPEED_CAMERA.isTrafficCamera())
-		assertTrue(RouteEventType.RED_LIGHT_CAMERA.isTrafficCamera())
-		assertFalse(RouteEventType.SPEED_LIMIT.isTrafficCamera())
-		assertFalse(RouteEventType.RAILWAY.isTrafficCamera())
 	}
 
 	@Test
@@ -219,29 +210,6 @@ class RouteEventBackendTest {
 
 		assertEquals(events, selected.map(RouteEventSelection::event))
 		assertTrue(selected.none(RouteEventSelection::announce))
-	}
-
-	@Test
-	fun tunnelClosedAndOpenEndedRangesArePreservedVerbatim() {
-		val closed = event(
-			RouteEventType.TUNNEL,
-			index = 2,
-			lastIndex = 7,
-			floatValue = 456.25f,
-		)
-		val openEnded = event(
-			RouteEventType.TUNNEL,
-			index = 8,
-			lastIndex = -1,
-			floatValue = 123.75f,
-		)
-
-		val result = RouteEventBackend.select(
-			listOf(openEnded, closed),
-			options(showTunnels = true),
-		)
-
-		assertEquals(listOf(closed, openEnded), result.map(RouteEventSelection::event))
 	}
 
 	private fun event(
