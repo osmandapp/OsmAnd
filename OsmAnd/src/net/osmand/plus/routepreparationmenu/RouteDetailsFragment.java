@@ -1534,23 +1534,9 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		}
 	}
 
-	public static class CumulativeInfo {
-		public int distance;
-		public int time;
-
-		CumulativeInfo() {
-			distance = 0;
-			time = 0;
-		}
-	}
-
-	public static CumulativeInfo getRouteDirectionCumulativeInfo(int position, List<
+	public static RouteCumulativeInfo getRouteDirectionCumulativeInfo(int position, List<
 			RouteDirectionInfo> routeDirections) {
-		CumulativeInfo cumulativeInfo = new CumulativeInfo();
-		RouteCumulativeInfo sharedInfo = SharedRouteDetailsProvider.getCumulativeInfo(position, routeDirections);
-		cumulativeInfo.distance = sharedInfo.getDistanceMeters();
-		cumulativeInfo.time = sharedInfo.getTimeSeconds();
-		return cumulativeInfo;
+		return SharedRouteDetailsProvider.getCumulativeInfo(position, routeDirections);
 	}
 
 	public static String getTimeDescription(OsmandApplication app, RouteDirectionInfo model) {

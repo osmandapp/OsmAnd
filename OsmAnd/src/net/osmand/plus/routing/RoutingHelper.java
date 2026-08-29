@@ -332,7 +332,7 @@ public class RoutingHelper {
 	}
 
 	private void showRouteAlertsDebug(@NonNull RouteCalculationResult route) {
-		RouteDetailsSnapshot snapshot = SharedRouteDetailsProvider.getSnapshot(route);
+		RouteDetailsSnapshot snapshot = route.getRouteDetailsSnapshot();
 		String title = "Route alerts/warnings: " + snapshot.getEvents().size();
 		String details = formatRouteAlertsDebug(route, snapshot);
 		log.info(title + "\n" + details);

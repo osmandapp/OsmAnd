@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -24,6 +23,8 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.TurnPathHelper.RouteDrawable;
 import net.osmand.plus.views.mapwidgets.LanesDrawable;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.routing.details.RouteCumulativeInfo;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
@@ -125,9 +126,11 @@ public class RouteDirectionsCard extends MapBaseCard {
 			timeLabel.setText("");
 			row.setContentDescription("");
 		}
-		RouteDetailsFragment.CumulativeInfo cumulativeInfo = RouteDetailsFragment.getRouteDirectionCumulativeInfo(directionInfoIndex, directionsInfo);
-		cumulativeDistanceLabel.setText(OsmAndFormatter.getFormattedDistance(cumulativeInfo.distance, app));
-		cumulativeTimeLabel.setText(Algorithms.formatDuration(cumulativeInfo.time, app.accessibilityEnabled()));
+		RouteCumulativeInfo cumulativeInfo = RouteDetailsFragment.getRouteDirectionCumulativeInfo(directionInfoIndex, directionsInfo);
+		cumulativeDistanceLabel.setText(OsmAndFormatter.getFormattedDistance(
+				cumulativeInfo.getDistanceMeters(), app));
+		cumulativeTimeLabel.setText(Algorithms.formatDuration(
+				cumulativeInfo.getTimeSeconds(), app.accessibilityEnabled()));
 		row.setOnClickListener(v -> notifyButtonPressed(directionInfoIndex));
 		return row;
 	}
