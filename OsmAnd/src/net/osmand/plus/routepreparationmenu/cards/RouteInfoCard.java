@@ -16,16 +16,16 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.measurementtool.graph.CustomChartAdapter;
 import net.osmand.plus.measurementtool.graph.CustomChartAdapter.LegendViewType;
-import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
+import net.osmand.shared.routing.details.RouteStatistic;
 
 public class RouteInfoCard extends MapBaseCard {
-	private final RouteStatistics statistics;
+	private final RouteStatistic statistics;
 	private final GpxTrackAnalysis analysis;
 	private CustomChartAdapter graphAdapter;
 
 	private boolean showLegend;
 
-	public RouteInfoCard(MapActivity mapActivity, RouteStatistics statistics, GpxTrackAnalysis analysis) {
+	public RouteInfoCard(MapActivity mapActivity, RouteStatistic statistics, GpxTrackAnalysis analysis) {
 		super(mapActivity);
 		this.statistics = statistics;
 		this.analysis = analysis;
@@ -66,7 +66,7 @@ public class RouteInfoCard extends MapBaseCard {
 
 	private void updateHeader() {
 		TextView title = view.findViewById(R.id.info_type_title);
-		String name = AndroidUtils.getStringRouteInfoPropertyValue(app, statistics.name);
+		String name = AndroidUtils.getStringRouteInfoPropertyValue(app, statistics.getName());
 		title.setText(name);
 	}
 

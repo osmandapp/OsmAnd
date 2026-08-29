@@ -10,7 +10,6 @@ import net.osmand.shared.routing.details.RouteAttributeClassificationRequest;
 import net.osmand.shared.routing.details.RouteAttributeClassifier;
 import net.osmand.shared.routing.details.RouteSegment;
 import net.osmand.shared.routing.details.RouteStatistic;
-import net.osmand.shared.routing.details.RouteStatisticElement;
 import net.osmand.shared.routing.details.RouteStatisticsCalculator;
 import net.osmand.util.Algorithms;
 
@@ -18,9 +17,7 @@ import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 public class RouteStatisticsHelper {
 
@@ -53,34 +50,7 @@ public class RouteStatisticsHelper {
 		BOUNDARIES_CLASS[NUM - 1] = "steepness="+MAX_DIVIDED_INCLINE+"_"+MAX_INCLINE;
 	}
 
-	public static class RouteStatistics {
-		public final List<RouteSegmentAttribute> elements;
-		public final Map<String, RouteSegmentAttribute> partition;
-		public final float totalDistance;
-		public final String name;
-
-		private RouteStatistics(String name, List<RouteSegmentAttribute> elements,
-								Map<String, RouteSegmentAttribute> partition,
-								float totalDistance) {
-			this.name = name.startsWith(ROUTE_INFO_PREFIX) ? name.substring(ROUTE_INFO_PREFIX.length()) : name;
-			this.elements = elements;
-			this.partition = partition;
-			this.totalDistance = totalDistance;
-		}
-		
-		@Override
-		public String toString() {
-			StringBuilder s  = new StringBuilder("Statistic '").append(name).append("':");
-			for (RouteSegmentAttribute a : elements) {
-				s.append(String.format(" %.0fm %s,", a.distance, a.getUserPropertyName()));
-			}
-			s.append("\n  Partition: ").append(partition);
-			return s.toString();
-		}
-	}
-	
-
-	public static List<RouteStatistics> calculateRouteStatistic(List<RouteSegmentResult> route,
+	public static List<RouteStatistic> calculateRouteStatistic(List<RouteSegmentResult> route,
 	                                                            RenderingRulesStorage currentRenderer,
 	                                                            RenderingRulesStorage defaultRenderer,
 	                                                            RenderingRuleSearchRequest currentSearchRequest,
@@ -89,7 +59,7 @@ public class RouteStatisticsHelper {
 				currentSearchRequest, defaultSearchRequest);
 	}
 
-	public static List<RouteStatistics> calculateRouteStatistic(List<RouteSegmentResult> route,
+	public static List<RouteStatistic> calculateRouteStatistic(List<RouteSegmentResult> route,
 	                                                            List<String> attributesNames,
 	                                                            RenderingRulesStorage currentRenderer,
 	                                                            RenderingRulesStorage defaultRenderer,
@@ -107,7 +77,7 @@ public class RouteStatisticsHelper {
 			// without reconstructing RouteCalculationResult's point-aligned segment list here.
 			sharedRoute.add(RouteSegmentResultSnapshotAdapter.toSnapshot(route.get(i), i, i));
 		}
-		List<RouteStatistic> sharedStatistics = RouteStatisticsCalculator.INSTANCE.calculate(
+		return RouteStatisticsCalculator.INSTANCE.calculate(
 				sharedRoute,
 				attributesNames,
 				new SharedRouteAttributeClassifier(
@@ -115,38 +85,6 @@ public class RouteStatisticsHelper {
 						defaultRenderer,
 						currentSearchRequest,
 						defaultSearchRequest));
-		return toCompatibilityStatistics(sharedStatistics);
-	}
-
-	private static List<RouteStatistics> toCompatibilityStatistics(List<RouteStatistic> sharedStatistics) {
-		List<RouteStatistics> result = new ArrayList<>(sharedStatistics.size());
-		for (RouteStatistic statistic : sharedStatistics) {
-			List<RouteSegmentAttribute> elements = toCompatibilityAttributes(statistic.getElements());
-			Map<String, RouteSegmentAttribute> partition = new LinkedHashMap<>();
-			for (RouteSegmentAttribute attribute : toCompatibilityAttributes(statistic.getPartition())) {
-				partition.put(attribute.getUserPropertyName(), attribute);
-			}
-			result.add(new RouteStatistics(
-					statistic.getName(),
-					elements,
-					partition,
-					statistic.getTotalDistanceMeters()));
-		}
-		return result;
-	}
-
-	private static List<RouteSegmentAttribute> toCompatibilityAttributes(List<RouteStatisticElement> sharedAttributes) {
-		List<RouteSegmentAttribute> result = new ArrayList<>(sharedAttributes.size());
-		for (RouteStatisticElement sharedAttribute : sharedAttributes) {
-			RouteSegmentAttribute attribute = new RouteSegmentAttribute(
-					sharedAttribute.getPropertyName(),
-					sharedAttribute.getColor(),
-					-1);
-			attribute.setUserPropertyName(sharedAttribute.getUserPropertyName());
-			attribute.incrementDistanceBy(sharedAttribute.getDistanceMeters());
-			result.add(attribute);
-		}
-		return result;
 	}
 
 	/** Keeps Android rendering objects outside common code while preserving current/default fallback. */

@@ -81,7 +81,6 @@ import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RouteStatisticsHelper;
-import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
 import net.osmand.router.TransportRouteResult;
 import net.osmand.shared.gpx.GpxFile;
@@ -89,6 +88,7 @@ import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.routing.details.RouteCumulativeInfo;
+import net.osmand.shared.routing.details.RouteStatistic;
 import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
@@ -336,10 +336,10 @@ public class RouteDetailsFragment extends ContextMenuFragment
 
 		List<RouteSegmentResult> route = app.getRoutingHelper().getRoute().getOriginalRoute();
 		if (route != null) {
-			List<RouteStatistics> routeStatistics = calculateRouteStatistics(app, route, isNightMode());
+			List<RouteStatistic> routeStatistics = calculateRouteStatistics(app, route, isNightMode());
 			GpxTrackAnalysis analysis = gpxFile.getAnalysis(0);
 
-			for (RouteStatistics statistic : routeStatistics) {
+			for (RouteStatistic statistic : routeStatistics) {
 				RouteInfoCard routeClassCard = new RouteInfoCard(mapActivity, statistic, analysis);
 				addRouteCard(cardsContainer, routeClassCard);
 			}
@@ -369,7 +369,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		return adapters;
 	}
 
-	public static List<RouteStatistics> calculateRouteStatistics(OsmandApplication app,
+	public static List<RouteStatistic> calculateRouteStatistics(OsmandApplication app,
 	                                                             List<RouteSegmentResult> route,
 	                                                             boolean nightMode) {
 		RenderingRulesStorage currentRenderer = app.getRendererRegistry().getCurrentSelectedRenderer();

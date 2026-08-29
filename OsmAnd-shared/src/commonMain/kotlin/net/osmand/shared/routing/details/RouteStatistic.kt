@@ -2,7 +2,7 @@ package net.osmand.shared.routing.details
 
 import kotlinx.serialization.Serializable
 
-/** Immutable copy of Android `RouteStatisticsHelper.RouteSegmentAttribute`. */
+/** One immutable route-statistics classification and its covered distance. */
 @Serializable
 data class RouteStatisticElement(
 	val propertyName: String,
@@ -18,8 +18,8 @@ data class RouteStatisticElement(
 }
 
 /**
- * Immutable copy of Android `RouteStatisticsHelper.RouteStatistics`.
- * [partition] is a list so the legacy `LinkedHashMap` order is retained during serialization.
+ * Shared aggregate route statistics.
+ * [partition] is a list so renderer-defined display order is retained during serialization.
  */
 @Serializable
 data class RouteStatistic(

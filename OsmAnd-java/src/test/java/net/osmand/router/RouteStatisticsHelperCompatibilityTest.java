@@ -6,7 +6,8 @@ import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteStatisticsHelper.RouteSegmentAttribute;
 import net.osmand.router.RouteStatisticsHelper.RouteStatisticComputer;
-import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
+import net.osmand.shared.routing.details.RouteStatistic;
+import net.osmand.shared.routing.details.RouteStatisticElement;
 
 import org.junit.Test;
 
@@ -43,7 +44,7 @@ public class RouteStatisticsHelperCompatibilityTest {
 				segment(region, 20f, new int[]{1, 3}, new float[0]),
 				segment(region, 40f, new int[]{1, 3}, new float[0]));
 
-		List<RouteStatistics> result = RouteStatisticsHelper.calculateRouteStatistic(
+		List<RouteStatistic> result = RouteStatisticsHelper.calculateRouteStatistic(
 				route,
 				Arrays.asList("routeInfo_surface", "routeInfo_roadClass", "routeInfo_missing"),
 				currentRenderer,
@@ -52,7 +53,7 @@ public class RouteStatisticsHelperCompatibilityTest {
 				new RenderingRuleSearchRequest(defaultRenderer));
 
 		assertEquals(Arrays.asList("surface", "roadClass"),
-				Arrays.asList(result.get(0).name, result.get(1).name));
+				Arrays.asList(result.get(0).getName(), result.get(1).getName()));
 		assertStatistic(
 				result.get(0),
 				90f,
@@ -63,8 +64,8 @@ public class RouteStatisticsHelperCompatibilityTest {
 				90f,
 				Arrays.asList("street:30.0", "primary:60.0"),
 				Arrays.asList("primary:60.0", "street:30.0"));
-		assertEquals(0xFF112233, result.get(0).elements.get(0).getColor());
-		assertEquals(0, result.get(0).elements.get(1).getColor());
+		assertEquals(0xFF112233, result.get(0).getElements().get(0).getColor());
+		assertEquals(0, result.get(0).getElements().get(1).getColor());
 
 		RouteStatisticComputer legacyClassifier = new RouteStatisticComputer(
 				currentRenderer,
@@ -73,10 +74,10 @@ public class RouteStatisticsHelperCompatibilityTest {
 				new RenderingRuleSearchRequest(defaultRenderer));
 		assertAttributeEquals(
 				legacyClassifier.classifySegment("routeInfo_surface", -1, route.get(0).getObject()),
-				result.get(0).elements.get(0));
+				result.get(0).getElements().get(0));
 		assertAttributeEquals(
 				legacyClassifier.classifySegment("routeInfo_surface", -1, route.get(1).getObject()),
-				result.get(0).elements.get(1));
+				result.get(0).getElements().get(1));
 	}
 
 	@Test
@@ -93,7 +94,7 @@ public class RouteStatisticsHelperCompatibilityTest {
 				new int[0],
 				new float[]{0f, 0f, 110f, 22f});
 
-		RouteStatistics result = RouteStatisticsHelper.calculateRouteStatistic(
+		RouteStatistic result = RouteStatisticsHelper.calculateRouteStatistic(
 				Collections.singletonList(segment),
 				Collections.singletonList("routeInfo_steepness"),
 				renderer,
@@ -101,7 +102,7 @@ public class RouteStatisticsHelperCompatibilityTest {
 				new RenderingRuleSearchRequest(renderer),
 				new RenderingRuleSearchRequest(renderer)).get(0);
 
-		assertEquals("steepness", result.name);
+		assertEquals("steepness", result.getName());
 		assertStatistic(
 				result,
 				110f,
@@ -143,24 +144,24 @@ public class RouteStatisticsHelperCompatibilityTest {
 		return segment;
 	}
 
-	private static void assertStatistic(RouteStatistics statistic,
+	private static void assertStatistic(RouteStatistic statistic,
 	                                    float totalDistance,
 	                                    List<String> elements,
 	                                    List<String> partition) {
-		assertEquals(totalDistance, statistic.totalDistance, 0f);
-		assertEquals(elements, attributes(statistic.elements));
-		assertEquals(partition, attributes(statistic.partition.values()));
+		assertEquals(totalDistance, statistic.getTotalDistanceMeters(), 0f);
+		assertEquals(elements, attributes(statistic.getElements()));
+		assertEquals(partition, attributes(statistic.getPartition()));
 	}
 
-	private static List<String> attributes(Iterable<RouteSegmentAttribute> attributes) {
+	private static List<String> attributes(Iterable<RouteStatisticElement> attributes) {
 		java.util.ArrayList<String> result = new java.util.ArrayList<>();
-		for (RouteSegmentAttribute attribute : attributes) {
-			result.add(attribute.getUserPropertyName() + ":" + attribute.getDistance());
+		for (RouteStatisticElement attribute : attributes) {
+			result.add(attribute.getUserPropertyName() + ":" + attribute.getDistanceMeters());
 		}
 		return result;
 	}
 
-	private static void assertAttributeEquals(RouteSegmentAttribute expected, RouteSegmentAttribute actual) {
+	private static void assertAttributeEquals(RouteSegmentAttribute expected, RouteStatisticElement actual) {
 		assertEquals(expected.getPropertyName(), actual.getPropertyName());
 		assertEquals(expected.getColor(), actual.getColor());
 	}

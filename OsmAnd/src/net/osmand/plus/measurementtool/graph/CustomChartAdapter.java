@@ -30,15 +30,15 @@ import net.osmand.plus.palette.view.PaletteElements;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.router.RouteStatisticsHelper.RouteSegmentAttribute;
-import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
+import net.osmand.shared.routing.details.RouteStatistic;
+import net.osmand.shared.routing.details.RouteStatisticElement;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class CustomChartAdapter extends BaseChartAdapter<HorizontalBarChart, BarData, RouteStatistics> {
+public class CustomChartAdapter extends BaseChartAdapter<HorizontalBarChart, BarData, RouteStatistic> {
 
 	private String selectedPropertyName;
 	private LegendViewType legendViewType;
@@ -65,7 +65,7 @@ public class CustomChartAdapter extends BaseChartAdapter<HorizontalBarChart, Bar
 					return;
 				}
 
-				List<RouteSegmentAttribute> elems = getStatistics().elements;
+				List<RouteStatisticElement> elems = getStatistics().getElements();
 				int i = h.getStackIndex();
 				if (i >= 0 && elems.size() > i) {
 					selectedPropertyName = elems.get(i).getPropertyName();
@@ -112,11 +112,11 @@ public class CustomChartAdapter extends BaseChartAdapter<HorizontalBarChart, Bar
 
 	@Override
 	protected void attachBottomInfo() {
-		List<RouteSegmentAttribute> attributes = getSegmentsList();
+		List<RouteStatisticElement> attributes = getSegmentsList();
 		if (legendViewType == ALL_AS_LIST) {
 			attachLegend(attributes, selectedPropertyName);
 		} else if (legendViewType == ONE_ELEMENT) {
-			for (RouteSegmentAttribute attribute : attributes) {
+			for (RouteStatisticElement attribute : attributes) {
 				if (attribute.getPropertyName().equals(selectedPropertyName)) {
 					attachLegend(Collections.singletonList(attribute), null);
 					break;
@@ -125,11 +125,11 @@ public class CustomChartAdapter extends BaseChartAdapter<HorizontalBarChart, Bar
 		}
 	}
 
-	private void attachLegend(List<RouteSegmentAttribute> list,
+	private void attachLegend(List<RouteStatisticElement> list,
 	                          String propertyNameToFullSpan) {
 		Context themedCtx = UiUtilities.getThemedContext(chart.getContext(), isNightMode());
 		LayoutInflater inflater = LayoutInflater.from(themedCtx);
-		for (RouteSegmentAttribute segment : list) {
+		for (RouteStatisticElement segment : list) {
 			View view = inflater.inflate(R.layout.route_details_legend, bottomInfoContainer, false);
 			int segmentColor = segment.getColor();
 			Drawable circle = app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_circle, segmentColor);
@@ -152,9 +152,9 @@ public class CustomChartAdapter extends BaseChartAdapter<HorizontalBarChart, Bar
 	}
 
 	private Spannable getSpanLegend(@NonNull String title,
-	                                @NonNull RouteSegmentAttribute segment,
+	                                @NonNull RouteStatisticElement segment,
 	                                boolean fullSpan) {
-		String formattedDistance = OsmAndFormatter.getFormattedDistance(segment.getDistance(), app);
+		String formattedDistance = OsmAndFormatter.getFormattedDistance(segment.getDistanceMeters(), app);
 		title = Algorithms.capitalizeFirstLetter(title);
 		SpannableStringBuilder spannable = new SpannableStringBuilder(title);
 		spannable.append(": ");
@@ -166,12 +166,12 @@ public class CustomChartAdapter extends BaseChartAdapter<HorizontalBarChart, Bar
 	}
 
 	@NonNull
-	private List<RouteSegmentAttribute> getSegmentsList() {
-		return getStatistics() != null ? new ArrayList<>(getStatistics().partition.values()) : new ArrayList<>();
+	private List<RouteStatisticElement> getSegmentsList() {
+		return getStatistics() != null ? new ArrayList<>(getStatistics().getPartition()) : new ArrayList<>();
 	}
 
 	@Nullable
-	private RouteStatistics getStatistics() {
+	private RouteStatistic getStatistics() {
 		return additionalData;
 	}
 }
