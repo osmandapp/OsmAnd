@@ -20,6 +20,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,9 +29,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.Collator;
 import net.osmand.IndexConstants;
-import net.osmand.OsmAndCollator;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -50,8 +49,9 @@ import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadResourceGroup;
-import net.osmand.plus.download.DownloadResourceGroupType;
 import net.osmand.plus.download.DownloadResources;
+import net.osmand.plus.download.DownloadSearchHelper;
+import net.osmand.plus.download.DownloadSearchHelper.SectionHeader;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -68,11 +68,8 @@ import java.io.RandomAccessFile;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 public class SearchDialogFragment extends BaseFullScreenDialogFragment implements DownloadEvents,
@@ -302,8 +299,14 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 
 	private class SearchListAdapter extends BaseAdapter implements Filterable {
 
+		private static final int ITEM_VIEW_TYPE = 0;
+		private static final int GROUP_VIEW_TYPE = 1;
+		private static final int HEADER_VIEW_TYPE = 2;
+		private static final int VIEW_TYPES_COUNT = 3;
+
 		private SearchIndexFilter mFilter;
 		private final OsmandRegions osmandRegions;
+		private final DownloadSearchHelper searchHelper;
 
 		private final List<Object> items = new LinkedList<>();
 		private final DownloadActivity ctx;
@@ -311,6 +314,7 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 		public SearchListAdapter(DownloadActivity ctx) {
 			this.ctx = ctx;
 			this.osmandRegions = ctx.getApp().getRegions();
+			this.searchHelper = new DownloadSearchHelper(ctx, osmandRegions, showGroup, downloadTypesToShow);
 			TypedArray ta = ctx.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
 			ta.recycle();
 		}
@@ -338,22 +342,41 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 		@Override
 		public int getItemViewType(int position) {
 			Object obj = items.get(position);
-			if (obj instanceof IndexItem || obj instanceof CityItem) {
-				return 0;
+			if (obj instanceof SectionHeader) {
+				return HEADER_VIEW_TYPE;
+			} else if (obj instanceof IndexItem || obj instanceof CityItem) {
+				return ITEM_VIEW_TYPE;
 			} else {
-				return 1;
+				return GROUP_VIEW_TYPE;
 			}
 		}
 
 		@Override
 		public int getViewTypeCount() {
-			return 2;
+			return VIEW_TYPES_COUNT;
+		}
+
+		@Override
+		public boolean areAllItemsEnabled() {
+			return false;
+		}
+
+		@Override
+		public boolean isEnabled(int position) {
+			return !(items.get(position) instanceof SectionHeader);
 		}
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			Object obj = items.get(position);
-			if (obj instanceof IndexItem || obj instanceof CityItem) {
+			if (obj instanceof SectionHeader header) {
+				if (convertView == null) {
+					convertView = LayoutInflater.from(parent.getContext()).inflate(
+							R.layout.download_item_list_section, parent, false);
+				}
+				TextView title = convertView.findViewById(R.id.title);
+				title.setText(header.getTitle(ctx));
+			} else if (obj instanceof IndexItem || obj instanceof CityItem) {
 
 				ItemViewHolder viewHolder;
 				if (convertView != null && convertView.getTag() instanceof ItemViewHolder) {
@@ -363,10 +386,12 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 							R.layout.two_line_with_images_list_item, parent, false);
 					viewHolder = new ItemViewHolder(convertView, getDownloadActivity());
 					viewHolder.setShowRemoteDate(true);
+					viewHolder.setShowRegionInDescription(true);
 					convertView.setTag(viewHolder);
 				}
+				viewHolder.setShowTypeInDesc(true);
+				viewHolder.setRegionName(searchHelper.getSubtitle(obj));
 				if (obj instanceof IndexItem item) {
-					viewHolder.setShowTypeInDesc(true);
 					viewHolder.bindDownloadItem(item);
 				} else {
 					CityItem item = (CityItem) obj;
@@ -381,12 +406,12 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 				if (convertView != null && convertView.getTag() instanceof DownloadGroupViewHolder) {
 					viewHolder = (DownloadGroupViewHolder) convertView.getTag();
 				}  else {
-					convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.simple_list_menu_item,
-							parent, false);
+					convertView = LayoutInflater.from(parent.getContext()).inflate(
+							R.layout.two_line_with_images_list_item, parent, false);
 					viewHolder = new DownloadGroupViewHolder(getDownloadActivity(), convertView);
 					convertView.setTag(viewHolder);
 				}
-				viewHolder.bindItem(group);
+				viewHolder.bindItem(group, searchHelper.getSubtitle(group));
 			}
 			return convertView;
 		}
@@ -405,6 +430,10 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 			return mFilter;
 		}
 
+		/**
+		 * Finds the map covering the city. Cities that could duplicate an already listed map are
+		 * resolved by the search itself, the rest are resolved here, when they are displayed.
+		 */
 		class IndexItemResolverTask extends AsyncTask<Void, Void, IndexItem> {
 			private final WeakReference<ItemViewHolder> viewHolderReference;
 			private final CityItem cityItem;
@@ -420,7 +449,7 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 				WorldRegion downloadRegion = null;
 				try {
 					Map.Entry<WorldRegion, BinaryMapDataObject> res = osmandRegions.getSmallestBinaryMapDataObjectAt(amenity.getLocation());
-					if(res != null) {
+					if (res != null) {
 						downloadRegion = res.getKey();
 					}
 				} catch (IOException e) {
@@ -443,87 +472,23 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 					return;
 				}
 				ItemViewHolder viewHolder = viewHolderReference.get();
-				if (viewHolder != null) {
-					if (indexItem != null) {
-						cityItem.setIndexItem(indexItem);
-						viewHolder.bindDownloadItem(indexItem, cityItem.getName());
-					}
+				if (viewHolder != null && indexItem != null) {
+					cityItem.setIndexItem(indexItem);
+					viewHolder.setRegionName(searchHelper.getSubtitle(cityItem));
+					viewHolder.bindDownloadItem(indexItem, cityItem.getName());
 				}
 			}
 		}
 
 		private final class SearchIndexFilter extends Filter {
 
-			private final OsmandRegions osmandRegions;
 			private final int searchCityLimit = 10000;
 			private final List<String> citySubTypes = Arrays.asList("city", "town");
 			private SearchRequest<Amenity> searchCityRequest;
 
-			public SearchIndexFilter() {
-				this.osmandRegions = ctx.getApp().getRegions();
-			}
-
 			public void cancelFilter() {
 				if (searchCityRequest != null) {
 					searchCityRequest.setInterrupted(true);
-				}
-			}
-
-			private void processGroup(DownloadResourceGroup group, List<Object> filter, List<List<String>> conds) {
-				String name = null;
-				if (group.getRegion() != null && group.getRegion().getRegionSearchText() != null) {
-					name = group.getRegion().getRegionSearchText().toLowerCase(Locale.US);
-				}
-				if (name == null) {
-					name = group.getName(ctx).toLowerCase(Locale.US);
-				}
-				if (group.getType().isScreen() && group.getParentGroup() != null
-						&& group.getParentGroup().getParentGroup() != null
-						&& group.getParentGroup().getParentGroup().getType() != DownloadResourceGroupType.WORLD
-						&& isMatch(conds, false, name)) {
-
-					if (showGroup) {
-						filter.add(group);
-					}
-
-					for (DownloadResourceGroup g : group.getGroups()) {
-						if (g.getType() == DownloadResourceGroupType.REGION_MAPS) {
-							if (g.getIndividualResources() != null) {
-								for (IndexItem item : g.getIndividualResources()) {
-									for (String fileTypeTag : downloadTypesToShow) {
-										DownloadActivityType type = DownloadActivityType.getIndexType(fileTypeTag);
-										if (type != null && type == item.getType()) {
-											filter.add(item);
-										}
-									}
-								}
-							}
-							break;
-						}
-					}
-				}
-
-				// process other maps & voice prompts & astronomy maps
-				if (group.getType() == DownloadResourceGroupType.OTHER_MAPS_HEADER
-						|| group.getType() == DownloadResourceGroupType.ASTRONOMY_HEADER
-						|| group.getType() == DownloadResourceGroupType.VOICE_HEADER_REC
-						|| group.getType() == DownloadResourceGroupType.VOICE_HEADER_TTS
-						|| group.getType() == DownloadResourceGroupType.FONTS_HEADER) {
-					if (group.getIndividualResources() != null) {
-						for (IndexItem item : group.getIndividualResources()) {
-							name = item.getVisibleName(ctx, osmandRegions, false).toLowerCase(Locale.US);
-							if (isMatch(conds, false, name)) {
-								filter.add(item);
-								break;
-							}
-						}
-					}
-				}
-
-				if (group.getGroups() != null) {
-					for (DownloadResourceGroup g : group.getGroups()) {
-						processGroup(g, filter, conds);
-					}
 				}
 			}
 
@@ -623,66 +588,16 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 					results.values = new ArrayList<>();
 					results.count = 0;
 				} else {
-					List<Object> filter = new ArrayList<>();
+					List<CityItem> cities = new ArrayList<>();
 					if (searchRequest.length() > 2) {
 						try {
-							filter.addAll(searchCities(searchRequest));
+							cities.addAll(searchCities(searchRequest));
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
 					}
-
-					String[] ors = searchRequest.split(",");
-					List<List<String>> conds = new ArrayList<>();
-					for (String or : ors) {
-						ArrayList<String> cond = new ArrayList<>();
-						for (String term : or.split("\\s")) {
-							String t = term.trim().toLowerCase(Locale.US);
-							if (t.length() > 0) {
-								cond.add(t);
-							}
-						}
-						if (cond.size() > 0) {
-							conds.add(cond);
-						}
-					}
-
 					DownloadResources indexes = ctx.getDownloadThread().getIndexes();
-					processGroup(indexes, filter, conds);
-
-					Collator collator = OsmAndCollator.primaryCollator();
-					Collections.sort(filter, new Comparator<Object>() {
-						@Override
-						public int compare(Object obj1, Object obj2) {
-							String str1;
-							String str2;
-							if (obj1 instanceof DownloadResourceGroup) {
-								str1 = ((DownloadResourceGroup) obj1).getName(ctx);
-							} else if (obj1 instanceof IndexItem) {
-								str1 = ((IndexItem) obj1).getVisibleName(app, osmandRegions, false);
-							} else {
-								Amenity a = ((CityItem) obj1).getAmenity();
-								if ("city".equals(a.getSubType())) {
-									str1 = "!" + ((CityItem) obj1).getName();
-								} else {
-									str1 = ((CityItem) obj1).getName();
-								}
-							}
-							if (obj2 instanceof DownloadResourceGroup) {
-								str2 = ((DownloadResourceGroup) obj2).getName(ctx);
-							} else if (obj2 instanceof IndexItem) {
-								str2 = ((IndexItem) obj2).getVisibleName(app, osmandRegions, false);
-							} else {
-								Amenity a = ((CityItem) obj2).getAmenity();
-								if ("city".equals(a.getSubType())) {
-									str2 = "!" + ((CityItem) obj2).getName();
-								} else {
-									str2 = ((CityItem) obj2).getName();
-								}
-							}
-							return collator.compare(str1, str2);
-						}
-					});
+					List<Object> filter = searchHelper.search(indexes, searchRequest, cities);
 
 					results.values = filter;
 					results.count = filter.size();
@@ -691,26 +606,6 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 				app.runInUIThread(SearchDialogFragment.this::hideProgressBar);
 
 				return results;
-			}
-
-			private boolean isMatch(List<List<String>> conditions, boolean matchByDefault, String text) {
-				boolean res = matchByDefault;
-				for (List<String> or : conditions) {
-					boolean tadd = true;
-					for (String var : or) {
-						if (!text.contains(var)) {
-							tadd = false;
-							break;
-						}
-					}
-					if (!tadd) {
-						res = false;
-					} else {
-						res = true;
-						break;
-					}
-				}
-				return res;
 			}
 
 			@SuppressWarnings("unchecked")

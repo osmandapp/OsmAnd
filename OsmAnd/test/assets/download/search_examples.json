@@ -1,0 +1,148 @@
+{
+  "comment": [
+    "Examples for DownloadSearchHelperTest: what the 'Maps & Resources' search results screen shows for a query.",
+    "'resources' is the catalog of downloadable files the search runs against, region names are resolved with the real regions.ocbf.",
+    "Every 'screen' entry is one row of the list: '[Header]' for a section header,",
+    "'Title' for a row without a second line and 'Title | Subtitle' for a row with the region shown in the second line."
+  ],
+  "resources": [
+    "Germany_berlin_europe_2.obf.zip",
+    "Germany_brandenburg_europe_2.obf.zip",
+    "US_new-hampshire_northamerica_2.obf.zip"
+  ],
+  "examples": [
+    {
+      "name": "Regions and maps with the same name are split into two sections",
+      "query": "berlin",
+      "screen": [
+        "[Regions]",
+        "Berlin | Germany",
+        "Brandenburg, Berlin | Germany",
+        "[Maps]",
+        "Berlin | Germany",
+        "Brandenburg, Berlin | Germany"
+      ]
+    },
+    {
+      "name": "Country is shown in the second line, so equally named maps could be distinguished",
+      "query": "hampshire",
+      "screen": [
+        "[Regions]",
+        "New Hampshire | United States",
+        "[Maps]",
+        "New Hampshire | United States"
+      ]
+    },
+    {
+      "name": "Countries themselves have no second line",
+      "query": "germany",
+      "screen": [
+        "[Regions]",
+        "Germany"
+      ]
+    },
+    {
+      "name": "Comma separated terms are searched independently",
+      "query": "berlin, hampshire",
+      "screen": [
+        "[Regions]",
+        "Berlin | Germany",
+        "Brandenburg, Berlin | Germany",
+        "New Hampshire | United States",
+        "[Maps]",
+        "Berlin | Germany",
+        "Brandenburg, Berlin | Germany",
+        "New Hampshire | United States"
+      ]
+    },
+    {
+      "name": "Space separated terms must all be present in the name",
+      "query": "new hampshire",
+      "screen": [
+        "[Regions]",
+        "New Hampshire | United States",
+        "[Maps]",
+        "New Hampshire | United States"
+      ]
+    },
+    {
+      "name": "Cities found in the world basemap are listed among the maps with the map region in the second line",
+      "query": "berlin",
+      "cities": [
+        {
+          "name": "Berlin",
+          "subType": "city",
+          "map": "US_new-hampshire_northamerica_2.obf.zip"
+        }
+      ],
+      "screen": [
+        "[Regions]",
+        "Berlin | Germany",
+        "Brandenburg, Berlin | Germany",
+        "[Maps]",
+        "Berlin | New Hampshire",
+        "Berlin | Germany",
+        "Brandenburg, Berlin | Germany"
+      ]
+    },
+    {
+      "name": "A city is not repeated when the map covering it is already listed",
+      "query": "berlin",
+      "cities": [
+        {
+          "name": "Berlin",
+          "subType": "city",
+          "map": "Germany_berlin_europe_2.obf.zip"
+        }
+      ],
+      "screen": [
+        "[Regions]",
+        "Berlin | Germany",
+        "Brandenburg, Berlin | Germany",
+        "[Maps]",
+        "Berlin | Germany",
+        "Brandenburg, Berlin | Germany"
+      ]
+    },
+    {
+      "name": "Two cities covered by the same map produce a single row",
+      "query": "berlin",
+      "cities": [
+        {
+          "name": "Berlin",
+          "subType": "city",
+          "map": "US_new-hampshire_northamerica_2.obf.zip"
+        },
+        {
+          "name": "Berlin",
+          "subType": "town",
+          "map": "US_new-hampshire_northamerica_2.obf.zip"
+        }
+      ],
+      "screen": [
+        "[Regions]",
+        "Berlin | Germany",
+        "Brandenburg, Berlin | Germany",
+        "[Maps]",
+        "Berlin | New Hampshire",
+        "Berlin | Germany",
+        "Brandenburg, Berlin | Germany"
+      ]
+    },
+    {
+      "name": "Regions are hidden when the search is opened for a single download type",
+      "query": "berlin",
+      "showGroup": false,
+      "screen": [
+        "[Maps]",
+        "Berlin | Germany",
+        "Brandenburg, Berlin | Germany"
+      ]
+    },
+    {
+      "name": "Nothing is shown when there are no matches",
+      "query": "atlantis",
+      "screen": []
+    }
+  ]
+}
