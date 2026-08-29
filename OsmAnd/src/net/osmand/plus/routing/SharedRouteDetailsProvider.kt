@@ -6,6 +6,7 @@ import net.osmand.data.LatLon
 import net.osmand.plus.R
 import net.osmand.router.TurnType
 import net.osmand.shared.routing.details.ILocationAccessor
+import net.osmand.shared.routing.details.IManeuverAccessor
 import net.osmand.shared.routing.details.IManeuverMetricsAccessor
 import net.osmand.shared.routing.details.RouteCumulativeInfo
 import net.osmand.shared.routing.details.RouteGeometryCalculator
@@ -34,15 +35,14 @@ object SharedRouteDetailsProvider {
 		directions: List<RouteDirectionInfo>,
 		distanceToFinishMeters: IntArray,
 	) {
-		val updated = RouteManeuverCalculator.updateDistancesAndTimes(
-			directions.map(RouteCalculationResultSnapshotAdapter::copyManeuver),
+		val update = RouteManeuverCalculator.calculateDistanceAndTimeUpdates(
+			ManeuverAccessor(directions),
 			distanceToFinishMeters,
 		)
 		for (index in directions.indices) {
 			val direction = directions[index]
-			val maneuver = updated[index]
-			direction.distance = maneuver.distanceMeters
-			direction.afterLeftTime = maneuver.afterLeftTimeSeconds
+			direction.distance = update.distanceMeters[index]
+			direction.afterLeftTime = update.afterLeftTimeSeconds[index]
 		}
 	}
 
@@ -61,39 +61,29 @@ object SharedRouteDetailsProvider {
 		directions: MutableList<RouteDirectionInfo>,
 		intermediatePoints: IntArray,
 	) {
-		if (intermediates == null) {
+		if (intermediates.isNullOrEmpty()) {
 			return
 		}
-		val originalManeuvers = directions.map(RouteCalculationResultSnapshotAdapter::copyManeuver)
 		val calculation = RouteManeuverCalculator.calculateIntermediateIndexesFromAccessors(
 			LocationAccessor(locations),
-			originalManeuvers,
+			ManeuverAccessor(directions),
 			LatLonAccessor(intermediates),
 		)
-		val updatedDirections = ArrayList<RouteDirectionInfo>(calculation.maneuvers.size)
-		var originalIndex = 0
-		for (maneuver in calculation.maneuvers) {
-			if (originalIndex < originalManeuvers.size &&
-				maneuver.routePointOffset == originalManeuvers[originalIndex].routePointOffset) {
-				updatedDirections.add(directions[originalIndex])
-				originalIndex++
-			} else {
-				val toSplit = directions[originalIndex]
-				updatedDirections.add(RouteDirectionInfo(
-					maneuver.averageSpeedMetersPerSecond,
-					TurnType.straight(),
-				).apply {
-					ref = maneuver.ref
-					streetName = maneuver.streetName
-					routeDataObject = toSplit.routeDataObject
-					destinationName = maneuver.destinationName
-					routePointOffset = maneuver.routePointOffset
-					setDescriptionRoute(requireNotNull(context).getString(R.string.route_head))
-				})
+		for (insertion in calculation.insertions) {
+			val toSplit = directions[insertion.directionIndex]
+			val direction = RouteDirectionInfo(
+				insertion.averageSpeedMetersPerSecond,
+				TurnType.straight(),
+			).apply {
+				ref = toSplit.ref
+				streetName = toSplit.streetName
+				routeDataObject = toSplit.routeDataObject
+				destinationName = toSplit.destinationName
+				routePointOffset = insertion.routePointOffset
+				setDescriptionRoute(requireNotNull(context).getString(R.string.route_head))
 			}
+			directions.add(insertion.directionIndex, direction)
 		}
-		directions.clear()
-		directions.addAll(updatedDirections)
 		calculation.intermediateDirectionIndices.forEachIndexed { index, directionIndex ->
 			intermediatePoints[index] = directionIndex
 		}
@@ -134,6 +124,17 @@ object SharedRouteDetailsProvider {
 		override fun getLatitude(index: Int): Double = locations[index].latitude
 
 		override fun getLongitude(index: Int): Double = locations[index].longitude
+	}
+
+	private class ManeuverAccessor(
+		private val directions: List<RouteDirectionInfo>,
+	) : IManeuverAccessor {
+		override fun getManeuversCount(): Int = directions.size
+
+		override fun getRoutePointOffset(index: Int): Int = directions[index].routePointOffset
+
+		override fun getAverageSpeedMetersPerSecond(index: Int): Float =
+			directions[index].averageSpeed
 	}
 
 	private class ManeuverMetricsAccessor(

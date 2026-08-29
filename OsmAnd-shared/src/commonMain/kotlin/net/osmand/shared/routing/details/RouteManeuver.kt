@@ -69,9 +69,10 @@ data class RouteExitInfo(
  * Android uses `0` as the ordinary default for [routeEndPointOffset]. It is therefore preserved
  * verbatim and is not required to follow [routePointOffset].
  *
- * [averageSpeedMetersPerSecond] also remains verbatim. Android's direction aggregation can produce
- * `NaN` for a zero-distance, zero-time group, and `RouteDirectionInfo.getExpectedTime()` preserves
- * Java's `Math.round(NaN) == 0` behavior.
+ * Floating-point values also remain verbatim. Android's direction aggregation can produce `NaN`
+ * for a zero-distance, zero-time group, and imported turn data may contain non-finite angles. The
+ * snapshot boundary must preserve those legacy values rather than rejecting a valid platform
+ * route while Route Details is being prepared.
  */
 @Serializable
 data class RouteManeuver(
@@ -105,7 +106,5 @@ data class RouteManeuver(
 		require(distanceMeters >= 0) { "Maneuver distance must not be negative" }
 		require(expectedTimeSeconds >= 0) { "Maneuver expected time must not be negative" }
 		require(afterLeftTimeSeconds >= 0) { "Maneuver time to finish must not be negative" }
-		require(turnAngleDegrees.isFinite()) { "Maneuver turn angle must be finite" }
-		require(otherTurnAngles?.all { it.isFinite() } != false) { "Other maneuver angles must be finite" }
 	}
 }
