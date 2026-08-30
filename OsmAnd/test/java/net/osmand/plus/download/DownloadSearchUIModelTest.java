@@ -14,6 +14,9 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
 import net.osmand.IndexConstants;
+import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.data.Amenity;
+import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
@@ -43,6 +46,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map.Entry;
 import java.util.Set;
 
 /**
@@ -147,6 +152,96 @@ public class DownloadSearchUIModelTest extends AndroidTest {
 		// the basemap knows a Berlin in Germany too, and it must not offer the same file again
 		assertScreenIsWellFormed("berlin", rows);
 		assertTrue("The cities may only add rows", withCities.containsAll(withoutCities));
+	}
+
+	/**
+	 * The screens in the examples are what the code produces, so they cannot tell whether it
+	 * produces the right thing. These cities and the country each of them is in are written down
+	 * from the map, not from a test run.
+	 */
+	@Test
+	public void citiesResolveToTheMapThatCoversThem() {
+		String[][] cities = {
+				// name, latitude, longitude, the country the city is in
+				{"Berlin", "52.5200", "13.4050", "Germany"},
+				{"Hamburg", "53.5511", "9.9937", "Germany"},
+				{"Berlin", "44.4687", "-71.1851", "United States"},
+				{"Washington", "38.9072", "-77.0369", "United States"},
+				{"New York", "40.7128", "-74.0060", "United States"},
+				{"San Francisco", "37.7749", "-122.4194", "United States"},
+				{"Kyiv", "50.4501", "30.5234", "Ukraine"},
+				{"Lviv", "49.8397", "24.0297", "Ukraine"},
+				{"Utrecht", "52.0907", "5.1214", "Netherlands"},
+				{"Amsterdam", "52.3676", "4.9041", "Netherlands"},
+				{"York", "53.9591", "-1.0815", "United Kingdom"},
+				{"Santo Domingo", "18.4861", "-69.9312", "Dominican Republic"},
+				{"Havana", "23.1136", "-82.3666", "Cuba"},
+				{"Geneva", "46.2044", "6.1432", "Switzerland"},
+		};
+		List<CityItem> items = new ArrayList<>();
+		for (String[] city : cities) {
+			items.add(cityAt(city[0], Double.parseDouble(city[1]), Double.parseDouble(city[2])));
+		}
+		resolve(items);
+
+		for (int i = 0; i < cities.length; i++) {
+			String[] expected = cities[i];
+			IndexItem item = items.get(i).getIndexItem();
+			assertNotNull(expected[0] + " is covered by no map", item);
+			WorldRegion country = regionOf(item).getCountryRegion();
+			assertNotNull(expected[0] + " resolved to " + item.getBasename() + ", which is in no country",
+					country);
+			assertEquals(expected[0] + " resolved to " + item.getBasename(),
+					expected[3], country.getLocaleName());
+		}
+	}
+
+	/**
+	 * The rows are built by walking the region tree in memory. {@code regions.ocbf} answers the
+	 * same question through its own quad tree, which is a separate implementation over the same
+	 * data, so the two must name the same map for every city.
+	 */
+	@Test
+	public void cityResolutionAgreesWithTheRegionFile() throws IOException {
+		DownloadSearchUIModel model = createModel(true);
+		List<CityItem> cities = new ArrayList<>();
+		for (String query : Arrays.asList("san", "port", "york")) {
+			cities.addAll(model.searchCities(query));
+		}
+		assertTrue("Nothing to cross check", cities.size() > 100);
+		resolve(cities);
+
+		for (CityItem city : cities) {
+			LatLon location = city.getAmenity().getLocation();
+			Entry<WorldRegion, BinaryMapDataObject> smallest =
+					regions.getSmallestBinaryMapDataObjectAt(location);
+			if (smallest == null) {
+				continue;
+			}
+			assertNotNull(city.getName() + " at " + location + " is covered by no map", city.getIndexItem());
+			assertEquals(city.getName() + " at " + location,
+					smallest.getKey().getRegionId(), regionOf(city.getIndexItem()).getRegionId());
+		}
+	}
+
+	/** Runs one search that resolves every city, with a request no region can match. */
+	private void resolve(@NonNull List<CityItem> cities) {
+		createModel(true).search(fullCatalog(), "-", cities);
+	}
+
+	@NonNull
+	private CityItem cityAt(@NonNull String name, double latitude, double longitude) {
+		Amenity amenity = new Amenity();
+		amenity.setSubType("city");
+		amenity.setLocation(latitude, longitude);
+		return new CityItem(name, amenity, null);
+	}
+
+	@NonNull
+	private WorldRegion regionOf(@NonNull IndexItem item) {
+		WorldRegion region = regions.getRegionDataByDownloadName(item.getBasename().toLowerCase(Locale.US));
+		assertNotNull("No region for " + item.getBasename(), region);
+		return region;
 	}
 
 	@Test

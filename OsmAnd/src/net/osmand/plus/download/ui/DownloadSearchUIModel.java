@@ -14,7 +14,9 @@ import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.Amenity;
+import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
@@ -44,6 +46,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -326,33 +329,63 @@ public class DownloadSearchUIModel {
 	private IndexItem resolveCityMap(@NonNull DownloadResources indexes, @NonNull CityItem city) {
 		Amenity amenity = city.getAmenity();
 		LatLon location = amenity != null ? amenity.getLocation() : null;
+		if (location == null) {
+			return null;
+		}
 		// the region boundaries are kept in memory, so the hundreds of cities a search finds are
 		// resolved without reading the region file once
-		return location != null ? findMapAt(indexes, osmandRegions.getWorldRegion(), location) : null;
+		IndexItem item = findMapAt(indexes, osmandRegions.getWorldRegion(), location, null);
+		return item != null ? item : readMapAt(indexes, location);
 	}
 
 	/**
-	 * Walks the region tree down to the smallest region containing the point and returns the map of
-	 * the first region on the way back that has one.
+	 * Only the biggest polygon of a region is kept in memory, so a point in a detached part of it -
+	 * Sanhe in Hebei, the islands of Sansha - is missed by the walk. Those few are looked up in the
+	 * region file, which holds every part.
+	 */
+	@Nullable
+	private IndexItem readMapAt(@NonNull DownloadResources indexes, @NonNull LatLon location) {
+		try {
+			Map.Entry<WorldRegion, BinaryMapDataObject> entry =
+					osmandRegions.getSmallestBinaryMapDataObjectAt(location);
+			return entry != null ? getStandardMap(indexes, entry.getKey()) : null;
+		} catch (IOException e) {
+			LOG.error(e.getMessage(), e);
+			return null;
+		}
+	}
+
+	/**
+	 * Walks the region tree and applies the rule of
+	 * {@link OsmandRegions#getSmallestBinaryMapDataObjectAt(LatLon)}: of all the regions covering
+	 * the point, the smallest one that can be downloaded wins. Taking the first one that matches
+	 * instead would offer the whole Caribbean archipelago map for a city in Cuba.
 	 */
 	@Nullable
 	private IndexItem findMapAt(@NonNull DownloadResources indexes, @NonNull WorldRegion region,
-	                            @NonNull LatLon location) {
+	                            @NonNull LatLon location, @Nullable IndexItem best) {
 		for (WorldRegion subregion : region.getSubregions()) {
 			// a region without boundaries only groups its subregions, look inside it anyway
-			boolean grouping = !subregion.hasBoundaries();
-			if (grouping || subregion.containsPoint(location)) {
-				IndexItem item = findMapAt(indexes, subregion, location);
-				if (item == null && !grouping) {
-					// the subregion is split into parts that have no map of their own
-					item = getStandardMap(indexes, subregion);
+			if (!subregion.hasBoundaries()) {
+				best = findMapAt(indexes, subregion, location, best);
+			} else if (subregion.containsPoint(location)) {
+				IndexItem item = getStandardMap(indexes, subregion);
+				if (item != null && (best == null || isSmaller(subregion, getItemRegion(best)))) {
+					best = item;
 				}
-				if (item != null) {
-					return item;
-				}
+				best = findMapAt(indexes, subregion, location, best);
 			}
 		}
-		return null;
+		return best;
+	}
+
+	private boolean isSmaller(@NonNull WorldRegion region, @Nullable WorldRegion than) {
+		return than == null || area(region) < area(than);
+	}
+
+	private static double area(@NonNull WorldRegion region) {
+		QuadRect bbox = region.getBoundingBox();
+		return bbox != null ? bbox.width() * bbox.height() : Double.MAX_VALUE;
 	}
 
 	@Nullable
