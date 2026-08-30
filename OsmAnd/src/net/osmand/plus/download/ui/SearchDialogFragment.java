@@ -563,12 +563,31 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 				}
 				if (indexItem != null) {
 					cityItem.setIndexItem(indexItem);
+					if (!items.contains(cityItem)) {
+						return;
+					}
+					if (removeDuplicateMapItem(indexItem)) {
+						notifyDataSetChanged();
+					}
 					SearchMapViewHolder viewHolder = viewHolderReference.get();
 					if (viewHolder != null && viewHolder.isBoundTo(cityItem)) {
 						viewHolder.bindCityItem(cityItem);
 					}
 				}
 			}
+		}
+
+		private boolean removeDuplicateMapItem(@NonNull IndexItem resolvedItem) {
+			for (int i = 0; i < items.size(); i++) {
+				Object item = items.get(i);
+				if (item instanceof IndexItem indexItem
+						&& indexItem.getType() == resolvedItem.getType()
+						&& Algorithms.stringsEqual(indexItem.getFileName(), resolvedItem.getFileName())) {
+					items.remove(i);
+					return true;
+				}
+			}
+			return false;
 		}
 
 		private final class SearchIndexFilter extends Filter {
@@ -603,11 +622,8 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 						&& isMatch(conds, false, name)) {
 
 					List<IndexItem> matchingMaps = new ArrayList<>();
-					boolean hasSubregions = false;
 					for (DownloadResourceGroup g : group.getGroups()) {
-						if (g.getGroups() != null) {
-							hasSubregions = hasSubregions || !g.isEmpty();
-						} else if (g.getType() == DownloadResourceGroupType.REGION_MAPS
+						if (g.getType() == DownloadResourceGroupType.REGION_MAPS
 								&& g.getIndividualResources() != null) {
 							for (IndexItem item : g.getIndividualResources()) {
 								for (String fileTypeTag : downloadTypesToShow) {
@@ -620,12 +636,10 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 						}
 					}
 
-					boolean hasMultipleResources = group.getAllDownloadItems().size() > 1;
-					if (showGroup && (hasSubregions || hasMultipleResources || matchingMaps.isEmpty())) {
+					if (showGroup) {
 						regions.add(group);
-					} else {
-						maps.addAll(matchingMaps);
 					}
+					maps.addAll(matchingMaps);
 				}
 
 				// process other maps & voice prompts & astronomy maps
