@@ -477,12 +477,13 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 				setShowTypeInDesc(true);
 				bindDownloadItem(item);
 				if (showGroup) {
-					tvName.setText(item.getVisibleName(ctx, osmandRegions, false));
+					String title = item.getVisibleName(ctx, osmandRegions, false);
+					tvName.setText(title);
 					WorldRegion region = osmandRegions.getRegionDataByDownloadName(
 							item.getBasename().toLowerCase(Locale.US));
 					WorldRegion parent = region != null ? region.getSuperregion() : null;
 					if (parent != null && !WorldRegion.WORLD.equals(parent.getRegionId())) {
-						setSecondaryDescription(parent.getLocaleName());
+						setTitleWithSecondaryLine(title, parent.getLocaleName());
 					}
 				}
 			}
@@ -493,13 +494,13 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 				if (indexItem != null) {
 					setShowTypeInDesc(true);
 					bindDownloadItem(indexItem);
-					tvName.setText(item.getName());
-					setSecondaryDescription(indexItem.getVisibleName(ctx, osmandRegions, false));
+					setTitleWithSecondaryLine(item.getName(),
+							indexItem.getVisibleName(ctx, osmandRegions, false));
 				} else {
 					bindDownloadItem(item);
 					btnRight.setVisibility(View.GONE);
 					ivBtnRight.setVisibility(View.GONE);
-					setSecondaryDescription(item.getAmenity().getRegionName());
+					setTitleWithSecondaryLine(item.getName(), item.getAmenity().getRegionName());
 				}
 			}
 
@@ -507,11 +508,8 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 				return boundCityItem == cityItem;
 			}
 
-			private void setSecondaryDescription(@Nullable String text) {
-				if (pbProgress.getVisibility() != View.VISIBLE && !Algorithms.isEmpty(text)) {
-					tvDesc.setText(text);
-					tvDesc.setVisibility(View.VISIBLE);
-				}
+			private void setTitleWithSecondaryLine(@NonNull String title, @Nullable String secondary) {
+				tvName.setText(Algorithms.isEmpty(secondary) ? title : title + "\n" + secondary);
 			}
 		}
 
