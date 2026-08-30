@@ -2,9 +2,12 @@ package net.osmand.plus.download.ui;
 
 import android.graphics.drawable.Drawable;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.plugins.custom.CustomRegion;
@@ -16,6 +19,8 @@ import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.DownloadResourceGroupType;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.util.Algorithms;
 
 public class DownloadGroupViewHolder {
 
@@ -23,9 +28,17 @@ public class DownloadGroupViewHolder {
 
 	private final TextView textView;
 
+	// present only in the two line layout used by the search results
+	@Nullable
+	private final TextView descriptionView;
+	@Nullable
+	private final ImageView iconView;
+
 	public DownloadGroupViewHolder(DownloadActivity ctx, View v) {
 		this.ctx = ctx;
 		textView = v.findViewById(R.id.title);
+		descriptionView = v.findViewById(R.id.description);
+		iconView = v.findViewById(R.id.icon);
 	}
 
 	private boolean isParentWorld(DownloadResourceGroup group) {
@@ -100,9 +113,25 @@ public class DownloadGroupViewHolder {
 	}
 
 	public void bindItem(DownloadResourceGroup group) {
+		bindItem(group, null);
+	}
+
+	/**
+	 * @param description name of the region the group belongs to, shown in the second line.
+	 *                    Ignored when the bound layout has no description view.
+	 */
+	public void bindItem(@NonNull DownloadResourceGroup group, @Nullable String description) {
 		String name = group.getName(ctx);
 		textView.setText(name);
 		Drawable iconStart = getIconForGroup(group);
-		AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(textView, iconStart, null, null, null);
+		if (iconView != null) {
+			iconView.setImageDrawable(iconStart);
+		} else {
+			AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(textView, iconStart, null, null, null);
+		}
+		if (descriptionView != null) {
+			descriptionView.setText(description);
+			AndroidUiHelper.updateVisibility(descriptionView, !Algorithms.isEmpty(description));
+		}
 	}
 }
