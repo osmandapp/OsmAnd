@@ -3260,7 +3260,7 @@
     <string name="app_profile_type">Врста применљивих налога</string>
     <string name="add_to_group">Додај у групу</string>
     <string name="app_modes_options">Одаберите начин рада програма</string>
-    <string name="shared_string_memory">Складиште</string>
+    <string name="shared_string_memory">Меморија</string>
     <string name="gps_filter_hdop_desc">Поставите највећу прихваћену вредност за водоравну прецизност.
 \nТачке са већим вредностима ће бити сакривене.</string>
     <string name="gps_filter_actions_description">ОсмАнд ће применити измене на трагу без измена датотеке. Измене можете сачувати ручно.</string>
@@ -5190,8 +5190,8 @@
     <string name="camera_folder">Омот камере</string>
     <string name="media_storage_main_storage_descr">Датотеке се чувају у пријатном складишту програма. Скривене су од галерије и других програма.</string>
     <string name="media_storage_shared_storage_descr">Датотеке се чувају у јавним омотима (слике, филмови, музика). Видљиве су у галерији и Гугловим сликама.</string>
-    <string name="shared_string_note">Напомена</string>
-    <string name="media_storage_camera_folder_note_descr">звук се чува у музици/ОсмАнду.</string>
+    <string name="shared_string_note">Белешка</string>
+    <string name="media_storage_camera_folder_note_descr">Звук се чува у музици/ОсмАнду.</string>
     <string name="media_storage_camera_folder_descr">Датотеке се чувају у омоту камерин свитак. %1$s</string>
     <string name="media_storage_manually_specified_descr">Датотеке се чувају у произвољном омоту и распоређују по врсти (звук, слика, видео).</string>
     <string name="change_media_storage_question">Променити складиште медија?</string>
@@ -5322,22 +5322,22 @@
     <string name="rendering_attr_surface_laterite_name">Латерит</string>
     <string name="use_spatial_text_search">Користите просторну претрагу текста</string>
     <string name="use_spatial_text_search_description">Замените стандардне АПИ-је за брзу претрагу експерименталном претрагом просторног текста.</string>
-    <string name="always_keep_local_copy">Увек чувај локалну копију</string>
-    <string name="always_keep_local_copy_description">Медији остају причвршћени чак и ако се оригинал обрише из галерије или датотека.</string>
+    <string name="always_keep_local_copy">Увек чувај местни умножак</string>
+    <string name="always_keep_local_copy_description">Медиј остаје прикључен чак и ако се изворни обрише из галерије или датотека.</string>
     <string name="release_5_4">• Освежени КИ претраге: сортирање, филтери категорија, чистији изглед\n\n • Приложите фотографије и медије омиљенима\n\n • Омиљени: подршка за подгрупе и фасцикле које се могу закачити\n\n • Координате: претрага, мрежа мапе и приказ ТОИ сада подржавају EPSG и локатор Мејденхеда\n\n • Исправљени прекиди навигације; пребацивање између стандардног и брзог рутирања\n\n • Подесите размеру мапе за Андроид Ауто одвојено од телефона\n\n • Нова просторна претрага — пронађите места и претражите око места\n\n • Астрономија је додала помрачења Сунца и Месеца</string>
-    <string name="share_favorites_media_preparation_failed">Није могуће укључити приложене медије. Само дељење тачака.</string>
+    <string name="share_favorites_media_preparation_failed">Нисам успео обухватити приложене медије. Само дељење тачака.</string>
     <plurals name="files_count">
         <item quantity="one">%d датотека</item>
         <item quantity="few">%d датотеке</item>
         <item quantity="other">%d датотека</item>
     </plurals>
-    <string name="preparing_file">Припрема датотеке</string>
+    <string name="preparing_file">Припремам датотеку</string>
     <string name="shared_string_archive">Архива</string>
-    <string name="share_favorites_with_media_description">Омиљене тачке у %1$s имају приложене медије. Делите само тачке или тачке са медијима као архиву.</string>
+    <string name="share_favorites_with_media_description">Омиљене тачке у %1$s имају приложени медиј. Делите само тачке или тачке са медијима као складиште.</string>
     <string name="share_favorites_points_only">Само тачке</string>
     <string name="share_favorites_points_and_media">Тачке и медији</string>
-    <string name="share_favorites_preparation_failed">Није била успешна припрема датотека за дељење.</string>
-    <string name="share_favorites_share_failed">Дељење датотеке није успело.</string>
-    <string name="share_favorites_missing_media_warning">Неки приложени медији нису могли бити укључени.</string>
-    <string name="search_on_web">Претрага на вебу</string>
+    <string name="share_favorites_preparation_failed">Нисам успео припремити датотеке за дељење.</string>
+    <string name="share_favorites_share_failed">Нисам успео поделити датотеку.</string>
+    <string name="share_favorites_missing_media_warning">Неки приложени медији нису могли бити обухваћени.</string>
+    <string name="search_on_web">Претражи на вебу</string>
 </resources>
