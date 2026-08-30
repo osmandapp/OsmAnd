@@ -270,6 +270,15 @@ public class WorldRegion implements Serializable {
 		return (polygon != null && another != null) && Algorithms.isFirstPolygonInsideSecond(another, polygon);
 	}
 
+	/**
+	 * Some regions - the continents and the ones that only join their parts, like Great Britain -
+	 * are not stored with a boundary of their own, so a point can only be looked up in their
+	 * subregions.
+	 */
+	public boolean hasBoundaries() {
+		return boundingBox != null && boundingBox.width() != 0 && boundingBox.height() != 0;
+	}
+
 	public boolean containsPoint(LatLon latLon) {
 		int intersections = 0;
 		if (polygon != null) {

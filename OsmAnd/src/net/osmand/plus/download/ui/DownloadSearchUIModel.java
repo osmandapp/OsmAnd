@@ -7,13 +7,17 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.Collator;
+import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
-import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.ResultMatcher;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.CityItem;
 import net.osmand.plus.download.DownloadActivityType;
@@ -22,18 +26,24 @@ import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.DownloadResourceGroupType;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.search.SearchUICore;
+import net.osmand.search.core.SearchPhrase;
+import net.osmand.search.core.SearchPhrase.NameStringMatcher;
+import net.osmand.search.core.SearchSettings;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -45,6 +55,9 @@ public class DownloadSearchUIModel {
 	private static final Log LOG = PlatformUtil.getLog(DownloadSearchUIModel.class);
 
 	private static final String CITY_SUBTYPE = "city";
+	private static final String TOWN_SUBTYPE = "town";
+	private static final List<String> CITY_SUBTYPES = Arrays.asList(CITY_SUBTYPE, TOWN_SUBTYPE);
+	private static final int SEARCH_CITY_LIMIT = 10000;
 
 	/** Non-clickable row that separates the sections of the search results list. */
 	public static class SectionHeader {
@@ -68,16 +81,119 @@ public class DownloadSearchUIModel {
 	}
 
 	private final Context ctx;
+	private final OsmandApplication app;
 	private final OsmandRegions osmandRegions;
 	private final boolean showGroup;
 	private final List<String> downloadTypesToShow;
 
+	private SearchRequest<Amenity> cityRequest;
+
 	public DownloadSearchUIModel(@NonNull Context ctx, @NonNull OsmandRegions osmandRegions,
 	                             boolean showGroup, @NonNull List<String> downloadTypesToShow) {
 		this.ctx = ctx;
+		this.app = (OsmandApplication) ctx.getApplicationContext();
 		this.osmandRegions = osmandRegions;
 		this.showGroup = showGroup;
 		this.downloadTypesToShow = downloadTypesToShow;
+	}
+
+	/**
+	 * Looks up the cities named like the request in the world basemap, so that a city can be found
+	 * even when the map covering it is named after the region it belongs to.
+	 *
+	 * @return cities matching the request, with no map resolved yet.
+	 */
+	@NonNull
+	public List<CityItem> searchCities(@NonNull String text) throws IOException {
+		File obf = getWorldBaseMapObf();
+		if (obf == null) {
+			obf = getWorldBaseMapMiniObf();
+		}
+		if (obf == null) {
+			return new ArrayList<>();
+		}
+		SearchUICore searchUICore = app.getSearchUICore().getCore();
+		SearchSettings searchSettings = searchUICore.getSearchSettings();
+		SearchPhrase searchPhrase = searchUICore.getPhrase().generateNewPhrase(text, searchSettings);
+		NameStringMatcher matcher = searchPhrase.getFirstUnknownNameStringMatcher();
+
+		String lang = app.getSettings().MAP_PREFERRED_LOCALE.get();
+		boolean translit = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
+		List<Amenity> amenities = new ArrayList<>();
+		SearchRequest<Amenity> request = BinaryMapIndexReader.buildSearchPoiRequest(
+				0, 0,
+				text,
+				Integer.MIN_VALUE, Integer.MAX_VALUE,
+				Integer.MIN_VALUE, Integer.MAX_VALUE,
+				new ResultMatcher<Amenity>() {
+					int count;
+
+					@Override
+					public boolean publish(Amenity amenity) {
+						if (count++ > SEARCH_CITY_LIMIT) {
+							return false;
+						}
+						List<String> otherNames = amenity.getOtherNames(true);
+						String localeName = amenity.getName(lang, translit);
+						String subType = amenity.getSubType();
+						if (!CITY_SUBTYPES.contains(subType)
+								|| (!matcher.matches(localeName) && !matcher.matches(otherNames))) {
+							return false;
+						}
+						amenities.add(amenity);
+						return false;
+					}
+
+					@Override
+					public boolean isCancelled() {
+						return count > SEARCH_CITY_LIMIT;
+					}
+				});
+
+		cityRequest = request;
+		BinaryMapIndexReader baseMapReader = new BinaryMapIndexReader(new RandomAccessFile(obf, "r"), obf);
+		try {
+			baseMapReader.searchPoiByName(request);
+		} finally {
+			try {
+				baseMapReader.close();
+			} catch (Exception e) {
+				LOG.error(e.getMessage(), e);
+			}
+		}
+
+		List<CityItem> cities = new ArrayList<>();
+		for (Amenity amenity : amenities) {
+			cities.add(new CityItem(amenity.getName(), amenity, null));
+		}
+		return cities;
+	}
+
+	/** Stops the running city search, the results of an outdated request are not needed. */
+	public void cancelCitySearch() {
+		if (cityRequest != null) {
+			cityRequest.setInterrupted(true);
+		}
+	}
+
+	@Nullable
+	private File getWorldBaseMapObf() {
+		IndexItem worldBaseMapItem = app.getDownloadThread().getIndexes().getWorldBaseMapItem();
+		if (worldBaseMapItem != null && worldBaseMapItem.isDownloaded()) {
+			File obf = worldBaseMapItem.getTargetFile(app);
+			if (obf.exists()) {
+				return obf;
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	private File getWorldBaseMapMiniObf() {
+		File mapsPath = app.getAppPath(IndexConstants.MAPS_PATH);
+		String fileName = WorldRegion.WORLD_BASEMAP_MINI + IndexConstants.BINARY_MAP_INDEX_EXT;
+		File obf = new File(mapsPath, fileName);
+		return obf.exists() ? obf : null;
 	}
 
 	/**
@@ -149,7 +265,13 @@ public class DownloadSearchUIModel {
 			subtitle = getCountryName(group.getRegion());
 		} else if (row instanceof CityItem city) {
 			IndexItem indexItem = city.getIndexItem();
-			subtitle = indexItem != null ? indexItem.getVisibleName(ctx, osmandRegions, false) : null;
+			if (indexItem != null) {
+				subtitle = indexItem.getVisibleName(ctx, osmandRegions, false);
+				if (Algorithms.isEmpty(subtitle) || subtitle.equals(city.getName())) {
+					// the map is named after the city itself, the country says more
+					subtitle = getCountryName(getItemRegion(indexItem));
+				}
+			}
 		} else if (row instanceof DownloadItem item) {
 			subtitle = getCountryName(getItemRegion(item));
 		}
@@ -177,21 +299,14 @@ public class DownloadSearchUIModel {
 	private List<CityItem> filterDuplicateCities(@NonNull DownloadResources indexes,
 	                                             @NonNull List<CityItem> cities, @NonNull List<Object> matched) {
 		Set<IndexItem> shownMaps = new HashSet<>();
-		List<WorldRegion> matchedRegions = new ArrayList<>();
 		for (Object row : matched) {
 			if (row instanceof IndexItem item) {
 				shownMaps.add(item);
-				WorldRegion region = DownloadResourceGroup.getRegion(item.getRelatedGroup());
-				if (region != null) {
-					matchedRegions.add(region);
-				}
 			}
 		}
 		List<CityItem> result = new ArrayList<>();
 		for (CityItem city : cities) {
-			// resolving a city reads the region file, so it is only done for the cities that could
-			// be covered by an already listed map - the rest are resolved when they are displayed
-			if (city.getIndexItem() == null && isCoveredByAny(matchedRegions, city)) {
+			if (city.getIndexItem() == null) {
 				city.setIndexItem(resolveCityMap(indexes, city));
 			}
 			IndexItem item = city.getIndexItem();
@@ -202,20 +317,6 @@ public class DownloadSearchUIModel {
 		return result;
 	}
 
-	private static boolean isCoveredByAny(@NonNull List<WorldRegion> regions, @NonNull CityItem city) {
-		Amenity amenity = city.getAmenity();
-		LatLon location = amenity != null ? amenity.getLocation() : null;
-		if (location == null) {
-			return false;
-		}
-		for (WorldRegion region : regions) {
-			if (region.containsPoint(location)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	/**
 	 * @return the standard map covering the city, the same one that is downloaded when the city is
 	 * selected in the search results.
@@ -223,24 +324,41 @@ public class DownloadSearchUIModel {
 	@Nullable
 	private IndexItem resolveCityMap(@NonNull DownloadResources indexes, @NonNull CityItem city) {
 		Amenity amenity = city.getAmenity();
-		if (amenity == null) {
-			return null;
-		}
-		WorldRegion region = null;
-		try {
-			LatLon location = amenity.getLocation();
-			Map.Entry<WorldRegion, BinaryMapDataObject> entry = osmandRegions.getSmallestBinaryMapDataObjectAt(location);
-			if (entry != null) {
-				region = entry.getKey();
-			}
-		} catch (IOException e) {
-			LOG.error(e.getMessage(), e);
-		}
-		if (region != null) {
-			for (IndexItem item : indexes.getIndexItems(region)) {
-				if (item.getType() == DownloadActivityType.NORMAL_FILE) {
+		LatLon location = amenity != null ? amenity.getLocation() : null;
+		// the region boundaries are kept in memory, so the hundreds of cities a search finds are
+		// resolved without reading the region file once
+		return location != null ? findMapAt(indexes, osmandRegions.getWorldRegion(), location) : null;
+	}
+
+	/**
+	 * Walks the region tree down to the smallest region containing the point and returns the map of
+	 * the first region on the way back that has one.
+	 */
+	@Nullable
+	private IndexItem findMapAt(@NonNull DownloadResources indexes, @NonNull WorldRegion region,
+	                            @NonNull LatLon location) {
+		for (WorldRegion subregion : region.getSubregions()) {
+			// a region without boundaries only groups its subregions, look inside it anyway
+			boolean grouping = !subregion.hasBoundaries();
+			if (grouping || subregion.containsPoint(location)) {
+				IndexItem item = findMapAt(indexes, subregion, location);
+				if (item == null && !grouping) {
+					// the subregion is split into parts that have no map of their own
+					item = getStandardMap(indexes, subregion);
+				}
+				if (item != null) {
 					return item;
 				}
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	private IndexItem getStandardMap(@NonNull DownloadResources indexes, @NonNull WorldRegion region) {
+		for (IndexItem item : indexes.getIndexItems(region)) {
+			if (item.getType() == DownloadActivityType.NORMAL_FILE) {
+				return item;
 			}
 		}
 		return null;

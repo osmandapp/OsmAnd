@@ -3,7 +3,6 @@ package net.osmand.plus.download.ui;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.LayoutInflater;
@@ -29,15 +28,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.IndexConstants;
-import net.osmand.ResultMatcher;
-import net.osmand.binary.BinaryMapDataObject;
-import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
-import net.osmand.data.Amenity;
 import net.osmand.map.OsmandRegions;
-import net.osmand.map.WorldRegion;
-import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseFullScreenDialogFragment;
@@ -54,21 +45,12 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.search.SearchUICore;
-import net.osmand.search.core.SearchPhrase;
-import net.osmand.search.core.SearchPhrase.NameStringMatcher;
-import net.osmand.search.core.SearchSettings;
 import net.osmand.util.Algorithms;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 public class SearchDialogFragment extends BaseFullScreenDialogFragment implements DownloadEvents,
 		OnItemClickListener {
@@ -392,11 +374,7 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 				if (obj instanceof IndexItem item) {
 					viewHolder.bindDownloadItem(item);
 				} else {
-					CityItem item = (CityItem) obj;
-					viewHolder.bindDownloadItem(item);
-					if (item.getIndexItem() == null) {
-						OsmAndTaskManager.executeTask(new IndexItemResolverTask(viewHolder, item));
-					}
+					viewHolder.bindDownloadItem((CityItem) obj);
 				}
 			} else {
 				DownloadResourceGroup group = (DownloadResourceGroup) obj;
@@ -428,151 +406,10 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 			return mFilter;
 		}
 
-		/**
-		 * Finds the map covering the city. Cities that could duplicate an already listed map are
-		 * resolved by the search itself, the rest are resolved here, when they are displayed.
-		 */
-		class IndexItemResolverTask extends AsyncTask<Void, Void, IndexItem> {
-			private final WeakReference<ItemViewHolder> viewHolderReference;
-			private final CityItem cityItem;
-
-			public IndexItemResolverTask(ItemViewHolder viewHolder, CityItem cityItem) {
-				this.viewHolderReference = new WeakReference<>(viewHolder);
-				this.cityItem = cityItem;
-			}
-
-			@Override
-			protected IndexItem doInBackground(Void... params) {
-				Amenity amenity = cityItem.getAmenity();
-				WorldRegion downloadRegion = null;
-				try {
-					Map.Entry<WorldRegion, BinaryMapDataObject> res = osmandRegions.getSmallestBinaryMapDataObjectAt(amenity.getLocation());
-					if (res != null) {
-						downloadRegion = res.getKey();
-					}
-				} catch (IOException e) {
-					// ignore
-				}
-				if (downloadRegion != null) {
-					List<IndexItem> indexItems = ctx.getDownloadThread().getIndexes().getIndexItems(downloadRegion);
-					for (IndexItem item : indexItems) {
-						if (item.getType() == DownloadActivityType.NORMAL_FILE) {
-							return item;
-						}
-					}
-				}
-				return null;
-			}
-
-			@Override
-			protected void onPostExecute(IndexItem indexItem) {
-				if (isCancelled()) {
-					return;
-				}
-				ItemViewHolder viewHolder = viewHolderReference.get();
-				if (viewHolder != null && indexItem != null) {
-					cityItem.setIndexItem(indexItem);
-					viewHolder.setRegionName(searchModel.getSubtitle(cityItem));
-					viewHolder.bindDownloadItem(indexItem, cityItem.getName());
-				}
-			}
-		}
-
 		private final class SearchIndexFilter extends Filter {
 
-			private final int searchCityLimit = 10000;
-			private final List<String> citySubTypes = Arrays.asList("city", "town");
-			private SearchRequest<Amenity> searchCityRequest;
-
 			public void cancelFilter() {
-				if (searchCityRequest != null) {
-					searchCityRequest.setInterrupted(true);
-				}
-			}
-
-			@NonNull
-			public List<CityItem> searchCities(@NonNull String text) throws IOException {
-				File obf = getWorldBaseMapObf(app);
-				if (obf == null) {
-					obf = getWorldBaseMapMiniObf(app);
-				}
-				if (obf == null) {
-					return new ArrayList<>();
-				}
-
-				SearchUICore searchUICore = app.getSearchUICore().getCore();
-				SearchSettings searchSettings = searchUICore.getSearchSettings();
-				SearchPhrase searchPhrase = searchUICore.getPhrase().generateNewPhrase(text, searchSettings);
-				NameStringMatcher matcher = searchPhrase.getFirstUnknownNameStringMatcher();
-
-				String lang = app.getSettings().MAP_PREFERRED_LOCALE.get();
-				boolean translit = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
-				List<Amenity> amenities = new ArrayList<>();
-				SearchRequest<Amenity> request = BinaryMapIndexReader.buildSearchPoiRequest(
-						0, 0,
-						text,
-						Integer.MIN_VALUE, Integer.MAX_VALUE,
-						Integer.MIN_VALUE, Integer.MAX_VALUE,
-						new ResultMatcher<Amenity>() {
-							int count;
-
-							@Override
-							public boolean publish(Amenity amenity) {
-								if (count++ > searchCityLimit) {
-									return false;
-								}
-								List<String> otherNames = amenity.getOtherNames(true);
-								String localeName = amenity.getName(lang, translit);
-								String subType = amenity.getSubType();
-								if (!citySubTypes.contains(subType)
-										|| (!matcher.matches(localeName) && !matcher.matches(otherNames))) {
-									return false;
-								}
-								amenities.add(amenity);
-								return false;
-							}
-
-							@Override
-							public boolean isCancelled() {
-								return count > searchCityLimit;
-							}
-						});
-
-				searchCityRequest = request;
-				BinaryMapIndexReader baseMapReader = new BinaryMapIndexReader(new RandomAccessFile(obf, "r"), obf);
-				baseMapReader.searchPoiByName(request);
-				try {
-					baseMapReader.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-
-				List<CityItem> items = new ArrayList<>();
-				for (Amenity amenity : amenities) {
-					items.add(new CityItem(amenity.getName(), amenity, null));
-				}
-				return items;
-			}
-
-			@Nullable
-			private File getWorldBaseMapObf(@NonNull OsmandApplication app) {
-				DownloadResources downloadResources = app.getDownloadThread().getIndexes();
-				IndexItem worldBaseMapItem = downloadResources.getWorldBaseMapItem();
-				if (worldBaseMapItem != null && worldBaseMapItem.isDownloaded()) {
-					File obf = worldBaseMapItem.getTargetFile(app);
-					if (obf.exists()) {
-						return obf;
-					}
-				}
-				return null;
-			}
-
-			@Nullable
-			private File getWorldBaseMapMiniObf(@NonNull OsmandApplication app) {
-				File mapsPath = app.getAppPath(IndexConstants.MAPS_PATH);
-				String baseMapMiniFileName = WorldRegion.WORLD_BASEMAP_MINI + IndexConstants.BINARY_MAP_INDEX_EXT;
-				File baseMapMiniObf = new File(mapsPath, baseMapMiniFileName);
-				return baseMapMiniObf.exists() ? baseMapMiniObf : null;
+				searchModel.cancelCitySearch();
 			}
 
 			@Override
@@ -589,7 +426,7 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 					List<CityItem> cities = new ArrayList<>();
 					if (searchRequest.length() > 2) {
 						try {
-							cities.addAll(searchCities(searchRequest));
+							cities.addAll(searchModel.searchCities(searchRequest));
 						} catch (IOException e) {
 							e.printStackTrace();
 						}

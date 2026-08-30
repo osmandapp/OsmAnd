@@ -3,7 +3,6 @@ package net.osmand.plus.download;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assume.assumeTrue;
 
@@ -14,13 +13,13 @@ import androidx.annotation.Nullable;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
-import net.osmand.data.Amenity;
+import net.osmand.IndexConstants;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.download.ui.DownloadSearchUIModel;
 import net.osmand.plus.download.ui.DownloadSearchUIModel.SectionHeader;
-import net.osmand.plus.R;
 import net.osmand.test.common.AndroidTest;
 import net.osmand.util.Algorithms;
 
@@ -49,9 +48,16 @@ import java.util.Set;
 /**
  * Checks the content of the "Maps & Resources" search results screen.
  * <p>
+ * Nothing on the screen is simulated: the regions, their names and the list of downloadable maps
+ * come from the real {@code regions.ocbf} and the cities come from the real
+ * {@code World_basemap_mini.obf}. Both are shipped with the app and unpacked on start, so no map
+ * has to be downloaded and the rows are the ones a user sees. The only thing the tests build
+ * themselves is the {@link IndexItem} of every map - its size and timestamp come from
+ * {@code indexes.xml} at runtime and neither of them is shown on this screen.
+ * <p>
  * {@link #searchResultsMatchExamples()} compares the rows against the examples listed in
- * {@code test/assets/download/search_examples.json}, {@link #europeAndUsSearchIsUnambiguous()}
- * runs the same search over the whole Europe and United States region trees.
+ * {@code test/assets/download/search_examples.json}, {@link #searchIsUnambiguousOnTheFullCatalog()}
+ * runs the ambiguous queries against every map there is.
  * <p>
  * Both write what they found to {@code download_search_report.html} in the app external files
  * directory, so the screens can be reviewed without taking screenshots. Run the tests with
@@ -63,31 +69,34 @@ public class DownloadSearchUIModelTest extends AndroidTest {
 
 	private static final String EXAMPLES_ASSET = "download/search_examples.json";
 	private static final String REPORT_FILE = "download_search_report.html";
-
-	private static final String UKRAINE_ID = "europe_ukraine";
-	private static final String NETHERLANDS_ID = "europe_netherlands";
-	private static final String GERMANY_ID = "europe_germany";
-	private static final String US_ID = "northamerica_us";
+	private static final String BASEMAP_FILE =
+			WorldRegion.WORLD_BASEMAP_MINI + IndexConstants.BINARY_MAP_INDEX_EXT;
 
 	private static final List<String> AMBIGUOUS_QUERIES = Arrays.asList(
 			"berlin", "hamburg", "kyiv", "holland", "utrecht", "york", "washington", "georgia");
 
 	private static final List<ReportScreen> REPORT = new ArrayList<>();
 
+	/** Built once, the region tree holds a few thousand maps. */
+	private static DownloadResources fullCatalog;
+
 	private OsmandRegions regions;
 
 	@Before
-	public void setupRegions() {
+	public void setupSearchData() {
 		regions = app.getRegions();
 		assertTrue("World regions are not initialized", regions.isInitialized());
 		// region names are localized, the examples are written in English
 		assumeTrue("Test requires an English locale", "en".equals(app.getLanguage()));
+		// the basemap is a bundled asset, the app unpacks it on every start
+		assertTrue("The world basemap is missing",
+				new File(app.getAppPath(IndexConstants.MAPS_PATH), BASEMAP_FILE).exists());
 	}
 
 	@Test
 	public void searchResultsMatchExamples() throws Exception {
 		JSONObject json = new JSONObject(readAsset(EXAMPLES_ASSET));
-		DownloadResources indexes = prepareIndexes(toIndexItems(toStringList(json.getJSONArray("resources"))));
+		DownloadResources indexes = prepareIndexes(toStringList(json.getJSONArray("resources")));
 
 		JSONArray examples = json.getJSONArray("examples");
 		assertTrue("No examples to check", examples.length() > 0);
@@ -98,57 +107,59 @@ public class DownloadSearchUIModelTest extends AndroidTest {
 			boolean showGroup = example.optBoolean("showGroup", true);
 
 			DownloadSearchUIModel model = createModel(showGroup);
-			List<Object> rows = model.search(indexes, query, readCities(example.optJSONArray("cities"), indexes));
+			List<Object> rows = model.search(indexes, query, Collections.emptyList());
 			REPORT.add(new ReportScreen("Examples", query, name, toReportRows(model, rows)));
 
-			List<String> expected = toStringList(example.getJSONArray("screen"));
-			List<String> actual = new ArrayList<>();
-			for (Object row : rows) {
-				actual.add(render(model, row));
-			}
-			assertEquals(name + " (query: \"" + query + "\")", expected, actual);
+			assertEquals(name + " (query: \"" + query + "\")",
+					toStringList(example.getJSONArray("screen")), renderAll(model, rows));
 		}
 	}
 
 	@Test
-	public void searchIsUnambiguousAcrossCountries() {
-		checkQueries("Ukraine", prepareIndexes(collectRegionMaps(UKRAINE_ID)));
-		checkQueries("Netherlands", prepareIndexes(collectRegionMaps(NETHERLANDS_ID)));
-		checkQueries("Germany", prepareIndexes(collectRegionMaps(GERMANY_ID)));
-		checkQueries("United States", prepareIndexes(collectRegionMaps(US_ID)));
-		checkQueries("All four countries",
-				prepareIndexes(collectRegionMaps(UKRAINE_ID, NETHERLANDS_ID, GERMANY_ID, US_ID)));
-	}
-
-	@Test
-	public void cityIsHiddenWhenItsMapIsAlreadyListed() {
-		DownloadResources germany = prepareIndexes(collectRegionMaps(GERMANY_ID));
-		IndexItem berlinMap = findByBasename(germany, "germany_berlin_europe");
-		DownloadSearchUIModel model = createModel(true);
-
-		List<Object> withoutCity = model.search(germany, "berlin", Collections.emptyList());
-		List<Object> withCity = model.search(germany, "berlin",
-				Collections.singletonList(new CityItem("Berlin", cityAmenity(), berlinMap)));
-
-		assertEquals("A city pointing to a listed map must not add a row",
-				renderAll(model, withoutCity), renderAll(model, withCity));
-	}
-
-	private void checkQueries(@NonNull String catalog, @NonNull DownloadResources indexes) {
+	public void searchIsUnambiguousOnTheFullCatalog() throws IOException {
+		DownloadResources indexes = fullCatalog();
 		DownloadSearchUIModel model = createModel(true);
 		for (String query : AMBIGUOUS_QUERIES) {
-			List<Object> rows = model.search(indexes, query, Collections.emptyList());
-			REPORT.add(new ReportScreen(catalog, query, null, toReportRows(model, rows)));
-			assertSectionsAreWellFormed(catalog, query, rows);
-			assertNoDuplicateMaps(catalog, query, rows);
-			assertRowsAreDistinguishable(catalog, query, rows);
+			List<Object> rows = model.search(indexes, query, model.searchCities(query));
+			REPORT.add(new ReportScreen("Every map and city", query, null, toReportRows(model, rows)));
+			assertSectionsAreWellFormed(query, rows);
+			assertNoDuplicateMaps(query, rows);
+			assertRowsAreDistinguishable(query, rows);
 		}
+	}
+
+	@Test
+	public void cityIsHiddenWhenItsMapIsAlreadyListed() throws IOException {
+		DownloadResources indexes = fullCatalog();
+		DownloadSearchUIModel model = createModel(true);
+		List<CityItem> cities = model.searchCities("berlin");
+		assertFalse("The basemap knows no Berlin", cities.isEmpty());
+
+		List<Object> rows = model.search(indexes, "berlin", cities);
+		List<String> withoutCities = renderAll(model, model.search(indexes, "berlin", Collections.emptyList()));
+		List<String> withCities = renderAll(model, rows);
+
+		assertTrue("Berlin, Germany is listed as a map on its own", withoutCities.contains("Berlin | Germany"));
+		// the basemap knows a Berlin in Germany too, and it must not offer the same file again
+		assertNoDuplicateMaps("berlin", rows);
+		assertRowsAreDistinguishable("berlin", rows);
+		assertTrue("The cities may only add rows", withCities.containsAll(withoutCities));
+	}
+
+	@Test
+	public void conditionsAreParsedAsAndOfOrs() {
+		List<List<String>> conditions = DownloadSearchUIModel.parseConditions("new hampshire, berlin");
+		assertEquals(Arrays.asList(Arrays.asList("new", "hampshire"), Arrays.asList("berlin")), conditions);
+
+		assertTrue(DownloadSearchUIModel.isMatch(conditions, false, "new hampshire"));
+		assertTrue(DownloadSearchUIModel.isMatch(conditions, false, "brandenburg, berlin"));
+		assertFalse(DownloadSearchUIModel.isMatch(conditions, false, "hampshire"));
+		assertFalse(DownloadSearchUIModel.isMatch(conditions, false, "germany"));
 	}
 
 	/** Headers come once, in a fixed order, and only in front of the rows they describe. */
-	private void assertSectionsAreWellFormed(@NonNull String catalog, @NonNull String query,
-	                                         @NonNull List<Object> rows) {
-		String where = catalog + " / \"" + query + "\": ";
+	private void assertSectionsAreWellFormed(@NonNull String query, @NonNull List<Object> rows) {
+		String where = "\"" + query + "\": ";
 		List<Integer> headers = new ArrayList<>();
 		Integer current = null;
 		for (Object row : rows) {
@@ -169,21 +180,18 @@ public class DownloadSearchUIModelTest extends AndroidTest {
 	}
 
 	/** The same file must not be offered twice in the "Maps" section. */
-	private void assertNoDuplicateMaps(@NonNull String catalog, @NonNull String query,
-	                                   @NonNull List<Object> rows) {
+	private void assertNoDuplicateMaps(@NonNull String query, @NonNull List<Object> rows) {
 		Set<String> files = new HashSet<>();
 		for (Object row : rows) {
 			String fileName = getFileName(row);
 			if (fileName != null) {
-				assertTrue(catalog + " / \"" + query + "\": " + fileName + " is listed twice",
-						files.add(fileName));
+				assertTrue("\"" + query + "\": " + fileName + " is listed twice", files.add(fileName));
 			}
 		}
 	}
 
 	/** Two rows of the same section must never show exactly the same two lines. */
-	private void assertRowsAreDistinguishable(@NonNull String catalog, @NonNull String query,
-	                                          @NonNull List<Object> rows) {
+	private void assertRowsAreDistinguishable(@NonNull String query, @NonNull List<Object> rows) {
 		DownloadSearchUIModel model = createModel(true);
 		Set<String> seen = new HashSet<>();
 		for (Object row : rows) {
@@ -192,42 +200,14 @@ public class DownloadSearchUIModelTest extends AndroidTest {
 				continue;
 			}
 			String text = render(model, row);
-			assertTrue(catalog + " / \"" + query + "\": two rows read as \"" + text + "\"", seen.add(text));
+			assertTrue("\"" + query + "\": two rows read as \"" + text + "\"", seen.add(text));
 		}
-	}
-
-	@Test
-	public void conditionsAreParsedAsAndOfOrs() {
-		List<List<String>> conditions = DownloadSearchUIModel.parseConditions("new hampshire, berlin");
-		assertEquals(Arrays.asList(Arrays.asList("new", "hampshire"), Arrays.asList("berlin")), conditions);
-
-		assertTrue(DownloadSearchUIModel.isMatch(conditions, false, "new hampshire"));
-		assertTrue(DownloadSearchUIModel.isMatch(conditions, false, "brandenburg, berlin"));
-		assertFalse(DownloadSearchUIModel.isMatch(conditions, false, "hampshire"));
-		assertFalse(DownloadSearchUIModel.isMatch(conditions, false, "germany"));
 	}
 
 	@NonNull
 	private DownloadSearchUIModel createModel(boolean showGroup) {
 		return new DownloadSearchUIModel(app, regions, showGroup,
 				Collections.singletonList(DownloadActivityType.NORMAL_FILE.getTag()));
-	}
-
-	@NonNull
-	private IndexItem findByBasename(@NonNull DownloadResources indexes, @NonNull String basename) {
-		for (IndexItem item : indexes.getIndexItems((List<DownloadActivityType>) null)) {
-			if (basename.equalsIgnoreCase(item.getBasename())) {
-				return item;
-			}
-		}
-		throw new AssertionError("No map for " + basename);
-	}
-
-	@NonNull
-	private Amenity cityAmenity() {
-		Amenity amenity = new Amenity();
-		amenity.setSubType("city");
-		return amenity;
 	}
 
 	@NonNull
@@ -273,37 +253,16 @@ public class DownloadSearchUIModelTest extends AndroidTest {
 		return reportRows;
 	}
 
+	/** Every map the app offers, taken from the region tree the app itself is shipped with. */
 	@NonNull
-	private DownloadResources prepareIndexes(@NonNull List<IndexItem> items) {
-		DownloadResources resources = new DownloadResources(app);
-		assertTrue(resources.prepareData(items));
-		return resources;
-	}
-
-	@NonNull
-	private List<IndexItem> toIndexItems(@NonNull List<String> fileNames) {
-		List<IndexItem> items = new ArrayList<>();
-		for (String fileName : fileNames) {
-			items.add(createIndexItem(fileName));
+	private DownloadResources fullCatalog() {
+		if (fullCatalog == null) {
+			Set<String> fileNames = new LinkedHashSet<>();
+			collectRegionMaps(regions.getWorldRegion(), fileNames);
+			assertFalse("No maps collected", fileNames.isEmpty());
+			fullCatalog = prepareIndexes(new ArrayList<>(fileNames));
 		}
-		return items;
-	}
-
-	/** Builds the standard map of every downloadable region under the given roots. */
-	@NonNull
-	private List<IndexItem> collectRegionMaps(@NonNull String... rootRegionIds) {
-		Set<String> fileNames = new LinkedHashSet<>();
-		for (String regionId : rootRegionIds) {
-			WorldRegion root = regions.getRegionData(regionId);
-			assertNotNull("Unknown region " + regionId, root);
-			collectRegionMaps(root, fileNames);
-		}
-		List<IndexItem> items = new ArrayList<>();
-		for (String fileName : fileNames) {
-			items.add(createIndexItem(fileName));
-		}
-		assertFalse("No maps collected", items.isEmpty());
-		return items;
+		return fullCatalog;
 	}
 
 	private void collectRegionMaps(@NonNull WorldRegion region, @NonNull Set<String> fileNames) {
@@ -317,27 +276,15 @@ public class DownloadSearchUIModelTest extends AndroidTest {
 	}
 
 	@NonNull
-	private IndexItem createIndexItem(@NonNull String fileName) {
-		return new IndexItem(fileName, null, 0, "0", 0, 0,
-				DownloadActivityType.NORMAL_FILE, true, null);
-	}
-
-	@NonNull
-	private List<CityItem> readCities(@Nullable JSONArray json, @NonNull DownloadResources indexes)
-			throws JSONException {
-		List<CityItem> cities = new ArrayList<>();
-		if (json != null) {
-			for (int i = 0; i < json.length(); i++) {
-				JSONObject object = json.getJSONObject(i);
-				Amenity amenity = new Amenity();
-				amenity.setSubType(object.optString("subType", "city"));
-				String mapFileName = object.optString("map", null);
-				IndexItem indexItem = mapFileName != null ? indexes.getIndexItem(mapFileName) : null;
-				assertTrue("Unknown map " + mapFileName, mapFileName == null || indexItem != null);
-				cities.add(new CityItem(object.getString("name"), amenity, indexItem));
-			}
+	private DownloadResources prepareIndexes(@NonNull List<String> fileNames) {
+		List<IndexItem> items = new ArrayList<>();
+		for (String fileName : fileNames) {
+			items.add(new IndexItem(fileName, null, 0, "0", 0, 0,
+					DownloadActivityType.NORMAL_FILE, true, null));
 		}
-		return cities;
+		DownloadResources resources = new DownloadResources(app);
+		assertTrue(resources.prepareData(items));
+		return resources;
 	}
 
 	@NonNull
@@ -364,6 +311,7 @@ public class DownloadSearchUIModelTest extends AndroidTest {
 
 	@AfterClass
 	public static void writeReport() throws IOException {
+		fullCatalog = null;
 		if (REPORT.isEmpty()) {
 			return;
 		}

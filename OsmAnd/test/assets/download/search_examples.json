@@ -1,9 +1,11 @@
 {
   "comment": [
-    "Examples for DownloadSearchHelperTest: what the 'Maps & Resources' search results screen shows for a query.",
+    "Examples for DownloadSearchUIModelTest: what the 'Maps & Resources' search results screen shows for a query.",
     "'resources' is the catalog of downloadable files the search runs against, region names are resolved with the real regions.ocbf.",
     "Every 'screen' entry is one row of the list: '[Header]' for a section header,",
-    "'Title' for a row without a second line and 'Title | Subtitle' for a row with the region shown in the second line."
+    "'Title' for a row without a second line and 'Title | Subtitle' for a row with the region shown in the second line.",
+    "Cities are not listed here - they are searched in the real World_basemap_mini.obf against the whole catalog,",
+    "see searchIsUnambiguousOnTheFullCatalog() and cityIsHiddenWhenItsMapIsAlreadyListed()."
   ],
   "resources": [
     "Germany_berlin_europe_2.obf.zip",
@@ -113,70 +115,6 @@
         "San Francisco | United States",
         "[Maps]",
         "San Francisco | United States"
-      ]
-    },
-    {
-      "name": "Cities found in the world basemap are listed among the maps with the map region in the second line",
-      "query": "berlin",
-      "cities": [
-        {
-          "name": "Berlin",
-          "subType": "city",
-          "map": "US_new-hampshire_northamerica_2.obf.zip"
-        }
-      ],
-      "screen": [
-        "[Regions]",
-        "Berlin | Germany",
-        "Brandenburg, Berlin | Germany",
-        "[Maps]",
-        "Berlin | New Hampshire",
-        "Berlin | Germany",
-        "Brandenburg, Berlin | Germany"
-      ]
-    },
-    {
-      "name": "A city is not repeated when the map covering it is already listed",
-      "query": "berlin",
-      "cities": [
-        {
-          "name": "Berlin",
-          "subType": "city",
-          "map": "Germany_berlin_europe_2.obf.zip"
-        }
-      ],
-      "screen": [
-        "[Regions]",
-        "Berlin | Germany",
-        "Brandenburg, Berlin | Germany",
-        "[Maps]",
-        "Berlin | Germany",
-        "Brandenburg, Berlin | Germany"
-      ]
-    },
-    {
-      "name": "Two cities covered by the same map produce a single row",
-      "query": "berlin",
-      "cities": [
-        {
-          "name": "Berlin",
-          "subType": "city",
-          "map": "US_new-hampshire_northamerica_2.obf.zip"
-        },
-        {
-          "name": "Berlin",
-          "subType": "town",
-          "map": "US_new-hampshire_northamerica_2.obf.zip"
-        }
-      ],
-      "screen": [
-        "[Regions]",
-        "Berlin | Germany",
-        "Brandenburg, Berlin | Germany",
-        "[Maps]",
-        "Berlin | New Hampshire",
-        "Berlin | Germany",
-        "Brandenburg, Berlin | Germany"
       ]
     },
     {
