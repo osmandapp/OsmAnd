@@ -22,6 +22,7 @@ import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
@@ -325,18 +326,22 @@ public class RoutingHelper {
 						res.getCalculateTime(), res.getVisitedSegments(), res.getLoadedTiles());
 				app.showToastMessage(msg);
 			}
-			if (PluginsHelper.isDevelopment()) {
-				showRouteAlertsDebug(res);
+			OsmandDevelopmentPlugin developmentPlugin = PluginsHelper.getEnabledPlugin(OsmandDevelopmentPlugin.class);
+			if (developmentPlugin != null) {
+				reportRouteAlertsDebug(res, developmentPlugin.SHOW_ROUTE_ALERTS_DEBUG_DIALOG.get());
 			}
 		});
 	}
 
-	private void showRouteAlertsDebug(@NonNull RouteCalculationResult route) {
+	private void reportRouteAlertsDebug(@NonNull RouteCalculationResult route, boolean showDialog) {
 		RouteDetailsSnapshot snapshot = route.getRouteDetailsSnapshot();
 		String title = "Route alerts/warnings: " + snapshot.getEvents().size();
 		String details = formatRouteAlertsDebug(route, snapshot);
 		log.info(title + "\n" + details);
 
+		if (!showDialog) {
+			return;
+		}
 		MapActivity mapActivity = app.getOsmandMap().getMapView().getMapActivity();
 		if (!AndroidUtils.isActivityNotDestroyed(mapActivity)) {
 			return;

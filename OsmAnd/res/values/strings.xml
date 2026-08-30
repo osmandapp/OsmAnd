@@ -4604,6 +4604,8 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="osm_editing_plugin_name">OpenStreetMap editing</string>
     <string name="osm_editing_plugin_description">Make contributions to OpenStreetMap, a global community maintaining a comprehensive map of the world and providing up-to date open-source data to every user. \n\nYou can find instructions on how to edit the map on our website %1$s.</string>
     <string name="osmand_development_plugin_description">Provides functionality to test and debug OsmAnd: simulate navigation routes, monitor the screen rendering, check performance, etc. This plugin is not required for normal app use.</string>
+    <string name="show_route_alerts_debug_dialog">Show route alerts and warnings dialog</string>
+    <string name="show_route_alerts_debug_dialog_description">Display a debug dialog listing all alerts and warnings after each route calculation.</string>
     <string name="debugging_and_development">OsmAnd development</string>
     <string name="rename_failed">Renaming failed.</string>
     <string name="back_to_map">Back to map</string>

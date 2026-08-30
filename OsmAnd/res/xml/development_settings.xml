@@ -40,6 +40,13 @@
 		android:layout="@layout/preference_category_with_descr"
 		android:title="@string/routing_settings" />
 
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="show_route_alerts_debug_dialog"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/show_route_alerts_debug_dialog" />
+
 	<Preference
 		android:key="simulate_your_location"
 		android:layout="@layout/preference_with_descr"
