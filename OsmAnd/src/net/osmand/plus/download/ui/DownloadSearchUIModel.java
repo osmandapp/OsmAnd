@@ -164,7 +164,8 @@ public class DownloadSearchUIModel {
 
 		List<CityItem> cities = new ArrayList<>();
 		for (Amenity amenity : amenities) {
-			cities.add(new CityItem(amenity.getName(), amenity, null));
+			// the request is matched against the localized name, so show that one in the row
+			cities.add(new CityItem(amenity.getName(lang, translit), amenity, null));
 		}
 		return cities;
 	}

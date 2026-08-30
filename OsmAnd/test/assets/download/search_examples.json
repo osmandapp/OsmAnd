@@ -1,20 +1,11 @@
 {
   "comment": [
     "Examples for DownloadSearchUIModelTest: what the 'Maps & Resources' search results screen shows for a query.",
-    "'resources' is the catalog of downloadable files the search runs against, region names are resolved with the real regions.ocbf.",
+    "Nothing here is made up - the maps are every map the region tree of regions.ocbf offers and the cities are",
+    "searched in World_basemap_mini.obf, both shipped with the app, so these are the rows a user sees.",
     "Every 'screen' entry is one row of the list: '[Header]' for a section header,",
     "'Title' for a row without a second line and 'Title | Subtitle' for a row with the region shown in the second line.",
-    "Cities are not listed here - they are searched in the real World_basemap_mini.obf against the whole catalog,",
-    "see searchIsUnambiguousOnTheFullCatalog() and cityIsHiddenWhenItsMapIsAlreadyListed()."
-  ],
-  "resources": [
-    "Germany_berlin_europe_2.obf.zip",
-    "Germany_brandenburg_europe_2.obf.zip",
-    "US_new-hampshire_northamerica_2.obf.zip",
-    "US_new-york_new-york-city_northamerica_2.obf.zip",
-    "US_california_san-francisco_northamerica_2.obf.zip",
-    "GB_england_greater-london_europe_2.obf.zip",
-    "Canada_ontario_london_northamerica_2.obf.zip"
+    "Update the file when the shipped region data changes - the report the test writes shows the new screens side by side."
   ],
   "examples": [
     {
@@ -25,6 +16,7 @@
         "Berlin | Germany",
         "Brandenburg, Berlin | Germany",
         "[Maps]",
+        "Berlin | New Hampshire",
         "Berlin | Germany",
         "Brandenburg, Berlin | Germany"
       ]
@@ -79,6 +71,8 @@
         "Greater London | United Kingdom",
         "London | Canada",
         "[Maps]",
+        "Derry/Londonderry | Northern Ireland",
+        "New London | Connecticut",
         "Greater London | United Kingdom",
         "London | Canada"
       ]
@@ -95,16 +89,47 @@
       ]
     },
     {
-      "name": "A short query matches every name that starts with it",
+      "name": "A short query matches every name that starts with it, cities included",
       "query": "New",
       "screen": [
         "[Regions]",
+        "Geneva | Switzerland",
+        "New Brunswick | Canada",
         "New Hampshire | United States",
+        "New Jersey | United States",
+        "New Mexico | United States",
+        "New South Wales | Australia",
         "New York | United States",
         "New York City and surroundings | United States",
+        "New Zealand",
+        "Newfoundland and Labrador | Canada",
+        "Nouvelle-Aquitaine | France",
+        "Papua New Guinea",
         "[Maps]",
+        "New Delhi | Delhi",
+        "Newark | Ohio",
+        "Newark | Delaware",
+        "Newburgh | Albany and surroundings",
+        "Newburyport | Massachusetts",
+        "Newcastle | KwaZulu-Natal",
+        "Newcastle upon Tyne | North East England",
+        "Newmarket | Toronto",
+        "Newport | Rhode Island",
+        "Newport | Wales",
+        "Newport News | Virginia",
+        "Newry | Northern Ireland",
+        "Невинномысск | Stavropol Krai",
+        "新北市 | Taiwan",
+        "Geneva | Switzerland",
+        "New Brunswick | Canada",
         "New Hampshire | United States",
-        "New York City and surroundings | United States"
+        "New Jersey | United States",
+        "New Mexico | United States",
+        "New South Wales | Australia",
+        "New York City and surroundings | United States",
+        "New Zealand",
+        "Newfoundland and Labrador | Canada",
+        "Papua New Guinea"
       ]
     },
     {
@@ -112,10 +137,18 @@
       "query": "San Fr",
       "screen": [
         "[Regions]",
+        "Central African Republic",
         "San Francisco | United States",
         "[Maps]",
+        "San Francisco | Venezuela",
+        "Central African Republic",
         "San Francisco | United States"
       ]
+    },
+    {
+      "name": "Nothing is shown when there are no matches",
+      "query": "atlantis",
+      "screen": []
     },
     {
       "name": "Regions are hidden when the search is opened for a single download type",
@@ -123,14 +156,10 @@
       "showGroup": false,
       "screen": [
         "[Maps]",
+        "Berlin | New Hampshire",
         "Berlin | Germany",
         "Brandenburg, Berlin | Germany"
       ]
-    },
-    {
-      "name": "Nothing is shown when there are no matches",
-      "query": "atlantis",
-      "screen": []
     }
   ]
 }

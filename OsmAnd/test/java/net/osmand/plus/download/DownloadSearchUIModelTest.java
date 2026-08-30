@@ -55,9 +55,10 @@ import java.util.Set;
  * themselves is the {@link IndexItem} of every map - its size and timestamp come from
  * {@code indexes.xml} at runtime and neither of them is shown on this screen.
  * <p>
- * {@link #searchResultsMatchExamples()} compares the rows against the examples listed in
+ * Every test runs against the whole catalog - every map the region tree offers.
+ * {@link #searchResultsMatchExamples()} compares the rows against the screens written down in
  * {@code test/assets/download/search_examples.json}, {@link #searchIsUnambiguousOnTheFullCatalog()}
- * runs the ambiguous queries against every map there is.
+ * checks the rules that must hold for any query on a few more ambiguous ones.
  * <p>
  * Both write what they found to {@code download_search_report.html} in the app external files
  * directory, so the screens can be reviewed without taking screenshots. Run the tests with
@@ -95,23 +96,21 @@ public class DownloadSearchUIModelTest extends AndroidTest {
 
 	@Test
 	public void searchResultsMatchExamples() throws Exception {
-		JSONObject json = new JSONObject(readAsset(EXAMPLES_ASSET));
-		DownloadResources indexes = prepareIndexes(toStringList(json.getJSONArray("resources")));
-
-		JSONArray examples = json.getJSONArray("examples");
+		DownloadResources indexes = fullCatalog();
+		JSONArray examples = new JSONObject(readAsset(EXAMPLES_ASSET)).getJSONArray("examples");
 		assertTrue("No examples to check", examples.length() > 0);
 		for (int i = 0; i < examples.length(); i++) {
 			JSONObject example = examples.getJSONObject(i);
 			String name = example.getString("name");
 			String query = example.getString("query");
-			boolean showGroup = example.optBoolean("showGroup", true);
 
-			DownloadSearchUIModel model = createModel(showGroup);
-			List<Object> rows = model.search(indexes, query, Collections.emptyList());
+			DownloadSearchUIModel model = createModel(example.optBoolean("showGroup", true));
+			List<Object> rows = model.search(indexes, query, model.searchCities(query));
 			REPORT.add(new ReportScreen("Examples", query, name, toReportRows(model, rows)));
 
 			assertEquals(name + " (query: \"" + query + "\")",
 					toStringList(example.getJSONArray("screen")), renderAll(model, rows));
+			assertScreenIsWellFormed(query, rows);
 		}
 	}
 
@@ -121,11 +120,16 @@ public class DownloadSearchUIModelTest extends AndroidTest {
 		DownloadSearchUIModel model = createModel(true);
 		for (String query : AMBIGUOUS_QUERIES) {
 			List<Object> rows = model.search(indexes, query, model.searchCities(query));
-			REPORT.add(new ReportScreen("Every map and city", query, null, toReportRows(model, rows)));
-			assertSectionsAreWellFormed(query, rows);
-			assertNoDuplicateMaps(query, rows);
-			assertRowsAreDistinguishable(query, rows);
+			REPORT.add(new ReportScreen("Ambiguous queries", query, null, toReportRows(model, rows)));
+			assertScreenIsWellFormed(query, rows);
 		}
+	}
+
+	/** Rules that hold for any query, whatever the shipped region data happens to contain. */
+	private void assertScreenIsWellFormed(@NonNull String query, @NonNull List<Object> rows) {
+		assertSectionsAreWellFormed(query, rows);
+		assertNoDuplicateMaps(query, rows);
+		assertRowsAreDistinguishable(query, rows);
 	}
 
 	@Test
@@ -141,8 +145,7 @@ public class DownloadSearchUIModelTest extends AndroidTest {
 
 		assertTrue("Berlin, Germany is listed as a map on its own", withoutCities.contains("Berlin | Germany"));
 		// the basemap knows a Berlin in Germany too, and it must not offer the same file again
-		assertNoDuplicateMaps("berlin", rows);
-		assertRowsAreDistinguishable("berlin", rows);
+		assertScreenIsWellFormed("berlin", rows);
 		assertTrue("The cities may only add rows", withCities.containsAll(withoutCities));
 	}
 
