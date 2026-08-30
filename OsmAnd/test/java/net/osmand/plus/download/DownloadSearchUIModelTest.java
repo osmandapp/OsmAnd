@@ -43,10 +43,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -78,13 +80,17 @@ public class DownloadSearchUIModelTest extends AndroidTest {
 	private static final String BASEMAP_FILE =
 			WorldRegion.WORLD_BASEMAP_MINI + IndexConstants.BINARY_MAP_INDEX_EXT;
 
+	/** Broad queries, to check the rules on more rows than the examples spell out. */
 	private static final List<String> AMBIGUOUS_QUERIES = Arrays.asList(
-			"berlin", "hamburg", "kyiv", "holland", "utrecht", "york", "washington", "georgia");
+			"san", "santa", "port", "york", "kyiv", "utrecht");
 
 	private static final List<ReportScreen> REPORT = new ArrayList<>();
 
 	/** Built once, the region tree holds a few thousand maps. */
 	private static DownloadResources fullCatalog;
+
+	/** Searching the basemap is by far the slowest part, and several tests use the same queries. */
+	private static final Map<String, List<CityItem>> CITIES = new HashMap<>();
 
 	private OsmandRegions regions;
 
@@ -94,6 +100,8 @@ public class DownloadSearchUIModelTest extends AndroidTest {
 		assertTrue("World regions are not initialized", regions.isInitialized());
 		// region names are localized, the examples are written in English
 		assumeTrue("Test requires an English locale", "en".equals(app.getLanguage()));
+		// cities are shown under the name the request is matched against, keep it at the default
+		settings.MAP_PREFERRED_LOCALE.set("");
 		// the basemap is a bundled asset, the app unpacks it on every start
 		assertTrue("The world basemap is missing",
 				new File(app.getAppPath(IndexConstants.MAPS_PATH), BASEMAP_FILE).exists());
@@ -110,7 +118,7 @@ public class DownloadSearchUIModelTest extends AndroidTest {
 			String query = example.getString("query");
 
 			DownloadSearchUIModel model = createModel(example.optBoolean("showGroup", true));
-			List<Object> rows = model.search(indexes, query, model.searchCities(query));
+			List<Object> rows = model.search(indexes, query, searchCities(model, query));
 			REPORT.add(new ReportScreen("Examples", query, name, toReportRows(model, rows)));
 
 			assertEquals(name + " (query: \"" + query + "\")",
@@ -124,7 +132,7 @@ public class DownloadSearchUIModelTest extends AndroidTest {
 		DownloadResources indexes = fullCatalog();
 		DownloadSearchUIModel model = createModel(true);
 		for (String query : AMBIGUOUS_QUERIES) {
-			List<Object> rows = model.search(indexes, query, model.searchCities(query));
+			List<Object> rows = model.search(indexes, query, searchCities(model, query));
 			REPORT.add(new ReportScreen("Ambiguous queries", query, null, toReportRows(model, rows)));
 			assertScreenIsWellFormed(query, rows);
 		}
@@ -141,7 +149,7 @@ public class DownloadSearchUIModelTest extends AndroidTest {
 	public void cityIsHiddenWhenItsMapIsAlreadyListed() throws IOException {
 		DownloadResources indexes = fullCatalog();
 		DownloadSearchUIModel model = createModel(true);
-		List<CityItem> cities = model.searchCities("berlin");
+		List<CityItem> cities = searchCities(model, "berlin");
 		assertFalse("The basemap knows no Berlin", cities.isEmpty());
 
 		List<Object> rows = model.search(indexes, "berlin", cities);
@@ -206,7 +214,7 @@ public class DownloadSearchUIModelTest extends AndroidTest {
 		DownloadSearchUIModel model = createModel(true);
 		List<CityItem> cities = new ArrayList<>();
 		for (String query : Arrays.asList("san", "port", "york")) {
-			cities.addAll(model.searchCities(query));
+			cities.addAll(searchCities(model, query));
 		}
 		assertTrue("Nothing to cross check", cities.size() > 100);
 		resolve(cities);
@@ -227,6 +235,22 @@ public class DownloadSearchUIModelTest extends AndroidTest {
 	/** Runs one search that resolves every city, with a request no region can match. */
 	private void resolve(@NonNull List<CityItem> cities) {
 		createModel(true).search(fullCatalog(), "-", cities);
+	}
+
+	@NonNull
+	private List<CityItem> searchCities(@NonNull DownloadSearchUIModel model, @NonNull String query)
+			throws IOException {
+		List<CityItem> cities = CITIES.get(query);
+		if (cities == null) {
+			cities = model.searchCities(query);
+			CITIES.put(query, cities);
+		}
+		// the rows keep the resolved map, hand out a copy so that the tests do not share it
+		List<CityItem> copy = new ArrayList<>();
+		for (CityItem city : cities) {
+			copy.add(new CityItem(city.getName(), city.getAmenity(), null));
+		}
+		return copy;
 	}
 
 	@NonNull
@@ -410,6 +434,7 @@ public class DownloadSearchUIModelTest extends AndroidTest {
 	@AfterClass
 	public static void writeReport() throws IOException {
 		fullCatalog = null;
+		CITIES.clear();
 		if (REPORT.isEmpty()) {
 			return;
 		}

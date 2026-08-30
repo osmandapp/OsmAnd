@@ -3,6 +3,7 @@
     "Examples for DownloadSearchUIModelTest: what the 'Maps & Resources' search results screen shows for a query.",
     "Nothing here is made up - the maps are every map the region tree of regions.ocbf offers and the cities are",
     "searched in World_basemap_mini.obf, both shipped with the app, so these are the rows a user sees.",
+    "The first examples are the rules of the screen, the ones after them are the corner cases that broke it.",
     "Every 'screen' entry is one row of the list: '[Header]' for a section header,",
     "'Title' for a row without a second line and 'Title | Subtitle' for a row with the region shown in the second line.",
     "Update the file when the shipped region data changes - the report the test writes shows the new screens side by side."
@@ -159,6 +160,90 @@
         "Berlin | New Hampshire",
         "Berlin | Germany",
         "Brandenburg, Berlin | Germany"
+      ]
+    },
+    {
+      "name": "Three rows named Washington - two cities and a state - are told apart only by the second line",
+      "query": "washington",
+      "screen": [
+        "[Regions]",
+        "Washington | United States",
+        "[Maps]",
+        "Washington | Pennsylvania",
+        "Washington | District of Columbia",
+        "Washington | United States"
+      ]
+    },
+    {
+      "name": "Cities of the same name on four continents, and one matched by another of its names",
+      "query": "san juan",
+      "screen": [
+        "[Regions]",
+        "San Juan | Argentina",
+        "[Maps]",
+        "San Juan | Metro Manila",
+        "San Juan | Puerto Rico",
+        "San Juan | Venezuela",
+        "San Juan del Río | Querétaro",
+        "St. John's | Newfoundland and Labrador",
+        "San Juan | Argentina"
+      ]
+    },
+    {
+      "name": "The smallest map covering the city wins, not the archipelago map that also covers it",
+      "query": "santo domingo",
+      "screen": [
+        "[Maps]",
+        "Santo Domingo | Dominican Republic"
+      ]
+    },
+    {
+      "name": "A city in a detached part of a region, which is only found by reading the region file",
+      "query": "sanhe",
+      "screen": [
+        "[Maps]",
+        "三河市 | Hebei Province"
+      ]
+    },
+    {
+      "name": "A city can carry the name of a country it is nowhere near",
+      "query": "holland",
+      "screen": [
+        "[Regions]",
+        "Netherlands",
+        "Netherlands Antilles",
+        "North Holland | Netherlands",
+        "South Holland | Netherlands",
+        "[Maps]",
+        "Holland | Michigan",
+        "Netherlands Antilles",
+        "North Holland | Netherlands",
+        "South Holland | Netherlands"
+      ]
+    },
+    {
+      "name": "A city whose name merely contains the query is still told apart by its region",
+      "query": "hamburg",
+      "screen": [
+        "[Regions]",
+        "Hamburg | Germany",
+        "[Maps]",
+        "Novo Hamburgo | Rio Grande do Sul",
+        "Hamburg | Germany"
+      ]
+    },
+    {
+      "name": "A country, a state of another country and an island group, all named Georgia",
+      "query": "georgia",
+      "screen": [
+        "[Regions]",
+        "Georgia",
+        "Georgia | United States",
+        "South Georgia and South Sandwich Islands",
+        "[Maps]",
+        "Georgia",
+        "Georgia | United States",
+        "South Georgia and South Sandwich Islands"
       ]
     }
   ]
