@@ -3260,7 +3260,7 @@
     <string name="app_profile_type">Врста применљивих налога</string>
     <string name="add_to_group">Додај у групу</string>
     <string name="app_modes_options">Одаберите начин рада програма</string>
-    <string name="shared_string_memory">Складиште</string>
+    <string name="shared_string_memory">Меморија</string>
     <string name="gps_filter_hdop_desc">Поставите највећу прихваћену вредност за водоравну прецизност.
 \nТачке са већим вредностима ће бити сакривене.</string>
     <string name="gps_filter_actions_description">ОсмАнд ће применити измене на трагу без измена датотеке. Измене можете сачувати ручно.</string>
@@ -5332,7 +5332,7 @@
         <item quantity="other">%d датотека</item>
     </plurals>
     <string name="preparing_file">Припремам датотеку</string>
-    <string name="shared_string_archive">Складиште</string>
+    <string name="shared_string_archive">Архива</string>
     <string name="share_favorites_with_media_description">Омиљене тачке у %1$s имају приложени медиј. Делите само тачке или тачке са медијима као складиште.</string>
     <string name="share_favorites_points_only">Само тачке</string>
     <string name="share_favorites_points_and_media">Тачке и медији</string>
