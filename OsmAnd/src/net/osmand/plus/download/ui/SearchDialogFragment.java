@@ -493,14 +493,11 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 				IndexItem indexItem = item.getIndexItem();
 				if (indexItem != null) {
 					setShowTypeInDesc(true);
-					bindDownloadItem(indexItem);
-					setTitleWithSecondaryLine(item.getName(),
-							indexItem.getVisibleName(ctx, osmandRegions, false));
+					bindDownloadItem(indexItem, item.getName());
 				} else {
 					bindDownloadItem(item);
 					btnRight.setVisibility(View.GONE);
 					ivBtnRight.setVisibility(View.GONE);
-					setTitleWithSecondaryLine(item.getName(), item.getAmenity().getRegionName());
 				}
 			}
 
