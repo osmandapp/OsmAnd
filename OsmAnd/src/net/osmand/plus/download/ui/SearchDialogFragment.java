@@ -17,9 +17,11 @@ import android.widget.ExpandableListView;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -83,6 +85,17 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 	public static final String SHOW_GROUP_KEY = "show_group_key";
 	public static final String DOWNLOAD_TYPES_TO_SHOW_KEY = "download_types_to_show";
 	public static final String SHOW_WIKI_KEY = "show_wiki_key";
+
+	private enum SearchResultSection {
+		REGIONS(R.string.regions),
+		MAPS(R.string.shared_string_maps);
+
+		private final int titleId;
+
+		SearchResultSection(int titleId) {
+			this.titleId = titleId;
+		}
+	}
 
 	private boolean showGroup;
 	private ArrayList<String> downloadTypesToShow = new ArrayList<>();
@@ -252,8 +265,12 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 		Object obj = listAdapter.getItem(position);
 		if (obj instanceof DownloadResourceGroup group) {
 			DownloadResourceGroupFragment.showInstance(requireActivity(), group.getUniqueId());
-		} else if (obj instanceof IndexItem indexItem) {
-			ItemViewHolder vh = (ItemViewHolder) v.getTag();
+		} else if (obj instanceof IndexItem indexItem && v.getTag() instanceof ItemViewHolder vh) {
+			View.OnClickListener ls = vh.getRightButtonAction(indexItem, vh.getClickAction(indexItem));
+			ls.onClick(v);
+		} else if (obj instanceof CityItem cityItem && cityItem.getIndexItem() != null
+				&& v.getTag() instanceof ItemViewHolder vh) {
+			IndexItem indexItem = cityItem.getIndexItem();
 			View.OnClickListener ls = vh.getRightButtonAction(indexItem, vh.getClickAction(indexItem));
 			ls.onClick(v);
 		}
@@ -301,6 +318,9 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 	}
 
 	private class SearchListAdapter extends BaseAdapter implements Filterable {
+		private static final int MAP_ITEM_TYPE = 0;
+		private static final int REGION_ITEM_TYPE = 1;
+		private static final int SECTION_ITEM_TYPE = 2;
 
 		private SearchIndexFilter mFilter;
 		private final OsmandRegions osmandRegions;
@@ -339,56 +359,152 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 		public int getItemViewType(int position) {
 			Object obj = items.get(position);
 			if (obj instanceof IndexItem || obj instanceof CityItem) {
-				return 0;
+				return MAP_ITEM_TYPE;
+			} else if (obj instanceof SearchResultSection) {
+				return SECTION_ITEM_TYPE;
 			} else {
-				return 1;
+				return REGION_ITEM_TYPE;
 			}
 		}
 
 		@Override
 		public int getViewTypeCount() {
-			return 2;
+			return 3;
+		}
+
+		@Override
+		public boolean areAllItemsEnabled() {
+			return false;
+		}
+
+		@Override
+		public boolean isEnabled(int position) {
+			return !(items.get(position) instanceof SearchResultSection);
 		}
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			Object obj = items.get(position);
 			if (obj instanceof IndexItem || obj instanceof CityItem) {
-
-				ItemViewHolder viewHolder;
-				if (convertView != null && convertView.getTag() instanceof ItemViewHolder) {
-					viewHolder = (ItemViewHolder) convertView.getTag();
+				SearchMapViewHolder viewHolder;
+				if (convertView != null && convertView.getTag() instanceof SearchMapViewHolder) {
+					viewHolder = (SearchMapViewHolder) convertView.getTag();
 				}  else {
 					convertView = LayoutInflater.from(parent.getContext()).inflate(
 							R.layout.two_line_with_images_list_item, parent, false);
-					viewHolder = new ItemViewHolder(convertView, getDownloadActivity());
+					viewHolder = new SearchMapViewHolder(convertView);
 					viewHolder.setShowRemoteDate(true);
 					convertView.setTag(viewHolder);
 				}
 				if (obj instanceof IndexItem item) {
-					viewHolder.setShowTypeInDesc(true);
-					viewHolder.bindDownloadItem(item);
+					viewHolder.bindMapItem(item);
 				} else {
 					CityItem item = (CityItem) obj;
-					viewHolder.bindDownloadItem(item);
+					viewHolder.bindCityItem(item);
 					if (item.getIndexItem() == null) {
 						OsmAndTaskManager.executeTask(new IndexItemResolverTask(viewHolder, item));
 					}
 				}
-			} else {
-				DownloadResourceGroup group = (DownloadResourceGroup) obj;
-				DownloadGroupViewHolder viewHolder;
-				if (convertView != null && convertView.getTag() instanceof DownloadGroupViewHolder) {
-					viewHolder = (DownloadGroupViewHolder) convertView.getTag();
+			} else if (obj instanceof DownloadResourceGroup group) {
+				SearchRegionViewHolder viewHolder;
+				if (convertView != null && convertView.getTag() instanceof SearchRegionViewHolder) {
+					viewHolder = (SearchRegionViewHolder) convertView.getTag();
 				}  else {
-					convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.simple_list_menu_item,
+					convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.two_line_with_images_list_item,
 							parent, false);
-					viewHolder = new DownloadGroupViewHolder(getDownloadActivity(), convertView);
+					viewHolder = new SearchRegionViewHolder(convertView);
 					convertView.setTag(viewHolder);
 				}
 				viewHolder.bindItem(group);
+			} else {
+				SearchResultSection section = (SearchResultSection) obj;
+				if (convertView == null) {
+					convertView = LayoutInflater.from(parent.getContext()).inflate(
+							R.layout.download_item_list_section, parent, false);
+				}
+				((TextView) convertView.findViewById(R.id.title)).setText(section.titleId);
 			}
 			return convertView;
+		}
+
+		private class SearchRegionViewHolder {
+			private final ImageView icon;
+			private final TextView title;
+			private final TextView description;
+
+			SearchRegionViewHolder(@NonNull View view) {
+				icon = view.findViewById(R.id.icon);
+				title = view.findViewById(R.id.title);
+				description = view.findViewById(R.id.description);
+				view.findViewById(R.id.secondaryIcon).setVisibility(View.GONE);
+				view.findViewById(R.id.rightButton).setVisibility(View.GONE);
+				view.findViewById(R.id.progressBar).setVisibility(View.GONE);
+			}
+
+			void bindItem(@NonNull DownloadResourceGroup group) {
+				icon.setImageDrawable(ctx.getApp().getUIUtilities().getThemedIcon(R.drawable.ic_map));
+				title.setText(group.getName(ctx));
+
+				WorldRegion region = group.getRegion();
+				WorldRegion parent = region != null ? region.getSuperregion() : null;
+				if (parent != null && !WorldRegion.WORLD.equals(parent.getRegionId())) {
+					description.setText(parent.getLocaleName());
+					description.setVisibility(View.VISIBLE);
+				} else {
+					description.setVisibility(View.GONE);
+				}
+			}
+		}
+
+		private class SearchMapViewHolder extends ItemViewHolder {
+			@Nullable
+			private CityItem boundCityItem;
+
+			SearchMapViewHolder(@NonNull View view) {
+				super(view, ctx);
+			}
+
+			void bindMapItem(@NonNull IndexItem item) {
+				boundCityItem = null;
+				setShowTypeInDesc(true);
+				bindDownloadItem(item);
+				if (showGroup) {
+					tvName.setText(item.getVisibleName(ctx, osmandRegions, false));
+					WorldRegion region = osmandRegions.getRegionDataByDownloadName(
+							item.getBasename().toLowerCase(Locale.US));
+					WorldRegion parent = region != null ? region.getSuperregion() : null;
+					if (parent != null && !WorldRegion.WORLD.equals(parent.getRegionId())) {
+						setSecondaryDescription(parent.getLocaleName());
+					}
+				}
+			}
+
+			void bindCityItem(@NonNull CityItem item) {
+				boundCityItem = item;
+				IndexItem indexItem = item.getIndexItem();
+				if (indexItem != null) {
+					setShowTypeInDesc(true);
+					bindDownloadItem(indexItem);
+					tvName.setText(item.getName());
+					setSecondaryDescription(indexItem.getVisibleName(ctx, osmandRegions, false));
+				} else {
+					bindDownloadItem(item);
+					btnRight.setVisibility(View.GONE);
+					ivBtnRight.setVisibility(View.GONE);
+					setSecondaryDescription(item.getAmenity().getRegionName());
+				}
+			}
+
+			boolean isBoundTo(@NonNull CityItem cityItem) {
+				return boundCityItem == cityItem;
+			}
+
+			private void setSecondaryDescription(@Nullable String text) {
+				if (pbProgress.getVisibility() != View.VISIBLE && !Algorithms.isEmpty(text)) {
+					tvDesc.setText(text);
+					tvDesc.setVisibility(View.VISIBLE);
+				}
+			}
 		}
 
 
@@ -406,10 +522,10 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 		}
 
 		class IndexItemResolverTask extends AsyncTask<Void, Void, IndexItem> {
-			private final WeakReference<ItemViewHolder> viewHolderReference;
+			private final WeakReference<SearchMapViewHolder> viewHolderReference;
 			private final CityItem cityItem;
 
-			public IndexItemResolverTask(ItemViewHolder viewHolder, CityItem cityItem) {
+			public IndexItemResolverTask(SearchMapViewHolder viewHolder, CityItem cityItem) {
 				this.viewHolderReference = new WeakReference<>(viewHolder);
 				this.cityItem = cityItem;
 			}
@@ -442,11 +558,11 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 				if (isCancelled()) {
 					return;
 				}
-				ItemViewHolder viewHolder = viewHolderReference.get();
-				if (viewHolder != null) {
-					if (indexItem != null) {
-						cityItem.setIndexItem(indexItem);
-						viewHolder.bindDownloadItem(indexItem, cityItem.getName());
+				if (indexItem != null) {
+					cityItem.setIndexItem(indexItem);
+					SearchMapViewHolder viewHolder = viewHolderReference.get();
+					if (viewHolder != null && viewHolder.isBoundTo(cityItem)) {
+						viewHolder.bindCityItem(cityItem);
 					}
 				}
 			}
@@ -469,7 +585,8 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 				}
 			}
 
-			private void processGroup(DownloadResourceGroup group, List<Object> filter, List<List<String>> conds) {
+			private void processGroup(DownloadResourceGroup group, List<Object> regions,
+			                          List<Object> maps, List<List<String>> conds) {
 				String name = null;
 				if (group.getRegion() != null && group.getRegion().getRegionSearchText() != null) {
 					name = group.getRegion().getRegionSearchText().toLowerCase(Locale.US);
@@ -482,24 +599,29 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 						&& group.getParentGroup().getParentGroup().getType() != DownloadResourceGroupType.WORLD
 						&& isMatch(conds, false, name)) {
 
-					if (showGroup) {
-						filter.add(group);
-					}
-
+					List<IndexItem> matchingMaps = new ArrayList<>();
+					boolean hasSubregions = false;
 					for (DownloadResourceGroup g : group.getGroups()) {
-						if (g.getType() == DownloadResourceGroupType.REGION_MAPS) {
-							if (g.getIndividualResources() != null) {
-								for (IndexItem item : g.getIndividualResources()) {
-									for (String fileTypeTag : downloadTypesToShow) {
-										DownloadActivityType type = DownloadActivityType.getIndexType(fileTypeTag);
-										if (type != null && type == item.getType()) {
-											filter.add(item);
-										}
+						if (g.getGroups() != null) {
+							hasSubregions = hasSubregions || !g.isEmpty();
+						} else if (g.getType() == DownloadResourceGroupType.REGION_MAPS
+								&& g.getIndividualResources() != null) {
+							for (IndexItem item : g.getIndividualResources()) {
+								for (String fileTypeTag : downloadTypesToShow) {
+									DownloadActivityType type = DownloadActivityType.getIndexType(fileTypeTag);
+									if (type != null && type == item.getType()) {
+										matchingMaps.add(item);
 									}
 								}
 							}
-							break;
 						}
+					}
+
+					boolean hasMultipleResources = group.getAllDownloadItems().size() > 1;
+					if (showGroup && (hasSubregions || hasMultipleResources || matchingMaps.isEmpty())) {
+						regions.add(group);
+					} else {
+						maps.addAll(matchingMaps);
 					}
 				}
 
@@ -513,7 +635,7 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 						for (IndexItem item : group.getIndividualResources()) {
 							name = item.getVisibleName(ctx, osmandRegions, false).toLowerCase(Locale.US);
 							if (isMatch(conds, false, name)) {
-								filter.add(item);
+								maps.add(item);
 								break;
 							}
 						}
@@ -522,7 +644,7 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 
 				if (group.getGroups() != null) {
 					for (DownloadResourceGroup g : group.getGroups()) {
-						processGroup(g, filter, conds);
+						processGroup(g, regions, maps, conds);
 					}
 				}
 			}
@@ -623,10 +745,12 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 					results.values = new ArrayList<>();
 					results.count = 0;
 				} else {
-					List<Object> filter = new ArrayList<>();
-					if (searchRequest.length() > 2) {
+					List<Object> regions = new ArrayList<>();
+					List<Object> maps = new ArrayList<>();
+					if (searchRequest.length() > 2
+							&& downloadTypesToShow.contains(DownloadActivityType.NORMAL_FILE.getTag())) {
 						try {
-							filter.addAll(searchCities(searchRequest));
+							maps.addAll(searchCities(searchRequest));
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
@@ -648,10 +772,10 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 					}
 
 					DownloadResources indexes = ctx.getDownloadThread().getIndexes();
-					processGroup(indexes, filter, conds);
+					processGroup(indexes, regions, maps, conds);
 
 					Collator collator = OsmAndCollator.primaryCollator();
-					Collections.sort(filter, new Comparator<Object>() {
+					Comparator<Object> comparator = new Comparator<Object>() {
 						@Override
 						public int compare(Object obj1, Object obj2) {
 							String str1;
@@ -682,7 +806,23 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 							}
 							return collator.compare(str1, str2);
 						}
-					});
+					};
+					Collections.sort(regions, comparator);
+					Collections.sort(maps, comparator);
+
+					List<Object> filter = new ArrayList<>();
+					if (showGroup) {
+						if (!regions.isEmpty()) {
+							filter.add(SearchResultSection.REGIONS);
+							filter.addAll(regions);
+						}
+						if (!maps.isEmpty()) {
+							filter.add(SearchResultSection.MAPS);
+							filter.addAll(maps);
+						}
+					} else {
+						filter.addAll(maps);
+					}
 
 					results.values = filter;
 					results.count = filter.size();
