@@ -8,7 +8,11 @@
   "resources": [
     "Germany_berlin_europe_2.obf.zip",
     "Germany_brandenburg_europe_2.obf.zip",
-    "US_new-hampshire_northamerica_2.obf.zip"
+    "US_new-hampshire_northamerica_2.obf.zip",
+    "US_new-york_new-york-city_northamerica_2.obf.zip",
+    "US_california_san-francisco_northamerica_2.obf.zip",
+    "GB_england_greater-london_europe_2.obf.zip",
+    "Canada_ontario_london_northamerica_2.obf.zip"
   ],
   "examples": [
     {
@@ -63,6 +67,52 @@
         "New Hampshire | United States",
         "[Maps]",
         "New Hampshire | United States"
+      ]
+    },
+    {
+      "name": "Maps with the same name in different countries are told apart by the second line",
+      "query": "London",
+      "screen": [
+        "[Regions]",
+        "Greater London | United Kingdom",
+        "London | Canada",
+        "[Maps]",
+        "Greater London | United Kingdom",
+        "London | Canada"
+      ]
+    },
+    {
+      "name": "A region whose map is built by joining its subregions has no map row of its own",
+      "query": "New york",
+      "screen": [
+        "[Regions]",
+        "New York | United States",
+        "New York City and surroundings | United States",
+        "[Maps]",
+        "New York City and surroundings | United States"
+      ]
+    },
+    {
+      "name": "A short query matches every name that starts with it",
+      "query": "New",
+      "screen": [
+        "[Regions]",
+        "New Hampshire | United States",
+        "New York | United States",
+        "New York City and surroundings | United States",
+        "[Maps]",
+        "New Hampshire | United States",
+        "New York City and surroundings | United States"
+      ]
+    },
+    {
+      "name": "A partial second term still narrows the search down",
+      "query": "San Fr",
+      "screen": [
+        "[Regions]",
+        "San Francisco | United States",
+        "[Maps]",
+        "San Francisco | United States"
       ]
     },
     {

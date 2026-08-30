@@ -50,8 +50,6 @@ import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.DownloadResources;
-import net.osmand.plus.download.DownloadSearchHelper;
-import net.osmand.plus.download.DownloadSearchHelper.SectionHeader;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -306,7 +304,7 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 
 		private SearchIndexFilter mFilter;
 		private final OsmandRegions osmandRegions;
-		private final DownloadSearchHelper searchHelper;
+		private final DownloadSearchUIModel searchModel;
 
 		private final List<Object> items = new LinkedList<>();
 		private final DownloadActivity ctx;
@@ -314,7 +312,7 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 		public SearchListAdapter(DownloadActivity ctx) {
 			this.ctx = ctx;
 			this.osmandRegions = ctx.getApp().getRegions();
-			this.searchHelper = new DownloadSearchHelper(ctx, osmandRegions, showGroup, downloadTypesToShow);
+			this.searchModel = new DownloadSearchUIModel(ctx, osmandRegions, showGroup, downloadTypesToShow);
 			TypedArray ta = ctx.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
 			ta.recycle();
 		}
@@ -342,7 +340,7 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 		@Override
 		public int getItemViewType(int position) {
 			Object obj = items.get(position);
-			if (obj instanceof SectionHeader) {
+			if (obj instanceof DownloadSearchUIModel.SectionHeader) {
 				return HEADER_VIEW_TYPE;
 			} else if (obj instanceof IndexItem || obj instanceof CityItem) {
 				return ITEM_VIEW_TYPE;
@@ -363,13 +361,13 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 
 		@Override
 		public boolean isEnabled(int position) {
-			return !(items.get(position) instanceof SectionHeader);
+			return !(items.get(position) instanceof DownloadSearchUIModel.SectionHeader);
 		}
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			Object obj = items.get(position);
-			if (obj instanceof SectionHeader header) {
+			if (obj instanceof DownloadSearchUIModel.SectionHeader header) {
 				if (convertView == null) {
 					convertView = LayoutInflater.from(parent.getContext()).inflate(
 							R.layout.download_item_list_section, parent, false);
@@ -390,7 +388,7 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 					convertView.setTag(viewHolder);
 				}
 				viewHolder.setShowTypeInDesc(true);
-				viewHolder.setRegionName(searchHelper.getSubtitle(obj));
+				viewHolder.setRegionName(searchModel.getSubtitle(obj));
 				if (obj instanceof IndexItem item) {
 					viewHolder.bindDownloadItem(item);
 				} else {
@@ -411,7 +409,7 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 					viewHolder = new DownloadGroupViewHolder(getDownloadActivity(), convertView);
 					convertView.setTag(viewHolder);
 				}
-				viewHolder.bindItem(group, searchHelper.getSubtitle(group));
+				viewHolder.bindItem(group, searchModel.getSubtitle(group));
 			}
 			return convertView;
 		}
@@ -474,7 +472,7 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 				ItemViewHolder viewHolder = viewHolderReference.get();
 				if (viewHolder != null && indexItem != null) {
 					cityItem.setIndexItem(indexItem);
-					viewHolder.setRegionName(searchHelper.getSubtitle(cityItem));
+					viewHolder.setRegionName(searchModel.getSubtitle(cityItem));
 					viewHolder.bindDownloadItem(indexItem, cityItem.getName());
 				}
 			}
@@ -597,7 +595,7 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 						}
 					}
 					DownloadResources indexes = ctx.getDownloadThread().getIndexes();
-					List<Object> filter = searchHelper.search(indexes, searchRequest, cities);
+					List<Object> filter = searchModel.search(indexes, searchRequest, cities);
 
 					results.values = filter;
 					results.count = filter.size();

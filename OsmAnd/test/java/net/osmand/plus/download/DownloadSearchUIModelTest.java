@@ -18,8 +18,9 @@ import net.osmand.data.Amenity;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.download.DownloadSearchHelper.SearchSection;
-import net.osmand.plus.download.DownloadSearchHelper.SectionHeader;
+import net.osmand.plus.download.ui.DownloadSearchUIModel;
+import net.osmand.plus.download.ui.DownloadSearchUIModel.SectionHeader;
+import net.osmand.plus.R;
 import net.osmand.test.common.AndroidTest;
 import net.osmand.util.Algorithms;
 
@@ -58,7 +59,7 @@ import java.util.Set;
  * app, and the report goes away with it.
  */
 @RunWith(AndroidJUnit4.class)
-public class DownloadSearchHelperTest extends AndroidTest {
+public class DownloadSearchUIModelTest extends AndroidTest {
 
 	private static final String EXAMPLES_ASSET = "download/search_examples.json";
 	private static final String REPORT_FILE = "download_search_report.html";
@@ -96,14 +97,14 @@ public class DownloadSearchHelperTest extends AndroidTest {
 			String query = example.getString("query");
 			boolean showGroup = example.optBoolean("showGroup", true);
 
-			DownloadSearchHelper helper = createHelper(showGroup);
-			List<Object> rows = helper.search(indexes, query, readCities(example.optJSONArray("cities"), indexes));
-			REPORT.add(new ReportScreen("Examples", query, name, toReportRows(helper, rows)));
+			DownloadSearchUIModel model = createModel(showGroup);
+			List<Object> rows = model.search(indexes, query, readCities(example.optJSONArray("cities"), indexes));
+			REPORT.add(new ReportScreen("Examples", query, name, toReportRows(model, rows)));
 
 			List<String> expected = toStringList(example.getJSONArray("screen"));
 			List<String> actual = new ArrayList<>();
 			for (Object row : rows) {
-				actual.add(render(helper, row));
+				actual.add(render(model, row));
 			}
 			assertEquals(name + " (query: \"" + query + "\")", expected, actual);
 		}
@@ -123,21 +124,21 @@ public class DownloadSearchHelperTest extends AndroidTest {
 	public void cityIsHiddenWhenItsMapIsAlreadyListed() {
 		DownloadResources germany = prepareIndexes(collectRegionMaps(GERMANY_ID));
 		IndexItem berlinMap = findByBasename(germany, "germany_berlin_europe");
-		DownloadSearchHelper helper = createHelper(true);
+		DownloadSearchUIModel model = createModel(true);
 
-		List<Object> withoutCity = helper.search(germany, "berlin", Collections.emptyList());
-		List<Object> withCity = helper.search(germany, "berlin",
+		List<Object> withoutCity = model.search(germany, "berlin", Collections.emptyList());
+		List<Object> withCity = model.search(germany, "berlin",
 				Collections.singletonList(new CityItem("Berlin", cityAmenity(), berlinMap)));
 
 		assertEquals("A city pointing to a listed map must not add a row",
-				renderAll(helper, withoutCity), renderAll(helper, withCity));
+				renderAll(model, withoutCity), renderAll(model, withCity));
 	}
 
 	private void checkQueries(@NonNull String catalog, @NonNull DownloadResources indexes) {
-		DownloadSearchHelper helper = createHelper(true);
+		DownloadSearchUIModel model = createModel(true);
 		for (String query : AMBIGUOUS_QUERIES) {
-			List<Object> rows = helper.search(indexes, query, Collections.emptyList());
-			REPORT.add(new ReportScreen(catalog, query, null, toReportRows(helper, rows)));
+			List<Object> rows = model.search(indexes, query, Collections.emptyList());
+			REPORT.add(new ReportScreen(catalog, query, null, toReportRows(model, rows)));
 			assertSectionsAreWellFormed(catalog, query, rows);
 			assertNoDuplicateMaps(catalog, query, rows);
 			assertRowsAreDistinguishable(catalog, query, rows);
@@ -148,22 +149,22 @@ public class DownloadSearchHelperTest extends AndroidTest {
 	private void assertSectionsAreWellFormed(@NonNull String catalog, @NonNull String query,
 	                                         @NonNull List<Object> rows) {
 		String where = catalog + " / \"" + query + "\": ";
-		List<SearchSection> headers = new ArrayList<>();
-		SearchSection current = null;
+		List<Integer> headers = new ArrayList<>();
+		Integer current = null;
 		for (Object row : rows) {
 			if (row instanceof SectionHeader header) {
-				assertFalse(where + "duplicate " + header.getSection() + " header",
-						headers.contains(header.getSection()));
-				headers.add(header.getSection());
-				current = header.getSection();
+				assertFalse(where + "duplicate header", headers.contains(header.getTitleId()));
+				headers.add(header.getTitleId());
+				current = header.getTitleId();
 			} else {
 				assertNotNull(where + "row before the first header", current);
-				assertEquals(where + "row is in the wrong section", current, DownloadSearchHelper.getSection(row));
+				int expected = DownloadSearchUIModel.isRegion(row) ? R.string.regions : R.string.shared_string_maps;
+				assertEquals(where + "row is in the wrong section", expected, current.intValue());
 			}
 		}
 		if (headers.size() == 2) {
 			assertEquals(where + "sections are in the wrong order",
-					Arrays.asList(SearchSection.REGIONS, SearchSection.MAPS), headers);
+					Arrays.asList(R.string.regions, R.string.shared_string_maps), headers);
 		}
 	}
 
@@ -183,80 +184,33 @@ public class DownloadSearchHelperTest extends AndroidTest {
 	/** Two rows of the same section must never show exactly the same two lines. */
 	private void assertRowsAreDistinguishable(@NonNull String catalog, @NonNull String query,
 	                                          @NonNull List<Object> rows) {
-		DownloadSearchHelper helper = createHelper(true);
+		DownloadSearchUIModel model = createModel(true);
 		Set<String> seen = new HashSet<>();
 		for (Object row : rows) {
 			if (row instanceof SectionHeader) {
 				seen.clear();
 				continue;
 			}
-			String text = render(helper, row);
+			String text = render(model, row);
 			assertTrue(catalog + " / \"" + query + "\": two rows read as \"" + text + "\"", seen.add(text));
 		}
 	}
 
 	@Test
-	public void countryRegionIsResolvedForNestedRegions() {
-		assertEquals("Germany", countryOf("germany_berlin_europe"));
-		assertEquals("Germany", countryOf("germany_europe"));
-		assertEquals("Ukraine", countryOf("ukraine_kyiv-city_europe"));
-		assertEquals("Netherlands", countryOf("netherlands_noord-holland_europe"));
-		assertEquals("United States", countryOf("us_new-hampshire_northamerica"));
-		// continents and the world itself have no country
-		assertNull(DownloadSearchHelper.getCountryName(regions.getRegionData("europe")));
-		assertNull(DownloadSearchHelper.getCountryRegion(regions.getWorldRegion()));
-		assertNull(DownloadSearchHelper.getCountryName(null));
-	}
-
-	/**
-	 * Most countries sit under a continent. A few are placed at the top level next to the
-	 * continents instead, and their subregions fall back to that topmost parent.
-	 */
-	@Test
-	public void countryIsResolvedForBothRegionTreeShapes() {
-		WorldRegion world = new WorldRegion(WorldRegion.WORLD);
-
-		WorldRegion continent = new WorldRegion("continent");
-		WorldRegion country = new WorldRegion("continent_country");
-		WorldRegion province = new WorldRegion("continent_country_province");
-		world.addSubregion(continent);
-		continent.addSubregion(country);
-		country.addSubregion(province);
-
-		WorldRegion topLevelCountry = new WorldRegion(WorldRegion.RUSSIA_REGION_ID);
-		WorldRegion topLevelProvince = new WorldRegion("top_province");
-		world.addSubregion(topLevelCountry);
-		topLevelCountry.addSubregion(topLevelProvince);
-
-		assertEquals(country, DownloadSearchHelper.getCountryRegion(province));
-		assertEquals(country, DownloadSearchHelper.getCountryRegion(country));
-		assertEquals(topLevelCountry, DownloadSearchHelper.getCountryRegion(topLevelProvince));
-		assertNull(DownloadSearchHelper.getCountryRegion(continent));
-		assertNull(DownloadSearchHelper.getCountryRegion(world));
-	}
-
-	@Test
 	public void conditionsAreParsedAsAndOfOrs() {
-		List<List<String>> conditions = DownloadSearchHelper.parseConditions("new hampshire, berlin");
+		List<List<String>> conditions = DownloadSearchUIModel.parseConditions("new hampshire, berlin");
 		assertEquals(Arrays.asList(Arrays.asList("new", "hampshire"), Arrays.asList("berlin")), conditions);
 
-		assertTrue(DownloadSearchHelper.isMatch(conditions, false, "new hampshire"));
-		assertTrue(DownloadSearchHelper.isMatch(conditions, false, "brandenburg, berlin"));
-		assertFalse(DownloadSearchHelper.isMatch(conditions, false, "hampshire"));
-		assertFalse(DownloadSearchHelper.isMatch(conditions, false, "germany"));
+		assertTrue(DownloadSearchUIModel.isMatch(conditions, false, "new hampshire"));
+		assertTrue(DownloadSearchUIModel.isMatch(conditions, false, "brandenburg, berlin"));
+		assertFalse(DownloadSearchUIModel.isMatch(conditions, false, "hampshire"));
+		assertFalse(DownloadSearchUIModel.isMatch(conditions, false, "germany"));
 	}
 
 	@NonNull
-	private DownloadSearchHelper createHelper(boolean showGroup) {
-		return new DownloadSearchHelper(app, regions, showGroup,
+	private DownloadSearchUIModel createModel(boolean showGroup) {
+		return new DownloadSearchUIModel(app, regions, showGroup,
 				Collections.singletonList(DownloadActivityType.NORMAL_FILE.getTag()));
-	}
-
-	@Nullable
-	private String countryOf(@NonNull String downloadName) {
-		WorldRegion region = regions.getRegionDataByDownloadName(downloadName);
-		assertNotNull("Unknown region " + downloadName, region);
-		return DownloadSearchHelper.getCountryName(region);
 	}
 
 	@NonNull
@@ -277,21 +231,21 @@ public class DownloadSearchHelperTest extends AndroidTest {
 	}
 
 	@NonNull
-	private List<String> renderAll(@NonNull DownloadSearchHelper helper, @NonNull List<Object> rows) {
+	private List<String> renderAll(@NonNull DownloadSearchUIModel model, @NonNull List<Object> rows) {
 		List<String> rendered = new ArrayList<>();
 		for (Object row : rows) {
-			rendered.add(render(helper, row));
+			rendered.add(render(model, row));
 		}
 		return rendered;
 	}
 
 	@NonNull
-	private String render(@NonNull DownloadSearchHelper helper, @NonNull Object row) {
+	private String render(@NonNull DownloadSearchUIModel model, @NonNull Object row) {
 		if (row instanceof SectionHeader header) {
 			return "[" + header.getTitle(app) + "]";
 		}
-		String title = helper.getTitle(row);
-		String subtitle = helper.getSubtitle(row);
+		String title = model.getTitle(row);
+		String subtitle = model.getSubtitle(row);
 		return subtitle == null ? title : title + " | " + subtitle;
 	}
 
@@ -307,13 +261,13 @@ public class DownloadSearchHelperTest extends AndroidTest {
 	}
 
 	@NonNull
-	private List<ReportRow> toReportRows(@NonNull DownloadSearchHelper helper, @NonNull List<Object> rows) {
+	private List<ReportRow> toReportRows(@NonNull DownloadSearchUIModel model, @NonNull List<Object> rows) {
 		List<ReportRow> reportRows = new ArrayList<>();
 		for (Object row : rows) {
 			if (row instanceof SectionHeader header) {
 				reportRows.add(new ReportRow(header.getTitle(app), null, null));
 			} else {
-				reportRows.add(new ReportRow(null, helper.getTitle(row), helper.getSubtitle(row)));
+				reportRows.add(new ReportRow(null, model.getTitle(row), model.getSubtitle(row)));
 			}
 		}
 		return reportRows;
@@ -421,7 +375,7 @@ public class DownloadSearchHelperTest extends AndroidTest {
 		}
 		File report = new File(dir, REPORT_FILE);
 		try (FileOutputStream out = new FileOutputStream(report)) {
-			out.write(SearchReport.build(REPORT).getBytes(StandardCharsets.UTF_8));
+			out.write(DownloadSearchScreenReport.build(REPORT).getBytes(StandardCharsets.UTF_8));
 		}
 		REPORT.clear();
 		System.out.println("Search results report: " + report.getAbsolutePath());
