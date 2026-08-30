@@ -148,6 +148,8 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 		ll.removeView(expandablelistView);
 
 		listView = new ListView(themedContext);
+		listView.setDivider(null);
+		listView.setDividerHeight(0);
 		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0);
 		layoutParams.weight = 1;
 		layoutParams.setMargins(0, 0, 0, 0);
@@ -423,6 +425,12 @@ public class SearchDialogFragment extends BaseFullScreenDialogFragment implement
 							R.layout.download_item_list_section, parent, false);
 				}
 				((TextView) convertView.findViewById(R.id.title)).setText(section.titleId);
+			}
+			if (!(obj instanceof SearchResultSection)) {
+				View divider = convertView.findViewById(R.id.list_item_divider);
+				boolean showDivider = position + 1 < items.size()
+						&& getItemViewType(position) == getItemViewType(position + 1);
+				divider.setVisibility(showDivider ? View.VISIBLE : View.GONE);
 			}
 			return convertView;
 		}
