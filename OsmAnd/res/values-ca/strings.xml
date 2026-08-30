@@ -4905,4 +4905,12 @@
     <string name="astro_eclipse_end">Final</string>
     <string name="duplicate_map">Duplica el mapa</string>
     <string name="gallery_stats_size">Mida %1$s.</string>
+    <plurals name="files_count">
+        <item quantity="one">%d fitxer</item>
+        <item quantity="other">%d fitxers</item>
+    </plurals>
+    <string name="search_on_web">Cerca al web</string>
+    <string name="media_storage_camera_folder_note_descr">L\'àudio es desa a Música/OsmAnd.</string>
+    <string name="always_keep_local_copy">Conserva sempre una còpia local</string>
+    <string name="always_keep_local_copy_description">El contingut multimèdia es manté adjunt fins i tot si l\'original s\'elimina de la galeria o dels fitxers.</string>
 </resources>
