@@ -8,22 +8,7 @@ import kotlin.math.floor
 /** Android-compatible `RouteCalculationResult.listDistance` values. */
 data class RouteGeometryCalculation(
 	val distanceToFinishMeters: IntArray,
-) {
-	init {
-		require(distanceToFinishMeters.all { it >= 0 }) {
-			"Android route distances to finish must not be negative"
-		}
-		require((1 until distanceToFinishMeters.size).all { index ->
-			distanceToFinishMeters[index - 1] >= distanceToFinishMeters[index]
-		}) {
-			"Android route distances to finish must be ordered"
-		}
-		require(distanceToFinishMeters.isEmpty() || distanceToFinishMeters.last() == 0) {
-			"The final Android route distance must be zero"
-		}
-	}
-
-}
+)
 
 /**
  * Shared home for ports of Android route-geometry methods; Android has no class named

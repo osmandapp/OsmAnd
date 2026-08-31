@@ -99,12 +99,4 @@ data class RouteManeuver(
 	/** Semantic view that does not replace or normalize [turnTypeValue]. */
 	val type: RouteManeuverType?
 		get() = RouteManeuverType.fromLegacyValue(turnTypeValue)
-
-	init {
-		require(routePointOffset >= 0) { "Maneuver route point offset must not be negative" }
-		require(routeEndPointOffset >= 0) { "Maneuver end point offset must not be negative" }
-		require(distanceMeters >= 0) { "Maneuver distance must not be negative" }
-		require(expectedTimeSeconds >= 0) { "Maneuver expected time must not be negative" }
-		require(afterLeftTimeSeconds >= 0) { "Maneuver time to finish must not be negative" }
-	}
 }

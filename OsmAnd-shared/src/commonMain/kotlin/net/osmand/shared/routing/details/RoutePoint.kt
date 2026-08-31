@@ -17,14 +17,4 @@ data class RoutePoint(
 	val speedMetersPerSecond: Float? = null,
 	val timeMillis: Long = 0L,
 	val provider: String? = null,
-) {
-	init {
-		require(distanceToFinishMeters >= 0) { "Route point distance to finish must not be negative" }
-		require(altitudeMeters == null || altitudeMeters.isFinite()) {
-			"Route point altitude must be finite"
-		}
-		require(speedMetersPerSecond == null || speedMetersPerSecond.isFinite()) {
-			"Route point speed must be finite"
-		}
-	}
-}
+)

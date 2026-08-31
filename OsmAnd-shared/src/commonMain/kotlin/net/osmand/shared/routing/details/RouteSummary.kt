@@ -37,13 +37,4 @@ data class RouteSummary(
 	val visitedSegments: Int = 0,
 	val loadedTiles: Int = 0,
 	val initialCalculation: Boolean = false,
-) {
-	init {
-		require(totalDistanceMeters >= 0) { "Total route distance must not be negative" }
-		require(totalTimeSeconds >= 0) { "Total route time must not be negative" }
-		require(routingTimeSeconds.isFinite()) { "Routing time must be finite" }
-		require(calculationTimeSeconds.isFinite()) { "Calculation time must be finite" }
-		require(visitedSegments >= 0) { "Visited segment count must not be negative" }
-		require(loadedTiles >= 0) { "Loaded tile count must not be negative" }
-	}
-}
+)

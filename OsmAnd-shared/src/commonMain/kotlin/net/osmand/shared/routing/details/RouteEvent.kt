@@ -63,10 +63,4 @@ data class RouteEvent(
 	val lastLocationIndex: Int = -1,
 	val intValue: Int = 0,
 	val floatValue: Float = 0f,
-) {
-	init {
-		require(locationIndex >= -1) { "Route event location index must preserve a valid Android sentinel" }
-		require(lastLocationIndex >= -1) { "Route event last location index must preserve a valid Android sentinel" }
-		require(floatValue.isFinite()) { "Route event float value must be finite" }
-	}
-}
+)

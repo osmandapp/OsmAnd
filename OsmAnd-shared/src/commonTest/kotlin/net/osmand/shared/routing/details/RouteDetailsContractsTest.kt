@@ -3,7 +3,6 @@ package net.osmand.shared.routing.details
 import net.osmand.shared.data.KLatLon
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
 import kotlin.test.assertNull
 
 class RouteDetailsContractsTest {
@@ -20,14 +19,19 @@ class RouteDetailsContractsTest {
 	}
 
 	@Test
-	fun snapshotRejectsDistancesThatCannotBeAndroidListDistance() {
+	fun snapshotPreservesPlatformValuesWithoutRuntimeValidation() {
 		val snapshot = sampleSnapshot()
-		assertFailsWith<IllegalArgumentException> {
-			snapshot.copy(
-				points = snapshot.points.reversed(),
-				summary = snapshot.summary.copy(totalDistanceMeters = 0),
-			)
-		}
+		val sourcePoints = snapshot.points.reversed()
+		val sourceSummary = snapshot.summary.copy(totalDistanceMeters = -1)
+		val copied = snapshot.copy(
+			points = sourcePoints,
+			summary = sourceSummary,
+			currentRoutePointIndex = -1,
+		)
+
+		assertEquals(sourcePoints, copied.points)
+		assertEquals(sourceSummary, copied.summary)
+		assertEquals(-1, copied.currentRoutePointIndex)
 	}
 
 	private fun sampleSnapshot(): RouteDetailsSnapshot {
