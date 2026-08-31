@@ -1,7 +1,6 @@
 package net.osmand.plus.plugins.astronomy.search
 
 import android.annotation.SuppressLint
-import android.app.Dialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -227,14 +226,10 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 		}
 	}
 
-	override fun createDialog(savedInstanceState: Bundle?): Dialog {
-		return object : Dialog(requireContext(), theme) {
-			override fun onBackPressed() {
-				if (!handleBackPressedInternal()) {
-					super.onBackPressed()
-				}
-			}
-		}
+	override fun isBackPressedCallbackEnabled(): Boolean = currentMode == ScreenMode.FULL_SEARCH
+
+	override fun handleBackPressed() {
+		handleBackPressedInternal()
 	}
 
 	override fun onSaveInstanceState(outState: Bundle) {
@@ -875,6 +870,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	private fun showExploreMode() {
 		currentMode = ScreenMode.EXPLORE
 		currentFullSearchMode = FullSearchMode.INPUT
+		updateBackPressedCallback()
 		dismissPopups()
 		getActiveSearchView()?.let { searchView ->
 			pendingSearchHideTarget = HideTarget.EXPLORE
@@ -893,6 +889,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	private fun showBrowseMode() {
 		currentMode = ScreenMode.FULL_SEARCH
 		currentFullSearchMode = FullSearchMode.BROWSE
+		updateBackPressedCallback()
 		dismissPopups()
 		getActiveSearchView()?.let { searchView ->
 			pendingSearchHideTarget = HideTarget.BROWSE
@@ -917,6 +914,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	private fun showInputMode(presentation: InputPresentation, requestKeyboard: Boolean) {
 		currentMode = ScreenMode.FULL_SEARCH
 		currentFullSearchMode = FullSearchMode.INPUT
+		updateBackPressedCallback()
 		currentInputPresentation = presentation
 		pendingSearchHideTarget = null
 		dismissPopups()
@@ -1086,6 +1084,7 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 				fullSearchContainer.isVisible = false
 			}
 		}
+		updateBackPressedCallback()
 		pendingSearchHideTarget = null
 		updateSortControls()
 		updateFilterControls()

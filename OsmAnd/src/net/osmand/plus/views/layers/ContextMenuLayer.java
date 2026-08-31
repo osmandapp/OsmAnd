@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresPermission;
@@ -94,6 +95,19 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 	private LatLon applyingMarkerLatLon;
 	private IContextMenuProvider selectedObjectContextMenuProvider;
 	private boolean mInAddGpxPointMode;
+	private final OnBackPressedCallback addGpxPointBackPressedCallback = new OnBackPressedCallback(false) {
+		@Override
+		public void handleOnBackPressed() {
+			MapActivity mapActivity = getMapActivity();
+			if (mAddGpxPointBottomSheetHelper != null) {
+				mAddGpxPointBottomSheetHelper.hide();
+			}
+			quitAddGpxPoint();
+			if (mapActivity != null) {
+				mapActivity.getOnBackPressedDispatcher().onBackPressed();
+			}
+		}
+	};
 	private boolean carView;
 
 	// OpenGl
@@ -130,6 +144,7 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 			mInAddGpxPointMode = false;
 			mAddGpxPointBottomSheetHelper = null;
 		}
+		updateAddGpxPointBackPressedCallback();
 	}
 
 	public AddGpxPointBottomSheetHelper getAddGpxPointBottomSheetHelper() {
@@ -635,6 +650,7 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 		}
 
 		mInAddGpxPointMode = false;
+		updateAddGpxPointBackPressedCallback();
 		AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE,
 				R.id.map_ruler_layout,
 				R.id.map_left_widgets_panel,
@@ -654,6 +670,7 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 		mapActivity.disableDrawer();
 
 		mInAddGpxPointMode = true;
+		updateAddGpxPointBackPressedCallback();
 		mAddGpxPointBottomSheetHelper.show(newGpxPoint);
 		AndroidUiHelper.setVisibility(mapActivity, View.INVISIBLE,
 				R.id.map_ruler_layout,
@@ -662,6 +679,16 @@ public class ContextMenuLayer extends OsmandMapLayer implements ChangeMarkerPosi
 				R.id.map_center_info);
 
 		view.refreshMap();
+	}
+
+	private void updateAddGpxPointBackPressedCallback() {
+		addGpxPointBackPressedCallback.remove();
+		MapActivity mapActivity = getMapActivity();
+		boolean enabled = mInAddGpxPointMode && mapActivity != null;
+		addGpxPointBackPressedCallback.setEnabled(enabled);
+		if (enabled) {
+			mapActivity.getOnBackPressedDispatcher().addCallback(mapActivity, addGpxPointBackPressedCallback);
+		}
 	}
 
 	private void enterMovingMode(@NonNull RotatedTileBox tileBox) {

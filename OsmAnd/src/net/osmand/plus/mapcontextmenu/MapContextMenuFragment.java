@@ -7,6 +7,7 @@ import static net.osmand.plus.settings.fragments.configureitems.RearrangeItemsHe
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.PointF;
@@ -61,6 +62,7 @@ import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.mapcontextmenu.other.MenuObjectUtils;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
+import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.menuitems.MainContextMenuItemsSettings;
 import net.osmand.plus.settings.enums.MapPosition;
 import net.osmand.plus.transport.TransportStopRoute;
@@ -595,19 +597,44 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		MapActivity activity = requireMapActivity();
-		boolean enabled = activity.getFragmentsHelper().getQuickSearchDialogFragment() == null;
-		backPressedCallback = new OnBackPressedCallback(enabled) {
+		backPressedCallback = new OnBackPressedCallback(false) {
 			public void handleOnBackPressed() {
-				if (menu.isVisible() && menu.isClosable()) {
-					if (menu.getCurrentMenuState() != MenuState.HEADER_ONLY && !menu.isLandscapeLayout()) {
-						menu.openMenuHeaderOnly();
-					} else {
-						menu.close();
+				try {
+					MenuController menuController = menu.getMenuController();
+					if (menu.isVisible() && menuController != null && menuController.hasBackAction()) {
+						menu.backToolbarAction(menuController);
+						return;
 					}
+					if (menu.isVisible() && menu.isClosable()) {
+						if (menu.getCurrentMenuState() != MenuState.HEADER_ONLY && !menu.isLandscapeLayout()) {
+							menu.openMenuHeaderOnly();
+						} else {
+							menu.close();
+						}
+					}
+				} finally {
+					updateBackPressedCallbackState();
 				}
 			}
 		};
 		activity.getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), backPressedCallback);
+		updateBackPressedCallbackState();
+	}
+
+	public void updateBackPressedCallbackState() {
+		if (backPressedCallback == null) {
+			return;
+		}
+		MapActivity activity = getMapActivity();
+		QuickSearchDialogFragment quickSearchFragment = activity != null
+				? activity.getFragmentsHelper().getQuickSearchDialogFragment() : null;
+		Dialog quickSearchDialog = quickSearchFragment != null ? quickSearchFragment.getDialog() : null;
+		boolean quickSearchOpen = quickSearchFragment != null
+				&& (quickSearchFragment.isSearchHidden() || quickSearchDialog != null && quickSearchDialog.isShowing());
+		// Keep Back owned by the visible menu even while it is temporarily not closable.
+		// Otherwise the gesture can preview/finish the activity and then do nothing useful.
+		boolean enabled = !quickSearchOpen && menu != null && menu.isVisible();
+		backPressedCallback.setEnabled(enabled);
 	}
 
 	@Nullable
@@ -1384,6 +1411,7 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 			updateMapDisplayPosition(true);
 			menu.updateControlsVisibility(true);
 			menu.onFragmentResume();
+			updateBackPressedCallbackState();
 			mapActivity.getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
 		}
 	}
@@ -2345,6 +2373,7 @@ public class MapContextMenuFragment extends BaseFullScreenFragment implements Do
 			menu.updateData();
 			updateButtonsAndProgress();
 			refreshTitle();
+			updateBackPressedCallbackState();
 		}
 	}
 

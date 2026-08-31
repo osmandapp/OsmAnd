@@ -129,12 +129,24 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 			}
 		}
 
-		requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
-			@Override
-			public void handleOnBackPressed() {
-				onBackPressed();
-			}
-		});
+		if (!getShowsDialog()) {
+			requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+				@Override
+				public void handleOnBackPressed() {
+					onBackPressed();
+				}
+			});
+		}
+	}
+
+	@Override
+	protected boolean isBackPressedCallbackEnabled() {
+		return getShowsDialog() && searchInputView != null && searchInputView.isShowing();
+	}
+
+	@Override
+	protected void handleBackPressed() {
+		onBackPressed();
 	}
 
 	@Nullable
@@ -309,6 +321,7 @@ public class AddCoordinateFormatFragment extends BaseFullScreenDialogFragment {
 				updateStatusBarAppearance(getView());
 				restoreSearchSoftInputMode();
 			}
+			updateBackPressedCallback();
 		});
 
 		searchInputView.getEditText().setText(searchQuery);

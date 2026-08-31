@@ -1,6 +1,5 @@
 package net.osmand.plus.myplaces.tracks.dialogs
 
-import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -96,12 +95,10 @@ class TracksFilterFragment : BaseFullScreenDialogFragment(),
 		return ColorUtilities.getStatusBarSecondaryColorId(nightMode)
 	}
 
-	override fun createDialog(savedInstanceState: Bundle?): Dialog {
-		return object : Dialog(requireContext(), themeId) {
-			override fun onBackPressed() {
-				closeWithoutApply()
-			}
-		}
+	override fun isBackPressedCallbackEnabled(): Boolean = true
+
+	override fun handleBackPressed() {
+		closeWithoutApply()
 	}
 
 	override fun onCreateView(

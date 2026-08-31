@@ -5,7 +5,6 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_STYLE_ID;
 import static net.osmand.plus.chooseplan.OsmAndFeature.UNLIMITED_MAP_DOWNLOADS;
 import static net.osmand.plus.firstusage.FirstUsageWizardFragment.FIRST_USAGE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
-import static net.osmand.plus.search.ShowQuickSearchMode.CURRENT;
 import static net.osmand.plus.settings.enums.ThemeUsageContext.MAP;
 import static net.osmand.plus.views.AnimateDraggingMapThread.TARGET_NO_ROTATION;
 
@@ -27,6 +26,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
@@ -68,7 +68,6 @@ import net.osmand.plus.dialogs.WhatsNewDialogFragment;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadValidationManager;
-import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
 import net.osmand.plus.feedback.CrashBottomSheetDialogFragment;
 import net.osmand.plus.feedback.RateUsHelper;
 import net.osmand.plus.feedback.RenderInitErrorBottomSheet;
@@ -82,7 +81,7 @@ import net.osmand.plus.keyevent.KeyEventHelper;
 import net.osmand.plus.keyevent.TrackballController;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.MapContextMenuFragment;
 import net.osmand.plus.mapcontextmenu.other.DestinationReachedFragment;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.mapmarkers.MapMarker;
@@ -192,6 +191,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private AppInitializeListener initListener;
 	private MapViewWithLayers mapViewWithLayers;
 	private DrawerLayout drawerLayout;
+
+	private final OnBackPressedCallback mapBackPressedCallback = new OnBackPressedCallback(false) {
+		@Override
+		public void handleOnBackPressed() {
+			handleMapBackPressed();
+		}
+	};
+
 	private boolean drawerDisabled;
 
 	private boolean mIsDestroyed;
@@ -199,7 +206,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private Timer splashScreenTimer;
 	private boolean activityRestartNeeded;
 	private boolean stopped = true;
-
 
 	private final StateChangedListener<Integer> mapScreenOrientationSettingListener = new StateChangedListener<Integer>() {
 		@Override
@@ -236,6 +242,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 		setRequestedOrientation(AndroidUiHelper.getScreenOrientation(this));
 		super.onCreate(savedInstanceState);
+		getSupportFragmentManager().addOnBackStackChangedListener(this::updateBackPressedCallbackState);
 
 		lockHelper = app.getLockHelper();
 		mapScrollHelper = new MapScrollHelper(app);
@@ -318,7 +325,19 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		mapView.refreshMap(true);
 
 		drawerLayout = findViewById(R.id.drawer_layout);
+		drawerLayout.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
+			@Override
+			public void onDrawerOpened(@NonNull View drawerView) {
+				updateBackPressedCallbackState();
+			}
+
+			@Override
+			public void onDrawerClosed(@NonNull View drawerView) {
+				updateBackPressedCallbackState();
+			}
+		});
 		mapViewWithLayers = findViewById(R.id.map_view_with_layers);
+		updateBackPressedCallbackState();
 
 		checkAppInitialization();
 
@@ -525,52 +544,68 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (!intentHelper.parseLaunchIntents()) {
 			intentHelper.parseContentIntent();
 		}
+		updateBackPressedCallbackState();
 	}
 
 	@Override
 	public void startActivity(Intent intent) {
 		clearPrevActivityIntent();
+		updateBackPressedCallbackState();
 		super.startActivity(intent);
 	}
 
-	@Override
-	public void onBackPressed() {
-		if (dashboardOnMap.onBackPressed()) {
-			return;
-		}
+	private void handleMapBackPressed() {
 		if (drawerLayout != null && drawerLayout.isDrawerOpen(GravityCompat.START)) {
 			closeDrawer();
 			return;
 		}
-		if (getMapLayers().getContextMenuLayer().isInAddGpxPointMode()) {
-			quitAddGpxPointMode();
-		}
 		int backStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
 		if (backStackEntryCount == 0 && launchPrevActivityIntent()) {
-			return;
-		}
-		ExplorePlacesFragment explorePlacesFragment = fragmentsHelper.getExplorePlacesFragment();
-		if (explorePlacesFragment != null) {
-			if (!explorePlacesFragment.onBackPress()) {
-				fragmentsHelper.closeExplore();
-				fragmentsHelper.showQuickSearch(CURRENT, false);
-			}
 			return;
 		}
 		QuickSearchDialogFragment quickSearchFragment = fragmentsHelper.getQuickSearchDialogFragment();
 		if ((backStackEntryCount == 0 || mapContextMenu.isVisible()) && quickSearchFragment != null
 				&& quickSearchFragment.isSearchHidden()) {
 			fragmentsHelper.showQuickSearch(ShowQuickSearchMode.CURRENT, false);
+			updateBackPressedCallbackState();
 			return;
 		}
-		if (mapContextMenu.isVisible()) {
-			MenuController menuController = mapContextMenu.getMenuController();
-			if (menuController != null && menuController.hasBackAction()) {
-				mapContextMenu.backToolbarAction(menuController);
-				return;
-			}
+		performDefaultBackNavigation();
+	}
+
+	private void performDefaultBackNavigation() {
+		mapBackPressedCallback.setEnabled(false);
+		try {
+			getOnBackPressedDispatcher().onBackPressed();
+		} finally {
+			updateBackPressedCallbackState();
 		}
-		super.onBackPressed();
+	}
+
+	public void updateBackPressedCallbackState() {
+		mapBackPressedCallback.remove();
+		boolean enabled = shouldInterceptMapBack();
+		mapBackPressedCallback.setEnabled(enabled);
+		if (enabled) {
+			getOnBackPressedDispatcher().addCallback(this, mapBackPressedCallback);
+		}
+		Fragment fragment = getSupportFragmentManager().findFragmentByTag(MapContextMenuFragment.TAG);
+		if (fragment instanceof MapContextMenuFragment contextMenuFragment) {
+			contextMenuFragment.updateBackPressedCallbackState();
+		}
+	}
+
+	private boolean shouldInterceptMapBack() {
+		if (drawerLayout != null && drawerLayout.isDrawerOpen(GravityCompat.START)) {
+			return true;
+		}
+		int backStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
+		if (backStackEntryCount == 0 && prevActivityIntent != null) {
+			return true;
+		}
+		QuickSearchDialogFragment quickSearchFragment = fragmentsHelper.getQuickSearchDialogFragment();
+		return quickSearchFragment != null && quickSearchFragment.isSearchHidden()
+				&& (backStackEntryCount == 0 || mapContextMenu.isVisible());
 	}
 
 	public boolean launchPrevActivityIntent() {
@@ -578,14 +613,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			prevActivityIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			AndroidUtils.startActivityIfSafe(this, prevActivityIntent);
 			prevActivityIntent = null;
+			updateBackPressedCallbackState();
 			return true;
 		}
 		return false;
-	}
-
-	private void quitAddGpxPointMode() {
-		getMapLayers().getContextMenuLayer().getAddGpxPointBottomSheetHelper().hide();
-		getMapLayers().getContextMenuLayer().quitAddGpxPoint();
 	}
 
 	@Override

@@ -712,15 +712,14 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		}
 	}
 
-	@NonNull
 	@Override
-	public Dialog createDialog(Bundle savedInstanceState) {
-		return new Dialog(requireActivity(), getTheme()) {
-			@Override
-			public void onBackPressed() {
-				onBackButtonPressed();
-			}
-		};
+	protected boolean isBackPressedCallbackEnabled() {
+		return true;
+	}
+
+	@Override
+	protected void handleBackPressed() {
+		onBackButtonPressed();
 	}
 
 	private void onBackButtonPressed() {
@@ -872,6 +871,10 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		paused = false;
 		cancelPrev = false;
 		hidden = false;
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.updateBackPressedCallbackState();
+		}
 		refreshSearchContentAfterShow();
 		addressSearchStack.clear();
 		if (interruptedSearch) {
@@ -890,6 +893,10 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	public void hide() {
 		paused = true;
 		hidden = true;
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.updateBackPressedCallbackState();
+		}
 		expired = searchType != QuickSearchType.REGULAR;
 		hideTimeMs = System.currentTimeMillis();
 		interruptedSearch = searching;
@@ -1812,6 +1819,8 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	public void onDismiss(@NonNull DialogInterface dialog) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
+			hidden = false;
+			mapActivity.updateBackPressedCallbackState();
 			hideToolbar();
 			mapActivity.updateStatusBarColor();
 			mapActivity.refreshMap();

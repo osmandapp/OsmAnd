@@ -1,6 +1,5 @@
 package net.osmand.plus.myplaces.tracks.dialogs
 
-import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.text.Editable
@@ -98,12 +97,10 @@ class FilterAllVariantsListFragment : BaseFullScreenDialogFragment(), SmartFolde
 		return if (nightMode) R.color.status_bar_secondary_dark else R.color.status_bar_secondary_light
 	}
 
-	override fun createDialog(savedInstanceState: Bundle?): Dialog {
-		return object : Dialog(requireContext(), themeId) {
-			override fun onBackPressed() {
-				closeWithoutApply()
-			}
-		}
+	override fun isBackPressedCallbackEnabled(): Boolean = true
+
+	override fun handleBackPressed() {
+		closeWithoutApply()
 	}
 
 	override fun onCreateView(

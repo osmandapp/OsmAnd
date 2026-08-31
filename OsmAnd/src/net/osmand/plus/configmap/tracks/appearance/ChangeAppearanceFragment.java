@@ -2,7 +2,6 @@ package net.osmand.plus.configmap.tracks.appearance;
 
 import static net.osmand.plus.configmap.tracks.appearance.ChangeAppearanceController.PROCESS_ID;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,17 +40,6 @@ public class ChangeAppearanceFragment extends BaseFullScreenDialogFragment imple
 
 	private DialogManager dialogManager;
 	private ChangeAppearanceController controller;
-
-	@NonNull
-	@Override
-	public Dialog createDialog(@Nullable Bundle savedInstanceState) {
-		return new Dialog(requireActivity(), getThemeId()) {
-			@Override
-			public void onBackPressed() {
-				dismiss();
-			}
-		};
-	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

@@ -15,7 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -69,19 +68,6 @@ public class MapMarkersDialogFragment extends BaseFullScreenDialogFragment imple
 	private String groupIdToOpen;
 
 	private int statusBarColor = -1;
-
-	@NonNull
-	@Override
-	public Dialog createDialog(Bundle savedInstanceState) {
-		return new Dialog(requireActivity(), getTheme()) {
-			@Override
-			public void onBackPressed() {
-				if (!dismissOptionsMenuFragment()) {
-					super.onBackPressed();
-				}
-			}
-		};
-	}
 
 	@Nullable
 	@Override
@@ -294,13 +280,11 @@ public class MapMarkersDialogFragment extends BaseFullScreenDialogFragment imple
 				getChildFragmentManager(), group, history, createOptionsFragmentListener());
 	}
 
-	private boolean dismissOptionsMenuFragment() {
-		Fragment optionsMenu = getChildFragmentManager().findFragmentByTag(OptionsBottomSheetDialogFragment.TAG);
-		if (optionsMenu != null) {
-			((DialogFragment) optionsMenu).dismiss();
-			return true;
+	private void dismissOptionsMenuFragment() {
+		Fragment fragment = getChildFragmentManager().findFragmentByTag(OptionsBottomSheetDialogFragment.TAG);
+		if (fragment instanceof OptionsBottomSheetDialogFragment optionsFragment) {
+			optionsFragment.dismiss();
 		}
-		return false;
 	}
 
 	private void restoreSelectedNavItem() {
