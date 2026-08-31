@@ -81,7 +81,6 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 
 		Preference routingCategory = findPreference("routing");
 		routingCategory.setIconSpaceReserved(false);
-		setupRouteAlertsDebugDialogPref();
 
 		setupSimulateYourLocationPref();
 
@@ -143,12 +142,6 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		simulateYourLocation.setIconSpaceReserved(false);
 		OsmAndLocationSimulation sim = app.getLocationProvider().getLocationSimulation();
 		simulateYourLocation.setSummary(sim.isRouteAnimating() ? R.string.shared_string_in_progress : R.string.simulate_your_location_descr);
-	}
-
-	private void setupRouteAlertsDebugDialogPref() {
-		SwitchPreferenceEx preference = findPreference(plugin.SHOW_ROUTE_ALERTS_DEBUG_DIALOG.getId());
-		preference.setDescription(R.string.show_route_alerts_debug_dialog_description);
-		preference.setIconSpaceReserved(false);
 	}
 
 	private void setupBatterySavingModePref() {

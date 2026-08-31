@@ -1,10 +1,7 @@
 package net.osmand.plus.routing;
 
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.Location;
 import net.osmand.LocationsHolder;
@@ -12,24 +9,20 @@ import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.data.LatLon;
 import net.osmand.data.ValueHolder;
-import net.osmand.osm.PoiType;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.RouteCalculationMethod;
 import net.osmand.plus.simulation.SimulationProvider;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.router.FastRoutingState;
 import net.osmand.router.GpxRouteApproximation;
@@ -38,11 +31,6 @@ import net.osmand.router.RouteExporter;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.routing.details.RouteDetailsSnapshot;
-import net.osmand.shared.routing.details.RouteEvent;
-import net.osmand.shared.routing.details.RouteEventType;
-import net.osmand.shared.routing.details.RouteSegment;
-import net.osmand.shared.routing.details.RouteTypeAttribute;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -53,7 +41,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
 
 public class RoutingHelper {
 
@@ -326,240 +313,7 @@ public class RoutingHelper {
 						res.getCalculateTime(), res.getVisitedSegments(), res.getLoadedTiles());
 				app.showToastMessage(msg);
 			}
-			OsmandDevelopmentPlugin developmentPlugin = PluginsHelper.getEnabledPlugin(OsmandDevelopmentPlugin.class);
-			if (developmentPlugin != null) {
-				reportRouteAlertsDebug(res, developmentPlugin.SHOW_ROUTE_ALERTS_DEBUG_DIALOG.get());
-			}
 		});
-	}
-
-	private void reportRouteAlertsDebug(@NonNull RouteCalculationResult route, boolean showDialog) {
-		RouteDetailsSnapshot snapshot = route.getRouteDetailsSnapshot();
-		String title = "Route alerts/warnings: " + snapshot.getEvents().size();
-		String details = formatRouteAlertsDebug(route, snapshot);
-		log.info(title + "\n" + details);
-
-		if (!showDialog) {
-			return;
-		}
-		MapActivity mapActivity = app.getOsmandMap().getMapView().getMapActivity();
-		if (!AndroidUtils.isActivityNotDestroyed(mapActivity)) {
-			return;
-		}
-		AlertDialog dialog = new AlertDialog.Builder(mapActivity)
-				.setTitle(title)
-				.setMessage(details)
-				.setPositiveButton(R.string.shared_string_ok, null)
-				.show();
-		TextView messageView = dialog.findViewById(android.R.id.message);
-		if (messageView != null) {
-			messageView.setTextIsSelectable(true);
-		}
-	}
-
-	@NonNull
-	private String formatRouteAlertsDebug(@NonNull RouteCalculationResult route,
-	                                      @NonNull RouteDetailsSnapshot snapshot) {
-		List<RouteEvent> events = snapshot.getEvents();
-		List<AlarmInfo> sourceAlarms = route.getAlarmInfo();
-		if (events.isEmpty()) {
-			return "No alerts/warnings found along the route.";
-		}
-		StringBuilder message = new StringBuilder();
-		for (int index = 0; index < events.size(); index++) {
-			RouteEvent event = events.get(index);
-			AlarmInfo sourceAlarm = index < sourceAlarms.size() ? sourceAlarms.get(index) : null;
-			String sourceTag = sourceAlarm != null ? sourceAlarm.getSourceTag() : null;
-			String markerValue = sourceAlarm != null ? sourceAlarm.getSourceValue() : null;
-			if (index > 0) {
-				message.append("\n\n");
-			}
-			String visualName = AlarmInfo.getVisualName(app, event.getType());
-			int geometryPointIndex = findRoutePointIndex(snapshot, event);
-			RouteSegment sourceSegment = findRouteSegmentWithType(snapshot, geometryPointIndex, sourceTag);
-			String resolvedValue = markerValue;
-			if (Algorithms.isEmpty(resolvedValue) && sourceSegment != null) {
-				resolvedValue = findRouteTypeValue(sourceSegment, sourceTag);
-			}
-			message.append(index + 1).append(". ").append(visualName);
-			if (event.getType() == RouteEventType.HAZARD && !Algorithms.isEmpty(resolvedValue)) {
-				message.append(": ").append(formatHazardName(resolvedValue));
-			}
-			message.append(" [").append(event.getType().name()).append("]\n")
-					.append("Distance from start: ").append(formatEventDistance(snapshot, event));//.append('\n')
-					//.append(event.getLastLocationIndex() >= 0 ? "Geometry points: " : "Geometry point: ");
-//			if (geometryPointIndex >= 0) {
-//				message.append(geometryPointIndex);
-//			} else {
-//				message.append("unknown");
-//			}
-			if (event.getLastLocationIndex() >= 0) {
-				message.append("..").append(event.getLastLocationIndex());
-			}
-			if (geometryPointIndex != event.getLocationIndex()) {
-				//message.append("\nAlarmInfo index: ").append(event.getLocationIndex());
-			}
-
-			if (!Algorithms.isEmpty(sourceTag)) {
-				boolean resolvedFromSegment = Algorithms.isEmpty(markerValue)
-						&& !Algorithms.isEmpty(resolvedValue);
-				if (resolvedFromSegment) {
-					//message.append("\nApplies to: road segment");
-				}
-				message.append("\nSource rule: ").append(sourceTag);
-				if (!Algorithms.isEmpty(resolvedValue)) {
-					message.append('=').append(resolvedValue);
-				}
-				if (resolvedFromSegment) {
-					//message.append("\nGenerated marker rule: ").append(sourceTag);
-				}
-			}
-
-			RouteSegment segment = sourceSegment != null
-					? sourceSegment
-					: findRouteSegment(snapshot, geometryPointIndex);
-			String road = formatRouteSegment(segment);
-			if (!Algorithms.isEmpty(road)) {
-				message.append("\nRoad: ").append(road);
-			}
-			message.append("\nLocation: ").append(String.format(
-					Locale.US,
-					"%.6f, %.6f",
-					event.getLocation().getLatitude(),
-					event.getLocation().getLongitude()));
-			if (event.getIntValue() != 0) {
-				message.append("\nInteger value: ").append(event.getIntValue());
-			}
-			if (event.getFloatValue() != 0f) {
-				if (event.getType() == RouteEventType.TUNNEL) {
-					message.append("\nTunnel length: ")
-							.append(OsmAndFormatter.getFormattedDistance(event.getFloatValue(), app));
-				} else {
-					message.append("\nFloat value: ").append(event.getFloatValue());
-				}
-			}
-		}
-		return message.toString();
-	}
-
-	@NonNull
-	private String formatEventDistance(@NonNull RouteDetailsSnapshot snapshot, @NonNull RouteEvent event) {
-		int startDistance = getDistanceFromStart(snapshot, findRoutePointIndex(snapshot, event));
-		if (startDistance < 0) {
-			return "unknown";
-		}
-		String start = OsmAndFormatter.getFormattedDistance(startDistance, app);
-		if (event.getLastLocationIndex() >= 0 && event.getLastLocationIndex() != event.getLocationIndex()) {
-			int endDistance = getDistanceFromStart(snapshot, event.getLastLocationIndex());
-			if (endDistance >= 0) {
-				return start + " .. " + OsmAndFormatter.getFormattedDistance(endDistance, app);
-			}
-		}
-		return start;
-	}
-
-	private static int findRoutePointIndex(@NonNull RouteDetailsSnapshot snapshot, @NonNull RouteEvent event) {
-		int alarmIndex = event.getLocationIndex();
-		if (alarmIndex > 0 && alarmIndex <= snapshot.getPoints().size()
-				&& snapshot.getPoints().get(alarmIndex - 1).getLocation().equals(event.getLocation())) {
-			return alarmIndex - 1;
-		}
-		if (alarmIndex >= 0 && alarmIndex < snapshot.getPoints().size()
-				&& snapshot.getPoints().get(alarmIndex).getLocation().equals(event.getLocation())) {
-			return alarmIndex;
-		}
-		return alarmIndex >= 0 && alarmIndex < snapshot.getPoints().size() ? alarmIndex : -1;
-	}
-
-	private static int getDistanceFromStart(@NonNull RouteDetailsSnapshot snapshot, int pointIndex) {
-		if (pointIndex < 0) {
-			return -1;
-		}
-		if (pointIndex >= snapshot.getPoints().size()) {
-			return snapshot.getSummary().getTotalDistanceMeters();
-		}
-		return snapshot.getSummary().getTotalDistanceMeters()
-				- snapshot.getPoints().get(pointIndex).getDistanceToFinishMeters();
-	}
-
-	@Nullable
-	private static RouteSegment findRouteSegment(@NonNull RouteDetailsSnapshot snapshot, int pointIndex) {
-		for (RouteSegment segment : snapshot.getSegments()) {
-			if (pointIndex >= segment.getRoutePointStartIndex()
-					&& pointIndex <= segment.getRoutePointEndIndex()) {
-				return segment;
-			}
-		}
-		return null;
-	}
-
-	@Nullable
-	private static RouteSegment findRouteSegmentWithType(@NonNull RouteDetailsSnapshot snapshot,
-	                                                     int pointIndex,
-	                                                     @Nullable String tag) {
-		if (Algorithms.isEmpty(tag)) {
-			return null;
-		}
-		for (RouteSegment segment : snapshot.getSegments()) {
-			if (pointIndex >= segment.getRoutePointStartIndex()
-					&& pointIndex <= segment.getRoutePointEndIndex()
-					&& !Algorithms.isEmpty(findRouteTypeValue(segment, tag))) {
-				return segment;
-			}
-		}
-		return null;
-	}
-
-	@Nullable
-	private static String findRouteTypeValue(@NonNull RouteSegment segment, @Nullable String tag) {
-		if (Algorithms.isEmpty(tag)) {
-			return null;
-		}
-		for (RouteTypeAttribute routeType : segment.getRouteTypes()) {
-			if (tag.equals(routeType.getTag()) && !Algorithms.isEmpty(routeType.getValue())) {
-				return routeType.getValue();
-			}
-		}
-		return null;
-	}
-
-	@NonNull
-	private String formatHazardName(@NonNull String value) {
-		String poiTypeKey = "hazard_" + value;
-		PoiType poiType = app.getPoiTypes().getPoiTypeByKey(poiTypeKey);
-		if (poiType == null) {
-			poiType = app.getPoiTypes().getPoiTypeByKey(poiTypeKey + "_road");
-		}
-		return poiType != null && !Algorithms.isEmpty(poiType.getTranslation())
-				? poiType.getTranslation()
-				: Algorithms.capitalizeFirstLetter(value.replace('_', ' '));
-	}
-
-	@NonNull
-	private static String formatRouteSegment(@Nullable RouteSegment segment) {
-		if (segment == null) {
-			return "";
-		}
-		StringBuilder road = new StringBuilder();
-		appendDebugValue(road, segment.getRoadName());
-		appendDebugValue(road, segment.getRef());
-		if (!Algorithms.isEmpty(segment.getHighway())) {
-			//appendDebugValue(road, "highway=" + segment.getHighway());
-		}
-		String surface = findRouteTypeValue(segment, "surface");
-		if (!Algorithms.isEmpty(surface)) {
-			appendDebugValue(road, "surface=" + surface);
-		}
-		return road.toString();
-	}
-
-	private static void appendDebugValue(@NonNull StringBuilder result, @Nullable String value) {
-		if (!Algorithms.isEmpty(value)) {
-			if (result.length() > 0) {
-				result.append(" • ");
-			}
-			result.append(value);
-		}
 	}
 
 	public GPXRouteParamsBuilder getCurrentGPXRoute() {
