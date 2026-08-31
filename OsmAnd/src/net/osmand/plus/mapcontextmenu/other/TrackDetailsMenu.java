@@ -715,6 +715,11 @@ public class TrackDetailsMenu {
 			}
 		}
 
+		if (dataSets.size() == 2 && ChartUtils.applyColorSource(app,
+				(OrderedLineDataSet) dataSets.get(0), (OrderedLineDataSet) dataSets.get(1))) {
+			dataSets.remove(1);
+		}
+
 		Collections.sort(dataSets, (ds1, ds2) -> {
 			OrderedLineDataSet dataSet1 = (OrderedLineDataSet) ds1;
 			OrderedLineDataSet dataSet2 = (OrderedLineDataSet) ds2;

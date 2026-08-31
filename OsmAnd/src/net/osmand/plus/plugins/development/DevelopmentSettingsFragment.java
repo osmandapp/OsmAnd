@@ -51,6 +51,8 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 	private static final String GRID_LAYOUT_DRAW_CELLS = "grid_layout_draw_cells";
 	private static final String GRID_LAYOUT_DRAW_SLOTS = "grid_layout_draw_slots";
 	private static final String GRID_LAYOUT_DRAW_BUTTON_FRAMES = "grid_layout_draw_button_frames";
+	private static final String CHART_COLOR_LINE_STROKE = "chart_color_line_stroke";
+	private static final String CHART_DISCRETE_COLORS = "chart_discrete_colors";
 
 	private static final int OPEN_AIS_FILE_REQUEST = 1001;
 
@@ -103,6 +105,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		setupMapRenderingPrefs();
 		setupAisTrackerPrefs();
 		setupGridPrefs();
+		setupChartPrototypePrefs();
 
 		Preference info = findPreference("info");
 		info.setIconSpaceReserved(false);
@@ -297,6 +300,22 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		buttonFramesPref.setIconSpaceReserved(false);
 	}
 
+	private void setupChartPrototypePrefs() {
+		Preference category = findPreference("chart_prototype");
+		category.setIconSpaceReserved(false);
+
+		SwitchPreferenceEx colorBySecondDataSet = findPreference(plugin.CHART_COLOR_BY_SECOND_DATASET.getId());
+		colorBySecondDataSet.setIconSpaceReserved(false);
+
+		SwitchPreferenceCompat colorLineStroke = findPreference(CHART_COLOR_LINE_STROKE);
+		colorLineStroke.setChecked(OsmandDevelopmentPlugin.CHART_COLOR_LINE_STROKE);
+		colorLineStroke.setIconSpaceReserved(false);
+
+		SwitchPreferenceCompat discreteColors = findPreference(CHART_DISCRETE_COLORS);
+		discreteColors.setChecked(OsmandDevelopmentPlugin.CHART_DISCRETE_COLORS);
+		discreteColors.setIconSpaceReserved(false);
+	}
+
 	private void setupGlobalAppAllocatedMemoryPref() {
 		long javaAvailMem = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / (1024 * 1024L);
 		long javaTotal = Runtime.getRuntime().totalMemory() / (1024 * 1024L);
@@ -484,6 +503,12 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 			return true;
 		} else if (settings.TRANSPARENT_STATUS_BAR.getId().equals(prefId) && newValue instanceof Boolean) {
 			restartActivity();
+			return true;
+		} else if (CHART_COLOR_LINE_STROKE.equals(prefId) && newValue instanceof Boolean color) {
+			OsmandDevelopmentPlugin.CHART_COLOR_LINE_STROKE = color;
+			return true;
+		} else if (CHART_DISCRETE_COLORS.equals(prefId) && newValue instanceof Boolean discrete) {
+			OsmandDevelopmentPlugin.CHART_DISCRETE_COLORS = discrete;
 			return true;
 		} else if (GRID_LAYOUT_DRAW_CELLS.equals(prefId)) {
 			OsmandSettings.DEV_GRID_LAYOUT_DRAW_CELLS = !OsmandSettings.DEV_GRID_LAYOUT_DRAW_CELLS;

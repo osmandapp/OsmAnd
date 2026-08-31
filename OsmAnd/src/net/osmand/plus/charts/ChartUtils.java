@@ -44,6 +44,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.download.local.dialogs.MemoryInfo;
 import net.osmand.plus.download.local.dialogs.MemoryInfo.MemoryItem;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
@@ -698,6 +699,38 @@ public class ChartUtils {
 		return yAxis;
 	}
 
+	/**
+	 * Prototype for issue #24575 draw the second selected data set as the colouring of the first
+	 * one rather than as a separate line. Gated behind the development plugin.
+	 */
+	public static boolean isColorBySecondDataSetEnabled() {
+		OsmandDevelopmentPlugin plugin = PluginsHelper.getActivePlugin(OsmandDevelopmentPlugin.class);
+		return plugin != null && plugin.CHART_COLOR_BY_SECOND_DATASET.get();
+	}
+
+	/**
+	 * Prototype for issue #24575 instead of drawing {@code colorDataSet} as a second line, use its
+	 * values to colour {@code lineDataSet}.
+	 * <p>
+	 * Callers assemble their data sets in several different places, so this is the single point that
+	 * decides whether the pair collapses into one coloured line. When it returns true the caller must
+	 * add only {@code lineDataSet} to the chart.
+	 */
+	public static boolean applyColorSource(@NonNull OsmandApplication app,
+	                                       @Nullable OrderedLineDataSet lineDataSet,
+	                                       @Nullable OrderedLineDataSet colorDataSet) {
+		if (lineDataSet == null || colorDataSet == null || !isColorBySecondDataSetEnabled()) {
+			return false;
+		}
+		ChartColorSource colorSource = ChartColorSource.create(app, colorDataSet);
+		if (colorSource == null) {
+			return false;
+		}
+		lineDataSet.setColorSource(colorSource);
+		lineDataSet.setDrawFilled(true);
+		return true;
+	}
+
 	public static YAxis getYAxis(BarLineChartBase<?> chart, Integer textColor, boolean useRightAxis) {
 		YAxis yAxis = useRightAxis ? chart.getAxisRight() : chart.getAxisLeft();
 		if (textColor != null) {
@@ -882,6 +915,10 @@ public class ChartUtils {
 		} else {
 			OrderedLineDataSet dataSet1 = getDataSet(app, chart, analysis, firstType, secondType, gpxDataSetAxisType, calcWithoutGaps, false);
 			OrderedLineDataSet dataSet2 = getDataSet(app, chart, analysis, secondType, firstType, gpxDataSetAxisType, calcWithoutGaps, true);
+			if (applyColorSource(app, dataSet1, dataSet2)) {
+				result.add(dataSet1);
+				return result;
+			}
 			if (dataSet1 == null && dataSet2 == null) {
 				return new ArrayList<>();
 			} else if (dataSet1 == null) {

@@ -11,6 +11,13 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="chart_prototype">Chart prototype</string>
+	<string name="chart_color_by_second_dataset">Colour graph by second data set</string>
+	<string name="chart_color_by_second_dataset_descr">Draw the second selected data set as the colouring of the first one instead of a separate line</string>
+	<string name="chart_color_line_stroke">Colour the line stroke</string>
+	<string name="chart_discrete_colors">Discrete colour bands</string>
+	<string name="chart_discrete_colors_descr">Off - smooth gradient. On - flat bands that change at the palette breakpoints. Resets on restart</string>
+	<string name="chart_color_line_stroke_descr">Off — only the fill under the line is coloured. Resets on restart</string>
 	<string name="share_favorites_media_preparation_failed">Couldn\'t include attached media. Sharing points only.</string>
 	<plurals name="files_count">
 		<item quantity="one">%d file</item>

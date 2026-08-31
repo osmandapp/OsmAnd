@@ -9,6 +9,7 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class OrderedLineDataSet extends LineDataSet {
 
@@ -18,6 +19,7 @@ public class OrderedLineDataSet extends LineDataSet {
 	private final boolean leftAxis;
 
 	private String units;
+	private ChartColorSource colorSource;
 	private float priority;
 	private float divX = 1f;
 
@@ -65,6 +67,15 @@ public class OrderedLineDataSet extends LineDataSet {
 
 	public void setUnits(String units) {
 		this.units = units;
+	}
+
+	@Nullable
+	public ChartColorSource getColorSource() {
+		return colorSource;
+	}
+
+	public void setColorSource(@Nullable ChartColorSource colorSource) {
+		this.colorSource = colorSource;
 	}
 
 	public boolean isLeftAxis() {

@@ -245,6 +245,31 @@
 		android:title="@string/show_layout_grid_logs" />
 
 	<PreferenceCategory
+		android:key="chart_prototype"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/chart_prototype" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="chart_color_by_second_dataset"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summary="@string/chart_color_by_second_dataset_descr"
+		android:title="@string/chart_color_by_second_dataset" />
+
+	<SwitchPreferenceCompat
+		android:key="chart_color_line_stroke"
+		android:layout="@layout/preference_switch"
+		android:persistent="false"
+		android:summary="@string/chart_color_line_stroke_descr"
+		android:title="@string/chart_color_line_stroke" />
+
+	<SwitchPreferenceCompat
+		android:key="chart_discrete_colors"
+		android:layout="@layout/preference_switch"
+		android:persistent="false"
+		android:summary="@string/chart_discrete_colors_descr"
+		android:title="@string/chart_discrete_colors" />
+
+	<PreferenceCategory
 		android:key="info"
 		android:layout="@layout/preference_category_with_descr"
 		android:title="@string/info_button" />
