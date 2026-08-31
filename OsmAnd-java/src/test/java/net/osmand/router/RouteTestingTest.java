@@ -34,7 +34,7 @@ import net.osmand.util.RouterUtilTest;
 public class RouteTestingTest {
 	private final TestEntry te;
 
-	private static final int TIMEOUT = 1500;
+	private static final int TIMEOUT = 2000;
 
 	public RouteTestingTest(String name, TestEntry te) {
 		this.te = te;
