@@ -5,7 +5,6 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.OsmandApplication;
@@ -16,6 +15,7 @@ import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.multistatetoggle.IconToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.IconToggleButton.IconRadioItem;
+import net.osmand.shared.gpx.enums.GpxLineStyleType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +50,7 @@ public class TrackLineStyleController implements IHeadedCardController {
 	@NonNull
 	@Override
 	public String getCardSummary() {
-		return app.getString(getSelectedStyle().titleId);
+		return drawInfo.getLineStyleType().getDisplayName();
 	}
 
 	@NonNull
@@ -72,48 +72,38 @@ public class TrackLineStyleController implements IHeadedCardController {
 	@NonNull
 	private List<IconRadioItem> getRadioItems() {
 		List<IconRadioItem> items = new ArrayList<>();
-		for (LineStyle style : LineStyle.values()) {
-			IconRadioItem item = new IconRadioItem(style.iconId);
+		for (GpxLineStyleType style : GpxLineStyleType.values()) {
+			IconRadioItem item = new IconRadioItem(getIconId(style));
 			item.setTag(style);
-			item.setContentDescription(app.getString(style.titleId));
+			item.setContentDescription(style.getDisplayName());
 			item.setOnClickListener((radioItem, view) -> onLineStyleSelected(style));
 			items.add(item);
 		}
 		return items;
 	}
 
-	private boolean onLineStyleSelected(@NonNull LineStyle style) {
-		if (style == LineStyle.DOTTED) {
-			return false;
-		}
-		drawInfo.setDashedLine(style == LineStyle.DASHED);
+	private boolean onLineStyleSelected(@NonNull GpxLineStyleType style) {
+		drawInfo.setLineStyleType(style);
 		cardInstance.updateCardSummary();
-		listener.onTrackLineStyleSelected(style == LineStyle.DASHED);
+		listener.onTrackLineStyleSelected(style);
 		return true;
 	}
 
-	@NonNull
-	private LineStyle getSelectedStyle() {
-		return drawInfo.isDashedLine() ? LineStyle.DASHED : LineStyle.SOLID;
+	@DrawableRes
+	private int getIconId(@NonNull GpxLineStyleType style) {
+		return switch (style) {
+			case SOLID -> R.drawable.ic_action_line_style_solid;
+			case DASHED -> R.drawable.ic_action_line_style_dashed;
+			case DOTTED -> R.drawable.ic_action_line_style_dotted;
+		};
 	}
 
-	private enum LineStyle {
-		SOLID(R.drawable.ic_action_line_style_solid, R.string.track_coloring_solid),
-		DASHED(R.drawable.ic_action_line_style_dashed, R.string.gpx_line_style_dashed),
-		DOTTED(R.drawable.ic_action_line_style_dotted, R.string.gpx_line_style_dotted);
-
-		@DrawableRes
-		private final int iconId;
-		@StringRes
-		private final int titleId;
-
-		LineStyle(@DrawableRes int iconId, @StringRes int titleId) {
-			this.iconId = iconId;
-			this.titleId = titleId;
-		}
+	@NonNull
+	private GpxLineStyleType getSelectedStyle() {
+		return drawInfo.getLineStyleType();
 	}
 
 	public interface ITrackLineStyleSelectedListener {
-		void onTrackLineStyleSelected(boolean dashed);
+		void onTrackLineStyleSelected(@NonNull GpxLineStyleType style);
 	}
 }

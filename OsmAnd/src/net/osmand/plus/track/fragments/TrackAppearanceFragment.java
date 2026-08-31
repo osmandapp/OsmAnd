@@ -11,7 +11,7 @@ import static net.osmand.shared.gpx.GpxParameter.COLOR;
 import static net.osmand.shared.gpx.GpxParameter.COLORING_TYPE;
 import static net.osmand.shared.gpx.GpxParameter.COLOR_PALETTE;
 import static net.osmand.shared.gpx.GpxParameter.ELEVATION_METERS;
-import static net.osmand.shared.gpx.GpxParameter.LINE_DASHED;
+import static net.osmand.shared.gpx.GpxParameter.LINE_STYLE;
 import static net.osmand.shared.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.shared.gpx.GpxParameter.SHOW_START_FINISH;
 import static net.osmand.shared.gpx.GpxParameter.SPLIT_INTERVAL;
@@ -705,7 +705,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			settings.CURRENT_TRACK_ROUTE_INFO_ATTRIBUTE.set(trackDrawInfo.getRouteInfoAttribute());
 			settings.CURRENT_TRACK_WIDTH.set(trackDrawInfo.getWidth());
 			settings.CURRENT_TRACK_SHOW_ARROWS.set(trackDrawInfo.isShowArrows());
-			settings.CURRENT_TRACK_LINE_DASHED.set(trackDrawInfo.isDashedLine());
+			settings.CURRENT_TRACK_LINE_STYLE.set(trackDrawInfo.getLineStyleType().getTypeName());
 			settings.CURRENT_TRACK_SHOW_START_FINISH.set(trackDrawInfo.isShowStartFinish());
 			settings.CURRENT_TRACK_3D_VISUALIZATION_TYPE.set(trackDrawInfo.getTrackVisualizationType().getTypeName());
 			settings.CURRENT_TRACK_3D_WALL_COLORING_TYPE.set(trackDrawInfo.getTrackWallColorType().getTypeName());
@@ -717,7 +717,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			gpxDataItem.setParameter(COLOR, trackDrawInfo.getColor());
 			gpxDataItem.setParameter(WIDTH, trackDrawInfo.getWidth());
 			gpxDataItem.setParameter(SHOW_ARROWS, trackDrawInfo.isShowArrows());
-			gpxDataItem.setParameter(LINE_DASHED, trackDrawInfo.isDashedLine());
+			gpxDataItem.setParameter(LINE_STYLE, trackDrawInfo.getLineStyleType().getTypeName());
 			gpxDataItem.setParameter(SHOW_START_FINISH, trackDrawInfo.isShowStartFinish());
 			gpxDataItem.setParameter(SPLIT_TYPE, GpxSplitType.getSplitTypeByTypeId(trackDrawInfo.getSplitType()).getType());
 			gpxDataItem.setParameter(SPLIT_INTERVAL, trackDrawInfo.getSplitInterval());
@@ -844,7 +844,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	private TrackLineStyleController getLineStyleCardController() {
-		return new TrackLineStyleController(app, trackDrawInfo, dashed -> refreshMap());
+		return new TrackLineStyleController(app, trackDrawInfo, style -> refreshMap());
 	}
 
 	public List<GpxDisplayGroup> getGpxDisplayGroups() {

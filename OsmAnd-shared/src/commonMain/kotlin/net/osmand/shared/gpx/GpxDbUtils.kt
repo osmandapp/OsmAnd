@@ -126,7 +126,7 @@ object GpxDbUtils {
 			addIfMissingGpxTableColumn(columnNames, db, SHOW_AS_MARKERS);
 			addIfMissingGpxTableColumn(columnNames, db, JOIN_SEGMENTS);
 			addIfMissingGpxTableColumn(columnNames, db, SHOW_ARROWS);
-			addIfMissingGpxTableColumn(columnNames, db, LINE_DASHED);
+			addIfMissingGpxTableColumn(columnNames, db, LINE_STYLE);
 			addIfMissingGpxTableColumn(columnNames, db, SHOW_START_FINISH);
 			addIfMissingGpxTableColumn(columnNames, db, TRACK_VISUALIZATION_TYPE);
 			addIfMissingGpxTableColumn(columnNames, db, TRACK_3D_WALL_COLORING_TYPE);

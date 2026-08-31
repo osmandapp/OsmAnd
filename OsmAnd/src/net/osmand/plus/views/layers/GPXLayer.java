@@ -87,6 +87,7 @@ import net.osmand.router.RouteSegmentResult;
 import net.osmand.shared.data.KQuadRect;
 import net.osmand.shared.gpx.*;
 import net.osmand.shared.gpx.GpxDbHelper;
+import net.osmand.shared.gpx.enums.GpxLineStyleType;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.io.KFile;
@@ -1412,18 +1413,17 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					}
 					updated |= renderableSegment.setDrawArrows(showArrows);
 					updated |= renderableSegment.setTrack3DStyle(track3DStyle);
-					boolean dashed = appearanceHelper.isLineDashedForTrack(gpxFile, gpxItem, dirItem, selected);
-					updated |= renderableSegment.setDashed(dashed);
+					GpxLineStyleType lineStyleType = selected
+							? appearanceHelper.getLineStyleTypeForTrack(gpxFile, gpxItem, dirItem)
+							: GpxLineStyleType.SOLID;
+					updated |= renderableSegment.setLineStyleType(lineStyleType);
 					if (updated || !hasMapRenderer) {
 						float[] intervals = null;
 						PathEffect pathEffect = paint.getPathEffect();
 						if (pathEffect instanceof OsmandDashPathEffect) {
 							intervals = ((OsmandDashPathEffect) pathEffect).getIntervals();
 						}
-						if (dashed) {
-							float dashStrokeWidth = paint.getStrokeWidth();
-							intervals = new float[] {Math.max(dashStrokeWidth * 2.5f, 1f), Math.max(dashStrokeWidth * 1.6f, 1f)};
-						}
+						intervals = getLineStyleIntervals(lineStyleType, paint.getStrokeWidth(), intervals);
 						boolean recreateSegments = invalidated || boundsChanged;
 						renderableSegment.drawGeometry(canvas, tileBox, correctedQuadRect, paint.getColor(),
 								paint.getStrokeWidth(), intervals, showArrows, track3DStyle, recreateSegments);
@@ -1948,5 +1948,15 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			customObjectsDelegate.setCustomMapObjects(gpxFiles);
 			getApplication().getOsmandMap().refreshMap();
 		}
+	}
+
+	@Nullable
+	private float[] getLineStyleIntervals(@NonNull GpxLineStyleType lineStyleType, float strokeWidth,
+			@Nullable float[] defaultIntervals) {
+		return switch (lineStyleType) {
+			case SOLID -> defaultIntervals;
+			case DASHED -> new float[] {Math.max(strokeWidth * 2f, 1f), Math.max(strokeWidth, 1f)};
+			case DOTTED -> new float[] {Math.max(strokeWidth, 1f), Math.max(strokeWidth, 1f)};
+		};
 	}
 }

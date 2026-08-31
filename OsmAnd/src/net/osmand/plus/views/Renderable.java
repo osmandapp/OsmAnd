@@ -22,6 +22,7 @@ import net.osmand.router.RouteSegmentResult;
 import net.osmand.shared.data.KQuadRect;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.GradientScaleType;
+import net.osmand.shared.gpx.enums.GpxLineStyleType;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.palette.domain.PaletteConstants;
 import net.osmand.shared.routing.ColoringType;
@@ -98,7 +99,8 @@ public class Renderable {
 
         protected GpxGeometryWay geometryWay;
         protected boolean drawArrows;
-        protected boolean dashed;
+        @NonNull
+        protected GpxLineStyleType lineStyleType = GpxLineStyleType.SOLID;
         protected Track3DStyle track3DStyle;
 
         public RenderableSegment(List<WptPt> points, double segmentSize) {
@@ -117,9 +119,9 @@ public class Renderable {
             return changed;
         }
 
-        public boolean setDashed(boolean dashed) {
-            boolean changed = this.dashed != dashed;
-            this.dashed = dashed;
+        public boolean setLineStyleType(@NonNull GpxLineStyleType lineStyleType) {
+            boolean changed = this.lineStyleType != lineStyleType;
+            this.lineStyleType = lineStyleType;
             return changed;
         }
 

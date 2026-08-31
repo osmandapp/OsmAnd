@@ -43,7 +43,7 @@ enum class GpxParameter(
 	SHOW_AS_MARKERS("showAsMarkers", "int", Boolean::class, false, false),
 	JOIN_SEGMENTS("joinSegments", "int", Boolean::class, false, false),
 	SHOW_ARROWS("showArrows", "int", Boolean::class, false, false),
-	LINE_DASHED("lineDashed", "int", Boolean::class, false, false),
+	LINE_STYLE("line_style", "TEXT", String::class, "solid", false),
 	SHOW_START_FINISH("showStartFinish", "int", Boolean::class, true, false),
 	TRACK_VISUALIZATION_TYPE("track_visualization_type", "TEXT", String::class, "none", false),
 	TRACK_3D_WALL_COLORING_TYPE("track_3d_wall_coloring_type", "TEXT", String::class, "none", false),
@@ -179,7 +179,7 @@ enum class GpxParameter(
 	companion object {
 
 		private val APPEARANCE_PARAMETERS = listOf(
-			COLOR, WIDTH, COLORING_TYPE, SHOW_ARROWS, LINE_DASHED,
+			COLOR, WIDTH, COLORING_TYPE, SHOW_ARROWS, LINE_STYLE,
 			SHOW_START_FINISH, SPLIT_TYPE, SPLIT_INTERVAL,
 			TRACK_3D_LINE_POSITION_TYPE, TRACK_VISUALIZATION_TYPE, TRACK_3D_WALL_COLORING_TYPE, COLOR_PALETTE
 		)
