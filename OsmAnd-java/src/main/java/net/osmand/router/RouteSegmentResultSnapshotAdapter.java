@@ -1,16 +1,21 @@
 package net.osmand.router;
 
+import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.shared.routing.details.RouteSegment;
 import net.osmand.shared.routing.details.RouteTypeAttribute;
 
+import org.apache.commons.logging.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /** Eagerly copies one Java/native route segment into the platform-neutral shared contract. */
 public final class RouteSegmentResultSnapshotAdapter {
+
+	private static final Log LOG = PlatformUtil.getLog(RouteSegmentResultSnapshotAdapter.class);
 
 	private RouteSegmentResultSnapshotAdapter() {
 	}
@@ -80,10 +85,13 @@ public final class RouteSegmentResultSnapshotAdapter {
 		int encodingRulesSize = region.quickGetEncodingRulesSize();
 		for (int type : types) {
 			if (type < 0 || type >= encodingRulesSize) {
+				LOG.warn("Skipping invalid route encoding rule id=" + type
+						+ " for route object id=" + road.getId()
+						+ ", rules=" + encodingRulesSize);
 				continue;
 			}
 			RouteTypeRule rule = region.quickGetEncodingRule(type);
-			if (rule != null && rule.getTag() != null && rule.getValue() != null) {
+			if (rule != null && rule.getTag() != null) {
 				result.add(new RouteTypeAttribute(rule.getTag(), rule.getValue()));
 			}
 		}

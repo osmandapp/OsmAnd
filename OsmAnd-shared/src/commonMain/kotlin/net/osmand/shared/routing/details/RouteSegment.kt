@@ -2,11 +2,11 @@ package net.osmand.shared.routing.details
 
 import kotlinx.serialization.Serializable
 
-/** One route encoding rule, preserving source order and duplicate tags. */
+/** One route encoding rule, preserving source order, duplicate tags, and nullable values. */
 @Serializable
 data class RouteTypeAttribute(
 	val tag: String,
-	val value: String,
+	val value: String?,
 )
 
 /**

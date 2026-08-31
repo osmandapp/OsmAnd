@@ -33,6 +33,7 @@ class RouteStatisticsCalculatorTest {
 				RouteTypeAttribute("access", "yes"),
 				RouteTypeAttribute("piste:type", "downhill"),
 				RouteTypeAttribute("smoothness", "good"),
+				RouteTypeAttribute("seasonal", null),
 			),
 		)
 
@@ -51,7 +52,7 @@ class RouteStatisticsCalculatorTest {
 					attributeName = "routeInfo_surface",
 					mainTag = "route",
 					mainValue = "ferry",
-					additional = "surface=asphalt;access=yes;smoothness=good;",
+					additional = "surface=asphalt;access=yes;smoothness=good;seasonal=null;",
 				),
 			),
 			requests,
