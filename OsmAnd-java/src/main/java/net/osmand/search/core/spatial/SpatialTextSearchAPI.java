@@ -8,6 +8,7 @@ import static net.osmand.search.core.SearchCoreFactory.PREFERRED_REGION_ZOOM;
 import static net.osmand.search.core.SearchCoreFactory.PREFERRED_STREET_INTERSECTION_ZOOM;
 import static net.osmand.search.core.SearchCoreFactory.PREFERRED_STREET_ZOOM;
 import static net.osmand.search.core.SearchCoreFactory.SEARCH_ADDRESS_BY_NAME_PRIORITY;
+import static net.osmand.search.core.SearchCoreFactory.isLastWordCityGroup;
 
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -196,7 +197,8 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 	@Override
 	public int getSearchPriority(SearchPhrase phrase) {
 		if (!phrase.isUnknownSearchWordPresent()
-				|| phrase.isLastWord(ObjectType.POI_TYPE, ObjectType.STREET)) {
+				|| phrase.isLastWord(ObjectType.POI_TYPE, ObjectType.STREET)
+				|| isLastWordCityGroup(phrase)) {
 			return -1;
 		}
 		return SEARCH_PRIORITY;
@@ -287,6 +289,11 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 				result.parentSearchResult = parent;
 			}
 		} else if (obj instanceof City city) {
+			if (city.getReferenceFile() instanceof BinaryMapIndexReader reader) {
+				result.file = reader;
+				result.relatedObject = reader;
+				result.localeRelatedObjectName = reader.getRegionName();
+			}
 			CityType type = city.getType();
 			if (type == CityType.CITY || type == CityType.TOWN) {
 				result.objectType = ObjectType.CITY;
