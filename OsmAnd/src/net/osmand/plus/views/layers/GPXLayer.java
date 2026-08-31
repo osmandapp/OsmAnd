@@ -1952,11 +1952,12 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	@Nullable
 	private float[] getLineStyleIntervals(@NonNull GpxLineStyleType lineStyleType, float strokeWidth,
-			@Nullable float[] defaultIntervals) {
+	                                      @Nullable float[] defaultIntervals) {
+		float interval = Math.max(strokeWidth, 1f);
 		return switch (lineStyleType) {
 			case SOLID -> defaultIntervals;
-			case DASHED -> new float[] {Math.max(strokeWidth * 2f, 1f), Math.max(strokeWidth, 1f)};
-			case DOTTED -> new float[] {Math.max(strokeWidth, 1f), Math.max(strokeWidth, 1f)};
+			case DASHED -> new float[] {interval * 0.75f, interval * 1.75f};
+			case DOTTED -> new float[] {0.1f, interval};
 		};
 	}
 }
