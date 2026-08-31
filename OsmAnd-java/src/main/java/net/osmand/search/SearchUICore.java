@@ -655,12 +655,12 @@ public class SearchUICore {
 				? new SpatialBuildingAndIntersectionsByStreetAPI()
 				: new SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI();
 		apis.add(streetsApi);
+		SearchStreetByCityAPI cityApi = new SearchCoreFactory.SearchStreetByCityAPI(streetsApi);
+		apis.add(cityApi);
 		if (useSpatialSearch) {
-			apis.add(new SpatialNearestCitySearchAPI(streetsApi));
+			apis.add(new SpatialNearestCitySearchAPI(streetsApi, cityApi));
 			apis.add(new SpatialTextSearchAPI(poiTypes));
 		} else {
-			SearchStreetByCityAPI cityApi = new SearchCoreFactory.SearchStreetByCityAPI(streetsApi);
-			apis.add(cityApi);
 			SearchCoreFactory.TownCitiesCache townCitiesCache = new SearchCoreFactory.TownCitiesCache();
 			apis.add(new SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi, false, townCitiesCache));
 			apis.add(new SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi, true, townCitiesCache));
@@ -669,9 +669,9 @@ public class SearchUICore {
 
 	private static class SpatialNearestCitySearchAPI extends SearchAddressByNameAPI {
 
-		public SpatialNearestCitySearchAPI(SearchBuildingAndIntersectionsByStreetAPI streetsApi) {
-			super(streetsApi, new SearchStreetByCityAPI(streetsApi), false,
-					new SearchCoreFactory.TownCitiesCache());
+		public SpatialNearestCitySearchAPI(SearchBuildingAndIntersectionsByStreetAPI streetsApi,
+		                                   SearchStreetByCityAPI cityApi) {
+			super(streetsApi, cityApi, false, new SearchCoreFactory.TownCitiesCache());
 		}
 
 		@Override
@@ -685,7 +685,8 @@ public class SearchUICore {
 
 		@Override
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
-			if (phrase.getLastSelectedWord().getResult().object instanceof Street street
+			SearchResult selectedResult = phrase.getLastSelectedWord().getResult();
+			if (selectedResult.file == null && selectedResult.object instanceof Street street
 					&& street.getBuildings().isEmpty() && street.getIntersectedStreets().isEmpty()) {
 				return true;
 			}

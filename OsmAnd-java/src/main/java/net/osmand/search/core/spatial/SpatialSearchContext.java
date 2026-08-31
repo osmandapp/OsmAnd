@@ -709,6 +709,9 @@ public class SpatialSearchContext {
 		} else {
 			obj = bmir.readCityObject(nameIndex.addressRegion, shift);
 		}
+		if (obj instanceof City city) {
+			city.setReferenceFile(bmir);
+		}
 		stats.readObjsBytes += (bmir.getBytesRead() - bytesRead);
 		stats.sub2ReadObjTime.finish();
 		return obj;
