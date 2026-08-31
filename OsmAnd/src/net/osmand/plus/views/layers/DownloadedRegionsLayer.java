@@ -164,10 +164,10 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		cachedShowDownloadedMaps = isShowDownloadedMaps();
 		mapSuggestionController = new MapSuggestionController(view);
 
-		paintDownloaded = getPaint(getColor(R.color.region_uptodate));
-		paintOutdated = getPaint(getColor(R.color.region_outdated));
-		paintSelected = getPaint(getColor(R.color.region_selected));
-		paintBackuped = getPaint(getColor(R.color.region_backuped));
+		paintDownloaded = getPaint(getColor(R.color.map_region_downloaded_fill));
+		paintOutdated = getPaint(getColor(R.color.map_region_outdated_fill));
+		paintSelected = getPaint(getColor(R.color.map_region_selected_fill));
+		paintBackuped = getPaint(getColor(R.color.map_region_deactivated_fill));
 
 		textPaint = new TextPaint();
 
