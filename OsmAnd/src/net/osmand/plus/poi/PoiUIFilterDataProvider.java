@@ -22,6 +22,8 @@ import java.util.List;
 
 public class PoiUIFilterDataProvider {
 
+	private static final long WIKI_LOAD_MAX_WAIT_MS = 30_000;
+
     private final OsmandApplication app;
     private final PoiUIFilter filter;
 
@@ -65,7 +67,8 @@ public class PoiUIFilterDataProvider {
         boolean loading = false;
         boolean cancelled = matcher != null && matcher.isCancelled();
         PoiUIFilterResultMatcher<?> uiFilterResultMatcher = matcher != null ? (PoiUIFilterResultMatcher<?>) matcher : null;
-        while (explorePlacesProvider.isLoading() && !cancelled) {
+        long waitDeadlineMs = System.currentTimeMillis() + WIKI_LOAD_MAX_WAIT_MS;
+        while (explorePlacesProvider.isLoadingRect(rect) && !cancelled && System.currentTimeMillis() < waitDeadlineMs) {
             if (uiFilterResultMatcher != null) {
                 uiFilterResultMatcher.defferedResults();
             }
