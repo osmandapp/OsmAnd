@@ -12,42 +12,12 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Eagerly copies one Java/native route segment into the platform-neutral shared contract. */
+/** Copies statistics inputs from one Java/native route segment into the shared contract. */
 public final class RouteSegmentResultSnapshotAdapter {
 
 	private static final Log LOG = PlatformUtil.getLog(RouteSegmentResultSnapshotAdapter.class);
 
 	private RouteSegmentResultSnapshotAdapter() {
-	}
-
-	public static RouteSegment toSnapshot(RouteSegmentResult source,
-	                                      int routePointStartIndex,
-	                                      int routePointEndIndex) {
-		RouteDataObject road = source.getObject();
-		boolean forward = source.isForwardDirection();
-		return new RouteSegment(
-				routePointStartIndex,
-				routePointEndIndex,
-				source.getStartPointIndex(),
-				source.getEndPointIndex(),
-				source.getDistance(),
-				source.getSegmentTime(),
-				source.getSegmentSpeed(),
-				road.getId(),
-				forward,
-				road.getName(),
-				road.getRef("", false, forward),
-				road.getDestinationName("", false, forward),
-				road.getDestinationRef("", false, forward),
-				road.getHighway(),
-				road.getMaximumSpeed(forward),
-				road.getLanes(),
-				road.getOneway(),
-				road.roundabout(),
-				road.tunnel(),
-				copyRouteTypes(road),
-				copyHeightValues(source.getHeightValues())
-		);
 	}
 
 	/** Copies only the fields consumed by the shared statistics calculator. */

@@ -24,7 +24,6 @@ import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingContext;
 import net.osmand.router.TurnType;
 import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.routing.details.RouteDetailsSnapshot;
 import net.osmand.shared.routing.details.RouteEventType;
 import net.osmand.shared.routing.details.RouteExitInfo;
 import net.osmand.util.Algorithms;
@@ -52,10 +51,6 @@ public class RouteCalculationResult {
 	private final String errorMessage;
 	private final int[] listDistance;
 	private final int[] intermediatePoints;
-	private final int snapshotCurrentRoutePointIndex;
-	private final int snapshotCurrentDirectionIndex;
-	private final int snapshotNextIntermediateIndex;
-	private volatile RouteDetailsSnapshot routeDetailsSnapshot;
 
 	// Route information
 	private final float routingTime;
@@ -103,9 +98,6 @@ public class RouteCalculationResult {
 		this.routeRecalcDistance = 0;
 		this.routeVisibleAngle = 0;
 		this.initialCalculation = false;
-		this.snapshotCurrentRoutePointIndex = this.currentRoute;
-		this.snapshotCurrentDirectionIndex = this.currentDirectionInfo;
-		this.snapshotNextIntermediateIndex = this.nextIntermediate;
 	}
 
 	public RouteCalculationResult(List<Location> list, List<RouteDirectionInfo> directions,
@@ -152,9 +144,6 @@ public class RouteCalculationResult {
 		}
 		this.initialCalculation = params.initialCalculation;
 		this.gpxFile = params.gpxFile;
-		this.snapshotCurrentRoutePointIndex = this.currentRoute;
-		this.snapshotCurrentDirectionIndex = this.currentDirectionInfo;
-		this.snapshotNextIntermediateIndex = this.nextIntermediate;
 	}
 
 	public RouteCalculationResult(List<RouteSegmentResult> list, RouteCalculationParams params, RoutingContext rctx,
@@ -209,9 +198,6 @@ public class RouteCalculationResult {
 				ctx.getSettings().ROUTE_STRAIGHT_ANGLE.getModeValue(mode) : 0;
 		this.initialCalculation = params.initialCalculation;
 		this.gpxFile = params.gpxFile;
-		this.snapshotCurrentRoutePointIndex = this.currentRoute;
-		this.snapshotCurrentDirectionIndex = this.currentDirectionInfo;
-		this.snapshotNextIntermediateIndex = this.nextIntermediate;
 	}
 
 	public ApplicationMode getAppMode() {
@@ -1119,18 +1105,6 @@ public class RouteCalculationResult {
 		return nextIntermediate;
 	}
 
-	int getCurrentDirectionInfoForSnapshot() {
-		return currentDirectionInfo;
-	}
-
-	int[] getIntermediateDirectionIndexesForSnapshot() {
-		return intermediatePoints.clone();
-	}
-
-	int getListDistanceForSnapshot(int index) {
-		return getListDistance(index);
-	}
-
 	public int getCurrentRouteForLocation(@NonNull Location location) {
 		int currentRoute = this.currentRoute;
 		if (currentRoute == 0) {
@@ -1461,23 +1435,4 @@ public class RouteCalculationResult {
 		return gpxFile;
 	}
 
-	/** Returns a lazily created immutable platform-neutral copy of this calculated route. */
-	@NonNull
-	public RouteDetailsSnapshot getRouteDetailsSnapshot() {
-		RouteDetailsSnapshot snapshot = routeDetailsSnapshot;
-		if (snapshot == null) {
-			synchronized (this) {
-				snapshot = routeDetailsSnapshot;
-				if (snapshot == null) {
-					snapshot = RouteCalculationResultSnapshotAdapter.create(
-							this,
-							snapshotCurrentRoutePointIndex,
-							snapshotCurrentDirectionIndex,
-							snapshotNextIntermediateIndex);
-					routeDetailsSnapshot = snapshot;
-				}
-			}
-		}
-		return snapshot;
-	}
 }
