@@ -173,9 +173,10 @@ class RouteEventHelperTest {
 
 		val selected = RouteEventHelper.select(input, options)
 
-		assertEquals(listOf(0, 3, 4, 5, 6, 7, 8), selected.map { it.event.locationIndex })
+		assertEquals(listOf(8, 7, 5, 2, 6, 3, 0), selected.map { it.sourceIndex })
+		assertEquals(listOf(0, 3, 4, 5, 6, 7, 8), selected.map { input[it.sourceIndex].locationIndex })
 		assertEquals(listOf(true, false, true, false, true, true, false), selected.map { it.announce })
-		assertEquals(tunnelAtSix, selected.single { it.event.type == RouteEventType.TUNNEL }.event)
+		assertEquals(6, selected.single { input[it.sourceIndex].type == RouteEventType.TUNNEL }.sourceIndex)
 	}
 
 	@Test
@@ -194,8 +195,10 @@ class RouteEventHelperTest {
 		val cameras = RouteEventHelper.select(cameraEvents, options(showCameras = true))
 		val railways = RouteEventHelper.select(railwayEvents, options())
 
-		assertEquals(listOf(4, 6), cameras.map { it.event.locationIndex })
-		assertEquals(listOf(5, 7), railways.map { it.event.locationIndex })
+		assertEquals(listOf(2, 0), cameras.map { it.sourceIndex })
+		assertEquals(listOf(4, 6), cameras.map { cameraEvents[it.sourceIndex].locationIndex })
+		assertEquals(listOf(2, 0), railways.map { it.sourceIndex })
+		assertEquals(listOf(5, 7), railways.map { railwayEvents[it.sourceIndex].locationIndex })
 	}
 
 	@Test
@@ -211,7 +214,8 @@ class RouteEventHelperTest {
 		assertEquals(emptyList(), RouteEventHelper.select(events, options(routingAlarmsEnabled = false)))
 
 		val railwayOnly = RouteEventHelper.select(events, options())
-		assertEquals(listOf(RouteEventType.RAILWAY), railwayOnly.map { it.event.type })
+		assertEquals(listOf(3), railwayOnly.map(RouteEventSelection::sourceIndex))
+		assertEquals(listOf(RouteEventType.RAILWAY), railwayOnly.map { events[it.sourceIndex].type })
 		assertEquals(listOf(false), railwayOnly.map(RouteEventSelection::announce))
 
 		val spokenOnly = RouteEventHelper.select(
@@ -223,7 +227,8 @@ class RouteEventHelperTest {
 				speakTrafficWarnings = true,
 			),
 		)
-		assertEquals(events, spokenOnly.map(RouteEventSelection::event))
+		assertEquals(events.indices.toList(), spokenOnly.map(RouteEventSelection::sourceIndex))
+		assertEquals(events, spokenOnly.map { events[it.sourceIndex] })
 		assertTrue(spokenOnly.all(RouteEventSelection::announce))
 	}
 
@@ -241,7 +246,8 @@ class RouteEventHelperTest {
 
 		val selected = RouteEventHelper.select(events, options(showTrafficWarnings = true))
 
-		assertEquals(events, selected.map(RouteEventSelection::event))
+		assertEquals(events.indices.toList(), selected.map(RouteEventSelection::sourceIndex))
+		assertEquals(events, selected.map { events[it.sourceIndex] })
 		assertTrue(selected.none(RouteEventSelection::announce))
 	}
 

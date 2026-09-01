@@ -48,7 +48,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -721,7 +720,6 @@ public class WaypointHelper {
 			return;
 		}
 		List<RouteEvent> events = new ArrayList<>(alarms.size());
-		Map<RouteEvent, AlarmInfo> alarmsByEvent = new IdentityHashMap<>(alarms.size());
 		for (AlarmInfo alarmInfo : alarms) {
 			RouteEvent event = new RouteEvent(
 					alarmInfo.getType(),
@@ -731,7 +729,6 @@ public class WaypointHelper {
 					0,
 					0f);
 			events.add(event);
-			alarmsByEvent.put(event, alarmInfo);
 		}
 		RouteEventSelectionOptions options = new RouteEventSelectionOptions(
 				routingAlarmsEnabled,
@@ -744,10 +741,8 @@ public class WaypointHelper {
 				settings.SHOW_TRAFFIC_WARNINGS.getModeValue(mode),
 				settings.SPEAK_TRAFFIC_WARNINGS.getModeValue(mode));
 		for (RouteEventSelection selection : RouteEventHelper.INSTANCE.select(events, options)) {
-			AlarmInfo alarmInfo = alarmsByEvent.get(selection.getEvent());
-			if (alarmInfo != null) {
-				addPointWrapper(alarmInfo, array, selection.getAnnounce());
-			}
+			AlarmInfo alarmInfo = alarms.get(selection.getSourceIndex());
+			addPointWrapper(alarmInfo, array, selection.getAnnounce());
 		}
 	}
 

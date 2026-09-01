@@ -16,9 +16,9 @@ data class RouteEventSelectionOptions(
 	val speakTrafficWarnings: Boolean,
 )
 
-/** One event selected by Android alarm rules, including its announcement flag. */
+/** One event selected by Android alarm rules, identified by its index in the input event list. */
 data class RouteEventSelection(
-	val event: RouteEvent,
+	val sourceIndex: Int,
 	val announce: Boolean,
 )
 
@@ -142,7 +142,8 @@ object RouteEventHelper {
 		var previousCamera: RouteEvent? = null
 		var previousRailway: RouteEvent? = null
 		val selected = ArrayList<RouteEventSelection>()
-		for (event in events) {
+		for (sourceIndex in events.indices) {
+			val event = events[sourceIndex]
 			when {
 				event.type.isTrafficCamera() -> {
 					if (options.showCameras || options.speakSpeedCameras) {
@@ -150,19 +151,19 @@ object RouteEventHelper {
 							KMapUtils.getDistance(previous.location, event.location)
 						}
 						if (distance == null || distance >= DUPLICATE_CAMERA_DISTANCE_METERS) {
-							selected.add(RouteEventSelection(event, options.speakSpeedCameras))
+							selected.add(RouteEventSelection(sourceIndex, options.speakSpeedCameras))
 							previousCamera = event
 						}
 					}
 				}
 				event.type == RouteEventType.TUNNEL -> {
 					if (options.showTunnels || options.speakTunnels) {
-						selected.add(RouteEventSelection(event, options.speakTunnels))
+						selected.add(RouteEventSelection(sourceIndex, options.speakTunnels))
 					}
 				}
 				event.type == RouteEventType.PEDESTRIAN -> {
 					if (options.showPedestrian || options.speakPedestrian) {
-						selected.add(RouteEventSelection(event, options.speakPedestrian))
+						selected.add(RouteEventSelection(sourceIndex, options.speakPedestrian))
 					}
 				}
 				event.type == RouteEventType.RAILWAY -> {
@@ -170,17 +171,17 @@ object RouteEventHelper {
 						KMapUtils.getDistance(previous.location, event.location)
 					}
 					if (distance == null || distance >= DUPLICATE_RAILWAY_DISTANCE_METERS) {
-						selected.add(RouteEventSelection(event, options.speakTrafficWarnings))
+						selected.add(RouteEventSelection(sourceIndex, options.speakTrafficWarnings))
 						previousRailway = event
 					}
 				}
 				options.showTrafficWarnings || options.speakTrafficWarnings -> {
-					selected.add(RouteEventSelection(event, options.speakTrafficWarnings))
+					selected.add(RouteEventSelection(sourceIndex, options.speakTrafficWarnings))
 				}
 			}
 		}
 		// MutableList.sortWith is stable, so events with the same route index retain input order.
-		selected.sortWith(compareBy { it.event.locationIndex })
+		selected.sortWith(compareBy { events[it.sourceIndex].locationIndex })
 		return selected
 	}
 }
