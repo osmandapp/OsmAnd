@@ -186,6 +186,12 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	}
 
 	@Nullable
+	private String getTrackPath() {
+		GpxFile gpxFile = displayHelper.getGpx();
+		return gpxFile != null ? gpxFile.getPath() : null;
+	}
+
+	@Nullable
 	private GpxFile getFilteredGpxFile() {
 		String gpxPath = displayHelper.getGpx() != null ? displayHelper.getGpx().getPath() : null;
 		if (gpxPath != null) {
@@ -231,7 +237,8 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		List<ILineDataSet> dataSets = dataSetsMap.get(tabType);
 		boolean withoutGaps = shouldCalculateWithoutGaps();
 		if (chart != null && analysis != null) {
-			dataSets = ChartUtils.getDataSets(chart, app, analysis, firstType, secondType, selectedMainAxisType, withoutGaps);
+			dataSets = ChartUtils.getDataSets(chart, app, analysis, firstType, secondType,
+					selectedMainAxisType, withoutGaps, getTrackPath());
 			if (!Algorithms.isEmpty(dataSets)) {
 				dataSetsMap.remove(tabType);
 			}

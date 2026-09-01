@@ -715,8 +715,9 @@ public class TrackDetailsMenu {
 			}
 		}
 
+		String trackPath = selectedGpxFile != null ? selectedGpxFile.getGpxFile().getPath() : null;
 		if (dataSets.size() == 2 && ChartUtils.applyColorSource(app, chart,
-				(OrderedLineDataSet) dataSets.get(0), (OrderedLineDataSet) dataSets.get(1))) {
+				(OrderedLineDataSet) dataSets.get(0), (OrderedLineDataSet) dataSets.get(1), trackPath)) {
 			dataSets.remove(1);
 		}
 

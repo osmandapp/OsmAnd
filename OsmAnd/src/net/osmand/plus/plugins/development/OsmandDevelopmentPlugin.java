@@ -96,6 +96,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	public final OsmandPreference<Integer> CHART_SLOPE_WINDOW;
 
 	public static boolean CHART_DISCRETE_COLORS = false;
+	public static boolean CHART_TRACK_PALETTES = true;
 
 	private final StateChangedListener<Boolean> useRasterSQLiteDbListener;
 	private final StateChangedListener<Boolean> symbolsDebugInfoListener;

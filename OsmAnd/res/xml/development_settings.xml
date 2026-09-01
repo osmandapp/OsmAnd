@@ -261,6 +261,13 @@
 		android:summary="@string/chart_discrete_colors_descr"
 		android:title="@string/chart_discrete_colors" />
 
+	<SwitchPreferenceCompat
+		android:key="chart_track_palettes"
+		android:layout="@layout/preference_switch"
+		android:persistent="false"
+		android:summary="@string/chart_track_palettes_descr"
+		android:title="@string/chart_track_palettes" />
+
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="chart_slope_window"
 		android:layout="@layout/preference_with_descr"

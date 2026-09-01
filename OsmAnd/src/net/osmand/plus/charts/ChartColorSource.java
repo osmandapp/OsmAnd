@@ -1,5 +1,7 @@
 package net.osmand.plus.charts;
 
+import static net.osmand.shared.gpx.GpxParameter.COLOR_PALETTE;
+
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
@@ -8,9 +10,15 @@ import androidx.annotation.Nullable;
 import com.github.mikephil.charting.data.Entry;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.track.helpers.GpxAppearanceHelper;
 import net.osmand.shared.ColorPalette;
 import net.osmand.shared.ColorPalette.ColorValue;
+import net.osmand.shared.gpx.GradientScaleType;
+import net.osmand.shared.palette.domain.PaletteItem;
+import net.osmand.shared.palette.domain.category.GradientPaletteCategory;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
@@ -55,7 +63,8 @@ public class ChartColorSource {
 
 	@Nullable
 	public static ChartColorSource create(@NonNull OsmandApplication app,
-	                                      @NonNull OrderedLineDataSet dataSet) {
+	                                      @NonNull OrderedLineDataSet dataSet,
+	                                      @Nullable String trackPath) {
 		List<Entry> entries = dataSet.getEntries();
 		if (entries == null || entries.size() < 2) {
 			return null;
@@ -81,7 +90,7 @@ public class ChartColorSource {
 		if (min > max) {
 			return null;
 		}
-		return new ChartColorSource(xs, values, resolvePalette(type, min, max), dataSet);
+		return new ChartColorSource(xs, values, resolvePalette(app, type, min, max, trackPath), dataSet);
 	}
 
 	public int getColorAt(float x) {
@@ -182,11 +191,75 @@ public class ChartColorSource {
 	}
 
 	@NonNull
-	private static ColorPalette resolvePalette(@NonNull GPXDataSetType type,
-	                                           double min, double max) {
+	private static ColorPalette resolvePalette(@NonNull OsmandApplication app,
+	                                           @NonNull GPXDataSetType type,
+	                                           double min, double max,
+	                                           @Nullable String trackPath) {
+		if (OsmandDevelopmentPlugin.CHART_TRACK_PALETTES) {
+			ColorPalette trackPalette = findTrackPalette(app, type, min, max, trackPath);
+			if (trackPalette != null) {
+				return trackPalette;
+			}
+		}
 		return isBipolar(type)
 				? BIPOLAR_PALETTE
 				: new ColorPalette(LINEAR_PALETTE, min, max, false);
+	}
+
+	/**
+	 * The gradient the map colours this attribute by, so a chart can match the track next to it.
+	 * <p>
+	 * Only altitude, speed and slope have such a palette at all; everything else keeps the built-in
+	 * one. Returns null whenever the chosen palette is missing or unusable, so the caller falls back
+	 * rather than drawing nothing.
+	 */
+	@Nullable
+	private static ColorPalette findTrackPalette(@NonNull OsmandApplication app,
+	                                             @NonNull GPXDataSetType type,
+	                                             double min, double max,
+	                                             @Nullable String trackPath) {
+		GradientScaleType scaleType = toGradientScaleType(type);
+		if (scaleType == null) {
+			return null;
+		}
+		GradientPaletteCategory category = scaleType.toPaletteCategory();
+		String name = findPaletteName(app, trackPath);
+		PaletteItem item = app.getPaletteRepository().findPaletteItem(category.getId(), name);
+		if (!(item instanceof PaletteItem.Gradient gradient)) {
+			return null;
+		}
+		ColorPalette palette = gradient.getColorPalette();
+		if (!palette.isValid()) {
+			return null;
+		}
+		return gradient.isFixed() ? palette : new ColorPalette(palette, min, max, isBipolar(type));
+	}
+
+	/**
+	 * A saved track keeps its palette in its own COLOR_PALETTE parameter; only the track being
+	 * recorded right now uses the global setting. Reading only the global one meant that choosing a
+	 * palette for a saved track had no effect here at all.
+	 */
+	@NonNull
+	private static String findPaletteName(@NonNull OsmandApplication app, @Nullable String trackPath) {
+		if (trackPath != null) {
+			GpxAppearanceHelper helper = new GpxAppearanceHelper(app);
+			String name = helper.getAppearanceParameter(new File(trackPath), COLOR_PALETTE);
+			if (name != null) {
+				return name;
+			}
+		}
+		return app.getSettings().CURRENT_GRADIENT_PALETTE.get();
+	}
+
+	@Nullable
+	private static GradientScaleType toGradientScaleType(@NonNull GPXDataSetType type) {
+		return switch (type) {
+			case ALTITUDE, ALTITUDE_EXTRM -> GradientScaleType.ALTITUDE;
+			case SPEED -> GradientScaleType.SPEED;
+			case SLOPE -> GradientScaleType.SLOPE;
+			default -> null;
+		};
 	}
 
 	@NonNull

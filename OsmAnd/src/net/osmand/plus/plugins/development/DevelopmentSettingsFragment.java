@@ -54,6 +54,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 	private static final String GRID_LAYOUT_DRAW_SLOTS = "grid_layout_draw_slots";
 	private static final String GRID_LAYOUT_DRAW_BUTTON_FRAMES = "grid_layout_draw_button_frames";
 	private static final String CHART_DISCRETE_COLORS = "chart_discrete_colors";
+	private static final String CHART_TRACK_PALETTES = "chart_track_palettes";
 
 	private static final int OPEN_AIS_FILE_REQUEST = 1001;
 
@@ -310,6 +311,10 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 
 		SwitchPreferenceCompat discreteColors = findPreference(CHART_DISCRETE_COLORS);
 		discreteColors.setChecked(OsmandDevelopmentPlugin.CHART_DISCRETE_COLORS);
+
+		SwitchPreferenceCompat trackPalettes = findPreference(CHART_TRACK_PALETTES);
+		trackPalettes.setChecked(OsmandDevelopmentPlugin.CHART_TRACK_PALETTES);
+		trackPalettes.setIconSpaceReserved(false);
 		discreteColors.setIconSpaceReserved(false);
 
 		setupSlopeWindowPref();
@@ -523,6 +528,9 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 			return true;
 		} else if (CHART_DISCRETE_COLORS.equals(prefId) && newValue instanceof Boolean discrete) {
 			OsmandDevelopmentPlugin.CHART_DISCRETE_COLORS = discrete;
+			return true;
+		} else if (CHART_TRACK_PALETTES.equals(prefId) && newValue instanceof Boolean fromTrack) {
+			OsmandDevelopmentPlugin.CHART_TRACK_PALETTES = fromTrack;
 			return true;
 		} else if (GRID_LAYOUT_DRAW_CELLS.equals(prefId)) {
 			OsmandSettings.DEV_GRID_LAYOUT_DRAW_CELLS = !OsmandSettings.DEV_GRID_LAYOUT_DRAW_CELLS;

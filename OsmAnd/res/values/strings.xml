@@ -14,6 +14,8 @@
 	<string name="chart_prototype">Chart prototype</string>
 	<string name="chart_color_by_second_dataset">Colour graph by second data set</string>
 	<string name="chart_discrete_colors">Stepped colours</string>
+	<string name="chart_track_palettes">Palettes from track appearance</string>
+	<string name="chart_track_palettes_descr">For altitude, speed and slope take the gradient chosen for the track instead of the built-in one. Falls back when there is none. Resets on restart</string>
 	<string name="chart_slope_window">Slope averaging window</string>
 	<string name="chart_slope_window_descr">Distance the slope is measured over. Shorter keeps more detail but amplifies elevation noise. The map uses 150 m</string>
 	<string name="chart_discrete_colors_descr">Off - smooth gradient. On - flat bands that change at the palette breakpoints. Resets on restart</string>

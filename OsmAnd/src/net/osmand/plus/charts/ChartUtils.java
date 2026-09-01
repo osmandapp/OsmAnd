@@ -729,10 +729,18 @@ public class ChartUtils {
 	                                       @NonNull BarLineChartBase<?> chart,
 	                                       @Nullable OrderedLineDataSet lineDataSet,
 	                                       @Nullable OrderedLineDataSet colorDataSet) {
+		return applyColorSource(app, chart, lineDataSet, colorDataSet, null);
+	}
+
+	public static boolean applyColorSource(@NonNull OsmandApplication app,
+	                                       @NonNull BarLineChartBase<?> chart,
+	                                       @Nullable OrderedLineDataSet lineDataSet,
+	                                       @Nullable OrderedLineDataSet colorDataSet,
+	                                       @Nullable String trackPath) {
 		if (lineDataSet == null || colorDataSet == null || !isColorBySecondDataSetEnabled()) {
 			return false;
 		}
-		ChartColorSource colorSource = ChartColorSource.create(app, colorDataSet);
+		ChartColorSource colorSource = ChartColorSource.create(app, colorDataSet, trackPath);
 		if (colorSource == null) {
 			return false;
 		}
@@ -926,6 +934,18 @@ public class ChartUtils {
 	                                             @Nullable GPXDataSetType secondType,
 	                                             GPXDataSetAxisType gpxDataSetAxisType,
 	                                             boolean calcWithoutGaps) {
+		return getDataSets(chart, app, analysis, firstType, secondType, gpxDataSetAxisType,
+				calcWithoutGaps, null);
+	}
+
+	public static List<ILineDataSet> getDataSets(LineChart chart,
+	                                             OsmandApplication app,
+	                                             GpxTrackAnalysis analysis,
+	                                             @NonNull GPXDataSetType firstType,
+	                                             @Nullable GPXDataSetType secondType,
+	                                             GPXDataSetAxisType gpxDataSetAxisType,
+	                                             boolean calcWithoutGaps,
+	                                             @Nullable String trackPath) {
 		if (app == null || chart == null || analysis == null) {
 			return new ArrayList<>();
 		}
@@ -938,7 +958,7 @@ public class ChartUtils {
 		} else {
 			OrderedLineDataSet dataSet1 = getDataSet(app, chart, analysis, firstType, secondType, gpxDataSetAxisType, calcWithoutGaps, false);
 			OrderedLineDataSet dataSet2 = getDataSet(app, chart, analysis, secondType, firstType, gpxDataSetAxisType, calcWithoutGaps, true);
-			if (applyColorSource(app, chart, dataSet1, dataSet2)) {
+			if (applyColorSource(app, chart, dataSet1, dataSet2, trackPath)) {
 				result.add(dataSet1);
 				return result;
 			}
