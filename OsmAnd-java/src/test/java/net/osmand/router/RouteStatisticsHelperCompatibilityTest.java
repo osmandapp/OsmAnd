@@ -1,168 +1,120 @@
 package net.osmand.router;
 
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
-import net.osmand.binary.RouteDataObject;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.data.LatLon;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
-import net.osmand.router.RouteStatisticsHelper.RouteStatisticComputer;
-import net.osmand.shared.routing.details.RouteAttributeClassification;
+import net.osmand.router.LegacyRouteStatisticsHelper.RouteSegmentAttribute;
+import net.osmand.router.LegacyRouteStatisticsHelper.RouteStatistics;
+import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
+import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
 import net.osmand.shared.routing.details.RouteStatistic;
 import net.osmand.shared.routing.details.RouteStatisticElement;
 
 import org.junit.Test;
 
-import java.io.ByteArrayInputStream;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.Collections;
+import java.io.File;
+import java.io.RandomAccessFile;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-/** Android compatibility fixtures frozen from the pre-shared RouteStatisticsHelper behavior. */
 public class RouteStatisticsHelperCompatibilityTest {
 
 	@Test
-	public void preservesRendererFallbackGroupingUndefinedOmissionAndPartitionOrder() throws Exception {
-		RenderingRulesStorage currentRenderer = renderer("current", """
-				<renderingAttribute name="routeInfo_surface">
-					<case additional="surface=asphalt" attrColorValue="#112233" attrStringValue="current_asphalt"/>
-				</renderingAttribute>
-				""");
-		RenderingRulesStorage defaultRenderer = renderer("default", """
-				<renderingAttribute name="routeInfo_surface">
-					<case additional="surface=gravel" attrColorValue="#445566" attrStringValue="default_gravel"/>
-				</renderingAttribute>
-				<renderingAttribute name="routeInfo_roadClass">
-					<case tag="highway" value="residential" attrColorValue="#770000" attrStringValue="street"/>
-					<case tag="highway" value="primary" attrColorValue="#007700" attrStringValue="primary"/>
-				</renderingAttribute>
-				""");
-		RouteRegion region = region();
-		List<RouteSegmentResult> route = Arrays.asList(
-				segment(region, 30f, new int[]{0, 1, 2}, new float[0]),
-				segment(region, 20f, new int[]{1, 3}, new float[0]),
-				segment(region, 40f, new int[]{1, 3}, new float[0]));
+	public void sharedCalculatorMatchesLegacyOnCalculatedObfRoute() throws Exception {
+		File mapFile = new File("src/test/resources/routing/Routing_test_64.obf");
+		BinaryMapIndexReader mapReader = new BinaryMapIndexReader(
+				new RandomAccessFile(mapFile, "r"),
+				mapFile);
+		try {
+			List<RouteSegmentResult> route = calculateRoute(mapReader);
+			assertTrue("The compatibility route must contain multiple segments", route.size() > 1);
 
-		List<RouteStatistic> result = RouteStatisticsHelper.calculateRouteStatistic(
-				route,
-				Arrays.asList("routeInfo_surface", "routeInfo_roadClass", "routeInfo_missing"),
-				currentRenderer,
-				defaultRenderer,
-				new RenderingRuleSearchRequest(currentRenderer),
-				new RenderingRuleSearchRequest(defaultRenderer));
+			RenderingRulesStorage renderer = RenderingRulesStorage.initWithStylesFromResources("default.render.xml");
+			List<String> attributeNames = RouteStatisticsHelper.getRouteStatisticAttrsNames(
+					null, renderer, false);
+			assertFalse("The default style must expose route statistics", attributeNames.isEmpty());
 
-		assertEquals(Arrays.asList("surface", "roadClass"),
-				Arrays.asList(result.get(0).getName(), result.get(1).getName()));
-		assertStatistic(
-				result.get(0),
-				90f,
-				Arrays.asList("current_asphalt:30.0", "undefined:60.0"),
-				Arrays.asList("current_asphalt:30.0", "undefined:60.0"));
-		assertStatistic(
-				result.get(1),
-				90f,
-				Arrays.asList("street:30.0", "primary:60.0"),
-				Arrays.asList("primary:60.0", "street:30.0"));
-		assertEquals(0xFF112233, result.get(0).getElements().get(0).getColor());
-		assertEquals(0, result.get(0).getElements().get(1).getColor());
+			List<RouteStatistics> expected = LegacyRouteStatisticsHelper.calculateRouteStatistic(
+					route,
+					attributeNames,
+					null,
+					renderer,
+					null,
+					new RenderingRuleSearchRequest(renderer));
+			List<RouteStatistic> actual = RouteStatisticsHelper.calculateRouteStatistic(
+					route,
+					attributeNames,
+					null,
+					renderer,
+					null,
+					new RenderingRuleSearchRequest(renderer));
 
-		RouteStatisticComputer legacyClassifier = new RouteStatisticComputer(
-				currentRenderer,
-				defaultRenderer,
-				new RenderingRuleSearchRequest(currentRenderer),
-				new RenderingRuleSearchRequest(defaultRenderer));
-		assertAttributeEquals(
-				legacyClassifier.classifySegment("routeInfo_surface", -1, route.get(0).getObject()),
-				result.get(0).getElements().get(0));
-		assertAttributeEquals(
-				legacyClassifier.classifySegment("routeInfo_surface", -1, route.get(1).getObject()),
-				result.get(0).getElements().get(1));
-	}
-
-	@Test
-	public void preservesLegacyElevationInterpolationAndSlopePartitions() throws Exception {
-		RenderingRulesStorage renderer = renderer("slope", """
-				<renderingAttribute name="routeInfo_steepness">
-					<case additional="steepness=-3_0" attrColorValue="#112233" attrStringValue="-3_0"/>
-					<case additional="steepness=17_20" attrColorValue="#445566" attrStringValue="17_20"/>
-				</renderingAttribute>
-				""");
-		RouteSegmentResult segment = segment(
-				new RouteRegion(),
-				110f,
-				new int[0],
-				new float[]{0f, 0f, 110f, 22f});
-
-		RouteStatistic result = RouteStatisticsHelper.calculateRouteStatistic(
-				Collections.singletonList(segment),
-				Collections.singletonList("routeInfo_steepness"),
-				renderer,
-				renderer,
-				new RenderingRuleSearchRequest(renderer),
-				new RenderingRuleSearchRequest(renderer)).get(0);
-
-		assertEquals("steepness", result.getName());
-		assertStatistic(
-				result,
-				110f,
-				Arrays.asList("-4% .. 0%:50.0", "16% .. 20%:10.0", "-4% .. 0%:50.0"),
-				Arrays.asList("-4% .. 0%:100.0", "16% .. 20%:10.0"));
-	}
-
-	private static RenderingRulesStorage renderer(String name, String attributes) throws Exception {
-		String xml = "<renderingStyle name=\"" + name + "\" defaultColor=\"#ffffff\" version=\"1\">"
-				+ attributes + "</renderingStyle>";
-		RenderingRulesStorage renderer = new RenderingRulesStorage(name, Collections.emptyMap());
-		renderer.parseRulesFromXmlInputStream(
-				new ByteArrayInputStream(xml.getBytes(StandardCharsets.UTF_8)),
-				null,
-				false);
-		return renderer;
-	}
-
-	private static RouteRegion region() {
-		RouteRegion region = new RouteRegion();
-		region.initRouteEncodingRule(0, "highway", "residential");
-		region.initRouteEncodingRule(1, "highway", "primary");
-		region.initRouteEncodingRule(2, "surface", "asphalt");
-		region.initRouteEncodingRule(3, "surface", "gravel");
-		return region;
-	}
-
-	private static RouteSegmentResult segment(RouteRegion region,
-	                                          float distance,
-	                                          int[] types,
-	                                          float[] heightValues) {
-		RouteDataObject road = new RouteDataObject(region, new int[0], new String[0]);
-		road.types = types;
-		road.pointsX = new int[]{0, 1};
-		road.pointsY = new int[]{0, 1};
-		road.heightDistanceArray = heightValues;
-		RouteSegmentResult segment = new RouteSegmentResult(road, 0, 1);
-		segment.setDistance(distance);
-		return segment;
-	}
-
-	private static void assertStatistic(RouteStatistic statistic,
-	                                    float totalDistance,
-	                                    List<String> elements,
-	                                    List<String> partition) {
-		assertEquals(totalDistance, statistic.getTotalDistanceMeters(), 0f);
-		assertEquals(elements, attributes(statistic.getElements()));
-		assertEquals(partition, attributes(statistic.getPartition()));
-	}
-
-	private static List<String> attributes(Iterable<RouteStatisticElement> attributes) {
-		java.util.ArrayList<String> result = new java.util.ArrayList<>();
-		for (RouteStatisticElement attribute : attributes) {
-			result.add(attribute.getUserPropertyName() + ":" + attribute.getDistanceMeters());
+			assertFalse("The calculated route must produce statistics", expected.isEmpty());
+			assertEquals("Statistic count", expected.size(), actual.size());
+			for (int statisticIndex = 0; statisticIndex < expected.size(); statisticIndex++) {
+				assertStatisticEquals(expected.get(statisticIndex), actual.get(statisticIndex), statisticIndex);
+			}
+		} finally {
+			mapReader.close();
 		}
-		return result;
 	}
 
-	private static void assertAttributeEquals(RouteAttributeClassification expected, RouteStatisticElement actual) {
-		assertEquals(expected.getPropertyName(), actual.getPropertyName());
-		assertEquals(expected.getColor(), actual.getColor());
+	private static List<RouteSegmentResult> calculateRoute(BinaryMapIndexReader mapReader) throws Exception {
+		RoutePlannerFrontEnd frontEnd = new RoutePlannerFrontEnd();
+		frontEnd.CALCULATE_MISSING_MAPS = false;
+		Map<String, String> parameters = new HashMap<>();
+		parameters.put("avoid_footways", "true");
+		parameters.put("avoid_unpaved", "true");
+		RoutingConfiguration configuration = RoutingConfiguration.getDefault().build(
+				"bicycle",
+				new RoutingMemoryLimits(
+						RoutingConfiguration.DEFAULT_MEMORY_LIMIT * 3,
+						RoutingConfiguration.DEFAULT_NATIVE_MEMORY_LIMIT),
+				parameters);
+		configuration.planRoadDirection = 0;
+		RoutingContext context = frontEnd.buildRoutingContext(
+				configuration,
+				null,
+				new BinaryMapIndexReader[]{mapReader},
+				RouteCalculationMode.NORMAL);
+		return frontEnd.searchRoute(
+				context,
+				new LatLon(45.67710, 35.39404),
+				new LatLon(45.67588, 35.39403),
+				null).detailed;
+	}
+
+	private static void assertStatisticEquals(RouteStatistics expected,
+	                                          RouteStatistic actual,
+	                                          int statisticIndex) {
+		String prefix = "Statistic " + statisticIndex + " (" + expected.name + ") ";
+		assertEquals(prefix + "name", expected.name, actual.getName());
+		assertEquals(prefix + "total distance", expected.totalDistance, actual.getTotalDistanceMeters(), 0f);
+		assertElementsEqual(prefix + "elements", expected.elements, actual.getElements());
+		assertElementsEqual(prefix + "partition", new ArrayList<>(expected.partition.values()), actual.getPartition());
+	}
+
+	private static void assertElementsEqual(String prefix,
+	                                        List<RouteSegmentAttribute> expected,
+	                                        List<RouteStatisticElement> actual) {
+		assertEquals(prefix + " count", expected.size(), actual.size());
+		for (int elementIndex = 0; elementIndex < expected.size(); elementIndex++) {
+			RouteSegmentAttribute expectedElement = expected.get(elementIndex);
+			RouteStatisticElement actualElement = actual.get(elementIndex);
+			String elementPrefix = prefix + "[" + elementIndex + "] ";
+			assertEquals(elementPrefix + "property", expectedElement.getPropertyName(), actualElement.getPropertyName());
+			assertEquals(elementPrefix + "user property", expectedElement.getUserPropertyName(),
+					actualElement.getUserPropertyName());
+			assertEquals(elementPrefix + "color", expectedElement.getColor(), actualElement.getColor());
+			assertEquals(elementPrefix + "distance", expectedElement.getDistance(),
+					actualElement.getDistanceMeters(), 0f);
+		}
 	}
 }
