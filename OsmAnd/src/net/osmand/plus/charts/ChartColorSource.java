@@ -31,7 +31,7 @@ public class ChartColorSource {
 	private static final ColorPalette BIPOLAR_PALETTE = buildPalette(new double[] {
 			-0.15, -0.08, -0.03, 0.0, 0.03, 0.08, 0.15
 	}, new int[] {
-			0xFF2E7FD4, 0xFF3FA9E8, 0xFF5FC8C0, 0xFF8FCB55, 0xFFF7B342, 0xFFFA7A3C, 0xFFD95FE8
+			0xFF2E7FD4, 0xFF3FA9E8, 0xFF5FC8C0, 0xFF8FCB55, 0xFFF7B342, 0xFFFA7A3C, 0xFFC62828
 	});
 
 	private static final ColorPalette LINEAR_PALETTE = buildPalette(new double[] {
