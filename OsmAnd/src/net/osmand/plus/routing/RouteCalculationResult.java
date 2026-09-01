@@ -1445,6 +1445,46 @@ public class RouteCalculationResult {
 		return intermediatePoints.length - nextIntermediate;
 	}
 
+	@NonNull
+	public List<IntermediatePointInfo> getIntermediatePointInfos() {
+		List<IntermediatePointInfo> infos = new ArrayList<>();
+		for (int i = nextIntermediate; i < intermediatePoints.length; i++) {
+			int directionIndex = intermediatePoints[i];
+			if (directionIndex >= 0 && directionIndex < directions.size()) {
+				int routePointOffset = directions.get(directionIndex).routePointOffset;
+				int distance = getDistanceToPoint(routePointOffset);
+				int time = getLeftTimeToNextIntermediate(null, i - nextIntermediate);
+				infos.add(new IntermediatePointInfo(routePointOffset, distance, time));
+			}
+		}
+		return infos;
+	}
+
+	public static class IntermediatePointInfo {
+
+		private final int routePointOffset;
+		private final int distance;
+		private final int time;
+
+		public IntermediatePointInfo(int routePointOffset, int distance, int time) {
+			this.routePointOffset = routePointOffset;
+			this.distance = distance;
+			this.time = time;
+		}
+
+		public int getRoutePointOffset() {
+			return routePointOffset;
+		}
+
+		public int getDistance() {
+			return distance;
+		}
+
+		public int getTime() {
+			return time;
+		}
+	}
+
 	public int getLeftTime(Location fromLoc) {
 		int time = 0;
 		if (currentDirectionInfo < directions.size()) {

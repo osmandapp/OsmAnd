@@ -1,6 +1,5 @@
 package net.osmand.plus.myplaces.tracks.filters
 
-import android.app.Activity
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
@@ -25,7 +24,6 @@ import net.osmand.shared.gpx.filters.TextTrackFilter
 
 class FiltersAdapter(
 	private val app: OsmandApplication,
-	private val activity: Activity,
 	private val fragmentManager: FragmentManager,
 	private val filter: TracksSearchFilter,
 	private val nightMode: Boolean
@@ -84,7 +82,7 @@ class FiltersAdapter(
 		} else if (holder is FilterRangeViewHolder) {
 			holder.bindView(item as RangeTrackFilter<*>)
 		} else if (holder is FilterDateViewHolder) {
-			holder.bindView(item as DateTrackFilter, activity)
+			holder.bindView(item as DateTrackFilter, fragmentManager)
 		} else if (holder is ListFilterViewHolder) {
 			holder.bindView(item as ListTrackFilter, fragmentManager)
 		} else if (holder is FilterOtherViewHolder) {

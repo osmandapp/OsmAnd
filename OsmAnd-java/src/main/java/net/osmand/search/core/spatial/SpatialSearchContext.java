@@ -738,6 +738,9 @@ public class SpatialSearchContext {
 			if (b.getEloRatingCount() > 0) {
 				elo = b.getEloRating(0);
 			}
+			if (indx.poiRegion.isBasemap()) {
+				elo = Math.max(settings.WORLD_ELO_RATING, elo);
+			}
 			poiTypes = parsePoiTypes(indx, b, poiTypes);
 		}
 		boolean[] cmnWord = new boolean[1];

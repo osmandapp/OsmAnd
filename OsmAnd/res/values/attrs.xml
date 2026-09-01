@@ -209,6 +209,19 @@
 		<attr name="icon_button_background_focused" format="reference" />
 		<attr name="icon_button_background_pressed" format="reference" />
 		<attr name="btn_history_disabled_card_bg" format="reference" />
+		<!-- M3 migration -->
+		<attr name="colorPrimaryPressed" format="reference" />
+		<attr name="colorPrimaryContainerPressed" format="reference" />
+		<attr name="colorSurfaceContainerHighestPressed" format="reference" />
+		<attr name="colorOnSurfaceTertiary" format="reference" />
+		<attr name="colorOnSurfaceDisabled" format="reference" />
+		<attr name="colorOutlineDisabled" format="reference" />
+		<attr name="colorSuccess" format="reference" />
+		<attr name="colorWarning" format="reference" />
+		<attr name="colorSuccessIcon" format="reference" />
+		<attr name="colorWarningIcon" format="reference" />
+		<attr name="colorErrorIcon" format="reference" />
+		<attr name="colorBrandAccent" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">

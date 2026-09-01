@@ -2176,7 +2176,7 @@
     <string name="poi_animal_training">Loomade väljaõpe</string>
     <string name="poi_animal_training_dog">Koer</string>
     <string name="poi_animal_training_horse">Hobune</string>
-    <string name="poi_horse_yes">Hobused lubatud</string>
+    <string name="poi_horse_yes">Jah</string>
     <string name="poi_horse_no">Hobused ei ole lubatud</string>
     <string name="poi_animal_yes">Loomad lubatud</string>
     <string name="poi_animal_no">Loomad ei ole lubatud</string>
@@ -3202,11 +3202,11 @@
     <string name="poi_gorge">Kuristik</string>
     <string name="poi_couloir">Kuluaar</string>
     <string name="poi_mountain_area">Mägipiirkond</string>
-    <string name="poi_surface_clay">Savi</string>
-    <string name="poi_surface_tartan">Tartaan</string>
-    <string name="poi_surface_artificial_turf">Kunstmuru</string>
-    <string name="poi_surface_decoturf">DecoTurf</string>
-    <string name="poi_surface_metal_grid">Metallvõrk</string>
+    <string name="poi_surface_clay">Pind: savi</string>
+    <string name="poi_surface_tartan">Pind: tartaan</string>
+    <string name="poi_surface_artificial_turf">Pind: kunstmuru</string>
+    <string name="poi_surface_decoturf">Pind: DecoTurf</string>
+    <string name="poi_surface_metal_grid">Pind: metallvõrk</string>
     <string name="poi_location_underground">Asukoht: maa all</string>
     <string name="poi_location_underwater">Asukoht: vee all</string>
     <string name="poi_location_overground">Asukoht: maa peal</string>
@@ -3643,7 +3643,7 @@
     <string name="poi_tourist_bus_no">Turistibussi ligipääs: ei</string>
     <string name="poi_coach_yes">Kaugsõidubussi ligipääs: jah</string>
     <string name="poi_coach_no">Kaugsõidubussi ligipääs: ei</string>
-    <string name="poi_ski_yes">Suuskadel ligipääs: jah</string>
+    <string name="poi_ski_yes">Jah</string>
     <string name="poi_ski_no">Suuskadel ligipääs: ei</string>
     <string name="poi_snowmobile_private">Mootorsaaniga ligipääs: privaatne</string>
     <string name="poi_snowmobile_no">Mootorsaaniga ligipääs: ei</string>
@@ -4885,7 +4885,7 @@
     <string name="poi_cafe_filter">Kohvik</string>
     <string name="poi_climbing_route_bottom">Ronimisraja algpunkt</string>
     <string name="poi_climbing_route">Ronimisrada</string>
-    <string name="poi_cafe_yes">Jah</string>
+    <string name="poi_cafe_yes">Kohvik: jah</string>
     <string name="poi_climbing_area">Ronimisraja piirkond</string>
     <string name="poi_route_activity_type_sport_motorcycling">Mootorrattasport</string>
     <string name="poi_route_activity_type_road_motorcycling">Mootorrattasõit teedel</string>
@@ -4933,7 +4933,7 @@
     <string name="poi_spikes">Piitõke</string>
     <string name="poi_wedge">Ülestõstetav kiilplokk</string>
     <string name="poi_sump_buster">Madal tõkkeplokk sõiduautodele</string>
-    <string name="poi_surface_chipseal">Mustkate või freesasfalt</string>
+    <string name="poi_surface_chipseal">Pind: mustkate või freesasfalt</string>
     <string name="poi_sinkhole_doline">Karst: lai karstilehter</string>
     <string name="poi_padus_local_designation">Kohalik klassifikatsioon</string>
     <string name="poi_padus_owner_fullname">Kohalik omanik</string>
@@ -5155,4 +5155,14 @@
     <string name="poi_denomination_scottish_episcopal">Šoti Episkopaalne Kirik</string>
     <string name="poi_denomination_catholic_apostolic">Katoliiklik apostellik kirik</string>
     <string name="poi_denomination_czechoslovak_hussite">Tšehhi hussiidikirik</string>
+    <string name="poi_mtb_filter">Sobilik mägirattasõiduks</string>
+    <string name="poi_ski_filter">Sobilik suusatamiseks</string>
+    <string name="poi_horse_filter">Sobilik ratsutamiseks</string>
+    <string name="poi_winter_hiking_filter">Sobib talviseks matkamiseks</string>
+    <string name="poi_mtb_yes">Jah</string>
+    <string name="poi_winter_hiking_yes">Jah</string>
+    <string name="poi_surface_laterite">Pind: lateriit</string>
+    <string name="poi_denomination_ecumenical">Oikumeeniline kirik</string>
+    <string name="poi_denomination_disciples_of_christ">Kristuse jüngrite kirik (Disciples Of Christ)</string>
+    <string name="poi_denomination_free_evangelical">Vabaenvangelistlik kirik (Free Evangelical)</string>
 </resources>

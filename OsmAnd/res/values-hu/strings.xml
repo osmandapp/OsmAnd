@@ -2627,7 +2627,7 @@
     <string name="track_show_start_finish_icons">Kiindulási pont és az úti cél ikonjainak megjelenítése</string>
     <string name="shared_string_file_name">Fájlnév</string>
     <string name="select_track_width">Vastagság kiválasztása</string>
-    <string name="plan_route_trim_after">Kiigazítás ez után:</string>
+    <string name="plan_route_trim_after">Következők levágása:</string>
     <string name="all_previous_segments_will_be_recalc">Minden korábbi szakasz újra lesz számítva a kiválasztott profilnak megfelelően.</string>
     <string name="previous_segment">Előző szakasz</string>
     <string name="monitoring_min_accuracy_descr">Ez csak a legalább minimális pontossággal mért pontokat rögzíti (méterben/lábban, ahogy azt az Android a lapkakészletnek közvetíti). A pontosság (accuracy) a mérések valódi helyzethez való közelsége, és nem kapcsolódik közvetlenül az ismételt mérések szórásának pontosságához (precision).</string>
@@ -2657,7 +2657,7 @@
     <string name="gpx_direction_arrows">Iránymutató nyilak</string>
     <string name="monitoring_min_distance_descr_recommendation">Ajánlás: Állítson be 5 méteres elmozdulást, ha nem szükséges ennél finomabb részleteket rögzítenie, és nyugalmi állapotban sincs szüksége további adatokra.</string>
     <string name="next_segment">Következő szakasz</string>
-    <string name="plan_route_trim_before">Kiigazítás ez előtt:</string>
+    <string name="plan_route_trim_before">Előzőek levágása:</string>
     <string name="simplified_track">Egyszerűsített nyomvonal</string>
     <string name="shared_string_done">Kész</string>
     <string name="shared_string_is_saved">elmentve</string>
@@ -2666,7 +2666,7 @@
     <string name="monitoring_min_accuracy_descr_remark">Megjegyzés: Ha a GPS közvetlenül a rögzítés előtt ki volt kapcsolva, akkor rosszabb lehet az első mért pont pontossága. A kódban ezért szeretnénk majd talán várni egy-két másodpercet egy pont rögzítése előtt (vagy a 3 egymást követő pont közül a legjobbat rögzíteni vagy valami hasonló), de ezt még nem programoztuk le.</string>
     <string name="delete_address">Cím törlése</string>
     <string name="context_menu_item_add_waypoint">Útpont hozzáadása a nyomvonalhoz</string>
-    <string name="plan_route_change_route_type_after">Útvonaltípus módosítása ez után:</string>
+    <string name="plan_route_change_route_type_after">Útvonaltípus módosítása utána</string>
     <string name="shared_string_gpx_route">Útvonal követése</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Ajánlás: Nehéz megjósolni, hogy mi kerül rögzítésre és mi nem, így talán a legjobb ezt a szűrőt kikapcsolni.</string>
     <string name="map_widget_monitoring">Utazás rögzítése</string>
@@ -2688,7 +2688,7 @@
     <string name="listed_exist">A felsorolt %1$s már létezik az OsmAndban.</string>
     <string name="all_previous_segments">Minden korábbi szakasz</string>
     <string name="plan_route_select_track_file_for_open">Válassza ki a megnyitni kívánt nyomvonalfájlt.</string>
-    <string name="plan_route_change_route_type_before">Útvonaltípus módosítása ez előtt:</string>
+    <string name="plan_route_change_route_type_before">Útvonaltípus módosítása előtte</string>
     <string name="route_between_points_whole_track_button_desc">A teljes útvonal újra lesz számítva a kiválasztott profilnak megfelelően.</string>
     <string name="save_as_new_track">Mentés új nyomvonalként</string>
     <string name="reverse_route">Útvonal megfordítása</string>
@@ -2771,8 +2771,8 @@
     <string name="lang_de_casual">német (tegeződő)</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="app_mode_light_aircraft">Könnyű légi jármű</string>
-    <string name="plan_route_split_before">Elvágás ez előtt:</string>
-    <string name="plan_route_split_after">Elvágás ez után:</string>
+    <string name="plan_route_split_before">Elvágás előtte</string>
+    <string name="plan_route_split_after">Elvágás utána</string>
     <string name="plan_route_add_new_segment">Új szakasz hozzáadása</string>
     <string name="release_3_9">• Lehetőség az összes adat exportálására és importálására, beleértve a beállításokat, erőforrásokat és a kedvenceket is \n \n • Útvonaltervezés: grafikonok a nyomvonalszakaszokhoz útvonallal, valamint lehetőség több nyomvonalszakasz létrehozására és szerkesztésére \n \n • OAuth hitelesítési módszer az OpenStreetMap-hez, az OSM-párbeszédpanelek felhasználói felületének javítása \n \n • Egyéni színek támogatása a kedvenceknél és a nyomvonalak útpontjainál</string>
     <string name="profile_type_osmand_string">OsmAnd-profil</string>
@@ -5252,7 +5252,7 @@
     <string name="use_spatial_text_search_description">Térbeli szövegkeresőmotor (kísérleti) használata a szabványos gyorskeresési API-k helyett.</string>
     <string name="always_keep_local_copy">Mindig legyen helyi másolat</string>
     <string name="always_keep_local_copy_description">A médiafájlok akkor is megmaradnak, ha az eredeti fájlt törlik a galériából vagy a fájlok közül.</string>
-    <string name="release_5_4">• Megújult keresőfelület: rendezés, kategóriaszűrők, letisztultabb megjelenés\n\n • Fotók és médiafájlok csatolása a kedvencekhez\n\n • Kedvencek: alcsoportok támogatása és kitűzhető mappák\n\n • Koordináták: a keresés, a térképrács és a POI-megjelenítés mostantól támogatja az EPSG és a Maidenhead helymeghatározó szolgáltatásokat\n\n • Navigáció megszakadásainak javítása; váltás a „Szabványos” és a „Gyors” útvonaltervezés között\n\n • Az Android Auto térkép méretarányának a telefontól független beállítása\n\n• Új térbeli keresés, helyek keresése és egy hely környékének átkutatása\n\n • A csillagászat részhez hozzá lett adva a nap- és holdfogyatkozások</string>
+    <string name="release_5_4">• Megújult keresőfelület: rendezés, kategóriaszűrők, letisztultabb megjelenés\n\n • Fotók és médiafájlok csatolása a kedvencekhez\n\n • Kedvencek: alcsoportok támogatása és kitűzhető mappák\n\n • Koordináták: a keresés, a térképrács és a POI-megjelenítés mostantól támogatja az EPSG által ismert koordináta-formátumokat és a Maidenhead helykódokat\n\n • Navigáció megszakadásainak javítása; váltás a „Szabványos” és a „Gyors” útvonaltervezés között\n\n • Az Android Auto térképméretarányának beállítása a telefontól függetlenül\n\n• Új térbeli keresés: helyek keresése és egy hely környékének átkutatása\n\n • A csillagászati módhoz hozzá lettek adva a nap- és holdfogyatkozások</string>
     <plurals name="files_count">
         <item quantity="one">%d fájl</item>
         <item quantity="other">%d fájl</item>
