@@ -17,6 +17,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.UiUtilities;
 
@@ -44,9 +45,14 @@ public class DisplayPositionAction extends QuickAction {
 	@Override
 	public void execute(@NonNull MapActivity mapActivity, @Nullable Bundle params) {
 		CommonPreference<Integer> pref = getPreference(mapActivity);
-		int currentState = pref.get();
-		pref.set((currentState == 2) ? 0 : currentState + 1);
+		pref.set(getNextPlacement(pref.get()));
 		mapActivity.updateLayers();
+	}
+
+	public static int getNextPlacement(int currentPlacement) {
+		return currentPlacement == OsmandSettings.POSITION_PLACEMENT_BOTTOM
+				? OsmandSettings.POSITION_PLACEMENT_AUTOMATIC
+				: currentPlacement + 1;
 	}
 
 	private CommonPreference<Integer> getPreference(@NonNull Context ctx) {
