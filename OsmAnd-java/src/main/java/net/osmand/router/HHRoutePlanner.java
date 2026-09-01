@@ -518,6 +518,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 	 * graph, stage 2 expands candidates one by one and checks the real road segments, stopping as
 	 * soon as ALT_MAX_COUNT routes are accepted.
 	 */
+	/** attempts to expand one candidate before giving up on it */
+	private static final int ALT_EXPAND_RETRIES = 3;
+
 	private static class AltCandidate {
 		NetworkDBPoint via;
 		double cost;
@@ -673,25 +676,42 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			if (progress != null && progress.isCancelled) {
 				return;
 			}
-			HHNetworkRouteRes alt = createRouteSegmentFromFinalPoint(hctx, c.via);
-			if (alt.segments.isEmpty()) {
-				continue;
+			// retrieveSegmentsGeometry bails out half way when a shortcut cannot be expanded, or when
+			// its detailed cost turns out higher than the hub graph promised; it corrects the segment
+			// cost on the way out, so the next attempt usually succeeds. The main route recalculates
+			// in exactly the same situation - an alternative simply retries a few times.
+			HHNetworkRouteRes alt = null;
+			boolean needsRecalculation = true;
+			for (int attempt = 0; attempt < ALT_EXPAND_RETRIES && needsRecalculation
+					&& expanded < cfg.ALT_MAX_EXPAND; attempt++) {
+				alt = createRouteSegmentFromFinalPoint(hctx, c.via);
+				if (alt.segments.isEmpty()) {
+					break;
+				}
+				needsRecalculation = retrieveSegmentsGeometry(hctx, rrp, alt, true, progress, true);
+				expanded++;
 			}
-			boolean needsRecalculation = retrieveSegmentsGeometry(hctx, rrp, alt, true, progress);
 			if (progress != null && progress.isCancelled) {
 				return;
 			}
-			expanded++;
+			if (alt == null || alt.segments.isEmpty()) {
+				continue;
+			}
 			if (needsRecalculation || !isFullyExpanded(alt)) {
-				// a shortcut could not be expanded (or turned out to cost much more than the hub
-				// graph promised) and retrieveSegmentsGeometry bailed out half way, leaving the rest
-				// of the segments without geometry - those would be drawn as straight lines.
-				// The main route recalculates in that case; for an alternative it is cheaper to drop
-				// the candidate and try the next one, the segment cost has been corrected anyway.
+				// still incomplete: the rest of the segments have no geometry and would be drawn as
+				// straight lines between hub points, so the candidate is not usable
 				printf(DEBUG_VERBOSE_LEVEL > 0, "  alt dropped: incomplete geometry (+%.1f%%)\n",
 						100 * (c.cost / optCost - 1));
 				continue;
 			}
+			// shortcut costs can be optimistic; now that the roads are known, check the real one
+			double realCost = alt.getHHRoutingDetailed();
+			if (realCost > maxCost) {
+				printf(DEBUG_VERBOSE_LEVEL > 0, "  alt dropped: real cost +%.1f%% over the limit (hub graph said +%.1f%%)\n",
+						100 * (realCost / optCost - 1), 100 * (c.cost / optCost - 1));
+				continue;
+			}
+			c.cost = realCost;
 			// prepare the candidate exactly like the main route: turns, distances and the clean-up of
 			// small manoeuvres all happen here, and the checks below must see what will be displayed
 			prepareRouteResults(hctx, alt, start, end, rrp);
@@ -1656,6 +1676,18 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 	
 	private boolean retrieveSegmentsGeometry(HHRoutingContext<T> hctx, RouteResultPreparation rrp, HHNetworkRouteRes route,
 			boolean routeSegments, RouteCalculationProgress progress) throws SQLException, InterruptedException, IOException {
+		return retrieveSegmentsGeometry(hctx, rrp, route, routeSegments, progress, false);
+	}
+
+	/**
+	 * @param acceptCostIncrease keep the detailed geometry when a shortcut turns out to cost more
+	 * than the hub graph promised, instead of aborting for a recalculation. The main route needs the
+	 * recalculation to stay optimal; an alternative only needs its true cost, which the caller then
+	 * re-checks against the stretch limit.
+	 */
+	private boolean retrieveSegmentsGeometry(HHRoutingContext<T> hctx, RouteResultPreparation rrp, HHNetworkRouteRes route,
+			boolean routeSegments, RouteCalculationProgress progress, boolean acceptCostIncrease)
+			throws SQLException, InterruptedException, IOException {
 		if (progress != null && progress.hhGetCalcCounter() > 0) {
 			progress.hhIterationProgress((double) progress.hhGetCalcCounter() / maxCountReiteration);
 		}
@@ -1693,11 +1725,15 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				if ((f.distanceFromStart + MAX_INC_COST_CORR) >
 						(s.segment.dist + MAX_INC_COST_CORR) * maxIncCostCoefficient) {
 					if (DEBUG_VERBOSE_LEVEL > 0) {
-						System.out.printf("Route cost increased (%.2f > %.2f) between %s -> %s: recalculate route\n",
-								f.distanceFromStart, s.segment.dist, s.segment.start, s.segment.end);
+						System.out.printf("Route cost increased (%.2f > %.2f) between %s -> %s: %s\n",
+								f.distanceFromStart, s.segment.dist, s.segment.start, s.segment.end,
+								acceptCostIncrease ? "keep detailed geometry" : "recalculate route");
 					}
 					s.segment.dist = f.distanceFromStart;
-					return true;
+					if (!acceptCostIncrease) {
+						return true;
+					}
+					s.rtTimeHHSegments = f.distanceFromStart;
 				}
 				s.rtTimeDetailed = f.distanceFromStart;
 				s.list = rrp.convertFinalSegmentToResults(hctx.rctx, f);

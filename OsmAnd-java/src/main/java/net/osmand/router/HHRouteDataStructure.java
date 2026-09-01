@@ -75,7 +75,9 @@ public class HHRouteDataStructure {
 		public double ALT_MAX_SHARING = 0.6; // coarse hub-graph pre-filter (stage 1)
 		public double ALT_MIN_DISTINCT_REL = 0.2; // exact geometry filter (stage 2), share of main length
 		public double ALT_MIN_DISTINCT_ABS = 1500; // exact geometry filter (stage 2), meters
-		public int ALT_MAX_EXPAND = 4; // max detailed expansions in stage 2 (time guard)
+		// Max detailed expansions in stage 2 (time guard). Retries of a candidate whose shortcuts
+		// disagree with the detailed roads count against it, so this is not "number of candidates".
+		public int ALT_MAX_EXPAND = 8;
 		public double ALT_MAX_RETRACED = 100; // meters an alternative may drive twice (u-turn tolerance)
 		public double ALT_RANK_COST_WEIGHT = 3; // rank: (1 - shared) - weight * stretch
 
