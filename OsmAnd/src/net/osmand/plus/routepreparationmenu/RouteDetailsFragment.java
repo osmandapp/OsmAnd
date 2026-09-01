@@ -101,6 +101,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		implements PublicTransportCardListener, CardListener {
 
 	public static final String ROUTE_ID_KEY = "route_id_key";
+	private static final String ROUTE_DETAILS_FILTER_MASK_KEY = "route_details_filter_mask";
 	private static final float PAGE_MARGIN = 5f;
 
 	private int routeId = -1;
@@ -115,6 +116,9 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	private final List<BaseCard> menuCards = new ArrayList<>();
 	@Nullable
 	private PublicTransportCard transportCard;
+	@Nullable
+	private RouteDirectionsCard routeDirectionsCard;
+	private int routeDetailsFilterMask = RouteDirectionsCard.FILTER_ALL;
 	private RouteDetailsFragmentListener routeDetailsListener;
 	private final List<RouteInfoCard> routeInfoCards = new ArrayList<>();
 	private RouteDetailsMenu routeDetailsMenu;
@@ -164,6 +168,37 @@ public class RouteDetailsFragment extends ContextMenuFragment
 
 	public int getRouteId() {
 		return routeId;
+	}
+
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		if (savedInstanceState != null) {
+			routeDetailsFilterMask = savedInstanceState.getInt(
+					ROUTE_DETAILS_FILTER_MASK_KEY, RouteDirectionsCard.FILTER_ALL);
+		}
+		getParentFragmentManager().setFragmentResultListener(
+				RouteDetailsFilterBottomSheet.REQUEST_KEY, this, (requestKey, result) -> {
+					routeDetailsFilterMask = result.getInt(
+							RouteDetailsFilterBottomSheet.RESULT_FILTER_MASK_KEY,
+							RouteDirectionsCard.FILTER_ALL) & RouteDirectionsCard.FILTER_ALL;
+					if (routeDirectionsCard != null) {
+						routeDirectionsCard.setFilterMask(routeDetailsFilterMask);
+						routeDirectionsCard.update();
+					}
+				});
+	}
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putInt(ROUTE_DETAILS_FILTER_MASK_KEY, routeDetailsFilterMask);
+	}
+
+	@Override
+	public void onDestroyView() {
+		routeDirectionsCard = null;
+		super.onDestroyView();
 	}
 
 	@Override
@@ -398,7 +433,11 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		if (mapActivity == null) {
 			return;
 		}
-		RouteDirectionsCard directionsCard = new RouteDirectionsCard(mapActivity);
+		RouteDirectionsCard directionsCard = new RouteDirectionsCard(mapActivity,
+				routeDetailsFilterMask, (selectedMask, warningCount, poiCount, favoriteCount) ->
+				RouteDetailsFilterBottomSheet.showInstance(getParentFragmentManager(), selectedMask,
+						warningCount, poiCount, favoriteCount));
+		routeDirectionsCard = directionsCard;
 		directionsCard.setTransparentBackground(true);
 		directionsCard.setListener(this);
 		menuCards.add(directionsCard);

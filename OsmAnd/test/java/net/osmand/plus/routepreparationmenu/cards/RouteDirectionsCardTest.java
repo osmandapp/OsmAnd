@@ -19,7 +19,6 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.EnumSet;
 import java.util.List;
 
 public class RouteDirectionsCardTest {
@@ -87,8 +86,9 @@ public class RouteDirectionsCardTest {
 
 		List<RouteDetailsItem> result = RouteDetailsListBuilder.mergeAlongRouteItems(
 				coreItems, alongRouteItems,
-				EnumSet.of(RouteDetailsItem.Type.TRAFFIC_WARNING,
-						RouteDetailsItem.Type.FAVORITE), 2);
+				RouteDirectionsCard.getVisibleAlongRouteTypes(
+						RouteDirectionsCard.FILTER_TRAFFIC_WARNINGS
+								| RouteDirectionsCard.FILTER_FAVORITES), 2);
 
 		List<RouteDetailsItem.Type> itemTypes = new java.util.ArrayList<>();
 		for (RouteDetailsItem item : result) {

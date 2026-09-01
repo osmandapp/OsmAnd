@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
@@ -44,17 +45,34 @@ import java.util.Set;
 
 public class RouteDirectionsCard extends MapBaseCard {
 
-	private static final Set<RouteDetailsItem.Type> ALL_ALONG_ROUTE_TYPES =
-			Collections.unmodifiableSet(EnumSet.of(
-					RouteDetailsItem.Type.TRAFFIC_WARNING,
-					RouteDetailsItem.Type.POI,
-					RouteDetailsItem.Type.FAVORITE));
+	public static final int FILTER_TRAFFIC_WARNINGS = 1;
+	public static final int FILTER_POI = 1 << 1;
+	public static final int FILTER_FAVORITES = 1 << 2;
+	public static final int FILTER_ALL = FILTER_TRAFFIC_WARNINGS | FILTER_POI | FILTER_FAVORITES;
 
 	private final RoutingHelper routingHelper;
+	@Nullable
+	private final FilterListener filterListener;
+	private int filterMask;
+
+	public interface FilterListener {
+		void onFilterRequested(int selectedMask, int warningCount, int poiCount, int favoriteCount);
+	}
 
 	public RouteDirectionsCard(@NonNull MapActivity mapActivity) {
+		this(mapActivity, FILTER_ALL, null);
+	}
+
+	public RouteDirectionsCard(@NonNull MapActivity mapActivity, int filterMask,
+	                           @Nullable FilterListener filterListener) {
 		super(mapActivity);
 		routingHelper = mapActivity.getRoutingHelper();
+		this.filterMask = filterMask & FILTER_ALL;
+		this.filterListener = filterListener;
+	}
+
+	public void setFilterMask(int filterMask) {
+		this.filterMask = filterMask & FILTER_ALL;
 	}
 
 	@Override
@@ -97,8 +115,9 @@ public class RouteDirectionsCard extends MapBaseCard {
 		List<RouteDetailsItem> coreItems = buildRouteDirectionItems(routeDirections,
 				intermediatePointInfos, intermediatePoints);
 		List<RouteDetailsItem> alongRouteItems = buildAlongRouteItems(route);
+		setupFilterButton(alongRouteItems);
 		List<RouteDetailsItem> items = RouteDetailsListBuilder.mergeAlongRouteItems(coreItems,
-				alongRouteItems, ALL_ALONG_ROUTE_TYPES, route.getCurrentRoute());
+				alongRouteItems, getVisibleAlongRouteTypes(filterMask), route.getCurrentRoute());
 		for (int i = 0; i < items.size(); i++) {
 			View view = getRouteDirectionView(items.get(i), i, items.size());
 			cardsContainer.addView(view);
@@ -146,6 +165,66 @@ public class RouteDirectionsCard extends MapBaseCard {
 			items.add(RouteDetailsItem.alongRoute(points.get(index), cumulativeInfo.get(index)));
 		}
 		return items;
+	}
+
+	private void setupFilterButton(@NonNull List<RouteDetailsItem> alongRouteItems) {
+		ImageView filterButton = view.findViewById(R.id.route_details_filter);
+		int warningCount = countItems(alongRouteItems, RouteDetailsItem.Type.TRAFFIC_WARNING);
+		int poiCount = countItems(alongRouteItems, RouteDetailsItem.Type.POI);
+		int favoriteCount = countItems(alongRouteItems, RouteDetailsItem.Type.FAVORITE);
+		int availableMask = 0;
+		if (warningCount > 0) {
+			availableMask |= FILTER_TRAFFIC_WARNINGS;
+		}
+		if (poiCount > 0) {
+			availableMask |= FILTER_POI;
+		}
+		if (favoriteCount > 0) {
+			availableMask |= FILTER_FAVORITES;
+		}
+		boolean visible = availableMask != 0 && filterListener != null;
+		AndroidUiHelper.updateVisibility(filterButton, visible);
+		if (!visible) {
+			return;
+		}
+
+		boolean filtered = (filterMask & availableMask) != availableMask;
+		filterButton.setImageDrawable(filtered
+				? getActiveIcon(R.drawable.ic_action_filter_dark)
+				: getContentIcon(R.drawable.ic_action_filter_dark));
+		int visibleCount = Integer.bitCount(filterMask & availableMask);
+		int availableCount = Integer.bitCount(availableMask);
+		String filterState = visibleCount + "/" + availableCount;
+		filterButton.setContentDescription(getString(R.string.ltr_or_rtl_combine_via_colon,
+				getString(R.string.filter_screen_title), filterState));
+		filterButton.setOnClickListener(v -> filterListener.onFilterRequested(filterMask,
+				warningCount, poiCount, favoriteCount));
+	}
+
+	private static int countItems(@NonNull List<RouteDetailsItem> items,
+	                              @NonNull RouteDetailsItem.Type type) {
+		int count = 0;
+		for (RouteDetailsItem item : items) {
+			if (item.getType() == type) {
+				count++;
+			}
+		}
+		return count;
+	}
+
+	@NonNull
+	static Set<RouteDetailsItem.Type> getVisibleAlongRouteTypes(int filterMask) {
+		Set<RouteDetailsItem.Type> types = EnumSet.noneOf(RouteDetailsItem.Type.class);
+		if ((filterMask & FILTER_TRAFFIC_WARNINGS) != 0) {
+			types.add(RouteDetailsItem.Type.TRAFFIC_WARNING);
+		}
+		if ((filterMask & FILTER_POI) != 0) {
+			types.add(RouteDetailsItem.Type.POI);
+		}
+		if ((filterMask & FILTER_FAVORITES) != 0) {
+			types.add(RouteDetailsItem.Type.FAVORITE);
+		}
+		return types;
 	}
 
 	private static String getTimeDescription(OsmandApplication app, RouteDirectionInfo model) {
@@ -239,7 +318,8 @@ public class RouteDirectionsCard extends MapBaseCard {
 		}
 		cumulativeDistanceLabel.setText(OsmAndFormatter.getFormattedDistance(item.getCumulativeDistance(), app));
 		cumulativeTimeLabel.setText(Algorithms.formatDuration(item.getCumulativeTime(), app.accessibilityEnabled()));
-		row.setContentDescription(label.getText() + " " + cumulativeTimeLabel.getText());
+		row.setContentDescription(getRowContentDescription(item, label, distanceLabel,
+				cumulativeDistanceLabel, cumulativeTimeLabel));
 		LocationPointWrapper locationPoint = item.getLocationPoint();
 		TargetPoint targetPoint = item.getTargetPoint();
 		if (locationPoint != null) {
@@ -251,6 +331,38 @@ public class RouteDirectionsCard extends MapBaseCard {
 			row.setOnClickListener(v -> notifyButtonPressed(item.getDirectionIndex()));
 		}
 		return row;
+	}
+
+	@NonNull
+	private String getRowContentDescription(@NonNull RouteDetailsItem item, @NonNull TextView label,
+	                                        @NonNull TextView distanceLabel,
+	                                        @NonNull TextView cumulativeDistanceLabel,
+	                                        @NonNull TextView cumulativeTimeLabel) {
+		StringBuilder description = new StringBuilder();
+		if (item.isAlongRoute()) {
+			description.append(getAlongRouteTypeName(item.getType())).append(' ');
+		}
+		description.append(label.getText()).append(' ')
+				.append(cumulativeDistanceLabel.getText()).append(' ')
+				.append(cumulativeTimeLabel.getText());
+		if (item.isAlongRoute() && !Algorithms.isEmpty(distanceLabel.getText())) {
+			description.append(' ').append(distanceLabel.getText());
+		}
+		return description.toString();
+	}
+
+	@NonNull
+	private String getAlongRouteTypeName(@NonNull RouteDetailsItem.Type type) {
+		switch (type) {
+			case TRAFFIC_WARNING:
+				return getString(R.string.way_alarms);
+			case POI:
+				return getString(R.string.points_of_interests);
+			case FAVORITE:
+				return getString(R.string.shared_string_my_favorites);
+			default:
+				throw new IllegalArgumentException("Unsupported along-route type: " + type);
+		}
 	}
 
 	@NonNull
