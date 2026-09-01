@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:title="@string/plugin_aprs_name">
+
+    <PreferenceCategory
+        android:key="aprs_frequency_settings"
+        android:layout="@layout/preference_category_with_descr"
+        android:title="@string/aprs_frequency_settings" />
+
+    <net.osmand.plus.settings.preferences.ListPreferenceEx
+        android:key="aprs_frequency_mhz"
+        android:layout="@layout/preference_with_descr"
+        android:title="@string/aprs_frequency"
+        tools:summary="@string/aprs_frequency_description" />
+
+    <net.osmand.plus.settings.preferences.EditTextPreferenceEx
+        android:key="aprs_custom_frequency_mhz"
+        android:layout="@layout/preference_with_descr"
+        android:inputType="numberDecimal"
+        android:title="@string/aprs_custom_frequency"
+        tools:summary="@string/aprs_custom_frequency_description" />
+
+    <PreferenceCategory
+        android:key="aprs_filter_settings"
+        android:layout="@layout/preference_category_with_descr"
+        android:title="@string/aprs_filter_settings" />
+
+    <net.osmand.plus.settings.preferences.ListPreferenceEx
+        android:key="aprs_expiry_minutes"
+        android:layout="@layout/preference_with_descr"
+        android:title="@string/aprs_expiry_minutes"
+        tools:summary="@string/aprs_expiry_description" />
+
+    <net.osmand.plus.settings.preferences.ListPreferenceEx
+        android:key="aprs_radius_km"
+        android:layout="@layout/preference_with_descr"
+        android:title="@string/aprs_radius_km"
+        tools:summary="@string/aprs_radius_description" />
+
+    <PreferenceCategory
+        android:key="aprs_hamlib_settings"
+        android:layout="@layout/preference_category_with_descr"
+        android:title="@string/aprs_hamlib_settings" />
+
+    <net.osmand.plus.settings.preferences.SwitchPreferenceEx
+        android:key="aprs_hamlib_enabled"
+        android:layout="@layout/preference_with_descr"
+        android:title="@string/aprs_hamlib_enabled"
+        tools:summary="@string/aprs_hamlib_enabled_description" />
+
+    <net.osmand.plus.settings.preferences.EditTextPreferenceEx
+        android:key="aprs_hamlib_host"
+        android:layout="@layout/preference_with_descr"
+        android:title="@string/aprs_hamlib_host"
+        tools:summary="@string/aprs_hamlib_host_description" />
+
+    <net.osmand.plus.settings.preferences.EditTextPreferenceEx
+        android:key="aprs_hamlib_port"
+        android:layout="@layout/preference_with_descr"
+        android:inputType="number"
+        android:title="@string/aprs_hamlib_port"
+        tools:summary="@string/aprs_hamlib_port_description" />
+
+</PreferenceScreen>
