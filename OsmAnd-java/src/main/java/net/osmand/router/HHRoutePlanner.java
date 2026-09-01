@@ -272,7 +272,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			long time = System.nanoTime();
 			// detailed geometry of the alternatives is retrieved inside - it is needed to reject
 			// candidates that turn out to run on the very same roads as the main route
-			calcAlternativeRoute(hctx, route, progress, rrp);
+			calcAlternativeRoute(hctx, route, start, end, progress, rrp);
 			if (progress.isCancelled) {
 				return cancelledStatus(hctx, stPoints, endPoints);
 			}
@@ -297,21 +297,6 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		}
 		if (hctx.config.ROUTE_ALL_SEGMENTS && route.detailed != null) {
 			route.detailed = rrp.prepareResult(hctx.rctx, route.detailed).detailed;
-		}
-		if (!route.altRoutes.isEmpty()) {
-			// prepare the alternatives the same way as the main route, so that a caller can display
-			// them (and later let the user pick one) as regular routes
-			float mainRoutingTime = hctx.rctx.routingTime;
-			for (HHNetworkRouteRes alt : route.altRoutes) {
-				prepareRouteResults(hctx, alt, start, end, rrp);
-				if (hctx.config.ROUTE_ALL_ALT_SEGMENTS && !alt.detailed.isEmpty()) {
-					alt.detailed = rrp.prepareResult(hctx.rctx, alt.detailed).detailed;
-				}
-				if (!alt.detailed.isEmpty()) {
-					route.getAlternatives().add(alt.detailed);
-				}
-			}
-			hctx.rctx.routingTime = mainRoutingTime;
 		}
 		hctx.stats.prepTime += (System.nanoTime() - time) / 1e6;
 		printf(SL > 0, "%.2f ms\n", hctx.stats.prepTime);
@@ -543,7 +528,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 	}
 
 	private void calcAlternativeRoute(HHRoutingContext<T> hctx, HHNetworkRouteRes route,
-			RouteCalculationProgress progress, RouteResultPreparation rrp)
+			LatLon start, LatLon end, RouteCalculationProgress progress, RouteResultPreparation rrp)
 			throws SQLException, IOException, InterruptedException {
 		HHRoutingConfig cfg = hctx.config;
 		double optCost = route.getHHRoutingTime();
@@ -614,16 +599,22 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		TLongSet seenPaths = new TLongHashSet();
 		for (T v : settled) {
 			Double bwd = plateauBwd.get(v);
-			if (bwd != null && bwd > 0) {
-				continue; // keep one representative per plateau: the far end of the chain
-			}
 			Double fwd = plateauFwd.get(v);
 			double cost = v.rtPos.rtDistanceFromStart + v.rtRev.rtDistanceFromStart;
 			double plateau = (fwd == null ? 0 : fwd) + (bwd == null ? 0 : bwd);
+			if (!isPlateauRepresentative(v, plateau, plateauFwd)) {
+				continue;
+			}
 			if (plateau < cfg.ALT_MIN_PLATEAU * cost) {
 				continue;
 			}
 			List<NetworkDBPoint> path = pathThrough(v);
+			if (!isSimple(path)) {
+				// sp(s,v) and sp(v,t) are each optimal, but their concatenation is not necessarily a
+				// simple path: when both halves run over the same roads the candidate drives out and
+				// turns back. Cheap check first, the exact one is on the geometry in stage 2.
+				continue;
+			}
 			long signature = 0;
 			for (NetworkDBPoint n : path) {
 				signature = signature * 1000003L + n.index;
@@ -701,7 +692,25 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 						100 * (c.cost / optCost - 1));
 				continue;
 			}
-			List<RouteSegmentResult> detailed = detailedSegments(alt);
+			// prepare the candidate exactly like the main route: turns, distances and the clean-up of
+			// small manoeuvres all happen here, and the checks below must see what will be displayed
+			prepareRouteResults(hctx, alt, start, end, rrp);
+			if (cfg.ROUTE_ALL_ALT_SEGMENTS && !alt.detailed.isEmpty()) {
+				alt.detailed = rrp.prepareResult(hctx.rctx, alt.detailed).detailed;
+			}
+			List<RouteSegmentResult> detailed = alt.detailed;
+			if (detailed.isEmpty()) {
+				continue;
+			}
+			double retraced = retracedLength(detailed);
+			if (retraced > cfg.ALT_MAX_RETRACED) {
+				// sp(s,v) and sp(v,t) are each optimal, but their concatenation is not necessarily a
+				// simple path: when the two halves run over the same roads the candidate drives out
+				// and turns back, which reads as a bug on the map
+				printf(DEBUG_VERBOSE_LEVEL > 0, "  alt dropped: drives %.0f m of its own roads twice (+%.1f%%)\n",
+						retraced, 100 * (c.cost / optCost - 1));
+				continue;
+			}
 			double altLength = geometryLength(detailed);
 			double distinct = altLength * (1 - sharedGeometry(detailed, mainGeometry));
 			for (Map<Long, Double> accepted : acceptedGeometry) {
@@ -713,6 +722,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				continue;
 			}
 			route.altRoutes.add(alt);
+			route.getAlternatives().add(detailed);
 			acceptedGeometry.add(roadSegments(detailed));
 			printf(DEBUG_VERBOSE_LEVEL > 0, "  alt accepted: +%.1f%%, plateau %.0f%%, own roads %.1f km\n",
 					100 * (c.cost / optCost - 1), 100 * c.plateau / c.cost, distinct / 1000);
@@ -791,6 +801,65 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		}
 		NetworkDBSegment segment = a.getSegment(b, true);
 		return segment == null ? 0 : segment.dist;
+	}
+
+	/**
+	 * All nodes of one plateau describe the same route, so only one of them is kept. The chosen one
+	 * is the node closest to the middle of the chain: there both trees agree on the edge coming in
+	 * and on the edge going out, which is what makes the two halves of the candidate join smoothly
+	 * instead of turning back on themselves. At the end of a chain they need not agree.
+	 */
+	private static boolean isPlateauRepresentative(NetworkDBPoint v, double plateau,
+			Map<NetworkDBPoint, Double> plateauFwd) {
+		if (plateau <= 0) {
+			return true; // no plateau at all, nothing to deduplicate
+		}
+		Double fwd = plateauFwd.get(v);
+		double own = Math.abs((fwd == null ? 0 : fwd) - plateau / 2);
+		// every node of the chain carries the same plateau length, so a neighbour that sits closer
+		// to the middle is the better representative
+		NetworkDBPoint prev = v.rt(false).rtRouteToPoint;
+		if (prev != null && plateauFwd.containsKey(prev) && prev.rt(true).rtRouteToPoint == v
+				&& Math.abs(plateauFwd.get(prev) - plateau / 2) < own) {
+			return false;
+		}
+		NetworkDBPoint next = v.rt(true).rtRouteToPoint;
+		if (next != null && plateauFwd.containsKey(next) && next.rt(false).rtRouteToPoint == v
+				&& Math.abs(plateauFwd.get(next) - plateau / 2) < own) {
+			return false;
+		}
+		return true;
+	}
+
+	/** no hub point is visited twice, i.e. the two halves of the candidate do not overlap */
+	private static boolean isSimple(List<NetworkDBPoint> path) {
+		TLongSet seen = new TLongHashSet();
+		for (NetworkDBPoint p : path) {
+			if (!seen.add(p.index)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/** length of the road pieces that `segments` drives more than once */
+	private static double retracedLength(List<RouteSegmentResult> segments) {
+		TLongSet seen = new TLongHashSet();
+		double retraced = 0;
+		for (RouteSegmentResult r : segments) {
+			RouteDataObject o = r.getObject();
+			int i = r.getStartPointIndex(), end = r.getEndPointIndex();
+			int step = i <= end ? 1 : -1;
+			while (i != end) {
+				int j = i + step;
+				if (!seen.add(o.getId() * 4096L + Math.min(i, j))) {
+					retraced += squareRootDist31(o.getPoint31XTile(i), o.getPoint31YTile(i),
+							o.getPoint31XTile(j), o.getPoint31YTile(j));
+				}
+				i = j;
+			}
+		}
+		return retraced;
 	}
 
 	/** every hub-graph segment was expanded into real roads, so nothing will be drawn as a straight line */
