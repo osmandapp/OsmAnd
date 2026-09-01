@@ -35,7 +35,7 @@ abstract class DataItem protected constructor(
 		return hasData() && GpxParameter.getAppearanceParameters().any { key -> map[key] != null }
 	}
 
-	fun hasParameter(parameter: GpxParameter): Boolean {
+	open fun hasParameter(parameter: GpxParameter): Boolean {
 		return map[parameter] != null
 	}
 
@@ -47,7 +47,7 @@ abstract class DataItem protected constructor(
 	}
 
 	@Suppress("UNCHECKED_CAST")
-	fun <T> getParameter(parameter: GpxParameter): T? {
+	open fun <T> getParameter(parameter: GpxParameter): T? {
 		var value: Any? = null
 		if (map.containsKey(parameter)) {
 			value = map[parameter]
