@@ -5252,7 +5252,7 @@
     <string name="astro_rise">Levata</string>
     <string name="astro_set">Occaso</string>
     <string name="star_altitude_name">Altitudine della stella</string>
-    <string name="sort_by_nearest_to_current_location">Il più vicino alla localizzazione attuale</string>
+    <string name="sort_by_nearest_to_current_location">Il più vicino alla posizione attuale</string>
     <string name="route_calculation_using_standard_algorithm">Utilizzo dell\'algoritmo di instradamento Standard (più lento).</string>
     <string name="route_calculation_missing_maps">Mappe mancanti</string>
     <string name="route_calculation_missing_maps_desc">Alcune mappe offline necessarie per questo percorso mancano. Scaricale per continuare.</string>
