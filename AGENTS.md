@@ -124,4 +124,32 @@ Many resources (icons, fonts, voice files) are not in the main `res` folder but 
   - Preserve existing file language: When modifying existing .java files, keep the change in Java unless the PR explicitly migrates that file/class to Kotlin.
   - Follow local architecture: Prefer Kotlin/Compose for future Android UI migration work, but do not introduce Kotlin into Java-only modules just to satisfy the default language preference.
 
+## 11. AI Disclosure in Pull Requests
+Every pull request produced with the help of an AI agent MUST end with an **AI disclaimer** section. Do not wait to be asked for it - write it into the PR body when the PR is created.
+
+The disclaimer must contain:
+- **Tool and model** that produced the change (e.g. `Claude Code (Opus 5)`).
+- **Prompt summary** - a short, faithful summary of the prompts the user actually gave, in order. Summarise the intent and do not invent requirements that were never asked for. Never mention which language the prompt was written in.
+- **What the agent decided on its own** - anything not covered by the prompts (design choices, extra files, workarounds), so reviewers can tell human intent from model inference.
+
+The same applies to AI-generated issue comments: mark them `(gen by AI)`.
+
+Rules for the whole PR, not just the disclaimer:
+- **English only.** Source code, code comments, commit messages, PR titles and bodies, and issue comments are always written in English, whatever language the conversation with the user happened in. Never note the language of the conversation.
+- **No tool advertising.** Do not append "Generated with Claude Code" banners, agent session links, or similar footers to PR bodies or issue comments. The AI disclaimer section above is the only provenance note needed.
+
+Template:
+
+```markdown
+## AI disclaimer
+
+Produced with <tool / model>.
+
+Prompts used (summarised):
+1. ...
+2. ...
+
+Decided by the agent, not requested explicitly: ...
+```
+
 *Note: This file is a living document and should be updated as the project evolves.*

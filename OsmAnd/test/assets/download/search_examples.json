@@ -1,0 +1,250 @@
+{
+  "comment": [
+    "Examples for DownloadSearchUIModelTest: what the 'Maps & Resources' search results screen shows for a query.",
+    "Nothing here is made up - the maps are every map the region tree of regions.ocbf offers and the cities are",
+    "searched in World_basemap_mini.obf, both shipped with the app, so these are the rows a user sees.",
+    "The first examples are the rules of the screen, the ones after them are the corner cases that broke it.",
+    "Every 'screen' entry is one row of the list: '[Header]' for a section header,",
+    "'Title' for a row without a second line and 'Title | Subtitle' for a row with the region shown in the second line.",
+    "Update the file when the shipped region data changes - the report the test writes shows the new screens side by side."
+  ],
+  "examples": [
+    {
+      "name": "Regions and maps with the same name are split into two sections",
+      "query": "berlin",
+      "screen": [
+        "[Regions]",
+        "Berlin | Germany",
+        "Brandenburg, Berlin | Germany",
+        "[Maps]",
+        "Berlin | New Hampshire",
+        "Berlin | Germany",
+        "Brandenburg, Berlin | Germany"
+      ]
+    },
+    {
+      "name": "Country is shown in the second line, so equally named maps could be distinguished",
+      "query": "hampshire",
+      "screen": [
+        "[Regions]",
+        "New Hampshire | United States",
+        "[Maps]",
+        "New Hampshire | United States"
+      ]
+    },
+    {
+      "name": "Countries themselves have no second line",
+      "query": "germany",
+      "screen": [
+        "[Regions]",
+        "Germany"
+      ]
+    },
+    {
+      "name": "Comma separated terms are searched independently",
+      "query": "berlin, hampshire",
+      "screen": [
+        "[Regions]",
+        "Berlin | Germany",
+        "Brandenburg, Berlin | Germany",
+        "New Hampshire | United States",
+        "[Maps]",
+        "Berlin | Germany",
+        "Brandenburg, Berlin | Germany",
+        "New Hampshire | United States"
+      ]
+    },
+    {
+      "name": "Space separated terms must all be present in the name",
+      "query": "new hampshire",
+      "screen": [
+        "[Regions]",
+        "New Hampshire | United States",
+        "[Maps]",
+        "New Hampshire | United States"
+      ]
+    },
+    {
+      "name": "Maps with the same name in different countries are told apart by the second line",
+      "query": "London",
+      "screen": [
+        "[Regions]",
+        "Greater London | United Kingdom",
+        "London | Canada",
+        "[Maps]",
+        "Derry/Londonderry | Northern Ireland",
+        "New London | Connecticut",
+        "Greater London | United Kingdom",
+        "London | Canada"
+      ]
+    },
+    {
+      "name": "A region whose map is built by joining its subregions has no map row of its own",
+      "query": "New york",
+      "screen": [
+        "[Regions]",
+        "New York | United States",
+        "New York City and surroundings | United States",
+        "[Maps]",
+        "New York City and surroundings | United States"
+      ]
+    },
+    {
+      "name": "A short query matches every name that starts with it, cities included",
+      "query": "New",
+      "screen": [
+        "[Regions]",
+        "Geneva | Switzerland",
+        "New Brunswick | Canada",
+        "New Hampshire | United States",
+        "New Jersey | United States",
+        "New Mexico | United States",
+        "New South Wales | Australia",
+        "New York | United States",
+        "New York City and surroundings | United States",
+        "New Zealand",
+        "Newfoundland and Labrador | Canada",
+        "Nouvelle-Aquitaine | France",
+        "Papua New Guinea",
+        "[Maps]",
+        "New Delhi | Delhi",
+        "Newark | Ohio",
+        "Newark | Delaware",
+        "Newburgh | Albany and surroundings",
+        "Newburyport | Massachusetts",
+        "Newcastle | KwaZulu-Natal",
+        "Newcastle upon Tyne | North East England",
+        "Newmarket | Toronto",
+        "Newport | Rhode Island",
+        "Newport | Wales",
+        "Newport News | Virginia",
+        "Newry | Northern Ireland",
+        "Невинномысск | Stavropol Krai",
+        "新北市 | Taiwan",
+        "Geneva | Switzerland",
+        "New Brunswick | Canada",
+        "New Hampshire | United States",
+        "New Jersey | United States",
+        "New Mexico | United States",
+        "New South Wales | Australia",
+        "New York City and surroundings | United States",
+        "New Zealand",
+        "Newfoundland and Labrador | Canada",
+        "Papua New Guinea"
+      ]
+    },
+    {
+      "name": "A partial second term still narrows the search down",
+      "query": "San Fr",
+      "screen": [
+        "[Regions]",
+        "Central African Republic",
+        "San Francisco | United States",
+        "[Maps]",
+        "San Francisco | Venezuela",
+        "Central African Republic",
+        "San Francisco | United States"
+      ]
+    },
+    {
+      "name": "Nothing is shown when there are no matches",
+      "query": "atlantis",
+      "screen": []
+    },
+    {
+      "name": "Regions are hidden when the search is opened for a single download type",
+      "query": "berlin",
+      "showGroup": false,
+      "screen": [
+        "[Maps]",
+        "Berlin | New Hampshire",
+        "Berlin | Germany",
+        "Brandenburg, Berlin | Germany"
+      ]
+    },
+    {
+      "name": "Three rows named Washington - two cities and a state - are told apart only by the second line",
+      "query": "washington",
+      "screen": [
+        "[Regions]",
+        "Washington | United States",
+        "[Maps]",
+        "Washington | Pennsylvania",
+        "Washington | District of Columbia",
+        "Washington | United States"
+      ]
+    },
+    {
+      "name": "Cities of the same name on four continents, and one matched by another of its names",
+      "query": "san juan",
+      "screen": [
+        "[Regions]",
+        "San Juan | Argentina",
+        "[Maps]",
+        "San Juan | Metro Manila",
+        "San Juan | Puerto Rico",
+        "San Juan | Venezuela",
+        "San Juan del Río | Querétaro",
+        "St. John's | Newfoundland and Labrador",
+        "San Juan | Argentina"
+      ]
+    },
+    {
+      "name": "The smallest map covering the city wins, not the archipelago map that also covers it",
+      "query": "santo domingo",
+      "screen": [
+        "[Maps]",
+        "Santo Domingo | Dominican Republic"
+      ]
+    },
+    {
+      "name": "A city in a detached part of a region, which is only found by reading the region file",
+      "query": "sanhe",
+      "screen": [
+        "[Maps]",
+        "三河市 | Hebei Province"
+      ]
+    },
+    {
+      "name": "A city can carry the name of a country it is nowhere near",
+      "query": "holland",
+      "screen": [
+        "[Regions]",
+        "Netherlands",
+        "Netherlands Antilles",
+        "North Holland | Netherlands",
+        "South Holland | Netherlands",
+        "[Maps]",
+        "Holland | Michigan",
+        "Netherlands Antilles",
+        "North Holland | Netherlands",
+        "South Holland | Netherlands"
+      ]
+    },
+    {
+      "name": "A city whose name merely contains the query is still told apart by its region",
+      "query": "hamburg",
+      "screen": [
+        "[Regions]",
+        "Hamburg | Germany",
+        "[Maps]",
+        "Novo Hamburgo | Rio Grande do Sul",
+        "Hamburg | Germany"
+      ]
+    },
+    {
+      "name": "A country, a state of another country and an island group, all named Georgia",
+      "query": "georgia",
+      "screen": [
+        "[Regions]",
+        "Georgia",
+        "Georgia | United States",
+        "South Georgia and South Sandwich Islands",
+        "[Maps]",
+        "Georgia",
+        "Georgia | United States",
+        "South Georgia and South Sandwich Islands"
+      ]
+    }
+  ]
+}

@@ -2066,7 +2066,7 @@
     <string name="poi_historic_civilization_tiahuanacota">Civilizo: Tiahuanaco-kulturo</string>
     <string name="poi_animal_training_dog">hundoj</string>
     <string name="poi_animal_training_horse">ĉevaloj</string>
-    <string name="poi_horse_yes">Ĉevaloj permesataj</string>
+    <string name="poi_horse_yes">jes</string>
     <string name="poi_horse_no">Ĉevaloj malpermesataj</string>
     <string name="poi_animal_yes">Bestoj permesitaj</string>
     <string name="poi_animal_no">Bestoj malpermesataj</string>
@@ -3641,7 +3641,7 @@
     <string name="poi_tourist_bus_no">Aliro por turismaj aŭtobusoj: ne</string>
     <string name="poi_coach_yes">Aliro por longdistancaj aŭtobusoj: jes</string>
     <string name="poi_coach_no">Aliro por longdistancaj aŭtobusoj: ne</string>
-    <string name="poi_ski_yes">Aliro por skiantoj: jes</string>
+    <string name="poi_ski_yes">jes</string>
     <string name="poi_ski_no">Aliro por skiantoj: ne</string>
     <string name="poi_snowmobile_private">Aliro por motorsledoj: nur laŭ privata permeso</string>
     <string name="poi_snowmobile_no">Aliro por motorsledoj: ne</string>
@@ -5174,4 +5174,10 @@
     <string name="poi_water_type_filter">Speco de akvujo</string>
     <string name="poi_water_lake">lago</string>
     <string name="poi_surface_laterite">Pavimo: laterito</string>
+    <string name="poi_mtb_filter">Taŭga por montbiciklado</string>
+    <string name="poi_ski_filter">Taŭga por skiado</string>
+    <string name="poi_horse_filter">Taŭga por ĉevalrajdado</string>
+    <string name="poi_winter_hiking_filter">Taŭga por vintra marŝado</string>
+    <string name="poi_mtb_yes">jes</string>
+    <string name="poi_winter_hiking_yes">jes</string>
 </resources>

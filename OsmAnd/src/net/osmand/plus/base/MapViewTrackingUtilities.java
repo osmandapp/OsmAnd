@@ -26,6 +26,7 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -92,6 +93,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private Float heading;
 	private boolean drivingRegionUpdated;
 	private long compassRequest;
+	private String lastDiagState;
 
 	public MapViewTrackingUtilities(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -140,6 +142,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	public void setMapView(@Nullable OsmandMapTileView mapView) {
+		NavigationSession.logDiag((mapView != null ? "ATTACH" : "DETACH") + " setMapView");
 		this.mapView = mapView;
 		mapDisplayPositionManager.setMapView(mapView);
 		autoZoomBySpeedHelper.setMapView(mapView);
@@ -239,8 +242,22 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		OsmAndTaskManager.executeTask(new DetectRegionTask(app, onRegionDetected), latLon);
 	}
 
+	// Diagnostics for #25754: locations arrive continuously, so only log on state transitions.
+	// A frozen rotation shows as a change to rotateMode != 1, linked=false, mapViewAttached=false
+	// or hasBearing=false that is never followed by a change back.
+	private void logDiagStateIfChanged(@Nullable Location location) {
+		String state = "mapViewAttached=" + (mapView != null) + " linked=" + isMapLinkedToLocation()
+				+ " rotateMode=" + settings.ROTATE_MAP.get()
+				+ " hasBearing=" + (location != null && location.hasBearing());
+		if (!state.equals(lastDiagState)) {
+			lastDiagState = state;
+			NavigationSession.logDiag("state " + state);
+		}
+	}
+
 	@Override
 	public void updateLocation(Location location) {
+		logDiagStateIfChanged(location);
 		Location prevLocation = myLocation;
 		long prevLocationTime = myLocationTime;
 

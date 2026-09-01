@@ -173,6 +173,11 @@ class ChipsLayout @JvmOverloads constructor(
 	private var chipClickListener: OnChipClickListener? = null
 	private var dropdownItemClickListener: OnDropdownItemClickListener? = null
 
+	override fun onDetachedFromWindow() {
+		disposeComposition()
+		super.onDetachedFromWindow()
+	}
+
 	fun setThemeContext(appMode: ApplicationMode, themeUsageContext: ThemeUsageContext) {
 		this.appMode = appMode
 		this.themeUsageContext = themeUsageContext

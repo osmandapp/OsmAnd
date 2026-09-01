@@ -177,8 +177,15 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		return (OsmandApplication) getCarContext().getApplicationContext();
 	}
 
+	// Diagnostics for #25754 (map stops rotating to movement direction after Android Auto restart).
+	// Collect with: adb logcat -s AA25754
+	public static void logDiag(@NonNull String msg) {
+		Log.i("AA25754", msg);
+	}
+
 	@Override
 	public void onCreate(@NonNull LifecycleOwner owner) {
+		logDiag("onCreate session=" + System.identityHashCode(this));
 		OsmandApplication app = getApp();
 		settings = app.getSettings();
 		routingHelper = app.getRoutingHelper();
@@ -194,6 +201,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 	@Override
 	public void onStart(@NonNull LifecycleOwner owner) {
+		logDiag("onStart session=" + System.identityHashCode(this));
 		OsmandApplication app = getApp();
 		routingHelper.addListener(this);
 
@@ -232,6 +240,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 	@Override
 	public void onStop(@NonNull LifecycleOwner owner) {
+		logDiag("onStop session=" + System.identityHashCode(this));
 		OsmandApplication app = getApp();
 		routingHelper.removeListener(this);
 
@@ -249,6 +258,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 	@Override
 	public void onDestroy(@NonNull LifecycleOwner owner) {
+		logDiag("onDestroy session=" + System.identityHashCode(this));
 		OsmandApplication app = getApp();
 		removeLocationUpdates();
 		removeLocationSourceListener();

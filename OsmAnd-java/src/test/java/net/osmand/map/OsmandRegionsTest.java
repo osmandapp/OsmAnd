@@ -48,6 +48,31 @@ public class OsmandRegionsTest {
     }
 
     @Test
+    public void testGetCountryRegion() {
+        // a country is the region right under a continent
+        Assert.assertEquals("europe_germany", countryId("germany_berlin_europe"));
+        Assert.assertEquals("europe_germany", countryId("germany_europe"));
+        Assert.assertEquals("europe_netherlands", countryId("netherlands_noord-holland_europe"));
+        Assert.assertEquals("europe_ukraine", countryId("ukraine_kyiv-city_europe"));
+        Assert.assertEquals("northamerica_us", countryId("us_new-hampshire_northamerica"));
+
+        // a country that is placed next to the continents instead of under one
+        Assert.assertEquals("russia", countryId("russia_moscow_asia"));
+        Assert.assertEquals("russia", countryId("russia_north-caucasus-federal-district_asia"));
+
+        // continents and the world itself are not countries
+        Assert.assertNull(osmandRegions.getRegionData("europe").getCountryRegion());
+        Assert.assertNull(osmandRegions.getWorldRegion().getCountryRegion());
+    }
+
+    private String countryId(String downloadName) {
+        WorldRegion region = osmandRegions.getRegionDataByDownloadName(downloadName);
+        Assert.assertNotNull("Unknown region " + downloadName, region);
+        WorldRegion country = region.getCountryRegion();
+        return country != null ? country.getRegionId() : null;
+    }
+
+    @Test
     public void testGetRegionsToDownload() {
         // Prague not part of Central Bohemia
         testIncludedExcluded(50.087463, 14.421259,

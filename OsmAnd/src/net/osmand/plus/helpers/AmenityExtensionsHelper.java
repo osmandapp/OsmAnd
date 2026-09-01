@@ -46,12 +46,38 @@ public class AmenityExtensionsHelper {
 
 	@Nullable
 	public Amenity findAmenity(@NonNull String nameEn, double lat, double lon) {
-		List<String> names = Collections.singletonList(nameEn);
+		return findAmenity(nameEn, lat, lon, null);
+	}
+
+	/**
+	 * Resolves the source amenity using identity hints persisted with a favorite or waypoint.
+	 * Wikidata is matched first by {@link AmenitySearcher}; the origin name remains the fallback.
+	 */
+	@Nullable
+	public Amenity findAmenityByIdentity(@Nullable String originName, double lat, double lon,
+	                                     @NonNull Map<String, String> extensions) {
+		Map<String, String> normalizedExtensions = getUpdatedAmenityExtensions(extensions, null);
+		String wikidata = normalizedExtensions.get(WIKIDATA);
+		if (Algorithms.isEmpty(originName) && Algorithms.isEmpty(wikidata)) {
+			return null;
+		}
+		return findAmenity(originName, lat, lon, wikidata);
+	}
+
+	@Nullable
+	private Amenity findAmenity(@Nullable String nameEn, double lat, double lon,
+	                            @Nullable String wikidata) {
+		List<String> names = Algorithms.isEmpty(nameEn)
+				? Collections.emptyList()
+				: Collections.singletonList(nameEn);
 		AmenitySearcher searcher = app.getResourceManager().getAmenitySearcher();
 		AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
 
 		Amenity requestAmenity = new Amenity();
 		requestAmenity.setLocation(new LatLon(lat, lon));
+		if (!Algorithms.isEmpty(wikidata)) {
+			requestAmenity.setAdditionalInfo(WIKIDATA, wikidata);
+		}
 		AmenitySearcher.Request request = new AmenitySearcher.Request(requestAmenity, names, true);
 		return searcher.searchDetailedAmenity(request, settings);
 	}

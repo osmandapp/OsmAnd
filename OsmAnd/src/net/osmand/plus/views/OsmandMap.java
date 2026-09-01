@@ -121,6 +121,9 @@ public class OsmandMap {
 	public void setupRenderingView() {
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		NavigationSession navigationSession = app.getCarNavigationSession();
+		NavigationSession.logDiag("setupRenderingView session=" + System.identityHashCode(navigationSession)
+				+ " started=" + (navigationSession != null && navigationSession.hasStarted())
+				+ " mapActivity=" + (mapView.getMapActivity() != null));
 		if (navigationSession != null) {
 			if (navigationSession.hasStarted()) {
 				navigationSession.setMapView(mapView);
