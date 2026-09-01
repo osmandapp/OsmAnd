@@ -686,11 +686,21 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			if (alt.segments.isEmpty()) {
 				continue;
 			}
-			retrieveSegmentsGeometry(hctx, rrp, alt, true, progress);
+			boolean needsRecalculation = retrieveSegmentsGeometry(hctx, rrp, alt, true, progress);
 			if (progress != null && progress.isCancelled) {
 				return;
 			}
 			expanded++;
+			if (needsRecalculation || !isFullyExpanded(alt)) {
+				// a shortcut could not be expanded (or turned out to cost much more than the hub
+				// graph promised) and retrieveSegmentsGeometry bailed out half way, leaving the rest
+				// of the segments without geometry - those would be drawn as straight lines.
+				// The main route recalculates in that case; for an alternative it is cheaper to drop
+				// the candidate and try the next one, the segment cost has been corrected anyway.
+				printf(DEBUG_VERBOSE_LEVEL > 0, "  alt dropped: incomplete geometry (+%.1f%%)\n",
+						100 * (c.cost / optCost - 1));
+				continue;
+			}
 			List<RouteSegmentResult> detailed = detailedSegments(alt);
 			double altLength = geometryLength(detailed);
 			double distinct = altLength * (1 - sharedGeometry(detailed, mainGeometry));
@@ -781,6 +791,16 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		}
 		NetworkDBSegment segment = a.getSegment(b, true);
 		return segment == null ? 0 : segment.dist;
+	}
+
+	/** every hub-graph segment was expanded into real roads, so nothing will be drawn as a straight line */
+	private static boolean isFullyExpanded(HHNetworkRouteRes route) {
+		for (HHNetworkSegmentRes s : route.segments) {
+			if (s.list == null || s.list.isEmpty()) {
+				return false;
+			}
+		}
+		return !route.segments.isEmpty();
 	}
 
 	private static List<RouteSegmentResult> detailedSegments(HHNetworkRouteRes route) {
