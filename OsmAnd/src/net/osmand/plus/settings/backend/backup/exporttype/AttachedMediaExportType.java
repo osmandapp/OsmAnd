@@ -96,6 +96,7 @@ public class AttachedMediaExportType extends AbstractExportType {
 		AttachedMediaDataHelper helper = new AttachedMediaDataHelper(app);
 		Map<String, AttachedMediaSettingsItem> itemsBySourceId = new LinkedHashMap<>();
 		Set<String> usedNames = collectExistingMediaFileNames(app);
+		File legacyAvNotesDir = offlineBackup ? null : MediaProvider.getLegacyInternalMediaDir(app.getAppPath().getAbsolutePath());
 		for (Link link : helper.collectMediaLinks(groups)) {
 			String href = link.getHref() != null ? link.getHref().trim() : null;
 			if (Algorithms.isEmpty(href) || isRemoteHref(href)) {
@@ -103,6 +104,9 @@ public class AttachedMediaExportType extends AbstractExportType {
 			}
 			MediaSource source = helper.resolveExportMediaSource(href, offlineBackup);
 			if (source == null) {
+				continue;
+			}
+			if (legacyAvNotesDir != null && Algorithms.stringsEqual(source.getId(), new File(legacyAvNotesDir, source.getFileName()).getAbsolutePath())) {
 				continue;
 			}
 			AttachedMediaSettingsItem existing = itemsBySourceId.get(source.getId());

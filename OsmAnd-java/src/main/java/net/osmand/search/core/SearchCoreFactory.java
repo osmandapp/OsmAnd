@@ -1760,23 +1760,22 @@ public class SearchCoreFactory {
 
 				if (cacheBuilding != s) {
 					cacheBuilding = s;
-					SearchRequest<Building> sr = BinaryMapIndexReader
-							.buildAddressRequest(new ResultMatcher<Building>() {
+					if (s.getBuildings().isEmpty() && s.getIntersectedStreets().isEmpty()) {
+						SearchRequest<Building> sr = BinaryMapIndexReader
+								.buildAddressRequest(new ResultMatcher<Building>() {
+									@Override
+									public boolean publish(Building object) {
+										return true;
+									}
 
-								@Override
-								public boolean publish(Building object) {
-									return true;
-								}
-
-								@Override
-								public boolean isCancelled() {
-									return resultMatcher.isCancelled();
-								}
-							});
-
-					file.preloadBuildings(s, sr, phrase.getSettings().getStat());
+									@Override
+									public boolean isCancelled() {
+										return resultMatcher.isCancelled();
+									}
+								});
+						file.preloadBuildings(s, sr, phrase.getSettings().getStat());
+					}
 					Collections.sort(s.getBuildings(), new Comparator<Building>() {
-
 						@Override
 						public int compare(Building o1, Building o2) {
 							int i1 = Algorithms.extractFirstIntegerNumber(o1.getName());

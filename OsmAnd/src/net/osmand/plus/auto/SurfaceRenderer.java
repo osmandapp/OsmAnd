@@ -167,7 +167,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 					changeVisibleArea(cachedVisibleArea);
 				}
 
-				darkMode = carContext.isDarkMode();
+				darkMode = isNightMode();
 				OsmandMapTileView mapView = SurfaceRenderer.this.mapView;
 				if (mapView != null) {
 					mapView.setupRenderingView();
@@ -273,6 +273,10 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 	 * Callback called when the car configuration changes.
 	 */
 	public void onCarConfigurationChanged() {
+		boolean newDarkMode = isNightMode();
+		if (darkMode != newDarkMode && mapView != null) {
+			mapView.refreshMap(true);
+		}
 		renderFrame();
 	}
 
@@ -492,7 +496,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 			// Surface is not available, or has been destroyed, skip this frame.
 			return;
 		}
-		DrawSettings drawSettings = new DrawSettings(carContext.isDarkMode(), false);
+		DrawSettings drawSettings = new DrawSettings(isNightMode(), false);
 		RotatedTileBox tileBox = mapView.getRotatedTileBox();
 		try {
 			renderFrame(tileBox, drawSettings);
@@ -509,7 +513,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 		Canvas canvas = surface.lockCanvas(null);
 		try {
 			canvas.drawColor(Color.LTGRAY);
-			boolean newDarkMode = carContext.isDarkMode();
+			boolean newDarkMode = isNightMode();
 			boolean updateVectorRendering = drawSettings.isUpdateVectorRendering() || darkMode != newDarkMode;
 			darkMode = newDarkMode;
 			drawSettings = new DrawSettings(newDarkMode, updateVectorRendering);
@@ -546,6 +550,11 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 
 	public int getSurfaceAdditionalWidth() {
 		return surfaceAdditionalWidth;
+	}
+
+	private boolean isNightMode() {
+		OsmandApplication app = (OsmandApplication) carContext.getApplicationContext();
+		return app.getDaynightHelper().isNightModeForCar(carContext);
 	}
 
 	public float getCachedRatioX() {

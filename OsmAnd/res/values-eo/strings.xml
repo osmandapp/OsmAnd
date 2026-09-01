@@ -54,7 +54,7 @@
     <string name="osmand_play_title_30_chars">OsmAnd Mapoj kaj Navigado</string>
     <string name="shared_string_reverse_order">Inversa ordigo</string>
     <string name="switch_start_finish">Anstataŭigi komencpunkton per celo</string>
-    <string name="rendering_attr_hideIcons_name">Emblemoj de interesejoj</string>
+    <string name="rendering_attr_hideIcons_name">Bildsimboloj de interesejoj</string>
     <string name="item_removed">Elemento forigita</string>
     <string name="n_items_removed">elementoj forigitaj</string>
     <string name="shared_string_undo_all">Malfari ĉiujn</string>
@@ -5268,7 +5268,7 @@
     <string name="share_favorites_share_failed">Ne povas kunhavigi dosieron.</string>
     <string name="share_favorites_missing_media_warning">Ne povas inkluzivi iujn ligitajn aŭdvidaĵojn.</string>
     <string name="search_on_web">Serĉi en interreto</string>
-    <string name="release_5_4">• nova spaca serĉilo – trovi lokojn kaj serĉi ĉirkaŭ lokoj\n\n• rekonstruita serĉo: eblo ordigi kaj filtri, pli klara vido\n\n• aldoni fotojn kaj aŭdvidaĵojn al ŝatataj punktoj\n\n• ŝatataj punktoj: subdosierujoj kaj alpingeblaj dosierujoj\n\n• koordinatoj: serĉado, kradoj kaj vidigo de interesejoj nun subtenas EPSG kaj Maidenhead Locator\n\n• riparitaj problemoj pri navigoj, rapide ŝanĝi inter norma kaj rapida kurs-difinadoj\n\n• skali Android Auto sendepende de via telefono\n\n• Astronomio: kalkuli sunajn kaj lunajn eklipsojn</string>
+    <string name="release_5_4">• rekonstruita serĉo: eblo ordigi kaj filtri, pli klara vido\n\n• aldoni fotojn kaj aŭdvidaĵojn al ŝatataj punktoj\n\n• ŝatataj punktoj: subdosierujoj kaj alpingeblaj dosierujoj\n\n• koordinatoj: serĉado, kradoj kaj vidigo de interesejoj nun subtenas EPSG kaj Maidenhead Locator\n\n• riparitaj problemoj pri navigoj, rapide ŝanĝi inter norma kaj rapida kurs-difinadoj\n\n• skali Android Auto sendepende de via telefono\n\n• nova spaca serĉilo – trovi lokojn kaj serĉi ĉirkaŭ lokoj\n\n• Astronomio: kalkuli sunajn kaj lunajn eklipsojn</string>
     <string name="shared_string_note">Rimarko</string>
     <string name="media_storage_camera_folder_note_descr">Sonaj dosieroj konserviĝos en la dosierujo Music/OsmAnd.</string>
     <string name="always_keep_local_copy">Ĉiam teni lokan kopion</string>

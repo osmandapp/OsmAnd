@@ -55,6 +55,7 @@ import net.osmand.shared.gpx.primitives.Linkable;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.media.MediaFileNameFormat;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -102,13 +103,13 @@ public class AttachedMediaUiHelper {
 		List<PopUpMenuItem> items = new ArrayList<>();
 		items.add(createAddMenuItem(R.string.recording_context_menu_precord,
 				R.drawable.ic_action_photo_dark, iconColor,
-				() -> takeNote(AVActionType.REC_PHOTO, target, false, onMediaChanged), false));
+				() -> takeNote(AVActionType.REC_PHOTO, target, latLon, false, onMediaChanged), false));
 		items.add(createAddMenuItem(R.string.recording_context_menu_vrecord,
 				R.drawable.ic_action_video_dark, iconColor,
-				() -> takeNote(AVActionType.REC_VIDEO, target, false, onMediaChanged), false));
+				() -> takeNote(AVActionType.REC_VIDEO, target, latLon, false, onMediaChanged), false));
 		items.add(createAddMenuItem(R.string.recording_context_menu_arecord,
 				R.drawable.ic_action_micro_dark, iconColor,
-				() -> takeNote(AVActionType.REC_AUDIO, target, showAudioRecordingInDialog, onMediaChanged), false));
+				() -> takeNote(AVActionType.REC_AUDIO, target, latLon, showAudioRecordingInDialog, onMediaChanged), false));
 		items.add(createAddMenuItem(R.string.choose_from_gallery,
 				R.drawable.ic_action_photo_album, iconColor,
 				() -> chooseFromGallery(target, onMediaChanged), true));
@@ -140,7 +141,7 @@ public class AttachedMediaUiHelper {
 		return target instanceof FavouritePoint || target instanceof WptPt;
 	}
 
-	private void takeNote(@NonNull AVActionType type, @NonNull Linkable target,
+	private void takeNote(@NonNull AVActionType type, @NonNull Linkable target, @NonNull LatLon targetLocation,
 	                      boolean showAudioRecordingInDialog, @Nullable Runnable onMediaChanged) {
 		AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
 		if (plugin != null && !plugin.isActive()) {
@@ -150,16 +151,21 @@ public class AttachedMediaUiHelper {
 			if (plugin.isRecording()) {
 				plugin.stopRecording(mapActivity, true, true);
 			} else {
-				captureAttachedMedia(plugin, type, target, showAudioRecordingInDialog, onMediaChanged);
+				captureAttachedMedia(plugin, type, target, targetLocation, showAudioRecordingInDialog, onMediaChanged);
 			}
 		}
 	}
 
 	private void captureAttachedMedia(@NonNull AudioVideoNotesPlugin plugin, @NonNull AVActionType type,
-	                                  @NonNull Linkable target, boolean showAudioRecordingInDialog, @Nullable Runnable onMediaChanged) {
+	                                  @NonNull Linkable target, @NonNull LatLon targetLocation,
+	                                  boolean showAudioRecordingInDialog, @Nullable Runnable onMediaChanged) {
 		Location location = app.getLocationProvider().getLastKnownLocation();
-		double lat = location != null ? location.getLatitude() : Double.NaN;
-		double lon = location != null ? location.getLongitude() : Double.NaN;
+		double lat = location != null ? location.getLatitude() : targetLocation.getLatitude();
+		double lon = location != null ? location.getLongitude() : targetLocation.getLongitude();
+		if (!MapUtils.isValidLatLon(lat, lon)) {
+			lat = targetLocation.getLatitude();
+			lon = targetLocation.getLongitude();
+		}
 
 		MediaDirType dirType = getMediaDirType(type);
 		String extension = getMediaExtension(type);
