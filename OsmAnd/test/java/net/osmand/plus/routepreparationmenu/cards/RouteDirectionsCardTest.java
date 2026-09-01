@@ -7,16 +7,19 @@ import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import net.osmand.data.LatLon;
+import net.osmand.plus.helpers.LocationPointWrapper;
 import net.osmand.plus.helpers.TargetPoint;
-import net.osmand.plus.routepreparationmenu.cards.RouteDirectionsCard.RouteDirectionItem;
+import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.routing.RouteCalculationResult.IntermediatePointInfo;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.router.TurnType;
+import net.osmand.shared.routing.details.RouteCumulativeInfo;
 
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 
 public class RouteDirectionsCardTest {
@@ -33,7 +36,7 @@ public class RouteDirectionsCardTest {
 		TargetPoint first = new TargetPoint(new LatLon(1, 1), null, 0);
 		TargetPoint second = new TargetPoint(new LatLon(2, 2), null, 1);
 
-		List<RouteDirectionItem> items = RouteDirectionsCard.buildRouteDirectionItems(
+		List<RouteDetailsItem> items = RouteDirectionsCard.buildRouteDirectionItems(
 				directions, intermediateInfos, Arrays.asList(first, second));
 
 		assertEquals(5, items.size());
@@ -54,7 +57,7 @@ public class RouteDirectionsCardTest {
 
 	@Test
 	public void keepsRouteIntermediateWhenTargetMetadataIsUnavailable() {
-		List<RouteDirectionItem> items = RouteDirectionsCard.buildRouteDirectionItems(
+		List<RouteDetailsItem> items = RouteDirectionsCard.buildRouteDirectionItems(
 				Arrays.asList(direction(0, 100), direction(10, 0)),
 				Collections.singletonList(new IntermediatePointInfo(5, 50, 5)),
 				Collections.emptyList());
@@ -62,6 +65,55 @@ public class RouteDirectionsCardTest {
 		assertEquals(3, items.size());
 		assertTrue(items.get(1).isIntermediate());
 		assertNull(items.get(1).getTargetPoint());
+	}
+
+	@Test
+	public void mergesEnabledFuturePointsByRouteIndexWithDeterministicTieOrder() {
+		List<RouteDetailsItem> coreItems = RouteDetailsListBuilder.buildCoreItems(
+				Arrays.asList(direction(0, 100), direction(10, 100), direction(20, 0)),
+				Collections.singletonList(new IntermediatePointInfo(10, 100, 10)),
+				Collections.emptyList());
+		LocationPointWrapper passedWarning = point(WaypointHelper.ALARMS, 2);
+		LocationPointWrapper hiddenPoi = point(WaypointHelper.POI, 5);
+		LocationPointWrapper warning = point(WaypointHelper.ALARMS, 10);
+		LocationPointWrapper firstFavorite = point(WaypointHelper.FAVORITES, 10);
+		LocationPointWrapper secondFavorite = point(WaypointHelper.FAVORITES, 10);
+		List<RouteDetailsItem> alongRouteItems = Arrays.asList(
+				alongRoute(passedWarning),
+				alongRoute(hiddenPoi),
+				alongRoute(warning),
+				alongRoute(firstFavorite),
+				alongRoute(secondFavorite));
+
+		List<RouteDetailsItem> result = RouteDetailsListBuilder.mergeAlongRouteItems(
+				coreItems, alongRouteItems,
+				EnumSet.of(RouteDetailsItem.Type.TRAFFIC_WARNING,
+						RouteDetailsItem.Type.FAVORITE), 2);
+
+		List<RouteDetailsItem.Type> itemTypes = new java.util.ArrayList<>();
+		for (RouteDetailsItem item : result) {
+			itemTypes.add(item.getType());
+		}
+		assertEquals(Arrays.asList(
+				RouteDetailsItem.Type.MANEUVER,
+				RouteDetailsItem.Type.INTERMEDIATE,
+				RouteDetailsItem.Type.TRAFFIC_WARNING,
+				RouteDetailsItem.Type.FAVORITE,
+				RouteDetailsItem.Type.FAVORITE,
+				RouteDetailsItem.Type.MANEUVER,
+				RouteDetailsItem.Type.DESTINATION), itemTypes);
+		assertSame(warning, result.get(2).getLocationPoint());
+		assertSame(firstFavorite, result.get(3).getLocationPoint());
+		assertSame(secondFavorite, result.get(4).getLocationPoint());
+	}
+
+	private static RouteDetailsItem alongRoute(LocationPointWrapper point) {
+		return RouteDetailsItem.alongRoute(point, new RouteCumulativeInfo(
+				point.getRouteIndex() * 10, point.getRouteIndex()));
+	}
+
+	private static LocationPointWrapper point(int type, int routeIndex) {
+		return new LocationPointWrapper(type, null, 0, routeIndex);
 	}
 
 	private static RouteDirectionInfo direction(int routePointOffset, int distance) {

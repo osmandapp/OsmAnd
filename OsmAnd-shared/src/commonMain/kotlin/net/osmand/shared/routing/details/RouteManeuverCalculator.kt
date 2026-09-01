@@ -145,6 +145,86 @@ object RouteManeuverCalculator {
 	}
 
 	/**
+	 * Calculates distance and estimated travel time from the current route point to sorted geometry
+	 * offsets in one forward pass. Time uses the same per-maneuver average speeds and Java rounding
+	 * as Android route-direction calculations.
+	 *
+	 * Offsets at or behind [currentRoutePointIndex] produce zero values. The result order matches
+	 * [routePointOffsets], including duplicate offsets.
+	 */
+	fun cumulativeInfoAtRoutePoints(
+		maneuvers: IManeuverAccessor,
+		distanceToFinishMeters: IntArray,
+		currentRoutePointIndex: Int,
+		currentManeuverIndex: Int,
+		routePointOffsets: IntArray,
+	): List<RouteCumulativeInfo> {
+		if (routePointOffsets.isEmpty()) {
+			return emptyList()
+		}
+		require(routePointOffsets.indices.drop(1).all {
+			routePointOffsets[it - 1] <= routePointOffsets[it]
+		}) {
+			"Route point offsets must be sorted"
+		}
+		require(routePointOffsets.all { it in distanceToFinishMeters.indices }) {
+			"Route point offset must reference Android listDistance"
+		}
+		if (distanceToFinishMeters.isEmpty() || maneuvers.getManeuversCount() == 0) {
+			return List(routePointOffsets.size) { RouteCumulativeInfo(0, 0) }
+		}
+
+		val maneuverCount = maneuvers.getManeuversCount()
+		val routeIndex = currentRoutePointIndex.coerceIn(distanceToFinishMeters.indices)
+		var maneuverIndex = currentManeuverIndex.coerceIn(0, maneuverCount - 1)
+		while (maneuverIndex + 1 < maneuverCount &&
+			maneuvers.getRoutePointOffset(maneuverIndex + 1) <= routeIndex
+		) {
+			maneuverIndex++
+		}
+
+		val result = ArrayList<RouteCumulativeInfo>(routePointOffsets.size)
+		var segmentStartRouteIndex = routeIndex
+		var cumulativeDistance = 0
+		var cumulativeTime = 0
+		for (targetRouteIndex in routePointOffsets) {
+			if (targetRouteIndex <= routeIndex) {
+				result.add(RouteCumulativeInfo(0, 0))
+				continue
+			}
+			while (maneuverIndex + 1 < maneuverCount) {
+				val nextManeuverRouteIndex = maneuvers.getRoutePointOffset(maneuverIndex + 1)
+				if (nextManeuverRouteIndex > targetRouteIndex) {
+					break
+				}
+				if (nextManeuverRouteIndex > segmentStartRouteIndex) {
+					val segmentDistance = distanceToFinishMeters[segmentStartRouteIndex] -
+						distanceToFinishMeters[nextManeuverRouteIndex]
+					cumulativeDistance += segmentDistance
+					cumulativeTime += javaRoundFloat(
+						segmentDistance / maneuvers.getAverageSpeedMetersPerSecond(maneuverIndex),
+					)
+					segmentStartRouteIndex = nextManeuverRouteIndex
+				}
+				maneuverIndex++
+			}
+
+			val distanceInSegment = distanceToFinishMeters[segmentStartRouteIndex] -
+				distanceToFinishMeters[targetRouteIndex]
+			val timeInSegment = javaRoundFloat(
+				distanceInSegment / maneuvers.getAverageSpeedMetersPerSecond(maneuverIndex),
+			)
+			result.add(
+				RouteCumulativeInfo(
+					distanceMeters = cumulativeDistance + distanceInSegment,
+					timeSeconds = cumulativeTime + timeInSegment,
+				),
+			)
+		}
+		return result
+	}
+
+	/**
 	 * Immutable port of Android `calculateIntermediateIndexes` indexing and split logic.
 	 *
 	 * The returned index array intentionally starts with Android's zero-filled sentinel values. If

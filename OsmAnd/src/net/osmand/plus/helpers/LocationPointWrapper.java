@@ -56,6 +56,10 @@ public class LocationPointWrapper {
 		return point;
 	}
 
+	public int getRouteIndex() {
+		return routeIndex;
+	}
+
 	@Nullable
 	public Drawable getDrawable(@NonNull Context context, @NonNull OsmandApplication app, boolean nightMode) {
 		if (type == WaypointHelper.POI) {
