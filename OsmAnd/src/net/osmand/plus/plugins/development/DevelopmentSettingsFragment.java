@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.development;
 
+import static net.osmand.plus.charts.ChartUtils.DEFAULT_SLOPE_WINDOW_M;
 import static net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.showResetSettingsDialog;
 import static net.osmand.plus.simulation.OsmAndLocationSimulation.LocationSimulationListener;
 
@@ -31,6 +32,7 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.BooleanRadioButtonsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.simulation.SimulateLocationFragment;
@@ -51,7 +53,6 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 	private static final String GRID_LAYOUT_DRAW_CELLS = "grid_layout_draw_cells";
 	private static final String GRID_LAYOUT_DRAW_SLOTS = "grid_layout_draw_slots";
 	private static final String GRID_LAYOUT_DRAW_BUTTON_FRAMES = "grid_layout_draw_button_frames";
-	private static final String CHART_COLOR_LINE_STROKE = "chart_color_line_stroke";
 	private static final String CHART_DISCRETE_COLORS = "chart_discrete_colors";
 
 	private static final int OPEN_AIS_FILE_REQUEST = 1001;
@@ -307,13 +308,29 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		SwitchPreferenceEx colorBySecondDataSet = findPreference(plugin.CHART_COLOR_BY_SECOND_DATASET.getId());
 		colorBySecondDataSet.setIconSpaceReserved(false);
 
-		SwitchPreferenceCompat colorLineStroke = findPreference(CHART_COLOR_LINE_STROKE);
-		colorLineStroke.setChecked(OsmandDevelopmentPlugin.CHART_COLOR_LINE_STROKE);
-		colorLineStroke.setIconSpaceReserved(false);
-
 		SwitchPreferenceCompat discreteColors = findPreference(CHART_DISCRETE_COLORS);
 		discreteColors.setChecked(OsmandDevelopmentPlugin.CHART_DISCRETE_COLORS);
 		discreteColors.setIconSpaceReserved(false);
+
+		setupSlopeWindowPref();
+	}
+
+	private void setupSlopeWindowPref() {
+		Integer[] values = {20, 50, 80, 100, 150, 200, 300};
+		String[] names = new String[values.length];
+		for (int i = 0; i < values.length; i++) {
+			String name = getString(R.string.ltr_or_rtl_combine_via_space, String.valueOf(values[i]), "m");
+			if (values[i] == DEFAULT_SLOPE_WINDOW_M) {
+				name = getString(R.string.ltr_or_rtl_combine_with_brackets,
+						name, getString(R.string.shared_string_default));
+			}
+			names[i] = name;
+		}
+		ListPreferenceEx preference = findPreference(plugin.CHART_SLOPE_WINDOW.getId());
+		preference.setEntries(names);
+		preference.setEntryValues(values);
+		preference.setDescription(R.string.chart_slope_window_descr);
+		preference.setIconSpaceReserved(false);
 	}
 
 	private void setupGlobalAppAllocatedMemoryPref() {
@@ -503,9 +520,6 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 			return true;
 		} else if (settings.TRANSPARENT_STATUS_BAR.getId().equals(prefId) && newValue instanceof Boolean) {
 			restartActivity();
-			return true;
-		} else if (CHART_COLOR_LINE_STROKE.equals(prefId) && newValue instanceof Boolean color) {
-			OsmandDevelopmentPlugin.CHART_COLOR_LINE_STROKE = color;
 			return true;
 		} else if (CHART_DISCRETE_COLORS.equals(prefId) && newValue instanceof Boolean discrete) {
 			OsmandDevelopmentPlugin.CHART_DISCRETE_COLORS = discrete;

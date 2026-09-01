@@ -10,9 +10,6 @@ import com.github.mikephil.charting.data.Entry;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.shared.ColorPalette;
 import net.osmand.shared.ColorPalette.ColorValue;
-import net.osmand.shared.gpx.GradientScaleType;
-import net.osmand.shared.palette.domain.PaletteItem;
-import net.osmand.shared.palette.domain.category.GradientPaletteCategory;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,12 +22,23 @@ import java.util.List;
  * type-agnostic — it only knows (x, value) pairs plus a palette — so any pair of data sets can be
  * combined, not just altitude and slope.
  * <p>
- * Values are kept in the palette's own domain, not in the chart's display units. The chart shows
- * slope in percent while the slope palette is defined in fractions, and altitude may be shown in
- * feet while the altitude palette is in meters, so {@link #createValueConverter} undoes the display
- * scaling that the data set builders applied.
+ * Values are kept in the palette's own domain, not in the chart's display units: the chart shows
+ * slope in percent while the palette is defined in fractions, and altitude may be shown in feet.
+ * {@link #createValueConverter} undoes the display scaling that the data set builders applied.
  */
 public class ChartColorSource {
+
+	private static final ColorPalette BIPOLAR_PALETTE = buildPalette(new double[] {
+			-0.15, -0.08, -0.03, 0.0, 0.03, 0.08, 0.15
+	}, new int[] {
+			0xFF2E7FD4, 0xFF3FA9E8, 0xFF5FC8C0, 0xFF8FCB55, 0xFFF7B342, 0xFFFA7A3C, 0xFFD95FE8
+	});
+
+	private static final ColorPalette LINEAR_PALETTE = buildPalette(new double[] {
+			0.0, 0.167, 0.333, 0.5, 0.667, 0.833, 1.0
+	}, new int[] {
+			0xFF6FCF5B, 0xFFA6D847, 0xFFDCDD3E, 0xFFF5C63C, 0xFFF79B3E, 0xFFF26F49, 0xFFE8474F
+	});
 
 	private final float[] xs;
 	private final float[] values;
@@ -73,12 +81,37 @@ public class ChartColorSource {
 		if (min > max) {
 			return null;
 		}
-		ColorPalette palette = resolvePalette(app, type, min, max);
-		return palette != null ? new ChartColorSource(xs, values, palette, dataSet) : null;
+		return new ChartColorSource(xs, values, resolvePalette(type, min, max), dataSet);
 	}
 
 	public int getColorAt(float x) {
-		return palette.getColorByValue(getValueAt(x));
+		return getColor(getValueAt(x));
+	}
+
+	public int getColor(float value) {
+		return palette.getColorByValue(value);
+	}
+
+	public float getAverageValueAt(float xFrom, float xTo) {
+		if (xTo <= xFrom) {
+			return getValueAt(xFrom);
+		}
+		int from = insertionIndex(xFrom);
+		int to = insertionIndex(xTo);
+		double sum = 0;
+		int count = 0;
+		for (int i = from; i < to; i++) {
+			if (!Float.isNaN(values[i])) {
+				sum += values[i];
+				count++;
+			}
+		}
+		return count > 0 ? (float) (sum / count) : getValueAt((xFrom + xTo) / 2f);
+	}
+
+	private int insertionIndex(float x) {
+		int index = Arrays.binarySearch(xs, x);
+		return index >= 0 ? index : -index - 1;
 	}
 
 	public float getValueAt(float x) {
@@ -120,19 +153,24 @@ public class ChartColorSource {
 	}
 
 	public int getBandColorAt(float x) {
-		float value = getValueAt(x);
+		return getBandColor(getValueAt(x));
+	}
+
+	public int getBandColor(float value) {
 		List<ColorValue> breakpoints = palette.getColors();
 		if (breakpoints.isEmpty()) {
 			return palette.getColorByValue(value);
 		}
-		ColorValue band = breakpoints.get(0);
+		ColorValue nearest = breakpoints.get(0);
+		double smallestDistance = Math.abs(value - nearest.getValue());
 		for (ColorValue breakpoint : breakpoints) {
-			if (value < breakpoint.getValue()) {
-				break;
+			double distance = Math.abs(value - breakpoint.getValue());
+			if (distance < smallestDistance) {
+				smallestDistance = distance;
+				nearest = breakpoint;
 			}
-			band = breakpoint;
 		}
-		return band.getClr();
+		return nearest.getClr();
 	}
 
 	public float getMinX() {
@@ -143,39 +181,21 @@ public class ChartColorSource {
 		return xs[xs.length - 1];
 	}
 
-	@Nullable
-	private static ColorPalette resolvePalette(@NonNull OsmandApplication app,
-	                                           @NonNull GPXDataSetType type,
+	@NonNull
+	private static ColorPalette resolvePalette(@NonNull GPXDataSetType type,
 	                                           double min, double max) {
-		GradientScaleType scaleType = toGradientScaleType(type);
-		if (scaleType != null) {
-			GradientPaletteCategory category = scaleType.toPaletteCategory();
-			for (PaletteItem item : app.getPaletteRepository().getPaletteItems(category.getId())) {
-				if (item instanceof PaletteItem.Gradient gradient) {
-					ColorPalette palette = gradient.getColorPalette();
-					if (!palette.isValid()) {
-						continue;
-					}
-					return gradient.isFixed()
-							? palette
-							: new ColorPalette(palette, min, max, isBipolar(type));
-				}
-			}
-		}
-		ColorPalette relative = isBipolar(type)
-				? ColorPalette.Companion.getBIPOLAR_MIN_MAX_PALETTE()
-				: ColorPalette.Companion.getMIN_MAX_PALETTE();
-		return new ColorPalette(relative, min, max, isBipolar(type));
+		return isBipolar(type)
+				? BIPOLAR_PALETTE
+				: new ColorPalette(LINEAR_PALETTE, min, max, false);
 	}
 
-	@Nullable
-	private static GradientScaleType toGradientScaleType(@NonNull GPXDataSetType type) {
-		return switch (type) {
-			case ALTITUDE, ALTITUDE_EXTRM -> GradientScaleType.ALTITUDE;
-			case SPEED -> GradientScaleType.SPEED;
-			case SLOPE -> GradientScaleType.SLOPE;
-			default -> null;
-		};
+	@NonNull
+	private static ColorPalette buildPalette(@NonNull double[] values, @NonNull int[] colors) {
+		ColorPalette palette = new ColorPalette();
+		for (int i = 0; i < values.length; i++) {
+			palette.addPoint(values[i], colors[i]);
+		}
+		return palette;
 	}
 
 	private static boolean isBipolar(@NonNull GPXDataSetType type) {

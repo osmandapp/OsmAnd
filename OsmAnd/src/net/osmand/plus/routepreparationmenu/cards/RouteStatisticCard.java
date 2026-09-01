@@ -202,7 +202,7 @@ public class RouteStatisticCard extends MapBaseCard {
 			dataSets.add(elevationDataSet);
 			slopeDataSet = ChartUtils.createGPXSlopeDataSet(app, mChart, analysis,
 					GPXDataSetType.SLOPE, GPXDataSetAxisType.DISTANCE, elevationDataSet.getEntries(), true, true, false);
-			if (slopeDataSet != null && !ChartUtils.applyColorSource(app, elevationDataSet, slopeDataSet)) {
+			if (slopeDataSet != null && !ChartUtils.applyColorSource(app, mChart, elevationDataSet, slopeDataSet)) {
 				dataSets.add(slopeDataSet);
 			}
 			this.elevationDataSet = elevationDataSet;

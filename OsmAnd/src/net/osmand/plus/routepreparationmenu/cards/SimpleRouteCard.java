@@ -130,7 +130,7 @@ public class SimpleRouteCard extends MapBaseCard {
 				dataSets.add(elevationDataSet);
 				slopeDataSet = createGPXSlopeDataSet(app, chart, analysis, GPXDataSetType.SLOPE, DISTANCE,
 						elevationDataSet.getEntries(), true, true, false);
-				if (slopeDataSet != null && !ChartUtils.applyColorSource(app, elevationDataSet, slopeDataSet)) {
+				if (slopeDataSet != null && !ChartUtils.applyColorSource(app, chart, elevationDataSet, slopeDataSet)) {
 					dataSets.add(slopeDataSet);
 				}
 				data = new LineData(dataSets);

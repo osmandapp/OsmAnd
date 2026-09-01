@@ -276,7 +276,7 @@ public class ElevationProfileWidget extends MapWidget {
 			if (showSlopes) {
 				OrderedLineDataSet slopeDataSet = ChartUtils.createGPXSlopeDataSet(app, chart, analysis,
 						GPXDataSetType.SLOPE, GPXDataSetAxisType.DISTANCE, elevationDataSet.getEntries(), true, true, false);
-				if (slopeDataSet != null && !ChartUtils.applyColorSource(app, elevationDataSet, slopeDataSet)) {
+				if (slopeDataSet != null && !ChartUtils.applyColorSource(app, chart, elevationDataSet, slopeDataSet)) {
 					dataSets.add(slopeDataSet);
 				}
 				this.slopeDataSet = slopeDataSet;

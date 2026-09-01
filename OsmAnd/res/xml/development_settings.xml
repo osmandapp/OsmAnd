@@ -252,15 +252,7 @@
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="chart_color_by_second_dataset"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
-		android:summary="@string/chart_color_by_second_dataset_descr"
 		android:title="@string/chart_color_by_second_dataset" />
-
-	<SwitchPreferenceCompat
-		android:key="chart_color_line_stroke"
-		android:layout="@layout/preference_switch"
-		android:persistent="false"
-		android:summary="@string/chart_color_line_stroke_descr"
-		android:title="@string/chart_color_line_stroke" />
 
 	<SwitchPreferenceCompat
 		android:key="chart_discrete_colors"
@@ -268,6 +260,11 @@
 		android:persistent="false"
 		android:summary="@string/chart_discrete_colors_descr"
 		android:title="@string/chart_discrete_colors" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="chart_slope_window"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/chart_slope_window" />
 
 	<PreferenceCategory
 		android:key="info"

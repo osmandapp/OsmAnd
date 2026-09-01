@@ -715,7 +715,7 @@ public class TrackDetailsMenu {
 			}
 		}
 
-		if (dataSets.size() == 2 && ChartUtils.applyColorSource(app,
+		if (dataSets.size() == 2 && ChartUtils.applyColorSource(app, chart,
 				(OrderedLineDataSet) dataSets.get(0), (OrderedLineDataSet) dataSets.get(1))) {
 			dataSets.remove(1);
 		}

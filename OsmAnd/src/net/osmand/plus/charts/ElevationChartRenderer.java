@@ -39,11 +39,15 @@ public class ElevationChartRenderer extends LineChartRenderer {
 
 	private static final float GRADIENT_STOP_STEP_PX = 3f;
 	private static final int MAX_GRADIENT_STOPS = 512;
+	private static final int FILL_ALPHA = 135;
 
 	private final GradientFillDrawable gradientFill = new GradientFillDrawable();
 
-	private int[] gradientColors = new int[0];
+	private int[] fillColors = new int[0];
+	private int[] strokeColors = new int[0];
 	private float[] gradientPositions = new float[0];
+	private float gradientLeft;
+	private float gradientRight;
 
 	public ElevationChartRenderer(LineDataProvider chart, ChartAnimator animator,
 	                              ViewPortHandler viewPortHandler) {
@@ -70,8 +74,7 @@ public class ElevationChartRenderer extends LineChartRenderer {
 	@Override
 	protected void drawDataSet(Canvas canvas, ILineDataSet dataSet) {
 		ChartColorSource colorSource = getColorSource(dataSet);
-		LinearGradient gradient = colorSource != null ? createGradient(dataSet, colorSource) : null;
-		if (gradient == null) {
+		if (colorSource == null || !prepareGradientStops(dataSet, colorSource)) {
 			super.drawDataSet(canvas, dataSet);
 			return;
 		}
@@ -80,12 +83,10 @@ public class ElevationChartRenderer extends LineChartRenderer {
 		boolean fillWasEnabled = orderedDataSet.isDrawFilledEnabled();
 		try {
 			// the fill is painted by clipping this drawable to the area under the line
-			gradientFill.setGradient(gradient, orderedDataSet.getFillAlpha());
+			gradientFill.setGradient(createGradient(fillColors));
 			orderedDataSet.setFillDrawable(gradientFill);
 			// a shader on the render paint takes precedence over the flat line colour
-			if (OsmandDevelopmentPlugin.CHART_COLOR_LINE_STROKE) {
-				mRenderPaint.setShader(gradient);
-			}
+			mRenderPaint.setShader(createGradient(strokeColors));
 			super.drawDataSet(canvas, orderedDataSet);
 		} finally {
 			mRenderPaint.setShader(null);
@@ -94,38 +95,53 @@ public class ElevationChartRenderer extends LineChartRenderer {
 		}
 	}
 
-	@Nullable
-	private LinearGradient createGradient(@NonNull ILineDataSet dataSet,
-	                                      @NonNull ChartColorSource colorSource) {
-		float left = mViewPortHandler.contentLeft();
-		float right = mViewPortHandler.contentRight();
-		if (right - left < 1) {
-			return null;
+	private boolean prepareGradientStops(@NonNull ILineDataSet dataSet,
+	                                     @NonNull ChartColorSource colorSource) {
+		gradientLeft = mViewPortHandler.contentLeft();
+		gradientRight = mViewPortHandler.contentRight();
+		if (gradientRight - gradientLeft < 1) {
+			return false;
 		}
 		Transformer transformer = mChart.getTransformer(dataSet.getAxisDependency());
-		MPPointD leftValue = transformer.getValuesByTouchPoint(left, 0);
-		MPPointD rightValue = transformer.getValuesByTouchPoint(right, 0);
+		MPPointD leftValue = transformer.getValuesByTouchPoint(gradientLeft, 0);
+		MPPointD rightValue = transformer.getValuesByTouchPoint(gradientRight, 0);
 		float fromX = (float) leftValue.x;
 		float toX = (float) rightValue.x;
 		MPPointD.recycleInstance(leftValue);
 		MPPointD.recycleInstance(rightValue);
 
-		int stops = (int) ((right - left) / GRADIENT_STOP_STEP_PX) + 1;
+		int stops = (int) ((gradientRight - gradientLeft) / GRADIENT_STOP_STEP_PX) + 1;
 		stops = Math.max(2, Math.min(stops, MAX_GRADIENT_STOPS));
-		if (gradientColors.length != stops) {
-			gradientColors = new int[stops];
+		if (fillColors.length != stops) {
+			fillColors = new int[stops];
+			strokeColors = new int[stops];
 			gradientPositions = new float[stops];
 		}
 		boolean discrete = OsmandDevelopmentPlugin.CHART_DISCRETE_COLORS;
+		float halfSpan = (toX - fromX) / (2f * (stops - 1));
 		for (int i = 0; i < stops; i++) {
 			float ratio = i / (float) (stops - 1);
 			float x = fromX + ratio * (toX - fromX);
+			// average over the span this stop covers, otherwise dense data gets point-sampled and
+			// noise turns into a stripe pattern that is not in the track
+			float value = colorSource.getAverageValueAt(x - halfSpan, x + halfSpan);
 			// stops sit a few pixels apart, so band colours read as hard edges without extra work
-			gradientColors[i] = discrete ? colorSource.getBandColorAt(x) : colorSource.getColorAt(x);
+			int color = discrete ? colorSource.getBandColor(value) : colorSource.getColor(value);
+			fillColors[i] = withAlpha(color, FILL_ALPHA);
+			strokeColors[i] = color;
 			gradientPositions[i] = ratio;
 		}
-		return new LinearGradient(left, 0, right, 0, gradientColors, gradientPositions,
+		return true;
+	}
+
+	@NonNull
+	private LinearGradient createGradient(@NonNull int[] colors) {
+		return new LinearGradient(gradientLeft, 0, gradientRight, 0, colors, gradientPositions,
 				Shader.TileMode.CLAMP);
+	}
+
+	private static int withAlpha(int color, int alpha) {
+		return (alpha << 24) | (color & 0x00FFFFFF);
 	}
 
 	@Nullable
@@ -146,9 +162,8 @@ public class ElevationChartRenderer extends LineChartRenderer {
 
 		private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
-		void setGradient(@NonNull Shader shader, int alpha) {
+		void setGradient(@NonNull Shader shader) {
 			paint.setShader(shader);
-			paint.setAlpha(alpha);
 		}
 
 		@Override

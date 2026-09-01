@@ -73,6 +73,7 @@ public class ChartUtils {
 	public static final int CHART_LABEL_COUNT = 3;
 	private static final int MAX_CHART_DATA_ITEMS = 10000;
 	public static final int MAX_CHART_TYPES = 2;
+	public static final int DEFAULT_SLOPE_WINDOW_M = 20;
 
 	public static void setupElevationChart(ElevationChart chart) {
 		setupElevationChart(chart, new ElevationChartAppearance());
@@ -703,6 +704,14 @@ public class ChartUtils {
 	 * Prototype for issue #24575 draw the second selected data set as the colouring of the first
 	 * one rather than as a separate line. Gated behind the development plugin.
 	 */
+	private static int getSlopeWindow() {
+		OsmandDevelopmentPlugin plugin = PluginsHelper.getActivePlugin(OsmandDevelopmentPlugin.class);
+		if (plugin != null && plugin.CHART_COLOR_BY_SECOND_DATASET.get()) {
+			return plugin.CHART_SLOPE_WINDOW.get();
+		}
+		return DEFAULT_SLOPE_WINDOW_M;
+	}
+
 	public static boolean isColorBySecondDataSetEnabled() {
 		OsmandDevelopmentPlugin plugin = PluginsHelper.getActivePlugin(OsmandDevelopmentPlugin.class);
 		return plugin != null && plugin.CHART_COLOR_BY_SECOND_DATASET.get();
@@ -717,6 +726,7 @@ public class ChartUtils {
 	 * add only {@code lineDataSet} to the chart.
 	 */
 	public static boolean applyColorSource(@NonNull OsmandApplication app,
+	                                       @NonNull BarLineChartBase<?> chart,
 	                                       @Nullable OrderedLineDataSet lineDataSet,
 	                                       @Nullable OrderedLineDataSet colorDataSet) {
 		if (lineDataSet == null || colorDataSet == null || !isColorBySecondDataSetEnabled()) {
@@ -728,7 +738,20 @@ public class ChartUtils {
 		}
 		lineDataSet.setColorSource(colorSource);
 		lineDataSet.setDrawFilled(true);
+		adoptAxisOfLineDataSet(chart, lineDataSet);
 		return true;
+	}
+
+	private static void adoptAxisOfLineDataSet(@NonNull BarLineChartBase<?> chart,
+	                                           @NonNull OrderedLineDataSet lineDataSet) {
+		YAxis lineAxis = getYAxis(chart, null, !lineDataSet.isLeftAxis());
+		YAxis otherAxis = getYAxis(chart, null, lineDataSet.isLeftAxis());
+
+		otherAxis.setValueFormatter(lineAxis.getValueFormatter());
+		otherAxis.setGranularity(lineAxis.getGranularity());
+		otherAxis.setGranularityEnabled(lineAxis.isGranularityEnabled());
+		otherAxis.resetAxisMinimum();
+		otherAxis.resetAxisMaximum();
 	}
 
 	public static YAxis getYAxis(BarLineChartBase<?> chart, Integer textColor, boolean useRightAxis) {
@@ -806,7 +829,7 @@ public class ChartUtils {
 			return null;
 		}
 
-		double SLOPE_PROXIMITY = Math.max(20, STEP * 2);
+		double SLOPE_PROXIMITY = Math.max(getSlopeWindow(), STEP * 2);
 
 		if (totalDistance - SLOPE_PROXIMITY < 0) {
 			if (useRightAxis) {
@@ -915,7 +938,7 @@ public class ChartUtils {
 		} else {
 			OrderedLineDataSet dataSet1 = getDataSet(app, chart, analysis, firstType, secondType, gpxDataSetAxisType, calcWithoutGaps, false);
 			OrderedLineDataSet dataSet2 = getDataSet(app, chart, analysis, secondType, firstType, gpxDataSetAxisType, calcWithoutGaps, true);
-			if (applyColorSource(app, dataSet1, dataSet2)) {
+			if (applyColorSource(app, chart, dataSet1, dataSet2)) {
 				result.add(dataSet1);
 				return result;
 			}
@@ -981,14 +1004,15 @@ public class ChartUtils {
 
 	@Nullable
 	public static List<GPXDataSetType> getSavedChartTypes(@NonNull ListStringPreference listStringPreference) {
-		List<GPXDataSetType> savedYAxisTypes = new ArrayList<>();
 		List<String> setTypes = listStringPreference.getStringsList();
 		if (Algorithms.isEmpty(setTypes)) {
 			return null;
 		}
 
-		for (GPXDataSetType type : GPXDataSetType.values()) {
-			if (setTypes.contains(type.name())) {
+		List<GPXDataSetType> savedYAxisTypes = new ArrayList<>();
+		for (String name : setTypes) {
+			GPXDataSetType type = getDataSetTypeByName(name);
+			if (type != null && !savedYAxisTypes.contains(type)) {
 				savedYAxisTypes.add(type);
 				if (savedYAxisTypes.size() >= MAX_CHART_TYPES) {
 					break;
@@ -997,6 +1021,16 @@ public class ChartUtils {
 		}
 
 		return Algorithms.isEmpty(savedYAxisTypes) ? null : savedYAxisTypes;
+	}
+
+	@Nullable
+	private static GPXDataSetType getDataSetTypeByName(@Nullable String name) {
+		for (GPXDataSetType type : GPXDataSetType.values()) {
+			if (type.name().equals(name)) {
+				return type;
+			}
+		}
+		return null;
 	}
 
 	@NonNull
