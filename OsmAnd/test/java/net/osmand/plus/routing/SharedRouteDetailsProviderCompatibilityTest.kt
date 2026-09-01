@@ -61,6 +61,21 @@ class SharedRouteDetailsProviderCompatibilityTest {
 				cumulativeInfoByPosition[position],
 			)
 		}
+		assertEquals(
+			listOf(
+				RouteCumulativeInfo(0, 0),
+				RouteCumulativeInfo(150, 13),
+				RouteCumulativeInfo(325, 27),
+				RouteCumulativeInfo(450, 45),
+			),
+			SharedRouteDetailsProvider.getCumulativeInfoAtRoutePoints(
+				directions,
+				distanceToFinish,
+				currentRoutePointIndex = 0,
+				currentDirectionIndex = 0,
+				routePointOffsets = intArrayOf(0, 1, 2, 3),
+			),
+		)
 	}
 
 	@Test

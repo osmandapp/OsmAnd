@@ -355,13 +355,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 
 		@NonNull
 		private String getHeader(int type) {
-			return switch (type) {
-				case WaypointHelper.TARGETS -> getString(R.string.shared_string_target_points);
-				case WaypointHelper.ALARMS -> getString(R.string.way_alarms);
-				case WaypointHelper.FAVORITES -> getString(R.string.shared_string_my_favorites);
-				case WaypointHelper.POI -> getString(R.string.points_of_interests);
-				default -> getString(R.string.shared_string_waypoints);
-			};
+			return getString(WaypointHelper.getTypeTitleId(type));
 		}
 
 		@NonNull

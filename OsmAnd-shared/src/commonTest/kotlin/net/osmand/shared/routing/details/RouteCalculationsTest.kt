@@ -86,6 +86,34 @@ class RouteCalculationsTest {
 		)
 	}
 
+	@Test
+	fun routePointCumulativeInfoUsesOneForwardManeuverPass() {
+		val distanceToFinish = IntArray(11) { index -> 1_000 - index * 100 }
+		val maneuvers = listOf(
+			maneuver(offset = 0, averageSpeed = 10f),
+			maneuver(offset = 4, averageSpeed = 20f),
+			maneuver(offset = 7, averageSpeed = 5f),
+		)
+
+		assertEquals(
+			listOf(
+				RouteCumulativeInfo(0, 0),
+				RouteCumulativeInfo(100, 10),
+				RouteCumulativeInfo(300, 30),
+				RouteCumulativeInfo(400, 35),
+				RouteCumulativeInfo(400, 35),
+				RouteCumulativeInfo(800, 85),
+			),
+			RouteManeuverCalculator.cumulativeInfoAtRoutePoints(
+				ManeuverAccessor(maneuvers),
+				distanceToFinish,
+				currentRoutePointIndex = 1,
+				currentManeuverIndex = 0,
+				routePointOffsets = intArrayOf(0, 2, 4, 5, 5, 9),
+			),
+		)
+	}
+
 	private fun maneuver(
 		offset: Int,
 		averageSpeed: Float,

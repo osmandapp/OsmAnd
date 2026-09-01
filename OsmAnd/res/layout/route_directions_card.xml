@@ -7,16 +7,36 @@
 	android:background="?attr/card_and_list_background_basic"
 	android:orientation="vertical">
 
-	<net.osmand.plus.widgets.TextViewEx
-		android:id="@+id/directions_card_title"
+	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:gravity="center_vertical"
-		android:padding="@dimen/content_padding"
-		android:text="@string/step_by_step"
-		android:textColor="?android:textColorPrimary"
-		android:textSize="@dimen/text_button_text_size"
-		app:typefaceWeight="medium" />
+		android:orientation="horizontal">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/directions_card_title"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:gravity="center_vertical"
+			android:padding="@dimen/content_padding"
+			android:text="@string/step_by_step"
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/text_button_text_size"
+			app:typefaceWeight="medium" />
+
+		<androidx.appcompat.widget.AppCompatImageButton
+			android:id="@+id/route_details_filter"
+			android:layout_width="48dp"
+			android:layout_height="48dp"
+			android:layout_marginEnd="@dimen/content_padding_half"
+			android:background="?attr/selectableItemBackgroundBorderless"
+			android:contentDescription="@string/filter_screen_title"
+			android:padding="12dp"
+			android:scaleType="centerInside"
+			android:visibility="gone" />
+
+	</LinearLayout>
 
 	<FrameLayout
 		android:id="@+id/attach_to_roads_banner_container"
