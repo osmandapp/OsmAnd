@@ -333,6 +333,8 @@ object RouteStatisticsCalculator {
 			}
 			partition.distanceMeters += attribute.distanceMeters
 		}
+		// The legacy TreeMap established natural key order before the stable comparator sort.
+		// Keep this first sort so comparator ties preserve the same legend order.
 		val naturallyOrderedKeys = partitionByUserName.keys.sorted()
 		return naturallyOrderedKeys.sortedWith { first, second ->
 			when {
