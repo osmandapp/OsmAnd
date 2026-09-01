@@ -25,6 +25,7 @@ import net.osmand.plus.utils.InsetTarget
 import net.osmand.plus.utils.InsetTargetsCollection
 import net.osmand.plus.utils.InsetsUtils.InsetSide
 import net.osmand.plus.wikipedia.WikiArticleBaseDialogFragment
+import net.osmand.util.Algorithms
 
 class AstroArticleDialogFragment : WikiArticleBaseDialogFragment() {
 
@@ -56,6 +57,7 @@ class AstroArticleDialogFragment : WikiArticleBaseDialogFragment() {
 	private var article: AstroArticle? = null
 	private var articleHtml: String? = null
 	private var htmlLoadJob: Job? = null
+	private var selectedLang: String? = null
 
 	private lateinit var readFullArticleButton: TextView
 
@@ -71,8 +73,8 @@ class AstroArticleDialogFragment : WikiArticleBaseDialogFragment() {
 		setupToolbar(mainView.findViewById(R.id.toolbar))
 
 		articleToolbarText = mainView.findViewById(R.id.title_text_view)
-		selectedLangTv = mainView.findViewById(R.id.select_language_text_view)
-		selectedLangTv.isVisible = false
+		setupLanguageChanger(mainView.findViewById(R.id.select_language_text_view))
+
 		mainView.findViewById<ImageView>(R.id.options_button).isVisible = false
 
 		readFullArticleButton = mainView.findViewById(R.id.read_full_article)
@@ -144,11 +146,19 @@ class AstroArticleDialogFragment : WikiArticleBaseDialogFragment() {
 
 	override fun populateArticle() {
 		val wikidataId = arguments?.getString(ARG_WIKIDATA_ID) ?: return
-		val lang = arguments?.getString(ARG_LANG)
+		val languageArg = arguments?.getString(ARG_LANG)
+
+		val preferredLanguage = this.selectedLang?.let {
+            it.ifEmpty { app.language }
+		} ?: languageArg
+		val selectedLanguage = if(preferredLanguage.isNullOrEmpty()) "en" else preferredLanguage
+
 		article = PluginsHelper.requirePlugin(AstronomyPlugin::class.java)
 			.dataProvider
-			.getAstroArticle(app, wikidataId, lang)
+			.getAstroArticle(app, wikidataId, selectedLanguage)
 		val currentArticle = article ?: return
+
+		setSelectedLanguage(currentArticle.lang);
 
 		articleToolbarText.text = currentArticle.title
 		val onlineArticleUrl = currentArticle.getOnlineArticleUrl()
@@ -175,9 +185,23 @@ class AstroArticleDialogFragment : WikiArticleBaseDialogFragment() {
 			}
 			loadHeaderImage(createHtmlContent(), wikidataId)
 		}
-	}
 
-	override fun showPopupLangMenu(view: View, langSelected: String) = Unit
+		selectedLangTv.text = Algorithms.capitalizeFirstLetter(selectedLanguage)
+		selectedLangTv.setOnClickListener {
+            showPopupLangMenu(
+                selectedLangTv,
+                selectedLanguage
+            )
+        }
+    }
+
+	override fun showPopupLangMenu(view: View, langSelected: String) {
+		val namesSet = article?.wikiContentLocales
+		if (namesSet.isNullOrEmpty()) return
+
+		val popupLangMenu = createPopupLangMenu(view, namesSet)
+		popupLangMenu?.show()
+	}
 
 	override fun createHtmlContent(): String {
 		val currentArticle = article
@@ -202,5 +226,13 @@ class AstroArticleDialogFragment : WikiArticleBaseDialogFragment() {
 
 	private fun extractBodyContent(html: String): String {
 		return BODY_CONTENT_REGEX.find(html)?.groups?.get(1)?.value ?: html
+	}
+
+	override fun getSelectedLanguage(): String? {
+		return this.selectedLang
+	}
+
+	override fun setSelectedLanguage(languageCode: String?) {
+		this.selectedLang = languageCode
 	}
 }

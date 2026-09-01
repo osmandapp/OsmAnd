@@ -2,10 +2,14 @@ package net.osmand.plus.wikipedia;
 
 import static net.osmand.plus.utils.ColorUtilities.getStatusBarSecondaryColorId;
 
+import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -14,10 +18,12 @@ import android.widget.TextView;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.PopupMenu;
 
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.plus.wikivoyage.WikiBaseDialogFragment;
@@ -33,6 +39,7 @@ import java.lang.ref.WeakReference;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Locale;
@@ -482,4 +489,61 @@ public abstract class WikiArticleBaseDialogFragment extends WikiBaseDialogFragme
 
 	@NonNull
 	protected abstract String createHtmlContent();
+
+
+	protected void setupLanguageChanger(final TextView selectedLangTv) {
+		this.selectedLangTv = selectedLangTv;
+		ColorStateList selectedLangColorStateList = AndroidUtils.createPressedColorStateList(
+				getContext(), nightMode,
+				R.color.icon_color_default_light, R.color.active_color_primary_light,
+				R.color.icon_color_default_light, R.color.active_color_primary_dark
+		);
+		selectedLangTv.setTextColor(selectedLangColorStateList);
+		selectedLangTv.setCompoundDrawablesWithIntrinsicBounds(getSelectedLangIcon(), null, null, null);
+		selectedLangTv.setBackgroundResource(nightMode
+				? R.drawable.wikipedia_select_lang_bg_dark_n : R.drawable.wikipedia_select_lang_bg_light_n);
+	}
+
+	@Nullable
+	protected PopupMenu createPopupLangMenu(final View anchor, final Set<String> languageCodes) {
+		final Context context = getContext();
+		if (context == null) return null;
+		final PopupMenu optionsMenu = new PopupMenu(getContext(), anchor, Gravity.RIGHT);
+
+		final Map<String, String> names = new HashMap<>();
+		for (String n : languageCodes) {
+			names.put(n, FileNameTranslationHelper.getVoiceName(context, n));
+		}
+		final String langSelected = getSelectedLanguage();
+		final String selectedLangName = names.remove(langSelected);
+		final Map<String, String> sortedNames = AndroidUtils.sortByValue(names);
+
+		if (selectedLangName != null) {
+			MenuItem item = optionsMenu.getMenu().add(selectedLangName);
+			item.setOnMenuItemClickListener(_item -> {
+				final String selectedLanguage = getSelectedLanguage();
+				if (!selectedLanguage.equals(langSelected)) {
+					setSelectedLanguage(langSelected);
+					populateArticle();
+				}
+				return true;
+			});
+		}
+		for (Map.Entry<String, String> e : sortedNames.entrySet()) {
+			MenuItem item = optionsMenu.getMenu().add(e.getValue());
+			item.setOnMenuItemClickListener(_item -> {
+				final String selectedLanguage = getSelectedLanguage();
+				final String itemLanguage = e.getKey();
+				if (!selectedLanguage.equals(itemLanguage)) {
+					setSelectedLanguage(e.getKey());
+					populateArticle();
+				}
+				return true;
+			});
+		}
+		return optionsMenu;
+	}
+
+	protected abstract void setSelectedLanguage(final String languageCode);
+	protected abstract String getSelectedLanguage();
 }
