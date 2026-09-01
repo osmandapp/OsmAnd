@@ -700,15 +700,19 @@ public class BinaryMapAddressReaderAdapter {
 				long length = readInt();
 				indexOffset = codedIS.getTotalBytesRead();
 				long oldLimit = codedIS.pushLimitLong((long) length);
-				List<QueryToken.Prefix> prefixCandidates = map.readIndexedStringTablePrefixes(
-						stringMatcher.getCollator(), Collections.singletonList(req.nameQuery)).get(0);
-				queryToken = new QueryToken(req.nameQuery, stringMatcher.getCollator(), req.matcherMode,
-						prefixCandidates);
-				TIntHashSet uniqueOffsets = new TIntHashSet();
-				for (QueryToken.Prefix prefix : queryToken.prefixes) {
-					if (uniqueOffsets.add(prefix.offset())) {
-						loffsets.add(prefix.offset());
-					}
+				List<String> queries = List.of(req.nameQuery.split(" "));
+				List<List<QueryToken.Prefix>> prefixCandidatesList = map.readIndexedStringTablePrefixes(
+						stringMatcher.getCollator(), queries);
+				for (int i = 0; i < queries.size(); i++) {
+					List<QueryToken.Prefix> prefixCandidates = prefixCandidatesList.get(i);
+					queryToken = new QueryToken(req.nameQuery, stringMatcher.getCollator(), req.matcherMode,
+							prefixCandidates);
+					TIntHashSet uniqueOffsets = new TIntHashSet();
+					for (QueryToken.Prefix prefix : queryToken.prefixes) {
+						if (uniqueOffsets.add(prefix.offset())) {
+							loffsets.add(prefix.offset());
+						}
+					}	
 				}
 				codedIS.popLimit(oldLimit);
 				req.endSubSearchStats(subStart, BinaryMapIndexReaderStats.BinaryMapIndexReaderApiName.ADDRESS_BY_NAME,
