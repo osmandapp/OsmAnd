@@ -68,20 +68,23 @@ class RouteDetailsListBuilder {
 		return items;
 	}
 
+	/**
+	 * Inserts the enabled along-route rows into the already ordered core rows. Callers pass only
+	 * points that are still ahead of the current route position; that filtering happens where the
+	 * route is available, so the counts backing the filter button match what is shown.
+	 */
 	@NonNull
 	static List<RouteDetailsItem> mergeAlongRouteItems(
 			@NonNull List<RouteDetailsItem> coreItems,
 			@NonNull List<RouteDetailsItem> alongRouteItems,
-			@NonNull Set<RouteDetailsItem.Type> visibleTypes,
-			int currentRoutePointIndex) {
+			@NonNull Set<RouteDetailsItem.Type> visibleTypes) {
 		List<RouteDetailsItem> result = new ArrayList<>(coreItems.size() + alongRouteItems.size());
 		result.addAll(coreItems);
 		for (RouteDetailsItem item : alongRouteItems) {
 			if (!item.isAlongRoute()) {
 				throw new IllegalArgumentException("Only along-route items can be merged");
 			}
-			if (item.getRoutePointOffset() > currentRoutePointIndex
-					&& visibleTypes.contains(item.getType())) {
+			if (visibleTypes.contains(item.getType())) {
 				result.add(item);
 			}
 		}

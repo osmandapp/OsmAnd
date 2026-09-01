@@ -12,28 +12,44 @@ import net.osmand.shared.routing.details.RouteCumulativeInfo;
 /** Data-only model for one ordered row in the Route Details list. */
 class RouteDetailsItem {
 
-	enum Type {
-		INTERMEDIATE(false, 0),
-		TRAFFIC_WARNING(true, 1),
-		POI(true, 2),
-		FAVORITE(true, 3),
-		MANEUVER(false, 4),
-		DESTINATION(false, 5);
+	private static final int NOT_ALONG_ROUTE = -1;
 
-		private final boolean alongRoute;
+	enum Type {
+		INTERMEDIATE(NOT_ALONG_ROUTE, 0),
+		TRAFFIC_WARNING(WaypointHelper.ALARMS, 1),
+		POI(WaypointHelper.POI, 2),
+		FAVORITE(WaypointHelper.FAVORITES, 3),
+		MANEUVER(NOT_ALONG_ROUTE, 4),
+		DESTINATION(NOT_ALONG_ROUTE, 5);
+
+		private final int waypointType;
 		private final int orderAtSameRoutePoint;
 
-		Type(boolean alongRoute, int orderAtSameRoutePoint) {
-			this.alongRoute = alongRoute;
+		Type(int waypointType, int orderAtSameRoutePoint) {
+			this.waypointType = waypointType;
 			this.orderAtSameRoutePoint = orderAtSameRoutePoint;
 		}
 
 		boolean isAlongRoute() {
-			return alongRoute;
+			return waypointType != NOT_ALONG_ROUTE;
+		}
+
+		int getWaypointType() {
+			return waypointType;
 		}
 
 		int getOrderAtSameRoutePoint() {
 			return orderAtSameRoutePoint;
+		}
+
+		@NonNull
+		static Type ofWaypointType(int waypointType) {
+			for (Type type : values()) {
+				if (type.isAlongRoute() && type.waypointType == waypointType) {
+					return type;
+				}
+			}
+			throw new IllegalArgumentException("Unsupported along-route point type: " + waypointType);
 		}
 	}
 
@@ -85,26 +101,17 @@ class RouteDetailsItem {
 				cumulativeTime);
 	}
 
+	/**
+	 * @param routePointOffset geometry index the [cumulativeInfo] was calculated for, which is the
+	 * point's route index clamped to the current route; it must stay in sync with that calculation
+	 * because it is also the sort key of the row.
+	 */
 	@NonNull
 	static RouteDetailsItem alongRoute(@NonNull LocationPointWrapper locationPoint,
-	                                  @NonNull RouteCumulativeInfo cumulativeInfo) {
-		Type type;
-		switch (locationPoint.type) {
-			case WaypointHelper.ALARMS:
-				type = Type.TRAFFIC_WARNING;
-				break;
-			case WaypointHelper.POI:
-				type = Type.POI;
-				break;
-			case WaypointHelper.FAVORITES:
-				type = Type.FAVORITE;
-				break;
-			default:
-				throw new IllegalArgumentException("Unsupported along-route point type: "
-						+ locationPoint.type);
-		}
-		return new RouteDetailsItem(type, null, null, locationPoint, -1, -1,
-				locationPoint.getRouteIndex(), cumulativeInfo.getDistanceMeters(),
+	                                   int routePointOffset,
+	                                   @NonNull RouteCumulativeInfo cumulativeInfo) {
+		return new RouteDetailsItem(Type.ofWaypointType(locationPoint.type), null, null,
+				locationPoint, -1, -1, routePointOffset, cumulativeInfo.getDistanceMeters(),
 				cumulativeInfo.getTimeSeconds());
 	}
 

@@ -162,13 +162,15 @@ object RouteManeuverCalculator {
 		if (routePointOffsets.isEmpty()) {
 			return emptyList()
 		}
-		require(routePointOffsets.indices.drop(1).all {
-			routePointOffsets[it - 1] <= routePointOffsets[it]
-		}) {
-			"Route point offsets must be sorted"
+		for (index in 1 until routePointOffsets.size) {
+			require(routePointOffsets[index - 1] <= routePointOffsets[index]) {
+				"Route point offsets must be sorted"
+			}
 		}
-		require(routePointOffsets.all { it in distanceToFinishMeters.indices }) {
-			"Route point offset must reference Android listDistance"
+		for (offset in routePointOffsets) {
+			require(offset in distanceToFinishMeters.indices) {
+				"Route point offset must reference Android listDistance"
+			}
 		}
 		if (distanceToFinishMeters.isEmpty() || maneuvers.getManeuversCount() == 0) {
 			return List(routePointOffsets.size) { RouteCumulativeInfo(0, 0) }

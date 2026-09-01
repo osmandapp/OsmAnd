@@ -17,6 +17,7 @@ import net.osmand.shared.routing.details.RouteCumulativeInfo;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -35,7 +36,7 @@ public class RouteDirectionsCardTest {
 		TargetPoint first = new TargetPoint(new LatLon(1, 1), null, 0);
 		TargetPoint second = new TargetPoint(new LatLon(2, 2), null, 1);
 
-		List<RouteDetailsItem> items = RouteDirectionsCard.buildRouteDirectionItems(
+		List<RouteDetailsItem> items = RouteDetailsListBuilder.buildCoreItems(
 				directions, intermediateInfos, Arrays.asList(first, second));
 
 		assertEquals(5, items.size());
@@ -56,7 +57,7 @@ public class RouteDirectionsCardTest {
 
 	@Test
 	public void keepsRouteIntermediateWhenTargetMetadataIsUnavailable() {
-		List<RouteDetailsItem> items = RouteDirectionsCard.buildRouteDirectionItems(
+		List<RouteDetailsItem> items = RouteDetailsListBuilder.buildCoreItems(
 				Arrays.asList(direction(0, 100), direction(10, 0)),
 				Collections.singletonList(new IntermediatePointInfo(5, 50, 5)),
 				Collections.emptyList());
@@ -72,13 +73,11 @@ public class RouteDirectionsCardTest {
 				Arrays.asList(direction(0, 100), direction(10, 100), direction(20, 0)),
 				Collections.singletonList(new IntermediatePointInfo(10, 100, 10)),
 				Collections.emptyList());
-		LocationPointWrapper passedWarning = point(WaypointHelper.ALARMS, 2);
 		LocationPointWrapper hiddenPoi = point(WaypointHelper.POI, 5);
 		LocationPointWrapper warning = point(WaypointHelper.ALARMS, 10);
 		LocationPointWrapper firstFavorite = point(WaypointHelper.FAVORITES, 10);
 		LocationPointWrapper secondFavorite = point(WaypointHelper.FAVORITES, 10);
 		List<RouteDetailsItem> alongRouteItems = Arrays.asList(
-				alongRoute(passedWarning),
 				alongRoute(hiddenPoi),
 				alongRoute(warning),
 				alongRoute(firstFavorite),
@@ -88,9 +87,9 @@ public class RouteDirectionsCardTest {
 				coreItems, alongRouteItems,
 				RouteDirectionsCard.getVisibleAlongRouteTypes(
 						RouteDirectionsCard.FILTER_TRAFFIC_WARNINGS
-								| RouteDirectionsCard.FILTER_FAVORITES), 2);
+								| RouteDirectionsCard.FILTER_FAVORITES));
 
-		List<RouteDetailsItem.Type> itemTypes = new java.util.ArrayList<>();
+		List<RouteDetailsItem.Type> itemTypes = new ArrayList<>();
 		for (RouteDetailsItem item : result) {
 			itemTypes.add(item.getType());
 		}
@@ -108,7 +107,7 @@ public class RouteDirectionsCardTest {
 	}
 
 	private static RouteDetailsItem alongRoute(LocationPointWrapper point) {
-		return RouteDetailsItem.alongRoute(point, new RouteCumulativeInfo(
+		return RouteDetailsItem.alongRoute(point, point.getRouteIndex(), new RouteCumulativeInfo(
 				point.getRouteIndex() * 10, point.getRouteIndex()));
 	}
 
