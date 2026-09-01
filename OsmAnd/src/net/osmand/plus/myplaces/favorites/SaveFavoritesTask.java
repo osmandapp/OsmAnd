@@ -24,7 +24,6 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,7 +77,7 @@ final class SaveFavoritesTask extends AsyncTask<Void, String, Void> {
 				log.error("Favorite deletions journal could not be read. Favorites save will continue, but journal will not be cleared.");
 			}
 
-			Set<String> deletedPointKeys = collectStalePointKeys(groups, journalRead.getDeletions().getPointKeys());
+			Set<String> deletedPointKeys = journalRead.getDeletions().getPointKeys();
 
 			boolean success = saveExternalFiles(groups, deletedPointKeys);
 			if (!success) {
@@ -98,38 +97,6 @@ final class SaveFavoritesTask extends AsyncTask<Void, String, Void> {
 			log.error(e.getMessage(), e);
 			return false;
 		}
-	}
-
-	@NonNull
-	private Set<String> collectStalePointKeys(@NonNull List<FavoriteGroup> groups, @NonNull Set<String> journalDeletedKeys) {
-		Set<String> staleKeys = new HashSet<>(journalDeletedKeys);
-		File internalFile = helper.getInternalFile();
-		if (!internalFile.exists()) {
-			return staleKeys;
-		}
-
-		GpxFile gpxFile = SharedUtil.loadGpxFile(internalFile);
-		if (gpxFile.getError() != null) {
-			return staleKeys;
-		}
-
-		Map<String, FavoriteGroup> previousGroups = new LinkedHashMap<>();
-		helper.collectFavoriteGroups(gpxFile, previousGroups);
-
-		Set<String> currentKeys = new HashSet<>();
-		for (FavoriteGroup group : groups) {
-			for (FavouritePoint point : group.getPoints()) {
-				currentKeys.add(point.getKey());
-			}
-		}
-		for (FavoriteGroup group : previousGroups.values()) {
-			for (FavouritePoint point : group.getPoints()) {
-				if (!currentKeys.contains(point.getKey())) {
-					staleKeys.add(point.getKey());
-				}
-			}
-		}
-		return staleKeys;
 	}
 
 	private boolean saveSelectedGroupsOnly(@NonNull List<FavoriteGroup> groupsToSave) {
