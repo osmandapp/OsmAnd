@@ -666,8 +666,12 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		// ---- 4. stage 2: expand lazily and verify on the real road segments ----
 		List<Map<Long, Double>> acceptedGeometry = new ArrayList<>();
 		Map<Long, Double> mainGeometry = roadSegments(detailedSegments(route));
-		double minDistinct = Math.max(cfg.ALT_MIN_DISTINCT_ABS,
-				cfg.ALT_MIN_DISTINCT_REL * geometryLength(detailedSegments(route)));
+		double mainLength = totalLength(mainGeometry);
+		double minOwnRoads = Math.max(cfg.ALT_MIN_DISTINCT_ABS, cfg.ALT_MIN_DISTINCT_REL * mainLength);
+		// Avoiding is asked for less strictly than offering: replacing a good stretch of a long route
+		// is useful even when most of the main route stays. The point of this second threshold is to
+		// reject an alternative that contains the whole main route and only adds a loop to it.
+		double minAvoided = Math.max(cfg.ALT_MIN_DISTINCT_ABS, cfg.ALT_MIN_DISTINCT_REL * mainLength / 2);
 		int expanded = 0;
 		for (AltCandidate c : ordered) {
 			if (route.altRoutes.size() >= cfg.ALT_MAX_COUNT || expanded >= cfg.ALT_MAX_EXPAND) {
@@ -731,21 +735,31 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 						retraced, 100 * (c.cost / optCost - 1));
 				continue;
 			}
-			double altLength = geometryLength(detailed);
-			double distinct = altLength * (1 - sharedGeometry(detailed, mainGeometry));
+			// Both directions matter. "Own roads" says the alternative offers something new; "roads
+			// avoided" says it actually replaces a part of the route it is an alternative to. Without
+			// the second one an alternative that contains the whole main route plus a loop passes.
+			Map<Long, Double> altGeometry = roadSegments(detailed);
+			double altLength = totalLength(altGeometry);
+			double ownRoads = altLength - sharedGeometry(altGeometry, mainGeometry);
+			double avoidedRoads = mainLength - sharedGeometry(mainGeometry, altGeometry);
 			for (Map<Long, Double> accepted : acceptedGeometry) {
-				distinct = Math.min(distinct, altLength * (1 - sharedGeometry(detailed, accepted)));
+				ownRoads = Math.min(ownRoads, altLength - sharedGeometry(altGeometry, accepted));
+				avoidedRoads = Math.min(avoidedRoads,
+						totalLength(accepted) - sharedGeometry(accepted, altGeometry));
 			}
-			if (distinct < minDistinct) {
-				printf(DEBUG_VERBOSE_LEVEL > 0, "  alt rejected: +%.1f%%, only %.1f km of own roads (need %.1f)\n",
-						100 * (c.cost / optCost - 1), distinct / 1000, minDistinct / 1000);
+			if (ownRoads < minOwnRoads || avoidedRoads < minAvoided) {
+				printf(DEBUG_VERBOSE_LEVEL > 0,
+						"  alt rejected: +%.1f%%, own roads %.1f km (need %.1f), avoids %.1f km (need %.1f)\n",
+						100 * (c.cost / optCost - 1), ownRoads / 1000, minOwnRoads / 1000,
+						avoidedRoads / 1000, minAvoided / 1000);
 				continue;
 			}
 			route.altRoutes.add(alt);
 			route.getAlternatives().add(detailed);
 			acceptedGeometry.add(roadSegments(detailed));
-			printf(DEBUG_VERBOSE_LEVEL > 0, "  alt accepted: +%.1f%%, plateau %.0f%%, own roads %.1f km\n",
-					100 * (c.cost / optCost - 1), 100 * c.plateau / c.cost, distinct / 1000);
+			printf(DEBUG_VERBOSE_LEVEL > 0,
+					"  alt accepted: +%.1f%%, plateau %.0f%%, own roads %.1f km, avoids %.1f km\n",
+					100 * (c.cost / optCost - 1), 100 * c.plateau / c.cost, ownRoads / 1000, avoidedRoads / 1000);
 		}
 	}
 
@@ -925,26 +939,24 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		return m;
 	}
 
-	private static double geometryLength(List<RouteSegmentResult> segments) {
+	private static double totalLength(Map<Long, Double> segments) {
 		double d = 0;
-		for (Double v : roadSegments(segments).values()) {
+		for (Double v : segments.values()) {
 			d += v;
 		}
 		return d;
 	}
 
-	/** share of `segments` length running on the very same roads as `reference` */
-	private static double sharedGeometry(List<RouteSegmentResult> segments, Map<Long, Double> reference) {
-		Map<Long, Double> own = roadSegments(segments);
-		double length = 0, common = 0;
-		for (Map.Entry<Long, Double> e : own.entrySet()) {
-			length += e.getValue();
+	/** length of the roads that the two routes have in common */
+	private static double sharedGeometry(Map<Long, Double> segments, Map<Long, Double> reference) {
+		double common = 0;
+		for (Map.Entry<Long, Double> e : segments.entrySet()) {
 			Double v = reference.get(e.getKey());
 			if (v != null) {
 				common += Math.min(v, e.getValue());
 			}
 		}
-		return length <= 0 ? 1 : common / length;
+		return common;
 	}
 
 	protected HHRoutingContext<T> initHCtx(HHRoutingConfig c, LatLon start, LatLon end) throws SQLException, IOException {
