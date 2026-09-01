@@ -2,19 +2,18 @@ package net.osmand.router;
 
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.RouteDataObject;
-import net.osmand.shared.routing.details.RouteSegment;
-import net.osmand.shared.routing.details.RouteTypeAttribute;
 
 import org.junit.Test;
 
 import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
-public class RouteSegmentResultSnapshotAdapterTest {
+public class RouteSegmentResultStatisticsAccessorTest {
 
 	@Test
-	public void statisticsSnapshotPreservesNullRuleValuesAndSkipsInvalidRuleIds() {
+	public void preservesNullRuleValuesAndSkipsInvalidRuleIds() {
 		RouteRegion region = new RouteRegion();
 		region.initRouteEncodingRule(0, "seasonal", null);
 
@@ -26,12 +25,13 @@ public class RouteSegmentResultSnapshotAdapterTest {
 
 		RouteSegmentResult source = new RouteSegmentResult(road, 0, 1);
 		source.setDistance(10f);
+		RouteSegmentResultStatisticsAccessor accessor =
+				new RouteSegmentResultStatisticsAccessor(Collections.singletonList(source));
 
-		RouteSegment snapshot = RouteSegmentResultSnapshotAdapter.toStatisticsSnapshot(source, 0);
-
-		assertEquals(
-				Collections.singletonList(new RouteTypeAttribute("seasonal", null)),
-				snapshot.getRouteTypes());
+		assertEquals(1, accessor.getSegmentsCount());
+		assertEquals(2, accessor.getRouteTypesCount(0));
+		assertEquals("seasonal", accessor.getRouteTypeTag(0, 0));
+		assertNull(accessor.getRouteTypeValue(0, 0));
+		assertNull(accessor.getRouteTypeTag(0, 1));
 	}
-
 }

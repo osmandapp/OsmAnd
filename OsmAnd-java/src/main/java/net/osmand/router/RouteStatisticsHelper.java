@@ -8,7 +8,6 @@ import net.osmand.render.RenderingRulesStorage;
 import net.osmand.shared.routing.details.RouteAttributeClassification;
 import net.osmand.shared.routing.details.RouteAttributeClassificationRequest;
 import net.osmand.shared.routing.details.RouteAttributeClassifier;
-import net.osmand.shared.routing.details.RouteSegment;
 import net.osmand.shared.routing.details.RouteStatistic;
 import net.osmand.shared.routing.details.RouteStatisticsCalculator;
 import net.osmand.util.Algorithms;
@@ -71,14 +70,8 @@ public class RouteStatisticsHelper {
 		if (Algorithms.isEmpty(attributesNames)) {
 			attributesNames = getRouteStatisticAttrsNames(currentRenderer, defaultRenderer, false);
 		}
-		List<RouteSegment> sharedRoute = new ArrayList<>(route.size());
-		for (int i = 0; i < route.size(); i++) {
-			// Statistics use segment values only; these synthetic ranges satisfy the shared contract
-			// without reconstructing RouteCalculationResult's point-aligned segment list here.
-			sharedRoute.add(RouteSegmentResultSnapshotAdapter.toStatisticsSnapshot(route.get(i), i));
-		}
 		return RouteStatisticsCalculator.INSTANCE.calculate(
-				sharedRoute,
+				new RouteSegmentResultStatisticsAccessor(route),
 				attributesNames,
 				new SharedRouteAttributeClassifier(
 						currentRenderer,

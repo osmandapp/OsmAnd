@@ -52,10 +52,18 @@ object RouteStatisticsCalculator {
 		attributeNames: List<String>,
 		classifier: RouteAttributeClassifier,
 	): List<RouteStatistic> {
-		if (route == null) {
+		return calculate(route?.let(::RouteSegmentStatisticsAccessor), attributeNames, classifier)
+	}
+
+	fun calculate(
+		accessor: IRouteStatisticsAccessor?,
+		attributeNames: List<String>,
+		classifier: RouteAttributeClassifier,
+	): List<RouteStatistic> {
+		if (accessor == null) {
 			return emptyList()
 		}
-		val segmentsWithIncline = calculateInclineRouteSegments(route)
+		val segmentsWithIncline = calculateInclineRouteSegments(accessor)
 		val result = mutableListOf<RouteStatistic>()
 		for (attributeName in attributeNames) {
 			val statistic = computeStatistic(segmentsWithIncline, attributeName, classifier)
@@ -88,15 +96,17 @@ object RouteStatisticsCalculator {
 		)
 	}
 
-	private fun calculateInclineRouteSegments(route: List<RouteSegment>): List<RouteSegmentWithIncline> {
-		val result = ArrayList<RouteSegmentWithIncline>(route.size)
+	private fun calculateInclineRouteSegments(accessor: IRouteStatisticsAccessor): List<RouteSegmentWithIncline> {
+		val result = ArrayList<RouteSegmentWithIncline>(accessor.getSegmentsCount())
 		var previousHeight = 0f
 		var totalHeightSamples = 0
-		for (segment in route) {
+		for (segmentIndex in 0 until accessor.getSegmentsCount()) {
+			val distanceMeters = accessor.getDistanceMeters(segmentIndex)
+			val heightValues = accessor.getHeightValues(segmentIndex)
 			var previousSampleHeight = previousHeight
 			var sampleIndex = 0
-			val interpolatedHeights = if (segment.distanceMeters.toDouble() > HEIGHT_STEP_METERS) {
-				FloatArray((segment.distanceMeters.toDouble() / HEIGHT_STEP_METERS).toInt() + 1)
+			val interpolatedHeights = if (distanceMeters.toDouble() > HEIGHT_STEP_METERS) {
+				FloatArray((distanceMeters.toDouble() / HEIGHT_STEP_METERS).toInt() + 1)
 			} else {
 				null
 			}
@@ -104,18 +114,18 @@ object RouteStatisticsCalculator {
 				totalHeightSamples += interpolatedHeights.size
 			}
 
-			if (segment.heightValues.isNotEmpty()) {
+			if (heightValues.isNotEmpty()) {
 				var heightIndex = 2
 				var cumulativeDistance = 0f
-				previousSampleHeight = segment.heightValues[1]
+				previousSampleHeight = heightValues[1]
 				if (interpolatedHeights != null && sampleIndex < interpolatedHeights.size) {
 					interpolatedHeights[sampleIndex++] = previousSampleHeight
 				}
 				while (interpolatedHeights != null &&
 					sampleIndex < interpolatedHeights.size &&
-					heightIndex < segment.heightValues.size
+					heightIndex < heightValues.size
 				) {
-					val distance = segment.heightValues[heightIndex] + cumulativeDistance
+					val distance = heightValues[heightIndex] + cumulativeDistance
 					if (distance.toDouble() > sampleIndex * HEIGHT_STEP_METERS) {
 						interpolatedHeights[sampleIndex] = if (distance == cumulativeDistance) {
 							previousSampleHeight
@@ -123,14 +133,14 @@ object RouteStatisticsCalculator {
 							(
 								previousSampleHeight.toDouble() +
 									(sampleIndex * HEIGHT_STEP_METERS - cumulativeDistance.toDouble()) *
-									(segment.heightValues[heightIndex + 1] - previousSampleHeight).toDouble() /
+									(heightValues[heightIndex + 1] - previousSampleHeight).toDouble() /
 									(distance - cumulativeDistance).toDouble()
 							).toFloat()
 						}
 						sampleIndex++
 					} else {
 						cumulativeDistance = distance
-						previousSampleHeight = segment.heightValues[heightIndex + 1]
+						previousSampleHeight = heightValues[heightIndex + 1]
 						heightIndex += 2
 					}
 				}
@@ -140,7 +150,8 @@ object RouteStatisticsCalculator {
 			}
 			result.add(
 				RouteSegmentWithIncline(
-					segment = segment,
+					distanceMeters = distanceMeters,
+					routeTypeFilters = routeTypeFilters(accessor, segmentIndex),
 					interpolatedHeights = interpolatedHeights,
 				),
 			)
@@ -212,8 +223,8 @@ object RouteStatisticsCalculator {
 		for (segment in route) {
 			val slopeClassIndexes = segment.slopeClassIndexes
 			if (slopeClassIndexes == null || slopeClassIndexes.isEmpty()) {
-				val current = classify(attributeName, -1, segment.segment, classifier)
-				current.distanceMeters = segment.segment.distanceMeters
+				val current = classify(attributeName, -1, segment.routeTypeFilters, classifier)
+				current.distanceMeters = segment.distanceMeters
 				if (previous != null && previous.propertyName == current.propertyName) {
 					previous.distanceMeters += current.distanceMeters
 				} else {
@@ -224,7 +235,7 @@ object RouteStatisticsCalculator {
 				for (index in slopeClassIndexes.indices) {
 					val distance = if (index == 0) {
 						(
-							segment.segment.distanceMeters.toDouble() -
+							segment.distanceMeters.toDouble() -
 								HEIGHT_STEP_METERS * (slopeClassIndexes.size - 1)
 						).toFloat()
 					} else {
@@ -233,7 +244,12 @@ object RouteStatisticsCalculator {
 					if (index > 0 && slopeClassIndexes[index] == slopeClassIndexes[index - 1]) {
 						previous!!.distanceMeters += distance
 					} else {
-						val current = classify(attributeName, slopeClassIndexes[index], segment.segment, classifier)
+						val current = classify(
+							attributeName,
+							slopeClassIndexes[index],
+							segment.routeTypeFilters,
+							classifier,
+						)
 						current.distanceMeters = distance
 						if (previous != null && previous.propertyName == current.propertyName) {
 							previous.distanceMeters += current.distanceMeters
@@ -255,10 +271,10 @@ object RouteStatisticsCalculator {
 	private fun classify(
 		attributeName: String,
 		slopeClassIndex: Int,
-		segment: RouteSegment,
+		routeTypeFilters: RouteTypeFilters,
 		classifier: RouteAttributeClassifier,
 	): MutableRouteAttribute {
-		val request = classificationRequest(attributeName, slopeClassIndex, segment)
+		val request = classificationRequest(attributeName, slopeClassIndex, routeTypeFilters)
 		val classification = classifier.classify(request)
 		return MutableRouteAttribute(
 			propertyName = classification?.propertyName ?: UNDEFINED_ATTR,
@@ -272,29 +288,41 @@ object RouteStatisticsCalculator {
 	private fun classificationRequest(
 		attributeName: String,
 		slopeClassIndex: Int,
-		segment: RouteSegment,
+		routeTypeFilters: RouteTypeFilters,
 	): RouteAttributeClassificationRequest {
-		var mainTag: String? = null
-		var mainValue: String? = null
-		val additional = StringBuilder(
-			if (slopeClassIndex >= 0) "${slopeClasses[slopeClassIndex]};" else "",
-		)
-		for (routeType in segment.routeTypes) {
-			if (routeType.tag in mainRouteTags) {
-				if (mainTag == null) {
-					mainTag = routeType.tag
-					mainValue = routeType.value
-				}
-			} else {
-				additional.append(routeType.tag).append('=').append(routeType.value).append(';')
-			}
+		val additional = if (slopeClassIndex >= 0) {
+			"${slopeClasses[slopeClassIndex]};${routeTypeFilters.additional}"
+		} else {
+			routeTypeFilters.additional
 		}
 		return RouteAttributeClassificationRequest(
 			attributeName = attributeName,
-			mainTag = mainTag,
-			mainValue = mainValue,
-			additional = additional.toString(),
+			mainTag = routeTypeFilters.mainTag,
+			mainValue = routeTypeFilters.mainValue,
+			additional = additional,
 		)
+	}
+
+	private fun routeTypeFilters(
+		accessor: IRouteStatisticsAccessor,
+		segmentIndex: Int,
+	): RouteTypeFilters {
+		var mainTag: String? = null
+		var mainValue: String? = null
+		val additional = StringBuilder()
+		for (routeTypeIndex in 0 until accessor.getRouteTypesCount(segmentIndex)) {
+			val tag = accessor.getRouteTypeTag(segmentIndex, routeTypeIndex) ?: continue
+			val value = accessor.getRouteTypeValue(segmentIndex, routeTypeIndex)
+			if (tag in mainRouteTags) {
+				if (mainTag == null) {
+					mainTag = tag
+					mainValue = value
+				}
+			} else {
+				additional.append(tag).append('=').append(value).append(';')
+			}
+		}
+		return RouteTypeFilters(mainTag, mainValue, additional.toString())
 	}
 
 	private fun makePartition(attributes: List<MutableRouteAttribute>): List<MutableRouteAttribute> {
@@ -329,11 +357,18 @@ object RouteStatisticsCalculator {
 	private fun formatSlope(slope: Int, nextSlope: Int): String = "$slope% .. $nextSlope%"
 
 	private class RouteSegmentWithIncline(
-		val segment: RouteSegment,
+		val distanceMeters: Float,
+		val routeTypeFilters: RouteTypeFilters,
 		var interpolatedHeights: FloatArray?,
 		var slopes: FloatArray? = null,
 		var slopeClassIndexes: IntArray? = null,
 		var formattedSlopeClasses: Array<String>? = null,
+	)
+
+	private data class RouteTypeFilters(
+		val mainTag: String?,
+		val mainValue: String?,
+		val additional: String,
 	)
 
 	private data class MutableRouteAttribute(
