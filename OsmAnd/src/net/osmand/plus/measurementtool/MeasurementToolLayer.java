@@ -828,8 +828,11 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 					renderer.setTrackParams(lineAttrs.paint.getColor(), "", ColoringType.TRACK_SOLID, null, null);
 					renderer.setDrawArrows(false);
 					renderer.setGeometryWay(geometryWay);
-					renderer.drawGeometry(canvas, tb, tb.getLatLonBounds(), lineAttrs.paint.getColor(),
-							lineAttrs.paint.getStrokeWidth(), getDashPattern(lineAttrs.paint));
+					QuadRect correctedQuadRect = getCorrectedQuadRect(tb.getLatLonBounds());
+					float scale = view.getMagnificationScale();
+					float strokeWidth = scale > 1.0f ? lineAttrs.paint.getStrokeWidth() / scale : lineAttrs.paint.getStrokeWidth();
+					renderer.drawGeometry(canvas, tb, correctedQuadRect, lineAttrs.paint.getColor(),
+							strokeWidth, getDashPattern(lineAttrs.paint));
 					beforeAfterRenderer = renderer;
 					this.beforeAfterWpt = beforeAfterWpt;
 				}
@@ -971,7 +974,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	private LatLon getElevatedCenterLatLon(@NonNull RotatedTileBox tb) {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
-			PointF pixel = new PointF(tb.getCenterPixelX(), tb.getCenterPixelY());
+			PointF pixel = view.getMagnifiedUnscaledPixel(tb.getCenterPixelX(), tb.getCenterPixelY());
 			return NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, tb, pixel);
 		}
 		return tb.getCenterLatLon();
