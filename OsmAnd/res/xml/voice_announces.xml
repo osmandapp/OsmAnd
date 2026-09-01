@@ -146,6 +146,11 @@
 		android:layout="@layout/preference_switch"
 		android:title="@string/speak_route_deviation" />
 
+	<SwitchPreferenceCompat
+		android:key="pebble_voice"
+		android:layout="@layout/preference_switch"
+		android:title="@string/pebble_voice" />
+
 	<Preference
 		android:key="speed_limit_divider"
 		android:layout="@layout/simple_divider_item"
