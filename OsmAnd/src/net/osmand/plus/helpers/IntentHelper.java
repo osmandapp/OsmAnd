@@ -276,7 +276,7 @@ public class IntentHelper {
 
 	private void buildRoute(@Nullable LatLon start, @NonNull LatLon end,
 	                        @Nullable ApplicationMode appMode, @Nullable List<LatLon> points,
-							@Nullable String routingSettingsQueryParam) {
+							@Nullable String routingSettingsQueryParams) {
 		if (appMode != null) {
 			app.getRoutingHelper().setAppMode(appMode);
 		}
@@ -290,8 +290,8 @@ public class IntentHelper {
 						null, settings.getIntermediatePoints().size());
 			}
 		}
-		if (routingSettingsQueryParam != null) {
-			applyRoutingParams(appMode, routingSettingsQueryParam);
+		if (!Algorithms.isEmpty(routingSettingsQueryParams)) {
+			applyRoutingParams(appMode, routingSettingsQueryParams);
 		}
 
 		mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, appMode, start,
@@ -303,10 +303,10 @@ public class IntentHelper {
 		buildRoute(start, end, appMode, points, null);
 	}
 
-    private void applyRoutingParams(@Nullable final ApplicationMode appMode, @NonNull String routingSettingsQueryParam) {
+    private void applyRoutingParams(@Nullable final ApplicationMode appMode, @NonNull String routingSettingsQueryParams) {
 		if (appMode == null) return;
 		
-		final List<RoutingUriQueryHandler.KeyValue> params = parseRoutingParams(routingSettingsQueryParam);
+		final List<RoutingUriQueryHandler.KeyValue> params = parseRoutingParams(routingSettingsQueryParams);
 		if (Algorithms.isEmpty(params)) return;
 
 		final RoutingSettingsProvider rsProvider =
