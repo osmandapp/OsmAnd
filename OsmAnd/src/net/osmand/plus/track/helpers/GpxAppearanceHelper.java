@@ -98,6 +98,26 @@ public class GpxAppearanceHelper {
 		return gpxFile.isShowArrows();
 	}
 
+	public boolean isLineDashedForTrack(@NonNull GpxFile gpxFile, @Nullable GpxDataItem gpxItem, @Nullable GpxDirItem dirItem) {
+		TrackDrawInfo drawInfo = getTrackDrawInfoForTrack(gpxFile);
+		if (drawInfo != null) {
+			return drawInfo.isDashedLine();
+		} else if (gpxFile.isShowCurrentTrack()) {
+			return settings.CURRENT_TRACK_LINE_DASHED.get();
+		} else if (gpxItem != null) {
+			Boolean dashed = getAppearanceParameter(gpxItem, dirItem, LINE_DASHED);
+			if (dashed != null) {
+				return dashed;
+			}
+		}
+		return gpxFile.isLineDashed();
+	}
+
+	public boolean isLineDashedForTrack(@NonNull GpxFile gpxFile, @Nullable GpxDataItem gpxItem,
+			@Nullable GpxDirItem dirItem, boolean selected) {
+		return selected && isLineDashedForTrack(gpxFile, gpxItem, dirItem);
+	}
+
 	public boolean isShowStartFinishForTrack(@NonNull GpxFile gpxFile, @Nullable GpxDataItem gpxItem, @Nullable GpxDirItem dirItem) {
 		TrackDrawInfo drawInfo = getTrackDrawInfoForTrack(gpxFile);
 		if (drawInfo != null) {
