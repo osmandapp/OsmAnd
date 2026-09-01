@@ -69,6 +69,6 @@ public abstract class BottomSheetDialogFragment extends BaseOsmAndDialogFragment
 	}
 
 	protected int getWindowAnimations(@NonNull Activity context) {
-		return R.style.Animation_MaterialComponents_BottomSheetDialog;
+		return com.google.android.material.R.style.Animation_MaterialComponents_BottomSheetDialog;
 	}
 }

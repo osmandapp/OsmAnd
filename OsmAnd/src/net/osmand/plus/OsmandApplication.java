@@ -7,6 +7,7 @@ import static net.osmand.shared.settings.enums.MetricsConstants.MILES_AND_FEET;
 import static net.osmand.shared.settings.enums.MetricsConstants.MILES_AND_METERS;
 import static btools.routingapp.BRouterServiceConnection.BROUTER_CONNECT_TIMEOUT_MS;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -30,8 +31,6 @@ import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ProcessLifecycleOwner;
-import androidx.multidex.MultiDex;
-import androidx.multidex.MultiDexApplication;
 
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
@@ -143,7 +142,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
 
-public class OsmandApplication extends MultiDexApplication {
+public class OsmandApplication extends Application {
 
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmandApplication.class);
 
@@ -351,12 +350,6 @@ public class OsmandApplication extends MultiDexApplication {
 		if (diagnosticThread != null) {
 			diagnosticThread.interrupt();
 		}
-	}
-
-	@Override
-	protected void attachBaseContext(Context base) {
-		super.attachBaseContext(base);
-		MultiDex.install(this);
 	}
 
 	public AppInitializer getAppInitializer() {

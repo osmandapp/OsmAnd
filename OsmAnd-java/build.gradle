@@ -2,6 +2,11 @@ apply plugin: 'java'
 apply plugin: 'maven-publish'
 apply plugin: 'ivy-publish'
 
+java {
+	sourceCompatibility = JavaVersion.VERSION_1_8
+	targetCompatibility = JavaVersion.VERSION_1_8
+}
+
 configurations {
 	android
 }
@@ -147,4 +152,3 @@ dependencies {
 	implementation 'net.sf.kxml:kxml2:2.1.8'
 	implementation fileTree(include: ['*.jar'], dir: 'libs')
 }
-

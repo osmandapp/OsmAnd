@@ -266,7 +266,7 @@ public class UiUtilities {
 
 	@Nullable
 	public static Drawable getSelectableDrawable(Context ctx) {
-		int bgResId = AndroidUtils.resolveAttribute(ctx, R.attr.selectableItemBackground);
+		int bgResId = AndroidUtils.resolveAttribute(ctx, androidx.appcompat.R.attr.selectableItemBackground);
 		if (bgResId != 0) {
 			return AppCompatResources.getDrawable(ctx, bgResId);
 		}

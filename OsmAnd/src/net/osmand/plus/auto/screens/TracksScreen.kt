@@ -103,7 +103,7 @@ class TracksScreen(
 
     private fun prepareTrackItems() {
         val newMap = HashMap<TrackItem, SelectedGpxFile>()
-        for (track in trackTab.trackItems) {
+        for (track in trackTab.getTrackItems()) {
             track.getFile()?.let { file ->
                 val item = gpxDbHelper.getItem(file) { updateTrack(track, it) }
                 if (item != null) {
@@ -125,9 +125,9 @@ class TracksScreen(
 	private fun setupTracks(templateBuilder: PlaceListNavigationTemplate.Builder) {
 		val latLon = app.mapViewTrackingUtilities.defaultLocation
 		val listBuilder = ItemList.Builder()
-		val tracksSize = trackTab.trackItems.size
+		val tracksSize = trackTab.getTrackItems().size
 		val selectedGpxFiles = ArrayList<SelectedGpxFile>()
-		val tracks = trackTab.trackItems.subList(0, tracksSize.coerceAtMost(contentLimit - 1))
+		val tracks = trackTab.getTrackItems().subList(0, tracksSize.coerceAtMost(contentLimit - 1))
 		val mapRect = KQuadRect()
 		for (track in tracks) {
 			val gpxFile = loadedGpxFiles[track]

@@ -1,10 +1,12 @@
+@file:OptIn(ExperimentalKotlinGradlePluginApi::class)
+
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
 	id("org.jetbrains.kotlin.multiplatform")
 	id("org.jetbrains.kotlin.plugin.serialization")
-	id("com.android.library")
+	id("com.android.kotlin.multiplatform.library")
 	id("maven-publish")
 	id("ivy-publish")
 }
@@ -20,13 +22,20 @@ kotlin {
 		}
 	}
 
-	androidTarget {
+	android {
+		namespace = "net.osmand.shared"
+		compileSdk { version = release(35) }
+		minSdk = 24
+
+		withJava()
+
 		@OptIn(ExperimentalKotlinGradlePluginApi::class)
 		compilerOptions {
 			jvmTarget.set(JvmTarget.JVM_17)
 			freeCompilerArgs.add("-Xjvm-default=all")
 		}
-		publishLibraryVariants("release", "debug")
+
+		withHostTest {  }
 	}
 
 	listOf(
@@ -95,17 +104,6 @@ kotlin {
 	}
 }
 
-android {
-	namespace = "net.osmand.shared"
-	compileSdk = 35
-	compileOptions {
-		sourceCompatibility = JavaVersion.VERSION_17
-		targetCompatibility = JavaVersion.VERSION_17
-	}
-	defaultConfig {
-		minSdk = 24
-	}
-}
 
 version = System.getenv("OSMAND_SHARED_ANDROID_BINARIES_IVY_REVISION") ?: "master-snapshot"
 publishing {

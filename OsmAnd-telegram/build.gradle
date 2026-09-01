@@ -1,9 +1,8 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
 apply from: rootProject.file("versions.gradle")
 
 android {
-	compileSdk osmand_compileSdk
+	compileSdk = osmand_compileSdk
 	buildToolsVersion = osmand_buildToolsVersion
 	namespace = "net.osmand.telegram"
 
@@ -11,10 +10,6 @@ android {
 		sourceCompatibility = JavaVersion.VERSION_17
 		targetCompatibility = JavaVersion.VERSION_17
 	}
-
-    kotlinOptions {
-        jvmTarget = "17"
-    }
 
 	sourceSets {
 		main {
@@ -92,22 +87,21 @@ android {
 			signingConfig signingConfigs.publishing
 		}
 	}
+    packagingOptions {
+        resources {
+            excludes += ['META-INF/proguard/androidx-annotations.pro']
+        }
+    }
 
 
-	lintOptions {
-		// use this line to check all rules except those listed
-		disable 'InvalidPackage'
-		disable 'MissingTranslation'
-	}
-
-	packagingOptions {
-		exclude 'META-INF/proguard/androidx-annotations.pro'
-	}
-	buildFeatures {
+    buildFeatures {
 		aidl true
 	}
+    lint {
+        disable 'InvalidPackage', 'MissingTranslation'
+    }
 
-	applicationVariants.configureEach {
+    applicationVariants.configureEach {
 		def variant = it
 		def taskName = variant.name.capitalize()
 		def mergeAssetsTaskName = "merge${taskName}Assets"
@@ -118,6 +112,26 @@ android {
 		def mapSourceSetPathsName= "map${taskName}SourceSetPaths"
 		tasks.named(mapSourceSetPathsName).configure { osmandTask ->
 			println(osmandTask.getName())
+		}
+		if (taskName.endsWith("Debug")) {
+			tasks.named("compile${taskName}AndroidTestAidl").configure { osmandTask ->
+				osmandTask.dependsOn(copyJavaSources)
+			}
+			tasks.named("process${taskName}AndroidTestManifest").configure { osmandTask ->
+				osmandTask.dependsOn(copyJavaSources)
+			}
+			tasks.named("merge${taskName}AndroidTestAssets").configure { osmandTask ->
+				osmandTask.dependsOn(copyJavaSources)
+			}
+			tasks.named("merge${taskName}AndroidTestJniLibFolders").configure { osmandTask ->
+				osmandTask.dependsOn(copyJavaSources)
+			}
+			tasks.named("merge${taskName}AndroidTestResources").configure { osmandTask ->
+				osmandTask.dependsOn(copyJavaSources)
+			}
+			tasks.named("generate${taskName}AndroidTestResources").configure { osmandTask ->
+				osmandTask.dependsOn(copyJavaSources)
+			}
 		}
 	}
 
@@ -172,7 +186,6 @@ dependencies {
 	implementation project(path: ':OsmAnd-java', configuration: 'android')
 	implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-	implementation 'androidx.multidex:multidex:2.0.1'
 	implementation 'androidx.appcompat:appcompat:1.6.1'
 	implementation 'com.google.android.material:material:1.9.0'
 	implementation 'androidx.browser:browser:1.0.0'

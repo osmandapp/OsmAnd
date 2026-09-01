@@ -27,8 +27,6 @@ import net.osmand.shared.obd.OBDDataComputer.OBDComputerWidget
 import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget
 import net.osmand.util.Algorithms
 import net.osmand.util.CollectionUtils
-import okhttp3.internal.immutableListOf
-import okhttp3.internal.toImmutableList
 
 class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.ConnectionStateListener,
 	RenameOBDDialog.OnDeviceNameChangedCallback, ForgetOBDDeviceDialog.ForgetDeviceListener {
@@ -63,7 +61,7 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 
 	private val uiHandler = Handler(Looper.getMainLooper())
 	private var updateWidgetsHandler: Handler? = null
-	private var items = immutableListOf<Any>()
+	private var items = listOf<Any>()
 
 	private lateinit var adapter: OBDMainFragmentAdapter
 	private var progress: View? = null
@@ -119,7 +117,7 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 
 	override fun setupUI(view: View) {
 		progress = view.findViewById(R.id.progress_bar)
-		items = immutableListOf()
+		items = listOf()
 		setupConnectionState(view)
 		updateButtonState(view)
 		setupVehicleInfo()
@@ -150,7 +148,7 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 			app.getString(protocolStringId)
 		)
 
-		view.findViewById<ImageView?>(R.id.widget_icon).apply {
+		view.findViewById<ImageView>(R.id.widget_icon).apply {
 			background = uiUtilities.getIcon(
 				if (connected) {
 					if (nightMode) R.drawable.bg_widget_type_icon_dark else R.drawable.bg_widget_type_icon_light
