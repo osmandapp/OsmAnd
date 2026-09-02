@@ -5180,4 +5180,8 @@
     <string name="poi_winter_hiking_filter">Idéal pour la randonnée hivernale</string>
     <string name="poi_mtb_yes">Oui</string>
     <string name="poi_winter_hiking_yes">Oui</string>
+    <string name="poi_air_conditioning">Climatisation</string>
+    <string name="poi_website_menu">Menu</string>
+    <string name="poi_air_conditioning_yes">Oui</string>
+    <string name="poi_air_conditioning_no">Non</string>
 </resources>
