@@ -1997,40 +1997,28 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return targetZoom;
 	}
 
-	/**
-	 * @return true if the map location under the given screen point was actually found. When it is
-	 * not found (renderer state is not ready yet, or the point does not hit the map surface) the
-	 * renderer leaves the location unchanged, so it stays equal to the current map target and must
-	 * not be used as a gesture anchor.
-	 */
-	private boolean findFirstTouchMapLocation(float touchPointX, float touchPointY) {
+	private void findFirstTouchMapLocation(float touchPointX, float touchPointY) {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			PointI touchPosition = new PointI((int) touchPointX, (int) touchPointY);
 			PointI touchLocation31 = mapRenderer.getTarget();
 			float height = mapRenderer.getHeightAndLocationFromElevatedPoint(touchPosition, touchLocation31);
-			boolean found = height > NativeUtilities.MIN_ALTITUDE_VALUE;
 			firstTouchLocationX = touchLocation31.getX();
 			firstTouchLocationY = touchLocation31.getY();
-			firstTouchLocationHeight = found ? height : 0.0f;
-			return found;
+			firstTouchLocationHeight = height > NativeUtilities.MIN_ALTITUDE_VALUE ? height : 0.0f;
 		}
-		return false;
 	}
 
-	private boolean findSecondTouchMapLocation(float touchPointX, float touchPointY) {
+	private void findSecondTouchMapLocation(float touchPointX, float touchPointY) {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			PointI touchPosition = new PointI((int) touchPointX, (int) touchPointY);
 			PointI touchLocation31 = mapRenderer.getTarget();
 			float height = mapRenderer.getHeightAndLocationFromElevatedPoint(touchPosition, touchLocation31);
-			boolean found = height > NativeUtilities.MIN_ALTITUDE_VALUE;
 			secondTouchLocationX = touchLocation31.getX();
 			secondTouchLocationY = touchLocation31.getY();
-			secondTouchLocationHeight = found ? height : 0.0f;
-			return found;
+			secondTouchLocationHeight = height > NativeUtilities.MIN_ALTITUDE_VALUE ? height : 0.0f;
 		}
-		return false;
 	}
 
 	public boolean onTouchEvent(MotionEvent event) {
@@ -2672,33 +2660,20 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			if (multiTouchSupport == null || (!multiTouchSupport.isInTiltMode() && !multiTouchSupport.isInZoomAndRotationMode())) {
 				MeasurementToolLayer layer = getMeasurementToolLayer();
 				MapRendererView mapRenderer = getMapRenderer();
-				if (mapRenderer != null && e1 != null && (layer == null || !layer.isInMeasurementMode())) {
+				if (mapRenderer != null && (layer == null || !layer.isInMeasurementMode())) {
 					if (!targetChanged) {
+						targetChanged = true;
 						// Remember last target position before it is changed with map gesture
 						PointI targetPixelPosition = mapRenderer.getTargetScreenPosition();
-						if (!findFirstTouchMapLocation(e1.getX(), e1.getY())) {
-							// The touched map location can not be resolved, so it can not be used as
-							// a gesture anchor: setMapTarget() would keep failing for the whole gesture
-							// and the map would stay frozen until the finger is lifted. Drag the map
-							// the plain way instead, and retry anchoring on the next scroll event.
-							dragToAnimate(e2.getX() + distanceX, e2.getY() + distanceY, e2.getX(), e2.getY(), true);
-							return true;
-						}
-						targetChanged = true;
 						targetPixelX = targetPixelPosition.getX();
 						targetPixelY = targetPixelPosition.getY();
+						findFirstTouchMapLocation(e1.getX(), e1.getY());
 						rotate = MapUtils.unifyRotationTo360(-mapRenderer.getAzimuth());
 					}
 					scrollDistanceX = distanceX;
 					scrollDistanceY = distanceY;
 					PointI touchPoint = new PointI((int) (e2.getX() + scrollDistanceX), (int) (e2.getY() + scrollDistanceY));
-					if (!mapRenderer.setMapTarget(touchPoint, new PointI(firstTouchLocationX, firstTouchLocationY))
-							&& findFirstTouchMapLocation(touchPoint.getX(), touchPoint.getY())) {
-						// The anchor location can not be moved to the touch point anymore. Re-anchor to
-						// whatever is under the touch point now (this does not move the map by itself)
-						// so that the rest of the gesture keeps following the finger.
-						mapRenderer.setMapTarget(touchPoint, new PointI(firstTouchLocationX, firstTouchLocationY));
-					}
+					mapRenderer.setMapTarget(touchPoint, new PointI(firstTouchLocationX, firstTouchLocationY));
 					LatLon latLon = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, currentViewport, targetPixelX, targetPixelY);
 					currentViewport.setLatLonCenter(latLon.getLatitude(), latLon.getLongitude());
 					refreshMap();
