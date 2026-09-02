@@ -5250,4 +5250,19 @@
     <string name="route_calculation_missing_maps_desc">Einige für diese Route benötigte Offline-Karten fehlen. Laden Sie diese herunter, um fortzufahren.</string>
     <string name="route_calculation_mixed_maps_desc">Schnelle Routenführung ist aufgrund unterschiedlicher Kartendaten nicht verfügbar. Der Wechsel zur Standardberechnung kann einige Minuten dauern.</string>
     <string name="route_calculation_missing_maps_estimate_desc">Möglicherweise fehlende Karten wurden anhand der Luftlinie ermittelt.\nWenn Ihre Route diese Gebiete vermeidet, werden vorhandene Karten verwendet.</string>
+    <plurals name="files_count">
+        <item quantity="one">%d Datei</item>
+        <item quantity="other">%d Dateien</item>
+    </plurals>
+    <string name="preparing_file">Datei vorbereiten</string>
+    <string name="shared_string_archive">Archiv</string>
+    <string name="share_favorites_points_only">Nur Punkte</string>
+    <string name="share_favorites_points_and_media">Punkte und Medien</string>
+    <string name="share_favorites_share_failed">Die Datei konnte nicht geteilt werden.</string>
+    <string name="share_favorites_missing_media_warning">Einige angehängte Medien konnten nicht beigefügt werden.</string>
+    <string name="search_on_web">Im Internet suchen</string>
+    <string name="shared_string_note">Anmerkung</string>
+    <string name="media_storage_camera_folder_note_descr">Audio wird unter Music/OsmAnd gespeichert.</string>
+    <string name="always_keep_local_copy">Immer eine lokale Kopie behalten</string>
+    <string name="astro_lunar_eclipse">Mondfinsternis</string>
 </resources>
