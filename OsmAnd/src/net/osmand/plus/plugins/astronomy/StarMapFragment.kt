@@ -171,6 +171,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private var previousViewAngle: Double = 150.0
 	private var eclipseRestoreState: EclipseRestoreState? = null
 	private var activeEclipseType: EclipseExplorerType? = null
+	private var lastStarCameraState: StarViewCameraState? = null
 	private var restoredActiveEclipseCameraState: StarViewCameraState? = null
 	private var lastFocusedEclipseRequestId = -1L
 	private var keepEclipseTargetCenteredForMapMove = false
@@ -310,6 +311,14 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		private const val STATE_ECLIPSE_ACTIVE_CAMERA_PAN_Y = "eclipse_active_camera_pan_y"
 		private const val STATE_ECLIPSE_ACTIVE_CAMERA_ROLL = "eclipse_active_camera_roll"
 
+		private const val STATE_STARVIEW_ACTIVE_CAMERA_AZ = "starview_active_camera_az"
+		private const val STATE_STARVIEW_ACTIVE_CAMERA_ALT = "eclipse_active_camera_alt"
+		private const val STATE_STARVIEW_ACTIVE_CAMERA_FOV = "eclipse_active_camera_fov"
+		private const val STATE_STARVIEW_ACTIVE_CAMERA_2D = "eclipse_active_camera_2d"
+		private const val STATE_STARVIEW_ACTIVE_CAMERA_PAN_X = "eclipse_active_camera_pan_x"
+		private const val STATE_STARVIEW_ACTIVE_CAMERA_PAN_Y = "eclipse_active_camera_pan_y"
+		private const val STATE_STARVIEW_ACTIVE_CAMERA_ROLL = "eclipse_active_camera_roll"
+
 		@JvmStatic
 		fun applyRedFilterToViews(enabled: Boolean, vararg views: View?) {
 			val layerType = if (enabled) View.LAYER_TYPE_HARDWARE else View.LAYER_TYPE_NONE
@@ -378,6 +387,18 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				)
 			}
 		}
+
+		 if (savedInstanceState != null && savedInstanceState.containsKey(STATE_STARVIEW_ACTIVE_CAMERA_FOV)){
+			 lastStarCameraState = StarViewCameraState(
+				azimuth = savedInstanceState.getDouble(STATE_STARVIEW_ACTIVE_CAMERA_AZ),
+				altitude = savedInstanceState.getDouble(STATE_STARVIEW_ACTIVE_CAMERA_ALT),
+				viewAngle = savedInstanceState.getDouble(STATE_STARVIEW_ACTIVE_CAMERA_FOV),
+				is2DMode = savedInstanceState.getBoolean(STATE_STARVIEW_ACTIVE_CAMERA_2D),
+				panX = savedInstanceState.getFloat(STATE_STARVIEW_ACTIVE_CAMERA_PAN_X),
+				panY = savedInstanceState.getFloat(STATE_STARVIEW_ACTIVE_CAMERA_PAN_Y),
+				roll = savedInstanceState.getDouble(STATE_STARVIEW_ACTIVE_CAMERA_ROLL)
+			)
+		}
 		requireActivity().onBackPressedDispatcher.addCallback(this, backPressedCallback)
 		childFragmentManager.addOnBackStackChangedListener {
 			updateBackPressedCallback()
@@ -386,6 +407,22 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	override fun onSaveInstanceState(outState: Bundle) {
 		super.onSaveInstanceState(outState)
+		saveEclipseState(outState)
+		saveStarViewCameraState(outState)
+	}
+
+	private fun saveStarViewCameraState(outState: Bundle) {
+		lastStarCameraState?.let { state ->
+			outState.putDouble(STATE_STARVIEW_ACTIVE_CAMERA_AZ, state.azimuth)
+			outState.putDouble(STATE_STARVIEW_ACTIVE_CAMERA_ALT, state.altitude)
+			outState.putDouble(STATE_STARVIEW_ACTIVE_CAMERA_FOV, state.viewAngle)
+			outState.putBoolean(STATE_STARVIEW_ACTIVE_CAMERA_2D, state.is2DMode)
+			outState.putFloat(STATE_STARVIEW_ACTIVE_CAMERA_PAN_X, state.panX)
+			outState.putFloat(STATE_STARVIEW_ACTIVE_CAMERA_PAN_Y, state.panY)
+			outState.putDouble(STATE_STARVIEW_ACTIVE_CAMERA_ROLL, state.roll)
+		}
+	}
+	private fun saveEclipseState(outState: Bundle) {
 		val restore = eclipseRestoreState ?: return
 		outState.putBoolean(STATE_ECLIPSE_ACTIVE, true)
 		activeEclipseType?.let { outState.putString(STATE_ECLIPSE_TYPE, it.name) }
@@ -649,6 +686,10 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				magnitudeSliderValue.text = text
 			}
 			updateRedMode(config.showRedFilter)
+			config.lastStarCameraState?.let {
+				lastStarCameraState = it
+				starView.restoreCameraState(it)
+			}
 		}
 
 		updateStarMap(true)
@@ -826,6 +867,12 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		mapActivity.refreshMap()
 		updateBackPressedCallback()
 		updateMapControlsVisibility()
+		if (restoredActiveEclipseCameraState == null) {
+			lastStarCameraState?.let { state ->
+				apply2DMode(state.is2DMode)
+				starView.restoreCameraState(state)
+			}
+		}
 		restoredActiveEclipseCameraState?.let { state ->
 			apply2DMode(state.is2DMode)
 			starView.restoreCameraState(state)
@@ -1091,7 +1138,11 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	}
 
 	private fun saveStarMapSettings() {
+		lastStarCameraState = if (::starView.isInitialized) {
+			eclipseRestoreState?.cameraState ?: starView.captureCameraState()
+		} else null
 		astroSettings.updateStarMapConfig { current ->
+			val cameraState = lastStarCameraState ?: current.lastStarCameraState
 			current.copy(
 				showAzimuthalGrid = starView.showAzimuthalGrid,
 				showEquatorialGrid = starView.showEquatorialGrid,
@@ -1115,7 +1166,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				showGlobularClusters = starView.showGlobularClusters,
 				showGalaxyClusters = starView.showGalaxyClusters,
 				is2DMode = starView.is2DMode,
-				magnitudeFilter = starView.magnitudeFilter?.toDouble()
+				magnitudeFilter = starView.magnitudeFilter?.toDouble(),
+				lastStarCameraState = cameraState
 			)
 		}
 	}
