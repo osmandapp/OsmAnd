@@ -270,7 +270,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			long time = System.nanoTime();
 			// detailed geometry of the alternatives is retrieved inside - it is needed to reject
 			// candidates that turn out to run on the very same roads as the main route
-			new HHAlternativeRoutes<T>(this).calcAlternativeRoute(hctx, route, start, end, progress, rrp);
+			new HHAlternativeRoutes<T>(this, hctx).calcAlternativeRoute(route, start, end, progress, rrp);
 			if (progress.isCancelled) {
 				return cancelledStatus(hctx, stPoints, endPoints);
 			}
