@@ -2660,7 +2660,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			if (multiTouchSupport == null || (!multiTouchSupport.isInTiltMode() && !multiTouchSupport.isInZoomAndRotationMode())) {
 				MeasurementToolLayer layer = getMeasurementToolLayer();
 				MapRendererView mapRenderer = getMapRenderer();
-				if (mapRenderer != null && (layer == null || !layer.isInMeasurementMode())) {
+				if (mapRenderer != null && e1 != null && (layer == null || !layer.isInMeasurementMode())) {
 					if (!targetChanged) {
 						targetChanged = true;
 						// Remember last target position before it is changed with map gesture
