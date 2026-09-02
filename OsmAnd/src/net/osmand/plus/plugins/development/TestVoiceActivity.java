@@ -18,9 +18,11 @@ import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.routing.data.StreetName;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.voice.CommandBuilder;
@@ -277,6 +279,9 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		} else {
 			button.setPadding(40, 5, 10, 5);
 		}
+		boolean nightMode = app.getDaynightHelper().isNightMode(settings.APPLICATION_MODE.get(), ThemeUsageContext.APP);
+		int activeColor = ColorUtilities.getActiveColor(this, nightMode);
+		button.setTextColor(ColorUtilities.getContrastColor(this, activeColor, false));
 		if (description.startsWith("\u25BA (11.1)")) {
 			// Buttons with refreshable caption
 			buttonInfo = button;
