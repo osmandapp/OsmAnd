@@ -124,4 +124,28 @@ Many resources (icons, fonts, voice files) are not in the main `res` folder but 
   - Preserve existing file language: When modifying existing .java files, keep the change in Java unless the PR explicitly migrates that file/class to Kotlin.
   - Follow local architecture: Prefer Kotlin/Compose for future Android UI migration work, but do not introduce Kotlin into Java-only modules just to satisfy the default language preference.
 
+## 11. Pull Requests and Commits Written by Agents
+Every pull request an agent opens MUST end with an AI disclaimer. A reviewer who cannot see how a
+change came about has to re-derive the reasoning from the diff, and on a large change that is the
+expensive part of the review. The disclaimer has three parts:
+
+1. **Who** - one line saying the change was produced by an AI agent, and which one.
+2. **Requests** - a summary of what the user actually asked for, in their own terms and in the order
+   they asked. Keep the corrections and the rejected attempts: "the first version of the alternative
+   route drove a pointless loop, rejected" tells a reviewer more than the final state does. Do not
+   merge several requests into one sentence.
+3. **Result** - a summary of what the agent produced: what changed, what was measured or tested, and
+   what is knowingly left out or unverified.
+
+Never put a link to an agent session, transcript or chat log in a pull request or a commit message.
+Such links are not readable by everyone who can read the repository and they rot; everything a
+reviewer needs belongs in the description itself.
+
+Commit messages carry `Co-Authored-By:` for the agent and nothing else. Write them for the reviewer
+too: say what was wrong and why the change fixes it, not only what was edited.
+
+Keep a pull request reviewable in its own right. A new subsystem belongs in its own class rather
+than inside an existing one, and unrelated clean-ups belong in their own commit, so that the diff
+against the existing code stays small enough to read at once.
+
 *Note: This file is a living document and should be updated as the project evolves.*
