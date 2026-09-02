@@ -80,6 +80,11 @@ public class RouteResultPreparation {
 		public List<RouteSegmentResult> getList() {
 			return detailed;
 		}
+
+		/** routes with the same start / end, empty unless they were requested and found */
+		public List<List<RouteSegmentResult>> getAlternatives() {
+			return Collections.emptyList();
+		}
 		
 		public String getError() {
 			return error;

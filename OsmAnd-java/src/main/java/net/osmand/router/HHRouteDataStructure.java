@@ -16,7 +16,6 @@ import com.google.protobuf.CodedInputStream;
 import gnu.trove.iterator.TLongObjectIterator;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
-import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.binary.BinaryHHRouteReaderAdapter.HHRouteRegion;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
@@ -57,12 +56,29 @@ public class HHRouteDataStructure {
 		boolean PRELOAD_SEGMENTS = false;
 		
 		boolean CACHE_CALCULATION_CONTEXT = false;
-		boolean CALC_ALTERNATIVES = false;
+		public boolean CALC_ALTERNATIVES = false;
 		boolean USE_GC_MORE_OFTEN = false;
 		
-		double ALT_EXCLUDE_RAD_MULT = 0.3; // radius multiplier to exclude points
-		double ALT_EXCLUDE_RAD_MULT_IN = 3; // skip some points to speed up calculation
-		double ALT_NON_UNIQUENESS = 0.7; // 0.7 - 30% of points must be unique
+		// ---- alternative routes (plateau / via-node method), see HHRoutePlanner.calcAlternativeRoute ----
+		// A candidate route goes through a "via node" v settled by both search trees: sp(s,v) + sp(v,t).
+		// Its plateau is the maximal chain of hub-graph edges around v that belongs to BOTH trees, i.e.
+		// the stretch the alternative drives as its own optimal road. Three explicit admissibility rules:
+		//   1) stretch    cost(alt) <= (1 + ALT_STRETCH) * cost(opt)
+		//   2) plateau    plateau(v) >= ALT_MIN_PLATEAU * cost(alt)          (local optimality)
+		//   3) distinct   own roads >= max(ALT_MIN_DISTINCT_ABS, ALT_MIN_DISTINCT_REL * len(opt))
+		// ALT_STRETCH also bounds the search horizon, so it directly trades quality for speed.
+		public int ALT_MAX_COUNT = 2; // how many alternatives to return
+		public double ALT_STRETCH = 0.3; // hard limit of relative cost overhead (and search bound)
+		public double ALT_STRETCH_PREFERRED = 0.15; // alternatives below this limit are proposed first
+		public double ALT_MIN_PLATEAU = 0.1; // min share of the route driven as its own optimal road
+		public double ALT_MAX_SHARING = 0.6; // coarse hub-graph pre-filter (stage 1)
+		public double ALT_MIN_DISTINCT_REL = 0.2; // exact geometry filter (stage 2), share of main length
+		public double ALT_MIN_DISTINCT_ABS = 1500; // exact geometry filter (stage 2), meters
+		// Max detailed expansions in stage 2 (time guard). Retries of a candidate whose shortcuts
+		// disagree with the detailed roads count against it, so this is not "number of candidates".
+		public int ALT_MAX_EXPAND = 8;
+		public double ALT_MAX_RETRACED = 100; // meters an alternative may drive twice (u-turn tolerance)
+		public double ALT_RANK_COST_WEIGHT = 3; // rank: (1 - shared) - weight * stretch
 
 		double MAX_COST;
 		int MAX_DEPTH = -1; // max depth to go to
@@ -119,6 +135,12 @@ public class HHRouteDataStructure {
 		
 		public HHRoutingConfig calcAlternative() {
 			this.CALC_ALTERNATIVES = true;
+			return this;
+		}
+
+		public HHRoutingConfig calcAlternative(int maxCount) {
+			this.CALC_ALTERNATIVES = maxCount > 0;
+			this.ALT_MAX_COUNT = maxCount;
 			return this;
 		}
 		
@@ -464,7 +486,6 @@ public class HHRouteDataStructure {
 		public RoutingStats stats;
 		public List<HHNetworkSegmentRes> segments = new ArrayList<>();
 		public List<HHNetworkRouteRes> altRoutes = new ArrayList<>();
-		public TLongHashSet uniquePoints = new TLongHashSet();
 		
 		public HHNetworkRouteRes() {
 			super(new ArrayList<RouteSegmentResult>());
@@ -483,6 +504,16 @@ public class HHRouteDataStructure {
 			return d;
 		}
 		
+		@Override
+		public List<List<RouteSegmentResult>> getAlternatives() {
+			// altRoutes is the storage - this is the same list seen through the generic result
+			List<List<RouteSegmentResult>> alts = new ArrayList<>(altRoutes.size());
+			for (HHNetworkRouteRes alt : altRoutes) {
+				alts.add(alt.detailed);
+			}
+			return alts;
+		}
+
 		public double getHHRoutingDetailed() {
 			double d = 0;
 			for (HHNetworkSegmentRes r : segments) {
@@ -497,8 +528,7 @@ public class HHRouteDataStructure {
 			} else {
 				detailed.addAll(res.detailed);
 				segments.addAll(res.segments);
-				altRoutes.clear();
-				uniquePoints.clear();
+				altRoutes.clear(); // not supported with intermediate points
 			}
 		}
 		
