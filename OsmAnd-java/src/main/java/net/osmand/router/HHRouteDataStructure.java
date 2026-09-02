@@ -69,7 +69,7 @@ public class HHRouteDataStructure {
 		//   3) distinct   own roads >= max(ALT_MIN_DISTINCT_FLOOR, ALT_MIN_DISTINCT_REL * len(opt))
 		// ALT_STRETCH also bounds the search horizon, so it directly trades quality for speed.
 		public int ALT_MAX_COUNT = 2; // how many alternatives to return
-		public double ALT_STRETCH = 0.3; // hard limit of relative cost overhead (and search bound)
+		public double ALT_STRETCH = 0.4; // hard limit of relative cost overhead (and search bound)
 		public double ALT_STRETCH_PREFERRED = 0.15; // alternatives below this limit are proposed first
 		public double ALT_MIN_PLATEAU = 0.1; // min share of the route driven as its own optimal road
 		public double ALT_MAX_SHARING = 0.6; // coarse hub-graph pre-filter (stage 1)

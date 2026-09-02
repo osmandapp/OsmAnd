@@ -70,5 +70,55 @@
       "longitude": 4.823599
     },
     "minAlternatives": 2
+  },
+  {
+    "testName": "Tours -> Nouatre: the A10 corridor, where the second road is +33%",
+    "description": "83% of the fastest route is toll motorway (A10). Within +30% there is only one candidate, the main route with a 24 km loop bolted on (it avoids 3.2 km of it), so the list came back empty; the two real corridors are at +32.7% and +39.4% of cost",
+    "map": "France_centre-loire-valley_europe_2.obf",
+    "startPoint": {
+      "latitude": 47.545713,
+      "longitude": 0.973663
+    },
+    "endPoint": {
+      "latitude": 47.08041,
+      "longitude": 0.606308
+    },
+    "minAlternatives": 2,
+    "expectedVia": [
+      {
+        "name": "the western corridor (D910 / Sainte-Maure)",
+        "latitude": 47.3018,
+        "longitude": 0.882,
+        "toleranceMeters": 1000
+      },
+      {
+        "name": "the eastern corridor (D760 / Azay-le-Rideau)",
+        "latitude": 47.3956,
+        "longitude": 0.7068,
+        "toleranceMeters": 1000
+      }
+    ]
+  },
+  {
+    "testName": "Pisa -> Prato: a toll-free option next to 88% of toll motorway",
+    "description": "The fastest route is A12 + A11. The alternatives are offered inside the normal limit here - one at +12% and one at +27% with only 9.7 km of toll left - which is what the fallback tier must not change",
+    "map": "Italy_toscana_europe_2.obf",
+    "startPoint": {
+      "latitude": 43.716,
+      "longitude": 10.4
+    },
+    "endPoint": {
+      "latitude": 43.88,
+      "longitude": 11.096
+    },
+    "minAlternatives": 2,
+    "expectedVia": [
+      {
+        "name": "the nearly toll-free corridor (SS67 / FI-PI-LI)",
+        "latitude": 43.7036,
+        "longitude": 10.8555,
+        "toleranceMeters": 1000
+      }
+    ]
   }
 ]
