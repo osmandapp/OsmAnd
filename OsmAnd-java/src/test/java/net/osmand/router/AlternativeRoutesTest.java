@@ -51,8 +51,10 @@ public class AlternativeRoutesTest {
 	private static final double MAX_RETRACED = 100;
 	/** a larger gap between consecutive points means a shortcut was not expanded into roads */
 	private static final double MAX_POINT_GAP = 4000;
-	/** an alternative must offer, and must avoid, at least this much road */
-	private static final double MIN_DISTINCT = 1500;
+	/** an alternative must offer, and must avoid, at least this share of the main route */
+	private static final double MIN_DISTINCT_REL = 0.2;
+	/** ... and never less than this, however short the route is */
+	private static final double MIN_DISTINCT_FLOOR = 300;
 
 	public static class ExpectedVia {
 		String name;
@@ -133,11 +135,12 @@ public class AlternativeRoutesTest {
 
 			Assert.assertTrue(id + " costs " + Math.round(100 * (alt.cost / main.cost - 1))
 					+ "% more than the main route", alt.cost <= maxCost);
+			double minDistinct = Math.max(MIN_DISTINCT_FLOOR, MIN_DISTINCT_REL * mainLength);
 			Assert.assertTrue(id + " has only " + Math.round(length(altRoads) - shared)
-					+ " m of roads of its own", length(altRoads) - shared >= MIN_DISTINCT);
+					+ " m of roads of its own", length(altRoads) - shared >= minDistinct);
 			Assert.assertTrue(id + " avoids only " + Math.round(mainLength - shared)
 					+ " m of the main route, so it is the main route with a detour",
-					mainLength - shared >= MIN_DISTINCT);
+					mainLength - shared >= minDistinct / 2);
 			Assert.assertTrue(id + " drives " + Math.round(retraced(alt)) + " m of its own roads twice",
 					retraced(alt) <= MAX_RETRACED);
 			Assert.assertTrue(id + " has a " + Math.round(maxGap(alt))

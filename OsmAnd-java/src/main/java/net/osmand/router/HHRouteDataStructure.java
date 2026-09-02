@@ -23,6 +23,7 @@ import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
+import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
 import net.osmand.router.RouteResultPreparation.RouteCalcResult;
 import net.osmand.util.MapUtils;
 
@@ -65,7 +66,7 @@ public class HHRouteDataStructure {
 		// the stretch the alternative drives as its own optimal road. Three explicit admissibility rules:
 		//   1) stretch    cost(alt) <= (1 + ALT_STRETCH) * cost(opt)
 		//   2) plateau    plateau(v) >= ALT_MIN_PLATEAU * cost(alt)          (local optimality)
-		//   3) distinct   own roads >= max(ALT_MIN_DISTINCT_ABS, ALT_MIN_DISTINCT_REL * len(opt))
+		//   3) distinct   own roads >= max(ALT_MIN_DISTINCT_FLOOR, ALT_MIN_DISTINCT_REL * len(opt))
 		// ALT_STRETCH also bounds the search horizon, so it directly trades quality for speed.
 		public int ALT_MAX_COUNT = 2; // how many alternatives to return
 		public double ALT_STRETCH = 0.3; // hard limit of relative cost overhead (and search bound)
@@ -73,7 +74,10 @@ public class HHRouteDataStructure {
 		public double ALT_MIN_PLATEAU = 0.1; // min share of the route driven as its own optimal road
 		public double ALT_MAX_SHARING = 0.6; // coarse hub-graph pre-filter (stage 1)
 		public double ALT_MIN_DISTINCT_REL = 0.2; // exact geometry filter (stage 2), share of main length
-		public double ALT_MIN_DISTINCT_ABS = 1500; // exact geometry filter (stage 2), meters
+		// Only a floor under the relative rule, for routes too short to make it meaningful: a fixed
+		// requirement of a kilometre or two is a third of a 4 km city route and rejects everything
+		// there, while asking nothing extra of a route long enough for the relative rule to bind.
+		public double ALT_MIN_DISTINCT_FLOOR = 300; // exact geometry filter (stage 2), meters
 		// Max detailed expansions in stage 2 (time guard). Retries of a candidate whose shortcuts
 		// disagree with the detailed roads count against it, so this is not "number of candidates".
 		public int ALT_MAX_EXPAND = 8;
@@ -263,6 +267,13 @@ public class HHRouteDataStructure {
 		Queue<NetworkDBPointCost<T>> queue = createQueue();
 		Queue<NetworkDBPointCost<T>> queuePos = createQueue();
 		Queue<NetworkDBPointCost<T>> queueRev = createQueue();
+
+		/**
+		 * The road segments the route actually starts and ends on, as chosen by the last-mile search
+		 * (they can differ from the nearest ones after a reiteration). Kept because the alternatives
+		 * of a short route are searched on the detailed graph - see HHAlternativeRoutes.
+		 */
+		RouteSegmentPoint startSegment, endSegment;
 
 
 
