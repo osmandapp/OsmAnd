@@ -24,7 +24,8 @@ public class ShowHideCoordinatesGridAction extends QuickAction {
 			.nameRes(R.string.layer_coordinates_grid)
 			.iconRes(R.drawable.ic_action_world_globe)
 			.nonEditable()
-			.category(QuickActionType.CONFIGURE_MAP);
+			.category(QuickActionType.CONFIGURE_MAP)
+			.allowedInAndroidAuto(true);
 
 	private transient CoordinatesGridSettings gridSettings;
 
