@@ -63,8 +63,6 @@ public class RouteResultPreparation {
 	
 	public static class RouteCalcResult {
 		List<RouteSegmentResult> detailed = new ArrayList<RouteSegmentResult>();
-		// alternative routes with the same start / end, empty unless they were requested and found
-		List<List<RouteSegmentResult>> alternatives = new ArrayList<List<RouteSegmentResult>>();
 		String error = null;
 		
 		public RouteCalcResult(List<RouteSegmentResult> list) {
@@ -83,8 +81,9 @@ public class RouteResultPreparation {
 			return detailed;
 		}
 
+		/** routes with the same start / end, empty unless they were requested and found */
 		public List<List<RouteSegmentResult>> getAlternatives() {
-			return alternatives;
+			return Collections.emptyList();
 		}
 		
 		public String getError() {

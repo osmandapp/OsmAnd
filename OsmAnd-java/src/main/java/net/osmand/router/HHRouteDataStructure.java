@@ -16,7 +16,6 @@ import com.google.protobuf.CodedInputStream;
 import gnu.trove.iterator.TLongObjectIterator;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
-import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.binary.BinaryHHRouteReaderAdapter.HHRouteRegion;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
@@ -487,7 +486,6 @@ public class HHRouteDataStructure {
 		public RoutingStats stats;
 		public List<HHNetworkSegmentRes> segments = new ArrayList<>();
 		public List<HHNetworkRouteRes> altRoutes = new ArrayList<>();
-		public TLongHashSet uniquePoints = new TLongHashSet();
 		
 		public HHNetworkRouteRes() {
 			super(new ArrayList<RouteSegmentResult>());
@@ -506,6 +504,16 @@ public class HHRouteDataStructure {
 			return d;
 		}
 		
+		@Override
+		public List<List<RouteSegmentResult>> getAlternatives() {
+			// altRoutes is the storage - this is the same list seen through the generic result
+			List<List<RouteSegmentResult>> alts = new ArrayList<>(altRoutes.size());
+			for (HHNetworkRouteRes alt : altRoutes) {
+				alts.add(alt.detailed);
+			}
+			return alts;
+		}
+
 		public double getHHRoutingDetailed() {
 			double d = 0;
 			for (HHNetworkSegmentRes r : segments) {
@@ -520,9 +528,7 @@ public class HHRouteDataStructure {
 			} else {
 				detailed.addAll(res.detailed);
 				segments.addAll(res.segments);
-				altRoutes.clear();
-				alternatives.clear(); // not supported with intermediate points
-				uniquePoints.clear();
+				altRoutes.clear(); // not supported with intermediate points
 			}
 		}
 		
