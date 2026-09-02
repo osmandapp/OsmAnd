@@ -1122,7 +1122,7 @@
     <string name="poi_bridge_pedestrian">Fußgängerbrücke</string>
     <string name="poi_bridge_bicycle">Fahrradbrücke</string>
     <string name="poi_bridge_railway">Eisenbahnbrücke</string>
-    <string name="poi_note">Notiz</string>
+    <string name="poi_note">Anmerkung</string>
     <string name="poi_historic_aircraft">Historisches Flugzeug</string>
     <string name="poi_elevator_yes">Mit Aufzug</string>
     <string name="poi_elevator_no">Ohne Aufzug</string>
@@ -1211,7 +1211,7 @@
     <string name="poi_step_count">Anzahl Stufen</string>
     <string name="poi_defibrillator">Defibrillator (AED)</string>
     <string name="poi_defibrillator_yes">Defibrillator: ja</string>
-    <string name="poi_horse_yes">Pferde erlaubt</string>
+    <string name="poi_horse_yes">Ja</string>
     <string name="poi_horse_no">Pferde nicht erlaubt</string>
     <string name="poi_animal_yes">Tiere erlaubt</string>
     <string name="poi_animal_no">Tiere nicht erlaubt</string>
@@ -1762,7 +1762,7 @@
     <string name="poi_outdoor_seating_pedestrian_zone">Sitzplätze im Freien: Fußgängerzone</string>
     <string name="poi_outdoor_seating_garden">Sitzplätze im Freien: Garten</string>
     <string name="poi_outdoor_seating_patio">Sitzplätze im Freien: Innenhof</string>
-    <string name="poi_second_hand_yes">Gebrauchtwaren</string>
+    <string name="poi_second_hand_yes">Ja</string>
     <string name="poi_second_hand_no">keine Gebrauchtwaren</string>
     <string name="poi_second_hand_only">Nur Gebrauchtwaren</string>
     <string name="poi_service_parts">Teile</string>
@@ -3637,7 +3637,7 @@
     <string name="poi_tourist_bus_yes">Zufahrt Reisebus: ja</string>
     <string name="poi_tourist_bus_designated">Zufahrt Reisebus: ausgewiesen</string>
     <string name="poi_tourist_bus_no">Zufahrt Reisebus: nein</string>
-    <string name="poi_ski_yes">Zufahrt Ski: ja</string>
+    <string name="poi_ski_yes">Ja</string>
     <string name="poi_ski_no">Zufahrt Ski: nein</string>
     <string name="poi_snowmobile_private">Zufahrt Schneemobil: privat</string>
     <string name="poi_access_trailer">Zufahrt Anhänger</string>
@@ -4455,7 +4455,7 @@
     <string name="poi_socket_tesla_standard_voltage">Sockel: Tesla Standard: Spannung</string>
     <string name="poi_socket_nema_5_20_voltage">Sockel: NEMA 5-20: Spannung</string>
     <string name="poi_socket_nema_14_50_voltage">Sockel: NEMA 14-50: Spannung</string>
-    <string name="poi_hiking_filter">Für Wanderer</string>
+    <string name="poi_hiking_filter">Für Wanderer geeignet</string>
     <string name="poi_hiking_yes">Ja</string>
     <string name="poi_socket_type2_voltage_filter">Typ 2-Anschluss Spannung</string>
     <string name="poi_socket_type2_combo_voltage_filter">Typ2 Combo-Anschluss Spannung</string>
@@ -5174,4 +5174,14 @@
     <string name="poi_water_type_filter">Wassertyp</string>
     <string name="poi_water_lake">See</string>
     <string name="poi_surface_laterite">Oberfläche: Laterit</string>
+    <string name="poi_air_conditioning_yes">Ja</string>
+    <string name="poi_air_conditioning_no">Nein</string>
+    <string name="poi_mtb_filter">Für MTB geeignet</string>
+    <string name="poi_ski_filter">Für Ski geeignet</string>
+    <string name="poi_horse_filter">Zum Reiten geeignet</string>
+    <string name="poi_winter_hiking_filter">Für Winterwanderungen geeignet</string>
+    <string name="poi_website_menu">Menü</string>
+    <string name="poi_winter_hiking_yes">Ja</string>
+    <string name="poi_mtb_yes">Ja</string>
+    <string name="poi_air_conditioning">Klimaanlage</string>
 </resources>
