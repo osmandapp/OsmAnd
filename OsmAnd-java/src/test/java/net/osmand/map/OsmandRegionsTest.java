@@ -1,6 +1,5 @@
 package net.osmand.map;
 
-import net.osmand.CollatorStringMatcher;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapDataObject;
 
@@ -28,17 +27,13 @@ public class OsmandRegionsTest {
     public void testSearchRegionByRef() {
         WorldRegion meuse = osmandRegions.getRegionDataByDownloadName("france_great-east_meuse_europe");
         Assert.assertNotNull(meuse);
-        Assert.assertFalse(matches("55", meuse));
-        Assert.assertTrue(matches("FR-55", meuse));
+        Assert.assertFalse(OsmandRegions.isRegionNameMatched("1", meuse.getRegionSearchText()));
+        Assert.assertFalse(OsmandRegions.isRegionNameMatched("55", meuse.getRegionSearchText()));
+        Assert.assertTrue(OsmandRegions.isRegionNameMatched("FR-55", meuse.getRegionSearchText()));
 
         WorldRegion pennsylvania = osmandRegions.getRegionDataByDownloadName("us_pennsylvania_northamerica");
         Assert.assertNotNull(pennsylvania);
-        Assert.assertTrue(matches("PA", pennsylvania));
-    }
-
-    private boolean matches(String query, WorldRegion region) {
-        return new CollatorStringMatcher(query, CollatorStringMatcher.StringMatcherMode.CHECK_EQUALS_FROM_SPACE)
-                .matches(region.getRegionSearchText());
+        Assert.assertTrue(OsmandRegions.isRegionNameMatched("PA", pennsylvania.getRegionSearchText()));
     }
 
     @Test
