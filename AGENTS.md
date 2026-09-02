@@ -130,10 +130,9 @@ change came about has to re-derive the reasoning from the diff, and on a large c
 expensive part of the review. The disclaimer has three parts:
 
 1. **Who** - one line saying the change was produced by an AI agent, and which one.
-2. **Requests** - a summary of what the user actually asked for, in their own terms and in the order
+2. **Requests** - a summary of what the user actually asked for in english and summary, in their own terms and in the order
    they asked. Keep the corrections and the rejected attempts: "the first version of the alternative
-   route drove a pointless loop, rejected" tells a reviewer more than the final state does. Do not
-   merge several requests into one sentence.
+   route drove a pointless loop, rejected" tells a reviewer more than the final state does. 
 3. **Result** - a summary of what the agent produced: what changed, what was measured or tested, and
    what is knowingly left out or unverified.
 
