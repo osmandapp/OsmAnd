@@ -57,6 +57,7 @@ public class OsmandRegions {
 	public static final String FIELD_LEFT_HAND_DRIVING = "region_left_hand_navigation";
 	public static final String FIELD_WIKI_LINK = "region_wiki_link";
 	public static final String FIELD_POPULATION = "region_population";
+	public static final String FIELD_REGION_REF = "osmand_region_ref";
 	public static final String LOCALE_NAME_DEFAULT_FORMAT = "%1$s %2$s";
 	public static final String LOCALE_NAME_REVERSED_FORMAT = "%2$s, %1$s";
 
@@ -650,9 +651,9 @@ public class OsmandRegions {
 			TagValuePair tp = mi.decodeType(it.key());
 			if (tp.tag.startsWith("name") || tp.tag.equals("key_name")
 					|| tp.tag.startsWith("alt_name") || tp.tag.startsWith("short_name")
-					|| tp.tag.equals("name:abbreviation") || tp.tag.equals("ref")) {
+					|| tp.tag.equals("name:abbreviation") || tp.tag.equals(FIELD_REGION_REF)) {
 				final String vl = it.value().toLowerCase(Locale.US);
-				if (ind.indexOf(vl) == -1 || tp.tag.equals("ref")) {
+				if (ind.indexOf(vl) == -1 || tp.tag.equals(FIELD_REGION_REF)) {
 					ind.append(" ").append(vl);
 				}
 			}
