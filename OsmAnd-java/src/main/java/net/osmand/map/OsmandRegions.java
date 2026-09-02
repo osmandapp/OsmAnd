@@ -14,6 +14,7 @@ import net.osmand.data.QuadTree;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
+import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -664,7 +665,7 @@ public class OsmandRegions {
 
 	public static boolean isRegionNameMatched(String query, String regionName) {
 		return Algorithms.isNotEmpty(regionName)
-				&& new CollatorStringMatcher(query, CollatorStringMatcher.StringMatcherMode.CHECK_EQUALS_FROM_SPACE)
+				&& new NameStringMatcher(query, CollatorStringMatcher.StringMatcherMode.CHECK_EQUALS_FROM_SPACE)
 				.matches(regionName);
 	}
 
