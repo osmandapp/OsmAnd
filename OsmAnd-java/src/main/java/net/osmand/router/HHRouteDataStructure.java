@@ -57,7 +57,7 @@ public class HHRouteDataStructure {
 		boolean PRELOAD_SEGMENTS = false;
 		
 		boolean CACHE_CALCULATION_CONTEXT = false;
-		boolean CALC_ALTERNATIVES = false;
+		public boolean CALC_ALTERNATIVES = false;
 		boolean USE_GC_MORE_OFTEN = false;
 		
 		// ---- alternative routes (plateau / via-node method), see HHRoutePlanner.calcAlternativeRoute ----
