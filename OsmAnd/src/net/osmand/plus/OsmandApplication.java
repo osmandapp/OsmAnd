@@ -322,7 +322,10 @@ public class OsmandApplication extends MultiDexApplication {
 	 * <p>
 	 * The flag only exists to support Compose on a non-main thread, which OsmAnd never does, so
 	 * falling back to the main looper handler is safe. To be removed once the upstream bug
-	 * (b/486998514) is fixed.
+	 * (b/486235925) is fixed.
+	 *
+	 * TODO(#25667): on BOM bump, if compose-ui >= 1.13.0 (b/486235925 fixed), delete this method
+	 * and ComposeChipDetachFromWindowTest.
 	 */
 	private void applyComposeWorkarounds() {
 		AndroidComposeUiFlags.isViewBasedSemanticsHandlerEnabled = false;
