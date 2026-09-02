@@ -30,6 +30,10 @@ public class OsmandRegionsTest {
         Assert.assertNotNull(meuse);
         Assert.assertFalse(matches("55", meuse));
         Assert.assertTrue(matches("FR-55", meuse));
+
+        WorldRegion pennsylvania = osmandRegions.getRegionDataByDownloadName("us_pennsylvania_northamerica");
+        Assert.assertNotNull(pennsylvania);
+        Assert.assertTrue(matches("PA", pennsylvania));
     }
 
     private boolean matches(String query, WorldRegion region) {
