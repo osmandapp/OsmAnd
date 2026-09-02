@@ -64,20 +64,6 @@ public class DoubleTapScaleDetector {
 			mIsInZoomMode = false;
 			return false;
 		}
-		if (event.getAction() == MotionEvent.ACTION_CANCEL) {
-			// A cancelled gesture never delivers ACTION_UP. Without this reset the detector stays in
-			// zoom / double tap mode, and OsmandMapTileView keeps skipping the gesture detector and
-			// the map layers, so the whole next gesture is silently ignored.
-			boolean handled = mIsInZoomMode;
-			if (mIsInZoomMode) {
-				mIsInZoomMode = false;
-				listener.onZoomEnded(scale);
-			}
-			resetEvents();
-			mIsDoubleTapping = false;
-			mScrolling = false;
-			return handled;
-		}
 		if (event.getAction() == MotionEvent.ACTION_UP) {
 			boolean handled = false;
 			if (mIsInZoomMode) {
