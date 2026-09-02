@@ -905,7 +905,8 @@ public class QuickSearchHelper implements ResourceListener {
 			if (group.getType().isScreen() && group.getParentGroup() != null
 					&& group.getParentGroup().getParentGroup() != null
 					&& group.getParentGroup().getParentGroup().getType() != DownloadResourceGroupType.WORLD
-					&& OsmandRegions.isRegionNameMatched(phrase.getFullSearchPhrase(), name)) {
+					&& OsmandRegions.isRegionNameMatched(phrase.getFullSearchPhrase(), name,
+							region == null ? null : region.getRegionSearchRef())) {
 
 				for (DownloadResourceGroup g : group.getGroups()) {
 					if (g.getType() == DownloadResourceGroupType.REGION_MAPS) {

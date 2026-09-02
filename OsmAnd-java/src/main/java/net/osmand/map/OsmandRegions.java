@@ -597,6 +597,7 @@ public class OsmandRegions {
 		rd.params.wikiLink = mapIndexFields.get(mapIndexFields.wikiLinkType, object);
 		rd.params.population = mapIndexFields.get(mapIndexFields.populationType, object);
 		rd.regionSearchText = getSearchIndex(object);
+		rd.regionSearchRef = getRegionSearchRef(object);
 		rd.regionMapDownload = isDownloadOfType(object, MAP_TYPE);
 		rd.regionRoadsDownload = isDownloadOfType(object, ROADS_TYPE);
 		rd.regionJoinMapDownload = isDownloadOfType(object, MAP_JOIN_TYPE);
@@ -653,9 +654,9 @@ public class OsmandRegions {
 			TagValuePair tp = mi.decodeType(it.key());
 			if (tp.tag.startsWith("name") || tp.tag.equals("key_name")
 					|| tp.tag.startsWith("alt_name") || tp.tag.startsWith("short_name")
-					|| tp.tag.equals("name:abbreviation") || tp.tag.equals(FIELD_REGION_REF)) {
+					|| tp.tag.equals("name:abbreviation")) {
 				final String vl = it.value().toLowerCase(Locale.US);
-				if (ind.indexOf(vl) == -1 || tp.tag.equals(FIELD_REGION_REF)) {
+				if (ind.indexOf(vl) == -1) {
 					ind.append(" ").append(vl);
 				}
 			}
@@ -663,10 +664,28 @@ public class OsmandRegions {
 		return ind.toString();
 	}
 
-	public static boolean isRegionNameMatched(String query, String regionName) {
-		return Algorithms.isNotEmpty(regionName)
-				&& new NameStringMatcher(query, CollatorStringMatcher.StringMatcherMode.CHECK_EQUALS_FROM_SPACE)
-				.matches(regionName);
+	private String getRegionSearchRef(BinaryMapDataObject object) {
+		TIntObjectIterator<String> it = object.getObjectNames().iterator();
+		while (it.hasNext()) {
+			it.advance();
+			TagValuePair tp = object.getMapIndex().decodeType(it.key());
+			if (tp.tag.equals(FIELD_REGION_REF)) {
+				return it.value();
+			}
+		}
+		return null;
+	}
+
+	public static boolean isRegionNameMatched(String query, String regionName, String regionSearchRef) {
+		if (Algorithms.isNotEmpty(regionSearchRef) && query.equalsIgnoreCase(regionSearchRef)) {
+			return true;
+		}
+		if (Algorithms.isNotEmpty(regionName)) {
+			NameStringMatcher matcher = new NameStringMatcher(query,
+					CollatorStringMatcher.StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
+			return matcher.matches(regionName);
+		}
+		return false;
 	}
 
 	public boolean isDownloadOfType(BinaryMapDataObject object, String type) {

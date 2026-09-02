@@ -44,6 +44,7 @@ public class WorldRegion implements Serializable {
 	protected String regionNameEn;
 	protected String regionNameLocale;
 	protected String regionSearchText;
+	protected String regionSearchRef;
 	protected String regionDownloadName;
 	protected boolean regionMapDownload;
 	protected boolean regionRoadsDownload;
@@ -135,6 +136,10 @@ public class WorldRegion implements Serializable {
 
 	public String getRegionSearchText() {
 		return regionSearchText;
+	}
+
+	public String getRegionSearchRef() {
+		return regionSearchRef;
 	}
 
 	public WorldRegion getSuperregion() {

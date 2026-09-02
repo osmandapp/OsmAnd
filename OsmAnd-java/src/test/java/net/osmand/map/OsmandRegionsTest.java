@@ -27,13 +27,17 @@ public class OsmandRegionsTest {
     public void testSearchRegionByRef() {
         WorldRegion meuse = osmandRegions.getRegionDataByDownloadName("france_great-east_meuse_europe");
         Assert.assertNotNull(meuse);
-        Assert.assertFalse(OsmandRegions.isRegionNameMatched("1", meuse.getRegionSearchText()));
-        Assert.assertFalse(OsmandRegions.isRegionNameMatched("55", meuse.getRegionSearchText()));
-        Assert.assertTrue(OsmandRegions.isRegionNameMatched("FR-55", meuse.getRegionSearchText()));
+        Assert.assertFalse(matches("1", meuse));
+        Assert.assertFalse(matches("55", meuse));
+        Assert.assertTrue(matches("FR-55", meuse));
 
         WorldRegion pennsylvania = osmandRegions.getRegionDataByDownloadName("us_pennsylvania_northamerica");
         Assert.assertNotNull(pennsylvania);
-        Assert.assertTrue(OsmandRegions.isRegionNameMatched("PA", pennsylvania.getRegionSearchText()));
+        Assert.assertTrue(matches("PA", pennsylvania));
+    }
+
+    private boolean matches(String query, WorldRegion region) {
+        return OsmandRegions.isRegionNameMatched(query, region.getRegionSearchText(), region.getRegionSearchRef());
     }
 
     @Test
