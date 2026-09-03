@@ -27,16 +27,16 @@ public class OsmandRegionsTest {
     public void testRegionSearchMatching() {
         WorldRegion pennsylvania = osmandRegions.getRegionDataByDownloadName("us_pennsylvania_northamerica");
         Assert.assertFalse(matches("1", pennsylvania)); // 1-char queries matched all regions
-        Assert.assertTrue(matches("PA", pennsylvania));
+        Assert.assertTrue(matches("PA", pennsylvania)); // ref
 
         WorldRegion meuse = osmandRegions.getRegionDataByDownloadName("france_great-east_meuse_europe");
-        Assert.assertFalse(matches("55", meuse));
+        Assert.assertFalse(matches("55", meuse)); // ref
 
         WorldRegion bicol = osmandRegions.getRegionDataByDownloadName("philippines_bicol-region_asia");
-        Assert.assertFalse(matches("5", bicol));
+        Assert.assertFalse(matches("5", bicol)); // alt_name
 
         WorldRegion centralVisayas = osmandRegions.getRegionDataByDownloadName("philippines_central-visayas_asia");
-        Assert.assertFalse(matches("7", centralVisayas));
+        Assert.assertFalse(matches("7", centralVisayas)); // alt_name
     }
 
     private boolean matches(String query, WorldRegion region) {

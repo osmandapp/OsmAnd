@@ -15,6 +15,7 @@ import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
+import net.osmand.util.SearchAlgorithms;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -653,13 +654,33 @@ public class OsmandRegions {
 			if (tp.tag.startsWith("name") || tp.tag.equals("key_name")
 					|| tp.tag.startsWith("alt_name") || tp.tag.startsWith("short_name")
 					|| tp.tag.equals("name:abbreviation") || tp.tag.equals("ref")) {
-				final String vl = it.value().toLowerCase(Locale.US);
-				if (ind.indexOf(vl) == -1 || tp.tag.equals("ref")) {
+				String vl = it.value().toLowerCase(Locale.US);
+				if (tp.tag.equals("ref") || tp.tag.startsWith("alt_name")) {
+					vl = removeElementsWithNumbers(vl); // see testRegionSearchMatching()
+				}
+				if (Algorithms.isNotEmpty(vl) && (tp.tag.equals("ref") || ind.indexOf(vl) == -1)) {
 					ind.append(" ").append(vl);
 				}
 			}
 		}
 		return ind.toString();
+	}
+
+	private String removeElementsWithNumbers(String value) {
+		List<String> values = new ArrayList<>();
+		for (String item : value.split(";")) {
+			boolean containsNumber = false;
+			for (String token : SearchAlgorithms.splitAndNormalize(item, false)) {
+				if (Algorithms.isInt(token)) {
+					containsNumber = true;
+					break;
+				}
+			}
+			if (!containsNumber) {
+				values.add(item);
+			}
+		}
+		return String.join(";", values);
 	}
 
 	public static boolean isRegionNameMatched(String query, String regionName) {
