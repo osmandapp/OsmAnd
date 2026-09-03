@@ -1,5 +1,6 @@
 package net.osmand.map;
 
+import net.osmand.CollatorStringMatcher;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
@@ -10,6 +11,7 @@ import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
+import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
@@ -660,6 +662,11 @@ public class OsmandRegions {
 		return ind.toString();
 	}
 
+	public static boolean isRegionNameMatched(String query, String regionName) {
+		return Algorithms.isNotEmpty(regionName)
+				&& new NameStringMatcher(query, CollatorStringMatcher.StringMatcherMode.CHECK_EQUALS_FROM_SPACE)
+						.matches(regionName);
+	}
 
 	public boolean isDownloadOfType(BinaryMapDataObject object, String type) {
 		int[] addtypes = object.getAdditionalTypes();

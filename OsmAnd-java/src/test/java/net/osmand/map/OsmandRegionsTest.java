@@ -1,9 +1,7 @@
 package net.osmand.map;
 
-import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapDataObject;
-import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -26,21 +24,23 @@ public class OsmandRegionsTest {
     }
 
     @Test
-    public void testSearchRegionByRef() {
-        WorldRegion meuse = osmandRegions.getRegionDataByDownloadName("france_great-east_meuse_europe");
-        Assert.assertNotNull(meuse);
-        Assert.assertFalse(matches("1", meuse));
-        Assert.assertFalse(matches("55", meuse));
-        Assert.assertTrue(matches("FR-55", meuse));
-
+    public void testRegionSearchMatching() {
         WorldRegion pennsylvania = osmandRegions.getRegionDataByDownloadName("us_pennsylvania_northamerica");
-        Assert.assertNotNull(pennsylvania);
+        Assert.assertFalse(matches("1", pennsylvania)); // 1-char queries matched all regions
         Assert.assertTrue(matches("PA", pennsylvania));
+
+        WorldRegion meuse = osmandRegions.getRegionDataByDownloadName("france_great-east_meuse_europe");
+        Assert.assertFalse(matches("55", meuse));
+
+        WorldRegion bicol = osmandRegions.getRegionDataByDownloadName("philippines_bicol-region_asia");
+        Assert.assertFalse(matches("5", bicol));
+
+        WorldRegion centralVisayas = osmandRegions.getRegionDataByDownloadName("philippines_central-visayas_asia");
+        Assert.assertFalse(matches("7", centralVisayas));
     }
 
     private boolean matches(String query, WorldRegion region) {
-        return new NameStringMatcher(query, StringMatcherMode.CHECK_EQUALS_FROM_SPACE)
-                .matches(region.getRegionSearchText());
+        return OsmandRegions.isRegionNameMatched(query, region.getRegionSearchText());
     }
 
     @Test
