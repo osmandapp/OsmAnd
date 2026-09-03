@@ -3,6 +3,11 @@ package net.osmand.plus.plugins.development;
 import android.app.ActionBar;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
+import android.content.res.ColorStateList;
+import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.RippleDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -14,7 +19,9 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.graphics.ColorUtils;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
@@ -22,6 +29,7 @@ import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.routing.data.StreetName;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
@@ -56,22 +64,26 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		LinearLayout gl = new LinearLayout(this);
 		gl.setId(R.id.root);
 		gl.setOrientation(LinearLayout.VERTICAL);
-		gl.setPadding(3, 3, 3, 3);
+
+		int contentPadding = AndroidUtils.dpToPx(this, 16);
 
 		TextView tv = new TextView(this);
 		tv.setText(R.string.test_voice_desrc);
-		tv.setPadding(0, 5, 0, 7);
-		
+		tv.setPadding(contentPadding, AndroidUtils.dpToPx(this, 12), contentPadding, AndroidUtils.dpToPx(this, 8));
+		gl.addView(tv, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
 		ScrollView sv = new ScrollView(this);
 		sv.setId(R.id.scroll_view);
+		sv.setClipToPadding(false);
 		gl.addView(sv, new LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
 				android.view.ViewGroup.LayoutParams.MATCH_PARENT));
 		LinearLayout ll = new LinearLayout(this);
 		ll.setId(R.id.container);
 		ll.setOrientation(LinearLayout.VERTICAL);
+		ll.setPadding(0, 0, 0, AndroidUtils.dpToPx(this, 16));
 		sv.addView(ll, new LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
 				android.view.ViewGroup.LayoutParams.MATCH_PARENT));
-		
+
 		// add buttons
 		setContentView(gl);
 		getSupportActionBar().setTitle(R.string.test_voice_prompts);
@@ -268,25 +280,40 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 	}
 
 	public void addButton(ViewGroup layout, String description, CommandBuilder builder) {
+		boolean isHeadline = !description.startsWith("\u25BA (");
+		boolean nightMode = app.getDaynightHelper().isNightMode(settings.APPLICATION_MODE.get(), ThemeUsageContext.APP);
+		// Text drawn in the app's active/accent color always contrasts with the plain
+		// page background (it is the same color the app uses elsewhere for links and
+		// active state text), so it is safe in both themes without per-theme math.
+		int activeColor = ColorUtilities.getActiveColor(this, nightMode);
+
 		Button button = new Button(this);
-		button.setGravity(Gravity.LEFT);
+		button.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+		button.setAllCaps(false);
 		button.setTransformationMethod(null); //or else button text is all upper case
 		button.setText(description);
-		button.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-		if (!description.startsWith("\u25BA (")) {
-			// Section headline buttons
-			button.setPadding(10, 20, 10, 5);
+		button.setTextColor(activeColor);
+
+		int hMargin = AndroidUtils.dpToPx(this, 16);
+		LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+		params.leftMargin = hMargin;
+		params.rightMargin = hMargin;
+		if (isHeadline) {
+			// Section headlines: bold accent-colored label, no button chrome
+			button.setBackground(null);
+			button.setTypeface(button.getTypeface(), Typeface.BOLD);
+			button.setPadding(0, AndroidUtils.dpToPx(this, 20), 0, AndroidUtils.dpToPx(this, 6));
+			params.topMargin = AndroidUtils.dpToPx(this, 4);
 		} else {
-			button.setPadding(40, 5, 10, 5);
+			button.setBackground(createOutlinedButtonBackground(activeColor));
+			int vPad = AndroidUtils.dpToPx(this, 12);
+			int hPad = AndroidUtils.dpToPx(this, 14);
+			button.setPadding(hPad, vPad, hPad, vPad);
+			params.topMargin = AndroidUtils.dpToPx(this, 4);
+			params.bottomMargin = AndroidUtils.dpToPx(this, 4);
 		}
-		boolean nightMode = app.getDaynightHelper().isNightMode(settings.APPLICATION_MODE.get(), ThemeUsageContext.APP);
-		if (!nightMode) {
-			// Only the light theme paints the default Button background with the accent
-			// color (see android:buttonStyle in osmand_light_style.xml); the dark theme
-			// keeps the platform default button background/text, which already contrasts.
-			int activeColor = ColorUtilities.getActiveColor(this, false);
-			button.setTextColor(ColorUtilities.getContrastColor(this, activeColor, false));
-		}
+		button.setLayoutParams(params);
+
 		if (description.startsWith("\u25BA (11.1)")) {
 			// Buttons with refreshable caption
 			buttonInfo = button;
@@ -295,7 +322,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		} else if (description.startsWith("\u25BA (11.3)")) {
 			buttonDisplay = button;
 		}
-		
+
 		layout.addView(button);
 		button.setOnClickListener(new View.OnClickListener() {
 
@@ -332,6 +359,19 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 				}
 			}
 		});
+	}
+
+	@NonNull
+	private Drawable createOutlinedButtonBackground(int color) {
+		float radius = AndroidUtils.dpToPxF(this, 10);
+		GradientDrawable shape = new GradientDrawable();
+		shape.setShape(GradientDrawable.RECTANGLE);
+		shape.setCornerRadius(radius);
+		shape.setColor(android.graphics.Color.TRANSPARENT);
+		shape.setStroke(AndroidUtils.dpToPx(this, 1), color);
+
+		ColorStateList rippleColor = ColorStateList.valueOf(ColorUtils.setAlphaComponent(color, 40));
+		return new RippleDrawable(rippleColor, shape, shape);
 	}
 
 	@Override
