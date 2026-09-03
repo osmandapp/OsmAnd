@@ -386,6 +386,8 @@ dependencies {
 	implementation 'androidx.gridlayout:gridlayout:1.1.0'
 	implementation 'androidx.cardview:cardview:1.0.0'
 	implementation 'androidx.appcompat:appcompat:1.7.1'
+	implementation 'androidx.fragment:fragment:1.8.9'
+	implementation 'androidx.drawerlayout:drawerlayout:1.2.0'
 	implementation 'com.google.android.material:material:1.14.0'
 	implementation 'androidx.browser:browser:1.0.0'
 	implementation 'androidx.preference:preference:1.1.0'

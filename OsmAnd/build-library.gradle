@@ -46,8 +46,8 @@ android {
 	libraryVariants.configureEach {
 		def variant = it
 		def taskName = variant.name.capitalize()
-		def packageAssetsTaskName = "package${taskName}Assets"
-		tasks.named(packageAssetsTaskName).configure { osmandTask ->
+		def mergeAssetsTaskName = "merge${taskName}Assets"
+		tasks.named(mergeAssetsTaskName).configure { osmandTask ->
 			println(osmandTask.getName())
 			osmandTask.dependsOn(copyProjDb)
 			osmandTask.dependsOn(collectFonts)
