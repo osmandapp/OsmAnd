@@ -134,6 +134,7 @@
 
 	<dimen name="map_ruler_width">120dp</dimen>
 	<dimen name="map_ruler_bottom_margin">9dp</dimen>
+	<dimen name="map_ruler_text_size">15sp</dimen>
 	<dimen name="map_alarm_size">92dp</dimen>
 	<dimen name="map_alarm_bottom_text_margin">8dp</dimen>
 
