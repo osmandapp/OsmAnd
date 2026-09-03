@@ -915,6 +915,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		super.updateMainViewLayout(posY);
 		updateStatusBarColor();
 		updateToolbar(posY, true);
+		// the menu covers a different part of the map now, so the map center has to be moved
+		mapDisplayPositionManager.updateMapDisplayPosition(true);
 	}
 
 	@Override
