@@ -243,6 +243,10 @@ public class MultiTouchSupport {
 		return secondPoint;
 	}
 
+	public double getZoomRelative() {
+		return zoomRelative;
+	}
+
 	public static boolean isTiltSupportEnabled(@NonNull OsmandApplication app) {
 		return isTiltSupported(app);
 	}

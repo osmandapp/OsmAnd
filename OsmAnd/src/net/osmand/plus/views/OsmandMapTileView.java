@@ -2195,6 +2195,27 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return animatedMapMarkersThread;
 	}
 
+	@NonNull
+	public PointF getMagnifiedUnscaledPixel(float screenX, float screenY) {
+		float scale = getMagnificationScale();
+		if (scale > 1.0f && multiTouchSupport != null) {
+			PointF firstPoint = multiTouchSupport.getFirstPoint();
+			float unscaledX = firstPoint.x + (screenX - firstPoint.x) / scale;
+			float unscaledY = firstPoint.y + (screenY - firstPoint.y) / scale;
+			return new PointF(unscaledX, unscaledY);
+		}
+		return new PointF(screenX, screenY);
+	}
+
+	public float getMagnificationScale() {
+		if (MapTileViewMultiTouchZoomListener.isPinchZoomMagnificationEnabled
+				&& multiTouchSupport != null
+				&& multiTouchSupport.isInZoomAndRotationMode()) {
+			return (float) multiTouchSupport.getZoomRelative();
+		}
+		return 1.0f;
+	}
+
 	public void setPinchZoomMagnificationEnabled(boolean enabled) {
 		MapTileViewMultiTouchZoomListener.isPinchZoomMagnificationEnabled = enabled;
 	}
