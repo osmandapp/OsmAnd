@@ -115,6 +115,10 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private lateinit var searchButton: StarMapButton
 	private lateinit var settingsButton: StarMapButton
 
+	private lateinit var zoomButtons: View
+	private lateinit var zoomInButton: StarMapButton
+	private lateinit var zoomOutButton: StarMapButton
+
 	private lateinit var compassButton: StarCompassButton
 	private lateinit var eclipseCard: MaterialCardView
 	private lateinit var eclipseLoading: ProgressBar
@@ -569,6 +573,22 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			}
 		}
 
+		zoomButtons = view.findViewById(R.id.star_map_zoom_buttons)
+
+		zoomInButton = view.findViewById(R.id.star_map_zoom_in_button)
+		zoomInButton.setOnClickListener {
+			if (::starView.isInitialized) {
+				starView.zoomIn()
+			}
+		}
+
+		zoomOutButton = view.findViewById(R.id.star_map_zoom_out_button)
+		zoomOutButton.setOnClickListener {
+			if (::starView.isInitialized) {
+				starView.zoomOut()
+			}
+		}
+
 		timeControlBtn.setOnClickListener {
 			timeSelectionView.isVisible = !timeSelectionView.isVisible
 			updateTimeControlTheme(timeControlCard, timeControlBtn, resetTimeButton)
@@ -742,6 +762,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		} else 0
 		applyBottomWindowInsets(searchButton, regularMapVisible, eclipseOffset)
 		applyBottomWindowInsets(settingsButton, regularMapVisible, eclipseOffset)
+		applyBottomWindowInsets(zoomButtons, regularMapVisible, eclipseOffset)
 	}
 
 	private fun applyTopInsets() {
@@ -752,7 +773,13 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private fun applySideInsets() {
 		applySideWindowInsets(compassButton, true)
 		applySideWindowInsets(closeButton, false)
-		applySideWindowInsets(settingsButton, false)
+		if (zoomButtons.isVisible) {
+			resetSideWindowInsets(settingsButton, false)
+			applySideWindowInsets(zoomButtons, false)
+		} else {
+			applySideWindowInsets(settingsButton, false)
+			resetSideWindowInsets(zoomButtons, false)
+		}
 	}
 
 	override fun getInsetTargets(): InsetTargetsCollection {
@@ -817,6 +844,17 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				marginStart = baseMargin + systemLeftInset
 			} else {
 				marginEnd = baseMargin + systemRightInset
+			}
+		}
+	}
+
+	private fun resetSideWindowInsets(view: View, isLeft: Boolean) {
+		val baseMargin = view.resources.getDimensionPixelSize(R.dimen.content_padding)
+		view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+			if (isLeft) {
+				marginStart = baseMargin
+			} else {
+				marginEnd = baseMargin
 			}
 		}
 	}
@@ -900,6 +938,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		closeButton.nightMode = currentNightMode
 		searchButton.nightMode = currentNightMode
 		settingsButton.nightMode = currentNightMode
+		zoomOutButton.nightMode = currentNightMode
+		zoomInButton.nightMode = currentNightMode
 		compassButton.setNightMode(currentNightMode)
 
 		updateMagnitudeFilterTheme()
@@ -2235,6 +2275,29 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		} else {
 			View.VISIBLE
 		}
+		updateZoomButtonsVisibility()
+	}
+
+	private fun updateZoomButtonsVisibility() {
+		if (!::zoomInButton.isInitialized) {
+			return
+		}
+		if (!::zoomOutButton.isInitialized) {
+			return
+		}
+		val activity = activity ?: return
+
+		val minWindowSizeDp = min(
+			AndroidUtils.getScreenWidth(activity),
+			AndroidUtils.getScreenHeight(activity)
+		).let {
+			AndroidUtils.pxToDpF(activity, it)
+		}
+		zoomButtons.visibility = if (minWindowSizeDp <= 600f) {
+            View.GONE
+        } else {
+            View.VISIBLE
+        }
 	}
 
 	private fun clearSelectedObject() {
@@ -2380,6 +2443,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		if (::closeButton.isInitialized) viewsToFilter.add(closeButton)
 		if (::searchButton.isInitialized) viewsToFilter.add(searchButton)
 		if (::settingsButton.isInitialized) viewsToFilter.add(settingsButton)
+		if (::zoomInButton.isInitialized) viewsToFilter.add(zoomInButton)
+		if (::zoomOutButton.isInitialized) viewsToFilter.add(zoomOutButton)
 		if (::sliderContainer.isInitialized) viewsToFilter.add(sliderContainer)
 		if (::bottomSheetContainer.isInitialized) viewsToFilter.add(bottomSheetContainer)
 

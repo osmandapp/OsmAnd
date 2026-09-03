@@ -2377,7 +2377,7 @@ class StarView @JvmOverloads constructor(
 			postOnAnimation(scrollRunnable)
 		}
 
-		private fun consumeScrollOffset(): Boolean {
+		private fun consumeScrollOffset() {
 			val x = scroller.currX
 			val y = scroller.currY
 
@@ -2387,12 +2387,7 @@ class StarView @JvmOverloads constructor(
 			flingLastX = x
 			flingLastY = y
 
-			var hasChangedMapState = false
-			if ( dx != 0 && dy != 0) {
-				applyPanDeltaToStarMap(dx.toFloat(), dy.toFloat())
-				hasChangedMapState = true
-			}
-			return hasChangedMapState
+			applyPanDeltaToStarMap(dx.toFloat(), dy.toFloat())
 		}
 	}
 
