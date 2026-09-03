@@ -670,7 +670,7 @@ public class OsmandRegions {
 		List<String> values = new ArrayList<>();
 		for (String item : value.split(";")) {
 			boolean containsNumber = false;
-			for (String token : SearchAlgorithms.splitAndNormalize(item, false)) {
+			for (String token : SearchAlgorithms.splitAndNormalize(item.replace('-', ' '), false)) {
 				if (Algorithms.isInt(token)) {
 					containsNumber = true;
 					break;
