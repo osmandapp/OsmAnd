@@ -37,6 +37,21 @@ public class OsmandRegionsTest {
 
         WorldRegion centralVisayas = osmandRegions.getRegionDataByDownloadName("philippines_central-visayas_asia");
         Assert.assertFalse(matches("7", centralVisayas)); // alt_name
+
+        WorldRegion bangkaBelitung = osmandRegions.getRegionDataByDownloadName("indonesia_bangka-belitung_asia");
+        Assert.assertFalse(matches("1", bangkaBelitung)); // ref
+
+        WorldRegion calabarzon = osmandRegions.getRegionDataByDownloadName("philippines_calabarzon_asia");
+        Assert.assertFalse(matches("4", calabarzon)); // alt_name
+
+        WorldRegion bali = osmandRegions.getRegionDataByDownloadName("indonesia_bali_asia");
+        Assert.assertFalse(matches("22", bali)); // ref
+
+        WorldRegion westNusaTenggara = osmandRegions.getRegionDataByDownloadName("indonesia_nusa-tenggara-barat_asia");
+        Assert.assertFalse(matches("33", westNusaTenggara)); // ref
+
+        WorldRegion westPapua = osmandRegions.getRegionDataByDownloadName("indonesia_irian-jaya-barat_asia");
+        Assert.assertFalse(matches("44", westPapua)); // ref
     }
 
     private boolean matches(String query, WorldRegion region) {
