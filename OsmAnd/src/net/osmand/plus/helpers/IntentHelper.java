@@ -165,12 +165,12 @@ public class IntentHelper {
 		Intent intent = mapActivity.getIntent();
 		if (intent != null && isUriHierarchical(intent)) {
 			Uri data = intent.getData();
-			if (isOsmAndMapNavigationUrl(data, true)) {
+			if (isOsmAndMapNavigationUrl(data)) {
 				String startLatLonParam = data.getQueryParameter(URL_PARAMETER_START);
 				String endLatLonParam = data.getQueryParameter(URL_PARAMETER_END);
 				String appModeKeyParam = data.getQueryParameter(URL_PARAMETER_MODE);
 				String intermediatePointsParam = data.getQueryParameter(URL_PARAMETER_INTERMEDIATE_POINTS);
-				final String routingParam = data.getQueryParameter(URL_PARAMETER_ROUTING_PARAMS);
+				final String routingParams = data.getQueryParameter(URL_PARAMETER_ROUTING_PARAMS);
 
 				if (Algorithms.isEmpty(endLatLonParam)) {
 					LOG.error("Malformed OsmAnd navigation URL: destination location is missing");
@@ -201,11 +201,11 @@ public class IntentHelper {
 						@Override
 						public void onFinish(@NonNull AppInitializer init) {
 							init.removeListener(this);
-							buildRoute(startLatLon, endLatLon, appMode, points, routingParam);
+							buildRoute(startLatLon, endLatLon, appMode, points, routingParams);
 						}
 					});
 				} else {
-					buildRoute(startLatLon, endLatLon, appMode, points, routingParam);
+					buildRoute(startLatLon, endLatLon, appMode, points, routingParams);
 				}
 				clearIntent(intent);
 				return true;
@@ -304,14 +304,20 @@ public class IntentHelper {
 	}
 
     private void applyRoutingParams(@Nullable final ApplicationMode appMode, @NonNull String routingSettingsQueryParams) {
-		if (appMode == null) return;
+		if (appMode == null) {
+            return;
+        }
 		
 		final List<RoutingUriQueryHandler.KeyValue> params = parseRoutingParams(routingSettingsQueryParams);
-		if (Algorithms.isEmpty(params)) return;
+		if (Algorithms.isEmpty(params)) {
+            return;
+        }
 
 		final RoutingSettingsProvider rsProvider =
 				RoutingUriQueryHandlerKt.commonRoutingSettingsProviderImpl(app, appMode);
-		if (rsProvider == null) return;
+		if (rsProvider == null) {
+            return;
+        }
 
 		final RoutingSettingsApplier rsApplier =
 				RoutingUriQueryHandlerKt.commonRoutingSettingsApplierImpl(app, appMode);
@@ -546,21 +552,12 @@ public class IntentHelper {
 		return isOsmAndSite(uri) && isPathPrefix(uri, "/map");
 	}
 
-	/**
-	 * Checks if given url can be treated as a "navigation" url
-	 * @param data url to check.
-	 *             Url is considered a navigation url if its path is /map/navigate
-	 *             and its query contains "end" param
-	 * @param acceptLegacyPath if true, also accept urls with /map path
-	 * @return true if url can be treated as a "navigation" url, false otherwise
-	 */
-	@SuppressWarnings("SameParameterValue")
-	private boolean isOsmAndMapNavigationUrl(@NonNull final Uri data, final boolean acceptLegacyPath) {
-		if (!isOsmAndSite(data)) return false;
-		if (acceptLegacyPath){
-			if (!hasPathPrefix(data, URL_PATH)) return false;
-		} else {
-			if (!hasExactPath(data, URL_PATH, URL_PATH_COMPONENT_NAVIGATE)) return false;
+	private boolean isOsmAndMapNavigationUrl(@NonNull final Uri data) {
+		if (!isOsmAndSite(data)) {
+			return false;
+		}
+		if (!hasPathPrefix(data, URL_PATH)) {
+			return false;
 		}
 		return data.getQueryParameterNames().contains(URL_PARAMETER_END);
 	}
