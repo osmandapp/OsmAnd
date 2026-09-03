@@ -56,6 +56,8 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 	private static final float CIRCLE_ANGLE_STEP = 5;
 	private static final int SHOW_COMPASS_MIN_ZOOM = 8;
 	private static final long COMPASS_REFRESH_INTERVAL_MS = 100L;
+	private static final double MAX_GLOBE_MERCATOR_ANGLE = 2 * Math.PI - 1e-7;
+	private static final long POINT31_FULL_RANGE = 1L << 31;
 
 	private OsmandApplication app;
 	private MapWidgetRegistry widgetRegistry;
@@ -74,6 +76,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 	private float cacheMapDensity;
 	private MetricsConstants cacheMetricSystem;
 	private int cacheIntZoom;
+	private boolean cacheSphericalMap;
 	private LatLon cacheCenterLatLon;
 	private ArrayList<String> cacheDistances;
 
@@ -92,6 +95,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 	private final Path arrow = new Path();
 	private final Path arrowArc = new Path();
 	private final Path redCompassLines = new Path();
+	private final Path rulerCircle = new Path();
 
 	private final double[] degrees = new double[72];
 	public static final String[] CARDINAL_DIRECTIONS = {"N", "NE", "E", "SE", "S", "SW", "W", "NW"};
@@ -103,6 +107,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 	};
 
 	private float cachedHeading;
+	private boolean sphericalMap;
 	private long lastCompassRefreshTime;
 	@Nullable
 	private View compassRefreshView;
@@ -275,6 +280,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 		if (isRulerWidgetOn() && !animatedThread.isAnimatingMapZoom()) {
 			OsmandApplication app = view.getApplication();
 			OsmandSettings settings = app.getSettings();
+			sphericalMap = hasMapRenderer() && settings.SPHERICAL_MAP.get();
 			circleAttrs.updatePaints(app, drawSettings, tb);
 			circleAttrs.paint2.setStyle(Style.FILL);
 			circleAttrsAlt.updatePaints(app, drawSettings, tb);
@@ -423,11 +429,12 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 			float mapDensity = getMapDensity();
 			boolean updateCache = tb.getZoom() != cacheIntZoom
 					|| !tb.getCenterLatLon().equals(cacheCenterLatLon) || mapDensity != cacheMapDensity
-					|| cacheMetricSystem != currentMetricSystem;
+					|| cacheMetricSystem != currentMetricSystem || cacheSphericalMap != sphericalMap;
 
 			if (!tb.isZoomAnimated() && updateCache) {
 				cacheMetricSystem = currentMetricSystem;
 				cacheIntZoom = tb.getZoom();
+				cacheSphericalMap = sphericalMap;
 				LatLon centerLatLon = tb.getCenterLatLon();
 				cacheCenterLatLon = new LatLon(centerLatLon.getLatitude(), centerLatLon.getLongitude());
 				cacheMapDensity = mapDensity;
@@ -458,9 +465,48 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 
 	private void updateDistance(RotatedTileBox tb) {
 		double pixDensity = tb.getPixDensity();
-		roundedDist = OsmAndFormatter.calculateRoundedDist(maxRadiusInDp / pixDensity, app);
-		radius = (int) (pixDensity * roundedDist);
+		double referenceDistance = maxRadiusInDp / pixDensity;
+		if (sphericalMap) {
+			double globeDistance = getGlobeDistanceForPixelRadius(tb, maxRadiusInDp);
+			if (!Double.isNaN(globeDistance) && globeDistance > 0) {
+				referenceDistance = globeDistance;
+			}
+		}
+		roundedDist = OsmAndFormatter.calculateRoundedDist(referenceDistance, app);
+		radius = sphericalMap
+				? Math.max(1, (int) (maxRadiusInDp * roundedDist / referenceDistance))
+				: (int) (pixDensity * roundedDist);
 		updateText();
+	}
+
+	private double getGlobeDistanceForPixelRadius(@NonNull RotatedTileBox tb, int pixelRadius) {
+		// RotatedTileBox density follows Web Mercator, so calibrate it against the active globe projection.
+		double distance = pixelRadius / tb.getPixDensity();
+		LatLon centerLatLon = getCenterLatLon(tb);
+		QuadPoint center = tb.getCenterPixelPoint();
+		for (int i = 0; i < 2; i++) {
+			double projectedRadius = getGlobePixelRadius(tb, centerLatLon, center, distance);
+			if (Double.isNaN(projectedRadius) || projectedRadius < 1) {
+				return Double.NaN;
+			}
+			distance *= pixelRadius / projectedRadius;
+		}
+		return distance;
+	}
+
+	private double getGlobePixelRadius(@NonNull RotatedTileBox tb, @NonNull LatLon centerLatLon,
+	                                   @NonNull QuadPoint center, double distance) {
+		double radiusSum = 0;
+		int samplesCount = 0;
+		for (int bearing = -90; bearing <= 90; bearing += 180) {
+			LatLon latLon = calculateDestinationPoint(centerLatLon, distance, bearing, true);
+			PointF screenPoint = getRulerPixelFromLatLon(tb, latLon, true);
+			if (screenPoint != null) {
+				radiusSum += MapUtils.getSqrtDistance(center.x, center.y, screenPoint.x, screenPoint.y);
+				samplesCount++;
+			}
+		}
+		return samplesCount > 0 ? radiusSum / samplesCount : Double.NaN;
 	}
 
 	private void updateText() {
@@ -474,7 +520,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 	}
 
 	private void drawRulerCircle(Canvas canvas, RotatedTileBox tb, int circleNumber, QuadPoint center, RenderingLineAttributes attrs) {
-		drawCircle(canvas, tb, circleNumber, center, attrs);
+		drawCircle(canvas, tb, circleNumber, attrs);
 
 		String text = cacheDistances.get(circleNumber - 1);
 		float circleRadius = radius * circleNumber;
@@ -493,40 +539,45 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 		}
 	}
 
-	private void drawCircle(Canvas canvas, RotatedTileBox tb, int circleNumber, QuadPoint center,
-	                        RenderingLineAttributes attrs) {
+	private void drawCircle(Canvas canvas, RotatedTileBox tb, int circleNumber, RenderingLineAttributes attrs) {
 		float circleRadius = radius * circleNumber;
-		List<List<QuadPoint>> arrays = new ArrayList<>();
-		List<QuadPoint> points = new ArrayList<>();
+		double distance = getDistanceForPixelRadius(circleRadius, tb);
 		LatLon centerLatLon = getCenterLatLon(tb);
+		QuadPoint canvasOffset = getCachedAACanvasOffset();
+		PointF previousPoint = null;
+		rulerCircle.reset();
 		for (int a = -180; a <= 180; a += CIRCLE_ANGLE_STEP) {
-			LatLon latLon = MapUtils.rhumbDestinationPoint(centerLatLon, circleRadius / tb.getPixDensity(), a);
-			if (Math.abs(latLon.getLatitude()) > 90) {
-				if (points.size() > 0) {
-					arrays.add(points);
-					points = new ArrayList<>();
-				}
+			LatLon latLon = calculateDestinationPoint(centerLatLon, distance, a, sphericalMap);
+			PointF screenPoint = getRulerPixelFromLatLon(tb, latLon);
+			if (screenPoint == null) {
+				drawCirclePath(canvas, attrs);
+				rulerCircle.reset();
+				previousPoint = null;
 				continue;
 			}
-
-			PointF screenPoint = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tb, latLon);
-			points.add(new QuadPoint(screenPoint.x + getCachedAACanvasOffset().x, screenPoint.y + getCachedAACanvasOffset().y));
-		}
-		if (points.size() > 0) {
-			arrays.add(points);
-		}
-
-		for (List<QuadPoint> pts : arrays) {
-			Path path = new Path();
-			for (QuadPoint pt : pts) {
-				if (path.isEmpty()) {
-					path.moveTo(pt.x, pt.y);
-				} else {
-					path.lineTo(pt.x, pt.y);
-				}
+			if (previousPoint != null
+					&& (Math.abs(screenPoint.x - previousPoint.x) > tb.getPixWidth()
+					|| Math.abs(screenPoint.y - previousPoint.y) > tb.getPixHeight())) {
+				// Do not connect points across a globe projection discontinuity.
+				drawCirclePath(canvas, attrs);
+				rulerCircle.reset();
 			}
-			canvas.drawPath(path, attrs.shadowPaint);
-			canvas.drawPath(path, attrs.paint);
+			float x = screenPoint.x + canvasOffset.x;
+			float y = screenPoint.y + canvasOffset.y;
+			if (rulerCircle.isEmpty()) {
+				rulerCircle.moveTo(x, y);
+			} else {
+				rulerCircle.lineTo(x, y);
+			}
+			previousPoint = screenPoint;
+		}
+		drawCirclePath(canvas, attrs);
+	}
+
+	private void drawCirclePath(@NonNull Canvas canvas, @NonNull RenderingLineAttributes attrs) {
+		if (!rulerCircle.isEmpty()) {
+			canvas.drawPath(rulerCircle, attrs.shadowPaint);
+			canvas.drawPath(rulerCircle, attrs.paint);
 		}
 	}
 
@@ -581,7 +632,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 		float innerRadiusLength = radiusLength - attrs.paint.getStrokeWidth() / 2;
 		QuadPoint centerPixels = tb.getCenterPixelPoint();
 
-		drawCircle(canvas, tb, circleNumber, center, attrs);
+		drawCircle(canvas, tb, circleNumber, attrs);
 		drawCompassCents(centerPixels, innerRadiusLength, radiusLength, tb, canvas, attrs);
 		drawCardinalDirections(canvas, center, radiusLength, tb, attrs);
 		drawLightingHeadingArc(radiusLength, cachedHeading, center, tb, canvas, attrs);
@@ -670,17 +721,30 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 		arrowArc.reset();
 		int startArcAngle = (int) angle - 45;
 		int endArcAngle = (int) angle + 45;
+		double distance = getDistanceForPixelRadius(radius, tb);
 		LatLon centerLatLon = getCenterLatLon(tb);
+		QuadPoint canvasOffset = getCachedAACanvasOffset();
 		for (int a = startArcAngle; a <= endArcAngle; a += CIRCLE_ANGLE_STEP) {
-			LatLon latLon = MapUtils.rhumbDestinationPoint(centerLatLon, radius / tb.getPixDensity(), a);
-			PointF screenPoint = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tb, latLon);
+			LatLon latLon = calculateDestinationPoint(centerLatLon, distance, a, sphericalMap);
+			PointF screenPoint = getRulerPixelFromLatLon(tb, latLon);
+			if (screenPoint == null) {
+				drawArrowArcPath(canvas);
+				arrowArc.reset();
+				continue;
+			}
 			if (arrowArc.isEmpty()) {
-				arrowArc.moveTo(screenPoint.x + getCachedAACanvasOffset().x, screenPoint.y + getCachedAACanvasOffset().y);
+				arrowArc.moveTo(screenPoint.x + canvasOffset.x, screenPoint.y + canvasOffset.y);
 			} else {
-				arrowArc.lineTo(screenPoint.x + getCachedAACanvasOffset().x, screenPoint.y + getCachedAACanvasOffset().y);
+				arrowArc.lineTo(screenPoint.x + canvasOffset.x, screenPoint.y + canvasOffset.y);
 			}
 		}
-		canvas.drawPath(arrowArc, blueLinesPaint);
+		drawArrowArcPath(canvas);
+	}
+
+	private void drawArrowArcPath(@NonNull Canvas canvas) {
+		if (!arrowArc.isEmpty()) {
+			canvas.drawPath(arrowArc, blueLinesPaint);
+		}
 	}
 
 	private void drawCompassCents(QuadPoint center, float innerRadiusLength, float radiusLength, RotatedTileBox tb, Canvas canvas, RenderingLineAttributes attrs) {
@@ -757,10 +821,66 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 	@Nullable
 	private PointF getPointFromCenterByRadius(double radius, double angle, RotatedTileBox tb) {
 		LatLon centerLatLon = getCenterLatLon(tb);
-		LatLon latLon = MapUtils.rhumbDestinationPoint(centerLatLon, radius / tb.getPixDensity(), angle);
-		return Math.abs(latLon.getLatitude()) > 90
-				? null
-				: NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tb, latLon);
+		LatLon latLon = calculateDestinationPoint(centerLatLon,
+				getDistanceForPixelRadius(radius, tb), angle, sphericalMap);
+		return getRulerPixelFromLatLon(tb, latLon);
+	}
+
+	private double getDistanceForPixelRadius(double pixelRadius, @NonNull RotatedTileBox tb) {
+		return sphericalMap && radius > 0
+				? roundedDist * pixelRadius / radius
+				: pixelRadius / tb.getPixDensity();
+	}
+
+	@Nullable
+	private PointF getRulerPixelFromLatLon(@NonNull RotatedTileBox tb, @NonNull LatLon latLon) {
+		return getRulerPixelFromLatLon(tb, latLon, false);
+	}
+
+	@Nullable
+	private PointF getRulerPixelFromLatLon(@NonNull RotatedTileBox tb, @NonNull LatLon latLon,
+	                                      boolean allowOffscreen) {
+		// Flat maps have no drawable surface beyond the Web Mercator latitude boundary.
+		double maxLatitude = sphericalMap ? 90 : MapUtils.MAX_LATITUDE;
+		if (Math.abs(latLon.getLatitude()) > maxLatitude) {
+			return null;
+		}
+		MapRendererView mapRenderer = getMapRenderer();
+		if (sphericalMap && mapRenderer != null) {
+			double absoluteLatitude = Math.abs(latLon.getLatitude());
+			PointI location31 = absoluteLatitude > MapUtils.MAX_LATITUDE
+					? calculateGlobePoint31(latLon)
+					: NativeUtilities.getPoint31FromLatLon(latLon);
+			PointI screenPoint = new PointI();
+			boolean projected = absoluteLatitude > MapUtils.MAX_LATITUDE
+					? mapRenderer.getScreenPointFromLocation(location31, screenPoint, allowOffscreen)
+					: mapRenderer.getElevatedPointFromLocation(location31, screenPoint, allowOffscreen);
+			if (projected) {
+				return new PointF(screenPoint.getX(), screenPoint.getY());
+			}
+			return null;
+		}
+		return NativeUtilities.getElevatedPixelFromLatLon(mapRenderer, tb, latLon);
+	}
+
+	@NonNull
+	private static LatLon calculateDestinationPoint(@NonNull LatLon center, double distance, double bearing,
+	                                               boolean sphericalMap) {
+		return sphericalMap
+				? MapUtils.greatCircleDestinationPoint(center.getLatitude(), center.getLongitude(), distance, bearing)
+				: MapUtils.rhumbDestinationPoint(center, distance, bearing);
+	}
+
+	@NonNull
+	private static PointI calculateGlobePoint31(@NonNull LatLon latLon) {
+		// The globe renderer accepts signed Point31 y values beyond the Web Mercator tile range.
+		// Keep polar-cap samples in that extended range instead of clamping them to +/-85.0511 degrees.
+		double latitude = Math.toRadians(latLon.getLatitude());
+		double mercatorAngle = Math.log(Math.tan(latitude / 2 + Math.PI / 4));
+		mercatorAngle = Math.max(-MAX_GLOBE_MERCATOR_ANGLE,
+				Math.min(MAX_GLOBE_MERCATOR_ANGLE, mercatorAngle));
+		long y31 = (long) ((1 - mercatorAngle / Math.PI) / 2 * POINT31_FULL_RANGE);
+		return new PointI(MapUtils.get31TileNumberX(latLon.getLongitude()), (int) y31);
 	}
 
 	private LatLon point31ToLatLon(PointI point31) {
