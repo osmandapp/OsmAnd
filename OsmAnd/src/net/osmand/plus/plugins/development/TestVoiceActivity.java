@@ -280,8 +280,13 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 			button.setPadding(40, 5, 10, 5);
 		}
 		boolean nightMode = app.getDaynightHelper().isNightMode(settings.APPLICATION_MODE.get(), ThemeUsageContext.APP);
-		int activeColor = ColorUtilities.getActiveColor(this, nightMode);
-		button.setTextColor(ColorUtilities.getContrastColor(this, activeColor, false));
+		if (!nightMode) {
+			// Only the light theme paints the default Button background with the accent
+			// color (see android:buttonStyle in osmand_light_style.xml); the dark theme
+			// keeps the platform default button background/text, which already contrasts.
+			int activeColor = ColorUtilities.getActiveColor(this, false);
+			button.setTextColor(ColorUtilities.getContrastColor(this, activeColor, false));
+		}
 		if (description.startsWith("\u25BA (11.1)")) {
 			// Buttons with refreshable caption
 			buttonInfo = button;
