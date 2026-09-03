@@ -261,9 +261,6 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 				.setOutlineWidth(outlineWidth * vectorLineScale)
 				.setApproximationEnabled(approximationEnabled)
 				.setBaseOrder(baseOrder);
-//		if (dashPattern != null) {
-//			builder.setEndCapStyle(VectorLine.EndCapStyle.BUTT.swigValue());
-//		}
 		if (dashPattern != null) {
 			VectorDouble vectorDouble = new VectorDouble();
 			for (float i : dashPattern) {

@@ -175,7 +175,6 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 		Paint paint = getContext().getCustomPaint();
 		paint.setColor(pathData.style.color);
 		paint.setStrokeWidth(pathData.style.width);
-//		paint.setStrokeCap(pathData.style.getDashPattern() != null ? Paint.Cap.BUTT : Paint.Cap.ROUND);
 		canvas.drawPath(pathData.path, paint);
 	}
 
