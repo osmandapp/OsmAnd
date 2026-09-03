@@ -3,7 +3,6 @@ package net.osmand.binary;
 import net.osmand.PlatformUtil;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
-import net.osmand.util.Algorithms;
 import net.osmand.util.SearchAlgorithms;
 
 import java.io.IOException;
@@ -139,10 +138,6 @@ public class CommonWords {
 		for (WorldRegion s : subregions) {
 			String t = s.getRegionSearchText();
 			if (t != null) {
-				String r = s.getRegionSearchRef();
-				if (Algorithms.isNotEmpty(r)) {
-					t += " " + r;
-				}
 				String[] ns = t.split(" ");
 				for (String n : ns) {
 					if (n.contains(";")) {

@@ -20,7 +20,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.PointDescription;
 import net.osmand.data.Street;
-import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
@@ -905,8 +904,7 @@ public class QuickSearchHelper implements ResourceListener {
 			if (group.getType().isScreen() && group.getParentGroup() != null
 					&& group.getParentGroup().getParentGroup() != null
 					&& group.getParentGroup().getParentGroup().getType() != DownloadResourceGroupType.WORLD
-					&& OsmandRegions.isRegionNameMatched(phrase.getFullSearchPhrase(), name,
-							region == null ? null : region.getRegionSearchRef())) {
+					&& isMatch(phrase, name)) {
 
 				for (DownloadResourceGroup g : group.getGroups()) {
 					if (g.getType() == DownloadResourceGroupType.REGION_MAPS) {
@@ -940,6 +938,17 @@ public class QuickSearchHelper implements ResourceListener {
 					processGroup(g, phrase, resultMatcher);
 				}
 			}
+		}
+
+		private boolean isMatch(SearchPhrase phrase, String text) {
+			if (phrase.getFullSearchPhrase().length() <= 1 && phrase.isNoSelectedType()) {
+				return true;
+			}
+			NameStringMatcher matcher = new NameStringMatcher(
+					phrase.getFullSearchPhrase(),
+					StringMatcherMode.CHECK_EQUALS_FROM_SPACE
+			);
+			return matcher.matches(text);
 		}
 
 		@Override

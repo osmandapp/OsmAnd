@@ -1,7 +1,9 @@
 package net.osmand.map;
 
+import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -37,7 +39,8 @@ public class OsmandRegionsTest {
     }
 
     private boolean matches(String query, WorldRegion region) {
-        return OsmandRegions.isRegionNameMatched(query, region.getRegionSearchText(), region.getRegionSearchRef());
+        return new NameStringMatcher(query, StringMatcherMode.CHECK_EQUALS_FROM_SPACE)
+                .matches(region.getRegionSearchText());
     }
 
     @Test

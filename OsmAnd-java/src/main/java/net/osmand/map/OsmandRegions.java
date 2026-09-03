@@ -1,6 +1,5 @@
 package net.osmand.map;
 
-import net.osmand.CollatorStringMatcher;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
@@ -14,7 +13,6 @@ import net.osmand.data.QuadTree;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
-import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -59,7 +57,6 @@ public class OsmandRegions {
 	public static final String FIELD_LEFT_HAND_DRIVING = "region_left_hand_navigation";
 	public static final String FIELD_WIKI_LINK = "region_wiki_link";
 	public static final String FIELD_POPULATION = "region_population";
-	public static final String FIELD_REGION_REF = "osmand_region_ref";
 	public static final String LOCALE_NAME_DEFAULT_FORMAT = "%1$s %2$s";
 	public static final String LOCALE_NAME_REVERSED_FORMAT = "%2$s, %1$s";
 
@@ -597,7 +594,6 @@ public class OsmandRegions {
 		rd.params.wikiLink = mapIndexFields.get(mapIndexFields.wikiLinkType, object);
 		rd.params.population = mapIndexFields.get(mapIndexFields.populationType, object);
 		rd.regionSearchText = getSearchIndex(object);
-		rd.regionSearchRef = getRegionSearchRef(object);
 		rd.regionMapDownload = isDownloadOfType(object, MAP_TYPE);
 		rd.regionRoadsDownload = isDownloadOfType(object, ROADS_TYPE);
 		rd.regionJoinMapDownload = isDownloadOfType(object, MAP_JOIN_TYPE);
@@ -654,9 +650,9 @@ public class OsmandRegions {
 			TagValuePair tp = mi.decodeType(it.key());
 			if (tp.tag.startsWith("name") || tp.tag.equals("key_name")
 					|| tp.tag.startsWith("alt_name") || tp.tag.startsWith("short_name")
-					|| tp.tag.equals("name:abbreviation")) {
+					|| tp.tag.equals("name:abbreviation") || tp.tag.equals("ref")) {
 				final String vl = it.value().toLowerCase(Locale.US);
-				if (ind.indexOf(vl) == -1) {
+				if (ind.indexOf(vl) == -1 || tp.tag.equals("ref")) {
 					ind.append(" ").append(vl);
 				}
 			}
@@ -664,29 +660,6 @@ public class OsmandRegions {
 		return ind.toString();
 	}
 
-	private String getRegionSearchRef(BinaryMapDataObject object) {
-		TIntObjectIterator<String> it = object.getObjectNames().iterator();
-		while (it.hasNext()) {
-			it.advance();
-			TagValuePair tp = object.getMapIndex().decodeType(it.key());
-			if (tp.tag.equals(FIELD_REGION_REF)) {
-				return it.value();
-			}
-		}
-		return null;
-	}
-
-	public static boolean isRegionNameMatched(String query, String regionName, String regionSearchRef) {
-		if (Algorithms.isNotEmpty(regionSearchRef) && query.equalsIgnoreCase(regionSearchRef)) {
-			return true;
-		}
-		if (Algorithms.isNotEmpty(regionName)) {
-			NameStringMatcher matcher = new NameStringMatcher(query,
-					CollatorStringMatcher.StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
-			return matcher.matches(regionName);
-		}
-		return false;
-	}
 
 	public boolean isDownloadOfType(BinaryMapDataObject object, String type) {
 		int[] addtypes = object.getAdditionalTypes();
