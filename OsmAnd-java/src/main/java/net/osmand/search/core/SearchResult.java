@@ -187,10 +187,13 @@ public class SearchResult {
 			}
 			if (object instanceof Amenity a) {
 				int elo = a.getTravelEloNumber();
+				double rat = 0;
 				if (elo > MIN_ELO_RATING) {
-					double rat = ((double)elo - MIN_ELO_RATING) / (MAX_ELO_RATING - MIN_ELO_RATING);
-					res += rat * MAX_PHRASE_WEIGHT_TOTAL * 2 / 3; 
+					rat = ((double)elo - MIN_ELO_RATING) / (MAX_ELO_RATING - MIN_ELO_RATING);
+				} else if (elo > Amenity.DEFAULT_ELO && a.isIsland()) {
+					rat = ((double)elo) / MAX_ELO_RATING;
 				}
+				res += rat * MAX_PHRASE_WEIGHT_TOTAL * 2 / 3;
 			}
 		}
 		if (parentSearchResult != null) {
