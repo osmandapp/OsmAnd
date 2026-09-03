@@ -97,6 +97,7 @@ public class RecordingsFileHelper {
 		Location fileLocation = MediaMetadataUtils.getLocation(file);
 		if (fileLocation == null) {
 			log.warn("Recording location unavailable: " + file.getAbsolutePath());
+			return false;
 		}
 		recording.setLatitude(fileLocation.getLatitude());
 		recording.setLongitude(fileLocation.getLongitude());

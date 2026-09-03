@@ -177,7 +177,6 @@ public class CoordinatesGridSettings {
 	@NonNull
 	private Limits<Integer> calculateSupportedZoomLevels(@NonNull CoordinateGridFormat gridFormat) {
 		int minZoom = 1;
-		int maxZoom = SUPPORTED_MAX_ZOOM;
 		if (isGridSupported(app)) {
 			GridConfiguration config = new GridConfiguration();
 			Projection projection = gridFormat.getProjection();
@@ -192,19 +191,13 @@ public class CoordinatesGridSettings {
 			GridParameters params = config.getGridParameters();
 			ZoomLevel min = params.getMinZoom();
 			minZoom = min.swigValue();
-			maxZoom = Math.min(maxZoom, getSupportedMaxZoom(params));
+		}
+		int maxZoom = SUPPORTED_MAX_ZOOM;
+		Integer formatMaxZoom = gridFormat.getMaxZoom();
+		if (formatMaxZoom != null) {
+			maxZoom = Math.min(maxZoom, formatMaxZoom);
 		}
 		return new Limits<>(minZoom, maxZoom);
-	}
-
-	private static int getSupportedMaxZoom(@NonNull GridParameters params) {
-		int maxZoom = Math.max(getZoomValue(params.getMaxZoomForFloat()), getZoomValue(params.getMaxZoomForMixed()));
-		return maxZoom > 0 ? maxZoom : SUPPORTED_MAX_ZOOM;
-	}
-
-	private static int getZoomValue(@NonNull ZoomLevel zoomLevel) {
-		int value = zoomLevel.swigValue();
-		return value > 0 && value <= ZoomLevel.MaxZoomLevel.swigValue() ? value : 0;
 	}
 
 	public float getTextScale(@NonNull ApplicationMode appMode) {
