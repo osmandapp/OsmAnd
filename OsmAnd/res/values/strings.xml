@@ -2061,6 +2061,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="routing_attr_avoid_fords_name">Avoid fords</string>
     <string name="routing_attr_avoid_fords_description">Avoid fords</string>
     <string name="compass_on_circles">Compass on circles</string>
+    <string name="sight_line">Sight line</string>
     <string name="distance_circles">Distance-circles</string>
     <string name="routing_attr_avoid_4wd_only_name">Avoid 4WD roads</string>
     <string name="routing_attr_avoid_4wd_only_description">Avoid roads only suitable for 4WD vehicles</string>

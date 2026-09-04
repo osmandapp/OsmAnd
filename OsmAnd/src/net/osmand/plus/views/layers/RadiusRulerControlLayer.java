@@ -26,6 +26,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
@@ -63,6 +65,8 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 	private static final float MIN_PROJECTED_STEP_DP = 24;
 	private static final double MAX_GLOBE_MERCATOR_ANGLE = 2 * Math.PI - 1e-7;
 	private static final long POINT31_FULL_RANGE = 1L << 31;
+	private static final double SIGHT_LINE_DISTANCE_METERS = 500_000;
+	private static final int SIGHT_LINE_SEGMENTS = 50;
 
 	private OsmandApplication app;
 	private MapWidgetRegistry widgetRegistry;
@@ -94,6 +98,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 	private Paint triangleNorthPaint;
 	private Paint redLinesPaint;
 	private Paint blueLinesPaint;
+	private Paint sightLinePaint;
 
 	private RenderingLineAttributes circleAttrs;
 	private RenderingLineAttributes circleAttrsAlt;
@@ -103,6 +108,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 	private final Path arrowArc = new Path();
 	private final Path redCompassLines = new Path();
 	private final Path rulerCircle = new Path();
+	private final Path sightLinePath = new Path();
 
 	private final double[] degrees = new double[72];
 	public static final String[] CARDINAL_DIRECTIONS = {"N", "NE", "E", "SE", "S", "SW", "W", "NW"};
@@ -156,6 +162,11 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 		triangleHeadingPaint = initPaintWithStyle(Style.FILL, colorHeadingArrow);
 		redLinesPaint = initPaintWithStyle(Style.STROKE, colorNorthArrow);
 		blueLinesPaint = initPaintWithStyle(Style.STROKE, colorHeadingArrow);
+
+		sightLinePaint = initPaintWithStyle(Style.STROKE, colorHeadingArrow);
+		sightLinePaint.setStrokeWidth(AndroidUtils.dpToPx(app, 2));
+		sightLinePaint.setPathEffect(new DashPathEffect(
+				new float[] {AndroidUtils.dpToPx(app, 10), AndroidUtils.dpToPx(app, 8)}, 0));
 
 		updatePaints();
 
@@ -300,13 +311,14 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 			RadiusRulerMode radiusRulerMode = settings.RADIUS_RULER_MODE.get();
 			boolean showRadiusRuler = radiusRulerMode == RadiusRulerMode.FIRST || radiusRulerMode == RadiusRulerMode.SECOND;
 			boolean showCompass = settings.SHOW_COMPASS_ON_RADIUS_RULER.get() && tb.getZoom() >= SHOW_COMPASS_MIN_ZOOM;
+			boolean showSightLine = settings.SHOW_SIGHT_LINE_ON_RADIUS_RULER.get() && isSightLineAvailable();
 
 			boolean radiusRulerNightMode = radiusRulerMode == RadiusRulerMode.SECOND;
 			drawCenterIcon(canvas, tb, center, drawSettings.isNightMode(), radiusRulerNightMode);
 
 			if (showRadiusRuler) {
 				updateData(tb, center);
-				if (showCompass) {
+				if (showCompass || showSightLine) {
 					updateHeading();
 					resetDrawingPaths();
 				}
@@ -319,6 +331,10 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 					} else {
 						drawRulerCircle(canvas, tb, circleIndex, center, attrs);
 					}
+				}
+
+				if (showSightLine) {
+					drawSightLine(canvas, tb, cachedHeading);
 				}
 			}
 			canvas.rotate(tb.getRotate(), center.x, center.y);
@@ -357,11 +373,16 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 	}
 
 	private boolean isCompassRulerVisible() {
-		return view != null
-				&& app.getSettings().RADIUS_RULER_MODE.get() != RadiusRulerMode.EMPTY
-				&& app.getSettings().SHOW_COMPASS_ON_RADIUS_RULER.get()
-				&& view.getZoom() >= SHOW_COMPASS_MIN_ZOOM
-				&& isRulerWidgetOn();
+		if (view == null || app.getSettings().RADIUS_RULER_MODE.get() == RadiusRulerMode.EMPTY || !isRulerWidgetOn()) {
+			return false;
+		}
+		boolean compassVisible = app.getSettings().SHOW_COMPASS_ON_RADIUS_RULER.get() && view.getZoom() >= SHOW_COMPASS_MIN_ZOOM;
+		boolean sightLineVisible = app.getSettings().SHOW_SIGHT_LINE_ON_RADIUS_RULER.get() && isSightLineAvailable();
+		return compassVisible || sightLineVisible;
+	}
+
+	private boolean isSightLineAvailable() {
+		return PluginsHelper.isActive(OsmandDevelopmentPlugin.class);
 	}
 
 	private int getCompassCircleIndex(RotatedTileBox tb, QuadPoint center) {
@@ -782,6 +803,34 @@ public class RadiusRulerControlLayer extends OsmandMapLayer implements OsmAndCom
 	private void drawArrowArcPath(@NonNull Canvas canvas) {
 		if (!arrowArc.isEmpty()) {
 			canvas.drawPath(arrowArc, blueLinesPaint);
+		}
+	}
+
+	private void drawSightLine(Canvas canvas, RotatedTileBox tb, double heading) {
+		QuadPoint canvasOffset = getCachedAACanvasOffset();
+		double step = SIGHT_LINE_DISTANCE_METERS / SIGHT_LINE_SEGMENTS;
+
+		sightLinePath.reset();
+		for (int i = 0; i <= SIGHT_LINE_SEGMENTS; i++) {
+			double distance = step * i;
+			if (sphericalMap && !isVisibleGlobeDistance(distance)) {
+				break;
+			}
+			LatLon latLon = calculateDestinationPoint(currentCenterLatLon, distance, heading, sphericalMap);
+			PointF screenPoint = getRulerPixelFromLatLon(tb, latLon);
+			if (screenPoint == null) {
+				break;
+			}
+			float x = screenPoint.x + canvasOffset.x;
+			float y = screenPoint.y + canvasOffset.y;
+			if (sightLinePath.isEmpty()) {
+				sightLinePath.moveTo(x, y);
+			} else {
+				sightLinePath.lineTo(x, y);
+			}
+		}
+		if (!sightLinePath.isEmpty()) {
+			canvas.drawPath(sightLinePath, sightLinePaint);
 		}
 	}
 
