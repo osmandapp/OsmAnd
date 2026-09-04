@@ -1,7 +1,7 @@
 package net.osmand.plus.plugins.aistracker.fragments
 
 import android.view.WindowManager
-import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -18,13 +18,10 @@ object AisMmsiDialog {
 	private const val MMSI_LENGTH = 9
 
 	@JvmStatic
-	fun show(fragment: Fragment, onSaved: () -> Unit) {
+	fun show(fragment: AisBaseFragment, onSaved: () -> Unit) {
 		val plugin = PluginsHelper.requirePlugin(AisTrackerPlugin::class.java)
-		/* the inflater of a Material 3 screen is already wrapped in the Material 3 theme, and the
-		 * dialog has to be built in that theme - the activity theme would give it the legacy
-		 * dialog buttons */
-		val context = fragment.layoutInflater.context
-		val view = fragment.layoutInflater.inflate(R.layout.dialog_ais_mmsi, null)
+		val context = fragment.materialContext()
+		val view = LayoutInflater.from(context).inflate(R.layout.dialog_ais_mmsi, null)
 		val inputLayout: TextInputLayout = view.findViewById(R.id.mmsi_layout)
 		val editText: TextInputEditText = view.findViewById(R.id.mmsi_edit)
 

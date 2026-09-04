@@ -32,6 +32,9 @@
 
 			<include
 				android:id="@+id/outdated_card"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/ui_group_gap"
 				layout="@layout/ui_slider_card" />
 
 			<net.osmand.plus.widgets.ui.GroupFooterView
@@ -41,6 +44,9 @@
 
 			<include
 				android:id="@+id/hide_after_card"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/ui_group_gap"
 				layout="@layout/ui_slider_card" />
 
 			<net.osmand.plus.widgets.ui.GroupFooterView

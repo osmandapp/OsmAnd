@@ -38,9 +38,12 @@ class MainSwitchView @JvmOverloads constructor(
 
 	init {
 		orientation = HORIZONTAL
-		minimumHeight = resources.getDimensionPixelSize(R.dimen.ui_group_header_min_height)
+		gravity = android.view.Gravity.CENTER_VERTICAL
+		/* the vertical padding sits on the label, so the 32dp switch fits into the 56dp row
+		 * instead of stretching it to the height of its own touch target */
+		minimumHeight = resources.getDimensionPixelSize(R.dimen.ui_main_switch_height)
 		val padding = resources.getDimensionPixelSize(R.dimen.content_padding)
-		setPaddingRelative(padding, padding, padding, padding)
+		setPaddingRelative(padding, 0, padding, 0)
 		isClickable = true
 		isFocusable = true
 

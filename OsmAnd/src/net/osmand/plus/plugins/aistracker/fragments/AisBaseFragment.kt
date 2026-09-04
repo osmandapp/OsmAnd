@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.aistracker.fragments
 
+import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.view.View
 import android.widget.ImageView
@@ -8,6 +9,7 @@ import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.appcompat.view.ContextThemeWrapper
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.appbar.MaterialToolbar
@@ -72,6 +74,13 @@ abstract class AisBaseFragment : BaseMaterialFragment() {
 				.commitAllowingStateLoss()
 		}
 	}
+
+	/**
+	 * Dialogs have to be built in the Material 3 theme of the screen. Taken from the activity
+	 * theme they come out as Material 2 - square corners and the legacy accent coloured buttons.
+	 */
+	fun materialContext(): Context =
+		ContextThemeWrapper(requireContext(), getMaterialThemeRes(nightMode))
 
 	/**
 	 * Colours must be resolved against the Material 3 context of the screen - the activity theme

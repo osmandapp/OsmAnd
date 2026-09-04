@@ -13,6 +13,8 @@
 		android:layout_height="wrap_content"
 		android:layout_gravity="center_vertical"
 		android:layout_weight="1"
+		android:paddingTop="@dimen/content_padding"
+		android:paddingBottom="@dimen/content_padding"
 		android:textColor="?attr/colorOnSurface"
 		android:textSize="@dimen/default_list_text_size"
 		app:lineHeight="@dimen/ui_line_height_title"
@@ -22,7 +24,7 @@
 	<com.google.android.material.materialswitch.MaterialSwitch
 		android:id="@+id/switch_widget"
 		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
+		android:layout_height="@dimen/ui_switch_height"
 		android:layout_gravity="center_vertical"
 		android:layout_marginStart="@dimen/content_padding"
 		android:clickable="false"

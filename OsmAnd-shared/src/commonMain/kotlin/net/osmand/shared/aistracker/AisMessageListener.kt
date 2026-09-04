@@ -17,6 +17,7 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withTimeout
 import net.osmand.shared.util.LoggerFactory
 import net.sf.marineapi.ais.event.AbstractAISMessageListener
 import net.sf.marineapi.ais.message.AISMessage01
@@ -36,6 +37,11 @@ import net.sf.marineapi.nmea.sentence.AISSentence
 import net.sf.marineapi.nmea.sentence.PositionSentence
 
 open class AisMessageListener {
+
+    companion object {
+        private const val CONNECT_TIMEOUT_MS = 15_000L
+    }
+
     private val aisObjectListener: AisObjectListener
     private val nmeaLocationListener: NmeaLocationListener?
     private val scope = CoroutineScope(Dispatchers.Default + SupervisorJob())
@@ -91,7 +97,11 @@ open class AisMessageListener {
                 try {
                     LoggerFactory.getLogger("AisMessageListener").debug("TCP connection starting")
                     connectionListener?.onAisConnecting()
-                    socket = aSocket(selectorManager).tcp().connect(serverIp, serverPort)
+                    /* an unreachable host would otherwise hang here for minutes and the UI would
+                     * keep saying "connecting" instead of reporting the failure */
+                    socket = withTimeout(CONNECT_TIMEOUT_MS) {
+                        aSocket(selectorManager).tcp().connect(serverIp, serverPort)
+                    }
                     connectionListener?.onAisConnected()
                     socket.socketContext.also { it.invokeOnCompletion { } } // Avoid crash
                     val readChannel = socket.openReadChannel()

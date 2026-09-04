@@ -16,7 +16,8 @@
 		android:layout_height="@dimen/ui_icon_size"
 		android:layout_marginEnd="@dimen/content_padding"
 		android:importantForAccessibility="no"
-		android:src="@drawable/ic_action_alert" />
+		android:src="@drawable/ic_action_alert"
+		app:tint="?attr/colorWarningIcon" />
 
 	<LinearLayout
 		android:layout_width="0dp"
@@ -50,6 +51,7 @@
 			android:layout_marginTop="@dimen/content_padding_small"
 			android:text="@string/ais_set_mmsi"
 			android:textColor="?attr/colorPrimary"
-			app:backgroundTint="?attr/colorPrimaryContainer" />
+			app:backgroundTint="?attr/colorPrimaryContainer"
+			app:cornerRadius="@dimen/ui_corner_radius_button" />
 	</LinearLayout>
 </LinearLayout>
