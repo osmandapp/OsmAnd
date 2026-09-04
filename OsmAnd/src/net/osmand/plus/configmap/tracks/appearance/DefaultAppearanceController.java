@@ -19,6 +19,7 @@ import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData.AppearanceChangedListener;
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.ArrowsCardController;
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.ColorCardController;
+import net.osmand.plus.configmap.tracks.appearance.subcontrollers.LineStyleCardController;
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.SplitCardController;
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.StartFinishCardController;
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.WidthCardController;
@@ -50,6 +51,7 @@ public class DefaultAppearanceController implements IDialogController, IColorCar
 	private final StartFinishCardController iconsCardController;
 	private final ColorCardController colorCardController;
 	private final WidthCardController widthCardController;
+	private final LineStyleCardController lineStyleCardController;
 	private final SplitCardController splitCardController;
 
 	private final GpxDirItem dirItem;
@@ -75,6 +77,8 @@ public class DefaultAppearanceController implements IDialogController, IColorCar
 
 		widthCardController = new WidthCardController(app, data, false);
 		widthCardController.setControlsColorProvider(colorCardController);
+
+		lineStyleCardController = new LineStyleCardController(app, data, false);
 
 		splitCardController = new SplitCardController(app, data, false);
 	}
@@ -160,6 +164,11 @@ public class DefaultAppearanceController implements IDialogController, IColorCar
 	@NonNull
 	public WidthCardController getWidthCardController() {
 		return widthCardController;
+	}
+
+	@NonNull
+	public LineStyleCardController getLineStyleCardController() {
+		return lineStyleCardController;
 	}
 
 	@NonNull
