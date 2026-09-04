@@ -506,30 +506,37 @@ public class RoutePlannerFrontEnd {
 
 	private void calculateRegionsWithAllRoutePoints(RoutingContext ctx, OsmandRegions osmandRegions,
 	                                                LatLon start, List<LatLon> targets) throws IOException {
-		Map<String, Integer> regionCounter = new LinkedHashMap<>();
-
-		getRegionsOfPoint(start, regionCounter, osmandRegions);
-		for (LatLon target : targets) {
-			getRegionsOfPoint(target, regionCounter, osmandRegions);
-		}
-
-		int allPoints = 1 + targets.size();
-		List<String> result = new ArrayList<>();
-
-		for (String region : regionCounter.keySet()) {
-			if (regionCounter.get(region) == allPoints) {
-				result.add(region);
-			}
-		}
-
-		ctx.regionsCoveringStartAndTargets = result.toArray(new String[0]);
+		List<String> regions = collectRegionsOfRoutePoints(osmandRegions, start, targets);
+		ctx.regionsCoveringStartAndTargets = regions.toArray(new String[0]);
 	}
 
-	private void getRegionsOfPoint(LatLon ll, Map<String, Integer> regionCounter, OsmandRegions or) throws IOException {
+	/**
+	 * Download names of the regions of every route point, at all levels of the region hierarchy
+	 * (Kyiv -> ukraine_kyiv-city_europe, ukraine_kyiv_europe, ukraine_europe).
+	 * HHRoutePlanner uses them to reject groups of maps which don't belong to the route regions.
+	 * <p/>
+	 * Regions common to all points must not be used here: countries published only as sub-regions
+	 * (Ukraine, France, Germany, Poland, ...) have no downloadable map named after the country
+	 * itself, so for 2 points of different sub-regions the only common region would never match
+	 * any downloaded file, and the check would always fail.
+	 */
+	static List<String> collectRegionsOfRoutePoints(OsmandRegions osmandRegions, LatLon start, List<LatLon> targets)
+			throws IOException {
+		Set<String> regions = new LinkedHashSet<>();
+		collectRegionsOfPoint(start, regions, osmandRegions);
+		for (LatLon target : targets) {
+			collectRegionsOfPoint(target, regions, osmandRegions);
+		}
+		return new ArrayList<>(regions);
+	}
+
+	private static void collectRegionsOfPoint(LatLon ll, Set<String> regions, OsmandRegions or) throws IOException {
 		List<BinaryMapDataObject> foundRegions = or.getRegionsToDownload(ll.getLatitude(), ll.getLongitude());
 		for (BinaryMapDataObject region : foundRegions) {
 			String name = or.getDownloadName(region);
-			regionCounter.put(name, regionCounter.getOrDefault(name, 0) + 1);
+			if (name != null) {
+				regions.add(name);
+			}
 		}
 	}
 
