@@ -59,7 +59,7 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.simulation.DashSimulateFragment;
-import net.osmand.plus.simulation.DriveSimulationFragment;
+import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -347,8 +347,10 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
 	@Override
 	public void mapActivityResume(@NonNull MapActivity activity) {
-		if (app.getLocationProvider().getLocationSimulation().isDriveSimulationActive()) {
-			DriveSimulationFragment.showInstance(activity);
+		OsmAndLocationSimulation simulation = app.getLocationProvider().getLocationSimulation();
+		if (simulation.isDriveSimulationActive()) {
+			// The keyboard callback may be taken over by other screens, restore it
+			simulation.getDriveSimulation().attachKeyListener();
 		}
 	}
 

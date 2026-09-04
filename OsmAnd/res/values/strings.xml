@@ -12,13 +12,7 @@
 	Thx - Hardy
 -->
 	<string name="drive_simulation">Simulate driving</string>
-	<string name="drive_simulation_descr">Drive a virtual vehicle over the map with on-screen controls or a keyboard: arrow keys drive, Q / E rotate the camera, W / S tilt it, A / D zoom. The simulated position is used by widgets, auto zoom, navigation and trip recording.</string>
-	<string name="drive_simulation_steer_left">Steer left</string>
-	<string name="drive_simulation_steer_right">Steer right</string>
-	<string name="drive_simulation_throttle">Accelerate</string>
-	<string name="drive_simulation_brake">Brake</string>
-	<string name="drive_simulation_gear_drive">D</string>
-	<string name="drive_simulation_gear_reverse">R</string>
+	<string name="drive_simulation_descr">Drive a virtual vehicle over the map with a keyboard: arrow keys drive, R switches between forward and reverse gear, Q / E rotate the camera, W / S tilt it, A / D zoom. The simulated position is used by widgets, auto zoom, navigation and trip recording.</string>
 	<string name="astro_eclipse_column_below_horizon">Below horizon</string>
 	<string name="share_favorites_media_preparation_failed">Couldn\'t include attached media. Sharing points only.</string>
 	<plurals name="files_count">

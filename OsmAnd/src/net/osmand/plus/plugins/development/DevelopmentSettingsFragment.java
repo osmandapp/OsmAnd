@@ -32,7 +32,6 @@ import net.osmand.plus.settings.bottomsheets.BooleanRadioButtonsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
-import net.osmand.plus.simulation.DriveSimulationFragment;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.simulation.SimulateLocationFragment;
 import net.osmand.plus.utils.AndroidUtils;
@@ -399,12 +398,10 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 				OsmAndLocationSimulation simulation = app.getLocationProvider().getLocationSimulation();
 				if (simulation.isDriveSimulationActive()) {
 					simulation.stopDriveSimulation();
-					DriveSimulationFragment.hideInstance(mapActivity);
 				} else {
 					simulation.startDriveSimulation(null);
-					// Return to the map, the controls are shown over it
+					// Return to the map, the vehicle is driven with the keyboard over it
 					mapActivity.getFragmentsHelper().closeAllFragments();
-					DriveSimulationFragment.showInstance(mapActivity);
 				}
 			}
 			return true;

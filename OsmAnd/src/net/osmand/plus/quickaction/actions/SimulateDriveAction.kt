@@ -11,7 +11,6 @@ import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin
 import net.osmand.plus.quickaction.QuickAction
 import net.osmand.plus.quickaction.QuickActionIds.SIMULATE_DRIVE_ACTION_ID
 import net.osmand.plus.quickaction.QuickActionType
-import net.osmand.plus.simulation.DriveSimulationFragment
 import net.osmand.plus.utils.UiUtilities
 
 /**
@@ -32,10 +31,8 @@ class SimulateDriveAction : QuickAction {
 		val simulation = app.locationProvider.locationSimulation
 		if (simulation.isDriveSimulationActive) {
 			simulation.stopDriveSimulation()
-			DriveSimulationFragment.hideInstance(mapActivity)
 		} else {
 			simulation.startDriveSimulation(null)
-			DriveSimulationFragment.showInstance(mapActivity)
 		}
 	}
 

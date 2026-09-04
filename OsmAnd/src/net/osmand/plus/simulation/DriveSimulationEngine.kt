@@ -2,6 +2,7 @@ package net.osmand.plus.simulation
 
 import android.os.Handler
 import android.os.Looper
+import android.view.KeyEvent
 import net.osmand.Location
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.settings.backend.OsmandSettings
@@ -14,20 +15,17 @@ import kotlin.math.sqrt
 
 /**
  * Manually driven location simulation: instead of replaying a recorded track it moves
- * a virtual vehicle over the map according to throttle / brake / steering input coming
- * from the on-screen controls or from a hardware keyboard.
+ * a virtual vehicle over the map according to throttle / brake / steering input.
+ *
+ * The vehicle is driven with a hardware keyboard: the arrow keys drive it and
+ * Q / E (rotate), W / S (tilt), A / D (zoom) control the camera. The R key switches the gear.
  *
  * Locations are pushed to [net.osmand.plus.OsmAndLocationProvider.setLocationFromSimulation],
  * so all the regular consumers (widgets, auto zoom, track recording, routing) work as usual.
  */
-class DriveSimulationEngine(private val app: OsmandApplication) {
-
-	interface DriveSimulationListener {
-		fun onDriveSimulationUpdate(engine: DriveSimulationEngine)
-	}
+class DriveSimulationEngine(private val app: OsmandApplication) : KeyEvent.Callback {
 
 	private val handler = Handler(Looper.getMainLooper())
-	private val listeners = mutableListOf<DriveSimulationListener>()
 
 	private var latitude = 0.0
 	private var longitude = 0.0
@@ -84,16 +82,6 @@ class DriveSimulationEngine(private val app: OsmandApplication) {
 		}
 	}
 
-	fun addListener(listener: DriveSimulationListener) {
-		if (!listeners.contains(listener)) {
-			listeners.add(listener)
-		}
-	}
-
-	fun removeListener(listener: DriveSimulationListener) {
-		listeners.remove(listener)
-	}
-
 	/**
 	 * Starts driving from [startLocation], from the last known location or, if there is none,
 	 * from the center of the map.
@@ -121,7 +109,16 @@ class DriveSimulationEngine(private val app: OsmandApplication) {
 		val trackingUtilities = app.mapViewTrackingUtilities
 		trackingUtilities.setMapLinkedToLocation(true)
 		trackingUtilities.backToLocationImpl(mapView.zoom, false)
+		attachKeyListener()
 		handler.postDelayed(tickRunnable, TICK_INTERVAL_MS)
+	}
+
+	/**
+	 * Starts to listen to the hardware keyboard. Called on every map activity resume,
+	 * because the callback may be taken over by other screens.
+	 */
+	fun attachKeyListener() {
+		app.keyEventHelper.setExternalCallback(this)
 	}
 
 	/**
@@ -150,6 +147,7 @@ class DriveSimulationEngine(private val app: OsmandApplication) {
 			return
 		}
 		restoreMapRotationMode()
+		app.keyEventHelper.setExternalCallback(null)
 		running = false
 		handler.removeCallbacks(tickRunnable)
 		resetControls()
@@ -171,7 +169,6 @@ class DriveSimulationEngine(private val app: OsmandApplication) {
 		brakeInput.onTickApplied()
 		steeringInput.onTickApplied()
 		publishLocation()
-		notifyListeners()
 	}
 
 	private fun updateSpeed() {
@@ -235,6 +232,68 @@ class DriveSimulationEngine(private val app: OsmandApplication) {
 		app.locationProvider.setLocationFromSimulation(location)
 	}
 
+	override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+		when (keyCode) {
+			// Vehicle
+			KeyEvent.KEYCODE_DPAD_UP -> setThrottlePressed(true)
+			KeyEvent.KEYCODE_DPAD_DOWN -> setBrakePressed(true)
+			KeyEvent.KEYCODE_DPAD_LEFT -> setSteering(-1f)
+			KeyEvent.KEYCODE_DPAD_RIGHT -> setSteering(1f)
+			KeyEvent.KEYCODE_R -> if (isFirstKeyPress(event)) {
+				reverseGear = !reverseGear
+			}
+
+			// Camera. Rotation and tilt are repeatable, so that a held key moves the camera
+			KeyEvent.KEYCODE_Q -> rotateCamera(-CAMERA_ROTATION_STEP)
+			KeyEvent.KEYCODE_E -> rotateCamera(CAMERA_ROTATION_STEP)
+			KeyEvent.KEYCODE_W -> tiltCamera(CAMERA_TILT_STEP)
+			KeyEvent.KEYCODE_S -> tiltCamera(-CAMERA_TILT_STEP)
+			KeyEvent.KEYCODE_A -> if (isFirstKeyPress(event)) {
+				app.osmandMap.mapView.changeZoomManually(1)
+			}
+
+			KeyEvent.KEYCODE_D -> if (isFirstKeyPress(event)) {
+				app.osmandMap.mapView.changeZoomManually(-1)
+			}
+
+			else -> return false
+		}
+		return true
+	}
+
+	override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
+		when (keyCode) {
+			KeyEvent.KEYCODE_DPAD_UP -> setThrottlePressed(false)
+			KeyEvent.KEYCODE_DPAD_DOWN -> setBrakePressed(false)
+			KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_DPAD_RIGHT -> setSteering(0f)
+			KeyEvent.KEYCODE_Q, KeyEvent.KEYCODE_E, KeyEvent.KEYCODE_W, KeyEvent.KEYCODE_S,
+			KeyEvent.KEYCODE_A, KeyEvent.KEYCODE_D, KeyEvent.KEYCODE_R -> Unit
+
+			else -> return false
+		}
+		return true
+	}
+
+	override fun onKeyLongPress(keyCode: Int, event: KeyEvent?) = false
+
+	override fun onKeyMultiple(keyCode: Int, count: Int, event: KeyEvent?) = false
+
+	private fun isFirstKeyPress(event: KeyEvent?) = event == null || event.repeatCount == 0
+
+	private fun rotateCamera(degrees: Float) {
+		enableManualMapRotation()
+		val mapView = app.osmandMap.mapView
+		mapView.setRotate(mapView.rotate + degrees, true)
+	}
+
+	private fun tiltCamera(degrees: Float) {
+		val mapView = app.osmandMap.mapView
+		val angle = mapView.normalizeElevationAngle(mapView.elevationAngle + degrees)
+		app.settings.setLastKnownMapElevation(angle)
+		mapView.animatedDraggingThread.startTilting(angle, 0f)
+		mapView.refreshMap()
+	}
+
 	/**
 	 * Control input that is guaranteed to be applied by at least one simulation tick,
 	 * so that short taps and key presses are not lost between the ticks.
@@ -276,12 +335,6 @@ class DriveSimulationEngine(private val app: OsmandApplication) {
 		}
 	}
 
-	private fun notifyListeners() {
-		for (listener in listeners) {
-			listener.onDriveSimulationUpdate(this)
-		}
-	}
-
 	companion object {
 		private const val TICK_INTERVAL_MS = 100L
 		private const val TICK_SECONDS = TICK_INTERVAL_MS / 1000f
@@ -299,5 +352,8 @@ class DriveSimulationEngine(private val app: OsmandApplication) {
 		private const val MIN_TURN_FACTOR = 0.5f
 
 		private const val LOCATION_ACCURACY = 5f
+
+		private const val CAMERA_ROTATION_STEP = 10f // degrees per key event
+		private const val CAMERA_TILT_STEP = 3f // degrees per key event
 	}
 }
