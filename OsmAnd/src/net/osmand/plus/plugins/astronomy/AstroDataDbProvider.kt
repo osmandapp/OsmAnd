@@ -273,13 +273,15 @@ class AstroDataDbProvider : AstroDataProvider() {
 			val cursor = db.query(
 				TABLE_WIKIPEDIA,
 				null,
-				"$COL_WIKI_WIKIDATA = ? AND ($COL_WIKI_LANG = ? OR $COL_WIKI_LANG = ?)",
-				arrayOf(wikidataId, bestLang, "en"),
+				"$COL_WIKI_WIKIDATA = ?",
+				arrayOf(wikidataId),
 				null, null, null
 			)
 
 			var bestArticle: AstroArticle? = null
 			var enArticle: AstroArticle? = null
+
+			val languages = mutableSetOf<String>()
 
 			cursor.use { c ->
 				val idxLang = c.getColumnIndex(COL_WIKI_LANG)
@@ -291,24 +293,28 @@ class AstroDataDbProvider : AstroDataProvider() {
 
 				while (c.moveToNext()) {
 					val l = c.getString(idxLang)
-					val title = if (idxTitle >= 0) c.getString(idxTitle) else ""
-					val extract = if (idxExtract >= 0) c.getString(idxExtract) else ""
-					val thumb = if (idxThumb >= 0) c.getStringOrNull(idxThumb) else null
-					val summary = if (idxSummary >= 0) c.getStringOrNull(idxSummary) else null
-					val mobile = if (idxMobile >= 0 && !c.isNull(idxMobile)) c.getBlob(idxMobile) else null
+					if (l == bestLang || l == "en") {
+						val title = if (idxTitle >= 0) c.getString(idxTitle) else ""
+						val extract = if (idxExtract >= 0) c.getString(idxExtract) else ""
+						val thumb = if (idxThumb >= 0) c.getStringOrNull(idxThumb) else null
+						val summary = if (idxSummary >= 0) c.getStringOrNull(idxSummary) else null
+						val mobile = if (idxMobile >= 0 && !c.isNull(idxMobile)) c.getBlob(idxMobile) else null
 
-					val article = AstroArticle(wikidataId, l, title, extract, thumb, summary, mobile)
-					if (l == bestLang) {
-						bestArticle = article
+						val article = AstroArticle(wikidataId, l, title, extract, thumb, summary, mobile)
+						if (l == bestLang) {
+							bestArticle = article
+						}
+						if (l == "en") {
+							enArticle = article
+						}
 					}
-					if (l == "en") {
-						enArticle = article
-					}
+					languages.add(l)
 				}
 			}
 
 			db.close()
-			return bestArticle ?: enArticle
+			val result = (bestArticle ?: enArticle)?.copy(wikiContentLocales = languages.toSet())
+			return result
 		} catch (e: Exception) {
 			LOG.error("Error reading Wikipedia article from DB", e)
 		}

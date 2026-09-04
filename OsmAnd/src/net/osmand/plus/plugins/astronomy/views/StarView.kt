@@ -28,6 +28,7 @@ import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import android.view.View
 import android.view.animation.DecelerateInterpolator
+import android.widget.OverScroller
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.withTranslation
 import io.github.cosinekitty.astronomy.Aberration
@@ -291,11 +292,8 @@ class StarView @JvmOverloads constructor(
 	private var lastTouchY = 0f
 	private var isPanning = false
 	private val scaleGestureDetector = ScaleGestureDetector(context, ScaleListener())
-	private val gestureDetector = GestureDetector(context, object : SimpleOnGestureListener() {
-		override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
-			performClickAt(e.x, e.y); return true;
-		}
-	})
+	private val gestureDetector = GestureDetector(context, StarViewGestureListener())
+	private val inertiaFlingScroller = FlingScroller(context, velocityFactor = 1f/3)
 
 	private var onObjectClickListener: ((SkyObject?) -> Unit)? = null
 
@@ -2116,6 +2114,11 @@ class StarView @JvmOverloads constructor(
 		return true
 	}
 
+	override fun onDetachedFromWindow() {
+		inertiaFlingScroller.forceFinished()
+		super.onDetachedFromWindow()
+	}
+
 	override fun onTouchEvent(event: MotionEvent): Boolean {
 		scaleGestureDetector.onTouchEvent(event)
 		if (scaleGestureDetector.isInProgress) {
@@ -2136,18 +2139,7 @@ class StarView @JvmOverloads constructor(
 					isPanning = true
 				} else if (hitThreshold) {
 					isPanning = true
-					if (is2DMode) {
-						panX += dx
-						panY += dy
-					} else {
-						val scale = viewAngle / width
-						azimuthCenter -= dx * scale
-						altitudeCenter += dy * scale
-						altitudeCenter = max(-90.0, min(90.0, altitudeCenter))
-						if (azimuthCenter < 0) azimuthCenter += 360
-						if (azimuthCenter >= 360) azimuthCenter -= 360
-						onAzimuthManualChangeListener?.invoke(azimuthCenter)
-					}
+					applyPanDeltaToStarMap(dx, dy)
 					lastTouchX = event.x; lastTouchY = event.y
 					invalidate()
 				}
@@ -2164,6 +2156,21 @@ class StarView @JvmOverloads constructor(
 			}
 		}
 		return true
+	}
+
+	private fun applyPanDeltaToStarMap(dx: Float, dy: Float) {
+		if (is2DMode) {
+			panX += dx
+			panY += dy
+		} else {
+			val scale = viewAngle / width
+			azimuthCenter -= dx * scale
+			altitudeCenter += dy * scale
+			altitudeCenter = max(-90.0, min(90.0, altitudeCenter))
+			if (azimuthCenter < 0) azimuthCenter += 360
+			if (azimuthCenter >= 360) azimuthCenter -= 360
+			onAzimuthManualChangeListener?.invoke(azimuthCenter)
+		}
 	}
 
 	private fun performClickAt(x: Float, y: Float) {
@@ -2282,9 +2289,105 @@ class StarView @JvmOverloads constructor(
 	}
 
 	private inner class ScaleListener : ScaleGestureDetector.SimpleOnScaleGestureListener() {
+		override fun onScaleBegin(detector: ScaleGestureDetector): Boolean {
+			inertiaFlingScroller.forceFinished()
+			return super.onScaleBegin(detector)
+		}
+
 		override fun onScale(detector: ScaleGestureDetector): Boolean {
 			updateViewAngle(viewAngle / detector.scaleFactor, detector.focusX, detector.focusY)
 			return true
+		}
+	}
+
+	private inner class StarViewGestureListener : SimpleOnGestureListener() {
+		override fun onDown(e: MotionEvent): Boolean {
+			inertiaFlingScroller.forceFinished()
+			return super.onDown(e)
+		}
+
+		override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
+			performClickAt(e.x, e.y)
+			return true
+		}
+
+		override fun onFling(
+			e1: MotionEvent?,
+			e2: MotionEvent,
+			velocityX: Float,
+			velocityY: Float
+		): Boolean {
+			if (scaleGestureDetector.isInProgress) {
+                return false
+            }
+			inertiaFlingScroller.fling(e1, e2, velocityX, velocityY)
+			return true
+		}
+	}
+
+	/**
+	 * Helper inner class for handling fling overscroll (inertia).
+	 *
+	 * @property velocityFactor - multiplier for velocities passed to [FlingScroller.fling]
+	 * @param context view's context
+	 */
+	private inner class FlingScroller(context: Context, private val velocityFactor: Float) {
+		private val scroller = OverScroller(context)
+
+		private var flingLastX = 0
+		private var flingLastY = 0
+
+		private val scrollRunnable = object: Runnable {
+			override fun run() {
+				if (scroller.computeScrollOffset()) {
+					consumeScrollOffset()
+					invalidate()
+					postOnAnimation(this)
+				}
+			}
+		}
+
+		/**
+		 * Stops the overscroll.
+		 *
+		 */
+		fun forceFinished() {
+			removeCallbacks(scrollRunnable)
+			scroller.forceFinished(true)
+		}
+
+		/**
+		 * Launches overscroll. Signature matches that of [SimpleOnGestureListener.onFling]
+		 * Invoke from [SimpleOnGestureListener.onFling] and pass all parameters from there as is.
+		 */
+		fun fling(e1: MotionEvent?, e2: MotionEvent, velocityX: Float, velocityY: Float) {
+			forceFinished()
+			flingLastX = e2.x.toInt()
+			flingLastY = e2.y.toInt()
+			scroller.fling(
+				flingLastX,
+				flingLastY,
+				(velocityX * velocityFactor).toInt(),
+				(velocityY * velocityFactor).toInt(),
+				Int.MIN_VALUE,
+				Int.MAX_VALUE,
+				Int.MIN_VALUE,
+				Int.MAX_VALUE
+			)
+			postOnAnimation(scrollRunnable)
+		}
+
+		private fun consumeScrollOffset() {
+			val x = scroller.currX
+			val y = scroller.currY
+
+			val dx = x - flingLastX
+			val dy = y - flingLastY
+
+			flingLastX = x
+			flingLastY = y
+
+			applyPanDeltaToStarMap(dx.toFloat(), dy.toFloat())
 		}
 	}
 

@@ -119,6 +119,10 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private lateinit var searchButton: StarMapButton
 	private lateinit var settingsButton: StarMapButton
 
+	private lateinit var zoomButtons: View
+	private lateinit var zoomInButton: StarMapButton
+	private lateinit var zoomOutButton: StarMapButton
+
 	private lateinit var compassButton: StarCompassButton
 	private lateinit var eclipseCard: MaterialCardView
 	private lateinit var eclipseLoading: ProgressBar
@@ -175,6 +179,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private var previousViewAngle: Double = 150.0
 	private var eclipseRestoreState: EclipseRestoreState? = null
 	private var activeEclipseType: EclipseExplorerType? = null
+	private var lastStarCameraState: StarViewCameraState? = null
 	private var restoredActiveEclipseCameraState: StarViewCameraState? = null
 	private var lastFocusedEclipseRequestId = -1L
 	private var keepEclipseTargetCenteredForMapMove = false
@@ -316,6 +321,14 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		private const val STATE_ECLIPSE_ACTIVE_CAMERA_PAN_Y = "eclipse_active_camera_pan_y"
 		private const val STATE_ECLIPSE_ACTIVE_CAMERA_ROLL = "eclipse_active_camera_roll"
 
+		private const val STATE_STARVIEW_ACTIVE_CAMERA_AZ = "starview_active_camera_az"
+		private const val STATE_STARVIEW_ACTIVE_CAMERA_ALT = "eclipse_active_camera_alt"
+		private const val STATE_STARVIEW_ACTIVE_CAMERA_FOV = "eclipse_active_camera_fov"
+		private const val STATE_STARVIEW_ACTIVE_CAMERA_2D = "eclipse_active_camera_2d"
+		private const val STATE_STARVIEW_ACTIVE_CAMERA_PAN_X = "eclipse_active_camera_pan_x"
+		private const val STATE_STARVIEW_ACTIVE_CAMERA_PAN_Y = "eclipse_active_camera_pan_y"
+		private const val STATE_STARVIEW_ACTIVE_CAMERA_ROLL = "eclipse_active_camera_roll"
+
 		@JvmStatic
 		fun applyRedFilterToViews(enabled: Boolean, vararg views: View?) {
 			val layerType = if (enabled) View.LAYER_TYPE_HARDWARE else View.LAYER_TYPE_NONE
@@ -384,6 +397,18 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				)
 			}
 		}
+
+		 if (savedInstanceState != null && savedInstanceState.containsKey(STATE_STARVIEW_ACTIVE_CAMERA_FOV)){
+			 lastStarCameraState = StarViewCameraState(
+				azimuth = savedInstanceState.getDouble(STATE_STARVIEW_ACTIVE_CAMERA_AZ),
+				altitude = savedInstanceState.getDouble(STATE_STARVIEW_ACTIVE_CAMERA_ALT),
+				viewAngle = savedInstanceState.getDouble(STATE_STARVIEW_ACTIVE_CAMERA_FOV),
+				is2DMode = savedInstanceState.getBoolean(STATE_STARVIEW_ACTIVE_CAMERA_2D),
+				panX = savedInstanceState.getFloat(STATE_STARVIEW_ACTIVE_CAMERA_PAN_X),
+				panY = savedInstanceState.getFloat(STATE_STARVIEW_ACTIVE_CAMERA_PAN_Y),
+				roll = savedInstanceState.getDouble(STATE_STARVIEW_ACTIVE_CAMERA_ROLL)
+			)
+		}
 		requireActivity().onBackPressedDispatcher.addCallback(this, backPressedCallback)
 		childFragmentManager.addOnBackStackChangedListener {
 			updateBackPressedCallback()
@@ -392,6 +417,22 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 
 	override fun onSaveInstanceState(outState: Bundle) {
 		super.onSaveInstanceState(outState)
+		saveEclipseState(outState)
+		saveStarViewCameraState(outState)
+	}
+
+	private fun saveStarViewCameraState(outState: Bundle) {
+		lastStarCameraState?.let { state ->
+			outState.putDouble(STATE_STARVIEW_ACTIVE_CAMERA_AZ, state.azimuth)
+			outState.putDouble(STATE_STARVIEW_ACTIVE_CAMERA_ALT, state.altitude)
+			outState.putDouble(STATE_STARVIEW_ACTIVE_CAMERA_FOV, state.viewAngle)
+			outState.putBoolean(STATE_STARVIEW_ACTIVE_CAMERA_2D, state.is2DMode)
+			outState.putFloat(STATE_STARVIEW_ACTIVE_CAMERA_PAN_X, state.panX)
+			outState.putFloat(STATE_STARVIEW_ACTIVE_CAMERA_PAN_Y, state.panY)
+			outState.putDouble(STATE_STARVIEW_ACTIVE_CAMERA_ROLL, state.roll)
+		}
+	}
+	private fun saveEclipseState(outState: Bundle) {
 		val restore = eclipseRestoreState ?: return
 		outState.putBoolean(STATE_ECLIPSE_ACTIVE, true)
 		activeEclipseType?.let { outState.putString(STATE_ECLIPSE_TYPE, it.name) }
@@ -538,6 +579,22 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			}
 		}
 
+		zoomButtons = view.findViewById(R.id.star_map_zoom_buttons)
+
+		zoomInButton = view.findViewById(R.id.star_map_zoom_in_button)
+		zoomInButton.setOnClickListener {
+			if (::starView.isInitialized) {
+				starView.zoomIn()
+			}
+		}
+
+		zoomOutButton = view.findViewById(R.id.star_map_zoom_out_button)
+		zoomOutButton.setOnClickListener {
+			if (::starView.isInitialized) {
+				starView.zoomOut()
+			}
+		}
+
 		timeControlBtn.setOnClickListener {
 			timeSelectionView.isVisible = !timeSelectionView.isVisible
 			updateTimeControlTheme(timeControlCard, timeControlBtn, resetTimeButton)
@@ -655,6 +712,10 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				magnitudeSliderValue.text = text
 			}
 			updateRedMode(config.showRedFilter)
+			config.lastStarCameraState?.let {
+				lastStarCameraState = it
+				starView.restoreCameraState(it)
+			}
 		}
 
 		updateStarMap(true)
@@ -694,30 +755,34 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		systemLeftInset = maxOf(sysBars?.left ?: 0, cutout.left)
 		systemRightInset = maxOf(sysBars?.right ?: 0, cutout.right)
 
-		applyBottomInsets()
-		applyTopInsets()
-		applySideInsets()
+		mapControlsContainer.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+			rightMargin = systemRightInset
+			leftMargin = systemLeftInset
+			topMargin = systemTopInset
+			bottomMargin = systemBottomInset
+		}
+		updateEclipseModeOffsets()
 	}
 
-	private fun applyBottomInsets() {
-		applyBottomWindowInsets(timeControlCard, regularMapVisible)
+	private fun updateEclipseModeOffsets() {
 		if (::eclipseCard.isInitialized) applyBottomWindowInsets(eclipseCard, regularMapVisible)
 		val eclipseOffset = if (::eclipseCard.isInitialized && eclipseCard.isVisible) {
 			eclipseCard.height + resources.getDimensionPixelSize(R.dimen.content_padding)
 		} else 0
-		applyBottomWindowInsets(searchButton, regularMapVisible, eclipseOffset)
-		applyBottomWindowInsets(settingsButton, regularMapVisible, eclipseOffset)
+		setExtraBottomMargin(timeControlCard, eclipseOffset)
+		setExtraBottomMargin(searchButton, eclipseOffset)
+		setExtraBottomMargin(settingsButton, eclipseOffset)
+		setExtraBottomMargin(zoomButtons, eclipseOffset)
 	}
 
-	private fun applyTopInsets() {
-		applyTopWindowInsets(compassButton)
-		applyTopWindowInsets(closeButton)
-	}
-
-	private fun applySideInsets() {
-		applySideWindowInsets(compassButton, true)
-		applySideWindowInsets(closeButton, false)
-		applySideWindowInsets(settingsButton, false)
+	private fun setExtraBottomMargin(view: View, extraBottom: Int) {
+		val layoutParams = view.layoutParams as? ViewGroup.MarginLayoutParams ?: return
+		val baseMarginBottom = view.resources.getDimensionPixelSize(R.dimen.content_padding)
+		val bottomMargin = baseMarginBottom + extraBottom
+		if (layoutParams.bottomMargin == bottomMargin) return
+		view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+			this.bottomMargin = bottomMargin
+		}
 	}
 
 	override fun getInsetTargets(): InsetTargetsCollection {
@@ -759,30 +824,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		if (layoutParams.bottomMargin == bottomMargin) return
 		view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
 			this.bottomMargin = bottomMargin
-		}
-	}
-
-	private fun applyTopWindowInsets(view: View) {
-		val baseMarginTop = view.resources.getDimensionPixelSize(R.dimen.content_padding)
-		if (systemTopInset > 0) {
-			view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-				topMargin = baseMarginTop + systemTopInset
-			}
-			return
-		}
-		view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-			topMargin = baseMarginTop
-		}
-	}
-
-	private fun applySideWindowInsets(view: View, isLeft: Boolean) {
-		val baseMargin = view.resources.getDimensionPixelSize(R.dimen.content_padding)
-		view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-			if (isLeft) {
-				marginStart = baseMargin + systemLeftInset
-			} else {
-				marginEnd = baseMargin + systemRightInset
-			}
 		}
 	}
 
@@ -832,6 +873,12 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		mapActivity.refreshMap()
 		updateBackPressedCallback()
 		updateMapControlsVisibility()
+		if (restoredActiveEclipseCameraState == null) {
+			lastStarCameraState?.let { state ->
+				apply2DMode(state.is2DMode)
+				starView.restoreCameraState(state)
+			}
+		}
 		restoredActiveEclipseCameraState?.let { state ->
 			apply2DMode(state.is2DMode)
 			starView.restoreCameraState(state)
@@ -859,6 +906,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		closeButton.nightMode = currentNightMode
 		searchButton.nightMode = currentNightMode
 		settingsButton.nightMode = currentNightMode
+		zoomOutButton.nightMode = currentNightMode
+		zoomInButton.nightMode = currentNightMode
 		compassButton.setNightMode(currentNightMode)
 
 		updateMagnitudeFilterTheme()
@@ -1018,7 +1067,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				)
 			}
 		}
-		applyBottomInsets()
+		updateEclipseModeOffsets()
 		if (isEclipseModeActive() && ::eclipseCard.isInitialized) {
 			eclipseCard.post { centerEclipseTargetAtSelectedTime() }
 		}
@@ -1097,7 +1146,11 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	}
 
 	private fun saveStarMapSettings() {
+		lastStarCameraState = if (::starView.isInitialized) {
+			eclipseRestoreState?.cameraState ?: starView.captureCameraState()
+		} else null
 		astroSettings.updateStarMapConfig { current ->
+			val cameraState = lastStarCameraState ?: current.lastStarCameraState
 			current.copy(
 				showAzimuthalGrid = starView.showAzimuthalGrid,
 				showEquatorialGrid = starView.showEquatorialGrid,
@@ -1121,7 +1174,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				showGlobularClusters = starView.showGlobularClusters,
 				showGalaxyClusters = starView.showGalaxyClusters,
 				is2DMode = starView.is2DMode,
-				magnitudeFilter = starView.magnitudeFilter?.toDouble()
+				magnitudeFilter = starView.magnitudeFilter?.toDouble(),
+				lastStarCameraState = cameraState
 			)
 		}
 	}
@@ -1338,7 +1392,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		if (regularMapVisible) updateRegularMapVisibility(true)
 		lastFocusedEclipseRequestId = -1L
 		updateBackPressedCallback()
-		eclipseCard.post { applyBottomInsets() }
+		eclipseCard.post { updateEclipseModeOffsets() }
 		when (type) {
 			EclipseExplorerType.Solar -> viewModel.enterSolarEclipseMode(starView.observer, displayedTime)
 			EclipseExplorerType.Lunar -> viewModel.enterLunarEclipseMode(starView.observer, displayedTime)
@@ -1416,7 +1470,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		if (restore.cameraEnabled && !cameraHelper.isCameraOverlayEnabled) cameraHelper.toggleCameraOverlay()
 		setTimeAutoUpdateEnabled(restore.autoTime)
 		lastFocusedEclipseRequestId = -1L
-		applyBottomInsets()
+		updateEclipseModeOffsets()
 		updateBackPressedCallback()
 	}
 
@@ -1572,7 +1626,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		timeControlCard.isVisible = !showing
 		if (!showing) {
 			resetEclipseUiCache()
-			applyBottomInsets()
+			updateEclipseModeOffsets()
 			return
 		}
 		eclipsePrevious.contentDescription = getString(R.string.astro_previous_solar_eclipse)
@@ -1694,7 +1748,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		if (eclipseMapShown && pendingEclipseMapFit) {
 			fitEclipseMapIfReady(state, state.mapFrame?.shadowPoint)
 		}
-		eclipseCard.post { applyBottomInsets() }
+		eclipseCard.post { updateEclipseModeOffsets() }
 		updateBackPressedCallback()
 		if (becameActive) applyRedFilterToViews(starView.showRedFilter, eclipseCard)
 	}
@@ -1723,7 +1777,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		timeControlCard.isVisible = !showing
 		if (!showing) {
 			resetEclipseUiCache()
-			applyBottomInsets()
+			updateEclipseModeOffsets()
 			return
 		}
 
@@ -1850,7 +1904,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		if (eclipseMapShown && pendingEclipseMapFit) {
 			state.mapFrame?.let { fitLunarEclipseVisibilityIfReady(it) }
 		}
-		eclipseCard.post { applyBottomInsets() }
+		eclipseCard.post { updateEclipseModeOffsets() }
 		updateBackPressedCallback()
 		if (becameActive) applyRedFilterToViews(starView.showRedFilter, eclipseCard)
 	}
@@ -2230,6 +2284,29 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		} else {
 			View.VISIBLE
 		}
+		updateZoomButtonsVisibility()
+	}
+
+	private fun updateZoomButtonsVisibility() {
+		if (!::zoomInButton.isInitialized) {
+			return
+		}
+		if (!::zoomOutButton.isInitialized) {
+			return
+		}
+		val activity = activity ?: return
+
+		val minWindowSizeDp = min(
+			AndroidUtils.getScreenWidth(activity),
+			AndroidUtils.getScreenHeight(activity)
+		).let {
+			AndroidUtils.pxToDpF(activity, it)
+		}
+		zoomButtons.visibility = if (minWindowSizeDp <= 600f) {
+            View.GONE
+        } else {
+            View.VISIBLE
+        }
 	}
 
 	private fun clearSelectedObject() {
@@ -2375,6 +2452,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		if (::closeButton.isInitialized) viewsToFilter.add(closeButton)
 		if (::searchButton.isInitialized) viewsToFilter.add(searchButton)
 		if (::settingsButton.isInitialized) viewsToFilter.add(settingsButton)
+		if (::zoomInButton.isInitialized) viewsToFilter.add(zoomInButton)
+		if (::zoomOutButton.isInitialized) viewsToFilter.add(zoomOutButton)
 		if (::sliderContainer.isInitialized) viewsToFilter.add(sliderContainer)
 		if (::bottomSheetContainer.isInitialized) viewsToFilter.add(bottomSheetContainer)
 
