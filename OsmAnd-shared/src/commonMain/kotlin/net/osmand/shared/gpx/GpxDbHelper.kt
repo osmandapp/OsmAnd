@@ -10,7 +10,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import net.osmand.shared.api.SQLiteAPI.SQLiteConnection
 import net.osmand.shared.data.StringIntPair
 import net.osmand.shared.extensions.currentTimeMillis
 import net.osmand.shared.gpx.GpxReader.GpxReaderAdapter
@@ -28,14 +27,16 @@ object GpxDbHelper : GpxReaderAdapter {
 	private val dataItems = ConcurrentMutableMap<KFile, GpxDataItem>()
 	private var itemsVersion = AtomicInt(0)
 
-	private val readingItemsMap = mutableMapOf<KFile, GpxDataItem>()
+	// Queued reads must not retain metadata snapshots created before cache hydration.
+	private val readingFiles = mutableSetOf<KFile>()
+	private val resolvingFiles = mutableSetOf<KFile>()
 	private val readingItemsCallbacks = mutableMapOf<KFile, MutableList<GpxDataItemCallback>?>()
 
 	private const val READER_TASKS_LIMIT = 4
 	private var readers = mutableListOf<GpxReader>()
 	private var readerSync = Synchronizable()
 
-	private var initialized: Boolean = false
+	private val initialized = AtomicBoolean(false)
 	private var reconciliationRunning = AtomicBoolean(false)
 	private var reconciliationComplete = AtomicBoolean(false)
 	private var reconciliationAttempted = AtomicBoolean(false)
@@ -53,7 +54,7 @@ object GpxDbHelper : GpxReaderAdapter {
 	suspend fun loadItems() {
 		loadGpxItems()
 		loadGpxDirItems()
-		initialized = true
+		initialized.value = true
 	}
 
 	private suspend fun loadGpxItems() {
@@ -70,14 +71,14 @@ object GpxDbHelper : GpxReaderAdapter {
 		log.info("Hydrated GPX directory metadata in ${currentTimeMillis() - start} ms, items count ${dirItems.size}")
 	}
 
-	fun isInitialized() = initialized
+	fun isInitialized() = initialized.value
 
 	fun isFilesystemReconciliationRunning() = reconciliationRunning.value
 
 	fun isFilesystemReconciliationComplete() = reconciliationComplete.value
 
 	fun startFilesystemReconciliation() {
-		if (!initialized || reconciliationAttempted.value ||
+		if (!initialized.value || reconciliationAttempted.value ||
 				!reconciliationRunning.compareAndSet(expected = false, new = true)) {
 			return
 		}
@@ -149,7 +150,7 @@ object GpxDbHelper : GpxReaderAdapter {
 				val actualModifiedTime = file.lastModified()
 				if (item.getParameter<Long>(GpxParameter.FILE_LAST_MODIFIED_TIME) != actualModifiedTime
 						|| GpxDbUtils.isAnalyseNeeded(item, actualModifiedTime)) {
-					readGpxItem(file, item, null, false)
+					readGpxItem(file, null, false)
 					queuedModifiedItems++
 				}
 			}
@@ -245,9 +246,18 @@ object GpxDbHelper : GpxReaderAdapter {
 		return res
 	}
 
-	fun insertDataItem(item: DataItem, conn: SQLiteConnection) {
-		database.insertItem(item, conn)
-		putToCache(item)
+	fun persistAnalyzedItem(item: GpxDataItem): GpxDataItem {
+		val persistedItem = database.persistAnalyzedItem(item)
+		val cachedItem = dataItems[item.file]
+		val result = when {
+			persistedItem == null -> cachedItem ?: item
+			cachedItem != null -> cachedItem.apply { copyAnalysisData(persistedItem) }
+			else -> persistedItem
+		}
+		if (persistedItem != null) {
+			putToCache(result)
+		}
+		return result
 	}
 
 	fun updateDataItemParameter(
@@ -371,7 +381,7 @@ object GpxDbHelper : GpxReaderAdapter {
 			val shouldCheckAnalysis = callback != null || !isReading(file)
 			if (shouldCheckAnalysis && GpxDbUtils.isAnalyseNeeded(item)) {
 				val reconciliationFinished = reconciliationAttempted.value && !reconciliationRunning.value
-				readGpxItem(file, item, callback, reconciliationFinished)
+				readGpxItem(file, callback, reconciliationFinished)
 			}
 		}
 		return item
@@ -411,11 +421,12 @@ object GpxDbHelper : GpxReaderAdapter {
 	fun isReading(): Boolean = readerSync.synchronize { readers.isNotEmpty() }
 
 	fun isReading(file: KFile): Boolean =
-		readerSync.synchronize { readingItemsMap.contains(file) || readers.any { it.isReading(file) } }
+		readerSync.synchronize {
+			readingFiles.contains(file) || resolvingFiles.contains(file) || readers.any { it.isReading(file) }
+		}
 
 	private fun readGpxItem(
 		file: KFile,
-		item: GpxDataItem?,
 		callback: GpxDataItemCallback?,
 		startReader: Boolean = true
 	) {
@@ -423,8 +434,10 @@ object GpxDbHelper : GpxReaderAdapter {
 			if (callback != null) {
 				readingItemsCallbacks.getOrPut(file) { mutableListOf() }?.apply { add(callback) }
 			}
-			if (!isReading(file)) {
-				readingItemsMap[file] = item ?: GpxDataItem(file)
+			val alreadyReading = readingFiles.contains(file) || resolvingFiles.contains(file) ||
+					readers.any { it.isReading(file) }
+			if (!alreadyReading) {
+				readingFiles.add(file)
 				if (startReader && readers.size < READER_TASKS_LIMIT) {
 					startReading()
 				}
@@ -434,7 +447,7 @@ object GpxDbHelper : GpxReaderAdapter {
 
 	private fun startQueuedReaders() {
 		readerSync.synchronize {
-			while (readingItemsMap.isNotEmpty() && readers.size < READER_TASKS_LIMIT) {
+			while (readingFiles.isNotEmpty() && readers.size < READER_TASKS_LIMIT) {
 				startReading()
 			}
 		}
@@ -455,12 +468,39 @@ object GpxDbHelper : GpxReaderAdapter {
 
 	fun getGPXDatabase(): GpxDatabase = database
 
-	override fun pullNextFileItem(action: ((Pair<KFile, GpxDataItem>?) -> Unit)?): Pair<KFile, GpxDataItem>? =
-		readerSync.synchronize {
-			val result = readingItemsMap.entries.firstOrNull()?.toPair()?.apply { readingItemsMap.remove(first) }
-			action?.invoke(result)
-			result
+	override fun pullNextFileItem(
+		action: ((Pair<KFile, GpxDataItem?>?) -> Unit)?
+	): Pair<KFile, GpxDataItem?>? {
+		val file = readerSync.synchronize {
+			readingFiles.firstOrNull()?.also {
+				readingFiles.remove(it)
+				resolvingFiles.add(it)
+			}
 		}
+		var result: Pair<KFile, GpxDataItem?>? = null
+		try {
+			result = file?.let {
+				val item = dataItems[it] ?: try {
+					database.getGpxDataItem(it)
+				} catch (e: Exception) {
+					log.error("Failed to resolve queued GPX item ${it.path()}", e)
+					null
+				}
+				it to item
+			}
+			return result
+		} finally {
+			readerSync.synchronize {
+				try {
+					action?.invoke(result)
+				} finally {
+					if (file != null) {
+						resolvingFiles.remove(file)
+					}
+				}
+			}
+		}
+	}
 
 	override fun onGpxDataItemRead(item: GpxDataItem) {
 		putGpxDataItemToSmartFolder(item)
@@ -490,14 +530,15 @@ object GpxDbHelper : GpxReaderAdapter {
 
 	override fun onReadingCancelled() {
 		readerSync.synchronize {
-			readingItemsMap.clear()
+			readingFiles.clear()
+			resolvingFiles.clear()
 			readingItemsCallbacks.clear()
 		}
 	}
 
 	override fun onReadingFinished(reader: GpxReader, cancelled: Boolean) {
 		readerSync.synchronize {
-			if (readingItemsMap.isNotEmpty() && readers.size < READER_TASKS_LIMIT && !cancelled) {
+			if (readingFiles.isNotEmpty() && readers.size < READER_TASKS_LIMIT && !cancelled) {
 				startReading()
 			}
 			readers.remove(reader)
