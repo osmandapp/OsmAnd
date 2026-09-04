@@ -5340,4 +5340,5 @@
     <string name="share_favorites_share_failed">Нисам успео поделити датотеку.</string>
     <string name="share_favorites_missing_media_warning">Неки приложени медији нису могли бити обухваћени.</string>
     <string name="search_on_web">Претражи на вебу</string>
+    <string name="astro_eclipse_column_below_horizon">Испод хоризонта</string>
 </resources>
