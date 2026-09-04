@@ -5337,4 +5337,5 @@
     <string name="share_favorites_share_failed">Deljenje fajla nije uspelo.</string>
     <string name="share_favorites_missing_media_warning">Neki priloženi mediji nisu mogli biti uključeni.</string>
     <string name="search_on_web">Pretraga na vebu</string>
+    <string name="astro_eclipse_column_below_horizon">Ispod horizonta</string>
 </resources>
