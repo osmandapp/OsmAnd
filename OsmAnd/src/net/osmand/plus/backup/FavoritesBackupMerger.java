@@ -396,7 +396,7 @@ final class FavoritesBackupMerger {
 			if (sameGroup(mergedGroup, current, defaultColor)) {
 				setLocalModifiedTime(sourceModifiedTime);
 				saveSnapshot(app, mergedGroup, fileName, uploadTime);
-			} else {
+			} else if (current != null) {
 				// Preserve the old common base so the next preparation keeps both sides in conflict.
 				app.getBackupHelper().updateFileUploadTime(
 						getType().name(), fileName, baseSyncTime);
