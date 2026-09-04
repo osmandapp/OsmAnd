@@ -10,6 +10,7 @@ import net.osmand.util.MapUtils
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
+import kotlin.math.sqrt
 
 /**
  * Manually driven location simulation: instead of replaying a recorded track it moves
@@ -196,14 +197,21 @@ class DriveSimulationEngine(private val app: OsmandApplication) {
 		if (steering == 0f) {
 			return
 		}
+		val absSpeed = abs(speed)
 		// A standing vehicle still can be turned slowly, otherwise it would be impossible
 		// to choose the direction before starting to drive
 		val speedFactor = MIN_TURN_FACTOR +
-				(1 - MIN_TURN_FACTOR) * min(1f, abs(speed) / FULL_TURN_RATE_SPEED)
+				(1 - MIN_TURN_FACTOR) * min(1f, absSpeed / FULL_TURN_RATE_SPEED)
+		// Above that speed the turn rate is damped, otherwise the vehicle spins on the spot
+		val dampingFactor = if (absSpeed > FULL_TURN_RATE_SPEED) {
+			sqrt(FULL_TURN_RATE_SPEED / absSpeed)
+		} else {
+			1f
+		}
 		// Steering a reversing vehicle turns it to the opposite side
 		val gearFactor = if (speed < 0) -1f else 1f
-		heading = MapUtils.normalizeDegrees360(
-			heading + steering * MAX_TURN_RATE * speedFactor * gearFactor * TICK_SECONDS)
+		heading = MapUtils.normalizeDegrees360(heading +
+				steering * MAX_TURN_RATE * speedFactor * dampingFactor * gearFactor * TICK_SECONDS)
 	}
 
 	private fun updatePosition() {
@@ -275,20 +283,20 @@ class DriveSimulationEngine(private val app: OsmandApplication) {
 	}
 
 	companion object {
-		private const val TICK_INTERVAL_MS = 200L
+		private const val TICK_INTERVAL_MS = 100L
 		private const val TICK_SECONDS = TICK_INTERVAL_MS / 1000f
 
 		private const val MAX_FORWARD_SPEED = 55f // m/s, ~200 km/h
-		private const val MAX_REVERSE_SPEED = 8f // m/s, ~29 km/h
+		private const val MAX_REVERSE_SPEED = 12f // m/s, ~43 km/h
 
-		private const val THROTTLE_ACCELERATION = 3f // m/s^2
-		private const val BRAKE_DECELERATION = 7f // m/s^2
-		private const val ROLLING_DECELERATION = 1f // m/s^2
+		private const val THROTTLE_ACCELERATION = 8f // m/s^2
+		private const val BRAKE_DECELERATION = 14f // m/s^2
+		private const val ROLLING_DECELERATION = 1.5f // m/s^2
 		private const val GEAR_SWITCH_MAX_SPEED = 0.5f // m/s
 
-		private const val MAX_TURN_RATE = 50f // degrees per second
-		private const val FULL_TURN_RATE_SPEED = 12f // m/s, full steering response above this speed
-		private const val MIN_TURN_FACTOR = 0.35f
+		private const val MAX_TURN_RATE = 110f // degrees per second
+		private const val FULL_TURN_RATE_SPEED = 5f // m/s, full steering response above this speed
+		private const val MIN_TURN_FACTOR = 0.5f
 
 		private const val LOCATION_ACCURACY = 5f
 	}

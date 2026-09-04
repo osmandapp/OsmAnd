@@ -13,15 +13,11 @@ import androidx.fragment.app.FragmentManager
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.BaseOsmAndFragment
-import net.osmand.plus.helpers.MapDisplayPositionManager
-import net.osmand.plus.helpers.MapDisplayPositionManager.IMapDisplayPositionProvider
-import net.osmand.plus.settings.enums.MapPosition
 import net.osmand.plus.simulation.DriveSimulationEngine.DriveSimulationListener
 import net.osmand.plus.simulation.OsmAndLocationSimulation.LocationSimulationListener
+import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
-import net.osmand.plus.utils.OsmAndFormatter
-import kotlin.math.abs
 
 /**
  * On-map controls of the manually driven location simulation: steering, throttle, brake and gear.
@@ -29,7 +25,7 @@ import kotlin.math.abs
  * Q / E (rotate), W / S (tilt) and A / D (zoom).
  */
 class DriveSimulationFragment : BaseOsmAndFragment(), DriveSimulationListener,
-	LocationSimulationListener, KeyEvent.Callback, IMapDisplayPositionProvider {
+	LocationSimulationListener, KeyEvent.Callback {
 
 	private val simulation: OsmAndLocationSimulation
 		get() = app.locationProvider.locationSimulation
@@ -37,11 +33,11 @@ class DriveSimulationFragment : BaseOsmAndFragment(), DriveSimulationListener,
 	private val engine: DriveSimulationEngine
 		get() = simulation.driveSimulation
 
-	private val mapDisplayPositionManager: MapDisplayPositionManager
-		get() = app.mapViewTrackingUtilities.mapDisplayPositionManager
-
-	private var speedText: TextView? = null
+	private var panel: View? = null
+	private var expandButton: ImageButton? = null
 	private var gearButton: TextView? = null
+
+	private var collapsed = false
 
 	override fun isUsedOnMap() = true
 
@@ -50,7 +46,8 @@ class DriveSimulationFragment : BaseOsmAndFragment(), DriveSimulationListener,
 		updateNightMode()
 		val view = themedInflater.inflate(R.layout.fragment_drive_simulation, container, false)
 
-		speedText = view.findViewById(R.id.speed_text)
+		collapsed = savedInstanceState?.getBoolean(COLLAPSED_KEY, false) ?: false
+		panel = view.findViewById(R.id.drive_simulation_panel)
 		gearButton = view.findViewById(R.id.gear_button)
 
 		setupPedal(view.findViewById(R.id.throttle_button), R.drawable.ic_action_arrow_up) { pressed ->
@@ -82,8 +79,36 @@ class DriveSimulationFragment : BaseOsmAndFragment(), DriveSimulationListener,
 				hideInstance(activity)
 			}
 		}
+		val collapseButton = view.findViewById<ImageButton>(R.id.collapse_button)
+		setupButtonAppearance(collapseButton, R.drawable.ic_action_arrow_down)
+		collapseButton.setOnClickListener { setCollapsed(true) }
+
+		expandButton = view.findViewById<ImageButton>(R.id.expand_button).also {
+			setupButtonAppearance(it, R.drawable.ic_action_car)
+			it.setOnClickListener { setCollapsed(false) }
+		}
+		updateVisibility()
 		updateControls()
 		return view
+	}
+
+	override fun onSaveInstanceState(outState: Bundle) {
+		super.onSaveInstanceState(outState)
+		outState.putBoolean(COLLAPSED_KEY, collapsed)
+	}
+
+	/** Hides the pedals, leaving a single button on the map. The keyboard keeps working. */
+	private fun setCollapsed(collapsed: Boolean) {
+		this.collapsed = collapsed
+		if (collapsed) {
+			engine.resetControls()
+		}
+		updateVisibility()
+	}
+
+	private fun updateVisibility() {
+		AndroidUiHelper.updateVisibility(panel, !collapsed)
+		AndroidUiHelper.updateVisibility(expandButton, collapsed)
 	}
 
 	@SuppressLint("ClickableViewAccessibility")
@@ -119,10 +144,6 @@ class DriveSimulationFragment : BaseOsmAndFragment(), DriveSimulationListener,
 		engine.addListener(this)
 		simulation.addSimulationListener(this)
 		app.keyEventHelper.setExternalCallback(this)
-
-		// Keep the vehicle in the lower part of the screen, as during navigation
-		mapDisplayPositionManager.registerMapPositionProvider(this)
-		mapDisplayPositionManager.updateMapDisplayPosition(true)
 		updateControls()
 	}
 
@@ -132,12 +153,7 @@ class DriveSimulationFragment : BaseOsmAndFragment(), DriveSimulationListener,
 		engine.resetControls()
 		simulation.removeSimulationListener(this)
 		app.keyEventHelper.setExternalCallback(null)
-
-		mapDisplayPositionManager.unregisterMapPositionProvider(this)
-		mapDisplayPositionManager.updateMapDisplayPosition(true)
 	}
-
-	override fun getMapDisplayPosition(): MapPosition = MapPosition.BOTTOM
 
 	override fun onDriveSimulationUpdate(engine: DriveSimulationEngine) {
 		updateControls()
@@ -152,7 +168,6 @@ class DriveSimulationFragment : BaseOsmAndFragment(), DriveSimulationListener,
 	}
 
 	private fun updateControls() {
-		speedText?.text = OsmAndFormatter.getFormattedSpeed(abs(engine.speed), app)
 		val gearNameId = if (engine.reverseGear) {
 			R.string.drive_simulation_gear_reverse
 		} else {
@@ -225,6 +240,7 @@ class DriveSimulationFragment : BaseOsmAndFragment(), DriveSimulationListener,
 	companion object {
 		val TAG: String = DriveSimulationFragment::class.java.simpleName
 
+		private const val COLLAPSED_KEY = "collapsed"
 		private const val CAMERA_ROTATION_STEP = 10f // degrees per key event
 		private const val CAMERA_TILT_STEP = 3f // degrees per key event
 

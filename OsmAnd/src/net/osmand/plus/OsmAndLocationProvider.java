@@ -677,8 +677,12 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		net.osmand.Location updatedLocation = location;
 		if (routingHelper.isFollowingMode()) {
 			if (location == null || isPointAccurateForRouting(location)) {
+				// The manually driven simulation is not supposed to follow the route,
+				// so the vehicle is never snapped to it
+				boolean snapToRoad = app.getSettings().SNAP_TO_ROAD.get()
+						&& !getLocationSimulation().isDriveSimulationActive();
 				// Update routing position and get location for sticking mode
-				updatedLocation = routingHelper.setCurrentLocation(location, app.getSettings().SNAP_TO_ROAD.get());
+				updatedLocation = routingHelper.setCurrentLocation(location, snapToRoad);
 			}
 		} else if (routingHelper.isRoutePlanningMode() && app.getSettings().getPointToStart() == null) {
 			routingHelper.setCurrentLocation(location, false);
