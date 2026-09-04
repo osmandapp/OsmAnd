@@ -8,12 +8,10 @@ import static net.osmand.shared.gpx.GpxParameter.SPLIT_TYPE;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -22,7 +20,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import androidx.appcompat.widget.ListPopupWindow;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
@@ -48,6 +45,9 @@ import net.osmand.plus.track.helpers.TrackDisplayHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetTarget;
+import net.osmand.plus.widgets.popup.PopUpMenu;
+import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.MapLayers;
@@ -226,25 +226,27 @@ public class SplitSegmentDialogFragment extends BaseFullScreenDialogFragment imp
 			}
 			updateSplitIntervalView(splitIntervalView);
 			splitIntervalView.setOnClickListener(v -> {
-				ListPopupWindow popup = new ListPopupWindow(v.getContext());
-				popup.setAnchorView(splitIntervalView);
-				popup.setContentWidth(AndroidUtils.dpToPx(app, 200f));
-				popup.setModal(true);
-				popup.setDropDownGravity(Gravity.END | Gravity.TOP);
-				popup.setVerticalOffset(AndroidUtils.dpToPx(app, -48f));
-				popup.setHorizontalOffset(AndroidUtils.dpToPx(app, -6f));
-				popup.setAdapter(new ArrayAdapter<>(v.getContext(),
-						R.layout.popup_list_text_item, options));
-				popup.setOnItemClickListener((parent, view, position, id) -> {
-					selectedSplitInterval = position;
-					List<GpxDisplayGroup> groups = getDisplayGroups();
-					if (!groups.isEmpty()) {
-						updateSplit(groups, selectedGpxFile);
-					}
-					popup.dismiss();
-					updateSplitIntervalView(splitIntervalView);
-				});
-				popup.show();
+				List<PopUpMenuItem> items = new ArrayList<>();
+				for (int i = 0; i < options.size(); i++) {
+					final int position = i;
+					PopUpMenuItem item = new PopUpMenuItem.Builder(v.getContext())
+							.setTitle(options.get(i))
+							.setSelected(selectedSplitInterval == position)
+							.setOnClickListener(it -> {
+								selectedSplitInterval = position;
+								List<GpxDisplayGroup> groups = getDisplayGroups();
+								if (!groups.isEmpty()) {
+									updateSplit(groups, selectedGpxFile);
+								}
+								updateSplitIntervalView(splitIntervalView);
+							})
+							.create();
+					items.add(item);
+				}
+				PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+				displayData.anchorView = splitIntervalView;
+				displayData.menuItems = items;
+				PopUpMenu.show(displayData);
 			});
 			splitIntervalView.setVisibility(View.VISIBLE);
 		} else {
