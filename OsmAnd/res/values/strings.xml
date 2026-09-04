@@ -12,6 +12,10 @@
 	Thx - Hardy
 -->
 	<string name="astro_eclipse_column_below_horizon">Below horizon</string>
+	<string name="quick_action_add_track">Add track</string>
+	<string name="quick_action_tracks_select_descr">Add one or more tracks to show or hide them on the map with a single tap.</string>
+	<string name="quick_action_tracks_always_ask_descr">Tapping this action opens the list of tracks, where you can show or hide one or more of them.</string>
+	<string name="quick_action_all_tracks">All tracks</string>
 	<string name="share_favorites_media_preparation_failed">Couldn\'t include attached media. Sharing points only.</string>
 	<plurals name="files_count">
 		<item quantity="one">%d file</item>
