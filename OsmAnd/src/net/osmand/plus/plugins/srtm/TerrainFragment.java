@@ -25,7 +25,7 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import com.github.mikephil.charting.charts.GradientChart;
+import net.osmand.plus.charts.GradientChart;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 

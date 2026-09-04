@@ -2,6 +2,7 @@ package net.osmand.plus.plugins.development;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_DEV;
+import static net.osmand.plus.charts.ChartUtils.DEFAULT_SLOPE_WINDOW_M;
 import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_CAMERA_DISTANCE;
 import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_CAMERA_TILT;
 import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_FPS;
@@ -91,6 +92,12 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	public final OsmandPreference<Boolean> SAVE_LOCATION_PROVIDER_TO_GPX;
 	public final OsmandPreference<Boolean> SHOW_PRIMITIVES_DEBUG_INFO;
 	public final OsmandPreference<Boolean> ALLOW_SYMBOLS_DISPLAY_ON_TOP;
+	public final OsmandPreference<Boolean> CHART_COLOR_BY_SECOND_DATASET;
+	public final OsmandPreference<Integer> CHART_SLOPE_WINDOW;
+
+	public static boolean CHART_DISCRETE_COLORS = false;
+	public static boolean CHART_TRACK_PALETTES = true;
+
 	private final StateChangedListener<Boolean> useRasterSQLiteDbListener;
 	private final StateChangedListener<Boolean> symbolsDebugInfoListener;
 	private final StateChangedListener<Boolean> debugRenderingInfoListener;
@@ -128,6 +135,8 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		SAVE_LOCATION_PROVIDER_TO_GPX = registerBooleanPreference("save_location_provider_to_gpx", true).makeGlobal().makeShared().cache();
 		SHOW_PRIMITIVES_DEBUG_INFO = registerBooleanPreference("show_primitives_debug_info", false).makeGlobal().makeShared().cache();
 		ALLOW_SYMBOLS_DISPLAY_ON_TOP = registerBooleanPreference("allow_symbols_display_on_top", false).makeGlobal().makeShared().cache();
+		CHART_COLOR_BY_SECOND_DATASET = registerBooleanPreference("chart_color_by_second_dataset", false).makeGlobal().makeShared().cache();
+		CHART_SLOPE_WINDOW = registerIntPreference("chart_slope_window", DEFAULT_SLOPE_WINDOW_M).makeGlobal().makeShared().cache();
 
 		useRasterSQLiteDbListener = change -> {
 			SRTMPlugin plugin = getSrtmPlugin();
