@@ -84,6 +84,7 @@ public class AmenityUIHelper extends MenuBuilder {
 	private Map<String, List<PoiType>> collectedPoiTypes = new HashMap<>();
 	private boolean osmEditingEnabled = PluginsHelper.isActive(OsmEditingPlugin.class);
 	private boolean lastBuiltRowIsDescription = false;
+	private Set<String> genericFallbackKeys = Collections.emptySet();
 
 	public AmenityUIHelper(@NonNull MapActivity mapActivity, String preferredLang,
 			@NonNull AdditionalInfoBundle infoBundle) {
@@ -342,6 +343,7 @@ public class AmenityUIHelper extends MenuBuilder {
 
 		AmenityInfoRow.Builder rowBuilder = new AmenityInfoRow.Builder(key);
 		rowBuilder.setCollapsableView(collapsableView);
+		boolean useGenericFallback = genericFallbackKeys.contains(key);
 
 		if (pType != null) {
 			PoiAdditionalUiRule poiAdditionalUiRule = PoiAdditionalUiRules.INSTANCE.findRule(key);
@@ -352,8 +354,9 @@ public class AmenityUIHelper extends MenuBuilder {
 				return null; // the "Others" value is already displayed as a title
 			}
 			collectedPoiTypes.computeIfAbsent(category, s -> new ArrayList<>()).add(poiType);
-		} else if (showDefaultTags) {
-			pType = new PoiType(poiTypes, poiCategory, null, key, poiCategory.getIconKeyName());
+		} else if (showDefaultTags || useGenericFallback) {
+			String displayKey = useGenericFallback ? getGenericFallbackDisplayKey(key) : key;
+			pType = new PoiType(poiTypes, poiCategory, null, displayKey, poiCategory.getIconKeyName());
 			pType.setText(true);
 			PoiAdditionalUiRule poiAdditionalUiRule = PoiAdditionalUiRules.INSTANCE.findRule(key);
 			poiAdditionalUiRule.fillRow(app, context, rowBuilder, this, pType, key, poiTypes.getPoiTranslation(vl), subtype);
@@ -776,5 +779,15 @@ public class AmenityUIHelper extends MenuBuilder {
 
 	public void setShowDefault(boolean showDefault) {
 		this.showDefaultTags = showDefault;
+	}
+
+	public void setGenericFallbackKeys(@NonNull Collection<String> genericFallbackKeys) {
+		this.genericFallbackKeys = new HashSet<>(genericFallbackKeys);
+	}
+
+	@NonNull
+	private String getGenericFallbackDisplayKey(@NonNull String key) {
+		int separatorIndex = key.indexOf(':');
+		return separatorIndex > 0 ? key.substring(separatorIndex + 1) : key;
 	}
 }

@@ -61,8 +61,10 @@ object GpxUtilities {
 	const val PINNED_EXTENSION = "pinned"
 	const val POINT_TYPE_EXTENSION = "point_type"
 
-	const val GPXTPX_PREFIX = "gpxtpx:"
-	const val OSMAND_EXTENSIONS_PREFIX = "osmand:"
+	private const val GPXTPX_XML_PREFIX = "gpxtpx"
+	private const val OSMAND_XML_PREFIX = "osmand"
+	const val GPXTPX_PREFIX = "$GPXTPX_XML_PREFIX:"
+	const val OSMAND_EXTENSIONS_PREFIX = "$OSMAND_XML_PREFIX:"
 	const val OSM_PREFIX = "osm_tag_"
 	const val AMENITY_PREFIX = "amenity_"
 	const val ORIGIN_EXTENSION = "origin"
@@ -1688,6 +1690,16 @@ object GpxUtilities {
 		return supportedTag ?: tag.replace(XML_COLON, ":")
 	}
 
+	private fun getQualifiedExtensionTagName(parser: XmlPullParser): String? {
+		val name = parser.getName() ?: return null
+		val prefix = parser.getPrefix()
+		return if (prefix.isNullOrEmpty() || prefix == OSMAND_XML_PREFIX || prefix == GPXTPX_XML_PREFIX) {
+			name
+		} else {
+			"$prefix:$name"
+		}
+	}
+
 	@Throws(XmlParserException::class, IOException::class)
 	private fun readExtensionsText(parser: XmlPullParser, key: String, target: GpxExtensions) {
 		var tok: Int
@@ -1698,7 +1710,7 @@ object GpxUtilities {
 				if (tag != null && text != null) {
 					val value = text.toString()
 					if (!value.isBlank()) {
-						applyExtensionValue(target, tag, value)
+						applyExtensionValue(target, getQualifiedExtensionTagName(parser) ?: tag, value)
 					}
 				}
 				if (tag == key) {

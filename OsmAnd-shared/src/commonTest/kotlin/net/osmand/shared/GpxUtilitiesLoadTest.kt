@@ -66,6 +66,30 @@ class GpxUtilitiesLoadTest {
 	}
 
 	@Test
+	fun testLoadGpxFilePreservesCustomExtensionPrefix() {
+		val gpxFile = loadGpx(
+			"""
+			<gpx version="1.1" creator="test" xmlns:test="https://example.com/gpx/test">
+			  <wpt lat="10.0" lon="20.0">
+			    <extensions>
+			      <test:country>United States</test:country>
+			      <test:telephone>+1 804 828 0100</test:telephone>
+			    </extensions>
+			  </wpt>
+			</gpx>
+			""".trimIndent(),
+			addGeneralTrack = false
+		)
+
+		assertNull(gpxFile.error)
+		val extensions = gpxFile.getPointsList().single().getExtensionsToRead()
+		assertEquals("United States", extensions["test:country"])
+		assertEquals("+1 804 828 0100", extensions["test:telephone"])
+		assertNull(extensions["country"])
+		assertNull(extensions["telephone"])
+	}
+
+	@Test
 	fun testLoadGpxFilePreservesGeneralTrackBehaviorForMultipleSegments() {
 		val gpxFile = loadGpx(
 			"""
