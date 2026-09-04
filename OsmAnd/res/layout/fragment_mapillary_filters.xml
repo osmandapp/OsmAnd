@@ -309,21 +309,95 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/multi_progress_container"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:orientation="horizontal">
+
+            <View
+                android:id="@+id/progress_red"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0"
+                android:background="@color/mapillary_layer_red_color" />
+
+            <View
+                android:id="@+id/progress_yellow"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0"
+                android:background="@color/mapillary_layer_yellow_color" />
+
+            <View
+                android:id="@+id/progress_green"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/mapillary_layer_green_color" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/multi_progress_container_labels"
+            android:layout_width="match_parent"
+            android:layout_height="26dp"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/progress_label_from"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="@string/mapillary_menu_date_from"
+                android:textAppearance="@style/TextAppearance.ListItemTitle" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/progress_label_first_split"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text=""
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.ListItemTitle" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/progress_label_second_split"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text=""
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.ListItemTitle" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/progress_label_to"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="end"
+                android:text="@string/shared_string_to"
+                android:textAppearance="@style/TextAppearance.ListItemTitle" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/bg_color"
-            android:orientation="vertical"
-            android:paddingStart="@dimen/map_button_size">
+            android:orientation="horizontal"
+            >
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/content_padding">
+                android:paddingLeft="@dimen/content_padding">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/content_padding_small"
+
                     android:layout_weight="1">
 
                     <EditText
@@ -337,10 +411,71 @@
                         tools:text="From" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="@dimen/content_padding_small">
+
+                    <net.osmand.plus.widgets.TextViewEx
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="6dp"
+                        android:text="@string/mapillary_menu_split_by"
+                        android:textColor="?android:textColorPrimary"
+                        android:textSize="@dimen/default_sub_text_size"
+                        android:gravity="center_horizontal"
+
+                        app:typefaceWeight="medium" />
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/date_second_split_toggle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="6dp"
+
+
+                        android:focusable="false" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="@dimen/content_padding_small">
+
+                    <net.osmand.plus.widgets.TextViewEx
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="6dp"
+                        android:text="@string/mapillary_menu_split_by"
+                        android:textColor="?android:textColorPrimary"
+                        android:textSize="@dimen/default_sub_text_size"
+                        android:gravity="center_horizontal"
+                        app:typefaceWeight="medium" />
+
+
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/date_first_split_toggle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="6dp"
+
+
+                        android:focusable="false" />
+
+                </LinearLayout>
+
+
+
+
+
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/content_padding_small"
+                    android:layout_marginEnd="@dimen/content_padding_small"
                     android:layout_weight="1">
 
                     <EditText
@@ -355,6 +490,8 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+
+
             </LinearLayout>
 
             <View
@@ -363,6 +500,75 @@
                 android:layout_marginTop="@dimen/content_padding"
                 android:background="?attr/dashboard_divider" />
         </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/bg_color"
+            android:orientation="horizontal"
+           >
+
+            <View
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_margin="@dimen/content_padding"
+                android:id="@+id/second_split_indicator"
+
+                android:background="@drawable/bg_circle_mapillary_red" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/date_second_split_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:hint="@string/mapillary_menu_split_by"
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="@dimen/default_list_text_size"
+                    tools:text="@string/mapillary_menu_split_by" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <View
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_margin="@dimen/content_padding"
+                android:id="@+id/first_split_indicator"
+
+                android:background="@drawable/bg_circle_mapillary_yellow" />
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/content_padding_small"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/date_first_split_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:hint="@string/mapillary_menu_split_by"
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="@dimen/default_list_text_size"
+                    tools:text="@string/mapillary_menu_split_by" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </LinearLayout>
+
+
+
+
+
+
 
         <LinearLayout
             android:id="@+id/pano_row"
@@ -383,6 +589,32 @@
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/pano_row_toggle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/content_padding"
+                android:layout_marginEnd="@dimen/content_padding"
+                android:focusable="false" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/above_overlay_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/bg_color"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/dialog_button_ex_height">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/above_overlay_row_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/map_button_size"
+                android:text="@string/mapillary_menu_title_above_overlay"
+                android:textAppearance="@style/TextAppearance.ListItemTitle" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/above_overlay_row_toggle"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/content_padding"
