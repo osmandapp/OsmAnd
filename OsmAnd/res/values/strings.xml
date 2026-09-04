@@ -4269,6 +4269,8 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="map_marker_2nd">Second map marker</string>
     <string name="shared_string_toolbar">Toolbar</string>
     <string name="shared_string_widgets">Widgets</string>
+    <string name="aa_show_widgets_panel">Show widgets panel</string>
+    <string name="aa_show_widgets_panel_descr">Draw the selected widgets over the map on the car screen</string>
     <string name="shared_string_add_to_map_markers">Add to map markers</string>
     <string name="select_map_markers">Select map markers</string>
     <string name="shared_string_reverse_order">Reverse order</string>
