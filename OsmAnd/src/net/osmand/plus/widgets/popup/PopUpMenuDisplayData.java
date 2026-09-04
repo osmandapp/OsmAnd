@@ -27,21 +27,6 @@ public class PopUpMenuDisplayData {
 	public Integer horizontalOffset;
 	public Integer verticalOffset;
 
-	public boolean hasCustomizations() {
-		if (layoutId != DEFAULT_LAYOUT_ID) {
-			return true;
-		}
-		if (dropDownGravity != null || horizontalOffset != null || verticalOffset != null) {
-			return true;
-		}
-		for (PopUpMenuItem menuItem : menuItems) {
-			if (menuItem.hasCustomization()) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	public enum CustomDropDown {
 		AUTO_DROP_DOWN,
 		TOP_DROPDOWN,
