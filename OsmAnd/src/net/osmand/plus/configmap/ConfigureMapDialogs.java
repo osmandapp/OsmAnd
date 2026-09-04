@@ -119,10 +119,11 @@ public class ConfigureMapDialogs {
 	                                       @NonNull OsmandPreference<Float> mapDensity,
 	                                       int value) {
 		mapDensity.set(value / 100.0f);
-		//todo revert when aa scale setting fixed
-//		if (!view.isCarView()) {
+		// while Android Auto owns the map view it renders with its own magnifier, the new phone
+		// value is applied by OsmandMapTileView.setView() once the map is given back to the phone
+		if (!view.isCarView()) {
 			view.applyDisplayScaleSettings();
-//		}
+		}
 	}
 
 	private record MapMagnifierValues(@NonNull TIntArrayList percentValues,

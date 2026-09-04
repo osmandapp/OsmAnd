@@ -16,7 +16,6 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -26,7 +25,6 @@ import net.osmand.plus.widgets.FrameLayoutEx;
 public class RulerWidget extends FrameLayoutEx implements ViewChangeProvider {
 
 	private final OsmandApplication app;
-	private final OsmandSettings settings;
 	private final OsmandMapTileView mapTileView;
 
 	private View layout;
@@ -56,9 +54,8 @@ public class RulerWidget extends FrameLayoutEx implements ViewChangeProvider {
 		super(context, attrs, defStyleAttr, defStyleRes);
 
 		this.app = AndroidUtils.getApp(context);
-		this.settings = app.getSettings();
 		this.mapTileView = app.getOsmandMap().getMapView();
-		this.cacheMapDensity = settings.MAP_DENSITY.get();
+		this.cacheMapDensity = app.getOsmandMap().getMapDensity();
 	}
 
 	@Override
