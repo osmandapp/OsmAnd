@@ -2,7 +2,6 @@ package net.osmand.plus.search.dialogs
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.TypedValue
 import android.view.View
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
@@ -26,7 +25,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.AbstractComposeView
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
@@ -34,8 +32,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.content.ContextCompat
 import net.osmand.plus.R
+import net.osmand.plus.widgets.popup.colorAttr
 import net.osmand.util.Algorithms
 
 class SearchScopeChip @JvmOverloads constructor(
@@ -106,18 +104,4 @@ class SearchScopeChip @JvmOverloads constructor(
 			}
 		}
 	}
-}
-
-@Composable
-private fun colorAttr(attrId: Int): Color {
-	val context = LocalContext.current
-	val typedValue = TypedValue()
-	context.theme.resolveAttribute(attrId, typedValue, true)
-	return Color(
-		if (typedValue.resourceId != 0) {
-			ContextCompat.getColor(context, typedValue.resourceId)
-		} else {
-			typedValue.data
-		}
-	)
 }
