@@ -12,6 +12,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
@@ -368,6 +369,23 @@ fun showComposeDropdownMenu(displayData: PopUpMenuDisplayData): PopupWindow? {
 		viewModelStoreOwner?.let { setViewTreeViewModelStoreOwner(it) }
 	}
 
+	val shadowPadding = 8.dp
+	val shadowPaddingPx = TypedValue.applyDimension(
+		TypedValue.COMPLEX_UNIT_DIP,
+		8f,
+		context.resources.displayMetrics
+	).toInt()
+	val screenMarginPx = TypedValue.applyDimension(
+		TypedValue.COMPLEX_UNIT_DIP,
+		16f,
+		context.resources.displayMetrics
+	).toInt()
+	val verticalSpacingPx = TypedValue.applyDimension(
+		TypedValue.COMPLEX_UNIT_DIP,
+		4f,
+		context.resources.displayMetrics
+	).toInt()
+
 	val popupWindow = PopupWindow(
 		composeView,
 		ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -386,24 +404,26 @@ fun showComposeDropdownMenu(displayData: PopUpMenuDisplayData): PopupWindow? {
 			null
 		}
 		OsmAndDropdownMenuTheme {
-			Surface(
-				shape = MenuDefaults.shape,
-				color = colors?.background ?: MenuDefaults.containerColor,
-				tonalElevation = 6.dp,
-				shadowElevation = 8.dp
-			) {
-				OsmAndDropdownMenuContent(
-					options = displayData.menuItems?.toDropdownOptions(displayData) ?: emptyList(),
-					modifier = Modifier.padding(vertical = 8.dp),
-					colors = colors,
-					onOptionSelected = { item ->
-						val listener = item.onClickListener ?: displayData.onItemClickListener
-						listener?.onPopUpItemClicked(item)
-						if (item.shouldDismissOnClick()) {
-							popupWindow.dismiss()
+			Box(modifier = Modifier.padding(shadowPadding)) {
+				Surface(
+					shape = MenuDefaults.shape,
+					color = colors?.background ?: MenuDefaults.containerColor,
+					tonalElevation = 6.dp,
+					shadowElevation = 8.dp
+				) {
+					OsmAndDropdownMenuContent(
+						options = displayData.menuItems?.toDropdownOptions(displayData) ?: emptyList(),
+						modifier = Modifier.padding(vertical = 8.dp),
+						colors = colors,
+						onOptionSelected = { item ->
+							val listener = item.onClickListener ?: displayData.onItemClickListener
+							listener?.onPopUpItemClicked(item)
+							if (item.shouldDismissOnClick()) {
+								popupWindow.dismiss()
+							}
 						}
-					}
-				)
+					)
+				}
 			}
 		}
 	}
@@ -413,17 +433,59 @@ fun showComposeDropdownMenu(displayData: PopUpMenuDisplayData): PopupWindow? {
 	val screenWidth = context.resources.displayMetrics.widthPixels
 	val anchorCenterX = anchorLocation[0] + anchorView.width / 2
 	val isRtl = anchorView.layoutDirection == View.LAYOUT_DIRECTION_RTL
+	val isAnchorOnRight = anchorCenterX > screenWidth / 2
 
 	val gravity = displayData.dropDownGravity ?: run {
-		if (anchorCenterX > screenWidth / 2) {
+		if (isAnchorOnRight) {
 			if (isRtl) Gravity.START or Gravity.TOP else Gravity.END or Gravity.TOP
 		} else {
 			if (isRtl) Gravity.END or Gravity.TOP else Gravity.START or Gravity.TOP
 		}
 	}
 
-	val hOffset = displayData.horizontalOffset ?: 0
-	val vOffset = displayData.verticalOffset ?: 0
+	val defaultHOffset = if (isAnchorOnRight) -screenMarginPx else screenMarginPx
+	var hOffset = (displayData.horizontalOffset ?: 0) + defaultHOffset
+	if (isAnchorOnRight) {
+		val maxHOffset = screenWidth - screenMarginPx - (anchorLocation[0] + anchorView.width)
+		if (hOffset > maxHOffset) {
+			hOffset = maxHOffset
+		}
+	} else {
+		val minHOffset = screenMarginPx - anchorLocation[0]
+		if (hOffset < minHOffset) {
+			hOffset = minHOffset
+		}
+	}
+
+	val screenHeight = context.resources.displayMetrics.heightPixels
+	val menuItems = displayData.menuItems
+	var totalHeightDp = 16f + 16f
+	if (menuItems != null) {
+		for (item in menuItems) {
+			totalHeightDp += 48f
+			if (item.shouldShowTopDivider()) {
+				totalHeightDp += 8f
+			}
+		}
+	}
+	val approxMenuHeightPx = TypedValue.applyDimension(
+		TypedValue.COMPLEX_UNIT_DIP,
+		totalHeightDp,
+		context.resources.displayMetrics
+	).toInt()
+
+	val spaceBelow = screenHeight - (anchorLocation[1] + anchorView.height)
+	val spaceAbove = anchorLocation[1]
+	val shouldShowAbove = displayData.customDropDown == PopUpMenuDisplayData.CustomDropDown.TOP_DROPDOWN ||
+		(displayData.customDropDown != PopUpMenuDisplayData.CustomDropDown.BOTTOM_DROPDOWN &&
+			spaceBelow < approxMenuHeightPx && spaceAbove > spaceBelow)
+
+	val vOffset = if (shouldShowAbove) {
+		-anchorView.height - approxMenuHeightPx + shadowPaddingPx - verticalSpacingPx + (displayData.verticalOffset ?: 0)
+	} else {
+		(displayData.verticalOffset ?: 0) - shadowPaddingPx + verticalSpacingPx
+	}
+
 	try {
 		popupWindow.showAsDropDown(anchorView, hOffset, vOffset, gravity)
 	} catch (e: Exception) {
