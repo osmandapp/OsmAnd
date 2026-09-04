@@ -20,7 +20,8 @@
 	<string name="ais_connection_no_data">No data received</string>
 	<string name="ais_connection_failed">Connection failed</string>
 	<string name="ais_connection_set_up">Set up connection</string>
-	<string name="ais_status_with_protocol">%1$s • %2$s</string>
+	<string name="ais_use_nmea_location">Use as location source</string>
+	<string name="ais_use_nmea_location_desc">Replaces the phone position with the position from the NMEA stream.</string>
 	<string name="ais_run_in_background">Run in the background</string>
 	<string name="ais_run_in_background_desc">Keeps receiving with the screen off.</string>
 	<string name="ais_vessels_on_the_map">Vessels on the map: %1$d</string>
@@ -32,7 +33,6 @@
 	<string name="ais_objects_visibility_desc">Configure when vessels without a signal are crossed out and when they are removed from the map.</string>
 	<string name="ais_collision_warning">Collision warning (CPA)</string>
 	<string name="ais_collision_warning_short">Collision warning</string>
-	<string name="ais_collision_warning_summary">%1$s • %2$s</string>
 	<string name="ais_my_vessel">My vessel</string>
 	<string name="ais_mmsi">MMSI</string>
 	<string name="ais_mmsi_not_set">Not set</string>

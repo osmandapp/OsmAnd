@@ -39,6 +39,10 @@
 					layout="@layout/item_ais_connection_row" />
 
 				<include
+					android:id="@+id/nmea_location_row"
+					layout="@layout/item_ui_setting_row" />
+
+				<include
 					android:id="@+id/background_row"
 					layout="@layout/item_ui_setting_row" />
 			</LinearLayout>

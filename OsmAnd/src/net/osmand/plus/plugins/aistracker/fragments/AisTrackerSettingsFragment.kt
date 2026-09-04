@@ -35,6 +35,7 @@ class AisTrackerSettingsFragment : AisBaseFragment(),
 	private lateinit var connectionIcon: View
 	private lateinit var connectionProgress: CircularProgressIndicator
 	private lateinit var connectionAction: MaterialButton
+	private lateinit var nmeaLocationRow: SettingRow
 	private lateinit var backgroundRow: SettingRow
 	private lateinit var objectsVisibilityRow: SettingRow
 	private lateinit var collisionWarningRow: SettingRow
@@ -78,6 +79,15 @@ class AisTrackerSettingsFragment : AisBaseFragment(),
 		connectionAction = connectionRow.findViewById(R.id.connection_action)
 		connectionRow.findViewById<View>(R.id.connection_content).setOnClickListener {
 			showFragment(AisConnectionFragment())
+		}
+
+		nmeaLocationRow = SettingRow(view.findViewById(R.id.nmea_location_row))
+		nmeaLocationRow.setIcon(null)
+		nmeaLocationRow.setTitle(R.string.ais_use_nmea_location)
+		nmeaLocationRow.setSubtitle(getString(R.string.ais_use_nmea_location_desc))
+		nmeaLocationRow.setOnClickListener {
+			plugin.AIS_USE_NMEA_LOCATION.set(!plugin.AIS_USE_NMEA_LOCATION.get())
+			updateContent()
 		}
 
 		backgroundRow = SettingRow(view.findViewById(R.id.background_row))
@@ -148,6 +158,7 @@ class AisTrackerSettingsFragment : AisBaseFragment(),
 	private fun updateContent() {
 		updateConnectionCard()
 
+		nmeaLocationRow.setChecked(plugin.AIS_USE_NMEA_LOCATION.get())
 		backgroundRow.setChecked(plugin.AIS_RECEIVE_IN_BACKGROUND.get())
 
 		objectsVisibilityRow.setSubtitle(
@@ -156,7 +167,7 @@ class AisTrackerSettingsFragment : AisBaseFragment(),
 
 		collisionWarningRow.setSubtitle(
 			if (plugin.isCpaEnabled) {
-				getString(R.string.ais_collision_warning_summary,
+				getString(R.string.ltr_or_rtl_combine_via_bold_point,
 					AisFormatter.formatMinutes(osmandApp, plugin.AIS_CPA_WARNING_TIME.get()),
 					AisFormatter.formatNauticalMiles(osmandApp, plugin.AIS_CPA_WARNING_DISTANCE.get()))
 			} else {
@@ -187,8 +198,8 @@ class AisTrackerSettingsFragment : AisBaseFragment(),
 		/* the connection row carries an action button, so it has its own layout and is bound here
 		 * instead of through SettingRow */
 		val subtitle: TextView = connectionRow.findViewById(R.id.subtitle)
-		subtitle.text =
-			getString(R.string.ais_status_with_protocol, getString(state.titleId), protocolName())
+		subtitle.text = getString(R.string.ltr_or_rtl_combine_via_bold_point,
+			getString(state.titleId), protocolName())
 		subtitle.setTextColor(AndroidUtils.getColorFromAttr(context, subtitleColorAttr(state)))
 
 		val connecting = state == AisConnectionState.CONNECTING
@@ -206,8 +217,17 @@ class AisTrackerSettingsFragment : AisBaseFragment(),
 		val connected = state == AisConnectionState.CONNECTED
 		connectionFooter.visibility = if (connected) View.VISIBLE else View.GONE
 		if (connected) {
+			val vessels = getString(R.string.ais_vessels_on_the_map, plugin.vesselsCount)
+			/* the position half is only meaningful while the stream is the location source */
 			connectionFooter.setText(
-				getString(R.string.ais_vessels_on_the_map, plugin.vesselsCount))
+				if (plugin.AIS_USE_NMEA_LOCATION.get()) {
+					getString(R.string.ltr_or_rtl_combine_via_bold_point, vessels,
+						getString(
+							if (plugin.isReceivingPosition) R.string.ais_receiving_position_data
+							else R.string.ais_no_position_data))
+				} else {
+					vessels
+				})
 		}
 	}
 
@@ -254,6 +274,7 @@ class AisTrackerSettingsFragment : AisBaseFragment(),
 		plugin.AIS_NMEA_TCP_PORT.resetToDefault()
 		plugin.AIS_NMEA_UDP_PORT.resetToDefault()
 		plugin.AIS_RECEIVE_IN_BACKGROUND.resetToDefault()
+		plugin.AIS_USE_NMEA_LOCATION.resetToDefault()
 		plugin.AIS_OBJ_LOST_TIMEOUT.resetToDefault()
 		plugin.AIS_SHIP_LOST_TIMEOUT.resetToDefault()
 		plugin.AIS_CPA_ENABLED.resetToDefault()

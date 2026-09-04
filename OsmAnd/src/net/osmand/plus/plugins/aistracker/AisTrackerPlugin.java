@@ -53,6 +53,12 @@ public class AisTrackerPlugin extends OsmandPlugin {
 	static private final int SIMULATED_LATENCY_TIME_MS = 100;
 	/* no AIS message within this time while the socket is open means "No data received": */
 	private static final long AIS_NO_DATA_TIMEOUT_MS = 60_000;
+	/* the phone GPS stays ignored for this long after every position from the NMEA stream, so a
+	 * stream that stops hands the position back instead of freezing it: */
+	private static final long IGNORE_PHONE_LOCATION_TIMEOUT_MS = 10_000;
+	/* no position sentence within this time means the stream carries no position at all: */
+	private static final long NMEA_POSITION_TIMEOUT_MS = 30_000;
+	public static final String NMEA_LOCATION_PROVIDER = "nmea";
 
 	private final AisImagesCache aisImagesCache;
 	private final AisSimulationProvider simulationProvider = new AisSimulationProvider(this);
@@ -75,6 +81,7 @@ public class AisTrackerPlugin extends OsmandPlugin {
     public static final String AIS_RECEIVE_IN_BACKGROUND_ID = "ais_receive_in_background";
 	public static final String AIS_CONNECTION_ENABLED_ID = "ais_connection_enabled";
 	public static final String AIS_CPA_ENABLED_ID = "ais_cpa_enabled";
+	public static final String AIS_USE_NMEA_LOCATION_ID = "ais_use_nmea_location";
 	public final CommonPreference<Integer> AIS_NMEA_PROTOCOL;
 	public static final int AIS_NMEA_PROTOCOL_UDP = 0;
 	public static final int AIS_NMEA_PROTOCOL_TCP = 1;
@@ -103,6 +110,8 @@ public class AisTrackerPlugin extends OsmandPlugin {
 	/* set to false while the user keeps the connection closed from the plugin screen: */
 	public final CommonPreference<Boolean> AIS_CONNECTION_ENABLED;
 	public final CommonPreference<Boolean> AIS_CPA_ENABLED;
+	/* replaces the phone position with the one the NMEA stream carries: */
+	public final CommonPreference<Boolean> AIS_USE_NMEA_LOCATION;
 
 	/* timestamp of last AIS message received for all instances: */
 	private long lastMessageReceived = 0;
@@ -110,6 +119,8 @@ public class AisTrackerPlugin extends OsmandPlugin {
 	private AisConnectionState connectionState = AisConnectionState.NOT_CONNECTED;
 	private final List<AisConnectionStateListener> connectionStateListeners = new CopyOnWriteArrayList<>();
 	private Location fakeOwnPosition = null; // used for test purposes to fake own position
+	@Nullable
+	private volatile Location nmeaLocation = null;
 
 	private final StateChangedListener<String> addrPrefListener = change -> restartNetworkListener();
 	private final StateChangedListener<Integer> protocolPortPrefListener = change -> restartNetworkListener();
@@ -193,6 +204,7 @@ public class AisTrackerPlugin extends OsmandPlugin {
 
 		@Override
 		public void onNmeaLocationReceived(@NonNull AisLocation location) {
+			AisTrackerPlugin.this.onNmeaLocationReceived(location);
 		}
 
 		@NonNull
@@ -248,6 +260,7 @@ public class AisTrackerPlugin extends OsmandPlugin {
 		AIS_RECEIVE_IN_BACKGROUND = registerBooleanPreference(AIS_RECEIVE_IN_BACKGROUND_ID, AIS_RECEIVE_IN_BACKGROUND_DEFAULT);
 		AIS_CONNECTION_ENABLED = registerBooleanPreference(AIS_CONNECTION_ENABLED_ID, true);
 		AIS_CPA_ENABLED = registerBooleanPreference(AIS_CPA_ENABLED_ID, false);
+		AIS_USE_NMEA_LOCATION = registerBooleanPreference(AIS_USE_NMEA_LOCATION_ID, false);
 		AIS_NMEA_IP_ADDRESS.addListener(addrPrefListener);
 		AIS_NMEA_PROTOCOL.addListener(protocolPortPrefListener);
 		AIS_NMEA_TCP_PORT.addListener(protocolPortPrefListener);
@@ -410,8 +423,44 @@ public class AisTrackerPlugin extends OsmandPlugin {
 		return AIS_CPA_ENABLED.get();
 	}
 
+	/**
+	 * Turns a position sentence of the NMEA stream into a location and, while the user asked for
+	 * it, feeds it to the app as the current position. Every fix keeps the phone GPS ignored for
+	 * a short while, so a stream that goes silent hands the position back instead of freezing it.
+	 */
+	private void onNmeaLocationReceived(@NonNull AisLocation location) {
+		Location result = new Location(NMEA_LOCATION_PROVIDER,
+				location.getLatitude(), location.getLongitude());
+		result.setTime(System.currentTimeMillis());
+		if (location.getHasSpeed()) {
+			result.setSpeed(location.getSpeed());
+		}
+		if (location.getHasBearing()) {
+			result.setBearing(location.getBearing());
+		}
+		nmeaLocation = result;
+
+		if (AIS_USE_NMEA_LOCATION.get()) {
+			app.runInUIThread(() -> app.getLocationProvider()
+					.setCustomLocation(result, IGNORE_PHONE_LOCATION_TIMEOUT_MS));
+		}
+	}
+
+	/** true while the stream actually carries position sentences, not only vessel reports. */
+	public boolean isReceivingPosition() {
+		Location location = nmeaLocation;
+		return location != null
+				&& System.currentTimeMillis() - location.getTime() <= NMEA_POSITION_TIMEOUT_MS;
+	}
+
 	public Location getOwnPosition() { // used to calculate distances, CPA etc.
-		return fakeOwnPosition != null ? fakeOwnPosition : app.getLocationProvider().getLastKnownLocation();
+		if (fakeOwnPosition != null) {
+			return fakeOwnPosition;
+		}
+		if (AIS_USE_NMEA_LOCATION.get() && isReceivingPosition()) {
+			return nmeaLocation;
+		}
+		return app.getLocationProvider().getLastKnownLocation();
 	}
 
 	public void fakeOwnPosition(Location fakePosition) { // used for test purposes
