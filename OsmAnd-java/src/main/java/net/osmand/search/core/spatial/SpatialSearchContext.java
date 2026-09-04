@@ -1013,7 +1013,7 @@ public class SpatialSearchContext {
 		for (SpatialSearchToken token : allTokens) {
 			// assign building to word token isNumber2Letters (number + 1 char) + possible
 			if (t != token && (otherTokens == null || !otherTokens.contains(token))) {
-				if ((token.likelyPartOfBuilding() && street) || (token.likelyRef() && poi)) {
+				if ((street && token.likelyPartOfBuilding()) || (poi && token.likelyRef())) {
 					NameIndexAtom atomB = new NameIndexAtom(atom.name, typeToAdd, atom.id,
 							atom.parentid, atom.object, atom.cityAsStreet, atom.otherWordsCnt, atom.otherFoundCnt,
 							atom.coords, atom.nearbyRadius, t.originalOrder);
