@@ -52,12 +52,14 @@ import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.actions.LocationSimulationAction;
+import net.osmand.plus.quickaction.actions.SimulateDriveAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.simulation.DashSimulateFragment;
+import net.osmand.plus.simulation.DriveSimulationFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -344,9 +346,17 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 
 	@Override
+	public void mapActivityResume(@NonNull MapActivity activity) {
+		if (app.getLocationProvider().getLocationSimulation().isDriveSimulationActive()) {
+			DriveSimulationFragment.showInstance(activity);
+		}
+	}
+
+	@Override
 	protected List<QuickActionType> getQuickActionTypes() {
 		List<QuickActionType> quickActionTypes = new ArrayList<>();
 		quickActionTypes.add(LocationSimulationAction.TYPE);
+		quickActionTypes.add(SimulateDriveAction.TYPE);
 		return quickActionTypes;
 	}
 

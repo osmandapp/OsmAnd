@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<net.osmand.plus.widgets.LinearLayoutEx xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/drive_simulation_controls"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_gravity="bottom"
+	android:background="?attr/bg_color"
+	android:gravity="center_vertical"
+	android:orientation="horizontal"
+	android:paddingHorizontal="@dimen/content_padding_small"
+	android:paddingVertical="@dimen/content_padding_small">
+
+	<ImageButton
+		android:id="@+id/steer_left_button"
+		android:layout_width="@dimen/map_button_size"
+		android:layout_height="@dimen/map_button_size"
+		android:background="@drawable/btn_circle"
+		android:contentDescription="@string/drive_simulation_steer_left"
+		tools:src="@drawable/ic_arrow_back" />
+
+	<ImageButton
+		android:id="@+id/steer_right_button"
+		android:layout_width="@dimen/map_button_size"
+		android:layout_height="@dimen/map_button_size"
+		android:layout_marginStart="@dimen/content_padding_small"
+		android:background="@drawable/btn_circle"
+		android:contentDescription="@string/drive_simulation_steer_right"
+		tools:src="@drawable/ic_arrow_forward" />
+
+	<LinearLayout
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_weight="1"
+		android:gravity="center"
+		android:orientation="vertical">
+
+		<TextView
+			android:id="@+id/speed_text"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/default_desc_text_size"
+			tools:text="42 km/h" />
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/content_padding_half"
+			android:gravity="center"
+			android:orientation="horizontal">
+
+			<TextView
+				android:id="@+id/gear_button"
+				android:layout_width="@dimen/map_small_button_size"
+				android:layout_height="@dimen/map_small_button_size"
+				android:background="@drawable/btn_circle"
+				android:gravity="center"
+				android:textColor="?android:textColorPrimary"
+				android:textSize="@dimen/default_list_text_size"
+				tools:text="D" />
+
+			<ImageButton
+				android:id="@+id/stop_simulation_button"
+				android:layout_width="@dimen/map_small_button_size"
+				android:layout_height="@dimen/map_small_button_size"
+				android:layout_marginStart="@dimen/content_padding_small"
+				android:background="@drawable/btn_circle"
+				android:contentDescription="@string/shared_string_close"
+				tools:src="@drawable/ic_action_close" />
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<ImageButton
+		android:id="@+id/brake_button"
+		android:layout_width="@dimen/map_button_size"
+		android:layout_height="@dimen/map_button_size"
+		android:layout_marginEnd="@dimen/content_padding_small"
+		android:background="@drawable/btn_circle"
+		android:contentDescription="@string/drive_simulation_brake"
+		tools:src="@drawable/ic_action_arrow_down" />
+
+	<ImageButton
+		android:id="@+id/throttle_button"
+		android:layout_width="@dimen/map_button_size"
+		android:layout_height="@dimen/map_button_size"
+		android:background="@drawable/btn_circle"
+		android:contentDescription="@string/drive_simulation_throttle"
+		tools:src="@drawable/ic_action_arrow_up" />
+
+</net.osmand.plus.widgets.LinearLayoutEx>

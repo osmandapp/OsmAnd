@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.Location;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
@@ -23,6 +24,7 @@ public class OsmAndLocationSimulation {
 	private final OsmandApplication app;
 
 	private Thread simulationThread;
+	private DriveSimulationEngine driveSimulation;
 
 	private LoadSimulatedLocationsTask loadLocationsTask;
 	private List<LoadSimulatedLocationsListener> loadLocationsListeners = new ArrayList<>();
@@ -36,7 +38,41 @@ public class OsmAndLocationSimulation {
 	}
 
 	public boolean isRouteAnimating() {
+		return isRouteSimulationRunning() || isDriveSimulationActive();
+	}
+
+	boolean isRouteSimulationRunning() {
 		return simulationThread != null;
+	}
+
+	public boolean isDriveSimulationActive() {
+		return driveSimulation != null && driveSimulation.getRunning();
+	}
+
+	@NonNull
+	public DriveSimulationEngine getDriveSimulation() {
+		if (driveSimulation == null) {
+			driveSimulation = new DriveSimulationEngine(app);
+		}
+		return driveSimulation;
+	}
+
+	/**
+	 * Starts the manually controlled driving simulation. Any other running simulation is stopped.
+	 */
+	public void startDriveSimulation(@Nullable Location startLocation) {
+		if (isRouteSimulationRunning()) {
+			stopRouteSimulation();
+		}
+		getDriveSimulation().start(startLocation);
+		notifyListeners(true);
+	}
+
+	public void stopDriveSimulation() {
+		if (driveSimulation != null) {
+			driveSimulation.stop();
+		}
+		notifyListeners(isRouteAnimating());
 	}
 
 	public boolean isLoadingRouteLocations() {
@@ -170,10 +206,15 @@ public class OsmAndLocationSimulation {
 	}
 
 	public void stop() {
+		stopDriveSimulation();
+		stopRouteSimulation();
+	}
+
+	void stopRouteSimulation() {
 		gpxFile = null;
 		simulationThread = null;
 		stopLoadLocationsTask();
-		notifyListeners(false);
+		notifyListeners(isRouteAnimating());
 	}
 
 	public interface LocationSimulationListener {

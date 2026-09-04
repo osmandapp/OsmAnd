@@ -47,6 +47,13 @@
 		android:title="@string/simulate_your_location"
 		tools:summary="@string/simulate_your_location_stop_descr" />
 
+	<Preference
+		android:key="drive_simulation"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:summary="@string/drive_simulation_descr"
+		android:title="@string/drive_simulation" />
+
 	<PreferenceCategory
 		android:key="debugging_and_development"
 		android:layout="@layout/preference_category_with_descr"

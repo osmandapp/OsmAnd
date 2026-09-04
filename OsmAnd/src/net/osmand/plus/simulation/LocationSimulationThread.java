@@ -65,7 +65,7 @@ class LocationSimulationThread extends Thread {
 		Triple<Boolean, Boolean, Boolean> triple = getSimulationParams(directions, useLocationTime);
 
 		int stopDelayCount = 0;
-		while (!directions.isEmpty() && locationSimulation.isRouteAnimating()) {
+		while (!directions.isEmpty() && locationSimulation.isRouteSimulationRunning()) {
 			long timeout = (long) (LOCATION_TIMEOUT * 1000);
 			float intervalTime = LOCATION_TIMEOUT;
 			if (stopDelayCount == 0) {
@@ -110,7 +110,7 @@ class LocationSimulationThread extends Thread {
 			}
 			prev = current;
 		}
-		locationSimulation.stop();
+		locationSimulation.stopRouteSimulation();
 	}
 
 	@NonNull

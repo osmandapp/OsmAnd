@@ -32,6 +32,7 @@ import net.osmand.plus.settings.bottomsheets.BooleanRadioButtonsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+import net.osmand.plus.simulation.DriveSimulationFragment;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.simulation.SimulateLocationFragment;
 import net.osmand.plus.utils.AndroidUtils;
@@ -44,6 +45,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 
 	private static final String SIMULATE_INITIAL_STARTUP = "simulate_initial_startup";
 	private static final String SIMULATE_YOUR_LOCATION = "simulate_your_location";
+	private static final String DRIVE_SIMULATION = "drive_simulation";
 	private static final String AGPS_DATA_DOWNLOADED = "agps_data_downloaded";
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
 	private static final String AISTRACKER_SIMULATION = "aistracker_simulation";
@@ -83,6 +85,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		routingCategory.setIconSpaceReserved(false);
 
 		setupSimulateYourLocationPref();
+		setupDriveSimulationPref();
 
 		Preference debuggingAndDevelopment = findPreference("debugging_and_development");
 		debuggingAndDevelopment.setIconSpaceReserved(false);
@@ -142,6 +145,11 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		simulateYourLocation.setIconSpaceReserved(false);
 		OsmAndLocationSimulation sim = app.getLocationProvider().getLocationSimulation();
 		simulateYourLocation.setSummary(sim.isRouteAnimating() ? R.string.shared_string_in_progress : R.string.simulate_your_location_descr);
+	}
+
+	private void setupDriveSimulationPref() {
+		Preference driveSimulation = findPreference(DRIVE_SIMULATION);
+		driveSimulation.setIconSpaceReserved(false);
 	}
 
 	private void setupBatterySavingModePref() {
@@ -385,7 +393,22 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
-		if (SIMULATE_YOUR_LOCATION.equals(prefId)) {
+		if (DRIVE_SIMULATION.equals(prefId)) {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				OsmAndLocationSimulation simulation = app.getLocationProvider().getLocationSimulation();
+				if (simulation.isDriveSimulationActive()) {
+					simulation.stopDriveSimulation();
+					DriveSimulationFragment.hideInstance(mapActivity);
+				} else {
+					simulation.startDriveSimulation(null);
+					// Return to the map, the controls are shown over it
+					mapActivity.getFragmentsHelper().closeAllFragments();
+					DriveSimulationFragment.showInstance(mapActivity);
+				}
+			}
+			return true;
+		} else if (SIMULATE_YOUR_LOCATION.equals(prefId)) {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				SimulateLocationFragment.showInstance(activity.getSupportFragmentManager(), null, false);
