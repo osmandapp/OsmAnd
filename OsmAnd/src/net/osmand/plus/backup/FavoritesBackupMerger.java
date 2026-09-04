@@ -11,6 +11,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.items.FavoritesSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.shared.SharedUtil;
@@ -37,6 +38,8 @@ final class FavoritesBackupMerger {
 
 	private static final Log LOG = PlatformUtil.getLog(FavoritesBackupMerger.class);
 	private static final String SNAPSHOT_DIR = "favorites_sync";
+	// Upload callbacks run in parallel, while applying a group mutates shared Favorites state.
+	private static final Object MERGE_FINISH_LOCK = new Object();
 
 	private FavoritesBackupMerger() {
 	}
@@ -44,10 +47,15 @@ final class FavoritesBackupMerger {
 	// Preparation only changes the in-memory upload payload. It never changes local Favorites.
 	static void prepareMergeUploads(@NonNull OsmandApplication app,
 	                                @NonNull BackupHelper backupHelper,
-	                                @NonNull BackupInfo info) {
+	                                @NonNull BackupInfo info, boolean autoSync) {
 		for (Pair<LocalFile, RemoteFile> conflict : new ArrayList<>(info.filesToMerge)) {
 			LocalFile localFile = conflict.first;
 			if (!(localFile.item instanceof FavoritesSettingsItem localItem)) {
+				continue;
+			}
+			// Merging downloads the remote file, so skip types the backup would filter out anyway.
+			ExportType exportType = ExportType.findBy(localItem);
+			if (exportType == null || !backupHelper.getBackupTypePref(exportType, autoSync).get()) {
 				continue;
 			}
 			try {
@@ -64,7 +72,7 @@ final class FavoritesBackupMerger {
 				FavoriteGroup merged = mergeGroups(base, local, remote, defaultColor);
 				if (merged != null) {
 					localFile.item = new MergeUploadItem(app, localItem, local, merged,
-							localFile.localModifiedTime);
+							localFile.localModifiedTime, localFile.uploadTime);
 					info.filesToUpload.add(localFile);
 					info.filesToMerge.remove(conflict);
 				}
@@ -84,7 +92,9 @@ final class FavoritesBackupMerger {
 		}
 		try {
 			if (favoritesItem instanceof MergeUploadItem mergeItem) {
-				mergeItem.finishUpload(fileName, uploadTime);
+				synchronized (MERGE_FINISH_LOCK) {
+					mergeItem.finishUpload(fileName, uploadTime);
+				}
 			} else if (favoritesItem.getLocalModifiedTime() == favoritesItem.getLastModifiedTime()) {
 				saveSnapshot(app, favoritesItem.getSingleGroup(), fileName, uploadTime);
 			} else {
@@ -366,14 +376,16 @@ final class FavoritesBackupMerger {
 		private final FavoriteGroup localGroup;
 		private final FavoriteGroup mergedGroup;
 		private final long sourceModifiedTime;
+		private final long baseSyncTime;
 
 		MergeUploadItem(@NonNull OsmandApplication app, @NonNull FavoritesSettingsItem baseItem,
 		                @NonNull FavoriteGroup localGroup, @NonNull FavoriteGroup mergedGroup,
-		                long sourceModifiedTime) {
+		                long sourceModifiedTime, long baseSyncTime) {
 			super(app, baseItem, Collections.singletonList(mergedGroup));
 			this.localGroup = copyGroup(localGroup);
 			this.mergedGroup = mergedGroup;
 			this.sourceModifiedTime = sourceModifiedTime;
+			this.baseSyncTime = baseSyncTime;
 			setLastModifiedTime(sourceModifiedTime);
 		}
 
@@ -390,7 +402,10 @@ final class FavoritesBackupMerger {
 			if (sameGroup(mergedGroup, current, defaultColor)) {
 				setLocalModifiedTime(sourceModifiedTime);
 				saveSnapshot(app, mergedGroup, fileName, uploadTime);
-			} else {
+			} else if (current != null) {
+				// Preserve the old common base so the next preparation keeps both sides in conflict.
+				app.getBackupHelper().updateFileUploadTime(
+						getType().name(), fileName, baseSyncTime);
 				setLocalModifiedTime(Math.max(System.currentTimeMillis(), uploadTime + 1));
 			}
 		}
