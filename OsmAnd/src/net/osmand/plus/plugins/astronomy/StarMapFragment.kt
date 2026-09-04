@@ -749,36 +749,33 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		systemLeftInset = maxOf(sysBars?.left ?: 0, cutout.left)
 		systemRightInset = maxOf(sysBars?.right ?: 0, cutout.right)
 
-		applyBottomInsets()
-		applyTopInsets()
-		applySideInsets()
+		mapControlsContainer.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+			rightMargin = systemRightInset
+			leftMargin = systemLeftInset
+			topMargin = systemTopInset
+			bottomMargin = systemBottomInset
+		}
+		updateEclipseModeOffsets()
 	}
 
-	private fun applyBottomInsets() {
-		applyBottomWindowInsets(timeControlCard, regularMapVisible)
+	private fun updateEclipseModeOffsets() {
 		if (::eclipseCard.isInitialized) applyBottomWindowInsets(eclipseCard, regularMapVisible)
 		val eclipseOffset = if (::eclipseCard.isInitialized && eclipseCard.isVisible) {
 			eclipseCard.height + resources.getDimensionPixelSize(R.dimen.content_padding)
 		} else 0
-		applyBottomWindowInsets(searchButton, regularMapVisible, eclipseOffset)
-		applyBottomWindowInsets(settingsButton, regularMapVisible, eclipseOffset)
-		applyBottomWindowInsets(zoomButtons, regularMapVisible, eclipseOffset)
+		setExtraBottomMargin(timeControlCard, eclipseOffset)
+		setExtraBottomMargin(searchButton, eclipseOffset)
+		setExtraBottomMargin(settingsButton, eclipseOffset)
+		setExtraBottomMargin(zoomButtons, eclipseOffset)
 	}
 
-	private fun applyTopInsets() {
-		applyTopWindowInsets(compassButton)
-		applyTopWindowInsets(closeButton)
-	}
-
-	private fun applySideInsets() {
-		applySideWindowInsets(compassButton, true)
-		applySideWindowInsets(closeButton, false)
-		if (zoomButtons.isVisible) {
-			resetSideWindowInsets(settingsButton, false)
-			applySideWindowInsets(zoomButtons, false)
-		} else {
-			applySideWindowInsets(settingsButton, false)
-			resetSideWindowInsets(zoomButtons, false)
+	private fun setExtraBottomMargin(view: View, extraBottom: Int) {
+		val layoutParams = view.layoutParams as? ViewGroup.MarginLayoutParams ?: return
+		val baseMarginBottom = view.resources.getDimensionPixelSize(R.dimen.content_padding)
+		val bottomMargin = baseMarginBottom + extraBottom
+		if (layoutParams.bottomMargin == bottomMargin) return
+		view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+			this.bottomMargin = bottomMargin
 		}
 	}
 
@@ -821,41 +818,6 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		if (layoutParams.bottomMargin == bottomMargin) return
 		view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
 			this.bottomMargin = bottomMargin
-		}
-	}
-
-	private fun applyTopWindowInsets(view: View) {
-		val baseMarginTop = view.resources.getDimensionPixelSize(R.dimen.content_padding)
-		if (systemTopInset > 0) {
-			view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-				topMargin = baseMarginTop + systemTopInset
-			}
-			return
-		}
-		view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-			topMargin = baseMarginTop
-		}
-	}
-
-	private fun applySideWindowInsets(view: View, isLeft: Boolean) {
-		val baseMargin = view.resources.getDimensionPixelSize(R.dimen.content_padding)
-		view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-			if (isLeft) {
-				marginStart = baseMargin + systemLeftInset
-			} else {
-				marginEnd = baseMargin + systemRightInset
-			}
-		}
-	}
-
-	private fun resetSideWindowInsets(view: View, isLeft: Boolean) {
-		val baseMargin = view.resources.getDimensionPixelSize(R.dimen.content_padding)
-		view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-			if (isLeft) {
-				marginStart = baseMargin
-			} else {
-				marginEnd = baseMargin
-			}
 		}
 	}
 
@@ -1099,7 +1061,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				)
 			}
 		}
-		applyBottomInsets()
+		updateEclipseModeOffsets()
 		if (isEclipseModeActive() && ::eclipseCard.isInitialized) {
 			eclipseCard.post { centerEclipseTargetAtSelectedTime() }
 		}
@@ -1424,7 +1386,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		if (regularMapVisible) updateRegularMapVisibility(true)
 		lastFocusedEclipseRequestId = -1L
 		updateBackPressedCallback()
-		eclipseCard.post { applyBottomInsets() }
+		eclipseCard.post { updateEclipseModeOffsets() }
 		when (type) {
 			EclipseExplorerType.Solar -> viewModel.enterSolarEclipseMode(starView.observer, displayedTime)
 			EclipseExplorerType.Lunar -> viewModel.enterLunarEclipseMode(starView.observer, displayedTime)
@@ -1502,7 +1464,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		if (restore.cameraEnabled && !cameraHelper.isCameraOverlayEnabled) cameraHelper.toggleCameraOverlay()
 		setTimeAutoUpdateEnabled(restore.autoTime)
 		lastFocusedEclipseRequestId = -1L
-		applyBottomInsets()
+		updateEclipseModeOffsets()
 		updateBackPressedCallback()
 	}
 
@@ -1658,7 +1620,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		timeControlCard.isVisible = !showing
 		if (!showing) {
 			resetEclipseUiCache()
-			applyBottomInsets()
+			updateEclipseModeOffsets()
 			return
 		}
 		eclipsePrevious.contentDescription = getString(R.string.astro_previous_solar_eclipse)
@@ -1771,7 +1733,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		if (eclipseMapShown && pendingEclipseMapFit) {
 			fitEclipseMapIfReady(state, state.mapFrame?.shadowPoint)
 		}
-		eclipseCard.post { applyBottomInsets() }
+		eclipseCard.post { updateEclipseModeOffsets() }
 		updateBackPressedCallback()
 		if (becameActive) applyRedFilterToViews(starView.showRedFilter, eclipseCard)
 	}
@@ -1800,7 +1762,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		timeControlCard.isVisible = !showing
 		if (!showing) {
 			resetEclipseUiCache()
-			applyBottomInsets()
+			updateEclipseModeOffsets()
 			return
 		}
 
@@ -1927,7 +1889,7 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		if (eclipseMapShown && pendingEclipseMapFit) {
 			state.mapFrame?.let { fitLunarEclipseVisibilityIfReady(it) }
 		}
-		eclipseCard.post { applyBottomInsets() }
+		eclipseCard.post { updateEclipseModeOffsets() }
 		updateBackPressedCallback()
 		if (becameActive) applyRedFilterToViews(starView.showRedFilter, eclipseCard)
 	}
