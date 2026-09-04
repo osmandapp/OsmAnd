@@ -1401,6 +1401,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					|| mapActivityInvalidated || invalidated || newTsRenderer || !renderedSegments.contains(ts);
 			if (ts.getRenderer() instanceof RenderableSegment renderableSegment) {
 				updated |= renderableSegment.setTrackParams(color, width, coloringType, routeIndoAttribute, colorPalette);
+				GpxLineStyleType lineStyleType = selected
+						? appearanceHelper.getLineStyleTypeForTrack(gpxFile, gpxItem, dirItem)
+						: GpxLineStyleType.SOLID;
 				if (hasMapRenderer || coloringType.isRouteInfoAttribute()) {
 					boolean showArrows = appearanceHelper.isShowArrowsForTrack(gpxFile, gpxItem, dirItem, selected);
 					if (coloringType.isRouteInfoAttribute()) {
@@ -1413,9 +1416,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					}
 					updated |= renderableSegment.setDrawArrows(showArrows);
 					updated |= renderableSegment.setTrack3DStyle(track3DStyle);
-					GpxLineStyleType lineStyleType = selected
-							? appearanceHelper.getLineStyleTypeForTrack(gpxFile, gpxItem, dirItem)
-							: GpxLineStyleType.SOLID;
 					updated |= renderableSegment.setLineStyleType(lineStyleType);
 					if (updated || !hasMapRenderer) {
 						float[] intervals = null;
@@ -1430,7 +1430,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 						renderedSegments.add(ts);
 					}
 				} else {
-					renderableSegment.drawSegment(view.getZoom(), paint, canvas, tileBox);
+					renderableSegment.setLineStyleType(lineStyleType);
+					renderableSegment.drawSegment(view.getZoom(), getLineStylePaint(paint, lineStyleType), canvas, tileBox);
 				}
 			}
 		}
@@ -1959,5 +1960,16 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			case DASHED -> new float[] {interval * 0.75f, interval * 1.75f};
 			case DOTTED -> new float[] {0.1f, interval};
 		};
+	}
+
+	@NonNull
+	private Paint getLineStylePaint(@NonNull Paint source, @NonNull GpxLineStyleType lineStyleType) {
+		float[] intervals = getLineStyleIntervals(lineStyleType, source.getStrokeWidth(), null);
+		if (intervals == null) {
+			return source;
+		}
+		Paint paint = new Paint(source);
+		paint.setPathEffect(new OsmandDashPathEffect(intervals, 0));
+		return paint;
 	}
 }

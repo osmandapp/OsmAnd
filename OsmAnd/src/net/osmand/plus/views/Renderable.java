@@ -140,6 +140,8 @@ public class Renderable {
             }
             paint.setColor(p.getColor());
             paint.setStrokeWidth(p.getStrokeWidth());
+            paint.setPathEffect(p.getPathEffect());
+            paint.setStrokeCap(p.getPathEffect() != null ? p.getStrokeCap() : Paint.Cap.ROUND);
             if (coloringType.isGradient()) {
                 paint.setAlpha(0xFF);
             }
