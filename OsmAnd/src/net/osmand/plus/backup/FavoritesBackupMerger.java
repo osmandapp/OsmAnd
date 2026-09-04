@@ -11,6 +11,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.items.FavoritesSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.shared.SharedUtil;
@@ -46,10 +47,15 @@ final class FavoritesBackupMerger {
 	// Preparation only changes the in-memory upload payload. It never changes local Favorites.
 	static void prepareMergeUploads(@NonNull OsmandApplication app,
 	                                @NonNull BackupHelper backupHelper,
-	                                @NonNull BackupInfo info) {
+	                                @NonNull BackupInfo info, boolean autoSync) {
 		for (Pair<LocalFile, RemoteFile> conflict : new ArrayList<>(info.filesToMerge)) {
 			LocalFile localFile = conflict.first;
 			if (!(localFile.item instanceof FavoritesSettingsItem localItem)) {
+				continue;
+			}
+			// Merging downloads the remote file, so skip types the backup would filter out anyway.
+			ExportType exportType = ExportType.findBy(localItem);
+			if (exportType == null || !backupHelper.getBackupTypePref(exportType, autoSync).get()) {
 				continue;
 			}
 			try {
