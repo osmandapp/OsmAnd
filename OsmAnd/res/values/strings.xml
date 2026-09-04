@@ -67,6 +67,7 @@
 	<string name="ais_reset_plugin_settings">Reset plugin settings</string>
 	<string name="ais_reset_connection_settings">Reset connection settings</string>
 	<string name="ais_reset_sliders">Reset to default values</string>
+	<string name="astro_eclipse_column_below_horizon">Below horizon</string>
 	<string name="share_favorites_media_preparation_failed">Couldn\'t include attached media. Sharing points only.</string>
 	<plurals name="files_count">
 		<item quantity="one">%d file</item>
