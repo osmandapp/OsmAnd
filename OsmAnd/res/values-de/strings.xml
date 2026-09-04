@@ -5265,4 +5265,24 @@
     <string name="media_storage_camera_folder_note_descr">Audio wird unter Music/OsmAnd gespeichert.</string>
     <string name="always_keep_local_copy">Immer eine lokale Kopie behalten</string>
     <string name="astro_lunar_eclipse">Mondfinsternis</string>
+    <string name="astro_lunar_eclipse_subtitle">Erkunde weltweit Mondfinsternisse</string>
+    <string name="astro_previous_lunar_eclipse">Vorherige Mondfinsternis</string>
+    <string name="astro_next_lunar_eclipse">Nächste Mondfinsternis</string>
+    <string name="astro_close_lunar_eclipse">Mondfinsternis-Explorer schließen</string>
+    <string name="astro_loading_lunar_eclipse">Berechne weltweit Mondfinsternisse</string>
+    <string name="astro_lunar_eclipse_load_error">Konnte diese Mondfinsternis nicht berechnen.</string>
+    <string name="astro_total_lunar_eclipse">Totale Mondfinsternis</string>
+    <string name="astro_partial_lunar_eclipse">Partielle Mondfinsternis</string>
+    <string name="astro_solar_eclipse">Sonnenfinsternis</string>
+    <string name="astro_solar_eclipse_subtitle">Entdecke weltweit Sonnenfinsternisse</string>
+    <string name="astro_previous_solar_eclipse">Vorherige Sonnenfinsternis</string>
+    <string name="astro_next_solar_eclipse">Nächste Sonnenfinsternis</string>
+    <string name="astro_close_solar_eclipse">Sonnenfinsternis-Explorer schließen</string>
+    <string name="astro_loading_solar_eclipse">Berechne weltweit Sonnenfinsternisse</string>
+    <string name="astro_total_solar_eclipse">Totale Sonnenfinsternis</string>
+    <string name="astro_partial_solar_eclipse">Partielle Sonnenfinsternis</string>
+    <string name="astro_eclipse_safety_warning">Schaue niemals direkt in die Sonne ohne ausreichende Schutzausrüstung zur Sonnenbeobachtung. Finsternis-Zeiten sind Schätzungen.</string>
+    <string name="route_calculation_standard_long_route_desc">Die Standard-Berechnung für lange Routen (&gt;300km) kann sehr zeitaufwändig sein. Das Hinzufügen eines Wegpunktes kann dies beschleunigen.</string>
+    <string name="route_calculation_fast_missing_or_outdated_maps_desc">Einige benötigte Offline-Karten für diese Route fehlen oder sind veraltet. Lade diese herunter oder aktualisiere sie, um fortzufahren.</string>
+    <string name="required_maps_route_overview">Routen-Überblick:</string>
 </resources>
