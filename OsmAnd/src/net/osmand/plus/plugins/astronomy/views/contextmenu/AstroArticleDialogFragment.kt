@@ -197,7 +197,9 @@ class AstroArticleDialogFragment : WikiArticleBaseDialogFragment() {
 
 	override fun showPopupLangMenu(view: View, langSelected: String) {
 		val namesSet = article?.wikiContentLocales
-		if (namesSet.isNullOrEmpty()) return
+		if (namesSet.isNullOrEmpty()) {
+			return
+		}
 
 		val popupLangMenu = createPopupLangMenu(view, namesSet)
 		popupLangMenu?.show()

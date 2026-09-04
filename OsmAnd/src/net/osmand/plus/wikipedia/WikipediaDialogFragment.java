@@ -232,6 +232,10 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 	@Override
 	protected void showPopupLangMenu(View view, String langSelected) {
 		final Set<String> namesSet = amenity.getSupportedContentLocales();
+		if (Algorithms.isEmpty(namesSet)) {
+			return;
+		}
+
 		final PopupMenu popupLangMenu = createPopupLangMenu(view, namesSet);
 		if (popupLangMenu != null) {
 			popupLangMenu.show();

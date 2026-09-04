@@ -252,9 +252,10 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 
 	@Override
 	protected void showPopupLangMenu(View view, String langSelected) {
-		if (langs == null) {
+		if (Algorithms.isEmpty(langs)) {
 			return;
 		}
+
 		final PopupMenu popupLangMenu = createPopupLangMenu(view, new HashSet<>(langs));
 		if (popupLangMenu != null) {
 			popupLangMenu.show();
