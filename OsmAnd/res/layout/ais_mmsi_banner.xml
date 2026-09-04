@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+	Shown on the Collision warning screen while the own MMSI is not set - without it the own
+	vessel keeps triggering collision warnings.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/mmsi_banner"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="@drawable/bg_ui_card_16"
+	android:orientation="horizontal"
+	android:padding="@dimen/content_padding">
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:layout_width="@dimen/ui_icon_size"
+		android:layout_height="@dimen/ui_icon_size"
+		android:layout_marginEnd="@dimen/content_padding"
+		android:importantForAccessibility="no"
+		android:src="@drawable/ic_action_alert" />
+
+	<LinearLayout
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_weight="1"
+		android:orientation="vertical">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="@string/ais_set_your_mmsi"
+			android:textColor="?attr/colorOnSurface"
+			android:textSize="@dimen/default_list_text_size"
+			app:lineHeight="@dimen/ui_line_height_title"
+			app:typefaceWeight="medium" />
+
+		<androidx.appcompat.widget.AppCompatTextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/ui_text_gap"
+			android:text="@string/ais_set_your_mmsi_desc"
+			android:textColor="?attr/colorOnSurfaceVariant"
+			android:textSize="@dimen/default_desc_text_size"
+			app:lineHeight="@dimen/ui_line_height_body" />
+
+		<com.google.android.material.button.MaterialButton
+			android:id="@+id/set_mmsi_button"
+			style="@style/Widget.Material3Expressive.Button"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/content_padding_small"
+			android:text="@string/ais_set_mmsi"
+			android:textColor="?attr/colorPrimary"
+			app:backgroundTint="?attr/colorPrimaryContainer" />
+	</LinearLayout>
+</LinearLayout>

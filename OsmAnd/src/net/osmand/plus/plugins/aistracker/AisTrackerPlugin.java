@@ -22,6 +22,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.shared.aistracker.AisConnectionListener;
 import net.osmand.shared.aistracker.AisMessageListener;
 import net.osmand.shared.aistracker.AisDataListener;
 import net.osmand.shared.aistracker.AisLocation;
@@ -29,6 +30,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.util.Algorithms;
 import net.osmand.plus.views.OsmandMapTileView;
 
 import java.io.File;
@@ -40,6 +42,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /*
  *   This plugin receives AIS positions and other AIS data via network (NMEA protocol)
@@ -48,6 +51,8 @@ import java.util.TimerTask;
 public class AisTrackerPlugin extends OsmandPlugin {
 
 	static private final int SIMULATED_LATENCY_TIME_MS = 100;
+	/* no AIS message within this time while the socket is open means "No data received": */
+	private static final long AIS_NO_DATA_TIMEOUT_MS = 60_000;
 
 	private final AisImagesCache aisImagesCache;
 	private final AisSimulationProvider simulationProvider = new AisSimulationProvider(this);
@@ -57,22 +62,24 @@ public class AisTrackerPlugin extends OsmandPlugin {
 
 	private static final String COMPONENT = "net.osmand.aistrackerPlugin";
 	public static final String AISTRACKER_ID = "osmand.aistracker";
-	public static final String AIS_NMEA_PROTOCOL_ID = "ais_nmea_protocol"; // see xml/ais_settings.xml
-	public static final String AIS_NMEA_IP_ADDRESS_ID = "ais_address_nmea_server"; // see xml/ais_settings.xml
-	public static final String AIS_NMEA_TCP_PORT_ID = "ais_port_nmea_server"; // see xml/ais_settings.xml
-	public static final String AIS_NMEA_UDP_PORT_ID = "ais_port_nmea_local"; // see xml/ais_settings.xml
-	public static final String AIS_OBJ_LOST_TIMEOUT_ID = "ais_object_lost_timeout"; // see xml/ais_settings.xml
-	public static final String AIS_SHIP_LOST_TIMEOUT_ID = "ais_ship_lost_timeout"; // see xml/ais_settings.xml
-	public static final String AIS_CPA_WARNING_TIME_ID = "ais_cpa_warning_time"; // see xml/ais_settings.xml
-	public static final String AIS_CPA_WARNING_DISTANCE_ID = "ais_cpa_warning_distance"; // see xml/ais_settings.xml
-	public static final String AIS_OWN_MMSI_ID = "ais_own_mmsi"; // see xml/ais_settings.xml
-    public static final String AIS_DISPLAY_OWN_POSITION_ID = "ais_display_own_position"; // see xml/ais_settings.xml
-    public static final String AIS_RECEIVE_IN_BACKGROUND_ID = "ais_receive_in_background"; // see xml/ais_settings.xml
+	public static final String AIS_NMEA_PROTOCOL_ID = "ais_nmea_protocol";
+	public static final String AIS_NMEA_IP_ADDRESS_ID = "ais_address_nmea_server";
+	public static final String AIS_NMEA_TCP_PORT_ID = "ais_port_nmea_server";
+	public static final String AIS_NMEA_UDP_PORT_ID = "ais_port_nmea_local";
+	public static final String AIS_OBJ_LOST_TIMEOUT_ID = "ais_object_lost_timeout";
+	public static final String AIS_SHIP_LOST_TIMEOUT_ID = "ais_ship_lost_timeout";
+	public static final String AIS_CPA_WARNING_TIME_ID = "ais_cpa_warning_time";
+	public static final String AIS_CPA_WARNING_DISTANCE_ID = "ais_cpa_warning_distance";
+	public static final String AIS_OWN_MMSI_ID = "ais_own_mmsi";
+    public static final String AIS_DISPLAY_OWN_POSITION_ID = "ais_display_own_position";
+    public static final String AIS_RECEIVE_IN_BACKGROUND_ID = "ais_receive_in_background";
+	public static final String AIS_CONNECTION_ENABLED_ID = "ais_connection_enabled";
+	public static final String AIS_CPA_ENABLED_ID = "ais_cpa_enabled";
 	public final CommonPreference<Integer> AIS_NMEA_PROTOCOL;
 	public static final int AIS_NMEA_PROTOCOL_UDP = 0;
 	public static final int AIS_NMEA_PROTOCOL_TCP = 1;
 	public final CommonPreference<String> AIS_NMEA_IP_ADDRESS;
-	private static final String AIS_NMEA_DEFAULT_IP = "192.168.200.16";
+	private static final String AIS_NMEA_DEFAULT_IP = "";
 	public final CommonPreference<Integer> AIS_NMEA_TCP_PORT;
 	private static final Integer AIS_NMEA_DEFAULT_TCP_PORT = 4001;
 	public final CommonPreference<Integer> AIS_NMEA_UDP_PORT;
@@ -84,18 +91,24 @@ public class AisTrackerPlugin extends OsmandPlugin {
 	public final CommonPreference<Integer> AIS_SHIP_LOST_TIMEOUT;
 	public static final Integer AIS_SHIP_LOST_DEFAULT_TIMEOUT = 4;
 	public final CommonPreference<Integer> AIS_CPA_WARNING_TIME; // in minutes
-	public static final Integer AIS_CPA_DEFAULT_WARNING_TIME = 0;
+	public static final Integer AIS_CPA_DEFAULT_WARNING_TIME = 1;
 	public final CommonPreference<Float> AIS_CPA_WARNING_DISTANCE; // in miles
-	public static final Float AIS_CPA_WARNING_DEFAULT_DISTANCE = 1.0f;
+	public static final Float AIS_CPA_WARNING_DEFAULT_DISTANCE = 0.02f;
 	public final CommonPreference<Integer> AIS_OWN_MMSI;
 	public static final Integer AIS_DEFAULT_OWN_MMSI = 0;
 	public final CommonPreference<Boolean> AIS_DISPLAY_OWN_POSITION;
 	public static final Boolean AIS_DISPLAY_OWN_POSITION_DEFAULT = false;
     public final CommonPreference<Boolean> AIS_RECEIVE_IN_BACKGROUND;
     public static final Boolean AIS_RECEIVE_IN_BACKGROUND_DEFAULT = false;
+	/* set to false while the user keeps the connection closed from the plugin screen: */
+	public final CommonPreference<Boolean> AIS_CONNECTION_ENABLED;
+	public final CommonPreference<Boolean> AIS_CPA_ENABLED;
 
 	/* timestamp of last AIS message received for all instances: */
 	private long lastMessageReceived = 0;
+	@NonNull
+	private AisConnectionState connectionState = AisConnectionState.NOT_CONNECTED;
+	private final List<AisConnectionStateListener> connectionStateListeners = new CopyOnWriteArrayList<>();
 	private Location fakeOwnPosition = null; // used for test purposes to fake own position
 
 	private final StateChangedListener<String> addrPrefListener = change -> restartNetworkListener();
@@ -221,7 +234,7 @@ public class AisTrackerPlugin extends OsmandPlugin {
 		super(app);
 		aisImagesCache = new AisImagesCache(app);
 
-		/* "ais_nmea_protocol" etc. is a reference to the content of xml/ais_settings.xml */
+		/* preference ids are kept as they were, so existing settings survive the redesign */
 		AIS_NMEA_PROTOCOL = registerIntPreference(AIS_NMEA_PROTOCOL_ID, AIS_NMEA_PROTOCOL_UDP);
 		AIS_NMEA_IP_ADDRESS = registerStringPreference(AIS_NMEA_IP_ADDRESS_ID, AIS_NMEA_DEFAULT_IP);
 		AIS_NMEA_TCP_PORT = registerIntPreference(AIS_NMEA_TCP_PORT_ID, AIS_NMEA_DEFAULT_TCP_PORT);
@@ -233,6 +246,8 @@ public class AisTrackerPlugin extends OsmandPlugin {
 		AIS_OWN_MMSI = registerIntPreference(AIS_OWN_MMSI_ID, AIS_DEFAULT_OWN_MMSI);
 		AIS_DISPLAY_OWN_POSITION = registerBooleanPreference(AIS_DISPLAY_OWN_POSITION_ID, AIS_DISPLAY_OWN_POSITION_DEFAULT);
 		AIS_RECEIVE_IN_BACKGROUND = registerBooleanPreference(AIS_RECEIVE_IN_BACKGROUND_ID, AIS_RECEIVE_IN_BACKGROUND_DEFAULT);
+		AIS_CONNECTION_ENABLED = registerBooleanPreference(AIS_CONNECTION_ENABLED_ID, true);
+		AIS_CPA_ENABLED = registerBooleanPreference(AIS_CPA_ENABLED_ID, false);
 		AIS_NMEA_IP_ADDRESS.addListener(addrPrefListener);
 		AIS_NMEA_PROTOCOL.addListener(protocolPortPrefListener);
 		AIS_NMEA_TCP_PORT.addListener(protocolPortPrefListener);
@@ -321,11 +336,78 @@ public class AisTrackerPlugin extends OsmandPlugin {
 	}
 
 	public int getCpaWarningTime() {
-		return AIS_CPA_WARNING_TIME.get();
+		return AIS_CPA_ENABLED.get() ? AIS_CPA_WARNING_TIME.get() : 0;
 	}
 
 	public float getCpaWarningDistance() {
 		return AIS_CPA_WARNING_DISTANCE.get();
+	}
+
+	public interface AisConnectionStateListener {
+		void onAisConnectionStateChanged(@NonNull AisConnectionState state);
+	}
+
+	public void addConnectionStateListener(@NonNull AisConnectionStateListener listener) {
+		if (!connectionStateListeners.contains(listener)) {
+			connectionStateListeners.add(listener);
+		}
+	}
+
+	public void removeConnectionStateListener(@NonNull AisConnectionStateListener listener) {
+		connectionStateListeners.remove(listener);
+	}
+
+	/**
+	 * The connection is "not set up" only for TCP - UDP works out of the box on the default port.
+	 */
+	public boolean isConnectionConfigured() {
+		return AIS_NMEA_PROTOCOL.get() != AIS_NMEA_PROTOCOL_TCP
+				|| !Algorithms.isEmpty(AIS_NMEA_IP_ADDRESS.get());
+	}
+
+	@NonNull
+	public AisConnectionState getConnectionState() {
+		if (!isConnectionConfigured()) {
+			return AisConnectionState.NOT_SET_UP;
+		}
+		if (connectionState == AisConnectionState.CONNECTED
+				&& System.currentTimeMillis() - lastMessageReceived > AIS_NO_DATA_TIMEOUT_MS) {
+			return AisConnectionState.NO_DATA;
+		}
+		return connectionState;
+	}
+
+	private void setConnectionState(@NonNull AisConnectionState state) {
+		if (connectionState != state) {
+			connectionState = state;
+			AisConnectionState reported = getConnectionState();
+			app.runInUIThread(() -> {
+				for (AisConnectionStateListener listener : connectionStateListeners) {
+					listener.onAisConnectionStateChanged(reported);
+				}
+			});
+		}
+	}
+
+	/** Opens the connection and remembers that the user wants it open. */
+	public void connect() {
+		AIS_CONNECTION_ENABLED.set(true);
+		restartNetworkListener();
+	}
+
+	/** Closes the connection and keeps it closed until the user asks for it again. */
+	public void disconnect() {
+		AIS_CONNECTION_ENABLED.set(false);
+		stopAisListener();
+		setConnectionState(AisConnectionState.NOT_CONNECTED);
+	}
+
+	public int getVesselsCount() {
+		return aisDataManager.getAisObjects().size();
+	}
+
+	public boolean isCpaEnabled() {
+		return AIS_CPA_ENABLED.get();
 	}
 
 	public Location getOwnPosition() { // used to calculate distances, CPA etc.
@@ -433,15 +515,41 @@ public class AisTrackerPlugin extends OsmandPlugin {
 		updateAisBackgroundService();
 	}
 
+	private final AisConnectionListener networkStateListener = new AisConnectionListener() {
+
+		@Override
+		public void onAisConnecting() {
+			setConnectionState(AisConnectionState.CONNECTING);
+		}
+
+		@Override
+		public void onAisConnected() {
+			/* the socket is open, but no AIS message arrived yet - getConnectionState() turns this
+			 * into NO_DATA once the silence gets too long */
+			lastMessageReceived = System.currentTimeMillis();
+			setConnectionState(AisConnectionState.CONNECTED);
+		}
+
+		@Override
+		public void onAisConnectionFailed(@Nullable String message) {
+			setConnectionState(AisConnectionState.FAILED);
+		}
+	};
+
 	private void startAisNetworkListener() {
+		if (!AIS_CONNECTION_ENABLED.get() || !isConnectionConfigured()) {
+			setConnectionState(AisConnectionState.NOT_CONNECTED);
+			return;
+		}
 		int proto = AIS_NMEA_PROTOCOL.get();
 		if (proto == AisTrackerPlugin.AIS_NMEA_PROTOCOL_UDP) {
 			aisDataManager.stopUpdates();
-			aisListener = new AisMessageListener(aisDataManager, AIS_NMEA_UDP_PORT.get());
+			aisListener = new AisMessageListener(aisDataManager, AIS_NMEA_UDP_PORT.get(), networkStateListener);
 			aisDataManager.startUpdates();
 		} else if (proto == AisTrackerPlugin.AIS_NMEA_PROTOCOL_TCP) {
 			aisDataManager.stopUpdates();
-			aisListener = new AisMessageListener(aisDataManager, AIS_NMEA_IP_ADDRESS.get(), AIS_NMEA_TCP_PORT.get());
+			aisListener = new AisMessageListener(aisDataManager, AIS_NMEA_IP_ADDRESS.get(),
+					AIS_NMEA_TCP_PORT.get(), networkStateListener);
 			aisDataManager.startUpdates();
 		}
 		updateAisBackgroundService();
@@ -454,6 +562,7 @@ public class AisTrackerPlugin extends OsmandPlugin {
 		}
 		aisDataManager.stopUpdates();
 		stopAisBackgroundService();
+		setConnectionState(AisConnectionState.NOT_CONNECTED);
 	}
 
 	private void updateAisBackgroundService() {

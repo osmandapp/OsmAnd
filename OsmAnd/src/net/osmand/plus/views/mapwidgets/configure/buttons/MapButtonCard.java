@@ -75,6 +75,17 @@ public class MapButtonCard extends MapBaseCard {
 
 	public static void setupButtonBackground(@NonNull View view, boolean nightMode) {
 		OsmandApplication app = (OsmandApplication) view.getContext().getApplicationContext();
+		Integer color = getMapWaterColor(app, nightMode);
+		if (color != null) {
+			view.setBackgroundColor(color);
+		}
+	}
+
+	/**
+	 * @return the waterColor of the selected map style, or null when the style does not define it.
+	 */
+	@Nullable
+	public static Integer getMapWaterColor(@NonNull OsmandApplication app, boolean nightMode) {
 		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
 		if (renderer != null) {
 			MapRenderRepositories maps = app.getResourceManager().getRenderer();
@@ -82,9 +93,10 @@ public class MapButtonCard extends MapBaseCard {
 			if (request.searchRenderingAttribute("waterColor")) {
 				int color = request.getIntPropertyValue(renderer.PROPS.R_ATTR_COLOR_VALUE);
 				if (color != -1) {
-					view.setBackgroundColor(color);
+					return color;
 				}
 			}
 		}
+		return null;
 	}
 }

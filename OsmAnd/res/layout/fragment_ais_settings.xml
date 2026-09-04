@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+	Vessel tracker (AIS) - root plugin screen. First screen migrated to Material 3.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/root"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/colorSurface"
+	android:orientation="vertical">
+
+	<include layout="@layout/ui_material_app_bar" />
+
+	<ScrollView
+		android:id="@+id/scroll_view"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:paddingBottom="@dimen/content_padding">
+
+			<net.osmand.plus.widgets.ui.GroupHeaderView
+				android:id="@+id/connection_header"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:groupHeaderTitle="@string/ais_connection" />
+
+			<LinearLayout
+				android:id="@+id/connection_group"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical">
+
+				<include
+					android:id="@+id/connection_row"
+					layout="@layout/item_ais_connection_row" />
+
+				<include
+					android:id="@+id/background_row"
+					layout="@layout/item_ui_setting_row" />
+			</LinearLayout>
+
+			<net.osmand.plus.widgets.ui.GroupFooterView
+				android:id="@+id/connection_footer"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:visibility="gone" />
+
+			<net.osmand.plus.widgets.ui.GroupHeaderView
+				android:id="@+id/vessels_header"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:groupHeaderTitle="@string/ais_vessels_on_the_map_group" />
+
+			<LinearLayout
+				android:id="@+id/vessels_group"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical">
+
+				<include
+					android:id="@+id/objects_visibility_row"
+					layout="@layout/item_ui_setting_row" />
+
+				<include
+					android:id="@+id/collision_warning_row"
+					layout="@layout/item_ui_setting_row" />
+			</LinearLayout>
+
+			<net.osmand.plus.widgets.ui.GroupHeaderView
+				android:id="@+id/my_vessel_header"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/ui_group_gap"
+				app:groupHeaderTitle="@string/ais_my_vessel" />
+
+			<LinearLayout
+				android:id="@+id/my_vessel_group"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical">
+
+				<include
+					android:id="@+id/mmsi_row"
+					layout="@layout/item_ui_setting_row" />
+
+				<include
+					android:id="@+id/show_on_map_row"
+					layout="@layout/item_ui_setting_row" />
+			</LinearLayout>
+
+			<net.osmand.plus.widgets.ui.GroupFooterView
+				android:id="@+id/my_vessel_footer"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:groupFooterText="@string/ais_my_vessel_footer" />
+		</LinearLayout>
+	</ScrollView>
+</LinearLayout>

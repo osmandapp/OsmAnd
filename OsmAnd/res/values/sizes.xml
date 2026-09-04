@@ -504,4 +504,23 @@
 	<dimen name="nearby_place_image_vertical_size">66dp</dimen>
 
 	<dimen name="banner_main_icon_size">66dp</dimen>
+
+	<!-- Material 3 UI kit -->
+	<dimen name="ui_corner_radius_large">16dp</dimen>
+	<dimen name="ui_corner_radius_small">4dp</dimen>
+	<dimen name="ui_group_gap">16dp</dimen>
+	<dimen name="ui_segment_gap">2dp</dimen>
+	<dimen name="ui_group_header_min_height">48dp</dimen>
+	<dimen name="ui_group_header_padding_vertical">12dp</dimen>
+	<dimen name="ui_group_footer_padding_top">8dp</dimen>
+	<dimen name="ui_touch_target">48dp</dimen>
+	<dimen name="ui_icon_size">24dp</dimen>
+	<dimen name="ui_row_min_height">48dp</dimen>
+	<dimen name="ui_row_icon_gap">32dp</dimen>
+	<dimen name="ui_line_height_title">24dp</dimen>
+	<dimen name="ui_line_height_body">20dp</dimen>
+	<dimen name="ui_image_inset">24dp</dimen>
+	<dimen name="ui_text_gap">2dp</dimen>
+	<dimen name="ui_dialog_padding">24dp</dimen>
+	<dimen name="ui_slider_height">48dp</dimen>
 </resources>
