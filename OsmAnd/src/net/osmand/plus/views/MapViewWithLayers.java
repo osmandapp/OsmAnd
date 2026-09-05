@@ -2,7 +2,9 @@ package net.osmand.plus.views;
 
 import static net.osmand.plus.views.OsmandMapTileView.MIN_ALLOWED_ELEVATION_ANGLE;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
@@ -168,12 +170,30 @@ public class MapViewWithLayers extends FrameLayout {
 			NavigationSession carNavigationSession = app.getCarNavigationSession();
 			if (carNavigationSession == null || !carNavigationSession.hasStarted()) {
 				mapView.setMapRenderer(null, true);
-				resetMapRendererView();
-				atlasMapRendererView.handleOnDestroy();
+				if (isChangingConfigurations()) {
+					// The activity is relaunched right away, so keep the renderer and its EGL
+					// contexts alive instead of releasing rendering and initializing it anew.
+					// The recreated view picks the renderer up in setupAtlasMapRendererView().
+					atlasMapRendererView.suspendRenderer();
+				} else {
+					resetMapRendererView();
+					atlasMapRendererView.handleOnDestroy();
+				}
 			}
 		}
 		mapView.clearTouchDetectors();
 		app.getOsmandMap().removeRenderingViewSetupListener(getRenderingViewSetupListener());
+	}
+
+	private boolean isChangingConfigurations() {
+		Context context = getContext();
+		while (context instanceof ContextWrapper) {
+			if (context instanceof Activity) {
+				return ((Activity) context).isChangingConfigurations();
+			}
+			context = ((ContextWrapper) context).getBaseContext();
+		}
+		return false;
 	}
 
 	@NonNull
