@@ -98,7 +98,10 @@ import net.osmand.aidlapi.copyfile.CopyFileParams;
 
 import net.osmand.aidlapi.navigation.ANavigationUpdateParams;
 import net.osmand.aidlapi.navigation.ANavigationVoiceRouterMessageParams;
+import net.osmand.aidlapi.navigation.ActiveRouteGeometry;
+import net.osmand.aidlapi.navigation.ARouteUpdateParams;
 import net.osmand.aidlapi.navigation.ABlockedRoad;
+import net.osmand.aidlapi.navigation.GetActiveRouteParams;
 import net.osmand.aidlapi.navigation.AddBlockedRoadParams;
 import net.osmand.aidlapi.navigation.RemoveBlockedRoadParams;
 
@@ -956,4 +959,27 @@ interface IOsmAndAidlInterface {
      * set RemoveWidgetGroupParams.removeWidgets = true to also remove the widgets.
      */
     boolean removeWidgetGroup(in RemoveWidgetGroupParams params);
+
+    /**
+     * Returns WGS84 polyline of the active route (planning or navigation).
+     *
+     * @param params optional flags (e.g. include passed segment)
+     * @param result filled on success
+     * @return false if no route, route is being calculated, or fewer than 2 points
+     */
+    boolean getActiveRouteGeometry(in GetActiveRouteParams params, out ActiveRouteGeometry result);
+
+    /**
+     * Route lifecycle updates: recalculated, cancelled, or finished.
+     * Not turn-by-turn ticks (see registerForNavigationUpdates).
+     * On recalculation, call getActiveRouteGeometry() for the polyline.
+     */
+    long registerForRouteUpdates(in ARouteUpdateParams params, IOsmAndAidlCallback callback);
+
+    /**
+     * Unregister from route lifecycle updates.
+     *
+     * @param callbackId id returned by registerForRouteUpdates
+     */
+    boolean unregisterFromRouteUpdates(in long callbackId);
 }

@@ -3,6 +3,7 @@ package net.osmand.aidlapi;
 import net.osmand.aidlapi.search.SearchResult;
 import net.osmand.aidlapi.gpx.AGpxBitmap;
 import net.osmand.aidlapi.navigation.ADirectionInfo;
+import net.osmand.aidlapi.navigation.ARouteUpdate;
 import net.osmand.aidlapi.navigation.OnVoiceNavigationParams;
 import net.osmand.aidlapi.logcat.OnLogcatMessageParams;
 
@@ -62,4 +63,10 @@ interface IOsmAndAidlCallback {
      *  Callback for {@link IOsmAndAidlInterface} registerForLogcatMessages() method.
      */
     void onLogcatMessage(in OnLogcatMessageParams params);
+
+    /**
+     * Callback for {@link IOsmAndAidlInterface} registerForRouteUpdates() method.
+     * Polyline is not included; call getActiveRouteGeometry() on recalculation.
+     */
+    void onRouteUpdate(in ARouteUpdate update);
 }

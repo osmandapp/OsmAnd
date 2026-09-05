@@ -4,6 +4,7 @@ import static net.osmand.aidl.OsmandAidlApi.KEY_ON_CONTEXT_MENU_BUTTONS_CLICK;
 import static net.osmand.aidl.OsmandAidlApi.KEY_ON_KEY_EVENT;
 import static net.osmand.aidl.OsmandAidlApi.KEY_ON_LOGCAT_MESSAGE;
 import static net.osmand.aidl.OsmandAidlApi.KEY_ON_NAV_DATA_UPDATE;
+import static net.osmand.aidl.OsmandAidlApi.KEY_ON_ROUTE_UPDATE;
 import static net.osmand.aidl.OsmandAidlApi.KEY_ON_UPDATE;
 import static net.osmand.aidl.OsmandAidlApi.KEY_ON_VOICE_MESSAGE;
 import static net.osmand.aidlapi.OsmandAidlConstants.CANNOT_ACCESS_API_ERROR;
@@ -97,6 +98,9 @@ import net.osmand.aidlapi.navigation.ABlockedRoad;
 import net.osmand.aidlapi.navigation.ANavigationUpdateParams;
 import net.osmand.aidlapi.navigation.ANavigationVoiceRouterMessageParams;
 import net.osmand.aidlapi.navigation.AddBlockedRoadParams;
+import net.osmand.aidlapi.navigation.ARouteUpdateParams;
+import net.osmand.aidlapi.navigation.ActiveRouteGeometry;
+import net.osmand.aidlapi.navigation.GetActiveRouteParams;
 import net.osmand.aidlapi.navigation.MuteNavigationParams;
 import net.osmand.aidlapi.navigation.NavigateGpxParams;
 import net.osmand.aidlapi.navigation.NavigateParams;
@@ -1573,6 +1577,56 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 			try {
 				OsmandAidlApi api = getApi("setZoomLimits");
 				return api != null && api.setZoomLimits(params.getMinZoom(), params.getMaxZoom());
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean getActiveRouteGeometry(GetActiveRouteParams params, ActiveRouteGeometry result) {
+			try {
+				OsmandAidlApi api = getApi("getActiveRouteGeometry");
+				return params != null && result != null && api != null
+						&& api.getActiveRouteGeometry(params, result);
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public long registerForRouteUpdates(ARouteUpdateParams params, IOsmAndAidlCallback callback) {
+			try {
+				OsmandAidlApi api = getApi("registerForRouteUpdates");
+				if (api != null) {
+					if (!params.isSubscribeToUpdates() && params.getCallbackId() != -1) {
+						api.unregisterFromRouteUpdates(params.getCallbackId());
+						removeAidlCallback(params.getCallbackId());
+						return -1;
+					} else {
+						long id = addAidlCallback(callback, KEY_ON_ROUTE_UPDATE);
+						api.registerForRouteUpdates(id);
+						return id;
+					}
+				} else {
+					return -1;
+				}
+			} catch (Exception e) {
+				handleException(e);
+				return UNKNOWN_API_ERROR;
+			}
+		}
+
+		@Override
+		public boolean unregisterFromRouteUpdates(long callbackId) {
+			try {
+				OsmandAidlApi api = getApi("unregisterFromRouteUpdates");
+				if (api != null) {
+					api.unregisterFromRouteUpdates(callbackId);
+					return removeAidlCallback(callbackId);
+				}
+				return false;
 			} catch (Exception e) {
 				handleException(e);
 				return false;
