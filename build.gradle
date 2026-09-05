@@ -5,10 +5,13 @@ buildscript {
         mavenCentral()
         maven {
             url 'https://developer.huawei.com/repo/'
+            content {
+                includeGroupByRegex 'com\\.huawei(\\..*)?'
+            }
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.7.3'
+        classpath 'com.android.tools.build:gradle:8.10.1'
         classpath 'com.google.gms:google-services:4.4.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:compose-compiler-gradle-plugin:$kotlin_version"
@@ -21,7 +24,7 @@ buildscript {
 }
 
 plugins {
-	id "de.undercouch.download" version "4.1.1"
+	id "de.undercouch.download" version "5.7.0"
 }
 
 
@@ -47,6 +50,9 @@ allprojects {
         }
         maven {
             url 'https://developer.huawei.com/repo/'
+            content {
+                includeGroupByRegex 'com\\.huawei(\\..*)?'
+            }
         }
     }
 }

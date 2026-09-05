@@ -6,6 +6,7 @@ import static android.view.View.VISIBLE;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,6 +66,8 @@ import kotlin.Unit;
 
 public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectProvider {
 
+	private static final long WIDGETS_UPDATE_INTERVAL_MS = 500L;
+
 	private final RouteLayer routeLayer;
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -114,6 +117,25 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		appearanceRefreshScheduled = false;
 		refreshWidgetPanels();
 	};
+
+	private long lastWidgetsUpdateTime;
+	private boolean widgetsUpdateScheduled;
+
+	private final Runnable widgetsUpdateRunnable = () -> {
+		widgetsUpdateScheduled = false;
+
+		MapActivity activity = getMapActivity();
+		if (activity != null && activity.getSettings().MAP_ACTIVITY_ENABLED) {
+			if (activity.isMapVisible()) {
+				long currentTime = SystemClock.uptimeMillis();
+				long elapsedTime = currentTime - lastWidgetsUpdateTime;
+				if (elapsedTime >= WIDGETS_UPDATE_INTERVAL_MS) {
+					updateWidgetsInternal(view.getCurrentRotatedTileBox(), drawSettings);
+				}
+			}
+			scheduleWidgetsUpdate();
+		}
+	};
 	private final PanelAppearanceSettingsManager.Listener appearanceSettingsListener;
 
 	public MapInfoLayer(@NonNull Context context, @NonNull RouteLayer layer) {
@@ -133,6 +155,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 
 	@Override
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
+		resetWidgetsUpdateState();
 		super.setMapActivity(mapActivity);
 		if (mapActivity != null) {
 			mapHudLayout = mapActivity.findViewById(R.id.map_hud_layout);
@@ -615,9 +638,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	}
 
 	private boolean resolveMapNightMode() {
-		return drawSettings != null
-				? drawSettings.isNightMode()
-				: app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
+		return app.getDaynightHelper().isNightMode(app.getSettings().getApplicationMode(), ThemeUsageContext.MAP);
 	}
 
 	public void updateTopToolbar() {
@@ -663,24 +684,54 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
 		this.drawSettings = drawSettings;
 		if (getMapActivity() != null) {
-			updateColorShadowsOfText();
-			updateWidgetsInfo(drawSettings);
+			updateWidgetsInternal(tileBox, drawSettings);
+			scheduleWidgetsUpdate();
+		}
+	}
 
-			updateMainWidgetPanels();
-			topToolbarView.updateInfo();
-			alarmWidget.updateInfo(drawSettings, false);
-			speedometerWidget.updateInfo(drawSettings);
+	private void updateWidgetsInternal(@NonNull RotatedTileBox tileBox, @Nullable DrawSettings drawSettings) {
+		updateColorShadowsOfText();
+		updateWidgetsInfo(drawSettings);
 
-			for (RulerWidget widget : rulerWidgets) {
-				widget.updateInfo(tileBox);
+		updateMainWidgetPanels();
+		topToolbarView.updateInfo();
+		alarmWidget.updateInfo(drawSettings, false);
+		speedometerWidget.updateInfo(drawSettings);
+
+		for (RulerWidget widget : rulerWidgets) {
+			widget.updateInfo(tileBox);
+		}
+		for (SideWidgetsPanel panel : sideWidgetsPanels) {
+			panel.update(drawSettings);
+		}
+		for (WidgetsContainer container : additionalWidgets) {
+			container.update(drawSettings);
+		}
+		lastWidgetsUpdateTime = SystemClock.uptimeMillis();
+	}
+
+	private void scheduleWidgetsUpdate() {
+		MapHudLayout hudLayout = mapHudLayout;
+		if (hudLayout != null && !widgetsUpdateScheduled) {
+			MapActivity activity = getMapActivity();
+			long delay = WIDGETS_UPDATE_INTERVAL_MS;
+			if (activity != null && activity.isMapVisible()) {
+				long elapsedTime = SystemClock.uptimeMillis() - lastWidgetsUpdateTime;
+				delay = Math.max(0, WIDGETS_UPDATE_INTERVAL_MS - elapsedTime);
 			}
-			for (SideWidgetsPanel panel : sideWidgetsPanels) {
-				panel.update(drawSettings);
-			}
-			for (WidgetsContainer container : additionalWidgets) {
-				container.update(drawSettings);
+			widgetsUpdateScheduled = true;
+			if (!hudLayout.postDelayed(widgetsUpdateRunnable, delay)) {
+				widgetsUpdateScheduled = false;
 			}
 		}
+	}
+
+	private void resetWidgetsUpdateState() {
+		if (mapHudLayout != null) {
+			mapHudLayout.removeCallbacks(widgetsUpdateRunnable);
+		}
+		widgetsUpdateScheduled = false;
+		lastWidgetsUpdateTime = 0;
 	}
 
 	private void updateWidgetsInfo(@Nullable DrawSettings drawSettings) {

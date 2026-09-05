@@ -31,6 +31,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class DownloadResources extends DownloadResourceGroup {
@@ -50,6 +51,7 @@ public class DownloadResources extends DownloadResourceGroup {
 	public boolean downloadFromInternetFailed;
 	public boolean mapVersionIsIncreased;
 	private List<IndexItem> rawResources;
+	private List<IndexItem> customResources = Collections.emptyList();
 	private Map<WorldRegion, List<IndexItem>> groupByRegion;
 	private OutdatedIndexesCollection outdatedItems = OutdatedIndexesCollection.emptyInstance();
 
@@ -181,6 +183,14 @@ public class DownloadResources extends DownloadResourceGroup {
 				outdatedItems = OutdatedIndexesCollector.collect(app, filtered, deprecatedItems);
 			}
 		}
+		updateCustomDownloadedFiles();
+	}
+
+	private void updateCustomDownloadedFiles() {
+		List<IndexItem> customItems = customResources;
+		for (IndexItem item : customItems) {
+			item.setDownloaded(item.getTargetFile(app).exists());
+		}
 	}
 
 	protected void updateOutdatedFiles() {
@@ -194,6 +204,7 @@ public class DownloadResources extends DownloadResourceGroup {
 
 	protected boolean prepareData(List<IndexItem> resources) {
 		this.rawResources = resources;
+		List<IndexItem> customResources = new ArrayList<>();
 
 		DownloadResourceGroup deprecatedMapsGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.DELETED_MAPS);
 		addGroup(deprecatedMapsGroup);
@@ -247,7 +258,7 @@ public class DownloadResources extends DownloadResourceGroup {
 				continue;
 			}
 			if (type == DownloadActivityType.DEPTH_MAP_FILE) {
-				String fileName = item.getFileName().toLowerCase();
+				String fileName = item.getFileName().toLowerCase(Locale.US);
 				if (fileName.startsWith(WORLD_CONTOURS_SUFFIX)) {
 					nauticalWorldwideMaps.addItem(item);
 				} else if (InAppPurchaseUtils.isDepthContoursAvailable(app)) {
@@ -283,7 +294,7 @@ public class DownloadResources extends DownloadResourceGroup {
 			}
 
 			String basename = item.getBasename();
-			WorldRegion region = regs.getRegionDataByDownloadName(basename.toLowerCase());
+			WorldRegion region = regs.getRegionDataByDownloadName(basename.toLowerCase(Locale.US));
 			if (region != null) {
 				if (!isMapCreatedByJoiningSubregions(region, type)) {
 					if (!groupByRegion.containsKey(region)) {
@@ -294,7 +305,7 @@ public class DownloadResources extends DownloadResourceGroup {
 			} else {
 				String fileName = item.getFileName();
 				if (fileName.contains("World")) {
-					if (CollectionUtils.startsWithAny(fileName.toLowerCase(), WORLD_SEAMARKS_KEY, WORLD_SEAMARKS_OLD_KEY)) {
+					if (CollectionUtils.startsWithAny(fileName.toLowerCase(Locale.US), WORLD_SEAMARKS_KEY, WORLD_SEAMARKS_OLD_KEY)) {
 						nauticalWorldwideMaps.addItem(item);
 					} else {
 						worldMaps.addItem(item);
@@ -306,7 +317,7 @@ public class DownloadResources extends DownloadResourceGroup {
 					String fileNameRegionName = fileName.substring(fileName.indexOf('_') + 1, fileName.indexOf('.'));
 					if (fileNameRegionName.contains("_") &&
 							!fileNameRegionName.endsWith(WorldRegion.AUSTRALIA_AND_OCEANIA_REGION_ID)) {
-						String[] parts = fileNameRegionName.toLowerCase().split("_");
+						String[] parts = fileNameRegionName.toLowerCase(Locale.US).split("_");
 						String countryPart = parts[0], regionPart = parts[1]; // us, northamerica
 						WorldRegion weatherRegion = regs.getRegionData(regionPart + "_" + countryPart);
 						if (weatherRegion != null) {
@@ -324,7 +335,7 @@ public class DownloadResources extends DownloadResourceGroup {
 		if (!Algorithms.isEmpty(customRegions)) {
 			addGroup(extraMapsGroup);
 			for (WorldRegion region : customRegions) {
-				buildRegionsGroups(region, extraMapsGroup);
+				buildRegionsGroups(region, extraMapsGroup, customResources);
 			}
 		}
 
@@ -401,6 +412,7 @@ public class DownloadResources extends DownloadResourceGroup {
 		replaceIndividualSrtmWithGroups(region);
 		createMultipleDownloadItems(region);
 		trimEmptyGroups();
+		this.customResources = Collections.unmodifiableList(customResources);
 		updateLoadedFiles();
 		return true;
 	}
@@ -526,7 +538,8 @@ public class DownloadResources extends DownloadResourceGroup {
 		return collectedItems;
 	}
 
-	private void buildRegionsGroups(WorldRegion region, DownloadResourceGroup group) {
+	private void buildRegionsGroups(WorldRegion region, DownloadResourceGroup group,
+	                                List<IndexItem> customResources) {
 		LinkedList<WorldRegion> queue = new LinkedList<>();
 		LinkedList<DownloadResourceGroup> parent = new LinkedList<>();
 		queue.add(region);
@@ -539,10 +552,10 @@ public class DownloadResources extends DownloadResourceGroup {
 			mainGrp.region = reg;
 			parentGroup.addGroup(mainGrp);
 
-			if (reg instanceof CustomRegion) {
-				CustomRegion customRegion = (CustomRegion) reg;
+			if (reg instanceof CustomRegion customRegion) {
 				List<IndexItem> indexItems = customRegion.loadIndexItems();
 				if (!Algorithms.isEmpty(indexItems)) {
+					customResources.addAll(indexItems);
 					DownloadResourceGroup flatFiles = new DownloadResourceGroup(mainGrp, REGION_MAPS);
 					for (IndexItem ii : indexItems) {
 						flatFiles.addItem(ii);

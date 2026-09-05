@@ -18,6 +18,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -52,6 +53,7 @@ public class SearchSettings {
 	private List<MapObject> exportedObjects;
 	private List<City> exportedCities;
 	private SortType sortType;
+	private RegionPriorityProvider regionPriorityProvider;
 
 	public SearchSettings(SearchSettings s) {
 		if (s != null) {
@@ -355,5 +357,36 @@ public class SearchSettings {
 		return s;
 	}
 
+	public boolean hasRegionPriority() {
+		return regionPriorityProvider != null;
+	}
+
+	public void updateRegionPriorityProvider(SearchPhrase phrase) {
+		if (regionPriorityProvider == null) {
+			regionPriorityProvider = new RegionPriorityProvider(phrase);
+		}
+		regionPriorityProvider.checkAndUpdate(phrase);
+	}
+
+	public Collection<BinaryMapIndexReader> getRegionPriorityIndexes() {
+		if (regionPriorityProvider != null) {
+			return regionPriorityProvider.getOfflineIndexes();
+		}
+		return Collections.emptyList();
+	}
+
+	public List<BinaryMapIndexReader> getRegionPriorityIndexesWithMinRadius(int min, int max) {
+		if (regionPriorityProvider != null) {
+			return regionPriorityProvider.getOfflineIndexes(min, max);
+		}
+		return Collections.emptyList();
+	}
+
+	public int getRegionPriority(BinaryMapIndexReader reader) {
+		if (regionPriorityProvider != null) {
+			return regionPriorityProvider.getRegionWeight(reader);
+		}
+		return 0;
+	}
 
 }

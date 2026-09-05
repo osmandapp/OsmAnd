@@ -11,6 +11,7 @@
 	<dimen name="map_address_height">60dp</dimen>
 	<dimen name="map_ruler_width">180dp</dimen>
 	<dimen name="map_ruler_bottom_margin">17dp</dimen>
+	<dimen name="map_ruler_text_size">23sp</dimen>
 	<dimen name="map_alarm_size">138dp</dimen>
 	<dimen name="map_alarm_bottom_text_margin">12dp</dimen>
 	<dimen name="map_alarm_text_size">35sp</dimen>

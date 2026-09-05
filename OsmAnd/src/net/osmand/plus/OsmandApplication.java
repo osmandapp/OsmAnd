@@ -24,6 +24,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.compose.ui.AndroidComposeUiFlags;
 import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleObserver;
@@ -246,6 +247,7 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 		long timeToStart = System.currentTimeMillis();
 		enableStrictMode();
+		applyComposeWorkarounds();
 		super.onCreate();
 
 		LifecycleObserver appLifecycleObserver = new DefaultLifecycleObserver() {
@@ -304,6 +306,26 @@ public class OsmandApplication extends MultiDexApplication {
 
 		SearchUICore.setDebugMode(PluginsHelper.isDevelopment());
 		BackupHelper.DEBUG = PluginsHelper.isDevelopment();
+	}
+
+	/**
+	 * Turns off the "view based semantics handler" Compose feature flag.
+	 * <p>
+	 * With the flag on, AndroidComposeViewAccessibilityDelegateCompat.onViewDetachedFromWindow()
+	 * dereferences View.getHandler() with {@code !!}, although that handler is null whenever the
+	 * view is not attached to a window. AbsListView leaves recycled item views exactly in that
+	 * state: RecycleBin detaches them from the window and later puts them back with
+	 * attachViewToParent(), which does not re-dispatch onAttachedToWindow(). The next
+	 * ListView.resetList() -> removeAllViewsInLayout() then detaches such a view a second time and
+	 * every ComposeView inside a list item (search results, gallery sort bar, chips) crashes with
+	 * a NullPointerException.
+	 * <p>
+	 * The flag only exists to support Compose on a non-main thread, which OsmAnd never does, so
+	 * falling back to the main looper handler is safe. To be removed once the upstream bug
+	 * (b/486998514) is fixed.
+	 */
+	private void applyComposeWorkarounds() {
+		AndroidComposeUiFlags.isViewBasedSemanticsHandlerEnabled = false;
 	}
 
 	public boolean isPlusVersionInApp() {
