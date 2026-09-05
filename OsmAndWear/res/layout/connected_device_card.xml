@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/appbar_and_list_background_color"
+	android:elevation="2dp"
+	android:orientation="vertical">
+
+	<ImageButton
+		android:id="@+id/close_button"
+		style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+		android:layout_width="@dimen/toolbar_height"
+		android:layout_height="@dimen/toolbar_height"
+		android:contentDescription="@string/access_shared_string_navigate_up"
+		app:srcCompat="@drawable/ic_arrow_back"
+		app:tint="?attr/default_icon_color" />
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal">
+
+		<ImageView
+			android:id="@+id/widget_icon"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="@dimen/content_padding"
+			android:layout_marginRight="@dimen/content_padding"
+			android:background="@drawable/bg_widget_type_icon_light"
+			android:importantForAccessibility="no"
+			android:scaleType="center"
+			tools:src="@drawable/widget_sensor_distance_day" />
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="vertical">
+
+			<TextView
+				android:id="@+id/device_name"
+				android:layout_width="wrap_content"
+				android:layout_height="0dp"
+				android:layout_weight="1"
+				android:textSize="@dimen/dialog_header_text_size"
+				app:typefaceWeight="medium"
+				tools:text="Wohoo" />
+
+			<TextView
+				android:id="@+id/connection_state"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="bottom"
+				android:drawablePadding="@dimen/content_padding_small_half"
+				android:gravity="bottom|start"
+				android:textColor="?android:textColorSecondary"
+				android:textSize="@dimen/default_desc_text_size"
+				tools:drawableStartCompat="@drawable/ic_action_signal_high"
+				tools:text="Disconnected" />
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<FrameLayout
+		android:id="@+id/pair_btn"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/dialog_button_height"
+		android:layout_margin="@dimen/content_padding">
+
+		<FrameLayout
+			android:id="@+id/button_container"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:duplicateParentState="true"
+			tools:ignore="UselessParent">
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/button_text"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_gravity="center"
+				android:drawablePadding="@dimen/content_padding_half"
+				android:duplicateParentState="true"
+				android:gravity="center"
+				android:paddingStart="@dimen/content_padding_small"
+				android:paddingLeft="@dimen/content_padding_small"
+				android:paddingEnd="@dimen/content_padding_small"
+				android:paddingRight="@dimen/content_padding_small"
+				android:textSize="@dimen/default_desc_text_size"
+				app:typefaceWeight="medium"
+				tools:text="Pair"
+				tools:visibility="gone" />
+
+			<me.zhanghai.android.materialprogressbar.MaterialProgressBar
+				android:id="@+id/progress_bar"
+				style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+				android:layout_width="120dp"
+				android:layout_height="4dp"
+				android:layout_gravity="center"
+				android:indeterminate="true"
+				android:visibility="gone"
+				app:mpb_progressStyle="horizontal"
+				app:mpb_useIntrinsicPadding="false"
+				tools:visibility="visible" />
+
+		</FrameLayout>
+
+	</FrameLayout>
+
+</LinearLayout>

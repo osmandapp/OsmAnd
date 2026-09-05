@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:paddingLeft="@dimen/content_padding"
+	android:paddingRight="@dimen/content_padding"
+	android:paddingStart="@dimen/content_padding"
+	android:paddingEnd="@dimen/content_padding">
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/content_padding_half" />
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/content_padding" />
+	
+	<include android:id="@+id/btnDontMove"
+		layout="@layout/bottom_sheet_dialog_button_big" />
+	
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/content_padding_half" />
+
+	<include android:id="@+id/btnMove"
+		layout="@layout/bottom_sheet_dialog_button_big" />
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/content_padding_half" />
+
+	<include android:id="@+id/btnClose"
+		layout="@layout/bottom_sheet_dialog_button_big" />
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/content_padding" />
+
+</LinearLayout>

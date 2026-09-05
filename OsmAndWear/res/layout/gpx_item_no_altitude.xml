@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/bg_color"
+	android:orientation="vertical">
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/icon"
+		android:layout_width="@dimen/big_icon_size"
+		android:layout_height="@dimen/big_icon_size"
+		android:layout_gravity="center_horizontal"
+		android:layout_marginTop="@dimen/content_padding"
+		android:layout_marginBottom="@dimen/content_padding"
+		app:srcCompat="@drawable/ic_action_desert"
+		app:tint="?attr/default_icon_color" />
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/title"
+		style="@style/TitleStyle.Medium"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginEnd="@dimen/content_padding"
+		android:layout_marginBottom="@dimen/content_padding"
+		android:text="@string/no_altitude_data" />
+
+	<net.osmand.plus.widgets.dialogbutton.DialogButton
+		android:id="@+id/button_action"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal"
+		app:dialogButtonType="secondaryActive"
+		app:dialogButtonBottomMargin="@dimen/dialog_content_margin"
+		app:dialogButtonTitle="@string/calculate_altitude"/>
+
+	<include layout="@layout/gpx_item_details_view" />
+
+</LinearLayout>

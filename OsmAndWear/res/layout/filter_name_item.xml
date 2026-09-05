@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:gravity="center_vertical"
+	android:orientation="horizontal">
+
+	<net.osmand.plus.widgets.OsmandTextFieldBoxes
+		android:id="@+id/query"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_weight="1"
+		android:layout_margin="@dimen/list_content_padding"
+		android:focusable="true"
+		app:hasClearButton="true"
+		android:focusableInTouchMode="true"
+		app:primaryColor="@color/active_color_primary_dark"
+		app:secondaryColor="?android:textColorSecondary"
+		app:errorColor="@color/color_invalid"
+		app:labelText="@string/filter_by_name">
+
+		<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+			android:id="@+id/query_et"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:inputType="text"
+			android:scrollHorizontally="true"
+			android:maxLines="1" />
+
+	</net.osmand.plus.widgets.OsmandTextFieldBoxes>
+</LinearLayout>

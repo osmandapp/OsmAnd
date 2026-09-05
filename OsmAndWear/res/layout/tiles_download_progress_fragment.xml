@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:background="?attr/activity_background_color"
+	android:clickable="true"
+	android:focusable="true">
+
+	<include layout="@layout/download_tiles_toolbar" />
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:background="?attr/list_background_color"
+		android:foregroundGravity="fill_horizontal|top"
+		android:foreground="@drawable/bg_contextmenu_shadow">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/percent_progress"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingHorizontal="@dimen/content_padding"
+			android:paddingVertical="@dimen/dialog_content_margin"
+			android:maxLines="1"
+			android:ellipsize="end"
+			android:textColor="?attr/active_color_basic"
+			android:textSize="@dimen/default_header_text_size"
+			android:letterSpacing="@dimen/text_button_letter_spacing"
+			app:typefaceWeight="medium"
+			app:lineHeight="@dimen/default_title_line_height"
+			tools:text="25% downloaded" />
+
+		<me.zhanghai.android.materialprogressbar.MaterialProgressBar
+			android:id="@+id/progress_bar"
+			style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/list_item_button_padding"
+			android:paddingHorizontal="@dimen/content_padding"
+			android:progressTint="?attr/active_color_basic"
+			android:max="100"
+			app:mpb_progressStyle="horizontal"
+			app:mpb_useIntrinsicPadding="false"
+			app:mpb_setBothDrawables="true"
+			tools:progress="25" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/downloaded_size"
+			style="@style/TitleStyle"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingHorizontal="@dimen/content_padding"
+			android:paddingVertical="@dimen/content_padding_small"
+			android:maxLines="1"
+			android:ellipsize="end"
+			android:textColor="?android:textColorPrimary"
+			tools:text="Downloaded: 789 MB (~ 1448 MB)" />
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:layout_marginStart="@dimen/content_padding"
+			android:background="?attr/divider_color_basic" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/downloaded_number"
+			style="@style/TitleStyle"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingHorizontal="@dimen/content_padding"
+			android:paddingVertical="@dimen/content_padding_small"
+			android:textColor="?android:textColorPrimary"
+			tools:text="Tiles: 65 000 (12 700)" />
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/dialog_button_ex_height"
+			android:paddingHorizontal="@dimen/content_padding"
+			android:paddingTop="@dimen/content_padding_half"
+			android:paddingBottom="@dimen/content_padding">
+
+			<net.osmand.plus.widgets.dialogbutton.DialogButton
+				android:id="@+id/cancel_button"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:dialogButtonType="secondary"
+				tools:dialogButtonTitle="@string/shared_string_cancel" />
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<include layout="@layout/card_bottom_divider" />
+
+</LinearLayout>

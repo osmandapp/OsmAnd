@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="splash_screen_background_color">@color/list_background_color_dark</color>
+</resources>

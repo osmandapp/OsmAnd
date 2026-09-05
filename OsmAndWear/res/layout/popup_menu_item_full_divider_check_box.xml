@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<View
+		android:id="@+id/divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="?attr/list_divider" />
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:minHeight="@dimen/bottom_sheet_list_item_height"
+		android:orientation="horizontal">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/icon"
+			android:layout_width="@dimen/standard_icon_size"
+			android:layout_height="@dimen/standard_icon_size"
+			android:layout_gravity="center_vertical"
+			android:layout_marginStart="@dimen/content_padding_half"
+			tools:src="@drawable/ic_action_info_dark" />
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<TextView
+					android:id="@+id/title"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_vertical"
+					android:layout_weight="1"
+					android:paddingStart="@dimen/content_padding"
+					android:paddingLeft="@dimen/content_padding"
+					android:paddingTop="@dimen/content_padding_small"
+					android:paddingEnd="@dimen/content_padding"
+					android:paddingRight="@dimen/content_padding"
+					android:paddingBottom="@dimen/content_padding_small"
+					android:textColor="?android:textColorPrimary"
+					android:textSize="@dimen/default_list_text_size"
+					tools:text="Title" />
+
+				<androidx.appcompat.widget.AppCompatCheckBox
+					android:id="@+id/compound_button"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center"
+					android:layout_marginEnd="@dimen/content_padding"
+					android:clickable="false"
+					android:focusable="false" />
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</LinearLayout>

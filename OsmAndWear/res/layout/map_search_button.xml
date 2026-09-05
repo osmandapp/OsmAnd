@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<net.osmand.plus.views.controls.maphudbuttons.QuickSearchButton xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/map_search_button"
+	android:layout_width="@dimen/map_small_button_size"
+	android:layout_height="@dimen/map_small_button_size"
+	android:clickable="true"
+	android:contentDescription="@string/map_widget_search"
+	android:focusable="true"
+	tools:background="@drawable/btn_inset_circle_night"
+	tools:src="@drawable/ic_action_search_dark" />

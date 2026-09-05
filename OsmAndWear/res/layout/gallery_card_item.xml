@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="@dimen/gallery_standard_icon_size"
+	android:layout_height="@dimen/gallery_standard_icon_size"
+	tools:background="@color/activity_background_color_dark">
+
+	<ImageView
+		android:id="@+id/image"
+		android:layout_width="@dimen/standard_icon_size"
+		android:layout_height="@dimen/standard_icon_size"
+		android:layout_gravity="center"
+		android:scaleType="centerCrop"
+		tools:src="@drawable/mm_tourism_museum" />
+
+	<ImageView
+		android:id="@+id/source_type"
+		android:layout_width="@dimen/standard_icon_size"
+		android:layout_height="@dimen/standard_icon_size"
+		android:layout_marginStart="9dp"
+		android:layout_marginTop="9dp"
+		android:visibility="gone" />
+
+</FrameLayout>
