@@ -71,6 +71,13 @@ public class RoutingConfiguration {
 	// 1.7 Maximum visited segments
 	public int MAX_VISITED = -1;
 
+	/**
+	 * Set only while alternative routes are being searched (see HHAlternativeRoutes): the bidirectional
+	 * search then does not stop at the first meeting point but keeps settling until both queues leave
+	 * the (1 + this) * optimum band, so that the two trees overlap enough to compare routes through them.
+	 */
+	public double altHorizon = 0;
+
 
 	// extra points to be inserted in ways (quad tree is based on 31 coords)
 	private QuadTree<DirectionPoint> directionPoints;

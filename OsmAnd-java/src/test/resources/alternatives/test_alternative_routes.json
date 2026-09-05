@@ -3,30 +3,122 @@
     "testName": "Kyiv, Podil -> Teremky: embankment and southern corridors instead of Povitryanykh Syl",
     "description": "The main route goes west over Peremohy/Povitryanykh Syl; both alternatives leave Podil along the Dnipro embankment. Used to be dropped: four shortcuts in a row cost more in detail than the hub graph said",
     "map": "Ukraine_kyiv_europe_2.obf",
-    "startPoint": { "latitude": 50.46904, "longitude": 30.51638 },
-    "endPoint": { "latitude": 50.37401, "longitude": 30.44741 },
+    "startPoint": {
+      "latitude": 50.46904,
+      "longitude": 30.51638
+    },
+    "endPoint": {
+      "latitude": 50.37401,
+      "longitude": 30.44741
+    },
     "minAlternatives": 2,
     "expectedVia": [
-      { "name": "Naberezhne shose (Dnipro embankment)", "latitude": 50.45860, "longitude": 30.52670, "toleranceMeters": 500 }
+      {
+        "name": "Naberezhne shose (Dnipro embankment)",
+        "latitude": 50.4586,
+        "longitude": 30.5267,
+        "toleranceMeters": 500
+      }
     ]
   },
   {
     "testName": "Kyiv, Podil -> Darnytskyi masyv: no main route with a loop bolted on",
     "description": "Used to return an alternative covering 99% of the main route plus a 3.3 km loop at the end",
     "map": "Ukraine_kyiv_europe_2.obf",
-    "startPoint": { "latitude": 50.46947, "longitude": 30.51361 },
-    "endPoint": { "latitude": 50.43286, "longitude": 30.60940 },
+    "startPoint": {
+      "latitude": 50.46947,
+      "longitude": 30.51361
+    },
+    "endPoint": {
+      "latitude": 50.43286,
+      "longitude": 30.6094
+    },
     "minAlternatives": 1
   },
   {
     "testName": "Kyiv, Podil -> Berezniaky: centre offered, loop variant rejected",
     "description": "The alternative goes through the centre (Khreshchatyk, Parkova doroha) instead of the embankment; the candidate that only adds a loop avoids 0.3 km of the main route and must stay out",
     "map": "Ukraine_kyiv_europe_2.obf",
-    "startPoint": { "latitude": 50.46947, "longitude": 30.51361 },
-    "endPoint": { "latitude": 50.43148, "longitude": 30.61028 },
+    "startPoint": {
+      "latitude": 50.46947,
+      "longitude": 30.51361
+    },
+    "endPoint": {
+      "latitude": 50.43148,
+      "longitude": 30.61028
+    },
     "minAlternatives": 1,
     "expectedVia": [
-      { "name": "Khreshchatyk", "latitude": 50.45290, "longitude": 30.52790, "toleranceMeters": 500 }
+      {
+        "name": "Khreshchatyk",
+        "latitude": 50.4529,
+        "longitude": 30.5279,
+        "toleranceMeters": 500
+      }
+    ]
+  },
+  {
+    "testName": "Amstelveen, Fluweelboomlaan -> Westwijk: a 4 km route the hub graph cannot describe",
+    "description": "The route never reaches the hub graph (two last-mile segments, no hub edge), so the alternatives can only come from the detailed road graph. Google offers three ways here; used to return none",
+    "map": "Netherlands_noord-holland_europe_2.obf",
+    "startPoint": {
+      "latitude": 52.286065,
+      "longitude": 4.866343
+    },
+    "endPoint": {
+      "latitude": 52.28491,
+      "longitude": 4.823599
+    },
+    "minAlternatives": 2
+  },
+  {
+    "testName": "Tours -> Nouatre: the A10 corridor, where the second road is +33%",
+    "description": "83% of the fastest route is toll motorway (A10). Within +30% there is only one candidate, the main route with a 24 km loop bolted on (it avoids 3.2 km of it), so the list came back empty; the two real corridors are at +32.7% and +39.4% of cost",
+    "map": "France_centre-loire-valley_europe_2.obf",
+    "startPoint": {
+      "latitude": 47.545713,
+      "longitude": 0.973663
+    },
+    "endPoint": {
+      "latitude": 47.08041,
+      "longitude": 0.606308
+    },
+    "minAlternatives": 2,
+    "expectedVia": [
+      {
+        "name": "the western corridor (D910 / Sainte-Maure)",
+        "latitude": 47.3018,
+        "longitude": 0.882,
+        "toleranceMeters": 1000
+      },
+      {
+        "name": "the eastern corridor (D760 / Azay-le-Rideau)",
+        "latitude": 47.3956,
+        "longitude": 0.7068,
+        "toleranceMeters": 1000
+      }
+    ]
+  },
+  {
+    "testName": "Pisa -> Prato: a toll-free option next to 88% of toll motorway",
+    "description": "The fastest route is A12 + A11. The alternatives are offered inside the normal limit here - one at +12% and one at +27% with only 9.7 km of toll left - which is what the fallback tier must not change",
+    "map": "Italy_toscana_europe_2.obf",
+    "startPoint": {
+      "latitude": 43.716,
+      "longitude": 10.4
+    },
+    "endPoint": {
+      "latitude": 43.88,
+      "longitude": 11.096
+    },
+    "minAlternatives": 2,
+    "expectedVia": [
+      {
+        "name": "the nearly toll-free corridor (SS67 / FI-PI-LI)",
+        "latitude": 43.7036,
+        "longitude": 10.8555,
+        "toleranceMeters": 1000
+      }
     ]
   }
 ]
