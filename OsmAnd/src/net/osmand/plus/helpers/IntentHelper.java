@@ -19,8 +19,8 @@ import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
 import android.content.ClipData;
 import android.content.Intent;
 import android.net.Uri;
-import android.net.Uri.Builder;
 import android.os.Bundle;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -66,6 +66,7 @@ import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.RequiredMapsFragment;
+import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment.QuickSearchTab;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment.QuickSearchType;
@@ -80,6 +81,7 @@ import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.ConfigureScreenFragment;
+import net.osmand.router.GeneralRouter;
 import net.osmand.search.AmenitySearcher;
 import net.osmand.search.AmenitySearcher.Request;
 import net.osmand.search.AmenitySearcher.Settings;
@@ -99,6 +101,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class IntentHelper {
 
@@ -107,10 +110,12 @@ public class IntentHelper {
 	private static final String URL_SCHEME = "https";
 	private static final String URL_AUTHORITY = "osmand.net";
 	private static final String URL_PATH = "map";
+	private static final String URL_PATH_COMPONENT_NAVIGATE = "navigate";
 	private static final String URL_PARAMETER_START = "start";
 	private static final String URL_PARAMETER_END = "end";
 	private static final String URL_PARAMETER_TOKEN = "token";
 	private static final String URL_PARAMETER_MODE = "profile";
+	private static final String URL_PARAMETER_ROUTING_PARAMS = "params";
 	private static final String URL_PARAMETER_INTERMEDIATE_POINTS = "via";
 	public static final int REQUEST_CODE_CREATE_FILE = 1101;
 
@@ -167,6 +172,7 @@ public class IntentHelper {
 				String endLatLonParam = data.getQueryParameter(URL_PARAMETER_END);
 				String appModeKeyParam = data.getQueryParameter(URL_PARAMETER_MODE);
 				String intermediatePointsParam = data.getQueryParameter(URL_PARAMETER_INTERMEDIATE_POINTS);
+				final String routingParams = data.getQueryParameter(URL_PARAMETER_ROUTING_PARAMS);
 
 				if (Algorithms.isEmpty(endLatLonParam)) {
 					LOG.error("Malformed OsmAnd navigation URL: destination location is missing");
@@ -197,11 +203,11 @@ public class IntentHelper {
 						@Override
 						public void onFinish(@NonNull AppInitializer init) {
 							init.removeListener(this);
-							buildRoute(startLatLon, endLatLon, appMode, points);
+							buildRoute(startLatLon, endLatLon, appMode, points, routingParams);
 						}
 					});
 				} else {
-					buildRoute(startLatLon, endLatLon, appMode, points);
+					buildRoute(startLatLon, endLatLon, appMode, points, routingParams);
 				}
 				clearIntent(intent);
 				return true;
@@ -271,7 +277,8 @@ public class IntentHelper {
 	}
 
 	private void buildRoute(@Nullable LatLon start, @NonNull LatLon end,
-	                        @Nullable ApplicationMode appMode, @Nullable List<LatLon> points) {
+	                        @Nullable ApplicationMode appMode, @Nullable List<LatLon> points,
+							@Nullable String routingSettingsQueryParams) {
 		if (appMode != null) {
 			app.getRoutingHelper().setAppMode(appMode);
 		}
@@ -285,9 +292,84 @@ public class IntentHelper {
 						null, settings.getIntermediatePoints().size());
 			}
 		}
+		if (!Algorithms.isEmpty(routingSettingsQueryParams)) {
+			applyRoutingParams(appMode, routingSettingsQueryParams);
+		}
 
 		mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, appMode, start,
 				null, hasIntermediatePoints, true, MapRouteInfoMenu.DEFAULT_MENU_STATE);
+	}
+
+	private void buildRoute(@Nullable LatLon start, @NonNull LatLon end,
+	                        @Nullable ApplicationMode appMode, @Nullable List<LatLon> points) {
+		buildRoute(start, end, appMode, points, null);
+	}
+
+	private void applyRoutingParams(@Nullable ApplicationMode appMode, @NonNull String routingSettingsQueryParams) {
+		if (appMode == null) {
+			return;
+		}
+
+		GeneralRouter router = app.getRouter(appMode);
+		if (router == null) {
+			return;
+		}
+
+		List<Pair<String, String>> parsedParams = parseRoutingParams(routingSettingsQueryParams);
+		if (Algorithms.isEmpty(parsedParams)) {
+            return;
+        }
+
+		Map<String, GeneralRouter.RoutingParameter> appRoutingParams
+				= RoutingHelperUtils.getParametersForDerivedProfile(appMode, router);
+		if (Algorithms.isEmpty(appRoutingParams)) {
+			return;
+		}
+
+		for (Map.Entry<String, GeneralRouter.RoutingParameter> entry : appRoutingParams.entrySet()) {
+			String key = entry.getKey();
+			GeneralRouter.RoutingParameter routingParam = entry.getValue();
+			if (GeneralRouter.USE_SHORTEST_WAY.equals(key)) {
+				boolean isFastMode = !routingParam.getDefaultBoolean();
+				settings.FAST_ROUTE_MODE.set(isFastMode);
+				continue;
+			}
+			if (GeneralRouter.RoutingParameterType.BOOLEAN.equals(routingParam.getType())) {
+				settings.getCustomRoutingBooleanProperty(key, routingParam.getDefaultBoolean())
+						.setModeValue(appMode, routingParam.getDefaultBoolean());
+			} else {
+				settings.getCustomRoutingProperty(key, routingParam.getDefaultString())
+						.setModeValue(appMode, routingParam.getDefaultString());
+			}
+		}
+
+		for (Pair<String, String> p: parsedParams) {
+			String paramKey = p.first;
+			if (Algorithms.isEmpty(paramKey)) {
+				continue;
+			}
+			if (appMode.getStringKey().equals(paramKey) || appMode.getRoutingProfile().equals(paramKey)) {
+				continue;
+			}
+			String paramValue = p.second;
+
+			if (GeneralRouter.USE_SHORTEST_WAY.equals(paramKey)) {
+				boolean booleanValue = (!"false".equals(paramValue));
+				settings.FAST_ROUTE_MODE.setModeValue(appMode, !booleanValue);
+				continue;
+			}
+
+			GeneralRouter.RoutingParameter ap = appRoutingParams.get(paramKey);
+			if (ap == null) {
+				continue;
+			}
+			if (ap.getType() == GeneralRouter.RoutingParameterType.BOOLEAN) {
+				boolean booleanValue = (!"false".equals(paramValue));
+				settings.getCustomRoutingBooleanProperty(paramKey, ap.getDefaultBoolean()).setModeValue(appMode, booleanValue);
+			} else {
+				settings.getCustomRoutingProperty(paramKey, ap.getDefaultString()).setModeValue(appMode, paramValue);
+			}
+		}
 	}
 
 	private boolean parseSetPinOnMapIntent() {
@@ -460,6 +542,14 @@ public class IntentHelper {
 	}
 
 	@Nullable
+	private List<Pair<String, String>> parseRoutingParams(@Nullable String parameter) {
+		if (Algorithms.isEmpty(parameter)) {
+            return null;
+        }
+		return parseRoutingParamsQueryValue(parameter);
+	}
+
+	@Nullable
 	private List<LatLon> parseIntermediatePoints(@Nullable String parameter) {
 		if (!Algorithms.isEmpty(parameter)) {
 			String[] params = parameter.split("[,;]");
@@ -510,6 +600,17 @@ public class IntentHelper {
 	private boolean isOsmAndMapUrl(@NonNull Uri uri) {
 		return isOsmAndSite(uri) && isPathPrefix(uri, "/map");
 	}
+
+	private boolean isOsmAndMapNavigationUrl(@NonNull Uri data) {
+		if (!isOsmAndSite(data)) {
+			return false;
+		}
+		if (!isPathPrefix(data, URL_PATH)) {
+			return false;
+		}
+		return data.getQueryParameterNames().contains(URL_PARAMETER_END);
+	}
+
 
 	private boolean parseOpenLocationMenuIntent() {
 		Intent intent = mapActivity.getIntent();
@@ -904,43 +1005,122 @@ public class IntentHelper {
 	}
 
 	public static String generateRouteUrl(@NonNull OsmandApplication app) {
+		Uri.Builder builder = new Uri.Builder()
+				.scheme(URL_SCHEME)
+				.authority(URL_AUTHORITY)
+				.path(URL_PATH)
+				.appendPath(URL_PATH_COMPONENT_NAVIGATE);
+
 		OsmandSettings settings = app.getSettings();
-		OsmandMapTileView mapTileView = app.getOsmandMap().getMapView();
 
 		LatLon startPoint = settings.getPointToStart();
-		LatLon endPoint = settings.getPointToNavigate();
-		List<LatLon> intermediatePoints = settings.getIntermediatePoints();
-
-		Builder builder = new Builder();
-		builder.scheme(URL_SCHEME)
-				.authority(URL_AUTHORITY)
-				.appendPath(URL_PATH);
-
 		if (startPoint != null) {
-			String startPointCoordinates = Algorithms.formatLatlon(startPoint);
-			builder.appendQueryParameter(URL_PARAMETER_START, startPointCoordinates);
+			String startValue = Algorithms.formatLatlon(startPoint);
+			builder.appendQueryParameter(URL_PARAMETER_START, startValue);
 		}
 
+		List<LatLon> intermediatePoints = settings.getIntermediatePoints();
 		if (!Algorithms.isEmpty(intermediatePoints)) {
-			StringBuilder stringBuilder = new StringBuilder();
-			for (LatLon latLon : intermediatePoints) {
-				stringBuilder.append(";")
-						.append(getFormattedCoordinate(latLon.getLatitude()))
-						.append(",")
-						.append(getFormattedCoordinate(latLon.getLongitude()));
-			}
-			builder.appendQueryParameter(URL_PARAMETER_INTERMEDIATE_POINTS, stringBuilder.substring(1));
+			String intermediatesValue = intermediatePoints
+					.stream()
+					.map(Algorithms::formatLatlon)
+					.collect(Collectors.joining(";"));
+			builder.appendQueryParameter(URL_PARAMETER_INTERMEDIATE_POINTS, intermediatesValue);
 		}
 
+		LatLon endPoint = settings.getPointToNavigate();
 		if (endPoint != null) {
-			String endPointCoordinates = Algorithms.formatLatlon(endPoint);
-			builder.appendQueryParameter(URL_PARAMETER_END, endPointCoordinates);
+			String endValue = Algorithms.formatLatlon(endPoint);
+			builder.appendQueryParameter(URL_PARAMETER_END, endValue);
 		}
 
-		builder.appendQueryParameter(URL_PARAMETER_MODE, app.getRoutingHelper().getAppMode().getStringKey())
-				.encodedFragment(mapTileView.getZoom() + "/" + getFormattedCoordinate(mapTileView.getLatitude()) + "/" + getFormattedCoordinate(mapTileView.getLongitude()));
+		ApplicationMode appMode = app.getRoutingHelper().getAppMode();
+		builder.appendQueryParameter(URL_PARAMETER_MODE, appMode.getStringKey());
+
+		String paramsValue = getRoutingParamsQueryValue(app, appMode);
+		if (paramsValue != null) {
+			builder.appendQueryParameter(URL_PARAMETER_ROUTING_PARAMS, paramsValue);
+		}
+
+		OsmandMapTileView mapTileView = app.getOsmandMap().getMapView();
+		int zoom = mapTileView.getZoom();
+		double lat = mapTileView.getLatitude();
+		double lon = mapTileView.getLongitude();
+		String fragment = zoom + "/" + getFormattedCoordinate(lat) + "/" + getFormattedCoordinate(lon);
+		builder.encodedFragment(fragment);
 
 		return builder.build().toString();
+	}
+
+	@Nullable
+	private static String getRoutingParamsQueryValue(OsmandApplication app, ApplicationMode mode) {
+		GeneralRouter router = app.getRouter(mode);
+		if (router == null) {
+			return null;
+		}
+		OsmandSettings settings = app.getSettings();
+		List<String> parts = new ArrayList<>();
+		parts.add(mode.getStringKey());
+		boolean hasChanges = false;
+
+		Map<String, GeneralRouter.RoutingParameter> routingParams
+				= RoutingHelperUtils.getParametersForDerivedProfile(mode, router);
+		for (Map.Entry<String, GeneralRouter.RoutingParameter> entry : routingParams.entrySet()) {
+			String key = entry.getKey();
+			GeneralRouter.RoutingParameter routingParam = entry.getValue();
+			if (GeneralRouter.USE_SHORTEST_WAY.equals(key)) {
+				boolean isFastMode = settings.FAST_ROUTE_MODE.getModeValue(mode);
+				if (!isFastMode) {
+					parts.add(GeneralRouter.USE_SHORTEST_WAY);
+					hasChanges = true;
+					continue;
+				}
+			}
+			if (GeneralRouter.RoutingParameterType.BOOLEAN.equals(routingParam.getType())) {
+				boolean settingsValue = settings
+						.getCustomRoutingBooleanProperty(key, routingParam.getDefaultBoolean())
+						.getModeValue(mode);
+				if (settingsValue == routingParam.getDefaultBoolean()) {
+					continue;
+				}
+				String value = settingsValue ? key : key + ":false";
+				parts.add(value);
+				hasChanges = true;
+			} else {
+				String settingsValue = settings
+						.getCustomRoutingProperty(key, routingParam.getDefaultString())
+						.getModeValue(mode);
+				if (routingParam.getDefaultString().equals(settingsValue)) {
+					continue;
+				}
+				String value = key + ":" + settingsValue;
+				parts.add(value);
+				hasChanges = true;
+			}
+		}
+		if (!hasChanges) {
+			return null;
+		}
+		return String.join(",", parts);
+	}
+
+	private List<Pair<String, String>> parseRoutingParamsQueryValue(String queryParamValue) {
+		List<Pair<String, String>> parsed = new ArrayList<>();
+		String[] parts = queryParamValue.split(",");
+        for (String part : parts) {
+            String[] splits = part.split("[:=]", 2);
+            if (Algorithms.isEmpty(splits)) {
+                continue;
+            }
+            Pair<String, String> keyValue;
+            if (splits.length == 2) {
+                keyValue = new Pair<>(splits[0], splits[1]);
+            } else {
+                keyValue = new Pair<>(splits[0], "true");
+            }
+            parsed.add(keyValue);
+        }
+		return parsed;
 	}
 
 	private static String getFormattedCoordinate(double coordinate) {
