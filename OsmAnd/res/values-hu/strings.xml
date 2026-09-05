@@ -5267,4 +5267,5 @@
     <string name="share_favorites_missing_media_warning">Néhány csatolt médiafájl nem volt beilleszthető.</string>
     <string name="share_favorites_media_preparation_failed">Nem sikerült beilleszteni a csatolt médiafájlokat. Csak pontok megosztása.</string>
     <string name="search_on_web">Keresés a világhálón</string>
+    <string name="astro_eclipse_column_below_horizon">Horizont alatt</string>
 </resources>

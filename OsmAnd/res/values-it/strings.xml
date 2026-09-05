@@ -5214,8 +5214,8 @@
     <string name="tracks_backup_promo_title">Salva e sincronizza le tue tracce</string>
     <string name="android_auto_missing_maps_desc">Scarica le mappe mancanti per continuare il percorso.</string>
     <string name="android_auto_possible_missing_maps_desc">Mappe potenzialmente mancanti. Prova a utilizzare le mappe esistenti per continuare.</string>
-    <string name="route_calculation_calculating_route">Calcolando il percorso...</string>
-    <string name="route_calculation_calculating_fast_route">Calcolando il percorso veloce...</string>
+    <string name="route_calculation_calculating_route">Sto calcolando il percorso...</string>
+    <string name="route_calculation_calculating_fast_route">Sto calcolando il percorso veloce...</string>
     <string name="shared_string_recent">Recente</string>
     <string name="attached_media_delete_confirmation">Eliminare %1$d elementi multimediali da questo punto? Anche i file multimediali memorizzati dall\'app e non collegati altrove saranno eliminati dal dispositivo.</string>
     <string name="route_calculation_using_fast_algorithm">Utilizzo dell\'algoritmo di calcolo veloce del percorso.</string>
@@ -5253,11 +5253,11 @@
     <string name="astro_set">Occaso</string>
     <string name="star_altitude_name">Altitudine della stella</string>
     <string name="sort_by_nearest_to_current_location">Il più vicino alla posizione attuale</string>
-    <string name="route_calculation_using_standard_algorithm">Utilizzo dell\'algoritmo di instradamento Standard (più lento).</string>
+    <string name="route_calculation_using_standard_algorithm">Utilizzo dell\'algoritmo standard di calcolo del percorso (più lento).</string>
     <string name="route_calculation_missing_maps">Mappe mancanti</string>
-    <string name="route_calculation_missing_maps_desc">Alcune mappe offline necessarie per questo percorso mancano. Scaricale per continuare.</string>
-    <string name="route_calculation_mixed_maps_desc">Il calcolo rapido non è disponibile a causa di mappe con date miste. Il passaggio al calcolo Standard potrebbe richiedere alcuni minuti.</string>
-    <string name="route_calculation_missing_maps_estimate_desc">Possibili mappe mancanti rilevate in base a una stima in linea retta.\nSe il tuo percorso evita queste aree, usa le mappe esistenti.</string>
+    <string name="route_calculation_missing_maps_desc">Mancano alcune mappe offline necessarie per questo percorso. Scaricale per continuare.</string>
+    <string name="route_calculation_mixed_maps_desc">Il calcolo rapido del percorso non è disponibile a causa di date incoerenti delle mappe. Il passaggio al calcolo standard potrebbe richiedere alcuni minuti.</string>
+    <string name="route_calculation_missing_maps_estimate_desc">Rilevate possibili mappe mancanti in base alla stima in linea retta.\nSe il tuo percorso evita queste aree, usa le mappe esistenti.</string>
     <string name="route_calculation_route_not_found_desc">Il calcolo rapido non ha trovato un percorso. Passaggio al calcolo standard.</string>
     <string name="route_calculation_unavailable_parameters_desc">Il calcolo rapido non è disponibile con i parametri di percorso selezionati. Passaggio al calcolo standard.</string>
     <string name="route_calculation_standard_long_route_desc">Il calcolo standard per percorsi lunghi (&gt;300 km) potrebbe richiedere molto tempo. L\'aggiunta di una tappa può accelerarlo.</string>

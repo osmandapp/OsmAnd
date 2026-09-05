@@ -5395,4 +5395,5 @@
     <string name="share_favorites_share_failed">Det var ikke muligt at dele filen.</string>
     <string name="share_favorites_missing_media_warning">Nogle af de vedhæftede mediefiler kunne ikke medtages.</string>
     <string name="search_on_web">Søg på nettet</string>
+    <string name="astro_eclipse_column_below_horizon">Under horisonten</string>
 </resources>
