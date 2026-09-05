@@ -376,14 +376,16 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
+		if (widgetInfo == null) {
+			return;
+		}
 		applySettings();
 		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null) {
 			mapInfoLayer.recreateControls();
 		}
-		Fragment target = getTargetFragment();
-		if (target instanceof WidgetsConfigurationChangeListener) {
-			((WidgetsConfigurationChangeListener) target).onWidgetsConfigurationChanged();
+		if (getTargetFragment() instanceof WidgetsConfigurationChangeListener listener) {
+			listener.onWidgetsConfigurationChanged();
 		}
 	}
 
