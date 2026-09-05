@@ -43,9 +43,9 @@ import net.osmand.router.HHRouteDataStructure.NetworkDBSegment;
  * expands candidates one by one and checks the real road segments, stopping as soon as
  * ALT_MAX_COUNT routes are accepted.
  *
- * A route short enough that the two last-mile searches meet each other never uses a hub-graph edge
- * at all, so none of the above can produce anything. {@link #calcDetailedAlternatives} then applies
- * the very same plateau idea one level down, on the detailed road trees - see its comment.
+ * A route short enough that the two last-mile searches meet each other uses no hub-graph edge at all,
+ * or so few that none of the above can produce anything. {@link #calcDetailedAlternatives} then
+ * applies the very same plateau idea one level down, on the detailed road trees - see its comment.
  *
  * One instance serves one routing call - the plateau maps and the expansion budget below are the
  * state of that call.
@@ -99,16 +99,28 @@ public class HHAlternativeRoutes<T extends NetworkDBPoint> {
 		if (optCost <= 0 || cfg.ALT_MAX_COUNT <= 0) {
 			return;
 		}
-		maxCost = optCost * (1 + cfg.ALT_STRETCH);
+		maxCost = stretchLimit(optCost);
 		// Distinctness is measured against the main route and against the alternatives already
 		// accepted alike - an alternative has to be worth proposing next to each of them.
 		accepted.add(roadSegments(detailedSegments(route)));
 		setDistinctnessThresholds(totalLength(accepted.get(0)));
-		if (usesHubGraph(route)) {
+		boolean hub = usesHubGraph(route);
+		if (hub) {
 			calcHubAlternatives(route, start, end, progress, rrp);
-		} else {
+		}
+		// A route of a kilometre or two can touch the hub graph and still give the method nothing to
+		// work with - measured on a 1.7 km route: three hub segments, six hub points settled by both
+		// trees, no candidate. The detailed graph is then the only place left to look, as long as the
+		// route is short enough for that search to be cheap (a route that uses no hub graph at all is
+		// short by construction).
+		if (route.altRoutes.isEmpty() && (!hub || optCost <= cfg.ALT_DETAILED_MAX_COST)) {
 			calcDetailedAlternatives(route, rrp);
 		}
+	}
+
+	/** the most an alternative may cost, rule 1 of the three in HHRoutingConfig */
+	private double stretchLimit(double cost) {
+		return cost * (1 + cfg.ALT_STRETCH) + cfg.ALT_STRETCH_ABS;
 	}
 
 	/**
@@ -304,11 +316,12 @@ public class HHAlternativeRoutes<T extends NetworkDBPoint> {
 	// ---------------------------------------------------------------------------------------------
 
 	/**
-	 * A city route of a few kilometres never reaches the hub graph: the two last-mile searches meet
-	 * each other first, the route is assembled from two detailed segments and the hub method above
-	 * has no edge to build a plateau on (measured on a 4 km route: 6 hub points settled by both
-	 * trees, none of them usable). Everything that makes such a route interesting - the parallel
-	 * street one block away - lives in the detailed graph, and both trees of it are already there.
+	 * A city route of a few kilometres does not reach the hub graph, or barely touches it: the two
+	 * last-mile searches meet each other first, and the hub method above has no edge to build a
+	 * plateau on (measured on a 4 km route: 6 hub points settled by both trees, none of them usable,
+	 * and the same six on a 1.7 km route that does have three hub segments). Everything that makes
+	 * such a route interesting - the parallel street one block away - lives in the detailed graph,
+	 * and both trees of it are already there.
 	 *
 	 * So the plateau method is applied one level down. A via node is a road point settled by both
 	 * detailed trees, its route costs f(v) + b(v), and its plateau is the maximal stretch around it
@@ -371,7 +384,7 @@ public class HHAlternativeRoutes<T extends NetworkDBPoint> {
 		rctx.config.MAX_VISITED = HHRoutePlanner.MAX_POINTS_CLUSTER_ROUTING;
 		rctx.config.planRoadDirection = 0;
 		rctx.config.heuristicCoefficient = 0; // dijkstra: the queue cost is the distance from the start
-		rctx.config.altHorizon = cfg.ALT_STRETCH;
+		rctx.config.altHorizon = stretchLimit(optCost) / optCost - 1;
 		// the road segments of the route already found carry the routing state of that search
 		rctx.unloadAllData();
 		try {
@@ -415,7 +428,7 @@ public class HHAlternativeRoutes<T extends NetworkDBPoint> {
 			best = Math.min(best, c.cost);
 			all.add(c);
 		}
-		double limit = Math.min(optCost, best) * (1 + cfg.ALT_STRETCH);
+		double limit = stretchLimit(Math.min(optCost, best));
 		List<DetailedCandidate> within = new ArrayList<>();
 		for (DetailedCandidate c : all) {
 			if (c.cost <= limit) {

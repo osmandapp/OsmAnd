@@ -120,5 +120,19 @@
         "toleranceMeters": 1000
       }
     ]
+  },
+  {
+    "testName": "Kyiv, a 1.7 km hop where the only other way costs 50% more",
+    "description": "The route uses three hub segments, but only six hub points are settled by both trees and none of them carries a plateau, so the hub method returns nothing. The one distinct way round (2.5 km, +49.6%) is out of reach of a purely relative stretch limit",
+    "map": "Ukraine_kyiv-city_europe_2.obf",
+    "startPoint": {
+      "latitude": 50.427112,
+      "longitude": 30.470581
+    },
+    "endPoint": {
+      "latitude": 50.416448,
+      "longitude": 30.47719
+    },
+    "minAlternatives": 1
   }
 ]

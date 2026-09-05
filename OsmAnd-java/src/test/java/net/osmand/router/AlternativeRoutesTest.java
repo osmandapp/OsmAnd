@@ -126,7 +126,8 @@ public class AlternativeRoutesTest {
 	private void assertSaneAlternatives(List<Route> routes, Route main) {
 		Map<Long, Double> mainRoads = roads(main);
 		double mainLength = length(mainRoads);
-		double maxCost = main.cost * (1 + new HHRoutingConfig().ALT_STRETCH) + 1;
+		HHRoutingConfig limits = new HHRoutingConfig();
+		double maxCost = main.cost * (1 + limits.ALT_STRETCH) + limits.ALT_STRETCH_ABS + 1;
 		for (int i = 1; i < routes.size(); i++) {
 			Route alt = routes.get(i);
 			String id = "alternative " + i;
