@@ -1,6 +1,8 @@
 package net.osmand.router;
 
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
+import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
@@ -16,8 +18,11 @@ import org.junit.Test;
 import java.io.File;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
@@ -25,6 +30,41 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class RouteStatisticsHelperCompatibilityTest {
+
+	@Test
+	public void steepnessLabelsMatchLegacyAfterLocaleChanges() throws Exception {
+		RouteRegion region = new RouteRegion();
+		region.initRouteEncodingRule(1, "highway", "primary");
+		RouteDataObject road = new RouteDataObject(region);
+		road.types = new int[]{1};
+		road.pointsX = new int[]{1, 2};
+		road.pointsY = new int[]{1, 2};
+		road.heightDistanceArray = new float[]{0, 0, 110, 22};
+		RouteSegmentResult segment = new RouteSegmentResult(road, 0, 1);
+		segment.setDistance(110);
+		List<RouteSegmentResult> route = Collections.singletonList(segment);
+		List<String> attributes = Collections.singletonList("routeInfo_steepness");
+		RenderingRulesStorage renderer = RenderingRulesStorage.initWithStylesFromResources("default.render.xml");
+
+		Locale previousLocale = Locale.getDefault();
+		try {
+			for (Locale locale : Arrays.asList(Locale.US, Locale.forLanguageTag("ar"))) {
+				Locale.setDefault(locale);
+				List<RouteStatistics> expected = LegacyRouteStatisticsHelper.calculateRouteStatistic(
+						route, attributes, null, renderer, null, new RenderingRuleSearchRequest(renderer));
+				List<RouteStatistic> actual = RouteStatisticsHelper.calculateRouteStatistic(
+						route, attributes, null, renderer, null, new RenderingRuleSearchRequest(renderer));
+
+				assertEquals("The fixture must produce steepness statistics", 1, expected.size());
+				assertEquals(expected.size(), actual.size());
+				assertEquals(locale.getLanguage().equals("ar") ? "-٤% .. ٠%" : "-4% .. 0%",
+						expected.get(0).elements.get(0).getUserPropertyName());
+				assertStatisticEquals(expected.get(0), actual.get(0), 0);
+			}
+		} finally {
+			Locale.setDefault(previousLocale);
+		}
+	}
 
 	@Test
 	public void sharedCalculatorMatchesLegacyOnCalculatedObfRoute() throws Exception {

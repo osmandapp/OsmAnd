@@ -21,6 +21,8 @@ class SharedRouteDetailsProviderCompatibilityTest {
 	fun cumulativeGeometryMatchesFrozenAndroidCalculation() {
 		val locations = listOf(
 			location(0.0, 0.0),
+			// This edge is the float immediately below half a meter and must round down.
+			location(0.0, 4.491576019021286E-6),
 			location(0.0, 0.001),
 			location(0.001, 0.001),
 			location(0.001, 0.002),
@@ -42,11 +44,13 @@ class SharedRouteDetailsProviderCompatibilityTest {
 
 	@Test
 	fun maneuverDistancesTimesAndCumulativeTotalsMatchFrozenAndroidCalculation() {
-		val distanceToFinish = intArrayOf(450, 300, 125, 0)
+		val distanceToFinish = intArrayOf(453, 450, 300, 125, 0)
 		val directions = listOf(
-			direction(offset = 0, averageSpeed = 12f),
-			direction(offset = 2, averageSpeed = 7f),
-			direction(offset = 3, averageSpeed = 1f),
+			// Three meters at this speed takes the float immediately below half a second.
+			direction(offset = 0, averageSpeed = Math.nextUp(6f)),
+			direction(offset = 1, averageSpeed = 12f),
+			direction(offset = 3, averageSpeed = 7f),
+			direction(offset = 4, averageSpeed = 1f),
 		)
 		val expected = legacyDirectionValues(directions, distanceToFinish)
 

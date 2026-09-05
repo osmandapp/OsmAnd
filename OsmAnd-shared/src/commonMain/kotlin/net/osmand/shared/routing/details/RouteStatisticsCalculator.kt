@@ -12,6 +12,10 @@ object RouteStatisticsCalculator {
 	const val UNDEFINED_ATTR = "undefined"
 	const val ROUTE_INFO_PREFIX = "routeInfo_"
 
+	fun interface SlopeFormatter {
+		fun formatSlope(slope: Int, nextSlope: Int): String
+	}
+
 	private const val HEIGHT_STEP_METERS = 5.0
 	private const val SLOPE_APPROXIMATION_METERS = 100.0
 	private const val MIN_INCLINE = -101
@@ -60,10 +64,20 @@ object RouteStatisticsCalculator {
 		attributeNames: List<String>,
 		classifier: RouteAttributeClassifier,
 	): List<RouteStatistic> {
+		return calculate(accessor, attributeNames, classifier, SlopeFormatter(::formatSlope))
+	}
+
+	/** Keeps localized steepness labels platform-side without changing existing callers' formatting. */
+	fun calculate(
+		accessor: IRouteStatisticsAccessor?,
+		attributeNames: List<String>,
+		classifier: RouteAttributeClassifier,
+		slopeFormatter: SlopeFormatter,
+	): List<RouteStatistic> {
 		if (accessor == null) {
 			return emptyList()
 		}
-		val segmentsWithIncline = calculateInclineRouteSegments(accessor)
+		val segmentsWithIncline = calculateInclineRouteSegments(accessor, slopeFormatter)
 		val result = mutableListOf<RouteStatistic>()
 		for (attributeName in attributeNames) {
 			val statistic = computeStatistic(segmentsWithIncline, attributeName, classifier)
@@ -96,7 +110,10 @@ object RouteStatisticsCalculator {
 		)
 	}
 
-	private fun calculateInclineRouteSegments(accessor: IRouteStatisticsAccessor): List<RouteSegmentWithIncline> {
+	private fun calculateInclineRouteSegments(
+		accessor: IRouteStatisticsAccessor,
+		slopeFormatter: SlopeFormatter,
+	): List<RouteSegmentWithIncline> {
 		val result = ArrayList<RouteSegmentWithIncline>(accessor.getSegmentsCount())
 		var previousHeight = 0f
 		var totalHeightSamples = 0
@@ -187,12 +204,12 @@ object RouteStatisticsCalculator {
 		}
 
 		val formattedSlopeClasses = Array(slopeBoundaries.size) { "" }
-		formattedSlopeClasses[0] = formatSlope(minimumSlope, MIN_DIVIDED_INCLINE)
-		formattedSlopeClasses[1] = formatSlope(minimumSlope, MIN_DIVIDED_INCLINE)
+		formattedSlopeClasses[0] = slopeFormatter.formatSlope(minimumSlope, MIN_DIVIDED_INCLINE)
+		formattedSlopeClasses[1] = slopeFormatter.formatSlope(minimumSlope, MIN_DIVIDED_INCLINE)
 		formattedSlopeClasses[formattedSlopeClasses.lastIndex] =
-			formatSlope(MAX_DIVIDED_INCLINE, maximumSlope)
+			slopeFormatter.formatSlope(MAX_DIVIDED_INCLINE, maximumSlope)
 		for (index in 2 until formattedSlopeClasses.lastIndex) {
-			formattedSlopeClasses[index] = formatSlope(slopeBoundaries[index - 1], slopeBoundaries[index])
+			formattedSlopeClasses[index] = slopeFormatter.formatSlope(slopeBoundaries[index - 1], slopeBoundaries[index])
 		}
 
 		for (segment in result) {

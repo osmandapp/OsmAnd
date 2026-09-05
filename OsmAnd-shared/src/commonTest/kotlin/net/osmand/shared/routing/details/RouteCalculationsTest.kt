@@ -9,6 +9,28 @@ import kotlin.test.assertNull
 class RouteCalculationsTest {
 
 	@Test
+	fun floatRoundingPreservesJavaHalfTiesAndPrecisionBoundaries() {
+		val cases = listOf(
+			0.49999997f to 0,
+			0.5f to 1,
+			0.50000006f to 1,
+			-0.49999997f to 0,
+			-0.5f to 0,
+			-0.50000006f to -1,
+			8_388_609f to 8_388_609,
+			-8_388_609f to -8_388_609,
+			Float.MAX_VALUE to Int.MAX_VALUE,
+			-Float.MAX_VALUE to Int.MIN_VALUE,
+			Float.POSITIVE_INFINITY to Int.MAX_VALUE,
+			Float.NEGATIVE_INFINITY to Int.MIN_VALUE,
+			Float.NaN to 0,
+		)
+		for ((value, expected) in cases) {
+			assertEquals(expected, javaRoundFloat(value), "Math.round($value)")
+		}
+	}
+
+	@Test
 	fun routeGeometryUsesAndroidWgs84DistanceAndPerEdgeRounding() {
 		val locations = listOf(
 			KLatLon(0.0, 0.0),

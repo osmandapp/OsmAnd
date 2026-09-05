@@ -77,7 +77,8 @@ public class RouteStatisticsHelper {
 						currentRenderer,
 						defaultRenderer,
 						currentSearchRequest,
-						defaultSearchRequest));
+						defaultSearchRequest),
+				(slope, nextSlope) -> String.format("%d%% .. %d%%", slope, nextSlope));
 	}
 
 	/** Keeps Android rendering objects outside common code while preserving current/default fallback. */

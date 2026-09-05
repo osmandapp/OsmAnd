@@ -150,5 +150,6 @@ object RouteGeometryCalculator {
 
 /** Common equivalent of Java `Math.round(float)`. */
 internal fun javaRoundFloat(value: Float): Int {
-	return floor((value + 0.5f).toDouble()).toInt()
+	// Add in Double precision so values just below a half do not round up before floor.
+	return floor(value.toDouble() + 0.5).toInt()
 }
