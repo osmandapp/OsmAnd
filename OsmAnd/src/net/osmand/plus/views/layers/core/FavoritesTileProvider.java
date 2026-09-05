@@ -45,14 +45,18 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 		this.textStyle = textStyle;
 		this.density = density;
 		this.offset = new PointI(0, 0);
-		this.swigTakeOwnership();
+	}
+
+	@NonNull
+	public MapTiledCollectionProvider getProviderInstance() {
+		if (providerInstance == null) {
+			providerInstance = NativeUtilities.instantiateNativeProvider(this);
+		}
+		return providerInstance;
 	}
 
 	public void drawSymbols(@NonNull MapRendererView mapRenderer) {
-		if (providerInstance == null) {
-			providerInstance = instantiateProxy();
-		}
-		mapRenderer.addSymbolsProvider(FAVORITES_SECTION, providerInstance);
+		mapRenderer.addSymbolsProvider(FAVORITES_SECTION, getProviderInstance());
 	}
 
 	public void clearSymbols(@NonNull MapRendererView mapRenderer) {
