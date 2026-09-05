@@ -1162,8 +1162,16 @@ public class OsmandApplication extends MultiDexApplication {
 					LOG.info(">>>> Failed APP startForegroundService = " + usageIntent + " {no location permission}");
 					return;
 				}
+				if (!isAppInForeground()) {
+					// A foreground service started from the background is denied the while-in-use
+					// location capability, so startForeground(.., TYPE_LOCATION) throws and the
+					// platform may kill the process for missing its startForegroundService()
+					// deadline. See #25861.
+					LOG.info(">>>> Failed APP startForegroundService = " + usageIntent + " {app in background}");
+					return;
+				}
 				try {
-					LOG.info(">>>> APP startForegroundService = " + usageIntent + " {foreground " + isAppInForeground() + "}");
+					LOG.info(">>>> APP startForegroundService = " + usageIntent);
 					context.startForegroundService(intent);
 				} catch (Exception e) {
 					// e.g. ForegroundServiceStartNotAllowedException (Android 12+) when the service
