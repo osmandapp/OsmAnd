@@ -420,9 +420,10 @@
 	<color name="inactive_item_orange">#ffc87f</color>
 
 	<!-- DownloadedRegionsLayer -->
-	<color name="region_uptodate">#5532C832</color>
-	<color name="region_backuped">#55FF8F00</color>
-	<color name="region_selected">#55FFFF00</color>
+	<color name="map_region_downloaded_fill">#5532C832</color>
+	<color name="map_region_outdated_fill">#55FD9822</color>
+	<color name="map_region_deactivated_fill">#55727272</color>
+	<color name="map_region_selected_fill">#55FFFF00</color>
 	<color name="region_downloading">#44FF61FF</color>
 
 	<!-- Dialog Live Updates Settings -->
