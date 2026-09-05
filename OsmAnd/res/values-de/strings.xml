@@ -5291,4 +5291,6 @@
     <string name="gallery_stats_size">Größe %1$s.</string>
     <string name="coordinate_format_cancel_changes_title">Nicht gespeicherte Änderungen</string>
     <string name="astro_eclipse_maximum">Maximum</string>
+    <string name="astro_eclipse_phase_partial">Partiell</string>
+    <string name="astro_eclipse_phase_total">Total</string>
 </resources>
