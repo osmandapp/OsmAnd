@@ -977,7 +977,7 @@ public class AppVersionUpgradeOnInit {
 	}
 
 	private void migrateLocalSorting(@NonNull OsmandSettings settings) {
-		CommonPreference<LocalSortMode> oldPref = settings.registerEnumStringPreference("local_maps_sort_mode", COUNTRY_NAME_ASCENDING, LocalSortMode.values(), LocalSortMode.class).makeGlobal();
+		CommonPreference<LocalSortMode> oldPref = settings.registerEnumStringPreference("local_maps_sort_mode", COUNTRY_NAME_ASCENDING, LocalSortMode.values(), LocalSortMode.class).makeGlobal().makeShared();
 		if (oldPref.isSet()) {
 			LocalSortMode sortMode = oldPref.get();
 			LocalItemUtils.getSortModePref(app, MAP_DATA).set(sortMode);

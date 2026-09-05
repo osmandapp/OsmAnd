@@ -394,6 +394,6 @@ public class LocalItemUtils {
 		String prefId = "local_" + type.name().toLowerCase(Locale.US) + "_sort_mode";
 		LocalSortMode defMode = LocalSortMode.getDefaultSortMode(type);
 		LocalSortMode[] supportedModes = LocalSortMode.getSupportedModes(type);
-		return settings.registerEnumStringPreference(prefId, defMode, supportedModes, LocalSortMode.class).makeGlobal();
+		return settings.registerEnumStringPreference(prefId, defMode, supportedModes, LocalSortMode.class).makeGlobal().makeShared();
 	}
 }
