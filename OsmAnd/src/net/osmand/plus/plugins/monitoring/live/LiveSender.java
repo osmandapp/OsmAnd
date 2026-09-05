@@ -6,9 +6,11 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.shared.gpx.GpxFormatter;
 import net.osmand.util.Algorithms;
@@ -23,7 +25,9 @@ import java.net.URI;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 
 class LiveSender extends AsyncTask<Void, Void, Void> {
@@ -65,23 +69,53 @@ class LiveSender extends AsyncTask<Void, Void, Void> {
 
 	public boolean sendData(@NonNull LiveMonitoringData data) {
 		String baseUrl = app.getSettings().LIVE_MONITORING_URL.get();
-		boolean retry = false;
+		if (IntentHelper.isOsmAndHost(baseUrl)) {
+			sendLiveTrack(baseUrl, data);
+			return true;
+		}
 		String urlStr;
 		try {
-			if (baseUrl.equals("test.osmand.net") || baseUrl.equals("osmand.net")) {
-				// "https://example.com?lat={0}&lon={1}&timestamp={2}&hdop={3}&altitude={4}&speed={5}").makeProfile();
-				baseUrl = "https://" + baseUrl + "/userdata/translation/msg?" +
-						"lat={0}&lon={1}&timestamp={2}&" +
-						"hdop={3}&altitude={4}&speed={5}&" +
-						"bearing={6}&tta={7}&ttf={8}&dta={9}&dtf={10}&batproc={11}&" +
-						"deviceid={12}&accessToken={13}";
-			}
 			urlStr = getLiveUrl(baseUrl, data);
 		} catch (IllegalArgumentException e) {
 			log.error("Could not construct live url from base url: " + baseUrl, e);
 			return false;
 		}
+		boolean ok = sendToUrl(urlStr) / 100 == 2;
+		if (ok) {
+			queue.poll();
+		}
+		return ok;
+	}
+
+	private void sendLiveTrack(@NonNull String baseUrl, @NonNull LiveMonitoringData data) {
+		List<String> translations = app.getSettings().LIVE_MONITORING_TRANSLATIONS.getStringsList();
+		Map<String, Map<String, String>> paramsByTranslation = getTranslationParams(data, translations);
+		if (paramsByTranslation.isEmpty()) {
+			queue.poll(); // nothing to send (no translations / not registered)
+			return;
+		}
+		String url = "https://" + baseUrl + "/userdata/translation/msg";
+		for (Map.Entry<String, Map<String, String>> entry : paramsByTranslation.entrySet()) {
+			post(url, entry.getValue(), entry.getKey());
+		}
+		queue.poll();
+	}
+
+	private void post(@NonNull String url, @NonNull Map<String, String> params, @NonNull String translation) {
+		AndroidNetworkUtils.sendRequest(app, url, params, null, false, true,
+				(result, error, resultCode) -> {
+					if (resultCode != null && resultCode == HttpURLConnection.HTTP_GONE) {
+						app.getSettings().LIVE_MONITORING_TRANSLATIONS.removeValue(translation);
+						log.info("Live track translation gone (410) — removed from broadcast set");
+					} else if (resultCode == null || resultCode / 100 != 2) {
+						log.error("Error sending live track point: " + resultCode + " : " + error);
+					}
+				});
+	}
+
+	private int sendToUrl(@NonNull String urlStr) {
 		InputStream is = null;
+		int code = -1;
 		try {
 			// Parse the URL and let the URI constructor handle proper encoding of special characters such as spaces
 			URL url = new URL(urlStr);
@@ -91,12 +125,10 @@ class LiveSender extends AsyncTask<Void, Void, Void> {
 			urlConnection.setConnectTimeout(AndroidNetworkUtils.CONNECT_TIMEOUT);
 			urlConnection.setReadTimeout(AndroidNetworkUtils.READ_TIMEOUT);
 			log.info("Monitor " + uri);
-			if (urlConnection.getResponseCode() / 100 != 2) {
-				String msg = urlConnection.getResponseCode() + " : " + urlConnection.getResponseMessage();
-				log.error("Error sending monitor request: " + msg);
+			code = urlConnection.getResponseCode();
+			if (code / 100 != 2) {
+				log.error("Error sending monitor request: " + code + " : " + urlConnection.getResponseMessage());
 			} else {
-				retry = true; // move to next point
-				queue.poll();
 				is = urlConnection.getInputStream();
 				StringBuilder builder = new StringBuilder();
 				if (is != null) {
@@ -111,12 +143,11 @@ class LiveSender extends AsyncTask<Void, Void, Void> {
 			}
 			urlConnection.disconnect();
 		} catch (Exception e) {
-			retry = false;
 			log.error("Failed connect to " + urlStr + ": " + e.getMessage(), e);
 		} finally {
 			Algorithms.closeStream(is);
 		}
-		return retry;
+		return code;
 	}
 
 	private String getLiveUrl(@NonNull String baseUrl, @NonNull LiveMonitoringData data) {
@@ -179,5 +210,44 @@ class LiveSender extends AsyncTask<Void, Void, Void> {
 			}
 		}
 		return MessageFormat.format(baseUrl, prm.toArray());
+	}
+
+	private Map<String, Map<String, String>> getTranslationParams(@NonNull LiveMonitoringData data,
+			@Nullable List<String> translations) {
+		Map<String, Map<String, String>> result = new LinkedHashMap<>();
+		if (translations == null || translations.isEmpty()) {
+			log.info("No live track translations set — skipping encrypted send");
+			return result;
+		}
+		String deviceId = app.getSettings().BACKUP_DEVICE_ID.get();
+		String accessToken = app.getSettings().BACKUP_ACCESS_TOKEN.get();
+		if (Algorithms.isEmpty(deviceId) || Algorithms.isEmpty(accessToken)) {
+			log.info("Live track device is not registered (deviceId/accessToken missing) — skipping encrypted send");
+			return result;
+		}
+		for (String translation : translations) {
+			int sep = translation.indexOf(':');
+			if (sep <= 0) {
+				continue;
+			}
+			String tid = translation.substring(0, sep);
+			String keyHex = translation.substring(sep + 1);
+			if (Algorithms.isEmpty(tid) || Algorithms.isEmpty(keyHex)) {
+				continue;
+			}
+			String encryptedData = LiveTrackCrypto.encrypt(keyHex, data);
+			if (encryptedData == null) {
+				log.error("Failed to encrypt live track location");
+				continue;
+			}
+			Map<String, String> params = new LinkedHashMap<>();
+			params.put("deviceid", deviceId);
+			params.put("accessToken", accessToken);
+			params.put("encryptedData", encryptedData);
+			params.put("translationId", tid);
+
+			result.put(translation, params);
+		}
+		return result;
 	}
 }

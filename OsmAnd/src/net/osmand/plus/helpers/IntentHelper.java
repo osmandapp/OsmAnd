@@ -154,7 +154,52 @@ public class IntentHelper {
 				|| parseTileSourceIntent()
 				|| parseOpenGpxIntent()
 				|| parseSendIntent()
-				|| parseOAuthIntent();
+				|| parseOAuthIntent()
+				|| parseLiveTrackIntent();
+	}
+
+	// Web live track share link: https://osmand.net/map/live/?tid=...#<64-hex key>
+	// Opening it on the device sets the encryption key and points Live monitoring at the
+	// translation, so the phone broadcasts its (encrypted) location into that live track.
+	private boolean parseLiveTrackIntent() {
+		Intent intent = mapActivity.getIntent();
+		if (intent != null && isUriHierarchical(intent)) {
+			Uri data = intent.getData();
+			if (isOsmAndSite(data) && isPathPrefix(data, "/map/live")) {
+				String key = data.getFragment();
+				String tid = data.getQueryParameter("tid");
+				if (key != null && key.matches("[0-9a-f]{64}") && tid != null && tid.matches("[0-9a-f]{16}")) {
+					if (!app.getBackupHelper().isRegistered()) {
+						app.showShortToastMessage(R.string.live_track_login_required);
+						BackupAuthorizationFragment.showInstance(mapActivity.getSupportFragmentManager());
+						clearIntent(intent);
+						return true;
+					}
+					String translation = tid + ":" + key;
+					if (!settings.LIVE_MONITORING_TRANSLATIONS.containsValue(translation)) {
+						settings.LIVE_MONITORING_TRANSLATIONS.addValue(translation);
+					}
+					settings.LIVE_MONITORING_URL.set(data.getHost());
+					settings.LIVE_MONITORING.set(true);
+					requestShareAccess(data.getHost(), tid);
+					app.showShortToastMessage(R.string.live_track_sharing_enabled);
+					clearIntent(intent);
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	// Ask the live track owner for permission to broadcast into this translation.
+	// The owner approves from the web; until then the server rejects this device's points.
+	private void requestShareAccess(@NonNull String host, @NonNull String tid) {
+		Map<String, String> params = new HashMap<>();
+		params.put("deviceid", settings.BACKUP_DEVICE_ID.get());
+		params.put("accessToken", settings.BACKUP_ACCESS_TOKEN.get());
+		params.put("tid", tid);
+		String url = "https://" + host + "/userdata/translation/requestShare";
+		AndroidNetworkUtils.sendRequestAsync(app, url, params, null, false, false, null);
 	}
 
 	private boolean parseNavigationIntent() {
@@ -885,7 +930,7 @@ public class IntentHelper {
 	}
 
 	private boolean isOsmAndSite(@NonNull Uri uri) {
-		return isHttpOrHttpsScheme(uri) && isOsmAndHost(uri);
+		return isHttpOrHttpsScheme(uri) && isOsmAndHost(uri.getHost());
 	}
 
 	private boolean isHttpOrHttpsScheme(@NonNull Uri uri) {
@@ -893,9 +938,12 @@ public class IntentHelper {
 		return "http".equalsIgnoreCase(scheme) || "https".equalsIgnoreCase(scheme);
 	}
 
-	private boolean isOsmAndHost(@NonNull Uri uri) {
-		String host = uri.getHost();
-		return host != null && host.endsWith("osmand.net");
+	public static boolean isOsmAndHost(@Nullable String host) {
+		if (host == null) {
+			return false;
+		}
+		host = host.toLowerCase(Locale.US);
+		return host.equals(URL_AUTHORITY) || host.endsWith("." + URL_AUTHORITY);
 	}
 
 	private boolean isPathPrefix(@NonNull Uri uri, @NonNull String pathPrefix) {

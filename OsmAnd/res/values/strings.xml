@@ -195,6 +195,8 @@
 	<string name="shared_string_media">Media</string>
 	<string name="no_media">No media</string>
 	<string name="no_media_descr">You can add photos, videos, or audio notes from your camera or library.</string>
+	<string name="live_track_login_required">Sign in to OsmAnd Cloud to share your location.</string>
+	<string name="live_track_sharing_enabled">Live track sharing is set up. Enable trip recording to start broadcasting your location.</string>
 	<string name="tracks_backup_promo_button">Get OsmAnd Pro</string>
 	<string name="tracks_backup_promo_description">Sync your tracks across devices and Web with OsmAnd Pro.</string>
 	<string name="tracks_backup_promo_title">Back up and sync your tracks</string>
