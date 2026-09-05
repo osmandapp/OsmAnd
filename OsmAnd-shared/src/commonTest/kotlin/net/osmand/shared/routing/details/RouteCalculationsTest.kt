@@ -1,0 +1,134 @@
+package net.osmand.shared.routing.details
+
+import net.osmand.shared.data.KLatLon
+import kotlin.test.Test
+import kotlin.test.assertContentEquals
+import kotlin.test.assertEquals
+import kotlin.test.assertNull
+
+class RouteCalculationsTest {
+
+	@Test
+	fun floatRoundingPreservesJavaHalfTiesAndPrecisionBoundaries() {
+		val cases = listOf(
+			0.49999997f to 0,
+			0.5f to 1,
+			0.50000006f to 1,
+			-0.49999997f to 0,
+			-0.5f to 0,
+			-0.50000006f to -1,
+			8_388_609f to 8_388_609,
+			-8_388_609f to -8_388_609,
+			Float.MAX_VALUE to Int.MAX_VALUE,
+			-Float.MAX_VALUE to Int.MIN_VALUE,
+			Float.POSITIVE_INFINITY to Int.MAX_VALUE,
+			Float.NEGATIVE_INFINITY to Int.MIN_VALUE,
+			Float.NaN to 0,
+		)
+		for ((value, expected) in cases) {
+			assertEquals(expected, javaRoundFloat(value), "Math.round($value)")
+		}
+	}
+
+	@Test
+	fun routeGeometryUsesAndroidWgs84DistanceAndPerEdgeRounding() {
+		val locations = listOf(
+			KLatLon(0.0, 0.0),
+			KLatLon(0.0, 1.0),
+			KLatLon(1.0, 1.0),
+		)
+
+		assertEquals(
+			expected = 111_319.49f,
+			actual = RouteGeometryCalculator.distanceBetween(locations[0], locations[1]),
+			absoluteTolerance = 0.01f,
+		)
+		assertContentEquals(
+			expected = intArrayOf(221_893, 110_574, 0),
+			actual = RouteGeometryCalculator.calculate(locations).distanceToFinishMeters,
+		)
+	}
+
+	@Test
+	fun routeGeometryHandlesEmptyAndSinglePointRoutes() {
+		assertContentEquals(
+			intArrayOf(),
+			RouteGeometryCalculator.calculate(emptyList()).distanceToFinishMeters,
+		)
+		assertContentEquals(
+			intArrayOf(0),
+			RouteGeometryCalculator.calculate(listOf(KLatLon(0.0, 0.0))).distanceToFinishMeters,
+		)
+	}
+
+	@Test
+	fun locationByDistanceUsesAndroidSignedDirectionAndDirectDistance() {
+		val locations = (0..4).map { index -> KLatLon(0.0, index * 0.001) }
+
+		assertEquals(locations[3], RouteGeometryCalculator.locationByDistance(locations, 2, 100))
+		assertEquals(locations[1], RouteGeometryCalculator.locationByDistance(locations, 2, -100))
+		assertEquals(locations[1], RouteGeometryCalculator.locationByDistance(locations, 2, 0))
+		assertNull(RouteGeometryCalculator.locationByDistance(locations, 2, 1_000))
+		assertNull(RouteGeometryCalculator.locationByDistance(locations, locations.size, 100))
+	}
+
+	@Test
+	fun maneuverDistancesAndTimesMatchAndroidReverseCalculation() {
+		val geometry = RouteGeometryCalculator.calculate(
+			listOf(
+				KLatLon(0.0, 0.0),
+				KLatLon(0.0, 1.0),
+				KLatLon(1.0, 1.0),
+			),
+		)
+		val maneuvers = listOf(
+			maneuver(offset = 0, averageSpeed = 10f),
+			maneuver(offset = 1, averageSpeed = 10f),
+			maneuver(offset = 2, averageSpeed = 1f),
+		)
+
+		val updated = RouteManeuverCalculator.updateDistancesAndTimes(maneuvers, geometry)
+
+		assertEquals(listOf(111_319, 110_574, 0), updated.map(RouteManeuver::distanceMeters))
+		assertEquals(listOf(11_132, 11_057, 0), updated.map(RouteManeuver::expectedTimeSeconds))
+		assertEquals(listOf(22_189, 11_057, 0), updated.map(RouteManeuver::afterLeftTimeSeconds))
+		assertEquals(
+			RouteCumulativeInfo(distanceMeters = 221_893, timeSeconds = 22_189),
+			RouteManeuverCalculator.cumulativeInfoBefore(2, updated),
+		)
+		assertEquals(
+			RouteCumulativeInfo(distanceMeters = 0, timeSeconds = 0),
+			RouteManeuverCalculator.cumulativeInfoBefore(updated.size, updated),
+		)
+		assertEquals(
+			(0..updated.size).map { position ->
+				RouteManeuverCalculator.cumulativeInfoBefore(position, updated)
+			},
+			RouteManeuverCalculator.cumulativeInfoByPosition(updated),
+		)
+	}
+
+	private fun maneuver(
+		offset: Int,
+		averageSpeed: Float,
+		turnTypeValue: Int = RouteManeuverType.STRAIGHT.legacyValue,
+		streetName: String? = null,
+		ref: String? = null,
+		destinationName: String? = null,
+	): RouteManeuver {
+		return RouteManeuver(
+			turnTypeValue = turnTypeValue,
+			routePointOffset = offset,
+			routeEndPointOffset = 0,
+			distanceMeters = 0,
+			expectedTimeSeconds = 0,
+			afterLeftTimeSeconds = 0,
+			averageSpeedMetersPerSecond = averageSpeed,
+			turnAngleDegrees = 0f,
+			exitNumber = 0,
+			streetName = streetName,
+			ref = ref,
+			destinationName = destinationName,
+		)
+	}
+}
