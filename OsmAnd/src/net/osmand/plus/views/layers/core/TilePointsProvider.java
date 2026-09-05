@@ -106,14 +106,18 @@ public class TilePointsProvider<T extends TilePointsProvider.ICollectionPoint> e
 		this.minZoom = minZoom;
 		this.maxZoom = maxZoom;
 		this.offset = new PointI(0, 0);
-		this.swigTakeOwnership();
+	}
+
+	@NonNull
+	public MapTiledCollectionProvider getProviderInstance() {
+		if (providerInstance == null) {
+			providerInstance = NativeUtilities.instantiateNativeProvider(this);
+		}
+		return providerInstance;
 	}
 
 	public void drawSymbols(@NonNull MapRendererView mapRenderer) {
-		if (providerInstance == null) {
-			providerInstance = instantiateProxy();
-		}
-		mapRenderer.addSymbolsProvider(providerInstance);
+		mapRenderer.addSymbolsProvider(getProviderInstance());
 	}
 
 	public void clearSymbols(@NonNull MapRendererView mapRenderer) {

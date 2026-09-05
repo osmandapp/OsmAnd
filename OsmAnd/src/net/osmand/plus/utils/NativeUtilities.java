@@ -31,6 +31,24 @@ public class NativeUtilities {
 
 	public static final int MIN_ALTITUDE_VALUE = -20_000;
 
+	/**
+	 * Passes a Java implemented tile provider to the native renderer.
+	 *
+	 * <p>The renderer keeps the returned proxy in its own state and calls back into the Java
+	 * provider from its worker threads, also for a while after {@code removeSymbolsProvider()}.
+	 * {@code swigReleaseOwnership()} makes the native director hold a strong JNI reference to the
+	 * Java object and become responsible for its own lifetime, so the provider cannot be collected
+	 * while the renderer still uses it; {@code instantiateProxy(true)} destroys the director once
+	 * the last native reference to the proxy is gone, so nothing is leaked either.
+	 */
+	@NonNull
+	public static MapTiledCollectionProvider instantiateNativeProvider(
+			@NonNull interface_MapTiledCollectionProvider provider) {
+		MapTiledCollectionProvider providerInstance = provider.instantiateProxy(true);
+		provider.swigReleaseOwnership();
+		return providerInstance;
+	}
+
 	public static SingleSkImage createSkImageFromBitmap(@NonNull Bitmap bitmap) {
 		return createSkImage(bitmap.getWidth(), bitmap.getHeight(), AndroidUtils.getByteArrayFromBitmap(bitmap));
 	}
