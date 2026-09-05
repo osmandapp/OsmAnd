@@ -17,6 +17,7 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withTimeout
 import net.osmand.shared.util.LoggerFactory
 import net.sf.marineapi.ais.event.AbstractAISMessageListener
 import net.sf.marineapi.ais.message.AISMessage01
@@ -36,9 +37,15 @@ import net.sf.marineapi.nmea.sentence.AISSentence
 import net.sf.marineapi.nmea.sentence.PositionSentence
 
 open class AisMessageListener {
+
+    companion object {
+        private const val CONNECT_TIMEOUT_MS = 15_000L
+    }
+
     private val aisObjectListener: AisObjectListener
     private val nmeaLocationListener: NmeaLocationListener?
     private val scope = CoroutineScope(Dispatchers.Default + SupervisorJob())
+    private var connectionListener: AisConnectionListener? = null
     private var networkJob: Job? = null
     private val listeners = mutableListOf<SentenceListener>()
 
@@ -56,16 +63,27 @@ open class AisMessageListener {
     }
 
     // For TCP
-    constructor(dataListener: AisDataListener, serverIp: String, serverPort: Int) {
+    constructor(
+        dataListener: AisDataListener,
+        serverIp: String,
+        serverPort: Int,
+        connectionListener: AisConnectionListener? = null
+    ) {
         this.aisObjectListener = dataListener
         this.nmeaLocationListener = dataListener
+        this.connectionListener = connectionListener
         startTcpConnection(serverIp, serverPort)
     }
 
     // For UDP
-    constructor(dataListener: AisDataListener, udpPort: Int) {
+    constructor(
+        dataListener: AisDataListener,
+        udpPort: Int,
+        connectionListener: AisConnectionListener? = null
+    ) {
         this.aisObjectListener = dataListener
         this.nmeaLocationListener = dataListener
+        this.connectionListener = connectionListener
         startUdpConnection(udpPort)
     }
 
@@ -78,7 +96,13 @@ open class AisMessageListener {
                 var socket: Socket? = null
                 try {
                     LoggerFactory.getLogger("AisMessageListener").debug("TCP connection starting")
-                    socket = aSocket(selectorManager).tcp().connect(serverIp, serverPort)
+                    connectionListener?.onAisConnecting()
+                    /* an unreachable host would otherwise hang here for minutes and the UI would
+                     * keep saying "connecting" instead of reporting the failure */
+                    socket = withTimeout(CONNECT_TIMEOUT_MS) {
+                        aSocket(selectorManager).tcp().connect(serverIp, serverPort)
+                    }
+                    connectionListener?.onAisConnected()
                     socket.socketContext.also { it.invokeOnCompletion { } } // Avoid crash
                     val readChannel = socket.openReadChannel()
                     while (isActive) {
@@ -87,6 +111,7 @@ open class AisMessageListener {
                     }
                 } catch (e: Exception) {
                     LoggerFactory.getLogger("AisMessageListener").error("TCP exception: ${e.message}")
+                    connectionListener?.onAisConnectionFailed(e.message)
                 } finally {
                     socket?.close()
                 }
@@ -104,7 +129,9 @@ open class AisMessageListener {
                 var socket: BoundDatagramSocket? = null
                 try {
                     LoggerFactory.getLogger("AisMessageListener").debug("UDP listener starting on port $udpPort")
+                    connectionListener?.onAisConnecting()
                     socket = aSocket(selectorManager).udp().bind(InetSocketAddress("0.0.0.0", udpPort))
+                    connectionListener?.onAisConnected()
                     while (isActive) {
                         val datagram = socket.receive()
                         val text = datagram.packet.readText()
@@ -117,6 +144,7 @@ open class AisMessageListener {
                     }
                 } catch (e: Exception) {
                     LoggerFactory.getLogger("AisMessageListener").error("UDP exception: ${e.message}")
+                    connectionListener?.onAisConnectionFailed(e.message)
                 } finally {
                     socket?.close()
                 }
@@ -171,6 +199,7 @@ open class AisMessageListener {
     }
 
     fun stopListener() {
+        connectionListener = null
         networkJob?.cancel()
         removeListeners()
         try {
