@@ -87,6 +87,25 @@ public class TrackSortModeKeyUtilsTest {
 	}
 
 	@Test
+	public void movingNestedFolderCopiesLegacyFallbackWithoutRemovingSourceKey() {
+		Map<String, TracksSortMode> sortModes = new LinkedHashMap<>();
+		sortModes.put("2025", TracksSortMode.DATE_ASCENDING);
+
+		assertEquals(TracksSortMode.DATE_ASCENDING,
+				TrackSortModeKeyUtils.resolveSortMode(sortModes,
+						"Trips" + File.separator + "2025", TracksSortScope.TRACKS));
+		assertTrue(TrackSortModeKeyUtils.copyLegacyTrackSortModeForRenamedFolder(sortModes,
+				"Trips" + File.separator + "2025", "Trips" + File.separator + "2026"));
+
+		assertEquals(TracksSortMode.DATE_ASCENDING, sortModes.get("2025"));
+		assertEquals(TracksSortMode.DATE_ASCENDING,
+				sortModes.get("Trips" + File.separator + "2026"));
+		assertEquals(TracksSortMode.DATE_ASCENDING,
+				TrackSortModeKeyUtils.resolveSortMode(sortModes,
+						"Trips" + File.separator + "2026", TracksSortScope.TRACKS));
+	}
+
+	@Test
 	public void movingTopLevelFolderCopiesDirectKeyAndMovesChildKeys() {
 		Map<String, TracksSortMode> sortModes = new LinkedHashMap<>();
 		sortModes.put("Trips", TracksSortMode.NAME_ASCENDING);

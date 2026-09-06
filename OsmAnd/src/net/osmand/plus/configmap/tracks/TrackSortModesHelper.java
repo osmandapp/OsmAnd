@@ -63,7 +63,8 @@ public class TrackSortModesHelper {
 	public void onTrackFolderIdChanged(@NonNull TracksGroup trackFolder, @NonNull File oldDir) {
 		String previousId = getFolderId(oldDir.getAbsolutePath());
 		String newId = trackFolder.getId();
-		boolean keysChanged = TrackSortModeKeyUtils.moveUnambiguousV2Keys(cachedSortModes, previousId, newId);
+		boolean keysChanged = TrackSortModeKeyUtils.copyLegacyTrackSortModeForRenamedFolder(cachedSortModes, previousId, newId);
+		keysChanged |= TrackSortModeKeyUtils.moveUnambiguousV2Keys(cachedSortModes, previousId, newId);
 		keysChanged |= TrackSortModeKeyUtils.copyTopLevelFolderSortMode(cachedSortModes, previousId, newId);
 		if (keysChanged) {
 			syncSettings();

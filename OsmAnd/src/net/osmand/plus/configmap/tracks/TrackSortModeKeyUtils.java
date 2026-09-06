@@ -123,6 +123,31 @@ final class TrackSortModeKeyUtils {
 	}
 
 	/**
+	 * Preserves the effective legacy sorting of a nested folder after an explicit rename or move.
+	 * The legacy V1 key remains untouched because it may still apply to another folder with the
+	 * same leaf name. An exact V2 source is handled by {@link #moveUnambiguousV2Keys(Map, String,
+	 * String)} instead, and a pre-existing destination V2 key has priority.
+	 */
+	static boolean copyLegacyTrackSortModeForRenamedFolder(@NonNull Map<String, TracksSortMode> sortModes,
+	                                                       @NonNull String previousId,
+	                                                       @NonNull String newId) {
+		if (!previousId.contains(File.separator) || previousId.equals(newId)) {
+			return false;
+		}
+		String sourceKey = getSortModeKey(previousId, TracksSortScope.TRACKS);
+		String destinationKey = getSortModeKey(newId, TracksSortScope.TRACKS);
+		if (sortModes.containsKey(sourceKey) || sortModes.containsKey(destinationKey)) {
+			return false;
+		}
+		TracksSortMode sortMode = resolveSortMode(sortModes, previousId, TracksSortScope.TRACKS);
+		if (sortMode == null) {
+			return false;
+		}
+		sortModes.put(destinationKey, sortMode);
+		return true;
+	}
+
+	/**
 	 * Preserves the direct sorting state when a top-level folder is explicitly renamed or moved.
 	 * The plain source key remains because it may be a legacy V1 key for another folder with the
 	 * same name. A pre-existing key for the destination has priority over the copied value.
