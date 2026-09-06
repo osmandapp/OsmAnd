@@ -2,6 +2,7 @@
 /osm_live/*.json
 /search/*
 /routing/*
+/turn_lanes/*
 *.obf
 *.osm
 phrases.xml
