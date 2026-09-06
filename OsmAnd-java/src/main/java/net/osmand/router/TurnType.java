@@ -22,6 +22,11 @@ public class TurnType {
 	public static final int OFFR = 12; // Off route //$NON-NLS-1$
 	public static final int RNDB = 13; // Roundabout
 	public static final int RNLB = 14; // Roundabout left
+	// Lane without a turn marking ("none" or an empty value in turn:lanes). It is not the same as
+	// C ("through"): such a lane declares no direction at all, so it must not be matched to a road
+	// of the junction. NONE exists only while turns are calculated, it is converted to C before it
+	// reaches voice prompts and the lanes widget (see convertNoneToStraight).
+	public static final int NONE = 15;
 	private static final int[] TURNS_ORDER = {TU, TSHL, TL, TSLL, C, TSLR, TR, TSHR, TRU};
 
 	public static TurnType straight() {
@@ -70,6 +75,8 @@ public class TurnType {
 			return "RNDB"+exitOut;
 		case RNLB:
 			return "RNLB"+exitOut;
+		case NONE:
+			return "NONE";
 		}
 		return "C";
 	}
@@ -100,6 +107,8 @@ public class TurnType {
 			t = TurnType.valueOf(TRU, leftSide);
 		} else if ("OFFR".equals(s)) {
 			t = TurnType.valueOf(OFFR, leftSide);
+		} else if ("NONE".equals(s)) {
+			t = TurnType.valueOf(NONE, leftSide);
 		} else if (s != null && (s.startsWith("EXIT") ||
 				s.startsWith("RNDB") || s.startsWith("RNLB"))) {
 			try {
@@ -489,11 +498,34 @@ public class TurnType {
 	}
 
 	public static boolean isSlightTurn(int type) {
-		return type == TSLL || type == TSLR || type == C || type == KL || type == KR;
+		return type == TSLL || type == TSLR || type == C || type == KL || type == KR || type == NONE;
 	}
 	
 	public static boolean isKeepDirectionTurn(int type) {
-		return type == C || type == KL || type == KR;
+		return type == C || type == KL || type == KR || type == NONE;
+	}
+
+	public static boolean hasNoneTurnLane(int lane) {
+		return getPrimaryTurn(lane) == NONE || getSecondaryTurn(lane) == NONE || getTertiaryTurn(lane) == NONE;
+	}
+
+	// NONE exists only while turns are calculated: replace it with C before the lanes are
+	// shown in the widget or used for voice prompts
+	public static void convertNoneToStraight(int[] lanes) {
+		if (lanes == null) {
+			return;
+		}
+		for (int i = 0; i < lanes.length; i++) {
+			if (getPrimaryTurn(lanes[i]) == NONE) {
+				setPrimaryTurn(lanes, i, C);
+			}
+			if (getSecondaryTurn(lanes[i]) == NONE) {
+				setSecondaryTurn(lanes, i, C);
+			}
+			if (getTertiaryTurn(lanes[i]) == NONE) {
+				setTertiaryTurn(lanes, i, C);
+			}
+		}
 	}
 
 	public static boolean isSharpOrReverse(int type) {
@@ -522,16 +554,17 @@ public class TurnType {
 	}
 
 	public static void collectTurnTypes(int lane, LinkedHashSet<Integer> set) {
+		// NONE is not collected: an unmarked lane declares no turn
 		int pt = TurnType.getPrimaryTurn(lane);
-		if(pt != 0) {
+		if(pt != 0 && pt != NONE) {
 			set.add(pt);
 		}
 		pt = TurnType.getSecondaryTurn(lane);
-		if(pt != 0) {
+		if(pt != 0 && pt != NONE) {
 			set.add(pt);
 		}		
 		pt = TurnType.getTertiaryTurn(lane);
-		if(pt != 0) {
+		if(pt != 0 && pt != NONE) {
 			set.add(pt);
 		}		
 	}
@@ -571,8 +604,10 @@ public class TurnType {
 			turn = TurnType.C;
 		} else if(lane.equals("merge_to_right")) {
 			turn = TurnType.C;
-		} else if (lane.equals("none") || lane.equals("through")) {
+		} else if (lane.equals("through")) {
 			turn = TurnType.C;
+		} else if (lane.equals("none") || lane.isEmpty()) {
+			turn = TurnType.NONE;
 		} else if (lane.equals("slight_right")) {
 			turn = TurnType.TSLR;
 		} else if (lane.equals("slight_left") ) {
@@ -588,7 +623,7 @@ public class TurnType {
 		} else if (lane.equals("reverse")) {
 			turn = TurnType.TU;
 		} else {
-			// Unknown string
+			// Unknown string (mistagged values such as "straight" are common), assume it keeps the direction
 			turn = TurnType.C;
 //			continue;
 		}
