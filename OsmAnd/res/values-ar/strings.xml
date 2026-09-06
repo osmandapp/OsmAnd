@@ -632,7 +632,7 @@
     <string name="shared_string_enable">تفعيل</string>
     <string name="shared_string_disable">تعطيل</string>
     <string name="shared_string_enabled">مفعل</string>
-    <string name="shared_string_disabled">معطل</string>
+    <string name="shared_string_disabled">ملغى</string>
     <string name="shared_string_selected">المحدد</string>
     <string name="shared_string_selected_lowercase">محدد</string>
     <string name="shared_string_never">أبداً</string>
@@ -5177,4 +5177,5 @@
     <string name="memory_native_settings">الذاكرة الأصلية المخصصة</string>
     <string name="shared_string_heap">إدارة الذاكرة</string>
     <string name="shared_string_native">الأصلية</string>
+    <string name="traffic_warning_red_light_camera">كاميرا ضوء أحمر</string>
 </resources>
