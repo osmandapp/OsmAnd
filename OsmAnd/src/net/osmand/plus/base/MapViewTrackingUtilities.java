@@ -321,6 +321,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				registerUnregisterSensor(location, smallSpeedForCompass);
 
 				if (!movingToMyLocation) {
+					mapView.getPanDiagnostics().onLocationCameraUpdate();
 					if (mapRenderer != null && !settings.USE_DISCRETE_AUTO_ZOOM.get()) {
 						setMyLocationV2(mapView, mapRenderer, location, predictedLocation, movingTime, rotation);
 					} else {
@@ -530,6 +531,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	private void animateBackToLocation(@NonNull Location location, int zoom, boolean forceZoom) {
+		mapView.getPanDiagnostics().onRecenter();
 		AnimateDraggingMapThread thread = mapView.getAnimatedDraggingThread();
 		int targetZoom;
 		float targetZoomFloatPart;

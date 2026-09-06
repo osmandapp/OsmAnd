@@ -597,6 +597,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	protected void onResume() {
 		super.onResume();
+		getMapView().getPanDiagnostics().onResume();
 		MapActivity mapViewMapActivity = getMapView().getMapActivity();
 		if (activityRestartNeeded || !getMapLayers().hasMapActivity()
 				|| (mapViewMapActivity != null && mapViewMapActivity != this)) {
@@ -1104,6 +1105,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	protected void onPause() {
 		super.onPause();
+		getMapView().getPanDiagnostics().onPause();
 		settings.LAST_MAP_ACTIVITY_PAUSED_TIME.set(System.currentTimeMillis());
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && isInMultiWindowMode()) {
 			pendingPause = true;
@@ -1458,6 +1460,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public boolean dispatchTouchEvent(MotionEvent event) {
+		long startedAt = android.os.SystemClock.uptimeMillis();
+		getMapView().getPanDiagnostics().onActivityTouch(event, lockHelper.isScreenLocked());
+		boolean handled = dispatchMapTouchEvent(event);
+		getMapView().getPanDiagnostics().onActivityTouchFinished(event, startedAt, handled);
+		return handled;
+	}
+
+	private boolean dispatchMapTouchEvent(MotionEvent event) {
 		if (lockHelper.isScreenLocked()) {
 			return lockHelper.getLockGestureDetector(this).onTouchEvent(event);
 		}
