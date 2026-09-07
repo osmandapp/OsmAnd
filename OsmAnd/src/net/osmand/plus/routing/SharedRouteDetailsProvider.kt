@@ -54,6 +54,21 @@ object SharedRouteDetailsProvider {
 	)
 
 	@JvmStatic
+	fun getCumulativeInfoAtRoutePoints(
+		directions: List<RouteDirectionInfo>,
+		distanceToFinishMeters: IntArray,
+		currentRoutePointIndex: Int,
+		currentDirectionIndex: Int,
+		routePointOffsets: IntArray,
+	): List<RouteCumulativeInfo> = RouteManeuverCalculator.cumulativeInfoAtRoutePoints(
+		ManeuverAccessor(directions),
+		distanceToFinishMeters,
+		currentRoutePointIndex,
+		currentDirectionIndex,
+		routePointOffsets,
+	)
+
+	@JvmStatic
 	fun calculateIntermediateIndexes(
 		context: Context?,
 		locations: List<Location>,

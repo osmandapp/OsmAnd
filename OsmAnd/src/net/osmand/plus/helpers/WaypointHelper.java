@@ -12,6 +12,7 @@ import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 import net.osmand.Location;
 import net.osmand.OnCompleteCallback;
@@ -24,6 +25,7 @@ import net.osmand.data.Amenity.AmenityRoutePoint;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.routing.AlarmInfo;
 import net.osmand.plus.routing.RouteCalculationResult;
@@ -108,6 +110,17 @@ public class WaypointHelper {
 		StateChangedListener<Boolean> listener = aBoolean -> recalculatePointsAsync(type, null);
 		registeredPrefListeners.put(preference.getId(), listener);
 		preference.addListener(listener);
+	}
+
+	@StringRes
+	public static int getTypeTitleId(int type) {
+		return switch (type) {
+			case TARGETS -> R.string.shared_string_target_points;
+			case ALARMS -> R.string.way_alarms;
+			case FAVORITES -> R.string.shared_string_my_favorites;
+			case POI -> R.string.points_of_interests;
+			default -> R.string.shared_string_waypoints;
+		};
 	}
 
 	public List<LocationPointWrapper> getWaypoints(int type) {

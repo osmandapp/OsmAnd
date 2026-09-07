@@ -26,6 +26,7 @@ import net.osmand.router.TurnType;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.routing.details.RouteEventType;
 import net.osmand.shared.routing.details.RouteExitInfo;
+import net.osmand.shared.routing.details.RouteCumulativeInfo;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -1290,6 +1291,12 @@ public class RouteCalculationResult {
 			return listDistance[currentRoute] - listDistance[locationIndex];
 		}
 		return 0;
+	}
+
+	@NonNull
+	public List<RouteCumulativeInfo> getCumulativeInfoAtRoutePoints(@NonNull int[] routePointOffsets) {
+		return SharedRouteDetailsProvider.getCumulativeInfoAtRoutePoints(directions, listDistance,
+				currentRoute, currentDirectionInfo, routePointOffsets);
 	}
 
 	public int getDistanceFromPoint(int locationIndex) {
