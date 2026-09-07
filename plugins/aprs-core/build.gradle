@@ -1,0 +1,5 @@
+// aprs-core sources are compiled into :OsmAnd via sourceSets in build-common.gradle.
+// Package: net.osmand.plus.plugins.aprs
+//
+// This module cannot be a standalone Android library because it extends OsmandPlugin
+// and uses the main app UI stack. Physical separation lives here; the build stays unified.
