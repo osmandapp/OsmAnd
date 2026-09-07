@@ -92,7 +92,7 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 		@NonNull
 		@Override
 		public CommonPreference<String> getPreference() {
-			return registerStringPref(DEVICES_SETTINGS_PREF_ID, "");
+			return registerStringPreference(DEVICES_SETTINGS_PREF_ID, "").makeGlobal();
 		}
 	};
 
