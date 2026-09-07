@@ -321,8 +321,8 @@ fun <T> OsmAndDropdownMenu(
 	properties: PopupProperties = PopupProperties(focusable = true),
 	shape: Shape = MenuDefaults.shape,
 	containerColor: Color = MenuDefaults.containerColor,
-	tonalElevation: Dp = 6.dp,
-	shadowElevation: Dp = 8.dp,
+	tonalElevation: Dp = 0.dp,
+	shadowElevation: Dp = 3.dp,
 	border: BorderStroke? = null,
 	colors: OsmAndDropdownMenuColors? = null,
 	title: String? = null
@@ -369,10 +369,10 @@ fun showComposeDropdownMenu(displayData: PopUpMenuDisplayData): PopupWindow? {
 		viewModelStoreOwner?.let { setViewTreeViewModelStoreOwner(it) }
 	}
 
-	val shadowPadding = 8.dp
+	val shadowPadding = 16.dp
 	val shadowPaddingPx = TypedValue.applyDimension(
 		TypedValue.COMPLEX_UNIT_DIP,
-		8f,
+		16f,
 		context.resources.displayMetrics
 	).toInt()
 	val screenMarginPx = TypedValue.applyDimension(
@@ -408,8 +408,8 @@ fun showComposeDropdownMenu(displayData: PopUpMenuDisplayData): PopupWindow? {
 				Surface(
 					shape = MenuDefaults.shape,
 					color = colors?.background ?: MenuDefaults.containerColor,
-					tonalElevation = 6.dp,
-					shadowElevation = 8.dp
+					tonalElevation = 0.dp,
+					shadowElevation = 3.dp
 				) {
 					OsmAndDropdownMenuContent(
 						options = displayData.menuItems?.toDropdownOptions(displayData) ?: emptyList(),
