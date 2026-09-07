@@ -46,7 +46,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -70,13 +69,15 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		String[] filePaths = Objects.requireNonNull(requireArguments().getStringArray(FILE_PATHS_KEY));
-		files = Arrays.stream(filePaths)
-				.map(File::new)
-				.toArray(File[]::new);
+		Bundle args = getArguments();
+		String[] filePaths = args != null ? args.getStringArray(FILE_PATHS_KEY) : null;
+		files = filePaths != null ? Arrays.stream(filePaths).map(File::new).toArray(File[]::new) : new File[0];
 		gpxDbHelper = app.getGpxDbHelper();
 		if (uploadVisibility == null) {
 			uploadVisibility = plugin.OSM_UPLOAD_VISIBILITY.get();
+		}
+		if (files.length == 0) {
+			dismissAllowingStateLoss();
 		}
 	}
 
