@@ -6,23 +6,20 @@ import androidx.fragment.app.FragmentManager
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
-import androidx.test.platform.app.InstrumentationRegistry
 import net.osmand.IndexConstants
-import net.osmand.plus.OsmandApplication
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.plugins.osmedit.dialogs.SendGpxBottomSheetFragment
+import net.osmand.test.common.AndroidTest
 import org.junit.After
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.io.File
 import java.io.PrintWriter
 import java.io.StringWriter
-import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicReference
 
 /**
@@ -46,26 +43,14 @@ import java.util.concurrent.atomic.AtomicReference
  */
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class SendGpxBottomSheetProcessDeathTest {
+class SendGpxBottomSheetProcessDeathTest : AndroidTest() {
 
 	companion object {
-		private const val APP_INIT_TIMEOUT_SEC = 120L
 		private const val TRACK_NAME = "send_gpx_process_death_test.gpx"
 	}
 
 	@get:Rule
 	val scenarioRule = ActivityScenarioRule(MapActivity::class.java)
-
-	private lateinit var app: OsmandApplication
-
-	@Before
-	fun setup() {
-		app = InstrumentationRegistry.getInstrumentation().targetContext.applicationContext as OsmandApplication
-		val deadline = System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(APP_INIT_TIMEOUT_SEC)
-		while (app.isApplicationInitializing && System.currentTimeMillis() < deadline) {
-			Thread.sleep(200)
-		}
-	}
 
 	@After
 	fun dismissSheet() {
