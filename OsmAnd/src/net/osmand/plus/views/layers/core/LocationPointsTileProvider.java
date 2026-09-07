@@ -39,14 +39,18 @@ public class LocationPointsTileProvider extends interface_MapTiledCollectionProv
       }
       skPointBitmap = pointBitmap;
       this.offset = new PointI(0, 0);
-      this.swigTakeOwnership();
+   }
+
+   @NonNull
+   public MapTiledCollectionProvider getProviderInstance() {
+      if (providerInstance == null) {
+         providerInstance = NativeUtilities.instantiateNativeProvider(this);
+      }
+      return providerInstance;
    }
 
    public void drawPoints(@NonNull MapRendererView mapRenderer) {
-      if (providerInstance == null) {
-         providerInstance = instantiateProxy();
-      }
-      mapRenderer.addSymbolsProvider(providerInstance);
+      mapRenderer.addSymbolsProvider(getProviderInstance());
    }
 
    public void clearPoints(@NonNull MapRendererView mapRenderer) {
