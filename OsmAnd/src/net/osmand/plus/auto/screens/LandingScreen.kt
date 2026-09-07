@@ -35,6 +35,7 @@ class LandingScreen(
             override fun onResume(owner: LifecycleOwner) {
                 app.carNavigationSession?.updateCarNavigation(app.locationProvider.lastKnownLocation)
                 movingSinceTime = 0
+                autoFreeRideStarted = false
                 app.locationProvider.addLocationListener(this@LandingScreen)
             }
 
