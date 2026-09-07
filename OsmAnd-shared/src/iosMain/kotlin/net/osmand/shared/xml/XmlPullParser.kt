@@ -309,9 +309,10 @@ actual class XmlPullParser actual constructor() {
 	@Throws(XmlParserException::class, IOException::class)
 	actual fun next(): Int {
 		if (pendingEndTagName != null) {
+			// Synthetic END_TAG for a self-closing element. readStartTag() never pushed it onto
+			// openTags, so this must NOT pop the stack (doing so would consume the real parent).
 			val name = pendingEndTagName!!
 			pendingEndTagName = null
-			popOpenTag(name)
 			currentName = name
 			currentText = null
 			attributes = emptyList()
