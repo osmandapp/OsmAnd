@@ -4,6 +4,7 @@ import static net.osmand.IndexConstants.BACKUP_INDEX_DIR;
 import static net.osmand.IndexConstants.FAVORITES_INDEX_DIR;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.ZIP_EXT;
+import static net.osmand.shared.favorites.FavoriteFolderPath.SUBFOLDER_PLACEHOLDER;
 import static net.osmand.shared.gpx.GpxFile.XML_COLON;
 
 import android.util.AtomicFile;
@@ -49,8 +50,6 @@ public class FavouritesFileHelper {
 	public static final String FAV_GROUP_NAME_SEPARATOR = "-";
 	public static final String LEGACY_FAV_FILE_PREFIX = "favourites";
 	public static final String BAK_FILE_SUFFIX = "_bak";
-
-	public static final String SUBFOLDER_PLACEHOLDER = "_%_";
 
 	private final OsmandApplication app;
 	private final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
