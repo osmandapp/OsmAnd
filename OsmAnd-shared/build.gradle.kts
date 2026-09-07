@@ -40,6 +40,11 @@ kotlin {
 		}
 	}
 
+	// the default test binary is a debug build with LLVM optimisations off, which makes any
+	// Kotlin/Native performance number meaningless; this adds an optimised test binary,
+	// run with :OsmAnd-shared:iosSimulatorArm64ReleaseTest
+	iosSimulatorArm64().binaries.test(listOf(org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE))
+
 	val sqliteVersion = "2.3.1"
 	val serializationVersion = "1.6.3"
 	val coroutinesCoreVersion = "1.8.1"
