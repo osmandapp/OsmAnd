@@ -4997,6 +4997,7 @@
 	<string name="poi_avalanche_transceiver_checkpoint">Avalanche transceiver checkpoint</string>
 
 	<string name="poi_parcel_locker">Parcel locker</string>
+	<string name="poi_luggage_locker">Luggage locker</string>
 
 	<string name="poi_tiles">Tiles store</string>
 
