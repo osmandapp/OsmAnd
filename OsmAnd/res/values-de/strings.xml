@@ -4889,8 +4889,8 @@
     <string name="us_gallon">US-Gallone</string>
     <string name="kilometers">Kilometer</string>
     <string name="miles">Meilen</string>
-    <string name="access_pinch_zoom_magnification">Zoom mit zwei Fingern</string>
-    <string name="access_pinch_zoom_magnification_descr">Verwenden Sie für Zoom-Gesten die Skalierung des Ansichtsfensters anstelle der separaten Zoomstufen.</string>
+    <string name="access_pinch_zoom_magnification">Pinch-Zoom-Vergrößerung</string>
+    <string name="access_pinch_zoom_magnification_descr">Verwendet während des Hineinzoomens die Viewport-Skalierung (Vergrößerung) anstelle sofort zu zoomen.</string>
     <string name="mpg">MPG</string>
     <string name="show_spherical_map_description">Sphäroidisches Modell der Erde anzeigen</string>
     <string name="shared_string_price">Preis</string>
