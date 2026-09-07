@@ -5293,4 +5293,5 @@
     <string name="astro_eclipse_maximum">Maximum</string>
     <string name="astro_eclipse_phase_partial">Partiell</string>
     <string name="astro_eclipse_phase_total">Total</string>
+    <string name="astro_eclipse_column_below_horizon">Unter dem Horizont</string>
 </resources>
