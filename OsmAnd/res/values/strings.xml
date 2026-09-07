@@ -1452,7 +1452,7 @@ You will be able to pair this scanner again at any time.</string>
     <string name="send_crash_log_descr">Contains only information about crashes</string>
     <string name="open_issue_on_github_descr">Ask question, propose features</string>
     <string name="open_issue_on_github">Open issue on GitHub</string>
-    <string name="report_an_issues">Report an issue</string>
+    <string name="report_an_issues">Report a problem</string>
     <string name="copy_build_version">Copy build version</string>
     <string name="most_viewed">Most viewed</string>
     <string name="wheel_circumference">Wheel circumference</string>
