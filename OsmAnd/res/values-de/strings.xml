@@ -5049,7 +5049,7 @@
     <string name="edit_palette">Palette bearbeiten</string>
     <string name="add_palette">Palette hinzufügen</string>
     <string name="delete_palette">Palette löschen</string>
-    <string name="trip_recording_avg_speed_widget_description">Zeigt die Durchschnittsgeschwindigkeit von der aktuellen Strecke oder die Durchschnittsgeschwindigkeit während des letzten Anstiegs- ober Abfahrtsabschnitts.</string>
+    <string name="trip_recording_avg_speed_widget_description">Zeigt die Durchschnittsgeschwindigkeit der aktuellen Strecke oder die Durchschnittsgeschwindigkeit während der letzten Steigung bzw. des letzten Gefälles an.</string>
     <string name="gradient_no_data_point_summary">Farbe, die angewendet wird, wenn Daten fehlen oder nicht definiert sind.</string>
     <string name="gradient_input_value_too_low_warn">Der zulässige Mindestwert ist %1$s.</string>
     <string name="gradient_input_value_too_high_warn">Der zulässige Höchstwert ist %1$s.</string>
