@@ -1047,7 +1047,7 @@
     <string name="poi_board_type_astronomy">Астрономија</string>
     <string name="poi_fireplace_yes">Да; Камин</string>
     <string name="poi_covered_yes">Да; Покривено</string>
-    <string name="poi_covered_no">Не</string>
+    <string name="poi_covered_no">Није покривено</string>
     <string name="poi_smoking_no">Забрањено</string>
     <string name="poi_smoking_outside">Само напољу</string>
     <string name="poi_smoking_yes">Дозвољено</string>
@@ -5180,4 +5180,8 @@
     <string name="poi_winter_hiking_filter">Погодно за зимско планинарење</string>
     <string name="poi_mtb_yes">Да</string>
     <string name="poi_winter_hiking_yes">Да</string>
+    <string name="poi_air_conditioning">Климатизација</string>
+    <string name="poi_website_menu">Мени</string>
+    <string name="poi_air_conditioning_yes">Да</string>
+    <string name="poi_air_conditioning_no">Не</string>
 </resources>

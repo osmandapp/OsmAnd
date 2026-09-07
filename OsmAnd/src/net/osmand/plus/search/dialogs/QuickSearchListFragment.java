@@ -144,8 +144,8 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 						if (sr.objectType == CITY || sr.objectType == VILLAGE || sr.objectType == STREET) {
 							showResult = true;
 						}
+						dialogFragment.saveAddressSearchState();
 						dialogFragment.completeQueryWithObject(sr);
-						dialogFragment.onSearchResultSelected();
 					}
 				}
 			}
@@ -153,8 +153,8 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 	}
 
 	private void onSpatialCategorySearchResultClick(@NonNull SearchResult searchResult) {
+		dialogFragment.saveAddressSearchState();
 		dialogFragment.completeSpatialCategorySearchResult(searchResult);
-		dialogFragment.onSearchResultSelected();
 	}
 
 	@Override

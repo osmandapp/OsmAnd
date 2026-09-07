@@ -5269,4 +5269,5 @@
     <string name="share_favorites_share_failed">Impossible de partager le fichier.</string>
     <string name="share_favorites_missing_media_warning">Certains fichiers médias n\'ont pu être inclus.</string>
     <string name="search_on_web">Rechercher sur le Web</string>
+    <string name="astro_eclipse_column_below_horizon">Sous l\'horizon</string>
 </resources>

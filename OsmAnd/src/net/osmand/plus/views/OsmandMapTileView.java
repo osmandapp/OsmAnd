@@ -451,7 +451,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				view.setDefaultFocusHighlightEnabled(false);
 			}
 			applyDisplayScaleSettings();
-			refreshMap(true);
 		}
 	}
 
@@ -739,11 +738,16 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void applyDisplayScaleSettings() {
+		if (!hasMapRenderer()) {
+			// v1 rendering keeps rasterized tiles of the previous magnifier
+			app.getResourceManager().getRenderer().clearCache();
+		}
 		setComplexZoom(getZoom(), getSettingsMapDensity());
 		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 		if (mapContext != null) {
 			mapContext.updateMapSettings(true);
 		}
+		refreshMap(true);
 	}
 
 	public void setComplexZoom(int zoom, double mapDensity) {
@@ -2660,7 +2664,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			if (multiTouchSupport == null || (!multiTouchSupport.isInTiltMode() && !multiTouchSupport.isInZoomAndRotationMode())) {
 				MeasurementToolLayer layer = getMeasurementToolLayer();
 				MapRendererView mapRenderer = getMapRenderer();
-				if (mapRenderer != null && (layer == null || !layer.isInMeasurementMode())) {
+				if (mapRenderer != null && e1 != null && (layer == null || !layer.isInMeasurementMode())) {
 					if (!targetChanged) {
 						targetChanged = true;
 						// Remember last target position before it is changed with map gesture
