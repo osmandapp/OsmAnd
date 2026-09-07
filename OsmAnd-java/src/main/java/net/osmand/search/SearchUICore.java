@@ -655,7 +655,9 @@ public class SearchUICore {
 				? new SpatialBuildingAndIntersectionsByStreetAPI()
 				: new SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI();
 		apis.add(streetsApi);
-		SearchStreetByCityAPI cityApi = new SearchCoreFactory.SearchStreetByCityAPI(streetsApi);
+		SearchStreetByCityAPI cityApi = useSpatialSearch
+				? new SpatialStreetByCityAPI(streetsApi)
+				: new SearchCoreFactory.SearchStreetByCityAPI(streetsApi);
 		apis.add(cityApi);
 		if (useSpatialSearch) {
 			apis.add(new SpatialNearestCitySearchAPI(streetsApi, cityApi));
@@ -677,6 +679,18 @@ public class SearchUICore {
 		@Override
 		public int getSearchPriority(SearchPhrase phrase) {
 			return phrase.isEmpty() && phrase.isEmptyQueryAllowed() ? super.getSearchPriority(phrase) : -1;
+		}
+	}
+
+	private static class SpatialStreetByCityAPI extends SearchStreetByCityAPI {
+
+		public SpatialStreetByCityAPI(SearchBuildingAndIntersectionsByStreetAPI streetsApi) {
+			super(streetsApi);
+		}
+
+		@Override
+		public int getSearchPriority(SearchPhrase phrase) {
+			return phrase.isUnknownSearchWordPresent() ? -1 : super.getSearchPriority(phrase);
 		}
 	}
 
