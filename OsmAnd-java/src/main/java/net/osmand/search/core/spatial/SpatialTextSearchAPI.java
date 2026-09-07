@@ -8,7 +8,6 @@ import static net.osmand.search.core.SearchCoreFactory.PREFERRED_REGION_ZOOM;
 import static net.osmand.search.core.SearchCoreFactory.PREFERRED_STREET_INTERSECTION_ZOOM;
 import static net.osmand.search.core.SearchCoreFactory.PREFERRED_STREET_ZOOM;
 import static net.osmand.search.core.SearchCoreFactory.SEARCH_ADDRESS_BY_NAME_PRIORITY;
-import static net.osmand.search.core.SearchCoreFactory.isLastWordCityGroup;
 
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -197,8 +196,7 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 	@Override
 	public int getSearchPriority(SearchPhrase phrase) {
 		if (!phrase.isUnknownSearchWordPresent()
-				|| phrase.isLastWord(ObjectType.POI_TYPE, ObjectType.STREET)
-				|| isLastWordCityGroup(phrase)) {
+				|| phrase.isLastWord(ObjectType.POI_TYPE, ObjectType.STREET)) {
 			return -1;
 		}
 		return SEARCH_PRIORITY;
