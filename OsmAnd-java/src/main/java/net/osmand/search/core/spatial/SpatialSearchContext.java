@@ -712,6 +712,7 @@ public class SpatialSearchContext {
 			}
 			if (city == null) {
 				city = bmir.readCityObject(nameIndex.addressRegion, pshift);
+				city.setReferenceFile(bmir);
 			}
 			obj = bmir.readStreetObject(nameIndex.addressRegion, city, shift);
 		} else {
