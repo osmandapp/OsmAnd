@@ -94,6 +94,23 @@ public class SearchUICoreGenericTest {
 		Assert.assertSame(cityResult, result.requiredSearchPhrase.getLastSelectedWord().getResult());
 		Assert.assertEquals("Kyiv Khreshchatyk", result.requiredSearchPhrase.getFullSearchPhrase());
 	}
+
+	@Test
+	public void testSpatialSearchAfterSelectingBoundary() {
+		SearchUICore core = new SearchUICore(MapPoiTypes.getDefault(), "en", false);
+		core.init(true);
+		City boundary = new City(City.CityType.BOUNDARY);
+		boundary.setName("Kyiv Oblast");
+		boundary.setLocation(50.4501, 30.5234);
+		SearchResult boundaryResult = selectCity(core, boundary);
+
+		SpatialTextSearchAPI api = core.getApiByClass(SpatialTextSearchAPI.class);
+		Assert.assertNotNull(api);
+		SearchPhrase phrase = core.resetPhrase("Kyiv Oblast pizzeria");
+		Assert.assertSame(boundaryResult, phrase.getLastSelectedWord().getResult());
+		Assert.assertTrue("Selecting a boundary must not disable spatial text search",
+				api.getSearchPriority(phrase) != -1);
+	}
 	
 
 	@Test
