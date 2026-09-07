@@ -106,12 +106,12 @@ public class TilePointsProvider<T extends TilePointsProvider.ICollectionPoint> e
 		this.minZoom = minZoom;
 		this.maxZoom = maxZoom;
 		this.offset = new PointI(0, 0);
-		this.swigTakeOwnership();
 	}
 
 	public void drawSymbols(@NonNull MapRendererView mapRenderer) {
 		if (providerInstance == null) {
-			providerInstance = instantiateProxy();
+			providerInstance = instantiateProxy(true);
+			swigReleaseOwnership();
 		}
 		mapRenderer.addSymbolsProvider(providerInstance);
 	}
