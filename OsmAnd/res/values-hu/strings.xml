@@ -3967,7 +3967,7 @@
     <string name="send_logcat_log_descr">Részletes naplófájl</string>
     <string name="send_crash_log_descr">Csak az összeomlásokról tartalmaz információkat</string>
     <string name="open_issue_on_github_descr">Tegyen fel kérdést, javasoljon funkciókat</string>
-    <string name="report_an_issues">Jelentsen be hibát</string>
+    <string name="report_an_issues">Hibajelentés</string>
     <string name="help_article_map_vector_maps_name">Vektoros térképek (térképstílusok)</string>
     <string name="help_article_navigation_car_play_name">CarPlay</string>
     <string name="help_article_navigation_guidance_map_during_navigation_name">Térkép képernyő navigáció közben</string>
@@ -4782,7 +4782,7 @@
     <string name="miles">Mérföld</string>
     <string name="mpg">Mérf./gal</string>
     <string name="access_pinch_zoom_magnification">Csippentéses nagyítás</string>
-    <string name="access_pinch_zoom_magnification_descr">Nagyítás közben a különálló nagyítási szintek helyett használja a nézetablak méretezését.</string>
+    <string name="access_pinch_zoom_magnification_descr">Nézetablak méretezésének (nagyítása) használata a különálló nagyítási szintek helyett nagyításkor.</string>
     <string name="show_spherical_map_description">A Föld gömbmodelljének megjelenítése</string>
     <string name="shared_string_price">Ár</string>
     <string name="rendering_attr_showSkiSlopes_name">Sípályák megjelenítése</string>
