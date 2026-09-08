@@ -93,7 +93,7 @@ import net.osmand.plus.voice.CommandPlayerException;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.data.TravelObfHelper;
 import net.osmand.render.RenderingRulesStorage;
-import net.osmand.router.RoutingConfiguration;
+import net.osmand.shared.routing.RoutingConfiguration;
 import net.osmand.shared.palette.data.PaletteRepository;
 import net.osmand.shared.gpx.SmartFolderHelper;
 import net.osmand.util.Algorithms;
@@ -101,10 +101,8 @@ import net.osmand.util.CollectionUtils;
 import net.osmand.shared.util.OpeningHoursParser;
 
 import org.apache.commons.logging.Log;
-import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -447,10 +445,12 @@ public class AppInitializer implements IProgress {
 								try {
 									String fileName = f.getName();
 									RoutingConfiguration.Builder builder = new RoutingConfiguration.Builder(defaultAttributes);
-									RoutingConfiguration.parseFromInputStream(new FileInputStream(f), fileName, builder);
+									RoutingConfiguration.parseFromFile(f.getAbsolutePath(), fileName, builder);
 
 									customConfigs.put(fileName, builder);
-								} catch (XmlPullParserException | IOException e) {
+								} catch (Exception e) {
+									// a malformed profile now fails in the parser rather than building
+									// a broken router, and this already throws the file away either way
 									Algorithms.removeAllFiles(f);
 									LOG.error(e.getMessage(), e);
 								}

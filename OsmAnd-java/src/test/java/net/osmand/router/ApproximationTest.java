@@ -1,6 +1,7 @@
 package net.osmand.router;
 
 import net.osmand.shared.routing.TurnType;
+import net.osmand.shared.routing.RoutingConfiguration;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.osmand.LocationsHolder;
@@ -9,7 +10,7 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities;
-import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
+import net.osmand.shared.routing.RoutingConfiguration.RoutingMemoryLimits;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import org.junit.Assert;

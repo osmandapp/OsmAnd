@@ -16,7 +16,7 @@ import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.shared.routing.GeneralRouter;
-import net.osmand.router.RoutingConfiguration;
+import net.osmand.shared.routing.RoutingConfiguration;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;

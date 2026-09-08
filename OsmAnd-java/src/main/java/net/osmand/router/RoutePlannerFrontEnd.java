@@ -18,6 +18,7 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.shared.routing.RouteRegion;
 import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.shared.routing.RouteCalculationProgress;
+import net.osmand.shared.routing.RoutingConfiguration;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;

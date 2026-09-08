@@ -9,6 +9,7 @@ import net.osmand.shared.data.KQuadRect;
 import net.osmand.shared.data.KQuadTree;
 import net.osmand.shared.routing.DirectionPoint;
 import net.osmand.shared.routing.NativeDirectionPoint;
+import net.osmand.shared.routing.RoutingConfiguration;
 import net.osmand.util.MapUtils;
 
 import org.junit.Test;

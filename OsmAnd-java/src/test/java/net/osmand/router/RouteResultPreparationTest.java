@@ -1,6 +1,7 @@
 package net.osmand.router;
 
 import net.osmand.shared.routing.TurnType;
+import net.osmand.shared.routing.RoutingConfiguration;
 import static net.osmand.util.RouterUtilTest.getNativeLibPath;
 import static net.osmand.util.RouterUtilTest.getRoadId;
 import static net.osmand.util.RouterUtilTest.getRoadStartPoint;
@@ -34,7 +35,7 @@ import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.ObfConstants;
-import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
+import net.osmand.shared.routing.RoutingConfiguration.RoutingMemoryLimits;
 import net.osmand.util.Algorithms;
 import net.osmand.shared.routing.RouteSegmentResult;
 

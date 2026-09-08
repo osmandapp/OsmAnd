@@ -8,6 +8,7 @@ import net.osmand.binary.ObfConstants;
 import net.osmand.shared.routing.RouteTypeRule;
 import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.shared.routing.DirectionPoint;
+import net.osmand.shared.routing.RoutingConfiguration;
 import net.osmand.data.LatLon;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.render.RenderingRuleSearchRequest;

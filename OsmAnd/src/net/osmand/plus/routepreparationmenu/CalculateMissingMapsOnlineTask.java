@@ -23,7 +23,7 @@ import net.osmand.shared.routing.GeneralRouter;
 import net.osmand.shared.routing.GeneralRouter.RoutingParameter;
 import net.osmand.router.MissingMapsCalculationResult;
 import net.osmand.router.MissingMapsCalculator;
-import net.osmand.router.RoutingConfiguration;
+import net.osmand.shared.routing.RoutingConfiguration;
 import net.osmand.router.RoutingContext;
 import net.osmand.shared.routing.GeneralRouterProfile;
 import net.osmand.util.Algorithms;

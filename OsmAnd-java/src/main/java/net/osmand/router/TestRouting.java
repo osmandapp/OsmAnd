@@ -7,8 +7,9 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
-import net.osmand.router.RoutingConfiguration.Builder;
-import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
+import net.osmand.shared.routing.RoutingConfiguration.Builder;
+import net.osmand.shared.routing.RoutingConfiguration.RoutingMemoryLimits;
+import net.osmand.shared.routing.RoutingConfiguration;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -88,7 +89,7 @@ public class TestRouting {
 			if (routingXmlFile == null || routingXmlFile.equals("routing.xml")) {
 				p.configBuilder = RoutingConfiguration.getDefault();
 			} else {
-				p.configBuilder = RoutingConfiguration.parseFromInputStream(new FileInputStream(routingXmlFile));
+				p.configBuilder = RoutingConfiguration.parseFromFile(routingXmlFile);
 			}
 
 			return p;

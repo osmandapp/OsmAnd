@@ -23,12 +23,13 @@ import com.google.gson.GsonBuilder;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.shared.routing.RouteCalculationProgress;
+import net.osmand.shared.routing.RoutingConfiguration;
 import net.osmand.data.LatLon;
 import net.osmand.router.HHRouteDataStructure.HHRoutingConfig;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 import net.osmand.router.RouteResultPreparation.RouteCalcResult;
-import net.osmand.router.RoutingConfiguration.Builder;
-import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
+import net.osmand.shared.routing.RoutingConfiguration.Builder;
+import net.osmand.shared.routing.RoutingConfiguration.RoutingMemoryLimits;
 import net.osmand.util.MapUtils;
 import net.osmand.shared.routing.RouteSegmentResult;
 

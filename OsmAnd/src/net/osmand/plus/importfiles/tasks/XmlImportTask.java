@@ -19,7 +19,7 @@ import net.osmand.plus.importfiles.ImportType;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.router.RoutingConfiguration.Builder;
+import net.osmand.shared.routing.RoutingConfiguration.Builder;
 import net.osmand.util.Algorithms;
 
 import org.xmlpull.v1.XmlPullParser;

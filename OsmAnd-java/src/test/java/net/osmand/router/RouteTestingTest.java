@@ -27,7 +27,8 @@ import com.google.gson.GsonBuilder;
 import net.osmand.NativeLibrary;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.ObfConstants;
-import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
+import net.osmand.shared.routing.RoutingConfiguration.RoutingMemoryLimits;
+import net.osmand.shared.routing.RoutingConfiguration;
 import net.osmand.util.RouterUtilTest;
 import net.osmand.shared.routing.RouteSegmentResult;
 

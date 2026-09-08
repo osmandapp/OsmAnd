@@ -8,6 +8,7 @@ import net.osmand.shared.routing.GeneralRouter.RouteAttributeContext;
 import net.osmand.shared.routing.GeneralRouter.RouteDataObjectAttribute;
 import net.osmand.shared.routing.GeneralRouter;
 import net.osmand.shared.util.collections.KBitSet;
+import net.osmand.shared.routing.RoutingConfiguration;
 
 public class TransportRoutingConfiguration {
 
