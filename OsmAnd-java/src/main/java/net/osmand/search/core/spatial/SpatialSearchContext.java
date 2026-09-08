@@ -712,10 +712,14 @@ public class SpatialSearchContext {
 			}
 			if (city == null) {
 				city = bmir.readCityObject(nameIndex.addressRegion, pshift);
+				city.setReferenceFile(bmir);
 			}
 			obj = bmir.readStreetObject(nameIndex.addressRegion, city, shift);
 		} else {
 			obj = bmir.readCityObject(nameIndex.addressRegion, shift);
+		}
+		if (obj instanceof City city) {
+			city.setReferenceFile(bmir);
 		}
 		stats.readObjsBytes += (bmir.getBytesRead() - bytesRead);
 		stats.sub2ReadObjTime.finish();
