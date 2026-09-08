@@ -14,6 +14,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.measurementtool.MeasurementEditingContextUtils.GpxTimeCalculator;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.shared.routing.RouteRegion;
+import net.osmand.shared.routing.RouteCalculationProgress;
 import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXUtilities;
 import net.osmand.shared.gpx.GpxFile;

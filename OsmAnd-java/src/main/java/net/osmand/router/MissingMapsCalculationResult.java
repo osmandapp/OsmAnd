@@ -3,6 +3,7 @@ package net.osmand.router;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
+import net.osmand.shared.routing.MissingMapsResult;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-public class MissingMapsCalculationResult {
+public class MissingMapsCalculationResult implements MissingMapsResult {
 
 	private final RoutingContext missingMapsRoutingContext;
 	private final List<LatLon> missingMapsPoints;
@@ -85,6 +86,7 @@ public class MissingMapsCalculationResult {
 		return missingMapsPoints;
 	}
 
+	@Override
 	public String getErrorMessage() {
 		String msg = "";
 		if (mapsToUpdate != null) {

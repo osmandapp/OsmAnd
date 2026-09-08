@@ -20,7 +20,7 @@ import net.osmand.plus.routing.RoutingEnvironment;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.GpxRouteApproximation;
-import net.osmand.router.RouteCalculationProgress;
+import net.osmand.shared.routing.RouteCalculationProgress;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 
 import java.io.ByteArrayInputStream;

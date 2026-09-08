@@ -23,6 +23,7 @@ import net.osmand.map.WorldRegion;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;
+import net.osmand.shared.routing.FastRoutingState;
 
 public class MissingMapsCalculator {
 

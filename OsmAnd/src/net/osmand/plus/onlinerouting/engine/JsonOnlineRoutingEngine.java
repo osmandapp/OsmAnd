@@ -8,7 +8,7 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.routing.RouteProvider;
-import net.osmand.router.RouteCalculationProgress;
+import net.osmand.shared.routing.RouteCalculationProgress;
 
 import org.json.JSONArray;
 import org.json.JSONException;

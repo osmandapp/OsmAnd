@@ -136,7 +136,7 @@ public class RouteProvider {
 				} else if (params.mode.getRouteService() == RouteService.OSMAND) {
 					res = findVectorMapsRoute(params, calcGPXRoute);
 					if (params.calculationProgress.missingMapsCalculationResult != null) {
-						res.setMissingMapsCalculationResult(params.calculationProgress.missingMapsCalculationResult);
+						res.setMissingMapsCalculationResult((MissingMapsCalculationResult) params.calculationProgress.missingMapsCalculationResult);
 					}
 				} else if (params.mode.getRouteService() == RouteService.BROUTER) {
 					res = findBROUTERRoute(params);

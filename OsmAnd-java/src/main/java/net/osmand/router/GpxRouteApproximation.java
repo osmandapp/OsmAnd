@@ -5,6 +5,7 @@ import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.shared.routing.RouteDataObject;
+import net.osmand.shared.routing.RouteCalculationProgress;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.util.MapUtils;

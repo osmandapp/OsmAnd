@@ -16,7 +16,7 @@ import net.osmand.plus.onlinerouting.VehicleType;
 import net.osmand.plus.routing.RouteCalculationParams;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
-import net.osmand.router.RouteCalculationProgress;
+import net.osmand.shared.routing.RouteCalculationProgress;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;

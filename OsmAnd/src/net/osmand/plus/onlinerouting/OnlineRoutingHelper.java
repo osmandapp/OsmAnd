@@ -15,7 +15,7 @@ import net.osmand.plus.routing.RouteCalculationParams;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidNetworkUtils;
-import net.osmand.router.RouteCalculationProgress;
+import net.osmand.shared.routing.RouteCalculationProgress;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;

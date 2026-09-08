@@ -14,9 +14,9 @@ import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.router.FastRoutingState;
+import net.osmand.shared.routing.FastRoutingState;
 import net.osmand.router.MissingMapsCalculationResult;
-import net.osmand.router.RouteCalculationProgress;
+import net.osmand.shared.routing.RouteCalculationProgress;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -359,7 +359,7 @@ class RouteRecalculationHelper {
 	@Nullable
 	protected MissingMapsCalculationResult getCurrentMissingMapsCalculationResult() {
 		return lastTask != null && lastTask.params.calculationProgress != null ?
-				lastTask.params.calculationProgress.missingMapsCalculationResult : null;
+				(MissingMapsCalculationResult) lastTask.params.calculationProgress.missingMapsCalculationResult : null;
 	}
 
 	private class RouteRecalculationTask implements Runnable {

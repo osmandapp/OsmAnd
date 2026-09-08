@@ -24,7 +24,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.RouteCalculationMethod;
 import net.osmand.plus.simulation.SimulationProvider;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.router.FastRoutingState;
+import net.osmand.shared.routing.FastRoutingState;
 import net.osmand.router.GpxRouteApproximation;
 import net.osmand.router.MissingMapsCalculationResult;
 import net.osmand.router.RouteExporter;

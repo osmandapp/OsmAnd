@@ -26,6 +26,7 @@ import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.shared.routing.RouteRegion;
 import net.osmand.shared.routing.RouteSubregion;
 import net.osmand.shared.routing.RouteDataObject;
+import net.osmand.shared.routing.RouteCalculationProgress;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.QuadRect;
 import net.osmand.map.WorldRegion;

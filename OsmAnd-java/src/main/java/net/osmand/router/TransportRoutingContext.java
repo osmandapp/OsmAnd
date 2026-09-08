@@ -19,6 +19,7 @@ import java.util.Map;
 
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TLongObjectHashMap;
+import net.osmand.shared.routing.RouteCalculationProgress;
 
 public class TransportRoutingContext {
 

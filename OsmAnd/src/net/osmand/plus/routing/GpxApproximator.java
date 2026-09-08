@@ -13,7 +13,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.measurementtool.GpxApproximationListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.GpxRouteApproximation;
-import net.osmand.router.RouteCalculationProgress;
+import net.osmand.shared.routing.RouteCalculationProgress;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 
 import org.apache.commons.logging.Log;

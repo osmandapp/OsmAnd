@@ -89,7 +89,7 @@ public class CalculateMissingMapsOnlineTask extends AsyncTask<Void, Void, Void> 
 				boolean hhCheckEditions = method.isFastRoutingPossible(app.getRoutingHelper().getAppMode());
 				calculator.checkIfThereAreMissingMaps(routingContext, routePoints.get(0), locations, hhCheckEditions);
 				if (routingContext.calculationProgress.missingMapsCalculationResult != null) {
-					route.setMissingMapsCalculationResult(routingContext.calculationProgress.missingMapsCalculationResult);
+					route.setMissingMapsCalculationResult((MissingMapsCalculationResult) routingContext.calculationProgress.missingMapsCalculationResult);
 				}
 				listener.onSuccess();
 			} catch (Exception e) {
