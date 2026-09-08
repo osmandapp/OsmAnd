@@ -6,6 +6,7 @@ import static net.osmand.plus.settings.enums.MediaStorageType.MAIN_STORAGE;
 import static net.osmand.plus.settings.enums.MediaStorageType.MANUALLY_SPECIFIED;
 
 import android.Manifest;
+import android.content.ContentUris;
 import android.database.Cursor;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
@@ -26,6 +27,7 @@ import net.osmand.plus.utils.FileUtils;
 import net.osmand.shared.media.LinkMediaFactory;
 import net.osmand.shared.media.MediaFileNameFormat;
 import net.osmand.shared.media.MediaProvider;
+import net.osmand.shared.media.domain.MediaType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -34,6 +36,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Resolves and writes OsmAnd-owned attached media. Internal app media is file-backed;
@@ -137,6 +141,80 @@ public class MediaStorageHelper {
 			return true;
 		}
 		return storageType == MAIN_STORAGE && new File(getLegacyInternalMediaDir(), fileName).exists();
+	}
+
+	/**
+	 * Lists media in both app folders and the active storage's type folders. Call off the UI
+	 * thread: document providers may perform IPC for every entry. An unavailable or revoked
+	 * folder contributes no entries. Listing never creates directories or requests permissions.
+	 */
+	@NonNull
+	public List<MediaSource> listMedia(@NonNull MediaStorageLocation location) {
+		Map<String, MediaSource> sources = new LinkedHashMap<>();
+		listRawMedia(getInternalMediaDir(), sources);
+		listRawMedia(getLegacyInternalMediaDir(), sources);
+		MediaStorageType storageType = location.getStorageType();
+		if (storageType != MAIN_STORAGE) {
+			for (MediaDirType dirType : MediaDirType.values()) {
+				try {
+					if (storageType == MANUALLY_SPECIFIED) {
+						DocumentFile root = getManualRootDocument(location);
+						DocumentFile dir = root == null ? null : root.findFile(dirType.getDirName());
+						if (dir != null && dir.isDirectory()) {
+							for (DocumentFile file : dir.listFiles()) {
+								String name = file.getName();
+								if (file.isFile() && name != null && MediaType.fromFileName(name) != MediaType.UNKNOWN) {
+									String href = file.getUri().toString();
+									sources.put(href, new UriMediaSource(app, href, file.getUri(), name,
+											file.length(), file.getType(), dirType, location.getManualUri()));
+								}
+							}
+						}
+					} else if (MediaStorageUtils.usesMediaStore(storageType)) {
+						Uri collection = MediaStorageUtils.getMediaStoreCollectionUri(dirType);
+						String path = MediaStorageUtils.getMediaStoreRelativePath(storageType, dirType);
+						String[] columns = {MediaStore.MediaColumns._ID, MediaStore.MediaColumns.DISPLAY_NAME,
+								MediaStore.MediaColumns.SIZE, MediaStore.MediaColumns.MIME_TYPE};
+						String selection = MediaStore.MediaColumns.RELATIVE_PATH + " IN (?, ?)";
+						try (Cursor cursor = app.getContentResolver().query(collection, columns, selection,
+								new String[] {path, path + "/"}, MediaStore.MediaColumns._ID + " ASC")) {
+							while (cursor != null && cursor.moveToNext()) {
+								String name = MediaStorageUtils.getString(cursor, MediaStore.MediaColumns.DISPLAY_NAME);
+								if (name != null && MediaType.fromFileName(name) != MediaType.UNKNOWN) {
+									Uri uri = ContentUris.withAppendedId(collection, MediaStorageUtils.getLong(cursor, MediaStore.MediaColumns._ID));
+									String href = uri.toString();
+									sources.put(href, new UriMediaSource(app, href, uri, name,
+											MediaStorageUtils.getLong(cursor, MediaStore.MediaColumns.SIZE),
+											MediaStorageUtils.getString(cursor, MediaStore.MediaColumns.MIME_TYPE), dirType, null));
+								}
+							}
+						}
+					} else {
+						listRawMedia(MediaStorageUtils.resolveRawMediaDir(storageType, dirType, getInternalMediaDir()), sources);
+					}
+				} catch (Exception e) {
+					log.warn("Unable to list media folder: " + dirType, e);
+				}
+			}
+		}
+		return new ArrayList<>(sources.values());
+	}
+
+	private void listRawMedia(@Nullable File dir, @NonNull Map<String, MediaSource> sources) {
+		try {
+			File[] files = dir == null ? null : dir.listFiles();
+			if (files != null) {
+				java.util.Arrays.sort(files, java.util.Comparator.comparing(File::getName));
+				for (File file : files) {
+					if (file.isFile() && MediaType.fromFileName(file.getName()) != MediaType.UNKNOWN) {
+						String href = createMediaFileHref(file);
+						sources.putIfAbsent(href, new FileMediaSource(this, href, file));
+					}
+				}
+			}
+		} catch (SecurityException e) {
+			log.warn("Unable to list media folder: " + dir, e);
+		}
 	}
 
 	@Nullable
