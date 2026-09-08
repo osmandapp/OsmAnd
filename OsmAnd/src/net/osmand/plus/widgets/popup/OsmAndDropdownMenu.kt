@@ -1,6 +1,7 @@
 package net.osmand.plus.widgets.popup
 
 import android.content.ContextWrapper
+import android.content.res.Configuration
 import android.graphics.drawable.Drawable
 import android.util.TypedValue
 import android.view.Gravity
@@ -43,6 +44,7 @@ import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -63,6 +65,7 @@ import androidx.savedstate.SavedStateRegistryOwner
 import androidx.savedstate.findViewTreeSavedStateRegistryOwner
 import androidx.savedstate.setViewTreeSavedStateRegistryOwner
 import net.osmand.PlatformUtil
+import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 
 private val LOG = PlatformUtil.getLog("OsmAndDropdownMenu")
@@ -103,13 +106,13 @@ object OsmAndDropdownMenuDefaults {
 
 	@Composable
 	fun colors(
-		background: Color = colorAttr(R.attr.list_background_color),
-		divider: Color = colorAttr(R.attr.divider_color_basic),
-		text: Color = colorAttr(android.R.attr.textColorPrimary),
-		secondaryText: Color = colorAttr(android.R.attr.textColorSecondary),
-		icon: Color = colorAttr(R.attr.default_icon_color),
-		selected: Color = colorAttr(R.attr.default_icon_color),
-		control: Color = colorAttr(R.attr.secondary_icon_color)
+		background: Color = MaterialTheme.colorScheme.surfaceContainer,
+		divider: Color = MaterialTheme.colorScheme.outlineVariant,
+		text: Color = MaterialTheme.colorScheme.onSurface,
+		secondaryText: Color = MaterialTheme.colorScheme.onSurfaceVariant,
+		icon: Color = MaterialTheme.colorScheme.onSurfaceVariant,
+		selected: Color = MaterialTheme.colorScheme.onSurfaceVariant,
+		control: Color = MaterialTheme.colorScheme.onSurfaceVariant
 	): OsmAndDropdownMenuColors {
 		return OsmAndDropdownMenuColors(
 			background = background,
@@ -127,22 +130,9 @@ object OsmAndDropdownMenuDefaults {
 fun OsmAndDropdownMenuTheme(
 	content: @Composable () -> Unit
 ) {
-	val background = colorAttr(R.attr.list_background_color)
-	val onSurface = colorAttr(android.R.attr.textColorPrimary)
-	val onSurfaceVariant = colorAttr(R.attr.default_icon_color)
-	val outlineVariant = colorAttr(R.attr.divider_color_basic)
-	val primary = colorAttr(R.attr.active_color_primary)
-
 	MaterialTheme(
 		colorScheme = MaterialTheme.colorScheme.copy(
-			primary = primary,
-			surface = background,
-			surfaceContainer = background,
-			surfaceContainerHigh = background,
-			background = background,
-			onSurface = onSurface,
-			onSurfaceVariant = onSurfaceVariant,
-			outlineVariant = outlineVariant
+			surfaceTint = Color.Transparent
 		),
 		content = content
 	)
@@ -398,16 +388,29 @@ fun showComposeDropdownMenu(displayData: PopUpMenuDisplayData): PopupWindow? {
 	}
 
 	composeView.setContent {
-		val colors = if (displayData.bgColor != 0) {
-			OsmAndDropdownMenuDefaults.colors(background = Color(displayData.bgColor))
-		} else {
-			null
-		}
+		val isNight = (context.applicationContext as? OsmandApplication)?.let {
+			!it.settings.isLightContent()
+		} ?: ((context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES)
+
+		val colors = OsmAndDropdownMenuDefaults.colors(
+			background = if (displayData.bgColor != 0) {
+				Color(displayData.bgColor)
+			} else {
+				colorResource(if (isNight) R.color.surface_container_dark else R.color.surface_container_light)
+			},
+			divider = colorResource(if (isNight) R.color.outline_variant_dark else R.color.outline_variant_light),
+			text = colorResource(if (isNight) R.color.on_surface_dark else R.color.on_surface_light),
+			secondaryText = colorResource(if (isNight) R.color.on_surface_variant_dark else R.color.on_surface_variant_light),
+			icon = colorResource(if (isNight) R.color.on_surface_variant_dark else R.color.on_surface_variant_light),
+			selected = colorResource(if (isNight) R.color.on_surface_variant_dark else R.color.on_surface_variant_light),
+			control = colorResource(if (isNight) R.color.on_surface_variant_dark else R.color.on_surface_variant_light)
+		)
+
 		OsmAndDropdownMenuTheme {
 			Box(modifier = Modifier.padding(shadowPadding)) {
 				Surface(
 					shape = MenuDefaults.shape,
-					color = colors?.background ?: MenuDefaults.containerColor,
+					color = colors.background,
 					tonalElevation = 0.dp,
 					shadowElevation = 3.dp
 				) {
