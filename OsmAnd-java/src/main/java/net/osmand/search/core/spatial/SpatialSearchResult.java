@@ -521,7 +521,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	public static String compareKeyString(SpatialSearchResult o) {
 		String sw = o.surplusWords >= 0 ? ("+" + o.surplusWords) : ("" + o.surplusWords);
 		if (o.parent.SCORE_RANKING) {
-			return String.format("t%d%s-sc%.2f", o.parent.tCount, sw, o.score);
+			return String.format("t%d%s-w%d-sc%.2f", o.parent.tCount, sw, o.objs.size(), o.score);
 		}
 		int e = (o.getTotalRating() - o.parent.MIN_ELO_RATING) / 64;
 		String elo = e > 0 ? "-"+e+"elo" : "";
@@ -533,11 +533,11 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		long key = 0;
 		key = addCompareKey(key, 6, -o.parent.tCount); // 6 bit - 64
 		key = addCompareKey(key, 3, -o.surplusWords); // 3 bit - 8
+		key = addCompareKey(key, 6, o.objs.size()); // 6 bit - 64
 		if (o.parent.SCORE_RANKING) {
 			key = addCompareKey(key, 6, -(int) Math.round(o.score * 4)); // visibleLevel bucket
 			return key;
 		}
-		key = addCompareKey(key, 6, o.objs.size()); // 6 bit - 64
 		key = addCompareKey(key, 3, Math.min(o.sumOther(), 3)); // 3 bit - 3
 		key = addCompareKey(key, 6, -(o.getTotalRating() - o.parent.MIN_ELO_RATING) / 64); // 6 bit - 64 - group by 64 bucket
 		key = addCompareKey(key, 6, -o.sumTypeOrder()); // 6 bit - 64
@@ -558,17 +558,20 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		if (res != 0) {
 			return res;
 		}
+		// objs.size stays a hard tier: an answer found in ONE object always beats the same words
+		// stitched from two. Folding it into the score put "Dr Lucas" 74th behind every
+		// <something Lucas> x <something Drive> pair.
+		res = Integer.compare(o1.objs.size(), o2.objs.size());
+		if (res != 0) {
+			return res;
+		}
 		if (o1.parent.SCORE_RANKING) {
-			// the 8 tiers below replaced by one score, see SpatialSearchRanking
+			// the 7 tiers below replaced by one score, see SpatialSearchRanking
 			res = -Double.compare(o1.score, o2.score);
 			if (res != 0) {
 				return res;
 			}
 			return -Long.compare(o1.getFirstRef().atom.id, o2.getFirstRef().atom.id);
-		}
-		res = Integer.compare(o1.objs.size(), o2.objs.size());
-		if (res != 0) {
-			return res;
 		}
 		res = Integer.compare(o1.sumOther(), o2.sumOther());
 		if (res != 0) {
