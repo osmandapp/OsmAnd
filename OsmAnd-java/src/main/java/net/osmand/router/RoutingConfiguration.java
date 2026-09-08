@@ -26,6 +26,7 @@ import java.util.Set;
 import java.util.Stack;
 
 import gnu.trove.list.array.TIntArrayList;
+import net.osmand.shared.routing.VehicleRouter;
 
 public class RoutingConfiguration {
 

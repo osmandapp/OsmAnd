@@ -3,7 +3,6 @@ package net.osmand.router;
 import net.osmand.shared.routing.RouteRegion;
 import net.osmand.shared.routing.RouteTypeRule;
 import net.osmand.shared.routing.RouteDataObject;
-import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.shared.routing.GeneralRouterProfile;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -24,6 +23,8 @@ import java.util.Set;
 
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.set.hash.TLongHashSet;
+import net.osmand.shared.routing.RoadTraversal;
+import net.osmand.shared.routing.VehicleRouter;
 
 public class GeneralRouter implements VehicleRouter {
 	
@@ -698,7 +699,7 @@ public class GeneralRouter implements VehicleRouter {
 	}
 	
 	@Override
-	public double calculateTurnTime(RouteSegment segment, RouteSegment prev) {
+	public double calculateTurnTime(RoadTraversal segment, RoadTraversal prev) {
 		float ts = getPenaltyTransition(segment.getRoad());
 		float prevTs = getPenaltyTransition(prev.getRoad());
 		float totalPenalty = 0;

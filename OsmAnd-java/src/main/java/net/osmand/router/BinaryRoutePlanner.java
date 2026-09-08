@@ -21,6 +21,8 @@ import org.apache.commons.logging.Log;
 
 import static net.osmand.router.RoutePlannerFrontEnd.*;
 import net.osmand.shared.routing.RouteSegmentResult;
+import net.osmand.shared.routing.RoadTraversal;
+import net.osmand.shared.routing.VehicleRouter;
 
 public class BinaryRoutePlanner {
 
@@ -1066,7 +1068,7 @@ public class BinaryRoutePlanner {
 
 	// Route segment represents part (segment) of the road. 
 	// In our current data it's always length of 1: [X, X + 1] or [X - 1, X] 
-	public static class RouteSegment {
+	public static class RouteSegment implements RoadTraversal {
 		
 		// # Represents parent segment for Start & End segment 
 		public static final RouteSegment NULL = new RouteSegment(null, 0, 1);
