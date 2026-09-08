@@ -3668,7 +3668,7 @@
     <string name="weather_temperature_fahrenheit">فهرنهايت</string>
     <string name="rendering_engine_failed">تعطل عرض خريطة أوسماند مؤخرا.</string>
     <string name="share_crash_log">مشاركة سجل الأعطال</string>
-    <string name="dismiss_changes_descr">سيتم رفض كافة التغييرات.</string>
+    <string name="dismiss_changes_descr">سيتم رفض جميع التغييرات.</string>
     <string name="restart_now">أعد التشغيل الآن</string>
     <string name="map_rendering_engine_v2">عرض 3D</string>
     <string name="map_rendering_engine">طريقة عرض الخريطة</string>
@@ -5178,4 +5178,6 @@
     <string name="shared_string_heap">إدارة الذاكرة</string>
     <string name="shared_string_native">الأصلية</string>
     <string name="traffic_warning_red_light_camera">كاميرا ضوء أحمر</string>
+    <string name="sort_by_nearest_to_current_location">أقرب إلى الموقع الحالي</string>
+    <string name="sort_by_nearest_to_map_center">أقرب إلى مركز الخرائط</string>
 </resources>
