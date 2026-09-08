@@ -8,6 +8,14 @@ import kotlin.test.assertTrue
 class KTLongHashSetTest {
 
 	@Test
+	fun testSizeIsReachableBothWays() {
+		// Java code migrating off trove keeps calling size()
+		val collection = KTLongHashSet()
+		assertEquals(0, collection.size())
+		assertEquals(collection.size, collection.size())
+	}
+
+	@Test
 	fun testAddContainsRemove() {
 		val set = KTLongHashSet()
 		assertTrue(set.isEmpty())

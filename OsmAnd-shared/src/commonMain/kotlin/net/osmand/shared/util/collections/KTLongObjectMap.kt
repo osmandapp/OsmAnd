@@ -56,6 +56,14 @@ class KTLongObjectMap<V : Any> @JvmOverloads constructor(
 		threshold = capacity / 2
 	}
 
+	/**
+	 * Trove compatible alias of [size].
+	 *
+	 * Kotlin callers read the [size] property; this exists so Java code migrating off
+	 * `TLongObjectHashMap` keeps calling `size()` rather than the property accessor `getSize()`.
+	 */
+	fun size(): Int = size
+
 	fun isEmpty(): Boolean = size == 0
 
 	fun isNotEmpty(): Boolean = size != 0

@@ -10,6 +10,14 @@ import kotlin.test.assertTrue
 class KTLongObjectMapTest {
 
 	@Test
+	fun testSizeIsReachableBothWays() {
+		// Java code migrating off trove keeps calling size()
+		val collection = KTLongObjectMap<Int>()
+		assertEquals(0, collection.size())
+		assertEquals(collection.size, collection.size())
+	}
+
+	@Test
 	fun testPutGetRemove() {
 		val map = KTLongObjectMap<String>()
 		assertTrue(map.isEmpty())

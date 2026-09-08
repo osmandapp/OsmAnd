@@ -35,6 +35,14 @@ class KTIntArrayList @JvmOverloads constructor(initialCapacity: Int = DEFAULT_CA
 
 	fun capacity(): Int = data.size
 
+	/**
+	 * Trove compatible alias of [size].
+	 *
+	 * Kotlin callers read the [size] property; this exists so Java code migrating off
+	 * `TIntArrayList` keeps calling `size()` rather than the property accessor `getSize()`.
+	 */
+	fun size(): Int = size
+
 	operator fun get(index: Int): Int {
 		checkIndex(index)
 		return data[index]
@@ -138,6 +146,44 @@ class KTIntArrayList @JvmOverloads constructor(initialCapacity: Int = DEFAULT_CA
 		data.fill(0, 0, size)
 		size = 0
 	}
+
+	/** Removes [length] values starting at [offset], like `TIntArrayList.remove`. */
+	fun remove(offset: Int, length: Int) {
+		require(offset >= 0 && length >= 0 && offset + length <= size) {
+			"Bad range $offset..${offset + length} for size $size"
+		}
+		if (length == 0) {
+			return
+		}
+		if (offset + length < size) {
+			data.copyInto(data, offset, offset + length, size)
+		}
+		size -= length
+	}
+
+	/** Writes [value] into every element of the payload. */
+	fun fill(value: Int) {
+		data.fill(value, 0, size)
+	}
+
+	/**
+	 * Writes [value] from [fromIndex] up to but excluding [toIndex], growing the list when
+	 * [toIndex] runs past the end, like `TIntArrayList.fill`.
+	 */
+	fun fill(fromIndex: Int, toIndex: Int, value: Int) {
+		require(fromIndex >= 0 && fromIndex <= toIndex) { "Bad range $fromIndex..$toIndex" }
+		if (toIndex > size) {
+			ensureCapacity(toIndex)
+			size = toIndex
+		}
+		data.fill(value, fromIndex, toIndex)
+	}
+
+	fun addAll(values: IntArray) {
+		add(values, 0, values.size)
+	}
+
+	fun iterator(): KTIntIterator = KTIntIterator(this)
 
 	fun toArray(): IntArray = data.copyOf(size)
 
@@ -244,5 +290,20 @@ class KTIntArrayList @JvmOverloads constructor(initialCapacity: Int = DEFAULT_CA
 
 	companion object {
 		const val DEFAULT_CAPACITY = 10
+	}
+}
+
+/** Trove style iterator: `while (it.hasNext()) { val value = it.next() }`. */
+class KTIntIterator internal constructor(private val list: KTIntArrayList) {
+
+	private var cursor = 0
+
+	fun hasNext(): Boolean = cursor < list.size
+
+	fun next(): Int {
+		if (!hasNext()) {
+			throw NoSuchElementException()
+		}
+		return list.getQuick(cursor++)
 	}
 }

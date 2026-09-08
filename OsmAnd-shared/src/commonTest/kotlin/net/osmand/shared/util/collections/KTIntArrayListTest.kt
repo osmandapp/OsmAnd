@@ -24,6 +24,65 @@ class KTIntArrayListTest {
 	}
 
 	@Test
+	fun testSizeIsReachableBothWays() {
+		// Java code migrating off TIntArrayList keeps calling size()
+		val list = KTIntArrayList(intArrayOf(1, 2, 3))
+		assertEquals(3, list.size)
+		assertEquals(list.size, list.size())
+		list.add(4)
+		assertEquals(4, list.size())
+	}
+
+	@Test
+	fun testRemoveRange() {
+		val list = KTIntArrayList(intArrayOf(1, 2, 3, 4, 5))
+		list.remove(1, 2)
+		assertContentEquals(intArrayOf(1, 4, 5), list.toArray())
+		list.remove(2, 1)
+		assertContentEquals(intArrayOf(1, 4), list.toArray())
+		list.remove(0, 0)
+		assertContentEquals(intArrayOf(1, 4), list.toArray())
+		list.remove(0, 2)
+		assertTrue(list.isEmpty())
+		assertFailsWith<IllegalArgumentException> { list.remove(0, 1) }
+	}
+
+	@Test
+	fun testFill() {
+		val list = KTIntArrayList(intArrayOf(1, 2, 3))
+		list.fill(7)
+		assertContentEquals(intArrayOf(7, 7, 7), list.toArray())
+
+		list.fill(1, 3, 9)
+		assertContentEquals(intArrayOf(7, 9, 9), list.toArray())
+
+		// filling past the end grows the list, like TIntArrayList.fill
+		list.fill(3, 6, 4)
+		assertContentEquals(intArrayOf(7, 9, 9, 4, 4, 4), list.toArray())
+		assertFailsWith<IllegalArgumentException> { list.fill(3, 1, 0) }
+	}
+
+	@Test
+	fun testAddAllArray() {
+		val list = KTIntArrayList(intArrayOf(1))
+		list.addAll(intArrayOf(2, 3))
+		assertContentEquals(intArrayOf(1, 2, 3), list.toArray())
+	}
+
+	@Test
+	fun testIterator() {
+		val list = KTIntArrayList(intArrayOf(4, 8, 15))
+		val seen = ArrayList<Int>()
+		val it = list.iterator()
+		while (it.hasNext()) {
+			seen.add(it.next())
+		}
+		assertEquals(listOf(4, 8, 15), seen)
+		assertFailsWith<NoSuchElementException> { it.next() }
+		assertFalse(KTIntArrayList().iterator().hasNext())
+	}
+
+	@Test
 	fun testBoundsChecked() {
 		val list = KTIntArrayList()
 		list.add(1)
