@@ -790,10 +790,6 @@
     <color name="scrim_light">#52000000</color>
     <color name="scrim_dark">#52000000</color>
 
-	<color name="map_region_downloaded_fill">#66339944</color>
-	<color name="map_region_outdated_fill">#66FF8800</color>
-	<color name="map_region_deactivated_fill">#66858594</color>
-
 	
 
 
