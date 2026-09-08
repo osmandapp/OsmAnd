@@ -131,6 +131,7 @@ import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.MapViewWithLayers;
+import net.osmand.plus.views.MapViewWithLayers.RetainedRenderer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.OsmandMapTileView.OnDrawMapListener;
 import net.osmand.plus.views.controls.VerticalWidgetPanel;
@@ -191,6 +192,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	private AppInitializeListener initListener;
 	private MapViewWithLayers mapViewWithLayers;
+	private RetainedRenderer retainedRenderer;
 	private DrawerLayout drawerLayout;
 	private boolean drawerDisabled;
 
@@ -319,6 +321,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		drawerLayout = findViewById(R.id.drawer_layout);
 		mapViewWithLayers = findViewById(R.id.map_view_with_layers);
+		takeRetainedRenderer();
 
 		checkAppInitialization();
 
@@ -1037,6 +1040,28 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		super.onStop();
 	}
 
+	/**
+	 * Keeps the map renderer of the map view across an activity recreation, so that the
+	 * replacement view reuses it instead of releasing rendering and initializing it anew.
+	 * Android calls this only when the activity is going to be created again, so no
+	 * configuration change has to be guessed here. The renderer itself is put into the holder
+	 * by {@link MapViewWithLayers#onDestroy(RetainedRenderer)}, which runs after this call
+	 */
+	@SuppressWarnings("deprecation")
+	@Override
+	public Object onRetainCustomNonConfigurationInstance() {
+		retainedRenderer = new RetainedRenderer();
+		return retainedRenderer;
+	}
+
+	@SuppressWarnings("deprecation")
+	private void takeRetainedRenderer() {
+		Object retained = getLastCustomNonConfigurationInstance();
+		if (mapViewWithLayers != null && retained instanceof RetainedRenderer) {
+			mapViewWithLayers.setRetainedRenderer((RetainedRenderer) retained);
+		}
+	}
+
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
@@ -1057,7 +1082,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			getMapViewTrackingUtilities().setMapView(null);
 		}
 		if (mapViewWithLayers != null) {
-			mapViewWithLayers.onDestroy();
+			mapViewWithLayers.onDestroy(retainedRenderer);
 		}
 		lockHelper.setLockUIAdapter(null);
 		keyEventHelper.setMapActivity(null);
