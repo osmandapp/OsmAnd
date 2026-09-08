@@ -163,13 +163,21 @@ public class MapViewWithLayers extends FrameLayout {
 		}
 	}
 
-	public void onDestroy() {
+	public void onDestroy(boolean changingScreenOrientation) {
 		if (atlasMapRendererView != null) {
 			NavigationSession carNavigationSession = app.getCarNavigationSession();
 			if (carNavigationSession == null || !carNavigationSession.hasStarted()) {
 				mapView.setMapRenderer(null, true);
-				resetMapRendererView();
-				atlasMapRendererView.handleOnDestroy();
+				MapRendererContext rendererContext = NativeCoreContext.getMapRendererContext();
+				boolean retainRenderer = changingScreenOrientation && rendererContext != null
+						&& rendererContext.getMapRendererView() == atlasMapRendererView
+						&& atlasMapRendererView.prepareRendererForReuse();
+				if (!retainRenderer) {
+					resetMapRendererView();
+					atlasMapRendererView.handleOnDestroy();
+				}
+				// On rotation the context keeps the prepared view until the replacement
+				// picks it up through setupAtlasMapRendererView(), as in Android Auto.
 			}
 		}
 		mapView.clearTouchDetectors();
