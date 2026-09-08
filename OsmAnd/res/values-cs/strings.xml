@@ -4885,7 +4885,7 @@
     <string name="rendering_attr_watercolor_description">Barva vody</string>
     <string name="show_local_names">Zobrazit místní názvy</string>
     <string name="access_pinch_zoom_magnification">Zvětšení sevřením a roztažením prstů</string>
-    <string name="access_pinch_zoom_magnification_descr">Při gestech přiblížení použít škálování viewportu namísto diskrétních úrovní přiblížení.</string>
+    <string name="access_pinch_zoom_magnification_descr">Při gestu přiblížení použít škálování viewportu (zvětšení) namísto diskrétních úrovní přiblížení.</string>
     <string name="lang_en_barebones">Angličtina (základní)</string>
     <string name="show_spherical_map_description">Zobrazit sférický model Země</string>
     <string name="shared_string_price">Cena</string>
