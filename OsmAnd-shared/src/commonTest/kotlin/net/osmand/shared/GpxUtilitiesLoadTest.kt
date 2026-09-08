@@ -73,7 +73,10 @@ class GpxUtilitiesLoadTest {
 			  <wpt lat="10.0" lon="20.0">
 			    <extensions>
 			      <test:country>United States</test:country>
+			      <test:state>Virginia</test:state>
 			      <test:telephone>+1 804 828 0100</test:telephone>
+			      <test:postcode>23284</test:postcode>
+			      <test:start_date>1838</test:start_date>
 			    </extensions>
 			  </wpt>
 			</gpx>
@@ -82,11 +85,62 @@ class GpxUtilitiesLoadTest {
 		)
 
 		assertNull(gpxFile.error)
+		val expected = mapOf(
+			"test:country" to "United States",
+			"test:state" to "Virginia",
+			"test:telephone" to "+1 804 828 0100",
+			"test:postcode" to "23284",
+			"test:start_date" to "1838"
+		)
 		val extensions = gpxFile.getPointsList().single().getExtensionsToRead()
-		assertEquals("United States", extensions["test:country"])
-		assertEquals("+1 804 828 0100", extensions["test:telephone"])
+		assertEquals(expected, extensions.filterKeys { it.startsWith("test:") })
 		assertNull(extensions["country"])
 		assertNull(extensions["telephone"])
+
+		val reloaded = loadGpx(writeGpxToString(gpxFile), addGeneralTrack = false)
+		assertNull(reloaded.error)
+		val reloadedExtensions = reloaded.getPointsList().single().getExtensionsToRead()
+		assertEquals(expected, reloadedExtensions.filterKeys { it.startsWith("test:") })
+	}
+
+	@Test
+	fun testLoadGpxFileResolvesKnownNamespacesBoundToAnotherPrefix() {
+		val gpxFile = loadGpx(
+			"""
+			<gpx version="1.1" creator="test"
+			     xmlns:ns1="https://osmand.net"
+			     xmlns:ns3="http://www.garmin.com/xmlschemas/TrackPointExtension/v1"
+			     xmlns:ns2="http://www.garmin.com/xmlschemas/GpxExtensions/v3"
+			     xmlns:test="https://example.com/gpx/test">
+			  <trk>
+			    <trkseg>
+			      <trkpt lat="10.0" lon="20.0">
+			        <extensions>
+			          <ns1:width>bold</ns1:width>
+			          <ns2:DisplayColor>Red</ns2:DisplayColor>
+			          <ns3:TrackPointExtension>
+			            <ns3:hr>145</ns3:hr>
+			            <ns3:cad>91</ns3:cad>
+			          </ns3:TrackPointExtension>
+			          <test:hr>1</test:hr>
+			        </extensions>
+			      </trkpt>
+			    </trkseg>
+			  </trk>
+			</gpx>
+			""".trimIndent(),
+			addGeneralTrack = false
+		)
+
+		assertNull(gpxFile.error)
+		val point = gpxFile.tracks[0].segments[0].points[0]
+		val extensions = point.getExtensionsToRead()
+		assertEquals("145", extensions[PointAttributes.SENSOR_TAG_HEART_RATE])
+		assertEquals("91", extensions[PointAttributes.SENSOR_TAG_CADENCE])
+		assertEquals("bold", extensions[GpxUtilities.LINE_WIDTH_EXTENSION])
+		assertEquals("Red", extensions["displaycolor"])
+		assertEquals(GpxUtilities.parseColor("Red", null), point.getColor(null as Int?))
+		assertEquals("1", extensions["test:hr"])
 	}
 
 	@Test

@@ -359,7 +359,9 @@ public class AmenityUIHelper extends MenuBuilder {
 			pType = new PoiType(poiTypes, poiCategory, null, displayKey, poiCategory.getIconKeyName());
 			pType.setText(true);
 			PoiAdditionalUiRule poiAdditionalUiRule = PoiAdditionalUiRules.INSTANCE.findRule(key);
-			poiAdditionalUiRule.fillRow(app, context, rowBuilder, this, pType, key, poiTypes.getPoiTranslation(vl), subtype);
+			// A custom GPX value is user data: show it as stored, do not translate it as a POI key.
+			String value = useGenericFallback ? vl : poiTypes.getPoiTranslation(vl);
+			poiAdditionalUiRule.fillRow(app, context, rowBuilder, this, pType, key, value, subtype);
 		} else {
 			return null; // skip non-translatable NON-poiType tags
 		}

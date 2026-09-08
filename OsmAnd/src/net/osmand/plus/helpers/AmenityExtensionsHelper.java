@@ -6,6 +6,8 @@ import static net.osmand.data.Amenity.WIKIMEDIA_COMMONS;
 import static net.osmand.data.Amenity.WIKIPEDIA;
 import static net.osmand.gpx.GPXUtilities.OSM_PREFIX;
 import static net.osmand.shared.gpx.GpxUtilities.AMENITY_PREFIX;
+import static net.osmand.shared.gpx.GpxUtilities.GPXTPX_PREFIX;
+import static net.osmand.shared.gpx.GpxUtilities.OSMAND_EXTENSIONS_PREFIX;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -104,12 +106,19 @@ public class AmenityExtensionsHelper {
 		return updatedExtensions;
 	}
 
+	/**
+	 * Collects the keys stored on a point that came from an external GPX namespace, for example
+	 * "test:country". Only these may fall back to a generic row when OsmAnd's POI logic does not
+	 * recognize them; an unqualified key is an OsmAnd field ("hidden", "visited_date"), and the
+	 * OsmAnd, Garmin and Amenity namespaces are OsmAnd's own data.
+	 */
 	@NonNull
 	public static Set<String> getStoredExtensionFallbackKeys(@NonNull Map<String, String> storedExtensions) {
 		Set<String> fallbackKeys = new HashSet<>();
 		for (String key : storedExtensions.keySet()) {
-			// These prefixes already identify fields persisted from an Amenity by OsmAnd.
-			if (!key.startsWith(AMENITY_PREFIX) && !key.startsWith(OSM_PREFIX)) {
+			if (key.indexOf(':') > 0
+					&& !key.startsWith(AMENITY_PREFIX) && !key.startsWith(OSM_PREFIX)
+					&& !key.startsWith(OSMAND_EXTENSIONS_PREFIX) && !key.startsWith(GPXTPX_PREFIX)) {
 				fallbackKeys.add(key);
 			}
 		}
