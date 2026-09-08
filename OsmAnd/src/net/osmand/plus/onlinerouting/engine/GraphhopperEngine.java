@@ -12,7 +12,7 @@ import net.osmand.plus.onlinerouting.EngineParameter;
 import net.osmand.plus.onlinerouting.VehicleType;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.router.RouteCalculationProgress;
-import net.osmand.router.TurnType;
+import net.osmand.shared.routing.TurnType;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.GeoPolylineParserUtil;
 

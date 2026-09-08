@@ -58,7 +58,7 @@ import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.router.TurnType;
+import net.osmand.shared.routing.TurnType;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchSettings;

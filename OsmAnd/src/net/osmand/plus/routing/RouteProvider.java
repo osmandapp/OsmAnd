@@ -40,7 +40,7 @@ import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
 import net.osmand.router.RoutingContext;
-import net.osmand.router.TurnType;
+import net.osmand.shared.routing.TurnType;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.gpx.GPXUtilities.Route;
 import net.osmand.gpx.GPXUtilities.TrkSegment;

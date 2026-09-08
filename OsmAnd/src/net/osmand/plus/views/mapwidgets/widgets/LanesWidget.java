@@ -32,7 +32,7 @@ import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.appearance.PanelAppearanceApplier;
 import net.osmand.plus.views.mapwidgets.appearance.ResolvedPanelAppearance;
 import net.osmand.router.RouteResultPreparation;
-import net.osmand.router.TurnType;
+import net.osmand.shared.routing.TurnType;
 
 import java.util.Arrays;
 import java.util.List;

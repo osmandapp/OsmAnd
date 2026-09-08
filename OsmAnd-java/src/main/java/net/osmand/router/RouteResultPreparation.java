@@ -17,6 +17,7 @@ import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 import net.osmand.router.RoadSplitStructure.AttachedRoadInfo;
+import net.osmand.shared.routing.TurnType;
 import net.osmand.shared.routing.GeneralRouterProfile;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapAlgorithms;

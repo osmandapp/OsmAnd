@@ -1,5 +1,6 @@
 package net.osmand.router;
 
+import net.osmand.shared.routing.TurnType;
 import static net.osmand.util.RouterUtilTest.getNativeLibPath;
 import static net.osmand.util.RouterUtilTest.getRoadId;
 import static net.osmand.util.RouterUtilTest.getRoadStartPoint;

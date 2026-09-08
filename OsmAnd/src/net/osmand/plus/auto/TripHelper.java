@@ -29,7 +29,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.views.mapwidgets.LanesDrawable;
 import net.osmand.plus.views.mapwidgets.TurnDrawable;
-import net.osmand.router.TurnType;
+import net.osmand.shared.routing.TurnType;
 import net.osmand.util.Algorithms;
 
 import java.util.TimeZone;

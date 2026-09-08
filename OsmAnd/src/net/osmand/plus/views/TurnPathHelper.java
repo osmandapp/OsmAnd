@@ -16,7 +16,7 @@ import android.graphics.drawable.Drawable;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
-import net.osmand.router.TurnType;
+import net.osmand.shared.routing.TurnType;
 
 public class TurnPathHelper {
 

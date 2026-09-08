@@ -18,7 +18,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.TurnPathHelper;
-import net.osmand.router.TurnType;
+import net.osmand.shared.routing.TurnType;
 
 import java.util.ArrayList;
 import java.util.List;

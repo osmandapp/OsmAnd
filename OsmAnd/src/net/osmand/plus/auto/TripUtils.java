@@ -21,7 +21,7 @@ import net.osmand.plus.routing.NextDirectionInfo;
 import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.FormattedValue;
-import net.osmand.router.TurnType;
+import net.osmand.shared.routing.TurnType;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.util.Algorithms;
 

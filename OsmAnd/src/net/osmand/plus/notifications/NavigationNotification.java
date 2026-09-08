@@ -40,7 +40,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.views.mapwidgets.TurnDrawable;
-import net.osmand.router.TurnType;
+import net.osmand.shared.routing.TurnType;
 import net.osmand.util.Algorithms;
 
 import java.text.DateFormat;

@@ -1,5 +1,6 @@
 package net.osmand.router;
 
+import net.osmand.shared.routing.TurnType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 

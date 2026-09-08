@@ -16,7 +16,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.TurnPathHelper;
-import net.osmand.router.TurnType;
+import net.osmand.shared.routing.TurnType;
 
 import org.apache.commons.logging.Log;
 

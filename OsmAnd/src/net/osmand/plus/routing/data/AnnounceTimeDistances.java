@@ -14,7 +14,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.voice.CommandPlayer;
-import net.osmand.router.TurnType;
+import net.osmand.shared.routing.TurnType;
 
 public class AnnounceTimeDistances {
 	// Avoids false negatives: Pre-pone close announcements by this distance to allow for the possible over-estimation of the 'true' lead distance due to positioning error.

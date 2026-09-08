@@ -45,7 +45,7 @@ import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportMultiRow;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportVerticalPanel;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportWidgetResizing;
 import net.osmand.plus.views.mapwidgets.widgetstates.ResizableWidgetState;
-import net.osmand.router.TurnType;
+import net.osmand.shared.routing.TurnType;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;

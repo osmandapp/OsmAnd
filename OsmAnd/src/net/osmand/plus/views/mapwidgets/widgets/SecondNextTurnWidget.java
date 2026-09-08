@@ -14,7 +14,7 @@ import net.osmand.plus.routing.CurrentStreetName;
 import net.osmand.plus.routing.NextDirectionInfo;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.router.TurnType;
+import net.osmand.shared.routing.TurnType;
 import net.osmand.util.Algorithms;
 
 public class SecondNextTurnWidget extends NextTurnBaseWidget {

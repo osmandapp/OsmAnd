@@ -1,5 +1,6 @@
 package net.osmand.router;
 
+import net.osmand.shared.routing.TurnType;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.osmand.LocationsHolder;

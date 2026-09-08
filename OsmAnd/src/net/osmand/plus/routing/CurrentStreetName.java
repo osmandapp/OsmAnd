@@ -8,9 +8,9 @@ import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.router.ExitInfo;
+import net.osmand.shared.routing.ExitInfo;
 import net.osmand.router.RouteSegmentResult;
-import net.osmand.router.TurnType;
+import net.osmand.shared.routing.TurnType;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;

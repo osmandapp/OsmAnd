@@ -132,7 +132,7 @@ import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
-import net.osmand.router.TurnType;
+import net.osmand.shared.routing.TurnType;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
