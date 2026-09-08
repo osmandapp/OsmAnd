@@ -378,7 +378,7 @@ private fun ChipAnchor(
 					value = item.id,
 					title = item.title,
 					iconId = if (item.iconId != 0) item.iconId else null,
-					description = item.description,
+					supportingText = item.description,
 					selected = item.selected,
 					enabled = item.enabled,
 					showDividerAfter = item.showDividerBelow

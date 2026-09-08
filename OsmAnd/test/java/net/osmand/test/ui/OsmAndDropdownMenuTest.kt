@@ -18,6 +18,7 @@ import androidx.lifecycle.setViewTreeLifecycleOwner
 import androidx.test.platform.app.InstrumentationRegistry
 import net.osmand.plus.R
 import net.osmand.plus.widgets.popup.AndroidDrawableIcon
+import net.osmand.plus.widgets.popup.OsmAndDropdownMenu
 import net.osmand.plus.widgets.popup.OsmAndDropdownMenuColors
 import net.osmand.plus.widgets.popup.OsmAndDropdownMenuContent
 import net.osmand.plus.widgets.popup.OsmAndDropdownMenuDefaults
@@ -48,15 +49,20 @@ class OsmAndDropdownMenuTest {
 		assertEquals("Item Title", option.title)
 		assertNull(option.iconId)
 		assertNull(option.iconDrawable)
-		assertNull(option.description)
+		assertNull(option.supportingText)
 		assertFalse(option.selected)
 		assertNull(option.selectedColor)
 		assertFalse(option.isCheckbox)
 		assertTrue(option.enabled)
 		assertFalse(option.showDividerAfter)
+		assertFalse(option.showGapAfter)
 		assertFalse(option.titleBold)
 		assertNull(option.titleColor)
 		assertNull(option.trailingBadgeTitle)
+		assertNull(option.trailingIconId)
+		assertNull(option.trailingIconDrawable)
+		assertNull(option.trailingText)
+		assertNull(option.labelText)
 	}
 
 	@Test
@@ -65,12 +71,14 @@ class OsmAndDropdownMenuTest {
 			value = 42,
 			title = "Custom Title",
 			iconId = R.drawable.ic_action_settings,
-			description = "Custom Description",
+			supportingText = "Custom Description",
+			labelText = "Section Header",
 			selected = true,
 			selectedColor = Color.Blue,
 			isCheckbox = true,
 			enabled = false,
 			showDividerAfter = true,
+			showGapAfter = true,
 			titleBold = true,
 			titleColor = Color.Magenta,
 			trailingBadgeTitle = "Get",
@@ -80,16 +88,34 @@ class OsmAndDropdownMenuTest {
 		assertEquals(42, option.value)
 		assertEquals("Custom Title", option.title)
 		assertEquals(R.drawable.ic_action_settings, option.iconId)
-		assertEquals("Custom Description", option.description)
+		assertEquals("Custom Description", option.supportingText)
+		assertEquals("Section Header", option.labelText)
 		assertTrue(option.selected)
 		assertEquals(Color.Blue, option.selectedColor)
 		assertTrue(option.isCheckbox)
 		assertFalse(option.enabled)
 		assertTrue(option.showDividerAfter)
+		assertTrue(option.showGapAfter)
 		assertTrue(option.titleBold)
 		assertEquals(Color.Magenta, option.titleColor)
 		assertEquals("Get", option.trailingBadgeTitle)
 		assertEquals(Color.Cyan, option.trailingBadgeColor)
+	}
+
+	@Test
+	fun testDropdownMenuOptionTrailingIconAndText() {
+		val drawable = ColorDrawable(android.graphics.Color.GREEN)
+		val option = OsmAndDropdownMenuOption(
+			value = "trailing",
+			title = "Item",
+			trailingIconId = R.drawable.ic_action_settings,
+			trailingIconDrawable = drawable,
+			trailingText = "⌘X"
+		)
+
+		assertEquals(R.drawable.ic_action_settings, option.trailingIconId)
+		assertEquals(drawable, option.trailingIconDrawable)
+		assertEquals("⌘X", option.trailingText)
 	}
 
 	@Test
@@ -171,6 +197,58 @@ class OsmAndDropdownMenuTest {
 			.create()
 		val coloredOptions = listOf(coloredItem).toDropdownOptions()
 		assertEquals(Color(android.graphics.Color.BLUE), coloredOptions[0].selectedColor)
+	}
+
+	@Test
+	fun testPopUpMenuItemTrailingIconMapping() {
+		val context = InstrumentationRegistry.getInstrumentation().targetContext
+		val drawable = ColorDrawable(android.graphics.Color.RED)
+		val item = PopUpMenuItem.Builder(context)
+			.setTitle("With Trailing")
+			.setTrailingIcon(drawable)
+			.setTrailingText("Ctrl+C")
+			.setOnClickListener { }
+			.create()
+
+		val option = item.toDropdownOption()
+		assertEquals("With Trailing", option.title)
+		assertEquals(drawable, option.trailingIconDrawable)
+		assertNull(option.trailingIconId)
+		assertEquals("Ctrl+C", option.trailingText)
+		assertNull(option.trailingBadgeTitle)
+	}
+
+	@Test
+	fun testPopUpMenuItemTrailingTextOnly() {
+		val context = InstrumentationRegistry.getInstrumentation().targetContext
+		val item = PopUpMenuItem.Builder(context)
+			.setTitle("Shortcut")
+			.setTrailingText("⌘V")
+			.setOnClickListener { }
+			.create()
+
+		val option = item.toDropdownOption()
+		assertEquals("⌘V", option.trailingText)
+		assertNull(option.trailingIconDrawable)
+	}
+
+	@Test
+	fun testPopUpMenuItemSupportingTextAndLabelTextMapping() {
+		val context = InstrumentationRegistry.getInstrumentation().targetContext
+		val item = PopUpMenuItem.Builder(context)
+			.setTitle("Main Action")
+			.setSupportingText("Additional descriptive text")
+			.setLabelText("Group 1")
+			.setOnClickListener { }
+			.create()
+
+		assertEquals("Additional descriptive text", item.supportingText)
+		assertEquals("Group 1", item.labelText)
+
+		val option = item.toDropdownOption()
+		assertEquals("Main Action", option.title)
+		assertEquals("Additional descriptive text", option.supportingText)
+		assertEquals("Group 1", option.labelText)
 	}
 
 	@Test
@@ -398,7 +476,7 @@ class OsmAndDropdownMenuTest {
 	fun testComposeDropdownMenuContentRendering() {
 		val context = InstrumentationRegistry.getInstrumentation().targetContext
 		val options = listOf(
-			OsmAndDropdownMenuOption(value = "opt1", title = "First Option", description = "First Description"),
+			OsmAndDropdownMenuOption(value = "opt1", title = "First Option", supportingText = "First Description"),
 			OsmAndDropdownMenuOption(value = "opt2", title = "Second Option", trailingBadgeTitle = "PRO", enabled = false)
 		)
 
@@ -476,6 +554,69 @@ class OsmAndDropdownMenuTest {
 			val composeView = createTestComposeView(context)
 			composeView.setContent {
 				colorAttr(android.R.attr.textColorPrimary)
+			}
+		}
+	}
+
+	@Test
+	fun testPopUpMenuItemShowTopGapMapping() {
+		val context = InstrumentationRegistry.getInstrumentation().targetContext
+		val item1 = PopUpMenuItem.Builder(context).setTitle("First").create()
+		val item2 = PopUpMenuItem.Builder(context).setTitle("Second").showTopGap(true).create()
+
+		assertTrue(item2.shouldShowTopGap())
+
+		val options = listOf(item1, item2).toDropdownOptions()
+		assertEquals(2, options.size)
+		assertTrue(options[0].showGapAfter)
+		assertFalse(options[0].showDividerAfter)
+		assertFalse(options[1].showGapAfter)
+		assertFalse(options[1].showDividerAfter)
+	}
+
+
+	@Test
+	fun testComposeDropdownMenuWithGap() {
+		val context = InstrumentationRegistry.getInstrumentation().targetContext
+		val options = listOf(
+			OsmAndDropdownMenuOption(value = "1", title = "One", showGapAfter = true),
+			OsmAndDropdownMenuOption(value = "2", title = "Two")
+		)
+
+		InstrumentationRegistry.getInstrumentation().runOnMainSync {
+			val composeView = createTestComposeView(context)
+			composeView.setContent {
+				OsmAndDropdownMenuTheme {
+					OsmAndDropdownMenu(
+						expanded = true,
+						onDismissRequest = {},
+						options = options,
+						onOptionSelected = {}
+					)
+				}
+			}
+		}
+	}
+
+	@Test
+	fun testComposeDropdownMenuWithTrailingIconAndText() {
+		val context = InstrumentationRegistry.getInstrumentation().targetContext
+		val drawable = ColorDrawable(android.graphics.Color.MAGENTA)
+		val options = listOf(
+			OsmAndDropdownMenuOption(value = "1", title = "Copy", trailingText = "⌘C"),
+			OsmAndDropdownMenuOption(value = "2", title = "Settings", trailingIconId = R.drawable.ic_action_settings),
+			OsmAndDropdownMenuOption(value = "3", title = "Custom", trailingIconDrawable = drawable, trailingText = "Extra")
+		)
+
+		InstrumentationRegistry.getInstrumentation().runOnMainSync {
+			val composeView = createTestComposeView(context)
+			composeView.setContent {
+				OsmAndDropdownMenuTheme {
+					OsmAndDropdownMenuContent(
+						options = options,
+						onOptionSelected = {}
+					)
+				}
 			}
 		}
 	}

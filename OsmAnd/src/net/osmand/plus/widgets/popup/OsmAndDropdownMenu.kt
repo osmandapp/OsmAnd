@@ -13,11 +13,14 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -38,6 +41,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
@@ -71,24 +75,32 @@ import net.osmand.plus.R
 private val LOG = PlatformUtil.getLog("OsmAndDropdownMenu")
 
 private val MENU_HORIZONTAL_PADDING = 12.dp
-private val MENU_ICON_SIZE = 24.dp
+private val MENU_ICON_SIZE = 20.dp
+private val MENU_SECTION_GAP = 2.dp
+private val MENU_CONTAINER_VERTICAL_PADDING = 2.dp
+private val MENU_LABEL_HEIGHT = 32.dp
 
 data class OsmAndDropdownMenuOption<T>(
 	val value: T,
 	val title: String,
 	@DrawableRes val iconId: Int? = null,
 	val iconDrawable: Drawable? = null,
-	val description: String? = null,
+	val supportingText: String? = null,
+	val labelText: String? = null,
 	val selected: Boolean = false,
 	val selectedColor: Color? = null,
 	val isCheckbox: Boolean = false,
 	val enabled: Boolean = true,
 	val showDividerAfter: Boolean = false,
+	val showGapAfter: Boolean = false,
 	val titleBold: Boolean = false,
 	val titleColor: Color? = null,
 	val trailingBadgeTitle: String? = null,
 	val trailingBadgeIcon: Drawable? = null,
-	val trailingBadgeColor: Color? = null
+	val trailingBadgeColor: Color? = null,
+	@DrawableRes val trailingIconId: Int? = null,
+	val trailingIconDrawable: Drawable? = null,
+	val trailingText: String? = null
 )
 
 data class OsmAndDropdownMenuColors(
@@ -143,120 +155,72 @@ fun <T> OsmAndDropdownMenuContent(
 	options: List<OsmAndDropdownMenuOption<T>>,
 	onOptionSelected: (T) -> Unit,
 	modifier: Modifier = Modifier,
+	shape: Shape = MenuDefaults.shape,
+	containerColor: Color = MenuDefaults.containerColor,
+	tonalElevation: Dp = 0.dp,
+	shadowElevation: Dp = 3.dp,
+	border: BorderStroke? = null,
 	colors: OsmAndDropdownMenuColors? = null,
 	title: String? = null
 ) {
+	val resolvedContainerColor = colors?.background ?: containerColor
+	val resolvedShape = if (shape == MenuDefaults.shape) {
+		RoundedCornerShape(16.dp)
+	} else {
+		shape
+	}
 	val hasSelection = options.any { it.selected && !it.isCheckbox }
 
-	Column(modifier = modifier.width(IntrinsicSize.Max)) {
-		if (title != null) {
-			Text(
-				text = title,
-				color = colors?.secondaryText ?: MaterialTheme.colorScheme.onSurfaceVariant,
-				style = MaterialTheme.typography.labelMedium,
-				fontWeight = FontWeight.Medium,
-				modifier = Modifier.padding(
-					start = MENU_HORIZONTAL_PADDING,
-					top = 8.dp,
-					end = MENU_HORIZONTAL_PADDING,
-					bottom = 4.dp
-				)
-			)
-		}
-
-		options.forEach { option ->
-			val leadingIcon: (@Composable () -> Unit)? = when {
-				option.iconId != null -> {
-					{
-						val baseColor = colors?.icon ?: MaterialTheme.colorScheme.onSurfaceVariant
-						Icon(
-							painter = painterResource(option.iconId),
-							contentDescription = null,
-							tint = if (option.enabled) baseColor else baseColor.copy(alpha = 0.38f),
-							modifier = Modifier.size(MENU_ICON_SIZE)
-						)
-					}
+	Surface(
+		modifier = modifier,
+		shape = resolvedShape,
+		color = resolvedContainerColor,
+		tonalElevation = tonalElevation,
+		shadowElevation = shadowElevation,
+		border = border
+	) {
+		Column(
+			modifier = Modifier
+				.padding(vertical = MENU_CONTAINER_VERTICAL_PADDING)
+				.width(IntrinsicSize.Max)
+		) {
+			if (title != null) {
+				Box(
+					modifier = Modifier
+						.fillMaxWidth()
+						.heightIn(min = MENU_LABEL_HEIGHT)
+						.padding(horizontal = MENU_HORIZONTAL_PADDING),
+					contentAlignment = Alignment.CenterStart
+				) {
+					Text(
+						text = title,
+						color = colors?.secondaryText ?: MaterialTheme.colorScheme.onSurfaceVariant,
+						style = MaterialTheme.typography.labelMedium,
+						fontWeight = FontWeight.Medium
+					)
 				}
-
-				option.iconDrawable != null -> {
-					{
-						AndroidDrawableIcon(
-							drawable = option.iconDrawable,
-							modifier = Modifier.size(MENU_ICON_SIZE)
-						)
-					}
-				}
-
-				else -> null
 			}
 
-			val trailingIcon: (@Composable () -> Unit)? = when {
-				option.trailingBadgeTitle != null -> {
-					{
-						Row(
-							modifier = Modifier
-								.background(
-									color = (colors?.control ?: MaterialTheme.colorScheme.onSurfaceVariant).copy(alpha = 0.12f),
-									shape = RoundedCornerShape(4.dp)
-								)
-								.padding(horizontal = 6.dp, vertical = 2.dp),
-							verticalAlignment = Alignment.CenterVertically
-						) {
-							if (option.trailingBadgeIcon != null) {
-								AndroidDrawableIcon(
-									drawable = option.trailingBadgeIcon,
-									modifier = Modifier.size(16.dp)
-								)
-								Spacer(modifier = Modifier.width(4.dp))
-							}
-							Text(
-								text = option.trailingBadgeTitle,
-								color = option.trailingBadgeColor ?: colors?.selected ?: MaterialTheme.colorScheme.onSurfaceVariant,
-								fontSize = 12.sp,
-								fontWeight = FontWeight.Medium
-							)
-						}
-					}
-				}
-
-				option.isCheckbox -> {
-					{
-						Checkbox(
-							checked = option.selected,
-							onCheckedChange = null,
-							enabled = option.enabled,
-							colors = CheckboxDefaults.colors(
-								checkedColor = option.selectedColor ?: colors?.selected ?: MaterialTheme.colorScheme.primary,
-								uncheckedColor = colors?.control ?: MaterialTheme.colorScheme.onSurfaceVariant,
-								checkmarkColor = Color.White
-							)
+			options.forEach { option ->
+				if (option.labelText != null) {
+					Box(
+						modifier = Modifier
+							.fillMaxWidth()
+							.heightIn(min = MENU_LABEL_HEIGHT)
+							.padding(horizontal = MENU_HORIZONTAL_PADDING),
+						contentAlignment = Alignment.CenterStart
+					) {
+						Text(
+							text = option.labelText,
+							color = colors?.secondaryText ?: MaterialTheme.colorScheme.onSurfaceVariant,
+							style = MaterialTheme.typography.labelMedium,
+							fontWeight = FontWeight.Medium
 						)
 					}
 				}
 
-				option.selected -> {
-					{
-						Icon(
-							painter = painterResource(R.drawable.ic_action_done),
-							contentDescription = null,
-							tint = option.selectedColor ?: colors?.selected ?: MaterialTheme.colorScheme.primary,
-							modifier = Modifier.size(MENU_ICON_SIZE)
-						)
-					}
-				}
-
-				hasSelection -> {
-					{
-						Spacer(modifier = Modifier.size(MENU_ICON_SIZE))
-					}
-				}
-
-				else -> null
-			}
-
-			DropdownMenuItem(
-				text = {
-					if (option.description != null) {
+				val text: @Composable () -> Unit = {
+					if (option.supportingText != null) {
 						Column {
 							Text(
 								text = option.title,
@@ -267,9 +231,11 @@ fun <T> OsmAndDropdownMenuContent(
 								overflow = TextOverflow.Ellipsis
 							)
 							Text(
-								text = option.description,
+								text = option.supportingText,
 								color = colors?.secondaryText?.copy(alpha = if (option.enabled) 1f else 0.5f)
-									?: if (option.enabled) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.38f),
+									?: if (option.enabled) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.onSurfaceVariant.copy(
+										alpha = 0.38f
+									),
 								fontSize = 12.sp,
 								maxLines = 1,
 								overflow = TextOverflow.Ellipsis
@@ -285,15 +251,200 @@ fun <T> OsmAndDropdownMenuContent(
 							overflow = TextOverflow.Ellipsis
 						)
 					}
-				},
-				onClick = { onOptionSelected(option.value) },
-				leadingIcon = leadingIcon,
-				trailingIcon = trailingIcon,
-				enabled = option.enabled
-			)
+				}
 
-			if (option.showDividerAfter) {
-				HorizontalDivider(color = colors?.divider ?: MaterialTheme.colorScheme.outlineVariant)
+				val leadingIcon: (@Composable () -> Unit)? = when {
+					option.iconId != null -> {
+						{
+							val baseColor = colors?.icon ?: MaterialTheme.colorScheme.onSurfaceVariant
+							Icon(
+								painter = painterResource(option.iconId),
+								contentDescription = null,
+								tint = if (option.enabled) baseColor else baseColor.copy(alpha = 0.38f),
+								modifier = Modifier.size(MENU_ICON_SIZE)
+							)
+						}
+					}
+
+					option.iconDrawable != null -> {
+						{
+							AndroidDrawableIcon(
+								drawable = option.iconDrawable,
+								modifier = Modifier.size(MENU_ICON_SIZE)
+							)
+						}
+					}
+
+					else -> null
+				}
+
+				val trailingIcon: (@Composable () -> Unit)? = when {
+					option.trailingBadgeTitle != null -> {
+						{
+							Row(
+								modifier = Modifier
+									.background(
+										color = (colors?.control ?: MaterialTheme.colorScheme.onSurfaceVariant).copy(alpha = 0.12f),
+										shape = RoundedCornerShape(4.dp)
+									)
+									.padding(horizontal = 6.dp, vertical = 2.dp),
+								verticalAlignment = Alignment.CenterVertically
+							) {
+								if (option.trailingBadgeIcon != null) {
+									AndroidDrawableIcon(
+										drawable = option.trailingBadgeIcon,
+										modifier = Modifier.size(16.dp)
+									)
+									Spacer(modifier = Modifier.width(4.dp))
+								}
+								Text(
+									text = option.trailingBadgeTitle,
+									color = option.trailingBadgeColor ?: colors?.selected ?: MaterialTheme.colorScheme.onSurfaceVariant,
+									fontSize = 12.sp,
+									fontWeight = FontWeight.Medium
+								)
+							}
+						}
+					}
+
+					option.trailingText != null || option.trailingIconId != null || option.trailingIconDrawable != null -> {
+						{
+							Row(
+								verticalAlignment = Alignment.CenterVertically,
+								horizontalArrangement = Arrangement.spacedBy(4.dp)
+							) {
+								if (option.trailingText != null) {
+									val baseTextColor = colors?.secondaryText ?: MaterialTheme.colorScheme.onSurfaceVariant
+									Text(
+										text = option.trailingText,
+										color = if (option.enabled) baseTextColor else baseTextColor.copy(alpha = 0.38f),
+										style = MaterialTheme.typography.labelSmall,
+										maxLines = 1,
+										overflow = TextOverflow.Ellipsis
+									)
+								}
+								val trailingDrawable = when {
+									option.trailingIconId != null -> null
+									else -> option.trailingIconDrawable
+								}
+								if (option.trailingIconId != null) {
+									val baseIconColor = colors?.icon ?: MaterialTheme.colorScheme.onSurfaceVariant
+									Icon(
+										painter = painterResource(option.trailingIconId),
+										contentDescription = null,
+										tint = if (option.enabled) baseIconColor else baseIconColor.copy(alpha = 0.38f),
+										modifier = Modifier.size(MENU_ICON_SIZE)
+									)
+								} else if (trailingDrawable != null) {
+									AndroidDrawableIcon(
+										drawable = trailingDrawable,
+										modifier = Modifier.size(MENU_ICON_SIZE)
+									)
+								}
+							}
+						}
+					}
+
+					option.isCheckbox -> {
+						{
+							Checkbox(
+								checked = option.selected,
+								onCheckedChange = null,
+								enabled = option.enabled,
+								colors = CheckboxDefaults.colors(
+									checkedColor = option.selectedColor ?: colors?.selected ?: MaterialTheme.colorScheme.primary,
+									uncheckedColor = colors?.control ?: MaterialTheme.colorScheme.onSurfaceVariant,
+									checkmarkColor = Color.White
+								)
+							)
+						}
+					}
+
+					option.selected -> {
+						{
+							Icon(
+								painter = painterResource(R.drawable.ic_action_done),
+								contentDescription = null,
+								tint = option.selectedColor ?: colors?.selected ?: MaterialTheme.colorScheme.primary,
+								modifier = Modifier.size(MENU_ICON_SIZE)
+							)
+						}
+					}
+
+					hasSelection -> {
+						{
+							Spacer(modifier = Modifier.size(MENU_ICON_SIZE))
+						}
+					}
+
+					else -> null
+				}
+
+				DropdownMenuItem(
+					text = text,
+					onClick = { onOptionSelected(option.value) },
+					leadingIcon = leadingIcon,
+					trailingIcon = trailingIcon,
+					enabled = option.enabled
+				)
+
+				if (option.showDividerAfter) {
+					HorizontalDivider(
+						modifier = Modifier.padding(horizontal = MENU_HORIZONTAL_PADDING, vertical = 2.dp),
+						color = colors?.divider ?: MaterialTheme.colorScheme.outlineVariant
+					)
+				}
+			}
+		}
+	}
+}
+
+@Composable
+fun <T> OsmAndDropdownMenuContainer(
+	options: List<OsmAndDropdownMenuOption<T>>,
+	onOptionSelected: (T) -> Unit,
+	modifier: Modifier = Modifier,
+	shape: Shape = MenuDefaults.shape,
+	containerColor: Color = MenuDefaults.containerColor,
+	tonalElevation: Dp = 0.dp,
+	shadowElevation: Dp = 3.dp,
+	border: BorderStroke? = null,
+	colors: OsmAndDropdownMenuColors? = null,
+	title: String? = null
+) {
+	Column(
+		modifier = modifier.width(IntrinsicSize.Max),
+		verticalArrangement = Arrangement.spacedBy(MENU_SECTION_GAP)
+	) {
+		var startIndex = 0
+		options.forEachIndexed { index, option ->
+			if (option.showGapAfter || index == options.lastIndex) {
+				val chunk = options.subList(startIndex, index + 1)
+				val isFirst = startIndex == 0
+				val isLast = index == options.lastIndex
+				startIndex = index + 1
+				val sectionShape = if (shape == MenuDefaults.shape) {
+					when {
+						isFirst && isLast -> RoundedCornerShape(16.dp)
+						isFirst -> RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp, bottomStart = 8.dp, bottomEnd = 8.dp)
+						isLast -> RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp, bottomStart = 16.dp, bottomEnd = 16.dp)
+						else -> RoundedCornerShape(8.dp)
+					}
+				} else {
+					shape
+				}
+				OsmAndDropdownMenuContent(
+					options = chunk,
+					onOptionSelected = onOptionSelected,
+					modifier = Modifier.fillMaxWidth(),
+					shape = sectionShape,
+					containerColor = containerColor,
+					tonalElevation = tonalElevation,
+					shadowElevation = shadowElevation,
+					border = border,
+					colors = colors,
+					title = if (isFirst) title else null
+				)
 			}
 		}
 	}
@@ -325,15 +476,20 @@ fun <T> OsmAndDropdownMenu(
 			offset = offset,
 			scrollState = scrollState,
 			properties = properties,
-			shape = shape,
-			containerColor = colors?.background ?: containerColor,
-			tonalElevation = tonalElevation,
-			shadowElevation = shadowElevation,
-			border = border
+			shape = RectangleShape,
+			containerColor = Color.Transparent,
+			tonalElevation = 0.dp,
+			shadowElevation = 0.dp,
+			border = null
 		) {
-			OsmAndDropdownMenuContent(
+			OsmAndDropdownMenuContainer(
 				options = options,
 				onOptionSelected = onOptionSelected,
+				shape = shape,
+				containerColor = containerColor,
+				tonalElevation = tonalElevation,
+				shadowElevation = shadowElevation,
+				border = border,
 				colors = colors,
 				title = title
 			)
@@ -389,7 +545,7 @@ fun showComposeDropdownMenu(displayData: PopUpMenuDisplayData): PopupWindow? {
 
 	composeView.setContent {
 		val isNight = (context.applicationContext as? OsmandApplication)?.let {
-			!it.settings.isLightContent()
+			!it.settings.isLightContent
 		} ?: ((context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES)
 
 		val colors = OsmAndDropdownMenuDefaults.colors(
@@ -408,25 +564,21 @@ fun showComposeDropdownMenu(displayData: PopUpMenuDisplayData): PopupWindow? {
 
 		OsmAndDropdownMenuTheme {
 			Box(modifier = Modifier.padding(shadowPadding)) {
-				Surface(
+				OsmAndDropdownMenuContainer(
+					options = displayData.menuItems?.toDropdownOptions(displayData) ?: emptyList(),
 					shape = MenuDefaults.shape,
-					color = colors.background,
+					containerColor = colors.background,
 					tonalElevation = 0.dp,
-					shadowElevation = 3.dp
-				) {
-					OsmAndDropdownMenuContent(
-						options = displayData.menuItems?.toDropdownOptions(displayData) ?: emptyList(),
-						modifier = Modifier.padding(vertical = 8.dp),
-						colors = colors,
-						onOptionSelected = { item ->
-							val listener = item.onClickListener ?: displayData.onItemClickListener
-							listener?.onPopUpItemClicked(item)
-							if (item.shouldDismissOnClick()) {
-								popupWindow.dismiss()
-							}
+					shadowElevation = 3.dp,
+					colors = colors,
+					onOptionSelected = { item ->
+						val listener = item.onClickListener ?: displayData.onItemClickListener
+						listener?.onPopUpItemClicked(item)
+						if (item.shouldDismissOnClick()) {
+							popupWindow.dismiss()
 						}
-					)
-				}
+					}
+				)
 			}
 		}
 	}
@@ -462,12 +614,15 @@ fun showComposeDropdownMenu(displayData: PopUpMenuDisplayData): PopupWindow? {
 
 	val screenHeight = context.resources.displayMetrics.heightPixels
 	val menuItems = displayData.menuItems
-	var totalHeightDp = 16f + 16f
+	var totalHeightDp = 4f + 16f
 	if (menuItems != null) {
 		for (item in menuItems) {
 			totalHeightDp += 48f
 			if (item.shouldShowTopDivider()) {
-				totalHeightDp += 8f
+				totalHeightDp += 5f
+			}
+			if (item.shouldShowTopGap()) {
+				totalHeightDp += 6f
 			}
 		}
 	}
@@ -514,16 +669,21 @@ fun PopUpMenuItem.toDropdownOption(displayData: PopUpMenuDisplayData? = null): O
 		value = this,
 		title = title?.toString() ?: "",
 		iconDrawable = icon,
+		supportingText = supportingText?.toString(),
+		labelText = labelText?.toString(),
 		selected = isSelected,
 		selectedColor = compoundBtnColor?.takeIf { it != 0 }?.let { Color(it) },
 		isCheckbox = isCheckbox,
 		enabled = hasClickListener || isShowCompoundBtn,
 		showDividerAfter = false,
+		showGapAfter = false,
 		titleBold = isTitleBold,
 		titleColor = titleColor?.let { Color(it) },
 		trailingBadgeTitle = trailingBadge?.title?.toString(),
 		trailingBadgeIcon = trailingBadge?.icon,
-		trailingBadgeColor = trailingBadge?.titleColor?.let { Color(it) }
+		trailingBadgeColor = trailingBadge?.titleColor?.let { Color(it) },
+		trailingIconDrawable = trailingIcon,
+		trailingText = trailingText?.toString()
 	)
 }
 
@@ -531,7 +691,8 @@ fun List<PopUpMenuItem>.toDropdownOptions(displayData: PopUpMenuDisplayData? = n
 	return mapIndexed { index, item ->
 		val nextItem = getOrNull(index + 1)
 		item.toDropdownOption(displayData).copy(
-			showDividerAfter = nextItem?.shouldShowTopDivider() == true
+			showDividerAfter = nextItem?.shouldShowTopDivider() == true,
+			showGapAfter = nextItem?.shouldShowTopGap() == true
 		)
 	}
 }
