@@ -142,8 +142,25 @@ object OsmAndDropdownMenuDefaults {
 fun OsmAndDropdownMenuTheme(
 	content: @Composable () -> Unit
 ) {
+	val context = LocalContext.current
+	val isNight = (context.applicationContext as? OsmandApplication)?.let {
+		!it.settings.isLightContent
+	} ?: ((context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES)
+
+	val surfaceContainer = colorResource(if (isNight) R.color.surface_container_dark else R.color.surface_container_light)
+	val outlineVariant = colorResource(if (isNight) R.color.outline_variant_dark else R.color.outline_variant_light)
+	val onSurface = colorResource(if (isNight) R.color.on_surface_dark else R.color.on_surface_light)
+	val onSurfaceVariant = colorResource(if (isNight) R.color.on_surface_variant_dark else R.color.on_surface_variant_light)
+
 	MaterialTheme(
 		colorScheme = MaterialTheme.colorScheme.copy(
+			surface = surfaceContainer,
+			surfaceContainer = surfaceContainer,
+			surfaceContainerHigh = surfaceContainer,
+			surfaceContainerLow = surfaceContainer,
+			onSurface = onSurface,
+			onSurfaceVariant = onSurfaceVariant,
+			outlineVariant = outlineVariant,
 			surfaceTint = Color.Transparent
 		),
 		content = content
@@ -468,12 +485,22 @@ fun <T> OsmAndDropdownMenu(
 	colors: OsmAndDropdownMenuColors? = null,
 	title: String? = null
 ) {
+	val shadowPadding = 16.dp
+	val adjustedOffset = DpOffset(offset.x - shadowPadding, offset.y - shadowPadding)
+
 	OsmAndDropdownMenuTheme {
+		val resolvedColors = colors ?: OsmAndDropdownMenuDefaults.colors()
+		val resolvedContainerColor = if (containerColor != MenuDefaults.containerColor) {
+			containerColor
+		} else {
+			resolvedColors.background
+		}
+
 		DropdownMenu(
 			expanded = expanded,
 			onDismissRequest = onDismissRequest,
 			modifier = modifier,
-			offset = offset,
+			offset = adjustedOffset,
 			scrollState = scrollState,
 			properties = properties,
 			shape = RectangleShape,
@@ -482,17 +509,19 @@ fun <T> OsmAndDropdownMenu(
 			shadowElevation = 0.dp,
 			border = null
 		) {
-			OsmAndDropdownMenuContainer(
-				options = options,
-				onOptionSelected = onOptionSelected,
-				shape = shape,
-				containerColor = containerColor,
-				tonalElevation = tonalElevation,
-				shadowElevation = shadowElevation,
-				border = border,
-				colors = colors,
-				title = title
-			)
+			Box(modifier = Modifier.padding(shadowPadding)) {
+				OsmAndDropdownMenuContainer(
+					options = options,
+					onOptionSelected = onOptionSelected,
+					shape = shape,
+					containerColor = resolvedContainerColor,
+					tonalElevation = tonalElevation,
+					shadowElevation = shadowElevation,
+					border = border,
+					colors = resolvedColors,
+					title = title
+				)
+			}
 		}
 	}
 }
@@ -544,25 +573,15 @@ fun showComposeDropdownMenu(displayData: PopUpMenuDisplayData): PopupWindow? {
 	}
 
 	composeView.setContent {
-		val isNight = (context.applicationContext as? OsmandApplication)?.let {
-			!it.settings.isLightContent
-		} ?: ((context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES)
-
-		val colors = OsmAndDropdownMenuDefaults.colors(
-			background = if (displayData.bgColor != 0) {
-				Color(displayData.bgColor)
-			} else {
-				colorResource(if (isNight) R.color.surface_container_dark else R.color.surface_container_light)
-			},
-			divider = colorResource(if (isNight) R.color.outline_variant_dark else R.color.outline_variant_light),
-			text = colorResource(if (isNight) R.color.on_surface_dark else R.color.on_surface_light),
-			secondaryText = colorResource(if (isNight) R.color.on_surface_variant_dark else R.color.on_surface_variant_light),
-			icon = colorResource(if (isNight) R.color.on_surface_variant_dark else R.color.on_surface_variant_light),
-			selected = colorResource(if (isNight) R.color.on_surface_variant_dark else R.color.on_surface_variant_light),
-			control = colorResource(if (isNight) R.color.on_surface_variant_dark else R.color.on_surface_variant_light)
-		)
-
 		OsmAndDropdownMenuTheme {
+			val colors = OsmAndDropdownMenuDefaults.colors(
+				background = if (displayData.bgColor != 0) {
+					Color(displayData.bgColor)
+				} else {
+					MaterialTheme.colorScheme.surfaceContainer
+				}
+			)
+
 			Box(modifier = Modifier.padding(shadowPadding)) {
 				OsmAndDropdownMenuContainer(
 					options = displayData.menuItems?.toDropdownOptions(displayData) ?: emptyList(),
