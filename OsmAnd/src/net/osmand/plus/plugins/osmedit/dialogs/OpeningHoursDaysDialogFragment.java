@@ -13,7 +13,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.BaseAlertDialogFragment;
 import net.osmand.plus.plugins.osmedit.fragments.BasicEditPoiFragment;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.util.OpeningHoursParser.BasicOpeningHourRule;
+import net.osmand.shared.util.OpeningHoursParser.BasicOpeningHourRule;
 
 import org.apache.commons.logging.Log;
 

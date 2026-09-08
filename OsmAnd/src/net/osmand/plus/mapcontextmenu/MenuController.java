@@ -69,7 +69,7 @@ import net.osmand.plus.views.layers.PlaceDetailsObject;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.shared.aistracker.AisObject;
 import net.osmand.shared.gpx.primitives.WptPt;
-import net.osmand.util.OpeningHoursParser.OpeningHours;
+import net.osmand.shared.util.OpeningHoursParser.OpeningHours;
 
 import java.util.LinkedList;
 import java.util.List;

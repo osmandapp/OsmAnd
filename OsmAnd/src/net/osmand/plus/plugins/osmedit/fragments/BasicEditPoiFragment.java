@@ -34,7 +34,7 @@ import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.InsetsUtils.InsetSide;
-import net.osmand.util.OpeningHoursParser;
+import net.osmand.shared.util.OpeningHoursParser;
 
 import java.util.ArrayList;
 import java.util.List;

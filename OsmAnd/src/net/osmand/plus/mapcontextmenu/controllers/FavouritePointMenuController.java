@@ -32,7 +32,7 @@ import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
-import net.osmand.util.OpeningHoursParser;
+import net.osmand.shared.util.OpeningHoursParser;
 import net.osmand.view.GravityDrawable;
 
 import java.util.List;

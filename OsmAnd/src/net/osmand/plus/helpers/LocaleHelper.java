@@ -19,7 +19,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.util.Algorithms;
-import net.osmand.util.OpeningHoursParser;
+import net.osmand.shared.util.OpeningHoursParser;
 
 import org.apache.commons.logging.Log;
 
@@ -197,8 +197,8 @@ public class LocaleHelper {
 	}
 
 	public void updateTimeFormatting(boolean twelveHoursFormatting, @NonNull Locale locale) {
-		OpeningHoursParser.initLocalStrings(locale);
-		OpeningHoursParser.setTwelveHourFormattingEnabled(twelveHoursFormatting, locale);
+		OpeningHoursParser.initLocalStrings(locale.toLanguageTag());
+		OpeningHoursParser.setTwelveHourFormattingEnabled(twelveHoursFormatting, locale.toLanguageTag());
 		OsmAndFormatter.setTwelveHoursFormatting(twelveHoursFormatting, locale);
 	}
 

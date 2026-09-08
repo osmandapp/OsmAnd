@@ -98,7 +98,7 @@ import net.osmand.shared.palette.data.PaletteRepository;
 import net.osmand.shared.gpx.SmartFolderHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
-import net.osmand.util.OpeningHoursParser;
+import net.osmand.shared.util.OpeningHoursParser;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParserException;

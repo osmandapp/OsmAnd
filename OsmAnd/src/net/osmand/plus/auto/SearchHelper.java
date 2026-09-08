@@ -26,7 +26,7 @@ import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import net.osmand.util.OpeningHoursParser;
+import net.osmand.shared.util.OpeningHoursParser;
 
 import java.util.ArrayList;
 import java.util.List;

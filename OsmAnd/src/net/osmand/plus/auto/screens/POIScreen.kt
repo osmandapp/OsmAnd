@@ -33,7 +33,7 @@ import net.osmand.search.core.SearchPhrase
 import net.osmand.search.core.SearchResult
 import net.osmand.util.Algorithms
 import net.osmand.util.MapUtils
-import net.osmand.util.OpeningHoursParser
+import net.osmand.shared.util.OpeningHoursParser
 
 class POIScreen(
     carContext: CarContext,
@@ -127,7 +127,7 @@ class POIScreen(
                     Algorithms.extendRectToContainPoint(mapRect, latLon.longitude, latLon.latitude)
                     val openHourInfo = OpeningHoursParser.getInfo(amenity.openingHours)
                     if(openHourInfo != null && openHourInfo.isNotEmpty()) {
-                        openHour = " • ${openHourInfo[0].shortInfo}"
+                        openHour = " • ${openHourInfo[0].getShortInfo()}"
                     }
                     if(!Algorithms.isEmpty(amenity.streetName)) {
                         description = " • ${amenity.streetName}"

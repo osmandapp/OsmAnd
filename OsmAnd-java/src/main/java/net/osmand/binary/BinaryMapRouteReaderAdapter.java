@@ -16,7 +16,7 @@ import net.osmand.binary.OsmandOdb.RouteData;
 import net.osmand.binary.RouteDataObject.RestrictionInfo;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import net.osmand.util.OpeningHoursParser;
+import net.osmand.shared.util.OpeningHoursParser;
 
 import org.apache.commons.logging.Log;
 
@@ -187,10 +187,8 @@ public class BinaryMapRouteReaderAdapter {
 
 		public int conditionalValue(long time) {
 			if (conditional()) {
-				Calendar i = Calendar.getInstance();
-				i.setTimeInMillis(time);
 				for (RouteTypeCondition c : conditions) {
-					if (c.hours != null && c.hours.isOpenedForTime(i)) {
+					if (c.hours != null && c.hours.isOpenedForTime(time)) {
 						return c.ruleid;
 					}
 				}

@@ -2,7 +2,7 @@ package net.osmand.plus.mapcontextmenu.builders.rows.behaviour
 
 import net.osmand.data.AmenityTagEntry
 import net.osmand.plus.R
-import net.osmand.util.OpeningHoursParser
+import net.osmand.shared.util.OpeningHoursParser
 import java.util.Calendar
 
 object OpeningHoursRowBehavior : DefaultPoiAdditionalRowBehaviour() {
@@ -20,9 +20,7 @@ object OpeningHoursRowBehavior : DefaultPoiAdditionalRowBehaviour() {
 		    val openingHours = OpeningHoursParser.parseOpenedHours(vl)
 		    if (openingHours != null) {
 			    vl = openingHours.toLocalString()
-			    val inst = Calendar.getInstance().apply { timeInMillis = System.currentTimeMillis() }
-
-			    val opened = openingHours.isOpenedForTime(inst)
+			    val opened = openingHours.isOpenedForTime(System.currentTimeMillis())
 			    builder.setTextColor(if (opened) R.color.color_ok else R.color.color_invalid)
 		    }
 		    builder.setText(vl.replace("; ", "\n"))

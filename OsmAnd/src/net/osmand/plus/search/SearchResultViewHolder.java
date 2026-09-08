@@ -55,8 +55,9 @@ import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.search.core.TopIndexFilter;
 import net.osmand.search.core.spatial.SpatialSearchResult;
 import net.osmand.util.Algorithms;
-import net.osmand.util.OpeningHoursParser;
-import net.osmand.util.OpeningHoursParser.OpeningHours;
+import net.osmand.shared.util.OpeningHoursParser;
+import net.osmand.shared.util.OpeningHoursTime;
+import net.osmand.shared.util.OpeningHoursParser.OpeningHours;
 
 import java.util.Calendar;
 import java.util.List;
@@ -150,7 +151,7 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 							rs.getInfo(),
 							ContextCompat.getColor(app, colorOpen),
 							ContextCompat.getColor(app, colorClosed), true);
-					int colorId = rs.isOpenedForTime(calendar) ? colorOpen : colorClosed;
+					int colorId = rs.isOpenedForTime(calendar.getTimeInMillis()) ? colorOpen : colorClosed;
 					timeLayout.setVisibility(View.VISIBLE);
 
 					TextView timeText = view.findViewById(R.id.time);
@@ -421,11 +422,11 @@ public class SearchResultViewHolder extends RecyclerView.ViewHolder {
 							ContextCompat.getColor(app, colorOpen),
 							ContextCompat.getColor(app, colorClosed), true);
 
-					String nearToOpen = rs.getNearToOpeningTime(calendar, OpeningHours.ALL_SEQUENCES);
+					String nearToOpen = rs.getNearToOpeningTime(OpeningHoursTime.ofEpochMillis(calendar.getTimeInMillis()), OpeningHours.ALL_SEQUENCES);
 					boolean isNearToOpen = !Algorithms.isEmpty(nearToOpen);
 
 					int colorId;
-					if (rs.isOpenedForTime(calendar)) {
+					if (rs.isOpenedForTime(calendar.getTimeInMillis())) {
 						colorId = colorOpen;
 					} else if (isNearToOpen) {
 						colorId = colorNearToOpen;

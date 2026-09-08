@@ -40,8 +40,8 @@ import net.osmand.search.core.SearchSettings.SortType;
 import net.osmand.search.core.TopIndexFilter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import net.osmand.util.OpeningHoursParser;
-import net.osmand.util.OpeningHoursParser.OpeningHours;
+import net.osmand.shared.util.OpeningHoursParser;
+import net.osmand.shared.util.OpeningHoursParser.OpeningHours;
 
 import org.apache.commons.logging.Log;
 
@@ -545,7 +545,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTimeInMillis(System.currentTimeMillis());
 
-		return openedHours.isOpenedForTime(calendar);
+		return openedHours.isOpenedForTime(calendar.getTimeInMillis());
 	}
 
 	private String extractNameFilter(@NonNull Amenity amenity, @Nullable List<String> unknownFilters) {

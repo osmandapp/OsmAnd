@@ -32,7 +32,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.util.Algorithms;
-import net.osmand.util.OpeningHoursParser;
+import net.osmand.shared.util.OpeningHoursParser;
 
 import java.util.Calendar;
 
@@ -104,7 +104,7 @@ public class WikiItemViewHolder extends RecyclerView.ViewHolder {
 							rs.getInfo(),
 							ContextCompat.getColor(app, colorOpen),
 							ContextCompat.getColor(app, colorClosed), true);
-					int colorId = rs.isOpenedForTime(Calendar.getInstance()) ? colorOpen : colorClosed;
+					int colorId = rs.isOpenedForTime(System.currentTimeMillis()) ? colorOpen : colorClosed;
 					timeLayout.setVisibility(View.VISIBLE);
 
 					TextView timeText = timeLayout.findViewById(R.id.time);

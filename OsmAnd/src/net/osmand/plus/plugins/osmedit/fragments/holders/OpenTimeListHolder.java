@@ -21,7 +21,8 @@ import net.osmand.plus.plugins.osmedit.dialogs.OpeningHoursHoursDialogFragment;
 import net.osmand.plus.plugins.osmedit.fragments.EditPoiContentAdapter.EditPoiAdapterListener;
 import net.osmand.plus.plugins.osmedit.fragments.EditPoiContentAdapter.EditPoiListener;
 import net.osmand.util.Algorithms;
-import net.osmand.util.OpeningHoursParser;
+import net.osmand.shared.util.collections.KTIntArrayList;
+import net.osmand.shared.util.OpeningHoursParser;
 
 import gnu.trove.list.array.TIntArrayList;
 
@@ -62,8 +63,8 @@ public class OpenTimeListHolder extends RecyclerView.ViewHolder {
 					OpeningHoursDaysDialogFragment.showInstance(fragmentManager, rule, position);
 				});
 
-				TIntArrayList startTimes = rule.getStartTimes();
-				TIntArrayList endTimes = rule.getEndTimes();
+				KTIntArrayList startTimes = rule.getStartTimes();
+				KTIntArrayList endTimes = rule.getEndTimes();
 				for (int i = 0; i < startTimes.size(); i++) {
 					View timeFromToLayout = LayoutInflater.from(activity)
 							.inflate(R.layout.time_from_to_layout, timeListContainer, false);
