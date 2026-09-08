@@ -33,9 +33,11 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.ApproximationType;
 import net.osmand.router.*;
+import net.osmand.shared.data.KLatLon;
 import net.osmand.shared.routing.GeneralRouter.RoutingParameter;
 import net.osmand.shared.routing.GeneralRouter.RoutingParameterType;
 import net.osmand.shared.routing.RoutingConfiguration;
+import net.osmand.shared.routing.PrecalculatedRouteDirection;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 import net.osmand.shared.routing.RoutingConfiguration.Builder;
@@ -331,9 +333,9 @@ public class RouteProvider {
 		if (calcGPXRoute) {
 			ArrayList<Location> sublist = findStartAndEndLocationsFromRoute(params.gpxRoute.points,
 					params.start, params.end, null, null);
-			LatLon[] latLon = new LatLon[sublist.size()];
+			KLatLon[] latLon = new KLatLon[sublist.size()];
 			for (int k = 0; k < latLon.length; k++) {
-				latLon[k] = new LatLon(sublist.get(k).getLatitude(), sublist.get(k).getLongitude());
+				latLon[k] = new KLatLon(sublist.get(k).getLatitude(), sublist.get(k).getLongitude());
 			}
 			precalculated = PrecalculatedRouteDirection.build(latLon, generalRouter.getMaxSpeed());
 			precalculated.setFollowNext(true);

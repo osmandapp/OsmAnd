@@ -19,6 +19,7 @@ import net.osmand.shared.routing.RouteRegion;
 import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.shared.routing.RouteCalculationProgress;
 import net.osmand.shared.routing.RoutingConfiguration;
+import net.osmand.shared.routing.PrecalculatedRouteDirection;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
@@ -478,7 +479,7 @@ public class RoutePlannerFrontEnd {
 				ctx.initTargetPoint(recalculationEnd);
 			}
 			if (routeDirection != null) {
-				ctx.precalculatedRouteDirection = routeDirection.adopt(ctx);
+				ctx.precalculatedRouteDirection = routeDirection.adopt(ctx.startX, ctx.startY, ctx.targetX, ctx.targetY, ctx.getRouter());
 			} else {
 				ctx.precalculatedRouteDirection = null;
 			}
@@ -719,7 +720,7 @@ public class RoutePlannerFrontEnd {
 			ctx.initStartAndTargetPoints(start, end);
 		}
 		if (routeDirection != null) {
-			ctx.precalculatedRouteDirection = routeDirection.adopt(ctx);
+			ctx.precalculatedRouteDirection = routeDirection.adopt(ctx.startX, ctx.startY, ctx.targetX, ctx.targetY, ctx.getRouter());
 		} else {
 			ctx.precalculatedRouteDirection = null;
 		}

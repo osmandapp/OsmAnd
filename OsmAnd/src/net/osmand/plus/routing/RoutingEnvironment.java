@@ -1,6 +1,6 @@
 package net.osmand.plus.routing;
 
-import net.osmand.router.PrecalculatedRouteDirection;
+import net.osmand.shared.routing.PrecalculatedRouteDirection;
 import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RoutingContext;
 
