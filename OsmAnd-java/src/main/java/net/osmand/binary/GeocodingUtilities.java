@@ -4,7 +4,7 @@ import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
+import net.osmand.shared.routing.RouteRegion;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
@@ -35,6 +35,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import net.osmand.shared.routing.RouteDataObject;
 
 public class GeocodingUtilities {
 
@@ -193,7 +194,7 @@ public class GeocodingUtilities {
 				sr.regionLen = road.region.getLength();
 				List<RouteRegion> plst = streetNames.get(sr.streetName);
 				if (plst == null) {
-					plst = new ArrayList<BinaryMapRouteReaderAdapter.RouteRegion>();
+					plst = new ArrayList<RouteRegion>();
 					streetNames.put(sr.streetName, plst);
 				}
 				if (!plst.contains(road.region)) {

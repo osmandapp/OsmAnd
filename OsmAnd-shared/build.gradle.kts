@@ -58,6 +58,7 @@ kotlin {
 	val statelyVersion = "2.1.0"
 	val coilVersion = "3.1.0"
     val ktorVersion = "3.1.3"
+	val junidecodeVersion = "0.1.1"
 
 	sourceSets {
 		commonMain.dependencies {
@@ -78,6 +79,7 @@ kotlin {
 			implementation("net.sf.kxml:kxml2:$kxml2Version")
 			implementation("org.xerial:sqlite-jdbc:$sqliteJDBCVersion")
 			implementation("commons-logging:commons-logging:$commonLoggingVersion")
+			implementation("com.moparisthebest:junidecode:$junidecodeVersion")
             implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
 		}
 		androidMain.dependencies {
@@ -86,6 +88,7 @@ kotlin {
 			implementation("net.sf.kxml:kxml2:$kxml2Version")
 			implementation("io.coil-kt.coil3:coil-core:$coilVersion")
 			implementation("io.coil-kt.coil3:coil-network-okhttp:$coilVersion")
+			implementation("com.moparisthebest:junidecode:$junidecodeVersion")
             implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
 		}
 		iosMain.dependencies {

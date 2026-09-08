@@ -16,7 +16,7 @@ import androidx.core.content.ContextCompat;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
-import net.osmand.binary.RouteDataObject;
+import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.data.Amenity;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
@@ -59,6 +59,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import net.osmand.shared.data.KLatLon;
 
 
 public class FavouritesHelper {
@@ -917,7 +918,7 @@ public class FavouritesHelper {
 					@Override
 					public boolean publish(RouteDataObject routeDataObject) {
 						if (routeDataObject != null) {
-							LatLon latLon = new LatLon(point.getLatitude(), point.getLongitude());
+							KLatLon latLon = new KLatLon(point.getLatitude(), point.getLongitude());
 							routeDataObject.calculateHeightArray(latLon);
 							point.setAltitude(routeDataObject.heightByCurrentLocation);
 						}

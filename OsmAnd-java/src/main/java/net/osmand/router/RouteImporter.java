@@ -8,9 +8,9 @@ import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
+import net.osmand.shared.routing.RouteRegion;
 import net.osmand.binary.RouteDataBundle;
-import net.osmand.binary.RouteDataObject;
+import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.binary.StringBundle;
 import net.osmand.util.Algorithms;
 
@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
+import static net.osmand.shared.routing.RouteDataObject.HEIGHT_UNDEFINED;
 
 public class RouteImporter {
 

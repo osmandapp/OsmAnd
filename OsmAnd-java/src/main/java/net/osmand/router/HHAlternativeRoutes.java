@@ -12,7 +12,7 @@ import java.util.Map;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.TLongSet;
 import gnu.trove.set.hash.TLongHashSet;
-import net.osmand.binary.RouteDataObject;
+import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;

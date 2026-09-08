@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.Location;
-import net.osmand.binary.RouteDataObject;
+import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;

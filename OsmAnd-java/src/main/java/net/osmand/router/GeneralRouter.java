@@ -1,8 +1,8 @@
 package net.osmand.router;
 
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
+import net.osmand.shared.routing.RouteRegion;
 import net.osmand.shared.routing.RouteTypeRule;
-import net.osmand.binary.RouteDataObject;
+import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.shared.routing.GeneralRouterProfile;
 import net.osmand.util.Algorithms;

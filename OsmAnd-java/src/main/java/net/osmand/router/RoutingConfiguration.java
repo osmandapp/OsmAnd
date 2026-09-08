@@ -2,7 +2,7 @@ package net.osmand.router;
 
 import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
-import net.osmand.binary.RouteDataObject;
+import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.osm.edit.Node;

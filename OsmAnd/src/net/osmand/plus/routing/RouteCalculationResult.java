@@ -1,6 +1,6 @@
 package net.osmand.plus.routing;
 
-import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
+import static net.osmand.shared.routing.RouteDataObject.HEIGHT_UNDEFINED;
 
 import android.content.Context;
 
@@ -9,9 +9,9 @@ import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
+import net.osmand.shared.routing.RouteRegion;
 import net.osmand.shared.routing.RouteTypeRule;
-import net.osmand.binary.RouteDataObject;
+import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.QuadRect;

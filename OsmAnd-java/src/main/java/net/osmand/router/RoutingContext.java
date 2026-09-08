@@ -14,7 +14,6 @@ import java.util.Map.Entry;
 
 import org.apache.commons.logging.Log;
 
-import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.iterator.TLongIterator;
 import gnu.trove.map.TLongObjectMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
@@ -24,10 +23,9 @@ import net.osmand.NativeLibrary.NativeRouteSearchResult;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
-import net.osmand.binary.BinaryMapRouteReaderAdapter;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
-import net.osmand.binary.RouteDataObject;
+import net.osmand.shared.routing.RouteRegion;
+import net.osmand.shared.routing.RouteSubregion;
+import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.QuadRect;
 import net.osmand.map.WorldRegion;
@@ -38,6 +36,7 @@ import net.osmand.router.BinaryRoutePlanner.RouteSegmentVisitor;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 import net.osmand.router.RoutingConfiguration.DirectionPoint;
 import net.osmand.util.MapUtils;
+import net.osmand.shared.util.collections.KTIntObjectIterator;
 
 
 public class RoutingContext {
@@ -130,7 +129,7 @@ public class RoutingContext {
 		this.calculationMode = calcMode;
 		for (BinaryMapIndexReader mr : list) {
 			List<RouteRegion> rr = mr.getRoutingIndexes();
-			List<RouteSubregion> subregions = new ArrayList<BinaryMapRouteReaderAdapter.RouteSubregion>();
+			List<RouteSubregion> subregions = new ArrayList<RouteSubregion>();
 			for (RouteRegion r : rr) {
 				List<RouteSubregion> subregs = calcMode == RouteCalculationMode.BASE ? r.getBaseSubregions() :
 					r.getSubregions();
@@ -915,7 +914,7 @@ public class RoutingContext {
 		sz += 8 + 4; // overhead
 		if (o.names != null) {
 			sz += 12;
-			TIntObjectIterator<String> it = o.names.iterator();
+			KTIntObjectIterator<String> it = o.names.iterator();
 			while(it.hasNext()) {
 				it.advance();
 				String vl = it.value();

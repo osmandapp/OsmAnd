@@ -433,6 +433,14 @@ public class Location {
      * Returns true if the provider is able to report bearing information,
      * false otherwise.  The default implementation returns false.
      */
+    /**
+     * Bearing of the fix in degrees, or null when there is no fix or it carries no bearing.
+     * Shaped for the shared routing code, which has no Location of its own yet.
+     */
+    public static Float bearingOf(Location location) {
+        return location != null && location.hasBearing() ? location.getBearing() : null;
+    }
+
     public boolean hasBearing() {
         return mHasBearing;
     }

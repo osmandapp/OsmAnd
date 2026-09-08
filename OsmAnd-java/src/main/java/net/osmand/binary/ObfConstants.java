@@ -12,6 +12,7 @@ import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Entity.EntityType;
 import net.osmand.osm.edit.Relation;
 import net.osmand.util.Algorithms;
+import net.osmand.shared.routing.RouteDataObject;
 
 public class ObfConstants {
 

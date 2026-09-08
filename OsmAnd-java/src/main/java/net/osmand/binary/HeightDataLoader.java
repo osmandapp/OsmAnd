@@ -3,7 +3,7 @@ package net.osmand.binary;
 
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
+import net.osmand.shared.routing.RouteSubregion;
 import net.osmand.data.QuadRect;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.MapUtils;
@@ -17,6 +17,8 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import net.osmand.shared.routing.RouteDataObject;
+import net.osmand.shared.routing.RouteRegion;
 
 public class HeightDataLoader {
     public static final int ZOOM_TO_LOAD_TILES = 15;
@@ -38,7 +40,7 @@ public class HeightDataLoader {
     public HeightDataLoader(BinaryMapIndexReader[] readers) {
         for (BinaryMapIndexReader r : readers) {
             List<RouteSubregion> subregions = new ArrayList<>();
-            for (BinaryMapRouteReaderAdapter.RouteRegion rInd : r.getRoutingIndexes()) {
+            for (RouteRegion rInd : r.getRoutingIndexes()) {
                 List<RouteSubregion> subregs = rInd.getSubregions();
                 // create a copy to avoid leaks to the original structure
                 for (RouteSubregion rs : subregs) {
@@ -112,7 +114,7 @@ public class HeightDataLoader {
                                      ResultMatcher<RouteDataObject> matcher) throws IOException {
         int loaded = 0;
         HashSet<Long> deletedIds = new HashSet<>();
-        Map<Long, BinaryMapRouteReaderAdapter.RouteRegion> usedIds = new HashMap<>();
+        Map<Long, RouteRegion> usedIds = new HashMap<>();
         BinaryMapIndexReader.SearchRequest<RouteDataObject> req = BinaryMapIndexReader.buildSearchRouteRequest(
                 x << ZOOM_TO_LOAD_TILES_SHIFT_L, (x + 1) << ZOOM_TO_LOAD_TILES_SHIFT_L,
                 y << ZOOM_TO_LOAD_TILES_SHIFT_L, (y + 1) << ZOOM_TO_LOAD_TILES_SHIFT_L, null);

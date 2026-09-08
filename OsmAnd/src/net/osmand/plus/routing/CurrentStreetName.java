@@ -5,7 +5,7 @@ import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_PREPARE_T
 import androidx.annotation.NonNull;
 
 import net.osmand.Location;
-import net.osmand.binary.RouteDataObject;
+import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.shared.routing.ExitInfo;

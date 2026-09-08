@@ -24,10 +24,10 @@ import com.google.gson.JsonObject;
 
 import gnu.trove.list.array.TIntArrayList;
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
+import net.osmand.shared.routing.RouteRegion;
+import net.osmand.shared.routing.RouteSubregion;
 import net.osmand.binary.ObfConstants;
-import net.osmand.binary.RouteDataObject;
+import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.QuadRect;

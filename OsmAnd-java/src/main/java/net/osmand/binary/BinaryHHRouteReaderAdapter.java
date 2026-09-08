@@ -20,6 +20,7 @@ import net.osmand.router.HHRouteDataStructure.HHRouteRegionPointsCtx;
 import net.osmand.router.HHRouteDataStructure.HHRoutingContext;
 import net.osmand.router.HHRouteDataStructure.NetworkDBPoint;
 import net.osmand.util.MapUtils;
+import net.osmand.shared.binary.BinaryIndexPart;
 
 public class BinaryHHRouteReaderAdapter {
 	protected static final Log LOG = PlatformUtil.getLog(BinaryHHRouteReaderAdapter.class);

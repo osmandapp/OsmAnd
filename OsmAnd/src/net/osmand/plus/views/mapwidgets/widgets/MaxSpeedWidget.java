@@ -7,7 +7,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.binary.RouteDataObject;
+import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
@@ -15,6 +15,7 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.FormattedValue;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.Location;
 
 public class MaxSpeedWidget extends SimpleWidget {
 
@@ -57,7 +58,7 @@ public class MaxSpeedWidget extends SimpleWidget {
 				&& mapViewTrackingUtilities.isMapLinkedToLocation()) {
 			RouteDataObject routeObject = locationProvider.getLastKnownRouteSegment();
 			if (routeObject != null) {
-				boolean direction = routeObject.bearingVsRouteDirection(locationProvider.getLastKnownLocation());
+				boolean direction = routeObject.bearingVsRouteDirection(Location.bearingOf(locationProvider.getLastKnownLocation()));
 				return routeObject.getMaximumSpeed(direction);
 			}
 		} else {

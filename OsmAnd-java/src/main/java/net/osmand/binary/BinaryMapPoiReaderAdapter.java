@@ -46,6 +46,7 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.search.core.HashQuadTree;
 import net.osmand.util.MapUtils;
 import net.osmand.util.SearchAlgorithms;
+import net.osmand.shared.binary.BinaryIndexPart;
 
 public class BinaryMapPoiReaderAdapter {
 	static final Log LOG = PlatformUtil.getLog(BinaryMapPoiReaderAdapter.class);

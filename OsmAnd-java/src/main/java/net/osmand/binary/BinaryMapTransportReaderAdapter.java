@@ -20,6 +20,7 @@ import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
 import net.osmand.util.MapUtils;
 import net.osmand.util.TransliterationHelper;
+import net.osmand.shared.binary.BinaryIndexPart;
 
 public class BinaryMapTransportReaderAdapter {
 	private CodedInputStream codedIS;

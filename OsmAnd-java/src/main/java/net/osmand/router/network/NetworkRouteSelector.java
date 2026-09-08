@@ -4,7 +4,7 @@ package net.osmand.router.network;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.shared.routing.RouteTypeRule;
-import net.osmand.binary.RouteDataObject;
+import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.osm.OsmRouteType;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.Metadata;

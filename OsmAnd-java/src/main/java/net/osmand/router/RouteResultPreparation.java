@@ -6,7 +6,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.ObfConstants;
 import net.osmand.shared.routing.RouteTypeRule;
-import net.osmand.binary.RouteDataObject;
+import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.render.RenderingRuleSearchRequest;

@@ -36,6 +36,7 @@ import net.osmand.data.Street;
 import net.osmand.util.MapUtils;
 import net.osmand.util.SearchAlgorithms;
 import net.osmand.util.TransliterationHelper;
+import net.osmand.shared.binary.BinaryIndexPart;
 
 public class BinaryMapAddressReaderAdapter {
 	

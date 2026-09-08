@@ -68,8 +68,8 @@ import net.osmand.binary.BinaryMapIndexReaderStats.MapObjectStat;
 import net.osmand.binary.BinaryMapIndexReaderStats.SearchStat;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
+import net.osmand.shared.routing.RouteRegion;
+import net.osmand.shared.routing.RouteSubregion;
 import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
 import net.osmand.binary.NameIndexReader.PrefixNameValue;
 import net.osmand.binary.OsmandOdb.MapDataBlock;
@@ -94,6 +94,8 @@ import net.osmand.router.HHRouteDataStructure.HHRoutingContext;
 import net.osmand.router.HHRouteDataStructure.NetworkDBPoint;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import net.osmand.shared.routing.RouteDataObject;
+import net.osmand.shared.binary.BinaryIndexPart;
 
 public class BinaryMapIndexReader {
 
@@ -3093,7 +3095,7 @@ public class BinaryMapIndexReader {
 		if (routeAdapter != null) {
 			routeAdapter.initRouteTypesIfNeeded(req, list);
 			return routeAdapter.searchRouteRegionTree(req, list,
-					new ArrayList<BinaryMapRouteReaderAdapter.RouteSubregion>());
+					new ArrayList<RouteSubregion>());
 		}
 		return Collections.emptyList();
 	}

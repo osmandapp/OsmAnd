@@ -6,7 +6,7 @@ import com.google.gson.GsonBuilder;
 import net.osmand.LocationsHolder;
 import net.osmand.NativeLibrary;
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.RouteDataObject;
+import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities;
 import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;

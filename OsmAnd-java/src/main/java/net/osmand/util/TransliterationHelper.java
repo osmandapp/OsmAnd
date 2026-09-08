@@ -1,15 +1,17 @@
 package net.osmand.util;
 
 import net.osmand.PlatformUtil;
-import net.sf.junidecode.Junidecode;
+import net.osmand.shared.util.KTransliterationHelper;
 
 import org.apache.commons.logging.Log;
 
+/**
+ * Kept as the entry point the C++ core calls through JNI, and as the name the Java code already
+ * uses. The implementation lives in {@link KTransliterationHelper} so ios gets the same behaviour.
+ */
 public class TransliterationHelper {
 
 	public static final Log LOG = PlatformUtil.getLog(TransliterationHelper.class);
-
-	private static boolean japanese;
 
 	//private static Tokenizer tokenizer;
 	//private static Map<String, String> katakanaMap = new HashMap<>();
@@ -18,21 +20,15 @@ public class TransliterationHelper {
 	}
 
 	public static boolean isJapanese() {
-		return japanese;
+		return KTransliterationHelper.isJapanese();
 	}
 
 	public static void setJapanese(boolean japanese) {
-		TransliterationHelper.japanese = japanese;
+		KTransliterationHelper.setJapanese(japanese);
 	}
 
 	public static String transliterate(String text) {
-		if (japanese) {
-			// do not transliterate japanese for now
-			//return japanese2Romaji(text);
-			return text;
-		} else {
-			return Junidecode.unidecode(text);
-		}
+		return KTransliterationHelper.transliterate(text);
 	}
 
 	/*

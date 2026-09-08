@@ -18,9 +18,9 @@ import androidx.annotation.Nullable;
 import net.osmand.Location;
 import net.osmand.OnCompleteCallback;
 import net.osmand.StateChangedListener;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
+import net.osmand.shared.routing.RouteRegion;
 import net.osmand.shared.routing.RouteTypeRule;
-import net.osmand.binary.RouteDataObject;
+import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.data.Amenity;
 import net.osmand.data.Amenity.AmenityRoutePoint;
 import net.osmand.data.LocationPoint;
@@ -339,7 +339,7 @@ public class WaypointHelper {
 
 	@Nullable
 	public AlarmInfo calculateSpeedLimitAlarm(@NonNull RouteDataObject object, @NonNull Location location, @NonNull SpeedConstants constants, boolean whenExceeded) {
-		float maxSpeed = object.getMaximumSpeed(object.bearingVsRouteDirection(location), appMode.getRouteTypeProfile());
+		float maxSpeed = object.getMaximumSpeed(object.bearingVsRouteDirection(Location.bearingOf(location)), appMode.getRouteTypeProfile());
 		float delta = whenExceeded ? settings.SPEED_LIMIT_EXCEED_KMH.get() / 3.6f : maxSpeed * -1;
 		return createSpeedAlarm(constants, maxSpeed, location, delta);
 	}
@@ -347,7 +347,7 @@ public class WaypointHelper {
 	@Nullable
 	public AlarmInfo calculateMostImportantAlarm(RouteDataObject ro, Location loc, MetricsConstants mc,
 	                                             SpeedConstants sc, boolean showCameras) {
-		float maxSpeed = ro.getMaximumSpeed(ro.bearingVsRouteDirection(loc), appMode.getRouteTypeProfile());
+		float maxSpeed = ro.getMaximumSpeed(ro.bearingVsRouteDirection(Location.bearingOf(loc)), appMode.getRouteTypeProfile());
 		float delta = settings.SPEED_LIMIT_EXCEED_KMH.get() / 3.6f;
 		AlarmInfo speedAlarm = createSpeedAlarm(sc, maxSpeed, loc, delta);
 		if (speedAlarm != null) {

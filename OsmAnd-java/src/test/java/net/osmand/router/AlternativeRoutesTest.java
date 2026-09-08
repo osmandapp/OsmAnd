@@ -21,7 +21,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.RouteDataObject;
+import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.router.HHRouteDataStructure.HHRoutingConfig;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;

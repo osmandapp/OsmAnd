@@ -16,7 +16,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
-import net.osmand.binary.RouteDataObject;
+import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.helpers.LocationPointWrapper;

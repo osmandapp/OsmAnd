@@ -26,7 +26,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.Location;
 import net.osmand.shared.routing.RouteTypeRule;
-import net.osmand.binary.RouteDataObject;
+import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -505,7 +505,7 @@ public class StreetNameWidget extends MapWidget {
 			if (lastKnownSegment != null && lastKnownLocation != null) {
 				String locale = settings.MAP_PREFERRED_LOCALE.get();
 				boolean transliterate = settings.MAP_TRANSLITERATE_NAMES.get();
-				boolean direction = lastKnownSegment.bearingVsRouteDirection(lastKnownLocation);
+				boolean direction = lastKnownSegment.bearingVsRouteDirection(Location.bearingOf(lastKnownLocation));
 
 				String name = lastKnownSegment.getName(locale, transliterate);
 				String ref = lastKnownSegment.getRef(locale, transliterate, direction);

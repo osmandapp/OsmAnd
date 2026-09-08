@@ -4,8 +4,7 @@ import gnu.trove.list.array.TIntArrayList;
 import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
-import net.osmand.binary.BinaryMapRouteReaderAdapter;
-import net.osmand.binary.RouteDataObject;
+import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.util.MapUtils;
@@ -13,6 +12,7 @@ import org.apache.commons.logging.Log;
 
 import java.io.IOException;
 import java.util.*;
+import net.osmand.shared.routing.RouteRegion;
 
 public class GpxRouteApproximation {
 	
@@ -349,7 +349,7 @@ public class GpxRouteApproximation {
 	}
 
 	private void calculateGpxRouteResult(GpxRouteApproximation gctx, List<RoutePlannerFrontEnd.GpxPoint> gpxPoints) throws IOException {
-		BinaryMapRouteReaderAdapter.RouteRegion reg = new BinaryMapRouteReaderAdapter.RouteRegion();
+		RouteRegion reg = new RouteRegion();
 		reg.initRouteEncodingRule(0, "highway", RouteResultPreparation.UNMATCHED_HIGHWAY_TYPE);
 		List<LatLon> lastStraightLine = null;
 		RoutePlannerFrontEnd.GpxPoint straightPointStart = null;
@@ -434,7 +434,7 @@ public class GpxRouteApproximation {
 		}
 	}
 
-	private void addStraightLine(GpxRouteApproximation gctx, List<LatLon> lastStraightLine, RoutePlannerFrontEnd.GpxPoint strPnt, BinaryMapRouteReaderAdapter.RouteRegion reg) {
+	private void addStraightLine(GpxRouteApproximation gctx, List<LatLon> lastStraightLine, RoutePlannerFrontEnd.GpxPoint strPnt, RouteRegion reg) {
 		RouteDataObject rdo = new RouteDataObject(reg);
 		if (gctx.ctx.config.smoothenPointsNoRoute > 0) {
 			simplifyDouglasPeucker(lastStraightLine, gctx.ctx.config.smoothenPointsNoRoute,

@@ -1,7 +1,7 @@
 package net.osmand.router;
 
 import net.osmand.shared.routing.RouteTypeRule;
-import net.osmand.binary.RouteDataObject;
+import net.osmand.shared.routing.RouteDataObject;
 
 import java.util.HashMap;
 import java.util.Map;

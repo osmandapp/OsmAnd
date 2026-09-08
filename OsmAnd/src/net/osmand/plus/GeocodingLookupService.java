@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.GeocodingUtilities.GeocodingResult;
-import net.osmand.binary.RouteDataObject;
+import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;

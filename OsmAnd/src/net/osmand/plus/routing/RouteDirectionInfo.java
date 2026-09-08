@@ -5,7 +5,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.binary.RouteDataObject;
+import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.shared.routing.ExitInfo;

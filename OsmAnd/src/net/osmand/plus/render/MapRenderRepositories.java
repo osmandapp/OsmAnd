@@ -16,10 +16,10 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
+import net.osmand.shared.routing.RouteRegion;
+import net.osmand.shared.routing.RouteSubregion;
 import net.osmand.shared.routing.RouteTypeRule;
-import net.osmand.binary.RouteDataObject;
+import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
@@ -51,13 +51,13 @@ import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.*;
 
-import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.list.TLongList;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.list.array.TLongArrayList;
-import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.set.TLongSet;
 import gnu.trove.set.hash.TLongHashSet;
+import net.osmand.shared.util.collections.KTIntObjectMap;
+import net.osmand.shared.util.collections.KTIntObjectIterator;
 
 public class MapRenderRepositories {
 	// It is needed to not draw object twice if user have map index that intersects by boundaries
@@ -380,9 +380,9 @@ public class MapRenderRepositories {
 						}
 						BinaryMapDataObject mo = new BinaryMapDataObject( r.getId(), coordinates, new int[0][],
 								RenderingRulesStorage.LINE_RULES, true, roTypes, null, 0,0);
-						TIntObjectHashMap<String> names = r.getNames();
+						KTIntObjectMap<String> names = r.getNames();
 						if(names != null) {
-							TIntObjectIterator<String> it = names.iterator();
+							KTIntObjectIterator<String> it = names.iterator();
 							while(it.hasNext()) {
 								it.advance();
 								registerMissingType(nmi, r, it.key());

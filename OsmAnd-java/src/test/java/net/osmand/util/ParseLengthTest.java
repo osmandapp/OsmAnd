@@ -1,6 +1,6 @@
 package net.osmand.util;
 
-import net.osmand.binary.RouteDataObject;
+import net.osmand.shared.routing.RouteDataObject;
 import org.junit.Assert;
 import org.junit.Test;
 

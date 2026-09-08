@@ -39,7 +39,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.StateChangedListener;
 import net.osmand.binary.GeocodingUtilities.GeocodingResult;
-import net.osmand.binary.RouteDataObject;
+import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.helpers.CurrentPositionHelper;

@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.binary.RouteDataObject;
+import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.plus.routing.RouteSegmentSearchResult;
 import net.osmand.router.RouteSegmentResult;

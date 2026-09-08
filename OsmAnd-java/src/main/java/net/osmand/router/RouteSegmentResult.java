@@ -3,10 +3,10 @@ package net.osmand.router;
 
 import net.osmand.shared.routing.TurnType;
 import net.osmand.Location;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
+import net.osmand.shared.routing.RouteRegion;
 import net.osmand.shared.routing.RouteTypeRule;
 import net.osmand.binary.RouteDataBundle;
-import net.osmand.binary.RouteDataObject;
+import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.binary.StringExternalizable;
 import net.osmand.data.LatLon;
 import net.osmand.util.Algorithms;
@@ -19,9 +19,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
 
 import static net.osmand.gpx.GPXUtilities.RouteSegment.START_TRKPT_IDX_ATTR;
+import net.osmand.shared.util.collections.KTIntObjectMap;
 
 
 public class RouteSegmentResult implements StringExternalizable<RouteDataBundle> {
@@ -270,7 +270,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 			RouteRegion region = object.region;
 			int nameTypeRule = region.getNameTypeRule();
 			int refTypeRule = region.getRefTypeRule();
-			object.names = new TIntObjectHashMap<>();
+			object.names = new KTIntObjectMap<>();
 			for (int nameId : object.nameIds) {
 				if (nameId >= region.quickGetEncodingRulesSize()) {
 					continue;
