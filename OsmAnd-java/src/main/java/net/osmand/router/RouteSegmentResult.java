@@ -2,12 +2,11 @@ package net.osmand.router;
 
 
 import net.osmand.shared.routing.TurnType;
-import net.osmand.Location;
 import net.osmand.shared.routing.RouteRegion;
 import net.osmand.shared.routing.RouteTypeRule;
-import net.osmand.binary.RouteDataBundle;
+import net.osmand.shared.routing.RouteDataBundle;
 import net.osmand.shared.routing.RouteDataObject;
-import net.osmand.binary.StringExternalizable;
+import net.osmand.shared.util.StringExternalizable;
 import net.osmand.data.LatLon;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
@@ -22,6 +21,8 @@ import java.util.Map;
 
 import static net.osmand.gpx.GPXUtilities.RouteSegment.START_TRKPT_IDX_ATTR;
 import net.osmand.shared.util.collections.KTIntObjectMap;
+import net.osmand.shared.routing.RouteDataResources;
+import net.osmand.shared.data.KLocation;
 
 
 public class RouteSegmentResult implements StringExternalizable<RouteDataBundle> {
@@ -403,9 +404,9 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		object.heightDistanceArray = new float[length * 2];
 		int index = plus ? 0 : length - 1;
 		float distance = 0;
-		Location prevLocation = null;
+		KLocation prevLocation = null;
 		for (int i = 0; i < length; i++) {
-			Location location = resources.getCurrentSegmentLocation(index);
+			KLocation location = resources.getCurrentSegmentLocation(index);
 			double dist = 0;
 			if (prevLocation != null) {
 				dist = MapUtils.getDistance(prevLocation.getLatitude(), prevLocation.getLongitude(), location.getLatitude(), location.getLongitude());
@@ -414,7 +415,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 			prevLocation = location;
 			object.pointsX[i] = MapUtils.get31TileNumberX(location.getLongitude());
 			object.pointsY[i] = MapUtils.get31TileNumberY(location.getLatitude());
-			if (location.hasAltitude() && object.heightDistanceArray.length > 0) {
+			if (location.getHasAltitude() && object.heightDistanceArray.length > 0) {
 				object.heightDistanceArray[i * 2] = (float) dist;
 				object.heightDistanceArray[i * 2 + 1] = (float) location.getAltitude();
 			} else {

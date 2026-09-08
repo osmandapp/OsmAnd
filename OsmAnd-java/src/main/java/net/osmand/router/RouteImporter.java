@@ -6,10 +6,9 @@ import net.osmand.gpx.GPXUtilities.RouteSegment;
 import net.osmand.gpx.GPXUtilities.RouteType;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
-import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.shared.routing.RouteRegion;
-import net.osmand.binary.RouteDataBundle;
+import net.osmand.shared.routing.RouteDataBundle;
 import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.binary.StringBundle;
 import net.osmand.util.Algorithms;
@@ -23,6 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.osmand.shared.routing.RouteDataObject.HEIGHT_UNDEFINED;
+import net.osmand.shared.routing.RouteDataResources;
+import net.osmand.shared.data.KLocation;
 
 public class RouteImporter {
 
@@ -107,11 +108,11 @@ public class RouteImporter {
 	}
 
 	private void collectLocations(RouteDataResources resources, TrkSegment segment) {
-		List<Location> locations = resources.getLocations();
+		List<KLocation> locations = resources.getLocations();
 		double lastElevation = HEIGHT_UNDEFINED;
 		if (segment.hasRoute()) {
 			for (WptPt point : segment.points) {
-				Location loc = new Location("", point.getLatitude(), point.getLongitude());
+				KLocation loc = new KLocation("", point.getLatitude(), point.getLongitude());
 				if (!Double.isNaN(point.ele)) {
 					loc.setAltitude(point.ele);
 					lastElevation = point.ele;
@@ -138,7 +139,7 @@ public class RouteImporter {
 			RouteDataObject object = new RouteDataObject(region);
 			RouteSegmentResult segmentResult = new RouteSegmentResult(object, leftSide);
 			try {
-				segmentResult.readFromBundle(new RouteDataBundle(resources, routeSegment.toStringBundle()));
+				segmentResult.readFromBundle(new RouteDataBundle(resources, toSharedBundle(routeSegment.toStringBundle())));
 				route.add(segmentResult);
 			} catch (IllegalStateException e) {
 				log.error(e.getMessage());
@@ -146,6 +147,22 @@ public class RouteImporter {
 			}
 		}
 		return route;
+	}
+
+	/**
+	 * The legacy gpx reader still answers with its own StringBundle, and route segments are read
+	 * through the shared one. Everything a route segment carries is a string, so copying them over
+	 * is enough; this goes away with net.osmand.gpx.
+	 */
+	private net.osmand.shared.util.StringBundle toSharedBundle(StringBundle bundle) {
+		net.osmand.shared.util.StringBundle shared = new net.osmand.shared.util.StringBundle();
+		for (String key : bundle.getMap().keySet()) {
+			String value = bundle.getString(key, null);
+			if (value != null) {
+				shared.putString(key, value);
+			}
+		}
+		return shared;
 	}
 
 	private void collectRouteTypes(RouteRegion region, TrkSegment segment) {

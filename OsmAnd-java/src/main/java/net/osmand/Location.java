@@ -17,6 +17,9 @@ package net.osmand;
 
 
 import net.osmand.data.LatLon;
+import net.osmand.shared.data.KLocation;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A class representing a geographic location sensed at a particular
@@ -433,6 +436,36 @@ public class Location {
      * Returns true if the provider is able to report bearing information,
      * false otherwise.  The default implementation returns false.
      */
+    /** The same fix as a {@link KLocation}, for the parts of routing that already live in OsmAnd-shared. */
+    public KLocation toShared() {
+        KLocation shared = new KLocation(mProvider, mLatitude, mLongitude);
+        shared.setTime(mTime);
+        if (mHasAltitude) {
+            shared.setAltitude(mAltitude);
+        }
+        if (mHasSpeed) {
+            shared.setSpeed(mSpeed);
+        }
+        if (mHasBearing) {
+            shared.setBearing(mBearing);
+        }
+        if (mHasAccuracy) {
+            shared.setAccuracy(mAccuracy);
+        }
+        if (mHasVerticalAccuracy) {
+            shared.setVerticalAccuracy(mVerticalAccuracy);
+        }
+        return shared;
+    }
+
+    public static List<KLocation> toShared(List<Location> locations) {
+        List<KLocation> shared = new ArrayList<>(locations.size());
+        for (Location location : locations) {
+            shared.add(location.toShared());
+        }
+        return shared;
+    }
+
     /**
      * Bearing of the fix in degrees, or null when there is no fix or it carries no bearing.
      * Shaped for the shared routing code, which has no Location of its own yet.

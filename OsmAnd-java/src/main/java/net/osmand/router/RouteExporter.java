@@ -2,8 +2,8 @@ package net.osmand.router;
 
 import net.osmand.Location;
 import net.osmand.shared.routing.RouteTypeRule;
-import net.osmand.binary.RouteDataBundle;
-import net.osmand.binary.StringBundle;
+import net.osmand.shared.routing.RouteDataBundle;
+import net.osmand.shared.util.StringBundle;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxUtilities.RouteSegment;
 import net.osmand.shared.gpx.GpxUtilities.RouteType;
@@ -15,6 +15,7 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import net.osmand.shared.routing.RouteDataResources;
 
 public class RouteExporter {
 
@@ -69,7 +70,7 @@ public class RouteExporter {
 	}
 
 	public TrkSegment generateRouteSegment() {
-		RouteDataResources resources = new RouteDataResources(locations, routePointIndexes);
+		RouteDataResources resources = new RouteDataResources(Location.toShared(locations), routePointIndexes);
 		List<StringBundle> routeItems = new ArrayList<>();
 		if (!Algorithms.isEmpty(route)) {
 			for (RouteSegmentResult sr : route) {
@@ -125,27 +126,15 @@ public class RouteExporter {
 
 		List<RouteSegment> routeSegments = new ArrayList<>();
 		for (StringBundle item : routeItems) {
-			net.osmand.shared.util.StringBundle itemInStrings = kStringBundleJustStrings(item);
-			routeSegments.add(RouteSegment.Companion.fromStringBundle(itemInStrings));
+			routeSegments.add(RouteSegment.Companion.fromStringBundle(item));
 		}
 		trkSegment.setRouteSegments(routeSegments);
 		List<RouteType> routeTypes = new ArrayList<>();
 		for (StringBundle item : typeList) {
-			net.osmand.shared.util.StringBundle itemInStrings = kStringBundleJustStrings(item);
-			routeTypes.add(RouteType.Companion.fromStringBundle(itemInStrings));
+			routeTypes.add(RouteType.Companion.fromStringBundle(item));
 		}
 		trkSegment.setRouteTypes(routeTypes);
 		return trkSegment;
 	}
 
-	private net.osmand.shared.util.StringBundle kStringBundleJustStrings(StringBundle in) {
-		net.osmand.shared.util.StringBundle out = new net.osmand.shared.util.StringBundle();
-		in.getMap().forEach((key, item) -> {
-			String asString = in.getString(key, null);
-			if (asString != null) {
-				out.putString(key, asString);
-			}
-		});
-		return out;
-	}
 }
