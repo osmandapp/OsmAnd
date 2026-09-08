@@ -1,12 +1,13 @@
 package net.osmand.router;
 
-import java.util.BitSet;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-import net.osmand.router.GeneralRouter.RouteAttributeContext;
-import net.osmand.router.GeneralRouter.RouteDataObjectAttribute;
+import net.osmand.shared.routing.GeneralRouter.RouteAttributeContext;
+import net.osmand.shared.routing.GeneralRouter.RouteDataObjectAttribute;
+import net.osmand.shared.routing.GeneralRouter;
+import net.osmand.shared.util.collections.KBitSet;
 
 public class TransportRoutingConfiguration {
 
@@ -133,8 +134,8 @@ public class TransportRoutingConfiguration {
 		return rawTypes.get(key);
 	}
 	
-	private BitSet getRawBitset(String tg, String vl) {
-		BitSet bs = new BitSet();
+	private KBitSet getRawBitset(String tg, String vl) {
+		KBitSet bs = new KBitSet();
 		bs.set(getRawType(tg, vl));
 		return bs;
 	}

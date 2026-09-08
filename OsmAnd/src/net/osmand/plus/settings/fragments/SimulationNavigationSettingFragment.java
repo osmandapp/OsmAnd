@@ -34,7 +34,7 @@ import net.osmand.plus.settings.enums.SimulationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.router.GeneralRouter;
+import net.osmand.shared.routing.GeneralRouter;
 
 public class SimulationNavigationSettingFragment extends BaseSettingsFragment {
 

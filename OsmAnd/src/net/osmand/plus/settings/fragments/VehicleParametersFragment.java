@@ -2,7 +2,7 @@ package net.osmand.plus.settings.fragments;
 
 import static net.osmand.plus.settings.backend.OsmandSettings.ROUTING_PREFERENCE_PREFIX;
 import static net.osmand.plus.settings.fragments.RouteParametersFragment.createRoutingParameterPref;
-import static net.osmand.router.GeneralRouter.*;
+import static net.osmand.shared.routing.GeneralRouter.*;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -34,7 +34,7 @@ import net.osmand.shared.vehicle.specification.domain.profiles.VehicleSpecs;
 import net.osmand.shared.vehicle.specification.data.VehicleSpecsFactory;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.router.GeneralRouter;
+import net.osmand.shared.routing.GeneralRouter;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.shared.routing.GeneralRouterProfile;
 

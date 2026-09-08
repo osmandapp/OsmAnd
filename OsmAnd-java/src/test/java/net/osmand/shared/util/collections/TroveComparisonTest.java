@@ -14,6 +14,7 @@ import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.hash.TLongHashSet;
+import net.osmand.shared.routing.GeneralRouter;
 
 /**
  * Differential tests of the shared primitive collections against the originals they replace:

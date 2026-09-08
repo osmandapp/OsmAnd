@@ -9,7 +9,7 @@ import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_
 import static net.osmand.plus.settings.fragments.RouteParametersFragment.RELIEF_SMOOTHNESS_FACTOR;
 import static net.osmand.plus.settings.fragments.RouteParametersFragment.getRoutingParameterTitle;
 import static net.osmand.plus.settings.fragments.RouteParametersFragment.isRoutingParameterSelected;
-import static net.osmand.router.GeneralRouter.USE_HEIGHT_OBSTACLES;
+import static net.osmand.shared.routing.GeneralRouter.USE_HEIGHT_OBSTACLES;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -75,8 +75,8 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.router.GeneralRouter;
-import net.osmand.router.GeneralRouter.RoutingParameter;
+import net.osmand.shared.routing.GeneralRouter;
+import net.osmand.shared.routing.GeneralRouter.RoutingParameter;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;

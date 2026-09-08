@@ -1,7 +1,7 @@
 package net.osmand.plus.routepreparationmenu;
 
 import static net.osmand.plus.settings.fragments.RouteParametersFragment.AVOID_ROUTING_PARAMETER_PREFIX;
-import static net.osmand.router.GeneralRouter.*;
+import static net.osmand.shared.routing.GeneralRouter.*;
 
 import android.app.Activity;
 import android.content.Context;
@@ -52,7 +52,7 @@ import net.osmand.plus.widgets.alert.CustomAlert;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuUtils;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
-import net.osmand.router.GeneralRouter;
+import net.osmand.shared.routing.GeneralRouter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 

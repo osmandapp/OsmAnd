@@ -39,6 +39,7 @@ import net.osmand.util.MapUtils;
 import net.osmand.shared.util.collections.KTIntObjectIterator;
 import net.osmand.shared.routing.RouteSegmentResult;
 import net.osmand.shared.routing.VehicleRouter;
+import net.osmand.shared.routing.GeneralRouter;
 
 
 public class RoutingContext {

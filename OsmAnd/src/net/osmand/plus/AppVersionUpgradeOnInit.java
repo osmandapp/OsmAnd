@@ -23,10 +23,10 @@ import static net.osmand.plus.views.mapwidgets.WidgetsPanel.PAGE_SEPARATOR;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.WIDGET_SEPARATOR;
 import static net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState.DEFAULT_BUTTON_ID;
 import static net.osmand.plus.views.mapwidgets.widgetstates.ResizableWidgetState.SIMPLE_WIDGET_SIZE_ID;
-import static net.osmand.router.GeneralRouter.VEHICLE_HEIGHT;
-import static net.osmand.router.GeneralRouter.VEHICLE_LENGTH;
-import static net.osmand.router.GeneralRouter.VEHICLE_WEIGHT;
-import static net.osmand.router.GeneralRouter.VEHICLE_WIDTH;
+import static net.osmand.shared.routing.GeneralRouter.VEHICLE_HEIGHT;
+import static net.osmand.shared.routing.GeneralRouter.VEHICLE_LENGTH;
+import static net.osmand.shared.routing.GeneralRouter.VEHICLE_WEIGHT;
+import static net.osmand.shared.routing.GeneralRouter.VEHICLE_WIDTH;
 
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;

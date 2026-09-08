@@ -1,6 +1,6 @@
 package net.osmand.plus.routepreparationmenu.data;
 
-import static net.osmand.router.GeneralRouter.USE_HEIGHT_OBSTACLES;
+import static net.osmand.shared.routing.GeneralRouter.USE_HEIGHT_OBSTACLES;
 
 import androidx.annotation.NonNull;
 

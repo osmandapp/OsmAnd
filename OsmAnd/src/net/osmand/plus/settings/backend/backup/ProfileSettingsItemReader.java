@@ -3,7 +3,7 @@ package net.osmand.plus.settings.backend.backup;
 import static net.osmand.plus.settings.enums.SunPositionMode.SUN_POSITION_MODE;
 import static net.osmand.plus.views.mapwidgets.widgetstates.ResizableWidgetState.SIMPLE_WIDGET_SIZE_ID;
 import static net.osmand.plus.views.mapwidgets.widgetstates.SunriseSunsetWidgetState.SUN_POSITION_WIDGET_MODE_ID;
-import static net.osmand.router.GeneralRouter.USE_SHORTEST_WAY;
+import static net.osmand.shared.routing.GeneralRouter.USE_SHORTEST_WAY;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

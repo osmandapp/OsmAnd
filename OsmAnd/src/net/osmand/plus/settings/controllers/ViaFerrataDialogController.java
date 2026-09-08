@@ -22,7 +22,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.router.GeneralRouter.RoutingParameter;
+import net.osmand.shared.routing.GeneralRouter.RoutingParameter;
 
 public class ViaFerrataDialogController extends BaseDialogController
 		implements IDisplayDataProvider, IDialogItemSelected {

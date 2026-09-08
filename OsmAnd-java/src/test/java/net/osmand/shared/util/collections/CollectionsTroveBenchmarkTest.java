@@ -17,6 +17,7 @@ import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.hash.TLongHashSet;
+import net.osmand.shared.routing.GeneralRouter;
 
 /**
  * Timing comparison of the shared primitive collections against gnu.trove and java.util.BitSet.

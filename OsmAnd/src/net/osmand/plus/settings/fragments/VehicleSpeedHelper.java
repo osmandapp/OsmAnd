@@ -34,7 +34,7 @@ import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.enums.SpeedSliderType;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.router.GeneralRouter;
+import net.osmand.shared.routing.GeneralRouter;
 
 public class VehicleSpeedHelper {
 

@@ -33,8 +33,8 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.ApproximationType;
 import net.osmand.router.*;
-import net.osmand.router.GeneralRouter.RoutingParameter;
-import net.osmand.router.GeneralRouter.RoutingParameterType;
+import net.osmand.shared.routing.GeneralRouter.RoutingParameter;
+import net.osmand.shared.routing.GeneralRouter.RoutingParameterType;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 import net.osmand.router.RoutingConfiguration.Builder;
@@ -64,6 +64,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import btools.routingapp.IBRouterService;
 import net.osmand.shared.routing.RouteSegmentResult;
+import net.osmand.shared.routing.GeneralRouter;
 
 
 public class RouteProvider {

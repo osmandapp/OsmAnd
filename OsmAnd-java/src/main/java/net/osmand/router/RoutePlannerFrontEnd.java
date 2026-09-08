@@ -21,7 +21,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
-import net.osmand.router.GeneralRouter.RoutingParameter;
+import net.osmand.shared.routing.GeneralRouter.RoutingParameter;
 import net.osmand.router.HHRouteDataStructure.HHNetworkRouteRes;
 import net.osmand.router.HHRouteDataStructure.HHRoutingConfig;
 import net.osmand.router.HHRouteDataStructure.NetworkDBPoint;
@@ -32,6 +32,7 @@ import net.osmand.shared.routing.GeneralRouterProfile;
 import net.osmand.util.MapUtils;
 import net.osmand.shared.routing.RouteSegmentResult;
 import net.osmand.shared.util.KMapUtils;
+import net.osmand.shared.routing.GeneralRouter;
 
 
 public class RoutePlannerFrontEnd {

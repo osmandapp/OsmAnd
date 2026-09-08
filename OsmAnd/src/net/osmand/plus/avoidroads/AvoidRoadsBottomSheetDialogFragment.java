@@ -34,8 +34,8 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.InsetsUtils;
-import net.osmand.router.GeneralRouter;
-import net.osmand.router.GeneralRouter.RoutingParameter;
+import net.osmand.shared.routing.GeneralRouter;
+import net.osmand.shared.routing.GeneralRouter.RoutingParameter;
 import net.osmand.util.Algorithms;
 
 import java.io.File;

@@ -4,7 +4,7 @@ import static net.osmand.map.WorldRegion.FRANCE_REGION_ID;
 import static net.osmand.map.WorldRegion.GERMANY_REGION_ID;
 import static net.osmand.plus.routing.RoutingHelperUtils.getParameterForDerivedProfile;
 import static net.osmand.plus.settings.fragments.RouteParametersFragment.populateListParameters;
-import static net.osmand.router.GeneralRouter.MOTOR_TYPE;
+import static net.osmand.shared.routing.GeneralRouter.MOTOR_TYPE;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,8 +23,8 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.preferences.ListParameters;
-import net.osmand.router.GeneralRouter;
-import net.osmand.router.GeneralRouter.RoutingParameter;
+import net.osmand.shared.routing.GeneralRouter;
+import net.osmand.shared.routing.GeneralRouter.RoutingParameter;
 import net.osmand.util.Algorithms;
 
 import java.text.DecimalFormat;

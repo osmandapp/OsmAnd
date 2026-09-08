@@ -34,7 +34,7 @@ import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.MultiFinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
-import net.osmand.router.GeneralRouter.RoutingParameter;
+import net.osmand.shared.routing.GeneralRouter.RoutingParameter;
 import net.osmand.router.HHRouteDataStructure.HHNetworkRouteRes;
 import net.osmand.router.HHRouteDataStructure.HHNetworkSegmentRes;
 import net.osmand.router.HHRouteDataStructure.HHRouteRegionPointsCtx;
@@ -52,6 +52,7 @@ import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.shared.routing.RouteSegmentResult;
+import net.osmand.shared.routing.GeneralRouter;
 
 public class HHRoutePlanner<T extends NetworkDBPoint> {
 	public static int DEBUG_VERBOSE_LEVEL = 0;

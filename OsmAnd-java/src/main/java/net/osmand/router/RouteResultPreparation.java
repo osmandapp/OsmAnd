@@ -44,6 +44,7 @@ import java.util.Set;
 import java.util.TreeSet;
 import net.osmand.shared.routing.RouteSegmentResult;
 import net.osmand.shared.util.KMapUtils;
+import net.osmand.shared.routing.GeneralRouter;
 
 public class RouteResultPreparation {
 

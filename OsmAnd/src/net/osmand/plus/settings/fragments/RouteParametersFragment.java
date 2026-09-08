@@ -6,7 +6,7 @@ import static net.osmand.plus.settings.fragments.DangerousGoodsFragment.getHazma
 import static net.osmand.plus.settings.fragments.SettingsScreenType.DANGEROUS_GOODS;
 import static net.osmand.plus.utils.AndroidUtils.getRoutingStringPropertyName;
 import static net.osmand.plus.utils.OsmAndFormatterParams.NO_TRAILING_ZEROS;
-import static net.osmand.router.GeneralRouter.*;
+import static net.osmand.shared.routing.GeneralRouter.*;
 
 import android.app.Activity;
 import android.content.Context;
@@ -70,7 +70,7 @@ import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
-import net.osmand.router.GeneralRouter;
+import net.osmand.shared.routing.GeneralRouter;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;

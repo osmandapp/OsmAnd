@@ -6,8 +6,8 @@ import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.osm.edit.Node;
-import net.osmand.router.GeneralRouter.RouteAttributeContext;
-import net.osmand.router.GeneralRouter.RouteDataObjectAttribute;
+import net.osmand.shared.routing.GeneralRouter.RouteAttributeContext;
+import net.osmand.shared.routing.GeneralRouter.RouteDataObjectAttribute;
 import net.osmand.shared.routing.GeneralRouterProfile;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -27,6 +27,7 @@ import java.util.Stack;
 
 import gnu.trove.list.array.TIntArrayList;
 import net.osmand.shared.routing.VehicleRouter;
+import net.osmand.shared.routing.GeneralRouter;
 
 public class RoutingConfiguration {
 

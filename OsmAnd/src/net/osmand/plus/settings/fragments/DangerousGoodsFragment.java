@@ -3,8 +3,8 @@ package net.osmand.plus.settings.fragments;
 import static net.osmand.plus.settings.backend.OsmandSettings.ROUTING_PREFERENCE_PREFIX;
 import static net.osmand.plus.settings.fragments.RouteParametersFragment.HAZMAT_CATEGORY_USA_PREFIX;
 import static net.osmand.plus.utils.AndroidUtils.getRoutingStringPropertyName;
-import static net.osmand.router.GeneralRouter.RoutingParameter;
-import static net.osmand.router.GeneralRouter.RoutingParameterType;
+import static net.osmand.shared.routing.GeneralRouter.RoutingParameter;
+import static net.osmand.shared.routing.GeneralRouter.RoutingParameterType;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -30,7 +30,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.router.GeneralRouter;
+import net.osmand.shared.routing.GeneralRouter;
 import net.osmand.util.Algorithms;
 
 import java.util.Iterator;
