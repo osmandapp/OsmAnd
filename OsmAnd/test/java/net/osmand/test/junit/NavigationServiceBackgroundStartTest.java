@@ -4,6 +4,7 @@ import static net.osmand.plus.NavigationService.USED_BY_GPX;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import android.Manifest;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -12,11 +13,13 @@ import android.content.Intent;
 import androidx.annotation.NonNull;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
+import androidx.test.rule.GrantPermissionRule;
 
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -49,6 +52,16 @@ import java.util.List;
  */
 @RunWith(AndroidJUnit4.class)
 public class NavigationServiceBackgroundStartTest {
+
+	/**
+	 * {@code startNavigationService()} returns before the check under test when the location
+	 * permission is missing, so a fresh install - which is what CI runs on - would pass the
+	 * test without exercising anything. This test does not extend {@code AndroidTest}, whose
+	 * {@code setup()} grants permissions, because it must run without an activity.
+	 */
+	@Rule
+	public final GrantPermissionRule grantPermissionRule =
+			GrantPermissionRule.grant(Manifest.permission.ACCESS_FINE_LOCATION);
 
 	private OsmandApplication app;
 

@@ -789,5 +789,8 @@
 
     <color name="scrim_light">#52000000</color>
     <color name="scrim_dark">#52000000</color>
+	
+
+
 
 </resources>
