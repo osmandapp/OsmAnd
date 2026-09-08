@@ -122,23 +122,6 @@ public class NativeLibrary {
 		}
 	}
 
-	public static class NativeDirectionPoint {
-		public int x31;
-		public int y31;
-		public String[][] tags;
-		public NativeDirectionPoint(double lat, double lon, Map<String, String> tags) {
-			x31 = MapUtils.get31TileNumberX(lon);
-			y31 = MapUtils.get31TileNumberY(lat);
-			this.tags = new String[tags.size()][2];
-			int i = 0;
-			for (Map.Entry<String, String> e : tags.entrySet()) {
-				this.tags[i][0] = e.getKey();
-				this.tags[i][1] = e.getValue();
-				i++;
-			}
-		}
-	}
-
 	public static class NativeGpxPointApproximation {
 		public int ind;
 		public double lat;

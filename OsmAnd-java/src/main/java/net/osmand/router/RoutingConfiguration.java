@@ -1,11 +1,10 @@
 package net.osmand.router;
 
-import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
-import net.osmand.shared.routing.RouteDataObject;
-import net.osmand.data.QuadRect;
-import net.osmand.data.QuadTree;
-import net.osmand.osm.edit.Node;
+import net.osmand.shared.data.KQuadRect;
+import net.osmand.shared.data.KQuadTree;
+import net.osmand.shared.routing.DirectionPoint;
+import net.osmand.shared.routing.NativeDirectionPoint;
 import net.osmand.shared.routing.GeneralRouter.RouteAttributeContext;
 import net.osmand.shared.routing.GeneralRouter.RouteDataObjectAttribute;
 import net.osmand.shared.routing.GeneralRouterProfile;
@@ -25,7 +24,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
-import gnu.trove.list.array.TIntArrayList;
 import net.osmand.shared.routing.VehicleRouter;
 import net.osmand.shared.routing.GeneralRouter;
 
@@ -82,7 +80,7 @@ public class RoutingConfiguration {
 
 
 	// extra points to be inserted in ways (quad tree is based on 31 coords)
-	private QuadTree<DirectionPoint> directionPoints;
+	private KQuadTree<DirectionPoint> directionPoints;
 
 	public int directionPointsRadius = 30; // 30 m
 
@@ -101,52 +99,20 @@ public class RoutingConfiguration {
 	public boolean showMinorTurns = false;
 
 
-	public QuadTree<DirectionPoint> getDirectionPoints() {
+	public KQuadTree<DirectionPoint> getDirectionPoints() {
 		return directionPoints;
 	}
 
-	public static class DirectionPoint extends Node {
-		private static final long serialVersionUID = -7496599771204656505L;
-		public double distance = Double.MAX_VALUE;
-		public RouteDataObject connected;
-		public TIntArrayList types = new TIntArrayList();
-		public int connectedx;
-		public int connectedy;
-		public final static String TAG = "osmand_dp";
-		public final static String DELETE_TYPE = "osmand_delete_point";
-		public final static String CREATE_TYPE = "osmand_add_point";
-		public final static String ANGLE_TAG = "apply_direction_angle";
-		public final static double MAX_ANGLE_DIFF = 45;//in degrees
-
-		public DirectionPoint(Node n) {
-			super(n, n.getId());
-		}
-
-		// gets angle or Double.NaN if empty
-		public double getAngle() {
-			String angle = getTag(ANGLE_TAG);
-			if (angle != null) {
-				try {
-					return Double.parseDouble(angle);
-				} catch (NumberFormatException e) {
-					throw new RuntimeException(e);
-				}
-			}
-			return Double.NaN;
-		}
-
-	}
-
-	public NativeLibrary.NativeDirectionPoint[] getNativeDirectionPoints() {
+	public NativeDirectionPoint[] getNativeDirectionPoints() {
 		if (directionPoints == null) {
-			return new NativeLibrary.NativeDirectionPoint[0];
+			return new NativeDirectionPoint[0];
 		}
-		QuadRect rect = new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
+		KQuadRect rect = new KQuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
 		List<DirectionPoint> points = directionPoints.queryInBox(rect, new ArrayList<DirectionPoint>());
-		NativeLibrary.NativeDirectionPoint[] result = new NativeLibrary.NativeDirectionPoint[points.size()];
+		NativeDirectionPoint[] result = new NativeDirectionPoint[points.size()];
 		for (int i = 0; i < points.size(); i++) {
 			DirectionPoint point = points.get(i);
-			result[i] = new NativeLibrary.NativeDirectionPoint(point.getLatitude(), point.getLongitude(), point.getTags());
+			result[i] = new NativeDirectionPoint(point.getLatitude(), point.getLongitude(), point.getTags());
 		}
 		return result;
 	}
@@ -157,7 +123,7 @@ public class RoutingConfiguration {
 		private Map<String, GeneralRouter> routers = new LinkedHashMap<>();
 		private Map<String, String> attributes = new LinkedHashMap<>();
 		private Set<Long> impassableRoadLocations = new HashSet<>();
-		private QuadTree<Node> directionPointsBuilder;
+		private KQuadTree<DirectionPoint> directionPointsBuilder;
 
 		public Builder() {
 		}
@@ -241,21 +207,22 @@ public class RoutingConfiguration {
 			}
 			i.planRoadDirection = parseSilentInt(getAttribute(i.router, "planRoadDirection"), i.planRoadDirection);
 			if (directionPointsBuilder != null) {
-				QuadRect rect = new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
-				List<net.osmand.osm.edit.Node> lst = directionPointsBuilder.queryInBox(rect, new ArrayList<Node>());
-				i.directionPoints = new QuadTree<>(rect, 14, 0.5f);
-				for(Node n : lst) {
-					DirectionPoint dp = new DirectionPoint(n);
+				KQuadRect rect = new KQuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
+				List<DirectionPoint> lst = directionPointsBuilder.queryInBox(rect, new ArrayList<DirectionPoint>());
+				i.directionPoints = new KQuadTree<>(rect, 14, 0.5f);
+				for (DirectionPoint p : lst) {
+					// a copy per calculation: the router writes onto the point as it attaches it
+					DirectionPoint dp = new DirectionPoint(p);
 					int x = MapUtils.get31TileNumberX(dp.getLongitude());
 					int y = MapUtils.get31TileNumberY(dp.getLatitude());
-					i.directionPoints.insert(dp, new QuadRect(x, y, x, y));
+					i.directionPoints.insert(dp, new KQuadRect(x, y, x, y));
 				}
 			}
 //			i.planRoadDirection = 1;
 			return i;
 		}
 		
-		public Builder setDirectionPoints(QuadTree<Node> directionPoints) {
+		public Builder setDirectionPoints(KQuadTree<DirectionPoint> directionPoints) {
 			this.directionPointsBuilder = directionPoints;
 			return this;
 		}

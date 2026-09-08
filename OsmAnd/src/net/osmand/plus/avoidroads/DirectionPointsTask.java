@@ -7,9 +7,9 @@ import androidx.annotation.Nullable;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
-import net.osmand.data.QuadRect;
-import net.osmand.data.QuadTree;
-import net.osmand.osm.edit.Node;
+import net.osmand.shared.data.KQuadRect;
+import net.osmand.shared.data.KQuadTree;
+import net.osmand.shared.routing.DirectionPoint;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -23,22 +23,22 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Iterator;
 
-public class DirectionPointsTask extends AsyncTask<Void, Void, QuadTree<Node>> {
+public class DirectionPointsTask extends AsyncTask<Void, Void, KQuadTree<DirectionPoint>> {
 
 	private static final Log log = PlatformUtil.getLog(DirectionPointsHelper.class);
 
 	private final File file;
-	private final CallbackWithObject<QuadTree<Node>> callback;
+	private final CallbackWithObject<KQuadTree<DirectionPoint>> callback;
 
-	public DirectionPointsTask(@NonNull File file, @Nullable CallbackWithObject<QuadTree<Node>> callback) {
+	public DirectionPointsTask(@NonNull File file, @Nullable CallbackWithObject<KQuadTree<DirectionPoint>> callback) {
 		this.file = file;
 		this.callback = callback;
 	}
 
 	@Override
-	protected QuadTree<Node> doInBackground(Void... voids) {
-		QuadRect rect = new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
-		QuadTree<Node> directionPoints = new QuadTree<>(rect, 15, 0.5f);
+	protected KQuadTree<DirectionPoint> doInBackground(Void... voids) {
+		KQuadRect rect = new KQuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
+		KQuadTree<DirectionPoint> directionPoints = new KQuadTree<>(rect, 15, 0.5f);
 		try {
 			parseDirectionPointsForFile(file, directionPoints);
 		} catch (JSONException | IOException e) {
@@ -47,7 +47,7 @@ public class DirectionPointsTask extends AsyncTask<Void, Void, QuadTree<Node>> {
 		return directionPoints;
 	}
 
-	public static void parseDirectionPointsForFile(@NonNull File file, @NonNull QuadTree<Node> directionPoints) throws JSONException, IOException {
+	public static void parseDirectionPointsForFile(@NonNull File file, @NonNull KQuadTree<DirectionPoint> directionPoints) throws JSONException, IOException {
 		StringBuilder json = Algorithms.readFromInputStream(new FileInputStream(file));
 		JSONObject jsonObject = new JSONObject(json.toString());
 		JSONArray array = jsonObject.getJSONArray("features");
@@ -60,21 +60,21 @@ public class DirectionPointsTask extends AsyncTask<Void, Void, QuadTree<Node>> {
 			double lon = coordinates.getDouble(0);
 			double lat = coordinates.getDouble(1);
 
-			Node node = new Node(lat, lon, -1);
+			DirectionPoint point = new DirectionPoint(lat, lon);
 			int x = MapUtils.get31TileNumberX(lon);
 			int y = MapUtils.get31TileNumberY(lat);
 
 			for (Iterator<String> iterator = properties.keys(); iterator.hasNext(); ) {
 				String key = iterator.next();
 				String value = properties.getString(key);
-				node.putTag(key, value);
+				point.putTag(key, value);
 			}
-			directionPoints.insert(node, new QuadRect(x, y, x, y));
+			directionPoints.insert(point, new KQuadRect(x, y, x, y));
 		}
 	}
 
 	@Override
-	protected void onPostExecute(QuadTree<Node> o) {
+	protected void onPostExecute(KQuadTree<DirectionPoint> o) {
 		if (callback != null) {
 			callback.processResult(o);
 		}

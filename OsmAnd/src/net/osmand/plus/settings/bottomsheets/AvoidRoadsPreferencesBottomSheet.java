@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.data.QuadRect;
+import net.osmand.shared.data.KQuadRect;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitleDividerItem;
@@ -88,7 +88,7 @@ public class AvoidRoadsPreferencesBottomSheet extends MultiSelectPreferencesBott
 						.create();
 
 				pointsHelper.getDirectionPointsForFileAsync(file, result -> {
-					int size = result.queryInBox(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE), new ArrayList<>()).size();
+					int size = result.queryInBox(new KQuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE), new ArrayList<>()).size();
 
 					String roads = getString(R.string.roads);
 					String used = getString(enabled ? R.string.shared_string_used : R.string.shared_string_not_used);

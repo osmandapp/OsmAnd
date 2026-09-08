@@ -7,6 +7,7 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.ObfConstants;
 import net.osmand.shared.routing.RouteTypeRule;
 import net.osmand.shared.routing.RouteDataObject;
+import net.osmand.shared.routing.DirectionPoint;
 import net.osmand.data.LatLon;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -213,7 +214,7 @@ public class RouteResultPreparation {
 			checkAndInitRouteRegion(ctx, road);
 			// "osmand_dp" using for backward compatibility from native lib RoutingConfiguration directionPoints
 			if (road.region != null) {
-				road.region.findOrCreateRouteType(RoutingConfiguration.DirectionPoint.TAG, RoutingConfiguration.DirectionPoint.DELETE_TYPE);
+				road.region.findOrCreateRouteType(DirectionPoint.TAG, DirectionPoint.DELETE_TYPE);
 			}
 		}
 		combineWayPointsForAreaRouting(ctx, result);

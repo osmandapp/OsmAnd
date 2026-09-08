@@ -27,15 +27,15 @@ import net.osmand.shared.routing.RouteRegion;
 import net.osmand.shared.routing.RouteSubregion;
 import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.shared.routing.RouteCalculationProgress;
+import net.osmand.shared.data.KQuadRect;
+import net.osmand.shared.routing.DirectionPoint;
 import net.osmand.data.QuadPointDouble;
-import net.osmand.data.QuadRect;
 import net.osmand.map.WorldRegion;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentVisitor;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
-import net.osmand.router.RoutingConfiguration.DirectionPoint;
 import net.osmand.util.MapUtils;
 import net.osmand.shared.util.collections.KTIntObjectIterator;
 import net.osmand.shared.routing.RouteSegmentResult;
@@ -284,7 +284,7 @@ public class RoutingContext {
 			if (config.getDirectionPoints() != null) {
 				//retrieve direction points for attach to routing
 				points = config.getDirectionPoints().queryInBox(
-						new QuadRect(ts.subregion.left, ts.subregion.top, ts.subregion.right, ts.subregion.bottom), new ArrayList<DirectionPoint>());
+						new KQuadRect(ts.subregion.left, ts.subregion.top, ts.subregion.right, ts.subregion.bottom), new ArrayList<DirectionPoint>());
 				int createType = ts.subregion.routeReg.findOrCreateRouteType(DirectionPoint.TAG, DirectionPoint.CREATE_TYPE);
 				for (DirectionPoint d : points) {
 					d.types.clear();

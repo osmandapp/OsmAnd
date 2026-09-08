@@ -8,13 +8,13 @@ import androidx.annotation.Nullable;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
-import net.osmand.data.QuadRect;
-import net.osmand.data.QuadTree;
-import net.osmand.osm.edit.Node;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
+import net.osmand.shared.data.KQuadRect;
+import net.osmand.shared.data.KQuadTree;
+import net.osmand.shared.routing.DirectionPoint;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -55,8 +55,8 @@ public class DirectionPointsHelper {
 	}
 
 	@Nullable
-	public QuadTree<Node> getDirectionPoints(@NonNull ApplicationMode mode) {
-		QuadTree<Node> directionPoints = null;
+	public KQuadTree<DirectionPoint> getDirectionPoints(@NonNull ApplicationMode mode) {
+		KQuadTree<DirectionPoint> directionPoints = null;
 
 		List<String> selectedFiles = getSelectedFilesForMode(mode);
 		if (!Algorithms.isEmpty(selectedFiles)) {
@@ -66,8 +66,8 @@ public class DirectionPointsHelper {
 					String fileName = file.getName();
 					if (fileName.endsWith(AVOID_ROADS_FILE_EXT) && selectedFiles.contains(fileName)) {
 						if (directionPoints == null) {
-							QuadRect rect = new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
-							directionPoints = new QuadTree<>(rect, 15, 0.5f);
+							KQuadRect rect = new KQuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
+							directionPoints = new KQuadTree<>(rect, 15, 0.5f);
 						}
 						try {
 							DirectionPointsTask.parseDirectionPointsForFile(file, directionPoints);
@@ -81,7 +81,7 @@ public class DirectionPointsHelper {
 		return directionPoints;
 	}
 
-	public void getDirectionPointsForFileAsync(@NonNull File file, @Nullable CallbackWithObject<QuadTree<Node>> callback) {
+	public void getDirectionPointsForFileAsync(@NonNull File file, @Nullable CallbackWithObject<KQuadTree<DirectionPoint>> callback) {
 		OsmAndTaskManager.executeTask(new DirectionPointsTask(file, callback));
 	}
 
