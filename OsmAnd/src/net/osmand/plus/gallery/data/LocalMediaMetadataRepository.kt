@@ -1,6 +1,7 @@
 package net.osmand.plus.gallery.data
 
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.media.MediaMetadataRetriever
 import android.media.MediaMetadataRetriever.METADATA_KEY_LOCATION
 import android.net.Uri
@@ -19,6 +20,7 @@ import net.osmand.shared.gpx.GpxUtilities
 import net.osmand.shared.media.MediaProvider
 import net.osmand.shared.media.domain.MediaItem
 import net.osmand.shared.media.domain.MediaType
+import net.osmand.shared.media.library.MediaFormatting
 import java.io.File
 import java.text.ParsePosition
 import java.text.SimpleDateFormat
@@ -161,14 +163,35 @@ class LocalMediaMetadataRepository(
 		}
 			?: extractCreationTime(item, file, contentUri)
 		val latLon = extractLocation(item, file, contentUri)
+		val dimensions = extractDimensions(item, file, contentUri)
+		val mime = contentUri?.let { runCatching { app.contentResolver.getType(it) }.getOrNull() }
 		return GalleryMediaMetadata(
 			sizeBytes = sizeBytes,
 			lastModifiedTimeMs = lastModifiedTimeMs,
 			durationMs = durationMs,
 			latLon = latLon,
-			creationTimeMs = creationTimeMs
+			creationTimeMs = creationTimeMs,
+			width = dimensions?.first,
+			height = dimensions?.second,
+			format = MediaFormatting.formatLabel(file?.name ?: item.title, mime)
 		)
 	}
+
+	private fun extractDimensions(item: MediaItem, file: File?, uri: Uri?): Pair<Int, Int>? =
+		when (item.type) {
+			MediaType.PHOTO -> runCatching {
+				val options = BitmapFactory.Options().apply { inJustDecodeBounds = true }
+				if (file != null) BitmapFactory.decodeFile(file.absolutePath, options)
+				else uri?.let { app.contentResolver.openInputStream(it)?.use { stream -> BitmapFactory.decodeStream(stream, null, options) } }
+				(options.outWidth to options.outHeight).takeIf { it.first > 0 && it.second > 0 }
+			}.getOrNull()
+			MediaType.VIDEO -> withRetriever(file, uri) {
+				val width = it.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH)?.toIntOrNull()
+				val height = it.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT)?.toIntOrNull()
+				if (width != null && height != null && width > 0 && height > 0) width to height else null
+			}
+			else -> null
+		}
 
 	private fun extractCreationTime(item: MediaItem, file: File?, contentUri: Uri?): Long? =
 		when (item.type) {

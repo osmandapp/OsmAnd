@@ -67,21 +67,23 @@ abstract class GalleryGridController(
 		return items
 	}
 
-	protected fun getMediaItems(): List<MediaItem> =
+	protected open fun getMediaItems(): List<MediaItem> =
 		app.galleryHelper.repository.get(key)?.getItems() ?: emptyList()
 
 	override fun getSpanCount(isPortrait: Boolean): Int {
 		return GalleryGridSettings.getSpanCount(app, isPortrait)
 	}
 
-	private fun setSpanCount(isPortrait: Boolean, count: Int) {
+	protected open fun setSpanCount(isPortrait: Boolean, count: Int) {
 		GalleryGridSettings.setSpanCount(app, isPortrait, count)
 	}
 
+	protected open fun spanBounds(isPortrait: Boolean): IntRange = MIN_SPAN_COUNT..MAX_SPAN_COUNT
+
 	// --- Image size ---
 
-	fun resolveSpanResizableSize(viewWidth: Int?): Int {
-		val mapActivity = view?.getMapActivity() ?: return standardPhotoSizePx
+	open fun resolveSpanResizableSize(viewWidth: Int?): Int {
+		val mapActivity = view?.getActivity() ?: return standardPhotoSizePx
 		val isPortrait = view?.isPortrait() ?: return standardPhotoSizePx
 
 		val spanCount = getSpanCount(isPortrait)
@@ -138,20 +140,21 @@ abstract class GalleryGridController(
 		}
 
 		val previousCount = getSpanCount(isPortrait)
+		val bounds = spanBounds(isPortrait)
 		val newCount = newScaleFactor.toInt() + previousCount
 		if (newCount == previousCount) {
 			return false
 		}
 
 		// Further zoom-in past the most zoomed-in grid switches to the list.
-		if (newCount < MIN_SPAN_COUNT && previousCount == MIN_SPAN_COUNT && isListModeSupported()) {
+		if (newCount < bounds.first && previousCount == bounds.first && isListModeSupported()) {
 			newScaleFactor = 0f
 			zoomedForPinch = true
 			setDisplayMode(GalleryDisplayMode.LIST)
 			return true
 		}
 
-		if (newCount in MIN_SPAN_COUNT..MAX_SPAN_COUNT) {
+		if (newCount in bounds) {
 			newScaleFactor = 0f
 			setSpanCount(isPortrait, newCount)
 			zoomedForPinch = true
@@ -167,7 +170,7 @@ abstract class GalleryGridController(
 
 	override fun isListModeSupported(): Boolean = false
 
-	private fun setDisplayMode(mode: GalleryDisplayMode) {
+	open fun setDisplayMode(mode: GalleryDisplayMode) {
 		if (displayMode != mode) {
 			displayMode = mode
 			view?.updateDisplayMode()
@@ -242,7 +245,7 @@ abstract class GalleryGridController(
 	// --- Media ---
 
 	override fun onMediaItemClicked(mediaItem: MediaItem) {
-		val activity = view?.getMapActivity() ?: return
+		val activity = view?.getActivity() ?: return
 		val orderedIds = getGalleryItems()
 			.filterIsInstance<GalleryItem.Media>()
 			.map { it.mediaItem.id }
@@ -260,7 +263,7 @@ abstract class GalleryGridController(
 		)
 	}
 
-	fun createAdapter(mapActivity: MapActivity, viewWidth: Int?, nightMode: Boolean): GalleryGridAdapter {
+	open fun createAdapter(mapActivity: FragmentActivity, viewWidth: Int?, nightMode: Boolean): GalleryGridAdapter {
 		val registry = app.galleryHelper.loadStateRegistry
 		return GalleryGridAdapter(
 			mapActivity = mapActivity,
@@ -276,7 +279,8 @@ abstract class GalleryGridController(
 			onMediaLongClicked = ::onMediaItemLongClicked,
 			isItemSelected = ::isSelected,
 			onToggleSelection = ::toggleSelection,
-			posterLoader = app.galleryHelper.posterLoader
+			posterLoader = app.galleryHelper.posterLoader,
+			onGroupHeaderClicked = ::onGroupHeaderClicked
 		)
 	}
 
