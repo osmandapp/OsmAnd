@@ -1,7 +1,7 @@
 package net.osmand.router;
 
 import net.osmand.Location;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
+import net.osmand.shared.routing.RouteTypeRule;
 import net.osmand.binary.RouteDataBundle;
 import net.osmand.binary.StringBundle;
 import net.osmand.shared.gpx.GpxFile;
@@ -89,7 +89,10 @@ public class RouteExporter {
 		Map<RouteTypeRule, Integer> rules = resources.getRules();
 		for (RouteTypeRule rule : rules.keySet()) {
 			RouteDataBundle typeBundle = new RouteDataBundle(resources);
-			rule.writeToBundle(typeBundle);
+			typeBundle.putString("t", rule.getTag());
+			if (rule.getValue() != null) {
+				typeBundle.putString("v", rule.getValue());
+			}
 			typeList.add(typeBundle);
 		}
 

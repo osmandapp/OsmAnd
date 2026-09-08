@@ -1,6 +1,6 @@
 package net.osmand.router;
 
-import net.osmand.binary.BinaryMapRouteReaderAdapter;
+import net.osmand.shared.routing.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
 
 import java.util.HashMap;
@@ -15,7 +15,7 @@ public class RouteConditionalHelper {
 		// Find corresponding non-conditional tags and save their existing int-values.
 		// Example: maxspeed:conditional (RULE_INT_MAX) will save the value of maxspeed.
 		for (int type : rdo.types) {
-			BinaryMapRouteReaderAdapter.RouteTypeRule r = rdo.region.quickGetEncodingRule(type);
+			RouteTypeRule r = rdo.region.quickGetEncodingRule(type);
 			if (r != null && !r.conditional()) {
 				String key = r.getTag() + ":conditional";
 				String rule = ambiguousConditionalTags.get(key);
@@ -37,7 +37,7 @@ public class RouteConditionalHelper {
 		// Example: access:conditional ("yes") will always set "access" = "yes"
 		// Example: maxspeed:conditional (RULE_INT_MAX) might set maxspeed = max(existing, conditional)
 		for (int type : rdo.types) {
-			BinaryMapRouteReaderAdapter.RouteTypeRule r = rdo.region.quickGetEncodingRule(type);
+			RouteTypeRule r = rdo.region.quickGetEncodingRule(type);
 			if (r != null && r.conditional()) {
 				String key = r.getTag();
 				String rule = ambiguousConditionalTags.get(key);
@@ -57,7 +57,7 @@ public class RouteConditionalHelper {
 	public void processConditionalTags(RouteDataObject rdo, long conditionalTime) {
 		int sz = rdo.types.length;
 		for (int i = 0; i < sz; i++) {
-			BinaryMapRouteReaderAdapter.RouteTypeRule r = rdo.region.quickGetEncodingRule(rdo.types[i]);
+			RouteTypeRule r = rdo.region.quickGetEncodingRule(rdo.types[i]);
 			if (r != null && r.conditional()) {
 				int vl = r.conditionalValue(conditionalTime);
 				if (vl != 0) {
@@ -74,15 +74,15 @@ public class RouteConditionalHelper {
 					int pSz = pTypes.length;
 					if (pSz > 0) {
 						for (int j = 0; j < pSz; j++) {
-							BinaryMapRouteReaderAdapter.RouteTypeRule r = rdo.region.quickGetEncodingRule(pTypes[j]);
+							RouteTypeRule r = rdo.region.quickGetEncodingRule(pTypes[j]);
 							if (r != null && r.conditional()) {
 								int vl = r.conditionalValue(conditionalTime);
 								if (vl != 0) {
-									BinaryMapRouteReaderAdapter.RouteTypeRule rtr = rdo.region.quickGetEncodingRule(vl);
+									RouteTypeRule rtr = rdo.region.quickGetEncodingRule(vl);
 									String nonCondTag = rtr.getTag();
 									int ks;
 									for (ks = 0; ks < rdo.pointTypes[i].length; ks++) {
-										BinaryMapRouteReaderAdapter.RouteTypeRule toReplace = rdo.region.quickGetEncodingRule(rdo.pointTypes[i][ks]);
+										RouteTypeRule toReplace = rdo.region.quickGetEncodingRule(rdo.pointTypes[i][ks]);
 										if (toReplace != null && toReplace.getTag().contentEquals(nonCondTag)) {
 											break;
 										}
@@ -117,7 +117,7 @@ public class RouteConditionalHelper {
 		if (ruleId > 0) {
 			int ks;
 			for (ks = 0; ks < rdo.types.length; ks++) {
-				BinaryMapRouteReaderAdapter.RouteTypeRule toReplace = rdo.region.quickGetEncodingRule(rdo.types[ks]);
+				RouteTypeRule toReplace = rdo.region.quickGetEncodingRule(rdo.types[ks]);
 				if (toReplace != null && toReplace.getTag().equals(tag)) {
 					break;
 				}

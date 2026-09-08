@@ -1,7 +1,7 @@
 package net.osmand.router;
 
 import net.osmand.PlatformUtil;
-import net.osmand.binary.BinaryMapRouteReaderAdapter;
+import net.osmand.shared.routing.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
@@ -403,7 +403,7 @@ public class RouteStatisticsHelper {
 							+ ", rules=" + encodingRulesSize);
 					continue;
 				}
-				BinaryMapRouteReaderAdapter.RouteTypeRule tp = routeObject.region.quickGetEncodingRule(type);
+				RouteTypeRule tp = routeObject.region.quickGetEncodingRule(type);
 				if (tp.getTag().equals("highway") || tp.getTag().equals("route")
 						|| tp.getTag().equals("railway") || tp.getTag().equals("aeroway")
 						|| tp.getTag().equals("aerialway") || tp.getTag().equals("piste:type")) {

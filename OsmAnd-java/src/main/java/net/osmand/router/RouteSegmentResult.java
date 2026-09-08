@@ -4,7 +4,7 @@ package net.osmand.router;
 import net.osmand.shared.routing.TurnType;
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
+import net.osmand.shared.routing.RouteTypeRule;
 import net.osmand.binary.RouteDataBundle;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.binary.StringExternalizable;

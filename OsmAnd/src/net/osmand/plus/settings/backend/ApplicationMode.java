@@ -1,7 +1,5 @@
 package net.osmand.plus.settings.backend;
 
-import static net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
-
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -19,6 +17,7 @@ import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.enums.MarkerDisplayOption;
+import net.osmand.shared.routing.RouteTypeRule;
 import net.osmand.util.Algorithms;
 
 import java.util.*;

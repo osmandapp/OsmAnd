@@ -3,9 +3,10 @@ package net.osmand.binary;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.data.LatLon;
 import net.osmand.shared.routing.GeneralRouterProfile;
+import net.osmand.shared.routing.RouteDataUtils;
+import net.osmand.shared.routing.RouteTypeRule;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.TransliterationHelper;
@@ -33,7 +34,7 @@ public class RouteDataObject {
 	public int[][] pointNameTypes;
 	public long id;
 	public TIntObjectHashMap<String> names;
-	public final static float NONE_MAX_SPEED = 40f;
+	public final static float NONE_MAX_SPEED = RouteDataUtils.NONE_MAX_SPEED;
 	public int[] nameIds;
 	// mixed array [0, height, cumulative_distance height, cumulative_distance, height, ...] - length is length(points)*2
 	public float[] heightDistanceArray = null;
@@ -552,20 +553,7 @@ public class RouteDataObject {
 	}
 
 	public static float parseSpeed(String v, float def) {
-		if (v.equals("none")) {
-			return RouteDataObject.NONE_MAX_SPEED;
-		} else {
-			int i = Algorithms.findFirstNumberEndIndex(v);
-			if (i > 0) {
-				float f = Float.parseFloat(v.substring(0, i));
-				f /= 3.6; // km/h -> m/s
-				if (v.contains("mph")) {
-					f *= 1.6;
-				}
-				return f;
-			}
-		}
-		return def;
+		return RouteDataUtils.parseSpeed(v, def);
 	}
 
 	public static float parseLength(String v, float def) {

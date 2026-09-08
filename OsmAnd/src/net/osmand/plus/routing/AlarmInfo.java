@@ -19,7 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.Location;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
+import net.osmand.shared.routing.RouteTypeRule;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
 

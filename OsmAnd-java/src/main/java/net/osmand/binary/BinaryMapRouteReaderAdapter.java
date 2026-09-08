@@ -14,15 +14,13 @@ import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteEncodingRule;
 import net.osmand.binary.OsmandOdb.RestrictionData;
 import net.osmand.binary.OsmandOdb.RouteData;
 import net.osmand.binary.RouteDataObject.RestrictionInfo;
-import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import net.osmand.shared.util.OpeningHoursParser;
+import net.osmand.shared.routing.RouteTypeRule;
 
 import org.apache.commons.logging.Log;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
@@ -39,289 +37,9 @@ public class BinaryMapRouteReaderAdapter {
 	protected static final Log LOG = PlatformUtil.getLog(BinaryMapRouteReaderAdapter.class);
 	private static final int SHIFT_COORDINATES = 4;
 
-	private static class RouteTypeCondition implements StringExternalizable<RouteDataBundle> {
-		String condition = "";
-		OpeningHoursParser.OpeningHours hours = null;
-		String value;
-		int ruleid;
-
-		@Override
-		public void writeToBundle(RouteDataBundle bundle) {
-			bundle.putString("c", condition);
-			bundle.putString("v", value);
-			bundle.putInt("id", ruleid);
-		}
-
-		@Override
-		public void readFromBundle(RouteDataBundle bundle) {
-
-		}
-	}
-
-	public static class RouteTypeRule implements StringExternalizable<RouteDataBundle> {
-		private final static int ACCESS = 1;
-		private final static int ONEWAY = 2;
-		private final static int HIGHWAY_TYPE = 3;
-		private final static int MAXSPEED = 4;
-		private final static int ROUNDABOUT = 5;
-		public final static int TRAFFIC_SIGNALS = 6;
-		public final static int RAILWAY_CROSSING = 7;
-		private final static int LANES = 8;
-		
-		public final static int PROFILE_NONE = 0;
-		public final static int PROFILE_TRUCK = 1000;
-		public final static int PROFILE_CAR = 1001;
-		
-		private String t;
-		private String v;
-		private int intValue;
-		private float floatValue;
-		private int type;
-		private List<RouteTypeCondition> conditions = null;
-		private int forward;
-
-		public RouteTypeRule() {
-		}
-
-		public RouteTypeRule(String t, String v) {
-			this.t = t.intern();
-			if ("true".equals(v)) {
-				v = "yes";
-			}
-			if ("false".equals(v)) {
-				v = "no";
-			}
-			this.v = v == null ? null : v.intern();
-			try {
-				analyze();
-			} catch(RuntimeException e) {
-				System.err.println("Error analyzing tag/value = " + t + "/" +v);
-				throw e;
-			}
-		}
-
-		@Override
-		public int hashCode() {
-			final int prime = 31;
-			int result = 1;
-			result = prime * result + ((t == null) ? 0 : t.hashCode());
-			result = prime * result + ((v == null) ? 0 : v.hashCode());
-			return result;
-		}
-
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj) {
-				return true;
-			}
-			if (obj == null || getClass() != obj.getClass()) {
-				return false;
-			}
-			RouteTypeRule other = (RouteTypeRule) obj;
-			return Algorithms.objectEquals(other.t, t) && Algorithms.objectEquals(other.v, v);
-		}
-
-		@Override
-		public void writeToBundle(RouteDataBundle bundle) {
-			bundle.putString("t", t);
-			if (v != null) {
-				bundle.putString("v", v);
-			}
-		}
-
-		@Override
-		public void readFromBundle(RouteDataBundle bundle) {
-			t = bundle.getString("t", null);
-			v = bundle.getString("v", null);
-			try {
-				analyze();
-			} catch(RuntimeException e) {
-				System.err.println("Error analyzing tag/value = " + t + "/" +v);
-				throw e;
-			}
-		}
-
-		@Override
-		public String toString() {
-			return t + "=" + v;
-		}
-
-		public int isForward() {
-			return forward;
-		}
-
-		public String getTag() {
-			return t;
-		}
-		
-		public String getValue(){
-			return v;
-		}
-
-		public boolean roundabout(){
-			return type == ROUNDABOUT;
-		}
-
-		public int getType() {
-			return type;
-		}
-
-		public boolean conditional() {
-			return conditions != null;
-		}
-		
-		public String getNonConditionalTag() {
-			String tag = getTag();
-			if(tag != null && tag.endsWith(":conditional")) {
-				tag = tag.substring(0, tag.length() - ":conditional".length());
-			}
-			return tag;
-		}
-		
-		public int onewayDirection(){
-			if(type == ONEWAY){
-				return intValue;
-			}
-			return 0;
-		}
-
-		public int conditionalValue(long time) {
-			if (conditional()) {
-				for (RouteTypeCondition c : conditions) {
-					if (c.hours != null && c.hours.isOpenedForTime(time)) {
-						return c.ruleid;
-					}
-				}
-			}
-			return 0;
-		}
-
-		public Integer getMaxIntegerConditionalValue() {
-			if (conditional()) {
-				int maxValue = Integer.MIN_VALUE;
-				for (RouteTypeCondition c : conditions) {
-					try {
-						int value = Integer.parseInt(c.value);
-						if (value > maxValue) {
-							maxValue = value;
-						}
-					} catch(NumberFormatException e) {
-						continue;
-					}
-				}
-				return maxValue > Integer.MIN_VALUE ? maxValue : null;
-			}
-			return null;
-		}
-
-		public float maxSpeed(int profile) {
-			if (type == (MAXSPEED + profile)) {
-				return floatValue;
-			}
-			return -1;
-		}
-
-		public int lanes() {
-			if (type == LANES) {
-				return intValue;
-			}
-			return -1;
-		}
-
-		public String highwayRoad() {
-			if (type == HIGHWAY_TYPE) {
-				return v;
-			}
-			return null;
-		}
-
-		private void analyze() {
-			if (t.equalsIgnoreCase("oneway")) {
-				type = ONEWAY;
-				if ("-1".equals(v) || "reverse".equals(v)) {
-					intValue = -1;
-				} else if("1".equals(v) || "yes".equals(v)) {
-					intValue = 1;
-				} else {
-					intValue = 0;
-				}
-			} else if(t.equalsIgnoreCase("highway") && "traffic_signals".equals(v)){
-				type = TRAFFIC_SIGNALS;
-			} else if(t.equalsIgnoreCase("railway") && ("crossing".equals(v) || "level_crossing".equals(v))){
-				type = RAILWAY_CROSSING;
-			} else if(t.equalsIgnoreCase("roundabout") && v != null){
-				type = ROUNDABOUT;
-			} else if(t.equalsIgnoreCase("junction") && "roundabout".equalsIgnoreCase(v)){
-				type = ROUNDABOUT;
-			} else if(t.equalsIgnoreCase("highway") && v != null){
-				type = HIGHWAY_TYPE;
-			} else if(t.endsWith(":conditional") && v != null){
-				conditions = new ArrayList<RouteTypeCondition>();
-				String[] cts = v.split("\\);");
-				for(String c : cts) {
-					int ch = c.indexOf('@');
-					if (ch > 0) {
-						RouteTypeCondition cond = new RouteTypeCondition();
-						cond.value = c.substring(0, ch).trim();
-						cond.condition = c.substring(ch + 1).trim();
-						if (cond.condition.startsWith("(")) {
-							cond.condition = cond.condition.substring(1, cond.condition.length()).trim();
-						}
-						if(cond.condition.endsWith(")")) {
-							cond.condition = cond.condition.substring(0, cond.condition.length() - 1).trim();
-						}
-						cond.hours = OpeningHoursParser.parseOpenedHours(cond.condition);
-						conditions.add(cond);
-					}
-				}
-				// we don't set type for condtiional so they are not used directly
-//				if(t.startsWith("maxspeed")) {
-//					type = MAXSPEED;
-//				} else if(t.startsWith("oneway")) {
-//					type = ONEWAY;
-//				} else if(t.startsWith("lanes")) {
-//					type = LANES;
-//				} else if(t.startsWith("access")) {
-//					type = ACCESS;
-//				}
-			} else if (t.startsWith("access") && v != null) {
-				type = ACCESS;
-			} else if (t.startsWith("maxspeed") && v != null) {
-				String tg = t;
-				if (t.endsWith(":forward")) {
-					tg = t.substring(0, t.length() - ":forward".length());
-					forward = 1;
-				} else if (t.endsWith(":backward")) {
-					tg = t.substring(0, t.length() - ":backward".length());
-					forward = -1;
-				} else {
-					forward = 0;
-				}
-				floatValue = RouteDataObject.parseSpeed(v, 0);
-				if (tg.equalsIgnoreCase("maxspeed")) {
-					type = MAXSPEED;
-				} else if (tg.equalsIgnoreCase("maxspeed:hgv")) {
-					type = MAXSPEED + PROFILE_TRUCK;
-				} else if (tg.equalsIgnoreCase("maxspeed:motorcar")) {
-					type = MAXSPEED + PROFILE_CAR;
-				}
-			} else if (t.equalsIgnoreCase("lanes") && v != null) {
-				intValue = -1;
-				int i = 0;
-				type = LANES;
-				while (i < v.length() && Character.isDigit(v.charAt(i))) {
-					i++;
-				}
-				if (i > 0) {
-					intValue = Integer.parseInt(v.substring(0, i));
-				}
-			}
-		}
-	}
-
 	public static class RouteRegion extends BinaryIndexPart {
 		public int regionsRead;
-		public List<RouteTypeRule> routeEncodingRules = new ArrayList<BinaryMapRouteReaderAdapter.RouteTypeRule>();
+		public List<RouteTypeRule> routeEncodingRules = new ArrayList<RouteTypeRule>();
 		public int routeEncodingRulesBytes = 0;
 		Map<String, Integer> decodingRules = null;
 		List<RouteSubregion> subregions = new ArrayList<RouteSubregion>();
@@ -432,9 +150,9 @@ public class BinaryMapRouteReaderAdapter {
 				RouteTypeRule rtr = routeEncodingRules.get(i);
 				if (rtr != null && rtr.conditional()) {
 					String tag = rtr.getNonConditionalTag();
-					for (RouteTypeCondition c : rtr.conditions) {
-						if (tag != null && c.value != null) {
-							c.ruleid = findOrCreateRouteType(tag, c.value);
+					for (RouteTypeRule.RouteTypeCondition c : rtr.getConditions()) {
+						if (c.getValue() != null) {
+							c.setRuleId(findOrCreateRouteType(tag, c.getValue()));
 						}
 					}
 

@@ -3,7 +3,7 @@ package net.osmand.router.network;
 
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapRouteReaderAdapter;
+import net.osmand.shared.routing.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.osm.OsmRouteType;
 import net.osmand.shared.gpx.GpxFile;
@@ -31,13 +31,13 @@ public class NetworkRouteSelector {
 		for (int i = 0; obj.nameIds != null && i < obj.nameIds.length; i++) {
 			int nameId = obj.nameIds[i];
 			String value = obj.names.get(nameId);
-			BinaryMapRouteReaderAdapter.RouteTypeRule rt = obj.region.quickGetEncodingRule(nameId);
+			RouteTypeRule rt = obj.region.quickGetEncodingRule(nameId);
 			if (rt != null) {
 				tags.put(rt.getTag(), value);
 			}
 		}
 		for (int i = 0; obj.types != null && i < obj.types.length; i++) {
-			BinaryMapRouteReaderAdapter.RouteTypeRule rt = obj.region.quickGetEncodingRule(obj.types[i]);
+			RouteTypeRule rt = obj.region.quickGetEncodingRule(obj.types[i]);
 			if (rt != null) {
 				tags.put(rt.getTag(), rt.getValue());
 			}
