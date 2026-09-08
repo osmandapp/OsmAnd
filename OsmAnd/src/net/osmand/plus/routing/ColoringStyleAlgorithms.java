@@ -18,7 +18,7 @@ import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteExporter;
-import net.osmand.router.RouteSegmentResult;
+import net.osmand.shared.routing.RouteSegmentResult;
 import net.osmand.router.RouteStatisticsHelper;
 import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 import net.osmand.util.Algorithms;

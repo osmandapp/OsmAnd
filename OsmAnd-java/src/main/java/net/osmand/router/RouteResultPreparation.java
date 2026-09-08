@@ -42,6 +42,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import net.osmand.shared.routing.RouteSegmentResult;
+import net.osmand.shared.util.KMapUtils;
 
 public class RouteResultPreparation {
 
@@ -508,7 +510,7 @@ public class RouteResultPreparation {
 		for (int i = 1; i < result.size(); i++) {
 			RouteSegmentResult rr = result.get(i);
 			RouteSegmentResult pr = result.get(i - 1);
-			double d = MapUtils.getDistance(pr.getPoint(pr.getEndPointIndex()), rr.getPoint(rr.getStartPointIndex()));
+			double d = KMapUtils.INSTANCE.getDistance(pr.getPoint(pr.getEndPointIndex()), rr.getPoint(rr.getStartPointIndex()));
 			if (d > 0) {
 				System.out.printf("Points are not connected: %d-%d of %d %s (%d) -> %s (%d) by %.2f meters\n",
 						i - 1, i, result.size() - 1, pr.getObject(), pr.getEndPointIndex(),
@@ -761,7 +763,7 @@ public class RouteResultPreparation {
 				indexnext += inc; 
 				if (serializer != null) {
 					try {
-						LatLon l = res.getPoint(index);
+						LatLon l = LatLon.of(res.getPoint(index));
 						serializer.startTag("","trkpt");
 						serializer.attribute("", "lat",  l.getLatitude() + "");
 						serializer.attribute("", "lon",  l.getLongitude() + "");

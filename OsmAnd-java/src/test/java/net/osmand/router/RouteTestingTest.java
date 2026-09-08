@@ -29,6 +29,7 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.ObfConstants;
 import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
 import net.osmand.util.RouterUtilTest;
+import net.osmand.shared.routing.RouteSegmentResult;
 
 @RunWith(Parameterized.class)
 public class RouteTestingTest {

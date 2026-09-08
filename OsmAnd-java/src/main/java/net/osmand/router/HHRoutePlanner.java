@@ -51,6 +51,7 @@ import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import net.osmand.shared.routing.RouteSegmentResult;
 
 public class HHRoutePlanner<T extends NetworkDBPoint> {
 	public static int DEBUG_VERBOSE_LEVEL = 0;

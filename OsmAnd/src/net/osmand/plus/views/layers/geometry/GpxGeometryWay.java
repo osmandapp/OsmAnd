@@ -9,7 +9,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.track.Gpx3DVisualizationType;
 import net.osmand.plus.track.Track3DStyle;
-import net.osmand.router.RouteSegmentResult;
+import net.osmand.shared.routing.RouteSegmentResult;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.shared.routing.RouteColorize.RouteColorizationPoint;

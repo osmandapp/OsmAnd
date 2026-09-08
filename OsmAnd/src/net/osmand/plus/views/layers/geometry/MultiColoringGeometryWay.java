@@ -23,7 +23,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.layers.geometry.GeometryWayDrawer.DrawPathData31;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
-import net.osmand.router.RouteSegmentResult;
+import net.osmand.shared.routing.RouteSegmentResult;
 import net.osmand.router.RouteStatisticsHelper.RouteSegmentAttribute;
 import net.osmand.router.RouteStatisticsHelper.RouteStatisticComputer;
 import net.osmand.shared.ColorPalette;
@@ -259,7 +259,7 @@ public abstract class MultiColoringGeometryWay<C extends MultiColoringGeometryWa
 
 	protected int getIdxOfFirstSegmentLocation(List<Location> locations, List<RouteSegmentResult> routeSegments) {
 		int locationsIdx = 0;
-		LatLon segmentStartPoint = routeSegments.get(0).getStartPoint();
+		LatLon segmentStartPoint = LatLon.of(routeSegments.get(0).getStartPoint());
 		while (locationsIdx < locations.size()) {
 			Location location = locations.get(locationsIdx);
 			if (location.getLatitude() == segmentStartPoint.getLatitude()

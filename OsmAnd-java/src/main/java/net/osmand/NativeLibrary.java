@@ -41,7 +41,7 @@ import net.osmand.router.NativeTransportRoutingResult;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RouteResultPreparation;
-import net.osmand.router.RouteSegmentResult;
+import net.osmand.shared.routing.RouteSegmentResult;
 import net.osmand.router.RoutingContext;
 import net.osmand.router.TransportRoutingConfiguration;
 import net.osmand.util.Algorithms;

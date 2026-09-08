@@ -52,7 +52,7 @@ import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.views.mapwidgets.widgets.speedometer.SpeedState;
 import net.osmand.plus.views.mapwidgets.widgets.speedometer.SpeedometerAnimationDrawable;
-import net.osmand.router.RouteSegmentResult;
+import net.osmand.shared.routing.RouteSegmentResult;
 import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.utils.AndroidUtils;

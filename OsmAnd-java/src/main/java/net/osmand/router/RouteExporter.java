@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import net.osmand.shared.routing.RouteDataResources;
+import net.osmand.shared.routing.RouteSegmentResult;
 
 public class RouteExporter {
 

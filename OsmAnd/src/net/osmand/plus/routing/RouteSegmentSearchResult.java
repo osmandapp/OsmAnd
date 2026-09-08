@@ -3,7 +3,7 @@ package net.osmand.plus.routing;
 import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadPointDouble;
-import net.osmand.router.RouteSegmentResult;
+import net.osmand.shared.routing.RouteSegmentResult;
 import net.osmand.util.MapUtils;
 
 import java.util.List;

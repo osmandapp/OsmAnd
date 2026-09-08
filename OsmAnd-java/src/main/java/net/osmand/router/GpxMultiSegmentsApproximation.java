@@ -13,6 +13,7 @@ import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.util.MapUtils;
+import net.osmand.shared.routing.RouteSegmentResult;
 
 // TEST missing roads, performance, start-end points (precise)
 public class GpxMultiSegmentsApproximation {

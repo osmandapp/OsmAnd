@@ -30,6 +30,8 @@ import net.osmand.router.RouteResultPreparation.RouteCalcResult;
 import net.osmand.shared.routing.TurnType;
 import net.osmand.shared.routing.GeneralRouterProfile;
 import net.osmand.util.MapUtils;
+import net.osmand.shared.routing.RouteSegmentResult;
+import net.osmand.shared.util.KMapUtils;
 
 
 public class RoutePlannerFrontEnd {
@@ -879,7 +881,7 @@ public class RoutePlannerFrontEnd {
 			for (int i = 0; i < prev.size(); i++) {
 				RouteSegmentResult rsr = prev.get(i);
 				if (id == rsr.getObject().getId()) {
-					if (MapUtils.getDistance(rsr.getPoint(rsr.getEndPointIndex()), MapUtils.get31LatitudeY(py),
+					if (KMapUtils.INSTANCE.getDistance(rsr.getPoint(rsr.getEndPointIndex()), MapUtils.get31LatitudeY(py),
 							MapUtils.get31LongitudeX(px)) < 50) {
 						firstPartRecalculatedRoute = new ArrayList<RouteSegmentResult>(i + 1);
 						restPartRecalculatedRoute = new ArrayList<RouteSegmentResult>(prev.size() - i);

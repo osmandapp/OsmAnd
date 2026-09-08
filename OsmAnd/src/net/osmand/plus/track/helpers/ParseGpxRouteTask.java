@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.track.CachedTrackParams;
-import net.osmand.router.RouteSegmentResult;
+import net.osmand.shared.routing.RouteSegmentResult;
 
 import java.util.ArrayList;
 import java.util.Collections;

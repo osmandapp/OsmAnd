@@ -17,7 +17,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.measurementtool.GpxApproximationParams;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.router.RouteSegmentResult;
+import net.osmand.shared.routing.RouteSegmentResult;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 

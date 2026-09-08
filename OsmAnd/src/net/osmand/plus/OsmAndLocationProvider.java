@@ -55,7 +55,7 @@ import net.osmand.plus.settings.enums.LocationSource;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.simulation.SimulationProvider;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.router.RouteSegmentResult;
+import net.osmand.shared.routing.RouteSegmentResult;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;

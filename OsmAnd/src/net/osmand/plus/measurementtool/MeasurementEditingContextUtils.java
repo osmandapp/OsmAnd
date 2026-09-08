@@ -3,7 +3,7 @@ package net.osmand.plus.measurementtool;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.data.LatLon;
 import net.osmand.router.RoutePlannerFrontEnd;
-import net.osmand.router.RouteSegmentResult;
+import net.osmand.shared.routing.RouteSegmentResult;
 import net.osmand.util.MapUtils;
 
 import java.util.List;
@@ -63,7 +63,7 @@ public class MeasurementEditingContextUtils {
 		}
 
 		private void addPointToArray(List<WptPt> points, RouteSegmentResult seg, int index, float[] heightArray) {
-			LatLon ll = seg.getPoint(index);
+			LatLon ll = LatLon.of(seg.getPoint(index));
 			WptPt pt = new WptPt();
 
 			pt.setLat(ll.getLatitude());
@@ -86,7 +86,7 @@ public class MeasurementEditingContextUtils {
 
 			// calculate next timestamp inside current segment
 			if (timestamp > 0 && index != seg.getEndPointIndex()) {
-				LatLon nextLatLon = seg.getPoint(index + (seg.isForwardDirection() ? +1 : -1));
+				LatLon nextLatLon = LatLon.of(seg.getPoint(index + (seg.isForwardDirection() ? +1 : -1)));
 				timestamp += calcTimeMs(seg, ll, nextLatLon);
 				previousSegmentLastPoint = nextLatLon;
 			}

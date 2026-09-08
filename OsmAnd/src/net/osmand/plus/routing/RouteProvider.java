@@ -63,6 +63,7 @@ import javax.xml.parsers.FactoryConfigurationError;
 import javax.xml.parsers.ParserConfigurationException;
 
 import btools.routingapp.IBRouterService;
+import net.osmand.shared.routing.RouteSegmentResult;
 
 
 public class RouteProvider {

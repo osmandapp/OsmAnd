@@ -29,7 +29,7 @@ import net.osmand.router.GpxRouteApproximation;
 import net.osmand.router.MissingMapsCalculationResult;
 import net.osmand.router.RouteExporter;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
-import net.osmand.router.RouteSegmentResult;
+import net.osmand.shared.routing.RouteSegmentResult;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.util.Algorithms;

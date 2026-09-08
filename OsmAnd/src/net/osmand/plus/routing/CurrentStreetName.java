@@ -9,7 +9,7 @@ import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.shared.routing.ExitInfo;
-import net.osmand.router.RouteSegmentResult;
+import net.osmand.shared.routing.RouteSegmentResult;
 import net.osmand.shared.routing.TurnType;
 import net.osmand.util.Algorithms;
 

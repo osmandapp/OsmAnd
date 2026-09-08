@@ -21,7 +21,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.shared.routing.ExitInfo;
 import net.osmand.router.MissingMapsCalculationResult;
 import net.osmand.router.RoutePlannerFrontEnd;
-import net.osmand.router.RouteSegmentResult;
+import net.osmand.shared.routing.RouteSegmentResult;
 import net.osmand.router.RoutingContext;
 import net.osmand.shared.routing.TurnType;
 import net.osmand.shared.gpx.GpxFile;
@@ -377,7 +377,7 @@ public class RouteCalculationResult {
 			int prevLocationSize = locations.size();
 			if (s.getObject().tunnel()) {
 				if (tunnelAlarm == null) {
-					LatLon latLon = s.getPoint(i);
+					LatLon latLon = LatLon.of(s.getPoint(i));
 					tunnelAlarm = new AlarmInfo(AlarmInfoType.TUNNEL, prevLocationSize);
 					tunnelAlarm.setLatLon(latLon.getLatitude(), latLon.getLongitude());
 					tunnelAlarm.setFloatValue(s.getDistance());
@@ -400,7 +400,7 @@ public class RouteCalculationResult {
 					break;
 				}
 				Location n = new Location("");
-				LatLon point = s.getPoint(i);
+				LatLon point = LatLon.of(s.getPoint(i));
 				n.setLatitude(point.getLatitude());
 				n.setLongitude(point.getLongitude());
 				n.setSpeed(s.getSegmentSpeed());

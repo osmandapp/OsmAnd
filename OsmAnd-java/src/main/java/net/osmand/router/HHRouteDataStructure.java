@@ -26,6 +26,7 @@ import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
 import net.osmand.router.RouteResultPreparation.RouteCalcResult;
 import net.osmand.util.MapUtils;
+import net.osmand.shared.routing.RouteSegmentResult;
 
 public class HHRouteDataStructure {
 	

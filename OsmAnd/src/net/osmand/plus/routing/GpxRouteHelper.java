@@ -7,7 +7,7 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.router.RouteResultPreparation;
-import net.osmand.router.RouteSegmentResult;
+import net.osmand.shared.routing.RouteSegmentResult;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -86,7 +86,7 @@ public class GpxRouteHelper {
                 if (nearestGpxPointInd > 0) {
                     gpxRoute = result.getOriginalRoute(nearestGpxPointInd, false);
                     if (!Algorithms.isEmpty(gpxRoute)) {
-                        LatLon startPoint = gpxRoute.get(0).getStartPoint();
+                        LatLon startPoint = LatLon.of(gpxRoute.get(0).getStartPoint());
                         nearestGpxLocation = new Location("", startPoint.getLatitude(), startPoint.getLongitude());
                     } else {
                         nearestGpxLocation = new Location("", routeParams.end.getLatitude(), routeParams.end.getLongitude());
@@ -424,8 +424,8 @@ public class GpxRouteHelper {
             int endIndex = segment.getStartPointIndex() + step;
 
             for (int index = startIndex; index != endIndex && checkedDistance < searchDistance; index += step) {
-                LatLon prevRoutePoint = segment.getPoint(index);
-                LatLon nextRoutePoint = segment.getPoint(index - step);
+                LatLon prevRoutePoint = LatLon.of(segment.getPoint(index));
+                LatLon nextRoutePoint = LatLon.of(segment.getPoint(index - step));
                 double distance = MapUtils.getOrthogonalDistance(
                         startLocation.getLatitude(), startLocation.getLongitude(),
                         prevRoutePoint.getLatitude(), prevRoutePoint.getLongitude(),

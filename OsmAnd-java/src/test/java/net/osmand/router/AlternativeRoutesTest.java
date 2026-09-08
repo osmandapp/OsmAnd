@@ -29,6 +29,7 @@ import net.osmand.router.RouteResultPreparation.RouteCalcResult;
 import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
 import net.osmand.util.MapUtils;
+import net.osmand.shared.routing.RouteSegmentResult;
 
 /**
  * Alternative routes of {@link HHRoutePlanner} (OsmAnd-Issues #2843).

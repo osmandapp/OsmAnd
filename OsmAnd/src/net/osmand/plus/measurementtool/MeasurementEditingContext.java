@@ -38,6 +38,7 @@ import org.apache.commons.logging.Log;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
+import net.osmand.shared.routing.RouteSegmentResult;
 
 public class MeasurementEditingContext implements IRouteSettingsListener {
 

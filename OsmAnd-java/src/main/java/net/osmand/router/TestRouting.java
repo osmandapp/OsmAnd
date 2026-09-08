@@ -22,6 +22,7 @@ import java.io.RandomAccessFile;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import net.osmand.shared.routing.RouteSegmentResult;
 
 public class TestRouting {
 	

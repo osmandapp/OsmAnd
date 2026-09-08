@@ -13,6 +13,8 @@ import org.apache.commons.logging.Log;
 import java.io.IOException;
 import java.util.*;
 import net.osmand.shared.routing.RouteRegion;
+import net.osmand.shared.routing.RouteSegmentResult;
+import net.osmand.shared.util.KMapUtils;
 
 public class GpxRouteApproximation {
 	
@@ -80,7 +82,7 @@ public class GpxRouteApproximation {
 
 	private LatLon getLastPoint() {
 		if (fullRoute.size() > 0) {
-			return fullRoute.get(fullRoute.size() - 1).getEndPoint();
+			return LatLon.of(fullRoute.get(fullRoute.size() - 1).getEndPoint());
 		}
 		return null;
 	}
@@ -310,7 +312,7 @@ public class GpxRouteApproximation {
 			int nextInd;
 			for (int j = rr.getEndPointIndex(); j != rr.getStartPointIndex(); j = nextInd) {
 				nextInd = minus ? j - 1 : j + 1;
-				d += MapUtils.getDistance(rr.getPoint(j), rr.getPoint(nextInd));
+				d += KMapUtils.INSTANCE.getDistance(rr.getPoint(j), rr.getPoint(nextInd));
 				if (d > STEP_BACK_DIST) {
 					if (nextInd == rr.getStartPointIndex()) {
 						segmendInd--;
@@ -357,10 +359,10 @@ public class GpxRouteApproximation {
 		for (int i = 0; i < gpxPoints.size() && !gctx.ctx.calculationProgress.isCancelled; ) {
 			RoutePlannerFrontEnd.GpxPoint pnt = gpxPoints.get(i);
 			if (pnt.routeToTarget != null && !pnt.routeToTarget.isEmpty()) {
-				LatLon startPoint = pnt.getFirstRouteRes().getStartPoint();
+				LatLon startPoint = LatLon.of(pnt.getFirstRouteRes().getStartPoint());
 				if (lastStraightLine != null) {
 					router.makeSegmentPointPrecise(gctx.ctx, pnt.getFirstRouteRes(), pnt.loc, true);
-					startPoint = pnt.getFirstRouteRes().getStartPoint();
+					startPoint = LatLon.of(pnt.getFirstRouteRes().getStartPoint());
 					lastStraightLine.add(startPoint);
 					addStraightLine(gctx, lastStraightLine, straightPointStart, reg);
 					lastStraightLine = null;
@@ -591,7 +593,7 @@ public class GpxRouteApproximation {
 			int st = r.getStartPointIndex();
 			int end = r.getEndPointIndex();
 			while (st != end) {
-				LatLon point = r.getPoint(st);
+				LatLon point = LatLon.of(r.getPoint(st));
 				boolean pointIsClosed = false;
 				int delta = 5, startInd = Math.max(0, start.ind - delta),
 						nextInd = Math.min(gpxPoints.size() - 1, next.ind + delta);

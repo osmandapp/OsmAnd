@@ -4,6 +4,7 @@ import net.osmand.Location;
 import net.osmand.util.MapUtils;
 
 import java.io.Serializable;
+import net.osmand.shared.data.KLatLon;
 
 public class LatLon implements Serializable {
 
@@ -14,6 +15,11 @@ public class LatLon implements Serializable {
 	public LatLon(double latitude, double longitude) {
 		this.latitude = latitude;
 		this.longitude = longitude;
+	}
+
+	/** The same point as a {@link KLatLon}, which the shared routing code answers with. */
+	public static LatLon of(KLatLon latLon) {
+		return new LatLon(latLon.getLatitude(), latLon.getLongitude());
 	}
 
 	public double getLatitude() {

@@ -9,6 +9,7 @@ import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.util.MapUtils;
+import net.osmand.shared.routing.RouteSegmentResult;
 
 // TO-THINK ? fix minor "Points are not connected" (~0.01m)
 // TO-THINK ? think about "bearing" in addition to LOOKUP_AHEAD to keep sharp/loop-shaped gpx parts

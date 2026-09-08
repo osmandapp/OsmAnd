@@ -36,6 +36,7 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.ObfConstants;
 import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
 import net.osmand.util.Algorithms;
+import net.osmand.shared.routing.RouteSegmentResult;
 
 /**
  * Created by yurkiss on 04.03.16.

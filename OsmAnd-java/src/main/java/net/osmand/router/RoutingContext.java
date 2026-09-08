@@ -37,6 +37,7 @@ import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 import net.osmand.router.RoutingConfiguration.DirectionPoint;
 import net.osmand.util.MapUtils;
 import net.osmand.shared.util.collections.KTIntObjectIterator;
+import net.osmand.shared.routing.RouteSegmentResult;
 
 
 public class RoutingContext {

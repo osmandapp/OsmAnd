@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.router.RouteSegmentResult;
+import net.osmand.shared.routing.RouteSegmentResult;
 import net.osmand.util.MapUtils;
 
 import java.util.Collections;

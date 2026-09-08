@@ -25,7 +25,7 @@ import net.osmand.shared.gpx.GradientScaleType;
 import net.osmand.shared.routing.RouteColorize;
 import net.osmand.shared.routing.RouteColorize.ColorizationType;
 import net.osmand.shared.routing.RouteColorize.RouteColorizationPoint;
-import net.osmand.router.RouteSegmentResult;
+import net.osmand.shared.routing.RouteSegmentResult;
 import net.osmand.router.RouteStatisticsHelper;
 
 import java.util.ArrayList;

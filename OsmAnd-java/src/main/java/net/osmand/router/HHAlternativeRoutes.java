@@ -23,6 +23,7 @@ import net.osmand.router.HHRouteDataStructure.HHRoutingContext;
 import net.osmand.router.HHRouteDataStructure.NetworkDBPoint;
 import net.osmand.router.HHRouteDataStructure.NetworkDBPointRouteInfo;
 import net.osmand.router.HHRouteDataStructure.NetworkDBSegment;
+import net.osmand.shared.routing.RouteSegmentResult;
 
 /**
  * Alternative routes by the plateau (via-node) method.

@@ -28,7 +28,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.shared.routing.ExitInfo;
-import net.osmand.router.RouteSegmentResult;
+import net.osmand.shared.routing.RouteSegmentResult;
 import net.osmand.shared.routing.TurnType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;

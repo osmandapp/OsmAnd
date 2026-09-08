@@ -21,6 +21,7 @@ import java.io.*;
 import java.util.*;
 
 import static net.osmand.util.RouterUtilTest.getNativeLibPath;
+import net.osmand.shared.routing.RouteSegmentResult;
 
 @RunWith(Parameterized.class)
 public class ApproximationTest {

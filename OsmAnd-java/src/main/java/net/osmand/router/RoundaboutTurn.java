@@ -6,6 +6,7 @@ import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import net.osmand.shared.routing.RouteSegmentResult;
 
 public class RoundaboutTurn {
 	private final List<RouteSegmentResult> routeSegmentResults;

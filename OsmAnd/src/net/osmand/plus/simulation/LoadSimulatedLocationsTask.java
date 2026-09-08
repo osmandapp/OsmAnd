@@ -11,7 +11,7 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.routing.RouteCalculationResult;
-import net.osmand.router.RouteSegmentResult;
+import net.osmand.shared.routing.RouteSegmentResult;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -74,7 +74,7 @@ public class LoadSimulatedLocationsTask extends AsyncTask<Void, Integer, List<Si
 		int endPointIndex = segmentResult.getEndPointIndex();
 
 		while (startPointIndex != endPointIndex || routeInd == segmentsSize - 1) {
-			LatLon point = segmentResult.getPoint(startPointIndex);
+			LatLon point = LatLon.of(segmentResult.getPoint(startPointIndex));
 			SimulatedLocation location = locationMap.get(point);
 			if (location != null) {
 				location.setHighwayType(segmentResult.getObject().getHighway());

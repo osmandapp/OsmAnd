@@ -24,6 +24,7 @@ import java.util.List;
 import static net.osmand.shared.routing.RouteDataObject.HEIGHT_UNDEFINED;
 import net.osmand.shared.routing.RouteDataResources;
 import net.osmand.shared.data.KLocation;
+import net.osmand.shared.routing.RouteSegmentResult;
 
 public class RouteImporter {
 

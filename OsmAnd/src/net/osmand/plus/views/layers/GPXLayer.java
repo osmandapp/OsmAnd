@@ -83,7 +83,7 @@ import net.osmand.plus.views.layers.geometry.GpxGeometryWayContext;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
-import net.osmand.router.RouteSegmentResult;
+import net.osmand.shared.routing.RouteSegmentResult;
 import net.osmand.shared.data.KQuadRect;
 import net.osmand.shared.gpx.*;
 import net.osmand.shared.gpx.GpxDbHelper;

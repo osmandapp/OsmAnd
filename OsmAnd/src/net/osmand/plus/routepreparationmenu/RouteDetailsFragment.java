@@ -78,7 +78,7 @@ import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
-import net.osmand.router.RouteSegmentResult;
+import net.osmand.shared.routing.RouteSegmentResult;
 import net.osmand.router.RouteStatisticsHelper;
 import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;

@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
+import net.osmand.shared.routing.RouteSegmentResult;
 
 public class GpxApproximator {
 
