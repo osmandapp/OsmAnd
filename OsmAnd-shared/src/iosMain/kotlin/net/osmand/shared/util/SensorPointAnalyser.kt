@@ -23,14 +23,10 @@ object SensorPointAnalyser {
 	private val SENSOR_GPX_TAG_SET = SENSOR_GPX_TAGS.toHashSet()
 
 	fun onAnalysePoint(analysis: GpxTrackAnalysis, point: WptPt, attribute: PointAttributes) {
-		// Skip entirely if this point has none of the sensor tags: cheaper to walk the
-		// point's own (usually small) extension key sets once than to probe all 6 fixed
-		// tags against them on every point during bulk indexing.
-		if (!hasAnySensorKey(point)) return
-
+		val hasSensorKey = hasAnySensorKey(point)
 		val anyValueSet = attribute.hasAnySensorValueSet()
 		for (tag in SENSOR_GPX_TAGS) {
-			if (!anyValueSet) {
+			if (!anyValueSet && hasSensorKey) {
 				val value = getPointAttribute(point, tag, Float.NaN)
 				attribute.setAttributeValue(tag, value)
 			}
