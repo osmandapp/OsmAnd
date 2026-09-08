@@ -31,6 +31,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	int visibleLevel;
 	public BaseDetailsObject unitedObject;
 	int biggestCityType = -1;
+	double score; // set by sortResults(), see SpatialSearchRanking
 
 	private static final List<String> FILTER_DUPLICATE_POI_SUBTYPE = new ArrayList<String>(
 			Arrays.asList("building", "internet_access_yes", "atm"));
@@ -518,17 +519,24 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	}
 	
 	public static String compareKeyString(SpatialSearchResult o) {
+		String sw = o.surplusWords >= 0 ? ("+" + o.surplusWords) : ("" + o.surplusWords);
+		if (o.parent.SCORE_RANKING) {
+			return String.format("t%d%s-sc%.2f", o.parent.tCount, sw, o.score);
+		}
 		int e = (o.getTotalRating() - o.parent.MIN_ELO_RATING) / 64;
 		String elo = e > 0 ? "-"+e+"elo" : "";
-		String sw = o.surplusWords >= 0 ? ("+" + o.surplusWords) : ("" + o.surplusWords);
-		return String.format("t%d%s-w%d-oth%d%s-tp%d", o.parent.tCount, sw, o.objs.size(), 
+		return String.format("t%d%s-w%d-oth%d%s-tp%d", o.parent.tCount, sw, o.objs.size(),
 				Math.min(o.sumOther(), 3), elo, o.sumTypeOrder());
 	}
-	
+
 	public static long compareKey(SpatialSearchResult o) {
 		long key = 0;
 		key = addCompareKey(key, 6, -o.parent.tCount); // 6 bit - 64
 		key = addCompareKey(key, 3, -o.surplusWords); // 3 bit - 8
+		if (o.parent.SCORE_RANKING) {
+			key = addCompareKey(key, 6, -(int) Math.round(o.score * 4)); // visibleLevel bucket
+			return key;
+		}
 		key = addCompareKey(key, 6, o.objs.size()); // 6 bit - 64
 		key = addCompareKey(key, 3, Math.min(o.sumOther(), 3)); // 3 bit - 3
 		key = addCompareKey(key, 6, -(o.getTotalRating() - o.parent.MIN_ELO_RATING) / 64); // 6 bit - 64 - group by 64 bucket
@@ -549,6 +557,14 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		res = -Integer.compare(o1.surplusWords, o2.surplusWords); // buildings 18 matches 18 B
 		if (res != 0) {
 			return res;
+		}
+		if (o1.parent.SCORE_RANKING) {
+			// the 8 tiers below replaced by one score, see SpatialSearchRanking
+			res = -Double.compare(o1.score, o2.score);
+			if (res != 0) {
+				return res;
+			}
+			return -Long.compare(o1.getFirstRef().atom.id, o2.getFirstRef().atom.id);
 		}
 		res = Integer.compare(o1.objs.size(), o2.objs.size());
 		if (res != 0) {
@@ -604,7 +620,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		return -Long.compare(o1.getFirstRef().atom.id, o2.getFirstRef().atom.id);
 	}
 
-	private static double getDistance(SpatialSearchResult o1, LatLon center) {
+	static double getDistance(SpatialSearchResult o1, LatLon center) {
 		double d1 = o1.getLatLon() == null ? 0 : MapUtils.getDistance(center, o1.getLatLon());
 		if (o1.getFirstRefObject(false) instanceof City c) {
 			// distance to center shorten by its radius (so boundary will be sorted down comparing to city)
