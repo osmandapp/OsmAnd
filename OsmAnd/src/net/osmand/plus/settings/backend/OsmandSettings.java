@@ -1575,6 +1575,8 @@ public class OsmandSettings {
 
 	public final CommonPreference<Long> LAST_AUTO_BACKUP_TIMESTAMP = registerLongPreference("last_auto_backup_timestamp", 0L).makeGlobal();
 	public final CommonPreference<Long> AUTO_BACKUP_INTERVAL_MS = registerLongPreference("auto_backup_interval_ms", DEFAULT_AUTO_BACKUP_INTERVAL_MS).makeGlobal();
+	public final CommonPreference<String> MAP_SOURCES_BACKUP_STATE_HASH = registerStringPreference("map_sources_backup_state_hash", "").makeGlobal();
+	public final CommonPreference<Long> MAP_SOURCES_LOCAL_MODIFIED_TIME = registerLongPreference("map_sources_local_modified_time", 0L).makeGlobal();
 
 	public final CommonPreference<DayNightMode> DAYNIGHT_MODE = new EnumStringPreference<>(this, "daynight_mode", DayNightMode.DAY, DayNightMode.values());
 
