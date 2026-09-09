@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -674,8 +675,8 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 	/** one physical place returned twice, when no id, wikidata or route id ties the rows together */
 	private static final double SAME_PLACE_M = 30;
 	/** a stop is a cluster of nodes - platform, stop position, shelter - spread along the street */
-	private static final double SAME_STOP_M = 300;
-	private static final double BUCKET_DEG = 0.004; // ~440 m, so the 3x3 neighbourhood covers both radii
+	private static final double SAME_STOP_M = 400;
+	private static final double BUCKET_DEG = 0.005; // ~550 m, so the 3x3 neighbourhood covers both radii
 
 	/**
 	 * Merge rows that carry the same name and stand on the same spot.
@@ -690,6 +691,7 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 	private List<SpatialSearchResult> deduplicateByProximity(List<SpatialSearchResult> sorted,
 			SpatialSearchContext ctx) {
 		Map<String, List<SpatialSearchResult>> buckets = new HashMap<>();
+		Map<SpatialSearchResult, SpatialSearchResult> merged = new IdentityHashMap<>();
 		List<SpatialSearchResult> out = new ArrayList<>(sorted.size());
 		for (SpatialSearchResult s : sorted) {
 			String name = s.getDedupName();
@@ -713,15 +715,23 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 								|| SpatialSearchRanking.isSubordinateNode(s) ? SAME_STOP_M : SAME_PLACE_M;
 						if (ul != null && MapUtils.getDistance(ul, loc) <= radius) {
 							same = u;
+							while (merged.containsKey(same)) {
+								same = merged.get(same);
+							}
 							break;
 						}
 					}
 				}
 			}
 			if (same != null) {
+				// the row that survives absorbs the duplicate, and the duplicate stays in the
+				// buckets: a stop is a chain of nodes and the next one may be within reach of
+				// this node while being 500 m from the row that now represents them all
 				same.addExtraResult(s, ctx.settings.LANG_DEDUPLICATE);
-			} else {
-				buckets.computeIfAbsent(name + '@' + bx + '_' + by, k -> new ArrayList<>()).add(s);
+				merged.put(s, same);
+			}
+			buckets.computeIfAbsent(name + '@' + bx + '_' + by, k -> new ArrayList<>()).add(s);
+			if (same == null) {
 				out.add(s);
 			}
 		}

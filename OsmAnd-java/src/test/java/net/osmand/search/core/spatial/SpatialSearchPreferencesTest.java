@@ -142,6 +142,12 @@ public class SpatialSearchPreferencesTest {
 					sc.notAsserted++;
 					continue;
 				}
+				if ("note".equals(p.kind)) {
+					// recall/matching observations: kept because they are the reason a case was
+					// dropped, asserted by nothing
+					sc.notAsserted++;
+					continue;
+				}
 				if ("merge".equals(p.kind)) {
 					java.util.Set<Integer> rows = new java.util.HashSet<>();
 					for (long id : p.objects) {
@@ -273,6 +279,15 @@ public class SpatialSearchPreferencesTest {
 				// it is the measured noise of a human judge, not a statement to test against
 				p.asserted = o.optJSONArray("conflictsWith") == null
 						|| o.getJSONArray("conflictsWith").length() == 0;
+				if ("note".equals(p.kind)) {
+					// A case the reviewer refused to answer, with the reason: "none is good",
+					// "we are not in Rotterdam and they do not match t2". Those are statements
+					// about recall and matching, not about order - kept because they are the
+					// only record that the case was looked at, asserted by nothing.
+					p.asserted = false;
+					out.add(p);
+					continue;
+				}
 				if ("merge".equals(p.kind)) {
 					p.verdict = o.getString("verdict");
 					p.asserted &= "one_row".equals(p.verdict);

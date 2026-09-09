@@ -92,10 +92,10 @@ comparator, which is what makes the number meaningful:
 | ladder (today) | 28 | 41 |
 | score, first weights | 35 | 26 |
 | score, weights fitted on the reviews | 52 | 25 |
-| + deduplication by name and distance | 56 | 14 |
+| + deduplication by name and distance | 56 | 11 |
 
 (The second row was measured on the 76 records that existed when those weights were written; the
-rest on all 96.) Of the 14 that remain, 7 are merge records whose object list has outgrown the
+rest on all 99.) Of the 11 that remain, 4 are merge records whose object list has outgrown the
 judgement: for `bundesplatz berlin` the stop nodes are now one row, and what is still separate is
 a railway station, a park, a tunnel and two streets that happen to share the name — objects a
 reviewer today would not call one place. `hohenschönhauser strasse` is the recorded contradiction
@@ -158,3 +158,15 @@ quoting as rules rather than as records:
 - and three verdicts that are not about ranking at all: `la amiga`, `rotterdam camping` and
   `amodo lodge` were skipped as *"bad search"* — a recall and a matching problem behind the
   ranking one.
+
+## A third kind of record: `note`
+
+A reviewer may refuse a case, and the reason is worth more than the refusal:
+
+> *"none is good, la probably should not be indexed"* — `la amiga`
+> *"bad search: we are not in Rotterdam and they do not match t2"* — `rotterdam camping`
+
+Those are statements about recall and matching, not about order. They are stored as
+`"kind": "note"` with `"verdict": "not_a_ranking_question"`, asserted by nothing, and they are the
+only record that the case was ever looked at - without them the same pair comes back in the next
+sample and costs a minute again.
