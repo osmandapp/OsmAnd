@@ -15,10 +15,13 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.hardware.display.DisplayManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -191,6 +194,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	private AppInitializeListener initListener;
 	private MapViewWithLayers mapViewWithLayers;
+	private int initialDisplayId;
+	private int initialDisplayRotation;
 	private DrawerLayout drawerLayout;
 	private boolean drawerDisabled;
 
@@ -236,6 +241,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 		setRequestedOrientation(AndroidUiHelper.getScreenOrientation(this));
 		super.onCreate(savedInstanceState);
+		Display display = getDeviceDisplay();
+		initialDisplayId = display != null ? display.getDisplayId() : -1;
+		initialDisplayRotation = display != null ? display.getRotation() : -1;
 
 		lockHelper = app.getLockHelper();
 		mapScrollHelper = new MapScrollHelper(app);
@@ -1057,7 +1065,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			getMapViewTrackingUtilities().setMapView(null);
 		}
 		if (mapViewWithLayers != null) {
-			mapViewWithLayers.onDestroy();
+			mapViewWithLayers.onDestroy(isChangingScreenOrientation());
 		}
 		lockHelper.setLockUIAdapter(null);
 		keyEventHelper.setMapActivity(null);
@@ -1066,6 +1074,34 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		mIsDestroyed = true;
 
 		removeActivityResultListener(importHelper.getSaveFileResultListener());
+	}
+
+	private boolean isChangingScreenOrientation() {
+		// Rotation also changes the screen dimensions/layout. Other configuration changes,
+		// explicit recreate(), and normal destruction must keep the usual release path.
+		int changes = getChangingConfigurations();
+		int rotationChanges = ActivityInfo.CONFIG_ORIENTATION | ActivityInfo.CONFIG_SCREEN_SIZE
+				| ActivityInfo.CONFIG_SCREEN_LAYOUT;
+		if (!isChangingConfigurations() || isFinishing()
+				|| (changes & ActivityInfo.CONFIG_ORIENTATION) == 0
+				|| (changes & ~rotationChanges) != 0) {
+			return false;
+		}
+		// Resizing a multi-window activity can change its orientation without rotating
+		// the display. Moving to another display must not retain the phone renderer either.
+		Display display = getDeviceDisplay();
+		return display != null && initialDisplayRotation != -1
+				&& display.getDisplayId() == initialDisplayId
+				&& display.getRotation() != initialDisplayRotation;
+	}
+
+	@Nullable
+	private Display getDeviceDisplay() {
+		// An Activity-scoped Display can still report the old configuration's rotation
+		// during relaunch. Use the application's DisplayManager for the current rotation.
+		DisplayManager displayManager = app.getSystemService(DisplayManager.class);
+		return displayManager != null
+				? displayManager.getDisplay(getWindowManager().getDefaultDisplay().getDisplayId()) : null;
 	}
 
 	public LatLon getMapLocation() {
