@@ -14,7 +14,7 @@ import androidx.core.view.marginEnd
 import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
-import net.osmand.plus.activities.MapActivity
+import androidx.fragment.app.FragmentActivity
 import net.osmand.plus.gallery.data.MediaPosterLoader
 import net.osmand.plus.gallery.model.GalleryItem
 import net.osmand.plus.helpers.AndroidUiHelper
@@ -30,7 +30,7 @@ import net.osmand.shared.util.LoadingImage
 import androidx.core.graphics.drawable.toDrawable
 import androidx.core.view.isVisible
 
-class GalleryMediaListViewHolder(
+open class GalleryMediaListViewHolder(
 	private val app: OsmandApplication,
 	itemView: View,
 	private val mediaProvider: MediaProvider,
@@ -105,8 +105,8 @@ class GalleryMediaListViewHolder(
 		}
 	}
 
-	fun bindView(
-		mapActivity: MapActivity,
+	open fun bindView(
+		mapActivity: FragmentActivity,
 		galleryItem: GalleryItem.Media,
 		nightMode: Boolean,
 		selectionMode: Boolean,
@@ -127,7 +127,7 @@ class GalleryMediaListViewHolder(
 		bindSelection(selectionMode, selected, nightMode, animate = false)
 	}
 
-	fun updateMetadata(galleryItem: GalleryItem.Media) {
+	open fun updateMetadata(galleryItem: GalleryItem.Media) {
 		if (boundMediaItem?.id != galleryItem.mediaItem.id) return
 		bindDescription(galleryItem)
 		previewDelegate.updateDurationLabel(galleryItem.presentation?.durationLabel)
@@ -162,7 +162,7 @@ class GalleryMediaListViewHolder(
 		}, previewSizePx)
 	}
 
-	fun updateSelection(selectionMode: Boolean, selected: Boolean, nightMode: Boolean) {
+	open fun updateSelection(selectionMode: Boolean, selected: Boolean, nightMode: Boolean) {
 		bindSelection(selectionMode, selected, nightMode, animate = true)
 	}
 
@@ -196,7 +196,7 @@ class GalleryMediaListViewHolder(
 		selectionCheck.visibility = View.VISIBLE
 		val row = selectionCheck.parent as ViewGroup
 		row.doOnPreDraw {
-			val shift = -(selectionCheck.width + selectionCheck.marginEnd).toFloat()
+			val shift = -selectionShift()
 			selectionCheck.translationX = shift
 			selectionCheck.alpha = 0f
 			selectionCheck.animate()
@@ -217,7 +217,7 @@ class GalleryMediaListViewHolder(
 	}
 
 	private fun animateCheckboxOut() {
-		val shift = (selectionCheck.width + selectionCheck.marginEnd).toFloat()
+		val shift = selectionShift()
 		selectionCheck.visibility = View.GONE
 		val row = selectionCheck.parent as ViewGroup
 		row.doOnPreDraw {
@@ -234,6 +234,9 @@ class GalleryMediaListViewHolder(
 
 	private fun rowSiblings(row: ViewGroup): List<View> =
 		(0 until row.childCount).map(row::getChildAt).filter { it !== selectionCheck }
+
+	private fun selectionShift(): Float = (selectionCheck.width + selectionCheck.marginEnd).toFloat() *
+		if (itemView.layoutDirection == View.LAYOUT_DIRECTION_RTL) -1 else 1
 
 	private fun resetSelectionAnimation() {
 		val row = selectionCheck.parent as ViewGroup

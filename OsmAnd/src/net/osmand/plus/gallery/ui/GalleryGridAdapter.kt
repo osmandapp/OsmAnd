@@ -3,12 +3,11 @@ package net.osmand.plus.gallery.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
-import net.osmand.plus.activities.MapActivity
+import androidx.fragment.app.FragmentActivity
 import net.osmand.plus.gallery.data.MediaPosterLoader
 import net.osmand.plus.gallery.model.GalleryAction
 import net.osmand.plus.gallery.model.GalleryDisplayMode
@@ -23,12 +22,15 @@ import net.osmand.plus.gallery.ui.holders.MediaStatsHolder
 import net.osmand.plus.gallery.ui.holders.NoInternetHolder
 import net.osmand.plus.gallery.ui.holders.NoMediaHolder
 import net.osmand.plus.gallery.ui.holders.SortBarHolder
+import net.osmand.plus.gallery.ui.holders.GroupHeaderHolder
+import net.osmand.plus.plugins.audionotes.library.MediaLibraryEmptyHolder
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.shared.media.MediaProvider
 import net.osmand.shared.media.domain.MediaItem
+import net.osmand.shared.media.domain.MediaType
 
 class GalleryGridAdapter(
-	private val mapActivity: MapActivity,
+	private val mapActivity: FragmentActivity,
 	private val onMediaClicked: (MediaItem) -> Unit,
 	private val onReloadMediaItems: () -> Unit,
 	private val onActionClicked: (View, GalleryAction) -> Unit,
@@ -41,13 +43,17 @@ class GalleryGridAdapter(
 	private val onMediaLongClicked: (MediaItem) -> Unit = {},
 	private val isItemSelected: (MediaItem) -> Boolean = { false },
 	private val onToggleSelection: (MediaItem) -> Unit = {},
-	private val mediaProvider: MediaProvider = MediaProvider(mapActivity.app),
-	private val posterLoader: MediaPosterLoader? = null
+	private val mediaProvider: MediaProvider = MediaProvider((mapActivity.application as OsmandApplication)),
+	private val posterLoader: MediaPosterLoader? = null,
+	private val onGroupHeaderClicked: (MediaType) -> Unit = {}
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-	private val app: OsmandApplication = mapActivity.app
+	private val app: OsmandApplication = (mapActivity.application as OsmandApplication)
 	private val themedInflater: LayoutInflater = UiUtilities.getInflater(mapActivity, nightMode)
 	private val items = mutableListOf<GalleryItem>()
+	private var sectionBoundaries: List<GallerySectionBoundary?> = emptyList()
+
+	fun getSectionBoundary(position: Int): GallerySectionBoundary? = sectionBoundaries.getOrNull(position)
 
 	private val mainPhotoSizePx = app.resources.getDimensionPixelSize(R.dimen.gallery_big_icon_size)
 	private val standardPhotoSizePx = app.resources.getDimensionPixelSize(R.dimen.gallery_standard_icon_size)
@@ -58,24 +64,31 @@ class GalleryGridAdapter(
 	var displayMode: GalleryDisplayMode = GalleryDisplayMode.GRID
 
 	var selectionMode: Boolean = false
+	var listRowFactory: ((ViewGroup) -> GalleryMediaListViewHolder)? = null
+	var emptyRowFactory: ((ViewGroup) -> MediaLibraryEmptyHolder)? = null
 
 	@JvmOverloads
 	fun setItems(newItems: List<GalleryItem>, animated: Boolean = false) {
+		val newBoundaries = GallerySectionBoundaries.build(newItems)
 		if (animated && items.isNotEmpty()) {
-			val diff = DiffUtil.calculateDiff(GalleryDiffCallback(items.toList(), newItems))
+			val diff = DiffUtil.calculateDiff(GalleryDiffCallback(items.toList(), newItems, sectionBoundaries, newBoundaries))
 			items.clear()
 			items.addAll(newItems)
+			sectionBoundaries = newBoundaries
 			diff.dispatchUpdatesTo(this)
 		} else {
 			items.clear()
 			items.addAll(newItems)
+			sectionBoundaries = newBoundaries
 			notifyDataSetChanged()
 		}
 	}
 
 	private class GalleryDiffCallback(
 		private val oldItems: List<GalleryItem>,
-		private val newItems: List<GalleryItem>
+		private val newItems: List<GalleryItem>,
+		private val oldBoundaries: List<GallerySectionBoundary?>,
+		private val newBoundaries: List<GallerySectionBoundary?>
 	) : DiffUtil.Callback() {
 
 		override fun getOldListSize(): Int = oldItems.size
@@ -86,6 +99,8 @@ class GalleryGridAdapter(
 			val oldItem = oldItems[oldPosition]
 			val newItem = newItems[newPosition]
 			return when {
+				oldItem is GalleryItem.GroupHeader && newItem is GalleryItem.GroupHeader ->
+					oldItem.type == newItem.type
 				oldItem is GalleryItem.Media && newItem is GalleryItem.Media ->
 					oldItem.mediaItem.id == newItem.mediaItem.id
 				oldItem is GalleryItem.Action && newItem is GalleryItem.Action ->
@@ -95,9 +110,10 @@ class GalleryGridAdapter(
 		}
 
 		override fun areContentsTheSame(oldPosition: Int, newPosition: Int): Boolean =
-			oldItems[oldPosition] == newItems[newPosition]
+			oldItems[oldPosition] == newItems[newPosition] && oldBoundaries[oldPosition] == newBoundaries[newPosition]
 
 		override fun getChangePayload(oldPosition: Int, newPosition: Int): Any? {
+			if (oldBoundaries[oldPosition] != newBoundaries[newPosition]) return null
 			val oldItem = oldItems[oldPosition]
 			val newItem = newItems[newPosition]
 			return if (oldItem is GalleryItem.Media && newItem is GalleryItem.Media) {
@@ -110,6 +126,8 @@ class GalleryGridAdapter(
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 		return when (viewType) {
+			GROUP_HEADER_TYPE -> GroupHeaderHolder(inflate(R.layout.gallery_group_header_item, parent), app, onGroupHeaderClicked)
+			SPACER_TYPE -> object : RecyclerView.ViewHolder(inflate(R.layout.gallery_spacer_item, parent)) {}
 			MAIN_MEDIA_TYPE, MEDIA_TYPE -> {
 				val itemView = inflate(R.layout.gallery_card_item, parent)
 				GalleryMediaViewHolder(
@@ -119,6 +137,7 @@ class GalleryGridAdapter(
 				)
 			}
 			LIST_MEDIA_TYPE -> {
+				listRowFactory?.let { return it(parent) }
 				val itemView = inflate(R.layout.gallery_list_item, parent)
 				GalleryMediaListViewHolder(
 					app, itemView, mediaProvider, onMediaClicked,
@@ -130,6 +149,7 @@ class GalleryGridAdapter(
 				ActionViewHolder(itemView, onActionClicked)
 			}
 			NO_MEDIA_TYPE -> {
+				emptyRowFactory?.let { return it(parent) }
 				NoMediaHolder(inflate(R.layout.no_image_card, parent), app, onActionClicked)
 			}
 			NO_INTERNET_TYPE -> {
@@ -152,6 +172,8 @@ class GalleryGridAdapter(
 	override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 		val item = items[position]
 		when {
+			holder is GroupHeaderHolder && item is GalleryItem.GroupHeader -> holder.bind(item, nightMode)
+			holder is MediaLibraryEmptyHolder && item is GalleryItem.NoMedia -> holder.bind(item, nightMode)
 			holder is GalleryMediaViewHolder && item is GalleryItem.Media -> {
 				val holderType = mediaHolderType(position)
 				val imageSizePx = when (holderType) {
@@ -166,7 +188,7 @@ class GalleryGridAdapter(
 				)
 			}
 			holder is GalleryMediaListViewHolder && item is GalleryItem.Media -> {
-				val showDivider = items.getOrNull(position + 1) is GalleryItem.Media
+				val showDivider = getSectionBoundary(position)?.isLast == false
 				holder.bindView(
 					mapActivity, item, nightMode, selectionMode,
 					isItemSelected(item.mediaItem), showDivider
@@ -251,6 +273,8 @@ class GalleryGridAdapter(
 	override fun getItemCount(): Int = items.size
 
 	override fun getItemViewType(position: Int): Int = when (val item = items[position]) {
+		is GalleryItem.GroupHeader -> GROUP_HEADER_TYPE
+		is GalleryItem.Spacer -> SPACER_TYPE
 		is GalleryItem.Media ->
 			if (displayMode == GalleryDisplayMode.LIST) {
 				LIST_MEDIA_TYPE
@@ -267,9 +291,7 @@ class GalleryGridAdapter(
 		is GalleryItem.SortBar -> SORT_BAR_TYPE
 	}
 
-	fun getAnimator(): RecyclerView.ItemAnimator = object : DefaultItemAnimator() {
-		override fun canReuseUpdatedViewHolder(viewHolder: RecyclerView.ViewHolder) = true
-	}
+	fun getAnimator(): RecyclerView.ItemAnimator = GalleryItemAnimator(!app.settings.DO_NOT_USE_ANIMATIONS.get())
 
 	private fun inflate(resourceId: Int, root: ViewGroup, attachToRoot: Boolean = false): View =
 		themedInflater.inflate(resourceId, root, attachToRoot)
@@ -286,6 +308,8 @@ class GalleryGridAdapter(
 		private const val LIST_MEDIA_TYPE = 6
 		private const val MEDIA_STATS_TYPE = 7
 		private const val SORT_BAR_TYPE = 8
+		private const val GROUP_HEADER_TYPE = 9
+		private const val SPACER_TYPE = 10
 
 		private const val UPDATE_PROGRESS_BAR_PAYLOAD_TYPE = 1
 		private const val SELECTION_PAYLOAD_TYPE = 2

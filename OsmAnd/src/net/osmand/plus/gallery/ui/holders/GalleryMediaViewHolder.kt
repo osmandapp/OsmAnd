@@ -12,7 +12,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
-import net.osmand.plus.activities.MapActivity
+import androidx.fragment.app.FragmentActivity
 import net.osmand.plus.gallery.data.MediaPosterLoader
 import net.osmand.plus.gallery.model.GalleryItem
 import net.osmand.plus.helpers.AndroidUiHelper
@@ -63,7 +63,7 @@ class GalleryMediaViewHolder(
 
 	private var loadingImage: LoadingImage? = null
 
-	private var mapActivity: MapActivity? = null
+	private var mapActivity: FragmentActivity? = null
 	private var nightMode: Boolean = false
 	private var imageSizePx: Int = 0
 	var holderType: MediaHolderType = MediaHolderType.STANDARD
@@ -108,7 +108,7 @@ class GalleryMediaViewHolder(
 	}
 
 	fun bindView(
-		mapActivity: MapActivity,
+		mapActivity: FragmentActivity,
 		galleryItem: GalleryItem.Media,
 		imageSizePx: Int,
 		holderType: MediaHolderType,
