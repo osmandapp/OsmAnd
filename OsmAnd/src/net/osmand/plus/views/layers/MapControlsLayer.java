@@ -407,7 +407,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		if (provider != null) {
 			return provider.isNightModeForMapControls();
 		}
-		return app.getDaynightHelper().isNightMode(app.getSettings().getApplicationMode(), ThemeUsageContext.OVER_MAP);
+		return app.getDaynightHelper().isNightMode(app.getSettings().getApplicationMode(), ThemeUsageContext.MAP);
 	}
 
 	@Nullable
