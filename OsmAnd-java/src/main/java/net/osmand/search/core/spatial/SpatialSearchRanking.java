@@ -22,14 +22,21 @@ import net.osmand.util.SearchAlgorithms;
  */
 public class SpatialSearchRanking {
 
-	// Ablation over the 60 preferences in spatial_search/preferences.jsonl (zero one weight):
-	// all 25 satisfied, no type 17, type alone 24, no rating 24, no name 26, no near 26.
-	// name and near are kept despite that - the set has no category query, which is the case
-	// they exist for ("farm" must return the nearest farm, not the famous one).
-	public double wName = 2.0;
-	public double wType = 1.5;
+	// Fitted on the 48 order preferences in spatial_search/preferences.jsonl (36 -> 41 satisfied;
+	// none of the 13 judgements added on 2026-09-09 is violated). What the second review round
+	// said, and what these numbers encode: between two ordinary POIs the NEARER one wins - an
+	// exact name, a matching category and a higher elo all lose to distance - while a node that
+	// merely describes a place loses to the place even from 5.5 km closer.
+	//
+	// The name term is deliberately small. Raising it costs preferences at every step
+	// (0.15 -> 41 satisfied, 0.3 -> 40, 0.5 -> 39, 2.0 -> 38) because "supermarkt", "кафе" and
+	// "lekarna" are words for a KIND of object, where carrying the word in the name says nothing
+	// about relevance, and the engine cannot yet tell such a word from a proper name. Until it
+	// can, the term only breaks ties.
+	public double wName = 0.15;
+	public double wType = 2.0;
 	public double wRating = 2.0;
-	public double wNear = 1.5;
+	public double wNear = 2.5;
 
 	/** distance at which the proximity term is worth half of its maximum */
 	public double halfWeightKm = 3.0;
@@ -64,11 +71,17 @@ public class SpatialSearchRanking {
 	private static final Set<String> STOP_SUBTYPES = new HashSet<>(Arrays.asList(
 			"bus_stop", "tram_stop", "railway_halt", "taxi"));
 
+	/**
+	 * Objects a person travels TO by name. Services that merely have a name - a hospital, a
+	 * university, a library - were in this list and are not any more: asked to choose between
+	 * "Омега-Київ" (clinic, 1.8 km) and "DENIS" (hospital, 3.1 km) for a medical query, the
+	 * reviewer took the nearer one, and the landmark bonus was the only thing preventing that.
+	 */
 	private static final Set<String> LANDMARK_SUBTYPES = new HashSet<>(Arrays.asList(
 			"railway_station", "public_transport_station", "bus_station", "aerodrome",
 			"castle", "museum", "attraction", "memorial", "monument", "theatre", "stadium",
-			"university", "hospital", "townhall", "library", "zoo", "peak", "mountain_pass",
-			"marketplace", "square", "park", "place_of_worship", "cathedral", "monastery"));
+			"townhall", "zoo", "peak", "mountain_pass",
+			"marketplace", "square", "park", "cathedral", "monastery"));
 
 	/** higher is better; only meaningful within one bucket of the structural tiers */
 	public double score(SpatialSearchResult r, LatLon center) {

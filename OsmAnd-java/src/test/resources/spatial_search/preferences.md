@@ -89,8 +89,12 @@ comparator, which is what makes the number meaningful:
 
 | ranking | satisfied | violated |
 |---|---|---|
-| ladder (today) | 16 | 30 |
-| score | 25 | 21 |
+| ladder (today) | 24 | 37 |
+| score, first weights | 35 | 26 |
+| score, weights fitted on the reviews | 40 | 21 |
+
+Fifteen of the violations in every row are merge records — the duplicate floods, which no
+weighting can fix; they need the deduplication rule.
 
 The test gates on `MIN_SATISFIED`, a ratchet: an unrelated reordering cannot break the build,
 only contradicting a recorded judgement can. Raise it when a change earns more.
@@ -102,3 +106,20 @@ only contradicting a recorded judgement can. Raise it when a change earns more.
 typed from. 38 order records, 22 merge records. The 13 merge records still violated are the
 duplicate floods — one stop stored as up to twelve OSM nodes — which the scoring change does not
 address; that needs the deduplication fix, which is a separate, exact rule.
+
+16 more on 2026-09-09 (`"batch": "01"`), this time over nine regions — Kyiv, Minsk, Amsterdam,
+Berlin, Munich, Paris, Praha, Egypt, Toscana — each query replayed from the position it was
+really typed from, so the distance tier means something. They are the round that produced the
+current weights, and they say something the first 60 could not:
+
+- between two ordinary POIs the NEARER one wins. An exact name (`Mini Supermarkt` over
+  `Supermarkt`), a matching category (`Омега-Київ [clinic]` over `DENIS [hospital]`) and a higher
+  elo (a restaurant 24 km away over one 8 km away) all lost to distance.
+- a node that only describes a place still loses to the place from 5.5 km closer
+  (`Asciano [motorway junction]` 0.4 km against `Asciano [railway station]` 5.9 km).
+- merge is about metres, not kinds: rows 9 m and 26 m apart were one place (a wiki place and a
+  theatre among them), rows 218 m apart were not.
+
+The one preference the weights cannot satisfy is `supermarkt`, and it names the missing signal:
+the engine cannot tell a word for a KIND of object from a proper name, so it cannot know that
+carrying "supermarkt" in the name is worth nothing.
