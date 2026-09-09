@@ -44,9 +44,10 @@ import net.osmand.shared.util.collections.KTIntObjectIterator;
 import net.osmand.shared.routing.RouteSegmentResult;
 import net.osmand.shared.routing.VehicleRouter;
 import net.osmand.shared.routing.GeneralRouter;
+import net.osmand.shared.routing.RoutingRequest;
 
 
-public class RoutingContext {
+public class RoutingContext extends RoutingRequest {
 
 	public static boolean SHOW_GC_SIZE = false;
 	public static boolean PRINT_ROUTING_ALERTS = false;
@@ -55,43 +56,21 @@ public class RoutingContext {
 	private final static Log log = PlatformUtil.getLog(RoutingContext.class);
 	
 	// Final context variables
-	public final RoutingConfiguration config;
-	public final RouteCalculationMode calculationMode;
 	public final Map<BinaryMapIndexReader, List<RouteSubregion>> map = new LinkedHashMap<BinaryMapIndexReader, List<RouteSubregion>>();
 	public final Map<RouteRegion, BinaryMapIndexReader> reverseMap = new LinkedHashMap<RouteRegion, BinaryMapIndexReader>();
 	private RouteConditionalHelper conditionalHelper = new RouteConditionalHelper();
 	public NativeLibrary nativeLib;
 	
-	// 0. Reference to native routingcontext for multiple routes
-	public long nativeRoutingContext;
-	public boolean keepNativeRoutingContext;
-	public boolean requestNativePrepareResult; // OK for tests/tools. Do not use in Android UI.
-	
-	// 1. Initial variables
-	public int startX;
-	public int startY;
-	public long startRoadId;
-	public int startSegmentInd;
-	public boolean startTransportStop;
-	public int targetX;
-	public int targetY;
-	public int[] intermediatesX;
-	public int[] intermediatesY;
-	public long targetRoadId;
-	public int targetSegmentInd;
-	public boolean targetTransportStop;
+	// 1. What is left of the request here: the pieces the java planner owns.
+	// The rest is on RoutingRequest, which the C++ router reads.
 	public int dijkstraMode;
-	public boolean publicTransport;
 	public HashSet<BinaryMapIndexReader> mapIndexReaderFilter = new HashSet<>();
-	public String[] regionsCoveringStartAndTargets = new String[0];
 	public boolean hhHasUnsupportedParameters = false;
 
-	public RouteCalculationProgress calculationProgress;
 	public RouteCalculationProgress calculationProgressFirstPhase;
 	public boolean leftSideNavigation;
 	public List<RouteSegmentResult> previouslyCalculatedRoute;
-	public PrecalculatedRouteDirection precalculatedRouteDirection;
-	
+
 	
 	// 2. Routing memory cache (big objects)
 	TLongObjectHashMap<List<RoutingSubregionTile>> indexedSubregions = new TLongObjectHashMap<List<RoutingSubregionTile>>();
@@ -114,17 +93,13 @@ public class RoutingContext {
 	// callback of processing segments
 	RouteSegmentVisitor visitor = null;
 
-	public int alertFasterRoadToVisitedSegments;
-	public int alertSlowerSegmentedWasVisitedEarlier;
-	
 	// old planner
 	public FinalRouteSegment finalRouteSegment;
 	
 	
 	RoutingContext(RoutingContext cp) {
-		this.config = cp.config;
+		super(cp.config, cp.calculationMode);
 		this.map.putAll(cp.map);
-		this.calculationMode = cp.calculationMode;
 		this.leftSideNavigation = cp.leftSideNavigation;
 		this.reverseMap.putAll(cp.reverseMap);
 		this.nativeLib = cp.nativeLib;
@@ -133,7 +108,7 @@ public class RoutingContext {
 	}
 	
 	RoutingContext(RoutingConfiguration config, NativeLibrary nativeLibrary, BinaryMapIndexReader[] list, RouteCalculationMode calcMode) {
-		this.calculationMode = calcMode;
+		super(config, calcMode);
 		for (BinaryMapIndexReader mr : list) {
 			List<RouteRegion> rr = mr.getRoutingIndexes();
 			List<RouteSubregion> subregions = new ArrayList<RouteSubregion>();
@@ -147,7 +122,6 @@ public class RoutingContext {
 			}
 			this.map.put(mr, subregions);
 		}
-		this.config = config;
 		this.nativeLib = nativeLibrary;
 		this.intermediatesX = new int[0];
 		this.intermediatesY = new int[0];
@@ -175,26 +149,6 @@ public class RoutingContext {
 	
 	public void setVisitor(RouteSegmentVisitor visitor) {
 		this.visitor = visitor;
-	}
-
-	public void setRouter(GeneralRouter router) {
-		config.router = router;
-	}
-	
-	public void setHeuristicCoefficient(float heuristicCoefficient) {
-		config.heuristicCoefficient = heuristicCoefficient;
-	}
-
-	public VehicleRouter getRouter() {
-		return config.router;
-	}
-
-	public boolean planRouteIn2Directions() {
-		return config.planRoadDirection == 0;
-	}
-
-	public int getPlanRoadDirection() {
-		return config.planRoadDirection;
 	}
 
 	public void initStartAndTargetPoints(RouteSegmentPoint start, RouteSegmentPoint end) {
@@ -971,20 +925,6 @@ public class RoutingContext {
 	
 	public BinaryMapIndexReader[] getMaps() {
 		return map.keySet().toArray(new BinaryMapIndexReader[0]);
-	}
-
-	public int getVisitedSegments() {
-		if (calculationProgress != null) {
-			return calculationProgress.visitedSegments;
-		}
-		return 0;
-	}
-
-	public int getLoadedTiles() {
-		if (calculationProgress != null) {
-			return calculationProgress.loadedTiles;
-		}
-		return 0;
 	}
 
 	public synchronized void deleteNativeRoutingContext() {
