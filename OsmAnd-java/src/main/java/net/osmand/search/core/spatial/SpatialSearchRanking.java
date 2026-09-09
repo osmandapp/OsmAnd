@@ -27,8 +27,7 @@ public class SpatialSearchRanking {
 	public double wType = 2.0;
 	public double wRating = 0.5;
 	public double wNear = 2.0;
-	/** an object whose whole name IS the query, when it is notable enough to be that name */
-	public double wExactName = 1.0;
+	public double wExactName = 1.0; // the whole name IS the query, and the object owns that name
 
 	/** distance at which the proximity term is worth half of its maximum */
 	public double halfWeightKm = 3.0;
@@ -64,16 +63,14 @@ public class SpatialSearchRanking {
 	private static final Set<String> STOP_SUBTYPES = new HashSet<>(Arrays.asList(
 			"bus_stop", "tram_stop", "railway_halt", "taxi"));
 
-	/** objects a person travels TO by name; a hospital or a library is a service, not a landmark */
-	/** administrative places stored as POI - the map has no address record for a country */
 	private static final Set<String> ADMIN_SUBTYPES = new HashSet<>(Arrays.asList(
 			"country", "state", "region", "province", "county"));
 
+	/** objects a person travels TO by name; a hospital or a library is a service, not a landmark */
 	private static final Set<String> LANDMARK_SUBTYPES = new HashSet<>(Arrays.asList(
 			"railway_station", "public_transport_station", "bus_station", "aerodrome",
 			"castle", "museum", "attraction", "memorial", "monument", "theatre", "stadium",
-			"wiki_place",
-			"townhall", "zoo", "peak", "mountain_pass",
+			"townhall", "zoo", "peak", "mountain_pass", "wiki_place",
 			"marketplace", "square", "park", "cathedral", "monastery"));
 
 	/** the parts ONE facility is stored as - spread over its footprint, unlike a bench */
@@ -110,9 +107,6 @@ public class SpatialSearchRanking {
 		}
 		double near = nearScore(r, center);
 		double name = nameScore(head);
-		// "liechtenstein" returned the country 22nd, behind museums that merely carry the word.
-		// An exact whole-name match is the strongest signal there is - but only for an object
-		// notable enough to own the name, or "Supermarkt" would outrank the nearer supermarket.
 		double exact = name == NAME_EXACT && isNotable(r) ? wExactName * near : 0;
 		return wName * name * near
 				+ wType * typeScore(head)
@@ -135,10 +129,8 @@ public class SpatialSearchRanking {
 		if (queried.isEmpty()) {
 			return NAME_OTHER;
 		}
-		// the OBJECT's name, not atom.name - the atom carries the matched TOKEN, so comparing
-		// against it made every single-word match "exact" and the term compared the query with
-		// itself: "Liechtensteinisches Landesmuseum Vaduz" scored the same as "Liechtenstein"
-		String name = normalize(atom.object != null ? atom.object.getName() : atom.name);
+		// the OBJECT's name: atom.name is the matched token, which would make every match exact
+		String name = normalizeName(atom.object != null ? atom.object.getName() : atom.name);
 		if (name.isEmpty()) {
 			return NAME_OTHER;
 		}
@@ -242,12 +234,11 @@ public class SpatialSearchRanking {
 				sb.append(t.word);
 			}
 		}
-		return normalize(sb.toString());
+		return normalizeName(sb.toString());
 	}
 
-	private static String normalize(String s) {
-		// "4th Avenue (Manhattan)" is our own disambiguation, added when a street is united with
-		// its district - it must not make the street a worse match for "4th avenue"
+	/** drops the "(district)" suffix deduplication adds, so a street still matches its own name */
+	private static String normalizeName(String s) {
 		int bracket = s == null ? -1 : s.lastIndexOf(" (");
 		if (bracket > 0 && s.endsWith(")")) {
 			s = s.substring(0, bracket);
