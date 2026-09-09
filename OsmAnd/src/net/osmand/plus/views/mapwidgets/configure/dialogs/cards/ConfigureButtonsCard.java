@@ -28,7 +28,8 @@ import java.util.List;
 public class ConfigureButtonsCard extends MapBaseCard {
 
 	public static final int CUSTOM_MAP_BUTTONS_INDEX = 0;
-	public static final int DEFAULT_MAP_BUTTONS_INDEX = 1;
+	public static final int AAUTO_CUSTOM_MAP_BUTTON_INDEX = 1;
+	public static final int DEFAULT_MAP_BUTTONS_INDEX = 2;
 
 	private final MapButtonsHelper mapButtonsHelper;
 
@@ -48,6 +49,7 @@ public class ConfigureButtonsCard extends MapBaseCard {
 		title.setText(R.string.shared_string_buttons);
 
 		setupCustomWidgetsButton();
+		setupAAutoCustomWidgetButton();
 		setupDefaultWidgetsButton();
 
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.description), false);
@@ -70,6 +72,18 @@ public class ConfigureButtonsCard extends MapBaseCard {
 		button.setOnClickListener(v -> notifyButtonPressed(CUSTOM_MAP_BUTTONS_INDEX));
 
 		AndroidUiHelper.updateVisibility(count, true);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.short_divider), true);
+	}
+
+	private void setupAAutoCustomWidgetButton() {
+		String title = getString(R.string.aauto_cbutton);
+		View button = view.findViewById(R.id.aauto_custom_button);
+
+		QuickActionButtonState state = mapButtonsHelper.getAndroidAutoButtonState();
+		boolean enabled = state != null && state.isEnabled();
+
+		setupButton(button, title, null, R.drawable.ic_action_android_auto, enabled, nightMode);
+		button.setOnClickListener(v -> notifyButtonPressed(AAUTO_CUSTOM_MAP_BUTTON_INDEX));
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.short_divider), true);
 	}
 

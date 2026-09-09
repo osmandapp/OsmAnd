@@ -32,6 +32,7 @@ public class QuickActionType {
 	private int iconRes;
 	private Class<? extends QuickAction> cl;
 	private int category;
+	private boolean allowedInAndroidAuto;
 
 	public QuickActionType(int id, String stringId) {
 		this.id = id;
@@ -72,6 +73,11 @@ public class QuickActionType {
 
 	public QuickActionType forceUseExtendedName() {
 		forceUseExtendedName = true;
+		return this;
+	}
+
+	public QuickActionType allowedInAndroidAuto(boolean allowed) {
+		this.allowedInAndroidAuto = allowed;
 		return this;
 	}
 
@@ -131,6 +137,10 @@ public class QuickActionType {
 
 	public int getCategory() {
 		return category;
+	}
+
+	public boolean isAllowedInAndroidAuto() {
+		return allowedInAndroidAuto;
 	}
 
 	@NonNull

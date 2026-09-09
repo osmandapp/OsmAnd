@@ -303,7 +303,13 @@ public class QuickActionListFragment extends BaseFullScreenFragment implements Q
 
 		LayoutInflater inflater = UiUtilities.getInflater(toolbar.getContext(), nightMode);
 		createDeleteActionsButton(inflater, container);
-		createOptionsButton(inflater, container);
+		if (!isAndroidAuto()) {
+			createOptionsButton(inflater, container);
+		}
+	}
+
+	private boolean isAndroidAuto() {
+		return buttonState != null && Algorithms.stringsEqual(buttonState.getId(), MapButtonsHelper.ANDROID_AUTO_BUTTON_ID);
 	}
 
 	private void createDeleteActionsButton(@NonNull LayoutInflater inflater, @NonNull ViewGroup container) {

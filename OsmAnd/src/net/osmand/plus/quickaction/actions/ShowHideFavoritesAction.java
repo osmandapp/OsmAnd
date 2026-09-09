@@ -24,7 +24,8 @@ public class ShowHideFavoritesAction extends QuickAction {
 			.nameActionRes(R.string.quick_action_verb_show_hide)
 			.nameRes(R.string.shared_string_favorites)
 			.iconRes(R.drawable.ic_action_favorite).nonEditable()
-			.category(QuickActionType.CONFIGURE_MAP);
+			.category(QuickActionType.CONFIGURE_MAP)
+			.allowedInAndroidAuto(true);
 
 	public ShowHideFavoritesAction() {
 		super(TYPE);

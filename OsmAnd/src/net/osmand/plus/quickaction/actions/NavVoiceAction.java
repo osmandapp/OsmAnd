@@ -22,7 +22,8 @@ public class NavVoiceAction extends QuickAction {
 			"nav.voice", NavVoiceAction.class).
 			nameRes(R.string.voices).iconRes(R.drawable.ic_action_volume_up).nonEditable().
 			category(QuickActionType.NAVIGATION)
-			.nameActionRes(R.string.quick_action_verb_turn_on_off);
+			.nameActionRes(R.string.quick_action_verb_turn_on_off)
+			.allowedInAndroidAuto(true);
 
 	public NavVoiceAction() {
 		super(TYPE);

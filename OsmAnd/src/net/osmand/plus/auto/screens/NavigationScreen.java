@@ -31,10 +31,12 @@ import androidx.lifecycle.LifecycleOwner;
 import net.osmand.data.ValueHolder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.NavigationListener;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.auto.SurfaceRenderer.SurfaceRendererCallback;
+import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -44,6 +46,7 @@ import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.OsmandMapTileView.ElevationListener;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
 import net.osmand.plus.views.mapwidgets.widgets.SpeedometerWidget;
 import net.osmand.util.Algorithms;
@@ -264,6 +267,25 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 							})
 							.build());
 		}
+
+		QuickActionButtonState state = getApp().getMapButtonsHelper().getAndroidAutoButtonState();
+		if (state != null && state.isEnabled()) {
+			actionStripBuilder.addAction(
+					new Action.Builder()
+							.setIcon(new CarIcon.Builder(IconCompat.createWithResource(getCarContext(), R.drawable.ic_quick_action)).build())
+							.setOnClickListener(() -> {
+								List<QuickAction> actions = state.getQuickActions();
+								if (!Algorithms.isEmpty(actions)) {
+									MapActivity mapActivity = getApp().getOsmandMap().getMapView().getMapActivity();
+									if (mapActivity != null) {
+										actions.get(0).execute(mapActivity, null);
+										invalidate();
+									}
+								}
+							})
+							.build());
+		}
+
 		actionStripBuilder.addAction(settingsAction);
 		if (navigating) {
 			actionStripBuilder.addAction(
