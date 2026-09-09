@@ -4301,7 +4301,7 @@
     <string name="disable_map_layers">تعطيل طبقات الخريطة</string>
     <string name="disable_map_layers_descr">قم بتعطيل جميع طبقات الخريطة أعلى الخريطة المتجهة (يلزم إعادة التشغيل).</string>
     <string name="shared_string_changes">التغييرات</string>
-    <string name="change_default_tracks_appearance_confirmation">تطبيق التغييرات على المسارات الموجودة في الملف أو فقط على المسارات الجديدة؟?</string>
+    <string name="change_default_tracks_appearance_confirmation">هل تريد تطبيق التغييرات على المسارات الموجودة في المجلد أم على المسارات الجديدة فقط؟</string>
     <string name="vertical_exaggeration">تضخيم عمودي</string>
     <string name="shared_string_scale">حجم</string>
     <string name="required_maps">الخرائط المطلوبة</string>
@@ -5010,8 +5010,8 @@
     <string name="astro_filter_visible_tonight">مرئي ليلا</string>
     <string name="astro_filter_visible_now">مرئي الآن</string>
     <string name="astro_filter_show_all">إظهار الكل</string>
-    <string name="astro_sort_sets_soonest">jحديد المواعيد في أقرب وقت</string>
-    <string name="astro_sort_rises_soonest">الاستيقاظ في أقرب وقت</string>
+    <string name="astro_sort_sets_soonest">تحديد المواعيد في أقرب وقت</string>
+    <string name="astro_sort_rises_soonest">يشرق في أقرب وقت</string>
     <string name="astro_sort_faintest_first">الأضعف أولا</string>
     <string name="astro_sort_brightest_first">الأقوى أولا</string>
     <string name="astro_search_empty_description">حاول تغيير الفلاتر أو وقت المراقبة.</string>

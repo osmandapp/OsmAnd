@@ -3149,8 +3149,8 @@
     <string name="poi_surface_clay">Lera</string>
     <string name="poi_surface_tartan">Gummibelagd löparbana</string>
     <string name="poi_surface_artificial_turf">Konstgräs</string>
-    <string name="poi_surface_decoturf">Hard court</string>
-    <string name="poi_surface_metal_grid">Metallgitter</string>
+    <string name="poi_surface_decoturf">DecoTurf</string>
+    <string name="poi_surface_metal_grid">Metallgaller</string>
     <string name="poi_location_overhead">Plats: ovan</string>
     <string name="poi_location_overground">Plats: ovan jord</string>
     <string name="poi_location_underwater">Plats: under vattnet</string>
@@ -3592,7 +3592,7 @@
     <string name="poi_snowmobile_no">Snöskoteråtkomst: nej</string>
     <string name="poi_snowmobile_private">Snöskoteråtkomst: privat</string>
     <string name="poi_ski_no">Skidåtkomst: nej</string>
-    <string name="poi_ski_yes">Skidåtkomst: ja</string>
+    <string name="poi_ski_yes">Skidåkning tillåten</string>
     <string name="poi_coach_no">Bussåtkomst: nej</string>
     <string name="poi_coach_yes">Bussåtkomst: ja</string>
     <string name="poi_tourist_bus_no">Turistbussåtkomst: nej</string>
@@ -4830,7 +4830,7 @@
     <string name="poi_route_activity_type_mushrooms_picking">Svampplockning</string>
     <string name="poi_route_activity_type_caving">Grottkrypning</string>
     <string name="poi_piste_type">Pisttyp</string>
-    <string name="poi_cafe_yes">Ja</string>
+    <string name="poi_cafe_yes">Kafé: ja</string>
     <string name="poi_mosque">Moské</string>
     <string name="poi_buddhist_temple">Buddhistiskt tempel</string>
     <string name="poi_greek_orthodox_church">Grekisk-ortodox kyrka</string>
@@ -5162,4 +5162,26 @@
     <string name="poi_memorial_type">Typ av minnesmärke</string>
     <string name="poi_yoga">Yoga</string>
     <string name="poi_covered_booth_filter">Bås</string>
+    <string name="poi_rapids_filter">Forsgrad</string>
+    <string name="poi_rapids_grade_0">0 (plattvatten)</string>
+    <string name="poi_rapids_grade_1">1 (lätt)</string>
+    <string name="poi_rapids_grade_2">2 (nybörjare)</string>
+    <string name="poi_rapids_grade_3">3 (medelsvår)</string>
+    <string name="poi_rapids_grade_4">4 (avancerad)</string>
+    <string name="poi_rapids_grade_5">5 (expert)</string>
+    <string name="poi_rapids_grade_6">6 (extrem)</string>
+    <string name="poi_rapids_grade_x">X (ej farbar)</string>
+    <string name="poi_water_type_filter">Vattentyp</string>
+    <string name="poi_water_lake">Sjö</string>
+    <string name="poi_surface_laterite">Yta: laterit</string>
+    <string name="poi_mtb_filter">Lämplig för MTB</string>
+    <string name="poi_ski_filter">Lämplig för skidåkning</string>
+    <string name="poi_horse_filter">Lämplig för ridning</string>
+    <string name="poi_winter_hiking_filter">Lämplig för vintervandring</string>
+    <string name="poi_mtb_yes">MTB tillåten</string>
+    <string name="poi_winter_hiking_yes">Vintervandring tillåten</string>
+    <string name="poi_air_conditioning">Luftkonditionering</string>
+    <string name="poi_website_menu">Meny</string>
+    <string name="poi_air_conditioning_yes">Ja</string>
+    <string name="poi_air_conditioning_no">Nej</string>
 </resources>
