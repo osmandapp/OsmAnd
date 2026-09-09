@@ -4716,7 +4716,7 @@
     <string name="miles">英里</string>
     <string name="mpg">英里/加侖</string>
     <string name="access_pinch_zoom_magnification">雙指縮放功能</string>
-    <string name="access_pinch_zoom_magnification_descr">在縮放手勢期間，請使用檢視區域縮放取代獨立縮放等級。</string>
+    <string name="access_pinch_zoom_magnification_descr">在執行放大手勢時，請使用檢視區域縮放（放大），而非離散的縮放等級。</string>
     <string name="show_spherical_map_description">顯示地球的球面模型</string>
     <string name="shared_string_price">價格</string>
     <string name="track_folder_appearance">軌跡資料夾外觀</string>
