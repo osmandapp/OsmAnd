@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
@@ -25,9 +27,11 @@ public class RadiusRulerWidgetInfoFragment extends BaseSimpleWidgetInfoFragment 
 
 	private static final String KEY_RADIUS_RULER_MODE = "radius_ruler_mode";
 	private static final String KEY_SHOW_COMPASS = "show_compass";
+	private static final String KEY_SHOW_SIGHT_LINE = "show_sight_line";
 
 	private RadiusRulerMode radiusRulerMode;
 	private boolean showCompass;
+	private boolean showSightLine;
 
 	@NonNull
 	@Override
@@ -41,10 +45,12 @@ public class RadiusRulerWidgetInfoFragment extends BaseSimpleWidgetInfoFragment 
 
 		RadiusRulerMode defaultRadiusRulerMode = settings.RADIUS_RULER_MODE.getModeValue(appMode);
 		boolean defaultShowCompass = settings.SHOW_COMPASS_ON_RADIUS_RULER.getModeValue(appMode);
+		boolean defaultShowSightLine = settings.SHOW_SIGHT_LINE_ON_RADIUS_RULER.getModeValue(appMode);
 
 		String radiusRulerModeName = bundle.getString(KEY_RADIUS_RULER_MODE, defaultRadiusRulerMode.name());
 		radiusRulerMode = RadiusRulerMode.valueOf(radiusRulerModeName);
 		showCompass = bundle.getBoolean(KEY_SHOW_COMPASS, defaultShowCompass);
+		showSightLine = bundle.getBoolean(KEY_SHOW_SIGHT_LINE, defaultShowSightLine);
 	}
 
 	@Override
@@ -52,6 +58,7 @@ public class RadiusRulerWidgetInfoFragment extends BaseSimpleWidgetInfoFragment 
 		inflate(R.layout.radius_ruler_widget_settings_fragment, container);
 		setupRadiusRulerModeSetting();
 		setupCompassSetting();
+		setupSightLineSetting();
 	}
 
 	private void setupRadiusRulerModeSetting() {
@@ -79,6 +86,7 @@ public class RadiusRulerWidgetInfoFragment extends BaseSimpleWidgetInfoFragment 
 
 			if (radiusRulerMode == RadiusRulerMode.EMPTY || previousMode == RadiusRulerMode.EMPTY) {
 				setupCompassSetting();
+				setupSightLineSetting();
 			}
 		};
 
@@ -141,6 +149,40 @@ public class RadiusRulerWidgetInfoFragment extends BaseSimpleWidgetInfoFragment 
 		updateIcon(icon, iconId, enabled);
 	}
 
+	private void setupSightLineSetting() {
+		View divider = view.findViewById(R.id.sight_line_divider);
+		View container = view.findViewById(R.id.sight_line_container);
+
+		if (!PluginsHelper.isActive(OsmandDevelopmentPlugin.class)) {
+			divider.setVisibility(View.GONE);
+			container.setVisibility(View.GONE);
+			return;
+		}
+		divider.setVisibility(View.VISIBLE);
+		container.setVisibility(View.VISIBLE);
+
+		ImageView icon = container.findViewById(R.id.icon);
+		TextView text = container.findViewById(R.id.text);
+		CompoundButton sightLineSwitch = container.findViewById(R.id.sight_line_switch);
+
+		boolean radiusRulerEnabled = radiusRulerMode != RadiusRulerMode.EMPTY;
+
+		updateIcon(icon, R.drawable.ic_action_direction_arrow, radiusRulerEnabled && showSightLine);
+		text.setText(R.string.sight_line);
+
+		UiUtilities.setupCompoundButton(sightLineSwitch, nightMode, CompoundButtonType.GLOBAL);
+		sightLineSwitch.setChecked(showSightLine);
+		sightLineSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+			updateIcon(icon, R.drawable.ic_action_direction_arrow, isChecked && radiusRulerEnabled);
+			showSightLine = isChecked;
+		});
+		sightLineSwitch.setEnabled(radiusRulerEnabled);
+
+		container.setOnClickListener(v -> sightLineSwitch.setChecked(!sightLineSwitch.isChecked()));
+		container.setBackground(getPressedStateDrawable());
+		container.setEnabled(radiusRulerEnabled);
+	}
+
 	private void updateIcon(@NonNull ImageView icon, @DrawableRes int iconId, boolean enabled) {
 		int colorId = enabled
 				? ColorUtilities.getActiveIconColorId(nightMode)
@@ -154,6 +196,7 @@ public class RadiusRulerWidgetInfoFragment extends BaseSimpleWidgetInfoFragment 
 
 		settings.RADIUS_RULER_MODE.setModeValue(appMode, radiusRulerMode);
 		settings.SHOW_COMPASS_ON_RADIUS_RULER.setModeValue(appMode, showCompass);
+		settings.SHOW_SIGHT_LINE_ON_RADIUS_RULER.setModeValue(appMode, showSightLine);
 
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
@@ -166,6 +209,7 @@ public class RadiusRulerWidgetInfoFragment extends BaseSimpleWidgetInfoFragment 
 		super.onSaveInstanceState(outState);
 		outState.putString(KEY_RADIUS_RULER_MODE, radiusRulerMode.name());
 		outState.putBoolean(KEY_SHOW_COMPASS, showCompass);
+		outState.putBoolean(KEY_SHOW_SIGHT_LINE, showSightLine);
 	}
 
 	private interface ModeSelectionCallback {
