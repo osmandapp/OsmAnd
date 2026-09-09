@@ -57,10 +57,14 @@ import net.osmand.aidlapi.logcat.OnLogcatMessageParams;
 import net.osmand.aidlapi.map.ALatLon;
 import net.osmand.aidlapi.map.ALocation;
 import net.osmand.aidlapi.navigation.ABlockedRoad;
+import net.osmand.aidlapi.navigation.ARouteUpdate;
+import net.osmand.aidlapi.navigation.ActiveRouteGeometry;
+import net.osmand.aidlapi.navigation.GetActiveRouteParams;
 import net.osmand.aidlapi.navigation.NavigateGpxParams;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.ValueHolder;
 import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmAndTaskManager;
@@ -94,8 +98,11 @@ import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.resources.SQLiteTileSource;
+import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.IRoutingDataUpdateListener;
 import net.osmand.plus.routing.NextDirectionInfo;
+import net.osmand.plus.routing.RouteCalculationResult;
+import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.routing.VoiceRouter.VoiceMessageListener;
@@ -161,6 +168,7 @@ public class OsmandAidlApi {
 	public static final int KEY_ON_VOICE_MESSAGE = 8;
 	public static final int KEY_ON_KEY_EVENT = 16;
 	public static final int KEY_ON_LOGCAT_MESSAGE = 32;
+	public static final int KEY_ON_ROUTE_UPDATE = 64;
 
 	public static final String WIDGET_ID_PREFIX = "aidl_widget_";
 
@@ -231,6 +239,7 @@ public class OsmandAidlApi {
 	private Map<String, BroadcastReceiver> receivers = new TreeMap<>();
 	private final Map<String, ConnectedApp> connectedApps = new ConcurrentHashMap<>();
 	private final Map<Long, IRoutingDataUpdateListener> navUpdateCallbacks = new ConcurrentHashMap<>();
+	private final Map<Long, IRouteInformationListener> routeUpdateCallbacks = new ConcurrentHashMap<>();
 	private final Map<String, AidlContextMenuButtonsWrapper> contextMenuButtonsParams = new ConcurrentHashMap<>();
 	private final Map<Long, VoiceRouter.VoiceMessageListener> voiceRouterMessageCallbacks = new ConcurrentHashMap<>();
 	private final Map<Long, Set<Integer>> keyEventCallbacks = new ConcurrentHashMap<>();
@@ -2120,6 +2129,135 @@ public class OsmandAidlApi {
 		IRoutingDataUpdateListener callback = navUpdateCallbacks.remove(id);
 		if (callback != null) {
 			app.getRoutingHelper().removeRouteDataListener(callback);
+		}
+	}
+
+	public boolean getActiveRouteGeometry(@NonNull GetActiveRouteParams params,
+	                                      @NonNull ActiveRouteGeometry result) {
+		RoutingHelper rh = app.getRoutingHelper();
+		if (!rh.isRouteCalculated() || rh.isRouteBeingCalculated()) {
+			return false;
+		}
+		RouteCalculationResult route = rh.getRoute();
+		List<Location> locations = params.isIncludePassedSegment()
+				? route.getImmutableAllLocations()
+				: route.getRouteLocations();
+		if (locations.size() < 2) {
+			return false;
+		}
+		List<ALatLon> points = new ArrayList<>(locations.size());
+		for (Location location : locations) {
+			points.add(new ALatLon(location.getLatitude(), location.getLongitude()));
+		}
+		result.setPoints(points);
+		fillActiveRouteGeometryMetadata(result, rh, route, locations);
+		return true;
+	}
+
+	void registerForRouteUpdates(long id) {
+		IRouteInformationListener listener = new IRouteInformationListener() {
+			@Override
+			public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
+				dispatchRouteUpdate(id, ARouteUpdate.ROUTE_EVENT_RECALCULATED, newRoute);
+			}
+
+			@Override
+			public void routeWasCancelled() {
+				dispatchRouteUpdate(id, ARouteUpdate.ROUTE_EVENT_CANCELLED, false);
+			}
+
+			@Override
+			public void routeWasFinished() {
+				dispatchRouteUpdate(id, ARouteUpdate.ROUTE_EVENT_FINISHED, false);
+			}
+		};
+		routeUpdateCallbacks.put(id, listener);
+		app.getRoutingHelper().addListener(listener);
+	}
+
+	public boolean unregisterFromRouteUpdates(long id) {
+		IRouteInformationListener listener = routeUpdateCallbacks.remove(id);
+		if (listener != null) {
+			app.getRoutingHelper().removeListener(listener);
+			return true;
+		}
+		return false;
+	}
+
+	private void fillActiveRouteGeometryMetadata(@NonNull ActiveRouteGeometry out,
+	                                             @NonNull RoutingHelper rh,
+	                                             @NonNull RouteCalculationResult route,
+	                                             @NonNull List<Location> locations) {
+		int remainingDistanceM = rh.getLeftDistance();
+		out.setTotalDistanceM(route.getWholeDistance());
+		out.setRemainingDistanceM(remainingDistanceM);
+		out.setProfileKey(rh.getAppMode().getStringKey());
+		out.setRouteSource(mapRouteSource(route.getRouteService()));
+		out.setRouteVersion(computeRouteVersion(locations, remainingDistanceM));
+		out.setCalculatedAt(System.currentTimeMillis());
+		out.setPlanningMode(rh.isRoutePlanningMode());
+	}
+
+	private ARouteUpdate buildRouteUpdate(int eventType, boolean newRoute, @NonNull RoutingHelper rh) {
+		RouteCalculationResult route = rh.getRoute();
+		List<Location> locations = route.getRouteLocations();
+		int remainingDistanceM = eventType == ARouteUpdate.ROUTE_EVENT_CANCELLED
+				|| eventType == ARouteUpdate.ROUTE_EVENT_FINISHED ? 0 : rh.getLeftDistance();
+		ARouteUpdate update = new ARouteUpdate();
+		update.setEventType(eventType);
+		update.setNewRoute(newRoute);
+		update.setRemainingDistanceM(remainingDistanceM);
+		update.setProfileKey(rh.getAppMode().getStringKey());
+		update.setRouteSource(mapRouteSource(route.getRouteService()));
+		update.setRouteVersion(computeRouteVersion(locations, remainingDistanceM));
+		update.setPlanningMode(rh.isRoutePlanningMode());
+		return update;
+	}
+
+	private void dispatchRouteUpdate(long callbackId, int eventType, boolean newRoute) {
+		if (aidlCallbackListenerV2 == null || !routeUpdateCallbacks.containsKey(callbackId)) {
+			return;
+		}
+		OsmandAidlServiceV2.AidlCallbackParams cb = aidlCallbackListenerV2.getAidlCallbacks().get(callbackId);
+		if (cb == null || (cb.getKey() & KEY_ON_ROUTE_UPDATE) == 0) {
+			return;
+		}
+		try {
+			cb.getCallback().onRouteUpdate(buildRouteUpdate(eventType, newRoute, app.getRoutingHelper()));
+		} catch (Exception e) {
+			LOG.error(e.getMessage(), e);
+		}
+	}
+
+	private static int computeRouteVersion(@NonNull List<Location> locations, int remainingDistanceM) {
+		if (locations.isEmpty()) {
+			return 0;
+		}
+		Location first = locations.get(0);
+		Location last = locations.get(locations.size() - 1);
+		return Objects.hash(locations.size(),
+				(int) (first.getLatitude() * 1e5), (int) (first.getLongitude() * 1e5),
+				(int) (last.getLatitude() * 1e5), (int) (last.getLongitude() * 1e5),
+				remainingDistanceM);
+	}
+
+	private static int mapRouteSource(@Nullable RouteService service) {
+		if (service == null) {
+			return ActiveRouteGeometry.ROUTE_SOURCE_UNKNOWN;
+		}
+		switch (service) {
+			case OSMAND:
+				return ActiveRouteGeometry.ROUTE_SOURCE_OSMAND;
+			case BROUTER:
+				return ActiveRouteGeometry.ROUTE_SOURCE_BROUTER;
+			case STRAIGHT:
+				return ActiveRouteGeometry.ROUTE_SOURCE_STRAIGHT;
+			case DIRECT_TO:
+				return ActiveRouteGeometry.ROUTE_SOURCE_DIRECT_TO;
+			case ONLINE:
+				return ActiveRouteGeometry.ROUTE_SOURCE_ONLINE;
+			default:
+				return ActiveRouteGeometry.ROUTE_SOURCE_UNKNOWN;
 		}
 	}
 
