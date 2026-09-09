@@ -71,7 +71,7 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 	private static final double SAME_PLACE_M = 30;      // pref-0071, pref-0092
 	private static final double SAME_FACILITY_M = 400;  // pref-0007, pref-0082
 	private static final double SAME_STREET_M = 2000;   // pref-0111
-	private static final int MAX_SAME_NAME = 32;        // bound the scan for a very common name
+	private static final int MAX_SAME_NAME = 10;        // how far back the chain is walked
 
 	// parts OF a street, carrying its name: pref-0108, pref-0109 
 	private static final Set<String> STREET_PART_SUBTYPES = new HashSet<>(
@@ -687,34 +687,47 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 	}
 
 
+	private String dedupName(SpatialSearchResult r) {
+		MapObject o = r.getMainObject();
+		String name = o == null ? null : o.getName();
+		if (Algorithms.isEmpty(name)) {
+			return null;
+		}
+		String n = SearchAlgorithms.normalizeToken(SearchAlgorithms.alignChars(name));
+		return Algorithms.isEmpty(n) ? null : n.trim().toLowerCase();
+	}
+	
 	private List<SpatialSearchResult> deduplicateByProximity(List<SpatialSearchResult> sorted,
 			SpatialSearchContext ctx) {
-		Map<String, List<SpatialSearchResult>> byName = new HashMap<>();
+		// first pass: name every row and chain it to the previous row of that name
+		Map<String, SpatialSearchResult> lastSameName = new HashMap<>();
+		for (SpatialSearchResult s : sorted) {
+			s.dedupName = dedupName(s);
+			if (s.dedupName != null) {
+				s.prevDedupSameName = lastSameName.put(s.dedupName, s);
+			}
+		}
 		List<SpatialSearchResult> out = new ArrayList<>(sorted.size());
 		for (SpatialSearchResult s : sorted) {
-			String name = dedupName(s);
 			SpatialSearchResult same = null;
-			if (name != null && s.getLatLon() != null) {
-				List<SpatialSearchResult> kept = byName.computeIfAbsent(name, k -> new ArrayList<>());
-				for (SpatialSearchResult u : kept) {
-					if (isSamePlace(u, s)) {
-						same = u;
+			if (s.dedupName != null && s.getLatLon() != null) {
+				SpatialSearchResult prev = s.prevDedupSameName;
+				for (int i = 0; i < MAX_SAME_NAME && prev != null; i++) {
+					if (prev.getLatLon() != null && isSamePlace(prev, s)) {
+						same = prev;
 						break;
 					}
-				}
-				if (same == null && kept.size() < MAX_SAME_NAME) {
-					kept.add(s);
+					prev = prev.prevDedupSameName;
 				}
 			}
 			if (same != null) {
-				same.addExtraResult(s, ctx.settings.LANG_DEDUPLICATE);
+//				same.addExtraResult(s, ctx.settings.LANG_DEDUPLICATE); // could be different objects don't mix
 			} else {
 				out.add(s);
 			}
 		}
 		return out;
 	}
-
 
 	private boolean isSamePlace(SpatialSearchResult a, SpatialSearchResult b) {
 		boolean street = a.getMainObject() instanceof Street;
@@ -741,7 +754,6 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		}
 		return MapUtils.getDistance(a.getLatLon(), b.getLatLon()) <= radius;
 	}
-	
 
 	private boolean isSpreadNode(SpatialSearchResult r) {
 		SpatialSearchResultRef head = r == null ? null : r.getFirstRef();
@@ -757,15 +769,6 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		return o instanceof Amenity a && a.getSubType() != null && STREET_PART_SUBTYPES.contains(a.getSubType());
 	}
 
-	private String dedupName(SpatialSearchResult r) {
-		MapObject o = r.getMainObject();
-		String name = o == null ? null : o.getName();
-		if (Algorithms.isEmpty(name)) {
-			return null;
-		}
-		String n = SearchAlgorithms.normalizeToken(SearchAlgorithms.alignChars(name));
-		return Algorithms.isEmpty(n) ? null : n.trim().toLowerCase();
-	}
 
 	@FunctionalInterface
 	private interface IterateIntersection {

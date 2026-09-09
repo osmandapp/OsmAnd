@@ -40,6 +40,10 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	final int ZOOM_SIMILARITY_1_KM = 15 - 8; // 3 symbols
 	final int ZOOM_SIMILARITY_10_M = 18 - 8; // 4 symbols
 	
+	// dedup linked list
+	String dedupName;
+	SpatialSearchResult prevDedupSameName;
+	
 	SpatialSearchResult(SpatialSearchResultsList parentList, int parentInd, LatLon preciseLatlon, String extraName,
 			Integer surplusWords) {
 		this.parentInd = parentInd;
