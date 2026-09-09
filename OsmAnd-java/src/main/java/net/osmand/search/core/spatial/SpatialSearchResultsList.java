@@ -687,8 +687,8 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 	 * nodes shares none of them, and neither do a wiki place and the theatre inside it. What the
 	 * reviewed cases say is that the question is METRES, not kinds - a village and its platform
 	 * 147 m apart are one row, two parcel lockers of the same name 218 m apart are two, and two
-	 * benches called "Park Bench" 57 m apart are two benches. Hence the two radii, and hence
-	 * streets are left alone: a street is a line whose single coordinate is not where it is.
+	 * benches called "Park Bench" 57 m apart are two benches. Hence the wide radius applies only
+	 * to the nodes a stop is SPREAD over - a bench is subordinate too, but it is one object.
 	 */
 	private List<SpatialSearchResult> deduplicateByProximity(List<SpatialSearchResult> sorted,
 			SpatialSearchContext ctx) {
@@ -720,8 +720,8 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 							// one - "we do not merge them, we merge only the stops with each other"
 							continue;
 						}
-						double radius = SpatialSearchRanking.isSubordinateNode(u)
-								|| SpatialSearchRanking.isSubordinateNode(s) ? SAME_STOP_M : SAME_PLACE_M;
+						double radius = SpatialSearchRanking.isSpreadNode(u)
+								|| SpatialSearchRanking.isSpreadNode(s) ? SAME_STOP_M : SAME_PLACE_M;
 						if (s.isStreetResult()) {
 							// one street cut into several OSM ways: the coordinate of a line means
 							// little, so the city it belongs to decides and the distance only

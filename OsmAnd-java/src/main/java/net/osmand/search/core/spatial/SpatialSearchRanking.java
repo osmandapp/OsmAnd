@@ -102,6 +102,27 @@ public class SpatialSearchRanking {
 			"marketplace", "square", "park", "cathedral", "monastery"));
 
 	/**
+	 * Nodes of ONE facility, spread over its whole footprint: the platforms, stop positions and
+	 * entrances of a stop lie hundreds of metres apart and are still one stop. Deduplication may
+	 * unite these across a wide radius - unlike a bench or a waste basket, which are also
+	 * subordinate but are one object each: two benches called "Park Bench" 57 m apart are two
+	 * benches, judged 2026-09-09.
+	 */
+	public static boolean isSpreadNode(SpatialSearchResult r) {
+		SpatialSearchResultRef head = r == null ? null : r.getFirstRef();
+		if (head == null || !(head.atom.object instanceof Amenity a)) {
+			return false;
+		}
+		String subType = a.getSubType();
+		return subType != null && (SPREAD_SUBTYPES.contains(subType) || STOP_SUBTYPES.contains(subType));
+	}
+
+	/** the parts a stop or a station is stored as */
+	private static final Set<String> SPREAD_SUBTYPES = new HashSet<>(Arrays.asList(
+			"public_transport_platform", "public_transport_stop_position", "subway_entrance",
+			"elevator", "ticket_validator", "entrance", "level_crossing", "motorway_junction"));
+
+	/**
 	 * A node that exists to describe something else - a platform, a stop position, an entrance,
 	 * a motorway junction. Named after the place it serves, so its name is never evidence that
 	 * it IS that place.
