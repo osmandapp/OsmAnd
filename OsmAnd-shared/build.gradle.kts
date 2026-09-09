@@ -79,7 +79,6 @@ kotlin {
 			implementation("net.sf.kxml:kxml2:$kxml2Version")
 			implementation("org.xerial:sqlite-jdbc:$sqliteJDBCVersion")
 			implementation("commons-logging:commons-logging:$commonLoggingVersion")
-			implementation("com.moparisthebest:junidecode:$junidecodeVersion")
             implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
 		}
 		androidMain.dependencies {
@@ -88,7 +87,6 @@ kotlin {
 			implementation("net.sf.kxml:kxml2:$kxml2Version")
 			implementation("io.coil-kt.coil3:coil-core:$coilVersion")
 			implementation("io.coil-kt.coil3:coil-network-okhttp:$coilVersion")
-			implementation("com.moparisthebest:junidecode:$junidecodeVersion")
             implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
 		}
 		iosMain.dependencies {
@@ -99,6 +97,10 @@ kotlin {
 		commonTest.dependencies {
 			implementation("org.jetbrains.kotlin:kotlin-test:2.0.0")
             implementation("io.ktor:ktor-client-mock:$ktorVersion")
+		}
+		jvmTest.dependencies {
+			// only to check the generated tables still say what junidecode says
+			implementation("com.moparisthebest:junidecode:$junidecodeVersion")
 		}
 	}
 }
