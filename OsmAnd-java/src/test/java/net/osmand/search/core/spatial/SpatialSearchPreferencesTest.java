@@ -64,7 +64,7 @@ public class SpatialSearchPreferencesTest {
 	 * unrelated reordering cannot break the build - only contradicting a recorded human
 	 * judgement can.
 	 */
-	private static final int MIN_SATISFIED = 59;
+	private static final int MIN_SATISFIED = 60;
 
 	/**
 	 * {@code OSMAND_SPATIAL_SCORE_RANKING=false} runs the same preferences against the old

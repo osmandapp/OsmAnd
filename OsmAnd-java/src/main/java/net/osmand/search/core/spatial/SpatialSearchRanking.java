@@ -33,15 +33,22 @@ public class SpatialSearchRanking {
 	// two castles first (Palazzo Pubblico, elo 2998 at 80 km, over Castello di Punta Ala, 2329 at
 	// 32 km), not enough to keep a cathedral 80 km away above an ordinary church 800 m away.
 	//
-	// The name term is deliberately small. Raising it costs preferences at every step
-	// (0.15 -> 41 satisfied, 0.3 -> 40, 0.5 -> 39, 2.0 -> 38) because "supermarkt", "кафе" and
-	// "lekarna" are words for a KIND of object, where carrying the word in the name says nothing
-	// about relevance, and the engine cannot yet tell such a word from a proper name. Until it
-	// can, the term only breaks ties.
+	// The name term is small AND multiplied by proximity, which is the fourth round's rule in the
+	// reviewer's own words: "they are close to each other so full match is more important". A
+	// per-result score cannot ask whether two candidates are close to EACH OTHER, but making the
+	// name count only for what is close to the PERSON has the same effect whenever both are in
+	// the same area, and lets the name fade for a far namesake - which is the other half of the
+	// same judgements ("Camping-Freunde Berlin" at 32 km must not beat an unnamed camping office
+	// at 24 km on the strength of the word in its name).
+	//
+	// Raising the weight further costs preferences at every step (0.3 -> 43 satisfied, 0.5 -> 42,
+	// 0.8 -> 39, 1.0 -> 38): "supermarkt", "кафе" and "lekarna" are words for a KIND of object,
+	// where carrying the word in the name says nothing about relevance, and the engine still
+	// cannot tell such a word from a proper name.
 	public double wName = 0.15;
 	public double wType = 2.0;
-	public double wRating = 1.0;
-	public double wNear = 2.5;
+	public double wRating = 0.5;
+	public double wNear = 2.0;
 
 	/** distance at which the proximity term is worth half of its maximum */
 	public double halfWeightKm = 3.0;
@@ -60,7 +67,13 @@ public class SpatialSearchRanking {
 	private static final double TYPE_VILLAGE = 0.88;
 	private static final double TYPE_LANDMARK = 0.80;
 	private static final double TYPE_BUILDING = 0.75;
-	private static final double TYPE_STREET = 0.70;
+	/**
+	 * A street used to be worth 0.70, half way between a village and an ordinary POI. That put
+	 * "Via del Mugello" 23 km away above the guest house called "Mugello" 13 km away, which the
+	 * reviewer rejected twice; 0.55 leaves the street comfortably above a stop (0.35) and a
+	 * platform (0.10), which is the comparison the value exists for.
+	 */
+	private static final double TYPE_STREET = 0.55;
 	private static final double TYPE_BOUNDARY = 0.60;
 	private static final double TYPE_POI = 0.50;
 	private static final double TYPE_POSTCODE = 0.40;
@@ -109,10 +122,11 @@ public class SpatialSearchRanking {
 		if (head == null) {
 			return 0;
 		}
-		return wName * nameScore(head)
+		double near = nearScore(r, center);
+		return wName * nameScore(head) * near
 				+ wType * typeScore(head)
 				+ wRating * ratingScore(r)
-				+ wNear * nearScore(r, center);
+				+ wNear * near;
 	}
 
 	/** did the query name this object, or only the word for its kind? */

@@ -95,6 +95,7 @@ comparator, which is what makes the number meaningful:
 | + deduplication by name and distance | 56 | 11 |
 | + the merge records re-judged against it | 57 | 5 |
 | + ways of one street merged, round 1 re-judged | 59 | 3 |
+| + the name term weighted by proximity | 60 | 2 |
 
 (The second row was measured on the 76 records that existed when those weights were written; the
 rest on the whole file.) The merge records that stayed violated turned out to be records whose
@@ -191,3 +192,23 @@ not by a distance alone:
 The radii are measured, not chosen: 320 m between a camp site and its bus stop and 330 m between
 a pass and its platform were both called one place; 218 m between two parcel lockers and 57 m
 between two benches were not.
+
+## The rule the fourth round added
+
+> *"they are close to each other so full match is more important"* — twice, on `berlin` and on
+> `mugello`.
+
+A per-result score cannot ask whether two candidates are close to EACH OTHER. Multiplying the name
+term by proximity has the same effect wherever both are in the same area, and the other half of
+the same judgements says it should: `Camping-Freunde Berlin` at 32 km must not beat an unnamed
+camping office at 24 km on the strength of the word in its name. So `wName * name * near`, and a
+street is worth 0.55 rather than 0.70 - it still stands comfortably above a stop (0.35) and a
+platform (0.10), which is the comparison that value exists for.
+
+Two records remain violated and both are worth keeping violated rather than fitted away:
+
+- `berlin` - the artwork literally called "Berlin" against `Gedenkstätte Berliner Mauer` 400 m
+  away, elo 2534 against 2722. Every weight that lifts the exact name high enough to beat that
+  costs more preferences elsewhere than it wins (0.3 -> 43 satisfied offline, 0.8 -> 39). It needs
+  the signal that is still missing: a word that names a KIND against a word that is a name.
+- `acqua` - the spring called "Acqua"; the same term, in the other direction.
