@@ -56,6 +56,12 @@ public class SpatialSearchRanking {
 	private static final double TYPE_STOP = 0.35;
 	private static final double TYPE_INFRASTRUCTURE = 0.10;
 
+	/** elo above the floor at which fame alone makes an object a landmark: pref-0134 */
+	private static final double LANDMARK_RATING = 1000;
+	/** ... but only where a person can go to it - 1/(1+9/3): a famous church 80 km away is not
+	 *  the answer to "christian church": pref-0086 */
+	private static final double LANDMARK_NEAR = 0.25;
+
 	/** the parts a stop or a station is stored as - deduplication unites these across 400 m */
 	static final Set<String> SPREAD_SUBTYPES = new HashSet<>(Arrays.asList(
 			"public_transport_platform", "public_transport_stop_position", "subway_entrance",
@@ -111,7 +117,7 @@ public class SpatialSearchRanking {
 		double exact = name == NAME_EXACT && isNotable(r)
 				? wExactName * (isPlace(head) || isProminent(r) ? 1 : near) : 0;
 		return wName * name * near
-				+ wType * typeScore(head)
+				+ wType * Math.max(typeScore(head), landmarkByRating(r, near))
 				+ (isPlace(head) ? wRatingPlace : wRating) * ratingScore(r)
 				+ wNear * near
 				+ exact;
@@ -267,6 +273,12 @@ public class SpatialSearchRanking {
 		}
 		MapObject o = r.getFirstRef() == null ? null : r.getFirstRef().atom.object;
 		return o instanceof Amenity a && !Algorithms.isEmpty(a.getAdditionalInfo(Amenity.WIKIDATA));
+	}
+
+	/** an object famous enough is a landmark whatever its subtype says: The Plaza is not "a hotel" */
+	private double landmarkByRating(SpatialSearchResult r, double near) {
+		return near >= LANDMARK_NEAR && r.getTotalRating() >= r.parent.MIN_ELO_RATING + LANDMARK_RATING
+				? TYPE_LANDMARK : 0;
 	}
 
 	/** bounded, so a famous place outranks an unknown one but not a much closer one */

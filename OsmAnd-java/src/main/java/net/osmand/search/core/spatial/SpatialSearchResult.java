@@ -577,32 +577,32 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 			if (res != 0) {
 				return res;
 			}
-			return -Long.compare(o1.getFirstRef().atom.id, o2.getFirstRef().atom.id);
-		}
-		res = Integer.compare(o1.sumOther(), o2.sumOther());
-		if (res != 0) {
-			return res;
-		}
-		res = -Integer.compare(o1.getMainRating(), o2.getMainRating());
-		if (res != 0) {
-			return res;
-		}
-		// sort poi intersection differently
-		res = -Integer.compare(o1.getTotalRating(), o2.getTotalRating());
-		if (res != 0) {
-			return res;
-		}
-		res = -Integer.compare(o1.sumTypeOrder(), o2.sumTypeOrder());
-		if (res != 0) {
-			return res;
-		}
-		if (center != null) {
-			double d1 = getDistance(o1, center);
-			double d2 = getDistance(o2, center);
-			if ((int) d1 != (int) d2) {
-				res = Double.compare(d1, d2);
-				if (res != 0) {
-					return res;
+		} else {
+			res = Integer.compare(o1.sumOther(), o2.sumOther());
+			if (res != 0) {
+				return res;
+			}
+			res = -Integer.compare(o1.getMainRating(), o2.getMainRating());
+			if (res != 0) {
+				return res;
+			}
+			// sort poi intersection differently
+			res = -Integer.compare(o1.getTotalRating(), o2.getTotalRating());
+			if (res != 0) {
+				return res;
+			}
+			res = -Integer.compare(o1.sumTypeOrder(), o2.sumTypeOrder());
+			if (res != 0) {
+				return res;
+			}
+			if (center != null) {
+				double d1 = getDistance(o1, center);
+				double d2 = getDistance(o2, center);
+				if ((int) d1 != (int) d2) {
+					res = Double.compare(d1, d2);
+					if (res != 0) {
+						return res;
+					}
 				}
 			}
 		}
