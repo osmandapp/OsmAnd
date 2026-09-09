@@ -650,8 +650,12 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 	}
 
 	public List<SpatialSearchResult> sortResults(SpatialSearchContext ctx, List<SpatialSearchResult> finalResult, boolean deduplicate) {
-		ctx.ranking.prepare(finalResult, ctx.location);
-		Collections.sort(finalResult, ctx.ranking::compare);
+		if (ctx.settings.SCORE_RANKING) {
+			ctx.ranking.prepare(finalResult, ctx.location);
+			Collections.sort(finalResult, ctx.ranking::compare);
+		} else {
+			Collections.sort(finalResult, (o1, o2) -> SpatialSearchResult.compare(o1, o2, ctx.location));
+		}
 		if (deduplicate) {
 			uniqueIdsResults.clear();
 			extraIdsResults.clear();

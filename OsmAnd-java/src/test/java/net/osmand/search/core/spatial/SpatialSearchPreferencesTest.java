@@ -73,6 +73,13 @@ public class SpatialSearchPreferencesTest {
 	 */
 	private static final int MIN_SATISFIED = 66;
 
+	/**
+	 * {@code OSMAND_SPATIAL_SCORE_RANKING=false} runs the same preferences against the old
+	 * lexicographic ladder - the comparison that makes the number mean something.
+	 */
+	private static final boolean SCORE_RANKING = !"false".equalsIgnoreCase(
+			setting("osmand.spatial.scoreRanking", "OSMAND_SPATIAL_SCORE_RANKING"));
+
 	private static String setting(String property, String env) {
 		String v = System.getProperty(property);
 		return v != null ? v : System.getenv(env);
@@ -115,6 +122,7 @@ public class SpatialSearchPreferencesTest {
 			}
 		}
 		Score sc = check(prefs, mapsDir);
+		System.out.printf("ranking: %s%n", SCORE_RANKING ? "score" : "ladder (old)");
 
 		System.out.printf("preferences: %d satisfied, %d violated, %d not applicable "
 						+ "(object not returned), %d absorbed by deduplication, %d below the "
@@ -124,6 +132,7 @@ public class SpatialSearchPreferencesTest {
 		for (String f : sc.failures) {
 			System.out.println("  violated " + f);
 		}
+		Assume.assumeTrue("the old ranking is measured for comparison, not gated", SCORE_RANKING);
 		Assume.assumeTrue("none of the maps named by preferences.jsonl are present",
 				sc.satisfied + sc.violated + sc.notApplicable > 0);
 		Assert.assertTrue(String.format(
@@ -252,6 +261,7 @@ public class SpatialSearchPreferencesTest {
 		}
 		try {
 			SpatialTextSearchSettings settings = SpatialTextSearchSettings.defaultSettings();
+			settings.SCORE_RANKING = SCORE_RANKING;
 			SpatialSearchContext ctx = new SpatialSearchContext(settings, files,
 					new SpatialPoiSearch(MapPoiTypes.getDefault()), location);
 			SpatialSearchResults res = new SpatialTextSearch().searchAPI(query, ctx);
