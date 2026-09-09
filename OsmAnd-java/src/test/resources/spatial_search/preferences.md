@@ -96,6 +96,7 @@ comparator, which is what makes the number meaningful:
 | + the merge records re-judged against it | 57 | 5 |
 | + ways of one street merged, round 1 re-judged | 59 | 3 |
 | + the name term weighted by proximity | 60 | 2 |
+| + only the top 10 asserted | 55 | 1 |
 
 (The second row was measured on the 76 records that existed when those weights were written; the
 rest on the whole file.) The merge records that stayed violated turned out to be records whose
@@ -212,3 +213,11 @@ Two records remain violated and both are worth keeping violated rather than fitt
   costs more preferences elsewhere than it wins (0.3 -> 43 satisfied offline, 0.8 -> 39). It needs
   the signal that is still missing: a word that names a KIND against a word that is a name.
 - `acqua` - the spring called "Acqua"; the same term, in the other direction.
+
+## Only what a person can see
+
+A judgement is made about two rows on a screen. Asserting it a hundred rows down measures nothing
+anybody would ever look at, and lets a deep reshuffle read as a regression - which is how `acqua`
+(rows #52 and #102) came to be reported as broken. An order preference is now asserted only when
+at least one of its two objects is inside the top 10; the rest are counted as `below the top 10`.
+The reviewer's rule, in his words: *"I am only interested in changes in the top 10"*.
