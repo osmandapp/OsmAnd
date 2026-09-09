@@ -35,7 +35,7 @@ import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.shared.routing.GeneralRouter;
 import net.osmand.router.GpxRouteApproximation;
-import net.osmand.router.HHRouteDataStructure.HHRoutingConfig;
+import net.osmand.shared.routing.HHRoutingConfig;
 import net.osmand.router.HHRoutePlanner;
 import net.osmand.router.NativeTransportRoutingResult;
 import net.osmand.shared.routing.RouteCalculationProgress;

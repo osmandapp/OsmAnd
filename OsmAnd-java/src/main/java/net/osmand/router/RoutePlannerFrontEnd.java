@@ -27,7 +27,7 @@ import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
 import net.osmand.shared.routing.GeneralRouter.RoutingParameter;
 import net.osmand.router.HHRouteDataStructure.HHNetworkRouteRes;
-import net.osmand.router.HHRouteDataStructure.HHRoutingConfig;
+import net.osmand.shared.routing.HHRoutingConfig;
 import net.osmand.router.HHRouteDataStructure.NetworkDBPoint;
 import net.osmand.shared.routing.RouteCalculationProgress.HHIteration;
 import net.osmand.router.RouteResultPreparation.RouteCalcResult;

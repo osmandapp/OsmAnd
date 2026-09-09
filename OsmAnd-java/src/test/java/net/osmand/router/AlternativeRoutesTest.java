@@ -25,7 +25,7 @@ import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.shared.routing.RouteCalculationProgress;
 import net.osmand.shared.routing.RoutingConfiguration;
 import net.osmand.data.LatLon;
-import net.osmand.router.HHRouteDataStructure.HHRoutingConfig;
+import net.osmand.shared.routing.HHRoutingConfig;
 import net.osmand.shared.routing.RouteCalculationMode;
 import net.osmand.router.RouteResultPreparation.RouteCalcResult;
 import net.osmand.shared.routing.RoutingConfiguration.Builder;

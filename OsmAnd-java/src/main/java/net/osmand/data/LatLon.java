@@ -22,6 +22,11 @@ public class LatLon implements Serializable {
 		return new LatLon(latLon.getLatitude(), latLon.getLongitude());
 	}
 
+	/** The same point as a {@link KLatLon}, which the shared routing code asks for; null stays null. */
+	public static KLatLon toKLatLon(LatLon latLon) {
+		return latLon == null ? null : new KLatLon(latLon.latitude, latLon.longitude);
+	}
+
 	public double getLatitude() {
 		return latitude;
 	}

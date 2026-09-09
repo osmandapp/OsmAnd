@@ -41,7 +41,7 @@ import net.osmand.shared.routing.GeneralRouter.RoutingParameter;
 import net.osmand.router.HHRouteDataStructure.HHNetworkRouteRes;
 import net.osmand.router.HHRouteDataStructure.HHNetworkSegmentRes;
 import net.osmand.router.HHRouteDataStructure.HHRouteRegionPointsCtx;
-import net.osmand.router.HHRouteDataStructure.HHRoutingConfig;
+import net.osmand.shared.routing.HHRoutingConfig;
 import net.osmand.router.HHRouteDataStructure.HHRoutingContext;
 import net.osmand.router.HHRouteDataStructure.NetworkDBPoint;
 import net.osmand.router.HHRouteDataStructure.NetworkDBPointCost;
@@ -173,23 +173,34 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		}
 	}
 	
+	/**
+	 * HHRoutingConfig lives in OsmAnd-shared now and carries the cached context as an Object:
+	 * HHRoutingContext holds BinaryMapIndexReaders and this planner's graph nodes, so it stays here.
+	 */
+	@SuppressWarnings("unchecked")
+	private static HHRoutingContext<NetworkDBPoint> cachedContext(HHRoutingConfig config) {
+		return (HHRoutingContext<NetworkDBPoint>) config.cacheCtx;
+	}
+
 	@SuppressWarnings("unchecked")
 	public HHNetworkRouteRes runRouting(LatLon start, LatLon end, HHRoutingConfig config) throws SQLException, IOException, InterruptedException {
 		long startTime = System.nanoTime();
 		int SL = HHRoutingConfig.STATS_VERBOSE_LEVEL;
 		RouteCalculationProgress progress = currentCtx.rctx.calculationProgress;
 		// important assumption that routing context match!
-		if (config.cacheCtx != null && config.cacheCtx.rctx  == currentCtx.rctx) {
-			currentCtx = (HHRoutingContext<T>) config.cacheCtx;
+		HHRoutingContext<NetworkDBPoint> cached = cachedContext(config);
+		if (cached != null && cached.rctx  == currentCtx.rctx) {
+			currentCtx = (HHRoutingContext<T>) cached;
 		}
 		config = prepareDefaultRoutingConfig(config);
 		HHRoutingContext<T> hctx = initHCtx(config, start, end);
 		if (config.CACHE_CALCULATION_CONTEXT) {
-			if (config.cacheCtx != null && config.cacheCtx != hctx) {
-				System.out.printf("Recreate routing cache context %s -> %s \n", config.cacheCtx.hashCode() + "",
+			cached = cachedContext(config);
+			if (cached != null && cached != hctx) {
+				System.out.printf("Recreate routing cache context %s -> %s \n", cached.hashCode() + "",
 						hctx == null ? "" : hctx.hashCode() + "");
 			}
-			config.cacheCtx = (HHRoutingContext<NetworkDBPoint>) hctx;
+			config.cacheCtx = hctx;
 		}
 		if (hctx == null) {
 			progress.raiseFastRoutingStatus(FastRoutingState.Status.FAILED_NO_HH_ROUTING_DATA);
@@ -325,7 +336,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				hctx.stats.loadPointsTime, hctx.stats.searchPointsTime,
 				hctx.stats.routingTime, hctx.stats.addQueueTime + hctx.stats.pollQueueTime,
 				hctx.stats.loadEdgesTime, hctx.stats.loadEdgesCnt, hctx.stats.prepTime,
-				hctx.config.toString(start, end), hctx.getRoutingInfo());
+				hctx.config.toString(LatLon.toKLatLon(start), LatLon.toKLatLon(end)), hctx.getRoutingInfo());
 	}
 
 	public static TreeMap<String, String> getFilteredTags(GeneralRouter generalRouter) {
