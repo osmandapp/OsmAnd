@@ -545,7 +545,8 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		return key;
 	}
 	
-	public static int compare(SpatialSearchResult o1, SpatialSearchResult o2, LatLon center) {
+	public static int compare(SpatialSearchResult o1, SpatialSearchResult o2, LatLon center,
+			SpatialSearchRanking ranking) {
 		int res = -Boolean.compare(o1.isPoiCategory(), o2.isPoiCategory());
 		if (res != 0) {
 			return res;
@@ -558,24 +559,16 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		if (res != 0) {
 			return res;
 		}
-		// objs.size stays a hard tier: an answer found in ONE object always beats the same words
-		// stitched from two. Folding it into the score put "Dr Lucas" 74th behind every
-		// <something Lucas> x <something Drive> pair.
-		//
-		// It does NOT apply when one side is a node named after the thing it serves. Dutch stops
-		// carry the street in their own name ("Amsterdam, Beethovenstraat"), so the stop matches
-		// both words as ONE object while the street is street + city = two, and the tier hands
-		// the stop the top row: 59 of 61 "<street> <city>" queries measured in Amsterdam,
-		// Rotterdam and Utrecht. Below the tier the score puts the street first on its own.
-		if (!SpatialSearchRanking.isSubordinateNode(o1) && !SpatialSearchRanking.isSubordinateNode(o2)) {
+		// one object beats the same words stitched from two - except against a node named after
+		// what it serves ("Amsterdam, Beethovenstraat" would take the top row from the street)
+		if (ranking == null || (!ranking.isSubordinateNode(o1) && !ranking.isSubordinateNode(o2))) {
 			res = Integer.compare(o1.objs.size(), o2.objs.size());
 			if (res != 0) {
 				return res;
 			}
 		}
 		if (o1.parent.SCORE_RANKING) {
-			// the 7 tiers below replaced by one score, see SpatialSearchRanking
-			res = -Double.compare(o1.score, o2.score);
+			res = -Double.compare(o1.score, o2.score); // the 7 tiers below, see SpatialSearchRanking
 			if (res != 0) {
 				return res;
 			}
@@ -658,7 +651,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 
 	@Override
 	public int compareTo(SpatialSearchResult o) {
-		return compare(this, o, null);
+		return compare(this, o, null, null);
 	}
 
 	private String getWikidata(SpatialSearchContext ctx) {

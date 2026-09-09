@@ -635,7 +635,7 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 				r.score = ctx.ranking.score(r, ctx.location);
 			}
 		}
-		Collections.sort(finalResult, (o1, o2) -> SpatialSearchResult.compare(o1, o2, ctx.location));
+		Collections.sort(finalResult, (o1, o2) -> SpatialSearchResult.compare(o1, o2, ctx.location, ctx.ranking));
 		if (deduplicate) {
 			uniqueIdsResults.clear();
 			extraIdsResults.clear();
@@ -672,19 +672,13 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		return finalResult;
 	}
 
-	/** how far apart two rows of the same name may be and still be one place */
-	private static final double SAME_PLACE_M = 30;      // two shops, two benches: 57 m are two
+	// how far apart two rows of the same name may be and still be one place
+	private static final double SAME_PLACE_M = 30;      // two shops, two benches
 	private static final double SAME_FACILITY_M = 400;  // the platforms of one stop are spread
 	private static final double SAME_STREET_M = 2000;   // one street cut into several OSM ways
+	private static final int MAX_SAME_NAME = 32;        // bound the scan for a very common name
 
-	/**
-	 * Merge rows that carry the same name and stand on the same spot. The id, wikidata and route
-	 * keys above cannot see these: a stop stored as a dozen OSM nodes shares none of them.
-	 *
-	 * Same name, and then a distance that depends on what the two rows are - measured on reviewed
-	 * cases: 320 m between a camp site and its bus stop is one place, 218 m between two parcel
-	 * lockers is not, and a street is only ever merged with another way of the same street.
-	 */
+	/** same name and same spot: the id/wikidata/route keys above cannot see a stop stored as nodes */
 	private List<SpatialSearchResult> deduplicateByProximity(List<SpatialSearchResult> sorted,
 			SpatialSearchContext ctx) {
 		Map<String, List<SpatialSearchResult>> byName = new HashMap<>();
@@ -695,7 +689,7 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 			if (name != null && s.getLatLon() != null) {
 				List<SpatialSearchResult> kept = byName.computeIfAbsent(name, k -> new ArrayList<>());
 				for (SpatialSearchResult u : kept) {
-					if (isSamePlace(u, s)) {
+					if (isSamePlace(u, s, ctx.ranking)) {
 						same = u;
 						break;
 					}
@@ -713,19 +707,16 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		return out;
 	}
 
-	/** rows of one name to compare against - a bound, so a common word cannot cost O(n^2) */
-	private static final int MAX_SAME_NAME = 32;
-
-	private static boolean isSamePlace(SpatialSearchResult a, SpatialSearchResult b) {
+	private static boolean isSamePlace(SpatialSearchResult a, SpatialSearchResult b,
+			SpatialSearchRanking ranking) {
 		boolean street = a.getMainObject() instanceof Street;
 		if (street != (b.getMainObject() instanceof Street)) {
-			// a street and what stands on it are different objects, judged six times
-			return false;
+			return false; // a street and what stands on it are different objects
 		}
 		double radius;
 		if (street) {
-			// the coordinate of a line means little, so the city decides and the distance only
-			// guards against two genuinely different streets of the same name
+			// a line's coordinate says little, so the city decides and the distance only guards
+			// against two genuinely different streets of the same name
 			City c1 = ((Street) a.getMainObject()).getCity();
 			City c2 = ((Street) b.getMainObject()).getCity();
 			if (c1 == null || c2 == null || !c1.getName().equals(c2.getName())) {
@@ -733,7 +724,7 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 			}
 			radius = SAME_STREET_M;
 		} else {
-			radius = SpatialSearchRanking.isSpreadNode(a) || SpatialSearchRanking.isSpreadNode(b)
+			radius = ranking.isSpreadNode(a) || ranking.isSpreadNode(b)
 					? SAME_FACILITY_M : SAME_PLACE_M;
 		}
 		return MapUtils.getDistance(a.getLatLon(), b.getLatLon()) <= radius;

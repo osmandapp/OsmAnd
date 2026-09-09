@@ -112,8 +112,7 @@ public class SpatialTextSearch {
 		// only do incomplete search with 2+ chars
 		public int MIN_CHARACTERS_INCOMPLETE = 2;
 		
-		// false restores the old lexicographic ladder, see SpatialSearchRanking
-		public boolean SCORE_RANKING = true;
+		public boolean SCORE_RANKING = true; // false - old lexicographic ladder
 
 		public int MIN_ELO_RATING = 1400; // see SearchResult.MIN_ELO_RATING
 		public int WORLD_ELO_RATING = 1500; // from world map by default

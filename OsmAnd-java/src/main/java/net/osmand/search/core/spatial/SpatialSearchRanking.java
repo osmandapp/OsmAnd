@@ -15,36 +15,13 @@ import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
 import net.osmand.util.SearchAlgorithms;
 
 /**
- * Replaces tiers 4..11 of {@link SpatialSearchResult#compare} (objs.size, sumOther, mainRating,
- * totalRating, sumTypeOrder, distance, biggestCityType, osm id) with one bounded score, so that
- * a large gap on one signal can outweigh a small gap on another instead of deciding outright:
- * in the ladder one point of travel elo beats any distance, and every POI has typeOrder 0.
+ * One bounded score in place of tiers 4..11 of {@link SpatialSearchResult#compare}, so a large gap
+ * on one signal can outweigh a small gap on another. Weights fitted on spatial_search/preferences.jsonl.
  */
 public class SpatialSearchRanking {
 
-	// Fitted on the 54 order preferences in spatial_search/preferences.jsonl (36 -> 46 satisfied).
-	// What the two review rounds said, and what these numbers encode: between two ordinary POIs
-	// the NEARER one wins - an exact name, a matching category and a higher elo all lose to
-	// distance - while a node that merely describes a place loses to the place even from 5.5 km
-	// closer.
-	//
-	// The rating weight is what the third round pinned down. A famous object is worth about one
-	// point, which is roughly the gap between 3 km and 30 km: enough to put the better-known of
-	// two castles first (Palazzo Pubblico, elo 2998 at 80 km, over Castello di Punta Ala, 2329 at
-	// 32 km), not enough to keep a cathedral 80 km away above an ordinary church 800 m away.
-	//
-	// The name term is small AND multiplied by proximity, which is the fourth round's rule in the
-	// reviewer's own words: "they are close to each other so full match is more important". A
-	// per-result score cannot ask whether two candidates are close to EACH OTHER, but making the
-	// name count only for what is close to the PERSON has the same effect whenever both are in
-	// the same area, and lets the name fade for a far namesake - which is the other half of the
-	// same judgements ("Camping-Freunde Berlin" at 32 km must not beat an unnamed camping office
-	// at 24 km on the strength of the word in its name).
-	//
-	// Raising the weight further costs preferences at every step (0.3 -> 43 satisfied, 0.5 -> 42,
-	// 0.8 -> 39, 1.0 -> 38): "supermarkt", "кафе" and "lekarna" are words for a KIND of object,
-	// where carrying the word in the name says nothing about relevance, and the engine still
-	// cannot tell such a word from a proper name.
+	// Fitted on the recorded preferences: the nearer of two ordinary POIs wins, a name matters
+	// only for what is close, and fame is worth about the gap between 3 km and 30 km.
 	public double wName = 0.15;
 	public double wType = 2.0;
 	public double wRating = 0.5;
@@ -67,13 +44,7 @@ public class SpatialSearchRanking {
 	private static final double TYPE_VILLAGE = 0.88;
 	private static final double TYPE_LANDMARK = 0.80;
 	private static final double TYPE_BUILDING = 0.75;
-	/**
-	 * A street used to be worth 0.70, half way between a village and an ordinary POI. That put
-	 * "Via del Mugello" 23 km away above the guest house called "Mugello" 13 km away, which the
-	 * reviewer rejected twice; 0.55 leaves the street comfortably above a stop (0.35) and a
-	 * platform (0.10), which is the comparison the value exists for.
-	 */
-	private static final double TYPE_STREET = 0.55;
+	private static final double TYPE_STREET = 0.55; // above a stop 0.35, below a village
 	private static final double TYPE_BOUNDARY = 0.60;
 	private static final double TYPE_POI = 0.50;
 	private static final double TYPE_POSTCODE = 0.40;
@@ -89,26 +60,15 @@ public class SpatialSearchRanking {
 	private static final Set<String> STOP_SUBTYPES = new HashSet<>(Arrays.asList(
 			"bus_stop", "tram_stop", "railway_halt", "taxi"));
 
-	/**
-	 * Objects a person travels TO by name. Services that merely have a name - a hospital, a
-	 * university, a library - were in this list and are not any more: asked to choose between
-	 * "Омега-Київ" (clinic, 1.8 km) and "DENIS" (hospital, 3.1 km) for a medical query, the
-	 * reviewer took the nearer one, and the landmark bonus was the only thing preventing that.
-	 */
+	/** objects a person travels TO by name; a hospital or a library is a service, not a landmark */
 	private static final Set<String> LANDMARK_SUBTYPES = new HashSet<>(Arrays.asList(
 			"railway_station", "public_transport_station", "bus_station", "aerodrome",
 			"castle", "museum", "attraction", "memorial", "monument", "theatre", "stadium",
 			"townhall", "zoo", "peak", "mountain_pass",
 			"marketplace", "square", "park", "cathedral", "monastery"));
 
-	/**
-	 * Nodes of ONE facility, spread over its whole footprint: the platforms, stop positions and
-	 * entrances of a stop lie hundreds of metres apart and are still one stop. Deduplication may
-	 * unite these across a wide radius - unlike a bench or a waste basket, which are also
-	 * subordinate but are one object each: two benches called "Park Bench" 57 m apart are two
-	 * benches, judged 2026-09-09.
-	 */
-	public static boolean isSpreadNode(SpatialSearchResult r) {
+	/** the parts ONE facility is stored as - spread over its footprint, unlike a bench */
+	public boolean isSpreadNode(SpatialSearchResult r) {
 		SpatialSearchResultRef head = r == null ? null : r.getFirstRef();
 		if (head == null || !(head.atom.object instanceof Amenity a)) {
 			return false;
@@ -122,12 +82,8 @@ public class SpatialSearchRanking {
 			"public_transport_platform", "public_transport_stop_position", "subway_entrance",
 			"elevator", "ticket_validator", "entrance", "level_crossing", "motorway_junction"));
 
-	/**
-	 * A node that exists to describe something else - a platform, a stop position, an entrance,
-	 * a motorway junction. Named after the place it serves, so its name is never evidence that
-	 * it IS that place.
-	 */
-	public static boolean isSubordinateNode(SpatialSearchResult r) {
+	/** a node that describes something else, so its name is not evidence that it IS that place */
+	public boolean isSubordinateNode(SpatialSearchResult r) {
 		SpatialSearchResultRef head = r == null ? null : r.getFirstRef();
 		if (head == null || !(head.atom.object instanceof Amenity a)) {
 			return false;
