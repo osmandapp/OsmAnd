@@ -157,8 +157,9 @@ class AstroArticleDialogFragment : WikiArticleBaseDialogFragment() {
 			.dataProvider
 			.getAstroArticle(app, wikidataId, selectedLanguage)
 		val currentArticle = article ?: return
+		val currentArticleLanguage = currentArticle.lang
 
-		setSelectedLanguage(currentArticle.lang);
+		setSelectedLanguage(currentArticleLanguage);
 
 		articleToolbarText.text = currentArticle.title
 		val onlineArticleUrl = currentArticle.getOnlineArticleUrl()
@@ -186,13 +187,19 @@ class AstroArticleDialogFragment : WikiArticleBaseDialogFragment() {
 			loadHeaderImage(createHtmlContent(), wikidataId)
 		}
 
-		selectedLangTv.text = Algorithms.capitalizeFirstLetter(selectedLanguage)
-		selectedLangTv.setOnClickListener {
-            showPopupLangMenu(
-                selectedLangTv,
-                selectedLanguage
-            )
-        }
+		val hasOtherLanguages = currentArticle.wikiContentLocales.minus(currentArticleLanguage).isNotEmpty()
+		if (hasOtherLanguages) {
+			selectedLangTv.visibility = View.VISIBLE
+			selectedLangTv.text = Algorithms.capitalizeFirstLetter(currentArticleLanguage)
+			selectedLangTv.setOnClickListener {
+				showPopupLangMenu(
+					selectedLangTv,
+					currentArticleLanguage
+				)
+			}
+		} else {
+			selectedLangTv.visibility = View.GONE
+		}
     }
 
 	override fun showPopupLangMenu(view: View, langSelected: String) {
@@ -201,8 +208,7 @@ class AstroArticleDialogFragment : WikiArticleBaseDialogFragment() {
 			return
 		}
 
-		val popupLangMenu = createPopupLangMenu(view, namesSet)
-		popupLangMenu?.show()
+		showPopupLangMenu(view, namesSet)
 	}
 
 	override fun createHtmlContent(): String {

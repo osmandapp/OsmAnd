@@ -2320,17 +2320,14 @@ class StarView @JvmOverloads constructor(
 			if (scaleGestureDetector.isInProgress) {
                 return false
             }
+			if (isCameraMode) {
+				return false
+			}
 			inertiaFlingScroller.fling(e1, e2, velocityX, velocityY)
 			return true
 		}
 	}
 
-	/**
-	 * Helper inner class for handling fling overscroll (inertia).
-	 *
-	 * @property velocityFactor - multiplier for velocities passed to [FlingScroller.fling]
-	 * @param context view's context
-	 */
 	private inner class FlingScroller(context: Context, private val velocityFactor: Float) {
 		private val scroller = OverScroller(context)
 

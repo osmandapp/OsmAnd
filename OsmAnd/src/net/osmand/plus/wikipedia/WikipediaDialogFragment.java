@@ -11,9 +11,7 @@ import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +31,6 @@ import net.osmand.IndexConstants;
 import net.osmand.data.Amenity;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.utils.AndroidUtils;
@@ -43,8 +40,6 @@ import net.osmand.plus.utils.InsetsUtils.InsetSide;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 
 
@@ -236,10 +231,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 			return;
 		}
 
-		final PopupMenu popupLangMenu = createPopupLangMenu(view, namesSet);
-		if (popupLangMenu != null) {
-			popupLangMenu.show();
-		}
+		showPopupLangMenu(view, namesSet);
 	}
 
 	@Override

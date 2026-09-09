@@ -316,12 +316,12 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		private const val STATE_ECLIPSE_ACTIVE_CAMERA_ROLL = "eclipse_active_camera_roll"
 
 		private const val STATE_STARVIEW_ACTIVE_CAMERA_AZ = "starview_active_camera_az"
-		private const val STATE_STARVIEW_ACTIVE_CAMERA_ALT = "eclipse_active_camera_alt"
-		private const val STATE_STARVIEW_ACTIVE_CAMERA_FOV = "eclipse_active_camera_fov"
-		private const val STATE_STARVIEW_ACTIVE_CAMERA_2D = "eclipse_active_camera_2d"
-		private const val STATE_STARVIEW_ACTIVE_CAMERA_PAN_X = "eclipse_active_camera_pan_x"
-		private const val STATE_STARVIEW_ACTIVE_CAMERA_PAN_Y = "eclipse_active_camera_pan_y"
-		private const val STATE_STARVIEW_ACTIVE_CAMERA_ROLL = "eclipse_active_camera_roll"
+		private const val STATE_STARVIEW_ACTIVE_CAMERA_ALT = "starview_active_camera_alt"
+		private const val STATE_STARVIEW_ACTIVE_CAMERA_FOV = "starview_active_camera_fov"
+		private const val STATE_STARVIEW_ACTIVE_CAMERA_2D = "starview_active_camera_2d"
+		private const val STATE_STARVIEW_ACTIVE_CAMERA_PAN_X = "starview_active_camera_pan_x"
+		private const val STATE_STARVIEW_ACTIVE_CAMERA_PAN_Y = "starview_active_camera_pan_y"
+		private const val STATE_STARVIEW_ACTIVE_CAMERA_ROLL = "starview_active_camera_roll"
 
 		@JvmStatic
 		fun applyRedFilterToViews(enabled: Boolean, vararg views: View?) {
@@ -706,13 +706,13 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 				magnitudeSliderValue.text = text
 			}
 			updateRedMode(config.showRedFilter)
-			config.lastStarCameraState?.let {
-				lastStarCameraState = it
-				starView.restoreCameraState(it)
-			}
 		}
 
 		updateStarMap(true)
+		astroSettings.getStarMapConfig().lastStarCameraState?.let {
+			lastStarCameraState = it
+			starView.restoreCameraState(it)
+		}
 
 		previousAltitude = starView.getAltitude()
 		previousAzimuth = starView.getAzimuth()
@@ -2247,19 +2247,13 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		if (!::zoomOutButton.isInitialized) {
 			return
 		}
-		val activity = activity ?: return
+		val context = context ?: return
 
-		val minWindowSizeDp = min(
-			AndroidUtils.getScreenWidth(activity),
-			AndroidUtils.getScreenHeight(activity)
-		).let {
-			AndroidUtils.pxToDpF(activity, it)
+		zoomButtons.visibility = if (AndroidUiHelper.isTablet(context)) {
+			View.GONE
+		} else {
+			View.VISIBLE
 		}
-		zoomButtons.visibility = if (minWindowSizeDp <= 600f) {
-            View.GONE
-        } else {
-            View.VISIBLE
-        }
 	}
 
 	private fun clearSelectedObject() {

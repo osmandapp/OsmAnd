@@ -270,18 +270,32 @@ class AstroDataDbProvider : AstroDataProvider() {
 			} else { lang }
 
 			val db = dbHelper.readableDatabase
+
+			val languagesCursor = db.query(
+				TABLE_WIKIPEDIA, arrayOf(COL_WIKI_LANG), "$COL_WIKI_WIKIDATA = ?",arrayOf(wikidataId), null, null, null
+			)
+
+			val languages = mutableSetOf<String>()
+
+			languagesCursor.use { c ->
+				while(c.moveToNext()) {
+					val l = c.getString(0)
+					if (l != null) {
+						languages.add(l)
+					}
+				}
+			}
+
 			val cursor = db.query(
 				TABLE_WIKIPEDIA,
 				null,
-				"$COL_WIKI_WIKIDATA = ?",
-				arrayOf(wikidataId),
+				"$COL_WIKI_WIKIDATA = ? AND ($COL_WIKI_LANG = ? OR $COL_WIKI_LANG = ?)",
+				arrayOf(wikidataId, bestLang, "en"),
 				null, null, null
 			)
 
 			var bestArticle: AstroArticle? = null
 			var enArticle: AstroArticle? = null
-
-			val languages = mutableSetOf<String>()
 
 			cursor.use { c ->
 				val idxLang = c.getColumnIndex(COL_WIKI_LANG)
@@ -293,22 +307,19 @@ class AstroDataDbProvider : AstroDataProvider() {
 
 				while (c.moveToNext()) {
 					val l = c.getString(idxLang)
-					if (l == bestLang || l == "en") {
-						val title = if (idxTitle >= 0) c.getString(idxTitle) else ""
-						val extract = if (idxExtract >= 0) c.getString(idxExtract) else ""
-						val thumb = if (idxThumb >= 0) c.getStringOrNull(idxThumb) else null
-						val summary = if (idxSummary >= 0) c.getStringOrNull(idxSummary) else null
-						val mobile = if (idxMobile >= 0 && !c.isNull(idxMobile)) c.getBlob(idxMobile) else null
+					val title = if (idxTitle >= 0) c.getString(idxTitle) else ""
+					val extract = if (idxExtract >= 0) c.getString(idxExtract) else ""
+					val thumb = if (idxThumb >= 0) c.getStringOrNull(idxThumb) else null
+					val summary = if (idxSummary >= 0) c.getStringOrNull(idxSummary) else null
+					val mobile = if (idxMobile >= 0 && !c.isNull(idxMobile)) c.getBlob(idxMobile) else null
 
-						val article = AstroArticle(wikidataId, l, title, extract, thumb, summary, mobile)
-						if (l == bestLang) {
-							bestArticle = article
-						}
-						if (l == "en") {
-							enArticle = article
-						}
+					val article = AstroArticle(wikidataId, l, title, extract, thumb, summary, mobile)
+					if (l == bestLang) {
+						bestArticle = article
 					}
-					languages.add(l)
+					if (l == "en") {
+						enArticle = article
+					}
 				}
 			}
 
