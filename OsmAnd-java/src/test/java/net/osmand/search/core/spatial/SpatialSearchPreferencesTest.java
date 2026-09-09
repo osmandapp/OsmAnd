@@ -62,7 +62,7 @@ public class SpatialSearchPreferencesTest {
 	 * unrelated reordering cannot break the build - only contradicting a recorded human
 	 * judgement can.
 	 */
-	private static final int MIN_SATISFIED = 45;
+	private static final int MIN_SATISFIED = 56;
 
 	/**
 	 * {@code OSMAND_SPATIAL_SCORE_RANKING=false} runs the same preferences against the old
@@ -136,19 +136,21 @@ public class SpatialSearchPreferencesTest {
 				sc.noMap += group.size();
 				continue;
 			}
-			List<MapObject> ordered = search(head.query, obf, mapsDir, head.location);
+			List<List<Long>> ordered = search(head.query, obf, mapsDir, head.location);
 			for (Pref p : group) {
 				if (!p.asserted) {
 					sc.notAsserted++;
 					continue;
 				}
 				if ("merge".equals(p.kind)) {
-					int present = 0;
+					java.util.Set<Integer> rows = new java.util.HashSet<>();
 					for (long id : p.objects) {
-						if (indexOf(ordered, id) >= 0) {
-							present++;
+						int row = indexOf(ordered, id);
+						if (row >= 0) {
+							rows.add(row);
 						}
 					}
+					int present = rows.size();
 					if (present == 0) {
 						sc.notApplicable++;
 					} else if (present == 1) {
@@ -166,6 +168,11 @@ public class SpatialSearchPreferencesTest {
 					sc.notApplicable++;
 					continue;
 				}
+				if (ia == ib) {
+					// deduplication united them: there is no order left to assert
+					sc.notAsserted++;
+					continue;
+				}
 				boolean aFirst = ia < ib;
 				if (aFirst == "a".equals(p.prefer)) {
 					sc.satisfied++;
@@ -180,17 +187,21 @@ public class SpatialSearchPreferencesTest {
 		return sc;
 	}
 
-	private int indexOf(List<MapObject> ordered, long osmId) {
+	private int indexOf(List<List<Long>> ordered, long osmId) {
 		for (int i = 0; i < ordered.size(); i++) {
-			if (ObfConstants.getOsmObjectId(ordered.get(i)) == osmId) {
+			if (ordered.get(i).contains(osmId)) {
 				return i;
 			}
 		}
 		return -1;
 	}
 
-	/** the first object of every result, in the order the engine returned them */
-	private List<MapObject> search(String query, File obf, File mapsDir, LatLon location)
+	/**
+	 * The osm ids of every row, in the order the engine returned them. A row that deduplication
+	 * united carries the ids of everything inside it - otherwise a merge would read as "the
+	 * object is gone" and quietly turn every preference about it into "not applicable".
+	 */
+	private List<List<Long>> search(String query, File obf, File mapsDir, LatLon location)
 			throws IOException {
 		List<BinaryMapIndexReader> files = new ArrayList<>();
 		File regions = new File(mapsDir, OsmandRegions.REGIONS_OCBF);
@@ -204,10 +215,21 @@ public class SpatialSearchPreferencesTest {
 			SpatialSearchContext ctx = new SpatialSearchContext(settings, files,
 					new SpatialPoiSearch(MapPoiTypes.getDefault()), location);
 			SpatialSearchResults res = new SpatialTextSearch().searchAPI(query, ctx);
-			List<MapObject> out = new ArrayList<>();
+			List<List<Long>> out = new ArrayList<>();
 			if (res.mainResults != null) {
 				for (SpatialSearchResult r : res.mainResults) {
-					out.addAll(r.getObjects());
+					List<Long> ids = new ArrayList<>();
+					for (MapObject o : r.getObjects()) {
+						ids.add(ObfConstants.getOsmObjectId(o));
+					}
+					if (r.unitedObject != null) {
+						for (Object o : r.unitedObject.getObjects()) {
+							if (o instanceof MapObject mo) {
+								ids.add(ObfConstants.getOsmObjectId(mo));
+							}
+						}
+					}
+					out.add(ids);
 				}
 			}
 			return out;

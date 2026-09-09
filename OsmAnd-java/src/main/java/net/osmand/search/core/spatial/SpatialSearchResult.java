@@ -205,6 +205,26 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		return o;
 	}
 
+	/**
+	 * The name under which this result competes to BE a place, normalized. Used to spot one
+	 * place returned as several rows; null when the result has no name of its own.
+	 */
+	public String getDedupName() {
+		MapObject o = getFirstRefObject(false);
+		String name = o == null ? null : o.getName();
+		if (Algorithms.isEmpty(name)) {
+			return null;
+		}
+		String n = SearchAlgorithms.normalizeToken(SearchAlgorithms.alignChars(name));
+		return Algorithms.isEmpty(n) ? null : n.trim().toLowerCase();
+	}
+
+	/** a street is a line: its single coordinate says nothing about what is close to it */
+	public boolean isStreetResult() {
+		SpatialSearchResultRef head = getFirstRef();
+		return head != null && (head.atom.isStreet() || head.atom.isBuilding());
+	}
+
 	public boolean isPoiCategory() {
 		return !objs.isEmpty() && objs.get(0).isPoiCategory();
 	}

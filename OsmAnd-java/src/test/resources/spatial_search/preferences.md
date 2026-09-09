@@ -91,11 +91,16 @@ comparator, which is what makes the number meaningful:
 |---|---|---|
 | ladder (today) | 28 | 41 |
 | score, first weights | 35 | 26 |
-| score, weights fitted on the reviews | 45 | 24 |
+| score, weights fitted on the reviews | 52 | 25 |
+| + deduplication by name and distance | 56 | 14 |
 
-Seventeen of the violations in every row are merge records — the duplicate floods, which no
-weighting can fix; they need the deduplication rule. (The middle row was measured on the 76
-records that existed when those weights were written.)
+(The second row was measured on the 76 records that existed when those weights were written; the
+rest on all 96.) Of the 14 that remain, 7 are merge records whose object list has outgrown the
+judgement: for `bundesplatz berlin` the stop nodes are now one row, and what is still separate is
+a railway station, a park, a tunnel and two streets that happen to share the name — objects a
+reviewer today would not call one place. `hohenschönhauser strasse` is the recorded contradiction
+between the rounds: a street and its platform were "keep apart" six times in round 1 and "merge"
+once in round 2, and streets are left out of the proximity merge for that reason.
 
 The test gates on `MIN_SATISFIED`, a ratchet: an unrelated reordering cannot break the build,
 only contradicting a recorded judgement can. Raise it when a change earns more.
@@ -140,3 +145,16 @@ settled the rating weight and the merge threshold:
 penalty is applied too widely: R1 is a statement about a node AND THE PLACE IT BELONGS TO, but
 `typeScore` charges it against every comparison, so a guidepost named "Camping" 8 km away lost to
 an office 12 km away.
+
+10 more on 2026-09-09 (`"batch": "03"`), drawn from New York, Los Angeles, San Francisco, Utrecht
+and Rotterdam — an address grammar and a POI mix the earlier records had barely seen — plus the
+"<street> <city>" shape that the Dutch stop naming breaks. All seven order records were already
+satisfied when they were written down, which is what the tier fix was for. Three of them are worth
+quoting as rules rather than as records:
+
+- *"city more important than station in same distance threshold 3-7 km"* (`pijnacker`),
+- *"closer"* for two streets of the same name 300 m apart (`4th avenue`, `high street`) — the same
+  R6 that governs POIs, now for streets,
+- and three verdicts that are not about ranking at all: `la amiga`, `rotterdam camping` and
+  `amodo lodge` were skipped as *"bad search"* — a recall and a matching problem behind the
+  ranking one.

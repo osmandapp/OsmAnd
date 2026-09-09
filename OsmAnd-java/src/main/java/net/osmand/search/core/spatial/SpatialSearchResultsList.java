@@ -666,9 +666,66 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 					result.add(s);
 				}
 			}
-			finalResult = result;
+			finalResult = deduplicateByProximity(result, ctx);
 		}
 		return finalResult;
+	}
+
+	/** one physical place returned twice, when no id, wikidata or route id ties the rows together */
+	private static final double SAME_PLACE_M = 30;
+	/** a stop is a cluster of nodes - platform, stop position, shelter - spread along the street */
+	private static final double SAME_STOP_M = 300;
+	private static final double BUCKET_DEG = 0.004; // ~440 m, so the 3x3 neighbourhood covers both radii
+
+	/**
+	 * Merge rows that carry the same name and stand on the same spot.
+	 *
+	 * The id/wikidata/route keys above cannot see these: a stop stored as a dozen separate OSM
+	 * nodes shares none of them, and neither do a wiki place and the theatre inside it. What the
+	 * reviewed cases say is that the question is METRES, not kinds - a village and its platform
+	 * 147 m apart are one row, two parcel lockers of the same name 218 m apart are two, and two
+	 * benches called "Park Bench" 57 m apart are two benches. Hence the two radii, and hence
+	 * streets are left alone: a street is a line whose single coordinate is not where it is.
+	 */
+	private List<SpatialSearchResult> deduplicateByProximity(List<SpatialSearchResult> sorted,
+			SpatialSearchContext ctx) {
+		Map<String, List<SpatialSearchResult>> buckets = new HashMap<>();
+		List<SpatialSearchResult> out = new ArrayList<>(sorted.size());
+		for (SpatialSearchResult s : sorted) {
+			String name = s.getDedupName();
+			LatLon loc = s.getLatLon();
+			if (name == null || loc == null || s.isStreetResult()) {
+				out.add(s);
+				continue;
+			}
+			int bx = (int) Math.floor(loc.getLatitude() / BUCKET_DEG);
+			int by = (int) Math.floor(loc.getLongitude() / BUCKET_DEG);
+			SpatialSearchResult same = null;
+			for (int dx = -1; dx <= 1 && same == null; dx++) {
+				for (int dy = -1; dy <= 1 && same == null; dy++) {
+					List<SpatialSearchResult> kept = buckets.get(name + '@' + (bx + dx) + '_' + (by + dy));
+					if (kept == null) {
+						continue;
+					}
+					for (SpatialSearchResult u : kept) {
+						LatLon ul = u.getLatLon();
+						double radius = SpatialSearchRanking.isSubordinateNode(u)
+								|| SpatialSearchRanking.isSubordinateNode(s) ? SAME_STOP_M : SAME_PLACE_M;
+						if (ul != null && MapUtils.getDistance(ul, loc) <= radius) {
+							same = u;
+							break;
+						}
+					}
+				}
+			}
+			if (same != null) {
+				same.addExtraResult(s, ctx.settings.LANG_DEDUPLICATE);
+			} else {
+				buckets.computeIfAbsent(name + '@' + bx + '_' + by, k -> new ArrayList<>()).add(s);
+				out.add(s);
+			}
+		}
+		return out;
 	}
 	
 	
