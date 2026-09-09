@@ -113,7 +113,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
@@ -125,6 +124,7 @@ public class AppInitializer implements IProgress {
 	private static final Log LOG = PlatformUtil.getLog(AppInitializer.class);
 	private static final int MAX_OPENGL_FAILURES = 3;
 	private static final int MAX_OPENGL_DISABLE = 6;
+	private static final long MAP_UPDATES_CHECK_INTERVAL_MS = 2 * 24 * 60 * 60 * 1000L; // 2 days
 
 	private final OsmandApplication app;
 	private final AppVersionUpgradeOnInit appVersionUpgrade;
@@ -225,12 +225,10 @@ public class AppInitializer implements IProgress {
 	}
 
 	private void checkMapUpdates() {
-		long diff = System.currentTimeMillis() - app.getSettings().LAST_CHECKED_UPDATES.get();
-		if (diff >= 2 * 24 * 60 * 60L && new Random().nextInt(5) == 0 &&
-				app.getSettings().isInternetConnectionAvailable()) {
-			app.getDownloadThread().runReloadIndexFiles();
-		} else if (Version.isDeveloperVersion(app)) {
-//			app.getDownloadThread().runReloadIndexFiles();
+		OsmandSettings settings = app.getSettings();
+		long diff = System.currentTimeMillis() - settings.LAST_CHECKED_UPDATES.get();
+		if (diff >= MAP_UPDATES_CHECK_INTERVAL_MS && settings.isInternetConnectionAvailable()) {
+			app.getDownloadThread().runReloadIndexFilesSilent();
 		}
 	}
 
