@@ -221,3 +221,24 @@ anybody would ever look at, and lets a deep reshuffle read as a regression - whi
 (rows #52 and #102) came to be reported as broken. An order preference is now asserted only when
 at least one of its two objects is inside the top 10; the rest are counted as `below the top 10`.
 The reviewer's rule, in his words: *"I am only interested in changes in the top 10"*.
+
+## The name term was comparing the query with itself
+
+`liechtenstein` returned the country 22nd, behind three museums, a souvenir shop and a
+defibrillator. The cause was not a weight: `nameScore` compared the queried words against
+`atom.name`, and an atom carries the matched TOKEN, not the object's name - so
+"Liechtensteinisches Landesmuseum Vaduz" scored NAME_EXACT for the query "liechtenstein", exactly
+like the country. Every single-word query scored 1.00 for everything, which is why raising the
+name weight always made things worse: it was amplifying noise.
+
+With the term reading the object's name, three more things follow:
+
+- an exact whole-name match earns a bonus, but only for an object notable enough to own the name
+  (a wikidata article or a travel rating above the floor) - otherwise "Supermarkt" would outrank
+  the nearer supermarket, which the reviewer rejected;
+- `wiki_place` is a landmark: the type exists because the object has an article;
+- a country or a region stored as a POI is a place, not a POI - the map has no address record for
+  Liechtenstein at all, only `country;wiki_place`;
+- and our own disambiguation suffix ("4th Avenue (Manhattan)", added when a street is united with
+  its district) is stripped before comparing, or it would make the street a worse match for its
+  own name.

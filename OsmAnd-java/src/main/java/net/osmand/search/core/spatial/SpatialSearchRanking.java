@@ -12,6 +12,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.search.core.spatial.SpatialSearchResult.SpatialSearchResultRef;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
+import net.osmand.util.Algorithms;
 import net.osmand.util.SearchAlgorithms;
 
 /**
@@ -26,6 +27,8 @@ public class SpatialSearchRanking {
 	public double wType = 2.0;
 	public double wRating = 0.5;
 	public double wNear = 2.0;
+	/** an object whose whole name IS the query, when it is notable enough to be that name */
+	public double wExactName = 1.0;
 
 	/** distance at which the proximity term is worth half of its maximum */
 	public double halfWeightKm = 3.0;
@@ -40,6 +43,7 @@ public class SpatialSearchRanking {
 	private static final double NAME_KIND_ONLY = 0.15;
 
 	// type
+	private static final double TYPE_ADMIN = 1.00; // a country or a region IS the place it names
 	private static final double TYPE_CITY = 0.95;
 	private static final double TYPE_VILLAGE = 0.88;
 	private static final double TYPE_LANDMARK = 0.80;
@@ -61,9 +65,14 @@ public class SpatialSearchRanking {
 			"bus_stop", "tram_stop", "railway_halt", "taxi"));
 
 	/** objects a person travels TO by name; a hospital or a library is a service, not a landmark */
+	/** administrative places stored as POI - the map has no address record for a country */
+	private static final Set<String> ADMIN_SUBTYPES = new HashSet<>(Arrays.asList(
+			"country", "state", "region", "province", "county"));
+
 	private static final Set<String> LANDMARK_SUBTYPES = new HashSet<>(Arrays.asList(
 			"railway_station", "public_transport_station", "bus_station", "aerodrome",
 			"castle", "museum", "attraction", "memorial", "monument", "theatre", "stadium",
+			"wiki_place",
 			"townhall", "zoo", "peak", "mountain_pass",
 			"marketplace", "square", "park", "cathedral", "monastery"));
 
@@ -100,10 +109,16 @@ public class SpatialSearchRanking {
 			return 0;
 		}
 		double near = nearScore(r, center);
-		return wName * nameScore(head) * near
+		double name = nameScore(head);
+		// "liechtenstein" returned the country 22nd, behind museums that merely carry the word.
+		// An exact whole-name match is the strongest signal there is - but only for an object
+		// notable enough to own the name, or "Supermarkt" would outrank the nearer supermarket.
+		double exact = name == NAME_EXACT && isNotable(r) ? wExactName * near : 0;
+		return wName * name * near
 				+ wType * typeScore(head)
 				+ wRating * ratingScore(r)
-				+ wNear * near;
+				+ wNear * near
+				+ exact;
 	}
 
 	/** did the query name this object, or only the word for its kind? */
@@ -120,7 +135,10 @@ public class SpatialSearchRanking {
 		if (queried.isEmpty()) {
 			return NAME_OTHER;
 		}
-		String name = normalize(atom.name);
+		// the OBJECT's name, not atom.name - the atom carries the matched TOKEN, so comparing
+		// against it made every single-word match "exact" and the term compared the query with
+		// itself: "Liechtensteinisches Landesmuseum Vaduz" scored the same as "Liechtenstein"
+		String name = normalize(atom.object != null ? atom.object.getName() : atom.name);
 		if (name.isEmpty()) {
 			return NAME_OTHER;
 		}
@@ -162,6 +180,9 @@ public class SpatialSearchRanking {
 		if (atom.object instanceof Amenity a) {
 			String subType = a.getSubType();
 			if (subType != null) {
+				if (ADMIN_SUBTYPES.contains(subType)) {
+					return TYPE_ADMIN;
+				}
 				if (INFRASTRUCTURE_SUBTYPES.contains(subType)) {
 					return TYPE_INFRASTRUCTURE;
 				}
@@ -174,6 +195,15 @@ public class SpatialSearchRanking {
 			}
 		}
 		return TYPE_POI;
+	}
+
+	/** carries a wikipedia article or a travel rating, so the name is its own, not a coincidence */
+	private boolean isNotable(SpatialSearchResult r) {
+		if (r.getTotalRating() > r.parent.MIN_ELO_RATING) {
+			return true;
+		}
+		MapObject o = r.getFirstRef() == null ? null : r.getFirstRef().atom.object;
+		return o instanceof Amenity a && !Algorithms.isEmpty(a.getAdditionalInfo(Amenity.WIKIDATA));
 	}
 
 	/** bounded, so a famous place outranks an unknown one but not a much closer one */
@@ -211,6 +241,12 @@ public class SpatialSearchRanking {
 	}
 
 	private static String normalize(String s) {
+		// "4th Avenue (Manhattan)" is our own disambiguation, added when a street is united with
+		// its district - it must not make the street a worse match for "4th avenue"
+		int bracket = s == null ? -1 : s.lastIndexOf(" (");
+		if (bracket > 0 && s.endsWith(")")) {
+			s = s.substring(0, bracket);
+		}
 		String n = SearchAlgorithms.normalizeToken(SearchAlgorithms.alignChars(s));
 		return n == null ? "" : n.trim().toLowerCase();
 	}
