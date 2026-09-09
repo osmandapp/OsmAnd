@@ -17,6 +17,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.AndroidAutoMapMode;
 
+import java.util.Locale;
+
 /**
  * Settings screen demo.
  */
@@ -69,32 +71,24 @@ public final class SettingsScreen extends BaseAndroidAutoScreen {
 				.setOnClickListener(() -> getScreenManager().pushForResult(
 						new MapModeScreen(getCarContext()), result -> invalidate()));
 
-		ItemList.Builder configureMapModeBuilder = new ItemList.Builder();
-		configureMapModeBuilder.addItem(mapModeRowBuilder.build());
-
-		templateBuilder.addSectionedList(
-				SectionedItemList.create(
-						configureMapModeBuilder.build(),
-						getApp().getString(R.string.configure_map)));
-
 		CarIcon icon = new CarIcon.Builder(IconCompat.createWithResource(getApp(), R.drawable.ic_action_map_magnifier)).build();
 		Row.Builder magnifierRowBuilder = new Row.Builder()
 				.setTitle(getApp().getString(R.string.map_magnifier))
+				.addText(String.format(Locale.US, "%d %%",
+						Math.round(100 * getApp().getOsmandMap().getMapDensity())))
 				.setImage(icon)
 				.setBrowsable(true)
-				.setOnClickListener(() -> {
-					getScreenManager().push(new MapMagnifierScreen(getCarContext()));
-				});
+				.setOnClickListener(() -> getScreenManager().pushForResult(
+						new MapMagnifierScreen(getCarContext()), result -> invalidate()));
 
+		ItemList.Builder configureMapBuilder = new ItemList.Builder();
+		configureMapBuilder.addItem(mapModeRowBuilder.build());
+		configureMapBuilder.addItem(magnifierRowBuilder.build());
 
-		//todo revert when aa scale setting fixed
-//		ItemList.Builder configureMapSectionBuilder = new ItemList.Builder();
-//		configureMapSectionBuilder.addItem(magnifierRowBuilder.build());
-
-//		templateBuilder.addSectionedList(
-//				SectionedItemList.create(
-//						configureMapSectionBuilder.build(),
-//						getApp().getString(R.string.configure_map)));
+		templateBuilder.addSectionedList(
+				SectionedItemList.create(
+						configureMapBuilder.build(),
+						getApp().getString(R.string.configure_map)));
 
         /*
         ItemList.Builder sectionBBuilder = new ItemList.Builder();

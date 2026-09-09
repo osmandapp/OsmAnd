@@ -142,16 +142,13 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 	}
 
 	private void clearDB(@NonNull List<Integer> allowedTypes, long finishDate) {
-		SQLiteDatabase db = getWritableDatabase();
-		if (db != null && db.isOpen()) {
-			try {
+		try (SQLiteDatabase db = getWritableDatabase()) {
+			if (db.isOpen()) {
 				String types = formatAllowedTypes(allowedTypes);
 				db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE " + COL_DATE + " <= ?" + " AND " + COL_TYPE + " IN " + types, new Object[] {finishDate});
-			} catch (Exception e) {
-				LOG.error(e);
-			} finally {
-				db.close();
 			}
+		} catch (Exception e) {
+			LOG.error(e);
 		}
 	}
 

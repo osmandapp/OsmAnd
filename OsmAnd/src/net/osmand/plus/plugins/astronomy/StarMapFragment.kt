@@ -24,7 +24,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.button.MaterialButton
+import io.github.cosinekitty.astronomy.EclipseEvent
 import io.github.cosinekitty.astronomy.EclipseKind
+import io.github.cosinekitty.astronomy.GlobalSolarEclipseInfo
+import io.github.cosinekitty.astronomy.GlobalSolarEclipseWindow
+import io.github.cosinekitty.astronomy.LocalSolarEclipseInfo
 import io.github.cosinekitty.astronomy.LunarEclipseMapFrame
 import io.github.cosinekitty.astronomy.LunarEclipsePhase
 import io.github.cosinekitty.astronomy.LunarEclipseState
@@ -182,6 +186,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 	private var lastBoundEclipseEventKey: Double? = null
 	private var lastBoundEclipseSelectedTime = Double.NaN
 	private var lastBoundLocalEclipseState: SolarEclipseState? = null
+	private var lastBoundLocalEclipseWindow: LocalSolarEclipseInfo? = null
+	private var lastBoundEclipseColumnsLocal: Boolean? = null
 	private var lastBoundLocalLunarEclipseState: LunarEclipseState? = null
 	private var lastDisplayedEclipseLatitude = Double.NaN
 	private var lastDisplayedEclipseLongitude = Double.NaN
@@ -1623,10 +1629,15 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 					else -> R.string.astro_partial_solar_eclipse
 				})
 				eclipseEventDate.text = formatEclipseDate(event.peak)
-				eclipseStartTime.text = formatEclipseColumn(window.start)
-				eclipseMaximumTime.text = formatEclipseColumn(event.peak)
-				eclipseEndTime.text = formatEclipseColumn(window.end)
 				lastBoundEclipseEventKey = event.peak.ut
+			}
+			val localWindow = state.localWindow
+			if (eventChanged || lastBoundLocalEclipseWindow !== localWindow ||
+				lastBoundEclipseColumnsLocal != (localWindow != null)
+			) {
+				bindEclipseColumns(localWindow, window, event)
+				lastBoundLocalEclipseWindow = localWindow
+				lastBoundEclipseColumnsLocal = localWindow != null
 			}
 			if (lastBoundEclipseSelectedTime != selectedTime.ut) {
 				val selectedMillis = selectedTime.toMillisecondsSince1970()
@@ -1652,8 +1663,12 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 			eclipseTimeline.setRange(
 				startMillis,
 				endMillis,
-				event.peak.toMillisecondsSince1970(),
-				selectedTime.toMillisecondsSince1970()
+				(localWindow?.peak?.time ?: event.peak).toMillisecondsSince1970(),
+				selectedTime.toMillisecondsSince1970(),
+				partialContacts = listOfNotNull(localWindow?.partialBegin, localWindow?.partialEnd)
+					.map { it.time.toMillisecondsSince1970() },
+				totalContacts = listOfNotNull(localWindow?.totalBegin, localWindow?.totalEnd)
+					.map { it.time.toMillisecondsSince1970() }
 			)
 			val insideWindow = selectedTime.ut in window.start.ut..window.end.ut
 			eclipseFitPath.isEnabled = insideWindow && !state.mapLoading
@@ -1844,6 +1859,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		lastBoundEclipseEventKey = null
 		lastBoundEclipseSelectedTime = Double.NaN
 		lastBoundLocalEclipseState = null
+		lastBoundLocalEclipseWindow = null
+		lastBoundEclipseColumnsLocal = null
 		lastBoundLocalLunarEclipseState = null
 		lastDisplayedEclipseLatitude = Double.NaN
 		lastDisplayedEclipseLongitude = Double.NaN
@@ -2103,6 +2120,36 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		val millis = time.toMillisecondsSince1970()
 		val date = DateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault()).format(Date(millis))
 		return "$date\n${formatClockWithSeconds(millis)}"
+	}
+
+	private fun formatEclipseColumn(event: EclipseEvent): String {
+		val column = formatEclipseColumn(event.time)
+		return if (event.altitude <= 0.0) {
+			"$column\n${getString(R.string.astro_eclipse_column_below_horizon)}"
+		} else {
+			column
+		}
+	}
+
+	private fun bindEclipseColumns(
+		localWindow: LocalSolarEclipseInfo?,
+		window: GlobalSolarEclipseWindow,
+		event: GlobalSolarEclipseInfo
+	) {
+		if (localWindow != null) {
+			setTextIfChanged(eclipseStartTime, formatEclipseColumn(localWindow.partialBegin))
+			setTextIfChanged(eclipseMaximumTime, formatEclipseColumn(localWindow.peak))
+			setTextIfChanged(eclipseEndTime, formatEclipseColumn(localWindow.partialEnd))
+		} else {
+			// The eclipse never reaches the map center; the status line above says so.
+			setTextIfChanged(eclipseStartTime, formatEclipseColumn(window.start))
+			setTextIfChanged(eclipseMaximumTime, formatEclipseColumn(event.peak))
+			setTextIfChanged(eclipseEndTime, formatEclipseColumn(window.end))
+		}
+	}
+
+	private fun setTextIfChanged(view: TextView, text: String) {
+		if (view.text?.toString() != text) view.text = text
 	}
 
 	private fun formatClockWithSeconds(millis: Long): String {

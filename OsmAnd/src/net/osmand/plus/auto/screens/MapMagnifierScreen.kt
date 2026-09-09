@@ -11,8 +11,9 @@ import androidx.car.app.model.Template
 import androidx.car.app.navigation.model.MapWithContentTemplate
 import androidx.lifecycle.LifecycleOwner
 import net.osmand.plus.R
-import net.osmand.plus.views.corenative.NativeCoreContext
 import java.util.Locale
+import kotlin.math.max
+import kotlin.math.min
 import kotlin.math.roundToInt
 
 class MapMagnifierScreen(
@@ -23,8 +24,8 @@ class MapMagnifierScreen(
 		lifecycle.addObserver(this)
 	}
 
-	private val magnifierValues = listOf(50, 75, 100, 125, 150, 200)
-	private var selectedIndex = 2
+	private var magnifierValues = DEFAULT_VALUES
+	private var selectedIndex = 0
 	private var initialAAMapDensity = 0f
 	private var isApplied = false
 
@@ -44,20 +45,38 @@ class MapMagnifierScreen(
 	override fun onFirstGetTemplate() {
 		super.onFirstGetTemplate()
 		val settings = app.settings
-		val mapDensity: Float = settings.MAP_DENSITY.get()
 		initialAAMapDensity = if (settings.AA_MAP_DENSITY.isSet) {
 			settings.AA_MAP_DENSITY.get()
 		} else {
 			0f
 		}
-		val selectedValue =
-			((if (isInitialValueSet()) initialAAMapDensity else mapDensity) * 100).roundToInt()
-		for (value in magnifierValues) {
-			if (selectedValue == value) {
-				selectedIndex = magnifierValues.indexOf(value)
-				break
-			}
+		// the value in use right now: the Android Auto one if it was ever changed here,
+		// the phone one otherwise
+		val currentValue =
+			((if (isInitialValueSet()) initialAAMapDensity else settings.MAP_DENSITY.get()) * 100)
+				.roundToInt()
+		magnifierValues = buildMagnifierValues(currentValue)
+		selectedIndex = max(0, magnifierValues.indexOf(currentValue))
+	}
+
+	/**
+	 * The phone offers values this screen does not (25 %, 400 % ...). Such a value has to stay
+	 * visible and selected, otherwise the head unit shows a selection the map does not use.
+	 * The list is kept within the host content limit around the selected item.
+	 */
+	private fun buildMagnifierValues(currentValue: Int): List<Int> {
+		val values = DEFAULT_VALUES.toMutableList()
+		if (!values.contains(currentValue)) {
+			values.add(currentValue)
+			values.sort()
 		}
+		val limit = if (contentLimit > 0) contentLimit else values.size
+		if (values.size <= limit) {
+			return values
+		}
+		var from = max(0, values.indexOf(currentValue) - limit / 2)
+		from = min(from, values.size - limit)
+		return values.subList(from, from + limit)
 	}
 
 	private fun isInitialValueSet(): Boolean {
@@ -77,8 +96,7 @@ class MapMagnifierScreen(
 		listBuilder.setOnSelectedListener { index ->
 			if (index >= 0 && index < magnifierValues.size) {
 				val value = magnifierValues[index].toFloat() / 100
-				val settings = app.settings
-				settings.AA_MAP_DENSITY.set(value)
+				app.settings.AA_MAP_DENSITY.set(value)
 				app.osmandMap.mapView.applyDisplayScaleSettings()
 				selectedIndex = index
 			}
@@ -111,5 +129,9 @@ class MapMagnifierScreen(
 			.setContentTemplate(listTemplate)
 			.setActionStrip(actionStrip)
 			.build()
+	}
+
+	companion object {
+		private val DEFAULT_VALUES = listOf(50, 75, 100, 125, 150, 200)
 	}
 }

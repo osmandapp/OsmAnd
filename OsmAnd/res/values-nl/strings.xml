@@ -5690,4 +5690,5 @@
     <string name="required_maps_get_accurate_list_online">Online een nauwkeurige lijst ophalen</string>
     <string name="rendering_attr_surface_clay_name">Klei</string>
     <string name="rendering_attr_surface_laterite_name">Lateriet</string>
+    <string name="astro_eclipse_column_below_horizon">Onder de horizon</string>
 </resources>

@@ -202,23 +202,23 @@
 
 			<LinearLayout
 				android:layout_width="match_parent"
-				android:layout_height="54dp"
+				android:layout_height="66dp"
 				android:baselineAligned="false"
 				android:orientation="horizontal">
 
 				<LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="start" android:orientation="vertical">
 					<TextView style="@style/TextAppearance.Material3.LabelMedium" android:layout_width="wrap_content" android:layout_height="18dp" android:text="@string/astro_eclipse_start" android:textColor="?attr/text_color_primary_v2" android:textSize="12sp" android:textStyle="bold" />
-					<TextView android:id="@+id/eclipse_start_time" style="@style/TextAppearance.Material3.LabelSmall" android:layout_width="wrap_content" android:layout_height="36dp" android:gravity="start|center_vertical" android:maxLines="2" android:textColor="?android:attr/textColorSecondary" android:textSize="11sp" />
+					<TextView android:id="@+id/eclipse_start_time" style="@style/TextAppearance.Material3.LabelSmall" android:layout_width="wrap_content" android:layout_height="48dp" android:gravity="start|top" android:maxLines="3" android:textColor="?android:attr/textColorSecondary" android:textSize="11sp" />
 				</LinearLayout>
 
 				<LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center_horizontal" android:orientation="vertical">
 					<TextView style="@style/TextAppearance.Material3.LabelMedium" android:layout_width="wrap_content" android:layout_height="18dp" android:text="@string/astro_eclipse_maximum" android:textColor="@color/osmand_orange" android:textSize="12sp" android:textStyle="bold" />
-					<TextView android:id="@+id/eclipse_maximum_time" style="@style/TextAppearance.Material3.LabelSmall" android:layout_width="wrap_content" android:layout_height="36dp" android:gravity="center" android:maxLines="2" android:textColor="?android:attr/textColorSecondary" android:textSize="11sp" />
+					<TextView android:id="@+id/eclipse_maximum_time" style="@style/TextAppearance.Material3.LabelSmall" android:layout_width="wrap_content" android:layout_height="48dp" android:gravity="center_horizontal|top" android:maxLines="3" android:textColor="?android:attr/textColorSecondary" android:textSize="11sp" />
 				</LinearLayout>
 
 				<LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="end" android:orientation="vertical">
 					<TextView style="@style/TextAppearance.Material3.LabelMedium" android:layout_width="wrap_content" android:layout_height="18dp" android:text="@string/astro_eclipse_end" android:textColor="?attr/text_color_primary_v2" android:textSize="12sp" android:textStyle="bold" />
-					<TextView android:id="@+id/eclipse_end_time" style="@style/TextAppearance.Material3.LabelSmall" android:layout_width="wrap_content" android:layout_height="36dp" android:gravity="end|center_vertical" android:maxLines="2" android:textColor="?android:attr/textColorSecondary" android:textSize="11sp" />
+					<TextView android:id="@+id/eclipse_end_time" style="@style/TextAppearance.Material3.LabelSmall" android:layout_width="wrap_content" android:layout_height="48dp" android:gravity="end|top" android:maxLines="3" android:textColor="?android:attr/textColorSecondary" android:textSize="11sp" />
 				</LinearLayout>
 			</LinearLayout>
 
