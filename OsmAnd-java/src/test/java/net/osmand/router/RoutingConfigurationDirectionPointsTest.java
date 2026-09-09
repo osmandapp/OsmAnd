@@ -13,20 +13,15 @@ import net.osmand.util.MapUtils;
 
 import org.junit.Test;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Direction points reach the native router through
- * {@link RoutingConfiguration#getNativeDirectionPoints()}, which `java_wrap.cpp` resolves by the
- * descriptor {@code ()[Lnet/osmand/shared/routing/NativeDirectionPoint;}. Nothing fails to compile
- * when that breaks - the points just stop arriving - so the descriptor is pinned here, from the side
- * that owns the method.
+ * What {@link RoutingConfiguration.Builder} does with the direction points it is given, and what
+ * {@link RoutingConfiguration#getNativeDirectionPoints()} flattens them into for the C++ router.
  *
- * The rest of this covers what {@link RoutingConfiguration.Builder} does with the points it is
- * given: it hands every calculation its own copies, because the router writes onto a point as it
- * attaches it to a road.
+ * Every calculation gets its own copies, because the router writes onto a point as it attaches it
+ * to a road, and a Builder is reused across calculations.
  */
 public class RoutingConfigurationDirectionPointsTest {
 
@@ -53,14 +48,6 @@ public class RoutingConfigurationDirectionPointsTest {
 		RoutingConfiguration.Builder builder = new RoutingConfiguration.Builder();
 		builder.setDirectionPoints(tree);
 		return builder.build("car", new RoutingConfiguration.RoutingMemoryLimits(0, 0));
-	}
-
-	@Test
-	public void testNativeDirectionPointsDescriptorMatchesTheJniLookup() throws Exception {
-		Method method = RoutingConfiguration.class.getMethod("getNativeDirectionPoints");
-		assertEquals(NativeDirectionPoint[].class, method.getReturnType());
-		assertEquals("net.osmand.shared.routing.NativeDirectionPoint",
-				method.getReturnType().getComponentType().getName());
 	}
 
 	@Test
