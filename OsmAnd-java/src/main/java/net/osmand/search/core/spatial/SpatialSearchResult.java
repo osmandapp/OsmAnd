@@ -545,6 +545,37 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		return key;
 	}
 	
+	/**
+	 * How many things the answer is stitched from, as a tier: one object beats the same words
+	 * found in two, which is what keeps "Dr Lucas" off the 74th row behind every
+	 * <something Lucas> x <something Drive> pair. Two corrections, both of them per RESULT so the
+	 * comparator stays transitive:
+	 *
+	 * <ul>
+	 * <li>"<object> in <city>" counts as one when the city was named by its own name - "pizza in
+	 * New York" is an answer, and the tier was handing the top to every "<x> New York Pizza";
+	 * <li>a node named after what it serves never gets the one-object advantage - a Dutch stop is
+	 * called "Amsterdam, Beethovenstraat" and would take the top row from the street.
+	 * </ul>
+	 */
+	private static int answerParts(SpatialSearchResult r, SpatialSearchRanking ranking) {
+		int parts = r.objs.size();
+		if (parts == 2 && ranking != null) {
+			SpatialSearchResultRef ref = r.objs.get(1);
+			NameIndexAtom second = ref.atom;
+			// and the city must have been named, not reached through an alias: "apple" finds New
+			// York through "Big Apple", which would make every <x> Drive an answer for "Apple Drive"
+			if ((second.isCity() || second.isCityVillage() || second.isBoundary())
+					&& ranking.matchesOwnName(ref)) {
+				parts = 1;
+			}
+		}
+		if (parts < 2 && ranking != null && ranking.isSubordinateNode(r)) {
+			parts = 2;
+		}
+		return parts;
+	}
+
 	public static int compare(SpatialSearchResult o1, SpatialSearchResult o2, LatLon center,
 			SpatialSearchRanking ranking) {
 		int res = -Boolean.compare(o1.isPoiCategory(), o2.isPoiCategory());
@@ -559,13 +590,9 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		if (res != 0) {
 			return res;
 		}
-		// one object beats the same words stitched from two - except against a node named after
-		// what it serves ("Amsterdam, Beethovenstraat" would take the top row from the street)
-		if (ranking == null || (!ranking.isSubordinateNode(o1) && !ranking.isSubordinateNode(o2))) {
-			res = Integer.compare(o1.objs.size(), o2.objs.size());
-			if (res != 0) {
-				return res;
-			}
+		res = Integer.compare(answerParts(o1, ranking), answerParts(o2, ranking));
+		if (res != 0) {
+			return res;
 		}
 		if (o1.parent.SCORE_RANKING) {
 			res = -Double.compare(o1.score, o2.score); // the 7 tiers below, see SpatialSearchRanking

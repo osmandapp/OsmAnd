@@ -66,6 +66,10 @@ public class SpatialSearchRanking {
 	private static final Set<String> ADMIN_SUBTYPES = new HashSet<>(Arrays.asList(
 			"country", "state", "region", "province", "county"));
 
+	/** a settlement stored as a POI - the world basemap has New York only in this shape */
+	private static final Set<String> PLACE_SUBTYPES = new HashSet<>(Arrays.asList(
+			"city", "town", "village", "hamlet", "borough"));
+
 	/** objects a person travels TO by name; a hospital or a library is a service, not a landmark */
 	private static final Set<String> LANDMARK_SUBTYPES = new HashSet<>(Arrays.asList(
 			"railway_station", "public_transport_station", "bus_station", "aerodrome",
@@ -107,7 +111,10 @@ public class SpatialSearchRanking {
 		}
 		double near = nearScore(r, center);
 		double name = nameScore(head);
-		double exact = name == NAME_EXACT && isNotable(r) ? wExactName * near : 0;
+		// a place you name exactly is what you asked for, wherever it is: "new york" from
+		// Amsterdam had the city 49th, under 45 outlets of a pizza chain
+		double exact = name == NAME_EXACT && isNotable(r)
+				? wExactName * (isPlace(head) ? 1 : near) : 0;
 		return wName * name * near
 				+ wType * typeScore(head)
 				+ wRating * ratingScore(r)
@@ -175,6 +182,9 @@ public class SpatialSearchRanking {
 				if (ADMIN_SUBTYPES.contains(subType)) {
 					return TYPE_ADMIN;
 				}
+				if (PLACE_SUBTYPES.contains(subType)) {
+					return "city".equals(subType) || "town".equals(subType) ? TYPE_CITY : TYPE_VILLAGE;
+				}
 				if (INFRASTRUCTURE_SUBTYPES.contains(subType)) {
 					return TYPE_INFRASTRUCTURE;
 				}
@@ -187,6 +197,23 @@ public class SpatialSearchRanking {
 			}
 		}
 		return TYPE_POI;
+	}
+
+	/** the query named this object, rather than reaching it through an alias or a category */
+	public boolean matchesOwnName(SpatialSearchResultRef ref) {
+		return nameScore(ref) >= NAME_PREFIX;
+	}
+
+	/** a settlement or an administrative area, however the map happens to store it */
+	private boolean isPlace(SpatialSearchResultRef ref) {
+		NameIndexAtom atom = ref.atom;
+		if (atom.isCity() || atom.isCityVillage()) {
+			return true;
+		}
+		if (atom.object instanceof Amenity a && a.getSubType() != null) {
+			return ADMIN_SUBTYPES.contains(a.getSubType()) || PLACE_SUBTYPES.contains(a.getSubType());
+		}
+		return false;
 	}
 
 	/** a travel rating above the floor: known well enough to be a destination, not a detail */

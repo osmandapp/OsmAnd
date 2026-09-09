@@ -243,3 +243,24 @@ With the term reading the object's name, three more things follow:
 - and our own disambiguation suffix ("4th Avenue (Manhattan)", added when a street is united with
   its district) is stripped before comparing, or it would make the street a worse match for its
   own name.
+
+## The one-object tier is a property of a result, never a test on a pair
+
+`objs.size` decides above the score, and it needed two exceptions: a stop named "Amsterdam,
+Beethovenstraat" must not take the top row from the street, and "Lombardi's Pizza in New York"
+must not lose to every "<x> New York Pizza" (issue #25021). Written as conditions on the PAIR -
+"skip this tier if either side is ..." - they make the comparator non-transitive, and
+`Collections.sort` threw `IllegalArgumentException: Comparison method violates its general
+contract!` on the first list large enough to trip TimSort's check:
+
+    X = "Made in New York Pizza"        one object
+    Y = "Lombardi's Pizza" + New York   two, exempt
+    Z = "<something> Pizza" + a street  two, not exempt
+
+    X vs Y -> exempt, score decides -> Y first
+    Y vs Z -> same count, score decides -> Z first
+    X vs Z -> tier applies -> X first        ... and Y > X > Z > Y
+
+Both exceptions are now a single per-result number, `answerParts()`: "<object> in <city>" counts
+as one when the city was named by its own name, a subordinate node never counts as one, and the
+tier compares two integers. A total order cannot have a cycle.
