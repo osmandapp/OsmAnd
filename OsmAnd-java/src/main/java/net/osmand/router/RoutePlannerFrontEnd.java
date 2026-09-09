@@ -17,6 +17,7 @@ import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.shared.routing.RouteRegion;
 import net.osmand.shared.routing.RouteDataObject;
+import net.osmand.shared.routing.RouteCalculationMode;
 import net.osmand.shared.routing.RouteCalculationProgress;
 import net.osmand.shared.routing.RoutingConfiguration;
 import net.osmand.shared.routing.PrecalculatedRouteDirection;
@@ -62,12 +63,6 @@ public class RoutePlannerFrontEnd {
 				.applyCalculateMissingMaps(RoutePlannerFrontEnd.CALCULATE_MISSING_MAPS);
 	}
 	
-	public enum RouteCalculationMode {
-		BASE,
-		NORMAL,
-		COMPLEX
-	}
-
 	private enum HHRoutingType {
 		JAVA,
 		CPP

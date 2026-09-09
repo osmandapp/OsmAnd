@@ -23,6 +23,7 @@ import java.util.*;
 
 import static net.osmand.util.RouterUtilTest.getNativeLibPath;
 import net.osmand.shared.routing.RouteSegmentResult;
+import net.osmand.shared.routing.RouteCalculationMode;
 
 @RunWith(Parameterized.class)
 public class ApproximationTest {
@@ -116,7 +117,7 @@ public class ApproximationTest {
 		config.routeCalculationTime = System.currentTimeMillis(); // ENABLE_TIME_CONDITIONAL_ROUTING
 		if (minPointApproximation > 0) config.minPointApproximation = minPointApproximation;
 		RoutingContext ctx = router.buildRoutingContext(config, isNative() ? nativeLibrary : null,
-				binaryMapIndexReaders, RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
+				binaryMapIndexReaders, RouteCalculationMode.NORMAL);
 		GpxRouteApproximation gctx = new GpxRouteApproximation(ctx);
 
 		String gpxFilePath = FILES_PATH + entry.gpxFile;

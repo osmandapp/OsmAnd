@@ -31,6 +31,7 @@ import net.osmand.shared.routing.RoutingConfiguration.RoutingMemoryLimits;
 import net.osmand.shared.routing.RoutingConfiguration;
 import net.osmand.util.RouterUtilTest;
 import net.osmand.shared.routing.RouteSegmentResult;
+import net.osmand.shared.routing.RouteCalculationMode;
 
 @RunWith(Parameterized.class)
 public class RouteTestingTest {
@@ -146,10 +147,10 @@ public class RouteTestingTest {
 			RoutingContext ctx;
 			if (useNative) {
 				ctx = fe.buildRoutingContext(config, nativeLibrary, binaryMapIndexReaders,
-						RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
+						RouteCalculationMode.NORMAL);
 			} else {
 				ctx = fe.buildRoutingContext(config, null, binaryMapIndexReaders,
-						RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
+						RouteCalculationMode.NORMAL);
 			}
 
 			ctx.leftSideNavigation = false;

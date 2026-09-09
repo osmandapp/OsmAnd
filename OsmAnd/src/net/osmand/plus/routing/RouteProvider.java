@@ -39,7 +39,7 @@ import net.osmand.shared.routing.GeneralRouter.RoutingParameterType;
 import net.osmand.shared.routing.RoutingConfiguration;
 import net.osmand.shared.routing.PrecalculatedRouteDirection;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
-import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
+import net.osmand.shared.routing.RouteCalculationMode;
 import net.osmand.shared.routing.RoutingConfiguration.Builder;
 import net.osmand.shared.routing.RoutingConfiguration.RoutingMemoryLimits;
 import net.osmand.router.RoutingContext;

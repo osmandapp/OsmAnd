@@ -20,6 +20,7 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import static net.osmand.router.RoutePlannerFrontEnd.*;
+import net.osmand.shared.routing.RouteCalculationMode;
 import net.osmand.shared.routing.RouteSegmentResult;
 import net.osmand.shared.routing.RoadTraversal;
 import net.osmand.shared.routing.VehicleRouter;

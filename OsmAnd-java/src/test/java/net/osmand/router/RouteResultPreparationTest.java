@@ -38,6 +38,7 @@ import net.osmand.binary.ObfConstants;
 import net.osmand.shared.routing.RoutingConfiguration.RoutingMemoryLimits;
 import net.osmand.util.Algorithms;
 import net.osmand.shared.routing.RouteSegmentResult;
+import net.osmand.shared.routing.RouteCalculationMode;
 
 /**
  * Created by yurkiss on 04.03.16.
@@ -121,11 +122,11 @@ public class RouteResultPreparationTest {
         
         if (useNative) {
             ctx = fe.buildRoutingContext(config, nativeLibrary, binaryMapIndexReaders,
-                    RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
+                    RouteCalculationMode.NORMAL);
             ctx.requestNativePrepareResult = true;
         } else {
             ctx = fe.buildRoutingContext(config, null, binaryMapIndexReaders,
-                    RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
+                    RouteCalculationMode.NORMAL);
         }
         ctx.leftSideNavigation = false;
         
