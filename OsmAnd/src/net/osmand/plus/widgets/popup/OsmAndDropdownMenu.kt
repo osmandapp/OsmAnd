@@ -47,6 +47,7 @@ import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -123,7 +124,7 @@ object OsmAndDropdownMenuDefaults {
 		text: Color = MaterialTheme.colorScheme.onSurface,
 		secondaryText: Color = MaterialTheme.colorScheme.onSurfaceVariant,
 		icon: Color = MaterialTheme.colorScheme.onSurfaceVariant,
-		selected: Color = MaterialTheme.colorScheme.onSurfaceVariant,
+		selected: Color = MaterialTheme.colorScheme.primary,
 		control: Color = MaterialTheme.colorScheme.onSurfaceVariant
 	): OsmAndDropdownMenuColors {
 		return OsmAndDropdownMenuColors(
@@ -143,10 +144,12 @@ fun OsmAndDropdownMenuTheme(
 	content: @Composable () -> Unit
 ) {
 	val context = LocalContext.current
+	val configuration = LocalConfiguration.current
 	val isNight = (context.applicationContext as? OsmandApplication)?.let {
 		!it.settings.isLightContent
-	} ?: ((context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES)
+	} ?: ((configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES)
 
+	val primary = colorResource(if (isNight) R.color.active_color_primary_dark else R.color.active_color_primary_light)
 	val surfaceContainer = colorResource(if (isNight) R.color.surface_container_dark else R.color.surface_container_light)
 	val outlineVariant = colorResource(if (isNight) R.color.outline_variant_dark else R.color.outline_variant_light)
 	val onSurface = colorResource(if (isNight) R.color.on_surface_dark else R.color.on_surface_light)
@@ -154,6 +157,7 @@ fun OsmAndDropdownMenuTheme(
 
 	MaterialTheme(
 		colorScheme = MaterialTheme.colorScheme.copy(
+			primary = primary,
 			surface = surfaceContainer,
 			surfaceContainer = surfaceContainer,
 			surfaceContainerHigh = surfaceContainer,
