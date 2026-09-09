@@ -49,18 +49,27 @@ public class SpatialSearchRanking {
 	private static final double TYPE_VILLAGE = 0.88;
 	private static final double TYPE_LANDMARK = 0.80;
 	private static final double TYPE_BUILDING = 0.75;
-	private static final double TYPE_STREET = 0.55; // above a stop, below a village: pref-0106
 	private static final double TYPE_BOUNDARY = 0.60;
+	private static final double TYPE_STREET = 0.55; // above a stop, below a village: pref-0106
 	private static final double TYPE_POI = 0.50;
 	private static final double TYPE_POSTCODE = 0.40;
 	private static final double TYPE_STOP = 0.35;
 	private static final double TYPE_INFRASTRUCTURE = 0.10;
 
-	/** nodes that describe a place rather than being it - a station has a dozen of them */
-	static final Set<String> INFRASTRUCTURE_SUBTYPES = new HashSet<>(Arrays.asList(
+	/** the parts a stop or a station is stored as - deduplication unites these across 400 m */
+	static final Set<String> SPREAD_SUBTYPES = new HashSet<>(Arrays.asList(
 			"public_transport_platform", "public_transport_stop_position", "subway_entrance",
-			"elevator", "ticket_validator", "entrance", "level_crossing", "boundary_stone",
-			"street_lamp", "waste_basket", "bench", "vending_machine", "motorway_junction"));
+			"elevator", "ticket_validator", "entrance", "level_crossing", "motorway_junction"));
+
+	/** street furniture: subordinate too, but each one is an object of its own: pref-0092 */
+	static final Set<String> FURNITURE_SUBTYPES = new HashSet<>(Arrays.asList(
+			"boundary_stone", "street_lamp", "waste_basket", "bench", "vending_machine"));
+
+	/** nodes that describe a place rather than being it - a station has a dozen of them */
+	static final Set<String> INFRASTRUCTURE_SUBTYPES = new HashSet<>(SPREAD_SUBTYPES);
+	static {
+		INFRASTRUCTURE_SUBTYPES.addAll(FURNITURE_SUBTYPES);
+	}
 
 	static final Set<String> STOP_SUBTYPES = new HashSet<>(Arrays.asList(
 			"bus_stop", "tram_stop", "railway_halt", "taxi"));
@@ -79,13 +88,8 @@ public class SpatialSearchRanking {
 			"townhall", "zoo", "peak", "mountain_pass", "wiki_place",
 			"marketplace", "square", "park", "cathedral", "monastery"));
 
-	/** the parts a stop or a station is stored as */
-	static final Set<String> SPREAD_SUBTYPES = new HashSet<>(Arrays.asList(
-			"public_transport_platform", "public_transport_stop_position", "subway_entrance",
-			"elevator", "ticket_validator", "entrance", "level_crossing", "motorway_junction"));
-
 	/** a node describing something else; its name is not evidence that it IS it: pref-0023 */
-	public boolean isSubordinateNode(SpatialSearchResult r) {
+	public static boolean isSubordinateNode(SpatialSearchResult r) {
 		SpatialSearchResultRef head = r == null ? null : r.getFirstRef();
 		if (head == null || !(head.atom.object instanceof Amenity a)) {
 			return false;
@@ -103,8 +107,6 @@ public class SpatialSearchRanking {
 		}
 		double near = nearScore(r, center);
 		double name = nameScore(head);
-		// a place you name exactly is what you asked for, wherever it is: "new york" from
-		// Amsterdam had the city 49th, under 45 outlets of a pizza chain
 		// undimmed by distance for what is looked for by name from anywhere: pref-0125, pref-0127
 		double exact = name == NAME_EXACT && isNotable(r)
 				? wExactName * (isPlace(head) || isProminent(r) ? 1 : near) : 0;
@@ -133,7 +135,9 @@ public class SpatialSearchRanking {
 		double best = NAME_OTHER;
 		if (atom.object != null) {
 			best = Math.max(best, compareToName(atom.object.getName(), queried));
-			Map<String, String> names = atom.object.getNamesMap(true);
+			// alternative names cost a map per result: worth it only for a rated object
+			Map<String, String> names = best == NAME_EXACT || atom.elo <= 0 ? null
+					: atom.object.getNamesMap(true);
 			if (names != null) {
 				for (String n : names.values()) {
 					best = Math.max(best, compareToName(n, queried));
@@ -257,8 +261,8 @@ public class SpatialSearchRanking {
 	}
 
 	/** carries a wikipedia article or a travel rating, so the name is its own, not a coincidence */
-	public boolean isNotable(SpatialSearchResult r) {
-		if (r.getTotalRating() > r.parent.MIN_ELO_RATING) {
+	public static boolean isNotable(SpatialSearchResult r) {
+		if (isProminent(r)) {
 			return true;
 		}
 		MapObject o = r.getFirstRef() == null ? null : r.getFirstRef().atom.object;

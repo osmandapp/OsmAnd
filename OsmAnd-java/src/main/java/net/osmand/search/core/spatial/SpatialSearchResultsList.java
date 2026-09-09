@@ -710,7 +710,9 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		List<SpatialSearchResult> out = new ArrayList<>(sorted.size());
 		for (SpatialSearchResult s : sorted) {
 			SpatialSearchResult same = null;
-			if (s.dedupName != null && s.getLatLon() != null) {
+			// a category search asked for the objects themselves: two stops of one name 300 m
+			// apart are two answers, and uniting them would hide one of them
+			if (s.dedupName != null && s.getLatLon() != null && !s.isPoiCategory()) {
 				SpatialSearchResult prev = s.prevDedupSameName;
 				for (int i = 0; i < MAX_SAME_NAME && prev != null; i++) {
 					if (prev.getLatLon() != null && isSamePlace(prev, s)) {
