@@ -2,8 +2,10 @@ package net.osmand.search.core.spatial;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -707,11 +709,23 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		return out;
 	}
 
+	/** parts OF a street, carrying its name - a bridge on Zollstrasse is Zollstrasse */
+	private static final Set<String> STREET_PART_SUBTYPES = new HashSet<>(
+			Arrays.asList("bridge", "tunnel", "viaduct", "ford"));
+
 	private static boolean isSamePlace(SpatialSearchResult a, SpatialSearchResult b,
 			SpatialSearchRanking ranking) {
 		boolean street = a.getMainObject() instanceof Street;
 		if (street != (b.getMainObject() instanceof Street)) {
-			return false; // a street and what stands on it are different objects
+			// a street and what STANDS on it are different objects, but a bridge carrying its
+			// name is a piece OF it
+			SpatialSearchResult poi = street ? b : a;
+			if (!isStreetPart(poi) || ranking.isProminent(poi)) {
+				// unless the bridge is a destination of its own - the Golden Gate is not a piece
+				// of road furniture. A wikipedia article is not enough, a travel rating is
+				return false;
+			}
+			return MapUtils.getDistance(a.getLatLon(), b.getLatLon()) <= SAME_STREET_M;
 		}
 		double radius;
 		if (street) {
@@ -728,6 +742,12 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 					? SAME_FACILITY_M : SAME_PLACE_M;
 		}
 		return MapUtils.getDistance(a.getLatLon(), b.getLatLon()) <= radius;
+	}
+
+	private static boolean isStreetPart(SpatialSearchResult r) {
+		MapObject o = r.getFirstRef() == null ? null : r.getFirstRef().atom.object;
+		return o instanceof Amenity a && a.getSubType() != null
+				&& STREET_PART_SUBTYPES.contains(a.getSubType());
 	}
 
 	private static String dedupName(SpatialSearchResult r) {

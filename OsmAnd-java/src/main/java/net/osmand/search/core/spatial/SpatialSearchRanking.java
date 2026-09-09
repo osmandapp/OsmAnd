@@ -197,8 +197,13 @@ public class SpatialSearchRanking {
 		return TYPE_POI;
 	}
 
+	/** a travel rating above the floor: known well enough to be a destination, not a detail */
+	public boolean isProminent(SpatialSearchResult r) {
+		return r.getTotalRating() > r.parent.MIN_ELO_RATING;
+	}
+
 	/** carries a wikipedia article or a travel rating, so the name is its own, not a coincidence */
-	private boolean isNotable(SpatialSearchResult r) {
+	public boolean isNotable(SpatialSearchResult r) {
 		if (r.getTotalRating() > r.parent.MIN_ELO_RATING) {
 			return true;
 		}

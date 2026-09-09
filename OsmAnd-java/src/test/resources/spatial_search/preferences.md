@@ -188,7 +188,8 @@ not by a distance alone:
 | stop node + stop node (platform, stop position, entrance, junction, bus/tram stop) | same name, within 400 m |
 | way + way of one street | same name AND same city, within 2 km - a line's single coordinate says little |
 | any other POI + POI | same name, within 30 m |
-| street + anything standing on it | never - six judgements in round 1 and the answer in round 4 |
+| street + a bridge, tunnel, viaduct or ford of the same name | within 2 km - it is a piece OF the street, unless it carries a travel rating of its own (the Golden Gate is not road furniture) |
+| street + anything else standing on it | never |
 
 The radii are measured, not chosen: 320 m between a camp site and its bus stop and 330 m between
 a pass and its platform were both called one place; 218 m between two parcel lockers and 57 m
