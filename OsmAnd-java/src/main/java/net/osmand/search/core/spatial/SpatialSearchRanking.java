@@ -219,6 +219,29 @@ public class SpatialSearchRanking {
 		}
 		return TYPE_POI;
 	}
+	
+	/**
+	 * How many things the answer is stitched from: one object beats the same words found in two,
+	 * which keeps "Dr Lucas" off the 74th row. Two corrections, per RESULT so the comparator stays
+	 * transitive: "<object> in <city>" counts as one when the city was named by its own name
+	 * (pref-0117), and a node named after what it serves never counts as one (pref-0087).
+	 */
+	public int answerParts(SpatialSearchResult r) {
+		int parts = r.objs.size();
+		if (parts == 2) {
+			SpatialSearchResultRef ref = r.objs.get(1);
+			NameIndexAtom second = ref.atom;
+			// named, not reached through an alias ("apple" finds New York): pref-0121
+			if ((second.isCity() || second.isCityVillage() || second.isBoundary())
+					&& matchesOwnName(ref)) {
+				parts = 1;
+			}
+		}
+		if (parts < 2 && isSubordinateNode(r)) {
+			parts = 2;
+		}
+		return parts;
+	}
 
 	/** the query named this object, rather than reaching it through an alias or a category */
 	public boolean matchesOwnName(SpatialSearchResultRef ref) {

@@ -520,7 +520,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	
 	public static String compareKeyString(SpatialSearchResult o) {
 		String sw = o.surplusWords >= 0 ? ("+" + o.surplusWords) : ("" + o.surplusWords);
-		if (o.parent.SCORE_RANKING) {
+		if (o.parent.ranking != null) {
 			return String.format("t%d%s-w%d-sc%.2f", o.parent.tCount, sw, o.objs.size(), o.score);
 		}
 		int e = (o.getTotalRating() - o.parent.MIN_ELO_RATING) / 64;
@@ -534,7 +534,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		key = addCompareKey(key, 6, -o.parent.tCount); // 6 bit - 64
 		key = addCompareKey(key, 3, -o.surplusWords); // 3 bit - 8
 		key = addCompareKey(key, 6, o.objs.size()); // 6 bit - 64
-		if (o.parent.SCORE_RANKING) {
+		if (o.parent.ranking != null) {
 			key = addCompareKey(key, 6, -(int) Math.round(o.score * 4)); // visibleLevel bucket
 			return key;
 		}
@@ -545,28 +545,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		return key;
 	}
 	
-	/**
-	 * How many things the answer is stitched from: one object beats the same words found in two,
-	 * which keeps "Dr Lucas" off the 74th row. Two corrections, per RESULT so the comparator stays
-	 * transitive: "<object> in <city>" counts as one when the city was named by its own name
-	 * (pref-0117), and a node named after what it serves never counts as one (pref-0087).
-	 */
-	private static int answerParts(SpatialSearchResult r, SpatialSearchRanking ranking) {
-		int parts = r.objs.size();
-		if (parts == 2 && ranking != null) {
-			SpatialSearchResultRef ref = r.objs.get(1);
-			NameIndexAtom second = ref.atom;
-			// named, not reached through an alias ("apple" finds New York): pref-0121
-			if ((second.isCity() || second.isCityVillage() || second.isBoundary())
-					&& ranking.matchesOwnName(ref)) {
-				parts = 1;
-			}
-		}
-		if (parts < 2 && ranking != null && ranking.isSubordinateNode(r)) {
-			parts = 2;
-		}
-		return parts;
-	}
+	
 
 	public static int compare(SpatialSearchResult o1, SpatialSearchResult o2, LatLon center,
 			SpatialSearchRanking ranking) {
@@ -582,11 +561,11 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		if (res != 0) {
 			return res;
 		}
-		res = Integer.compare(answerParts(o1, ranking), answerParts(o2, ranking));
-		if (res != 0) {
-			return res;
-		}
-		if (o1.parent.SCORE_RANKING) {
+		if (ranking != null) {
+			res = Integer.compare(ranking.answerParts(o1), ranking.answerParts(o2));
+			if (res != 0) {
+				return res;
+			}
 			res = -Double.compare(o1.score, o2.score); // the 7 tiers below, see SpatialSearchRanking
 			if (res != 0) {
 				return res;

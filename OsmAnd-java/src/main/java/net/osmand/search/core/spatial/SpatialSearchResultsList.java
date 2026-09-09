@@ -41,7 +41,7 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 	final int tCount;
 	
 	int MIN_ELO_RATING = Amenity.DEFAULT_ELO;
-	boolean SCORE_RANKING = true;
+	SpatialSearchRanking ranking;
 	
 
 	// NameIndexAtom[][] -- should be double array to store list of combinations
@@ -77,7 +77,7 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 	    }
 	    if (ctx != null) {
 			MIN_ELO_RATING = ctx.settings.MIN_ELO_RATING;
-			SCORE_RANKING = ctx.settings.SCORE_RANKING;
+			ranking = ctx.ranking;
 		}
 	    this.tCount = this.tokens.length;
 	}
@@ -95,7 +95,7 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		tCount = tokens.length;
 		if (ctx != null) {
 			MIN_ELO_RATING = ctx.settings.MIN_ELO_RATING;
-			SCORE_RANKING = ctx.settings.SCORE_RANKING;
+			ranking = ctx.ranking;
 		}
 		if (parent != null) {
 			limitIntersection = parent.limitIntersection == -1 ? (ctx.limitLocationBboxes.length) : parent.limitIntersection;
@@ -632,7 +632,7 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 	}
 
 	public List<SpatialSearchResult> sortResults(SpatialSearchContext ctx, List<SpatialSearchResult> finalResult, boolean deduplicate) {
-		if (SCORE_RANKING) {
+		if (ctx.ranking != null) {
 			for (SpatialSearchResult r : finalResult) {
 				r.score = ctx.ranking.score(r, ctx.location);
 			}
