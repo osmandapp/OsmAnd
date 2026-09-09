@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent" android:layout_height="match_parent"
+	android:orientation="vertical" android:background="?attr/activity_background_color">
+	<FrameLayout android:id="@+id/chips_container" android:layout_width="match_parent"
+		android:layout_height="wrap_content" android:paddingVertical="@dimen/content_padding">
+		<net.osmand.plus.search.dialogs.ChipsLayout android:id="@+id/chips"
+			android:layout_width="match_parent" android:layout_height="wrap_content" />
+	</FrameLayout>
+	<net.osmand.plus.gallery.ui.GalleryGridRecyclerView android:id="@+id/recycler_view"
+		android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"
+		android:paddingBottom="@dimen/content_padding_large"
+		android:clipToPadding="false" />
+</LinearLayout>
