@@ -546,25 +546,17 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	}
 	
 	/**
-	 * How many things the answer is stitched from, as a tier: one object beats the same words
-	 * found in two, which is what keeps "Dr Lucas" off the 74th row behind every
-	 * <something Lucas> x <something Drive> pair. Two corrections, both of them per RESULT so the
-	 * comparator stays transitive:
-	 *
-	 * <ul>
-	 * <li>"<object> in <city>" counts as one when the city was named by its own name - "pizza in
-	 * New York" is an answer, and the tier was handing the top to every "<x> New York Pizza";
-	 * <li>a node named after what it serves never gets the one-object advantage - a Dutch stop is
-	 * called "Amsterdam, Beethovenstraat" and would take the top row from the street.
-	 * </ul>
+	 * How many things the answer is stitched from: one object beats the same words found in two,
+	 * which keeps "Dr Lucas" off the 74th row. Two corrections, per RESULT so the comparator stays
+	 * transitive: "<object> in <city>" counts as one when the city was named by its own name
+	 * (pref-0117), and a node named after what it serves never counts as one (pref-0087).
 	 */
 	private static int answerParts(SpatialSearchResult r, SpatialSearchRanking ranking) {
 		int parts = r.objs.size();
 		if (parts == 2 && ranking != null) {
 			SpatialSearchResultRef ref = r.objs.get(1);
 			NameIndexAtom second = ref.atom;
-			// and the city must have been named, not reached through an alias: "apple" finds New
-			// York through "Big Apple", which would make every <x> Drive an answer for "Apple Drive"
+			// named, not reached through an alias ("apple" finds New York): pref-0121
 			if ((second.isCity() || second.isCityVillage() || second.isBoundary())
 					&& ranking.matchesOwnName(ref)) {
 				parts = 1;

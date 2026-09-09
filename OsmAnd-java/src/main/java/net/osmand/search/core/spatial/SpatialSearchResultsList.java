@@ -674,13 +674,14 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		return finalResult;
 	}
 
-	// how far apart two rows of the same name may be and still be one place
-	private static final double SAME_PLACE_M = 30;      // two shops, two benches
-	private static final double SAME_FACILITY_M = 400;  // the platforms of one stop are spread
-	private static final double SAME_STREET_M = 2000;   // one street cut into several OSM ways
+	// how far apart two rows of the same name may be and still be one place, all three measured
+	// on judged cases - see preferences.md, "What deduplication is allowed to merge"
+	private static final double SAME_PLACE_M = 30;      // pref-0071, pref-0092
+	private static final double SAME_FACILITY_M = 400;  // pref-0007, pref-0082
+	private static final double SAME_STREET_M = 2000;   // pref-0111
 	private static final int MAX_SAME_NAME = 32;        // bound the scan for a very common name
 
-	/** same name and same spot: the id/wikidata/route keys above cannot see a stop stored as nodes */
+	/** same name and same spot: the id/wikidata/route keys cannot see a stop stored as nodes */
 	private List<SpatialSearchResult> deduplicateByProximity(List<SpatialSearchResult> sorted,
 			SpatialSearchContext ctx) {
 		Map<String, List<SpatialSearchResult>> byName = new HashMap<>();
@@ -709,7 +710,7 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		return out;
 	}
 
-	/** parts OF a street, carrying its name - a bridge on Zollstrasse is Zollstrasse */
+	/** parts OF a street, carrying its name: pref-0108, pref-0109 */
 	private static final Set<String> STREET_PART_SUBTYPES = new HashSet<>(
 			Arrays.asList("bridge", "tunnel", "viaduct", "ford"));
 
@@ -717,20 +718,17 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 			SpatialSearchRanking ranking) {
 		boolean street = a.getMainObject() instanceof Street;
 		if (street != (b.getMainObject() instanceof Street)) {
-			// a street and what STANDS on it are different objects, but a bridge carrying its
-			// name is a piece OF it
+			// a bridge carrying the street name is a piece OF it, unless it is a destination of
+			// its own: pref-0111. Anything else standing on a street stays separate: pref-0080
 			SpatialSearchResult poi = street ? b : a;
 			if (!isStreetPart(poi) || ranking.isProminent(poi)) {
-				// unless the bridge is a destination of its own - the Golden Gate is not a piece
-				// of road furniture. A wikipedia article is not enough, a travel rating is
 				return false;
 			}
 			return MapUtils.getDistance(a.getLatLon(), b.getLatLon()) <= SAME_STREET_M;
 		}
 		double radius;
 		if (street) {
-			// a line's coordinate says little, so the city decides and the distance only guards
-			// against two genuinely different streets of the same name
+			// a line's coordinate says little, so the city decides: pref-0107
 			City c1 = ((Street) a.getMainObject()).getCity();
 			City c2 = ((Street) b.getMainObject()).getCity();
 			if (c1 == null || c2 == null || !c1.getName().equals(c2.getName())) {

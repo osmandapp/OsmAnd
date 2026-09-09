@@ -3,6 +3,7 @@ package net.osmand.search.core.spatial;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import net.osmand.binary.NameIndexReader;
@@ -21,13 +22,14 @@ import net.osmand.util.SearchAlgorithms;
  */
 public class SpatialSearchRanking {
 
-	// Fitted on the recorded preferences: the nearer of two ordinary POIs wins, a name matters
-	// only for what is close, and fame is worth about the gap between 3 km and 30 km.
+	// Fitted on spatial_search/preferences.jsonl - see preferences.md for how, and the pref ids
+	// below for the judgement each choice answers to.
 	public double wName = 0.15;
 	public double wType = 2.0;
-	public double wRating = 0.5;
+	public double wRating = 0.5;      // an ordinary POI: pref-0116, pref-0126
+	public double wRatingPlace = 2.0; // a settlement is looked for from anywhere: pref-0127
 	public double wNear = 2.0;
-	public double wExactName = 1.0; // the whole name IS the query, and the object owns that name
+	public double wExactName = 1.0; // the whole name IS the query: pref-0063, pref-0104
 
 	/** distance at which the proximity term is worth half of its maximum */
 	public double halfWeightKm = 3.0;
@@ -47,7 +49,7 @@ public class SpatialSearchRanking {
 	private static final double TYPE_VILLAGE = 0.88;
 	private static final double TYPE_LANDMARK = 0.80;
 	private static final double TYPE_BUILDING = 0.75;
-	private static final double TYPE_STREET = 0.55; // above a stop 0.35, below a village
+	private static final double TYPE_STREET = 0.55; // above a stop, below a village: pref-0106
 	private static final double TYPE_BOUNDARY = 0.60;
 	private static final double TYPE_POI = 0.50;
 	private static final double TYPE_POSTCODE = 0.40;
@@ -66,18 +68,17 @@ public class SpatialSearchRanking {
 	private static final Set<String> ADMIN_SUBTYPES = new HashSet<>(Arrays.asList(
 			"country", "state", "region", "province", "county"));
 
-	/** a settlement stored as a POI - the world basemap has New York only in this shape */
+	/** a settlement stored as a POI - the world basemap has New York only so: pref-0127 */
 	private static final Set<String> PLACE_SUBTYPES = new HashSet<>(Arrays.asList(
 			"city", "town", "village", "hamlet", "borough"));
 
-	/** objects a person travels TO by name; a hospital or a library is a service, not a landmark */
+	/** objects a person travels TO by name; a hospital is a service, not a landmark: pref-0068 */
 	private static final Set<String> LANDMARK_SUBTYPES = new HashSet<>(Arrays.asList(
 			"railway_station", "public_transport_station", "bus_station", "aerodrome",
 			"castle", "museum", "attraction", "memorial", "monument", "theatre", "stadium",
 			"townhall", "zoo", "peak", "mountain_pass", "wiki_place",
 			"marketplace", "square", "park", "cathedral", "monastery"));
 
-	/** the parts ONE facility is stored as - spread over its footprint, unlike a bench */
 	public boolean isSpreadNode(SpatialSearchResult r) {
 		SpatialSearchResultRef head = r == null ? null : r.getFirstRef();
 		if (head == null || !(head.atom.object instanceof Amenity a)) {
@@ -92,7 +93,7 @@ public class SpatialSearchRanking {
 			"public_transport_platform", "public_transport_stop_position", "subway_entrance",
 			"elevator", "ticket_validator", "entrance", "level_crossing", "motorway_junction"));
 
-	/** a node that describes something else, so its name is not evidence that it IS that place */
+	/** a node describing something else; its name is not evidence that it IS it: pref-0023 */
 	public boolean isSubordinateNode(SpatialSearchResult r) {
 		SpatialSearchResultRef head = r == null ? null : r.getFirstRef();
 		if (head == null || !(head.atom.object instanceof Amenity a)) {
@@ -113,11 +114,12 @@ public class SpatialSearchRanking {
 		double name = nameScore(head);
 		// a place you name exactly is what you asked for, wherever it is: "new york" from
 		// Amsterdam had the city 49th, under 45 outlets of a pizza chain
+		// undimmed by distance for what is looked for by name from anywhere: pref-0125, pref-0127
 		double exact = name == NAME_EXACT && isNotable(r)
-				? wExactName * (isPlace(head) ? 1 : near) : 0;
+				? wExactName * (isPlace(head) || isProminent(r) ? 1 : near) : 0;
 		return wName * name * near
 				+ wType * typeScore(head)
-				+ wRating * ratingScore(r)
+				+ (isPlace(head) ? wRatingPlace : wRating) * ratingScore(r)
 				+ wNear * near
 				+ exact;
 	}
@@ -136,8 +138,27 @@ public class SpatialSearchRanking {
 		if (queried.isEmpty()) {
 			return NAME_OTHER;
 		}
-		// the OBJECT's name: atom.name is the matched token, which would make every match exact
-		String name = normalizeName(atom.object != null ? atom.object.getName() : atom.name);
+		// any language the object carries, not only the default one: pref-0125
+		double best = NAME_OTHER;
+		if (atom.object != null) {
+			best = Math.max(best, compareToName(atom.object.getName(), queried));
+			Map<String, String> names = atom.object.getNamesMap(true);
+			if (names != null) {
+				for (String n : names.values()) {
+					best = Math.max(best, compareToName(n, queried));
+					if (best == NAME_EXACT) {
+						return NAME_EXACT;
+					}
+				}
+			}
+		} else {
+			best = Math.max(best, compareToName(atom.name, queried));
+		}
+		return best;
+	}
+
+	private static double compareToName(String rawName, String queried) {
+		String name = normalizeName(rawName);
 		if (name.isEmpty()) {
 			return NAME_OTHER;
 		}

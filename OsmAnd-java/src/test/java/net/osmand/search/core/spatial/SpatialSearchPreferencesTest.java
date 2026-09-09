@@ -71,7 +71,7 @@ public class SpatialSearchPreferencesTest {
 	 * unrelated reordering cannot break the build - only contradicting a recorded human
 	 * judgement can.
 	 */
-	private static final int MIN_SATISFIED = 63;
+	private static final int MIN_SATISFIED = 66;
 
 	/**
 	 * {@code OSMAND_SPATIAL_SCORE_RANKING=false} runs the same preferences against the old
@@ -157,12 +157,18 @@ public class SpatialSearchPreferencesTest {
 
 		for (List<Pref> group : byRun.values()) {
 			Pref head = group.get(0);
-			File obf = new File(mapsDir, head.map);
-			if (!obf.isFile()) {
+			// a record may name several maps ("Netherlands_....obf|World_basemap_2.obf"): the world
+			// basemap is where a far city lives, and a judgement about it needs both loaded
+			String[] mapNames = head.map.split("\\|");
+			boolean allMapsHere = true;
+			for (String m : mapNames) {
+				allMapsHere &= new File(mapsDir, m).isFile();
+			}
+			if (!allMapsHere) {
 				sc.noMap += group.size();
 				continue;
 			}
-			List<List<Long>> ordered = search(head.query, obf, mapsDir, head.location);
+			List<List<Long>> ordered = search(head.query, mapNames, mapsDir, head.location);
 			for (Pref p : group) {
 				if (!p.asserted) {
 					sc.notAsserted++;
@@ -247,14 +253,17 @@ public class SpatialSearchPreferencesTest {
 	 * united carries the ids of everything inside it - otherwise a merge would read as "the
 	 * object is gone" and quietly turn every preference about it into "not applicable".
 	 */
-	private List<List<Long>> search(String query, File obf, File mapsDir, LatLon location)
+	private List<List<Long>> search(String query, String[] mapNames, File mapsDir, LatLon location)
 			throws IOException {
 		List<BinaryMapIndexReader> files = new ArrayList<>();
 		File regions = new File(mapsDir, OsmandRegions.REGIONS_OCBF);
 		if (regions.isFile()) {
 			files.add(new BinaryMapIndexReader(new RandomAccessFile(regions, "r"), regions));
 		}
-		files.add(new BinaryMapIndexReader(new RandomAccessFile(obf, "r"), obf));
+		for (String m : mapNames) {
+			File obf = new File(mapsDir, m);
+			files.add(new BinaryMapIndexReader(new RandomAccessFile(obf, "r"), obf));
+		}
 		try {
 			SpatialTextSearchSettings settings = SpatialTextSearchSettings.defaultSettings();
 			settings.SCORE_RANKING = SCORE_RANKING;
