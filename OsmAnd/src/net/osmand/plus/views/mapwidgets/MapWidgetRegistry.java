@@ -293,7 +293,7 @@ public class MapWidgetRegistry {
 	                                             @NonNull List<WidgetsPanel> panels) {
 		List<Class<?>> includedWidgetTypes = new ArrayList<>();
 		boolean sidePanel = false, verticalPanel = false;
-		if (panels.contains(WidgetsPanel.LEFT) || panels.contains(WidgetsPanel.RIGHT)) {
+		if (panels.contains(WidgetsPanel.LEFT) || panels.contains(WidgetsPanel.RIGHT) || panels.contains(WidgetsPanel.ANDROID_AUTO)) {
 			sidePanel = true;
 			includedWidgetTypes.add(SideWidgetInfo.class);
 			includedWidgetTypes.add(SimpleWidgetInfo.class);

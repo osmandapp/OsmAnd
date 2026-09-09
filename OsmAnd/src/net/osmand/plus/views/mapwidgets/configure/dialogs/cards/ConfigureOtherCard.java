@@ -11,12 +11,15 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.controllers.MapFocusDialogController;
 import net.osmand.plus.settings.enums.MapFocus;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.DistanceByTapFragment;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.SpeedometerSettingsFragment;
+import net.osmand.plus.views.mapwidgets.configure.panel.ConfigureWidgetsFragment;
 
 public class ConfigureOtherCard extends MapBaseCard {
 
@@ -38,6 +41,7 @@ public class ConfigureOtherCard extends MapBaseCard {
 		setupDisplayPositionButton(appMode);
 		setupDistanceRulerButton(appMode);
 		setupSpeedometerButton(appMode);
+		setupAndroidAutoAWidgetsButton();
 
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.description), false);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_divider), false);
@@ -89,5 +93,24 @@ public class ConfigureOtherCard extends MapBaseCard {
 		description.setTextSize(COMPLEX_UNIT_PX, app.getResources().getDimensionPixelSize(R.dimen.default_sub_text_size));
 
 		AndroidUiHelper.updateVisibility(description, true);
+	}
+
+	private void setupAndroidAutoAWidgetsButton() {
+		boolean isAndroidAutoAvailable = InAppPurchaseUtils.isAndroidAutoAvailable(getMyApplication());
+		boolean isDrivingMode = appMode.isDerivedRoutingFrom(ApplicationMode.CAR);
+		boolean shouldShow = isAndroidAutoAvailable && isDrivingMode;
+
+		View button = view.findViewById(R.id.aa_widgets);
+
+		if (shouldShow) {
+			String title = getString(R.string.android_auto_widget_settings);
+			int iconId = nightMode ? R.drawable.ic_action_android_auto_colored_night : R.drawable.ic_action_android_auto_colored;
+			ConfigureButtonsCard.setupButton(button, title, null, iconId, true, nightMode);
+			button.setOnClickListener(v -> {
+				ConfigureWidgetsFragment.showInstance(getMapActivity(), WidgetsPanel.ANDROID_AUTO, appMode, null);
+			});
+		}
+
+		AndroidUiHelper.updateVisibility(button, shouldShow);
 	}
 }

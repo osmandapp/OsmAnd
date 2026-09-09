@@ -1,5 +1,9 @@
 package net.osmand.plus.auto;
 
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MATCHING_PANELS_MODE;
+
 import android.graphics.Canvas;
 import android.graphics.Path;
 import android.graphics.Rect;
@@ -16,18 +20,18 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
-import net.osmand.plus.views.mapwidgets.WidgetsInitializer;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.appearance.ResolvedPanelAppearance;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
-
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Prototype of a generic widgets panel drawn over the Android Auto map surface.
@@ -72,12 +76,12 @@ public class CarWidgetsPanel {
 	private MapActivity cachedMapActivity;
 	private ApplicationMode cachedAppMode;
 	private Boolean cachedNightMode;
-	private String cachedWidgetIds;
+	private List<String> cachedWidgetIds = new ArrayList<>();
 	private int firstVisibleWidget;
 	private int lastVisibleCount;
 
 	public CarWidgetsPanel(@NonNull OsmandApplication app) {
-		this(app, WidgetsPanel.RIGHT);
+		this(app, WidgetsPanel.ANDROID_AUTO);
 	}
 
 	public CarWidgetsPanel(@NonNull OsmandApplication app, @NonNull WidgetsPanel panel) {
@@ -223,64 +227,58 @@ public class CarWidgetsPanel {
 		if (mapActivity == null) {
 			// Widgets can only be created together with a map activity. Once created they stay
 			// valid and keep being updated even after the activity is gone.
+			// todo: NB: actually, a lot of widgets call methods of mapActivity. This also needs decoupling.
 			return widgets;
 		}
-		String widgetIds = app.getSettings().AA_WIDGETS.getModeValue(appMode);
+
+		List<MapWidgetInfo> widgetInfos = getWidgetInfos(mapActivity, appMode);
+		List<String> widgetIds = widgetInfos.stream().map(v -> v.key).collect(Collectors.toList());
+
 		if (mapActivity != cachedMapActivity || appMode != cachedAppMode
 				|| !Boolean.valueOf(nightMode).equals(cachedNightMode)
-				|| !Algorithms.stringsEqual(widgetIds, cachedWidgetIds)) {
+				|| !Algorithms.objectEquals(widgetIds, cachedWidgetIds)) {
 			cachedMapActivity = mapActivity;
 			cachedAppMode = appMode;
 			cachedNightMode = nightMode;
 			cachedWidgetIds = widgetIds;
-			recreateWidgets(mapActivity, appMode, nightMode, widgetIds);
+			recreateWidgets(mapActivity, appMode, nightMode, widgetInfos);
 		}
 		return widgets;
 	}
 
+	private List<MapWidgetInfo> getWidgetInfos(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode) {
+		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(mapActivity);
+		int enabledWidgetsFilter = AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE;
+		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		Set<MapWidgetInfo> widgetInfos = widgetRegistry.getWidgetsForPanel(mapActivity, appMode, layoutMode, enabledWidgetsFilter, List.of(panel));
+		return new ArrayList<>(widgetInfos);
+	}
+
 	private void recreateWidgets(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode,
-			boolean nightMode, @Nullable String widgetIds) {
+			boolean nightMode, @Nullable List<MapWidgetInfo> widgetInfos) {
 		widgets.clear();
 		firstVisibleWidget = 0;
 
-		List<String> selectedIds = getSelectedWidgetIds(widgetIds);
-		if (selectedIds.isEmpty()) {
+		if (Algorithms.isEmpty(widgetInfos)) {
 			return;
 		}
 		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(mapActivity);
-		Map<String, MapWidgetInfo> available = new HashMap<>();
-		for (MapWidgetInfo info : WidgetsInitializer.createAllControls(mapActivity, appMode, layoutMode)) {
-			// Custom copies of a widget share the type id, the first one is enough for the car.
-			available.putIfAbsent(info.getWidgetType().id, info);
-		}
+
 		float density = app.getResources().getDisplayMetrics().density;
 		ResolvedPanelAppearance appearance = app.getPanelAppearanceSettingsManager()
 				.resolveCommitted(panel, layoutMode, nightMode, false, density, true);
-		for (String id : selectedIds) {
-			MapWidgetInfo info = available.get(id);
-			if (info != null) {
+
+		Set<String> addedWidgetTypes = new HashSet<>();
+		for (MapWidgetInfo info : widgetInfos) {
+			// Custom copies of a widget share the type id, the first one is enough for the car.
+			String widgetTypeId = info.getWidgetType().id;
+			if (!addedWidgetTypes.contains(widgetTypeId)) {
+				addedWidgetTypes.add(widgetTypeId);
 				MapWidget widget = info.widget;
 				widget.applyPanelAppearance(appearance);
 				widgets.add(widget);
 			}
 		}
-	}
-
-	/**
-	 * @return ids of the widgets selected for the car screen, in the order they are shown.
-	 */
-	@NonNull
-	public static List<String> getSelectedWidgetIds(@Nullable String widgetIds) {
-		if (Algorithms.isEmpty(widgetIds)) {
-			return Collections.emptyList();
-		}
-		List<String> ids = new ArrayList<>();
-		for (String id : widgetIds.split(WIDGETS_SEPARATOR)) {
-			if (!Algorithms.isEmpty(id) && !ids.contains(id)) {
-				ids.add(id);
-			}
-		}
-		return ids;
 	}
 
 	public void clearWidgets() {

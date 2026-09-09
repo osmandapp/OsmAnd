@@ -11,6 +11,8 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="android_auto_widget_settings">Android Auto widgets</string>
+	<string name="android_auto_widget_panel">Android Auto widgets panel</string>
 	<string name="astro_eclipse_column_below_horizon">Below horizon</string>
 	<string name="share_favorites_media_preparation_failed">Couldn\'t include attached media. Sharing points only.</string>
 	<plurals name="files_count">

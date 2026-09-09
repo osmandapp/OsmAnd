@@ -1495,7 +1495,8 @@ public class OsmandSettings {
 			new EnumStringPreference<>(this, "aa_map_mode", AndroidAutoMapMode.AUTOMATIC, AndroidAutoMapMode.values()).makeProfile().cache();
 	public final OsmandPreference<Boolean> AA_SHOW_WIDGETS_PANEL = new BooleanPreference(this, "aa_show_widgets_panel", true).makeProfile().cache();
 	/** Widget ids shown on the Android Auto widgets panel, separated by {@code ;}. */
-	public final CommonPreference<String> AA_WIDGETS = new StringPreference(this, "aa_widgets", "speed;altitude").makeProfile().cache();
+	public ListStringPreference AA_WIDGETS_ORDER = (ListStringPreference) new ListStringPreference(this,
+															"aa_widgets_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.ANDROID_AUTO.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
 
 	public final OsmandPreference<Boolean> SHOW_POI_LABEL = new BooleanPreference(this, "show_poi_label", false).makeProfile();
 

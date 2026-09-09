@@ -93,12 +93,6 @@ public final class SettingsScreen extends BaseAndroidAutoScreen {
 								.build())
 				.build()
 		);
-		configureMapBuilder.addItem(new Row.Builder()
-				.setTitle(getApp().getString(R.string.shared_string_widgets))
-				.setBrowsable(true)
-				.setOnClickListener(() -> getScreenManager().push(new CarWidgetsScreen(getCarContext())))
-				.build()
-		);
 
 		templateBuilder.addSectionedList(
 				SectionedItemList.create(

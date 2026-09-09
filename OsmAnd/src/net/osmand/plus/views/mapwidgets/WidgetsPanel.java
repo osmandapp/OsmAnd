@@ -27,7 +27,8 @@ public enum WidgetsPanel {
 	LEFT(R.string.map_widget_left, R.drawable.ic_action_device_portrait_panel_left, R.drawable.ic_action_device_landscape_panel_left),
 	RIGHT(R.string.map_widget_right, R.drawable.ic_action_device_portrait_panel_right, R.drawable.ic_action_device_landscape_panel_right),
 	TOP(R.string.top_widgets_panel, R.drawable.ic_action_device_portrait_panel_top, R.drawable.ic_action_device_landscape_panel_top),
-	BOTTOM(R.string.bottom_widgets_panel, R.drawable.ic_action_device_portrait_panel_bottom, R.drawable.ic_action_device_landscape_panel_bottom);
+	BOTTOM(R.string.bottom_widgets_panel, R.drawable.ic_action_device_portrait_panel_bottom, R.drawable.ic_action_device_landscape_panel_bottom),
+	ANDROID_AUTO(R.string.android_auto_widget_panel, R.drawable.ic_action_device_portrait_panel_right, R.drawable.ic_action_device_landscape_panel_right);
 
 	public static final String PAGE_SEPARATOR = ";";
 	public static final String WIDGET_SEPARATOR = ",";
@@ -37,6 +38,7 @@ public enum WidgetsPanel {
 	private static final List<String> ORIGINAL_RIGHT_ORDER = new ArrayList<>();
 	private static final List<String> ORIGINAL_TOP_ORDER = new ArrayList<>();
 	private static final List<String> ORIGINAL_BOTTOM_ORDER = new ArrayList<>();
+	private static final List<String> ORIGINAL_ANDROID_AUTO_ORDER = new ArrayList<>();
 
 	static {
 		for (WidgetType widget : WidgetType.values()) {
@@ -50,6 +52,8 @@ public enum WidgetsPanel {
 				ORIGINAL_RIGHT_ORDER.add(id);
 			} else if (defaultPanel == BOTTOM) {
 				ORIGINAL_BOTTOM_ORDER.add(id);
+			} else if (defaultPanel == ANDROID_AUTO) {
+				ORIGINAL_ANDROID_AUTO_ORDER.add(id);
 			} else {
 				throw new IllegalStateException("Unsupported panel");
 			}
@@ -83,7 +87,7 @@ public enum WidgetsPanel {
 
 	@NonNull
 	private WidgetsPanel getRtlPanel(boolean rtl) {
-		if (!rtl || this == TOP || this == BOTTOM) {
+		if (!rtl || this == TOP || this == BOTTOM || this == ANDROID_AUTO) {
 			return this;
 		} else if (this == LEFT) {
 			return RIGHT;
@@ -101,6 +105,8 @@ public enum WidgetsPanel {
 			return new ArrayList<>(ORIGINAL_RIGHT_ORDER);
 		} else if (this == TOP) {
 			return new ArrayList<>(ORIGINAL_TOP_ORDER);
+		} else if (this == ANDROID_AUTO) {
+			return new ArrayList<>(ORIGINAL_ANDROID_AUTO_ORDER);
 		} else {
 			return new ArrayList<>(ORIGINAL_BOTTOM_ORDER);
 		}
@@ -210,6 +216,8 @@ public enum WidgetsPanel {
 			return settings.getLayoutPreference(settings.TOP_WIDGET_PANEL_ORDER, layoutMode);
 		} else if (this == BOTTOM) {
 			return settings.getLayoutPreference(settings.BOTTOM_WIDGET_PANEL_ORDER, layoutMode);
+		} else if (this == ANDROID_AUTO) {
+			return settings.AA_WIDGETS_ORDER;
 		}
 		throw new IllegalStateException("Unsupported panel");
 	}
