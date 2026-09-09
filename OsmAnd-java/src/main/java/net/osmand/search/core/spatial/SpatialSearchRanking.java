@@ -88,6 +88,21 @@ public class SpatialSearchRanking {
 			"townhall", "zoo", "peak", "mountain_pass",
 			"marketplace", "square", "park", "cathedral", "monastery"));
 
+	/**
+	 * A node that exists to describe something else - a platform, a stop position, an entrance,
+	 * a motorway junction. Named after the place it serves, so its name is never evidence that
+	 * it IS that place.
+	 */
+	public static boolean isSubordinateNode(SpatialSearchResult r) {
+		SpatialSearchResultRef head = r == null ? null : r.getFirstRef();
+		if (head == null || !(head.atom.object instanceof Amenity a)) {
+			return false;
+		}
+		String subType = a.getSubType();
+		return subType != null
+				&& (INFRASTRUCTURE_SUBTYPES.contains(subType) || STOP_SUBTYPES.contains(subType));
+	}
+
 	/** higher is better; only meaningful within one bucket of the structural tiers */
 	public double score(SpatialSearchResult r, LatLon center) {
 		SpatialSearchResultRef head = r.getFirstRef();

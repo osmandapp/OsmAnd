@@ -561,9 +561,17 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		// objs.size stays a hard tier: an answer found in ONE object always beats the same words
 		// stitched from two. Folding it into the score put "Dr Lucas" 74th behind every
 		// <something Lucas> x <something Drive> pair.
-		res = Integer.compare(o1.objs.size(), o2.objs.size());
-		if (res != 0) {
-			return res;
+		//
+		// It does NOT apply when one side is a node named after the thing it serves. Dutch stops
+		// carry the street in their own name ("Amsterdam, Beethovenstraat"), so the stop matches
+		// both words as ONE object while the street is street + city = two, and the tier hands
+		// the stop the top row: 59 of 61 "<street> <city>" queries measured in Amsterdam,
+		// Rotterdam and Utrecht. Below the tier the score puts the street first on its own.
+		if (!SpatialSearchRanking.isSubordinateNode(o1) && !SpatialSearchRanking.isSubordinateNode(o2)) {
+			res = Integer.compare(o1.objs.size(), o2.objs.size());
+			if (res != 0) {
+				return res;
+			}
 		}
 		if (o1.parent.SCORE_RANKING) {
 			// the 7 tiers below replaced by one score, see SpatialSearchRanking
