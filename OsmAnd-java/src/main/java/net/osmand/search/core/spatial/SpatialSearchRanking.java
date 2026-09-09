@@ -2,6 +2,7 @@ package net.osmand.search.core.spatial;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -14,23 +15,24 @@ import net.osmand.data.MapObject;
 import net.osmand.search.core.spatial.SpatialSearchResult.SpatialSearchResultRef;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 import net.osmand.util.SearchAlgorithms;
 
 /**
- * One bounded score in place of tiers 4..11 of {@link SpatialSearchResult#compare}, so a large gap
- * on one signal can outweigh a small gap on another. Weights fitted on spatial_search/preferences.jsonl.
+ * Orders results by one bounded score instead of a lexicographic ladder, so a large gap on one
+ * signal can outweigh a small gap on another. Every weight and every list below is fitted on
+ * spatial_search/preferences.jsonl; the pref ids say which judgement each one answers to, and
+ * preferences.md tells how they were collected.
  */
 public class SpatialSearchRanking {
 
-	// Fitted on spatial_search/preferences.jsonl - see preferences.md for how, and the pref ids
-	// below for the judgement each choice answers to.
-	public double wName = 0.15;
+	// weights
+	public double wName = 0.15;       // small: pref-0063 (a word for a kind means nothing)
 	public double wType = 2.0;
 	public double wRating = 0.5;      // an ordinary POI: pref-0116, pref-0126
 	public double wRatingPlace = 2.0; // a settlement is looked for from anywhere: pref-0127
 	public double wNear = 2.0;
-	public double wExactName = 1.0; // the whole name IS the query: pref-0063, pref-0104
-
+	public double wExactName = 1.0;   // the whole name IS the query: pref-0063, pref-0104
 	/** distance at which the proximity term is worth half of its maximum */
 	public double halfWeightKm = 3.0;
 	/** elo above MIN_ELO_RATING at which the rating term saturates */
@@ -43,7 +45,7 @@ public class SpatialSearchRanking {
 	private static final double NAME_OTHER = 0.50;
 	private static final double NAME_KIND_ONLY = 0.15;
 
-	// type
+	// kind
 	private static final double TYPE_ADMIN = 1.00; // a country or a region IS the place it names
 	private static final double TYPE_CITY = 0.95;
 	private static final double TYPE_VILLAGE = 0.88;
@@ -56,15 +58,7 @@ public class SpatialSearchRanking {
 	private static final double TYPE_STOP = 0.35;
 	private static final double TYPE_INFRASTRUCTURE = 0.10;
 
-	/** nodes that describe a place rather than being it - a station has a dozen of them */
-	private static final Set<String> INFRASTRUCTURE_SUBTYPES = new HashSet<>(Arrays.asList(
-			"public_transport_platform", "public_transport_stop_position", "subway_entrance",
-			"elevator", "ticket_validator", "entrance", "level_crossing", "boundary_stone",
-			"street_lamp", "waste_basket", "bench", "vending_machine", "motorway_junction"));
-
-	private static final Set<String> STOP_SUBTYPES = new HashSet<>(Arrays.asList(
-			"bus_stop", "tram_stop", "railway_halt", "taxi"));
-
+	/** administrative areas stored as a POI */
 	private static final Set<String> ADMIN_SUBTYPES = new HashSet<>(Arrays.asList(
 			"country", "state", "region", "province", "county"));
 
@@ -79,32 +73,85 @@ public class SpatialSearchRanking {
 			"townhall", "zoo", "peak", "mountain_pass", "wiki_place",
 			"marketplace", "square", "park", "cathedral", "monastery"));
 
-	public boolean isSpreadNode(SpatialSearchResult r) {
-		SpatialSearchResultRef head = r == null ? null : r.getFirstRef();
-		if (head == null || !(head.atom.object instanceof Amenity a)) {
-			return false;
-		}
-		String subType = a.getSubType();
-		return subType != null && (SPREAD_SUBTYPES.contains(subType) || STOP_SUBTYPES.contains(subType));
-	}
-
-	/** the parts a stop or a station is stored as */
-	private static final Set<String> SPREAD_SUBTYPES = new HashSet<>(Arrays.asList(
-			"public_transport_platform", "public_transport_stop_position", "subway_entrance",
-			"elevator", "ticket_validator", "entrance", "level_crossing", "motorway_junction"));
-
 	/** a node describing something else; its name is not evidence that it IS it: pref-0023 */
-	public boolean isSubordinateNode(SpatialSearchResult r) {
-		SpatialSearchResultRef head = r == null ? null : r.getFirstRef();
-		if (head == null || !(head.atom.object instanceof Amenity a)) {
-			return false;
+	private static final Set<String> INFRASTRUCTURE_SUBTYPES = new HashSet<>(Arrays.asList(
+			SpatialSearchTags.PUBLIC_TRANSPORT_PLATFORM, SpatialSearchTags.PUBLIC_TRANSPORT_STOP,
+			SpatialSearchTags.SUBWAY_ENTRANCE, SpatialSearchTags.ELEVATOR,
+			SpatialSearchTags.TICKET_VALIDATOR, SpatialSearchTags.ENTRANCE,
+			SpatialSearchTags.LEVEL_CROSSING, SpatialSearchTags.MOTORWAY_JUNCTION,
+			"boundary_stone", "street_lamp", "waste_basket", "bench", "vending_machine"));
+
+	private static final Set<String> STOP_SUBTYPES = new HashSet<>(Arrays.asList(
+			SpatialSearchTags.BUS_STOP, SpatialSearchTags.TRAM_STOP, SpatialSearchTags.RAILWAY_HALT,
+			"taxi"));
+
+	/** computed once per result: the value goes stale when deduplication changes getTotalRating() */
+	private final Map<SpatialSearchResult, Double> scores = new IdentityHashMap<>();
+
+	public void prepare(List<SpatialSearchResult> results, LatLon center) {
+		scores.clear();
+		for (SpatialSearchResult r : results) {
+			scores.put(r, score(r, center));
 		}
-		String subType = a.getSubType();
-		return subType != null
-				&& (INFRASTRUCTURE_SUBTYPES.contains(subType) || STOP_SUBTYPES.contains(subType));
 	}
 
-	/** higher is better; only meaningful within one bucket of the structural tiers */
+	public double scoreOf(SpatialSearchResult r) {
+		Double d = scores.get(r);
+		return d == null ? 0 : d;
+	}
+
+	/**
+	 * The order of the results. Above the score sit the tiers that are not a matter of degree:
+	 * a category suggestion, how many query words matched, extra or missing words, and how many
+	 * objects the answer is stitched from.
+	 */
+	public int compare(SpatialSearchResult o1, SpatialSearchResult o2) {
+		int res = -Boolean.compare(o1.isPoiCategory(), o2.isPoiCategory());
+		if (res != 0) {
+			return res;
+		}
+		res = -Integer.compare(o1.parent.tCount, o2.parent.tCount);
+		if (res != 0) {
+			return res;
+		}
+		res = -Integer.compare(o1.surplusWords, o2.surplusWords);
+		if (res != 0) {
+			return res;
+		}
+		res = Integer.compare(answerParts(o1), answerParts(o2));
+		if (res != 0) {
+			return res;
+		}
+		res = -Double.compare(scoreOf(o1), scoreOf(o2));
+		if (res != 0) {
+			return res;
+		}
+		return -Long.compare(o1.getFirstRef().atom.id, o2.getFirstRef().atom.id);
+	}
+
+	/**
+	 * How many things the answer is stitched from: one object beats the same words found in two,
+	 * which keeps "Dr Lucas" off the 74th row. Two corrections, per RESULT so the comparator stays
+	 * transitive: "<object> in <city>" counts as one when the city was named by its own name
+	 * (pref-0117, pref-0121), and a node named after what it serves never counts as one (pref-0087).
+	 */
+	public int answerParts(SpatialSearchResult r) {
+		int parts = r.objs.size();
+		if (parts == 2) {
+			SpatialSearchResultRef ref = r.objs.get(1);
+			NameIndexAtom second = ref.atom;
+			if ((second.isCity() || second.isCityVillage() || second.isBoundary())
+					&& nameScore(ref) >= NAME_PREFIX) {
+				parts = 1;
+			}
+		}
+		if (parts < 2 && isSubordinateNode(r)) {
+			parts = 2;
+		}
+		return parts;
+	}
+
+	/** higher is better; only meaningful within one bucket of the tiers above it */
 	public double score(SpatialSearchResult r, LatLon center) {
 		SpatialSearchResultRef head = r.getFirstRef();
 		if (head == null) {
@@ -112,11 +159,9 @@ public class SpatialSearchRanking {
 		}
 		double near = nearScore(r, center);
 		double name = nameScore(head);
-		// a place you name exactly is what you asked for, wherever it is: "new york" from
-		// Amsterdam had the city 49th, under 45 outlets of a pizza chain
 		// undimmed by distance for what is looked for by name from anywhere: pref-0125, pref-0127
-		double exact = name == NAME_EXACT && isNotable(r)
-				? wExactName * (isPlace(head) || isProminent(r) ? 1 : near) : 0;
+		double exact = name == NAME_EXACT && ownsItsName(r)
+				? wExactName * (isPlace(head) || hasTravelRating(r) ? 1 : near) : 0;
 		return wName * name * near
 				+ wType * typeScore(head)
 				+ (isPlace(head) ? wRatingPlace : wRating) * ratingScore(r)
@@ -131,47 +176,27 @@ public class SpatialSearchRanking {
 			return NAME_OTHER;
 		}
 		if (atom.name.startsWith(NameIndexReader.POI_CATEGORY_PREFIX)) {
-			// matched through the poi category key: "farm" -> Podere Colombaio
 			return NAME_KIND_ONLY;
 		}
 		String queried = queriedWords(ref);
 		if (queried.isEmpty()) {
 			return NAME_OTHER;
 		}
+		if (atom.object == null) {
+			return compareToName(atom.name, queried);
+		}
 		// any language the object carries, not only the default one: pref-0125
-		double best = NAME_OTHER;
-		if (atom.object != null) {
-			best = Math.max(best, compareToName(atom.object.getName(), queried));
-			Map<String, String> names = atom.object.getNamesMap(true);
-			if (names != null) {
-				for (String n : names.values()) {
-					best = Math.max(best, compareToName(n, queried));
-					if (best == NAME_EXACT) {
-						return NAME_EXACT;
-					}
+		double best = compareToName(atom.object.getName(), queried);
+		Map<String, String> names = atom.object.getNamesMap(true);
+		if (names != null) {
+			for (String n : names.values()) {
+				best = Math.max(best, compareToName(n, queried));
+				if (best == NAME_EXACT) {
+					return NAME_EXACT;
 				}
 			}
-		} else {
-			best = Math.max(best, compareToName(atom.name, queried));
 		}
 		return best;
-	}
-
-	private static double compareToName(String rawName, String queried) {
-		String name = normalizeName(rawName);
-		if (name.isEmpty()) {
-			return NAME_OTHER;
-		}
-		if (name.equals(queried)) {
-			return NAME_EXACT;
-		}
-		if (name.startsWith(queried)) {
-			return NAME_PREFIX;
-		}
-		if (name.contains(queried)) {
-			return NAME_CONTAINS;
-		}
-		return NAME_OTHER;
 	}
 
 	public double typeScore(SpatialSearchResultRef ref) {
@@ -220,9 +245,28 @@ public class SpatialSearchRanking {
 		return TYPE_POI;
 	}
 
-	/** the query named this object, rather than reaching it through an alias or a category */
-	public boolean matchesOwnName(SpatialSearchResultRef ref) {
-		return nameScore(ref) >= NAME_PREFIX;
+	/** bounded, so a famous place outranks an unknown one but not a much closer one */
+	public double ratingScore(SpatialSearchResult r) {
+		double over = r.getTotalRating() - r.parent.MIN_ELO_RATING;
+		return Math.max(0, Math.min(1, over / ratingSpan));
+	}
+
+	public double nearScore(SpatialSearchResult r, LatLon center) {
+		if (center == null || r.getLatLon() == null) {
+			return 0;
+		}
+		double km = MapUtils.getDistance(center, r.getLatLon()) / 1000.0;
+		return 1.0 / (1.0 + Math.max(0, km) / halfWeightKm);
+	}
+
+	/** a node that describes something else, so its name is not evidence that it IS that place */
+	public boolean isSubordinateNode(SpatialSearchResult r) {
+		SpatialSearchResultRef head = r.getFirstRef();
+		if (head == null || !(head.atom.object instanceof Amenity a) || a.getSubType() == null) {
+			return false;
+		}
+		return INFRASTRUCTURE_SUBTYPES.contains(a.getSubType())
+				|| STOP_SUBTYPES.contains(a.getSubType());
 	}
 
 	/** a settlement or an administrative area, however the map happens to store it */
@@ -231,41 +275,39 @@ public class SpatialSearchRanking {
 		if (atom.isCity() || atom.isCityVillage()) {
 			return true;
 		}
-		if (atom.object instanceof Amenity a && a.getSubType() != null) {
-			return ADMIN_SUBTYPES.contains(a.getSubType()) || PLACE_SUBTYPES.contains(a.getSubType());
-		}
-		return false;
+		return atom.object instanceof Amenity a && a.getSubType() != null
+				&& (ADMIN_SUBTYPES.contains(a.getSubType()) || PLACE_SUBTYPES.contains(a.getSubType()));
 	}
 
 	/** a travel rating above the floor: known well enough to be a destination, not a detail */
-	public boolean isProminent(SpatialSearchResult r) {
+	private boolean hasTravelRating(SpatialSearchResult r) {
 		return r.getTotalRating() > r.parent.MIN_ELO_RATING;
 	}
 
-	/** carries a wikipedia article or a travel rating, so the name is its own, not a coincidence */
-	public boolean isNotable(SpatialSearchResult r) {
-		if (r.getTotalRating() > r.parent.MIN_ELO_RATING) {
+	/** notable enough that carrying the name is not a coincidence: a rating or a wikipedia article */
+	private boolean ownsItsName(SpatialSearchResult r) {
+		if (hasTravelRating(r)) {
 			return true;
 		}
 		MapObject o = r.getFirstRef() == null ? null : r.getFirstRef().atom.object;
 		return o instanceof Amenity a && !Algorithms.isEmpty(a.getAdditionalInfo(Amenity.WIKIDATA));
 	}
 
-	/** bounded, so a famous place outranks an unknown one but not a much closer one */
-	public double ratingScore(SpatialSearchResult r) {
-		double over = r.getTotalRating() - r.parent.MIN_ELO_RATING;
-		return Math.max(0, Math.min(1, over / ratingSpan));
-	}
-
-	public double nearScore(SpatialSearchResult r, LatLon center) {
-		if (center == null) {
-			return 0;
+	private static double compareToName(String rawName, String queried) {
+		String name = normalizeName(rawName);
+		if (name.isEmpty()) {
+			return NAME_OTHER;
 		}
-		double km = SpatialSearchResult.getDistance(r, center) / 1000.0;
-		if (km < 0) {
-			km = 0;
+		if (name.equals(queried)) {
+			return NAME_EXACT;
 		}
-		return 1.0 / (1.0 + km / halfWeightKm);
+		if (name.startsWith(queried)) {
+			return NAME_PREFIX;
+		}
+		if (name.contains(queried)) {
+			return NAME_CONTAINS;
+		}
+		return NAME_OTHER;
 	}
 
 	private static String queriedWords(SpatialSearchResultRef ref) {
@@ -275,7 +317,7 @@ public class SpatialSearchRanking {
 		}
 		StringBuilder sb = new StringBuilder();
 		for (SpatialSearchToken t : tokens) {
-			if (t.word != null && !t.word.isEmpty()) {
+			if (!Algorithms.isEmpty(t.word)) {
 				if (sb.length() > 0) {
 					sb.append(' ');
 				}
@@ -287,7 +329,10 @@ public class SpatialSearchRanking {
 
 	/** drops the "(district)" suffix deduplication adds, so a street still matches its own name */
 	private static String normalizeName(String s) {
-		int bracket = s == null ? -1 : s.lastIndexOf(" (");
+		if (s == null) {
+			return "";
+		}
+		int bracket = s.lastIndexOf(" (");
 		if (bracket > 0 && s.endsWith(")")) {
 			s = s.substring(0, bracket);
 		}

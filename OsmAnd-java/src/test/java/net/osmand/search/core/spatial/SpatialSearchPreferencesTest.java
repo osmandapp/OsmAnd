@@ -73,18 +73,6 @@ public class SpatialSearchPreferencesTest {
 	 */
 	private static final int MIN_SATISFIED = 66;
 
-	/**
-	 * {@code OSMAND_SPATIAL_SCORE_RANKING=false} runs the same preferences against the old
-	 * lexicographic ladder. That comparison is the reason this file exists: the number is
-	 * comparable across ranker versions, which a golden result list can never be.
-	 *
-	 * <p>An environment variable rather than a system property because gradle passes the
-	 * environment through to the test JVM and does not pass {@code -D} (the property is still
-	 * read, so it works when the test is launched from an IDE).
-	 */
-	private static final boolean SCORE_RANKING = !"false".equalsIgnoreCase(
-			setting("osmand.spatial.scoreRanking", "OSMAND_SPATIAL_SCORE_RANKING"));
-
 	private static String setting(String property, String env) {
 		String v = System.getProperty(property);
 		return v != null ? v : System.getenv(env);
@@ -128,7 +116,6 @@ public class SpatialSearchPreferencesTest {
 		}
 		Score sc = check(prefs, mapsDir);
 
-		System.out.printf("ranking: %s%n", SCORE_RANKING ? "score" : "ladder (old)");
 		System.out.printf("preferences: %d satisfied, %d violated, %d not applicable "
 						+ "(object not returned), %d absorbed by deduplication, %d below the "
 						+ "top %d, %d not asserted, %d without a map%n",
@@ -139,7 +126,6 @@ public class SpatialSearchPreferencesTest {
 		}
 		Assume.assumeTrue("none of the maps named by preferences.jsonl are present",
 				sc.satisfied + sc.violated + sc.notApplicable > 0);
-		Assume.assumeTrue("old ranking is measured for comparison, not gated", SCORE_RANKING);
 		Assert.assertTrue(String.format(
 				"satisfied preferences dropped to %d, the recorded floor is %d - a human "
 						+ "judgement was contradicted, see the list above",
@@ -266,7 +252,6 @@ public class SpatialSearchPreferencesTest {
 		}
 		try {
 			SpatialTextSearchSettings settings = SpatialTextSearchSettings.defaultSettings();
-			settings.SCORE_RANKING = SCORE_RANKING;
 			SpatialSearchContext ctx = new SpatialSearchContext(settings, files,
 					new SpatialPoiSearch(MapPoiTypes.getDefault()), location);
 			SpatialSearchResults res = new SpatialTextSearch().searchAPI(query, ctx);

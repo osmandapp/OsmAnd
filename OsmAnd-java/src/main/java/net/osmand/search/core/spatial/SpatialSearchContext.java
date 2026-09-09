@@ -61,6 +61,7 @@ public class SpatialSearchContext {
 	final SpatialSearchStats stats = new SpatialSearchStats();
 	
 	public ResultMatcher<SpatialSearchResult> resultMatcher;
+	final SpatialSearchRanking ranking = new SpatialSearchRanking();
 	
 	public boolean isCancelled() {
 		return resultMatcher != null && resultMatcher.isCancelled();
@@ -138,8 +139,6 @@ public class SpatialSearchContext {
 		}
 
 	}
-
-	public final SpatialSearchRanking ranking = new SpatialSearchRanking();
 
 	public SpatialSearchContext(SpatialTextSearchSettings settings, List<BinaryMapIndexReader> files,
 			SpatialPoiSearch poiSearch, LatLon location) {
