@@ -57,39 +57,30 @@ public class SpatialSearchRanking {
 	private static final double TYPE_INFRASTRUCTURE = 0.10;
 
 	/** nodes that describe a place rather than being it - a station has a dozen of them */
-	private static final Set<String> INFRASTRUCTURE_SUBTYPES = new HashSet<>(Arrays.asList(
+	static final Set<String> INFRASTRUCTURE_SUBTYPES = new HashSet<>(Arrays.asList(
 			"public_transport_platform", "public_transport_stop_position", "subway_entrance",
 			"elevator", "ticket_validator", "entrance", "level_crossing", "boundary_stone",
 			"street_lamp", "waste_basket", "bench", "vending_machine", "motorway_junction"));
 
-	private static final Set<String> STOP_SUBTYPES = new HashSet<>(Arrays.asList(
+	static final Set<String> STOP_SUBTYPES = new HashSet<>(Arrays.asList(
 			"bus_stop", "tram_stop", "railway_halt", "taxi"));
 
-	private static final Set<String> ADMIN_SUBTYPES = new HashSet<>(Arrays.asList(
+	static final Set<String> ADMIN_SUBTYPES = new HashSet<>(Arrays.asList(
 			"country", "state", "region", "province", "county"));
 
 	/** a settlement stored as a POI - the world basemap has New York only so: pref-0127 */
-	private static final Set<String> PLACE_SUBTYPES = new HashSet<>(Arrays.asList(
+	static final Set<String> PLACE_SUBTYPES = new HashSet<>(Arrays.asList(
 			"city", "town", "village", "hamlet", "borough"));
 
 	/** objects a person travels TO by name; a hospital is a service, not a landmark: pref-0068 */
-	private static final Set<String> LANDMARK_SUBTYPES = new HashSet<>(Arrays.asList(
+	static final Set<String> LANDMARK_SUBTYPES = new HashSet<>(Arrays.asList(
 			"railway_station", "public_transport_station", "bus_station", "aerodrome",
 			"castle", "museum", "attraction", "memorial", "monument", "theatre", "stadium",
 			"townhall", "zoo", "peak", "mountain_pass", "wiki_place",
 			"marketplace", "square", "park", "cathedral", "monastery"));
 
-	public boolean isSpreadNode(SpatialSearchResult r) {
-		SpatialSearchResultRef head = r == null ? null : r.getFirstRef();
-		if (head == null || !(head.atom.object instanceof Amenity a)) {
-			return false;
-		}
-		String subType = a.getSubType();
-		return subType != null && (SPREAD_SUBTYPES.contains(subType) || STOP_SUBTYPES.contains(subType));
-	}
-
 	/** the parts a stop or a station is stored as */
-	private static final Set<String> SPREAD_SUBTYPES = new HashSet<>(Arrays.asList(
+	static final Set<String> SPREAD_SUBTYPES = new HashSet<>(Arrays.asList(
 			"public_transport_platform", "public_transport_stop_position", "subway_entrance",
 			"elevator", "ticket_validator", "entrance", "level_crossing", "motorway_junction"));
 
@@ -261,7 +252,7 @@ public class SpatialSearchRanking {
 	}
 
 	/** a travel rating above the floor: known well enough to be a destination, not a detail */
-	public boolean isProminent(SpatialSearchResult r) {
+	public static boolean isProminent(SpatialSearchResult r) {
 		return r.getTotalRating() > r.parent.MIN_ELO_RATING;
 	}
 

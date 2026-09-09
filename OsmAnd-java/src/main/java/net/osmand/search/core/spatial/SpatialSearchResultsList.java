@@ -29,6 +29,7 @@ import net.osmand.data.Street;
 import net.osmand.search.core.HashQuadTree;
 import net.osmand.search.core.HashSkipTileQuadTree;
 import net.osmand.search.core.HashSkipTileQuadTreeJoiner;
+import net.osmand.search.core.spatial.SpatialSearchResult.SpatialSearchResultRef;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSettings;
 import net.osmand.util.Algorithms;
@@ -64,6 +65,17 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 	List<String> tempBuildNames2 = new ArrayList<String>();
 	Map<String, SpatialSearchResult> extraIdsResults = new HashMap<>();
 	TLongObjectHashMap<SpatialSearchResult> uniqueIdsResults = new TLongObjectHashMap<>();
+	
+	// how far apart two rows of the same name may be and still be one place, all three measured
+	// on judged cases - see preferences.md, "What deduplication is allowed to merge"
+	private static final double SAME_PLACE_M = 30;      // pref-0071, pref-0092
+	private static final double SAME_FACILITY_M = 400;  // pref-0007, pref-0082
+	private static final double SAME_STREET_M = 2000;   // pref-0111
+	private static final int MAX_SAME_NAME = 32;        // bound the scan for a very common name
+
+	// parts OF a street, carrying its name: pref-0108, pref-0109 
+	private static final Set<String> STREET_PART_SUBTYPES = new HashSet<>(
+			Arrays.asList("bridge", "tunnel", "viaduct", "ford"));
 	
 	public SpatialSearchResultsList() {
 		this(null, null, null);
@@ -674,14 +686,7 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		return finalResult;
 	}
 
-	// how far apart two rows of the same name may be and still be one place, all three measured
-	// on judged cases - see preferences.md, "What deduplication is allowed to merge"
-	private static final double SAME_PLACE_M = 30;      // pref-0071, pref-0092
-	private static final double SAME_FACILITY_M = 400;  // pref-0007, pref-0082
-	private static final double SAME_STREET_M = 2000;   // pref-0111
-	private static final int MAX_SAME_NAME = 32;        // bound the scan for a very common name
 
-	/** same name and same spot: the id/wikidata/route keys cannot see a stop stored as nodes */
 	private List<SpatialSearchResult> deduplicateByProximity(List<SpatialSearchResult> sorted,
 			SpatialSearchContext ctx) {
 		Map<String, List<SpatialSearchResult>> byName = new HashMap<>();
@@ -692,7 +697,7 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 			if (name != null && s.getLatLon() != null) {
 				List<SpatialSearchResult> kept = byName.computeIfAbsent(name, k -> new ArrayList<>());
 				for (SpatialSearchResult u : kept) {
-					if (isSamePlace(u, s, ctx.ranking)) {
+					if (isSamePlace(u, s)) {
 						same = u;
 						break;
 					}
@@ -710,18 +715,14 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		return out;
 	}
 
-	/** parts OF a street, carrying its name: pref-0108, pref-0109 */
-	private static final Set<String> STREET_PART_SUBTYPES = new HashSet<>(
-			Arrays.asList("bridge", "tunnel", "viaduct", "ford"));
 
-	private static boolean isSamePlace(SpatialSearchResult a, SpatialSearchResult b,
-			SpatialSearchRanking ranking) {
+	private boolean isSamePlace(SpatialSearchResult a, SpatialSearchResult b) {
 		boolean street = a.getMainObject() instanceof Street;
 		if (street != (b.getMainObject() instanceof Street)) {
 			// a bridge carrying the street name is a piece OF it, unless it is a destination of
 			// its own: pref-0111. Anything else standing on a street stays separate: pref-0080
 			SpatialSearchResult poi = street ? b : a;
-			if (!isStreetPart(poi) || ranking.isProminent(poi)) {
+			if (!isStreetPart(poi) || SpatialSearchRanking.isProminent(poi)) {
 				return false;
 			}
 			return MapUtils.getDistance(a.getLatLon(), b.getLatLon()) <= SAME_STREET_M;
@@ -736,19 +737,27 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 			}
 			radius = SAME_STREET_M;
 		} else {
-			radius = ranking.isSpreadNode(a) || ranking.isSpreadNode(b)
-					? SAME_FACILITY_M : SAME_PLACE_M;
+			radius = isSpreadNode(a) || isSpreadNode(b) ? SAME_FACILITY_M : SAME_PLACE_M;
 		}
 		return MapUtils.getDistance(a.getLatLon(), b.getLatLon()) <= radius;
 	}
+	
 
-	private static boolean isStreetPart(SpatialSearchResult r) {
-		MapObject o = r.getFirstRef() == null ? null : r.getFirstRef().atom.object;
-		return o instanceof Amenity a && a.getSubType() != null
-				&& STREET_PART_SUBTYPES.contains(a.getSubType());
+	private boolean isSpreadNode(SpatialSearchResult r) {
+		SpatialSearchResultRef head = r == null ? null : r.getFirstRef();
+		if (head == null || !(head.atom.object instanceof Amenity a)) {
+			return false;
+		}
+		String subType = a.getSubType();
+		return subType != null && (SpatialSearchRanking.SPREAD_SUBTYPES.contains(subType) || SpatialSearchRanking.STOP_SUBTYPES.contains(subType));
 	}
 
-	private static String dedupName(SpatialSearchResult r) {
+	private boolean isStreetPart(SpatialSearchResult r) {
+		MapObject o = r.getFirstRef() == null ? null : r.getFirstRef().atom.object;
+		return o instanceof Amenity a && a.getSubType() != null && STREET_PART_SUBTYPES.contains(a.getSubType());
+	}
+
+	private String dedupName(SpatialSearchResult r) {
 		MapObject o = r.getMainObject();
 		String name = o == null ? null : o.getName();
 		if (Algorithms.isEmpty(name)) {
