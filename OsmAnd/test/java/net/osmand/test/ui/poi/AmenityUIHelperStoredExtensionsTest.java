@@ -17,12 +17,12 @@ import net.osmand.data.Amenity;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.SpecialPointType;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.mapcontextmenu.builders.AmenityUIHelper;
 import net.osmand.plus.mapcontextmenu.builders.rows.AmenityInfoRow;
 import net.osmand.shared.gpx.primitives.WptPt;
+import net.osmand.test.common.AndroidTest;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -33,11 +33,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 
 @RunWith(AndroidJUnit4.class)
-public class AmenityUIHelperStoredExtensionsTest {
+public class AmenityUIHelperStoredExtensionsTest extends AndroidTest {
 
 	private static final String KNOWN_COLON_KEY = "authentication:phone_call:number";
 	private static final String CUSTOM_KEY = "test:country";
@@ -57,16 +55,11 @@ public class AmenityUIHelperStoredExtensionsTest {
 			new ActivityTestRule<>(MapActivity.class, true, false);
 
 	private MapActivity mapActivity;
-	private OsmandApplication app;
 
 	@Before
-	public void setUp() throws InterruptedException {
+	public void setup() {
+		super.setup();
 		mapActivity = activityRule.launchActivity(null);
-		app = (OsmandApplication) mapActivity.getApplication();
-		CountDownLatch appInitialized = new CountDownLatch(1);
-		app.getAppInitializer().addOnFinishListener(initializer -> appInitialized.countDown());
-		assertTrue("Application initialization timed out",
-				appInitialized.await(5, TimeUnit.MINUTES));
 	}
 
 	@Test
