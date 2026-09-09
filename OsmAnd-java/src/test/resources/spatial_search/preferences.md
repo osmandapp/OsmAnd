@@ -89,12 +89,13 @@ comparator, which is what makes the number meaningful:
 
 | ranking | satisfied | violated |
 |---|---|---|
-| ladder (today) | 24 | 37 |
+| ladder (today) | 28 | 41 |
 | score, first weights | 35 | 26 |
-| score, weights fitted on the reviews | 40 | 21 |
+| score, weights fitted on the reviews | 45 | 24 |
 
-Fifteen of the violations in every row are merge records — the duplicate floods, which no
-weighting can fix; they need the deduplication rule.
+Seventeen of the violations in every row are merge records — the duplicate floods, which no
+weighting can fix; they need the deduplication rule. (The middle row was measured on the 76
+records that existed when those weights were written.)
 
 The test gates on `MIN_SATISFIED`, a ratchet: an unrelated reordering cannot break the build,
 only contradicting a recorded judgement can. Raise it when a change earns more.
@@ -123,3 +124,19 @@ current weights, and they say something the first 60 could not:
 The one preference the weights cannot satisfy is `supermarkt`, and it names the missing signal:
 the engine cannot tell a word for a KIND of object from a proper name, so it cannot know that
 carrying "supermarkt" in the name is worth nothing.
+
+10 more on 2026-09-09 (`"batch": "02"`), chosen where the fitted score was least sure. They
+settled the rating weight and the merge threshold:
+
+- fame is worth about one point, which is the gap between 3 km and 30 km. It sorts two prominent
+  objects of the same kind (`Palazzo Pubblico`, elo 2998 at 80 km, over `Castello di Punta Ala`,
+  2329 at 32 km) and does not rescue `Cattedrale di Santa Maria del Fiore` (elo 4049) at 80 km
+  from an ordinary church 800 m away. In the reviewer's words: *"it would be different at 20 km,
+  but not 75"*. `wRating` 2.0 -> 1.0.
+- merge is about metres and not about kinds: 129 m and 147 m (a village and its platform) are one
+  row, 218 m are two, 107 m was called either way.
+
+`camping` is the second preference the weights cannot satisfy, and it says the infrastructure
+penalty is applied too widely: R1 is a statement about a node AND THE PLACE IT BELONGS TO, but
+`typeScore` charges it against every comparison, so a guidepost named "Camping" 8 km away lost to
+an office 12 km away.

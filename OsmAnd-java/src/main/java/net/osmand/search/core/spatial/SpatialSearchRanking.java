@@ -22,11 +22,16 @@ import net.osmand.util.SearchAlgorithms;
  */
 public class SpatialSearchRanking {
 
-	// Fitted on the 48 order preferences in spatial_search/preferences.jsonl (36 -> 41 satisfied;
-	// none of the 13 judgements added on 2026-09-09 is violated). What the second review round
-	// said, and what these numbers encode: between two ordinary POIs the NEARER one wins - an
-	// exact name, a matching category and a higher elo all lose to distance - while a node that
-	// merely describes a place loses to the place even from 5.5 km closer.
+	// Fitted on the 54 order preferences in spatial_search/preferences.jsonl (36 -> 46 satisfied).
+	// What the two review rounds said, and what these numbers encode: between two ordinary POIs
+	// the NEARER one wins - an exact name, a matching category and a higher elo all lose to
+	// distance - while a node that merely describes a place loses to the place even from 5.5 km
+	// closer.
+	//
+	// The rating weight is what the third round pinned down. A famous object is worth about one
+	// point, which is roughly the gap between 3 km and 30 km: enough to put the better-known of
+	// two castles first (Palazzo Pubblico, elo 2998 at 80 km, over Castello di Punta Ala, 2329 at
+	// 32 km), not enough to keep a cathedral 80 km away above an ordinary church 800 m away.
 	//
 	// The name term is deliberately small. Raising it costs preferences at every step
 	// (0.15 -> 41 satisfied, 0.3 -> 40, 0.5 -> 39, 2.0 -> 38) because "supermarkt", "кафе" and
@@ -35,7 +40,7 @@ public class SpatialSearchRanking {
 	// can, the term only breaks ties.
 	public double wName = 0.15;
 	public double wType = 2.0;
-	public double wRating = 2.0;
+	public double wRating = 1.0;
 	public double wNear = 2.5;
 
 	/** distance at which the proximity term is worth half of its maximum */
