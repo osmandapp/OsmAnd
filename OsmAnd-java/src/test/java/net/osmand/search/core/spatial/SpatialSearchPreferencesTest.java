@@ -7,10 +7,12 @@ import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -62,7 +64,7 @@ public class SpatialSearchPreferencesTest {
 	 * unrelated reordering cannot break the build - only contradicting a recorded human
 	 * judgement can.
 	 */
-	private static final int MIN_SATISFIED = 56;
+	private static final int MIN_SATISFIED = 57;
 
 	/**
 	 * {@code OSMAND_SPATIAL_SCORE_RANKING=false} runs the same preferences against the old
@@ -82,15 +84,18 @@ public class SpatialSearchPreferencesTest {
 	}
 
 	static class Pref {
-		String id, kind, query, map, prefer, verdict, note;
+		String id, kind, query, map, prefer, verdict, note, supersedes;
 		LatLon location;
 		List<Long> objects = new ArrayList<>();
 		long a, b;
 		boolean asserted = true;
 	}
 
+	/** the ids each row shows in its own right, parallel to the rows returned by search() */
+	private final List<List<Long>> headIds = new ArrayList<>();
+
 	static class Score {
-		int satisfied, violated, notApplicable, notAsserted, noMap;
+		int satisfied, violated, notApplicable, notAsserted, absorbed, noMap;
 		List<String> failures = new ArrayList<>();
 	}
 
@@ -102,12 +107,26 @@ public class SpatialSearchPreferencesTest {
 		File mapsDir = mapsDir();
 		Assume.assumeTrue("no maps directory - set OSMAND_MAPS_DIR=<dir with .obf files>",
 				mapsDir != null);
+		// a record replaced by a later one is history, not a statement to test against
+		Set<String> superseded = new HashSet<>();
+		for (Pref p : prefs) {
+			if (p.supersedes != null) {
+				superseded.add(p.supersedes);
+			}
+		}
+		for (Pref p : prefs) {
+			if (superseded.contains(p.id)) {
+				p.asserted = false;
+			}
+		}
 		Score sc = check(prefs, mapsDir);
 
 		System.out.printf("ranking: %s%n", SCORE_RANKING ? "score" : "ladder (old)");
 		System.out.printf("preferences: %d satisfied, %d violated, %d not applicable "
-						+ "(object not returned), %d not asserted, %d without a map%n",
-				sc.satisfied, sc.violated, sc.notApplicable, sc.notAsserted, sc.noMap);
+						+ "(object not returned), %d absorbed by deduplication, %d not asserted, "
+						+ "%d without a map%n",
+				sc.satisfied, sc.violated, sc.notApplicable, sc.absorbed, sc.notAsserted,
+				sc.noMap);
 		for (String f : sc.failures) {
 			System.out.println("  violated " + f);
 		}
@@ -179,6 +198,13 @@ public class SpatialSearchPreferencesTest {
 					sc.notAsserted++;
 					continue;
 				}
+				if (!headIds.get(ia).contains(p.a) || !headIds.get(ib).contains(p.b)) {
+					// the object the judgement is about is no longer a row of its own - it was
+					// absorbed into one. The complaint it recorded cannot be evaluated against a
+					// row that now stands for something else.
+					sc.absorbed++;
+					continue;
+				}
 				boolean aFirst = ia < ib;
 				if (aFirst == "a".equals(p.prefer)) {
 					sc.satisfied++;
@@ -222,12 +248,15 @@ public class SpatialSearchPreferencesTest {
 					new SpatialPoiSearch(MapPoiTypes.getDefault()), location);
 			SpatialSearchResults res = new SpatialTextSearch().searchAPI(query, ctx);
 			List<List<Long>> out = new ArrayList<>();
+		headIds.clear();
+		List<List<Long>> headOf = headIds;
 			if (res.mainResults != null) {
 				for (SpatialSearchResult r : res.mainResults) {
 					List<Long> ids = new ArrayList<>();
 					for (MapObject o : r.getObjects()) {
 						ids.add(ObfConstants.getOsmObjectId(o));
 					}
+					List<Long> heads = new ArrayList<>(ids);
 					if (r.unitedObject != null) {
 						for (Object o : r.unitedObject.getObjects()) {
 							if (o instanceof MapObject mo) {
@@ -235,6 +264,7 @@ public class SpatialSearchPreferencesTest {
 							}
 						}
 					}
+					headOf.add(heads);
 					out.add(ids);
 				}
 			}
@@ -279,6 +309,7 @@ public class SpatialSearchPreferencesTest {
 				// it is the measured noise of a human judge, not a statement to test against
 				p.asserted = o.optJSONArray("conflictsWith") == null
 						|| o.getJSONArray("conflictsWith").length() == 0;
+				p.supersedes = o.isNull("supersedes") ? null : o.getString("supersedes");
 				if ("note".equals(p.kind)) {
 					// A case the reviewer refused to answer, with the reason: "none is good",
 					// "we are not in Rotterdam and they do not match t2". Those are statements

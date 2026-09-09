@@ -93,14 +93,18 @@ comparator, which is what makes the number meaningful:
 | score, first weights | 35 | 26 |
 | score, weights fitted on the reviews | 52 | 25 |
 | + deduplication by name and distance | 56 | 11 |
+| + the merge records re-judged against it | 57 | 5 |
 
 (The second row was measured on the 76 records that existed when those weights were written; the
-rest on all 99.) Of the 11 that remain, 4 are merge records whose object list has outgrown the
-judgement: for `bundesplatz berlin` the stop nodes are now one row, and what is still separate is
-a railway station, a park, a tunnel and two streets that happen to share the name — objects a
-reviewer today would not call one place. `hohenschönhauser strasse` is the recorded contradiction
-between the rounds: a street and its platform were "keep apart" six times in round 1 and "merge"
-once in round 2, and streets are left out of the proximity merge for that reason.
+rest on the whole file.) The merge records that stayed violated turned out to be records whose
+object list had outgrown the judgement: for `bundesplatz berlin` the stop nodes are now one row, and
+what is still separate is a railway station, a park, a tunnel and two streets that happen to share
+the name. Re-judged on 2026-09-09, each was replaced (`supersedes`) by one record per group the
+engine actually produces, and the answer to the street question came with it: *"we do not merge
+[a street with its stops], we merge only stops with each other"*. Two more record kinds of
+housekeeping followed: a record replaced by a later one is no longer asserted, and an object that
+deduplication absorbed into another row is reported as `absorbed` rather than judged - the
+complaint it recorded cannot be evaluated against a row that now stands for something else.
 
 The test gates on `MIN_SATISFIED`, a ratchet: an unrelated reordering cannot break the build,
 only contradicting a recorded judgement can. Raise it when a change earns more.
