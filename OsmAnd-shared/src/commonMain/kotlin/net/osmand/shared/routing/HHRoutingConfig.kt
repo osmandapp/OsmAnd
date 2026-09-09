@@ -10,9 +10,11 @@ import kotlin.jvm.JvmStatic
  * alternative route has to look like to be offered.
  *
  * The C++ router in core-legacy reads fourteen of these fields off the object it is handed, by name
- * and descriptor, so those are a contract with `native/src/java_wrap.cpp` that no build checks -
- * `HHRoutingConfigJniContractTest` is what does. `@JvmField` is a separate matter: it is for the
- * java callers that read and assign these as fields, and javac catches its absence.
+ * and descriptor. Renaming one, or changing its type, means changing `native/src/java_wrap.cpp`
+ * with it, and no build will say so: the app consumes OsmAndCore as a prebuilt snapshot, so a
+ * mismatch first shows up as a failed route calculation on a device. `@JvmField` is a separate
+ * matter - it is for the java callers that read and assign these as fields, and javac catches its
+ * absence.
  *
  * The rest are read by the java planner only, and are here because a configuration split in two -
  * half shared, half not - is worse than a few fields that only one caller uses.
