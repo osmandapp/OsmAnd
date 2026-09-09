@@ -676,6 +676,8 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 	private static final double SAME_PLACE_M = 30;
 	/** a stop is a cluster of nodes - platform, stop position, shelter - spread along the street */
 	private static final double SAME_STOP_M = 400;
+	/** ways of one street: "Stauffenbergstraße" was two rows 342 m apart in the same hamlet */
+	private static final double SAME_STREET_M = 2000;
 	private static final double BUCKET_DEG = 0.005; // ~550 m, so the 3x3 neighbourhood covers both radii
 
 	/**
@@ -696,23 +698,40 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		for (SpatialSearchResult s : sorted) {
 			String name = s.getDedupName();
 			LatLon loc = s.getLatLon();
-			if (name == null || loc == null || s.isStreetResult()) {
+			if (name == null || loc == null) {
 				out.add(s);
 				continue;
 			}
 			int bx = (int) Math.floor(loc.getLatitude() / BUCKET_DEG);
 			int by = (int) Math.floor(loc.getLongitude() / BUCKET_DEG);
 			SpatialSearchResult same = null;
-			for (int dx = -1; dx <= 1 && same == null; dx++) {
-				for (int dy = -1; dy <= 1 && same == null; dy++) {
+			int reach = s.isStreetResult() ? 4 : 1;   // 0.005 deg buckets: 4 of them cover 2 km
+			for (int dx = -reach; dx <= reach && same == null; dx++) {
+				for (int dy = -reach; dy <= reach && same == null; dy++) {
 					List<SpatialSearchResult> kept = buckets.get(name + '@' + (bx + dx) + '_' + (by + dy));
 					if (kept == null) {
 						continue;
 					}
 					for (SpatialSearchResult u : kept) {
 						LatLon ul = u.getLatLon();
+						if (u.isStreetResult() != s.isStreetResult()) {
+							// a street and what stands on it are different objects: six judgements
+							// in the first round and the answer to the fourth question of the last
+							// one - "we do not merge them, we merge only the stops with each other"
+							continue;
+						}
 						double radius = SpatialSearchRanking.isSubordinateNode(u)
 								|| SpatialSearchRanking.isSubordinateNode(s) ? SAME_STOP_M : SAME_PLACE_M;
+						if (s.isStreetResult()) {
+							// one street cut into several OSM ways: the coordinate of a line means
+							// little, so the city it belongs to decides and the distance only
+							// guards against two genuinely different streets of the same name
+							String c1 = u.getStreetCity(), c2 = s.getStreetCity();
+							if (c1 == null || !c1.equals(c2)) {
+								continue;
+							}
+							radius = SAME_STREET_M;
+						}
 						if (ul != null && MapUtils.getDistance(ul, loc) <= radius) {
 							same = u;
 							while (merged.containsKey(same)) {

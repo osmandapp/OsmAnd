@@ -94,6 +94,7 @@ comparator, which is what makes the number meaningful:
 | score, weights fitted on the reviews | 52 | 25 |
 | + deduplication by name and distance | 56 | 11 |
 | + the merge records re-judged against it | 57 | 5 |
+| + ways of one street merged, round 1 re-judged | 59 | 3 |
 
 (The second row was measured on the 76 records that existed when those weights were written; the
 rest on the whole file.) The merge records that stayed violated turned out to be records whose
@@ -174,3 +175,19 @@ Those are statements about recall and matching, not about order. They are stored
 `"kind": "note"` with `"verdict": "not_a_ranking_question"`, asserted by nothing, and they are the
 only record that the case was ever looked at - without them the same pair comes back in the next
 sample and costs a minute again.
+
+## What deduplication is allowed to merge
+
+It is a separate question from ranking, and it is answered by a list of pairs that may be united,
+not by a distance alone:
+
+| pair | when |
+|---|---|
+| stop node + stop node (platform, stop position, entrance, junction, bus/tram stop) | same name, within 400 m |
+| way + way of one street | same name AND same city, within 2 km - a line's single coordinate says little |
+| any other POI + POI | same name, within 30 m |
+| street + anything standing on it | never - six judgements in round 1 and the answer in round 4 |
+
+The radii are measured, not chosen: 320 m between a camp site and its bus stop and 330 m between
+a pass and its platform were both called one place; 218 m between two parcel lockers and 57 m
+between two benches were not.

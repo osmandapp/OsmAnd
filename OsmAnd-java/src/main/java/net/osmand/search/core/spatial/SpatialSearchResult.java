@@ -225,6 +225,15 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		return head != null && (head.atom.isStreet() || head.atom.isBuilding());
 	}
 
+	/** the city a street belongs to, for telling one street cut into ways from two streets */
+	public String getStreetCity() {
+		MapObject o = getFirstRefObject(false);
+		if (o instanceof Street st && st.getCity() != null) {
+			return st.getCity().getName();
+		}
+		return null;
+	}
+
 	public boolean isPoiCategory() {
 		return !objs.isEmpty() && objs.get(0).isPoiCategory();
 	}
