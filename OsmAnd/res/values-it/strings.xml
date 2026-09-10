@@ -4502,7 +4502,7 @@
     <string name="map_3d_mode_action_descr">Cambia l\'inclinazione della mappa.</string>
     <string name="drawer_button_description">Apre il menu principale.</string>
     <string name="configure_map_description">Modifica lo stile della mappa, i livelli o altre impostazioni.</string>
-    <string name="rendering_attr_showDirtbikeTrails_description">Mostra percorsi per motocross</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Mostra percorsi per moto da enduro</string>
     <string name="contour_layers_action_descr">Cambia i livelli di contorno</string>
     <string name="type_of_activity">Tipo di attività</string>
     <string name="change_activity">Cambia attività</string>
@@ -4662,7 +4662,7 @@
     <string name="third_links">Collegamenti a Terzi</string>
     <string name="quick_action_save_recorded_trip_and_continue_summary">Un pulsante per salvare il percorso correntemente registrato come file GPX e continuare a registrare un nuovo tratto senza interruzioni.</string>
     <string name="liter_per_hour">L/h</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Sentieri per motocross</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Sentieri per moto da enduro</string>
     <string name="av_audio_sample_rate">Frequenza di campionamento audio</string>
     <string name="av_audio_sample_rate_descr">Seleziona la frequenza di campionamento audio.</string>
     <string name="connect_new_scanner">Connetti il nuovo scanner</string>
