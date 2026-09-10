@@ -796,6 +796,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		mapRendererContext.recreateHeightmapProvider();
 		MapRendererView rendererView = mapRendererContext.getMapRendererView();
 		if (rendererView != null) {
+			rendererView.setFlatEarth(!settings.SPHERICAL_MAP.get());
 			rendererView.set3DBuildingsAlpha(BUILDINGS_3D_ALPHA.get());
 			rendererView.set3DBuildingsDetalization(BUILDINGS_3D_VIEW_DISTANCE.get());
 		}

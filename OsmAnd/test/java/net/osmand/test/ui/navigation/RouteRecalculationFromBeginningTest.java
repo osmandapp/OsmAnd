@@ -1,6 +1,7 @@
 package net.osmand.test.ui.navigation;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static net.osmand.plus.simulation.SimulationProvider.SIMULATED_PROVIDER;
 import static net.osmand.test.common.Interactions.openNavigationMenu;
 import static net.osmand.test.common.OsmAndDialogInteractions.skipAppStartDialogs;
 
@@ -35,6 +36,7 @@ import org.junit.runner.RunWith;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.concurrent.TimeUnit;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
@@ -92,6 +94,12 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 
 		openNavigationMenu();
 
+		// without this the device's own position is used and the route is recalculated from
+		// wherever the emulator happens to be - a fix in California gives a 9500 km route
+		app.getLocationProvider().setCustomLocation(
+				new net.osmand.Location(SIMULATED_PROVIDER, START.getLatitude(), START.getLongitude()),
+				TimeUnit.MINUTES.toMillis(5));
+
 		app.getOsmandMap().getMapActions().setGPXRouteParams(gpxFile);
 		app.getTargetPointsHelper().setStartPoint(START, true, null);
 
@@ -101,6 +109,7 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 		registerIdlingResources(idlingResource);
 
 		Espresso.onIdle();
+		idlingResource.rethrowFailure();
 	}
 
 	private static class ObserveDistToFinishIdlingResource extends BaseIdlingResource {
@@ -113,6 +122,7 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 		private final Handler handler;
 
 		private boolean idle = false;
+		private volatile Throwable failure;
 
 		public ObserveDistToFinishIdlingResource(@NonNull OsmandApplication app) {
 			super(app);
@@ -123,7 +133,19 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 				private int initialLeftDistance = -1;
 
 				@Override
-				public void run() throws AssertionError, IllegalStateException {
+				public void run() {
+					try {
+						check();
+					} catch (Throwable t) {
+						// throwing here is uncaught on the main looper: it crashes the process
+						// and every test after this one is dropped from the run
+						failure = t;
+						idle = true;
+						notifyIdleTransition();
+					}
+				}
+
+				private void check() {
 					int leftDistance = app.getRoutingHelper().getLeftDistance();
 					if (leftDistance == 0) {
 						// Route is not calculated yet
@@ -156,6 +178,12 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 		@Override
 		public boolean isIdleNow() {
 			return idle;
+		}
+
+		void rethrowFailure() throws Throwable {
+			if (failure != null) {
+				throw failure;
+			}
 		}
 	}
 }

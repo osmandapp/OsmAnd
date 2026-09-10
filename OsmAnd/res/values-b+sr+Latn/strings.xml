@@ -3963,7 +3963,7 @@
     <string name="free_versions">Besplatna izdanja</string>
     <string name="send_logcat_log_descr">Fajl detaljnog dnevnika</string>
     <string name="open_issue_on_github">Otvori grešku na GitHubu</string>
-    <string name="report_an_issues">Prijavi grešku</string>
+    <string name="report_an_issues">Prijavi problem</string>
     <string name="most_viewed">Najpregledanije</string>
     <string name="feature_available_as_part_of_plan">%1$s je dostupno kao deo plana %2$s</string>
     <string name="write_bearing_description">Snimiti azimut za svaku tačku trase prilikom snimanja</string>
@@ -4658,12 +4658,10 @@
     <string name="ais_object_lost_timeouts">Podešavanja vremenskog ograničenja za prijem AIS signala</string>
     <string name="ais_ship_lost_timeout">Vremensko ograničenje za isporuku je zastarelo</string>
     <string name="ais_cpa_settings">Podešavanja vezana za CPA</string>
-    <string name="ais_cpa_settings_description">Ove vrednosti određuju kako se AIS objekti prikazuju kada se približe sopstvenoj poziciji plovila.</string>
     <string name="ais_cpa_warning_distance">Upozorenje udaljenosti za najbližu tačku približavanja (CPA)</string>
     <string name="plugin_ais_tracker_name">AIS tragač plovila</string>
     <string name="plugin_ais_tracker_description">Prikaz AIS pozicija i informacija o okolnim plovilima. AIS podaci se primaju preko mreže sa eksternog AIS prijemnika.</string>
     <string name="ais_load_data">Učitaj AIS podatke iz datoteke</string>
-    <string name="ais_object_lost_timeouts_description">Podesite vrednosti vremenskog ograničenja da biste identifikovali izgubljene AIS objekte ako nije primljen signal tokom određenog vremena.</string>
     <string name="plugin_ais_tracker_disclaimer">ODRICANJE ODGOVORNOSTI\n\nOvaj dodatak je hobi projekat i nije dizajniran za pouzdanost i ispravnost. Nemojte se oslanjati na ovaj softver ni na koji način uključujući navigaciju i/ili bezbednost života.</string>
     <string name="ais_port_nmea_server_description">Definišite broj TCP porta NMEA izvora podataka</string>
     <string name="ais_cpa_warning_time_description">Ako je TCPA (vreme za dostizanje CPA sa drugim plovilom) manji od ove vrednosti, plovilo je označeno crvenom bojom.</string>
@@ -4849,7 +4847,7 @@
     <string name="miles">Milja</string>
     <string name="mpg">MPG</string>
     <string name="access_pinch_zoom_magnification">Zumiranje prstima</string>
-    <string name="access_pinch_zoom_magnification_descr">Koristite zum prikaza umesto diskretnih nivoa zumiranja za gestove prstiju.</string>
+    <string name="access_pinch_zoom_magnification_descr">Koristite skaliranje (uvećanje) prikaznog dela umesto diskretnih nivoa zumiranja tokom gesta uvećavanja.</string>
     <string name="show_spherical_map_description">Prikaz sferoidnog modela Zemlje</string>
     <string name="shared_string_price">Cena</string>
     <string name="rendering_attr_showSkiSlopes_name">Prikaži skijaške staze</string>
@@ -5337,4 +5335,5 @@
     <string name="share_favorites_share_failed">Deljenje fajla nije uspelo.</string>
     <string name="share_favorites_missing_media_warning">Neki priloženi mediji nisu mogli biti uključeni.</string>
     <string name="search_on_web">Pretraga na vebu</string>
+    <string name="astro_eclipse_column_below_horizon">Ispod horizonta</string>
 </resources>

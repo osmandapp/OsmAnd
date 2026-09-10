@@ -202,6 +202,7 @@
 	<string name="poi_ski_filter">Suitable for ski</string>
 	<string name="poi_horse_filter">Suitable for horse riding</string>
 	<string name="poi_winter_hiking_filter">Suitable for winter hiking</string>
+	<string name="poi_air_conditioning">Air conditioning</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -5777,5 +5778,10 @@
 
 	<string name="poi_mtb_yes">Yes</string>
 	<string name="poi_winter_hiking_yes">Yes</string>
+
+	<string name="poi_website_menu">Menu</string>
+
+	<string name="poi_air_conditioning_yes">Yes</string>
+	<string name="poi_air_conditioning_no">No</string>
 
 </resources>

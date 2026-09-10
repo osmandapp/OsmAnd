@@ -441,7 +441,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 					float bearing = 0;
 					if (editingCtx.getPointsCount() > 0) {
 						WptPt lastPoint = editingCtx.getPoints().get(editingCtx.getPointsCount() - 1);
-						LatLon centerLatLon = tb.getCenterLatLon();
+						LatLon centerLatLon = getElevatedCenterLatLon(tb);
 						distance = (float) MapUtils.getDistance(
 								lastPoint.getLat(), lastPoint.getLon(), centerLatLon.getLatitude(), centerLatLon.getLongitude());
 						bearing = getLocationFromLL(lastPoint.getLat(), lastPoint.getLon())
@@ -483,7 +483,11 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 			if (editingCtx.getSelectedPointPosition() != -1) {
 				if (hasMapRenderer) {
 					if (selectedPointMarker != null) {
-						selectedPointMarker.setPosition(new PointI(tb.getCenter31X(), tb.getCenter31Y()));
+						LatLon centerLatLon = getElevatedCenterLatLon(tb);
+						selectedPointMarker.setPosition(new PointI(
+								MapUtils.get31TileNumberX(centerLatLon.getLongitude()),
+								MapUtils.get31TileNumberY(centerLatLon.getLatitude())
+						));
 						selectedPointMarker.setIsHidden(false);
 					}
 				} else {
@@ -761,8 +765,9 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 
 			List<WptPt> beforeAfterWpt = new ArrayList<>();
 			WptPt centerWpt = new WptPt();
-			centerWpt.setLat(tb.getCenterLatLon().getLatitude());
-			centerWpt.setLon(tb.getCenterLatLon().getLongitude());
+			LatLon centerLatLon = getElevatedCenterLatLon(tb);
+			centerWpt.setLat(centerLatLon.getLatitude());
+			centerWpt.setLon(centerLatLon.getLongitude());
 			boolean hasPointsBefore = false;
 			if (before.size() > 0) {
 				TrkSegment segment = before.get(before.size() - 1);
@@ -823,14 +828,17 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 					renderer.setTrackParams(lineAttrs.paint.getColor(), "", ColoringType.TRACK_SOLID, null, null);
 					renderer.setDrawArrows(false);
 					renderer.setGeometryWay(geometryWay);
-					renderer.drawGeometry(canvas, tb, tb.getLatLonBounds(), lineAttrs.paint.getColor(),
-							lineAttrs.paint.getStrokeWidth(), getDashPattern(lineAttrs.paint));
+					QuadRect correctedQuadRect = getCorrectedQuadRect(tb.getLatLonBounds());
+					float scale = view.getMagnificationScale();
+					float strokeWidth = scale > 1.0f ? lineAttrs.paint.getStrokeWidth() / scale : lineAttrs.paint.getStrokeWidth();
+					renderer.drawGeometry(canvas, tb, correctedQuadRect, lineAttrs.paint.getColor(),
+							strokeWidth, getDashPattern(lineAttrs.paint));
 					beforeAfterRenderer = renderer;
+					this.beforeAfterWpt = beforeAfterWpt;
 				}
 			} else {
 				resetBeforeAfterRenderer();
 			}
-			this.beforeAfterWpt = beforeAfterWpt;
 			canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 		} else {
 			resetBeforeAfterRenderer();
@@ -848,6 +856,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 				geometryWay.resetSymbolProviders();
 			}
 			beforeAfterRenderer = null;
+			beforeAfterWpt = new ArrayList<>();
 		}
 	}
 
@@ -914,22 +923,9 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	public WptPt addCenterPoint(boolean addPointBefore) {
 		WptPt pt = new WptPt();
 		RotatedTileBox tb = view.getCurrentRotatedTileBox();
-
-		MapRendererView mapRenderer = getMapRenderer();
-		if (mapRenderer != null)
-		{
-			PointF pixel = new PointF(tb.getCenterPixelX(), tb.getCenterPixelY());
-			LatLon l = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, tb, pixel);
-
-			pt.setLat(l.getLatitude());
-			pt.setLon(l.getLongitude());
-		}
-		else
-		{
-			LatLon l = tb.getCenterLatLon();
-			pt.setLat(l.getLatitude());
-			pt.setLon(l.getLongitude());
-		}
+		LatLon l = getElevatedCenterLatLon(tb);
+		pt.setLat(l.getLatitude());
+		pt.setLon(l.getLongitude());
 
 		boolean allowed = editingCtx.getPointsCount() == 0 || !editingCtx.getPoints().get(editingCtx.getPointsCount() - 1).equals(pt);
 		if (allowed) {
@@ -963,7 +959,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 		WptPt originalPoint = editingCtx.getOriginalPointToMove();
 		if (originalPoint != null) {
 			RotatedTileBox tb = view.getCurrentRotatedTileBox();
-			LatLon latLon = tb.getCenterLatLon();
+			LatLon latLon = getElevatedCenterLatLon(tb);
 			WptPt point = new WptPt(originalPoint);
 			point.setLat(latLon.getLatitude());
 			point.setLon(latLon.getLongitude());
@@ -972,6 +968,16 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 			return point;
 		}
 		return null;
+	}
+
+	@NonNull
+	private LatLon getElevatedCenterLatLon(@NonNull RotatedTileBox tb) {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null) {
+			PointF pixel = view.getMagnifiedUnscaledPixel(tb.getCenterPixelX(), tb.getCenterPixelY());
+			return NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, tb, pixel);
+		}
+		return tb.getCenterLatLon();
 	}
 
 	public void exitMovePointMode() {

@@ -18,6 +18,8 @@ public class RegionPriorityProvider {
     private final Map<Integer, List<BinaryMapIndexReader>> priorityMap;
     private LinkedHashMap<BinaryMapIndexReader, Integer> regionsPriority;
     private LatLon searchLocation;
+    private int lastIndexesCount = -1;
+    private static final double LOCATION_SHIFT_THRESHOLD_METERS = 30000; // 30 km
 
     public RegionPriorityProvider(SearchPhrase phrase) {
         this.priorityMap = new TreeMap<>();
@@ -25,6 +27,34 @@ public class RegionPriorityProvider {
             this.searchLocation = phrase.getSettings().getOriginalLocation();
             initPriorityMap(phrase);
         }
+    }
+
+    public void checkAndUpdate(SearchPhrase phrase) {
+        if (phrase == null || phrase.getSettings() == null) {
+            return;
+        }
+
+        LatLon newLocation = phrase.getSettings().getOriginalLocation();
+        int cnt = phrase.getOfflineIndexes().size();
+        if (shouldReinitialize(newLocation, cnt)) {
+            this.searchLocation = newLocation == null ? this.searchLocation : newLocation;
+            this.lastIndexesCount = cnt;
+            this.priorityMap.clear();
+            this.regionsPriority = null;
+            initPriorityMap(phrase);
+        }
+    }
+
+    private boolean shouldReinitialize(LatLon newLocation, int cnt) {
+        if (this.searchLocation == null || this.lastIndexesCount != cnt) {
+            return true;
+        }
+
+        if (newLocation != null) {
+            double distance = MapUtils.getDistance(this.searchLocation, newLocation);
+            return distance >= LOCATION_SHIFT_THRESHOLD_METERS;
+        }
+        return false;
     }
 
     public Collection<BinaryMapIndexReader> getOfflineIndexes() {

@@ -54,7 +54,6 @@ public class SearchPhrase {
 	private AbstractPoiType unselectedPoiType;
 	private boolean acceptPrivate;
 	private QuadRect cache1kmRect;
-	private RegionPriorityProvider regionPriorityProvider;
 	
 	static {
 		commonWordsComparator = new Comparator<String>() {
@@ -88,7 +87,7 @@ public class SearchPhrase {
 		this.settings = settings;
 		this.clt = clt;
 		if (settings != null) {
-			this.regionPriorityProvider = new RegionPriorityProvider(this);
+			settings.updateRegionPriorityProvider(this);
 		}
 	}
 	
@@ -395,8 +394,9 @@ public class SearchPhrase {
 
 	public Iterator<BinaryMapIndexReader> getRadiusOfflineIndexes(int minMeters, int maxMeters, SearchPhraseDataType dataType) {
 		List<BinaryMapIndexReader> list;
-		if (regionPriorityProvider != null) {
-			list = regionPriorityProvider.getOfflineIndexes(minMeters, maxMeters);
+		if (settings.hasRegionPriority()) {
+			settings.updateRegionPriorityProvider(this);
+			list = settings.getRegionPriorityIndexesWithMinRadius(minMeters, maxMeters);
 		} else {
 			list = indexes != null ? indexes : settings.getOfflineIndexes();
 		}
@@ -406,8 +406,9 @@ public class SearchPhrase {
 
 	public Iterator<BinaryMapIndexReader> getOfflineIndexes(QuadRect rect, SearchPhraseDataType dataType) {
 		Collection<BinaryMapIndexReader> list;
-		if (regionPriorityProvider != null) {
-			list = regionPriorityProvider.getOfflineIndexes();
+		if (settings.hasRegionPriority()) {
+			settings.updateRegionPriorityProvider(this);
+			list = settings.getRegionPriorityIndexes();
 		} else {
 			list = indexes != null ? indexes : settings.getOfflineIndexes();
 		}
@@ -950,8 +951,8 @@ public class SearchPhrase {
 	}
 
 	public int getRegionPriority(BinaryMapIndexReader reader) {
-		if (regionPriorityProvider != null) {
-			return regionPriorityProvider.getRegionWeight(reader);
+		if (settings != null) {
+			return settings.getRegionPriority(reader);
 		}
 		return 0;
 	}

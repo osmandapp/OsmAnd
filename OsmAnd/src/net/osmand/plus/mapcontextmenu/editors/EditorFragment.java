@@ -98,6 +98,10 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 		this.color = color;
 	}
 
+	protected void setColorSelected(boolean colorSelected) {
+		this.colorSelected = colorSelected;
+	}
+
 	public String getIconName() {
 		return iconName;
 	}
