@@ -61,6 +61,7 @@ public class SpatialSearchContext {
 	final SpatialSearchStats stats = new SpatialSearchStats();
 	
 	public ResultMatcher<SpatialSearchResult> resultMatcher;
+	public final SpatialSearchRanking ranking;
 	
 	public boolean isCancelled() {
 		return resultMatcher != null && resultMatcher.isCancelled();
@@ -142,6 +143,7 @@ public class SpatialSearchContext {
 	public SpatialSearchContext(SpatialTextSearchSettings settings, List<BinaryMapIndexReader> files,
 			SpatialPoiSearch poiSearch, LatLon location) {
 		this.files = files;
+		this.ranking = settings.SCORE_RANKING ? new SpatialSearchRanking() : null;
 		// SpatialPoiSearch will be passed as parameter
 		this.poiSearch = poiSearch;
 		this.location = location;
