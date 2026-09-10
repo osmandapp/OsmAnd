@@ -17,6 +17,7 @@ import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.shared.routing.RouteRegion;
 import net.osmand.shared.routing.RouteDataObject;
+import net.osmand.shared.routing.NativeRouteCalculation;
 import net.osmand.shared.routing.NativeRouting;
 import net.osmand.shared.routing.RouteCalculationMode;
 import net.osmand.shared.routing.RouteCalculationProgress;
@@ -731,7 +732,7 @@ public class RoutePlannerFrontEnd {
 			ctx.targetSegmentInd  = end.segStart;
 			return runNativeRouting(ctx, recalculationEnd, null);
 		} else {
-			refreshProgressDistance(ctx);
+			NativeRouteCalculation.INSTANCE.refreshProgressDistance(ctx);
 			// Split into 2 methods to let GC work in between
 			ctx.finalRouteSegment = new BinaryRoutePlanner().searchRouteInternal(ctx, start, recalculationEnd != null ? recalculationEnd : end, null);
 			RouteResultPreparation rrp = new RouteResultPreparation();
@@ -781,42 +782,23 @@ public class RoutePlannerFrontEnd {
 		return recalculationEnd;
 	}
 
-	private void refreshProgressDistance(RoutingContext ctx) {
-		if (ctx.calculationProgress != null) {
-			ctx.calculationProgress.distanceFromBegin = 0;
-			ctx.calculationProgress.distanceFromEnd = 0;
-			ctx.calculationProgress.reverseSegmentQueueSize = 0;
-			ctx.calculationProgress.directSegmentQueueSize = 0;
-			float rd = (float) MapUtils.squareRootDist31(ctx.startX, ctx.startY, ctx.targetX, ctx.targetY);
-			float speed = 0.9f * ctx.config.router.getMaxSpeed();
-			ctx.calculationProgress.totalEstimatedDistance = (float) (rd / speed);
-		}
-
-	}
 
 	private RouteCalcResult runNativeRouting(final RoutingContext ctx, RouteSegment recalculationEnd, HHRoutingConfig hhConfig) throws IOException {
-		refreshProgressDistance(ctx);
 		if (recalculationEnd != null) {
 			if (TRACE_ROUTING) {
 				log.info("RecalculationEnd = " + recalculationEnd.road + " ind=" + recalculationEnd.getSegmentStart() + "->" + recalculationEnd.getSegmentEnd());
 			}
 		}
+		// the reader map is the java planner's, so the regions to search are gathered here and
+		// handed to the shared entry point, which knows nothing about readers
 		RouteRegion[] regions = ctx.reverseMap.keySet().toArray(new RouteRegion[0]);
 		// long time = System.currentTimeMillis();
-		if (ctx.intermediatesX == null || ctx.intermediatesY == null) {
-			ctx.intermediatesX = new int[0];
-			ctx.intermediatesY = new int[0];
-		}
-		RouteSegmentResult[] res = ctx.nativeLib.runNativeRouting(ctx, hhConfig, regions, ctx.calculationMode == RouteCalculationMode.BASE);
+		List<RouteSegmentResult> result = NativeRouteCalculation.INSTANCE.calculate(ctx, hhConfig, regions);
 		if (TRACE_ROUTING) {
 			log.info("Native routing result!");
-			for (RouteSegmentResult r : res) {
+			for (RouteSegmentResult r : result) {
 				log.info("Road = " + r.getObject().id / 64 + " " + r.getStartPointIndex() + "->" + r.getEndPointIndex());
 			}
-		}
-		//	log.info("Native routing took " + (System.currentTimeMillis() - time) / 1000f + " seconds");
-		List<RouteSegmentResult> result = new ArrayList<>(Arrays.asList(res));
-		if (TRACE_ROUTING) {
 			log.info("RecalculationEnd result!");
 		}
 		addPrecalculatedToResult(recalculationEnd, result);

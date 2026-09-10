@@ -238,30 +238,14 @@ public class NativeLibrary implements NativeRouting {
 
 	@Override
 	public RouteSegmentResult[] runNativeRouting(RoutingRequest c, HHRoutingConfig hhRoutingConfig, RouteRegion[] regions, boolean basemap) {
-		RoutingContext ctx = asRoutingContext(c);
 		// if hhRoutingConfig == null - process old routing
 		if (hhRoutingConfig != null) {
 			setHHNativeFilterAndParameters(c);
 		}
 		final float CPP_NO_DIRECTION = -2 * (float) Math.PI;
-		return nativeRouting(ctx, hhRoutingConfig, c.config.initialDirection == null ?
+		return nativeRouting(c, hhRoutingConfig, c.config.initialDirection == null ?
 				CPP_NO_DIRECTION : c.config.initialDirection.floatValue(),
 				regions, basemap, c.requestNativePrepareResult);
-	}
-
-	/**
-	 * java_wrap.cpp resolves the request's fields on net/osmand/router/RoutingContext, so this
-	 * implementation can only hand the core one of those. Binding them on
-	 * net.osmand.shared.routing.RoutingRequest instead is what would let shared code build the
-	 * request itself, and that is a paired change in OsmAnd-core-legacy which has not been made.
-	 * Until it is, say so here rather than let the core read fields off the wrong class.
-	 */
-	private static RoutingContext asRoutingContext(RoutingRequest request) {
-		if (!(request instanceof RoutingContext)) {
-			throw new IllegalArgumentException("The C++ router binds RoutingContext, and this is a "
-					+ request.getClass().getName());
-		}
-		return (RoutingContext) request;
 	}
 
 	private void setHHNativeFilterAndParameters(RoutingRequest ctx) {
@@ -370,7 +354,7 @@ public class NativeLibrary implements NativeRouting {
 
 	protected static native RouteDataObject[] getRouteDataObjects(RouteRegion reg, long rs, int x31, int y31);
 
-	protected static native RouteSegmentResult[] nativeRouting(RoutingContext c, HHRoutingConfig hhRoutingConfig,
+	protected static native RouteSegmentResult[] nativeRouting(RoutingRequest c, HHRoutingConfig hhRoutingConfig,
 	                                                           float initDirection, RouteRegion[] regions,
 	                                                           boolean basemap, boolean requestNativePrepareResult);
 
@@ -410,9 +394,9 @@ public class NativeLibrary implements NativeRouting {
 
 	@Override
 	public boolean needRequestPrivateAccessRouting(RoutingRequest ctx, int[] x31Coordinates, int[] y31Coordinates){
-		return nativeNeedRequestPrivateAccessRouting(asRoutingContext(ctx), x31Coordinates, y31Coordinates);
+		return nativeNeedRequestPrivateAccessRouting(ctx, x31Coordinates, y31Coordinates);
 	}
-	protected static native boolean nativeNeedRequestPrivateAccessRouting(RoutingContext ctx, int[] x31Coordinates, int[] y31Coordinates);
+	protected static native boolean nativeNeedRequestPrivateAccessRouting(RoutingRequest ctx, int[] x31Coordinates, int[] y31Coordinates);
 
 	protected static native ByteBuffer getGeotiffTile(
 		String tilePath, String outColorFilename, String midColorFilename, int type, int size, int zoom, int x, int y);
