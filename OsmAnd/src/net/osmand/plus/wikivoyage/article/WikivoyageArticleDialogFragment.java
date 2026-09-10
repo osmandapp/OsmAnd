@@ -9,7 +9,6 @@ import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,7 +32,6 @@ import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
@@ -60,10 +58,9 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 
 public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragment {
@@ -111,17 +108,8 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		int appBarTextColor = nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
 		articleToolbarText = mainView.findViewById(R.id.article_toolbar_text);
 		articleToolbarText.setTextColor(ContextCompat.getColor(mainView.getContext(), appBarTextColor));
-		ColorStateList selectedLangColorStateList = AndroidUtils.createPressedColorStateList(
-				getContext(), nightMode,
-				R.color.icon_color_default_light, R.color.active_color_primary_light,
-				R.color.icon_color_default_dark, R.color.active_color_primary_dark
-		);
 
-		selectedLangTv = mainView.findViewById(R.id.select_language_text_view);
-		selectedLangTv.setTextColor(selectedLangColorStateList);
-		selectedLangTv.setCompoundDrawablesWithIntrinsicBounds(getSelectedLangIcon(), null, null, null);
-		selectedLangTv.setBackgroundResource(nightMode
-				? R.drawable.wikipedia_select_lang_bg_dark_n : R.drawable.wikipedia_select_lang_bg_light_n);
+		setupLanguageChanger(mainView.findViewById(R.id.select_language_text_view));
 		selectedLangTv.setOnClickListener(v -> showPopupLangMenu(v, selectedLang));
 
 		TextView contentsBtn = mainView.findViewById(R.id.contents_button);
@@ -260,28 +248,21 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 
 	@Override
 	protected void showPopupLangMenu(View view, String langSelected) {
-		if (langs == null) {
+		if (Algorithms.isEmpty(langs)) {
 			return;
 		}
-		PopupMenu popup = new PopupMenu(view.getContext(), view, Gravity.END);
-		Map<String, String> names = new HashMap<>();
-		for (String n : langs) {
-			names.put(n, FileNameTranslationHelper.getVoiceName(getContext(), n));
-		}
-		Map<String, String> sortedNames = AndroidUtils.sortByValue(names);
-		for (Map.Entry<String, String> e : sortedNames.entrySet()) {
-			String lang = e.getValue();
-			String langKey = e.getKey();
-			MenuItem item = popup.getMenu().add(lang);
-			item.setOnMenuItemClickListener(i -> {
-				if (!selectedLang.equals(langKey)) {
-					selectedLang = langKey;
-					populateArticle();
-				}
-				return true;
-			});
-		}
-		popup.show();
+
+		showPopupLangMenu(view, new HashSet<>(langs));
+	}
+
+	@Override
+	protected String getSelectedLanguage() {
+		return selectedLang;
+	}
+
+	@Override
+	protected void setSelectedLanguage(final String languageCode) {
+		this.selectedLang = languageCode;
 	}
 
 	@Override
