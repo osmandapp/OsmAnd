@@ -108,7 +108,8 @@ public class SpatialTextSearch {
 				Map.of(-300_000, 0.2, -100_000, 0.5, -10_000, 1.0, -1_000, 20.0));
 		
 		// Hide results under SHOW MORE
-		public int[] SHOW_MORE_WORDS_COUNT = new int[] {3, 20, 100};
+		// the ladder widens and ends: the last level holds the rest, within the limits of the search itself
+		public int[] SHOW_MORE_WORDS_COUNT = new int[] {3, 10, 30, 100, 300, 1000};
 		// with score ranking a level also ends where the score drops this much below its first row
 		public double SHOW_MORE_SCORE_DROP = 0.5;
 		// ... or holds this many times its minimum: hundreds of rows with one score give no drop to cut at
@@ -644,15 +645,13 @@ public class SpatialTextSearch {
 				long nextKey = SpatialSearchResult.compareKey(r);
 				boolean scoreDrop = ctx.ranking != null && !r.isPoiCategory()
 						&& (r.score < levelScore - ctx.settings.SHOW_MORE_SCORE_DROP
-								|| ind >= ctx.settings.SHOW_MORE_MAX_LEVEL_TIMES * limits[lind]);
+								|| lind < limits.length && ind >= ctx.settings.SHOW_MORE_MAX_LEVEL_TIMES * limits[lind]);
 				if (cKey != nextKey || scoreDrop) {
 					if (lind < limits.length && ind >= limits[lind]) {
 						level++;
 						levelScore = r.score;
 						ind = 0;
-						if (lind < limits.length - 1) {
-							lind++;
-						}
+						lind++;
 					}
 //					System.out.println(nextKey + " " + r);
 					cKey = nextKey;
