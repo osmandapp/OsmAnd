@@ -427,7 +427,7 @@ public abstract class EditorFragment extends BaseFullScreenFragment
 	}
 
 	@NonNull
-	private EditorIconController getIconController() {
+	protected EditorIconController getIconController() {
 		return EditorIconController.getInstance(app, this, iconName);
 	}
 
