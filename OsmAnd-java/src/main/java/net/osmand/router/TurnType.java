@@ -509,6 +509,31 @@ public class TurnType {
 		return getPrimaryTurn(lane) == NONE || getSecondaryTurn(lane) == NONE || getTertiaryTurn(lane) == NONE;
 	}
 
+	public static boolean hasNoneTurnLane(int[] lanes) {
+		if (lanes != null) {
+			for (int lane : lanes) {
+				if (hasNoneTurnLane(lane)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	public static boolean isPrimaryDirection(int lane, int direction) {
+		int primary = getPrimaryTurn(lane);
+		return primary == direction || (direction == C && primary == NONE);
+	}
+
+	public static boolean laneHasDirection(int lane, int direction) {
+		return isPrimaryDirection(lane, direction) || getSecondaryTurn(lane) == direction
+				|| getTertiaryTurn(lane) == direction;
+	}
+
+	public static boolean isSameTurnSide(int t1, int t2) {
+		return (isLeftTurn(t1) && isLeftTurn(t2)) || (isRightTurn(t1) && isRightTurn(t2));
+	}
+
 	// NONE exists only while turns are calculated: replace it with C before the lanes are
 	// shown in the widget or used for voice prompts
 	public static void convertNoneToStraight(int[] lanes) {

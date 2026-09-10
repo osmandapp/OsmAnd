@@ -1485,35 +1485,11 @@ public class RouteResultPreparation {
 		int activeTurn = act[2];
 		if (activeBeginIndex == -1 || activeEndIndex == -1 || activeBeginIndex > activeEndIndex) {
 			TurnType simple = createSimpleKeepLeftRightTurn(leftSide, prevSegm, currentSegm, rs);
-			if (hasNoneLanes(rawLanes)) {
-				// turn:lanes doesn't declare a direction for every road of the junction, so the
-				// directions couldn't be matched to the roads by their position. The lanes themselves
-				// are still usable: activate the ones that allow the direction the route takes,
-				// instead of dropping the tag and building the lanes from the geometry alone.
-				double deviation = MapUtils.degreesDiff(prevSegm.getBearingEnd(), currentSegm.getBearingBegin());
-				int laneTurnType = getTurnByAngle(deviation);
-				int baseTurnType = simple != null ? simple.getValue() : laneTurnType;
-				boolean activated = setAllowedLanes(laneTurnType, rawLanes);
-				if (!activated) {
-					// the geometry matches no lane: a tag that declares a single direction
-					// on the same side describes the turn better than the raw angle does
-					int[] declared = getUniqTurnTypes(turnLanes);
-					if (declared.length == 1 && sameTurnSide(declared[0], laneTurnType)
-							&& setAllowedLanes(declared[0], rawLanes)) {
-						activated = true;
-						baseTurnType = declared[0];
-					}
-				}
-				if (activated) {
-					t = getActiveTurnType(rawLanes, leftSide, TurnType.valueOf(baseTurnType, leftSide));
-					if (simple != null) {
-						t.setSkipToSpeak(simple.isSkipToSpeak());
-					}
-					t.setLanes(rawLanes);
-					t.setPossibleLeftTurn(possiblyLeftTurn);
-					t.setPossibleRightTurn(possiblyRightTurn);
-					return t;
-				}
+			TurnType unmarked = createTurnFromUnmarkedLanes(prevSegm, currentSegm, rawLanes, turnLanes, leftSide, simple);
+			if (unmarked != null) {
+				unmarked.setPossibleLeftTurn(possiblyLeftTurn);
+				unmarked.setPossibleRightTurn(possiblyRightTurn);
+				return unmarked;
 			}
 			// something went wrong
 			return simple;
@@ -1529,7 +1505,7 @@ public class RouteResultPreparation {
 					if (TurnType.getSecondaryTurn(rawLanes[i]) == tp) {
 						TurnType.setSecondaryToPrimary(rawLanes, i);
 						rawLanes[i] |= 1;
-					} else if (isPrimaryDirection(rawLanes[i], tp)) {
+					} else if (TurnType.isPrimaryDirection(rawLanes[i], tp)) {
 						rawLanes[i] |= 1;
 					}
 				}
@@ -1555,18 +1531,32 @@ public class RouteResultPreparation {
 		return t;
 	}
 
-	private boolean sameTurnSide(int t1, int t2) {
-		return (TurnType.isLeftTurn(t1) && TurnType.isLeftTurn(t2))
-				|| (TurnType.isRightTurn(t1) && TurnType.isRightTurn(t2));
-	}
-
-	private boolean hasNoneLanes(int[] rawLanes) {
-		for (int lane : rawLanes) {
-			if (TurnType.hasNoneTurnLane(lane)) {
-				return true;
+	private TurnType createTurnFromUnmarkedLanes(RouteSegmentResult prevSegm, RouteSegmentResult currentSegm,
+			int[] rawLanes, String turnLanes, boolean leftSide, TurnType simple) {
+		if (!TurnType.hasNoneTurnLane(rawLanes)) {
+			return null;
+		}
+		double deviation = MapUtils.degreesDiff(prevSegm.getBearingEnd(), currentSegm.getBearingBegin());
+		int laneTurnType = getTurnByAngle(deviation);
+		int baseTurnType = simple != null ? simple.getValue() : laneTurnType;
+		boolean activated = setAllowedLanes(laneTurnType, rawLanes);
+		if (!activated) {
+			int[] declared = getUniqTurnTypes(turnLanes);
+			if (declared.length == 1 && TurnType.isSameTurnSide(declared[0], laneTurnType)
+					&& setAllowedLanes(declared[0], rawLanes)) {
+				activated = true;
+				baseTurnType = declared[0];
 			}
 		}
-		return false;
+		if (!activated) {
+			return null;
+		}
+		TurnType t = getActiveTurnType(rawLanes, leftSide, TurnType.valueOf(baseTurnType, leftSide));
+		if (simple != null) {
+			t.setSkipToSpeak(simple.isSkipToSpeak());
+		}
+		t.setLanes(rawLanes);
+		return t;
 	}
 
 	private void setActiveLanesRange(int[] rawLanes, int activeBeginIndex, int activeEndIndex, int activeTurn) {
@@ -2403,49 +2393,55 @@ public class RouteResultPreparation {
 	private void findActiveIndexByUniqueDirections(int[] pair, int[] directions, RoadSplitStructure rs, int[] rawLanes) {
 		int startDirection = directions[rs.roadsOnLeft];
 		int endDirection = directions[directions.length - rs.roadsOnRight - 1];
+
+		int beginIndex = firstLaneWithDirection(rawLanes, startDirection);
+		int endIndex = lastLaneWithDirection(rawLanes, endDirection);
+		if (beginIndex >= 0) {
+			pair[2] = startDirection;
+		}
+		if (beginIndex >= 0 && endIndex >= beginIndex) {
+			endIndex = includeTrailingUnmarkedLanes(rawLanes, endIndex);
+		}
+		if (beginIndex >= 0 && !isStartDirectionTrusted(rawLanes, beginIndex, startDirection, rs)) {
+			beginIndex = -1;
+		}
+		pair[0] = beginIndex;
+		pair[1] = endIndex;
+	}
+
+	private int firstLaneWithDirection(int[] rawLanes, int direction) {
 		for (int i = 0; i < rawLanes.length; i++) {
-			if (laneHasDirection(rawLanes[i], startDirection)) {
-				pair[0] = i;
-				pair[2] = startDirection;
-				break;
+			if (TurnType.laneHasDirection(rawLanes[i], direction)) {
+				return i;
 			}
 		}
+		return -1;
+	}
+
+	private int lastLaneWithDirection(int[] rawLanes, int direction) {
 		for (int i = rawLanes.length - 1; i >= 0; i--) {
-			if (laneHasDirection(rawLanes[i], endDirection)) {
-				pair[1] = i;
-				break;
+			if (TurnType.laneHasDirection(rawLanes[i], direction)) {
+				return i;
 			}
 		}
-		if (pair[0] >= 0 && pair[1] >= pair[0]) {
-			// Unmarked lanes next to the matched range are claimed by no road of the junction,
-			// so they belong to the direction the route takes - keep them in the active range.
-			while (pair[1] + 1 < rawLanes.length
-					&& TurnType.getPrimaryTurn(rawLanes[pair[1] + 1]) == TurnType.NONE) {
-				pair[1]++;
-			}
-		}
-		if (pair[0] >= 0 && rs.roadsOnLeft > 0 && hasNoneLanes(rawLanes)
-				&& !TurnType.isSlightTurn(startDirection)
-				&& !isPrimaryDirection(rawLanes[pair[0]], startDirection)) {
-			// The roads here are within TURN_DEGREE_MIN of each other, so a sharp direction is already
-			// at odds with the geometry. With an incomplete tag (unmarked lanes) the directions can't be
-			// matched to the roads by position either, so accept it only as the main direction of its lane.
-			pair[0] = -1;
-		}
+		return -1;
 	}
 
-	private boolean isPrimaryDirection(int lane, int direction) {
-		int primary = TurnType.getPrimaryTurn(lane);
-		return primary == direction || (direction == TurnType.C && primary == TurnType.NONE);
+	private int includeTrailingUnmarkedLanes(int[] rawLanes, int endIndex) {
+		while (endIndex + 1 < rawLanes.length
+				&& TurnType.getPrimaryTurn(rawLanes[endIndex + 1]) == TurnType.NONE) {
+			endIndex++;
+		}
+		return endIndex;
 	}
 
-	private boolean laneHasDirection(int lane, int direction) {
-		if (direction == TurnType.C && TurnType.getPrimaryTurn(lane) == TurnType.NONE) {
-			// an unmarked lane keeps the direction of the road
+	private boolean isStartDirectionTrusted(int[] rawLanes, int beginIndex, int startDirection,
+			RoadSplitStructure rs) {
+		if (rs.roadsOnLeft == 0 || !TurnType.hasNoneTurnLane(rawLanes)) {
 			return true;
 		}
-		return TurnType.getPrimaryTurn(lane) == direction || TurnType.getSecondaryTurn(lane) == direction
-				|| TurnType.getTertiaryTurn(lane) == direction;
+		return TurnType.isSlightTurn(startDirection)
+				|| TurnType.isPrimaryDirection(rawLanes[beginIndex], startDirection);
 	}
 
 	private boolean findActiveIndexByLanes(int[] pair, int[] directions, RoadSplitStructure rs, int[] rawLanes,
