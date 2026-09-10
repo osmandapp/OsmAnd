@@ -19,6 +19,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
@@ -52,7 +53,8 @@ public class CarWidgetsPanel {
 	private static final float PANEL_MARGIN_DP = 10f;
 	private static final float CORNER_RADIUS_DP = 8f;
 	private static final float BORDER_WIDTH_DP = 2f;
-	private static final float PANEL_PADDING_DP = 8f;
+	private static final float DIVIDER_WIDTH_DP = 1f;
+	private static final float PANEL_PADDING_DP = 4f;
 	/** Widgets are stacked without gaps, their own dividers separate the rows. */
 	private static final float WIDGET_SPACING_DP = 0f;
 	private static final float WIDGET_WIDTH_DP = 130f;
@@ -67,8 +69,6 @@ public class CarWidgetsPanel {
 	/** Fraction of the visible area height the panel is allowed to occupy. */
 	private static final float MAX_PANEL_HEIGHT_RATIO = 0.7f;
 
-	public static final String WIDGETS_SEPARATOR = ";";
-
 	private final OsmandApplication app;
 	private final WidgetsPanel panel;
 
@@ -82,9 +82,9 @@ public class CarWidgetsPanel {
 	private int firstVisibleWidget;
 	private int lastVisibleCount;
 
-
-	private ResolvedPanelAppearance panelAppearance;
 	private final Paint borderPaint = new Paint();
+	private final Paint backgroundPaint = new Paint();
+	private final Paint dividerPaint = new Paint();
 
 	public CarWidgetsPanel(@NonNull OsmandApplication app) {
 		this(app, WidgetsPanel.ANDROID_AUTO);
@@ -97,6 +97,14 @@ public class CarWidgetsPanel {
 		borderPaint.setDither(true);
 		borderPaint.setAntiAlias(true);
 		borderPaint.setStyle(Paint.Style.STROKE);
+
+		dividerPaint.setDither(true);
+		dividerPaint.setAntiAlias(true);
+		dividerPaint.setStyle(Paint.Style.STROKE);
+
+		dividerPaint.setDither(true);
+		dividerPaint.setAntiAlias(true);
+		backgroundPaint.setStyle(Paint.Style.FILL);
 	}
 
 	/**
@@ -129,19 +137,29 @@ public class CarWidgetsPanel {
 		int widgetWidth = (int) (WIDGET_WIDTH_DP * appDensity);
 		float panelWidth = Math.min(PANEL_WIDTH_CAR_DP * carDensity,
 				visibleArea.width() * MAX_PANEL_WIDTH_RATIO);
-		float scale = panelWidth / widgetWidth;
+		float panelPadding = PANEL_PADDING_DP * carDensity;
+		float borderWidth = BORDER_WIDTH_DP * carDensity;
+		float panelContentWidth = panelWidth - panelPadding * 2 - borderWidth * 2;
+		float scale = panelContentWidth / widgetWidth;
 
 		// The panel is flush with the right edge and keeps a fixed top, so that it does not jump
 		// when the speedometer or the alarm widget appear or change size.
 		float right = visibleArea.right;
 		float left = right - panelWidth;
 		float top = visibleArea.top + topOffset;
-		float maxBottom = top + visibleArea.height() * MAX_PANEL_HEIGHT_RATIO;
+		float maxHeight = Math.min(visibleArea.bottom - top, visibleArea.height() * MAX_PANEL_HEIGHT_RATIO);
+		float maxBottom = top + maxHeight;
+
+		float contentRight = right - panelPadding - borderWidth;
+		float contentLeft = left + panelPadding + borderWidth;
+		float contentTop = top + borderWidth;
+		float maxContentBottom = maxBottom - borderWidth;
 
 		List<View> views = new ArrayList<>();
 		List<Float> tops = new ArrayList<>();
 		List<Float> bottoms = new ArrayList<>();
-		float y = top;
+
+		float y = contentTop;
 		for (int i = firstVisibleWidget; i < widgets.size(); i++) {
 			MapWidget widget = widgets.get(i);
 			widget.updateInfo(drawSettings);
@@ -159,7 +177,7 @@ public class CarWidgetsPanel {
 				continue;
 			}
 			float height = measuredHeight * scale;
-			if (y + height > maxBottom) {
+			if (y + height > maxContentBottom) {
 				break;
 			}
 			view.layout(0, 0, measuredWidth, measuredHeight);
@@ -167,8 +185,8 @@ public class CarWidgetsPanel {
 			// on the edge is not worth losing a whole row for.
 			boolean covered = hiddenArea != null
 					&& Math.min(hiddenArea.bottom, y + height) > Math.max(hiddenArea.top, y)
-					&& Math.min(hiddenArea.right, right) - Math.max(hiddenArea.left, left)
-					> panelWidth / 2;
+					&& Math.min(hiddenArea.right, contentRight) - Math.max(hiddenArea.left, contentLeft)
+					> panelContentWidth / 2;
 			if (!covered) {
 				views.add(view);
 				tops.add(y);
@@ -182,16 +200,20 @@ public class CarWidgetsPanel {
 			return 0;
 		}
 		float corner = CORNER_RADIUS_DP * carDensity;
-		float borderWidth = BORDER_WIDTH_DP * carDensity;
-		// Rounded on the left, flush square on the right. Rows hidden by the reserved area split
-		// the panel into several blocks, each of them gets its own rounded outline.
+		float dividerWidth = DIVIDER_WIDTH_DP * carDensity;
+
+		//  Rows hidden by the reserved area split the panel into several blocks, each of them gets its own rounded outline.
 		int blockStart = 0;
 		for (int i = 1; i <= views.size(); i++) {
 			boolean endOfBlock = i == views.size()
 					|| bottoms.get(i - 1) + 1 < tops.get(i);
 			if (endOfBlock) {
-				drawBlock(canvas, views.subList(blockStart, i), tops.subList(blockStart, i),
-						left, right, bottoms.get(i - 1), corner, borderWidth, scale);
+				drawBlock(canvas,
+						views.subList(blockStart, i),
+						tops.subList(blockStart, i), bottoms.subList(blockStart, i),
+						contentLeft, contentRight,
+						panelPadding, corner,
+						borderWidth, dividerWidth, scale);
 				lastPanelBounds.union(left, tops.get(blockStart), right, bottoms.get(i - 1));
 				blockStart = i;
 			}
@@ -199,14 +221,21 @@ public class CarWidgetsPanel {
 		return lastPanelBounds.height();
 	}
 
-	private void drawBlock(@NonNull Canvas canvas, @NonNull List<View> views,
-	                       @NonNull List<Float> tops, float left, float right, float bottom,
-	                       float corner, float borderWidth,
+	private void drawBlock(@NonNull Canvas canvas,
+						   @NonNull List<View> views,
+	                       @NonNull List<Float> tops, @NonNull List<Float> bottoms,
+	                       float contentLeft, float contentRight, float padding,
+	                       float corner, float borderWidth, float dividerWidth,
 	                       float scale) {
-		Path path = new Path();
-		float top = tops.get(0);
-		path.addRoundRect(
-				new RectF(left, top, right, bottom),
+		Path backgroundPath = new Path();
+		float blockTop = tops.get(0);
+		float blockBottom = bottoms.get(bottoms.size() - 1);
+
+		float blockLeft = contentLeft - padding;
+		float blockRight = contentRight + padding;
+
+		backgroundPath.addRoundRect(
+				new RectF(blockLeft, blockTop, blockRight, blockBottom),
 				new float[]{
 						corner, corner,
 						corner, corner,
@@ -216,19 +245,30 @@ public class CarWidgetsPanel {
 				Path.Direction.CW
 		);
 
+		borderPaint.setStrokeWidth(borderWidth*2);
+		canvas.drawPath(backgroundPath, borderPaint);
+
 		canvas.save();
-		canvas.clipPath(path);
+		canvas.clipPath(backgroundPath);
+
+		canvas.drawPath(backgroundPath, backgroundPaint);
+
+		dividerPaint.setStrokeWidth(dividerWidth);
+
 		for (int i = 0; i < views.size(); i++) {
 			canvas.save();
-			canvas.translate(left, tops.get(i));
+			canvas.translate(contentLeft, tops.get(i));
 			canvas.scale(scale, scale);
 			views.get(i).draw(canvas);
 			canvas.restore();
+			if (i < views.size() - 1) {
+				canvas.drawLine(
+						blockLeft, bottoms.get(i) - dividerWidth / 2,
+						blockRight, bottoms.get(i) - dividerWidth / 2,
+						dividerPaint
+				);
+			}
 		}
-
-		borderPaint.setColor(panelAppearance.getPanelBorderColor());
-		borderPaint.setStrokeWidth(borderWidth);
-		canvas.drawPath(path, borderPaint);
 
 		canvas.restore();
 	}
@@ -292,7 +332,7 @@ public class CarWidgetsPanel {
 		float density = app.getResources().getDisplayMetrics().density;
 		ResolvedPanelAppearance appearance = app.getPanelAppearanceSettingsManager()
 				.resolveCommitted(panel, layoutMode, nightMode, false, density, true);
-		this.panelAppearance = appearance;
+        applyPanelAppearance(appearance);
 
 		Set<String> addedWidgetTypes = new HashSet<>();
 		for (MapWidgetInfo info : widgetInfos) {
@@ -305,6 +345,14 @@ public class CarWidgetsPanel {
 				widgets.add(widget);
 			}
 		}
+	}
+
+	private void applyPanelAppearance(@NonNull ResolvedPanelAppearance appearance) {
+		int baseBorderColor = ColorUtilities.removeAlpha(appearance.getPanelBorderColor());
+		int borderColor = ColorUtilities.getColorWithAlpha(baseBorderColor, 0.7f);
+		borderPaint.setColor(borderColor);
+		backgroundPaint.setColor(appearance.getBackground().getColor());
+		dividerPaint.setColor(appearance.getDividerColor());
 	}
 
 	public void clearWidgets() {
