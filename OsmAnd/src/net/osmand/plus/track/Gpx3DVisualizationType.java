@@ -3,6 +3,7 @@ package net.osmand.plus.track;
 import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_BIKE_POWER;
 import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_CADENCE;
 import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_HEART_RATE;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_SPEED;
 import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_TEMPERATURE_A;
 import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_TEMPERATURE_W;
 
@@ -101,9 +102,10 @@ public enum Gpx3DVisualizationType {
 				if (!Float.isNaN(waterTemp)) {
 					return waterTemp + TEMPERATURE_TO_HEIGHT_OFFSET;
 				}
+				return TEMPERATURE_TO_HEIGHT_OFFSET;
 			}
 			case SPEED_SENSOR: {
-				return hasAttributes ? attributes.getSensorSpeed() : SensorAttributesUtils.getPointAttribute(point, SENSOR_TAG_BIKE_POWER, 0) * SPEED_TO_HEIGHT_SCALE;
+				return hasAttributes ? attributes.getSensorSpeed() : SensorAttributesUtils.getPointAttribute(point, SENSOR_TAG_SPEED, 0) * SPEED_TO_HEIGHT_SCALE;
 			}
 		}
 		return 0;

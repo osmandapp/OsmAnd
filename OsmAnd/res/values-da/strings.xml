@@ -4910,7 +4910,7 @@
     <string name="miles">Miles</string>
     <string name="mpg">MPG</string>
     <string name="access_pinch_zoom_magnification">Forstørrelse med knibezoom</string>
-    <string name="access_pinch_zoom_magnification_descr">Brug viewport-skalering i stedet for separate zoom-niveauer ved zoom-bevægelser.</string>
+    <string name="access_pinch_zoom_magnification_descr">Brug viewport-skalering (forstørrelse) i stedet for separate zoom-niveauer ved zoom-bevægelsen.</string>
     <string name="show_spherical_map_description">Vis sfærisk model af Jorden</string>
     <string name="shared_string_price">Pris</string>
     <string name="rendering_attr_showSkiSlopes_name">Vis skiløjper</string>
@@ -5395,4 +5395,5 @@
     <string name="share_favorites_share_failed">Det var ikke muligt at dele filen.</string>
     <string name="share_favorites_missing_media_warning">Nogle af de vedhæftede mediefiler kunne ikke medtages.</string>
     <string name="search_on_web">Søg på nettet</string>
+    <string name="astro_eclipse_column_below_horizon">Under horisonten</string>
 </resources>

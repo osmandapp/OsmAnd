@@ -21,32 +21,21 @@ import net.osmand.search.core.spatial.SpatialTextSearch.SpatialSearchResults;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSettings;
 import net.osmand.util.SearchAlgorithms;
 
-//////////// TESTING //////////
-// ### ukraine_school.json - Missing A+ school - школа А+ (nothing found on website)
-// 		Result 2 (t2+0-w1-oth1-tp0) - ["школа а" [POI School] 'Початкова школа А+' 731005224 6351 (50.3700 30.4470)]
-// ### usa_new_york.json  - "apple city", "harlem city" (New york) - test that result odesn't appear "city" [POI_TYPE] + "apple" [CITY_TOWN_TYPE] 'New York' 
-// ### uk_saksag.json (NO street intersection, No City Antwerpen)  
-// ### usa_penn_avenue.json: (add ro-ki ignore) UNIT TESTING: (failing) 763 Ro-Ki Boulevard Nichols
-// ### usa_wilkes-barre.json '155 Park Avenue Wilkes Barre': duplicate result not present
-// ### portugal_travessa.json: See comment
-// ### ge3.json: '10 Am Remsufer Remseck am Neckar' - see comment
-// ### uk_mihiia.json
-// ### World.json 'остров Пасхи'
-
 ////////// IN PROGRESS //////////
-// REVIEW (index_words_dashboard - common озеро): POI / ADDRESS - France, Germany, US, Europe, China, Peru
-// REVIEW Auto test Analyze Performance & Android bootlenecks VisualVM (Pipeline + Intersection)
 // TODO FIX ORDER -  (tests)
+// TODO FIX TEST - category 8
+// TODO 'Hardware store' - Store is city? 
+// TODO 'Bank', 'Billa' - translations for poi categories 
 
-// TODO INDEX: Find POI Categories translations / synonyms via Common words - Стоматол., Dentist, Basilica 
-// TODO REVIEW: Abbrevations (synonyms / direction words) other languages?
-// TODO REVIEW: Analyze Abbrevations / common skip (abbrevations 1st=first)
+// DEDUPLICATE: Unit test - "Ярославів Вал"
+// DEDUPLICATE: Index place=state, province (World_basemap_mini) + county, ... (normal maps).. + wikidata id for boundaries (regions.ocbf) & display them - analyze
+// DEDUPLICATE: Add missing boundaries to Adress section (probably national parks?)
+// DEDUPLICATE: Duplicate village POI - - 'Khotiv' - missing wikidata on relation amenity. When generating amenity relation, wikidata tag could be taken from admin_centre, admin_center, ...
 
-// TODO Web worldwide search on missing results test "Arizona"
-// TODO DEDUPLICATE: Index place=state, county.. + wikidata id for boundaries (regions.ocbf) & display them - analyze
-// TODO DEDUPLICATE: Travel / Wiki - too many houses (duplicate names) in wiki maps - obstruct search by street "Ярославів Вал"`?
-// TODO Extend POI tile bboxes 200m? internet_access (fuel_diesel)
-// TODO Search in large parks, neighborhood same as in boundaries (index bbox POI), residential way/56238205
+// REVIEW: Compare Unit tests with Live maps
+// REVIEW: Find POI Categories translations / synonyms via Common words - Стоматол., Dentist, Basilica 
+// REVIEW: Abbrevations (synonyms / direction words) other languages? - https://github.com/osmandapp/OsmAnd/issues/16359
+// REVIEW: Analyze Abbrevations / common skip (abbrevations 1st=first) 
 
 /////////////// EXTRA FEATURES ///////////////
 // TODO Sorting before load objects (use elo and other buildings?) and limit results
@@ -422,11 +411,12 @@ public class SpatialSearchTestAndDocs {
 //		query = "Holmby road 18 B"; // 'Holmby 18 B', 'Holmby 18-B', 'Holmby 18B'
 //		query = "Holmby Melbourne 18B";
 		
-//		pattern = "Slovakia";
+		pattern = "Slovakia";
 //		location = new LatLon(45.04, 30.0);
-//		location = new LatLon(46.3848, 25.0420);
-//		pattern2 = "World";
-//		query = "Bratislava Billa";
+		location = new LatLon(46.3848, 25.0420);
+//		settings.DEDUPLICATE_RES = false;
+		pattern2 = "World_basemap_mini";
+		query = "Bratislava Billa";
 //		settings.DEDUPLICATE_RES = false;
 //		settings.ALLOW_HOUSE_POI_TYPE_INTERSECTION = false;
 //		query = "Shell 2 Rožňavská";

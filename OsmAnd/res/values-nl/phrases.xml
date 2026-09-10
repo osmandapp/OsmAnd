@@ -236,8 +236,8 @@
     <string name="poi_hostel">Hostel</string>
     <string name="poi_motel">Motel</string>
     <string name="poi_guest_house">Guest house</string>
-    <string name="poi_alpine_hut">Berghut</string>
-    <string name="poi_chalet">Chalet</string>
+    <string name="poi_alpine_hut">Berghut;Schuilplaats</string>
+    <string name="poi_chalet">Chalet;Schuilplaats</string>
     <string name="poi_monastery">Klooster</string>
     <string name="poi_religion_taoist">Taoïsme</string>
     <string name="poi_place_of_worship">Gebedshuis</string>
@@ -706,7 +706,7 @@
     <string name="poi_water">Water</string>
     <string name="poi_wood">Bos</string>
     <string name="poi_communication">Communicatie</string>
-    <string name="poi_cabin">Hut</string>
+    <string name="poi_cabin">Hut;Schuilplaats</string>
     <string name="poi_craft_winery">Wijnhandel</string>
     <string name="poi_piste_playground">Kinderskiweide</string>
     <string name="poi_personal_transport">Persoonlijk vervoer</string>
@@ -2335,7 +2335,7 @@
     <string name="poi_cuisine_noodle">Noedels</string>
     <string name="poi_cuisine_donut">Donut</string>
     <string name="poi_cuisine_ramen">Ramen</string>
-    <string name="poi_cuisine_crepe">Crêpes</string>
+    <string name="poi_cuisine_crepe">Crêpe;Crêpes</string>
     <string name="poi_cuisine_breakfast">Ontbijt</string>
     <string name="poi_cuisine_beef_bowl">Gyudon</string>
     <string name="poi_cuisine_steak">Biefstuk</string>
@@ -2715,7 +2715,7 @@
     <string name="poi_healthcare_speciality_addiction">Verslavingszorg</string>
     <string name="poi_capacity_beds">Capaciteit (bedden)</string>
     <string name="poi_dispensing_yes">Ja</string>
-    <string name="poi_organic_yes">Ja</string>
+    <string name="poi_organic_yes">Ja;Biologisch</string>
     <string name="poi_organic_no">Nee</string>
     <string name="poi_fast_food_cafeteria">Ja;Cafetaria</string>
     <string name="poi_beds">Bedden</string>
@@ -2726,7 +2726,7 @@
     <string name="poi_historic_tank">Historische tank</string>
     <string name="poi_generator_source_biomass">Energiebron: biomassa</string>
     <string name="poi_access_disabled">Gehandicaptentoegang</string>
-    <string name="poi_snowmobile_yes">Ja</string>
+    <string name="poi_snowmobile_yes">Ja;Sneeuwscooter</string>
     <string name="poi_bus_yes">Ja;Bus;Bussen</string>
     <string name="poi_caravan_yes">Ja;Caravan</string>
     <string name="poi_motorhome_yes">Ja;Camper</string>
@@ -2735,8 +2735,8 @@
     <string name="poi_moped_yes">Ja;Bromfiets</string>
     <string name="poi_mofa_yes">Ja;Snorfiets</string>
     <string name="poi_hgv_yes">Ja</string>
-    <string name="poi_goods_yes">Ja</string>
-    <string name="poi_disabled_yes">Ja</string>
+    <string name="poi_goods_yes">Ja;Toegang voor lichte bedrijfsvoertuigen</string>
+    <string name="poi_disabled_yes">Ja;Mensen met een handicap</string>
     <string name="poi_bridge_structure_boardwalk">Soort brug: vlonderpad</string>
     <string name="poi_bridge_movable_submersible">Beweegbare brug type: afzinkbaar</string>
     <string name="poi_conveying_yes">Roltrap: ja</string>
@@ -3111,8 +3111,8 @@
     <string name="poi_support_suspended">Ondersteuning: hangend</string>
     <string name="poi_location_overhead">Boven</string>
     <string name="poi_location_underwater">Onderwater</string>
-    <string name="poi_surface_metal_grid">Metaalrooster</string>
-    <string name="poi_surface_artificial_turf">Kunstgras</string>
+    <string name="poi_surface_metal_grid">Oppervlak: Metaalrooster</string>
+    <string name="poi_surface_artificial_turf">Oppervlak: Kunstgras</string>
     <string name="poi_mountain_area">Berggebied</string>
     <string name="poi_couloir">Couloir</string>
     <string name="poi_vhf">VHF-kanaal</string>
@@ -3202,7 +3202,7 @@
     <string name="poi_toilets_disposal_pitlatrine">Puttenlatrine</string>
     <string name="poi_diplomatic_high_commission">Hoge Commissaris</string>
     <string name="poi_diplomatic_honorary_consulate">Ereconsulaat</string>
-    <string name="poi_organic_only">Alleen</string>
+    <string name="poi_organic_only">Alleen;Enkel biologisch</string>
     <string name="poi_aquaculture_shrimp">Garnalenkwekerij</string>
     <string name="poi_support_tower">Ondersteuning: toren</string>
     <string name="poi_support_billboard">Ondersteuning: billboard</string>
@@ -3289,8 +3289,8 @@
     <string name="poi_location_roof">Locatie: dak</string>
     <string name="poi_location_overground">Locatie: bovengronds</string>
     <string name="poi_location_underground">Locatie: ondergronds</string>
-    <string name="poi_surface_decoturf">DecoTurf</string>
-    <string name="poi_surface_tartan">Tartan (kunststof)</string>
+    <string name="poi_surface_decoturf">Oppervlak: DecoTurf</string>
+    <string name="poi_surface_tartan">Oppervlak: Tartan</string>
     <string name="poi_gorge">Kloof</string>
     <string name="poi_government_legislative">Wetgevende instelling</string>
     <string name="poi_government_treasury">Ministerie van Financiën</string>
@@ -3581,18 +3581,18 @@
     <string name="poi_childcare">Kinderopvang</string>
     <string name="poi_toll_gantry">Tolportaal</string>
     <string name="poi_atoll">Atol</string>
-    <string name="poi_disabled_designated">Aangegeven</string>
-    <string name="poi_goods_designated">Aangegeven</string>
+    <string name="poi_disabled_designated">Aangewezen;Aangewezen toegang voor mensen met een handicap</string>
+    <string name="poi_goods_designated">Aangewezen;Toegang voor lichte bedrijfsvoertuigen als bestemmingsverkeer</string>
     <string name="poi_hgv_delivery">Levering;Toegang voor bevoorradingsvrachtwagens</string>
     <string name="poi_hgv_designated">Aangewezen;Aangewezen voor vrachtwagens</string>
     <string name="poi_hgv_permissive">Toegelaten;Vrachtwagens toegelaten</string>
-    <string name="poi_hgv_destination">Bestemmingsverkeer</string>
+    <string name="poi_hgv_destination">Bestemmingsverkeer;Toegang voor vrachtwagens als bestemmingsverkeer</string>
     <string name="poi_mofa_designated">Aangewezen;Aangewezen voor snorfietsen</string>
     <string name="poi_moped_designated">Aangewezen;Aangewezen voor bromfietsen</string>
     <string name="poi_motorcycle_designated">Aangewezen;Aangewezen voor motorfietsen</string>
-    <string name="poi_motorcycle_destination">Bestemmingsverkeer</string>
+    <string name="poi_motorcycle_destination">Bestemmingsverkeer;Toegang voor motorfietsen als bestemmingsverkeer</string>
     <string name="poi_motorcycle_permissive">Toegelaten;Motorfietsen toegelaten</string>
-    <string name="poi_trailer_designated">Aangegeven</string>
+    <string name="poi_trailer_designated">Aangewezen;Aangewezen voor trailers</string>
     <string name="poi_motorhome_designated">Aangewezen;Aangewezen voor campers</string>
     <string name="poi_caravan_designated">Aangewezen;Aangewezen voor caravans</string>
     <string name="poi_bus_designated">Aangewezen;Aangewezen voor bussen</string>
@@ -3607,7 +3607,7 @@
     <string name="poi_snowmobile_no">Toegang voor sneeuwscooters: nee</string>
     <string name="poi_snowmobile_private">Toegang voor sneeuwscooters: privé</string>
     <string name="poi_ski_no">Toegang voor skiërs: nee</string>
-    <string name="poi_ski_yes">Toegang voor skiërs: ja</string>
+    <string name="poi_ski_yes">Ja</string>
     <string name="poi_tourist_bus_no">Toegang voor touringcars: nee</string>
     <string name="poi_tourist_bus_designated">Toegang voor touringcars: aangegeven</string>
     <string name="poi_bus_no">Toegang voor lijnbussen: nee</string>
@@ -3683,7 +3683,7 @@
     <string name="poi_monastery_type_convent">Soort klooster: convent</string>
     <string name="poi_monastery_type_monastics">Soort klooster: monniken</string>
     <string name="poi_bath_open_air_no">Nee</string>
-    <string name="poi_bath_open_air_yes">Ja</string>
+    <string name="poi_bath_open_air_yes">Ja;Openluchtzwembad</string>
     <string name="poi_bath_type_foot_bath">Voetenbad</string>
     <string name="poi_bath_type_lake">Meer</string>
     <string name="poi_bath_type_river">Rivier</string>
@@ -3791,7 +3791,7 @@
     <string name="poi_direction_north">Noordelijke richting</string>
     <string name="poi_permanent_camping_only">Enkel</string>
     <string name="poi_permanent_camping_no">Nee</string>
-    <string name="poi_permanent_camping_yes">Ja</string>
+    <string name="poi_permanent_camping_yes">Ja;Permanent kamperen</string>
     <string name="poi_authentication_none_yes">Ja;Geen authenticatie</string>
     <string name="poi_authentication_short_message_yes">Ja</string>
     <string name="poi_authentication_phone_call_yes">Ja</string>
@@ -3878,7 +3878,7 @@
     <string name="poi_fire_hydrant_type_pipe">Pijp</string>
     <string name="poi_drinking_water_refill_network">Netwerk van drinkwater vulpunten</string>
     <string name="poi_drinking_water_refill_no">Drinkwater bijvullen: nee</string>
-    <string name="poi_drinking_water_refill_yes">Ja</string>
+    <string name="poi_drinking_water_refill_yes">Ja;Drinkwater hervullen;Hervullen</string>
     <string name="poi_seamark_water_level_dry">Waterniveau: droog</string>
     <string name="poi_seamark_water_level_submerged">Waterniveau: onder water</string>
     <string name="poi_seamark_water_level_part_submerged">Waterniveau: gedeeltelijk onder water</string>
@@ -3887,7 +3887,7 @@
     <string name="poi_video_no">Nee</string>
     <string name="poi_video_yes">Ja;Video</string>
     <string name="poi_sms_no">Nee</string>
-    <string name="poi_sms_yes">Ja</string>
+    <string name="poi_sms_yes">Ja;SMS</string>
     <string name="poi_bowling_alley">Bowling</string>
     <string name="poi_paintball">Paintball</string>
     <string name="poi_tactile_paving_incorrect">Incorrect</string>
@@ -4558,7 +4558,7 @@
     <string name="poi_climbing_area">Klimgebied</string>
     <string name="poi_climbing_route">Klimroute</string>
     <string name="poi_climbing_route_bottom">Onderkant klimroute</string>
-    <string name="poi_cafe_yes">Ja</string>
+    <string name="poi_cafe_yes">Café: ja</string>
     <string name="poi_sled_yes">Slee: ja</string>
     <string name="poi_sled_no">Slee: nee</string>
     <string name="poi_dog_sled_yes">Hondenslee: ja</string>
@@ -4753,7 +4753,7 @@
     <string name="poi_barrier_log">Boomstam</string>
     <string name="poi_barrier_sliding_gate">Schuifpoort</string>
     <string name="poi_toy_library">Speel-o-theek</string>
-    <string name="poi_surface_chipseal">Chipseal</string>
+    <string name="poi_surface_chipseal">Oppervlak: Chipseal</string>
     <string name="poi_lock_name">Sluis naam</string>
     <string name="poi_draft">Vaardiepte</string>
     <string name="poi_lock_height">Sluishoogte</string>
@@ -4920,4 +4920,9 @@
     <string name="poi_healthcare_speciality_diabetology">Diabetologie</string>
     <string name="poi_healthcare_speciality_pharmacology">Farmacologie</string>
     <string name="poi_healthcare_speciality_cosmetic">Cosmetisch</string>
+    <string name="poi_mtb_filter">Geschikt voor MTB</string>
+    <string name="poi_ski_filter">Geschikt voor ski</string>
+    <string name="poi_horse_filter">Geschikt voor paardrijden</string>
+    <string name="poi_winter_hiking_filter">Geschikt voor winterwandelen</string>
+    <string name="poi_covered_booth">Ja</string>
 </resources>

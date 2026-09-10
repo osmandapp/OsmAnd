@@ -24,6 +24,41 @@ public class OsmandRegionsTest {
     }
 
     @Test
+    public void testRegionSearchMatching() {
+        WorldRegion pennsylvania = osmandRegions.getRegionDataByDownloadName("us_pennsylvania_northamerica");
+        Assert.assertFalse(matches("1", pennsylvania)); // 1-char queries matched all regions
+        Assert.assertTrue(matches("PA", pennsylvania)); // ref
+
+        WorldRegion meuse = osmandRegions.getRegionDataByDownloadName("france_great-east_meuse_europe");
+        Assert.assertFalse(matches("55", meuse)); // ref
+
+        WorldRegion bicol = osmandRegions.getRegionDataByDownloadName("philippines_bicol-region_asia");
+        Assert.assertFalse(matches("5", bicol)); // alt_name
+
+        WorldRegion centralVisayas = osmandRegions.getRegionDataByDownloadName("philippines_central-visayas_asia");
+        Assert.assertFalse(matches("7", centralVisayas)); // alt_name
+
+        WorldRegion bangkaBelitung = osmandRegions.getRegionDataByDownloadName("indonesia_bangka-belitung_asia");
+        Assert.assertFalse(matches("1", bangkaBelitung)); // ref
+
+        WorldRegion calabarzon = osmandRegions.getRegionDataByDownloadName("philippines_calabarzon_asia");
+        Assert.assertFalse(matches("4", calabarzon)); // alt_name
+
+        WorldRegion bali = osmandRegions.getRegionDataByDownloadName("indonesia_bali_asia");
+        Assert.assertFalse(matches("22", bali)); // ref
+
+        WorldRegion westNusaTenggara = osmandRegions.getRegionDataByDownloadName("indonesia_nusa-tenggara-barat_asia");
+        Assert.assertFalse(matches("33", westNusaTenggara)); // ref
+
+        WorldRegion westPapua = osmandRegions.getRegionDataByDownloadName("indonesia_irian-jaya-barat_asia");
+        Assert.assertFalse(matches("44", westPapua)); // ref
+    }
+
+    private boolean matches(String query, WorldRegion region) {
+        return OsmandRegions.isRegionNameMatched(query, region.getRegionSearchText());
+    }
+
+    @Test
     public void testRemoveDuplicates() {
         List<String> cz = List.of(
                 "czech-republic_jihovychod_europe",
@@ -45,6 +80,31 @@ public class OsmandRegionsTest {
         }
         Assert.assertEquals(deduplicatedDownloadNames.size(), cz.size());
         Assert.assertTrue(deduplicatedDownloadNames.contains("czech-republic_praha_europe"));
+    }
+
+    @Test
+    public void testGetCountryRegion() {
+        // a country is the region right under a continent
+        Assert.assertEquals("europe_germany", countryId("germany_berlin_europe"));
+        Assert.assertEquals("europe_germany", countryId("germany_europe"));
+        Assert.assertEquals("europe_netherlands", countryId("netherlands_noord-holland_europe"));
+        Assert.assertEquals("europe_ukraine", countryId("ukraine_kyiv-city_europe"));
+        Assert.assertEquals("northamerica_us", countryId("us_new-hampshire_northamerica"));
+
+        // a country that is placed next to the continents instead of under one
+        Assert.assertEquals("russia", countryId("russia_moscow_asia"));
+        Assert.assertEquals("russia", countryId("russia_north-caucasus-federal-district_asia"));
+
+        // continents and the world itself are not countries
+        Assert.assertNull(osmandRegions.getRegionData("europe").getCountryRegion());
+        Assert.assertNull(osmandRegions.getWorldRegion().getCountryRegion());
+    }
+
+    private String countryId(String downloadName) {
+        WorldRegion region = osmandRegions.getRegionDataByDownloadName(downloadName);
+        Assert.assertNotNull("Unknown region " + downloadName, region);
+        WorldRegion country = region.getCountryRegion();
+        return country != null ? country.getRegionId() : null;
     }
 
     @Test

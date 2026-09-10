@@ -5174,4 +5174,14 @@
     <string name="poi_rapids_grade_6">6 (ekstrem)</string>
     <string name="poi_rapids_grade_x">X (tidak dapat dilalui)</string>
     <string name="poi_water_lake">Danau</string>
+    <string name="poi_air_conditioning_no">Tidak ada</string>
+    <string name="poi_mtb_yes">Ya</string>
+    <string name="poi_winter_hiking_yes">Ya</string>
+    <string name="poi_website_menu">Menu</string>
+    <string name="poi_air_conditioning_yes">Ada</string>
+    <string name="poi_air_conditioning">AC</string>
+    <string name="poi_mtb_filter">Cocok untuk sepeda gunung</string>
+    <string name="poi_ski_filter">Cocok untuk ski</string>
+    <string name="poi_horse_filter">Cocok untuk berkuda</string>
+    <string name="poi_winter_hiking_filter">Cocok untuk hiking musim dingin</string>
 </resources>

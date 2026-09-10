@@ -10,6 +10,7 @@ import android.location.LocationManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.car.app.CarContext;
 import androidx.lifecycle.Lifecycle.State;
 
 import net.osmand.Location;
@@ -21,11 +22,14 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.AndroidAutoMapMode;
 import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.SunriseSunset;
 
 import org.apache.commons.logging.Log;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Date;
 import java.util.List;
@@ -123,6 +127,17 @@ public class DayNightHelper implements SensorEventListener {
 
 	public boolean isNightMode(@NonNull ApplicationMode appMode,
 	                           @NonNull ThemeUsageContext usageContext) {
+		return isNightMode(appMode, usageContext, false);
+	}
+
+	public boolean isNightMode(@NonNull ApplicationMode appMode,
+	                           @NonNull ThemeUsageContext usageContext, boolean checkCarSettings) {
+		if (checkCarSettings) {
+			OsmandMapTileView mapTileView = app.getOsmandMap().getMapView();
+			if (mapTileView.isCarView() && app.getCarNavigationSession() != null) {
+				return app.getDaynightHelper().isNightModeForCar(app.getCarNavigationSession().getCarContext());
+			}
+		}
 		boolean appNightMode = !settings.isLightContentForMode(appMode);
 		if (usageContext == ThemeUsageContext.APP) {
 			return appNightMode;
@@ -137,12 +152,6 @@ public class DayNightHelper implements SensorEventListener {
 		if (externalMapThemeProvider != null) {
 			DayNightMode providedTheme = externalMapThemeProvider.getMapTheme();
 			dayNightMode = providedTheme != null ? providedTheme : dayNightMode;
-		}
-
-		NavigationSession carNavigationSession = app.getCarNavigationSession();
-		if (carNavigationSession != null && carNavigationSession.isStateAtLeast(State.CREATED)) {
-			boolean carDarkMode = carNavigationSession.getCarContext().isDarkMode();
-			dayNightMode = carDarkMode ? DayNightMode.NIGHT : DayNightMode.DAY;
 		}
 
 		if (dayNightMode.isDay()) {
@@ -178,6 +187,15 @@ public class DayNightHelper implements SensorEventListener {
 			return appNightMode;
 		}
 		return false;
+	}
+
+	public boolean isNightModeForCar(@NotNull CarContext carContext) {
+		AndroidAutoMapMode nightMode = settings.AA_MAP_NIGHT_MODE.get();
+		return switch (nightMode) {
+			case DAY -> false;
+			case NIGHT -> true;
+			case AUTOMATIC -> carContext.isDarkMode();
+		};
 	}
 
 	@Nullable

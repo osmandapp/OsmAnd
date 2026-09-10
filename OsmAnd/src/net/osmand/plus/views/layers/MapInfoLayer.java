@@ -638,9 +638,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	}
 
 	private boolean resolveMapNightMode() {
-		return drawSettings != null
-				? drawSettings.isNightMode()
-				: app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
+		return app.getDaynightHelper().isNightMode(app.getSettings().getApplicationMode(), ThemeUsageContext.MAP);
 	}
 
 	public void updateTopToolbar() {

@@ -8,7 +8,6 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.plus.R;
-import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.util.Algorithms;
 
@@ -53,8 +52,8 @@ public class ObfImportTask extends BaseImportAsyncTask<Void, Void, String> {
 
 	@NonNull
 	private File getObfDestFile(@NonNull String name) {
-		if (endsWithVersionAndMapBinaryExt(name)) {
-			name = DownloadActivityType.NORMAL_FILE.getBasename(name, DownloadActivityType.NORMAL_FILE) + IndexConstants.BINARY_MAP_INDEX_EXT;
+		if (name.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
+			name = Algorithms.removeFileVersionSuffix(name);
 		}
 		if (name.endsWith(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)) {
 			return app.getAppPath(IndexConstants.ROADS_INDEX_DIR + name);
@@ -66,17 +65,5 @@ public class ObfImportTask extends BaseImportAsyncTask<Void, Void, String> {
 			return app.getAppPath(IndexConstants.NAUTICAL_INDEX_DIR + name);
 		}
 		return app.getAppPath(name);
-	}
-
-	private boolean endsWithVersionAndMapBinaryExt(@NonNull String name) {
-		if (name.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
-			int extIndex = name.indexOf(IndexConstants.BINARY_MAP_INDEX_EXT);
-			int underscoreIndex = name.lastIndexOf("_");
-			if (extIndex > underscoreIndex + 1) {
-				String versionPart = name.substring(underscoreIndex + 1, extIndex);
-				return Algorithms.isInt(versionPart);
-			}
-		}
-		return false;
 	}
 }

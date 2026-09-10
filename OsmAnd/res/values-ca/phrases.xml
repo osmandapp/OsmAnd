@@ -3133,4 +3133,10 @@
     <string name="poi_defibrillator_location">Ubicació</string>
     <string name="poi_volcano_type_stratovolcano">Estratovolcà</string>
     <string name="poi_volcano_status_dormant">Latent</string>
+    <string name="poi_historic_civilization_ancient_greek">Civilització: grec antic</string>
+    <string name="poi_material_masonry">Material: maçoneria</string>
+    <string name="poi_parking_surface">Tipus: superfície</string>
+    <string name="poi_sample_collection_covid19">COVID19</string>
+    <string name="poi_mtb_yes">Sí</string>
+    <string name="poi_winter_hiking_yes">Sí</string>
 </resources>

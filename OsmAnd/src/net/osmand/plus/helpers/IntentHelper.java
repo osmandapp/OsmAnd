@@ -478,7 +478,7 @@ public class IntentHelper {
 		AmenitySearcher amenitySearcher = app.getResourceManager().getAmenitySearcher();
 		Settings searchSettings = app.getResourceManager().getDefaultAmenitySearchSettings();
 
-		List<String> names = Collections.singletonList(name);
+		List<String> names = Algorithms.isEmpty(name) ? Collections.emptyList() : Collections.singletonList(name);
 		long id = -1L;
 		if (osmId != null) {
 			try {

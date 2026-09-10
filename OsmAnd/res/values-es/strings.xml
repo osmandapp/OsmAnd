@@ -3845,7 +3845,7 @@
     <string name="rssi_widget_desc">Muestra el nivel RSSI del dispositivo externo.</string>
     <string name="map_widget_rssi">Indicador de fuerza de la señal recibida (RSSI)</string>
     <string name="tracks_empty_folder_description">Esta carpeta no contiene trazas aún.</string>
-    <string name="tracks_empty_folder"></string>
+    <string name="tracks_empty_folder"/>
     <string name="track_not_recorded">No grabado</string>
     <string name="shared_string_new_track">Nueva traza</string>
     <string name="shared_string_visible_on_map">Visible en el mapa</string>

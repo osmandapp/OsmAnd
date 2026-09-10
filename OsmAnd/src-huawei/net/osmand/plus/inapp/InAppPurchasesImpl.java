@@ -93,11 +93,6 @@ public class InAppPurchasesImpl extends InAppPurchases {
 		public boolean isLegacy() {
 			return false;
 		}
-
-		@Override
-		public String getDefaultPrice(Context ctx) {
-			return ctx.getString(R.string.full_version_price);
-		}
 	}
 
 	private static class InAppPurchaseDepthContoursFree extends InAppPurchaseDepthContours {

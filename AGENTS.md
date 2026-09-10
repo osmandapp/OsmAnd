@@ -113,8 +113,7 @@ Many resources (icons, fonts, voice files) are not in the main `res` folder but 
 - **Updating Plugins:** Most plugin-specific code is in `net.osmand.plus.plugins`.
 
 ## 9. Restrictions
-- **Building Gradle project:** YOU MUST NEVER run Gradle build task by yourself! EVEN for verifying build errors!!!
-- **No manual Gradle build emulation:** YOU MUST NEVER reconstruct an Android/Gradle compilation classpath from cached JARs, transformed dependencies, generated classes, or build directories, and MUST NEVER invoke `kotlinc`, `javac`, or similar tools to compile a full Android fragment, source set, module, or project as a substitute for Gradle. Do not spend time resolving cascading classpath errors. Unless the user explicitly requests additional verification, use only fast, targeted checks such as `git diff --check`, XML/resource syntax validation, or isolated tests that have a direct, already-available runtime.
+- **Building Gradle project:** You may run Gradle build tasks to verify that a change compiles (see section 6). Prefer the narrowest task that proves the point (a module `assembleDebug` or a targeted `compile*` task over a full build), and when a build is not needed use fast checks instead - `git diff --check`, XML/resource syntax validation, or an isolated test with an already-available runtime.
 - **New files for git** When creating source, resource, or documentation files intended for the change, add them to VCS. Do not add temporary, generated, local, or diagnostic files. Never change .gitignore file unless explicitly requested. Do not commit unless explicitly requested.
 
 ## 10. Language Preference
@@ -123,5 +122,33 @@ Many resources (icons, fonts, voice files) are not in the main `res` folder but 
   - Use Java in Java-only modules: In :OsmAnd-java, :OsmAnd-api, and other Java-only/core modules, write new code in Java unless the module is explicitly being migrated to Kotlin.
   - Preserve existing file language: When modifying existing .java files, keep the change in Java unless the PR explicitly migrates that file/class to Kotlin.
   - Follow local architecture: Prefer Kotlin/Compose for future Android UI migration work, but do not introduce Kotlin into Java-only modules just to satisfy the default language preference.
+
+## 11. AI Disclosure in Pull Requests
+Every pull request produced with the help of an AI agent MUST end with an **AI disclaimer** section. Do not wait to be asked for it - write it into the PR body when the PR is created.
+
+The disclaimer must contain:
+- **Tool and model** that produced the change (e.g. `Claude Code (Opus 5)`).
+- **Prompt summary** - a short, faithful summary of the prompts the user actually gave, in order. Summarise the intent and do not invent requirements that were never asked for. Never mention which language the prompt was written in.
+- **What the agent decided on its own** - anything not covered by the prompts (design choices, extra files, workarounds), so reviewers can tell human intent from model inference.
+
+The same applies to AI-generated issue comments: mark them `(gen by AI)`.
+
+Rules for the whole PR, not just the disclaimer:
+- **English only.** Source code, code comments, commit messages, PR titles and bodies, and issue comments are always written in English, whatever language the conversation with the user happened in. Never note the language of the conversation.
+- **No tool advertising.** Do not append "Generated with Claude Code" banners, agent session links, or similar footers to PR bodies or issue comments. The AI disclaimer section above is the only provenance note needed.
+
+Template:
+
+```markdown
+## AI disclaimer
+
+Produced with <tool / model>.
+
+Prompts used (summarised):
+1. ...
+2. ...
+
+Decided by the agent, not requested explicitly: ...
+```
 
 *Note: This file is a living document and should be updated as the project evolves.*

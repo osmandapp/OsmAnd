@@ -527,11 +527,7 @@ public class DownloadActivityType {
 					+ IndexConstants.STAR_MAP_INDEX_EXT;
 		} else if (fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)
 				|| fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)) {
-			int l = fileName.lastIndexOf('_');
-			if (l == -1) {
-				l = fileName.length();
-			}
-			String baseNameWithoutVersion = fileName.substring(0, l);
+			String baseNameWithoutVersion = getBasenameWithoutVersion(fileName);
 			if (this == SRTM_COUNTRY_FILE) {
 				return baseNameWithoutVersion + SrtmDownloadItem.getExtension(item);
 			}
@@ -618,13 +614,14 @@ public class DownloadActivityType {
 			return fileName.substring(0, fileName.length() - WEATHER_MAP_INDEX_EXT.length())
 					.replace(FileNameTranslationHelper.WEATHER + "_", "");
 		}
-		int ls = fileName.lastIndexOf('_');
-		if (ls >= 0) {
-			return fileName.substring(0, ls);
-		} else if (fileName.indexOf('.') > 0) {
-			return fileName.substring(0, fileName.indexOf('.'));
-		}
-		return fileName;
+		return getBasenameWithoutVersion(fileName);
+	}
+
+	@NonNull
+	private static String getBasenameWithoutVersion(@NonNull String fileName) {
+		int extensionIndex = fileName.indexOf('.', fileName.lastIndexOf('_') + 1);
+		String basename = extensionIndex > 0 ? fileName.substring(0, extensionIndex) : fileName;
+		return Algorithms.removeFileVersionSuffix(basename);
 	}
 
 	public static boolean isVoiceTTS(@NonNull DownloadItem downloadItem) {

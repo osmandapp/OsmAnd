@@ -6,6 +6,8 @@ import static net.osmand.data.Amenity.WIKIMEDIA_COMMONS;
 import static net.osmand.data.Amenity.WIKIPEDIA;
 import static net.osmand.gpx.GPXUtilities.OSM_PREFIX;
 import static net.osmand.shared.gpx.GpxUtilities.AMENITY_PREFIX;
+import static net.osmand.shared.gpx.GpxUtilities.GPXTPX_PREFIX;
+import static net.osmand.shared.gpx.GpxUtilities.OSMAND_EXTENSIONS_PREFIX;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,8 +31,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class AmenityExtensionsHelper {
 	public static final double MIN_UPHILL_DOWNHILL_FIXED_TO_SHOW = 10.0;
@@ -46,12 +50,38 @@ public class AmenityExtensionsHelper {
 
 	@Nullable
 	public Amenity findAmenity(@NonNull String nameEn, double lat, double lon) {
-		List<String> names = Collections.singletonList(nameEn);
+		return findAmenity(nameEn, lat, lon, null);
+	}
+
+	/**
+	 * Resolves the source amenity using identity hints persisted with a favorite or waypoint.
+	 * Wikidata is matched first by {@link AmenitySearcher}; the origin name remains the fallback.
+	 */
+	@Nullable
+	public Amenity findAmenityByIdentity(@Nullable String originName, double lat, double lon,
+	                                     @NonNull Map<String, String> extensions) {
+		Map<String, String> normalizedExtensions = getUpdatedAmenityExtensions(extensions, null);
+		String wikidata = normalizedExtensions.get(WIKIDATA);
+		if (Algorithms.isEmpty(originName) && Algorithms.isEmpty(wikidata)) {
+			return null;
+		}
+		return findAmenity(originName, lat, lon, wikidata);
+	}
+
+	@Nullable
+	private Amenity findAmenity(@Nullable String nameEn, double lat, double lon,
+	                            @Nullable String wikidata) {
+		List<String> names = Algorithms.isEmpty(nameEn)
+				? Collections.emptyList()
+				: Collections.singletonList(nameEn);
 		AmenitySearcher searcher = app.getResourceManager().getAmenitySearcher();
 		AmenitySearcher.Settings settings = app.getResourceManager().getDefaultAmenitySearchSettings();
 
 		Amenity requestAmenity = new Amenity();
 		requestAmenity.setLocation(new LatLon(lat, lon));
+		if (!Algorithms.isEmpty(wikidata)) {
+			requestAmenity.setAdditionalInfo(WIKIDATA, wikidata);
+		}
 		AmenitySearcher.Request request = new AmenitySearcher.Request(requestAmenity, names, true);
 		return searcher.searchDetailedAmenity(request, settings);
 	}
@@ -74,6 +104,25 @@ public class AmenityExtensionsHelper {
 			updatedExtensions.putAll(amenity.getAmenityExtensions(app.getPoiTypes(), false));
 		}
 		return updatedExtensions;
+	}
+
+	/**
+	 * Collects the keys stored on a point that came from an external GPX namespace, for example
+	 * "test:country". Only these may fall back to a generic row when OsmAnd's POI logic does not
+	 * recognize them; an unqualified key is an OsmAnd field ("hidden", "visited_date"), and the
+	 * OsmAnd, Garmin and Amenity namespaces are OsmAnd's own data.
+	 */
+	@NonNull
+	public static Set<String> getStoredExtensionFallbackKeys(@NonNull Map<String, String> storedExtensions) {
+		Set<String> fallbackKeys = new HashSet<>();
+		for (String key : storedExtensions.keySet()) {
+			if (key.indexOf(':') > 0
+					&& !key.startsWith(AMENITY_PREFIX) && !key.startsWith(OSM_PREFIX)
+					&& !key.startsWith(OSMAND_EXTENSIONS_PREFIX) && !key.startsWith(GPXTPX_PREFIX)) {
+				fallbackKeys.add(key);
+			}
+		}
+		return fallbackKeys;
 	}
 
 	@NonNull

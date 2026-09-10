@@ -287,6 +287,11 @@ public class SpatialTextSearchAPI extends SearchBaseAPI {
 				result.parentSearchResult = parent;
 			}
 		} else if (obj instanceof City city) {
+			if (city.getReferenceFile() instanceof BinaryMapIndexReader reader) {
+				result.file = reader;
+				result.relatedObject = reader;
+				result.localeRelatedObjectName = reader.getRegionName();
+			}
 			CityType type = city.getType();
 			if (type == CityType.CITY || type == CityType.TOWN) {
 				result.objectType = ObjectType.CITY;

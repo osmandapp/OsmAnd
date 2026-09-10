@@ -4316,4 +4316,6 @@
     <string name="poi_ski_filter">Velegnet til ski</string>
     <string name="poi_horse_filter">Velegnet til ridning</string>
     <string name="poi_winter_hiking_filter">Velegnet til vintervandring</string>
+    <string name="poi_air_conditioning_yes">Ja</string>
+    <string name="poi_air_conditioning_no">Nej</string>
 </resources>

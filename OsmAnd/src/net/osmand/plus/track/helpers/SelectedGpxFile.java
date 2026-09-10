@@ -413,10 +413,8 @@ public class SelectedGpxFile {
 	public List<TrkSegment> getPointsToDisplay() {
 		if (filteredSelectedGpxFile != null) {
 			return filteredSelectedGpxFile.getPointsToDisplay();
-		} else if (joinSegments) {
-			return gpxFile != null && gpxFile.getGeneralTrack() != null
-					? gpxFile.getGeneralTrack().getSegments()
-					: Collections.emptyList();
+		} else if (joinSegments && gpxFile != null && gpxFile.getGeneralTrack() != null) {
+			return gpxFile.getGeneralTrack().getSegments();
 		} else {
 			return processedPointsToDisplay;
 		}
