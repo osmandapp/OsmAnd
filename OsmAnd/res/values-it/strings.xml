@@ -5203,7 +5203,6 @@
     <string name="gallery_sort_duration_long_short">Prima le durate maggiori</string>
     <string name="gallery_sort_duration_short_long">Prima le durate minori</string>
     <string name="navigate_point_format_maidenhead">Maidenhead</string>
-    <string name="maidenhead_format_descr">Sistema di localizzazione Maidenhead (QTH Locator).</string>
     <string name="search_around">Cerca nei dintorni</string>
     <string name="search_around_map_center_description">%1$s distante dalla tua posizione</string>
     <string name="search_around_my_location">La mia posizione</string>
