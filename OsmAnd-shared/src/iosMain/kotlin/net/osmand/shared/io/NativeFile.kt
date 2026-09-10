@@ -9,6 +9,9 @@ import platform.posix.S_IFDIR
 import platform.posix.S_IFMT
 import platform.posix.stat
 
+// NSTimeIntervalSince1970: seconds between the Unix epoch and NSDate's 2001 reference date.
+private const val APPLE_REFERENCE_EPOCH = 978_307_200L
+
 @OptIn(ExperimentalForeignApi::class)
 actual class NativeFile actual constructor(actual val file: KFile) {
 
@@ -33,10 +36,18 @@ actual class NativeFile actual constructor(actual val file: KFile) {
 		st.st_size
 	}
 
+	// Milliseconds are produced the way the NSDate-based implementation this replaced produced
+	// them: seconds relative to the 2001 reference date, carried through a Double, truncated.
+	// Exact integer arithmetic on st_mtimespec lands a millisecond apart for timestamps whose
+	// nanosecond part sits on a millisecond boundary, and every FILE_LAST_MODIFIED_TIME row
+	// already in the database was written by the old path - GpxDbHelper.reconcileFilesystem()
+	// compares them with !=, so a drift of 1 ms re-reads and re-analyses the track.
 	actual fun lastModified(): Long = memScoped {
 		val st = alloc<stat>()
 		if (stat(filePath, st.ptr) != 0) return@memScoped 0L
-		st.st_mtimespec.tv_sec * 1000L + st.st_mtimespec.tv_nsec / 1_000_000L
+		val secondsSinceReference = (st.st_mtimespec.tv_sec - APPLE_REFERENCE_EPOCH).toDouble() +
+				st.st_mtimespec.tv_nsec.toDouble() / 1e9
+		((secondsSinceReference + APPLE_REFERENCE_EPOCH.toDouble()) * 1000.0).toLong()
 	}
 
 	actual fun listFiles(): List<KFile>? {
