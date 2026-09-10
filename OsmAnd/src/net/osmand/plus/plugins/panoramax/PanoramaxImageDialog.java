@@ -17,7 +17,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.JavascriptInterface;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
@@ -210,7 +209,7 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 		});
 	}
 
-	@SuppressLint({"SetJavaScriptEnabled", "AddJavascriptInterface"})
+	@SuppressLint("SetJavaScriptEnabled")
 	private View getWebView() {
 		View view = getMapActivity().getLayoutInflater().inflate(R.layout.panoramax_web_view, null);
 		WebView webView = view.findViewById(R.id.webView);
@@ -225,7 +224,11 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 		// enabled here. Without it the viewer throws on window.localStorage.getItem and stalls
 		// before it ever shows the picture.
 		webView.getSettings().setDomStorageEnabled(true);
-		webView.addJavascriptInterface(new PanoramaxWebAppInterface(), "Android");
+		// No Android JavaScript bridge here, unlike MapillaryImageDialog. That bridge works
+		// only because Mapillary is loaded from an osmand.net proxy page that OsmAnd authors
+		// and which calls Android.onNodeChanged() itself. This WebView loads the Panoramax
+		// viewer directly, so an injected interface would never be called, and exposing one
+		// to a third party page is a trust boundary OsmAnd does not need to cross.
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
 				isPortrait() ? ViewGroup.LayoutParams.MATCH_PARENT : AndroidUtils.dpToPx(getMapActivity(), 360f),
 				isPortrait() ? AndroidUtils.dpToPx(getMapActivity(), 270f) : ViewGroup.LayoutParams.MATCH_PARENT);
@@ -253,24 +256,6 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 		return view;
 	}
 
-	private class PanoramaxWebAppInterface {
-
-		@JavascriptInterface
-		public void onNodeChanged(double latitude, double longitude, double compassAngle, String imageId) {
-			LatLon latLon = null;
-			if (!Double.isNaN(latitude) && !Double.isNaN(longitude)) {
-				latLon = new LatLon(latitude, longitude);
-				PanoramaxImageDialog.this.latLon = latLon;
-				PanoramaxImageDialog.this.compassAngle = compassAngle;
-				if (!Algorithms.isEmpty(imageId)) {
-					PanoramaxImageDialog.this.imageId = imageId;
-					PanoramaxImageDialog.this.imageUrl = PanoramaxConstants.getHiResImageUrl(imageId);
-					PanoramaxImageDialog.this.viewerUrl = PANORAMAX_VIEWER_URL_TEMPLATE + imageId;
-				}
-			}
-			setImageLocation(latLon, compassAngle, false);
-		}
-	}
 
 	private View getStaticImageView() {
 		View view = getMapActivity().getLayoutInflater().inflate(R.layout.panoramax_static_image_view, null);
