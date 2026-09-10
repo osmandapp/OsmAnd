@@ -46,6 +46,9 @@ public class TileSourceManager {
 	private static final String MAPNIK_URL = "https://tile.osmand.net/hd/{0}/{1}/{2}.png";
 	private static final String MAPILLARY_VECTOR_URL = "https://tiles.mapillary.com/maps/vtp/mly1_public/2/{0}/{1}/{2}/?access_token="
 			+ MAPILLARY_ACCESS_TOKEN;
+	// Federated Panoramax instance. Read access needs no API key. {0}=zoom {1}=x {2}=y,
+	// matching MessageFormat argument order in buildUrlToLoad().
+	private static final String PANORAMAX_VECTOR_URL = "https://api.panoramax.xyz/api/map/2/{0}/{1}/{2}.mvt";
 
 	private static final TileSourceTemplate MAPNIK_SOURCE =
 			new TileSourceTemplate("OsmAnd (online tiles)", MAPNIK_URL, ".png", 19,
@@ -56,6 +59,20 @@ public class TileSourceManager {
 	private static final TileSourceTemplate MAPILLARY_CACHE_SOURCE =
 			new TileSourceTemplate("Mapillary (raster tiles)", "", ".png", 22, 13,
 					256, 32, 18000);
+	// Panoramax serves Mapbox Vector Tiles at .../{z}/{x}/{y}.mvt. The cache extension must
+	// stay MAPILLARY_VECTOR_TILE_EXT: GeometryTilesCache and BitmapTilesCache decide whether a
+	// tile source holds geometry or bitmaps by comparing against that exact extension, so any
+	// other value would route Panoramax tiles into the bitmap cache and decode MVT as an image.
+	private static final TileSourceTemplate PANORAMAX_VECTOR_SOURCE =
+			// Minimum 15: below that the service only returns the aggregated "grid" layer, which
+			// this plugin does not render, so fetching lower zooms would download tiles for nothing.
+			// Maximum stays 22 so the layer keeps drawing when zoomed in past the service cap of 17;
+			// tiles are always requested at a fixed zoom, never at the current one.
+			new TileSourceTemplate("Panoramax (vector tiles)", PANORAMAX_VECTOR_URL,
+					MAPILLARY_VECTOR_TILE_EXT, 22, 15, 256, 16, 32000);
+	private static final TileSourceTemplate PANORAMAX_CACHE_SOURCE =
+			new TileSourceTemplate("Panoramax (raster tiles)", "", ".png", 22, 13,
+					256, 32, 18000);
 
 	static {
 		int oneDayMinutes = 60 * 24;
@@ -63,6 +80,10 @@ public class TileSourceManager {
 		MAPILLARY_VECTOR_SOURCE.setHidden(true);
 		MAPILLARY_CACHE_SOURCE.setExpirationTimeMinutes(oneDayMinutes);		
 		MAPILLARY_CACHE_SOURCE.setHidden(true);
+		PANORAMAX_VECTOR_SOURCE.setExpirationTimeMinutes(oneDayMinutes);
+		PANORAMAX_VECTOR_SOURCE.setHidden(true);
+		PANORAMAX_CACHE_SOURCE.setExpirationTimeMinutes(oneDayMinutes);
+		PANORAMAX_CACHE_SOURCE.setHidden(true);
 	}
 
 	public static final String PARAM_BING_QUAD_KEY = "{q}";
@@ -736,6 +757,8 @@ public class TileSourceManager {
 		list.add(getMapnikSource());
 		list.add(getMapillaryVectorSource());
 		list.add(getMapillaryCacheSource());
+		list.add(getPanoramaxVectorSource());
+		list.add(getPanoramaxCacheSource());
 		return list;
 	}
 
@@ -749,6 +772,14 @@ public class TileSourceManager {
 
 	public static TileSourceTemplate getMapillaryCacheSource() {
 		return MAPILLARY_CACHE_SOURCE;
+	}
+
+	public static TileSourceTemplate getPanoramaxVectorSource() {
+		return PANORAMAX_VECTOR_SOURCE;
+	}
+
+	public static TileSourceTemplate getPanoramaxCacheSource() {
+		return PANORAMAX_CACHE_SOURCE;
 	}
 
 	public static List<TileSourceTemplate> downloadTileSourceTemplates(String versionAsUrl, boolean https) {

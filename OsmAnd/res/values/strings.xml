@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="panoramax">Panoramax</string>
+	<string name="panoramax_descr">Openly licensed street-level photos from a federated network. Explore places, check coverage, and contribute your own.</string>
+	<string name="open_panoramax">Open Panoramax</string>
+	<string name="panoramax_image">Panoramax image</string>
+	<string name="panoramax_no_internet_desc">Photos from Panoramax are only available online.</string>
+	<string name="panoramax_widget">Panoramax widget</string>
+	<string name="panoramax_widget_descr">Opens the Panoramax viewer in a browser.</string>
+	<string name="panoramax_widget_desc">Provides quick access to the Panoramax viewer for street-level imagery.</string>
+	<string name="quick_action_showhide_panoramax_descr">A toggle to show or hide the Panoramax layer on the map.</string>
+	<string name="panoramax_menu_filter_description_new">Filter images by date or by type. Only active in closeup zoom.</string>
+	<string name="panoramax_menu_descr_dates">Only view added images</string>
+	<string name="panoramax_menu_date_from">From</string>
+	<string name="panoramax_menu_title_pano">Display only 360° images</string>
+	<string name="panoramax_menu_title_username">Username</string>
+	<string name="panoramax_menu_descr_username">View only images added by</string>
+	<string name="panoramax_menu_edit_text_hint">Type username</string>
+	<string name="panoramax_menu_title_tile_cache">Tile cache</string>
+	<string name="panoramax_menu_descr_tile_cache">Reload tiles to see up to date data.</string>
+	<string name="plugin_panoramax_descr">Show street-level imagery from Panoramax, a federated and openly licensed photo mapping platform, as a map overlay. Useful for checking existing coverage and planning what still needs to be recorded.</string>
+
 <!--
 	README:
 	- The preferred way to help with translations is via https://hosted.weblate.org/engage/osmand/
