@@ -39,6 +39,7 @@ import net.osmand.util.MapUtils;
 import net.osmand.shared.routing.RouteSegmentResult;
 import net.osmand.shared.util.KMapUtils;
 import net.osmand.shared.routing.GeneralRouter;
+import net.osmand.shared.routing.TurnPreparation;
 
 
 public class RoutePlannerFrontEnd {
@@ -692,7 +693,7 @@ public class RoutePlannerFrontEnd {
 				r.insert(pind, (int) i.x, (int) i.y);
 			}
 			// correct distance
-			RouteResultPreparation.calculateTimeSpeed(ctx, routeSegmentResult);
+			TurnPreparation.calculateTimeSpeed(ctx, routeSegmentResult);
 		}
 	}
 

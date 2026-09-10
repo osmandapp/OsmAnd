@@ -68,7 +68,6 @@ public class RoutingContext extends RoutingRequest {
 	public boolean hhHasUnsupportedParameters = false;
 
 	public RouteCalculationProgress calculationProgressFirstPhase;
-	public boolean leftSideNavigation;
 	public List<RouteSegmentResult> previouslyCalculatedRoute;
 
 	

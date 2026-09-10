@@ -16,6 +16,7 @@ import java.util.*;
 import net.osmand.shared.routing.RouteRegion;
 import net.osmand.shared.routing.RouteSegmentResult;
 import net.osmand.shared.util.KMapUtils;
+import net.osmand.shared.routing.TurnPreparation;
 
 public class GpxRouteApproximation {
 	
@@ -97,7 +98,7 @@ public class GpxRouteApproximation {
 			for (RouteSegmentResult seg : gp.routeToTarget) {
 				seg.setSegmentSpeed(calcSegmentSpeedByExternalTimestamps(gp, seg, sourcePoints));
 			}
-			RouteResultPreparation.recalculateTimeDistance(gp.routeToTarget);
+			TurnPreparation.recalculateTimeDistance(gp.routeToTarget);
 		}
 	}
 
@@ -413,7 +414,7 @@ public class GpxRouteApproximation {
 			r.clearDescription();
 		}
 		if (!gctx.ctx.calculationProgress.isCancelled) {
-			preparation.prepareTurnResults(gctx.ctx, gctx.fullRoute);
+			TurnPreparation.prepareTurnResults(gctx.ctx, gctx.fullRoute);
 		}
 		for (RouteSegmentResult r : gctx.fullRoute) {
 			r.clearAttachedRoutes();

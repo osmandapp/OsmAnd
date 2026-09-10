@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
+import net.osmand.shared.routing.TurnPreparation;
 
 public class GpxRouteHelper {
     private final RouteProvider provider;
@@ -170,7 +171,7 @@ public class GpxRouteHelper {
     private void calculateGpxRouteTimeSpeed(RouteCalculationParams params, List<RouteSegmentResult> gpxRouteResult) throws IOException {
         RoutingEnvironment env = provider.calculateRoutingEnvironment(params, false, true);
         if (env != null) {
-            RouteResultPreparation.calculateTimeSpeed(env.getCtx(), gpxRouteResult);
+            TurnPreparation.calculateTimeSpeed(env.getCtx(), gpxRouteResult);
         }
     }
 
