@@ -139,6 +139,8 @@ public class SpatialSearchContext {
 
 	}
 
+	public final SpatialSearchRanking ranking = new SpatialSearchRanking();
+
 	public SpatialSearchContext(SpatialTextSearchSettings settings, List<BinaryMapIndexReader> files,
 			SpatialPoiSearch poiSearch, LatLon location) {
 		this.files = files;

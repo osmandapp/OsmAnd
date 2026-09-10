@@ -2,8 +2,10 @@ package net.osmand.search.core.spatial;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -19,6 +21,7 @@ import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.binary.BinaryMapPoiReaderAdapter;
 import net.osmand.data.Amenity;
 import net.osmand.data.Building;
+import net.osmand.data.City;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.QuadRect;
@@ -38,6 +41,7 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 	final int tCount;
 	
 	int MIN_ELO_RATING = Amenity.DEFAULT_ELO;
+	boolean SCORE_RANKING = true;
 	
 
 	// NameIndexAtom[][] -- should be double array to store list of combinations
@@ -73,6 +77,7 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 	    }
 	    if (ctx != null) {
 			MIN_ELO_RATING = ctx.settings.MIN_ELO_RATING;
+			SCORE_RANKING = ctx.settings.SCORE_RANKING;
 		}
 	    this.tCount = this.tokens.length;
 	}
@@ -90,6 +95,7 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 		tCount = tokens.length;
 		if (ctx != null) {
 			MIN_ELO_RATING = ctx.settings.MIN_ELO_RATING;
+			SCORE_RANKING = ctx.settings.SCORE_RANKING;
 		}
 		if (parent != null) {
 			limitIntersection = parent.limitIntersection == -1 ? (ctx.limitLocationBboxes.length) : parent.limitIntersection;
@@ -626,7 +632,12 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 	}
 
 	public List<SpatialSearchResult> sortResults(SpatialSearchContext ctx, List<SpatialSearchResult> finalResult, boolean deduplicate) {
-		Collections.sort(finalResult, (o1, o2) -> SpatialSearchResult.compare(o1, o2, ctx.location));
+		if (SCORE_RANKING) {
+			for (SpatialSearchResult r : finalResult) {
+				r.score = ctx.ranking.score(r, ctx.location);
+			}
+		}
+		Collections.sort(finalResult, (o1, o2) -> SpatialSearchResult.compare(o1, o2, ctx.location, ctx.ranking));
 		if (deduplicate) {
 			uniqueIdsResults.clear();
 			extraIdsResults.clear();
@@ -658,12 +669,95 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 					result.add(s);
 				}
 			}
-			finalResult = result;
+			finalResult = deduplicateByProximity(result, ctx);
 		}
 		return finalResult;
 	}
-	
-	
+
+	// how far apart two rows of the same name may be and still be one place, all three measured
+	// on judged cases - see preferences.md, "What deduplication is allowed to merge"
+	private static final double SAME_PLACE_M = 30;      // pref-0071, pref-0092
+	private static final double SAME_FACILITY_M = 400;  // pref-0007, pref-0082
+	private static final double SAME_STREET_M = 2000;   // pref-0111
+	private static final int MAX_SAME_NAME = 32;        // bound the scan for a very common name
+
+	/** same name and same spot: the id/wikidata/route keys cannot see a stop stored as nodes */
+	private List<SpatialSearchResult> deduplicateByProximity(List<SpatialSearchResult> sorted,
+			SpatialSearchContext ctx) {
+		Map<String, List<SpatialSearchResult>> byName = new HashMap<>();
+		List<SpatialSearchResult> out = new ArrayList<>(sorted.size());
+		for (SpatialSearchResult s : sorted) {
+			String name = dedupName(s);
+			SpatialSearchResult same = null;
+			if (name != null && s.getLatLon() != null) {
+				List<SpatialSearchResult> kept = byName.computeIfAbsent(name, k -> new ArrayList<>());
+				for (SpatialSearchResult u : kept) {
+					if (isSamePlace(u, s, ctx.ranking)) {
+						same = u;
+						break;
+					}
+				}
+				if (same == null && kept.size() < MAX_SAME_NAME) {
+					kept.add(s);
+				}
+			}
+			if (same != null) {
+				same.addExtraResult(s, ctx.settings.LANG_DEDUPLICATE);
+			} else {
+				out.add(s);
+			}
+		}
+		return out;
+	}
+
+	/** parts OF a street, carrying its name: pref-0108, pref-0109 */
+	private static final Set<String> STREET_PART_SUBTYPES = new HashSet<>(
+			Arrays.asList("bridge", "tunnel", "viaduct", "ford"));
+
+	private static boolean isSamePlace(SpatialSearchResult a, SpatialSearchResult b,
+			SpatialSearchRanking ranking) {
+		boolean street = a.getMainObject() instanceof Street;
+		if (street != (b.getMainObject() instanceof Street)) {
+			// a bridge carrying the street name is a piece OF it, unless it is a destination of
+			// its own: pref-0111. Anything else standing on a street stays separate: pref-0080
+			SpatialSearchResult poi = street ? b : a;
+			if (!isStreetPart(poi) || ranking.isProminent(poi)) {
+				return false;
+			}
+			return MapUtils.getDistance(a.getLatLon(), b.getLatLon()) <= SAME_STREET_M;
+		}
+		double radius;
+		if (street) {
+			// a line's coordinate says little, so the city decides: pref-0107
+			City c1 = ((Street) a.getMainObject()).getCity();
+			City c2 = ((Street) b.getMainObject()).getCity();
+			if (c1 == null || c2 == null || !c1.getName().equals(c2.getName())) {
+				return false;
+			}
+			radius = SAME_STREET_M;
+		} else {
+			radius = ranking.isSpreadNode(a) || ranking.isSpreadNode(b)
+					? SAME_FACILITY_M : SAME_PLACE_M;
+		}
+		return MapUtils.getDistance(a.getLatLon(), b.getLatLon()) <= radius;
+	}
+
+	private static boolean isStreetPart(SpatialSearchResult r) {
+		MapObject o = r.getFirstRef() == null ? null : r.getFirstRef().atom.object;
+		return o instanceof Amenity a && a.getSubType() != null
+				&& STREET_PART_SUBTYPES.contains(a.getSubType());
+	}
+
+	private static String dedupName(SpatialSearchResult r) {
+		MapObject o = r.getMainObject();
+		String name = o == null ? null : o.getName();
+		if (Algorithms.isEmpty(name)) {
+			return null;
+		}
+		String n = SearchAlgorithms.normalizeToken(SearchAlgorithms.alignChars(name));
+		return Algorithms.isEmpty(n) ? null : n.trim().toLowerCase();
+	}
+
 	@FunctionalInterface
 	private interface IterateIntersection {
 
