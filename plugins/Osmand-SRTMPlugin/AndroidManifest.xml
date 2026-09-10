@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="net.osmand.srtmPlugin.paid"
 	android:installLocation="auto"
-	android:versionCode="12"
-	android:versionName="1.2">
+	android:versionCode="13"
+	android:versionName="1.3">
 
 	<uses-feature
 		android:name="android.hardware.touchscreen"
