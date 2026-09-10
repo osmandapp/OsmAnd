@@ -169,7 +169,11 @@ public class PanoramaxPlugin extends OsmandPlugin {
 			if (SHOW_PANORAMAX.get() || force) {
 				vectorSource = settings.getTileSourceByName(TileSourceManager.getPanoramaxVectorSource().getName(), false);
 			}
-			updateLayer(mapView, vectorSource, vectorLayer, 0.62f);
+			// Must differ from Mapillary's 0.62f. OsmandMapTileView.getLayerIndex() derives the
+			// native map layer slot as (int) (zOrder * 100), and PanoramaxVectorLayer registers
+			// its provider in that slot via setMapLayerProvider(). Sharing a zOrder with the
+			// Mapillary layer would make the two overwrite each other's provider under OpenGL.
+			updateLayer(mapView, vectorSource, vectorLayer, 0.63f);
 		} else {
 			mapView.removeLayer(vectorLayer);
 			vectorLayer.setMap(null);
