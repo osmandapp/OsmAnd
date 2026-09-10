@@ -211,9 +211,6 @@
     <string name="route_tsll">稍向左转后直行</string>
     <string name="route_tu">掉头后直行</string>
     <string name="route_head">直行</string>
-    <string name="first_time_continue">以后再说</string>
-    <string name="first_time_download">下载区域</string>
-    <string name="search_poi_location">等待信号中…</string>
     <string name="map_orientation_portrait">竖屏</string>
     <string name="map_orientation_landscape">横屏</string>
     <string name="map_screen_orientation">屏幕方向</string>
@@ -526,15 +523,7 @@
     <string name="osm_user_stat">编辑数 %1$s，排名 %2$s，总计编辑 %3$s</string>
     <string name="osm_editors_ranking">OSM 编辑者排名</string>
     <string name="osm_live_subscribe_btn">订阅</string>
-    <string name="osm_live_subscription">OsmAnd 实时订阅</string>
-    <string name="osm_live_user_public_name">公开名称</string>
-    <string name="osm_live_email_desc">用于通知您的贡献更新。</string>
-    <string name="osm_live_hide_user_name">不在报告中显示我的名称</string>
-    <string name="osm_live_support_region">支持地区</string>
-    <string name="osm_live_month_cost">每月费用</string>
-    <string name="osm_live_month_cost_desc">每月支付</string>
     <string name="osm_live_active">启用</string>
-    <string name="osm_live_not_active">未启用</string>
     <string name="osm_live_enter_email">请输入有效的电子邮件地址</string>
     <string name="osm_live_ask_for_purchase">请先购买 Osmand Live 的订阅</string>
     <string name="select_map_marker">选择地图标记</string>
@@ -935,7 +924,6 @@
     <string name="update_all">全部更新（%1$s MB）</string>
     <string name="downloads">下载</string>
     <string name="later">以后再说</string>
-    <string name="get_full_version">完整版本</string>
     <string name="buy">购买</string>
     <string name="shared_string_permissions">权限</string>
     <string name="import_gpx_failed_descr">无法导入文件。请确保 OsmAnd 有读取权限。</string>
@@ -976,8 +964,6 @@
     <string name="routing_attr_driving_style_safety_name">偏好背街小路</string>
     <string name="shared_string_slope">坡度</string>
     <string name="add_new_folder">添加新文件夹</string>
-    <string name="route_points_category_name">本路线上的转向点</string>
-    <string name="track_points_category_name">航点、兴趣点和已命名地物</string>
     <string name="shared_string_gpx_track">轨迹</string>
     <string name="shared_string_time_moving">时间移动</string>
     <string name="shared_string_time_span">持续时间</string>
@@ -1127,8 +1113,6 @@
     <string name="specified_directiory_not_writeable">不能在指定目录中创建地图</string>
     <string name="osm_changes_added_to_local_edits">OSM 更改添加到本地的变更集</string>
     <string name="local_recordings_delete_all_confirm">删除 %1$d 个注记？</string>
-    <string name="local_osm_changes_upload_all_confirm">将 %1$d 个更改上传到 OSM？</string>
-    <string name="delay_to_start_navigation_descr">设置在路线规划界面停留的时间。</string>
     <string name="delay_to_start_navigation">延迟开始转向导航…</string>
     <string name="parking_place_limited">停车限时</string>
     <string name="waypoint_visit_after">访问之后的</string>
@@ -2172,7 +2156,6 @@
     <string name="images_cache">图片缓存</string>
     <string name="article_removed">已删除文章</string>
     <string name="saved_articles">已收藏文章</string>
-    <string name="group_deleted">群组已删除</string>
     <string name="rendering_attr_whiteWaterSports_name">白水运动</string>
     <string name="touring_view_renderer">旅游风景</string>
     <string name="osm_recipients_label">OSM 收件人</string>
@@ -2364,11 +2347,6 @@
     <string name="measurement_tool_snap_to_road_descr">OsmAnd将为选中的配置文件连接路线点。</string>
     <string name="add_point_before">在此之前新增点</string>
     <string name="add_point_after">在此之后新增点</string>
-    <string name="route_point">路线点</string>
-    <string name="save_as_route_point">保存为路线点</string>
-    <string name="route_point_one">路线点1</string>
-    <string name="save_route_point">保存路线点</string>
-    <string name="live_monitoring_max_interval_to_send">用于在线跟踪的时间缓冲</string>
     <string name="context_menu_item_add_waypoint">添加轨迹路径点</string>
     <string name="disable_recording_once_app_killed_descrp">当应用程序被杀死时，轨迹记录将暂停（通过最近的应用程序）。(OsmAnd后台指示会从安卓通知栏中消失。）</string>
     <string name="add_online_routing_engine">添加在线路线引擎</string>
@@ -3393,9 +3371,6 @@
     <string name="routing_attr_allow_skating_only_description">仅为自由式或滑行滑雪整修的路线，不设传统滑道。</string>
     <string name="routing_attr_allow_classic_only_description">仅针对传统滑雪方式整修的路线，不含滑行滑雪道。这包括由小型雪地摩托整修的松软滑雪道和滑雪者人工开辟的滑雪道。</string>
     <string name="default_render_descr">通用风格。密集的城市清晰地显示出来。具有路线、路面质量、通行限制、公路护栏、根据 SAC 比例绘制的路径、白水运动项目，等高线等地形特征。</string>
-    <string name="add_location_as_first_point_descr">将您的位置添加为出发点，以计划完美的路线。</string>
-    <string name="measurement_tool_save_as_new_track_descr">将点存储为路线点或一条线路。</string>
-    <string name="add_route_points">添加路径点</string>
     <string name="test_voice_desrc">点击一个按钮并听取其相应的语音提示，以了解它是否丢失或有故障</string>
     <string name="move_all_to_history">全部移至历史</string>
     <string name="select_waypoints_category_description">添加轨迹中的所有路径点，或选择单独的类别。</string>
