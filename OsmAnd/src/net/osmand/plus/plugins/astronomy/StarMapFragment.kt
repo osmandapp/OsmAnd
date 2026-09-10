@@ -498,6 +498,8 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		magnitudeSlider = view.findViewById(R.id.magnitude_slider)
 		magnitudeSliderValue = view.findViewById(R.id.magnitude_slider_value)
 
+		AndroidUtils.addStatusBarPadding21v(requireActivity(), mapControlsContainer)
+
 		magnitudeFilterButton.setOnClickListener {
 			magnitudeSliderCard.isVisible = !magnitudeSliderCard.isVisible
 			updateMagnitudeFilterTheme()
