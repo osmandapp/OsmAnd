@@ -234,7 +234,7 @@ public class SpatialSearchRanking {
 			NameIndexAtom second = ref.atom;
 			// named, not reached through an alias ("apple" finds New York): pref-0121
 			if ((second.isCity() || second.isCityVillage() || second.isBoundary())
-					&& matchesOwnName(ref)) {
+					&& matchesWholeName(ref)) {
 				parts = 1;
 			}
 		}
@@ -247,6 +247,12 @@ public class SpatialSearchRanking {
 	/** the query named this object, rather than reaching it through an alias or a category */
 	public boolean matchesOwnName(SpatialSearchResultRef ref) {
 		return nameScore(ref) >= NAME_PREFIX;
+	}
+
+	/** the query spelled the whole name, not the start of a longer one: "rue de la" is not the
+	 *  boundary "Rue de la République", and an object behind it is not what the query asked for */
+	public boolean matchesWholeName(SpatialSearchResultRef ref) {
+		return nameScore(ref) >= NAME_EXACT;
 	}
 
 	/** a settlement or an administrative area, however the map happens to store it */
