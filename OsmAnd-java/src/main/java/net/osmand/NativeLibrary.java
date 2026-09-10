@@ -36,6 +36,8 @@ import net.osmand.render.RenderingRulesStorage;
 import net.osmand.shared.routing.GeneralRouter;
 import net.osmand.router.GpxRouteApproximation;
 import net.osmand.shared.routing.HHRoutingConfig;
+import net.osmand.shared.routing.NativeRouting;
+import net.osmand.shared.routing.RoutingRequest;
 import net.osmand.router.HHRoutePlanner;
 import net.osmand.router.NativeTransportRoutingResult;
 import net.osmand.shared.routing.RouteCalculationProgress;
@@ -47,7 +49,7 @@ import net.osmand.router.TransportRoutingConfiguration;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
-public class NativeLibrary {
+public class NativeLibrary implements NativeRouting {
 
 
 	public NativeLibrary() {
@@ -234,18 +236,35 @@ public class NativeLibrary {
 		return nativeTransportRouting(new int[]{sx31, sy31, ex31, ey31}, cfg, progress);
 	}
 
-	public RouteSegmentResult[] runNativeRouting(RoutingContext c, HHRoutingConfig hhRoutingConfig, RouteRegion[] regions, boolean basemap) {
+	@Override
+	public RouteSegmentResult[] runNativeRouting(RoutingRequest c, HHRoutingConfig hhRoutingConfig, RouteRegion[] regions, boolean basemap) {
+		RoutingContext ctx = asRoutingContext(c);
 		// if hhRoutingConfig == null - process old routing
 		if (hhRoutingConfig != null) {
 			setHHNativeFilterAndParameters(c);
 		}
 		final float CPP_NO_DIRECTION = -2 * (float) Math.PI;
-		return nativeRouting(c, hhRoutingConfig, c.config.initialDirection == null ?
+		return nativeRouting(ctx, hhRoutingConfig, c.config.initialDirection == null ?
 				CPP_NO_DIRECTION : c.config.initialDirection.floatValue(),
 				regions, basemap, c.requestNativePrepareResult);
 	}
 
-	private void setHHNativeFilterAndParameters(RoutingContext ctx) {
+	/**
+	 * java_wrap.cpp resolves the request's fields on net/osmand/router/RoutingContext, so this
+	 * implementation can only hand the core one of those. Binding them on
+	 * net.osmand.shared.routing.RoutingRequest instead is what would let shared code build the
+	 * request itself, and that is a paired change in OsmAnd-core-legacy which has not been made.
+	 * Until it is, say so here rather than let the core read fields off the wrong class.
+	 */
+	private static RoutingContext asRoutingContext(RoutingRequest request) {
+		if (!(request instanceof RoutingContext)) {
+			throw new IllegalArgumentException("The C++ router binds RoutingContext, and this is a "
+					+ request.getClass().getName());
+		}
+		return (RoutingContext) request;
+	}
+
+	private void setHHNativeFilterAndParameters(RoutingRequest ctx) {
 		GeneralRouter gr = (GeneralRouter) ctx.getRouter();
 
 		TreeMap<String, String> tags = HHRoutePlanner.getFilteredTags(gr);
@@ -334,6 +353,15 @@ public class NativeLibrary {
 	protected static native NativeRouteSearchResult loadRoutingData(RouteRegion reg, String regName, int regfp, RouteSubregion subreg,
 	                                                                boolean loadObjects);
 
+	/**
+	 * What [NativeRouting] asks for. It cannot be called deleteNativeRoutingContext: that name
+	 * belongs to the static native below, and JNI binds it by the name it is declared under.
+	 */
+	@Override
+	public void releaseNativeRoutingContext(long handle) {
+		deleteNativeRoutingContext(handle);
+	}
+
 	public static native void deleteNativeRoutingContext(long handle);
 
 	protected static native void deleteRenderingContextHandle(long handle);
@@ -380,8 +408,9 @@ public class NativeLibrary {
 		return searchRenderedObjects(context, x, y, notvisible);
 	}
 
-	public boolean needRequestPrivateAccessRouting(RoutingContext ctx, int[] x31Coordinates, int[] y31Coordinates){
-		return nativeNeedRequestPrivateAccessRouting(ctx, x31Coordinates, y31Coordinates);
+	@Override
+	public boolean needRequestPrivateAccessRouting(RoutingRequest ctx, int[] x31Coordinates, int[] y31Coordinates){
+		return nativeNeedRequestPrivateAccessRouting(asRoutingContext(ctx), x31Coordinates, y31Coordinates);
 	}
 	protected static native boolean nativeNeedRequestPrivateAccessRouting(RoutingContext ctx, int[] x31Coordinates, int[] y31Coordinates);
 

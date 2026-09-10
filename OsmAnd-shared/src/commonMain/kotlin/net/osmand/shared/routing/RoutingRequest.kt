@@ -28,7 +28,14 @@ open class RoutingRequest(
 	@JvmField val calculationMode: RouteCalculationMode
 ) {
 
-	// 0. The native session, so several routes can reuse one C++ context
+	// 0. The native router and its session, so several routes can reuse one C++ context
+
+	/**
+	 * The C++ router, or null when there is none and the java planner has to do the work: the
+	 * server and the tools always, android in SAFE_MODE. Read as "is native routing available"
+	 * in a dozen places.
+	 */
+	@JvmField var nativeLib: NativeRouting? = null
 
 	@JvmField var nativeRoutingContext: Long = 0
 

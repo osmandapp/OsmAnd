@@ -17,6 +17,7 @@ import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.shared.routing.RouteRegion;
 import net.osmand.shared.routing.RouteDataObject;
+import net.osmand.shared.routing.NativeRouting;
 import net.osmand.shared.routing.RouteCalculationMode;
 import net.osmand.shared.routing.RouteCalculationProgress;
 import net.osmand.shared.routing.RoutingConfiguration;
@@ -115,7 +116,7 @@ public class RoutePlannerFrontEnd {
 		}
 	}
 
-	public RoutingContext buildRoutingContext(RoutingConfiguration config, NativeLibrary nativeLibrary, BinaryMapIndexReader[] map, RouteCalculationMode rm) {
+	public RoutingContext buildRoutingContext(RoutingConfiguration config, NativeRouting nativeLibrary, BinaryMapIndexReader[] map, RouteCalculationMode rm) {
 		if (rm == null) {
 			rm = config.router.getProfile() == GeneralRouterProfile.CAR ? RouteCalculationMode.COMPLEX
 					: RouteCalculationMode.NORMAL;
@@ -123,7 +124,7 @@ public class RoutePlannerFrontEnd {
 		return new RoutingContext(config, nativeLibrary, map, rm);
 	}
 
-	public RoutingContext buildRoutingContext(RoutingConfiguration config, NativeLibrary nativeLibrary, BinaryMapIndexReader[] map) {
+	public RoutingContext buildRoutingContext(RoutingConfiguration config, NativeRouting nativeLibrary, BinaryMapIndexReader[] map) {
 		return buildRoutingContext(config, nativeLibrary, map, null);
 	}
 
@@ -588,7 +589,7 @@ public class RoutePlannerFrontEnd {
 
 	private HHNetworkRouteRes calculateHHRoute(HHRoutePlanner<NetworkDBPoint> routePlanner, RoutingContext ctx,
 			LatLon start, LatLon end, Double dir) throws InterruptedException, IOException {
-		NativeLibrary nativeLib = ctx.nativeLib;
+		NativeRouting nativeLib = ctx.nativeLib;
 		ctx.nativeLib = null; // keep null to interfere with detailed 
 		try {
 			HHRoutingConfig cfg = HHRoutePlanner.prepareDefaultRoutingConfig(hhRoutingConfig);

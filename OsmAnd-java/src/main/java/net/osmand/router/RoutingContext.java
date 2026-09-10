@@ -44,6 +44,7 @@ import net.osmand.shared.util.collections.KTIntObjectIterator;
 import net.osmand.shared.routing.RouteSegmentResult;
 import net.osmand.shared.routing.VehicleRouter;
 import net.osmand.shared.routing.GeneralRouter;
+import net.osmand.shared.routing.NativeRouting;
 import net.osmand.shared.routing.RoutingRequest;
 
 
@@ -59,8 +60,7 @@ public class RoutingContext extends RoutingRequest {
 	public final Map<BinaryMapIndexReader, List<RouteSubregion>> map = new LinkedHashMap<BinaryMapIndexReader, List<RouteSubregion>>();
 	public final Map<RouteRegion, BinaryMapIndexReader> reverseMap = new LinkedHashMap<RouteRegion, BinaryMapIndexReader>();
 	private RouteConditionalHelper conditionalHelper = new RouteConditionalHelper();
-	public NativeLibrary nativeLib;
-	
+
 	// 1. What is left of the request here: the pieces the java planner owns.
 	// The rest is on RoutingRequest, which the C++ router reads.
 	public int dijkstraMode;
@@ -107,7 +107,7 @@ public class RoutingContext extends RoutingRequest {
 		this.calculationProgress = cp.calculationProgress;
 	}
 	
-	RoutingContext(RoutingConfiguration config, NativeLibrary nativeLibrary, BinaryMapIndexReader[] list, RouteCalculationMode calcMode) {
+	RoutingContext(RoutingConfiguration config, NativeRouting nativeLibrary, BinaryMapIndexReader[] list, RouteCalculationMode calcMode) {
 		super(config, calcMode);
 		for (BinaryMapIndexReader mr : list) {
 			List<RouteRegion> rr = mr.getRoutingIndexes();
@@ -295,7 +295,8 @@ public class RoutingContext extends RoutingRequest {
 			}
 		} else {
 			
-			NativeRouteSearchResult ns = nativeLib.loadRouteRegion(ts.subregion, loadObjectsInMemory);
+			// the java planner's own tile loading, which only the JNI library can serve
+			NativeRouteSearchResult ns = ((NativeLibrary) nativeLib).loadRouteRegion(ts.subregion, loadObjectsInMemory);
 //			System.out.println(ts.subregion.shiftToData + " " + Arrays.toString(ns.objects));
 			ts.setLoadedNative(ns, this);
 		}
@@ -928,8 +929,10 @@ public class RoutingContext extends RoutingRequest {
 	}
 
 	public synchronized void deleteNativeRoutingContext() {
-		if (nativeRoutingContext != 0) {
-			NativeLibrary.deleteNativeRoutingContext(nativeRoutingContext);
+		// nativeLib is briefly nulled out around the base route in RoutePlannerFrontEnd, and this
+		// also runs from finalize(), so do not assume it is still there
+		if (nativeRoutingContext != 0 && nativeLib != null) {
+			nativeLib.releaseNativeRoutingContext(nativeRoutingContext);
 		}
 		nativeRoutingContext = 0;
 	}

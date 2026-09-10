@@ -175,7 +175,7 @@ public class GpxRouteApproximation {
 	}
 
 	private GpxRouteApproximation searchGpxSegments(GpxRouteApproximation gctx, List<RoutePlannerFrontEnd.GpxPoint> gpxPoints) throws IOException, InterruptedException {
-		NativeLibrary nativeLib = gctx.ctx.nativeLib;
+		NativeLibrary nativeLib = (NativeLibrary) gctx.ctx.nativeLib;
 		if (nativeLib != null && router.isUseNativeApproximation()) {
 			gctx = nativeLib.runNativeSearchGpxRoute(gctx, gpxPoints, true);
 		} else {
@@ -201,7 +201,7 @@ public class GpxRouteApproximation {
 
 	private GpxRouteApproximation searchGpxRouteByRouting(GpxRouteApproximation gctx, List<RoutePlannerFrontEnd.GpxPoint> gpxPoints) throws IOException, InterruptedException {
 		long timeToCalculate = System.nanoTime();
-		NativeLibrary nativeLib = gctx.ctx.nativeLib;
+		NativeLibrary nativeLib = (NativeLibrary) gctx.ctx.nativeLib;
 		if (nativeLib != null && router.isUseNativeApproximation()) {
 			gctx = nativeLib.runNativeSearchGpxRoute(gctx, gpxPoints, false);
 		} else {
