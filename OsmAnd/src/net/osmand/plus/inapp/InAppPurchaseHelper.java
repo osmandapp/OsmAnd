@@ -354,6 +354,12 @@ public abstract class InAppPurchaseHelper {
 	protected void exec(@NonNull InAppPurchaseTaskType taskType, @NonNull InAppCommand command) {
 		if (isDeveloperVersion || (!Version.isGooglePlayEnabled() && !Version.isHuawei() && !Version.isAmazon())) {
 			notifyDismissProgress(taskType);
+			if (taskType == InAppPurchaseTaskType.REQUEST_INVENTORY) {
+				// External purchases are fetched from the server and need no billing service,
+				// so they still have to be applied on a build that never queries the store.
+				applyPurchases();
+				notifyGetItems();
+			}
 			stop(true);
 			return;
 		}
