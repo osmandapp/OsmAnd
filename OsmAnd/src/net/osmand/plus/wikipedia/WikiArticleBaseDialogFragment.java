@@ -508,7 +508,7 @@ public abstract class WikiArticleBaseDialogFragment extends WikiBaseDialogFragme
 		return AndroidUtils.createPressedColorStateList(
 				getContext(), nightMode,
 				R.color.icon_color_default_light, R.color.active_color_primary_light,
-				R.color.icon_color_default_light, R.color.active_color_primary_dark
+				R.color.icon_color_default_dark, R.color.active_color_primary_dark
 		);
 	}
 
