@@ -5161,8 +5161,8 @@
     <string name="access_pinch_zoom_magnification">Ingrandimento con due dita</string>
     <string name="ais_own_object">Impostazioni per la visualizzazione del proprio oggetto AIS</string>
     <string name="ais_own_mmsi">MMSI personale (identificativo del servizio mobile marittimo)</string>
-    <string name="ais_own_mmsi_description">Identificare l\'MMSI (valore numerico a 9 cifre) del proprio oggetto AIS.</string>
-    <string name="ais_display_own_position">Definire se il proprio oggetto AIS deve essere visualizzato.</string>
+    <string name="ais_own_mmsi_description">Identificare l\'MMSI (codice numerico a 9 cifre) del proprio oggetto AIS.</string>
+    <string name="ais_display_own_position">Definire se il proprio oggetto AIS debba essere visualizzato.</string>
     <string name="ais_display_own_position_description">Normalmente la propria posizione è indicata da OsmAnd. La visualizzazione aggiuntiva del proprio oggetto AIS potrebbe creare confusione e può essere disabilitata qui.</string>
     <string name="ais_receive_in_background">Ricevi i dati AIS anche se OsmAnd è in pausa.</string>
     <string name="ais_receive_in_background_description">Se abilitato, il ricevitore dei messaggi AIS rimane attivo anche se OsmAnd è in pausa o in sottofondo. Se disabilitato, non vengono ricevuti messaggi se OsmAnd è in sottofondo.</string>
