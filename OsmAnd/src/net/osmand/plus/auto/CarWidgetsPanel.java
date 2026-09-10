@@ -5,6 +5,7 @@ import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MATCHING_PANELS_MODE;
 
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -27,7 +28,6 @@ import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -51,6 +51,8 @@ public class CarWidgetsPanel {
 	private static final float MIN_SURFACE_WIDTH_DP = 400f;
 	private static final float PANEL_MARGIN_DP = 10f;
 	private static final float CORNER_RADIUS_DP = 8f;
+	private static final float BORDER_WIDTH_DP = 2f;
+	private static final float PANEL_PADDING_DP = 8f;
 	/** Widgets are stacked without gaps, their own dividers separate the rows. */
 	private static final float WIDGET_SPACING_DP = 0f;
 	private static final float WIDGET_WIDTH_DP = 130f;
@@ -80,6 +82,10 @@ public class CarWidgetsPanel {
 	private int firstVisibleWidget;
 	private int lastVisibleCount;
 
+
+	private ResolvedPanelAppearance panelAppearance;
+	private final Paint borderPaint = new Paint();
+
 	public CarWidgetsPanel(@NonNull OsmandApplication app) {
 		this(app, WidgetsPanel.ANDROID_AUTO);
 	}
@@ -87,6 +93,10 @@ public class CarWidgetsPanel {
 	public CarWidgetsPanel(@NonNull OsmandApplication app, @NonNull WidgetsPanel panel) {
 		this.app = app;
 		this.panel = panel;
+
+		borderPaint.setDither(true);
+		borderPaint.setAntiAlias(true);
+		borderPaint.setStyle(Paint.Style.STROKE);
 	}
 
 	/**
@@ -172,6 +182,7 @@ public class CarWidgetsPanel {
 			return 0;
 		}
 		float corner = CORNER_RADIUS_DP * carDensity;
+		float borderWidth = BORDER_WIDTH_DP * carDensity;
 		// Rounded on the left, flush square on the right. Rows hidden by the reserved area split
 		// the panel into several blocks, each of them gets its own rounded outline.
 		int blockStart = 0;
@@ -180,7 +191,7 @@ public class CarWidgetsPanel {
 					|| bottoms.get(i - 1) + 1 < tops.get(i);
 			if (endOfBlock) {
 				drawBlock(canvas, views.subList(blockStart, i), tops.subList(blockStart, i),
-						left, right, bottoms.get(i - 1), corner, scale);
+						left, right, bottoms.get(i - 1), corner, borderWidth, scale);
 				lastPanelBounds.union(left, tops.get(blockStart), right, bottoms.get(i - 1));
 				blockStart = i;
 			}
@@ -189,12 +200,21 @@ public class CarWidgetsPanel {
 	}
 
 	private void drawBlock(@NonNull Canvas canvas, @NonNull List<View> views,
-			@NonNull List<Float> tops, float left, float right, float bottom, float corner,
-			float scale) {
+	                       @NonNull List<Float> tops, float left, float right, float bottom,
+	                       float corner, float borderWidth,
+	                       float scale) {
 		Path path = new Path();
 		float top = tops.get(0);
-		path.addRoundRect(new RectF(left, top, right, bottom),
-				new float[] {corner, corner, 0, 0, 0, 0, corner, corner}, Path.Direction.CW);
+		path.addRoundRect(
+				new RectF(left, top, right, bottom),
+				new float[]{
+						corner, corner,
+						corner, corner,
+						corner, corner,
+						corner, corner
+				},
+				Path.Direction.CW
+		);
 
 		canvas.save();
 		canvas.clipPath(path);
@@ -205,6 +225,11 @@ public class CarWidgetsPanel {
 			views.get(i).draw(canvas);
 			canvas.restore();
 		}
+
+		borderPaint.setColor(panelAppearance.getPanelBorderColor());
+		borderPaint.setStrokeWidth(borderWidth);
+		canvas.drawPath(path, borderPaint);
+
 		canvas.restore();
 	}
 
@@ -267,6 +292,7 @@ public class CarWidgetsPanel {
 		float density = app.getResources().getDisplayMetrics().density;
 		ResolvedPanelAppearance appearance = app.getPanelAppearanceSettingsManager()
 				.resolveCommitted(panel, layoutMode, nightMode, false, density, true);
+		this.panelAppearance = appearance;
 
 		Set<String> addedWidgetTypes = new HashSet<>();
 		for (MapWidgetInfo info : widgetInfos) {
