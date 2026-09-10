@@ -578,6 +578,10 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 				return res;
 			}
 		} else {
+			res = Integer.compare(o1.objs.size(), o2.objs.size());
+			if (res != 0) {
+				return res;
+			}
 			res = Integer.compare(o1.sumOther(), o2.sumOther());
 			if (res != 0) {
 				return res;
