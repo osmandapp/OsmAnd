@@ -266,6 +266,7 @@ public class RouteResultPreparation {
 			result.get(i).setTurnType(turnType);
 		}
 		
+		convertNoneLanes(result);
 		determineTurnsToMerge(ctx.leftSideNavigation, result);
 		ignorePrecedingStraightsOnSameIntersection(ctx.leftSideNavigation, result);
 		justifyUTurns(ctx.leftSideNavigation, result);
@@ -1280,15 +1281,6 @@ public class RouteResultPreparation {
 
 
 	private TurnType getTurnInfo(List<RouteSegmentResult> result, int i, boolean leftSide) {
-		TurnType t = calculateTurnInfo(result, i, leftSide);
-		if (t != null) {
-			// TurnType.NONE is an internal marker of an unmarked lane, it must not leave turn calculation
-			TurnType.convertNoneToStraight(t.getLanes());
-		}
-		return t;
-	}
-
-	private TurnType calculateTurnInfo(List<RouteSegmentResult> result, int i, boolean leftSide) {
 		if (i == 0) {
 			return TurnType.valueOf(TurnType.C, false);
 		}
@@ -2649,6 +2641,15 @@ public class RouteResultPreparation {
 			}
 		}
 		return false;
+	}
+
+	private void convertNoneLanes(List<RouteSegmentResult> result) {
+		for (int i = 0; i < result.size(); i ++) {
+			TurnType t = result.get(i).getTurnType();
+			if (t != null) {
+				TurnType.convertNoneToStraight(t.getLanes());
+			}
+		}
 	}
 
 }

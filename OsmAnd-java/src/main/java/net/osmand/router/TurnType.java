@@ -534,8 +534,6 @@ public class TurnType {
 		return (isLeftTurn(t1) && isLeftTurn(t2)) || (isRightTurn(t1) && isRightTurn(t2));
 	}
 
-	// NONE exists only while turns are calculated: replace it with C before the lanes are
-	// shown in the widget or used for voice prompts
 	public static void convertNoneToStraight(int[] lanes) {
 		if (lanes == null) {
 			return;
