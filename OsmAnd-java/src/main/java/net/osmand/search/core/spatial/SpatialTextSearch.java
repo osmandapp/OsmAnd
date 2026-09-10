@@ -109,6 +109,10 @@ public class SpatialTextSearch {
 		
 		// Hide results under SHOW MORE
 		public int[] SHOW_MORE_WORDS_COUNT = new int[] {3, 20, 100};
+		// with score ranking a level also ends where the score drops this much below its first row
+		public double SHOW_MORE_SCORE_DROP = 0.5;
+		// ... or holds this many times its minimum: hundreds of rows with one score give no drop to cut at
+		public int SHOW_MORE_MAX_LEVEL_TIMES = 3;
 		
 		// only do incomplete search with 2+ chars
 		public int MIN_CHARACTERS_INCOMPLETE = 2;
@@ -630,16 +634,21 @@ public class SpatialTextSearch {
 		if (res.mainResults.size() > 0) {
 			int[] limits = ctx.settings.SHOW_MORE_WORDS_COUNT.clone();
 			long cKey = SpatialSearchResult.compareKey(res.mainResults.get(0));
+			double levelScore = res.mainResults.get(0).score;
 			int ind = 0, lind = 0;
-			int level = 0; 
+			int level = 0;
 			for (SpatialSearchResult r : res.mainResults) {
 				if (limitPoiCat > 0) {
 					limitPoiCat = printPoiCategory(ctx, limitPoiCat, r);
 				}
 				long nextKey = SpatialSearchResult.compareKey(r);
-				if (cKey != nextKey) {
+				boolean scoreDrop = ctx.ranking != null && !r.isPoiCategory()
+						&& (r.score < levelScore - ctx.settings.SHOW_MORE_SCORE_DROP
+								|| ind >= ctx.settings.SHOW_MORE_MAX_LEVEL_TIMES * limits[lind]);
+				if (cKey != nextKey || scoreDrop) {
 					if (lind < limits.length && ind >= limits[lind]) {
 						level++;
+						levelScore = r.score;
 						ind = 0;
 						if (lind < limits.length - 1) {
 							lind++;
