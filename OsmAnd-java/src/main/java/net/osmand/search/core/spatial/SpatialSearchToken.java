@@ -613,6 +613,8 @@ public class SpatialSearchToken {
 		
 		int otherWordsCnt; // added before intersection
 		int otherFoundCnt;
+		// matched name words that are not common in this map: "Avenue" is, "York" is not
+		int distinctFoundCnt = -1;
 		
 		int indexInToken;
 		final boolean cityAsStreet;
@@ -632,6 +634,7 @@ public class SpatialSearchToken {
 			this(cp.name, cp.type, cp.id, cp.parentid, cp.object, cp.cityAsStreet, cp.otherWordsCnt, cp.otherFoundCnt,
 					cp.coords, cp.nearbyRadius, cp.buildingOrRefInd);
 			this.poiTypes = cp.poiTypes;
+			this.distinctFoundCnt = cp.distinctFoundCnt;
 		}
 
 		NameIndexAtom(String name, int type, long id, long pid, MapObject obj, boolean cityAsStreet, int otherWordsCnt,

@@ -56,6 +56,11 @@ public class SpatialSearchRanking {
 	private static final double TYPE_STOP = 0.35;
 	private static final double TYPE_INFRASTRUCTURE = 0.10;
 
+	/** distance from which a town or a village, named by a piece of its name, starts to lose its weight */
+	private static final double PLACE_FAR_FROM_KM = 500;
+	/** ... and at which, past that, it keeps half of it */
+	private static final double PLACE_FAR_HALF_KM = 1000;
+
 	/** elo above the floor at which fame alone makes an object a landmark: pref-0134 */
 	private static final double LANDMARK_RATING = 1000;
 	/** ... but only where a person can go to it - 1/(1+9/3): a famous church 80 km away is not
@@ -116,11 +121,33 @@ public class SpatialSearchRanking {
 		// undimmed by distance for what is looked for by name from anywhere: pref-0125, pref-0127
 		double exact = name == NAME_EXACT && isNotable(r)
 				? wExactName * (isPlace(head) || isProminent(r) ? 1 : near) : 0;
+		double type = Math.max(typeScore(head), landmarkByRating(r, near));
+		double rating = (isPlace(head) ? wRatingPlace : wRating) * ratingScore(r);
+		double far = farPlaceFactor(r, head, name, center);
 		return wName * name * near
-				+ wType * Math.max(typeScore(head), landmarkByRating(r, near))
-				+ (isPlace(head) ? wRatingPlace : wRating) * ratingScore(r)
+				+ wType * type * far
+				+ rating * far
 				+ wNear * near
 				+ exact;
+	}
+
+	/** a city is looked for by name from anywhere; a town, a village, a hamlet or an area named by a piece
+	 *  of its name is not: "farm" in Amsterdam is not 八五九农场 7900 km away. Within PLACE_FAR_FROM_KM
+	 *  nothing changes - "rifugio" still finds the village 128 km off: pref-0045, pref-0138 */
+	private double farPlaceFactor(SpatialSearchResult r, SpatialSearchResultRef head, double name, LatLon center) {
+		if (center == null || name >= NAME_EXACT || !isPlace(head) || isCity(head)) {
+			return 1;
+		}
+		double km = SpatialSearchResult.getDistance(r, center) / 1000.0;
+		return km <= PLACE_FAR_FROM_KM ? 1 : 1.0 / (1.0 + (km - PLACE_FAR_FROM_KM) / PLACE_FAR_HALF_KM);
+	}
+
+	/** a city by its own place type, however the map stores it - the address index writes towns as cities too */
+	private boolean isCity(SpatialSearchResultRef ref) {
+		if (ref.atom.object instanceof Amenity a) {
+			return "city".equals(a.getSubType());
+		}
+		return ref.atom.object instanceof City c && c.getType() == City.CityType.CITY;
 	}
 
 	/** did the query name this object, or only the word for its kind? */
@@ -242,6 +269,14 @@ public class SpatialSearchRanking {
 			parts = 2;
 		}
 		return parts;
+	}
+
+	/** the query said how many and what kind, but never which street: "4 av" is 4th Avenue, not
+	 *  house 4 on any avenue. Whether a word only says what kind ("avenue", "sokak", "вулиця") comes
+	 *  from the common words of the map that holds the street, not from a list kept here. */
+	public boolean kindOnlyAddress(SpatialSearchResult r) {
+		SpatialSearchResultRef head = r == null ? null : r.getFirstRef();
+		return head != null && head.atom != null && head.atom.isBuilding() && head.atom.distinctFoundCnt == 0;
 	}
 
 	/** the query named this object, rather than reaching it through an alias or a category */

@@ -59,8 +59,15 @@ public class SpatialSearchContext {
 	final SpatialPoiSearch poiSearch;
 	final SpatialTextSearchSettings settings;
 	final SpatialSearchStats stats = new SpatialSearchStats();
+
+	private static final int WORD_COMMON = 1;
+	private static final int WORD_KIND = 2;
+	// flags of the words met in the map being read, files are read one after another
+	private NameIndexReader wordFlagsReader;
+	private final Map<String, Integer> wordFlags = new HashMap<>();
 	
 	public ResultMatcher<SpatialSearchResult> resultMatcher;
+
 	public final SpatialSearchRanking ranking;
 	
 	public boolean isCancelled() {
@@ -746,7 +753,7 @@ public class SpatialSearchContext {
 			}
 			poiTypes = parsePoiTypes(indx, b, poiTypes);
 		}
-		boolean[] cmnWord = new boolean[1];
+		boolean[] cmnWord = new boolean[2]; // common, kind word
 		for (int i = 0; i < cnt; i++) {
 			int suffBit = a != null ? a.getSuffixesBitsetIndex(i) : b.getSuffixesBitsetIndex(i);
 			if (suffBit % 2 == 0) {
@@ -863,6 +870,9 @@ public class SpatialSearchContext {
 		}
 		if (commonWord != null) {
 			commonWord[0] = isWordCommonlyUsed(indx, mname);
+			if (commonWord.length > 1) {
+				commonWord[1] = isKindWord(indx, mname);
+			}
 		}
 		stats.sub1MatchTime.finish();
 		return acceptName;
@@ -891,6 +901,8 @@ public class SpatialSearchContext {
 		List<SpatialSearchToken> otherTokens = null;
 		boolean streetCity = false;
 		boolean numericNotMatch = false;
+		// the word that found the object: common in this map ("avenue", "rue") names no object
+		int distinct = cmnWord != null && cmnWord.length > 1 && cmnWord[1] ? 0 : 1;
 		List<String> split = null;
 		if (name.indexOf(' ') != -1) {
 			split = SearchAlgorithms.splitAndNormalize(name, false);
@@ -930,6 +942,9 @@ public class SpatialSearchContext {
 						}
 						otherTokens.add(token);
 						matched = true;
+						if (!isKindWord(indx, otherName)) {
+							distinct++;
+						}
 						break;
 					}
 				}
@@ -953,6 +968,7 @@ public class SpatialSearchContext {
 		}
 		NameIndexAtom atom = new NameIndexAtom(name, type, lid, pid, obj, streetCity, other, otherFound, coords,
 				nearByType, -1);
+		atom.distinctFoundCnt = distinct;
 		atom.poiTypes = poiTypes;
 		atom.elo = elo;
 		if (settings.SEARCH_POI_BY_CATEGORY_ONLY) {
@@ -991,17 +1007,42 @@ public class SpatialSearchContext {
 
 	}
 
+	/** a word the map mostly leaves unindexed says what an object is ("avenue", "вулиця", "calle"),
+	 *  not which one: measured on the map, like the common words, never listed by hand */
+	private boolean isKindWord(NameIndexReader indx, String word) {
+		return word != null && (wordFlags(indx, word) & WORD_KIND) != 0;
+	}
+
 	private boolean isWordCommonlyUsed(NameIndexReader indx, String mainWord) {
-		// do not store commonlyUsedWords across all files! 
+		return (wordFlags(indx, mainWord) & WORD_COMMON) != 0;
+	}
+
+	/** matchName and addObject ask about the same few words for every atom they read: decide once per word */
+	private int wordFlags(NameIndexReader indx, String word) {
+		// do not store commonlyUsedWords across all files!
 		// it creates bug "united states" not common for world, regions.ocbf (apple test case - appletree)
-		if (SearchAlgorithms.isNumber2Letters(mainWord)) {
-			return false;
+		if (indx != wordFlagsReader) {
+			wordFlagsReader = indx;
+			wordFlags.clear();
 		}
-		ValueFreq isCommonWord = indx.getCommonWordsStats().get(SearchAlgorithms.alignChars(mainWord));
-		if (isCommonWord == null) {
-			return false;
+		Integer cached = wordFlags.get(word);
+		if (cached != null) {
+			return cached;
 		}
-		return true;
+		int flags = 0;
+		if (!SearchAlgorithms.isNumber2Letters(word)) {
+			Map<String, ValueFreq> stats = indx.getCommonWordsStats();
+			ValueFreq v = stats == null ? null : stats.get(SearchAlgorithms.alignChars(word));
+			if (v != null) {
+				flags |= WORD_COMMON;
+				// nonindexed = freq - extra; "avenue" 12662 of 19992 in New York, "york" 0 of 170
+				if (v.freq > 0 && (v.freq - v.extra) >= v.freq * settings.KIND_WORD_NONINDEXED_SHARE) {
+					flags |= WORD_KIND;
+				}
+			}
+		}
+		wordFlags.put(word, flags);
+		return flags;
 	}
 
 	void addBuildingRefAtoms(SpatialSearchToken t, List<SpatialSearchToken> allTokens,
@@ -1023,6 +1064,7 @@ public class SpatialSearchContext {
 					NameIndexAtom atomB = new NameIndexAtom(atom.name, typeToAdd, atom.id,
 							atom.parentid, atom.object, atom.cityAsStreet, atom.otherWordsCnt, atom.otherFoundCnt,
 							atom.coords, atom.nearbyRadius, t.originalOrder);
+					atomB.distinctFoundCnt = atom.distinctFoundCnt; // the house number names no street
 					token.addAtom(atomB);
 				}
 

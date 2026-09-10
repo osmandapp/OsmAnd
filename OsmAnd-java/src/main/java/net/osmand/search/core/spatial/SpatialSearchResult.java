@@ -569,6 +569,11 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 			return res;
 		}
 		if (ranking != null) {
+			// "4 av" is 4th Avenue: a house whose street the query never named comes after
+			res = Boolean.compare(ranking.kindOnlyAddress(o1), ranking.kindOnlyAddress(o2));
+			if (res != 0) {
+				return res;
+			}
 			res = Integer.compare(ranking.answerParts(o1), ranking.answerParts(o2));
 			if (res != 0) {
 				return res;

@@ -58,6 +58,7 @@ import net.osmand.util.SearchAlgorithms;
 public class SpatialTextSearch {
 
 	public static class SpatialTextSearchSettings {
+		
 		private SpatialTextSearchSettings() {}
 		
 		///////////// GENERAL SETTINGS //////////
@@ -120,6 +121,9 @@ public class SpatialTextSearch {
 		
 		// no need to find 3 street intersection or 3 POI intersection
 		public int LIMIT_ATOMIC_OBJECTS = 2;
+		
+		// share of a common word left unindexed from which it names a kind, not an object
+		public double KIND_WORD_NONINDEXED_SHARE = 0.2;
 		
 		// Create default bboxes for points POI / Address objects  
 		public int POI_DEFAULT_RADIUS = 50;
