@@ -157,6 +157,69 @@ class XmlPullParserContractTest {
 		)
 	}
 
+	// Garmin writes its extensions under arbitrary prefixes (ns2:, ns3:) bound to the well-known
+	// URIs, and GpxUtilities.getQualifiedExtensionTagName() tells known from foreign by the URI.
+	@Test
+	fun resolvesNamespaceUriOfPrefixedElements() {
+		val parser = parser(
+			"<gpx xmlns=\"http://www.topografix.com/GPX/1/1\"" +
+				" xmlns:ns3=\"http://www.garmin.com/xmlschemas/TrackPointExtension/v1\"" +
+				" xmlns:test=\"https://example.com/gpx/test\">" +
+				"<ns3:hr>145</ns3:hr><test:hr>1</test:hr><plain/></gpx>"
+		)
+		assertEquals(XmlPullParser.START_TAG, parser.next())
+		assertEquals("gpx", parser.getName())
+		assertEquals("http://www.topografix.com/GPX/1/1", parser.getNamespace())
+
+		assertEquals(XmlPullParser.START_TAG, parser.next())
+		assertEquals("hr", parser.getName())
+		assertEquals("ns3", parser.getPrefix())
+		assertEquals("http://www.garmin.com/xmlschemas/TrackPointExtension/v1", parser.getNamespace())
+		assertEquals("145", parser.nextText())
+
+		assertEquals(XmlPullParser.START_TAG, parser.next())
+		assertEquals("hr", parser.getName())
+		assertEquals("https://example.com/gpx/test", parser.getNamespace())
+		assertEquals("1", parser.nextText())
+
+		assertEquals(XmlPullParser.START_TAG, parser.next())
+		assertEquals("plain", parser.getName())
+		assertEquals(null, parser.getPrefix())
+		assertEquals("http://www.topografix.com/GPX/1/1", parser.getNamespace())
+		parser.close()
+	}
+
+	@Test
+	fun resolvesNamespacesPerElementScope() {
+		val parser = parser(
+			"<root xmlns:p=\"urn:outer\"><a xmlns:p=\"urn:inner\"><p:x/></a><p:y/></root>"
+		)
+		assertEquals(XmlPullParser.START_TAG, parser.next()) // <root>
+		assertEquals(XmlPullParser.START_TAG, parser.next()) // <a>
+		assertEquals(XmlPullParser.START_TAG, parser.next()) // <p:x/>
+		assertEquals("urn:inner", parser.getNamespace())
+		assertEquals(XmlPullParser.END_TAG, parser.next()) // </p:x>
+		assertEquals("urn:inner", parser.getNamespace())
+		assertEquals(XmlPullParser.END_TAG, parser.next()) // </a>
+		assertEquals(XmlPullParser.START_TAG, parser.next()) // <p:y/>
+		assertEquals("urn:outer", parser.getNamespace())
+		parser.close()
+	}
+
+	@Test
+	fun reportsNamespaceOfAttributes() {
+		val parser = parser("<a xmlns:x=\"urn:x\" x:v=\"prefixed\" v=\"plain\"/>")
+		assertEquals(XmlPullParser.START_TAG, parser.next())
+		assertEquals(2, parser.getAttributeCount())
+		val prefixed = (0 until 2).single { parser.getAttributePrefix(it) == "x" }
+		assertEquals("urn:x", parser.getAttributeNamespace(prefixed))
+		assertEquals("", parser.getAttributeNamespace(1 - prefixed))
+		// An unprefixed attribute is in no namespace, so "" must not match the prefixed one.
+		assertEquals("plain", parser.getAttributeValue("", "v"))
+		assertEquals("prefixed", parser.getAttributeValue("urn:x", "v"))
+		parser.close()
+	}
+
 	@Test
 	fun coalescesCdataWithSurroundingText() {
 		assertEquals(

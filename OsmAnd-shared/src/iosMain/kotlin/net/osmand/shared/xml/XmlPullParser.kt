@@ -25,8 +25,9 @@ import okio.buffer
 // START_TAG, TEXT, END_TAG, END_DOCUMENT (comments/processing instructions are skipped,
 // CDATA is coalesced into text, entities are expanded) - this is the standard next() contract
 // used by org.xmlpull.v1.XmlPullParser, i.e. exactly what Android's actual (backed by
-// android.util.Xml) already provides. getAttributeValue(namespace, name) is always called
-// with namespace = "" by real callers, i.e. a plain attribute-name lookup.
+// android.util.Xml) already provides. Namespace declarations are tracked and resolved to URIs
+// as well, because GpxUtilities.getQualifiedExtensionTagName() distinguishes a known extension
+// namespace from a foreign one by URI rather than by prefix.
 actual class XmlPullParser actual constructor() {
 
 	actual companion object {
@@ -118,6 +119,14 @@ actual class XmlPullParser actual constructor() {
 	private var attributes: List<Pair<String, String>> = emptyList() // raw name -> decoded value
 	private var pendingEndTagName: String? = null // set right after reporting an empty element's START_TAG
 	private val openTags = mutableListOf<String>()
+	// Namespace declarations in scope, innermost last; "" is the prefix of a default (xmlns=)
+	// declaration. nsScopes holds, per open element, the declaration count that was in scope
+	// before it - an element's own declarations stay visible through its END_TAG and are dropped
+	// at the start of the next next().
+	private val nsPrefixes = mutableListOf<String>()
+	private val nsUris = mutableListOf<String>()
+	private val nsScopes = mutableListOf<Int>()
+	private var pendingNamespacePop: Int = -1
 	private var detectedEncoding: String = "UTF-8" // resolved from BOM / XML declaration while priming
 	// org.xmlpull.v1.XmlPullParser defaults to namespaces NOT processed (raw/qualified names);
 	// ImportGpx explicitly turns this off for KML's gx: prefix, implying GpxUtilities relies on
@@ -142,6 +151,7 @@ actual class XmlPullParser actual constructor() {
 		attributes = emptyList()
 		pendingEndTagName = null
 		openTags.clear()
+		clearNamespaces()
 		primeEncoding(input)
 		if (ensure(1) && buf[pos].code == 0xFEFF) {
 			pos++ // BOM that survived decoding (an unmarked UTF-16 stream, say)
@@ -437,6 +447,7 @@ actual class XmlPullParser actual constructor() {
 		attributes = emptyList()
 		pendingEndTagName = null
 		openTags.clear()
+		clearNamespaces()
 		discardedChars = 0
 		detectedEncoding = "UTF-8"
 		encodingMode = MODE_UTF8
@@ -459,15 +470,24 @@ actual class XmlPullParser actual constructor() {
 	}
 
 	@Throws(XmlParserException::class)
-	actual fun getNamespaceCount(depth: Int): Int = -1 // Not implemented
+	actual fun getNamespaceCount(depth: Int): Int {
+		if (!processNamespaces || depth < 0) return 0
+		return if (depth < nsScopes.size) nsScopes[depth] else nsPrefixes.size
+	}
 
 	@Throws(XmlParserException::class)
-	actual fun getNamespacePrefix(pos: Int): String? = null // Not implemented
+	actual fun getNamespacePrefix(pos: Int): String? {
+		// A default declaration (xmlns=) is reported with a null prefix, as in org.xmlpull.
+		return nsPrefixes.getOrNull(pos)?.ifEmpty { null }
+	}
 
 	@Throws(XmlParserException::class)
-	actual fun getNamespaceUri(pos: Int): String? = null // Not implemented
+	actual fun getNamespaceUri(pos: Int): String? = nsUris.getOrNull(pos)
 
-	actual fun getNamespace(prefix: String?): String? = null // Not implemented
+	actual fun getNamespace(prefix: String?): String? {
+		if (!processNamespaces) return null
+		return resolveNamespace(prefix ?: NO_NAMESPACE)
+	}
 
 	// openTags holds the elements that are currently open, which is one short of the reported
 	// depth in the two cases the stack cannot express: an empty element (never pushed) and an
@@ -493,7 +513,15 @@ actual class XmlPullParser actual constructor() {
 
 	actual fun getTextCharacters(holderForStartAndLength: IntArray): CharArray? = null // Not implemented
 
-	actual fun getNamespace(): String? = null // namespace URI resolution not implemented; unused by real callers
+	// The URI the current element's prefix is bound to, "" when it is in no namespace.
+	// GpxUtilities.getQualifiedExtensionTagName() reads this to tell a known extension namespace
+	// bound to an unexpected prefix (Garmin writes ns2:/ns3:) from a genuinely foreign one.
+	actual fun getNamespace(): String? {
+		if (!processNamespaces) return NO_NAMESPACE
+		if (currentTokenType != START_TAG && currentTokenType != END_TAG) return null
+		val rawName = currentName ?: return null
+		return resolveNamespace(prefixOf(rawName) ?: NO_NAMESPACE) ?: NO_NAMESPACE
+	}
 
 	actual fun getName(): String? = applyNamespaceMode(currentName)
 
@@ -506,7 +534,13 @@ actual class XmlPullParser actual constructor() {
 
 	actual fun getAttributeCount(): Int = attributes.size
 
-	actual fun getAttributeNamespace(index: Int): String? = null // not resolved; unused by real callers
+	// Attributes are never in the default namespace, so an unprefixed one is in no namespace.
+	actual fun getAttributeNamespace(index: Int): String? {
+		if (!processNamespaces) return NO_NAMESPACE
+		val rawName = attributes.getOrNull(index)?.first ?: return null
+		val prefix = prefixOf(rawName) ?: return NO_NAMESPACE
+		return resolveNamespace(prefix) ?: NO_NAMESPACE
+	}
 
 	actual fun getAttributeName(index: Int): String? {
 		return attributes.getOrNull(index)?.first?.let { applyNamespaceMode(it) }
@@ -524,8 +558,12 @@ actual class XmlPullParser actual constructor() {
 
 	actual fun getAttributeValue(namespace: String?, name: String?): String? {
 		if (name == null) return null
-		for ((attrName, attrValue) in attributes) {
-			if (applyNamespaceMode(attrName) == name) return attrValue
+		val checkNamespace = processNamespaces && namespace != null
+		for (index in attributes.indices) {
+			val (attrName, attrValue) = attributes[index]
+			if (applyNamespaceMode(attrName) != name) continue
+			if (checkNamespace && getAttributeNamespace(index) != namespace) continue
+			return attrValue
 		}
 		return null
 	}
@@ -535,6 +573,7 @@ actual class XmlPullParser actual constructor() {
 
 	@Throws(XmlParserException::class, IOException::class)
 	actual fun next(): Int {
+		applyPendingNamespacePop()
 		if (pendingEndTagName != null) {
 			// Synthetic END_TAG for a self-closing element. readStartTag() never pushed it onto
 			// openTags, so this must NOT pop the stack (doing so would consume the real parent).
@@ -544,6 +583,7 @@ actual class XmlPullParser actual constructor() {
 			currentText = null
 			attributes = emptyList()
 			currentTokenType = END_TAG
+			pendingNamespacePop = nsScopes.removeAt(nsScopes.lastIndex)
 			return currentTokenType
 		}
 
@@ -641,6 +681,36 @@ actual class XmlPullParser actual constructor() {
 
 	private fun isNamespaceDeclaration(rawName: String): Boolean =
 		rawName == "xmlns" || rawName.startsWith("xmlns:")
+
+	private fun clearNamespaces() {
+		nsPrefixes.clear()
+		nsUris.clear()
+		nsScopes.clear()
+		pendingNamespacePop = -1
+	}
+
+	private fun resolveNamespace(prefix: String): String? {
+		for (i in nsPrefixes.indices.reversed()) {
+			if (nsPrefixes[i] == prefix) return nsUris[i]
+		}
+		// An undeclared prefix has no URI; the default prefix simply means "no namespace".
+		return if (prefix.isEmpty()) NO_NAMESPACE else null
+	}
+
+	private fun declareNamespace(rawName: String, uri: String) {
+		nsPrefixes.add(if (rawName == "xmlns") NO_NAMESPACE else rawName.substring(6)) // "xmlns:".length
+		nsUris.add(uri)
+	}
+
+	// An element's declarations stay in scope through its END_TAG; this drops them afterwards.
+	private fun applyPendingNamespacePop() {
+		if (pendingNamespacePop < 0) return
+		while (nsPrefixes.size > pendingNamespacePop) {
+			nsPrefixes.removeAt(nsPrefixes.lastIndex)
+			nsUris.removeAt(nsUris.lastIndex)
+		}
+		pendingNamespacePop = -1
+	}
 
 	private fun prefixOf(rawName: String): String? {
 		val idx = rawName.indexOf(':')
@@ -780,6 +850,7 @@ actual class XmlPullParser actual constructor() {
 		val rawName = scanName()
 		val attrs = mutableListOf<Pair<String, String>>()
 		var selfClosing = false
+		nsScopes.add(nsPrefixes.size)
 		while (true) {
 			skipWhitespace()
 			if (!ensure(1)) {
@@ -808,9 +879,12 @@ actual class XmlPullParser actual constructor() {
 			val quote = buf[pos]
 			pos++
 			val attrValue = readAttributeValue(quote, attrName, rawName)
-			// With namespace processing on, xmlns declarations are not part of the attribute
-			// list - same as Android's actual and as the previous QXmlStreamReader backend.
-			if (!processNamespaces || !isNamespaceDeclaration(attrName)) {
+			// With namespace processing on, xmlns declarations bind a prefix instead of being
+			// reported as attributes - same as Android's actual and as the previous
+			// QXmlStreamReader backend.
+			if (processNamespaces && isNamespaceDeclaration(attrName)) {
+				declareNamespace(attrName, attrValue)
+			} else {
 				attrs.add(attrName to attrValue)
 			}
 		}
@@ -874,6 +948,7 @@ actual class XmlPullParser actual constructor() {
 		currentText = null
 		attributes = emptyList()
 		currentTokenType = END_TAG
+		pendingNamespacePop = nsScopes.removeAt(nsScopes.lastIndex)
 		return currentTokenType
 	}
 
