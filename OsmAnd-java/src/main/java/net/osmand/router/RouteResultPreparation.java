@@ -2109,8 +2109,6 @@ public class RouteResultPreparation {
 		for (int i = 0; i < oLanes.length; i++) {
 			// Nothing is in the list to compare to, so add the first elements
 			upossibleTurns.clear();
-			// an unmarked lane offers the direction of the road, i.e. the same slot as "through":
-			// it must stay in the count, otherwise "several directions are possible" turns into a turn
 			int primary = TurnType.getPrimaryTurn(oLanes[i]);
 			upossibleTurns.add(primary == TurnType.NONE ? TurnType.C : primary);
 			if (!onlyPrimary && TurnType.getSecondaryTurn(oLanes[i]) != 0) {
@@ -2121,14 +2119,6 @@ public class RouteResultPreparation {
 			}
 			if (!uniqueFromActive) {
 				possibleTurns.addAll(upossibleTurns);
-//				if (!possibleTurns.isEmpty()) {
-//					possibleTurns.retainAll(upossibleTurns);
-//					if(possibleTurns.isEmpty()) {
-//						break;
-//					}
-//				} else {
-//					possibleTurns.addAll(upossibleTurns);
-//				}
 			} else if ((oLanes[i] & 1) == 1) {
 				if (!possibleTurns.isEmpty()) {
 					possibleTurns.retainAll(upossibleTurns);

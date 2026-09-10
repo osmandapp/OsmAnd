@@ -22,11 +22,7 @@ public class TurnType {
 	public static final int OFFR = 12; // Off route //$NON-NLS-1$
 	public static final int RNDB = 13; // Roundabout
 	public static final int RNLB = 14; // Roundabout left
-	// Lane without a turn marking ("none" or an empty value in turn:lanes). It is not the same as
-	// C ("through"): such a lane declares no direction at all, so it must not be matched to a road
-	// of the junction. NONE exists only while turns are calculated, it is converted to C before it
-	// reaches voice prompts and the lanes widget (see convertNoneToStraight).
-	public static final int NONE = 15;
+	public static final int NONE = 15; // NONE lanes using only during calculating !
 	private static final int[] TURNS_ORDER = {TU, TSHL, TL, TSLL, C, TSLR, TR, TSHR, TRU};
 
 	public static TurnType straight() {
@@ -646,7 +642,7 @@ public class TurnType {
 		} else if (lane.equals("reverse")) {
 			turn = TurnType.TU;
 		} else {
-			// Unknown string (mistagged values such as "straight" are common), assume it keeps the direction
+			// Unknown string
 			turn = TurnType.C;
 //			continue;
 		}
