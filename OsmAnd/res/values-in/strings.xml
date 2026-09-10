@@ -5742,4 +5742,5 @@
     <string name="share_favorites_missing_media_warning">Beberapa media terlampir tidak dapat disertakan.</string>
     <string name="search_on_web">Cari di web</string>
     <string name="release_5_4">• Pencarian spasial baru — temukan tempat dan cari di sekitar suatu tempat\n\n • UI pencarian yang diperbarui: pengurutan, filter kategori, tampilan lebih bersih\n\n • Lampirkan foto dan media ke Favorit\n\n • Favorit: dukungan subgrup dan folder yang dapat disematkan\n\n • Koordinat: pencarian, grid peta, dan tampilan POI kini mendukung EPSG dan locator Maidenhead\n\n • Diperbaiki gangguan navigasi; beralih antara rute Standar dan Cepat\n\n • Atur skala peta Android Auto secara terpisah dari ponsel Anda\n\n • Astronomi menambahkan gerhana matahari &amp; bulan</string>
+    <string name="astro_eclipse_column_below_horizon">Di bawah cakrawala</string>
 </resources>

@@ -5180,4 +5180,8 @@
     <string name="poi_winter_hiking_filter">Taŭga por vintra marŝado</string>
     <string name="poi_mtb_yes">jes</string>
     <string name="poi_winter_hiking_yes">jes</string>
+    <string name="poi_air_conditioning">Klimatizo</string>
+    <string name="poi_website_menu">Manĝkarto</string>
+    <string name="poi_air_conditioning_yes">jes</string>
+    <string name="poi_air_conditioning_no">ne</string>
 </resources>

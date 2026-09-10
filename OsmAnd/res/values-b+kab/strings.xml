@@ -279,7 +279,7 @@
     <string name="shared_string_move">Senkez</string>
     <string name="shared_string_gpx_tracks">Iberdan</string>
     <string name="shared_string_time">Akud</string>
-    <string name="rendering_value_high_name">Haut</string>
+    <string name="rendering_value_high_name">Afellay</string>
     <string name="rendering_value_medium_w_name">D alemmas</string>
     <string name="rendering_value_low_name">Faible</string>
     <string name="shared_string_appearance">Udem</string>
@@ -725,7 +725,7 @@
     <string name="osb_comment_dialog_success">Awennit yettwarna</string>
     <string name="av_audio_bitrate">Aktum ameslaw</string>
     <string name="rendering_value_thin_name">Areqqaq</string>
-    <string name="access_shared_string_navigate_up">Aller vers le haut</string>
+    <string name="access_shared_string_navigate_up">Ali d asawen</string>
     <string name="coords_format">Amasal n tsidegt</string>
     <string name="developer_plugin">Azegrir n tneflit</string>
     <string name="replace_point_descr">Semselsi agaz s wagi</string>

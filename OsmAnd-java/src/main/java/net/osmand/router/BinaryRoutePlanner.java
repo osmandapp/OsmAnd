@@ -80,14 +80,27 @@ public class BinaryRoutePlanner {
 	 */
 	FinalRouteSegment searchRouteInternal(final RoutingContext ctx, RouteSegmentPoint start, RouteSegmentPoint end, 
 			TLongObjectMap<RouteSegment> boundaries) throws InterruptedException, IOException {
+		return searchRouteInternal(ctx, start, end, boundaries, null, null);
+	}
+
+	/**
+	 * @param visitedDirectOut  when given, it is used as the visited set of the forward search, so the
+	 *                          caller keeps the search tree after the call (see HHAlternativeRoutes)
+	 * @param visitedOppositeOut the same for the backward search
+	 */
+	FinalRouteSegment searchRouteInternal(final RoutingContext ctx, RouteSegmentPoint start, RouteSegmentPoint end, 
+			TLongObjectMap<RouteSegment> boundaries, TLongObjectHashMap<RouteSegment> visitedDirectOut,
+			TLongObjectHashMap<RouteSegment> visitedOppositeOut) throws InterruptedException, IOException {
 		// measure time
 		ctx.memoryOverhead = 1000;
 		// Initializing priority queue to visit way segments 
 		PriorityQueue<RouteSegmentCost> graphDirectSegments = new PriorityQueue<>(50, new SegmentsComparator());
 		PriorityQueue<RouteSegmentCost> graphReverseSegments = new PriorityQueue<>(50, new SegmentsComparator());
 		// Set to not visit one segment twice (stores road.id << X + segmentStart)
-		TLongObjectHashMap<RouteSegment> visitedDirectSegments = new TLongObjectHashMap<RouteSegment>();
-		TLongObjectHashMap<RouteSegment> visitedOppositeSegments = new TLongObjectHashMap<RouteSegment>();
+		TLongObjectHashMap<RouteSegment> visitedDirectSegments = visitedDirectOut != null ? visitedDirectOut
+				: new TLongObjectHashMap<RouteSegment>();
+		TLongObjectHashMap<RouteSegment> visitedOppositeSegments = visitedOppositeOut != null ? visitedOppositeOut
+				: new TLongObjectHashMap<RouteSegment>();
 		initQueuesWithStartEnd(ctx, start, end, graphDirectSegments, graphReverseSegments);
 
 		boolean onlyBackward = ctx.getPlanRoadDirection() < 0;
@@ -140,6 +153,13 @@ public class BinaryRoutePlanner {
 					TLongObjectHashMap<RouteSegment> visitedSegments = (forwardSearch ? visitedDirectSegments : visitedOppositeSegments);
 					if (!visitedSegments.containsKey(calculateRoutePointId(segment))) {
 						visitedSegments.put(calculateRoutePointId(segment), segment);
+					}
+					skipSegment = true;
+				} else if (ctx.config.altHorizon > 0) {
+					// alternative routes are read off the two trees, so the search must not stop at the
+					// first meeting point - it keeps the cheapest one and settles on (see altHorizon)
+					if (finalSegment == null || segment.distanceFromStart < finalSegment.distanceFromStart) {
+						finalSegment = (FinalRouteSegment) segment;
 					}
 					skipSegment = true;
 				} else {
@@ -238,6 +258,10 @@ public class BinaryRoutePlanner {
 			if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
 				throw new InterruptedException("Route calculation interrupted");
 			}
+			if (ctx.config.altHorizon > 0 && finalSegment != null && leftAltHorizon(ctx, finalSegment,
+					graphDirectSegments, graphReverseSegments)) {
+				break;
+			}
 		}
 		if (ctx.calculationProgress != null) {
 			ctx.calculationProgress.visitedDirectSegments += visitedDirectSegments.size();
@@ -246,6 +270,19 @@ public class BinaryRoutePlanner {
 			ctx.calculationProgress.oppositeQueueSize += graphReverseSegments.size();
 		}
 		return finalSegment;
+	}
+
+	/**
+	 * Everything still in the queues costs more than the band the alternatives may live in, so no
+	 * route through a node settled from here on could be proposed anyway.
+	 */
+	private boolean leftAltHorizon(RoutingContext ctx, FinalRouteSegment finalSegment,
+			PriorityQueue<RouteSegmentCost> direct, PriorityQueue<RouteSegmentCost> reverse) {
+		if (direct.isEmpty() || reverse.isEmpty()) {
+			return true;
+		}
+		return direct.peek().cost + reverse.peek().cost
+				> finalSegment.distanceFromStart * (1 + ctx.config.altHorizon);
 	}
 
 	protected boolean checkIfGraphIsEmpty(final RoutingContext ctx, boolean allowDirection,
@@ -538,8 +575,10 @@ public class BinaryRoutePlanner {
 			// reassign @distanceFromStart to make it correct for visited segment
 			currentSegment.distanceFromStart = distFromStartPlusSegmentTime;
 			
-			if (bothDirVisited) {
+			if (bothDirVisited && ctx.config.altHorizon <= 0) {
  				// We stop here for shortcut creation (we can't improve the neighbors if they're already visited cause the opposite is min - prove by contradiction) 
+				// Alternatives need the opposite: the two trees have to grow through each other, or the
+				// only road points settled by both are the handful on the frontier (see altHorizon).
 				if (TRACE_ROUTING) {
 					println("  " + currentSegment.segEnd + ">> 2 dir visited");
 				}

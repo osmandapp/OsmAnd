@@ -38,6 +38,7 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.shared.favorites.FavoriteFolderPath;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;

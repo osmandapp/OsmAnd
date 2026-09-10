@@ -451,7 +451,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				view.setDefaultFocusHighlightEnabled(false);
 			}
 			applyDisplayScaleSettings();
-			refreshMap(true);
 		}
 	}
 
@@ -739,11 +738,16 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void applyDisplayScaleSettings() {
+		if (!hasMapRenderer()) {
+			// v1 rendering keeps rasterized tiles of the previous magnifier
+			app.getResourceManager().getRenderer().clearCache();
+		}
 		setComplexZoom(getZoom(), getSettingsMapDensity());
 		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 		if (mapContext != null) {
 			mapContext.updateMapSettings(true);
 		}
+		refreshMap(true);
 	}
 
 	public void setComplexZoom(int zoom, double mapDensity) {
@@ -2193,6 +2197,27 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public AnimateMapMarkersThread getAnimatedMapMarkersThread() {
 		return animatedMapMarkersThread;
+	}
+
+	@NonNull
+	public PointF getMagnifiedUnscaledPixel(float screenX, float screenY) {
+		float scale = getMagnificationScale();
+		if (scale > 1.0f && multiTouchSupport != null) {
+			PointF firstPoint = multiTouchSupport.getFirstPoint();
+			float unscaledX = firstPoint.x + (screenX - firstPoint.x) / scale;
+			float unscaledY = firstPoint.y + (screenY - firstPoint.y) / scale;
+			return new PointF(unscaledX, unscaledY);
+		}
+		return new PointF(screenX, screenY);
+	}
+
+	public float getMagnificationScale() {
+		if (MapTileViewMultiTouchZoomListener.isPinchZoomMagnificationEnabled
+				&& multiTouchSupport != null
+				&& multiTouchSupport.isInZoomAndRotationMode()) {
+			return (float) multiTouchSupport.getZoomRelative();
+		}
+		return 1.0f;
 	}
 
 	public void setPinchZoomMagnificationEnabled(boolean enabled) {

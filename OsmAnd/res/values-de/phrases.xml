@@ -3166,10 +3166,10 @@
     <string name="poi_couloir">Felsschlucht</string>
     <string name="poi_mountain_area">Berggebiet</string>
     <string name="poi_surface_clay">Oberfläche: Asche</string>
-    <string name="poi_surface_tartan">Tartan</string>
-    <string name="poi_surface_artificial_turf">Kunstrasen</string>
-    <string name="poi_surface_decoturf">Zierrasen</string>
-    <string name="poi_surface_metal_grid">Metallgitter</string>
+    <string name="poi_surface_tartan">Oberfläche: Tartan</string>
+    <string name="poi_surface_artificial_turf">Oberfläche: Kunstrasen</string>
+    <string name="poi_surface_decoturf">Oberfläche: Zierrasen</string>
+    <string name="poi_surface_metal_grid">Oberfläche: Metallgitter</string>
     <string name="poi_location_underground">Lage: unterirdisch</string>
     <string name="poi_location_underwater">Lage: unter Wasser</string>
     <string name="poi_location_overground">Lage: oberirdisch</string>
@@ -4539,7 +4539,7 @@
     <string name="poi_sump_buster">Ölwannenbrecher</string>
     <string name="poi_wedge">Keil</string>
     <string name="poi_barrier_bar">Absperrbalken</string>
-    <string name="poi_surface_chipseal">Tränkmakadam</string>
+    <string name="poi_surface_chipseal">Oberfläche: Tränkmakadam</string>
     <string name="poi_cemt">CEMT-Klasse</string>
     <string name="poi_ship_private">Schiffszugang: privat</string>
     <string name="poi_ship_designated">Schiffszugang: ausgewiesen</string>
@@ -4918,7 +4918,7 @@
     <string name="poi_route_activity_type_mushrooms_picking">Pilze sammeln</string>
     <string name="poi_climbing_route">Kletterroute</string>
     <string name="poi_cafe_filter">Café</string>
-    <string name="poi_cafe_yes">ja</string>
+    <string name="poi_cafe_yes">Café: ja</string>
     <string name="poi_route_activity_type_harvesting">Ernten</string>
     <string name="poi_climbing_area">Klettergebiet</string>
     <string name="poi_route_activity_type_road_running">Straßenlauf</string>

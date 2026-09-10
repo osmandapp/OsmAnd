@@ -135,13 +135,9 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 	private val deviceSettingsPreferenceProvider: CommonPreferenceProvider<String> =
 		object : CommonPreferenceProvider<String> {
 			override fun getPreference(): CommonPreference<String> {
-				return registerStringPref(OBD_DEVICES_SETTINGS_PREF_ID, "")
+				return registerStringPreference(OBD_DEVICES_SETTINGS_PREF_ID, "").makeGlobal()
 			}
 		}
-
-	fun registerStringPref(prefId: String, defValue: String?): CommonPreference<String> {
-		return registerStringPreference(prefId, defValue).makeGlobal().makeShared()
-	}
 
 	private val devicesHelper: DevicesHelper =
 		VehicleMetricsBLEDeviceHelper(this, app, deviceSettingsPreferenceProvider)

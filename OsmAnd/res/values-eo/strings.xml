@@ -5345,4 +5345,5 @@
     <string name="media_storage_camera_folder_descr">Konservas dosierojn al la dosierujo de fotilo (DCIM/OsmAnd). %1$s</string>
     <string name="rendering_attr_surface_clay_name">Argilo</string>
     <string name="rendering_attr_surface_laterite_name">Laterito</string>
+    <string name="astro_eclipse_column_below_horizon">subhorizonte</string>
 </resources>

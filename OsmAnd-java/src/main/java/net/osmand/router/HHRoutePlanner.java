@@ -452,6 +452,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			hctx.boundaries.put(calcRPId(endP, endP.getSegmentEnd(), endP.getSegmentStart()), null);
 			hctx.boundaries.put(calcRPId(endP, endP.getSegmentStart(), endP.getSegmentEnd()), null);
 			progress.hhIterationProgress(0.50); // %
+			hctx.startSegment = startP;
+			hctx.endSegment = endP;
 			initStart(hctx, startP, false, stPoints);
 			hctx.rctx.config.initialDirection = prev;
 			if (stPoints.isEmpty()) {
@@ -572,6 +574,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		public int unsupportedParams = 0; // affects FastRoutingState via hhHasUnsupportedParameters
 
 		public boolean containsStartEnd;
+		public boolean containsStartEndByBbox;
 		public double sumIntersects;
 
 		public HHRouteRegionsGroup(long edition, String params) {
@@ -637,7 +640,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		}
 	}
 
-	private HHRoutingContext<T> selectBestRoutingFiles(LatLon start, LatLon end, HHRoutingContext<T> hctx,
+	HHRoutingContext<T> selectBestRoutingFiles(LatLon start, LatLon end, HHRoutingContext<T> hctx,
 	                                                   boolean strictBestGroupMaps) throws IOException {
 		List<HHRouteRegionsGroup<T>> groups = new ArrayList<>();
 	
@@ -657,7 +660,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			}
 		}
 		for (HHRouteRegionsGroup<T> g : groups) {
-			g.containsStartEnd = g.contains(start) && g.contains(end)
+			g.containsStartEndByBbox = g.contains(start) && g.contains(end);
+			g.containsStartEnd = g.containsStartEndByBbox
 					&& g.containsStartEndRegion(hctx.rctx.regionsCoveringStartAndTargets);
 			String[] params = g.profileParams.split(",");
 			matchGroupRoutingParams(params, router, g);
@@ -668,6 +672,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			public int compare(HHRouteRegionsGroup<T> o1, HHRouteRegionsGroup<T> o2) {
 				if (o1.containsStartEnd != o2.containsStartEnd) {
 					return o1.containsStartEnd ? -1 : 1;
+				} else if (o1.containsStartEndByBbox != o2.containsStartEndByBbox) {
+					// Keep polygon matches first, then prefer endpoint coverage over a newer edition.
+					return o1.containsStartEndByBbox ? -1 : 1;
 				} else if (o1.edition != o2.edition) {
 					return o1.edition > o2.edition ? -1 : 1;
 				} else if (o1.extraParam != o2.extraParam) {

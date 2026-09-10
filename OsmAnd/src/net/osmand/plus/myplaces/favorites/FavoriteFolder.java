@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.data.FavouritePoint;
+import net.osmand.shared.favorites.FavoriteFolderPath;
 
 import java.text.Collator;
 import java.util.ArrayList;

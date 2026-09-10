@@ -5709,4 +5709,16 @@
     <string name="duplicate_map">Mapa duplicado</string>
     <string name="share_favorites_media_preparation_failed">Não foi possível incluir os arquivos anexados. Apenas pontos de compartilhamento.</string>
     <string name="preparing_file">Preparando o arquivo</string>
+    <string name="astro_eclipse_column_below_horizon">Abaixo do horizonte</string>
+    <string name="share_favorites_with_media_description">Os pontos favoritos em %1$s têm mídia anexada. Compartilhe apenas os pontos ou os pontos com mídia como um arquivo.</string>
+    <string name="share_favorites_points_only">Apenas pontos</string>
+    <string name="share_favorites_points_and_media">Pontos e mídia</string>
+    <string name="share_favorites_preparation_failed">Não foi possível preparar os arquivos para compartilhamento.</string>
+    <string name="share_favorites_share_failed">Não foi possível compartilhar o arquivo.</string>
+    <string name="share_favorites_missing_media_warning">Alguns arquivos de mídia anexados não puderam ser incluídos.</string>
+    <string name="search_on_web">Pesquisar na web</string>
+    <string name="astro_eclipse_phase_none">Não ofuscado</string>
+    <string name="astro_fit_lunar_eclipse_visibility">Visibilidade adequada</string>
+    <string name="astro_eclipse_start">Iniciar</string>
+    <string name="astro_eclipse_end">Fim</string>
 </resources>

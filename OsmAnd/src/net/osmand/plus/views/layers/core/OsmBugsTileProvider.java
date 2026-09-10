@@ -130,12 +130,12 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 		this.showClosed = showClosed;
 		this.minZoom = minZoom;
 		this.offset = new PointI(0, -BACKGROUND_TYPE.getOffsetY(context, textScale));
-		this.swigTakeOwnership();
 	}
 
 	public void drawSymbols(@NonNull MapRendererView mapRenderer) {
 		if (providerInstance == null) {
-			providerInstance = instantiateProxy();
+			providerInstance = instantiateProxy(true);
+			swigReleaseOwnership();
 		}
 
 		mapRenderer.addSymbolsProvider(providerInstance);

@@ -192,8 +192,7 @@ public class MapRendererContext {
 	}
 
 	protected int getRasterTileSize() {
-		OsmandMap osmandMap = app.getOsmandMap();
-		float mapDensity = osmandMap != null ? osmandMap.getMapDensity() : app.getSettings().MAP_DENSITY.get();
+		float mapDensity = OsmandMap.getMapDensitySettings(app);
 		float mapDensityAligned = mapDensity > 2.0f ? 2.0f : Math.min(mapDensity, 1.0f);
 		return (int) (getReferenceTileSize() * mapDensityAligned);
 	}
@@ -246,7 +245,10 @@ public class MapRendererContext {
 			}
 		}
 		ResolvedMapStyle mapStyle = mapStyles.get(rendName);
-		float mapDensity = settings.MAP_DENSITY.get();
+		// must match getRasterTileSize(): the raster tile size and the style scale factor
+		// are two halves of the same magnifier, mixing the phone and the Android Auto values
+		// stretches the rendered tiles
+		float mapDensity = OsmandMap.getMapDensitySettings(app);
 		float textScale = settings.TEXT_SCALE.get();
 		QStringStringHash styleSettings = getMapStyleSettings();
 

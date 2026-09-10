@@ -4781,7 +4781,7 @@
     <string name="miles">Milles</string>
     <string name="mpg">MPG</string>
     <string name="access_pinch_zoom_magnification">Agrandissement par pincement</string>
-    <string name="access_pinch_zoom_magnification_descr">Utilisez la mise à l\'échelle de la fenêtre d\'affichage au lieu de niveaux de zoom discrets pendant les gestes de zoom avant.</string>
+    <string name="access_pinch_zoom_magnification_descr">Lors du geste de zoom avant, utiliser un agrandissement de l\'affichage en continu plutôt que de passer d\'un niveau de zoom prédéfini à un autre.</string>
     <string name="show_spherical_map_description">Afficher le modèle sphéroïdal de la Terre</string>
     <string name="shared_string_price">Prix</string>
     <string name="rendering_attr_showSkiSlopes_name">Afficher les pistes de ski</string>
@@ -5269,4 +5269,5 @@
     <string name="share_favorites_share_failed">Impossible de partager le fichier.</string>
     <string name="share_favorites_missing_media_warning">Certains fichiers médias n\'ont pu être inclus.</string>
     <string name="search_on_web">Rechercher sur le Web</string>
+    <string name="astro_eclipse_column_below_horizon">Sous l\'horizon</string>
 </resources>
