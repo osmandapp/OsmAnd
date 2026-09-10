@@ -31,7 +31,7 @@ import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.appearance.PanelAppearanceApplier;
 import net.osmand.plus.views.mapwidgets.appearance.ResolvedPanelAppearance;
-import net.osmand.router.RouteResultPreparation;
+import net.osmand.shared.routing.TurnLanes;
 import net.osmand.shared.routing.TurnType;
 
 import java.util.Arrays;
@@ -98,9 +98,9 @@ public class LanesWidget extends MapWidget {
 				float degree = lastKnownLocation == null || !lastKnownLocation.hasBearing()
 						? 0
 						: lastKnownLocation.getBearing();
-				lanes = RouteResultPreparation.parseTurnLanes(ro, degree / 180 * Math.PI);
+				lanes = TurnLanes.parseTurnLanes(ro, degree / 180 * Math.PI);
 				if (lanes == null) {
-					lanes = RouteResultPreparation.parseLanes(ro, degree / 180 * Math.PI);
+					lanes = TurnLanes.parseLanes(ro, degree / 180 * Math.PI);
 				}
 			}
 		} else if (routingHelper.isRouteCalculated() && followingMode) {
