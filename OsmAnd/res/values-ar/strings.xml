@@ -985,7 +985,7 @@
     <string name="lang_nb">بوكمول النرويجية</string>
     <string name="lang_nn">نينورسك النرويجية</string>
     <string name="lang_es_ar">الإسبانية (الأرجنتين)</string>
-    <string name="si_nm">ميل بحري</string>
+    <string name="si_nm">الأميال البحرية</string>
     <string name="dark_theme">ليلي</string>
     <string name="routing_attr_height_name">الارتفاع</string>
     <string name="default_speed_system_descr">اختيار وحدة للسرعة.</string>
@@ -1848,7 +1848,7 @@
     <string name="shared_string_travel_guides">ارشادات السفر</string>
     <string name="enter_lon">أدخل خط الطول</string>
     <string name="enter_lat">أدخل خط العرض</string>
-    <string name="transport_nearby_routes">في غضون</string>
+    <string name="transport_nearby_routes">الفئة</string>
     <string name="shared_string_current">الحالي</string>
     <string name="delete_search_history">حذف محفوظات البحث</string>
     <string name="download_maps_travel">أدلة السفر</string>
