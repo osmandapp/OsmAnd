@@ -2,6 +2,7 @@ package net.osmand.plus.track.fragments.controller;
 
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.card.base.headed.IHeadedCardController;
 import net.osmand.plus.card.base.headed.IHeadedContentCard;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.multistatetoggle.IconToggleButton;
@@ -59,6 +61,7 @@ public class TrackLineStyleController implements IHeadedCardController {
 		View view = UiUtilities.getInflater(activity, nightMode)
 				.inflate(R.layout.card_line_style_content, null);
 		setupToggleButton(view, nightMode);
+		setupDescription(view);
 		return view;
 	}
 
@@ -69,6 +72,15 @@ public class TrackLineStyleController implements IHeadedCardController {
 		toggleButton.setSelectedItemByTag(getSelectedStyle());
 	}
 
+	private void setupDescription(@NonNull View view) {
+		TextView description = view.findViewById(R.id.description);
+		boolean solidColorSelected = isColorSolid();
+		AndroidUiHelper.updateVisibility(description, !solidColorSelected);
+		if (!solidColorSelected) {
+			description.setText(R.string.gpx_line_style_desc_unavailable_for_color);
+		}
+	}
+
 	@NonNull
 	private List<IconRadioItem> getRadioItems() {
 		List<IconRadioItem> items = new ArrayList<>();
@@ -76,10 +88,19 @@ public class TrackLineStyleController implements IHeadedCardController {
 			IconRadioItem item = new IconRadioItem(getIconId(style));
 			item.setTag(style);
 			item.setContentDescription(style.getDisplayName());
+			item.setEnabled(isStyleAvailable(style));
 			item.setOnClickListener((radioItem, view) -> onLineStyleSelected(style));
 			items.add(item);
 		}
 		return items;
+	}
+
+	private boolean isStyleAvailable(@NonNull GpxLineStyleType style) {
+		return style == GpxLineStyleType.SOLID || isColorSolid();
+	}
+
+	private boolean isColorSolid() {
+		return drawInfo.getColoringStyle().getType().isTrackSolid();
 	}
 
 	private boolean onLineStyleSelected(@NonNull GpxLineStyleType style) {

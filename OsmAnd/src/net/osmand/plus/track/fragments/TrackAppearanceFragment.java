@@ -88,6 +88,7 @@ import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.shared.gpx.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.io.KFile;
+import net.osmand.shared.gpx.enums.GpxLineStyleType;
 import net.osmand.shared.palette.domain.PaletteConstants;
 import net.osmand.shared.palette.domain.PaletteItem;
 import net.osmand.shared.routing.ColoringType;
@@ -124,6 +125,8 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	private View controlButtons;
 	private View view;
 	private Track3DCard track3DCard;
+	private MultiStateCard colorCard;
+	private HeadedContentCard lineStyleCard;
 
 	@Override
 	public int getMainLayoutId() {
@@ -465,10 +468,16 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	public void onColoringStyleSelected(@Nullable ColoringStyle coloringStyle) {
 		if (coloringStyle != null) {
 			trackDrawInfo.setColoringStyle(coloringStyle);
+			if (!coloringStyle.getType().isTrackSolid() && trackDrawInfo.getLineStyleType() != GpxLineStyleType.SOLID) {
+				trackDrawInfo.setLineStyleType(GpxLineStyleType.SOLID);
+			}
 			View saveButton = view.findViewById(R.id.right_bottom_button);
 			saveButton.setEnabled(isAvailableInSubscription(app, coloringStyle));
 			updateColorItems();
 			updateGradientPalette(coloringStyle);
+			if (lineStyleCard != null) {
+				lineStyleCard.update();
+			}
 		}
 	}
 
@@ -800,7 +809,8 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			inflate(R.layout.list_item_divider_basic, container, true);
 
 			TrackColorController trackColorController = getColorCardController();
-			addCard(container, new MultiStateCard(mapActivity, trackColorController));
+			colorCard = new MultiStateCard(mapActivity, trackColorController);
+			addCard(container, colorCard);
 
 			inflate(R.layout.list_item_divider_basic, container, true);
 
@@ -810,7 +820,8 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			inflate(R.layout.list_item_divider_basic, container, true);
 
 			TrackLineStyleController lineStyleController = getLineStyleCardController();
-			addCard(container, new HeadedContentCard(mapActivity, lineStyleController));
+			lineStyleCard = new HeadedContentCard(mapActivity, lineStyleController);
+			addCard(container, lineStyleCard);
 
 			inflate(R.layout.list_item_divider_basic, container, true);
 
@@ -844,7 +855,14 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	private TrackLineStyleController getLineStyleCardController() {
-		return new TrackLineStyleController(app, trackDrawInfo, style -> refreshMap());
+		return new TrackLineStyleController(app, trackDrawInfo, this::onTrackLineStyleSelected);
+	}
+
+	private void onTrackLineStyleSelected(@NonNull GpxLineStyleType style) {
+		if (colorCard != null) {
+			colorCard.update();
+		}
+		refreshMap();
 	}
 
 	public List<GpxDisplayGroup> getGpxDisplayGroups() {

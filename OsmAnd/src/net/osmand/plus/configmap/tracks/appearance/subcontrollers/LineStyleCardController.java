@@ -1,11 +1,13 @@
 package net.osmand.plus.configmap.tracks.appearance.subcontrollers;
 
+import static net.osmand.shared.gpx.GpxParameter.COLORING_TYPE;
 import static net.osmand.shared.gpx.GpxParameter.LINE_STYLE;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -19,10 +21,13 @@ import net.osmand.plus.card.base.multistate.BaseMultiStateCardController;
 import net.osmand.plus.card.base.multistate.CardState;
 import net.osmand.plus.card.base.simple.DescriptionCard;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.multistatetoggle.IconToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.IconToggleButton.IconRadioItem;
+import net.osmand.shared.gpx.ColoringPurpose;
 import net.osmand.shared.gpx.enums.GpxLineStyleType;
+import net.osmand.shared.routing.ColoringType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,7 +99,9 @@ public class LineStyleCardController extends BaseMultiStateCardController {
 		}
 		if (lineStyleToggleButton != null) {
 			lineStyleToggleButton.setSelectedItemByTag(selectedState.getTag());
+			updateItemsAvailability();
 		}
+		updateDescription(container);
 		container.setTag(LINE_STYLE_COMPONENT_CARD_ID);
 	}
 
@@ -105,10 +112,52 @@ public class LineStyleCardController extends BaseMultiStateCardController {
 			IconRadioItem item = new IconRadioItem(getIconId(style));
 			item.setTag(style);
 			item.setContentDescription(style.getDisplayName());
+			item.setEnabled(isStyleAvailable(style));
 			item.setOnClickListener((radioItem, view) -> lineStyleValueSelected(style));
 			items.add(item);
 		}
 		return items;
+	}
+
+	private void updateItemsAvailability() {
+		for (IconRadioItem item : lineStyleToggleButton.getItems()) {
+			if (item.getTag() instanceof GpxLineStyleType style) {
+				item.setEnabled(isStyleAvailable(style));
+			}
+		}
+		lineStyleToggleButton.updateView();
+	}
+
+	private void updateDescription(@NonNull ViewGroup container) {
+		TextView description = container.findViewById(R.id.description);
+		boolean solidColorSelected = isColorSolid();
+		AndroidUiHelper.updateVisibility(description, !solidColorSelected);
+		if (!solidColorSelected) {
+			description.setText(R.string.gpx_line_style_desc_unavailable_for_color);
+		}
+	}
+
+	private boolean isStyleAvailable(@NonNull GpxLineStyleType style) {
+		return style == GpxLineStyleType.SOLID || isColorSolid();
+	}
+
+	private boolean isColorSolid() {
+		String coloringTypeId = appearanceData.getParameter(COLORING_TYPE);
+		if (coloringTypeId == null) {
+			return true;
+		}
+		ColoringType coloringType = ColoringType.Companion.requireValueOf(ColoringPurpose.TRACK, coloringTypeId);
+		return coloringType.isTrackSolid();
+	}
+
+	public void refreshContent() {
+		card.updateSelectedCardState();
+	}
+
+	public void forceSolidStyleIfNeeded() {
+		if (selectedState.getTag() != GpxLineStyleType.SOLID) {
+			lineStyleValueSelected(GpxLineStyleType.SOLID);
+		}
 	}
 
 	@DrawableRes
@@ -118,6 +167,14 @@ public class LineStyleCardController extends BaseMultiStateCardController {
 			case DASHED -> R.drawable.ic_action_line_style_dashed;
 			case DOTTED -> R.drawable.ic_action_line_style_dotted;
 		};
+	}
+
+	@Override
+	protected boolean isCardStateAvailable(@NonNull CardState cardState) {
+		if (cardState.getTag() instanceof GpxLineStyleType style) {
+			return isStyleAvailable(style);
+		}
+		return isColorSolid();
 	}
 
 	@Override

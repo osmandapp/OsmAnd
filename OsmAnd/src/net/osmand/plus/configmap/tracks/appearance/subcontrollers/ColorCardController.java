@@ -2,11 +2,14 @@ package net.osmand.plus.configmap.tracks.appearance.subcontrollers;
 
 import static net.osmand.shared.gpx.GpxParameter.COLOR;
 import static net.osmand.shared.gpx.GpxParameter.COLORING_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.LINE_STYLE;
 import static net.osmand.shared.gpx.ColoringPurpose.TRACK;
 import static net.osmand.shared.routing.ColoringType.TRACK_SOLID;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,6 +33,8 @@ import net.osmand.plus.card.color.cstyle.IColoringStyleDetailsController;
 import net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteCard;
 import net.osmand.plus.chooseplan.PromoBannerCard;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.shared.gpx.enums.GpxLineStyleType;
 import net.osmand.shared.palette.domain.PaletteConstants;
 import net.osmand.shared.palette.domain.category.GradientPaletteCategory;
 import net.osmand.shared.routing.ColoringType;
@@ -94,9 +99,42 @@ public class ColorCardController extends ColoringStyleCardController implements 
 			GradientScaleType gradientScaleType = coloringType.toGradientScaleType();
 			container.addView(new GradientColorsPaletteCard(activity, getGradientPaletteController(gradientScaleType)).build());
 		} else if (coloringType.isTrackSolid()) {
-			container.addView(new ColorsPaletteCard(activity, getColorsPaletteController()).build());
+			View paletteView = new ColorsPaletteCard(activity, getColorsPaletteController()).build();
+			if (!isLineStyleSolid()) {
+				View descriptionView = new DescriptionCard(activity, R.string.gpx_color_desc_unavailable_for_style).build();
+				container.addView(AndroidUiHelper.wrapWithLinearLayout(activity, LinearLayout.VERTICAL, paletteView, descriptionView));
+			} else {
+				container.addView(paletteView);
+			}
 		} else {
 			container.addView(new ColoringStyleDetailsCard(activity, getColoringStyleDetailsController()).build());
+		}
+	}
+
+	@Override
+	protected boolean isCardStateAvailable(@NonNull CardState cardState) {
+		if (cardState.getTag() instanceof ColoringStyle coloringStyle) {
+			return coloringStyle.getType().isTrackSolid() || isLineStyleSolid();
+		}
+		return isLineStyleSolid();
+	}
+
+	private boolean isLineStyleSolid() {
+		String lineStyleTypeName = data.getParameter(LINE_STYLE);
+		if (lineStyleTypeName == null) {
+			return true;
+		}
+		return GpxLineStyleType.Companion.getLineStyleType(lineStyleTypeName) == GpxLineStyleType.SOLID;
+	}
+
+	public void refreshContent() {
+		card.updateSelectedCardState();
+	}
+
+	public void forceSolidColorIfNeeded() {
+		ColoringStyle coloringStyle = getSelectedColoringStyle();
+		if (coloringStyle == null || !coloringStyle.getType().isTrackSolid()) {
+			askSelectColoringStyle(new ColoringStyle(TRACK_SOLID));
 		}
 	}
 

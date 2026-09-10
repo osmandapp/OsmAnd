@@ -2,6 +2,7 @@ package net.osmand.plus.configmap.tracks.appearance;
 
 import static net.osmand.shared.gpx.GpxParameter.COLOR;
 import static net.osmand.shared.gpx.GpxParameter.COLORING_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.LINE_STYLE;
 import static net.osmand.shared.gpx.GpxParameter.SPLIT_INTERVAL;
 import static net.osmand.shared.gpx.GpxParameter.SPLIT_TYPE;
 
@@ -26,12 +27,15 @@ import net.osmand.plus.configmap.tracks.appearance.subcontrollers.WidthCardContr
 import net.osmand.plus.myplaces.tracks.tasks.ChangeTracksAppearanceTask;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.shared.gpx.ColoringPurpose;
 import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.shared.gpx.GpxDirItem;
 import net.osmand.shared.gpx.GpxParameter;
 import net.osmand.shared.gpx.TrackItem;
 import net.osmand.shared.gpx.data.TrackFolder;
+import net.osmand.shared.gpx.enums.GpxLineStyleType;
 import net.osmand.shared.palette.domain.PaletteItem;
+import net.osmand.shared.routing.ColoringType;
 import net.osmand.util.Algorithms;
 
 import java.util.HashSet;
@@ -178,7 +182,31 @@ public class DefaultAppearanceController implements IDialogController, IColorCar
 
 	@Override
 	public void onAppearanceChanged() {
+		reconcileSolidConstraint();
+		colorCardController.refreshContent();
+		lineStyleCardController.refreshContent();
 		app.getDialogManager().askRefreshDialogCompletely(PROCESS_ID);
+	}
+
+	private void reconcileSolidConstraint() {
+		if (isColorNonSolid()) {
+			lineStyleCardController.forceSolidStyleIfNeeded();
+		}
+		if (isLineStyleNonSolid()) {
+			colorCardController.forceSolidColorIfNeeded();
+		}
+	}
+
+	private boolean isColorNonSolid() {
+		String coloringTypeId = data.getParameter(COLORING_TYPE);
+		return coloringTypeId != null
+				&& !ColoringType.Companion.requireValueOf(ColoringPurpose.TRACK, coloringTypeId).isTrackSolid();
+	}
+
+	private boolean isLineStyleNonSolid() {
+		String lineStyleName = data.getParameter(LINE_STYLE);
+		return lineStyleName != null
+				&& GpxLineStyleType.Companion.getLineStyleType(lineStyleName) != GpxLineStyleType.SOLID;
 	}
 
 	@NonNull

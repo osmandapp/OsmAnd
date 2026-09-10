@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:orientation="vertical">
@@ -14,6 +15,16 @@
 		<include layout="@layout/custom_radio_buttons" />
 
 	</LinearLayout>
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/description"
+		style="@style/DescStyle"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:textColor="?android:textColorSecondary"
+		android:visibility="gone"
+		tools:text="@string/gpx_line_style_desc_unavailable_for_color" />
 
 	<View
 		android:layout_width="match_parent"
