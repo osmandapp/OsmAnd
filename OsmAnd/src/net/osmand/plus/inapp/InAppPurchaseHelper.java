@@ -810,30 +810,58 @@ public abstract class InAppPurchaseHelper {
 			this.listener = listener;
 		}
 
+		/**
+		 * @return null when the state could not be verified - a request that did not reach
+		 *         the server must not be stored as "there is no subscription".
+		 */
+		@Nullable
 		@Override
 		protected Boolean doInBackground(Void... voids) {
-			boolean subscriptionActive = false;
+			boolean anyActive = false;
+			boolean anyUnverified = false;
 			try {
 				String promocode = ctx.getSettings().BACKUP_PROMOCODE.get();
 				if (!Algorithms.isEmpty(promocode)) {
-					subscriptionActive = checkBackupSubscription(promocode);
+					Boolean activeByPromocode = checkBackupSubscription(promocode);
+					if (activeByPromocode == null) {
+						anyUnverified = true;
+					} else {
+						anyActive = activeByPromocode;
+					}
 				}
-				if (!subscriptionActive) {
+				if (!anyActive) {
 					// Get only PRO subscriptions
 					String orderId = getOrderIdByDeviceIdAndToken();
-					if (!Algorithms.isEmpty(orderId)) {
-						subscriptionActive = checkBackupSubscription(orderId);
+					if (orderId == null) {
+						// Either the request failed or the device is not registered
+						anyUnverified = true;
+					} else if (!Algorithms.isEmpty(orderId)) {
+						Boolean activeByOrderId = checkBackupSubscription(orderId);
+						if (activeByOrderId == null) {
+							anyUnverified = true;
+						} else {
+							anyActive = activeByOrderId;
+						}
 					}
 				}
 			} catch (Exception e) {
 				logError("checkPromoAsync Error", e);
+				return null;
 			}
-			return subscriptionActive;
+			if (anyActive) {
+				return Boolean.TRUE;
+			}
+			// Report inactive only when every check that ran actually got an answer
+			return anyUnverified ? null : Boolean.FALSE;
 		}
 
-		private boolean checkBackupSubscription(@NonNull String orderId) {
+		@Nullable
+		private Boolean checkBackupSubscription(@NonNull String orderId) {
 			Map<String, SubscriptionStateHolder> subscriptionStates = getSubscriptionStatesByOrderId(orderId);
-			if (!Algorithms.isEmpty(subscriptionStates)) {
+			if (subscriptionStates == null) {
+				return null;
+			}
+			if (!subscriptionStates.isEmpty()) {
 				SubscriptionStateHolder stateHolder = subscriptionStates.entrySet().iterator().next().getValue();
 				OsmandSettings settings = ctx.getSettings();
 				settings.BACKUP_PURCHASE_STATE.set(stateHolder.state);
@@ -848,13 +876,17 @@ public abstract class InAppPurchaseHelper {
 		}
 
 		@Override
-		protected void onPostExecute(Boolean active) {
+		protected void onPostExecute(@Nullable Boolean active) {
 			promoRequested = true;
-			lastPromoCheckTime = System.currentTimeMillis();
-			ctx.getSettings().BACKUP_PURCHASE_ACTIVE.set(active);
+			if (active != null) {
+				// Leave both the state and the check time untouched when nothing was
+				// verified, so the next attempt is not postponed by a failed one
+				lastPromoCheckTime = System.currentTimeMillis();
+				ctx.getSettings().BACKUP_PURCHASE_ACTIVE.set(active);
+			}
 			notifyGetItems();
 			if (listener != null) {
-				listener.processResult(active);
+				listener.processResult(Boolean.TRUE.equals(active));
 			}
 		}
 	}
