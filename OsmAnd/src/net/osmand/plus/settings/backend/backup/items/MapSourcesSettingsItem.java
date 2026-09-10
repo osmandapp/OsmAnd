@@ -11,19 +11,25 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.resources.SQLiteTileSource;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> {
 
@@ -57,19 +63,52 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 
 	@Override
 	public long getLocalModifiedTime() {
+		OsmandSettings settings = app.getSettings();
+		String storedStateHash = settings.MAP_SOURCES_BACKUP_STATE_HASH.get();
+		long storedModifiedTime = settings.MAP_SOURCES_LOCAL_MODIFIED_TIME.get();
+		boolean hasStoredState = !Algorithms.isEmpty(storedStateHash);
+		// Has to be resolved before the state hash is computed: computing the hash opens
+		// the tile databases, which may add missing info columns to them and by that
+		// change the very file timestamps the initial time is derived from.
+		long initialModifiedTime = hasStoredState ? 0 : getInitialModifiedTime(storedModifiedTime);
+
+		String currentStateHash = getStateHash(items);
+		if (currentStateHash.equals(storedStateHash)) {
+			return storedModifiedTime;
+		}
+		long modifiedTime = hasStoredState
+				? Math.max(System.currentTimeMillis(), storedModifiedTime + 1)
+				: initialModifiedTime;
+		persistBackupState(currentStateHash, modifiedTime);
+		return modifiedTime;
+	}
+
+	/**
+	 * There is no semantic baseline on the first run after upgrading, so the legacy file
+	 * time is kept to not silently discard a source edit that was never synced.
+	 *
+	 * @param storedModifiedTime a non zero time without a stored hash is left over from an
+	 * initialization that was interrupted between the two writes, and is reused as it is.
+	 */
+	private long getInitialModifiedTime(long storedModifiedTime) {
+		if (storedModifiedTime != 0) {
+			return storedModifiedTime;
+		}
+		long legacyModifiedTime = getLegacyLocalModifiedTime();
+		return legacyModifiedTime == 0 && !items.isEmpty() ? System.currentTimeMillis() : legacyModifiedTime;
+	}
+
+	private long getLegacyLocalModifiedTime() {
 		long lastModifiedTime = 0;
 		for (ITileSource source : items) {
+			File file = null;
 			if (source instanceof SQLiteTileSource) {
-				long lastModified = app.getAppPath(IndexConstants.TILES_INDEX_DIR + source.getName()
-						+ IndexConstants.SQLITE_EXT).lastModified();
-				if (lastModified > lastModifiedTime) {
-					lastModifiedTime = lastModified;
-				}
+				file = app.getAppPath(IndexConstants.TILES_INDEX_DIR + source.getName() + IndexConstants.SQLITE_EXT);
 			} else if (source instanceof TileSourceManager.TileSourceTemplate) {
-				long lastModified = new File(app.getAppPath(IndexConstants.TILES_INDEX_DIR + source.getName()), ".metainfo").lastModified();
-				if (lastModified > lastModifiedTime) {
-					lastModifiedTime = lastModified;
-				}
+				file = new File(app.getAppPath(IndexConstants.TILES_INDEX_DIR + source.getName()), ".metainfo");
+			}
+			if (file != null) {
+				lastModifiedTime = Math.max(lastModifiedTime, file.lastModified());
 			}
 		}
 		return lastModifiedTime;
@@ -77,19 +116,15 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 
 	@Override
 	public void setLocalModifiedTime(long lastModifiedTime) {
-		for (ITileSource source : items) {
-			if (source instanceof SQLiteTileSource) {
-				File file = app.getAppPath(IndexConstants.TILES_INDEX_DIR + source.getName() + IndexConstants.SQLITE_EXT);
-				if (file.lastModified() > lastModifiedTime) {
-					file.setLastModified(lastModifiedTime);
-				}
-			} else if (source instanceof TileSourceManager.TileSourceTemplate) {
-				File file = new File(app.getAppPath(IndexConstants.TILES_INDEX_DIR + source.getName()), ".metainfo");
-				if (file.lastModified() > lastModifiedTime) {
-					file.setLastModified(lastModifiedTime);
-				}
-			}
-		}
+		persistBackupState(getStateHash(items), lastModifiedTime);
+	}
+
+	private void persistBackupState(@NonNull String stateHash, long lastModifiedTime) {
+		OsmandSettings settings = app.getSettings();
+		// Write the hash last. An interrupted update may then cause a harmless repeat
+		// detection, but cannot acknowledge a state whose timestamp was not stored.
+		settings.MAP_SOURCES_LOCAL_MODIFIED_TIME.set(lastModifiedTime);
+		settings.MAP_SOURCES_BACKUP_STATE_HASH.set(stateHash);
 	}
 
 	@Override
@@ -226,7 +261,8 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 
 					template = tileSourceTemplate;
 				} else {
-					template = new SQLiteTileSource(app, name, minZoom, maxZoom, url, randoms, ellipsoid, invertedY, referer, userAgent, timeSupported, expire, inversiveZoom, rule);
+					template = SQLiteTileSource.fromBackup(app, name, minZoom, maxZoom, url, randoms, ellipsoid, invertedY,
+							referer, userAgent, timeSupported, expire, inversiveZoom, rule, ext, tileSize, bitDensity, avgSize);
 				}
 				items.add(template);
 			}
@@ -242,28 +278,8 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 		JSONArray jsonArray = new JSONArray();
 		if (!items.isEmpty()) {
 			try {
-				for (ITileSource template : items) {
-					JSONObject jsonObject = new JSONObject();
-					boolean sql = template instanceof SQLiteTileSource;
-					jsonObject.put("sql", sql);
-					jsonObject.put("name", template.getName());
-					jsonObject.put("minZoom", template.getMinimumZoomSupported());
-					jsonObject.put("maxZoom", template.getMaximumZoomSupported());
-					jsonObject.put("url", template.getUrlTemplate());
-					jsonObject.put("randoms", template.getRandoms());
-					jsonObject.put("ellipsoid", template.isEllipticYTile());
-					jsonObject.put("inverted_y", template.isInvertedYTile());
-					jsonObject.put("referer", template.getReferer());
-					jsonObject.put("userAgent", template.getUserAgent());
-					jsonObject.put("timesupported", template.isTimeSupported());
-					jsonObject.put("expire", template.getExpirationTimeMinutes());
-					jsonObject.put("inversiveZoom", template.getInversiveZoom());
-					jsonObject.put("ext", template.getTileFormat());
-					jsonObject.put("tileSize", template.getTileSize());
-					jsonObject.put("bitDensity", template.getBitDensity());
-					jsonObject.put("avgSize", template.getAvgSize());
-					jsonObject.put("rule", template.getRule());
-					jsonArray.put(jsonObject);
+				for (MapSourceBackupState state : snapshotSources(items)) {
+					jsonArray.put(state.toJson());
 				}
 				json.put("items", jsonArray);
 
@@ -273,6 +289,117 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 			}
 		}
 		return json;
+	}
+
+	@NonNull
+	static String getStateHash(@NonNull List<? extends ITileSource> sources) {
+		StringBuilder state = new StringBuilder();
+		List<MapSourceBackupState> sourceStates = snapshotSources(sources);
+		sourceStates.sort(Comparator.comparing(sourceState -> sourceState.canonicalState));
+		for (MapSourceBackupState sourceState : sourceStates) {
+			appendField(state, sourceState.canonicalState);
+		}
+		return DigestUtils.sha256Hex(state.toString());
+	}
+
+	@NonNull
+	private static List<MapSourceBackupState> snapshotSources(@NonNull List<? extends ITileSource> sources) {
+		List<MapSourceBackupState> states = new ArrayList<>(sources.size());
+		for (ITileSource source : sources) {
+			states.add(new MapSourceBackupState(source));
+		}
+		return states;
+	}
+
+	private static void appendField(@NonNull StringBuilder state, @Nullable Object value) {
+		String stringValue = value != null ? String.valueOf(value) : "";
+		state.append(stringValue.length()).append(':').append(stringValue).append('|');
+	}
+
+	private static final class MapSourceBackupState {
+
+		private final SortedMap<String, BackupProperty> properties = new TreeMap<>();
+		private final String canonicalState;
+
+		private MapSourceBackupState(@NonNull ITileSource source) {
+			boolean sqlite = source instanceof SQLiteTileSource;
+			if (sqlite) {
+				// Load the SQLite metadata before reading any getters. Otherwise lazily
+				// initialized fields such as zoom limits could be captured as defaults.
+				((SQLiteTileSource) source).initDatabaseIfNeeded();
+			}
+			put("sql", sqlite);
+			put("name", normalizeString(source.getName()));
+			put("minZoom", source.getMinimumZoomSupported());
+			put("maxZoom", source.getMaximumZoomSupported());
+			put("url", normalizeString(source.getUrlTemplate()));
+			put("randoms", normalizeString(source.getRandoms()));
+			put("ellipsoid", source.isEllipticYTile());
+			put("inverted_y", source.isInvertedYTile());
+			put("referer", normalizeString(source.getReferer()));
+			put("userAgent", normalizeString(source.getUserAgent()));
+			put("timesupported", source.isTimeSupported());
+			put("expire", source.getExpirationTimeMinutes());
+			put("inversiveZoom", source.getInversiveZoom());
+			put("ext", normalizeString(source.getTileFormat()));
+			// Legacy SQLite sources can discover and persist this value when a tile is
+			// decoded. Keep it in backup, but do not treat derived runtime metadata as
+			// a semantic source change. Directory-source tile size remains semantic.
+			put("tileSize", source.getTileSize(), !sqlite);
+			put("bitDensity", source.getBitDensity());
+			put("avgSize", source.getAvgSize());
+			put("rule", normalizeString(source.getRule()));
+			canonicalState = createCanonicalState();
+		}
+
+		private void put(@NonNull String name, @NonNull Object value) {
+			put(name, value, true);
+		}
+
+		private void put(@NonNull String name, @NonNull Object value, boolean hashRelevant) {
+			properties.put(name, new BackupProperty(value, hashRelevant));
+		}
+
+		@NonNull
+		private JSONObject toJson() throws JSONException {
+			JSONObject json = new JSONObject();
+			for (Map.Entry<String, BackupProperty> property : properties.entrySet()) {
+				json.put(property.getKey(), property.getValue().value);
+			}
+			return json;
+		}
+
+		@NonNull
+		private String createCanonicalState() {
+			StringBuilder state = new StringBuilder();
+			for (Map.Entry<String, BackupProperty> entry : properties.entrySet()) {
+				BackupProperty property = entry.getValue();
+				if (!property.hashRelevant) {
+					continue;
+				}
+				appendField(state, entry.getKey());
+				Object value = property.value;
+				appendField(state, value instanceof Boolean ? "boolean" : value instanceof Number ? "number" : "string");
+				appendField(state, value);
+			}
+			return state.toString();
+		}
+
+		@NonNull
+		private static String normalizeString(@Nullable String value) {
+			return value != null ? value : "";
+		}
+
+		private static final class BackupProperty {
+
+			private final Object value;
+			private final boolean hashRelevant;
+
+			private BackupProperty(@NonNull Object value, boolean hashRelevant) {
+				this.value = value;
+				this.hashRelevant = hashRelevant;
+			}
+		}
 	}
 
 	@Nullable

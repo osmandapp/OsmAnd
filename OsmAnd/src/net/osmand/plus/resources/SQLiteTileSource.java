@@ -52,6 +52,9 @@ public class SQLiteTileSource implements ITileSource {
 	private static final String TILENUMBERING = "tilenumbering";
 	private static final String BIG_PLANET_TILE_NUMBERING = "BigPlanet";
 	private static final String TILESIZE = "tilesize";
+	private static final String TILE_FORMAT = "ext";
+	private static final String BIT_DENSITY = "img_density";
+	private static final String AVG_SIZE = "avg_size";
 	private static final String TITLE = "title";
 
 	private final OsmandApplication app;
@@ -75,7 +78,10 @@ public class SQLiteTileSource implements ITileSource {
 	private String referer;
 	private String userAgent;
 
+	private String tileFormat = ".png";
 	private int tileSize = 256;
+	private int bitDensity = 16;
+	private int avgSize = -1;
 	private boolean tileSizeSpecified;
 	private boolean onlyReadonlyAvailable;
 
@@ -113,6 +119,34 @@ public class SQLiteTileSource implements ITileSource {
 	public SQLiteTileSource(@NonNull OsmandApplication app, String name, int minZoom, int maxZoom, String urlTemplate,
 	                        String randoms, boolean isEllipsoid, boolean invertedY, String referer, String userAgent,
 	                        boolean timeSupported, long expirationTimeMillis, boolean inversiveZoom, String rule) {
+		this(app, name, minZoom, maxZoom, urlTemplate, randoms, isEllipsoid, invertedY, referer, userAgent,
+				timeSupported, expirationTimeMillis, inversiveZoom, rule, ".png", 0, 16, -1);
+	}
+
+	/**
+	 * Creates a source from the Map Sources backup representation. The backup format
+	 * cannot distinguish an explicitly configured tile size from an old runtime
+	 * default, so the value must remain eligible for local auto-detection.
+	 */
+	@NonNull
+	public static SQLiteTileSource fromBackup(@NonNull OsmandApplication app, String name, int minZoom, int maxZoom,
+	                                          String urlTemplate, String randoms, boolean isEllipsoid, boolean invertedY,
+	                                          String referer, String userAgent, boolean timeSupported,
+	                                          long expirationTimeMillis, boolean inversiveZoom, String rule,
+	                                          String tileFormat, int tileSize, int bitDensity, int avgSize) {
+		return new SQLiteTileSource(app, name, minZoom, maxZoom, urlTemplate, randoms, isEllipsoid, invertedY,
+				referer, userAgent, timeSupported, expirationTimeMillis, inversiveZoom, rule, tileFormat,
+				tileSize, bitDensity, avgSize);
+	}
+
+	/**
+	 * A source built in memory never has an explicitly configured tile size, only
+	 * a tile size stored in the database marks it as specified.
+	 */
+	private SQLiteTileSource(@NonNull OsmandApplication app, String name, int minZoom, int maxZoom, String urlTemplate,
+	                         String randoms, boolean isEllipsoid, boolean invertedY, String referer, String userAgent,
+	                         boolean timeSupported, long expirationTimeMillis, boolean inversiveZoom, String rule,
+	                         String tileFormat, int tileSize, int bitDensity, int avgSize) {
 		this.app = app;
 		this.title = name;
 		this.fileName = name;
@@ -128,6 +162,10 @@ public class SQLiteTileSource implements ITileSource {
 		this.invertedY = invertedY;
 		this.timeSupported = timeSupported;
 		this.inversiveZoom = inversiveZoom;
+		this.tileFormat = normalizeTileFormat(tileFormat);
+		this.tileSize = normalizeTileSize(tileSize);
+		this.bitDensity = normalizeBitDensity(bitDensity);
+		this.avgSize = avgSize;
 	}
 
 	public SQLiteTileSource(@NonNull SQLiteTileSource tileSource, @NonNull String name, @NonNull OsmandApplication app) {
@@ -145,6 +183,12 @@ public class SQLiteTileSource implements ITileSource {
 		this.invertedY = tileSource.isInvertedYTile();
 		this.timeSupported = tileSource.isTimeSupported();
 		this.inversiveZoom = tileSource.getInversiveZoom();
+		this.rule = tileSource.getRule();
+		this.tileFormat = normalizeTileFormat(tileSource.getTileFormat());
+		this.tileSize = normalizeTileSize(tileSource.getTileSize());
+		this.bitDensity = normalizeBitDensity(tileSource.getBitDensity());
+		this.avgSize = tileSource.getAvgSize();
+		this.tileSizeSpecified = tileSource.tileSizeSpecified;
 	}
 
 	public void createDataBase() {
@@ -152,10 +196,15 @@ public class SQLiteTileSource implements ITileSource {
 		SQLiteConnection db = app.getSQLiteAPI().getOrCreateDatabase(name, true);
 		if (db != null) {
 			try {
+				// BigPlanet databases store inverted zooms, mirroring how getDatabase() reads
+				// them back. Writing plain zooms here would turn the source into a simple one.
+				int databaseMinZoom = inversiveZoom ? 17 - maxZoom : minZoom;
+				int databaseMaxZoom = inversiveZoom ? 17 - minZoom : maxZoom;
 				db.execSQL("CREATE TABLE IF NOT EXISTS tiles (x int, y int, z int, s int, image blob, time long, PRIMARY KEY (x,y,z,s))");
 				db.execSQL("CREATE INDEX IF NOT EXISTS IND on tiles (x,y,z,s)");
 				db.execSQL("CREATE TABLE IF NOT EXISTS info(tilenumbering,minzoom,maxzoom)");
-				db.execSQL("INSERT INTO info (tilenumbering,minzoom,maxzoom) VALUES ('simple','" + minZoom + "','" + maxZoom + "');");
+				db.execSQL("INSERT INTO info (tilenumbering,minzoom,maxzoom) VALUES (?, ?, ?)",
+						new Object[] {inversiveZoom ? BIG_PLANET_TILE_NUMBERING : "simple", databaseMinZoom, databaseMaxZoom});
 
 				addInfoColumn(db, TITLE, title);
 				addInfoColumn(db, URL, urlTemplate);
@@ -166,6 +215,15 @@ public class SQLiteTileSource implements ITileSource {
 				addInfoColumn(db, USER_AGENT, userAgent);
 				addInfoColumn(db, TIME_COLUMN, timeSupported ? "yes" : "no");
 				addInfoColumn(db, EXPIRE_MINUTES, String.valueOf(getExpirationTimeMinutes()));
+				addInfoColumn(db, RULE, rule);
+				// Unlike the declarative properties below, the tile size is only stored once
+				// it is known, so that an unset one stays open to local auto-detection.
+				if (tileSizeSpecified) {
+					addInfoColumn(db, TILESIZE, String.valueOf(tileSize));
+				}
+				addInfoColumn(db, TILE_FORMAT, tileFormat);
+				addInfoColumn(db, BIT_DENSITY, String.valueOf(bitDensity));
+				addInfoColumn(db, AVG_SIZE, String.valueOf(avgSize));
 			} finally {
 				db.close();
 			}
@@ -174,7 +232,7 @@ public class SQLiteTileSource implements ITileSource {
 
 	@Override
 	public int getBitDensity() {
-		return base != null ? base.getBitDensity() : 16;
+		return base != null ? base.getBitDensity() : bitDensity;
 	}
 
 	@Override
@@ -194,7 +252,7 @@ public class SQLiteTileSource implements ITileSource {
 
 	@Override
 	public String getTileFormat() {
-		return base != null ? base.getTileFormat() : ".png"; //$NON-NLS-1$
+		return base != null ? base.getTileFormat() : tileFormat;
 	}
 
 	@Override
@@ -272,7 +330,22 @@ public class SQLiteTileSource implements ITileSource {
 	}
 
 	public void initDatabaseIfNeeded() {
-		getDatabase();
+		if (file != null) {
+			getDatabase();
+		}
+	}
+
+	@NonNull
+	private static String normalizeTileFormat(@Nullable String tileFormat) {
+		return Algorithms.isEmpty(tileFormat) ? ".png" : tileFormat;
+	}
+
+	private static int normalizeTileSize(int tileSize) {
+		return tileSize > 0 ? tileSize : 256;
+	}
+
+	private static int normalizeBitDensity(int bitDensity) {
+		return bitDensity > 0 ? bitDensity : 16;
 	}
 
 	protected synchronized SQLiteConnection getDatabase() {
@@ -335,9 +408,22 @@ public class SQLiteTileSource implements ITileSource {
 						addInfoColumn(db, EXPIRE_MINUTES, "0");
 					}
 					int tsColumn = list.indexOf(TILESIZE);
-					this.tileSizeSpecified = tsColumn != -1;
-					if(tileSizeSpecified) {
-						this.tileSize = cursor.getInt(tsColumn);
+					if (tsColumn != -1) {
+						int storedTileSize = cursor.getInt(tsColumn);
+						this.tileSize = normalizeTileSize(storedTileSize);
+						this.tileSizeSpecified = storedTileSize > 0;
+					}
+					int tileFormatId = list.indexOf(TILE_FORMAT);
+					if (tileFormatId != -1) {
+						this.tileFormat = normalizeTileFormat(cursor.getString(tileFormatId));
+					}
+					int bitDensityId = list.indexOf(BIT_DENSITY);
+					if (bitDensityId != -1) {
+						this.bitDensity = normalizeBitDensity(cursor.getInt(bitDensityId));
+					}
+					int avgSizeId = list.indexOf(AVG_SIZE);
+					if (avgSizeId != -1) {
+						this.avgSize = cursor.getInt(avgSizeId);
 					}
 					int ellipsoid = list.indexOf(ELLIPSOID);
 					if(ellipsoid != -1) {
@@ -448,7 +534,7 @@ public class SQLiteTileSource implements ITileSource {
 			} catch (SQLException e) {
 				LOG.info("Error adding column " + e);
 			}
-			db.execSQL("update info set " + columnName + " = '" + value + "'");
+			db.execSQL("update info set " + columnName + " = ?", new Object[] {value != null ? value : ""});
 		}
 	}
 
@@ -637,7 +723,7 @@ public class SQLiteTileSource implements ITileSource {
 
 	@Override
 	public int getAvgSize() {
-		return base != null ? base.getAvgSize() : -1;
+		return base != null ? base.getAvgSize() : avgSize;
 	}
 
 	@Override
