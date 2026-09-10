@@ -7,7 +7,6 @@ import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.DownloadManager;
-import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -40,6 +39,11 @@ import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
 import net.osmand.plus.gallery.controller.GalleryPagerController;
 import net.osmand.plus.gallery.model.GalleryItem;
+import net.osmand.plus.plugins.audionotes.library.MediaItemMenu;
+import net.osmand.plus.plugins.audionotes.library.MediaShareHelper;
+import net.osmand.plus.plugins.audionotes.library.data.MediaLibraryEntry;
+import net.osmand.plus.gallery.data.GalleryKey;
+import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -81,6 +85,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 	private Toolbar toolbar;
 
 	private boolean uiHidden = false;
+	private boolean restoreHostActionBar;
 	private int selectedPosition = 0;
 
 	private GalleryPagerController controller;
@@ -321,7 +326,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 		toolbar = view.findViewById(R.id.toolbar);
 
 		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT);
-		params.topMargin = AndroidUtils.getStatusBarHeight(getMapActivity());
+		params.topMargin = AndroidUtils.getStatusBarHeight(requireActivity());
 		toolbar.setLayoutParams(params);
 
 		ImageView backButton = toolbar.findViewById(R.id.back_button);
@@ -361,45 +366,21 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 	private void shareMedia() {
 		MediaItem mediaItem = getSelectedMediaItem();
 		if (mediaItem == null) return;
-
-		Uri localUri = app.getGalleryHelper().getMediaSourceResolver().getShareableUri(mediaItem);
-		if (localUri != null) {
-			callActivity(activity -> shareMediaUri(activity, mediaItem, localUri));
-			return;
-		}
-
-		String shareUri = MediaUriResolver.getShareUri(mediaItem);
-		if (!Algorithms.isEmpty(shareUri)) {
-			callActivity(activity -> shareText(activity, shareUri));
-		}
-	}
-
-	private void shareMediaUri(@NonNull FragmentActivity activity, @NonNull MediaItem mediaItem,
-	                           @NonNull Uri uri) {
-		Intent sendIntent = new Intent();
-		sendIntent.setAction(Intent.ACTION_SEND);
-		sendIntent.setType(getMediaMimeType(mediaItem));
-		sendIntent.putExtra(Intent.EXTRA_STREAM, uri);
-		sendIntent.setClipData(ClipData.newRawUri(mediaItem.getTitle(), uri));
-		sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-
-		Intent chooser = Intent.createChooser(sendIntent, getString(R.string.shared_string_share));
-		chooser.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-		AndroidUtils.startActivityIfSafe(activity, chooser);
-	}
-
-	private void shareText(@NonNull FragmentActivity activity, @NonNull String shareUri) {
-		Intent sendIntent = new Intent();
-		sendIntent.setAction(Intent.ACTION_SEND);
-		sendIntent.setType("text/plain");
-		sendIntent.putExtra(Intent.EXTRA_TEXT, shareUri);
-		AndroidUtils.startActivityIfSafe(activity,
-				Intent.createChooser(sendIntent, getString(R.string.shared_string_share)));
+		callActivity(activity -> MediaShareHelper.share(activity, java.util.Collections.singletonList(mediaItem)));
 	}
 
 	public void showContextWidgetMenu(@NonNull View view) {
 		MediaItem mediaItem = getSelectedMediaItem();
 		if (mediaItem == null) return;
+		if (controller.getKey() == GalleryKey.MediaLibrary.INSTANCE) {
+			MediaLibraryEntry entry = app.getGalleryHelper().getMediaLibraryRepository().getEntry(mediaItem.getId());
+			if (entry != null) {
+				List<String> orderedIds = new ArrayList<>();
+				for (GalleryItem.Media item : mediaItems) orderedIds.add(item.getMediaItem().getId());
+				callActivity(activity -> MediaItemMenu.show(activity, entry, view, nightMode, false, orderedIds));
+				return;
+			}
+		}
 
 		List<PopUpMenuItem> items = new ArrayList<>();
 		UiUtilities uiUtilities = app.getUIUtilities();
@@ -409,7 +390,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 				.setTitleId(R.string.shared_string_details)
 				.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_info_outlined, iconColor))
 				.setOnClickListener(item -> callActivity(activity ->
-						GalleryDetailsFragment.showInstance(activity, mediaItem.getId())))
+						controller.openDetails(activity, mediaItem)))
 				.create());
 
 		String browserUri = MediaUriResolver.getBrowserUri(mediaItem);
@@ -458,10 +439,10 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 	}
 
 	private void downloadMedia(@NonNull String url) {
-		callMapActivity(activity -> downloadMedia(activity, url));
+		callActivity(activity -> downloadMedia(activity, url));
 	}
 
-	private void downloadMedia(@NonNull MapActivity activity, @NonNull String url) {
+	private void downloadMedia(@NonNull FragmentActivity activity, @NonNull String url) {
 		String fileName = URLUtil.guessFileName(url, null, null);
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
 			startDownloading(fileName, url);
@@ -487,7 +468,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 				.setAllowedOverRoaming(false)
 				.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
 		DownloadManager downloadManager =
-				(DownloadManager) getMapActivity().getSystemService(Context.DOWNLOAD_SERVICE);
+				(DownloadManager) requireActivity().getSystemService(Context.DOWNLOAD_SERVICE);
 		downloadManager.enqueue(request);
 	}
 
@@ -503,6 +484,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 
 	private void setupViewPager(@NonNull View view) {
 		ViewPager pager = view.findViewById(R.id.photo_pager);
+		pager.clearOnPageChangeListeners();
 		FragmentManager manager = getChildFragmentManager();
 
 		ViewPagerAdapter adapter = new ViewPagerAdapter(manager, mediaItems);
@@ -526,6 +508,15 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 			}
 		});
 		pager.setPageTransformer(true, new GalleryDepthTransformer());
+	}
+
+	/** Rebinds file URIs after a successful library rename, retaining the renamed item. */
+	public void refreshMediaItems(@NonNull String selectedItemId) {
+		if (getView() == null || controller == null) return;
+		mediaItems = controller.getMediaItems();
+		selectedPosition = controller.getIndexById(selectedItemId);
+		setupViewPager(getView());
+		updateImageDescriptionRow(getSelectedMediaItem());
 	}
 
 	@Nullable
@@ -575,7 +566,20 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 	@Override
 	public void onResume() {
 		super.onResume();
+		if (getActivity() instanceof MyPlacesActivity activity && activity.getSupportActionBar() != null) {
+			restoreHostActionBar |= activity.getSupportActionBar().isShowing();
+			activity.getSupportActionBar().hide();
+		}
 		callMapActivity(MapActivity::disableDrawer);
+	}
+
+	@Override
+	public void onDestroyView() {
+		if (restoreHostActionBar && getActivity() instanceof MyPlacesActivity activity
+				&& activity.getSupportActionBar() != null) {
+			activity.getSupportActionBar().show();
+		}
+		super.onDestroyView();
 	}
 
 	@Override

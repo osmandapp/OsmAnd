@@ -45,6 +45,16 @@ public class PopUpMenuArrayAdapter extends ArrayAdapter<PopUpMenuItem> {
 		return items.size();
 	}
 
+	@Override
+	public boolean areAllItemsEnabled() {
+		return false;
+	}
+
+	@Override
+	public boolean isEnabled(int position) {
+		return items.get(position).isEnabled();
+	}
+
 	@NonNull
 	@Override
 	public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -54,6 +64,8 @@ public class PopUpMenuArrayAdapter extends ArrayAdapter<PopUpMenuItem> {
 		}
 		PopUpMenuItem item = getItem(position);
 		if (item != null) {
+			convertView.setEnabled(item.isEnabled());
+			convertView.setAlpha(item.isEnabled() ? 1f : 0.5f);
 			TextView tvTitle = convertView.findViewById(R.id.title);
 			tvTitle.setText(item.getTitle());
 			tvTitle.setTypeface(tvTitle.getTypeface(), item.isTitleBold() ? Typeface.BOLD : Typeface.NORMAL);

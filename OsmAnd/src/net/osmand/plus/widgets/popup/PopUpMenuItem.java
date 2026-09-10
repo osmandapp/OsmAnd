@@ -28,6 +28,7 @@ public class PopUpMenuItem {
 	private final boolean showTopDivider;
 	private final boolean titleBold;
 	private final boolean dismissOnClick;
+	private final boolean enabled;
 	private final Object tag;
 
 	private PopUpMenuItem(CharSequence title,
@@ -42,6 +43,7 @@ public class PopUpMenuItem {
 	                      boolean showTopDivider,
 	                      boolean titleBold,
 	                      boolean dismissOnClick,
+	                      boolean enabled,
 	                      Object tag) {
 		this.title = title;
 		this.titleColor = titleColor;
@@ -55,6 +57,7 @@ public class PopUpMenuItem {
 		this.showTopDivider = showTopDivider;
 		this.titleBold = titleBold;
 		this.dismissOnClick = dismissOnClick;
+		this.enabled = enabled;
 		this.tag = tag;
 	}
 
@@ -101,6 +104,10 @@ public class PopUpMenuItem {
 
 	public boolean isSelected() {
 		return selected;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
 	}
 
 	public boolean shouldShowTopDivider() {
@@ -169,6 +176,7 @@ public class PopUpMenuItem {
 		private boolean showTopDivider;
 		private boolean titleBold;
 		private boolean dismissOnClick = true;
+		private boolean enabled = true;
 		private Object tag;
 
 		public Builder(Context ctx) {
@@ -257,10 +265,15 @@ public class PopUpMenuItem {
 			return this;
 		}
 
+		public Builder setEnabled(boolean enabled) {
+			this.enabled = enabled;
+			return this;
+		}
+
 		public PopUpMenuItem create() {
 			return new PopUpMenuItem(title, titleColor, titleSize, icon, trailingBadge,
 					onClickListener, compoundBtnColor, compoundButtonType, selected,
-					showTopDivider, titleBold, dismissOnClick, tag);
+					showTopDivider, titleBold, dismissOnClick, enabled, tag);
 		}
 	}
 }
