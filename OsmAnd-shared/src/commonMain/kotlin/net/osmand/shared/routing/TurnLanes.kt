@@ -1,6 +1,7 @@
 package net.osmand.shared.routing
 
 import net.osmand.shared.routing.RoadSplitStructure.AttachedRoadInfo
+import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.KMapUtils
 import kotlin.jvm.JvmStatic
 import kotlin.math.PI
@@ -8,6 +9,7 @@ import kotlin.math.abs
 import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.math.max
+import kotlin.math.min
 
 /**
  * Everything about turn lanes: reading `turn:lanes` off a road, working out which of them the driver
@@ -16,6 +18,10 @@ import kotlin.math.max
  * A lane is one int. Bit 0 says whether it is active for this manoeuvre - whether staying in it gets
  * you where the route goes - and the bits above it hold up to three turns the lane's sign shows,
  * primary first. [TurnType] owns that packing; this owns what to do with it.
+ *
+ * The second half of this works from the picture of the whole intersection - what else leaves it and
+ * on which side - because a "keep left" only means anything when there is something to keep away
+ * from. [RoadSplitStructure] is that picture.
  *
  * Ported from `RouteResultPreparation` in OsmAnd-java, which keeps the rest of the turn preparation
  * for now. The C++ router has its own copy of all of it in `routeResultPreparation.cpp`, so until
@@ -815,6 +821,569 @@ object TurnLanes {
 			}
 		}
 		return false
+	}
+
+	// ---- the shape of the intersection, and the manoeuvre it calls for ----
+
+	/**
+	 * Looks at everything leaving the intersection and works out what the driver has to keep away
+	 * from: how many roads go off to each side, how many lanes they take, and whether any of it is
+	 * worth speaking. A road the previous one is forbidden to turn into does not count.
+	 */
+	@JvmStatic
+	fun calculateRoadSplitStructure(
+		prevSegm: RouteSegmentResult,
+		currentSegm: RouteSegmentResult,
+		attachedRoutes: List<RouteSegmentResult>,
+		turnLanesPrevSegm: String?
+	): RoadSplitStructure {
+		val rs = RoadSplitStructure()
+		val speakPriority = max(
+			highwaySpeakPriority(prevSegm.getObject().getHighway()),
+			highwaySpeakPriority(currentSegm.getObject().getHighway())
+		)
+		// java computed these in float and widened, because normalizeDegrees360 takes a float
+		val currentAngle = KMapUtils.normalizeDegrees360(currentSegm.getBearingBegin()).toDouble()
+		val prevAngle = KMapUtils.normalizeDegrees360(prevSegm.getBearingBegin() - 180).toDouble()
+		val hasSharpOrReverseLane = hasSharpOrReverseTurnLane(turnLanesPrevSegm)
+		val hasSameTurnLanes = hasSameTurnLanes(prevSegm, currentSegm)
+		for (attached in attachedRoutes) {
+			var restricted = false
+			for (k in 0 until prevSegm.getObject().getRestrictionLength()) {
+				if (prevSegm.getObject().getRestrictionId(k) == attached.getObject().getId() &&
+					prevSegm.getObject().getRestrictionType(k) <= RouteDataObject.RESTRICTION_NO_STRAIGHT_ON
+				) {
+					restricted = true
+					break
+				}
+			}
+			if (restricted) {
+				continue
+			}
+			val ex = KMapUtils.degreesDiff(attached.getBearingBegin().toDouble(), currentSegm.getBearingBegin().toDouble())
+			val deviation = KMapUtils.degreesDiff(prevSegm.getBearingEnd().toDouble(), attached.getBearingBegin().toDouble())
+			val mpi = abs(deviation)
+			val lanes = countLanesMinOne(attached)
+			val smallStraightVariation = mpi < TURN_DEGREE_MIN
+			val smallTargetVariation = abs(ex) < TURN_DEGREE_MIN
+			val verySharpTurn = abs(ex) > 150
+			val ai = AttachedRoadInfo()
+			ai.speakPriority = highwaySpeakPriority(attached.getObject().getHighway())
+			ai.attachedOnTheRight = ex >= 0
+			ai.attachedAngle = deviation
+			ai.parsedLanes = parseTurnLanes(attached.getObject(), attached.getBearingBegin() * PI / 180)
+			ai.lanes = lanes
+
+			if (!verySharpTurn || hasSharpOrReverseLane) {
+				val attachedAngle = KMapUtils.normalizeDegrees360(attached.getBearingBegin()).toDouble()
+				val rightSide: Boolean
+				if (prevAngle > currentAngle) {
+					// left side angle range contains 0 degree transition
+					rightSide = attachedAngle > currentAngle && attachedAngle < prevAngle
+				} else {
+					// right side angle range contains 0 degree transition
+					val leftSide = attachedAngle > prevAngle && attachedAngle < currentAngle
+					rightSide = !leftSide
+				}
+
+				// check if need ignore right or left attached road
+				if (hasSameTurnLanes && !smallTargetVariation && !smallStraightVariation) {
+					if (rightSide && !hasTurn(turnLanesPrevSegm, TurnType.TR)) {
+						// restricted
+						continue
+					} else if (!hasTurn(turnLanesPrevSegm, TurnType.TL)) {
+						// restricted
+						continue
+					}
+				}
+
+				if (rightSide) {
+					rs.roadsOnRight++
+				} else {
+					rs.roadsOnLeft++
+				}
+			}
+
+			if (turnLanesPrevSegm != null || ai.speakPriority != MAX_SPEAK_PRIORITY || speakPriority == MAX_SPEAK_PRIORITY) {
+				if (smallTargetVariation || smallStraightVariation) {
+					if (ai.attachedOnTheRight) {
+						rs.keepLeft = true
+						rs.rightLanes += lanes
+						rs.rightMaxPrio = max(rs.rightMaxPrio, highwaySpeakPriority(attached.getObject().getHighway()))
+						rs.rightLanesInfo.add(ai)
+					} else {
+						rs.keepRight = true
+						rs.leftLanes += lanes
+						rs.leftMaxPrio = max(rs.leftMaxPrio, highwaySpeakPriority(attached.getObject().getHighway()))
+						rs.leftLanesInfo.add(ai)
+					}
+					rs.speak = rs.speak || ai.speakPriority <= speakPriority
+				}
+			}
+		}
+		return rs
+	}
+
+	/** How many lanes all the roads leaving the intersection take with them. */
+	@JvmStatic
+	fun getAttachedLanesCount(rs: RoadSplitStructure): Int {
+		var cnt = 0
+		for (ri in rs.leftLanesInfo) {
+			cnt += ri.lanes
+		}
+		for (ri in rs.rightLanesInfo) {
+			cnt += ri.lanes
+		}
+		return cnt
+	}
+
+	/**
+	 * The run of lanes the driver has to be in, as `[begin, end, turn]`, or `[-1, -1, 0]` when it
+	 * cannot be worked out. [rs] may be null, in which case it is calculated here.
+	 */
+	@JvmStatic
+	fun findActiveIndex(
+		prevSegm: RouteSegmentResult,
+		currentSegm: RouteSegmentResult,
+		rawLanes: IntArray,
+		rs: RoadSplitStructure?,
+		turnLanes: String?
+	): IntArray {
+		val pair = intArrayOf(-1, -1, 0) // [activeBeginIndex, activeEndIndex, activeTurn]
+		if (turnLanes == null) {
+			return pair
+		}
+		var split = rs
+		if (split == null) {
+			val attachedRoutes = currentSegm.getAttachedRoutes(currentSegm.getStartPointIndex())
+			if (!KAlgorithms.isEmpty(attachedRoutes)) {
+				split = calculateRoadSplitStructure(prevSegm, currentSegm, attachedRoutes, turnLanes)
+			}
+		}
+		if (split == null) {
+			return pair
+		}
+
+		val directions = getUniqTurnTypes(turnLanes)
+		if (split.roadsOnLeft + split.roadsOnRight >= directions.size) {
+			return pair
+		}
+
+		if (findActiveIndexByLanes(pair, directions, split, rawLanes, prevSegm, currentSegm)) {
+			return pair
+		}
+
+		findActiveIndexByUniqueDirections(pair, directions, split, rawLanes)
+
+		return pair
+	}
+
+	/**
+	 * The active run taken from the lane counts: when the road loses exactly as many lanes as the
+	 * roads leaving it take, the ones that carry on are the ones to be in.
+	 */
+	private fun findActiveIndexByLanes(
+		pair: IntArray,
+		directions: IntArray,
+		rs: RoadSplitStructure,
+		rawLanes: IntArray,
+		prevSegm: RouteSegmentResult,
+		currentSegm: RouteSegmentResult
+	): Boolean {
+		val prevCntLanes = parseLanes(prevSegm.getObject(), prevSegm.getBearingBegin() * PI / 180)
+		val curCntLanes = parseLanes(currentSegm.getObject(), currentSegm.getBearingBegin() * PI / 180)
+		val attachedLanesCount = getAttachedLanesCount(rs)
+		if (prevCntLanes != null && curCntLanes != null &&
+			prevCntLanes.size > curCntLanes.size &&
+			prevCntLanes.size == curCntLanes.size + attachedLanesCount
+		) {
+			if (rs.roadsOnLeft == 0 && rs.roadsOnRight > 0) {
+				pair[0] = 0
+				pair[1] = curCntLanes.size - 1
+				pair[2] = directions[0]
+				return true
+			} else if (rs.roadsOnLeft > 0 && rs.roadsOnRight == 0) {
+				pair[0] = rawLanes.size - curCntLanes.size
+				pair[1] = rawLanes.size - 1
+				pair[2] = directions[rs.roadsOnLeft]
+				return true
+			}
+		}
+		return false
+	}
+
+	/**
+	 * The active run taken from the directions on offer: the roads leaving on the left take the
+	 * leftmost of them and those on the right take the rightmost, so what is left in between is
+	 * where the route goes.
+	 */
+	private fun findActiveIndexByUniqueDirections(pair: IntArray, directions: IntArray, rs: RoadSplitStructure, rawLanes: IntArray) {
+		val startDirection = directions[rs.roadsOnLeft]
+		val endDirection = directions[directions.size - rs.roadsOnRight - 1]
+		for (i in rawLanes.indices) {
+			val p = TurnType.getPrimaryTurn(rawLanes[i])
+			val s = TurnType.getSecondaryTurn(rawLanes[i])
+			val t = TurnType.getTertiaryTurn(rawLanes[i])
+			if (p == startDirection || s == startDirection || t == startDirection) {
+				pair[0] = i
+				pair[2] = startDirection
+				break
+			}
+		}
+		for (i in rawLanes.indices.reversed()) {
+			val p = TurnType.getPrimaryTurn(rawLanes[i])
+			val s = TurnType.getSecondaryTurn(rawLanes[i])
+			val t = TurnType.getTertiaryTurn(rawLanes[i])
+			if (p == endDirection || s == endDirection || t == endDirection) {
+				pair[1] = i
+				break
+			}
+		}
+	}
+
+	/**
+	 * The lanes of the road being left, with the ones that serve [mainTurnType] switched on. Falls
+	 * back to the previous manoeuvre's own lanes on a short segment that carries no `turn:lanes`.
+	 */
+	@JvmStatic
+	fun getTurnLanesInfo(prevSegm: RouteSegmentResult, currentSegm: RouteSegmentResult, mainTurnType: Int): IntArray? {
+		val turnLanes = getTurnLanesString(prevSegm)
+		val lanesArray: IntArray
+		if (turnLanes == null) {
+			val prevTurn = prevSegm.getTurnType()
+			if (prevTurn?.lanes != null && prevSegm.getDistance() < 60) {
+				// calculate for short segment junctions with missing turn:lanes
+				val lns = prevTurn.lanes!!
+				val lst = ArrayList<Int>()
+				for (i in lns.indices) {
+					if (lns[i] % 2 == 1) {
+						lst.add((lns[i] shr 1) shl 1)
+					}
+				}
+				if (lst.isEmpty()) {
+					return null
+				}
+				lanesArray = lst.toIntArray()
+			} else {
+				return null
+			}
+		} else {
+			lanesArray = calculateRawTurnLanes(turnLanes, mainTurnType)
+		}
+
+		var isSet = false
+		val act = findActiveIndex(prevSegm, currentSegm, lanesArray, null, turnLanes)
+		val startIndex = act[0]
+		val endIndex = act[1]
+		if (startIndex != -1 && endIndex != -1) {
+			if (hasAllowedLanes(mainTurnType, lanesArray, startIndex, endIndex)) {
+				for (k in startIndex..endIndex) {
+					val oneActiveLane = intArrayOf(lanesArray[k])
+					if (hasAllowedLanes(mainTurnType, oneActiveLane, 0, 0)) {
+						lanesArray[k] = lanesArray[k] or 1
+					}
+				}
+				isSet = true
+			}
+		}
+		if (!isSet) {
+			// Manually set the allowed lanes.
+			isSet = setAllowedLanes(mainTurnType, lanesArray)
+		}
+		return lanesArray
+	}
+
+	/**
+	 * The manoeuvre for leaving an intersection something else also leaves, or null when nothing
+	 * leaves it and there is nothing to keep away from.
+	 */
+	@JvmStatic
+	fun attachKeepLeftInfoAndLanes(
+		leftSide: Boolean,
+		prevSegm: RouteSegmentResult,
+		currentSegm: RouteSegmentResult,
+		twiceRoadPresent: Boolean
+	): TurnType? {
+		val attachedRoutes = currentSegm.getAttachedRoutes(currentSegm.getStartPointIndex())
+		if (attachedRoutes.isEmpty()) {
+			return null
+		}
+		val turnLanesPrevSegm = if (twiceRoadPresent) null else getTurnLanesString(prevSegm)
+		// keep left/right
+		val rs = calculateRoadSplitStructure(prevSegm, currentSegm, attachedRoutes, turnLanesPrevSegm)
+		if (rs.roadsOnLeft + rs.roadsOnRight == 0) {
+			return null
+		}
+
+		// turn lanes exist
+		if (turnLanesPrevSegm != null) {
+			return createKeepLeftRightTurnBasedOnTurnTypes(rs, prevSegm, currentSegm, turnLanesPrevSegm, leftSide)
+		}
+
+		// turn lanes don't exist
+		if (rs.keepLeft || rs.keepRight) {
+			return createSimpleKeepLeftRightTurn(leftSide, prevSegm, currentSegm, rs)
+		}
+		return null
+	}
+
+	/** The manoeuvre when the road being left declares its lanes, so the lanes decide. */
+	@JvmStatic
+	fun createKeepLeftRightTurnBasedOnTurnTypes(
+		rs: RoadSplitStructure,
+		prevSegm: RouteSegmentResult,
+		currentSegm: RouteSegmentResult,
+		turnLanes: String,
+		leftSide: Boolean
+	): TurnType? {
+		// Maybe going straight at a 90-degree intersection
+		var t = TurnType.valueOf(TurnType.C, leftSide)
+		val rawLanes = calculateRawTurnLanes(turnLanes, TurnType.C)
+		var possiblyLeftTurn = rs.roadsOnLeft == 0
+		var possiblyRightTurn = rs.roadsOnRight == 0
+		for (k in rawLanes.indices) {
+			val turn = TurnType.getPrimaryTurn(rawLanes[k])
+			val sturn = TurnType.getSecondaryTurn(rawLanes[k])
+			val tturn = TurnType.getTertiaryTurn(rawLanes[k])
+			if (turn == TurnType.TU || sturn == TurnType.TU || tturn == TurnType.TU) {
+				possiblyLeftTurn = true
+			}
+			if (turn == TurnType.TRU || sturn == TurnType.TRU || tturn == TurnType.TRU) {
+				possiblyRightTurn = true
+			}
+		}
+
+		val act = findActiveIndex(prevSegm, currentSegm, rawLanes, rs, turnLanes)
+		val activeBeginIndex = act[0]
+		val activeEndIndex = act[1]
+		val activeTurn = act[2]
+		if (activeBeginIndex == -1 || activeEndIndex == -1 || activeBeginIndex > activeEndIndex) {
+			// something went wrong
+			return createSimpleKeepLeftRightTurn(leftSide, prevSegm, currentSegm, rs)
+		}
+		val leftOrRightKeep = (rs.keepLeft && !rs.keepRight) || (!rs.keepLeft && rs.keepRight)
+		if (leftOrRightKeep) {
+			setActiveLanesRange(rawLanes, activeBeginIndex, activeEndIndex, activeTurn)
+			val tp = inferSlightTurnFromActiveLanes(rawLanes, rs.keepLeft, rs.keepRight)
+			// Checking to see that there is only one unique turn
+			if (tp != 0) {
+				// add extra lanes with same turn
+				for (i in rawLanes.indices) {
+					if (TurnType.getSecondaryTurn(rawLanes[i]) == tp) {
+						TurnType.setSecondaryToPrimary(rawLanes, i)
+						rawLanes[i] = rawLanes[i] or 1
+					} else if (TurnType.getPrimaryTurn(rawLanes[i]) == tp) {
+						rawLanes[i] = rawLanes[i] or 1
+					}
+				}
+			}
+			if (tp != t.value && tp != 0) {
+				t = TurnType.valueOf(tp, leftSide)
+			} else {
+				// use keepRight and keepLeft turns when attached road doesn't have lanes
+				// or prev segment has more then 1 turn to the active lane
+				if (rs.keepRight && !rs.keepLeft) {
+					t = getTurnByCurrentTurns(rs.leftLanesInfo, rawLanes, TurnType.KR, leftSide)
+				} else if (rs.keepLeft && !rs.keepRight) {
+					t = getTurnByCurrentTurns(rs.rightLanesInfo, rawLanes, TurnType.KL, leftSide)
+				}
+			}
+		} else {
+			setActiveLanesRange(rawLanes, activeBeginIndex, activeEndIndex, activeTurn)
+			t = getActiveTurnType(rawLanes, leftSide, t)
+		}
+		t.lanes = rawLanes
+		t.isPossibleLeftTurn = possiblyLeftTurn
+		t.isPossibleRightTurn = possiblyRightTurn
+		return t
+	}
+
+	/**
+	 * The manoeuvre when the road being left declares no lanes, so the geometry decides and the
+	 * lanes are invented: one arrow per lane of the road being left, the active ones in the middle
+	 * or to whichever side carries on.
+	 */
+	@JvmStatic
+	fun createSimpleKeepLeftRightTurn(
+		leftSide: Boolean,
+		prevSegm: RouteSegmentResult,
+		currentSegm: RouteSegmentResult,
+		rs: RoadSplitStructure
+	): TurnType? {
+		val deviation = KMapUtils.degreesDiff(prevSegm.getBearingEnd().toDouble(), currentSegm.getBearingBegin().toDouble())
+		val makeSlightTurn = abs(deviation) > TURN_SLIGHT_DEGREE
+
+		var t: TurnType
+		var mainLaneType = TurnType.C
+
+		if (rs.keepLeft || rs.keepRight) {
+			if (deviation < -TURN_SLIGHT_DEGREE && makeSlightTurn) {
+				t = TurnType.valueOf(TurnType.TSLR, leftSide)
+				mainLaneType = TurnType.TSLR
+			} else if (deviation > TURN_SLIGHT_DEGREE && makeSlightTurn) {
+				t = TurnType.valueOf(TurnType.TSLL, leftSide)
+				mainLaneType = TurnType.TSLL
+			} else if (rs.keepLeft && rs.keepRight) {
+				t = TurnType.valueOf(TurnType.C, leftSide)
+			} else {
+				t = TurnType.valueOf(if (rs.keepLeft) TurnType.KL else TurnType.KR, leftSide)
+			}
+		} else {
+			return null
+		}
+
+		val currentLanesCount = countLanesMinOne(currentSegm)
+		val prevLanesCount = countLanesMinOne(prevSegm)
+		val oneLane = currentLanesCount == 1 && prevLanesCount == 1
+		val lanes: IntArray
+
+		if (oneLane) {
+			lanes = createCombinedTurnTypeForSingleLane(rs, deviation)
+			t.lanes = lanes
+			val active = t.getActiveCommonLaneTurn()
+			if (active > 0 && (!TurnType.isKeepDirectionTurn(active) || !TurnType.isKeepDirectionTurn(t.value))) {
+				t = TurnType.valueOf(active, leftSide)
+			}
+		} else {
+			lanes = IntArray(prevLanesCount)
+			val ltr = rs.leftLanes < rs.rightLanes
+			val roads = ArrayList<AttachedRoadInfo>()
+			val mainType = AttachedRoadInfo()
+			mainType.lanes = currentLanesCount
+			mainType.speakPriority = highwaySpeakPriority(currentSegm.getObject().getHighway())
+			mainType.turnType = mainLaneType
+			roads.add(mainType)
+
+			synteticAssignTurnTypes(rs, mainLaneType, roads, true)
+			synteticAssignTurnTypes(rs, mainLaneType, roads, false)
+			// sort important last
+			roads.sortWith { o1, o2 ->
+				if (o1.speakPriority == o2.speakPriority) {
+					-o1.lanes.compareTo(o2.lanes)
+				} else {
+					-o1.speakPriority.compareTo(o2.speakPriority)
+				}
+			}
+			for (i in roads) {
+				var sumLanes = 0
+				for (l in roads) {
+					sumLanes += l.lanes
+				}
+				if (sumLanes < 2 * lanes.size) {
+					// max 2 attached per lane is enough
+					break
+				}
+				i.lanes = 1 // if not enough reset to 1 lane
+			}
+
+			// active lanes
+			val startActive = max(0, if (ltr) 0 else lanes.size - mainType.lanes)
+			val endActive = minOf(lanes.size, startActive + mainType.lanes) - 1
+			for (i in startActive..endActive) {
+				lanes[i] = (mainType.turnType shl 1) + 1
+			}
+			var ind = 0
+			for (i in rs.leftLanesInfo) {
+				var k = 0
+				while (k < i.lanes && ind <= startActive) {
+					if (lanes[ind] == 0) {
+						lanes[ind] = i.turnType shl 1
+					} else if (TurnType.getSecondaryTurn(lanes[ind]) == 0) {
+						TurnType.setSecondaryTurn(lanes, ind, i.turnType)
+					} else {
+						TurnType.setTertiaryTurn(lanes, ind, i.turnType)
+					}
+					k++
+					ind++
+				}
+			}
+			ind = lanes.size - 1
+			for (i in rs.rightLanesInfo) {
+				var k = 0
+				while (k < i.lanes && ind >= endActive) {
+					if (lanes[ind] == 0) {
+						lanes[ind] = i.turnType shl 1
+					} else if (TurnType.getSecondaryTurn(lanes[ind]) == 0) {
+						TurnType.setSecondaryTurn(lanes, ind, i.turnType)
+					} else {
+						TurnType.setTertiaryTurn(lanes, ind, i.turnType)
+					}
+					k++
+					ind--
+				}
+			}
+			// Fill All left empty slots with inactive C
+			for (i in lanes.indices) {
+				if (lanes[i] == 0) {
+					lanes[i] = TurnType.C shl 1
+				}
+			}
+		}
+
+		// Set properties for the TurnType object
+		t.isSkipToSpeak = !rs.speak
+		t.lanes = lanes
+		return t
+	}
+
+	/**
+	 * The single lane of a road that has only one, showing the turn taken as its primary arrow and
+	 * up to two of the roads left behind as the others.
+	 */
+	private fun createCombinedTurnTypeForSingleLane(rs: RoadSplitStructure, currentDeviation: Double): IntArray {
+		val attachedAngles = ArrayList<Double>()
+		attachedAngles.add(currentDeviation)
+		for (l in rs.leftLanesInfo) {
+			attachedAngles.add(l.attachedAngle)
+		}
+		for (l in rs.rightLanesInfo) {
+			attachedAngles.add(l.attachedAngle)
+		}
+		attachedAngles.sortWith { c1, c2 -> c2.compareTo(c1) }
+
+		val size = attachedAngles.size
+		val allStraight = rs.allAreStraight()
+		val lanes = IntArray(1)
+		var extraLanes = 0
+		var prevAngle = Double.NaN
+		// iterate from left to right turns
+		var prevTurn = 0
+		for (i in 0 until size) {
+			val angle = attachedAngles[i]
+			if (!prevAngle.isNaN() && angle == prevAngle) {
+				continue
+			}
+			prevAngle = angle
+			var turn: Int
+			if (allStraight) {
+				// create fork intersection
+				turn = if (i == 0) {
+					TurnType.KL
+				} else if (i == size - 1) {
+					TurnType.KR
+				} else {
+					TurnType.C
+				}
+			} else {
+				turn = getTurnByAngle(angle)
+				if (prevTurn > 0 && prevTurn == turn) {
+					turn = TurnType.getNext(turn)
+				}
+			}
+			prevTurn = turn
+			if (angle == currentDeviation) {
+				TurnType.setPrimaryTurn(lanes, 0, turn)
+			} else {
+				if (extraLanes++ == 0) {
+					TurnType.setSecondaryTurn(lanes, 0, turn)
+				} else {
+					TurnType.setTertiaryTurn(lanes, 0, turn)
+					// if (extraLanes > 2): we don't have enough space to display
+				}
+			}
+		}
+		lanes[0] = lanes[0] or 1
+		return lanes
 	}
 
 	// ---- splitting the way java's String.split does ----
