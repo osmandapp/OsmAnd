@@ -220,7 +220,7 @@ class RouteRegion : BinaryIndexPart() {
 		}
 
 		if (routeEncodingRules.isEmpty()) {
-			routeEncodingRules.addAll(o.region.routeEncodingRules)
+			routeEncodingRules.addAll(o.region!!.routeEncodingRules)
 			referenceRouteRegion = o.region
 			return o
 		}
@@ -234,7 +234,7 @@ class RouteRegion : BinaryIndexPart() {
 		val types = o.types
 		if (types != null) {
 			rdo.types = IntArray(types.size) { i ->
-				val tp = o.region.routeEncodingRules[types[i]]!!
+				val tp = o.region!!.routeEncodingRules[types[i]]!!
 				findOrCreateRouteType(tp.getTag(), tp.getValue())
 			}
 		}
@@ -244,7 +244,7 @@ class RouteRegion : BinaryIndexPart() {
 			for (i in pointTypes.indices) {
 				val point = pointTypes[i] ?: continue
 				adopted[i] = IntArray(point.size) { j ->
-					val tp = o.region.routeEncodingRules[point[j]]!!
+					val tp = o.region!!.routeEncodingRules[point[j]]!!
 					var ruleId = searchRouteEncodingRule(tp.getTag(), tp.getValue())
 					if (ruleId == -1) {
 						ruleId = routeEncodingRules.size
@@ -260,7 +260,7 @@ class RouteRegion : BinaryIndexPart() {
 			val adopted = IntArray(nameIds.size)
 			val names = KTIntObjectMap<String>()
 			for (i in nameIds.indices) {
-				val tp = o.region.routeEncodingRules[nameIds[i]]!!
+				val tp = o.region!!.routeEncodingRules[nameIds[i]]!!
 				var ruleId = searchRouteEncodingRule(tp.getTag(), null)
 				if (ruleId == -1) {
 					ruleId = routeEncodingRules.size
@@ -279,7 +279,7 @@ class RouteRegion : BinaryIndexPart() {
 			for (i in pointNameTypes.indices) {
 				val point = pointNameTypes[i] ?: continue
 				adopted[i] = IntArray(point.size) { j ->
-					val tp = o.region.routeEncodingRules[point[j]]!!
+					val tp = o.region!!.routeEncodingRules[point[j]]!!
 					var ruleId = searchRouteEncodingRule(tp.getTag(), null)
 					if (ruleId == -1) {
 						ruleId = routeEncodingRules.size

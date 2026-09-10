@@ -352,24 +352,24 @@ class GeneralRouter : VehicleRouter {
 
 	override fun defineObstacle(road: RouteDataObject, point: Int, isBackwardDir: Boolean): Float {
 		val pointTypes = road.getPointTypes(point) ?: return 0f
-		var obst = getCache(RouteDataObjectAttribute.OBSTACLES, road.region, pointTypes, isBackwardDir)
+		var obst = getCache(RouteDataObjectAttribute.OBSTACLES, road.region!!, pointTypes, isBackwardDir)
 		if (obst == null) {
 			val filteredPointTypes = filterDirectionTags(road, pointTypes, isBackwardDir)
 			obst = getObjContext(RouteDataObjectAttribute.OBSTACLES)
-				.evaluateFloat(road.region, filteredPointTypes, 0f)
-			putCache(RouteDataObjectAttribute.OBSTACLES, road.region, pointTypes, obst, isBackwardDir)
+				.evaluateFloat(road.region!!, filteredPointTypes, 0f)
+			putCache(RouteDataObjectAttribute.OBSTACLES, road.region!!, pointTypes, obst, isBackwardDir)
 		}
 		return obst
 	}
 
 	override fun defineRoutingObstacle(road: RouteDataObject, point: Int, isBackwardDir: Boolean): Float {
 		val pointTypes = road.getPointTypes(point) ?: return 0f
-		var obst = getCache(RouteDataObjectAttribute.ROUTING_OBSTACLES, road.region, pointTypes, isBackwardDir)
+		var obst = getCache(RouteDataObjectAttribute.ROUTING_OBSTACLES, road.region!!, pointTypes, isBackwardDir)
 		if (obst == null) {
 			val filteredPointTypes = filterDirectionTags(road, pointTypes, isBackwardDir)
 			obst = getObjContext(RouteDataObjectAttribute.ROUTING_OBSTACLES)
-				.evaluateFloat(road.region, filteredPointTypes, 0f)
-			putCache(RouteDataObjectAttribute.ROUTING_OBSTACLES, road.region, pointTypes, obst, isBackwardDir)
+				.evaluateFloat(road.region!!, filteredPointTypes, 0f)
+			putCache(RouteDataObjectAttribute.ROUTING_OBSTACLES, road.region!!, pointTypes, obst, isBackwardDir)
 		}
 		return obst
 	}
@@ -380,7 +380,7 @@ class GeneralRouter : VehicleRouter {
 		var direction = 0
 		var tdirection = 0
 		var hdirection = 0
-		val region = road.region
+		val region = road.region!!
 		for (type in pointTypes) {
 			if (type == region.directionBackward) {
 				direction = -1
@@ -512,11 +512,11 @@ class GeneralRouter : VehicleRouter {
 	}
 
 	private fun putCache(attr: RouteDataObjectAttribute, road: RouteDataObject, value: Float) {
-		putCache(attr, road.region, road.types!!, value, false)
+		putCache(attr, road.region!!, road.types!!, value, false)
 	}
 
 	private fun putCache(attr: RouteDataObjectAttribute, road: RouteDataObject, value: Float, extra: Boolean) {
-		putCache(attr, road.region, road.types!!, value, extra)
+		putCache(attr, road.region!!, road.types!!, value, extra)
 	}
 
 	private fun putCache(
@@ -553,10 +553,10 @@ class GeneralRouter : VehicleRouter {
 	}
 
 	private fun getCache(attr: RouteDataObjectAttribute, road: RouteDataObject): Float? =
-		getCache(attr, road.region, road.types!!, false)
+		getCache(attr, road.region!!, road.types!!, false)
 
 	private fun getCache(attr: RouteDataObjectAttribute, road: RouteDataObject, extra: Boolean): Float? =
-		getCache(attr, road.region, road.types!!, extra)
+		getCache(attr, road.region!!, road.types!!, extra)
 
 	private fun getCache(
 		attr: RouteDataObjectAttribute, reg: RouteRegion, types: IntArray, extra: Boolean
@@ -692,7 +692,7 @@ class GeneralRouter : VehicleRouter {
 
 		fun getParamValues(): Array<String> = paramContext?.vars?.values?.toTypedArray() ?: emptyArray()
 
-		private fun evaluate(ro: RouteDataObject): Any? = evaluate(convert(ro.region, ro.types!!))
+		private fun evaluate(ro: RouteDataObject): Any? = evaluate(convert(ro.region!!, ro.types!!))
 
 		fun printRules(out: StringBuilder) {
 			for (r in rules) {

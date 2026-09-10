@@ -92,7 +92,7 @@ class RouteSegmentResult : StringExternalizable<RouteDataBundle> {
 
 	fun collectNames(resources: RouteDataResources) {
 		val rules = resources.getRules()
-		val region = routeObject.region
+		val region = routeObject.region!!
 		if (region.getNameTypeRule() != -1) {
 			val r = region.quickGetEncodingRule(region.getNameTypeRule())
 			if (r != null && !rules.containsKey(r)) {
@@ -137,7 +137,7 @@ class RouteSegmentResult : StringExternalizable<RouteDataBundle> {
 	}
 
 	private fun collectRules(rules: MutableMap<RouteTypeRule, Int>, types: IntArray) {
-		val region = routeObject.region
+		val region = routeObject.region!!
 		for (type in types) {
 			if (type >= region.quickGetEncodingRulesSize()) {
 				continue
@@ -162,10 +162,10 @@ class RouteSegmentResult : StringExternalizable<RouteDataBundle> {
 		}
 		val arr = ArrayList<Int>()
 		for (type in types) {
-			if (type >= routeObject.region.quickGetEncodingRulesSize()) {
+			if (type >= routeObject.region!!.quickGetEncodingRulesSize()) {
 				continue
 			}
-			val rule = routeObject.region.quickGetEncodingRule(type) ?: continue
+			val rule = routeObject.region!!.quickGetEncodingRule(type) ?: continue
 			rules[rule]?.let { arr.add(it) }
 		}
 		return IntArray(arr.size) { arr[it] }
@@ -189,11 +189,11 @@ class RouteSegmentResult : StringExternalizable<RouteDataBundle> {
 		val res = IntArray(nameIds.size)
 		for (i in nameIds.indices) {
 			val nameId = nameIds[i]
-			if (nameId >= routeObject.region.quickGetEncodingRulesSize()) {
+			if (nameId >= routeObject.region!!.quickGetEncodingRulesSize()) {
 				continue
 			}
 			val name = routeObject.names?.get(nameId) ?: continue
-			val tag = routeObject.region.quickGetEncodingRule(nameId)!!.getTag()
+			val tag = routeObject.region!!.quickGetEncodingRule(nameId)!!.getTag()
 			val rule = RouteTypeRule(tag, name)
 			val ruleId = rules[rule] ?: throw IllegalArgumentException("Cannot find collected rule: $rule")
 			res[i] = ruleId
@@ -214,10 +214,10 @@ class RouteSegmentResult : StringExternalizable<RouteDataBundle> {
 			val arr = IntArray(types.size)
 			for (k in types.indices) {
 				val type = types[k]
-				if (type >= routeObject.region.quickGetEncodingRulesSize()) {
+				if (type >= routeObject.region!!.quickGetEncodingRulesSize()) {
 					continue
 				}
-				val tag = routeObject.region.quickGetEncodingRule(type)!!.getTag()
+				val tag = routeObject.region!!.quickGetEncodingRule(type)!!.getTag()
 				val name = pointNames!![i]!![k]
 				val rule = RouteTypeRule(tag, name)
 				var ruleId = rules[rule]
@@ -236,7 +236,7 @@ class RouteSegmentResult : StringExternalizable<RouteDataBundle> {
 	fun fillNames(resources: RouteDataResources) {
 		val nameIds = routeObject.nameIds
 		if (nameIds != null && nameIds.isNotEmpty()) {
-			val region = routeObject.region
+			val region = routeObject.region!!
 			val nameTypeRule = region.getNameTypeRule()
 			val refTypeRule = region.getRefTypeRule()
 			val names = KTIntObjectMap<String>()
@@ -269,13 +269,13 @@ class RouteSegmentResult : StringExternalizable<RouteDataBundle> {
 				val typesRow = IntArray(namesIds.size)
 				for (k in namesIds.indices) {
 					val id = namesIds[k]
-					if (id >= routeObject.region.quickGetEncodingRulesSize()) {
+					if (id >= routeObject.region!!.quickGetEncodingRulesSize()) {
 						continue
 					}
-					val r = routeObject.region.quickGetEncodingRule(id)
+					val r = routeObject.region!!.quickGetEncodingRule(id)
 					if (r != null) {
 						namesRow[k] = r.getValue()
-						val nameType = routeObject.region.searchRouteEncodingRule(r.getTag(), null)
+						val nameType = routeObject.region!!.searchRouteEncodingRule(r.getTag(), null)
 						if (nameType != -1) {
 							typesRow[k] = nameType
 						}
