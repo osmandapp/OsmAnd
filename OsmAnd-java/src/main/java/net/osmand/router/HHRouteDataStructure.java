@@ -13,9 +13,11 @@ import java.util.TreeMap;
 
 import com.google.protobuf.CodedInputStream;
 
+import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.iterator.TLongObjectIterator;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
+import net.osmand.binary.BinaryHHRouteReaderAdapter;
 import net.osmand.binary.BinaryHHRouteReaderAdapter.HHRouteRegion;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
@@ -397,6 +399,116 @@ public class HHRouteDataStructure {
 				}
 			}
 			return points;
+		}
+
+		/**
+		 * Copies the points of an initialized context for another routing context over the same file
+		 * (each routing context has its own reader): nothing is parsed or filtered again.
+		 * Segments are not copied, the copy loads them lazily. Returns null if the copy isn't possible.
+		 */
+		public static HHRoutingContext<NetworkDBPoint> copy(HHRoutingContext<NetworkDBPoint> src, RoutingContext rctx) {
+			if (!src.initialized) {
+				return null;
+			}
+			HHRoutingContext<NetworkDBPoint> c = new HHRoutingContext<>();
+			c.rctx = rctx;
+			for (HHRouteRegionPointsCtx<NetworkDBPoint> r : src.regions) {
+				HHRouteRegion fileRegion = null;
+				BinaryMapIndexReader file = null;
+				for (BinaryMapIndexReader reader : rctx.map.keySet()) {
+					for (HHRouteRegion h : reader.getHHRoutingIndexes()) {
+						if (r.file != null && reader.getFile().equals(r.file.getFile())
+								&& h.getFilePointer() == r.fileRegion.getFilePointer()) {
+							fileRegion = h;
+							file = reader;
+						}
+					}
+				}
+				if (fileRegion == null) {
+					return null;
+				}
+				BinaryHHRouteReaderAdapter.copySegmentHeaders(r.fileRegion, fileRegion);
+				c.regions.add(new HHRouteRegionPointsCtx<>(r.id, fileRegion, file, r.routingProfile));
+			}
+			int maxIndex = 0;
+			for (NetworkDBPoint p : src.pointsById.valueCollection()) {
+				if (p.getClass() != NetworkDBPoint.class) {
+					return null;
+				}
+				maxIndex = Math.max(maxIndex, p.index);
+			}
+			// index is a dense global id
+			NetworkDBPoint[] byIndex = new NetworkDBPoint[maxIndex + 1];
+			c.pointsById = new TLongObjectHashMap<>(src.pointsById.size());
+			TLongObjectIterator<NetworkDBPoint> it = src.pointsById.iterator();
+			while (it.hasNext()) {
+				it.advance();
+				NetworkDBPoint s = it.value();
+				NetworkDBPoint p = new NetworkDBPoint();
+				p.tagValues = s.tagValues;
+				p.index = s.index;
+				p.clusterId = s.clusterId;
+				p.fileId = s.fileId;
+				p.mapId = s.mapId;
+				p.incomplete = s.incomplete;
+				p.roadId = s.roadId;
+				p.start = s.start;
+				p.end = s.end;
+				p.startX = s.startX;
+				p.startY = s.startY;
+				p.endX = s.endX;
+				p.endY = s.endY;
+				p.rtExclude = s.rtExclude;
+				p.markSegmentsNotLoaded();
+				byIndex[p.index] = p;
+				c.pointsById.put(it.key(), p);
+			}
+			for (NetworkDBPoint s : src.pointsById.valueCollection()) {
+				if (s.dualPoint != null) {
+					byIndex[s.index].dualPoint = byIndex[s.dualPoint.index];
+				}
+			}
+			c.pointsByGeo = new TLongObjectHashMap<>(src.pointsByGeo.size());
+			c.boundaries = new TLongObjectHashMap<>(src.pointsByGeo.size());
+			it = src.pointsByGeo.iterator();
+			while (it.hasNext()) {
+				it.advance();
+				c.pointsByGeo.put(it.key(), byIndex[it.value().index]);
+				// not copied from src.boundaries: it holds the start and end of a route running there
+				c.boundaries.put(it.key(), null);
+			}
+			c.clusterInPoints = copyClusters(src.clusterInPoints, byIndex);
+			c.clusterOutPoints = copyClusters(src.clusterOutPoints, byIndex);
+			for (NetworkDBPoint p : c.pointsById.valueCollection()) {
+				LatLon latlon = p.getPoint();
+				c.pointsRect.registerObject(latlon.getLatitude(), latlon.getLongitude(), p);
+			}
+			for (int i = 0; i < src.regions.size(); i++) {
+				it = src.regions.get(i).pntsByFileId.iterator();
+				while (it.hasNext()) {
+					it.advance();
+					c.regions.get(i).pntsByFileId.put(it.key(), byIndex[it.value().index]);
+				}
+			}
+			c.filterRoutingParameters = new TreeMap<>(src.filterRoutingParameters);
+			rctx.hhHasUnsupportedParameters = src.rctx.hhHasUnsupportedParameters;
+			c.initialized = true;
+			return c;
+		}
+
+		private static TIntObjectHashMap<List<NetworkDBPoint>> copyClusters(TIntObjectHashMap<List<NetworkDBPoint>> src,
+				NetworkDBPoint[] byIndex) {
+			TIntObjectHashMap<List<NetworkDBPoint>> res = new TIntObjectHashMap<>(src.size());
+			TIntObjectIterator<List<NetworkDBPoint>> it = src.iterator();
+			while (it.hasNext()) {
+				it.advance();
+				List<NetworkDBPoint> l = new ArrayList<>(it.value().size());
+				for (NetworkDBPoint p : it.value()) {
+					l.add(byIndex[p.index]);
+				}
+				res.put(it.key(), l);
+			}
+			return res;
 		}
 
 		public int loadNetworkSegments(Collection<T> valueCollection) throws SQLException {
