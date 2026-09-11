@@ -33,7 +33,8 @@ import java.util.List;
  * <ul>
  *     <li>OpenSky Network - {@code {"states": [[icao24, callsign, .., lon, lat, ..], ..]}},
  *     speed in m/s and altitude in metres;</li>
- *     <li>ADS-B Exchange / airplanes.live - {@code {"ac": [{"hex": .., "lat": .., "gs": ..}, ..]}},
+ *     <li>ADS-B Exchange and the community services serving the same payload (adsb.lol under
+ *     {@code "ac"}, adsb.fi under {@code "aircraft"}) - {@code [{"hex": .., "lat": .., "gs": ..}]},
  *     speed in knots and altitude in feet.</li>
  * </ul>
  * Runs synchronously - callers are expected to invoke this from a background thread.
@@ -71,7 +72,11 @@ public class AisPlaneDataFetcher {
 			if (states != null) {
 				return parseOpenSky(states);
 			}
+			// same payload, different wrapper key depending on the service
 			JSONArray aircraft = root.optJSONArray("ac");
+			if (aircraft == null) {
+				aircraft = root.optJSONArray("aircraft");
+			}
 			if (aircraft != null) {
 				return parseAdsb(aircraft);
 			}

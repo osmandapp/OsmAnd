@@ -62,13 +62,20 @@ public class AisUrlSourceTemplate {
 						"Needs a RapidAPI subscription key, sent as a header. Edit lat/lon/dist in "
 								+ "the URL below to your area (dist is in nautical miles)."),
 				new AisUrlSourceTemplate(
-						"airplanes.live (free, no key)",
+						"adsb.lol (free, no key)",
 						AisUrlSource.Type.PLANES,
-						"https://api.airplanes.live/v2/point/50.45/30.52/250",
+						"https://api.adsb.lol/v2/lat/50.03/lon/8.56/dist/50",
 						null,
-						"Community ADS-B feed in the same format as ADS-B Exchange, no key needed. "
-								+ "Edit lat/lon/radius in the URL below (radius is in nautical miles, "
-								+ "max 250)."),
+						"Community feed in the ADS-B Exchange format, no key needed - the easiest "
+								+ "way to try planes out. Edit lat/lon/dist in the URL below "
+								+ "(dist is in nautical miles)."),
+				new AisUrlSourceTemplate(
+						"adsb.fi (free, no key)",
+						AisUrlSource.Type.PLANES,
+						"https://opendata.adsb.fi/api/v2/lat/50.03/lon/8.56/dist/50/",
+						null,
+						"Another community feed in the same format, no key needed. Edit "
+								+ "lat/lon/dist in the URL below (dist is in nautical miles)."),
 				new AisUrlSourceTemplate(
 						"Private aggregator (key in URL)",
 						AisUrlSource.Type.PLANES,
