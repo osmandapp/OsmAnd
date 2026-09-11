@@ -27,6 +27,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 /**
  * Fetches aircraft positions from a plane {@link AisUrlSource} and turns them into
@@ -68,6 +69,14 @@ public class AisPlaneDataFetcher {
 	// the ADS-B services cap the radius at 250 nm
 	private static final double MAX_RADIUS_NM = 250;
 
+	private static final String NUMBER = "-?\\d+(?:\\.\\d+)?";
+	private static final Pattern PLACEHOLDER =
+			Pattern.compile("\\{(LAT|LON|DIST|LAMIN|LOMIN|LAMAX|LOMAX)}");
+	private static final Pattern LAT_LON_DIST_PATH =
+			Pattern.compile("/lat/" + NUMBER + "/lon/" + NUMBER + "/dist/" + NUMBER);
+	private static final Pattern POINT_PATH =
+			Pattern.compile("/point/" + NUMBER + "/" + NUMBER + "/" + NUMBER);
+
 	private AisPlaneDataFetcher() {
 	}
 
@@ -87,13 +96,53 @@ public class AisPlaneDataFetcher {
 		// radius covering the viewport corner, which is what centre+radius services ask for
 		double distNm = Math.min(MAX_RADIUS_NM, Math.max(MIN_RADIUS_NM,
 				MapUtils.getDistance(centerLat, centerLon, north, east) / METERS_PER_NM));
-		return url.replace("{LAMIN}", format(south))
-				.replace("{LAMAX}", format(north))
-				.replace("{LOMIN}", format(west))
-				.replace("{LOMAX}", format(east))
-				.replace("{LAT}", format(centerLat))
-				.replace("{LON}", format(centerLon))
-				.replace("{DIST}", String.valueOf(Math.round(distNm)));
+		String dist = String.valueOf(Math.round(distNm));
+
+		if (PLACEHOLDER.matcher(url).find()) {
+			return url.replace("{LAMIN}", format(south))
+					.replace("{LAMAX}", format(north))
+					.replace("{LOMIN}", format(west))
+					.replace("{LOMAX}", format(east))
+					.replace("{LAT}", format(centerLat))
+					.replace("{LON}", format(centerLon))
+					.replace("{DIST}", dist);
+		}
+		return replaceLiteralCoordinates(url, format(centerLat), format(centerLon), dist,
+				format(south), format(west), format(north), format(east));
+	}
+
+	/**
+	 * A URL without placeholders - typed by hand or saved before placeholders existed - still has
+	 * to follow the map, so coordinates written in the shapes these services use are rewritten to
+	 * the current area. Anything unrecognised is left alone.
+	 */
+	@NonNull
+	private static String replaceLiteralCoordinates(@NonNull String url, @NonNull String lat,
+	                                                 @NonNull String lon, @NonNull String dist,
+	                                                 @NonNull String lamin, @NonNull String lomin,
+	                                                 @NonNull String lamax, @NonNull String lomax) {
+		String result = url;
+		// /lat/50.03/lon/8.56/dist/50 - adsb.lol, adsb.fi, ADS-B Exchange
+		result = LAT_LON_DIST_PATH.matcher(result)
+				.replaceAll("/lat/" + lat + "/lon/" + lon + "/dist/" + dist);
+		// /point/50.03/8.56/50 - airplanes.live
+		result = POINT_PATH.matcher(result).replaceAll("/point/" + lat + "/" + lon + "/" + dist);
+		// lamin=45&lomin=5&lamax=55&lomax=20 - OpenSky, in whatever order they appear
+		result = replaceQueryValue(result, "lamin", lamin);
+		result = replaceQueryValue(result, "lomin", lomin);
+		result = replaceQueryValue(result, "lamax", lamax);
+		result = replaceQueryValue(result, "lomax", lomax);
+		if (!result.equals(url)) {
+			Log.d(TAG, "rewrote fixed coordinates to the current map area: " + result);
+		}
+		return result;
+	}
+
+	@NonNull
+	private static String replaceQueryValue(@NonNull String url, @NonNull String param,
+	                                         @NonNull String value) {
+		return Pattern.compile("([?&]" + param + "=)" + NUMBER)
+				.matcher(url).replaceAll("$1" + value);
 	}
 
 	@NonNull
