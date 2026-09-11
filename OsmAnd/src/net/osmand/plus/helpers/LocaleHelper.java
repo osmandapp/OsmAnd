@@ -79,13 +79,9 @@ public class LocaleHelper {
 			currentLocale = SupportedLocale.normalizeToOsmandLegacy(currentLocale);
 
 			if (!Algorithms.stringsEqual(currentLocale, locale)) {
-				if (Algorithms.isEmpty(currentLocale) && !Algorithms.isEmpty(locale)) {
-					// Ignore empty OS response if vendor firmware rejected a rare tag (e.g., "sc").
-				} else {
-					// Sync with OS if user changed the language via Android App Info.
-					locale = currentLocale;
-					settings.PREFERRED_LOCALE.set(locale);
-				}
+				// Sync with OS if user changed the language via Android App Info.
+				locale = currentLocale;
+				settings.PREFERRED_LOCALE.set(locale);
 			}
 		}
 
