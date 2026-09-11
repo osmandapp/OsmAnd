@@ -265,6 +265,15 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		return result;
 	}
 	
+	private static boolean unitesSame(BaseDetailsObject united, MapObject object) {
+		for (Object o : united.getObjects()) {
+			if (o == object) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	private List<String> addResult(List<String> result, String value) {
 		if (!Algorithms.isEmpty(value)) {
 			if (result == null) {
@@ -294,7 +303,11 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 				}
 			}
 			return; // nothing to merge
-		} 
+		}
+		if (unitedObject != null && unitesSame(unitedObject, otherObj)) {
+			// the same object found again with other words: every merge combines all united objects once more,
+			return;
+		}
 		if (object instanceof Amenity a && unitedObject == null) {
 			unitedObject = new BaseDetailsObject(a, lang);
 		}
