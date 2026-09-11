@@ -11,6 +11,28 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="detach_external_media_descr">The file will no longer be shown in this favorite. It stays on your device.</string>
+	<string name="detach_external_media_descr_plural">The files will no longer be shown in this favorite. They stay on your device.</string>
+	<string name="attach_to_track">Attach to track</string>
+	<string name="attach_to_favorite">Attach to favorite</string>
+	<string name="delete_media_title">Delete media?</string>
+	<string name="delete_media_descr">This file will be permanently deleted from your device. It will disappear from all favorites it\'s attached to.</string>
+	<string name="delete_media_title_plural">Delete %1$d media?</string>
+	<string name="delete_media_descr_plural">These files will be permanently deleted from your device. They will disappear from all favorites they\'re attached to.</string>
+	<string name="detach_media_title">Detach media?</string>
+	<string name="detach_media_title_plural">Detach %1$d media?</string>
+	<string name="detach_media_descr">The file will no longer be shown in this favorite. It stays on your device and in Media library.</string>
+	<string name="detach_media_descr_plural">The files will no longer be shown in this favorite. They stay on your device and in Media library.</string>
+	<string name="shared_string_detach">Detach</string>
+	<string name="media_delete_failed">Could not delete media.</string>
+	<string name="media_detach_failed">Could not detach media.</string>
+	<string name="media_library_empty_title">No media yet</string>
+	<string name="media_library_empty_descr">Take a photo, video, or audio note on the map, or attach files to a favorite. Everything you record or attach appears here.</string>
+	<string name="shared_string_grid">Grid</string>
+	<string name="shared_string_group">Group</string>
+	<string name="gallery_sort_size_large_small">Largest size first</string>
+	<string name="gallery_sort_size_small_large">Smallest size first</string>
+	<string name="ltr_or_rtl_combine_via_pipe_plus">%1$s | +%2$d</string>
 	<string name="astro_eclipse_column_below_horizon">Below horizon</string>
 	<string name="quick_action_add_track">Add track</string>
 	<string name="quick_action_tracks_select_descr">Add one or more tracks to show or hide them on the map with a single tap.</string>
