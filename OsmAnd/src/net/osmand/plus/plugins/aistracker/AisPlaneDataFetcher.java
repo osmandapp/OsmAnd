@@ -27,6 +27,8 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 
 /**
@@ -70,12 +72,18 @@ public class AisPlaneDataFetcher {
 	private static final double MAX_RADIUS_NM = 250;
 
 	private static final String NUMBER = "-?\\d+(?:\\.\\d+)?";
+	// both braces escaped: Android's ICU regex engine rejects a bare '}', unlike the JVM one
 	private static final Pattern PLACEHOLDER =
-			Pattern.compile("\\{(LAT|LON|DIST|LAMIN|LOMIN|LAMAX|LOMAX)}");
+			Pattern.compile("\\{(LAT|LON|DIST|LAMIN|LOMIN|LAMAX|LOMAX)\\}");
 	private static final Pattern LAT_LON_DIST_PATH =
 			Pattern.compile("/lat/" + NUMBER + "/lon/" + NUMBER + "/dist/" + NUMBER);
 	private static final Pattern POINT_PATH =
 			Pattern.compile("/point/" + NUMBER + "/" + NUMBER + "/" + NUMBER);
+
+	private static final int HTTP_TOO_MANY_REQUESTS = 429;
+	private static final long RATE_LIMIT_BACKOFF_MS = 60_000L;
+	/** Host -> when it is fair to ask again, after that host answered 429. */
+	private static final Map<String, Long> RATE_LIMITED_UNTIL = new ConcurrentHashMap<>();
 
 	private AisPlaneDataFetcher() {
 	}
@@ -210,6 +218,13 @@ public class AisPlaneDataFetcher {
 			url = url.replace(API_KEY_PLACEHOLDER, source.apiKey);
 		}
 		String loggedUrl = hideKey(url, source.apiKey);
+		String host = getHost(url);
+		Long backoffUntil = host == null ? null : RATE_LIMITED_UNTIL.get(host);
+		if (backoffUntil != null && System.currentTimeMillis() < backoffUntil) {
+			Log.d(TAG, "'" + source.name + "': skipping, " + host + " rate-limited us, backing off for "
+					+ (backoffUntil - System.currentTimeMillis()) / 1000 + " s more");
+			return null;
+		}
 		HttpURLConnection connection = null;
 		long started = System.currentTimeMillis();
 		try {
@@ -237,7 +252,16 @@ public class AisPlaneDataFetcher {
 						? shorten(readStream(connection.getErrorStream())) : "";
 				Log.w(TAG, "'" + source.name + "' responded " + responseCode + " "
 						+ connection.getResponseMessage() + " " + error);
+				if (responseCode == HTTP_TOO_MANY_REQUESTS && host != null) {
+					// keep hammering a service that just asked us to stop and it will only get worse
+					RATE_LIMITED_UNTIL.put(host, System.currentTimeMillis() + RATE_LIMIT_BACKOFF_MS);
+					Log.w(TAG, "pausing requests to " + host + " for "
+							+ RATE_LIMIT_BACKOFF_MS / 1000 + " s");
+				}
 				return null;
+			}
+			if (host != null) {
+				RATE_LIMITED_UNTIL.remove(host);
 			}
 			String body = readStream(connection.getInputStream());
 			Log.d(TAG, "'" + source.name + "' responded " + responseCode + ", " + body.length()
@@ -263,6 +287,15 @@ public class AisPlaneDataFetcher {
 			}
 		}
 		return builder.toString();
+	}
+
+	@Nullable
+	private static String getHost(@NonNull String url) {
+		try {
+			return new URI(url).getHost();
+		} catch (URISyntaxException e) {
+			return null;
+		}
 	}
 
 	@Nullable

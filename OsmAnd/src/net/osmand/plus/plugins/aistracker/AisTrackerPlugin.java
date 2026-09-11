@@ -500,7 +500,7 @@ public class AisTrackerPlugin extends OsmandPlugin {
 		planePollTimer.schedule(new TimerTask() {
 			@Override
 			public void run() {
-				pollPlaneSources();
+				safePollPlaneSources();
 			}
 		}, 0, PLANE_POLL_INTERVAL_MS);
 	}
@@ -524,7 +524,22 @@ public class AisTrackerPlugin extends OsmandPlugin {
 		if (System.currentTimeMillis() - lastPlaneRequestTime < MIN_PLANE_REQUEST_SPACING_MS) {
 			return;
 		}
-		new Thread(this::pollPlaneSources, "ais-planes-viewport").start();
+		new Thread(this::safePollPlaneSources, "ais-planes-viewport").start();
+	}
+
+	/**
+	 * Polling runs on a timer thread, where an uncaught exception takes the whole app down - a
+	 * misbehaving source must never be able to do that.
+	 */
+	private void safePollPlaneSources() {
+		try {
+			pollPlaneSources();
+		} catch (Throwable e) {
+			Log.e(AisPlaneDataFetcher.TAG, "poll failed", e);
+			synchronized (planeRequestLock) {
+				planeRequestInProgress = false;
+			}
+		}
 	}
 
 	private void pollPlaneSources() {
