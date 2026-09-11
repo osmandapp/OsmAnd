@@ -763,6 +763,18 @@ class GpxFile : GpxExtensions {
 		getExtensionsToWrite()["show_arrows"] = showArrows.toString()
 	}
 
+	fun isLineDashedSet(): Boolean {
+		return extensions?.containsKey("line_dashed") ?: false
+	}
+
+	fun isLineDashed(): Boolean {
+		return extensions?.get("line_dashed")?.toBoolean() ?: false
+	}
+
+	fun setLineDashed(lineDashed: Boolean) {
+		getExtensionsToWrite()["line_dashed"] = lineDashed.toString()
+	}
+
 	fun get3DVisualizationType(): String? {
 		return extensions?.get("line_3d_visualization_by_type")
 	}

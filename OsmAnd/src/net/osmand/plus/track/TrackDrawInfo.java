@@ -11,6 +11,7 @@ import static net.osmand.shared.gpx.GpxParameter.COLOR;
 import static net.osmand.shared.gpx.GpxParameter.COLORING_TYPE;
 import static net.osmand.shared.gpx.GpxParameter.ELEVATION_METERS;
 import static net.osmand.shared.gpx.GpxParameter.JOIN_SEGMENTS;
+import static net.osmand.shared.gpx.GpxParameter.LINE_DASHED;
 import static net.osmand.shared.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.shared.gpx.GpxParameter.SHOW_START_FINISH;
 import static net.osmand.shared.gpx.GpxParameter.SPLIT_INTERVAL;
@@ -66,6 +67,7 @@ public class TrackDrawInfo {
 	private static final String TRACK_SPLIT_INTERVAL = "track_split_interval";
 	private static final String TRACK_JOIN_SEGMENTS = "track_join_segments";
 	private static final String TRACK_SHOW_ARROWS = "track_show_arrows";
+	private static final String TRACK_LINE_DASHED = "track_line_dashed";
 	private static final String TRACK_SHOW_START_FINISH = "track_show_start_finish";
 
 	private static final String TRACK_VISUALIZATION_TYPE_KEY = "track_visualization_type";
@@ -86,6 +88,7 @@ public class TrackDrawInfo {
 	private double splitInterval;
 	private boolean joinSegments;
 	private boolean showArrows;
+	private boolean dashedLine;
 	private boolean showStartFinish = true;
 	private Gpx3DVisualizationType trackVisualizationType = Gpx3DVisualizationType.NONE;
 	private Gpx3DWallColorType trackWallColorType = Gpx3DWallColorType.NONE;
@@ -128,6 +131,7 @@ public class TrackDrawInfo {
 		coloringType = settings.CURRENT_TRACK_COLORING_TYPE.get();
 		routeInfoAttribute = settings.CURRENT_TRACK_ROUTE_INFO_ATTRIBUTE.get();
 		showArrows = settings.CURRENT_TRACK_SHOW_ARROWS.get();
+		dashedLine = settings.CURRENT_TRACK_LINE_DASHED.get();
 		showStartFinish = settings.CURRENT_TRACK_SHOW_START_FINISH.get();
 		additionalExaggeration = settings.CURRENT_TRACK_ADDITIONAL_EXAGGERATION.get();
 		elevationMeters = settings.CURRENT_TRACK_ELEVATION_METERS.get();
@@ -155,6 +159,7 @@ public class TrackDrawInfo {
 		splitInterval = helper.requireParameter(item, SPLIT_INTERVAL);
 		joinSegments = helper.requireParameter(item, JOIN_SEGMENTS);
 		showArrows = helper.requireParameter(item, SHOW_ARROWS);
+		dashedLine = helper.requireParameter(item, LINE_DASHED);
 		showStartFinish = helper.isShowStartFinishForTrack(gpxFile, item, null);
 		trackVisualizationType = Gpx3DVisualizationType.get3DVisualizationType(helper.getParameter(item, TRACK_VISUALIZATION_TYPE));
 		trackWallColorType = Gpx3DWallColorType.Companion.get3DWallColorType(helper.getParameter(item, TRACK_3D_WALL_COLORING_TYPE));
@@ -269,6 +274,14 @@ public class TrackDrawInfo {
 		this.showArrows = showArrows;
 	}
 
+	public boolean isDashedLine() {
+		return dashedLine;
+	}
+
+	public void setDashedLine(boolean dashedLine) {
+		this.dashedLine = dashedLine;
+	}
+
 	public Gpx3DVisualizationType getTrackVisualizationType() {
 		return trackVisualizationType;
 	}
@@ -347,6 +360,7 @@ public class TrackDrawInfo {
 			settings.CURRENT_GRADIENT_PALETTE.resetToDefault();
 			settings.CURRENT_TRACK_ROUTE_INFO_ATTRIBUTE.resetToDefault();
 			settings.CURRENT_TRACK_SHOW_ARROWS.resetToDefault();
+			settings.CURRENT_TRACK_LINE_DASHED.resetToDefault();
 			settings.CURRENT_TRACK_SHOW_START_FINISH.resetToDefault();
 			settings.CURRENT_TRACK_3D_VISUALIZATION_TYPE.resetToDefault();
 			initCurrentTrackParams(app);
@@ -354,6 +368,7 @@ public class TrackDrawInfo {
 			color = getDefaultColor(settings, renderer);
 			width = getDefaultWidth(settings, renderer);
 			showArrows = false;
+			dashedLine = false;
 			showStartFinish = true;
 			coloringType = ColoringType.Companion.requireValueOf(TRACK, null);
 			gradientColorName = PaletteConstants.DEFAULT_NAME;
@@ -365,6 +380,7 @@ public class TrackDrawInfo {
 			color = gpxFile.getColor(null);
 			width = gpxFile.getWidth(null);
 			showArrows = gpxFile.isShowArrows();
+			dashedLine = gpxFile.isLineDashed();
 			showStartFinish = gpxFile.isShowStartFinish();
 			splitInterval = gpxFile.getSplitInterval();
 			splitType = GpxSplitType.getSplitTypeByName(gpxFile.getSplitType()).getType();
@@ -388,6 +404,7 @@ public class TrackDrawInfo {
 		splitInterval = bundle.getDouble(TRACK_SPLIT_INTERVAL);
 		joinSegments = bundle.getBoolean(TRACK_JOIN_SEGMENTS);
 		showArrows = bundle.getBoolean(TRACK_SHOW_ARROWS);
+		dashedLine = bundle.getBoolean(TRACK_LINE_DASHED);
 		showStartFinish = bundle.getBoolean(TRACK_SHOW_START_FINISH);
 		trackVisualizationType = AndroidUtils.getSerializable(bundle, TRACK_VISUALIZATION_TYPE_KEY, Gpx3DVisualizationType.class);
 		trackWallColorType = AndroidUtils.getSerializable(bundle, TRACK_WALL_COLOR_TYPE_KEY, Gpx3DWallColorType.class);
@@ -405,6 +422,7 @@ public class TrackDrawInfo {
 		bundle.putDouble(TRACK_SPLIT_INTERVAL, splitInterval);
 		bundle.putBoolean(TRACK_JOIN_SEGMENTS, joinSegments);
 		bundle.putBoolean(TRACK_SHOW_ARROWS, showArrows);
+		bundle.putBoolean(TRACK_LINE_DASHED, dashedLine);
 		bundle.putBoolean(TRACK_SHOW_START_FINISH, showStartFinish);
 		bundle.putInt(TRACK_APPEARANCE_TYPE, appearanceType);
 		bundle.putSerializable(TRACK_VISUALIZATION_TYPE_KEY, trackVisualizationType);

@@ -763,6 +763,7 @@ public class GpxUiHelper {
 	private static void addAppearanceToGpx(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile, @NonNull GpxDataItem item) {
 		GpxAppearanceHelper helper = new GpxAppearanceHelper(app);
 		gpxFile.setShowArrows(helper.requireParameter(item, SHOW_ARROWS));
+		gpxFile.setLineDashed(helper.requireParameter(item, LINE_DASHED));
 		gpxFile.setShowStartFinish(helper.requireParameter(item, SHOW_START_FINISH));
 		gpxFile.setSplitInterval(helper.requireParameter(item, SPLIT_INTERVAL));
 		gpxFile.setSplitType(GpxSplitType.getSplitTypeByTypeId(helper.requireParameter(item, SPLIT_TYPE)).getTypeName());

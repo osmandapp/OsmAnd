@@ -1412,11 +1412,17 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					}
 					updated |= renderableSegment.setDrawArrows(showArrows);
 					updated |= renderableSegment.setTrack3DStyle(track3DStyle);
+					boolean dashed = appearanceHelper.isLineDashedForTrack(gpxFile, gpxItem, dirItem, selected);
+					updated |= renderableSegment.setDashed(dashed);
 					if (updated || !hasMapRenderer) {
 						float[] intervals = null;
 						PathEffect pathEffect = paint.getPathEffect();
 						if (pathEffect instanceof OsmandDashPathEffect) {
 							intervals = ((OsmandDashPathEffect) pathEffect).getIntervals();
+						}
+						if (dashed) {
+							float dashStrokeWidth = paint.getStrokeWidth();
+							intervals = new float[] {Math.max(dashStrokeWidth * 2.5f, 1f), Math.max(dashStrokeWidth * 1.6f, 1f)};
 						}
 						boolean recreateSegments = invalidated || boundsChanged;
 						renderableSegment.drawGeometry(canvas, tileBox, correctedQuadRect, paint.getColor(),
