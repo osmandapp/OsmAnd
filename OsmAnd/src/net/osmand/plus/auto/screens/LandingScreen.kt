@@ -16,6 +16,7 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import net.osmand.Location
+import net.osmand.plus.OsmAndConstants
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener
 import net.osmand.plus.R
 import net.osmand.plus.auto.NavigationSession
@@ -51,17 +52,31 @@ class LandingScreen(
      * so the map is shown without any interaction with the head unit. See issue #25783.
      */
     override fun updateLocation(location: Location?) {
-        if (autoFreeRideStarted || app.routingHelper.isRouteCalculated
-            || location == null || !location.hasSpeed() || location.speed < AUTO_FREE_RIDE_MIN_SPEED) {
+        if (autoFreeRideStarted || app.routingHelper.isRouteCalculated) {
             movingSinceTime = 0
             return
         }
-        val time = System.currentTimeMillis()
+        if (location == null) {
+            // Location temporarily unavailable - keep the already running timer going.
+            return
+        }
         if (movingSinceTime == 0L) {
-            movingSinceTime = time
-        } else if (time - movingSinceTime >= AUTO_FREE_RIDE_DELAY) {
+            // A confirmed speed above the threshold is required to start counting.
+            if (!location.hasSpeed() || location.speed < AUTO_FREE_RIDE_MIN_SPEED) {
+                return
+            }
+            movingSinceTime = System.currentTimeMillis()
+            // Fire even if no further location updates arrive (e.g. GPS signal lost entirely).
+            app.runInUIThreadAndCancelPrevious(
+                AUTO_FREE_RIDE_CHECK_MSG_ID, { checkFreeRideDelayElapsed() }, AUTO_FREE_RIDE_DELAY)
+        }
+    }
+
+    /** Scheduled AUTO_FREE_RIDE_DELAY after the timer started; re-checks state before acting. */
+    private fun checkFreeRideDelayElapsed() {
+        if (movingSinceTime != 0L && System.currentTimeMillis() - movingSinceTime >= AUTO_FREE_RIDE_DELAY) {
             movingSinceTime = 0
-            app.runInUIThread { startFreeRide() }
+            startFreeRide()
         }
     }
 
@@ -69,6 +84,7 @@ class LandingScreen(
         if (!autoFreeRideStarted && lifecycle.currentState == Lifecycle.State.RESUMED
             && !app.routingHelper.isRouteCalculated) {
             autoFreeRideStarted = true
+            app.mapViewTrackingUtilities.backToLocationImpl()
             onCategoryClick(PlaceCategory.FREE_MODE)
         }
     }
@@ -239,5 +255,7 @@ class LandingScreen(
 
         /** How long the vehicle should move before the free ride mode is started automatically. */
         private const val AUTO_FREE_RIDE_DELAY = 15000L
+
+        private const val AUTO_FREE_RIDE_CHECK_MSG_ID = OsmAndConstants.UI_HANDLER_ANDROID_AUTO + 1
     }
 }
