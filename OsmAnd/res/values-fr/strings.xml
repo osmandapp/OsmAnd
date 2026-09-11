@@ -5270,4 +5270,8 @@
     <string name="share_favorites_missing_media_warning">Certains fichiers médias n\'ont pu être inclus.</string>
     <string name="search_on_web">Rechercher sur le Web</string>
     <string name="astro_eclipse_column_below_horizon">Sous l\'horizon</string>
+    <string name="quick_action_add_track">Ajouter une trace</string>
+    <string name="quick_action_tracks_select_descr">Ajoutez une ou plusieurs traces pour les afficher ou les masquer sur la carte d\'un seul appui.</string>
+    <string name="quick_action_tracks_always_ask_descr">Cette action ouvre la liste des traces qui permet de sélectionner quelle(s) trace(s) afficher ou masquer.</string>
+    <string name="quick_action_all_tracks">Toutes les traces</string>
 </resources>
