@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.audionotes.library
 
+import android.animation.ValueAnimator
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.LayoutInflater
@@ -12,7 +13,6 @@ import android.view.ViewGroup
 import androidx.core.view.doOnLayout
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
-import androidx.recyclerview.widget.LinearLayoutManager
 import net.osmand.plus.R
 import net.osmand.plus.base.BaseOsmAndFragment
 import net.osmand.plus.gallery.contract.IGalleryGridView
@@ -20,7 +20,7 @@ import net.osmand.plus.gallery.model.GalleryItem
 import net.osmand.plus.gallery.ui.GalleryGridAdapter
 import net.osmand.plus.gallery.ui.GalleryGridBinder
 import net.osmand.plus.gallery.ui.GalleryGridRecyclerView
-import net.osmand.plus.gallery.ui.GallerySectionCardDecoration
+import net.osmand.plus.gallery.ui.motion.GalleryMotion
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.myplaces.MyPlacesActivity
 import net.osmand.plus.utils.AndroidUtils
@@ -39,6 +39,8 @@ class MediaLibraryFragment : BaseOsmAndFragment(), IGalleryGridView {
 	private var chipsContainer: View? = null
 	private var pendingLayoutState: Parcelable? = null
 	private var toolbarSelectionMode = false
+	private val toolbarBackground = ColorDrawable()
+	private var toolbarColorAnimator: ValueAnimator? = null
 	private val backCallback = object : OnBackPressedCallback(false) {
 		override fun handleOnBackPressed() = controller.exitSelectionMode()
 	}
@@ -66,12 +68,12 @@ class MediaLibraryFragment : BaseOsmAndFragment(), IGalleryGridView {
 		recycler.doOnLayout {
 			recycler.post {
 				if (recyclerView !== recycler) return@post
-				val mediaAdapter = controller.createAdapter(requireActivity(), recycler.width - recycler.paddingLeft - recycler.paddingRight, nightMode)
+				val contentWidth = recycler.width - recycler.paddingLeft - recycler.paddingRight
+				val mediaAdapter = controller.createAdapter(requireActivity(), contentWidth, nightMode)
 				adapter = mediaAdapter
 				mediaAdapter.displayMode = controller.getDisplayMode()
-				recycler.addItemDecoration(GallerySectionCardDecoration(app, nightMode))
-				recycler.itemAnimator = mediaAdapter.getAnimator()
-				binder = GalleryGridBinder(recycler, mediaAdapter, controller, sectionCards = true).also { it.bind() }
+				binder = GalleryGridBinder(recycler, mediaAdapter, controller, sectionCards = true, nightMode = nightMode,
+					resizableViewWidth = contentWidth).also { it.bind() }
 				controller.attach(this)
 				updateItems()
 			}
@@ -119,7 +121,7 @@ class MediaLibraryFragment : BaseOsmAndFragment(), IGalleryGridView {
 
 	override fun updateItems() {
 		val items = controller.getGalleryItems()
-		adapter?.setItems(items, animated = true)
+		binder?.setItems(items, animated = true)
 		if (items.isNotEmpty() && adapter != null) {
 			pendingLayoutState?.let { recyclerView?.layoutManager?.onRestoreInstanceState(it) }
 			pendingLayoutState = null
@@ -130,16 +132,7 @@ class MediaLibraryFragment : BaseOsmAndFragment(), IGalleryGridView {
 	}
 
 	override fun updateDisplayMode() {
-		val recycler = recyclerView ?: return
-		val mediaAdapter = adapter ?: return
-		val manager = recycler.layoutManager as? LinearLayoutManager
-		val first = manager?.findFirstVisibleItemPosition() ?: 0
-		val offset = manager?.findViewByPosition(first)?.top ?: 0
-		recycler.itemAnimator?.endAnimations()
-		mediaAdapter.displayMode = controller.getDisplayMode()
-		binder?.applyLayout()
-		mediaAdapter.setItems(controller.getGalleryItems())
-		(recycler.layoutManager as? LinearLayoutManager)?.scrollToPositionWithOffset(first.coerceAtLeast(0), offset)
+		binder?.morphLayout(controller.getGalleryItems())
 		chips?.update()
 	}
 
@@ -152,30 +145,44 @@ class MediaLibraryFragment : BaseOsmAndFragment(), IGalleryGridView {
 		outState.putStringArrayList("selected_ids", ArrayList(controller.selectedIds()))
 		super.onSaveInstanceState(outState)
 	}
-	override fun updateSpan() = updateDisplayMode()
 	override fun updateToolbar() {
 		if (!isResumed) return
 		val host = activity as? MyPlacesActivity ?: return
 		val bar = host.supportActionBar ?: return
 		val selected = controller.isSelectionMode()
 		backCallback.isEnabled = selected
-		if (toolbarSelectionMode != selected) {
+		val changed = toolbarSelectionMode != selected
+		if (changed) {
 			host.animateShowHideTabs(selected)
 			toolbarSelectionMode = selected
 		}
 		bar.setHomeButtonEnabled(true)
 		bar.setDisplayHomeAsUpEnabled(true)
+		val barColor: Int
 		if (selected) {
 			bar.setHomeAsUpIndicator(R.drawable.ic_action_close)
-			bar.setBackgroundDrawable(ColorDrawable(ColorUtilities.getToolbarActiveColor(app, nightMode)))
+			barColor = ColorUtilities.getToolbarActiveColor(app, nightMode)
 			bar.title = controller.getSelectedCount().toString()
 			AndroidUiHelper.setStatusBarColor(host, ColorUtilities.getColor(app, ColorUtilities.getStatusBarActiveColorId(nightMode)))
 		} else {
 			bar.setHomeAsUpIndicator(app.uiUtilities.getIcon(AndroidUtils.getNavigationIconResId(app),
 				ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode)))
-			bar.setBackgroundDrawable(ColorDrawable(ColorUtilities.getAppBarColor(app, nightMode)))
+			barColor = ColorUtilities.getAppBarColor(app, nightMode)
 			bar.setTitle(R.string.shared_string_my_places)
 			host.updateStatusBarColor()
+		}
+		toolbarColorAnimator?.cancel()
+		val background = toolbarBackground
+		bar.setBackgroundDrawable(background)
+		if (changed && GalleryMotion.animationsEnabled(app) && background.color != barColor) {
+			toolbarColorAnimator = ValueAnimator.ofArgb(background.color, barColor).apply {
+				duration = TOOLBAR_COLOR_DURATION_MS
+				interpolator = GalleryMotion.CURVE
+				addUpdateListener { background.color = it.animatedValue as Int }
+				start()
+			}
+		} else {
+			background.color = barColor
 		}
 		host.invalidateOptionsMenu()
 	}
@@ -193,7 +200,9 @@ class MediaLibraryFragment : BaseOsmAndFragment(), IGalleryGridView {
 
 	override fun onDestroyView() {
 		controller.detach()
-		recyclerView?.itemAnimator?.endAnimations()
+		toolbarColorAnimator?.cancel()
+		toolbarColorAnimator = null
+		binder?.release()
 		recyclerView?.adapter = null
 		recyclerView = null
 		adapter = null
@@ -206,5 +215,9 @@ class MediaLibraryFragment : BaseOsmAndFragment(), IGalleryGridView {
 	override fun onDestroy() {
 		controller.onScreenDestroyed(activity)
 		super.onDestroy()
+	}
+
+	companion object {
+		private const val TOOLBAR_COLOR_DURATION_MS = 200L
 	}
 }

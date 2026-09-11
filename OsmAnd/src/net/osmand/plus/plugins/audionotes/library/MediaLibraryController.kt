@@ -139,14 +139,13 @@ class MediaLibraryController(app: OsmandApplication, private val plugin: AudioVi
 		(if (isPortrait) plugin.MEDIA_LIBRARY_SPAN_COUNT else plugin.MEDIA_LIBRARY_SPAN_COUNT_LANDSCAPE).set(count)
 	}
 
-	override fun spanBounds(isPortrait: Boolean) = if (isPortrait) 2..5 else 4..8
+	override fun getSpanBounds(isPortrait: Boolean) = if (isPortrait) 2..5 else 4..8
 
-	override fun resolveSpanResizableSize(viewWidth: Int?): Int {
-		val span = getSpanCount(view?.isPortrait() != false)
+	override fun resolveSpanResizableSize(viewWidth: Int?, spanCount: Int): Int {
 		val padding = app.resources.getDimensionPixelSize(R.dimen.content_padding)
 		val gap = AndroidUtils.dpToPxF(app, 8f).roundToInt()
-		val width = viewWidth ?: return super.resolveSpanResizableSize(null)
-		return ((width - 2 * padding - (span - 1) * gap) / span).coerceAtLeast(1)
+		val width = viewWidth ?: return super.resolveSpanResizableSize(null, spanCount)
+		return ((width - 2 * padding - (spanCount - 1) * gap) / spanCount).coerceAtLeast(1)
 	}
 
 	private fun reference(): KLatLon {
