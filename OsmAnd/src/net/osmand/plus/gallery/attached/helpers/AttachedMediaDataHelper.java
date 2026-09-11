@@ -160,7 +160,6 @@ public class AttachedMediaDataHelper {
 		}
 	}
 
-	/** Saves replacement links before renaming an internal file, restoring the links on failure. */
 	public void renameMedia(@Nullable Recording recording, @NonNull String href, @NonNull String name,
 	                        @NonNull Map<Linkable, List<Link>> linksByTarget,
 	                        @NonNull CallbackWithObject<Boolean> callback) {

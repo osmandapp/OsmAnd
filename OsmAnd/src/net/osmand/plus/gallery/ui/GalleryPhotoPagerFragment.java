@@ -510,7 +510,6 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenFragment implements
 		pager.setPageTransformer(true, new GalleryDepthTransformer());
 	}
 
-	/** Rebinds file URIs after a successful library rename, retaining the renamed item. */
 	public void refreshMediaItems(@NonNull String selectedItemId) {
 		if (getView() == null || controller == null) return;
 		mediaItems = controller.getMediaItems();

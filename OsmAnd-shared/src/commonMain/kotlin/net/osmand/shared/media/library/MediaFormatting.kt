@@ -35,7 +35,6 @@ object MediaFormatting {
 		}
 	}
 
-	/** Composition is independent of Android date/size/distance localization. */
 	fun secondLine(mode: MediaLibrarySortMode, date: String?, size: String?, duration: String?, distance: String? = null): String? {
 		val parts = when (mode.group) {
 			MediaLibrarySortMode.Group.SIZE -> listOf(size, date, duration)

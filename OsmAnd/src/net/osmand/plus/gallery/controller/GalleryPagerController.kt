@@ -23,7 +23,6 @@ class GalleryPagerController(
 		return true
 	}
 
-	/** Single entry point for both Details menu items, so the viewer state is decided in one place. */
 	fun openDetails(activity: FragmentActivity, item: MediaItem) {
 		if (activity.supportFragmentManager.findFragmentByTag(GalleryPhotoPagerFragment.TAG) == null) {
 			autoPlayItemId = null

@@ -10,7 +10,6 @@ import net.osmand.shared.gpx.primitives.Link
 import net.osmand.shared.media.LinkMediaFactory
 import net.osmand.shared.media.domain.MediaItem
 
-/** Storage enumeration and attachment collection run only on the repository executor. */
 class MediaLibraryScanner(private val app: OsmandApplication, private val plugin: AudioVideoNotesPlugin?) {
 	fun scan(): List<MediaLibraryEntry> {
 		val storage = MediaStorageHelper(app)

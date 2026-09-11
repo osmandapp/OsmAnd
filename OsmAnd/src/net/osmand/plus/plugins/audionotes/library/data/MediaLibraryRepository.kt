@@ -16,7 +16,6 @@ import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin
 import net.osmand.shared.media.domain.MediaItem
 import java.util.concurrent.Executors
 
-/** Application-lifetime cache: reopening the tab subscribes to the last scan, without SAF IPC. */
 class MediaLibraryRepository(private val app: OsmandApplication) {
 	private val executor = Executors.newSingleThreadExecutor()
 	private val handler = Handler(Looper.getMainLooper())

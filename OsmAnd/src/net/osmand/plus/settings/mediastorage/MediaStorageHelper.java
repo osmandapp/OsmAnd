@@ -143,11 +143,6 @@ public class MediaStorageHelper {
 		return storageType == MAIN_STORAGE && new File(getLegacyInternalMediaDir(), fileName).exists();
 	}
 
-	/**
-	 * Lists media in both app folders and the active storage's type folders. Call off the UI
-	 * thread: document providers may perform IPC for every entry. An unavailable or revoked
-	 * folder contributes no entries. Listing never creates directories or requests permissions.
-	 */
 	@NonNull
 	public List<MediaSource> listMedia(@NonNull MediaStorageLocation location) {
 		Map<String, MediaSource> sources = new LinkedHashMap<>();

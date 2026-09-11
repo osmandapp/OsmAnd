@@ -12,7 +12,6 @@ object MediaLibraryGrouping {
 			items.filter { it.type == type }.takeIf { it.isNotEmpty() }?.let { Group(type, it) }
 		}
 
-	/** Links have no attachment timestamp; callers supply favorites order, then selected tracks order. */
 	fun <T> lastAttachedName(attachments: List<T>, name: (T) -> String): String? =
 		attachments.lastOrNull()?.let(name)
 }
