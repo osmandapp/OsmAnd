@@ -38,26 +38,33 @@ public class GalleryGridRecyclerView extends RecyclerView {
 	@Override
 	public boolean onTouchEvent(MotionEvent e) {
 		scaleDetector.onTouchEvent(e);
-		if (e.getAction() == MotionEvent.ACTION_UP) {
-			isScaling = false;
-		} else if (e.getAction() == MotionEvent.ACTION_MOVE && isScaling) {
-			return true;
+		if (!isScaling) {
+			return super.onTouchEvent(e);
 		}
-		return super.onTouchEvent(e);
+		switch (e.getActionMasked()) {
+			case MotionEvent.ACTION_CANCEL:
+				return super.onTouchEvent(e);
+			case MotionEvent.ACTION_UP:
+				MotionEvent cancel = MotionEvent.obtain(e);
+				cancel.setAction(MotionEvent.ACTION_CANCEL);
+				try {
+					return super.onTouchEvent(cancel);
+				} finally {
+					cancel.recycle();
+				}
+			default:
+				return true;
+		}
 	}
 
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent e) {
 		scaleDetector.onTouchEvent(e);
-		if (e.getAction() == MotionEvent.ACTION_UP) {
-			isScaling = false;
-		}
 		if (isScaling) {
 			stopScroll();
 			return true;
-		} else {
-			return super.onInterceptTouchEvent(e);
 		}
+		return super.onInterceptTouchEvent(e);
 	}
 
 	@Override
@@ -68,9 +75,11 @@ public class GalleryGridRecyclerView extends RecyclerView {
 		}
 		boolean handled = super.dispatchTouchEvent(e);
 		int action = e.getActionMasked();
-		if ((action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL)
-				&& gestureFinishedListener != null) {
-			gestureFinishedListener.run();
+		if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
+			isScaling = false;
+			if (gestureFinishedListener != null) {
+				gestureFinishedListener.run();
+			}
 		}
 		return handled;
 	}

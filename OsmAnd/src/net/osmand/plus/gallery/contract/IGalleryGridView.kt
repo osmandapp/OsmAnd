@@ -10,7 +10,6 @@ interface IGalleryGridView {
 	fun isNightMode(): Boolean
 	fun isPortrait(): Boolean
 
-	fun updateSpan()
 	fun updateDisplayMode()
 	fun updateToolbar()
 	fun updateItems()

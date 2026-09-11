@@ -20,10 +20,7 @@ interface IGalleryGridController : IGalleryListener, IGalleryActionListener {
 	fun getGalleryItems(): List<GalleryItem>
 	fun getSpanCount(isPortrait: Boolean): Int
 
-	fun onScaleBegin()
-	fun onScaleEnd()
-	fun onScaleChanged(scaleFactor: Float): Boolean
-	fun onPinchGestureFinished() {}
+	fun getSpanBounds(isPortrait: Boolean): IntRange = 2..4
 
 	fun getDisplayMode(): GalleryDisplayMode = GalleryDisplayMode.GRID
 	fun isListModeSupported(): Boolean = false
