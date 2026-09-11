@@ -5320,4 +5320,8 @@
     <string name="shared_string_note">Obs</string>
     <string name="release_5_4">• Uppdaterat sökgränssnitt: sortering, kategorifilter och renare utseende\n\n • Bifoga foton och media till favoriter\n\n • Favoriter: stöd för undergrupper och mappar som kan fästas\n\n • Koordinater: sökning, kartrutnät och POI-visning stöder nu EPSG och Maidenhead-lokator\n\n • Rättade navigeringsavbrott; växla mellan standard- och snabbruttning\n\n • Ställ in Android Autos kartskala separat från telefonens\n\n • Ny rumslig sökning — hitta platser och sök kring en plats\n\n • Astronomi har fått sol- och månförmörkelser</string>
     <string name="astro_eclipse_column_below_horizon">Under horisonten</string>
+    <string name="quick_action_add_track">Lägg till spår</string>
+    <string name="quick_action_tracks_select_descr">Lägg till ett eller flera spår för att med ett enkelt tryck visa eller dölja dem på kartan.</string>
+    <string name="quick_action_all_tracks">Alla spår</string>
+    <string name="quick_action_tracks_always_ask_descr">Tryck på denna snabbåtgärd öppnar listan över spår, där du kan visa eller dölja en eller flera av dem.</string>
 </resources>
