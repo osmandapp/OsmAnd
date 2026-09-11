@@ -225,7 +225,7 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 				removeFromBucket(previous);
 			}
 			AisLatLon position = ais.getPosition();
-			if (position != null && !isOwnObjectHidden(ais)) {
+			if (position != null && !isOwnObjectHidden(ais) && !isHiddenByTypeFilter(ais)) {
 				int x31 = MapUtils.get31TileNumberX(position.getLongitude());
 				int y31 = MapUtils.get31TileNumberY(position.getLatitude());
 				RenderRecord record = new RenderRecord(ais, x31, y31, nextVersion++);
@@ -266,7 +266,7 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 			spatialBuckets.clear();
 			for (AisObject ais : snapshot) {
 				AisLatLon position = ais.getPosition();
-				if (position != null && !isOwnObjectHidden(ais)) {
+				if (position != null && !isOwnObjectHidden(ais) && !isHiddenByTypeFilter(ais)) {
 					int x31 = MapUtils.get31TileNumberX(position.getLongitude());
 					int y31 = MapUtils.get31TileNumberY(position.getLatitude());
 					RenderRecord record = new RenderRecord(ais, x31, y31, nextVersion++);
@@ -303,6 +303,19 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	private boolean isOwnObjectHidden(@NonNull AisObject ais) {
 		return isOwnObject(ais) && !plugin.AIS_DISPLAY_OWN_POSITION.get();
+	}
+
+	private boolean isHiddenByTypeFilter(@NonNull AisObject ais) {
+		boolean isPlane = ais.getObjectClass() == AIS_AIRPLANE;
+		return isPlane ? !plugin.AIS_SHOW_PLANES.get() : !plugin.AIS_SHOW_SHIPS.get();
+	}
+
+	/**
+	 * Call after toggling AIS_SHOW_SHIPS/AIS_SHOW_PLANES so already-indexed objects are
+	 * re-evaluated against the new filter without waiting for the next AIS message per object.
+	 */
+	public void refreshTypeFilter() {
+		refreshOwnObjectVisibility();
 	}
 
 	public void refreshOwnObjectVisibility() {

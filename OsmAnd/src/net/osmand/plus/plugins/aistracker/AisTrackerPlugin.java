@@ -10,9 +10,11 @@ import static net.osmand.plus.settings.fragments.SettingsScreenType.AIS_SETTINGS
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -30,6 +32,13 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.render.RenderingRuleProperty;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -93,6 +102,16 @@ public class AisTrackerPlugin extends OsmandPlugin {
 	public static final Boolean AIS_DISPLAY_OWN_POSITION_DEFAULT = false;
     public final CommonPreference<Boolean> AIS_RECEIVE_IN_BACKGROUND;
     public static final Boolean AIS_RECEIVE_IN_BACKGROUND_DEFAULT = false;
+	public static final String AIS_URL_SOURCES_ID = "ais_url_sources"; // see xml/ais_settings.xml
+	public static final String AIS_SHOW_SHIPS_ID = "ais_show_ships"; // see xml/ais_settings.xml
+	public static final String AIS_SHOW_PLANES_ID = "ais_show_planes"; // see xml/ais_settings.xml
+	public final CommonPreference<String> AIS_URL_SOURCES;
+	public final CommonPreference<Boolean> AIS_SHOW_SHIPS;
+	public final CommonPreference<Boolean> AIS_SHOW_PLANES;
+	// Anonymous OpenSky access is capped at ~400 requests/day; keep this conservative by default
+	// until a user-run aggregator with its own key/limits is configured.
+	private static final long PLANE_POLL_INTERVAL_MS = 60_000L;
+	private Timer planePollTimer;
 
 	/* timestamp of last AIS message received for all instances: */
 	private long lastMessageReceived = 0;
@@ -233,6 +252,9 @@ public class AisTrackerPlugin extends OsmandPlugin {
 		AIS_OWN_MMSI = registerIntPreference(AIS_OWN_MMSI_ID, AIS_DEFAULT_OWN_MMSI);
 		AIS_DISPLAY_OWN_POSITION = registerBooleanPreference(AIS_DISPLAY_OWN_POSITION_ID, AIS_DISPLAY_OWN_POSITION_DEFAULT);
 		AIS_RECEIVE_IN_BACKGROUND = registerBooleanPreference(AIS_RECEIVE_IN_BACKGROUND_ID, AIS_RECEIVE_IN_BACKGROUND_DEFAULT);
+		AIS_URL_SOURCES = registerStringPreference(AIS_URL_SOURCES_ID, "").makeGlobal();
+		AIS_SHOW_SHIPS = registerBooleanPreference(AIS_SHOW_SHIPS_ID, true).makeGlobal();
+		AIS_SHOW_PLANES = registerBooleanPreference(AIS_SHOW_PLANES_ID, true).makeGlobal();
 		AIS_NMEA_IP_ADDRESS.addListener(addrPrefListener);
 		AIS_NMEA_PROTOCOL.addListener(protocolPortPrefListener);
 		AIS_NMEA_TCP_PORT.addListener(protocolPortPrefListener);
@@ -358,6 +380,7 @@ public class AisTrackerPlugin extends OsmandPlugin {
 		if (AIS_RECEIVE_IN_BACKGROUND.get()) {
 			AndroidUtils.requestNotificationPermissionIfNeeded(activity);
 		}
+		startPlanePolling();
 	}
 
 	@Override
@@ -367,6 +390,110 @@ public class AisTrackerPlugin extends OsmandPlugin {
 		} else {
 			updateAisBackgroundService();
 			app.runInUIThread(this::stopAisListenerIfBackgroundServiceFailed, 1500);
+		}
+		stopPlanePolling();
+	}
+
+	@NonNull
+	public List<AisUrlSource> getUrlSources() {
+		return AisUrlSource.parseList(AIS_URL_SOURCES.get());
+	}
+
+	public void addOrUpdateUrlSource(@NonNull AisUrlSource source) {
+		List<AisUrlSource> sources = getUrlSources();
+		boolean replaced = false;
+		for (int i = 0; i < sources.size(); i++) {
+			if (sources.get(i).id.equals(source.id)) {
+				sources.set(i, source);
+				replaced = true;
+				break;
+			}
+		}
+		if (!replaced) {
+			sources.add(source);
+		}
+		AIS_URL_SOURCES.set(AisUrlSource.serializeList(sources));
+		restartPlanePolling();
+	}
+
+	public void removeUrlSource(@NonNull String id) {
+		List<AisUrlSource> sources = getUrlSources();
+		sources.removeIf(source -> source.id.equals(id));
+		AIS_URL_SOURCES.set(AisUrlSource.serializeList(sources));
+		restartPlanePolling();
+	}
+
+	public void setSourceEnabled(@NonNull String id, boolean enabled) {
+		List<AisUrlSource> sources = getUrlSources();
+		for (int i = 0; i < sources.size(); i++) {
+			if (sources.get(i).id.equals(id)) {
+				sources.set(i, sources.get(i).withEnabled(enabled));
+				break;
+			}
+		}
+		AIS_URL_SOURCES.set(AisUrlSource.serializeList(sources));
+		restartPlanePolling();
+		AisTrackerLayer currentLayer = layer;
+		if (currentLayer != null) {
+			currentLayer.refreshTypeFilter();
+		}
+	}
+
+	@NonNull
+	private List<AisUrlSource> getPlaneSources() {
+		List<AisUrlSource> planes = new ArrayList<>();
+		for (AisUrlSource source : getUrlSources()) {
+			if (source.type == AisUrlSource.Type.PLANES && source.enabled) {
+				planes.add(source);
+			}
+		}
+		return planes;
+	}
+
+	public void feedExternalAisObject(@NonNull AisObject ais) {
+		aisDataManager.onAisObjectReceived(ais);
+	}
+
+	public void restartPlanePolling() {
+		stopPlanePolling();
+		startPlanePolling();
+	}
+
+	private void startPlanePolling() {
+		stopPlanePolling();
+		if (getPlaneSources().isEmpty()) {
+			return;
+		}
+		planePollTimer = new Timer();
+		planePollTimer.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				pollPlaneSources();
+			}
+		}, 0, PLANE_POLL_INTERVAL_MS);
+	}
+
+	private void stopPlanePolling() {
+		if (planePollTimer != null) {
+			planePollTimer.cancel();
+			planePollTimer = null;
+		}
+	}
+
+	private void pollPlaneSources() {
+		if (!AIS_SHOW_PLANES.get()) {
+			return;
+		}
+		List<AisObject> received = new ArrayList<>();
+		for (AisUrlSource source : getPlaneSources()) {
+			received.addAll(AisPlaneDataFetcher.fetchOpenSkyCompatible(app, source.url));
+		}
+		if (!received.isEmpty()) {
+			app.runInUIThread(() -> {
+				for (AisObject ais : received) {
+					feedExternalAisObject(ais);
+				}
+			});
 		}
 	}
 
@@ -408,6 +535,89 @@ public class AisTrackerPlugin extends OsmandPlugin {
 	@Nullable
 	public AisTrackerLayer getLayer() {
 		return layer;
+	}
+
+	@Override
+	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter,
+	                                               @NonNull MapActivity mapActivity,
+	                                               List<RenderingRuleProperty> customRules) {
+		if (!isEnabled()) {
+			return;
+		}
+		addTypeToggleItem(adapter, mapActivity, AISTRACKER_ID + ".show_ships",
+				R.string.ais_show_ships, R.drawable.mm_sport_sailing, AIS_SHOW_SHIPS);
+		addTypeToggleItem(adapter, mapActivity, AISTRACKER_ID + ".show_planes",
+				R.string.ais_show_planes, R.drawable.ic_action_aircraft, AIS_SHOW_PLANES);
+		if (!getUrlSources().isEmpty()) {
+			addSourcesPickerItem(adapter, mapActivity);
+		}
+	}
+
+	private void addSourcesPickerItem(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity) {
+		OnRowItemClick listener = new OnRowItemClick() {
+			@Override
+			public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter,
+			                              @NonNull View view, @NonNull ContextMenuItem item) {
+				showSourcesPickerDialog(mapActivity);
+				return false;
+			}
+
+			@Override
+			public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter, @Nullable View view,
+			                                  @NonNull ContextMenuItem item, boolean isChecked) {
+				return false;
+			}
+		};
+		adapter.addItem(new ContextMenuItem(AISTRACKER_ID + ".sources_picker")
+				.setTitleId(R.string.ais_url_sources, mapActivity)
+				.setIcon(R.drawable.ic_action_layers)
+				.setListener(listener));
+	}
+
+	private void showSourcesPickerDialog(@NonNull MapActivity mapActivity) {
+		List<AisUrlSource> sources = getUrlSources();
+		CharSequence[] items = new CharSequence[sources.size()];
+		boolean[] checked = new boolean[sources.size()];
+		for (int i = 0; i < sources.size(); i++) {
+			AisUrlSource source = sources.get(i);
+			items[i] = source.name + " (" + source.type.name().toLowerCase() + ")";
+			checked[i] = source.enabled;
+		}
+		Context themedContext = UiUtilities.getThemedContext(mapActivity, mapActivity.isNightMode());
+		new AlertDialog.Builder(themedContext)
+				.setTitle(R.string.ais_url_sources)
+				.setMultiChoiceItems(items, checked, (dialog, which, isChecked) ->
+						setSourceEnabled(sources.get(which).id, isChecked))
+				.setPositiveButton(R.string.shared_string_ok, null)
+				.show();
+	}
+
+	private void addTypeToggleItem(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity,
+	                               @NonNull String id, int titleId, int iconId,
+	                               @NonNull CommonPreference<Boolean> pref) {
+		ItemClickListener listener = new ItemClickListener() {
+			@Override
+			public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter, @Nullable View view,
+			                                  @NonNull ContextMenuItem item, boolean isChecked) {
+				pref.set(!pref.get());
+				AisTrackerLayer currentLayer = layer;
+				if (currentLayer != null) {
+					currentLayer.refreshTypeFilter();
+				}
+				item.setSelected(pref.get());
+				item.setColor(app, pref.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+				if (uiAdapter != null) {
+					uiAdapter.onDataSetChanged();
+				}
+				return false;
+			}
+		};
+		adapter.addItem(new ContextMenuItem(id)
+				.setTitleId(titleId, mapActivity)
+				.setSelected(pref.get())
+				.setColor(app, pref.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+				.setIcon(iconId)
+				.setListener(listener));
 	}
 
 	public void onAisObjectReceived(@NonNull AisObject ais) {

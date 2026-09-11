@@ -681,6 +681,13 @@
     <string name="ais_cpa_warning_time_description">If the TCPA (Time to Closest Point of Approach) with another vessel falls below the defined threshold, the vessel is highlighted in red.</string>
     <string name="ais_cpa_warning_distance">Warning distance for the Closes Point of Approach (CPA)</string>
     <string name="ais_cpa_warning_distance_description">Vessels are highlighted in red if the CPA (Closest Point of Approach) is below the defined threshold and the TCPA (Time to CPA) falls within the warning time set in the \'Warning time to reach the CPA\' setting.</string>
+    <string name="ais_url_sources">Online data sources (URL)</string>
+    <string name="ais_url_sources_description">Add a named URL source per data type (planes or ships), the same way you add an online routing engine. Only PLANES sources (OpenSky-compatible JSON) are fetched so far.</string>
+    <string name="ais_add_url_source">Add source</string>
+    <string name="ais_show_ships">Show ships</string>
+    <string name="ais_show_ships_description">Show vessels received over NMEA or from a SHIPS source.</string>
+    <string name="ais_show_planes">Show planes</string>
+    <string name="ais_show_planes_description">Show aircraft received from a PLANES source.</string>
     <string name="plugin_ais_tracker_name">AIS vessel tracker</string>
     <string name="plugin_ais_tracker_description">Displays AIS positions and information about nearby vessels. AIS data is received over the network from an external AIS receiver.</string>
     <string name="plugin_ais_tracker_disclaimer">DISCLAIMER\n\nThis plugin is a hobby project and is not intended for use in critical applications. It does not guarantee reliability or accuracy. Do not rely on this software for navigation, safety of life, or any other essential operations.</string>
