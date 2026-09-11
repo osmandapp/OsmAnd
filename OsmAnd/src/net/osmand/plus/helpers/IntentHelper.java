@@ -150,7 +150,8 @@ public class IntentHelper {
 	}
 
 	public boolean parseLaunchIntents() {
-		return parseNavigationIntent()
+		return parseGeoActionIntent()
+				|| parseNavigationIntent()
 				|| parseBackupAuthorizationIntent()
 				|| parseSetPinOnMapIntent()
 				|| parseMoveMapToLocationIntent()
@@ -160,6 +161,22 @@ public class IntentHelper {
 				|| parseOpenGpxIntent()
 				|| parseSendIntent()
 				|| parseOAuthIntent();
+	}
+
+	public boolean parseGeoActionIntent() {
+		Intent intent = mapActivity.getIntent();
+		if (intent != null && intent.getData() != null) {
+			Uri uri = intent.getData();
+			if (GeoActionHelper.isGeoActionUri(uri)) {
+				String action = GeoActionHelper.parseAction(uri);
+				if (!action.isEmpty()) {
+					GeoActionHelper.executeAction(app, action, mapActivity);
+				}
+				clearIntent(intent);
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private boolean parseNavigationIntent() {
