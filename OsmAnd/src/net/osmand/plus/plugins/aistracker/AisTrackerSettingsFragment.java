@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -125,17 +126,12 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
 	private void showTemplatePickerDialog() {
 		List<AisUrlSourceTemplate> templates = AisUrlSourceTemplate.all();
 		Context themedContext = UiUtilities.getThemedContext(getActivity(), isNightMode());
-		// two-line rows so the cost/access note is visible while picking, not after
 		ArrayAdapter<AisUrlSourceTemplate> adapter = new ArrayAdapter<>(themedContext,
 				android.R.layout.simple_list_item_2, android.R.id.text1, templates) {
 			@NonNull
 			@Override
 			public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-				View view = super.getView(position, convertView, parent);
-				AisUrlSourceTemplate template = templates.get(position);
-				((TextView) view.findViewById(android.R.id.text1)).setText(template.displayName);
-				((TextView) view.findViewById(android.R.id.text2)).setText(template.note);
-				return view;
+				return createTemplateRow(templates.get(position));
 			}
 		};
 		new AlertDialog.Builder(themedContext)
@@ -143,6 +139,54 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
 				.setAdapter(adapter, (dialog, which) -> showSourceDialog(templates.get(which), null))
 				.setNegativeButton(R.string.shared_string_cancel, null)
 				.show();
+	}
+
+	/**
+	 * Name plus access note, with an info button opening the project page. The row itself stays
+	 * unfocusable so tapping anywhere else still selects the template.
+	 */
+	@NonNull
+	private View createTemplateRow(@NonNull AisUrlSourceTemplate template) {
+		Context themedContext = UiUtilities.getThemedContext(getActivity(), isNightMode());
+		float density = getResources().getDisplayMetrics().density;
+		int padding = (int) (16 * density);
+
+		LinearLayout row = new LinearLayout(themedContext);
+		row.setOrientation(LinearLayout.HORIZONTAL);
+		row.setGravity(Gravity.CENTER_VERTICAL);
+		row.setPadding(padding, padding / 2, padding / 2, padding / 2);
+		row.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
+
+		LinearLayout textColumn = new LinearLayout(themedContext);
+		textColumn.setOrientation(LinearLayout.VERTICAL);
+		textColumn.setLayoutParams(new LinearLayout.LayoutParams(0,
+				ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
+
+		TextView title = new TextView(themedContext);
+		title.setText(template.displayName);
+		title.setTextColor(ColorUtilities.getPrimaryTextColor(app, isNightMode()));
+		textColumn.addView(title);
+
+		TextView note = new TextView(themedContext);
+		note.setText(template.note);
+		note.setTextColor(ColorUtilities.getSecondaryTextColor(app, isNightMode()));
+		note.setTextSize(12);
+		textColumn.addView(note);
+		row.addView(textColumn);
+
+		if (template.projectUrl != null) {
+			ImageView infoButton = new ImageView(themedContext);
+			infoButton.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_info_dark,
+					ColorUtilities.getLinksColorId(isNightMode())));
+			infoButton.setContentDescription(template.projectUrl);
+			infoButton.setPadding(padding / 2, padding / 2, padding / 2, padding / 2);
+			infoButton.setFocusable(false);
+			infoButton.setClickable(true);
+			infoButton.setOnClickListener(v ->
+					AndroidUtils.openUrl(requireActivity(), template.projectUrl, isNightMode()));
+			row.addView(infoButton);
+		}
+		return row;
 	}
 
 	private void showSourceDialog(@Nullable AisUrlSourceTemplate template, @Nullable AisUrlSource existing) {
