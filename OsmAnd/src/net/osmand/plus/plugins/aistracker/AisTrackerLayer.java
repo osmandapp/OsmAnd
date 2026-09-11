@@ -85,6 +85,7 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 	private static final long RENDER_UPDATE_INTERVAL_MS = 200;
 	private static final double ZOOM_EPSILON = 0.02;
 	private static final boolean SHOW_RENDER_LOGS = false;
+	private static final long PLANE_LOG_INTERVAL_MS = 5000;
 
 	private final AisTrackerPlugin plugin = PluginsHelper.requirePlugin(AisTrackerPlugin.class);
 	private final Paint bitmapPaint = new Paint();
@@ -105,6 +106,7 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 	private boolean refreshScheduled;
 	private long nextVersion = 1;
 	private long lastRenderTimeMs;
+	private long lastPlaneLogTimeMs;
 	private ViewportSignature lastViewport;
 	private Integer selectedMmsi;
 	private int peakDrawableCount;
@@ -303,6 +305,39 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	private boolean isOwnObjectHidden(@NonNull AisObject ais) {
 		return isOwnObject(ais) && !plugin.AIS_DISPLAY_OWN_POSITION.get();
+	}
+
+	/**
+	 * Why aircraft are or are not on screen: how many are indexed, how many the current viewport
+	 * actually draws, and whether the zoom is below the threshold that suppresses them entirely.
+	 * Throttled, since reconcile() runs several times a second while the map moves.
+	 */
+	private void logPlaneVisibility(@NonNull RotatedTileBox tileBox) {
+		long now = SystemClock.elapsedRealtime();
+		if (now - lastPlaneLogTimeMs < PLANE_LOG_INTERVAL_MS) {
+			return;
+		}
+		lastPlaneLogTimeMs = now;
+		int indexedPlanes = 0;
+		synchronized (indexLock) {
+			for (RenderRecord record : objectRecords.values()) {
+				if (record.object.getObjectClass() == AIS_AIRPLANE) {
+					indexedPlanes++;
+				}
+			}
+		}
+		int renderedPlanes = 0;
+		for (RenderRecord record : renderedRecords.values()) {
+			if (record.object.getObjectClass() == AIS_AIRPLANE) {
+				renderedPlanes++;
+			}
+		}
+		int zoom = tileBox.getZoom();
+		// fully qualified: this class already imports commons-logging Log for its own LOG field
+		android.util.Log.d(AisPlaneDataFetcher.TAG, "layer: " + indexedPlanes + " aircraft indexed, "
+				+ renderedPlanes + " drawn, zoom " + zoom
+				+ (zoom < START_ZOOM ? " (below minimum " + START_ZOOM + ", aircraft are hidden)" : "")
+				+ ", 'Show planes' " + (plugin.AIS_SHOW_PLANES.get() ? "on" : "OFF"));
 	}
 
 	private boolean isHiddenByTypeFilter(@NonNull AisObject ais) {
@@ -773,6 +808,7 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 			}
 		}
 		renderedRecords = new LinkedHashMap<>(selection.desired);
+		logPlaneVisibility(tileBox);
 		peakDrawableCount = Math.max(peakDrawableCount, objectDrawables.size());
 
 		showLog(selection, actualDesired, previous);

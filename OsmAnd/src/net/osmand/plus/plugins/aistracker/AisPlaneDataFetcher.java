@@ -1,22 +1,23 @@
 package net.osmand.plus.plugins.aistracker;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.PlatformUtil;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.shared.aistracker.AisObject;
 import net.osmand.util.Algorithms;
 
-import org.apache.commons.logging.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URI;
@@ -41,7 +42,10 @@ import java.util.List;
  */
 public class AisPlaneDataFetcher {
 
-	private static final Log LOG = PlatformUtil.getLog(AisPlaneDataFetcher.class);
+	/** Shared with AisTrackerPlugin so the whole plane pipeline reads as one log: adb logcat -s AisPlanes */
+	public static final String TAG = "AisPlanes";
+
+	private static final int LOGGED_BODY_LIMIT = 700;
 
 	// net.osmand.shared.aistracker.AisObjectConstants values, duplicated here to avoid
 	// Kotlin-object interop from Java for a handful of constants.
@@ -64,13 +68,17 @@ public class AisPlaneDataFetcher {
 	public static List<AisObject> fetch(@NonNull OsmandApplication app, @NonNull AisUrlSource source) {
 		String response = request(app, source);
 		if (Algorithms.isEmpty(response)) {
+			Log.d(TAG, "'" + source.name + "': empty response, nothing to parse");
 			return new ArrayList<>();
 		}
 		try {
 			JSONObject root = new JSONObject(response);
 			JSONArray states = root.optJSONArray("states");
 			if (states != null) {
-				return parseOpenSky(states);
+				List<AisObject> parsed = parseOpenSky(states);
+				Log.d(TAG, "'" + source.name + "': OpenSky format, " + states.length()
+						+ " states -> " + parsed.size() + " aircraft with a position");
+				return parsed;
 			}
 			// same payload, different wrapper key depending on the service
 			JSONArray aircraft = root.optJSONArray("ac");
@@ -78,13 +86,29 @@ public class AisPlaneDataFetcher {
 				aircraft = root.optJSONArray("aircraft");
 			}
 			if (aircraft != null) {
-				return parseAdsb(aircraft);
+				List<AisObject> parsed = parseAdsb(aircraft);
+				Log.d(TAG, "'" + source.name + "': ADS-B format, " + aircraft.length()
+						+ " entries -> " + parsed.size() + " aircraft with a position");
+				return parsed;
 			}
-			LOG.warn("Unrecognised plane source response for " + source.name);
+			Log.w(TAG, "'" + source.name + "': unrecognised response, no 'states'/'ac'/'aircraft' key."
+					+ " Keys: " + root.keys() + ", body: " + shorten(response));
 		} catch (JSONException e) {
-			LOG.warn("Failed to parse plane source response for " + source.name, e);
+			Log.w(TAG, "'" + source.name + "': response is not JSON: " + shorten(response), e);
 		}
 		return new ArrayList<>();
+	}
+
+	@NonNull
+	private static String shorten(@NonNull String body) {
+		return body.length() <= LOGGED_BODY_LIMIT ? body
+				: body.substring(0, LOGGED_BODY_LIMIT) + "... (" + body.length() + " chars)";
+	}
+
+	/** Never log the credential itself. */
+	@NonNull
+	private static String hideKey(@NonNull String url, @NonNull String apiKey) {
+		return Algorithms.isEmpty(apiKey) ? url : url.replace(apiKey, "***");
 	}
 
 	@Nullable
@@ -92,7 +116,9 @@ public class AisPlaneDataFetcher {
 		String url = source.url.contains(API_KEY_PLACEHOLDER)
 				? source.url.replace(API_KEY_PLACEHOLDER, source.apiKey)
 				: source.url;
+		String loggedUrl = hideKey(url, source.apiKey);
 		HttpURLConnection connection = null;
+		long started = System.currentTimeMillis();
 		try {
 			connection = NetworkUtils.getHttpURLConnection(url);
 			connection.setRequestMethod("GET");
@@ -103,33 +129,47 @@ public class AisPlaneDataFetcher {
 			// RapidAPI-hosted services (ADS-B Exchange among them) expect the key as a header
 			// rather than a query parameter.
 			String rapidApiHost = getRapidApiHost(url);
-			if (rapidApiHost != null && !Algorithms.isEmpty(source.apiKey)) {
+			boolean rapidApiAuth = rapidApiHost != null && !Algorithms.isEmpty(source.apiKey);
+			if (rapidApiAuth) {
 				connection.setRequestProperty("X-RapidAPI-Key", source.apiKey);
 				connection.setRequestProperty("X-RapidAPI-Host", rapidApiHost);
 			}
+			Log.d(TAG, "GET '" + source.name + "' " + loggedUrl
+					+ " (key " + (Algorithms.isEmpty(source.apiKey) ? "not set" : "set")
+					+ (rapidApiAuth ? ", sent as RapidAPI header" : "") + ")");
 			connection.connect();
-			if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
-				LOG.warn("Plane source " + source.name + " responded "
-						+ connection.getResponseCode() + " " + connection.getResponseMessage());
+			int responseCode = connection.getResponseCode();
+			if (responseCode != HttpURLConnection.HTTP_OK) {
+				String error = connection.getErrorStream() != null
+						? shorten(readStream(connection.getErrorStream())) : "";
+				Log.w(TAG, "'" + source.name + "' responded " + responseCode + " "
+						+ connection.getResponseMessage() + " " + error);
 				return null;
 			}
-			StringBuilder builder = new StringBuilder();
-			try (BufferedReader reader = new BufferedReader(
-					new InputStreamReader(connection.getInputStream(), "UTF-8"))) {
-				String line;
-				while ((line = reader.readLine()) != null) {
-					builder.append(line);
-				}
-			}
-			return builder.toString();
+			String body = readStream(connection.getInputStream());
+			Log.d(TAG, "'" + source.name + "' responded " + responseCode + ", " + body.length()
+					+ " chars in " + (System.currentTimeMillis() - started) + " ms: " + shorten(body));
+			return body;
 		} catch (IOException e) {
-			LOG.warn("Failed to read plane source " + source.name, e);
+			Log.w(TAG, "'" + source.name + "' request failed: " + loggedUrl, e);
 			return null;
 		} finally {
 			if (connection != null) {
 				connection.disconnect();
 			}
 		}
+	}
+
+	@NonNull
+	private static String readStream(@NonNull InputStream stream) throws IOException {
+		StringBuilder builder = new StringBuilder();
+		try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream, "UTF-8"))) {
+			String line;
+			while ((line = reader.readLine()) != null) {
+				builder.append(line);
+			}
+		}
+		return builder.toString();
 	}
 
 	@Nullable

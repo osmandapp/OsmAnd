@@ -461,9 +461,15 @@ public class AisTrackerPlugin extends OsmandPlugin {
 
 	private void startPlanePolling() {
 		stopPlanePolling();
-		if (getPlaneSources().isEmpty()) {
+		List<AisUrlSource> sources = getPlaneSources();
+		if (sources.isEmpty()) {
+			int configured = getUrlSources().size();
+			Log.d(AisPlaneDataFetcher.TAG, "polling not started: no enabled PLANES source ("
+					+ configured + " source(s) configured in total)");
 			return;
 		}
+		Log.d(AisPlaneDataFetcher.TAG, "polling started for " + sources.size()
+				+ " source(s) every " + PLANE_POLL_INTERVAL_MS / 1000 + " s");
 		planePollTimer = new Timer();
 		planePollTimer.schedule(new TimerTask() {
 			@Override
@@ -482,19 +488,29 @@ public class AisTrackerPlugin extends OsmandPlugin {
 
 	private void pollPlaneSources() {
 		if (!AIS_SHOW_PLANES.get()) {
+			Log.d(AisPlaneDataFetcher.TAG, "poll skipped: 'Show planes' is off");
+			return;
+		}
+		if (!isActive()) {
+			Log.d(AisPlaneDataFetcher.TAG, "poll skipped: plugin is not active");
 			return;
 		}
 		List<AisObject> received = new ArrayList<>();
 		for (AisUrlSource source : getPlaneSources()) {
 			received.addAll(AisPlaneDataFetcher.fetch(app, source));
 		}
-		if (!received.isEmpty()) {
-			app.runInUIThread(() -> {
-				for (AisObject ais : received) {
-					feedExternalAisObject(ais);
-				}
-			});
+		if (received.isEmpty()) {
+			Log.d(AisPlaneDataFetcher.TAG, "poll finished: no aircraft received");
+			return;
 		}
+		app.runInUIThread(() -> {
+			for (AisObject ais : received) {
+				feedExternalAisObject(ais);
+			}
+			Log.d(AisPlaneDataFetcher.TAG, "fed " + received.size() + " aircraft to the layer; "
+					+ "tracked objects now: " + getAisObjects().size()
+					+ ", layer " + (layer == null ? "NOT attached (nothing will be drawn)" : "attached"));
+		});
 	}
 
 	@Override
