@@ -35,30 +35,41 @@ public class AisUrlSource {
 	public final String name;
 	@NonNull
 	public final String url;
+	/**
+	 * Optional credential. Substituted into {@link #url} in place of {@code {API_KEY}} when the
+	 * URL carries that placeholder, otherwise sent as a header for hosts that expect one
+	 * (see AisPlaneDataFetcher). May be empty - sources that need no key still work.
+	 */
+	@NonNull
+	public final String apiKey;
 	/** Per-source visibility, toggled from the "AIS sources" picker in Configure Map. */
 	public final boolean enabled;
 
-	public AisUrlSource(@NonNull String id, @NonNull Type type, @NonNull String name, @NonNull String url, boolean enabled) {
+	public AisUrlSource(@NonNull String id, @NonNull Type type, @NonNull String name,
+	                     @NonNull String url, @NonNull String apiKey, boolean enabled) {
 		this.id = id;
 		this.type = type;
 		this.name = name;
 		this.url = url;
+		this.apiKey = apiKey;
 		this.enabled = enabled;
 	}
 
 	@NonNull
-	public static AisUrlSource create(@NonNull Type type, @NonNull String name, @NonNull String url) {
-		return new AisUrlSource(UUID.randomUUID().toString(), type, name, url, true);
+	public static AisUrlSource create(@NonNull Type type, @NonNull String name, @NonNull String url,
+	                                   @NonNull String apiKey) {
+		return new AisUrlSource(UUID.randomUUID().toString(), type, name, url, apiKey, true);
 	}
 
 	@NonNull
-	public AisUrlSource withValues(@NonNull Type type, @NonNull String name, @NonNull String url) {
-		return new AisUrlSource(id, type, name, url, enabled);
+	public AisUrlSource withValues(@NonNull Type type, @NonNull String name, @NonNull String url,
+	                                @NonNull String apiKey) {
+		return new AisUrlSource(id, type, name, url, apiKey, enabled);
 	}
 
 	@NonNull
 	public AisUrlSource withEnabled(boolean enabled) {
-		return new AisUrlSource(id, type, name, url, enabled);
+		return new AisUrlSource(id, type, name, url, apiKey, enabled);
 	}
 
 	@NonNull
@@ -68,6 +79,7 @@ public class AisUrlSource {
 		json.put("type", type.name());
 		json.put("name", name);
 		json.put("url", url);
+		json.put("apiKey", apiKey);
 		json.put("enabled", enabled);
 		return json;
 	}
@@ -78,6 +90,7 @@ public class AisUrlSource {
 		String typeStr = json.optString("type", "");
 		String name = json.optString("name", "");
 		String url = json.optString("url", "");
+		String apiKey = json.optString("apiKey", "");
 		boolean enabled = json.optBoolean("enabled", true);
 		if (Algorithms.isEmpty(id) || Algorithms.isEmpty(name) || Algorithms.isEmpty(url)) {
 			return null;
@@ -88,7 +101,7 @@ public class AisUrlSource {
 		} catch (IllegalArgumentException e) {
 			return null;
 		}
-		return new AisUrlSource(id, type, name, url, enabled);
+		return new AisUrlSource(id, type, name, url, apiKey, enabled);
 	}
 
 	@NonNull

@@ -150,12 +150,11 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
 		urlInput.setText(existing != null ? existing.url : template != null ? template.urlTemplate : "");
 		layout.addView(urlInput);
 
-		EditText apiKeyInput = null;
-		if (existing == null && template != null && template.apiKeyLabel != null) {
-			apiKeyInput = new EditText(themedContext);
-			apiKeyInput.setHint(template.apiKeyLabel);
-			layout.addView(apiKeyInput);
-		}
+		EditText apiKeyInput = new EditText(themedContext);
+		apiKeyInput.setHint(template != null && template.apiKeyLabel != null
+				? template.apiKeyLabel : getString(R.string.ais_source_api_key));
+		apiKeyInput.setText(existing != null ? existing.apiKey : "");
+		layout.addView(apiKeyInput);
 
 		RadioGroup typeGroup = new RadioGroup(themedContext);
 		typeGroup.setOrientation(RadioGroup.HORIZONTAL);
@@ -174,27 +173,23 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
 		shipsButton.setChecked(currentType == AisUrlSource.Type.SHIPS);
 		layout.addView(typeGroup);
 
-		final EditText finalApiKeyInput = apiKeyInput;
 		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext)
 				.setTitle(existing != null ? R.string.shared_string_edit : R.string.ais_add_url_source)
 				.setView(layout)
 				.setPositiveButton(R.string.shared_string_save, (dialog, which) -> {
 					String name = nameInput.getText().toString().trim();
 					String url = urlInput.getText().toString().trim();
-					if (finalApiKeyInput != null) {
-						// leaving the key blank must still produce a usable URL (e.g. a
-						// source that works anonymously, or one edited by hand afterwards)
-						String key = finalApiKeyInput.getText().toString().trim();
-						url = url.replace("{API_KEY}", key);
-					}
+					// the key stays editable on the source instead of being baked into the URL;
+					// leaving it blank is fine, sources that need no key still work
+					String apiKey = apiKeyInput.getText().toString().trim();
 					if (name.isEmpty() || url.isEmpty()) {
 						return;
 					}
 					AisUrlSource.Type type = shipsButton.isChecked()
 							? AisUrlSource.Type.SHIPS : AisUrlSource.Type.PLANES;
 					AisUrlSource toSave = existing != null
-							? existing.withValues(type, name, url)
-							: AisUrlSource.create(type, name, url);
+							? existing.withValues(type, name, url, apiKey)
+							: AisUrlSource.create(type, name, url, apiKey);
 					plugin.addOrUpdateUrlSource(toSave);
 					refreshUrlSourcesList();
 				})

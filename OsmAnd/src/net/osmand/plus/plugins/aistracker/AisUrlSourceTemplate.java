@@ -19,8 +19,9 @@ public class AisUrlSourceTemplate {
 	public final AisUrlSource.Type type;
 	@NonNull
 	public final String urlTemplate;
-	/** Null when the template needs no key; otherwise the label for an extra "key" input whose
-	 * value replaces {@code {API_KEY}} in {@link #urlTemplate} before the source is saved. */
+	/** Label for the key input, or null when this source needs no key. The value is stored on the
+	 * source and applied at request time - substituted into the URL when it carries
+	 * {@code {API_KEY}}, sent as a header otherwise (see AisPlaneDataFetcher). */
 	@Nullable
 	public final String apiKeyLabel;
 	@NonNull
@@ -53,6 +54,21 @@ public class AisUrlSourceTemplate {
 						null,
 						"No key needed, but a global query costs more of the daily anonymous quota "
 								+ "per request than a bounding-box one - prefer the bounding-box template."),
+				new AisUrlSourceTemplate(
+						"ADS-B Exchange (RapidAPI key)",
+						AisUrlSource.Type.PLANES,
+						"https://adsbexchange-com1.p.rapidapi.com/v2/lat/50.45/lon/30.52/dist/250/",
+						"RapidAPI key",
+						"Needs a RapidAPI subscription key, sent as a header. Edit lat/lon/dist in "
+								+ "the URL below to your area (dist is in nautical miles)."),
+				new AisUrlSourceTemplate(
+						"airplanes.live (free, no key)",
+						AisUrlSource.Type.PLANES,
+						"https://api.airplanes.live/v2/point/50.45/30.52/250",
+						null,
+						"Community ADS-B feed in the same format as ADS-B Exchange, no key needed. "
+								+ "Edit lat/lon/radius in the URL below (radius is in nautical miles, "
+								+ "max 250)."),
 				new AisUrlSourceTemplate(
 						"Private aggregator (key in URL)",
 						AisUrlSource.Type.PLANES,

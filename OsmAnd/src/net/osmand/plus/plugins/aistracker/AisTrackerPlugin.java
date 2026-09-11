@@ -486,7 +486,7 @@ public class AisTrackerPlugin extends OsmandPlugin {
 		}
 		List<AisObject> received = new ArrayList<>();
 		for (AisUrlSource source : getPlaneSources()) {
-			received.addAll(AisPlaneDataFetcher.fetchOpenSkyCompatible(app, source.url));
+			received.addAll(AisPlaneDataFetcher.fetch(app, source));
 		}
 		if (!received.isEmpty()) {
 			app.runInUIThread(() -> {
