@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.aistracker;
 
+import static net.osmand.shared.aistracker.AisObjectConstants.INVALID_ALTITUDE;
 import static net.osmand.shared.aistracker.AisObjectConstants.INVALID_COG;
 import static net.osmand.shared.aistracker.AisObjectConstants.INVALID_HEADING;
 
@@ -108,13 +109,23 @@ public class AisObjectDrawable {
 		return renderKey != null && !renderKey.equals(getCurrentRenderKey());
 	}
 
+	/** Aircraft are drawn a fifth smaller than vessels, and without the halo/outline the shared
+	 * AIS icon carries, so a dense sky stays readable. */
+	private static final float PLANE_ICON_SCALE = 0.8f;
+	private static final int PLANE_ALTITUDE_MID = 5000;
+	private static final int PLANE_ALTITUDE_HIGH = 12000;
+	private static final int PLANE_COLOR_GROUND = Color.rgb(0x9E, 0x9E, 0x9E);
+	private static final int PLANE_COLOR_LOW = Color.rgb(0x2E, 0xCC, 0x40);
+	private static final int PLANE_COLOR_MID = Color.rgb(0xFF, 0xDC, 0x00);
+	private static final int PLANE_COLOR_HIGH = Color.rgb(0xE5, 0x39, 0x35);
+
 	public static int selectBitmap(@NonNull AisObjType type) {
 		return switch (type) {
 			case AIS_VESSEL, AIS_VESSEL_SPORT, AIS_VESSEL_FAST, AIS_VESSEL_PASSENGER,
 				 AIS_VESSEL_FREIGHT, AIS_VESSEL_COMMERCIAL, AIS_VESSEL_AUTHORITIES, AIS_VESSEL_SAR,
 				 AIS_VESSEL_OTHER, AIS_INVALID -> R.drawable.mm_ais_vessel;
 			case AIS_LANDSTATION -> R.drawable.mm_ais_land;
-			case AIS_AIRPLANE -> R.drawable.mm_ais_plane;
+			case AIS_AIRPLANE -> R.drawable.ic_ais_plane_plain;
 			case AIS_SART -> R.drawable.mm_ais_sar;
 			case AIS_ATON -> R.drawable.mm_ais_aton;
 			case AIS_ATON_VIRTUAL -> R.drawable.mm_ais_aton_virt;
@@ -161,20 +172,51 @@ public class AisObjectDrawable {
 	}
 
 	private void prepareBitmap() {
+		boolean plane = ais.getObjectClass() == AisObjType.AIS_AIRPLANE && visualState != 2;
 		if (visualState == 1) {
 			bitmap = null;
 		} else {
 			bitmap = imagesCache.getBitmap(visualState == 2
-					? R.drawable.mm_ais_vessel_cross
-					: selectBitmap(ais.getObjectClass()));
+							? R.drawable.mm_ais_vessel_cross
+							: selectBitmap(ais.getObjectClass()),
+					plane ? PLANE_ICON_SCALE : 1f);
 		}
 		if (ownObject) {
 			bitmapColor = Color.BLACK;
 		} else if (visualState == 2) {
 			bitmapColor = 0;
+		} else if (plane) {
+			bitmapColor = selectAltitudeColor(ais.getAltitude());
 		} else {
 			bitmapColor = selectColor(ais.getObjectClass());
 		}
+	}
+
+	/**
+	 * Aircraft are told apart by how high they are: grey on the ground (or with no altitude
+	 * reported), then green near the ground through yellow at cruising climb to red high up.
+	 *
+	 * @param altitude metres above sea level, 0 meaning on the ground
+	 */
+	public static int selectAltitudeColor(int altitude) {
+		if (altitude == INVALID_ALTITUDE || altitude <= 0) {
+			return PLANE_COLOR_GROUND;
+		}
+		if (altitude >= PLANE_ALTITUDE_HIGH) {
+			return PLANE_COLOR_HIGH;
+		}
+		return altitude < PLANE_ALTITUDE_MID
+				? blend(PLANE_COLOR_LOW, PLANE_COLOR_MID, (float) altitude / PLANE_ALTITUDE_MID)
+				: blend(PLANE_COLOR_MID, PLANE_COLOR_HIGH,
+				(float) (altitude - PLANE_ALTITUDE_MID) / (PLANE_ALTITUDE_HIGH - PLANE_ALTITUDE_MID));
+	}
+
+	private static int blend(int from, int to, float ratio) {
+		float r = Math.max(0, Math.min(1, ratio));
+		return Color.rgb(
+				Math.round(Color.red(from) + (Color.red(to) - Color.red(from)) * r),
+				Math.round(Color.green(from) + (Color.green(to) - Color.green(from)) * r),
+				Math.round(Color.blue(from) + (Color.blue(to) - Color.blue(from)) * r));
 	}
 
 	private void updatePaint(@NonNull Paint paint, boolean cpaWarning) {

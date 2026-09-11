@@ -1,0 +1,11 @@
+<!-- Aircraft silhouette without the halo and outline of mm_ais_plane, in white so the layer can
+     tint it by altitude. Same 48dp viewport, so rotation and anchoring stay unchanged. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+  <path
+      android:pathData="M24,8C25.1046,8 26,8.8954 26,10V17.25L40,26V30L26,24.75V33.5L32,38V40L24,38L16,40V38L22,33.5V24.75L8,30V26L22,17.25V10C22,8.8954 22.8954,8 24,8Z"
+      android:fillColor="#ffffff"/>
+</vector>

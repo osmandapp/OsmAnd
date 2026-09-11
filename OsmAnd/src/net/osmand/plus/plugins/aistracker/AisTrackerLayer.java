@@ -56,6 +56,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -86,6 +87,8 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 	private static final double ZOOM_EPSILON = 0.02;
 	private static final boolean SHOW_RENDER_LOGS = false;
 	private static final long PLANE_LOG_INTERVAL_MS = 5000;
+	// aircraft icons are drawn a fifth smaller, so their touch target follows suit
+	private static final float PLANE_FOOTPRINT_FACTOR = 0.8f;
 
 	private final AisTrackerPlugin plugin = PluginsHelper.requirePlugin(AisTrackerPlugin.class);
 	private final Paint bitmapPaint = new Paint();
@@ -462,6 +465,18 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 				? Math.min(MAX_RENDERED_OBJECTS, columns * rows)
 				: selectedRecord == null ? 0 : 1;
 
+		// Aircraft bypass the vessel pipeline entirely: they are small, they cluster along the same
+		// airways, and hiding the overlapping ones would drop most of the sky. They are admitted
+		// below without collision checks or the per-cell thinning vessels go through.
+		List<RenderRecord> planeCandidates = new ArrayList<>();
+		for (Iterator<RenderRecord> iterator = candidates.iterator(); iterator.hasNext(); ) {
+			RenderRecord record = iterator.next();
+			if (record != selectedRecord && record.object.getObjectClass() == AIS_AIRPLANE) {
+				planeCandidates.add(record);
+				iterator.remove();
+			}
+		}
+
 		Set<Integer> incumbentKeys = new HashSet<>(objectDrawables.keySet());
 		List<RenderRecord> incumbents = new ArrayList<>();
 		for (RenderRecord record : candidates) {
@@ -565,7 +580,53 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 			trySelect(record, false, tileBox, renderer, footprint, renderBounds, renderBudget,
 					incumbentKeys, occupied, result);
 		}
+		admitPlanes(planeCandidates, tileBox, renderer, footprint, renderBounds, result);
 		return result;
+	}
+
+	/**
+	 * Admits every aircraft in view, overlapping or not, capped only by the layer's hard ceiling.
+	 * They neither take part in the collision grid nor block vessels from it.
+	 */
+	private void admitPlanes(@NonNull List<RenderRecord> planes, @NonNull RotatedTileBox tileBox,
+			@Nullable MapRendererView renderer, float footprint, @NonNull RectF renderBounds,
+			@NonNull SelectionResult result) {
+		float planeFootprint = footprint * PLANE_FOOTPRINT_FACTOR;
+		for (RenderRecord record : planes) {
+			if (result.desired.size() >= MAX_RENDERED_OBJECTS) {
+				return;
+			}
+			record.updateSelectionState(plugin);
+			record.hasScreenPoint = false;
+			record.cpaWarning = false;
+			AisLatLon position = record.object.getPosition();
+			if (position == null) {
+				continue;
+			}
+			result.projected++;
+			PointF screenPoint = projectToScreen(record, position, tileBox, renderer);
+			if (!renderBounds.contains(screenPoint.x, screenPoint.y)) {
+				continue;
+			}
+			record.screenX = screenPoint.x;
+			record.screenY = screenPoint.y;
+			record.iconRect = new RectF(screenPoint.x - planeFootprint / 2,
+					screenPoint.y - planeFootprint / 2, screenPoint.x + planeFootprint / 2,
+					screenPoint.y + planeFootprint / 2);
+			record.hasScreenPoint = true;
+			result.desired.put(record.mmsi, record);
+		}
+	}
+
+	@NonNull
+	private PointF projectToScreen(@NonNull RenderRecord record, @NonNull AisLatLon position,
+			@NonNull RotatedTileBox tileBox, @Nullable MapRendererView renderer) {
+		if (renderer != null) {
+			return NativeUtilities.getPixelFrom31(renderer, tileBox, new PointI(record.x31, record.y31));
+		}
+		double longitude = normalizeLongitudeNear(position.getLongitude(), tileBox.getLongitude());
+		return new PointF(tileBox.getPixXFromLatLon(position.getLatitude(), longitude),
+				tileBox.getPixYFromLatLon(position.getLatitude(), longitude));
 	}
 
 	@NonNull
@@ -661,16 +722,7 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 		if (position == null) {
 			return;
 		}
-		PointF screenPoint;
-		if (renderer != null) {
-			screenPoint = NativeUtilities.getPixelFrom31(renderer, tileBox,
-					new PointI(record.x31, record.y31));
-		} else {
-			double longitude = normalizeLongitudeNear(position.getLongitude(), tileBox.getLongitude());
-			screenPoint = new PointF(
-					tileBox.getPixXFromLatLon(position.getLatitude(), longitude),
-					tileBox.getPixYFromLatLon(position.getLatitude(), longitude));
-		}
+		PointF screenPoint = projectToScreen(record, position, tileBox, renderer);
 		float x = screenPoint.x;
 		float y = screenPoint.y;
 		if (!renderBounds.contains(x, y)) {

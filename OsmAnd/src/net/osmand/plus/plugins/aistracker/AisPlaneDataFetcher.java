@@ -325,7 +325,11 @@ public class AisPlaneDataFetcher {
 			if (Double.isNaN(lon) || Double.isNaN(lat)) {
 				continue;
 			}
-			double altitudeMeters = row.length() > 13 && !row.isNull(13)
+			// on_ground, so the layer can tell a taxiing aircraft from one that simply reports
+			// no altitude
+			boolean onGround = row.optBoolean(8, false);
+			double altitudeMeters = onGround ? 0
+					: row.length() > 13 && !row.isNull(13)
 					? row.optDouble(13, Double.NaN) : row.optDouble(7, Double.NaN);
 			double velocityMs = row.isNull(9) ? Double.NaN : row.optDouble(9, Double.NaN);
 			double cog = row.isNull(10) ? INVALID_COG : row.optDouble(10, INVALID_COG);
@@ -352,10 +356,13 @@ public class AisPlaneDataFetcher {
 			if (Double.isNaN(lat) || Double.isNaN(lon)) {
 				continue;
 			}
-			// alt_baro is "ground" for aircraft on the ground, hence optDouble with a NaN default
+			// alt_baro is the string "ground" for aircraft on the ground - 0 marks them as landed,
+			// which the layer draws differently from an aircraft that reports no altitude at all
+			boolean onGround = "ground".equals(plane.optString("alt_baro", ""));
 			double altitudeFeet = plane.isNull("alt_geom")
 					? plane.optDouble("alt_baro", Double.NaN) : plane.optDouble("alt_geom", Double.NaN);
-			double altitudeMeters = Double.isNaN(altitudeFeet) ? Double.NaN : altitudeFeet * FEET_TO_METERS;
+			double altitudeMeters = onGround ? 0
+					: Double.isNaN(altitudeFeet) ? Double.NaN : altitudeFeet * FEET_TO_METERS;
 			// ground speed is already in knots here, unlike OpenSky
 			double sog = plane.isNull("gs") ? Double.NaN : plane.optDouble("gs", Double.NaN);
 			double cog = plane.isNull("track") ? INVALID_COG : plane.optDouble("track", INVALID_COG);
