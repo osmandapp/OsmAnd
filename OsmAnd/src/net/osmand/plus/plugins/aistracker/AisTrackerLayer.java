@@ -89,6 +89,10 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 	private static final long PLANE_LOG_INTERVAL_MS = 5000;
 	// aircraft icons are drawn a fifth smaller, so their touch target follows suit
 	private static final float PLANE_FOOTPRINT_FACTOR = 0.8f;
+	// airborne aircraft are never hidden; grounded ones stop being drawn past this many in a pile
+	private static final int GROUND_PLANE_MAX_OVERLAP = 3;
+	/** Altitude AisPlaneDataFetcher assigns to aircraft the feed reports as being on the ground. */
+	private static final int GROUND_ALTITUDE = 0;
 
 	private final AisTrackerPlugin plugin = PluginsHelper.requirePlugin(AisTrackerPlugin.class);
 	private final Paint bitmapPaint = new Paint();
@@ -592,6 +596,9 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 			@Nullable MapRendererView renderer, float footprint, @NonNull RectF renderBounds,
 			@NonNull SelectionResult result) {
 		float planeFootprint = footprint * PLANE_FOOTPRINT_FACTOR;
+		// Parked aircraft sit on top of each other at airports, so unlike airborne ones they are
+		// capped: past a few in the same spot the rest add nothing but clutter.
+		Map<Long, List<AcceptedRect>> groundOccupied = new HashMap<>();
 		for (RenderRecord record : planes) {
 			if (result.desired.size() >= MAX_RENDERED_OBJECTS) {
 				return;
@@ -608,13 +615,63 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 			if (!renderBounds.contains(screenPoint.x, screenPoint.y)) {
 				continue;
 			}
-			record.screenX = screenPoint.x;
-			record.screenY = screenPoint.y;
-			record.iconRect = new RectF(screenPoint.x - planeFootprint / 2,
+			RectF rect = new RectF(screenPoint.x - planeFootprint / 2,
 					screenPoint.y - planeFootprint / 2, screenPoint.x + planeFootprint / 2,
 					screenPoint.y + planeFootprint / 2);
+			boolean onGround = record.object.getAltitude() == GROUND_ALTITUDE;
+			if (onGround) {
+				if (countOverlaps(groundOccupied, record.mmsi, rect, planeFootprint, renderBounds)
+						>= GROUND_PLANE_MAX_OVERLAP) {
+					result.collisionRejected++;
+					continue;
+				}
+				occupy(groundOccupied, new AcceptedRect(record.mmsi, rect, false), planeFootprint,
+						renderBounds);
+			}
+			record.screenX = screenPoint.x;
+			record.screenY = screenPoint.y;
+			record.iconRect = rect;
 			record.hasScreenPoint = true;
 			result.desired.put(record.mmsi, record);
+		}
+	}
+
+	private static int countOverlaps(@NonNull Map<Long, List<AcceptedRect>> occupied, int mmsi,
+			@NonNull RectF rect, float cellSize, @NonNull RectF bounds) {
+		Set<Integer> inspected = new HashSet<>();
+		int overlaps = 0;
+		int minCellX = (int) Math.floor((rect.left - bounds.left) / cellSize);
+		int maxCellX = (int) Math.floor((rect.right - bounds.left) / cellSize);
+		int minCellY = (int) Math.floor((rect.top - bounds.top) / cellSize);
+		int maxCellY = (int) Math.floor((rect.bottom - bounds.top) / cellSize);
+		for (int cellX = minCellX; cellX <= maxCellX; cellX++) {
+			for (int cellY = minCellY; cellY <= maxCellY; cellY++) {
+				List<AcceptedRect> accepted = occupied.get(screenCellKey(cellX, cellY));
+				if (accepted == null) {
+					continue;
+				}
+				for (AcceptedRect other : accepted) {
+					if (other.mmsi != mmsi && inspected.add(other.mmsi)
+							&& RectF.intersects(rect, other.rect)) {
+						overlaps++;
+					}
+				}
+			}
+		}
+		return overlaps;
+	}
+
+	private static void occupy(@NonNull Map<Long, List<AcceptedRect>> occupied,
+			@NonNull AcceptedRect accepted, float cellSize, @NonNull RectF bounds) {
+		int minCellX = (int) Math.floor((accepted.rect.left - bounds.left) / cellSize);
+		int maxCellX = (int) Math.floor((accepted.rect.right - bounds.left) / cellSize);
+		int minCellY = (int) Math.floor((accepted.rect.top - bounds.top) / cellSize);
+		int maxCellY = (int) Math.floor((accepted.rect.bottom - bounds.top) / cellSize);
+		for (int cellX = minCellX; cellX <= maxCellX; cellX++) {
+			for (int cellY = minCellY; cellY <= maxCellY; cellY++) {
+				occupied.computeIfAbsent(screenCellKey(cellX, cellY), ignored -> new ArrayList<>())
+						.add(accepted);
+			}
 		}
 	}
 
