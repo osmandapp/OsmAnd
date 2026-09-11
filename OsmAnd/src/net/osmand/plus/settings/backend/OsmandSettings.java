@@ -1493,6 +1493,9 @@ public class OsmandSettings {
 	public final CommonPreference<Float> AA_MAP_DENSITY = new FloatPreference(this, "aa_map_density_n", 1f).makeProfile().cache();
 	public final CommonPreference<AndroidAutoMapMode> AA_MAP_NIGHT_MODE =
 			new EnumStringPreference<>(this, "aa_map_mode", AndroidAutoMapMode.AUTOMATIC, AndroidAutoMapMode.values()).makeProfile().cache();
+	public final OsmandPreference<Boolean> AA_SHOW_WIDGETS_PANEL = new BooleanPreference(this, "aa_show_widgets_panel", true).makeProfile().cache();
+	/** Widget ids shown on the Android Auto widgets panel, separated by {@code ;}. */
+	public final CommonPreference<String> AA_WIDGETS = new StringPreference(this, "aa_widgets", "speed;altitude").makeProfile().cache();
 
 	public final OsmandPreference<Boolean> SHOW_POI_LABEL = new BooleanPreference(this, "show_poi_label", false).makeProfile();
 
