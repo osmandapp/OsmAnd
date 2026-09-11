@@ -160,24 +160,28 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 			Bitmap alarmBitmap = alarmWidget.getWidgetBitmap();
 			Bitmap speedometerBitmap = speedometerWidget.getWidgetBitmap();
 
-			Rect area = visibleArea;
+			Rect area = new Rect(visibleArea);
+			int bitmapMargin = 10;
+			int bitmapLeft = area.right;
+			int speedometerTop = area.top + bitmapMargin;
+			int widgetPanelTopOffset = 0;
 			if (speedometerBitmap != null) {
-				canvas.drawBitmap(speedometerBitmap, area.right - speedometerBitmap.getWidth() - 10, area.top + 10, new Paint());
+				bitmapLeft -= (bitmapMargin + speedometerBitmap.getWidth());
+				canvas.drawBitmap(speedometerBitmap, bitmapLeft, speedometerTop, new Paint());
+				widgetPanelTopOffset = speedometerBitmap.getHeight() + 2 * bitmapMargin;
 			}
+
+			Rect alarmArea = null;
 			if (alarmBitmap != null) {
-				int offset = speedometerBitmap != null ? speedometerBitmap.getWidth() : 0;
-				canvas.drawBitmap(alarmBitmap, area.right - alarmBitmap.getWidth() - 10 - offset, area.top + 10, new Paint());
+				bitmapLeft -= (bitmapMargin + alarmBitmap.getWidth());
+				canvas.drawBitmap(alarmBitmap, bitmapLeft, speedometerTop, new Paint());
+				alarmArea = new Rect(bitmapLeft, speedometerTop,
+						bitmapLeft + alarmBitmap.getWidth(),
+						speedometerTop + alarmBitmap.getHeight());
 			}
 			// The speedometer is always there while driving, so the panel simply starts below it.
 			// The alarm comes and goes, hiding the rows it covers keeps the panel from jumping.
-			float topOffset = speedometerBitmap != null ? speedometerBitmap.getHeight() + 20 : 10;
-			Rect alarmArea = null;
-			if (alarmBitmap != null) {
-				int offset = speedometerBitmap != null ? speedometerBitmap.getWidth() : 0;
-				alarmArea = new Rect(area.right - alarmBitmap.getWidth() - 10 - offset, area.top,
-						area.right - offset, area.top + alarmBitmap.getHeight() + 20);
-			}
-			widgetsPanel.drawWidgets(canvas, area, drawSettings, density, topOffset, alarmArea);
+			widgetsPanel.drawWidgets(canvas, area, drawSettings, density, widgetPanelTopOffset, alarmArea);
 		}
 	}
 
