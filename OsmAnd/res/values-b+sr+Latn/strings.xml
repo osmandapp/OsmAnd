@@ -5336,4 +5336,8 @@
     <string name="share_favorites_missing_media_warning">Neki priloženi mediji nisu mogli biti uključeni.</string>
     <string name="search_on_web">Pretraga na vebu</string>
     <string name="astro_eclipse_column_below_horizon">Ispod horizonta</string>
+    <string name="quick_action_add_track">Dodaj putanju</string>
+    <string name="quick_action_tracks_select_descr">Dodajte jednu ili više putanja kako biste ih prikazali ili sakrili na mapi jednim dodirom.</string>
+    <string name="quick_action_tracks_always_ask_descr">Dodirivanjem ove radnje otvara se lista putanja, gde možete prikazati ili sakriti jednu ili više njih.</string>
+    <string name="quick_action_all_tracks">Sve putanje</string>
 </resources>
