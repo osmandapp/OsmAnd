@@ -28,6 +28,7 @@ import net.osmand.plus.utils.UiUtilities
 import net.osmand.shared.media.MediaProvider
 import net.osmand.shared.media.domain.MediaItem
 import net.osmand.shared.media.domain.MediaType
+import java.util.WeakHashMap
 
 class GalleryGridAdapter(
 	private val mapActivity: FragmentActivity,
@@ -54,6 +55,10 @@ class GalleryGridAdapter(
 	private var sectionBoundaries: List<GallerySectionBoundary?> = emptyList()
 
 	fun getSectionBoundary(position: Int): GallerySectionBoundary? = sectionBoundaries.getOrNull(position)
+
+	private val boundSections = WeakHashMap<RecyclerView.ViewHolder, GallerySectionBoundary?>()
+
+	fun getBoundSectionBoundary(holder: RecyclerView.ViewHolder): GallerySectionBoundary? = boundSections[holder]
 
 	private val mainPhotoSizePx = app.resources.getDimensionPixelSize(R.dimen.gallery_big_icon_size)
 	private val standardPhotoSizePx = app.resources.getDimensionPixelSize(R.dimen.gallery_standard_icon_size)
@@ -113,13 +118,12 @@ class GalleryGridAdapter(
 			oldItems[oldPosition] == newItems[newPosition] && oldBoundaries[oldPosition] == newBoundaries[newPosition]
 
 		override fun getChangePayload(oldPosition: Int, newPosition: Int): Any? {
-			if (oldBoundaries[oldPosition] != newBoundaries[newPosition]) return null
 			val oldItem = oldItems[oldPosition]
 			val newItem = newItems[newPosition]
-			return if (oldItem is GalleryItem.Media && newItem is GalleryItem.Media) {
-				METADATA_PAYLOAD_TYPE
-			} else {
-				null
+			return when {
+				oldItem !is GalleryItem.Media || newItem !is GalleryItem.Media -> null
+				oldItem == newItem -> SECTION_PAYLOAD_TYPE
+				else -> METADATA_PAYLOAD_TYPE
 			}
 		}
 	}
@@ -171,6 +175,7 @@ class GalleryGridAdapter(
 
 	override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 		val item = items[position]
+		boundSections[holder] = getSectionBoundary(position)
 		when {
 			holder is GroupHeaderHolder && item is GalleryItem.GroupHeader -> holder.bind(item, nightMode)
 			holder is MediaLibraryEmptyHolder && item is GalleryItem.NoMedia -> holder.bind(item, nightMode)
@@ -214,34 +219,38 @@ class GalleryGridAdapter(
 		position: Int,
 		payloads: MutableList<Any>
 	) {
-		when {
-			payloads.isEmpty() -> super.onBindViewHolder(holder, position, payloads)
+		if (payloads.isEmpty() || payloads.any { it !in KNOWN_PAYLOADS }) {
+			super.onBindViewHolder(holder, position, payloads)
+			return
+		}
+		val item = items[position]
+		boundSections[holder] = getSectionBoundary(position)
+		for (payload in payloads.distinct()) {
+			when {
+				payload == UPDATE_PROGRESS_BAR_PAYLOAD_TYPE ->
+					if (holder is NoInternetHolder) holder.updateProgressBar(loadingImages)
 
-			payloads[0] == UPDATE_PROGRESS_BAR_PAYLOAD_TYPE ->
-				if (holder is NoInternetHolder) holder.updateProgressBar(loadingImages)
-
-			payloads[0] == SELECTION_PAYLOAD_TYPE -> {
-				val item = items[position]
-				if (item is GalleryItem.Media) {
+				payload == SELECTION_PAYLOAD_TYPE && item is GalleryItem.Media -> {
 					val selected = isItemSelected(item.mediaItem)
 					when (holder) {
 						is GalleryMediaViewHolder -> holder.updateSelection(selectionMode, selected, nightMode)
 						is GalleryMediaListViewHolder -> holder.updateSelection(selectionMode, selected, nightMode)
 					}
 				}
-			}
 
-			payloads[0] == METADATA_PAYLOAD_TYPE -> {
-				val item = items[position]
-				if (item is GalleryItem.Media) {
+				payload == METADATA_PAYLOAD_TYPE && item is GalleryItem.Media -> {
 					when (holder) {
 						is GalleryMediaViewHolder -> holder.updateMetadata(item)
-						is GalleryMediaListViewHolder -> holder.updateMetadata(item)
+						is GalleryMediaListViewHolder -> {
+							holder.updateMetadata(item)
+							holder.updateDivider(getSectionBoundary(position)?.isLast == false)
+						}
 					}
 				}
-			}
 
-			else -> super.onBindViewHolder(holder, position, payloads)
+				payload == SECTION_PAYLOAD_TYPE && item is GalleryItem.Media ->
+					(holder as? GalleryMediaListViewHolder)?.updateDivider(getSectionBoundary(position)?.isLast == false)
+			}
 		}
 	}
 
@@ -291,8 +300,6 @@ class GalleryGridAdapter(
 		is GalleryItem.SortBar -> SORT_BAR_TYPE
 	}
 
-	fun getAnimator(): RecyclerView.ItemAnimator = GalleryItemAnimator(!app.settings.DO_NOT_USE_ANIMATIONS.get())
-
 	private fun inflate(resourceId: Int, root: ViewGroup, attachToRoot: Boolean = false): View =
 		themedInflater.inflate(resourceId, root, attachToRoot)
 
@@ -314,5 +321,7 @@ class GalleryGridAdapter(
 		private const val UPDATE_PROGRESS_BAR_PAYLOAD_TYPE = 1
 		private const val SELECTION_PAYLOAD_TYPE = 2
 		private const val METADATA_PAYLOAD_TYPE = 3
+		private const val SECTION_PAYLOAD_TYPE = 4
+		private val KNOWN_PAYLOADS = setOf<Any>(UPDATE_PROGRESS_BAR_PAYLOAD_TYPE, SELECTION_PAYLOAD_TYPE, METADATA_PAYLOAD_TYPE, SECTION_PAYLOAD_TYPE)
 	}
 }

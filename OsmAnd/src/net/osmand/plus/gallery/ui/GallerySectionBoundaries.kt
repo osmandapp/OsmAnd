@@ -14,9 +14,14 @@ data class GallerySectionBoundary(
 ) {
 	val roundTopCorners get() = isFirst
 	val roundBottomCorners get() = isLast
+
+	val hasGapAbove get() = isFirst && (firstPosition > 0 || sectionId == GallerySectionBoundaries.EMPTY_SECTION)
 }
 
 object GallerySectionBoundaries {
+	const val ALL_SECTION = "all"
+	const val EMPTY_SECTION = "empty"
+
 	fun build(items: List<GalleryItem>): List<GallerySectionBoundary?> {
 		val result = MutableList<GallerySectionBoundary?>(items.size) { null }
 		var position = 0
@@ -28,7 +33,7 @@ object GallerySectionBoundaries {
 				continue
 			}
 			val header = item as? GalleryItem.GroupHeader
-			val id = header?.let { "type:${it.type.name}" } ?: if (item is GalleryItem.NoMedia) "empty" else "all"
+			val id = header?.let { "type:${it.type.name}" } ?: if (item is GalleryItem.NoMedia) EMPTY_SECTION else ALL_SECTION
 			position++
 			if (item !is GalleryItem.NoMedia && header?.collapsed != true) {
 				while (position < items.size && items[position] is GalleryItem.Media) position++

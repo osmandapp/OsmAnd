@@ -43,6 +43,9 @@ class MediaLibraryListViewHolder(
 		itemView.findViewById<View>(R.id.overflow_button).visibility = if (selectionMode) View.INVISIBLE else View.VISIBLE
 	}
 
+	override fun getFadeableContentViews(): List<View> = super.getFadeableContentViews() +
+		listOf(itemView.findViewById<View>(R.id.overflow_button), itemView.findViewById(R.id.attachment_container)).filter { it.isVisible }
+
 	override fun updateMetadata(galleryItem: GalleryItem.Media) {
 		super.updateMetadata(galleryItem)
 		bindAttachment(galleryItem)
