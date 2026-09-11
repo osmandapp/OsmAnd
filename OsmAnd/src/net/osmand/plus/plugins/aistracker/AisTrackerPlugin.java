@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.aistracker;
 
 import net.osmand.plus.render.RendererRegistry;
+import net.osmand.shared.aistracker.AisObjType;
 import net.osmand.shared.aistracker.AisObject;
 
 import static net.osmand.plus.NavigationService.USED_BY_AIS;
@@ -17,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.Location;
+import net.osmand.data.QuadRect;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.NavigationService;
@@ -44,9 +46,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -108,10 +112,13 @@ public class AisTrackerPlugin extends OsmandPlugin {
 	public final CommonPreference<String> AIS_URL_SOURCES;
 	public final CommonPreference<Boolean> AIS_SHOW_SHIPS;
 	public final CommonPreference<Boolean> AIS_SHOW_PLANES;
-	// Anonymous OpenSky access is capped at ~400 requests/day; keep this conservative by default
-	// until a user-run aggregator with its own key/limits is configured.
-	private static final long PLANE_POLL_INTERVAL_MS = 60_000L;
+	private static final long PLANE_POLL_INTERVAL_MS = 15_000L;
+	// floor between requests, so panning around cannot outpace the poll itself
+	private static final long MIN_PLANE_REQUEST_SPACING_MS = 5_000L;
 	private Timer planePollTimer;
+	private final Object planeRequestLock = new Object();
+	private volatile boolean planeRequestInProgress;
+	private volatile long lastPlaneRequestTime;
 
 	/* timestamp of last AIS message received for all instances: */
 	private long lastMessageReceived = 0;
@@ -204,6 +211,25 @@ public class AisTrackerPlugin extends OsmandPlugin {
 		@NonNull
 		public synchronized List<AisObject> getAisObjects() {
 			return new ArrayList<>(objects.values());
+		}
+
+		/**
+		 * Drops the aircraft that the latest batch no longer reports, leaving every other object
+		 * untouched - vessels come from the NMEA listener and have nothing to do with this.
+		 *
+		 * @return how many aircraft were removed
+		 */
+		public synchronized int removeAircraftMissingFrom(@NonNull Set<Integer> receivedMmsi) {
+			int removed = 0;
+			for (Iterator<Map.Entry<Integer, AisObject>> iterator = objects.entrySet().iterator(); iterator.hasNext(); ) {
+				AisObject obj = iterator.next().getValue();
+				if (obj.getObjectClass() == AisObjType.AIS_AIRPLANE && !receivedMmsi.contains(obj.getMmsi())) {
+					iterator.remove();
+					removed++;
+					AisTrackerPlugin.this.onAisObjectRemoved(obj);
+				}
+			}
+			return removed;
 		}
 
 		public synchronized void removeLostObjects() {
@@ -486,6 +512,21 @@ public class AisTrackerPlugin extends OsmandPlugin {
 		}
 	}
 
+	/**
+	 * Called by the layer when the visible area changed. Fetches for the new area without touching
+	 * the poll timer, so panning cannot turn into a request storm - the periodic poll keeps its own
+	 * cadence and the viewport-driven extra request is spaced out on top of it.
+	 */
+	public void onMapAreaChanged() {
+		if (planePollTimer == null || planeRequestInProgress) {
+			return;
+		}
+		if (System.currentTimeMillis() - lastPlaneRequestTime < MIN_PLANE_REQUEST_SPACING_MS) {
+			return;
+		}
+		new Thread(this::pollPlaneSources, "ais-planes-viewport").start();
+	}
+
 	private void pollPlaneSources() {
 		if (!AIS_SHOW_PLANES.get()) {
 			Log.d(AisPlaneDataFetcher.TAG, "poll skipped: 'Show planes' is off");
@@ -495,20 +536,58 @@ public class AisTrackerPlugin extends OsmandPlugin {
 			Log.d(AisPlaneDataFetcher.TAG, "poll skipped: plugin is not active");
 			return;
 		}
-		List<AisObject> received = new ArrayList<>();
-		for (AisUrlSource source : getPlaneSources()) {
-			received.addAll(AisPlaneDataFetcher.fetch(app, source));
+		QuadRect latLonBounds = app.getOsmandMap().getMapView().getRotatedTileBox().getLatLonBounds();
+		if (latLonBounds == null) {
+			Log.d(AisPlaneDataFetcher.TAG, "poll skipped: map area is not known yet");
+			return;
 		}
-		if (received.isEmpty()) {
-			Log.d(AisPlaneDataFetcher.TAG, "poll finished: no aircraft received");
+		synchronized (planeRequestLock) {
+			if (planeRequestInProgress) {
+				Log.d(AisPlaneDataFetcher.TAG, "poll skipped: a request is already running");
+				return;
+			}
+			planeRequestInProgress = true;
+		}
+		try {
+			lastPlaneRequestTime = System.currentTimeMillis();
+			List<AisObject> received = new ArrayList<>();
+			boolean allSourcesFailed = true;
+			for (AisUrlSource source : getPlaneSources()) {
+				List<AisObject> fromSource = AisPlaneDataFetcher.fetch(app, source, latLonBounds);
+				if (fromSource != null) {
+					allSourcesFailed = false;
+					received.addAll(fromSource);
+				}
+			}
+			applyPlaneBatch(received, allSourcesFailed);
+		} finally {
+			synchronized (planeRequestLock) {
+				planeRequestInProgress = false;
+			}
+		}
+	}
+
+	/**
+	 * Aircraft already on the map are updated in place rather than re-added, and only those missing
+	 * from a successful batch are dropped - that keeps the layer from rebuilding its symbols and
+	 * blinking on every poll. A failed batch changes nothing, so a network hiccup does not wipe the
+	 * map.
+	 */
+	private void applyPlaneBatch(@NonNull List<AisObject> received, boolean requestFailed) {
+		if (requestFailed) {
+			Log.d(AisPlaneDataFetcher.TAG, "poll failed, keeping the aircraft already on the map");
 			return;
 		}
 		app.runInUIThread(() -> {
+			Set<Integer> receivedMmsi = new HashSet<>();
 			for (AisObject ais : received) {
+				receivedMmsi.add(ais.getMmsi());
 				feedExternalAisObject(ais);
 			}
-			Log.d(AisPlaneDataFetcher.TAG, "fed " + received.size() + " aircraft to the layer; "
-					+ "tracked objects now: " + getAisObjects().size()
+			int removed = aisDataManager.removeAircraftMissingFrom(receivedMmsi);
+			Log.d(AisPlaneDataFetcher.TAG, "batch applied: " + received.size() + " aircraft in view, "
+					+ removed + " gone from the batch removed; tracked objects now: "
+					+ getAisObjects().size()
 					+ ", layer " + (layer == null ? "NOT attached (nothing will be drawn)" : "attached"));
 		});
 	}

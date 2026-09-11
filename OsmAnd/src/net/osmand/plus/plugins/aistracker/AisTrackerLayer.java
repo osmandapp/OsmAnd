@@ -411,6 +411,11 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		ViewportSignature viewport = new ViewportSignature(tileBox);
 		boolean viewportChanged = !viewport.equals(lastViewport);
+		if (viewportChanged) {
+			// plane sources query by area, so a moved map needs a fresh batch; the plugin decides
+			// whether it is time to ask, this call never restarts its poll timer
+			plugin.onMapAreaChanged();
+		}
 		long now = SystemClock.elapsedRealtime();
 		boolean intervalElapsed = lastRenderTimeMs == 0 || now - lastRenderTimeMs >= RENDER_UPDATE_INTERVAL_MS;
 		if ((dataDirty || viewportChanged) && intervalElapsed) {

@@ -5,11 +5,13 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.data.QuadRect;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.shared.aistracker.AisObject;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,6 +26,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Fetches aircraft positions from a plane {@link AisUrlSource} and turns them into
@@ -60,16 +63,55 @@ public class AisPlaneDataFetcher {
 	private static final int READ_TIMEOUT = 30000;
 	private static final double FEET_TO_METERS = 0.3048;
 	private static final double MS_TO_KNOTS = 3600.0 / 1852.0;
+	private static final double METERS_PER_NM = 1852.0;
+	private static final double MIN_RADIUS_NM = 5;
+	// the ADS-B services cap the radius at 250 nm
+	private static final double MAX_RADIUS_NM = 250;
 
 	private AisPlaneDataFetcher() {
 	}
 
+	/**
+	 * Placeholders filled in from the visible map area, so a source follows the map instead of
+	 * being pinned to whatever coordinates were typed when it was created. Bounding-box services
+	 * (OpenSky) and centre+radius services (the ADS-B family) each take the set they need.
+	 */
 	@NonNull
-	public static List<AisObject> fetch(@NonNull OsmandApplication app, @NonNull AisUrlSource source) {
-		String response = request(app, source);
+	public static String applyMapArea(@NonNull String url, @NonNull QuadRect latLonBounds) {
+		double north = latLonBounds.top;
+		double south = latLonBounds.bottom;
+		double west = latLonBounds.left;
+		double east = latLonBounds.right;
+		double centerLat = (north + south) / 2;
+		double centerLon = (west + east) / 2;
+		// radius covering the viewport corner, which is what centre+radius services ask for
+		double distNm = Math.min(MAX_RADIUS_NM, Math.max(MIN_RADIUS_NM,
+				MapUtils.getDistance(centerLat, centerLon, north, east) / METERS_PER_NM));
+		return url.replace("{LAMIN}", format(south))
+				.replace("{LAMAX}", format(north))
+				.replace("{LOMIN}", format(west))
+				.replace("{LOMAX}", format(east))
+				.replace("{LAT}", format(centerLat))
+				.replace("{LON}", format(centerLon))
+				.replace("{DIST}", String.valueOf(Math.round(distNm)));
+	}
+
+	@NonNull
+	private static String format(double value) {
+		return String.format(Locale.US, "%.4f", value);
+	}
+
+	/**
+	 * @return the aircraft in view, empty when the service legitimately reports none, or null when
+	 * the request failed - callers must not treat a failure as "everything is gone".
+	 */
+	@Nullable
+	public static List<AisObject> fetch(@NonNull OsmandApplication app, @NonNull AisUrlSource source,
+	                                     @NonNull QuadRect latLonBounds) {
+		String response = request(app, source, latLonBounds);
 		if (Algorithms.isEmpty(response)) {
 			Log.d(TAG, "'" + source.name + "': empty response, nothing to parse");
-			return new ArrayList<>();
+			return null;
 		}
 		try {
 			JSONObject root = new JSONObject(response);
@@ -96,7 +138,7 @@ public class AisPlaneDataFetcher {
 		} catch (JSONException e) {
 			Log.w(TAG, "'" + source.name + "': response is not JSON: " + shorten(response), e);
 		}
-		return new ArrayList<>();
+		return null;
 	}
 
 	@NonNull
@@ -112,10 +154,12 @@ public class AisPlaneDataFetcher {
 	}
 
 	@Nullable
-	private static String request(@NonNull OsmandApplication app, @NonNull AisUrlSource source) {
-		String url = source.url.contains(API_KEY_PLACEHOLDER)
-				? source.url.replace(API_KEY_PLACEHOLDER, source.apiKey)
-				: source.url;
+	private static String request(@NonNull OsmandApplication app, @NonNull AisUrlSource source,
+	                               @NonNull QuadRect latLonBounds) {
+		String url = applyMapArea(source.url, latLonBounds);
+		if (url.contains(API_KEY_PLACEHOLDER)) {
+			url = url.replace(API_KEY_PLACEHOLDER, source.apiKey);
+		}
 		String loggedUrl = hideKey(url, source.apiKey);
 		HttpURLConnection connection = null;
 		long started = System.currentTimeMillis();

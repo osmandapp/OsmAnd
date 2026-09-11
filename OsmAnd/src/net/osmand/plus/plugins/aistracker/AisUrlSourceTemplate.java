@@ -53,49 +53,49 @@ public class AisUrlSourceTemplate {
 				new AisUrlSourceTemplate(
 						"adsb.lol",
 						AisUrlSource.Type.PLANES,
-						"https://api.adsb.lol/v2/lat/50.03/lon/8.56/dist/50",
+						"https://api.adsb.lol/v2/lat/{LAT}/lon/{LON}/dist/{DIST}",
 						null,
 						"Free, no key - easiest way to try planes out",
-						"Community feed in the ADS-B Exchange format. Edit lat/lon/dist in the URL "
-								+ "below (dist is in nautical miles).",
+						"Community feed in the ADS-B Exchange format. {LAT}/{LON}/{DIST} are filled "
+								+ "in from the visible map area on every request.",
 						"https://adsb.lol"),
 				new AisUrlSourceTemplate(
 						"adsb.fi",
 						AisUrlSource.Type.PLANES,
-						"https://opendata.adsb.fi/api/v2/lat/50.03/lon/8.56/dist/50/",
+						"https://opendata.adsb.fi/api/v2/lat/{LAT}/lon/{LON}/dist/{DIST}/",
 						null,
 						"Free, no key",
-						"Community feed in the same format as ADS-B Exchange. Edit lat/lon/dist in "
-								+ "the URL below (dist is in nautical miles).",
+						"Community feed in the same format as ADS-B Exchange. {LAT}/{LON}/{DIST} are "
+								+ "filled in from the visible map area on every request.",
 						"https://adsb.fi"),
 				new AisUrlSourceTemplate(
 						"ADS-B Exchange",
 						AisUrlSource.Type.PLANES,
-						"https://adsbexchange-com1.p.rapidapi.com/v2/lat/50.03/lon/8.56/dist/50/",
+						"https://adsbexchange-com1.p.rapidapi.com/v2/lat/{LAT}/lon/{LON}/dist/{DIST}/",
 						"RapidAPI key",
 						"Paid RapidAPI subscription - the keyless endpoint returns NO_AUTH",
-						"The key is sent as a header. Edit lat/lon/dist in the URL below (dist is "
-								+ "in nautical miles). Feeding your own receiver to ADS-B Exchange "
-								+ "is what gets you free API access.",
+						"The key is sent as a header. {LAT}/{LON}/{DIST} are filled in from the "
+								+ "visible map area on every request. Feeding your own receiver to "
+								+ "ADS-B Exchange is what gets you free API access.",
 						"https://www.adsbexchange.com/data/"),
 				new AisUrlSourceTemplate(
 						"airplanes.live",
 						AisUrlSource.Type.PLANES,
-						"https://api.airplanes.live/v2/point/50.03/8.56/50",
+						"https://api.airplanes.live/v2/point/{LAT}/{LON}/{DIST}",
 						null,
 						"Needs approval - answers 403 until access is granted",
 						"Same format as ADS-B Exchange, but the API asks projects to request access "
-								+ "by email first. Edit lat/lon/radius in the URL below (radius is "
-								+ "in nautical miles, max 250).",
+								+ "by email first. {LAT}/{LON}/{DIST} are filled in from the visible "
+								+ "map area on every request.",
 						"https://airplanes.live/api-guide/"),
 				new AisUrlSourceTemplate(
 						"OpenSky Network - bounding box",
 						AisUrlSource.Type.PLANES,
-						"https://opensky-network.org/api/states/all?lamin=45&lomin=5&lamax=55&lomax=20",
+						"https://opensky-network.org/api/states/all?lamin={LAMIN}&lomin={LOMIN}&lamax={LAMAX}&lomax={LOMAX}",
 						null,
 						"Free, no key - about 400 requests a day anonymously",
-						"Edit lamin/lomin/lamax/lomax in the URL below to your region. Registering "
-								+ "a free account raises the daily allowance.",
+						"{LAMIN}/{LOMIN}/{LAMAX}/{LOMAX} are filled in from the visible map area on "
+								+ "every request. Registering a free account raises the daily allowance.",
 						"https://openskynetwork.github.io/opensky-api/rest.html"),
 				new AisUrlSourceTemplate(
 						"OpenSky Network - whole world",
@@ -109,11 +109,12 @@ public class AisUrlSourceTemplate {
 				new AisUrlSourceTemplate(
 						"Private aggregator",
 						AisUrlSource.Type.PLANES,
-						"https://example.com/api/planes?key={API_KEY}",
+						"https://example.com/api/planes?key={API_KEY}&lat={LAT}&lon={LON}&dist={DIST}",
 						"API key",
 						"Your own server, key passed as a query parameter",
 						"Edit the URL below (host, path, params) to match your server. The response "
-								+ "must be in OpenSky or ADS-B Exchange JSON format.",
+								+ "must be in OpenSky or ADS-B Exchange JSON format. Placeholders "
+								+ "{LAT} {LON} {DIST} {LAMIN} {LOMIN} {LAMAX} {LOMAX} follow the map.",
 						null),
 				new AisUrlSourceTemplate(
 						"Custom",
@@ -122,7 +123,8 @@ public class AisUrlSourceTemplate {
 						null,
 						"Start blank",
 						"Fill in everything yourself. The response must be in OpenSky or ADS-B "
-								+ "Exchange JSON format.",
+								+ "Exchange JSON format. Placeholders {LAT} {LON} {DIST} {LAMIN} "
+								+ "{LOMIN} {LAMAX} {LOMAX} are filled in from the visible map area.",
 						null)
 		);
 	}
