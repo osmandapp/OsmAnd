@@ -6,13 +6,16 @@ import static java.lang.Math.ceil;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.text.TextUtils;
+import android.graphics.Paint;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,6 +28,8 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.EditTextPreferenceEx;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.text.MessageFormat;
@@ -119,14 +124,23 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
 
 	private void showTemplatePickerDialog() {
 		List<AisUrlSourceTemplate> templates = AisUrlSourceTemplate.all();
-		CharSequence[] items = new CharSequence[templates.size()];
-		for (int i = 0; i < templates.size(); i++) {
-			items[i] = templates.get(i).displayName;
-		}
 		Context themedContext = UiUtilities.getThemedContext(getActivity(), isNightMode());
+		// two-line rows so the cost/access note is visible while picking, not after
+		ArrayAdapter<AisUrlSourceTemplate> adapter = new ArrayAdapter<>(themedContext,
+				android.R.layout.simple_list_item_2, android.R.id.text1, templates) {
+			@NonNull
+			@Override
+			public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+				View view = super.getView(position, convertView, parent);
+				AisUrlSourceTemplate template = templates.get(position);
+				((TextView) view.findViewById(android.R.id.text1)).setText(template.displayName);
+				((TextView) view.findViewById(android.R.id.text2)).setText(template.note);
+				return view;
+			}
+		};
 		new AlertDialog.Builder(themedContext)
 				.setTitle(R.string.ais_add_url_source)
-				.setItems(items, (dialog, which) -> showSourceDialog(templates.get(which), null))
+				.setAdapter(adapter, (dialog, which) -> showSourceDialog(templates.get(which), null))
 				.setNegativeButton(R.string.shared_string_cancel, null)
 				.show();
 	}
@@ -139,6 +153,24 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
 		LinearLayout layout = new LinearLayout(themedContext);
 		layout.setOrientation(LinearLayout.VERTICAL);
 		layout.setPadding(padding, padding / 2, padding, 0);
+
+		if (template != null) {
+			TextView descriptionView = new TextView(themedContext);
+			descriptionView.setText(template.note + ".\n" + template.description);
+			descriptionView.setTextColor(ColorUtilities.getSecondaryTextColor(app, isNightMode()));
+			layout.addView(descriptionView);
+
+			if (template.projectUrl != null) {
+				TextView linkView = new TextView(themedContext);
+				linkView.setText(template.projectUrl);
+				linkView.setTextColor(ColorUtilities.getLinksColor(app, isNightMode()));
+				linkView.setPaintFlags(linkView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+				linkView.setPadding(0, padding / 4, 0, padding / 4);
+				linkView.setOnClickListener(v ->
+						AndroidUtils.openUrl(requireActivity(), template.projectUrl, isNightMode()));
+				layout.addView(linkView);
+			}
+		}
 
 		EditText nameInput = new EditText(themedContext);
 		nameInput.setHint(R.string.shared_string_name);
