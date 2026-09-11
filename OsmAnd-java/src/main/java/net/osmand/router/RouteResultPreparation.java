@@ -508,7 +508,7 @@ public class RouteResultPreparation {
 			RouteSegmentResult rr = result.get(i);
 			RouteSegmentResult pr = result.get(i - 1);
 			double d = MapUtils.getDistance(pr.getPoint(pr.getEndPointIndex()), rr.getPoint(rr.getStartPointIndex()));
-			if (d > 0) {
+			if (d > 0 && PRINT_TO_CONSOLE_ROUTE_INFORMATION) {
 				System.out.printf("Points are not connected: %d-%d of %d %s (%d) -> %s (%d) by %.2f meters\n",
 						i - 1, i, result.size() - 1, pr.getObject(), pr.getEndPointIndex(),
 						rr.getObject(), rr.getStartPointIndex(), d);
@@ -2202,7 +2202,9 @@ public class RouteResultPreparation {
 	
 	private static void println(String logMsg) {
 //		log.info(logMsg);
-		System.out.println(logMsg);
+		if (PRINT_TO_CONSOLE_ROUTE_INFORMATION || PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST) {
+			System.out.println(logMsg);
+		}
 	}
 	
 	private long getPoint(RouteDataObject road, int pointInd) {
