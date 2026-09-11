@@ -41,4 +41,23 @@ public class RoadSplitStructure {
 		public boolean attachedOnTheRight;
 		public int turnType;
 	}
+	
+	public String roadsInfo(List<AttachedRoadInfo> attached) {
+		String s = "";
+		if (attached != null) {
+			int i = 0;
+			for (AttachedRoadInfo a : attached) {
+				s += String.format("\n  Road %d angle: %.2f, lanes: %d, lanesInfo: %s", 
+						++i, a.attachedAngle, a.lanes, a.parsedLanes == null ? "" :TurnType.lanesToString(a.parsedLanes));
+			}
+		}
+		return s;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format(" Left lanes %d roads %d prioRoads %d: %s\n Right lanes %d roads %d prioRoads: %d %s", 
+				leftLanes, roadsOnLeft, leftMaxPrio, roadsInfo(leftLanesInfo),
+				rightLanes, roadsOnRight, rightMaxPrio, roadsInfo(rightLanesInfo));
+	}
 }
