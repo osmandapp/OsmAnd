@@ -38,6 +38,10 @@ kotlin {
 			baseName = "OsmAndShared"
 			isStatic = true
 		}
+		iosTarget.compilations.getByName("main").cinterops.create("libxml2") {
+			defFile(project.file("src/nativeInterop/cinterop/libxml2.def"))
+			packageName("libxml2")
+		}
 	}
 
 	val sqliteVersion = "2.3.1"
