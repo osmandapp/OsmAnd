@@ -1,17 +1,15 @@
 package net.osmand.shared.io
 
-import kotlinx.cinterop.BooleanVar
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.alloc
 import kotlinx.cinterop.memScoped
 import kotlinx.cinterop.ptr
-import kotlinx.cinterop.value
-import platform.Foundation.NSDate
 import platform.Foundation.NSFileManager
-import platform.Foundation.NSFileModificationDate
-import platform.Foundation.NSFileSize
-import platform.Foundation.NSNumber
-import platform.Foundation.timeIntervalSince1970
+import platform.posix.S_IFDIR
+import platform.posix.S_IFMT
+import platform.posix.stat
+
+private const val APPLE_REFERENCE_EPOCH = 978_307_200L
 
 @OptIn(ExperimentalForeignApi::class)
 actual class NativeFile actual constructor(actual val file: KFile) {
@@ -20,32 +18,29 @@ actual class NativeFile actual constructor(actual val file: KFile) {
 
 	actual fun absolutePath(): String = filePath
 
-	actual fun isDirectory(): Boolean {
-		return memScoped {
-			val isDirectory = alloc<BooleanVar>()
-			NSFileManager.defaultManager.fileExistsAtPath(filePath, isDirectory.ptr)
-			isDirectory.value
-		}
+	actual fun isDirectory(): Boolean = memScoped {
+		val st = alloc<stat>()
+		if (stat(filePath, st.ptr) != 0) return@memScoped false
+		(st.st_mode.toInt() and S_IFMT) == S_IFDIR
 	}
 
-	actual fun exists(): Boolean {
-		return NSFileManager.defaultManager.fileExistsAtPath(filePath)
+	actual fun exists(): Boolean = memScoped {
+		val st = alloc<stat>()
+		stat(filePath, st.ptr) == 0
 	}
 
-	actual fun length(): Long {
-		val attr: Map<Any?, *>? = NSFileManager.defaultManager.attributesOfItemAtPath(filePath, null)
-		if (attr == null || attr.isEmpty()) {
-			return 0
-		}
-		return (attr[NSFileSize] as NSNumber).longLongValue
+	actual fun length(): Long = memScoped {
+		val st = alloc<stat>()
+		if (stat(filePath, st.ptr) != 0) return@memScoped 0L
+		st.st_size
 	}
 
-	actual fun lastModified(): Long {
-		val attr: Map<Any?, *>? = NSFileManager.defaultManager.attributesOfItemAtPath(filePath, null)
-		if (attr == null || attr.isEmpty()) {
-			return 0
-		}
-		return ((attr[NSFileModificationDate] as NSDate).timeIntervalSince1970 * 1000.0).toLong()
+	actual fun lastModified(): Long = memScoped {
+		val st = alloc<stat>()
+		if (stat(filePath, st.ptr) != 0) return@memScoped 0L
+		val secondsSinceReference = (st.st_mtimespec.tv_sec - APPLE_REFERENCE_EPOCH).toDouble() +
+				st.st_mtimespec.tv_nsec.toDouble() / 1e9
+		((secondsSinceReference + APPLE_REFERENCE_EPOCH.toDouble()) * 1000.0).toLong()
 	}
 
 	actual fun listFiles(): List<KFile>? {
