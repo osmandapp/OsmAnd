@@ -108,8 +108,7 @@ public class FavoritePointEditor extends PointEditor {
 	private void setAmenity(@NonNull Amenity amenity) {
 		favorite.setAmenityOriginName(amenity.toStringEn());
 		favorite.setIconId(RenderingIcons.getPreselectedIconId(app, amenity));
-		favorite.setAmenityExtensions(amenity.getAmenityExtensions(app.getPoiTypes(), true, true,
-				app.getLanguage()));
+		favorite.setAmenityExtensions(amenity.getAmenityExtensions(app.getPoiTypes(), true, true, app.getLanguage()));
 		setOsmUrl(amenity);
 	}
 
