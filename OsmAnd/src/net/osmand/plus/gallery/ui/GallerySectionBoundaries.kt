@@ -2,7 +2,6 @@ package net.osmand.plus.gallery.ui
 
 import net.osmand.plus.gallery.model.GalleryItem
 
-/** Immutable adapter metadata, shared by row binding and section-card drawing. */
 data class GallerySectionBoundary(
 	val sectionId: String,
 	val firstPosition: Int,

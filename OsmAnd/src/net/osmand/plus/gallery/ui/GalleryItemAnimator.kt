@@ -134,8 +134,12 @@ class GalleryItemAnimator(
 		if (running.isNotEmpty()) finishAll()
 		val changes = pending.toList()
 		pending.clear()
-		changes.sortedWith(compareBy({ it.visualTop }, { it.visualLeft }))
-			.forEachIndexed { index, change -> change.delay = if (animationsEnabled) GalleryMotion.stagger(index) else 0L }
+		val uniformShift = isUniformShift(changes)
+		var staggered = 0
+		for (change in changes.sortedWith(compareBy({ it.visualTop }, { it.visualLeft }))) {
+			val together = uniformShift && change is Change.Move
+			change.delay = if (animationsEnabled && !together) GalleryMotion.stagger(staggered++) else 0L
+		}
 		buildTracks(changes)
 		pre.clear()
 		post.clear()
@@ -158,6 +162,19 @@ class GalleryItemAnimator(
 			})
 			start()
 		}
+	}
+
+	private fun isUniformShift(changes: List<Change>): Boolean {
+		val moves = changes.filterIsInstance<Change.Move>()
+		val first = moves.firstOrNull() ?: return false
+		if (moves.any { it.dx != first.dx || it.dy != first.dy }) return false
+		val byHolder = changes.associateBy { it.holder }
+		for (index in 0 until recyclerView.childCount) {
+			val holder = recyclerView.getChildViewHolder(recyclerView.getChildAt(index)) ?: continue
+			val change = byHolder[holder]
+			if (change !is Change.Move && change !is Change.Remove && change !is Change.FadeOut) return false
+		}
+		return true
 	}
 
 	private fun buildTracks(changes: List<Change>) {

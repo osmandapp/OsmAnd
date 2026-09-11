@@ -74,6 +74,7 @@ class GridPinchController(
 	private var focalY = 0f
 	private var focalRatio = 0f
 	private var focalRealTop = 0f
+	private var anchoredAtTop = false
 	private var settle: ValueAnimator? = null
 	private val heights = HashMap<Int, Int>()
 	private val scratch = Rect()
@@ -235,6 +236,7 @@ class GridPinchController(
 		}
 		val anchor = focal ?: return
 		captured = list
+		anchoredAtTop = list.any { it.position == 0 && it.decorated.top >= recyclerView.paddingTop }
 		focalPosition = anchor.position
 		focalRealTop = anchor.decorated.top
 		focalRatio = (focalY - anchor.decorated.top) / anchor.decorated.height().coerceAtLeast(1f)
@@ -251,6 +253,7 @@ class GridPinchController(
 		val upperLayout = layoutFor(upper)
 		val lowerShift = screenShift(lowerLayout, lower)
 		val upperShift = screenShift(upperLayout, upper)
+		val zoomPivotY = if (anchoredAtTop) recyclerView.paddingTop.toFloat() else focalY
 		val rect = RectF()
 		fun place(lowerRect: RectF, upperRect: RectF, out: RectF) {
 			out.set(
@@ -260,8 +263,8 @@ class GridPinchController(
 				lowerRect.bottom + lowerShift + (upperRect.bottom + upperShift - lowerRect.bottom - lowerShift) * fraction
 			)
 			if (zoom != 1f) {
-				out.set(focalX + (out.left - focalX) * zoom, focalY + (out.top - focalY) * zoom,
-					focalX + (out.right - focalX) * zoom, focalY + (out.bottom - focalY) * zoom)
+				out.set(focalX + (out.left - focalX) * zoom, zoomPivotY + (out.top - zoomPivotY) * zoom,
+					focalX + (out.right - focalX) * zoom, zoomPivotY + (out.bottom - zoomPivotY) * zoom)
 			}
 		}
 		for (item in captured) {
@@ -288,9 +291,10 @@ class GridPinchController(
 	}
 
 	private fun screenShift(layout: Layout, span: Int): Float {
+		val top = recyclerView.paddingTop.toFloat()
+		if (anchoredAtTop) return top
 		val focal = layout.decorated[focalPosition] ?: return 0f
 		val screenTop = if (span == baseSpan) focalRealTop else focalY - focalRatio * focal.height()
-		val top = recyclerView.paddingTop.toFloat()
 		val bottom = (recyclerView.height - recyclerView.paddingBottom).toFloat()
 		return (screenTop - focal.top).coerceAtLeast(bottom - layout.height).coerceAtMost(top)
 	}
@@ -383,10 +387,15 @@ class GridPinchController(
 		val layout = layoutFor(target)
 		val shift = screenShift(layout, target)
 		val anchor = layout.decorated[focalPosition]
-		val offset = if (anchor != null) (anchor.top + shift - recyclerView.paddingTop).roundToInt() else 0
+		val anchorPosition = when {
+			anchoredAtTop -> 0
+			anchor != null -> focalPosition
+			else -> firstVisiblePosition()
+		}
+		val offset = if (!anchoredAtTop && anchor != null) (anchor.top + shift - recyclerView.paddingTop).roundToInt() else 0
 		val views = captured.map { it.view }
 		listener.setExtraLayoutSpace(0)
-		listener.commitSpan(target, if (anchor != null) focalPosition else firstVisiblePosition(), offset) {
+		listener.commitSpan(target, anchorPosition, offset) {
 			views.forEach(::clearTransform)
 			cards?.liveCards = null
 			recyclerView.invalidate()

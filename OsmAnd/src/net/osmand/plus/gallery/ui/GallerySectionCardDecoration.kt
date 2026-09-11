@@ -86,7 +86,6 @@ class GallerySectionCardDecoration(app: OsmandApplication, nightMode: Boolean) :
 			val rect = sections.getOrPut(boundary.sectionId) { RectF(card) }
 			rect.union(card)
 			val (topOpen, bottomOpen) = openEdges(parent, boundary)
-			// Keep corners beyond the viewport when the real section edge is not laid out.
 			if (topOpen) rect.top = minOf(rect.top, -radius)
 			if (bottomOpen) rect.bottom = maxOf(rect.bottom, parent.height + radius)
 		}

@@ -1,14 +1,12 @@
 package net.osmand.plus.gallery.ui
 
 import android.animation.ValueAnimator
-import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewTreeObserver
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -30,8 +28,6 @@ import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.helpers.AndroidUiHelper.isOrientationPortrait
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
-import net.osmand.plus.utils.InsetTarget
-import net.osmand.plus.utils.InsetTargetsCollection
 
 class GalleryGridFragment : BaseFullScreenFragment(), IGalleryGridView {
 
@@ -40,16 +36,13 @@ class GalleryGridFragment : BaseFullScreenFragment(), IGalleryGridView {
 	private lateinit var toolbarTitle: TextView
 	private lateinit var backButton: AppCompatImageView
 	private lateinit var actionsContainer: LinearLayout
-	private lateinit var recyclerView: GalleryGridRecyclerView
-	private lateinit var adapter: GalleryGridAdapter
 
 	private var controller: GalleryGridController? = null
-	private var gridBinder: GalleryGridBinder? = null
+	private var binder: GalleryGridBinder? = null
 	private var toolbarSelection: Boolean? = null
 	private var toolbarColor = 0
 	private var toolbarColorAnimator: ValueAnimator? = null
 
-	@SuppressLint("ClickableViewAccessibility")
 	override fun onCreateView(
 		inflater: LayoutInflater,
 		container: ViewGroup?,
@@ -58,51 +51,28 @@ class GalleryGridFragment : BaseFullScreenFragment(), IGalleryGridView {
 		updateNightMode()
 
 		val controllerId = arguments?.getString(CONTROLLER_ID_KEY) ?: return null
-		controller = app.dialogManager.findController(controllerId) as? GalleryGridController
-			?: return null
-		controller?.attach(this)
+		val controller = app.dialogManager.findController(controllerId) as? GalleryGridController ?: return null
+		this.controller = controller
+		controller.attach(this)
 
 		val view = inflate(R.layout.gallery_grid_fragment, container, false)
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view)
 
-		setupRecyclerView(view)
+		binder = GalleryGridBinder(view.findViewById(R.id.recycler_view), controller, requireActivity(), nightMode, sectionCards = false)
 
 		appBarLayout = view.findViewById(R.id.app_bar_layout)
 		toolbar = view.findViewById(R.id.toolbar)
 		toolbarTitle = toolbar.findViewById(R.id.toolbar_title)
 		backButton = toolbar.findViewById(R.id.back_button)
 		actionsContainer = toolbar.findViewById(R.id.actions_container)
-		setupToolbar()
+		renderToolbar()
 		setupOnBackPressedCallback()
 
 		return view
 	}
 
-	private fun setupRecyclerView(view: View) {
-		recyclerView = view.findViewById(R.id.content_list)
-		recyclerView.viewTreeObserver.addOnGlobalLayoutListener(
-			object : ViewTreeObserver.OnGlobalLayoutListener {
-				override fun onGlobalLayout() {
-					recyclerView.viewTreeObserver.removeOnGlobalLayoutListener(this)
-					val ctrl = controller ?: return
-					val activity = mapActivity ?: return
-
-					adapter = ctrl.createAdapter(activity, recyclerView.measuredWidth, nightMode)
-					adapter.displayMode = ctrl.getDisplayMode()
-					adapter.selectionMode = ctrl.isSelectionMode()
-					adapter.setItems(ctrl.getGalleryItems())
-
-					gridBinder = GalleryGridBinder(recyclerView, adapter, ctrl, sectionCards = false, nightMode = nightMode,
-						resizableViewWidth = recyclerView.measuredWidth).also { it.bind() }
-				}
-			}
-		)
-	}
-
 	override fun updateDisplayMode() {
-		if (!::adapter.isInitialized) return
-		val ctrl = controller ?: return
-		gridBinder?.morphLayout(ctrl.getGalleryItems())
+		binder?.updateDisplayMode()
 	}
 
 	override fun updateToolbar() {
@@ -111,21 +81,11 @@ class GalleryGridFragment : BaseFullScreenFragment(), IGalleryGridView {
 	}
 
 	override fun updateItems() {
-		if (!::adapter.isInitialized) return
-		val ctrl = controller ?: return
-		adapter.selectionMode = ctrl.isSelectionMode()
-		gridBinder?.setItems(ctrl.getGalleryItems(), animated = true)
+		binder?.updateItems()
 	}
 
 	override fun updateSelection() {
-		if (!::adapter.isInitialized) return
-		val ctrl = controller ?: return
-		adapter.selectionMode = ctrl.isSelectionMode()
-		adapter.notifySelectionChanged()
-	}
-
-	private fun setupToolbar() {
-		renderToolbar()
+		binder?.updateSelection()
 	}
 
 	private fun renderToolbar() {
@@ -137,7 +97,12 @@ class GalleryGridFragment : BaseFullScreenFragment(), IGalleryGridView {
 		} else {
 			ColorUtilities.getColor(app, ColorUtilities.getListBgColorId(nightMode))
 		}
-		applyToolbarColor(bgColor, animate = toolbarSelection != null && toolbarSelection != selection)
+		toolbarColorAnimator?.cancel()
+		toolbarColorAnimator = GalleryMotion.recolor(app, toolbarColor, bgColor, animate = toolbarSelection != null && toolbarSelection != selection) {
+			appBarLayout.setBackgroundColor(it)
+			toolbar.setBackgroundColor(it)
+		}
+		toolbarColor = bgColor
 		toolbarSelection = selection
 
 		val contentColor = if (selection) {
@@ -165,27 +130,6 @@ class GalleryGridFragment : BaseFullScreenFragment(), IGalleryGridView {
 
 		renderToolbarActions(ctrl.getToolbarActions(), iconColor)
 		AndroidUiHelper.updateVisibility(toolbar.findViewById(R.id.toolbar_subtitle), false)
-	}
-
-	private fun applyToolbarColor(color: Int, animate: Boolean) {
-		toolbarColorAnimator?.cancel()
-		toolbarColorAnimator = null
-		if (animate && GalleryMotion.animationsEnabled(app) && toolbarColor != color) {
-			toolbarColorAnimator = ValueAnimator.ofArgb(toolbarColor, color).apply {
-				duration = TOOLBAR_COLOR_DURATION_MS
-				interpolator = GalleryMotion.CURVE
-				addUpdateListener {
-					val value = it.animatedValue as Int
-					appBarLayout.setBackgroundColor(value)
-					toolbar.setBackgroundColor(value)
-				}
-				start()
-			}
-		} else {
-			appBarLayout.setBackgroundColor(color)
-			toolbar.setBackgroundColor(color)
-		}
-		toolbarColor = color
 	}
 
 	private fun renderToolbarActions(actions: List<GalleryToolbarAction>, iconColor: Int) {
@@ -249,30 +193,26 @@ class GalleryGridFragment : BaseFullScreenFragment(), IGalleryGridView {
 		callMapActivity(MapActivity::enableDrawer)
 	}
 
-	override fun onDestroy() {
-		super.onDestroy()
+	override fun onDestroyView() {
+		controller?.detach()
 		toolbarColorAnimator?.cancel()
 		toolbarColorAnimator = null
-		gridBinder?.release()
-		gridBinder = null
+		binder?.release()
+		binder = null
+		super.onDestroyView()
+	}
+
+	override fun onDestroy() {
+		super.onDestroy()
 		controller?.onScreenDestroyed(activity)
 	}
 
-	override fun getInsetTargets(): InsetTargetsCollection {
-		return super.getInsetTargets().apply {
-			replace(InsetTarget.createScrollable(R.id.content_list))
-		}
-	}
-
-	// IGalleryGridView
 	override fun getMapActivity(): MapActivity? = activity as? MapActivity
-	override fun isNightMode(): Boolean = nightMode
 	override fun isPortrait(): Boolean = isOrientationPortrait(requireActivity())
 
 	companion object {
 		const val TAG = "GalleryGridFragment"
 		private const val CONTROLLER_ID_KEY = "controller_id"
-		private const val TOOLBAR_COLOR_DURATION_MS = 200L
 
 		@JvmStatic
 		fun showInstance(activity: FragmentActivity, controllerId: String) {

@@ -1,43 +1,37 @@
 package net.osmand.plus.plugins.audionotes.library
 
 import android.animation.ValueAnimator
-import android.os.Bundle
-import android.os.Parcelable
-import android.view.LayoutInflater
 import android.graphics.drawable.ColorDrawable
+import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.doOnLayout
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import net.osmand.plus.R
+import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.BaseOsmAndFragment
 import net.osmand.plus.gallery.contract.IGalleryGridView
 import net.osmand.plus.gallery.model.GalleryItem
-import net.osmand.plus.gallery.ui.GalleryGridAdapter
 import net.osmand.plus.gallery.ui.GalleryGridBinder
-import net.osmand.plus.gallery.ui.GalleryGridRecyclerView
 import net.osmand.plus.gallery.ui.motion.GalleryMotion
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.myplaces.MyPlacesActivity
-import net.osmand.plus.utils.AndroidUtils
-import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin
+import net.osmand.plus.utils.AndroidUtils
+import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.InsetTarget
 import net.osmand.plus.utils.InsetTargetsCollection
 
 class MediaLibraryFragment : BaseOsmAndFragment(), IGalleryGridView {
 	private lateinit var controller: MediaLibraryController
-	private var recyclerView: GalleryGridRecyclerView? = null
-	private var adapter: GalleryGridAdapter? = null
 	private var binder: GalleryGridBinder? = null
 	private var chips: MediaLibraryChips? = null
 	private var chipsContainer: View? = null
-	private var pendingLayoutState: Parcelable? = null
 	private var toolbarSelectionMode = false
 	private val toolbarBackground = ColorDrawable()
 	private var toolbarColorAnimator: ValueAnimator? = null
@@ -54,7 +48,6 @@ class MediaLibraryFragment : BaseOsmAndFragment(), IGalleryGridView {
 		if (savedInstanceState?.getBoolean("selection_mode") == true) {
 			controller.restoreSelection(savedInstanceState.getStringArrayList("selected_ids").orEmpty())
 		}
-		pendingLayoutState = savedInstanceState?.getParcelable("library_layout")
 		app.dialogManager.register(controller.processId, controller)
 	}
 
@@ -63,21 +56,9 @@ class MediaLibraryFragment : BaseOsmAndFragment(), IGalleryGridView {
 		val root = themedInflater.inflate(R.layout.media_library_fragment, container, false)
 		chipsContainer = root.findViewById(R.id.chips_container)
 		chips = MediaLibraryChips(root.findViewById(R.id.chips), controller).also { it.update() }
-		val recycler = root.findViewById<GalleryGridRecyclerView>(R.id.recycler_view)
-		recyclerView = recycler
-		recycler.doOnLayout {
-			recycler.post {
-				if (recyclerView !== recycler) return@post
-				val contentWidth = recycler.width - recycler.paddingLeft - recycler.paddingRight
-				val mediaAdapter = controller.createAdapter(requireActivity(), contentWidth, nightMode)
-				adapter = mediaAdapter
-				mediaAdapter.displayMode = controller.getDisplayMode()
-				binder = GalleryGridBinder(recycler, mediaAdapter, controller, sectionCards = true, nightMode = nightMode,
-					resizableViewWidth = contentWidth).also { it.bind() }
-				controller.attach(this)
-				updateItems()
-			}
-		}
+		binder = GalleryGridBinder(root.findViewById(R.id.recycler_view), controller, requireActivity(), nightMode, sectionCards = true)
+			.also { it.pendingLayoutState = savedInstanceState?.getParcelable("library_layout") }
+		controller.attach(this)
 		return root
 	}
 
@@ -120,31 +101,30 @@ class MediaLibraryFragment : BaseOsmAndFragment(), IGalleryGridView {
 	}
 
 	override fun updateItems() {
-		val items = controller.getGalleryItems()
-		binder?.setItems(items, animated = true)
-		if (items.isNotEmpty() && adapter != null) {
-			pendingLayoutState?.let { recyclerView?.layoutManager?.onRestoreInstanceState(it) }
-			pendingLayoutState = null
-		}
+		val binder = binder ?: return
+		binder.updateItems()
+		val items = binder.items
 		chipsContainer?.isVisible = items.isNotEmpty() && items.none { it is GalleryItem.NoMedia }
 		chips?.update()
-		recyclerView?.invalidateItemDecorations()
 	}
 
 	override fun updateDisplayMode() {
-		binder?.morphLayout(controller.getGalleryItems())
+		binder?.updateDisplayMode()
 		chips?.update()
 	}
 
-	override fun updateSections() = updateItems()
+	override fun updateSelection() {
+		binder?.updateSelection()
+	}
 
 	override fun onSaveInstanceState(outState: Bundle) {
-		outState.putParcelable("library_layout", recyclerView?.layoutManager?.onSaveInstanceState() ?: pendingLayoutState)
+		outState.putParcelable("library_layout", binder?.saveLayoutState())
 		outState.putStringArrayList("collapsed_groups", ArrayList(controller.getCollapsedGroups()))
 		outState.putBoolean("selection_mode", controller.isSelectionMode())
 		outState.putStringArrayList("selected_ids", ArrayList(controller.selectedIds()))
 		super.onSaveInstanceState(outState)
 	}
+
 	override fun updateToolbar() {
 		if (!isResumed) return
 		val host = activity as? MyPlacesActivity ?: return
@@ -174,23 +154,13 @@ class MediaLibraryFragment : BaseOsmAndFragment(), IGalleryGridView {
 		toolbarColorAnimator?.cancel()
 		val background = toolbarBackground
 		bar.setBackgroundDrawable(background)
-		if (changed && GalleryMotion.animationsEnabled(app) && background.color != barColor) {
-			toolbarColorAnimator = ValueAnimator.ofArgb(background.color, barColor).apply {
-				duration = TOOLBAR_COLOR_DURATION_MS
-				interpolator = GalleryMotion.CURVE
-				addUpdateListener { background.color = it.animatedValue as Int }
-				start()
-			}
-		} else {
-			background.color = barColor
+		toolbarColorAnimator = GalleryMotion.recolor(app, background.color, barColor, animate = changed && background.color != 0) {
+			background.color = it
 		}
 		host.invalidateOptionsMenu()
 	}
-	override fun getMapActivity(): net.osmand.plus.activities.MapActivity? = activity as? net.osmand.plus.activities.MapActivity
-	override fun updateSelection() {
-		adapter?.selectionMode = controller.isSelectionMode()
-		adapter?.notifySelectionChanged()
-	}
+
+	override fun getMapActivity(): MapActivity? = activity as? MapActivity
 	override fun isPortrait(): Boolean = AndroidUiHelper.isOrientationPortrait(requireContext())
 
 	override fun getInsetTargets(): InsetTargetsCollection = InsetTargetsCollection().apply {
@@ -203,9 +173,6 @@ class MediaLibraryFragment : BaseOsmAndFragment(), IGalleryGridView {
 		toolbarColorAnimator?.cancel()
 		toolbarColorAnimator = null
 		binder?.release()
-		recyclerView?.adapter = null
-		recyclerView = null
-		adapter = null
 		binder = null
 		chips = null
 		chipsContainer = null
@@ -215,9 +182,5 @@ class MediaLibraryFragment : BaseOsmAndFragment(), IGalleryGridView {
 	override fun onDestroy() {
 		controller.onScreenDestroyed(activity)
 		super.onDestroy()
-	}
-
-	companion object {
-		private const val TOOLBAR_COLOR_DURATION_MS = 200L
 	}
 }

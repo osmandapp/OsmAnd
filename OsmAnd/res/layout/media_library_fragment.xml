@@ -7,8 +7,6 @@
 		<net.osmand.plus.search.dialogs.ChipsLayout android:id="@+id/chips"
 			android:layout_width="match_parent" android:layout_height="wrap_content" />
 	</FrameLayout>
-	<net.osmand.plus.gallery.ui.GalleryGridRecyclerView android:id="@+id/recycler_view"
-		android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"
-		android:paddingBottom="@dimen/content_padding_large"
-		android:clipToPadding="false" />
+	<include layout="@layout/gallery_grid_content"
+		android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" />
 </LinearLayout>
