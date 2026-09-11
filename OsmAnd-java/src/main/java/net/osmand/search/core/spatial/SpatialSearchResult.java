@@ -212,7 +212,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	public boolean isPoiCategory() {
 		return !objs.isEmpty() && objs.get(0).isPoiCategory();
 	}
-	
+
 	public SpatialPoiType getPoiCategory(SpatialPoiSearch poiSearch) {
 		if (!objs.isEmpty() && objs.get(0).isPoiCategory()) {
 			return poiSearch.getById((int) objs.get(0).atom.id);

@@ -73,9 +73,6 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 	private static final double SAME_STREET_M = 2000;   // pref-0111
 	private static final int MAX_SAME_NAME = 10;        // how far back the chain is walked
 
-	// parts OF a street, carrying its name: pref-0108, pref-0109 
-	private static final Set<String> STREET_PART_SUBTYPES = new HashSet<>(
-			Arrays.asList("bridge", "tunnel", "viaduct", "ford"));
 	
 	public SpatialSearchResultsList() {
 		this(null, null, null);
@@ -708,11 +705,11 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 			}
 		}
 		List<SpatialSearchResult> out = new ArrayList<>(sorted.size());
+		// quick check - a category search asked for all the objects themselves
+		int categoryId = !sorted.isEmpty() && sorted.get(0).isPoiCategory() ? (int) sorted.get(0).getFirstRef().atom.id : -1;
 		for (SpatialSearchResult s : sorted) {
 			SpatialSearchResult same = null;
-			// a category search asked for the objects themselves: two stops of one name 300 m
-			// apart are two answers, and uniting them would hide one of them
-			if (s.dedupName != null && s.getLatLon() != null && !s.isPoiCategory()) {
+			if (s.dedupName != null && s.getLatLon() != null && !s.isPoiCategory() && !isOfCategory(s, categoryId)) {
 				SpatialSearchResult prev = s.prevDedupSameName;
 				for (int i = 0; i < MAX_SAME_NAME && prev != null; i++) {
 					if (prev.getLatLon() != null && isSamePlace(prev, s)) {
@@ -732,43 +729,41 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 	}
 
 	private boolean isSamePlace(SpatialSearchResult a, SpatialSearchResult b) {
-		boolean street = a.getMainObject() instanceof Street;
-		if (street != (b.getMainObject() instanceof Street)) {
-			// a bridge carrying the street name is a piece OF it, unless it is a destination of
-			// its own: pref-0111. Anything else standing on a street stays separate: pref-0080
-			SpatialSearchResult poi = street ? b : a;
-			if (!isStreetPart(poi) || SpatialSearchRanking.isProminent(poi)) {
+		double distance = MapUtils.getDistance(a.getLatLon(), b.getLatLon());
+		boolean alikeA = SpatialSearchRanking.isSubordinateNode(a), alikeB = SpatialSearchRanking.isSubordinateNode(b);
+		if (alikeA || alikeB) {
+			// searched by name, what is named alike a place is absorbed by it: a stop
+			// called after the street, the village, the station it stands at - pref-0001, pref-0082, pref-0103, pref-0108;
+			if (alikeA != alikeB && SpatialSearchRanking.isProminent(alikeA ? a : b)) {
 				return false;
 			}
-			return MapUtils.getDistance(a.getLatLon(), b.getLatLon()) <= SAME_STREET_M;
+			return distance <= SAME_FACILITY_M;
 		}
-		double radius;
+		boolean street = a.getMainObject() instanceof Street;
+		if (street != (b.getMainObject() instanceof Street)) {
+			return false;
+		}
 		if (street) {
 			// a line's coordinate says little, so the city decides: pref-0107
 			City c1 = ((Street) a.getMainObject()).getCity();
 			City c2 = ((Street) b.getMainObject()).getCity();
-			if (c1 == null || c2 == null || !c1.getName().equals(c2.getName())) {
-				return false;
-			}
-			radius = SAME_STREET_M;
-		} else {
-			radius = isSpreadNode(a) || isSpreadNode(b) ? SAME_FACILITY_M : SAME_PLACE_M;
+			return c1 != null && c2 != null && c1.getName().equals(c2.getName()) && distance <= SAME_STREET_M;
 		}
-		return MapUtils.getDistance(a.getLatLon(), b.getLatLon()) <= radius;
-	}
-
-	private boolean isSpreadNode(SpatialSearchResult r) {
-		SpatialSearchResultRef head = r == null ? null : r.getFirstRef();
-		if (head == null || !(head.atom.object instanceof Amenity a)) {
+		if (isMetro(a) != isMetro(b)) {
 			return false;
 		}
-		String subType = a.getSubType();
-		return subType != null && (SpatialSearchRanking.SPREAD_SUBTYPES.contains(subType) || SpatialSearchRanking.STOP_SUBTYPES.contains(subType));
+		return distance <= SAME_PLACE_M;
 	}
 
-	private boolean isStreetPart(SpatialSearchResult r) {
-		MapObject o = r.getFirstRef() == null ? null : r.getFirstRef().atom.object;
-		return o instanceof Amenity a && a.getSubType() != null && STREET_PART_SUBTYPES.contains(a.getSubType());
+
+	private boolean isMetro(SpatialSearchResult r) {
+		SpatialSearchResultRef head = r == null ? null : r.getFirstRef();
+		return head != null && head.atom.object instanceof Amenity a && a.getAdditionalInfo("subway_station") != null;
+	}
+
+	private boolean isOfCategory(SpatialSearchResult r, int categoryId) {
+		SpatialSearchResultRef head = r.getFirstRef();
+		return categoryId != -1 && head != null && head.atom.poiTypes != null && head.atom.poiTypes.contains(categoryId);
 	}
 
 
