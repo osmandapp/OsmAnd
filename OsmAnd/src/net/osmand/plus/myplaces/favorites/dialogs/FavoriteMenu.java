@@ -24,6 +24,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -44,6 +45,8 @@ import net.osmand.plus.myplaces.favorites.FavoriteFolderFormatter;
 import net.osmand.plus.myplaces.favorites.FavoriteFolderPath;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
+import net.osmand.plus.myplaces.favorites.ShareFavoritesAsyncTask;
+import net.osmand.plus.myplaces.favorites.ShareFavoritesAsyncTask.ShareFavoritesListener;
 import net.osmand.plus.track.SelectTrackTabsFragment;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -62,9 +65,12 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class FavoriteMenu {
@@ -472,6 +478,13 @@ public class FavoriteMenu {
 		}
 
 		items.add(new PopUpMenuItem.Builder(activity)
+				.setTitleId(R.string.shared_string_share)
+				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_gshare_dark))
+				.setOnClickListener(v -> shareSelection(selection, actionListener))
+				.showTopDivider(selection.canMoveFolders())
+				.create());
+
+		items.add(new PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.shared_string_delete)
 				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_delete_outlined))
 				.setOnClickListener(v -> {
@@ -484,7 +497,7 @@ public class FavoriteMenu {
 					});
 					builder.create().show();
 				})
-				.showTopDivider(selection.canMoveFolders())
+				.showTopDivider(true)
 				.create());
 
 		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
@@ -547,6 +560,97 @@ public class FavoriteMenu {
 		return app.getString(R.string.shared_string_delete_all_q);
 	}
 
+	private void sharePoints(@NonNull Collection<FavouritePoint> points, @NonNull FavoriteActionListener listener) {
+		shareGroups(collectGroupsForPoints(points), null, listener);
+	}
+
+	private void shareSelection(@NonNull FavoriteSelection selection, @NonNull FavoriteActionListener listener) {
+		shareGroups(collectGroupsForSelection(selection), getSelectionFolderPath(selection), listener);
+	}
+
+	@Nullable
+	private String getSelectionFolderPath(@NonNull FavoriteSelection selection) {
+		if (selection.hasPoints() || !selection.getExactGroups().isEmpty() || selection.getFolders().size() != 1) {
+			return null;
+		}
+		String folderPath = selection.getFolders().get(0).getFullPath();
+		return Algorithms.isEmpty(folderPath) ? null : folderPath;
+	}
+
+	private void shareGroups(@NonNull List<FavoriteGroup> groups, @Nullable String folderPath,
+	                         @NonNull FavoriteActionListener listener) {
+		if (Algorithms.isEmpty(groups)) {
+			app.showToastMessage(R.string.no_fav_to_save);
+			return;
+		}
+		ShareFavoritesListener shareListener = listener instanceof ShareFavoritesListener sl ? sl : null;
+		OsmAndTaskManager.executeTask(new ShareFavoritesAsyncTask(activity, groups, folderPath, shareListener));
+	}
+
+	@NonNull
+	private List<FavoriteGroup> collectGroupsForPoints(@NonNull Collection<FavouritePoint> points) {
+		Map<String, FavoriteGroup> groups = new LinkedHashMap<>();
+		addPointsToGroups(groups, points, Collections.emptySet());
+		return new ArrayList<>(groups.values());
+	}
+
+	@NonNull
+	private List<FavoriteGroup> collectGroupsForSelection(@NonNull FavoriteSelection selection) {
+		FavouritesHelper helper = app.getFavoritesHelper();
+		Map<String, FavoriteGroup> groups = new LinkedHashMap<>();
+		Set<String> completeGroups = new HashSet<>();
+
+		for (FavoriteGroup group : selection.getExactGroups()) {
+			addWholeGroup(groups, completeGroups, group);
+		}
+		for (FavoriteFolder folder : selection.getFolders()) {
+			String folderPath = folder.getFullPath();
+			if (Algorithms.isEmpty(folderPath)) {
+				addWholeGroup(groups, completeGroups, folder.getGroup());
+			} else {
+				for (FavoriteGroup group : helper.getFavoriteGroupsInSubtree(folderPath)) {
+					addWholeGroup(groups, completeGroups, group);
+				}
+			}
+		}
+		addPointsToGroups(groups, selection.getPoints(), completeGroups);
+
+		return new ArrayList<>(groups.values());
+	}
+
+	private void addWholeGroup(@NonNull Map<String, FavoriteGroup> groups,
+	                           @NonNull Set<String> completeGroups, @Nullable FavoriteGroup group) {
+		if (group != null && !Algorithms.isEmpty(group.getPoints())) {
+			groups.put(group.getName(), new FavoriteGroup(group));
+			completeGroups.add(group.getName());
+		}
+	}
+
+	private void addPointsToGroups(@NonNull Map<String, FavoriteGroup> groups,
+	                               @NonNull Collection<FavouritePoint> points,
+	                               @NonNull Set<String> completeGroups) {
+		FavouritesHelper helper = app.getFavoritesHelper();
+		for (FavouritePoint point : points) {
+			String category = point.getCategory();
+			if (completeGroups.contains(category)) {
+				continue;
+			}
+			FavoriteGroup group = groups.get(category);
+			if (group == null) {
+				group = createEmptyGroupCopy(helper.getGroup(category), point);
+				groups.put(category, group);
+			}
+			group.getPoints().add(point);
+		}
+	}
+
+	@NonNull
+	private FavoriteGroup createEmptyGroupCopy(@Nullable FavoriteGroup group, @NonNull FavouritePoint point) {
+		FavoriteGroup copy = group != null ? new FavoriteGroup(group) : new FavoriteGroup(point);
+		copy.setPoints(new ArrayList<>());
+		return copy;
+	}
+
 	public void showPointsSelectOptionsMenu(@NonNull View view, @NonNull Set<FavouritePoint> points, @Nullable FavoriteGroup selectedGroup, boolean nightMode,
 	                                        @NonNull CategorySelectionListener selectionListener, @NonNull FavoriteActionListener actionListener,
 	                                        @NonNull FragmentStateHolder fragmentStateHolder) {
@@ -565,6 +669,13 @@ public class FavoriteMenu {
 							selectedGroup != null ? selectedGroup.getName() : null,
 							selectionListener);
 				})
+				.create());
+
+		items.add(new PopUpMenuItem.Builder(activity)
+				.setTitleId(R.string.shared_string_share)
+				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_gshare_dark))
+				.setOnClickListener(v -> sharePoints(points, actionListener))
+				.showTopDivider(true)
 				.create());
 
 		items.add(new PopUpMenuItem.Builder(activity)
