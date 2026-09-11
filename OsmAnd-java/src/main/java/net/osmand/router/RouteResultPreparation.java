@@ -266,6 +266,7 @@ public class RouteResultPreparation {
 			result.get(i).setTurnType(turnType);
 		}
 		
+		convertNoneLanes(result);
 		determineTurnsToMerge(ctx.leftSideNavigation, result);
 		ignorePrecedingStraightsOnSameIntersection(ctx.leftSideNavigation, result);
 		justifyUTurns(ctx.leftSideNavigation, result);
@@ -1308,7 +1309,7 @@ public class RouteResultPreparation {
 					int[] lanes = getTurnLanesInfo(prev, rr, t.getValue());
 					t = getActiveTurnType(lanes, leftSide, t);
 					t.setLanes(lanes);
-				} else if (fromTag != TurnType.C) {
+				} else if (fromTag != TurnType.C && fromTag != TurnType.NONE) {
 					t = attachKeepLeftInfoAndLanes(leftSide, prev, rr, twiceRoadPresent);
 					if (t != null) {
 						TurnType mainTurnType = TurnType.valueOf(fromTag, leftSide);
@@ -1414,6 +1415,15 @@ public class RouteResultPreparation {
 				turnSet = true;
 			}
 		}
+		if (mainTurnType == TurnType.C) {
+			// unmarked lanes are the ones that keep the direction of the road
+			for (int i = 0; i < lanesArray.length; i++) {
+				if (TurnType.getPrimaryTurn(lanesArray[i]) == TurnType.NONE) {
+					lanesArray[i] |= 1;
+					turnSet = true;
+				}
+			}
+		}
 		return turnSet;
 	}
 
@@ -1466,8 +1476,15 @@ public class RouteResultPreparation {
 		int activeEndIndex = act[1];
 		int activeTurn = act[2];
 		if (activeBeginIndex == -1 || activeEndIndex == -1 || activeBeginIndex > activeEndIndex) {
+			TurnType simple = createSimpleKeepLeftRightTurn(leftSide, prevSegm, currentSegm, rs);
+			TurnType unmarked = createTurnFromUnmarkedLanes(prevSegm, currentSegm, rawLanes, turnLanes, leftSide, simple);
+			if (unmarked != null) {
+				unmarked.setPossibleLeftTurn(possiblyLeftTurn);
+				unmarked.setPossibleRightTurn(possiblyRightTurn);
+				return unmarked;
+			}
 			// something went wrong
-			return createSimpleKeepLeftRightTurn(leftSide, prevSegm, currentSegm, rs);
+			return simple;
 		}
 		boolean leftOrRightKeep = (rs.keepLeft && !rs.keepRight) || (!rs.keepLeft && rs.keepRight);
 		if (leftOrRightKeep) {
@@ -1480,7 +1497,7 @@ public class RouteResultPreparation {
 					if (TurnType.getSecondaryTurn(rawLanes[i]) == tp) {
 						TurnType.setSecondaryToPrimary(rawLanes, i);
 						rawLanes[i] |= 1;
-					} else if(TurnType.getPrimaryTurn(rawLanes[i]) == tp) {
+					} else if (TurnType.isPrimaryDirection(rawLanes[i], tp)) {
 						rawLanes[i] |= 1;
 					}
 				}
@@ -1503,6 +1520,34 @@ public class RouteResultPreparation {
 		t.setLanes(rawLanes);
 		t.setPossibleLeftTurn(possiblyLeftTurn);
 		t.setPossibleRightTurn(possiblyRightTurn);
+		return t;
+	}
+
+	private TurnType createTurnFromUnmarkedLanes(RouteSegmentResult prevSegm, RouteSegmentResult currentSegm,
+			int[] rawLanes, String turnLanes, boolean leftSide, TurnType simple) {
+		if (!TurnType.hasNoneTurnLane(rawLanes)) {
+			return null;
+		}
+		double deviation = MapUtils.degreesDiff(prevSegm.getBearingEnd(), currentSegm.getBearingBegin());
+		int laneTurnType = getTurnByAngle(deviation);
+		int baseTurnType = simple != null ? simple.getValue() : laneTurnType;
+		boolean activated = setAllowedLanes(laneTurnType, rawLanes);
+		if (!activated) {
+			int[] declared = getUniqTurnTypes(turnLanes);
+			if (declared.length == 1 && TurnType.isSameTurnSide(declared[0], laneTurnType)
+					&& setAllowedLanes(declared[0], rawLanes)) {
+				activated = true;
+				baseTurnType = declared[0];
+			}
+		}
+		if (!activated) {
+			return null;
+		}
+		TurnType t = getActiveTurnType(rawLanes, leftSide, TurnType.valueOf(baseTurnType, leftSide));
+		if (simple != null) {
+			t.setSkipToSpeak(simple.isSkipToSpeak());
+		}
+		t.setLanes(rawLanes);
 		return t;
 	}
 
@@ -1969,7 +2014,10 @@ public class RouteResultPreparation {
 		if(turnLanes == null) {
 			return null;
 		}
-		return calculateRawTurnLanes(turnLanes, 0);
+		int[] lanes = calculateRawTurnLanes(turnLanes, 0);
+		// public entry point (used by the lanes widget in free drive), it must not expose TurnType.NONE
+		TurnType.convertNoneToStraight(lanes);
+		return lanes;
 	}
 	
 	public static int[] parseLanes(RouteDataObject ro, double dirToNorthEastPi) {
@@ -2061,7 +2109,8 @@ public class RouteResultPreparation {
 		for (int i = 0; i < oLanes.length; i++) {
 			// Nothing is in the list to compare to, so add the first elements
 			upossibleTurns.clear();
-			upossibleTurns.add(TurnType.getPrimaryTurn(oLanes[i]));
+			int primary = TurnType.getPrimaryTurn(oLanes[i]);
+			upossibleTurns.add(primary == TurnType.NONE ? TurnType.C : primary);
 			if (!onlyPrimary && TurnType.getSecondaryTurn(oLanes[i]) != 0) {
 				upossibleTurns.add(TurnType.getSecondaryTurn(oLanes[i]));
 			}
@@ -2070,14 +2119,6 @@ public class RouteResultPreparation {
 			}
 			if (!uniqueFromActive) {
 				possibleTurns.addAll(upossibleTurns);
-//				if (!possibleTurns.isEmpty()) {
-//					possibleTurns.retainAll(upossibleTurns);
-//					if(possibleTurns.isEmpty()) {
-//						break;
-//					}
-//				} else {
-//					possibleTurns.addAll(upossibleTurns);
-//				}
 			} else if ((oLanes[i] & 1) == 1) {
 				if (!possibleTurns.isEmpty()) {
 					possibleTurns.retainAll(upossibleTurns);
@@ -2286,7 +2327,10 @@ public class RouteResultPreparation {
 			String[] laneOptions = splitLaneOptions[i].split(";");
 			for (int j = 0; j < laneOptions.length; j++) {
 				int turn = TurnType.convertType(laneOptions[j]);
-				turnTypes.add(turn);
+				if (turn != TurnType.NONE) {
+					// an unmarked lane declares no direction, it must not be matched to a road at the junction
+					turnTypes.add(turn);
+				}
 			}
 		}
 		Iterator<Integer> it = turnTypes.iterator();
@@ -2331,25 +2375,55 @@ public class RouteResultPreparation {
 	private void findActiveIndexByUniqueDirections(int[] pair, int[] directions, RoadSplitStructure rs, int[] rawLanes) {
 		int startDirection = directions[rs.roadsOnLeft];
 		int endDirection = directions[directions.length - rs.roadsOnRight - 1];
+
+		int beginIndex = firstLaneWithDirection(rawLanes, startDirection);
+		int endIndex = lastLaneWithDirection(rawLanes, endDirection);
+		if (beginIndex >= 0) {
+			pair[2] = startDirection;
+		}
+		if (beginIndex >= 0 && endIndex >= beginIndex) {
+			endIndex = includeTrailingUnmarkedLanes(rawLanes, endIndex);
+		}
+		if (beginIndex >= 0 && !isStartDirectionTrusted(rawLanes, beginIndex, startDirection, rs)) {
+			beginIndex = -1;
+		}
+		pair[0] = beginIndex;
+		pair[1] = endIndex;
+	}
+
+	private int firstLaneWithDirection(int[] rawLanes, int direction) {
 		for (int i = 0; i < rawLanes.length; i++) {
-			int p = TurnType.getPrimaryTurn(rawLanes[i]);
-			int s = TurnType.getSecondaryTurn(rawLanes[i]);
-			int t = TurnType.getTertiaryTurn(rawLanes[i]);
-			if (p == startDirection || s == startDirection || t == startDirection) {
-				pair[0] = i;
-				pair[2] = startDirection;
-				break;
+			if (TurnType.laneHasDirection(rawLanes[i], direction)) {
+				return i;
 			}
 		}
+		return -1;
+	}
+
+	private int lastLaneWithDirection(int[] rawLanes, int direction) {
 		for (int i = rawLanes.length - 1; i >= 0; i--) {
-			int p = TurnType.getPrimaryTurn(rawLanes[i]);
-			int s = TurnType.getSecondaryTurn(rawLanes[i]);
-			int t = TurnType.getTertiaryTurn(rawLanes[i]);
-			if (p == endDirection || s == endDirection || t == endDirection) {
-				pair[1] = i;
-				break;
+			if (TurnType.laneHasDirection(rawLanes[i], direction)) {
+				return i;
 			}
 		}
+		return -1;
+	}
+
+	private int includeTrailingUnmarkedLanes(int[] rawLanes, int endIndex) {
+		while (endIndex + 1 < rawLanes.length
+				&& TurnType.getPrimaryTurn(rawLanes[endIndex + 1]) == TurnType.NONE) {
+			endIndex++;
+		}
+		return endIndex;
+	}
+
+	private boolean isStartDirectionTrusted(int[] rawLanes, int beginIndex, int startDirection,
+			RoadSplitStructure rs) {
+		if (rs.roadsOnLeft == 0 || !TurnType.hasNoneTurnLane(rawLanes)) {
+			return true;
+		}
+		return TurnType.isSlightTurn(startDirection)
+				|| TurnType.isPrimaryDirection(rawLanes[beginIndex], startDirection);
 	}
 
 	private boolean findActiveIndexByLanes(int[] pair, int[] directions, RoadSplitStructure rs, int[] rawLanes,
@@ -2481,7 +2555,9 @@ public class RouteResultPreparation {
 			if ((ln & 1) > 0) {
 				int[] oneActiveLane = {lanes[k]};
 				if (hasAllowedLanes(oldTurnType.getValue(), oneActiveLane, 0, 0)) {
-					tp = TurnType.getPrimaryTurn(lanes[k]);
+					int primary = TurnType.getPrimaryTurn(lanes[k]);
+					// an unmarked lane carries no direction of its own, keep the calculated one
+					tp = primary == TurnType.NONE ? oldTurnType.getValue() : primary;
 					if (isOldTurnTypeSharp && TurnType.isSharpOrReverse(tp)) {
 						break;
 					}
@@ -2555,6 +2631,15 @@ public class RouteResultPreparation {
 			}
 		}
 		return false;
+	}
+
+	private void convertNoneLanes(List<RouteSegmentResult> result) {
+		for (int i = 0; i < result.size(); i ++) {
+			TurnType t = result.get(i).getTurnType();
+			if (t != null) {
+				TurnType.convertNoneToStraight(t.getLanes());
+			}
+		}
 	}
 
 }
