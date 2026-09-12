@@ -86,6 +86,9 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 	//OpenGL
 	private PanoramaxTilesProvider panoramaxTilesProvider;
 	private MapMarkersCollection mapMarkersCollection;
+	// MapMarker cannot hide individual surface icons, so use separate markers with/without heading.
+	private MapMarker markerWithHeading;
+	private MapMarker markerWithoutHeading;
 	Bitmap selectedImageBitmap;
 	Bitmap headingImageBitmap;
 	private long filterKey = 0;
@@ -189,21 +192,27 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			initMarkersCollectionIfNeeded();
-			if (mapMarkersCollection != null && mapMarkersCollection.getMarkers().size() > 0) {
-				MapMarker marker = mapMarkersCollection.getMarkers().get(0);
-				if (selectedImageLocation != null) {
-					int x = MapUtils.get31TileNumberX(selectedImageLocation.getLongitude());
-					int y = MapUtils.get31TileNumberY(selectedImageLocation.getLatitude());
-					PointI pointI = new PointI(x, y);
-					marker.setPosition(pointI);
-					marker.setIsHidden(false);
-				} else {
-					marker.setIsHidden(true);
-				}
-				if (selectedImageCameraAngle != null) {
-					marker.setOnMapSurfaceIconDirection(SwigUtilities.getOnSurfaceIconKey(2), selectedImageCameraAngle);
-				}
+			if (markerWithHeading == null || markerWithoutHeading == null) {
+				return;
 			}
+			if (selectedImageLocation == null) {
+				markerWithHeading.setIsHidden(true);
+				markerWithoutHeading.setIsHidden(true);
+				return;
+			}
+			// Keep both markers in sync before switching visibility.
+			int x = MapUtils.get31TileNumberX(selectedImageLocation.getLongitude());
+			int y = MapUtils.get31TileNumberY(selectedImageLocation.getLatitude());
+			PointI pointI = new PointI(x, y);
+			markerWithHeading.setPosition(pointI);
+			markerWithoutHeading.setPosition(pointI);
+
+			boolean hasHeading = selectedImageCameraAngle != null;
+			if (hasHeading) {
+				markerWithHeading.setOnMapSurfaceIconDirection(SwigUtilities.getOnSurfaceIconKey(2), selectedImageCameraAngle);
+			}
+			markerWithHeading.setIsHidden(!hasHeading);
+			markerWithoutHeading.setIsHidden(hasHeading);
 		}
 	}
 
@@ -224,17 +233,24 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 		headingImageCanvas.drawBitmap(headingImage, 0, 0, paintPoint);
 
 		mapMarkersCollection = new MapMarkersCollection();
-		MapMarkerBuilder imageAndCourseMarkerBuilder = new MapMarkerBuilder();
-		imageAndCourseMarkerBuilder
+		markerWithHeading = buildMarker(true);
+		markerWithoutHeading = buildMarker(false);
+		mapRenderer.addSymbolsProvider(mapMarkersCollection);
+	}
+
+	/**OpenGL*/
+	private MapMarker buildMarker(boolean withHeading) {
+		MapMarkerBuilder builder = new MapMarkerBuilder()
 				.setIsHidden(true)
 				.setIsAccuracyCircleSupported(false)
 				.setBaseOrder(getPointsOrder())
 				.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal)
 				.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.Top)
-				.addOnMapSurfaceIcon(SwigUtilities.getOnSurfaceIconKey(1), NativeUtilities.createSkImageFromBitmap(selectedImageBitmap))
-				.addOnMapSurfaceIcon(SwigUtilities.getOnSurfaceIconKey(2), NativeUtilities.createSkImageFromBitmap(headingImageBitmap))
-				.buildAndAddToCollection(mapMarkersCollection);
-		mapRenderer.addSymbolsProvider(mapMarkersCollection);
+				.addOnMapSurfaceIcon(SwigUtilities.getOnSurfaceIconKey(1), NativeUtilities.createSkImageFromBitmap(selectedImageBitmap));
+		if (withHeading) {
+			builder.addOnMapSurfaceIcon(SwigUtilities.getOnSurfaceIconKey(2), NativeUtilities.createSkImageFromBitmap(headingImageBitmap));
+		}
+		return builder.buildAndAddToCollection(mapMarkersCollection);
 	}
 
 	/**OpenGL*/
@@ -244,6 +260,8 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 		if (mapRenderer != null && mapMarkersCollection != null) {
 			mapRenderer.removeSymbolsProvider(mapMarkersCollection);
 			mapMarkersCollection = null;
+			markerWithHeading = null;
+			markerWithoutHeading = null;
 		}
 	}
 
@@ -552,6 +570,8 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 		if (mapMarkersCollection != null) {
 			mapRenderer.removeSymbolsProvider(mapMarkersCollection);
 			mapMarkersCollection = null;
+			markerWithHeading = null;
+			markerWithoutHeading = null;
 		}
 		if (panoramaxTilesProvider != null) {
 			int layerIndex = view.getLayerIndex(this);

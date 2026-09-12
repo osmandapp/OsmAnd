@@ -110,7 +110,7 @@ public class PanoramaxImageTest {
 		PanoramaxImage image = new PanoramaxImage(0, 0);
 		assertTrue(image.setData(data));
 		assertEquals(0, image.getCapturedAt());
-		assertEquals(-1, image.getCompassAngle(), 0.0001);
+		assertTrue(Double.isNaN(image.getCompassAngle()));
 		assertNull(image.getAccountId());
 		assertNull(image.getSKey());
 		assertFalse(image.isPanoramicImage());

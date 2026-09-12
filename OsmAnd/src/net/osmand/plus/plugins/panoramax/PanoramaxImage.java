@@ -44,8 +44,8 @@ public class PanoramaxImage {
 	// Image location
 	private final double latitude;
 	private final double longitude;
-	// Camera heading. -1 if not found.
-	private double compassAngle = -1;
+	// Camera heading, or NaN if unavailable.
+	private double compassAngle = Double.NaN;
 	// When the image was captured, expressed as UTC epoch time in milliseconds. 0 if not found.
 	private long capturedAt;
 	private String imageId;
@@ -87,7 +87,7 @@ public class PanoramaxImage {
 		this.imageId = id.toString();
 		this.capturedAt = parseCaptureTime(userData);
 		Object heading = userData.get(HEADING_KEY);
-		this.compassAngle = heading instanceof Number ? ((Number) heading).doubleValue() : -1;
+		this.compassAngle = heading instanceof Number ? ((Number) heading).doubleValue() : Double.NaN;
 		Object sequenceId = userData.get(SEQUENCE_ID_KEY);
 		this.sequenceId = sequenceId != null ? sequenceId.toString() : null;
 		Object accountId = userData.get(ACCOUNT_ID_KEY);
