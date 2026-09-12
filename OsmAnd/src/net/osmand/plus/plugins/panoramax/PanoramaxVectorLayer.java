@@ -137,8 +137,11 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
-		super.onPrepareBufferImage(canvas, tileBox, drawSettings);
+		// Before super: MapTileLayer.onPrepareBufferImage() calls the overridden drawTileMap()
+		// itself when there is no map renderer, so the bitmaps it paints with must already be
+		// current by then.
 		updateBitmaps(false);
+		super.onPrepareBufferImage(canvas, tileBox, drawSettings);
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			int layerIndex = view.getLayerIndex(this);
@@ -166,8 +169,6 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 			} else {
 				panoramaxTilesProvider.setVisibleBBox31(mapRenderer.getVisibleBBox31(), tileBox.getZoom());
 			}
-		} else {
-			super.onPrepareBufferImage(canvas, tileBox, drawSettings);
 		}
 	}
 
