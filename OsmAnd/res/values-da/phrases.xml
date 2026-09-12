@@ -3677,7 +3677,7 @@
     <string name="poi_goods_yes">Ja</string>
     <string name="poi_goods_designated">Udpeget</string>
     <string name="poi_disabled_yes">Ja</string>
-    <string name="poi_disabled_designated">Udpeget</string>
+    <string name="poi_disabled_designated">Udpeget;Adgang forbeholdt handicappede</string>
     <string name="poi_cellar_entrance">Kælderindgang</string>
     <string name="poi_health_food">Helsekost</string>
     <string name="poi_craft_builder">Bygherre</string>
