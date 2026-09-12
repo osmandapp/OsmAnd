@@ -539,15 +539,12 @@ public class SpatialPipelineSearch {
 
 	private SpatialPipelineContext prepareInitialBuckets() {
 		int totalTokens = ctx.tokens.size();
+		// a query repeating words: for every token the tokens with its word
+		long[] copies = copiesOfWords();
 		// combine & merge by tokens
-		Map<String, Integer> dupTokens = new HashMap<>();
 		for (int tokenIdx = 0; tokenIdx < totalTokens; tokenIdx++) {
 			SpatialSearchToken token = ctx.tokens.get(tokenIdx);
-			Integer lastDupToken = dupTokens.get(token.word);
-			dupTokens.put(token.word, tokenIdx);
-			if (lastDupToken == null) {
-				lastDupToken = tokenIdx;
-			}
+			int lastDupToken = previousCopy(copies, tokenIdx);
 //			if (!SearchAlgorithms.isNumber2Letters(token.wordAligned)) {
 				// fixes 'Am Remsufer Remseck am Neckar' but incorrect for '138 138 Scott Avenue Bellefonte' & 'W&W'
 //				token = ctx.tokens.get(lastDupToken); 
@@ -560,7 +557,8 @@ public class SpatialPipelineSearch {
 				SpatialPipelineObjectRes existing = ctx.objectsById.get(atom.id);
 				boolean noPoiType = disallowPoiType(atom, token);
 				if (existing != null) {
-					existing.mergeSame(totalTokens, atom, tokenIdx, noPoiType, lastDupToken);
+					existing.mergeSame(totalTokens, atom, tokenIdx, noPoiType, lastDupToken, copies,
+							copies == null ? 0 : tokensOf(atom.id));
 				} else {
 					SpatialPipelineObjectRes obj = new SpatialPipelineObjectRes(totalTokens, atom, tokenIdx, noPoiType);
 					ctx.objectsById.put(atom.id, obj);
@@ -589,6 +587,43 @@ public class SpatialPipelineSearch {
 		}
 		ctx.initBuckets = buckets;
 		return ctx;
+	}
+
+	/**
+	 * @return for every token the tokens with the same word, null when the query repeats no word
+	 */
+	private long[] copiesOfWords() {
+		long[] copies = null;
+		for (int i = 0; i < ctx.tokens.size(); i++) {
+			for (int j = 0; j < ctx.tokens.size(); j++) {
+				if (i != j && ctx.tokens.get(i).word.equals(ctx.tokens.get(j).word)) {
+					if (copies == null) {
+						copies = new long[ctx.tokens.size()];
+					}
+					copies[i] |= 1L << j;
+				}
+			}
+		}
+		return copies;
+	}
+
+	// the tokens that found the object
+	private long tokensOf(long objectId) {
+		long tokens = 0;
+		for (int i = 0; i < ctx.tokens.size(); i++) {
+			SpatialSearchToken token = ctx.tokens.get(i);
+			NameIndexAtom atom = token.index.get(objectId);
+			if (atom != null && !token.getDeletedAtoms().contains(atom.indexInToken)) {
+				tokens |= 1L << i;
+			}
+		}
+		return tokens;
+	}
+
+	// the nearest token before with the same word, the token itself when there is none
+	private int previousCopy(long[] copies, int tokenIdx) {
+		long before = copies == null ? 0 : copies[tokenIdx] & ((1L << tokenIdx) - 1);
+		return before == 0 ? tokenIdx : 63 - Long.numberOfLeadingZeros(before);
 	}
 
 	private boolean validateResultsAndFinish(List<SpatialPipelineObjectRes> preResults, int stage,

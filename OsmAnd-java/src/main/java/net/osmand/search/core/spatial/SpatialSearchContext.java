@@ -925,6 +925,7 @@ public class SpatialSearchContext {
 				}
 			}
 		}
+		int nameFound = 0;
 		if (split != null) {
 			for (int k = 1; k < split.size(); k++) {
 				String otherName = split.get(k);
@@ -940,8 +941,10 @@ public class SpatialSearchContext {
 						if (otherTokens == null) {
 							otherTokens = new ArrayList<>(3);
 						}
+						token = nearestCopy(allTokens, t, token, otherTokens);
 						otherTokens.add(token);
 						matched = true;
+						nameFound++;
 						if (!isKindWord(indx, otherName)) {
 							distinct++;
 						}
@@ -958,6 +961,12 @@ public class SpatialSearchContext {
 					}
 				}
 			}
+		}
+		// the query word only names this object's category ('hotel' in 'Hotel Sacher') and every other query word is already
+		// explained by the category: the category atom finds the object without the unmatched name words
+		if (other > 0 && nameFound == 0 && (otherTokens == null ? 0 : otherTokens.size()) == allTokens.size() - 1
+				&& poiTypes != null && t.matchPoiCategoryKeys(poiTypes) && (split == null || t.matchName(split.get(0), null))) {
+			return;
 		}
 		int otherFound = otherTokens == null ? 0 : otherTokens.size();
 		int nearByType = 0;
@@ -1005,6 +1014,26 @@ public class SpatialSearchContext {
 			addBuildingRefAtoms(t, allTokens, otherTokens, numericNotMatch, atom);
 		}
 
+	}
+
+	/**
+	 * A word the query has twice belongs to the name next to it: in "travessa de santo antónio rua joaquim ribeiro de
+	 * carvalho" the street found by "antónio" takes the first "de" and the street found by "ribeiro" the second.
+	 * Copies side by side ("w w" of "W&W") are one name and keep their order.
+	 */
+	private SpatialSearchToken nearestCopy(List<SpatialSearchToken> allTokens, SpatialSearchToken found,
+			SpatialSearchToken copy, List<SpatialSearchToken> used) {
+		int f = allTokens.indexOf(found);
+		for (SpatialSearchToken other : allTokens) {
+			if (other == found || other == copy || !other.word.equals(copy.word) || used.contains(other)) {
+				continue;
+			}
+			int o = allTokens.indexOf(other), c = allTokens.indexOf(copy);
+			if (Math.abs(o - c) > 1 && Math.abs(o - f) < Math.abs(c - f)) {
+				copy = other;
+			}
+		}
+		return copy;
 	}
 
 	/** a word the map mostly leaves unindexed says what an object is ("avenue", "вулиця", "calle"),
