@@ -18,6 +18,7 @@ import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemsFactory;
 import net.osmand.plus.settings.backend.backup.items.CollectionSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.FavoritesSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.GpxSettingsItem;
@@ -169,15 +170,24 @@ class BackupImporter {
 				if (!error) {
 					is = new FileInputStream(tempFile);
 					File file = reader.readFromStream(is, tempFile, remoteFile.getName());
+					boolean applied = true;
 					if (forceReadData) {
 						if (item instanceof CollectionSettingsItem<?>) {
 							((CollectionSettingsItem<?>) item).processDuplicateItems();
 						}
 						item.apply();
+						applied = isAppliedLocally(item);
 					}
-					updateFileM5Digest(remoteFile, item, file);
-					updateFileUploadTime(remoteFile, item);
-					FavoritesBackupMerger.onDownloadSuccess(app, item, remoteFile);
+					if (applied) {
+						updateFileM5Digest(remoteFile, item, file);
+						updateFileUploadTime(remoteFile, item);
+						FavoritesBackupMerger.onDownloadSuccess(app, item, remoteFile);
+					} else {
+						// Leaving the upload time unrecorded makes the next sync download the file
+						// again, instead of reading the missing local file as a local deletion.
+						item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
+						LOG.error("Downloaded item was not applied locally: " + item.getName());
+					}
 					if (PluginsHelper.isDevelopment()) {
 						UploadedFileInfo info = backupHelper.getUploadedFileInfo(remoteFile.getType(), remoteFile.getName());
 						LOG.debug(" importItemFile file info " + info);
@@ -199,6 +209,10 @@ class BackupImporter {
 		} finally {
 			Algorithms.closeStream(is);
 		}
+	}
+
+	private static boolean isAppliedLocally(@NonNull SettingsItem item) {
+		return !(item instanceof FavoritesSettingsItem favoritesItem) || favoritesItem.isAppliedLocally();
 	}
 
 	private void updateFileM5Digest(@NonNull RemoteFile remoteFile, @NonNull SettingsItem item, @Nullable File file) {
