@@ -1,9 +1,5 @@
 package net.osmand.core.android;
 
-import static net.osmand.plus.plugins.panoramax.PanoramaxImage.ACCOUNT_ID_KEY;
-import static net.osmand.plus.plugins.panoramax.PanoramaxImage.TYPE_EQUIRECTANGULAR;
-import static net.osmand.plus.plugins.panoramax.PanoramaxImage.TYPE_KEY;
-
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -31,6 +27,7 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.panoramax.PanoramaxFilterState;
 import net.osmand.plus.plugins.panoramax.PanoramaxImage;
 import net.osmand.plus.plugins.panoramax.PanoramaxPlugin;
 import net.osmand.plus.plugins.panoramax.PanoramaxVectorLayer;
@@ -63,6 +60,9 @@ public class PanoramaxTilesProvider extends interface_ImageMapLayerProvider {
 	private final ResourceManager rm;
 	private final OsmandSettings settings;
 	private final PanoramaxPlugin plugin;
+	// The filter this provider was created for. PanoramaxVectorLayer replaces the provider when
+	// the filter changes, so the cached tiles below always belong to this one state.
+	private final PanoramaxFilterState filterState;
 	private final Paint paintLine;
 	private final Paint paintPoint;
 	private final Bitmap bitmapPoint;
@@ -79,8 +79,10 @@ public class PanoramaxTilesProvider extends interface_ImageMapLayerProvider {
 	public static final int MIN_POINTS_ZOOM = PanoramaxVectorLayer.MIN_POINTS_ZOOM;
 	public static final double EXTENT = PanoramaxVectorLayer.EXTENT;
 
-	public PanoramaxTilesProvider(@NonNull OsmandApplication app, @NonNull ITileSource tileSource, float density) {
+	public PanoramaxTilesProvider(@NonNull OsmandApplication app, @NonNull ITileSource tileSource, float density,
+			@NonNull PanoramaxFilterState filterState) {
 		this.tileSource = tileSource;
+		this.filterState = filterState;
 		this.app = app;
 		this.rm = app.getResourceManager();
 		this.settings = app.getSettings();
@@ -244,7 +246,7 @@ public class PanoramaxTilesProvider extends interface_ImageMapLayerProvider {
 	                       AreaI tileBBox31, AreaI tileBBox31Enlarged, int mult, int zoomShift, int tileSize, double tileSize31) {
 		boolean isDraw = false;
 		for (Geometry geometry : geometries) {
-			if (geometry.isEmpty() || filtered(geometry.getUserData())) {
+			if (geometry.isEmpty() || filterState.filtered(geometry.getUserData())) {
 				continue;
 			}
 			if (geometry instanceof MultiLineString) {
@@ -335,42 +337,6 @@ public class PanoramaxTilesProvider extends interface_ImageMapLayerProvider {
 		} else {
 			return MIN_IMAGE_LAYER_ZOOM;
 		}
-	}
-
-	private boolean filtered(Object data) {
-		if (data == null) {
-			return true;
-		}
-		HashMap<String, Object> userData = (HashMap<String, Object>) data;
-		boolean shouldFilter = plugin.USE_PANORAMAX_FILTER.get();
-		if (shouldFilter) {
-			String userKey = plugin.PANORAMAX_FILTER_USER_KEY.get();
-			if (!userKey.isEmpty()) {
-				Object accountId = userData.get(ACCOUNT_ID_KEY);
-				if (accountId == null || !userKey.equals(accountId.toString())) {
-					return true;
-				}
-			}
-			long from = plugin.PANORAMAX_FILTER_FROM_DATE.get();
-			long to = plugin.PANORAMAX_FILTER_TO_DATE.get();
-			// "ts" is a timestamp string, not a number of milliseconds as in Mapillary tiles.
-			long capturedAt = PanoramaxImage.parseCaptureTime(userData);
-			if (from != 0 && to != 0) {
-				if (capturedAt < from || capturedAt > to) {
-					return true;
-				}
-			} else if ((from != 0 && capturedAt < from) || (to != 0 && capturedAt > to)) {
-				return true;
-			}
-		}
-		// Always filter by image type
-		boolean pano = plugin.PANORAMAX_FILTER_PANO.get();
-		if (pano) {
-			// Panoramas are flagged by type = "equirectangular"; the property can be absent.
-			Object type = userData.get(TYPE_KEY);
-			return type == null || !TYPE_EQUIRECTANGULAR.equalsIgnoreCase(type.toString());
-		}
-		return false;
 	}
 
 	private boolean drawLine(Canvas canvas, TileId tileId, IQueryController queryController, LineString line, Paint paintLine,
@@ -482,7 +448,7 @@ public class PanoramaxTilesProvider extends interface_ImageMapLayerProvider {
 				double lat = MapUtils.get31LatitudeY((int) tileY);
 				double lon = MapUtils.get31LongitudeX((int) tileX);
 
-				if (tileBBox31Enlarged.contains((int) tileX, (int) tileY) && !filtered(userData)) {
+				if (tileBBox31Enlarged.contains((int) tileX, (int) tileY) && !filterState.filtered(userData)) {
 					double x = ((tileX - tileBBox31Left) / tileSize31) * tileSize - bitmapHalfSize;
 					double y = ((tileY - tileBBox31Top) / tileSize31) * tileSize - bitmapHalfSize;
 					canvas.drawBitmap(bitmapPoint, (float) x, (float) y, paintPoint);
@@ -578,7 +544,7 @@ public class PanoramaxTilesProvider extends interface_ImageMapLayerProvider {
 						double lat = MapUtils.get31LatitudeY((int) y31);
 						double lon = MapUtils.get31LongitudeX((int) x31);
 
-						if (!filtered(userData)) {
+						if (!filterState.filtered(userData)) {
 							PanoramaxImage img = new PanoramaxImage(lat, lon);
 							if (img.setData(userData)) {
 								tileQuadTree.insert(img, (float) lon, (float) lat);

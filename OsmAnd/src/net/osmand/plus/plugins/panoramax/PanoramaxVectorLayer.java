@@ -1,9 +1,5 @@
 package net.osmand.plus.plugins.panoramax;
 
-import static net.osmand.plus.plugins.panoramax.PanoramaxImage.ACCOUNT_ID_KEY;
-import static net.osmand.plus.plugins.panoramax.PanoramaxImage.TYPE_KEY;
-import static net.osmand.plus.plugins.panoramax.PanoramaxImage.TYPE_EQUIRECTANGULAR;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -91,7 +87,8 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 	private MapMarker markerWithoutHeading;
 	Bitmap selectedImageBitmap;
 	Bitmap headingImageBitmap;
-	private long filterKey = 0;
+	// The state the current OpenGL provider was built for; a change means its tiles are stale.
+	private PanoramaxFilterState appliedFilterState;
 
 	PanoramaxVectorLayer(@NonNull Context context) {
 		super(context, false);
@@ -156,17 +153,18 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 				}
 				return;
 			}
-			if (filterKey != getFilterKey()) {
+			PanoramaxFilterState currentFilterState = PanoramaxFilterState.read(plugin);
+			if (!currentFilterState.equals(appliedFilterState)) {
 				if (panoramaxTilesProvider != null) {
 					panoramaxTilesProvider.clearCache();
 					mapRenderer.resetMapLayerProvider(layerIndex);
 					clearMapMarkersCollections();
 					panoramaxTilesProvider = null;
 				}
-				filterKey = getFilterKey();
+				appliedFilterState = currentFilterState;
 			}
 			if (panoramaxTilesProvider == null) {
-				panoramaxTilesProvider = new PanoramaxTilesProvider(getApplication(), map, view.getDensity());
+				panoramaxTilesProvider = new PanoramaxTilesProvider(getApplication(), map, view.getDensity(), currentFilterState);
 				mapRenderer.setMapLayerProvider(layerIndex, panoramaxTilesProvider.instantiateProxy(true));
 				panoramaxTilesProvider.swigReleaseOwnership();
 			} else {
@@ -320,6 +318,7 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 				|| PluginsHelper.isActive(PanoramaxPlugin.class))
 				&& settings.isInternetConnectionAvailable() && map.couldBeDownloadedFromInternet();
 
+		PanoramaxFilterState filterState = PanoramaxFilterState.read(plugin);
 		Map<String, GeometryTile> tiles = new HashMap<>();
 		Map<QuadPointDouble, Map<?, ?>> visiblePoints = new HashMap<>();
 		for (int i = 0; i < width; i++) {
@@ -340,9 +339,9 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 						tiles.put(tileId, tile);
 						List<Geometry> geometries = tile.getData();
 						if (geometries != null) {
-							drawLines(canvas, tileBox, geometries, tileX, tileY, tileZoom);
+							drawLines(canvas, tileBox, geometries, tileX, tileY, tileZoom, filterState);
 							if (currentZoom >= MIN_POINTS_ZOOM) {
-								Map<QuadPointDouble, Map<?, ?>> drawnPoints = drawPoints(canvas, tileBox, geometries, tileX, tileY);
+								Map<QuadPointDouble, Map<?, ?>> drawnPoints = drawPoints(canvas, tileBox, geometries, tileX, tileY, filterState);
 								visiblePoints.putAll(drawnPoints);
 							}
 						}
@@ -355,9 +354,9 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 	}
 
 	private void drawLines(Canvas canvas, RotatedTileBox tileBox, List<Geometry> geometries,
-	                       int tileX, int tileY, int tileZoom) {
+	                       int tileX, int tileY, int tileZoom, PanoramaxFilterState filterState) {
 		for (Geometry geometry : geometries) {
-			if (geometry.isEmpty() || filtered(geometry.getUserData())) {
+			if (geometry.isEmpty() || filterState.filtered(geometry.getUserData())) {
 				continue;
 			}
 
@@ -439,7 +438,8 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 	}
 
 	private Map<QuadPointDouble, Map<?, ?>> drawPoints(Canvas canvas, RotatedTileBox tileBox,
-	                                             List<Geometry> geometries, int tileX, int tileY) {
+	                                             List<Geometry> geometries, int tileX, int tileY,
+	                                             PanoramaxFilterState filterState) {
 		int dzoom = tileBox.getZoom() - MIN_IMAGE_LAYER_ZOOM;
 		int mult = (int) Math.pow(2.0, dzoom);
 		QuadRect tileBounds = tileBox.getTileBounds();
@@ -459,7 +459,7 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 				py = p.getCoordinate().y / EXTENT;
 				tx = (tileX + px) * mult;
 				ty = (tileY + py) * mult;
-				if (tileBounds.contains(tx, ty, tx, ty) && !filtered(userData)) {
+				if (tileBounds.contains(tx, ty, tx, ty) && !filterState.filtered(userData)) {
 					x = tileBox.getPixXFromTile(tileX + px, tileY + py, MIN_IMAGE_LAYER_ZOOM);
 					y = tileBox.getPixYFromTile(tileX + px, tileY + py, MIN_IMAGE_LAYER_ZOOM);
 					canvas.drawBitmap(point, x - pwd, y - phd, paintPoint);
@@ -469,47 +469,6 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 		}
 
 		return visiblePoints;
-	}
-
-	private boolean filtered(Object data) {
-		if (data == null) {
-			return true;
-		}
-
-		boolean shouldFilter = plugin.USE_PANORAMAX_FILTER.get();
-		String userKey = plugin.PANORAMAX_FILTER_USER_KEY.get();
-		long from = plugin.PANORAMAX_FILTER_FROM_DATE.get();
-		long to = plugin.PANORAMAX_FILTER_TO_DATE.get();
-		boolean pano = plugin.PANORAMAX_FILTER_PANO.get();
-
-		HashMap<String, Object> userData = (HashMap<String, Object>) data;
-		long capturedAt = PanoramaxImage.parseCaptureTime(userData);
-
-		if (shouldFilter) {
-			// Unlike Mapillary, whose tiles carry no user key, Panoramax tags every picture with the
-			// account that uploaded it, so this filter actually works here.
-			if (!userKey.isEmpty()) {
-				Object accountId = userData.get(ACCOUNT_ID_KEY);
-				if (accountId == null || !userKey.equals(accountId.toString())) {
-					return true;
-				}
-			}
-
-			if (from != 0 && to != 0) {
-				if (capturedAt < from || capturedAt > to) {
-					return true;
-				}
-			} else if ((from != 0 && capturedAt < from) || (to != 0 && capturedAt > to)) {
-				return true;
-			}
-		}
-
-		// Always filter by image type
-		if (pano) {
-			Object type = userData.get(TYPE_KEY);
-			return type == null || !TYPE_EQUIRECTANGULAR.equalsIgnoreCase(type.toString());
-		}
-		return false;
 	}
 
 	private void drawSelectedPoint(Canvas canvas, RotatedTileBox tileBox) {
@@ -713,17 +672,5 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 		if (image != null) {
 			result.collect(image, this);
 		}
-	}
-
-	private long getFilterKey() {
-		int hasFilter = plugin.USE_PANORAMAX_FILTER.get() ? 1 : 0;
-		long from = 0;
-		long to = 0;
-		if (hasFilter == 1) {
-			from = plugin.PANORAMAX_FILTER_FROM_DATE.get();
-			to = plugin.PANORAMAX_FILTER_TO_DATE.get();
-		}
-		int pano = plugin.PANORAMAX_FILTER_PANO.get() ? 1 : 0;
-		return (hasFilter << 1) + from + to + pano;
 	}
 }
