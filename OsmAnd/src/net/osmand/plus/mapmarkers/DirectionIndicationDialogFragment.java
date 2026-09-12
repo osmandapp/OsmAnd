@@ -5,24 +5,20 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.MARKERS_TOP_BAR;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.TOP;
 
 import android.content.Context;
-import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.ListPopupWindow;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
@@ -40,8 +36,13 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
+import net.osmand.plus.widgets.popup.PopUpMenu;
+import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class DirectionIndicationDialogFragment extends BaseFullScreenDialogFragment {
 
@@ -93,26 +94,22 @@ public class DirectionIndicationDialogFragment extends BaseFullScreenDialogFragm
 		menuTv.setText(settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get() == 1 ? R.string.shared_string_one : R.string.shared_string_two);
 		menuTv.setCompoundDrawablesWithIntrinsicBounds(null, null, getContentIcon(R.drawable.ic_action_arrow_drop_down), null);
 		menuTv.setOnClickListener(view -> {
-			Context themedContext = UiUtilities.getThemedContext(getActivity(), nightMode);
 			CharSequence[] titles = getMenuTitles();
-			Paint paint = new Paint();
-			paint.setTextSize(getResources().getDimensionPixelSize(R.dimen.default_list_text_size));
-			float titleTextWidth = Math.max(paint.measureText(titles[0].toString()), paint.measureText(titles[1].toString()));
-			float itemWidth = titleTextWidth + AndroidUtils.dpToPx(themedContext, 32);
-			float minWidth = AndroidUtils.dpToPx(themedContext, 100);
-			ListPopupWindow listPopupWindow = new ListPopupWindow(themedContext);
-			listPopupWindow.setAnchorView(menuTv);
-			listPopupWindow.setContentWidth((int) (Math.max(itemWidth, minWidth)));
-			listPopupWindow.setDropDownGravity(Gravity.END | Gravity.TOP);
-			listPopupWindow.setHorizontalOffset(AndroidUtils.dpToPx(themedContext, 8));
-			listPopupWindow.setVerticalOffset(-menuTv.getHeight());
-			listPopupWindow.setModal(true);
-			listPopupWindow.setAdapter(new ArrayAdapter<>(themedContext, R.layout.popup_list_text_item, titles));
-			listPopupWindow.setOnItemClickListener((parent, v, position, id) -> {
-				updateDisplayedMarkersCount(position == 0 ? 1 : 2);
-				listPopupWindow.dismiss();
-			});
-			listPopupWindow.show();
+			List<PopUpMenuItem> items = new ArrayList<>();
+			int currentCount = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get();
+			for (int i = 0; i < titles.length; i++) {
+				final int count = i + 1;
+				PopUpMenuItem item = new PopUpMenuItem.Builder(view.getContext())
+						.setTitle(titles[i])
+						.setSelected(currentCount == count)
+						.setOnClickListener(it -> updateDisplayedMarkersCount(count))
+						.create();
+				items.add(item);
+			}
+			PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+			displayData.anchorView = menuTv;
+			displayData.menuItems = items;
+			PopUpMenu.show(displayData);
 		});
 
 		updateHelpImage();
