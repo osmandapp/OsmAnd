@@ -302,6 +302,8 @@ public class PluginsHelper {
 				plugin.updateLayers(mapActivity, mapActivity);
 				MapLayers mapLayers = app.getOsmandMap().getMapLayers();
 				mapLayers.getMapInfoLayer().recreateAllControls(mapActivity);
+				app.getMapWidgetRegistry().recreateAndroidAutoWidgets();
+
 				mapActivity.getDashboard().refreshDashboardFragments();
 
 				DashFragmentData fragmentData = plugin.getCardFragment();
@@ -619,10 +621,28 @@ public class PluginsHelper {
 		}
 	}
 
+	public static void createAndroidAutoWidgets(@NonNull List<MapWidgetInfo> widgetInfos,
+	                                            @NonNull ApplicationMode appMode) {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			plugin.createAndroidAutoWidgets(widgetInfos, appMode);
+		}
+	}
+
 	@Nullable
 	public static MapWidget createMapWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			MapWidget widget = plugin.createMapWidgetForParams(mapActivity, widgetType, customId, widgetsPanel);
+			if (widget != null) {
+				return widget;
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	public static MapWidget createAndroidAutoWidget(@NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			MapWidget widget = plugin.createAndroidAutoWidgetForParams(widgetType, customId, widgetsPanel);
 			if (widget != null) {
 				return widget;
 			}

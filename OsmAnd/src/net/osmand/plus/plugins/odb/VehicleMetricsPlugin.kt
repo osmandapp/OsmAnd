@@ -59,6 +59,7 @@ import net.osmand.plus.views.mapwidgets.MapWidgetInfo
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator
 import net.osmand.plus.views.mapwidgets.WidgetType
 import net.osmand.plus.views.mapwidgets.WidgetsPanel
+import net.osmand.plus.views.mapwidgets.widgets.MapWidget
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem
@@ -165,6 +166,46 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 			if (widgetInfo != null) {
 				widgetsInfos.add(widgetInfo)
 			}
+		}
+	}
+
+	override fun createAndroidAutoWidgets(
+		widgetInfos: MutableList<MapWidgetInfo>,
+		appMode: ApplicationMode,
+	) {
+		val creator = WidgetInfoCreator(app, appMode, null)
+		val supportedTypes = WidgetType.getObdTypes().filter { it.supportsAndroidAuto }
+		for (widgetType in supportedTypes) {
+			val obdWidget = createAndroidAutoWidgetForParams(widgetType)
+			val widgetInfo = creator.createWidgetInfo(obdWidget)
+			if (widgetInfo != null) {
+				widgetInfos.add(widgetInfo)
+			}
+		}
+	}
+
+	override fun createAndroidAutoWidgetForParams(
+		widgetType: WidgetType,
+		customId: String?,
+		widgetsPanel: WidgetsPanel?
+	): MapWidget? {
+		return when (widgetType) {
+			WidgetType.OBD_SPEED -> OBDTextWidget(
+				app,
+				WidgetType.OBD_SPEED,
+				OBDTypeWidget.SPEED,
+				customId,
+				widgetsPanel
+			)
+			WidgetType.OBD_RPM -> OBDTextWidget(
+				app,
+				WidgetType.OBD_RPM,
+				OBDTypeWidget.RPM,
+				customId,
+				widgetsPanel
+			)
+
+			else -> null
 		}
 	}
 

@@ -1,20 +1,27 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
+import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.Pair;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.mapwidgets.OutlinedTextContainer;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -46,10 +53,23 @@ public abstract class TextInfoWidget extends MapWidget implements ISupportSidePa
 	private Integer cachedAltitudeMetric;
 	private Integer cachedAngularUnits;
 
+	protected String cachedText, cachedSmallText;
+	protected Rect cachedTextBounds = new Rect();
+	protected Rect cachedSmallTextBounds = new Rect();
+	protected Rect cachedWidgetNameTextBounds = new Rect();
+	protected TextPaint textPaint = new TextPaint();
+	protected TextPaint smallTextPaint = new TextPaint();
+	protected TextPaint widgetNameTextPaint = new TextPaint();
+
 
 	public TextInfoWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType,
 			@Nullable String customId, @Nullable WidgetsPanel panel) {
 		super(mapActivity, widgetType, customId, panel);
+	}
+
+	public TextInfoWidget(@NonNull OsmandApplication app, @NonNull WidgetType widgetType,
+						  @Nullable String customId, @Nullable WidgetsPanel panel) {
+		super(app, widgetType, customId, panel);
 	}
 
 	@Override
@@ -138,7 +158,9 @@ public abstract class TextInfoWidget extends MapWidget implements ISupportSidePa
 	}
 
 	protected void setTextNoUpdateVisibility(String text, String subtext) {
-		getView().setContentDescription(combine(text, subtext));
+		if (!isAndroidAuto()) {
+			getView().setContentDescription(combine(text, subtext));
+		}
 		if (text == null) {
 			setText("");
 		} else {
@@ -149,16 +171,25 @@ public abstract class TextInfoWidget extends MapWidget implements ISupportSidePa
 		} else {
 			setSmallText(subtext);
 		}
+
 	}
 
 	private void setText(String text) {
-		textView.setText(text);
-	}
+		cachedText = text;
+		updateCachedTextBounds(cachedTextBounds, textPaint, cachedText);
+        if (textView != null) {
+            textView.setText(text);
+        }
+    }
 
 	private void setSmallText(String text) {
-		smallTextView.setText(text);
-		if (smallTextViewShadow != null) {
-			smallTextViewShadow.setText(text);
+		cachedSmallText = text;
+		updateCachedTextBounds(cachedSmallTextBounds, smallTextPaint, cachedSmallText);
+		if (smallTextView != null) {
+			smallTextView.setText(text);
+			if (smallTextViewShadow != null) {
+				smallTextViewShadow.setText(text);
+			}
 		}
 	}
 
@@ -210,6 +241,12 @@ public abstract class TextInfoWidget extends MapWidget implements ISupportSidePa
 	}
 
 	@Override
+	public void onAndroidAutoPanelAppearanceChanged(@NonNull ResolvedPanelAppearance appearance) {
+		super.onAndroidAutoPanelAppearanceChanged(appearance);
+		configureAAPaints(appearance);
+	}
+
+	@Override
 	public boolean isViewVisible() {
 		return getContentView().getVisibility() == View.VISIBLE;
 	}
@@ -249,4 +286,48 @@ public abstract class TextInfoWidget extends MapWidget implements ISupportSidePa
 	public int getMapIconId(boolean nightMode) {
 		return getIconId(nightMode);
 	}
+
+	// region android auto
+	protected void updateCachedTextBounds(Rect bounds, TextPaint paint, String text) {
+		bounds.setEmpty();
+		if (text != null) {
+			paint.getTextBounds(text, 0, text.length(), bounds);
+		}
+	}
+
+	protected void configureAAPaints(ResolvedPanelAppearance appearance) {
+		applyPrimaryTextAppearance(textPaint, appearance);
+		applySecondaryTextAppearance(smallTextPaint, appearance);
+		updateCachedTextBounds(cachedTextBounds, textPaint, cachedText);
+		updateCachedTextBounds(cachedSmallTextBounds, smallTextPaint, cachedSmallText);
+	}
+
+	protected float getPrimaryTextSizeAA() {
+		return app.getResources().getDimension(R.dimen.map_widget_text_size);
+	}
+
+	protected float getSecondaryTextSizeAA() {
+		return app.getResources().getDimension(R.dimen.map_widget_text_size_small);
+	}
+
+	protected void applyPrimaryTextAppearance(Paint paint, ResolvedPanelAppearance appearance) {
+		applyTextAppearance(paint, appearance.getPrimaryTextColor(), appearance);
+		paint.setTextSize(getPrimaryTextSizeAA());
+	}
+
+	protected void applySecondaryTextAppearance(Paint paint, ResolvedPanelAppearance appearance) {
+		applyTextAppearance(paint, appearance.getPrimaryTextColor(), appearance);
+		paint.setTextSize(getSecondaryTextSizeAA());
+	}
+
+	protected void applyTextAppearance(
+			Paint textPaint,
+			@ColorInt int color,
+			ResolvedPanelAppearance appearance
+	) {
+		int typefaceStyle =  (appearance.getBoldText()) ? Typeface.BOLD : Typeface.NORMAL;
+		textPaint.setColor(color);
+		textPaint.setTypeface(Typeface.create(Typeface.DEFAULT, typefaceStyle));
+	}
+	// endregion
 }

@@ -90,6 +90,8 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 	private boolean addNewWidgetMode = false;
 	protected boolean isVerticalPanel;
 
+	protected boolean isAndroidAutoMode = false;
+
 	@NonNull
 	public WidgetType getWidget() {
 		return widgetInfo.widget.getWidgetType();
@@ -210,9 +212,13 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 
 		widgetPanel.setWidgetsOrder(appMode, new ArrayList<>(pagedOrder.values()), settings, layoutMode);
 
-		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
-		if (mapInfoLayer != null) {
-			mapInfoLayer.recreateAllControls(mapActivity);
+		if (isAndroidAutoMode) {
+			app.getMapWidgetRegistry().recreateAndroidAutoWidgets();
+		} else {
+			MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
+			if (mapInfoLayer != null) {
+				mapInfoLayer.recreateAllControls(mapActivity);
+			}
 		}
 
 		return duplicateId;

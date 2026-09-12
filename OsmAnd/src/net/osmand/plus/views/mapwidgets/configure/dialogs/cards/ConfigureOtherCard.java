@@ -107,7 +107,7 @@ public class ConfigureOtherCard extends MapBaseCard {
 			int iconId = nightMode ? R.drawable.ic_action_android_auto_colored_night : R.drawable.ic_action_android_auto_colored;
 			ConfigureButtonsCard.setupButton(button, title, null, iconId, true, nightMode);
 			button.setOnClickListener(v -> {
-				ConfigureWidgetsFragment.showInstance(getMapActivity(), WidgetsPanel.ANDROID_AUTO, appMode, null);
+				ConfigureWidgetsFragment.showInstanceForAndroidAuto(getMapActivity(), WidgetsPanel.ANDROID_AUTO, appMode, null);
 			});
 		}
 

@@ -20,7 +20,12 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public enum WidgetsPanel {
 
@@ -135,6 +140,24 @@ public enum WidgetsPanel {
 		return getPagedOrder(appMode, widgetId, settings, layoutMode).second;
 	}
 
+	public Map<String, Integer> getAndroidAutoWidgetsOrders(@NonNull ApplicationMode appMode,
+	                                                        @NonNull OsmandSettings settings,
+	                                                        @NonNull Collection<MapWidgetInfo> widgets
+	                                                        ) {
+		ListStringPreference preference = getOrderPreference(settings, null);
+		List<String> widgetIds = preference.getStringsListForProfile(appMode);
+		Map<String, Integer> savedOrders = new HashMap<>();
+		if (!Algorithms.isEmpty(widgetIds)) {
+			for (int i = 0; i < widgetIds.size(); i++) {
+				savedOrders.put(widgetIds.get(i), i);
+			}
+		}
+		return widgets.stream().collect(Collectors.toMap(
+				(w) -> w.key,
+				(w) -> Optional.ofNullable(savedOrders.get(w.key)).orElse(DEFAULT_ORDER))
+		);
+	}
+
 	@NonNull
 	private Pair<Integer, Integer> getPagedOrder(@NonNull ApplicationMode appMode,
 	                                             @NonNull String widgetId,
@@ -224,5 +247,9 @@ public enum WidgetsPanel {
 
 	public boolean isPanelVertical() {
 		return this == TOP || this == BOTTOM;
+	}
+
+	public boolean isAndroidAutoPanel() {
+		return this == ANDROID_AUTO;
 	}
 }

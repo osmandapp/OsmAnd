@@ -34,15 +34,14 @@ public class MapWidgetRegistry {
 	public static final int MATCHING_PANELS_MODE = 0x10;
 
 	private final OsmandApplication app;
-	private final OsmandSettings settings;
 
 	private Map<WidgetsPanel, Set<MapWidgetInfo>> allWidgets = new HashMap<>();
+	private Map<WidgetsPanel, Set<MapWidgetInfo>> androidAutoWidgets = new HashMap<>();
 
 	private List<WidgetsRegistryListener> listeners = new ArrayList<>();
 
 	public MapWidgetRegistry(@NonNull OsmandApplication app) {
 		this.app = app;
-		this.settings = app.getSettings();
 	}
 
 	public void removeWidget(MapWidget widget) {
@@ -65,6 +64,16 @@ public class MapWidgetRegistry {
 		notifyWidgetsCleared();
 	}
 
+	public void clearAndroidAutoWidgets() {
+		androidAutoWidgets.clear();
+	}
+
+	public void recreateAndroidAutoWidgets() {
+		clearAndroidAutoWidgets();
+		registerAndroidAutoControls();
+		reorderAndroidAutoWidgets();
+	}
+
 	public void enableDisableWidgetForMode(@NonNull ApplicationMode appMode,
 	                                       @NonNull MapWidgetInfo widgetInfo,
 	                                       @Nullable Boolean enabled,
@@ -74,12 +83,22 @@ public class MapWidgetRegistry {
 		notifyWidgetVisibilityChanged(widgetInfo);
 
 		if (widgetInfo.isCustomWidget() && (enabled == null || !enabled)) {
-			settings.getCustomWidgetsKeys(layoutMode).removeValueForProfile(appMode, widgetInfo.key);
+			getSettings().getCustomWidgetsKeys(layoutMode).removeValueForProfile(appMode, widgetInfo.key);
 		}
 
 		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
 		if (recreateControls && mapInfoLayer != null) {
 			mapInfoLayer.recreateControls();
+		}
+	}
+	public void enableDisableAndroidAutoWidgetForMode(@NonNull ApplicationMode appMode,
+	                                       @NonNull MapWidgetInfo widgetInfo,
+	                                       @Nullable Boolean enabled) {
+		widgetInfo.enableDisableForMode(appMode, enabled, null);
+		notifyWidgetVisibilityChanged(widgetInfo);
+
+		if (widgetInfo.isCustomWidget() && (enabled == null || !enabled)) {
+			getSettings().getAndroidAutoCustomWidgetsKeys().removeValueForProfile(appMode, widgetInfo.key);
 		}
 	}
 
@@ -147,8 +166,22 @@ public class MapWidgetRegistry {
 		reorderWidgets(getAllWidgets(), layoutMode);
 	}
 
+	public void reorderAndroidAutoWidgets() {
+		reorderAndroidAutoWidgets(getAllAndroidAutoWidgets());
+	}
+
 	private void reorderWidgets(@NonNull List<MapWidgetInfo> widgetInfos, @Nullable ScreenLayoutMode layoutMode) {
+        allWidgets = computeReorderedWidgets(widgetInfos, layoutMode, false);
+	}
+
+	private void reorderAndroidAutoWidgets(@NonNull List<MapWidgetInfo> widgetInfos) {
+		androidAutoWidgets = computeReorderedWidgets(widgetInfos, null, true);
+	}
+
+	@NonNull
+	private Map<WidgetsPanel, Set<MapWidgetInfo>> computeReorderedWidgets(@NonNull List<MapWidgetInfo> widgetInfos, @Nullable ScreenLayoutMode layoutMode, boolean isAndroidAuto) {
 		Map<WidgetsPanel, Set<MapWidgetInfo>> newAllWidgets = new HashMap<>();
+		OsmandSettings settings = getSettings();
 		for (MapWidgetInfo widgetInfo : widgetInfos) {
 			WidgetsPanel panel = widgetInfo.getUpdatedPanel(settings.getApplicationMode(), layoutMode);
 			widgetInfo.pageIndex = panel.getWidgetPage(widgetInfo.key, settings, layoutMode);
@@ -159,10 +192,14 @@ public class MapWidgetRegistry {
 				widgetsOfPanel = new TreeSet<>();
 				newAllWidgets.put(panel, widgetsOfPanel);
 			}
-			widgetInfo.widget.initView();
-			widgetsOfPanel.add(widgetInfo);
+            if (isAndroidAuto) {
+                widgetInfo.widget.initAndroidAuto();
+            } else {
+                widgetInfo.widget.initView();
+            }
+            widgetsOfPanel.add(widgetInfo);
 		}
-		allWidgets = newAllWidgets;
+		return newAllWidgets;
 	}
 
 	@NonNull
@@ -246,6 +283,15 @@ public class MapWidgetRegistry {
 	}
 
 	@NonNull
+	public List<MapWidgetInfo> getAllAndroidAutoWidgets() {
+		List<MapWidgetInfo> widgets = new ArrayList<>();
+		for (Set<MapWidgetInfo> panelWidgets : androidAutoWidgets.values()) {
+			widgets.addAll(panelWidgets);
+		}
+		return widgets;
+	}
+
+	@NonNull
 	public List<Set<MapWidgetInfo>> getPagedWidgetsForPanel(@NonNull MapActivity mapActivity,
 	                                                        @NonNull ApplicationMode appMode,
 	                                                        @Nullable ScreenLayoutMode layoutMode,
@@ -265,12 +311,41 @@ public class MapWidgetRegistry {
 	}
 
 	@NonNull
+	public List<Set<MapWidgetInfo>> getPagedAndroidAutoWidgetsForPanel(@NonNull OsmandApplication app,
+	                                                        @NonNull ApplicationMode appMode,
+	                                                        @NonNull WidgetsPanel panel,
+	                                                        int filterModes) {
+		Map<Integer, Set<MapWidgetInfo>> widgetsByPages = new TreeMap<>();
+		for (MapWidgetInfo widgetInfo : getAndroidAutoWidgetsForPanel(app, appMode, filterModes, Collections.singletonList(panel))) {
+			int page = widgetInfo.pageIndex;
+			Set<MapWidgetInfo> widgetsOfPage = widgetsByPages.get(page);
+			if (widgetsOfPage == null) {
+				widgetsOfPage = new TreeSet<>();
+				widgetsByPages.put(page, widgetsOfPage);
+			}
+			widgetsOfPage.add(widgetInfo);
+		}
+		return new ArrayList<>(widgetsByPages.values());
+	}
+
+	@NonNull
 	public List<MapWidgetInfo> getWidgets(@NonNull MapActivity activity, @NonNull ApplicationMode appMode, @Nullable ScreenLayoutMode layoutMode) {
 		List<MapWidgetInfo> list = new ArrayList<>();
-		if (settings.getApplicationMode() == appMode && (layoutMode == null || ScreenLayoutMode.getDefault(activity) == layoutMode)) {
+		if (getSettings().getApplicationMode() == appMode && (layoutMode == null || ScreenLayoutMode.getDefault(activity) == layoutMode)) {
 			list.addAll(getAllWidgets());
 		} else {
 			list.addAll(WidgetsInitializer.createAllControls(activity, appMode, layoutMode));
+		}
+		return list;
+	}
+
+	@NonNull
+	public List<MapWidgetInfo> getAndroidAutoWidgets(@NonNull OsmandApplication app, @NonNull ApplicationMode appMode) {
+		List<MapWidgetInfo> list = new ArrayList<>();
+		if (getSettings().getApplicationMode() == appMode) {
+			list.addAll(getAllAndroidAutoWidgets());
+		} else {
+			list.addAll(AndroidAutoWidgetsInitializer.createAllControls(app, appMode));
 		}
 		return list;
 	}
@@ -285,6 +360,12 @@ public class MapWidgetRegistry {
 		return getFilteredWidgets(widgetInfos, appMode, layoutMode, filterModes, panels);
 	}
 
+	public Set<MapWidgetInfo> getAndroidAutoWidgetsForPanel(@NonNull OsmandApplication app, @NonNull ApplicationMode appMode,
+															int filterModes, @NonNull List<WidgetsPanel> panels) {
+		List<MapWidgetInfo> widgetInfos = getAndroidAutoWidgets(app, appMode);
+		return getFilteredWidgets(widgetInfos, appMode, null, filterModes, panels);
+	}
+
 	@NonNull
 	public Set<MapWidgetInfo> getFilteredWidgets(@NonNull List<MapWidgetInfo> widgetInfos,
 	                                             @NonNull ApplicationMode appMode,
@@ -292,8 +373,8 @@ public class MapWidgetRegistry {
 	                                             int filterModes,
 	                                             @NonNull List<WidgetsPanel> panels) {
 		List<Class<?>> includedWidgetTypes = new ArrayList<>();
-		boolean sidePanel = false, verticalPanel = false;
-		if (panels.contains(WidgetsPanel.LEFT) || panels.contains(WidgetsPanel.RIGHT) || panels.contains(WidgetsPanel.ANDROID_AUTO)) {
+		boolean sidePanel = false, verticalPanel = false, androidAutoPanel = false;
+		if (panels.contains(WidgetsPanel.LEFT) || panels.contains(WidgetsPanel.RIGHT)) {
 			sidePanel = true;
 			includedWidgetTypes.add(SideWidgetInfo.class);
 			includedWidgetTypes.add(SimpleWidgetInfo.class);
@@ -303,17 +384,24 @@ public class MapWidgetRegistry {
 			includedWidgetTypes.add(CenterWidgetInfo.class);
 			includedWidgetTypes.add(SimpleWidgetInfo.class);
 		}
+		if (panels.contains(WidgetsPanel.ANDROID_AUTO)) {
+			androidAutoPanel = true;
+		}
 		Set<MapWidgetInfo> filteredWidgets = new TreeSet<>();
 		List<String> widgetsVisibility = MapWidgetInfo.getWidgetsVisibility(app, appMode, layoutMode);
 		for (MapWidgetInfo widget : widgetInfos) {
 			boolean panelSupported = false;
+			WidgetType widgetType = widget.getWidgetType();
 			if (sidePanel) {
-				panelSupported = widget.widget instanceof ISupportSidePanel;
-			} else if (verticalPanel) {
-				panelSupported = widget.widget instanceof ISupportVerticalPanel;
+				panelSupported = (widget.widget instanceof ISupportSidePanel);
+			}
+			if (verticalPanel) {
+				panelSupported = panelSupported || (widget.widget instanceof ISupportVerticalPanel);
+			}
+			if (androidAutoPanel) {
+				panelSupported = panelSupported || (widgetType.supportsAndroidAuto);
 			}
 			if (panelSupported || includedWidgetTypes.contains(widget.getClass())) {
-				WidgetType widgetType = widget.getWidgetType();
 				boolean disabledMode = (filterModes & DISABLED_MODE) == DISABLED_MODE;
 				boolean enabledMode = (filterModes & ENABLED_MODE) == ENABLED_MODE;
 				boolean availableMode = (filterModes & AVAILABLE_MODE) == AVAILABLE_MODE;
@@ -337,11 +425,30 @@ public class MapWidgetRegistry {
 	}
 
 	@NonNull
+	public Set<MapWidgetInfo> getWidgetsForPanel(@NonNull WidgetsPanel panel, boolean isAndroidAuto) {
+		if (isAndroidAuto) {
+			return getAndroidAutoWidgetsForPanel(panel);
+		} else {
+			return getWidgetsForPanel(panel);
+		}
+	}
+
+	@NonNull
 	public Set<MapWidgetInfo> getWidgetsForPanel(@NonNull WidgetsPanel panel) {
 		Set<MapWidgetInfo> widgets = allWidgets.get(panel);
 		if (widgets == null) {
 			widgets = new TreeSet<>();
 			allWidgets.put(panel, widgets);
+		}
+		return widgets;
+	}
+
+	@NonNull
+	public Set<MapWidgetInfo> getAndroidAutoWidgetsForPanel(@NonNull WidgetsPanel panel) {
+		Set<MapWidgetInfo> widgets = androidAutoWidgets.get(panel);
+		if (widgets == null) {
+			widgets = new TreeSet<>();
+			androidAutoWidgets.put(panel, widgets);
 		}
 		return widgets;
 	}
@@ -352,7 +459,7 @@ public class MapWidgetRegistry {
 	}
 
 	public void registerAllControls(@NonNull MapActivity mapActivity) {
-		ApplicationMode appMode = settings.getApplicationMode();
+		ApplicationMode appMode = getSettings().getApplicationMode();
 		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(mapActivity);
 		List<MapWidgetInfo> infos = WidgetsInitializer.createAllControls(mapActivity, appMode, layoutMode);
 		reorderWidgets(infos, layoutMode);
@@ -360,6 +467,19 @@ public class MapWidgetRegistry {
 		for (MapWidgetInfo widgetInfo : infos) {
 			notifyWidgetRegistered(widgetInfo);
 		}
+	}
+
+	public void registerAndroidAutoControls() {
+		ApplicationMode appMode = getSettings().getApplicationMode();
+		List<MapWidgetInfo> infos = AndroidAutoWidgetsInitializer.createAllControls(app, appMode);
+		reorderAndroidAutoWidgets(infos);
+		for (MapWidgetInfo widgetInfo : infos) {
+			notifyWidgetRegistered(widgetInfo);
+		}
+	}
+
+	private OsmandSettings getSettings() {
+		return app.getSettings();
 	}
 
 	public interface WidgetsRegistryListener {

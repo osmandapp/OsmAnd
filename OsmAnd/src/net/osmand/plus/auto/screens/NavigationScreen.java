@@ -4,6 +4,9 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.SystemClock;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -88,6 +91,24 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 	/** Compensates the 0.77 factor SpeedometerWidget applies for Android Auto. */
 	private static final float SPEEDOMETER_CAR_SCALE = 2f;
 
+	private static final long WIDGETS_UPDATE_INTERVAL_MS = 500L;
+
+	private long lastWidgetsUpdateTime;
+	private boolean widgetsUpdateScheduled;
+	private final Handler widgetsUpdatehandler = new Handler(Looper.getMainLooper());
+	private final Runnable widgetsUpdateRunnable = () -> {
+		widgetsUpdateScheduled = false;
+
+		long currentTime = SystemClock.uptimeMillis();
+		long elapsedTime = currentTime - lastWidgetsUpdateTime;
+		if (elapsedTime >= WIDGETS_UPDATE_INTERVAL_MS) {
+			updateWidgetsInternal();
+		}
+
+		scheduleWidgetsUpdate();
+
+	};
+
 	public NavigationScreen(
 			@NonNull CarContext carContext,
 			@NonNull Action settingsAction,
@@ -99,7 +120,7 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 		OsmandApplication app = getApp();
 		alarmWidget = new AlarmWidget(app, null);
 		speedometerWidget = new SpeedometerWidget(app, ThemeUsageContext.MAP);
-		widgetsPanel = new CarWidgetsPanel(app);
+		widgetsPanel = new CarWidgetsPanel(app, carContext);
 		updateUse3DButton();
 		getLifecycle().addObserver(this);
 	}
@@ -119,6 +140,8 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 				surfaceRenderer.setCallback(this);
 			}
 		}
+		loadWidgets();
+		scheduleWidgetsUpdate();
 	}
 
 	@Override
@@ -131,6 +154,7 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 				surfaceRenderer.setCallback(null);
 			}
 		}
+		stopWidgetUpdates();
 	}
 
 	@Override
@@ -147,12 +171,11 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 		SurfaceRenderer surfaceRenderer = getSurfaceRenderer();
 		if (surfaceRenderer != null) {
 			float density = surfaceRenderer.getDensity();
-			DrawSettings drawSettings = new DrawSettings(isNightMode(), false, density);
+			DrawSettings drawSettings = getDrawSettings(surfaceRenderer);
 			// SpeedometerWidget shrinks itself by 0.77 for Android Auto, which leaves it much
 			// smaller than the alarm widget next to it - unlike on the phone, where the two are
 			// about the same size. The alarm widget already has a car sized layout.
-			DrawSettings speedometerSettings = new DrawSettings(drawSettings.isNightMode(), false,
-					density * SPEEDOMETER_CAR_SCALE);
+			DrawSettings speedometerSettings = getDrawSettings(surfaceRenderer, SPEEDOMETER_CAR_SCALE);
 
 			alarmWidget.updateInfo(drawSettings, true);
 			speedometerWidget.updateInfo(speedometerSettings, drawSettings.isNightMode());
@@ -463,6 +486,43 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 		finish();
 		// Test
 		//getScreenManager().pushForResult(new SearchResultsScreen(getCarContext(), settingsAction, surfaceRenderer, "cafe"), (obj) -> { });
+	}
+
+	private void scheduleWidgetsUpdate() {
+		if (!widgetsUpdateScheduled) {
+            long elapsedTime = SystemClock.uptimeMillis() - lastWidgetsUpdateTime;
+            long delay = Math.max(0, WIDGETS_UPDATE_INTERVAL_MS - elapsedTime);
+            widgetsUpdateScheduled = widgetsUpdatehandler.postDelayed(widgetsUpdateRunnable, delay);
+		}
+	}
+
+	private void stopWidgetUpdates() {
+		widgetsUpdatehandler.removeCallbacks(widgetsUpdateRunnable);
+	}
+
+	private void loadWidgets() {
+		SurfaceRenderer surfaceRenderer = getSurfaceRenderer();
+		if (surfaceRenderer != null) {
+			DrawSettings drawSettings = getDrawSettings(surfaceRenderer);
+			widgetsPanel.reloadWidgets(drawSettings);
+			widgetsPanel.updateWidgetsInfo(drawSettings);
+		}
+	}
+
+	private void updateWidgetsInternal() {
+		SurfaceRenderer surfaceRenderer = getSurfaceRenderer();
+		if (surfaceRenderer != null) {
+			widgetsPanel.updateWidgetsInfo(getDrawSettings(surfaceRenderer));
+		}
+	}
+
+	private DrawSettings getDrawSettings(@NonNull SurfaceRenderer surfaceRenderer) {
+		return getDrawSettings(surfaceRenderer, 1f);
+	}
+
+	private DrawSettings getDrawSettings(@NonNull SurfaceRenderer surfaceRenderer, float scale) {
+		float density = surfaceRenderer.getDensity();
+		return new DrawSettings(isNightMode(), false, density * scale);
 	}
 
 	@Override

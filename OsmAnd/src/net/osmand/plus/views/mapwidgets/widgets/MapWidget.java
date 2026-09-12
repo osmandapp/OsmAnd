@@ -1,12 +1,20 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import android.graphics.Canvas;
 import android.graphics.Paint.Style;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.*;
+import androidx.annotation.ColorInt;
+import androidx.annotation.DimenRes;
+import androidx.annotation.Dimension;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
@@ -52,6 +60,10 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 	@Nullable
 	private ResolvedPanelAppearance panelAppearance;
 
+	@Nullable
+	protected ResolvedPanelAppearance androidAutoPanelAppearance;
+	protected boolean androidAutoNightMode;
+
 	public MapWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType,
 			@Nullable String customId, @Nullable WidgetsPanel panel) {
 		this.app = mapActivity.getApp();
@@ -71,6 +83,24 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 		setPanel(selectedPanel);
 	}
 
+	public MapWidget(@NonNull OsmandApplication app, @NonNull WidgetType widgetType,
+	                 @Nullable String customId, @Nullable WidgetsPanel panel) {
+		this.app = app;
+		this.settings = app.getSettings();
+		this.customId = customId;
+		this.widgetType = widgetType;
+		this.iconsCache = app.getUIUtilities();
+		this.locationProvider = app.getLocationProvider();
+		this.routingHelper = app.getRoutingHelper();
+		this.nightMode = app.getDaynightHelper().isNightMode(ThemeUsageContext.MAP);
+		this.mapActivity = null;
+		this.visibilityHelper = null;
+		String id = customId != null ? customId : widgetType.id;
+		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(app);
+		WidgetsPanel selectedPanel = panel != null ? panel : widgetType.getPanel(id, settings, layoutMode);
+		setPanel(selectedPanel);
+	}
+
 	@LayoutRes
 	protected abstract int getLayoutId();
 
@@ -78,6 +108,9 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 		if (view == null) {
 			view = getView();
 		}
+	}
+	public void initAndroidAuto() {
+
 	}
 
 	@NonNull
@@ -90,10 +123,18 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 	}
 
 	public final void recreateView() {
-		recreateViewInternal();
-		ResolvedPanelAppearance appearance = panelAppearance;
-		if (appearance != null && appearance.getPanel() == panel) {
-			onPanelAppearanceChanged(appearance);
+		if (isAndroidAuto()) {
+			recreateInternalForAndroidAuto();
+			ResolvedPanelAppearance appearance = androidAutoPanelAppearance;
+			if (appearance != null && appearance.getPanel() == panel) {
+				onAndroidAutoPanelAppearanceChanged(appearance);
+			}
+		} else {
+			recreateViewInternal();
+			ResolvedPanelAppearance appearance = panelAppearance;
+			if (appearance != null && appearance.getPanel() == panel) {
+				onPanelAppearanceChanged(appearance);
+			}
 		}
 	}
 
@@ -101,9 +142,38 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 
 	}
 
+	protected void recreateInternalForAndroidAuto() {
+
+	}
+
 	protected void setupView(@NonNull View view) {
 
 	}
+
+	// region android auto
+
+	public void applyPanelAppearanceForAndroidAuto(@NonNull ResolvedPanelAppearance appearance) {
+		androidAutoPanelAppearance = appearance;
+		androidAutoNightMode = appearance.getNightMode();
+		onAndroidAutoPanelAppearanceChanged(appearance);
+	}
+
+	public void onAndroidAutoPanelAppearanceChanged(@NonNull ResolvedPanelAppearance appearance) {
+
+	}
+
+	public boolean shouldDrawForAndroidAuto() {
+		return widgetType.supportsAndroidAuto;
+	}
+
+	public float measureHeightForAndroidAuto(int maxWidthPx) {
+		return 0f;
+	}
+
+	public void drawForAndroidAuto(@NonNull Canvas canvas, @NonNull DrawSettings drawSettings,
+								   float widgetWidthPx, float widgetHeightPx, boolean isRtl) {
+	}
+	// endregion
 
 	@NonNull
 	public MapActivity getMapActivity() {
@@ -159,17 +229,26 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 	}
 
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
-		updateInfo(getView(), drawSettings);
+		if (isAndroidAuto()) {
+			updateInfoForAndroidAuto(drawSettings);
+		} else if (mapActivity != null) {
+			updateInfo(getView(), drawSettings);
+		}
 	}
 
 	protected abstract void updateInfo(@NonNull View view, @Nullable DrawSettings drawSettings);
+	protected void updateInfoForAndroidAuto(@Nullable DrawSettings drawSettings) {}
 
 	@Override
 	public final void applyPanelAppearance(@NonNull ResolvedPanelAppearance appearance) {
-		panelAppearance = appearance;
-		nightMode = appearance.getNightMode();
-		getView();
-		onPanelAppearanceChanged(appearance);
+		if (isAndroidAuto()) {
+			applyPanelAppearanceForAndroidAuto(appearance);
+		} else {
+			panelAppearance = appearance;
+			nightMode = appearance.getNightMode();
+			getView();
+			onPanelAppearanceChanged(appearance);
+		}
 	}
 
 	protected void onPanelAppearanceChanged(@NonNull ResolvedPanelAppearance appearance) {
@@ -262,5 +341,9 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 	@NonNull
 	public OsmandApplication getMyApplication() {
 		return app;
+	}
+
+	protected boolean isAndroidAuto() {
+		return panel.isAndroidAutoPanel();
 	}
 }

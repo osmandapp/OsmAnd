@@ -10,15 +10,13 @@ import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.view.View;
-import android.view.View.MeasureSpec;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.car.app.CarContext;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
@@ -29,7 +27,6 @@ import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -69,13 +66,13 @@ public class CarWidgetsPanel {
 	/** Fraction of the visible area height the panel is allowed to occupy. */
 	private static final float MAX_PANEL_HEIGHT_RATIO = 0.7f;
 
+	private final CarContext carContext;
 	private final OsmandApplication app;
 	private final WidgetsPanel panel;
 
 	private final List<MapWidget> widgets = new ArrayList<>();
 	private final RectF lastPanelBounds = new RectF();
 
-	private MapActivity cachedMapActivity;
 	private ApplicationMode cachedAppMode;
 	private Boolean cachedNightMode;
 	private List<String> cachedWidgetIds = new ArrayList<>();
@@ -86,13 +83,14 @@ public class CarWidgetsPanel {
 	private final Paint backgroundPaint = new Paint();
 	private final Paint dividerPaint = new Paint();
 
-	public CarWidgetsPanel(@NonNull OsmandApplication app) {
-		this(app, WidgetsPanel.ANDROID_AUTO);
+	public CarWidgetsPanel(@NonNull OsmandApplication app,  @NonNull CarContext carContext) {
+		this(app, carContext, WidgetsPanel.ANDROID_AUTO);
 	}
 
-	public CarWidgetsPanel(@NonNull OsmandApplication app, @NonNull WidgetsPanel panel) {
+	public CarWidgetsPanel(@NonNull OsmandApplication app, @NonNull CarContext carContext, @NonNull WidgetsPanel panel) {
 		this.app = app;
 		this.panel = panel;
+		this.carContext = carContext;
 
 		borderPaint.setDither(true);
 		borderPaint.setAntiAlias(true);
@@ -105,6 +103,24 @@ public class CarWidgetsPanel {
 		dividerPaint.setDither(true);
 		dividerPaint.setAntiAlias(true);
 		backgroundPaint.setStyle(Paint.Style.FILL);
+	}
+
+	public void updateWidgetsInfo(DrawSettings drawSettings) {
+		for (MapWidget w : widgets) {
+			w.updateInfo(drawSettings);
+		}
+	}
+
+	public void reloadWidgets(DrawSettings drawSettings) {
+		clearWidgets();
+		ApplicationMode appMode = app.getSettings().getApplicationMode();
+		List<MapWidgetInfo> widgetInfos = getWidgetInfos(appMode);
+		List<String> widgetIds = widgetInfos.stream().map(v -> v.key).collect(Collectors.toList());
+		boolean nightMode = drawSettings.isNightMode();
+		cachedAppMode = appMode;
+		cachedNightMode = nightMode;
+		cachedWidgetIds = widgetIds;
+		recreateWidgets(nightMode, widgetInfos);
 	}
 
 	/**
@@ -123,7 +139,6 @@ public class CarWidgetsPanel {
 				|| visibleArea.width() < MIN_SURFACE_WIDTH_DP * carDensity) {
 			return 0;
 		}
-		List<MapWidget> widgets = getWidgets(drawSettings.isNightMode());
 		if (widgets.isEmpty()) {
 			return 0;
 		}
@@ -141,6 +156,7 @@ public class CarWidgetsPanel {
 		float borderWidth = BORDER_WIDTH_DP * carDensity;
 		float panelContentWidth = panelWidth - panelPadding * 2 - borderWidth * 2;
 		float scale = panelContentWidth / widgetWidth;
+		boolean isRtl = carContext.getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
 
 		// The panel is flush with the right edge and keeps a fixed top, so that it does not jump
 		// when the speedometer or the alarm widget appear or change size.
@@ -155,24 +171,19 @@ public class CarWidgetsPanel {
 		float contentTop = top + borderWidth;
 		float maxContentBottom = maxBottom - borderWidth;
 
-		List<View> views = new ArrayList<>();
 		List<Float> tops = new ArrayList<>();
 		List<Float> bottoms = new ArrayList<>();
+		List<MapWidget> drawnWidgets = new ArrayList<>();
 
 		float y = contentTop;
 		for (int i = firstVisibleWidget; i < widgets.size(); i++) {
 			MapWidget widget = widgets.get(i);
-			widget.updateInfo(drawSettings);
-			View view = widget.getView();
-			if (view.getVisibility() != View.VISIBLE) {
+			if (!widget.shouldDrawForAndroidAuto()) {
 				lastVisibleCount++;
 				continue;
 			}
-			view.measure(MeasureSpec.makeMeasureSpec(widgetWidth, MeasureSpec.EXACTLY),
-					MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
-			int measuredWidth = view.getMeasuredWidth();
-			int measuredHeight = view.getMeasuredHeight();
-			if (measuredWidth <= 0 || measuredHeight <= 0) {
+			float measuredHeight = widget.measureHeightForAndroidAuto(widgetWidth);
+			if (measuredHeight <= 0) {
 				lastVisibleCount++;
 				continue;
 			}
@@ -180,7 +191,6 @@ public class CarWidgetsPanel {
 			if (y + height > maxContentBottom) {
 				break;
 			}
-			view.layout(0, 0, measuredWidth, measuredHeight);
 			// A row is dropped only when the transient widget really covers it, a small overlap
 			// on the edge is not worth losing a whole row for.
 			boolean covered = hiddenArea != null
@@ -188,7 +198,7 @@ public class CarWidgetsPanel {
 					&& Math.min(hiddenArea.right, contentRight) - Math.max(hiddenArea.left, contentLeft)
 					> panelContentWidth / 2;
 			if (!covered) {
-				views.add(view);
+				drawnWidgets.add(widget);
 				tops.add(y);
 				bottoms.add(y + height);
 			}
@@ -196,24 +206,24 @@ public class CarWidgetsPanel {
 			y += height + WIDGET_SPACING_DP * carDensity;
 			lastVisibleCount++;
 		}
-		if (views.isEmpty()) {
+		if (drawnWidgets.isEmpty()) {
 			return 0;
 		}
 		float corner = CORNER_RADIUS_DP * carDensity;
 		float dividerWidth = DIVIDER_WIDTH_DP * carDensity;
 
-		//  Rows hidden by the reserved area split the panel into several blocks, each of them gets its own rounded outline.
+		//  Rows hidden by the reserved area split the panel into several blocks, each of them gets its own outline.
 		int blockStart = 0;
-		for (int i = 1; i <= views.size(); i++) {
-			boolean endOfBlock = i == views.size()
+		for (int i = 1; i <= drawnWidgets.size(); i++) {
+			boolean endOfBlock = i == drawnWidgets.size()
 					|| bottoms.get(i - 1) + 1 < tops.get(i);
 			if (endOfBlock) {
-				drawBlock(canvas,
-						views.subList(blockStart, i),
+				drawBlock(canvas, drawSettings,
+						drawnWidgets.subList(blockStart, i),
 						tops.subList(blockStart, i), bottoms.subList(blockStart, i),
 						contentLeft, contentRight,
 						panelPadding, corner,
-						borderWidth, dividerWidth, scale);
+						borderWidth, dividerWidth, scale, isRtl);
 				lastPanelBounds.union(left, tops.get(blockStart), right, bottoms.get(i - 1));
 				blockStart = i;
 			}
@@ -222,11 +232,12 @@ public class CarWidgetsPanel {
 	}
 
 	private void drawBlock(@NonNull Canvas canvas,
-						   @NonNull List<View> views,
+						   @NonNull DrawSettings drawSettings,
+						   @NonNull List<MapWidget> widgets,
 	                       @NonNull List<Float> tops, @NonNull List<Float> bottoms,
 	                       float contentLeft, float contentRight, float padding,
 	                       float corner, float borderWidth, float dividerWidth,
-	                       float scale) {
+	                       float scale, boolean isRtl) {
 		Path backgroundPath = new Path();
 		float blockTop = tops.get(0);
 		float blockBottom = bottoms.get(bottoms.size() - 1);
@@ -254,14 +265,19 @@ public class CarWidgetsPanel {
 		canvas.drawPath(backgroundPath, backgroundPaint);
 
 		dividerPaint.setStrokeWidth(dividerWidth);
-
-		for (int i = 0; i < views.size(); i++) {
+		float widgetWidth = (contentRight - contentLeft) / scale;
+		float widgetHeight;
+		for (int i = 0; i < widgets.size(); i++) {
+			float top = tops.get(i);
+			float bottom = bottoms.get(i);
+			widgetHeight = (bottom - top) / scale;
 			canvas.save();
 			canvas.translate(contentLeft, tops.get(i));
 			canvas.scale(scale, scale);
-			views.get(i).draw(canvas);
+			widgets.get(i).drawForAndroidAuto(canvas, drawSettings,
+					widgetWidth, widgetHeight, isRtl);
 			canvas.restore();
-			if (i < views.size() - 1) {
+			if (i < widgets.size() - 1) {
 				canvas.drawLine(
 						blockLeft, bottoms.get(i) - dividerWidth / 2,
 						blockRight, bottoms.get(i) - dividerWidth / 2,
@@ -287,63 +303,45 @@ public class CarWidgetsPanel {
 
 	@NonNull
 	private List<MapWidget> getWidgets(boolean nightMode) {
-		MapActivity mapActivity = app.getOsmandMap().getMapView().getMapActivity();
 		ApplicationMode appMode = app.getSettings().getApplicationMode();
-		if (mapActivity == null) {
-			// Widgets can only be created together with a map activity. Once created they stay
-			// valid and keep being updated even after the activity is gone.
-			// todo: NB: actually, a lot of widgets call methods of mapActivity. This also needs decoupling.
-			return widgets;
-		}
-
-		List<MapWidgetInfo> widgetInfos = getWidgetInfos(mapActivity, appMode);
+		List<MapWidgetInfo> widgetInfos = getWidgetInfos(appMode);
 		List<String> widgetIds = widgetInfos.stream().map(v -> v.key).collect(Collectors.toList());
 
-		if (mapActivity != cachedMapActivity || appMode != cachedAppMode
+		if (appMode != cachedAppMode
 				|| !Boolean.valueOf(nightMode).equals(cachedNightMode)
 				|| !Algorithms.objectEquals(widgetIds, cachedWidgetIds)) {
-			cachedMapActivity = mapActivity;
 			cachedAppMode = appMode;
 			cachedNightMode = nightMode;
 			cachedWidgetIds = widgetIds;
-			recreateWidgets(mapActivity, appMode, nightMode, widgetInfos);
+			recreateWidgets(nightMode, widgetInfos);
 		}
 		return widgets;
 	}
 
-	private List<MapWidgetInfo> getWidgetInfos(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode) {
-		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(mapActivity);
+	private List<MapWidgetInfo> getWidgetInfos(@NonNull ApplicationMode appMode) {
 		int enabledWidgetsFilter = AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE;
-		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
-		Set<MapWidgetInfo> widgetInfos = widgetRegistry.getWidgetsForPanel(mapActivity, appMode, layoutMode, enabledWidgetsFilter, List.of(panel));
+		MapWidgetRegistry widgetRegistry = app.getMapWidgetRegistry();
+		Set<MapWidgetInfo> widgetInfos = widgetRegistry.getAndroidAutoWidgetsForPanel(app, appMode, enabledWidgetsFilter, List.of(panel));
 		return new ArrayList<>(widgetInfos);
 	}
 
-	private void recreateWidgets(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode,
-			boolean nightMode, @Nullable List<MapWidgetInfo> widgetInfos) {
+	private void recreateWidgets(boolean nightMode, @Nullable List<MapWidgetInfo> widgetInfos) {
 		widgets.clear();
 		firstVisibleWidget = 0;
 
 		if (Algorithms.isEmpty(widgetInfos)) {
 			return;
 		}
-		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(mapActivity);
 
 		float density = app.getResources().getDisplayMetrics().density;
 		ResolvedPanelAppearance appearance = app.getPanelAppearanceSettingsManager()
-				.resolveCommitted(panel, layoutMode, nightMode, false, density, true);
-        applyPanelAppearance(appearance);
+				.resolveCommitted(panel, null, nightMode, false, density, true);
+		applyPanelAppearance(appearance);
 
-		Set<String> addedWidgetTypes = new HashSet<>();
 		for (MapWidgetInfo info : widgetInfos) {
-			// Custom copies of a widget share the type id, the first one is enough for the car.
-			String widgetTypeId = info.getWidgetType().id;
-			if (!addedWidgetTypes.contains(widgetTypeId)) {
-				addedWidgetTypes.add(widgetTypeId);
-				MapWidget widget = info.widget;
-				widget.applyPanelAppearance(appearance);
-				widgets.add(widget);
-			}
+			MapWidget widget = info.widget;
+			widget.applyPanelAppearance(appearance);
+			widgets.add(widget);
 		}
 	}
 
@@ -360,7 +358,6 @@ public class CarWidgetsPanel {
 		lastPanelBounds.setEmpty();
 		lastVisibleCount = 0;
 		firstVisibleWidget = 0;
-		cachedMapActivity = null;
 		cachedAppMode = null;
 		cachedNightMode = null;
 	}

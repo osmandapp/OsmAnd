@@ -2136,6 +2136,12 @@ public class OsmandSettings {
 		return getLayoutPreference(CUSTOM_WIDGETS_KEYS, layoutMode);
 	}
 
+	private final ListStringPreference AA_CUSTOM_WIDGET_KEYS = (ListStringPreference) new ListStringPreference(this, "aa_custom_widgets_keys", null, WIDGET_SEPARATOR).makeProfile();
+
+	public ListStringPreference getAndroidAutoCustomWidgetsKeys() {
+		return AA_CUSTOM_WIDGET_KEYS;
+	}
+
 	public final OsmandPreference<Boolean> USE_SEPARATE_LAYOUTS = new BooleanPreference(this, "use_separate_layouts", false).makeProfile();
 	private final CommonPreference<PanelsLayoutMode> PANELS_LAYOUT_MODE = new EnumStringPreference<>(this, "panels_layout_mode", PanelsLayoutMode.getDefault(), PanelsLayoutMode.values()).makeProfile();
 

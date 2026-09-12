@@ -11,23 +11,39 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings
 import net.osmand.plus.views.mapwidgets.WidgetType
 import net.osmand.plus.views.mapwidgets.WidgetsPanel
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget
-import net.osmand.shared.obd.OBDCommand
 import net.osmand.plus.widgets.popup.PopUpMenuItem
+import net.osmand.shared.obd.OBDCommand
 import net.osmand.shared.obd.OBDDataComputer
 import net.osmand.shared.obd.OBDDataComputer.OBDComputerWidget
 import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget
 import net.osmand.util.Algorithms
 
-open class OBDTextWidget(
-	mapActivity: MapActivity,
-	widgetType: WidgetType,
-	private val fieldType: OBDTypeWidget,
-	customId: String?,
-	widgetsPanel: WidgetsPanel?
-) :
-	SimpleWidget(mapActivity, widgetType, customId, widgetsPanel) {
+open class OBDTextWidget : SimpleWidget {
+
+	constructor(
+		mapActivity: MapActivity,
+		widgetType: WidgetType,
+		fieldType: OBDTypeWidget,
+		customId: String?,
+		widgetsPanel: WidgetsPanel?
+	) : super(mapActivity, widgetType, customId, widgetsPanel) {
+		this.fieldType = fieldType
+		init()
+	}
+	constructor(
+		app: OsmandApplication,
+		widgetType: WidgetType,
+		fieldType: OBDTypeWidget,
+		customId: String?,
+		widgetsPanel: WidgetsPanel?
+	) : super(app, widgetType, customId, widgetsPanel) {
+		this.fieldType = fieldType
+		init()
+	}
+
+	private val fieldType: OBDTypeWidget
 	private val plugin = PluginsHelper.requirePlugin(VehicleMetricsPlugin::class.java)
-	protected var widgetComputer: OBDComputerWidget
+	protected lateinit var widgetComputer: OBDComputerWidget
 	private var cacheTextData: String? = null
 	private var cacheSubTextData: String? = null
 
@@ -49,7 +65,7 @@ open class OBDTextWidget(
 		}
 	}
 
-	init {
+	private fun init(){
 		// 0 - for instant
 		var averageTimeSeconds = 0
 
@@ -164,8 +180,13 @@ open class OBDTextWidget(
 	}
 
 	override fun updateSimpleWidgetInfo(drawSettings: DrawSettings?) {
-		val visible = widgetType.isPurchased(app)
-		if (visible) {
+		if (isVisible()) {
+			updateSimpleWidgetInfoImpl()
+		}
+	}
+
+	override fun updateSimpleWidgetInfoForAndroidAuto(drawSettings: DrawSettings?) {
+		if (isVisible()) {
 			updateSimpleWidgetInfoImpl()
 		}
 	}
@@ -241,4 +262,18 @@ open class OBDTextWidget(
 			else -> false
 		}
 	}
+	protected fun isVisible() : Boolean {
+		return widgetType.isPurchased(app)
+	}
+
+	// region android auto
+	override fun shouldDrawForAndroidAuto() : Boolean {
+		return super.shouldDrawForAndroidAuto() && isVisible()
+	}
+
+	override fun initAndroidAuto() {
+		super.initAndroidAuto()
+		setIcons(widgetType)
+	}
+	// endregion
 }

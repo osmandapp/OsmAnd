@@ -29,7 +29,7 @@ public class WidgetInfoCreator {
 	}
 
 	@Nullable
-	public MapWidgetInfo createWidgetInfo(@NonNull MapWidgetsFactory factory, @NonNull WidgetType widgetType) {
+	public MapWidgetInfo createWidgetInfo(@NonNull WidgetFactory factory, @NonNull WidgetType widgetType) {
 		MapWidget mapWidget = factory.createMapWidget(null, widgetType, null);
 		if (mapWidget != null) {
 			return createWidgetInfo(mapWidget);
@@ -38,7 +38,7 @@ public class WidgetInfoCreator {
 	}
 
 	@Nullable
-	public MapWidgetInfo createWidgetInfo(@NonNull MapWidgetsFactory factory, @NonNull String key, @NonNull WidgetType widgetType) {
+	public MapWidgetInfo createWidgetInfo(@NonNull WidgetFactory factory, @NonNull String key, @NonNull WidgetType widgetType) {
 		WidgetsPanel panel = widgetType.getPanel(key, appMode, layoutMode, settings);
 		MapWidget widget = factory.createMapWidget(key, widgetType, panel);
 		if (widget != null) {
@@ -138,4 +138,7 @@ public class WidgetInfoCreator {
 		}
 	}
 
+	public interface WidgetFactory {
+		MapWidget createMapWidget(@Nullable String customId, @NonNull WidgetType widgetType, @Nullable WidgetsPanel panel);
+	}
 }

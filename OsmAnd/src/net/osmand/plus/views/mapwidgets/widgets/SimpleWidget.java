@@ -4,6 +4,12 @@ import static android.view.View.INVISIBLE;
 import static net.osmand.plus.utils.AndroidUtils.dpToPx;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
 
+import android.content.res.Resources;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.text.TextPaint;
@@ -20,6 +26,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -28,6 +35,7 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.enums.WidgetSize;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.ViewChangeProvider.ViewChangeListener;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
@@ -55,9 +63,18 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 	@Nullable
 	private WidgetSize renderedWidgetSize;
 
+	@Nullable
+	protected WidgetSize androidAutoRenderedWidgetSize;
+	protected String cachedWidgetName;
+
 	public SimpleWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType,
 	                    @Nullable String customId, @Nullable WidgetsPanel panel) {
 		super(mapActivity, widgetType, customId, panel);
+		widgetState = new SimpleWidgetState(app, customId, widgetType, getDefaultWidgetSize());
+	}
+
+	public SimpleWidget(@NonNull OsmandApplication app, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel panel) {
+		super(app, widgetType, customId, panel);
 		widgetState = new SimpleWidgetState(app, customId, widgetType, getDefaultWidgetSize());
 	}
 
@@ -150,13 +167,15 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 	}
 
 	public void updateWidgetView() {
-		boolean showIcon = shouldShowIcon();
-		AndroidUiHelper.updateVisibility(imageView, showIcon);
 		updateWidgetName();
-		if (isVerticalWidget()) {
-			app.getOsmandMap().getMapLayers().getMapInfoLayer().updateRow(this);
-		} else {
-			updateValueAlign(false);
+		if (!isAndroidAuto()) {
+			boolean showIcon = shouldShowIcon();
+			AndroidUiHelper.updateVisibility(imageView, showIcon);
+			if (isVerticalWidget()) {
+				app.getOsmandMap().getMapLayers().getMapInfoLayer().updateRow(this);
+			} else {
+				updateValueAlign(false);
+			}
 		}
 	}
 
@@ -183,9 +202,16 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 	public void recreateViewIfNeeded(@NonNull WidgetsPanel panel) {
 		boolean oldWidgetOrientation = isVerticalWidget();
 		setPanel(panel);
-		if (oldWidgetOrientation != isVerticalWidget()) {
+		if (!isAndroidAuto() && oldWidgetOrientation != isVerticalWidget()) {
 			recreateView();
 		}
+	}
+
+	@Override
+	protected void recreateInternalForAndroidAuto() {
+		super.recreateInternalForAndroidAuto();
+		androidAutoRenderedWidgetSize = widgetState.getWidgetSizePref().get();
+		updateWidgetName();
 	}
 
 	@Override
@@ -234,12 +260,23 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 		}
 	}
 
+	@Override
+	protected void updateInfoForAndroidAuto(@Nullable DrawSettings drawSettings) {
+		super.updateInfoForAndroidAuto(drawSettings);
+		updateSimpleWidgetInfoForAndroidAuto(drawSettings);
+	}
+
 	protected boolean shouldHide() {
 		return (!(panel == BOTTOM && visibilityHelper.shouldShowBottomWidgets())) && (isVerticalWidget() && visibilityHelper.shouldHideVerticalWidgets() ||
 				panel == BOTTOM && visibilityHelper.shouldHideBottomWidgets());
 	}
 
 	protected void updateSimpleWidgetInfo(@Nullable OsmandMapLayer.DrawSettings drawSettings) {
+
+	}
+
+	protected void updateSimpleWidgetInfoForAndroidAuto(@Nullable OsmandMapLayer.DrawSettings drawSettings) {
+
 	}
 
 	@Override
@@ -253,6 +290,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 
 	protected void updateWidgetName() {
 		String newWidgetName = getWidgetName();
+		cachedWidgetName = newWidgetName;
 		if (newWidgetName != null && this.widgetName != null) {
 
 			String additionalName = getAdditionalWidgetName();
@@ -437,4 +475,181 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 	private boolean isSmallSize() {
 		return getWidgetSizePref().get() == WidgetSize.SMALL;
 	}
+
+	// region android auto
+
+	@Override
+	public void drawForAndroidAuto(@NonNull Canvas canvas, @NonNull DrawSettings drawSettings,
+								   float widgetWidthPx, float widgetHeightPx, boolean isRtl) {
+		if (androidAutoRenderedWidgetSize == WidgetSize.SMALL) {
+			drawSmallSize(canvas, drawSettings, widgetWidthPx, widgetHeightPx, isRtl);
+		} else if (androidAutoRenderedWidgetSize == WidgetSize.LARGE) {
+			drawLargeSize(canvas, drawSettings, widgetWidthPx, widgetHeightPx, isRtl);
+		} else {
+			drawMediumSize(canvas, drawSettings, widgetWidthPx, widgetHeightPx, isRtl);
+		}
+	}
+
+	@Override
+	public void onAndroidAutoPanelAppearanceChanged(@NonNull ResolvedPanelAppearance appearance) {
+		super.onAndroidAutoPanelAppearanceChanged(appearance);
+		if (androidAutoRenderedWidgetSize != getWidgetSizePref().get()) {
+			recreateInternalForAndroidAuto();
+			configureAAPaints(appearance);
+		}
+	}
+
+	@Override
+    public float measureHeightForAndroidAuto(int maxWidthPx) {
+		if (!shouldDrawForAndroidAuto()) {
+			return 0;
+		}
+		if (androidAutoRenderedWidgetSize == WidgetSize.SMALL) {
+			return measureHeightForSmallSizeAA();
+		} else if (androidAutoRenderedWidgetSize == WidgetSize.LARGE) {
+			return measureHeightForLargeSizeAA();
+		} else {
+			return measureHeightForMediumSizeAA();
+		}
+	}
+
+	protected float measureHeightForSmallSizeAA() {
+		Resources resources = app.getResources();
+		float minBottomLayoutHeight = resources.getDimension(R.dimen.map_widget_height);
+		float iconHeight = resources.getDimension(R.dimen.map_widget_icon);
+		float dividerHeight = AndroidUtils.dpToPxF(app, 1f);
+		float textBlockHeight = Math.max(cachedTextBounds.height(),cachedSmallTextBounds.height());
+		float contentHeight = Math.max(iconHeight, textBlockHeight);
+		return dividerHeight + Math.max(minBottomLayoutHeight, contentHeight);
+	}
+
+	protected float measureHeightForMediumSizeAA() {
+		// todo: use this dime value after "draw medium" is implemented
+//		return app.getResources().getDimension(R.dimen.simple_widget_medium_height);
+		return measureHeightForSmallSizeAA();
+	}
+
+	protected float measureHeightForLargeSizeAA() {
+		// todo: use this dime value after "draw large" is implemented
+//		return app.getResources().getDimension(R.dimen.simple_widget_large_height);
+		return measureHeightForSmallSizeAA();
+	}
+
+	protected float getPrimaryTextSizeAA() {
+		int resId;
+
+		if (androidAutoRenderedWidgetSize == WidgetSize.SMALL) {
+			resId = R.dimen.map_widget_text_size;
+		} else if (androidAutoRenderedWidgetSize == WidgetSize.LARGE) {
+			resId = R.dimen.simple_widget_value_large_size;
+		} else  {
+			resId = R.dimen.simple_widget_value_medium_size;
+		}
+
+		return app.getResources().getDimension(resId);
+	}
+
+	protected float getSecondaryTextSizeAA() {
+		int resId;
+		if (androidAutoRenderedWidgetSize == WidgetSize.SMALL) {
+			resId = R.dimen.map_widget_text_size_small;
+		} else if (androidAutoRenderedWidgetSize == WidgetSize.LARGE) {
+			resId = R.dimen.simple_widget_description_text_size;
+		} else  {
+			resId = R.dimen.simple_widget_description_text_size;
+		}
+		return app.getResources().getDimension(resId);
+	}
+
+	protected float getWidgetNameTextSizeAA() {
+		int resId;
+
+		if (androidAutoRenderedWidgetSize == WidgetSize.SMALL) {
+			return 0f;
+		} else if (androidAutoRenderedWidgetSize == WidgetSize.LARGE) {
+			resId = R.dimen.simple_widget_description_text_size;
+		} else  {
+			resId = R.dimen.simple_widget_description_text_size;
+		}
+
+		return app.getResources().getDimension(resId);
+	}
+
+	protected void drawSmallSize(@NonNull Canvas canvas, @NonNull DrawSettings drawSettings,
+								 float widgetWidthPx, float widgetHeightPx,
+								 boolean isRtl) {
+		Resources resources = app.getResources();
+		Rect textBounds = new Rect(cachedTextBounds);
+		Rect smallTextBounds = new Rect(cachedSmallTextBounds);
+
+		int iconSize = resources.getDimensionPixelSize(R.dimen.map_widget_icon);
+		float dividerHeight = AndroidUtils.dpToPxF(app, 1f);
+		float contentHeight = widgetHeightPx - dividerHeight;
+		int iconMargin = resources.getDimensionPixelSize(R.dimen.map_widget_icon_margin);
+		int textMargin = AndroidUtils.dpToPx(app, 4);
+		float centerVertical = contentHeight / 2f;
+
+		int textBlockHeight = Math.max(textBounds.height(), smallTextBounds.height());
+
+		Rect iconBounds = new Rect(0, 0, iconSize, iconSize);
+		float iconTop = centerVertical - iconBounds.height() / 2f;
+		float textBottom = centerVertical + textBlockHeight / 2f;
+		float textTop = textBottom - textBounds.height();
+		float smallTextTop = textBottom - smallTextBounds.height();
+
+		if (isRtl) {
+			iconBounds.offsetTo((int) (widgetWidthPx - iconMargin - iconSize), (int) iconTop);
+			textBounds.offsetTo(iconBounds.left - iconMargin - textBounds.width(), (int) textTop);
+			smallTextBounds.offsetTo(textBounds.left - iconMargin - textMargin - smallTextBounds.width(), (int) smallTextTop);
+		} else {
+			iconBounds.offsetTo(iconMargin, (int) iconTop);
+			textBounds.offsetTo(iconBounds.right + iconMargin, (int) textTop);
+			smallTextBounds.offsetTo(textBounds.right + iconMargin + textMargin, (int) smallTextTop);
+		}
+
+		int iconId = getIconId(drawSettings.isNightMode());
+		if (iconId != 0) {
+			Drawable iconDrawable = iconsCache.getIcon(iconId, 0);
+			if (iconDrawable != null) {
+				iconDrawable.setBounds(iconBounds);
+				iconDrawable.draw(canvas);
+			}
+		}
+		String text = cachedText;
+		if (text != null) {
+			drawText(canvas, text, textBounds, textPaint);
+		}
+		text = cachedSmallText;
+		if (text != null) {
+			drawText(canvas, text, smallTextBounds, smallTextPaint);
+		}
+
+	}
+
+	protected void drawMediumSize(@NonNull Canvas canvas, @NonNull DrawSettings drawSettings, float widgetWidthPx, float widgetHeightPx, boolean isRtl) {
+		// todo: implement
+		drawSmallSize(canvas, drawSettings, widgetWidthPx, widgetHeightPx, isRtl);
+	}
+	protected void drawLargeSize(@NonNull Canvas canvas, @NonNull DrawSettings drawSettings, float widgetWidthPx, float widgetHeightPx, boolean isRtl) {
+		// todo: implement
+		drawSmallSize(canvas, drawSettings, widgetWidthPx, widgetHeightPx, isRtl);
+	}
+
+	protected void drawText(@NonNull Canvas canvas, @NonNull String text, @NonNull Rect bounds, @NonNull Paint paint){
+		canvas.drawText(text, 0, text.length(), bounds.left, bounds.bottom, paint);
+	}
+
+	@Override
+	protected void configureAAPaints(ResolvedPanelAppearance appearance) {
+		super.configureAAPaints(appearance);
+		applyWidgetNameTextAppearance(widgetNameTextPaint, appearance);
+		updateCachedTextBounds(cachedWidgetNameTextBounds, widgetNameTextPaint, getWidgetName());
+	}
+
+	protected void applyWidgetNameTextAppearance(Paint paint, ResolvedPanelAppearance appearance) {
+		applyTextAppearance(paint, appearance.getPrimaryTextColor(), appearance);
+		paint.setTextSize(getWidgetNameTextSizeAA());
+	}
+
+	// endregion
 }

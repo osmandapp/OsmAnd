@@ -118,6 +118,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.views.corenative.NativeCoreContext;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.configure.appearance.PanelAppearanceSettingsManager;
 import net.osmand.plus.views.mapwidgets.utils.AverageGlideComputer;
 import net.osmand.plus.views.mapwidgets.utils.AverageSpeedComputer;
@@ -167,6 +168,8 @@ public class OsmandApplication extends MultiDexApplication {
 	private final ToastHelper toastHelper = new ToastHelper(this);
 	private final CoordinateFormatHelper coordinateFormatHelper = new CoordinateFormatHelper(this);
 	PanelAppearanceSettingsManager panelAppearanceSettingsManager;
+
+	private final MapWidgetRegistry mapWidgetRegistry = new MapWidgetRegistry(this);
 
 	// start variables
 	ResourceManager resourceManager;
@@ -779,9 +782,13 @@ public class OsmandApplication extends MultiDexApplication {
 		return player;
 	}
 
+	public MapWidgetRegistry getMapWidgetRegistry() {
+		return mapWidgetRegistry;
+	}
+
 	public void initVoiceCommandPlayer(@NonNull Context context, @NonNull ApplicationMode appMode,
-			@Nullable Runnable onCommandPlayerCreated, boolean warnNoProvider,
-			boolean showProgress, boolean forceInitialization, boolean applyAllModes) {
+	                                   @Nullable Runnable onCommandPlayerCreated, boolean warnNoProvider,
+	                                   boolean showProgress, boolean forceInitialization, boolean applyAllModes) {
 		String voiceProvider = settings.VOICE_PROVIDER.getModeValue(appMode);
 		if (OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
 			settings.VOICE_MUTE.setModeValue(appMode, true);

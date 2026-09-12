@@ -64,6 +64,8 @@ public class WidgetsListFragment extends BaseNestedFragment implements Confirmat
 	private RecyclerView recyclerView;
 	private WidgetsListAdapter adapter;
 
+	private boolean isAndroidAutoMode = false;
+
 	@NonNull
 	public WidgetsPanel getSelectedPanel() {
 		return selectedPanel;
@@ -71,6 +73,10 @@ public class WidgetsListFragment extends BaseNestedFragment implements Confirmat
 
 	public void setSelectedPanel(@NonNull WidgetsPanel panel) {
 		this.selectedPanel = panel;
+	}
+
+	public void setAndroidAutoMode(boolean value) {
+		this.isAndroidAutoMode = value;
 	}
 
 	@NonNull
@@ -159,9 +165,16 @@ public class WidgetsListFragment extends BaseNestedFragment implements Confirmat
 		List<List<MapWidgetInfo>> result = new ArrayList<>();
 		ScreenLayoutMode layoutMode = getScreenLayoutMode();
 		int enabledWidgetsFilter = AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE;
-		for (Set<MapWidgetInfo> set : widgetRegistry.getPagedWidgetsForPanel(mapActivity, getAppMode(),
-				layoutMode, selectedPanel, enabledWidgetsFilter)) {
-			result.add(new ArrayList<>(set));
+		if (isAndroidAutoMode) {
+			for (Set<MapWidgetInfo> set : widgetRegistry.getPagedAndroidAutoWidgetsForPanel(app, getAppMode(),
+					selectedPanel, enabledWidgetsFilter)) {
+				result.add(new ArrayList<>(set));
+			}
+		} else {
+			for (Set<MapWidgetInfo> set : widgetRegistry.getPagedWidgetsForPanel(mapActivity, getAppMode(),
+					layoutMode, selectedPanel, enabledWidgetsFilter)) {
+				result.add(new ArrayList<>(set));
+			}
 		}
 		return result;
 	}
@@ -222,9 +235,13 @@ public class WidgetsListFragment extends BaseNestedFragment implements Confirmat
 		applyWidgetsVisibility(enabledWidgetsIds);
 		applyWidgetsOrder(orderList);
 
-		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
-		if (mapInfoLayer != null) {
-			mapInfoLayer.recreateAllControls(requireMapActivity());
+		if (isAndroidAutoMode) {
+			app.getMapWidgetRegistry().recreateAndroidAutoWidgets();
+		} else {
+			MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
+			if (mapInfoLayer != null) {
+				mapInfoLayer.recreateAllControls(requireMapActivity());
+			}
 		}
 	}
 
@@ -249,9 +266,13 @@ public class WidgetsListFragment extends BaseNestedFragment implements Confirmat
 	}
 
 	private void applyWidgetsOrder(@NonNull List<List<String>> pagedOrder) {
-		ScreenLayoutMode layoutMode =  getScreenLayoutMode();
-		selectedPanel.setWidgetsOrder(getAppMode(), pagedOrder, settings, layoutMode);
-		widgetRegistry.reorderWidgets(layoutMode);
+		if (isAndroidAutoMode) {
+			widgetRegistry.reorderAndroidAutoWidgets();
+		} else {
+			ScreenLayoutMode layoutMode = getScreenLayoutMode();
+			selectedPanel.setWidgetsOrder(getAppMode(), pagedOrder, settings, layoutMode);
+			widgetRegistry.reorderWidgets(layoutMode);
+		}
 	}
 
 	@Override
