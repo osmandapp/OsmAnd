@@ -18,7 +18,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.appcompat.widget.ListPopupWindow
+import android.widget.PopupWindow
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -144,8 +144,8 @@ class StarMapSearchDialogFragment : BaseFullScreenDialogFragment() {
 	private lateinit var catalogsViewAllRow: View
 	private lateinit var catalogsViewAllCount: TextView
 
-	private var sortPopup: ListPopupWindow? = null
-	private var filterPopup: ListPopupWindow? = null
+	private var sortPopup: PopupWindow? = null
+	private var filterPopup: PopupWindow? = null
 	private var filterAndSortJob: Job? = null
 	private var filterAndSortRequestId = 0
 

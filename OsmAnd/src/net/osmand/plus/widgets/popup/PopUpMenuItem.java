@@ -20,39 +20,54 @@ public class PopUpMenuItem {
 	private final Integer titleSize;
 	private final Drawable icon;
 	private final TrailingBadge trailingBadge;
+	private final Drawable trailingIcon;
+	private final CharSequence trailingText;
+	private final CharSequence supportingText;
+	private final CharSequence labelText;
 	private final OnPopUpMenuItemClickListener onClickListener;
 	@ColorInt
 	private final Integer compoundBtnColor;
 	private final CompoundButtonType compoundButtonType;
 	private final boolean selected;
 	private final boolean showTopDivider;
+	private final boolean showTopGap;
 	private final boolean titleBold;
 	private final boolean dismissOnClick;
 	private final Object tag;
 
 	private PopUpMenuItem(CharSequence title,
-	                      @ColorInt @Nullable Integer titleColor,
-	                      Integer titleSize,
-	                      Drawable icon,
-	                      TrailingBadge trailingBadge,
-	                      OnPopUpMenuItemClickListener onClickListener,
-	                      Integer compoundBtnColor,
-	                      CompoundButtonType compoundButtonType,
-	                      boolean selected,
-	                      boolean showTopDivider,
-	                      boolean titleBold,
-	                      boolean dismissOnClick,
-	                      Object tag) {
+			@ColorInt @Nullable Integer titleColor,
+			Integer titleSize,
+			Drawable icon,
+			TrailingBadge trailingBadge,
+			Drawable trailingIcon,
+			CharSequence trailingText,
+			CharSequence supportingText,
+			CharSequence labelText,
+			OnPopUpMenuItemClickListener onClickListener,
+			Integer compoundBtnColor,
+			CompoundButtonType compoundButtonType,
+			boolean selected,
+			boolean showTopDivider,
+			boolean showTopGap,
+			boolean titleBold,
+			boolean dismissOnClick,
+			Object tag) {
 		this.title = title;
 		this.titleColor = titleColor;
 		this.titleSize = titleSize;
 		this.icon = icon;
 		this.trailingBadge = trailingBadge;
+		this.trailingIcon = trailingIcon;
+		this.trailingText = trailingText;
+		this.supportingText = supportingText;
+		this.labelText = labelText;
 		this.onClickListener = onClickListener;
 		this.compoundBtnColor = compoundBtnColor;
 		this.compoundButtonType = compoundButtonType;
 		this.selected = selected;
 		this.showTopDivider = showTopDivider;
+		this.showTopGap = showTopGap;
 		this.titleBold = titleBold;
 		this.dismissOnClick = dismissOnClick;
 		this.tag = tag;
@@ -82,6 +97,26 @@ public class PopUpMenuItem {
 	}
 
 	@Nullable
+	public Drawable getTrailingIcon() {
+		return trailingIcon;
+	}
+
+	@Nullable
+	public CharSequence getTrailingText() {
+		return trailingText;
+	}
+
+	@Nullable
+	public CharSequence getSupportingText() {
+		return supportingText;
+	}
+
+	@Nullable
+	public CharSequence getLabelText() {
+		return labelText;
+	}
+
+	@Nullable
 	public OnPopUpMenuItemClickListener getOnClickListener() {
 		return onClickListener;
 	}
@@ -107,6 +142,10 @@ public class PopUpMenuItem {
 		return showTopDivider;
 	}
 
+	public boolean shouldShowTopGap() {
+		return showTopGap;
+	}
+
 	public boolean isTitleBold() {
 		return titleBold;
 	}
@@ -119,10 +158,6 @@ public class PopUpMenuItem {
 		return tag;
 	}
 
-	public boolean hasCustomization() {
-		return isShowCompoundBtn() || getTitleColor() != null || titleBold || trailingBadge != null;
-	}
-
 	public static class TrailingBadge {
 		private final Drawable icon;
 		private final CharSequence title;
@@ -130,7 +165,7 @@ public class PopUpMenuItem {
 		private final Integer titleColor;
 
 		private TrailingBadge(@Nullable Drawable icon, @NonNull CharSequence title,
-		                      @ColorInt @Nullable Integer titleColor) {
+				@ColorInt @Nullable Integer titleColor) {
 			this.icon = icon;
 			this.title = title;
 			this.titleColor = titleColor;
@@ -158,15 +193,20 @@ public class PopUpMenuItem {
 		private CharSequence title;
 		@ColorInt
 		private Integer titleColor;
-		private Integer titleSize = 16; //SP
+		private Integer titleSize = 16; // SP
 		private Drawable icon;
 		private TrailingBadge trailingBadge;
+		private Drawable trailingIcon;
+		private CharSequence trailingText;
+		private CharSequence supportingText;
+		private CharSequence labelText;
 		private OnPopUpMenuItemClickListener onClickListener;
 		@ColorInt
 		private Integer compoundBtnColor;
 		private CompoundButtonType compoundButtonType;
 		private boolean selected;
 		private boolean showTopDivider;
+		private boolean showTopGap;
 		private boolean titleBold;
 		private boolean dismissOnClick = true;
 		private Object tag;
@@ -210,8 +250,38 @@ public class PopUpMenuItem {
 		}
 
 		public Builder setTrailingBadge(@Nullable Drawable icon, @NonNull CharSequence title,
-		                                @ColorInt @Nullable Integer titleColor) {
+				@ColorInt @Nullable Integer titleColor) {
 			this.trailingBadge = new TrailingBadge(icon, title, titleColor);
+			return this;
+		}
+
+		public Builder setTrailingIcon(@Nullable Drawable trailingIcon) {
+			this.trailingIcon = trailingIcon;
+			return this;
+		}
+
+		public Builder setTrailingText(@Nullable CharSequence trailingText) {
+			this.trailingText = trailingText;
+			return this;
+		}
+
+		public Builder setSupportingText(@Nullable CharSequence supportingText) {
+			this.supportingText = supportingText;
+			return this;
+		}
+
+		public Builder setSupportingTextId(int supportingTextId) {
+			this.supportingText = ctx.getString(supportingTextId);
+			return this;
+		}
+
+		public Builder setLabelText(@Nullable CharSequence labelText) {
+			this.labelText = labelText;
+			return this;
+		}
+
+		public Builder setLabelTextId(int labelTextId) {
+			this.labelText = ctx.getString(labelTextId);
 			return this;
 		}
 
@@ -242,6 +312,11 @@ public class PopUpMenuItem {
 			return this;
 		}
 
+		public Builder showTopGap(boolean showTopGap) {
+			this.showTopGap = showTopGap;
+			return this;
+		}
+
 		public Builder setTitleBold(boolean titleBold) {
 			this.titleBold = titleBold;
 			return this;
@@ -259,8 +334,9 @@ public class PopUpMenuItem {
 
 		public PopUpMenuItem create() {
 			return new PopUpMenuItem(title, titleColor, titleSize, icon, trailingBadge,
+					trailingIcon, trailingText, supportingText, labelText,
 					onClickListener, compoundBtnColor, compoundButtonType, selected,
-					showTopDivider, titleBold, dismissOnClick, tag);
+					showTopDivider, showTopGap, titleBold, dismissOnClick, tag);
 		}
 	}
 }
