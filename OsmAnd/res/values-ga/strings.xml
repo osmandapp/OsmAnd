@@ -4715,7 +4715,7 @@
     <string name="miles">Míle</string>
     <string name="mpg">MPG</string>
     <string name="access_pinch_zoom_magnification">Formhéadú súmáil pinch</string>
-    <string name="access_pinch_zoom_magnification_descr">Bain úsáid as scálú radhairc in ionad leibhéil súmála ar leith le linn gothaí súmála isteach.</string>
+    <string name="access_pinch_zoom_magnification_descr">Bain úsáid as scálú an limistéir amhairc (méadú) seachas leibhéil zúmála scoite le linn na gotha zúmála isteach.</string>
     <string name="show_spherical_map_description">Taispeáin samhail sféaróideach den Domhan</string>
     <string name="shared_string_price">Praghas</string>
     <string name="rendering_attr_showSkiSlopes_name">Taispeáin fánaí sciála</string>
@@ -5209,4 +5209,9 @@
     <string name="share_favorites_share_failed">Níorbh fhéidir an comhad a roinnt.</string>
     <string name="share_favorites_missing_media_warning">Níorbh fhéidir roinnt meán ceangailte a chur san áireamh.</string>
     <string name="search_on_web">Cuardaigh ar an ngréasán</string>
+    <string name="astro_eclipse_column_below_horizon">Faoi bhun na spéire</string>
+    <string name="quick_action_add_track">Cuir rian leis</string>
+    <string name="quick_action_tracks_select_descr">Cuir rian amháin nó níos mó leis chun iad a thaispeáint nó a cheilt ar an léarscáil le sconne amháin.</string>
+    <string name="quick_action_tracks_always_ask_descr">Má dhéantar an gníomh seo a thapáil, osclaítear liosta na rian, áit ar féidir leat ceann amháin nó níos mó díobh a thaispeáint nó a cheilt.</string>
+    <string name="quick_action_all_tracks">Gach rian</string>
 </resources>
