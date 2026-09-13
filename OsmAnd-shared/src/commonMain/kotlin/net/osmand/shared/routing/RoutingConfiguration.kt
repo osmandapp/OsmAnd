@@ -9,7 +9,9 @@ import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.KMapUtils
 import net.osmand.shared.xml.XmlPullParser
 import okio.Source
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
+import kotlin.native.ObjCName
 import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 
@@ -314,6 +316,10 @@ class RoutingConfiguration {
 		const val DEVIATION_RADIUS = 3000f
 
 		// if no penaltyForReverseDirection in xml
+		// exported to Objective-C under another name: a macro of the same name in the C++ core headers
+		// would otherwise break every file that includes both
+		@OptIn(ExperimentalObjCName::class)
+		@ObjCName("defaultPenaltyForReverseDirection")
 		const val DEFAULT_PENALTY_FOR_REVERSE_DIRECTION = 60.0
 
 		@JvmStatic
