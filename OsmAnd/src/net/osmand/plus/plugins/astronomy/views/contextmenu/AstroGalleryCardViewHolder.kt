@@ -15,7 +15,9 @@ import net.osmand.plus.gallery.contract.IGalleryListener
 import net.osmand.plus.gallery.model.GalleryItem
 import net.osmand.plus.gallery.ui.GalleryGridAdapter
 import net.osmand.plus.gallery.ui.GalleryGridItemDecorator
+import net.osmand.plus.gallery.ui.GalleryItemAnimator
 import net.osmand.plus.gallery.ui.holders.MediaHolderType
+import net.osmand.plus.gallery.ui.motion.GalleryMotion
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.widgets.dialogbutton.DialogButton
 import net.osmand.util.Algorithms
@@ -142,7 +144,7 @@ class AstroGalleryCardViewHolder(
 			recyclerView.addItemDecoration(GalleryGridItemDecorator(app))
 		}
 		recyclerView.adapter = galleryGridAdapter
-		recyclerView.itemAnimator = galleryGridAdapter?.getAnimator()
+		recyclerView.itemAnimator = galleryGridAdapter?.let { GalleryItemAnimator(recyclerView, it, null, GalleryMotion.animationsEnabled(app)) }
 	}
 
 	private fun setupViewAllButton() {

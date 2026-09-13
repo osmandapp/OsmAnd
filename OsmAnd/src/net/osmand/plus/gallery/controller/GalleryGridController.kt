@@ -30,9 +30,6 @@ abstract class GalleryGridController(
 
 	protected var view: IGalleryGridView? = null
 
-	private var newScaleFactor = 0f
-	private var zoomedForPinch = false
-
 	private var displayMode = GalleryDisplayMode.GRID
 
 	private var selectionMode = false
@@ -67,24 +64,31 @@ abstract class GalleryGridController(
 		return items
 	}
 
-	protected fun getMediaItems(): List<MediaItem> =
+	protected open fun getMediaItems(): List<MediaItem> =
 		app.galleryHelper.repository.get(key)?.getItems() ?: emptyList()
 
 	override fun getSpanCount(isPortrait: Boolean): Int {
 		return GalleryGridSettings.getSpanCount(app, isPortrait)
 	}
 
-	private fun setSpanCount(isPortrait: Boolean, count: Int) {
+	open fun setSpanCount(isPortrait: Boolean, count: Int) {
 		GalleryGridSettings.setSpanCount(app, isPortrait, count)
 	}
 
+	override fun getSpanBounds(isPortrait: Boolean): IntRange =
+		if (isPortrait) MIN_SPAN_COUNT..MAX_SPAN_COUNT else MIN_SPAN_COUNT_LANDSCAPE..MAX_SPAN_COUNT_LANDSCAPE
+
 	// --- Image size ---
 
-	fun resolveSpanResizableSize(viewWidth: Int?): Int {
-		val mapActivity = view?.getMapActivity() ?: return standardPhotoSizePx
+	open fun resolveSpanResizableSize(viewWidth: Int?): Int {
+		val isPortrait = view?.isPortrait() ?: return standardPhotoSizePx
+		return resolveSpanResizableSize(viewWidth, getSpanCount(isPortrait))
+	}
+
+	open fun resolveSpanResizableSize(viewWidth: Int?, spanCount: Int): Int {
+		val mapActivity = view?.getActivity() ?: return standardPhotoSizePx
 		val isPortrait = view?.isPortrait() ?: return standardPhotoSizePx
 
-		val spanCount = getSpanCount(isPortrait)
 		val padding = AndroidUtils.dpToPx(app, GalleryGridItemDecorator.GRID_SIDE_PADDING_DP)
 		val itemSpace = AndroidUtils.dpToPx(app, GRID_SCREEN_ITEM_SPACE_DP * 2f)
 		val screenWidth = viewWidth ?: if (isPortrait) {
@@ -96,78 +100,13 @@ abstract class GalleryGridController(
 		return spaceForItems / spanCount
 	}
 
-	// --- Scale ---
-
-	override fun onScaleBegin() {
-		newScaleFactor = 0f
-	}
-
-	override fun onScaleEnd() {
-		// Only reset the accumulated factor: zoomedForPinch stays latched until
-		// the touch gesture fully ends, so a single pinch can change the zoom
-		// by at most one step even if the detector restarts mid-gesture.
-		newScaleFactor = 0f
-	}
-
-	override fun onPinchGestureFinished() {
-		newScaleFactor = 0f
-		zoomedForPinch = false
-	}
-
-	override fun onScaleChanged(scaleFactor: Float): Boolean {
-		if (zoomedForPinch) return false
-
-		newScaleFactor += if (scaleFactor < 1f) {
-			-(scaleFactor - 1f) * SCALE_MULTIPLIER
-		} else {
-			(1f - scaleFactor) * SCALE_MULTIPLIER
-		}
-
-		val isPortrait = view?.isPortrait() ?: return false
-
-		// In list mode the only zoom gesture we react to is zoom-out, which
-		// returns to the most zoomed-in grid state.
-		if (displayMode == GalleryDisplayMode.LIST) {
-			if (newScaleFactor >= 1f) {
-				newScaleFactor = 0f
-				zoomedForPinch = true
-				setDisplayMode(GalleryDisplayMode.GRID)
-				return true
-			}
-			return false
-		}
-
-		val previousCount = getSpanCount(isPortrait)
-		val newCount = newScaleFactor.toInt() + previousCount
-		if (newCount == previousCount) {
-			return false
-		}
-
-		// Further zoom-in past the most zoomed-in grid switches to the list.
-		if (newCount < MIN_SPAN_COUNT && previousCount == MIN_SPAN_COUNT && isListModeSupported()) {
-			newScaleFactor = 0f
-			zoomedForPinch = true
-			setDisplayMode(GalleryDisplayMode.LIST)
-			return true
-		}
-
-		if (newCount in MIN_SPAN_COUNT..MAX_SPAN_COUNT) {
-			newScaleFactor = 0f
-			setSpanCount(isPortrait, newCount)
-			zoomedForPinch = true
-			view?.updateSpan()
-			return true
-		}
-		return false
-	}
-
 	// --- Display mode ---
 
 	override fun getDisplayMode(): GalleryDisplayMode = displayMode
 
 	override fun isListModeSupported(): Boolean = false
 
-	private fun setDisplayMode(mode: GalleryDisplayMode) {
+	open fun setDisplayMode(mode: GalleryDisplayMode) {
 		if (displayMode != mode) {
 			displayMode = mode
 			view?.updateDisplayMode()
@@ -242,7 +181,7 @@ abstract class GalleryGridController(
 	// --- Media ---
 
 	override fun onMediaItemClicked(mediaItem: MediaItem) {
-		val activity = view?.getMapActivity() ?: return
+		val activity = view?.getActivity() ?: return
 		val orderedIds = getGalleryItems()
 			.filterIsInstance<GalleryItem.Media>()
 			.map { it.mediaItem.id }
@@ -260,7 +199,7 @@ abstract class GalleryGridController(
 		)
 	}
 
-	fun createAdapter(mapActivity: MapActivity, viewWidth: Int?, nightMode: Boolean): GalleryGridAdapter {
+	open fun createAdapter(mapActivity: FragmentActivity, viewWidth: Int?, nightMode: Boolean): GalleryGridAdapter {
 		val registry = app.galleryHelper.loadStateRegistry
 		return GalleryGridAdapter(
 			mapActivity = mapActivity,
@@ -276,13 +215,15 @@ abstract class GalleryGridController(
 			onMediaLongClicked = ::onMediaItemLongClicked,
 			isItemSelected = ::isSelected,
 			onToggleSelection = ::toggleSelection,
-			posterLoader = app.galleryHelper.posterLoader
+			posterLoader = app.galleryHelper.posterLoader,
+			onGroupHeaderClicked = ::onGroupHeaderClicked
 		)
 	}
 
 	companion object {
 		const val MIN_SPAN_COUNT = 2
-		const val MAX_SPAN_COUNT = 4
-		const val SCALE_MULTIPLIER = 3f
+		const val MAX_SPAN_COUNT = 5
+		const val MIN_SPAN_COUNT_LANDSCAPE = 4
+		const val MAX_SPAN_COUNT_LANDSCAPE = 8
 	}
 }

@@ -114,13 +114,7 @@ public class MyPlacesActivity extends TabActivity {
 				if (intent.hasExtra(MapActivity.INTENT_PARAMS)) {
 					intentParams = intent.getBundleExtra(MapActivity.INTENT_PARAMS);
 					int tabId = intentParams.getInt(TAB_ID, FAV_TAB);
-					int pagerItem = 0;
-					for (int n = 0; n < tabItems.size(); n++) {
-						if (tabItems.get(n).resId == tabId) {
-							pagerItem = n;
-							break;
-						}
-					}
+					int pagerItem = resolveTabIndex(tabItems, tabId);
 					viewPager.setCurrentItem(pagerItem, false);
 				}
 			}
@@ -153,12 +147,7 @@ public class MyPlacesActivity extends TabActivity {
 		appBar.setOutlineProvider(null);
 
 		Integer tabId = settings.FAVORITES_TAB.get();
-		int tab = 0;
-		for (int i = 0; i < tabItems.size(); i++) {
-			if (tabItems.get(i).resId == tabId) {
-				tab = i;
-			}
-		}
+		int tab = resolveTabIndex(tabItems, tabId);
 		tabSize = tabItems.size();
 		setViewPagerAdapter(viewPager, tabItems);
 		mSlidingTabLayout.setViewPager(viewPager);

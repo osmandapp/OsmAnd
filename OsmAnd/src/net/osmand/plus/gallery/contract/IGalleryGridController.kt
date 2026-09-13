@@ -5,8 +5,14 @@ import net.osmand.plus.gallery.model.GalleryDisplayMode
 import net.osmand.plus.gallery.model.GalleryItem
 import net.osmand.plus.gallery.model.GalleryToolbarAction
 import net.osmand.shared.media.domain.MediaItem
+import net.osmand.shared.media.domain.MediaType
+import android.view.View
 
 interface IGalleryGridController : IGalleryListener, IGalleryActionListener {
+	fun isGroupingSupported(): Boolean = false
+	fun isGrouped(): Boolean = false
+	fun onMediaItemMenuClicked(item: MediaItem, anchor: View) {}
+	fun onGroupHeaderClicked(type: MediaType) {}
 	fun attach(view: IGalleryGridView)
 	fun detach()
 	fun onScreenDestroyed(activity: FragmentActivity?)
@@ -14,10 +20,7 @@ interface IGalleryGridController : IGalleryListener, IGalleryActionListener {
 	fun getGalleryItems(): List<GalleryItem>
 	fun getSpanCount(isPortrait: Boolean): Int
 
-	fun onScaleBegin()
-	fun onScaleEnd()
-	fun onScaleChanged(scaleFactor: Float): Boolean
-	fun onPinchGestureFinished() {}
+	fun getSpanBounds(isPortrait: Boolean): IntRange = 2..4
 
 	fun getDisplayMode(): GalleryDisplayMode = GalleryDisplayMode.GRID
 	fun isListModeSupported(): Boolean = false

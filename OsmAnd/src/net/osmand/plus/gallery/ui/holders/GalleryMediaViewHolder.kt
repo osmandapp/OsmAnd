@@ -1,7 +1,6 @@
 package net.osmand.plus.gallery.ui.holders
 
 import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.view.Gravity
 import android.view.View
 import android.widget.CompoundButton
@@ -12,10 +11,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
-import net.osmand.plus.activities.MapActivity
+import androidx.fragment.app.FragmentActivity
 import net.osmand.plus.gallery.data.MediaPosterLoader
 import net.osmand.plus.gallery.model.GalleryItem
+import net.osmand.plus.gallery.ui.motion.GalleryMotion
 import net.osmand.plus.helpers.AndroidUiHelper
+import androidx.core.view.isVisible
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.UiUtilities
@@ -38,7 +39,7 @@ class GalleryMediaViewHolder(
 	private val onMediaItemLongClicked: (MediaItem) -> Unit = {},
 	private val onToggleSelection: (MediaItem) -> Unit = {},
 	posterLoader: MediaPosterLoader? = null
-) : RecyclerView.ViewHolder(itemView) {
+) : RecyclerView.ViewHolder(itemView), MorphableMediaHolder {
 
 	private val ivImage: ImageView = itemView.findViewById(R.id.image)
 	private val ivSourceType: ImageView = itemView.findViewById(R.id.source_type)
@@ -49,7 +50,8 @@ class GalleryMediaViewHolder(
 		videoScrim = itemView.findViewById(R.id.video_scrim),
 		playIcon = itemView.findViewById(R.id.play_icon),
 		durationText = itemView.findViewById(R.id.duration_text),
-		posterLoader = posterLoader
+		posterLoader = posterLoader,
+		onPreviewShown = ::onPreviewShown
 	)
 
 	private val tvUrl: TextView = itemView.findViewById(R.id.url)
@@ -63,7 +65,7 @@ class GalleryMediaViewHolder(
 
 	private var loadingImage: LoadingImage? = null
 
-	private var mapActivity: MapActivity? = null
+	private var mapActivity: FragmentActivity? = null
 	private var nightMode: Boolean = false
 	private var imageSizePx: Int = 0
 	var holderType: MediaHolderType = MediaHolderType.STANDARD
@@ -71,29 +73,43 @@ class GalleryMediaViewHolder(
 	private var boundMediaItem: MediaItem? = null
 	private var selectionMode: Boolean = false
 
-	val boundItemId: String?
+	override val boundItemId: String?
 		get() = boundMediaItem?.id
 
-	val morphPreviewSnapshotView
+	override val previewView: View
+		get() = itemView
+
+	override val morphSnapshotView
 		get() = previewDelegate.morphPreviewSnapshotView
 
-	val morphCenterIcon
+	override val morphPreviewBitmap
+		get() = previewDelegate.morphPreviewBitmap
+
+	override val morphCenterIcon
 		get() = previewDelegate.morphCenterIcon
 
-	val morphShowsScrim
+	override val morphShowsScrim
 		get() = previewDelegate.morphShowsScrim
 
-	val morphDurationLabel
+	override val morphDurationLabel
 		get() = previewDelegate.morphDurationLabel
 
-	val morphShowsDuration
+	override val morphShowsDuration
 		get() = previewDelegate.morphShowsDuration
 
-	val morphDurationTextColor
+	override val morphDurationTextColor
 		get() = previewDelegate.morphDurationTextColor
 
-	val morphBgColor: Int
+	override val morphBgColor: Int
 		get() = previewDelegate.placeholderBgColor
+
+	override fun getFadeableContentViews(): List<View> = emptyList()
+
+	override fun getSelectionOverlayViews(): List<View> = listOf(selectionOverlay, selectionCheck).filter { it.isVisible }
+
+	override fun beginMorph(standIn: Bitmap?, onPreviewArrived: (Bitmap) -> Unit) = previewDelegate.beginMorph(standIn, onPreviewArrived)
+
+	override fun endMorph(revealed: Boolean) = previewDelegate.endMorph(revealed)
 
 	init {
 		clickOverlay.setOnClickListener {
@@ -108,7 +124,7 @@ class GalleryMediaViewHolder(
 	}
 
 	fun bindView(
-		mapActivity: MapActivity,
+		mapActivity: FragmentActivity,
 		galleryItem: GalleryItem.Media,
 		imageSizePx: Int,
 		holderType: MediaHolderType,
@@ -178,8 +194,7 @@ class GalleryMediaViewHolder(
 			override fun onStart(bitmap: Bitmap?) {}
 
 			override fun onSuccess(bitmap: Bitmap) {
-				bindImage(mediaItem)
-				ivImage.setImageDrawable(BitmapDrawable(ivImage.resources, bitmap))
+				previewDelegate.showPhotoPreview(bitmap)
 			}
 
 			override fun onError() {
@@ -202,8 +217,7 @@ class GalleryMediaViewHolder(
 			override fun onStart(bitmap: Bitmap?) {}
 
 			override fun onSuccess(bitmap: Bitmap) {
-				bindImage(mediaItem)
-				ivImage.setImageDrawable(BitmapDrawable(ivImage.resources, bitmap))
+				previewDelegate.showPhotoPreview(bitmap)
 			}
 
 			override fun onError() {
@@ -225,7 +239,7 @@ class GalleryMediaViewHolder(
 		}
 	}
 
-	private fun bindImage(mediaItem: MediaItem) {
+	private fun onPreviewShown() {
 		val layoutParams = FrameLayout.LayoutParams(
 			FrameLayout.LayoutParams.MATCH_PARENT,
 			FrameLayout.LayoutParams.MATCH_PARENT
@@ -233,8 +247,6 @@ class GalleryMediaViewHolder(
 		layoutParams.gravity = Gravity.CENTER
 		ivImage.visibility = View.VISIBLE
 		ivImage.layoutParams = layoutParams
-		ivImage.scaleType = ImageView.ScaleType.CENTER_CROP
-		previewDelegate.onPhotoPreviewShown()
 
 		tvUrl.visibility = View.GONE
 		border.visibility = View.GONE
@@ -265,11 +277,60 @@ class GalleryMediaViewHolder(
 	}
 
 	fun updateSelection(selectionMode: Boolean, selected: Boolean, nightMode: Boolean) {
+		val wasSelectionMode = this.selectionMode
+		val overlayWasVisible = selectionOverlay.isVisible
+		if (!GalleryMotion.animationsEnabled(app)) {
+			bindSelection(selectionMode, selected, nightMode)
+			return
+		}
 		bindSelection(selectionMode, selected, nightMode)
+		val overlayVisible = selectionOverlay.isVisible
+		if (selectionMode && !wasSelectionMode) {
+			appear(selectionCheck)
+			if (overlayVisible) appear(selectionOverlay)
+		} else if (!selectionMode && wasSelectionMode) {
+			disappear(selectionCheck)
+			if (overlayWasVisible) disappear(selectionOverlay)
+		} else if (overlayVisible && !overlayWasVisible) {
+			appear(selectionOverlay)
+		} else if (!overlayVisible && overlayWasVisible) {
+			disappear(selectionOverlay)
+		}
+	}
+
+	private fun appear(view: View) {
+		view.animate().cancel()
+		view.visibility = View.VISIBLE
+		view.alpha = 0f
+		view.scaleX = SELECTION_APPEAR_SCALE
+		view.scaleY = SELECTION_APPEAR_SCALE
+		view.animate().alpha(1f).scaleX(1f).scaleY(1f)
+			.setDuration(GalleryMotion.FADE_DURATION_MS).setInterpolator(GalleryMotion.CURVE).withEndAction(null).start()
+	}
+
+	private fun disappear(view: View) {
+		view.animate().cancel()
+		view.visibility = View.VISIBLE
+		view.animate().alpha(0f).scaleX(SELECTION_APPEAR_SCALE).scaleY(SELECTION_APPEAR_SCALE)
+			.setDuration(GalleryMotion.FADE_DURATION_MS).setInterpolator(GalleryMotion.CURVE)
+			.withEndAction {
+				view.visibility = View.GONE
+				resetAffordance(view)
+			}.start()
+	}
+
+	private fun resetAffordance(view: View) {
+		view.alpha = 1f
+		view.scaleX = 1f
+		view.scaleY = 1f
 	}
 
 	private fun bindSelection(selectionMode: Boolean, selected: Boolean, nightMode: Boolean) {
 		this.selectionMode = selectionMode
+		listOf(selectionCheck, selectionOverlay).forEach {
+			it.animate().cancel()
+			resetAffordance(it)
+		}
 		val activeColor = ColorUtilities.getActiveColor(app, nightMode)
 		selectionOverlay.setBackgroundColor(ColorUtilities.getColorWithAlpha(activeColor, SELECTION_TINT_ALPHA))
 		AndroidUiHelper.updateVisibility(selectionOverlay, selectionMode && selected)
@@ -295,5 +356,6 @@ class GalleryMediaViewHolder(
 
 	companion object {
 		private const val SELECTION_TINT_ALPHA = 0.3f
+		private const val SELECTION_APPEAR_SCALE = 0.8f
 	}
 }

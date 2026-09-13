@@ -21,6 +21,7 @@ class GalleryHelper(
 	val repository = GalleryRepository(loadStateRegistry)
 	val mediaLoader = MediaLoader(repository)
 	val attachedMediaRegistry = AttachedMediaRegistry()
+	val mediaLibraryRepository by lazy { net.osmand.plus.plugins.audionotes.library.data.MediaLibraryRepository(app) }
 
 	// Temporary local implementation behind the metadata/poster/source contracts;
 	// Will be replaced by a backend-backed one when the media backend is ready.

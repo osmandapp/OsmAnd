@@ -8,6 +8,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.gallery.data.GalleryKey;
 import net.osmand.plus.myplaces.favorites.FavoritesListener;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.myplaces.favorites.add.AddFavoriteOptions;
@@ -33,6 +34,10 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.Map;
+import java.util.IdentityHashMap;
+import java.io.File;
+import net.osmand.shared.media.MediaProvider;
 
 public class AttachedMediaDataHelper {
 
@@ -99,21 +104,35 @@ public class AttachedMediaDataHelper {
 		if (onMediaChanged != null) {
 			onMediaChanged.run();
 		}
+		notifyMediaChanged(target);
 	}
 
 	public void removeMediaLinks(@NonNull Linkable target, @NonNull List<Link> links, @Nullable CallbackWithObject<Boolean> callback) {
+		removeMediaLinks(target, links, true, callback);
+	}
+
+	public void removeMediaLinks(@NonNull Linkable target, @NonNull List<Link> links,
+	                             boolean deleteUnreferencedFiles, @Nullable CallbackWithObject<Boolean> callback) {
 		if (links.isEmpty()) {
 			logDebug("Attached media remove skipped: empty links");
+			notifyResult(callback, true);
 			return;
 		}
 		logDebug("Attached media remove: target=" + target + ", links=" + links.size());
+		List<Link> originals = new ArrayList<>(target.getLinks() != null ? target.getLinks() : List.of());
 
 		for (Link link : links) {
 			target.removeLink(link);
 		}
 		saveTarget(target, success -> {
-			if (Boolean.TRUE.equals(success)) {
+			if (Boolean.TRUE.equals(success) && deleteUnreferencedFiles) {
 				OsmAndTaskManager.executeTask(new DeleteMediaFilesTask(app, links, null));
+			}
+			if (!Boolean.TRUE.equals(success)) {
+				for (Link link : new ArrayList<>(target.getLinks() != null ? target.getLinks() : List.of())) target.removeLink(link);
+				for (Link link : originals) target.addLink(link);
+			} else {
+				notifyMediaChanged(target);
 			}
 			notifyResult(callback, Boolean.TRUE.equals(success));
 			return true;
@@ -139,6 +158,87 @@ public class AttachedMediaDataHelper {
 			LOG.warn("Unsupported Linkable type, links not persisted: " + target.getClass().getName());
 			notifyResult(callback, false);
 		}
+	}
+
+	/** Saves replacement links before renaming an internal file, restoring the links on failure. */
+	public void renameMedia(@Nullable Recording recording, @NonNull String href, @NonNull String name,
+	                        @NonNull Map<Linkable, List<Link>> linksByTarget,
+	                        @NonNull CallbackWithObject<Boolean> callback) {
+		String path = LinkMediaFactory.getInternalPath(href);
+		if (path == null || name.trim().isEmpty() || name.equals(".") || name.equals("..")
+				|| name.matches(".*[\\\\/:*?\"<>|\\p{Cntrl}].*")) {
+			notifyResult(callback, false);
+			return;
+		}
+		File source = MediaProvider.resolveInternalMediaFile(app.getAppPath().getAbsolutePath(), path);
+		String extension = Algorithms.getFileNameExtension(source.getName());
+		String newName = recording != null ? name + " " + recording.getOtherName(source.getName())
+				: name + (extension.isEmpty() ? "" : "." + extension);
+		File destination = new File(source.getParentFile(), newName);
+		if (source.equals(destination)) {
+			notifyResult(callback, true);
+			return;
+		}
+		if (!source.isFile() || destination.exists()) {
+			notifyResult(callback, false);
+			return;
+		}
+		Map<Link, Link> originals = new IdentityHashMap<>();
+		String newHref = mediaStorageHelper.createMediaFileHref(destination);
+		for (List<Link> links : linksByTarget.values()) {
+			for (Link link : links) {
+				originals.putIfAbsent(link, new Link(link));
+				link.setHref(newHref);
+				link.setText(newName);
+			}
+		}
+		List<Linkable> targets = new ArrayList<>(linksByTarget.keySet());
+		saveTargets(targets, 0, true, saved -> {
+			boolean renamed = Boolean.TRUE.equals(saved) && !destination.exists()
+					&& (recording != null ? recording.setName(name) : source.renameTo(destination));
+			if (renamed) {
+				mediaStorageHelper.scanMediaFile(source);
+				mediaStorageHelper.scanMediaFile(destination);
+				for (Linkable target : targets) notifyMediaChanged(target);
+				notifyResult(callback, true);
+			} else {
+				for (Map.Entry<Link, Link> entry : originals.entrySet()) {
+					entry.getKey().setHref(entry.getValue().getHref());
+					entry.getKey().setText(entry.getValue().getText());
+				}
+				saveTargets(targets, 0, true, restored -> {
+					if (!Boolean.TRUE.equals(restored)) LOG.warn("Failed to restore media links after rename failure");
+					notifyResult(callback, false);
+					return true;
+				});
+			}
+			return true;
+		});
+	}
+
+	private void notifyMediaChanged(@NonNull Linkable target) {
+		app.runInUIThread(() -> {
+			GalleryKey key = null;
+			if (target instanceof FavouritePoint point) {
+				key = new GalleryKey.Favorite(point.getKey());
+			} else if (target instanceof WptPt point) {
+				SelectedGpxFile selected = app.getSelectedGpxHelper().getSelectedGPXFile(point);
+				if (selected != null) key = new GalleryKey.Waypoint(selected.getGpxFile().getPath(), point.getKey());
+			}
+			if (key != null) app.getGalleryHelper().notifyAttachedMediaChanged(java.util.Collections.singleton(key));
+		});
+	}
+
+	private void saveTargets(@NonNull List<Linkable> targets, int index, boolean success,
+	                         @NonNull CallbackWithObject<Boolean> callback) {
+		if (index == targets.size()) {
+			notifyResult(callback, success);
+			return;
+		}
+		saveTarget(targets.get(index), saved -> {
+			app.runInUIThread(() -> saveTargets(targets, index + 1, success && Boolean.TRUE.equals(saved), callback));
+			return true;
+		});
 	}
 
 	private static void notifyResult(@Nullable CallbackWithObject<Boolean> callback, boolean success) {

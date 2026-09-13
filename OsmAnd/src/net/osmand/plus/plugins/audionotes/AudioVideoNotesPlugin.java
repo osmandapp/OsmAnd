@@ -97,7 +97,7 @@ import java.util.*;
 
 public class AudioVideoNotesPlugin extends OsmandPlugin {
 
-	public static final int NOTES_TAB = R.string.notes;
+	public static final int NOTES_TAB = R.string.shared_string_media;
 	public static final String DEFAULT_ACTION_SETTING_ID = "av_default_action";
 	public static final String EXTERNAL_RECORDER_SETTING_ID = "av_external_recorder";
 	public static final String EXTERNAL_PHOTO_CAM_SETTING_ID = "av_external_cam";
@@ -136,6 +136,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public final OsmandPreference<Boolean> SHOW_RECORDINGS;
 
 	public final CommonPreference<NotesSortByMode> NOTES_SORT_BY_MODE;
+	public final CommonPreference<net.osmand.plus.gallery.model.GallerySortMode> MEDIA_LIBRARY_SORT_MODE;
+	public final CommonPreference<net.osmand.plus.gallery.model.GalleryDisplayMode> MEDIA_LIBRARY_DISPLAY_MODE;
+	public final CommonPreference<Boolean> MEDIA_LIBRARY_GROUPED;
+	public final CommonPreference<Integer> MEDIA_LIBRARY_SPAN_COUNT;
+	public final CommonPreference<Integer> MEDIA_LIBRARY_SPAN_COUNT_LANDSCAPE;
 
 	private AudioNotesLayer audioNotesLayer;
 
@@ -206,6 +211,13 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		registerPreference(recordingsFileHelper.AV_RS_STORAGE_SIZE);
 
 		NOTES_SORT_BY_MODE = registerEnumStringPreference("notes_sort_by_mode", NotesSortByMode.BY_DATE, NotesSortByMode.values(), NotesSortByMode.class);
+		MEDIA_LIBRARY_SORT_MODE = registerEnumStringPreference("media_library_sort_mode", net.osmand.plus.gallery.model.GallerySortMode.NAME_A_Z,
+				net.osmand.plus.gallery.model.GallerySortMode.values(), net.osmand.plus.gallery.model.GallerySortMode.class).makeGlobal();
+		MEDIA_LIBRARY_DISPLAY_MODE = registerEnumStringPreference("media_library_display_mode", net.osmand.plus.gallery.model.GalleryDisplayMode.LIST,
+				net.osmand.plus.gallery.model.GalleryDisplayMode.values(), net.osmand.plus.gallery.model.GalleryDisplayMode.class).makeGlobal();
+		MEDIA_LIBRARY_GROUPED = registerBooleanPreference("media_library_grouped", false).makeGlobal();
+		MEDIA_LIBRARY_SPAN_COUNT = registerIntPreference("media_library_span_grid_count", 4).makeGlobal();
+		MEDIA_LIBRARY_SPAN_COUNT_LANDSCAPE = registerIntPreference("media_library_span_grid_count_landscape", 7).makeGlobal();
 
 		recordingPlayer = new RecordingPlayer(app, this::updateContextMenu);
 	}
@@ -1003,7 +1015,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public void addMyPlacesTab(MyPlacesActivity myPlacesActivity, List<TabItem> mTabs, Intent intent) {
-		mTabs.add(myPlacesActivity.getTabIndicator(NOTES_TAB, NotesFragment.class));
+		mTabs.add(myPlacesActivity.getTabIndicator(NOTES_TAB, net.osmand.plus.plugins.audionotes.library.MediaLibraryFragment.class));
 		if (intent != null && "AUDIO".equals(intent.getStringExtra("TAB"))) {
 			app.getSettings().FAVORITES_TAB.set(NOTES_TAB);
 		}

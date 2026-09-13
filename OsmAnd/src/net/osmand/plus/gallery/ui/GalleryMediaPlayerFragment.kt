@@ -769,6 +769,14 @@ class GalleryMediaPlayerFragment : BaseFullScreenFragment() {
 		}
 	}
 
+	override fun onResume() {
+		super.onResume()
+		val item = mediaItem ?: return
+		if (item.type == MediaType.AUDIO && controller?.consumeAutoPlay(item.id) == true) {
+			togglePlayPause()
+		}
+	}
+
 	override fun onPause() {
 		super.onPause()
 		pausePlayback()

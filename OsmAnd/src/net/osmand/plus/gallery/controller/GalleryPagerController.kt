@@ -7,6 +7,7 @@ import net.osmand.plus.gallery.data.GalleryKey
 import net.osmand.plus.gallery.data.getPagerItems
 import net.osmand.plus.gallery.model.GalleryItem
 import net.osmand.plus.gallery.ui.GalleryPhotoPagerFragment
+import net.osmand.shared.media.domain.MediaItem
 
 class GalleryPagerController(
 	app: OsmandApplication,
@@ -14,6 +15,21 @@ class GalleryPagerController(
 ) : BaseDialogController(app) {
 
 	var orderedIds: List<String>? = null
+	private var autoPlayItemId: String? = null
+
+	fun consumeAutoPlay(id: String): Boolean {
+		if (autoPlayItemId != id) return false
+		autoPlayItemId = null
+		return true
+	}
+
+	/** Single entry point for both Details menu items, so the viewer state is decided in one place. */
+	fun openDetails(activity: FragmentActivity, item: MediaItem) {
+		if (activity.supportFragmentManager.findFragmentByTag(GalleryPhotoPagerFragment.TAG) == null) {
+			autoPlayItemId = null
+			GalleryPhotoPagerFragment.showInstance(activity, item.id)
+		}
+	}
 
 	val mediaItems: List<GalleryItem.Media>
 		get() {
@@ -50,6 +66,7 @@ class GalleryPagerController(
 		) {
 			val controller = getInstance(activity.application as OsmandApplication, key)
 			controller.orderedIds = orderedIds
+			controller.autoPlayItemId = if (key == GalleryKey.MediaLibrary) selectedItemId else null
 			GalleryPhotoPagerFragment.showInstance(activity, selectedItemId)
 		}
 
