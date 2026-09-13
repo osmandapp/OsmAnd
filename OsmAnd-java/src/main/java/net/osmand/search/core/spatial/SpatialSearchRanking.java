@@ -276,10 +276,12 @@ public class SpatialSearchRanking {
 
 	/** the query said how many and what kind, but never which street: "4 av" is 4th Avenue, not
 	 *  house 4 on any avenue. Whether a word only says what kind ("avenue", "sokak", "вулиця") comes
-	 *  from the common words of the map that holds the street, not from a list kept here. */
+	 *  from the common words of the map that holds the street, not from a list kept here.
+	 *  Only a house that is the whole answer: "76 North Street Waverly" names the street by its city. */
 	public boolean kindOnlyAddress(SpatialSearchResult r) {
 		SpatialSearchResultRef head = r == null ? null : r.getFirstRef();
-		return head != null && head.atom != null && head.atom.isBuilding() && head.atom.distinctFoundCnt == 0;
+		return r.objs.size() == 1 && head != null && head.atom != null && head.atom.isBuilding()
+				&& head.atom.distinctFoundCnt == 0;
 	}
 
 	/** the query named this object, rather than reaching it through an alias or a category */
