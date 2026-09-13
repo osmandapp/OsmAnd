@@ -244,8 +244,11 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 			@TargetApi(android.os.Build.VERSION_CODES.M)
 			@Override
 			public void onReceivedError(WebView view, WebResourceRequest req, WebResourceError rerr) {
-				// Redirect to deprecated method, so you can use it in all SDK versions
-				onReceivedError(view, rerr.getErrorCode(), rerr.getDescription().toString(), req.getUrl().toString());
+				// This overload also reports subresource failures; only a failed document means
+				// the viewer is unusable. The page pulls scripts from several CDNs.
+				if (req.isForMainFrame()) {
+					onReceivedError(view, rerr.getErrorCode(), rerr.getDescription().toString(), req.getUrl().toString());
+				}
 			}
 		});
 		noInternetView.findViewById(R.id.retry_button).setOnClickListener(v -> {
