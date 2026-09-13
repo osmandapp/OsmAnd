@@ -3,7 +3,9 @@ package net.osmand.shared.routing
 import net.osmand.shared.data.KLatLon
 import net.osmand.shared.extensions.format
 import net.osmand.shared.util.KMapUtils
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
+import kotlin.native.ObjCName
 
 /**
  * One step of the A* search: a road, the point the step starts at and the neighbouring point it
@@ -167,6 +169,10 @@ open class RouteSegment(road: RouteDataObject?, segmentStart: Int, segmentEnd: I
 
 	companion object {
 		// # Represents parent segment for Start & End segment
+		// Named NULL in java; exported to Objective-C under another name, since NULL is a macro there
+		// and a property called that breaks the compile of every file that imports the framework
+		@OptIn(ExperimentalObjCName::class)
+		@ObjCName("nullSegment")
 		@JvmField
 		val NULL = RouteSegment(null, 0, 1)
 	}
