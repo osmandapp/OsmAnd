@@ -44,14 +44,14 @@ public class RoutePlannerBenchmarkTest {
 	private static final int MEASURED_ROUNDS = 2;
 
 	private static final List<String> OBF_DIRECTORIES = Arrays.asList(
-			"/Users/crimean/Library/Developer/CoreSimulator/Devices/04D37C3C-5D03-45A0-8B2D-69512DE2391C/data/Containers/Data/Application/DA50C80C-B421-4B6C-9009-AE8109DA6E6E/Documents/Resources",
+			"/Users/crimean/tmp/maps",
 			"/Users/crimean/Library/Developer/CoreSimulator/Devices/2B4A49F7-4769-4207-93AD-2DFF3B315735/data/Containers/Data/Application/1D97C071-99BF-41BC-BC02-A1CF7EEF3BCD/Documents/Resources");
 
 	private static final String NATIVE_LIB_DIR = "../../core-legacy/binaries/darwin/arm64/Release";
 
-	private static final String KYIV = "Ukraine_kyiv-city_europe.obf";
-	private static final String MOSCOW = "Russia_moscow_asia.obf";
+	private static final String NOORD_HOLLAND = "Netherlands_noord-holland_europe.obf";
 	private static final String BAVARIA = "Germany_bayern_upper-bavaria_europe.obf";
+	private static final String LOWER_AUSTRIA = "Austria_lower-austria_europe.obf";
 
 	private static class Route {
 		final String name;
@@ -69,14 +69,15 @@ public class RoutePlannerBenchmarkTest {
 
 	/** The same list as in the shared test; keep the two together. */
 	private static final List<Route> ROUTES = Arrays.asList(
-			new Route("kyiv centre 3 km", Arrays.asList(KYIV), new LatLon(50.4501, 30.5234), new LatLon(50.4400, 30.4890)),
-			new Route("kyiv airport 35 km", Arrays.asList(KYIV), new LatLon(50.4501, 30.5234), new LatLon(50.3450, 30.8947)),
-			new Route("moscow sheremetyevo 35 km", Arrays.asList(MOSCOW), new LatLon(55.7539, 37.6208), new LatLon(55.9726, 37.4146)),
-			new Route("moscow zelenograd 40 km", Arrays.asList(MOSCOW), new LatLon(55.9825, 37.1814), new LatLon(55.7539, 37.6208)),
-			new Route("moscow vnukovo-svo 50 km", Arrays.asList(MOSCOW), new LatLon(55.5915, 37.2615), new LatLon(55.9726, 37.4146)),
+			new Route("amsterdam schiphol 17 km", Arrays.asList(NOORD_HOLLAND), new LatLon(52.3791, 4.9003), new LatLon(52.3105, 4.7683)),
+			new Route("amsterdam haarlem 20 km", Arrays.asList(NOORD_HOLLAND), new LatLon(52.3791, 4.9003), new LatLon(52.3874, 4.6462)),
+			new Route("amsterdam den helder 80 km", Arrays.asList(NOORD_HOLLAND), new LatLon(52.3791, 4.9003), new LatLon(52.9563, 4.7606)),
+			new Route("munich airport 35 km", Arrays.asList(BAVARIA), new LatLon(48.1374, 11.5755), new LatLon(48.3538, 11.7861)),
 			new Route("munich rosenheim 65 km", Arrays.asList(BAVARIA), new LatLon(48.1374, 11.5755), new LatLon(47.8561, 12.1289)),
 			new Route("munich garmisch 90 km", Arrays.asList(BAVARIA), new LatLon(48.1374, 11.5755), new LatLon(47.4917, 11.0954)),
-			new Route("munich regensburg 120 km", Arrays.asList(BAVARIA), new LatLon(48.1374, 11.5755), new LatLon(49.0134, 12.1016)));
+			new Route("vienna schwechat 20 km", Arrays.asList(LOWER_AUSTRIA), new LatLon(48.2082, 16.3738), new LatLon(48.1103, 16.5697)),
+			new Route("st poelten krems 30 km", Arrays.asList(LOWER_AUSTRIA), new LatLon(48.2047, 15.6256), new LatLon(48.4103, 15.6136)),
+			new Route("st poelten wr neustadt 70 km", Arrays.asList(LOWER_AUSTRIA), new LatLon(48.2047, 15.6256), new LatLon(47.8100, 16.2450)));
 
 	@Test
 	public void benchmarkRoutes() throws IOException {
