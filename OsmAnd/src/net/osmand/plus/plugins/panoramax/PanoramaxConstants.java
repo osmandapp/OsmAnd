@@ -24,24 +24,10 @@ public class PanoramaxConstants {
 	/** User search, no API key required; the query string has to be URL encoded. */
 	public static final String USER_SEARCH_URL = API_URL + "users/search?q=%s";
 
-	private static final String PICTURES_PATH = API_URL + "pictures/";
-
 	private PanoramaxConstants() {
 	}
 
 	public static String getViewerUrl(String imageId) {
 		return VIEWER_URL_TEMPLATE + imageId;
-	}
-
-	public static String getHiResImageUrl(String imageId) {
-		return PICTURES_PATH + imageId + "/hd.jpg";
-	}
-
-	public static String getImageUrl(String imageId) {
-		return PICTURES_PATH + imageId + "/sd.jpg";
-	}
-
-	public static String getThumbnailUrl(String imageId) {
-		return PICTURES_PATH + imageId + "/thumb.jpg";
 	}
 }
