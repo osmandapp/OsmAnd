@@ -1,0 +1,219 @@
+package net.osmand.shared.compat;
+
+import net.osmand.NativeLibrary;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.data.LatLon;
+import net.osmand.router.RoutePlannerFrontEnd;
+import net.osmand.router.RouteResultPreparation;
+import net.osmand.router.RouteResultPreparation.RouteCalcResult;
+import net.osmand.router.RouteSegmentResult;
+import net.osmand.router.RoutingConfiguration;
+import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
+import net.osmand.router.RoutingContext;
+import net.osmand.shared.data.KLatLon;
+
+import org.junit.Ignore;
+import org.junit.Test;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Locale;
+
+/**
+ * The routes of the shared {@code RoutePlannerBenchmarkTest}, calculated three ways on this jvm:
+ * by the java planner, by the C++ router over JNI, and by the shared planner. With the shared
+ * planner's Kotlin/Native run that gives the four columns the port is judged by.
+ *
+ * The maps are real ones and are not in the repository, see the directories below. The C++ column
+ * needs the host library built, see {@code core-legacy/binaries/darwin/arm64/Release/libosmand.dylib};
+ * without it the column says so.
+ *
+ * <b>Disabled on purpose</b>: it takes minutes and prints numbers. To measure, lift the
+ * {@code @Ignore} and run {@code ./gradlew :OsmAnd-java:test --tests "*RoutePlannerBenchmarkTest" -i}.
+ */
+@Ignore
+public class RoutePlannerBenchmarkTest {
+
+	private static final int WARMUP_ROUNDS = 1;
+	private static final int MEASURED_ROUNDS = 2;
+
+	private static final List<String> OBF_DIRECTORIES = Arrays.asList(
+			"/Users/crimean/Library/Developer/CoreSimulator/Devices/04D37C3C-5D03-45A0-8B2D-69512DE2391C/data/Containers/Data/Application/DA50C80C-B421-4B6C-9009-AE8109DA6E6E/Documents/Resources",
+			"/Users/crimean/Library/Developer/CoreSimulator/Devices/2B4A49F7-4769-4207-93AD-2DFF3B315735/data/Containers/Data/Application/1D97C071-99BF-41BC-BC02-A1CF7EEF3BCD/Documents/Resources");
+
+	private static final String NATIVE_LIB_DIR = "../../core-legacy/binaries/darwin/arm64/Release";
+
+	private static final String KYIV = "Ukraine_kyiv-city_europe.obf";
+	private static final String MOSCOW = "Russia_moscow_asia.obf";
+	private static final String BAVARIA = "Germany_bayern_upper-bavaria_europe.obf";
+
+	private static class Route {
+		final String name;
+		final List<String> maps;
+		final LatLon start;
+		final LatLon end;
+
+		Route(String name, List<String> maps, LatLon start, LatLon end) {
+			this.name = name;
+			this.maps = maps;
+			this.start = start;
+			this.end = end;
+		}
+	}
+
+	/** The same list as in the shared test; keep the two together. */
+	private static final List<Route> ROUTES = Arrays.asList(
+			new Route("kyiv centre 3 km", Arrays.asList(KYIV), new LatLon(50.4501, 30.5234), new LatLon(50.4400, 30.4890)),
+			new Route("kyiv airport 35 km", Arrays.asList(KYIV), new LatLon(50.4501, 30.5234), new LatLon(50.3450, 30.8947)),
+			new Route("moscow sheremetyevo 35 km", Arrays.asList(MOSCOW), new LatLon(55.7539, 37.6208), new LatLon(55.9726, 37.4146)),
+			new Route("moscow zelenograd 40 km", Arrays.asList(MOSCOW), new LatLon(55.9825, 37.1814), new LatLon(55.7539, 37.6208)),
+			new Route("moscow vnukovo-svo 50 km", Arrays.asList(MOSCOW), new LatLon(55.5915, 37.2615), new LatLon(55.9726, 37.4146)),
+			new Route("munich rosenheim 65 km", Arrays.asList(BAVARIA), new LatLon(48.1374, 11.5755), new LatLon(47.8561, 12.1289)),
+			new Route("munich garmisch 90 km", Arrays.asList(BAVARIA), new LatLon(48.1374, 11.5755), new LatLon(47.4917, 11.0954)),
+			new Route("munich regensburg 120 km", Arrays.asList(BAVARIA), new LatLon(48.1374, 11.5755), new LatLon(49.0134, 12.1016)));
+
+	@Test
+	public void benchmarkRoutes() throws IOException {
+		RouteResultPreparation.PRINT_TO_CONSOLE_ROUTE_INFORMATION = false;
+		net.osmand.shared.routing.RouteResultPreparation.PRINT_TO_CONSOLE_ROUTE_INFORMATION = false;
+		RoutePlannerFrontEnd.CALCULATE_MISSING_MAPS = false;
+		NativeLibrary nativeLib = null;
+		File libDir = new File(NATIVE_LIB_DIR);
+		if (libDir.exists() && NativeLibrary.loadOldLib(libDir.getAbsolutePath())) {
+			nativeLib = new NativeLibrary();
+		}
+		System.out.println();
+		System.out.println("### route planner on jvm " + System.getProperty("java.version") + ": java, C++ over JNI" + (nativeLib == null ? " (library not found)" : "")
+				+ ", shared copy; " + WARMUP_ROUNDS + " warmup / " + MEASURED_ROUNDS + " measured, best time");
+		System.out.println();
+		System.out.printf(Locale.US, "  %-28s %-6s %8s %9s %8s %10s %9s %7s%n", "route", "by", "ms", "segments", "km", "routing s", "visited", "tiles");
+		for (Route route : ROUTES) {
+			List<File> files = new ArrayList<>();
+			for (String map : route.maps) {
+				File f = find(map);
+				if (f == null) {
+					System.out.printf(Locale.US, "  %-28s map not found: %s%n", route.name, map);
+					files = null;
+					break;
+				}
+				files.add(f);
+			}
+			if (files == null) {
+				continue;
+			}
+			runJava(route, files, null);
+			if (nativeLib != null) {
+				for (File f : files) {
+					nativeLib.initMapFile(f.getAbsolutePath(), true);
+				}
+				runJava(route, files, nativeLib);
+			}
+			runShared(route, files);
+		}
+		System.out.println();
+	}
+
+	private void runJava(Route route, List<File> files, NativeLibrary nativeLib) throws IOException {
+		BinaryMapIndexReader[] readers = new BinaryMapIndexReader[files.size()];
+		for (int i = 0; i < files.size(); i++) {
+			readers[i] = new BinaryMapIndexReader(new RandomAccessFile(files.get(i), "r"), files.get(i));
+		}
+		try {
+			double best = Double.MAX_VALUE;
+			String line = "";
+			for (int round = 0; round < WARMUP_ROUNDS + MEASURED_ROUNDS; round++) {
+				long start = System.nanoTime();
+				RoutingConfiguration config = RoutingConfiguration.getDefault().build("car", limits(), new HashMap<>());
+				RoutePlannerFrontEnd fe = new RoutePlannerFrontEnd();
+				RoutingContext ctx = fe.buildRoutingContext(config, nativeLib, readers);
+				RouteCalcResult res;
+				try {
+					res = fe.searchRoute(ctx, route.start, route.end, null);
+				} catch (InterruptedException e) {
+					throw new IOException(e);
+				}
+				double ms = (System.nanoTime() - start) / 1.0e6;
+				if (round >= WARMUP_ROUNDS && ms < best) {
+					best = ms;
+					if (res.getError() != null) {
+						line = "error: " + res.getError();
+					} else {
+						double km = 0;
+						for (RouteSegmentResult s : res.getList()) {
+							km += s.getDistance();
+						}
+						line = String.format(Locale.US, "%9d %8.1f %10.1f %9d %7d", res.getList().size(), km / 1000, ctx.routingTime,
+								ctx.calculationProgress.visitedSegments, ctx.calculationProgress.loadedTiles);
+					}
+				}
+			}
+			System.out.printf(Locale.US, "  %-28s %-6s %8.1f %s%n", route.name, nativeLib == null ? "java" : "cpp", best, line);
+		} finally {
+			for (BinaryMapIndexReader reader : readers) {
+				reader.close();
+			}
+		}
+	}
+
+	private void runShared(Route route, List<File> files) {
+		List<net.osmand.shared.binary.BinaryMapIndexReader> readers = new ArrayList<>();
+		for (File f : files) {
+			readers.add(new net.osmand.shared.binary.BinaryMapIndexReader(f.getPath()));
+		}
+		try {
+			double best = Double.MAX_VALUE;
+			String line = "";
+			for (int round = 0; round < WARMUP_ROUNDS + MEASURED_ROUNDS; round++) {
+				long start = System.nanoTime();
+				net.osmand.shared.routing.RoutingConfiguration config = net.osmand.shared.routing.RoutingConfiguration.getDefault()
+						.build("car", new net.osmand.shared.routing.RoutingConfiguration.RoutingMemoryLimits(
+								RoutingConfiguration.DEFAULT_NATIVE_MEMORY_LIMIT, RoutingConfiguration.DEFAULT_NATIVE_MEMORY_LIMIT), new LinkedHashMap<>());
+				net.osmand.shared.routing.RoutePlannerFrontEnd fe = new net.osmand.shared.routing.RoutePlannerFrontEnd();
+				net.osmand.shared.routing.RoutingContext ctx = fe.buildRoutingContext(config, readers);
+				net.osmand.shared.routing.RouteCalcResult res = fe.searchRoute(ctx,
+						new KLatLon(route.start.getLatitude(), route.start.getLongitude()),
+						new KLatLon(route.end.getLatitude(), route.end.getLongitude()), null);
+				double ms = (System.nanoTime() - start) / 1.0e6;
+				if (round >= WARMUP_ROUNDS && ms < best) {
+					best = ms;
+					if (res.getError() != null) {
+						line = "error: " + res.getError();
+					} else {
+						double km = 0;
+						for (net.osmand.shared.routing.RouteSegmentResult s : res.getList()) {
+							km += s.getDistance();
+						}
+						line = String.format(Locale.US, "%9d %8.1f %10.1f %9d %7d", res.getList().size(), km / 1000, ctx.routingTime,
+								ctx.calculationProgress.visitedSegments, ctx.calculationProgress.loadedTiles);
+					}
+				}
+			}
+			System.out.printf(Locale.US, "  %-28s %-6s %8.1f %s%n", route.name, "shared", best, line);
+		} finally {
+			for (net.osmand.shared.binary.BinaryMapIndexReader reader : readers) {
+				reader.close();
+			}
+		}
+	}
+
+	/** The 256 MB the C++ router is given, for the java planner too, so the tile cache does not thrash on the long routes. */
+	private static RoutingMemoryLimits limits() {
+		return new RoutingMemoryLimits(RoutingConfiguration.DEFAULT_NATIVE_MEMORY_LIMIT, RoutingConfiguration.DEFAULT_NATIVE_MEMORY_LIMIT);
+	}
+
+	private static File find(String name) {
+		for (String directory : OBF_DIRECTORIES) {
+			File f = new File(directory, name);
+			if (f.exists()) {
+				return f;
+			}
+		}
+		return null;
+	}
+}
