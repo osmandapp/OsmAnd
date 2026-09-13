@@ -868,34 +868,46 @@ public class TravelObfHelper implements TravelHelper {
 			if (articleId.file != null && !articleId.file.equals(repo.getFile()) && !isDbArticle) {
 				continue;
 			}
-			SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(0, 0,
-					Algorithms.emptyIfNull(articleId.title), 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
-					getSearchFilter(ROUTE_ARTICLE), new ResultMatcher<Amenity>() {
-						boolean done;
+			ResultMatcher<Amenity> matcher = new ResultMatcher<Amenity>() {
+				boolean done;
 
-						@Override
-						public boolean publish(Amenity amenity) {
-							if (Algorithms.stringsEqual(articleId.routeId,
-									Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID))) || isDbArticle) {
-								amenities.add(amenity);
-								done = true;
-							}
-							return false;
-						}
-
-						@Override
-						public boolean isCancelled() {
-							return done;
-						}
-					}, null);
-
-			if (!Double.isNaN(articleId.lat)) {
-				req.setBBoxRadius(articleId.lat, articleId.lon, ARTICLE_SEARCH_RADIUS);
-				if (!Algorithms.isEmpty(articleId.title)) {
-					repo.searchPoiByName(req);
-				} else {
-					repo.searchPoi(req);
+				@Override
+				public boolean publish(Amenity amenity) {
+					if (Algorithms.stringsEqual(articleId.routeId,
+							Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID))) || isDbArticle) {
+						amenities.add(amenity);
+						done = true;
+					}
+					return false;
 				}
+
+				@Override
+				public boolean isCancelled() {
+					return done;
+				}
+			};
+			boolean hasLocation = !Double.isNaN(articleId.lat);
+			boolean searchByRouteId = !isDbArticle && Algorithms.isEmpty(articleId.title)
+					&& !Algorithms.isEmpty(articleId.routeId);
+			String searchName = searchByRouteId ? articleId.routeId : Algorithms.emptyIfNull(articleId.title);
+			SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(0, 0, searchName,
+					0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, getSearchFilter(ROUTE_ARTICLE), matcher, null);
+			if (hasLocation) {
+				req.setBBoxRadius(articleId.lat, articleId.lon, ARTICLE_SEARCH_RADIUS);
+			}
+			if (searchByRouteId) {
+				// route_id is in the POI name index: a spatial scan of ARTICLE_SEARCH_RADIUS decodes thousands
+				// of articles (hundreds of MB) while holding the repository lock
+				repo.searchPoiByName(req);
+				if (amenities.isEmpty() && hasLocation) {
+					// travel files without the route_id name index
+					SearchRequest<Amenity> nearbyReq = BinaryMapIndexReader.buildSearchPoiRequest(0, 0, "",
+							0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, getSearchFilter(ROUTE_ARTICLE), matcher, null);
+					nearbyReq.setBBoxRadius(articleId.lat, articleId.lon, SAVED_ARTICLE_SEARCH_RADIUS);
+					repo.searchPoi(nearbyReq);
+				}
+			} else if (hasLocation && !Algorithms.isEmpty(articleId.title)) {
+				repo.searchPoiByName(req);
 			} else {
 				repo.searchPoi(req);
 			}
