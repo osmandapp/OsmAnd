@@ -58,7 +58,7 @@ public class MapillaryFiltersFragment extends BaseFullScreenFragment {
         int currentModeColor = appMode.getProfileColor(nightMode);
 
         View view = UiUtilities.getInflater(mapActivity, nightMode)
-                .inflate(R.layout.fragment_mapillary_filters, container, false);
+                .inflate(R.layout.fragment_street_level_imagery_filters, container, false);
 
         boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
         AndroidUiHelper.updateVisibility(view.findViewById(R.id.shadow_on_map), portrait);
