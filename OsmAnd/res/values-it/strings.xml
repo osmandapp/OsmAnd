@@ -1765,7 +1765,7 @@
     <string name="looking_for_tracks_with_waypoints">Cerco tracce con punti intermedi</string>
     <string name="shared_string_more_without_dots">Altro</string>
     <string name="empty_state_osm_edits">Crea o modifica oggetti di OpenStreetMap</string>
-    <string name="empty_state_osm_edits_descr">Crea o modifica PDI OSM, apri o commenta note OSM, e invia tracce GPX registrate.</string>
+    <string name="empty_state_osm_edits_descr">Crea o modifica PDI di OpenStreetMap, apri o commenta note di OSM e invia tracce GPX registrate.</string>
     <string name="shared_string_deleted">Cancellato</string>
     <string name="shared_string_edited">Modificato</string>
     <string name="shared_string_added">Aggiunto</string>
@@ -5180,7 +5180,7 @@
     <string name="change_media_storage_full_description">Sposto i file multimediali esistenti nella nuova destinazione?\n%1$s &gt; %2$s</string>
     <string name="media_storage_directory_not_writable">I file multimediali potrebbero non essere salvati nella cartella specificata</string>
     <string name="route_calculation_method">Metodo di calcolo del percorso</string>
-    <string name="route_calculation_method_auto">Automatico (Il più veloce disponibile)</string>
+    <string name="route_calculation_method_auto">Automatico (il più veloce disponibile)</string>
     <string name="route_calculation_method_auto_desc">Tenta di usare il calcolo rapido del percorso. Passa automaticamente al calcolo standard se le date sulla mappa non corrispondono.</string>
     <string name="route_calculation_method_standard_only">Solo standard</string>
     <string name="route_calculation_method_standard_only_desc">Utilizza sempre il calcolo standard del percorso. Più lento, ma consente la navigazione con mappe di date diverse.</string>
@@ -5209,7 +5209,7 @@
     <string name="search_around_my_location_description">Cerca attorno alla tua posizione</string>
     <string name="sort_by_relevance">Rilevanza</string>
     <string name="tracks_backup_promo_button">Ottieni OsmAnd Pro</string>
-    <string name="tracks_backup_promo_description">Sincronizza le tue tracce tra tutti i dispositivi e sul Web con OsmAnd Pro.</string>
+    <string name="tracks_backup_promo_description">Sincronizza le tue tracce tra tutti i dispositivi e il web con OsmAnd Pro.</string>
     <string name="tracks_backup_promo_title">Salva e sincronizza le tue tracce</string>
     <string name="android_auto_missing_maps_desc">Scarica le mappe mancanti per continuare il percorso.</string>
     <string name="android_auto_possible_missing_maps_desc">Mappe potenzialmente mancanti. Prova a utilizzare le mappe esistenti per continuare.</string>
@@ -5277,8 +5277,8 @@
     <string name="history_is_turned_off">La cronologia è disattivata</string>
     <string name="search_and_navigation_history_disabled_descr">Le cronologie della ricerca e della navigazione sono disattivate. Abilitale nelle impostazioni per vedere qui l\'attività recente.</string>
     <string name="open_history_settings">Apri le impostazioni della cronologia</string>
-    <string name="free_download_limit_reached">Limite di download gratuiti raggiunto</string>
-    <string name="free_download_limit_reached_description">Sblocca download e aggiornamenti illimitati delle mappe</string>
+    <string name="free_download_limit_reached">Limite di scaricamenti gratuiti raggiunto</string>
+    <string name="free_download_limit_reached_description">Sblocca scaricamenti e aggiornamenti illimitati delle mappe</string>
     <string name="get_unlimited_downloads">Ottieni download illimitati</string>
     <string name="navigate_point_east_coordinate">Coordinata Est</string>
     <string name="navigate_point_north_coordinate">Coordinata Nord</string>
