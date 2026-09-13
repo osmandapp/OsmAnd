@@ -24,7 +24,6 @@ import net.osmand.plus.views.layers.geometry.GeometryWayDrawer.DrawPathData31;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteSegmentResult;
-import net.osmand.router.RouteStatisticsHelper.RouteSegmentAttribute;
 import net.osmand.router.RouteStatisticsHelper.RouteStatisticComputer;
 import net.osmand.shared.ColorPalette;
 import net.osmand.shared.gpx.GpxFile;
@@ -33,6 +32,7 @@ import net.osmand.shared.routing.ColoringType;
 import net.osmand.shared.routing.RouteColorize;
 import net.osmand.shared.routing.RouteColorize.ColorizationType;
 import net.osmand.shared.routing.RouteColorize.RouteColorizationPoint;
+import net.osmand.shared.routing.details.RouteAttributeClassification;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -230,7 +230,7 @@ public abstract class MultiColoringGeometryWay<C extends MultiColoringGeometryWa
 		List<Integer> colors = new ArrayList<>(locations.size());
 		for (int i = 0; i < routeSegments.size(); i++) {
 			RouteSegmentResult segment = routeSegments.get(i);
-			RouteSegmentAttribute attribute =
+			RouteAttributeClassification attribute =
 					statisticComputer.classifySegment(routeInfoAttribute, -1, segment.getObject());
 			int color = attribute.getColor();
 			color = color == 0 ? ColorPalette.Companion.getLIGHT_GREY() : color;

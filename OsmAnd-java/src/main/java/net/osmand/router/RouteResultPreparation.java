@@ -15,9 +15,9 @@ import net.osmand.render.RenderingRulesStorage.RenderingRulesStorageResolver;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
-import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 import net.osmand.router.RoadSplitStructure.AttachedRoadInfo;
 import net.osmand.shared.routing.GeneralRouterProfile;
+import net.osmand.shared.routing.details.RouteStatistic;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
@@ -846,8 +846,8 @@ public class RouteResultPreparation {
 				}
 			}, false);
 			RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
-			List<RouteStatistics> rsr = RouteStatisticsHelper.calculateRouteStatistic(result, null, rrs, null, req);
-			for(RouteStatistics r : rsr) {
+			List<RouteStatistic> rsr = RouteStatisticsHelper.calculateRouteStatistic(result, null, rrs, null, req);
+			for(RouteStatistic r : rsr) {
 				System.out.println(r);
 			}
 		} catch (Exception e) {

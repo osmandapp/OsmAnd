@@ -1,17 +1,6 @@
 package net.osmand.plus.routing;
 
 import static net.osmand.data.PointDescription.POINT_TYPE_ALARM;
-import static net.osmand.plus.routing.AlarmInfoType.BORDER_CONTROL;
-import static net.osmand.plus.routing.AlarmInfoType.HAZARD;
-import static net.osmand.plus.routing.AlarmInfoType.MAXIMUM;
-import static net.osmand.plus.routing.AlarmInfoType.PEDESTRIAN;
-import static net.osmand.plus.routing.AlarmInfoType.RAILWAY;
-import static net.osmand.plus.routing.AlarmInfoType.SPEED_CAMERA;
-import static net.osmand.plus.routing.AlarmInfoType.SPEED_LIMIT;
-import static net.osmand.plus.routing.AlarmInfoType.STOP;
-import static net.osmand.plus.routing.AlarmInfoType.TOLL_BOOTH;
-import static net.osmand.plus.routing.AlarmInfoType.TRAFFIC_CALMING;
-import static net.osmand.plus.routing.AlarmInfoType.RED_LIGHT_CAMERA;
 
 import android.content.Context;
 
@@ -22,10 +11,13 @@ import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.R;
+import net.osmand.shared.routing.details.RouteEventHelper;
+import net.osmand.shared.routing.details.RouteEventType;
 
 public class AlarmInfo implements LocationPoint {
 
-	private final AlarmInfoType type;
+	private final RouteEventType type;
 	protected final int locationIndex;
 	private int lastLocationIndex = -1;
 	private int intValue;
@@ -33,13 +25,13 @@ public class AlarmInfo implements LocationPoint {
 	private double latitude;
 	private double longitude;
 
-	public AlarmInfo(@NonNull AlarmInfoType type, int locationIndex) {
+	public AlarmInfo(@NonNull RouteEventType type, int locationIndex) {
 		this.type = type;
 		this.locationIndex = locationIndex;
 	}
 
 	@NonNull
-	public AlarmInfoType getType() {
+	public RouteEventType getType() {
 		return type;
 	}
 
@@ -83,7 +75,7 @@ public class AlarmInfo implements LocationPoint {
 
 	@NonNull
 	public static AlarmInfo createSpeedLimit(int speed, @NonNull Location location, float speedMetersPerSecond) {
-		AlarmInfo info = new AlarmInfo(SPEED_LIMIT, 0);
+		AlarmInfo info = new AlarmInfo(RouteEventType.SPEED_LIMIT, 0);
 		info.setLatLon(location.getLatitude(), location.getLongitude());
 		info.setIntValue(speed);
 		info.setFloatValue(speedMetersPerSecond);
@@ -97,68 +89,55 @@ public class AlarmInfo implements LocationPoint {
 
 	@Nullable
 	public static AlarmInfo createAlarmInfo(@NonNull RouteTypeRule ruleType, int locInd, @NonNull Location loc) {
-		AlarmInfo alarmInfo = null;
-		if ("highway".equals(ruleType.getTag())) {
-			if ("speed_camera".equals(ruleType.getValue())) {
-				alarmInfo = new AlarmInfo(SPEED_CAMERA, locInd);
-			} else if ("stop".equals(ruleType.getValue())) {
-				alarmInfo = new AlarmInfo(STOP, locInd);
-			}
-		} else if ("enforcement".equals(ruleType.getTag())) {
-			if ("traffic_signals".equals(ruleType.getValue())) {
-				alarmInfo = new AlarmInfo(RED_LIGHT_CAMERA, locInd);
-			}
-		} else if ("barrier".equals(ruleType.getTag())) {
-			if ("toll_booth".equals(ruleType.getValue())) {
-				alarmInfo = new AlarmInfo(TOLL_BOOTH, locInd);
-			} else if ("border_control".equals(ruleType.getValue())) {
-				alarmInfo = new AlarmInfo(BORDER_CONTROL, locInd);
-			}
-		} else if ("traffic_calming".equals(ruleType.getTag())) {
-			String value = ruleType.getValue();
-			boolean isIslandType = "island".equals(value)
-					|| "choked_island".equals(value)
-					|| "painted_island".equals(value);
-			if (!isIslandType) {
-				alarmInfo = new AlarmInfo(TRAFFIC_CALMING, locInd);
-			}
-		} else if ("hazard".equals(ruleType.getTag())) {
-			alarmInfo = new AlarmInfo(HAZARD, locInd);
-		} else if ("railway".equals(ruleType.getTag()) && "level_crossing".equals(ruleType.getValue())) {
-			alarmInfo = new AlarmInfo(RAILWAY, locInd);
-		} else if ("crossing".equals(ruleType.getTag()) && "uncontrolled".equals(ruleType.getValue())) {
-			alarmInfo = new AlarmInfo(PEDESTRIAN, locInd);
+		RouteEventType type = RouteEventHelper.INSTANCE.classifyType(ruleType.getTag(), ruleType.getValue());
+		if (type == null) {
+			return null;
 		}
-		if (alarmInfo != null) {
-			alarmInfo.setLatLon(loc.getLatitude(), loc.getLongitude());
-		}
+		AlarmInfo alarmInfo = new AlarmInfo(type, locInd);
+		alarmInfo.setLatLon(loc.getLatitude(), loc.getLongitude());
 		return alarmInfo;
 	}
 
 	public int updateDistanceAndGetPriority(float time, float distance) {
-		if (distance > 1500) {
-			return Integer.MAX_VALUE;
+		return RouteEventHelper.INSTANCE.updateDistanceAndGetPriority(type, time, distance);
+	}
+
+	@NonNull
+	public static String getVisualName(@NonNull Context ctx, @NonNull RouteEventType type) {
+		// Android resource IDs stay in the Android wrapper; only the backend event type is shared.
+		switch (type) {
+			case SPEED_CAMERA:
+				return ctx.getString(R.string.traffic_warning_speed_camera);
+			case SPEED_LIMIT:
+				return ctx.getString(R.string.traffic_warning_speed_limit);
+			case BORDER_CONTROL:
+				return ctx.getString(R.string.traffic_warning_border_control);
+			case RAILWAY:
+				return ctx.getString(R.string.traffic_warning_railways);
+			case TRAFFIC_CALMING:
+				return ctx.getString(R.string.traffic_warning_calming);
+			case TOLL_BOOTH:
+				return ctx.getString(R.string.traffic_warning_payment);
+			case STOP:
+				return ctx.getString(R.string.traffic_warning_stop);
+			case PEDESTRIAN:
+				return ctx.getString(R.string.traffic_warning_pedestrian);
+			case HAZARD:
+				return ctx.getString(R.string.traffic_warning_hazard);
+			case MAXIMUM:
+				return ctx.getString(R.string.traffic_warning);
+			case TUNNEL:
+				return ctx.getString(R.string.tunnel_warning);
+			case RED_LIGHT_CAMERA:
+				return ctx.getString(R.string.traffic_warning_red_light_camera);
+			default:
+				throw new IllegalArgumentException("Unsupported route event type: " + type);
 		}
-		// 1 level of priorities
-		if (time < 6 || distance < 75 || type == SPEED_LIMIT) {
-			return type.getPriority();
-		}
-		if ((type == SPEED_CAMERA || type == RED_LIGHT_CAMERA) && (time < 15 || distance < 150)) {
-			return type.getPriority();
-		}
-		if (type == TOLL_BOOTH && (time < 30 || distance < 500)) {
-			return type.getPriority();
-		}
-		// 2nd level
-		if (time < 7 || distance < 100) {
-			return type.getPriority() + MAXIMUM.getPriority();
-		}
-		return Integer.MAX_VALUE;
 	}
 
 	@Override
 	public PointDescription getPointDescription(@NonNull Context ctx) {
-		return new PointDescription(POINT_TYPE_ALARM, type.getVisualName(ctx));
+		return new PointDescription(POINT_TYPE_ALARM, getVisualName(ctx, type));
 	}
 
 	@Override

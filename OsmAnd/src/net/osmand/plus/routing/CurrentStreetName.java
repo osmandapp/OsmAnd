@@ -8,9 +8,9 @@ import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.router.ExitInfo;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.TurnType;
+import net.osmand.shared.routing.details.RouteExitInfo;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -101,7 +101,7 @@ public class CurrentStreetName {
 			if (turnType == null) {
 				turnType = TurnType.valueOf(TurnType.C, false);
 			}
-			ExitInfo exitInfo = info.directionInfo.getExitInfo();
+			RouteExitInfo exitInfo = info.directionInfo.getExitInfo();
 			if (exitInfo != null) {
 				// don't display name of exit street name
 				exitRef = exitInfo.getRef();

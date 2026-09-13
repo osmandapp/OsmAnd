@@ -8,8 +8,8 @@ import androidx.annotation.Nullable;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.router.ExitInfo;
 import net.osmand.router.TurnType;
+import net.osmand.shared.routing.details.RouteExitInfo;
 import net.osmand.util.Algorithms;
 
 public class RouteDirectionInfo {
@@ -35,7 +35,7 @@ public class RouteDirectionInfo {
 	private RouteDataObject routeDataObject;
 
 	@Nullable
-	private ExitInfo exitInfo;
+	private RouteExitInfo exitInfo;
 
 	public String getDestinationName() {
 		return destinationName;
@@ -138,11 +138,11 @@ public class RouteDirectionInfo {
 	}
 
 	@Nullable
-	public ExitInfo getExitInfo() {
+	public RouteExitInfo getExitInfo() {
 		return exitInfo;
 	}
 
-	public void setExitInfo(@Nullable ExitInfo exitInfo) {
+	public void setExitInfo(@Nullable RouteExitInfo exitInfo) {
 		this.exitInfo = exitInfo;
 	}
 

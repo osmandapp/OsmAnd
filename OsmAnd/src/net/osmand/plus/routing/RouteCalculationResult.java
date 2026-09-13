@@ -18,13 +18,14 @@ import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.router.ExitInfo;
 import net.osmand.router.MissingMapsCalculationResult;
 import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingContext;
 import net.osmand.router.TurnType;
 import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.routing.details.RouteEventType;
+import net.osmand.shared.routing.details.RouteExitInfo;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -38,8 +39,6 @@ import java.util.List;
 public class RouteCalculationResult {
 	private static final Log log = PlatformUtil.getLog(RouteCalculationResult.class);
 
-	private static final double DISTANCE_CLOSEST_TO_INTERMEDIATE = 3000;
-	private static final double DISTANCE_THRESHOLD_TO_INTERMEDIATE = 25;
 	private static final double DISTANCE_THRESHOLD_TO_INTRODUCE_FIRST_AND_LAST_POINTS = 15;
 
 	public static final String FIRST_LAST_LOCATION_PROVIDER = "FirstLastLocationProvider";
@@ -130,7 +129,8 @@ public class RouteCalculationResult {
 		this.listDistance = new int[locations.size()];
 		updateListDistanceTime(this.listDistance, this.locations);
 		this.alarmInfo = new ArrayList<>();
-		calculateIntermediateIndexes(params.ctx, this.locations, params.intermediates, localDirections, this.intermediatePoints);
+		SharedRouteDetailsProvider.calculateIntermediateIndexes(
+				params.ctx, this.locations, params.intermediates, localDirections, this.intermediatePoints);
 		this.directions = Collections.unmodifiableList(localDirections);
 		updateDirectionsTime(this.directions, this.listDistance);
 		this.routeService = params.mode.getRouteService();
@@ -184,7 +184,8 @@ public class RouteCalculationResult {
 		this.locations = Collections.unmodifiableList(locations);
 		this.segments = Collections.unmodifiableList(segments);
 		this.listDistance = new int[locations.size()];
-		calculateIntermediateIndexes(ctx, this.locations, intermediates, computeDirections, this.intermediatePoints);
+		SharedRouteDetailsProvider.calculateIntermediateIndexes(
+				ctx, this.locations, intermediates, computeDirections, this.intermediatePoints);
 		updateListDistanceTime(this.listDistance, this.locations);
 		this.appMode = mode;
 		this.routeService = mode.getRouteService();
@@ -227,66 +228,6 @@ public class RouteCalculationResult {
 		return initialCalculation;
 	}
 
-	private static void calculateIntermediateIndexes(Context ctx, List<Location> locations,
-	                                                 List<LatLon> intermediates, List<RouteDirectionInfo> localDirections, int[] intermediatePoints) {
-		if (intermediates != null && localDirections != null) {
-			int[] interLocations = new int[intermediates.size()];
-			for (int currentIntermediate = 0; currentIntermediate < intermediates.size(); currentIntermediate++) {
-				double setDistance = DISTANCE_CLOSEST_TO_INTERMEDIATE;
-				LatLon currentIntermediatePoint = intermediates.get(currentIntermediate);
-				int prevLocation = currentIntermediate == 0 ? 0 : interLocations[currentIntermediate - 1];
-				for (int currentLocation = prevLocation; currentLocation < locations.size();
-				     currentLocation++) {
-					double currentDistance = getDistanceToLocation(locations, currentIntermediatePoint, currentLocation);
-					if (currentDistance < setDistance) {
-						interLocations[currentIntermediate] = currentLocation;
-						setDistance = currentDistance;
-					} else if (currentDistance > DISTANCE_THRESHOLD_TO_INTERMEDIATE &&
-							setDistance < DISTANCE_THRESHOLD_TO_INTERMEDIATE) {
-						// finish search
-						break;
-					}
-
-				}
-				if (setDistance == DISTANCE_CLOSEST_TO_INTERMEDIATE) {
-					return;
-				}
-			}
-
-
-			int currentDirection = 0;
-			int currentIntermediate = 0;
-			while (currentIntermediate < intermediates.size() && currentDirection < localDirections.size()) {
-				int locationIndex = localDirections.get(currentDirection).routePointOffset;
-				if (locationIndex >= interLocations[currentIntermediate]) {
-					// split directions
-					if (locationIndex > interLocations[currentIntermediate]
-							&& getDistanceToLocation(locations, intermediates.get(currentIntermediate), locationIndex) > 50) {
-						RouteDirectionInfo toSplit = localDirections.get(currentDirection);
-						// intermediate point should split using average speed from its actual (previous) segment
-						float currentAvgSpeed = localDirections.get(Math.max(0, currentDirection - 1)).getAverageSpeed();
-						RouteDirectionInfo info = new RouteDirectionInfo(currentAvgSpeed, TurnType.straight());
-						info.setRef(toSplit.getRef());
-						info.setStreetName(toSplit.getStreetName());
-						info.setRouteDataObject(toSplit.getRouteDataObject());
-						info.setDestinationName(toSplit.getDestinationName());
-						info.routePointOffset = interLocations[currentIntermediate];
-						info.setDescriptionRoute(ctx.getString(R.string.route_head));//; //$NON-NLS-1$
-						localDirections.add(currentDirection, info);
-					}
-					intermediatePoints[currentIntermediate] = currentDirection;
-					currentIntermediate++;
-				}
-				currentDirection++;
-			}
-		}
-	}
-
-	private static double getDistanceToLocation(List<Location> locations, LatLon p, int currentLocation) {
-		return MapUtils.getDistance(p,
-				locations.get(currentLocation).getLatitude(), locations.get(currentLocation).getLongitude());
-	}
-
 	private static void attachAlarmInfo(List<AlarmInfo> alarms, RouteSegmentResult res, int intId, int locInd) {
 		RouteDataObject rdo = res.getObject();
 		int[] pointTypes = rdo.getPointTypes(intId);
@@ -304,7 +245,7 @@ public class RouteCalculationResult {
 					// For STOP and TRAFFIC_CALMING first check if it has directional info
 					boolean forward = res.isForwardDirection();
 					boolean directionApplicable = rdo.isDirectionApplicable(forward, intId,
-							info.getType() == AlarmInfoType.STOP ? res.getStartPointIndex() : -1, res.getEndPointIndex());
+							info.getType() == RouteEventType.STOP ? res.getStartPointIndex() : -1, res.getEndPointIndex());
 					if (!directionApplicable) {
 						continue;
 					}
@@ -378,7 +319,7 @@ public class RouteCalculationResult {
 			if (s.getObject().tunnel()) {
 				if (tunnelAlarm == null) {
 					LatLon latLon = s.getPoint(i);
-					tunnelAlarm = new AlarmInfo(AlarmInfoType.TUNNEL, prevLocationSize);
+					tunnelAlarm = new AlarmInfo(RouteEventType.TUNNEL, prevLocationSize);
 					tunnelAlarm.setLatLon(latLon.getLatitude(), latLon.getLongitude());
 					tunnelAlarm.setFloatValue(s.getDistance());
 					alarms.add(tunnelAlarm);
@@ -459,13 +400,12 @@ public class RouteCalculationResult {
 					currentExitRef = current.getObject().getExitRef();
 					currentExitName = current.getObject().getExitName();
 					if (s.hasExitInfo()) {
-						ExitInfo exitInfo = new ExitInfo();
 						actualExitRef = currentExitRef;
-						exitInfo.setRef(currentExitRef);
 						actualExitName = currentExitName;
-						exitInfo.setExitStreetName(currentExitName);
+						RouteExitInfo exitInfo = new RouteExitInfo(currentExitRef, currentExitName);
 						info.setExitInfo(exitInfo);
-						if (!exitInfo.isEmpty() && info.getDestinationRef() == null && routeInd > 0) {
+						if ((exitInfo.getRef() != null || exitInfo.getExitStreetName() != null)
+								&& info.getDestinationRef() == null && routeInd > 0) {
 							// set ref and road name (or shield icon) from previous segment because exit point is not consist of highway ref
 							RouteSegmentResult previous;
 							previous = list.get(routeInd - 1);
@@ -995,13 +935,7 @@ public class RouteCalculationResult {
 	 * At the end always update listDistance local vars and time
 	 */
 	private static void updateListDistanceTime(int[] listDistance, List<Location> locations) {
-		if (listDistance.length > 0) {
-			listDistance[locations.size() - 1] = 0;
-			for (int i = locations.size() - 1; i > 0; i--) {
-				listDistance[i - 1] = Math.round(locations.get(i - 1).distanceTo(locations.get(i)));
-				listDistance[i - 1] += listDistance[i];
-			}
-		}
+		SharedRouteDetailsProvider.calculateDistancesToFinish(locations, listDistance);
 	}
 
 	/**
@@ -1009,15 +943,7 @@ public class RouteCalculationResult {
 	 * At the end always update listDistance local vars and time
 	 */
 	private static void updateDirectionsTime(List<RouteDirectionInfo> directions, int[] listDistance) {
-		int sumExpectedTime = 0;
-		for (int i = directions.size() - 1; i >= 0; i--) {
-			directions.get(i).distance = listDistance[directions.get(i).routePointOffset];
-			if (i < directions.size() - 1) {
-				directions.get(i).distance -= listDistance[directions.get(i + 1).routePointOffset];
-			}
-			sumExpectedTime += directions.get(i).getExpectedTime();
-			directions.get(i).afterLeftTime = sumExpectedTime;
-		}
+		SharedRouteDetailsProvider.updateDirectionDistancesAndTimes(directions, listDistance);
 	}
 
 	//////////////////// MUST BE ALL SYNCHRONIZED ??? //////////////////////
@@ -1333,15 +1259,7 @@ public class RouteCalculationResult {
 
 	@Nullable
 	public Location getRouteLocationByDistance(int meters) {
-		int increase = meters > 0 ? 1 : -1;
-		for (int i = increase; currentRoute < locations.size() && currentRoute + i >= 0 && currentRoute + i < locations.size(); i = i + increase) {
-			Location loc = locations.get(currentRoute + i);
-			double dist = MapUtils.getDistance(locations.get(currentRoute), loc);
-			if (dist >= Math.abs(meters)) {
-				return loc;
-			}
-		}
-		return null;
+		return SharedRouteDetailsProvider.getRouteLocationByDistance(locations, currentRoute, meters);
 	}
 
 	public boolean directionsAvailable() {
@@ -1556,4 +1474,5 @@ public class RouteCalculationResult {
 	public GpxFile getGpxFile() {
 		return gpxFile;
 	}
+
 }

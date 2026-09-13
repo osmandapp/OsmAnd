@@ -55,7 +55,6 @@ import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment;
-import net.osmand.plus.routepreparationmenu.RouteDetailsFragment.CumulativeInfo;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment.RouteDetailsFragmentListener;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
@@ -80,6 +79,7 @@ import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.router.TransportRouteResult;
 import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.routing.details.RouteCumulativeInfo;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -661,6 +661,8 @@ public class ChooseRouteFragment extends BaseFullScreenFragment implements Conte
 	private StringBuilder generateHtmlPrint(List<RouteDirectionInfo> directionsInfo, String title) {
 		StringBuilder html = new StringBuilder();
 		boolean accessibilityEnabled = app.accessibilityEnabled();
+		List<RouteCumulativeInfo> cumulativeInfoByPosition =
+				RouteDetailsFragment.getRouteDirectionCumulativeInfoByPosition(directionsInfo);
 		html.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
 		html.append("<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\">");
 		html.append("<head>");
@@ -699,16 +701,18 @@ public class ChooseRouteFragment extends BaseFullScreenFragment implements Conte
 			html.append("<td>");
 			html.append(i + 1).append(". ").append(description);
 			html.append("</td>");
-			CumulativeInfo cumulativeInfo = RouteDetailsFragment.getRouteDirectionCumulativeInfo(i, directionsInfo);
+			RouteCumulativeInfo cumulativeInfo = cumulativeInfoByPosition.get(i);
 			html.append("<td>");
 			sb = new StringBuilder();
-			sb.append(OsmAndFormatter.getFormattedDistance(cumulativeInfo.distance, app));
+			sb.append(OsmAndFormatter.getFormattedDistance(cumulativeInfo.getDistanceMeters(), app));
 			sb.append(" - ");
-			sb.append(OsmAndFormatter.getFormattedDistance(cumulativeInfo.distance + routeDirectionInfo.distance, app));
+			sb.append(OsmAndFormatter.getFormattedDistance(
+					cumulativeInfo.getDistanceMeters() + routeDirectionInfo.distance, app));
 			sb.append(BR);
-			sb.append(Algorithms.formatDuration(cumulativeInfo.time, accessibilityEnabled));
+			sb.append(Algorithms.formatDuration(cumulativeInfo.getTimeSeconds(), accessibilityEnabled));
 			sb.append(" - ");
-			sb.append(Algorithms.formatDuration(cumulativeInfo.time + routeDirectionInfo.getExpectedTime(), accessibilityEnabled));
+			sb.append(Algorithms.formatDuration(
+					cumulativeInfo.getTimeSeconds() + routeDirectionInfo.getExpectedTime(), accessibilityEnabled));
 			String cumulativeTimeAndDistance = sb.toString().replaceAll("\\s", NBSP);
 			html.append(cumulativeTimeAndDistance);
 			html.append("</td>");

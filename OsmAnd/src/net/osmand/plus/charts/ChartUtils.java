@@ -55,13 +55,13 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.router.RouteStatisticsHelper.RouteSegmentAttribute;
-import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 import net.osmand.shared.ColorPalette;
 import net.osmand.shared.ColorPalette.ColorValue;
 import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.PointAttributes;
+import net.osmand.shared.routing.details.RouteStatistic;
+import net.osmand.shared.routing.details.RouteStatisticElement;
 import net.osmand.util.Algorithms;
 
 import java.text.MessageFormat;
@@ -314,7 +314,7 @@ public class ChartUtils {
 	@NonNull
 	public static <E> BarData buildStatisticChart(@NonNull OsmandApplication app,
 	                                              @NonNull HorizontalBarChart chart,
-	                                              @NonNull RouteStatistics routeStatistics,
+	                                              @NonNull RouteStatistic routeStatistics,
 	                                              @NonNull GpxTrackAnalysis analysis,
 	                                              boolean useRightAxis,
 	                                              boolean nightMode) {
@@ -325,13 +325,13 @@ public class ChartUtils {
 		YAxis yAxis = getAndEnableYAxis(chart, null, useRightAxis);
 		float divX = setupAxisDistance(app, yAxis, analysis.getTotalDistance());
 
-		List<RouteSegmentAttribute> segments = routeStatistics.elements;
+		List<RouteStatisticElement> segments = routeStatistics.getElements();
 		List<BarEntry> entries = new ArrayList<>();
 		float[] stacks = new float[segments.size()];
 		int[] colors = new int[segments.size()];
 		for (int i = 0; i < stacks.length; i++) {
-			RouteSegmentAttribute segment = segments.get(i);
-			stacks[i] = segment.getDistance() / divX;
+			RouteStatisticElement segment = segments.get(i);
+			stacks[i] = segment.getDistanceMeters() / divX;
 			colors[i] = segment.getColor();
 		}
 		entries.add(new BarEntry(0, stacks));

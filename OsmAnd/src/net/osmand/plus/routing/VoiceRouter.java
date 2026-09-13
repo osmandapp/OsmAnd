@@ -27,9 +27,10 @@ import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomiz
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
-import net.osmand.router.ExitInfo;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.TurnType;
+import net.osmand.shared.routing.details.RouteEventType;
+import net.osmand.shared.routing.details.RouteExitInfo;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -346,16 +347,16 @@ public class VoiceRouter {
 	}
 
 	public void announceAlarm(AlarmInfo info, float speed) {
-		AlarmInfoType type = info.getType();
-		if (type == AlarmInfoType.SPEED_LIMIT) {
+		RouteEventType type = info.getType();
+		if (type == RouteEventType.SPEED_LIMIT) {
 			announceSpeedAlarm(info.getIntValue(), speed);
 		} else {
 			OsmandSettings settings = router.getSettings();
 			boolean speakTrafficWarnings = settings.SPEAK_TRAFFIC_WARNINGS.get();
-			boolean speakTunnels = type == AlarmInfoType.TUNNEL && settings.SPEAK_TUNNELS.get();
-			boolean speakPedestrian = type == AlarmInfoType.PEDESTRIAN && settings.SPEAK_PEDESTRIAN.get();
-			boolean speakSpeedCamera = (type == AlarmInfoType.SPEED_CAMERA || type == AlarmInfoType.RED_LIGHT_CAMERA) && settings.SPEAK_SPEED_CAMERA.get();
-			boolean speakPrefType = type == AlarmInfoType.TUNNEL || type == AlarmInfoType.PEDESTRIAN || type == AlarmInfoType.SPEED_CAMERA || type == AlarmInfoType.RED_LIGHT_CAMERA;
+			boolean speakTunnels = type == RouteEventType.TUNNEL && settings.SPEAK_TUNNELS.get();
+			boolean speakPedestrian = type == RouteEventType.PEDESTRIAN && settings.SPEAK_PEDESTRIAN.get();
+			boolean speakSpeedCamera = type.isTrafficCamera() && settings.SPEAK_SPEED_CAMERA.get();
+			boolean speakPrefType = type == RouteEventType.TUNNEL || type == RouteEventType.PEDESTRIAN || type.isTrafficCamera();
 
 			if (speakSpeedCamera || speakPedestrian || speakTunnels || speakTrafficWarnings && !speakPrefType) {
 				CommandBuilder p = getNewCommandPlayerToPlay();
@@ -364,7 +365,7 @@ public class VoiceRouter {
 				}
 				play(p);
 				// See Issue 2377: Announce destination again - after some motorway tolls roads split shortly after the toll
-				if (type == AlarmInfoType.TOLL_BOOTH) {
+				if (type == RouteEventType.TOLL_BOOTH) {
 					suppressDest = false;
 				}
 			}
@@ -566,7 +567,7 @@ public class VoiceRouter {
 	private void playGoAhead(int dist, RouteDirectionInfo next, StreetName streetName) {
 		CommandBuilder p = getNewCommandPlayerToPlay();
 		String tParam = getTurnType(next.getTurnType());
-		ExitInfo exitInfo = next.getExitInfo();
+		RouteExitInfo exitInfo = next.getExitInfo();
 		if (p != null) {
 			p.goAhead(dist, streetName);
 			if (tParam != null && exitInfo != null && !Algorithms.isEmpty(exitInfo.getRef()) && settings.SPEAK_EXIT_NUMBER_NAMES.get()) {
@@ -636,7 +637,7 @@ public class VoiceRouter {
 		return new StreetName(result);
 	}
 
-	private StreetName getSpeakableExitName(RouteDirectionInfo routeInfo, ExitInfo exitInfo, boolean includeDest) {
+	private StreetName getSpeakableExitName(RouteDirectionInfo routeInfo, RouteExitInfo exitInfo, boolean includeDest) {
 		Map<String, String> result = new HashMap<>();
 		if (exitInfo == null || !router.getSettings().SPEAK_STREET_NAMES.get()) {
 			return new StreetName(result);
@@ -732,7 +733,7 @@ public class VoiceRouter {
 		if (p != null && router.getSettings().TURN_BY_TURN_DIRECTIONS.get()) {
 			String tParam = getTurnType(next.getTurnType());
 			boolean isPlay = true;
-			ExitInfo exitInfo = next.getExitInfo();
+			RouteExitInfo exitInfo = next.getExitInfo();
 			if (tParam != null) {
 				if (exitInfo != null && !Algorithms.isEmpty(exitInfo.getRef()) && settings.SPEAK_EXIT_NUMBER_NAMES.get()) {
 					String stringRef = getSpeakableExitRef(exitInfo.getRef());
@@ -806,7 +807,7 @@ public class VoiceRouter {
 		CommandBuilder p = getNewCommandPlayerToPlay();
 		if (p != null && router.getSettings().TURN_BY_TURN_DIRECTIONS.get()) {
 			String tParam = getTurnType(next.getTurnType());
-			ExitInfo exitInfo = next.getExitInfo();
+			RouteExitInfo exitInfo = next.getExitInfo();
 			boolean isplay = true;
 			if (tParam != null) {
 				if (exitInfo != null && !Algorithms.isEmpty(exitInfo.getRef()) && settings.SPEAK_EXIT_NUMBER_NAMES.get()) {

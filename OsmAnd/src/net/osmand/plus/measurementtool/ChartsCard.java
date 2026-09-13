@@ -4,7 +4,6 @@ import static net.osmand.plus.charts.GPXDataSetType.ALTITUDE;
 import static net.osmand.plus.charts.GPXDataSetType.SLOPE;
 import static net.osmand.plus.charts.GPXDataSetType.SPEED;
 import static net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer.MEASUREMENT_TOOL;
-import static net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 
 import android.annotation.SuppressLint;
 import android.view.View;
@@ -52,6 +51,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
 import net.osmand.router.RouteSegmentResult;
+import net.osmand.shared.routing.details.RouteStatistic;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -390,10 +390,10 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 		addCommonType(R.string.shared_string_speed, false, hasSpeedData, SPEED, null);
 
 		// update custom graph data
-		List<RouteStatistics> routeStatistics = calculateRouteStatistics();
+		List<RouteStatistic> routeStatistics = calculateRouteStatistics();
 		if (analysis != null && routeStatistics != null) {
-			for (RouteStatistics statistics : routeStatistics) {
-				String title = AndroidUtils.getStringRouteInfoPropertyValue(app, statistics.name);
+			for (RouteStatistic statistics : routeStatistics) {
+				String title = AndroidUtils.getStringRouteInfoPropertyValue(app, statistics.getName());
 				chartTypes.add(new CustomChartType(title, statistics));
 			}
 		}
@@ -428,7 +428,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 		}
 	}
 
-	private List<RouteStatistics> calculateRouteStatistics() {
+	private List<RouteStatistic> calculateRouteStatistics() {
 		List<RouteSegmentResult> route = editingCtx.getOrderedRoadSegmentData();
 		if (route != null) {
 			return RouteDetailsFragment.calculateRouteStatistics(app, route, nightMode);
@@ -520,26 +520,26 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 
 	private class CustomChartType extends ChartType<BarData> {
 
-		private final RouteStatistics statistics;
+		private final RouteStatistic statistics;
 
-		public CustomChartType(String title, RouteStatistics statistics) {
+		public CustomChartType(String title, RouteStatistic statistics) {
 			super(title, false);
 			this.statistics = statistics;
 		}
 
-		public RouteStatistics getStatistics() {
+		public RouteStatistic getStatistics() {
 			return statistics;
 		}
 
 		@Override
 		public boolean hasData() {
-			return !Algorithms.isEmpty(statistics.elements);
+			return !Algorithms.isEmpty(statistics.getElements());
 		}
 
 		@Override
 		public BarData getChartData() {
 			ChartUtils.setupHorizontalGPXChart(app, customGraphAdapter.getChart(), 5, 9, 24, true, nightMode);
-			if (!Algorithms.isEmpty(statistics.elements)) {
+			if (!Algorithms.isEmpty(statistics.getElements())) {
 				return ChartUtils.buildStatisticChart(app, customGraphAdapter.getChart(),
 						statistics, analysis, true, nightMode);
 			}
