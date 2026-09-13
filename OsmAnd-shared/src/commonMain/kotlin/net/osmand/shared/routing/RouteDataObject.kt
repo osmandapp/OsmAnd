@@ -1026,6 +1026,17 @@ class RouteDataObject {
 	}
 
 	companion object {
+		// Turn restriction types, as getRestrictionType answers them. MapRenderingTypes in
+		// OsmAnd-java declares the same seven for the rendering and the map creator; the two sets
+		// merge when that class moves, and until then these are the ones routing uses.
+		const val RESTRICTION_NO_RIGHT_TURN = 1
+		const val RESTRICTION_NO_LEFT_TURN = 2
+		const val RESTRICTION_NO_U_TURN = 3
+		const val RESTRICTION_NO_STRAIGHT_ON = 4
+		const val RESTRICTION_ONLY_RIGHT_TURN = 5
+		const val RESTRICTION_ONLY_LEFT_TURN = 6
+		const val RESTRICTION_ONLY_STRAIGHT_ON = 7
+
 		private const val RESTRICTION_SHIFT = 3
 		private const val RESTRICTION_MASK = 7
 
