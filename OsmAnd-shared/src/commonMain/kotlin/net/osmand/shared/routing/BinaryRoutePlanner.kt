@@ -5,7 +5,9 @@ import net.osmand.shared.util.KMapUtils
 import net.osmand.shared.util.LoggerFactory
 import net.osmand.shared.util.collections.KPriorityQueue
 import net.osmand.shared.util.collections.KTLongObjectMap
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
+import kotlin.native.ObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.math.PI
 import kotlin.math.abs
@@ -981,6 +983,10 @@ class BinaryRoutePlanner {
 		@JvmField
 		var ASSERT_CHECKS = true
 
+		// exported to Objective-C under another name: a macro of the same name in the C++ core headers
+		// would otherwise break every file that includes both
+		@OptIn(ExperimentalObjCName::class)
+		@ObjCName("traceRouting")
 		@JvmField
 		var TRACE_ROUTING = false
 
