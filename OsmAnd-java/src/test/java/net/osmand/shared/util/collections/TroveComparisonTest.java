@@ -11,6 +11,7 @@ import java.util.Random;
 import org.junit.Test;
 
 import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.hash.TLongHashSet;
 
@@ -56,6 +57,37 @@ public class TroveComparisonTest {
 		Arrays.sort(sharedKeys);
 		assertArrayEquals(troveKeys, sharedKeys);
 		for (long key : troveKeys) {
+			assertEquals(trove.get(key), shared.get(key));
+		}
+	}
+
+	@Test
+	public void testIntObjectMapMatchesTrove() {
+		KTIntObjectMap<Integer> shared = new KTIntObjectMap<>();
+		TIntObjectHashMap<Integer> trove = new TIntObjectHashMap<>();
+		Random random = new Random(20260908L);
+
+		for (int step = 0; step < OPERATIONS; step++) {
+			int key = random.nextInt(4000) - 2000;
+			int op = random.nextInt(10);
+			if (op <= 5) {
+				assertEquals("put(" + key + ")", trove.put(key, step), shared.put(key, step));
+			} else if (op <= 7) {
+				assertEquals("remove(" + key + ")", trove.remove(key), shared.remove(key));
+			} else if (op == 8) {
+				assertEquals("get(" + key + ")", trove.get(key), shared.get(key));
+			} else {
+				assertEquals("containsKey(" + key + ")", trove.containsKey(key), shared.containsKey(key));
+			}
+			assertEquals(trove.size(), shared.getSize());
+		}
+
+		int[] troveKeys = trove.keys();
+		int[] sharedKeys = shared.keys();
+		Arrays.sort(troveKeys);
+		Arrays.sort(sharedKeys);
+		assertArrayEquals(troveKeys, sharedKeys);
+		for (int key : troveKeys) {
 			assertEquals(trove.get(key), shared.get(key));
 		}
 	}
@@ -182,6 +214,7 @@ public class TroveComparisonTest {
 	public void testConstructorsAreUsableFromJava() {
 		// @JvmOverloads must keep the no-arg form available for the Java routing code
 		assertEquals(0, new KTLongObjectMap<String>().getSize());
+		assertEquals(0, new KTIntObjectMap<String>().getSize());
 		assertEquals(0, new KTLongHashSet().getSize());
 		assertEquals(0, new KTIntArrayList().getSize());
 		assertFalse(new KBitSet().get(0));
