@@ -6,24 +6,43 @@ import static java.lang.Math.ceil;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Paint;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.EditTextPreferenceEx;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.text.MessageFormat;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class AisTrackerSettingsFragment extends BaseSettingsFragment {
+
+	private static final String URL_SOURCES_CATEGORY_KEY = "ais_url_sources_category";
+	private static final String ADD_URL_SOURCE_KEY = "ais_add_url_source";
+	private static final String URL_SOURCE_KEY_PREFIX = "ais_url_source_";
 
 	private final AisTrackerPlugin plugin = PluginsHelper.requirePlugin(AisTrackerPlugin.class);
 
@@ -41,6 +60,246 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
 		setupShipLostTimeout();
 		setupCpaWarningDistance(cpaWarningEnabled);
 		setupDisplayOwnPosition(ownMmsi);
+		setupUrlSources();
+		setupShowShips();
+		setupShowPlanes();
+	}
+
+	private void setupUrlSources() {
+		refreshUrlSourcesList();
+	}
+
+	private void refreshUrlSourcesList() {
+		PreferenceCategory category = findPreference(URL_SOURCES_CATEGORY_KEY);
+		if (category == null) {
+			return;
+		}
+		category.setSummary(R.string.ais_url_sources_description);
+		category.removeAll();
+
+		// Clicks are dispatched from onPreferenceClick() by key, not through per-preference
+		// listeners: BaseSettingsFragment.registerPreferences() runs after setupPreferences()
+		// and replaces every preference's click listener with the fragment itself.
+		for (AisUrlSource source : plugin.getUrlSources()) {
+			Preference item = new Preference(requireContext());
+			item.setKey(URL_SOURCE_KEY_PREFIX + source.id);
+			item.setPersistent(false);
+			item.setTitle(source.name + (source.enabled ? "" : " (" + getString(R.string.shared_string_hidden) + ")"));
+			item.setSummary((source.type == AisUrlSource.Type.PLANES
+					? getString(R.string.ais_show_planes) : getString(R.string.ais_show_ships))
+					+ " — " + source.url);
+			item.setIcon(source.type == AisUrlSource.Type.PLANES
+					? R.drawable.ic_action_aircraft : R.drawable.mm_sport_sailing);
+			item.setOnPreferenceClickListener(this);
+			category.addPreference(item);
+		}
+
+		Preference addItem = new Preference(requireContext());
+		addItem.setKey(ADD_URL_SOURCE_KEY);
+		addItem.setPersistent(false);
+		addItem.setTitle(R.string.ais_add_url_source);
+		addItem.setIcon(R.drawable.ic_action_plus);
+		addItem.setOnPreferenceClickListener(this);
+		category.addPreference(addItem);
+	}
+
+	@Override
+	public boolean onPreferenceClick(Preference preference) {
+		String key = preference.getKey();
+		if (ADD_URL_SOURCE_KEY.equals(key)) {
+			showTemplatePickerDialog();
+			return true;
+		}
+		if (key != null && key.startsWith(URL_SOURCE_KEY_PREFIX)) {
+			String id = key.substring(URL_SOURCE_KEY_PREFIX.length());
+			for (AisUrlSource source : plugin.getUrlSources()) {
+				if (source.id.equals(id)) {
+					showSourceDialog(null, source);
+					break;
+				}
+			}
+			return true;
+		}
+		return super.onPreferenceClick(preference);
+	}
+
+	private void showTemplatePickerDialog() {
+		List<AisUrlSourceTemplate> templates = AisUrlSourceTemplate.all();
+		Context themedContext = UiUtilities.getThemedContext(getActivity(), isNightMode());
+		ArrayAdapter<AisUrlSourceTemplate> adapter = new ArrayAdapter<>(themedContext,
+				android.R.layout.simple_list_item_2, android.R.id.text1, templates) {
+			@NonNull
+			@Override
+			public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+				return createTemplateRow(templates.get(position));
+			}
+		};
+		new AlertDialog.Builder(themedContext)
+				.setTitle(R.string.ais_add_url_source)
+				.setAdapter(adapter, (dialog, which) -> showSourceDialog(templates.get(which), null))
+				.setNegativeButton(R.string.shared_string_cancel, null)
+				.show();
+	}
+
+	/**
+	 * Name plus access note, with an info button opening the project page. The row itself stays
+	 * unfocusable so tapping anywhere else still selects the template.
+	 */
+	@NonNull
+	private View createTemplateRow(@NonNull AisUrlSourceTemplate template) {
+		Context themedContext = UiUtilities.getThemedContext(getActivity(), isNightMode());
+		float density = getResources().getDisplayMetrics().density;
+		int padding = (int) (16 * density);
+
+		LinearLayout row = new LinearLayout(themedContext);
+		row.setOrientation(LinearLayout.HORIZONTAL);
+		row.setGravity(Gravity.CENTER_VERTICAL);
+		row.setPadding(padding, padding / 2, padding / 2, padding / 2);
+		row.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
+
+		LinearLayout textColumn = new LinearLayout(themedContext);
+		textColumn.setOrientation(LinearLayout.VERTICAL);
+		textColumn.setLayoutParams(new LinearLayout.LayoutParams(0,
+				ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
+
+		TextView title = new TextView(themedContext);
+		title.setText(template.displayName);
+		title.setTextColor(ColorUtilities.getPrimaryTextColor(app, isNightMode()));
+		textColumn.addView(title);
+
+		TextView note = new TextView(themedContext);
+		note.setText(template.note);
+		note.setTextColor(ColorUtilities.getSecondaryTextColor(app, isNightMode()));
+		note.setTextSize(12);
+		textColumn.addView(note);
+		row.addView(textColumn);
+
+		if (template.projectUrl != null) {
+			ImageView infoButton = new ImageView(themedContext);
+			infoButton.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_info_dark,
+					ColorUtilities.getLinksColorId(isNightMode())));
+			infoButton.setContentDescription(template.projectUrl);
+			infoButton.setPadding(padding / 2, padding / 2, padding / 2, padding / 2);
+			infoButton.setFocusable(false);
+			infoButton.setClickable(true);
+			infoButton.setOnClickListener(v ->
+					AndroidUtils.openUrl(requireActivity(), template.projectUrl, isNightMode()));
+			row.addView(infoButton);
+		}
+		return row;
+	}
+
+	private void showSourceDialog(@Nullable AisUrlSourceTemplate template, @Nullable AisUrlSource existing) {
+		Context themedContext = UiUtilities.getThemedContext(getActivity(), isNightMode());
+		float density = getResources().getDisplayMetrics().density;
+		int padding = (int) (20 * density);
+
+		LinearLayout layout = new LinearLayout(themedContext);
+		layout.setOrientation(LinearLayout.VERTICAL);
+		layout.setPadding(padding, padding / 2, padding, 0);
+
+		if (template != null) {
+			TextView descriptionView = new TextView(themedContext);
+			descriptionView.setText(template.note + ".\n" + template.description);
+			descriptionView.setTextColor(ColorUtilities.getSecondaryTextColor(app, isNightMode()));
+			layout.addView(descriptionView);
+
+			if (template.projectUrl != null) {
+				TextView linkView = new TextView(themedContext);
+				linkView.setText(template.projectUrl);
+				linkView.setTextColor(ColorUtilities.getLinksColor(app, isNightMode()));
+				linkView.setPaintFlags(linkView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+				linkView.setPadding(0, padding / 4, 0, padding / 4);
+				linkView.setOnClickListener(v ->
+						AndroidUtils.openUrl(requireActivity(), template.projectUrl, isNightMode()));
+				layout.addView(linkView);
+			}
+		}
+
+		EditText nameInput = new EditText(themedContext);
+		nameInput.setHint(R.string.shared_string_name);
+		nameInput.setText(existing != null ? existing.name : template != null ? template.displayName : "");
+		layout.addView(nameInput);
+
+		EditText urlInput = new EditText(themedContext);
+		urlInput.setHint("URL");
+		urlInput.setText(existing != null ? existing.url : template != null ? template.urlTemplate : "");
+		layout.addView(urlInput);
+
+		EditText apiKeyInput = new EditText(themedContext);
+		apiKeyInput.setHint(template != null && template.apiKeyLabel != null
+				? template.apiKeyLabel : getString(R.string.ais_source_api_key));
+		apiKeyInput.setText(existing != null ? existing.apiKey : "");
+		layout.addView(apiKeyInput);
+
+		RadioGroup typeGroup = new RadioGroup(themedContext);
+		typeGroup.setOrientation(RadioGroup.HORIZONTAL);
+		typeGroup.setGravity(Gravity.CENTER_VERTICAL);
+		RadioButton planesButton = new RadioButton(themedContext);
+		planesButton.setId(View.generateViewId());
+		planesButton.setText(R.string.ais_show_planes);
+		RadioButton shipsButton = new RadioButton(themedContext);
+		shipsButton.setId(View.generateViewId());
+		shipsButton.setText(R.string.ais_show_ships);
+		typeGroup.addView(planesButton);
+		typeGroup.addView(shipsButton);
+		AisUrlSource.Type currentType = existing != null ? existing.type
+				: template != null ? template.type : AisUrlSource.Type.PLANES;
+		planesButton.setChecked(currentType == AisUrlSource.Type.PLANES);
+		shipsButton.setChecked(currentType == AisUrlSource.Type.SHIPS);
+		layout.addView(typeGroup);
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext)
+				.setTitle(existing != null ? R.string.shared_string_edit : R.string.ais_add_url_source)
+				.setView(layout)
+				.setPositiveButton(R.string.shared_string_save, (dialog, which) -> {
+					String name = nameInput.getText().toString().trim();
+					String url = urlInput.getText().toString().trim();
+					// the key stays editable on the source instead of being baked into the URL;
+					// leaving it blank is fine, sources that need no key still work
+					String apiKey = apiKeyInput.getText().toString().trim();
+					if (name.isEmpty() || url.isEmpty()) {
+						return;
+					}
+					AisUrlSource.Type type = shipsButton.isChecked()
+							? AisUrlSource.Type.SHIPS : AisUrlSource.Type.PLANES;
+					AisUrlSource toSave = existing != null
+							? existing.withValues(type, name, url, apiKey)
+							: AisUrlSource.create(type, name, url, apiKey);
+					plugin.addOrUpdateUrlSource(toSave);
+					refreshUrlSourcesList();
+				})
+				.setNegativeButton(R.string.shared_string_cancel, null);
+		if (existing != null) {
+			AisUrlSource toDelete = existing;
+			builder.setNeutralButton(R.string.shared_string_delete, (dialog, which) -> {
+				plugin.removeUrlSource(toDelete.id);
+				refreshUrlSourcesList();
+			});
+		}
+		builder.show();
+	}
+
+	private void setupShowShips() {
+		Boolean[] entryValues = {true, false};
+		String[] entries = {getString(R.string.shared_string_yes), getString(R.string.shared_string_no)};
+		ListPreferenceEx showShips = findPreference(plugin.AIS_SHOW_SHIPS.getId());
+		if (showShips != null) {
+			showShips.setEntries(entries);
+			showShips.setEntryValues(entryValues);
+			showShips.setDescription(R.string.ais_show_ships_description);
+		}
+	}
+
+	private void setupShowPlanes() {
+		Boolean[] entryValues = {true, false};
+		String[] entries = {getString(R.string.shared_string_yes), getString(R.string.shared_string_no)};
+		ListPreferenceEx showPlanes = findPreference(plugin.AIS_SHOW_PLANES.getId());
+		if (showPlanes != null) {
+			showPlanes.setEntries(entries);
+			showPlanes.setEntryValues(entryValues);
+			showPlanes.setDescription(R.string.ais_show_planes_description);
+		}
 	}
 
 	private int setupProtocol() {
@@ -233,6 +492,10 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
 		if (changed && refreshOwnObjectVisibility) {
 			app.runInUIThread(this::updateOwnObjectVisibility);
 		}
+		if (changed && (preference.getKey().equals(AisTrackerPlugin.AIS_SHOW_SHIPS_ID)
+				|| preference.getKey().equals(AisTrackerPlugin.AIS_SHOW_PLANES_ID))) {
+			app.runInUIThread(this::updateTypeFilter);
+		}
 		return changed;
 	}
 
@@ -240,6 +503,13 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
 		AisTrackerLayer layer = plugin.getLayer();
 		if (layer != null) {
 			layer.refreshOwnObjectVisibility();
+		}
+	}
+
+	private void updateTypeFilter() {
+		AisTrackerLayer layer = plugin.getLayer();
+		if (layer != null) {
+			layer.refreshTypeFilter();
 		}
 	}
 

@@ -91,4 +91,21 @@
         android:title="@string/ais_display_own_position"
         tools:summary="@string/ais_display_own_position_description" />
 
+    <PreferenceCategory
+        android:key="ais_url_sources_category"
+        android:layout="@layout/preference_category_with_descr"
+        android:title="@string/ais_url_sources" />
+
+    <net.osmand.plus.settings.preferences.ListPreferenceEx
+        android:key="ais_show_ships"
+        android:layout="@layout/preference_with_descr"
+        android:title="@string/ais_show_ships"
+        tools:summary="@string/ais_show_ships_description" />
+
+    <net.osmand.plus.settings.preferences.ListPreferenceEx
+        android:key="ais_show_planes"
+        android:layout="@layout/preference_with_descr"
+        android:title="@string/ais_show_planes"
+        tools:summary="@string/ais_show_planes_description" />
+
 </PreferenceScreen>

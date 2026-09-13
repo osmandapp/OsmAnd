@@ -56,6 +56,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -85,6 +86,13 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 	private static final long RENDER_UPDATE_INTERVAL_MS = 200;
 	private static final double ZOOM_EPSILON = 0.02;
 	private static final boolean SHOW_RENDER_LOGS = false;
+	private static final long PLANE_LOG_INTERVAL_MS = 5000;
+	// aircraft icons are drawn a fifth smaller, so their touch target follows suit
+	private static final float PLANE_FOOTPRINT_FACTOR = 0.8f;
+	// airborne aircraft are never hidden; grounded ones stop being drawn past this many in a pile
+	private static final int GROUND_PLANE_MAX_OVERLAP = 3;
+	/** Altitude AisPlaneDataFetcher assigns to aircraft the feed reports as being on the ground. */
+	private static final int GROUND_ALTITUDE = 0;
 
 	private final AisTrackerPlugin plugin = PluginsHelper.requirePlugin(AisTrackerPlugin.class);
 	private final Paint bitmapPaint = new Paint();
@@ -105,6 +113,7 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 	private boolean refreshScheduled;
 	private long nextVersion = 1;
 	private long lastRenderTimeMs;
+	private long lastPlaneLogTimeMs;
 	private ViewportSignature lastViewport;
 	private Integer selectedMmsi;
 	private int peakDrawableCount;
@@ -225,7 +234,7 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 				removeFromBucket(previous);
 			}
 			AisLatLon position = ais.getPosition();
-			if (position != null && !isOwnObjectHidden(ais)) {
+			if (position != null && !isOwnObjectHidden(ais) && !isHiddenByTypeFilter(ais)) {
 				int x31 = MapUtils.get31TileNumberX(position.getLongitude());
 				int y31 = MapUtils.get31TileNumberY(position.getLatitude());
 				RenderRecord record = new RenderRecord(ais, x31, y31, nextVersion++);
@@ -266,7 +275,7 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 			spatialBuckets.clear();
 			for (AisObject ais : snapshot) {
 				AisLatLon position = ais.getPosition();
-				if (position != null && !isOwnObjectHidden(ais)) {
+				if (position != null && !isOwnObjectHidden(ais) && !isHiddenByTypeFilter(ais)) {
 					int x31 = MapUtils.get31TileNumberX(position.getLongitude());
 					int y31 = MapUtils.get31TileNumberY(position.getLatitude());
 					RenderRecord record = new RenderRecord(ais, x31, y31, nextVersion++);
@@ -303,6 +312,52 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	private boolean isOwnObjectHidden(@NonNull AisObject ais) {
 		return isOwnObject(ais) && !plugin.AIS_DISPLAY_OWN_POSITION.get();
+	}
+
+	/**
+	 * Why aircraft are or are not on screen: how many are indexed, how many the current viewport
+	 * actually draws, and whether the zoom is below the threshold that suppresses them entirely.
+	 * Throttled, since reconcile() runs several times a second while the map moves.
+	 */
+	private void logPlaneVisibility(@NonNull RotatedTileBox tileBox) {
+		long now = SystemClock.elapsedRealtime();
+		if (now - lastPlaneLogTimeMs < PLANE_LOG_INTERVAL_MS) {
+			return;
+		}
+		lastPlaneLogTimeMs = now;
+		int indexedPlanes = 0;
+		synchronized (indexLock) {
+			for (RenderRecord record : objectRecords.values()) {
+				if (record.object.getObjectClass() == AIS_AIRPLANE) {
+					indexedPlanes++;
+				}
+			}
+		}
+		int renderedPlanes = 0;
+		for (RenderRecord record : renderedRecords.values()) {
+			if (record.object.getObjectClass() == AIS_AIRPLANE) {
+				renderedPlanes++;
+			}
+		}
+		int zoom = tileBox.getZoom();
+		// fully qualified: this class already imports commons-logging Log for its own LOG field
+		android.util.Log.d(AisPlaneDataFetcher.TAG, "layer: " + indexedPlanes + " aircraft indexed, "
+				+ renderedPlanes + " drawn, zoom " + zoom
+				+ (zoom < START_ZOOM ? " (below minimum " + START_ZOOM + ", aircraft are hidden)" : "")
+				+ ", 'Show planes' " + (plugin.AIS_SHOW_PLANES.get() ? "on" : "OFF"));
+	}
+
+	private boolean isHiddenByTypeFilter(@NonNull AisObject ais) {
+		boolean isPlane = ais.getObjectClass() == AIS_AIRPLANE;
+		return isPlane ? !plugin.AIS_SHOW_PLANES.get() : !plugin.AIS_SHOW_SHIPS.get();
+	}
+
+	/**
+	 * Call after toggling AIS_SHOW_SHIPS/AIS_SHOW_PLANES so already-indexed objects are
+	 * re-evaluated against the new filter without waiting for the next AIS message per object.
+	 */
+	public void refreshTypeFilter() {
+		refreshOwnObjectVisibility();
 	}
 
 	public void refreshOwnObjectVisibility() {
@@ -363,6 +418,11 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		ViewportSignature viewport = new ViewportSignature(tileBox);
 		boolean viewportChanged = !viewport.equals(lastViewport);
+		if (viewportChanged) {
+			// plane sources query by area, so a moved map needs a fresh batch; the plugin decides
+			// whether it is time to ask, this call never restarts its poll timer
+			plugin.onMapAreaChanged();
+		}
 		long now = SystemClock.elapsedRealtime();
 		boolean intervalElapsed = lastRenderTimeMs == 0 || now - lastRenderTimeMs >= RENDER_UPDATE_INTERVAL_MS;
 		if ((dataDirty || viewportChanged) && intervalElapsed) {
@@ -408,6 +468,18 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 		int renderBudget = zoom >= START_ZOOM
 				? Math.min(MAX_RENDERED_OBJECTS, columns * rows)
 				: selectedRecord == null ? 0 : 1;
+
+		// Aircraft bypass the vessel pipeline entirely: they are small, they cluster along the same
+		// airways, and hiding the overlapping ones would drop most of the sky. They are admitted
+		// below without collision checks or the per-cell thinning vessels go through.
+		List<RenderRecord> planeCandidates = new ArrayList<>();
+		for (Iterator<RenderRecord> iterator = candidates.iterator(); iterator.hasNext(); ) {
+			RenderRecord record = iterator.next();
+			if (record != selectedRecord && record.object.getObjectClass() == AIS_AIRPLANE) {
+				planeCandidates.add(record);
+				iterator.remove();
+			}
+		}
 
 		Set<Integer> incumbentKeys = new HashSet<>(objectDrawables.keySet());
 		List<RenderRecord> incumbents = new ArrayList<>();
@@ -512,7 +584,106 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 			trySelect(record, false, tileBox, renderer, footprint, renderBounds, renderBudget,
 					incumbentKeys, occupied, result);
 		}
+		admitPlanes(planeCandidates, tileBox, renderer, footprint, renderBounds, result);
 		return result;
+	}
+
+	/**
+	 * Admits every aircraft in view, overlapping or not, capped only by the layer's hard ceiling.
+	 * They neither take part in the collision grid nor block vessels from it.
+	 */
+	private void admitPlanes(@NonNull List<RenderRecord> planes, @NonNull RotatedTileBox tileBox,
+			@Nullable MapRendererView renderer, float footprint, @NonNull RectF renderBounds,
+			@NonNull SelectionResult result) {
+		float planeFootprint = footprint * PLANE_FOOTPRINT_FACTOR;
+		// Parked aircraft sit on top of each other at airports, so unlike airborne ones they are
+		// capped: past a few in the same spot the rest add nothing but clutter.
+		Map<Long, List<AcceptedRect>> groundOccupied = new HashMap<>();
+		for (RenderRecord record : planes) {
+			if (result.desired.size() >= MAX_RENDERED_OBJECTS) {
+				return;
+			}
+			record.updateSelectionState(plugin);
+			record.hasScreenPoint = false;
+			record.cpaWarning = false;
+			AisLatLon position = record.object.getPosition();
+			if (position == null) {
+				continue;
+			}
+			result.projected++;
+			PointF screenPoint = projectToScreen(record, position, tileBox, renderer);
+			if (!renderBounds.contains(screenPoint.x, screenPoint.y)) {
+				continue;
+			}
+			RectF rect = new RectF(screenPoint.x - planeFootprint / 2,
+					screenPoint.y - planeFootprint / 2, screenPoint.x + planeFootprint / 2,
+					screenPoint.y + planeFootprint / 2);
+			boolean onGround = record.object.getAltitude() == GROUND_ALTITUDE;
+			if (onGround) {
+				if (countOverlaps(groundOccupied, record.mmsi, rect, planeFootprint, renderBounds)
+						>= GROUND_PLANE_MAX_OVERLAP) {
+					result.collisionRejected++;
+					continue;
+				}
+				occupy(groundOccupied, new AcceptedRect(record.mmsi, rect, false), planeFootprint,
+						renderBounds);
+			}
+			record.screenX = screenPoint.x;
+			record.screenY = screenPoint.y;
+			record.iconRect = rect;
+			record.hasScreenPoint = true;
+			result.desired.put(record.mmsi, record);
+		}
+	}
+
+	private static int countOverlaps(@NonNull Map<Long, List<AcceptedRect>> occupied, int mmsi,
+			@NonNull RectF rect, float cellSize, @NonNull RectF bounds) {
+		Set<Integer> inspected = new HashSet<>();
+		int overlaps = 0;
+		int minCellX = (int) Math.floor((rect.left - bounds.left) / cellSize);
+		int maxCellX = (int) Math.floor((rect.right - bounds.left) / cellSize);
+		int minCellY = (int) Math.floor((rect.top - bounds.top) / cellSize);
+		int maxCellY = (int) Math.floor((rect.bottom - bounds.top) / cellSize);
+		for (int cellX = minCellX; cellX <= maxCellX; cellX++) {
+			for (int cellY = minCellY; cellY <= maxCellY; cellY++) {
+				List<AcceptedRect> accepted = occupied.get(screenCellKey(cellX, cellY));
+				if (accepted == null) {
+					continue;
+				}
+				for (AcceptedRect other : accepted) {
+					if (other.mmsi != mmsi && inspected.add(other.mmsi)
+							&& RectF.intersects(rect, other.rect)) {
+						overlaps++;
+					}
+				}
+			}
+		}
+		return overlaps;
+	}
+
+	private static void occupy(@NonNull Map<Long, List<AcceptedRect>> occupied,
+			@NonNull AcceptedRect accepted, float cellSize, @NonNull RectF bounds) {
+		int minCellX = (int) Math.floor((accepted.rect.left - bounds.left) / cellSize);
+		int maxCellX = (int) Math.floor((accepted.rect.right - bounds.left) / cellSize);
+		int minCellY = (int) Math.floor((accepted.rect.top - bounds.top) / cellSize);
+		int maxCellY = (int) Math.floor((accepted.rect.bottom - bounds.top) / cellSize);
+		for (int cellX = minCellX; cellX <= maxCellX; cellX++) {
+			for (int cellY = minCellY; cellY <= maxCellY; cellY++) {
+				occupied.computeIfAbsent(screenCellKey(cellX, cellY), ignored -> new ArrayList<>())
+						.add(accepted);
+			}
+		}
+	}
+
+	@NonNull
+	private PointF projectToScreen(@NonNull RenderRecord record, @NonNull AisLatLon position,
+			@NonNull RotatedTileBox tileBox, @Nullable MapRendererView renderer) {
+		if (renderer != null) {
+			return NativeUtilities.getPixelFrom31(renderer, tileBox, new PointI(record.x31, record.y31));
+		}
+		double longitude = normalizeLongitudeNear(position.getLongitude(), tileBox.getLongitude());
+		return new PointF(tileBox.getPixXFromLatLon(position.getLatitude(), longitude),
+				tileBox.getPixYFromLatLon(position.getLatitude(), longitude));
 	}
 
 	@NonNull
@@ -608,16 +779,7 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 		if (position == null) {
 			return;
 		}
-		PointF screenPoint;
-		if (renderer != null) {
-			screenPoint = NativeUtilities.getPixelFrom31(renderer, tileBox,
-					new PointI(record.x31, record.y31));
-		} else {
-			double longitude = normalizeLongitudeNear(position.getLongitude(), tileBox.getLongitude());
-			screenPoint = new PointF(
-					tileBox.getPixXFromLatLon(position.getLatitude(), longitude),
-					tileBox.getPixYFromLatLon(position.getLatitude(), longitude));
-		}
+		PointF screenPoint = projectToScreen(record, position, tileBox, renderer);
 		float x = screenPoint.x;
 		float y = screenPoint.y;
 		if (!renderBounds.contains(x, y)) {
@@ -760,6 +922,7 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 			}
 		}
 		renderedRecords = new LinkedHashMap<>(selection.desired);
+		logPlaneVisibility(tileBox);
 		peakDrawableCount = Math.max(peakDrawableCount, objectDrawables.size());
 
 		showLog(selection, actualDesired, previous);

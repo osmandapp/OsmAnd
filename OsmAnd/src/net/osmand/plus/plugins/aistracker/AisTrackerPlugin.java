@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.aistracker;
 
 import net.osmand.plus.render.RendererRegistry;
+import net.osmand.shared.aistracker.AisObjType;
 import net.osmand.shared.aistracker.AisObject;
 
 import static net.osmand.plus.NavigationService.USED_BY_AIS;
@@ -10,11 +11,14 @@ import static net.osmand.plus.settings.fragments.SettingsScreenType.AIS_SETTINGS
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.Location;
+import net.osmand.data.QuadRect;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.NavigationService;
@@ -30,14 +34,23 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
+import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
+import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.render.RenderingRuleProperty;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -93,6 +106,19 @@ public class AisTrackerPlugin extends OsmandPlugin {
 	public static final Boolean AIS_DISPLAY_OWN_POSITION_DEFAULT = false;
     public final CommonPreference<Boolean> AIS_RECEIVE_IN_BACKGROUND;
     public static final Boolean AIS_RECEIVE_IN_BACKGROUND_DEFAULT = false;
+	public static final String AIS_URL_SOURCES_ID = "ais_url_sources"; // see xml/ais_settings.xml
+	public static final String AIS_SHOW_SHIPS_ID = "ais_show_ships"; // see xml/ais_settings.xml
+	public static final String AIS_SHOW_PLANES_ID = "ais_show_planes"; // see xml/ais_settings.xml
+	public final CommonPreference<String> AIS_URL_SOURCES;
+	public final CommonPreference<Boolean> AIS_SHOW_SHIPS;
+	public final CommonPreference<Boolean> AIS_SHOW_PLANES;
+	private static final long PLANE_POLL_INTERVAL_MS = 15_000L;
+	// floor between requests, so panning around cannot outpace the poll itself
+	private static final long MIN_PLANE_REQUEST_SPACING_MS = 5_000L;
+	private Timer planePollTimer;
+	private final Object planeRequestLock = new Object();
+	private volatile boolean planeRequestInProgress;
+	private volatile long lastPlaneRequestTime;
 
 	/* timestamp of last AIS message received for all instances: */
 	private long lastMessageReceived = 0;
@@ -187,6 +213,25 @@ public class AisTrackerPlugin extends OsmandPlugin {
 			return new ArrayList<>(objects.values());
 		}
 
+		/**
+		 * Drops the aircraft that the latest batch no longer reports, leaving every other object
+		 * untouched - vessels come from the NMEA listener and have nothing to do with this.
+		 *
+		 * @return how many aircraft were removed
+		 */
+		public synchronized int removeAircraftMissingFrom(@NonNull Set<Integer> receivedMmsi) {
+			int removed = 0;
+			for (Iterator<Map.Entry<Integer, AisObject>> iterator = objects.entrySet().iterator(); iterator.hasNext(); ) {
+				AisObject obj = iterator.next().getValue();
+				if (obj.getObjectClass() == AisObjType.AIS_AIRPLANE && !receivedMmsi.contains(obj.getMmsi())) {
+					iterator.remove();
+					removed++;
+					AisTrackerPlugin.this.onAisObjectRemoved(obj);
+				}
+			}
+			return removed;
+		}
+
 		public synchronized void removeLostObjects() {
 			for (Iterator<Map.Entry<Integer, AisObject>> iterator = objects.entrySet().iterator(); iterator.hasNext(); ) {
 				AisObject obj = iterator.next().getValue();
@@ -233,6 +278,9 @@ public class AisTrackerPlugin extends OsmandPlugin {
 		AIS_OWN_MMSI = registerIntPreference(AIS_OWN_MMSI_ID, AIS_DEFAULT_OWN_MMSI);
 		AIS_DISPLAY_OWN_POSITION = registerBooleanPreference(AIS_DISPLAY_OWN_POSITION_ID, AIS_DISPLAY_OWN_POSITION_DEFAULT);
 		AIS_RECEIVE_IN_BACKGROUND = registerBooleanPreference(AIS_RECEIVE_IN_BACKGROUND_ID, AIS_RECEIVE_IN_BACKGROUND_DEFAULT);
+		AIS_URL_SOURCES = registerStringPreference(AIS_URL_SOURCES_ID, "").makeGlobal();
+		AIS_SHOW_SHIPS = registerBooleanPreference(AIS_SHOW_SHIPS_ID, true).makeGlobal();
+		AIS_SHOW_PLANES = registerBooleanPreference(AIS_SHOW_PLANES_ID, true).makeGlobal();
 		AIS_NMEA_IP_ADDRESS.addListener(addrPrefListener);
 		AIS_NMEA_PROTOCOL.addListener(protocolPortPrefListener);
 		AIS_NMEA_TCP_PORT.addListener(protocolPortPrefListener);
@@ -358,6 +406,7 @@ public class AisTrackerPlugin extends OsmandPlugin {
 		if (AIS_RECEIVE_IN_BACKGROUND.get()) {
 			AndroidUtils.requestNotificationPermissionIfNeeded(activity);
 		}
+		startPlanePolling();
 	}
 
 	@Override
@@ -368,6 +417,194 @@ public class AisTrackerPlugin extends OsmandPlugin {
 			updateAisBackgroundService();
 			app.runInUIThread(this::stopAisListenerIfBackgroundServiceFailed, 1500);
 		}
+		stopPlanePolling();
+	}
+
+	@NonNull
+	public List<AisUrlSource> getUrlSources() {
+		return AisUrlSource.parseList(AIS_URL_SOURCES.get());
+	}
+
+	public void addOrUpdateUrlSource(@NonNull AisUrlSource source) {
+		List<AisUrlSource> sources = getUrlSources();
+		boolean replaced = false;
+		for (int i = 0; i < sources.size(); i++) {
+			if (sources.get(i).id.equals(source.id)) {
+				sources.set(i, source);
+				replaced = true;
+				break;
+			}
+		}
+		if (!replaced) {
+			sources.add(source);
+		}
+		AIS_URL_SOURCES.set(AisUrlSource.serializeList(sources));
+		restartPlanePolling();
+	}
+
+	public void removeUrlSource(@NonNull String id) {
+		List<AisUrlSource> sources = getUrlSources();
+		sources.removeIf(source -> source.id.equals(id));
+		AIS_URL_SOURCES.set(AisUrlSource.serializeList(sources));
+		restartPlanePolling();
+	}
+
+	public void setSourceEnabled(@NonNull String id, boolean enabled) {
+		List<AisUrlSource> sources = getUrlSources();
+		for (int i = 0; i < sources.size(); i++) {
+			if (sources.get(i).id.equals(id)) {
+				sources.set(i, sources.get(i).withEnabled(enabled));
+				break;
+			}
+		}
+		AIS_URL_SOURCES.set(AisUrlSource.serializeList(sources));
+		restartPlanePolling();
+		AisTrackerLayer currentLayer = layer;
+		if (currentLayer != null) {
+			currentLayer.refreshTypeFilter();
+		}
+	}
+
+	@NonNull
+	private List<AisUrlSource> getPlaneSources() {
+		List<AisUrlSource> planes = new ArrayList<>();
+		for (AisUrlSource source : getUrlSources()) {
+			if (source.type == AisUrlSource.Type.PLANES && source.enabled) {
+				planes.add(source);
+			}
+		}
+		return planes;
+	}
+
+	public void feedExternalAisObject(@NonNull AisObject ais) {
+		aisDataManager.onAisObjectReceived(ais);
+	}
+
+	public void restartPlanePolling() {
+		stopPlanePolling();
+		startPlanePolling();
+	}
+
+	private void startPlanePolling() {
+		stopPlanePolling();
+		List<AisUrlSource> sources = getPlaneSources();
+		if (sources.isEmpty()) {
+			int configured = getUrlSources().size();
+			Log.d(AisPlaneDataFetcher.TAG, "polling not started: no enabled PLANES source ("
+					+ configured + " source(s) configured in total)");
+			return;
+		}
+		Log.d(AisPlaneDataFetcher.TAG, "polling started for " + sources.size()
+				+ " source(s) every " + PLANE_POLL_INTERVAL_MS / 1000 + " s");
+		planePollTimer = new Timer();
+		planePollTimer.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				safePollPlaneSources();
+			}
+		}, 0, PLANE_POLL_INTERVAL_MS);
+	}
+
+	private void stopPlanePolling() {
+		if (planePollTimer != null) {
+			planePollTimer.cancel();
+			planePollTimer = null;
+		}
+	}
+
+	/**
+	 * Called by the layer when the visible area changed. Fetches for the new area without touching
+	 * the poll timer, so panning cannot turn into a request storm - the periodic poll keeps its own
+	 * cadence and the viewport-driven extra request is spaced out on top of it.
+	 */
+	public void onMapAreaChanged() {
+		if (planePollTimer == null || planeRequestInProgress) {
+			return;
+		}
+		if (System.currentTimeMillis() - lastPlaneRequestTime < MIN_PLANE_REQUEST_SPACING_MS) {
+			return;
+		}
+		new Thread(this::safePollPlaneSources, "ais-planes-viewport").start();
+	}
+
+	/**
+	 * Polling runs on a timer thread, where an uncaught exception takes the whole app down - a
+	 * misbehaving source must never be able to do that.
+	 */
+	private void safePollPlaneSources() {
+		try {
+			pollPlaneSources();
+		} catch (Throwable e) {
+			Log.e(AisPlaneDataFetcher.TAG, "poll failed", e);
+			synchronized (planeRequestLock) {
+				planeRequestInProgress = false;
+			}
+		}
+	}
+
+	private void pollPlaneSources() {
+		if (!AIS_SHOW_PLANES.get()) {
+			Log.d(AisPlaneDataFetcher.TAG, "poll skipped: 'Show planes' is off");
+			return;
+		}
+		if (!isActive()) {
+			Log.d(AisPlaneDataFetcher.TAG, "poll skipped: plugin is not active");
+			return;
+		}
+		QuadRect latLonBounds = app.getOsmandMap().getMapView().getRotatedTileBox().getLatLonBounds();
+		if (latLonBounds == null) {
+			Log.d(AisPlaneDataFetcher.TAG, "poll skipped: map area is not known yet");
+			return;
+		}
+		synchronized (planeRequestLock) {
+			if (planeRequestInProgress) {
+				Log.d(AisPlaneDataFetcher.TAG, "poll skipped: a request is already running");
+				return;
+			}
+			planeRequestInProgress = true;
+		}
+		try {
+			lastPlaneRequestTime = System.currentTimeMillis();
+			List<AisObject> received = new ArrayList<>();
+			boolean allSourcesFailed = true;
+			for (AisUrlSource source : getPlaneSources()) {
+				List<AisObject> fromSource = AisPlaneDataFetcher.fetch(app, source, latLonBounds);
+				if (fromSource != null) {
+					allSourcesFailed = false;
+					received.addAll(fromSource);
+				}
+			}
+			applyPlaneBatch(received, allSourcesFailed);
+		} finally {
+			synchronized (planeRequestLock) {
+				planeRequestInProgress = false;
+			}
+		}
+	}
+
+	/**
+	 * Aircraft already on the map are updated in place rather than re-added, and only those missing
+	 * from a successful batch are dropped - that keeps the layer from rebuilding its symbols and
+	 * blinking on every poll. A failed batch changes nothing, so a network hiccup does not wipe the
+	 * map.
+	 */
+	private void applyPlaneBatch(@NonNull List<AisObject> received, boolean requestFailed) {
+		if (requestFailed) {
+			Log.d(AisPlaneDataFetcher.TAG, "poll failed, keeping the aircraft already on the map");
+			return;
+		}
+		app.runInUIThread(() -> {
+			Set<Integer> receivedMmsi = new HashSet<>();
+			for (AisObject ais : received) {
+				receivedMmsi.add(ais.getMmsi());
+				feedExternalAisObject(ais);
+			}
+			int removed = aisDataManager.removeAircraftMissingFrom(receivedMmsi);
+			Log.d(AisPlaneDataFetcher.TAG, "batch applied: " + received.size() + " aircraft in view, "
+					+ removed + " gone from the batch removed; tracked objects now: "
+					+ getAisObjects().size()
+					+ ", layer " + (layer == null ? "NOT attached (nothing will be drawn)" : "attached"));
+		});
 	}
 
 	@Override
@@ -408,6 +645,89 @@ public class AisTrackerPlugin extends OsmandPlugin {
 	@Nullable
 	public AisTrackerLayer getLayer() {
 		return layer;
+	}
+
+	@Override
+	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter,
+	                                               @NonNull MapActivity mapActivity,
+	                                               List<RenderingRuleProperty> customRules) {
+		if (!isEnabled()) {
+			return;
+		}
+		addTypeToggleItem(adapter, mapActivity, AISTRACKER_ID + ".show_ships",
+				R.string.ais_show_ships, R.drawable.mm_sport_sailing, AIS_SHOW_SHIPS);
+		addTypeToggleItem(adapter, mapActivity, AISTRACKER_ID + ".show_planes",
+				R.string.ais_show_planes, R.drawable.ic_action_aircraft, AIS_SHOW_PLANES);
+		if (!getUrlSources().isEmpty()) {
+			addSourcesPickerItem(adapter, mapActivity);
+		}
+	}
+
+	private void addSourcesPickerItem(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity) {
+		OnRowItemClick listener = new OnRowItemClick() {
+			@Override
+			public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter,
+			                              @NonNull View view, @NonNull ContextMenuItem item) {
+				showSourcesPickerDialog(mapActivity);
+				return false;
+			}
+
+			@Override
+			public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter, @Nullable View view,
+			                                  @NonNull ContextMenuItem item, boolean isChecked) {
+				return false;
+			}
+		};
+		adapter.addItem(new ContextMenuItem(AISTRACKER_ID + ".sources_picker")
+				.setTitleId(R.string.ais_url_sources, mapActivity)
+				.setIcon(R.drawable.ic_action_layers)
+				.setListener(listener));
+	}
+
+	private void showSourcesPickerDialog(@NonNull MapActivity mapActivity) {
+		List<AisUrlSource> sources = getUrlSources();
+		CharSequence[] items = new CharSequence[sources.size()];
+		boolean[] checked = new boolean[sources.size()];
+		for (int i = 0; i < sources.size(); i++) {
+			AisUrlSource source = sources.get(i);
+			items[i] = source.name + " (" + source.type.name().toLowerCase() + ")";
+			checked[i] = source.enabled;
+		}
+		Context themedContext = UiUtilities.getThemedContext(mapActivity, mapActivity.isNightMode());
+		new AlertDialog.Builder(themedContext)
+				.setTitle(R.string.ais_url_sources)
+				.setMultiChoiceItems(items, checked, (dialog, which, isChecked) ->
+						setSourceEnabled(sources.get(which).id, isChecked))
+				.setPositiveButton(R.string.shared_string_ok, null)
+				.show();
+	}
+
+	private void addTypeToggleItem(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity,
+	                               @NonNull String id, int titleId, int iconId,
+	                               @NonNull CommonPreference<Boolean> pref) {
+		ItemClickListener listener = new ItemClickListener() {
+			@Override
+			public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter, @Nullable View view,
+			                                  @NonNull ContextMenuItem item, boolean isChecked) {
+				pref.set(!pref.get());
+				AisTrackerLayer currentLayer = layer;
+				if (currentLayer != null) {
+					currentLayer.refreshTypeFilter();
+				}
+				item.setSelected(pref.get());
+				item.setColor(app, pref.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+				if (uiAdapter != null) {
+					uiAdapter.onDataSetChanged();
+				}
+				return false;
+			}
+		};
+		adapter.addItem(new ContextMenuItem(id)
+				.setTitleId(titleId, mapActivity)
+				.setSelected(pref.get())
+				.setColor(app, pref.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+				.setIcon(iconId)
+				.setListener(listener));
 	}
 
 	public void onAisObjectReceived(@NonNull AisObject ais) {
