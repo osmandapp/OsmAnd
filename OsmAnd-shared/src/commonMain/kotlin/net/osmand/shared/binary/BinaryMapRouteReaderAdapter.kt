@@ -6,6 +6,7 @@ import net.osmand.shared.routing.RouteRegion
 import net.osmand.shared.routing.RouteSubregion
 import net.osmand.shared.util.collections.KTIntArrayList
 import net.osmand.shared.util.collections.KTIntObjectMap
+import net.osmand.shared.util.collections.KTLongArrayList
 import net.osmand.shared.util.collections.KTLongObjectMap
 import net.osmand.shared.util.internString
 
@@ -22,6 +23,16 @@ import net.osmand.shared.util.internString
 class BinaryMapRouteReaderAdapter internal constructor(private val map: BinaryMapIndexReader) {
 
 	private val codedIS: CodedInputStream = map.codedIS
+
+	// Scratch space for reading a block: java allocates these per road and per block, which the
+	// jvm's young generation makes free and Kotlin/Native's collector does not. The reader is used
+	// from one thread at a time, as the java one is.
+	private val pointsXScratch = KTIntArrayList()
+	private val pointsYScratch = KTIntArrayList()
+	private val typesScratch = KTIntArrayList()
+	private val pointTypesScratch = KTIntArrayList()
+	private val idTables = KTLongArrayList()
+	private val restrictionMap = KTLongObjectMap<RestrictionInfo>()
 
 	private fun skipUnknownField(t: Int) {
 		map.skipUnknownField(t)
@@ -93,11 +104,14 @@ class BinaryMapRouteReaderAdapter internal constructor(private val map: BinaryMa
 
 	private fun readRouteDataObject(reg: RouteRegion, pleftx: Int, ptopy: Int): RouteDataObject {
 		val o = RouteDataObject(reg)
-		val pointsX = KTIntArrayList()
-		val pointsY = KTIntArrayList()
-		val types = KTIntArrayList()
-		val globalpointTypes = ArrayList<KTIntArrayList?>()
-		val globalpointNames = ArrayList<KTIntArrayList?>()
+		val pointsX = pointsXScratch
+		val pointsY = pointsYScratch
+		val types = typesScratch
+		pointsX.clear()
+		pointsY.clear()
+		types.clear()
+		var globalpointTypes: ArrayList<IntArray?>? = null
+		var globalpointNames: ArrayList<KTIntArrayList?>? = null
 		while (true) {
 			val ts = codedIS.readTag()
 			when (CodedInputStream.getTagFieldNumber(ts)) {
@@ -105,14 +119,16 @@ class BinaryMapRouteReaderAdapter internal constructor(private val map: BinaryMa
 					o.pointsX = pointsX.toArray()
 					o.pointsY = pointsY.toArray()
 					o.types = types.toArray()
-					if (globalpointTypes.size > 0) {
-						o.pointTypes = Array(globalpointTypes.size) { k -> globalpointTypes[k]?.toArray() }
+					val pointTypesRead = globalpointTypes
+					if (pointTypesRead != null && pointTypesRead.size > 0) {
+						o.pointTypes = Array(pointTypesRead.size) { k -> pointTypesRead[k] }
 					}
-					if (globalpointNames.size > 0) {
-						val pointNames = arrayOfNulls<Array<String>>(globalpointNames.size)
-						val pointNameTypes = arrayOfNulls<IntArray>(globalpointNames.size)
+					val pointNamesRead = globalpointNames
+					if (pointNamesRead != null && pointNamesRead.size > 0) {
+						val pointNames = arrayOfNulls<Array<String>>(pointNamesRead.size)
+						val pointNameTypes = arrayOfNulls<IntArray>(pointNamesRead.size)
 						for (k in pointNames.indices) {
-							val l = globalpointNames[k]
+							val l = pointNamesRead[k]
 							if (l != null) {
 								val nameTypes = IntArray(l.size / 2)
 								val names = Array(l.size / 2) { "" }
@@ -173,37 +189,40 @@ class BinaryMapRouteReaderAdapter internal constructor(private val map: BinaryMa
 				RouteData.POINTNAMES_FIELD_NUMBER -> {
 					val len = codedIS.readRawVarint32()
 					val oldLimit = codedIS.pushLimitLong(len.toLong())
+					val names = globalpointNames ?: ArrayList<KTIntArrayList?>().also { globalpointNames = it }
 					while (codedIS.getBytesUntilLimit() > 0) {
 						val pointInd = codedIS.readRawVarint32()
 						val pointNameType = codedIS.readRawVarint32()
 						val nameInd = codedIS.readRawVarint32()
-						while (pointInd >= globalpointNames.size) {
-							globalpointNames.add(null)
+						while (pointInd >= names.size) {
+							names.add(null)
 						}
-						if (globalpointNames[pointInd] == null) {
-							globalpointNames[pointInd] = KTIntArrayList()
+						if (names[pointInd] == null) {
+							names[pointInd] = KTIntArrayList()
 						}
-						globalpointNames[pointInd]!!.add(pointNameType)
-						globalpointNames[pointInd]!!.add(nameInd)
+						names[pointInd]!!.add(pointNameType)
+						names[pointInd]!!.add(nameInd)
 					}
 					codedIS.popLimit(oldLimit)
 				}
 				RouteData.POINTTYPES_FIELD_NUMBER -> {
 					val len = codedIS.readRawVarint32()
 					val oldLimit = codedIS.pushLimitLong(len.toLong())
+					val pointTypesRead = globalpointTypes ?: ArrayList<IntArray?>().also { globalpointTypes = it }
 					while (codedIS.getBytesUntilLimit() > 0) {
 						val pointInd = codedIS.readRawVarint32()
-						val pointTypes = KTIntArrayList()
+						val pointTypes = pointTypesScratch
+						pointTypes.clear()
 						val lens = codedIS.readRawVarint32()
 						val oldLimits = codedIS.pushLimitLong(lens.toLong())
 						while (codedIS.getBytesUntilLimit() > 0) {
 							pointTypes.add(codedIS.readRawVarint32())
 						}
 						codedIS.popLimit(oldLimits)
-						while (pointInd >= globalpointTypes.size) {
-							globalpointTypes.add(null)
+						while (pointInd >= pointTypesRead.size) {
+							pointTypesRead.add(null)
 						}
-						globalpointTypes[pointInd] = pointTypes
+						pointTypesRead[pointInd] = pointTypes.toArray()
 					}
 					codedIS.popLimit(oldLimit)
 				}
@@ -214,7 +233,7 @@ class BinaryMapRouteReaderAdapter internal constructor(private val map: BinaryMa
 	}
 
 	private fun readRouteTreeData(
-		routeTree: RouteSubregion, idTables: MutableList<Long>,
+		routeTree: RouteSubregion, idTables: KTLongArrayList,
 		restrictions: KTLongObjectMap<RestrictionInfo>
 	) {
 		val dataObjects = ArrayList<RouteDataObject?>()
@@ -434,13 +453,11 @@ class BinaryMapRouteReaderAdapter internal constructor(private val map: BinaryMa
 	}
 
 	fun loadRouteRegionData(rs: RouteSubregion): List<RouteDataObject?> {
-		val idMap = ArrayList<Long>()
-		val restrictionMap = KTLongObjectMap<RestrictionInfo>()
 		if (rs.dataObjects == null) {
 			codedIS.seek(rs.filePointer + rs.shiftToData)
 			val limit = codedIS.readRawVarint32()
 			val oldLimit = codedIS.pushLimitLong(limit.toLong())
-			readRouteTreeData(rs, idMap, restrictionMap)
+			readRouteTreeData(rs, idTables, restrictionMap)
 			codedIS.popLimit(oldLimit)
 		}
 		val res = rs.dataObjects!!
@@ -454,14 +471,12 @@ class BinaryMapRouteReaderAdapter internal constructor(private val map: BinaryMa
 			val p2 = o2.filePointer + o2.shiftToData
 			if (p1 == p2) 0 else if (p1 < p2) -1 else 1
 		}
-		val idMap = ArrayList<Long>()
-		val restrictionMap = KTLongObjectMap<RestrictionInfo>()
 		for (rs in toLoad) {
 			if (rs.dataObjects == null) {
 				codedIS.seek(rs.filePointer + rs.shiftToData)
 				val limit = codedIS.readRawVarint32()
 				val oldLimit = codedIS.pushLimitLong(limit.toLong())
-				readRouteTreeData(rs, idMap, restrictionMap)
+				readRouteTreeData(rs, idTables, restrictionMap)
 				codedIS.popLimit(oldLimit)
 			}
 			for (ro in rs.dataObjects!!) {

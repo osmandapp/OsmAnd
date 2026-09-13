@@ -99,6 +99,22 @@ class KBitSet @JvmOverloads constructor(bitCapacity: Int = BITS_PER_WORD) {
 		return false
 	}
 
+	/** True when every bit set in [other] is set here too - [other] is a subset of this. */
+	fun containsAll(other: KBitSet): Boolean {
+		val ow = other.words
+		val w = words
+		for (i in ow.indices) {
+			val o = ow[i]
+			if (o == 0L) {
+				continue
+			}
+			if (i >= w.size || (w[i] and o) != o) {
+				return false
+			}
+		}
+		return true
+	}
+
 	fun isEmpty(): Boolean {
 		for (word in words) {
 			if (word != 0L) {

@@ -1,8 +1,7 @@
 package net.osmand.shared.routing
 
+import net.osmand.shared.data.KIntQuadTree
 import net.osmand.shared.data.KLatLon
-import net.osmand.shared.data.KQuadRect
-import net.osmand.shared.data.KQuadTree
 import net.osmand.shared.util.KMapUtils
 import net.osmand.shared.util.collections.KTIntArrayList
 import kotlin.jvm.JvmStatic
@@ -29,13 +28,12 @@ class PrecalculatedRouteDirection {
 	private lateinit var tms: FloatArray
 	private var followNext: Boolean = false
 
-	private val cachedS: MutableList<Int> = ArrayList()
+	// the candidates of getIndex, primitive: the heuristic asks on every settled segment
+	private val cachedS = KTIntArrayList()
 
 	private var startPoint: Long = 0
 	private var endPoint: Long = 0
-	private val quadTree = KQuadTree<Int>(
-		KQuadRect(0.0, 0.0, Int.MAX_VALUE.toDouble(), Int.MAX_VALUE.toDouble()), 8, 0.55f
-	)
+	private val quadTree = KIntQuadTree(0.0, 0.0, Int.MAX_VALUE.toDouble(), Int.MAX_VALUE.toDouble(), 8, 0.55f)
 	private var startFinishTime: Float = 0f
 	private var endFinishTime: Float = 0f
 
@@ -203,18 +201,14 @@ class PrecalculatedRouteDirection {
 		var ind = -1
 		cachedS.clear()
 		quadTree.queryInBox(
-			KQuadRect(
-				(x31 - SHIFT).toDouble(), (y31 - SHIFT).toDouble(),
-				(x31 + SHIFT).toDouble(), (y31 + SHIFT).toDouble()
-			), cachedS
+			(x31 - SHIFT).toDouble(), (y31 - SHIFT).toDouble(),
+			(x31 + SHIFT).toDouble(), (y31 + SHIFT).toDouble(), cachedS
 		)
 		if (cachedS.size == 0) {
 			for (k in SHIFTS.indices) {
 				quadTree.queryInBox(
-					KQuadRect(
-						(x31 - SHIFTS[k]).toDouble(), (y31 - SHIFTS[k]).toDouble(),
-						(x31 + SHIFTS[k]).toDouble(), (y31 + SHIFTS[k]).toDouble()
-					), cachedS
+					(x31 - SHIFTS[k]).toDouble(), (y31 - SHIFTS[k]).toDouble(),
+					(x31 + SHIFTS[k]).toDouble(), (y31 + SHIFTS[k]).toDouble(), cachedS
 				)
 				if (cachedS.size != 0) {
 					break
@@ -225,8 +219,8 @@ class PrecalculatedRouteDirection {
 			}
 		}
 		var minDist = 0.0
-		for (i in cachedS.indices) {
-			val n = cachedS[i]
+		for (i in 0 until cachedS.size) {
+			val n = cachedS.getQuick(i)
 			val ds = KMapUtils.squareRootDist31(x31, y31, pointsX[n], pointsY[n])
 			if (ds < minDist || i == 0) {
 				ind = n

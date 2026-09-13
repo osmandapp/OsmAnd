@@ -535,8 +535,16 @@ class GeneralRouter : VehicleRouter {
 		}
 	}
 
-	/** The tag set of a road, as the key of the evaluation cache. */
-	class IntHolder(private val array: IntArray, private val extra: Boolean) {
+	/**
+	 * The tag set of a road, as the key of the evaluation cache. Keys that are stored are fresh;
+	 * [lookupKey] is the one reused for every lookup, so a cache hit allocates nothing.
+	 */
+	class IntHolder(internal var array: IntArray, internal var extra: Boolean) {
+
+		fun set(array: IntArray, extra: Boolean) {
+			this.array = array
+			this.extra = extra
+		}
 
 		override fun hashCode(): Int = array.contentHashCode() + (if (extra) 1 else 0)
 
@@ -566,10 +574,14 @@ class GeneralRouter : VehicleRouter {
 		val ch = evalCache[attr.ordinal]
 		if (USE_CACHE) {
 			val rM = ch[reg] ?: return null
-			return rM[IntHolder(types, extra)]
+			lookupKey.set(types, extra)
+			return rM[lookupKey]
 		}
 		return null
 	}
+
+	// as thread safe as the caches themselves, which are per router instance and unsynchronized in java too
+	private val lookupKey = IntHolder(IntArray(0), false)
 
 	override fun getDefaultSpeed(): Float = defaultSpeed
 
@@ -670,6 +682,9 @@ class GeneralRouter : VehicleRouter {
 	inner class RouteAttributeContext {
 
 		internal val rules: MutableList<RouteAttributeEvalRule> = ArrayList()
+
+		// the rules as an array for evaluate, which runs them for every road type set; rebuilt when one is added
+		private var rulesArray: Array<RouteAttributeEvalRule>? = null
 		internal var paramContext: ParameterContext? = null
 		private val evalLock = KLock()
 
@@ -684,6 +699,7 @@ class GeneralRouter : VehicleRouter {
 			for (rt in original.rules) {
 				if (checkParameter(rt)) {
 					rules.add(rt)
+					rulesArray = null
 				}
 			}
 		}
@@ -706,6 +722,7 @@ class GeneralRouter : VehicleRouter {
 			val ev = RouteAttributeEvalRule()
 			ev.registerSelectValue(selectValue, selectType)
 			rules.add(ev)
+			rulesArray = null
 			return ev
 		}
 
@@ -716,6 +733,7 @@ class GeneralRouter : VehicleRouter {
 		 * so only one thread may be inside them at a time. This was `synchronized` in Java.
 		 */
 		private fun evaluate(types: KBitSet): Any? = synchronized(evalLock) {
+			val rules = rulesArray ?: this.rules.toTypedArray().also { rulesArray = it }
 			for (k in rules.indices) {
 				val r = rules[k]
 				val o = r.eval(types, paramContext)
@@ -936,7 +954,6 @@ class GeneralRouter : VehicleRouter {
 		internal var selectExpression: RouteAttributeExpression? = null
 		internal val filterTypes = KBitSet()
 		internal val filterNotTypes = KBitSet()
-		internal val evalFilterTypes = KBitSet()
 
 		internal val onlyTags: MutableSet<String> = LinkedHashSet()
 		internal val onlyNotTags: MutableSet<String> = LinkedHashSet()
@@ -1162,13 +1179,10 @@ class GeneralRouter : VehicleRouter {
 		private fun checkAllTypesShouldNotBePresent(types: KBitSet): Boolean = !filterNotTypes.intersects(types)
 
 		private fun checkAllTypesShouldBePresent(types: KBitSet): Boolean {
-			// Bitset method subset is missing "filterTypes.isSubset(types)"
-			// reset previous evaluation
-			// evalFilterTypes.clear(); // not needed same as or()
-			evalFilterTypes.or(filterTypes)
-			// evaluate bit intersection and check if filterTypes contained as set in types
-			evalFilterTypes.and(types)
-			return evalFilterTypes == filterTypes
+			// java does this as three operations on a scratch bit set - or the filter in, and the
+			// types, compare with the filter - which is "every filter type is among the types"; one
+			// pass without the scratch set, since this runs for every rule of every evaluation
+			return types.containsAll(filterTypes)
 		}
 	}
 
