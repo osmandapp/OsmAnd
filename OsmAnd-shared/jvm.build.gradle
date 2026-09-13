@@ -24,6 +24,7 @@ kotlin {
     def commonLoggingVersion = "1.2"
     def statelyVersion = "2.1.0"
     def ktorVersion = "3.1.3"
+    def junidecodeVersion = "0.1.1"
 
     sourceSets {
         commonMain {
@@ -45,6 +46,7 @@ kotlin {
                 implementation "net.sf.kxml:kxml2:$kxml2Version"
                 implementation "org.xerial:sqlite-jdbc:$sqliteJDBCVersion"
                 implementation "commons-logging:commons-logging:$commonLoggingVersion"
+                implementation "com.moparisthebest:junidecode:$junidecodeVersion"
                 implementation "io.ktor:ktor-client-okhttp:$ktorVersion"
             }
         }
