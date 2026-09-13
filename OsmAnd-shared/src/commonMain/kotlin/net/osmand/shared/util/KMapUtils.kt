@@ -2,6 +2,7 @@ package net.osmand.shared.util
 
 import co.touchlab.stately.collections.ConcurrentMutableMap
 import net.osmand.shared.data.KLatLon
+import net.osmand.shared.data.KQuadPointDouble
 import net.osmand.shared.data.KQuadRect
 import net.osmand.shared.extensions.toDegrees
 import net.osmand.shared.extensions.toRadians
@@ -487,6 +488,31 @@ object KMapUtils {
 			diff += 360
 		}
 		return diff
+	}
+
+	/**
+	 * Where a point projects onto the segment between two others, clamped to its ends, in 31 coords.
+	 */
+	fun getProjectionPoint31(px: Int, py: Int, st31x: Int, st31y: Int, end31x: Int, end31y: Int): KQuadPointDouble {
+		// st31x, st31y - A, end31x, end31y - B, px, py - C
+		val tWidth = getTileWidth(py)
+		// Scalar multiplication between (AB, AC)
+		val projection = (end31x - st31x) * tWidth * (px - st31x) * tWidth +
+				(end31y - st31y) * tWidth * (py - st31y) * tWidth
+		val mDist = squareRootDist31(end31x, end31y, st31x, st31y)
+		var pry = end31y.toDouble()
+		var prx = end31x.toDouble()
+		if (projection < 0) {
+			prx = st31x.toDouble()
+			pry = st31y.toDouble()
+		} else if (projection >= mDist * mDist) {
+			prx = end31x.toDouble()
+			pry = end31y.toDouble()
+		} else {
+			prx = st31x + (end31x - st31x) * (projection / (mDist * mDist))
+			pry = st31y + (end31y - st31y) * (projection / (mDist * mDist))
+		}
+		return KQuadPointDouble(prx, pry)
 	}
 
 	fun squareRootDist31(x1: Int, y1: Int, x2: Int, y2: Int): Double {
