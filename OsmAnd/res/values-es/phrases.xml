@@ -1951,11 +1951,11 @@
     <string name="poi_power_supply_nema_5_15">Suministro eléctrico (enchufe): NEMA 5-15</string>
     <string name="poi_capacity_tents">Carpas máximas</string>
     <string name="poi_capacity_caravans">Caravanas máximas</string>
-    <string name="poi_dog_yes">Perros: permitido</string>
-    <string name="poi_dog_no">Perros: prohibido</string>
-    <string name="poi_refugee_yes">Servicios para refugiados</string>
+    <string name="poi_dog_yes">Perros permitidos</string>
+    <string name="poi_dog_no">Perros no permitidos</string>
+    <string name="poi_refugee_yes">Comodidades para refugiados</string>
     <string name="poi_refugee_no">Servicios para refugiados: no</string>
-    <string name="poi_social_facility_group_home">Grupo residencial</string>
+    <string name="poi_social_facility_group_home">Hogar colectivo</string>
     <string name="poi_social_facility_assisted_living">Vida asistida</string>
     <string name="poi_social_facility_outreach">Alcance</string>
     <string name="poi_social_facility_food_bank">Banco de alimentos</string>
@@ -2054,7 +2054,7 @@
     <string name="poi_animal_training">Amaestramiento de animales</string>
     <string name="poi_animal_training_dog">Canino</string>
     <string name="poi_animal_training_horse">Equino</string>
-    <string name="poi_horse_yes">Caballos: permitido</string>
+    <string name="poi_horse_yes">Sí</string>
     <string name="poi_horse_no">Caballos: prohibido</string>
     <string name="poi_animal_yes">Animales: permitido</string>
     <string name="poi_animal_no">Animales: prohibido</string>
@@ -3719,7 +3719,7 @@
     <string name="poi_mofa_no">Acceso para bicimotos: no</string>
     <string name="poi_coach_yes">Acceso para autobuses de larga distancia: sí</string>
     <string name="poi_coach_no">Acceso para autobuses de larga distancia: no</string>
-    <string name="poi_ski_yes">Acceso para esquís: sí</string>
+    <string name="poi_ski_yes">Sí</string>
     <string name="poi_ski_no">Acceso para esquís: no</string>
     <string name="poi_snowmobile_private">Acceso para motonieves: privado</string>
     <string name="poi_snowmobile_no">Acceso para motonieves: no</string>
@@ -4929,7 +4929,7 @@
     <string name="poi_climbing_area">Área de escalada</string>
     <string name="poi_climbing_route">Ruta de escalada</string>
     <string name="poi_climbing_route_bottom">Ruta de escalada inferior</string>
-    <string name="poi_cafe_yes">Sí</string>
+    <string name="poi_cafe_yes">Café: sí</string>
     <string name="poi_sled_yes">Trineo: sí</string>
     <string name="poi_sled_no">Trineo: no</string>
     <string name="poi_dog_sled_yes">Trineo de perros: sí</string>
