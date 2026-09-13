@@ -1,6 +1,8 @@
 package net.osmand.shared.util.collections
 
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmOverloads
+import kotlin.native.ObjCName
 
 /**
  * Primitive `int` -> object map without boxing of keys.
@@ -366,6 +368,11 @@ class KTIntObjectIterator<V : Any> internal constructor(private val map: KTIntOb
 		cursor++
 	}
 
+	// Exported to Objective-C as intKey: a primitive -key next to the app's own -key methods that return
+	// an object gives the selector two result types, and clang refuses every [v key] on an untyped
+	// receiver under ARC. The Kotlin name stays key.
+	@OptIn(ExperimentalObjCName::class)
+	@ObjCName("intKey")
 	fun key(): Int {
 		check(current >= 0) { "advance() must be called first" }
 		return map.keysArr[current]
