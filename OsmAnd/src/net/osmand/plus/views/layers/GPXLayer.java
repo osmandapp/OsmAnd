@@ -87,6 +87,7 @@ import net.osmand.router.RouteSegmentResult;
 import net.osmand.shared.data.KQuadRect;
 import net.osmand.shared.gpx.*;
 import net.osmand.shared.gpx.GpxDbHelper;
+import net.osmand.shared.gpx.enums.GpxLineStyleType;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.io.KFile;
@@ -1400,6 +1401,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					|| mapActivityInvalidated || invalidated || newTsRenderer || !renderedSegments.contains(ts);
 			if (ts.getRenderer() instanceof RenderableSegment renderableSegment) {
 				updated |= renderableSegment.setTrackParams(color, width, coloringType, routeIndoAttribute, colorPalette);
+				GpxLineStyleType lineStyleType = selected
+						? appearanceHelper.getLineStyleTypeForTrack(gpxFile, gpxItem, dirItem)
+						: GpxLineStyleType.SOLID;
 				if (hasMapRenderer || coloringType.isRouteInfoAttribute()) {
 					boolean showArrows = appearanceHelper.isShowArrowsForTrack(gpxFile, gpxItem, dirItem, selected);
 					if (coloringType.isRouteInfoAttribute()) {
@@ -1412,19 +1416,22 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					}
 					updated |= renderableSegment.setDrawArrows(showArrows);
 					updated |= renderableSegment.setTrack3DStyle(track3DStyle);
+					updated |= renderableSegment.setLineStyleType(lineStyleType);
 					if (updated || !hasMapRenderer) {
 						float[] intervals = null;
 						PathEffect pathEffect = paint.getPathEffect();
 						if (pathEffect instanceof OsmandDashPathEffect) {
 							intervals = ((OsmandDashPathEffect) pathEffect).getIntervals();
 						}
+						intervals = getLineStyleIntervals(lineStyleType, paint.getStrokeWidth(), intervals);
 						boolean recreateSegments = invalidated || boundsChanged;
 						renderableSegment.drawGeometry(canvas, tileBox, correctedQuadRect, paint.getColor(),
 								paint.getStrokeWidth(), intervals, showArrows, track3DStyle, recreateSegments);
 						renderedSegments.add(ts);
 					}
 				} else {
-					renderableSegment.drawSegment(view.getZoom(), paint, canvas, tileBox);
+					renderableSegment.setLineStyleType(lineStyleType);
+					renderableSegment.drawSegment(view.getZoom(), getLineStylePaint(paint, lineStyleType), canvas, tileBox);
 				}
 			}
 		}
@@ -1942,5 +1949,27 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			customObjectsDelegate.setCustomMapObjects(gpxFiles);
 			getApplication().getOsmandMap().refreshMap();
 		}
+	}
+
+	@Nullable
+	private float[] getLineStyleIntervals(@NonNull GpxLineStyleType lineStyleType, float strokeWidth,
+	                                      @Nullable float[] defaultIntervals) {
+		float interval = Math.max(strokeWidth, 1f);
+		return switch (lineStyleType) {
+			case SOLID -> defaultIntervals;
+			case DASHED -> new float[] {interval * 0.75f, interval * 1.75f};
+			case DOTTED -> new float[] {0.1f, interval};
+		};
+	}
+
+	@NonNull
+	private Paint getLineStylePaint(@NonNull Paint source, @NonNull GpxLineStyleType lineStyleType) {
+		float[] intervals = getLineStyleIntervals(lineStyleType, source.getStrokeWidth(), null);
+		if (intervals == null) {
+			return source;
+		}
+		Paint paint = new Paint(source);
+		paint.setPathEffect(new OsmandDashPathEffect(intervals, 0));
+		return paint;
 	}
 }

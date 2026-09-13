@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.core.jni.QListFColorARGB;
 import net.osmand.core.jni.VectorLinesCollection;
+import net.osmand.plus.render.OsmandDashPathEffect;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.layers.MapTileLayer;
@@ -167,6 +168,7 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 			strokePaint.setShader(gradient);
 			strokePaint.setStrokeWidth(style.width);
 			strokePaint.setAlpha(0xFF);
+			applyDashPattern(strokePaint, style.getDashPattern());
 			canvas.drawPath(pathData.path, strokePaint);
 		}
 	}
@@ -175,7 +177,12 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 		Paint paint = getContext().getCustomPaint();
 		paint.setColor(pathData.style.color);
 		paint.setStrokeWidth(pathData.style.width);
+		applyDashPattern(paint, pathData.style.getDashPattern());
 		canvas.drawPath(pathData.path, paint);
+	}
+
+	private void applyDashPattern(@NonNull Paint paint, @Nullable float[] dashPattern) {
+		paint.setPathEffect(dashPattern != null ? new OsmandDashPathEffect(dashPattern, 0) : null);
 	}
 
 	@Override

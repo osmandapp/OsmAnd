@@ -11,6 +11,7 @@ import static net.osmand.shared.gpx.GpxParameter.COLOR;
 import static net.osmand.shared.gpx.GpxParameter.COLORING_TYPE;
 import static net.osmand.shared.gpx.GpxParameter.COLOR_PALETTE;
 import static net.osmand.shared.gpx.GpxParameter.ELEVATION_METERS;
+import static net.osmand.shared.gpx.GpxParameter.LINE_STYLE;
 import static net.osmand.shared.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.shared.gpx.GpxParameter.SHOW_START_FINISH;
 import static net.osmand.shared.gpx.GpxParameter.SPLIT_INTERVAL;
@@ -68,6 +69,7 @@ import net.osmand.plus.track.cards.ShowStartFinishCard;
 import net.osmand.plus.track.cards.SplitIntervalCard;
 import net.osmand.plus.track.cards.Track3DCard;
 import net.osmand.plus.track.fragments.controller.TrackColorController;
+import net.osmand.plus.track.fragments.controller.TrackLineStyleController;
 import net.osmand.plus.track.fragments.controller.TrackWidthController;
 import net.osmand.plus.track.fragments.controller.TrackWidthController.ITrackWidthSelectedListener;
 import net.osmand.plus.track.helpers.GpxAppearanceHelper;
@@ -86,6 +88,7 @@ import net.osmand.shared.gpx.GpxDbHelper;
 import net.osmand.shared.gpx.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.io.KFile;
+import net.osmand.shared.gpx.enums.GpxLineStyleType;
 import net.osmand.shared.palette.domain.PaletteConstants;
 import net.osmand.shared.palette.domain.PaletteItem;
 import net.osmand.shared.routing.ColoringType;
@@ -122,6 +125,8 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	private View controlButtons;
 	private View view;
 	private Track3DCard track3DCard;
+	private MultiStateCard colorCard;
+	private HeadedContentCard lineStyleCard;
 
 	@Override
 	public int getMainLayoutId() {
@@ -463,10 +468,16 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	public void onColoringStyleSelected(@Nullable ColoringStyle coloringStyle) {
 		if (coloringStyle != null) {
 			trackDrawInfo.setColoringStyle(coloringStyle);
+			if (!coloringStyle.getType().isTrackSolid() && trackDrawInfo.getLineStyleType() != GpxLineStyleType.SOLID) {
+				trackDrawInfo.setLineStyleType(GpxLineStyleType.SOLID);
+			}
 			View saveButton = view.findViewById(R.id.right_bottom_button);
 			saveButton.setEnabled(isAvailableInSubscription(app, coloringStyle));
 			updateColorItems();
 			updateGradientPalette(coloringStyle);
+			if (lineStyleCard != null) {
+				lineStyleCard.update();
+			}
 		}
 	}
 
@@ -703,6 +714,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			settings.CURRENT_TRACK_ROUTE_INFO_ATTRIBUTE.set(trackDrawInfo.getRouteInfoAttribute());
 			settings.CURRENT_TRACK_WIDTH.set(trackDrawInfo.getWidth());
 			settings.CURRENT_TRACK_SHOW_ARROWS.set(trackDrawInfo.isShowArrows());
+			settings.CURRENT_TRACK_LINE_STYLE.set(trackDrawInfo.getLineStyleType().getTypeName());
 			settings.CURRENT_TRACK_SHOW_START_FINISH.set(trackDrawInfo.isShowStartFinish());
 			settings.CURRENT_TRACK_3D_VISUALIZATION_TYPE.set(trackDrawInfo.getTrackVisualizationType().getTypeName());
 			settings.CURRENT_TRACK_3D_WALL_COLORING_TYPE.set(trackDrawInfo.getTrackWallColorType().getTypeName());
@@ -714,6 +726,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			gpxDataItem.setParameter(COLOR, trackDrawInfo.getColor());
 			gpxDataItem.setParameter(WIDTH, trackDrawInfo.getWidth());
 			gpxDataItem.setParameter(SHOW_ARROWS, trackDrawInfo.isShowArrows());
+			gpxDataItem.setParameter(LINE_STYLE, trackDrawInfo.getLineStyleType().getTypeName());
 			gpxDataItem.setParameter(SHOW_START_FINISH, trackDrawInfo.isShowStartFinish());
 			gpxDataItem.setParameter(SPLIT_TYPE, GpxSplitType.getSplitTypeByTypeId(trackDrawInfo.getSplitType()).getType());
 			gpxDataItem.setParameter(SPLIT_INTERVAL, trackDrawInfo.getSplitInterval());
@@ -796,12 +809,19 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			inflate(R.layout.list_item_divider_basic, container, true);
 
 			TrackColorController trackColorController = getColorCardController();
-			addCard(container, new MultiStateCard(mapActivity, trackColorController));
+			colorCard = new MultiStateCard(mapActivity, trackColorController);
+			addCard(container, colorCard);
 
 			inflate(R.layout.list_item_divider_basic, container, true);
 
 			TrackWidthController trackWidthController = getWidthCardController();
 			addCard(container, new HeadedContentCard(mapActivity, trackWidthController));
+
+			inflate(R.layout.list_item_divider_basic, container, true);
+
+			TrackLineStyleController lineStyleController = getLineStyleCardController();
+			lineStyleCard = new HeadedContentCard(mapActivity, lineStyleController);
+			addCard(container, lineStyleCard);
 
 			inflate(R.layout.list_item_divider_basic, container, true);
 
@@ -832,6 +852,17 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			}
 		};
 		return TrackWidthController.getInstance(app, trackDrawInfo, onNeedScrollListener, this);
+	}
+
+	private TrackLineStyleController getLineStyleCardController() {
+		return new TrackLineStyleController(app, trackDrawInfo, this::onTrackLineStyleSelected);
+	}
+
+	private void onTrackLineStyleSelected(@NonNull GpxLineStyleType style) {
+		if (colorCard != null) {
+			colorCard.update();
+		}
+		refreshMap();
 	}
 
 	public List<GpxDisplayGroup> getGpxDisplayGroups() {
