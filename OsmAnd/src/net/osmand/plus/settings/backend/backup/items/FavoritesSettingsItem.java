@@ -155,11 +155,8 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 		favoritesHelper.runBulkUpdate(this::applyGroups);
 	}
 
-	/**
-	 * Reports whether every group this item applied is present locally. Backup import must not
-	 * record a download as complete when it is not: the group has no local file, and the next
-	 * sync would read that as a deletion and remove the group from the Cloud.
-	 */
+	/** Every group applied must be present once apply() has reloaded the groups from disk. */
+	@Override
 	public boolean isAppliedLocally() {
 		for (String name : appliedGroupNames) {
 			if (favoritesHelper.getGroup(name) == null) {
