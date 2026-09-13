@@ -49,6 +49,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 
 	private FavouritesHelper favoritesHelper;
 	private FavoriteGroup personalGroup;
+	private List<String> appliedGroupNames;
 	@Nullable
 	private Map<String, String> hrefRewrites;
 
@@ -69,6 +70,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 		super.init();
 		favoritesHelper = app.getFavoritesHelper();
 		existingItems = new ArrayList<>(favoritesHelper.getFavoriteGroups());
+		appliedGroupNames = new ArrayList<>();
 	}
 
 	@NonNull
@@ -150,6 +152,21 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 
 	@Override
 	public void apply() {
+		favoritesHelper.runBulkUpdate(this::applyGroups);
+	}
+
+	/** Every group applied must be present once apply() has reloaded the groups from disk. */
+	@Override
+	public boolean isAppliedLocally() {
+		for (String name : appliedGroupNames) {
+			if (favoritesHelper.getGroup(name) == null) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private void applyGroups() {
 		List<FavoriteGroup> newItems = getNewItems();
 		if (personalGroup != null) {
 			duplicateItems.add(personalGroup);
@@ -189,6 +206,8 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 							group.getIconName(), group.getBackgroundType());
 				}
 				localGroup.copyAppearance(group);
+				// addFavoriteGroup() may resolve the name, so collect it from the local group.
+				appliedGroupNames.add(localGroup.getName());
 
 				PointsGroup pointsGroup = group.toPointsGroup(app);
 				for (FavouritePoint point : group.getPoints()) {
