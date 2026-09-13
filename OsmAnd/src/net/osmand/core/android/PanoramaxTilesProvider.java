@@ -156,8 +156,11 @@ public class PanoramaxTilesProvider extends interface_ImageMapLayerProvider {
 			int z = requestZoom;
 			Bitmap bitmapFromCache = panoramaxBitmapTileCache.getTile(x, y, z);
 			if (bitmapFromCache != null) {
-				AreaI tileBBox31 = Utilities.tileBoundingBox31(swigTileId, swigZoom);
-				lazyLoadMap.put(tileBBox31, new TileRequest(x, y, z));
+				// Only picture tiles need lazy point loading.
+				if (requestZoom >= MIN_POINTS_ZOOM) {
+					AreaI tileBBox31 = Utilities.tileBoundingBox31(swigTileId, swigZoom);
+					lazyLoadMap.put(tileBBox31, new TileRequest(x, y, z));
+				}
 				byte[] bytes = AndroidUtils.getByteArrayFromBitmap(bitmapFromCache);
 				SwigUtilities.appendToQByteArray(byteArray, bytes);
 				return (long) bitmapFromCache.getHeight() << 32 | bitmapFromCache.getWidth();
@@ -492,6 +495,9 @@ public class PanoramaxTilesProvider extends interface_ImageMapLayerProvider {
 			}
 		}
 		if (tileBBox31 == null || request == null) {
+			return;
+		}
+		if (request.zoom < MIN_IMAGE_LAYER_ZOOM) {
 			return;
 		}
 
