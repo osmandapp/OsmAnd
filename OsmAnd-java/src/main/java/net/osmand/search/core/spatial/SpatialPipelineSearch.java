@@ -2,6 +2,7 @@ package net.osmand.search.core.spatial;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -11,6 +12,8 @@ import java.util.Map;
 import gnu.trove.iterator.TLongObjectIterator;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.hash.TIntHashSet;
+import net.osmand.binary.NameIndexReader;
+import net.osmand.data.LatLon;
 import net.osmand.search.core.HashQuadTree;
 import net.osmand.search.core.HashSkipTileQuadTree;
 import net.osmand.search.core.HashSkipTileQuadTreeJoiner;
@@ -18,6 +21,7 @@ import net.osmand.search.core.spatial.SpatialSearchContext.SpatialSearchStats;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtomXY;
 import net.osmand.search.core.spatial.SpatialTextSearch.SpatialTextSearchSettings;
+import net.osmand.util.MapUtils;
 
 public class SpatialPipelineSearch {
 
@@ -636,7 +640,7 @@ public class SpatialPipelineSearch {
 		}
 		long time = System.nanoTime();
 		int nonCategoryRes = 0;
-		SpatialSearchResultsList stageList = createResultList(tokens, preResults);
+		SpatialSearchResultsList stageList = createResultList(tokens, limitSingleObjects(preResults));
 		stageList.loadObjectsAndCalcBuildings(ctx.searchContext);
 		if (ctx.isCancelled()) {
 			return true;
@@ -667,6 +671,46 @@ public class SpatialPipelineSearch {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * A one-word query of a popular category ("restaurant" finds 180K POIs): a POI found by its category only and
+	 * without rating scores by its distance alone, so only the nearest of them are read. Everything else is read:
+	 * a POI named by the word, a rated one, a street, a city.
+	 */
+	private List<SpatialPipelineObjectRes> limitSingleObjects(List<SpatialPipelineObjectRes> preResults) {
+		int limit = ctx.settings.LIMIT_READ_SINGLE_OBJECTS;
+		LatLon l = ctx.searchContext.location;
+		if (limit <= 0 || preResults.size() <= limit || ctx.tokens.size() != 1 || ctx.searchContext.ranking == null
+				|| l == null) {
+			return preResults;
+		}
+		double[] dist = new double[preResults.size()];
+		int byCategory = 0;
+		for (int i = 0; i < preResults.size(); i++) {
+			SpatialPipelineObjectRes r = preResults.get(i);
+			NameIndexAtom a = r.refs1 == null && r.refs2 == null ? r.atoms[0] : null;
+			if (a != null && a.isPOI() && a.elo <= 0 && a.name.startsWith(NameIndexReader.POI_CATEGORY_PREFIX)) {
+				dist[i] = MapUtils.getDistance(l, MapUtils.get31LatitudeY(a.coords.y16 << 15),
+						MapUtils.get31LongitudeX(a.coords.x16 << 15));
+				byCategory++;
+			} else {
+				dist[i] = -1;
+			}
+		}
+		if (byCategory <= limit) {
+			return preResults;
+		}
+		double[] sorted = dist.clone();
+		Arrays.sort(sorted);
+		double max = sorted[preResults.size() - byCategory + limit - 1];
+		List<SpatialPipelineObjectRes> res = new ArrayList<>();
+		for (int i = 0; i < preResults.size(); i++) {
+			if (dist[i] <= max) {
+				res.add(preResults.get(i));
+			}
+		}
+		return res;
 	}
 
 	private SpatialSearchResultsList createResultList(List<SpatialSearchToken> tokens,
