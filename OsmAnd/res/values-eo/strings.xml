@@ -5346,4 +5346,8 @@
     <string name="rendering_attr_surface_clay_name">Argilo</string>
     <string name="rendering_attr_surface_laterite_name">Laterito</string>
     <string name="astro_eclipse_column_below_horizon">subhorizonte</string>
+    <string name="quick_action_add_track">Aldoni spuron</string>
+    <string name="quick_action_tracks_select_descr">Aldoni unu aŭ pli spurojn por montri/kaŝi ilin sur la mapo per unu frapeto.</string>
+    <string name="quick_action_tracks_always_ask_descr">Frapeti tiun ĉi agon montros la liston de spuroj, el kiu vi povos elekti unu aŭ pli spurojn por montri aŭ kaŝi.</string>
+    <string name="quick_action_all_tracks">Ĉiuj spuroj</string>
 </resources>
