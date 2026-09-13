@@ -6,7 +6,9 @@ import net.osmand.shared.extensions.nanoTime
 import net.osmand.shared.util.KMapUtils
 import net.osmand.shared.util.LoggerFactory
 import net.osmand.shared.util.collections.KTIntArrayList
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
+import kotlin.native.ObjCName
 import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 import kotlin.math.abs
@@ -503,6 +505,10 @@ class RoutePlannerFrontEnd {
 		// Check issue #8649
 		const val GPS_POSSIBLE_ERROR = 7.0
 
+		// exported to Objective-C under another name: a macro of the same name in the C++ core headers
+		// would otherwise break every file that includes both
+		@OptIn(ExperimentalObjCName::class)
+		@ObjCName("traceRouting")
 		@JvmField
 		var TRACE_ROUTING = false
 
