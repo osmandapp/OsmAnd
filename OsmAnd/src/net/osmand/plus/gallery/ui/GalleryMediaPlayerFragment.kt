@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.RectF
 import android.graphics.SurfaceTexture
 import android.media.AudioAttributes
 import android.media.AudioFocusRequest
@@ -33,10 +34,12 @@ import android.widget.LinearLayout
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.view.OneShotPreDrawListener
 import net.osmand.PlatformUtil
 import net.osmand.plus.R
 import net.osmand.plus.base.BaseFullScreenFragment
 import net.osmand.plus.gallery.controller.GalleryPagerController
+import net.osmand.plus.gallery.ui.viewer.MediaViewerPage
 import net.osmand.plus.utils.InsetTarget.Type
 import net.osmand.plus.utils.InsetTargetsCollection
 import net.osmand.shared.media.domain.MediaItem
@@ -44,7 +47,7 @@ import net.osmand.shared.media.domain.MediaType
 import kotlin.math.abs
 import kotlin.math.min
 
-class GalleryMediaPlayerFragment : BaseFullScreenFragment() {
+class GalleryMediaPlayerFragment : BaseFullScreenFragment(), MediaViewerPage {
 
 	private var position = 0
 	private var controller: GalleryPagerController? = null
@@ -149,6 +152,41 @@ class GalleryMediaPlayerFragment : BaseFullScreenFragment() {
 		return super.getInsetTargets().apply { removeType(Type.ROOT_INSET) }
 	}
 
+	override fun contentRect(): RectF? {
+		if (view == null) return null
+		if (!isVideo) {
+			val width = min(rootView.width.toFloat(), rootView.height * 4f / 3f)
+			val height = width * 3f / 4f
+			return RectF(0f, 0f, width, height).apply {
+				offset(rootView.width / 2f - width / 2f, rootView.height / 2f - height / 2f)
+			}
+		}
+		if (textureView.layoutParams.width > 0 && textureView.width > 0) {
+			return RectF(0f, 0f, textureView.width.toFloat(), textureView.height.toFloat()).apply {
+				textureView.matrix.mapRect(this)
+				offset(textureView.left.toFloat(), textureView.top.toFloat())
+			}
+		}
+		val poster = posterView.drawable ?: return null
+		if (posterView.visibility != View.VISIBLE || poster.intrinsicWidth <= 0 || poster.intrinsicHeight <= 0) return null
+		return RectF(0f, 0f, poster.intrinsicWidth.toFloat(), poster.intrinsicHeight.toFloat()).apply {
+			posterView.imageMatrix.mapRect(this)
+			offset(posterView.left.toFloat(), posterView.top.toFloat())
+		}
+	}
+
+	override fun canScrollVertically(direction: Int): Boolean = isVideo && zoomScale > 1f
+
+	override fun onPreviewSettled() {
+		if (isVideo && zoomScale > 1f) resetZoom(animated = true)
+	}
+
+	private fun notifyContentChanged(view: View) {
+		OneShotPreDrawListener.add(view) {
+			(parentFragment as? GalleryPhotoPagerFragment)?.onPageContentChanged(this)
+		}
+	}
+
 	private fun setupArtwork() {
 		val item = mediaItem ?: return
 		if (isVideo) {
@@ -156,6 +194,7 @@ class GalleryMediaPlayerFragment : BaseFullScreenFragment() {
 			app.galleryHelper.posterLoader.loadPoster(item) { poster ->
 				if (poster != null && !playbackStarted) {
 					posterView.setImageBitmap(poster)
+					notifyContentChanged(posterView)
 				}
 			}
 		} else {
@@ -729,6 +768,7 @@ class GalleryMediaPlayerFragment : BaseFullScreenFragment() {
 				Gravity.CENTER
 			)
 			textureView.layoutParams = params
+			notifyContentChanged(textureView)
 		}
 	}
 

@@ -15,7 +15,7 @@ import net.osmand.plus.gallery.ui.motion.GallerySectionCardTracks
 
 class GalleryItemAnimator(
 	private val recyclerView: RecyclerView,
-	private val adapter: GalleryGridAdapter,
+	private val adapter: GalleryGridAdapter?,
 	private val cards: GallerySectionCardDecoration?,
 	private val animationsEnabled: Boolean
 ) : SimpleItemAnimator() {
@@ -61,14 +61,14 @@ class GalleryItemAnimator(
 			pre.clear()
 			post.clear()
 		}
-		pre[holder] = snapshot(holder, adapter.getBoundSectionBoundary(holder))
+		pre[holder] = snapshot(holder, adapter?.getBoundSectionBoundary(holder))
 		return super.recordPreLayoutInformation(state, holder, changeFlags, payloads)
 	}
 
 	override fun recordPostLayoutInformation(state: RecyclerView.State, holder: RecyclerView.ViewHolder): ItemHolderInfo {
 		val position = recyclerView.getChildAdapterPosition(holder.itemView)
-		val boundary = (if (position in 0 until adapter.itemCount) adapter.getSectionBoundary(position) else null)
-			?: adapter.getBoundSectionBoundary(holder)
+		val boundary = (if (adapter != null && position in 0 until adapter.itemCount) adapter.getSectionBoundary(position) else null)
+			?: adapter?.getBoundSectionBoundary(holder)
 		post[holder] = snapshot(holder, boundary)
 		return super.recordPostLayoutInformation(state, holder)
 	}

@@ -59,7 +59,8 @@ object MediaItemMenu {
 			})
 			add(item(app, R.string.shared_string_delete, R.drawable.ic_action_delete_outlined, nightMode, divider = true, warning = true) {
 				MediaDialogs.delete(activity, 1, nightMode) { delete(activity, listOf(entry)) {
-					if (!includeView) activity.supportFragmentManager.popBackStack()
+					if (!includeView) (activity.supportFragmentManager.findFragmentByTag(GalleryPhotoPagerFragment.TAG)
+						as? GalleryPhotoPagerFragment)?.dismissAllowingStateLoss()
 				} }
 			})
 		}
