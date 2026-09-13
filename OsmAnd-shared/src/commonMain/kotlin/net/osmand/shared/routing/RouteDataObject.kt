@@ -24,8 +24,14 @@ import kotlin.math.atan2
  */
 class RouteDataObject {
 
+	/**
+	 * The region the road was read from. Null is possible and expected: the C++ router returns
+	 * roads whose region it could not match back, and NativeLibrary.initRouteRegion fixes those up
+	 * afterwards. Java had this as a plain field with the same freedom - every dereference below
+	 * would throw there too, which is what the !! reproduce.
+	 */
 	@JvmField
-	val region: RouteRegion
+	val region: RouteRegion?
 
 	// all these arrays supposed to be immutable!
 	// These fields accessible from C++
@@ -69,11 +75,11 @@ class RouteDataObject {
 	@JvmField
 	var heightByCurrentLocation: Float = Float.NaN
 
-	constructor(region: RouteRegion) {
+	constructor(region: RouteRegion?) {
 		this.region = region
 	}
 
-	constructor(region: RouteRegion, nameIds: IntArray, nameValues: Array<String>) {
+	constructor(region: RouteRegion?, nameIds: IntArray, nameValues: Array<String>) {
 		this.region = region
 		this.nameIds = nameIds
 		if (nameIds.isNotEmpty()) {
@@ -100,7 +106,7 @@ class RouteDataObject {
 	}
 
 	/** The rule [id] stands for. Roads only carry ids their own region defines. */
-	private fun rule(id: Int): RouteTypeRule = region.quickGetEncodingRule(id)!!
+	private fun rule(id: Int): RouteTypeRule = region!!.quickGetEncodingRule(id)!!
 
 	/** True when the two roads carry the same geometry, tags and restrictions. */
 	fun compareRoute(thatObj: RouteDataObject): Boolean {
@@ -298,20 +304,20 @@ class RouteDataObject {
 
 	fun getId(): Long = id
 
-	fun getName(): String? = names?.get(region.nameTypeRule)
+	fun getName(): String? = names?.get(region!!.nameTypeRule)
 
 	@JvmOverloads
 	fun getName(lang: String?, transliterate: Boolean = false): String? {
 		val names = this.names ?: return null
 		if (KAlgorithms.isEmpty(lang)) {
-			return names[region.nameTypeRule]
+			return names[region!!.nameTypeRule]
 		}
 		for (k in names.keys()) {
-			if (region.routeEncodingRules.size > k && "name:$lang" == region.routeEncodingRules[k]?.getTag()) {
+			if (region!!.routeEncodingRules.size > k && "name:$lang" == region!!.routeEncodingRules[k]?.getTag()) {
 				return names[k]
 			}
 		}
-		val nmDef = names[region.nameTypeRule]
+		val nmDef = names[region!!.nameTypeRule]
 		if (transliterate && !nmDef.isNullOrEmpty()) {
 			return KTransliterationHelper.transliterate(nmDef)
 		}
@@ -325,14 +331,14 @@ class RouteDataObject {
 	fun getRef(lang: String?, transliterate: Boolean, direction: Boolean): String? {
 		val names = this.names ?: return null
 		if (KAlgorithms.isEmpty(lang)) {
-			return names[region.refTypeRule]
+			return names[region!!.refTypeRule]
 		}
 		for (k in names.keys()) {
-			if (region.routeEncodingRules.size > k && "ref:$lang" == region.routeEncodingRules[k]?.getTag()) {
+			if (region!!.routeEncodingRules.size > k && "ref:$lang" == region!!.routeEncodingRules[k]?.getTag()) {
 				return names[k]
 			}
 		}
-		val refDefault = names[region.refTypeRule]
+		val refDefault = names[region!!.refTypeRule]
 		if (transliterate && !refDefault.isNullOrEmpty()) {
 			return KTransliterationHelper.transliterate(refDefault)
 		}
@@ -346,8 +352,8 @@ class RouteDataObject {
 		var refDefault: String? = null
 
 		for (k in names.keys()) {
-			if (region.routeEncodingRules.size > k) {
-				val tag = region.routeEncodingRules[k]?.getTag()
+			if (region!!.routeEncodingRules.size > k) {
+				val tag = region!!.routeEncodingRules[k]?.getTag()
 				if (refTag == tag) {
 					return names[k]?.let { KAlgorithms.splitAndClearRepeats(it, ";") }
 				}
@@ -378,8 +384,8 @@ class RouteDataObject {
 		var highestPriorityNameKey = -1
 		var highestPriority = Int.MAX_VALUE
 		for (nameKey in names.keys()) {
-			if (region.routeEncodingRules.size > nameKey) {
-				val tag = region.routeEncodingRules[nameKey]?.getTag()
+			if (region!!.routeEncodingRules.size > nameKey) {
+				val tag = region!!.routeEncodingRules[nameKey]?.getTag()
 				val priority = tagPriorities[tag]
 				if (priority != null && priority < highestPriority) {
 					highestPriority = priority
@@ -626,7 +632,7 @@ class RouteDataObject {
 		for (point in pointTypes) {
 			if (point != null) {
 				for (t in point) {
-					if (region.routeEncodingRules[t]?.getValue() == "motorway_junction") {
+					if (region!!.routeEncodingRules[t]?.getValue() == "motorway_junction") {
 						return true
 					}
 				}
@@ -639,9 +645,9 @@ class RouteDataObject {
 
 	fun getJunctionName(): String? = getValue(JUNCTION_NAME)
 
-	fun getNodeRef(): String? = getPointNameByTypeRule(region.refTypeRule)
+	fun getNodeRef(): String? = getPointNameByTypeRule(region!!.refTypeRule)
 
-	fun getNodeName(): String? = getPointNameByTypeRule(region.nameTypeRule)
+	fun getNodeName(): String? = getPointNameByTypeRule(region!!.nameTypeRule)
 
 	fun getExitRef(): String? = getJunctionRef() ?: getNodeRef()
 
@@ -650,7 +656,7 @@ class RouteDataObject {
 	fun hasTrafficLightAt(i: Int): Boolean {
 		val pointTypes = getPointTypes(i) ?: return false
 		for (pointType in pointTypes) {
-			if (region.routeEncodingRules[pointType]?.getValue()?.startsWith("traffic_signals") == true) {
+			if (region!!.routeEncodingRules[pointType]?.getValue()?.startsWith("traffic_signals") == true) {
 				return true
 			}
 		}
@@ -679,7 +685,7 @@ class RouteDataObject {
 		return null
 	}
 
-	fun getHighway(): String? = getHighway(types!!, region)
+	fun getHighway(): String? = getHighway(types!!, region!!)
 
 	fun hasPrivateAccess(profile: GeneralRouterProfile): Boolean {
 		for (type in types!!) {
@@ -889,7 +895,7 @@ class RouteDataObject {
 	fun hasNameTagStartsWith(tagStartsWith: String): Boolean {
 		val nameIds = this.nameIds ?: return false
 		for (nameId in nameIds) {
-			val rtr = region.quickGetEncodingRule(nameId)
+			val rtr = region!!.quickGetEncodingRule(nameId)
 			if (rtr != null && rtr.getTag().startsWith(tagStartsWith)) {
 				return true
 			}
