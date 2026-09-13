@@ -1,6 +1,8 @@
 package net.osmand.shared.util.collections
 
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmOverloads
+import kotlin.native.ObjCName
 
 /**
  * Primitive `long` -> object map without boxing of keys.
@@ -361,6 +363,11 @@ class KTLongObjectIterator<V : Any> internal constructor(private val map: KTLong
 		cursor++
 	}
 
+	// Exported to Objective-C as longKey: a primitive -key next to the app's own -key methods that return
+	// an object gives the selector two result types, and clang refuses every [v key] on an untyped
+	// receiver under ARC. The Kotlin name stays key.
+	@OptIn(ExperimentalObjCName::class)
+	@ObjCName("longKey")
 	fun key(): Long {
 		check(current >= 0) { "advance() must be called first" }
 		return map.keysArr[current]
