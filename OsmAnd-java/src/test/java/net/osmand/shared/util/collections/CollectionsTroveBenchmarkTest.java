@@ -14,6 +14,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.hash.TLongHashSet;
 
@@ -117,6 +118,78 @@ public class CollectionsTroveBenchmarkTest {
 			assertEquals(checksums[1], checksums[0]);
 			assertEquals(checksums[1], checksums[2]);
 			printRow(distribution.label, "KTLongObjectMap", shared, "TLongObjectHashMap", trove, "HashMap", boxed);
+		}
+	}
+
+	@Test
+	public void benchmarkIntObjectMap() {
+		System.out.println();
+		System.out.printf("### int -> object map, %d entries, %d lookups%n", ENTRIES, LOOKUPS);
+		printHeader();
+
+		for (IntKeyDistribution distribution : IntKeyDistribution.values()) {
+			int[] keys = distribution.keys(ENTRIES);
+			int[] probes = intProbeKeys(keys, LOOKUPS);
+			Object value = new Object();
+			long[] checksums = new long[3];
+
+			double shared = measure(() -> {
+				KTIntObjectMap<Object> map = new KTIntObjectMap<>(ENTRIES);
+				for (int key : keys) {
+					map.put(key, value);
+				}
+				long hits = 0;
+				for (int probe : probes) {
+					if (map.get(probe) != null) {
+						hits++;
+					}
+				}
+				long iterated = 0;
+				for (int key : map.keys()) {
+					iterated += key;
+				}
+				checksums[0] = hits * 31 + iterated;
+			});
+
+			double trove = measure(() -> {
+				TIntObjectHashMap<Object> map = new TIntObjectHashMap<>(ENTRIES);
+				for (int key : keys) {
+					map.put(key, value);
+				}
+				long hits = 0;
+				for (int probe : probes) {
+					if (map.get(probe) != null) {
+						hits++;
+					}
+				}
+				long iterated = 0;
+				for (int key : map.keys()) {
+					iterated += key;
+				}
+				checksums[1] = hits * 31 + iterated;
+			});
+
+			double boxed = measure(() -> {
+				HashMap<Integer, Object> map = new HashMap<>(ENTRIES * 2);
+				for (int key : keys) {
+					map.put(key, value);
+				}
+				long hits = 0;
+				for (int probe : probes) {
+					if (map.get(probe) != null) {
+						hits++;
+					}
+				}
+				long iterated = 0;
+				for (int key : map.keySet()) {
+					iterated += key;
+				}
+				checksums[2] = hits * 31 + iterated;
+			});
+
+			assertEquals(checksums[1], checksums[0]);
+			assertEquals(checksums[1], checksums[2]);
+			printRow(distribution.label, "KTIntObjectMap", shared, "TIntObjectHashMap", trove, "HashMap", boxed);
 		}
 	}
 
@@ -317,6 +390,42 @@ public class CollectionsTroveBenchmarkTest {
 			}
 			return keys;
 		}
+	}
+
+	private enum IntKeyDistribution {
+
+		/** Dense ids counted from zero, the shape of encoding rule and string table keys. */
+		DENSE_IDS("encoding rules"),
+
+		/** Uniformly spread keys, the friendly case for any hash function. */
+		RANDOM("random     ");
+
+		final String label;
+
+		IntKeyDistribution(String label) {
+			this.label = label;
+		}
+
+		int[] keys(int count) {
+			int[] keys = new int[count];
+			Random random = new Random(20260908L);
+			for (int i = 0; i < count; i++) {
+				keys[i] = this == DENSE_IDS ? i : random.nextInt();
+			}
+			return keys;
+		}
+	}
+
+	/** Half of the probes hit an existing key, half miss. */
+	private static int[] intProbeKeys(int[] keys, int count) {
+		int[] probes = new int[count];
+		Random random = new Random(1234L);
+		for (int i = 0; i < count; i++) {
+			probes[i] = (i & 1) == 0
+					? keys[random.nextInt(keys.length)]
+					: random.nextInt() | (1 << 30);
+		}
+		return probes;
 	}
 
 	/** Half of the probes hit an existing key, half miss. */
