@@ -25,18 +25,23 @@ public final class TestObf {
 	private TestObf() {
 	}
 
+	/** The obf files, in a fixed order: the turn lanes map first, then the routing maps by name. */
+	public static List<File> files() {
+		List<File> files = new ArrayList<>();
+		File resources = new File("src/test/resources");
+		files.add(new File(resources, "Turn_lanes_test.obf"));
+		File[] routing = new File(resources, "routing").listFiles((dir, name) -> name.endsWith(".obf"));
+		if (routing != null) {
+			Arrays.sort(routing);
+			files.addAll(Arrays.asList(routing));
+		}
+		return files;
+	}
+
 	public static synchronized List<BinaryMapIndexReader> readers() throws IOException {
 		if (readers == null) {
-			List<File> files = new ArrayList<>();
-			File resources = new File("src/test/resources");
-			files.add(new File(resources, "Turn_lanes_test.obf"));
-			File[] routing = new File(resources, "routing").listFiles((dir, name) -> name.endsWith(".obf"));
-			if (routing != null) {
-				Arrays.sort(routing);
-				files.addAll(Arrays.asList(routing));
-			}
 			List<BinaryMapIndexReader> opened = new ArrayList<>();
-			for (File f : files) {
+			for (File f : files()) {
 				if (f.exists()) {
 					opened.add(new BinaryMapIndexReader(new RandomAccessFile(f, "r"), f));
 				}
