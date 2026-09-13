@@ -216,9 +216,10 @@ public class PanoramaxPlugin extends OsmandPlugin {
 			}
 		};
 
+		// ConfigureMapFragment uses titleId as a view-cache key, so it must be unique.
 		adapter.addItem(new ContextMenuItem(PANORAMAX)
-				.setTitleId(R.string.street_level_imagery, mapActivity)
-				.setDescription("Panoramax")
+				.setTitleId(R.string.panoramax, mapActivity)
+				.setDescription(app.getString(R.string.street_level_imagery))
 				.setSelected(SHOW_PANORAMAX.get())
 				.setColor(app, SHOW_PANORAMAX.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_panoramax)
