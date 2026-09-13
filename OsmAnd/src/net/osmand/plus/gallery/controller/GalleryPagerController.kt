@@ -24,9 +24,12 @@ class GalleryPagerController(
 	}
 
 	fun openDetails(activity: FragmentActivity, item: MediaItem) {
-		if (activity.supportFragmentManager.findFragmentByTag(GalleryPhotoPagerFragment.TAG) == null) {
+		val viewer = activity.supportFragmentManager.findFragmentByTag(GalleryPhotoPagerFragment.TAG) as? GalleryPhotoPagerFragment
+		if (viewer != null) {
+			viewer.showDetails(item.id)
+		} else {
 			autoPlayItemId = null
-			GalleryPhotoPagerFragment.showInstance(activity, item.id)
+			GalleryPhotoPagerFragment.showInstance(activity, item.id, GalleryPhotoPagerFragment.STATE_PREVIEW)
 		}
 	}
 

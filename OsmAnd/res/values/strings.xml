@@ -11,6 +11,12 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="shared_string_file">File</string>
+	<string name="shared_string_format">Format</string>
+	<string name="shared_string_resolution">Resolution</string>
+	<string name="shared_string_attached_to">Attached to</string>
+	<string name="media_not_attached_title">Not attached to anything yet</string>
+	<string name="media_not_attached_descr">Attach this media to a favorite to see it on the map.</string>
 	<string name="detach_external_media_descr">The file will no longer be shown in this favorite. It stays on your device.</string>
 	<string name="detach_external_media_descr_plural">The files will no longer be shown in this favorite. They stay on your device.</string>
 	<string name="attach_to_track">Attach to track</string>
