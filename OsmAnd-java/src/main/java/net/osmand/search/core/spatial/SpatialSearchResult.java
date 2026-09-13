@@ -101,11 +101,16 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		});
 	}
 
-	SpatialSearchResultRef getFirstRef() {
+	public SpatialSearchResultRef getFirstRef() {
 		if (objs.size() > 0) {
 			return objs.get(0);
 		}
 		return null;
+	}
+
+	/** atoms of the combination this result stands for, one per query token */
+	public List<NameIndexAtom> getAtoms() {
+		return parent.getRawAtoms(parentInd);
 	}
 	
 	private MapObject getFirstRefObject(boolean useUnited) {
