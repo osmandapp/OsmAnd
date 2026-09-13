@@ -43,6 +43,9 @@ open class RoutingRequest(
 
 	// 2. Progress, and a route to lean on
 
+	/** Which side of the road the driver is on, which decides what a sharp turn is called. */
+	@JvmField var leftSideNavigation: Boolean = false
+
 	@JvmField var calculationProgress: RouteCalculationProgress? = null
 
 	@JvmField var precalculatedRouteDirection: PrecalculatedRouteDirection? = null
