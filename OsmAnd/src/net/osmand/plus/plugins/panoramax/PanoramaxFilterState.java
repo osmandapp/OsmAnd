@@ -48,10 +48,9 @@ public final class PanoramaxFilterState {
 	 * @return true when the tile feature must not be drawn.
 	 */
 	public boolean filtered(@Nullable Object data) {
-		if (!(data instanceof Map)) {
+		if (!(data instanceof Map<?, ?> userData)) {
 			return true;
 		}
-		Map<?, ?> userData = (Map<?, ?>) data;
 		if (enabled) {
 			if (!userKey.isEmpty()) {
 				Object accountId = userData.get(ACCOUNT_ID_KEY);
@@ -79,10 +78,9 @@ public final class PanoramaxFilterState {
 		if (this == o) {
 			return true;
 		}
-		if (!(o instanceof PanoramaxFilterState)) {
+		if (!(o instanceof PanoramaxFilterState other)) {
 			return false;
 		}
-		PanoramaxFilterState other = (PanoramaxFilterState) o;
 		return enabled == other.enabled
 				&& panoOnly == other.panoOnly
 				&& from == other.from
