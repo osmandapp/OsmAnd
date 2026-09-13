@@ -83,6 +83,10 @@ class RoutingContext : RoutingRequest {
 	// callback of processing segments
 	internal var visitor: RouteSegmentVisitor? = null
 
+	// what loadRouteSegment excludes while it collects the segments at a point; java allocates
+	// one per call, which the jvm's young generation makes free and Kotlin/Native's collector does not
+	private val excludeDuplicationsScratch = KTLongObjectMap<RouteDataObject>()
+
 	// old planner
 	@JvmField
 	var finalRouteSegment: FinalRouteSegment? = null
@@ -193,7 +197,8 @@ class RoutingContext : RoutingRequest {
 
 	fun loadRouteSegment(x31: Int, y31: Int, memoryLimit: Long, reverseWaySearch: Boolean): RouteSegment? {
 		val tileId = getRoutingTile(x31, y31, memoryLimit)
-		val excludeDuplications = KTLongObjectMap<RouteDataObject>()
+		val excludeDuplications = excludeDuplicationsScratch
+		excludeDuplications.clear()
 		var original: RouteSegment? = null
 		val subregions = indexedSubregions[tileId]
 		if (subregions != null) {
