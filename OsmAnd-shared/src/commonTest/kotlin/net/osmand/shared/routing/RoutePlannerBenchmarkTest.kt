@@ -117,24 +117,25 @@ class RoutePlannerBenchmarkTest {
 		const val MEASURED_ROUNDS = 2
 
 		val OBF_DIRECTORIES = listOf(
-			"/Users/crimean/Library/Developer/CoreSimulator/Devices/04D37C3C-5D03-45A0-8B2D-69512DE2391C/data/Containers/Data/Application/DA50C80C-B421-4B6C-9009-AE8109DA6E6E/Documents/Resources",
+			"/Users/crimean/tmp/maps",
 			"/Users/crimean/Library/Developer/CoreSimulator/Devices/2B4A49F7-4769-4207-93AD-2DFF3B315735/data/Containers/Data/Application/1D97C071-99BF-41BC-BC02-A1CF7EEF3BCD/Documents/Resources",
 		)
 
-		private const val KYIV = "Ukraine_kyiv-city_europe.obf"
-		private const val MOSCOW = "Russia_moscow_asia.obf"
+		private const val NOORD_HOLLAND = "Netherlands_noord-holland_europe.obf"
 		private const val BAVARIA = "Germany_bayern_upper-bavaria_europe.obf"
+		private const val LOWER_AUSTRIA = "Austria_lower-austria_europe.obf"
 
 		/** The same list as in OsmAnd-java's `RoutePlannerBenchmarkTest`; keep the two together. */
 		val ROUTES = listOf(
-			Route("kyiv centre 3 km", listOf(KYIV), KLatLon(50.4501, 30.5234), KLatLon(50.4400, 30.4890)),
-			Route("kyiv airport 35 km", listOf(KYIV), KLatLon(50.4501, 30.5234), KLatLon(50.3450, 30.8947)),
-			Route("moscow sheremetyevo 35 km", listOf(MOSCOW), KLatLon(55.7539, 37.6208), KLatLon(55.9726, 37.4146)),
-			Route("moscow zelenograd 40 km", listOf(MOSCOW), KLatLon(55.9825, 37.1814), KLatLon(55.7539, 37.6208)),
-			Route("moscow vnukovo-svo 50 km", listOf(MOSCOW), KLatLon(55.5915, 37.2615), KLatLon(55.9726, 37.4146)),
+			Route("amsterdam schiphol 17 km", listOf(NOORD_HOLLAND), KLatLon(52.3791, 4.9003), KLatLon(52.3105, 4.7683)),
+			Route("amsterdam haarlem 20 km", listOf(NOORD_HOLLAND), KLatLon(52.3791, 4.9003), KLatLon(52.3874, 4.6462)),
+			Route("amsterdam den helder 80 km", listOf(NOORD_HOLLAND), KLatLon(52.3791, 4.9003), KLatLon(52.9563, 4.7606)),
+			Route("munich airport 35 km", listOf(BAVARIA), KLatLon(48.1374, 11.5755), KLatLon(48.3538, 11.7861)),
 			Route("munich rosenheim 65 km", listOf(BAVARIA), KLatLon(48.1374, 11.5755), KLatLon(47.8561, 12.1289)),
 			Route("munich garmisch 90 km", listOf(BAVARIA), KLatLon(48.1374, 11.5755), KLatLon(47.4917, 11.0954)),
-			Route("munich regensburg 120 km", listOf(BAVARIA), KLatLon(48.1374, 11.5755), KLatLon(49.0134, 12.1016)),
+			Route("vienna schwechat 20 km", listOf(LOWER_AUSTRIA), KLatLon(48.2082, 16.3738), KLatLon(48.1103, 16.5697)),
+			Route("st poelten krems 30 km", listOf(LOWER_AUSTRIA), KLatLon(48.2047, 15.6256), KLatLon(48.4103, 15.6136)),
+			Route("st poelten wr neustadt 70 km", listOf(LOWER_AUSTRIA), KLatLon(48.2047, 15.6256), KLatLon(47.8100, 16.2450)),
 		)
 	}
 }
