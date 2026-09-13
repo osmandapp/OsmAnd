@@ -626,7 +626,7 @@ public class SearchCoreFactory {
 				String wordToSearch = phrase.getUnknownWordToSearch();
 				List<String> wordToSearchSplit = splitAndNormalize(wordToSearch, true);
 				if (wordToSearchSplit.size() > 1) {
-					wordToSearch = phrase.selectMainUnknownWordToSearch(new ArrayList<>(wordToSearchSplit));
+					wordToSearch = SearchPhrase.selectMainUnknownWordToSearch(new ArrayList<>(wordToSearchSplit));
 				}
 				SearchRequest<MapObject> req = BinaryMapIndexReader.buildAddressByNameRequest(rm, rawDataCollector, wordToSearch.toLowerCase(),
 						phrase.isMainUnknownSearchWordComplete() ? StringMatcherMode.CHECK_EQUALS_FROM_SPACE
