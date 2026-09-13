@@ -178,6 +178,8 @@ public class PanoramaxPlugin extends OsmandPlugin {
 			mapView.removeLayer(vectorLayer);
 			vectorLayer.setMap(null);
 		}
+		app.getResourceManager().getMapillaryVectorTilesCache()
+				.setPanoramaxActive(vectorLayer.getMap() != null);
 		app.getOsmandMap().getMapLayers().updateMapSource(mapView, null);
 	}
 

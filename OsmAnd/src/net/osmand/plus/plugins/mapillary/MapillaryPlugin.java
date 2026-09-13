@@ -190,6 +190,8 @@ public class MapillaryPlugin extends OsmandPlugin {
 			mapView.removeLayer(vectorLayer);
 			vectorLayer.setMap(null);
 		}
+		app.getResourceManager().getMapillaryVectorTilesCache()
+				.setMapillaryActive(vectorLayer.getMap() != null);
 		app.getOsmandMap().getMapLayers().updateMapSource(mapView, null);
 	}
 
