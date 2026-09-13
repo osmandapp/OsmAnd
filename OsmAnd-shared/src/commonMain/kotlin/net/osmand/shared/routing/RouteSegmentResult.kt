@@ -7,7 +7,9 @@ import net.osmand.shared.util.KCollectionUtils
 import net.osmand.shared.util.KMapUtils
 import net.osmand.shared.util.StringExternalizable
 import net.osmand.shared.util.collections.KTIntObjectMap
-import kotlin.jvm.JvmOverloads
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.jvm.JvmField
+import kotlin.native.ObjCName
 import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.math.max
@@ -741,7 +743,14 @@ class RouteSegmentResult : StringExternalizable<RouteDataBundle> {
 	}
 
 	companion object {
+		// exported to Objective-C under another name: a macro of the same name in the C++ core headers
+		// would otherwise break every file that includes both
+		@OptIn(ExperimentalObjCName::class)
+		@ObjCName("distBearingDetect")
 		const val DIST_BEARING_DETECT = 10f
+
+		@OptIn(ExperimentalObjCName::class)
+		@ObjCName("distBearingDetectUnmatched")
 		const val DIST_BEARING_DETECT_UNMATCHED = 50f
 
 		/**
