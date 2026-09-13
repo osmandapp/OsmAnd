@@ -3,6 +3,7 @@ package net.osmand.shared.util
 import kotlin.jvm.JvmStatic
 import kotlinx.datetime.Clock
 import kotlinx.datetime.DateTimeUnit
+import kotlinx.datetime.IllegalTimeZoneException
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
@@ -75,6 +76,20 @@ class OpeningHoursTime(var dateTime: LocalDateTime) {
 		fun ofEpochMillis(epochMillis: Long): OpeningHoursTime = OpeningHoursTime(
 			Instant.fromEpochMilliseconds(epochMillis).toLocalDateTime(TimeZone.currentSystemDefault())
 		)
+
+		/**
+		 * [epochMillis] read in [timeZoneId], the equivalent of `Calendar.getInstance(TimeZone)`.
+		 * An unknown zone falls back to UTC, the way `TimeZone.getTimeZone` falls back to GMT.
+		 */
+		@JvmStatic
+		fun ofEpochMillis(epochMillis: Long, timeZoneId: String): OpeningHoursTime {
+			val zone = try {
+				TimeZone.of(timeZoneId)
+			} catch (e: IllegalTimeZoneException) {
+				TimeZone.UTC
+			}
+			return OpeningHoursTime(Instant.fromEpochMilliseconds(epochMillis).toLocalDateTime(zone))
+		}
 
 		/** Explicit wall clock reading, mostly useful in tests. */
 		@JvmStatic
