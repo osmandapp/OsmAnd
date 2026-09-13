@@ -11,7 +11,9 @@ import androidx.car.app.model.SectionedItemList;
 import androidx.car.app.model.Template;
 import androidx.car.app.model.Toggle;
 import androidx.core.graphics.drawable.IconCompat;
+import androidx.lifecycle.LifecycleOwner;
 
+import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -27,9 +29,25 @@ public final class SettingsScreen extends BaseAndroidAutoScreen {
 	@NonNull
 	final OsmandSettings osmandSettings;
 
+	private final StateChangedListener<Boolean> voiceMuteListener =
+			change -> getApp().runInUIThread(this::invalidate);
+
 	public SettingsScreen(@NonNull CarContext carContext) {
 		super(carContext);
 		osmandSettings = ((OsmandApplication) carContext.getApplicationContext()).getSettings();
+		getLifecycle().addObserver(this);
+	}
+
+	@Override
+	public void onStart(@NonNull LifecycleOwner owner) {
+		super.onStart(owner);
+		osmandSettings.VOICE_MUTE.addListener(voiceMuteListener);
+	}
+
+	@Override
+	public void onStop(@NonNull LifecycleOwner owner) {
+		osmandSettings.VOICE_MUTE.removeListener(voiceMuteListener);
+		super.onStop(owner);
 	}
 
 	@NonNull
