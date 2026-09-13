@@ -93,6 +93,26 @@ object KAlgorithms {
 		}
 	}
 
+	/**
+	 * Joins the [symbol] separated parts of [ref] back together, dropping empty parts and any part
+	 * that repeats the one before it. Road refs are often tagged as "A1;A1;A2".
+	 */
+	fun splitAndClearRepeats(ref: String, symbol: String): String {
+		val res = StringBuilder()
+		var prev = ""
+		for (s in ref.split(symbol)) {
+			if (isEmpty(s) || prev == s) {
+				continue
+			}
+			if (res.isNotEmpty()) {
+				res.append(symbol)
+			}
+			res.append(s)
+			prev = s
+		}
+		return res.toString()
+	}
+
 	fun isDigit(c: Char): Boolean {
 		return c in '0'..'9'
 	}
