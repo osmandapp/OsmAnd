@@ -1038,7 +1038,7 @@ public class SpatialSearchContext {
 
 	/** a word the map mostly leaves unindexed says what an object is ("avenue", "вулиця", "calle"),
 	 *  not which one: measured on the map, like the common words, never listed by hand */
-	private boolean isKindWord(NameIndexReader indx, String word) {
+	boolean isKindWord(NameIndexReader indx, String word) {
 		return word != null && (wordFlags(indx, word) & WORD_KIND) != 0;
 	}
 
