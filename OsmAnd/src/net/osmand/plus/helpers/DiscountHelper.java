@@ -182,6 +182,9 @@ public class DiscountHelper {
 			}
 
 			if (app.getSettings().SHOULD_SHOW_DISCOUNT_BOTTOM_SHEET.get()) {
+				if (mapActivity.getRoutingHelper().isFollowingMode()) {
+					return;
+				}
 				InAppPurchaseHelper purchaseHelper = mapActivity.getPurchaseHelper();
 				if (purchaseHelper != null) {
 					purchaseHelper.requestInventory(false);
@@ -234,6 +237,9 @@ public class DiscountHelper {
 						|| (app.getAppInitializer().getNumberOfStarts() - settings.DISCOUNT_SHOW_NUMBER_OF_STARTS.get() >= showStartFrequency
 						|| System.currentTimeMillis() - settings.DISCOUNT_SHOW_DATETIME_MS.get() > 1000L * 60 * 60 * 24 * showDayFrequency)) {
 					if (settings.DISCOUNT_TOTAL_SHOW.get() < maxTotalShow) {
+						if (mapActivity.getRoutingHelper().isFollowingMode()) {
+							return;
+						}
 						settings.DISCOUNT_ID.set(discountId);
 						settings.DISCOUNT_TOTAL_SHOW.set(settings.DISCOUNT_TOTAL_SHOW.get() + 1);
 						settings.DISCOUNT_SHOW_NUMBER_OF_STARTS.set(app.getAppInitializer().getNumberOfStarts());
