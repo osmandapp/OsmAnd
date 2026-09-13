@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+	Content of ScreenDescriptionView. Intro text at the top of a screen, above all cards.
+	One per screen, never inside a card.
+-->
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	tools:parentTag="android.widget.FrameLayout">
+
+	<androidx.appcompat.widget.AppCompatTextView
+		android:id="@+id/text"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:textColor="?attr/colorOnSurfaceVariant"
+		android:textSize="@dimen/default_desc_text_size"
+		app:lineHeight="@dimen/ui_line_height_body"
+		tools:text="@string/ais_objects_visibility_desc" />
+</merge>

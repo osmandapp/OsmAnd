@@ -6,9 +6,6 @@
   <group>
     <clip-path android:pathData="M0,0h360v120h-360z M 0,0"/>
     <path
-        android:pathData="M0.0,0.0h360.0v120.0h-360.0z"
-        android:fillColor="#5CC3E5"/>
-    <path
         android:pathData="M167.28 93C162.707 93 159 89.2928 159 84.7197C159 83.9708 159.102 83.2252 159.302 82.5036L173.307 32.0876C174.142 29.0809 176.879 27 180 27C183.121 27 185.858 29.0809 186.693 32.0876L200.698 82.5036C200.898 83.2252 201 83.9708 201 84.7197C201 89.2928 197.293 93 192.72 93H167.28Z"
         android:strokeAlpha="0.2"
         android:fillColor="#ffffff"
