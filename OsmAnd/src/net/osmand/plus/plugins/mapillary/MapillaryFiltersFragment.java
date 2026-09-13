@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -63,7 +64,11 @@ public class MapillaryFiltersFragment extends BaseFullScreenFragment {
         boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
         AndroidUiHelper.updateVisibility(view.findViewById(R.id.shadow_on_map), portrait);
 
-        view.findViewById(R.id.mapillary_filters_linear_layout).setBackgroundColor(backgroundColor);
+        view.findViewById(R.id.filters_linear_layout).setBackgroundColor(backgroundColor);
+        applyProviderStrings(view);
+        // Filtering by username is not available in the current Mapillary API version.
+        AndroidUiHelper.updateVisibility(view.findViewById(R.id.username_row), false);
+        AndroidUiHelper.updateVisibility(view.findViewById(R.id.username_input_container), false);
 
         View toggleRow = view.findViewById(R.id.toggle_row);
         boolean selected = plugin.SHOW_MAPILLARY.get();
@@ -100,11 +105,11 @@ public class MapillaryFiltersFragment extends BaseFullScreenFragment {
 
 
         int colorRes = ColorUtilities.getDefaultIconColorId(nightMode);
-        ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_user_icon))
+        ((AppCompatImageView) view.findViewById(R.id.filters_user_icon))
                 .setImageDrawable(getIcon(R.drawable.ic_action_user, colorRes));
-        ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_date_icon))
+        ((AppCompatImageView) view.findViewById(R.id.filters_date_icon))
                 .setImageDrawable(getIcon(R.drawable.ic_action_data, colorRes));
-        ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_tile_cache_icon))
+        ((AppCompatImageView) view.findViewById(R.id.filters_tile_cache_icon))
                 .setImageDrawable(getIcon(R.drawable.ic_layer_top, colorRes));
 
         DelayAutoCompleteTextView textView =
@@ -253,6 +258,19 @@ public class MapillaryFiltersFragment extends BaseFullScreenFragment {
         return view;
     }
 
+    // The layout is shared with Panoramax, so it carries no provider wording of its own.
+    private void applyProviderStrings(@NonNull View view) {
+        ((TextView) view.findViewById(R.id.filters_tile_cache_title)).setText(R.string.mapillary_menu_title_tile_cache);
+        ((TextView) view.findViewById(R.id.filters_tile_cache_descr)).setText(R.string.mapillary_menu_descr_tile_cache);
+        ((TextView) view.findViewById(R.id.filters_description)).setText(R.string.mapillary_menu_filter_description_new);
+        ((TextView) view.findViewById(R.id.filters_username_title)).setText(R.string.mapillary_menu_title_username);
+        ((TextView) view.findViewById(R.id.filters_username_descr)).setText(R.string.mapillary_menu_descr_username);
+        ((TextView) view.findViewById(R.id.filters_dates_descr)).setText(R.string.mapillary_menu_descr_dates);
+        ((TextView) view.findViewById(R.id.pano_row_title)).setText(R.string.mapillary_menu_title_pano);
+        ((TextView) view.findViewById(R.id.auto_complete_text_view)).setHint(R.string.mapillary_menu_edit_text_hint);
+        ((TextView) view.findViewById(R.id.date_from_edit_text)).setHint(R.string.mapillary_menu_date_from);
+    }
+
     private void hideKeyboard() {
         View currentFocus = getActivity().getCurrentFocus();
         if (currentFocus != null) {
@@ -277,7 +295,7 @@ public class MapillaryFiltersFragment extends BaseFullScreenFragment {
     @Override
     public InsetTargetsCollection getInsetTargets() {
         InsetTargetsCollection collection = super.getInsetTargets();
-        collection.replace(InsetTarget.createBottomContainer(R.id.mapillary_filters_linear_layout).landscapeLeftSided(true));
+        collection.replace(InsetTarget.createBottomContainer(R.id.filters_linear_layout).landscapeLeftSided(true));
         collection.removeType(Type.ROOT_INSET);
         return collection;
     }
