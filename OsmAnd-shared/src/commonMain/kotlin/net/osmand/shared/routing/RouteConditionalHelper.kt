@@ -1,6 +1,7 @@
 package net.osmand.shared.routing
 
 import net.osmand.shared.util.LoggerFactory
+import net.osmand.shared.util.OpeningHoursTime
 
 /**
  * Applies `:conditional` tags to a road before the router sees it.
@@ -54,7 +55,10 @@ class RouteConditionalHelper {
 		}
 	}
 
-	fun processConditionalTags(rdo: RouteDataObject, conditionalTime: Long) {
+	fun processConditionalTags(rdo: RouteDataObject, conditionalTime: Long) =
+		processConditionalTags(rdo, OpeningHoursTime.ofEpochMillis(conditionalTime))
+
+	fun processConditionalTags(rdo: RouteDataObject, conditionalTime: OpeningHoursTime) {
 		val sz = rdo.types!!.size
 		for (i in 0 until sz) {
 			val r = rdo.region!!.quickGetEncodingRule(rdo.types!![i])

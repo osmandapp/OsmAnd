@@ -4,6 +4,7 @@ import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.LoggerFactory
 import net.osmand.shared.util.OpeningHoursParser
 import net.osmand.shared.util.internString
+import net.osmand.shared.util.OpeningHoursTime
 
 /**
  * One tag/value pair of the routing section of an obf file.
@@ -98,7 +99,10 @@ class RouteTypeRule(t: String, v: String?) {
 		return 0
 	}
 
-	fun conditionalValue(time: Long): Int {
+	fun conditionalValue(time: Long): Int = conditionalValue(OpeningHoursTime.ofEpochMillis(time))
+
+	/** The same for a reading the caller has already made, which is how the routing asks. */
+	fun conditionalValue(time: OpeningHoursTime): Int {
 		conditions?.let {
 			for (c in it) {
 				if (c.hours != null && c.hours.isOpenedForTime(time)) {

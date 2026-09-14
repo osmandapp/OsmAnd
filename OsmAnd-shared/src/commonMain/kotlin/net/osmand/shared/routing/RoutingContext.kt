@@ -7,6 +7,7 @@ import net.osmand.shared.extensions.format
 import net.osmand.shared.extensions.nanoTime
 import net.osmand.shared.util.KMapUtils
 import net.osmand.shared.util.LoggerFactory
+import net.osmand.shared.util.OpeningHoursTime
 import net.osmand.shared.util.collections.KTLongHashSet
 import net.osmand.shared.util.collections.KTLongObjectMap
 import kotlin.jvm.JvmField
@@ -39,6 +40,30 @@ class RoutingContext : RoutingRequest {
 	val reverseMap: MutableMap<RouteRegion, BinaryMapIndexReader> = LinkedHashMap()
 
 	private val conditionalHelper = RouteConditionalHelper()
+
+	/**
+	 * [RoutingConfiguration.routeCalculationTime] read as a wall clock, worked out once instead of once
+	 * per road: the router asks for it for every `:conditional` tag of every road it loads, and turning
+	 * an instant into a local date-time costs a time zone lookup. The C++ core keeps the same reading in
+	 * a `tm` next to the time itself; java rebuilds a `Calendar` every time, which is cheaper there than
+	 * this is here. Recomputed if the configuration's time changes under us.
+	 */
+	private var conditionalTimeMillis: Long = 0
+	private var conditionalTime: OpeningHoursTime? = null
+
+	private fun conditionalTime(): OpeningHoursTime? {
+		val millis = config.routeCalculationTime
+		if (millis == 0L) {
+			return null
+		}
+		var time = conditionalTime
+		if (time == null || conditionalTimeMillis != millis) {
+			time = OpeningHoursTime.ofEpochMillis(millis)
+			conditionalTimeMillis = millis
+			conditionalTime = time
+		}
+		return time
+	}
 
 	// 1. Initial variables
 	@JvmField
@@ -246,14 +271,15 @@ class RoutingContext : RoutingRequest {
 				}
 			}
 		} else {
+			val conditionalTime = conditionalTime()
 			for (ro in res) {
 				if (ro != null) {
 					val ambiguousConditionalTags = config.ambiguousConditionalTags
 					if (ambiguousConditionalTags != null) {
 						conditionalHelper.resolveAmbiguousConditionalTags(ro, ambiguousConditionalTags)
 					}
-					if (config.routeCalculationTime != 0L) {
-						conditionalHelper.processConditionalTags(ro, config.routeCalculationTime)
+					if (conditionalTime != null) {
+						conditionalHelper.processConditionalTags(ro, conditionalTime)
 					}
 					if (config.router.acceptLine(ro)) {
 						if (excludeNotAllowed != null && !excludeNotAllowed.contains(ro.getId())) {
