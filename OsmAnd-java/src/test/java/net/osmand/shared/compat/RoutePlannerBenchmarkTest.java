@@ -91,9 +91,9 @@ public class RoutePlannerBenchmarkTest {
 		}
 		System.out.println();
 		System.out.println("### route planner on jvm " + System.getProperty("java.version") + ": java, C++ over JNI" + (nativeLib == null ? " (library not found)" : "")
-				+ ", shared copy; " + WARMUP_ROUNDS + " warmup / " + MEASURED_ROUNDS + " measured, best time");
+				+ ", shared copy, each A* and HH; " + WARMUP_ROUNDS + " warmup / " + MEASURED_ROUNDS + " measured, best time");
 		System.out.println();
-		System.out.printf(Locale.US, "  %-28s %-6s %8s %9s %8s %10s %9s %7s%n", "route", "by", "ms", "segments", "km", "routing s", "visited", "tiles");
+		System.out.printf(Locale.US, "  %-28s %-10s %8s %9s %8s %10s %9s %7s%n", "route", "by", "ms", "segments", "km", "routing s", "visited", "tiles");
 		for (Route route : ROUTES) {
 			List<File> files = new ArrayList<>();
 			for (String map : route.maps) {
@@ -108,19 +108,26 @@ public class RoutePlannerBenchmarkTest {
 			if (files == null) {
 				continue;
 			}
-			runJava(route, files, null);
+			runJava(route, files, null, false);
 			if (nativeLib != null) {
 				for (File f : files) {
 					nativeLib.initMapFile(f.getAbsolutePath(), true);
 				}
-				runJava(route, files, nativeLib);
+				runJava(route, files, nativeLib, false);
 			}
-			runShared(route, files);
+			runShared(route, files, false);
+			// the same routes over the hub graph, as the apps calculate them by default; only HH, so a
+			// fallback to A* would show as an error rather than as a slow HH
+			runJava(route, files, null, true);
+			if (nativeLib != null) {
+				runJava(route, files, nativeLib, true);
+			}
+			runShared(route, files, true);
 		}
 		System.out.println();
 	}
 
-	private void runJava(Route route, List<File> files, NativeLibrary nativeLib) throws IOException {
+	private void runJava(Route route, List<File> files, NativeLibrary nativeLib, boolean hh) throws IOException {
 		BinaryMapIndexReader[] readers = new BinaryMapIndexReader[files.size()];
 		for (int i = 0; i < files.size(); i++) {
 			readers[i] = new BinaryMapIndexReader(new RandomAccessFile(files.get(i), "r"), files.get(i));
@@ -132,6 +139,11 @@ public class RoutePlannerBenchmarkTest {
 				long start = System.nanoTime();
 				RoutingConfiguration config = RoutingConfiguration.getDefault().build("car", limits(), new HashMap<>());
 				RoutePlannerFrontEnd fe = new RoutePlannerFrontEnd();
+				if (hh) {
+					fe.setDefaultHHRoutingConfig();
+					fe.setUseOnlyHHRouting(true);
+					fe.setHHRouteCpp(nativeLib != null);
+				}
 				RoutingContext ctx = fe.buildRoutingContext(config, nativeLib, readers);
 				RouteCalcResult res;
 				try {
@@ -154,7 +166,7 @@ public class RoutePlannerBenchmarkTest {
 					}
 				}
 			}
-			System.out.printf(Locale.US, "  %-28s %-6s %8.1f %s%n", route.name, nativeLib == null ? "java" : "cpp", best, line);
+			System.out.printf(Locale.US, "  %-28s %-10s %8.1f %s%n", route.name, (nativeLib == null ? "java" : "cpp") + (hh ? " hh" : ""), best, line);
 		} finally {
 			for (BinaryMapIndexReader reader : readers) {
 				reader.close();
@@ -162,7 +174,7 @@ public class RoutePlannerBenchmarkTest {
 		}
 	}
 
-	private void runShared(Route route, List<File> files) {
+	private void runShared(Route route, List<File> files, boolean hh) {
 		List<net.osmand.shared.binary.BinaryMapIndexReader> readers = new ArrayList<>();
 		for (File f : files) {
 			readers.add(new net.osmand.shared.binary.BinaryMapIndexReader(f.getPath()));
@@ -176,6 +188,11 @@ public class RoutePlannerBenchmarkTest {
 						.build("car", new net.osmand.shared.routing.RoutingConfiguration.RoutingMemoryLimits(
 								RoutingConfiguration.DEFAULT_NATIVE_MEMORY_LIMIT, RoutingConfiguration.DEFAULT_NATIVE_MEMORY_LIMIT), new LinkedHashMap<>());
 				net.osmand.shared.routing.RoutePlannerFrontEnd fe = new net.osmand.shared.routing.RoutePlannerFrontEnd();
+				net.osmand.shared.routing.RoutePlannerFrontEnd.CALCULATE_MISSING_MAPS = false;
+				if (hh) {
+					fe.setDefaultHHRoutingConfig();
+					fe.setUseOnlyHHRouting(true);
+				}
 				net.osmand.shared.routing.RoutingContext ctx = fe.buildRoutingContext(config, readers);
 				net.osmand.shared.routing.RouteCalcResult res = fe.searchRoute(ctx,
 						new KLatLon(route.start.getLatitude(), route.start.getLongitude()),
@@ -195,7 +212,7 @@ public class RoutePlannerBenchmarkTest {
 					}
 				}
 			}
-			System.out.printf(Locale.US, "  %-28s %-6s %8.1f %s%n", route.name, "shared", best, line);
+			System.out.printf(Locale.US, "  %-28s %-10s %8.1f %s%n", route.name, hh ? "shared hh" : "shared", best, line);
 		} finally {
 			for (net.osmand.shared.binary.BinaryMapIndexReader reader : readers) {
 				reader.close();
