@@ -20,6 +20,8 @@ import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 
@@ -47,10 +49,20 @@ public class StreetImageryFirstDialogFragment extends BottomSheetDialogFragment 
 		View view = inflate(R.layout.street_imagery_first_dialog, container, false);
 		applySourceContent(view);
 
+		int activeColor = settings.getApplicationMode().getProfileColor(nightMode);
+
 		SwitchCompat widgetSwitch = view.findViewById(R.id.widget_switch);
 		widgetSwitch.setChecked(showWidget);
 		widgetSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> showWidget = isChecked);
-		view.findViewById(R.id.actionButton).setOnClickListener(v -> {
+		UiUtilities.setupCompoundButton(nightMode, activeColor, widgetSwitch);
+
+		View widgetRow = view.findViewById(R.id.widget_row);
+		UiUtilities.setupListItemBackground(view.getContext(), widgetRow, activeColor);
+		widgetRow.setOnClickListener(v -> widgetSwitch.setChecked(!widgetSwitch.isChecked()));
+
+		View actionButton = view.findViewById(R.id.actionButton);
+		UiUtilities.setupListItemBackground(view.getContext(), actionButton, activeColor);
+		actionButton.setOnClickListener(v -> {
 			applyWidgetVisibility();
 			dismiss();
 		});
@@ -104,7 +116,12 @@ public class StreetImageryFirstDialogFragment extends BottomSheetDialogFragment 
 		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(activity);
 		if (widgetInfo.isEnabledForAppMode(appMode, layoutMode) != showWidget) {
 			MapWidgetRegistry widgetRegistry = activity.getMapLayers().getMapWidgetRegistry();
-			widgetRegistry.enableDisableWidgetForMode(appMode, widgetInfo, showWidget, layoutMode, true);
+			widgetRegistry.enableDisableWidgetForMode(appMode, widgetInfo, showWidget, layoutMode, false);
+			// Rebuild controls to apply the updated widget visibility.
+			MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
+			if (mapInfoLayer != null) {
+				mapInfoLayer.recreateAllControls(activity);
+			}
 			activity.refreshMap();
 		}
 	}
