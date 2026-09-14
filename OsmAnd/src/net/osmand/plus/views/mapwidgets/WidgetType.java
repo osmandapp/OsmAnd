@@ -33,6 +33,7 @@ import net.osmand.plus.plugins.odb.dialogs.FuelConsumptionSettingFragment;
 import net.osmand.plus.plugins.odb.OBDFuelConsumptionWidget;
 import net.osmand.plus.plugins.odb.OBDTextWidget;
 import net.osmand.plus.plugins.odb.dialogs.RemainingFuelSettingFragment;
+import net.osmand.plus.plugins.panoramax.PanoramaxPlugin;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -106,7 +107,8 @@ public enum WidgetType {
 
 	MAPILLARY("mapillary", R.string.mapillary, R.string.mapillary_widget_desc, R.drawable.widget_mapillary_day, R.drawable.widget_mapillary_night, R.string.docs_widget_mapillary, null, RIGHT),
 
-	PANORAMAX("panoramax", R.string.panoramax, R.string.panoramax_widget_desc, R.drawable.widget_panoramax_day, R.drawable.widget_panoramax_night, 0, null, RIGHT),
+	// TODO: Replace with dedicated Panoramax widget icons when artwork is available.
+	PANORAMAX("panoramax", R.string.panoramax, R.string.panoramax_widget_desc, R.drawable.widget_av_photo_day, R.drawable.widget_av_photo_night, 0, null, RIGHT),
 
 	PARKING("parking", R.string.map_widget_parking, R.string.parking_widget_desc, R.drawable.widget_parking_day, R.drawable.widget_parking_night, R.string.docs_widget_parking, null, RIGHT),
 
@@ -277,6 +279,8 @@ public enum WidgetType {
 			return WidgetGroup.getPartOfPluginDesc(context, OsmandDevelopmentPlugin.class);
 		} else if (this == MAPILLARY) {
 			return WidgetGroup.getPartOfPluginDesc(context, MapillaryPlugin.class);
+		} else if (this == PANORAMAX) {
+			return WidgetGroup.getPartOfPluginDesc(context, PanoramaxPlugin.class);
 		} else if (this == PARKING) {
 			return WidgetGroup.getPartOfPluginDesc(context, ParkingPositionPlugin.class);
 		} else if (group != null) {
@@ -293,7 +297,7 @@ public enum WidgetType {
 	public int getSecondaryIconId() {
 		if (this == COORDINATES_CURRENT_LOCATION || this == COORDINATES_MAP_CENTER) {
 			return R.drawable.ic_action_help;
-		} else if (this == DEV_FPS || this == DEV_MEMORY || this == MAPILLARY || this == PARKING) {
+		} else if (this == DEV_FPS || this == DEV_MEMORY || this == MAPILLARY || this == PANORAMAX || this == PARKING) {
 			return R.drawable.ic_extension_dark;
 		} else if (group != null) {
 			return group.getSecondaryIconId();

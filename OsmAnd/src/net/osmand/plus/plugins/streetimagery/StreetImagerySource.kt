@@ -26,8 +26,9 @@ enum class StreetImagerySource(
 		R.string.mapillary_widget, R.string.mapillary_widget_descr
 	),
 
+	// TODO: Replace with a dedicated Panoramax icon when artwork is available.
 	PANORAMAX(
-		WidgetType.PANORAMAX, R.drawable.ic_action_panoramax, R.color.panoramax_color,
+		WidgetType.PANORAMAX, R.drawable.ic_action_photo_street, R.color.panoramax_color,
 		R.string.panoramax, R.string.panoramax_descr,
 		R.string.panoramax_widget, R.string.panoramax_widget_descr
 	)

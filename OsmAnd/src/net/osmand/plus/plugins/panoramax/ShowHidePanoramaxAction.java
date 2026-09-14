@@ -24,7 +24,7 @@ public class ShowHidePanoramaxAction extends QuickAction {
 			"panoramax.showhide", ShowHidePanoramaxAction.class)
 			.nameActionRes(R.string.quick_action_verb_show_hide)
 			.nameRes(R.string.panoramax)
-			.iconRes(R.drawable.ic_action_panoramax).nonEditable()
+			.iconRes(R.drawable.ic_action_photo_street).nonEditable()
 			.category(QuickActionType.CONFIGURE_MAP);
 
 	public ShowHidePanoramaxAction() {

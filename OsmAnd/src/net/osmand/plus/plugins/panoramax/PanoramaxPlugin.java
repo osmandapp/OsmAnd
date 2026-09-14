@@ -7,7 +7,6 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_PANORAMAX;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.view.View;
 
@@ -87,14 +86,8 @@ public class PanoramaxPlugin extends OsmandPlugin {
 
 	@Override
 	public int getLogoResourceId() {
-		return R.drawable.ic_action_panoramax;
-	}
-
-	@Override
-	public Drawable getAssetResourceImage() {
-		// Placeholder: OsmAnd ships a branded illustration per plugin (see drawable/mapillary.webp).
-		// Panoramax artwork has to be supplied before this can go upstream.
-		return app.getUIUtilities().getIcon(R.drawable.ic_action_photo_street);
+		// TODO: Replace with a dedicated Panoramax icon when artwork is available.
+		return R.drawable.ic_action_photo_street;
 	}
 
 	@Override
@@ -221,7 +214,7 @@ public class PanoramaxPlugin extends OsmandPlugin {
 				.setDescription(app.getString(R.string.street_level_imagery))
 				.setSelected(SHOW_PANORAMAX.get())
 				.setColor(app, SHOW_PANORAMAX.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
-				.setIcon(R.drawable.ic_action_panoramax)
+				.setIcon(R.drawable.ic_action_photo_street)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setItemDeleteAction(SHOW_PANORAMAX)
 				.setListener(listener));

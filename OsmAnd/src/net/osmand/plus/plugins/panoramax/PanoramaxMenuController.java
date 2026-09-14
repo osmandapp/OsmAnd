@@ -62,7 +62,7 @@ public class PanoramaxMenuController extends MenuController {
 
 	@Override
 	public Drawable getRightIcon() {
-		return getIcon(R.drawable.ic_action_panoramax, R.color.panoramax_color);
+		return getIcon(R.drawable.ic_action_photo_street, R.color.panoramax_color);
 	}
 
 	@Override
