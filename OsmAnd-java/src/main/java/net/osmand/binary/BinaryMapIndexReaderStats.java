@@ -37,7 +37,10 @@ public class BinaryMapIndexReaderStats {
 		long decodeTimeNs;
 		long matcherTimeNs;
 		long blocksLoaded;
+		/** Atoms examined, whether or not an Amenity was built for them. */
 		long objectsLoaded;
+		/** Atoms decoded into an Amenity. Equal to objectsLoaded until the name probe skips one. */
+		long objectsBuilt;
 		long matchedObjectsLoaded;
 		long maxObjectsPerBlock;
 		private long objectsLoadedBefore, payloadBytesParsedBefore;
@@ -62,7 +65,7 @@ public class BinaryMapIndexReaderStats {
 		public final String mapName;
 		private long time = 0, count = 0, calls = 0, bytes = 0;
 		private long payloadBytesParsed = 0, decodeTime = 0, matcherTime = 0;
-		private long blocksLoaded = 0, objectsLoaded = 0, matchedObjects = 0, maxObjectsPerBlock = 0;
+		private long blocksLoaded = 0, objectsLoaded = 0, objectsBuilt = 0, matchedObjects = 0, maxObjectsPerBlock = 0;
 
 		SubStatByAPI(BinaryMapIndexReaderApiName api, BinaryMapIndexReaderSubApiName subApi, String mapName) {
 			this.api = api;
@@ -86,6 +89,7 @@ public class BinaryMapIndexReaderStats {
 			this.matcherTime +=  metrics.matcherTimeNs;
 			this.blocksLoaded += metrics.blocksLoaded;
 			this.objectsLoaded += metrics.objectsLoaded;
+			this.objectsBuilt += metrics.objectsBuilt;
 			this.matchedObjects += metrics.matchedObjectsLoaded;
 			this.maxObjectsPerBlock = Math.max(this.maxObjectsPerBlock,  metrics.maxObjectsPerBlock);
 			calls++;
@@ -125,6 +129,11 @@ public class BinaryMapIndexReaderStats {
 
 		public long getObjectsLoaded() {
 			return objectsLoaded;
+		}
+
+		/** Of {@link #getObjectsLoaded()}, the ones that were decoded into an object. */
+		public long getObjectsBuilt() {
+			return objectsBuilt;
 		}
 
 		public long getMatchedObjects() {
@@ -214,6 +223,7 @@ public class BinaryMapIndexReaderStats {
 					agg.matcherTime += st.matcherTime;
 					agg.blocksLoaded += st.blocksLoaded;
 					agg.objectsLoaded += st.objectsLoaded;
+					agg.objectsBuilt += st.objectsBuilt;
 					agg.matchedObjects += st.matchedObjects;
 					agg.maxObjectsPerBlock = Math.max(agg.maxObjectsPerBlock, st.maxObjectsPerBlock);
 					agg.calls += st.calls;
@@ -335,6 +345,11 @@ public class BinaryMapIndexReaderStats {
 		                                  Map<String, SubStatByAPI> totalsByApiObf,
 		                                  int subApiCount) {
 
+			/** Objects built against objects examined; the two differ once the name probe skips atoms. */
+			private static String builtOf(SubStatByAPI stat) {
+				return String.format(Locale.US, "%d/%d", stat.objectsBuilt, stat.objectsLoaded);
+			}
+
 			private String renderDetailedString(Map<String, WordSearchStat>  wordStats, long totalTime, long totalBytes, int topKObf) {
 				int w1 = c1.length(), w2 = c2.length(), w3 = c3.length(), w4 = c4.length(), w5 = c5.length(), w6 = c6.length(),
 						w9 = c9.length(), w10 = c10.length(), w11 = c11.length(),
@@ -407,7 +422,7 @@ public class BinaryMapIndexReaderStats {
 							.append(padLeft(String.format(Locale.US, "%.2f", apiTotal.decodeTime / 1e6), w10)).append(", ")
 							.append(padLeft(String.format(Locale.US, "%.2f", apiTotal.matcherTime / 1e6), w11)).append(", ")
 							.append(padLeft(String.format(Locale.US, "% d", apiTotal.blocksLoaded), w12)).append(", ")
-							.append(padLeft(String.format(Locale.US, "% d", apiTotal.objectsLoaded), w13)).append(", ")
+							.append(padLeft(builtOf(apiTotal), w13)).append(", ")
 							.append(padLeft(String.format(Locale.US, "% d", apiTotal.matchedObjects), w14)).append(", ")
 							.append(padLeft(String.format(Locale.US, "% d", apiTotal.maxObjectsPerBlock), w15));
 
@@ -436,7 +451,7 @@ public class BinaryMapIndexReaderStats {
 								.append(padLeft(String.format(Locale.US, "%.2f", subTotal.decodeTime / 1e6), w10)).append(", ")
 								.append(padLeft(String.format(Locale.US, "%.2f", subTotal.matcherTime / 1e6), w11)).append(", ")
 								.append(padLeft(String.format(Locale.US, "% d", subTotal.blocksLoaded), w12)).append(", ")
-								.append(padLeft(String.format(Locale.US, "% d", subTotal.objectsLoaded), w13)).append(", ")
+								.append(padLeft(builtOf(subTotal), w13)).append(", ")
 								.append(padLeft(String.format(Locale.US, "% d", subTotal.matchedObjects), w14)).append(", ")
 								.append(padLeft(String.format(Locale.US, "% d", subTotal.maxObjectsPerBlock), w15));
 
@@ -458,7 +473,7 @@ public class BinaryMapIndexReaderStats {
 									.append(padLeft(String.format(Locale.US, "%.2f", st.decodeTime / 1e6), w10)).append(", ")
 									.append(padLeft(String.format(Locale.US, "%.2f", st.matcherTime / 1e6), w11)).append(", ")
 									.append(padLeft(String.format(Locale.US, "% d", st.blocksLoaded), w12)).append(", ")
-									.append(padLeft(String.format(Locale.US, "% d", st.objectsLoaded), w13)).append(", ")
+									.append(padLeft(builtOf(st), w13)).append(", ")
 									.append(padLeft(String.format(Locale.US, "% d", st.matchedObjects), w14)).append(", ")
 									.append(padLeft(String.format(Locale.US, "% d", st.maxObjectsPerBlock), w15));
 						}
@@ -486,7 +501,7 @@ public class BinaryMapIndexReaderStats {
 							.append(", ").append(String.format(Locale.US, "%.2f", obfTotal.time / 1e9))
 							.append(",").append(String.format(Locale.US, "% d", obfTotal.payloadBytesParsed / 1024))
 							.append(", ").append(String.format(Locale.US, "%d", obfTotal.blocksLoaded))
-							.append(", ").append(String.format(Locale.US, "%d", obfTotal.objectsLoaded))
+							.append(", ").append(builtOf(obfTotal))
 							.append(", ").append(String.format(Locale.US, "%d", obfTotal.matchedObjects));
 				}
 				return sb.toString();
@@ -511,7 +526,7 @@ public class BinaryMapIndexReaderStats {
 			String c1 = "API       ", c2 = String.format(Locale.US, "Sub-API / Top-%d OBF                             ", topKObf), c3 = "Time (s)",
 					c4 = "Count (O)", c5 = "Volume (KB)", c6 = "Calls",
 					c9 = "Payload (KB)", c10 = "Decode (ms)", c11 = "Matcher (ms)",
-					c12 = "Blocks", c13 = "Objects", c14 = "Matched", c15 = "Max Obj/Block";
+					c12 = "Blocks", c13 = "Built/Objects", c14 = "Matched", c15 = "Max Obj/Block";
 
 			Map<BinaryMapIndexReaderApiName, Map<BinaryMapIndexReaderSubApiName, List<SubStatByAPI>>> rows = new HashMap<>();
 			Map<BinaryMapIndexReaderApiName, Map<BinaryMapIndexReaderSubApiName, SubStatByAPI>> totalsByApiSubApi = new HashMap<>();
@@ -550,6 +565,7 @@ public class BinaryMapIndexReaderStats {
 							obfTotal.matcherTime += st.matcherTime;
 							obfTotal.blocksLoaded += st.blocksLoaded;
 							obfTotal.objectsLoaded += st.objectsLoaded;
+							obfTotal.objectsBuilt += st.objectsBuilt;
 							obfTotal.matchedObjects += st.matchedObjects;
 							obfTotal.maxObjectsPerBlock = Math.max(obfTotal.maxObjectsPerBlock, st.maxObjectsPerBlock);
 							obfTotal.calls += st.calls;
@@ -569,6 +585,7 @@ public class BinaryMapIndexReaderStats {
 						subTotal.matcherTime += st.matcherTime;
 						subTotal.blocksLoaded += st.blocksLoaded;
 						subTotal.objectsLoaded += st.objectsLoaded;
+						subTotal.objectsBuilt += st.objectsBuilt;
 						subTotal.matchedObjects += st.matchedObjects;
 						subTotal.maxObjectsPerBlock = Math.max(subTotal.maxObjectsPerBlock, st.maxObjectsPerBlock);
 						subTotal.calls += st.calls;
@@ -583,6 +600,7 @@ public class BinaryMapIndexReaderStats {
 						apiTotal.matcherTime += st.matcherTime;
 						apiTotal.blocksLoaded += st.blocksLoaded;
 						apiTotal.objectsLoaded += st.objectsLoaded;
+						apiTotal.objectsBuilt += st.objectsBuilt;
 						apiTotal.matchedObjects += st.matchedObjects;
 						apiTotal.maxObjectsPerBlock = Math.max(apiTotal.maxObjectsPerBlock, st.maxObjectsPerBlock);
 						apiTotal.calls += st.calls;

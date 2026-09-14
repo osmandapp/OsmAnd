@@ -39,6 +39,9 @@ import net.osmand.binary.OsmandOdb.CommonIndexedStats;
 import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData;
 import net.osmand.data.Amenity;
 import net.osmand.data.Amenity.AmenityRoutePoint;
+import net.osmand.data.MapObject;
+import net.osmand.util.Algorithms;
+import net.osmand.util.TransliterationHelper;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.MapPoiTypes;
@@ -892,15 +895,38 @@ public class BinaryMapPoiReaderAdapter {
 			case OsmandOdb.OsmAndPoiBoxData.POIDATA_FIELD_NUMBER:
 				long decodeStartNs = 0, matcherStartNs = 0;
 				if (metrics != null) {
+					// every atom is examined; objectsBuilt below counts the ones decoded into an object
 					metrics.objectsLoaded++;
 					decodeStartNs = System.nanoTime();
 				}
 				int len = codedIS.readRawVarint32();
+				long start = codedIS.getTotalBytesRead();
 				long oldLim = codedIS.pushLimitLong((long) len);
 
+				if (USE_NAME_PROBE) {
+					// Test every name as it is decoded and build nothing for the rest. Only a few
+					// candidates in a thousand match, and those are read a second time below.
+					boolean probeMatches = probePoiName(matcher, region);
+					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+					if (metrics != null) {
+						metrics.decodeTimeNs += System.nanoTime() - decodeStartNs;
+					}
+					codedIS.popLimit(oldLim);
+					if (!probeMatches) {
+						break;
+					}
+					codedIS.seek(start);
+					oldLim = codedIS.pushLimitLong((long) len);
+				}
+
+				if (metrics != null) {
+					metrics.objectsBuilt++;
+				}
 				Amenity am = readPoiPoint(0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, x, y, zoom, req, region, false);
 				if (metrics != null)  {
-					metrics.decodeTimeNs += System.nanoTime() - decodeStartNs;
+					if (!USE_NAME_PROBE) {
+						metrics.decodeTimeNs += System.nanoTime() - decodeStartNs;
+					}
 					matcherStartNs = System.nanoTime();
 				}
 				codedIS.popLimit(oldLim);
@@ -1030,6 +1056,170 @@ public class BinaryMapPoiReaderAdapter {
 					arp.pointB.getLatitude(), arp.pointB.getLongitude());
 		}
 		return arp;
+	}
+
+	/**
+	 * When set, {@link #readPoiData(CollatorStringMatcher, SearchRequest, PoiRegion, BinaryMapIndexReaderStats.PoiReadMetricSet)}
+	 * matches names as they are decoded instead of building an {@link Amenity} for every candidate.
+	 * Kept as a switch so the two paths can be compared on real maps; they must publish the same objects.
+	 */
+	static boolean USE_NAME_PROBE = true;
+
+	/**
+	 * Reads one {@code OsmAndPoiBoxDataAtom} and answers only whether the name search accepts it,
+	 * without allocating an {@link Amenity}, its additional info map or its name list. The strings
+	 * tested are the ones {@code readPoiData} would have tested on the built object, in the order
+	 * they appear in the block instead of the order the getters return them; the answer is their OR,
+	 * so it does not depend on that order.
+	 *
+	 * The caller is left anywhere inside the atom and has to skip to its end.
+	 */
+	private boolean probePoiName(CollatorStringMatcher matcher, PoiRegion region) throws IOException {
+		boolean matched = false;
+		boolean hasType = false;
+		String name = null;
+		boolean hasEnName = false;
+		StringBuilder retValue = new StringBuilder();
+		LinkedList<String> textTags = null;
+		while (true) {
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			if (!hasType && (tag > OsmandOdb.OsmAndPoiBoxDataAtom.CATEGORIES_FIELD_NUMBER || tag == 0)) {
+				// readPoiPoint gives up on an atom with no category, so nothing can match
+				return false;
+			}
+			// a tag and a value that setAdditionalInfo would have routed, filled in by the two cases
+			// that carry them; the routing is shared below because both feed the same fields
+			String pendingKey = null;
+			String pendingValue = null;
+			switch (tag) {
+			case 0:
+				if (!matched && !hasEnName && !Algorithms.isEmpty(name)) {
+					// Amenity.getEnName(true) transliterates the name, and whether it is needed is
+					// only known once the atom has ended without an english name
+					matched = matcher.matches(TransliterationHelper.transliterate(name).toLowerCase(Locale.ROOT));
+				}
+				return matched;
+			case OsmandOdb.OsmAndPoiBoxDataAtom.CATEGORIES_FIELD_NUMBER:
+				codedIS.readUInt32();
+				hasType = true;
+				break;
+			case OsmandOdb.OsmAndPoiBoxDataAtom.NAME_FIELD_NUMBER:
+				pendingKey = "name";
+				pendingValue = codedIS.readString();
+				break;
+			case OsmandOdb.OsmAndPoiBoxDataAtom.NAMEEN_FIELD_NUMBER:
+				pendingKey = "name:en";
+				pendingValue = codedIS.readString();
+				break;
+			case OsmandOdb.OsmAndPoiBoxDataAtom.SUBCATEGORIES_FIELD_NUMBER: {
+				int subtypev = codedIS.readUInt32();
+				retValue.setLength(0);
+				PoiSubType st = region.getSubtypeFromId(subtypev, retValue);
+				if (st != null) {
+					pendingKey = st.name;
+					pendingValue = retValue.toString();
+				}
+				break;
+			}
+			case OsmandOdb.OsmAndPoiBoxDataAtom.TEXTCATEGORIES_FIELD_NUMBER: {
+				int texttypev = codedIS.readUInt32();
+				retValue.setLength(0);
+				PoiSubType textt = region.getSubtypeFromId(texttypev, retValue);
+				if (textt != null && textt.text) {
+					if (textTags == null) {
+						textTags = new LinkedList<String>();
+					}
+					textTags.add(textt.name);
+				}
+				break;
+			}
+			case OsmandOdb.OsmAndPoiBoxDataAtom.TEXTVALUES_FIELD_NUMBER: {
+				String str = codedIS.readString();
+				if (textTags != null && !textTags.isEmpty()) {
+					pendingKey = textTags.poll();
+					pendingValue = str;
+				}
+				break;
+			}
+			default:
+				skipUnknownField(t);
+				break;
+			}
+			if (pendingKey == null) {
+				continue;
+			}
+			switch (nameRole(pendingKey)) {
+			case NAME:
+				// the name can arrive as field 6 or as a "name" text value; either way it is the
+				// string getName() would return, and the one transliterated at the end
+				name = MapObject.unzipContent(pendingValue);
+				if (!matched) {
+					matched = matcher.matches(name.toLowerCase(Locale.ROOT));
+				}
+				break;
+			case EN_NAME: {
+				String enName = MapObject.unzipContent(pendingValue);
+				hasEnName = !Algorithms.isEmpty(enName);
+				if (!matched) {
+					matched = matcher.matches(enName.toLowerCase(Locale.ROOT));
+				}
+				break;
+			}
+			case LOCALIZED_NAME:
+				if (!matched) {
+					matched = matcher.matches(MapObject.unzipContent(pendingValue).toLowerCase(Locale.ROOT));
+				}
+				break;
+			case ADDITIONAL_INFO:
+				// note the asymmetry kept from readPoiData: additional info is not lowercased
+				if (!matched) {
+					matched = matcher.matches(MapObject.unzipContent(pendingValue));
+				}
+				break;
+			default:
+				break;
+			}
+		}
+	}
+
+	/**
+	 * Where {@code Amenity.setAdditionalInfo} would have put a tag, which is what decides whether
+	 * the name search ever compares its value.
+	 */
+	private enum NameRole {
+		/** Stored, but never compared: an unindexed tag, or a bookkeeping language. */
+		IGNORED,
+		/** The name itself, and the string {@code getEnName(true)} transliterates. */
+		NAME,
+		/** The english name, which suppresses that transliteration. */
+		EN_NAME,
+		/** A localized name, compared through {@code getOtherNames()}. */
+		LOCALIZED_NAME,
+		/** Additional info that one of the four indexed-for-search predicates accepts. */
+		ADDITIONAL_INFO,
+	}
+
+	private static NameRole nameRole(String tag) {
+		if ("name".equals(tag)) {
+			return NameRole.NAME;
+		}
+		if (MapObject.isNameLangTag(tag)) {
+			String lang = tag.substring("name:".length());
+			if (lang.equals("en")) {
+				return NameRole.EN_NAME;
+			}
+			if (lang.equals(MapObject.NAME_ADMIN_LEVEL_ATTR) || lang.equals(MapObject.NAME_PLACE_ATTR)
+					|| lang.contains(MapObject.NAME_ETYMOLOGY_ATTR) || lang.equals(MapObject.NAME_WIKIDATA_ATTR)) {
+				return NameRole.IGNORED;
+			}
+			return NameRole.LOCALIZED_NAME;
+		}
+		if (isTagIndexedForSearchAsName(tag) || isTagNonIndexedForSearchAsName(tag)
+				|| isTagIndexedForSearchAsId(tag) || isTagIndexedAsSearchRelated(tag)) {
+			return NameRole.ADDITIONAL_INFO;
+		}
+		return NameRole.IGNORED;
 	}
 
 	private Amenity readPoiPoint(int left31, int right31, int top31, int bottom31,
