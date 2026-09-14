@@ -159,10 +159,8 @@ public class PanoramaxPlugin extends OsmandPlugin {
 			if (SHOW_PANORAMAX.get() || force) {
 				vectorSource = settings.getTileSourceByName(TileSourceManager.getPanoramaxVectorSource().getName(), false);
 			}
-			// Must differ from Mapillary's 0.62f. OsmandMapTileView.getLayerIndex() derives the
-			// native map layer slot as (int) (zOrder * 100), and PanoramaxVectorLayer registers
-			// its provider in that slot via setMapLayerProvider(). Sharing a zOrder with the
-			// Mapillary layer would make the two overwrite each other's provider under OpenGL.
+			// zOrder maps to a native layer slot as (int) (zOrder * 100), so it must differ from
+			// Mapillary's 0.62f or the two layers overwrite each other's provider under OpenGL.
 			updateLayer(mapView, vectorSource, vectorLayer, 0.63f);
 		} else {
 			mapView.removeLayer(vectorLayer);
@@ -228,11 +226,8 @@ public class PanoramaxPlugin extends OsmandPlugin {
 		widgetsInfos.add(creator.createWidgetInfo(widget));
 	}
 
-		// No context menu gallery row here, unlike MapillaryPlugin. That row is fed by OsmAnd's
-	// own online photos service through OnlinePhotosHolder, whose OnlinePhotosGroup enum has
-	// only MAPILLARY, WIKIDATA, WIKIMEDIA and OTHER members. Nothing server side supplies
-	// Panoramax photos for a place, so such a row could only ever render empty. Pictures are
-	// reached by tapping the map layer instead.
+	// No context menu gallery row: OnlinePhotosGroup has no Panoramax member, so it could only
+	// ever render empty. Pictures are reached by tapping the map layer instead.
 
 	@Override
 	public boolean isMenuControllerSupported(MenuController menuController) {

@@ -56,12 +56,9 @@ import java.util.Map.Entry;
 
 public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer, IContextMenuProvider {
 
-	// Panoramax serves an aggregated "grid" layer up to zoom 14 and only starts emitting
-	// "sequences" at zoom 15, unlike Mapillary which has sequences down to 13. Fetching 13
-	// here returns tiles containing nothing this layer can draw.
+	// Panoramax emits "sequences" only from zoom 15; lower zooms return nothing drawable.
 	public static final int MAX_SEQUENCE_LAYER_ZOOM = 15;
-	// Panoramax only emits the "pictures" layer from zoom 15 and caps its tiles at zoom 17,
-	// so image tiles are fetched at 17 rather than at Panoramax's 14.
+	// Panoramax caps its tiles at zoom 17, which is also where the "pictures" layer appears.
 	public static final int MIN_IMAGE_LAYER_ZOOM = 17;
 	public static final int MIN_POINTS_ZOOM = 17;
 	public static final double EXTENT = 4096.0;
@@ -104,9 +101,8 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 		paintLine.setStyle(Paint.Style.STROKE);
 		paintLine.setAntiAlias(true);
 		paintLine.setColor(ContextCompat.getColor(getContext(), R.color.panoramax_color));
-		// Panoramax publishes line-width 1.5 at zoom 16, rising to 2-4 only past 17.5. Mapillary's
-		// 4dp is far too heavy for Panoramax's much denser urban coverage: at zoom 16 over central
-		// Paris it buries the basemap and the street names underneath it.
+		// Deliberately thinner than Mapillary's 4dp: Panoramax coverage is dense enough that a
+		// heavier line buries the basemap underneath it.
 		paintLine.setStrokeWidth(AndroidUtils.dpToPx(getContext(), 2f));
 		paintLine.setStrokeCap(Paint.Cap.ROUND);
 
@@ -283,10 +279,8 @@ public class PanoramaxVectorLayer extends MapTileLayer implements PanoramaxLayer
 		}
 
 		ResourceManager mgr = resourceManager;
-		// Shared with the Mapillary layer on purpose: ResourceManager.getTilesCache() returns the
-		// first cache whose isTileSourceSupported() matches, and both vector sources use the same
-		// .pbf tile format, so a second GeometryTilesCache instance would never be selected.
-		// Cached tile ids are prefixed with the tile source name, so the two cannot collide.
+		// Shared with Mapillary on purpose: getTilesCache() matches by tile format, so a separate
+		// instance would never be selected. Tile ids are prefixed by source name and cannot collide.
 		GeometryTilesCache tilesCache = mgr.getMapillaryVectorTilesCache();
 
 		int tileZoom;

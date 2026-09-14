@@ -3,7 +3,6 @@ package net.osmand.core.android;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 
@@ -373,8 +372,6 @@ public class PanoramaxTilesProvider extends interface_ImageMapLayerProvider {
 
 		boolean recalculateLastXY = false;
 		int size = coordinates.length;
-		Path path = new Path();
-		path.moveTo(x1, y1);
 		for (int i = 1; i < size; i++) {
 			if (queryController != null && i % 10 == 0 && queryController.isAborted()) {
 				break;
@@ -587,8 +584,6 @@ public class PanoramaxTilesProvider extends interface_ImageMapLayerProvider {
 
 	private class PanoramaxBitmapTileCache {
 		private final SQLiteTileSource sqlTileSource;
-		boolean storedShouldFilter;
-		boolean storedPano;
 
 		public PanoramaxBitmapTileCache() {
 			String dbName = TileSourceManager.getPanoramaxCacheSource().getName();
@@ -597,8 +592,6 @@ public class PanoramaxTilesProvider extends interface_ImageMapLayerProvider {
 			File dbFile = new File(tilesDir, dbName);
 			sqlTileSource = new SQLiteTileSource(app,  dbFile, TileSourceManager.getKnownSourceTemplates());
 			sqlTileSource.createDataBase();
-			storedShouldFilter = plugin.USE_PANORAMAX_FILTER.get();
-			storedPano = plugin.PANORAMAX_FILTER_PANO.get();
 		}
 
 		public void clearCache() {
@@ -626,12 +619,6 @@ public class PanoramaxTilesProvider extends interface_ImageMapLayerProvider {
 			} catch (IOException e) {
 				Log.w("Tile x=" + tileId.getX() + " y=" + tileId.getY() + " z=" + zoom + " couldn't be read", e);
 			}
-		}
-
-		public void deleteTile(IMapTiledDataProvider.Request request) {
-			TileId tileId = request.getTileId();
-			int zoom = request.getZoom().swigValue();
-			sqlTileSource.deleteImage(tileId.getX(), tileId.getY(), zoom);
 		}
 
 	}

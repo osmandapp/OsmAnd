@@ -157,16 +157,10 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 		((ImageView) noInternetView.findViewById(R.id.wifiOff)).setImageDrawable(icWifiOff);
 		view.setScrollContainer(false);
 		webView.getSettings().setJavaScriptEnabled(true);
-		// The Panoramax viewer is a single page app that reads localStorage on startup. Mapillary
-		// is served through an osmand.net proxy page that does not, so DOM storage was never
-		// enabled here. Without it the viewer throws on window.localStorage.getItem and stalls
-		// before it ever shows the picture.
+		// The viewer reads localStorage on startup and stalls without it.
 		webView.getSettings().setDomStorageEnabled(true);
-		// No Android JavaScript bridge here, unlike MapillaryImageDialog. That bridge works
-		// only because Mapillary is loaded from an osmand.net proxy page that OsmAnd authors
-		// and which calls Android.onNodeChanged() itself. This WebView loads the Panoramax
-		// viewer directly, so an injected interface would never be called, and exposing one
-		// to a third party page is a trust boundary OsmAnd does not need to cross.
+		// No JavaScript bridge: this loads the third-party viewer directly, so an injected
+		// interface would never be called and would widen the trust boundary for nothing.
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
 				isPortrait() ? ViewGroup.LayoutParams.MATCH_PARENT : AndroidUtils.dpToPx(getMapActivity(), 360f),
 				isPortrait() ? AndroidUtils.dpToPx(getMapActivity(), 270f) : ViewGroup.LayoutParams.MATCH_PARENT);
