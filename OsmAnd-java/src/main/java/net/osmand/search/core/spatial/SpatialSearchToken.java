@@ -262,13 +262,15 @@ public class SpatialSearchToken {
 				int res = Boolean.compare(atom.name.startsWith(NameIndexReader.POI_CATEGORY_PREFIX), 
 						existing.name.startsWith(NameIndexReader.POI_CATEGORY_PREFIX));
 //				res = 0; // Test a school 
-				// select shortest available version
-				if (res == 0) {
-					// fewer unmatched words first: '28' keeps house of 'вулиця 28-ма Лінія' over street '28-a liniia street'
+				// select shortest available version (see number of tests 'Piazza Trento e Trieste', ukraine_zhytomyr_smokivskyi_lane...)
+				if (res == 0 && !SearchAlgorithms.isNumber2Letters(wordAligned)) {
 					res = Integer.compare(atom.otherWordsCnt, existing.otherWordsCnt);
 					if (res == 0) {
 						res = Integer.compare(atom.otherFoundCnt, existing.otherFoundCnt);
 					}
+				} else if (res == 0) {
+					res = Integer.compare(atom.otherWordsCnt + atom.otherFoundCnt,
+							existing.otherWordsCnt + existing.otherFoundCnt);
 				}
 				// '2 south 2nd street' vs '25 садова вулиця' (25-та) -
 				if (res == 0 && !SearchAlgorithms.isNumber2Letters(wordAligned)) {
