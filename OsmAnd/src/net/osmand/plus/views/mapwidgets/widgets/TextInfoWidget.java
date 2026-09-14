@@ -1,13 +1,17 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
+import android.text.Layout;
+import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.Pair;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,7 +25,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.mapwidgets.OutlinedTextContainer;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -56,10 +59,9 @@ public abstract class TextInfoWidget extends MapWidget implements ISupportSidePa
 	protected String cachedText, cachedSmallText;
 	protected Rect cachedTextBounds = new Rect();
 	protected Rect cachedSmallTextBounds = new Rect();
-	protected Rect cachedWidgetNameTextBounds = new Rect();
 	protected TextPaint textPaint = new TextPaint();
 	protected TextPaint smallTextPaint = new TextPaint();
-	protected TextPaint widgetNameTextPaint = new TextPaint();
+	protected boolean shouldDrawAndroidAutoIcon;
 
 
 	public TextInfoWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType,
@@ -291,6 +293,8 @@ public abstract class TextInfoWidget extends MapWidget implements ISupportSidePa
 	protected void updateCachedTextBounds(Rect bounds, TextPaint paint, String text) {
 		bounds.setEmpty();
 		if (text != null) {
+			float desiredWidth = StaticLayout.getDesiredWidth(text, textPaint);
+			measureText(bounds, desiredWidth, text, textPaint, Gravity.START, null, 1);
 			paint.getTextBounds(text, 0, text.length(), bounds);
 		}
 	}
@@ -328,6 +332,170 @@ public abstract class TextInfoWidget extends MapWidget implements ISupportSidePa
 		int typefaceStyle =  (appearance.getBoldText()) ? Typeface.BOLD : Typeface.NORMAL;
 		textPaint.setColor(color);
 		textPaint.setTypeface(Typeface.create(Typeface.DEFAULT, typefaceStyle));
+	}
+
+
+	protected float findOptimalTextSize(
+			CharSequence text, TextPaint paint,
+			int maxWidth, int maxHeight,
+			float minSize, float maxSize, float step
+	) {
+		TextPaint testPaint = new TextPaint(paint);
+		float low = minSize;
+		float high = maxSize;
+		float optimal = minSize;
+
+		while (low <= high) {
+			float mid = ((int) ((low + high) / 2 / step)) * step;
+			testPaint.setTextSize(mid);
+
+			StaticLayout layout = StaticLayout.Builder.obtain(text, 0, text.length(), testPaint, maxWidth)
+					.setIncludePad(false)
+					.build();
+
+			if (layout.getHeight() <= maxHeight) {
+				optimal = mid;
+				low = mid + step;
+			} else {
+				high = mid - step;
+			}
+		}
+		return optimal;
+	}
+
+	protected void drawTextLineInRect(
+			Canvas canvas,
+			CharSequence text,
+			TextPaint textPaint,
+			Rect targetRect) {
+		drawTextLineInRect(canvas,
+				text,
+				textPaint,
+				targetRect,
+				Gravity.START,
+				false,
+				0 ,
+				0,
+				0,
+				null,
+				null,
+				true);
+	}
+
+	protected void measureText(Rect outRect,
+	                           float maxWidthPx, String text, Paint textPaint,
+	                           int gravity,
+							   Float lineSpacingExtra,
+	                           TextUtils.TruncateAt ellipsizeAt,
+	                           Integer maxLines) {
+		TextPaint workingPaint = new TextPaint(textPaint);
+		Layout.Alignment layoutAlignment;
+		int horizontalGravity = gravity & Gravity.RELATIVE_HORIZONTAL_GRAVITY_MASK;
+
+        if (horizontalGravity == Gravity.END) {
+			layoutAlignment = Layout.Alignment.ALIGN_OPPOSITE;
+		} else if (horizontalGravity == Gravity.CENTER_HORIZONTAL) {
+			layoutAlignment = Layout.Alignment.ALIGN_CENTER;
+		} else {
+			layoutAlignment = Layout.Alignment.ALIGN_NORMAL;
+		}
+
+		StaticLayout.Builder layoutBuilder = StaticLayout.Builder
+				.obtain(text, 0, text.length(), workingPaint, (int) maxWidthPx)
+				.setAlignment(layoutAlignment)
+				.setIncludePad(false);
+		if (maxLines != null) {
+			layoutBuilder.setMaxLines(maxLines);
+		}
+		if (ellipsizeAt != null) {
+			layoutBuilder.setEllipsize(ellipsizeAt);
+		}
+		if (lineSpacingExtra != null) {
+			layoutBuilder.setLineSpacing(lineSpacingExtra, 1f)
+		}
+
+		StaticLayout staticLayout = layoutBuilder.build();
+		outRect.set(0, 0, staticLayout.getWidth(), staticLayout.getHeight());
+	}
+
+	protected void drawTextLineInRect(
+			Canvas canvas,
+			CharSequence text,
+			TextPaint textPaint,
+			Rect targetRect,
+			int gravity,
+			boolean autoSize,
+			float minTextSizePx,
+			float maxTextSizePx,
+			float textSizeStepPx,
+			Float lineSpacingExtra,
+			TextUtils.TruncateAt ellipsizeAt,
+			boolean hardClip
+	) {
+		int rectWidth = targetRect.width();
+		int rectHeight = targetRect.height();
+		if (rectWidth <= 0 || rectHeight <= 0) return;
+		TextPaint workingPaint = new TextPaint(textPaint);
+
+		if (autoSize) {
+			float optimalSize = findOptimalTextSize(text,
+					workingPaint,
+					rectWidth, rectHeight,
+					minTextSizePx, maxTextSizePx, textSizeStepPx);
+			workingPaint.setTextSize(optimalSize);
+		}
+
+		Layout.Alignment layoutAlignment;
+		int horizontalGravity = gravity & Gravity.RELATIVE_HORIZONTAL_GRAVITY_MASK;
+		int verticalGravity = gravity & Gravity.VERTICAL_GRAVITY_MASK;
+
+		if (horizontalGravity == Gravity.END) {
+			layoutAlignment = Layout.Alignment.ALIGN_OPPOSITE;
+		} else if (horizontalGravity == Gravity.CENTER_HORIZONTAL) {
+			layoutAlignment = Layout.Alignment.ALIGN_CENTER;
+		} else {
+			layoutAlignment = Layout.Alignment.ALIGN_NORMAL;
+		}
+
+		StaticLayout.Builder layoutBuilder = StaticLayout.Builder
+				.obtain(text, 0, text.length(), workingPaint, rectWidth)
+				.setMaxLines(1)
+				.setAlignment(layoutAlignment)
+				.setIncludePad(false);
+		if (ellipsizeAt != null) {
+			layoutBuilder.setEllipsize(ellipsizeAt);
+		}
+
+		StaticLayout staticLayout = layoutBuilder.build();
+
+		int layoutWidth = staticLayout.getWidth();
+		int layoutHeight = staticLayout.getHeight();
+
+		float xOffset = 0f;
+		if (horizontalGravity == Gravity.END) {
+			xOffset = (float) (rectWidth - layoutWidth);
+		} else if (horizontalGravity == Gravity.CENTER_HORIZONTAL) {
+			xOffset = (rectWidth - layoutWidth) / 2f;
+		}
+
+		float yOffset = 0f;
+		if (verticalGravity == Gravity.BOTTOM) {
+			yOffset = (float) (rectHeight - layoutHeight);
+		} else if (verticalGravity == Gravity.CENTER_VERTICAL) {
+			yOffset = (rectHeight - layoutHeight) / 2f;
+		}
+
+		float finalX = targetRect.left + xOffset;
+		float finalY = targetRect.top + yOffset;
+
+		canvas.save();
+		if (hardClip) {
+			canvas.clipRect(targetRect);
+		}
+
+		canvas.translate(finalX, finalY);
+		staticLayout.draw(canvas);
+		canvas.restore();
 	}
 	// endregion
 }

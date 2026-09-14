@@ -52,8 +52,6 @@ public class CarWidgetsPanel {
 	private static final float BORDER_WIDTH_DP = 2f;
 	private static final float DIVIDER_WIDTH_DP = 1f;
 	private static final float PANEL_PADDING_DP = 4f;
-	/** Widgets are stacked without gaps, their own dividers separate the rows. */
-	private static final float WIDGET_SPACING_DP = 0f;
 	private static final float WIDGET_WIDTH_DP = 130f;
 	/**
 	 * Width of the panel in car dp. The car screen is viewed from about twice the distance of a
@@ -155,6 +153,9 @@ public class CarWidgetsPanel {
 		float panelPadding = PANEL_PADDING_DP * carDensity;
 		float borderWidth = BORDER_WIDTH_DP * carDensity;
 		float panelContentWidth = panelWidth - panelPadding * 2 - borderWidth * 2;
+		float corner = CORNER_RADIUS_DP * carDensity;
+		float dividerWidth = DIVIDER_WIDTH_DP * carDensity;
+
 		float scale = panelContentWidth / widgetWidth;
 		boolean isRtl = carContext.getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
 
@@ -203,14 +204,12 @@ public class CarWidgetsPanel {
 				bottoms.add(y + height);
 			}
 			// The slot is kept even for a hidden widget, the panel must not shift.
-			y += height + WIDGET_SPACING_DP * carDensity;
+			y += height + dividerWidth;
 			lastVisibleCount++;
 		}
 		if (drawnWidgets.isEmpty()) {
 			return 0;
 		}
-		float corner = CORNER_RADIUS_DP * carDensity;
-		float dividerWidth = DIVIDER_WIDTH_DP * carDensity;
 
 		//  Rows hidden by the reserved area split the panel into several blocks, each of them gets its own outline.
 		int blockStart = 0;
@@ -256,38 +255,71 @@ public class CarWidgetsPanel {
 				Path.Direction.CW
 		);
 
-		borderPaint.setStrokeWidth(borderWidth*2);
-		canvas.drawPath(backgroundPath, borderPaint);
-
 		canvas.save();
 		canvas.clipPath(backgroundPath);
 
-		canvas.drawPath(backgroundPath, backgroundPaint);
+		drawBackground(canvas, backgroundPath);
+		drawBorder(canvas, backgroundPath, borderWidth);
 
-		dividerPaint.setStrokeWidth(dividerWidth);
 		float widgetWidth = (contentRight - contentLeft) / scale;
-		float widgetHeight;
+//		float widgetHeight;
+		float widgetContentTop, widgetContentBottom;
 		for (int i = 0; i < widgets.size(); i++) {
-			float top = tops.get(i);
-			float bottom = bottoms.get(i);
-			widgetHeight = (bottom - top) / scale;
-			canvas.save();
-			canvas.translate(contentLeft, tops.get(i));
-			canvas.scale(scale, scale);
-			widgets.get(i).drawForAndroidAuto(canvas, drawSettings,
-					widgetWidth, widgetHeight, isRtl);
-			canvas.restore();
+			widgetContentTop = tops.get(i);
+			widgetContentBottom = bottoms.get(i);
+			drawWidget(canvas, drawSettings, widgets.get(i),
+					contentLeft, contentRight,
+					widgetContentTop, widgetContentBottom,
+					scale, widgetWidth, isRtl);
+//			widgetHeight = (widgetContentBottom - widgetContentTop) / scale;
+//			canvas.save();
+//			canvas.translate(contentLeft, tops.get(i));
+//			canvas.scale(scale, scale);
+//			widgets.get(i).drawForAndroidAuto(canvas, drawSettings,
+//					widgetWidth, widgetHeight, isRtl);
+//			canvas.restore();
 			if (i < widgets.size() - 1) {
-				canvas.drawLine(
-						blockLeft, bottoms.get(i) - dividerWidth / 2,
-						blockRight, bottoms.get(i) - dividerWidth / 2,
-						dividerPaint
-				);
+				drawSeparator(canvas, widgetContentBottom, dividerWidth, blockRight, blockLeft);
 			}
 		}
 
 		canvas.restore();
 	}
+
+	private void drawWidget(@NonNull Canvas canvas,
+							@NonNull DrawSettings drawSettings,
+							@NonNull MapWidget widget,
+							float contentLeft, float contentRight,
+							float widgetContentTop, float widgetContentBottom,
+							float scale,
+							float widgetWidth,
+							boolean isRtl) {
+		float widgetHeight = (widgetContentTop - widgetContentBottom) / scale;
+		canvas.save();
+		canvas.translate(contentLeft, widgetContentTop);
+		canvas.scale(scale, scale);
+		widget.drawForAndroidAuto(canvas, drawSettings,
+				widgetWidth, widgetHeight, isRtl);
+		canvas.restore();
+	}
+
+	private void drawBackground(@NonNull Canvas canvas, @NonNull Path backgroundPath) {
+		canvas.drawPath(backgroundPath, backgroundPaint);
+	}
+	private void drawBorder(@NonNull Canvas canvas, @NonNull Path backgroundPath, float borderWidth) {
+		borderPaint.setStrokeWidth(borderWidth*2);
+		canvas.drawPath(backgroundPath, borderPaint);
+	}
+
+	private void drawSeparator(@NonNull Canvas canvas, @NonNull Float widgetBottom, float dividerWidth, float blockRight, float blockLeft) {
+		dividerPaint.setStrokeWidth(dividerWidth);
+		canvas.drawLine(
+				blockLeft, widgetBottom + dividerWidth / 2,
+				blockRight, widgetBottom + dividerWidth / 2,
+				dividerPaint
+		);
+	}
+
 
 	/**
 	 * @return true if the click was handled by the panel.
