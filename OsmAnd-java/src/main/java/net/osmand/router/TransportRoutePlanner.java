@@ -58,6 +58,7 @@ public class TransportRoutePlanner {
 			return Collections.emptyList();
 		}
 		PriorityQueue<TransportRouteSegment> queue = new PriorityQueue<>(startStops.size(), new SegmentsComparator());
+		TLongObjectHashMap<TransportRouteSegment> queuedSegments = new TLongObjectHashMap<>();
 		for (TransportRouteSegment r : startStops) {
 			r.walkDist = (float) MapUtils.getDistance(r.getLocation(), start);
 			r.distFromStart = r.walkDist / ctx.cfg.walkSpeed;
@@ -68,7 +69,7 @@ public class TransportRoutePlanner {
 				}
 			}
 			r.nonce = nonce++;
-			queue.add(r);
+			addToQueueIfBetter(queue, queuedSegments, r);
 		}
 
 		double finishTime = ctx.cfg.maxRouteTime;
@@ -85,7 +86,10 @@ public class TransportRoutePlanner {
 			if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
 				return null;
 			}
-			TransportRouteSegment segment = queue.poll();
+			TransportRouteSegment segment = pollFromQueue(queue, queuedSegments);
+			if (segment == null) {
+				break;
+			}
 			long segIdWithParent = segmentWithParentId(segment, segment.parentRoute);
 			TransportRouteSegment ex = ctx.visitedSegments.get(segIdWithParent);
 			if (ex != null) {
@@ -155,25 +159,29 @@ public class TransportRoutePlanner {
 						if (ctx.visitedSegments.containsKey(segmentWithParentId(sgm, segment))) {
 							continue;
 						}
+						double walkDist = MapUtils.getDistance(sgm.getLocation(), stop.getLocation());
+						double walkTime = walkDist / ctx.cfg.walkSpeed +
+								ctx.cfg.getChangeTime(segment.road.getType(), sgm.road.getType());
+						double distFromStart = segment.distFromStart + travelTime + walkTime;
+						if (ctx.cfg.useSchedule) {
+							int tm = (sgm.departureTime - ctx.cfg.scheduleTimeOfDay) * 10;
+							if (tm < distFromStart) {
+								continue;
+							}
+							distFromStart = tm;
+						}
+						if (hasEqualOrBetterQueuedSegment(queuedSegments, sgm, segment, distFromStart)) {
+							continue;
+						}
 						TransportRouteSegment nextSegment = new TransportRouteSegment(sgm);
 						nextSegment.parentRoute = segment;
 						nextSegment.parentStop = ind;
-						nextSegment.walkDist = MapUtils.getDistance(nextSegment.getLocation(), stop.getLocation());
+						nextSegment.walkDist = walkDist;
 						nextSegment.parentTravelTime = travelTime;
 						nextSegment.parentTravelDist = travelDist;
-						double walkTime = nextSegment.walkDist / ctx.cfg.walkSpeed + 
-								ctx.cfg.getChangeTime(segment.road.getType(), sgm.road.getType());
-						nextSegment.distFromStart = segment.distFromStart + travelTime + walkTime;
+						nextSegment.distFromStart = distFromStart;
 						nextSegment.nonce = nonce++;
-						if (ctx.cfg.useSchedule) {
-							int tm = (sgm.departureTime - ctx.cfg.scheduleTimeOfDay) * 10;
-							if (tm >= nextSegment.distFromStart) {
-								nextSegment.distFromStart = tm;
-								queue.add(nextSegment);
-							}
-						} else {
-							queue.add(nextSegment);
-						}
+						addToQueueIfBetter(queue, queuedSegments, nextSegment);
 						if (TRACE_CHANGE_ID != 0) {
 							long from = ObfConstants.getOsmIdFromBinaryMapObjectId(segment.road.getId());
 							long to = ObfConstants.getOsmIdFromBinaryMapObjectId(sgm.road.getId());
@@ -231,7 +239,40 @@ public class TransportRoutePlanner {
 		return prepareResults(ctx, results);
 	}
 
-	private long segmentWithParentId(TransportRouteSegment segment, TransportRouteSegment parent) {
+	private static boolean hasEqualOrBetterQueuedSegment(
+			TLongObjectHashMap<TransportRouteSegment> queuedSegments, TransportRouteSegment segment,
+			TransportRouteSegment parent, double distFromStart) {
+		TransportRouteSegment queued = queuedSegments.get(segmentWithParentId(segment, parent));
+		return queued != null && queued.distFromStart <= distFromStart;
+	}
+
+	static boolean addToQueueIfBetter(PriorityQueue<TransportRouteSegment> queue,
+			TLongObjectHashMap<TransportRouteSegment> queuedSegments, TransportRouteSegment segment) {
+		if (hasEqualOrBetterQueuedSegment(queuedSegments, segment, segment.parentRoute, segment.distFromStart)) {
+			return false;
+		}
+		long segmentId = segmentWithParentId(segment, segment.parentRoute);
+		// PriorityQueue has no decrease-key operation. Keep the cheaper entry live and discard
+		// the superseded entry lazily in pollFromQueue().
+		queuedSegments.put(segmentId, segment);
+		queue.add(segment);
+		return true;
+	}
+
+	static TransportRouteSegment pollFromQueue(PriorityQueue<TransportRouteSegment> queue,
+			TLongObjectHashMap<TransportRouteSegment> queuedSegments) {
+		while (!queue.isEmpty()) {
+			TransportRouteSegment segment = queue.poll();
+			long segmentId = segmentWithParentId(segment, segment.parentRoute);
+			if (queuedSegments.get(segmentId) == segment) {
+				queuedSegments.remove(segmentId);
+				return segment;
+			}
+		}
+		return null;
+	}
+
+	private static long segmentWithParentId(TransportRouteSegment segment, TransportRouteSegment parent) {
 		return ((parent != null ? ObfConstants.getOsmIdFromBinaryMapObjectId(parent.road.getId()) : 0) << 30l) 
 				+ segment.getId();
 	}
