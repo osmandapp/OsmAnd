@@ -198,7 +198,6 @@ public class PluginsHelper {
 					&& !enabledPlugins.contains(plugin.getId())
 					&& !isPluginDisabledManually(app, plugin)) {
 				enabledPlugins.add(plugin.getId());
-				app.getSettings().enablePlugin(plugin.getId(), true);
 			}
 		}
 	}
