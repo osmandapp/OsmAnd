@@ -258,7 +258,21 @@ public class PointLocationLayer extends OsmandMapLayer
 		} else if (isMapLinkedToLocation() && !isMovingToMyLocation()) {
 			updateMarker(getPointLocation(), null, 0);
 		}
+		updateMyLocationCirclePosition(mapRenderer);
 		lastMarkerLocation = getCurrentMarkerLocation();
+	}
+
+	/**
+	 * Accuracy circle and view angle sector are drawn by the renderer itself at its own
+	 * "my location" position, which is a state separate from the marker position. That state is
+	 * not updated while the marker position is animated (unless the accuracy circle is visible),
+	 * so the sector could be left behind the location icon. Keep both in sync on every frame.
+	 */
+	private void updateMyLocationCirclePosition(@NonNull MapRendererView mapRenderer) {
+		CoreMapMarker locMarker = getCurrentMarker();
+		if (locMarker != null && locMarker.marker != null) {
+			mapRenderer.setMyLocationCirclePosition(locMarker.marker.getPosition());
+		}
 	}
 
 	private boolean setMarkerState(MarkerState markerState, boolean showHeading, boolean forceUpdate) {
