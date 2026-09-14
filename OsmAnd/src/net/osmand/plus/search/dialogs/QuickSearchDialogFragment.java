@@ -695,6 +695,10 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		amenity.setType(app.getPoiTypes().getOtherPoiCategory());
 		amenity.setSubType("");
 		amenity.setAdditionalInfo(Amenity.GPX_ICON, getSpatialSearchMapIconName(searchResult));
+		String typeLabel = MapObjectViewHolder.getTypeName(app, mapObject);
+		if (typeLabel != null) {
+			amenity.setAdditionalInfo(Amenity.SYNTHETIC_TYPE_LABEL, typeLabel);
+		}
 		return amenity;
 	}
 

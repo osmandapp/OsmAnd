@@ -81,6 +81,7 @@ public class Amenity extends MapObject {
 	public static final String COLOR = "color";
 	public static final String LANG_YES = "lang_yes";
 	public static final String GPX_ICON = "gpx_icon";
+	public static final String SYNTHETIC_TYPE_LABEL = "synthetic_type_label";
 	public static final String TYPE = "type";
 	public static final String SUBTYPE = "subtype";
 	public static final String NAME = "name";
