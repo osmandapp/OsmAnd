@@ -43,9 +43,9 @@ class RoutePlannerBenchmarkTest {
 		}
 		RouteResultPreparation.PRINT_TO_CONSOLE_ROUTE_INFORMATION = false
 		println("")
-		println("### route planner, shared copy on ${testPlatformName()}, $WARMUP_ROUNDS warmup / $MEASURED_ROUNDS measured, best time")
+		println("### route planner, shared copy on ${testPlatformName()}, A* and HH, $WARMUP_ROUNDS warmup / $MEASURED_ROUNDS measured, best time")
 		println("")
-		println("  ${"route".padEnd(28)} ${"ms".padStart(8)} ${"segments".padStart(9)} ${"km".padStart(8)} " +
+		println("  ${"route".padEnd(28)} ${"by".padEnd(10)} ${"ms".padStart(8)} ${"segments".padStart(9)} ${"km".padStart(8)} " +
 				"${"routing s".padStart(10)} ${"visited".padStart(9)} ${"tiles".padStart(7)}")
 		for (route in ROUTES) {
 			val paths = route.maps.map { find(it) }
@@ -53,40 +53,52 @@ class RoutePlannerBenchmarkTest {
 				println("  ${route.name.padEnd(28)} map not found: ${route.maps.filterIndexed { i, _ -> paths[i] == null }}")
 				continue
 			}
-			val readers = paths.map { BinaryMapIndexReader(it!!) }
-			try {
-				var best = Double.MAX_VALUE
-				var line = ""
-				repeat(WARMUP_ROUNDS + MEASURED_ROUNDS) { round ->
-					val mark = TimeSource.Monotonic.markNow()
-					val config = RoutingTestFixtures.defaultBuilder().build("car", limits(), LinkedHashMap())
-					val fe = RoutePlannerFrontEnd()
-					val ctx = fe.buildRoutingContext(config, readers)
-					val res = fe.searchRoute(ctx, route.start, route.end, null)
-					val ms = mark.elapsedNow().inWholeMicroseconds / 1000.0
-					if (round >= WARMUP_ROUNDS && ms < best) {
-						best = ms
-						val error = res.getError()
-						line = if (error != null) {
-							"error: $error"
-						} else {
-							var km = 0.0
-							for (s in res.detailed) {
-								km += s.getDistance()
-							}
-							val progress = ctx.calculationProgress!!
-							"${res.detailed.size.toString().padStart(9)} ${(km / 1000).format1().padStart(8)} " +
-									"${ctx.routingTime.toDouble().format1().padStart(10)} ${progress.visitedSegments.toString().padStart(9)} " +
-									progress.loadedTiles.toString().padStart(7)
-						}
-					}
-				}
-				println("  ${route.name.padEnd(28)} ${best.format1().padStart(8)} $line")
-			} finally {
-				readers.forEach { it.close() }
+			for (hh in listOf(false, true)) {
+				benchmark(route, paths.map { it!! }, hh)
 			}
 		}
 		println("")
+	}
+
+	/** One row: the route by the A* planner, or over the hub graph as the apps calculate it by default (only HH, so a fallback shows as an error). */
+	private fun benchmark(route: Route, paths: List<String>, hh: Boolean) {
+		val readers = paths.map { BinaryMapIndexReader(it) }
+		try {
+			var best = Double.MAX_VALUE
+			var line = ""
+			repeat(WARMUP_ROUNDS + MEASURED_ROUNDS) { round ->
+				val mark = TimeSource.Monotonic.markNow()
+				val config = RoutingTestFixtures.defaultBuilder().build("car", limits(), LinkedHashMap())
+				val fe = RoutePlannerFrontEnd()
+				RoutePlannerFrontEnd.CALCULATE_MISSING_MAPS = false
+				if (hh) {
+					fe.setDefaultHHRoutingConfig()
+					fe.setUseOnlyHHRouting(true)
+				}
+				val ctx = fe.buildRoutingContext(config, readers)
+				val res = fe.searchRoute(ctx, route.start, route.end, null)
+				val ms = mark.elapsedNow().inWholeMicroseconds / 1000.0
+				if (round >= WARMUP_ROUNDS && ms < best) {
+					best = ms
+					val error = res.getError()
+					line = if (error != null) {
+						"error: $error"
+					} else {
+						var km = 0.0
+						for (s in res.detailed) {
+							km += s.getDistance()
+						}
+						val progress = ctx.calculationProgress!!
+						"${res.detailed.size.toString().padStart(9)} ${(km / 1000).format1().padStart(8)} " +
+								"${ctx.routingTime.toDouble().format1().padStart(10)} ${progress.visitedSegments.toString().padStart(9)} " +
+								progress.loadedTiles.toString().padStart(7)
+					}
+				}
+			}
+			println("  ${route.name.padEnd(28)} ${(if (hh) "shared hh" else "shared").padEnd(10)} ${best.format1().padStart(8)} $line")
+		} finally {
+			readers.forEach { it.close() }
+		}
 	}
 
 	/** The 256 MB the C++ router is given, for the java planner too, so the tile cache does not thrash on the long routes. */
