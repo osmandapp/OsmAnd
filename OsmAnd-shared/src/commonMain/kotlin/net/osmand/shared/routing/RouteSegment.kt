@@ -240,11 +240,10 @@ class MultiFinalRouteSegment(f: FinalRouteSegment) : FinalRouteSegment(f.getRoad
 }
 
 /**
- * A callback the planner tells about every segment it settles.
- *
- * Java's interface has a second method, `visitApproximatedSegments`, for the gpx approximation;
- * it comes with that.
+ * A callback the planner tells about every segment it settles, and the gpx approximation about
+ * every stretch of route it attached between two track points.
  */
 interface RouteSegmentVisitor {
 	fun visitSegment(segment: RouteSegment, segmentEnd: Int, poll: Boolean)
+	fun visitApproximatedSegments(segment: List<RouteSegmentResult>, start: GpxPoint, target: GpxPoint)
 }

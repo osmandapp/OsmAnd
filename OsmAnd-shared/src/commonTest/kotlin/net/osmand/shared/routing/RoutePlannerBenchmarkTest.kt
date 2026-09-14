@@ -2,6 +2,7 @@ package net.osmand.shared.routing
 
 import net.osmand.shared.binary.BinaryMapIndexReader
 import net.osmand.shared.data.KLatLon
+import net.osmand.shared.util.KMapUtils
 import okio.FileSystem
 import okio.Path.Companion.toPath
 import kotlin.test.Test
@@ -15,7 +16,8 @@ import kotlin.time.TimeSource
  * detailed search along it - and the wall time, the segments settled and the tiles loaded are
  * printed. The same routes, the same maps and the same profile run through the java planner, the
  * C++ router and this planner on the jvm in `RoutePlannerBenchmarkTest` in OsmAnd-java, so the
- * four columns can be put side by side.
+ * four columns can be put side by side. A second table takes the same routes as tracks and
+ * attaches them back to the roads, the routing-based and the geometry-based way.
  *
  * The maps are real ones and are not in the repository; they are looked for in [OBF_DIRECTORIES]
  * and in `OSMAND_OBF_DIRECTORY`. **Not part of a normal run**: it only does anything when
@@ -58,6 +60,87 @@ class RoutePlannerBenchmarkTest {
 			}
 		}
 		println("")
+		// the same routes as tracks - the A* route's road points thinned to the spacing of a recorded
+		// track - attached back to the roads, the routing-based way and the geometry-based way
+		println("### gpx approximation, shared copy on ${testPlatformName()}, routing-based and geometry-based, $WARMUP_ROUNDS warmup / $MEASURED_ROUNDS measured, best time")
+		println("")
+		println("  ${"route".padEnd(28)} ${"by".padEnd(14)} ${"ms".padStart(8)} ${"segments".padStart(9)} ${"km".padStart(8)} " +
+				"${"points".padStart(8)} ${"visited".padStart(9)} ${"tiles".padStart(7)}")
+		for (route in ROUTES) {
+			val paths = route.maps.map { find(it) }
+			if (paths.any { it == null }) {
+				println("  ${route.name.padEnd(28)} map not found: ${route.maps.filterIndexed { i, _ -> paths[i] == null }}")
+				continue
+			}
+			val readers = paths.map { BinaryMapIndexReader(it!!) }
+			try {
+				val track = track(route, readers)
+				for (geometry in listOf(false, true)) {
+					approximation(route, readers, track, geometry)
+				}
+			} finally {
+				readers.forEach { it.close() }
+			}
+		}
+		println("")
+	}
+
+	/** The route's road points thinned to the spacing of a track recorded at driving speed, a point a second. */
+	private fun track(route: Route, readers: List<BinaryMapIndexReader>): List<KLatLon> {
+		val config = RoutingTestFixtures.defaultBuilder().build("car", limits(), LinkedHashMap())
+		val fe = RoutePlannerFrontEnd()
+		val ctx = fe.buildRoutingContext(config, readers)
+		val res = fe.searchRoute(ctx, route.start, route.end, null)
+		val track = ArrayList<KLatLon>()
+		var last: KLatLon? = null
+		for (s in res.detailed) {
+			val step = if (s.getStartPointIndex() < s.getEndPointIndex()) 1 else -1
+			var i = s.getStartPointIndex()
+			while (true) {
+				val p = s.getPoint(i)
+				last = p
+				if (track.isEmpty() || KMapUtils.getDistance(track[track.size - 1], p) >= TRACK_SPACING_M) {
+					track.add(p)
+				}
+				if (i == s.getEndPointIndex()) {
+					break
+				}
+				i += step
+			}
+		}
+		if (last != null && track[track.size - 1] != last) {
+			track.add(last)
+		}
+		return track
+	}
+
+	/** One row: the track attached to the roads, by the A* searches between its points or by the walk along the road graph. */
+	private fun approximation(route: Route, readers: List<BinaryMapIndexReader>, track: List<KLatLon>, geometry: Boolean) {
+		var best = Double.MAX_VALUE
+		var line = ""
+		repeat(WARMUP_ROUNDS + MEASURED_ROUNDS) { round ->
+			val mark = TimeSource.Monotonic.markNow()
+			val config = RoutingTestFixtures.defaultBuilder().build("car", limits(), LinkedHashMap())
+			val fe = RoutePlannerFrontEnd()
+			fe.setUseGeometryBasedApproximation(geometry)
+			val ctx = fe.buildRoutingContext(config, readers, RouteCalculationMode.NORMAL)
+			val gctx = GpxRouteApproximation(ctx)
+			val points = fe.generateGpxPoints(gctx, track, null)
+			val res = fe.searchGpxRoute(gctx, points, null, false)
+			val ms = mark.elapsedNow().inWholeMicroseconds / 1000.0
+			if (round >= WARMUP_ROUNDS && ms < best) {
+				best = ms
+				var km = 0.0
+				for (s in res.fullRoute) {
+					km += s.getDistance()
+				}
+				val progress = ctx.calculationProgress!!
+				line = "${res.fullRoute.size.toString().padStart(9)} ${(km / 1000).format1().padStart(8)} " +
+						"${points.size.toString().padStart(8)} ${progress.visitedSegments.toString().padStart(9)} " +
+						progress.loadedTiles.toString().padStart(7)
+			}
+		}
+		println("  ${route.name.padEnd(28)} ${("shared gpx" + if (geometry) " geo" else "").padEnd(14)} ${best.format1().padStart(8)} $line")
 	}
 
 	/** One row: the route by the A* planner, or over the hub graph as the apps calculate it by default (only HH, so a fallback shows as an error). */
@@ -127,6 +210,7 @@ class RoutePlannerBenchmarkTest {
 	companion object {
 		const val WARMUP_ROUNDS = 1
 		const val MEASURED_ROUNDS = 2
+		const val TRACK_SPACING_M = 15.0 // a point a second at 55 km/h
 
 		val OBF_DIRECTORIES = listOf(
 			"/Users/crimean/tmp/maps",
