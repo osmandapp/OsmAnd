@@ -262,8 +262,11 @@ public class SpatialSearchToken {
 //				res = 0; // Test a school 
 				// select shortest available version
 				if (res == 0) {
-					res = Integer.compare(atom.otherWordsCnt + atom.otherFoundCnt,
-							existing.otherWordsCnt + existing.otherFoundCnt);
+					// fewer unmatched words first: '28' keeps house of 'вулиця 28-ма Лінія' over street '28-a liniia street'
+					res = Integer.compare(atom.otherWordsCnt, existing.otherWordsCnt);
+					if (res == 0) {
+						res = Integer.compare(atom.otherFoundCnt, existing.otherFoundCnt);
+					}
 				}
 				// '2 south 2nd street' vs '25 садова вулиця' (25-та) -
 				if (res == 0 && !SearchAlgorithms.isNumber2Letters(wordAligned)) {
