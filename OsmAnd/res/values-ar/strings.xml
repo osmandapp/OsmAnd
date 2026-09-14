@@ -5385,4 +5385,8 @@
     <string name="routing_attr_motor_type_ethanol_name">الإيثانول</string>
     <string name="rendering_attr_surface_clay_name">فخار</string>
     <string name="rendering_attr_surface_laterite_name">اللاتريت</string>
+    <string name="quick_action_add_track">إضافة مسار</string>
+    <string name="quick_action_tracks_select_descr">أضف مساراً واحداً أو أكثر لإظهارها أو إخفائها على الخريطة بنقرة واحدة.</string>
+    <string name="quick_action_tracks_always_ask_descr">يؤدي النقر على هذا الإجراء إلى فتح قائمة المسارات، حيث يمكنك إظهار أو إخفاء واحد أو أكثر منها.</string>
+    <string name="quick_action_all_tracks">كل المسارات</string>
 </resources>

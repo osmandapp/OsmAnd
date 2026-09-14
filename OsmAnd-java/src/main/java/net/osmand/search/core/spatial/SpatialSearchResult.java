@@ -101,11 +101,16 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 		});
 	}
 
-	SpatialSearchResultRef getFirstRef() {
+	public SpatialSearchResultRef getFirstRef() {
 		if (objs.size() > 0) {
 			return objs.get(0);
 		}
 		return null;
+	}
+
+	/** atoms of the combination this result stands for, one per query token */
+	public List<NameIndexAtom> getAtoms() {
+		return parent.getRawAtoms(parentInd);
 	}
 	
 	private MapObject getFirstRefObject(boolean useUnited) {
@@ -212,7 +217,7 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 	public boolean isPoiCategory() {
 		return !objs.isEmpty() && objs.get(0).isPoiCategory();
 	}
-	
+
 	public SpatialPoiType getPoiCategory(SpatialPoiSearch poiSearch) {
 		if (!objs.isEmpty() && objs.get(0).isPoiCategory()) {
 			return poiSearch.getById((int) objs.get(0).atom.id);

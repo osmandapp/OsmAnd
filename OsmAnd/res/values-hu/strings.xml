@@ -5268,4 +5268,8 @@
     <string name="share_favorites_media_preparation_failed">Nem sikerült beilleszteni a csatolt médiafájlokat. Csak pontok megosztása.</string>
     <string name="search_on_web">Keresés a világhálón</string>
     <string name="astro_eclipse_column_below_horizon">Horizont alatt</string>
+    <string name="quick_action_add_track">Nyomvonal hozzáadása</string>
+    <string name="quick_action_tracks_select_descr">Adjon hozzá egy vagy több nyomvonalat, hogy egyetlen koppintással megjeleníthesse vagy elrejthesse őket a térképen.</string>
+    <string name="quick_action_tracks_always_ask_descr">Erre a műveletre koppintva megnyílik a nyomvonalak listája, ahol megjeleníthet vagy elrejthet egyet vagy többet közülük.</string>
+    <string name="quick_action_all_tracks">Összes nyomvonal</string>
 </resources>

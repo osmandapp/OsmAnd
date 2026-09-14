@@ -185,11 +185,26 @@ not by a distance alone:
 
 | pair | when |
 |---|---|
-| stop node + stop node (platform, stop position, entrance, junction, bus/tram stop) | same name, within 400 m |
+| name-alike object + anything of the same name | within 400 m, unless it carries a travel rating of its own (the Golden Gate is not road furniture) |
 | way + way of one street | same name AND same city, within 2 km - a line's single coordinate says little |
 | any other POI + POI | same name, within 30 m |
-| street + a bridge, tunnel, viaduct or ford of the same name | within 2 km - it is a piece OF the street, unless it carries a travel rating of its own (the Golden Gate is not road furniture) |
-| street + anything else standing on it | never |
+| street + anything that is not name-alike | never |
+| metro station (`station=subway`) + another place | never - the metro `Майдан Незалежності` stands 7 m from the square it is named after (pref-0141) |
+
+A **name-alike** object is named after the place it stands at, and searched by name it is absorbed
+by that place - the street, the village, the pass, the station (pref-0001, pref-0007, pref-0082,
+pref-0103, pref-0108). Two classes, and their weights only decide which row stays: 0.35 keeps a
+street above within ~700 m and 0.10 within ~2 km, so inside 400 m the place always wins.
+
+- 0.35: stops, taxi, bike docks, car parks and their entrances - a third of named bike docks and a
+  seventh of car parks are called after their street;
+- 0.10: pieces - the platforms, stop positions and entrances of a stop, internet access (a metro
+  platform with wi-fi is stored as one too, pref-0140), bridges, tunnels, steps, traffic calming,
+  traffic signals, road hazard signs, street furniture.
+
+Searched by kind ("parking", "bench") nothing is absorbed: the objects themselves were asked for
+(pref-0092) - the 20 entrances of one metro station are 20 answers (pref-0143). A search is by kind
+when its first row is the category itself: a category row always sorts first.
 
 The radii are measured, not chosen: 320 m between a camp site and its bus stop and 330 m between
 a pass and its platform were both called one place; 218 m between two parcel lockers and 57 m

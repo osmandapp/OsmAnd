@@ -119,6 +119,8 @@ public class SpatialTextSearch {
 		public int MIN_CHARACTERS_INCOMPLETE = 2;
 		
 		public boolean SCORE_RANKING = true; // false - old lexicographic ladder
+		// one-word query: POIs found by category only and unrated, read nearest first ("restaurant" finds 180K; 0 - all)
+		public int LIMIT_READ_SINGLE_OBJECTS = 1500;
 
 		public int MIN_ELO_RATING = 1400; // see SearchResult.MIN_ELO_RATING
 		public int WORLD_ELO_RATING = 1500; // from world map by default
@@ -127,8 +129,10 @@ public class SpatialTextSearch {
 		// no need to find 3 street intersection or 3 POI intersection
 		public int LIMIT_ATOMIC_OBJECTS = 2;
 		
-		// share of a common word left unindexed from which it names a kind, not an object
-		public double KIND_WORD_NONINDEXED_SHARE = 0.2;
+		// share of a common word left unindexed from which it names a kind, not an object.
+		// Address index of the 2026-09 maps: "street", "avenue", "straße" 0.90-1.00, but street names reach
+		// 0.2 too - "john" 0.31, "lange" 0.33, "hohe" 0.26 - and 0.2 sent "707 John Street" below Johnson Street
+		public double KIND_WORD_NONINDEXED_SHARE = 0.5;
 		
 		// Create default bboxes for points POI / Address objects  
 		public int POI_DEFAULT_RADIUS = 50;

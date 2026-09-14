@@ -5396,4 +5396,8 @@
     <string name="share_favorites_missing_media_warning">Nogle af de vedhæftede mediefiler kunne ikke medtages.</string>
     <string name="search_on_web">Søg på nettet</string>
     <string name="astro_eclipse_column_below_horizon">Under horisonten</string>
+    <string name="quick_action_add_track">Tilføj spor</string>
+    <string name="quick_action_tracks_select_descr">Tilføj et eller flere spor for at vise eller skjule dem på kortet med et enkelt tryk.</string>
+    <string name="quick_action_tracks_always_ask_descr">Med et tryk på denne handling åbnes listen over spor, hvor du kan vise eller skjule et eller flere af dem.</string>
+    <string name="quick_action_all_tracks">Alle spor</string>
 </resources>

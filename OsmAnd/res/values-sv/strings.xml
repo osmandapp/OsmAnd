@@ -1128,7 +1128,7 @@
     <string name="update_all">Uppdatera alla (%1$s MB)</string>
     <string name="share_geo">geo:</string>
     <string name="share_menu_location">Dela platsen</string>
-    <string name="shared_string_send">Sänd</string>
+    <string name="shared_string_send">Skicka</string>
     <string name="show_on_start_description">\'Av\' startar kartan direkt.</string>
     <string name="map_downloaded">Karta hämtad</string>
     <string name="map_downloaded_descr">%1$s -kartan är redo att användas.</string>
@@ -1139,7 +1139,7 @@
     <string name="shared_string_contact">Kontakt</string>
     <string name="osm_edit_created_poi">Skapat en OSM POI</string>
     <string name="world_map_download_descr">Världskarta (täcker hela världen vid låg zoomnivå) saknas eller är föråldrad. Överväg att ladda ned den för en global översikt.</string>
-    <string name="shared_string_upload">Skicka</string>
+    <string name="shared_string_upload">Ladda upp</string>
     <string name="map_legend">Teckenförklaring</string>
     <string name="shared_string_update">Uppdatering</string>
     <string name="feedback">Återkoppling</string>
@@ -1875,7 +1875,7 @@
     <string name="add_waypoint">Lägg till vägpunkt</string>
     <string name="save_gpx_waypoint">Spara GPX-vägpunkt</string>
     <string name="waypoint_one">Vägpunkt 1</string>
-    <string name="empty_state_favourites">Lägg Till Favoriter</string>
+    <string name="empty_state_favourites">Lägg till favoriter</string>
     <string name="empty_state_favourites_desc">Importera favoriter eller lägg till dem genom att markera punkter på kartan.</string>
     <string name="import_track">Importera GPX-fil</string>
     <string name="import_track_desc">Filen %1$s innehåller inte vägpunkter, importera det som ett spår?</string>
@@ -3404,7 +3404,7 @@
     <string name="external_device_details_disconnect">Koppla ifrån</string>
     <string name="external_device_ant">ANT</string>
     <string name="search_track_by_name">Sök spår efter namn</string>
-    <string name="no_search_results">Inga resultat</string>
+    <string name="no_search_results">Inga träffar</string>
     <string name="external_device_low_battery">Lågt batteri</string>
     <string name="device_disconnected">%1$s frånkopplad</string>
     <string name="device_connected">%1$s ansluten</string>
@@ -5320,4 +5320,8 @@
     <string name="shared_string_note">Obs</string>
     <string name="release_5_4">• Uppdaterat sökgränssnitt: sortering, kategorifilter och renare utseende\n\n • Bifoga foton och media till favoriter\n\n • Favoriter: stöd för undergrupper och mappar som kan fästas\n\n • Koordinater: sökning, kartrutnät och POI-visning stöder nu EPSG och Maidenhead-lokator\n\n • Rättade navigeringsavbrott; växla mellan standard- och snabbruttning\n\n • Ställ in Android Autos kartskala separat från telefonens\n\n • Ny rumslig sökning — hitta platser och sök kring en plats\n\n • Astronomi har fått sol- och månförmörkelser</string>
     <string name="astro_eclipse_column_below_horizon">Under horisonten</string>
+    <string name="quick_action_add_track">Lägg till spår</string>
+    <string name="quick_action_tracks_select_descr">Lägg till ett eller flera spår för att med ett enkelt tryck visa eller dölja dem på kartan.</string>
+    <string name="quick_action_all_tracks">Alla spår</string>
+    <string name="quick_action_tracks_always_ask_descr">Tryck på denna snabbåtgärd öppnar listan över spår, där du kan visa eller dölja en eller flera av dem.</string>
 </resources>
