@@ -298,7 +298,7 @@ public abstract class BaseFavoriteListFragment extends BaseFullScreenFragment
 	}
 
 	@Override
-	public void shareFavoritesFinished(@NonNull File destFile, @NonNull Spanned pointsDescription) {
+	public void shareFavoritesFinished(@NonNull File destFile, @Nullable Spanned pointsDescription) {
 		updateProgressVisibility(false);
 	}
 
