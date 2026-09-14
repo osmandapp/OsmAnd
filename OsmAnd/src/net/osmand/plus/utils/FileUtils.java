@@ -51,11 +51,11 @@ public class FileUtils {
 
 	public static final int APPROXIMATE_FILE_SIZE_BYTES = 5 * 1024 * 1024;
 
-	public static final Pattern ILLEGAL_FILE_NAME_CHARACTERS = Pattern.compile("[?:\"*|/<>]");
+	public static final Pattern ILLEGAL_FILE_NAME_CHARACTERS = Pattern.compile("[?:\"*|/\\\\<>]");
 	public static final Pattern ILLEGAL_PATH_NAME_CHARACTERS = Pattern.compile("[?:\"*|<>]");
 
 	public static void renameFile(@NonNull FragmentActivity activity, @NonNull File file,
-			@Nullable Fragment target, boolean usedOnMap) {
+	                              @Nullable Fragment target, boolean usedOnMap) {
 		if (file.exists()) {
 			FragmentManager fragmentManager = activity.getSupportFragmentManager();
 			RenameFileBottomSheet.showInstance(fragmentManager, target, file, usedOnMap);
@@ -64,7 +64,7 @@ public class FileUtils {
 
 	@Nullable
 	public static File renameSQLiteFile(@NonNull OsmandApplication app, @NonNull File source,
-			@NonNull String newName, @Nullable RenameCallback callback) {
+	                                    @NonNull String newName, @Nullable RenameCallback callback) {
 		File dest = checkRenamePossibility(app, source, newName, false);
 		if (dest == null) {
 			return null;
@@ -93,7 +93,7 @@ public class FileUtils {
 
 	@Nullable
 	public static File renameGpxFile(@NonNull OsmandApplication app, @NonNull File source,
-			@NonNull String newName, boolean dirAllowed, @Nullable RenameCallback callback) {
+	                                 @NonNull String newName, boolean dirAllowed, @Nullable RenameCallback callback) {
 		File dest = checkRenamePossibility(app, source, newName, dirAllowed);
 		if (dest == null) {
 			return null;
@@ -111,7 +111,7 @@ public class FileUtils {
 
 	@Nullable
 	public static File renameFile(@NonNull OsmandApplication app, @NonNull File source,
-			@NonNull String newName, boolean dirAllowed, RenameCallback callback) {
+	                              @NonNull String newName, boolean dirAllowed, RenameCallback callback) {
 		File dest = checkRenamePossibility(app, source, newName, dirAllowed);
 		if (dest == null) {
 			return null;
@@ -133,7 +133,7 @@ public class FileUtils {
 
 	@Nullable
 	public static File renameGpxFile(@NonNull OsmandApplication app, @NonNull File src,
-			@NonNull File dest) {
+	                                 @NonNull File dest) {
 		File destDir = dest.getParentFile();
 		if (!destDir.exists()) {
 			destDir.mkdirs();
@@ -188,8 +188,8 @@ public class FileUtils {
 	}
 
 	public static void updateMovedTrackFolder(@NonNull OsmandApplication app,
-			@NonNull TrackFolder trackFolder,
-			@NonNull File srcDir, @NonNull File destDir) {
+	                                          @NonNull TrackFolder trackFolder,
+	                                          @NonNull File srcDir, @NonNull File destDir) {
 		List<File> files = new ArrayList<>();
 		for (TrackItem trackItem : trackFolder.getFlattenedTrackItems()) {
 			KFile file = trackItem.getFile();
@@ -204,14 +204,14 @@ public class FileUtils {
 	}
 
 	public static void updateAfterDeleteTrackFolder(@NonNull OsmandApplication app,
-			@NonNull TrackFolder trackFolder) {
+	                                                @NonNull TrackFolder trackFolder) {
 		TrackSortModesHelper sortModesHelper = app.getTrackSortModesHelper();
 		sortModesHelper.onTrackFolderDeleted(trackFolder);
 	}
 
 	private static void updateMovedGpxFiles(@NonNull OsmandApplication app,
-			@NonNull List<File> files,
-			@NonNull File srcDir, @NonNull File destDir) {
+	                                        @NonNull List<File> files,
+	                                        @NonNull File srcDir, @NonNull File destDir) {
 		for (File srcFile : files) {
 			String path = srcFile.getAbsolutePath();
 			String newPath = path.replace(srcDir.getAbsolutePath(), destDir.getAbsolutePath());
@@ -242,7 +242,7 @@ public class FileUtils {
 	}
 
 	public static File checkRenamePossibility(@NonNull OsmandApplication app, @NonNull File source,
-			@NonNull String newName, boolean dirAllowed) {
+	                                          @NonNull String newName, boolean dirAllowed) {
 		if (Algorithms.isEmpty(newName)) {
 			app.showToastMessage(R.string.empty_filename);
 			return null;
@@ -332,7 +332,7 @@ public class FileUtils {
 	}
 
 	public static String createUniqueFileName(@NonNull OsmandApplication app, String name,
-			String dirName, String extension) {
+	                                          String dirName, String extension) {
 		String uniqueFileName = name;
 		File dir = app.getAppPath(dirName);
 		File fout = new File(dir, name + extension);
@@ -424,7 +424,7 @@ public class FileUtils {
 	}
 
 	public static void collectFiles(@NonNull File file, @NonNull List<File> list,
-			boolean includeDirs) {
+	                                boolean includeDirs) {
 		if (file.isDirectory()) {
 			if (includeDirs) {
 				list.add(file);
@@ -463,7 +463,7 @@ public class FileUtils {
 	}
 
 	public static void removeFilesWithExtensions(@NonNull File dir, boolean withSubdirs,
-			@NonNull String... extensions) {
+	                                             @NonNull String... extensions) {
 		File[] files = dir.listFiles(pathname -> pathname.isDirectory()
 				? withSubdirs : CollectionUtils.endsWithAny(pathname.getName(), extensions));
 		if (files == null) {
@@ -485,7 +485,7 @@ public class FileUtils {
 	}
 
 	public static boolean replaceTargetFile(@Nullable ResourceManager manager,
-			@NonNull File sourceFile, @NonNull File targetFile) {
+	                                        @NonNull File sourceFile, @NonNull File targetFile) {
 		boolean removed = Algorithms.removeAllFiles(targetFile);
 		if (manager != null && removed) {
 			manager.closeFile(targetFile.getName());
@@ -516,7 +516,7 @@ public class FileUtils {
 
 	@NonNull
 	public static File getBackupFileForCustomAppMode(@NonNull OsmandApplication app,
-			@NonNull String appModeKey) {
+	                                                 @NonNull String appModeKey) {
 		String fileName = appModeKey + OSMAND_SETTINGS_FILE_EXT;
 		File backupDir = FileUtils.getExistingDir(app, BACKUP_INDEX_DIR);
 		return new File(backupDir, fileName);
