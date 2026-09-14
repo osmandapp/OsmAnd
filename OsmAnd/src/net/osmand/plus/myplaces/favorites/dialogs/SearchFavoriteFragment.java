@@ -466,7 +466,7 @@ public class SearchFavoriteFragment extends BaseFullScreenDialogFragment impleme
 				FavoriteMenu favoriteMenu = new FavoriteMenu(app, app.getUIUtilities(), requireMyPlacesActivity());
 				favoriteMenu.showPointsSelectOptionsMenu(actionButton, selectedPoints, null, nightMode,
 						createCategorySelectionListener(null, selectedPoints),
-						SearchFavoriteFragment.this, SearchFavoriteFragment.this);
+						SearchFavoriteFragment.this, null, SearchFavoriteFragment.this);
 			}
 		});
 
