@@ -198,17 +198,7 @@ public class RoutePlannerCompatTest {
 				for (int i = 0; i < java.size(); i++) {
 					RouteSegmentResult j = java.get(i);
 					net.osmand.shared.routing.RouteSegmentResult k = copy.get(i);
-					String s = m + " segment " + i + " road " + j.getObject().id;
-					assertEquals(s + " road", j.getObject().id, k.getObject().id);
-					assertEquals(s + " start", j.getStartPointIndex(), k.getStartPointIndex());
-					assertEquals(s + " end", j.getEndPointIndex(), k.getEndPointIndex());
-					assertArrayEquals(s + " pointsX", j.getObject().pointsX, k.getObject().pointsX);
-					assertArrayEquals(s + " pointsY", j.getObject().pointsY, k.getObject().pointsY);
-					Same.close(s + " routingTime", j.getRoutingTime(), k.getRoutingTime());
-					Same.close(s + " distance", j.getDistance(), k.getDistance());
-					Same.close(s + " segmentTime", j.getSegmentTime(), k.getSegmentTime());
-					Same.close(s + " speed", j.getSegmentSpeed(), k.getSegmentSpeed());
-					assertTurn(s, j.getTurnType(), k.getTurnType());
+					Same.segment(m + " segment " + i + " road " + j.getObject().id, j, k);
 				}
 			}
 		} finally {
@@ -231,20 +221,5 @@ public class RoutePlannerCompatTest {
 			res.add(latLon(l));
 		}
 		return res;
-	}
-
-	private static void assertTurn(String m, net.osmand.router.TurnType j, TurnType k) {
-		assertEquals(m + " turn present", j == null, k == null);
-		if (j == null) {
-			return;
-		}
-		assertEquals(m + " turn", j.getValue(), k.getValue());
-		assertEquals(m + " exit", j.getExitOut(), k.getExitOut());
-		Same.close(m + " angle", j.getTurnAngle(), k.getTurnAngle());
-		assertEquals(m + " skipToSpeak", j.isSkipToSpeak(), k.isSkipToSpeak());
-		assertEquals(m + " possibleLeft", j.isPossibleLeftTurn(), k.isPossibleLeftTurn());
-		assertEquals(m + " possibleRight", j.isPossibleRightTurn(), k.isPossibleRightTurn());
-		assertArrayEquals(m + " lanes", j.getLanes(), k.getLanes());
-		assertEquals(m + " toString", j.toString(), k.toString());
 	}
 }

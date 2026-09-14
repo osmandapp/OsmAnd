@@ -1,9 +1,13 @@
 package net.osmand.shared.compat;
 
+import net.osmand.LocationsHolder;
 import net.osmand.NativeLibrary;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
+import net.osmand.router.GpxRouteApproximation;
 import net.osmand.router.RoutePlannerFrontEnd;
+import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
+import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.RouteResultPreparation.RouteCalcResult;
 import net.osmand.router.RouteSegmentResult;
@@ -11,6 +15,8 @@ import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
 import net.osmand.router.RoutingContext;
 import net.osmand.shared.data.KLatLon;
+import net.osmand.shared.routing.RouteCalculationMode;
+import net.osmand.util.MapUtils;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -28,7 +34,9 @@ import java.util.Locale;
 /**
  * The routes of the shared {@code RoutePlannerBenchmarkTest}, calculated three ways on this jvm:
  * by the java planner, by the C++ router over JNI, and by the shared planner. With the shared
- * planner's Kotlin/Native run that gives the four columns the port is judged by.
+ * planner's Kotlin/Native run that gives the four columns the port is judged by. A second table
+ * takes the same routes as tracks and attaches them back to the roads, the routing-based and the
+ * geometry-based way, by the same three.
  *
  * The maps are real ones and are not in the repository, see the directories below. The C++ column
  * needs the host library built, see {@code core-legacy/binaries/darwin/arm64/Release/libosmand.dylib};
@@ -42,6 +50,8 @@ public class RoutePlannerBenchmarkTest {
 
 	private static final int WARMUP_ROUNDS = 1;
 	private static final int MEASURED_ROUNDS = 2;
+	private static final double TRACK_SPACING_M = 15; // a point a second at 55 km/h
+	private static final double TRACK_OFFSET_LAT = 0.00002, TRACK_OFFSET_LON = 0.00003; // ~2 m north and ~2 m east
 
 	private static final List<String> OBF_DIRECTORIES = Arrays.asList(
 			"/Users/crimean/tmp/maps",
@@ -91,36 +101,205 @@ public class RoutePlannerBenchmarkTest {
 		}
 		System.out.println();
 		System.out.println("### route planner on jvm " + System.getProperty("java.version") + ": java, C++ over JNI" + (nativeLib == null ? " (library not found)" : "")
-				+ ", shared copy; " + WARMUP_ROUNDS + " warmup / " + MEASURED_ROUNDS + " measured, best time");
+				+ ", shared copy, each A* and HH; " + WARMUP_ROUNDS + " warmup / " + MEASURED_ROUNDS + " measured, best time");
 		System.out.println();
-		System.out.printf(Locale.US, "  %-28s %-6s %8s %9s %8s %10s %9s %7s%n", "route", "by", "ms", "segments", "km", "routing s", "visited", "tiles");
+		System.out.printf(Locale.US, "  %-28s %-10s %8s %9s %8s %10s %9s %7s%n", "route", "by", "ms", "segments", "km", "routing s", "visited", "tiles");
 		for (Route route : ROUTES) {
-			List<File> files = new ArrayList<>();
-			for (String map : route.maps) {
-				File f = find(map);
-				if (f == null) {
-					System.out.printf(Locale.US, "  %-28s map not found: %s%n", route.name, map);
-					files = null;
-					break;
-				}
-				files.add(f);
-			}
+			List<File> files = mapsOf(route);
 			if (files == null) {
 				continue;
 			}
-			runJava(route, files, null);
+			runJava(route, files, null, false);
 			if (nativeLib != null) {
 				for (File f : files) {
 					nativeLib.initMapFile(f.getAbsolutePath(), true);
 				}
-				runJava(route, files, nativeLib);
+				runJava(route, files, nativeLib, false);
 			}
-			runShared(route, files);
+			runShared(route, files, false);
+			// the same routes over the hub graph, as the apps calculate them by default; only HH, so a
+			// fallback to A* would show as an error rather than as a slow HH
+			runJava(route, files, null, true);
+			if (nativeLib != null) {
+				runJava(route, files, nativeLib, true);
+			}
+			runShared(route, files, true);
+		}
+		System.out.println();
+		// the same routes as tracks - the A* route's road points thinned to the spacing of a recorded
+		// track - attached back to the roads, the routing-based way and the geometry-based way
+		System.out.println("### gpx approximation on jvm " + System.getProperty("java.version") + ": java, C++ over JNI" + (nativeLib == null ? " (library not found)" : "")
+				+ ", shared copy, each routing-based and geometry-based; " + WARMUP_ROUNDS + " warmup / " + MEASURED_ROUNDS + " measured, best time");
+		System.out.println();
+		System.out.printf(Locale.US, "  %-28s %-14s %8s %9s %8s %8s %9s %7s%n", "route", "by", "ms", "segments", "km", "points", "visited", "tiles");
+		for (Route route : ROUTES) {
+			List<File> files = mapsOf(route);
+			if (files == null) {
+				continue;
+			}
+			List<LatLon> track = track(route, files);
+			for (boolean geometry : new boolean[] {false, true}) {
+				runJavaApproximation(route, files, track, null, geometry);
+				if (nativeLib != null) {
+					runJavaApproximation(route, files, track, nativeLib, geometry);
+				}
+				runSharedApproximation(route, files, track, geometry);
+			}
 		}
 		System.out.println();
 	}
 
-	private void runJava(Route route, List<File> files, NativeLibrary nativeLib) throws IOException {
+	private static List<File> mapsOf(Route route) {
+		List<File> files = new ArrayList<>();
+		for (String map : route.maps) {
+			File f = find(map);
+			if (f == null) {
+				System.out.printf(Locale.US, "  %-28s map not found: %s%n", route.name, map);
+				return null;
+			}
+			files.add(f);
+		}
+		return files;
+	}
+
+	/**
+	 * The route's road points thinned to the spacing of a track recorded at driving speed, a point a
+	 * second, and moved a couple of metres off the road: a recording never lies on the road's own nodes,
+	 * and on a node several roads are the same distance away, where the planners pick by the order they
+	 * met the roads in - java and the copy iterate their hash tables differently, so the route they attach
+	 * would differ by a road here and there for a reason that has nothing to do with the approximation.
+	 */
+	private static List<LatLon> track(Route route, List<File> files) throws IOException {
+		BinaryMapIndexReader[] readers = open(files);
+		try {
+			RoutingConfiguration config = RoutingConfiguration.getDefault().build("car", limits(), new HashMap<>());
+			RoutePlannerFrontEnd fe = new RoutePlannerFrontEnd();
+			RoutingContext ctx = fe.buildRoutingContext(config, null, readers);
+			RouteCalcResult res;
+			try {
+				res = fe.searchRoute(ctx, route.start, route.end, null);
+			} catch (InterruptedException e) {
+				throw new IOException(e);
+			}
+			List<LatLon> track = new ArrayList<>();
+			LatLon last = null;
+			for (RouteSegmentResult s : res.getList()) {
+				int step = s.getStartPointIndex() < s.getEndPointIndex() ? 1 : -1;
+				for (int i = s.getStartPointIndex(); ; i += step) {
+					LatLon p = s.getPoint(i);
+					last = new LatLon(p.getLatitude() + TRACK_OFFSET_LAT, p.getLongitude() + TRACK_OFFSET_LON);
+					if (track.isEmpty() || MapUtils.getDistance(track.get(track.size() - 1), last) >= TRACK_SPACING_M) {
+						track.add(last);
+					}
+					if (i == s.getEndPointIndex()) {
+						break;
+					}
+				}
+			}
+			if (last != null && !track.get(track.size() - 1).equals(last)) {
+				track.add(last);
+			}
+			return track;
+		} finally {
+			for (BinaryMapIndexReader reader : readers) {
+				reader.close();
+			}
+		}
+	}
+
+	private static BinaryMapIndexReader[] open(List<File> files) throws IOException {
+		BinaryMapIndexReader[] readers = new BinaryMapIndexReader[files.size()];
+		for (int i = 0; i < files.size(); i++) {
+			readers[i] = new BinaryMapIndexReader(new RandomAccessFile(files.get(i), "r"), files.get(i));
+		}
+		return readers;
+	}
+
+	private void runJavaApproximation(Route route, List<File> files, List<LatLon> track, NativeLibrary nativeLib, boolean geometry) throws IOException {
+		BinaryMapIndexReader[] readers = open(files);
+		try {
+			double best = Double.MAX_VALUE;
+			String line = "";
+			for (int round = 0; round < WARMUP_ROUNDS + MEASURED_ROUNDS; round++) {
+				long start = System.nanoTime();
+				RoutingConfiguration config = RoutingConfiguration.getDefault().build("car", limits(), new HashMap<>());
+				RoutePlannerFrontEnd fe = new RoutePlannerFrontEnd();
+				fe.setUseNativeApproximation(nativeLib != null);
+				fe.setUseGeometryBasedApproximation(geometry);
+				RoutingContext ctx = fe.buildRoutingContext(config, nativeLib, readers, RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
+				ctx.calculationProgress = new RouteCalculationProgress(); // the java path makes one itself, the JNI path does not
+				GpxRouteApproximation gctx = new GpxRouteApproximation(ctx);
+				List<GpxPoint> points = fe.generateGpxPoints(gctx, new LocationsHolder(track));
+				GpxRouteApproximation res;
+				try {
+					res = fe.searchGpxRoute(gctx, points, null, false);
+				} catch (InterruptedException e) {
+					throw new IOException(e);
+				}
+				double ms = (System.nanoTime() - start) / 1.0e6;
+				if (round >= WARMUP_ROUNDS && ms < best) {
+					best = ms;
+					double km = 0;
+					for (RouteSegmentResult s : res.fullRoute) {
+						km += s.getDistance();
+					}
+					line = String.format(Locale.US, "%9d %8.1f %8d ", res.fullRoute.size(), km / 1000, points.size())
+							+ (nativeLib == null
+									? String.format(Locale.US, "%9d %7d", ctx.calculationProgress.visitedSegments, ctx.calculationProgress.loadedTiles)
+									: String.format(Locale.US, "%9s %7s", "-", "-")); // the JNI path reports no counters
+				}
+			}
+			System.out.printf(Locale.US, "  %-28s %-14s %8.1f %s%n", route.name, (nativeLib == null ? "java" : "cpp") + " gpx" + (geometry ? " geo" : ""), best, line);
+		} finally {
+			for (BinaryMapIndexReader reader : readers) {
+				reader.close();
+			}
+		}
+	}
+
+	private void runSharedApproximation(Route route, List<File> files, List<LatLon> track, boolean geometry) {
+		List<net.osmand.shared.binary.BinaryMapIndexReader> readers = new ArrayList<>();
+		for (File f : files) {
+			readers.add(new net.osmand.shared.binary.BinaryMapIndexReader(f.getPath()));
+		}
+		List<KLatLon> locations = new ArrayList<>();
+		for (LatLon l : track) {
+			locations.add(new KLatLon(l.getLatitude(), l.getLongitude()));
+		}
+		try {
+			double best = Double.MAX_VALUE;
+			String line = "";
+			for (int round = 0; round < WARMUP_ROUNDS + MEASURED_ROUNDS; round++) {
+				long start = System.nanoTime();
+				net.osmand.shared.routing.RoutingConfiguration config = net.osmand.shared.routing.RoutingConfiguration.getDefault()
+						.build("car", new net.osmand.shared.routing.RoutingConfiguration.RoutingMemoryLimits(
+								RoutingConfiguration.DEFAULT_NATIVE_MEMORY_LIMIT, RoutingConfiguration.DEFAULT_NATIVE_MEMORY_LIMIT), new LinkedHashMap<>());
+				net.osmand.shared.routing.RoutePlannerFrontEnd fe = new net.osmand.shared.routing.RoutePlannerFrontEnd();
+				fe.setUseGeometryBasedApproximation(geometry);
+				net.osmand.shared.routing.RoutingContext ctx = fe.buildRoutingContext(config, readers, RouteCalculationMode.NORMAL);
+				net.osmand.shared.routing.GpxRouteApproximation gctx = new net.osmand.shared.routing.GpxRouteApproximation(ctx);
+				List<net.osmand.shared.routing.GpxPoint> points = fe.generateGpxPoints(gctx, locations, null);
+				net.osmand.shared.routing.GpxRouteApproximation res = fe.searchGpxRoute(gctx, points, null, false);
+				double ms = (System.nanoTime() - start) / 1.0e6;
+				if (round >= WARMUP_ROUNDS && ms < best) {
+					best = ms;
+					double km = 0;
+					for (net.osmand.shared.routing.RouteSegmentResult s : res.fullRoute) {
+						km += s.getDistance();
+					}
+					line = String.format(Locale.US, "%9d %8.1f %8d %9d %7d", res.fullRoute.size(), km / 1000, points.size(),
+							ctx.calculationProgress.visitedSegments, ctx.calculationProgress.loadedTiles);
+				}
+			}
+			System.out.printf(Locale.US, "  %-28s %-14s %8.1f %s%n", route.name, "shared gpx" + (geometry ? " geo" : ""), best, line);
+		} finally {
+			for (net.osmand.shared.binary.BinaryMapIndexReader reader : readers) {
+				reader.close();
+			}
+		}
+	}
+
+	private void runJava(Route route, List<File> files, NativeLibrary nativeLib, boolean hh) throws IOException {
 		BinaryMapIndexReader[] readers = new BinaryMapIndexReader[files.size()];
 		for (int i = 0; i < files.size(); i++) {
 			readers[i] = new BinaryMapIndexReader(new RandomAccessFile(files.get(i), "r"), files.get(i));
@@ -132,6 +311,11 @@ public class RoutePlannerBenchmarkTest {
 				long start = System.nanoTime();
 				RoutingConfiguration config = RoutingConfiguration.getDefault().build("car", limits(), new HashMap<>());
 				RoutePlannerFrontEnd fe = new RoutePlannerFrontEnd();
+				if (hh) {
+					fe.setDefaultHHRoutingConfig();
+					fe.setUseOnlyHHRouting(true);
+					fe.setHHRouteCpp(nativeLib != null);
+				}
 				RoutingContext ctx = fe.buildRoutingContext(config, nativeLib, readers);
 				RouteCalcResult res;
 				try {
@@ -154,7 +338,7 @@ public class RoutePlannerBenchmarkTest {
 					}
 				}
 			}
-			System.out.printf(Locale.US, "  %-28s %-6s %8.1f %s%n", route.name, nativeLib == null ? "java" : "cpp", best, line);
+			System.out.printf(Locale.US, "  %-28s %-10s %8.1f %s%n", route.name, (nativeLib == null ? "java" : "cpp") + (hh ? " hh" : ""), best, line);
 		} finally {
 			for (BinaryMapIndexReader reader : readers) {
 				reader.close();
@@ -162,7 +346,7 @@ public class RoutePlannerBenchmarkTest {
 		}
 	}
 
-	private void runShared(Route route, List<File> files) {
+	private void runShared(Route route, List<File> files, boolean hh) {
 		List<net.osmand.shared.binary.BinaryMapIndexReader> readers = new ArrayList<>();
 		for (File f : files) {
 			readers.add(new net.osmand.shared.binary.BinaryMapIndexReader(f.getPath()));
@@ -176,6 +360,11 @@ public class RoutePlannerBenchmarkTest {
 						.build("car", new net.osmand.shared.routing.RoutingConfiguration.RoutingMemoryLimits(
 								RoutingConfiguration.DEFAULT_NATIVE_MEMORY_LIMIT, RoutingConfiguration.DEFAULT_NATIVE_MEMORY_LIMIT), new LinkedHashMap<>());
 				net.osmand.shared.routing.RoutePlannerFrontEnd fe = new net.osmand.shared.routing.RoutePlannerFrontEnd();
+				net.osmand.shared.routing.RoutePlannerFrontEnd.CALCULATE_MISSING_MAPS = false;
+				if (hh) {
+					fe.setDefaultHHRoutingConfig();
+					fe.setUseOnlyHHRouting(true);
+				}
 				net.osmand.shared.routing.RoutingContext ctx = fe.buildRoutingContext(config, readers);
 				net.osmand.shared.routing.RouteCalcResult res = fe.searchRoute(ctx,
 						new KLatLon(route.start.getLatitude(), route.start.getLongitude()),
@@ -195,7 +384,7 @@ public class RoutePlannerBenchmarkTest {
 					}
 				}
 			}
-			System.out.printf(Locale.US, "  %-28s %-6s %8.1f %s%n", route.name, "shared", best, line);
+			System.out.printf(Locale.US, "  %-28s %-10s %8.1f %s%n", route.name, hh ? "shared hh" : "shared", best, line);
 		} finally {
 			for (net.osmand.shared.binary.BinaryMapIndexReader reader : readers) {
 				reader.close();
