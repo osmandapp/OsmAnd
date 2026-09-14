@@ -82,6 +82,8 @@ public class SpatialSearchToken {
 	CollatorStringMatcher wordSpaceCollatorSuffix;
 	
 	int mainNumber = -1;
+	/** a bare number whose value another query word already carries: '28' next to '28-ма' */
+	boolean numberNamedByOther;
 	CollatorStringMatcher[] otherMatch;
 	
 	Map<String, Boolean> fastMatchCheck = new HashMap<String, Boolean>();
@@ -273,6 +275,10 @@ public class SpatialSearchToken {
 					// a school
 					res = Boolean.compare(atom.isBuilding() || atom.isPOIRef(),
 						existing.isBuilding() || existing.isPOIRef());
+				}
+				// 'вулиця 28-ма Лінія 28': '28-ма' names the street, the bare 28 keeps its house
+				if (numberNamedByOther && (existing.isBuilding() || existing.isPOIRef()) && !(atom.isBuilding() || atom.isPOIRef())) {
+					res = 0;
 				}
 				boolean replace = res < 0;
 				if (replace) {
