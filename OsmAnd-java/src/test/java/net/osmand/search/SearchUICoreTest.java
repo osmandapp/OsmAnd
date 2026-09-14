@@ -6,6 +6,7 @@ import net.osmand.binary.GeocodingUtilities;
 import net.osmand.binary.GeocodingUtilities.GeocodingResult;
 import net.osmand.data.Building;
 import net.osmand.data.Street;
+import net.osmand.map.OsmandRegions;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.router.RoutingContext;
@@ -156,6 +157,7 @@ public class SearchUICoreTest {
 		}
 
 		SearchSettings s = SearchSettings.parseJSON(settingsJson);
+		s.setRegions(new OsmandRegions(null));
 		boolean multiSearch = readers.size() > 1;
 		if (!readers.isEmpty()) {			
 			s.setOfflineIndexes(readers);
