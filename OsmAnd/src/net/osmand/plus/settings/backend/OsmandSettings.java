@@ -1864,6 +1864,7 @@ public class OsmandSettings {
 			"https://example.com?lat={0}&lon={1}&timestamp={2}&hdop={3}&altitude={4}&speed={5}").makeProfile();
 
 	public final CommonPreference<String> GPS_STATUS_APP = new StringPreference(this, "gps_status_app", "").makeGlobal();
+	public final ListStringPreference LIVE_MONITORING_TRANSLATIONS = (ListStringPreference) new ListStringPreference(this, "live_monitoring_translations", null, ",").makeProfile();
 
 	private final CommonPreference<String> MAP_INFO_CONTROLS = new StringPreference(this, "map_info_controls", "").makeProfile();
 
