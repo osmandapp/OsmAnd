@@ -51,6 +51,7 @@ public class RoutePlannerBenchmarkTest {
 	private static final int WARMUP_ROUNDS = 1;
 	private static final int MEASURED_ROUNDS = 2;
 	private static final double TRACK_SPACING_M = 15; // a point a second at 55 km/h
+	private static final double TRACK_OFFSET_LAT = 0.00002, TRACK_OFFSET_LON = 0.00003; // ~2 m north and ~2 m east
 
 	private static final List<String> OBF_DIRECTORIES = Arrays.asList(
 			"/Users/crimean/tmp/maps",
@@ -161,7 +162,13 @@ public class RoutePlannerBenchmarkTest {
 		return files;
 	}
 
-	/** The route's road points thinned to the spacing of a track recorded at driving speed, a point a second. */
+	/**
+	 * The route's road points thinned to the spacing of a track recorded at driving speed, a point a
+	 * second, and moved a couple of metres off the road: a recording never lies on the road's own nodes,
+	 * and on a node several roads are the same distance away, where the planners pick by the order they
+	 * met the roads in - java and the copy iterate their hash tables differently, so the route they attach
+	 * would differ by a road here and there for a reason that has nothing to do with the approximation.
+	 */
 	private static List<LatLon> track(Route route, List<File> files) throws IOException {
 		BinaryMapIndexReader[] readers = open(files);
 		try {
@@ -179,7 +186,8 @@ public class RoutePlannerBenchmarkTest {
 			for (RouteSegmentResult s : res.getList()) {
 				int step = s.getStartPointIndex() < s.getEndPointIndex() ? 1 : -1;
 				for (int i = s.getStartPointIndex(); ; i += step) {
-					last = s.getPoint(i);
+					LatLon p = s.getPoint(i);
+					last = new LatLon(p.getLatitude() + TRACK_OFFSET_LAT, p.getLongitude() + TRACK_OFFSET_LON);
 					if (track.isEmpty() || MapUtils.getDistance(track.get(track.size() - 1), last) >= TRACK_SPACING_M) {
 						track.add(last);
 					}
@@ -235,8 +243,10 @@ public class RoutePlannerBenchmarkTest {
 					for (RouteSegmentResult s : res.fullRoute) {
 						km += s.getDistance();
 					}
-					line = String.format(Locale.US, "%9d %8.1f %8d %9d %7d", res.fullRoute.size(), km / 1000, points.size(),
-							ctx.calculationProgress.visitedSegments, ctx.calculationProgress.loadedTiles);
+					line = String.format(Locale.US, "%9d %8.1f %8d ", res.fullRoute.size(), km / 1000, points.size())
+							+ (nativeLib == null
+									? String.format(Locale.US, "%9d %7d", ctx.calculationProgress.visitedSegments, ctx.calculationProgress.loadedTiles)
+									: String.format(Locale.US, "%9s %7s", "-", "-")); // the JNI path reports no counters
 				}
 			}
 			System.out.printf(Locale.US, "  %-28s %-14s %8.1f %s%n", route.name, (nativeLib == null ? "java" : "cpp") + " gpx" + (geometry ? " geo" : ""), best, line);
