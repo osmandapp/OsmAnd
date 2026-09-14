@@ -737,7 +737,7 @@ public class RoutingHelper {
 	}
 
 	public static float getPosTolerance(float accuracy) {
-		if (accuracy > 0) {
+		if (0 < accuracy && accuracy < POS_TOLERANCE) {
 			return POS_TOLERANCE / 2 + accuracy;
 		}
 		return POS_TOLERANCE;
