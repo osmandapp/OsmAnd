@@ -11,7 +11,7 @@
 
     </net.osmand.plus.widgets.WebViewEx>
 
-    <include layout="@layout/panoramax_no_internet"
+    <include layout="@layout/fragment_street_imagery_no_internet"
              android:id="@+id/panoramaxNoInternetLayout"
              android:visibility="gone"/>
 

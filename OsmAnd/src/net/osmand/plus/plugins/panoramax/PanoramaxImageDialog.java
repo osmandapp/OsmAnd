@@ -15,6 +15,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
@@ -155,6 +156,8 @@ public class PanoramaxImageDialog extends ContextMenuCardDialog {
 		View noInternetView = view.findViewById(R.id.panoramaxNoInternetLayout);
 		Drawable icWifiOff = iconsCache.getThemedIcon(R.drawable.ic_action_wifi_off);
 		((ImageView) noInternetView.findViewById(R.id.wifiOff)).setImageDrawable(icWifiOff);
+		((TextView) noInternetView.findViewById(R.id.no_internet_description))
+				.setText(R.string.panoramax_no_internet_desc);
 		view.setScrollContainer(false);
 		webView.getSettings().setJavaScriptEnabled(true);
 		// The viewer reads localStorage on startup and stalls without it.
