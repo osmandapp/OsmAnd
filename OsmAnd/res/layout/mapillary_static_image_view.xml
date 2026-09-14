@@ -52,7 +52,7 @@
 
     </FrameLayout>
 
-    <include layout="@layout/mapillary_no_internet"
+    <include layout="@layout/fragment_street_imagery_no_internet"
              android:id="@+id/mapillaryNoInternetLayout"
              android:visibility="gone"/>
 
