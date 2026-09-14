@@ -147,26 +147,16 @@ public class TransportRoutePlanner {
 			double travelDist = 0;
 
 			int seconds = segment.road.calcIntervalInSeconds();
-			// [FERRY_PT_PROBE] TEMP debug fix for issue #17773 (debug_33.txt, Sandbanks Ferry never
-			// competitive): using interval/2 as the boarding/wait estimate makes a standalone
-			// route=ferry PT entity with a real OSM interval=* tag (e.g. ~20 min => ~600s here) look
-			// far more expensive than a non-ferry route (e.g. a bus) that happens to physically cross
-			// the very same ferry mid-route - the bus's crossing is priced as an ordinary road hop
-			// (geodesic distance / bus speed) with NO wait penalty at all, since it's just "next stop"
-			// on an already-boarded ride, not a boarding event. Same physical ferry crossing, two very
-			// different costs -> the cheap (bus) one always wins the accept-threshold competition and
-			// the ferry-only finish gets rejected (see [FERRY_PT_PROBE] ferry finish REJECTED logs).
-			// Temporarily disabling the interval/2 estimate entirely (always use getBoardingTime())
-			// so standalone ferry finishes stop being penalized relative to buses that silently ride
-			// the same ferry for free.
-			// TODO(#17773): this is a one-sided temp fix (removes the ferry's penalty) - properly fix
-			// by making the comparison symmetric instead: ALSO charge non-ferry routes an interval/2
-			// (or equivalent) wait estimate for any mid-route hop that actually crosses a ferry, so
-			// standalone ferry PT entities and ferry-carrying bus/car routes compete on equal footing.
-			// Revert this disablement once that symmetric fix is in place.
-			boolean useIntervalHalfAsWait = false;
-			double travelTime = (useIntervalHalfAsWait && seconds > 0) ? (double) seconds / 2 : ctx.cfg.getBoardingTime(segment.road.getType());
-			//double travelTime = seconds > 0 ? (double) seconds / 2 : ctx.cfg.getBoardingTime(segment.road.getType());
+			// issue #17773: a standalone route=ferry PT entity with a real interval=* tag is priced
+			// using interval/2 as the boarding/wait estimate here. A non-ferry PT route (e.g. a bus)
+			// that happens to physically cross the very same ferry mid-route is NOT yet charged an
+			// equivalent wait for that hop - that PT-internal symmetric fix (charging a mid-route
+			// ferry-crossing hop within a bus/etc PT route) is still open, tracked separately from the
+			// generic (car/bike/pedestrian) router fix already applied (see
+			// RouteResultPreparation.calculateTimeSpeed). Until that PT-internal fix lands, a
+			// standalone ferry PT entity can still lose out to a bus PT route silently riding the same
+			// ferry for free.
+			double travelTime = seconds > 0 ? (double) seconds / 2 : ctx.cfg.getBoardingTime(segment.road.getType());
 
 			final float routeTravelSpeed = ctx.cfg.getSpeedByRouteType(segment.road.getType());
 			if (routeTravelSpeed == 0) {
