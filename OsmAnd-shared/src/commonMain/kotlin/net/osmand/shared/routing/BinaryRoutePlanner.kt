@@ -5,6 +5,7 @@ import net.osmand.shared.util.KMapUtils
 import net.osmand.shared.util.LoggerFactory
 import net.osmand.shared.util.collections.KPriorityQueue
 import net.osmand.shared.util.collections.KTLongObjectMap
+import net.osmand.shared.util.collections.KTLongObjectLookup
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
@@ -47,7 +48,7 @@ class BinaryRoutePlanner {
 	 */
 	fun searchRouteInternal(
 		ctx: RoutingContext, start: RouteSegmentPoint?, end: RouteSegmentPoint?,
-		boundaries: KTLongObjectMap<RouteSegment>?
+		boundaries: KTLongObjectLookup<RouteSegment>?
 	): FinalRouteSegment? {
 		return searchRouteInternal(ctx, start, end, boundaries, null, null)
 	}
@@ -59,7 +60,7 @@ class BinaryRoutePlanner {
 	 */
 	fun searchRouteInternal(
 		ctx: RoutingContext, start: RouteSegmentPoint?, end: RouteSegmentPoint?,
-		boundaries: KTLongObjectMap<RouteSegment>?, visitedDirectOut: KTLongObjectMap<RouteSegment>?,
+		boundaries: KTLongObjectLookup<RouteSegment>?, visitedDirectOut: KTLongObjectMap<RouteSegment>?,
 		visitedOppositeOut: KTLongObjectMap<RouteSegment>?
 	): FinalRouteSegment? {
 		// measure time
@@ -463,7 +464,7 @@ class BinaryRoutePlanner {
 		ctx: RoutingContext, reverseWaySearch: Boolean,
 		graphSegments: KPriorityQueue<RouteSegmentCost>, visitedSegments: KTLongObjectMap<RouteSegment>,
 		startSegment: RouteSegment, oppositeSegments: KTLongObjectMap<RouteSegment>,
-		boundaries: KTLongObjectMap<RouteSegment>?, doNotAddIntersections: Boolean
+		boundaries: KTLongObjectLookup<RouteSegment>?, doNotAddIntersections: Boolean
 	) {
 		if (ASSERT_CHECKS && !checkMovementAllowed(ctx, reverseWaySearch, startSegment)) {
 			throw IllegalStateException()
@@ -605,9 +606,9 @@ class BinaryRoutePlanner {
 	private fun checkIfOppositeSegmentWasVisited(
 		ctx: RoutingContext, reverseWaySearch: Boolean,
 		graphSegments: KPriorityQueue<RouteSegmentCost>, currentSegment: RouteSegment,
-		oppositeSegmentsArg: KTLongObjectMap<RouteSegment>, boundaries: KTLongObjectMap<RouteSegment>?
+		oppositeSegmentsArg: KTLongObjectMap<RouteSegment>, boundaries: KTLongObjectLookup<RouteSegment>?
 	): Boolean {
-		var oppositeSegments = oppositeSegmentsArg
+		var oppositeSegments: KTLongObjectLookup<RouteSegment> = oppositeSegmentsArg
 		// check inverse direction for opposite
 		val currPoint = calculateRoutePointInternalId(
 			currentSegment.getRoad(),

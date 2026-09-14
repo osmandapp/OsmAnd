@@ -10,7 +10,7 @@ import kotlin.jvm.JvmOverloads
  *
  * Not thread safe.
  */
-class KTLongHashSet @JvmOverloads constructor(initialCapacity: Int = DEFAULT_CAPACITY) {
+class KTLongHashSet @JvmOverloads constructor(initialCapacity: Int = DEFAULT_CAPACITY) : KTLongObjectLookup<Nothing> {
 
 	@PublishedApi
 	internal var keysArr: LongArray
@@ -49,6 +49,11 @@ class KTLongHashSet @JvmOverloads constructor(initialCapacity: Int = DEFAULT_CAP
 	fun isNotEmpty(): Boolean = size != 0
 
 	operator fun contains(key: Long): Boolean = indexOf(key) >= 0
+
+	/** The set seen as a map with no values: a key is either there, with nothing under it, or not. */
+	override fun containsKey(key: Long): Boolean = indexOf(key) >= 0
+
+	override fun get(key: Long): Nothing? = null
 
 	/** Returns true when [key] was not in the set yet. */
 	fun add(key: Long): Boolean {

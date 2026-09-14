@@ -1,9 +1,13 @@
 package net.osmand.shared.binary
 
 import net.osmand.shared.io.KFile
+import net.osmand.shared.routing.HHRouteRegionPointsCtx
+import net.osmand.shared.routing.HHRoutingContext
+import net.osmand.shared.routing.NetworkDBPoint
 import net.osmand.shared.routing.RouteDataObject
 import net.osmand.shared.routing.RouteRegion
 import net.osmand.shared.routing.RouteSubregion
+import net.osmand.shared.util.collections.KTLongObjectMap
 import okio.FileHandle
 import okio.FileSystem
 import okio.Path.Companion.toPath
@@ -13,10 +17,10 @@ import okio.Path.Companion.toPath
  *
  * A copy of `BinaryMapIndexReader` in OsmAnd-java, which stays there for android and tools; this
  * copy is for iOS, so a route can be calculated there without the C++ core. It carries the part
- * the routing needs - the structure walk in the constructor, the routing sections, `readInt` and
- * the string table - and skips the map, address, poi, transport and HH sections, which will be
- * read when the searches that use them are copied. The method names are java's, so the two can
- * be compared side by side.
+ * the routing needs - the structure walk in the constructor, the routing and HH sections,
+ * `readInt` and the string table - and skips the map, address, poi and transport sections, which
+ * will be read when the searches that use them are copied. The method names are java's, so the
+ * two can be compared side by side.
  */
 class BinaryMapIndexReader {
 
@@ -24,21 +28,21 @@ class BinaryMapIndexReader {
 	private val file: KFile
 	internal val codedIS: CodedInputStream
 	private val routeAdapter: BinaryMapRouteReaderAdapter
+	private val hhAdapter: BinaryHHRouteReaderAdapter
 
 	private var version: Int = 0
 	private var dateCreated: Long = 0
 	private var initCorrectly = false
 
 	private val routingIndexes = ArrayList<RouteRegion>()
-
-	/** True when the file carries an HH routing section; the section itself is not read yet. */
-	private var hhRoutingIndexes = 0
+	private val hhIndexes = ArrayList<HHRouteRegion>()
 
 	constructor(file: KFile) {
 		this.file = file
 		this.handle = FileSystem.SYSTEM.openReadOnly(file.path().toPath())
 		this.codedIS = CodedInputStream(handle)
 		this.routeAdapter = BinaryMapRouteReaderAdapter(this)
+		this.hhAdapter = BinaryHHRouteReaderAdapter(this)
 		init()
 	}
 
@@ -67,9 +71,14 @@ class BinaryMapIndexReader {
 					codedIS.seek(routeReg.filePointer + routeReg.length)
 				}
 				OsmAndStructure.HHROUTINGINDEX_FIELD_NUMBER -> {
-					hhRoutingIndexes++
-					val length = readInt()
-					codedIS.seek(codedIS.getTotalBytesRead() + length)
+					val hhreg = HHRouteRegion()
+					hhreg.length = readInt()
+					hhreg.filePointer = codedIS.getTotalBytesRead()
+					val oldLimit = codedIS.pushLimitLong(hhreg.length)
+					hhAdapter.readHHIndex(hhreg, false)
+					codedIS.popLimit(oldLimit)
+					hhIndexes.add(hhreg)
+					codedIS.seek(hhreg.filePointer + hhreg.length)
 				}
 				OsmAndStructure.MAPINDEX_FIELD_NUMBER, OsmAndStructure.ADDRESSINDEX_FIELD_NUMBER,
 				OsmAndStructure.TRANSPORTINDEX_FIELD_NUMBER, OsmAndStructure.POIINDEX_FIELD_NUMBER -> {
@@ -98,7 +107,37 @@ class BinaryMapIndexReader {
 
 	fun containsRouteData(): Boolean = routingIndexes.size > 0
 
-	fun hasHHRoutingIndexes(): Boolean = hhRoutingIndexes > 0
+	fun getHHRoutingIndexes(): List<HHRouteRegion> = hhIndexes
+
+	fun hasHHRoutingIndexes(): Boolean = hhIndexes.isNotEmpty()
+
+	/**
+	 * Whether a routing section has roads in the zoom 14 tile of the point. A region named in
+	 * [checkedRegions] is skipped, and every region asked is added to it, so a caller asking
+	 * several readers over the same regions asks each region once.
+	 */
+	fun containsActualRouteData(x31: Int, y31: Int, checkedRegions: MutableSet<String>?): Boolean {
+		val zoomToLoad = 14
+		val x = x31 shr zoomToLoad
+		val y = y31 shr zoomToLoad
+		val request = SearchRequest.buildSearchRouteRequest(
+			x shl zoomToLoad, (x + 1) shl zoomToLoad, y shl zoomToLoad, (y + 1) shl zoomToLoad
+		)
+		for (reg in getRoutingIndexes()) {
+			if (checkedRegions != null) {
+				val name = reg.getName() ?: ""
+				if (checkedRegions.contains(name)) {
+					continue
+				}
+				checkedRegions.add(name)
+			}
+			val res = searchRouteIndexTree(request, reg.getSubregions())
+			if (res.isNotEmpty()) {
+				return true
+			}
+		}
+		return false
+	}
 
 	fun containsRouteData(left31x: Int, top31y: Int, right31x: Int, bottom31y: Int): Boolean {
 		for (ri in routingIndexes) {
@@ -174,6 +213,16 @@ class BinaryMapIndexReader {
 		routeAdapter.initRouteRegion(routeReg)
 	}
 
+	/** Reads every vertex of the HH section [reg], keyed by index, with the section's edge block headers. */
+	fun initHHPoints(reg: HHRouteRegion, mapId: Short): KTLongObjectMap<NetworkDBPoint> {
+		return hhAdapter.initRegionAndLoadPoints(reg, mapId)
+	}
+
+	/** Reads the edges of [point] in one direction, if they are not loaded yet; returns how many. */
+	fun loadNetworkSegmentPoint(ctx: HHRoutingContext, reg: HHRouteRegionPointsCtx, point: NetworkDBPoint, reverse: Boolean): Int {
+		return hhAdapter.loadNetworkSegmentPoint(ctx, reg, point, reverse)
+	}
+
 	fun close() {
 		handle.close()
 	}
@@ -186,9 +235,14 @@ class BinaryMapIndexReader {
 		const val ADDRESSINDEX_FIELD_NUMBER = 7
 		const val POIINDEX_FIELD_NUMBER = 8
 		const val ROUTINGINDEX_FIELD_NUMBER = 9
-		const val HHROUTINGINDEX_FIELD_NUMBER = 10
+		const val HHROUTINGINDEX_FIELD_NUMBER = BinaryMapIndexReader.HHROUTINGINDEX_FIELD_NUMBER
 		const val DATECREATED_FIELD_NUMBER = 18
 		const val VERSIONCONFIRM_FIELD_NUMBER = 32
+	}
+
+	companion object {
+		/** The field of `OsmAndStructure` an HH routing section occupies; [HHRouteRegion.getFieldNumber]. */
+		const val HHROUTINGINDEX_FIELD_NUMBER = 10
 	}
 
 	private object StringTable {
