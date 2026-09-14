@@ -143,6 +143,21 @@ class CodedInputStream(private val handle: FileHandle, bufferSize: Int = DEFAULT
 		return bytes.decodeToString()
 	}
 
+	/** A `bytes` field: its varint length, then that many raw bytes. */
+	fun readBytes(): ByteArray {
+		val size = readRawVarint32()
+		if (size <= bufferLength - pos) {
+			val value = buffer.copyOfRange(pos, pos + size)
+			pos += size
+			return value
+		}
+		val bytes = ByteArray(size)
+		for (i in 0 until size) {
+			bytes[i] = readRawByte()
+		}
+		return bytes
+	}
+
 	/** The next tag, or 0 at the current limit, which is how the reader ends every message loop. */
 	fun readTag(): Int {
 		if (getBytesUntilLimit() <= 0) {

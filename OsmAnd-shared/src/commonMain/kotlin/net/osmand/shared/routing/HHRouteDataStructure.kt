@@ -1,6 +1,8 @@
 package net.osmand.shared.routing
 
 import net.osmand.shared.util.LoggerFactory
+import net.osmand.shared.util.collections.KTIntObjectMap
+import net.osmand.shared.util.collections.KTLongObjectMap
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 
@@ -57,6 +59,24 @@ object HHRouteDataStructure {
 		} else {
 			calculateRoutePointInternalId(segm.getRoad(), segm.getSegmentEnd().toInt(), segm.getSegmentStart().toInt())
 		}
+	}
+
+	/**
+	 * The vertices of every cluster, by cluster id, each list ordered by [NetworkDBPoint.index]:
+	 * with [out] the clusters the points lead out of, otherwise the ones their dual points lead
+	 * into. The order is what the edge bytes of a vertex are decoded against.
+	 */
+	@JvmStatic
+	fun groupByClusters(pointsById: KTLongObjectMap<NetworkDBPoint>, out: Boolean): KTIntObjectMap<MutableList<NetworkDBPoint>> {
+		val res = KTIntObjectMap<MutableList<NetworkDBPoint>>()
+		pointsById.forEachValue { p ->
+			val cid = if (out) p.clusterId else (p.dualPoint ?: throw IllegalStateException("No dual point for $p")).clusterId
+			res.getOrPut(cid) { ArrayList() }.add(p)
+		}
+		res.forEachValue { l ->
+			l.sortWith { o1, o2 -> o1.index.compareTo(o2.index) }
+		}
+		return res
 	}
 
 	/**
