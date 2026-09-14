@@ -206,6 +206,6 @@ public class CoordinatesGridSettings {
 	}
 
 	public static boolean isGridSupported(@NonNull OsmandApplication app) {
-		return app.getSettings().USE_OPENGL_RENDER.get() && Version.isOpenGlAvailable(app);
+		return app.getSettings().isOpenGlRendererEnabled() && Version.isOpenGlAvailable(app);
 	}
 }
