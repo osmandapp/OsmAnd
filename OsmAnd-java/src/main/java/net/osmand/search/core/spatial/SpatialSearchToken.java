@@ -262,7 +262,7 @@ public class SpatialSearchToken {
 				int res = Boolean.compare(atom.name.startsWith(NameIndexReader.POI_CATEGORY_PREFIX), 
 						existing.name.startsWith(NameIndexReader.POI_CATEGORY_PREFIX));
 //				res = 0; // Test a school 
-				// select shortest available version (see number of tests 'Piazza Trento e Trieste', ukraine_zhytomyr_smokivskyi_lane...)
+				// select shortest available version (see number of tests 'Piazza Trento e Trieste', netherlands_amsterdam_eerste_helmersstraat...)
 				if (res == 0 && !SearchAlgorithms.isNumber2Letters(wordAligned)) {
 					res = Integer.compare(atom.otherWordsCnt, existing.otherWordsCnt);
 					if (res == 0) {
