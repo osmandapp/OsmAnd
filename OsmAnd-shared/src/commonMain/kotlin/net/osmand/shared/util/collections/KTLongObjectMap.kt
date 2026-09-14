@@ -24,7 +24,7 @@ import kotlin.native.ObjCName
  */
 class KTLongObjectMap<V : Any> @JvmOverloads constructor(
 	initialCapacity: Int = DEFAULT_CAPACITY
-) {
+) : KTLongObjectLookup<V> {
 
 	@PublishedApi
 	internal var keysArr: LongArray
@@ -71,12 +71,12 @@ class KTLongObjectMap<V : Any> @JvmOverloads constructor(
 	fun isNotEmpty(): Boolean = size != 0
 
 	@Suppress("UNCHECKED_CAST")
-	operator fun get(key: Long): V? {
+	override operator fun get(key: Long): V? {
 		val index = indexOf(key)
 		return if (index < 0) null else valuesArr[index] as V
 	}
 
-	fun containsKey(key: Long): Boolean = indexOf(key) >= 0
+	override fun containsKey(key: Long): Boolean = indexOf(key) >= 0
 
 	/** Returns the value previously stored under [key], or null. */
 	@Suppress("UNCHECKED_CAST")

@@ -14,7 +14,7 @@ import kotlin.time.TimeSource
  * **Disabled on purpose.** Measuring takes seconds and the timings are noise in a normal test run,
  * so this class is not part of the suite. It is a tool you reach for when you change a collection
  * or want platform numbers, not a regression gate — correctness is covered by [KTLongObjectMapTest],
- * [KTLongHashSetTest], [KTIntArrayListTest] and [KBitSetTest], which do run.
+ * [KTIntObjectMapTest], [KTLongHashSetTest], [KTIntArrayListTest] and [KBitSetTest], which do run.
  *
  * To measure, remove the `@Ignore` below and put it back afterwards.
  *
@@ -90,6 +90,58 @@ class CollectionsBenchmarkTest {
 
 			assertEquals(refChecksum, ktChecksum, "checksum mismatch for $distribution")
 			report.add(distribution.label, "KTLongObjectMap", ktTime, "HashMap<Long,V>", refTime)
+		}
+
+		report.print()
+	}
+
+	@Test
+	fun benchmarkIntObjectMap() {
+		val report = BenchmarkReport("int -> object map, ${ENTRIES} entries, ${LOOKUPS} lookups")
+
+		for (distribution in IntKeyDistribution.entries) {
+			val keys = distribution.keys(ENTRIES)
+			val probes = intProbeKeys(keys, LOOKUPS)
+			val value = Any()
+
+			var ktChecksum = 0L
+			val ktTime = measure {
+				val map = KTIntObjectMap<Any>(ENTRIES)
+				for (key in keys) {
+					map.put(key, value)
+				}
+				var hits = 0L
+				for (probe in probes) {
+					if (map[probe] != null) {
+						hits++
+					}
+				}
+				var iterated = 0L
+				map.forEach { key, _ -> iterated += key }
+				ktChecksum = hits * 31 + iterated
+			}
+
+			var refChecksum = 0L
+			val refTime = measure {
+				val map = HashMap<Int, Any>(ENTRIES * 2)
+				for (key in keys) {
+					map[key] = value
+				}
+				var hits = 0L
+				for (probe in probes) {
+					if (map[probe] != null) {
+						hits++
+					}
+				}
+				var iterated = 0L
+				for (key in map.keys) {
+					iterated += key
+				}
+				refChecksum = hits * 31 + iterated
+			}
+
+			assertEquals(refChecksum, ktChecksum, "checksum mismatch for $distribution")
+			report.add(distribution.label, "KTIntObjectMap", ktTime, "HashMap<Int,V>", refTime)
 		}
 
 		report.print()
@@ -254,6 +306,31 @@ class CollectionsBenchmarkTest {
 				}
 				RANDOM -> LongArray(count) { random.nextLong() }
 			}
+		}
+	}
+
+	private enum class IntKeyDistribution(val label: String) {
+
+		/** Dense ids counted from zero, the shape of encoding rule and string table keys. */
+		DENSE_IDS("encoding rules"),
+
+		/** Uniformly spread keys, the friendly case for any hash function. */
+		RANDOM("random     ");
+
+		fun keys(count: Int): IntArray {
+			val random = XorShiftRandom(20260908L)
+			return when (this) {
+				DENSE_IDS -> IntArray(count) { i -> i }
+				RANDOM -> IntArray(count) { random.nextLong().toInt() }
+			}
+		}
+	}
+
+	/** Half of the probes hit an existing key, half miss. */
+	private fun intProbeKeys(keys: IntArray, count: Int): IntArray {
+		val random = XorShiftRandom(1234L)
+		return IntArray(count) { i ->
+			if (i and 1 == 0) keys[random.nextInt(keys.size)] else (random.nextLong().toInt() or (1 shl 30))
 		}
 	}
 

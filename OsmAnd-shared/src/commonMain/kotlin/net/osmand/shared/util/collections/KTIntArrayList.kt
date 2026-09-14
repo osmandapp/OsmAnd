@@ -1,5 +1,6 @@
 package net.osmand.shared.util.collections
 
+import net.osmand.shared.util.PlatformSerializable
 import kotlin.jvm.JvmOverloads
 
 /**
@@ -17,7 +18,9 @@ import kotlin.jvm.JvmOverloads
  *
  * Not thread safe.
  */
-class KTIntArrayList @JvmOverloads constructor(initialCapacity: Int = DEFAULT_CAPACITY) {
+class KTIntArrayList @JvmOverloads constructor(
+	initialCapacity: Int = DEFAULT_CAPACITY
+) : PlatformSerializable {
 
 	@PublishedApi
 	internal var data: IntArray = IntArray(if (initialCapacity > 0) initialCapacity else DEFAULT_CAPACITY)

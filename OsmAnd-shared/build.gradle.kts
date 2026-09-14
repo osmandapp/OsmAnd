@@ -62,6 +62,7 @@ kotlin {
 	val statelyVersion = "2.1.0"
 	val coilVersion = "3.1.0"
     val ktorVersion = "3.1.3"
+	val junidecodeVersion = "0.1.1"
 
 	sourceSets {
 		commonMain.dependencies {
@@ -100,6 +101,10 @@ kotlin {
 		commonTest.dependencies {
 			implementation("org.jetbrains.kotlin:kotlin-test:2.0.0")
             implementation("io.ktor:ktor-client-mock:$ktorVersion")
+		}
+		jvmTest.dependencies {
+			// only to check the generated tables still say what junidecode says
+			implementation("com.moparisthebest:junidecode:$junidecodeVersion")
 		}
 	}
 }
