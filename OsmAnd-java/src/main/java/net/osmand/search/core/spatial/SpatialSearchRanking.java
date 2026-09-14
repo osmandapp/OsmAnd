@@ -139,10 +139,15 @@ public class SpatialSearchRanking {
 	}
 
 	/** a city is looked for by name from anywhere; a town, a village, a hamlet or an area named by a piece
-	 *  of its name is not: "farm" in Amsterdam is not 八五九农场 7900 km away. Within PLACE_FAR_FROM_KM
+	 *  of its name is not: "farm" in Amsterdam is not 八五九农场 7900 km away, and neither is an unrated
+	 *  airstrip or park named "... Farm" 230 km off, whatever its landmark type. Within PLACE_FAR_FROM_KM
 	 *  nothing changes - "rifugio" still finds the village 128 km off: pref-0045, pref-0138 */
 	private double farPlaceFactor(SpatialSearchResult r, SpatialSearchResultRef head, double name, LatLon center) {
-		if (center == null || name >= NAME_EXACT || !isPlace(head) || isCity(head)) {
+		// an exact place name is no evidence when the query is the name of a kind: "farm" is not the town Farm
+		if (center == null || isCity(head) || name >= NAME_EXACT && !queryIsKind(head)) {
+			return 1;
+		}
+		if (!isPlace(head) && (typeScore(head) != TYPE_LANDMARK || isProminent(r))) {
 			return 1;
 		}
 		double km = SpatialSearchResult.getDistance(r, center) / 1000.0;
@@ -272,10 +277,30 @@ public class SpatialSearchRanking {
 				parts = 1;
 			}
 		}
-		if (parts < 2 && isSubordinateNode(r)) {
+		if (parts < 2 && isSubordinateNode(r) && !namedByKind(r.getFirstRef())) {
 			parts = 2;
 		}
 		return parts;
+	}
+
+	/** a query word is the name of a POI category ("farm", "furt", "parkplatz") */
+	private boolean queryIsKind(SpatialSearchResultRef ref) {
+		for (SpatialSearchToken t : ref.tokens) {
+			if (t.hasPoiCategoryKeys()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/** the query word is a category of the object: "parkplatz" says what a car park named "Parkplatz Edeka" is */
+	private boolean namedByKind(SpatialSearchResultRef ref) {
+		for (SpatialSearchToken t : ref.tokens) {
+			if (ref.atom.poiTypes != null && t.matchPoiCategoryKeys(ref.atom.poiTypes)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/** the query said how many and what kind, but never which street: "4 av" is 4th Avenue, not
