@@ -1,8 +1,10 @@
 package net.osmand.shared.routing
 
 import net.osmand.shared.binary.BinaryMapIndexReader
+import net.osmand.shared.binary.ResultMatcher
 import net.osmand.shared.data.KLatLon
 import net.osmand.shared.extensions.nanoTime
+import net.osmand.shared.gpx.primitives.WptPt
 import net.osmand.shared.util.KMapUtils
 import net.osmand.shared.util.LoggerFactory
 import net.osmand.shared.util.collections.KTIntArrayList
@@ -24,16 +26,17 @@ import kotlin.math.max
  * point the driver left it.
  *
  * A copy of `net.osmand.router.RoutePlannerFrontEnd`, which stays in OsmAnd-java for android and
- * tools; this copy is for iOS. It carries the search over the road graph and the preparation. Not
- * yet copied, and left to their own steps: the HH search, the gpx approximation, and the missing
- * maps check (`MissingMapsCalculator` needs the world regions); the native path is not copied at
- * all, since on iOS this planner is what replaces the C++ one.
+ * tools; this copy is for iOS. It carries the search over the road graph, the HH search, the gpx
+ * approximation and the preparation. Not copied: the missing maps check (`MissingMapsCalculator`
+ * needs the world regions), and the native path, since on iOS this planner is what replaces the
+ * C++ one; so there is no `useNativeApproximation` here either.
  */
 class RoutePlannerFrontEnd {
 
 	private var useSmartRouteRecalculation = true
 	private var useOnlyHHRouting = false
 	private var hhRoutingConfig: HHRoutingConfig? = null
+	private var useGeometryBasedApproximation = false
 
 	@JvmOverloads
 	fun buildRoutingContext(config: RoutingConfiguration, map: List<BinaryMapIndexReader>, rm: RouteCalculationMode? = null): RoutingContext {
@@ -156,6 +159,64 @@ class RoutePlannerFrontEnd {
 			this.hhRoutingConfig = defaultHHConfig()
 		}
 		return this
+	}
+
+	/** Whether [searchGpxRoute] walks the road graph along the track instead of running the A* search between track points. */
+	fun setUseGeometryBasedApproximation(enabled: Boolean): RoutePlannerFrontEnd {
+		this.useGeometryBasedApproximation = enabled
+		return this
+	}
+
+	fun isUseGeometryBasedApproximation(): Boolean = useGeometryBasedApproximation
+
+	/**
+	 * Attaches a track to roads: the [gpxPoints] of [generateGpxPoints], approximated over the map
+	 * of [gctx]'s context. The result is [gctx] itself, with its final points and the whole route;
+	 * [resultMatcher], when given, is handed it too, or null when the calculation was cancelled.
+	 * With [useExternalTimestamps] the speed of every road is taken from the track's timestamps.
+	 */
+	fun searchGpxRoute(
+		gctx: GpxRouteApproximation, gpxPoints: List<GpxPoint>, resultMatcher: ResultMatcher<GpxRouteApproximation?>?,
+		useExternalTimestamps: Boolean
+	): GpxRouteApproximation {
+		return gctx.searchGpxRouteInternal(this, gpxPoints, resultMatcher, useExternalTimestamps)
+	}
+
+	/**
+	 * The track points for [searchGpxRoute]: each with its distance along the track, the time it
+	 * was recorded at when [times] is given (milliseconds, one per location, for the external
+	 * timestamps, null for none), and the whole track as one straight-line road. Java takes a
+	 * `LocationsHolder` of points, locations or waypoints; this takes the coordinates and times
+	 * themselves, or the waypoints of the shared gpx model.
+	 */
+	fun generateGpxPoints(gctx: GpxRouteApproximation, locations: List<KLatLon>, times: LongArray?): MutableList<GpxPoint> {
+		val gpxPoints = ArrayList<GpxPoint>(locations.size)
+		var prev: GpxPoint? = null
+		val o = generateStraightLineSegment(0f, locations).getObject()
+		for (i in locations.indices) {
+			val p = GpxPoint()
+			p.ind = i
+			p.time = times?.get(i) ?: 0
+			p.loc = locations[i]
+			p.track = o
+			if (prev != null) {
+				p.cumDist = KMapUtils.getDistance(p.loc, prev.loc) + prev.cumDist
+			}
+			gpxPoints.add(p)
+			gctx.routeDistance = p.cumDist.toInt()
+			prev = p
+		}
+		return gpxPoints
+	}
+
+	fun generateGpxPoints(gctx: GpxRouteApproximation, points: List<WptPt>): MutableList<GpxPoint> {
+		val locations = ArrayList<KLatLon>(points.size)
+		val times = LongArray(points.size)
+		for (i in points.indices) {
+			locations.add(KLatLon(points[i].lat, points[i].lon))
+			times[i] = points[i].time
+		}
+		return generateGpxPoints(gctx, locations, times)
 	}
 
 	private fun needRequestPrivateAccessRouting(ctx: RoutingContext, points: List<KLatLon>): Boolean {

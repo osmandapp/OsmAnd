@@ -1,5 +1,6 @@
 package net.osmand.shared.compat;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
@@ -49,5 +50,34 @@ final class Same {
 		} catch (Throwable t) {
 			return "threw " + t.getClass().getName();
 		}
+	}
+
+	/** A route segment and its copy: the road, the stretch of it, the times, the distance, the speed and the manoeuvre. */
+	static void segment(String m, net.osmand.router.RouteSegmentResult j, net.osmand.shared.routing.RouteSegmentResult k) {
+		assertEquals(m + " road", j.getObject().id, k.getObject().id);
+		assertEquals(m + " start", j.getStartPointIndex(), k.getStartPointIndex());
+		assertEquals(m + " end", j.getEndPointIndex(), k.getEndPointIndex());
+		assertArrayEquals(m + " pointsX", j.getObject().pointsX, k.getObject().pointsX);
+		assertArrayEquals(m + " pointsY", j.getObject().pointsY, k.getObject().pointsY);
+		close(m + " routingTime", j.getRoutingTime(), k.getRoutingTime());
+		close(m + " distance", j.getDistance(), k.getDistance());
+		close(m + " segmentTime", j.getSegmentTime(), k.getSegmentTime());
+		close(m + " speed", j.getSegmentSpeed(), k.getSegmentSpeed());
+		turn(m, j.getTurnType(), k.getTurnType());
+	}
+
+	static void turn(String m, net.osmand.router.TurnType j, net.osmand.shared.routing.TurnType k) {
+		assertEquals(m + " turn present", j == null, k == null);
+		if (j == null) {
+			return;
+		}
+		assertEquals(m + " turn", j.getValue(), k.getValue());
+		assertEquals(m + " exit", j.getExitOut(), k.getExitOut());
+		close(m + " angle", j.getTurnAngle(), k.getTurnAngle());
+		assertEquals(m + " skipToSpeak", j.isSkipToSpeak(), k.isSkipToSpeak());
+		assertEquals(m + " possibleLeft", j.isPossibleLeftTurn(), k.isPossibleLeftTurn());
+		assertEquals(m + " possibleRight", j.isPossibleRightTurn(), k.isPossibleRightTurn());
+		assertArrayEquals(m + " lanes", j.getLanes(), k.getLanes());
+		assertEquals(m + " toString", j.toString(), k.toString());
 	}
 }
