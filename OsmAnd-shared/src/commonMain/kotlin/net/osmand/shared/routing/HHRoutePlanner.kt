@@ -177,7 +177,7 @@ class HHRoutePlanner private constructor(ctx: RoutingContext) {
 			val time = nanoTime()
 			// detailed geometry of the alternatives is retrieved inside - it is needed to reject
 			// candidates that turn out to run on the very same roads as the main route
-			calcAlternativeRoute(route, start, end, progress)
+			HHAlternativeRoutes(this, hctx).calcAlternativeRoute(route, start, end, progress)
 			if (progress.isCancelled) {
 				return cancelledStatus(hctx, stPoints, endPoints)
 			}
@@ -220,11 +220,6 @@ class HHRoutePlanner private constructor(ctx: RoutingContext) {
 		}
 		progress.raiseFastRoutingStatus(FastRoutingState.Status.SUCCESS)
 		return route
-	}
-
-	/** The alternatives step of the search; its own step of the series, so nothing is found yet. */
-	private fun calcAlternativeRoute(route: HHNetworkRouteRes, start: KLatLon, end: KLatLon, progress: RouteCalculationProgress) {
-		route.altRoutes.clear()
 	}
 
 	private fun printFinalMessage(msg: String, start: KLatLon, end: KLatLon, startTime: Long, hctx: HHRoutingContext) {
