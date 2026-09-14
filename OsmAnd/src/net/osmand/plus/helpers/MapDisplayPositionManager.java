@@ -73,7 +73,15 @@ public class MapDisplayPositionManager implements ViewportListener {
 
 	@NonNull
 	public MapPosition getNavigationMapPosition() {
-		return getPositionFromPreferences();
+		DisplayPositionData positionData = getPositionFromProviders();
+		MapPosition providerPosition = positionData != null ? positionData.position : null;
+		return resolveNavigationMapPosition(providerPosition, getPositionFromPreferences());
+	}
+
+	@NonNull
+	static MapPosition resolveNavigationMapPosition(@Nullable MapPosition providerPosition,
+	                                                @NonNull MapPosition preferencePosition) {
+		return providerPosition != null ? providerPosition : preferencePosition;
 	}
 
 	@Nullable
