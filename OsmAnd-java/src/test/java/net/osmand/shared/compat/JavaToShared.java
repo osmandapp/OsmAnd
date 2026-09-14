@@ -3,8 +3,11 @@ package net.osmand.shared.compat;
 import net.osmand.binary.BinaryMapRouteReaderAdapter;
 import net.osmand.shared.routing.RouteDataObject;
 import net.osmand.shared.routing.RouteRegion;
+import net.osmand.shared.routing.RouteSegmentResult;
+import net.osmand.shared.routing.TurnType;
 import net.osmand.shared.util.collections.KTIntObjectMap;
 
+import java.util.ArrayList;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,6 +70,49 @@ public final class JavaToShared {
 			k.heightDistanceArray = j.heightDistanceArray == null ? null : j.heightDistanceArray.clone();
 			k.heightByCurrentLocation = j.heightByCurrentLocation;
 			roads.put(j, k);
+		}
+		return k;
+	}
+
+	public TurnType turn(net.osmand.router.TurnType j) {
+		if (j == null) {
+			return null;
+		}
+		TurnType k = new TurnType(j.getValue(), j.getExitOut(), j.getTurnAngle(), j.isSkipToSpeak(),
+				copy(j.getLanes()), j.isPossibleLeftTurn(), j.isPossibleRightTurn());
+		if (j.getOtherTurnAngles() != null) {
+			k.setOtherTurnAngles(new ArrayList<>(j.getOtherTurnAngles()));
+		}
+		return k;
+	}
+
+	/** The segment with its road, indices, timing, turn and attached roads; the attached ones carry no turns of their own. */
+	public RouteSegmentResult segment(net.osmand.router.RouteSegmentResult j) {
+		RouteSegmentResult k = new RouteSegmentResult(road(j.getObject()), j.getStartPointIndex(), j.getEndPointIndex());
+		k.setSegmentTime(j.getSegmentTime());
+		k.setRoutingTime(j.getRoutingTime());
+		k.setSegmentSpeed(j.getSegmentSpeed());
+		k.setDistance(j.getDistance());
+		k.setTurnType(turn(j.getTurnType()));
+		k.setGpxPointIndex(j.getGpxPointIndex());
+		if (j.getDescription(false) != null && !j.getDescription(false).isEmpty()
+				|| j.getDescription(true) != null && !j.getDescription(true).isEmpty()) {
+			k.setDescription(j.getDescription(false), j.getDescription(true));
+		}
+		int from = Math.min(j.getStartPointIndex(), j.getEndPointIndex());
+		int to = Math.max(j.getStartPointIndex(), j.getEndPointIndex());
+		for (int i = from; i <= to; i++) {
+			for (net.osmand.router.RouteSegmentResult attached : j.getAttachedRoutes(i)) {
+				k.attachRoute(i, segment(attached));
+			}
+		}
+		return k;
+	}
+
+	public List<RouteSegmentResult> segments(List<net.osmand.router.RouteSegmentResult> j) {
+		List<RouteSegmentResult> k = new ArrayList<>(j.size());
+		for (net.osmand.router.RouteSegmentResult s : j) {
+			k.add(segment(s));
 		}
 		return k;
 	}
