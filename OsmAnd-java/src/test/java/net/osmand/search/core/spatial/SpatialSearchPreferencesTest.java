@@ -66,14 +66,6 @@ public class SpatialSearchPreferencesTest {
 	private static final int VISIBLE_ROWS = 10;
 
 	/**
-	 * Ratchet, not a target. It is the number of preferences the engine satisfied when this
-	 * test was written; raise it when a change earns more. The point of a ratchet is that an
-	 * unrelated reordering cannot break the build - only contradicting a recorded human
-	 * judgement can.
-	 */
-	private static final int MIN_SATISFIED = 70;
-
-	/**
 	 * {@code OSMAND_SPATIAL_SCORE_RANKING=false} runs the same preferences against the old
 	 * lexicographic ladder. That comparison is the reason this file exists: the number is
 	 * comparable across ranker versions, which a golden result list can never be.
@@ -140,10 +132,11 @@ public class SpatialSearchPreferencesTest {
 		Assume.assumeTrue("none of the maps named by preferences.jsonl are present",
 				sc.satisfied + sc.violated + sc.notApplicable > 0);
 		Assume.assumeTrue("old ranking is measured for comparison, not gated", SCORE_RANKING);
-		Assert.assertTrue(String.format(
-				"satisfied preferences dropped to %d, the recorded floor is %d - a human "
-						+ "judgement was contradicted, see the list above",
-				sc.satisfied, MIN_SATISFIED), sc.satisfied >= MIN_SATISFIED);
+		// gate on a contradicted judgement, not on the satisfied count: that count moves with the maps
+		// (fbe317152e satisfied 70 on the 2026-09-10 maps, 63 with 2 violated on the 2026-09-13 ones)
+		Assert.assertEquals(String.format(
+				"%d recorded human judgements were contradicted, see the list above", sc.violated),
+				0, sc.violated);
 	}
 
 	Score check(List<Pref> prefs, File mapsDir) throws IOException {
