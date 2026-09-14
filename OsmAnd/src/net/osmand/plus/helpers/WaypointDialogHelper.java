@@ -179,15 +179,17 @@ public class WaypointDialogHelper {
 		TargetPointsHelper targetsHelper = app.getTargetPointsHelper();
 		targetsHelper.setStartPoint(new LatLon(finish.getLatitude(), finish.getLongitude()),
 				false, finish.getPointDescription(app));
-		if (start == null) {
+		if (start != null) {
+			targetsHelper.navigateToPoint(new LatLon(start.getLatitude(),
+					start.getLongitude()), updateRoute, -1, start.getPointDescription(app));
+		} else {
 			Location loc = app.getLocationProvider().getLastKnownLocation();
 			if (loc != null) {
 				targetsHelper.navigateToPoint(new LatLon(loc.getLatitude(),
 						loc.getLongitude()), updateRoute, -1);
+			} else {
+				targetsHelper.clearPointToNavigate(updateRoute, false);
 			}
-		} else {
-			targetsHelper.navigateToPoint(new LatLon(start.getLatitude(),
-					start.getLongitude()), updateRoute, -1, start.getPointDescription(app));
 		}
 	}
 
