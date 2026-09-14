@@ -8,7 +8,6 @@ import net.osmand.binary.ObfConstants;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
-import net.osmand.data.TransportRoute;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
@@ -351,23 +350,6 @@ public class RouteResultPreparation {
 		
 		RouteDataObject road = rr.getObject();
 		double distOnRoadToPass = 0;
-		// issue #17773: generic (car/bike/pedestrian) routers give route=ferry roads zero wait
-		// time today - amenity=ferry_terminal's "obstacle" value (routing.xml) only affects path
-		// search weighting, never the displayed obstacle_time, and the ferry's real interval=* tag
-		// was not even readable here until rendering_types.xml registered it as a routing_type (see
-		// there). Added once per ferry road segment (not per point, or a multi-point ferry way would
-		// get it added multiple times) so travel-time estimates are comparable across routing
-		// profiles - the exact same formula and fallback the public_transport profile already uses
-		// (TransportRoutingConfiguration.getBoardingTime via routing.xml's "boarding" obstacle rule):
-		// interval/2 when the way has a real interval tag, else a flat fallback. The 180 below
-		// mirrors routing.xml's current public_transport <point attribute="obstacle"> "boarding v=''"
-		// default (no ferry-specific override exists there either) - if that default ever changes,
-		// update this constant too, they are not read from the same place.
-		double ferryWaitSeconds = 0;
-		if ("ferry".equals(road.getValue("route"))) {
-			int intervalSeconds = TransportRoute.parseIntervalTagToSeconds(road.getValue("interval"));
-			ferryWaitSeconds = intervalSeconds > 0 ? intervalSeconds / 2.0 : 180;
-		}
 		double speed = ctx.getRouter().defineVehicleSpeed(road, rr.isForwardDirection());
 		if (speed == 0) {
 			speed = ctx.getRouter().getDefaultSpeed();
@@ -396,22 +378,6 @@ public class RouteResultPreparation {
 			if (obstacle < 0) {
 				obstacle = 0;
 			}
-			// [FERRY_GENERIC_PROBE] draft, investigating issue #17773 (car/bike/pedestrian ferry
-			// wait time): dumping per-point obstacle_time contribution for a route=ferry road, plus
-			// whatever "interval"/"duration" tag values survived into the routing graph's registered
-			// encoding rules (road.getValue() only sees tags routing.xml actually references - an
-			// arbitrary OSM tag like interval=* may simply not be present here at all). Goal: find out
-			// whether the generic router has ANY ferry wait-time data available today, and whether the
-			// existing amenity=ferry_terminal "obstacle" value (routing.xml) contributes real seconds
-			// here (obstacle_time) or only affects path-search weighting (a separate "obstacle"
-			// attribute, see BinaryRoutePlanner.defineRoutingObstacle) instead.
-			if ("ferry".equals(road.getValue("route"))) {
-				System.out.println("[FERRY_GENERIC_PROBE] road id=" + road.getId() + " point j=" + j
-						+ " route=" + road.getValue("route") + " interval=" + road.getValue("interval")
-						+ " duration=" + road.getValue("duration") + " d=" + String.format("%.1f", d)
-						+ " speed=" + speed + " baseTime=" + String.format("%.1f", d / speed)
-						+ " obstacle_time=" + String.format("%.2f", obstacle));
-			}
 			distOnRoadToPass += d / speed + obstacle;  //this is time in seconds
 
 			//for Naismith/Scarf
@@ -428,16 +394,6 @@ public class RouteResultPreparation {
 					}
 				}
 			}
-		}
-
-		distOnRoadToPass += ferryWaitSeconds;
-		if (ferryWaitSeconds > 0) {
-			// [FERRY_GENERIC_PROBE] shows the actual wait added to this segment's total time -
-			// distinct from the per-point "obstacle_time" logged above, which is the OLD
-			// amenity=ferry_terminal obstacle (routing.xml) and stays 0 regardless of this fix.
-			System.out.println("[FERRY_GENERIC_PROBE] road id=" + road.getId() + " ferryWaitSeconds="
-					+ String.format("%.2f", ferryWaitSeconds) + " distOnRoadToPass(after)="
-					+ String.format("%.2f", distOnRoadToPass));
 		}
 
 		// last point turn time can be added
