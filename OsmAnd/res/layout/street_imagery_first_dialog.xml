@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:layout_gravity="bottom"
@@ -27,9 +27,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="16dp"
-                    app:srcCompat="@drawable/ic_action_mapillary"
-                    android:tint="@color/mapillary_color"
-	                android:layout_marginStart="16dp" />
+	                android:layout_marginStart="16dp"
+                    tools:src="@drawable/ic_action_mapillary" />
 
             </LinearLayout>
 
@@ -40,28 +39,30 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="24dp"
                     android:paddingRight="8dp"
-                    android:text="@string/mapillary"
                     android:textColor="?android:textColorPrimary"
                     android:textSize="@dimen/dialog_header_text_size"
 	                android:layout_marginStart="24dp"
-	                android:paddingEnd="8dp" />
+	                android:paddingEnd="8dp"
+                    tools:text="Mapillary" />
 
                 <TextView
+                    android:id="@+id/description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="24dp"
                     android:paddingRight="24dp"
-                    android:text="@string/mapillary_descr"
                     android:textColor="?android:textColorPrimary"
                     android:textSize="@dimen/default_list_text_size"
 	                android:paddingEnd="24dp"
-	                android:layout_marginStart="24dp" />
+	                android:layout_marginStart="24dp"
+                    tools:text="Street-level imagery" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -81,23 +82,25 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/widget_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingRight="24dp"
-                            android:text="@string/mapillary_widget"
                             android:textColor="?android:textColorPrimary"
                             android:textSize="@dimen/default_list_text_size"
-	                        android:paddingEnd="24dp" />
+	                        android:paddingEnd="24dp"
+                            tools:text="Mapillary widget" />
 
                         <TextView
+                            android:id="@+id/widget_description"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
                             android:paddingRight="24dp"
-                            android:text="@string/mapillary_widget_descr"
                             android:textColor="?android:textColorSecondary"
                             android:textSize="@dimen/default_sub_text_size"
-	                        android:paddingEnd="24dp" />
+	                        android:paddingEnd="24dp"
+                            tools:text="Shows a button to open the viewer" />
 
                     </LinearLayout>
 

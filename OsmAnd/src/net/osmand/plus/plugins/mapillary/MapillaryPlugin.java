@@ -39,10 +39,8 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
@@ -89,7 +87,6 @@ public class MapillaryPlugin extends OsmandPlugin {
 	@Nullable
 	private GalleryRowController mapillaryRowController;
 	private MapillaryVectorLayer vectorLayer;
-	private MapWidgetInfo mapillaryWidgetRegInfo;
 
 	public MapillaryPlugin(OsmandApplication app) {
 		super(app);
@@ -276,22 +273,6 @@ public class MapillaryPlugin extends OsmandPlugin {
 	@Override
 	public boolean isMenuControllerSupported(MenuController menuController) {
 		return true;
-	}
-
-	public void setWidgetVisible(MapActivity mapActivity, boolean visible) {
-		if (mapillaryWidgetRegInfo != null) {
-			MapWidgetRegistry widgetRegistry = mapActivity.getMapLayers().getMapWidgetRegistry();
-			List<ApplicationMode> allModes = ApplicationMode.allPossibleValues();
-			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(mapActivity);
-			for (ApplicationMode mode : allModes) {
-				widgetRegistry.enableDisableWidgetForMode(mode, mapillaryWidgetRegInfo, visible, layoutMode, false);
-			}
-			MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
-			if (mil != null) {
-				mil.recreateControls();
-			}
-			mapActivity.refreshMap();
-		}
 	}
 
 	@Override

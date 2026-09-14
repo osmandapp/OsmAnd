@@ -61,18 +61,18 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.mapillary.MapillaryFiltersFragment;
-import net.osmand.plus.plugins.streetimagery.StreetImageryFirstDialogFragment;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
-import net.osmand.plus.plugins.panoramax.PanoramaxFiltersFragment;
-import net.osmand.plus.plugins.panoramax.PanoramaxFirstDialogFragment;
-import net.osmand.plus.plugins.panoramax.PanoramaxPlugin;
 import net.osmand.plus.plugins.openseamaps.NauticalDepthContourFragment;
 import net.osmand.plus.plugins.osmedit.menu.OsmNotesMenu;
+import net.osmand.plus.plugins.panoramax.PanoramaxFiltersFragment;
+import net.osmand.plus.plugins.panoramax.PanoramaxPlugin;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.plugins.srtm.building.Buildings3DFragment;
 import net.osmand.plus.plugins.srtm.ContourLinesMenu;
 import net.osmand.plus.plugins.srtm.Relief3DFragment;
 import net.osmand.plus.plugins.srtm.TerrainFragment;
+import net.osmand.plus.plugins.streetimagery.StreetImageryFirstDialogFragment;
+import net.osmand.plus.plugins.streetimagery.StreetImagerySource;
 import net.osmand.plus.plugins.weather.WeatherBand;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.plugins.weather.dialogs.WeatherContoursFragment;
@@ -668,14 +668,16 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			}
 
 			MapillaryPlugin plugin = PluginsHelper.getPlugin(MapillaryPlugin.class);
-			if (plugin != null && plugin.SHOW_MAPILLARY.get() && !plugin.MAPILLARY_FIRST_DIALOG_SHOWN.get()) {
-				StreetImageryFirstDialogFragment.showInstance(mapActivity);
+			if (plugin != null && plugin.SHOW_MAPILLARY.get() && !plugin.MAPILLARY_FIRST_DIALOG_SHOWN.get()
+					&& StreetImageryFirstDialogFragment.showInstance(mapActivity, StreetImagerySource.MAPILLARY)) {
+				plugin.MAPILLARY_FIRST_DIALOG_SHOWN.set(true);
 			}
 
 			PanoramaxPlugin panoramaxPlugin = PluginsHelper.getPlugin(PanoramaxPlugin.class);
 			if (panoramaxPlugin != null && panoramaxPlugin.SHOW_PANORAMAX.get()
-					&& !panoramaxPlugin.PANORAMAX_FIRST_DIALOG_SHOWN.get()) {
-				PanoramaxFirstDialogFragment.showInstance(mapActivity);
+					&& !panoramaxPlugin.PANORAMAX_FIRST_DIALOG_SHOWN.get()
+					&& StreetImageryFirstDialogFragment.showInstance(mapActivity, StreetImagerySource.PANORAMAX)) {
+				panoramaxPlugin.PANORAMAX_FIRST_DIALOG_SHOWN.set(true);
 			}
 		}
 		mapActivity.updateStatusBarColor();

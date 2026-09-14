@@ -31,10 +31,8 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
@@ -72,7 +70,6 @@ public class PanoramaxPlugin extends OsmandPlugin {
 
 	@Nullable
 	private PanoramaxVectorLayer vectorLayer;
-	private MapWidgetInfo panoramaxWidgetRegInfo;
 
 	public PanoramaxPlugin(OsmandApplication app) {
 		super(app);
@@ -247,22 +244,6 @@ public class PanoramaxPlugin extends OsmandPlugin {
 	@Override
 	public boolean isMenuControllerSupported(MenuController menuController) {
 		return true;
-	}
-
-	public void setWidgetVisible(MapActivity mapActivity, boolean visible) {
-		if (panoramaxWidgetRegInfo != null) {
-			MapWidgetRegistry widgetRegistry = mapActivity.getMapLayers().getMapWidgetRegistry();
-			List<ApplicationMode> allModes = ApplicationMode.allPossibleValues();
-			ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(mapActivity);
-			for (ApplicationMode mode : allModes) {
-				widgetRegistry.enableDisableWidgetForMode(mode, panoramaxWidgetRegInfo, visible, layoutMode, false);
-			}
-			MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
-			if (mil != null) {
-				mil.recreateControls();
-			}
-			mapActivity.refreshMap();
-		}
 	}
 
 	@Override
