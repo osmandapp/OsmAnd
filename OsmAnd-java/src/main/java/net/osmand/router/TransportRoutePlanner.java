@@ -42,11 +42,30 @@ public class TransportRoutePlanner {
 	private final static Log LOG = PlatformUtil.getLog(TransportRoutePlanner.class);
 
 	public List<TransportRouteResult> buildRoute(TransportRoutingContext ctx, LatLon start, LatLon end) throws IOException, InterruptedException {
+		System.out.println("[FERRY_PT_PROBE] MARK buildRoute() ENTRY build=MARKER-B1");
 		long nonce = 0;
 		ctx.startCalcTime = System.currentTimeMillis();
 		double totalDistance = MapUtils.getDistance(start, end);
 		List<TransportRouteSegment> startStops = ctx.getTransportStops(start);
 		List<TransportRouteSegment> endStops = ctx.getTransportStops(end);
+
+		// [FERRY_PT_PROBE] draft, testing a NEW hypothesis for issue #17773: startStops/endStops are
+		// picked purely by straight-line distance to the start/end point (same class of bug as the
+		// mid-route/finish issues above), with no check that a real path (not across open water)
+		// actually exists. If the true start is on one shore and a ferry's boarding stop happens to
+		// be geodesically "close enough" across the strait, buildRoute() will treat it as directly
+		// walkable and skip whatever LOCAL ferry should have been ridden first. Dumping the full
+		// candidate list (type, id, name, walkDist) here to see the raw picture before designing a fix.
+		for (TransportRouteSegment s : startStops) {
+			double d = MapUtils.getDistance(s.getLocation(), start);
+			System.out.println("[FERRY_PT_PROBE] START candidate: " + s.road.getType() + " id=" + s.road.getId()
+					+ " '" + s.road.getName() + "' walkDist=" + String.format("%.1f", d) + " m");
+		}
+		for (TransportRouteSegment s : endStops) {
+			double d = MapUtils.getDistance(s.getLocation(), end);
+			System.out.println("[FERRY_PT_PROBE] END candidate: " + s.road.getType() + " id=" + s.road.getId()
+					+ " '" + s.road.getName() + "' walkDist=" + String.format("%.1f", d) + " m");
+		}
 
 		TLongObjectHashMap<TransportRouteSegment> endSegments = new TLongObjectHashMap<TransportRouteSegment>();
 		for (TransportRouteSegment s : endStops) {
@@ -96,9 +115,31 @@ public class TransportRoutePlanner {
 			}
 			ctx.visitedRoutesCount++;
 			ctx.visitedSegments.put(segIdWithParent, segment);
+			// [FERRY_PT_PROBE] draft, investigating issue #17773 (debug_32.txt, Sandbanks Ferry not
+			// found): log every time a ferry TransportRouteSegment is popped off the priority queue,
+			// so we can see whether/when it gets processed relative to the BREAK below, and what its
+			// segStart/distFromStart were at pop time.
+			if ("ferry".equals(segment.road.getType())) {
+				System.out.println("[FERRY_PT_PROBE] POPPED ferry segment: id=" + segment.road.getId()
+						+ " '" + segment.road.getName() + "' segStart=" + segment.segStart
+						+ ", distFromStart=" + String.format("%.1f", segment.distFromStart)
+						+ ", finishTime=" + String.format("%.1f", finishTime)
+						+ ", finishTime*increase=" + String.format("%.1f", finishTime * ctx.cfg.increaseForAlternativesRoutes));
+			}
 			
 			if (segment.distFromStart > finishTime * ctx.cfg.increaseForAlternativesRoutes ||
 					segment.distFromStart > maxTravelTimeCmpToWalk) {
+				// [FERRY_PT_PROBE] draft, testing hypothesis for issue #17773: this is a HARD break
+				// of the whole search (not a skip/continue for this branch only). Logging here to see
+				// whether a cheap "finish" (e.g. a single-ferry direct-walk completion) shrinks
+				// finishTime early enough to cut off other, still-unexplored bus contexts before they
+				// ever reach their own ferry-to-ferry transfer attempt.
+				System.out.println("[FERRY_PT_PROBE] BREAK main loop: segment=" + segment.road.getRef()
+						+ " id=" + segment.road.getId() + " '" + segment.road.getName()
+						+ "' distFromStart=" + String.format("%.1f", segment.distFromStart)
+						+ ", finishTime=" + String.format("%.1f", finishTime)
+						+ ", finishTime*increase=" + String.format("%.1f", finishTime * ctx.cfg.increaseForAlternativesRoutes)
+						+ ", maxTravelTimeCmpToWalk=" + String.format("%.1f", maxTravelTimeCmpToWalk));
 				break;
 			}
 			TransportRouteSegment finish = null;
@@ -106,7 +147,26 @@ public class TransportRoutePlanner {
 			double travelDist = 0;
 
 			int seconds = segment.road.calcIntervalInSeconds();
-			double travelTime = seconds > 0 ? (double) seconds / 2 : ctx.cfg.getBoardingTime(segment.road.getType());
+			// [FERRY_PT_PROBE] TEMP debug fix for issue #17773 (debug_33.txt, Sandbanks Ferry never
+			// competitive): using interval/2 as the boarding/wait estimate makes a standalone
+			// route=ferry PT entity with a real OSM interval=* tag (e.g. ~20 min => ~600s here) look
+			// far more expensive than a non-ferry route (e.g. a bus) that happens to physically cross
+			// the very same ferry mid-route - the bus's crossing is priced as an ordinary road hop
+			// (geodesic distance / bus speed) with NO wait penalty at all, since it's just "next stop"
+			// on an already-boarded ride, not a boarding event. Same physical ferry crossing, two very
+			// different costs -> the cheap (bus) one always wins the accept-threshold competition and
+			// the ferry-only finish gets rejected (see [FERRY_PT_PROBE] ferry finish REJECTED logs).
+			// Temporarily disabling the interval/2 estimate entirely (always use getBoardingTime())
+			// so standalone ferry finishes stop being penalized relative to buses that silently ride
+			// the same ferry for free.
+			// TODO(#17773): this is a one-sided temp fix (removes the ferry's penalty) - properly fix
+			// by making the comparison symmetric instead: ALSO charge non-ferry routes an interval/2
+			// (or equivalent) wait estimate for any mid-route hop that actually crosses a ferry, so
+			// standalone ferry PT entities and ferry-carrying bus/car routes compete on equal footing.
+			// Revert this disablement once that symmetric fix is in place.
+			boolean useIntervalHalfAsWait = false;
+			double travelTime = (useIntervalHalfAsWait && seconds > 0) ? (double) seconds / 2 : ctx.cfg.getBoardingTime(segment.road.getType());
+			//double travelTime = seconds > 0 ? (double) seconds / 2 : ctx.cfg.getBoardingTime(segment.road.getType());
 
 			final float routeTravelSpeed = ctx.cfg.getSpeedByRouteType(segment.road.getType());
 			if (routeTravelSpeed == 0) {
@@ -152,7 +212,40 @@ public class TransportRoutePlanner {
 						if (segment.wasVisited(sgm)) {
 							continue;
 						}
+						// [FERRY_PT_PROBE] new bug found for issue #17773 (debug_28.txt): wasVisited()
+						// above only blocks re-riding the EXACT same road id, but a ferry's forward and
+						// backward directions are two DIFFERENT road ids (base<<1 / (base<<1)+1), so it
+						// does not catch boarding a ferry's reverse-direction sibling right after riding
+						// it (or vice versa) - a degenerate "ride out, immediately ride straight back"
+						// loop with 0.0 m walk at the transfer and zero real displacement. This used to
+						// be an accidental side effect of the shared (non-nonce) dedup key colliding
+						// across contexts, but is not reliably blocked now that ferry-parent transfers
+						// get a unique key per calling context. Confirmed in debug_28.txt: a route that
+						// rides ferry1-reverse then immediately ferry1-forward (or, in a longer case,
+						// ferry2-reverse -> ferry1-reverse -> ferry1-forward) got ADDED to the results,
+						// and its inflated ferry count fooled filterIncompleteFerryRoutes()'s "more
+						// ferries = more complete crossing" heuristic into preferring it over the
+						// correct, non-looped route. Block it explicitly using the same (id>>1)
+						// same-physical-route comparison already used by isMidCrossingFerryStop above.
+						if ("ferry".equals(segment.road.getType()) && "ferry".equals(sgm.road.getType())
+								&& (segment.road.getId().longValue() >> 1) == (sgm.road.getId().longValue() >> 1)) {
+							continue;
+						}
 						if (ctx.visitedSegments.containsKey(segmentWithParentId(sgm, segment))) {
+							// [FERRY_PT_PROBE] draft, testing hypothesis for issue #17773: this dedup
+							// key is (parent ROAD id << 30) + target segment id - it does NOT depend on
+							// which earlier bus/path got us onto "segment" (the currently ridden road),
+							// only on the road itself. So if two different starting contexts both ride
+							// the SAME ferry1 and both try to transfer onto the SAME ferry2 at the SAME
+							// stop, only the first one to arrive here claims this transfer - every other
+							// context silently loses the ability to ever complete its own "both ferries"
+							// route, even though it's a genuinely different overall journey.
+							if ("ferry".equals(segment.road.getType()) && "ferry".equals(sgm.road.getType())) {
+								System.out.println("[FERRY_PT_PROBE] transfer to ferry ALREADY CLAIMED by another context: riding "
+										+ segment.road.getRef() + " id=" + segment.road.getId()
+										+ " (this segment distFromStart=" + segment.distFromStart + "), wanted to transfer to "
+										+ sgm.road.getRef() + " id=" + sgm.road.getId() + " at stop " + stop.getId());
+							}
 							continue;
 						}
 						TransportRouteSegment nextSegment = new TransportRouteSegment(sgm);
@@ -184,7 +277,84 @@ public class TransportRoutePlanner {
 				}
 				TransportRouteSegment finalSegment = endSegments.get(segment.getId() + ind - segment.segStart);
 				double distToEnd = MapUtils.getDistance(stop.getLocation(), end);
+				// [FERRY_PT_PROBE] draft, investigating issue #17773 (debug_32.txt, Sandbanks Ferry not
+				// found): log every stop visited while riding a ferry, whether a finalSegment (END
+				// candidate for this exact road+index) was found, and the geodesic distance to the end
+				// point - to see whether the ferry ever gets close enough to complete a finish, or is
+				// silently missing a matching END candidate at this index.
+				if ("ferry".equals(segment.road.getType())) {
+					System.out.println("[FERRY_PT_PROBE] ferry stop while riding: id=" + segment.road.getId()
+							+ " '" + segment.road.getName() + "', ind=" + ind + " stop id=" + stop.getId()
+							+ ", finalSegment=" + (finalSegment == null ? "null" : ("id=" + finalSegment.road.getId()))
+							+ ", distToEnd=" + String.format("%.1f", distToEnd) + " m, walkRadius=" + ctx.cfg.walkRadius);
+				}
+//				if (finalSegment != null && distToEnd < 100 && finalSegment.road.getType().equals("ferry") ||
+//						finalSegment != null && distToEnd < ctx.cfg.walkRadius && !finalSegment.road.getType().equals("ferry")
+//				) {
+				// [FERRY_PT_PROBE] fix for issue #17773 (Nordoleden/Hyppeln investigation): if we are
+				// currently riding a ferry AND this exact stop also offers a DIFFERENT ferry
+				// continuation (sgms, just computed above), this stop MIGHT be a synthetic
+				// mid-crossing transfer node (see orphan-ferry-way OBF generation notes) rather than
+				// a real dock a pedestrian could walk further from - but only might: a real, tagged
+				// terminal (e.g. amenity=ferry_terminal, like Hyppeln on Nordöleden) can legitimately
+				// sit at exactly the same node where two named ferry legs happen to connect, and
+				// ending the trip there is perfectly valid. So this additionally requires
+				// stop.isSyntheticTerminal() - set at generation time, true ONLY for a stop the
+				// generator itself fabricated (a way endpoint forced into being a stop with no real
+				// backing OSM tag), never for a real pre-existing tagged terminal. Earlier versions of
+				// this check suppressed ANY shared ferry stop unconditionally, which wrongly discarded
+				// the correct (shortest) finish at Hyppeln and caused forward/backward asymmetry.
+				// IMPORTANT: every direct/backward TransportRoute pair in this codebase is generated
+				// as id=(base<<1) / id=(base<<1)+1 (both IndexTransportCreator V1 and our new
+				// way-based branch use this), so the REVERSE direction of the very route we are
+				// currently riding always shares this id pair and always shows up in sgms at BOTH
+				// endpoints too - not just at a real mid-crossing node. Comparing (id >> 1) excludes
+				// that same-pair reverse-direction match, which is what was wrongly suppressing every
+				// ferry finish (including legitimate ones) and made buildRoute() return zero routes
+				// after the first version of this check.
+				boolean isMidCrossingFerryStop = false;
+				if ("ferry".equals(segment.road.getType()) && stop.isSyntheticTerminal()) {
+					long currentRoutePairId = segment.road.getId().longValue() >> 1;
+					for (TransportRouteSegment sgm : sgms) {
+						if ("ferry".equals(sgm.road.getType())
+								&& (sgm.road.getId().longValue() >> 1) != currentRoutePairId) {
+							isMidCrossingFerryStop = true;
+							System.out.println("[FERRY_PT_PROBE] mid-crossing ferry stop detected: riding "
+									+ segment.road.getRef() + " id=" + segment.road.getId()
+									+ " '" + segment.road.getName() + "', stop id=" + stop.getId()
+									+ ", continuation found: " + sgm.road.getRef() + " id=" + sgm.road.getId()
+									+ " '" + sgm.road.getName() + "'");
+							break;
+						}
+					}
+				}
+				// [FERRY_PT_PROBE] draft, testing a NEW hypothesis: isMidCrossingFerryStop above only
+				// fires when we are CURRENTLY riding a ferry. But a finish reached via a non-ferry
+				// mode (e.g. a bus) at a stop that ALSO has a ferry departing from it nearby could be
+				// exactly the same "walk across water" bug, just one hop removed - the bus got us to
+				// one shore, and the pure-geodesic distToEnd check has no idea the destination is
+				// actually across a strait the bus never crossed. Purely diagnostic for now - does not
+				// change which finishes get created, only logs when this situation occurs.
+				if (finalSegment != null && distToEnd < ctx.cfg.walkRadius && !"ferry".equals(segment.road.getType())) {
+					for (TransportRouteSegment sgm : sgms) {
+						if ("ferry".equals(sgm.road.getType())) {
+							System.out.println("[FERRY_PT_PROBE] NON-FERRY finish near a ferry stop: riding "
+									+ segment.road.getRef() + " id=" + segment.road.getId()
+									+ " (" + segment.road.getType() + ") '" + segment.road.getName()
+									+ "', stop id=" + stop.getId() + ", distToEnd=" + String.format("%.1f", distToEnd)
+									+ " m, nearby ferry: " + sgm.road.getRef() + " id=" + sgm.road.getId()
+									+ " '" + sgm.road.getName() + "'");
+							break;
+						}
+					}
+				}
 				if (finalSegment != null && distToEnd < ctx.cfg.walkRadius) {
+					if (isMidCrossingFerryStop) {
+						System.out.println("[FERRY_PT_PROBE] SUPPRESSED finish at mid-crossing ferry stop "
+								+ stop.getId() + " (would have walked " + String.format("%.1f", distToEnd) + " m)");
+					}
+				}
+				if (finalSegment != null && distToEnd < ctx.cfg.walkRadius && !isMidCrossingFerryStop) {
 					if (finish == null || minDist > distToEnd) {
 						minDist = distToEnd;
 						finish = new TransportRouteSegment(finalSegment);
@@ -201,11 +371,43 @@ public class TransportRoutePlanner {
 				prevStop = stop;
 			}
 			if (finish != null) {
+				// [FERRY_PT_PROBE] draft, investigating issue #17773 (debug_33.txt, Sandbanks Ferry
+				// finish gets computed but never lands in results): log the exact numbers used by
+				// the accept/reject decision below for every FERRY finish candidate, whether or not
+				// it ends up shrinking finishTime or being added to results.
+				if ("ferry".equals(segment.road.getType())) {
+					System.out.println("[FERRY_PT_PROBE] ferry finish candidate: segment id=" + segment.road.getId()
+							+ " '" + segment.road.getName() + "', walkDist=" + String.format("%.1f", finish.walkDist)
+							+ ", finish.distFromStart=" + String.format("%.1f", finish.distFromStart)
+							+ ", finishTime(before)=" + String.format("%.1f", finishTime)
+							+ ", finishTime*increase=" + String.format("%.1f", finishTime * ctx.cfg.increaseForAlternativesRoutes)
+							+ ", maxTravelTimeCmpToWalk=" + String.format("%.1f", maxTravelTimeCmpToWalk)
+							+ ", results.size()=" + results.size());
+				}
 				if (finishTime > finish.distFromStart) {
+					// [FERRY_PT_PROBE] draft, testing hypothesis for issue #17773: log every time
+					// finishTime shrinks, and by which finish/segment - to check whether a cheap
+					// (e.g. single-ferry) finish shrinks it prematurely and triggers the hard break
+					// above before other legitimate, more expensive bus contexts get explored.
+					System.out.println("[FERRY_PT_PROBE] finishTime shrunk from " + String.format("%.1f", finishTime)
+							+ " to " + String.format("%.1f", finish.distFromStart)
+							+ " by finish via segment=" + segment.road.getRef() + " id=" + segment.road.getId()
+							+ " '" + segment.road.getName() + "', walkDist=" + String.format("%.1f", finish.walkDist));
 					finishTime = finish.distFromStart;
 				}
-				if (finish.distFromStart < finishTime * ctx.cfg.increaseForAlternativesRoutes && 
-						(finish.distFromStart < maxTravelTimeCmpToWalk || results.size() == 0)) {
+				boolean willAdd = finish.distFromStart < finishTime * ctx.cfg.increaseForAlternativesRoutes &&
+						(finish.distFromStart < maxTravelTimeCmpToWalk || results.size() == 0);
+				if ("ferry".equals(segment.road.getType()) && !willAdd) {
+					// [FERRY_PT_PROBE] draft: log exactly why a ferry finish candidate got REJECTED
+					// (not added to results) - which of the two conditions failed.
+					System.out.println("[FERRY_PT_PROBE] ferry finish REJECTED: finish.distFromStart="
+							+ String.format("%.1f", finish.distFromStart)
+							+ " vs finishTime*increase=" + String.format("%.1f", finishTime * ctx.cfg.increaseForAlternativesRoutes)
+							+ " (cond1=" + (finish.distFromStart < finishTime * ctx.cfg.increaseForAlternativesRoutes)
+							+ "), vs maxTravelTimeCmpToWalk=" + String.format("%.1f", maxTravelTimeCmpToWalk)
+							+ " (cond2=" + (finish.distFromStart < maxTravelTimeCmpToWalk) + "), results.size()=" + results.size());
+				}
+				if (willAdd) {
 					results.add(finish);
 					// Stop when results reached range [1000 min, 2500 (for default limit * changes), 5000 max]
 					int optimalLimitOfResults = 25 * ctx.cfg.ptLimitResultsByNumber * ctx.cfg.maxNumberOfChanges;
@@ -228,12 +430,76 @@ public class TransportRoutePlanner {
 			updateCalculationProgress(ctx, queue);
 			
 		}
-		return prepareResults(ctx, results);
+
+		//TODO: delete after debug
+		// [FERRY_PT_PROBE] BUG FOUND: this used to check only result.road.getType() - i.e. only the
+		// LAST ridden transit route before the final walk. A route like ferry1 -> ferry2 -> bus ->
+		// destination legitimately uses both ferries but ENDS on a bus, so it was being classified as
+		// "not ferry" and silently dropped by "return prepareResults(ctx, ferryResults)" below, even
+		// though it's exactly the kind of route we want. Fixed by walking the whole parentRoute chain
+		// and checking whether ANY leg of the journey was a ferry, not just the last one.
+		List<TransportRouteSegment> ferryResults = new ArrayList<TransportRouteSegment>();
+		List<TransportRouteSegment> notFerryResults = new ArrayList<TransportRouteSegment>();
+
+		for (TransportRouteSegment result : results) {
+			boolean usesFerry = false;
+			TransportRouteSegment cur = result;
+			while (cur != null) {
+				if ("ferry".equals(cur.road.getType())) {
+					usesFerry = true;
+					break;
+				}
+				cur = cur.parentRoute;
+			}
+			if (usesFerry) {
+				ferryResults.add(result);
+			} else {
+				notFerryResults.add(result);
+			}
+		}
+
+
+		System.out.println("[FERRY_PT_PROBE] buildRoute() finished: results.size()=" + results.size()
+				+ " ferryResults.size()=" + ferryResults.size()
+				+ " notFerryResults.size()=" + notFerryResults.size());
+		return prepareResults(ctx, ferryResults);
+
+		// [FERRY_PT_PROBE] reverted the ferry-only debug filter (issue #17773, debug_30.txt):
+		// restricting the final result list to ferryResults only was a temporary hack to make
+		// ferry-containing candidates easy to spot in the logs while debugging the ferry-search
+		// bugs above. It was silently dropping every valid non-ferry route whenever the search
+        // didn't happen to also find a ferry-based alternative for that start/end pair (confirmed
+		// e.g. for the Sandbanks Ferry test: results.size()=1 notFerryResults.size()=1 but
+		// ferryResults.size()=0, so prepareResults() got an empty list and OsmAnd reported "no
+		// route found" even though a perfectly valid bus-only route existed). Back to returning
+		// the full results list now that the ferry-specific bugs are fixed.
+//		return prepareResults(ctx, results);
 	}
 
 	private long segmentWithParentId(TransportRouteSegment segment, TransportRouteSegment parent) {
-		return ((parent != null ? ObfConstants.getOsmIdFromBinaryMapObjectId(parent.road.getId()) : 0) << 30l) 
+		long key = ((parent != null ? ObfConstants.getOsmIdFromBinaryMapObjectId(parent.road.getId()) : 0) << 30l)
 				+ segment.getId();
+		// [FERRY_PT_PROBE] draft v2, testing hypothesis for issue #17773: this key is otherwise
+		// based only on the PARENT'S ROAD id, so two different contexts that both end up riding
+		// the same ferry (e.g. one via a direct walk to its dock, another after riding an earlier
+		// ferry1 first) and both try to transfer onto the SAME next leg (another ferry, a bus,
+		// anything) from the same stop collide into one shared "visited" state - confirmed by
+		// debug_25/debug_26/debug_27 logs ("transfer to ferry ALREADY CLAIMED by another context",
+		// and separately by a5164e59-debug_27.txt where a ferry1->ferry2->bus route was never
+		// produced even though ferry1->ferry2 and ferry2->bus were each found independently).
+		// Only the fastest-arriving context's transfer survives; every other context silently
+		// loses the ability to ever continue its own journey past that ferry, even though it's a
+		// genuinely different journey with a genuinely different arrival time. Mixing in the
+		// parent's nonce (unique per TransportRouteSegment instance) makes the key unique per
+		// calling context instead of per road, whenever the PARENT (the road we are transferring
+		// FROM) is a ferry - not just for ferry-to-ferry transfers as in the first version of this
+		// fix - since the ambiguous-arrival-context problem exists for ANY leg following a ferry,
+		// not only another ferry. Every other transfer (parent not a ferry) keeps the original
+		// (intentional) shared-state dedup untouched.
+		if (parent != null && "ferry".equals(parent.road.getType())) {
+			key = key * 1000003L + parent.nonce;
+		}
+		return key;
 	}
 	
 	private void initProgressBar(TransportRoutingContext ctx, LatLon start, LatLon end) {
@@ -258,6 +524,7 @@ public class TransportRoutePlanner {
 	}
 
 	private List<TransportRouteResult> prepareResults(TransportRoutingContext ctx, List<TransportRouteSegment> results) {
+		System.out.println("[FERRY_PT_PROBE] MARK prepareResults() ENTRY build=MARKER-B1 results.size()=" + results.size());
 		Collections.sort(results, new SegmentsComparator());
 
 		List<TransportRouteResult> lst = new ArrayList<TransportRouteResult>();
@@ -266,65 +533,118 @@ public class TransportRoutePlanner {
 				ctx.visitedRoutesCount, ctx.visitedStops, 
 				ctx.quadTree.size(), ctx.readTime / (1000 * 1000), ctx.loadTime / (1000 * 1000),
 				ctx.loadedWays, ctx.wrongLoadedWays));
+		// [FERRY_PT_PROBE] temporary: dump every raw candidate (before exclude/alternative/limit
+		// filtering) so we can see whether a route exists among them and, if so, why it did/didn't
+		// make it into the final displayed list. Remove once issue #17773 ferry PT routing is verified.
+		List<TransportRouteResult> debugRoutesList = new ArrayList<TransportRouteResult>();
+		for (int probeIdx = 0; probeIdx < results.size(); probeIdx++) {
+			TransportRouteSegment probeRes = results.get(probeIdx);
+			TransportRouteResult probeRoute = new TransportRouteResult(ctx);
+			probeRoute.routeTime = probeRes.distFromStart;
+			probeRoute.finishWalkDist = probeRes.walkDist;
+			TransportRouteSegment pp = probeRes;
+			while (pp != null) {
+				if (pp.parentRoute != null) {
+					TransportRouteResultSegment sg = new TransportRouteResultSegment();
+					sg.route = pp.parentRoute.road;
+					sg.start = pp.parentRoute.segStart;
+					sg.end = pp.parentStop;
+					sg.walkDist = pp.parentRoute.walkDist;
+					sg.walkTime = sg.walkDist / ctx.cfg.walkSpeed;
+					sg.depTime = pp.departureTime;
+					sg.travelDistApproximate = pp.parentTravelDist;
+					sg.travelTime = pp.parentTravelTime;
+					probeRoute.segments.add(0, sg);
+				}
+				pp = pp.parentRoute;
+			}
+			System.out.println("[FERRY_PT_PROBE] raw #" + probeIdx + " " + probeRoute.toString());
+			debugRoutesList.add(probeRoute);
+		}
+
+
+		List<TransportRouteResult> routesWithFerry = new ArrayList<TransportRouteResult>();
+
 		for (TransportRouteSegment res : results) {
 			if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
 				return null;
 			}
-			TransportRouteResult route = new TransportRouteResult(ctx);
-			route.routeTime = res.distFromStart;
-			route.finishWalkDist = res.walkDist;
-			TransportRouteSegment p = res;
-			while (p != null) {
-				if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
-					return null;
-				}
-				if (p.parentRoute != null) {
-					TransportRouteResultSegment sg = new TransportRouteResultSegment();
-					sg.route = p.parentRoute.road;
-					sg.start = p.parentRoute.segStart;
-					sg.end = p.parentStop;
-					sg.walkDist = p.parentRoute.walkDist;
-					sg.walkTime = sg.walkDist / ctx.cfg.walkSpeed;
-					sg.depTime = p.departureTime;
-					sg.travelDistApproximate = p.parentTravelDist;
-					sg.travelTime = p.parentTravelTime;
-					route.segments.add(0, sg);
-				}
-				p = p.parentRoute;
+
+			TransportRouteResult route = getParsedTransportRouteResult(ctx, res);
+			if (route.getFerryCount() > 0) {
+				routesWithFerry.add(route);
+				continue;
 			}
+
 			// test if faster routes fully included
 			boolean exclude = false;
+			exclude = shouldExclude(ctx, lst, route);
+
+			/*
 			for (TransportRouteResult s : lst) {
 				if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
-					return null;
+					//return null;
+					break;
 				}
 				if (excludeRoute(ctx, s, route)) {
 					exclude = true;
+					System.out.println("[FERRY_PT_PROBE] EXCLUDED (dominated): " + route.toString());
 					break;
 				}
 			}
 			if (!exclude) {
 				for (TransportRouteResult s : lst) {
 					if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
-						return null;
+						//return null;
+						break;
 					}
 					if (checkAlternative(ctx, s, route)) {
-						System.out.println("ALT " + s.getSegments().get(0).route + " " + route.toString());
+						System.out.println("[FERRY_PT_PROBE] ALT " + s.getSegments().get(0).route + " " + route.toString());
 						exclude = true;
 						break;
 					}
 				}
 			}
+			 */
+
 			if (!exclude) {
 				int limitByNumber = ctx.cfg.ptLimitResultsByNumber;
 				if (limitByNumber > 0 && lst.size() >= limitByNumber) {
-					System.out.printf("ptLimitResultsByNumber (%d) reached\n", limitByNumber);
+					System.out.println("[FERRY_PT_PROBE] TRUNCATED ptLimitResultsByNumber (" + limitByNumber
+							+ ") reached, remaining candidate: " + route.toString());
 					break;
 				}
-				System.out.println(route);
+				System.out.println("[FERRY_PT_PROBE] ADDED: " + route.toString());
 				lst.add(route);
 			}
 		}
+
+
+		Collections.sort(routesWithFerry, new FerrySegmentsComparator());
+
+		routesWithFerry = filterIncompleteFerryRoutes(routesWithFerry);
+
+		for (TransportRouteResult routeeWithFerry : routesWithFerry) {
+			if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
+				return null;
+			}
+
+			// test if faster routes fully included
+			boolean exclude = false;
+			exclude = shouldExclude(ctx, lst, routeeWithFerry);
+
+			if (!exclude) {
+				int limitByNumber = ctx.cfg.ptLimitResultsByNumber;
+				if (limitByNumber > 0 && lst.size() >= limitByNumber) {
+					System.out.println("[FERRY_PT_PROBE] TRUNCATED ptLimitResultsByNumber (" + limitByNumber
+							+ ") reached, remaining candidate: " + routeeWithFerry.toString());
+					break;
+				}
+				System.out.println("[FERRY_PT_PROBE] ADDED: " + routeeWithFerry.toString());
+				lst.add(routeeWithFerry);
+			}
+		}
+
 
 		for (TransportRouteResult r : lst) {
 			for (int i = 0; i < r.getSegments().size(); i++) {
@@ -342,6 +662,95 @@ public class TransportRoutePlanner {
 		}
 
 		return lst;
+	}
+
+	private boolean shouldExclude(TransportRoutingContext ctx, List<TransportRouteResult> lst, TransportRouteResult route) {
+		// test if faster routes fully included
+		boolean exclude = false;
+		for (TransportRouteResult s : lst) {
+			if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
+				//return null;
+				break;
+			}
+			if (excludeRoute(ctx, s, route)) {
+				exclude = true;
+				System.out.println("[FERRY_PT_PROBE] EXCLUDED (dominated): " + route.toString());
+				break;
+			}
+		}
+		if (!exclude) {
+			for (TransportRouteResult s : lst) {
+				if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
+					//return null;
+					break;
+				}
+				if (checkAlternative(ctx, s, route)) {
+					System.out.println("[FERRY_PT_PROBE] ALT " + s.getSegments().get(0).route + " " + route.toString());
+					exclude = true;
+					break;
+				}
+			}
+		}
+		return exclude;
+	}
+
+	private static TransportRouteResult getParsedTransportRouteResult(TransportRoutingContext ctx, TransportRouteSegment res) {
+		TransportRouteResult route = new TransportRouteResult(ctx);
+		route.routeTime = res.distFromStart;
+		route.finishWalkDist = res.walkDist;
+		TransportRouteSegment p = res;
+		while (p != null) {
+			if (ctx.calculationProgress != null && ctx.calculationProgress.isCancelled) {
+				return null;
+			}
+			if (p.parentRoute != null) {
+				TransportRouteResultSegment sg = new TransportRouteResultSegment();
+				sg.route = p.parentRoute.road;
+				sg.start = p.parentRoute.segStart;
+				sg.end = p.parentStop;
+				sg.walkDist = p.parentRoute.walkDist;
+				sg.walkTime = sg.walkDist / ctx.cfg.walkSpeed;
+				sg.depTime = p.departureTime;
+				sg.travelDistApproximate = p.parentTravelDist;
+				sg.travelTime = p.parentTravelTime;
+				route.segments.add(0, sg);
+			}
+			p = p.parentRoute;
+		}
+		return route;
+	}
+
+	// [FERRY_PT_PROBE] draft v2, testing hypothesis for issue #17773: group routes by their
+	// NON-ferry segments (same bus/tram context, same route ids, same order) - this is what
+	// makes two candidates "the same underlying trip". Within each group, keep only the route
+	// with the most ferry segments (the most complete crossing for that context) and drop the
+	// rest. Unlike v1 (subset-of-ferry-ids over the whole candidate list), this won't merge two
+	// routes that only coincidentally share a ferry leg but start on different buses.
+	// [bus_1, ferry_1, bus_2;  bus_1, ferry_2, bus_2;  bus_1, ferry_1, ferry_2, bus_2]
+	//   -> [bus_1, ferry_1, ferry_2, bus_2]
+	private static List<TransportRouteResult> filterIncompleteFerryRoutes(List<TransportRouteResult> routesWithFerry) {
+		Map<String, TransportRouteResult> bestRouteByNonFerryContext = new LinkedHashMap<>();
+		for (TransportRouteResult route : routesWithFerry) {
+			String nonFerryContextKey = getNonFerryContextKey(route);
+			TransportRouteResult bestSoFar = bestRouteByNonFerryContext.get(nonFerryContextKey);
+			if (bestSoFar == null || route.getFerryCount() > bestSoFar.getFerryCount()) {
+				bestRouteByNonFerryContext.put(nonFerryContextKey, route);
+			}
+		}
+		return new ArrayList<>(bestRouteByNonFerryContext.values());
+	}
+
+	// Builds a key from the route ids of the NON-ferry segments only, in order - two routes get
+	// the same key iff their surrounding (non-ferry) journey is identical; the ferry segments
+	// in between are exactly what's allowed to differ between routes sharing a key.
+	private static String getNonFerryContextKey(TransportRouteResult route) {
+		StringBuilder key = new StringBuilder();
+		for (TransportRouteResultSegment segment : route.getSegments()) {
+			if (!"ferry".equals(segment.route.getType())) {
+				key.append(segment.route.getId()).append(';');
+			}
+		}
+		return key.toString();
 	}
 
 	private boolean excludeRoute(TransportRoutingContext ctx, TransportRouteResult fastRoute, TransportRouteResult testRoute) {
@@ -389,7 +798,10 @@ public class TransportRoutePlanner {
 	}
 
 	private boolean sameRouteWithExtraSegments(TransportRouteResult fastRoute, TransportRouteResult testRoute) {
-		if (testRoute.segments.size() < fastRoute.segments.size()) {
+//		if (testRoute.segments.size() < fastRoute.segments.size()) {
+//			return false;
+//		}
+		if (testRoute.getFilteredChanges() < fastRoute.getFilteredChanges()) {
 			return false;
 		}
 		int j = 0;
@@ -421,6 +833,20 @@ public class TransportRoutePlanner {
 		public int compare(TransportRouteSegment o1, TransportRouteSegment o2) {
 			int cmpDist = Double.compare(o1.distFromStart, o2.distFromStart);
 			return cmpDist == 0 ? Long.compare(o1.getId() + o1.nonce, o2.getId() + o2.nonce) : cmpDist;
+		}
+	}
+
+	private static class FerrySegmentsComparator implements Comparator<TransportRouteResult> {
+
+		public FerrySegmentsComparator() {
+		}
+
+		@Override
+		public int compare(TransportRouteResult o1, TransportRouteResult o2) {
+
+			//prefer more ferry segments. less walking distance
+			int cmpFerryCount = Integer.compare(o2.getFerryCount(), o1.getFerryCount());
+			return cmpFerryCount == 0 ? Double.compare(o1.getWalkDist(), o2.getWalkDist()) : cmpFerryCount;
 		}
 	}
 	

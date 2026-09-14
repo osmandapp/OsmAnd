@@ -139,11 +139,37 @@ public class TransportRouteResult {
 		return segments.size() - 1;
 	}
 
+	public int getFilteredChanges() {
+		// Join Ferry ways:   Bus1 - Ferry1 - Ferry2 - Bus2   ->    Bus1 - Ferry1 - Bus2
+		int count = 0;
+		if (segments.size() > 1) {
+			for (int i = 1; i < segments.size(); i++) {
+				TransportRouteResultSegment prevSegment = segments.get(i-1);
+				TransportRouteResultSegment currentSegment = segments.get(i);
+				if (prevSegment.route.getType().equals("ferry") && currentSegment.route.getType().equals("ferry")) {
+					continue;
+				}
+				count++;
+			}
+		}
+		return count;
+	}
+
+	public int getFerryCount() {
+		int count = 0;
+		for (TransportRouteResultSegment segment : segments) {
+			if (segment.route.getType().equals("ferry")) {
+				count++;
+			}
+		}
+		return count;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder bld = new StringBuilder();
-		bld.append(String.format(Locale.US, "Route %d stops, %d changes, %.2f min: %.2f m (%.1f min) to walk, %.2f m (%.1f min) to travel\n",
-				getStops(), getChanges(), routeTime / 60, getWalkDist(), getWalkTime() / 60.0,
+		bld.append(String.format(Locale.US, "Route %d stops, %d changes, %d filteredChanges %.2f min: %.2f m (%.1f min) to walk, %.2f m (%.1f min) to travel\n",
+				getStops(), getChanges(),  getFilteredChanges(), routeTime / 60, getWalkDist(), getWalkTime() / 60.0,
 				getTravelDist(), getTravelTime() / 60.0));
 		for(int i = 0; i < segments.size(); i++) {
 			TransportRoutePlanner.TransportRouteResultSegment s = segments.get(i);

@@ -39780,6 +39780,16 @@ public final class OsmandOdb {
      * </pre>
      */
     int getTravelTime();
+
+    // optional bool syntheticTerminal = 9;
+    /**
+     * <code>optional bool syntheticTerminal = 9;</code>
+     */
+    boolean hasSyntheticTerminal();
+    /**
+     * <code>optional bool syntheticTerminal = 9;</code>
+     */
+    boolean getSyntheticTerminal();
   }
   /**
    * Protobuf type {@code OsmAnd.OBF.TransportRouteStop}
@@ -39860,6 +39870,11 @@ public final class OsmandOdb {
             case 64: {
               bitField0_ |= 0x00000020;
               travelTime_ = input.readUInt32();
+              break;
+            }
+            case 72: {
+              bitField0_ |= 0x00000040;
+              syntheticTerminal_ = input.readBool();
               break;
             }
           }
@@ -40046,6 +40061,22 @@ public final class OsmandOdb {
       return travelTime_;
     }
 
+    // optional bool syntheticTerminal = 9;
+    public static final int SYNTHETICTERMINAL_FIELD_NUMBER = 9;
+    private boolean syntheticTerminal_;
+    /**
+     * <code>optional bool syntheticTerminal = 9;</code>
+     */
+    public boolean hasSyntheticTerminal() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional bool syntheticTerminal = 9;</code>
+     */
+    public boolean getSyntheticTerminal() {
+      return syntheticTerminal_;
+    }
+
     private void initFields() {
       id_ = 0L;
       dx_ = 0;
@@ -40053,6 +40084,7 @@ public final class OsmandOdb {
       name_ = 0;
       nameEn_ = 0;
       travelTime_ = 0;
+      syntheticTerminal_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -40100,6 +40132,9 @@ public final class OsmandOdb {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeUInt32(8, travelTime_);
       }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeBool(9, syntheticTerminal_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -40132,6 +40167,10 @@ public final class OsmandOdb {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(8, travelTime_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(9, syntheticTerminal_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -40261,6 +40300,8 @@ public final class OsmandOdb {
         bitField0_ = (bitField0_ & ~0x00000010);
         travelTime_ = 0;
         bitField0_ = (bitField0_ & ~0x00000020);
+        syntheticTerminal_ = false;
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -40313,6 +40354,10 @@ public final class OsmandOdb {
           to_bitField0_ |= 0x00000020;
         }
         result.travelTime_ = travelTime_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.syntheticTerminal_ = syntheticTerminal_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -40346,6 +40391,9 @@ public final class OsmandOdb {
         }
         if (other.hasTravelTime()) {
           setTravelTime(other.getTravelTime());
+        }
+        if (other.hasSyntheticTerminal()) {
+          setSyntheticTerminal(other.getSyntheticTerminal());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -40684,6 +40732,39 @@ public final class OsmandOdb {
         return this;
       }
 
+      // optional bool syntheticTerminal = 9;
+      private boolean syntheticTerminal_ ;
+      /**
+       * <code>optional bool syntheticTerminal = 9;</code>
+       */
+      public boolean hasSyntheticTerminal() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional bool syntheticTerminal = 9;</code>
+       */
+      public boolean getSyntheticTerminal() {
+        return syntheticTerminal_;
+      }
+      /**
+       * <code>optional bool syntheticTerminal = 9;</code>
+       */
+      public Builder setSyntheticTerminal(boolean value) {
+        bitField0_ |= 0x00000040;
+        syntheticTerminal_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool syntheticTerminal = 9;</code>
+       */
+      public Builder clearSyntheticTerminal() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        syntheticTerminal_ = false;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:OsmAnd.OBF.TransportRouteStop)
     }
 
@@ -40805,6 +40886,16 @@ public final class OsmandOdb {
      * </pre>
      */
     com.google.protobuf.ByteString getAdditionalNamePairs();
+
+    // optional bool syntheticTerminal = 23;
+    /**
+     * <code>optional bool syntheticTerminal = 23;</code>
+     */
+    boolean hasSyntheticTerminal();
+    /**
+     * <code>optional bool syntheticTerminal = 23;</code>
+     */
+    boolean getSyntheticTerminal();
 
     // repeated .OsmAnd.OBF.TransportStopExit exits = 9;
     /**
@@ -41003,6 +41094,11 @@ public final class OsmandOdb {
             case 66: {
               bitField0_ |= 0x00000020;
               additionalNamePairs_ = input.readBytes();
+              break;
+            }
+            case 184: {
+              bitField0_ |= 0x00000400;
+              syntheticTerminal_ = input.readBool();
               break;
             }
             case 74: {
@@ -41272,6 +41368,22 @@ public final class OsmandOdb {
       return additionalNamePairs_;
     }
 
+    // optional bool syntheticTerminal = 23;
+    public static final int SYNTHETICTERMINAL_FIELD_NUMBER = 23;
+    private boolean syntheticTerminal_;
+    /**
+     * <code>optional bool syntheticTerminal = 23;</code>
+     */
+    public boolean hasSyntheticTerminal() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    /**
+     * <code>optional bool syntheticTerminal = 23;</code>
+     */
+    public boolean getSyntheticTerminal() {
+      return syntheticTerminal_;
+    }
+
     // repeated .OsmAnd.OBF.TransportStopExit exits = 9;
     public static final int EXITS_FIELD_NUMBER = 9;
     private java.util.List<net.osmand.binary.OsmandOdb.TransportStopExit> exits_;
@@ -41439,6 +41551,7 @@ public final class OsmandOdb {
       routes_ = java.util.Collections.emptyList();
       deletedRoutesIds_ = java.util.Collections.emptyList();
       routesIds_ = java.util.Collections.emptyList();
+      syntheticTerminal_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -41504,6 +41617,9 @@ public final class OsmandOdb {
       for (int i = 0; i < routesIds_.size(); i++) {
         output.writeUInt64(22, routesIds_.get(i));
       }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        output.writeBool(23, syntheticTerminal_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -41567,6 +41683,10 @@ public final class OsmandOdb {
         }
         size += dataSize;
         size += 2 * getRoutesIdsList().size();
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(23, syntheticTerminal_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -41709,6 +41829,8 @@ public final class OsmandOdb {
         bitField0_ = (bitField0_ & ~0x00000100);
         routesIds_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000200);
+        syntheticTerminal_ = false;
+        bitField0_ = (bitField0_ & ~0x00000400);
         return this;
       }
 
@@ -41785,6 +41907,10 @@ public final class OsmandOdb {
           bitField0_ = (bitField0_ & ~0x00000200);
         }
         result.routesIds_ = routesIds_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000400;
+        }
+        result.syntheticTerminal_ = syntheticTerminal_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -41874,6 +42000,9 @@ public final class OsmandOdb {
             routesIds_.addAll(other.routesIds_);
           }
           onChanged();
+        }
+        if (other.hasSyntheticTerminal()) {
+          setSyntheticTerminal(other.getSyntheticTerminal());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -42217,6 +42346,39 @@ public final class OsmandOdb {
       public Builder clearAdditionalNamePairs() {
         bitField0_ = (bitField0_ & ~0x00000020);
         additionalNamePairs_ = getDefaultInstance().getAdditionalNamePairs();
+        onChanged();
+        return this;
+      }
+
+      // optional bool syntheticTerminal = 23;
+      private boolean syntheticTerminal_ ;
+      /**
+       * <code>optional bool syntheticTerminal = 23;</code>
+       */
+      public boolean hasSyntheticTerminal() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <code>optional bool syntheticTerminal = 23;</code>
+       */
+      public boolean getSyntheticTerminal() {
+        return syntheticTerminal_;
+      }
+      /**
+       * <code>optional bool syntheticTerminal = 23;</code>
+       */
+      public Builder setSyntheticTerminal(boolean value) {
+        bitField0_ |= 0x00000400;
+        syntheticTerminal_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool syntheticTerminal = 23;</code>
+       */
+      public Builder clearSyntheticTerminal() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        syntheticTerminal_ = false;
         onChanged();
         return this;
       }
