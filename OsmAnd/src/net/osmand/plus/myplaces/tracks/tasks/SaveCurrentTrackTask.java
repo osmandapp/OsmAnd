@@ -3,6 +3,7 @@ package net.osmand.plus.myplaces.tracks.tasks;
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
 import net.osmand.plus.shared.SharedUtil;
@@ -15,7 +16,7 @@ import net.osmand.shared.gpx.GpxFile;
 import java.io.File;
 import java.util.Map;
 
-public class SaveCurrentTrackTask extends AsyncTask<Void, Void, Boolean> {
+public class SaveCurrentTrackTask extends AsyncTask<Void, Void, SaveCurrentTrackTask.SaveResult> {
 
 	private final OsmandApplication app;
 	private final GpxFile gpx;
@@ -36,40 +37,62 @@ public class SaveCurrentTrackTask extends AsyncTask<Void, Void, Boolean> {
 	}
 
 	@Override
-	protected Boolean doInBackground(Void... params) {
+	protected SaveResult doInBackground(Void... params) {
 		SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
 		Map<String, GpxFile> files = savingTrackHelper.collectRecordedData();
-		File dir;
-		boolean shouldClearPath = false;
-		if (gpx.getPath().isEmpty()) {
-			dir = app.getCacheDir();
-			shouldClearPath = true;
-		} else {
-			dir = app.getAppCustomization().getTracksDir();
-		}
+		boolean shouldClearPath = gpx.getPath().isEmpty();
+		File dir = shouldClearPath ? app.getCacheDir() : app.getAppCustomization().getTracksDir();
 		if (!dir.exists()) {
-			dir.mkdir();
+			dir.mkdirs();
 		}
+		Exception lastError = null;
+		String lastSavedPath = null;
 		for (String f : files.keySet()) {
+			GpxFile gpxFile = files.get(f);
+			if (gpxFile == null) {
+				continue;
+			}
 			File fout = new File(dir, f + IndexConstants.GPX_FILE_EXT);
-			Exception exception = SharedUtil.writeGpxFile(fout, gpx);
-			if (exception == null) {
+			Exception exception = SharedUtil.writeGpxFile(fout, gpxFile);
+			if (exception != null) {
+				lastError = exception;
+			} else {
+				lastSavedPath = fout.getAbsolutePath();
+				gpxFile.setPath(lastSavedPath);
 				app.getSavingTrackHelper().setLastTimeFileSaved(fout.lastModified());
-				app.getSmartFolderHelper().addTrackItemToSmartFolder(new TrackItem(gpx));
+				app.getSmartFolderHelper().addTrackItemToSmartFolder(new TrackItem(gpxFile));
 			}
 		}
-		return shouldClearPath;
+		return new SaveResult(lastError, lastSavedPath, shouldClearPath);
 	}
 
 	@Override
-	protected void onPostExecute(Boolean shouldClearPath) {
-		if (gpx != null) {
-			if (saveGpxListener != null) {
-				saveGpxListener.onSaveGpxFinished(null);
-			}
-			if (shouldClearPath) {
-				gpx.setPath("");
-			}
+	protected void onPostExecute(@Nullable SaveResult result) {
+		if (gpx == null || result == null) {
+			return;
+		}
+		if (result.error == null && result.savedPath != null) {
+			gpx.setPath(result.savedPath);
+		}
+		if (saveGpxListener != null) {
+			saveGpxListener.onSaveGpxFinished(result.error);
+		}
+		if (result.error == null && result.shouldClearPath) {
+			gpx.setPath("");
+		}
+	}
+
+	static final class SaveResult {
+		@Nullable
+		final Exception error;
+		@Nullable
+		final String savedPath;
+		final boolean shouldClearPath;
+
+		SaveResult(@Nullable Exception error, @Nullable String savedPath, boolean shouldClearPath) {
+			this.error = error;
+			this.savedPath = savedPath;
+			this.shouldClearPath = shouldClearPath;
 		}
 	}
 }
