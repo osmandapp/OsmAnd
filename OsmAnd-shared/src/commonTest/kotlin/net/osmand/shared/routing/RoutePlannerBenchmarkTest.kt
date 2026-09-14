@@ -85,7 +85,13 @@ class RoutePlannerBenchmarkTest {
 		println("")
 	}
 
-	/** The route's road points thinned to the spacing of a track recorded at driving speed, a point a second. */
+	/**
+	 * The route's road points thinned to the spacing of a track recorded at driving speed, a point a
+	 * second, and moved a couple of metres off the road: a recording never lies on the road's own nodes,
+	 * and on a node several roads are the same distance away, where the planners pick by the order they
+	 * met the roads in - java and the copy iterate their hash tables differently, so the route they attach
+	 * would differ by a road here and there for a reason that has nothing to do with the approximation.
+	 */
 	private fun track(route: Route, readers: List<BinaryMapIndexReader>): List<KLatLon> {
 		val config = RoutingTestFixtures.defaultBuilder().build("car", limits(), LinkedHashMap())
 		val fe = RoutePlannerFrontEnd()
@@ -97,7 +103,8 @@ class RoutePlannerBenchmarkTest {
 			val step = if (s.getStartPointIndex() < s.getEndPointIndex()) 1 else -1
 			var i = s.getStartPointIndex()
 			while (true) {
-				val p = s.getPoint(i)
+				val road = s.getPoint(i)
+				val p = KLatLon(road.latitude + TRACK_OFFSET_LAT, road.longitude + TRACK_OFFSET_LON)
 				last = p
 				if (track.isEmpty() || KMapUtils.getDistance(track[track.size - 1], p) >= TRACK_SPACING_M) {
 					track.add(p)
@@ -211,6 +218,8 @@ class RoutePlannerBenchmarkTest {
 		const val WARMUP_ROUNDS = 1
 		const val MEASURED_ROUNDS = 2
 		const val TRACK_SPACING_M = 15.0 // a point a second at 55 km/h
+		const val TRACK_OFFSET_LAT = 0.00002 // ~2 m north
+		const val TRACK_OFFSET_LON = 0.00003 // ~2 m east
 
 		val OBF_DIRECTORIES = listOf(
 			"/Users/crimean/tmp/maps",
