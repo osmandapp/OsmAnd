@@ -46,13 +46,17 @@ android {
 			jni.srcDirs = []
 			jniLibs.srcDirs = ["libs"]
 			aidl.srcDirs = ["src"]
-			java.srcDirs = ["src"]
+			java.srcDirs = ["src",
+				rootProject.file("plugins/aprs-core/src")]
 			resources.srcDirs = ["src"]
-			res.srcDirs = ["res", layout.buildDirectory.dir("generated/osmand/res")]
-			assets.srcDirs = ["assets", layout.buildDirectory.dir("generated/osmand/assets")]
+			res.srcDirs = ["res", layout.buildDirectory.dir("generated/osmand/res"),
+				rootProject.file("plugins/aprs-core/res")]
+			assets.srcDirs = ["assets", layout.buildDirectory.dir("generated/osmand/assets"),
+				rootProject.file("plugins/aprs-core/assets")]
 		}
 		androidTest {
-			java.srcDirs = ["test/java"]
+			java.srcDirs = ["test/java",
+				rootProject.file("plugins/aprs-core/test/java")]
 			res.srcDirs = ["test/res"]
 			assets.srcDirs = ["test/assets"]
 		}
