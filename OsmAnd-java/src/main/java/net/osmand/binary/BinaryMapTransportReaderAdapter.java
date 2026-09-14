@@ -619,6 +619,9 @@ public class BinaryMapTransportReaderAdapter {
 			case OsmandOdb.TransportRouteStop.SYNTHETICTERMINAL_FIELD_NUMBER :
 				dataObject.setSyntheticTerminal(codedIS.readBool());
 				break;
+			case OsmandOdb.TransportRouteStop.TRANSFERONLY_FIELD_NUMBER :
+				dataObject.setTransferOnly(codedIS.readBool());
+				break;
 			default:
 				skipUnknownField(t);
 				break;

@@ -39790,6 +39790,16 @@ public final class OsmandOdb {
      * <code>optional bool syntheticTerminal = 9;</code>
      */
     boolean getSyntheticTerminal();
+
+    // optional bool transferOnly = 10;
+    /**
+     * <code>optional bool transferOnly = 10;</code>
+     */
+    boolean hasTransferOnly();
+    /**
+     * <code>optional bool transferOnly = 10;</code>
+     */
+    boolean getTransferOnly();
   }
   /**
    * Protobuf type {@code OsmAnd.OBF.TransportRouteStop}
@@ -39875,6 +39885,11 @@ public final class OsmandOdb {
             case 72: {
               bitField0_ |= 0x00000040;
               syntheticTerminal_ = input.readBool();
+              break;
+            }
+            case 80: {
+              bitField0_ |= 0x00000080;
+              transferOnly_ = input.readBool();
               break;
             }
           }
@@ -40077,6 +40092,22 @@ public final class OsmandOdb {
       return syntheticTerminal_;
     }
 
+    // optional bool transferOnly = 10;
+    public static final int TRANSFERONLY_FIELD_NUMBER = 10;
+    private boolean transferOnly_;
+    /**
+     * <code>optional bool transferOnly = 10;</code>
+     */
+    public boolean hasTransferOnly() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional bool transferOnly = 10;</code>
+     */
+    public boolean getTransferOnly() {
+      return transferOnly_;
+    }
+
     private void initFields() {
       id_ = 0L;
       dx_ = 0;
@@ -40085,6 +40116,7 @@ public final class OsmandOdb {
       nameEn_ = 0;
       travelTime_ = 0;
       syntheticTerminal_ = false;
+      transferOnly_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -40135,6 +40167,9 @@ public final class OsmandOdb {
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeBool(9, syntheticTerminal_);
       }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeBool(10, transferOnly_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -40171,6 +40206,10 @@ public final class OsmandOdb {
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(9, syntheticTerminal_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(10, transferOnly_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -40302,6 +40341,8 @@ public final class OsmandOdb {
         bitField0_ = (bitField0_ & ~0x00000020);
         syntheticTerminal_ = false;
         bitField0_ = (bitField0_ & ~0x00000040);
+        transferOnly_ = false;
+        bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
 
@@ -40358,6 +40399,10 @@ public final class OsmandOdb {
           to_bitField0_ |= 0x00000040;
         }
         result.syntheticTerminal_ = syntheticTerminal_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.transferOnly_ = transferOnly_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -40394,6 +40439,9 @@ public final class OsmandOdb {
         }
         if (other.hasSyntheticTerminal()) {
           setSyntheticTerminal(other.getSyntheticTerminal());
+        }
+        if (other.hasTransferOnly()) {
+          setTransferOnly(other.getTransferOnly());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -40761,6 +40809,39 @@ public final class OsmandOdb {
       public Builder clearSyntheticTerminal() {
         bitField0_ = (bitField0_ & ~0x00000040);
         syntheticTerminal_ = false;
+        onChanged();
+        return this;
+      }
+
+      // optional bool transferOnly = 10;
+      private boolean transferOnly_ ;
+      /**
+       * <code>optional bool transferOnly = 10;</code>
+       */
+      public boolean hasTransferOnly() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional bool transferOnly = 10;</code>
+       */
+      public boolean getTransferOnly() {
+        return transferOnly_;
+      }
+      /**
+       * <code>optional bool transferOnly = 10;</code>
+       */
+      public Builder setTransferOnly(boolean value) {
+        bitField0_ |= 0x00000080;
+        transferOnly_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool transferOnly = 10;</code>
+       */
+      public Builder clearTransferOnly() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        transferOnly_ = false;
         onChanged();
         return this;
       }

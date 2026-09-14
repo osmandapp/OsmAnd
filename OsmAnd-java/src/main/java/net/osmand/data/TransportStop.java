@@ -34,6 +34,9 @@ public class TransportStop extends MapObject {
 	// Deliberately opt-in: only set true for stops we ourselves fabricated: a real, pre-existing
 	// tagged terminal must never end up flagged here, even if it happens to sit at a way endpoint.
 	private boolean syntheticTerminal;
+	// Synthetic stop that can't be reached on foot (e.g. a node in the water where two route=ferry
+	// ways meet): only a same-stop change between routes is allowed there, no walking start/finish/transfer.
+	private boolean transferOnly;
 
 	public TransportStop() {}
 
@@ -43,6 +46,14 @@ public class TransportStop extends MapObject {
 
 	public void setSyntheticTerminal(boolean syntheticTerminal) {
 		this.syntheticTerminal = syntheticTerminal;
+	}
+
+	public boolean isTransferOnly() {
+		return transferOnly;
+	}
+
+	public void setTransferOnly(boolean transferOnly) {
+		this.transferOnly = transferOnly;
 	}
 	
 	public List<TransportRoute> getRoutes() {
