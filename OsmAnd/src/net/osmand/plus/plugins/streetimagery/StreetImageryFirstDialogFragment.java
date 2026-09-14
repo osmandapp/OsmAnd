@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.mapillary;
+package net.osmand.plus.plugins.streetimagery;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,6 +14,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.utils.AndroidUtils;
 
 public class StreetImageryFirstDialogFragment extends BottomSheetDialogFragment {

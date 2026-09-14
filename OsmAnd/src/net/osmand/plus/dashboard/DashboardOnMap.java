@@ -61,7 +61,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.mapillary.MapillaryFiltersFragment;
-import net.osmand.plus.plugins.mapillary.StreetImageryFirstDialogFragment;
+import net.osmand.plus.plugins.streetimagery.StreetImageryFirstDialogFragment;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.panoramax.PanoramaxFiltersFragment;
 import net.osmand.plus.plugins.panoramax.PanoramaxFirstDialogFragment;
