@@ -23,9 +23,6 @@ class RouteTestingTest {
 		var cases = 0
 		for (entry in RoutingTestFixtures.entries("test_routing.json")) {
 			val params = entry.params
-			if (params["hh"] == "true") {
-				continue
-			}
 			val maps = ArrayList<String>()
 			params["map"]?.let { maps.add(RoutingTestFixtures.resource("routing/$it")) }
 			maps.add(RoutingTestFixtures.resource("routing/Routing_test_archive.obf"))
@@ -63,6 +60,11 @@ class RouteTestingTest {
 		config.planRoadDirection = planRoadDirection
 
 		val fe = RoutePlannerFrontEnd()
+		RoutePlannerFrontEnd.CALCULATE_MISSING_MAPS = false
+		if (params["hh"] == "true") {
+			fe.setDefaultHHRoutingConfig()
+			fe.setUseOnlyHHRouting(true)
+		}
 		val ctx = fe.buildRoutingContext(config, readers, RouteCalculationMode.NORMAL)
 		ctx.leftSideNavigation = false
 		val routeSegments = fe.searchRoute(ctx, entry.startPoint, entry.endPoint, entry.transitPoints).detailed

@@ -11,6 +11,7 @@ import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
+import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.math.max
 
@@ -31,6 +32,8 @@ import kotlin.math.max
 class RoutePlannerFrontEnd {
 
 	private var useSmartRouteRecalculation = true
+	private var useOnlyHHRouting = false
+	private var hhRoutingConfig: HHRoutingConfig? = null
 
 	@JvmOverloads
 	fun buildRoutingContext(config: RoutingConfiguration, map: List<BinaryMapIndexReader>, rm: RouteCalculationMode? = null): RoutingContext {
@@ -128,6 +131,33 @@ class RoutePlannerFrontEnd {
 		return this
 	}
 
+	fun setHHRoutingConfig(hhRoutingConfig: HHRoutingConfig?): RoutePlannerFrontEnd {
+		// null means don't use hh
+		this.hhRoutingConfig = hhRoutingConfig
+		return this
+	}
+
+	fun disableHHRoutingConfig(): RoutePlannerFrontEnd {
+		this.hhRoutingConfig = null
+		return this
+	}
+
+	fun isHHRoutingConfigured(): Boolean = this.hhRoutingConfig != null
+
+	fun getHHRoutingConfig(): HHRoutingConfig? = this.hhRoutingConfig
+
+	fun setDefaultHHRoutingConfig() {
+		this.hhRoutingConfig = defaultHHConfig()
+	}
+
+	fun setUseOnlyHHRouting(useOnlyHHRouting: Boolean): RoutePlannerFrontEnd {
+		this.useOnlyHHRouting = useOnlyHHRouting
+		if (useOnlyHHRouting && hhRoutingConfig == null) {
+			this.hhRoutingConfig = defaultHHConfig()
+		}
+		return this
+	}
+
 	private fun needRequestPrivateAccessRouting(ctx: RoutingContext, points: List<KLatLon>): Boolean {
 		var res = false
 		val router = ctx.config.router
@@ -179,6 +209,14 @@ class RoutePlannerFrontEnd {
 		if (needRequestPrivateAccessRouting(ctx, targets)) {
 			progress.requestPrivateAccessRouting = true
 		}
+		if (hhRoutingConfig != null && ctx.calculationMode != RouteCalculationMode.BASE) {
+			// java fills ctx.regionsCoveringStartAndTargets from OsmandRegions here; the request carries it
+			val r = runHHRoute(ctx, start, targets)
+			val hasAnyMissingMaps = progress.hasAnyMissingMaps()
+			if ((r != null && r.isCorrect()) || hasAnyMissingMaps || useOnlyHHRouting) {
+				return r ?: HHNetworkRouteRes("Error during routing calculation")
+			}
+		}
 
 		var maxDistance = KMapUtils.getDistance(start, end)
 		if (!intermediatesEmpty) {
@@ -221,6 +259,60 @@ class RoutePlannerFrontEnd {
 		val res = searchRouteImpl(ctx, points, routeDirection)
 		progress.timeToCalculate = (nanoTime() - timeToCalculate)
 		return res
+	}
+
+	private fun runHHRoute(ctx: RoutingContext, start: KLatLon, targets: List<KLatLon>): HHNetworkRouteRes? {
+		val routePlanner = HHRoutePlanner.create(ctx)
+		val progress = ctx.calculationProgress
+		var r: HHNetworkRouteRes? = null
+		var dir = ctx.config.initialDirection
+		for (i in targets.indices) {
+			val initialPenalty = ctx.config.penaltyForReverseDirection
+			if (i > 0) {
+				ctx.config.penaltyForReverseDirection /= 2.0 // relax reverse-penalty (only for inter-points)
+			}
+			progress?.hhTargetsProgress(i, targets.size)
+			val res = calculateHHRoute(routePlanner, ctx, if (i == 0) start else targets[i - 1], targets[i], dir)
+			ctx.config.penaltyForReverseDirection = initialPenalty
+			if (r == null) {
+				r = res
+			} else {
+				r.append(res)
+			}
+			if (r == null || !r.isCorrect()) {
+				break
+			}
+			if (r.detailed.size > 0) {
+				dir = (r.detailed[r.detailed.size - 1].getBearingEnd() / 180.0) * PI
+			}
+		}
+		ctx.unloadAllData() // clean indexedSubregions is required for BRP-fallback
+		ctx.routingTime = r?.getHHRoutingDetailed()?.toFloat() ?: 0f
+		return r
+	}
+
+	private fun calculateHHRoute(
+		routePlanner: HHRoutePlanner, ctx: RoutingContext, start: KLatLon, end: KLatLon, dir: Double?
+	): HHNetworkRouteRes? {
+		try {
+			val cfg = HHRoutePlanner.prepareDefaultRoutingConfig(hhRoutingConfig)
+			cfg.INITIAL_DIRECTION = dir
+			val res = routePlanner.runRouting(start, end, cfg)
+			if (res.error == null) {
+				ctx.calculationProgress?.hhIteration(RouteCalculationProgress.HHIteration.DONE)
+				makeStartEndPointsPrecise(ctx, res, start, end)
+				return res
+			}
+			ctx.calculationProgress?.hhIteration(RouteCalculationProgress.HHIteration.HH_NOT_STARTED)
+		} catch (e: RouteCalculationInterruptedException) {
+			throw e
+		} catch (e: Exception) {
+			log.error("HH routing failed: " + e.message, e)
+			if (useOnlyHHRouting) {
+				return HHNetworkRouteRes("Error during routing calculation : " + e.message)
+			}
+		}
+		return null
 	}
 
 	fun makeStartEndPointsPrecise(ctx: RoutingContext, res: RouteCalcResult, start: KLatLon, end: KLatLon) {
@@ -504,6 +596,16 @@ class RoutePlannerFrontEnd {
 
 		// Check issue #8649
 		const val GPS_POSSIBLE_ERROR = 7.0
+
+		/** Read by the HH config: with the missing maps check on, only the best group of HH files is routed over. */
+		@JvmField
+		var CALCULATE_MISSING_MAPS = true
+
+		@JvmStatic
+		fun defaultHHConfig(): HHRoutingConfig {
+			return HHRoutingConfig.astar(0).calcDetailed(HHRoutingConfig.CALCULATE_ALL_DETAILED)
+				.applyCalculateMissingMaps(CALCULATE_MISSING_MAPS)
+		}
 
 		// exported to Objective-C under another name: a macro of the same name in the C++ core headers
 		// would otherwise break every file that includes both

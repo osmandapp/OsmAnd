@@ -1401,7 +1401,7 @@ object TurnLanes {
 	 * when it is empty. Kotlin's split keeps the trailing empties, so "left;" would gain a lane
 	 * that java never saw.
 	 */
-	private fun splitDroppingTrailingEmpty(s: String, delimiter: String): List<String> {
+	internal fun splitDroppingTrailingEmpty(s: String, delimiter: String): List<String> {
 		val parts = s.split(delimiter)
 		if (parts.size == 1) {
 			return parts
