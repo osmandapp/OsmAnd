@@ -214,7 +214,6 @@ class ChipsLayout @JvmOverloads constructor(
 	override fun Content() {
 		ObserveThemeChanges()
 		ChipsLayoutContent(
-			items = items,
 			contentEnabled = chipsContentEnabled,
 			nightMode = nightMode,
 			expandedChipId = expandedChipId,
@@ -226,6 +225,74 @@ class ChipsLayout @JvmOverloads constructor(
 			}
 		)
 	}
+
+	@Composable
+	private fun ChipsLayoutContent(
+		contentEnabled: Boolean,
+		nightMode: Boolean,
+		expandedChipId: String?,
+		onExpandedChipChanged: (String?) -> Unit,
+		onChipClick: (String) -> Unit,
+		onDropdownItemClick: (String, Int) -> Unit
+	) {
+		val activityBackground = colorAttr(R.attr.activity_background_color)
+		val listBackground = colorAttr(R.attr.list_background_color)
+		val chipBackground = colorResource(if (nightMode) R.color.chip_bg_dark else R.color.chip_bg_light)
+		val chipOutlineColor = colorResource(
+			if (nightMode) R.color.btn_outline_secondary_dark else R.color.btn_outline_secondary_light
+		)
+		val dividerColor = colorAttr(R.attr.divider_color_basic)
+		val activeColor = colorAttr(R.attr.active_color_primary)
+		val inActiveColor = colorAttr(R.attr.secondary_icon_color)
+		val chipSelectedBackground = colorResource(
+			if (nightMode) R.color.chip_bg_selected_dark else R.color.chip_bg_selected_light
+		)
+		val contentPadding = dimensionResource(R.dimen.content_padding)
+		val halfPadding = dimensionResource(R.dimen.content_padding_half)
+		val chips = items.filter { it.visible }
+
+		MaterialTheme(
+			colorScheme = lightColorScheme(
+				primary = activeColor,
+				surface = listBackground,
+				background = activityBackground,
+				onSurface = textColor(ChipsLayout.TextColorStyle.PRIMARY)
+			)
+		) {
+			Row(
+				modifier = Modifier
+					.fillMaxWidth()
+					.height(CHIPS_ROW_HEIGHT)
+					.horizontalScroll(rememberScrollState()),
+				horizontalArrangement = Arrangement.spacedBy(halfPadding),
+				verticalAlignment = Alignment.CenterVertically
+			) {
+				Spacer(modifier = Modifier.width(contentPadding - halfPadding))
+				chips.forEach { chip ->
+					ChipAnchor(
+						chip = chip,
+						contentEnabled = contentEnabled,
+						expanded = expandedChipId == chip.id,
+						changeExpandedState = { expanded ->
+							onExpandedChipChanged(if (expanded) chip.id else null)
+						},
+						onChipClick = onChipClick,
+						onDropdownItemClick = onDropdownItemClick,
+						listBackground = listBackground,
+						chipBackground = chipBackground,
+						chipOutlineColor = chipOutlineColor,
+						dividerColor = dividerColor,
+						activeColor = activeColor,
+						inActiveColor = inActiveColor,
+						chipSelectedBackground = chipSelectedBackground,
+						nightMode = nightMode
+					)
+				}
+				Spacer(modifier = Modifier.width(contentPadding - halfPadding))
+			}
+		}
+	}
+
 
 	@Composable
 	private fun ObserveThemeChanges() {
@@ -258,74 +325,6 @@ class ChipsLayout @JvmOverloads constructor(
 		val app = context.applicationContext as? OsmandApplication ?: return false
 		val appMode = appMode ?: app.settings.applicationMode
 		return app.daynightHelper.isNightMode(appMode, themeUsageContext)
-	}
-}
-
-@Composable
-private fun ChipsLayoutContent(
-	items: List<ChipsLayout.ChipData>,
-	contentEnabled: Boolean,
-	nightMode: Boolean,
-	expandedChipId: String?,
-	onExpandedChipChanged: (String?) -> Unit,
-	onChipClick: (String) -> Unit,
-	onDropdownItemClick: (String, Int) -> Unit
-) {
-	val activityBackground = colorAttr(R.attr.activity_background_color)
-	val listBackground = colorAttr(R.attr.list_background_color)
-	val chipBackground = colorResource(if (nightMode) R.color.chip_bg_dark else R.color.chip_bg_light)
-	val chipOutlineColor = colorResource(
-		if (nightMode) R.color.btn_outline_secondary_dark else R.color.btn_outline_secondary_light
-	)
-	val dividerColor = colorAttr(R.attr.divider_color_basic)
-	val activeColor = colorAttr(R.attr.active_color_primary)
-	val inActiveColor = colorAttr(R.attr.secondary_icon_color)
-	val chipSelectedBackground = colorResource(
-		if (nightMode) R.color.chip_bg_selected_dark else R.color.chip_bg_selected_light
-	)
-	val contentPadding = dimensionResource(R.dimen.content_padding)
-	val halfPadding = dimensionResource(R.dimen.content_padding_half)
-	val chips = items.filter { it.visible }
-
-	MaterialTheme(
-		colorScheme = lightColorScheme(
-			primary = activeColor,
-			surface = listBackground,
-			background = activityBackground,
-			onSurface = textColor(ChipsLayout.TextColorStyle.PRIMARY)
-		)
-	) {
-		Row(
-			modifier = Modifier
-				.fillMaxWidth()
-				.height(CHIPS_ROW_HEIGHT)
-				.horizontalScroll(rememberScrollState()),
-			horizontalArrangement = Arrangement.spacedBy(halfPadding),
-			verticalAlignment = Alignment.CenterVertically
-		) {
-			Spacer(modifier = Modifier.width(contentPadding - halfPadding))
-			chips.forEach { chip ->
-				ChipAnchor(
-					chip = chip,
-					contentEnabled = contentEnabled,
-					expanded = expandedChipId == chip.id,
-					changeExpandedState = { expanded ->
-						onExpandedChipChanged(if (expanded) chip.id else null)
-					},
-					onChipClick = onChipClick,
-					onDropdownItemClick = onDropdownItemClick,
-					listBackground = listBackground,
-					chipBackground = chipBackground,
-					chipOutlineColor = chipOutlineColor,
-					dividerColor = dividerColor,
-					activeColor = activeColor,
-					inActiveColor = inActiveColor,
-					chipSelectedBackground = chipSelectedBackground,
-					nightMode = nightMode
-				)
-			}
-			Spacer(modifier = Modifier.width(contentPadding - halfPadding))
-		}
 	}
 }
 
