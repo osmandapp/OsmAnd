@@ -16,6 +16,7 @@ import net.osmand.plus.gallery.model.GalleryItem
 import net.osmand.plus.gallery.ui.GalleryGridAdapter
 import net.osmand.plus.gallery.ui.GalleryGridItemDecorator
 import net.osmand.plus.gallery.ui.GallerySectionCardDecoration
+import net.osmand.plus.gallery.ui.holders.MorphableMediaHolder
 import net.osmand.plus.utils.AndroidUtils
 import kotlin.math.abs
 import kotlin.math.floor
@@ -43,7 +44,7 @@ class GridPinchController(
 		fun switchDisplayMode(mode: GalleryDisplayMode)
 	}
 
-	private class Captured(val position: Int, val view: View, val decorated: RectF)
+	private class Captured(val position: Int, val view: View, val holder: MorphableMediaHolder?, val decorated: RectF)
 
 	private class Layout {
 		val decorated = HashMap<Int, RectF>()
@@ -55,6 +56,7 @@ class GridPinchController(
 	val isActive: Boolean get() = active || settle != null
 
 	private var active = false
+	private var touching = false
 	private var listPinch = false
 	private var discrete = false
 	private var stepped = false
@@ -62,12 +64,15 @@ class GridPinchController(
 	private var captureRequested = false
 	private val layouts = HashMap<Int, Layout>()
 	private var baseSpan = 0
+	private var capturedSpan = 0
 	private var minSpan = 0
 	private var stepLower = 0
 	private var stepUpper = 0
 	private var stepRange = 0f..0f
+	private var travelled = 0f..0f
 	private var scale = 1f
 	private var spanF = 0f
+	private var settleSpan = 0
 	private var listSupported = false
 	private var focalPosition = -1
 	private var focalX = 0f
@@ -95,20 +100,24 @@ class GridPinchController(
 			settle = null
 			animator.cancel()
 			active = true
+			if (!touching) {
+				rebase(settleSpan, bounds)
+				travelled = unitOf(spanF).let { it..it }
+			}
+			touching = true
 			scale = baseSpan / spanF
 			return true
 		}
 		if (active) return true
 		active = true
+		touching = true
 		scale = 1f
 		focalX = detector.focusX
 		focalY = detector.focusY
-		baseSpan = controller.getSpanCount(portrait)
+		rebase(controller.getSpanCount(portrait), bounds)
+		capturedSpan = baseSpan
 		spanF = baseSpan.toFloat()
-		minSpan = minOf(bounds.first, baseSpan)
-		stepLower = maxOf(minSpan, baseSpan - 1)
-		stepUpper = minOf(maxOf(bounds.last, baseSpan), baseSpan + 1)
-		stepRange = (if (listSupported && baseSpan == minSpan) minSpan - LIST_ZONE else stepLower.toFloat())..stepUpper.toFloat()
+		travelled = spanF..spanF
 		listener.setScrollLocked(true)
 		if (!GalleryMotion.animationsEnabled(app)) {
 			discrete = true
@@ -136,7 +145,11 @@ class GridPinchController(
 		}
 		if (!active) return true
 		scale *= detector.scaleFactor
-		spanF = (baseSpan / scale).coerceIn(stepRange)
+		val unit = unitOf(baseSpan / scale).coerceIn(
+			maxOf(unitOf(stepRange.start), travelled.endInclusive - 1f), minOf(stepRange.endInclusive, travelled.start + 1f))
+		travelled = minOf(travelled.start, unit)..maxOf(travelled.endInclusive, unit)
+		spanF = spanOf(unit)
+		scale = baseSpan / spanF
 		if (captured.isNotEmpty()) apply(spanF)
 		return true
 	}
@@ -177,6 +190,7 @@ class GridPinchController(
 			return
 		}
 		val from = spanF
+		settleSpan = target
 		settle = ValueAnimator.ofFloat(0f, 1f).apply {
 			duration = (SETTLE_DURATION_MS * (distance / 0.5f)).toLong().coerceIn(SETTLE_MIN_DURATION_MS, SETTLE_DURATION_MS)
 			interpolator = GalleryMotion.CURVE
@@ -200,13 +214,32 @@ class GridPinchController(
 		if (active) onScaleEnd()
 		stepped = false
 		listPinch = false
+		touching = false
 		if (!isActive) listener.setScrollLocked(false)
 	}
 
-	private fun settleTarget(): Int? {
-		if (listSupported && spanF <= minSpan - LIST_ZONE) return null
-		return spanF.roundToInt().coerceIn(stepLower, stepUpper)
+	private fun rebase(span: Int, bounds: IntRange) {
+		baseSpan = span
+		minSpan = minOf(bounds.first, span)
+		stepLower = maxOf(minSpan, span - 1)
+		stepUpper = minOf(maxOf(bounds.last, span), span + 1)
+		stepRange = (if (listSupported && span == minSpan) minSpan - LIST_ZONE else stepLower.toFloat())..stepUpper.toFloat()
 	}
+
+	private fun unitOf(span: Float): Float = if (span >= minSpan) span else minSpan - (minSpan - span) / LIST_ZONE
+
+	private fun spanOf(unit: Float): Float = if (unit >= minSpan) unit else minSpan - (minSpan - unit) * LIST_ZONE
+
+	private fun settleTarget(): Int? {
+		val base = baseSpan.toFloat()
+		val lower = stepRange.start
+		val upper = stepRange.endInclusive
+		if (lower < base && spanF <= halfway(base, lower)) return if (lower < minSpan) null else lower.roundToInt()
+		if (upper > base && spanF >= halfway(base, upper)) return upper.roundToInt()
+		return baseSpan
+	}
+
+	private fun halfway(span: Float, neighbour: Float): Float = 2f * span * neighbour / (span + neighbour)
 
 	private fun switchToList() {
 		stepped = true
@@ -224,7 +257,7 @@ class GridPinchController(
 			val position = recyclerView.getChildAdapterPosition(child)
 			if (position !in 0 until adapter.itemCount) continue
 			recyclerView.getDecoratedBoundsWithMargins(child, scratch)
-			val item = Captured(position, child, RectF(scratch))
+			val item = Captured(position, child, recyclerView.getChildViewHolder(child) as? MorphableMediaHolder, RectF(scratch))
 			list += item
 			if (adapter.getItem(position) !is GalleryItem.Media) heights[position] = child.height
 			val distance = if (item.decorated.contains(focalX, focalY)) 0f
@@ -278,6 +311,7 @@ class GridPinchController(
 			view.translationY = rect.top - view.top
 			view.scaleX = if (view.width > 0) rect.width() / view.width else 1f
 			view.scaleY = if (view.height > 0) rect.height() / view.height else 1f
+			item.holder?.counterScaleOverlays(view.scaleX, view.scaleY)
 		}
 		cards?.let { decoration ->
 			val live = LinkedHashMap<String, RectF>()
@@ -294,7 +328,7 @@ class GridPinchController(
 		val top = recyclerView.paddingTop.toFloat()
 		if (anchoredAtTop) return top
 		val focal = layout.decorated[focalPosition] ?: return 0f
-		val screenTop = if (span == baseSpan) focalRealTop else focalY - focalRatio * focal.height()
+		val screenTop = if (span == capturedSpan) focalRealTop else focalY - focalRatio * focal.height()
 		val bottom = (recyclerView.height - recyclerView.paddingBottom).toFloat()
 		return (screenTop - focal.top).coerceAtLeast(bottom - layout.height).coerceAtMost(top)
 	}
@@ -393,10 +427,10 @@ class GridPinchController(
 			else -> firstVisiblePosition()
 		}
 		val offset = if (!anchoredAtTop && anchor != null) (anchor.top + shift - recyclerView.paddingTop).roundToInt() else 0
-		val views = captured.map { it.view }
+		val items = captured
 		listener.setExtraLayoutSpace(0)
 		listener.commitSpan(target, anchorPosition, offset) {
-			views.forEach(::clearTransform)
+			items.forEach(::clearTransform)
 			cards?.liveCards = null
 			recyclerView.invalidate()
 			if (!isActive) listener.setScrollLocked(false)
@@ -407,7 +441,7 @@ class GridPinchController(
 	}
 
 	private fun reset() {
-		captured.forEach { clearTransform(it.view) }
+		captured.forEach(::clearTransform)
 		captured = emptyList()
 		layouts.clear()
 		heights.clear()
@@ -417,13 +451,15 @@ class GridPinchController(
 		recyclerView.invalidate()
 	}
 
-	private fun clearTransform(view: View) {
+	private fun clearTransform(item: Captured) {
+		val view = item.view
 		view.translationX = 0f
 		view.translationY = 0f
 		view.scaleX = 1f
 		view.scaleY = 1f
 		view.pivotX = view.width / 2f
 		view.pivotY = view.height / 2f
+		item.holder?.counterScaleOverlays(1f, 1f)
 	}
 
 	private fun firstVisiblePosition(): Int {

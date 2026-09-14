@@ -26,4 +26,6 @@ interface MorphableMediaHolder {
 	fun beginMorph(standIn: Bitmap?, onPreviewArrived: (Bitmap) -> Unit)
 
 	fun endMorph(revealed: Boolean)
+
+	fun counterScaleOverlays(cellScaleX: Float, cellScaleY: Float) {}
 }

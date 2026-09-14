@@ -84,6 +84,7 @@ class GalleryGridBinder(
 		this.adapter = adapter
 		adapter.displayMode = controller.getDisplayMode()
 		adapter.selectionMode = controller.isSelectionMode()
+		adapter.sectionCardRadius = cardDecoration?.radius ?: 0f
 		recyclerView.adapter = adapter
 		cardDecoration?.let { recyclerView.addItemDecoration(it) }
 		itemDecorator?.let { recyclerView.addItemDecoration(it) }

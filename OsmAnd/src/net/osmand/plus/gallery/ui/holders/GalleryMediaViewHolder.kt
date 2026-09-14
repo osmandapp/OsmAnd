@@ -111,6 +111,16 @@ class GalleryMediaViewHolder(
 
 	override fun endMorph(revealed: Boolean) = previewDelegate.endMorph(revealed)
 
+	override fun counterScaleOverlays(cellScaleX: Float, cellScaleY: Float) {
+		previewDelegate.counterScaleOverlays(cellScaleX, cellScaleY)
+		MediaPreviewDelegate.counterScale(progressBar, itemView.width / 2f, itemView.height / 2f, cellScaleX, cellScaleY)
+		for (corner in listOf(selectionCheck, ivLoadSourceType)) {
+			val anchorX = if (corner.left + corner.width / 2f > itemView.width / 2f) itemView.width.toFloat() else 0f
+			val anchorY = if (corner.top + corner.height / 2f > itemView.height / 2f) itemView.height.toFloat() else 0f
+			MediaPreviewDelegate.counterScale(corner, anchorX, anchorY, cellScaleX, cellScaleY)
+		}
+	}
+
 	init {
 		clickOverlay.setOnClickListener {
 			val item = boundMediaItem ?: return@setOnClickListener

@@ -68,6 +68,8 @@ class GalleryGridAdapter(
 
 	var displayMode: GalleryDisplayMode = GalleryDisplayMode.GRID
 
+	var sectionCardRadius = 0f
+
 	var selectionMode: Boolean = false
 	var listRowFactory: ((ViewGroup) -> GalleryMediaListViewHolder)? = null
 	var emptyRowFactory: ((ViewGroup) -> MediaLibraryEmptyHolder)? = null
@@ -193,11 +195,8 @@ class GalleryGridAdapter(
 				)
 			}
 			holder is GalleryMediaListViewHolder && item is GalleryItem.Media -> {
-				val showDivider = getSectionBoundary(position)?.isLast == false
-				holder.bindView(
-					mapActivity, item, nightMode, selectionMode,
-					isItemSelected(item.mediaItem), showDivider
-				)
+				holder.bindView(mapActivity, item, nightMode, selectionMode, isItemSelected(item.mediaItem))
+				holder.bindSection(getSectionBoundary(position), sectionCardRadius)
 			}
 			holder is ActionViewHolder && item is GalleryItem.Action ->
 				holder.bindView(nightMode, mapActivity, item)
@@ -243,13 +242,13 @@ class GalleryGridAdapter(
 						is GalleryMediaViewHolder -> holder.updateMetadata(item)
 						is GalleryMediaListViewHolder -> {
 							holder.updateMetadata(item)
-							holder.updateDivider(getSectionBoundary(position)?.isLast == false)
+							holder.bindSection(getSectionBoundary(position), sectionCardRadius)
 						}
 					}
 				}
 
 				payload == SECTION_PAYLOAD_TYPE && item is GalleryItem.Media ->
-					(holder as? GalleryMediaListViewHolder)?.updateDivider(getSectionBoundary(position)?.isLast == false)
+					(holder as? GalleryMediaListViewHolder)?.bindSection(getSectionBoundary(position), sectionCardRadius)
 			}
 		}
 	}

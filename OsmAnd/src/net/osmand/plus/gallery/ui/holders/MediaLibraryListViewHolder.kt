@@ -27,9 +27,9 @@ class MediaLibraryListViewHolder(
 ) : GalleryMediaListViewHolder(app, itemView, mediaProvider, onClick, onLongClick, onToggleSelection, posterLoader) {
 	private var nightMode = false
 	override fun bindView(mapActivity: FragmentActivity, galleryItem: GalleryItem.Media, nightMode: Boolean,
-		selectionMode: Boolean, selected: Boolean, showDivider: Boolean) {
+		selectionMode: Boolean, selected: Boolean) {
 		this.nightMode = nightMode
-		super.bindView(mapActivity, galleryItem, nightMode, selectionMode, selected, showDivider)
+		super.bindView(mapActivity, galleryItem, nightMode, selectionMode, selected)
 		bindAttachment(galleryItem)
 		itemView.findViewById<ImageView>(R.id.overflow_button).apply {
 			visibility = if (selectionMode) View.INVISIBLE else View.VISIBLE

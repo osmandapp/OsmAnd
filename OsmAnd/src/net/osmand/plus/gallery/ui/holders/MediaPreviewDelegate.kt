@@ -55,6 +55,8 @@ class MediaPreviewDelegate(
 	private var morphing = false
 	private var onPreviewArrived: ((Bitmap) -> Unit)? = null
 	private var crossFade: ValueAnimator? = null
+	private var cellScaleX = 1f
+	private var cellScaleY = 1f
 
 	val morphPreviewSnapshotView: View?
 		get() = imageView.takeIf { showsPreviewBitmap && it.isVisible }
@@ -161,10 +163,28 @@ class MediaPreviewDelegate(
 		applyDurationLabel()
 	}
 
+	fun counterScaleOverlays(cellScaleX: Float, cellScaleY: Float) {
+		this.cellScaleX = cellScaleX
+		this.cellScaleY = cellScaleY
+		applyCounterScale()
+	}
+
+	private fun applyCounterScale() {
+		val cell = imageView.parent as? View ?: return
+		val centerX = cell.width / 2f
+		val centerY = cell.height / 2f
+		val iconScaleX = if (showsPreviewBitmap) 1f else cellScaleX
+		val iconScaleY = if (showsPreviewBitmap) 1f else cellScaleY
+		counterScale(imageView, centerX, centerY, iconScaleX, iconScaleY)
+		playIcon?.let { counterScale(it, centerX, centerY, cellScaleX, cellScaleY) }
+		durationText?.let { counterScale(it, centerX, centerY, cellScaleX, cellScaleY) }
+	}
+
 	private fun showPreview(bitmap: Bitmap, crossFadeFrom: Bitmap?) {
 		endCrossFade()
 		val wasPreview = showsPreviewBitmap
 		showsPreviewBitmap = true
+		if (cellScaleX != 1f || cellScaleY != 1f) applyCounterScale()
 		hideVideoChrome()
 		imageView.scaleType = ImageView.ScaleType.CENTER_CROP
 		if (crossFadeFrom != null && crossFadeFrom !== bitmap && GalleryMotion.animationsEnabled(app)) {
@@ -304,6 +324,20 @@ class MediaPreviewDelegate(
 
 	companion object {
 		private const val DURATION_GAP_DP = 2f
+
+		fun counterScale(view: View, anchorX: Float, anchorY: Float, cellScaleX: Float, cellScaleY: Float) {
+			if (cellScaleX == 1f && cellScaleY == 1f) {
+				view.scaleX = 1f
+				view.scaleY = 1f
+				view.pivotX = view.width / 2f
+				view.pivotY = view.height / 2f
+				return
+			}
+			view.pivotX = anchorX - view.left - view.translationX
+			view.pivotY = anchorY - view.top - view.translationY
+			view.scaleX = 1f / cellScaleX
+			view.scaleY = 1f / cellScaleY
+		}
 
 		fun getPlaceholderIconId(type: MediaType): Int = when (type) {
 			MediaType.VIDEO -> R.drawable.ic_type_video

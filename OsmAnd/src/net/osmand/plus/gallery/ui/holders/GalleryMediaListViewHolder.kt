@@ -2,6 +2,7 @@ package net.osmand.plus.gallery.ui.holders
 
 import android.graphics.Bitmap
 import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
@@ -15,6 +16,7 @@ import net.osmand.plus.R
 import androidx.fragment.app.FragmentActivity
 import net.osmand.plus.gallery.data.MediaPosterLoader
 import net.osmand.plus.gallery.model.GalleryItem
+import net.osmand.plus.gallery.ui.GallerySectionBoundary
 import net.osmand.plus.gallery.ui.motion.GalleryMotion
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.utils.ColorUtilities
@@ -43,6 +45,7 @@ open class GalleryMediaListViewHolder(
 	private val tvDescription: TextView = itemView.findViewById(R.id.description)
 	private val selectionCheck: CompoundButton = itemView.findViewById(R.id.selection_check)
 	private val divider: View = itemView.findViewById(R.id.divider)
+	private val selectionTint = GradientDrawable()
 
 	private val previewDelegate = MediaPreviewDelegate(
 		app, ivImage,
@@ -101,11 +104,15 @@ open class GalleryMediaListViewHolder(
 
 	override fun endMorph(revealed: Boolean) = previewDelegate.endMorph(revealed)
 
-	fun updateDivider(showDivider: Boolean) {
-		AndroidUiHelper.updateVisibility(divider, showDivider)
+	fun bindSection(boundary: GallerySectionBoundary?, cardRadius: Float) {
+		AndroidUiHelper.updateVisibility(divider, boundary?.isLast == false)
+		val top = if (boundary?.roundTopCorners == true) cardRadius else 0f
+		val bottom = if (boundary?.roundBottomCorners == true) cardRadius else 0f
+		selectionTint.cornerRadii = floatArrayOf(top, top, top, top, bottom, bottom, bottom, bottom)
 	}
 
 	init {
+		itemView.background = selectionTint
 		itemView.setOnClickListener {
 			val item = boundMediaItem ?: return@setOnClickListener
 			if (selectionMode) onToggleSelection(item) else onMediaItemClicked(item)
@@ -122,8 +129,7 @@ open class GalleryMediaListViewHolder(
 		galleryItem: GalleryItem.Media,
 		nightMode: Boolean,
 		selectionMode: Boolean,
-		selected: Boolean,
-		showDivider: Boolean
+		selected: Boolean
 	) {
 		val mediaItem = galleryItem.mediaItem
 		boundMediaItem = mediaItem
@@ -133,8 +139,6 @@ open class GalleryMediaListViewHolder(
 		tvTitle.text = mediaItem.title
 		tvDescription.setTextColor(ColorUtilities.getSecondaryTextColor(app, nightMode))
 		bindDescription(galleryItem)
-		AndroidUiHelper.updateVisibility(divider, showDivider)
-
 		bindPreview(galleryItem, nightMode)
 		bindSelection(selectionMode, selected, nightMode, animate = false)
 	}
@@ -189,7 +193,7 @@ open class GalleryMediaListViewHolder(
 		} else {
 			Color.TRANSPARENT
 		}
-		itemView.setBackgroundColor(bgColor)
+		selectionTint.setColor(bgColor)
 
 		val shown = selectionCheck.isVisible && !checkboxLeaving
 		if (animate && selectionMode != shown) {
