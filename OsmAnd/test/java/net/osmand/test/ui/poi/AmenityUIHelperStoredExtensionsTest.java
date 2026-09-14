@@ -17,6 +17,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.SpecialPointType;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.mapcontextmenu.builders.AmenityUIHelper;
@@ -91,6 +92,7 @@ public class AmenityUIHelperStoredExtensionsTest extends AndroidTest {
 			AmenityInfoRow row = rows.get(entry.getKey());
 			assertNotNull(entry.getKey(), row);
 			assertEquals(entry.getValue(), row.text);
+			assertEquals(R.drawable.ic_action_info_dark, row.iconId);
 		}
 		assertEquals("country", rows.get(CUSTOM_KEY).name);
 	}
