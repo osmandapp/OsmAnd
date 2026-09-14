@@ -253,6 +253,9 @@ class PrecalculatedRouteDirection {
 	 * Takes the points and the router rather than a routing context: the context holds an open obf
 	 * reader and stays in OsmAnd-java, and this is all of it that was ever read here.
 	 */
+	fun adopt(ctx: RoutingContext): PrecalculatedRouteDirection? =
+		adopt(ctx.startX, ctx.startY, ctx.targetX, ctx.targetY, ctx.getRouter())
+
 	fun adopt(startX: Int, startY: Int, targetX: Int, targetY: Int, router: VehicleRouter): PrecalculatedRouteDirection? {
 		val ind1 = getIndex(startX, startY)
 		val ind2 = getIndex(targetX, targetY)
