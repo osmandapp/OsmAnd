@@ -49,6 +49,25 @@ public class GeoActionIntentTest {
 	}
 
 	@Test
+	public void testParseRoutePreferences() {
+		assertEquals("avoid_tolls", GeoActionHelper.parseAction(Uri.parse("geo.action:?act=avoid_tolls")));
+		assertEquals("allow_tolls", GeoActionHelper.parseAction(Uri.parse("geo.action.offline:?act=allow_tolls")));
+		assertEquals("avoid_highways", GeoActionHelper.parseAction(Uri.parse("geo.action:?act=avoid_highways")));
+		assertEquals("allow_highways", GeoActionHelper.parseAction(Uri.parse("geo.action.offline:?act=allow_highways")));
+		assertEquals("avoid_ferries", GeoActionHelper.parseAction(Uri.parse("geo.action:?act=avoid_ferries")));
+		assertEquals("allow_ferries", GeoActionHelper.parseAction(Uri.parse("geo.action.offline:?act=allow_ferries")));
+	}
+
+	@Test
+	public void testParseMapActions() {
+		assertEquals("show_alternates", GeoActionHelper.parseAction(Uri.parse("geo.action:?act=show_alternates")));
+		assertEquals("route_overview", GeoActionHelper.parseAction(Uri.parse("geo.action.offline:?act=route_overview")));
+		assertEquals("show_directions_list", GeoActionHelper.parseAction(Uri.parse("geo.action:?act=show_directions_list")));
+		assertEquals("follow_mode", GeoActionHelper.parseAction(Uri.parse("geo.action.offline:?act=follow_mode")));
+		assertEquals("go_back", GeoActionHelper.parseAction(Uri.parse("geo.action:?act=go_back")));
+	}
+
+	@Test
 	public void testParseUnsupportedAndEdgeCases() {
 		assertEquals("unknown_action", GeoActionHelper.parseAction(Uri.parse("geo.action:?act=unknown_action")));
 		assertEquals("", GeoActionHelper.parseAction(Uri.parse("geo:52.52,13.40")));
