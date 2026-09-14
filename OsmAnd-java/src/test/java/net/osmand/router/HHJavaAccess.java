@@ -42,6 +42,16 @@ public final class HHJavaAccess {
 		return hctx.pointsById;
 	}
 
+	/** The search counters of a route, whose fields are package private. */
+	public static String stats(HHRouteDataStructure.HHNetworkRouteRes route) {
+		HHRouteDataStructure.RoutingStats s = route.stats;
+		if (s == null) {
+			return "no stats";
+		}
+		return "visited " + s.visitedVertices + " unique " + s.uniqueVisitedVertices + " added " + s.addedVertices
+				+ " firstMet " + s.firstRouteVisitedVertices + " edges " + s.loadEdgesCnt;
+	}
+
 	/** The edges of a vertex in one direction as "from>to cost direction shortcut", or null while not loaded. */
 	public static List<String> edges(NetworkDBPoint point, boolean reverse) {
 		List<NetworkDBSegment> segments = point.connected(reverse);

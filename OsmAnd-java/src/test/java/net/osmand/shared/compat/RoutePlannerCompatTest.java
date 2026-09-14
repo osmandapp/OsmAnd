@@ -48,10 +48,8 @@ import java.util.Objects;
  * preparation. What comes out is compared segment by segment: the road, the stretch of it, the
  * routing and driving times, the distance and the manoeuvre; and the number of segments the search
  * settled, which two searches taking the same steps agree on. A request one side rejects the other
- * has to reject the same way.
- *
- * The cases that ask for HH routing are left out: the copy has no HH search yet, and java would
- * answer them from a different algorithm.
+ * has to reject the same way. A case that asks for HH routing runs the HH search on both sides,
+ * over the hub graph of its map, with the same last-mile and detailed searches underneath.
  */
 @RunWith(Parameterized.class)
 public class RoutePlannerCompatTest {
@@ -86,9 +84,6 @@ public class RoutePlannerCompatTest {
 		}
 		for (TestEntry te : entries("/test_routing.json")) {
 			Map<String, String> params = te.getParams();
-			if (params != null && "true".equals(params.get("hh"))) {
-				continue;
-			}
 			List<String> maps = new ArrayList<>();
 			if (params != null && params.containsKey("map")) {
 				maps.add(RESOURCES + "routing/" + params.get("map"));
@@ -164,8 +159,16 @@ public class RoutePlannerCompatTest {
 				ctx.leftSideNavigation = false;
 
 				net.osmand.shared.routing.RoutePlannerFrontEnd kfe = new net.osmand.shared.routing.RoutePlannerFrontEnd();
+				net.osmand.shared.routing.RoutePlannerFrontEnd.CALCULATE_MISSING_MAPS = false;
 				net.osmand.shared.routing.RoutingContext kctx = kfe.buildRoutingContext(kconfig, kreaders, RouteCalculationMode.NORMAL);
 				kctx.leftSideNavigation = false;
+				if ("true".equals(params.get("hh"))) {
+					fe.setDefaultHHRoutingConfig();
+					fe.setUseOnlyHHRouting(true);
+					fe.setHHRouteCpp(false);
+					kfe.setDefaultHHRoutingConfig();
+					kfe.setUseOnlyHHRouting(true);
+				}
 
 				String m = entry.getTestName() + " direction " + planRoadDirection;
 				List<RouteSegmentResult> java;
