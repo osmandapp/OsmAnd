@@ -93,6 +93,50 @@ object KAlgorithms {
 		}
 	}
 
+	fun isDigit(c: Char): Boolean {
+		return c in '0'..'9'
+	}
+
+	/**
+	 * Index right after the leading decimal number of [value], -1 when it does not start with one.
+	 * A trailing dot is not part of the number, so "40." reports 2.
+	 */
+	fun findFirstNumberEndIndex(value: String): Int {
+		var i = 0
+		if (value.isNotEmpty() && value[0] == '-') {
+			i++
+		}
+		var state = 0 // 0 - no number, 1 - 1st digits, 2 - dot, 3 - last digits
+		while (i < value.length && (isDigit(value[i]) || value[i] == '.')) {
+			if (value[i] == '.') {
+				if (state == 2) {
+					return i - 1
+				}
+				if (state != 1) {
+					return -1
+				}
+				state = 2
+			} else {
+				if (state == 2) {
+					// last digits
+					state = 3
+				} else if (state == 0) {
+					// first digits started
+					state = 1
+				}
+			}
+			i++
+		}
+		if (state == 2) {
+			// invalid number like 40. correct to -> '40'
+			return i - 1
+		}
+		if (state == 0) {
+			return -1
+		}
+		return i
+	}
+
 	fun colorToString(color: Int): String {
 		return if ((0xFF000000.toInt() and color) == 0xFF000000.toInt()) {
 			"#%06X".format(color and 0x00FFFFFF)
