@@ -12,4 +12,5 @@ public interface OsmAndConstants {
 	int UI_HANDLER_MAP_HUD = 10000;
 	int EXPLORE_PLACES_UPDATE = 11000;
 	int AUTO_BACKUP = 12000;
+	int UI_HANDLER_ANDROID_AUTO = 13000;
 }
