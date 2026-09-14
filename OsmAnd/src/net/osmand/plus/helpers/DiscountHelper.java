@@ -183,7 +183,7 @@ public class DiscountHelper {
 			if (!validateUrl(app, data.url)) {
 				return;
 			}
-			boolean followingMode = app.getRoutingHelper().isFollowingMode();
+			boolean followingMode = app.getSettings().FOLLOW_THE_ROUTE.get() || app.getRoutingHelper().isFollowingMode();
 
 			if (app.getSettings().SHOULD_SHOW_DISCOUNT_BOTTOM_SHEET.get()) {
 				if (!followingMode) {
