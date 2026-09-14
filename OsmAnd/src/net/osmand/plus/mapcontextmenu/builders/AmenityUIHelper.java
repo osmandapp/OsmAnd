@@ -356,6 +356,9 @@ public class AmenityUIHelper extends MenuBuilder {
 			collectedPoiTypes.computeIfAbsent(category, s -> new ArrayList<>()).add(poiType);
 		} else if (showDefaultTags || useGenericFallback) {
 			String displayKey = useGenericFallback ? getGenericFallbackDisplayKey(key) : key;
+			if (useGenericFallback) {
+				rowBuilder.setIconId(R.drawable.ic_action_info_dark);
+			}
 			pType = new PoiType(poiTypes, poiCategory, null, displayKey, poiCategory.getIconKeyName());
 			pType.setText(true);
 			PoiAdditionalUiRule poiAdditionalUiRule = PoiAdditionalUiRules.INSTANCE.findRule(key);
