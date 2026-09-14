@@ -61,7 +61,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.mapillary.MapillaryFiltersFragment;
-import net.osmand.plus.plugins.mapillary.MapillaryFirstDialogFragment;
+import net.osmand.plus.plugins.mapillary.StreetImageryFirstDialogFragment;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.panoramax.PanoramaxFiltersFragment;
 import net.osmand.plus.plugins.panoramax.PanoramaxFirstDialogFragment;
@@ -669,7 +669,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 			MapillaryPlugin plugin = PluginsHelper.getPlugin(MapillaryPlugin.class);
 			if (plugin != null && plugin.SHOW_MAPILLARY.get() && !plugin.MAPILLARY_FIRST_DIALOG_SHOWN.get()) {
-				MapillaryFirstDialogFragment.showInstance(mapActivity);
+				StreetImageryFirstDialogFragment.showInstance(mapActivity);
 			}
 
 			PanoramaxPlugin panoramaxPlugin = PluginsHelper.getPlugin(PanoramaxPlugin.class);

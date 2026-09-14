@@ -16,9 +16,9 @@ import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.utils.AndroidUtils;
 
-public class MapillaryFirstDialogFragment extends BottomSheetDialogFragment {
+public class StreetImageryFirstDialogFragment extends BottomSheetDialogFragment {
 
-	private static final String TAG = MapillaryFirstDialogFragment.class.getSimpleName();
+	private static final String TAG = StreetImageryFirstDialogFragment.class.getSimpleName();
 
 	private static final String KEY_SHOW_WIDGET = "key_show_widget";
 
@@ -31,7 +31,7 @@ public class MapillaryFirstDialogFragment extends BottomSheetDialogFragment {
 			showWidget = savedInstanceState.getBoolean(KEY_SHOW_WIDGET, true);
 		}
 
-		View view = inflate(R.layout.mapillary_first_dialog, container, false);
+		View view = inflate(R.layout.street_imagery_first_dialog, container, false);
 		SwitchCompat widgetSwitch = view.findViewById(R.id.widget_switch);
 		widgetSwitch.setChecked(showWidget);
 		widgetSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> showWidget(isChecked));
@@ -60,7 +60,7 @@ public class MapillaryFirstDialogFragment extends BottomSheetDialogFragment {
 		FragmentManager manager = activity.getSupportFragmentManager();
 		MapillaryPlugin plugin = PluginsHelper.getPlugin(MapillaryPlugin.class);
 		if (plugin != null && AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-			MapillaryFirstDialogFragment fragment = new MapillaryFirstDialogFragment();
+			StreetImageryFirstDialogFragment fragment = new StreetImageryFirstDialogFragment();
 			fragment.show(manager, TAG);
 			plugin.MAPILLARY_FIRST_DIALOG_SHOWN.set(true);
 		}
