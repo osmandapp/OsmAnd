@@ -35,43 +35,23 @@ import net.osmand.router.lanes.TurnTypeAI;
 import net.osmand.router.lanes.TurnTypeAI.TurnIndication;
 
 /**
- * The same cases as {@link RouteResultPreparationTest}, prepared by {@link TurnPrepareAI}.
- *
- * <p>The recorded strings were written for another implementation, and many of them encode a human
- * judgement about what an instruction should say rather than a fact about the map, so a case gets
- * one of three verdicts:
- *
- * <ul>
- * <li><b>OK</b> - the maneuver and the lanes say the same thing;</li>
- * <li><b>SIMILAR</b> - a difference a person has to judge: neighbouring maneuvers on the
- *     left-to-right ladder ({@link TurnType#orderFromLeftToRight}, so straight against keep right),
- *     the same lanes with a different set marked, the same arrows in a different order, or only
- *     the muting;</li>
- * <li><b>FAIL</b> - no instruction where one was expected, an instruction where none was, a
- *     maneuver two steps away or more, or a different lane structure.</li>
- * </ul>
- *
- * <p>A case with any FAIL fails the test and prints what differs. SIMILAR is counted and printed,
- * never asserted.
- *
- * <h3>Lane format</h3>
- *
- * {@code [MUTE] KR:TU|TL|TL,+C|+C|+C,TR} - the maneuver, then one entry per lane, left to right as
- * the driver sees them, arrows in the order the map wrote them. The {@code +} marks the arrow the
- * route takes, not the lane, so a lane whose arrows are {@code TL,C} where the route goes straight
- * reads {@code TL,+C}. The old format wrote the taken arrow first and marked the lane instead
- * ({@code +C,TL}); both parse to the same thing here, which is what lets the two be compared.
+ * The same cases as RouteResultPreparationTest, prepared by TurnPrepareAI. The recorded strings were
+ * written for another implementation, and many of them encode a human judgement about what an instruction
+ * should say rather than a fact about the map, so a case gets one of three verdicts: OK - the maneuver and
+ * the lanes say the same thing; SIMILAR - a difference a person has to judge: neighbouring maneuvers on the
+ * left-to-right ladder (TurnType#orderFromLeftToRight, so straight against keep right), the same lanes with
+ * a different set marked, the same arrows in a different order, or only the muting; FAIL - no instruction
+ * where one was expected, an instruction where none was, a maneuver two steps away or more, or a different
+ * lane structure.
  */
 @RunWith(Parameterized.class)
 public class TurnPrepareTestAI {
 
 	/**
-	 * Measured on 2026-09-11 over the whole file, after the verdict was tightened so that marking
-	 * lanes which lead somewhere else counts as a failure rather than a judgement call. That
-	 * re-scoring alone moved 23 expectations from SIMILAR to FAIL; the number is not comparable
-	 * with anything measured before it.
+	 * Measured on 2026-09-14 over the whole file, and not comparable with the 37 first measured on 2026-09-11:
+	 * three re-scorings sit between them.
 	 */
-	private static final int MEASURED_FAIL = 37;
+	private static final int MEASURED_FAIL = 7;
 
 	private static final String MAP = "src/test/resources/Turn_lanes_test.obf";
 	private static final String CASES = "/test_turn_lanes.json";
@@ -159,13 +139,13 @@ public class TurnPrepareTestAI {
 
 	static Verdict verdict(String expected, String actual) {
 		if (expected == null) {
-			// null and "" are not the same sentence: null says "this road is on the route" and
-			// nothing more, while "" says "and it carries no instruction"
+			// null and "" are not the same sentence: null says "this road is on the route" and nothing more, while ""
+			// says "and it carries no instruction"
 			return Verdict.SKIP;
 		}
 		if (expected.isEmpty()) {
-			// whether a plain "carry on" is worth an instruction at all is a judgement, not a fact:
-			// one side shows the lanes and says nothing, the other says nothing at all
+			// whether a plain "carry on" is worth an instruction at all is a judgement, not a fact: one side shows
+			// the lanes and says nothing, the other says nothing at all
 			return actual == null ? Verdict.OK : onlyCarriesOn(actual) ? Verdict.SIMILAR : Verdict.FAIL;
 		}
 		if (actual == null) {
@@ -208,23 +188,30 @@ public class TurnPrepareTestAI {
 	}
 
 	/**
-	 * Neighbours on the left-to-right ladder are one judgement apart: straight and keep right are
-	 * the same road read by two people. Two steps or more is a different instruction.
+	 * Neighbours on the left-to-right ladder are one judgement apart: straight and keep right are the same
+	 * road read by two people.
 	 */
 	private static Verdict compareTurns(String expected, String actual) {
 		if (expected.equals(actual)) {
 			return Verdict.OK;
+		}
+		if (keepAndTurnOfTheSameSide(expected, actual)) {
+			return Verdict.SIMILAR;
 		}
 		int e = TurnType.orderFromLeftToRight(TurnType.fromString(expected, false).getValue());
 		int a = TurnType.orderFromLeftToRight(TurnType.fromString(actual, false).getValue());
 		return Math.abs(e - a) <= 1 ? Verdict.SIMILAR : Verdict.FAIL;
 	}
 
-	/**
-	 * The lane structure is a fact of the map and has to match. Which lanes are marked is the
-	 * judgement: the old implementation marked the one lane it chose, this one marks every lane
-	 * that leads where the route goes.
-	 */
+	private static boolean keepAndTurnOfTheSameSide(String one, String other) {
+		return pairOf("KL", "TL", one, other) || pairOf("KR", "TR", one, other);
+	}
+
+	private static boolean pairOf(String keep, String turn, String one, String other) {
+		return (keep.equals(one) && turn.equals(other)) || (keep.equals(other) && turn.equals(one));
+	}
+
+	/** The lane structure is a fact of the map and has to match. */
 	private static Verdict compareLanes(String expected, String actual) {
 		List<LaneShape> e = LaneShape.parse(expected);
 		List<LaneShape> a = LaneShape.parse(actual);
@@ -234,6 +221,8 @@ public class TurnPrepareTestAI {
 		boolean sameLanes = true;
 		TreeSet<String> markedExpected = new TreeSet<>();
 		TreeSet<String> markedActual = new TreeSet<>();
+		TreeSet<Integer> activeExpected = new TreeSet<>();
+		TreeSet<Integer> activeActual = new TreeSet<>();
 		for (int i = 0; i < e.size(); i++) {
 			if (!e.get(i).arrows.equals(a.get(i).arrows)) {
 				return Verdict.FAIL;
@@ -241,16 +230,22 @@ public class TurnPrepareTestAI {
 			sameLanes &= Objects.equals(e.get(i).marked, a.get(i).marked);
 			if (e.get(i).marked != null) {
 				markedExpected.add(e.get(i).marked);
+				activeExpected.add(i);
 			}
 			if (a.get(i).marked != null) {
 				markedActual.add(a.get(i).marked);
+				activeActual.add(i);
 			}
 		}
 		if (sameLanes) {
 			return Verdict.OK;
 		}
-		// marking a different NUMBER of lanes that lead the same way is a judgement; marking lanes
-		// that lead somewhere else is an error, and a driver following it ends up in the wrong lane
+		if (activeExpected.equals(activeActual)) {
+			// the same lanes are active and only the arrow drawn as taken inside one of them differs.
+			return Verdict.SIMILAR;
+		}
+		// marking a different NUMBER of lanes that lead the same way is a judgement; marking lanes that lead
+		// somewhere else is an error, and a driver following it ends up in the wrong lane
 		return markedExpected.equals(markedActual) ? Verdict.SIMILAR : Verdict.FAIL;
 	}
 
@@ -443,11 +438,7 @@ public class TurnPrepareTestAI {
 		return sb.toString();
 	}
 
-	/**
-	 * The lane row. {@code +} goes on the arrow the route takes, which the model records when it
-	 * marks the lane rather than leaving it to be guessed from the maneuver. This is also the
-	 * place a profile-aware code would be added: the panel knows whose lane each one is.
-	 */
+	/** The lane row. */
 	private String lanesOf(TurnTypeAI turn) {
 		LanePanelAI panel = turn.panel();
 		if (panel.isEmpty()) {

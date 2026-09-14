@@ -8,17 +8,7 @@ import java.util.List;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.MapUtils;
 
-/**
- * What a junction offers, read before anything is decided about the maneuver.
- *
- * <p>A driver at a junction does not measure degrees, they count choices: these roads leave here,
- * mine is the second from the left, and the arrows painted on my lane say which one each lane
- * leads to. This class is the first half of that - the options and where the route sits among
- * them. {@link TurnPrepareAI} does the second half.
- *
- * <p>Angles are degrees away from the road being left, positive to the left, so the options sort
- * from left to right by descending angle.
- */
+/** What a junction offers, read before anything is decided about the maneuver. */
 public final class JunctionAI {
 
 	/** the road we came in on, seen among the roads that leave */
@@ -72,11 +62,7 @@ public final class JunctionAI {
 		this.forkRight = forkRight;
 	}
 
-	/**
-	 * Reads the junction between two segments of the route. Roads that only lead back where we came
-	 * from are dropped, and so is a road so much smaller than the one we are on that no driver would
-	 * mistake it for a choice: a driveway beside a trunk road is not a fork.
-	 */
+	/** Reads the junction between two segments of the route. */
 	public static JunctionAI at(RouteSegmentResult prev, RouteSegmentResult current) {
 		double out = prev.getBearingEnd(prev.getEndPointIndex(),
 				Math.min(prev.getDistance(), RouteSegmentResult.DIST_BEARING_DETECT));
@@ -160,11 +146,7 @@ public final class JunctionAI {
 		return options.size() > 1;
 	}
 
-	/**
-	 * The route leaves the main road onto a slip road while another road carries it on. An exit is
-	 * drawn as a gentle bend, sometimes of a few degrees, but it is a turn: the lane that leads to
-	 * it is marked with an arrow, and the route takes that arrow however small the angle is.
-	 */
+	/** The route leaves the main road onto a slip road while another road carries it on. */
 	public boolean routeLeavesMainRoad() {
 		boolean routeOnLink = false;
 		boolean otherOnRoad = false;
@@ -191,10 +173,7 @@ public final class JunctionAI {
 		return forkRight;
 	}
 
-	/**
-	 * How big a road is, smaller number for bigger road. Used only to drop the choices nobody
-	 * would count as choices.
-	 */
+	/** How big a road is, smaller number for bigger road. */
 	public static int rank(String highway) {
 		if (highway == null) {
 			return 5;

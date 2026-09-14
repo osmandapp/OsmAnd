@@ -8,26 +8,7 @@ import net.osmand.router.lanes.TurnTypeAI.TransportMode;
 import net.osmand.router.lanes.TurnTypeAI.TurnIndication;
 
 
-/**
- * The lane table a driver looks at, in the driver's own direction of travel.
- *
- * <p>This is the whole interface an UI needs, and it is deliberately not the model. {@link TurnTypeAI}
- * knows OSM: an access hierarchy, tag keys, direction groups, designations. None of that is a
- * question a driver asks. A driver asks four:
- *
- * <ol>
- * <li>how many lanes are there and in what order - the list, index 0 leftmost AS SEEN BY THE DRIVER;</li>
- * <li>which of them leads where I am going - {@link Lane#active};</li>
- * <li>may I be in this lane - {@link Lane#open};</li>
- * <li>whose lane is it - {@link Lane#purpose}.</li>
- * </ol>
- *
- * <p>Two more answers come free with the model and cost nothing to carry: the arrows painted on the
- * lane, and whether the line beside it may be crossed.
- *
- * <p>Everything here is already resolved for the traveller the route was built for, so nothing in
- * an interface has to know what {@code psv} means or that {@code vehicle} outranks {@code access}.
- */
+/** The lane table a driver looks at, in the driver's own direction of travel. */
 public final class LanePanelAI {
 
 	/** whose lane it is, in the words a person would use */
