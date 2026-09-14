@@ -235,7 +235,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 
 	private static boolean isDebugMode = SearchUICore.isDebugMode();
 	private ProcessTopIndex processTopIndexAfterLoad = ProcessTopIndex.NO;
-	private final Stack<SearchPhrase> addressSearchStack = new Stack<>();
+	private final Stack<String> addressSearchStack = new Stack<>();
 
 	private enum ProcessTopIndex {
 		FILTER,
@@ -727,7 +727,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		if (tabBarHidden) {
 			resetSpatialSearchScope();
 			if (!addressSearchStack.isEmpty()) {
-				String newText = addressSearchStack.pop().getFullSearchPhrase();
+				String newText = addressSearchStack.pop();
 				searchEditText.setText(newText);
 				searchEditText.setSelection(newText.length());
 			} else {
@@ -3447,13 +3447,14 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				|| searchResult.objectType == GPX_TRACK) {
 			mainSearchFragment.showResult(searchResult);
 		} else {
+			saveAddressSearchState();
 			completeQueryWithObject(searchResult);
-			onSearchResultSelected();
 		}
 	}
 
-	public void onSearchResultSelected() {
-		SearchResultCollection searchResult = searchHelper.getCore().getCurrentSearchResult();
-		addressSearchStack.push(searchResult.getPhrase());
+	// Should be called before the selected result is applied to the search query,
+	// so that back navigation restores exactly the query which is displayed now.
+	public void saveAddressSearchState() {
+		addressSearchStack.push(searchEditText.getText().toString());
 	}
 }

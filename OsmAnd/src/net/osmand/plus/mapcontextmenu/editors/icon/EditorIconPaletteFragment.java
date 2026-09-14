@@ -273,7 +273,7 @@ public class EditorIconPaletteFragment extends BaseFullScreenDialogFragment impl
 	public void onDestroy() {
 		super.onDestroy();
 		FragmentActivity activity = getActivity();
-		if (activity != null && !activity.isChangingConfigurations()) {
+		if (controller != null && activity != null && !activity.isChangingConfigurations()) {
 			// Automatically unregister controller when close the dialog
 			// to avoid any possible memory leaks
 			controller.onDestroyScreen();

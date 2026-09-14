@@ -3202,6 +3202,32 @@ fun globalSolarEclipseWindow(event: GlobalSolarEclipseInfo): GlobalSolarEclipseW
 
 
 /**
+ * Local circumstances of an already known global solar eclipse.
+ *
+ * Unlike [searchLocalSolarEclipse], this function does not advance to another
+ * new moon: it reports how the eclipse identified by [event] appears to the
+ * observer, or `null` when the Moon's penumbra never reaches that location.
+ *
+ * Eclipses that happen entirely below the horizon are also reported, because the
+ * caller may want to present the contact times together with the Sun altitude
+ * carried by every [EclipseEvent].
+ */
+fun localSolarEclipseWindow(event: GlobalSolarEclipseInfo, observer: Observer): LocalSolarEclipseInfo? {
+    val shadow = try {
+        peakLocalMoonShadow(event.peak, observer)
+    } catch (e: InternalError) {
+        // The shadow axis never approaches the observer near the peak of this eclipse.
+        return null
+    }
+    if (shadow.r >= shadow.p) {
+        // The observer stays outside the penumbra: no eclipse at this location.
+        return null
+    }
+    return localEclipse(shadow, observer)
+}
+
+
+/**
  * Returns a representative point in the Moon's shadow at [time], or `null`
  * when the penumbra does not touch the Earth.
  */

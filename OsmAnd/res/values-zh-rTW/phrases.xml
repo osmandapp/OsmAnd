@@ -5180,4 +5180,8 @@
     <string name="poi_winter_hiking_filter">適用於冬季健行</string>
     <string name="poi_mtb_yes">是</string>
     <string name="poi_winter_hiking_yes">是</string>
+    <string name="poi_air_conditioning">空調</string>
+    <string name="poi_website_menu">選單</string>
+    <string name="poi_air_conditioning_yes">是</string>
+    <string name="poi_air_conditioning_no">否</string>
 </resources>

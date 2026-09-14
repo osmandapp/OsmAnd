@@ -80,6 +80,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	private boolean selectAll;
 	private boolean exploreHistoryCard;
 	private final List<QuickSearchListItem> selectedItems = new ArrayList<>();
+	private final List<QuickSearchListItem> itemsToRemove = new ArrayList<>();
 	private final UpdateLocationViewCache updateLocationViewCache;
 	private final SearchTrackDataResolver trackDataResolver;
 
@@ -503,11 +504,10 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		if (searchResult != null && searchResult.objectType == ObjectType.INDEX_ITEM) {
 			view = getConvertView(convertView, R.layout.search_download_map_list_item);
 			IndexItem indexItem = (IndexItem) searchResult.relatedObject;
+			bindIndexItem(view, indexItem, activity, nightMode);
 			if (indexItem.isDownloaded()) {
 				// remove item after downloading
-				remove(listItem);
-			} else {
-				bindIndexItem(view, indexItem, activity, nightMode);
+				removeItemDelayed(listItem);
 			}
 		} else if (searchResult != null && searchResult.objectType == ObjectType.GPX_TRACK) {
 			view = getConvertView(convertView, R.layout.search_list_item_full);
@@ -545,6 +545,30 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			setupCheckBox(position, view, listItem);
 		}
 		return view;
+	}
+
+	/**
+	 * Schedules the item removal for the next UI message instead of removing it right away.
+	 * {@link #getView(int, View, ViewGroup)} is called from a layout pass, and modifying the
+	 * adapter content there leaves the list view with a stale item count for the rest of that
+	 * pass, which ends up in an {@link IndexOutOfBoundsException} on the following positions.
+	 */
+	private void removeItemDelayed(@NonNull QuickSearchListItem item) {
+		if (itemsToRemove.contains(item)) {
+			return;
+		}
+		itemsToRemove.add(item);
+		if (itemsToRemove.size() == 1) {
+			app.runInUIThread(() -> {
+				setNotifyOnChange(false);
+				for (QuickSearchListItem itemToRemove : itemsToRemove) {
+					remove(itemToRemove);
+				}
+				itemsToRemove.clear();
+				setNotifyOnChange(true);
+				notifyDataSetChanged();
+			});
+		}
 	}
 
 	private View bindSpatialCategorySearchResultItem(int position, @Nullable View convertView,
@@ -668,14 +692,13 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	                          boolean useBigMargin) {
 		View divider = view.findViewById(R.id.divider);
 		if (divider != null) {
-			Object o = getItem(position);
-			if (position == getCount() - 1 || getItem(position + 1).getType() == HEADER
-					|| getItem(position + 1).getType() == BOTTOM_SHADOW || getItem(position + 1).getType() == CARD_DIVIDER) {
+			QuickSearchListItem nextItem = position >= 0 && position + 1 < getCount() ? getItem(position + 1) : null;
+			QuickSearchListItemType nextItemType = nextItem != null ? nextItem.getType() : null;
+			if (nextItemType == null || nextItemType == HEADER
+					|| nextItemType == BOTTOM_SHADOW || nextItemType == CARD_DIVIDER) {
 				divider.setVisibility(View.GONE);
 			} else {
 				divider.setVisibility(View.VISIBLE);
-				QuickSearchListItem nextItem = position < getCount() - 1 ? getItem(position + 1) : null;
-				QuickSearchListItemType nextItemType = nextItem != null ? nextItem.getType() : null;
 				if (nextItemType == SEARCH_MORE
 						|| nextItemType == SEARCH_ON_WEB
 						|| listItem.getType() == QuickSearchListItemType.SELECT_ALL) {

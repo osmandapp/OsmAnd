@@ -79,5 +79,6 @@ public class QuickActionIds {
 	public static final int SHOW_HIDE_COORDINATE_GRID_ACTION_ID = 79;
 	public static final int SHOW_HIDE_WEATHER_LAYERS = 80;
 	public static final int SHOW_HIDE_WIND_ANIMATION_LAYER = 81;
-	public static final int SHOW_HIDE_PANORAMAX_ACTION_ID = 82;
+	public static final int SHOW_HIDE_TRACKS_ACTION_ID = 82;
+	public static final int SHOW_HIDE_PANORAMAX_ACTION_ID = 83;
 }

@@ -915,6 +915,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		super.updateMainViewLayout(posY);
 		updateStatusBarColor();
 		updateToolbar(posY, true);
+		mapDisplayPositionManager.updateMapDisplayPosition(true);
 	}
 
 	@Override

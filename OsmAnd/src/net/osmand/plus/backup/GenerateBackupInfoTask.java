@@ -129,7 +129,7 @@ public class GenerateBackupInfoTask extends AsyncTask<Void, Void, BackupInfo> {
 				}
 			}
 		}
-		FavoritesBackupMerger.prepareMergeUploads(app, backupHelper, info);
+		FavoritesBackupMerger.prepareMergeUploads(app, backupHelper, info, autoSync);
 		info.createItemCollections(app);
 
 		operationLog.log("=== filesToUpload ===");

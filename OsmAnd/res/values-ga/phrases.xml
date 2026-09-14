@@ -5180,4 +5180,8 @@
     <string name="poi_winter_hiking_filter">Oiriúnach do shiúlóidí geimhridh</string>
     <string name="poi_mtb_yes">Tá</string>
     <string name="poi_winter_hiking_yes">Tá</string>
+    <string name="poi_air_conditioning">Aerchóiriú</string>
+    <string name="poi_website_menu">Roghchlár</string>
+    <string name="poi_air_conditioning_yes">Tá</string>
+    <string name="poi_air_conditioning_no">Níl</string>
 </resources>

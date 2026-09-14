@@ -114,6 +114,44 @@ class GpxDatabase {
 		return updateGpxParameters(item, linkedMapOf(gpxParameter to value))
 	}
 
+	fun persistAnalyzedItem(item: GpxDataItem): GpxDataItem? {
+		var db: SQLiteConnection? = null
+		try {
+			db = openConnection(false) ?: return null
+			db.beginTransaction()
+			try {
+				// Re-read in the write transaction so analysis can only be merged into the
+				// latest user-controlled values.
+				val storedItem = getDataItem(item.file, db) as? GpxDataItem
+				val itemToPersist = storedItem?.apply { copyAnalysisData(item) } ?: item
+				val updateParameters = itemToPersist.getAnalysisUpdateParameters().toMutableMap()
+				if (itemToPersist.normalizeAdditionalExaggeration()) {
+					updateParameters[ADDITIONAL_EXAGGERATION] =
+						itemToPersist.getParameter(ADDITIONAL_EXAGGERATION)
+				}
+				if (storedItem != null) {
+					updateGpxParameters(
+						db,
+						GPX_TABLE_NAME,
+						updateParameters,
+						GpxDbUtils.getItemRowsToSearch(item.file)
+					)
+				} else {
+					insertItem(itemToPersist, db)
+				}
+				db.setTransactionSuccessful()
+				return itemToPersist
+			} finally {
+				db.endTransaction()
+			}
+		} catch (e: Exception) {
+			log.error("Failed to persist analyzed GPX item ${item.file.path()}", e)
+			return null
+		} finally {
+			db?.close()
+		}
+	}
+
 	private fun updateGpxParameters(item: DataItem, map: Map<GpxParameter, Any?>): Boolean {
 		val file = item.file
 		val tableName = GpxDbUtils.getTableName(file)

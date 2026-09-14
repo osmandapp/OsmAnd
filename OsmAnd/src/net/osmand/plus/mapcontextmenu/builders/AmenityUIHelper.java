@@ -70,6 +70,7 @@ public class AmenityUIHelper extends MenuBuilder {
 	private String subtype;
 	private boolean osmEditingEnabled = PluginsHelper.isActive(OsmEditingPlugin.class);
 	private List<String> preferredLangCandidates;
+	private Set<String> genericFallbackKeys = Collections.emptySet();
 
 	public AmenityUIHelper(@NonNull MapActivity mapActivity,
 	                       @NonNull AdditionalInfoBundle infoBundle) {
@@ -84,7 +85,8 @@ public class AmenityUIHelper extends MenuBuilder {
 		List<AmenityTagEntry> infoEntries = new ArrayList<>();
 		List<AmenityTagEntry> descriptions = new ArrayList<>();
 
-		List<AmenityTagEntry> visibleTags = additionalInfo.getVisibleTags(osmEditingEnabled, preferredLangCandidates);
+		List<AmenityTagEntry> visibleTags = additionalInfo.getVisibleTags(osmEditingEnabled,
+				preferredLangCandidates, genericFallbackKeys);
 		for (AmenityTagEntry baseEntry : visibleTags) {
 			AmenityTagEntry amenityEntry = buildEntryData(context, baseEntry);
 			if (amenityEntry == null) {
@@ -193,10 +195,14 @@ public class AmenityUIHelper extends MenuBuilder {
 			poiAdditionalUiRule.fillRow(app, context, entryBuilder, this, resolvedType.additionalType(),
 					key, value, subtype);
 		} else {
-			PoiType fallbackType = new PoiType(poiTypes, poiCategory, null, key, poiCategory.getIconKeyName());
+			boolean useGenericFallback = genericFallbackKeys.contains(key);
+			String displayKey = useGenericFallback ? getGenericFallbackDisplayKey(key) : key;
+			PoiType fallbackType = new PoiType(poiTypes, poiCategory, null, displayKey, poiCategory.getIconKeyName());
 			fallbackType.setText(true);
+			// A custom GPX value is user data: show it as stored, do not translate it as a POI key.
+			String displayValue = useGenericFallback ? value : poiTypes.getPoiTranslation(value);
 			poiAdditionalUiRule.fillRow(app, context, entryBuilder, this, fallbackType, key,
-					poiTypes.getPoiTranslation(value), subtype);
+					displayValue, subtype);
 		}
 		entryBuilder.setMatchWidthDivider(!entryBuilder.isDescription() && entryBuilder.isWiki());
 		return entryBuilder;
@@ -693,4 +699,13 @@ public class AmenityUIHelper extends MenuBuilder {
 		return null;
 	}
 
+	public void setGenericFallbackKeys(@NonNull Collection<String> genericFallbackKeys) {
+		this.genericFallbackKeys = new HashSet<>(genericFallbackKeys);
+	}
+
+	@NonNull
+	private String getGenericFallbackDisplayKey(@NonNull String key) {
+		int separatorIndex = key.indexOf(':');
+		return separatorIndex > 0 ? key.substring(separatorIndex + 1) : key;
+	}
 }
