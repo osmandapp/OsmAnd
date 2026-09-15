@@ -257,15 +257,6 @@ public abstract class BaseFavoriteListFragment extends BaseFullScreenFragment
 		return selectionMode;
 	}
 
-	@Override
-	public void onPause() {
-		super.onPause();
-		Activity activity = getActivity();
-		if (activity == null || !activity.isChangingConfigurations()) {
-			exitSelectionMode();
-		}
-	}
-
 	@Nullable
 	private ActionBar getSupportActionBar() {
 		MyPlacesActivity activity = (MyPlacesActivity) requireMyActivity();
