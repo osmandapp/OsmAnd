@@ -198,9 +198,16 @@ public class TurnPrepareTestAI {
 		if (keepAndTurnOfTheSameSide(expected, actual)) {
 			return Verdict.SIMILAR;
 		}
+		if (roundabout(expected) || roundabout(actual)) {
+			return Verdict.FAIL; // another exit is another road, not a neighbour on the ladder
+		}
 		int e = TurnType.orderFromLeftToRight(TurnType.fromString(expected, false).getValue());
 		int a = TurnType.orderFromLeftToRight(TurnType.fromString(actual, false).getValue());
 		return Math.abs(e - a) <= 1 ? Verdict.SIMILAR : Verdict.FAIL;
+	}
+
+	private static boolean roundabout(String turn) {
+		return turn != null && (turn.startsWith("RNDB") || turn.startsWith("RNLB"));
 	}
 
 	private static boolean keepAndTurnOfTheSameSide(String one, String other) {
@@ -497,9 +504,18 @@ public class TurnPrepareTestAI {
 		RoutingMemoryLimits limits = new RoutingMemoryLimits(
 				RoutingConfiguration.DEFAULT_MEMORY_LIMIT * 3, RoutingConfiguration.DEFAULT_NATIVE_MEMORY_LIMIT);
 		RoutingConfiguration config = RoutingConfiguration.getDefault().build("car", limits, params);
-		BinaryMapIndexReader[] readers = {new BinaryMapIndexReader(raf, map)};
+		BinaryMapIndexReader[] readers;
+		if (params.containsKey("map")) {
+			// a case with its own small map reads it first, the way RouteResultPreparationTest does
+			File own = new File("src/test/resources/turn_lanes/" + params.get("map"));
+			readers = new BinaryMapIndexReader[] {
+					new BinaryMapIndexReader(new RandomAccessFile(own, "r"), own),
+					new BinaryMapIndexReader(raf, map)};
+		} else {
+			readers = new BinaryMapIndexReader[] {new BinaryMapIndexReader(raf, map)};
+		}
 		ctx = fe.buildRoutingContext(config, null, readers, RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
-		ctx.leftSideNavigation = false;
+		ctx.leftSideNavigation = "true".equals(params.get("leftSide"));
 		return fe.searchRoute(ctx, te.getStartPoint(), te.getEndPoint(), null).detailed;
 	}
 

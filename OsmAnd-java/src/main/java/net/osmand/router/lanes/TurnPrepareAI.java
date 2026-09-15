@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import net.osmand.binary.ObfConstants;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.router.lanes.TurnTypeAI.Lane;
 import net.osmand.router.lanes.TurnTypeAI.LaneGroup;
@@ -21,6 +20,7 @@ import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingContext;
 import net.osmand.shared.routing.GeneralRouterProfile;
 import net.osmand.router.GeneralRouter;
+import net.osmand.osm.MapRenderingTypes;
 import net.osmand.util.MapUtils;
 
 /**
@@ -91,6 +91,8 @@ public class TurnPrepareAI {
 		muteStraightsOfTheSameJunction(result);
 	}
 
+
+
 	// ------------------------------------------------------------------ one junction
 
 	private TurnTypeAI defineTurn(List<RouteSegmentResult> route, int i, boolean leftHand, TransportMode mode) {
@@ -109,14 +111,13 @@ public class TurnPrepareAI {
 
 		JunctionAI junction = JunctionAI.at(prev, current);
 		double leftDeg = junction.routeAngle();
-		// the road we are leaving carries on past this junction as one of its own branches, and the markings are
-		// painted on it: they say what its lanes do further along, at the junction it reaches, not what this one
-		// offers the route leaving it here.
-		boolean carriesOn = marksTheRoadThatCarriesOn(junction, prev);
-		List<Lane> lanes = carriesOn ? Collections.<Lane>emptyList() : lanesOf(prev, leftHand);
+		List<Lane> lanes = lanesOf(prev, leftHand);
+		if (i >= 2) {
+			lanes = withArrowsPaintedBefore(lanes, route.get(i - 2), prev, junction, leftHand);
+		}
 		boolean ownMarkings = !lanes.isEmpty();
 		double carried = prev.getDistance();
-		for (int j = i - 2; !carriesOn && lanes.isEmpty() && j >= 0 && carried < CARRY_LANES_M; j--) {
+		for (int j = i - 2; lanes.isEmpty() && j >= 0 && carried < CARRY_LANES_M; j--) {
 			// a few metres of unmarked road between two junctions is the same carriageway: the lanes painted before
 			// it still say which lane leads where
 			List<Lane> painted = lanesOf(route.get(j), leftHand);
@@ -129,10 +130,13 @@ public class TurnPrepareAI {
 			lanes = painted;
 			carried += route.get(j).getDistance();
 		}
+		if (hasArrows(lanes)) {
+			lanes = unmarkedByTheSides(lanes, junction, prev);
+		}
 		double decisive = decisiveAngle(route, i, junction, lanes, leftHand);
 		boolean decidedAhead = decisive != junction.routeAngle();
 		TurnIndication routeArrow = lanes.isEmpty() ? null
-				: routeArrow(junction, lanes, decisive, taggedTurn(current));
+				: routeArrow(junction, lanes, decisive, taggedTurn(current), ahead(junction, prev));
 
 		Maneuver maneuver = maneuverOf(leftDeg, taggedTurn(current), leftHand);
 		boolean choice = junction.isChoice() || distinctArrows(lanes).size() > 1;
@@ -168,7 +172,7 @@ public class TurnPrepareAI {
 		boolean mapped = hasArrows(lanes);
 		// an arrow read out of markings that do not describe this junction is a guess; the maneuver the geometry
 		// measured is not.
-		boolean describes = describesThisJunction(junction, distinctArrows(lanes));
+		boolean describes = describesThisJunction(junction, distinctArrows(lanes), ahead(junction, prev));
 		TurnIndication says = describes || !isRealTurn(maneuver) ? routeArrow : arrowOf(maneuver);
 		lanes = mapped ? markActive(lanes, wanted(maneuver, says), mode)
 				: markBySide(lanes, maneuver, junction);
@@ -298,7 +302,7 @@ public class TurnPrepareAI {
 	}
 
 	private TurnIndication routeArrow(JunctionAI junction, List<Lane> lanes, double angle,
-			TurnIndication tagged) {
+			TurnIndication tagged, double ahead) {
 		List<TurnIndication> arrows = distinctArrows(lanes);
 		if (arrows.isEmpty()) {
 			return null;
@@ -314,7 +318,7 @@ public class TurnPrepareAI {
 		// the exit relaxation is about the geometry of THIS junction; when the arrows look past it the angle
 		// already carries the whole picture and needs no help
 		boolean leaving = junction.routeLeavesMainRoad() && angle == junction.routeAngle();
-		if (describesThisJunction(junction, arrows)) {
+		if (describesThisJunction(junction, arrows, ahead)) {
 			// one arrow kind per road, and every road on the side its arrow points to: the mapper painted this
 			// junction road by road, so the k-th road from the left takes the k-th kind from the left.
 			return arrows.get(junction.routeRank());
@@ -361,13 +365,13 @@ public class TurnPrepareAI {
 	}
 
 	/** Whether the markings are about the junction under the wheels. */
-	private boolean describesThisJunction(JunctionAI junction, List<TurnIndication> arrows) {
+	private boolean describesThisJunction(JunctionAI junction, List<TurnIndication> arrows, double ahead) {
 		List<JunctionAI.Option> options = junction.options(); // already left to right
 		if (options.size() != arrows.size()) {
 			return false;
 		}
 		for (int k = 0; k < options.size(); k++) {
-			double angle = options.get(k).angle();
+			double angle = options.get(k).angle() - ahead;
 			double side = usualAngle(arrows.get(k));
 			boolean fits = side == 0 ? Math.abs(angle) < BENDS_DEG : side * angle > 0;
 			if (!fits) {
@@ -380,7 +384,8 @@ public class TurnPrepareAI {
 	/** Counting the roads and counting the arrows can agree by accident. */
 	private boolean plausible(TurnIndication arrow, double routeAngle) {
 		if (arrow == TurnIndication.THROUGH) {
-			return true;
+			// the straight arrow promises no bend, so a road that bends past BENDS_DEG is not taking it
+			return Math.abs(routeAngle) < BENDS_DEG;
 		}
 		// the road has to bend at least halfway towards what the arrow promises: a twelve degree bend is not the
 		// "left" of left-or-through, it is the "through"
@@ -613,7 +618,7 @@ public class TurnPrepareAI {
 			boolean active = i >= from && i <= to;
 			List<TurnIndication> arrows = new ArrayList<>();
 			if (active && arrow != TurnIndication.THROUGH) {
-				arrows.add(arrow); // the route's own arrow first, it is the one being taken
+				arrows.add(arrow);
 			}
 			if (i >= otherFrom && i <= otherTo && otherArrow != arrow) {
 				if (active && arrow == TurnIndication.THROUGH) {
@@ -623,9 +628,13 @@ public class TurnPrepareAI {
 				}
 				arrows.add(otherArrow);
 			}
-			if (arrows.size() > 1 && !active) {
-				Collections.reverse(arrows);
-			}
+			// a lane's arrows are drawn left to right, as painted; which of them the route takes is marked apart
+			Collections.sort(arrows, new Comparator<TurnIndication>() {
+				@Override
+				public int compare(TurnIndication a, TurnIndication b) {
+					return Double.compare(usualAngle(b), usualAngle(a));
+				}
+			});
 			if (!arrows.isEmpty()) {
 				lane = new Lane.Builder().group(lane.group()).turns(arrows).build();
 			}
@@ -797,15 +806,151 @@ public class TurnPrepareAI {
 		return here <= 0 || here == painted.size();
 	}
 
-	/** is the road being left one of the roads leaving this junction, carrying on past it? */
-	private boolean marksTheRoadThatCarriesOn(JunctionAI junction, RouteSegmentResult prev) {
+	/**
+	 * The unmarked lanes of a road whose other lanes are marked, read against the junction they lead to: each carries
+	 * on where a road carries on, and the outermost one also turns towards a road leaving on its side, unless that
+	 * turn is forbidden. So "||right" before a junction with a road leaving left reads "left;through|through|right",
+	 * and without one "through|through|right".
+	 */
+	private List<Lane> unmarkedByTheSides(List<Lane> lanes, JunctionAI junction, RouteSegmentResult prev) {
+		// sides are counted from the road that carries on, not from due ahead: a carriageway swinging right is still
+		// the way on, and a slip road leaving it at a gentler angle leaves on its left
+		double ahead = ahead(junction, prev);
+		boolean left = false;
+		boolean straight = false;
+		boolean right = false;
 		for (JunctionAI.Option option : junction.options()) {
-			if (!option.isRoute() && ObfConstants.getOsmObjectId(option.segment().getObject())
-					== ObfConstants.getOsmObjectId(prev.getObject())) {
+			if (forbidden(prev, option)) {
+				continue;
+			}
+			double side = option.angle() - ahead;
+			straight |= Math.abs(side) < TURN_HINT_DEG;
+			left |= side >= TURN_HINT_DEG;
+			right |= side <= -TURN_HINT_DEG;
+		}
+		List<Lane> out = new ArrayList<>(lanes.size());
+		for (int k = 0; k < lanes.size(); k++) {
+			Lane lane = lanes.get(k);
+			if (!unmarked(lane)) {
+				out.add(lane);
+				continue;
+			}
+			List<TurnIndication> arrows = new ArrayList<>(3);
+			if (k == 0 && left) {
+				arrows.add(TurnIndication.LEFT);
+			}
+			if (straight) {
+				arrows.add(TurnIndication.THROUGH);
+			}
+			if (k == lanes.size() - 1 && right) {
+				arrows.add(TurnIndication.RIGHT);
+			}
+			out.add(arrows.isEmpty() ? lane : lane.withTurns(arrows));
+		}
+		return out;
+	}
+
+
+	/**
+	 * Where straight on is at this junction: along the road that carries on through it, when there is one bending less
+	 * than a fork does, and due ahead otherwise. A carriageway swinging by thirty degrees is still the way on; at a T
+	 * junction nothing carries on, and the straightest road there is not a reference for anything.
+	 */
+	private double ahead(JunctionAI junction, RouteSegmentResult prev) {
+		JunctionAI.Option on = carryingOn(junction, prev);
+		return on != null && Math.abs(on.angle()) < JunctionAI.FORK_MAX_DEG ? on.angle() : 0;
+	}
+
+	/**
+	 * The road carrying on through the junction: the straightest one with the road's own name or ref, or none. Where the
+	 * street changes name nothing carries on, and the straightest cross street is not a reference for anything.
+	 */
+	private JunctionAI.Option carryingOn(JunctionAI junction, RouteSegmentResult prev) {
+		JunctionAI.Option named = null;
+		for (JunctionAI.Option option : junction.options()) {
+			if (sameStreet(prev.getObject(), option.segment().getObject())
+					&& (named == null || Math.abs(option.angle()) < Math.abs(named.angle()))) {
+				named = option;
+			}
+		}
+		return named;
+	}
+
+	private boolean sameStreet(RouteDataObject a, RouteDataObject b) {
+		String name = a.getName();
+		if (name != null && !name.isEmpty() && name.equals(b.getName())) {
+			return true;
+		}
+		String ref = a.getRef(null, false, true);
+		return ref != null && !ref.isEmpty() && ref.equals(b.getRef(null, false, true));
+	}
+
+	private boolean unmarked(Lane lane) {
+		for (TurnIndication t : lane.turns()) {
+			if (t != TurnIndication.NONE) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/** a road this junction may be left by lies on the side the arrow points to */
+	private boolean aRoadLeavesTowards(JunctionAI junction, RouteSegmentResult prev, TurnIndication arrow) {
+		double side = usualAngle(arrow);
+		if (side == 0) {
+			return false; // a straight arrow names no road leaving
+		}
+		double ahead = ahead(junction, prev);
+		for (JunctionAI.Option option : junction.options()) {
+			double angle = option.angle() - ahead;
+			if (Math.abs(angle) >= TURN_HINT_DEG && angle * side > 0 && !forbidden(prev, option)) {
 				return true;
 			}
 		}
 		return false;
+	}
+
+	/** a turn from the road being left onto this one is forbidden by a restriction, as the old preparation reads it */
+	private boolean forbidden(RouteSegmentResult prev, JunctionAI.Option option) {
+		RouteDataObject from = prev.getObject();
+		for (int k = 0; k < from.getRestrictionLength(); k++) {
+			if (from.getRestrictionId(k) == option.segment().getObject().getId()
+					&& from.getRestrictionType(k) <= MapRenderingTypes.RESTRICTION_NO_STRAIGHT_ON) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Where the road runs on from the way before it with no other road joining in between, the two are one carriageway:
+	 * a turning arrow painted on a lane there and gone from it here names a road leaving this junction on its side, so
+	 * it is found only when there is such a road to take it.
+	 */
+	private List<Lane> withArrowsPaintedBefore(List<Lane> lanes, RouteSegmentResult before, RouteSegmentResult prev,
+			JunctionAI junction, boolean leftHand) {
+		List<RouteSegmentResult> joining = prev.getAttachedRoutes(prev.getStartPointIndex());
+		if (!hasArrows(lanes) || (joining != null && !joining.isEmpty())) {
+			return lanes;
+		}
+		List<Lane> painted = lanesOf(before, leftHand);
+		if (painted.size() != lanes.size()) {
+			return lanes;
+		}
+		List<Lane> out = new ArrayList<>(lanes.size());
+		for (int k = 0; k < lanes.size(); k++) {
+			Lane lane = lanes.get(k);
+			List<TurnIndication> turns = new ArrayList<>(lane.turns());
+			if (!turns.isEmpty()) { // an unmarked lane is read from the junction itself
+				for (TurnIndication t : painted.get(k).turns()) {
+					if (!turns.contains(t) && aRoadLeavesTowards(junction, prev, t)) {
+						turns.add(t);
+					}
+				}
+			}
+			out.add(turns.size() == lane.turns().size() ? lane : lane.withTurns(turns));
+		}
+		return out;
 	}
 
 	private boolean hasTurnMarkings(Map<String, String> tags) {
@@ -964,8 +1109,10 @@ public class TurnPrepareAI {
 			}
 			last = j;
 			boolean forward = segment.getStartPointIndex() < segment.getEndPointIndex();
+			// the point where the route enters is not an exit; the first point of a later segment is where two ways of
+			// the roundabout meet, and the previous segment stopped short of it
 			for (int k = segment.getStartPointIndex(); k != segment.getEndPointIndex(); k += forward ? 1 : -1) {
-				if (k != segment.getStartPointIndex() && !segment.getAttachedRoutes(k).isEmpty()) {
+				if ((k != segment.getStartPointIndex() || j > i) && !segment.getAttachedRoutes(k).isEmpty()) {
 					exit++;
 				}
 			}
@@ -1007,8 +1154,9 @@ public class TurnPrepareAI {
 	}
 
 	/**
-	 * A U-turn across a median is mapped as two turns: left onto the link between the carriageways, then left
-	 * again onto the other side.
+	 * A U-turn across a median is mapped as two turns to the same side: onto the link between the carriageways, then
+	 * again onto the other side - left and left where traffic keeps right, right and right where it keeps left. The
+	 * first is the U-turn, with the lanes to take it from; the second is the same maneuver and says nothing.
 	 */
 	private void justifyUTurns(List<RouteSegmentResult> route, boolean leftHand) {
 		for (int i = 1; i + 1 < route.size(); i++) {
@@ -1038,7 +1186,7 @@ public class TurnPrepareAI {
 			}
 			route.get(i).setTurnTypeAI(turn.withManeuver(Maneuver.U_TURN)
 					.withLanes(retarget(turn.lanes(), arrowOf(turn.maneuver()), TurnIndication.REVERSE)));
-			route.get(j).setTurnTypeAI(next.withSkipToSpeak(true));
+			route.get(j).setTurnTypeAI(null); // the second turn is the same u-turn, already said with its lanes
 		}
 	}
 
@@ -1070,17 +1218,28 @@ public class TurnPrepareAI {
 			if (turn == null) {
 				continue;
 			}
-			if (isRealTurn(turn.maneuver())) {
+			if (isRealTurn(turn.maneuver()) || turn.maneuver() == Maneuver.ROUNDABOUT) {
+				// a roundabout is a maneuver of its own, never a lane picture already shown
 				shown = null;
 				continue;
 			}
 			boolean repeat = shown != null && sameLanes(shown.lanes(), turn.lanes());
-			if (repeat && !precedesTurn(route, i)) {
+			if (repeat && !precedesTurn(route, i) && !lanesEndHere(route, i)) {
 				route.get(i).setTurnTypeAI(null);
 			} else {
 				shown = turn;
 			}
 		}
+	}
+
+	/** the road entered has fewer lanes than the one left: where a lane runs out is where its picture is needed */
+	private boolean lanesEndHere(List<RouteSegmentResult> route, int i) {
+		if (i == 0) {
+			return false;
+		}
+		int before = laneCount(route.get(i - 1));
+		int after = laneCount(route.get(i));
+		return before > 0 && after > 0 && after < before;
 	}
 
 	/** the same lanes with the same ones marked: a picture a driver has already been shown */

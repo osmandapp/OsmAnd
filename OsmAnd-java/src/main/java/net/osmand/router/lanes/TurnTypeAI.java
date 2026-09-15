@@ -284,6 +284,11 @@ public final class TurnTypeAI {
 			return new Lane(turns, group, access, left, right, destinations, width, active, taken);
 		}
 
+		/** the same lane with other arrows, everything else the map said about it kept */
+		public Lane withTurns(List<TurnIndication> value) {
+			return new Lane(value, group, access, changeLeft, changeRight, destinations, width, active, taken);
+		}
+
 		/** the value the map gave for exactly this key, with no inheritance applied */
 		public AccessValue declaredAccess(TransportMode mode) {
 			return access.get(mode);
