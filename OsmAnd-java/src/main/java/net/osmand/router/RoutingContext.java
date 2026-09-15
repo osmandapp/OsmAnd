@@ -85,6 +85,9 @@ public class RoutingContext {
 	public boolean leftSideNavigation;
 	public List<RouteSegmentResult> previouslyCalculatedRoute;
 	public PrecalculatedRouteDirection precalculatedRouteDirection;
+
+	public double currentCalculatedDistance;
+	public double lastTrafficSignalDistance;
 	
 	
 	// 2. Routing memory cache (big objects)

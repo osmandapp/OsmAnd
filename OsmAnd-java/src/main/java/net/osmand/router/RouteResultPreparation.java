@@ -325,14 +325,32 @@ public class RouteResultPreparation {
 	private static final double SLOW_DOWN_SPEED_THRESHOLD = 15;
 	// reference speed 30ms (108kmh) - 2ms (7kmh)
 	private static final double SLOW_DOWN_SPEED = 2;
-	
+
+	private static boolean segmentHasTag(RouteDataObject road, int segmentIndex, String tag) {
+		int[] segmentPointTypes = road.getPointTypes(segmentIndex);
+		if (segmentPointTypes != null) {
+			for (int type : segmentPointTypes) {
+				RouteTypeRule rule = road.region.quickGetEncodingRule(type);
+				if (rule != null && rule.getValue().equals(tag)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	public static void calculateTimeSpeed(RoutingContext ctx, List<RouteSegmentResult> result) {
+		ctx.currentCalculatedDistance = 0.0;
+		ctx.lastTrafficSignalDistance = -1;
+
 		for (int i = 0; i < result.size(); i++) {
 			RouteSegmentResult rr = result.get(i);
+			if (i > 0) {
+				ctx.currentCalculatedDistance += result.get(i-1).getDistance();
+			}
 			calculateTimeSpeed(ctx, rr);
 		}
 	}
-
 	public static void calculateTimeSpeed(RoutingContext ctx, RouteSegmentResult rr) {
 		// Naismith's/Scarf rules add additional travel time when moving uphill
 		boolean useNaismithRule = false;
@@ -377,6 +395,20 @@ public class RouteResultPreparation {
 			double obstacle = ctx.getRouter().defineObstacle(road, j, !plus);
 			if (obstacle < 0) {
 				obstacle = 0;
+			} else if (obstacle > 0) {
+				if (segmentHasTag(road, j,"traffic_signals")) {
+					// For groups with many traffic signals nearby take penalty only for first one. (After red signal next usually are green)
+					// XXXXX XXXXX   ->   Xxxxx Xxxxx
+					boolean isFirstStop = ctx.lastTrafficSignalDistance == -1;
+					double currentDistance = ctx.currentCalculatedDistance + distance;
+					double distanceFromPreviousStop = currentDistance - ctx.lastTrafficSignalDistance;
+					ctx.lastTrafficSignalDistance = currentDistance;
+					if (isFirstStop || distanceFromPreviousStop >= 100) {
+						obstacle = obstacle * 1.0;
+					} else {
+						obstacle = obstacle * 0.25;
+					}
+				}
 			}
 			distOnRoadToPass += d / speed + obstacle;  //this is time in seconds
 
