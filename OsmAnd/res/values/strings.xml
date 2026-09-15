@@ -3858,8 +3858,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="will_open_at">Opens at</string>
     <string name="will_open_on">Opens at</string>
     <string name="additional_actions">Additional actions</string>
-    <string name="av_locations_selected_desc">GPX file with coordinates and data of the selected notes.</string>
-    <string name="av_locations_all_desc">GPX file with coordinates and data of all notes.</string>
     <!-- string name="release_3_0">
 • New: Support for global offline travel guides. Referenced locations are linked to the map. Initial data from Wikivoyage.\n\n
 • Wikipedia: New look, active links, images now supported\n\n
@@ -3878,11 +3876,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="marker_activated">Marker %s activated.</string>
     <string name="one_tap_active_descr">Tap a marker on the map to move it to the top of the active markers without opening the context menu.</string>
     <string name="one_tap_active">\'One tap\' active</string>
-    <string name="empty_state_av_notes">Make notes!</string>
-    <string name="empty_state_av_notes_desc">Add audio, video, or photo notes to any point on the map by using the widgets or context menus.</string>
-    <string name="notes_by_date">A/V notes by date</string>
-    <string name="by_date">By date</string>
-    <string name="by_type">By type</string>
     <string name="looking_for_tracks_with_waypoints">Looking for tracks with waypoints</string>
     <string name="shared_string_more_without_dots">More</string>
     <string name="appearance_on_the_map">Appearance on the map</string>
@@ -4437,8 +4430,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="simulate_your_location_stop_descr">Stop simulating your position.</string>
     <string name="simulate_your_location_descr">Simulate your position using a calculated route or a recorded GPX track.</string>
     <string name="looking_up_address">Looking up address</string>
-    <string name="av_locations_descr">GPX file with locations.</string>
-    <string name="av_locations">Locations</string>
     <string name="plugin_settings">Plugins</string>
     <string name="routing_attr_avoid_shuttle_train_name">No shuttle train</string>
     <string name="routing_attr_avoid_shuttle_train_description">Avoids using shuttle trains</string>
@@ -4510,7 +4501,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="welcome_header">Welcome</string>
     <string name="current_route">Current route</string>
     <string name="osm_changes_added_to_local_edits">OSM changes added to local changeset</string>
-    <string name="local_recordings_delete_all_confirm">Delete %1$d notes?</string>
     <string name="delay_to_start_navigation">Start turn-by-turn guidance after…</string>
     <string name="shared_string_go">Go</string>
     <string name="osmand_parking_overdue">overdue</string>
@@ -4641,7 +4631,6 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="rename_failed">Renaming failed.</string>
     <string name="back_to_map">Back to map</string>
     <string name="share_note">Share note</string>
-    <string name="watch">Watch</string>
     <string name="notes">A/V notes</string>
     <string name="online_map">Online map</string>
     <string name="rendering_attr_pisteRoutes_name">Ski slopes and routes</string>

@@ -50,6 +50,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.gallery.attached.helpers.AttachedMediaDataHelper;
+import net.osmand.plus.gallery.model.GalleryDisplayMode;
+import net.osmand.plus.gallery.model.GallerySortMode;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
@@ -60,6 +62,7 @@ import net.osmand.plus.media.MediaCaptureHelper;
 import net.osmand.plus.media.MediaMetadataUtils;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.audionotes.library.MediaLibraryFragment;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
@@ -135,9 +138,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	public final OsmandPreference<Boolean> SHOW_RECORDINGS;
 
-	public final CommonPreference<NotesSortByMode> NOTES_SORT_BY_MODE;
-	public final CommonPreference<net.osmand.plus.gallery.model.GallerySortMode> MEDIA_LIBRARY_SORT_MODE;
-	public final CommonPreference<net.osmand.plus.gallery.model.GalleryDisplayMode> MEDIA_LIBRARY_DISPLAY_MODE;
+	public final CommonPreference<GallerySortMode> MEDIA_LIBRARY_SORT_MODE;
+	public final CommonPreference<GalleryDisplayMode> MEDIA_LIBRARY_DISPLAY_MODE;
 	public final CommonPreference<Boolean> MEDIA_LIBRARY_GROUPED;
 	public final CommonPreference<Integer> MEDIA_LIBRARY_SPAN_COUNT;
 	public final CommonPreference<Integer> MEDIA_LIBRARY_SPAN_COUNT_LANDSCAPE;
@@ -210,11 +212,10 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		registerPreference(recordingsFileHelper.AV_RS_CLIP_LENGTH);
 		registerPreference(recordingsFileHelper.AV_RS_STORAGE_SIZE);
 
-		NOTES_SORT_BY_MODE = registerEnumStringPreference("notes_sort_by_mode", NotesSortByMode.BY_DATE, NotesSortByMode.values(), NotesSortByMode.class);
-		MEDIA_LIBRARY_SORT_MODE = registerEnumStringPreference("media_library_sort_mode", net.osmand.plus.gallery.model.GallerySortMode.NAME_A_Z,
-				net.osmand.plus.gallery.model.GallerySortMode.values(), net.osmand.plus.gallery.model.GallerySortMode.class).makeGlobal();
-		MEDIA_LIBRARY_DISPLAY_MODE = registerEnumStringPreference("media_library_display_mode", net.osmand.plus.gallery.model.GalleryDisplayMode.LIST,
-				net.osmand.plus.gallery.model.GalleryDisplayMode.values(), net.osmand.plus.gallery.model.GalleryDisplayMode.class).makeGlobal();
+		MEDIA_LIBRARY_SORT_MODE = registerEnumStringPreference("media_library_sort_mode", GallerySortMode.NAME_A_Z,
+				GallerySortMode.values(), GallerySortMode.class).makeGlobal();
+		MEDIA_LIBRARY_DISPLAY_MODE = registerEnumStringPreference("media_library_display_mode", GalleryDisplayMode.LIST,
+				GalleryDisplayMode.values(), GalleryDisplayMode.class).makeGlobal();
 		MEDIA_LIBRARY_GROUPED = registerBooleanPreference("media_library_grouped", false).makeGlobal();
 		MEDIA_LIBRARY_SPAN_COUNT = registerIntPreference("media_library_span_grid_count", 4).makeGlobal();
 		MEDIA_LIBRARY_SPAN_COUNT_LANDSCAPE = registerIntPreference("media_library_span_grid_count_landscape", 7).makeGlobal();
@@ -1015,7 +1016,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public void addMyPlacesTab(MyPlacesActivity myPlacesActivity, List<TabItem> mTabs, Intent intent) {
-		mTabs.add(myPlacesActivity.getTabIndicator(NOTES_TAB, net.osmand.plus.plugins.audionotes.library.MediaLibraryFragment.class));
+		mTabs.add(myPlacesActivity.getTabIndicator(NOTES_TAB, MediaLibraryFragment.class));
 		if (intent != null && "AUDIO".equals(intent.getStringExtra("TAB"))) {
 			app.getSettings().FAVORITES_TAB.set(NOTES_TAB);
 		}
