@@ -16,9 +16,9 @@ import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.TransportStop;
+import net.osmand.data.TransportStopMatcher;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -103,22 +103,10 @@ public class AmenityMenuController extends MenuController {
 	@Nullable
 	protected TransportStopController acquireTransportStopController(@NonNull Amenity amenity,
 			@NonNull MapActivity activity, @NonNull PointDescription description) {
-		if (amenity.getType().getKeyName().equals("transportation")) {
-			boolean showTransportStops = false;
-			PoiFilter filter = amenity.getType().getPoiFilterByName("public_transport");
-			if (filter != null) {
-				for (PoiType type : filter.getPoiTypes()) {
-					if (type.getKeyName().equals(amenity.getSubType())) {
-						showTransportStops = true;
-						break;
-					}
-				}
-			}
-			if (showTransportStops) {
-				TransportStop transportStop = TransportStopHelper.findBestTransportStopForAmenity(getApplication(), amenity);
-				if (transportStop != null) {
-					return new TransportStopController(activity, description, transportStop);
-				}
+		if (TransportStopMatcher.isPublicTransportStop(amenity)) {
+			TransportStop transportStop = TransportStopHelper.findBestTransportStopForAmenity(getApplication(), amenity);
+			if (transportStop != null) {
+				return new TransportStopController(activity, description, transportStop);
 			}
 		}
 		return null;
