@@ -4475,8 +4475,8 @@
     <string name="add_widget_to_the_left">Aggiungi il widget a sinistra</string>
     <string name="add_widget_below">Aggiungi il widget qui sotto</string>
     <string name="location_radius">Raggio di posizione</string>
-    <string name="delete_widget">Eliminare il widget?</string>
-    <string name="delete_widget_description">Questo widget verrà eliminato. Puoi ripristinarlo più tardi in Configura schermo.</string>
+    <string name="delete_widget">Rimuovere il widget?</string>
+    <string name="delete_widget_description">Questo widget sarà rimosso. Puoi ripristinarlo più tardi in Configura schermo.</string>
     <string name="battery_saving_mode">Modalità di risparmio batteria</string>
     <string name="app_mode_suv">SUV</string>
     <string name="rendering_attr_alpineHiking_name">Grado di difficoltà dei sentieri escursionistici</string>
@@ -4915,8 +4915,8 @@
     <string name="rendering_attr_shellsStyle_description">Stile per le conchiglie sul fondale marino</string>
     <string name="rendering_attr_showLNAMmarker_name">Marcatori ENC</string>
     <string name="rendering_attr_showLNAMmarker_description">Mostra i marcatori ENC</string>
-    <string name="rendering_attr_spotSize_name">Dimensioni punto profondità</string>
-    <string name="rendering_attr_spotSize_description">Dimensioni punto profondità</string>
+    <string name="rendering_attr_spotSize_name">Dimensione dei punti di profondità</string>
+    <string name="rendering_attr_spotSize_description">Dimensione dei punti di profondità</string>
     <string name="help_article_navigation_routing_ski_routing_name">Piste da sci e percorsi</string>
     <string name="show_local_names">Mostra i nomi locali</string>
     <string name="rendering_attr_pisteRoutes_name">Discese e percorsi da sci</string>
@@ -5391,4 +5391,8 @@
     <string name="duplicate_map_standard_exists_desc">Hai già la mappa standard per %1$s. Lo scaricamento della mappa con le sole strade duplicherà i dati e potrebbe degradare le prestazioni.\n\nLa sostituzione rimuoverà la ricerca degli indirizzi e i dati dei PDI inclusi nella mappa standard.</string>
     <string name="duplicate_map_road_only_exists_desc">Hai già la mappa con le sole strade per %1$s. Scaricare la mappa standard duplicherà i dati e potrebbe compromettere le prestazioni.</string>
     <string name="astro_eclipse_column_below_horizon">Sotto l\'orizzonte</string>
+    <string name="quick_action_add_track">Aggiungi una traccia</string>
+    <string name="quick_action_tracks_select_descr">Aggiungi una o più tracce per mostrarle o nasconderle sulla mappa con un singolo tocco.</string>
+    <string name="quick_action_tracks_always_ask_descr">Il tocco di questo attivatore apre l\'elenco delle tracce, da cui è possibile mostrarne o nasconderne una o più.</string>
+    <string name="quick_action_all_tracks">Tutte le tracce</string>
 </resources>

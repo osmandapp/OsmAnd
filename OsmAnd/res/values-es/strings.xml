@@ -871,11 +871,11 @@
     <string name="rendering_value_orange_name">Anaranjado</string>
     <string name="routing_attr_no_new_routing_name">Sin reglas de navegación v1.9</string>
     <string name="routing_attr_no_new_routing_description">No usar reglas de navegación introducidas en v.1.9.</string>
-    <string name="rendering_value_germanRoadAtlas_name">Estilo vial alemán</string>
+    <string name="rendering_value_germanRoadAtlas_name">Atlas de carreteras alemán</string>
     <string name="traffic_warning_railways">Paso a nivel</string>
     <string name="traffic_warning_pedestrian">Paso de peatones</string>
     <string name="show_pedestrian_warnings">Pasos de peatones</string>
-    <string name="rendering_value_americanRoadAtlas_name">Estilo vial estadounidense</string>
+    <string name="rendering_value_americanRoadAtlas_name">Atlas de carreteras estadounidense</string>
     <string name="navigate_point_easting">Al este (lat)</string>
     <string name="navigate_point_northing">Al norte (lon)</string>
     <string name="speak_pedestrian">Pasos de peatones</string>

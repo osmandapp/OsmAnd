@@ -5721,4 +5721,15 @@
     <string name="astro_fit_lunar_eclipse_visibility">Visibilidade adequada</string>
     <string name="astro_eclipse_start">Iniciar</string>
     <string name="astro_eclipse_end">Fim</string>
+    <string name="quick_action_add_track">Adicionar trilha</string>
+    <string name="quick_action_tracks_select_descr">Adicione uma ou mais trilhas para exibi-las ou ocultá-las no mapa com um único toque.</string>
+    <string name="quick_action_tracks_always_ask_descr">Ao tocar nessa ação, abre-se a lista de trilhas, onde você pode exibir ou ocultar uma ou mais delas.</string>
+    <string name="quick_action_all_tracks">Todas as trilhas</string>
+    <plurals name="files_count">
+        <item quantity="one">%d arquivo</item>
+        <item quantity="many">%d arquivos</item>
+        <item quantity="other">%d arquivos</item>
+    </plurals>
+    <string name="shared_string_archive">Arquivo</string>
+    <string name="attached_media_delete_confirmation">Deseja excluir %1$d itens de mídia a partir deste momento? As mídias armazenadas pelo aplicativo e que não estejam anexadas em nenhum outro lugar também serão excluídas do dispositivo.</string>
 </resources>
