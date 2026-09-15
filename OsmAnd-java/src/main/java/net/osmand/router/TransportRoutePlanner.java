@@ -107,6 +107,9 @@ public class TransportRoutePlanner {
 
 			int seconds = 0; // TODO #17773 temporary disabled segment.road.calcIntervalInSeconds(): ferry loses to buses riding it for free
 			double travelTime = seconds > 0 ? (double) seconds / 2 : ctx.cfg.getBoardingTime(segment.road.getType());
+			if (segment.getStop(segment.segStart).isTransferOnly()) {
+				travelTime = 0; // same ferry continues through the junction in the water, no boarding
+			}
 
 			final float routeTravelSpeed = ctx.cfg.getSpeedByRouteType(segment.road.getType());
 			if (routeTravelSpeed == 0) {
@@ -135,7 +138,7 @@ public class TransportRoutePlanner {
 					int interval = sc.avgStopIntervals.get(ind - 1);
 					travelTime += interval * 10;
 				} else {
-					int stopTime = ctx.cfg.getStopTime(segment.road.getType());
+					int stopTime = stop.isTransferOnly() ? 0 : ctx.cfg.getStopTime(segment.road.getType());
 					travelTime += stopTime + segmentDist / routeTravelSpeed;
 				}
 				if (segment.distFromStart + travelTime > finishTime * ctx.cfg.increaseForAlternativesRoutes) {
@@ -166,8 +169,8 @@ public class TransportRoutePlanner {
 						nextSegment.walkDist = MapUtils.getDistance(nextSegment.getLocation(), stop.getLocation());
 						nextSegment.parentTravelTime = travelTime;
 						nextSegment.parentTravelDist = travelDist;
-						double walkTime = nextSegment.walkDist / ctx.cfg.walkSpeed + 
-								ctx.cfg.getChangeTime(segment.road.getType(), sgm.road.getType());
+						double walkTime = nextSegment.walkDist / ctx.cfg.walkSpeed + (stop.isTransferOnly() ? 0 :
+								ctx.cfg.getChangeTime(segment.road.getType(), sgm.road.getType()));
 						nextSegment.distFromStart = segment.distFromStart + travelTime + walkTime;
 						nextSegment.nonce = nonce++;
 						if (ctx.cfg.useSchedule) {
