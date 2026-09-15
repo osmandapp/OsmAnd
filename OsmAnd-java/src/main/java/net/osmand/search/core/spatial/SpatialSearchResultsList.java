@@ -216,6 +216,10 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 //					System.out.println(indx + " " + getRawAtoms(indx) + " " + skipResults.contains(indx));
 //				}
 			}
+			if (nearestHouseM <= MISSING_HOUSE_FOUND_RADIUS || nearestPartialHouseM <= MISSING_HOUSE_STREET_RADIUS) {
+				// the house is found: no street for it
+				missingHouses.forEach(ind -> skipResults.put(ind, true));
+			}
 		}
 		if (ctx.settings.SEARCH_STREET_INTERSECTIONS) {
 			for (int indx = 0; indx < getCombinations(); indx++) {
@@ -454,9 +458,20 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 				bldObj = new BuildingCache(bldres, indx, loc, matchExtraWord[0]);
 				bldCheckCache.put(cacheKey, bldObj);
 			}
-			if (bldObj.bld == null || !checkBuildingPoiLocation(ctx, indx, bldObj.bld, loc)) {
+			if (bldObj.bld == null && streetNearby(ctx, indx, bldRefObj)) {
+				// no such house in the map, but the street is at the point: offer the street
+				missingHouses.add(indx);
+			} else if (bldObj.bld == null || !checkBuildingPoiLocation(ctx, indx, bldObj.bld, loc)) {
 				skipResults.put(indx, true);
 			} else {
+				if (ctx.location != null) {
+					double d = MapUtils.getDistance(ctx.location, bldObj.loc != null ? bldObj.loc : bldObj.bld.getLocation());
+					if (bldObj.surplus == 0) {
+						nearestHouseM = Math.min(nearestHouseM, d);
+					} else {
+						nearestPartialHouseM = Math.min(nearestPartialHouseM, d);
+					}
+				}
 				// assign buildings
 				if (bldRefObj.bldObject == null || 
 						bldRefObj.bldObject.getName().length() < bldObj.bld.getName().length()) {
@@ -475,6 +490,26 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 	}
 	
 	
+	private static final int MISSING_HOUSE_STREET_RADIUS = 300;
+	private static final int MISSING_HOUSE_FOUND_RADIUS = 5000;
+	private final List<Integer> missingHouses = new ArrayList<>();
+	private double nearestHouseM = Double.MAX_VALUE;
+	private double nearestPartialHouseM = Double.MAX_VALUE;
+
+	private boolean streetNearby(SpatialSearchContext ctx, int indx, NameIndexAtom street) {
+		// only for the whole query: a street named by a part of it proves nothing
+		if (ctx.location == null || ctx.tokens == null || tCount < ctx.tokens.size() || !(street.object instanceof Street)) {
+			return false;
+		}
+		for (NameIndexAtom a : getRawAtoms(indx)) {
+			if (a.isPOI() || a.isPoiCategory()) {
+				return false;
+			}
+		}
+		QuadRect qr = MapUtils.calculate31BboxUsingRhumb(MISSING_HOUSE_STREET_RADIUS, ctx.location);
+		return street.coords.intersects(new int[] { (int) qr.left, (int) qr.top, (int) qr.right, (int) qr.bottom });
+	}
+
 	private boolean checkBuildingPoiLocation(SpatialSearchContext ctx, int indx, Building bld, LatLon loc) {
 		if (loc == null) {
 			loc = bld.getLocation();
