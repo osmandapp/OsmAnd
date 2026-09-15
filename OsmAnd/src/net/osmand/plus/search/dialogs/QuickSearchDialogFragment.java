@@ -866,12 +866,12 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		if (dialog == null) {
 			return;
 		}
-		updateSearchAroundLocationAfterMapReturn();
 		app.getLocationProvider().removeCompassListener(app.getLocationProvider().getNavigationInfo());
 		dialog.show();
 		paused = false;
 		cancelPrev = false;
 		hidden = false;
+		updateSearchAroundLocationAfterMapReturn();
 		refreshSearchContentAfterShow();
 		addressSearchStack.clear();
 		if (interruptedSearch) {
@@ -912,20 +912,10 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		if (mapCenter == null) {
 			return;
 		}
-		if (location == null) {
-			useMapCenter = true;
-			updateSearchAroundLocation(mapCenter);
-			updateUseMapCenterUI();
-			updateContent(null);
-			return;
-		}
-		double distance = MapUtils.getDistance(mapCenter, location.getLatitude(), location.getLongitude());
-		if (distance >= DISTANCE_THRESHOLD) {
-			useMapCenter = true;
-			updateSearchAroundLocation(mapCenter);
-			updateUseMapCenterUI();
-			updateContent(null);
-		}
+		useMapCenter = true;
+		updateSearchAroundLocation(mapCenter);
+		updateUseMapCenterUI();
+		updateContent(null);
 	}
 
 	private void visibilityChanged(boolean visible) {
@@ -2751,7 +2741,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private void restoreDefaultSearchLocation() {
 		if (searchUICore == null) {
 			return;
-		}//
+		}
 		LatLon searchLatLon = null;
 		LatLon mapCenter = getCurrentMapCenter();
 		if (location != null) {
