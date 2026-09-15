@@ -58,7 +58,7 @@ class GridPinchController(
 	private var active = false
 	private var touching = false
 	private var listPinch = false
-	private var discrete = false
+	private var snapOnly = false
 	private var stepped = false
 	private var captured: List<Captured> = emptyList()
 	private var captureRequested = false
@@ -71,7 +71,7 @@ class GridPinchController(
 	private var stepRange = 0f..0f
 	private var travelled = 0f..0f
 	private var scale = 1f
-	private var spanF = 0f
+	private var liveSpan = 0f
 	private var settleSpan = 0
 	private var listSupported = false
 	private var focalPosition = -1
@@ -102,10 +102,10 @@ class GridPinchController(
 			active = true
 			if (!touching) {
 				rebase(settleSpan, bounds)
-				travelled = unitOf(spanF).let { it..it }
+				travelled = unitOf(liveSpan).let { it..it }
 			}
 			touching = true
-			scale = baseSpan / spanF
+			scale = baseSpan / liveSpan
 			return true
 		}
 		if (active) return true
@@ -116,11 +116,11 @@ class GridPinchController(
 		focalY = detector.focusY
 		rebase(controller.getSpanCount(portrait), bounds)
 		capturedSpan = baseSpan
-		spanF = baseSpan.toFloat()
-		travelled = spanF..spanF
+		liveSpan = baseSpan.toFloat()
+		travelled = liveSpan..liveSpan
 		listener.setScrollLocked(true)
 		if (!GalleryMotion.animationsEnabled(app)) {
-			discrete = true
+			snapOnly = true
 			return true
 		}
 		layouts.clear()
@@ -148,9 +148,9 @@ class GridPinchController(
 		val unit = unitOf(baseSpan / scale).coerceIn(
 			maxOf(unitOf(stepRange.start), travelled.endInclusive - 1f), minOf(stepRange.endInclusive, travelled.start + 1f))
 		travelled = minOf(travelled.start, unit)..maxOf(travelled.endInclusive, unit)
-		spanF = spanOf(unit)
-		scale = baseSpan / spanF
-		if (captured.isNotEmpty()) apply(spanF)
+		liveSpan = spanOf(unit)
+		scale = baseSpan / liveSpan
+		if (captured.isNotEmpty()) apply(liveSpan)
 		return true
 	}
 
@@ -168,8 +168,8 @@ class GridPinchController(
 			return
 		}
 		if (target != baseSpan) stepped = true
-		if (discrete || captured.isEmpty()) {
-			discrete = false
+		if (snapOnly || captured.isEmpty()) {
+			snapOnly = false
 			listener.setExtraLayoutSpace(0)
 			if (target == baseSpan) {
 				listener.setScrollLocked(false)
@@ -184,19 +184,19 @@ class GridPinchController(
 			listener.commitSpan(target, firstVisiblePosition(), offset) { listener.setScrollLocked(false) }
 			return
 		}
-		val distance = abs(target - spanF)
-		if (distance < 0.01f) {
+		val distance = abs(target - liveSpan)
+		if (distance < SETTLE_EPSILON) {
 			commit(target)
 			return
 		}
-		val from = spanF
+		val from = liveSpan
 		settleSpan = target
 		settle = ValueAnimator.ofFloat(0f, 1f).apply {
-			duration = (SETTLE_DURATION_MS * (distance / 0.5f)).toLong().coerceIn(SETTLE_MIN_DURATION_MS, SETTLE_DURATION_MS)
+			duration = (SETTLE_DURATION_MS * (distance / SETTLE_FULL_DURATION_SPAN)).toLong().coerceIn(SETTLE_MIN_DURATION_MS, SETTLE_DURATION_MS)
 			interpolator = GalleryMotion.CURVE
 			addUpdateListener {
-				spanF = from + (target - from) * it.animatedFraction
-				apply(spanF)
+				liveSpan = from + (target - from) * it.animatedFraction
+				apply(liveSpan)
 			}
 			addListener(object : AnimatorListenerAdapter() {
 				override fun onAnimationEnd(animation: Animator) {
@@ -234,8 +234,8 @@ class GridPinchController(
 		val base = baseSpan.toFloat()
 		val lower = stepRange.start
 		val upper = stepRange.endInclusive
-		if (lower < base && spanF <= halfway(base, lower)) return if (lower < minSpan) null else lower.roundToInt()
-		if (upper > base && spanF >= halfway(base, upper)) return upper.roundToInt()
+		if (lower < base && liveSpan <= halfway(base, lower)) return if (lower < minSpan) null else lower.roundToInt()
+		if (upper > base && liveSpan >= halfway(base, upper)) return upper.roundToInt()
 		return baseSpan
 	}
 
@@ -273,7 +273,7 @@ class GridPinchController(
 		focalPosition = anchor.position
 		focalRealTop = anchor.decorated.top
 		focalRatio = (focalY - anchor.decorated.top) / anchor.decorated.height().coerceAtLeast(1f)
-		apply(spanF)
+		apply(liveSpan)
 	}
 
 	private fun apply(value: Float) {
@@ -406,9 +406,9 @@ class GridPinchController(
 	}
 
 	private fun defaultHeight(item: GalleryItem): Int = AndroidUtils.dpToPx(app, when (item) {
-		is GalleryItem.Spacer -> 16f
-		is GalleryItem.MediaStats -> 60f
-		else -> 56f
+		is GalleryItem.Spacer -> SPACER_HEIGHT_DP
+		is GalleryItem.MediaStats -> STATS_HEIGHT_DP
+		else -> CHROME_ROW_HEIGHT_DP
 	})
 
 	private fun persist(span: Int) {
@@ -473,6 +473,12 @@ class GridPinchController(
 	companion object {
 		private const val SETTLE_DURATION_MS = 200L
 		private const val SETTLE_MIN_DURATION_MS = 60L
+		private const val SETTLE_FULL_DURATION_SPAN = 0.5f
+		private const val SETTLE_EPSILON = 0.01f
+
+		private const val SPACER_HEIGHT_DP = 16f
+		private const val STATS_HEIGHT_DP = 60f
+		private const val CHROME_ROW_HEIGHT_DP = 56f
 
 		private const val LIST_ZONE = 0.5f
 

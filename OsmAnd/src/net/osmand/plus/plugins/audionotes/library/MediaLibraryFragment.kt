@@ -15,22 +15,26 @@ import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.BaseOsmAndFragment
 import net.osmand.plus.gallery.contract.IGalleryGridView
+import net.osmand.plus.gallery.model.GalleryDisplayMode
 import net.osmand.plus.gallery.model.GalleryItem
+import net.osmand.plus.gallery.model.GallerySortMode
 import net.osmand.plus.gallery.ui.GalleryGridBinder
 import net.osmand.plus.gallery.ui.motion.GalleryMotion
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.myplaces.MyPlacesActivity
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin
+import net.osmand.plus.search.dialogs.ChipsLayout
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.InsetTarget
 import net.osmand.plus.utils.InsetTargetsCollection
+import net.osmand.plus.widgets.popup.OsmAndDropdownMenuSelectionStyle
 
 class MediaLibraryFragment : BaseOsmAndFragment(), IGalleryGridView {
 	private lateinit var controller: MediaLibraryController
 	private var binder: GalleryGridBinder? = null
-	private var chips: MediaLibraryChips? = null
+	private var chips: ChipsLayout? = null
 	private var chipsContainer: View? = null
 	private var toolbarSelectionMode = false
 	private val toolbarBackground = ColorDrawable()
@@ -55,7 +59,8 @@ class MediaLibraryFragment : BaseOsmAndFragment(), IGalleryGridView {
 		updateNightMode()
 		val root = themedInflater.inflate(R.layout.media_library_fragment, container, false)
 		chipsContainer = root.findViewById(R.id.chips_container)
-		chips = MediaLibraryChips(root.findViewById(R.id.chips), controller).also { it.update() }
+		chips = root.findViewById<ChipsLayout>(R.id.chips).also { setupChips(it) }
+		updateChips()
 		binder = GalleryGridBinder(root.findViewById(R.id.recycler_view), controller, requireActivity(), nightMode, sectionCards = true)
 			.also { it.pendingLayoutState = savedInstanceState?.getParcelable("library_layout") }
 		controller.attach(this)
@@ -105,16 +110,45 @@ class MediaLibraryFragment : BaseOsmAndFragment(), IGalleryGridView {
 		binder.updateItems()
 		val items = binder.items
 		chipsContainer?.isVisible = items.isNotEmpty() && items.none { it is GalleryItem.NoMedia }
-		chips?.update()
+		updateChips()
 	}
 
 	override fun updateDisplayMode() {
 		binder?.updateDisplayMode()
-		chips?.update()
+		updateChips()
 	}
 
 	override fun updateSelection() {
 		binder?.updateSelection()
+	}
+
+	private fun setupChips(view: ChipsLayout) {
+		view.setOnChipClickListener {
+			when (it) {
+				GRID_CHIP -> controller.setDisplayMode(if (controller.getDisplayMode() == GalleryDisplayMode.GRID) GalleryDisplayMode.LIST else GalleryDisplayMode.GRID)
+				GROUP_CHIP -> controller.toggleGrouping()
+			}
+		}
+		view.setOnDropdownItemClickListener { _, id -> GallerySortMode.entries.getOrNull(id)?.let(controller::onSortModeSelected) }
+	}
+
+	private fun updateChips() {
+		val view = chips ?: return
+		val mode = controller.sortMode
+		fun chip(id: String, icon: Int, title: Int, selected: Boolean) = ChipsLayout.ChipData(id,
+			if (selected) 0 else icon, getString(title), selected, true, true, false,
+			ChipsLayout.TextColorStyle.PRIMARY, ChipsLayout.IconColorStyle.DEFAULT)
+		view.updateContent(listOf(
+			ChipsLayout.DropDownChipData(SORT_CHIP, mode.iconId, getString(mode.titleId), false, true, true,
+				ChipsLayout.TextColorStyle.PRIMARY, ChipsLayout.IconColorStyle.ACTIVE,
+				selectionStyle = OsmAndDropdownMenuSelectionStyle.CHECKMARK,
+				dropdownItems = GallerySortMode.entries.mapIndexed { index, item ->
+					ChipsLayout.DropdownItem(index, item.iconId, getString(item.titleId), selected = item == mode,
+						showDividerBelow = GallerySortMode.entries.getOrNull(index + 1)?.let { it.group != item.group } == true)
+				}),
+			chip(GRID_CHIP, MediaLibraryIcons.GRID, R.string.shared_string_grid, controller.getDisplayMode() == GalleryDisplayMode.GRID),
+			chip(GROUP_CHIP, MediaLibraryIcons.GROUP_BY, R.string.shared_string_group, controller.isGrouped())
+		))
 	}
 
 	override fun onSaveInstanceState(outState: Bundle) {
@@ -182,5 +216,11 @@ class MediaLibraryFragment : BaseOsmAndFragment(), IGalleryGridView {
 	override fun onDestroy() {
 		controller.onScreenDestroyed(activity)
 		super.onDestroy()
+	}
+
+	companion object {
+		private const val SORT_CHIP = "sort"
+		private const val GRID_CHIP = "grid"
+		private const val GROUP_CHIP = "group"
 	}
 }

@@ -18,9 +18,9 @@ import kotlin.math.roundToInt
 
 class GallerySectionCardDecoration(app: OsmandApplication, nightMode: Boolean) : RecyclerView.ItemDecoration() {
 	private val padding = app.resources.getDimensionPixelSize(R.dimen.content_padding)
-	private val columnGap = AndroidUtils.dpToPxF(app, 8f).roundToInt()
-	private val rowGap = AndroidUtils.dpToPxF(app, 6f).roundToInt()
-	val radius = AndroidUtils.dpToPxF(app, 16f)
+	private val columnGap = AndroidUtils.dpToPxF(app, COLUMN_GAP_DP).roundToInt()
+	private val rowGap = AndroidUtils.dpToPxF(app, ROW_GAP_DP).roundToInt()
+	val radius = AndroidUtils.dpToPxF(app, CARD_RADIUS_DP)
 	private val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = ColorUtilities.getColor(app, ColorUtilities.getListBgColorId(nightMode)) }
 	private val bounds = Rect()
 
@@ -90,5 +90,11 @@ class GallerySectionCardDecoration(app: OsmandApplication, nightMode: Boolean) :
 			if (bottomOpen) rect.bottom = maxOf(rect.bottom, parent.height + radius)
 		}
 		return sections
+	}
+
+	companion object {
+		const val CARD_RADIUS_DP = 16f
+		const val COLUMN_GAP_DP = 8f
+		const val ROW_GAP_DP = 6f
 	}
 }

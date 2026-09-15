@@ -1,14 +1,16 @@
 package net.osmand.plus.plugins.audionotes.library.data
 
+import net.osmand.data.LatLon
 import net.osmand.plus.gallery.data.GalleryMediaMetadata
 import net.osmand.plus.plugins.audionotes.Recording
+import net.osmand.shared.gpx.primitives.Link
+import net.osmand.shared.gpx.primitives.Linkable
 import net.osmand.shared.media.domain.MediaItem
 import net.osmand.shared.media.LinkMediaFactory
 import net.osmand.shared.media.library.SortableMedia
 
 data class MediaLibraryEntry(
 	val mediaItem: MediaItem,
-	val key: String,
 	val recording: Recording? = null,
 	val attachments: List<MediaAttachment> = emptyList(),
 	val metadata: GalleryMediaMetadata? = null
@@ -24,4 +26,15 @@ data class MediaLibraryEntry(
 	override val durationMs get() = metadata?.durationMs
 	override val lat get() = metadata?.latLon?.latitude ?: recording?.latitude
 	override val lon get() = metadata?.latLon?.longitude ?: recording?.longitude
+}
+
+data class MediaAttachment(
+	val target: Linkable,
+	val link: Link,
+	val kind: Kind,
+	val name: String,
+	val latLon: LatLon,
+	val trackFile: String? = null
+) {
+	enum class Kind { FAVORITE, TRACK_POINT }
 }

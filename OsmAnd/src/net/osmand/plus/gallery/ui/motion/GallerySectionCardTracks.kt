@@ -97,10 +97,10 @@ class GallerySectionCardTracks private constructor(private val tracks: List<Trac
 		for (track in tracks) {
 			for (other in tracks) {
 				if (other === track) continue
-				if (other.rect.top > track.rect.bottom - radius - 1f && other.rect.top <= track.rect.bottom + 1f) {
+				if (other.rect.top > track.rect.bottom - radius - TOUCH_PX && other.rect.top <= track.rect.bottom + TOUCH_PX) {
 					track.drawRect.bottom = max(track.drawRect.bottom, other.rect.top + radius)
 				}
-				if (other.rect.bottom >= track.rect.top - 1f && other.rect.bottom < track.rect.top + radius + 1f) {
+				if (other.rect.bottom >= track.rect.top - TOUCH_PX && other.rect.bottom < track.rect.top + radius + TOUCH_PX) {
 					track.drawRect.top = min(track.drawRect.top, other.rect.bottom - radius)
 				}
 			}
@@ -191,12 +191,12 @@ class GallerySectionCardTracks private constructor(private val tracks: List<Trac
 					val before = openBefore[startSection] ?: (false to false)
 					val after = openAfter[endSection] ?: (false to false)
 					if (before.first || after.first) {
-						val sliver = RectF(startBox.left, viewportTop - radius, startBox.right, viewportTop - radius + 1f)
+						val sliver = RectF(startBox.left, viewportTop - radius, startBox.right, viewportTop - radius + SLIVER_PX)
 						contributions += Contribution(if (before.first) sliver else project(sliver, startBox),
 							if (after.first) sliver else project(sliver, endBox), minDelay, GalleryMotion.MOVE_DURATION_MS)
 					}
 					if (before.second || after.second) {
-						val sliver = RectF(startBox.left, viewportBottom + radius - 1f, startBox.right, viewportBottom + radius)
+						val sliver = RectF(startBox.left, viewportBottom + radius - SLIVER_PX, startBox.right, viewportBottom + radius)
 						contributions += Contribution(if (before.second) sliver else project(sliver, startBox),
 							if (after.second) sliver else project(sliver, endBox), minDelay, GalleryMotion.MOVE_DURATION_MS)
 					}
@@ -219,10 +219,10 @@ class GallerySectionCardTracks private constructor(private val tracks: List<Trac
 				val endBox = track.endBox ?: continue
 				val startSiblings = tracks.filter { it.startSection == track.startSection && it.startBox != null }
 				val endSiblings = tracks.filter { it.endSection == track.endSection && it.endBox != null }
-				track.startTopRound = startSiblings.none { it.startBox!!.top < startBox.top - 0.5f }
-				track.startBottomRound = startSiblings.none { it.startBox!!.bottom > startBox.bottom + 0.5f }
-				track.endTopRound = endSiblings.none { it.endBox!!.top < endBox.top - 0.5f }
-				track.endBottomRound = endSiblings.none { it.endBox!!.bottom > endBox.bottom + 0.5f }
+				track.startTopRound = startSiblings.none { it.startBox!!.top < startBox.top - EDGE_PX }
+				track.startBottomRound = startSiblings.none { it.startBox!!.bottom > startBox.bottom + EDGE_PX }
+				track.endTopRound = endSiblings.none { it.endBox!!.top < endBox.top - EDGE_PX }
+				track.endBottomRound = endSiblings.none { it.endBox!!.bottom > endBox.bottom + EDGE_PX }
 			}
 			return GallerySectionCardTracks(tracks, radius)
 		}
@@ -244,6 +244,10 @@ class GallerySectionCardTracks private constructor(private val tracks: List<Trac
 	}
 
 	companion object {
+		private const val TOUCH_PX = 1f
+		private const val SLIVER_PX = 1f
+		private const val EDGE_PX = 0.5f
+
 		private fun lerp(from: Float, to: Float, p: Float): Float = from + (to - from) * p
 
 		private fun lerp(from: RectF, to: RectF, p: Float, out: RectF) {

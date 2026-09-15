@@ -9,7 +9,6 @@ import net.osmand.shared.media.domain.MediaType
 import android.view.View
 
 interface IGalleryGridController : IGalleryListener, IGalleryActionListener {
-	fun isGroupingSupported(): Boolean = false
 	fun isGrouped(): Boolean = false
 	fun onMediaItemMenuClicked(item: MediaItem, anchor: View) {}
 	fun onGroupHeaderClicked(type: MediaType) {}
@@ -20,7 +19,7 @@ interface IGalleryGridController : IGalleryListener, IGalleryActionListener {
 	fun getGalleryItems(): List<GalleryItem>
 	fun getSpanCount(isPortrait: Boolean): Int
 
-	fun getSpanBounds(isPortrait: Boolean): IntRange = 2..4
+	fun getSpanBounds(isPortrait: Boolean): IntRange
 
 	fun getDisplayMode(): GalleryDisplayMode = GalleryDisplayMode.GRID
 	fun isListModeSupported(): Boolean = false

@@ -82,7 +82,7 @@ class MediaLibraryRepository(private val app: OsmandApplication) {
 								override fun onMetadataLoaded(item: MediaItem, metadata: GalleryMediaMetadata) {
 									if (!metadataUpdatePending) {
 										metadataUpdatePending = true
-										handler.postDelayed(metadataUpdate, 250)
+										handler.postDelayed(metadataUpdate, METADATA_UPDATE_DEBOUNCE_MS)
 									}
 								}
 								override fun onBatchFinished() {
@@ -114,5 +114,6 @@ class MediaLibraryRepository(private val app: OsmandApplication) {
 
 	companion object {
 		private val LOG = PlatformUtil.getLog(MediaLibraryRepository::class.java)
+		private const val METADATA_UPDATE_DEBOUNCE_MS = 250L
 	}
 }

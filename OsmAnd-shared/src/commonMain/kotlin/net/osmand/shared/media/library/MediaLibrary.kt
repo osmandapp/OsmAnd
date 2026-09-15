@@ -1,7 +1,30 @@
 package net.osmand.shared.media.library
 
 import net.osmand.shared.data.KLatLon
+import net.osmand.shared.media.domain.MediaType
 import net.osmand.shared.util.KMapUtils
+
+interface SortableMedia {
+	val id: String
+	val title: String
+	val type: MediaType
+	val dateMs: Long?
+	val lastModifiedMs: Long?
+	val sizeBytes: Long?
+	val durationMs: Long?
+	val lat: Double?
+	val lon: Double?
+}
+
+enum class MediaLibrarySortMode(val group: Group) {
+	NEAREST(Group.LOCATION), LAST_MODIFIED(Group.LOCATION),
+	NAME_A_Z(Group.NAME), NAME_Z_A(Group.NAME),
+	NEWEST_FIRST(Group.DATE), OLDEST_FIRST(Group.DATE),
+	SIZE_LARGE_SMALL(Group.SIZE), SIZE_SMALL_LARGE(Group.SIZE),
+	DURATION_LONG_SHORT(Group.DURATION), DURATION_SHORT_LONG(Group.DURATION);
+
+	enum class Group { LOCATION, NAME, DATE, SIZE, DURATION }
+}
 
 object MediaLibrarySorter {
 	fun comparator(mode: MediaLibrarySortMode, referenceLatLon: KLatLon? = null): Comparator<SortableMedia> =
@@ -36,5 +59,30 @@ object MediaLibrarySorter {
 		val lon = item.lon ?: return null
 		if (reference == null || !lat.isFinite() || !lon.isFinite()) return null
 		return KMapUtils.getDistance(reference.latitude, reference.longitude, lat, lon)
+	}
+}
+
+object MediaLibraryGrouping {
+	data class Group<T>(val type: MediaType, val items: List<T>) {
+		val count: Int get() = items.size
+	}
+
+	fun <T : SortableMedia> group(items: List<T>): List<Group<T>> =
+		listOf(MediaType.PHOTO, MediaType.VIDEO, MediaType.AUDIO).mapNotNull { type ->
+			items.filter { it.type == type }.takeIf { it.isNotEmpty() }?.let { Group(type, it) }
+		}
+
+	fun <T> lastAttachedName(attachments: List<T>, name: (T) -> String): String? =
+		attachments.lastOrNull()?.let(name)
+}
+
+data class MediaLibraryStats(val photos: Int, val videos: Int, val audios: Int, val bytes: Long) {
+	companion object {
+		fun compute(items: List<SortableMedia>) = MediaLibraryStats(
+			items.count { it.type == MediaType.PHOTO },
+			items.count { it.type == MediaType.VIDEO },
+			items.count { it.type == MediaType.AUDIO },
+			items.sumOf { (it.sizeBytes ?: 0L).coerceAtLeast(0L) }
+		)
 	}
 }

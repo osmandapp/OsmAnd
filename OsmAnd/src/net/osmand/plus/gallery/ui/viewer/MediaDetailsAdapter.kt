@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
+import net.osmand.plus.gallery.ui.GallerySectionCardDecoration
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.audionotes.library.data.MediaAttachment
 import net.osmand.plus.utils.AndroidUtils
@@ -166,7 +167,7 @@ class DetailsRowHolder(view: View, private val nightMode: Boolean) : DetailsHold
 
 class DetailsCardDecoration(app: OsmandApplication, nightMode: Boolean, private val adapter: MediaDetailsAdapter) : RecyclerView.ItemDecoration() {
 	private val gap = app.resources.getDimensionPixelSize(R.dimen.content_padding)
-	private val radius = AndroidUtils.dpToPxF(app, 16f)
+	private val radius = AndroidUtils.dpToPxF(app, GallerySectionCardDecoration.CARD_RADIUS_DP)
 	private val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = ColorUtilities.getColor(app, ColorUtilities.getListBgColorId(nightMode)) }
 	private val card = RectF()
 

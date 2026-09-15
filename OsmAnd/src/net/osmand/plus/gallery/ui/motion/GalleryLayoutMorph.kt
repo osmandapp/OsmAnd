@@ -85,8 +85,6 @@ class GalleryLayoutMorph(
 		override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent) = true
 	}
 
-	val isRunning: Boolean get() = !finished
-
 	fun run(newItems: List<GalleryItem>, crossMode: Boolean, apply: () -> Unit, onComplete: () -> Unit) {
 		this.onComplete = onComplete
 		this.crossMode = crossMode
@@ -146,7 +144,7 @@ class GalleryLayoutMorph(
 		val previewBounds = media?.let { boundsOf(it.previewView) }
 		val snapshot = if (!withSnapshots) null else when {
 			media != null -> media.morphSnapshotView?.let { snapshot(it) }
-			child.height <= recyclerView.height / 4 -> snapshot(child)
+			child.height <= recyclerView.height * SNAPSHOT_MAX_HEIGHT -> snapshot(child)
 			else -> null
 		}
 		val content = if (withSnapshots && media != null && media.previewView !== child) media.getFadeableContentViews().map(::snapshotted) else emptyList()
@@ -607,6 +605,7 @@ class GalleryLayoutMorph(
 		private const val CONTENT_SLIDE_DP = 8f
 
 		private const val CROSSFADE_MIN_MS = 100L
+		private const val SNAPSHOT_MAX_HEIGHT = 0.25f
 		private const val VIDEO_SCRIM_ALPHA = 77
 		private const val DURATION_GAP_DP = 2f
 

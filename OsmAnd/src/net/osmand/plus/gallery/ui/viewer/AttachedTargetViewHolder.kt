@@ -60,7 +60,7 @@ class AttachedTargetViewHolder(view: View) : DetailsHolder(view) {
 
 	private fun bindFavorite(attachment: MediaAttachment) {
 		val point = attachment.target as? FavouritePoint
-		setIconSize(app.resources.getDimensionPixelSize(R.dimen.favorites_my_places_icon_size), AndroidUtils.dpToPx(app, 10f))
+		setIconSize(app.resources.getDimensionPixelSize(R.dimen.favorites_my_places_icon_size), AndroidUtils.dpToPx(app, FAVORITE_CONTENT_MARGIN_DP))
 		val color = point?.let { app.favoritesHelper.getColorWithCategory(it, ColorUtilities.getColor(app, R.color.color_favorite)) }
 			?: ColorUtilities.getColor(app, R.color.color_favorite)
 		icon.setImageDrawable(PointImageUtils.getFromPoint(app, color, false, point))
@@ -111,5 +111,9 @@ class AttachedTargetViewHolder(view: View) : DetailsHolder(view) {
 			height = size
 		}
 		contentContainer.layoutParams = (contentContainer.layoutParams as LinearLayout.LayoutParams).apply { marginStart = contentMargin }
+	}
+
+	companion object {
+		private const val FAVORITE_CONTENT_MARGIN_DP = 10f
 	}
 }

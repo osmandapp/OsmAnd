@@ -23,7 +23,6 @@ import net.osmand.plus.gallery.ui.holders.NoInternetHolder
 import net.osmand.plus.gallery.ui.holders.NoMediaHolder
 import net.osmand.plus.gallery.ui.holders.SortBarHolder
 import net.osmand.plus.gallery.ui.holders.GroupHeaderHolder
-import net.osmand.plus.plugins.audionotes.library.MediaLibraryEmptyHolder
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.shared.media.MediaProvider
 import net.osmand.shared.media.domain.MediaItem
@@ -72,7 +71,7 @@ class GalleryGridAdapter(
 
 	var selectionMode: Boolean = false
 	var listRowFactory: ((ViewGroup) -> GalleryMediaListViewHolder)? = null
-	var emptyRowFactory: ((ViewGroup) -> MediaLibraryEmptyHolder)? = null
+	var emptyRowFactory: ((ViewGroup) -> RecyclerView.ViewHolder)? = null
 
 	@JvmOverloads
 	fun setItems(newItems: List<GalleryItem>, animated: Boolean = false) {
@@ -180,7 +179,6 @@ class GalleryGridAdapter(
 		boundSections[holder] = getSectionBoundary(position)
 		when {
 			holder is GroupHeaderHolder && item is GalleryItem.GroupHeader -> holder.bind(item, nightMode)
-			holder is MediaLibraryEmptyHolder && item is GalleryItem.NoMedia -> holder.bind(item, nightMode)
 			holder is GalleryMediaViewHolder && item is GalleryItem.Media -> {
 				val holderType = mediaHolderType(position)
 				val imageSizePx = when (holderType) {

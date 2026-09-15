@@ -11,7 +11,7 @@ import net.osmand.shared.media.domain.MediaType
  * Represents typed presentation items displayed by GalleryGridAdapter.
  */
 sealed class GalleryItem {
-	data class GroupHeader(val type: MediaType, val count: Int, val collapsed: Boolean) : GalleryItem()
+	data class GroupHeader(val type: MediaType, val collapsed: Boolean) : GalleryItem()
 	data object Spacer : GalleryItem()
 
 	data class Media(
@@ -54,9 +54,7 @@ data class GalleryMediaPresentation(
 	val attachment: AttachmentLine? = null
 )
 
-data class AttachmentLine(val iconDrawable: Drawable?, val name: String, val extraCount: Int, val kind: Kind) {
-	enum class Kind { FAVORITE, TRACK_POINT }
-}
+data class AttachmentLine(val iconDrawable: Drawable?, val name: String, val extraCount: Int)
 
 data class GalleryAction(
 	val id: String

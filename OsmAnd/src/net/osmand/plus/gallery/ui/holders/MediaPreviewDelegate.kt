@@ -27,6 +27,32 @@ import net.osmand.shared.media.domain.MediaItem
 import net.osmand.shared.media.domain.MediaType
 import kotlin.math.roundToInt
 
+interface MorphableMediaHolder {
+	val boundItemId: String?
+
+	val previewView: View
+
+	val morphSnapshotView: View?
+
+	val morphPreviewBitmap: Bitmap?
+	val morphCenterIcon: Drawable?
+	val morphShowsScrim: Boolean
+	val morphDurationLabel: String?
+	val morphShowsDuration: Boolean
+	val morphDurationTextColor: Int
+	val morphBgColor: Int
+
+	fun getFadeableContentViews(): List<View>
+
+	fun getSelectionOverlayViews(): List<View>
+
+	fun beginMorph(standIn: Bitmap?, onPreviewArrived: (Bitmap) -> Unit)
+
+	fun endMorph(revealed: Boolean)
+
+	fun counterScaleOverlays(cellScaleX: Float, cellScaleY: Float) {}
+}
+
 class MediaPreviewDelegate(
 	private val app: OsmandApplication,
 	private val imageView: ImageView,

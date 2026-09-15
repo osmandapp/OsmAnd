@@ -74,8 +74,8 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenDialogFragment impl
 	public static final int REQUEST_EXTERNAL_STORAGE_PERMISSION = 2000;
 	public static final int PRELOAD_THUMBNAILS_COUNT = 3;
 
-	public static final int STATE_MEDIA = 0;
-	public static final int STATE_PREVIEW = 1;
+	public static final int STATE_MEDIA = MediaViewerSheetLayout.STATE_MEDIA;
+	public static final int STATE_PREVIEW = MediaViewerSheetLayout.STATE_PREVIEW;
 
 	private static final int UI_TOGGLE_ANIM_MS = 150;
 
@@ -439,7 +439,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenDialogFragment impl
 			if (entry != null) {
 				List<String> orderedIds = new ArrayList<>();
 				for (GalleryItem.Media item : mediaItems) orderedIds.add(item.getMediaItem().getId());
-				callActivity(activity -> MediaItemMenu.show(activity, entry, view, nightMode, false, orderedIds));
+				callActivity(activity -> MediaItemMenu.show(activity, entry, view, nightMode, true, orderedIds));
 				return;
 			}
 		}
@@ -607,19 +607,19 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	@Override
-	public void onProgressChanged(float progress, float dismiss) {
+	public void onProgressChanged(float progress, float dismissProgress) {
 		if (progress > 0f && uiHidden) {
 			toggleUi();
 		}
 		if (InsetsUtils.isEdgeToEdgeSupported()) {
 			return;
 		}
-		boolean solid = progress >= 1.5f;
+		boolean solid = progress >= MediaViewerSheetLayout.CHROME_SWITCH_PROGRESS;
 		if (solid != statusBarSolid) {
 			statusBarSolid = solid;
 			setStatusBarColor(getColor(getStatusBarColorId()));
 		} else if (!solid) {
-			setStatusBarColor(ColorUtils.setAlphaComponent(Color.BLACK, Math.round(255 * (1f - dismiss))));
+			setStatusBarColor(ColorUtils.setAlphaComponent(Color.BLACK, Math.round(255 * (1f - dismissProgress))));
 		}
 	}
 

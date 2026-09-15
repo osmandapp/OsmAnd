@@ -1,17 +1,20 @@
 package net.osmand.plus.plugins.audionotes.library
 
+import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import net.osmand.PlatformUtil
+import net.osmand.data.FavouritePoint
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.gallery.attached.helpers.AttachedMediaDataHelper
 import net.osmand.plus.gallery.controller.GalleryPagerController
 import net.osmand.plus.gallery.data.GalleryKey
 import net.osmand.plus.gallery.ui.GalleryPhotoPagerFragment
+import net.osmand.plus.mapcontextmenu.other.SelectFavouriteBottomSheet
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin
 import net.osmand.plus.plugins.audionotes.library.data.MediaLibraryEntry
@@ -23,6 +26,7 @@ import net.osmand.plus.widgets.popup.PopUpMenu
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData
 import net.osmand.plus.widgets.popup.PopUpMenuItem
 import net.osmand.plus.widgets.popup.PopUpMenuWidthMode
+import net.osmand.shared.gpx.primitives.Link
 import net.osmand.shared.media.domain.MediaItem
 import net.osmand.shared.media.LinkMediaFactory
 import net.osmand.shared.media.MediaProvider
@@ -35,11 +39,11 @@ object MediaItemMenu {
 
 	@JvmStatic
 	fun show(activity: FragmentActivity, entry: MediaLibraryEntry, anchor: View, nightMode: Boolean,
-		includeView: Boolean, orderedIds: List<String>) {
+		fromViewer: Boolean, orderedIds: List<String>) {
 		val app = activity.application as OsmandApplication
 		val pager = GalleryPagerController.getInstance(app, GalleryKey.MediaLibrary).apply { this.orderedIds = orderedIds }
 		val items = buildList {
-			if (includeView) add(item(app, R.string.shared_string_view, MediaLibraryIcons.VIEW, nightMode) {
+			if (!fromViewer) add(item(app, R.string.shared_string_view, MediaLibraryIcons.VIEW, nightMode) {
 				GalleryPagerController.show(activity, GalleryKey.MediaLibrary, entry.id, orderedIds)
 			})
 			if (entry.lat != null && entry.lon != null) add(item(app, R.string.shared_string_show_on_map,
@@ -59,7 +63,7 @@ object MediaItemMenu {
 			})
 			add(item(app, R.string.shared_string_delete, R.drawable.ic_action_delete_outlined, nightMode, divider = true, warning = true) {
 				MediaDialogs.delete(activity, 1, nightMode) { delete(activity, listOf(entry)) {
-					if (!includeView) (activity.supportFragmentManager.findFragmentByTag(GalleryPhotoPagerFragment.TAG)
+					if (fromViewer) (activity.supportFragmentManager.findFragmentByTag(GalleryPhotoPagerFragment.TAG)
 						as? GalleryPhotoPagerFragment)?.dismissAllowingStateLoss()
 				} }
 			})
@@ -171,6 +175,24 @@ object MediaItemMenu {
 				}
 				removeLinks(0, true)
 			}
+		}
+	}
+}
+
+class SelectMediaFavoriteBottomSheet : SelectFavouriteBottomSheet() {
+	override fun onFavouriteSelected(favourite: FavouritePoint) {
+		val href = arguments?.getString("href") ?: return
+		if (favourite.links.orEmpty().none { it.href == href }) {
+			AttachedMediaDataHelper(app).addMediaLinks(favourite,
+				listOf(Link(href).apply { text = arguments?.getString("title") }), null)
+		}
+		app.galleryHelper.mediaLibraryRepository.refresh()
+		dismiss()
+	}
+
+	companion object {
+		fun create(href: String, title: String) = SelectMediaFavoriteBottomSheet().apply {
+			arguments = Bundle().apply { putString("href", href); putString("title", title) }
 		}
 	}
 }

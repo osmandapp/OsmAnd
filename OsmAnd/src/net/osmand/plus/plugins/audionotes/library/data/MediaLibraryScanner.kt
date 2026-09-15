@@ -19,7 +19,7 @@ class MediaLibraryScanner(private val app: OsmandApplication, private val plugin
 			val item = LinkMediaFactory.fromLinks(listOf(link)).firstOrNull() ?: return
 			val existing = entries[key]
 			if (existing == null) {
-				entries[key] = MediaLibraryEntry(item, key, attachments = listOfNotNull(attachment))
+				entries[key] = MediaLibraryEntry(item, attachments = listOfNotNull(attachment))
 			} else if (attachment != null) {
 				entries[key] = existing.copy(attachments = existing.attachments + attachment)
 			}

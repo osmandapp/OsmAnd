@@ -19,6 +19,7 @@ import net.osmand.plus.gallery.model.GalleryItem
 import net.osmand.plus.gallery.ui.GallerySectionBoundary
 import net.osmand.plus.gallery.ui.motion.GalleryMotion
 import net.osmand.plus.helpers.AndroidUiHelper
+import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.shared.media.MediaProvider
@@ -29,15 +30,17 @@ import net.osmand.shared.util.ImageLoaderCallback
 import net.osmand.shared.util.ImageRequestListener
 import net.osmand.shared.util.LoadingImage
 import androidx.core.view.isVisible
+import kotlin.math.roundToInt
 
-open class GalleryMediaListViewHolder(
+class GalleryMediaListViewHolder(
 	private val app: OsmandApplication,
 	itemView: View,
 	private val mediaProvider: MediaProvider,
 	private val onMediaItemClicked: (MediaItem) -> Unit,
 	private val onMediaItemLongClicked: (MediaItem) -> Unit,
 	private val onToggleSelection: (MediaItem) -> Unit,
-	posterLoader: MediaPosterLoader? = null
+	posterLoader: MediaPosterLoader? = null,
+	private val onMenuClicked: ((MediaItem, View) -> Unit)? = null
 ) : RecyclerView.ViewHolder(itemView), MorphableMediaHolder {
 
 	private val ivImage: ImageView = itemView.findViewById(R.id.image)
@@ -45,6 +48,12 @@ open class GalleryMediaListViewHolder(
 	private val tvDescription: TextView = itemView.findViewById(R.id.description)
 	private val selectionCheck: CompoundButton = itemView.findViewById(R.id.selection_check)
 	private val divider: View = itemView.findViewById(R.id.divider)
+	private val rowContainer: View? = itemView.findViewById(R.id.row_container)
+	private val overflowButton: ImageView? = itemView.findViewById(R.id.overflow_button)
+	private val attachmentContainer: View? = itemView.findViewById(R.id.attachment_container)
+	private val attachmentIcon: ImageView? = itemView.findViewById(R.id.attachment_icon)
+	private val attachmentName: TextView? = itemView.findViewById(R.id.attachment_name)
+	private val attachmentCount: TextView? = itemView.findViewById(R.id.attachment_count)
 	private val selectionTint = GradientDrawable()
 
 	private val previewDelegate = MediaPreviewDelegate(
@@ -60,6 +69,7 @@ open class GalleryMediaListViewHolder(
 	private var loadingImage: LoadingImage? = null
 
 	private var boundMediaItem: MediaItem? = null
+	private var nightMode = false
 	private var selectionMode: Boolean = false
 	private var checkboxLeaving = false
 
@@ -93,10 +103,8 @@ open class GalleryMediaListViewHolder(
 	override val morphBgColor: Int
 		get() = previewDelegate.placeholderBgColor
 
-	/** Row content that fades in after the preview morph (everything except the preview). */
 	override fun getFadeableContentViews(): List<View> =
-		listOf(tvTitle, tvDescription, selectionCheck, divider)
-			.filter { it.visibility == View.VISIBLE }
+		listOfNotNull(tvTitle, tvDescription, selectionCheck, divider, overflowButton, attachmentContainer).filter { it.isVisible }
 
 	override fun getSelectionOverlayViews(): List<View> = emptyList()
 
@@ -124,7 +132,7 @@ open class GalleryMediaListViewHolder(
 		}
 	}
 
-	open fun bindView(
+	fun bindView(
 		mapActivity: FragmentActivity,
 		galleryItem: GalleryItem.Media,
 		nightMode: Boolean,
@@ -133,20 +141,44 @@ open class GalleryMediaListViewHolder(
 	) {
 		val mediaItem = galleryItem.mediaItem
 		boundMediaItem = mediaItem
+		this.nightMode = nightMode
 		cancelLoadingImage()
 
 		tvTitle.setTextColor(ColorUtilities.getPrimaryTextColor(app, nightMode))
 		tvTitle.text = mediaItem.title
 		tvDescription.setTextColor(ColorUtilities.getSecondaryTextColor(app, nightMode))
 		bindDescription(galleryItem)
+		bindAttachment(galleryItem)
 		bindPreview(galleryItem, nightMode)
 		bindSelection(selectionMode, selected, nightMode, animate = false)
+		overflowButton?.apply {
+			setImageDrawable(app.uiUtilities.getPaintedIcon(R.drawable.ic_overflow_menu_white, ColorUtilities.getDefaultIconColor(app, nightMode)))
+			setOnClickListener { onMenuClicked?.invoke(mediaItem, it) }
+		}
 	}
 
-	open fun updateMetadata(galleryItem: GalleryItem.Media) {
+	fun updateMetadata(galleryItem: GalleryItem.Media) {
 		if (boundMediaItem?.id != galleryItem.mediaItem.id) return
 		bindDescription(galleryItem)
+		bindAttachment(galleryItem)
 		previewDelegate.updateDurationLabel(galleryItem.presentation?.durationLabel)
+	}
+
+	private fun bindAttachment(galleryItem: GalleryItem.Media) {
+		val container = attachmentContainer ?: return
+		val line = galleryItem.presentation?.attachment
+		container.isVisible = line != null
+		rowContainer?.minimumHeight = AndroidUtils.dpToPxF(app, if (line == null) ROW_MIN_HEIGHT_DP else ATTACHED_ROW_MIN_HEIGHT_DP).roundToInt()
+		attachmentIcon?.setImageDrawable(line?.iconDrawable)
+		attachmentName?.apply {
+			text = line?.name
+			setTextColor(ColorUtilities.getSecondaryTextColor(app, nightMode))
+		}
+		attachmentCount?.apply {
+			isVisible = line != null && line.extraCount > 0
+			text = line?.let { app.getString(R.string.ltr_or_rtl_combine_via_pipe_plus, "", it.extraCount) }
+			setTextColor(ColorUtilities.getSecondaryTextColor(app, nightMode))
+		}
 	}
 
 	private fun bindDescription(galleryItem: GalleryItem.Media) {
@@ -176,7 +208,7 @@ open class GalleryMediaListViewHolder(
 		}, previewSizePx)
 	}
 
-	open fun updateSelection(selectionMode: Boolean, selected: Boolean, nightMode: Boolean) {
+	fun updateSelection(selectionMode: Boolean, selected: Boolean, nightMode: Boolean) {
 		bindSelection(selectionMode, selected, nightMode, animate = GalleryMotion.animationsEnabled(app))
 	}
 
@@ -187,6 +219,7 @@ open class GalleryMediaListViewHolder(
 		animate: Boolean
 	) {
 		this.selectionMode = selectionMode
+		overflowButton?.visibility = if (selectionMode) View.INVISIBLE else View.VISIBLE
 		val activeColor = ColorUtilities.getActiveColor(app, nightMode)
 		val bgColor = if (selectionMode && selected) {
 			ColorUtilities.getColorWithAlpha(activeColor, ROW_SELECTED_ALPHA)
@@ -289,6 +322,8 @@ open class GalleryMediaListViewHolder(
 	}
 
 	companion object {
+		private const val ROW_MIN_HEIGHT_DP = 68f
+		private const val ATTACHED_ROW_MIN_HEIGHT_DP = 100f
 		private const val ROW_SELECTED_ALPHA = 0.2f
 		private const val CHECKBOX_ANIM_DURATION_MS = GalleryMotion.MOVE_DURATION_MS
 

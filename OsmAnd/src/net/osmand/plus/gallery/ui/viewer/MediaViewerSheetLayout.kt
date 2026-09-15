@@ -26,15 +26,23 @@ import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
 
+interface MediaViewerPage {
+	fun contentRect(): RectF?
+
+	fun canScrollVertically(direction: Int): Boolean
+
+	fun onPreviewSettled()
+}
+
 class MediaViewerSheetLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) :
 	FrameLayout(context, attrs), NestedScrollingParent3 {
 
 	interface Listener {
-		fun onProgressChanged(progress: Float, dismiss: Float)
+		fun onProgressChanged(progress: Float, dismissProgress: Float)
 		fun onDismissed()
 	}
 
-	private enum class DragMode { NONE, UNDECIDED, PAGE, BOX, SHEET, DISMISS }
+	private enum class DragMode { NONE, UNDECIDED, PAGE, MEDIA_BOX, SHEET, DISMISS }
 
 	var pageProvider: () -> MediaViewerPage? = { null }
 	var listener: Listener? = null
@@ -59,9 +67,9 @@ class MediaViewerSheetLayout @JvmOverloads constructor(context: Context, attrs: 
 	private val nestedHelper = NestedScrollingParentHelper(this)
 	private val touchSlop = ViewConfiguration.get(context).scaledTouchSlop
 	private val appBarHeight = context.resources.getDimensionPixelSize(R.dimen.toolbar_height)
-	private val previewBoxHeight = AndroidUtils.dpToPx(context, 300f)
-	private val sheetRadius = AndroidUtils.dpToPx(context, 16f)
-	private val listInset = AndroidUtils.dpToPx(context, 16f) + sheetRadius
+	private val previewBoxHeight = AndroidUtils.dpToPx(context, PREVIEW_BOX_HEIGHT_DP)
+	private val sheetRadius = AndroidUtils.dpToPx(context, SHEET_RADIUS_DP)
+	private val listInset = AndroidUtils.dpToPx(context, LIST_TOP_INSET_DP) + sheetRadius
 	private val hitRect = Rect()
 
 	private var statusBarInset = 0
@@ -98,17 +106,15 @@ class MediaViewerSheetLayout @JvmOverloads constructor(context: Context, attrs: 
 
 	fun animateTo(state: Int) {
 		if (dismissing) return
-		val target = state.coerceIn(0, 2)
+		val target = state.coerceIn(STATE_MEDIA, STATE_FULL)
 		cancelAnimator()
 		if (!animationsEnabled || width == 0 || height == 0 || target.toFloat() == progress) {
 			snapTo(target)
 			return
 		}
 		val from = progress
-		val distance = abs(sheetTop(from) - sheetTop(target.toFloat()))
-		val duration = 150L + (150f * (distance / (height / 2f)).coerceIn(0f, 1f)).toLong()
 		animator = ValueAnimator.ofFloat(from, target.toFloat()).apply {
-			this.duration = duration
+			duration = settleDuration(abs(sheetTop(from) - sheetTop(target.toFloat())))
 			interpolator = GalleryMotion.CURVE
 			addUpdateListener { setProgress(it.animatedValue as Float) }
 			addListener(object : AnimatorListenerAdapter() {
@@ -125,9 +131,14 @@ class MediaViewerSheetLayout @JvmOverloads constructor(context: Context, attrs: 
 
 	fun handleBack(): Boolean = when {
 		dismissing -> true
-		progress > 1.5f -> { animateTo(1); true }
-		progress > 0f -> { animateTo(0); true }
+		progress > CHROME_SWITCH_PROGRESS -> { animateTo(STATE_PREVIEW); true }
+		progress > 0f -> { animateTo(STATE_MEDIA); true }
 		else -> false
+	}
+
+	private fun settleDuration(distancePx: Float): Long {
+		val fraction = (distancePx / (height * SETTLE_FULL_DURATION_TRAVEL)).coerceIn(0f, 1f)
+		return GalleryMotion.FADE_DURATION_MS + ((GalleryMotion.MOVE_DURATION_MS - GalleryMotion.FADE_DURATION_MS) * fraction).toLong()
 	}
 
 	fun onPageContentChanged() {
@@ -175,7 +186,7 @@ class MediaViewerSheetLayout @JvmOverloads constructor(context: Context, attrs: 
 	}
 
 	private val boxHeight: Int
-		get() = if (width > height) min(previewBoxHeight, (height - topInset) / 2) else previewBoxHeight
+		get() = if (width > height) min(previewBoxHeight, ((height - topInset) * LANDSCAPE_BOX_MAX_HEIGHT).toInt()) else previewBoxHeight
 
 	private val fullTop: Float
 		get() = (topInset + appBarHeight - sheetRadius).toFloat()
@@ -183,21 +194,22 @@ class MediaViewerSheetLayout @JvmOverloads constructor(context: Context, attrs: 
 	private fun sheetTop(p: Float): Float {
 		val h = height.toFloat()
 		val previewTop = (topInset + boxHeight).toFloat()
-		return if (p <= 1f) h + (previewTop - h) * p else previewTop + (fullTop - previewTop) * (p - 1f)
+		return if (p <= STATE_PREVIEW) h + (previewTop - h) * p else previewTop + (fullTop - previewTop) * (p - STATE_PREVIEW)
 	}
 
 	private fun progressForTop(top: Float): Float {
 		val h = height.toFloat()
 		val previewTop = (topInset + boxHeight).toFloat()
 		return if (top >= previewTop) {
-			if (h > previewTop) ((h - top) / (h - previewTop)).coerceIn(0f, 1f) else 1f
+			if (h > previewTop) ((h - top) / (h - previewTop)).coerceIn(STATE_MEDIA.toFloat(), STATE_PREVIEW.toFloat()) else STATE_PREVIEW.toFloat()
 		} else {
-			if (previewTop > fullTop) (1f + (previewTop - top) / (previewTop - fullTop)).coerceIn(1f, 2f) else 2f
+			if (previewTop > fullTop) (STATE_PREVIEW + (previewTop - top) / (previewTop - fullTop)).coerceIn(STATE_PREVIEW.toFloat(), STATE_FULL.toFloat())
+			else STATE_FULL.toFloat()
 		}
 	}
 
 	private fun setProgress(value: Float) {
-		progress = value.coerceIn(0f, 2f)
+		progress = value.coerceIn(STATE_MEDIA.toFloat(), STATE_FULL.toFloat())
 		applyProgress()
 	}
 
@@ -205,13 +217,13 @@ class MediaViewerSheetLayout @JvmOverloads constructor(context: Context, attrs: 
 		if (width == 0 || height == 0) return
 		val p = progress
 		sheet.translationY = sheetTop(p) - fullTop
-		sheetList.translationY = listInset * (p - 1f).coerceIn(0f, 1f)
-		applyMediaTransform(min(p, 1f))
+		sheetList.translationY = listInset * (p - STATE_PREVIEW).coerceIn(0f, 1f)
+		applyMediaTransform(min(p, STATE_PREVIEW.toFloat()))
 		val fade = 1f - dismissProgress
-		val chromeAlpha = (1f - (p - 1f) / 0.5f).coerceIn(0f, 1f) * fade
+		val chromeAlpha = (1f - (p - STATE_PREVIEW) / (CHROME_SWITCH_PROGRESS - STATE_PREVIEW)).coerceIn(0f, 1f) * fade
 		floatingChrome.alpha = chromeAlpha
 		floatingChrome.visibility = if (chromeAlpha > 0f) VISIBLE else INVISIBLE
-		val appBarAlpha = ((p - 1.5f) / 0.5f).coerceIn(0f, 1f)
+		val appBarAlpha = ((p - CHROME_SWITCH_PROGRESS) / (STATE_FULL - CHROME_SWITCH_PROGRESS)).coerceIn(0f, 1f)
 		solidAppBar.alpha = appBarAlpha
 		solidAppBar.visibility = if (appBarAlpha > 0f) VISIBLE else INVISIBLE
 		backdrop.alpha = fade
@@ -228,13 +240,13 @@ class MediaViewerSheetLayout @JvmOverloads constructor(context: Context, attrs: 
 			return
 		}
 		val rect = mediaRect ?: captureMediaRect().also { mediaRect = it }
-		val dismissScale = 1f - 0.3f * (dismissY / (height / 2f)).coerceIn(0f, 1f)
+		val dismissScale = 1f - DISMISS_SHRINK * (dismissY / (height * DISMISS_SHRINK_TRAVEL)).coerceIn(0f, 1f)
 		val scale = (1f + (previewRect.height() / rect.height() - 1f) * p) * dismissScale
 		mediaContainer.pivotX = rect.centerX()
 		mediaContainer.pivotY = rect.centerY()
 		mediaContainer.scaleX = scale
 		mediaContainer.scaleY = scale
-		mediaContainer.translationX = (previewRect.centerX() - rect.centerX()) * p + dismissX * 0.5f
+		mediaContainer.translationX = (previewRect.centerX() - rect.centerX()) * p + dismissX * DISMISS_HORIZONTAL_FOLLOW
 		mediaContainer.translationY = (previewRect.centerY() - rect.centerY()) * p + dismissY
 	}
 
@@ -252,7 +264,7 @@ class MediaViewerSheetLayout @JvmOverloads constructor(context: Context, attrs: 
 	}
 
 	private fun snapTo(state: Int) {
-		val target = state.coerceIn(0, 2)
+		val target = state.coerceIn(STATE_MEDIA, STATE_FULL)
 		cancelAnimator()
 		dismissX = 0f
 		dismissY = 0f
@@ -264,20 +276,20 @@ class MediaViewerSheetLayout @JvmOverloads constructor(context: Context, attrs: 
 
 	private fun onSettled(state: Int) {
 		settledState = state
-		if (state == 0) mediaRect = null
-		if (state == 1) pageProvider()?.onPreviewSettled()
+		if (state == STATE_MEDIA) mediaRect = null
+		if (state == STATE_PREVIEW) pageProvider()?.onPreviewSettled()
 	}
 
 	private fun settle(velocityUp: Float) {
 		val p = progress
 		val nearest = p.roundToInt()
-		val atState = abs(p - nearest) < 0.001f
+		val atState = abs(p - nearest) < AT_STATE_EPSILON
 		val target = when {
 			velocityUp > SETTLE_VELOCITY -> if (atState) nearest + 1 else ceil(p).toInt()
 			velocityUp < -SETTLE_VELOCITY -> if (atState) nearest - 1 else floor(p).toInt()
 			else -> nearest
 		}
-		animateTo(target.coerceIn(0, 2))
+		animateTo(target)
 	}
 
 	private fun cancelAnimator() {
@@ -292,7 +304,7 @@ class MediaViewerSheetLayout @JvmOverloads constructor(context: Context, attrs: 
 		when (ev.actionMasked) {
 			MotionEvent.ACTION_DOWN -> {
 				beginTouch(ev)
-				return dragMode == DragMode.BOX || dragMode == DragMode.DISMISS
+				return dragMode == DragMode.MEDIA_BOX || dragMode == DragMode.DISMISS
 			}
 			MotionEvent.ACTION_POINTER_DOWN -> if (dragMode == DragMode.UNDECIDED) dragMode = DragMode.PAGE
 			MotionEvent.ACTION_MOVE -> {
@@ -318,7 +330,7 @@ class MediaViewerSheetLayout @JvmOverloads constructor(context: Context, attrs: 
 				val y = ev.getY(index)
 				when (dragMode) {
 					DragMode.UNDECIDED -> if (ev.pointerCount == 1) decide(ev)
-					DragMode.BOX -> {
+					DragMode.MEDIA_BOX -> {
 						val dx = x - downX
 						val dy = y - downY
 						if (abs(dy) >= touchSlop && abs(dy) >= abs(dx)) startDrag(DragMode.SHEET, x, y)
@@ -330,7 +342,7 @@ class MediaViewerSheetLayout @JvmOverloads constructor(context: Context, attrs: 
 					DragMode.DISMISS -> {
 						dismissX = x - dragStartX
 						dismissY = y - dragStartY
-						dismissProgress = (dismissY / (height / 3f)).coerceIn(0f, 1f)
+						dismissProgress = dismissProgressOf(dismissY)
 						applyProgress()
 					}
 					else -> {}
@@ -371,7 +383,7 @@ class MediaViewerSheetLayout @JvmOverloads constructor(context: Context, attrs: 
 			onSheet || onToolbar || onSolidAppBar -> DragMode.PAGE
 			progress > 0f || animator != null -> {
 				cancelAnimator()
-				DragMode.BOX
+				DragMode.MEDIA_BOX
 			}
 			else -> DragMode.UNDECIDED
 		}
@@ -421,10 +433,10 @@ class MediaViewerSheetLayout @JvmOverloads constructor(context: Context, attrs: 
 		val velocityY = if (tracker != null && !cancelled) tracker.yVelocity else 0f
 		when (dragMode) {
 			DragMode.SHEET -> settle(-velocityY)
-			DragMode.DISMISS -> if (!cancelled && (dismissY > height / 6f || velocityY > DISMISS_VELOCITY)) dismiss() else returnFromDismiss()
-			DragMode.BOX -> {
+			DragMode.DISMISS -> if (!cancelled && (dismissY > height * DISMISS_THRESHOLD_TRAVEL || velocityY > DISMISS_VELOCITY)) dismiss() else returnFromDismiss()
+			DragMode.MEDIA_BOX -> {
 				val tap = !cancelled && abs(ev.x - downX) < touchSlop && abs(ev.y - downY) < touchSlop
-				if (tap) animateTo(0) else settle(0f)
+				if (tap) animateTo(STATE_MEDIA) else settle(0f)
 			}
 			else -> {}
 		}
@@ -449,13 +461,13 @@ class MediaViewerSheetLayout @JvmOverloads constructor(context: Context, attrs: 
 			return
 		}
 		animator = ValueAnimator.ofFloat(1f, 0f).apply {
-			duration = 150L + (150f * (abs(startY) / (height / 2f)).coerceIn(0f, 1f)).toLong()
+			duration = settleDuration(abs(startY))
 			interpolator = GalleryMotion.CURVE
 			addUpdateListener {
 				val f = it.animatedValue as Float
 				dismissX = startX * f
 				dismissY = startY * f
-				dismissProgress = (dismissY / (height / 3f)).coerceIn(0f, 1f)
+				dismissProgress = dismissProgressOf(dismissY)
 				applyProgress()
 			}
 			addListener(object : AnimatorListenerAdapter() {
@@ -483,7 +495,7 @@ class MediaViewerSheetLayout @JvmOverloads constructor(context: Context, attrs: 
 			addUpdateListener {
 				val f = it.animatedValue as Float
 				dismissX = startX
-				dismissY = startY + 0.3f * height * f
+				dismissY = startY + DISMISS_EXIT_SLIDE * height * f
 				dismissProgress = 1f - startFade * (1f - f)
 				mediaContainer.alpha = 1f - f
 				applyProgress()
@@ -513,9 +525,11 @@ class MediaViewerSheetLayout @JvmOverloads constructor(context: Context, attrs: 
 		if (type == ViewCompat.TYPE_TOUCH && animator == null) settle(0f)
 	}
 
+	private fun dismissProgressOf(dragY: Float): Float = (dragY / (height * DISMISS_FADE_TRAVEL)).coerceIn(0f, 1f)
+
 	override fun onNestedPreScroll(target: View, dx: Int, dy: Int, consumed: IntArray, type: Int) {
 		if (type != ViewCompat.TYPE_TOUCH) return
-		if (dy > 0 && progress < 2f) {
+		if (dy > 0 && progress < STATE_FULL) {
 			consumed[1] = moveSheet(dy)
 		} else if (dy < 0 && progress > 0f && !target.canScrollVertically(-1)) {
 			consumed[1] = moveSheet(dy)
@@ -531,11 +545,11 @@ class MediaViewerSheetLayout @JvmOverloads constructor(context: Context, attrs: 
 	}
 
 	override fun onNestedPreFling(target: View, velocityX: Float, velocityY: Float): Boolean {
-		if (velocityY > 0 && progress < 2f) {
+		if (velocityY > 0 && progress < STATE_FULL) {
 			settle(velocityY)
 			return true
 		}
-		if (velocityY < 0 && progress > 0f && (progress < 2f || !target.canScrollVertically(-1))) {
+		if (velocityY < 0 && progress > 0f && (progress < STATE_FULL || !target.canScrollVertically(-1))) {
 			settle(velocityY)
 			return true
 		}
@@ -548,14 +562,31 @@ class MediaViewerSheetLayout @JvmOverloads constructor(context: Context, attrs: 
 
 	private fun moveSheet(dy: Int): Int {
 		val top = sheetTop(progress)
-		val newTop = (top - dy).coerceIn(sheetTop(2f), sheetTop(0f))
+		val newTop = (top - dy).coerceIn(sheetTop(STATE_FULL.toFloat()), sheetTop(STATE_MEDIA.toFloat()))
 		setProgress(progressForTop(newTop))
 		return (top - newTop).roundToInt()
 	}
 
 	companion object {
+		const val STATE_MEDIA = 0
+		const val STATE_PREVIEW = 1
+		const val STATE_FULL = 2
+		const val CHROME_SWITCH_PROGRESS = 1.5f
+
+		private const val PREVIEW_BOX_HEIGHT_DP = 300f
+		private const val SHEET_RADIUS_DP = 16f
+		private const val LIST_TOP_INSET_DP = 16f
+		private const val LANDSCAPE_BOX_MAX_HEIGHT = 0.5f
+		private const val AT_STATE_EPSILON = 0.001f
 		private const val SETTLE_VELOCITY = 1000f
+		private const val SETTLE_FULL_DURATION_TRAVEL = 0.5f
 		private const val DISMISS_VELOCITY = 1500f
+		private const val DISMISS_THRESHOLD_TRAVEL = 1f / 6f
+		private const val DISMISS_FADE_TRAVEL = 1f / 3f
+		private const val DISMISS_SHRINK = 0.3f
+		private const val DISMISS_SHRINK_TRAVEL = 0.5f
+		private const val DISMISS_HORIZONTAL_FOLLOW = 0.5f
+		private const val DISMISS_EXIT_SLIDE = 0.3f
 		private const val DISMISS_DURATION_MS = 200L
 	}
 }
