@@ -250,8 +250,11 @@ public class AmenityMenuController extends MenuController {
 	}
 
 	public static String getTypeStr(@NonNull OsmandApplication app, @NonNull Amenity amenity) {
+		String syntheticTypeLabel = amenity.getAdditionalInfo(Amenity.SYNTHETIC_TYPE_LABEL);
 		ClickableWayHelper clickableWayHelper = app.getClickableWayHelper();
-		if (amenity.isRouteTrack() || clickableWayHelper.isClickableWayAmenity(amenity)) {
+		if (!Algorithms.isEmpty(syntheticTypeLabel)) {
+			return syntheticTypeLabel;
+		} else if (amenity.isRouteTrack() || clickableWayHelper.isClickableWayAmenity(amenity)) {
 			return getTypeWithDistanceStr(amenity, app);
 		} else if (amenity.getType() != null && amenity.getType().isWiki()) {
 			return getCommonWikiTypeStr(amenity, app);

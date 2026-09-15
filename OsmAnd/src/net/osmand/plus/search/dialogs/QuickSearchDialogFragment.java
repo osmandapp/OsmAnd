@@ -17,6 +17,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -90,6 +91,9 @@ import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.layers.ContextMenuLayer;
+import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.layers.POIMapLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.CustomMapObjects;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
@@ -213,6 +217,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private boolean poiFilterApplied;
 	private boolean fabVisible;
 	private boolean spatialSearchMapObjectsApplied;
+	private final Map<Amenity, SearchResult> spatialSearchAmenityResults = new IdentityHashMap<>();
 	private boolean sendEmptySearchBottomBarVisible;
 	private boolean runSearchFirstTime;
 	private boolean phraseDefined;
@@ -632,6 +637,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 	private void applySpatialSearchMapObjects(@NonNull MapActivity activity,
 	                                          @NonNull List<QuickSearchListItem> searchItems) {
 		List<Amenity> amenities = new ArrayList<>();
+		spatialSearchAmenityResults.clear();
 		for (QuickSearchListItem item : searchItems) {
 			SearchResult searchResult = item.getSearchResult();
 			Object object = searchResult.object;
@@ -641,14 +647,39 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 				Amenity amenity = createSpatialSearchMapAmenity(searchResult, mapObject);
 				if (amenity != null) {
 					amenities.add(amenity);
+					spatialSearchAmenityResults.put(amenity, searchResult);
 				}
 			}
 		}
-		if (activity.getMapLayers().getPoiMapLayer().customObjectsDelegate == null) {
-			activity.getMapLayers().getPoiMapLayer().customObjectsDelegate = new CustomMapObjects<>();
+		POIMapLayer poiMapLayer = activity.getMapLayers().getPoiMapLayer();
+		if (poiMapLayer.customObjectsDelegate == null) {
+			poiMapLayer.customObjectsDelegate = new CustomMapObjects<>();
 		}
-		activity.getMapLayers().getPoiMapLayer().setCustomMapObjects(amenities);
+		poiMapLayer.setCustomMapObjects(amenities);
+		poiMapLayer.setCustomObjectClickListener(this::showSpatialSearchAmenityContextMenu);
 		spatialSearchMapObjectsApplied = true;
+	}
+
+	private boolean showSpatialSearchAmenityContextMenu(@NonNull Amenity amenity) {
+		SearchResult searchResult = spatialSearchAmenityResults.get(amenity);
+		MapActivity activity = getMapActivity();
+		if (searchResult == null || activity == null) {
+			return false;
+		}
+		Object object = searchResult.object;
+		LatLon objectLocation = object instanceof MapObject mapObject ? mapObject.getLocation() : null;
+		LatLon location = searchResult.location != null ? searchResult.location : objectLocation;
+		if (location == null) {
+			return false;
+		}
+		ContextMenuLayer contextMenuLayer = activity.getMapLayers().getContextMenuLayer();
+		POIMapLayer poiMapLayer = activity.getMapLayers().getPoiMapLayer();
+		Pair<PointDescription, Object> pointDescriptionObject =
+				QuickSearchListItem.getPointDescriptionObject(app, searchResult);
+		Object menuObject = pointDescriptionObject.second != null ? pointDescriptionObject.second : object;
+		IContextMenuProvider provider = menuObject instanceof Amenity ? poiMapLayer : null;
+		contextMenuLayer.showContextMenu(location, pointDescriptionObject.first, menuObject, provider);
+		return true;
 	}
 
 	@Nullable
@@ -664,6 +695,10 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		amenity.setType(app.getPoiTypes().getOtherPoiCategory());
 		amenity.setSubType("");
 		amenity.setAdditionalInfo(Amenity.GPX_ICON, getSpatialSearchMapIconName(searchResult));
+		String typeLabel = MapObjectViewHolder.getTypeName(app, mapObject);
+		if (typeLabel != null) {
+			amenity.setAdditionalInfo(Amenity.SYNTHETIC_TYPE_LABEL, typeLabel);
+		}
 		return amenity;
 	}
 
@@ -679,8 +714,11 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		if (!spatialSearchMapObjectsApplied || activity == null) {
 			return;
 		}
-		activity.getMapLayers().getPoiMapLayer().setCustomMapObjects(Collections.emptyList());
-		activity.getMapLayers().getPoiMapLayer().customObjectsDelegate = null;
+		POIMapLayer poiMapLayer = activity.getMapLayers().getPoiMapLayer();
+		poiMapLayer.setCustomMapObjects(Collections.emptyList());
+		poiMapLayer.customObjectsDelegate = null;
+		poiMapLayer.setCustomObjectClickListener(null);
+		spatialSearchAmenityResults.clear();
 		spatialSearchMapObjectsApplied = false;
 		activity.refreshMap();
 	}

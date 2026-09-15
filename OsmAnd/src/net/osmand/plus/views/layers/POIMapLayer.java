@@ -120,7 +120,17 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	private String routeArticlePointsFilterByName;
 	private boolean fileVisibilityChanged;
 	public CustomMapObjects<Amenity> customObjectsDelegate;
+	@Nullable
+	private CustomObjectClickListener customObjectClickListener;
 	private int topPlacesLimit = TOP_PLACES_LIMIT;
+
+	public interface CustomObjectClickListener {
+		boolean onCustomObjectClick(@NonNull Amenity amenity);
+	}
+
+	public void setCustomObjectClickListener(@Nullable CustomObjectClickListener listener) {
+		this.customObjectClickListener = listener;
+	}
 
 	private static final int SELECTED_MARKER_ID = -1;
 	private static final int IMAGE_ICON_BORDER_DP = 4;
@@ -795,6 +805,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				cancelLoadingImages();
 				List<Amenity> customObjects = customObjectsDelegate.getMapObjects();
 				updateVisiblePlaces(customObjects, tileBox.getLatLonBounds());
+				data.queryNewData(tileBox);
 				if (customObjectsChanged || mapActivityInvalidated || customObjectsCollection == null) {
 					updateCustomObjectsCollection(customObjects);
 				}
@@ -1112,6 +1123,10 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	@Override
 	public boolean showMenuAction(@Nullable Object object) {
 		Amenity amenity = getAmenity(object);
+		if (amenity != null && customObjectsDelegate != null && customObjectClickListener != null
+				&& customObjectClickListener.onCustomObjectClick(amenity)) {
+			return true;
+		}
 		MapActivity activity = view.getMapActivity();
 		if (activity != null && amenity != null) {
 			TravelHelper travelHelper = app.getTravelHelper();
