@@ -421,10 +421,17 @@ public class SpatialPoiSearch {
 		
 		List<PoiCatSearch> finalRes = new ArrayList<>(res.values());
 		Collections.sort(finalRes);
-		if (finalRes.size() > ctx.settings.LIMIT_POI_CATEGORY_BY_FREQ) {
-			finalRes = finalRes.subList(0, ctx.settings.LIMIT_POI_CATEGORY_BY_FREQ);
-		}
+		Set<SpatialSearchToken> uncoveredTokens = new HashSet<>();
 		for (PoiCatSearch pc : finalRes) {
+			uncoveredTokens.addAll(pc.tokens);
+		}
+		int free = ctx.settings.LIMIT_POI_CATEGORY_BY_FREQ;
+		for (PoiCatSearch pc : finalRes) {
+			boolean coversNewToken = uncoveredTokens.removeAll(pc.tokens);
+			if (free == 0 || (!coversNewToken && free <= uncoveredTokens.size())) {
+				continue;
+			}
+			free--;
 			for (int i = 0; i < pc.tokens.size(); i++) {
 				SpatialSearchToken token = pc.tokens.get(i);
 				NameIndexAtom atom = pc.atoms.get(i);
