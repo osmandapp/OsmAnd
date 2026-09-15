@@ -12,6 +12,7 @@ import net.osmand.shared.api.SQLiteAPI.SQLiteConnection
 import net.osmand.shared.api.SQLiteAPI.SQLiteCursor
 import net.osmand.shared.api.SQLiteAPI.SQLiteStatement
 import net.osmand.shared.util.LoggerFactory
+import java.io.File
 
 class SQLiteAPIImpl(private val context: Context) : SQLiteAPI {
 
@@ -21,14 +22,29 @@ class SQLiteAPIImpl(private val context: Context) : SQLiteAPI {
 
 	override fun getOrCreateDatabase(name: String, readOnly: Boolean): SQLiteConnection? {
 		val db = try {
-			val mode = MODE_PRIVATE or (if (readOnly) 0 else MODE_ENABLE_WRITE_AHEAD_LOGGING)
-			context.openOrCreateDatabase(name, mode, null)
+			val file = context.getDatabasePath(name)
+			if (readOnly && canOpenReadOnly(file)) {
+				SQLiteDatabase.openDatabase(file.path, null, OPEN_READONLY)
+			} else {
+				// openOrCreateDatabase() always opens read-write. Keep write-ahead logging on for every
+				// such open: a connection opened without it switches the file to a rollback journal,
+				// the next one switches it back, each time under an exclusive lock that starves the
+				// other connections until the busy timeout (OsmAnd-Issues #3331)
+				context.openOrCreateDatabase(name, MODE_PRIVATE or MODE_ENABLE_WRITE_AHEAD_LOGGING, null)
+			}
 		} catch (e: RuntimeException) {
 			log.error("Failed to get or create database", e)
 			null
 		}
 		return db?.let { SQLiteDatabaseWrapper(it) }
 	}
+
+	/**
+	 * A read-only connection can neither create the database nor roll back a hot journal left by
+	 * an interrupted rollback-journal transaction; both need a writable open first.
+	 */
+	private fun canOpenReadOnly(file: File): Boolean =
+		file.exists() && File(file.path + "-journal").length() == 0L
 
 	inner class SQLiteDatabaseWrapper(private val ds: SQLiteDatabase) : SQLiteConnection {
 
