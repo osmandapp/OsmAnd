@@ -49,8 +49,8 @@ public class TransportStopMatcher {
 		return isSubwayEntrance(amenity) ? SHOW_SUBWAY_STOPS_FROM_ENTRANCES_RADIUS_METERS : SHOW_STOPS_RADIUS_METERS;
 	}
 
-	public static TransportStop findBestStopForAmenity(List<TransportStop> transportStops, Amenity amenity) {
-		TransportStopAggregated stopAggregated = aggregateStopsForAmenity(transportStops, amenity);
+	public static TransportStop findBestStopForAmenity(List<TransportStop> stopsInSearchRadius, Amenity amenity) {
+		TransportStopAggregated stopAggregated = aggregateStopsForAmenity(stopsInSearchRadius, amenity);
 		List<TransportStop> localStops = stopAggregated.getLocalTransportStops();
 		List<TransportStop> nearbyStops = stopAggregated.getNearbyTransportStops();
 		if (!localStops.isEmpty()) {
@@ -61,19 +61,20 @@ public class TransportStopMatcher {
 		return null;
 	}
 
-	public static TransportStopAggregated aggregateStopsForAmenity(List<TransportStop> transportStops, Amenity amenity) {
+	// sorts the list and writes the distance and the aggregate into the stops
+	public static TransportStopAggregated aggregateStopsForAmenity(List<TransportStop> stopsInSearchRadius, Amenity amenity) {
 		TransportStopAggregated stopAggregated;
 		LatLon loc = amenity.getLocation();
-		sortTransportStops(loc, transportStops);
+		sortTransportStops(loc, stopsInSearchRadius);
 
 		if (isSubwayEntrance(amenity)) {
-			stopAggregated = processTransportStopsForAmenity(transportStops, amenity);
+			stopAggregated = processTransportStopsForAmenity(stopsInSearchRadius, amenity);
 		} else {
 			stopAggregated = new TransportStopAggregated();
 			stopAggregated.setAmenity(amenity);
 			TransportStop nearestStop = null;
 			String amenityName = amenity.getName().toLowerCase();
-			for (TransportStop stop : transportStops) {
+			for (TransportStop stop : stopsInSearchRadius) {
 				stop.setTransportStopAggregated(stopAggregated);
 				String stopName = stop.getName().toLowerCase();
 				if (((stopName.contains(amenityName) || amenityName.contains(stopName))
