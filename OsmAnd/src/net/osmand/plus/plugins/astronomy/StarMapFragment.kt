@@ -2252,10 +2252,10 @@ class StarMapFragment : BaseFullScreenFragment(), IMapLocationListener, OsmAndLo
 		val context = context ?: return
 
 		zoomButtons.visibility = if (AndroidUiHelper.isTablet(context)) {
-			View.GONE
-		} else {
-			View.VISIBLE
-		}
+            View.VISIBLE
+        } else {
+            View.GONE
+        }
 	}
 
 	private fun clearSelectedObject() {
