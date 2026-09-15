@@ -455,13 +455,8 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 				bldCheckCache.put(cacheKey, bldObj);
 			}
 			if (bldObj.bld == null) {
-				// no such house in the map: offer the street at the point under the houses found, as 18 for 18 B
-				QuadRect qr = ctx.location == null ? null : MapUtils.calculate31BboxUsingRhumb(ctx.settings.POI_HOUSE_DEFAULT_RADIUS, ctx.location);
-				if (qr != null && bldRefObj.coords.intersects(new int[] { (int) qr.left, (int) qr.top, (int) qr.right, (int) qr.bottom })) {
-					surplusWords.put(indx, -1);
-				} else {
-					skipResults.put(indx, true);
-				}
+				// no such house in the map: offer the street under the houses found, as 18 for 18 B
+				surplusWords.put(indx, -1);
 			} else if (!checkBuildingPoiLocation(ctx, indx, bldObj.bld, loc)) {
 				skipResults.put(indx, true);
 			} else {
