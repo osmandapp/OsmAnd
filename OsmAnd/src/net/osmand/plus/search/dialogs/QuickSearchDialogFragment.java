@@ -90,6 +90,7 @@ import net.osmand.plus.utils.InsetTarget;
 import net.osmand.plus.utils.InsetTargetsCollection;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.layers.POIMapLayer.SearchResultAmenity;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.CustomMapObjects;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
@@ -658,7 +659,7 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		if (location == null) {
 			return null;
 		}
-		Amenity amenity = new Amenity();
+		Amenity amenity = new SearchResultAmenity(searchResult);
 		amenity.setLocation(location);
 		amenity.setName(QuickSearchListItem.getName(app, searchResult));
 		amenity.setType(app.getPoiTypes().getOtherPoiCategory());
