@@ -68,6 +68,31 @@ public class GeoActionIntentTest {
 	}
 
 	@Test
+	public void testParseStatusQueries() {
+		assertEquals(GeoActionHelper.ACTION_ETA, GeoActionHelper.parseAction(Uri.parse("geo.action:?act=eta")));
+		assertEquals(GeoActionHelper.ACTION_TIME_TO_DESTINATION, GeoActionHelper.parseAction(Uri.parse("geo.action.offline:?act=time_to_destination")));
+		assertEquals(GeoActionHelper.ACTION_DISTANCE_TO_DESTINATION, GeoActionHelper.parseAction(Uri.parse("geo.action:?act=distance_to_destination")));
+		assertEquals(GeoActionHelper.ACTION_TIME_TO_NEXT_TURN, GeoActionHelper.parseAction(Uri.parse("geo.action:?act=time_to_next_turn")));
+		assertEquals(GeoActionHelper.ACTION_DISTANCE_TO_NEXT_TURN, GeoActionHelper.parseAction(Uri.parse("geo.action.offline:?act=distance_to_next_turn")));
+		assertEquals(GeoActionHelper.ACTION_QUERY_NEXT_TURN, GeoActionHelper.parseAction(Uri.parse("geo.action:?act=query_next_turn")));
+		assertEquals(GeoActionHelper.ACTION_QUERY_DESTINATION, GeoActionHelper.parseAction(Uri.parse("geo.action:?act=query_destination")));
+		assertEquals(GeoActionHelper.ACTION_QUERY_CURRENT_ROAD, GeoActionHelper.parseAction(Uri.parse("geo.action.offline:?act=query_current_road")));
+	}
+
+	@Test
+	public void testParseUnsupportedActions() {
+		assertEquals(GeoActionHelper.ACTION_REPORT_CRASH, GeoActionHelper.parseAction(Uri.parse("geo.action:?act=report_crash")));
+		assertEquals(GeoActionHelper.ACTION_REPORT_HAZARD, GeoActionHelper.parseAction(Uri.parse("geo.action:?act=report_hazard")));
+		assertEquals(GeoActionHelper.ACTION_REPORT_POLICE, GeoActionHelper.parseAction(Uri.parse("geo.action:?act=report_police")));
+		assertEquals(GeoActionHelper.ACTION_REPORT_TRAFFIC, GeoActionHelper.parseAction(Uri.parse("geo.action:?act=report_traffic")));
+		assertEquals(GeoActionHelper.ACTION_REPORT_ROAD_CLOSURE, GeoActionHelper.parseAction(Uri.parse("geo.action:?act=report_road_closure")));
+		assertEquals(GeoActionHelper.ACTION_SHOW_TRAFFIC, GeoActionHelper.parseAction(Uri.parse("geo.action:?act=show_traffic")));
+		assertEquals(GeoActionHelper.ACTION_HIDE_TRAFFIC, GeoActionHelper.parseAction(Uri.parse("geo.action:?act=hide_traffic")));
+		assertEquals(GeoActionHelper.ACTION_SHOW_SATELLITE, GeoActionHelper.parseAction(Uri.parse("geo.action:?act=show_satellite")));
+		assertEquals(GeoActionHelper.ACTION_HIDE_SATELLITE, GeoActionHelper.parseAction(Uri.parse("geo.action:?act=hide_satellite")));
+	}
+
+	@Test
 	public void testParseUnsupportedAndEdgeCases() {
 		assertEquals("unknown_action", GeoActionHelper.parseAction(Uri.parse("geo.action:?act=unknown_action")));
 		assertEquals("", GeoActionHelper.parseAction(Uri.parse("geo:52.52,13.40")));
