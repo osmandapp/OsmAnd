@@ -23,11 +23,13 @@ import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteCalculationResult.IntermediatePointInfo;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.SharedRouteDetailsProvider;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.TurnPathHelper.RouteDrawable;
 import net.osmand.plus.views.mapwidgets.LanesDrawable;
 import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.routing.details.RouteCumulativeInfo;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -93,9 +95,9 @@ public class RouteDirectionsCard extends MapBaseCard {
 			@NonNull List<IntermediatePointInfo> intermediatePointInfos,
 			@NonNull List<TargetPoint> intermediatePoints) {
 		List<RouteDirectionItem> items = new ArrayList<>();
+		List<RouteCumulativeInfo> cumulativeInfoByPosition =
+				SharedRouteDetailsProvider.getCumulativeInfoByPosition(routeDirections);
 		int intermediateIndex = 0;
-		int cumulativeDistance = 0;
-		int cumulativeTime = 0;
 		for (int directionIndex = 0; directionIndex < routeDirections.size(); directionIndex++) {
 			RouteDirectionInfo direction = routeDirections.get(directionIndex);
 			while (intermediateIndex < intermediatePointInfos.size()
@@ -108,10 +110,9 @@ public class RouteDirectionsCard extends MapBaseCard {
 				intermediateIndex++;
 			}
 			boolean destination = directionIndex == routeDirections.size() - 1 && direction.distance == 0;
+			RouteCumulativeInfo cumulativeInfo = cumulativeInfoByPosition.get(directionIndex);
 			items.add(RouteDirectionItem.direction(direction, directionIndex,
-					cumulativeDistance, cumulativeTime, destination));
-			cumulativeDistance += direction.distance;
-			cumulativeTime += direction.getExpectedTime();
+					cumulativeInfo.getDistanceMeters(), cumulativeInfo.getTimeSeconds(), destination));
 		}
 		while (intermediateIndex < intermediatePointInfos.size()) {
 			IntermediatePointInfo info = intermediatePointInfos.get(intermediateIndex);

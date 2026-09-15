@@ -1,7 +1,7 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
 import static android.util.TypedValue.COMPLEX_UNIT_PX;
-import static net.osmand.plus.routing.AlarmInfoType.*;
+import static net.osmand.shared.routing.details.RouteEventType.*;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -125,7 +125,7 @@ public class AlarmWidget {
 				if (info != null) {
 					visible = true;
 					if (layout != null) {
-						layout.setContentDescription(alarm.getType().getVisualName(app));
+						layout.setContentDescription(AlarmInfo.getVisualName(app, alarm.getType()));
 					}
 					if (info.locImgId != imgId) {
 						changed = true;

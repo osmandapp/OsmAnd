@@ -20,7 +20,7 @@ import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteExporter;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RouteStatisticsHelper;
-import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
+import net.osmand.shared.routing.details.RouteStatistic;
 import net.osmand.util.Algorithms;
 import net.osmand.shared.routing.ColoringType;
 
@@ -110,7 +110,7 @@ public class ColoringStyleAlgorithms {
 		RenderingRuleSearchRequest defaultSearchRequest =
 				maps.getSearchRequestWithAppliedCustomRules(defaultRenderer, nightMode);
 
-		List<RouteStatistics> routeStatisticsList =
+		List<RouteStatistic> routeStatisticsList =
 				RouteStatisticsHelper.calculateRouteStatistic(routeSegments,
 						Collections.singletonList(attributeName), currentRenderer,
 						defaultRenderer, currentSearchRequest, defaultSearchRequest);

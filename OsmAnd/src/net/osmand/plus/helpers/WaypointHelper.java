@@ -1,14 +1,12 @@
 package net.osmand.plus.helpers;
 
-import static net.osmand.plus.routing.AlarmInfoType.PEDESTRIAN;
-import static net.osmand.plus.routing.AlarmInfoType.RAILWAY;
-import static net.osmand.plus.routing.AlarmInfoType.RED_LIGHT_CAMERA;
-import static net.osmand.plus.routing.AlarmInfoType.SPEED_CAMERA;
-import static net.osmand.plus.routing.AlarmInfoType.TUNNEL;
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_ALARM_ANNOUNCE;
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_PNT_APPROACH;
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_ALARM_ANNOUNCE;
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_PNT_APPROACH;
+import static net.osmand.shared.routing.details.RouteEventType.PEDESTRIAN;
+import static net.osmand.shared.routing.details.RouteEventType.RED_LIGHT_CAMERA;
+import static net.osmand.shared.routing.details.RouteEventType.SPEED_CAMERA;
 
 import android.os.AsyncTask;
 
@@ -28,7 +26,6 @@ import net.osmand.plus.OsmAndTaskManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.routing.AlarmInfo;
-import net.osmand.plus.routing.AlarmInfoType;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
@@ -37,6 +34,12 @@ import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.shared.data.KLatLon;
+import net.osmand.shared.routing.details.RouteEvent;
+import net.osmand.shared.routing.details.RouteEventHelper;
+import net.osmand.shared.routing.details.RouteEventSelection;
+import net.osmand.shared.routing.details.RouteEventSelectionOptions;
+import net.osmand.shared.routing.details.RouteEventType;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.util.MapUtils;
@@ -74,13 +77,11 @@ public class WaypointHelper {
 	public static final int ALARMS = 4;
 	public static final int MAX = 5;
 	public static final int[] SEARCH_RADIUS_VALUES = {50, 100, 200, 500, 1000, 2000, 5000};
-	private static final double DISTANCE_IGNORE_DOUBLE_SPEEDCAMS = 150;
-	private static final double DISTANCE_IGNORE_DOUBLE_RAILWAYS = 50;
 	private static final int SAME_ALARM_INTERVAL = 30;//in seconds
 	private List<List<LocationPointWrapper>> locationPoints = new ArrayList<>();
 	private final ConcurrentHashMap<LocationPoint, Integer> locationPointsStates = new ConcurrentHashMap<>();
-	private final ConcurrentHashMap<AlarmInfoType, AlarmInfo> lastAnnouncedAlarms = new ConcurrentHashMap<>();
-	private final ConcurrentHashMap<AlarmInfoType, Long> lastAnnouncedAlarmsTime = new ConcurrentHashMap<>();
+	private final ConcurrentHashMap<RouteEventType, AlarmInfo> lastAnnouncedAlarms = new ConcurrentHashMap<>();
+	private final ConcurrentHashMap<RouteEventType, Long> lastAnnouncedAlarmsTime = new ConcurrentHashMap<>();
 	private TIntArrayList pointsProgress = new TIntArrayList();
 	private RouteCalculationResult route;
 
@@ -435,7 +436,7 @@ public class WaypointHelper {
 								approachPoints.add(lwp);
 							} else if (type == ALARMS && (state == null || state == NOT_ANNOUNCED)) {
 								AlarmInfo alarm = (AlarmInfo) point;
-								AlarmInfoType t = alarm.getType();
+								RouteEventType t = alarm.getType();
 								if (beforeTunnelEntrance(currentRoute, alarm)) {
 									kIterator++;
 									continue;
@@ -616,7 +617,6 @@ public class WaypointHelper {
 			List<LocationPointWrapper> array = clearAndGetArray(locationPoints, ALARMS);
 			if (route.getAppMode() != null) {
 				calculateAlarms(route, array, appMode);
-				sortList(array);
 			}
 		}
 		if ((type == WAYPOINTS || all)) {
@@ -711,39 +711,38 @@ public class WaypointHelper {
 	}
 
 	private void calculateAlarms(RouteCalculationResult route, List<LocationPointWrapper> array, ApplicationMode mode) {
-		if (!settings.SHOW_ROUTING_ALARMS.getModeValue(mode)) {
+		boolean routingAlarmsEnabled = settings.SHOW_ROUTING_ALARMS.getModeValue(mode);
+		if (!routingAlarmsEnabled) {
 			return;
 		}
-		AlarmInfo prevSpeedCam = null;
-		AlarmInfo prevRailway = null;
-		for (AlarmInfo alarmInfo : route.getAlarmInfo()) {
-			AlarmInfoType type = alarmInfo.getType();
-			if (type == SPEED_CAMERA || type == RED_LIGHT_CAMERA) {
-				if (settings.SHOW_CAMERAS.getModeValue(mode) || settings.SPEAK_SPEED_CAMERA.getModeValue(mode)) {
-					// ignore double speed cams
-					if (prevSpeedCam == null || MapUtils.getDistance(prevSpeedCam.getLatitude(), prevSpeedCam.getLongitude(),
-							alarmInfo.getLatitude(), alarmInfo.getLongitude()) >= DISTANCE_IGNORE_DOUBLE_SPEEDCAMS) {
-						addPointWrapper(alarmInfo, array, settings.SPEAK_SPEED_CAMERA.getModeValue(mode));
-						prevSpeedCam = alarmInfo;
-					}
-				}
-			} else if (type == TUNNEL) {
-				if (settings.SHOW_TUNNELS.getModeValue(mode) || settings.SPEAK_TUNNELS.getModeValue(mode)) {
-					addPointWrapper(alarmInfo, array, settings.SPEAK_TUNNELS.getModeValue(mode));
-				}
-			} else if (type == PEDESTRIAN) {
-				if (settings.SHOW_PEDESTRIAN.getModeValue(mode) || settings.SPEAK_PEDESTRIAN.getModeValue(mode)) {
-					addPointWrapper(alarmInfo, array, settings.SPEAK_PEDESTRIAN.getModeValue(mode));
-				}
-			} else if (type == RAILWAY) {
-				if (prevRailway == null || MapUtils.getDistance(prevRailway.getLatitude(), prevRailway.getLongitude(),
-						alarmInfo.getLatitude(), alarmInfo.getLongitude()) >= DISTANCE_IGNORE_DOUBLE_RAILWAYS) {
-					addPointWrapper(alarmInfo, array, settings.SPEAK_TRAFFIC_WARNINGS.getModeValue(mode));
-					prevRailway = alarmInfo;
-				}
-			} else if (settings.SHOW_TRAFFIC_WARNINGS.getModeValue(mode) || settings.SPEAK_TRAFFIC_WARNINGS.getModeValue(mode)) {
-				addPointWrapper(alarmInfo, array, settings.SPEAK_TRAFFIC_WARNINGS.getModeValue(mode));
-			}
+		List<AlarmInfo> alarms = route.getAlarmInfo();
+		if (alarms.isEmpty()) {
+			return;
+		}
+		List<RouteEvent> events = new ArrayList<>(alarms.size());
+		for (AlarmInfo alarmInfo : alarms) {
+			RouteEvent event = new RouteEvent(
+					alarmInfo.getType(),
+					new KLatLon(alarmInfo.getLatitude(), alarmInfo.getLongitude()),
+					alarmInfo.getLocationIndex(),
+					-1,
+					0,
+					0f);
+			events.add(event);
+		}
+		RouteEventSelectionOptions options = new RouteEventSelectionOptions(
+				routingAlarmsEnabled,
+				settings.SHOW_CAMERAS.getModeValue(mode),
+				settings.SPEAK_SPEED_CAMERA.getModeValue(mode),
+				settings.SHOW_TUNNELS.getModeValue(mode),
+				settings.SPEAK_TUNNELS.getModeValue(mode),
+				settings.SHOW_PEDESTRIAN.getModeValue(mode),
+				settings.SPEAK_PEDESTRIAN.getModeValue(mode),
+				settings.SHOW_TRAFFIC_WARNINGS.getModeValue(mode),
+				settings.SPEAK_TRAFFIC_WARNINGS.getModeValue(mode));
+		for (RouteEventSelection selection : RouteEventHelper.INSTANCE.select(events, options)) {
+			AlarmInfo alarmInfo = alarms.get(selection.getSourceIndex());
+			addPointWrapper(alarmInfo, array, selection.getAnnounce());
 		}
 	}
 
