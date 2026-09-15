@@ -5181,10 +5181,10 @@
     <string name="building_3d_near_distance_content_desc">3D будівлі відстань поруч</string>
     <string name="building_3d_far_distance_content_desc">3D будівлі відстань далеко</string>
     <string name="gradient_range_type_relative">Відносний</string>
-    <string name="data_storage">Data storage</string>
+    <string name="data_storage">Сховище даних</string>
     <string name="main_storage">Основне сховище</string>
-    <string name="media_storage">Медіа сховище</string>
-    <string name="camera_folder">Папка камери</string>
+    <string name="media_storage">Сховище медіа</string>
+    <string name="camera_folder">Тека камери</string>
     <string name="media_storage_main_storage_descr">Файли зберігаються в приватній пам’яті програм. Вони приховані від Галереї та інших програм.</string>
     <string name="media_storage_shared_storage_descr">Файли зберігаються у загальнодоступних папках (Зображення, Фільми, Музика). Вони відображаються в Галереї та Google Фото.</string>
     <string name="shared_string_note">Примітка</string>
