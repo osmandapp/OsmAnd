@@ -133,6 +133,15 @@ public class TransportRouteResult {
 		return cfg.getChangeTime(current.route.getType(), next.route.getType());
 	}
 
+	// ferry ways joined by a transfer-only stop in the water are one ferry ride
+	public void mergeTransferOnlySegments() {
+		for (int i = segments.size() - 1; i > 0; i--) {
+			if (segments.get(i - 1).getEnd().isTransferOnly()) {
+				segments.set(i - 1, segments.get(i - 1).merge(segments.remove(i)));
+			}
+		}
+	}
+
 	public int getChanges() {
 		return segments.size() - 1;
 	}

@@ -119,9 +119,8 @@ public class PublicTransportRouteTestingTest {
 		List<String> actualResults = calculateRoute("ferry_kungshamn.obf", start, end);
 
 		List<String> expectedResults = new ArrayList<>();
-		expectedResults.add("Route 2 stops, 1 changes, 8.23 min: 65.76 m (1.3 min) to walk, 1705.76 m (6.9 min) to travel\n"
+		expectedResults.add("Route 1 stops, 0 changes, 8.23 min: 65.76 m (1.3 min) to walk, 1615.25 m (6.9 min) to travel\n"
 				+ " 1. K-S [5924502]: walk 50.9 m to '' and travel  to '' by Smögen - Kungshamn 1 stops \n"
-				+ " 2. K-S [5924455]: walk 0.0 m to '' and travel  to '' by Smögen - Kungshamn 1 stops \n"
 				+ " F. Walk 14.9 m to reach your destination");
 
 		Assert.assertEquals(expectedResults, actualResults);
@@ -136,9 +135,8 @@ public class PublicTransportRouteTestingTest {
 		List<String> actualResults = calculateRoute("ferry_kungshamn.obf", start, end);
 
 		List<String> expectedResults = new ArrayList<>();
-		expectedResults.add("Route 2 stops, 1 changes, 8.23 min: 65.76 m (1.3 min) to walk, 1705.76 m (6.9 min) to travel\n"
+		expectedResults.add("Route 1 stops, 0 changes, 8.23 min: 65.76 m (1.3 min) to walk, 1615.25 m (6.9 min) to travel\n"
 				+ " 1. K-S [5924455]: walk 14.9 m to '' and travel  to '' by Kungshamn - Smögen 1 stops \n"
-				+ " 2. K-S [5924502]: walk 0.0 m to '' and travel  to '' by Kungshamn - Smögen 1 stops \n"
 				+ " F. Walk 50.9 m to reach your destination");
 
 		Assert.assertEquals(expectedResults, actualResults);

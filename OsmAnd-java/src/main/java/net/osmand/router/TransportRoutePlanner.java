@@ -349,6 +349,7 @@ public class TransportRoutePlanner {
 				}
 				r.getSegments().get(i).alternatives.addAll(alts.values());
 			}
+			r.mergeTransferOnlySegments(); // after all filtering: only changes how the result is presented
 		}
 
 		return lst;
@@ -472,6 +473,29 @@ public class TransportRoutePlanner {
 		
 		public double getTravelTime() {
 			return travelTime;
+		}
+
+		// continue this segment with the next one, skipping the transfer stop between them
+		TransportRouteResultSegment merge(TransportRouteResultSegment next) {
+			List<TransportStop> stops = new ArrayList<>(getTravelStops().subList(0, end - start));
+			stops.addAll(next.getTravelStops().subList(1, next.end - next.start + 1));
+			List<Way> ways = new ArrayList<>();
+			for (Way w : route.getForwardWays()) {
+				ways.add(new Way(w, w.getId()));
+			}
+			for (Way w : next.route.getForwardWays()) {
+				ways.add(new Way(w, w.getId()));
+			}
+			TransportRouteResultSegment s = new TransportRouteResultSegment();
+			s.route = new TransportRoute(route, stops, ways);
+			s.start = 0;
+			s.end = stops.size() - 1;
+			s.walkDist = walkDist;
+			s.walkTime = walkTime;
+			s.depTime = depTime;
+			s.travelTime = travelTime + next.travelTime;
+			s.travelDistApproximate = travelDistApproximate + next.travelDistApproximate;
+			return s;
 		}
 		
 		public TransportStop getStart() {
@@ -737,6 +761,7 @@ public class TransportRoutePlanner {
 			if (ntrr.alternativeRoutes != null && ntrr.alternativeRoutes.length > 0) {
 				trr.alternativeRoutes = convertToTransportRoutingResult(ntrr.alternativeRoutes, cfg);
 			}
+			trr.mergeTransferOnlySegments();
 
 			convertedRes.add(trr);
 		}
