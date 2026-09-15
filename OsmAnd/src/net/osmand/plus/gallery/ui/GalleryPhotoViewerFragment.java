@@ -2,6 +2,7 @@ package net.osmand.plus.gallery.ui;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.OneShotPreDrawListener;
 import androidx.fragment.app.Fragment;
 
 import net.osmand.PlatformUtil;
@@ -22,6 +24,7 @@ import net.osmand.plus.base.BaseFullScreenFragment;
 import net.osmand.plus.gallery.controller.GalleryPagerController;
 import net.osmand.plus.gallery.model.GalleryItem;
 import net.osmand.plus.gallery.ui.imageview.GalleryImageView;
+import net.osmand.plus.gallery.ui.viewer.MediaViewerPage;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.InsetTarget.Type;
 import net.osmand.plus.utils.InsetTargetsCollection;
@@ -34,7 +37,7 @@ import org.apache.commons.logging.Log;
 
 import java.util.List;
 
-public class GalleryPhotoViewerFragment extends BaseFullScreenFragment {
+public class GalleryPhotoViewerFragment extends BaseFullScreenFragment implements MediaViewerPage {
 
 	private static final Log LOG = PlatformUtil.getLog(GalleryPhotoViewerFragment.class);
 
@@ -82,6 +85,33 @@ public class GalleryPhotoViewerFragment extends BaseFullScreenFragment {
 		InsetTargetsCollection collection = super.getInsetTargets();
 		collection.removeType(Type.ROOT_INSET);
 		return collection;
+	}
+
+	@Nullable
+	@Override
+	public RectF contentRect() {
+		return imageView != null ? imageView.getDisplayedImageRect() : null;
+	}
+
+	@Override
+	public boolean canScrollVertically(int direction) {
+		return imageView != null && imageView.canScrollVertically(direction);
+	}
+
+	@Override
+	public void onPreviewSettled() {
+		if (imageView != null) {
+			imageView.animateToFit();
+		}
+	}
+
+	private void notifyContentChanged() {
+		OneShotPreDrawListener.add(imageView, () -> {
+			Fragment parent = getParentFragment();
+			if (parent instanceof GalleryPhotoPagerFragment fragment) {
+				fragment.onPageContentChanged(this);
+			}
+		});
 	}
 
 	private void setupImageView(@NonNull ViewGroup view) {
@@ -133,6 +163,7 @@ public class GalleryPhotoViewerFragment extends BaseFullScreenFragment {
 				Drawable next = new BitmapDrawable(imageView.getResources(), bitmap);
 
 				AndroidUiHelper.crossFadeDrawables(imageView, previous, next);
+				notifyContentChanged();
 
 				downloadFullImage(mediaItem, false);
 			}
@@ -158,6 +189,7 @@ public class GalleryPhotoViewerFragment extends BaseFullScreenFragment {
 				Drawable next = new BitmapDrawable(imageView.getResources(), bitmap);
 
 				AndroidUiHelper.crossFadeDrawables(imageView, previous, next);
+				notifyContentChanged();
 			}
 
 			@Override
@@ -184,6 +216,7 @@ public class GalleryPhotoViewerFragment extends BaseFullScreenFragment {
 				Drawable next = new BitmapDrawable(imageView.getResources(), bitmap);
 
 				AndroidUiHelper.crossFadeDrawables(imageView, previous, next);
+				notifyContentChanged();
 			}
 
 			@Override

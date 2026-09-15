@@ -16,6 +16,8 @@ class GalleryGridItemDecorator(
 
 	private val standardItemOffsetInPx = AndroidUtils.dpToPx(app, 6f)
 
+	val spanResizableInset: Int = AndroidUtils.dpToPx(app, GRID_SCREEN_ITEM_SPACE_DP.toFloat())
+
 	override fun getItemOffsets(
 		outRect: Rect,
 		view: View,

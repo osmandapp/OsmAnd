@@ -54,6 +54,7 @@ import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.widgets.popup.OsmAndDropdownMenu
 import net.osmand.plus.widgets.popup.OsmAndDropdownMenuColors
 import net.osmand.plus.widgets.popup.OsmAndDropdownMenuOption
+import net.osmand.plus.widgets.popup.OsmAndDropdownMenuSelectionStyle
 
 class ChipsLayout @JvmOverloads constructor(
 	context: Context,
@@ -94,7 +95,8 @@ class ChipsLayout @JvmOverloads constructor(
 		@JvmField var showDropDownIconWhenDisabled: Boolean = false,
 		@JvmField var onClickListener: OnChipClickListener? = null,
 		@JvmField var onDropdownItemClickListener: OnDropdownItemClickListener? = null,
-		@JvmField var contentDescription: String? = null
+		@JvmField var contentDescription: String? = null,
+		@JvmField var selectionStyle: OsmAndDropdownMenuSelectionStyle = OsmAndDropdownMenuSelectionStyle.RADIO
 	) {
 		fun updateContent(chip: ChipData) {
 			iconId = chip.iconId
@@ -111,6 +113,7 @@ class ChipsLayout @JvmOverloads constructor(
 			onClickListener = chip.onClickListener
 			onDropdownItemClickListener = chip.onDropdownItemClickListener
 			contentDescription = chip.contentDescription
+			selectionStyle = chip.selectionStyle
 		}
 	}
 
@@ -127,7 +130,8 @@ class ChipsLayout @JvmOverloads constructor(
 		dropdownItems: List<DropdownItem> = emptyList(),
 		showDropDownIconWhenDisabled: Boolean = false,
 		onDropdownItemClickListener: OnDropdownItemClickListener? = null,
-		contentDescription: String? = null
+		contentDescription: String? = null,
+		selectionStyle: OsmAndDropdownMenuSelectionStyle = OsmAndDropdownMenuSelectionStyle.RADIO
 	) : ChipData(
 		id = id,
 		iconId = iconId,
@@ -142,7 +146,8 @@ class ChipsLayout @JvmOverloads constructor(
 		dropdownItems = dropdownItems,
 		showDropDownIconWhenDisabled = showDropDownIconWhenDisabled,
 		onDropdownItemClickListener = onDropdownItemClickListener,
-		contentDescription = contentDescription
+		contentDescription = contentDescription,
+		selectionStyle = selectionStyle
 	)
 
 	class DropdownItem @JvmOverloads constructor(
@@ -406,7 +411,8 @@ private fun ChipAnchor(
 					selected = activeColor,
 					control = inActiveColor
 				),
-				title = if (chip.menuTitleId != 0) stringResource(chip.menuTitleId) else null
+				title = if (chip.menuTitleId != 0) stringResource(chip.menuTitleId) else null,
+				selectionStyle = chip.selectionStyle
 			)
 		}
 	}

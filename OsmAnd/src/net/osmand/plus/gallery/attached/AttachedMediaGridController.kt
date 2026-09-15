@@ -25,6 +25,7 @@ import net.osmand.plus.gallery.model.GallerySortMode
 import net.osmand.plus.gallery.model.GalleryToolbarAction
 import net.osmand.plus.gallery.model.MediaHolder
 import net.osmand.plus.gallery.ui.GalleryGridFragment
+import net.osmand.plus.plugins.audionotes.library.MediaDialogs
 import net.osmand.plus.myplaces.favorites.FavoriteGroup
 import net.osmand.plus.settings.backend.backup.exporttype.AttachedMediaExportType
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType
@@ -162,6 +163,8 @@ class AttachedMediaGridController(
 		return when (sortMode) {
 			GallerySortMode.NAME_A_Z -> media.sortedWith(byName)
 			GallerySortMode.NAME_Z_A -> media.sortedWith(byName.reversed())
+			GallerySortMode.SIZE_LARGE_SMALL -> media.sortedByDescending { metadataOf(it)?.sizeBytes ?: Long.MIN_VALUE }
+			GallerySortMode.SIZE_SMALL_LARGE -> media.sortedBy { metadataOf(it)?.sizeBytes ?: Long.MAX_VALUE }
 			GallerySortMode.LAST_MODIFIED,
 			GallerySortMode.NEWEST_FIRST ->
 				media.sortedByDescending { metadataOf(it)?.lastModifiedTimeMs ?: Long.MIN_VALUE }
@@ -276,6 +279,26 @@ class AttachedMediaGridController(
 		val nightMode = view?.isNightMode() ?: false
 		val iconColor = ColorUtilities.getDefaultIconColor(app, nightMode)
 		val items = listOf(
+			PopUpMenuItem.Builder(app)
+				.setTitleId(R.string.shared_string_detach)
+				.setIcon(app.uiUtilities.getPaintedIcon(R.drawable.ic_action_attachment_remove, iconColor))
+				.setOnClickListener {
+					val activity = view?.getActivity()
+					val links = getSelectedLinks()
+					if (activity != null && links.isNotEmpty()) {
+						MediaDialogs.detach(activity, links, nightMode) {
+							AttachedMediaDataHelper(app).removeMediaLinks(target, links, false) { success ->
+								app.runInUIThread {
+									if (!success) app.showShortToastMessage(R.string.media_detach_failed)
+									exitSelectionMode()
+									onMediaChanged()
+									app.galleryHelper.mediaLibraryRepository.refresh()
+								}
+								true
+							}
+						}
+					}
+				}.create(),
 			PopUpMenuItem.Builder(app)
 				.setTitleId(R.string.shared_string_export)
 				.setIcon(app.uiUtilities.getPaintedIcon(R.drawable.ic_action_export, iconColor))

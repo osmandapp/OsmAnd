@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.PointF;
+import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.AttributeSet;
@@ -465,6 +466,42 @@ public class GalleryImageView extends AppCompatImageView {
 		return true;
 	}
 
+	@Override
+	public boolean canScrollVertically(int direction) {
+		currentMatrix.getValues(matrix);
+		float y = matrix[Matrix.MTRANS_Y];
+
+		if (getImageHeight() <= viewHeight + 1) {
+			return false;
+
+		} else if (y >= -1 && direction < 0) {
+			return false;
+
+		} else if (Math.abs(y) + viewHeight + 1 >= getImageHeight() && direction > 0) {
+			return false;
+		}
+
+		return true;
+	}
+
+	@Nullable
+	public RectF getDisplayedImageRect() {
+		Drawable drawable = getDrawable();
+		if (drawable == null || drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0
+				|| viewWidth == 0 || viewHeight == 0) {
+			return null;
+		}
+		RectF rect = new RectF(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+		currentMatrix.mapRect(rect);
+		return rect;
+	}
+
+	public void animateToFit() {
+		if (isZoomed() && state == State.NONE && onDrawReady) {
+			compatPostOnAnimation(new DoubleTapZoom(minScale, (float) viewWidth / 2, (float) viewHeight / 2, false));
+		}
+	}
+
 	private void scaleImage(double deltaScale, float focusX, float focusY, boolean stretchImageToFinal) {
 		float lowerScale, upperScale;
 		if (stretchImageToFinal) {
@@ -569,6 +606,7 @@ public class GalleryImageView extends AppCompatImageView {
 						break;
 					case MotionEvent.ACTION_UP:
 					case MotionEvent.ACTION_POINTER_UP:
+					case MotionEvent.ACTION_CANCEL:
 						setState(State.NONE);
 						break;
 				}

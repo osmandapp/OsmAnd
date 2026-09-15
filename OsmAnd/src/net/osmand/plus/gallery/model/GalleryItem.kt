@@ -2,13 +2,17 @@ package net.osmand.plus.gallery.model
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import android.graphics.drawable.Drawable
 import net.osmand.plus.R
 import net.osmand.shared.media.domain.MediaItem
+import net.osmand.shared.media.domain.MediaType
 
 /**
  * Represents typed presentation items displayed by GalleryGridAdapter.
  */
 sealed class GalleryItem {
+	data class GroupHeader(val type: MediaType, val collapsed: Boolean) : GalleryItem()
+	data object Spacer : GalleryItem()
 
 	data class Media(
 		val mediaItem: MediaItem,
@@ -39,14 +43,18 @@ sealed class GalleryItem {
 	) : GalleryItem()
 
 	data class MediaStats(
-		val text: String
+		val text: String,
+		val sectionFooter: Boolean = false
 	) : GalleryItem()
 }
 
 data class GalleryMediaPresentation(
 	val description: String? = null,
-	val durationLabel: String? = null
+	val durationLabel: String? = null,
+	val attachment: AttachmentLine? = null
 )
+
+data class AttachmentLine(val iconDrawable: Drawable?, val name: String, val extraCount: Int)
 
 data class GalleryAction(
 	val id: String
