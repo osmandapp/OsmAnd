@@ -56,6 +56,7 @@ import net.osmand.plus.render.TravelRendererHelper;
 import net.osmand.plus.render.TravelRendererHelper.OnFileVisibilityChangeListener;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchWikiItem;
 import net.osmand.plus.settings.enums.ThemeUsageContext;
 import net.osmand.plus.track.clickable.ClickableWayHelper;
@@ -76,6 +77,7 @@ import net.osmand.plus.widgets.WebViewEx;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
+import net.osmand.search.core.SearchResult;
 import net.osmand.shared.util.ImageLoaderCallback;
 import net.osmand.shared.util.LoadingImage;
 import net.osmand.shared.util.NetworkImageLoader;
@@ -627,7 +629,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	public void collectAmenitiesFromPoint(@NonNull MapSelectionResult result) {
 		PointF point = result.getPoint();
 		RotatedTileBox tileBox = result.getTileBox();
-		List<Amenity> objects = data.getDisplayedResults();
+		List<Amenity> objects = customObjectsDelegate != null
+				? customObjectsDelegate.getMapObjects() : data.getDisplayedResults();
 
 		if (tileBox.getZoom() >= START_ZOOM && !Algorithms.isEmpty(objects)) {
 			MapRendererView mapRenderer = getMapRenderer();
@@ -652,7 +655,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 							result.collect(amenity, this);
 							break;
 						}
-						result.collect(amenity, this);
+						result.collect(amenity instanceof SearchResultAmenity a ? a.getSearchResult() : amenity, this);
 					}
 				}
 			} catch (IndexOutOfBoundsException e) {
@@ -1055,6 +1058,9 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 	@Override
 	public PointDescription getObjectName(Object o) {
+		if (o instanceof SearchResult searchResult) {
+			return QuickSearchListItem.getPointDescriptionObject(app, searchResult).first;
+		}
 		Amenity amenity = getAmenity(o);
 		return amenity != null ? new PointDescription(POINT_TYPE_POI, getAmenityName(amenity)) : null;
 	}
@@ -1105,12 +1111,18 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			return renderedObject.getLatLon();
 		} else if (object instanceof MapObject mapObject) {
 			return mapObject.getLocation();
+		} else if (object instanceof SearchResult searchResult) {
+			return searchResult.location;
 		}
 		return null;
 	}
 
 	@Override
 	public boolean showMenuAction(@Nullable Object object) {
+		if (object instanceof SearchResult searchResult) {
+			ContextMenuLayer contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
+			return contextMenuLayer != null && contextMenuLayer.showContextMenu(searchResult);
+		}
 		Amenity amenity = getAmenity(object);
 		MapActivity activity = view.getMapActivity();
 		if (activity != null && amenity != null) {
@@ -1340,5 +1352,19 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	@Override
 	public long getPointOrder(Object object) {
 		return isTopPlace(object) ? getTopPlaceBaseOrder() : getPointsOrder();
+	}
+
+	public static class SearchResultAmenity extends Amenity {
+
+		private final SearchResult searchResult;
+
+		public SearchResultAmenity(@NonNull SearchResult searchResult) {
+			this.searchResult = searchResult;
+		}
+
+		@NonNull
+		public SearchResult getSearchResult() {
+			return searchResult;
+		}
 	}
 }
