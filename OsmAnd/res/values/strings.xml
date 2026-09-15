@@ -11,6 +11,15 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="gpx_line_style_desc_unavailable_for_color">Dashed and dotted line styles are not available for non-solid track color.</string>
+	<string name="gpx_color_unavailable_for_line_style">This coloring is not available for a non-solid line style.</string>
+	<string name="gpx_color_desc_unavailable_for_style">Only solid track color is available for a dashed or dotted line style.</string>
+	<string name="gpx_line_style">Line style</string>
+	<string name="gpx_line_style_solid">Solid</string>
+	<string name="gpx_line_style_dashed">Dashed</string>
+	<string name="gpx_line_style_dotted">Dotted</string>
+<!--	<string name="gpx_dotted_line">Dotted line</string>-->
+<!--	<string name="gpx_dashed_line">Dashed line</string>-->
 	<string name="astro_eclipse_column_below_horizon">Below horizon</string>
 	<string name="quick_action_add_track">Add track</string>
 	<string name="quick_action_tracks_select_descr">Add one or more tracks to show or hide them on the map with a single tap.</string>
