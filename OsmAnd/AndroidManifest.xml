@@ -87,8 +87,7 @@
 		android:theme="@style/OsmandDarkTheme" android:restoreAnyVersion="true" android:largeHeap="true"
 		android:supportsRtl="true" android:usesCleartextTraffic="true"
 		android:hasFragileUserData="true" android:requestLegacyExternalStorage="true"
-		android:localeConfig="@xml/locales_config"
-		android:enableOnBackInvokedCallback="false">
+		android:localeConfig="@xml/locales_config">
 
 		<property android:name="android.window.PROPERTY_COMPAT_ALLOW_RESTRICTED_RESIZABILITY" android:value="true" />
 

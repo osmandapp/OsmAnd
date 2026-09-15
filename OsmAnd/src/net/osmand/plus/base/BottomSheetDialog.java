@@ -1,5 +1,6 @@
 package net.osmand.plus.base;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -9,13 +10,12 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
-import androidx.activity.ComponentDialog;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
 
-public class BottomSheetDialog extends ComponentDialog {
+public class BottomSheetDialog extends Dialog {
 
 	private boolean cancelable = true;
 	private boolean canceledOnTouchOutside = true;
@@ -31,9 +31,9 @@ public class BottomSheetDialog extends ComponentDialog {
 	}
 
 	protected BottomSheetDialog(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener) {
-		this(context, 0);
-		setCancelable(cancelable);
-		setOnCancelListener(cancelListener);
+		super(context, cancelable, cancelListener);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		this.cancelable = cancelable;
 	}
 
 	@Override

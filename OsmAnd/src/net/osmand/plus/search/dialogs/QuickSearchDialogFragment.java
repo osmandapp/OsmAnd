@@ -712,14 +712,15 @@ public class QuickSearchDialogFragment extends BaseFullScreenDialogFragment impl
 		}
 	}
 
+	@NonNull
 	@Override
-	protected boolean isBackPressedCallbackEnabled() {
-		return true;
-	}
-
-	@Override
-	protected void handleBackPressed() {
-		onBackButtonPressed();
+	public Dialog createDialog(Bundle savedInstanceState) {
+		return new Dialog(requireActivity(), getTheme()) {
+			@Override
+			public void onBackPressed() {
+				onBackButtonPressed();
+			}
+		};
 	}
 
 	private void onBackButtonPressed() {

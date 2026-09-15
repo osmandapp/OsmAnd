@@ -3,6 +3,7 @@ package net.osmand.plus.configmap.tracks;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab.OVERVIEW;
 import static net.osmand.plus.utils.FileUtils.RenameCallback;
 
+import android.app.Dialog;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -98,14 +99,15 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 		return nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
 	}
 
+	@NonNull
 	@Override
-	protected boolean isBackPressedCallbackEnabled() {
-		return true;
-	}
-
-	@Override
-	protected void handleBackPressed() {
-		onBackPressed();
+	public Dialog createDialog(@Nullable Bundle savedInstanceState) {
+		return new Dialog(requireActivity(), getThemeId()) {
+			@Override
+			public void onBackPressed() {
+				TracksTabsFragment.this.onBackPressed();
+			}
+		};
 	}
 
 	@Nullable

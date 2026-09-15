@@ -1,5 +1,6 @@
 package net.osmand.plus.myplaces.tracks.dialogs
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -69,6 +70,14 @@ class OrganizeTracksByFragment : BaseFullScreenDialogFragment(), IAskRefreshDial
 
 	override fun getStatusBarColorId(): Int {
 		return ColorUtilities.getStatusBarSecondaryColorId(nightMode)
+	}
+
+	override fun createDialog(savedInstanceState: Bundle?): Dialog {
+		return object : Dialog(requireContext(), themeId) {
+			override fun onBackPressed() {
+				dismiss()
+			}
+		}
 	}
 
 	override fun onCreateView(

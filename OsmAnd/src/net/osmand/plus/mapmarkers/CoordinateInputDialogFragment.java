@@ -202,24 +202,19 @@ public class CoordinateInputDialogFragment extends BaseFullScreenDialogFragment 
 				getChildFragmentManager(), getGpx().getPointsSize(), createSaveAsTrackFragmentListener());
 	}
 
-	@Override
-	protected boolean isBackPressedCallbackEnabled() {
-		return true;
-	}
-
-	@Override
-	protected void handleBackPressed() {
-		if (isOsmandKeyboardCurrentlyVisible()) {
-			changeOsmandKeyboardVisibility(false);
-		} else {
-			quit();
-		}
-	}
-
 	@NonNull
 	@Override
 	public Dialog createDialog(Bundle savedInstanceState) {
-		Dialog dialog = super.createDialog(savedInstanceState);
+		Dialog dialog = new Dialog(requireActivity(), getTheme()) {
+			@Override
+			public void onBackPressed() {
+				if (isOsmandKeyboardCurrentlyVisible()) {
+					changeOsmandKeyboardVisibility(false);
+				} else {
+					quit();
+				}
+			}
+		};
 		Window window = dialog.getWindow();
 		if (window != null) {
 			window.setSoftInputMode(SOFT_INPUT_STATE_HIDDEN);

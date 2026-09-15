@@ -24,7 +24,6 @@ import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView.ScaleType;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
@@ -144,12 +143,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	private OnItemClickListener adapterClickListener;
 
 	private boolean visible;
-	private final OnBackPressedCallback backPressedCallback = new OnBackPressedCallback(false) {
-		@Override
-		public void handleOnBackPressed() {
-			backPressed();
-		}
-	};
 	private final DashboardVisibilityStack visibleTypes = new DashboardVisibilityStack();
 	private final Map<DashboardType, Integer> lastKnownScrolls = new HashMap<>();
 	private ApplicationMode previousAppMode;
@@ -547,7 +540,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		mapActivity.getRoutingHelper().removeListener(this);
 		nightMode = getMyApplication().getDaynightHelper().isNightMode(ThemeUsageContext.OVER_MAP);
 		this.visible = visible;
-		updateBackPressedCallback();
+		mapActivity.updateBackPressedCallbackState();
 		updateVisibilityStack(type, visible);
 
 		ApplicationMode currentAppMode = getMyApplication().getSettings().APPLICATION_MODE.get();
@@ -1023,14 +1016,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	public boolean isVisible() {
 		return visible;
-	}
-
-	private void updateBackPressedCallback() {
-		backPressedCallback.remove();
-		backPressedCallback.setEnabled(visible);
-		if (visible) {
-			mapActivity.getOnBackPressedDispatcher().addCallback(mapActivity, backPressedCallback);
-		}
 	}
 
 	public boolean isCurrentType(@NonNull DashboardType... types) {

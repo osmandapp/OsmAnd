@@ -4,6 +4,7 @@ import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_CONTAINS;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -169,6 +170,17 @@ public class FavoritesSearchFragment extends BaseFullScreenDialogFragment {
 			listView.setAdapter(listAdapter);
 		}
 		openKeyboard();
+	}
+
+	@NonNull
+	@Override
+	public Dialog createDialog(Bundle savedInstanceState) {
+		return new Dialog(requireActivity(), getTheme()) {
+			@Override
+			public void onBackPressed() {
+				cancel();
+			}
+		};
 	}
 
 	@Override

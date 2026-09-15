@@ -11,7 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.widget.LinearLayout
-import androidx.activity.OnBackPressedCallback
 import androidx.annotation.ColorRes
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.graphics.Insets
@@ -39,7 +38,6 @@ import net.osmand.plus.base.BaseFullScreenFragment
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.poi.PoiUIFilter
-import net.osmand.plus.search.ShowQuickSearchMode
 import net.osmand.plus.search.listitems.QuickSearchListItem
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.InsetTarget
@@ -254,17 +252,6 @@ class ExplorePlacesFragment : BaseFullScreenFragment(), ExplorePlacesAdapter.Exp
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
-		requireActivity().onBackPressedDispatcher.addCallback(
-			viewLifecycleOwner,
-			object : OnBackPressedCallback(true) {
-				override fun handleOnBackPressed() {
-					if (!onBackPress()) {
-						mapActivity?.fragmentsHelper?.closeExplore()
-						mapActivity?.fragmentsHelper?.showQuickSearch(ShowQuickSearchMode.CURRENT, false)
-					}
-				}
-			}
-		)
 		if (savedInstanceState == null) {
 			hideList()
 		}

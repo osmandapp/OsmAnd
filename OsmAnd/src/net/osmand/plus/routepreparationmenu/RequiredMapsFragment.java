@@ -7,6 +7,7 @@ import static net.osmand.plus.utils.ColorUtilities.getActivityBgColor;
 import static net.osmand.plus.utils.ColorUtilities.getSecondaryIconColor;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
@@ -65,14 +66,15 @@ public class RequiredMapsFragment extends BaseFullScreenDialogFragment implement
 		return ColorUtilities.getStatusBarColorId(nightMode);
 	}
 
+	@NonNull
 	@Override
-	protected boolean isBackPressedCallbackEnabled() {
-		return true;
-	}
-
-	@Override
-	protected void handleBackPressed() {
-		closeDialog();
+	public Dialog createDialog(@Nullable Bundle savedInstanceState) {
+		return new Dialog(requireActivity(), getThemeId()) {
+			@Override
+			public void onBackPressed() {
+				closeDialog();
+			}
+		};
 	}
 
 	public void closeDialog() {

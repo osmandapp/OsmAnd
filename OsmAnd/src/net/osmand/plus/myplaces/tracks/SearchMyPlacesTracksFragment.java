@@ -74,10 +74,6 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	}
 
 	@Override
-	protected void setupFragment(View view) {
-	}
-
-	@Override
 	protected boolean isBackPressedCallbackEnabled() {
 		return true;
 	}

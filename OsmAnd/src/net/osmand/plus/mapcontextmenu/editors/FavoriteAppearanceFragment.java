@@ -3,7 +3,9 @@ package net.osmand.plus.mapcontextmenu.editors;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 import static net.osmand.plus.configmap.tracks.appearance.favorite.FavoriteAppearanceController.PROCESS_ID;
+import static net.osmand.shared.gpx.GpxUtilities.DEFAULT_ICON_NAME;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -94,9 +96,15 @@ public class FavoriteAppearanceFragment extends BaseFullScreenDialogFragment {
 		return ColorUtilities.getStatusBarColorId(nightMode);
 	}
 
+	@NonNull
 	@Override
-	protected boolean isBackPressedCallbackEnabled() {
-		return true;
+	public Dialog createDialog(@Nullable Bundle savedInstanceState) {
+		return new Dialog(requireActivity(), getThemeId()) {
+			@Override
+			public void onBackPressed() {
+				dismiss();
+			}
+		};
 	}
 
 	private void registerFavoriteAppearanceController() {

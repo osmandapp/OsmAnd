@@ -2,6 +2,7 @@ package net.osmand.plus.configmap.tracks.appearance;
 
 import static net.osmand.plus.configmap.tracks.appearance.DefaultAppearanceController.PROCESS_ID;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +50,17 @@ public class DefaultAppearanceFragment extends BaseFullScreenDialogFragment impl
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
 		return ColorUtilities.getStatusBarColorId(nightMode);
+	}
+
+	@NonNull
+	@Override
+	public Dialog createDialog(@Nullable Bundle savedInstanceState) {
+		return new Dialog(requireActivity(), getThemeId()) {
+			@Override
+			public void onBackPressed() {
+				dismiss();
+			}
+		};
 	}
 
 	@Override

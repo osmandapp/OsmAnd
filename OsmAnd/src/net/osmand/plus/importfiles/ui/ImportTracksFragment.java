@@ -6,6 +6,7 @@ import static net.osmand.plus.myplaces.MyPlacesActivity.GPX_TAB;
 import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 import static net.osmand.plus.myplaces.tracks.dialogs.AvailableTracksFragment.SELECTED_FOLDER_KEY;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
@@ -20,6 +21,7 @@ import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
@@ -114,6 +116,13 @@ public class ImportTracksFragment extends BaseFullScreenDialogFragment implement
 		if (Algorithms.isEmpty(selectedFolder)) {
 			selectedFolder = app.getAppPath(GPX_IMPORT_DIR).getAbsolutePath();
 		}
+
+		FragmentActivity activity = requireActivity();
+		activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+			public void handleOnBackPressed() {
+				showExitDialog();
+			}
+		});
 	}
 
 	@Override
@@ -121,14 +130,15 @@ public class ImportTracksFragment extends BaseFullScreenDialogFragment implement
 		return true;
 	}
 
+	@NonNull
 	@Override
-	protected boolean isBackPressedCallbackEnabled() {
-		return true;
-	}
-
-	@Override
-	protected void handleBackPressed() {
-		showExitDialog();
+	public Dialog createDialog(Bundle savedInstanceState) {
+		return new Dialog(requireContext(), getTheme()) {
+			@Override
+			public void onBackPressed() {
+				showExitDialog();
+			}
+		};
 	}
 
 	@Nullable

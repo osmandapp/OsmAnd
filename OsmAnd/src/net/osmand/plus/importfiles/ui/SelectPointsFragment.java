@@ -1,6 +1,7 @@
 package net.osmand.plus.importfiles.ui;
 
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -75,18 +76,19 @@ public class SelectPointsFragment extends BaseFullScreenDialogFragment implement
 		return true;
 	}
 
+	@NonNull
 	@Override
-	protected boolean isBackPressedCallbackEnabled() {
-		return true;
-	}
-
-	@Override
-	protected void handleBackPressed() {
-		if (selectedPointsChanged()) {
-			dismiss();
-		} else {
-			showSkipSelectionDialog();
-		}
+	public Dialog createDialog(Bundle savedInstanceState) {
+		return new Dialog(requireContext(), getTheme()) {
+			@Override
+			public void onBackPressed() {
+				if (selectedPointsChanged()) {
+					dismiss();
+				} else {
+					showSkipSelectionDialog();
+				}
+			}
+		};
 	}
 
 	@Nullable
