@@ -271,6 +271,15 @@ public class RouteResultPreparation {
 		justifyUTurns(ctx.leftSideNavigation, result);
 		avoidKeepForThroughMoving(result);
 		muteAndRemoveTurns(result, ctx);
+		for (int i = 1; i < result.size(); i++) {
+			RouteSegmentResult current = result.get(i);
+			TurnType turn = current.getTurnType();
+			// Preserve lanes added by turn merging, even if the junction itself has no turn:lanes tags.
+			if (turn != null && turn.getLanes() == null && getTurnString(current) == null
+					&& isObviousRoadContinuation(result.get(i - 1), current)) {
+				current.setTurnType(null);
+			}
+		}
 		addTurnInfoDescriptions(result);
 	}
 
@@ -1278,6 +1287,38 @@ public class RouteResultPreparation {
 		return 0;
 	}
 
+
+	private boolean isObviousRoadContinuation(RouteSegmentResult prev, RouteSegmentResult current) {
+		RouteDataObject from = prev.getObject();
+		RouteDataObject to = current.getObject();
+		String highway = from.getHighway();
+		if (highway == null || !highway.equals(to.getHighway()) || highway.endsWith("_link")
+				|| from.roundabout() || to.roundabout()
+				|| getTurnLanesString(prev) != null || getTurnLanesString(current) != null
+				|| (prev.getTurnType() != null && prev.getTurnType().getLanes() != null)
+				|| (from.getId() == to.getId() && prev.isForwardDirection() != current.isForwardDirection())) {
+			return false;
+		}
+		String ref = from.getRef("", false, prev.isForwardDirection());
+		String nextRef = to.getRef("", false, current.isForwardDirection());
+		boolean useRef = !Algorithms.isEmpty(ref) || !Algorithms.isEmpty(nextRef);
+		String identity = useRef ? ref : from.getName();
+		if (Algorithms.isEmpty(identity) || !identity.equals(useRef ? nextRef : to.getName())) {
+			return false;
+		}
+		List<RouteSegmentResult> attached = current.getAttachedRoutes(current.getStartPointIndex());
+		int priority = highwaySpeakPriority(highway);
+		for (RouteSegmentResult branch : attached) {
+			RouteDataObject road = branch.getObject();
+			String branchHighway = road.getHighway();
+			if (branchHighway == null || branchHighway.endsWith("_link") || road.roundabout()
+					|| getTurnLanesString(branch) != null || highwaySpeakPriority(branchHighway) <= priority
+					|| identity.equals(useRef ? road.getRef("", false, branch.isForwardDirection()) : road.getName())) {
+				return false;
+			}
+		}
+		return true;
+	}
 
 	private TurnType getTurnInfo(List<RouteSegmentResult> result, int i, boolean leftSide) {
 		if (i == 0) {
