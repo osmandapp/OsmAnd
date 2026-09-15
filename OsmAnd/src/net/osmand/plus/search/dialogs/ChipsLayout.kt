@@ -2,10 +2,8 @@ package net.osmand.plus.search.dialogs
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.TypedValue
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -13,7 +11,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
@@ -52,8 +49,8 @@ import net.osmand.plus.settings.enums.DayNightMode
 import net.osmand.plus.settings.enums.ThemeUsageContext
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.widgets.popup.OsmAndDropdownMenu
-import net.osmand.plus.widgets.popup.OsmAndDropdownMenuColors
 import net.osmand.plus.widgets.popup.OsmAndDropdownMenuOption
+import net.osmand.plus.widgets.popup.colorAttr
 
 class ChipsLayout @JvmOverloads constructor(
 	context: Context,
@@ -291,8 +288,11 @@ private fun ChipsLayoutContent(
 		colorScheme = lightColorScheme(
 			primary = activeColor,
 			surface = listBackground,
+			surfaceContainer = listBackground,
 			background = activityBackground,
-			onSurface = textColor(ChipsLayout.TextColorStyle.PRIMARY)
+			onSurface = textColor(ChipsLayout.TextColorStyle.PRIMARY),
+			onSurfaceVariant = iconColor(ChipsLayout.IconColorStyle.DEFAULT, nightMode),
+			outlineVariant = dividerColor
 		)
 	) {
 		Row(
@@ -397,15 +397,6 @@ private fun ChipAnchor(
 						onDropdownItemClick(chipId, itemId)
 					}
 				},
-				colors = OsmAndDropdownMenuColors(
-					background = listBackground,
-					divider = dividerColor,
-					text = textColor(ChipsLayout.TextColorStyle.PRIMARY),
-					secondaryText = textColor(ChipsLayout.TextColorStyle.SECONDARY),
-					icon = iconColor(ChipsLayout.IconColorStyle.DEFAULT, nightMode),
-					selected = activeColor,
-					control = inActiveColor
-				),
 				title = if (chip.menuTitleId != 0) stringResource(chip.menuTitleId) else null
 			)
 		}
@@ -550,18 +541,4 @@ private fun iconColor(style: ChipsLayout.IconColorStyle, nightMode: Boolean): Co
 		ChipsLayout.IconColorStyle.WARNING -> ColorUtilities.getWarningColorId(nightMode)
 	}
 	return Color(ContextCompat.getColor(context, colorId))
-}
-
-@Composable
-private fun colorAttr(attrId: Int): Color {
-	val context = LocalContext.current
-	val typedValue = TypedValue()
-	context.theme.resolveAttribute(attrId, typedValue, true)
-	return Color(
-		if (typedValue.resourceId != 0) {
-			ContextCompat.getColor(context, typedValue.resourceId)
-		} else {
-			typedValue.data
-		}
-	)
 }
