@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Context.MODE_ENABLE_WRITE_AHEAD_LOGGING
 import android.content.Context.MODE_PRIVATE
 import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteDatabase.CREATE_IF_NECESSARY
 import android.database.sqlite.SQLiteDatabase.ENABLE_WRITE_AHEAD_LOGGING
 import android.database.sqlite.SQLiteDatabase.OPEN_READONLY
@@ -12,6 +13,7 @@ import net.osmand.shared.api.SQLiteAPI.SQLiteConnection
 import net.osmand.shared.api.SQLiteAPI.SQLiteCursor
 import net.osmand.shared.api.SQLiteAPI.SQLiteStatement
 import net.osmand.shared.util.LoggerFactory
+import java.io.File
 
 class SQLiteAPIImpl(private val context: Context) : SQLiteAPI {
 
@@ -21,13 +23,45 @@ class SQLiteAPIImpl(private val context: Context) : SQLiteAPI {
 
 	override fun getOrCreateDatabase(name: String, readOnly: Boolean): SQLiteConnection? {
 		val db = try {
-			val mode = MODE_PRIVATE or (if (readOnly) 0 else MODE_ENABLE_WRITE_AHEAD_LOGGING)
-			context.openOrCreateDatabase(name, mode, null)
+			openDatabase(name, readOnly)
 		} catch (e: RuntimeException) {
 			log.error("Failed to get or create database", e)
 			null
 		}
 		return db?.let { SQLiteDatabaseWrapper(it) }
+	}
+
+	private fun openDatabase(name: String, readOnly: Boolean): SQLiteDatabase {
+		if (readOnly) {
+			openReadOnly(context.getDatabasePath(name))?.let { return it }
+		}
+		// openOrCreateDatabase() always opens read-write. Keep write-ahead logging on for every such
+		// open: without it the connection switches the file to a rollback journal and the next one
+		// switches it back, each time under an exclusive lock that starves the other connections
+		// until the busy timeout (OsmAnd-Issues #3331)
+		return context.openOrCreateDatabase(name, MODE_PRIVATE or MODE_ENABLE_WRITE_AHEAD_LOGGING, null)
+	}
+
+	/**
+	 * Opens an existing database read-only, or returns null when reads need a writable connection:
+	 * the file does not exist yet, or a hot journal left by an interrupted rollback-journal
+	 * transaction has to be rolled back first. SQLite reports the latter on the first read, not on
+	 * open, so the connection is probed with one before it is handed out.
+	 */
+	private fun openReadOnly(file: File): SQLiteDatabase? {
+		if (!file.exists()) {
+			return null
+		}
+		var db: SQLiteDatabase? = null
+		try {
+			db = SQLiteDatabase.openDatabase(file.path, null, OPEN_READONLY)
+			db.version
+			return db
+		} catch (e: SQLiteException) {
+			log.warn("Cannot use $file read-only, opening it writable: $e")
+			db?.close()
+			return null
+		}
 	}
 
 	inner class SQLiteDatabaseWrapper(private val ds: SQLiteDatabase) : SQLiteConnection {
