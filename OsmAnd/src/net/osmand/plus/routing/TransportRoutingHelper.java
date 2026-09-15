@@ -459,10 +459,7 @@ public class TransportRoutingHelper {
 
 	private static class RouteRecalculationTask implements Runnable {
 
-		// [FERRY_PT_PROBE] temporarily forced true so PT routing always goes through the
-		// instrumented Java TransportRoutePlanner regardless of whether the native library
-		// loads - remove once issue #17773 ferry PT routing is verified.
-		private static final boolean DISABLE_NATIVE = true;
+		private static final boolean DISABLE_NATIVE = true; // TODO #17773 temporary: native router has no ferry fixes yet
 		private final int MAX_WALKING_CNT = 4;
 		private final TransportRoutingHelper transportRoutingHelper;
 		private final RoutingHelper routingHelper;
@@ -544,7 +541,6 @@ public class TransportRoutingHelper {
 				return TransportRoutePlanner.convertToTransportRoutingResult(nativeRes, cfg);
 			} else {
 				log.info("Public transport. No native library present");
-				log.info("[FERRY_PT_PROBE] MARK about to call Java TransportRoutePlanner.buildRoute() build=MARKER-B1");
 				TransportRoutePlanner planner = new TransportRoutePlanner();
 				return planner.buildRoute(ctx, params.start, params.end);
 			}

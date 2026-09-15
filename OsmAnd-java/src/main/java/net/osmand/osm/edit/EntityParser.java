@@ -272,18 +272,9 @@ public class EntityParser {
 	}
 
 
-	public static TransportRoute parserRoute(Relation r, String ref){
+	public static TransportRoute parserRoute(Entity r, String ref){
 		TransportRoute rt = new TransportRoute();
 		parseMapObject(rt, r, r.getTags());
-		rt.setRef(ref);
-		return rt;
-	}
-
-	// Ferry (or other route=*) way without a wrapping public-transport relation:
-	// build a TransportRoute directly from the way, same id-derivation pattern as for a Relation.
-	public static TransportRoute parserRoute(Way w, String ref){
-		TransportRoute rt = new TransportRoute();
-		parseMapObject(rt, w, w.getTags());
 		rt.setRef(ref);
 		return rt;
 	}

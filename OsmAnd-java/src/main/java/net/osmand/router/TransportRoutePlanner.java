@@ -51,9 +51,6 @@ public class TransportRoutePlanner {
 		TLongObjectHashMap<TransportRouteSegment> endSegments = new TLongObjectHashMap<TransportRouteSegment>();
 		for (TransportRouteSegment s : endStops) {
 //			System.out.printf(" END %s %.3f - %d \n", s, s.distFromStart, s.getId()); 
-			if (s.getStop(s.segStart).isTransferOnly()) {
-				continue;
-			}
 			endSegments.put(s.getId(), s);
 		}
 		if (startStops.size() == 0) {
@@ -62,9 +59,6 @@ public class TransportRoutePlanner {
 		}
 		PriorityQueue<TransportRouteSegment> queue = new PriorityQueue<>(startStops.size(), new SegmentsComparator());
 		for (TransportRouteSegment r : startStops) {
-			if (r.getStop(r.segStart).isTransferOnly()) {
-				continue;
-			}
 			r.walkDist = (float) MapUtils.getDistance(r.getLocation(), start);
 			r.distFromStart = r.walkDist / ctx.cfg.walkSpeed;
 			if (TRACE_ONBOARD_ID != 0) {
@@ -111,12 +105,8 @@ public class TransportRoutePlanner {
 			double minDist = 0;
 			double travelDist = 0;
 
-			int seconds = segment.road.calcIntervalInSeconds();
-			// [FERRY_PT_PROBE] TEMP for issue #17773: interval/2 makes a standalone route=ferry PT route far more
-			// expensive than a bus riding the same ferry for free (Sandbanks Ferry is not found).
-			// TODO(#17773): make it symmetric (charge ferry hops of other routes too) and restore interval/2.
-			boolean useIntervalHalfAsWait = false;
-			double travelTime = (useIntervalHalfAsWait && seconds > 0) ? (double) seconds / 2 : ctx.cfg.getBoardingTime(segment.road.getType());
+			int seconds = 0; // TODO #17773 temporary disabled segment.road.calcIntervalInSeconds(): ferry loses to buses riding it for free
+			double travelTime = seconds > 0 ? (double) seconds / 2 : ctx.cfg.getBoardingTime(segment.road.getType());
 
 			final float routeTravelSpeed = ctx.cfg.getSpeedByRouteType(segment.road.getType());
 			if (routeTravelSpeed == 0) {
@@ -168,8 +158,7 @@ public class TransportRoutePlanner {
 						TransportStop changeStop = sgm.getStop(sgm.segStart);
 						if ((stop.isTransferOnly() || changeStop.isTransferOnly())
 								&& changeStop.getId().longValue() != stop.getId().longValue()) {
-							// transfer-only stop can't be reached on foot, only a change at the same stop
-							continue;
+							continue; // transfer-only stop can't be reached on foot
 						}
 						TransportRouteSegment nextSegment = new TransportRouteSegment(sgm);
 						nextSegment.parentRoute = segment;
@@ -244,18 +233,9 @@ public class TransportRoutePlanner {
 			updateCalculationProgress(ctx, queue);
 			
 		}
-		// [FERRY_PT_PROBE] TEMP debug filter for issue #17773: keep only routes that use a ferry.
-		// TODO(#17773): remove before commit - return prepareResults(ctx, results)
-		List<TransportRouteSegment> ferryResults = new ArrayList<TransportRouteSegment>();
-		for (TransportRouteSegment result : results) {
-			for (TransportRouteSegment cur = result; cur != null; cur = cur.parentRoute) {
-				if ("ferry".equals(cur.road.getType())) {
-					ferryResults.add(result);
-					break;
-				}
-			}
-		}
-		return prepareResults(ctx, ferryResults);
+		// TODO #17773 temporary: show only routes with ferries
+		results.removeIf(r -> !r.usesFerry());
+		return prepareResults(ctx, results);
 	}
 
 	private long segmentWithParentId(TransportRouteSegment segment, TransportRouteSegment parent) {
@@ -667,6 +647,10 @@ public class TransportRoutePlanner {
 			this.road = c.road;
 			this.segStart = c.segStart;
 			this.departureTime = c.departureTime;
+		}
+
+		boolean usesFerry() {
+			return "ferry".equals(road.getType()) || parentRoute != null && parentRoute.usesFerry();
 		}
 
 		public boolean wasVisited(TransportRouteSegment rrs) {

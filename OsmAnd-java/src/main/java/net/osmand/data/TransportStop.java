@@ -23,30 +23,9 @@ public class TransportStop extends MapObject {
 	private List<TransportStopExit> exits;
 	private List<TransportRoute> routes = null;
 	private TransportStopAggregated transportStopAggregated;
-	// TODO(#17773): marks a stop that was NOT present as a tagged real stop (e.g.
-	// amenity=ferry_terminal) in the source OSM data, but was force-created by the generator
-	// because it sits at the first/last node of an orphan route=ferry way (see
-	// IndexTransportCreator.indexTransportRouteFromWay / indexTransportRoute - "no stitching"
-	// design, way endpoints always become a stop so the router's shared-stop transfer search can
-	// chain adjacent orphan ferry ways). Used by TransportRoutePlanner to tell a real terminal
-	// (where ending/starting a trip is legitimate) apart from a synthetic stitching point (where
-	// it isn't) - and, in a follow-up task, to hide these synthetic points from the map/UI.
-	// Deliberately opt-in: only set true for stops we ourselves fabricated: a real, pre-existing
-	// tagged terminal must never end up flagged here, even if it happens to sit at a way endpoint.
-	private boolean syntheticTerminal;
-	// Synthetic stop that can't be reached on foot (e.g. a node in the water where two route=ferry
-	// ways meet): only a same-stop change between routes is allowed there, no walking start/finish/transfer.
-	private boolean transferOnly;
+	private boolean transferOnly; // not reachable on foot (e.g. junction of ferry ways in the water)
 
 	public TransportStop() {}
-
-	public boolean isSyntheticTerminal() {
-		return syntheticTerminal;
-	}
-
-	public void setSyntheticTerminal(boolean syntheticTerminal) {
-		this.syntheticTerminal = syntheticTerminal;
-	}
 
 	public boolean isTransferOnly() {
 		return transferOnly;
