@@ -188,7 +188,12 @@ public class LocalOperationHelper {
 		ITileSource src = (ITileSource) item.getAttachedObject();
 		ITileSource mapilaryCache = TileSourceManager.getMapillaryCacheSource();
 		ITileSource mapilaryVector = TileSourceManager.getMapillaryVectorSource();
-		if (src != null && (mapilaryVector.getName().equals(src.getName()) || mapilaryCache.getName().equals(src.getName()))) {
+		ITileSource panoramaxCache = TileSourceManager.getPanoramaxCacheSource();
+		ITileSource panoramaxVector = TileSourceManager.getPanoramaxVectorSource();
+		if (src != null && (mapilaryVector.getName().equals(src.getName())
+				|| mapilaryCache.getName().equals(src.getName())
+				|| panoramaxVector.getName().equals(src.getName())
+				|| panoramaxCache.getName().equals(src.getName()))) {
 			File current = item.getFile();
 			File parent = current.getParentFile();
 			if (parent == null) {

@@ -24,6 +24,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.aistracker.AisLoadTask;
 import net.osmand.plus.plugins.aistracker.AisTrackerPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
+import net.osmand.plus.plugins.panoramax.PanoramaxPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -400,6 +401,11 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 			MapillaryPlugin mapillaryPlugin = PluginsHelper.getPlugin(MapillaryPlugin.class);
 			if (mapillaryPlugin != null) {
 				mapillaryPlugin.MAPILLARY_FIRST_DIALOG_SHOWN.resetToDefault();
+			}
+
+			PanoramaxPlugin panoramaxPlugin = PluginsHelper.getPlugin(PanoramaxPlugin.class);
+			if (panoramaxPlugin != null) {
+				panoramaxPlugin.PANORAMAX_FIRST_DIALOG_SHOWN.resetToDefault();
 			}
 
 			app.showToastMessage(R.string.shared_string_ok);
