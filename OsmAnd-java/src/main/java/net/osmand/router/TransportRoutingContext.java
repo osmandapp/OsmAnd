@@ -59,7 +59,9 @@ public class TransportRoutingContext {
 	public List<TransportRouteSegment> getTransportStops(LatLon loc) throws IOException {
 		int y = MapUtils.get31TileNumberY(loc.getLatitude());
 		int x = MapUtils.get31TileNumberX(loc.getLongitude());
-		return getTransportStops(x, y, false, new ArrayList<TransportRouteSegment>());
+		List<TransportRouteSegment> res = getTransportStops(x, y, false, new ArrayList<TransportRouteSegment>());
+		res.removeIf(s -> s.getStop(s.segStart).isTransferOnly());
+		return res;
 	}
 
 	public List<TransportRouteSegment> getTransportStops(int x, int y, boolean change, List<TransportRouteSegment> res) throws IOException {

@@ -616,6 +616,12 @@ public class BinaryMapTransportReaderAdapter {
 			case OsmandOdb.TransportRouteStop.DY_FIELD_NUMBER :
 				dy[0] += codedIS.readSInt32();
 				break;
+			case OsmandOdb.TransportRouteStop.TRANSFERONLY_FIELD_NUMBER :
+				dataObject.setTransferOnly(codedIS.readBool());
+				break;
+			case OsmandOdb.TransportRouteStop.SYNTHETIC_FIELD_NUMBER :
+				dataObject.setSynthetic(codedIS.readBool());
+				break;
 			default:
 				skipUnknownField(t);
 				break;
@@ -710,6 +716,9 @@ public class BinaryMapTransportReaderAdapter {
 				TransportStopExit transportStopExit = readTransportStopExit(cleft, ctop, req, stringTable);
 				dataObject.addExit(transportStopExit);
 				codedIS.popLimit(oldLimit);
+				break;
+			case OsmandOdb.TransportStop.SYNTHETIC_FIELD_NUMBER :
+				dataObject.setSynthetic(codedIS.readBool());
 				break;
 			default:
 				skipUnknownField(t);

@@ -111,9 +111,7 @@ public class TransportRouteResult {
 					t += sts.getAvgStopIntervals()[k] * 10;
 				}
 			} else {
-				if (prev != null) {
-					t += cfg.getChangeTime(prev.route.getType(), s.route.getType());
-				}
+				t += getChangeTime(prev, s);
 				// part of s.getTravelTime()
 //				t += cfg.getBoardingTime(s.route.getType());
 				t += s.getTravelTime();
@@ -129,7 +127,7 @@ public class TransportRouteResult {
 
 
 	public int getChangeTime(TransportRouteResultSegment current, TransportRouteResultSegment next) {
-		if(next == null) {
+		if (current == null || next == null || current.getEnd().isTransferOnly()) {
 			return 0;
 		}
 		return cfg.getChangeTime(current.route.getType(), next.route.getType());

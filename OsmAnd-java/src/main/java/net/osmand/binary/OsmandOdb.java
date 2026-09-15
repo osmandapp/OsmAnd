@@ -39780,6 +39780,26 @@ public final class OsmandOdb {
      * </pre>
      */
     int getTravelTime();
+
+    // optional bool transferOnly = 9;
+    /**
+     * <code>optional bool transferOnly = 9;</code>
+     */
+    boolean hasTransferOnly();
+    /**
+     * <code>optional bool transferOnly = 9;</code>
+     */
+    boolean getTransferOnly();
+
+    // optional bool synthetic = 10;
+    /**
+     * <code>optional bool synthetic = 10;</code>
+     */
+    boolean hasSynthetic();
+    /**
+     * <code>optional bool synthetic = 10;</code>
+     */
+    boolean getSynthetic();
   }
   /**
    * Protobuf type {@code OsmAnd.OBF.TransportRouteStop}
@@ -39860,6 +39880,16 @@ public final class OsmandOdb {
             case 64: {
               bitField0_ |= 0x00000020;
               travelTime_ = input.readUInt32();
+              break;
+            }
+            case 72: {
+              bitField0_ |= 0x00000040;
+              transferOnly_ = input.readBool();
+              break;
+            }
+            case 80: {
+              bitField0_ |= 0x00000080;
+              synthetic_ = input.readBool();
               break;
             }
           }
@@ -40046,6 +40076,38 @@ public final class OsmandOdb {
       return travelTime_;
     }
 
+    // optional bool transferOnly = 9;
+    public static final int TRANSFERONLY_FIELD_NUMBER = 9;
+    private boolean transferOnly_;
+    /**
+     * <code>optional bool transferOnly = 9;</code>
+     */
+    public boolean hasTransferOnly() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional bool transferOnly = 9;</code>
+     */
+    public boolean getTransferOnly() {
+      return transferOnly_;
+    }
+
+    // optional bool synthetic = 10;
+    public static final int SYNTHETIC_FIELD_NUMBER = 10;
+    private boolean synthetic_;
+    /**
+     * <code>optional bool synthetic = 10;</code>
+     */
+    public boolean hasSynthetic() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional bool synthetic = 10;</code>
+     */
+    public boolean getSynthetic() {
+      return synthetic_;
+    }
+
     private void initFields() {
       id_ = 0L;
       dx_ = 0;
@@ -40053,6 +40115,8 @@ public final class OsmandOdb {
       name_ = 0;
       nameEn_ = 0;
       travelTime_ = 0;
+      transferOnly_ = false;
+      synthetic_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -40100,6 +40164,12 @@ public final class OsmandOdb {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeUInt32(8, travelTime_);
       }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeBool(9, transferOnly_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeBool(10, synthetic_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -40132,6 +40202,14 @@ public final class OsmandOdb {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(8, travelTime_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(9, transferOnly_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(10, synthetic_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -40261,6 +40339,10 @@ public final class OsmandOdb {
         bitField0_ = (bitField0_ & ~0x00000010);
         travelTime_ = 0;
         bitField0_ = (bitField0_ & ~0x00000020);
+        transferOnly_ = false;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        synthetic_ = false;
+        bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
 
@@ -40313,6 +40395,14 @@ public final class OsmandOdb {
           to_bitField0_ |= 0x00000020;
         }
         result.travelTime_ = travelTime_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.transferOnly_ = transferOnly_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.synthetic_ = synthetic_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -40346,6 +40436,12 @@ public final class OsmandOdb {
         }
         if (other.hasTravelTime()) {
           setTravelTime(other.getTravelTime());
+        }
+        if (other.hasTransferOnly()) {
+          setTransferOnly(other.getTransferOnly());
+        }
+        if (other.hasSynthetic()) {
+          setSynthetic(other.getSynthetic());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -40684,6 +40780,72 @@ public final class OsmandOdb {
         return this;
       }
 
+      // optional bool transferOnly = 9;
+      private boolean transferOnly_ ;
+      /**
+       * <code>optional bool transferOnly = 9;</code>
+       */
+      public boolean hasTransferOnly() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional bool transferOnly = 9;</code>
+       */
+      public boolean getTransferOnly() {
+        return transferOnly_;
+      }
+      /**
+       * <code>optional bool transferOnly = 9;</code>
+       */
+      public Builder setTransferOnly(boolean value) {
+        bitField0_ |= 0x00000040;
+        transferOnly_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool transferOnly = 9;</code>
+       */
+      public Builder clearTransferOnly() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        transferOnly_ = false;
+        onChanged();
+        return this;
+      }
+
+      // optional bool synthetic = 10;
+      private boolean synthetic_ ;
+      /**
+       * <code>optional bool synthetic = 10;</code>
+       */
+      public boolean hasSynthetic() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional bool synthetic = 10;</code>
+       */
+      public boolean getSynthetic() {
+        return synthetic_;
+      }
+      /**
+       * <code>optional bool synthetic = 10;</code>
+       */
+      public Builder setSynthetic(boolean value) {
+        bitField0_ |= 0x00000080;
+        synthetic_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool synthetic = 10;</code>
+       */
+      public Builder clearSynthetic() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        synthetic_ = false;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:OsmAnd.OBF.TransportRouteStop)
     }
 
@@ -40805,6 +40967,16 @@ public final class OsmandOdb {
      * </pre>
      */
     com.google.protobuf.ByteString getAdditionalNamePairs();
+
+    // optional bool synthetic = 23;
+    /**
+     * <code>optional bool synthetic = 23;</code>
+     */
+    boolean hasSynthetic();
+    /**
+     * <code>optional bool synthetic = 23;</code>
+     */
+    boolean getSynthetic();
 
     // repeated .OsmAnd.OBF.TransportStopExit exits = 9;
     /**
@@ -41003,6 +41175,11 @@ public final class OsmandOdb {
             case 66: {
               bitField0_ |= 0x00000020;
               additionalNamePairs_ = input.readBytes();
+              break;
+            }
+            case 184: {
+              bitField0_ |= 0x00000400;
+              synthetic_ = input.readBool();
               break;
             }
             case 74: {
@@ -41272,6 +41449,22 @@ public final class OsmandOdb {
       return additionalNamePairs_;
     }
 
+    // optional bool synthetic = 23;
+    public static final int SYNTHETIC_FIELD_NUMBER = 23;
+    private boolean synthetic_;
+    /**
+     * <code>optional bool synthetic = 23;</code>
+     */
+    public boolean hasSynthetic() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    /**
+     * <code>optional bool synthetic = 23;</code>
+     */
+    public boolean getSynthetic() {
+      return synthetic_;
+    }
+
     // repeated .OsmAnd.OBF.TransportStopExit exits = 9;
     public static final int EXITS_FIELD_NUMBER = 9;
     private java.util.List<net.osmand.binary.OsmandOdb.TransportStopExit> exits_;
@@ -41439,6 +41632,7 @@ public final class OsmandOdb {
       routes_ = java.util.Collections.emptyList();
       deletedRoutesIds_ = java.util.Collections.emptyList();
       routesIds_ = java.util.Collections.emptyList();
+      synthetic_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -41504,6 +41698,9 @@ public final class OsmandOdb {
       for (int i = 0; i < routesIds_.size(); i++) {
         output.writeUInt64(22, routesIds_.get(i));
       }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        output.writeBool(23, synthetic_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -41567,6 +41764,10 @@ public final class OsmandOdb {
         }
         size += dataSize;
         size += 2 * getRoutesIdsList().size();
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(23, synthetic_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -41709,6 +41910,8 @@ public final class OsmandOdb {
         bitField0_ = (bitField0_ & ~0x00000100);
         routesIds_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000200);
+        synthetic_ = false;
+        bitField0_ = (bitField0_ & ~0x00000400);
         return this;
       }
 
@@ -41785,6 +41988,10 @@ public final class OsmandOdb {
           bitField0_ = (bitField0_ & ~0x00000200);
         }
         result.routesIds_ = routesIds_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000400;
+        }
+        result.synthetic_ = synthetic_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -41874,6 +42081,9 @@ public final class OsmandOdb {
             routesIds_.addAll(other.routesIds_);
           }
           onChanged();
+        }
+        if (other.hasSynthetic()) {
+          setSynthetic(other.getSynthetic());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -42217,6 +42427,39 @@ public final class OsmandOdb {
       public Builder clearAdditionalNamePairs() {
         bitField0_ = (bitField0_ & ~0x00000020);
         additionalNamePairs_ = getDefaultInstance().getAdditionalNamePairs();
+        onChanged();
+        return this;
+      }
+
+      // optional bool synthetic = 23;
+      private boolean synthetic_ ;
+      /**
+       * <code>optional bool synthetic = 23;</code>
+       */
+      public boolean hasSynthetic() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <code>optional bool synthetic = 23;</code>
+       */
+      public boolean getSynthetic() {
+        return synthetic_;
+      }
+      /**
+       * <code>optional bool synthetic = 23;</code>
+       */
+      public Builder setSynthetic(boolean value) {
+        bitField0_ |= 0x00000400;
+        synthetic_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool synthetic = 23;</code>
+       */
+      public Builder clearSynthetic() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        synthetic_ = false;
         onChanged();
         return this;
       }

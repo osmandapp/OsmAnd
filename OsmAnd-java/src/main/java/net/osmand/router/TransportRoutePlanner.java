@@ -105,8 +105,11 @@ public class TransportRoutePlanner {
 			double minDist = 0;
 			double travelDist = 0;
 
-			int seconds = segment.road.calcIntervalInSeconds();
+			int seconds = 0; // TODO #17773 temporary disabled segment.road.calcIntervalInSeconds(): ferry loses to buses riding it for free
 			double travelTime = seconds > 0 ? (double) seconds / 2 : ctx.cfg.getBoardingTime(segment.road.getType());
+			if (segment.getStop(segment.segStart).isTransferOnly()) {
+				travelTime = 0; // same ferry continues through the junction in the water, no boarding
+			}
 
 			final float routeTravelSpeed = ctx.cfg.getSpeedByRouteType(segment.road.getType());
 			if (routeTravelSpeed == 0) {
@@ -135,7 +138,7 @@ public class TransportRoutePlanner {
 					int interval = sc.avgStopIntervals.get(ind - 1);
 					travelTime += interval * 10;
 				} else {
-					int stopTime = ctx.cfg.getStopTime(segment.road.getType());
+					int stopTime = stop.isTransferOnly() ? 0 : ctx.cfg.getStopTime(segment.road.getType());
 					travelTime += stopTime + segmentDist / routeTravelSpeed;
 				}
 				if (segment.distFromStart + travelTime > finishTime * ctx.cfg.increaseForAlternativesRoutes) {
@@ -155,14 +158,19 @@ public class TransportRoutePlanner {
 						if (ctx.visitedSegments.containsKey(segmentWithParentId(sgm, segment))) {
 							continue;
 						}
+						TransportStop changeStop = sgm.getStop(sgm.segStart);
+						if ((stop.isTransferOnly() || changeStop.isTransferOnly())
+								&& changeStop.getId().longValue() != stop.getId().longValue()) {
+							continue; // transfer-only stop can't be reached on foot
+						}
 						TransportRouteSegment nextSegment = new TransportRouteSegment(sgm);
 						nextSegment.parentRoute = segment;
 						nextSegment.parentStop = ind;
 						nextSegment.walkDist = MapUtils.getDistance(nextSegment.getLocation(), stop.getLocation());
 						nextSegment.parentTravelTime = travelTime;
 						nextSegment.parentTravelDist = travelDist;
-						double walkTime = nextSegment.walkDist / ctx.cfg.walkSpeed + 
-								ctx.cfg.getChangeTime(segment.road.getType(), sgm.road.getType());
+						double walkTime = nextSegment.walkDist / ctx.cfg.walkSpeed + (stop.isTransferOnly() ? 0 :
+								ctx.cfg.getChangeTime(segment.road.getType(), sgm.road.getType()));
 						nextSegment.distFromStart = segment.distFromStart + travelTime + walkTime;
 						nextSegment.nonce = nonce++;
 						if (ctx.cfg.useSchedule) {
@@ -228,6 +236,8 @@ public class TransportRoutePlanner {
 			updateCalculationProgress(ctx, queue);
 			
 		}
+		// TODO #17773 temporary: show only routes with ferries
+		results.removeIf(r -> !r.usesFerry());
 		return prepareResults(ctx, results);
 	}
 
@@ -640,6 +650,10 @@ public class TransportRoutePlanner {
 			this.road = c.road;
 			this.segStart = c.segStart;
 			this.departureTime = c.departureTime;
+		}
+
+		boolean usesFerry() {
+			return "ferry".equals(road.getType()) || parentRoute != null && parentRoute.usesFerry();
 		}
 
 		public boolean wasVisited(TransportRouteSegment rrs) {

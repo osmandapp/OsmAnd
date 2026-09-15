@@ -459,7 +459,7 @@ public class TransportRoutingHelper {
 
 	private static class RouteRecalculationTask implements Runnable {
 
-		private static final boolean DISABLE_NATIVE = false;
+		private static final boolean DISABLE_NATIVE = true; // TODO #17773 temporary: native router has no ferry fixes yet
 		private final int MAX_WALKING_CNT = 4;
 		private final TransportRoutingHelper transportRoutingHelper;
 		private final RoutingHelper routingHelper;
