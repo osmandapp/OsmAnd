@@ -39,6 +39,7 @@ public class MapWidgetRegistry {
 	private Map<WidgetsPanel, Set<MapWidgetInfo>> androidAutoWidgets = new HashMap<>();
 
 	private List<WidgetsRegistryListener> listeners = new ArrayList<>();
+	private List<WidgetsRegistryAndroidAutoListener> androdidAutolisteners = new ArrayList<>();
 
 	public MapWidgetRegistry(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -66,6 +67,7 @@ public class MapWidgetRegistry {
 
 	public void clearAndroidAutoWidgets() {
 		androidAutoWidgets.clear();
+		notifyAndroidAutoWidgetsCleared();
 	}
 
 	public void recreateAndroidAutoWidgets() {
@@ -138,6 +140,14 @@ public class MapWidgetRegistry {
 		listeners = CollectionUtils.removeFromList(listeners, listener);
 	}
 
+	public void addWidgetsRegistryAndroidAutoListener(@NonNull WidgetsRegistryAndroidAutoListener listener) {
+		androdidAutolisteners = CollectionUtils.addToList(androdidAutolisteners, listener);
+	}
+
+	public void removeWidgetsRegistryAndroidAutoListener(@NonNull WidgetsRegistryAndroidAutoListener listener) {
+		androdidAutolisteners = CollectionUtils.removeFromList(androdidAutolisteners, listener);
+	}
+
 	private void notifyWidgetRegistered(@NonNull MapWidgetInfo widgetInfo) {
 		if (!Algorithms.isEmpty(listeners)) {
 			for (WidgetsRegistryListener listener : listeners) {
@@ -146,9 +156,25 @@ public class MapWidgetRegistry {
 		}
 	}
 
+	private void notifyAndroidWidgetRegistered(@NonNull MapWidgetInfo widgetInfo) {
+		if (!Algorithms.isEmpty(androdidAutolisteners)) {
+			for (WidgetsRegistryAndroidAutoListener listener : androdidAutolisteners) {
+				listener.onWidgetRegistered(widgetInfo);
+			}
+		}
+	}
+
 	private void notifyWidgetsCleared() {
 		if (!Algorithms.isEmpty(listeners)) {
 			for (WidgetsRegistryListener listener : listeners) {
+				listener.onWidgetsCleared();
+			}
+		}
+	}
+
+	private void notifyAndroidAutoWidgetsCleared() {
+		if (!Algorithms.isEmpty(androdidAutolisteners)) {
+			for (WidgetsRegistryAndroidAutoListener listener : androdidAutolisteners) {
 				listener.onWidgetsCleared();
 			}
 		}
@@ -216,6 +242,11 @@ public class MapWidgetRegistry {
 	@Nullable
 	public MapWidgetInfo getWidgetInfoById(@NonNull String widgetId) {
 		for (MapWidgetInfo widgetInfo : getAllWidgets()) {
+			if (widgetId.equals(widgetInfo.key)) {
+				return widgetInfo;
+			}
+		}
+		for (MapWidgetInfo widgetInfo : getAllAndroidAutoWidgets()) {
 			if (widgetId.equals(widgetInfo.key)) {
 				return widgetInfo;
 			}
@@ -458,6 +489,11 @@ public class MapWidgetRegistry {
 		notifyWidgetRegistered(widgetInfo);
 	}
 
+	public void registerAndroidAutoWidget(@NonNull MapWidgetInfo widgetInfo) {
+		getWidgetsForPanel(widgetInfo.getWidgetPanel()).add(widgetInfo);
+		notifyAndroidWidgetRegistered(widgetInfo);
+	}
+
 	public void registerAllControls(@NonNull MapActivity mapActivity) {
 		ApplicationMode appMode = getSettings().getApplicationMode();
 		ScreenLayoutMode layoutMode = ScreenLayoutMode.getDefault(mapActivity);
@@ -474,7 +510,7 @@ public class MapWidgetRegistry {
 		List<MapWidgetInfo> infos = AndroidAutoWidgetsInitializer.createAllControls(app, appMode);
 		reorderAndroidAutoWidgets(infos);
 		for (MapWidgetInfo widgetInfo : infos) {
-			notifyWidgetRegistered(widgetInfo);
+			notifyAndroidWidgetRegistered(widgetInfo);
 		}
 	}
 
@@ -483,6 +519,14 @@ public class MapWidgetRegistry {
 	}
 
 	public interface WidgetsRegistryListener {
+		void onWidgetRegistered(@NonNull MapWidgetInfo widgetInfo);
+
+		void onWidgetVisibilityChanged(@NonNull MapWidgetInfo widgetInfo);
+
+		void onWidgetsCleared();
+	}
+
+	public interface WidgetsRegistryAndroidAutoListener {
 		void onWidgetRegistered(@NonNull MapWidgetInfo widgetInfo);
 
 		void onWidgetVisibilityChanged(@NonNull MapWidgetInfo widgetInfo);

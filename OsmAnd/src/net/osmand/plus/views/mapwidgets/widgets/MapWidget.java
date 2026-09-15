@@ -1,8 +1,8 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint.Style;
-import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +63,9 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 	@Nullable
 	protected ResolvedPanelAppearance androidAutoPanelAppearance;
 	protected boolean androidAutoNightMode;
+	private boolean isWidgetAALayoutNeeded = true;
+	protected float measuredAAHeight = 0f;
+	protected float measuredAAWidth = 0f;
 
 	public MapWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType,
 			@Nullable String customId, @Nullable WidgetsPanel panel) {
@@ -109,6 +112,7 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 			view = getView();
 		}
 	}
+
 	public void initAndroidAuto() {
 
 	}
@@ -143,7 +147,7 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 	}
 
 	protected void recreateInternalForAndroidAuto() {
-
+		initAndroidAuto();
 	}
 
 	protected void setupView(@NonNull View view) {
@@ -156,6 +160,7 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 		androidAutoPanelAppearance = appearance;
 		androidAutoNightMode = appearance.getNightMode();
 		onAndroidAutoPanelAppearanceChanged(appearance);
+		markAndroidAutoLayoutNeeded();
 	}
 
 	public void onAndroidAutoPanelAppearanceChanged(@NonNull ResolvedPanelAppearance appearance) {
@@ -166,12 +171,36 @@ public abstract class MapWidget implements PanelAppearanceConsumer {
 		return widgetType.supportsAndroidAuto;
 	}
 
-	public float measureHeightForAndroidAuto(int maxWidthPx) {
-		return 0f;
+	public float getMeasuredAAHeight() {
+		return measuredAAHeight;
 	}
+
+	public float getMeasuredAAWidth() {
+		return measuredAAWidth;
+	}
+
+//	public float measureHeightForAndroidAuto(int maxWidthPx) {
+//		return 0f;
+//	}
 
 	public void drawForAndroidAuto(@NonNull Canvas canvas, @NonNull DrawSettings drawSettings,
 								   float widgetWidthPx, float widgetHeightPx, boolean isRtl) {
+	}
+
+	public final void markAndroidAutoLayoutNeeded() {
+		isWidgetAALayoutNeeded = true;
+	}
+
+	public final void layoutAAIfNeeded(Context context, int desiredWidthPx, boolean isRtl) {
+		if (!isWidgetAALayoutNeeded) {
+			return;
+		}
+		isWidgetAALayoutNeeded = false;
+		doLayoutAAWidget(context, desiredWidthPx, isRtl);
+	}
+
+	protected void doLayoutAAWidget(Context context, int desiredWidthPx, boolean isRtl) {
+		// layout and set measuredAAHeight and measuredAAWidth in subclasses
 	}
 	// endregion
 

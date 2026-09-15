@@ -59,6 +59,7 @@ public abstract class TextInfoWidget extends MapWidget implements ISupportSidePa
 	protected String cachedText, cachedSmallText;
 	protected Rect cachedTextBounds = new Rect();
 	protected Rect cachedSmallTextBounds = new Rect();
+	protected Rect cachedIconBounds = new Rect();
 	protected TextPaint textPaint = new TextPaint();
 	protected TextPaint smallTextPaint = new TextPaint();
 	protected boolean shouldDrawAndroidAutoIcon;
@@ -178,7 +179,6 @@ public abstract class TextInfoWidget extends MapWidget implements ISupportSidePa
 
 	private void setText(String text) {
 		cachedText = text;
-		updateCachedTextBounds(cachedTextBounds, textPaint, cachedText);
         if (textView != null) {
             textView.setText(text);
         }
@@ -186,7 +186,6 @@ public abstract class TextInfoWidget extends MapWidget implements ISupportSidePa
 
 	private void setSmallText(String text) {
 		cachedSmallText = text;
-		updateCachedTextBounds(cachedSmallTextBounds, smallTextPaint, cachedSmallText);
 		if (smallTextView != null) {
 			smallTextView.setText(text);
 			if (smallTextViewShadow != null) {
@@ -291,19 +290,19 @@ public abstract class TextInfoWidget extends MapWidget implements ISupportSidePa
 
 	// region android auto
 	protected void updateCachedTextBounds(Rect bounds, TextPaint paint, String text) {
+		updateCachedTextBounds(bounds, paint, text, null);
+	}
+	protected void updateCachedTextBounds(Rect bounds, TextPaint paint, String text, Float lineSpacingExtra) {
 		bounds.setEmpty();
 		if (text != null) {
-			float desiredWidth = StaticLayout.getDesiredWidth(text, textPaint);
-			measureText(bounds, desiredWidth, text, textPaint, Gravity.START, null, 1);
-			paint.getTextBounds(text, 0, text.length(), bounds);
+			float desiredWidth = StaticLayout.getDesiredWidth(text, paint);
+			measureText(bounds, desiredWidth, text, paint, Gravity.START | Gravity.END, lineSpacingExtra, null,1);
 		}
 	}
 
 	protected void configureAAPaints(ResolvedPanelAppearance appearance) {
 		applyPrimaryTextAppearance(textPaint, appearance);
 		applySecondaryTextAppearance(smallTextPaint, appearance);
-		updateCachedTextBounds(cachedTextBounds, textPaint, cachedText);
-		updateCachedTextBounds(cachedSmallTextBounds, smallTextPaint, cachedSmallText);
 	}
 
 	protected float getPrimaryTextSizeAA() {
@@ -334,11 +333,11 @@ public abstract class TextInfoWidget extends MapWidget implements ISupportSidePa
 		textPaint.setTypeface(Typeface.create(Typeface.DEFAULT, typefaceStyle));
 	}
 
-
-	protected float findOptimalTextSize(
+	protected float findOptimalSingleLineTextSize(
 			CharSequence text, TextPaint paint,
 			int maxWidth, int maxHeight,
-			float minSize, float maxSize, float step
+			float minSize, float maxSize, float step,
+			Float lineSpacingExtra
 	) {
 		TextPaint testPaint = new TextPaint(paint);
 		float low = minSize;
@@ -346,14 +345,19 @@ public abstract class TextInfoWidget extends MapWidget implements ISupportSidePa
 		float optimal = minSize;
 
 		while (low <= high) {
-			float mid = ((int) ((low + high) / 2 / step)) * step;
+			float mid = Math.round((low + high)/2);
 			testPaint.setTextSize(mid);
 
-			StaticLayout layout = StaticLayout.Builder.obtain(text, 0, text.length(), testPaint, maxWidth)
-					.setIncludePad(false)
-					.build();
+			StaticLayout.Builder layoutBuilder = StaticLayout.Builder
+					.obtain(text, 0, text.length(), testPaint, Integer.MAX_VALUE)
+					.setIncludePad(false);
 
-			if (layout.getHeight() <= maxHeight) {
+			if (lineSpacingExtra != null) {
+				layoutBuilder.setLineSpacing(lineSpacingExtra, 1f);
+			}
+			StaticLayout layout =  layoutBuilder.build();
+
+			if (layout.getLineWidth(0) <= maxWidth && layout.getHeight() <= maxHeight) {
 				optimal = mid;
 				low = mid + step;
 			} else {
@@ -372,14 +376,14 @@ public abstract class TextInfoWidget extends MapWidget implements ISupportSidePa
 				text,
 				textPaint,
 				targetRect,
-				Gravity.START,
+				Gravity.START | Gravity.BOTTOM,
 				false,
 				0 ,
 				0,
 				0,
 				null,
-				null,
-				true);
+				null
+		);
 	}
 
 	protected void measureText(Rect outRect,
@@ -411,7 +415,7 @@ public abstract class TextInfoWidget extends MapWidget implements ISupportSidePa
 			layoutBuilder.setEllipsize(ellipsizeAt);
 		}
 		if (lineSpacingExtra != null) {
-			layoutBuilder.setLineSpacing(lineSpacingExtra, 1f)
+			layoutBuilder.setLineSpacing(lineSpacingExtra, 1f);
 		}
 
 		StaticLayout staticLayout = layoutBuilder.build();
@@ -429,8 +433,7 @@ public abstract class TextInfoWidget extends MapWidget implements ISupportSidePa
 			float maxTextSizePx,
 			float textSizeStepPx,
 			Float lineSpacingExtra,
-			TextUtils.TruncateAt ellipsizeAt,
-			boolean hardClip
+			TextUtils.TruncateAt ellipsizeAt
 	) {
 		int rectWidth = targetRect.width();
 		int rectHeight = targetRect.height();
@@ -438,10 +441,10 @@ public abstract class TextInfoWidget extends MapWidget implements ISupportSidePa
 		TextPaint workingPaint = new TextPaint(textPaint);
 
 		if (autoSize) {
-			float optimalSize = findOptimalTextSize(text,
+			float optimalSize = findOptimalSingleLineTextSize(text,
 					workingPaint,
 					rectWidth, rectHeight,
-					minTextSizePx, maxTextSizePx, textSizeStepPx);
+					minTextSizePx, maxTextSizePx, textSizeStepPx, lineSpacingExtra);
 			workingPaint.setTextSize(optimalSize);
 		}
 
@@ -464,6 +467,9 @@ public abstract class TextInfoWidget extends MapWidget implements ISupportSidePa
 				.setIncludePad(false);
 		if (ellipsizeAt != null) {
 			layoutBuilder.setEllipsize(ellipsizeAt);
+		}
+		if (lineSpacingExtra != null) {
+			layoutBuilder.setLineSpacing(lineSpacingExtra, 1f);
 		}
 
 		StaticLayout staticLayout = layoutBuilder.build();
@@ -489,11 +495,8 @@ public abstract class TextInfoWidget extends MapWidget implements ISupportSidePa
 		float finalY = targetRect.top + yOffset;
 
 		canvas.save();
-		if (hardClip) {
-			canvas.clipRect(targetRect);
-		}
-
-		canvas.translate(finalX, finalY);
+        canvas.clipRect(targetRect);
+        canvas.translate(finalX, finalY);
 		staticLayout.draw(canvas);
 		canvas.restore();
 	}

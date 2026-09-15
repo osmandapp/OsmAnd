@@ -284,7 +284,7 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 					if (activity != null) {
 						FragmentManager fragmentManager = activity.getSupportFragmentManager();
 						ApplicationMode appMode = settings.getApplicationMode();
-						SelectCopyAppModeBottomSheet.showInstance(fragmentManager, ConfigureWidgetsFragment.this, appMode);
+						SelectCopyAppModeBottomSheet.showInstance(fragmentManager, ConfigureWidgetsFragment.this, appMode, isAndroidAutoMode);
 					}
 				}).create());
 
@@ -364,7 +364,7 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 	private void copyFromProfile() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			SelectCopyAppModeBottomSheet.showInstance(activity.getSupportFragmentManager(), this, selectedAppMode);
+			SelectCopyAppModeBottomSheet.showInstance(activity.getSupportFragmentManager(), this, selectedAppMode, isAndroidAutoMode);
 		}
 	}
 
@@ -395,17 +395,21 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 				bottomButtonsShadow.setTranslationY(0f);
 			}
 		} else {
-			tabLayout.setVisibility(View.VISIBLE);
+			if (isTabLayoutAvailable()) {
+				tabLayout.setVisibility(View.VISIBLE);
+			}
 
 			params.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS);
 			tabLayout.setClickable(true);
 			tabLayout.setFocusable(true);
 			if (!updateWithAnimation) {
-				tabLayout.setAlpha(1f);
-				tabLayout.setTranslationY(0f);
+				if (isTabLayoutAvailable()) {
+					tabLayout.setAlpha(1f);
+					tabLayout.setTranslationY(0f);
+					shadowView.setVisibility(View.VISIBLE);
+					shadowView.setTranslationY(0f);
+				}
 				viewPager.setTranslationY(0f);
-				shadowView.setVisibility(View.VISIBLE);
-				shadowView.setTranslationY(0f);
 				bottomButtons.setVisibility(View.GONE);
 				bottomButtons.setTranslationY(0f);
 				bottomButtonsShadow.setVisibility(View.GONE);
@@ -428,9 +432,11 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 				bottomButtonsShadow.setTranslationY(bottomButtons.getHeight() - bottomButtonsShadow.getHeight());
 				appBar.setElevation(0f);
 
-				animateView(tabLayout, -tabLayout.getHeight(), false, () -> tabLayout.setVisibility(View.INVISIBLE));
-				animateView(viewPager, -tabLayout.getHeight(), null, null);
-				animateView(shadowView, -tabLayout.getHeight(), null, null);
+				if (isTabLayoutAvailable()) {
+					animateView(tabLayout, -tabLayout.getHeight(), false, () -> tabLayout.setVisibility(View.INVISIBLE));
+					animateView(viewPager, -tabLayout.getHeight(), null, null);
+					animateView(shadowView, -tabLayout.getHeight(), null, null);
+				}
 				animateView(bottomButtons, 0, true, () -> bottomButtons.setVisibility(View.VISIBLE));
 				animateView(bottomButtonsShadow, 0, true, () -> bottomButtonsShadow.setVisibility(View.VISIBLE));
 			}
@@ -552,14 +558,18 @@ public class ConfigureWidgetsFragment extends BaseFullScreenFragment implements 
 		}
 
 		tabLayout.post( () -> {
-			if (isAndroidAutoMode) {
-				tabLayout.setVisibility(View.GONE);
-			} else {
-				tabLayout.setVisibility(View.VISIBLE);
-			}
-		});
+            if (isTabLayoutAvailable()) {
+                tabLayout.setVisibility(View.VISIBLE);
+            } else {
+                tabLayout.setVisibility(View.GONE);
+            }
+        });
 	}
 
+	private boolean isTabLayoutAvailable() {
+		return !isAndroidAutoMode;
+	}
+	
 	public void setupTabIconColor(@Nullable Tab tab, int color) {
 		if (tab != null) {
 			Drawable icon = tab.getIcon();

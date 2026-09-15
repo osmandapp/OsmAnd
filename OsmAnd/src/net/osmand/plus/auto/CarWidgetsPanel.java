@@ -27,7 +27,9 @@ import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -183,7 +185,8 @@ public class CarWidgetsPanel {
 				lastVisibleCount++;
 				continue;
 			}
-			float measuredHeight = widget.measureHeightForAndroidAuto(widgetWidth);
+			widget.layoutAAIfNeeded(app, widgetWidth, isRtl);
+			float measuredHeight = widget.getMeasuredAAHeight();
 			if (measuredHeight <= 0) {
 				lastVisibleCount++;
 				continue;
@@ -204,7 +207,7 @@ public class CarWidgetsPanel {
 				bottoms.add(y + height);
 			}
 			// The slot is kept even for a hidden widget, the panel must not shift.
-			y += height + dividerWidth;
+			y += height;// + dividerWidth;
 			lastVisibleCount++;
 		}
 		if (drawnWidgets.isEmpty()) {
@@ -261,24 +264,15 @@ public class CarWidgetsPanel {
 		drawBackground(canvas, backgroundPath);
 		drawBorder(canvas, backgroundPath, borderWidth);
 
-		float widgetWidth = (contentRight - contentLeft) / scale;
-//		float widgetHeight;
 		float widgetContentTop, widgetContentBottom;
 		for (int i = 0; i < widgets.size(); i++) {
 			widgetContentTop = tops.get(i);
-			widgetContentBottom = bottoms.get(i);
 			drawWidget(canvas, drawSettings, widgets.get(i),
-					contentLeft, contentRight,
-					widgetContentTop, widgetContentBottom,
-					scale, widgetWidth, isRtl);
-//			widgetHeight = (widgetContentBottom - widgetContentTop) / scale;
-//			canvas.save();
-//			canvas.translate(contentLeft, tops.get(i));
-//			canvas.scale(scale, scale);
-//			widgets.get(i).drawForAndroidAuto(canvas, drawSettings,
-//					widgetWidth, widgetHeight, isRtl);
-//			canvas.restore();
+					contentLeft,
+					widgetContentTop,
+					scale, isRtl);
 			if (i < widgets.size() - 1) {
+				widgetContentBottom = bottoms.get(i);
 				drawSeparator(canvas, widgetContentBottom, dividerWidth, blockRight, blockLeft);
 			}
 		}
@@ -289,17 +283,14 @@ public class CarWidgetsPanel {
 	private void drawWidget(@NonNull Canvas canvas,
 							@NonNull DrawSettings drawSettings,
 							@NonNull MapWidget widget,
-							float contentLeft, float contentRight,
-							float widgetContentTop, float widgetContentBottom,
+							float contentLeft, float widgetContentTop,
 							float scale,
-							float widgetWidth,
 							boolean isRtl) {
-		float widgetHeight = (widgetContentTop - widgetContentBottom) / scale;
-		canvas.save();
+        canvas.save();
 		canvas.translate(contentLeft, widgetContentTop);
 		canvas.scale(scale, scale);
 		widget.drawForAndroidAuto(canvas, drawSettings,
-				widgetWidth, widgetHeight, isRtl);
+				widget.getMeasuredAAWidth(), widget.getMeasuredAAHeight(), isRtl);
 		canvas.restore();
 	}
 

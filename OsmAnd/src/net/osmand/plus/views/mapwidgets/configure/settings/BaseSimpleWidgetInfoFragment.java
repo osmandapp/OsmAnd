@@ -75,6 +75,7 @@ public class BaseSimpleWidgetInfoFragment extends BaseResizableWidgetSettingFrag
 			if (iconVisibilityChanged) {
 				app.getPanelAppearanceSettingsManager().get(widgetInfo.getWidgetPanel())
 						.getIconModePref(layoutMode).setModeValue(appMode, PanelIconMode.ORIGINAL);
+				widgetInfo.widget.markAndroidAutoLayoutNeeded();
 			}
 		}
 		super.applySettings();

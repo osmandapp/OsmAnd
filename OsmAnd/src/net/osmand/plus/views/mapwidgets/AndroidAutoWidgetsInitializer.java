@@ -74,7 +74,7 @@ public class AndroidAutoWidgetsInitializer {
 		return initializer.createAllControls();
 	}
 
-	static class AndroidAutoWidgetsFactory implements WidgetInfoCreator.WidgetFactory {
+	static public class AndroidAutoWidgetsFactory implements WidgetInfoCreator.WidgetFactory {
 
 		private final OsmandApplication app;
 

@@ -257,7 +257,13 @@ public class WidgetsListFragment extends BaseNestedFragment implements Confirmat
 		ScreenLayoutMode layoutMode = getScreenLayoutMode();
 		List<String> widgetsVisibility = MapWidgetInfo.getWidgetsVisibility(app, appMode, layoutMode);
 
-		for (MapWidgetInfo widget : widgetRegistry.getWidgetsForPanel(selectedPanel)) {
+		Set<MapWidgetInfo> widgetsForPanel;
+		if (!isAndroidAutoMode) {
+			widgetsForPanel = widgetRegistry.getWidgetsForPanel(selectedPanel);
+		} else {
+			widgetsForPanel = widgetRegistry.getAndroidAutoWidgetsForPanel(selectedPanel);
+		}
+		for (MapWidgetInfo widget : widgetsForPanel) {
 			boolean enabledFromApply = enabledWidgetsIds.contains(widget.key);
 			if (widget.isEnabledForAppMode(appMode, widgetsVisibility) != enabledFromApply) {
 				widgetRegistry.enableDisableWidgetForMode(appMode, widget, enabledFromApply, layoutMode, false);
@@ -322,7 +328,7 @@ public class WidgetsListFragment extends BaseNestedFragment implements Confirmat
 			ScreenLayoutMode layoutMode = getScreenLayoutMode();
 			FragmentManager manager = requireMapActivity().getSupportFragmentManager();
 			WidgetInfoBaseFragment.showInstance(manager, settingsBaseFragment, requireParentFragment(),
-					appMode, widgetInfo.key, selectedPanel, layoutMode);
+					appMode, widgetInfo.key, selectedPanel, layoutMode, isAndroidAutoMode);
 		}
 	}
 

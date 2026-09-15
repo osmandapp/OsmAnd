@@ -97,6 +97,7 @@ open class OBDTextWidget : SimpleWidget {
 				widgetComputer.averageTimeSeconds = newTimeSeconds
 			}
 			updateWidgetName()
+			markAndroidAutoLayoutNeeded()
 		}
 	}
 

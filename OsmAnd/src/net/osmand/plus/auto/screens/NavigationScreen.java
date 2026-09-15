@@ -48,6 +48,8 @@ import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.OsmandMapTileView.ElevationListener;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
 import net.osmand.plus.views.mapwidgets.widgets.SpeedometerWidget;
 import net.osmand.util.Algorithms;
@@ -55,7 +57,7 @@ import net.osmand.util.Algorithms;
 import java.util.List;
 
 public final class NavigationScreen extends BaseAndroidAutoScreen implements SurfaceRendererCallback,
-		IRouteInformationListener, DefaultLifecycleObserver, ElevationListener {
+		IRouteInformationListener, DefaultLifecycleObserver, ElevationListener, MapWidgetRegistry.WidgetsRegistryAndroidAutoListener {
 
 	@NonNull
 	private final NavigationListener listener;
@@ -140,6 +142,7 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 				surfaceRenderer.setCallback(this);
 			}
 		}
+		getApp().getMapWidgetRegistry().addWidgetsRegistryAndroidAutoListener(this);
 		loadWidgets();
 		scheduleWidgetsUpdate();
 	}
@@ -154,6 +157,7 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 				surfaceRenderer.setCallback(null);
 			}
 		}
+		getApp().getMapWidgetRegistry().removeWidgetsRegistryAndroidAutoListener(this);
 		stopWidgetUpdates();
 	}
 
@@ -226,6 +230,21 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 			return surfaceRenderer.getMapView();
 		}
 		return null;
+	}
+
+	@Override
+	public void onWidgetRegistered(@NonNull MapWidgetInfo widgetInfo) {
+		loadWidgets();
+	}
+
+	@Override
+	public void onWidgetVisibilityChanged(@NonNull MapWidgetInfo widgetInfo) {
+		loadWidgets();
+	}
+
+	@Override
+	public void onWidgetsCleared() {
+		loadWidgets();
 	}
 
 	/**

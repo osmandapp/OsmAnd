@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.odb
 
-import android.view.View
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
@@ -13,29 +12,43 @@ import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget
 import net.osmand.shared.settings.enums.MetricsConstants
 import net.osmand.util.Algorithms
 
-class OBDRemainingFuelWidget(
-	mapActivity: MapActivity,
-	widgetType: WidgetType,
-	fieldType: OBDTypeWidget,
-	customId: String?,
-	widgetsPanel: WidgetsPanel?
-) :
-	OBDTextWidget(mapActivity, widgetType, fieldType, customId, widgetsPanel) {
+class OBDRemainingFuelWidget :
+    OBDTextWidget {
 
-	var remainingFuelMode: OsmandPreference<RemainingFuelMode> = registerRemainingFuelPref(customId)
+    constructor(
+        mapActivity: MapActivity,
+        widgetType: WidgetType,
+        fieldType: OBDTypeWidget,
+        customId: String?,
+        widgetsPanel: WidgetsPanel?
+    ) : super(mapActivity, widgetType, fieldType, customId, widgetsPanel) {
+        this.remainingFuelMode = registerRemainingFuelPref(customId)
+        val averageTimeSeconds = 0
+        val typeWidget = getFieldType()
+        widgetComputer = OBDDataComputer.registerWidget(typeWidget, averageTimeSeconds)
+    }
 
-	companion object {
-		private const val OBD_REMAINING_FUEL_MODE = "obd_remaining_fuel_mode"
-	}
-
-	init {
+	constructor(
+		app: OsmandApplication,
+		widgetType: WidgetType,
+		fieldType: OBDTypeWidget,
+		customId: String?,
+		widgetsPanel: WidgetsPanel?
+	) : super(app, widgetType, fieldType, customId, widgetsPanel){
+		this.remainingFuelMode = registerRemainingFuelPref(customId)
 		val averageTimeSeconds = 0
 		val typeWidget = getFieldType()
-
 		widgetComputer = OBDDataComputer.registerWidget(typeWidget, averageTimeSeconds)
 	}
 
-	private fun getFieldType(): OBDTypeWidget {
+
+	var remainingFuelMode: OsmandPreference<RemainingFuelMode>
+
+    companion object {
+		private const val OBD_REMAINING_FUEL_MODE = "obd_remaining_fuel_mode"
+	}
+
+    private fun getFieldType(): OBDTypeWidget {
 		return remainingFuelMode.get().fieldType
 	}
 

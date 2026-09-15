@@ -11,8 +11,6 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
-import android.text.Layout;
-import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -27,7 +25,6 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import androidx.compose.ui.text.style.TextAlign;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -55,7 +52,6 @@ import net.osmand.plus.views.mapwidgets.widgetstates.SimpleWidgetState;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.util.Algorithms;
 
-import java.nio.charset.Charset;
 import java.util.List;
 
 public abstract class SimpleWidget extends TextInfoWidget implements ISupportWidgetResizing, ISupportMultiRow {
@@ -296,8 +292,6 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 
     protected void updateWidgetName() {
         String newWidgetName = getWidgetName();
-        cachedWidgetName = newWidgetName;
-        updateCachedTextBounds(cachedWidgetNameTextBounds, widgetNameTextPaint, getWidgetName());
 
         if (newWidgetName != null && this.widgetName != null) {
 
@@ -316,6 +310,8 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
                 checkForMaxWidgetName();
             }
         }
+        cachedWidgetName = newWidgetName;
+        markAndroidAutoLayoutNeeded();
     }
 
     private void checkForMaxWidgetName() {
@@ -490,25 +486,11 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
     public void drawForAndroidAuto(@NonNull Canvas canvas, @NonNull DrawSettings drawSettings,
                                    float widgetWidthPx, float widgetHeightPx, boolean isRtl) {
         if (androidAutoRenderedWidgetSize == WidgetSize.SMALL) {
-            drawSmallSize(canvas, drawSettings, widgetWidthPx, widgetHeightPx, isRtl);
+            drawSmallSize(canvas, drawSettings);
         } else if (androidAutoRenderedWidgetSize == WidgetSize.LARGE) {
-            drawLargeSize(canvas, drawSettings, widgetWidthPx, widgetHeightPx, isRtl);
+            drawLargeSize(app, canvas, drawSettings);
         } else {
-            drawMediumSize(canvas, drawSettings, widgetWidthPx, widgetHeightPx, isRtl);
-        }
-    }
-
-    @Override
-    public float measureHeightForAndroidAuto(int maxWidthPx) {
-        if (!shouldDrawForAndroidAuto()) {
-            return 0;
-        }
-        if (androidAutoRenderedWidgetSize == WidgetSize.SMALL) {
-            return measureHeightForSmallSizeAA();
-        } else if (androidAutoRenderedWidgetSize == WidgetSize.LARGE) {
-            return measureHeightForLargeSizeAA();
-        } else {
-            return measureHeightForMediumSizeAA();
+            drawMediumSize(app, canvas, drawSettings);
         }
     }
 
@@ -517,37 +499,18 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
         super.onAndroidAutoPanelAppearanceChanged(appearance);
         if (androidAutoRenderedWidgetSize != getWidgetSizePref().get()) {
             recreateInternalForAndroidAuto();
-            configureAAPaints(appearance);
         }
+        configureAAPaints(appearance);
         shouldDrawAndroidAutoIcon = shouldShowIcon();
+        markAndroidAutoLayoutNeeded();
     }
 
     @Override
     protected void configureAAPaints(ResolvedPanelAppearance appearance) {
         super.configureAAPaints(appearance);
         applyWidgetNameTextAppearance(widgetNameTextPaint, appearance);
-        updateCachedTextBounds(cachedWidgetNameTextBounds, widgetNameTextPaint, getWidgetName());
     }
 
-    // region measure height
-
-    protected float measureHeightForSmallSizeAA() {
-        Resources resources = app.getResources();
-        float minBottomLayoutHeight = resources.getDimension(R.dimen.map_widget_height);
-        float iconHeight = resources.getDimension(R.dimen.map_widget_icon);
-        float textBlockHeight = Math.max(cachedTextBounds.height(), cachedSmallTextBounds.height());
-        float contentHeight = Math.max(iconHeight, textBlockHeight);
-        return Math.max(minBottomLayoutHeight, contentHeight);
-    }
-
-    protected float measureHeightForMediumSizeAA() {
-        return app.getResources().getDimension(R.dimen.simple_widget_medium_height);
-    }
-
-    protected float measureHeightForLargeSizeAA() {
-        return app.getResources().getDimension(R.dimen.simple_widget_large_height);
-    }
-    // endregion
 
     // region text sizes
     @Override
@@ -597,8 +560,9 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
     @Override
     protected void applyPrimaryTextAppearance(Paint paint, ResolvedPanelAppearance appearance) {
         super.applyPrimaryTextAppearance(paint, appearance);
+        //noinspection StatementWithEmptyBody
         if (androidAutoRenderedWidgetSize == WidgetSize.SMALL) {
-
+            // no additional tweaks for now
         } else if (androidAutoRenderedWidgetSize == WidgetSize.LARGE) {
             paint.setLetterSpacing(AndroidUtils.spToPx(app, 0.04f));
         } else {
@@ -609,8 +573,9 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
     @Override
     protected void applySecondaryTextAppearance(Paint paint, ResolvedPanelAppearance appearance) {
         super.applySecondaryTextAppearance(paint, appearance);
+        //noinspection StatementWithEmptyBody
         if (androidAutoRenderedWidgetSize == WidgetSize.SMALL) {
-
+            // no additional tweaks for now
         } else if (androidAutoRenderedWidgetSize == WidgetSize.LARGE) {
             paint.setLetterSpacing(AndroidUtils.spToPx(app, 0.06f));
         } else {
@@ -621,8 +586,9 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
     protected void applyWidgetNameTextAppearance(Paint paint, ResolvedPanelAppearance appearance) {
         applyTextAppearance(paint, appearance.getSecondaryTextColor(), appearance);
         paint.setTextSize(getWidgetNameTextSizeAA());
+        //noinspection StatementWithEmptyBody
         if (androidAutoRenderedWidgetSize == WidgetSize.SMALL) {
-
+            // no additional tweaks for now
         } else if (androidAutoRenderedWidgetSize == WidgetSize.LARGE) {
             paint.setLetterSpacing(AndroidUtils.spToPx(app, 0.06f));
         } else {
@@ -632,119 +598,141 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
     // endregion
 
     // region draw
-    protected void drawSmallSize(@NonNull Canvas canvas, @NonNull DrawSettings drawSettings,
-                                 float widgetWidthPx, float widgetHeightPx,
-                                 boolean isRtl) {
-        Rect iconBounds = new Rect(0, 0, 0, 0);
-        Rect textBounds = new Rect(cachedTextBounds);
-        Rect smallTextBounds = new Rect(cachedSmallTextBounds);
-
-        layoutSmallSizeAA(app, iconBounds, textBounds, smallTextBounds, widgetWidthPx, widgetHeightPx, isRtl);
-
+    protected void drawSmallSize(@NonNull Canvas canvas, @NonNull DrawSettings drawSettings) {
         if (shouldDrawAndroidAutoIcon) {
             int iconId = getIconId(drawSettings.isNightMode());
             if (iconId != 0) {
                 Drawable iconDrawable = iconsCache.getIcon(iconId, 0);
                 if (iconDrawable != null) {
-                    iconDrawable.setBounds(iconBounds);
+                    iconDrawable.setBounds(cachedIconBounds);
                     iconDrawable.draw(canvas);
                 }
             }
         }
         String text = cachedText;
         if (text != null) {
-            drawTextLineInRect(canvas, text, textPaint, textBounds);
+            drawTextLineInRect(canvas, text, textPaint, cachedTextBounds);
         }
         text = cachedSmallText;
         if (text != null) {
-            drawTextLineInRect(canvas, text, smallTextPaint, smallTextBounds);
+            drawTextLineInRect(canvas, text, smallTextPaint, cachedSmallTextBounds);
         }
     }
 
-    protected void drawMediumSize(@NonNull Canvas canvas, @NonNull DrawSettings drawSettings, float widgetWidthPx, float widgetHeightPx, boolean isRtl) {
-        Rect iconBounds = new Rect(0, 0, 0, 0);
-        Rect textBounds = new Rect(cachedTextBounds);
-        Rect smallTextBounds = new Rect(cachedSmallTextBounds);
-        Rect widgetNameBounds = new Rect(cachedWidgetNameTextBounds);
-
-        layoutMediumSizeAA(app, iconBounds, widgetNameBounds, textBounds, smallTextBounds, widgetWidthPx, widgetHeightPx, isRtl);
-
+    protected void drawMediumSize(@NonNull Context context, @NonNull Canvas canvas, @NonNull DrawSettings drawSettings) {
         if (shouldDrawAndroidAutoIcon) {
             int iconId = getIconId(drawSettings.isNightMode());
             if (iconId != 0) {
                 Drawable iconDrawable = iconsCache.getIcon(iconId, 0);
                 if (iconDrawable != null) {
-                    iconDrawable.setBounds(iconBounds);
+                    iconDrawable.setBounds(cachedIconBounds);
                     iconDrawable.draw(canvas);
                 }
             }
         }
+        Resources resources = context.getResources();
+
         String text = cachedText;
         if (text != null) {
-            drawTextLineInRect(canvas, text, textPaint, textBounds);
+            float maxTextSize = getPrimaryTextSizeAA();
+            float minTextSize = resources.getDimension(R.dimen.simple_widget_value_minimum_size);
+            float textSizeStep = AndroidUtils.spToPx(context, 2);
+            drawTextLineInRect(canvas, text, textPaint, cachedTextBounds, Gravity.CENTER_VERTICAL | Gravity.START,
+                    true, minTextSize, maxTextSize, textSizeStep,
+                    null, null);
         }
         text = cachedSmallText;
         if (text != null) {
-            drawTextLineInRect(canvas, text, smallTextPaint, smallTextBounds);
+            float lineSpacingExtra = -1 * AndroidUtils.spToPx(context, 2);
+            drawTextLineInRect(canvas, text.toUpperCase(),
+                    smallTextPaint, cachedSmallTextBounds, Gravity.BOTTOM | Gravity.END,
+                    false, 0, 0, 0,
+                    lineSpacingExtra, null);
         }
         text = cachedWidgetName;
         if (text != null) {
-            drawTextLineInRect(canvas, text, widgetNameTextPaint, cachedWidgetNameTextBounds);
+            float lineSpacingExtra = -1 * AndroidUtils.spToPx(context, 2);
+            drawTextLineInRect(canvas, text.toUpperCase(),
+                    widgetNameTextPaint, cachedWidgetNameTextBounds, Gravity.BOTTOM | Gravity.START,
+                    false, 0, 0, 0,
+                    lineSpacingExtra, TextUtils.TruncateAt.END);
         }
     }
 
-    protected void drawLargeSize(@NonNull Canvas canvas, @NonNull DrawSettings drawSettings, float widgetWidthPx, float widgetHeightPx, boolean isRtl) {
-        Rect iconBounds = new Rect(0, 0, 0, 0);
-        Rect textBounds = new Rect(cachedTextBounds);
-        Rect smallTextBounds = new Rect(cachedSmallTextBounds);
-        Rect widgetNameBounds = new Rect(cachedWidgetNameTextBounds);
-
-        layoutLargeSizeAA(app, iconBounds, widgetNameBounds, textBounds, smallTextBounds, widgetWidthPx, widgetHeightPx, isRtl);
-
+    protected void drawLargeSize(@NonNull Context context, @NonNull Canvas canvas, @NonNull DrawSettings drawSettings) {
         if (shouldDrawAndroidAutoIcon) {
             int iconId = getIconId(drawSettings.isNightMode());
             if (iconId != 0) {
                 Drawable iconDrawable = iconsCache.getIcon(iconId, 0);
                 if (iconDrawable != null) {
-                    iconDrawable.setBounds(iconBounds);
+                    iconDrawable.setBounds(cachedIconBounds);
                     iconDrawable.draw(canvas);
                 }
             }
         }
+        Resources resources = context.getResources();
+
         String text = cachedText;
         if (text != null) {
-            drawTextLineInRect(canvas, text, textPaint, textBounds);
+            float maxTextSize = getPrimaryTextSizeAA();
+            float minTextSize = resources.getDimension(R.dimen.simple_widget_value_minimum_size);
+            float textSizeStep = AndroidUtils.spToPx(context, 2);
+            drawTextLineInRect(canvas, text, textPaint, cachedTextBounds, Gravity.CENTER_VERTICAL | Gravity.START,
+                    true, minTextSize, maxTextSize, textSizeStep,
+                    null, null);
         }
         text = cachedSmallText;
         if (text != null) {
-            drawTextLineInRect(canvas, text, smallTextPaint, smallTextBounds);
+            float lineSpacingExtra = -1 * AndroidUtils.spToPx(context, 2);
+            drawTextLineInRect(canvas, text.toUpperCase(),
+                    smallTextPaint, cachedSmallTextBounds, Gravity.BOTTOM | Gravity.END,
+                    false, 0, 0, 0,
+                    lineSpacingExtra, null);
         }
         text = cachedWidgetName;
         if (text != null) {
-            drawTextLineInRect(canvas, text, widgetNameTextPaint, cachedWidgetNameTextBounds);
+            float lineSpacingExtra = -1 * AndroidUtils.spToPx(context, 2);
+            drawTextLineInRect(canvas, text.toUpperCase(),
+                    widgetNameTextPaint, cachedWidgetNameTextBounds, Gravity.BOTTOM | Gravity.START,
+                    false, 0, 0, 0,
+                    lineSpacingExtra, TextUtils.TruncateAt.END);
         }
     }
     // endregion
 
     // region layout
-    private void layoutLargeSizeAA(Context context, @NonNull Rect iconBounds, @NonNull Rect widgetNameBounds, @NonNull Rect textBounds, @NonNull Rect smallTextBounds,
-                                   float widgetWidthPx, float widgetHeightPx, boolean isRtl) {
-        layoutBigWidgetAA(context, iconBounds, widgetNameBounds, textBounds, smallTextBounds, widgetWidthPx, widgetHeightPx, isRtl);
+
+
+    @Override
+    protected void doLayoutAAWidget(Context context, int desiredWidthPx, boolean isRtl) {
+        if (androidAutoRenderedWidgetSize == WidgetSize.SMALL) {
+            layoutSmallWidgetAA(context, desiredWidthPx, isRtl);
+        } else if (androidAutoRenderedWidgetSize == WidgetSize.LARGE) {
+            layoutLargeWidgetAA(context, desiredWidthPx, isRtl);
+        } else {
+            layoutMediumWidgetAA(context, desiredWidthPx, isRtl);
+        }
     }
 
+  private void layoutSmallWidgetAA(Context context, float widgetWidthPx, boolean isRtl) {
+        Resources resources = context.getResources();
 
-    private void layoutMediumSizeAA(Context context, @NonNull Rect iconBounds, @NonNull Rect widgetNameBounds, @NonNull Rect textBounds, @NonNull Rect smallTextBounds,
-                                    float widgetWidthPx, float widgetHeightPx, boolean isRtl) {
-        layoutBigWidgetAA(context, iconBounds, widgetNameBounds, textBounds, smallTextBounds, widgetWidthPx, widgetHeightPx, isRtl);
+        float minBottomLayoutHeight = resources.getDimension(R.dimen.map_widget_height);
+        float iconSize = resources.getDimension(R.dimen.map_widget_icon);
+        float textBlockHeight = Math.max(cachedTextBounds.height(), cachedSmallTextBounds.height());
+        float contentHeight = Math.max(iconSize, textBlockHeight);
+        float widgetHeightPx = Math.max(minBottomLayoutHeight, contentHeight);
+
+        cachedIconBounds.set(0, 0, (int) iconSize, (int) iconSize);
+
+        layoutSmallWidgetAA(context, cachedIconBounds, cachedTextBounds, cachedSmallTextBounds, widgetWidthPx, widgetHeightPx, isRtl);
+
+        measuredAAHeight = widgetHeightPx;
+        measuredAAWidth = widgetWidthPx;
     }
 
-    private void layoutSmallSizeAA(Context context, @NonNull Rect iconBounds, @NonNull Rect textBounds, @NonNull Rect smallTextBounds,
-                                   float widgetWidthPx, float widgetHeightPx, boolean isRtl) {
-        layoutSmallWidget(context, iconBounds, textBounds, smallTextBounds, widgetWidthPx, widgetHeightPx, isRtl);
-    }
-
-    private void layoutSmallWidget(Context context, @NonNull Rect iconBounds, @NonNull Rect textBounds, @NonNull Rect smallTextBounds,
-                                   float widgetWidthPx, float widgetHeightPx, boolean isRtl) {
+    private void layoutSmallWidgetAA(Context context, @NonNull Rect iconBounds, @NonNull Rect textBounds, @NonNull Rect smallTextBounds,
+                                     float widgetWidthPx, float widgetHeightPx, boolean isRtl) {
         Resources resources = context.getResources();
         int iconSize = resources.getDimensionPixelSize(R.dimen.map_widget_icon);
         float dividerHeight = AndroidUtils.dpToPxF(context, 1f);
@@ -752,6 +740,9 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
         int iconMargin = resources.getDimensionPixelSize(R.dimen.map_widget_icon_margin);
         int textMargin = AndroidUtils.dpToPx(context, 4);
         float centerVertical = contentHeight / 2f;
+
+        updateCachedTextBounds(cachedTextBounds, textPaint, cachedText);
+        updateCachedTextBounds(cachedSmallTextBounds, smallTextPaint, cachedSmallText);
 
         int textBlockHeight = Math.max(textBounds.height(), smallTextBounds.height());
         float textBlockMarginStart = AndroidUtils.dpToPxF(context, 4);
@@ -773,7 +764,7 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
             textBounds.offsetTo((int) widgetWidthPx, (int) textTop);
             smallTextBounds.offsetTo((int) widgetWidthPx, (int) smallTextTop);
             if (shouldDrawAndroidAutoIcon) {
-                iconBounds.offsetTo((int) (widgetWidthPx - iconMargin - iconSize), (int) iconTop);
+                iconBounds.offset((int) (widgetWidthPx - iconMargin - iconSize), (int) iconTop);
                 textBounds.offsetTo((int) (iconBounds.left - iconMargin - textBlockMarginStart - textBounds.width()), textBounds.top);
             } else {
                 textBounds.offsetTo((int) (widgetWidthPx - textBlockMarginStart - textBounds.width()), textBounds.top);
@@ -793,6 +784,33 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
         }
     }
 
+    private void layoutMediumWidgetAA(Context context, float widgetWidthPx, boolean isRtl) {
+        Resources resources = context.getResources();
+
+        float iconSize = resources.getDimension(R.dimen.map_widget_icon);
+        float widgetHeightPx = resources.getDimension(R.dimen.simple_widget_medium_height);
+
+        cachedIconBounds.set(0, 0, (int) iconSize, (int) iconSize);
+
+        layoutBigWidgetAA(context, cachedIconBounds, cachedWidgetNameTextBounds, cachedTextBounds, cachedSmallTextBounds, widgetWidthPx, widgetHeightPx, isRtl);
+
+        measuredAAHeight = widgetHeightPx;
+        measuredAAWidth = widgetWidthPx;
+    }
+
+    private void layoutLargeWidgetAA(Context context, float widgetWidthPx, boolean isRtl) {
+        Resources resources = context.getResources();
+
+        float iconSize = resources.getDimension(R.dimen.map_widget_icon);
+        float widgetHeightPx = resources.getDimension(R.dimen.simple_widget_large_height);
+
+        cachedIconBounds.set(0, 0, (int) iconSize, (int) iconSize);
+
+        layoutBigWidgetAA(context, cachedIconBounds, cachedWidgetNameTextBounds, cachedTextBounds, cachedSmallTextBounds, widgetWidthPx, widgetHeightPx, isRtl);
+
+        measuredAAHeight = widgetHeightPx;
+        measuredAAWidth = widgetWidthPx;
+    }
 
     private void layoutBigWidgetAA(Context context, @NonNull Rect iconBounds, @NonNull Rect widgetNameBounds, @NonNull Rect textBounds, @NonNull Rect smallTextBounds,
                                  float widgetWidthPx, float widgetHeightPx, boolean isRtl) {
@@ -811,27 +829,30 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
                 containerRect.right,
                 containerRect.top + AndroidUtils.dpToPx(context, 17));
         int topRowTextMargin = AndroidUtils.dpToPx(context, 3);
+
+        float smallTextLineSpacingExtra = -1 * AndroidUtils.spToPx(context, 2);
+        updateCachedTextBounds(cachedSmallTextBounds, smallTextPaint, cachedSmallText, smallTextLineSpacingExtra);
+
         if (isRtl) {
             smallTextBounds.offsetTo(topRowRect.left, topRowRect.bottom - smallTextBounds.height());
-            widgetNameBounds.offsetTo(topRowRect.right - widgetNameBounds.width(),
-                    topRowRect.bottom - widgetNameBounds.height());
+
             widgetNameBounds.set(
-                    Math.max(widgetNameBounds.left, smallTextBounds.right + topRowTextMargin),
-                    widgetNameBounds.top,
-                    widgetNameBounds.right,
-                    widgetNameBounds.bottom);
+                    smallTextBounds.right + topRowTextMargin,
+                    topRowRect.top,
+                    topRowRect.left,
+                    topRowRect.bottom
+            );
         } else {
             smallTextBounds.offsetTo(
                     topRowRect.right - smallTextBounds.width(),
                     topRowRect.bottom - smallTextBounds.height()
             );
-            widgetNameBounds.offsetTo(topRowRect.left,
-                    topRowRect.bottom - widgetNameBounds.height());
             widgetNameBounds.set(
-                    widgetNameBounds.left,
-                    widgetNameBounds.top,
-                    Math.min(widgetNameBounds.right, smallTextBounds.left - topRowTextMargin),
-                    widgetNameBounds.bottom);
+                    topRowRect.left,
+                    topRowRect.top,
+                    smallTextBounds.left - topRowTextMargin,
+                    topRowRect.bottom
+            );
         }
         Rect bottomRowRect = new Rect(paddingHorizontal,
                 topRowRect.bottom,
@@ -845,18 +866,27 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
         }
         float bottomRowCenterVertical = bottomRowRect.top + bottomRowRect.height() / 2f;
         float iconTop = bottomRowCenterVertical - iconBounds.height() / 2f;
-        float bottomTextTop = bottomRowCenterVertical - textBounds.height() / 2f;
+//        float bottomTextTop = bottomRowCenterVertical - textBounds.height() / 2f;
         float bottomTextMarginStart = AndroidUtils.dpToPx(context, 12);
         if (isRtl) {
             if (shouldDrawAndroidAutoIcon) {
-                iconBounds.offsetTo(bottomRowRect.right, (int) iconTop);
+                iconBounds.offsetTo(bottomRowRect.right - iconBounds.width(), (int) iconTop);
             }
-            textBounds.set(bottomRowRect.left, (int) bottomTextTop, (int) (bottomRowRect.right - bottomTextMarginStart), bottomRowRect.bottom);
+            textBounds.set(
+                    bottomRowRect.left,
+                    bottomRowRect.top,
+                    (int) (iconBounds.left - bottomTextMarginStart),
+                    bottomRowRect.bottom);
         } else {
             if (shouldDrawAndroidAutoIcon) {
                 iconBounds.offsetTo(bottomRowRect.left, (int) iconTop);
             }
-            textBounds.set((int) (bottomRowRect.left + bottomTextMarginStart), (int) bottomTextTop, bottomRowRect.right, bottomRowRect.bottom);
+            textBounds.set(
+                    (int) (iconBounds.right + bottomTextMarginStart),
+                    bottomRowRect.top,
+                    bottomRowRect.right,
+                    bottomRowRect.bottom
+            );
         }
     }
     // endregion

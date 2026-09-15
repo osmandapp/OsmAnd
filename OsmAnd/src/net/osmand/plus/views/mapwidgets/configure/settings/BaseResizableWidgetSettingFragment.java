@@ -14,8 +14,10 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.PanelSizeMode;
+import net.osmand.plus.settings.enums.ScreenLayoutMode;
 import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportWidgetResizing;
@@ -30,6 +32,8 @@ public class BaseResizableWidgetSettingFragment extends WidgetInfoBaseFragment {
 	protected OsmandPreference<WidgetSize> widgetSizePref;
 
 	private WidgetSize selectedWidgetSize;
+
+	protected boolean isAndroidAutoMode;
 
 	@Override
 	protected void initParams(@NonNull Bundle bundle) {
@@ -104,8 +108,14 @@ public class BaseResizableWidgetSettingFragment extends WidgetInfoBaseFragment {
 				widgetResizing.recreateView();
 			}
 			if (sizeChanged) {
-				app.getPanelAppearanceSettingsManager().get(widgetInfo.getWidgetPanel())
-						.getSizeModePref(layoutMode).setModeValue(appMode, PanelSizeMode.ORIGINAL);
+				if (isAndroidAutoMode) {
+					app.getPanelAppearanceSettingsManager().get(widgetInfo.getWidgetPanel())
+							.getSizeModePref(null).setModeValue(appMode, PanelSizeMode.ORIGINAL);
+				} else {
+					app.getPanelAppearanceSettingsManager().get(widgetInfo.getWidgetPanel())
+							.getSizeModePref(layoutMode).setModeValue(appMode, PanelSizeMode.ORIGINAL);
+				}
+				widgetInfo.widget.markAndroidAutoLayoutNeeded();
 			}
 		}
 		app.getOsmandMap().getMapLayers().getMapInfoLayer().recreateControls();
@@ -116,11 +126,19 @@ public class BaseResizableWidgetSettingFragment extends WidgetInfoBaseFragment {
 		if (activity == null) {
 			return;
 		}
-		List<Set<MapWidgetInfo>> widgets = widgetRegistry.getPagedWidgetsForPanel(activity,
-				appMode, layoutMode, widgetInfo.getWidgetPanel(),
-				AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE);
+		List<Set<MapWidgetInfo>> widgets;
+		if (isAndroidAutoMode) {
+			widgets = widgetRegistry.getPagedAndroidAutoWidgetsForPanel(app,
+					appMode, widgetInfo.getWidgetPanel(),
+					AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE);
 
-		for (Set<MapWidgetInfo> rowMapWidgetsInfo : widgets) {
+		} else {
+			widgets = widgetRegistry.getPagedWidgetsForPanel(activity,
+					appMode, layoutMode, widgetInfo.getWidgetPanel(),
+					AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE);
+		}
+
+        for (Set<MapWidgetInfo> rowMapWidgetsInfo : widgets) {
 			for (MapWidgetInfo info : rowMapWidgetsInfo) {
 				if (info == widgetInfo) {
 					applySizeSettingToWidgetsInRow(rowMapWidgetsInfo);
@@ -135,6 +153,7 @@ public class BaseResizableWidgetSettingFragment extends WidgetInfoBaseFragment {
 			if (info.widget instanceof ISupportWidgetResizing widgetResizing) {
 				widgetResizing.getWidgetSizePref().set(selectedWidgetSize);
 				widgetResizing.recreateView();
+				info.widget.markAndroidAutoLayoutNeeded();
 			}
 		}
 	}

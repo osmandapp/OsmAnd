@@ -21,18 +21,31 @@ public class SelectCopyAppModeBottomSheet extends AppModesBottomSheetDialogFragm
 	public static final String TAG = "SelectCopyAppModeBottomSheet";
 
 	private static final String SELECTED_APP_MODE_KEY = "selected_app_mode_key";
+	private static final String FILTER_AA_COMPATIBLE_MODES = "is_for_copy_aa_widgets_key";
 
 	private static final Log LOG = PlatformUtil.getLog(SelectCopyAppModeBottomSheet.class);
 
 	private List<ApplicationMode> appModes = new ArrayList<>();
 
 	private ApplicationMode selectedAppMode;
+	private boolean filterAndroidAutoCompatibleModes;
+
+//	@Override
+//	public void onCreate(Bundle savedInstanceState) {
+//		super.onCreate(savedInstanceState);
+//	}
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	protected void initParams(Bundle savedInstanceState) {
+		super.initParams(savedInstanceState);
 		if (savedInstanceState != null) {
+			filterAndroidAutoCompatibleModes = savedInstanceState.getBoolean(FILTER_AA_COMPATIBLE_MODES);
 			selectedAppMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(SELECTED_APP_MODE_KEY), null);
+		} else {
+			Bundle args = getArguments();
+			if (args != null) {
+				filterAndroidAutoCompatibleModes = args.getBoolean(FILTER_AA_COMPATIBLE_MODES);
+			}
 		}
 	}
 
@@ -44,9 +57,14 @@ public class SelectCopyAppModeBottomSheet extends AppModesBottomSheetDialogFragm
 	protected void getData() {
 		appModes = new ArrayList<>();
 		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
-			if (mode != getAppMode()) {
-				appModes.add(mode);
+			if (mode == getAppMode()) {
+				continue;
 			}
+            if (filterAndroidAutoCompatibleModes && !mode.isAndroidAutoCompatible()) {
+                continue;
+            }
+			appModes.add(mode);
+
 		}
 	}
 
@@ -66,6 +84,7 @@ public class SelectCopyAppModeBottomSheet extends AppModesBottomSheetDialogFragm
 		if (selectedAppMode != null) {
 			outState.putString(SELECTED_APP_MODE_KEY, selectedAppMode.getStringKey());
 		}
+		outState.putBoolean(FILTER_AA_COMPATIBLE_MODES, filterAndroidAutoCompatibleModes);
 	}
 
 	@Override
@@ -94,16 +113,24 @@ public class SelectCopyAppModeBottomSheet extends AppModesBottomSheetDialogFragm
 
 	public static void showInstance(@NonNull FragmentManager fm, Fragment target,
 	                                @NonNull ApplicationMode currentMode) {
-		showInstance(fm, target, false, currentMode);
+		showInstance(fm, target, false, currentMode, null);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm, Fragment target,
-	                                boolean usedOnMap, @NonNull ApplicationMode currentMode) {
+	                                @NonNull ApplicationMode currentMode, boolean filterAACompatibleModes) {
+		Bundle args =  new Bundle();
+		args.putBoolean(FILTER_AA_COMPATIBLE_MODES, filterAACompatibleModes);
+		showInstance(fm, target, false, currentMode, args);
+	}
+
+	public static void showInstance(@NonNull FragmentManager fm, Fragment target,
+	                                boolean usedOnMap, @NonNull ApplicationMode currentMode, Bundle args) {
 		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG, true)) {
 			SelectCopyAppModeBottomSheet fragment = new SelectCopyAppModeBottomSheet();
 			fragment.setTargetFragment(target, 0);
 			fragment.setUsedOnMap(usedOnMap);
 			fragment.setAppMode(currentMode);
+			fragment.setArguments(args);
 			fragment.show(fm, TAG);
 		}
 	}

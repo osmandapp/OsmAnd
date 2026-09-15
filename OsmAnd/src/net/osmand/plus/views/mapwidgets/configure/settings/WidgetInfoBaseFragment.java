@@ -71,6 +71,7 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 	public static final String KEY_WIDGET_ID = "widget_id";
 	public static final String KEY_ADD_MODE = "add_mode_key";
 	public static final String KEY_SELECTED_PANEL = "selected_panel_key";
+	public static final String KEY_IS_ANDROID_AUTO = "is_android_auto_key";
 
 	protected ConfigureWidgetsController controller;
 	protected ApplicationMode appMode;
@@ -266,6 +267,7 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 		widgetId = bundle.getString(KEY_WIDGET_ID);
 		appMode = ApplicationMode.valueOfStringKey(bundle.getString(KEY_APP_MODE), settings.getApplicationMode());
 		addNewWidgetMode = bundle.getBoolean(KEY_ADD_MODE, false);
+		isAndroidAutoMode = bundle.getBoolean(KEY_IS_ANDROID_AUTO, false);
 		widgetPanel = WidgetsPanel.valueOf(bundle.getString(KEY_SELECTED_PANEL));
 		isVerticalPanel = widgetPanel.isPanelVertical();
 
@@ -400,6 +402,7 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 		outState.putString(KEY_WIDGET_ID, widgetId);
 		outState.putBoolean(KEY_ADD_MODE, addNewWidgetMode);
 		outState.putString(KEY_SELECTED_PANEL, widgetPanel.name());
+		outState.putBoolean(KEY_IS_ANDROID_AUTO, isAndroidAutoMode);
 
 		if (layoutMode != null) {
 			outState.putSerializable(SCREEN_LAYOUT_MODE, layoutMode);
@@ -425,7 +428,8 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 	private static void showInstance(@NonNull FragmentManager manager, @NonNull WidgetInfoBaseFragment fragment,
 	                                 @Nullable Fragment target, @NonNull ApplicationMode appMode,
 	                                 @NonNull String widgetId, @NonNull WidgetsPanel widgetsPanel,
-	                                 boolean addNewWidgetMode, @Nullable ScreenLayoutMode layoutMode) {
+	                                 boolean addNewWidgetMode, @Nullable ScreenLayoutMode layoutMode,
+									 boolean isAndroidAutoMode) {
 		String tag = fragment.getClass().getSimpleName();
 		if (AndroidUtils.isFragmentCanBeAdded(manager, tag, true)) {
 			Bundle args = new Bundle();
@@ -433,6 +437,7 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 			args.putString(KEY_APP_MODE, appMode.getStringKey());
 			args.putBoolean(KEY_ADD_MODE, addNewWidgetMode);
 			args.putString(KEY_SELECTED_PANEL, widgetsPanel.name());
+			args.putBoolean(KEY_IS_ANDROID_AUTO, isAndroidAutoMode);
 
 			if (layoutMode != null) {
 				args.putSerializable(SCREEN_LAYOUT_MODE, layoutMode);
@@ -451,12 +456,18 @@ public class WidgetInfoBaseFragment extends BaseFullScreenFragment {
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull WidgetInfoBaseFragment fragment,
 	                                @Nullable Fragment target, @NonNull ApplicationMode appMode, @NonNull String widgetId,
 	                                @NonNull WidgetsPanel widgetsPanel, @Nullable ScreenLayoutMode layoutMode) {
-		showInstance(manager, fragment, target, appMode, widgetId, widgetsPanel, false, layoutMode);
+		showInstance(manager, fragment, target, appMode, widgetId, widgetsPanel, false, layoutMode, false);
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull WidgetInfoBaseFragment fragment,
+	                                @Nullable Fragment target, @NonNull ApplicationMode appMode, @NonNull String widgetId,
+	                                @NonNull WidgetsPanel widgetsPanel, @Nullable ScreenLayoutMode layoutMode, boolean isAndroidAutoMode) {
+		showInstance(manager, fragment, target, appMode, widgetId, widgetsPanel, false, layoutMode, isAndroidAutoMode);
 	}
 
 	public static void showAddWidgetFragment(@NonNull FragmentManager manager, @NonNull WidgetInfoBaseFragment fragment,
 	                                @Nullable Fragment target, @NonNull ApplicationMode appMode, @NonNull String widgetId,
-	                                @NonNull WidgetsPanel widgetsPanel, @Nullable ScreenLayoutMode layoutMode) {
-		showInstance(manager, fragment, target, appMode, widgetId, widgetsPanel, true, layoutMode);
+	                                @NonNull WidgetsPanel widgetsPanel, @Nullable ScreenLayoutMode layoutMode, boolean isAndroidAutoMode) {
+		showInstance(manager, fragment, target, appMode, widgetId, widgetsPanel, true, layoutMode, isAndroidAutoMode);
 	}
 }
