@@ -622,25 +622,4 @@ public class TurnType {
 	public void setOtherTurnAngles(List<Float> turnAngles) {
 		this.otherTurnAngles = turnAngles;
 	}
-
-	public static String getLaneValue(int turnType) {
-		switch (turnType) {
-			case TurnType.TU:
-				return "reverse";
-			case TurnType.TSHL:
-				return "sharp_left";
-			case TurnType.TL:
-				return "left";
-			case TurnType.TSLL:
-				return "slight_left";
-			case TurnType.TSLR:
-				return "slight_right";
-			case TurnType.TR:
-				return "right";
-			case TurnType.TSHR:
-				return "sharp_right";
-			default:
-				return "through";
-		}
-	}
 }
