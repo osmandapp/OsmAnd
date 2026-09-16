@@ -106,11 +106,11 @@ public class TransportRoutePlanner {
 			double travelDist = 0;
 
 			double travelTime = ctx.cfg.getWaitTime(segment.road.getType(), segment.road.calcIntervalInSeconds());
-			if (segment.getStop(segment.segStart).isTransferOnly()) {
+			if (TransportFerryHelper.isJunctionStop(segment.road, segment.segStart)) {
 				travelTime = 0; // same ferry continues through the junction in the water, no boarding
 			}
 			// walking can't avoid waiting for a ferry either, so it isn't compared with walking
-			double waitTime = "ferry".equals(segment.road.getType()) ? travelTime : 0;
+			double waitTime = TransportFerryHelper.isFerry(segment.road) ? travelTime : 0;
 
 			final float routeTravelSpeed = ctx.cfg.getSpeedByRouteType(segment.road.getType());
 			if (routeTravelSpeed == 0) {
@@ -131,6 +131,7 @@ public class TransportRoutePlanner {
 				segIdWithParent ++;
 				ctx.visitedSegments.put(segIdWithParent, segment);
 				TransportStop stop = segment.getStop(ind);
+				boolean junctionStop = TransportFerryHelper.isJunctionStop(segment.road, ind);
 				// could be geometry size
 				double segmentDist = MapUtils.getDistance(prevStop.getLocation(), stop.getLocation());
 				travelDist += segmentDist;
@@ -139,13 +140,10 @@ public class TransportRoutePlanner {
 					int interval = sc.avgStopIntervals.get(ind - 1);
 					travelTime += interval * 10;
 				} else {
-					int stopTime = stop.isTransferOnly() ? 0 : ctx.cfg.getStopTime(segment.road.getType());
-					travelTime += stopTime + segmentDist / routeTravelSpeed;
-					if (stop.getFerryInterval() >= 0) {
-						double ferryWait = ctx.cfg.getWaitTime("ferry", stop.getFerryInterval());
-						travelTime += ferryWait;
-						waitTime += ferryWait;
-					}
+					int stopTime = junctionStop ? 0 : ctx.cfg.getStopTime(segment.road.getType());
+					double ferryWaitTime = TransportFerryHelper.getCrossingWaitTime(ctx.cfg, segment.road, ind);
+					travelTime += stopTime + segmentDist / routeTravelSpeed + ferryWaitTime;
+					waitTime += ferryWaitTime;
 				}
 				if (segment.distFromStart + travelTime > finishTime * ctx.cfg.increaseForAlternativesRoutes) {
 					break;
@@ -164,10 +162,9 @@ public class TransportRoutePlanner {
 						if (ctx.visitedSegments.containsKey(segmentWithParentId(sgm, segment))) {
 							continue;
 						}
-						TransportStop changeStop = sgm.getStop(sgm.segStart);
-						if ((stop.isTransferOnly() || changeStop.isTransferOnly())
-								&& changeStop.getId().longValue() != stop.getId().longValue()) {
-							continue; // transfer-only stop can't be reached on foot
+						if ((junctionStop || TransportFerryHelper.isJunctionStop(sgm.road, sgm.segStart))
+								&& sgm.getStop(sgm.segStart).getId().longValue() != stop.getId().longValue()) {
+							continue; // junction stop in the water can't be reached on foot
 						}
 						TransportRouteSegment nextSegment = new TransportRouteSegment(sgm);
 						nextSegment.parentRoute = segment;
@@ -175,7 +172,7 @@ public class TransportRoutePlanner {
 						nextSegment.walkDist = MapUtils.getDistance(nextSegment.getLocation(), stop.getLocation());
 						nextSegment.parentTravelTime = travelTime;
 						nextSegment.parentTravelDist = travelDist;
-						double walkTime = nextSegment.walkDist / ctx.cfg.walkSpeed + (stop.isTransferOnly() ? 0 :
+						double walkTime = nextSegment.walkDist / ctx.cfg.walkSpeed + (junctionStop ? 0 :
 								ctx.cfg.getChangeTime(segment.road.getType(), sgm.road.getType()));
 						nextSegment.distFromStart = segment.distFromStart + travelTime + walkTime;
 						nextSegment.waitTime = segment.waitTime + waitTime;
@@ -244,8 +241,7 @@ public class TransportRoutePlanner {
 			updateCalculationProgress(ctx, queue);
 			
 		}
-		// TODO #17773 temporary: show only routes with ferries
-		results.removeIf(r -> !r.usesFerry());
+		results.removeIf(r -> !TransportFerryHelper.usesFerry(r));
 		return prepareResults(ctx, results);
 	}
 
@@ -357,7 +353,7 @@ public class TransportRoutePlanner {
 				}
 				r.getSegments().get(i).alternatives.addAll(alts.values());
 			}
-			r.mergeTransferOnlySegments(); // after all filtering: only changes how the result is presented
+			TransportFerryHelper.mergeJunctionSegments(r.getSegments()); // after filtering: changes only presentation
 		}
 
 		return lst;
@@ -481,29 +477,6 @@ public class TransportRoutePlanner {
 		
 		public double getTravelTime() {
 			return travelTime;
-		}
-
-		// continue this segment with the next one, skipping the transfer stop between them
-		TransportRouteResultSegment merge(TransportRouteResultSegment next) {
-			List<TransportStop> stops = new ArrayList<>(getTravelStops().subList(0, end - start));
-			stops.addAll(next.getTravelStops().subList(1, next.end - next.start + 1));
-			List<Way> ways = new ArrayList<>();
-			for (Way w : route.getForwardWays()) {
-				ways.add(new Way(w, w.getId()));
-			}
-			for (Way w : next.route.getForwardWays()) {
-				ways.add(new Way(w, w.getId()));
-			}
-			TransportRouteResultSegment s = new TransportRouteResultSegment();
-			s.route = new TransportRoute(route, stops, ways);
-			s.start = 0;
-			s.end = stops.size() - 1;
-			s.walkDist = walkDist;
-			s.walkTime = walkTime;
-			s.depTime = depTime;
-			s.travelTime = travelTime + next.travelTime;
-			s.travelDistApproximate = travelDistApproximate + next.travelDistApproximate;
-			return s;
 		}
 		
 		public TransportStop getStart() {
@@ -686,10 +659,6 @@ public class TransportRoutePlanner {
 			this.departureTime = c.departureTime;
 		}
 
-		boolean usesFerry() {
-			return "ferry".equals(road.getType()) || parentRoute != null && parentRoute.usesFerry();
-		}
-
 		public boolean wasVisited(TransportRouteSegment rrs) {
 			if (rrs.road.getId().longValue() == road.getId().longValue() && 
 					rrs.departureTime == departureTime) {
@@ -771,7 +740,7 @@ public class TransportRoutePlanner {
 			if (ntrr.alternativeRoutes != null && ntrr.alternativeRoutes.length > 0) {
 				trr.alternativeRoutes = convertToTransportRoutingResult(ntrr.alternativeRoutes, cfg);
 			}
-			trr.mergeTransferOnlySegments();
+			TransportFerryHelper.mergeJunctionSegments(trr.getSegments());
 
 			convertedRes.add(trr);
 		}

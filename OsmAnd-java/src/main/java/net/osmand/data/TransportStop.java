@@ -23,35 +23,8 @@ public class TransportStop extends MapObject {
 	private List<TransportStopExit> exits;
 	private List<TransportRoute> routes = null;
 	private TransportStopAggregated transportStopAggregated;
-	private boolean transferOnly; // not reachable on foot (e.g. junction of ferry ways in the water)
-	private boolean synthetic; // generated at the end of a ferry way, not present in OSM
-	private int ferryInterval = -1; // route goes over a ferry before this stop: ferry interval in seconds (0 - unknown)
 
 	public TransportStop() {}
-
-	public int getFerryInterval() {
-		return ferryInterval;
-	}
-
-	public void setFerryInterval(int ferryInterval) {
-		this.ferryInterval = ferryInterval;
-	}
-
-	public boolean isSynthetic() {
-		return synthetic;
-	}
-
-	public void setSynthetic(boolean synthetic) {
-		this.synthetic = synthetic;
-	}
-
-	public boolean isTransferOnly() {
-		return transferOnly;
-	}
-
-	public void setTransferOnly(boolean transferOnly) {
-		this.transferOnly = transferOnly;
-	}
 	
 	public List<TransportRoute> getRoutes() {
 		return routes;

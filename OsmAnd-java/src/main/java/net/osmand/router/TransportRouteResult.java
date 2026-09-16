@@ -111,7 +111,9 @@ public class TransportRouteResult {
 					t += sts.getAvgStopIntervals()[k] * 10;
 				}
 			} else {
-				t += getChangeTime(prev, s);
+				if (prev != null) {
+					t += cfg.getChangeTime(prev.route.getType(), s.route.getType());
+				}
 				// part of s.getTravelTime()
 //				t += cfg.getBoardingTime(s.route.getType());
 				t += s.getTravelTime();
@@ -127,19 +129,10 @@ public class TransportRouteResult {
 
 
 	public int getChangeTime(TransportRouteResultSegment current, TransportRouteResultSegment next) {
-		if (current == null || next == null || current.getEnd().isTransferOnly()) {
+		if(next == null) {
 			return 0;
 		}
 		return cfg.getChangeTime(current.route.getType(), next.route.getType());
-	}
-
-	// ferry ways joined by a transfer-only stop in the water are one ferry ride
-	public void mergeTransferOnlySegments() {
-		for (int i = segments.size() - 1; i > 0; i--) {
-			if (segments.get(i - 1).getEnd().isTransferOnly()) {
-				segments.set(i - 1, segments.get(i - 1).merge(segments.remove(i)));
-			}
-		}
 	}
 
 	public int getChanges() {

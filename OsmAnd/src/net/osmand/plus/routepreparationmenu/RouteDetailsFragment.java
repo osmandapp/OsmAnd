@@ -546,7 +546,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		((ViewGroup) view).addView(baseContainer);
 
 		if (nextSegment != null) {
-				double walkDist = (long) getWalkDistance(segment, nextSegment, nextSegment.walkDist);
+			double walkDist = (long) getWalkDistance(segment, nextSegment, nextSegment.walkDist);
 
 			if (walkDist > 0) {
 				int walkTime = (int) getWalkTime(segment, nextSegment, walkDist, walkSpeed);

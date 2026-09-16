@@ -545,7 +545,6 @@ public class BinaryMapTransportReaderAdapter {
 		}
 		if (dataObject.getTags() != null && dataObject.getTags().size() > 0) {
 			dataObject.setTags(initializeTags(stringTable, dataObject));
-			dataObject.applyStopTags();
 		}
 	}
 
