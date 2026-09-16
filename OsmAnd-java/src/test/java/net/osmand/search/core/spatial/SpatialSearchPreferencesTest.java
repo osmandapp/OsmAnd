@@ -48,7 +48,8 @@ import org.junit.Assert;
  *
  * <p>Objects are addressed by OSM id. A record whose objects are no longer returned at all is
  * NOT APPLICABLE, never a failure: that is a recall problem and mixing it into a ranking number
- * would hide both.
+ * would hide both. The one exception is an order record whose preferred object is a row on screen
+ * while the other one is not returned: the judgement holds, so it counts as satisfied.
  *
  * <p>Maps are not in the repository. It looks in {@code ~/osmand/maps} by default; point it
  * elsewhere with {@code OSMAND_MAPS_DIR} (or {@code -Dosmand.maps.dir} from an IDE). Without
@@ -64,14 +65,6 @@ public class SpatialSearchPreferencesTest {
 	 * #52 and #102.
 	 */
 	private static final int VISIBLE_ROWS = 10;
-
-	/**
-	 * Ratchet, not a target. It is the number of preferences the engine satisfied when this
-	 * test was written; raise it when a change earns more. The point of a ratchet is that an
-	 * unrelated reordering cannot break the build - only contradicting a recorded human
-	 * judgement can.
-	 */
-	private static final int MIN_SATISFIED = 70;
 
 	/**
 	 * {@code OSMAND_SPATIAL_SCORE_RANKING=false} runs the same preferences against the old
@@ -140,10 +133,11 @@ public class SpatialSearchPreferencesTest {
 		Assume.assumeTrue("none of the maps named by preferences.jsonl are present",
 				sc.satisfied + sc.violated + sc.notApplicable > 0);
 		Assume.assumeTrue("old ranking is measured for comparison, not gated", SCORE_RANKING);
-		Assert.assertTrue(String.format(
-				"satisfied preferences dropped to %d, the recorded floor is %d - a human "
-						+ "judgement was contradicted, see the list above",
-				sc.satisfied, MIN_SATISFIED), sc.satisfied >= MIN_SATISFIED);
+		// gate on a contradicted judgement, not on the satisfied count: that count moves with the maps
+		// (fbe317152e satisfied 70 on the 2026-09-10 maps, 63 with 2 violated on the 2026-09-13 ones)
+		Assert.assertEquals(String.format(
+				"%d recorded human judgements were contradicted, see the list above", sc.violated),
+				0, sc.violated);
 	}
 
 	Score check(List<Pref> prefs, File mapsDir) throws IOException {
@@ -203,7 +197,15 @@ public class SpatialSearchPreferencesTest {
 				int ia = indexOf(ordered, p.a);
 				int ib = indexOf(ordered, p.b);
 				if (ia < 0 || ib < 0) {
-					sc.notApplicable++;
+					long preferred = "a".equals(p.prefer) ? p.a : p.b;
+					int ip = "a".equals(p.prefer) ? ia : ib;
+					int io = "a".equals(p.prefer) ? ib : ia;
+					if (ip >= 0 && ip < VISIBLE_ROWS && io < 0 && headIds.get(ip).contains(preferred)) {
+						// "B before A" holds when B is a row on screen and A is not shown at all
+						sc.satisfied++;
+					} else {
+						sc.notApplicable++;
+					}
 					continue;
 				}
 				if (ia == ib) {

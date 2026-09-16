@@ -454,7 +454,10 @@ public class SpatialSearchResultsList implements Comparable<SpatialSearchResults
 				bldObj = new BuildingCache(bldres, indx, loc, matchExtraWord[0]);
 				bldCheckCache.put(cacheKey, bldObj);
 			}
-			if (bldObj.bld == null || !checkBuildingPoiLocation(ctx, indx, bldObj.bld, loc)) {
+			if (bldObj.bld == null) {
+				// no such house in the map: offer the street under the houses found, as 18 for 18 B
+				surplusWords.put(indx, -1);
+			} else if (!checkBuildingPoiLocation(ctx, indx, bldObj.bld, loc)) {
 				skipResults.put(indx, true);
 			} else {
 				// assign buildings

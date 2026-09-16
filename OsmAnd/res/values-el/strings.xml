@@ -5166,4 +5166,8 @@
     <string name="share_favorites_missing_media_warning">Δεν ήταν δυνατή η συμπερίληψη μερικών συνημμένων πολυμέσων.</string>
     <string name="search_on_web">Αναζήτηση στον ιστό</string>
     <string name="astro_eclipse_column_below_horizon">Κάτω από τον ορίζοντα</string>
+    <string name="quick_action_add_track">Προσθήκη ίχνους</string>
+    <string name="quick_action_all_tracks">Όλα τα ίχνη</string>
+    <string name="quick_action_tracks_select_descr">Προσθέστε ένα ή περισσότερα ίχνη για εμφάνιση ή απόκρυψη τους στον χάρτη με ένα πάτημα.</string>
+    <string name="quick_action_tracks_always_ask_descr">Πατώντας αυτή την ενέργεια, ανοίγει τη λίστα των ιχνών όπου μπορείτε να εμφανίσετε ή να αποκρύψετε ένα ή περισσότερα από αυτά.</string>
 </resources>

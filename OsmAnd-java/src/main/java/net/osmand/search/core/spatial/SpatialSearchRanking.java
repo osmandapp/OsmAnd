@@ -30,6 +30,9 @@ public class SpatialSearchRanking {
 	public double wRatingPlace = 2.0; // a settlement is looked for from anywhere: pref-0127
 	public double wNear = 2.0;
 	public double wExactName = 1.0; // the whole name IS the query: pref-0063, pref-0104
+	/** "4 av" is 4th Avenue: a house whose street the query named by its kind only loses this much, so a
+	 *  house 2 km off falls under the street 6 km off (pref-0136) while the house at the point stays first */
+	public double wKindOnly = 1.0;
 
 	/** distance at which the proximity term is worth half of its maximum */
 	public double halfWeightKm = 3.0;
@@ -57,9 +60,9 @@ public class SpatialSearchRanking {
 	private static final double TYPE_NAME_ALIKE_PART = 0.10;
 
 	/** distance from which a town or a village, named by a piece of its name, starts to lose its weight */
-	private static final double PLACE_FAR_FROM_KM = 500;
+	private static final double PLACE_FAR_FROM_KM = 60;
 	/** ... and at which, past that, it keeps half of it */
-	private static final double PLACE_FAR_HALF_KM = 1000;
+	private static final double PLACE_FAR_HALF_KM = 150;
 
 	/** elo above the floor at which fame alone makes an object a landmark: pref-0134 */
 	private static final double LANDMARK_RATING = 1000;
@@ -131,14 +134,20 @@ public class SpatialSearchRanking {
 				+ wType * type * far
 				+ rating * far
 				+ wNear * near
-				+ exact;
+				+ exact
+				- (kindOnlyAddress(r) ? wKindOnly : 0);
 	}
 
 	/** a city is looked for by name from anywhere; a town, a village, a hamlet or an area named by a piece
-	 *  of its name is not: "farm" in Amsterdam is not 八五九农场 7900 km away. Within PLACE_FAR_FROM_KM
+	 *  of its name is not: "farm" in Amsterdam is not 八五九农场 7900 km away, and neither is an unrated
+	 *  airstrip or park named "... Farm" 230 km off, whatever its landmark type. Within PLACE_FAR_FROM_KM
 	 *  nothing changes - "rifugio" still finds the village 128 km off: pref-0045, pref-0138 */
 	private double farPlaceFactor(SpatialSearchResult r, SpatialSearchResultRef head, double name, LatLon center) {
-		if (center == null || name >= NAME_EXACT || !isPlace(head) || isCity(head)) {
+		// an exact place name is no evidence when the query is the name of a kind: "farm" is not the town Farm
+		if (center == null || isCity(head) || name >= NAME_EXACT && !queryIsKind(head)) {
+			return 1;
+		}
+		if (!isPlace(head) && (typeScore(head) != TYPE_LANDMARK || isProminent(r))) {
 			return 1;
 		}
 		double km = SpatialSearchResult.getDistance(r, center) / 1000.0;
@@ -268,17 +277,39 @@ public class SpatialSearchRanking {
 				parts = 1;
 			}
 		}
-		if (parts < 2 && isSubordinateNode(r)) {
+		if (parts < 2 && isSubordinateNode(r) && !namedByKind(r.getFirstRef())) {
 			parts = 2;
 		}
 		return parts;
 	}
 
+	/** a query word is the name of a POI category ("farm", "furt", "parkplatz") */
+	private boolean queryIsKind(SpatialSearchResultRef ref) {
+		for (SpatialSearchToken t : ref.tokens) {
+			if (t.hasPoiCategoryKeys()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/** the query word is a category of the object: "parkplatz" says what a car park named "Parkplatz Edeka" is */
+	private boolean namedByKind(SpatialSearchResultRef ref) {
+		for (SpatialSearchToken t : ref.tokens) {
+			if (ref.atom.poiTypes != null && t.matchPoiCategoryKeys(ref.atom.poiTypes)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	/** the query said how many and what kind, but never which street: "4 av" is 4th Avenue, not
 	 *  house 4 on any avenue. Whether a word only says what kind ("avenue", "sokak", "вулиця") comes
-	 *  from the common words of the map that holds the street, not from a list kept here.
+	 *  from the common words of the map that holds the street, not from a list kept here - and that
+	 *  statistic takes frequent street names for kinds too ("centre", "norte"), so this costs a house
+	 *  wKindOnly of its score rather than a tier: the house at the point still comes first.
 	 *  Only a house that is the whole answer: "76 North Street Waverly" names the street by its city. */
-	public boolean kindOnlyAddress(SpatialSearchResult r) {
+	private boolean kindOnlyAddress(SpatialSearchResult r) {
 		SpatialSearchResultRef head = r == null ? null : r.getFirstRef();
 		return r.objs.size() == 1 && head != null && head.atom != null && head.atom.isBuilding()
 				&& head.atom.distinctFoundCnt == 0;

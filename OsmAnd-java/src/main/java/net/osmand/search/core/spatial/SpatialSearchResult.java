@@ -65,8 +65,9 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 							ref.otherWordsNotFound--;
 						}
 					}
-					// building-street
-					if (check.atom.type > atom.type) {
+					// building-street, but a house the map does not have stays its street
+					if (check.atom.type > atom.type ? atom.bldObject != null || atom.type != SpatialSearchToken.BUILDING_TYPE
+							: check.atom.type == SpatialSearchToken.BUILDING_TYPE && check.atom.bldObject == null) {
 						// existing street - swap
 						check.atom = atom;
 						break;
@@ -559,7 +560,6 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 			// only the tiers that make an answer a DIFFERENT KIND of answer: the score is a
 			// continuum, and cutting it into buckets put "show more" after the third row in half
 			// of all queries
-			key = addCompareKey(key, 1, o.parent.ranking.kindOnlyAddress(o) ? 1 : 0); // same order as compare()
 			key = addCompareKey(key, 6, o.parent.ranking.answerParts(o)); // 6 bit - 64
 			return key;
 		}
@@ -588,11 +588,6 @@ public class SpatialSearchResult implements Comparable<SpatialSearchResult> {
 			return res;
 		}
 		if (ranking != null) {
-			// "4 av" is 4th Avenue: a house whose street the query never named comes after
-			res = Boolean.compare(ranking.kindOnlyAddress(o1), ranking.kindOnlyAddress(o2));
-			if (res != 0) {
-				return res;
-			}
 			res = Integer.compare(ranking.answerParts(o1), ranking.answerParts(o2));
 			if (res != 0) {
 				return res;

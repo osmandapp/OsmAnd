@@ -50,6 +50,9 @@ public class SpatialSearchContext {
 
 	private static int SHIFT_FILE_IND = 14; // maxism files 16K
 	private static int SHIFT_POI_IND = 10; // maximum poi 1024
+	// alternative name variant 1..7 (NameIndexReader.ALT_NAME_VARIANTS) in bits 56-58 of an atom id: an address id takes up to
+	// 45 bits (31-bit file offset + file index), a poi id up to 55 bits (31-bit shift + poi index + file index)
+	private static int SHIFT_ALT_NAME = 56;
 
 	final List<BinaryMapIndexReader> files;
 	final List<SpatialSearchFileCache> internalFile = new ArrayList<>();
@@ -640,6 +643,7 @@ public class SpatialSearchContext {
 	}
 
 	public MapObject readPoiObject(long id, TLongObjectHashMap<MapObject> cache) throws IOException {
+		id &= (1L << SHIFT_ALT_NAME) - 1; // the alternative name variant reads the same object
 		if (cache != null) {
 			MapObject mapObject = cache.get(id);
 			if (mapObject != null) {
@@ -691,6 +695,7 @@ public class SpatialSearchContext {
 			}
 		}
 		long opid = pid;
+		id &= (1L << SHIFT_ALT_NAME) - 1; // the alternative name variant reads the same object
 		int indInd = (int) (id & ((1l << SHIFT_FILE_IND) - 1));
 		id >>= SHIFT_FILE_IND;
 		long shift = id;
@@ -901,6 +906,7 @@ public class SpatialSearchContext {
 		List<SpatialSearchToken> otherTokens = null;
 		boolean streetCity = false;
 		boolean numericNotMatch = false;
+		int altVariant = 0;
 		// the word that found the object: common in this map ("avenue", "rue") names no object
 		int distinct = cmnWord != null && cmnWord.length > 1 && cmnWord[1] ? 0 : 1;
 		List<String> split = null;
@@ -932,6 +938,11 @@ public class SpatialSearchContext {
 				boolean numeric = SearchAlgorithms.isNumber2Letters(otherName);
 				if (otherName.equalsIgnoreCase(NameIndexReader.CITY_AS_STREET_COMMON)) {
 					streetCity = true;
+					continue;
+				}
+				int marker = NameIndexReader.altNameVariant(otherName);
+				if (marker > 0) {
+					altVariant = marker;
 					continue;
 				}
 				boolean matched = false;
@@ -974,6 +985,10 @@ public class SpatialSearchContext {
 			if (coords.intersects(limitLocationBboxes[nearByType])) {
 				break;
 			}
+		}
+		if (altVariant > 0) {
+			// an alternative name with its own marker is its own object: its words never take the slots of the main name
+			lid += ((long) altVariant) << SHIFT_ALT_NAME;
 		}
 		NameIndexAtom atom = new NameIndexAtom(name, type, lid, pid, obj, streetCity, other, otherFound, coords,
 				nearByType, -1);

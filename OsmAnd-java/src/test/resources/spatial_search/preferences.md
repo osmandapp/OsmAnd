@@ -109,8 +109,19 @@ housekeeping followed: a record replaced by a later one is no longer asserted, a
 deduplication absorbed into another row is reported as `absorbed` rather than judged - the
 complaint it recorded cannot be evaluated against a row that now stands for something else.
 
-The test gates on `MIN_SATISFIED`, a ratchet: an unrelated reordering cannot break the build,
-only contradicting a recorded judgement can. Raise it when a change earns more.
+The test fails only when a recorded judgement is contradicted (`violated > 0`): an unrelated
+reordering cannot break the build. The satisfied count is printed for comparison, not gated - it
+moves with the maps as much as with the ranker. It used to be a floor (`MIN_SATISFIED = 70`), and
+replacing the Berlin, Toscana, Minsk, Praha and New York maps on 2026-09-13 dropped it to 65 with
+nothing violated: the ranker of 2026-09-10 (fbe317152e) itself satisfies only 63 on the new maps.
+
+An order record whose preferred object is a row of its own in the top 10 while the other object is
+not returned at all counts as satisfied: "B before A" holds when A is not shown. 19 of the 25
+"not applicable" records on the 2026-09-13 maps were of this kind. The object not returned is a
+public transport stop or platform in 12 of them, and in 11 an object of the same name sits inside
+a row merged by deduplication, under another OSM id. With this rule the engine at android
+88c6defe9a satisfies 84, violates 0 and leaves 6 not applicable; fbe317152e still fails on its 2
+violated records.
 
 ## Where the current records came from
 

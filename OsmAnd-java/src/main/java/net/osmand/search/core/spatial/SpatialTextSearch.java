@@ -34,6 +34,7 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.search.core.spatial.SpatialPoiSearch.SpatialPoiType;
 import net.osmand.search.core.spatial.SpatialSearchContext.SpatialSearchStats;
 import net.osmand.search.core.spatial.SpatialSearchToken.NameIndexAtom;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.SearchAlgorithms;
 
@@ -701,6 +702,12 @@ public class SpatialTextSearch {
 			SpatialSearchToken token = new SpatialSearchToken(ctx.settings.MIN_CHARACTERS_INCOMPLETE, w,
 					owords.get(ind), tokens.size());
 			tokens.add(token);
+		}
+		for (SpatialSearchToken t : tokens) {
+			for (SpatialSearchToken o : tokens) {
+				t.numberNamedByOther |= t.mainNumber > 0 && o != t && SearchAlgorithms.letters(o.wordNoDot) > 0
+						&& Algorithms.extractFirstIntegerNumber(o.wordNoDot) == t.mainNumber;
+			}
 		}
 		return tokens;
 	}
