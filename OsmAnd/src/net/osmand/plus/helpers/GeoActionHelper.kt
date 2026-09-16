@@ -133,6 +133,8 @@ object GeoActionHelper {
 					app.runInUIThread {
 						ChooseRouteFragment.showInstance(activity.supportFragmentManager, 0, MenuState.FULL_SCREEN)
 					}
+				} else {
+					showFeedback(app, mapActivity, session, R.string.download_unsupported_action)
 				}
 				true
 			}
@@ -142,12 +144,19 @@ object GeoActionHelper {
 					app.runInUIThread {
 						ChooseRouteFragment.showInstance(activity.supportFragmentManager, 0, MenuState.FULL_SCREEN)
 					}
+				} else {
+					showFeedback(app, mapActivity, session, R.string.download_unsupported_action)
 				}
 				true
 			}
 			ACTION_ROUTE_OVERVIEW -> {
-				app.runInUIThread {
-					app.osmandMap?.fitCurrentRouteToMap(false, 0)
+				val activity = mapActivity ?: app.osmandMap?.mapView?.mapActivity
+				if (activity != null) {
+					app.runInUIThread {
+						app.osmandMap?.fitCurrentRouteToMap(false, 0)
+					}
+				} else {
+					showFeedback(app, mapActivity, session, R.string.download_unsupported_action)
 				}
 				true
 			}
@@ -227,13 +236,17 @@ object GeoActionHelper {
 					showFeedback(app, mapActivity, session, R.string.animate_routing_route_not_calculated)
 				} else {
 					val nextInfo = app.routingHelper.getNextRouteDirectionInfo(NextDirectionInfo(), false)
-					val desc = TripUtils.getNextTurnDescription(app, nextInfo, nextInfo?.directionInfo?.turnType, null)
+					val turnType = nextInfo?.directionInfo?.turnType
+					val desc = if (nextInfo != null) {
+						TripUtils.getNextTurnDescription(app, nextInfo, turnType, null)
+					} else {
+						""
+					}
 					if (desc.isNotEmpty()) {
 						showFeedback(app, mapActivity, session, desc)
 					} else {
 						showFeedback(app, mapActivity, session, R.string.shared_string_none)
 					}
-					app.routingHelper.voiceRouter.announceCurrentDirection(app.locationProvider.lastKnownLocation)
 				}
 				true
 			}
@@ -241,7 +254,12 @@ object GeoActionHelper {
 				val point = app.targetPointsHelper.pointToNavigate
 				if (point != null) {
 					val name = point.onlyName
-					val dest = name.ifEmpty { app.getString(R.string.route_descr_destination) }
+					val dest = if (name.isNotEmpty()) {
+						name
+					} else {
+						val latLon = point.latLon
+						"${latLon.latitude}, ${latLon.longitude}"
+					}
 					showFeedback(app, mapActivity, session, "${app.getString(R.string.route_descr_destination)}: $dest")
 				} else {
 					showFeedback(app, mapActivity, session, R.string.animate_routing_route_not_calculated)
@@ -294,13 +312,14 @@ object GeoActionHelper {
 		session: NavigationSession?,
 		text: String
 	) {
-		app.runInUIThread {
-			val context: Context = mapActivity ?: app
-			Toast.makeText(context, text, Toast.LENGTH_LONG).show()
-		}
 		val navSession = session ?: app.carNavigationSession
 		if (navSession != null) {
 			app.toastHelper.showCarToast(text, true)
+		} else {
+			app.runInUIThread {
+				val context: Context = mapActivity ?: app
+				Toast.makeText(context, text, Toast.LENGTH_LONG).show()
+			}
 		}
 	}
 
