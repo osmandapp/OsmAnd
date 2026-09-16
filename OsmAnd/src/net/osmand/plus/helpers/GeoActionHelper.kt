@@ -90,10 +90,7 @@ object GeoActionHelper {
 		session: NavigationSession? = null
 	): Boolean {
 		if (action.isNullOrEmpty()) return false
-		LOG.info("executeAction: action=$action, hasMapActivity=${mapActivity != null}, hasSession=${session != null}")
-		val result = executeActionInternal(app, action, mapActivity, session)
-		LOG.info("executeAction: action=$action completed with result=$result")
-		return result
+		return executeActionInternal(app, action, mapActivity, session)
 	}
 
 	private fun executeActionInternal(
@@ -150,7 +147,7 @@ object GeoActionHelper {
 			}
 			ACTION_ROUTE_OVERVIEW -> {
 				app.runInUIThread {
-					app.osmandMap.fitCurrentRouteToMap(false, 0)
+					app.osmandMap?.fitCurrentRouteToMap(false, 0)
 				}
 				true
 			}
