@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.sp
 import net.osmand.plus.R
 import net.osmand.plus.gallery.model.GallerySortMode
 import net.osmand.plus.widgets.popup.OsmAndDropdownMenu
+import net.osmand.plus.widgets.popup.OsmAndDropdownMenuDefaults
 import net.osmand.plus.widgets.popup.OsmAndDropdownMenuOption
 import net.osmand.plus.widgets.popup.colorAttr
 
@@ -62,7 +63,12 @@ class GallerySortBarView @JvmOverloads constructor(
 	@Composable
 	override fun Content() {
 		val listBackground = colorAttr(R.attr.list_background_color)
+		val dividerColor = colorAttr(R.attr.divider_color_basic)
 		val activeColor = colorAttr(R.attr.active_color_primary)
+		val textColor = colorAttr(android.R.attr.textColorPrimary)
+		val secondaryTextColor = colorAttr(android.R.attr.textColorSecondary)
+		val iconColor = colorAttr(R.attr.default_icon_color)
+		val controlColor = colorAttr(R.attr.secondary_icon_color)
 
 		val horizontalPadding = with(LocalDensity.current) { horizontalContentPaddingPx.toDp() }
 		val menuOptions = sortModes.mapIndexed { index, mode ->
@@ -113,7 +119,16 @@ class GallerySortBarView @JvmOverloads constructor(
 				onOptionSelected = {
 					menuExpanded = false
 					onSortModeSelected?.invoke(it)
-				}
+				},
+				colors = OsmAndDropdownMenuDefaults.colors(
+					background = listBackground,
+					divider = dividerColor,
+					text = textColor,
+					secondaryText = secondaryTextColor,
+					icon = iconColor,
+					selected = activeColor,
+					control = controlColor
+				)
 			)
 		}
 	}

@@ -49,6 +49,7 @@ import net.osmand.plus.settings.enums.DayNightMode
 import net.osmand.plus.settings.enums.ThemeUsageContext
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.widgets.popup.OsmAndDropdownMenu
+import net.osmand.plus.widgets.popup.OsmAndDropdownMenuDefaults
 import net.osmand.plus.widgets.popup.OsmAndDropdownMenuOption
 import net.osmand.plus.widgets.popup.colorAttr
 
@@ -397,6 +398,15 @@ private fun ChipAnchor(
 						onDropdownItemClick(chipId, itemId)
 					}
 				},
+				colors = OsmAndDropdownMenuDefaults.colors(
+					background = listBackground,
+					divider = dividerColor,
+					text = textColor(ChipsLayout.TextColorStyle.PRIMARY),
+					secondaryText = textColor(ChipsLayout.TextColorStyle.SECONDARY),
+					icon = iconColor(ChipsLayout.IconColorStyle.DEFAULT, nightMode),
+					selected = activeColor,
+					control = inActiveColor
+				),
 				title = if (chip.menuTitleId != 0) stringResource(chip.menuTitleId) else null
 			)
 		}
