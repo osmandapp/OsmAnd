@@ -332,13 +332,22 @@ public class RouteResultPreparation {
 			RouteSegmentResult rr = result.get(i);
 			calculateTimeSpeed(ctx, rr);
 			RouteDataObject road = rr.getObject();
-			if ("ferry".equals(road.getValue("route"))) {
+			if (isFerry(road)) {
+				double time = rr.getSegmentTime();
 				double length = getLength(road);
 				int duration = TransportRoute.parseDurationTagToSeconds(road.getValue(TransportRoute.DURATION_KEY), length);
 				if (duration > 0) {
 					// the passed part of the ferry way takes the same part of its duration
-					rr.setSegmentSpeed((float) (length / duration));
-					rr.setSegmentTime(rr.getDistance() / rr.getSegmentSpeed());
+					time = rr.getDistance() * duration / length;
+				}
+				if (i == 0 || !isFerry(result.get(i - 1).getObject())) {
+					// waiting for the ferry once per crossing, same as in public transport
+					int interval = TransportRoute.parseIntervalTagToSeconds(road.getValue(TransportRoute.INTERVAL_KEY));
+					time += TransportRoute.getFerryWaitTime(interval, ((GeneralRouter) ctx.getRouter()).getFerryBoardingTime());
+				}
+				if (time > 0) {
+					rr.setSegmentTime((float) time);
+					rr.setSegmentSpeed((float) (rr.getDistance() / time)); // navigation calculates time left with the speed
 				}
 			}
 		}
@@ -2220,6 +2229,10 @@ public class RouteResultPreparation {
 		return (((long) road.getPoint31XTile(pointInd)) << 31) + (long) road.getPoint31YTile(pointInd);
 	}
 	
+	private static boolean isFerry(RouteDataObject road) {
+		return "ferry".equals(road.getValue("route"));
+	}
+
 	private static double getLength(RouteDataObject road) {
 		double length = 0;
 		for (int i = 1; i < road.getPointsLength(); i++) {

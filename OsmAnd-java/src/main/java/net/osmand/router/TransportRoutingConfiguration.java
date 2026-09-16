@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
+import net.osmand.data.TransportRoute;
 import net.osmand.router.GeneralRouter.RouteAttributeContext;
 import net.osmand.router.GeneralRouter.RouteDataObjectAttribute;
 
@@ -76,6 +77,9 @@ public class TransportRoutingConfiguration {
 	
 	// waiting for a vehicle: half of its interval if known, otherwise boarding time
 	public double getWaitTime(String routeType, int intervalSeconds) {
+		if ("ferry".equals(routeType)) {
+			return TransportRoute.getFerryWaitTime(intervalSeconds, router.getFerryBoardingTime());
+		}
 		return intervalSeconds > 0 ? intervalSeconds / 2.0 : getBoardingTime(routeType);
 	}
 

@@ -88,6 +88,11 @@ public class TransportRoute extends MapObject {
 		return Math.max(0, hh * 3600 + mm * 60 + ss);
 	}
 
+	// waiting for a ferry, same for all routing profiles
+	public static double getFerryWaitTime(int intervalSeconds, int boardingTime) {
+		return intervalSeconds > 0 ? intervalSeconds / 2.0 : boardingTime;
+	}
+
 	// time from a duration tag, 0 if the tag is absent or unrealistic for the distance (meters)
 	public static int parseDurationTagToSeconds(String duration, double distance) {
 		int seconds = parseIntervalTagToSeconds(duration);
