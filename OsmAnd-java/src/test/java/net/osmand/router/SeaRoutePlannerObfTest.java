@@ -153,6 +153,24 @@ public class SeaRoutePlannerObfTest {
 	}
 
 	/**
+	 * Vlissingen: the nearest water to a point in town is a dock behind the locks, from which the Scheldt
+	 * cannot be reached over open water. The route has to fall back to farther water instead of failing.
+	 */
+	@Test
+	public void vlissingenTownPointReachesTheScheldtPastTheDocks() throws Exception {
+		List<BinaryMapIndexReader> readers = readers("Netherlands_zeeland_europe_2.obf", "Belgium_flanders_europe_2.obf");
+		LatLon town = new LatLon(51.4420, 3.5700), scheldt = new LatLon(51.4300, 3.5800);
+		SeaRoutePlanner planner = planner();
+
+		SeaObstacles planning = load(readers, town, scheldt, PLAN_ZOOM);
+		SeaRoute route = planner.plan(planning, town, scheldt);
+
+		Assert.assertNotNull("no route out of Vlissingen", route);
+		Assert.assertTrue("the nearest water should have been skipped, attempts " + route.attempts, route.attempts > 1);
+		Assert.assertFalse(planner.crossesShore(planning, route));
+	}
+
+	/**
 	 * The IJsselmeer carries no coastline at all - it is a natural=water area - so a coastline-only
 	 * load sees open water and would happily route over land. Guards the reason water areas have to be
 	 * loaded as well.

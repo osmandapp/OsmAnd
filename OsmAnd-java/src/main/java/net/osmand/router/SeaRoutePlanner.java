@@ -35,6 +35,8 @@ public class SeaRoutePlanner {
 		public double simplifyTolerance = 40;
 		/** How far to look for water when an endpoint is on land. */
 		public double snapRadius = 3000;
+		/** How many pairs of water points around the endpoints are tried before giving up. */
+		public int maxEndpointAttempts = 16;
 	}
 
 	public static class SeaRoute {
@@ -43,6 +45,8 @@ public class SeaRoutePlanner {
 		public int corners;
 		public int expansions;
 		public int visibilityChecks;
+		/** Pairs of endpoints tried, 1 when the nearest water of both ends was usable. */
+		public int attempts;
 		/** Set when an endpoint was on land and had to be moved onto water. */
 		public LatLon snappedStart;
 		public LatLon snappedEnd;
@@ -70,20 +74,48 @@ public class SeaRoutePlanner {
 
 	/** Returns null when the endpoints cannot be put on water or no path exists within the obstacles. */
 	public SeaRoute plan(SeaObstacles obstacles, LatLon start, LatLon end) {
-		SeaRoute route = new SeaRoute();
-		LatLon from = obstacles.snapToWater(start, config.minClearance, config.snapRadius);
-		LatLon to = obstacles.snapToWater(end, config.minClearance, config.snapRadius);
-		if (from == null || to == null) {
+		List<LatLon> froms = obstacles.waterCandidates(start, config.minClearance, config.snapRadius);
+		List<LatLon> tos = obstacles.waterCandidates(end, config.minClearance, config.snapRadius);
+		if (froms.isEmpty() || tos.isEmpty()) {
 			return null;
 		}
-		if (!from.equals(start)) {
-			route.snappedStart = from;
-		}
-		if (!to.equals(end)) {
-			route.snappedEnd = to;
-		}
-
 		List<Corner> corners = corners(obstacles);
+		int attempts = 0, expansions = 0, visibilityChecks = 0;
+		// the nearest water may be a dock behind a lock: try farther water too, nearest pairs first
+		for (int sum = 0; sum <= froms.size() + tos.size() - 2; sum++) {
+			for (int i = 0; i <= sum; i++) {
+				int j = sum - i;
+				if (i >= froms.size() || j >= tos.size()) {
+					continue;
+				}
+				if (attempts == config.maxEndpointAttempts) {
+					return null;
+				}
+				attempts++;
+				SeaRoute route = search(obstacles, corners, froms.get(i), tos.get(j));
+				expansions += route.expansions;
+				visibilityChecks += route.visibilityChecks;
+				if (route.points.isEmpty()) {
+					continue;
+				}
+				route.expansions = expansions;
+				route.visibilityChecks = visibilityChecks;
+				route.attempts = attempts;
+				if (!froms.get(i).equals(start)) {
+					route.snappedStart = froms.get(i);
+				}
+				if (!tos.get(j).equals(end)) {
+					route.snappedEnd = tos.get(j);
+				}
+				return route;
+			}
+		}
+		return null;
+	}
+
+	/** A* between two water points; the result has no points when they are not connected. */
+	private SeaRoute search(SeaObstacles obstacles, List<Corner> corners, LatLon from, LatLon to) {
+		SeaRoute route = new SeaRoute();
 		route.corners = corners.size();
 		int size = corners.size() + 2;
 		double[] x = new double[size], y = new double[size];
@@ -141,7 +173,7 @@ public class SeaRoutePlanner {
 			}
 		}
 		if (Double.isInfinite(g[1])) {
-			return null;
+			return route;
 		}
 		route.distance = g[1];
 		for (int v = 1; v != -1; v = parent[v]) {

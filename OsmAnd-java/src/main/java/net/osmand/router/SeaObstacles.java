@@ -281,14 +281,22 @@ public class SeaObstacles {
 	 * nearest water within maxRadius. Returns the point itself when it is already clear of the shore.
 	 */
 	public LatLon snapToWater(LatLon point, double clearance, double maxRadius) {
+		List<LatLon> candidates = waterCandidates(point, clearance, maxRadius);
+		return candidates.isEmpty() ? null : candidates.get(0);
+	}
+
+	/**
+	 * Water points around a point, nearest first: the point itself when it is clear of the shore, then one
+	 * point per ring of growing radius. The nearest water is not always usable - in Vlissingen it is a
+	 * dock behind a lock - so a router keeps the farther ones to fall back on.
+	 */
+	public List<LatLon> waterCandidates(LatLon point, double clearance, double maxRadius) {
+		List<LatLon> candidates = new ArrayList<>();
 		double px = x(point.getLongitude()), py = y(point.getLatitude());
 		boolean onLand = isLand(point, maxRadius);
 		if (!onLand && isClear(px, py, px, py, clearance)) {
-			return point;
+			candidates.add(point);
 		}
-		LatLon best = null;
-		double bestDistance = Double.MAX_VALUE;
-		// rings of candidates outwards; the first radius that offers water wins
 		for (double radius = clearance; radius <= maxRadius; radius *= 1.6) {
 			for (int i = 0; i < 64; i++) {
 				double a = Math.PI * 2 * i / 64;
@@ -300,16 +308,11 @@ public class SeaObstacles {
 				if (!onLand && !isClear(px, py, cx, cy, 0)) {
 					continue; // water on the other side of a spit; from land the shore is crossed anyway
 				}
-				if (radius < bestDistance) {
-					bestDistance = radius;
-					best = candidate;
-				}
-			}
-			if (best != null) {
-				return best;
+				candidates.add(candidate);
+				break;
 			}
 		}
-		return null;
+		return candidates;
 	}
 
 	private int nearestSegment(double px, double py, double searchRadius) {

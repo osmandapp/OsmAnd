@@ -187,4 +187,24 @@ public class SeaRoutePlannerTest {
 
 		Assert.assertNull(route);
 	}
+
+	@Test
+	public void berthNextToAnEnclosedDockStillReachesTheSea() {
+		// a 2 km island with a closed dock inside: the berth is 50 m from the dock and 650 m from the sea,
+		// so the nearest water is the one a boat cannot leave - the Vlissingen docks behind their locks
+		SeaObstacles obstacles = new SeaObstacles(ORIGIN.getLatitude());
+		obstacles.addCoastline(island(0, 0, 2000));
+		obstacles.addWaterAreaRing(island(1000, 900, 300));
+		obstacles.build();
+		SeaRoutePlanner planner = planner(80, 40);
+		LatLon berth = at(1350, 1050);
+
+		Assert.assertTrue(obstacles.isLand(berth));
+		SeaRoute route = planner.plan(obstacles, berth, at(3000, 1050));
+
+		Assert.assertNotNull("the dock is the nearest water, but the sea is reachable a little farther", route);
+		Assert.assertTrue("attempts " + route.attempts, route.attempts > 1);
+		Assert.assertFalse(obstacles.isLand(route.snappedStart));
+		Assert.assertFalse(planner.crossesShore(obstacles, route));
+	}
 }
