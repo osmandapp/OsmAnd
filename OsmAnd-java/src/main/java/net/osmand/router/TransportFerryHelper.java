@@ -65,10 +65,11 @@ public class TransportFerryHelper {
 		return stops;
 	}
 
-	// ferry crossing time from its duration tag, 0 if unknown (then it's calculated with the ferry speed)
-	public static int getDuration(TransportRoute route) {
-		return isFerry(route) ? TransportRoute.parseDurationTagToSeconds(route.getTags().get(TransportRoute.DURATION_KEY),
+	// ferry with a duration tag moves with the speed from it (route distance is a sum of distances between stops)
+	public static double getTravelSpeed(TransportRoute route, double defaultSpeed) {
+		int duration = isFerry(route) ? TransportRoute.parseDurationTagToSeconds(route.getTags().get(TransportRoute.DURATION_KEY),
 				route.getDistance()) : 0;
+		return duration > 0 ? (double) route.getDistance() / duration : defaultSpeed;
 	}
 
 	// waiting for a ferry on the way to the stop, same as boarding the ferry itself

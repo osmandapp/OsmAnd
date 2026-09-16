@@ -333,15 +333,12 @@ public class RouteResultPreparation {
 			calculateTimeSpeed(ctx, rr);
 			RouteDataObject road = rr.getObject();
 			if ("ferry".equals(road.getValue("route"))) {
-				int duration = TransportRoute.parseDurationTagToSeconds(road.getValue(TransportRoute.DURATION_KEY),
-						road.distance(0, road.getPointsLength() - 1));
+				double length = getLength(road);
+				int duration = TransportRoute.parseDurationTagToSeconds(road.getValue(TransportRoute.DURATION_KEY), length);
 				if (duration > 0) {
-					// whole duration goes to the first segment of the ferry way (a way can be split into several segments)
-					boolean sameWay = i > 0 && result.get(i - 1).getObject().getId() == road.getId();
-					rr.setSegmentTime(sameWay ? 0 : duration);
-					if (!sameWay) {
-						rr.setSegmentSpeed(rr.getDistance() / duration);
-					}
+					// the passed part of the ferry way takes the same part of its duration
+					rr.setSegmentSpeed((float) (length / duration));
+					rr.setSegmentTime(rr.getDistance() / rr.getSegmentSpeed());
 				}
 			}
 		}
@@ -2223,6 +2220,14 @@ public class RouteResultPreparation {
 		return (((long) road.getPoint31XTile(pointInd)) << 31) + (long) road.getPoint31YTile(pointInd);
 	}
 	
+	private static double getLength(RouteDataObject road) {
+		double length = 0;
+		for (int i = 1; i < road.getPointsLength(); i++) {
+			length += measuredDist(road.getPoint31XTile(i - 1), road.getPoint31YTile(i - 1), road.getPoint31XTile(i), road.getPoint31YTile(i));
+		}
+		return length;
+	}
+
 	private static double measuredDist(int x1, int y1, int x2, int y2) {
 		return MapUtils.getDistance(MapUtils.get31LatitudeY(y1), MapUtils.get31LongitudeX(x1), 
 				MapUtils.get31LatitudeY(y2), MapUtils.get31LongitudeX(x2));

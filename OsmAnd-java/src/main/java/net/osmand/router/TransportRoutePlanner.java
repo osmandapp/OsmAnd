@@ -111,13 +111,12 @@ public class TransportRoutePlanner {
 			}
 			// walking can't avoid waiting for a ferry either, so it isn't compared with walking
 			double waitTime = TransportFerryHelper.isFerry(segment.road) ? travelTime : 0;
-			// whole ferry duration goes to the first stop, otherwise travel time is calculated with the speed
-			int ferryDuration = TransportFerryHelper.getDuration(segment.road);
 
 			final float routeTravelSpeed = ctx.cfg.getSpeedByRouteType(segment.road.getType());
 			if (routeTravelSpeed == 0) {
 				continue;
 			}
+			double travelSpeed = TransportFerryHelper.getTravelSpeed(segment.road, routeTravelSpeed);
 			TransportStop prevStop = segment.getStop(segment.segStart);
 			List<TransportRouteSegment> sgms = new ArrayList<TransportRouteSegment>();
 			if (TRACE_ONBOARD_ID != 0) {
@@ -143,11 +142,9 @@ public class TransportRoutePlanner {
 					travelTime += interval * 10;
 				} else {
 					int stopTime = junctionStop ? 0 : ctx.cfg.getStopTime(segment.road.getType());
-					double hopTime = ferryDuration == 0 ? segmentDist / routeTravelSpeed
-							: ind == segment.segStart + 1 ? ferryDuration : 0;
 					double ferryWaitTime = TransportFerryHelper.getCrossingWaitTime(ctx.cfg, segment.road, ind);
 					int ferryCrossingTime = TransportFerryHelper.getCrossingDuration(segment.road, ind);
-					travelTime += stopTime + hopTime + ferryWaitTime + ferryCrossingTime;
+					travelTime += stopTime + segmentDist / travelSpeed + ferryWaitTime + ferryCrossingTime;
 					waitTime += ferryWaitTime;
 				}
 				if (segment.distFromStart + travelTime > finishTime * ctx.cfg.increaseForAlternativesRoutes) {
