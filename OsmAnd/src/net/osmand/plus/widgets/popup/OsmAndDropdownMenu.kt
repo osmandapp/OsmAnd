@@ -13,6 +13,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -192,7 +193,8 @@ fun <T> OsmAndDropdownMenuContent(
 	shadowElevation: Dp = 3.dp,
 	border: BorderStroke? = null,
 	colors: OsmAndDropdownMenuColors? = null,
-	title: String? = null
+	title: String? = null,
+	onDismissRequest: () -> Unit = {}
 ) {
 	val resolvedContainerColor = colors?.background ?: containerColor
 	val resolvedShape = if (shape == MenuDefaults.shape) {
@@ -220,6 +222,7 @@ fun <T> OsmAndDropdownMenuContent(
 					modifier = Modifier
 						.fillMaxWidth()
 						.heightIn(min = MENU_LABEL_HEIGHT)
+						.clickable(onClick = onDismissRequest)
 						.padding(horizontal = MENU_HORIZONTAL_PADDING),
 					contentAlignment = Alignment.CenterStart
 				) {
@@ -250,23 +253,32 @@ fun <T> OsmAndDropdownMenuContent(
 					}
 				}
 
+				val titleColor = option.titleColor
+					?: if (option.titleBold) {
+						colors?.secondaryText ?: MaterialTheme.colorScheme.onSurfaceVariant
+					} else if (option.enabled) {
+						colors?.text ?: Color.Unspecified
+					} else {
+						colors?.text?.copy(alpha = 0.38f) ?: MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
+					}
+
 				val text: @Composable () -> Unit = {
 					if (option.supportingText != null) {
 						Column {
 							Text(
 								text = option.title,
-								color = option.titleColor ?: colors?.text?.copy(alpha = if (option.enabled) 1f else 0.5f)
-								?: if (option.enabled) Color.Unspecified else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
+								color = titleColor,
 								fontWeight = if (option.titleBold) FontWeight.Bold else FontWeight.Normal,
 								maxLines = 1,
 								overflow = TextOverflow.Ellipsis
 							)
 							Text(
 								text = option.supportingText,
-								color = colors?.secondaryText?.copy(alpha = if (option.enabled) 1f else 0.5f)
-									?: if (option.enabled) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.onSurfaceVariant.copy(
-										alpha = 0.38f
-									),
+								color = if (option.enabled) {
+									colors?.secondaryText ?: MaterialTheme.colorScheme.onSurfaceVariant
+								} else {
+									colors?.secondaryText?.copy(alpha = 0.38f) ?: MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.38f)
+								},
 								fontSize = 12.sp,
 								maxLines = 1,
 								overflow = TextOverflow.Ellipsis
@@ -275,8 +287,7 @@ fun <T> OsmAndDropdownMenuContent(
 					} else {
 						Text(
 							text = option.title,
-							color = option.titleColor ?: colors?.text?.copy(alpha = if (option.enabled) 1f else 0.5f)
-							?: if (option.enabled) Color.Unspecified else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
+							color = titleColor,
 							fontWeight = if (option.titleBold) FontWeight.Bold else FontWeight.Normal,
 							maxLines = 1,
 							overflow = TextOverflow.Ellipsis
@@ -441,7 +452,8 @@ fun <T> OsmAndDropdownMenuContainer(
 	shadowElevation: Dp = 3.dp,
 	border: BorderStroke? = null,
 	colors: OsmAndDropdownMenuColors? = null,
-	title: String? = null
+	title: String? = null,
+	onDismissRequest: () -> Unit = {}
 ) {
 	Column(
 		modifier = modifier.width(IntrinsicSize.Max),
@@ -474,7 +486,8 @@ fun <T> OsmAndDropdownMenuContainer(
 					shadowElevation = shadowElevation,
 					border = border,
 					colors = colors,
-					title = if (isFirst) title else null
+					title = if (isFirst) title else null,
+					onDismissRequest = onDismissRequest
 				)
 			}
 		}
@@ -532,7 +545,8 @@ fun <T> OsmAndDropdownMenu(
 					shadowElevation = shadowElevation,
 					border = border,
 					colors = resolvedColors,
-					title = title
+					title = title,
+					onDismissRequest = onDismissRequest
 				)
 			}
 		}
@@ -605,7 +619,8 @@ fun showComposeDropdownMenu(displayData: PopUpMenuDisplayData): PopupWindow? {
 						if (item.shouldDismissOnClick()) {
 							popupWindow.dismiss()
 						}
-					}
+					},
+					onDismissRequest = { popupWindow.dismiss() }
 				)
 			}
 		}
@@ -703,7 +718,7 @@ fun PopUpMenuItem.toDropdownOption(displayData: PopUpMenuDisplayData? = null): O
 		selected = isSelected,
 		selectedColor = compoundBtnColor?.takeIf { it != 0 }?.let { Color(it) },
 		isCheckbox = isCheckbox,
-		enabled = hasClickListener || isShowCompoundBtn,
+		enabled = hasClickListener || isShowCompoundBtn || shouldDismissOnClick(),
 		showDividerAfter = false,
 		showGapAfter = false,
 		titleBold = isTitleBold,

@@ -180,8 +180,15 @@ class OsmAndDropdownMenuTest {
 		val option2 = options[1]
 		assertEquals("Delete", option2.title)
 		assertTrue(option2.titleBold)
-		assertFalse(option2.enabled)
+		assertTrue(option2.enabled)
 		assertFalse(option2.showDividerAfter)
+
+		val disabledItem = PopUpMenuItem.Builder(context)
+			.setTitle("Disabled Item")
+			.setDismissOnClick(false)
+			.create()
+		val disabledOption = disabledItem.toDropdownOption()
+		assertFalse(disabledOption.enabled)
 
 		val clickableItem = PopUpMenuItem.Builder(context)
 			.setTitle("Clickable")
@@ -385,11 +392,21 @@ class OsmAndDropdownMenuTest {
 	}
 
 	@Test
-	fun testPopUpMenuItemDisabledWhenNoListeners() {
+	fun testPopUpMenuItemEnabledWithDismissOnClickEvenWithoutListener() {
 		val context = InstrumentationRegistry.getInstrumentation().targetContext
-		val item = PopUpMenuItem.Builder(context).setTitle("Plain Item").create()
-		val option = item.toDropdownOption()
-		assertFalse(option.enabled)
+		val headerItem = PopUpMenuItem.Builder(context)
+			.setTitle("Sort by")
+			.setTitleBold(true)
+			.create()
+		val option = headerItem.toDropdownOption()
+		assertTrue(option.enabled)
+
+		val disabledItem = PopUpMenuItem.Builder(context)
+			.setTitle("Static Item")
+			.setDismissOnClick(false)
+			.create()
+		val disabledOption = disabledItem.toDropdownOption()
+		assertFalse(disabledOption.enabled)
 	}
 
 	@Test
@@ -662,6 +679,27 @@ class OsmAndDropdownMenuTest {
 		val anchorWidthExcessive = 2000
 		val targetWidth2 = minOf(anchorWidthExcessive, maxAllowedWidthPx)
 		assertEquals(maxAllowedWidthPx, targetWidth2)
+	}
+
+	@Test
+	fun testDropdownMenuTitleClickDismiss() {
+		val context = InstrumentationRegistry.getInstrumentation().targetContext
+		var dismissed = false
+		val options = listOf(OsmAndDropdownMenuOption(value = "1", title = "Item"))
+
+		InstrumentationRegistry.getInstrumentation().runOnMainSync {
+			val composeView = createTestComposeView(context)
+			composeView.setContent {
+				OsmAndDropdownMenuTheme {
+					OsmAndDropdownMenuContent(
+						options = options,
+						onOptionSelected = {},
+						title = "Sort by",
+						onDismissRequest = { dismissed = true }
+					)
+				}
+			}
+		}
 	}
 
 	private fun createTestComposeView(context: android.content.Context): ComposeView {
