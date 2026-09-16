@@ -27,7 +27,7 @@ public class PublicTransportRouteTestingTest {
 		List<String> actualResults = calculateRoute("ferry_gullmarsleden.obf", start, end);
 
 		List<String> expectedResults = new ArrayList<>();
-		expectedResults.add("Route 1 stops, 0 changes, 14.02 min: 164.24 m (3.3 min) to walk, 1809.95 m (10.7 min) to travel\n"
+		expectedResults.add("Route 1 stops, 0 changes, 16.78 min: 164.24 m (3.3 min) to walk, 1809.95 m (13.5 min) to travel\n"
 				+ " 1. 161 [7841117]: walk 87.7 m to 'Finnsbo färjeläge' and travel  to 'Skår' by Vägfärja Gullmarsleden 1 stops \n"
 				+ " F. Walk 76.5 m to reach your destination");
 
@@ -43,7 +43,7 @@ public class PublicTransportRouteTestingTest {
 		List<String> actualResults = calculateRoute("ferry_gullmarsleden.obf", start, end);
 
 		List<String> expectedResults = new ArrayList<>();
-		expectedResults.add("Route 1 stops, 0 changes, 14.02 min: 164.24 m (3.3 min) to walk, 1809.95 m (10.7 min) to travel\n"
+		expectedResults.add("Route 1 stops, 0 changes, 16.78 min: 164.24 m (3.3 min) to walk, 1809.95 m (13.5 min) to travel\n"
 				+ " 1. 161 [7841117]: walk 76.5 m to 'Skår' and travel  to 'Finnsbo färjeläge' by Vägfärja Gullmarsleden 1 stops \n"
 				+ " F. Walk 87.7 m to reach your destination");
 
@@ -59,7 +59,7 @@ public class PublicTransportRouteTestingTest {
 		List<String> actualResults = calculateRoute("ferry_sandbanks.obf", start, end);
 
 		List<String> expectedResults = new ArrayList<>();
-		expectedResults.add("Route 1 stops, 0 changes, 19.22 min: 369.81 m (7.4 min) to walk, 330.13 m (11.8 min) to travel\n"
+		expectedResults.add("Route 1 stops, 0 changes, 21.90 min: 369.81 m (7.4 min) to walk, 330.13 m (14.5 min) to travel\n"
 				+ " 1. SF [4624542]: walk 277.8 m to 'Sandbanks Ferry' and travel  to 'Sandbanks' by Sandbanks Ferry 1 stops \n"
 				+ " F. Walk 92.0 m to reach your destination");
 
@@ -75,7 +75,7 @@ public class PublicTransportRouteTestingTest {
 		List<String> actualResults = calculateRoute("ferry_sandbanks.obf", start, end);
 
 		List<String> expectedResults = new ArrayList<>();
-		expectedResults.add("Route 1 stops, 0 changes, 19.22 min: 369.81 m (7.4 min) to walk, 330.13 m (11.8 min) to travel\n"
+		expectedResults.add("Route 1 stops, 0 changes, 21.90 min: 369.81 m (7.4 min) to walk, 330.13 m (14.5 min) to travel\n"
 				+ " 1. SF [4624542]: walk 92.0 m to 'Sandbanks' and travel  to 'Sandbanks Ferry' by Sandbanks Ferry 1 stops \n"
 				+ " F. Walk 277.8 m to reach your destination");
 
@@ -91,7 +91,7 @@ public class PublicTransportRouteTestingTest {
 		List<String> actualResults = calculateRoute("ferry_nordoleden.obf", start, end);
 
 		List<String> expectedResults = new ArrayList<>();
-		expectedResults.add("Route 1 stops, 0 changes, 13.10 min: 182.27 m (3.6 min) to walk, 1489.59 m (9.5 min) to travel\n"
+		expectedResults.add("Route 1 stops, 0 changes, 27.15 min: 182.27 m (3.6 min) to walk, 1489.59 m (23.5 min) to travel\n"
 				+ " 1. NORD [524836]: walk 48.1 m to 'Hyppeln' and travel  to 'Rörö' by Nordöleden 1 stops \n"
 				+ " F. Walk 134.2 m to reach your destination");
 
@@ -107,7 +107,7 @@ public class PublicTransportRouteTestingTest {
 		List<String> actualResults = calculateRoute("ferry_nordoleden.obf", start, end);
 
 		List<String> expectedResults = new ArrayList<>();
-		expectedResults.add("Route 1 stops, 0 changes, 13.10 min: 182.27 m (3.6 min) to walk, 1489.59 m (9.5 min) to travel\n"
+		expectedResults.add("Route 1 stops, 0 changes, 27.15 min: 182.27 m (3.6 min) to walk, 1489.59 m (23.5 min) to travel\n"
 				+ " 1. NORD [524836]: walk 134.2 m to 'Rörö' and travel  to 'Hyppeln' by Nordöleden 1 stops \n"
 				+ " F. Walk 48.1 m to reach your destination");
 
@@ -154,7 +154,7 @@ public class PublicTransportRouteTestingTest {
 
 		String actualResult = calculateRoute("ferry_gullmarsleden.obf", "car", start, end);
 
-		Assert.assertEquals("Route 2007 m, 7.54 min, ferry ways [4361073]", actualResult);
+		Assert.assertEquals("Route 2007 m, 10.17 min, ferry ways [4361073]", actualResult);
 	}
 
 	// Car ferry routing test (reverse direction)
@@ -165,7 +165,7 @@ public class PublicTransportRouteTestingTest {
 
 		String actualResult = calculateRoute("ferry_gullmarsleden.obf", "car", start, end);
 
-		Assert.assertEquals("Route 2446 m, 8.26 min, ferry ways [4361073]", actualResult);
+		Assert.assertEquals("Route 2446 m, 10.90 min, ferry ways [4361073]", actualResult);
 	}
 
 	// Bicycle ferry routing test
@@ -176,7 +176,7 @@ public class PublicTransportRouteTestingTest {
 
 		String actualResult = calculateRoute("ferry_gullmarsleden.obf", "bicycle", start, end);
 
-		Assert.assertEquals("Route 2007 m, 8.13 min, ferry ways [4361073]", actualResult);
+		Assert.assertEquals("Route 2007 m, 10.76 min, ferry ways [4361073]", actualResult);
 	}
 
 	// Bicycle ferry routing test (reverse direction)
@@ -187,7 +187,7 @@ public class PublicTransportRouteTestingTest {
 
 		String actualResult = calculateRoute("ferry_gullmarsleden.obf", "bicycle", start, end);
 
-		Assert.assertEquals("Route 2446 m, 10.40 min, ferry ways [4361073]", actualResult);
+		Assert.assertEquals("Route 2446 m, 13.04 min, ferry ways [4361073]", actualResult);
 	}
 
 	// Pedestrian ferry routing test
@@ -198,7 +198,7 @@ public class PublicTransportRouteTestingTest {
 
 		String actualResult = calculateRoute("ferry_gullmarsleden.obf", "pedestrian", start, end);
 
-		Assert.assertEquals("Route 2007 m, 9.85 min, ferry ways [4361073]", actualResult);
+		Assert.assertEquals("Route 2007 m, 12.49 min, ferry ways [4361073]", actualResult);
 	}
 
 	// Pedestrian ferry routing test (reverse direction)
@@ -209,7 +209,7 @@ public class PublicTransportRouteTestingTest {
 
 		String actualResult = calculateRoute("ferry_gullmarsleden.obf", "pedestrian", start, end);
 
-		Assert.assertEquals("Route 2007 m, 9.85 min, ferry ways [4361073]", actualResult);
+		Assert.assertEquals("Route 2007 m, 12.49 min, ferry ways [4361073]", actualResult);
 	}
 
 	// Car ferry routing test
@@ -220,7 +220,7 @@ public class PublicTransportRouteTestingTest {
 
 		String actualResult = calculateRoute("ferry_sandbanks.obf", "car", start, end);
 
-		Assert.assertEquals("Route 703 m, 1.81 min, ferry ways [147985346]", actualResult);
+		Assert.assertEquals("Route 703 m, 4.49 min, ferry ways [147985346]", actualResult);
 	}
 
 	// Car ferry routing test (reverse direction)
@@ -231,7 +231,7 @@ public class PublicTransportRouteTestingTest {
 
 		String actualResult = calculateRoute("ferry_sandbanks.obf", "car", start, end);
 
-		Assert.assertEquals("Route 2387 m, 4.08 min, ferry ways [147985346]", actualResult);
+		Assert.assertEquals("Route 2387 m, 6.76 min, ferry ways [147985346]", actualResult);
 	}
 
 	// Bicycle ferry routing test
@@ -242,7 +242,7 @@ public class PublicTransportRouteTestingTest {
 
 		String actualResult = calculateRoute("ferry_sandbanks.obf", "bicycle", start, end);
 
-		Assert.assertEquals("Route 703 m, 2.69 min, ferry ways [147985346]", actualResult);
+		Assert.assertEquals("Route 703 m, 5.37 min, ferry ways [147985346]", actualResult);
 	}
 
 	// Bicycle ferry routing test (reverse direction)
@@ -253,7 +253,7 @@ public class PublicTransportRouteTestingTest {
 
 		String actualResult = calculateRoute("ferry_sandbanks.obf", "bicycle", start, end);
 
-		Assert.assertEquals("Route 1610 m, 6.11 min, ferry ways [147985346]", actualResult);
+		Assert.assertEquals("Route 1610 m, 8.79 min, ferry ways [147985346]", actualResult);
 	}
 
 	// Pedestrian ferry routing test
@@ -264,7 +264,7 @@ public class PublicTransportRouteTestingTest {
 
 		String actualResult = calculateRoute("ferry_sandbanks.obf", "pedestrian", start, end);
 
-		Assert.assertEquals("Route 703 m, 6.91 min, ferry ways [147985346]", actualResult);
+		Assert.assertEquals("Route 703 m, 9.60 min, ferry ways [147985346]", actualResult);
 	}
 
 	// Pedestrian ferry routing test (reverse direction)
@@ -275,7 +275,7 @@ public class PublicTransportRouteTestingTest {
 
 		String actualResult = calculateRoute("ferry_sandbanks.obf", "pedestrian", start, end);
 
-		Assert.assertEquals("Route 703 m, 6.91 min, ferry ways [147985346]", actualResult);
+		Assert.assertEquals("Route 703 m, 9.60 min, ferry ways [147985346]", actualResult);
 	}
 
 	// Car ferry routing test
@@ -286,7 +286,7 @@ public class PublicTransportRouteTestingTest {
 
 		String actualResult = calculateRoute("ferry_nordoleden.obf", "car", start, end);
 
-		Assert.assertEquals("Route 1993 m, 7.60 min, ferry ways [16794766]", actualResult);
+		Assert.assertEquals("Route 1993 m, 20.37 min, ferry ways [16794766]", actualResult);
 	}
 
 	// Car ferry routing test (reverse direction)
@@ -297,7 +297,7 @@ public class PublicTransportRouteTestingTest {
 
 		String actualResult = calculateRoute("ferry_nordoleden.obf", "car", start, end);
 
-		Assert.assertEquals("Route 1993 m, 7.60 min, ferry ways [16794766]", actualResult);
+		Assert.assertEquals("Route 1993 m, 20.37 min, ferry ways [16794766]", actualResult);
 	}
 
 	// Bicycle ferry routing test
@@ -308,7 +308,7 @@ public class PublicTransportRouteTestingTest {
 
 		String actualResult = calculateRoute("ferry_nordoleden.obf", "bicycle", start, end);
 
-		Assert.assertEquals("Route 1993 m, 7.71 min, ferry ways [16794766]", actualResult);
+		Assert.assertEquals("Route 1993 m, 20.48 min, ferry ways [16794766]", actualResult);
 	}
 
 	// Bicycle ferry routing test (reverse direction)
@@ -319,7 +319,7 @@ public class PublicTransportRouteTestingTest {
 
 		String actualResult = calculateRoute("ferry_nordoleden.obf", "bicycle", start, end);
 
-		Assert.assertEquals("Route 1993 m, 7.71 min, ferry ways [16794766]", actualResult);
+		Assert.assertEquals("Route 1993 m, 20.48 min, ferry ways [16794766]", actualResult);
 	}
 
 	// Pedestrian ferry routing test
@@ -330,7 +330,7 @@ public class PublicTransportRouteTestingTest {
 
 		String actualResult = calculateRoute("ferry_nordoleden.obf", "pedestrian", start, end);
 
-		Assert.assertEquals("Route 1993 m, 10.01 min, ferry ways [16794766]", actualResult);
+		Assert.assertEquals("Route 1993 m, 22.78 min, ferry ways [16794766]", actualResult);
 	}
 
 	// Pedestrian ferry routing test (reverse direction)
@@ -341,7 +341,7 @@ public class PublicTransportRouteTestingTest {
 
 		String actualResult = calculateRoute("ferry_nordoleden.obf", "pedestrian", start, end);
 
-		Assert.assertEquals("Route 1993 m, 10.01 min, ferry ways [16794766]", actualResult);
+		Assert.assertEquals("Route 1993 m, 22.78 min, ferry ways [16794766]", actualResult);
 	}
 
 	// Pedestrian ferry routing test

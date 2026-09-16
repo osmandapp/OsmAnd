@@ -21,8 +21,8 @@ public class TransportFerryHelper {
 	public static final String SYNTHETIC_STOPS_TAG = "osmand:synthetic_ferry_stops";
 	// synthetic stops in the water joining ferry ways: only a change to the next ferry way at the same stop
 	public static final String JUNCTION_STOPS_TAG = "osmand:ferry_junction_stops";
-	// non-ferry route goes over a ferry before these stops: "stop index:ferry interval in seconds (0 - unknown)"
-	public static final String CROSSING_INTERVALS_TAG = "osmand:ferry_crossing_intervals";
+	// non-ferry route goes over a ferry before these stops: "stop index:ferry interval:ferry duration" (seconds, 0 - unknown)
+	public static final String CROSSINGS_TAG = "osmand:ferry_crossings";
 
 	public static void addStopTag(Map<String, String> tags, String tag, int stop, Object value) {
 		tags.merge(tag, value == null ? String.valueOf(stop) : stop + ":" + value, (a, b) -> a + "," + b);
@@ -65,10 +65,26 @@ public class TransportFerryHelper {
 		return stops;
 	}
 
+	// ferry crossing time from its duration tag, 0 if unknown (then it's calculated with the ferry speed)
+	public static int getDuration(TransportRoute route) {
+		return isFerry(route) ? TransportRoute.parseDurationTagToSeconds(route.getTags().get(TransportRoute.DURATION_KEY),
+				route.getDistance()) : 0;
+	}
+
 	// waiting for a ferry on the way to the stop, same as boarding the ferry itself
 	public static double getCrossingWaitTime(TransportRoutingConfiguration cfg, TransportRoute route, int stop) {
-		String interval = getStopValue(route, CROSSING_INTERVALS_TAG, stop);
-		return interval == null ? 0 : cfg.getWaitTime(FERRY, Integer.parseInt(interval));
+		String[] crossing = getCrossing(route, stop);
+		return crossing == null ? 0 : cfg.getWaitTime(FERRY, Integer.parseInt(crossing[0]));
+	}
+
+	public static int getCrossingDuration(TransportRoute route, int stop) {
+		String[] crossing = getCrossing(route, stop);
+		return crossing == null ? 0 : Integer.parseInt(crossing[1]);
+	}
+
+	private static String[] getCrossing(TransportRoute route, int stop) {
+		String value = getStopValue(route, CROSSINGS_TAG, stop);
+		return value == null ? null : value.split(":"); // interval, duration
 	}
 
 	// TODO #17773 temporary: show only routes with ferries
@@ -112,9 +128,9 @@ public class TransportFerryHelper {
 		String value = route.getTags().get(tag);
 		if (value != null) {
 			for (String v : value.split(",")) {
-				String[] parts = v.split(":");
-				if (Integer.parseInt(parts[0]) == stop) {
-					return parts.length > 1 ? parts[1] : "";
+				int sep = v.indexOf(':');
+				if (Integer.parseInt(sep < 0 ? v : v.substring(0, sep)) == stop) {
+					return sep < 0 ? "" : v.substring(sep + 1);
 				}
 			}
 		}

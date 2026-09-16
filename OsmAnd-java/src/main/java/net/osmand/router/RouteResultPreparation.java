@@ -8,6 +8,7 @@ import net.osmand.binary.ObfConstants;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
+import net.osmand.data.TransportRoute;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
@@ -330,6 +331,19 @@ public class RouteResultPreparation {
 		for (int i = 0; i < result.size(); i++) {
 			RouteSegmentResult rr = result.get(i);
 			calculateTimeSpeed(ctx, rr);
+			RouteDataObject road = rr.getObject();
+			if ("ferry".equals(road.getValue("route"))) {
+				int duration = TransportRoute.parseDurationTagToSeconds(road.getValue(TransportRoute.DURATION_KEY),
+						road.distance(0, road.getPointsLength() - 1));
+				if (duration > 0) {
+					// whole duration goes to the first segment of the ferry way (a way can be split into several segments)
+					boolean sameWay = i > 0 && result.get(i - 1).getObject().getId() == road.getId();
+					rr.setSegmentTime(sameWay ? 0 : duration);
+					if (!sameWay) {
+						rr.setSegmentSpeed(rr.getDistance() / duration);
+					}
+				}
+			}
 		}
 	}
 
