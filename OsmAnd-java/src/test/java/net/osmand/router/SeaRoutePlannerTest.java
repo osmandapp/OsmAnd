@@ -189,6 +189,19 @@ public class SeaRoutePlannerTest {
 	}
 
 	@Test
+	public void legThatClipsTheCornerOfAGridCellStillSeesTheShoreInIt() {
+		// metres on the 250 m index grid: the leg (0,0) -> (1000,600) steps through cells (0,0) (1,0) (2,1) (3,1)
+		// (4,2) but also clips cell (1,1), where a short piece of shore crosses it
+		SeaObstacles obstacles = new SeaObstacles(0);
+		double x0 = 250 * 1000, y0 = 250 * 1000;
+		obstacles.addBarrier(obstacles.lat(y0 + 280), obstacles.lon(x0 + 440),
+				obstacles.lat(y0 + 260), obstacles.lon(x0 + 460));
+		obstacles.build();
+
+		Assert.assertFalse(obstacles.isClear(x0, y0, x0 + 1000, y0 + 600, 0));
+	}
+
+	@Test
 	public void tidalFlatBlocksOpenWaterButIsNotLand() {
 		// a tidal flat edge has no known land side; its ring may run either way
 		SeaObstacles obstacles = new SeaObstacles(ORIGIN.getLatitude());

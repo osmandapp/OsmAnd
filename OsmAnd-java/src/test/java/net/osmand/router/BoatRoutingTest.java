@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -20,8 +19,8 @@ import com.google.gson.Gson;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.router.BoatRoutePlanner.BoatRoute;
-import net.osmand.router.RouteResultPreparation.RouteCalcResult;
 import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
+import net.osmand.util.MapUtils;
 
 /**
  * Boat routes over the water network and open water on real maps (OsmAnd-Issues #3170). The network part is
@@ -87,8 +86,16 @@ public class BoatRoutingTest {
 		LatLon start = new LatLon(boatCase.start[0], boatCase.start[1]);
 		LatLon end = new LatLon(boatCase.end[0], boatCase.end[1]);
 
+		RoutePlannerFrontEnd fe = new RoutePlannerFrontEnd();
+		fe.CALCULATE_MISSING_MAPS = false;
+		RoutingMemoryLimits limits = new RoutingMemoryLimits(RoutingConfiguration.DEFAULT_MEMORY_LIMIT * 3,
+				RoutingConfiguration.DEFAULT_NATIVE_MEMORY_LIMIT);
+		RoutingConfiguration config = RoutingConfiguration.getDefault().build("boat", limits, new HashMap<>());
+		RoutingContext ctx = fe.buildRoutingContext(config, null, readers.toArray(new BinaryMapIndexReader[0]),
+				RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
+
 		long started = System.currentTimeMillis();
-		BoatRoute route = planner(readers).plan(Arrays.asList(start, end), network(readers, start, end));
+		BoatRoute route = planner(readers).route(fe, ctx, start, end);
 		long timeMs = System.currentTimeMillis() - started;
 		String what = boatCase.name + " [" + boatCase.status + "]: " + route.decision + ", " + timeMs + " ms in total, "
 				+ boatCase.url;
@@ -113,24 +120,6 @@ public class BoatRoutingTest {
 		assertStaysOnWater(readers, route.startConnector, start, end);
 		assertStaysOnWater(readers, route.endConnector, start, end);
 		assertStaysOnWater(readers, route.openWater, start, end);
-	}
-
-	/** The water network route as the server computes it, or null when the router finds none. */
-	private static List<RouteSegmentResult> network(List<BinaryMapIndexReader> readers, LatLon start, LatLon end)
-			throws Exception {
-		RoutePlannerFrontEnd fe = new RoutePlannerFrontEnd();
-		fe.CALCULATE_MISSING_MAPS = false;
-		RoutingMemoryLimits limits = new RoutingMemoryLimits(RoutingConfiguration.DEFAULT_MEMORY_LIMIT * 3,
-				RoutingConfiguration.DEFAULT_NATIVE_MEMORY_LIMIT);
-		RoutingConfiguration config = RoutingConfiguration.getDefault().build("boat", limits, new HashMap<>());
-		RoutingContext ctx = fe.buildRoutingContext(config, null, readers.toArray(new BinaryMapIndexReader[0]),
-				RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
-		try {
-			RouteCalcResult result = fe.searchRoute(ctx, start, end, null);
-			return result == null || result.detailed.isEmpty() ? null : result.detailed;
-		} catch (IllegalArgumentException e) {
-			return null; // no waterway found near the start or the end
-		}
 	}
 
 	/**
@@ -166,8 +155,9 @@ public class BoatRoutingTest {
 	}
 
 	/**
-	 * Fails when an open water line crosses the detailed shores. A requested point on land - a berth mapped behind
-	 * the shore, a town - can only be left across the shore, so the leg that touches it is allowed to.
+	 * Fails when an open water line crosses the detailed shores. Two legs are allowed to, both touching a requested
+	 * point: from a point on land - a berth mapped behind the shore, a town - across the shore, and to a point on a
+	 * tidal flat across the flat's edge (not across coastline, and not for more than 10 km).
 	 */
 	private static void assertStaysOnWater(List<BinaryMapIndexReader> readers, List<LatLon> line, LatLon... requested)
 			throws Exception {
@@ -189,14 +179,20 @@ public class BoatRoutingTest {
 					detailed.x(b.getLongitude()), detailed.y(b.getLatitude()), 0)) {
 				continue;
 			}
-			boolean leavesLandPoint = false;
+			boolean allowed = false;
 			for (LatLon p : requested) {
 				if ((p.equals(a) || p.equals(b)) && detailed.isLand(p)) {
-					leavesLandPoint = true;
+					allowed = true; // leaving a point on land
+				} else if (MapUtils.getDistance(a, p) <= 10000 && MapUtils.getDistance(b, p) <= 10000) {
+					// the approach to a point on a tidal flat: flat edges only, never coastline
+					detailed.setBarriersEnabled(false);
+					allowed |= detailed.isClear(detailed.x(a.getLongitude()), detailed.y(a.getLatitude()),
+							detailed.x(b.getLongitude()), detailed.y(b.getLatitude()), 0);
+					detailed.setBarriersEnabled(true);
 				}
 			}
-			Assert.assertTrue("leg " + i + " of " + (line.size() - 1) + " " + a + " -> " + b + " crosses the shore",
-					leavesLandPoint);
+			Assert.assertTrue("leg " + i + " of " + (line.size() - 1) + " " + a + " -> " + b + " crosses the shore; line "
+					+ line + ", requested " + java.util.Arrays.toString(requested), allowed);
 		}
 	}
 }

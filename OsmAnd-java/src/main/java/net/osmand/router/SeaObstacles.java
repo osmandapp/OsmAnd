@@ -264,6 +264,9 @@ public class SeaObstacles {
 						continue;
 					}
 					segmentStamp[segment] = stamp;
+					if (ignored(segment)) {
+						continue;
+					}
 					int p = segment * STRIDE;
 					double d = segmentDistance(leg[0], leg[1], leg[2], leg[3], segments[p], segments[p + 1],
 							segments[p + 2], segments[p + 3]);
@@ -296,6 +299,9 @@ public class SeaObstacles {
 						continue;
 					}
 					segmentStamp[segment] = stamp;
+					if (ignored(segment)) {
+						continue;
+					}
 					int p = segment * STRIDE;
 					min[0] = Math.min(min[0], segmentDistance(leg[0], leg[1], leg[2], leg[3], segments[p],
 							segments[p + 1], segments[p + 2], segments[p + 3]));
@@ -315,9 +321,22 @@ public class SeaObstacles {
 	}
 
 	private FarFromShore farFromShore;
+	private boolean barriersEnabled = true;
 
 	public void setFarFromShore(FarFromShore farFromShore) {
 		this.farFromShore = farFromShore;
+	}
+
+	/**
+	 * Barriers such as tidal flat edges can be switched off for the last few kilometres to a point that sits on a
+	 * flat itself: nothing else reaches it.
+	 */
+	public void setBarriersEnabled(boolean barriersEnabled) {
+		this.barriersEnabled = barriersEnabled;
+	}
+
+	private boolean ignored(int segment) {
+		return !barriersEnabled && pieceLandSide.get(segmentPiece[segment]) == NO_LAND_SIDE;
 	}
 
 	/**
@@ -471,22 +490,54 @@ public class SeaObstacles {
 	 * its bounding box is what keeps a 150 km leg at a few hundred cells.
 	 */
 	private void walkCells(double x1, double y1, double x2, double y2, double margin, CellVisitor visitor) {
+		// every cell the line passes through, in order (Amanatides and Woo): sampling one cell per step would miss
+		// the corners a line clips between samples
 		int ring = (int) Math.ceil(margin / cellSize);
-		int cx1 = (int) Math.floor(x1 / cellSize), cy1 = (int) Math.floor(y1 / cellSize);
-		int cx2 = (int) Math.floor(x2 / cellSize), cy2 = (int) Math.floor(y2 / cellSize);
-		int steps = Math.max(Math.abs(cx2 - cx1), Math.abs(cy2 - cy1));
-		for (int s = 0; s <= steps; s++) {
-			double t = steps == 0 ? 0 : (double) s / steps;
-			int cx = (int) Math.floor((x1 + (x2 - x1) * t) / cellSize);
-			int cy = (int) Math.floor((y1 + (y2 - y1) * t) / cellSize);
-			for (int dx = -ring; dx <= ring; dx++) {
-				for (int dy = -ring; dy <= ring; dy++) {
-					if (!visitor.cell(cellKey(cx + dx, cy + dy))) {
-						return;
-					}
+		int cx = (int) Math.floor(x1 / cellSize), cy = (int) Math.floor(y1 / cellSize);
+		int ex = (int) Math.floor(x2 / cellSize), ey = (int) Math.floor(y2 / cellSize);
+		double dx = x2 - x1, dy = y2 - y1;
+		int stepX = dx > 0 ? 1 : -1, stepY = dy > 0 ? 1 : -1;
+		double nextX = dx == 0 ? Double.POSITIVE_INFINITY : ((stepX > 0 ? cx + 1 : cx) * cellSize - x1) / dx;
+		double nextY = dy == 0 ? Double.POSITIVE_INFINITY : ((stepY > 0 ? cy + 1 : cy) * cellSize - y1) / dy;
+		double deltaX = dx == 0 ? Double.POSITIVE_INFINITY : cellSize / Math.abs(dx);
+		double deltaY = dy == 0 ? Double.POSITIVE_INFINITY : cellSize / Math.abs(dy);
+		int steps = Math.abs(ex - cx) + Math.abs(ey - cy);
+		for (int step = 0; ; step++) {
+			if (!visitRing(cx, cy, ring, visitor)) {
+				return;
+			}
+			if ((cx == ex && cy == ey) || step >= steps) {
+				return;
+			}
+			if (nextX < nextY) {
+				nextX += deltaX;
+				cx += stepX;
+			} else if (nextY < nextX) {
+				nextY += deltaY;
+				cy += stepY;
+			} else {
+				// through a corner exactly: both side cells touch the line
+				if (!visitRing(cx + stepX, cy, ring, visitor) || !visitRing(cx, cy + stepY, ring, visitor)) {
+					return;
+				}
+				nextX += deltaX;
+				nextY += deltaY;
+				cx += stepX;
+				cy += stepY;
+				step++;
+			}
+		}
+	}
+
+	private static boolean visitRing(int cx, int cy, int ring, CellVisitor visitor) {
+		for (int dx = -ring; dx <= ring; dx++) {
+			for (int dy = -ring; dy <= ring; dy++) {
+				if (!visitor.cell(cellKey(cx + dx, cy + dy))) {
+					return false;
 				}
 			}
 		}
+		return true;
 	}
 
 	private static long cellKey(int cx, int cy) {

@@ -99,7 +99,8 @@ public class SeaRoutePlanner {
 					break search;
 				}
 				attempts++;
-				SeaRoute route = search(obstacles, corners, froms.get(i), tos.get(j));
+				SeaRoute route = search(obstacles, corners, froms.get(i), tos.get(j),
+						distance(obstacles, froms.get(i), tos.get(j)) * MAX_DETOUR + DETOUR_ALLOWANCE);
 				expansions += route.expansions;
 				visibilityChecks += route.visibilityChecks;
 				if (route.points.isEmpty()) {
@@ -134,7 +135,14 @@ public class SeaRoutePlanner {
 	}
 
 	/** A* between two water points; the result has no points when they are not connected. */
-	private SeaRoute search(SeaObstacles obstacles, List<Corner> corners, LatLon from, LatLon to) {
+	/**
+	 * A route longer than this many times the straight line - plus the allowance - is no route a boat wants; and a
+	 * search that fails, the expensive kind, stops there instead of taking the whole graph.
+	 */
+	private static final double MAX_DETOUR = 3;
+	private static final double DETOUR_ALLOWANCE = 10000;
+
+	private SeaRoute search(SeaObstacles obstacles, List<Corner> corners, LatLon from, LatLon to, double maxDistance) {
 		SeaRoute route = new SeaRoute();
 		route.corners = corners.size();
 		int size = corners.size() + 2;
@@ -162,7 +170,11 @@ public class SeaRoutePlanner {
 		});
 		queue.add(new double[] { heuristic(x, y, 0), 0 });
 		while (!queue.isEmpty()) {
-			int u = (int) queue.poll()[1];
+			double[] top = queue.poll();
+			if (top[0] > maxDistance) {
+				break;
+			}
+			int u = (int) top[1];
 			if (u == 1) {
 				break;
 			}
@@ -200,6 +212,109 @@ public class SeaRoutePlanner {
 			route.points.add(0, obstacles.latLon(x[v], y[v]));
 		}
 		return route;
+	}
+
+	/**
+	 * Open water from one point to many targets - points of the water network - in a single search: the shortest
+	 * route to every target reached within maxDistance, null for the others. A leg into a target need not keep clear
+	 * of the shore: a network point in a harbour sits by a quay.
+	 */
+	public SeaRoute[] planToMany(SeaObstacles obstacles, LatLon start, List<LatLon> targets, double maxDistance) {
+		SeaRoute[] result = new SeaRoute[targets.size()];
+		List<LatLon> froms = obstacles.waterCandidates(start, config.minClearance, config.snapRadius);
+		if (froms.isEmpty() || targets.isEmpty()) {
+			return result;
+		}
+		if (froms.size() > 3) {
+			froms = froms.subList(0, 3);
+		}
+		List<Corner> corners = corners(obstacles);
+		// nodes: sources [0, s), targets [s, s + t), corners after them
+		int s = froms.size(), t = targets.size(), size = s + t + corners.size();
+		double[] x = new double[size], y = new double[size];
+		for (int i = 0; i < s; i++) {
+			x[i] = obstacles.x(froms.get(i).getLongitude());
+			y[i] = obstacles.y(froms.get(i).getLatitude());
+		}
+		for (int i = 0; i < t; i++) {
+			x[s + i] = obstacles.x(targets.get(i).getLongitude());
+			y[s + i] = obstacles.y(targets.get(i).getLatitude());
+		}
+		for (int i = 0; i < corners.size(); i++) {
+			x[s + t + i] = corners.get(i).x;
+			y[s + t + i] = corners.get(i).y;
+		}
+		double[] g = new double[size];
+		int[] parent = new int[size];
+		boolean[] settled = new boolean[size];
+		Arrays.fill(g, Double.POSITIVE_INFINITY);
+		Arrays.fill(parent, -1);
+		PriorityQueue<double[]> queue = new PriorityQueue<>(new java.util.Comparator<double[]>() {
+			@Override
+			public int compare(double[] a, double[] b) {
+				return Double.compare(a[0], b[0]);
+			}
+		});
+		for (int i = 0; i < s; i++) {
+			g[i] = distance(obstacles, start, froms.get(i));
+			queue.add(new double[] { g[i], i });
+		}
+		int reached = 0;
+		while (!queue.isEmpty()) {
+			double[] top = queue.poll();
+			int u = (int) top[1];
+			if (settled[u]) {
+				continue;
+			}
+			if (top[0] > maxDistance) {
+				break;
+			}
+			settled[u] = true;
+			if (u >= s && u < s + t) {
+				if (++reached == t) {
+					break;
+				}
+				continue; // a route goes to a target, never through it
+			}
+			for (int v = s; v < size; v++) {
+				if (settled[v]) {
+					continue;
+				}
+				double d = g[u] + Math.hypot(x[v] - x[u], y[v] - y[u]);
+				if (d >= g[v] || d > maxDistance) {
+					continue;
+				}
+				boolean target = v < s + t;
+				if (!target && !corners.get(v - s - t).isTangentFrom(x[u], y[u])) {
+					continue;
+				}
+				if (!obstacles.isClear(x[u], y[u], x[v], y[v], target ? 0 : config.minClearance)) {
+					continue;
+				}
+				g[v] = d;
+				parent[v] = u;
+				queue.add(new double[] { d, v });
+			}
+		}
+		for (int i = 0; i < t; i++) {
+			if (!settled[s + i]) {
+				continue;
+			}
+			SeaRoute route = new SeaRoute();
+			route.distance = g[s + i];
+			route.corners = corners.size();
+			int v = s + i;
+			for (; v >= s; v = parent[v]) {
+				route.points.add(0, obstacles.latLon(x[v], y[v]));
+			}
+			route.points.add(0, froms.get(v));
+			if (!froms.get(v).equals(start)) {
+				route.snappedStart = froms.get(v);
+				route.points.add(0, start);
+			}
+			result[i] = route;
+		}
+		return result;
 	}
 
 	/** True when any leg crosses a shore of the given obstacles - the check against detailed geometry. */
