@@ -72,14 +72,22 @@ import androidx.savedstate.setViewTreeSavedStateRegistryOwner
 import net.osmand.PlatformUtil
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
+import net.osmand.plus.utils.AndroidUtils
 
 private val LOG = PlatformUtil.getLog("OsmAndDropdownMenu")
 
-private val MENU_HORIZONTAL_PADDING = 12.dp
-private val MENU_ICON_SIZE = 20.dp
-private val MENU_SECTION_GAP = 2.dp
-private val MENU_CONTAINER_VERTICAL_PADDING = 2.dp
-private val MENU_LABEL_HEIGHT = 32.dp
+internal val MENU_SHADOW_PADDING = 16.dp
+internal val MENU_SCREEN_MARGIN = 16.dp
+internal val MENU_VERTICAL_SPACING = 4.dp
+internal val MENU_HORIZONTAL_PADDING = 12.dp
+internal val MENU_ICON_SIZE = 20.dp
+internal val MENU_SECTION_GAP = 2.dp
+internal val MENU_CONTAINER_VERTICAL_PADDING = 2.dp
+internal val MENU_ITEM_HEIGHT = 48.dp
+internal val MENU_SUPPORTING_TEXT_EXTRA_HEIGHT = 16.dp
+internal val MENU_LABEL_HEIGHT = 32.dp
+internal val MENU_DIVIDER_TOTAL_HEIGHT = 5.dp
+internal val MENU_GAP_EXTRA_HEIGHT = 6.dp
 
 data class OsmAndDropdownMenuOption<T>(
 	val value: T,
@@ -489,8 +497,7 @@ fun <T> OsmAndDropdownMenu(
 	colors: OsmAndDropdownMenuColors? = null,
 	title: String? = null
 ) {
-	val shadowPadding = 16.dp
-	val adjustedOffset = DpOffset(offset.x - shadowPadding, offset.y - shadowPadding)
+	val adjustedOffset = DpOffset(offset.x - MENU_SHADOW_PADDING, offset.y - MENU_SHADOW_PADDING)
 
 	OsmAndDropdownMenuTheme {
 		val resolvedColors = colors ?: OsmAndDropdownMenuDefaults.colors()
@@ -513,7 +520,7 @@ fun <T> OsmAndDropdownMenu(
 			shadowElevation = 0.dp,
 			border = null
 		) {
-			Box(modifier = Modifier.padding(shadowPadding)) {
+			Box(modifier = Modifier.padding(MENU_SHADOW_PADDING)) {
 				OsmAndDropdownMenuContainer(
 					options = options,
 					onOptionSelected = onOptionSelected,
@@ -548,22 +555,9 @@ fun showComposeDropdownMenu(displayData: PopUpMenuDisplayData): PopupWindow? {
 		viewModelStoreOwner?.let { setViewTreeViewModelStoreOwner(it) }
 	}
 
-	val shadowPadding = 16.dp
-	val shadowPaddingPx = TypedValue.applyDimension(
-		TypedValue.COMPLEX_UNIT_DIP,
-		16f,
-		context.resources.displayMetrics
-	).toInt()
-	val screenMarginPx = TypedValue.applyDimension(
-		TypedValue.COMPLEX_UNIT_DIP,
-		16f,
-		context.resources.displayMetrics
-	).toInt()
-	val verticalSpacingPx = TypedValue.applyDimension(
-		TypedValue.COMPLEX_UNIT_DIP,
-		4f,
-		context.resources.displayMetrics
-	).toInt()
+	val shadowPaddingPx = AndroidUtils.dpToPx(context, MENU_SHADOW_PADDING.value)
+	val screenMarginPx = AndroidUtils.dpToPx(context, MENU_SCREEN_MARGIN.value)
+	val verticalSpacingPx = AndroidUtils.dpToPx(context, MENU_VERTICAL_SPACING.value)
 
 	val popupWindow = PopupWindow(
 		composeView,
@@ -586,7 +580,7 @@ fun showComposeDropdownMenu(displayData: PopUpMenuDisplayData): PopupWindow? {
 				}
 			)
 
-			Box(modifier = Modifier.padding(shadowPadding)) {
+			Box(modifier = Modifier.padding(MENU_SHADOW_PADDING)) {
 				OsmAndDropdownMenuContainer(
 					options = displayData.menuItems?.toDropdownOptions(displayData) ?: emptyList(),
 					shape = MenuDefaults.shape,
@@ -637,23 +631,25 @@ fun showComposeDropdownMenu(displayData: PopUpMenuDisplayData): PopupWindow? {
 
 	val screenHeight = context.resources.displayMetrics.heightPixels
 	val menuItems = displayData.menuItems
-	var totalHeightDp = 4f + 16f
+	var totalHeight = MENU_CONTAINER_VERTICAL_PADDING * 2 + MENU_SCREEN_MARGIN
 	if (menuItems != null) {
 		for (item in menuItems) {
-			totalHeightDp += 48f
+			totalHeight += MENU_ITEM_HEIGHT
+			if (item.supportingText != null) {
+				totalHeight += MENU_SUPPORTING_TEXT_EXTRA_HEIGHT
+			}
+			if (item.labelText != null) {
+				totalHeight += MENU_LABEL_HEIGHT
+			}
 			if (item.shouldShowTopDivider()) {
-				totalHeightDp += 5f
+				totalHeight += MENU_DIVIDER_TOTAL_HEIGHT
 			}
 			if (item.shouldShowTopGap()) {
-				totalHeightDp += 6f
+				totalHeight += MENU_GAP_EXTRA_HEIGHT
 			}
 		}
 	}
-	val approxMenuHeightPx = TypedValue.applyDimension(
-		TypedValue.COMPLEX_UNIT_DIP,
-		totalHeightDp,
-		context.resources.displayMetrics
-	).toInt()
+	val approxMenuHeightPx = AndroidUtils.dpToPx(context, totalHeight.value)
 
 	val spaceBelow = screenHeight - (anchorLocation[1] + anchorView.height)
 	val spaceAbove = anchorLocation[1]

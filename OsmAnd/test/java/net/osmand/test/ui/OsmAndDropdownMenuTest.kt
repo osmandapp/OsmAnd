@@ -17,6 +17,14 @@ import androidx.lifecycle.LifecycleRegistry
 import androidx.lifecycle.setViewTreeLifecycleOwner
 import androidx.test.platform.app.InstrumentationRegistry
 import net.osmand.plus.R
+import net.osmand.plus.utils.AndroidUtils
+import net.osmand.plus.widgets.popup.MENU_CONTAINER_VERTICAL_PADDING
+import net.osmand.plus.widgets.popup.MENU_DIVIDER_TOTAL_HEIGHT
+import net.osmand.plus.widgets.popup.MENU_GAP_EXTRA_HEIGHT
+import net.osmand.plus.widgets.popup.MENU_ITEM_HEIGHT
+import net.osmand.plus.widgets.popup.MENU_LABEL_HEIGHT
+import net.osmand.plus.widgets.popup.MENU_SCREEN_MARGIN
+import net.osmand.plus.widgets.popup.MENU_SUPPORTING_TEXT_EXTRA_HEIGHT
 import net.osmand.plus.widgets.popup.AndroidDrawableIcon
 import net.osmand.plus.widgets.popup.OsmAndDropdownMenu
 import net.osmand.plus.widgets.popup.OsmAndDropdownMenuColors
@@ -413,7 +421,7 @@ class OsmAndDropdownMenuTest {
 	fun testDropdownMenuPositioningMarginAndOffsets() {
 		val context = InstrumentationRegistry.getInstrumentation().targetContext
 		val metrics = context.resources.displayMetrics
-		val screenMarginPx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16f, metrics).toInt()
+		val screenMarginPx = AndroidUtils.dpToPx(context, MENU_SCREEN_MARGIN.value)
 		val screenWidth = metrics.widthPixels
 
 		val leftAnchorX = 10
@@ -433,22 +441,38 @@ class OsmAndDropdownMenuTest {
 	@Test
 	fun testDropdownMenuPositioningHeightEstimationWithDividers() {
 		val context = InstrumentationRegistry.getInstrumentation().targetContext
-		val metrics = context.resources.displayMetrics
 
-		var baseHeightDp = 16f + 16f
+		var baseHeight = MENU_CONTAINER_VERTICAL_PADDING * 2 + MENU_SCREEN_MARGIN
 		val items = listOf(
 			PopUpMenuItem.Builder(context).setTitle("1").create(),
-			PopUpMenuItem.Builder(context).setTitle("2").showTopDivider(true).create()
+			PopUpMenuItem.Builder(context).setTitle("2").showTopDivider(true).create(),
+			PopUpMenuItem.Builder(context).setTitle("3").setSupportingText("Desc").create(),
+			PopUpMenuItem.Builder(context).setTitle("4").setLabelText("Header").showTopGap(true).create()
 		)
 		for (item in items) {
-			baseHeightDp += 48f
+			baseHeight += MENU_ITEM_HEIGHT
+			if (item.supportingText != null) {
+				baseHeight += MENU_SUPPORTING_TEXT_EXTRA_HEIGHT
+			}
+			if (item.labelText != null) {
+				baseHeight += MENU_LABEL_HEIGHT
+			}
 			if (item.shouldShowTopDivider()) {
-				baseHeightDp += 8f
+				baseHeight += MENU_DIVIDER_TOTAL_HEIGHT
+			}
+			if (item.shouldShowTopGap()) {
+				baseHeight += MENU_GAP_EXTRA_HEIGHT
 			}
 		}
-		assertEquals(32f + 48f * 2 + 8f, baseHeightDp, 0.01f)
+		val expectedDp = (MENU_CONTAINER_VERTICAL_PADDING * 2 + MENU_SCREEN_MARGIN) +
+			MENU_ITEM_HEIGHT * 4 +
+			MENU_DIVIDER_TOTAL_HEIGHT +
+			MENU_SUPPORTING_TEXT_EXTRA_HEIGHT +
+			MENU_LABEL_HEIGHT +
+			MENU_GAP_EXTRA_HEIGHT
+		assertEquals(expectedDp, baseHeight)
 
-		val expectedPx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, baseHeightDp, metrics).toInt()
+		val expectedPx = AndroidUtils.dpToPx(context, baseHeight.value)
 		assertTrue(expectedPx > 0)
 	}
 
