@@ -11,6 +11,8 @@
 	Strings for OsmAnd core
 	Thx - Hardy
 -->
+	<string name="crash_report_sent">Report sent. Thank you!</string>
+	<string name="crash_report_send_failed">Could not send the report. Try again later.</string>
 	<string name="share_favorites_media_preparation_failed">Couldn\'t include attached media. Sharing points only.</string>
 	<plurals name="files_count">
 		<item quantity="one">%d file</item>

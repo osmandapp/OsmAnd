@@ -1472,6 +1472,8 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SEND_ANONYMOUS_DATA_REQUEST_PROCESSED = new BooleanPreference(this, "send_anonymous_data_request_processed", false).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Integer> SEND_ANONYMOUS_DATA_REQUESTS_COUNT = new IntPreference(this, "send_anonymous_data_requests_count", 0).makeGlobal().cache();
 	public final OsmandPreference<Integer> SEND_ANONYMOUS_DATA_LAST_REQUEST_NS = new IntPreference(this, "send_anonymous_data_last_request_ns", -1).makeGlobal().cache();
+	// timestamp of the newest system crash (ANR, native) the crash dialog was already shown for
+	public final OsmandPreference<Long> LAST_SHOWN_SYSTEM_CRASH_TIME = new LongPreference(this, "last_shown_system_crash_time", 0).makeGlobal();
 
 	public final OsmandPreference<Boolean> SEND_UNIQUE_USER_IDENTIFIER = new BooleanPreference(this, "send_unique_user_identifier", true).makeGlobal().cache();
 

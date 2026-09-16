@@ -35,21 +35,29 @@ public class CrashBottomSheetDialogFragment extends MenuBottomSheetDialogFragmen
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		app.getFeedbackHelper().sendCrashLog();
+		OsmandApplication app = this.app;
+		app.getFeedbackHelper().sendCrashReport(sent -> {
+			app.showToastMessage(sent ? R.string.crash_report_sent : R.string.crash_report_send_failed);
+			return true;
+		});
 		dismiss();
 	}
 
 	public static boolean shouldShow(@Nullable OsmandSettings settings, @NonNull MapActivity activity) {
 		OsmandApplication app = activity.getApp();
 		if (app.getAppCustomization().isFeatureEnabled(FRAGMENT_CRASH_ID)) {
-			return !app.getRoutingHelper().isFollowingMode()
-					&& app.getAppInitializer().checkPreviousRunsForExceptions(activity, settings != null);
+			if (app.getRoutingHelper().isFollowingMode()) {
+				return false;
+			}
+			boolean javaCrash = app.getAppInitializer().checkPreviousRunsForExceptions(activity, settings != null);
+			return javaCrash || app.getFeedbackHelper().hasNewSystemCrash();
 		}
 		return false;
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager) {
+	public static void showInstance(@NonNull OsmandApplication app, @NonNull FragmentManager fragmentManager) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			app.getFeedbackHelper().markSystemCrashesShown();
 			CrashBottomSheetDialogFragment fragment = new CrashBottomSheetDialogFragment();
 			fragment.show(fragmentManager, TAG);
 		}
