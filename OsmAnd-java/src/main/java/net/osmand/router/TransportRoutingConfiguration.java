@@ -74,6 +74,11 @@ public class TransportRoutingConfiguration {
 		return defaultStopTime;
 	}
 	
+	// waiting for a vehicle: half of its interval if known, otherwise boarding time
+	public double getWaitTime(String routeType, int intervalSeconds) {
+		return intervalSeconds > 0 ? intervalSeconds / 2.0 : getBoardingTime(routeType);
+	}
+
 	public int getBoardingTime(String routeType) {
 		int time;
 		if (boardingTimes.containsKey(routeType)) {

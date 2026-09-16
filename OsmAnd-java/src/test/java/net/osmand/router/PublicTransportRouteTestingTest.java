@@ -55,7 +55,7 @@ public class PublicTransportRouteTestingTest {
 		List<String> actualResults = calculateRoute("ferry_sandbanks.obf", start, end);
 
 		List<String> expectedResults = new ArrayList<>();
-		expectedResults.add("Route 1 stops, 0 changes, 11.56 min: 369.81 m (7.4 min) to walk, 330.13 m (4.2 min) to travel\n"
+		expectedResults.add("Route 1 stops, 0 changes, 18.56 min: 369.81 m (7.4 min) to walk, 330.13 m (11.2 min) to travel\n"
 				+ " 1. SF [4624542]: walk 277.8 m to 'Sandbanks Ferry' and travel  to 'Sandbanks' by Sandbanks Ferry 1 stops \n"
 				+ " F. Walk 92.0 m to reach your destination");
 
@@ -71,7 +71,7 @@ public class PublicTransportRouteTestingTest {
 		List<String> actualResults = calculateRoute("ferry_sandbanks.obf", start, end);
 
 		List<String> expectedResults = new ArrayList<>();
-		expectedResults.add("Route 1 stops, 0 changes, 11.56 min: 369.81 m (7.4 min) to walk, 330.13 m (4.2 min) to travel\n"
+		expectedResults.add("Route 1 stops, 0 changes, 18.56 min: 369.81 m (7.4 min) to walk, 330.13 m (11.2 min) to travel\n"
 				+ " 1. SF [4624542]: walk 92.0 m to 'Sandbanks' and travel  to 'Sandbanks Ferry' by Sandbanks Ferry 1 stops \n"
 				+ " F. Walk 277.8 m to reach your destination");
 

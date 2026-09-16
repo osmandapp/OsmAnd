@@ -545,6 +545,7 @@ public class BinaryMapTransportReaderAdapter {
 		}
 		if (dataObject.getTags() != null && dataObject.getTags().size() > 0) {
 			dataObject.setTags(initializeTags(stringTable, dataObject));
+			dataObject.applyStopTags();
 		}
 	}
 
@@ -615,12 +616,6 @@ public class BinaryMapTransportReaderAdapter {
 				break;
 			case OsmandOdb.TransportRouteStop.DY_FIELD_NUMBER :
 				dy[0] += codedIS.readSInt32();
-				break;
-			case OsmandOdb.TransportRouteStop.TRANSFERONLY_FIELD_NUMBER :
-				dataObject.setTransferOnly(codedIS.readBool());
-				break;
-			case OsmandOdb.TransportRouteStop.SYNTHETIC_FIELD_NUMBER :
-				dataObject.setSynthetic(codedIS.readBool());
 				break;
 			default:
 				skipUnknownField(t);
@@ -716,9 +711,6 @@ public class BinaryMapTransportReaderAdapter {
 				TransportStopExit transportStopExit = readTransportStopExit(cleft, ctop, req, stringTable);
 				dataObject.addExit(transportStopExit);
 				codedIS.popLimit(oldLimit);
-				break;
-			case OsmandOdb.TransportStop.SYNTHETIC_FIELD_NUMBER :
-				dataObject.setSynthetic(codedIS.readBool());
 				break;
 			default:
 				skipUnknownField(t);

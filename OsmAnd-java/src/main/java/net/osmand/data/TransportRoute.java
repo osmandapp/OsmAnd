@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -86,6 +87,63 @@ public class TransportRoute extends MapObject {
 
 	public void addTag(String k, String v) {
 		tags.put(k, v);
+	}
+
+	// stop flags are stored as route tags with stop indexes: osmand:synthetic_stops=0,5
+	private static final String SYNTHETIC_STOPS_TAG = "osmand:synthetic_stops";
+	private static final String TRANSFER_ONLY_STOPS_TAG = "osmand:transfer_only_stops";
+	private static final String FERRY_INTERVALS_TAG = "osmand:ferry_intervals"; // stop index:ferry interval
+
+	public static Map<String, String> getStopTags(List<TransportStop> stops) {
+		Map<String, StringBuilder> values = new LinkedHashMap<>();
+		for (int i = 0; i < stops.size(); i++) {
+			TransportStop s = stops.get(i);
+			if (s.isSynthetic()) {
+				appendStopValue(values, SYNTHETIC_STOPS_TAG, String.valueOf(i));
+			}
+			if (s.isTransferOnly()) {
+				appendStopValue(values, TRANSFER_ONLY_STOPS_TAG, String.valueOf(i));
+			}
+			if (s.getFerryInterval() >= 0) {
+				appendStopValue(values, FERRY_INTERVALS_TAG, i + ":" + s.getFerryInterval());
+			}
+		}
+		Map<String, String> res = new LinkedHashMap<>();
+		for (Map.Entry<String, StringBuilder> e : values.entrySet()) {
+			res.put(e.getKey(), e.getValue().toString());
+		}
+		return res;
+	}
+
+	private static void appendStopValue(Map<String, StringBuilder> values, String tag, String value) {
+		StringBuilder sb = values.computeIfAbsent(tag, k -> new StringBuilder());
+		sb.append(sb.length() > 0 ? "," : "").append(value);
+	}
+
+	public void applyStopTags() {
+		for (String[] v : getStopValues(SYNTHETIC_STOPS_TAG)) {
+			forwardStops.get(Integer.parseInt(v[0])).setSynthetic(true);
+		}
+		for (String[] v : getStopValues(TRANSFER_ONLY_STOPS_TAG)) {
+			forwardStops.get(Integer.parseInt(v[0])).setTransferOnly(true);
+		}
+		for (String[] v : getStopValues(FERRY_INTERVALS_TAG)) {
+			forwardStops.get(Integer.parseInt(v[0])).setFerryInterval(Integer.parseInt(v[1]));
+		}
+	}
+
+	private List<String[]> getStopValues(String tag) {
+		List<String[]> res = new ArrayList<>();
+		String value = tags.get(tag);
+		if (!Algorithms.isEmpty(value)) {
+			for (String v : value.split(",")) {
+				String[] parts = v.split(":");
+				if (Integer.parseInt(parts[0]) < forwardStops.size()) {
+					res.add(parts);
+				}
+			}
+		}
+		return res;
 	}
 
 	public TransportSchedule getOrCreateSchedule() {

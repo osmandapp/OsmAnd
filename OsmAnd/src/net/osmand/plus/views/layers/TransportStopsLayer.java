@@ -28,6 +28,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
@@ -131,7 +132,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 									return isInterrupted();
 								}
 							});
-					res.removeIf(TransportStop::isSynthetic);
+					res.removeIf(TransportStopsLayer::isSynthetic);
 					Collections.sort(res, (lhs, rhs) -> lhs.getId() < rhs.getId()
 							? -1 : (lhs.getId().longValue() == rhs.getId().longValue() ? 0 : 1));
 					return new Pair<>(res, res);
@@ -189,6 +190,20 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 
 	public void setRoute(TransportStopRoute route) {
 		this.stopRoute = route;
+	}
+
+	// synthetic stop belongs only to generated ferry routes, which mark it in their stop lists
+	private static boolean isSynthetic(@NonNull TransportStop stop) {
+		if (stop.getRoutes() != null) {
+			for (TransportRoute route : stop.getRoutes()) {
+				for (TransportStop s : route.getForwardStops()) {
+					if (s.getId().longValue() == stop.getId().longValue()) {
+						return s.isSynthetic();
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	@NonNull
