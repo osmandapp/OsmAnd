@@ -4,12 +4,16 @@ import java.io.File;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.ObfConstants;
 import net.osmand.data.LatLon;
 
 public class PublicTransportRouteTestingTest {
@@ -142,6 +146,226 @@ public class PublicTransportRouteTestingTest {
 		Assert.assertEquals(expectedResults, actualResults);
 	}
 
+	// Car ferry routing test
+	@Test
+	public void testCarFerryRoutingGullmarsledenForward() throws Exception {
+		LatLon start = new LatLon(58.30263, 11.50282);
+		LatLon end = new LatLon(58.29961, 11.53579);
+
+		String actualResult = calculateRoute("ferry_gullmarsleden.obf", "car", start, end);
+
+		Assert.assertEquals("Route 2007 m, 5.70 min, ferry ways [4361073]", actualResult);
+	}
+
+	// Car ferry routing test (reverse direction)
+	@Test
+	public void testCarFerryRoutingGullmarsledenBackward() throws Exception {
+		LatLon start = new LatLon(58.29961, 11.53579);
+		LatLon end = new LatLon(58.30263, 11.50282);
+
+		String actualResult = calculateRoute("ferry_gullmarsleden.obf", "car", start, end);
+
+		Assert.assertEquals("Route 2446 m, 6.42 min, ferry ways [4361073]", actualResult);
+	}
+
+	// Bicycle ferry routing test
+	@Test
+	public void testBicycleFerryRoutingGullmarsledenForward() throws Exception {
+		LatLon start = new LatLon(58.30263, 11.50282);
+		LatLon end = new LatLon(58.29961, 11.53579);
+
+		String actualResult = calculateRoute("ferry_gullmarsleden.obf", "bicycle", start, end);
+
+		Assert.assertEquals("Route 2007 m, 11.81 min, ferry ways [4361073]", actualResult);
+	}
+
+	// Bicycle ferry routing test (reverse direction)
+	@Test
+	public void testBicycleFerryRoutingGullmarsledenBackward() throws Exception {
+		LatLon start = new LatLon(58.29961, 11.53579);
+		LatLon end = new LatLon(58.30263, 11.50282);
+
+		String actualResult = calculateRoute("ferry_gullmarsleden.obf", "bicycle", start, end);
+
+		Assert.assertEquals("Route 2446 m, 14.09 min, ferry ways [4361073]", actualResult);
+	}
+
+	// Pedestrian ferry routing test
+	@Test
+	public void testPedestrianFerryRoutingGullmarsledenForward() throws Exception {
+		LatLon start = new LatLon(58.30263, 11.50282);
+		LatLon end = new LatLon(58.29961, 11.53579);
+
+		String actualResult = calculateRoute("ferry_gullmarsleden.obf", "pedestrian", start, end);
+
+		Assert.assertEquals("Route 2007 m, 30.11 min, ferry ways [4361073]", actualResult);
+	}
+
+	// Pedestrian ferry routing test (reverse direction)
+	@Test
+	public void testPedestrianFerryRoutingGullmarsledenBackward() throws Exception {
+		LatLon start = new LatLon(58.29961, 11.53579);
+		LatLon end = new LatLon(58.30263, 11.50282);
+
+		String actualResult = calculateRoute("ferry_gullmarsleden.obf", "pedestrian", start, end);
+
+		Assert.assertEquals("Route 2007 m, 30.11 min, ferry ways [4361073]", actualResult);
+	}
+
+	// Car ferry routing test
+	@Test
+	public void testCarFerryRoutingSandbanksForward() throws Exception {
+		LatLon start = new LatLon(50.67782, -1.95123);
+		LatLon end = new LatLon(50.68383, -1.94831);
+
+		String actualResult = calculateRoute("ferry_sandbanks.obf", "car", start, end);
+
+		Assert.assertEquals("Route 703 m, 1.48 min, ferry ways [147985346]", actualResult);
+	}
+
+	// Car ferry routing test (reverse direction)
+	@Test
+	public void testCarFerryRoutingSandbanksBackward() throws Exception {
+		LatLon start = new LatLon(50.68383, -1.94831);
+		LatLon end = new LatLon(50.67782, -1.95123);
+
+		String actualResult = calculateRoute("ferry_sandbanks.obf", "car", start, end);
+
+		Assert.assertEquals("Route 2387 m, 3.75 min, ferry ways [147985346]", actualResult);
+	}
+
+	// Bicycle ferry routing test
+	@Test
+	public void testBicycleFerryRoutingSandbanksForward() throws Exception {
+		LatLon start = new LatLon(50.67782, -1.95123);
+		LatLon end = new LatLon(50.68383, -1.94831);
+
+		String actualResult = calculateRoute("ferry_sandbanks.obf", "bicycle", start, end);
+
+		Assert.assertEquals("Route 703 m, 3.35 min, ferry ways [147985346]", actualResult);
+	}
+
+	// Bicycle ferry routing test (reverse direction)
+	@Test
+	public void testBicycleFerryRoutingSandbanksBackward() throws Exception {
+		LatLon start = new LatLon(50.68383, -1.94831);
+		LatLon end = new LatLon(50.67782, -1.95123);
+
+		String actualResult = calculateRoute("ferry_sandbanks.obf", "bicycle", start, end);
+
+		Assert.assertEquals("Route 1610 m, 6.77 min, ferry ways [147985346]", actualResult);
+	}
+
+	// Pedestrian ferry routing test
+	@Test
+	public void testPedestrianFerryRoutingSandbanksForward() throws Exception {
+		LatLon start = new LatLon(50.67782, -1.95123);
+		LatLon end = new LatLon(50.68383, -1.94831);
+
+		String actualResult = calculateRoute("ferry_sandbanks.obf", "pedestrian", start, end);
+
+		Assert.assertEquals("Route 703 m, 10.54 min, ferry ways [147985346]", actualResult);
+	}
+
+	// Pedestrian ferry routing test (reverse direction)
+	@Test
+	public void testPedestrianFerryRoutingSandbanksBackward() throws Exception {
+		LatLon start = new LatLon(50.68383, -1.94831);
+		LatLon end = new LatLon(50.67782, -1.95123);
+
+		String actualResult = calculateRoute("ferry_sandbanks.obf", "pedestrian", start, end);
+
+		Assert.assertEquals("Route 703 m, 10.54 min, ferry ways [147985346]", actualResult);
+	}
+
+	// Car ferry routing test
+	@Test
+	public void testCarFerryRoutingNordoledenForward() throws Exception {
+		LatLon start = new LatLon(57.75831, 11.61556);
+		LatLon end = new LatLon(57.77241, 11.61966);
+
+		String actualResult = calculateRoute("ferry_nordoleden.obf", "car", start, end);
+
+		Assert.assertEquals("Route 1993 m, 5.79 min, ferry ways [16794766]", actualResult);
+	}
+
+	// Car ferry routing test (reverse direction)
+	@Test
+	public void testCarFerryRoutingNordoledenBackward() throws Exception {
+		LatLon start = new LatLon(57.77241, 11.61966);
+		LatLon end = new LatLon(57.75831, 11.61556);
+
+		String actualResult = calculateRoute("ferry_nordoleden.obf", "car", start, end);
+
+		Assert.assertEquals("Route 1993 m, 5.79 min, ferry ways [16794766]", actualResult);
+	}
+
+	// Bicycle ferry routing test
+	@Test
+	public void testBicycleFerryRoutingNordoledenForward() throws Exception {
+		LatLon start = new LatLon(57.75831, 11.61556);
+		LatLon end = new LatLon(57.77241, 11.61966);
+
+		String actualResult = calculateRoute("ferry_nordoleden.obf", "bicycle", start, end);
+
+		Assert.assertEquals("Route 1993 m, 11.33 min, ferry ways [16794766]", actualResult);
+	}
+
+	// Bicycle ferry routing test (reverse direction)
+	@Test
+	public void testBicycleFerryRoutingNordoledenBackward() throws Exception {
+		LatLon start = new LatLon(57.77241, 11.61966);
+		LatLon end = new LatLon(57.75831, 11.61556);
+
+		String actualResult = calculateRoute("ferry_nordoleden.obf", "bicycle", start, end);
+
+		Assert.assertEquals("Route 1993 m, 11.33 min, ferry ways [16794766]", actualResult);
+	}
+
+	// Pedestrian ferry routing test
+	@Test
+	public void testPedestrianFerryRoutingNordoledenForward() throws Exception {
+		LatLon start = new LatLon(57.75831, 11.61556);
+		LatLon end = new LatLon(57.77241, 11.61966);
+
+		String actualResult = calculateRoute("ferry_nordoleden.obf", "pedestrian", start, end);
+
+		Assert.assertEquals("Route 1993 m, 29.89 min, ferry ways [16794766]", actualResult);
+	}
+
+	// Pedestrian ferry routing test (reverse direction)
+	@Test
+	public void testPedestrianFerryRoutingNordoledenBackward() throws Exception {
+		LatLon start = new LatLon(57.77241, 11.61966);
+		LatLon end = new LatLon(57.75831, 11.61556);
+
+		String actualResult = calculateRoute("ferry_nordoleden.obf", "pedestrian", start, end);
+
+		Assert.assertEquals("Route 1993 m, 29.89 min, ferry ways [16794766]", actualResult);
+	}
+
+	// Pedestrian ferry routing test
+	@Test
+	public void testPedestrianFerryRoutingKungshamnForward() throws Exception {
+		LatLon start = new LatLon(58.36137, 11.2488);
+		LatLon end = new LatLon(58.35333, 11.22505);
+
+		String actualResult = calculateRoute("ferry_kungshamn.obf", "pedestrian", start, end);
+
+		Assert.assertEquals("Route 1933 m, 29.08 min, ferry ways [189584079, 189582586]", actualResult);
+	}
+
+	// Pedestrian ferry routing test (reverse direction)
+	@Test
+	public void testPedestrianFerryRoutingKungshamnBackward() throws Exception {
+		LatLon start = new LatLon(58.35333, 11.22505);
+		LatLon end = new LatLon(58.36137, 11.2488);
+
+		String actualResult = calculateRoute("ferry_kungshamn.obf", "pedestrian", start, end);
+
+		Assert.assertEquals("Route 1933 m, 29.08 min, ferry ways [189582586, 189584079]", actualResult);
+	}
+
 	private List<String> calculateRoute(String obfFileName, LatLon start, LatLon end) throws Exception {
 		String fl = "src/test/resources/routing/" + obfFileName;
 		RandomAccessFile raf = new RandomAccessFile(fl, "r");
@@ -166,6 +390,34 @@ public class PublicTransportRouteTestingTest {
 			System.out.println(s);
 		}
 		return actualResults;
+	}
+
+	// car, bicycle or pedestrian route: distance, time and OSM ids of the ferry ways on the route
+	private String calculateRoute(String obfFileName, String profile, LatLon start, LatLon end) throws Exception {
+		String fl = "src/test/resources/routing/" + obfFileName;
+		BinaryMapIndexReader[] readers = { new BinaryMapIndexReader(new RandomAccessFile(fl, "r"), new File(fl)) };
+
+		RoutingConfiguration config = RoutingConfiguration.getDefault().build(profile,
+				new RoutingConfiguration.RoutingMemoryLimits(RoutingConfiguration.DEFAULT_MEMORY_LIMIT * 3,
+						RoutingConfiguration.DEFAULT_NATIVE_MEMORY_LIMIT));
+		RoutePlannerFrontEnd planner = new RoutePlannerFrontEnd();
+		RoutingContext ctx = planner.buildRoutingContext(config, null, readers, RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
+		List<RouteSegmentResult> segments = planner.searchRoute(ctx, start, end, null).detailed;
+		Assert.assertNotNull("Routing failed to produce a route", segments);
+
+		double distance = 0;
+		double time = 0;
+		Set<Long> ferryWays = new LinkedHashSet<>();
+		for (RouteSegmentResult segment : segments) {
+			distance += segment.getDistance();
+			time += segment.getSegmentTime();
+			if ("ferry".equals(segment.getObject().getValue("route"))) {
+				ferryWays.add(segment.getObject().getId() >> ObfConstants.SHIFT_ID);
+			}
+		}
+		String result = String.format(Locale.US, "Route %.0f m, %.2f min, ferry ways %s", distance, time / 60, ferryWays);
+		System.out.println(profile + ": " + result);
+		return result;
 	}
 
 }
