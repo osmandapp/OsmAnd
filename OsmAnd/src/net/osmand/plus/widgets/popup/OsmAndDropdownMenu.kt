@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Checkbox
@@ -49,6 +50,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -211,7 +213,7 @@ fun <T> OsmAndDropdownMenuContent(
 		Column(
 			modifier = Modifier
 				.padding(vertical = MENU_CONTAINER_VERTICAL_PADDING)
-				.width(IntrinsicSize.Max)
+				.fillMaxWidth()
 		) {
 			if (title != null) {
 				Box(
@@ -558,6 +560,7 @@ fun showComposeDropdownMenu(displayData: PopUpMenuDisplayData): PopupWindow? {
 	val shadowPaddingPx = AndroidUtils.dpToPx(context, MENU_SHADOW_PADDING.value)
 	val screenMarginPx = AndroidUtils.dpToPx(context, MENU_SCREEN_MARGIN.value)
 	val verticalSpacingPx = AndroidUtils.dpToPx(context, MENU_VERTICAL_SPACING.value)
+	val screenWidth = context.resources.displayMetrics.widthPixels
 
 	val popupWindow = PopupWindow(
 		composeView,
@@ -581,8 +584,16 @@ fun showComposeDropdownMenu(displayData: PopUpMenuDisplayData): PopupWindow? {
 			)
 
 			Box(modifier = Modifier.padding(MENU_SHADOW_PADDING)) {
+				val minMenuWidth = if (displayData.widthMode == PopUpMenuWidthMode.AS_ANCHOR_VIEW && anchorView.width > 0) {
+					val maxAllowedWidthPx = screenWidth - 2 * screenMarginPx
+					val targetWidthPx = if (maxAllowedWidthPx > 0) minOf(anchorView.width, maxAllowedWidthPx) else anchorView.width
+					with(LocalDensity.current) { targetWidthPx.toDp() }
+				} else {
+					Dp.Unspecified
+				}
 				OsmAndDropdownMenuContainer(
 					options = displayData.menuItems?.toDropdownOptions(displayData) ?: emptyList(),
+					modifier = if (minMenuWidth != Dp.Unspecified) Modifier.widthIn(min = minMenuWidth) else Modifier,
 					shape = MenuDefaults.shape,
 					containerColor = colors.background,
 					tonalElevation = 0.dp,
@@ -602,7 +613,6 @@ fun showComposeDropdownMenu(displayData: PopUpMenuDisplayData): PopupWindow? {
 
 	val anchorLocation = IntArray(2)
 	anchorView.getLocationOnScreen(anchorLocation)
-	val screenWidth = context.resources.displayMetrics.widthPixels
 	val anchorCenterX = anchorLocation[0] + anchorView.width / 2
 	val isRtl = anchorView.layoutDirection == View.LAYOUT_DIRECTION_RTL
 	val isAnchorOnRight = anchorCenterX > screenWidth / 2

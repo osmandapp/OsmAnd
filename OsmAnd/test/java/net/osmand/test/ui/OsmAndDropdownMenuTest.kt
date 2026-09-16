@@ -34,6 +34,7 @@ import net.osmand.plus.widgets.popup.OsmAndDropdownMenuOption
 import net.osmand.plus.widgets.popup.OsmAndDropdownMenuTheme
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData
 import net.osmand.plus.widgets.popup.PopUpMenuItem
+import net.osmand.plus.widgets.popup.PopUpMenuWidthMode
 import net.osmand.plus.widgets.popup.colorAttr
 import net.osmand.plus.widgets.popup.showComposeDropdownMenu
 import net.osmand.plus.widgets.popup.toDropdownOption
@@ -643,6 +644,24 @@ class OsmAndDropdownMenuTest {
 				}
 			}
 		}
+	}
+
+	@Test
+	fun testDropdownMenuWidthModeDefaultAndAnchorWidthCalculation() {
+		val displayData = PopUpMenuDisplayData()
+		assertEquals(PopUpMenuWidthMode.AS_ANCHOR_VIEW, displayData.widthMode)
+
+		val screenWidthPx = 1080
+		val screenMarginPx = 32
+		val maxAllowedWidthPx = screenWidthPx - 2 * screenMarginPx
+
+		val anchorWidth1 = 300
+		val targetWidth1 = minOf(anchorWidth1, maxAllowedWidthPx)
+		assertEquals(300, targetWidth1)
+
+		val anchorWidthExcessive = 2000
+		val targetWidth2 = minOf(anchorWidthExcessive, maxAllowedWidthPx)
+		assertEquals(maxAllowedWidthPx, targetWidth2)
 	}
 
 	private fun createTestComposeView(context: android.content.Context): ComposeView {

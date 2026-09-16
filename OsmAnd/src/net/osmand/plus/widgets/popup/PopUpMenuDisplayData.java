@@ -29,10 +29,6 @@ public class PopUpMenuDisplayData {
 	@Deprecated
 	public boolean nightMode;
 
-	/**
-	 * @deprecated Unused with Compose dropdown menus. Width is measured intrinsically.
-	 */
-	@Deprecated
 	public PopUpMenuWidthMode widthMode = PopUpMenuWidthMode.AS_ANCHOR_VIEW;
 
 	public List<PopUpMenuItem> menuItems;
