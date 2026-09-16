@@ -71,6 +71,23 @@ public class BoatRoutePlanner {
 		public double getConnectorsDistance() {
 			return length(startConnector) + length(endConnector);
 		}
+
+		/** Metres over the network and open water together. */
+		public double getDistance() {
+			return (network == null ? 0 : routeDistance(network)) + getConnectorsDistance() + length(openWater);
+		}
+
+		/** Seconds: segment times over the network, the boat's speed over open water. */
+		public double getTime() {
+			double time = 0;
+			if (network != null) {
+				for (RouteSegmentResult r : network) {
+					time += r.getSegmentTime();
+				}
+			}
+			double openWaterDistance = getConnectorsDistance() + length(openWater);
+			return decision.speed > 0 ? time + openWaterDistance / decision.speed : time;
+		}
 	}
 
 	/** What was compared and what was chosen: for the log, for tests and for the server response. */
@@ -78,8 +95,6 @@ public class BoatRoutePlanner {
 		public int networkSegments;
 		public double networkToStart = -1;
 		public double networkToEnd = -1;
-		public boolean startConnectorFailed;
-		public boolean endConnectorFailed;
 		public int startEntries;
 		public int endEntries;
 		public int networkSearches;
@@ -96,10 +111,9 @@ public class BoatRoutePlanner {
 		@Override
 		public String toString() {
 			return String.format(Locale.US,
-					"%s: network %d segments ending %.0f m / %.0f m from the points%s%s, entries %d / %d, %d network searches (%d failed), cost %.0f network vs %.0f open water, speed %.2f, %d ms (entries %d, network %d, open water %d)",
+					"%s: network %d segments ending %.0f m / %.0f m from the points, entries %d / %d, %d network searches (%d failed), cost %.0f network vs %.0f open water, speed %.2f, %d ms (entries %d, network %d, open water %d)",
 					choice, networkSegments, networkToStart, networkToEnd,
-					startConnectorFailed ? ", no open water to the start" : "",
-					endConnectorFailed ? ", no open water to the end" : "", startEntries, endEntries, networkSearches,
+					startEntries, endEntries, networkSearches,
 					networkFailures, networkCost, openWaterCost, speed, timeMs, entriesMs, networkMs, openWaterMs);
 		}
 	}
@@ -111,12 +125,28 @@ public class BoatRoutePlanner {
 		List<LatLon> line;
 		/** routing.xml seconds of the open water part. */
 		double cost;
+		/** How far from the point the network route may start or end. */
+		double reach = ENDPOINT_TOLERANCE_METERS;
 	}
 
 	private final ShoreProvider shores;
 
 	public BoatRoutePlanner(ShoreProvider shores) {
 		this.shores = shores;
+	}
+
+	/**
+	 * The boat route through the points in order, one leg per pair of neighbouring points. Rivers, canals and ports
+	 * are only ever reached as requested points, so every leg is planned on its own; a leg with no route has the
+	 * choice "none".
+	 */
+	public List<BoatRoute> route(RoutePlannerFrontEnd fe, RoutingContext ctx, List<LatLon> points)
+			throws IOException, InterruptedException {
+		List<BoatRoute> legs = new ArrayList<>();
+		for (int i = 1; i < points.size(); i++) {
+			legs.add(route(fe, ctx, points.get(i - 1), points.get(i)));
+		}
+		return legs;
 	}
 
 	/**
@@ -158,6 +188,9 @@ public class BoatRoutePlanner {
 				break;
 			}
 			if (pair[0] == null) {
+				// TODO when open water crosses a fairway, decide by the fairway's direction whether to follow it -
+				// open water is now either the whole route or the connectors to the entries, never a fairway crossed
+				// in the middle
 				phase = System.currentTimeMillis();
 				List<LatLon> openWater = openWater(start, end);
 				decision.openWaterMs = System.currentTimeMillis() - phase;
@@ -174,7 +207,7 @@ public class BoatRoutePlanner {
 			}
 			decision.networkSearches++;
 			phase = System.currentTimeMillis();
-			List<RouteSegmentResult> network = networkRoute(fe, ctx, pair[0].point, pair[1].point);
+			List<RouteSegmentResult> network = networkRoute(fe, ctx, pair[0], pair[1]);
 			decision.networkMs += System.currentTimeMillis() - phase;
 			if (network == null) {
 				decision.networkFailures++;
@@ -189,8 +222,8 @@ public class BoatRoutePlanner {
 				route.endConnector = pair[1].line;
 				decision.networkCost = cost;
 				decision.networkSegments = network.size();
-				decision.networkToStart = MapUtils.getDistance(network.get(0).getStartPoint(), start);
-				decision.networkToEnd = MapUtils.getDistance(network.get(network.size() - 1).getEndPoint(), end);
+				decision.networkToStart = distance(network.get(0), start);
+				decision.networkToEnd = distance(network.get(network.size() - 1), end);
 				decision.choice = pair[0].line == null && pair[1].line == null ? "network" : "network+connectors";
 			}
 		}
@@ -217,6 +250,8 @@ public class BoatRoutePlanner {
 		if (snapped != null && MapUtils.getDistance(snapped, point) <= ENDPOINT_TOLERANCE_METERS) {
 			Entry entry = new Entry();
 			entry.point = point;
+			// the router may start on another way next to the one the point snapped to
+			entry.reach = MapUtils.getDistance(snapped, point) + ENDPOINT_TOLERANCE_METERS;
 			entries.add(entry);
 			return entries;
 		}
@@ -310,8 +345,9 @@ public class BoatRoutePlanner {
 	}
 
 	/** The network route between two network points, or null when the router has none or joins other waterways. */
-	private static List<RouteSegmentResult> networkRoute(RoutePlannerFrontEnd fe, RoutingContext ctx, LatLon a, LatLon b)
+	private static List<RouteSegmentResult> networkRoute(RoutePlannerFrontEnd fe, RoutingContext ctx, Entry from, Entry to)
 			throws IOException, InterruptedException {
+		LatLon a = from.point, b = to.point;
 		List<RouteSegmentResult> result;
 		try {
 			RouteCalcResult calc = fe.searchRoute(ctx, a, b, null);
@@ -320,11 +356,26 @@ public class BoatRoutePlanner {
 			return null;
 		}
 		if (result == null || result.isEmpty()
-				|| MapUtils.getDistance(result.get(0).getStartPoint(), a) > ENDPOINT_TOLERANCE_METERS
-				|| MapUtils.getDistance(result.get(result.size() - 1).getEndPoint(), b) > ENDPOINT_TOLERANCE_METERS) {
+				|| distance(result.get(0), a) > from.reach
+				|| distance(result.get(result.size() - 1), b) > to.reach) {
 			return null;
 		}
 		return result;
+	}
+
+	/**
+	 * From a point to the part of the way a segment covers. Not to its first or last point: a route that starts in
+	 * the middle of a long fairway begins at a way point kilometres from where it joins the fairway.
+	 */
+	private static double distance(RouteSegmentResult segment, LatLon p) {
+		int step = segment.isForwardDirection() ? 1 : -1;
+		double min = MapUtils.getDistance(segment.getPoint(segment.getStartPointIndex()), p);
+		for (int i = segment.getStartPointIndex(); i != segment.getEndPointIndex(); i += step) {
+			LatLon from = segment.getPoint(i), to = segment.getPoint(i + step);
+			min = Math.min(min, MapUtils.getOrthogonalDistance(p.getLatitude(), p.getLongitude(), from.getLatitude(),
+					from.getLongitude(), to.getLatitude(), to.getLongitude()));
+		}
+		return min;
 	}
 
 	private static double routingTime(List<RouteSegmentResult> route) {
@@ -346,78 +397,6 @@ public class BoatRoutePlanner {
 		config.cornerClearance = offshore ? 300 : 80;
 		config.minClearance = offshore ? 150 : 40;
 		return config;
-	}
-
-	/**
-	 * Decision on a network route that is already computed - the server's first integration, kept until it moves to
-	 * {@link #route}.
-	 *
-	 * @param points  start, intermediate points and end as requested
-	 * @param network the {@link BinaryRoutePlanner} route through them, null or empty when it found none
-	 */
-	public BoatRoute plan(List<LatLon> points, List<RouteSegmentResult> network) throws IOException {
-		long started = System.currentTimeMillis();
-		BoatRoute route = new BoatRoute();
-		Decision decision = route.decision;
-		LatLon start = points.get(0), end = points.get(points.size() - 1);
-		boolean joinable = network != null && !network.isEmpty();
-		List<LatLon> startConnector = null, endConnector = null;
-		if (joinable) {
-			LatLon networkStart = network.get(0).getStartPoint();
-			LatLon networkEnd = network.get(network.size() - 1).getEndPoint();
-			decision.networkSegments = network.size();
-			decision.networkToStart = MapUtils.getDistance(networkStart, start);
-			decision.networkToEnd = MapUtils.getDistance(networkEnd, end);
-			if (decision.networkToStart > ENDPOINT_TOLERANCE_METERS) {
-				startConnector = openWater(start, networkStart);
-				decision.startConnectorFailed = startConnector == null;
-				joinable = startConnector != null;
-			}
-			if (joinable && decision.networkToEnd > ENDPOINT_TOLERANCE_METERS) {
-				endConnector = openWater(networkEnd, end);
-				decision.endConnectorFailed = endConnector == null;
-				joinable = endConnector != null;
-			}
-			if (joinable && startConnector == null && endConnector == null) {
-				route.network = network;
-				decision.networkCost = routeDistance(network);
-				decision.choice = "network";
-				decision.timeMs = System.currentTimeMillis() - started;
-				return route;
-			}
-		}
-		List<LatLon> openWater = openWater(points);
-		decision.openWaterCost = openWater == null ? -1 : length(openWater) / OPEN_WATER_PRIORITY;
-		decision.networkCost = joinable
-				? routeDistance(network) + (length(startConnector) + length(endConnector)) / OPEN_WATER_PRIORITY : -1;
-		if (joinable && (openWater == null || decision.networkCost <= decision.openWaterCost)) {
-			route.network = network;
-			route.startConnector = startConnector;
-			route.endConnector = endConnector;
-			decision.choice = "network+connectors";
-		} else if (openWater != null) {
-			route.openWater = openWater;
-			decision.choice = "openWater";
-		} else if (network != null && !network.isEmpty()) {
-			route.network = network;
-			decision.choice = "network, not joined";
-		}
-		decision.timeMs = System.currentTimeMillis() - started;
-		return route;
-	}
-
-	/** Open water through the points in order, null when any leg has no way over water. */
-	public List<LatLon> openWater(List<LatLon> points) throws IOException {
-		List<LatLon> line = new ArrayList<>();
-		line.add(points.get(0));
-		for (int i = 1; i < points.size(); i++) {
-			List<LatLon> leg = openWater(points.get(i - 1), points.get(i));
-			if (leg == null) {
-				return null;
-			}
-			line.addAll(leg.subList(1, leg.size()));
-		}
-		return line;
 	}
 
 	/** Open water from a to b, starting exactly at a and ending exactly at b, or null. */

@@ -43,6 +43,8 @@ public class BoatRoutingTest {
 		String url;
 		double[] start;
 		double[] end;
+		/** Intermediate points: every leg between neighbouring points must meet the expectations. */
+		List<double[]> via;
 		List<String> maps;
 		List<String> choices;
 		List<String> ways;
@@ -83,8 +85,14 @@ public class BoatRoutingTest {
 			Assume.assumeTrue("map " + file + " is not downloaded", file.exists());
 			readers.add(new BinaryMapIndexReader(new RandomAccessFile(file, "r"), file));
 		}
-		LatLon start = new LatLon(boatCase.start[0], boatCase.start[1]);
-		LatLon end = new LatLon(boatCase.end[0], boatCase.end[1]);
+		List<LatLon> points = new ArrayList<>();
+		points.add(new LatLon(boatCase.start[0], boatCase.start[1]));
+		if (boatCase.via != null) {
+			for (double[] p : boatCase.via) {
+				points.add(new LatLon(p[0], p[1]));
+			}
+		}
+		points.add(new LatLon(boatCase.end[0], boatCase.end[1]));
 
 		RoutePlannerFrontEnd fe = new RoutePlannerFrontEnd();
 		fe.CALCULATE_MISSING_MAPS = false;
@@ -95,31 +103,34 @@ public class BoatRoutingTest {
 				RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
 
 		long started = System.currentTimeMillis();
-		BoatRoute route = planner(readers).route(fe, ctx, start, end);
+		List<BoatRoute> legs = planner(readers).route(fe, ctx, points);
 		long timeMs = System.currentTimeMillis() - started;
-		String what = boatCase.name + " [" + boatCase.status + "]: " + route.decision + ", " + timeMs + " ms in total, "
-				+ boatCase.url;
+		Assert.assertEquals(points.size() - 1, legs.size());
+		String what = boatCase.name + " [" + boatCase.status + "]: " + legs.stream().map(l -> l.decision.toString())
+				.collect(java.util.stream.Collectors.joining("; ")) + ", " + timeMs + " ms in total, " + boatCase.url;
 		System.out.println(what);
 
-		if (boatCase.choices != null) {
-			Assert.assertTrue("choice not in " + boatCase.choices + " - " + what,
-					boatCase.choices.contains(route.decision.choice));
-		}
-		if (boatCase.ways != null) {
-			for (String way : boatCase.ways) {
-				Assert.assertTrue("does not use " + way + " - " + what, usesWay(route, way));
-			}
-		}
-		if (Boolean.TRUE.equals(boatCase.joinsPoints)) {
-			Assert.assertTrue("does not reach both points - " + what, route.isOpenWater()
-					|| "network".equals(route.decision.choice) || "network+connectors".equals(route.decision.choice));
+		for (String way : boatCase.ways == null ? new ArrayList<String>() : boatCase.ways) {
+			Assert.assertTrue("does not use " + way + " - " + what, legs.stream().anyMatch(l -> usesWay(l, way)));
 		}
 		if (boatCase.maxTimeMs != null) {
 			Assert.assertTrue("took " + timeMs + " ms - " + what, timeMs <= boatCase.maxTimeMs);
 		}
-		assertStaysOnWater(readers, route.startConnector, start, end);
-		assertStaysOnWater(readers, route.endConnector, start, end);
-		assertStaysOnWater(readers, route.openWater, start, end);
+		for (int i = 0; i < legs.size(); i++) {
+			BoatRoute route = legs.get(i);
+			LatLon start = points.get(i), end = points.get(i + 1);
+			if (boatCase.choices != null) {
+				Assert.assertTrue("leg " + i + " choice not in " + boatCase.choices + " - " + what,
+						boatCase.choices.contains(route.decision.choice));
+			}
+			if (Boolean.TRUE.equals(boatCase.joinsPoints)) {
+				Assert.assertTrue("leg " + i + " does not reach both points - " + what, route.isOpenWater()
+						|| "network".equals(route.decision.choice) || "network+connectors".equals(route.decision.choice));
+			}
+			assertStaysOnWater(readers, route.startConnector, start, end);
+			assertStaysOnWater(readers, route.endConnector, start, end);
+			assertStaysOnWater(readers, route.openWater, start, end);
+		}
 	}
 
 	/**
