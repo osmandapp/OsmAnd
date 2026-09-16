@@ -5153,4 +5153,9 @@
     <string name="quick_action_all_tracks">Todos los trayectos</string>
     <string name="share_favorites_media_preparation_failed">No se pudo incluir la multimedia adjunta. Se compartirán solo los puntos.</string>
     <string name="quick_action_add_track">Añadir trayecto</string>
+    <string name="another_profile">Otro perfil</string>
+    <string name="last_week">Semana pasada</string>
+    <string name="history_is_turned_off">El historial está desactivado</string>
+    <string name="search_and_navigation_history_disabled_descr">Se desactivó el historial de búsquedas y navegación. Actívelo en Configuración para ver aquí la actividad reciente.</string>
+    <string name="open_history_settings">Abrir configuración de historial</string>
 </resources>
