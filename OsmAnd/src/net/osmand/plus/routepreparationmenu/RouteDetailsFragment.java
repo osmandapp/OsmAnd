@@ -1379,7 +1379,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 							   @Nullable TransportRouteResultSegment nextSegment, double walkDistPT, double walkSpeedPT) {
 		RouteCalculationResult walkingRouteSegment = app.getTransportRoutingHelper().getWalkingRouteSegment(segment, nextSegment);
 		if (walkingRouteSegment != null) {
-			return walkingRouteSegment.getRoutingTime();
+			return walkingRouteSegment.getWholeTime();
 		}
 		return walkDistPT / walkSpeedPT;
 	}

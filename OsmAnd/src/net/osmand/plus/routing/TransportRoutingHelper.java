@@ -140,14 +140,14 @@ public class TransportRoutingHelper {
 			for (TransportRouteResultSegment segment : segments) {
 				RouteCalculationResult walkingRouteSegment = getWalkingRouteSegment(prevSegment, segment);
 				if (walkingRouteSegment != null) {
-					res += walkingRouteSegment.getRoutingTime();
+					res += walkingRouteSegment.getWholeTime();
 				}
 				prevSegment = segment;
 			}
 			if (segments.size() > 0) {
 				RouteCalculationResult walkingRouteSegment = getWalkingRouteSegment(segments.get(segments.size() - 1), null);
 				if (walkingRouteSegment != null) {
-					res += walkingRouteSegment.getRoutingTime();
+					res += walkingRouteSegment.getWholeTime();
 				}
 			}
 		}

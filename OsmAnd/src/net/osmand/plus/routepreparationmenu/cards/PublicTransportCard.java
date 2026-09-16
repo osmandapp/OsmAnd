@@ -292,7 +292,7 @@ public class PublicTransportCard extends MapBaseCard {
 			TransportRouteResultSegment s = iterator.next();
 			RouteCalculationResult walkingSegment = transportRoutingHelper.getWalkingRouteSegment(prevSegment, s);
 			if (walkingSegment != null) {
-				double walkTime = walkingSegment.getRoutingTime();
+				double walkTime = walkingSegment.getWholeTime();
 				if (walkTime > MIN_WALK_TIME) {
 					routesBadges.addView(createWalkRouteBadge(walkingSegment, badgesRowClickable), new FlowLayout.LayoutParams(itemsSpacing, itemsSpacing));
 					routesBadges.addView(createArrow(), new FlowLayout.LayoutParams(itemsSpacing, itemsSpacing));
@@ -321,7 +321,7 @@ public class PublicTransportCard extends MapBaseCard {
 			} else {
 				walkingSegment = transportRoutingHelper.getWalkingRouteSegment(s, null);
 				if (walkingSegment != null) {
-					double walkTime = walkingSegment.getRoutingTime();
+					double walkTime = walkingSegment.getWholeTime();
 					if (walkTime > MIN_WALK_TIME) {
 						routesBadges.addView(createArrow(), new FlowLayout.LayoutParams(itemsSpacing, itemsSpacing));
 						routesBadges.addView(createWalkRouteBadge(walkingSegment, badgesRowClickable), new FlowLayout.LayoutParams(itemsSpacing, itemsSpacing));
@@ -375,7 +375,7 @@ public class PublicTransportCard extends MapBaseCard {
 	}
 
 	private View createWalkRouteBadge(@NonNull RouteCalculationResult result, boolean badgesRowClickable) {
-		View v = createWalkRouteBadge(result.getRoutingTime(), null, null, badgesRowClickable);
+		View v = createWalkRouteBadge(result.getWholeTime(), null, null, badgesRowClickable);
 		if (transportCardListener != null && !badgesRowClickable) {
 			v.setOnClickListener(new View.OnClickListener() {
 				@Override
