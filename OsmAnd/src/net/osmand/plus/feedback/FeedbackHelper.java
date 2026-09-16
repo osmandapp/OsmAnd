@@ -9,26 +9,41 @@ import android.os.Build;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
+import net.osmand.StreamWriter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.utils.AndroidNetworkUtils.NetworkResult;
+import net.osmand.plus.utils.AndroidNetworkUtils.OnFileUploadCallback;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 public class FeedbackHelper {
 
 	private static final Log log = PlatformUtil.getLog(FeedbackHelper.class);
 
 	public static final String EXCEPTION_PATH = "exception.log";
+	private static final String CRASH_REPORT_URL = "https://osmand.net/api/crash-report";
+	private static final int MAX_SYSTEM_CRASH_LOGS_IN_REPORT = 3;
+	private static final long MAX_EXCEPTION_LOG_IN_REPORT = 10 * 1024 * 1024;
 
 	private final OsmandApplication app;
 	private final ExceptionHandler exceptionHandler;
@@ -92,6 +107,73 @@ public class FeedbackHelper {
 		Intent chooserIntent = Intent.createChooser(intent, app.getString(R.string.send_report));
 		chooserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		AndroidUtils.startActivityIfSafe(app, intent, chooserIntent);
+	}
+
+	// a native crash or ANR happened after the dialog was shown last time (and after the app was installed / updated)
+	public boolean hasNewSystemCrash() {
+		return nativeCrashHandler.getLastCrashTimestamp() > getShownSystemCrashTime();
+	}
+
+	public void markSystemCrashesShown() {
+		long timestamp = nativeCrashHandler.getLastCrashTimestamp();
+		if (timestamp > 0) {
+			app.getSettings().LAST_SHOWN_SYSTEM_CRASH_TIME.set(timestamp);
+		}
+	}
+
+	private long getShownSystemCrashTime() {
+		long shown = app.getSettings().LAST_SHOWN_SYSTEM_CRASH_TIME.get();
+		PackageInfo info = getPackageInfo();
+		return info != null ? Math.max(shown, info.lastUpdateTime) : shown;
+	}
+
+	// zip of exception.log and the newest system crash traces (tombstones, ANR traces) uploaded to osmand.net
+	public void sendCrashReport(@Nullable CallbackWithObject<Boolean> callback) {
+		Map<String, String> params = new LinkedHashMap<>();
+		PackageInfo info = getPackageInfo();
+		params.put("platform", "android");
+		params.put("version", info != null && info.versionName != null ? info.versionName : Version.getAppVersion(app));
+		params.put("osversion", Build.VERSION.RELEASE);
+
+		StreamWriter writer = (outputStream, progress) -> writeCrashReport(outputStream);
+		AndroidNetworkUtils.uploadFileAsync(CRASH_REPORT_URL, writer, "crash_report.zip", false, params, null,
+				new OnFileUploadCallback() {
+					@Override
+					public void onFileUploadDone(@NonNull NetworkResult result) {
+						if (result.getError() != null) {
+							log.error("Crash report upload failed: " + result.getError());
+						}
+						if (callback != null) {
+							callback.processResult(result.getError() == null);
+						}
+					}
+				});
+	}
+
+	private void writeCrashReport(@NonNull OutputStream outputStream) throws IOException {
+		ZipOutputStream zip = new ZipOutputStream(outputStream);
+		File crashLog = getCrashLog();
+		if (crashLog != null) {
+			putZipEntry(zip, crashLog, MAX_EXCEPTION_LOG_IN_REPORT);
+		}
+		List<File> files = nativeCrashHandler.collectCrashLogs();
+		for (File file : files.subList(0, Math.min(files.size(), MAX_SYSTEM_CRASH_LOGS_IN_REPORT))) {
+			putZipEntry(zip, file, Long.MAX_VALUE);
+		}
+		zip.finish();
+	}
+
+	// writes at most the last maxLength bytes of the file
+	private static void putZipEntry(@NonNull ZipOutputStream zip, @NonNull File file, long maxLength) throws IOException {
+		zip.putNextEntry(new ZipEntry(file.getName()));
+		try (InputStream in = new FileInputStream(file)) {
+			long skip = file.length() - maxLength;
+			if (skip > 0) {
+				in.skip(skip);
+			}
+			Algorithms.streamCopy(in, zip);
+		}
+		zip.closeEntry();
 	}
 
 	public void sendSupportEmail(@NonNull String screenName) {
