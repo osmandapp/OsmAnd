@@ -77,7 +77,7 @@ public class BoatRoutePlannerObfTest {
 					use.add(r);
 				}
 			}
-			SeaObstacles obstacles = SeaObstacles.readCoastline(use.isEmpty() ? readers : use, minLat, minLon,
+			SeaObstacles obstacles = SeaObstacles.readShores(use.isEmpty() ? readers : use, minLat, minLon,
 					maxLat, maxLon, offshore ? 9 : 12);
 			obstacles.setFarFromShore(landTiles);
 			return obstacles;
@@ -106,7 +106,7 @@ public class BoatRoutePlannerObfTest {
 			minLon = Math.min(minLon, p.getLongitude());
 			maxLon = Math.max(maxLon, p.getLongitude());
 		}
-		SeaObstacles detailed = SeaObstacles.readCoastline(readers, minLat - 0.02, minLon - 0.03, maxLat + 0.02,
+		SeaObstacles detailed = SeaObstacles.readShores(readers, minLat - 0.02, minLon - 0.03, maxLat + 0.02,
 				maxLon + 0.03, 16);
 		for (int i = 1; i < line.size(); i++) {
 			LatLon a = line.get(i - 1), b = line.get(i);
@@ -170,6 +170,24 @@ public class BoatRoutePlannerObfTest {
 		Assert.assertNotNull("open water from the North Sea to the channel", route.startConnector);
 		Assert.assertTrue("the canals reach Leiden", route.decision.networkToEnd < BoatRoutePlanner.ENDPOINT_TOLERANCE_METERS);
 		assertStaysOnWater(readers, route.startConnector, northSea, leiden);
+	}
+
+	/**
+	 * From the Stortemelk sea gate to Harlingen. The straight way over the Wadden Sea crosses tidal flats and cuts
+	 * across marked channels ten times, and still looked 3% cheaper than the fairway. With the flats as obstacles
+	 * the route follows the fairway.
+	 */
+	@Test
+	public void stortemelkToHarlingenFollowsTheFairwayNotTheFlats() throws Exception {
+		List<BinaryMapIndexReader> readers = readers(NETHERLANDS);
+		LatLon stortemelk = new LatLon(53.360405, 5.033101), harlingen = new LatLon(53.178056, 5.416263);
+
+		BoatRoute route = route(readers, stortemelk, harlingen);
+
+		Assert.assertTrue(route.decision.toString(), route.isNetwork());
+		Assert.assertTrue("the network reaches Harlingen",
+				route.decision.networkToEnd < BoatRoutePlanner.ENDPOINT_TOLERANCE_METERS);
+		assertStaysOnWater(readers, route.startConnector, stortemelk, harlingen);
 	}
 
 	/** Harlingen to West-Terschelling: fairways all the way, nothing to add. */

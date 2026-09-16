@@ -81,7 +81,14 @@ public class SeaRoutePlanner {
 		}
 		List<Corner> corners = corners(obstacles);
 		int attempts = 0, expansions = 0, visibilityChecks = 0;
-		// the nearest water may be a dock behind a lock: try farther water too, nearest pairs first
+		double direct = distance(obstacles, start, end);
+		SeaRoute best = null;
+		double bestCost = Double.MAX_VALUE;
+		// The nearest water is not always the right one: in Vlissingen it is a dock basin that reaches the Scheldt
+		// only through 15 km of docks, while water 300 m farther is 1.5 km from the target. Pairs are tried nearest
+		// first and the shortest route wins, counting the moves onto water; a route about as short as the straight
+		// line cannot be beaten, so the search stops there.
+		search:
 		for (int sum = 0; sum <= froms.size() + tos.size() - 2; sum++) {
 			for (int i = 0; i <= sum; i++) {
 				int j = sum - i;
@@ -89,7 +96,7 @@ public class SeaRoutePlanner {
 					continue;
 				}
 				if (attempts == config.maxEndpointAttempts) {
-					return null;
+					break search;
 				}
 				attempts++;
 				SeaRoute route = search(obstacles, corners, froms.get(i), tos.get(j));
@@ -98,19 +105,32 @@ public class SeaRoutePlanner {
 				if (route.points.isEmpty()) {
 					continue;
 				}
-				route.expansions = expansions;
-				route.visibilityChecks = visibilityChecks;
-				route.attempts = attempts;
-				if (!froms.get(i).equals(start)) {
-					route.snappedStart = froms.get(i);
+				double cost = distance(obstacles, start, froms.get(i)) + route.distance + distance(obstacles, tos.get(j), end);
+				if (cost < bestCost) {
+					bestCost = cost;
+					best = route;
+					best.snappedStart = froms.get(i).equals(start) ? null : froms.get(i);
+					best.snappedEnd = tos.get(j).equals(end) ? null : tos.get(j);
 				}
-				if (!tos.get(j).equals(end)) {
-					route.snappedEnd = tos.get(j);
+				if (bestCost <= direct * NEAR_STRAIGHT) {
+					break search;
 				}
-				return route;
 			}
 		}
-		return null;
+		if (best != null) {
+			best.expansions = expansions;
+			best.visibilityChecks = visibilityChecks;
+			best.attempts = attempts;
+		}
+		return best;
+	}
+
+	/** A route this close to the straight line is not worth trying farther water for. */
+	private static final double NEAR_STRAIGHT = 1.1;
+
+	private static double distance(SeaObstacles obstacles, LatLon a, LatLon b) {
+		return Math.hypot(obstacles.x(a.getLongitude()) - obstacles.x(b.getLongitude()),
+				obstacles.y(a.getLatitude()) - obstacles.y(b.getLatitude()));
 	}
 
 	/** A* between two water points; the result has no points when they are not connected. */
@@ -262,6 +282,10 @@ public class SeaRoutePlanner {
 	private Corner corner(SeaObstacles obstacles, double vx, double vy, double[] prev, double[] next, int landSide) {
 		double inX = vx - prev[0], inY = vy - prev[1], outX = next[0] - vx, outY = next[1] - vy;
 		double turn = inX * outY - inY * outX;
+		if (landSide == 0) {
+			// a barrier such as a tidal flat edge has no known land side: a route wraps any bend on its outer side
+			landSide = turn > 0 ? 1 : -1;
+		}
 		if (turn * landSide <= 0) {
 			return null; // concave towards the water: a route never bends here
 		}

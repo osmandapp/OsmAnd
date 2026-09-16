@@ -33,6 +33,8 @@ public class SeaObstacles {
 	private static final int STRIDE = 4;
 	private static final int LAND_ON_LEFT = 1;
 	private static final int LAND_ON_RIGHT = -1;
+	/** A barrier - the edge of a tidal flat - blocks a leg but says nothing about which side is land. */
+	private static final int NO_LAND_SIDE = 0;
 
 	private final double baseLat;
 	private final double metersPerDegreeLon;
@@ -57,16 +59,19 @@ public class SeaObstacles {
 	}
 
 	/**
-	 * Reads natural=coastline of the given box. The zoom picks the stored generalization: a coarse zoom
-	 * is enough to plan on and keeps the graph small, a detailed one is what a result should be verified
-	 * against.
+	 * Reads the shores a boat may not cross in the given box: natural=coastline, and the edges of tidal flats
+	 * (wetland=tidalflat), which dry out and are crossed by channels only - over the Wadden Sea the straight way is
+	 * shorter than the fairway on the map and impassable on the water.
+	 *
+	 * The zoom picks the stored generalization: a coarse zoom is enough to plan on and keeps the graph small, a
+	 * detailed one is what a result should be verified against.
 	 */
-	public static SeaObstacles readCoastline(List<BinaryMapIndexReader> readers, double minLat, double minLon,
+	public static SeaObstacles readShores(List<BinaryMapIndexReader> readers, double minLat, double minLon,
 			double maxLat, double maxLon, int zoom) throws IOException {
 		SeaObstacles obstacles = new SeaObstacles((minLat + maxLat) / 2);
 		SearchRequest<BinaryMapDataObject> req = BinaryMapIndexReader.buildSearchRequest(
 				MapUtils.get31TileNumberX(minLon), MapUtils.get31TileNumberX(maxLon),
-				MapUtils.get31TileNumberY(maxLat), MapUtils.get31TileNumberY(minLat), zoom, COASTLINE_FILTER);
+				MapUtils.get31TileNumberY(maxLat), MapUtils.get31TileNumberY(minLat), zoom, SHORE_FILTER);
 		Set<Long> loaded = new HashSet<>();
 		List<double[]> coastPieces = new ArrayList<>();
 		for (BinaryMapIndexReader reader : readers) {
@@ -75,13 +80,17 @@ public class SeaObstacles {
 					if (!loaded.add(o.getId())) {
 						continue; // the same piece at another zoom level or in an overlapping map
 					}
-					double[] piece = new double[o.getPointsLength() * 2];
-					for (int i = 0; i < o.getPointsLength(); i++) {
-						piece[i * 2] = obstacles.x(MapUtils.get31LongitudeX(o.getPoint31XTile(i)));
-						piece[i * 2 + 1] = obstacles.y(MapUtils.get31LatitudeY(o.getPoint31YTile(i)));
+					if (hasTag(o, index, "natural", "coastline")) {
+						double[] piece = obstacles.toPiece(o.getPointsLength(), o, null);
+						coastPieces.add(piece);
+						obstacles.accountRing(piece);
+					} else if (hasTag(o, index, "wetland", "tidalflat")) {
+						obstacles.addPiece(obstacles.toPiece(o.getPointsLength(), o, null), NO_LAND_SIDE);
+						int[][] inner = o.getPolygonInnerCoordinates();
+						for (int k = 0; inner != null && k < inner.length; k++) {
+							obstacles.addPiece(obstacles.toPiece(inner[k].length / 2, null, inner[k]), NO_LAND_SIDE);
+						}
 					}
-					coastPieces.add(piece);
-					obstacles.accountRing(piece);
 				}
 			}
 		}
@@ -94,12 +103,41 @@ public class SeaObstacles {
 		return obstacles;
 	}
 
-	private static final SearchFilter COASTLINE_FILTER = new SearchFilter() {
+	private double[] toPiece(int count, BinaryMapDataObject o, int[] xy) {
+		double[] piece = new double[count * 2];
+		for (int i = 0; i < count; i++) {
+			int x31 = o != null ? o.getPoint31XTile(i) : xy[i * 2];
+			int y31 = o != null ? o.getPoint31YTile(i) : xy[i * 2 + 1];
+			piece[i * 2] = x(MapUtils.get31LongitudeX(x31));
+			piece[i * 2 + 1] = y(MapUtils.get31LatitudeY(y31));
+		}
+		return piece;
+	}
+
+	private static boolean hasTag(BinaryMapDataObject o, MapIndex index, String tag, String value) {
+		for (int t : o.getTypes()) {
+			TagValuePair p = index.decodeType(t);
+			if (p != null && tag.equals(p.tag) && value.equals(p.value)) {
+				return true;
+			}
+		}
+		int[] additional = o.getAdditionalTypes();
+		for (int i = 0; additional != null && i < additional.length; i++) {
+			TagValuePair p = index.decodeType(additional[i]);
+			if (p != null && tag.equals(p.tag) && value.equals(p.value)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private static final SearchFilter SHORE_FILTER = new SearchFilter() {
 		@Override
 		public boolean accept(TIntArrayList types, MapIndex index) {
 			for (int i = 0; i < types.size(); i++) {
 				TagValuePair p = index.decodeType(types.get(i));
-				if (p != null && "natural".equals(p.tag) && "coastline".equals(p.value)) {
+				if (p != null && ("natural".equals(p.tag) && ("coastline".equals(p.value) || "wetland".equals(p.value))
+						|| "wetland".equals(p.tag) && "tidalflat".equals(p.value))) {
 					return true;
 				}
 			}
@@ -118,6 +156,11 @@ public class SeaObstacles {
 	public void addWaterAreaRing(double... latLon) {
 		double[] piece = toPiece(latLon);
 		addPiece(piece, signedArea(piece) >= 0 ? LAND_ON_RIGHT : LAND_ON_LEFT);
+	}
+
+	/** A barrier given as lat, lon, lat, lon…: legs may not cross it, and it does not tell land from water. */
+	public void addBarrier(double... latLon) {
+		addPiece(toPiece(latLon), NO_LAND_SIDE);
 	}
 
 	private double[] toPiece(double[] latLon) {
@@ -350,6 +393,9 @@ public class SeaObstacles {
 						continue;
 					}
 					segmentStamp[segment] = stamp;
+					if (pieceLandSide.get(segmentPiece[segment]) == NO_LAND_SIDE) {
+						continue; // a barrier cannot tell land from water
+					}
 					int p = segment * STRIDE;
 					double d = pointToSegment(state[1], state[2], segments[p], segments[p + 1], segments[p + 2],
 							segments[p + 3]);

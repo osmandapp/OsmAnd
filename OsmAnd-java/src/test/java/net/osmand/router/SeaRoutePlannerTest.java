@@ -189,6 +189,22 @@ public class SeaRoutePlannerTest {
 	}
 
 	@Test
+	public void tidalFlatBlocksOpenWaterButIsNotLand() {
+		// a tidal flat edge has no known land side; its ring may run either way
+		SeaObstacles obstacles = new SeaObstacles(ORIGIN.getLatitude());
+		obstacles.addBarrier(island(0, 0, 1000));
+		obstacles.build();
+		SeaRoutePlanner planner = planner(80, 40);
+
+		SeaRoute route = planner.plan(obstacles, at(-2000, 500), at(3000, 500));
+
+		Assert.assertFalse("a barrier does not make land", obstacles.isLand(at(-500, 500)));
+		Assert.assertNotNull(route);
+		Assert.assertEquals("the route goes around the flat", 3, route.getLegs());
+		Assert.assertFalse(planner.crossesShore(obstacles, route));
+	}
+
+	@Test
 	public void farFromAnyShoreTheBasemapTellsLandFromSea() {
 		SeaObstacles obstacles = obstacles(island(0, 0, 1000));
 		LatLon inland = at(50000, 50000);

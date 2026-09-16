@@ -43,7 +43,7 @@ public class SeaRoutePlannerObfTest {
 	private SeaObstacles load(List<BinaryMapIndexReader> readers, LatLon start, LatLon end, int zoom) throws Exception {
 		double margin = Math.max(0.05, 0.3 * MapUtils.getDistance(start, end) / 111000);
 		double lonMargin = margin / Math.cos(Math.toRadians((start.getLatitude() + end.getLatitude()) / 2));
-		return SeaObstacles.readCoastline(readers,
+		return SeaObstacles.readShores(readers,
 				Math.min(start.getLatitude(), end.getLatitude()) - margin,
 				Math.min(start.getLongitude(), end.getLongitude()) - lonMargin,
 				Math.max(start.getLatitude(), end.getLatitude()) + margin,
@@ -166,7 +166,13 @@ public class SeaRoutePlannerObfTest {
 		SeaRoute route = planner.plan(planning, town, scheldt);
 
 		Assert.assertNotNull("no route out of Vlissingen", route);
-		Assert.assertTrue("the nearest water should have been skipped, attempts " + route.attempts, route.attempts > 1);
+		System.out.println("Vlissingen: attempts " + route.attempts + ", start moved to " + route.snappedStart
+				+ ", " + Math.round(route.distance) + " m");
+		Assert.assertFalse("the start must be moved onto water", planning.isLand(route.points.get(0)));
+		// the nearest water is a dock basin that reaches the Scheldt only through 15 km of docks
+		double direct = MapUtils.getDistance(town, scheldt);
+		Assert.assertTrue("route " + Math.round(route.distance) + " m for " + Math.round(direct) + " m straight",
+				route.distance < direct * 3);
 		Assert.assertFalse(planner.crossesShore(planning, route));
 	}
 
@@ -183,7 +189,13 @@ public class SeaRoutePlannerObfTest {
 
 		SeaObstacles planning = load(readers, enkhuizen, stavoren, PLAN_ZOOM);
 
-		Assert.assertEquals("no coastline is expected around the IJsselmeer", 0, planning.getSegmentsCount());
+		int coastlinePieces = 0;
+		for (int i = 0; i < planning.getPieces().size(); i++) {
+			if (planning.getPieceLandSide(i) != 0) {
+				coastlinePieces++; // tidal flat edges nearby are barriers, not a shore of the lake
+			}
+		}
+		Assert.assertEquals("no coastline is expected around the IJsselmeer", 0, coastlinePieces);
 	}
 
 	@Test
