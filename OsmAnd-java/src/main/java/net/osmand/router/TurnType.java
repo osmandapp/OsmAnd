@@ -643,20 +643,4 @@ public class TurnType {
 				return "through";
 		}
 	}
-
-	public static boolean isNoneLane(String lane) {
-		return lane.isEmpty() || "none".equals(lane);
-	}
-
-	public static boolean hasNoneLane(String turnLanes) {
-		if (turnLanes == null) {
-			return false;
-		}
-		for (String lane : turnLanes.split("\\|", -1)) {
-			if (isNoneLane(lane)) {
-				return true;
-			}
-		}
-		return false;
-	}
 }

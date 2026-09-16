@@ -94,32 +94,21 @@ public class RouteResultPreparationTest {
                 useNative = false;
             }
         }
-
+        
         Map<String, String> params = te.getParams();
         if (params == null) {
             params = new HashMap<>();
         }
-        File fl = new File("src/test/resources/Turn_lanes_test.obf");
+        // a case can bring its own small map instead of growing the shared one
+        String fileName = params.containsKey("map") ? "src/test/resources/turn_lanes/" + params.get("map")
+                : "src/test/resources/Turn_lanes_test.obf";
+        File fl = new File(fileName);
+    
         RandomAccessFile raf = new RandomAccessFile(fl, "r");
         fe = new RoutePlannerFrontEnd();
         RoutingConfiguration.Builder builder = RoutingConfiguration.getDefault();
         if (useNative) {
             Objects.requireNonNull(nativeLibrary).initMapFile(fl.getAbsolutePath(), true);
-        }
-        BinaryMapIndexReader[] binaryMapIndexReaders;
-        if (params.containsKey("map")) {
-            // a case that needs its own small map instead of growing the shared one
-            File fl1 = new File("src/test/resources/turn_lanes/" + params.get("map"));
-            RandomAccessFile raf1 = new RandomAccessFile(fl1, "r");
-            binaryMapIndexReaders = new BinaryMapIndexReader[] {
-                    new BinaryMapIndexReader(raf1, fl1),
-                    new BinaryMapIndexReader(raf, fl)
-            };
-            if (useNative) {
-                Objects.requireNonNull(nativeLibrary).initMapFile(fl1.getAbsolutePath(), true);
-            }
-        } else {
-            binaryMapIndexReaders = new BinaryMapIndexReader[] {new BinaryMapIndexReader(raf, fl)};
         }
         params.put("car", "true");
         RoutingMemoryLimits memoryLimit = new RoutingMemoryLimits(
@@ -127,6 +116,7 @@ public class RouteResultPreparationTest {
                 RoutingConfiguration.DEFAULT_NATIVE_MEMORY_LIMIT
         );
         RoutingConfiguration config = builder.build("car", memoryLimit, params);
+        BinaryMapIndexReader[] binaryMapIndexReaders = {new BinaryMapIndexReader(raf, fl)};
         
         if (useNative) {
             ctx = fe.buildRoutingContext(config, nativeLibrary, binaryMapIndexReaders,

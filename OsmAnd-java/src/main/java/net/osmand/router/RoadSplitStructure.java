@@ -19,7 +19,7 @@ public class RoadSplitStructure {
 	int rightMaxPrio = 0;
 	int roadsOnRight = 0;
 
-	List<AttachedRoadInfo> attachedRoads = new ArrayList<>();
+	List<Double> attachedAngles = new ArrayList<>();
 	double currentDeviation = 0;
 
 	public boolean allAreStraight() {
