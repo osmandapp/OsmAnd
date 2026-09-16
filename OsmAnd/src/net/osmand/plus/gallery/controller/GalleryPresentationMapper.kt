@@ -5,10 +5,13 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.gallery.data.MediaMetadataRepository
 import net.osmand.plus.gallery.model.GalleryMediaPresentation
+import net.osmand.plus.gallery.model.GallerySortMode
+import net.osmand.shared.media.library.MediaFormatting
+import net.osmand.shared.media.library.MediaLibrarySortMode
+import net.osmand.shared.media.library.MediaLibraryStats
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.shared.media.domain.MediaItem
 import net.osmand.shared.media.domain.MediaType
-import net.osmand.util.Algorithms
 import java.util.Date
 
 /**
@@ -22,7 +25,8 @@ class GalleryPresentationMapper(
 	private val repository: MediaMetadataRepository
 ) {
 
-	fun presentation(item: MediaItem): GalleryMediaPresentation {
+	@JvmOverloads
+	fun presentation(item: MediaItem, sortMode: GallerySortMode = GallerySortMode.NAME_A_Z, distance: String? = null): GalleryMediaPresentation {
 		val metadata = repository.getCached(item)
 		val date = (metadata?.creationTimeMs ?: metadata?.lastModifiedTimeMs)?.let {
 			DateFormat.getMediumDateFormat(app).format(Date(it))
@@ -30,11 +34,10 @@ class GalleryPresentationMapper(
 		val size = metadata?.sizeBytes?.takeIf { it > 0 }?.let {
 			AndroidUtils.formatSize(app, it)
 		}
-		val duration = metadata?.durationMs?.let { formatDuration(it) }
-		val description = listOfNotNull(date, size, duration)
-			.joinToString(separator = " • ")
+		val duration = metadata?.durationMs?.takeIf { item.type == MediaType.AUDIO || item.type == MediaType.VIDEO }?.let { MediaFormatting.duration(it) }
+		val description = MediaFormatting.secondLine(MediaLibrarySortMode.valueOf(sortMode.name), date, size, duration, distance)
 		return GalleryMediaPresentation(
-			description = description.takeIf { it.isNotEmpty() },
+			description = description,
 			durationLabel = duration
 		)
 	}
@@ -53,13 +56,15 @@ class GalleryPresentationMapper(
 			}
 			sizeBytes += repository.getCached(item)?.sizeBytes ?: 0L
 		}
-		val counts = app.getString(R.string.gallery_stats_counts, photos, videos, audios)
+		return statsText(MediaLibraryStats(photos, videos, audios, sizeBytes))
+	}
+
+	fun statsText(stats: MediaLibraryStats): String {
+		val counts = app.getString(R.string.gallery_stats_counts, stats.photos, stats.videos, stats.audios)
 		val size = app.getString(
-			R.string.gallery_stats_size, AndroidUtils.formatSize(app, sizeBytes)
+			R.string.gallery_stats_size, AndroidUtils.formatSize(app, stats.bytes)
 		)
 		return "$counts\n$size"
 	}
 
-	private fun formatDuration(durationMs: Long): String =
-		Algorithms.formatDuration((durationMs / 1000).toInt(), app.accessibilityEnabled())
 }

@@ -103,6 +103,7 @@ public class PopUpMenu {
 		listPopupWindow.setOnItemClickListener((parent, view, position, id) -> {
 			if (position < menuItems.size()) {
 				PopUpMenuItem item = menuItems.get(position);
+				if (!item.isEnabled()) return;
 				notifyItemClicked(displayData, item);
 				if (item.shouldDismissOnClick()) {
 					listPopupWindow.dismiss();
@@ -190,6 +191,7 @@ public class PopUpMenu {
 
 	private static void notifyItemClicked(@NonNull PopUpMenuDisplayData displayData,
 	                                      @NonNull PopUpMenuItem menuItem) {
+		if (!menuItem.isEnabled()) return;
 		OnPopUpMenuItemClickListener listener = menuItem.getOnClickListener();
 		if (listener == null) {
 			listener = displayData.onItemClickListener;
@@ -214,6 +216,7 @@ public class PopUpMenu {
 			}
 			MenuItem menuItem = popupMenu.getMenu().add(groupId, i, Menu.NONE, popupMenuItem.getTitle());
 			menuItem.setIcon(popupMenuItem.getIcon());
+			menuItem.setEnabled(popupMenuItem.isEnabled());
 			menuItem.setOnMenuItemClickListener(item -> {
 				notifyItemClicked(displayData, popupMenuItem);
 				popupMenu.dismiss();

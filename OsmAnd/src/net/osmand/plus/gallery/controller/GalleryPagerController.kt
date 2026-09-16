@@ -7,6 +7,7 @@ import net.osmand.plus.gallery.data.GalleryKey
 import net.osmand.plus.gallery.data.getPagerItems
 import net.osmand.plus.gallery.model.GalleryItem
 import net.osmand.plus.gallery.ui.GalleryPhotoPagerFragment
+import net.osmand.shared.media.domain.MediaItem
 
 class GalleryPagerController(
 	app: OsmandApplication,
@@ -14,6 +15,23 @@ class GalleryPagerController(
 ) : BaseDialogController(app) {
 
 	var orderedIds: List<String>? = null
+	private var autoPlayItemId: String? = null
+
+	fun consumeAutoPlay(id: String): Boolean {
+		if (autoPlayItemId != id) return false
+		autoPlayItemId = null
+		return true
+	}
+
+	fun openDetails(activity: FragmentActivity, item: MediaItem) {
+		val viewer = activity.supportFragmentManager.findFragmentByTag(GalleryPhotoPagerFragment.TAG) as? GalleryPhotoPagerFragment
+		if (viewer != null) {
+			viewer.showDetails(item.id)
+		} else {
+			autoPlayItemId = null
+			GalleryPhotoPagerFragment.showInstance(activity, item.id, GalleryPhotoPagerFragment.STATE_PREVIEW)
+		}
+	}
 
 	val mediaItems: List<GalleryItem.Media>
 		get() {
@@ -50,6 +68,7 @@ class GalleryPagerController(
 		) {
 			val controller = getInstance(activity.application as OsmandApplication, key)
 			controller.orderedIds = orderedIds
+			controller.autoPlayItemId = if (key == GalleryKey.MediaLibrary) selectedItemId else null
 			GalleryPhotoPagerFragment.showInstance(activity, selectedItemId)
 		}
 

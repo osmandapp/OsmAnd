@@ -3,7 +3,7 @@ package net.osmand.plus.gallery.ui.holders
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.R
-import net.osmand.plus.activities.MapActivity
+import androidx.fragment.app.FragmentActivity
 import net.osmand.plus.gallery.model.GalleryAction
 import net.osmand.plus.gallery.model.GalleryItem
 import net.osmand.plus.utils.AndroidUtils
@@ -16,7 +16,7 @@ class ActionViewHolder(
 
 	fun bindView(
 		nightMode: Boolean,
-		mapActivity: MapActivity,
+		mapActivity: FragmentActivity,
 		item: GalleryItem.Action
 	) {
 		itemView.findViewById<View>(R.id.card_background).visibility = View.GONE
