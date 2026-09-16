@@ -62,8 +62,14 @@ public class BoatRoutePlannerObfTest {
 		}
 	}
 
-	/** Coastline of the given maps; the world basemap only for offshore corridors, as the server does. */
-	private static BoatRoutePlanner planner(List<BinaryMapIndexReader> readers) {
+	/**
+	 * Coastline of the given maps, the world basemap only for offshore corridors, and the basemap's land tiles
+	 * for points far from any shore - as the server does.
+	 */
+	private static BoatRoutePlanner planner(List<BinaryMapIndexReader> readers) throws Exception {
+		File basemap = new File(MAPS_DIR, "World_basemap_2.obf");
+		BasemapLandTiles landTiles = basemap.exists()
+				? new BasemapLandTiles(new BinaryMapIndexReader(new RandomAccessFile(basemap, "r"), basemap)) : null;
 		return new BoatRoutePlanner((minLat, minLon, maxLat, maxLon, offshore) -> {
 			List<BinaryMapIndexReader> use = new ArrayList<>();
 			for (BinaryMapIndexReader r : readers) {
@@ -71,8 +77,10 @@ public class BoatRoutePlannerObfTest {
 					use.add(r);
 				}
 			}
-			return SeaObstacles.readCoastline(use.isEmpty() ? readers : use, minLat, minLon, maxLat, maxLon,
-					offshore ? 9 : 12);
+			SeaObstacles obstacles = SeaObstacles.readCoastline(use.isEmpty() ? readers : use, minLat, minLon,
+					maxLat, maxLon, offshore ? 9 : 12);
+			obstacles.setFarFromShore(landTiles);
+			return obstacles;
 		});
 	}
 
@@ -215,5 +223,19 @@ public class BoatRoutePlannerObfTest {
 
 		Assert.assertTrue(route.decision.toString(), route.isOpenWater());
 		assertStaysOnWater(readers, route.openWater, valletta, gozo);
+	}
+
+	/**
+	 * A boat in the forest of the Utrechtse Heuvelrug: no waterway and no shore within kilometres. A point that far
+	 * from any coastline used to look like open sea and got a straight line through the trees.
+	 */
+	@Test
+	public void forestFarFromAnyShoreHasNoOpenWaterRoute() throws Exception {
+		Assume.assumeTrue("World_basemap_2.obf is not downloaded", new File(MAPS_DIR, "World_basemap_2.obf").exists());
+		List<BinaryMapIndexReader> readers = readers(NETHERLANDS);
+
+		BoatRoute route = route(readers, new LatLon(52.0600, 5.3700), new LatLon(52.0800, 5.4000));
+
+		Assert.assertFalse(route.decision.toString(), route.isOpenWater());
 	}
 }

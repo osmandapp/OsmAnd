@@ -264,12 +264,30 @@ public class SeaObstacles {
 	}
 
 	/**
-	 * Land or water by the side of the nearest shore segment. Water is also the answer when no shore is
-	 * within searchRadius, which is the open sea.
+	 * Tells land from water where no shore is near enough to judge by its side: the middle of the sea and the
+	 * middle of a continent look the same to a coastline. See {@link BasemapLandTiles}.
+	 */
+	public interface FarFromShore {
+		boolean isLand(double lat, double lon);
+	}
+
+	private FarFromShore farFromShore;
+
+	public void setFarFromShore(FarFromShore farFromShore) {
+		this.farFromShore = farFromShore;
+	}
+
+	/**
+	 * Land or water by the side of the nearest shore segment. With no shore within searchRadius the point is
+	 * either far out at sea or far inland, which {@link #setFarFromShore} decides; without it, water.
 	 */
 	public boolean isLand(LatLon point, double searchRadius) {
-		int segment = nearestSegment(x(point.getLongitude()), y(point.getLatitude()), searchRadius);
-		return segment >= 0 && landSide(segment, x(point.getLongitude()), y(point.getLatitude())) > 0;
+		double px = x(point.getLongitude()), py = y(point.getLatitude());
+		int segment = nearestSegment(px, py, searchRadius);
+		if (segment >= 0) {
+			return landSide(segment, px, py) > 0;
+		}
+		return farFromShore != null && farFromShore.isLand(point.getLatitude(), point.getLongitude());
 	}
 
 	public boolean isLand(LatLon point) {

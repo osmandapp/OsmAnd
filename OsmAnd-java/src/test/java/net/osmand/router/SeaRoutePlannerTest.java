@@ -189,6 +189,19 @@ public class SeaRoutePlannerTest {
 	}
 
 	@Test
+	public void farFromAnyShoreTheBasemapTellsLandFromSea() {
+		SeaObstacles obstacles = obstacles(island(0, 0, 1000));
+		LatLon inland = at(50000, 50000);
+
+		Assert.assertFalse("without land tiles a point far from any shore is open sea", obstacles.isLand(inland));
+
+		obstacles.setFarFromShore((lat, lon) -> true);
+		Assert.assertTrue(obstacles.isLand(inland));
+		Assert.assertFalse("near a shore its side still decides", obstacles.isLand(at(-500, 500)));
+		Assert.assertNull("no water to start from", planner(80, 40).plan(obstacles, inland, at(50500, 50000)));
+	}
+
+	@Test
 	public void berthNextToAnEnclosedDockStillReachesTheSea() {
 		// a 2 km island with a closed dock inside: the berth is 50 m from the dock and 650 m from the sea,
 		// so the nearest water is the one a boat cannot leave - the Vlissingen docks behind their locks
