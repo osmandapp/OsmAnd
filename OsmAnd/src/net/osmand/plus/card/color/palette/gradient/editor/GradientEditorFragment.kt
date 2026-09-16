@@ -151,15 +151,12 @@ class GradientEditorFragment : BaseFullScreenDialogFragment(), IGradientEditorVi
 	override fun onResume() {
 		super.onResume()
 		callMapActivity { it.disableDrawer() }
+	}
 
-		dialog?.setOnKeyListener { _, keyCode, event ->
-			if (keyCode == android.view.KeyEvent.KEYCODE_BACK && event.action == android.view.KeyEvent.ACTION_UP) {
-				controller?.onBackClick()
-				true
-			} else {
-				false
-			}
-		}
+	override fun isBackPressedCallbackEnabled(): Boolean = true
+
+	override fun handleBackPressed() {
+		controller?.onBackClick()
 	}
 
 	override fun onPause() {

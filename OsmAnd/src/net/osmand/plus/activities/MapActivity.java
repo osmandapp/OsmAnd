@@ -27,6 +27,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
@@ -194,6 +195,25 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private DrawerLayout drawerLayout;
 	private boolean drawerDisabled;
 
+	private final OnBackPressedCallback mapBackPressedCallback = new OnBackPressedCallback(false) {
+		@Override
+		public void handleOnBackPressed() {
+			handleMapBackPressed();
+		}
+	};
+	private final FragmentManager.FragmentLifecycleCallbacks fragmentLifecycleCallbacks =
+			new FragmentManager.FragmentLifecycleCallbacks() {
+				@Override
+				public void onFragmentStarted(@NonNull FragmentManager fm, @NonNull Fragment f) {
+					registerMapBackPressedCallback();
+				}
+
+				@Override
+				public void onFragmentResumed(@NonNull FragmentManager fm, @NonNull Fragment f) {
+					registerMapBackPressedCallback();
+				}
+			};
+
 	private boolean mIsDestroyed;
 	private boolean pendingPause;
 	private Timer splashScreenTimer;
@@ -236,6 +256,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 		setRequestedOrientation(AndroidUiHelper.getScreenOrientation(this));
 		super.onCreate(savedInstanceState);
+		registerMapBackPressedCallback();
+		getSupportFragmentManager().registerFragmentLifecycleCallbacks(fragmentLifecycleCallbacks, true);
+		getSupportFragmentManager().addOnBackStackChangedListener(this::updateBackPressedCallbackState);
 
 		lockHelper = app.getLockHelper();
 		mapScrollHelper = new MapScrollHelper(app);
@@ -318,6 +341,17 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		mapView.refreshMap(true);
 
 		drawerLayout = findViewById(R.id.drawer_layout);
+		drawerLayout.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
+			@Override
+			public void onDrawerOpened(@NonNull View drawerView) {
+				updateBackPressedCallbackState();
+			}
+
+			@Override
+			public void onDrawerClosed(@NonNull View drawerView) {
+				updateBackPressedCallbackState();
+			}
+		});
 		mapViewWithLayers = findViewById(R.id.map_view_with_layers);
 
 		checkAppInitialization();
@@ -533,44 +567,102 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		super.startActivity(intent);
 	}
 
-	@Override
-	public void onBackPressed() {
-		if (dashboardOnMap.onBackPressed()) {
-			return;
+	private void handleMapBackPressed() {
+		try {
+			if (dashboardOnMap.onBackPressed()) {
+				return;
+			}
+			if (drawerLayout != null && drawerLayout.isDrawerOpen(GravityCompat.START)) {
+				closeDrawer();
+				return;
+			}
+			if (getMapLayers().getContextMenuLayer().isInAddGpxPointMode()) {
+				quitAddGpxPointMode();
+			}
+			int backStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
+			if (backStackEntryCount == 0 && launchPrevActivityIntent()) {
+				return;
+			}
+			ExplorePlacesFragment explorePlacesFragment = fragmentsHelper.getExplorePlacesFragment();
+			if (explorePlacesFragment != null) {
+				if (!explorePlacesFragment.onBackPress()) {
+					fragmentsHelper.closeExplore();
+					fragmentsHelper.showQuickSearch(CURRENT, false);
+				}
+				return;
+			}
+			QuickSearchDialogFragment quickSearchFragment = fragmentsHelper.getQuickSearchDialogFragment();
+			if ((backStackEntryCount == 0 || mapContextMenu.isVisible()) && quickSearchFragment != null
+					&& quickSearchFragment.isSearchHidden()) {
+				fragmentsHelper.showQuickSearch(ShowQuickSearchMode.CURRENT, false);
+				return;
+			}
+			if (mapContextMenu.isVisible()) {
+				MenuController menuController = mapContextMenu.getMenuController();
+				if (menuController != null && menuController.hasBackAction()) {
+					mapContextMenu.backToolbarAction(menuController);
+					return;
+				}
+			}
+			performDefaultBackNavigation();
+		} finally {
+			updateBackPressedCallbackState();
+		}
+	}
+
+	/**
+	 * Equivalent of super.onBackPressed() in the former override: passes Back on to the fragments,
+	 * the back stack or the system while this callback is disabled, so it cannot handle it twice.
+	 */
+	private void performDefaultBackNavigation() {
+		mapBackPressedCallback.setEnabled(false);
+		getOnBackPressedDispatcher().onBackPressed();
+	}
+
+	/**
+	 * Keeps the map callback above callbacks registered by fragments, so Back is handled in the same
+	 * order as by the former onBackPressed() override: map overlays first, then fragments and the back stack.
+	 */
+	private void registerMapBackPressedCallback() {
+		mapBackPressedCallback.remove();
+		getOnBackPressedDispatcher().addCallback(this, mapBackPressedCallback);
+	}
+
+	/**
+	 * The callback must be enabled before the Back gesture starts, otherwise the system handles it
+	 * with the predictive animation; it is enabled only while handleMapBackPressed() has something to do.
+	 */
+	public void updateBackPressedCallbackState() {
+		mapBackPressedCallback.setEnabled(shouldInterceptMapBack());
+	}
+
+	private boolean shouldInterceptMapBack() {
+		if (dashboardOnMap.isVisible()) {
+			return true;
 		}
 		if (drawerLayout != null && drawerLayout.isDrawerOpen(GravityCompat.START)) {
-			closeDrawer();
-			return;
+			return true;
 		}
 		if (getMapLayers().getContextMenuLayer().isInAddGpxPointMode()) {
-			quitAddGpxPointMode();
+			return true;
 		}
 		int backStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
-		if (backStackEntryCount == 0 && launchPrevActivityIntent()) {
-			return;
+		if (backStackEntryCount == 0 && prevActivityIntent != null) {
+			return true;
 		}
-		ExplorePlacesFragment explorePlacesFragment = fragmentsHelper.getExplorePlacesFragment();
-		if (explorePlacesFragment != null) {
-			if (!explorePlacesFragment.onBackPress()) {
-				fragmentsHelper.closeExplore();
-				fragmentsHelper.showQuickSearch(CURRENT, false);
-			}
-			return;
+		if (fragmentsHelper.getExplorePlacesFragment() != null) {
+			return true;
 		}
 		QuickSearchDialogFragment quickSearchFragment = fragmentsHelper.getQuickSearchDialogFragment();
 		if ((backStackEntryCount == 0 || mapContextMenu.isVisible()) && quickSearchFragment != null
 				&& quickSearchFragment.isSearchHidden()) {
-			fragmentsHelper.showQuickSearch(ShowQuickSearchMode.CURRENT, false);
-			return;
+			return true;
 		}
 		if (mapContextMenu.isVisible()) {
 			MenuController menuController = mapContextMenu.getMenuController();
-			if (menuController != null && menuController.hasBackAction()) {
-				mapContextMenu.backToolbarAction(menuController);
-				return;
-			}
+			return menuController != null && menuController.hasBackAction();
 		}
-		super.onBackPressed();
+		return false;
 	}
 
 	public boolean launchPrevActivityIntent() {
@@ -578,6 +670,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			prevActivityIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			AndroidUtils.startActivityIfSafe(this, prevActivityIntent);
 			prevActivityIntent = null;
+			updateBackPressedCallbackState();
 			return true;
 		}
 		return false;
@@ -605,6 +698,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			return;
 		}
 		RestartActivity.showRestartDialogIfNeeded(this);
+		// Covers state restored before the first gesture, e.g. a drawer reopened by onRestoreInstanceState.
+		updateBackPressedCallbackState();
 
 		importHelper.setUiActivity(this);
 		app.getLocationProvider().ensureLatestLocation();
@@ -1355,6 +1450,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public static void clearPrevActivityIntent() {
 		prevActivityIntent = null;
+		MapActivity mapActivity = mapContextMenu.getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.updateBackPressedCallbackState();
+		}
 	}
 
 	@Override
