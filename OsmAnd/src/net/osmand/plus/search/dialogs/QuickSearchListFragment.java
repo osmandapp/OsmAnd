@@ -130,6 +130,9 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 						onSpatialCategorySearchResultClick(sr);
 					} else if (sr.objectType == POI
 							|| sr.objectType == LOCATION
+							|| sr.objectType == CITY
+							|| sr.objectType == VILLAGE
+							|| sr.objectType == STREET
 							|| sr.objectType == HOUSE
 							|| sr.objectType == FAVORITE
 							|| sr.objectType == RECENT_OBJ
@@ -141,9 +144,6 @@ public abstract class QuickSearchListFragment extends BaseNestedListFragment {
 					} else if (sr.objectType == INDEX_ITEM) {
 						processIndexItemClick((IndexItem) sr.relatedObject);
 					} else {
-						if (sr.objectType == CITY || sr.objectType == VILLAGE || sr.objectType == STREET) {
-							showResult = true;
-						}
 						dialogFragment.saveAddressSearchState();
 						dialogFragment.completeQueryWithObject(sr);
 					}
