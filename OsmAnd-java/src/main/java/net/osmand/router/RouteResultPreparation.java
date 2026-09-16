@@ -48,6 +48,7 @@ public class RouteResultPreparation {
 	public static boolean PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = false;
 	public static String PRINT_TO_GPX_FILE = null;
 	private static final float TURN_DEGREE_MIN = 45;
+	private static final int SIMILAR_TURN_ORDER = 2;
 	private static final float UNMATCHED_TURN_DEGREE_MINIMUM = 45;
 	private static final float SPLIT_TURN_DEGREE_NOT_STRAIGHT = 100;
 	private static final float TURN_SLIGHT_DEGREE = 5;
@@ -1296,7 +1297,8 @@ public class RouteResultPreparation {
 			if (UNMATCHED_HIGHWAY_TYPE.equals(rr.getObject().getHighway())) {
 				bearingDist = RouteSegmentResult.DIST_BEARING_DETECT_UNMATCHED;
 			}
-			double mpi = MapUtils.degreesDiff(prev.getBearingEnd(prev.getEndPointIndex(), Math.min(prev.getDistance(), bearingDist)), 
+			float prevBearingEnd = getBearingEndExtended(result, i, bearingDist);
+			double mpi = MapUtils.degreesDiff(prevBearingEnd,
 					rr.getBearingBegin(rr.getStartPointIndex(), Math.min(rr.getDistance(), bearingDist)));
 
 			String turnTag = getTurnString(rr);
@@ -1309,7 +1311,7 @@ public class RouteResultPreparation {
 					t = getActiveTurnType(lanes, leftSide, t);
 					t.setLanes(lanes);
 				} else if (fromTag != TurnType.C) {
-					t = attachKeepLeftInfoAndLanes(leftSide, prev, rr, twiceRoadPresent);
+					t = attachKeepLeftInfoAndLanes(leftSide, prev, rr, twiceRoadPresent, prevBearingEnd);
 					if (t != null) {
 						TurnType mainTurnType = TurnType.valueOf(fromTag, leftSide);
 						int[] lanes = t.getLanes();
@@ -1351,7 +1353,7 @@ public class RouteResultPreparation {
 				t = getActiveTurnType(lanes, leftSide, t);
 				t.setLanes(lanes);
 			} else {
-				t = attachKeepLeftInfoAndLanes(leftSide, prev, rr, twiceRoadPresent);
+				t = attachKeepLeftInfoAndLanes(leftSide, prev, rr, twiceRoadPresent, prevBearingEnd);
 			}
 			if (t != null) {
 				t.setTurnAngle((float) - mpi);
@@ -1381,6 +1383,11 @@ public class RouteResultPreparation {
 				return null;
 			}
 		} else {
+			if (TurnType.hasNoneLane(turnLanes)) {
+				List<RouteSegmentResult> attachedRoutes = currentSegm.getAttachedRoutes(currentSegm.getStartPointIndex());
+				RoadSplitStructure rs = calculateRoadSplitStructure(prevSegm, currentSegm, attachedRoutes, turnLanes);
+				turnLanes = convertNoneLanes(turnLanes, rs);
+			}
 			lanesArray = calculateRawTurnLanes(turnLanes, mainTurnType);
 		}
 
@@ -1417,16 +1424,25 @@ public class RouteResultPreparation {
 		return turnSet;
 	}
 
-	private TurnType attachKeepLeftInfoAndLanes(boolean leftSide, RouteSegmentResult prevSegm, RouteSegmentResult currentSegm, boolean twiceRoadPresent) {
+	private TurnType attachKeepLeftInfoAndLanes(boolean leftSide, RouteSegmentResult prevSegm, RouteSegmentResult currentSegm,
+			boolean twiceRoadPresent, float prevBearingEnd) {
 		List<RouteSegmentResult> attachedRoutes = currentSegm.getAttachedRoutes(currentSegm.getStartPointIndex());
 		if(attachedRoutes == null || attachedRoutes.isEmpty()) {
 			return null;
 		}
 		String turnLanesPrevSegm = twiceRoadPresent ? null : getTurnLanesString(prevSegm);
 		// keep left/right
-		RoadSplitStructure rs = calculateRoadSplitStructure(prevSegm, currentSegm, attachedRoutes, turnLanesPrevSegm);
+		RoadSplitStructure rs = calculateRoadSplitStructure(prevSegm, currentSegm, attachedRoutes, turnLanesPrevSegm, prevBearingEnd);
 		if (rs.roadsOnLeft + rs.roadsOnRight == 0) {
 			return null;
+		}
+
+		if (TurnType.hasNoneLane(turnLanesPrevSegm)) {
+			String converted = convertNoneLanes(turnLanesPrevSegm, rs);
+			if (!converted.equals(turnLanesPrevSegm)) {
+				turnLanesPrevSegm = converted;
+				rs = calculateRoadSplitStructure(prevSegm, currentSegm, attachedRoutes, turnLanesPrevSegm, prevBearingEnd);
+			}
 		}
 
 		// turn lanes exist
@@ -1592,7 +1608,13 @@ public class RouteResultPreparation {
 
 	protected RoadSplitStructure calculateRoadSplitStructure(RouteSegmentResult prevSegm, RouteSegmentResult currentSegm,
 			List<RouteSegmentResult> attachedRoutes, String turnLanesPrevSegm) {
+		return calculateRoadSplitStructure(prevSegm, currentSegm, attachedRoutes, turnLanesPrevSegm, prevSegm.getBearingEnd());
+	}
+
+	protected RoadSplitStructure calculateRoadSplitStructure(RouteSegmentResult prevSegm, RouteSegmentResult currentSegm,
+			List<RouteSegmentResult> attachedRoutes, String turnLanesPrevSegm, float prevBearingEnd) {
 		RoadSplitStructure rs = new RoadSplitStructure();
+		rs.currentDeviation = MapUtils.degreesDiff(prevBearingEnd, currentSegm.getBearingBegin());
 		int speakPriority = Math.max(highwaySpeakPriority(prevSegm.getObject().getHighway()), highwaySpeakPriority(currentSegm.getObject().getHighway()));
 		double currentAngle = MapUtils.normalizeDegrees360(currentSegm.getBearingBegin());
 		double prevAngle = MapUtils.normalizeDegrees360(prevSegm.getBearingBegin() - 180);
@@ -1611,18 +1633,24 @@ public class RouteResultPreparation {
 				continue;
 			}
 			double ex = MapUtils.degreesDiff(attached.getBearingBegin(), currentSegm.getBearingBegin());
-			double deviation = MapUtils.degreesDiff(prevSegm.getBearingEnd(), attached.getBearingBegin());
+			double deviation = MapUtils.degreesDiff(prevBearingEnd, attached.getBearingBegin());
+			if (isOppositeWay(prevSegm, attached, deviation)) {
+				continue;
+			}
 			double mpi = Math.abs(deviation);
 			int lanes = countLanesMinOne(attached);
 			boolean smallStraightVariation = mpi < TURN_DEGREE_MIN;
 			boolean smallTargetVariation = Math.abs(ex) < TURN_DEGREE_MIN;
-			boolean verySharpTurn = Math.abs(ex) > 150;
+			// sharpness of the attached road is its own deviation from the previous segment,
+			// not the difference with the direction of the route (which could be a turn itself)
+			boolean verySharpTurn = mpi > 150;
 			AttachedRoadInfo ai = new AttachedRoadInfo();
 			ai.speakPriority = highwaySpeakPriority(attached.getObject().getHighway()); 
 			ai.attachedOnTheRight = ex >= 0;
 			ai.attachedAngle = deviation;
 			ai.parsedLanes = parseTurnLanes(attached.getObject(), attached.getBearingBegin() * Math.PI / 180);
 			ai.lanes = lanes;
+			rs.attachedRoads.add(ai);
 
 			if (!verySharpTurn || hasSharpOrReverseLane) {
 				double attachedAngle = MapUtils.normalizeDegrees360(attached.getBearingBegin());
@@ -2042,7 +2070,6 @@ public class RouteResultPreparation {
 		if (possibleTurns.length == 1) {
 			infer = possibleTurns[0];
 		} else if (possibleTurns.length == 2) {
-			// this method could be adapted for 3+ turns 
 			if (mostLeft && !mostRight) {
 				infer = possibleTurns[0];
 			} else if (mostRight && !mostLeft) {
@@ -2050,6 +2077,12 @@ public class RouteResultPreparation {
 			} else {
 				infer = possibleTurns[1];
 				// infer = TurnType.C;
+			}
+		} else {
+			// 3+ turns: use the turn of the active lanes if it is the only one there
+			Integer[] activeTurns = getPossibleTurns(oLanes, false, true);
+			if (activeTurns.length == 1) {
+				infer = activeTurns[0];
 			}
 		}
 		return infer;
@@ -2070,14 +2103,6 @@ public class RouteResultPreparation {
 			}
 			if (!uniqueFromActive) {
 				possibleTurns.addAll(upossibleTurns);
-//				if (!possibleTurns.isEmpty()) {
-//					possibleTurns.retainAll(upossibleTurns);
-//					if(possibleTurns.isEmpty()) {
-//						break;
-//					}
-//				} else {
-//					possibleTurns.addAll(upossibleTurns);
-//				}
 			} else if ((oLanes[i] & 1) == 1) {
 				if (!possibleTurns.isEmpty()) {
 					possibleTurns.retainAll(upossibleTurns);
@@ -2531,6 +2556,210 @@ public class RouteResultPreparation {
 		String p = prev.getObject().getHighway();
 		return c != null && c.contains("_link") && 
 				p != null && !p.contains("_link");
+	}
+
+	/**
+	 * All directions of the junction, including the direction of the route itself, are distributed between the lanes.
+	 * Directions already described by the marked lanes are skipped, the straightest one of the rest goes through,
+	 * the others are added to the outermost unmarked lanes (they are stacked when there are not enough lanes).
+	 * Example: 3 directions (left, through, right) + "left|left|" = "left|left|through;right".
+	 *
+	 */
+	protected String convertNoneLanes(String turnLanesPrev, RoadSplitStructure rs) {
+		if (turnLanesPrev == null || rs == null) {
+			return turnLanesPrev;
+		}
+		String[] splitLaneOptions = turnLanesPrev.split("\\|", -1);
+		TIntArrayList noneLanes = new TIntArrayList();
+		for (int i = 0; i < splitLaneOptions.length; i++) {
+			if (TurnType.isNoneLane(splitLaneOptions[i])) {
+				noneLanes.add(i);
+			}
+		}
+		if (noneLanes.isEmpty()) {
+			return turnLanesPrev;
+		}
+		// directions described by the marked lanes are trusted as is
+		Set<Integer> markedTurns = new TreeSet<>();
+		boolean leftDescribed = false;
+		boolean rightDescribed = false;
+		for (String lane : splitLaneOptions) {
+			if (TurnType.isNoneLane(lane)) {
+				continue;
+			}
+			for (String option : lane.split(";")) {
+				int turn = TurnType.convertType(option);
+				markedTurns.add(turn);
+				leftDescribed |= TurnType.isLeftTurn(turn);
+				rightDescribed |= TurnType.isRightTurn(turn);
+			}
+		}
+		// all directions of the junction: attached roads and the road of the route itself
+		List<Double> restAngles = new ArrayList<>();
+		List<Integer> restTurns = new ArrayList<>();
+		List<Double> angles = new ArrayList<>();
+		List<Integer> turns = new ArrayList<>();
+		for (AttachedRoadInfo info : rs.attachedRoads) {
+			angles.add(info.attachedAngle);
+			turns.add(getTurnByAngle(info.attachedAngle));
+		}
+		angles.add(rs.currentDeviation);
+		turns.add(getTurnByAngle(rs.currentDeviation));
+		boolean leftClaimed = false;
+		boolean rightClaimed = false;
+		for (int i = 0; i < turns.size(); i++) {
+			int turn = turns.get(i);
+			if (markedTurns.contains(turn) || (TurnType.isLeftTurn(turn) && leftDescribed)
+					|| (TurnType.isRightTurn(turn) && rightDescribed)) {
+				leftClaimed |= TurnType.isLeftTurn(turn);
+				rightClaimed |= TurnType.isRightTurn(turn);
+				continue;
+			}
+			restAngles.add(angles.get(i));
+			restTurns.add(turn);
+		}
+		int leftMark = 0;
+		int rightMark = 0;
+		for (int turn : markedTurns) {
+			if (TurnType.isLeftTurn(turn) && (leftMark == 0
+					|| TurnType.orderFromLeftToRight(turn) < TurnType.orderFromLeftToRight(leftMark))) {
+				leftMark = turn;
+			} else if (TurnType.isRightTurn(turn) && (rightMark == 0
+					|| TurnType.orderFromLeftToRight(turn) > TurnType.orderFromLeftToRight(rightMark))) {
+				rightMark = turn;
+			}
+		}
+		boolean leftUnclaimed = leftDescribed && !leftClaimed;
+		boolean rightUnclaimed = rightDescribed && !rightClaimed;
+		while (restTurns.size() > noneLanes.size() && (leftUnclaimed || rightUnclaimed)) {
+			boolean left = leftUnclaimed;
+			int outermost = 0;
+			for (int i = 1; i < restAngles.size(); i++) {
+				boolean further = left ? restAngles.get(i) > restAngles.get(outermost)
+						: restAngles.get(i) < restAngles.get(outermost);
+				if (further) {
+					outermost = i;
+				}
+			}
+			int mark = left ? leftMark : rightMark;
+			int diff = Math.abs(TurnType.orderFromLeftToRight(mark)
+					- TurnType.orderFromLeftToRight(restTurns.get(outermost)));
+			if (diff <= SIMILAR_TURN_ORDER) {
+				restAngles.remove(outermost);
+				restTurns.remove(outermost);
+			}
+			if (left) {
+				leftUnclaimed = false;
+			} else {
+				rightUnclaimed = false;
+			}
+		}
+		if (restTurns.isEmpty()) {
+			return turnLanesPrev;
+		}
+		// the straightest direction of the rest is the continuation
+		int throughIndex = 0;
+		for (int i = 1; i < restAngles.size(); i++) {
+			if (Math.abs(restAngles.get(i)) < Math.abs(restAngles.get(throughIndex))) {
+				throughIndex = i;
+			}
+		}
+		if (Math.abs(restAngles.get(throughIndex)) > TURN_DEGREE_MIN) {
+			// no direction of the junction continues the road
+			throughIndex = -1;
+		}
+		List<Integer> leftTurns = new ArrayList<>();
+		List<Integer> rightTurns = new ArrayList<>();
+		for (int i = 0; i < restTurns.size(); i++) {
+			int turn = restTurns.get(i);
+			if (i == throughIndex || turn == TurnType.C) {
+				continue;
+			}
+			if (TurnType.isLeftTurn(turn) && !leftTurns.contains(turn)) {
+				leftTurns.add(turn);
+			} else if (TurnType.isRightTurn(turn) && !rightTurns.contains(turn)) {
+				rightTurns.add(turn);
+			}
+		}
+		Comparator<Integer> leftToRight = new Comparator<Integer>() {
+			@Override
+			public int compare(Integer o1, Integer o2) {
+				return Integer.compare(TurnType.orderFromLeftToRight(o1), TurnType.orderFromLeftToRight(o2));
+			}
+		};
+		Collections.sort(leftTurns, leftToRight);
+		Collections.sort(rightTurns, leftToRight);
+		// the outermost lanes take the outermost directions, extra directions are stacked on the same lane
+		int lastLane = noneLanes.size() - 1;
+		List<List<Integer>> laneTurns = new ArrayList<>();
+		for (int i = 0; i < noneLanes.size(); i++) {
+			laneTurns.add(new ArrayList<Integer>());
+		}
+		for (int i = 0; i < leftTurns.size(); i++) {
+			laneTurns.get(Math.min(i, lastLane)).add(leftTurns.get(i));
+		}
+		for (int i = 0; i < rightTurns.size(); i++) {
+			laneTurns.get(Math.max(lastLane - (rightTurns.size() - 1 - i), 0)).add(rightTurns.get(i));
+		}
+		StringBuilder res = new StringBuilder();
+		int noneIndex = 0;
+		for (int i = 0; i < splitLaneOptions.length; i++) {
+			if (i > 0) {
+				res.append("|");
+			}
+			if (!TurnType.isNoneLane(splitLaneOptions[i])) {
+				res.append(splitLaneOptions[i]);
+				continue;
+			}
+			List<Integer> lane = laneTurns.get(noneIndex++);
+			if (lane.isEmpty()) {
+				res.append("through");
+				continue;
+			}
+			boolean throughAdded = false;
+			for (int turn : lane) {
+				if (TurnType.isRightTurn(turn) && !throughAdded && throughIndex >= 0) {
+					res.append("through;");
+					throughAdded = true;
+				}
+				res.append(TurnType.getLaneValue(turn)).append(";");
+			}
+			if (!throughAdded && throughIndex >= 0) {
+				res.append("through;");
+			}
+			res.setLength(res.length() - 1);
+		}
+		return res.toString();
+	}
+
+	private boolean isOppositeWay(RouteSegmentResult prevSegm, RouteSegmentResult attached, double deviation) {
+		if (prevSegm.getObject().getOneway() == 0 || attached.getObject().getOneway() == 0) {
+			return false;
+		}
+		String prevName = prevSegm.getObject().getName();
+		return !Algorithms.isEmpty(prevName) && prevName.equals(attached.getObject().getName())
+				&& TurnType.isSharpOrReverse(getTurnByAngle(deviation));
+	}
+
+	/**
+	 * Direction of the road before the junction. A short previous segment gives a noisy bearing,
+	 * so the baseline is extended backwards while the road continues without junctions.
+	 */
+	private float getBearingEndExtended(List<RouteSegmentResult> result, int i, float bearingDist) {
+		RouteSegmentResult prev = result.get(i - 1);
+		float bearing = prev.getBearingEnd();
+		double length = prev.getDistance() > 0 ? prev.getDistance() : bearingDist;
+		for (int k = i - 2; k >= 0 && length < bearingDist; k--) {
+			RouteSegmentResult before = result.get(k);
+			if (before.getDistance() <= 0 || before.getTurnType() != null
+					|| !Algorithms.isEmpty(before.getAttachedRoutes(before.getEndPointIndex()))) {
+				// a junction in between, the road before it goes in another direction
+				break;
+			}
+			bearing = before.getBearingEnd();
+			length += before.getDistance();
+		}
+		return bearing;
 	}
 
 	private boolean twiceRoadPresent(List<RouteSegmentResult> result, int i) {

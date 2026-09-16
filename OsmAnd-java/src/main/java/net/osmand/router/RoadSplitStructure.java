@@ -19,6 +19,9 @@ public class RoadSplitStructure {
 	int rightMaxPrio = 0;
 	int roadsOnRight = 0;
 
+	List<AttachedRoadInfo> attachedRoads = new ArrayList<>();
+	double currentDeviation = 0;
+
 	public boolean allAreStraight() {
 		for (AttachedRoadInfo angle : leftLanesInfo) {
 			if (Math.abs(angle.attachedAngle) > TURN_SLIGHT_DEGREE) {

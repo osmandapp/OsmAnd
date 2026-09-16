@@ -622,4 +622,41 @@ public class TurnType {
 	public void setOtherTurnAngles(List<Float> turnAngles) {
 		this.otherTurnAngles = turnAngles;
 	}
+
+	public static String getLaneValue(int turnType) {
+		switch (turnType) {
+			case TurnType.TU:
+				return "reverse";
+			case TurnType.TSHL:
+				return "sharp_left";
+			case TurnType.TL:
+				return "left";
+			case TurnType.TSLL:
+				return "slight_left";
+			case TurnType.TSLR:
+				return "slight_right";
+			case TurnType.TR:
+				return "right";
+			case TurnType.TSHR:
+				return "sharp_right";
+			default:
+				return "through";
+		}
+	}
+
+	public static boolean isNoneLane(String lane) {
+		return lane.isEmpty() || "none".equals(lane);
+	}
+
+	public static boolean hasNoneLane(String turnLanes) {
+		if (turnLanes == null) {
+			return false;
+		}
+		for (String lane : turnLanes.split("\\|", -1)) {
+			if (isNoneLane(lane)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
