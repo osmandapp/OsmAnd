@@ -24,10 +24,6 @@ public class TransportRoute extends MapObject {
 	private Map<String, String> tags = new HashMap<>();
 	public static final double SAME_STOP = 40;
 	public static final String INTERVAL_KEY = "interval";
-	public static final String DURATION_KEY = "duration";
-	// speeds (km/h) that make a duration tag believable for its distance
-	private static final double MIN_DURATION_SPEED = 1;
-	private static final double MAX_DURATION_SPEED = 100;
 	private int intervalInSeconds = -1;
 
 	public TransportRoute() {
@@ -86,18 +82,6 @@ public class TransportRoute extends MapObject {
 			}
 		}
 		return Math.max(0, hh * 3600 + mm * 60 + ss);
-	}
-
-	// waiting for a ferry, same for all routing profiles
-	public static double getFerryWaitTime(int intervalSeconds, int boardingTime) {
-		return intervalSeconds > 0 ? intervalSeconds / 2.0 : boardingTime;
-	}
-
-	// time from a duration tag, 0 if the tag is absent or unrealistic for the distance (meters)
-	public static int parseDurationTagToSeconds(String duration, double distance) {
-		int seconds = parseIntervalTagToSeconds(duration);
-		double speed = seconds > 0 ? distance / seconds * 3.6 : 0;
-		return speed >= MIN_DURATION_SPEED && speed <= MAX_DURATION_SPEED ? seconds : 0;
 	}
 
 	public void addTag(String k, String v) {

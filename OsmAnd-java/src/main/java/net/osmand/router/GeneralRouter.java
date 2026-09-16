@@ -84,7 +84,6 @@ public class GeneralRouter implements VehicleRouter {
 	private float roundaboutTurn, shortWayRoundaboutTurn;
 	// speed in m/s
 	private float minSpeed = 0.28f;
-	private int ferryBoardingTime = -1;
 	// speed in m/s
 	private float defaultSpeed = 1f;
 	// speed in m/s
@@ -348,16 +347,6 @@ public class GeneralRouter implements VehicleRouter {
 		return impassableRoads.toArray();
 	}
 	
-	// waiting for a ferry if its interval is unknown: routing obstacle of amenity=ferry_terminal
-	public int getFerryBoardingTime() {
-		if (ferryBoardingTime < 0) {
-			BitSet types = new BitSet();
-			types.set(registerTagValueAttribute("amenity", "ferry_terminal"));
-			ferryBoardingTime = getObjContext(RouteDataObjectAttribute.ROUTING_OBSTACLES).evaluateInt(types, 0);
-		}
-		return ferryBoardingTime;
-	}
-
 	public int registerTagValueAttribute(String tag, String value) {
 		String key = tag +"$"+value;
 		if (universalRules.containsKey(key)) {
@@ -567,7 +556,7 @@ public class GeneralRouter implements VehicleRouter {
 	
 	// ferry moves with its own speed, whatever vehicle is on board
 	private float limitSpeed(RouteDataObject road, float speed, float max) {
-		return "ferry".equals(road.getValue("route")) ? speed : Math.max(Math.min(speed, max), minSpeed);
+		return FerryRoutingHelper.isFerry(road) ? speed : Math.max(Math.min(speed, max), minSpeed);
 	}
 
 	@Override

@@ -8,7 +8,6 @@ import net.osmand.binary.ObfConstants;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
-import net.osmand.data.TransportRoute;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
@@ -331,26 +330,8 @@ public class RouteResultPreparation {
 		for (int i = 0; i < result.size(); i++) {
 			RouteSegmentResult rr = result.get(i);
 			calculateTimeSpeed(ctx, rr);
-			RouteDataObject road = rr.getObject();
-			if (isFerry(road)) {
-				double time = rr.getSegmentTime();
-				double length = getLength(road);
-				int duration = TransportRoute.parseDurationTagToSeconds(road.getValue(TransportRoute.DURATION_KEY), length);
-				if (duration > 0) {
-					// the passed part of the ferry way takes the same part of its duration
-					time = rr.getDistance() * duration / length;
-				}
-				if (i == 0 || !isFerry(result.get(i - 1).getObject())) {
-					// waiting for the ferry once per crossing, same as in public transport
-					int interval = TransportRoute.parseIntervalTagToSeconds(road.getValue(TransportRoute.INTERVAL_KEY));
-					time += TransportRoute.getFerryWaitTime(interval, ((GeneralRouter) ctx.getRouter()).getFerryBoardingTime());
-				}
-				if (time > 0) {
-					rr.setSegmentTime((float) time);
-					rr.setSegmentSpeed((float) (rr.getDistance() / time)); // navigation calculates time left with the speed
-				}
-			}
 		}
+		FerryRoutingHelper.updateSegmentTimes(ctx, result);
 	}
 
 	public static void calculateTimeSpeed(RoutingContext ctx, RouteSegmentResult rr) {
@@ -2229,18 +2210,6 @@ public class RouteResultPreparation {
 		return (((long) road.getPoint31XTile(pointInd)) << 31) + (long) road.getPoint31YTile(pointInd);
 	}
 	
-	private static boolean isFerry(RouteDataObject road) {
-		return "ferry".equals(road.getValue("route"));
-	}
-
-	private static double getLength(RouteDataObject road) {
-		double length = 0;
-		for (int i = 1; i < road.getPointsLength(); i++) {
-			length += measuredDist(road.getPoint31XTile(i - 1), road.getPoint31YTile(i - 1), road.getPoint31XTile(i), road.getPoint31YTile(i));
-		}
-		return length;
-	}
-
 	private static double measuredDist(int x1, int y1, int x2, int y2) {
 		return MapUtils.getDistance(MapUtils.get31LatitudeY(y1), MapUtils.get31LongitudeX(x1), 
 				MapUtils.get31LatitudeY(y2), MapUtils.get31LongitudeX(x2));

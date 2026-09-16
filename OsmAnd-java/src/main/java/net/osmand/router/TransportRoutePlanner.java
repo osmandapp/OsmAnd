@@ -98,19 +98,18 @@ public class TransportRoutePlanner {
 			ctx.visitedSegments.put(segIdWithParent, segment);
 			
 			if (segment.distFromStart > finishTime * ctx.cfg.increaseForAlternativesRoutes ||
-					segment.distFromStart - segment.waitTime > maxTravelTimeCmpToWalk) {
+					segment.distFromStart - segment.ferryWaitTime > maxTravelTimeCmpToWalk) {
 				break;
 			}
 			TransportRouteSegment finish = null;
 			double minDist = 0;
 			double travelDist = 0;
 
-			double travelTime = ctx.cfg.getWaitTime(segment.road.getType(), segment.road.calcIntervalInSeconds());
-			if (TransportFerryHelper.isJunctionStop(segment.road, segment.segStart)) {
-				travelTime = 0; // same ferry continues through the junction in the water, no boarding
-			}
+			// no boarding if the same ferry continues through a junction in the water
+			double travelTime = TransportFerryHelper.isJunctionStop(segment.road, segment.segStart) ? 0
+					: ctx.cfg.getWaitTime(segment.road.getType(), segment.road.calcIntervalInSeconds());
 			// walking can't avoid waiting for a ferry either, so it isn't compared with walking
-			double waitTime = TransportFerryHelper.isFerry(segment.road) ? travelTime : 0;
+			double ferryWaitTime = TransportFerryHelper.isFerry(segment.road) ? travelTime : 0;
 
 			final float routeTravelSpeed = ctx.cfg.getSpeedByRouteType(segment.road.getType());
 			if (routeTravelSpeed == 0) {
@@ -142,10 +141,10 @@ public class TransportRoutePlanner {
 					travelTime += interval * 10;
 				} else {
 					int stopTime = junctionStop ? 0 : ctx.cfg.getStopTime(segment.road.getType());
-					double ferryWaitTime = TransportFerryHelper.getCrossingWaitTime(ctx.cfg, segment.road, ind);
-					int ferryCrossingTime = TransportFerryHelper.getCrossingDuration(segment.road, ind);
-					travelTime += stopTime + segmentDist / travelSpeed + ferryWaitTime + ferryCrossingTime;
-					waitTime += ferryWaitTime;
+					double crossingWaitTime = TransportFerryHelper.getCrossingWaitTime(ctx.cfg, segment.road, ind);
+					int crossingDuration = TransportFerryHelper.getCrossingDuration(segment.road, ind);
+					travelTime += stopTime + segmentDist / travelSpeed + crossingWaitTime + crossingDuration;
+					ferryWaitTime += crossingWaitTime;
 				}
 				if (segment.distFromStart + travelTime > finishTime * ctx.cfg.increaseForAlternativesRoutes) {
 					break;
@@ -177,7 +176,7 @@ public class TransportRoutePlanner {
 						double walkTime = nextSegment.walkDist / ctx.cfg.walkSpeed + (junctionStop ? 0 :
 								ctx.cfg.getChangeTime(segment.road.getType(), sgm.road.getType()));
 						nextSegment.distFromStart = segment.distFromStart + travelTime + walkTime;
-						nextSegment.waitTime = segment.waitTime + waitTime;
+						nextSegment.ferryWaitTime = segment.ferryWaitTime + ferryWaitTime;
 						nextSegment.nonce = nonce++;
 						if (ctx.cfg.useSchedule) {
 							int tm = (sgm.departureTime - ctx.cfg.scheduleTimeOfDay) * 10;
@@ -209,7 +208,7 @@ public class TransportRoutePlanner {
 						finish.parentTravelDist = travelDist;
 						double walkTime = distToEnd / ctx.cfg.walkSpeed;
 						finish.distFromStart = segment.distFromStart + travelTime + walkTime;
-						finish.waitTime = segment.waitTime + waitTime;
+						finish.ferryWaitTime = segment.ferryWaitTime + ferryWaitTime;
 						finish.nonce = nonce++;
 					}
 				}
@@ -220,7 +219,7 @@ public class TransportRoutePlanner {
 					finishTime = finish.distFromStart;
 				}
 				if (finish.distFromStart < finishTime * ctx.cfg.increaseForAlternativesRoutes && 
-						(finish.distFromStart - finish.waitTime < maxTravelTimeCmpToWalk || results.size() == 0)) {
+						(finish.distFromStart - finish.ferryWaitTime < maxTravelTimeCmpToWalk || results.size() == 0)) {
 					results.add(finish);
 					// Stop when results reached range [1000 min, 2500 (for default limit * changes), 5000 max]
 					int optimalLimitOfResults = 25 * ctx.cfg.ptLimitResultsByNumber * ctx.cfg.maxNumberOfChanges;
@@ -641,7 +640,7 @@ public class TransportRoutePlanner {
 		// main field accumulated all time spent from beginning of journey
 		double distFromStart = 0;
 		// time spent waiting for ferries, part of distFromStart
-		double waitTime = 0;
+		double ferryWaitTime = 0;
 		
 		public TransportRouteSegment(TransportRoute road, int stopIndex) {
 			this.road = road;
