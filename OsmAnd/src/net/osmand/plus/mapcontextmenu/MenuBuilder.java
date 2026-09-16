@@ -743,7 +743,7 @@ public class MenuBuilder {
 		}
 		if (showNearbyTransportRoutes()) {
 			CollapsableView collapsableView = getCollapsableTransportStopRoutesView(view.getContext(), false, true);
-			String routesWithingDistance = app.getString(R.string.transport_nearby_routes_within) + " " + OsmAndFormatter.getFormattedDistance(TransportStopMatcher.SHOW_STOPS_RADIUS_METERS_UI, app);
+			String routesWithingDistance = app.getString(R.string.transport_nearby_routes_within) + " " + OsmAndFormatter.getFormattedDistance(TransportStopMatcher.SHOW_STOPS_RADIUS_METERS, app);
 			buildRow(view, new BuildRowAttrs.Builder().setText(routesWithingDistance)
 					.setCollapsable(collapsableView != null).setCollapsableView(collapsableView)
 					.setMatchWithDivider(true).build());

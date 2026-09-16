@@ -13,8 +13,7 @@ import java.util.List;
 
 public class TransportStopMatcher {
 
-	public static final int SHOW_STOPS_RADIUS_METERS_UI = 150;
-	public static final int SHOW_STOPS_RADIUS_METERS = SHOW_STOPS_RADIUS_METERS_UI * 6 / 5;
+	public static final int SHOW_STOPS_RADIUS_METERS = 150;
 	public static final int MAX_DISTANCE_BETWEEN_AMENITY_AND_LOCAL_STOPS = 20;
 	public static final int SHOW_SUBWAY_STOPS_FROM_ENTRANCES_RADIUS_METERS = 400;
 
