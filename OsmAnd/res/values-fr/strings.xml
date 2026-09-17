@@ -5274,4 +5274,6 @@
     <string name="quick_action_tracks_select_descr">Ajoutez une ou plusieurs traces pour les afficher ou les masquer sur la carte d\'un seul appui.</string>
     <string name="quick_action_tracks_always_ask_descr">Cette action ouvre la liste des traces qui permet de sélectionner quelle(s) trace(s) afficher ou masquer.</string>
     <string name="quick_action_all_tracks">Toutes les traces</string>
+    <string name="crash_report_sent">Le rapport a été envoyé. Merci !</string>
+    <string name="crash_report_send_failed">Impossible d\'envoyer le rapport. Veuillez réessayer plus tard.</string>
 </resources>
