@@ -37,6 +37,14 @@ kotlin {
 		iosTarget.binaries.framework {
 			baseName = "OsmAndShared"
 			isStatic = true
+			// Kotlin/Native's allocator takes its pages with mmap and keeps them: after a route search
+			// the framework held onto what the search had borrowed, hundreds of megabytes on a long
+			// route, and neither collecting nor waiting gave it back. On malloc the pages go back to
+			// the system allocator, which on Darwin returns the large ones to the OS. Measured inside
+			// the iOS app over Freiburg - Rostock (874 km): the second search peaks at 670 MB instead
+			// of 886 and settles at 583 instead of 743, and nine shorter routes end the session at
+			// 580 MB instead of 823, all of it at the same speed.
+			binaryOption("disableMmap", "true")
 		}
 		iosTarget.compilations.getByName("main").cinterops.create("libxml2") {
 			defFile(project.file("src/nativeInterop/cinterop/libxml2.def"))
