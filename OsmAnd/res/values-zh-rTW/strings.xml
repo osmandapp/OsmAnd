@@ -5199,4 +5199,8 @@
     <string name="share_favorites_missing_media_warning">部分附加媒體無法一併納入。</string>
     <string name="search_on_web">在網路上搜尋</string>
     <string name="astro_eclipse_column_below_horizon">地平線以下</string>
+    <string name="quick_action_add_track">新增軌跡</string>
+    <string name="quick_action_tracks_select_descr">透過點一下來在地圖上新增一條或是多條軌跡。</string>
+    <string name="quick_action_tracks_always_ask_descr">點一下來開啟軌跡清單，可以顯示一條或是多修軌跡。</string>
+    <string name="quick_action_all_tracks">所有軌跡</string>
 </resources>
