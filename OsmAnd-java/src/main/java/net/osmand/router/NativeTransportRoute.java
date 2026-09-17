@@ -29,4 +29,8 @@ public class NativeTransportRoute {
 	public long[][] waysNodesIds;
 	public double[][] waysNodesLats;
 	public double[][] waysNodesLons;
+
+	// route tags (ferry stop flags)
+	public String[] tagKeys;
+	public String[] tagValues;
 }

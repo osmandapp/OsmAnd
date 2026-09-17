@@ -27,7 +27,7 @@ public class FerryRoutingHelper {
 	private static final double MAX_DURATION_SPEED = 100;
 
 	public static boolean isFerry(RouteDataObject road) {
-		return FERRY.equals(road.getValue("route"));
+		return road.containsType(road.region.ferry);
 	}
 
 	// waiting for a ferry (half of its interval if known) and getting on it while it stands at the terminal

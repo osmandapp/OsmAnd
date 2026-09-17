@@ -339,6 +339,7 @@ public class BinaryMapRouteReaderAdapter {
 		public int stopSign = -1;
 		public int stopMinor = -1;
 		public int giveWaySign = -1;
+		public int ferry = -1;
 		
 		int nameTypeRule = -1;
 		int refTypeRule = -1;
@@ -408,6 +409,8 @@ public class BinaryMapRouteReaderAdapter {
 				stopSign = id;
 			} else if (tags.equals("highway") && val.equals("give_way")){
 				giveWaySign = id;
+			} else if (tags.equals("route") && "ferry".equals(val)) {
+				ferry = id;
 			} else if (tags.equals("traffic_signals:direction") && val != null){
 				if (val.equals("forward")) {
 					directionTrafficSignalsForward = id;

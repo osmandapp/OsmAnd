@@ -816,6 +816,10 @@ public class TransportRoutePlanner {
 					new TIntArrayList(nr.avgWaitIntervals)));
 		}
 
+		for (int i = 0; nr.tagKeys != null && i < nr.tagKeys.length; i++) {
+			r.addTag(nr.tagKeys[i], nr.tagValues[i]);
+		}
+
 		for (int i = 0; i < nr.waysIds.length; i++) {
 			List<Node> wnodes = new ArrayList<>();
 			for (int j = 0; j < nr.waysNodesLats[i].length; j++) {
