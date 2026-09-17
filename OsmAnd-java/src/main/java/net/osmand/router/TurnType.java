@@ -587,6 +587,9 @@ public class TurnType {
 			turn = TurnType.TSHL;
 		} else if (lane.equals("reverse")) {
 			turn = TurnType.TU;
+		} else if (lane.equals("reverse_right")) {
+			// not an OSM value: a U-turn to the right, left-side navigation
+			turn = TurnType.TRU;
 		} else {
 			// Unknown string
 			turn = TurnType.C;

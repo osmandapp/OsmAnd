@@ -49,8 +49,10 @@ public class RouteResultPreparation {
 	public static String PRINT_TO_GPX_FILE = null;
 	private static final float TURN_DEGREE_MIN = 45;
 	// turn:lanes value by TurnType.orderFromLeftToRight() + 5
-	private static final String[] LANE_BY_TURN_ORDER = {"reverse", "sharp_left", "left", "slight_left", "",
-			"through", "", "slight_right", "right", "sharp_right", "through"};
+	private static final String REVERSE_LANE = "reverse";
+	private static final String REVERSE_RIGHT_LANE = "reverse_right";
+	private static final String[] LANE_BY_TURN_ORDER = {REVERSE_LANE, "sharp_left", "left", "slight_left", "",
+			"through", "", "slight_right", "right", "sharp_right", REVERSE_RIGHT_LANE};
 	private static final float UNMATCHED_TURN_DEGREE_MINIMUM = 45;
 	private static final float SPLIT_TURN_DEGREE_NOT_STRAIGHT = 100;
 	private static final float TURN_SLIGHT_DEGREE = 5;
@@ -1948,15 +1950,24 @@ public class RouteResultPreparation {
 	}
 
 	protected static String getTurnLanesString(RouteSegmentResult segment) {
+		String turnLanes;
 		if (segment.getObject().getOneway() == 0) {
 			if (segment.isForwardDirection()) {
-				return segment.getObject().getValue("turn:lanes:forward");
+				turnLanes = segment.getObject().getValue("turn:lanes:forward");
 			} else {
-				return segment.getObject().getValue("turn:lanes:backward");
+				turnLanes = segment.getObject().getValue("turn:lanes:backward");
 			}
 		} else {
-			return segment.getObject().getValue("turn:lanes");
+			turnLanes = segment.getObject().getValue("turn:lanes");
 		}
+		return convertReverseLanes(turnLanes);
+	}
+
+	private static String convertReverseLanes(String turnLanes) {
+		if (turnLanes == null || REVERSE_LANE.equals(turnLanes) || !turnLanes.endsWith(REVERSE_LANE)) {
+			return turnLanes;
+		}
+		return turnLanes.substring(0, turnLanes.length() - REVERSE_LANE.length()) + REVERSE_RIGHT_LANE;
 	}
 
 	private String getTurnString(RouteSegmentResult segment) {
@@ -1991,7 +2002,7 @@ public class RouteResultPreparation {
 		if(turnLanes == null) {
 			return null;
 		}
-		return calculateRawTurnLanes(turnLanes, 0);
+		return calculateRawTurnLanes(convertReverseLanes(turnLanes), 0);
 	}
 	
 	public static int[] parseLanes(RouteDataObject ro, double dirToNorthEastPi) {
