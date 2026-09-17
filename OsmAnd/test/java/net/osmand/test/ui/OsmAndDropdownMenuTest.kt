@@ -1,9 +1,11 @@
 package net.osmand.test.ui
 
+import android.graphics.Rect
 import android.graphics.drawable.ColorDrawable
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.compose.foundation.layout.size
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -700,6 +702,26 @@ class OsmAndDropdownMenuTest {
 				}
 			}
 		}
+	}
+
+	@Test
+	fun testAndroidDrawableIconDoesNotMutateOriginalDrawable() {
+		val context = InstrumentationRegistry.getInstrumentation().targetContext
+		val originalDrawable = ContextCompat.getDrawable(context, net.osmand.plus.R.drawable.ic_action_settings)!!
+		val originalBounds = Rect(0, 0, 0, 0)
+		originalDrawable.bounds = originalBounds
+
+		InstrumentationRegistry.getInstrumentation().runOnMainSync {
+			val composeView = createTestComposeView(context)
+			composeView.setContent {
+				AndroidDrawableIcon(
+					drawable = originalDrawable,
+					tint = Color.Red
+				)
+			}
+		}
+
+		assertEquals(originalBounds, originalDrawable.bounds)
 	}
 
 	private fun createTestComposeView(context: android.content.Context): ComposeView {

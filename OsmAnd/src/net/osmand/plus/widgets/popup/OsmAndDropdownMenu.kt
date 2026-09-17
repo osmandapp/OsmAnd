@@ -749,7 +749,7 @@ fun AndroidDrawableIcon(
 	tint: Color = Color.Unspecified
 ) {
 	val mutatedDrawable = remember(drawable, tint) {
-		drawable.mutate().apply {
+		(drawable.constantState?.newDrawable() ?: drawable).mutate().apply {
 			if (tint != Color.Unspecified) {
 				setTint(tint.toArgb())
 			}
