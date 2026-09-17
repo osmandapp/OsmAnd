@@ -245,7 +245,7 @@ public class ImportCompleteFragment extends BaseFullScreenFragment {
 			case OSM_EDITS:
 				return OsmEditingPlugin.OSM_EDIT_TAB;
 			case MULTIMEDIA_NOTES:
-				return AudioVideoNotesPlugin.NOTES_TAB;
+				return AudioVideoNotesPlugin.MEDIA_TAB;
 			case TRACKS:
 				return MyPlacesActivity.GPX_TAB;
 			case FAVORITES:

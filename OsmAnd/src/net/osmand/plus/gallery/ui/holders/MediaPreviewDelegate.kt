@@ -27,22 +27,25 @@ import net.osmand.shared.media.domain.MediaItem
 import net.osmand.shared.media.domain.MediaType
 import kotlin.math.roundToInt
 
-interface MorphableMediaHolder {
-	val boundItemId: String?
+class MorphState(
+	val snapshotView: View?,
+	val previewBitmap: Bitmap?,
+	val centerIcon: Drawable?,
+	val showsScrim: Boolean,
+	val durationLabel: String?,
+	val showsDuration: Boolean,
+	val durationTextColor: Int,
+	val bgColor: Int
+)
 
+class MorphContent(val view: View, val slides: Boolean)
+
+interface MorphableMediaHolder {
 	val previewView: View
 
-	val morphSnapshotView: View?
+	fun captureMorphState(): MorphState
 
-	val morphPreviewBitmap: Bitmap?
-	val morphCenterIcon: Drawable?
-	val morphShowsScrim: Boolean
-	val morphDurationLabel: String?
-	val morphShowsDuration: Boolean
-	val morphDurationTextColor: Int
-	val morphBgColor: Int
-
-	fun getFadeableContentViews(): List<View>
+	fun getFadeableContentViews(): List<MorphContent>
 
 	fun getSelectionOverlayViews(): List<View>
 
@@ -84,30 +87,20 @@ class MediaPreviewDelegate(
 	private var cellScaleX = 1f
 	private var cellScaleY = 1f
 
-	val morphPreviewSnapshotView: View?
-		get() = imageView.takeIf { showsPreviewBitmap && it.isVisible }
-
-	val morphPreviewBitmap: Bitmap?
-		get() = preview ?: standIn
-
-	val morphCenterIcon: Drawable?
-		get() = when {
+	fun captureMorphState() = MorphState(
+		snapshotView = imageView.takeIf { showsPreviewBitmap && it.isVisible },
+		previewBitmap = preview ?: standIn,
+		centerIcon = when {
 			!showsPreviewBitmap && imageView.isVisible -> imageView.drawable
 			playIcon?.isVisible == true -> playIcon.drawable
 			else -> null
-		}
-
-	val morphShowsScrim: Boolean
-		get() = videoScrim?.isVisible == true
-
-	val morphDurationLabel: String?
-		get() = durationLabel
-
-	val morphShowsDuration: Boolean
-		get() = durationText?.isVisible == true
-
-	val morphDurationTextColor: Int
-		get() = getDurationTextColor()
+		},
+		showsScrim = videoScrim?.isVisible == true,
+		durationLabel = durationLabel,
+		showsDuration = durationText?.isVisible == true,
+		durationTextColor = getDurationTextColor(),
+		bgColor = placeholderBgColor
+	)
 
 	fun bind(
 		item: MediaItem,
@@ -319,6 +312,7 @@ class MediaPreviewDelegate(
 
 	private class CrossFadeDrawable(private val from: Bitmap, val to: Bitmap) : Drawable() {
 		private val paint = Paint(Paint.FILTER_BITMAP_FLAG or Paint.ANTI_ALIAS_FLAG)
+		private var alpha = 255
 
 		var progress = 0f
 			set(value) {
@@ -333,16 +327,24 @@ class MediaPreviewDelegate(
 		override fun draw(canvas: Canvas) {
 			val bounds: Rect = bounds
 			if (progress < 1f) {
-				paint.alpha = 255
+				paint.alpha = alpha
 				canvas.drawBitmap(from, null, bounds, paint)
 			}
-			paint.alpha = (progress * 255f).roundToInt().coerceIn(0, 255)
+			paint.alpha = (progress * alpha).roundToInt().coerceIn(0, 255)
 			canvas.drawBitmap(to, null, bounds, paint)
 		}
 
-		override fun setAlpha(alpha: Int) {}
+		override fun setAlpha(alpha: Int) {
+			this.alpha = alpha
+			invalidateSelf()
+		}
 
-		override fun setColorFilter(colorFilter: ColorFilter?) {}
+		override fun getAlpha(): Int = alpha
+
+		override fun setColorFilter(colorFilter: ColorFilter?) {
+			paint.colorFilter = colorFilter
+			invalidateSelf()
+		}
 
 		@Deprecated("Deprecated in Java")
 		override fun getOpacity(): Int = PixelFormat.TRANSLUCENT

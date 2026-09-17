@@ -13,13 +13,11 @@ import androidx.core.view.marginEnd
 import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
-import androidx.fragment.app.FragmentActivity
 import net.osmand.plus.gallery.data.MediaPosterLoader
 import net.osmand.plus.gallery.model.GalleryItem
 import net.osmand.plus.gallery.ui.GallerySectionBoundary
 import net.osmand.plus.gallery.ui.motion.GalleryMotion
 import net.osmand.plus.helpers.AndroidUiHelper
-import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.shared.media.MediaProvider
@@ -30,30 +28,22 @@ import net.osmand.shared.util.ImageLoaderCallback
 import net.osmand.shared.util.ImageRequestListener
 import net.osmand.shared.util.LoadingImage
 import androidx.core.view.isVisible
-import kotlin.math.roundToInt
 
-class GalleryMediaListViewHolder(
-	private val app: OsmandApplication,
+open class GalleryMediaListViewHolder(
+	protected val app: OsmandApplication,
 	itemView: View,
 	private val mediaProvider: MediaProvider,
 	private val onMediaItemClicked: (MediaItem) -> Unit,
 	private val onMediaItemLongClicked: (MediaItem) -> Unit,
 	private val onToggleSelection: (MediaItem) -> Unit,
-	posterLoader: MediaPosterLoader? = null,
-	private val onMenuClicked: ((MediaItem, View) -> Unit)? = null
+	posterLoader: MediaPosterLoader? = null
 ) : RecyclerView.ViewHolder(itemView), MorphableMediaHolder {
 
 	private val ivImage: ImageView = itemView.findViewById(R.id.image)
-	private val tvTitle: TextView = itemView.findViewById(R.id.title)
-	private val tvDescription: TextView = itemView.findViewById(R.id.description)
-	private val selectionCheck: CompoundButton = itemView.findViewById(R.id.selection_check)
-	private val divider: View = itemView.findViewById(R.id.divider)
-	private val rowContainer: View? = itemView.findViewById(R.id.row_container)
-	private val overflowButton: ImageView? = itemView.findViewById(R.id.overflow_button)
-	private val attachmentContainer: View? = itemView.findViewById(R.id.attachment_container)
-	private val attachmentIcon: ImageView? = itemView.findViewById(R.id.attachment_icon)
-	private val attachmentName: TextView? = itemView.findViewById(R.id.attachment_name)
-	private val attachmentCount: TextView? = itemView.findViewById(R.id.attachment_count)
+	protected val tvTitle: TextView = itemView.findViewById(R.id.title)
+	protected val tvDescription: TextView = itemView.findViewById(R.id.description)
+	protected val selectionCheck: CompoundButton = itemView.findViewById(R.id.selection_check)
+	protected val divider: View = itemView.findViewById(R.id.divider)
 	private val selectionTint = GradientDrawable()
 
 	private val previewDelegate = MediaPreviewDelegate(
@@ -69,42 +59,19 @@ class GalleryMediaListViewHolder(
 	private var loadingImage: LoadingImage? = null
 
 	private var boundMediaItem: MediaItem? = null
-	private var nightMode = false
+	protected var nightMode = false
+		private set
 	private var selectionMode: Boolean = false
-	private var checkboxLeaving = false
-
-	override val boundItemId: String?
-		get() = boundMediaItem?.id
+	private var checkboxState = CheckboxState.HIDDEN
 
 	override val previewView: View
 		get() = ivImage.parent as View
 
-	override val morphSnapshotView
-		get() = previewDelegate.morphPreviewSnapshotView
+	override fun captureMorphState(): MorphState = previewDelegate.captureMorphState()
 
-	override val morphPreviewBitmap
-		get() = previewDelegate.morphPreviewBitmap
-
-	override val morphCenterIcon
-		get() = previewDelegate.morphCenterIcon
-
-	override val morphShowsScrim
-		get() = previewDelegate.morphShowsScrim
-
-	override val morphDurationLabel
-		get() = previewDelegate.morphDurationLabel
-
-	override val morphShowsDuration
-		get() = previewDelegate.morphShowsDuration
-
-	override val morphDurationTextColor
-		get() = previewDelegate.morphDurationTextColor
-
-	override val morphBgColor: Int
-		get() = previewDelegate.placeholderBgColor
-
-	override fun getFadeableContentViews(): List<View> =
-		listOfNotNull(tvTitle, tvDescription, selectionCheck, divider, overflowButton, attachmentContainer).filter { it.isVisible }
+	override fun getFadeableContentViews(): List<MorphContent> =
+		listOf(tvTitle, tvDescription, selectionCheck).filter { it.isVisible }.map { MorphContent(it, slides = true) } +
+			listOf(divider).filter { it.isVisible }.map { MorphContent(it, slides = false) }
 
 	override fun getSelectionOverlayViews(): List<View> = emptyList()
 
@@ -114,8 +81,8 @@ class GalleryMediaListViewHolder(
 
 	fun bindSection(boundary: GallerySectionBoundary?, cardRadius: Float) {
 		AndroidUiHelper.updateVisibility(divider, boundary?.isLast == false)
-		val top = if (boundary?.roundTopCorners == true) cardRadius else 0f
-		val bottom = if (boundary?.roundBottomCorners == true) cardRadius else 0f
+		val top = if (boundary?.isFirst == true) cardRadius else 0f
+		val bottom = if (boundary?.isLast == true) cardRadius else 0f
 		selectionTint.cornerRadii = floatArrayOf(top, top, top, top, bottom, bottom, bottom, bottom)
 	}
 
@@ -133,7 +100,6 @@ class GalleryMediaListViewHolder(
 	}
 
 	fun bindView(
-		mapActivity: FragmentActivity,
 		galleryItem: GalleryItem.Media,
 		nightMode: Boolean,
 		selectionMode: Boolean,
@@ -148,38 +114,21 @@ class GalleryMediaListViewHolder(
 		tvTitle.text = mediaItem.title
 		tvDescription.setTextColor(ColorUtilities.getSecondaryTextColor(app, nightMode))
 		bindDescription(galleryItem)
-		bindAttachment(galleryItem)
 		bindPreview(galleryItem, nightMode)
 		bindSelection(selectionMode, selected, nightMode, animate = false)
-		overflowButton?.apply {
-			setImageDrawable(app.uiUtilities.getPaintedIcon(R.drawable.ic_overflow_menu_white, ColorUtilities.getDefaultIconColor(app, nightMode)))
-			setOnClickListener { onMenuClicked?.invoke(mediaItem, it) }
-		}
+		onItemBound(galleryItem)
 	}
 
 	fun updateMetadata(galleryItem: GalleryItem.Media) {
 		if (boundMediaItem?.id != galleryItem.mediaItem.id) return
 		bindDescription(galleryItem)
-		bindAttachment(galleryItem)
 		previewDelegate.updateDurationLabel(galleryItem.presentation?.durationLabel)
+		onItemBound(galleryItem)
 	}
 
-	private fun bindAttachment(galleryItem: GalleryItem.Media) {
-		val container = attachmentContainer ?: return
-		val line = galleryItem.presentation?.attachment
-		container.isVisible = line != null
-		rowContainer?.minimumHeight = AndroidUtils.dpToPxF(app, if (line == null) ROW_MIN_HEIGHT_DP else ATTACHED_ROW_MIN_HEIGHT_DP).roundToInt()
-		attachmentIcon?.setImageDrawable(line?.iconDrawable)
-		attachmentName?.apply {
-			text = line?.name
-			setTextColor(ColorUtilities.getSecondaryTextColor(app, nightMode))
-		}
-		attachmentCount?.apply {
-			isVisible = line != null && line.extraCount > 0
-			text = line?.let { app.getString(R.string.ltr_or_rtl_combine_via_pipe_plus, "", it.extraCount) }
-			setTextColor(ColorUtilities.getSecondaryTextColor(app, nightMode))
-		}
-	}
+	protected open fun onItemBound(galleryItem: GalleryItem.Media) {}
+
+	protected open fun onSelectionModeBound(selectionMode: Boolean) {}
 
 	private fun bindDescription(galleryItem: GalleryItem.Media) {
 		val description = galleryItem.presentation?.description
@@ -219,7 +168,7 @@ class GalleryMediaListViewHolder(
 		animate: Boolean
 	) {
 		this.selectionMode = selectionMode
-		overflowButton?.visibility = if (selectionMode) View.INVISIBLE else View.VISIBLE
+		onSelectionModeBound(selectionMode)
 		val activeColor = ColorUtilities.getActiveColor(app, nightMode)
 		val bgColor = if (selectionMode && selected) {
 			ColorUtilities.getColorWithAlpha(activeColor, ROW_SELECTED_ALPHA)
@@ -228,11 +177,12 @@ class GalleryMediaListViewHolder(
 		}
 		selectionTint.setColor(bgColor)
 
-		val shown = selectionCheck.isVisible && !checkboxLeaving
+		val shown = checkboxState == CheckboxState.SHOWN || checkboxState == CheckboxState.SHOWING
 		if (animate && selectionMode != shown) {
 			if (selectionMode) animateCheckboxIn() else animateCheckboxOut()
 		} else if (!animate) {
 			resetSelectionAnimation()
+			checkboxState = if (selectionMode) CheckboxState.SHOWN else CheckboxState.HIDDEN
 			AndroidUiHelper.updateVisibility(selectionCheck, selectionMode)
 		}
 		selectionCheck.isChecked = selected
@@ -240,8 +190,8 @@ class GalleryMediaListViewHolder(
 	}
 
 	private fun animateCheckboxIn() {
-		checkboxLeaving = false
-		val wasLaidOut = selectionCheck.isVisible
+		val wasLaidOut = checkboxState == CheckboxState.HIDING
+		checkboxState = CheckboxState.SHOWING
 		selectionCheck.animate().cancel()
 		selectionCheck.visibility = View.VISIBLE
 		val row = selectionCheck.parent as ViewGroup
@@ -257,7 +207,7 @@ class GalleryMediaListViewHolder(
 				.alpha(1f)
 				.setDuration(CHECKBOX_ANIM_DURATION_MS)
 				.setInterpolator(selectionInterpolator)
-				.withEndAction(null)
+				.withEndAction { if (checkboxState == CheckboxState.SHOWING) checkboxState = CheckboxState.SHOWN }
 				.start()
 			rowSiblings(row).forEach { view ->
 				view.animate()
@@ -272,7 +222,7 @@ class GalleryMediaListViewHolder(
 	private fun animateCheckboxOut() {
 		val shift = selectionShift()
 		val row = selectionCheck.parent as ViewGroup
-		checkboxLeaving = true
+		checkboxState = CheckboxState.HIDING
 		selectionCheck.animate().cancel()
 		selectionCheck.visibility = View.VISIBLE
 		selectionCheck.animate()
@@ -281,8 +231,8 @@ class GalleryMediaListViewHolder(
 			.setDuration(CHECKBOX_ANIM_DURATION_MS)
 			.setInterpolator(selectionInterpolator)
 			.withEndAction {
-				if (!checkboxLeaving) return@withEndAction
-				checkboxLeaving = false
+				if (checkboxState != CheckboxState.HIDING) return@withEndAction
+				checkboxState = CheckboxState.HIDDEN
 				selectionCheck.visibility = View.GONE
 				selectionCheck.translationX = 0f
 				selectionCheck.alpha = 1f
@@ -305,7 +255,6 @@ class GalleryMediaListViewHolder(
 		if (itemView.layoutDirection == View.LAYOUT_DIRECTION_RTL) -1 else 1
 
 	private fun resetSelectionAnimation() {
-		checkboxLeaving = false
 		val row = selectionCheck.parent as ViewGroup
 		for (i in 0 until row.childCount) {
 			val child = row.getChildAt(i)
@@ -321,9 +270,9 @@ class GalleryMediaListViewHolder(
 		previewDelegate.cancel()
 	}
 
+	private enum class CheckboxState { HIDDEN, SHOWING, SHOWN, HIDING }
+
 	companion object {
-		private const val ROW_MIN_HEIGHT_DP = 68f
-		private const val ATTACHED_ROW_MIN_HEIGHT_DP = 100f
 		private const val ROW_SELECTED_ALPHA = 0.2f
 		private const val CHECKBOX_ANIM_DURATION_MS = GalleryMotion.MOVE_DURATION_MS
 

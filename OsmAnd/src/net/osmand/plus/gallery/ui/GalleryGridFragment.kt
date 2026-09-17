@@ -1,6 +1,5 @@
 package net.osmand.plus.gallery.ui
 
-import android.animation.ValueAnimator
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.TypedValue
@@ -23,7 +22,6 @@ import net.osmand.plus.base.BaseFullScreenFragment
 import net.osmand.plus.gallery.contract.IGalleryGridView
 import net.osmand.plus.gallery.controller.GalleryGridController
 import net.osmand.plus.gallery.model.GalleryToolbarAction
-import net.osmand.plus.gallery.ui.motion.GalleryMotion
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.helpers.AndroidUiHelper.isOrientationPortrait
 import net.osmand.plus.utils.AndroidUtils
@@ -39,9 +37,7 @@ class GalleryGridFragment : BaseFullScreenFragment(), IGalleryGridView {
 
 	private var controller: GalleryGridController? = null
 	private var binder: GalleryGridBinder? = null
-	private var toolbarSelection: Boolean? = null
-	private var toolbarColor = 0
-	private var toolbarColorAnimator: ValueAnimator? = null
+	private val toolbarRecolor by lazy { GalleryToolbarRecolor(app) }
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
@@ -97,13 +93,10 @@ class GalleryGridFragment : BaseFullScreenFragment(), IGalleryGridView {
 		} else {
 			ColorUtilities.getColor(app, ColorUtilities.getListBgColorId(nightMode))
 		}
-		toolbarColorAnimator?.cancel()
-		toolbarColorAnimator = GalleryMotion.recolor(app, toolbarColor, bgColor, animate = toolbarSelection != null && toolbarSelection != selection) {
+		toolbarRecolor.recolor(bgColor) {
 			appBarLayout.setBackgroundColor(it)
 			toolbar.setBackgroundColor(it)
 		}
-		toolbarColor = bgColor
-		toolbarSelection = selection
 
 		val contentColor = if (selection) {
 			ContextCompat.getColor(app, R.color.active_buttons_and_links_text_light)
@@ -195,8 +188,7 @@ class GalleryGridFragment : BaseFullScreenFragment(), IGalleryGridView {
 
 	override fun onDestroyView() {
 		controller?.detach()
-		toolbarColorAnimator?.cancel()
-		toolbarColorAnimator = null
+		toolbarRecolor.cancel()
 		binder?.release()
 		binder = null
 		super.onDestroyView()
@@ -207,7 +199,6 @@ class GalleryGridFragment : BaseFullScreenFragment(), IGalleryGridView {
 		controller?.onScreenDestroyed(activity)
 	}
 
-	override fun getMapActivity(): MapActivity? = activity as? MapActivity
 	override fun isPortrait(): Boolean = isOrientationPortrait(requireActivity())
 
 	companion object {

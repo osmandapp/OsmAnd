@@ -9,7 +9,6 @@ import android.graphics.Color
 import android.graphics.Rect
 import android.graphics.RectF
 import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.Drawable
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.MotionEvent
@@ -22,11 +21,14 @@ import androidx.core.graphics.createBitmap
 import androidx.core.view.doOnPreDraw
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import net.osmand.PlatformUtil
 import net.osmand.plus.R
 import net.osmand.plus.gallery.model.GalleryItem
 import net.osmand.plus.gallery.ui.GalleryGridAdapter
 import net.osmand.plus.gallery.ui.GallerySectionCardDecoration
+import net.osmand.plus.gallery.ui.holders.MorphState
 import net.osmand.plus.gallery.ui.holders.MorphableMediaHolder
+import net.osmand.plus.gallery.ui.motion.OpenEdges
 
 class GalleryLayoutMorph(
 	private val recyclerView: RecyclerView,
@@ -46,19 +48,15 @@ class GalleryLayoutMorph(
 		val breathes: Boolean,
 		val previewBounds: Rect?,
 		val snapshot: Bitmap?,
-		val previewBitmap: Bitmap?,
-		val centerIcon: Drawable?,
-		val showsScrim: Boolean,
-		val durationLabel: String?,
-		val showsDuration: Boolean,
-		val durationTextColor: Int,
-		val bgColor: Int,
+		val morph: MorphState?,
 		val selection: List<Snapshotted>,
 		val content: List<Snapshotted>
-	)
+	) {
+		val bgColor: Int get() = morph?.bgColor ?: 0
+	}
 
 	private abstract class Piece(val delay: Long, val duration: Long) {
-		abstract fun apply(p: Float, elapsed: Long)
+		abstract fun apply(p: Float)
 	}
 
 	private class MorphTarget(val holder: MorphableMediaHolder) {
@@ -66,7 +64,7 @@ class GalleryLayoutMorph(
 	}
 
 	private val startStates = LinkedHashMap<String, Capture>()
-	private val startOpenEdges = HashMap<String, Pair<Boolean, Boolean>>()
+	private val startOpenEdges = HashMap<String, OpenEdges>()
 	private val pieces = mutableListOf<Piece>()
 	private val overlayViews = mutableListOf<View>()
 	private val transformedViews = mutableListOf<View>()
@@ -142,14 +140,16 @@ class GalleryLayoutMorph(
 		val boundary = adapter.getSectionBoundary(position)
 		val card = if (cards != null && boundary != null) RectF().also { cards.cardBounds(recyclerView, child, boundary, it) } else null
 		val previewBounds = media?.let { boundsOf(it.previewView) }
+		val key = item.morphKey()
+		val morph = media?.captureMorphState()
 		val snapshot = if (!withSnapshots) null else when {
-			media != null -> media.morphSnapshotView?.let { snapshot(it) }
-			child.height <= recyclerView.height * SNAPSHOT_MAX_HEIGHT -> snapshot(child)
+			media != null -> morph?.snapshotView?.let { snapshot(it, key) }
+			child.height <= recyclerView.height * MAX_SNAPSHOT_FRACTION_OF_VIEWPORT -> snapshot(child, key)
 			else -> null
 		}
-		val content = if (withSnapshots && media != null && media.previewView !== child) media.getFadeableContentViews().map(::snapshotted) else emptyList()
+		val content = if (withSnapshots && media != null && media.previewView !== child) media.getFadeableContentViews().map { snapshotted(it.view, key) } else emptyList()
 		return Capture(
-			key = item.morphKey(),
+			key = key,
 			view = child,
 			bounds = boundsOf(child),
 			card = card,
@@ -158,22 +158,16 @@ class GalleryLayoutMorph(
 			breathes = item is GalleryItem.Media || item is GalleryItem.GroupHeader,
 			previewBounds = previewBounds,
 			snapshot = snapshot,
-			previewBitmap = media?.morphPreviewBitmap,
-			centerIcon = media?.morphCenterIcon,
-			showsScrim = media?.morphShowsScrim == true,
-			durationLabel = media?.morphDurationLabel,
-			showsDuration = media?.morphShowsDuration == true,
-			durationTextColor = media?.morphDurationTextColor ?: Color.WHITE,
-			bgColor = media?.morphBgColor ?: 0,
-			selection = media?.getSelectionOverlayViews()?.map(::snapshotted) ?: emptyList(),
+			morph = morph,
+			selection = media?.getSelectionOverlayViews()?.map { snapshotted(it, key) } ?: emptyList(),
 			content = content
 		)
 	}
 
-	private fun snapshotted(view: View): Snapshotted {
+	private fun snapshotted(view: View, key: String): Snapshotted {
 		val color = (view.background as? ColorDrawable)?.color
 		return if (view !is ViewGroup && color != null && view.javaClass == View::class.java) Snapshotted(boundsOf(view), null, color)
-		else Snapshotted(boundsOf(view), snapshot(view), Color.TRANSPARENT)
+		else Snapshotted(boundsOf(view), snapshot(view, key), Color.TRANSPARENT)
 	}
 
 	private fun animate() {
@@ -202,14 +196,13 @@ class GalleryLayoutMorph(
 			builder?.element(start.sectionId, start.card, end.sectionId, end.card, GalleryMotion.stagger(index), GalleryMotion.MOVE_DURATION_MS)
 		}
 		if (builder != null && cards != null) {
-			startOpenEdges.forEach { (section, open) -> builder.openEdgesBefore(section, open.first, open.second) }
+			startOpenEdges.forEach { (section, open) -> builder.openEdgesBefore(section, open) }
 			val seen = HashSet<String>()
 			for (index in 0 until recyclerView.childCount) {
 				val position = recyclerView.getChildAdapterPosition(recyclerView.getChildAt(index))
 				val boundary = adapter.getSectionBoundary(position) ?: continue
 				if (!seen.add(boundary.sectionId)) continue
-				val (top, bottom) = cards.openEdges(recyclerView, boundary)
-				builder.openEdgesAfter(boundary.sectionId, top, bottom)
+				builder.openEdgesAfter(boundary.sectionId, cards.openEdges(recyclerView, boundary))
 			}
 			cards.tracks = builder.build()
 		}
@@ -245,9 +238,11 @@ class GalleryLayoutMorph(
 		}
 	}
 
+	private fun clock(): Long = elapsed
+
 	private fun tick(elapsed: Long) {
 		this.elapsed = elapsed
-		for (index in pieces.indices) pieces[index].let { it.apply(GalleryMotion.progress(elapsed, it.delay, it.duration), elapsed) }
+		for (index in pieces.indices) pieces[index].let { it.apply(GalleryMotion.progress(elapsed, it.delay, it.duration)) }
 		cards?.tracks?.update(elapsed)
 		recyclerView.invalidate()
 	}
@@ -266,7 +261,7 @@ class GalleryLayoutMorph(
 		val real = handle?.end
 		val other = handle?.start
 		if (real != null && other != null && other != real) {
-			pieces += TravelPiece(view, bounds.top, real, other, real, appear = true, breathes = breathes, delay = delay)
+			pieces += TravelPiece(view, bounds.top, real, other, real, appear = true, breathes = breathes, delay = delay, clock = ::clock)
 		} else {
 			pieces += BreathePiece(view, appear = true, breathes = breathes, delay = delay)
 		}
@@ -279,7 +274,7 @@ class GalleryLayoutMorph(
 		val real = handle?.start
 		val other = handle?.end
 		if (real != null && other != null && other != real) {
-			pieces += TravelPiece(view, bounds.top, real, real, other, appear = false, breathes = start.breathes, delay = delay)
+			pieces += TravelPiece(view, bounds.top, real, real, other, appear = false, breathes = start.breathes, delay = delay, clock = ::clock)
 		} else {
 			pieces += BreathePiece(view, appear = false, breathes = start.breathes, delay = delay)
 		}
@@ -299,7 +294,7 @@ class GalleryLayoutMorph(
 			val row = end.view
 			transformedViews += row
 			pieces += object : Piece(delay, GalleryMotion.MOVE_DURATION_MS) {
-				override fun apply(p: Float, elapsed: Long) {
+				override fun apply(p: Float) {
 					row.translationY = rowStart.top + (rowEnd.top - rowStart.top) * p - rowEnd.top
 				}
 			}
@@ -312,14 +307,14 @@ class GalleryLayoutMorph(
 		}
 		addOverlay(sharpView, endBounds)
 		pieces += BoundsPiece(sharpView, startBounds, endBounds, endBounds, delay)
-		if (start.showsScrim) {
+		if (start.morph?.showsScrim == true) {
 			val scrim = View(recyclerView.context).apply { setBackgroundColor(Color.argb(VIDEO_SCRIM_ALPHA, 0, 0, 0)) }
 			addOverlay(scrim, startBounds)
 			pieces += BoundsPiece(scrim, startBounds, endBounds, startBounds, delay)
 		}
 		var iconHeight = 0
 		var iconView: ImageView? = null
-		start.centerIcon?.let { icon ->
+		start.morph?.centerIcon?.let { icon ->
 			val copy = icon.constantState?.newDrawable()?.mutate() ?: icon
 			val width = copy.intrinsicWidth.coerceAtLeast(1)
 			val height = copy.intrinsicHeight.coerceAtLeast(1)
@@ -333,13 +328,14 @@ class GalleryLayoutMorph(
 		val morphEnd = delay + GalleryMotion.MOVE_DURATION_MS
 		val morphTarget = MorphTarget(end.media)
 		morphTargets += morphTarget
-		end.media.beginMorph(start.previewBitmap) { sharp ->
-			if (finished || sharp === start.previewBitmap || morphEnd - elapsed < CROSSFADE_MIN_MS) return@beginMorph
+		val startPreview = start.morph?.previewBitmap
+		end.media.beginMorph(startPreview) { sharp ->
+			if (finished || sharp === startPreview || morphEnd - elapsed < GalleryMotion.CROSSFADE_MIN_MS) return@beginMorph
 			sharpView.setImageBitmap(sharp)
 			val fadeStart = maxOf(elapsed, morphEnd - GalleryMotion.FADE_DURATION_MS)
 			val placeholderIcon = if (start.snapshot == null) iconView else null
 			pieces += object : Piece(fadeStart, morphEnd - fadeStart) {
-				override fun apply(p: Float, elapsed: Long) {
+				override fun apply(p: Float) {
 					sharpView.alpha = p
 					placeholderIcon?.alpha = 1f - p
 				}
@@ -353,30 +349,32 @@ class GalleryLayoutMorph(
 			for (piece in start.content) {
 				val view = overlayBase(piece.bitmap, piece.color, piece.bounds)
 				pieces += object : Piece(delay, GalleryMotion.MOVE_DURATION_MS) {
-					override fun apply(p: Float, elapsed: Long) {
+					override fun apply(p: Float) {
 						view.translationY = slide * p
-						view.alpha = 1f - GalleryMotion.progress(elapsed, delay, GalleryMotion.FADE_DURATION_MS)
+						view.alpha = 1f - GalleryMotion.progress(clock(), delay, GalleryMotion.FADE_DURATION_MS)
 					}
 				}
 			}
 		}
-		val label = start.durationLabel
-		if (label != null && (start.showsDuration || end.showsDuration)) {
+		val label = start.morph?.durationLabel
+		val startShowsDuration = start.morph?.showsDuration == true
+		val endShowsDuration = end.morph?.showsDuration == true
+		if (label != null && (startShowsDuration || endShowsDuration)) {
 			val labelView = TextView(recyclerView.context).apply {
 				text = label
 				gravity = Gravity.CENTER
-				setTextColor(start.durationTextColor)
+				setTextColor(start.morph?.durationTextColor ?: Color.WHITE)
 				setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.default_sub_text_size))
-				alpha = if (start.showsDuration) 1f else 0f
+				alpha = if (startShowsDuration) 1f else 0f
 			}
 			labelView.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED))
 			val from = durationBounds(startBounds, labelView.measuredWidth, labelView.measuredHeight, iconHeight)
 			val to = durationBounds(endBounds, labelView.measuredWidth, labelView.measuredHeight, iconHeight)
 			addOverlay(labelView, from)
-			val fromAlpha = if (start.showsDuration) 1f else 0f
-			val toAlpha = if (end.showsDuration) 1f else 0f
+			val fromAlpha = if (startShowsDuration) 1f else 0f
+			val toAlpha = if (endShowsDuration) 1f else 0f
 			pieces += object : Piece(delay, GalleryMotion.MOVE_DURATION_MS) {
-				override fun apply(p: Float, elapsed: Long) {
+				override fun apply(p: Float) {
 					labelView.translationX = (to.left - from.left) * p
 					labelView.translationY = (to.top - from.top) * p
 					labelView.alpha = fromAlpha + (toAlpha - fromAlpha) * p
@@ -387,12 +385,12 @@ class GalleryLayoutMorph(
 		hiddenViews += target
 		val slidePx = recyclerView.resources.displayMetrics.density * CONTENT_SLIDE_DP
 		end.media.getFadeableContentViews().forEach { content ->
-			transformedViews += content
-			val slide = (content.parent as? View)?.let { content.right < it.width } != false
-			pieces += object : Piece(CONTENT_FADE_BASE_DELAY_MS + delay, GalleryMotion.FADE_DURATION_MS) {
-				override fun apply(p: Float, elapsed: Long) {
-					content.alpha = p
-					if (slide) content.translationX = slidePx * (1f - p)
+			val view = content.view
+			transformedViews += view
+			pieces += object : Piece(GalleryMotion.CONTENT_FADE_BASE_DELAY_MS + delay, GalleryMotion.FADE_DURATION_MS) {
+				override fun apply(p: Float) {
+					view.alpha = p
+					if (content.slides) view.translationX = slidePx * (1f - p)
 				}
 			}
 		}
@@ -404,7 +402,7 @@ class GalleryLayoutMorph(
 			val fullCell = piece.bounds.width() >= own.width() - 1 && piece.bounds.height() >= own.height() - 1
 			pieces += if (fullCell) BoundsPiece(view, from, to, piece.bounds, delay)
 			else CornerPiece(view, own, from, to, piece.bounds, delay)
-			pieces += FadePiece(view, appear, delay)
+			pieces += FadePiece(view, appear, delay, ::clock)
 		}
 	}
 
@@ -473,7 +471,7 @@ class GalleryLayoutMorph(
 			view.pivotY = 0f
 		}
 
-		override fun apply(p: Float, elapsed: Long) {
+		override fun apply(p: Float) {
 			val left = from.left + (to.left - from.left) * p
 			val top = from.top + (to.top - from.top) * p
 			val width = from.width() + (to.width() - from.width()) * p
@@ -486,7 +484,7 @@ class GalleryLayoutMorph(
 	}
 
 	private class CenterPiece(val view: View, val from: Rect, val to: Rect, val laidOutAt: Rect, delay: Long) : Piece(delay, GalleryMotion.MOVE_DURATION_MS) {
-		override fun apply(p: Float, elapsed: Long) {
+		override fun apply(p: Float) {
 			val cx = from.exactCenterX() + (to.exactCenterX() - from.exactCenterX()) * p
 			val cy = from.exactCenterY() + (to.exactCenterY() - from.exactCenterY()) * p
 			view.translationX = cx - laidOutAt.exactCenterX()
@@ -500,7 +498,7 @@ class GalleryLayoutMorph(
 			view.pivotY = view.height / 2f
 		}
 
-		override fun apply(p: Float, elapsed: Long) {
+		override fun apply(p: Float) {
 			val visible = if (appear) p else 1f - p
 			view.alpha = visible
 			val scale = if (breathes) GalleryMotion.APPEAR_SCALE + (1f - GalleryMotion.APPEAR_SCALE) * visible else 1f
@@ -509,12 +507,12 @@ class GalleryLayoutMorph(
 		}
 	}
 
-	private class FadePiece(val view: View, val appear: Boolean, delay: Long) : Piece(delay, GalleryMotion.MOVE_DURATION_MS) {
-		override fun apply(p: Float, elapsed: Long) {
+	private class FadePiece(val view: View, val appear: Boolean, delay: Long, val clock: () -> Long) : Piece(delay, GalleryMotion.MOVE_DURATION_MS) {
+		override fun apply(p: Float) {
 			view.alpha = if (appear) {
-				GalleryMotion.progress(elapsed, delay + duration - GalleryMotion.FADE_DURATION_MS, GalleryMotion.FADE_DURATION_MS)
+				GalleryMotion.progress(clock(), delay + duration - GalleryMotion.FADE_DURATION_MS, GalleryMotion.FADE_DURATION_MS)
 			} else {
-				1f - GalleryMotion.progress(elapsed, delay, GalleryMotion.FADE_DURATION_MS)
+				1f - GalleryMotion.progress(clock(), delay, GalleryMotion.FADE_DURATION_MS)
 			}
 		}
 	}
@@ -524,7 +522,7 @@ class GalleryLayoutMorph(
 		private val offsetX = if (anchorRight) own.right - laidOutAt.right else laidOutAt.left - own.left
 		private val offsetY = laidOutAt.top - own.top
 
-		override fun apply(p: Float, elapsed: Long) {
+		override fun apply(p: Float) {
 			val left = from.left + (to.left - from.left) * p
 			val right = from.right + (to.right - from.right) * p
 			val top = from.top + (to.top - from.top) * p
@@ -534,14 +532,15 @@ class GalleryLayoutMorph(
 	}
 
 	private class TravelPiece(
-		val view: View, val viewTop: Int, val real: RectF, val from: RectF, val to: RectF, val appear: Boolean, val breathes: Boolean, delay: Long
+		val view: View, val viewTop: Int, val real: RectF, val from: RectF, val to: RectF, val appear: Boolean, val breathes: Boolean,
+		delay: Long, val clock: () -> Long
 	) : Piece(delay, GalleryMotion.MOVE_DURATION_MS) {
 		init {
 			view.pivotX = view.width / 2f
 			view.pivotY = real.top - viewTop
 		}
 
-		override fun apply(p: Float, elapsed: Long) {
+		override fun apply(p: Float) {
 			val top = from.top + (to.top - from.top) * p
 			val height = from.height() + (to.height() - from.height()) * p
 			val breathing = when {
@@ -553,9 +552,9 @@ class GalleryLayoutMorph(
 			view.scaleY = if (real.height() > 0f) height / real.height() * breathing else breathing
 			view.scaleX = breathing
 			view.alpha = if (appear) {
-				GalleryMotion.progress(elapsed, delay + duration - GalleryMotion.FADE_DURATION_MS, GalleryMotion.FADE_DURATION_MS)
+				GalleryMotion.progress(clock(), delay + duration - GalleryMotion.FADE_DURATION_MS, GalleryMotion.FADE_DURATION_MS)
 			} else {
-				1f - GalleryMotion.progress(elapsed, delay, GalleryMotion.FADE_DURATION_MS)
+				1f - GalleryMotion.progress(clock(), delay, GalleryMotion.FADE_DURATION_MS)
 			}
 		}
 	}
@@ -585,7 +584,7 @@ class GalleryLayoutMorph(
 		return rect
 	}
 
-	private fun snapshot(view: View): Bitmap? {
+	private fun snapshot(view: View, key: String): Bitmap? {
 		val width = view.width
 		val height = view.height
 		if (width <= 0 || height <= 0) return null
@@ -596,16 +595,16 @@ class GalleryLayoutMorph(
 		} catch (e: OutOfMemoryError) {
 			null
 		} catch (e: RuntimeException) {
+			LOG.warn("Unable to snapshot " + key + " for the layout morph", e)
 			null
 		}
 	}
 
 	companion object {
-		private const val CONTENT_FADE_BASE_DELAY_MS = 80L
-		private const val CONTENT_SLIDE_DP = 8f
+		private val LOG = PlatformUtil.getLog(GalleryLayoutMorph::class.java)
 
-		private const val CROSSFADE_MIN_MS = 100L
-		private const val SNAPSHOT_MAX_HEIGHT = 0.25f
+		private const val CONTENT_SLIDE_DP = 8f
+		private const val MAX_SNAPSHOT_FRACTION_OF_VIEWPORT = 0.25f
 		private const val VIDEO_SCRIM_ALPHA = 77
 		private const val DURATION_GAP_DP = 2f
 

@@ -38,7 +38,7 @@
 	<string name="shared_string_group">Group</string>
 	<string name="gallery_sort_size_large_small">Largest size first</string>
 	<string name="gallery_sort_size_small_large">Smallest size first</string>
-	<string name="ltr_or_rtl_combine_via_pipe_plus">%1$s | +%2$d</string>
+	<string name="media_attached_more_count">+%1$d</string>
 	<string name="astro_eclipse_column_below_horizon">Below horizon</string>
 	<string name="quick_action_add_track">Add track</string>
 	<string name="quick_action_tracks_select_descr">Add one or more tracks to show or hide them on the map with a single tap.</string>
@@ -3279,7 +3279,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="live_monitoring">Online tracking</string>
     <string name="save_track_logging_accuracy">Logging accuracy</string>
     <string name="tracks_view_descr">Your recorded tracks are in %1$s, or the OsmAnd folder.</string>
-    <string name="multimedia_notes_view_descr">Your OSM notes are in %1$s.</string>
+    <string name="multimedia_notes_view_descr">Your A/V notes are in %1$s.</string>
     <string name="video_notes">Video notes</string>
     <string name="photo_notes">Photo notes</string>
     <string name="accessibility_announce">Announce</string>
@@ -4618,7 +4618,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="plugin_nautical_descr">Enriches your map with information about sailing routes, navigation lights, nautical danger zones, zones with sailing or docking restrictions, etc. To use, download the respective Nautical maps and enable the \"Nautical map\" style under \"Configure map\". \n\nFurther reading at %1$s.</string>
     <string name="plugin_ski_name">Ski map view</string>
     <string name="plugin_ski_descr">Designed to navigate winter sports areas: See ski pistes and ski lifts, and cross country ski tracks, with colored lines indicating the difficulty ratings. To use, enable this plugin and also go to \"Configure map\" and choose the \"Winter and ski\" map style.</string>
-    <string name="audionotes_plugin_name">Audio/video notes</string>
+    <string name="audionotes_plugin_name">Media</string>
     <string name="audionotes_plugin_description">Take audio/photo/video notes during a trip, using either a map button or the location context menu.</string>
     <string name="osmand_parking_plugin_name">Parking position</string>
     <string name="osmand_parking_plugin_description">Mark where your car is parked, and notify your calendar when the parking meter will expire. To place the marker, choose a place on the map, go to \"Actions\", and tap \"Add parking\".</string>
@@ -4928,7 +4928,6 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="recording_unavailable">unavailable</string>
     <string name="recording_context_menu_arecord">Take an audio note</string>
     <string name="recording_context_menu_vrecord">Take a video note</string>
-    <string name="layer_recordings">Recording layer</string>
     <string name="recording_context_menu_play">Play</string>
     <string name="recording_description">Recording %1$s %3$s %2$s</string>
     <string name="recording_default_name">Recording</string>

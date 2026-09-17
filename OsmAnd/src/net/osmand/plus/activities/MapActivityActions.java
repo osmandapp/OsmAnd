@@ -451,7 +451,7 @@ public class MapActivityActions extends MapActions {
 		addMyPlacesTabToDrawer(activity, adapter, R.string.shared_string_tracks,
 				R.drawable.ic_action_folder_tracks, DRAWER_TRACKS_ID);
 		if (PluginsHelper.isActive(AudioVideoNotesPlugin.class)) {
-			addMyPlacesTabToDrawer(activity, adapter, AudioVideoNotesPlugin.NOTES_TAB,
+			addMyPlacesTabToDrawer(activity, adapter, AudioVideoNotesPlugin.MEDIA_TAB,
 					R.drawable.ic_action_folder_av_notes, DRAWER_AV_NOTES_ID);
 		}
 		if (PluginsHelper.isActive(OsmEditingPlugin.class)) {

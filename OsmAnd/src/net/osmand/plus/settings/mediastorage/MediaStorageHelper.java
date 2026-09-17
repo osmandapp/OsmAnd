@@ -35,8 +35,10 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -199,7 +201,7 @@ public class MediaStorageHelper {
 		try {
 			File[] files = dir == null ? null : dir.listFiles();
 			if (files != null) {
-				java.util.Arrays.sort(files, java.util.Comparator.comparing(File::getName));
+				Arrays.sort(files, Comparator.comparing(File::getName));
 				for (File file : files) {
 					if (file.isFile() && MediaType.fromFileName(file.getName()) != MediaType.UNKNOWN) {
 						String href = createMediaFileHref(file);
@@ -273,6 +275,60 @@ public class MediaStorageHelper {
 			}
 		}
 		return null;
+	}
+
+	public boolean isInMediaFolder(@NonNull MediaStorageLocation location, @Nullable String href) {
+		if (Algorithms.isEmpty(href)) {
+			return false;
+		}
+		String uri = href.trim();
+		String internalPath = LinkMediaFactory.getInternalPath(uri);
+		if (internalPath != null) {
+			return isInMediaFolder(location, MediaProvider.resolveInternalMediaFile(app.getAppPath().getAbsolutePath(), internalPath));
+		}
+		Uri parsedUri = Uri.parse(uri);
+		String scheme = parsedUri.getScheme();
+		if (SCHEME_FILE.equalsIgnoreCase(scheme)) {
+			String path = parsedUri.getPath();
+			return path != null && isInMediaFolder(location, new File(path));
+		} else if (SCHEME_CONTENT.equalsIgnoreCase(scheme)) {
+			if (location.getStorageType() == MANUALLY_SPECIFIED) {
+				return MediaStorageUtils.isInManualTree(location, parsedUri);
+			}
+			if (MediaStorageUtils.usesMediaStore(location.getStorageType()) && MEDIA_AUTHORITY.equalsIgnoreCase(parsedUri.getAuthority())) {
+				MediaInfo info = readMediaInfo(parsedUri, true);
+				String relativePath = info == null ? null : MediaStorageUtils.normalizeRelativePath(info.relativePath());
+				for (MediaDirType dirType : MediaDirType.values()) {
+					if (Algorithms.stringsEqual(relativePath, MediaStorageUtils.getMediaStoreRelativePath(location.getStorageType(), dirType))) {
+						return true;
+					}
+				}
+			}
+			return false;
+		} else if (scheme == null) {
+			File file = new File(uri);
+			return file.isAbsolute() && isInMediaFolder(location, file);
+		}
+		return false;
+	}
+
+	private boolean isInMediaFolder(@NonNull MediaStorageLocation location, @NonNull File file) {
+		if (!file.isFile()) {
+			return false;
+		}
+		if (isInInternalMediaDir(file)) {
+			return true;
+		}
+		MediaStorageType storageType = location.getStorageType();
+		if (storageType == MAIN_STORAGE || storageType == MANUALLY_SPECIFIED || MediaStorageUtils.usesMediaStore(storageType)) {
+			return false;
+		}
+		for (MediaDirType dirType : MediaDirType.values()) {
+			if (MediaStorageUtils.isInDirectory(MediaStorageUtils.resolveRawMediaDir(storageType, dirType, getInternalMediaDir()), file)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@NonNull

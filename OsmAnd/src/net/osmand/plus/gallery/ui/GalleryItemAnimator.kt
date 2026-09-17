@@ -12,10 +12,11 @@ import net.osmand.plus.gallery.ui.holders.GroupHeaderHolder
 import net.osmand.plus.gallery.ui.holders.MorphableMediaHolder
 import net.osmand.plus.gallery.ui.motion.GalleryMotion
 import net.osmand.plus.gallery.ui.motion.GallerySectionCardTracks
+import net.osmand.plus.gallery.ui.motion.OpenEdges
 
 class GalleryItemAnimator(
 	private val recyclerView: RecyclerView,
-	private val adapter: GalleryGridAdapter?,
+	private val adapter: GallerySectionSource?,
 	private val cards: GallerySectionCardDecoration?,
 	private val animationsEnabled: Boolean
 ) : SimpleItemAnimator() {
@@ -57,20 +58,25 @@ class GalleryItemAnimator(
 	override fun recordPreLayoutInformation(
 		state: RecyclerView.State, holder: RecyclerView.ViewHolder, changeFlags: Int, payloads: MutableList<Any>
 	): ItemHolderInfo {
-		if (post.isNotEmpty()) {
-			pre.clear()
-			post.clear()
-		}
-		pre[holder] = snapshot(holder, adapter?.getBoundSectionBoundary(holder))
+		if (cards != null) pre[holder] = snapshot(holder, adapter?.getBoundSectionBoundary(holder))
 		return super.recordPreLayoutInformation(state, holder, changeFlags, payloads)
 	}
 
 	override fun recordPostLayoutInformation(state: RecyclerView.State, holder: RecyclerView.ViewHolder): ItemHolderInfo {
-		val position = recyclerView.getChildAdapterPosition(holder.itemView)
-		val boundary = (if (adapter != null && position in 0 until adapter.itemCount) adapter.getSectionBoundary(position) else null)
-			?: adapter?.getBoundSectionBoundary(holder)
-		post[holder] = snapshot(holder, boundary)
+		if (cards != null) {
+			val position = recyclerView.getChildAdapterPosition(holder.itemView)
+			val boundary = (if (position != RecyclerView.NO_POSITION) adapter?.getSectionBoundary(position) else null)
+				?: adapter?.getBoundSectionBoundary(holder)
+			post[holder] = snapshot(holder, boundary)
+		}
 		return super.recordPostLayoutInformation(state, holder)
+	}
+
+	fun onLayoutCompleted() {
+		if (pending.isEmpty()) {
+			pre.clear()
+			post.clear()
+		}
 	}
 
 	private fun snapshot(holder: RecyclerView.ViewHolder, boundary: GallerySectionBoundary?): Snapshot {
@@ -134,10 +140,10 @@ class GalleryItemAnimator(
 		if (running.isNotEmpty()) finishAll()
 		val changes = pending.toList()
 		pending.clear()
-		val uniformShift = isUniformShift(changes)
+		val wholeListShift = isWholeListShift(changes)
 		var staggered = 0
 		for (change in changes.sortedWith(compareBy({ it.visualTop }, { it.visualLeft }))) {
-			val together = uniformShift && change is Change.Move
+			val together = wholeListShift && change is Change.Move
 			change.delay = if (animationsEnabled && !together) GalleryMotion.stagger(staggered++) else 0L
 		}
 		buildTracks(changes)
@@ -164,17 +170,17 @@ class GalleryItemAnimator(
 		}
 	}
 
-	private fun isUniformShift(changes: List<Change>): Boolean {
+	private fun isWholeListShift(changes: List<Change>): Boolean {
 		val moves = changes.filterIsInstance<Change.Move>()
 		val first = moves.firstOrNull() ?: return false
-		if (moves.any { it.dx != first.dx || it.dy != first.dy }) return false
+		val everyMoveHasTheSameDelta = moves.none { it.dx != first.dx || it.dy != first.dy }
 		val byHolder = changes.associateBy { it.holder }
-		for (index in 0 until recyclerView.childCount) {
-			val holder = recyclerView.getChildViewHolder(recyclerView.getChildAt(index)) ?: continue
+		val everyVisibleChildMovesOrLeaves = (0 until recyclerView.childCount).all { index ->
+			val holder = recyclerView.getChildViewHolder(recyclerView.getChildAt(index)) ?: return@all true
 			val change = byHolder[holder]
-			if (change !is Change.Move && change !is Change.Remove && change !is Change.FadeOut) return false
+			change is Change.Move || change is Change.Remove || change is Change.FadeOut
 		}
-		return true
+		return everyMoveHasTheSameDelta && everyVisibleChildMovesOrLeaves
 	}
 
 	private fun buildTracks(changes: List<Change>) {
@@ -198,11 +204,10 @@ class GalleryItemAnimator(
 		}
 		if (!any) return
 		pre.values.mapNotNull { it.boundary }.groupBy { it.sectionId }.forEach { (section, boundaries) ->
-			builder.openEdgesBefore(section, boundaries.none { it.isFirst }, boundaries.none { it.isLast })
+			builder.openEdgesBefore(section, OpenEdges(top = boundaries.none { it.isFirst }, bottom = boundaries.none { it.isLast }))
 		}
 		post.values.mapNotNull { it.boundary }.distinctBy { it.sectionId }.forEach { boundary ->
-			val (top, bottom) = cards.openEdges(recyclerView, boundary)
-			builder.openEdgesAfter(boundary.sectionId, top, bottom)
+			builder.openEdgesAfter(boundary.sectionId, cards.openEdges(recyclerView, boundary))
 		}
 		cards.tracks = builder.build()
 		recyclerView.invalidate()
@@ -327,6 +332,8 @@ class GalleryItemAnimator(
 		val started = pending.toList()
 		pending.clear()
 		started.forEach(::finish)
+		pre.clear()
+		post.clear()
 		finishAll()
 	}
 

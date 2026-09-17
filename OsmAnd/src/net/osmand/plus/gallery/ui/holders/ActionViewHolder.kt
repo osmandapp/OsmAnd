@@ -16,17 +16,17 @@ class ActionViewHolder(
 
 	fun bindView(
 		nightMode: Boolean,
-		mapActivity: FragmentActivity,
+		activity: FragmentActivity,
 		item: GalleryItem.Action
 	) {
 		itemView.findViewById<View>(R.id.card_background).visibility = View.GONE
 		AndroidUtils.setBackgroundColor(
-			mapActivity,
+			activity,
 			itemView,
 			ColorUtilities.getActivityBgColorId(nightMode)
 		)
 		AndroidUtils.setTextPrimaryColor(
-			mapActivity,
+			activity,
 			itemView.findViewById(R.id.title),
 			nightMode
 		)

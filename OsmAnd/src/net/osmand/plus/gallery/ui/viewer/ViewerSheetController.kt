@@ -11,13 +11,14 @@ import net.osmand.plus.gallery.attached.helpers.AttachedMediaDataHelper
 import net.osmand.plus.gallery.data.Cancellable
 import net.osmand.plus.gallery.data.GalleryMediaMetadata
 import net.osmand.plus.gallery.data.MediaMetadataListener
+import net.osmand.plus.gallery.library.MediaAttachment
+import net.osmand.plus.gallery.library.MediaDialogs
+import net.osmand.plus.gallery.library.MediaLibraryEntry
+import net.osmand.plus.gallery.library.ShowOnMapNavigator
 import net.osmand.plus.gallery.ui.GalleryItemAnimator
+import net.osmand.plus.gallery.ui.GallerySectionCardDecoration
 import net.osmand.plus.gallery.ui.motion.GalleryMotion
 import net.osmand.plus.mapcontextmenu.other.ShareMenu
-import net.osmand.plus.plugins.audionotes.library.MediaDialogs
-import net.osmand.plus.plugins.audionotes.library.ShowOnMapNavigator
-import net.osmand.plus.plugins.audionotes.library.data.MediaAttachment
-import net.osmand.plus.plugins.audionotes.library.data.MediaLibraryEntry
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.widgets.popup.PopUpMenu
@@ -33,7 +34,7 @@ class ViewerSheetController(
 ) : MediaDetailsAdapter.Actions {
 
 	private val app = activity.application as OsmandApplication
-	private val adapter = MediaDetailsAdapter(app, nightMode, this)
+	private val adapter = MediaDetailsAdapter(nightMode, this)
 	private val builder = MediaDetailsContentBuilder(app)
 	private val metadataRepository get() = app.galleryHelper.metadataRepository
 	private val libraryRepository get() = app.galleryHelper.mediaLibraryRepository
@@ -46,13 +47,12 @@ class ViewerSheetController(
 	private var metadataRequest: Cancellable? = null
 	private var subscribed = false
 
-	val items: List<DetailsItem> get() = adapter.items
-
 	init {
 		list.layoutManager = LinearLayoutManager(activity)
 		list.adapter = adapter
-		list.addItemDecoration(DetailsCardDecoration(app, nightMode, adapter))
-		list.itemAnimator = GalleryItemAnimator(list, null, null, GalleryMotion.animationsEnabled(app))
+		val cards = GallerySectionCardDecoration(app, nightMode)
+		list.addItemDecoration(cards)
+		list.itemAnimator = GalleryItemAnimator(list, adapter, cards, GalleryMotion.animationsEnabled(app))
 	}
 
 	fun setItem(item: MediaItem?) {
@@ -134,8 +134,7 @@ class ViewerSheetController(
 
 	private fun detach(attachment: MediaAttachment) {
 		val target = attachment.target
-		val links = target.links.orEmpty()
-		val link = links.firstOrNull { it === attachment.link } ?: links.firstOrNull { it.href == attachment.link.href } ?: return
+		val link = target.links.orEmpty().firstOrNull { it === attachment.link } ?: return
 		MediaDialogs.detach(activity, listOf(link), nightMode) {
 			AttachedMediaDataHelper(app).removeMediaLinks(target, listOf(link), false) { success ->
 				app.runInUIThread {

@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.audionotes.library
+package net.osmand.plus.gallery.library
 
 import android.content.ClipData
 import android.content.Intent

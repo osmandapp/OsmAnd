@@ -191,7 +191,6 @@ public class PopUpMenu {
 
 	private static void notifyItemClicked(@NonNull PopUpMenuDisplayData displayData,
 	                                      @NonNull PopUpMenuItem menuItem) {
-		if (!menuItem.isEnabled()) return;
 		OnPopUpMenuItemClickListener listener = menuItem.getOnClickListener();
 		if (listener == null) {
 			listener = displayData.onItemClickListener;

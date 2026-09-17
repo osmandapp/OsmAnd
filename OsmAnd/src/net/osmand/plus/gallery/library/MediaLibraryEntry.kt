@@ -1,12 +1,12 @@
-package net.osmand.plus.plugins.audionotes.library.data
+package net.osmand.plus.gallery.library
 
 import net.osmand.data.LatLon
 import net.osmand.plus.gallery.data.GalleryMediaMetadata
 import net.osmand.plus.plugins.audionotes.Recording
 import net.osmand.shared.gpx.primitives.Link
 import net.osmand.shared.gpx.primitives.Linkable
-import net.osmand.shared.media.domain.MediaItem
 import net.osmand.shared.media.LinkMediaFactory
+import net.osmand.shared.media.domain.MediaItem
 import net.osmand.shared.media.library.SortableMedia
 
 data class MediaLibraryEntry(

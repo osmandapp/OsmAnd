@@ -1,14 +1,12 @@
-package net.osmand.plus.plugins.audionotes.library
+package net.osmand.plus.gallery.library
 
 import androidx.fragment.app.FragmentActivity
 import net.osmand.data.FavouritePoint
-import net.osmand.data.PointDescription
 import net.osmand.data.LatLon
+import net.osmand.data.PointDescription
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.gallery.ui.GalleryPhotoPagerFragment
 import net.osmand.plus.myplaces.MyPlacesActivity
-import net.osmand.plus.plugins.audionotes.library.data.MediaAttachment
-import net.osmand.plus.plugins.audionotes.library.data.MediaLibraryEntry
 import net.osmand.shared.gpx.primitives.WptPt
 
 object ShowOnMapNavigator {
@@ -31,11 +29,13 @@ object ShowOnMapNavigator {
 
 	fun show(activity: FragmentActivity, lat: Double, lon: Double, description: PointDescription, target: Any?) {
 		when (activity) {
-			is MyPlacesActivity -> activity.showOnMap(null, lat, lon, 15, description, true, target)
+			is MyPlacesActivity -> activity.showOnMap(null, lat, lon, SHOW_ON_MAP_ZOOM, description, true, target)
 			is MapActivity -> {
 				(activity.supportFragmentManager.findFragmentByTag(GalleryPhotoPagerFragment.TAG) as? GalleryPhotoPagerFragment)?.dismiss()
 				activity.contextMenu.show(LatLon(lat, lon), description, target)
 			}
 		}
 	}
+
+	private const val SHOW_ON_MAP_ZOOM = 15
 }

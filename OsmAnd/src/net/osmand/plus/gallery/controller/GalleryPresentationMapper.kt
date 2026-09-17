@@ -26,7 +26,7 @@ class GalleryPresentationMapper(
 ) {
 
 	@JvmOverloads
-	fun presentation(item: MediaItem, sortMode: GallerySortMode = GallerySortMode.NAME_A_Z, distance: String? = null): GalleryMediaPresentation {
+	fun presentation(item: MediaItem, sortMode: GallerySortMode? = null, distance: String? = null): GalleryMediaPresentation {
 		val metadata = repository.getCached(item)
 		val date = (metadata?.creationTimeMs ?: metadata?.lastModifiedTimeMs)?.let {
 			DateFormat.getMediumDateFormat(app).format(Date(it))
@@ -35,7 +35,8 @@ class GalleryPresentationMapper(
 			AndroidUtils.formatSize(app, it)
 		}
 		val duration = metadata?.durationMs?.takeIf { item.type == MediaType.AUDIO || item.type == MediaType.VIDEO }?.let { MediaFormatting.duration(it) }
-		val description = MediaFormatting.secondLine(MediaLibrarySortMode.valueOf(sortMode.name), date, size, duration, distance)
+		val dateFirst = MediaLibrarySortMode.NEWEST_FIRST
+		val description = MediaFormatting.secondLine(sortMode?.shared ?: dateFirst, date, size, duration, distance)
 		return GalleryMediaPresentation(
 			description = description,
 			durationLabel = duration

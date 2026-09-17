@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.audionotes.library
 
-import android.animation.ValueAnimator
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,14 +11,13 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import net.osmand.plus.R
-import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.BaseOsmAndFragment
 import net.osmand.plus.gallery.contract.IGalleryGridView
 import net.osmand.plus.gallery.model.GalleryDisplayMode
 import net.osmand.plus.gallery.model.GalleryItem
 import net.osmand.plus.gallery.model.GallerySortMode
 import net.osmand.plus.gallery.ui.GalleryGridBinder
-import net.osmand.plus.gallery.ui.motion.GalleryMotion
+import net.osmand.plus.gallery.ui.GalleryToolbarRecolor
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.myplaces.MyPlacesActivity
 import net.osmand.plus.plugins.PluginsHelper
@@ -38,7 +36,7 @@ class MediaLibraryFragment : BaseOsmAndFragment(), IGalleryGridView {
 	private var chipsContainer: View? = null
 	private var toolbarSelectionMode = false
 	private val toolbarBackground = ColorDrawable()
-	private var toolbarColorAnimator: ValueAnimator? = null
+	private val toolbarRecolor by lazy { GalleryToolbarRecolor(app) }
 	private val backCallback = object : OnBackPressedCallback(false) {
 		override fun handleOnBackPressed() = controller.exitSelectionMode()
 	}
@@ -48,9 +46,9 @@ class MediaLibraryFragment : BaseOsmAndFragment(), IGalleryGridView {
 		setHasOptionsMenu(true)
 		val plugin = requireNotNull(PluginsHelper.getPlugin(AudioVideoNotesPlugin::class.java))
 		controller = MediaLibraryController(app, plugin)
-		controller.restoreCollapsedGroups(savedInstanceState?.getStringArrayList("collapsed_groups").orEmpty())
-		if (savedInstanceState?.getBoolean("selection_mode") == true) {
-			controller.restoreSelection(savedInstanceState.getStringArrayList("selected_ids").orEmpty())
+		controller.restoreCollapsedGroups(savedInstanceState?.getStringArrayList(COLLAPSED_GROUPS_KEY).orEmpty())
+		if (savedInstanceState?.getBoolean(SELECTION_MODE_KEY) == true) {
+			controller.restoreSelection(savedInstanceState.getStringArrayList(SELECTED_IDS_KEY).orEmpty())
 		}
 		app.dialogManager.register(controller.processId, controller)
 	}
@@ -62,7 +60,7 @@ class MediaLibraryFragment : BaseOsmAndFragment(), IGalleryGridView {
 		chips = root.findViewById<ChipsLayout>(R.id.chips).also { setupChips(it) }
 		updateChips()
 		binder = GalleryGridBinder(root.findViewById(R.id.recycler_view), controller, requireActivity(), nightMode, sectionCards = true)
-			.also { it.pendingLayoutState = savedInstanceState?.getParcelable("library_layout") }
+			.also { it.pendingLayoutState = savedInstanceState?.getParcelable(LAYOUT_STATE_KEY) }
 		controller.attach(this)
 		return root
 	}
@@ -89,7 +87,6 @@ class MediaLibraryFragment : BaseOsmAndFragment(), IGalleryGridView {
 			menu.findItem(R.id.select_all).setIcon(if (controller.isAllSelected())
 				R.drawable.ic_action_deselect_all else R.drawable.ic_action_select_all)
 		}
-		(activity as? MyPlacesActivity)?.setToolbarVisibility(false)
 	}
 
 	override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -152,10 +149,10 @@ class MediaLibraryFragment : BaseOsmAndFragment(), IGalleryGridView {
 	}
 
 	override fun onSaveInstanceState(outState: Bundle) {
-		outState.putParcelable("library_layout", binder?.saveLayoutState())
-		outState.putStringArrayList("collapsed_groups", ArrayList(controller.getCollapsedGroups()))
-		outState.putBoolean("selection_mode", controller.isSelectionMode())
-		outState.putStringArrayList("selected_ids", ArrayList(controller.selectedIds()))
+		outState.putParcelable(LAYOUT_STATE_KEY, binder?.saveLayoutState())
+		outState.putStringArrayList(COLLAPSED_GROUPS_KEY, ArrayList(controller.getCollapsedGroups()))
+		outState.putBoolean(SELECTION_MODE_KEY, controller.isSelectionMode())
+		outState.putStringArrayList(SELECTED_IDS_KEY, ArrayList(controller.selectedIds()))
 		super.onSaveInstanceState(outState)
 	}
 
@@ -163,6 +160,7 @@ class MediaLibraryFragment : BaseOsmAndFragment(), IGalleryGridView {
 		if (!isResumed) return
 		val host = activity as? MyPlacesActivity ?: return
 		val bar = host.supportActionBar ?: return
+		host.setToolbarVisibility(false)
 		val selected = controller.isSelectionMode()
 		backCallback.isEnabled = selected
 		val changed = toolbarSelectionMode != selected
@@ -185,16 +183,12 @@ class MediaLibraryFragment : BaseOsmAndFragment(), IGalleryGridView {
 			bar.setTitle(R.string.shared_string_my_places)
 			host.updateStatusBarColor()
 		}
-		toolbarColorAnimator?.cancel()
 		val background = toolbarBackground
 		bar.setBackgroundDrawable(background)
-		toolbarColorAnimator = GalleryMotion.recolor(app, background.color, barColor, animate = changed && background.color != 0) {
-			background.color = it
-		}
+		toolbarRecolor.recolor(barColor) { background.color = it }
 		host.invalidateOptionsMenu()
 	}
 
-	override fun getMapActivity(): MapActivity? = activity as? MapActivity
 	override fun isPortrait(): Boolean = AndroidUiHelper.isOrientationPortrait(requireContext())
 
 	override fun getInsetTargets(): InsetTargetsCollection = InsetTargetsCollection().apply {
@@ -204,8 +198,7 @@ class MediaLibraryFragment : BaseOsmAndFragment(), IGalleryGridView {
 
 	override fun onDestroyView() {
 		controller.detach()
-		toolbarColorAnimator?.cancel()
-		toolbarColorAnimator = null
+		toolbarRecolor.cancel()
 		binder?.release()
 		binder = null
 		chips = null
@@ -219,6 +212,10 @@ class MediaLibraryFragment : BaseOsmAndFragment(), IGalleryGridView {
 	}
 
 	companion object {
+		private const val COLLAPSED_GROUPS_KEY = "collapsed_groups"
+		private const val SELECTION_MODE_KEY = "selection_mode"
+		private const val SELECTED_IDS_KEY = "selected_ids"
+		private const val LAYOUT_STATE_KEY = "library_layout"
 		private const val SORT_CHIP = "sort"
 		private const val GRID_CHIP = "grid"
 		private const val GROUP_CHIP = "group"

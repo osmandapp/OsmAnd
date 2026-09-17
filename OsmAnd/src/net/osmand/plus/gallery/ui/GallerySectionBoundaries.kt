@@ -1,6 +1,15 @@
 package net.osmand.plus.gallery.ui
 
+import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.gallery.model.GalleryItem
+
+interface GallerySectionSource {
+	fun getSectionBoundary(position: Int): GallerySectionBoundary?
+
+	fun getBoundSectionBoundary(holder: RecyclerView.ViewHolder): GallerySectionBoundary?
+
+	fun isGridCell(position: Int): Boolean
+}
 
 data class GallerySectionBoundary(
 	val sectionId: String,
@@ -11,9 +20,6 @@ data class GallerySectionBoundary(
 	val isFirst: Boolean,
 	val isLast: Boolean
 ) {
-	val roundTopCorners get() = isFirst
-	val roundBottomCorners get() = isLast
-
 	val hasGapAbove get() = isFirst && (firstPosition > 0 || sectionId == GallerySectionBoundaries.EMPTY_SECTION)
 }
 

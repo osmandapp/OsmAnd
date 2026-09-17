@@ -3,7 +3,6 @@ package net.osmand.plus.gallery.ui
 import android.content.Context
 import android.os.Parcelable
 import android.view.ScaleGestureDetector
-import androidx.core.view.doOnLayout
 import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -31,17 +30,27 @@ class GalleryGridBinder(
 		var scrollLocked: Boolean
 	}
 
-	private class GalleryListLayoutManager(context: Context) : LinearLayoutManager(context), ScrollLockable {
+	private class GalleryListLayoutManager(context: Context, private val onLayoutCompleted: () -> Unit) : LinearLayoutManager(context), ScrollLockable {
 		override var scrollLocked = false
 
 		override fun canScrollVertically(): Boolean = !scrollLocked && super.canScrollVertically()
+
+		override fun onLayoutCompleted(state: RecyclerView.State) {
+			super.onLayoutCompleted(state)
+			onLayoutCompleted()
+		}
 	}
 
-	private class GalleryGridLayoutManager(context: Context, span: Int) : GridLayoutManager(context, span), ScrollLockable {
+	private class GalleryGridLayoutManager(context: Context, span: Int, private val onLayoutCompleted: () -> Unit) : GridLayoutManager(context, span), ScrollLockable {
 		var extraLayoutSpacePx = 0
 		override var scrollLocked = false
 
 		override fun canScrollVertically(): Boolean = !scrollLocked && super.canScrollVertically()
+
+		override fun onLayoutCompleted(state: RecyclerView.State) {
+			super.onLayoutCompleted(state)
+			onLayoutCompleted()
+		}
 
 		override fun calculateExtraLayoutSpace(state: RecyclerView.State, extraLayoutSpace: IntArray) {
 			if (extraLayoutSpacePx > 0) {
@@ -55,7 +64,7 @@ class GalleryGridBinder(
 
 	private val app = recyclerView.context.applicationContext as OsmandApplication
 	private val animationsEnabled = GalleryMotion.animationsEnabled(app)
-	val cardDecoration: GallerySectionCardDecoration? = if (sectionCards) GallerySectionCardDecoration(app, nightMode) else null
+	private val cardDecoration: GallerySectionCardDecoration? = if (sectionCards) GallerySectionCardDecoration(app, nightMode) else null
 	private val itemDecorator: GalleryGridItemDecorator? = if (sectionCards) null else GalleryGridItemDecorator(app)
 	private var adapter: GalleryGridAdapter? = null
 	private var morph: GalleryLayoutMorph? = null
@@ -68,14 +77,12 @@ class GalleryGridBinder(
 
 	var pendingLayoutState: Parcelable? = null
 
-	val isMorphing: Boolean get() = morph != null
+	private val isMorphing: Boolean get() = morph != null
 
 	private val isPinching: Boolean get() = pinch?.isActive == true
 
 	init {
-		recyclerView.doOnLayout {
-			recyclerView.post { if (!released && adapter == null) bind() }
-		}
+		recyclerView.doOnPreDraw { if (!released && adapter == null) bind() }
 	}
 
 	private fun bind() {
@@ -137,8 +144,9 @@ class GalleryGridBinder(
 	private fun applyLayout(adapter: GalleryGridAdapter) {
 		val isList = controller.getDisplayMode() == GalleryDisplayMode.LIST
 		val locked = (recyclerView.layoutManager as? ScrollLockable)?.scrollLocked == true
-		recyclerView.layoutManager = if (isList) GalleryListLayoutManager(recyclerView.context).apply { scrollLocked = locked }
-		else GalleryGridLayoutManager(recyclerView.context, controller.getSpanCount(AndroidUiHelper.isOrientationPortrait(recyclerView.context))).apply {
+		val onLayoutCompleted: () -> Unit = { (recyclerView.itemAnimator as? GalleryItemAnimator)?.onLayoutCompleted() }
+		recyclerView.layoutManager = if (isList) GalleryListLayoutManager(recyclerView.context, onLayoutCompleted).apply { scrollLocked = locked }
+		else GalleryGridLayoutManager(recyclerView.context, controller.getSpanCount(AndroidUiHelper.isOrientationPortrait(recyclerView.context)), onLayoutCompleted).apply {
 			scrollLocked = locked
 			spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
 				override fun getSpanSize(position: Int) = if (adapter.getItem(position) is GalleryItem.Media) 1 else spanCount
@@ -220,6 +228,10 @@ class GalleryGridBinder(
 		released = true
 		morph?.cancel()
 		morph = null
+		pinch?.release()
+		pinch = null
+		recyclerView.setScaleDetector(null)
+		recyclerView.setGestureFinishedListener(null)
 		pendingItems = null
 		recyclerView.itemAnimator?.endAnimations()
 		recyclerView.adapter = null

@@ -12,39 +12,38 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.gallery.contract.IGalleryGridView
 import net.osmand.plus.gallery.controller.GalleryGridController
+import net.osmand.plus.gallery.controller.GalleryPagerController
 import net.osmand.plus.gallery.controller.GalleryPresentationMapper
 import net.osmand.plus.gallery.data.GalleryKey
+import net.osmand.plus.gallery.library.MediaLibraryEntry
 import net.osmand.plus.gallery.model.AttachmentLine
 import net.osmand.plus.gallery.model.GalleryDisplayMode
 import net.osmand.plus.gallery.model.GalleryItem
 import net.osmand.plus.gallery.model.GallerySortMode
 import net.osmand.plus.gallery.ui.GalleryGridAdapter
-import net.osmand.plus.gallery.ui.GallerySectionCardDecoration
-import net.osmand.plus.gallery.ui.holders.GalleryMediaListViewHolder
+import net.osmand.plus.gallery.ui.SectionGridGeometry
+import net.osmand.plus.gallery.ui.holders.MediaLibraryListViewHolder
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin
-import net.osmand.plus.plugins.audionotes.library.data.MediaLibraryEntry
-import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.OsmAndFormatter
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.views.PointImageUtils
 import net.osmand.shared.data.KLatLon
 import net.osmand.shared.media.MediaProvider
+import net.osmand.shared.media.domain.MediaItem
 import net.osmand.shared.media.domain.MediaType
 import net.osmand.shared.media.library.MediaLibraryGrouping
-import net.osmand.shared.media.library.MediaLibrarySortMode
 import net.osmand.shared.media.library.MediaLibrarySorter
 import net.osmand.shared.media.library.MediaLibraryStats
 import net.osmand.shared.util.KMapUtils
-import kotlin.math.roundToInt
 
 class MediaLibraryController(app: OsmandApplication, private val plugin: AudioVideoNotesPlugin) :
 	GalleryGridController(app, GalleryKey.MediaLibrary) {
 	private val repository = app.galleryHelper.mediaLibraryRepository
 	private val mapper = GalleryPresentationMapper(app, app.galleryHelper.metadataRepository)
 	private var entries: List<MediaLibraryEntry> = emptyList()
-	private var pendingEntries: List<MediaLibraryEntry>? = null
-	private var restoredSelection: Set<String>? = null
+	private var entriesDeferredDuringSelection: List<MediaLibraryEntry>? = null
+	private var selectionToRestore: Set<String>? = null
 	private val collapsedGroups = mutableSetOf<MediaType>()
 	private val emptyItem = GalleryItem.NoMedia(
 		titleResId = R.string.media_library_empty_title,
@@ -52,11 +51,11 @@ class MediaLibraryController(app: OsmandApplication, private val plugin: AudioVi
 		iconResId = R.drawable.ic_action_photo_album)
 	private val repositoryListener: (List<MediaLibraryEntry>) -> Unit = {
 		if (isSelectionMode()) {
-			pendingEntries = it
+			entriesDeferredDuringSelection = it
 		} else {
 			entries = it
-			restoredSelection?.let { ids ->
-				restoredSelection = null
+			selectionToRestore?.let { ids ->
+				selectionToRestore = null
 				enterSelectionMode(null)
 				selectionHelper.onItemsSelected(getMediaItems().filter { item -> item.id in ids }, true)
 			}
@@ -67,7 +66,7 @@ class MediaLibraryController(app: OsmandApplication, private val plugin: AudioVi
 	}
 	val sortMode: GallerySortMode get() = plugin.MEDIA_LIBRARY_SORT_MODE.get()
 
-	init { super.setDisplayMode(plugin.MEDIA_LIBRARY_DISPLAY_MODE.get()) }
+	init { applyDisplayMode(plugin.MEDIA_LIBRARY_DISPLAY_MODE.get()) }
 
 	override fun getProcessId() = PROCESS_ID
 	override fun getScreenTitle(): String = getString(R.string.shared_string_media)
@@ -76,19 +75,24 @@ class MediaLibraryController(app: OsmandApplication, private val plugin: AudioVi
 	override fun isGrouped(): Boolean = plugin.MEDIA_LIBRARY_GROUPED.get()
 	override fun getMediaItems() = entries.map { it.mediaItem }
 
-	fun selectedIds(): List<String> = restoredSelection?.toList() ?: getSelectedItems().map { it.id }
-	fun restoreSelection(ids: List<String>) { restoredSelection = ids.toSet() }
+	fun selectedIds(): List<String> = selectionToRestore?.toList() ?: getSelectedItems().map { it.id }
+	fun restoreSelection(ids: List<String>) { selectionToRestore = ids.toSet() }
 
 	override fun exitSelectionMode() {
 		super.exitSelectionMode()
-		pendingEntries?.let {
+		entriesDeferredDuringSelection?.let {
 			entries = it
-			pendingEntries = null
+			entriesDeferredDuringSelection = null
 			view?.updateItems()
 		}
 	}
 
-	override fun onMediaItemMenuClicked(item: net.osmand.shared.media.domain.MediaItem, anchor: View) {
+	override fun onMediaItemClicked(mediaItem: MediaItem) {
+		val activity = view?.getActivity() ?: return
+		GalleryPagerController.show(activity, key, mediaItem.id, orderedIds(), autoPlay = true)
+	}
+
+	override fun onMediaItemMenuClicked(item: MediaItem, anchor: View) {
 		if (isSelectionMode()) return
 		val activity = view?.getActivity() ?: return
 		val entry = entries.firstOrNull { it.id == item.id } ?: return
@@ -116,7 +120,7 @@ class MediaLibraryController(app: OsmandApplication, private val plugin: AudioVi
 
 	override fun setDisplayMode(mode: GalleryDisplayMode) {
 		plugin.MEDIA_LIBRARY_DISPLAY_MODE.set(mode)
-		super.setDisplayMode(mode)
+		applyDisplayMode(mode)
 	}
 
 	fun toggleGrouping() {
@@ -150,10 +154,8 @@ class MediaLibraryController(app: OsmandApplication, private val plugin: AudioVi
 	}
 
 	override fun resolveSpanResizableSize(viewWidth: Int?, spanCount: Int): Int {
-		val padding = app.resources.getDimensionPixelSize(R.dimen.content_padding)
-		val gap = AndroidUtils.dpToPxF(app, GallerySectionCardDecoration.COLUMN_GAP_DP).roundToInt()
 		val width = viewWidth ?: return super.resolveSpanResizableSize(null, spanCount)
-		return ((width - 2 * padding - (spanCount - 1) * gap) / spanCount).coerceAtLeast(1)
+		return SectionGridGeometry.of(app, spanCount, width).cellSize
 	}
 
 	private fun referenceLocation(): KLatLon {
@@ -167,7 +169,7 @@ class MediaLibraryController(app: OsmandApplication, private val plugin: AudioVi
 		if (!repository.hasSnapshot) return emptyList()
 		if (entries.isEmpty()) return listOf(emptyItem)
 		val reference = referenceLocation()
-		val sorted = entries.sortedWith(MediaLibrarySorter.comparator(MediaLibrarySortMode.valueOf(sortMode.name), reference))
+		val sorted = entries.sortedWith(MediaLibrarySorter.comparator(sortMode.shared, reference))
 		val nightMode = view?.isNightMode() ?: false
 		fun toItem(entry: MediaLibraryEntry): GalleryItem.Media {
 			val distance = entry.lat?.let { lat -> entry.lon?.let { lon ->
@@ -196,10 +198,10 @@ class MediaLibraryController(app: OsmandApplication, private val plugin: AudioVi
 		}
 	}
 
-	override fun createAdapter(mapActivity: FragmentActivity, viewWidth: Int?, nightMode: Boolean): GalleryGridAdapter =
-		super.createAdapter(mapActivity, viewWidth, nightMode).apply {
-			val inflater = UiUtilities.getInflater(mapActivity, nightMode)
-			listRowFactory = { parent -> GalleryMediaListViewHolder(app,
+	override fun createAdapter(activity: FragmentActivity, viewWidth: Int?, nightMode: Boolean): GalleryGridAdapter =
+		super.createAdapter(activity, viewWidth, nightMode).apply {
+			val inflater = UiUtilities.getInflater(activity, nightMode)
+			listRowFactory = { parent -> MediaLibraryListViewHolder(app,
 				inflater.inflate(R.layout.media_library_list_item, parent, false), MediaProvider(app),
 				::onMediaItemClicked, ::onMediaItemLongClicked, ::toggleSelection,
 				app.galleryHelper.posterLoader, ::onMediaItemMenuClicked) }
@@ -207,12 +209,11 @@ class MediaLibraryController(app: OsmandApplication, private val plugin: AudioVi
 		}
 
 	private fun emptyRow(inflater: LayoutInflater, parent: ViewGroup, nightMode: Boolean): RecyclerView.ViewHolder {
-		val view = inflater.inflate(R.layout.track_folder_empty_state, parent, false)
+		val view = inflater.inflate(R.layout.gallery_empty_state_item, parent, false)
 		view.findViewById<ImageView>(R.id.icon).setImageDrawable(
 			app.uiUtilities.getPaintedIcon(emptyItem.iconResId, ColorUtilities.getDefaultIconColor(app, nightMode)))
 		view.findViewById<TextView>(R.id.title).setText(emptyItem.titleResId)
 		view.findViewById<TextView>(R.id.description).setText(emptyItem.descriptionResId)
-		view.findViewById<View>(R.id.action_button).visibility = View.GONE
 		return object : RecyclerView.ViewHolder(view) {}
 	}
 

@@ -3,19 +3,17 @@ package net.osmand.plus.gallery.ui.viewer
 import android.text.SpannableStringBuilder
 import android.view.View
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import net.osmand.data.FavouritePoint
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
+import net.osmand.plus.gallery.library.MediaAttachment
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.myplaces.favorites.dialogs.FavoriteViewHolder
-import net.osmand.plus.plugins.audionotes.library.data.MediaAttachment
 import net.osmand.plus.track.GpxAppearanceAdapter
 import net.osmand.plus.track.fragments.TrackAppearanceFragment
 import net.osmand.plus.track.helpers.GpxAppearanceHelper
 import net.osmand.plus.track.helpers.GpxUiHelper
-import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.OsmAndFormatter
 import net.osmand.plus.utils.UpdateLocationUtils
@@ -34,18 +32,9 @@ class AttachedTargetViewHolder(view: View) : DetailsHolder(view) {
 	private val directionIcon: ImageView = view.findViewById(R.id.direction_icon)
 	private val menuButton: View = view.findViewById(R.id.menu_button)
 	private val divider: View = view.findViewById(R.id.divider)
-	private val contentContainer: View = view.findViewById(R.id.content_container)
 	private val row: View = view.findViewById(R.id.button_container)
 	private val locationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(view.context)
 	private var bound: MediaAttachment? = null
-
-	init {
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.checkbox_container), false)
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.prefix_description), false)
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.full_divider), false)
-		title.maxLines = 2
-		description.maxLines = 1
-	}
 
 	fun bind(attachment: MediaAttachment, showDivider: Boolean, actions: MediaDetailsAdapter.Actions) {
 		bound = attachment
@@ -60,7 +49,6 @@ class AttachedTargetViewHolder(view: View) : DetailsHolder(view) {
 
 	private fun bindFavorite(attachment: MediaAttachment) {
 		val point = attachment.target as? FavouritePoint
-		setIconSize(app.resources.getDimensionPixelSize(R.dimen.favorites_my_places_icon_size), AndroidUtils.dpToPx(app, FAVORITE_CONTENT_MARGIN_DP))
 		val color = point?.let { app.favoritesHelper.getColorWithCategory(it, ColorUtilities.getColor(app, R.color.color_favorite)) }
 			?: ColorUtilities.getColor(app, R.color.color_favorite)
 		icon.setImageDrawable(PointImageUtils.getFromPoint(app, color, false, point))
@@ -82,7 +70,6 @@ class AttachedTargetViewHolder(view: View) : DetailsHolder(view) {
 	}
 
 	private fun bindTrack(attachment: MediaAttachment) {
-		setIconSize(app.resources.getDimensionPixelSize(R.dimen.standard_icon_size), app.resources.getDimensionPixelSize(R.dimen.content_padding))
 		title.text = attachment.name
 		AndroidUiHelper.updateVisibility(directionIcon, false)
 		AndroidUiHelper.updateVisibility(suffix, false)
@@ -105,15 +92,10 @@ class AttachedTargetViewHolder(view: View) : DetailsHolder(view) {
 		}
 	}
 
-	private fun setIconSize(size: Int, contentMargin: Int) {
-		icon.layoutParams = (icon.layoutParams as LinearLayout.LayoutParams).apply {
-			width = size
-			height = size
-		}
-		contentContainer.layoutParams = (contentContainer.layoutParams as LinearLayout.LayoutParams).apply { marginStart = contentMargin }
-	}
-
 	companion object {
-		private const val FAVORITE_CONTENT_MARGIN_DP = 10f
+		fun layoutFor(kind: MediaAttachment.Kind): Int = when (kind) {
+			MediaAttachment.Kind.FAVORITE -> R.layout.gallery_attached_favorite_item
+			MediaAttachment.Kind.TRACK_POINT -> R.layout.gallery_attached_track_item
+		}
 	}
 }

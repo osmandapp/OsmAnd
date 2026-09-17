@@ -30,7 +30,7 @@ import net.osmand.shared.media.domain.MediaType
 import java.util.WeakHashMap
 
 class GalleryGridAdapter(
-	private val mapActivity: FragmentActivity,
+	private val activity: FragmentActivity,
 	private val onMediaClicked: (MediaItem) -> Unit,
 	private val onReloadMediaItems: () -> Unit,
 	private val onActionClicked: (View, GalleryAction) -> Unit,
@@ -43,21 +43,23 @@ class GalleryGridAdapter(
 	private val onMediaLongClicked: (MediaItem) -> Unit = {},
 	private val isItemSelected: (MediaItem) -> Boolean = { false },
 	private val onToggleSelection: (MediaItem) -> Unit = {},
-	private val mediaProvider: MediaProvider = MediaProvider((mapActivity.application as OsmandApplication)),
+	private val mediaProvider: MediaProvider = MediaProvider((activity.application as OsmandApplication)),
 	private val posterLoader: MediaPosterLoader? = null,
 	private val onGroupHeaderClicked: (MediaType) -> Unit = {}
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), GallerySectionSource {
 
-	private val app: OsmandApplication = (mapActivity.application as OsmandApplication)
-	private val themedInflater: LayoutInflater = UiUtilities.getInflater(mapActivity, nightMode)
+	private val app: OsmandApplication = (activity.application as OsmandApplication)
+	private val themedInflater: LayoutInflater = UiUtilities.getInflater(activity, nightMode)
 	private val items = mutableListOf<GalleryItem>()
 	private var sectionBoundaries: List<GallerySectionBoundary?> = emptyList()
 
-	fun getSectionBoundary(position: Int): GallerySectionBoundary? = sectionBoundaries.getOrNull(position)
+	override fun getSectionBoundary(position: Int): GallerySectionBoundary? = sectionBoundaries.getOrNull(position)
 
 	private val boundSections = WeakHashMap<RecyclerView.ViewHolder, GallerySectionBoundary?>()
 
-	fun getBoundSectionBoundary(holder: RecyclerView.ViewHolder): GallerySectionBoundary? = boundSections[holder]
+	override fun getBoundSectionBoundary(holder: RecyclerView.ViewHolder): GallerySectionBoundary? = boundSections[holder]
+
+	override fun isGridCell(position: Int): Boolean = displayMode == GalleryDisplayMode.GRID && items[position] is GalleryItem.Media
 
 	private val mainPhotoSizePx = app.resources.getDimensionPixelSize(R.dimen.gallery_big_icon_size)
 	private val standardPhotoSizePx = app.resources.getDimensionPixelSize(R.dimen.gallery_standard_icon_size)
@@ -188,16 +190,16 @@ class GalleryGridAdapter(
 					else -> standardPhotoSizePx
 				}
 				holder.bindView(
-					mapActivity, item, imageSizePx, holderType, nightMode,
+					activity, item, imageSizePx, holderType, nightMode,
 					selectionMode, isItemSelected(item.mediaItem)
 				)
 			}
 			holder is GalleryMediaListViewHolder && item is GalleryItem.Media -> {
-				holder.bindView(mapActivity, item, nightMode, selectionMode, isItemSelected(item.mediaItem))
+				holder.bindView(item, nightMode, selectionMode, isItemSelected(item.mediaItem))
 				holder.bindSection(getSectionBoundary(position), sectionCardRadius)
 			}
 			holder is ActionViewHolder && item is GalleryItem.Action ->
-				holder.bindView(nightMode, mapActivity, item)
+				holder.bindView(nightMode, activity, item)
 			holder is NoMediaHolder && item is GalleryItem.NoMedia ->
 				holder.bindView(item, nightMode)
 			holder is NoInternetHolder && item is GalleryItem.NoInternet ->

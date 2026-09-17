@@ -103,10 +103,10 @@ abstract class GalleryRowController(
 	protected open fun resolveRowHolderType(position: Int): MediaHolderType =
 		if (position == 0) MediaHolderType.MAIN else MediaHolderType.STANDARD
 
-	fun createAdapter(mapActivity: FragmentActivity, nightMode: Boolean): GalleryGridAdapter {
+	fun createAdapter(activity: FragmentActivity, nightMode: Boolean): GalleryGridAdapter {
 		val registry = app.galleryHelper.loadStateRegistry
 		return GalleryGridAdapter(
-			mapActivity = mapActivity,
+			activity = activity,
 			onMediaClicked = ::onMediaItemClicked,
 			onReloadMediaItems = ::onReloadMediaItems,
 			onActionClicked = ::handleGalleryAction,

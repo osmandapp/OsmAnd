@@ -50,6 +50,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.gallery.attached.helpers.AttachedMediaDataHelper;
+import net.osmand.plus.gallery.controller.GalleryGridController;
 import net.osmand.plus.gallery.model.GalleryDisplayMode;
 import net.osmand.plus.gallery.model.GallerySortMode;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -100,7 +101,7 @@ import java.util.*;
 
 public class AudioVideoNotesPlugin extends OsmandPlugin {
 
-	public static final int NOTES_TAB = R.string.shared_string_media;
+	public static final int MEDIA_TAB = R.string.shared_string_media;
 	public static final String DEFAULT_ACTION_SETTING_ID = "av_default_action";
 	public static final String EXTERNAL_RECORDER_SETTING_ID = "av_external_recorder";
 	public static final String EXTERNAL_PHOTO_CAM_SETTING_ID = "av_external_cam";
@@ -217,8 +218,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		MEDIA_LIBRARY_DISPLAY_MODE = registerEnumStringPreference("media_library_display_mode", GalleryDisplayMode.LIST,
 				GalleryDisplayMode.values(), GalleryDisplayMode.class).makeGlobal();
 		MEDIA_LIBRARY_GROUPED = registerBooleanPreference("media_library_grouped", false).makeGlobal();
-		MEDIA_LIBRARY_SPAN_COUNT = registerIntPreference("media_library_span_grid_count", 4).makeGlobal();
-		MEDIA_LIBRARY_SPAN_COUNT_LANDSCAPE = registerIntPreference("media_library_span_grid_count_landscape", 7).makeGlobal();
+		MEDIA_LIBRARY_SPAN_COUNT = registerIntPreference("media_library_span_grid_count", GalleryGridController.DEFAULT_SPAN_COUNT).makeGlobal();
+		MEDIA_LIBRARY_SPAN_COUNT_LANDSCAPE = registerIntPreference("media_library_span_grid_count_landscape", GalleryGridController.DEFAULT_SPAN_COUNT_LANDSCAPE).makeGlobal();
 
 		recordingPlayer = new RecordingPlayer(app, this::updateContextMenu);
 	}
@@ -288,7 +289,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 		ItemClickListener listener = (uiAdapter, view, item, isChecked) -> {
 			int itemId = item.getTitleId();
-			if (itemId == R.string.layer_recordings) {
+			if (itemId == R.string.shared_string_media) {
 				SHOW_RECORDINGS.set(!SHOW_RECORDINGS.get());
 				item.setColor(app, SHOW_RECORDINGS.get() ?
 						R.color.osmand_orange : ContextMenuItem.INVALID_ID);
@@ -298,9 +299,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			return true;
 		};
 		adapter.addItem(new ContextMenuItem(RECORDING_LAYER)
-				.setTitleId(R.string.layer_recordings, app)
+				.setTitleId(R.string.shared_string_media, app)
 				.setSelected(SHOW_RECORDINGS.get())
-				.setIcon(R.drawable.ic_action_micro_dark)
+				.setIcon(R.drawable.ic_action_photo_album)
 				.setColor(mapActivity, SHOW_RECORDINGS.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setItemDeleteAction(SHOW_RECORDINGS)
 				.setListener(listener));
@@ -1016,9 +1017,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public void addMyPlacesTab(MyPlacesActivity myPlacesActivity, List<TabItem> mTabs, Intent intent) {
-		mTabs.add(myPlacesActivity.getTabIndicator(NOTES_TAB, MediaLibraryFragment.class));
+		mTabs.add(myPlacesActivity.getTabIndicator(MEDIA_TAB, MediaLibraryFragment.class));
 		if (intent != null && "AUDIO".equals(intent.getStringExtra("TAB"))) {
-			app.getSettings().FAVORITES_TAB.set(NOTES_TAB);
+			app.getSettings().FAVORITES_TAB.set(MEDIA_TAB);
 		}
 	}
 
@@ -1379,7 +1380,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public int getLogoResourceId() {
-		return R.drawable.ic_action_micro_dark;
+		return R.drawable.ic_action_plugin_media;
 	}
 
 	@Override

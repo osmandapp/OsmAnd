@@ -153,22 +153,19 @@ class LocalMediaMetadataRepository(
 				queryContentLong(it, DocumentsContract.Document.COLUMN_LAST_MODIFIED)
 					?: queryContentLong(it, MediaStore.MediaColumns.DATE_MODIFIED)?.times(1000L)
 			}
-		val durationMs = if (item.type == MediaType.VIDEO || item.type == MediaType.AUDIO) {
-			extractDuration(file, contentUri)
-		} else {
-			null
-		}
+		val isPhoto = item.type == MediaType.PHOTO
+		val retrieved = if (item.type == MediaType.VIDEO || item.type == MediaType.AUDIO) retrieve(file, contentUri) else null
 		val creationTimeMs = contentUri?.let {
 			queryContentLong(it, MediaStore.MediaColumns.DATE_TAKEN)
 		}
-			?: extractCreationTime(item, file, contentUri)
-		val latLon = extractLocation(item, file, contentUri)
-		val dimensions = extractDimensions(item, file, contentUri)
+			?: if (isPhoto) extractPhotoCreationTime(file, contentUri) else retrieved?.creationTimeMs
+		val latLon = extractLocation(item, file, contentUri, retrieved)
+		val dimensions = if (isPhoto) extractPhotoDimensions(file, contentUri) else retrieved?.dimensions
 		val mime = contentUri?.let { runCatching { app.contentResolver.getType(it) }.getOrNull() }
 		return GalleryMediaMetadata(
 			sizeBytes = sizeBytes,
 			lastModifiedTimeMs = lastModifiedTimeMs,
-			durationMs = durationMs,
+			durationMs = retrieved?.durationMs,
 			latLon = latLon,
 			creationTimeMs = creationTimeMs,
 			width = dimensions?.first,
@@ -177,61 +174,56 @@ class LocalMediaMetadataRepository(
 		)
 	}
 
-	private fun extractDimensions(item: MediaItem, file: File?, uri: Uri?): Pair<Int, Int>? =
-		when (item.type) {
-			MediaType.PHOTO -> runCatching {
-				val options = BitmapFactory.Options().apply { inJustDecodeBounds = true }
-				if (file != null) BitmapFactory.decodeFile(file.absolutePath, options)
-				else uri?.let { app.contentResolver.openInputStream(it)?.use { stream -> BitmapFactory.decodeStream(stream, null, options) } }
-				(options.outWidth to options.outHeight).takeIf { it.first > 0 && it.second > 0 }
-			}.getOrNull()
-			MediaType.VIDEO -> withRetriever(file, uri) {
-				val width = it.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH)?.toIntOrNull()
-				val height = it.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT)?.toIntOrNull()
-				if (width != null && height != null && width > 0 && height > 0) width to height else null
-			}
-			else -> null
-		}
+	private class Retrieved(
+		val durationMs: Long?,
+		val creationTimeMs: Long?,
+		val location: Location?,
+		val dimensions: Pair<Int, Int>?
+	)
 
-	private fun extractCreationTime(item: MediaItem, file: File?, contentUri: Uri?): Long? =
-		when (item.type) {
-			MediaType.PHOTO -> runCatching {
-				file?.let { MediaMetadataUtils.getPhotoCreationTime(it) }
-					?: contentUri?.let { uri ->
-						app.contentResolver.openInputStream(uri)?.use { stream ->
-							MediaMetadataUtils.getPhotoCreationTime(stream)
-						}
-					}
-			}.getOrNull()
-			MediaType.VIDEO, MediaType.AUDIO -> withRetriever(file, contentUri) {
-				parseCreationTime(it.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DATE))
-			}
-			else -> null
-		}
+	private fun retrieve(file: File?, contentUri: Uri?): Retrieved? = withRetriever(file, contentUri) {
+		val width = it.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH)?.toIntOrNull()
+		val height = it.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT)?.toIntOrNull()
+		Retrieved(
+			durationMs = it.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)?.toLongOrNull(),
+			creationTimeMs = parseCreationTime(it.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DATE)),
+			location = MediaMetadataUtils.parseMediaLocation(it.extractMetadata(METADATA_KEY_LOCATION)),
+			dimensions = if (width != null && height != null && width > 0 && height > 0) width to height else null
+		)
+	}
 
-	private fun extractLocation(item: MediaItem, file: File?, contentUri: Uri?): LatLon? {
+	private fun extractPhotoDimensions(file: File?, uri: Uri?): Pair<Int, Int>? = runCatching {
+		val options = BitmapFactory.Options().apply { inJustDecodeBounds = true }
+		if (file != null) BitmapFactory.decodeFile(file.absolutePath, options)
+		else uri?.let { app.contentResolver.openInputStream(it)?.use { stream -> BitmapFactory.decodeStream(stream, null, options) } }
+		(options.outWidth to options.outHeight).takeIf { it.first > 0 && it.second > 0 }
+	}.getOrNull()
+
+	private fun extractPhotoCreationTime(file: File?, contentUri: Uri?): Long? = runCatching {
+		file?.let { MediaMetadataUtils.getPhotoCreationTime(it) }
+			?: contentUri?.let { uri ->
+				app.contentResolver.openInputStream(uri)?.use { stream ->
+					MediaMetadataUtils.getPhotoCreationTime(stream)
+				}
+			}
+	}.getOrNull()
+
+	private fun extractLocation(item: MediaItem, file: File?, contentUri: Uri?, retrieved: Retrieved?): LatLon? {
+		val isPhoto = item.type == MediaType.PHOTO
 		val location = when {
-			file != null -> MediaMetadataUtils.getLocation(file)
-			contentUri != null -> extractContentLocation(item, contentUri)
+			file != null -> MediaMetadataUtils.getLocationFromFileName(file.name)
+				?: (if (isPhoto) extractPhotoLocation(file, null) else retrieved?.location)
+			contentUri != null -> (if (isPhoto) extractPhotoLocation(null, contentUri) else retrieved?.location)
+				?: MediaMetadataUtils.getLocationFromFileName(item.title)
 			else -> null
 		}
 		return location?.let { LatLon(it.latitude, it.longitude) }
 	}
 
-	private fun extractContentLocation(item: MediaItem, uri: Uri): Location? {
-		val location = if (item.type == MediaType.PHOTO) {
-			runCatching {
-				app.contentResolver.openInputStream(uri)?.use {
-					MediaMetadataUtils.getPhotoInformation(it)
-				}
-			}.getOrNull()
-		} else {
-			withRetriever(null, uri) {
-				MediaMetadataUtils.parseMediaLocation(it.extractMetadata(METADATA_KEY_LOCATION))
-			}
-		}
-		return location ?: MediaMetadataUtils.getLocationFromFileName(item.title)
-	}
+	private fun extractPhotoLocation(file: File?, uri: Uri?): Location? = runCatching {
+		file?.let { MediaMetadataUtils.getPhotoInformation(it) }
+			?: uri?.let { app.contentResolver.openInputStream(it)?.use { stream -> MediaMetadataUtils.getPhotoInformation(stream) } }
+	}.getOrNull()
 
 	private fun resolveFile(item: MediaItem): File? {
 		val file = when (item) {
@@ -288,11 +280,6 @@ class LocalMediaMetadataRepository(
 		}
 		return GpxUtilities.parseTime(date).takeIf { it > 0 }
 	}
-
-	private fun extractDuration(file: File?, contentUri: Uri?): Long? =
-		withRetriever(file, contentUri) { retriever ->
-			retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)?.toLongOrNull()
-		}
 
 	private fun extractPoster(item: MediaItem): Bitmap? {
 		val file = resolveFile(item)

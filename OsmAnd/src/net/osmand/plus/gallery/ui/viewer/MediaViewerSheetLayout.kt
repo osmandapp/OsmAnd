@@ -22,7 +22,6 @@ import net.osmand.plus.utils.AndroidUtils
 import kotlin.math.abs
 import kotlin.math.ceil
 import kotlin.math.floor
-import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
 
@@ -72,8 +71,7 @@ class MediaViewerSheetLayout @JvmOverloads constructor(context: Context, attrs: 
 	private val listInset = AndroidUtils.dpToPx(context, LIST_TOP_INSET_DP) + sheetRadius
 	private val hitRect = Rect()
 
-	private var statusBarInset = 0
-	private var topInset = -1
+	private var topInset = 0
 	private var pendingState: Int? = null
 	private var animator: ValueAnimator? = null
 	private var velocityTracker: VelocityTracker? = null
@@ -89,6 +87,13 @@ class MediaViewerSheetLayout @JvmOverloads constructor(context: Context, attrs: 
 	private var dismissing = false
 	private var mediaRect: RectF? = null
 
+	init {
+		ViewCompat.setOnApplyWindowInsetsListener(this) { _, insets ->
+			applyTopInset(insets.getInsets(WindowInsetsCompat.Type.statusBars() or WindowInsetsCompat.Type.displayCutout()).top)
+			insets
+		}
+	}
+
 	override fun onFinishInflate() {
 		super.onFinishInflate()
 		backdrop = findViewById(R.id.backdrop)
@@ -98,6 +103,12 @@ class MediaViewerSheetLayout @JvmOverloads constructor(context: Context, attrs: 
 		sheet = findViewById(R.id.details_sheet)
 		sheetList = findViewById(R.id.details_list)
 		solidAppBar = findViewById(R.id.solid_app_bar)
+		(sheetList.layoutParams as MarginLayoutParams).bottomMargin = listInset
+	}
+
+	override fun onAttachedToWindow() {
+		super.onAttachedToWindow()
+		ViewCompat.requestApplyInsets(this)
 	}
 
 	fun setInitialState(state: Int) {
@@ -148,19 +159,8 @@ class MediaViewerSheetLayout @JvmOverloads constructor(context: Context, attrs: 
 		}
 	}
 
-	override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-		resolveInsets()
-		val location = IntArray(2)
-		(parent as? View)?.getLocationInWindow(location)
-		applyTopInset(max(0, statusBarInset - (location[1] + top)))
-		super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-	}
-
 	override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
 		super.onLayout(changed, left, top, right, bottom)
-		val location = IntArray(2)
-		getLocationInWindow(location)
-		if (max(0, statusBarInset - location[1]) != topInset) post { requestLayout() }
 		val pending = pendingState
 		if (pending != null) {
 			pendingState = null
@@ -171,18 +171,14 @@ class MediaViewerSheetLayout @JvmOverloads constructor(context: Context, attrs: 
 		applyProgress()
 	}
 
-	private fun resolveInsets() {
-		val insets = ViewCompat.getRootWindowInsets(this)
-		statusBarInset = insets?.getInsets(WindowInsetsCompat.Type.statusBars() or WindowInsetsCompat.Type.displayCutout())?.top
-			?: AndroidUtils.getStatusBarHeight(context)
-	}
-
 	private fun applyTopInset(inset: Int) {
 		if (inset == topInset) return
 		topInset = inset
 		floatingChrome.setPadding(floatingChrome.paddingLeft, inset, floatingChrome.paddingRight, floatingChrome.paddingBottom)
 		solidAppBar.setPadding(solidAppBar.paddingLeft, inset, solidAppBar.paddingRight, solidAppBar.paddingBottom)
 		(sheet.layoutParams as LayoutParams).topMargin = inset + appBarHeight - sheetRadius
+		mediaRect = null
+		requestLayout()
 	}
 
 	private val boxHeight: Int
@@ -280,13 +276,13 @@ class MediaViewerSheetLayout @JvmOverloads constructor(context: Context, attrs: 
 		if (state == STATE_PREVIEW) pageProvider()?.onPreviewSettled()
 	}
 
-	private fun settle(velocityUp: Float) {
+	private fun settle(upwardVelocity: Float) {
 		val p = progress
 		val nearest = p.roundToInt()
 		val atState = abs(p - nearest) < AT_STATE_EPSILON
 		val target = when {
-			velocityUp > SETTLE_VELOCITY -> if (atState) nearest + 1 else ceil(p).toInt()
-			velocityUp < -SETTLE_VELOCITY -> if (atState) nearest - 1 else floor(p).toInt()
+			upwardVelocity > SETTLE_VELOCITY -> if (atState) nearest + 1 else ceil(p).toInt()
+			upwardVelocity < -SETTLE_VELOCITY -> if (atState) nearest - 1 else floor(p).toInt()
 			else -> nearest
 		}
 		animateTo(target)
@@ -297,6 +293,12 @@ class MediaViewerSheetLayout @JvmOverloads constructor(context: Context, attrs: 
 			animator = null
 			it.cancel()
 		}
+	}
+
+	override fun onDetachedFromWindow() {
+		cancelAnimator()
+		endTouch()
+		super.onDetachedFromWindow()
 	}
 
 	override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
@@ -431,8 +433,9 @@ class MediaViewerSheetLayout @JvmOverloads constructor(context: Context, attrs: 
 		val tracker = velocityTracker
 		tracker?.computeCurrentVelocity(1000)
 		val velocityY = if (tracker != null && !cancelled) tracker.yVelocity else 0f
+		val touchUpwardVelocity = -velocityY
 		when (dragMode) {
-			DragMode.SHEET -> settle(-velocityY)
+			DragMode.SHEET -> settle(touchUpwardVelocity)
 			DragMode.DISMISS -> if (!cancelled && (dismissY > height * DISMISS_THRESHOLD_TRAVEL || velocityY > DISMISS_VELOCITY)) dismiss() else returnFromDismiss()
 			DragMode.MEDIA_BOX -> {
 				val tap = !cancelled && abs(ev.x - downX) < touchSlop && abs(ev.y - downY) < touchSlop
@@ -545,12 +548,13 @@ class MediaViewerSheetLayout @JvmOverloads constructor(context: Context, attrs: 
 	}
 
 	override fun onNestedPreFling(target: View, velocityX: Float, velocityY: Float): Boolean {
-		if (velocityY > 0 && progress < STATE_FULL) {
-			settle(velocityY)
+		val scrollUpwardVelocity = velocityY
+		if (scrollUpwardVelocity > 0 && progress < STATE_FULL) {
+			settle(scrollUpwardVelocity)
 			return true
 		}
-		if (velocityY < 0 && progress > 0f && (progress < STATE_FULL || !target.canScrollVertically(-1))) {
-			settle(velocityY)
+		if (scrollUpwardVelocity < 0 && progress > 0f && (progress < STATE_FULL || !target.canScrollVertically(-1))) {
+			settle(scrollUpwardVelocity)
 			return true
 		}
 		return false
@@ -572,6 +576,8 @@ class MediaViewerSheetLayout @JvmOverloads constructor(context: Context, attrs: 
 		const val STATE_PREVIEW = 1
 		const val STATE_FULL = 2
 		const val CHROME_SWITCH_PROGRESS = 1.5f
+
+		const val AUDIO_VIRTUAL_CONTENT_ASPECT = 4f / 3f
 
 		private const val PREVIEW_BOX_HEIGHT_DP = 300f
 		private const val SHEET_RADIUS_DP = 16f

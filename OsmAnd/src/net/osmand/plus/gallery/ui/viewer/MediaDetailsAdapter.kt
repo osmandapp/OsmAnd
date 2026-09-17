@@ -1,9 +1,5 @@
 package net.osmand.plus.gallery.ui.viewer
 
-import android.graphics.Canvas
-import android.graphics.Paint
-import android.graphics.Rect
-import android.graphics.RectF
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -14,23 +10,20 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
-import net.osmand.plus.gallery.ui.GallerySectionCardDecoration
+import net.osmand.plus.gallery.library.MediaAttachment
+import net.osmand.plus.gallery.ui.GallerySectionBoundary
+import net.osmand.plus.gallery.ui.GallerySectionSource
 import net.osmand.plus.helpers.AndroidUiHelper
-import net.osmand.plus.plugins.audionotes.library.data.MediaAttachment
-import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
-import kotlin.math.max
-import kotlin.math.min
 
 abstract class DetailsHolder(view: View) : RecyclerView.ViewHolder(view) {
-	var card = -1
+	var boundary: GallerySectionBoundary? = null
 }
 
 class MediaDetailsAdapter(
-	private val app: OsmandApplication,
 	private val nightMode: Boolean,
 	private val actions: Actions
-) : RecyclerView.Adapter<DetailsHolder>() {
+) : RecyclerView.Adapter<DetailsHolder>(), GallerySectionSource {
 
 	interface Actions {
 		fun onRowAction(action: RowAction)
@@ -38,8 +31,9 @@ class MediaDetailsAdapter(
 		fun onAttachmentMenu(anchor: View, attachment: MediaAttachment)
 	}
 
-	var items: List<DetailsItem> = emptyList()
+	internal var items: List<DetailsItem> = emptyList()
 		private set
+	private var boundaries: List<GallerySectionBoundary> = emptyList()
 
 	fun submit(newItems: List<DetailsItem>) {
 		val oldItems = items
@@ -51,25 +45,43 @@ class MediaDetailsAdapter(
 				oldItems[oldPosition] == newItems[newPosition] && isLastInCard(oldItems, oldPosition) == isLastInCard(newItems, newPosition)
 		})
 		items = newItems
+		boundaries = cardBoundaries(newItems)
 		diff.dispatchUpdatesTo(this)
 	}
 
-	fun cardAt(position: Int): Int = items.getOrNull(position)?.card ?: -1
+	override fun getSectionBoundary(position: Int): GallerySectionBoundary? = boundaries.getOrNull(position)
 
-	fun isFirstInCard(position: Int): Boolean = position == 0 || cardAt(position - 1) != cardAt(position)
+	override fun getBoundSectionBoundary(holder: RecyclerView.ViewHolder): GallerySectionBoundary? = (holder as? DetailsHolder)?.boundary
 
-	fun isLastInCard(position: Int): Boolean = isLastInCard(items, position)
+	override fun isGridCell(position: Int): Boolean = false
+
+	private fun cardBoundaries(list: List<DetailsItem>): List<GallerySectionBoundary> {
+		val result = ArrayList<GallerySectionBoundary>(list.size)
+		var first = 0
+		while (first < list.size) {
+			var last = first
+			while (last + 1 < list.size && list[last + 1].card == list[first].card) last++
+			for (index in first..last) {
+				result += GallerySectionBoundary("card:" + list[first].card, first, last, first, false, index == first, index == last)
+			}
+			first = last + 1
+		}
+		return result
+	}
 
 	private fun isLastInCard(list: List<DetailsItem>, position: Int): Boolean =
 		position == list.lastIndex || list[position + 1].card != list[position].card
 
 	override fun getItemCount() = items.size
 
-	override fun getItemViewType(position: Int) = when (items[position]) {
+	override fun getItemViewType(position: Int) = when (val item = items[position]) {
 		is DetailsItem.Header -> HEADER
 		is DetailsItem.Text -> TEXT
 		is DetailsItem.Row -> ROW
-		is DetailsItem.Attachment -> ATTACHMENT
+		is DetailsItem.Attachment -> when (item.attachment.kind) {
+			MediaAttachment.Kind.FAVORITE -> ATTACHED_FAVORITE
+			MediaAttachment.Kind.TRACK_POINT -> ATTACHED_TRACK
+		}
 		is DetailsItem.EmptyAttachments -> EMPTY
 	}
 
@@ -79,15 +91,16 @@ class MediaDetailsAdapter(
 			HEADER -> HeaderHolder(inflater.inflate(R.layout.gallery_details_header_item, parent, false))
 			TEXT -> TextHolder(inflater.inflate(R.layout.gallery_details_text_item, parent, false))
 			ROW -> DetailsRowHolder(inflater.inflate(R.layout.gallery_details_row_item, parent, false), nightMode)
-			ATTACHMENT -> AttachedTargetViewHolder(inflater.inflate(R.layout.track_list_item, parent, false))
+			ATTACHED_FAVORITE -> AttachedTargetViewHolder(inflater.inflate(AttachedTargetViewHolder.layoutFor(MediaAttachment.Kind.FAVORITE), parent, false))
+			ATTACHED_TRACK -> AttachedTargetViewHolder(inflater.inflate(AttachedTargetViewHolder.layoutFor(MediaAttachment.Kind.TRACK_POINT), parent, false))
 			else -> EmptyAttachmentsHolder(inflater.inflate(R.layout.gallery_details_empty_attachments_item, parent, false), nightMode)
 		}
 	}
 
 	override fun onBindViewHolder(holder: DetailsHolder, position: Int) {
 		val item = items[position]
-		holder.card = item.card
-		val last = isLastInCard(position)
+		holder.boundary = boundaries[position]
+		val last = isLastInCard(items, position)
 		when (holder) {
 			is HeaderHolder -> holder.title.text = (item as DetailsItem.Header).title
 			is TextHolder -> holder.bind((item as DetailsItem.Text).text, last, actions)
@@ -127,8 +140,9 @@ class MediaDetailsAdapter(
 		private const val HEADER = 0
 		private const val TEXT = 1
 		private const val ROW = 2
-		private const val ATTACHMENT = 3
-		private const val EMPTY = 4
+		private const val ATTACHED_FAVORITE = 3
+		private const val ATTACHED_TRACK = 4
+		private const val EMPTY = 5
 	}
 }
 
@@ -161,51 +175,6 @@ class DetailsRowHolder(view: View, private val nightMode: Boolean) : DetailsHold
 		row.setOnLongClickListener {
 			actions.onCopy(item.value)
 			true
-		}
-	}
-}
-
-class DetailsCardDecoration(app: OsmandApplication, nightMode: Boolean, private val adapter: MediaDetailsAdapter) : RecyclerView.ItemDecoration() {
-	private val gap = app.resources.getDimensionPixelSize(R.dimen.content_padding)
-	private val radius = AndroidUtils.dpToPxF(app, GallerySectionCardDecoration.CARD_RADIUS_DP)
-	private val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = ColorUtilities.getColor(app, ColorUtilities.getListBgColorId(nightMode)) }
-	private val card = RectF()
-
-	override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-		val position = parent.getChildAdapterPosition(view)
-		if (position > 0 && adapter.isFirstInCard(position)) outRect.top = gap
-	}
-
-	override fun onDraw(canvas: Canvas, parent: RecyclerView, state: RecyclerView.State) {
-		var index = 0
-		while (index < parent.childCount) {
-			val first = parent.getChildAt(index)
-			val cardId = (parent.getChildViewHolder(first) as? DetailsHolder)?.card ?: -1
-			var open = cardId < 0
-			var closed = cardId < 0
-			var top = Float.MAX_VALUE
-			var bottom = -Float.MAX_VALUE
-			var end = index
-			while (end < parent.childCount) {
-				val child = parent.getChildAt(end)
-				val holder = parent.getChildViewHolder(child) as? DetailsHolder
-				if (holder == null || holder.card != cardId) break
-				val position = parent.getChildAdapterPosition(child)
-				if (position >= 0) {
-					if (adapter.isFirstInCard(position)) open = true
-					if (adapter.isLastInCard(position)) closed = true
-				}
-				val childTop = child.top + child.translationY
-				top = min(top, childTop)
-				bottom = max(bottom, childTop + child.height * child.alpha)
-				end++
-			}
-			if (cardId >= 0 && top < bottom) {
-				card.set(parent.paddingLeft.toFloat(), if (open) top else min(top, 0f) - radius,
-					(parent.width - parent.paddingRight).toFloat(), if (closed) bottom else max(bottom, parent.height.toFloat()) + radius)
-				canvas.drawRoundRect(card, radius, radius, paint)
-			}
-			index = max(end, index + 1)
 		}
 	}
 }

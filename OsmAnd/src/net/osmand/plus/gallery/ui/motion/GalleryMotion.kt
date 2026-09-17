@@ -1,8 +1,17 @@
 package net.osmand.plus.gallery.ui.motion
 
 import android.animation.ValueAnimator
+import android.graphics.RectF
 import android.view.animation.PathInterpolator
 import net.osmand.plus.OsmandApplication
+import kotlin.math.max
+import kotlin.math.min
+
+data class OpenEdges(val top: Boolean, val bottom: Boolean) {
+	companion object {
+		val CLOSED = OpenEdges(top = false, bottom = false)
+	}
+}
 
 object GalleryMotion {
 	val CURVE = PathInterpolator(0.05f, 0.7f, 0.1f, 1f)
@@ -12,6 +21,8 @@ object GalleryMotion {
 	const val RECOLOR_DURATION_MS = 200L
 	const val STAGGER_STEP_MS = 15L
 	const val MAX_STAGGER_MS = 120L
+	const val CONTENT_FADE_BASE_DELAY_MS = 80L
+	const val CROSSFADE_MIN_MS = 100L
 	const val APPEAR_SCALE = 0.92f
 
 	fun stagger(index: Int): Long = (index * STAGGER_STEP_MS).coerceAtMost(MAX_STAGGER_MS)
@@ -23,6 +34,11 @@ object GalleryMotion {
 	}
 
 	fun animationsEnabled(app: OsmandApplication): Boolean = !app.settings.DO_NOT_USE_ANIMATIONS.get()
+
+	fun extendOffscreen(rect: RectF, open: OpenEdges, viewportTop: Float, viewportBottom: Float, radius: Float) {
+		if (open.top) rect.top = min(rect.top, viewportTop - radius)
+		if (open.bottom) rect.bottom = max(rect.bottom, viewportBottom + radius)
+	}
 
 	fun recolor(app: OsmandApplication, from: Int, to: Int, animate: Boolean, apply: (Int) -> Unit): ValueAnimator? {
 		if (!animate || !animationsEnabled(app) || from == to) {

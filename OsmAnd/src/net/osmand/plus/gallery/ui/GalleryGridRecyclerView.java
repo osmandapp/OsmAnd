@@ -27,7 +27,7 @@ public class GalleryGridRecyclerView extends RecyclerView {
 		super(context, attrs, defStyleAttr);
 	}
 
-	public void setScaleDetector(ScaleGestureDetector scaleDetector) {
+	public void setScaleDetector(@Nullable ScaleGestureDetector scaleDetector) {
 		this.scaleDetector = scaleDetector;
 	}
 
@@ -37,7 +37,9 @@ public class GalleryGridRecyclerView extends RecyclerView {
 
 	@Override
 	public boolean onTouchEvent(MotionEvent e) {
-		scaleDetector.onTouchEvent(e);
+		if (scaleDetector != null) {
+			scaleDetector.onTouchEvent(e);
+		}
 		if (!isScaling) {
 			return super.onTouchEvent(e);
 		}
@@ -59,7 +61,9 @@ public class GalleryGridRecyclerView extends RecyclerView {
 
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent e) {
-		scaleDetector.onTouchEvent(e);
+		if (scaleDetector != null) {
+			scaleDetector.onTouchEvent(e);
+		}
 		if (isScaling) {
 			stopScroll();
 			return true;

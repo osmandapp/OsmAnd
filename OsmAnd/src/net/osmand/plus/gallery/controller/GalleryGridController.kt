@@ -4,7 +4,6 @@ import android.view.View
 import androidx.fragment.app.FragmentActivity
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
-import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.dialog.BaseDialogController
 import net.osmand.plus.gallery.contract.IGalleryGridController
 import net.osmand.plus.gallery.contract.IGalleryGridView
@@ -80,21 +79,16 @@ abstract class GalleryGridController(
 
 	// --- Image size ---
 
-	open fun resolveSpanResizableSize(viewWidth: Int?): Int {
-		val isPortrait = view?.isPortrait() ?: return standardPhotoSizePx
-		return resolveSpanResizableSize(viewWidth, getSpanCount(isPortrait))
-	}
-
 	open fun resolveSpanResizableSize(viewWidth: Int?, spanCount: Int): Int {
-		val mapActivity = view?.getActivity() ?: return standardPhotoSizePx
+		val activity = view?.getActivity() ?: return standardPhotoSizePx
 		val isPortrait = view?.isPortrait() ?: return standardPhotoSizePx
 
 		val padding = AndroidUtils.dpToPx(app, GalleryGridItemDecorator.GRID_SIDE_PADDING_DP)
 		val itemSpace = AndroidUtils.dpToPx(app, GRID_SCREEN_ITEM_SPACE_DP * 2f)
 		val screenWidth = viewWidth ?: if (isPortrait) {
-			AndroidUtils.getScreenWidth(mapActivity)
+			AndroidUtils.getScreenWidth(activity)
 		} else {
-			AndroidUtils.getScreenHeight(mapActivity)
+			AndroidUtils.getScreenHeight(activity)
 		}
 		val spaceForItems = screenWidth - (padding * 2) - (spanCount * itemSpace)
 		return spaceForItems / spanCount
@@ -107,6 +101,10 @@ abstract class GalleryGridController(
 	override fun isListModeSupported(): Boolean = false
 
 	open fun setDisplayMode(mode: GalleryDisplayMode) {
+		applyDisplayMode(mode)
+	}
+
+	protected fun applyDisplayMode(mode: GalleryDisplayMode) {
 		if (displayMode != mode) {
 			displayMode = mode
 			view?.updateDisplayMode()
@@ -199,16 +197,19 @@ abstract class GalleryGridController(
 		)
 	}
 
-	open fun createAdapter(mapActivity: FragmentActivity, viewWidth: Int?, nightMode: Boolean): GalleryGridAdapter {
+	open fun createAdapter(activity: FragmentActivity, viewWidth: Int?, nightMode: Boolean): GalleryGridAdapter {
 		val registry = app.galleryHelper.loadStateRegistry
 		return GalleryGridAdapter(
-			mapActivity = mapActivity,
+			activity = activity,
 			onMediaClicked = ::onMediaItemClicked,
 			onReloadMediaItems = ::onReloadMediaItems,
 			onActionClicked = ::handleGalleryAction,
 			onSortModeSelected = ::onSortModeSelected,
 			mediaHolderType = { MediaHolderType.SPAN_RESIZABLE },
-			resolveResizableImageSize = { resolveSpanResizableSize(viewWidth) },
+			resolveResizableImageSize = {
+				val isPortrait = view?.isPortrait()
+				if (isPortrait == null) standardPhotoSizePx else resolveSpanResizableSize(viewWidth, getSpanCount(isPortrait))
+			},
 			isLoadFailed = registry::isFailed,
 			onLoadFailed = registry::markFailed,
 			nightMode = nightMode,
@@ -223,7 +224,9 @@ abstract class GalleryGridController(
 	companion object {
 		const val MIN_SPAN_COUNT = 2
 		const val MAX_SPAN_COUNT = 5
+		const val DEFAULT_SPAN_COUNT = 4
 		const val MIN_SPAN_COUNT_LANDSCAPE = 4
 		const val MAX_SPAN_COUNT_LANDSCAPE = 8
+		const val DEFAULT_SPAN_COUNT_LANDSCAPE = 7
 	}
 }

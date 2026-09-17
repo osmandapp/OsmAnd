@@ -14,6 +14,7 @@ import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.myplaces.favorites.add.AddFavoriteOptions;
 import net.osmand.plus.myplaces.favorites.add.AddFavoriteResult;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.gallery.library.MediaLibraryScanner;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.plugins.audionotes.Recording;
 import net.osmand.plus.settings.mediastorage.MediaSource;
@@ -21,23 +22,25 @@ import net.osmand.plus.settings.mediastorage.MediaStorageHelper;
 import net.osmand.plus.settings.mediastorage.MediaStorageLocation;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.shared.gpx.primitives.Link;
 import net.osmand.shared.gpx.primitives.Linkable;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.media.LinkMediaFactory;
+import net.osmand.shared.media.MediaProvider;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.Map;
 import java.util.IdentityHashMap;
-import java.io.File;
-import net.osmand.shared.media.MediaProvider;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class AttachedMediaDataHelper {
 
@@ -139,6 +142,25 @@ public class AttachedMediaDataHelper {
 		});
 	}
 
+	public void removeMediaLinks(@NonNull Map<Linkable, List<Link>> linksByTarget, boolean deleteUnreferencedFiles,
+	                             @Nullable CallbackWithObject<Boolean> callback) {
+		removeMediaLinks(new ArrayList<>(linksByTarget.entrySet()), 0, true, deleteUnreferencedFiles, callback);
+	}
+
+	private void removeMediaLinks(@NonNull List<Map.Entry<Linkable, List<Link>>> entries, int index, boolean success,
+	                              boolean deleteUnreferencedFiles, @Nullable CallbackWithObject<Boolean> callback) {
+		if (index == entries.size()) {
+			notifyResult(callback, success);
+			return;
+		}
+		Map.Entry<Linkable, List<Link>> entry = entries.get(index);
+		removeMediaLinks(entry.getKey(), entry.getValue(), deleteUnreferencedFiles, removed -> {
+			app.runInUIThread(() -> removeMediaLinks(entries, index + 1, success && Boolean.TRUE.equals(removed),
+					deleteUnreferencedFiles, callback));
+			return true;
+		});
+	}
+
 	private void saveTarget(@NonNull Linkable target, @Nullable CallbackWithObject<Boolean> callback) {
 		if (target instanceof FavouritePoint) {
 			app.getFavoritesHelper().saveCurrentPointsIntoFile(true, new FavoritesListener() {
@@ -162,11 +184,11 @@ public class AttachedMediaDataHelper {
 
 	public void renameMedia(@Nullable Recording recording, @NonNull String href, @NonNull String name,
 	                        @NonNull Map<Linkable, List<Link>> linksByTarget,
-	                        @NonNull CallbackWithObject<Boolean> callback) {
+	                        @NonNull CallbackWithObject<String> onRenamed) {
 		String path = LinkMediaFactory.getInternalPath(href);
 		if (path == null || name.trim().isEmpty() || name.equals(".") || name.equals("..")
-				|| name.matches(".*[\\\\/:*?\"<>|\\p{Cntrl}].*")) {
-			notifyResult(callback, false);
+				|| !FileUtils.isValidFileName(name)) {
+			onRenamed.processResult(null);
 			return;
 		}
 		File source = MediaProvider.resolveInternalMediaFile(app.getAppPath().getAbsolutePath(), path);
@@ -174,16 +196,16 @@ public class AttachedMediaDataHelper {
 		String newName = recording != null ? name + " " + recording.getOtherName(source.getName())
 				: name + (extension.isEmpty() ? "" : "." + extension);
 		File destination = new File(source.getParentFile(), newName);
+		String newHref = mediaStorageHelper.createMediaFileHref(destination);
 		if (source.equals(destination)) {
-			notifyResult(callback, true);
+			onRenamed.processResult(newHref);
 			return;
 		}
 		if (!source.isFile() || destination.exists()) {
-			notifyResult(callback, false);
+			onRenamed.processResult(null);
 			return;
 		}
 		Map<Link, Link> originals = new IdentityHashMap<>();
-		String newHref = mediaStorageHelper.createMediaFileHref(destination);
 		for (List<Link> links : linksByTarget.values()) {
 			for (Link link : links) {
 				originals.putIfAbsent(link, new Link(link));
@@ -199,7 +221,7 @@ public class AttachedMediaDataHelper {
 				mediaStorageHelper.scanMediaFile(source);
 				mediaStorageHelper.scanMediaFile(destination);
 				for (Linkable target : targets) notifyMediaChanged(target);
-				notifyResult(callback, true);
+				onRenamed.processResult(newHref);
 			} else {
 				for (Map.Entry<Link, Link> entry : originals.entrySet()) {
 					entry.getKey().setHref(entry.getValue().getHref());
@@ -207,7 +229,7 @@ public class AttachedMediaDataHelper {
 				}
 				saveTargets(targets, 0, true, restored -> {
 					if (!Boolean.TRUE.equals(restored)) LOG.warn("Failed to restore media links after rename failure");
-					notifyResult(callback, false);
+					onRenamed.processResult(null);
 					return true;
 				});
 			}
@@ -224,7 +246,7 @@ public class AttachedMediaDataHelper {
 				SelectedGpxFile selected = app.getSelectedGpxHelper().getSelectedGPXFile(point);
 				if (selected != null) key = new GalleryKey.Waypoint(selected.getGpxFile().getPath(), point.getKey());
 			}
-			if (key != null) app.getGalleryHelper().notifyAttachedMediaChanged(java.util.Collections.singleton(key));
+			if (key != null) app.getGalleryHelper().notifyAttachedMediaChanged(Collections.singleton(key));
 		});
 	}
 
@@ -342,17 +364,7 @@ public class AttachedMediaDataHelper {
 
 	@Nullable
 	private String mediaLinkKey(@Nullable String href) {
-		if (Algorithms.isEmpty(href)) {
-			return null;
-		}
-		String internalPath = LinkMediaFactory.getInternalPath(href);
-		if (internalPath != null) {
-			String name = LinkMediaFactory.getInternalMediaFileName(internalPath);
-			if (!Algorithms.isEmpty(name)) {
-				return "internal:" + name;
-			}
-		}
-		return href;
+		return href == null ? null : MediaLibraryScanner.keyOf(new Link(href), app.getAppPath().getAbsolutePath());
 	}
 
 	@NonNull

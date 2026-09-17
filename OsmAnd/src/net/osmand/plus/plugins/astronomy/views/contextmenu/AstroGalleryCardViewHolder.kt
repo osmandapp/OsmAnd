@@ -128,7 +128,7 @@ class AstroGalleryCardViewHolder(
 
 		val registry = app.galleryHelper.loadStateRegistry
 		galleryGridAdapter = GalleryGridAdapter(
-			mapActivity = mapActivity,
+			activity = mapActivity,
 			onMediaClicked = galleryListener::onMediaItemClicked,
 			onReloadMediaItems = galleryListener::onReloadMediaItems,
 			onActionClicked = actionListener::handleGalleryAction,

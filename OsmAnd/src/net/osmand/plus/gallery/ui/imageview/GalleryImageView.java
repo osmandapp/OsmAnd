@@ -27,6 +27,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 
 public class GalleryImageView extends AppCompatImageView {
+
+	private static final float SCROLL_EDGE_TOLERANCE_PX = 1f;
 	private static final float FINAL_SCALE_MIN_MULTIPLIER = .50f;
 	private static final float FINAL_SCALE_MAX_MULTIPLIER = 1.5f;
 	private static final float MAX_USER_SCALE = 3f;
@@ -451,36 +453,25 @@ public class GalleryImageView extends AppCompatImageView {
 	@Override
 	public boolean canScrollHorizontally(int direction) {
 		currentMatrix.getValues(matrix);
-		float x = matrix[Matrix.MTRANS_X];
-
-		if (getImageWidth() < viewWidth) {
-			return false;
-
-		} else if (x >= -1 && direction < 0) {
-			return false;
-
-		} else if (Math.abs(x) + viewWidth + 1 >= getImageWidth() && direction > 0) {
-			return false;
-		}
-
-		return true;
+		return canScroll(matrix[Matrix.MTRANS_X], getImageWidth(), viewWidth, direction);
 	}
 
 	@Override
 	public boolean canScrollVertically(int direction) {
 		currentMatrix.getValues(matrix);
-		float y = matrix[Matrix.MTRANS_Y];
+		return canScroll(matrix[Matrix.MTRANS_Y], getImageHeight(), viewHeight, direction);
+	}
 
-		if (getImageHeight() <= viewHeight + 1) {
-			return false;
-
-		} else if (y >= -1 && direction < 0) {
-			return false;
-
-		} else if (Math.abs(y) + viewHeight + 1 >= getImageHeight() && direction > 0) {
+	private static boolean canScroll(float translation, float imageSize, int viewSize, int direction) {
+		if (imageSize <= viewSize + SCROLL_EDGE_TOLERANCE_PX) {
 			return false;
 		}
-
+		if (direction < 0) {
+			return translation < -SCROLL_EDGE_TOLERANCE_PX;
+		}
+		if (direction > 0) {
+			return Math.abs(translation) + viewSize + SCROLL_EDGE_TOLERANCE_PX < imageSize;
+		}
 		return true;
 	}
 

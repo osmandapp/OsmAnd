@@ -43,8 +43,8 @@ import net.osmand.plus.gallery.ui.viewer.MediaViewerPage;
 import net.osmand.plus.gallery.ui.viewer.MediaViewerSheetLayout;
 import net.osmand.plus.gallery.ui.viewer.ViewerSheetController;
 import net.osmand.plus.plugins.audionotes.library.MediaItemMenu;
-import net.osmand.plus.plugins.audionotes.library.MediaShareHelper;
-import net.osmand.plus.plugins.audionotes.library.data.MediaLibraryEntry;
+import net.osmand.plus.gallery.library.MediaShareHelper;
+import net.osmand.plus.gallery.library.MediaLibraryEntry;
 import net.osmand.plus.gallery.data.GalleryKey;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -66,6 +66,7 @@ import net.osmand.shared.media.domain.MediaType;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class GalleryPhotoPagerFragment extends BaseFullScreenDialogFragment implements IDialog, MediaViewerSheetLayout.Listener {
@@ -73,9 +74,6 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenDialogFragment impl
 	public static final String TAG = GalleryPhotoPagerFragment.class.getSimpleName();
 	public static final int REQUEST_EXTERNAL_STORAGE_PERMISSION = 2000;
 	public static final int PRELOAD_THUMBNAILS_COUNT = 3;
-
-	public static final int STATE_MEDIA = MediaViewerSheetLayout.STATE_MEDIA;
-	public static final int STATE_PREVIEW = MediaViewerSheetLayout.STATE_PREVIEW;
 
 	private static final int UI_TOGGLE_ANIM_MS = 150;
 
@@ -97,8 +95,9 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenDialogFragment impl
 
 	private boolean uiHidden = false;
 	private int selectedPosition = 0;
-	private int initialState = STATE_MEDIA;
-	private int statusBarColor = -1;
+	private int initialState = MediaViewerSheetLayout.STATE_MEDIA;
+	@Nullable
+	private Integer statusBarColor;
 	private boolean statusBarSolid;
 
 	private GalleryPagerController controller;
@@ -123,10 +122,10 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenDialogFragment impl
 		String selectedItemId = null;
 		if (savedInstanceState != null) {
 			selectedItemId = savedInstanceState.getString(SELECTED_ITEM_ID_KEY);
-			initialState = savedInstanceState.getInt(DETAILS_STATE_KEY, STATE_MEDIA);
+			initialState = savedInstanceState.getInt(DETAILS_STATE_KEY, MediaViewerSheetLayout.STATE_MEDIA);
 		} else if (getArguments() != null) {
 			selectedItemId = getArguments().getString(SELECTED_ITEM_ID_KEY);
-			initialState = getArguments().getInt(DETAILS_STATE_KEY, STATE_MEDIA);
+			initialState = getArguments().getInt(DETAILS_STATE_KEY, MediaViewerSheetLayout.STATE_MEDIA);
 		}
 		selectedPosition = selectedItemId != null
 				? controller.getIndexById(selectedItemId)
@@ -177,11 +176,9 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenDialogFragment impl
 		descriptionShadow = view.findViewById(R.id.description_shadow);
 		descriptionContainer = view.findViewById(R.id.description_container);
 
+		setupViewPager(view);
 		if (selectedPosition < mediaItems.size()) {
-			setupViewPager(view);
-			preloadThumbNails();
-			updateImageDescriptionRow(getSelectedMediaItem());
-			sheetController.setItem(getSelectedMediaItem());
+			bindPager();
 		}
 		sheetLayout.setInitialState(initialState);
 
@@ -307,11 +304,18 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenDialogFragment impl
 	}
 
 	public void toggleUi() {
-		if (sheetLayout != null && sheetLayout.getProgress() > 0f && !uiHidden) {
+		if (sheetLayout != null && sheetLayout.getProgress() > 0f) {
+			return;
+		}
+		setUiHidden(!uiHidden);
+	}
+
+	private void setUiHidden(boolean hidden) {
+		if (uiHidden == hidden) {
 			return;
 		}
 		boolean useAnimations = !settings.DO_NOT_USE_ANIMATIONS.get();
-		uiHidden = !uiHidden;
+		uiHidden = hidden;
 		if (useAnimations) {
 			if (uiHidden) {
 				toolbar.animate()
@@ -397,7 +401,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenDialogFragment impl
 
 		ImageView backButton = view.findViewById(R.id.details_back_button);
 		backButton.setImageDrawable(getPaintedIcon(AndroidUtils.getNavigationIconResId(app), iconColor));
-		backButton.setOnClickListener(v -> sheetLayout.animateTo(STATE_PREVIEW));
+		backButton.setOnClickListener(v -> sheetLayout.animateTo(MediaViewerSheetLayout.STATE_PREVIEW));
 		setupSelectableBackground(backButton);
 
 		ImageView shareButton = view.findViewById(R.id.details_share_button);
@@ -428,7 +432,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenDialogFragment impl
 	private void shareMedia() {
 		MediaItem mediaItem = getSelectedMediaItem();
 		if (mediaItem == null) return;
-		callActivity(activity -> MediaShareHelper.share(activity, java.util.Collections.singletonList(mediaItem)));
+		callActivity(activity -> MediaShareHelper.share(activity, Collections.singletonList(mediaItem)));
 	}
 
 	public void showContextWidgetMenu(@NonNull View view) {
@@ -546,12 +550,6 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenDialogFragment impl
 
 	private void setupViewPager(@NonNull View view) {
 		pager = view.findViewById(R.id.photo_pager);
-		pager.clearOnPageChangeListeners();
-		FragmentManager manager = getChildFragmentManager();
-
-		pagerAdapter = new ViewPagerAdapter(manager, mediaItems);
-		pager.setAdapter(pagerAdapter);
-		pager.setCurrentItem(selectedPosition);
 		pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 			@Override
 			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -575,15 +573,20 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenDialogFragment impl
 		pager.setPageTransformer(true, new GalleryDepthTransformer());
 	}
 
+	private void bindPager() {
+		pagerAdapter = new ViewPagerAdapter(getChildFragmentManager(), mediaItems);
+		pager.setAdapter(pagerAdapter);
+		pager.setCurrentItem(selectedPosition);
+		preloadThumbNails();
+		updateImageDescriptionRow(getSelectedMediaItem());
+		sheetController.setItem(getSelectedMediaItem());
+	}
+
 	public void refreshMediaItems(@NonNull String selectedItemId) {
-		if (getView() == null || controller == null) return;
+		if (pager == null || controller == null) return;
 		mediaItems = controller.getMediaItems();
 		selectedPosition = controller.getIndexById(selectedItemId);
-		setupViewPager(getView());
-		updateImageDescriptionRow(getSelectedMediaItem());
-		if (sheetController != null) {
-			sheetController.setItem(getSelectedMediaItem());
-		}
+		bindPager();
 	}
 
 	public void showDetails(@NonNull String itemId) {
@@ -592,7 +595,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenDialogFragment impl
 		if (position != selectedPosition && position < mediaItems.size()) {
 			pager.setCurrentItem(position, false);
 		}
-		sheetLayout.animateTo(STATE_PREVIEW);
+		sheetLayout.animateTo(MediaViewerSheetLayout.STATE_PREVIEW);
 	}
 
 	public void onPageContentChanged(@NonNull Fragment page) {
@@ -608,8 +611,8 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenDialogFragment impl
 
 	@Override
 	public void onProgressChanged(float progress, float dismissProgress) {
-		if (progress > 0f && uiHidden) {
-			toggleUi();
+		if (progress > 0f) {
+			setUiHidden(false);
 		}
 		if (InsetsUtils.isEdgeToEdgeSupported()) {
 			return;
@@ -630,7 +633,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenDialogFragment impl
 
 	private void setStatusBarColor(int color) {
 		Window window = getDialog() != null ? getDialog().getWindow() : null;
-		if (window != null && color != statusBarColor) {
+		if (window != null && (statusBarColor == null || statusBarColor != color)) {
 			statusBarColor = color;
 			AndroidUiHelper.setStatusBarColor(window, color);
 		}
@@ -703,7 +706,7 @@ public class GalleryPhotoPagerFragment extends BaseFullScreenDialogFragment impl
 
 	public static void showInstance(@NonNull FragmentActivity activity,
 	                                @NonNull String selectedItemId) {
-		showInstance(activity, selectedItemId, STATE_MEDIA);
+		showInstance(activity, selectedItemId, MediaViewerSheetLayout.STATE_MEDIA);
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity,

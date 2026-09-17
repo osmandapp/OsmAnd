@@ -8,7 +8,12 @@ import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
 
-class GallerySectionCardTracks private constructor(private val tracks: List<Track>, private val radius: Float) {
+class GallerySectionCardTracks private constructor(
+	private val tracks: List<Track>,
+	private val radius: Float,
+	private val viewportTop: Float,
+	private val viewportBottom: Float
+) {
 
 	class Contribution(val start: RectF, val end: RectF, val delay: Long, val duration: Long)
 
@@ -17,7 +22,9 @@ class GallerySectionCardTracks private constructor(private val tracks: List<Trac
 		val endSection: String?,
 		val contributions: List<Contribution>,
 		val startBox: RectF?,
-		val endBox: RectF?
+		val endBox: RectF?,
+		val openStart: OpenEdges,
+		val openEnd: OpenEdges
 	) {
 		val minDelay = contributions.minOfOrNull { it.delay } ?: 0L
 		var startTopRound = true
@@ -87,12 +94,43 @@ class GallerySectionCardTracks private constructor(private val tracks: List<Trac
 						out.union(scratch)
 					}
 				}
+				extendOpenEdges(track, elapsed, out)
 				return 1f
 			}
 		}
 	}
 
+	private fun extendOpenEdges(track: Track, elapsed: Long, out: RectF) {
+		val startBox = track.startBox ?: return
+		val endBox = track.endBox ?: return
+		val p = GalleryMotion.progress(elapsed, track.minDelay, GalleryMotion.MOVE_DURATION_MS)
+		if (track.openStart.top || track.openEnd.top) {
+			val from = if (track.openStart.top) viewportTop - radius else startBox.top
+			val to = if (track.openEnd.top) viewportTop - radius else endBox.top
+			out.top = min(out.top, lerp(from, to, p))
+		}
+		if (track.openStart.bottom || track.openEnd.bottom) {
+			val from = if (track.openStart.bottom) viewportBottom + radius else startBox.bottom
+			val to = if (track.openEnd.bottom) viewportBottom + radius else endBox.bottom
+			out.bottom = max(out.bottom, lerp(from, to, p))
+		}
+	}
+
 	fun draw(canvas: Canvas, paint: Paint) {
+		bridgeSeams()
+		for (track in tracks) {
+			if (track.drawRect.isEmpty || track.alpha <= 0f) continue
+			paint.alpha = (track.alpha * 255f).roundToInt().coerceIn(0, 255)
+			corners.fill(track.topRadius, 0, 4)
+			corners.fill(track.bottomRadius, 4, 8)
+			path.rewind()
+			path.addRoundRect(track.drawRect, corners, Path.Direction.CW)
+			canvas.drawPath(path, paint)
+		}
+		paint.alpha = 255
+	}
+
+	private fun bridgeSeams() {
 		for (track in tracks) track.drawRect.set(track.rect)
 		for (track in tracks) {
 			for (other in tracks) {
@@ -105,16 +143,6 @@ class GallerySectionCardTracks private constructor(private val tracks: List<Trac
 				}
 			}
 		}
-		for (track in tracks) {
-			if (track.drawRect.isEmpty || track.alpha <= 0f) continue
-			paint.alpha = (track.alpha * 255f).roundToInt().coerceIn(0, 255)
-			corners.fill(track.topRadius, 0, 4)
-			corners.fill(track.bottomRadius, 4, 8)
-			path.rewind()
-			path.addRoundRect(track.drawRect, corners, Path.Direction.CW)
-			canvas.drawPath(path, paint)
-		}
-		paint.alpha = 255
 	}
 
 	class Handle {
@@ -137,8 +165,8 @@ class GallerySectionCardTracks private constructor(private val tracks: List<Trac
 		)
 
 		private val elements = mutableListOf<Element>()
-		private val openBefore = mutableMapOf<String, Pair<Boolean, Boolean>>()
-		private val openAfter = mutableMapOf<String, Pair<Boolean, Boolean>>()
+		private val openBefore = mutableMapOf<String, OpenEdges>()
+		private val openAfter = mutableMapOf<String, OpenEdges>()
 
 		fun element(startSection: String?, start: RectF?, endSection: String?, end: RectF?, delay: Long, duration: Long): Handle {
 			val handle = Handle()
@@ -150,12 +178,12 @@ class GallerySectionCardTracks private constructor(private val tracks: List<Trac
 			return handle
 		}
 
-		fun openEdgesBefore(section: String, top: Boolean, bottom: Boolean) {
-			openBefore[section] = top to bottom
+		fun openEdgesBefore(section: String, open: OpenEdges) {
+			openBefore[section] = open
 		}
 
-		fun openEdgesAfter(section: String, top: Boolean, bottom: Boolean) {
-			openAfter[section] = top to bottom
+		fun openEdgesAfter(section: String, open: OpenEdges) {
+			openAfter[section] = open
 		}
 
 		fun build(): GallerySectionCardTracks? {
@@ -180,57 +208,43 @@ class GallerySectionCardTracks private constructor(private val tracks: List<Trac
 				val startBox = union(members.mapNotNull { it.start })
 				val endBox = union(members.mapNotNull { it.end })
 				if (startSection != null && endSection != null && startBox != null && endBox != null) {
-					val contributions = members.mapTo(mutableListOf()) { member ->
+					val contributions = members.map { member ->
 						val start = member.start ?: project(member.end!!, startBox)
 						val end = member.end ?: project(member.start!!, endBox)
 						member.handle.start = RectF(start)
 						member.handle.end = RectF(end)
 						Contribution(start, end, member.delay, member.duration)
 					}
-					val minDelay = contributions.minOf { it.delay }
-					val before = openBefore[startSection] ?: (false to false)
-					val after = openAfter[endSection] ?: (false to false)
-					if (before.first || after.first) {
-						val sliver = RectF(startBox.left, viewportTop - radius, startBox.right, viewportTop - radius + SLIVER_PX)
-						contributions += Contribution(if (before.first) sliver else project(sliver, startBox),
-							if (after.first) sliver else project(sliver, endBox), minDelay, GalleryMotion.MOVE_DURATION_MS)
-					}
-					if (before.second || after.second) {
-						val sliver = RectF(startBox.left, viewportBottom + radius - SLIVER_PX, startBox.right, viewportBottom + radius)
-						contributions += Contribution(if (before.second) sliver else project(sliver, startBox),
-							if (after.second) sliver else project(sliver, endBox), minDelay, GalleryMotion.MOVE_DURATION_MS)
-					}
-					Track(startSection, endSection, contributions, union(contributions.map { it.start }), union(contributions.map { it.end }))
+					Track(startSection, endSection, contributions, startBox, endBox,
+						openBefore[startSection] ?: OpenEdges.CLOSED, openAfter[endSection] ?: OpenEdges.CLOSED)
 				} else if (startSection != null && startBox != null) {
-					val open = openBefore[startSection] ?: (false to false)
+					val open = openBefore[startSection] ?: OpenEdges.CLOSED
 					Track(startSection, null, members.map { Contribution(it.start!!, it.start, it.delay, it.duration) },
-						extended(startBox, open.first, open.second), null)
+						extended(startBox, open), null, open, OpenEdges.CLOSED)
 				} else if (endSection != null && endBox != null) {
-					val open = openAfter[endSection] ?: (false to false)
+					val open = openAfter[endSection] ?: OpenEdges.CLOSED
 					Track(null, endSection, members.map { Contribution(it.end!!, it.end, it.delay, it.duration) }, null,
-						extended(endBox, open.first, open.second))
+						extended(endBox, open), OpenEdges.CLOSED, open)
 				} else {
 					null
 				}
 			}
 			if (tracks.isEmpty()) return null
 			for (track in tracks) {
-				val startBox = track.startBox ?: continue
-				val endBox = track.endBox ?: continue
+				val startBox = track.startBox?.let { extended(it, track.openStart) } ?: continue
+				val endBox = track.endBox?.let { extended(it, track.openEnd) } ?: continue
 				val startSiblings = tracks.filter { it.startSection == track.startSection && it.startBox != null }
 				val endSiblings = tracks.filter { it.endSection == track.endSection && it.endBox != null }
-				track.startTopRound = startSiblings.none { it.startBox!!.top < startBox.top - EDGE_PX }
-				track.startBottomRound = startSiblings.none { it.startBox!!.bottom > startBox.bottom + EDGE_PX }
-				track.endTopRound = endSiblings.none { it.endBox!!.top < endBox.top - EDGE_PX }
-				track.endBottomRound = endSiblings.none { it.endBox!!.bottom > endBox.bottom + EDGE_PX }
+				track.startTopRound = startSiblings.none { extended(it.startBox!!, it.openStart).top < startBox.top - EDGE_PX }
+				track.startBottomRound = startSiblings.none { extended(it.startBox!!, it.openStart).bottom > startBox.bottom + EDGE_PX }
+				track.endTopRound = endSiblings.none { extended(it.endBox!!, it.openEnd).top < endBox.top - EDGE_PX }
+				track.endBottomRound = endSiblings.none { extended(it.endBox!!, it.openEnd).bottom > endBox.bottom + EDGE_PX }
 			}
-			return GallerySectionCardTracks(tracks, radius)
+			return GallerySectionCardTracks(tracks, radius, viewportTop, viewportBottom)
 		}
 
-		private fun extended(box: RectF, top: Boolean, bottom: Boolean): RectF = RectF(box).apply {
-			if (top) this.top = min(this.top, viewportTop - radius)
-			if (bottom) this.bottom = max(this.bottom, viewportBottom + radius)
-		}
+		private fun extended(box: RectF, open: OpenEdges): RectF =
+			RectF(box).also { GalleryMotion.extendOffscreen(it, open, viewportTop, viewportBottom, radius) }
 
 		private fun union(rects: List<RectF>): RectF? {
 			if (rects.isEmpty()) return null
@@ -245,7 +259,6 @@ class GallerySectionCardTracks private constructor(private val tracks: List<Trac
 
 	companion object {
 		private const val TOUCH_PX = 1f
-		private const val SLIVER_PX = 1f
 		private const val EDGE_PX = 0.5f
 
 		private fun lerp(from: Float, to: Float, p: Float): Float = from + (to - from) * p

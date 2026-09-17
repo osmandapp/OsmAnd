@@ -65,7 +65,7 @@ class GalleryMediaViewHolder(
 
 	private var loadingImage: LoadingImage? = null
 
-	private var mapActivity: FragmentActivity? = null
+	private var activity: FragmentActivity? = null
 	private var nightMode: Boolean = false
 	private var imageSizePx: Int = 0
 	var holderType: MediaHolderType = MediaHolderType.STANDARD
@@ -73,37 +73,12 @@ class GalleryMediaViewHolder(
 	private var boundMediaItem: MediaItem? = null
 	private var selectionMode: Boolean = false
 
-	override val boundItemId: String?
-		get() = boundMediaItem?.id
-
 	override val previewView: View
 		get() = itemView
 
-	override val morphSnapshotView
-		get() = previewDelegate.morphPreviewSnapshotView
+	override fun captureMorphState(): MorphState = previewDelegate.captureMorphState()
 
-	override val morphPreviewBitmap
-		get() = previewDelegate.morphPreviewBitmap
-
-	override val morphCenterIcon
-		get() = previewDelegate.morphCenterIcon
-
-	override val morphShowsScrim
-		get() = previewDelegate.morphShowsScrim
-
-	override val morphDurationLabel
-		get() = previewDelegate.morphDurationLabel
-
-	override val morphShowsDuration
-		get() = previewDelegate.morphShowsDuration
-
-	override val morphDurationTextColor
-		get() = previewDelegate.morphDurationTextColor
-
-	override val morphBgColor: Int
-		get() = previewDelegate.placeholderBgColor
-
-	override fun getFadeableContentViews(): List<View> = emptyList()
+	override fun getFadeableContentViews(): List<MorphContent> = emptyList()
 
 	override fun getSelectionOverlayViews(): List<View> = listOf(selectionOverlay, selectionCheck).filter { it.isVisible }
 
@@ -134,7 +109,7 @@ class GalleryMediaViewHolder(
 	}
 
 	fun bindView(
-		mapActivity: FragmentActivity,
+		activity: FragmentActivity,
 		galleryItem: GalleryItem.Media,
 		imageSizePx: Int,
 		holderType: MediaHolderType,
@@ -142,7 +117,7 @@ class GalleryMediaViewHolder(
 		selectionMode: Boolean = false,
 		selected: Boolean = false
 	) {
-		this.mapActivity = mapActivity
+		this.activity = activity
 		this.nightMode = nightMode
 		this.imageSizePx = imageSizePx
 		this.holderType = holderType
@@ -162,7 +137,7 @@ class GalleryMediaViewHolder(
 			setSourceTypeIcon(null)
 		}
 
-		AndroidUtils.setBackground(mapActivity, border, getBackgroundId(nightMode))
+		AndroidUtils.setBackground(activity, border, getBackgroundId(nightMode))
 		progressBar.visibility = if (galleryItem.showLoadingProgress) View.VISIBLE else View.GONE
 		ivImage.setOnClickListener(null)
 		ivLoadSourceType.visibility = View.GONE
@@ -271,7 +246,7 @@ class GalleryMediaViewHolder(
 		if (displayUri != null) {
 			tvUrl.text = displayUri
 			tvUrl.setOnClickListener {
-				mapActivity?.let { AndroidUtils.openUrl(it, displayUri, nightMode) }
+				activity?.let { AndroidUtils.openUrl(it, displayUri, nightMode) }
 			}
 		}
 
@@ -289,11 +264,8 @@ class GalleryMediaViewHolder(
 	fun updateSelection(selectionMode: Boolean, selected: Boolean, nightMode: Boolean) {
 		val wasSelectionMode = this.selectionMode
 		val overlayWasVisible = selectionOverlay.isVisible
-		if (!GalleryMotion.animationsEnabled(app)) {
-			bindSelection(selectionMode, selected, nightMode)
-			return
-		}
 		bindSelection(selectionMode, selected, nightMode)
+		if (!GalleryMotion.animationsEnabled(app)) return
 		val overlayVisible = selectionOverlay.isVisible
 		if (selectionMode && !wasSelectionMode) {
 			appear(selectionCheck)

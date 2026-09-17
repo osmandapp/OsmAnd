@@ -171,7 +171,6 @@
 			android:id="@+id/details_list"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:layout_marginBottom="32dp"
 			android:clipToPadding="false"
 			android:overScrollMode="never"
 			android:paddingBottom="16dp" />

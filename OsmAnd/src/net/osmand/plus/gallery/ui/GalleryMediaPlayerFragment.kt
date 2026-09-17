@@ -40,6 +40,7 @@ import net.osmand.plus.R
 import net.osmand.plus.base.BaseFullScreenFragment
 import net.osmand.plus.gallery.controller.GalleryPagerController
 import net.osmand.plus.gallery.ui.viewer.MediaViewerPage
+import net.osmand.plus.gallery.ui.viewer.MediaViewerSheetLayout
 import net.osmand.plus.utils.InsetTarget.Type
 import net.osmand.plus.utils.InsetTargetsCollection
 import net.osmand.shared.media.domain.MediaItem
@@ -154,13 +155,7 @@ class GalleryMediaPlayerFragment : BaseFullScreenFragment(), MediaViewerPage {
 
 	override fun contentRect(): RectF? {
 		if (view == null) return null
-		if (!isVideo) {
-			val width = min(rootView.width.toFloat(), rootView.height * 4f / 3f)
-			val height = width * 3f / 4f
-			return RectF(0f, 0f, width, height).apply {
-				offset(rootView.width / 2f - width / 2f, rootView.height / 2f - height / 2f)
-			}
-		}
+		if (!isVideo) return audioVirtualContentRect()
 		if (textureView.layoutParams.width > 0 && textureView.width > 0) {
 			return RectF(0f, 0f, textureView.width.toFloat(), textureView.height.toFloat()).apply {
 				textureView.matrix.mapRect(this)
@@ -172,6 +167,15 @@ class GalleryMediaPlayerFragment : BaseFullScreenFragment(), MediaViewerPage {
 		return RectF(0f, 0f, poster.intrinsicWidth.toFloat(), poster.intrinsicHeight.toFloat()).apply {
 			posterView.imageMatrix.mapRect(this)
 			offset(posterView.left.toFloat(), posterView.top.toFloat())
+		}
+	}
+
+	private fun audioVirtualContentRect(): RectF {
+		val aspect = MediaViewerSheetLayout.AUDIO_VIRTUAL_CONTENT_ASPECT
+		val width = min(rootView.width.toFloat(), rootView.height * aspect)
+		val height = width / aspect
+		return RectF(0f, 0f, width, height).apply {
+			offset(rootView.width / 2f - width / 2f, rootView.height / 2f - height / 2f)
 		}
 	}
 
@@ -812,7 +816,7 @@ class GalleryMediaPlayerFragment : BaseFullScreenFragment(), MediaViewerPage {
 	override fun onResume() {
 		super.onResume()
 		val item = mediaItem ?: return
-		if (item.type == MediaType.AUDIO && controller?.consumeAutoPlay(item.id) == true) {
+		if (item.type == MediaType.AUDIO && controller?.takeAutoPlayOnOpen(item.id) == true) {
 			togglePlayPause()
 		}
 	}

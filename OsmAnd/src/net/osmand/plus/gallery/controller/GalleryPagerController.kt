@@ -7,6 +7,7 @@ import net.osmand.plus.gallery.data.GalleryKey
 import net.osmand.plus.gallery.data.getPagerItems
 import net.osmand.plus.gallery.model.GalleryItem
 import net.osmand.plus.gallery.ui.GalleryPhotoPagerFragment
+import net.osmand.plus.gallery.ui.viewer.MediaViewerSheetLayout
 import net.osmand.shared.media.domain.MediaItem
 
 class GalleryPagerController(
@@ -15,21 +16,23 @@ class GalleryPagerController(
 ) : BaseDialogController(app) {
 
 	var orderedIds: List<String>? = null
-	private var autoPlayItemId: String? = null
+	private var autoPlayOnOpenItemId: String? = null
 
-	fun consumeAutoPlay(id: String): Boolean {
-		if (autoPlayItemId != id) return false
-		autoPlayItemId = null
+	fun takeAutoPlayOnOpen(id: String): Boolean {
+		if (autoPlayOnOpenItemId != id) return false
+		autoPlayOnOpenItemId = null
 		return true
 	}
 
-	fun openDetails(activity: FragmentActivity, item: MediaItem) {
+	@JvmOverloads
+	fun openDetails(activity: FragmentActivity, item: MediaItem, orderedIds: List<String>? = null) {
 		val viewer = activity.supportFragmentManager.findFragmentByTag(GalleryPhotoPagerFragment.TAG) as? GalleryPhotoPagerFragment
 		if (viewer != null) {
 			viewer.showDetails(item.id)
 		} else {
-			autoPlayItemId = null
-			GalleryPhotoPagerFragment.showInstance(activity, item.id, GalleryPhotoPagerFragment.STATE_PREVIEW)
+			this.orderedIds = orderedIds
+			autoPlayOnOpenItemId = null
+			GalleryPhotoPagerFragment.showInstance(activity, item.id, MediaViewerSheetLayout.STATE_PREVIEW)
 		}
 	}
 
@@ -64,11 +67,12 @@ class GalleryPagerController(
 			activity: FragmentActivity,
 			key: GalleryKey,
 			selectedItemId: String,
-			orderedIds: List<String>? = null
+			orderedIds: List<String>? = null,
+			autoPlay: Boolean = false
 		) {
 			val controller = getInstance(activity.application as OsmandApplication, key)
 			controller.orderedIds = orderedIds
-			controller.autoPlayItemId = if (key == GalleryKey.MediaLibrary) selectedItemId else null
+			controller.autoPlayOnOpenItemId = if (autoPlay) selectedItemId else null
 			GalleryPhotoPagerFragment.showInstance(activity, selectedItemId)
 		}
 
