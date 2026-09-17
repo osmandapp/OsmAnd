@@ -61,15 +61,18 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.mapillary.MapillaryFiltersFragment;
-import net.osmand.plus.plugins.mapillary.MapillaryFirstDialogFragment;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.openseamaps.NauticalDepthContourFragment;
 import net.osmand.plus.plugins.osmedit.menu.OsmNotesMenu;
+import net.osmand.plus.plugins.panoramax.PanoramaxFiltersFragment;
+import net.osmand.plus.plugins.panoramax.PanoramaxPlugin;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.plugins.srtm.building.Buildings3DFragment;
 import net.osmand.plus.plugins.srtm.ContourLinesMenu;
 import net.osmand.plus.plugins.srtm.Relief3DFragment;
 import net.osmand.plus.plugins.srtm.TerrainFragment;
+import net.osmand.plus.plugins.streetimagery.StreetImageryFirstDialogFragment;
+import net.osmand.plus.plugins.streetimagery.StreetImagerySource;
 import net.osmand.plus.plugins.weather.WeatherBand;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.plugins.weather.dialogs.WeatherContoursFragment;
@@ -327,6 +330,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			tv.setText(R.string.map_overlay);
 		} else if (isCurrentType(MAPILLARY)) {
 			tv.setText(R.string.street_level_imagery);
+		} else if (isCurrentType(PANORAMAX)) {
+			tv.setText(R.string.panoramax);
 		} else if (isCurrentType(CONTOUR_LINES)) {
 			tv.setText(R.string.download_srtm_maps);
 		} else if (isCurrentType(OSM_NOTES)) {
@@ -593,6 +598,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 					ConfigureMapFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(MAPILLARY)) {
 					MapillaryFiltersFragment.showInstance(fragmentManager);
+				} else if (isCurrentType(PANORAMAX)) {
+					PanoramaxFiltersFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(TRAVEL_ROUTES)) {
 					TravelRoutesFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(TRANSPORT_LINES)) {
@@ -662,8 +669,16 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			}
 
 			MapillaryPlugin plugin = PluginsHelper.getPlugin(MapillaryPlugin.class);
-			if (plugin != null && plugin.SHOW_MAPILLARY.get() && !plugin.MAPILLARY_FIRST_DIALOG_SHOWN.get()) {
-				MapillaryFirstDialogFragment.showInstance(mapActivity);
+			if (plugin != null && plugin.SHOW_MAPILLARY.get() && !plugin.MAPILLARY_FIRST_DIALOG_SHOWN.get()
+					&& StreetImageryFirstDialogFragment.showInstance(mapActivity, StreetImagerySource.MAPILLARY)) {
+				plugin.MAPILLARY_FIRST_DIALOG_SHOWN.set(true);
+			}
+
+			PanoramaxPlugin panoramaxPlugin = PluginsHelper.getPlugin(PanoramaxPlugin.class);
+			if (panoramaxPlugin != null && panoramaxPlugin.SHOW_PANORAMAX.get()
+					&& !panoramaxPlugin.PANORAMAX_FIRST_DIALOG_SHOWN.get()
+					&& StreetImageryFirstDialogFragment.showInstance(mapActivity, StreetImagerySource.PANORAMAX)) {
+				panoramaxPlugin.PANORAMAX_FIRST_DIALOG_SHOWN.set(true);
 			}
 		}
 		mapActivity.updateStatusBarColor();
@@ -1033,7 +1048,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	public boolean isCurrentTypeHasIndividualFragment() {
 		return isCurrentType(
-				CONFIGURE_MAP, MAPILLARY, TERRAIN, RELIEF_3D, MAP_ROUTES, RENDERING_CLASS,
+				CONFIGURE_MAP, MAPILLARY, PANORAMAX, TERRAIN, RELIEF_3D, MAP_ROUTES, RENDERING_CLASS,
 				TRAVEL_ROUTES, TRANSPORT_LINES, WEATHER, WEATHER_LAYER, WEATHER_CONTOURS,
 				NAUTICAL_DEPTH, COORDINATE_GRID, BUILDINGS_3D
 		);
@@ -1099,7 +1114,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 		DashboardType previous = visibleTypes.getPrevious();
 		if (previous != null) {
-			if (isCurrentType(MAPILLARY)) {
+			if (isCurrentType(MAPILLARY, PANORAMAX)) {
 				hideKeyboard();
 			}
 			visibleTypes.pop(); // Remove current visible type.
