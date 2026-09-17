@@ -21,6 +21,7 @@ import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -28,6 +29,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.DropdownMenu
@@ -38,6 +40,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MenuDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -127,6 +131,7 @@ data class OsmAndDropdownMenuColors(
 
 object OsmAndDropdownMenuDefaults {
 	val Offset = DpOffset(x = 0.dp, y = 4.dp)
+	val Shape: Shape = RoundedCornerShape(16.dp)
 
 	@Composable
 	fun colors(
@@ -187,7 +192,8 @@ fun <T> OsmAndDropdownMenuContent(
 	options: List<OsmAndDropdownMenuOption<T>>,
 	onOptionSelected: (T) -> Unit,
 	modifier: Modifier = Modifier,
-	shape: Shape = MenuDefaults.shape,
+	scrollState: ScrollState? = null,
+	shape: Shape = OsmAndDropdownMenuDefaults.Shape,
 	containerColor: Color = MenuDefaults.containerColor,
 	tonalElevation: Dp = 0.dp,
 	shadowElevation: Dp = 3.dp,
@@ -197,25 +203,22 @@ fun <T> OsmAndDropdownMenuContent(
 	onDismissRequest: () -> Unit = {}
 ) {
 	val resolvedContainerColor = colors?.background ?: containerColor
-	val resolvedShape = if (shape == MenuDefaults.shape) {
-		RoundedCornerShape(16.dp)
-	} else {
-		shape
-	}
 	val hasSelection = options.any { it.selected && !it.isCheckbox }
 
 	Surface(
 		modifier = modifier,
-		shape = resolvedShape,
+		shape = shape,
 		color = resolvedContainerColor,
 		tonalElevation = tonalElevation,
 		shadowElevation = shadowElevation,
 		border = border
 	) {
+		val scrollModifier = if (scrollState != null) Modifier.verticalScroll(scrollState) else Modifier
 		Column(
 			modifier = Modifier
 				.padding(vertical = MENU_CONTAINER_VERTICAL_PADDING)
 				.fillMaxWidth()
+				.then(scrollModifier)
 		) {
 			if (title != null) {
 				Box(
@@ -446,7 +449,8 @@ fun <T> OsmAndDropdownMenuContainer(
 	options: List<OsmAndDropdownMenuOption<T>>,
 	onOptionSelected: (T) -> Unit,
 	modifier: Modifier = Modifier,
-	shape: Shape = MenuDefaults.shape,
+	scrollState: ScrollState? = null,
+	shape: Shape = OsmAndDropdownMenuDefaults.Shape,
 	containerColor: Color = MenuDefaults.containerColor,
 	tonalElevation: Dp = 0.dp,
 	shadowElevation: Dp = 3.dp,
@@ -455,40 +459,63 @@ fun <T> OsmAndDropdownMenuContainer(
 	title: String? = null,
 	onDismissRequest: () -> Unit = {}
 ) {
-	Column(
-		modifier = modifier.width(IntrinsicSize.Max),
-		verticalArrangement = Arrangement.spacedBy(MENU_SECTION_GAP)
-	) {
-		var startIndex = 0
-		options.forEachIndexed { index, option ->
-			if (option.showGapAfter || index == options.lastIndex) {
-				val chunk = options.subList(startIndex, index + 1)
-				val isFirst = startIndex == 0
-				val isLast = index == options.lastIndex
-				startIndex = index + 1
-				val sectionShape = if (shape == MenuDefaults.shape) {
-					when {
-						isFirst && isLast -> RoundedCornerShape(16.dp)
-						isFirst -> RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp, bottomStart = 8.dp, bottomEnd = 8.dp)
-						isLast -> RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp, bottomStart = 16.dp, bottomEnd = 16.dp)
-						else -> RoundedCornerShape(8.dp)
+	val hasGaps = options.any { it.showGapAfter }
+	if (!hasGaps) {
+		OsmAndDropdownMenuContent(
+			options = options,
+			onOptionSelected = onOptionSelected,
+			modifier = modifier.width(IntrinsicSize.Max),
+			scrollState = scrollState,
+			shape = shape,
+			containerColor = containerColor,
+			tonalElevation = tonalElevation,
+			shadowElevation = shadowElevation,
+			border = border,
+			colors = colors,
+			title = title,
+			onDismissRequest = onDismissRequest
+		)
+	} else {
+		val scrollModifier = if (scrollState != null) Modifier.verticalScroll(scrollState) else Modifier
+		Column(
+			modifier = modifier
+				.width(IntrinsicSize.Max)
+				.shadow(elevation = shadowElevation, shape = shape)
+				.clip(shape)
+				.then(scrollModifier),
+			verticalArrangement = Arrangement.spacedBy(MENU_SECTION_GAP)
+		) {
+			var startIndex = 0
+			options.forEachIndexed { index, option ->
+				if (option.showGapAfter || index == options.lastIndex) {
+					val chunk = options.subList(startIndex, index + 1)
+					val isFirst = startIndex == 0
+					val isLast = index == options.lastIndex
+					startIndex = index + 1
+					val sectionShape = if (shape == OsmAndDropdownMenuDefaults.Shape) {
+						when {
+							isFirst && isLast -> RoundedCornerShape(16.dp)
+							isFirst -> RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp, bottomStart = 8.dp, bottomEnd = 8.dp)
+							isLast -> RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp, bottomStart = 16.dp, bottomEnd = 16.dp)
+							else -> RoundedCornerShape(8.dp)
+						}
+					} else {
+						shape
 					}
-				} else {
-					shape
+					OsmAndDropdownMenuContent(
+						options = chunk,
+						onOptionSelected = onOptionSelected,
+						modifier = Modifier.fillMaxWidth(),
+						shape = sectionShape,
+						containerColor = containerColor,
+						tonalElevation = tonalElevation,
+						shadowElevation = 0.dp,
+						border = border,
+						colors = colors,
+						title = if (isFirst) title else null,
+						onDismissRequest = onDismissRequest
+					)
 				}
-				OsmAndDropdownMenuContent(
-					options = chunk,
-					onOptionSelected = onOptionSelected,
-					modifier = Modifier.fillMaxWidth(),
-					shape = sectionShape,
-					containerColor = containerColor,
-					tonalElevation = tonalElevation,
-					shadowElevation = shadowElevation,
-					border = border,
-					colors = colors,
-					title = if (isFirst) title else null,
-					onDismissRequest = onDismissRequest
-				)
 			}
 		}
 	}
@@ -504,7 +531,7 @@ fun <T> OsmAndDropdownMenu(
 	offset: DpOffset = OsmAndDropdownMenuDefaults.Offset,
 	scrollState: ScrollState = rememberScrollState(),
 	properties: PopupProperties = PopupProperties(focusable = true),
-	shape: Shape = MenuDefaults.shape,
+	shape: Shape = OsmAndDropdownMenuDefaults.Shape,
 	containerColor: Color = MenuDefaults.containerColor,
 	tonalElevation: Dp = 0.dp,
 	shadowElevation: Dp = 3.dp,
@@ -575,6 +602,110 @@ fun showComposeDropdownMenu(displayData: PopUpMenuDisplayData): PopupWindow? {
 	val screenMarginPx = AndroidUtils.dpToPx(context, MENU_SCREEN_MARGIN.value)
 	val verticalSpacingPx = AndroidUtils.dpToPx(context, MENU_VERTICAL_SPACING.value)
 	val screenWidth = context.resources.displayMetrics.widthPixels
+	val screenHeight = context.resources.displayMetrics.heightPixels
+
+	val anchorLocation = IntArray(2)
+	anchorView.getLocationOnScreen(anchorLocation)
+	val anchorCenterX = anchorLocation[0] + anchorView.width / 2
+	val isRtl = anchorView.layoutDirection == View.LAYOUT_DIRECTION_RTL
+	val isAnchorOnRight = anchorCenterX > screenWidth / 2
+
+	val gravity = displayData.dropDownGravity ?: run {
+		if (isAnchorOnRight) {
+			if (isRtl) Gravity.START or Gravity.TOP else Gravity.END or Gravity.TOP
+		} else {
+			if (isRtl) Gravity.END or Gravity.TOP else Gravity.START or Gravity.TOP
+		}
+	}
+
+	val defaultHOffset = if (isAnchorOnRight) -screenMarginPx else screenMarginPx
+	var hOffset = (displayData.horizontalOffset ?: 0) + defaultHOffset
+	if (isAnchorOnRight) {
+		val maxHOffset = screenWidth - screenMarginPx - (anchorLocation[0] + anchorView.width)
+		if (hOffset > maxHOffset) {
+			hOffset = maxHOffset
+		}
+	} else {
+		val minHOffset = screenMarginPx - anchorLocation[0]
+		if (hOffset < minHOffset) {
+			hOffset = minHOffset
+		}
+	}
+
+	val menuItems = displayData.menuItems
+	var totalHeight = MENU_CONTAINER_VERTICAL_PADDING * 2 + MENU_SCREEN_MARGIN
+	if (menuItems != null) {
+		for (item in menuItems) {
+			totalHeight += MENU_ITEM_HEIGHT
+			if (item.supportingText != null) {
+				totalHeight += MENU_SUPPORTING_TEXT_EXTRA_HEIGHT
+			}
+			if (item.labelText != null) {
+				totalHeight += MENU_LABEL_HEIGHT
+			}
+			if (item.shouldShowTopDivider()) {
+				totalHeight += MENU_DIVIDER_TOTAL_HEIGHT
+			}
+			if (item.shouldShowTopGap()) {
+				totalHeight += MENU_GAP_EXTRA_HEIGHT
+			}
+		}
+	}
+	val approxMenuHeightPx = AndroidUtils.dpToPx(context, totalHeight.value)
+
+	val anchorBottom = anchorLocation[1] + anchorView.height
+	val spaceBelow = screenHeight - anchorBottom
+	val spaceAbove = anchorLocation[1]
+	val shouldShowAbove = displayData.customDropDown == PopUpMenuDisplayData.CustomDropDown.TOP_DROPDOWN ||
+		(displayData.customDropDown != PopUpMenuDisplayData.CustomDropDown.BOTTOM_DROPDOWN &&
+			spaceBelow < approxMenuHeightPx && spaceAbove > spaceBelow)
+
+	val availableSpacePx = if (shouldShowAbove) {
+		spaceAbove - screenMarginPx - verticalSpacingPx
+	} else {
+		spaceBelow - screenMarginPx - verticalSpacingPx
+	}
+	val density = context.resources.displayMetrics.density
+	val availableSpaceDp = availableSpacePx / density
+	val minSensibleHeightDp = (MENU_ITEM_HEIGHT * 1.5f + MENU_CONTAINER_VERTICAL_PADDING * 2).value
+
+	val actualMenuHeightDp = (totalHeight - MENU_SCREEN_MARGIN).value
+	val actualMenuHeightPx = AndroidUtils.dpToPx(context, actualMenuHeightDp)
+
+	val maxMenuHeightDp = if (menuItems != null && actualMenuHeightDp > availableSpaceDp) {
+		var currentContentHeightDp = (MENU_CONTAINER_VERTICAL_PADDING * 2).value
+		var peekingTargetDp: Float = minSensibleHeightDp
+
+		for (item in menuItems) {
+			val extraTop = (if (item.shouldShowTopDivider()) MENU_DIVIDER_TOTAL_HEIGHT.value else 0f) +
+				(if (item.shouldShowTopGap()) MENU_GAP_EXTRA_HEIGHT.value else 0f) +
+				(if (item.labelText != null) MENU_LABEL_HEIGHT.value else 0f)
+			val rowHeight = MENU_ITEM_HEIGHT.value +
+				(if (item.supportingText != null) MENU_SUPPORTING_TEXT_EXTRA_HEIGHT.value else 0f)
+			val fullItemHeight = extraTop + rowHeight
+
+			val halfCutHeight = currentContentHeightDp + extraTop + rowHeight / 2f
+			if (halfCutHeight <= availableSpaceDp) {
+				peekingTargetDp = halfCutHeight
+			} else {
+				break
+			}
+			currentContentHeightDp += fullItemHeight
+		}
+
+		peekingTargetDp.coerceIn(minSensibleHeightDp, availableSpaceDp).dp
+	} else {
+		maxOf(availableSpaceDp, minSensibleHeightDp).dp
+	}
+
+	val maxMenuHeightPx = AndroidUtils.dpToPx(context, maxMenuHeightDp.value)
+	val effectiveMenuHeightPx = minOf(actualMenuHeightPx, maxMenuHeightPx)
+
+	val vOffset = if (shouldShowAbove) {
+		-anchorView.height - effectiveMenuHeightPx + shadowPaddingPx - verticalSpacingPx + (displayData.verticalOffset ?: 0)
+	} else {
+		(displayData.verticalOffset ?: 0) - shadowPaddingPx + verticalSpacingPx
+	}
 
 	val popupWindow = PopupWindow(
 		composeView,
@@ -605,10 +736,14 @@ fun showComposeDropdownMenu(displayData: PopUpMenuDisplayData): PopupWindow? {
 				} else {
 					Dp.Unspecified
 				}
+				val scrollState = rememberScrollState()
 				OsmAndDropdownMenuContainer(
 					options = displayData.menuItems?.toDropdownOptions(displayData) ?: emptyList(),
-					modifier = if (minMenuWidth != Dp.Unspecified) Modifier.widthIn(min = minMenuWidth) else Modifier,
-					shape = MenuDefaults.shape,
+					modifier = Modifier
+						.then(if (minMenuWidth != Dp.Unspecified) Modifier.widthIn(min = minMenuWidth) else Modifier)
+						.heightIn(max = maxMenuHeightDp),
+					scrollState = scrollState,
+					shape = OsmAndDropdownMenuDefaults.Shape,
 					containerColor = colors.background,
 					tonalElevation = 0.dp,
 					shadowElevation = 3.dp,
@@ -624,68 +759,6 @@ fun showComposeDropdownMenu(displayData: PopUpMenuDisplayData): PopupWindow? {
 				)
 			}
 		}
-	}
-
-	val anchorLocation = IntArray(2)
-	anchorView.getLocationOnScreen(anchorLocation)
-	val anchorCenterX = anchorLocation[0] + anchorView.width / 2
-	val isRtl = anchorView.layoutDirection == View.LAYOUT_DIRECTION_RTL
-	val isAnchorOnRight = anchorCenterX > screenWidth / 2
-
-	val gravity = displayData.dropDownGravity ?: run {
-		if (isAnchorOnRight) {
-			if (isRtl) Gravity.START or Gravity.TOP else Gravity.END or Gravity.TOP
-		} else {
-			if (isRtl) Gravity.END or Gravity.TOP else Gravity.START or Gravity.TOP
-		}
-	}
-
-	val defaultHOffset = if (isAnchorOnRight) -screenMarginPx else screenMarginPx
-	var hOffset = (displayData.horizontalOffset ?: 0) + defaultHOffset
-	if (isAnchorOnRight) {
-		val maxHOffset = screenWidth - screenMarginPx - (anchorLocation[0] + anchorView.width)
-		if (hOffset > maxHOffset) {
-			hOffset = maxHOffset
-		}
-	} else {
-		val minHOffset = screenMarginPx - anchorLocation[0]
-		if (hOffset < minHOffset) {
-			hOffset = minHOffset
-		}
-	}
-
-	val screenHeight = context.resources.displayMetrics.heightPixels
-	val menuItems = displayData.menuItems
-	var totalHeight = MENU_CONTAINER_VERTICAL_PADDING * 2 + MENU_SCREEN_MARGIN
-	if (menuItems != null) {
-		for (item in menuItems) {
-			totalHeight += MENU_ITEM_HEIGHT
-			if (item.supportingText != null) {
-				totalHeight += MENU_SUPPORTING_TEXT_EXTRA_HEIGHT
-			}
-			if (item.labelText != null) {
-				totalHeight += MENU_LABEL_HEIGHT
-			}
-			if (item.shouldShowTopDivider()) {
-				totalHeight += MENU_DIVIDER_TOTAL_HEIGHT
-			}
-			if (item.shouldShowTopGap()) {
-				totalHeight += MENU_GAP_EXTRA_HEIGHT
-			}
-		}
-	}
-	val approxMenuHeightPx = AndroidUtils.dpToPx(context, totalHeight.value)
-
-	val spaceBelow = screenHeight - (anchorLocation[1] + anchorView.height)
-	val spaceAbove = anchorLocation[1]
-	val shouldShowAbove = displayData.customDropDown == PopUpMenuDisplayData.CustomDropDown.TOP_DROPDOWN ||
-		(displayData.customDropDown != PopUpMenuDisplayData.CustomDropDown.BOTTOM_DROPDOWN &&
-			spaceBelow < approxMenuHeightPx && spaceAbove > spaceBelow)
-
-	val vOffset = if (shouldShowAbove) {
-		-anchorView.height - approxMenuHeightPx + shadowPaddingPx - verticalSpacingPx + (displayData.verticalOffset ?: 0)
-	} else {
-		(displayData.verticalOffset ?: 0) - shadowPaddingPx + verticalSpacingPx
 	}
 
 	try {

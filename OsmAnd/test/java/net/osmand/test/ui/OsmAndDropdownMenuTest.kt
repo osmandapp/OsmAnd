@@ -6,7 +6,9 @@ import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
@@ -30,6 +32,7 @@ import net.osmand.plus.widgets.popup.MENU_SUPPORTING_TEXT_EXTRA_HEIGHT
 import net.osmand.plus.widgets.popup.AndroidDrawableIcon
 import net.osmand.plus.widgets.popup.OsmAndDropdownMenu
 import net.osmand.plus.widgets.popup.OsmAndDropdownMenuColors
+import net.osmand.plus.widgets.popup.OsmAndDropdownMenuContainer
 import net.osmand.plus.widgets.popup.OsmAndDropdownMenuContent
 import net.osmand.plus.widgets.popup.OsmAndDropdownMenuDefaults
 import net.osmand.plus.widgets.popup.OsmAndDropdownMenuOption
@@ -722,6 +725,58 @@ class OsmAndDropdownMenuTest {
 		}
 
 		assertEquals(originalBounds, originalDrawable.bounds)
+	}
+
+	@Test
+	fun testComposeDropdownMenuHeightLimitingAndScrolling() {
+		val screenHeight = 800
+		val anchorY = 500
+		val anchorHeight = 50
+		val screenMarginPx = 16
+		val verticalSpacingPx = 4
+		val shadowPaddingPx = 16
+
+		val approxMenuHeightPx = 1200
+
+		val anchorBottom = anchorY + anchorHeight
+		val spaceBelow = screenHeight - anchorBottom
+		val spaceAbove = anchorY
+
+		val shouldShowAbove = spaceBelow < approxMenuHeightPx && spaceAbove > spaceBelow
+		assertTrue(shouldShowAbove)
+
+		val availableSpacePx = spaceAbove - screenMarginPx - verticalSpacingPx
+		val maxMenuHeightPx = maxOf(availableSpacePx, 96)
+		assertEquals(480, maxMenuHeightPx)
+
+		val effectiveMenuHeightPx = minOf(approxMenuHeightPx, maxMenuHeightPx)
+		assertEquals(480, effectiveMenuHeightPx)
+
+		val vOffset = -anchorHeight - effectiveMenuHeightPx + shadowPaddingPx - verticalSpacingPx
+		assertEquals(-518, vOffset)
+	}
+
+	@Test
+	fun testOsmAndDropdownMenuContainerWithScrollStateRendering() {
+		val context = InstrumentationRegistry.getInstrumentation().targetContext
+		val options = (1..15).map { index ->
+			OsmAndDropdownMenuOption(value = "opt_$index", title = "Option $index")
+		}
+
+		InstrumentationRegistry.getInstrumentation().runOnMainSync {
+			val composeView = createTestComposeView(context)
+			composeView.setContent {
+				OsmAndDropdownMenuTheme {
+					val scrollState = rememberScrollState()
+					OsmAndDropdownMenuContainer(
+						options = options,
+						onOptionSelected = {},
+						modifier = Modifier.heightIn(max = 200.dp),
+						scrollState = scrollState
+					)
+				}
+			}
+		}
 	}
 
 	private fun createTestComposeView(context: android.content.Context): ComposeView {
