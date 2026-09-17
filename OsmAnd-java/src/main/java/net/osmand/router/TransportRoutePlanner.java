@@ -248,7 +248,6 @@ public class TransportRoutePlanner {
 			updateCalculationProgress(ctx, queue);
 			
 		}
-		results.removeIf(r -> !TransportFerryHelper.usesFerry(r));
 		return prepareResults(ctx, results);
 	}
 

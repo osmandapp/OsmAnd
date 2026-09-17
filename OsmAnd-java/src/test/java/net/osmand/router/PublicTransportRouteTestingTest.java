@@ -61,6 +61,9 @@ public class PublicTransportRouteTestingTest {
 		List<String> actualResults = calculateRoute("ferry_sandbanks.obf", start, end);
 
 		List<String> expectedResults = new ArrayList<>();
+		expectedResults.add("Route 1 stops, 0 changes, 28.33 min: 122.88 m (2.5 min) to walk, 578.31 m (25.9 min) to travel\n"
+				+ " 1. 50 [12668143]: walk 103.3 m to 'Shell Bay Ferry' and travel  to 'Sandbanks Ferry' by Breezer 50: Swanage => Bournemouth 1 stops \n"
+				+ " F. Walk 19.6 m to reach your destination");
 		expectedResults.add("Route 1 stops, 0 changes, 28.91 min: 369.81 m (7.4 min) to walk, 330.13 m (21.5 min) to travel\n"
 				+ " 1. SF [4624542]: walk 277.8 m to 'Sandbanks Ferry' and travel  to 'Sandbanks' by Sandbanks Ferry 1 stops \n"
 				+ " F. Walk 92.0 m to reach your destination");
@@ -77,6 +80,13 @@ public class PublicTransportRouteTestingTest {
 		List<String> actualResults = calculateRoute("ferry_sandbanks.obf", start, end);
 
 		List<String> expectedResults = new ArrayList<>();
+		// the first route walks over the water: the app drops it after calculating real walks
+		expectedResults.add("Route 1 stops, 0 changes, 26.53 min: 1120.10 m (22.4 min) to walk, 419.36 m (4.1 min) to travel\n"
+				+ " 1. 50 [12668143]: walk 19.6 m to 'Sandbanks Ferry' and travel  to 'Royal Motor Yacht Club' by Breezer 50: Swanage => Bournemouth 1 stops \n"
+				+ " F. Walk 1100.5 m to reach your destination");
+		expectedResults.add("Route 1 stops, 0 changes, 28.86 min: 151.68 m (3.0 min) to walk, 549.44 m (25.8 min) to travel\n"
+				+ " 1. 50 [1047294]: walk 47.6 m to 'Sandbanks Ferry' and travel  to 'Shell Bay Ferry' by Breezer 50: Bournemouth => Swanage 1 stops \n"
+				+ " F. Walk 104.0 m to reach your destination");
 		expectedResults.add("Route 1 stops, 0 changes, 28.91 min: 369.81 m (7.4 min) to walk, 330.13 m (21.5 min) to travel\n"
 				+ " 1. SF [4624542]: walk 92.0 m to 'Sandbanks' and travel  to 'Sandbanks Ferry' by Sandbanks Ferry 1 stops \n"
 				+ " F. Walk 277.8 m to reach your destination");
@@ -125,6 +135,9 @@ public class PublicTransportRouteTestingTest {
 		List<String> actualResults = calculateRoute("ferry_kungshamn.obf", start, end);
 
 		List<String> expectedResults = new ArrayList<>();
+		expectedResults.add("Route 4 stops, 0 changes, 19.34 min: 558.84 m (11.2 min) to walk, 2107.82 m (8.2 min) to travel\n"
+				+ " 1. 860 [5461816]: walk 11.8 m to 'A' and travel  to 'A' by Buss 860: Trollhättan - Smögen 4 stops \n"
+				+ " F. Walk 547.0 m to reach your destination");
 		expectedResults.add("Route 1 stops, 0 changes, 20.64 min: 65.76 m (1.3 min) to walk, 1615.25 m (19.3 min) to travel\n"
 				+ " 1. K-S [5924502]: walk 50.9 m to '' and travel  to '' by Smögen - Kungshamn 1 stops \n"
 				+ " F. Walk 14.9 m to reach your destination");
@@ -141,6 +154,9 @@ public class PublicTransportRouteTestingTest {
 		List<String> actualResults = calculateRoute("ferry_kungshamn.obf", start, end);
 
 		List<String> expectedResults = new ArrayList<>();
+		expectedResults.add("Route 4 stops, 0 changes, 19.29 min: 558.84 m (11.2 min) to walk, 2077.87 m (8.1 min) to travel\n"
+				+ " 1. 860 [2325043]: walk 547.0 m to 'A' and travel  to 'A' by Buss 860: Smögen - Trollhättan 4 stops \n"
+				+ " F. Walk 11.8 m to reach your destination");
 		expectedResults.add("Route 1 stops, 0 changes, 20.64 min: 65.76 m (1.3 min) to walk, 1615.25 m (19.3 min) to travel\n"
 				+ " 1. K-S [5924455]: walk 14.9 m to '' and travel  to '' by Kungshamn - Smögen 1 stops \n"
 				+ " F. Walk 50.9 m to reach your destination");
@@ -478,6 +494,9 @@ public class PublicTransportRouteTestingTest {
 		expectedResults.add("Route 1 stops, 0 changes, 28.05 min: 326.76 m (6.5 min) to walk, 330.13 m (21.5 min) to travel\n"
 				+ " 1. SF [4624542]: walk 131.9 m to 'Sandbanks Ferry' and travel  to 'Sandbanks' by Sandbanks Ferry 1 stops \n"
 				+ " F. Walk 194.9 m to reach your destination");
+		expectedResults.add("Route 1 stops, 0 changes, 30.92 min: 252.57 m (5.1 min) to walk, 578.31 m (25.9 min) to travel\n"
+				+ " 1. 50 [12668143]: walk 61.2 m to 'Shell Bay Ferry' and travel  to 'Sandbanks Ferry' by Breezer 50: Swanage => Bournemouth 1 stops \n"
+				+ " F. Walk 191.4 m to reach your destination");
 
 		Assert.assertEquals(expectedResults, actualResults);
 	}
@@ -494,6 +513,9 @@ public class PublicTransportRouteTestingTest {
 		expectedResults.add("Route 1 stops, 0 changes, 28.05 min: 326.76 m (6.5 min) to walk, 330.13 m (21.5 min) to travel\n"
 				+ " 1. SF [4624542]: walk 194.9 m to 'Sandbanks' and travel  to 'Sandbanks Ferry' by Sandbanks Ferry 1 stops \n"
 				+ " F. Walk 131.9 m to reach your destination");
+		expectedResults.add("Route 1 stops, 0 changes, 30.47 min: 232.47 m (4.6 min) to walk, 549.44 m (25.8 min) to travel\n"
+				+ " 1. 50 [1047294]: walk 176.5 m to 'Sandbanks Ferry' and travel  to 'Shell Bay Ferry' by Breezer 50: Bournemouth => Swanage 1 stops \n"
+				+ " F. Walk 55.9 m to reach your destination");
 
 		Assert.assertEquals(expectedResults, actualResults);
 	}

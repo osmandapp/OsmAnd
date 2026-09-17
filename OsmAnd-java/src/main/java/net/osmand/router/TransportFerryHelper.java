@@ -12,7 +12,6 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
-import net.osmand.router.TransportRoutePlanner.TransportRouteSegment;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -188,11 +187,6 @@ public class TransportFerryHelper {
 			}
 		}
 		return closest;
-	}
-
-	// TODO #17773 temporary: show only routes with ferries
-	static boolean usesFerry(TransportRouteSegment segment) {
-		return isFerry(segment.road) || segment.parentRoute != null && usesFerry(segment.parentRoute);
 	}
 
 	// ferry ways joined by a junction stop in the water are one ferry ride
